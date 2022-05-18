@@ -10,7 +10,5 @@ export const parsePrismaSchema = async () => {
     const prismaBlocks = convertPrismaLinesToBlocks(prismaLines);
 
     const prismaJson = prismaBlocks.map((block) => convertPrismaBlockToJson(block))
-  console.log(prismaJson);
-    // console.log(prismaJson);
   };
 

@@ -1,0 +1,1 @@
+export { ListModel as default } from '../../../views/models/List';

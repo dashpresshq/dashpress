@@ -1,1 +1,1 @@
-export { ListModel as default } from '../../../views/models/List';
+export { ListModel as default } from '../../../frontend/views/models/List';

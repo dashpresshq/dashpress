@@ -2,7 +2,7 @@ import {
   useSchemaFields,
 } from "../../data-store/schema.data-store";
 import { useSlug } from "../../lib/routing/useSlug";
-import { DynamicTableStateless } from "@atlaskit/dynamic-table";
+// import { DynamicTableStateless } from "@atlaskit/dynamic-table";
 import { useState } from "react";
 import { AppLayout } from "../../_layouts/app";
 
@@ -17,7 +17,7 @@ export function ListModel() {
 
   return (
     <AppLayout>
-      <DynamicTableStateless
+      {/* <DynamicTableStateless
         head={{
           cells: (schemaFields.data || []).map(({ name }) => ({
             key: name,
@@ -35,7 +35,7 @@ export function ListModel() {
         // sortOrder="DESC"
         onSort={() => console.log("onSort")}
         onSetPage={() => console.log("onSetPage")}
-      />
+      /> */}
     </AppLayout>
   );
 }

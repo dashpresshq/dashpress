@@ -15,8 +15,8 @@
     "react-dom": "18.1.0",
     "react-hot-toast": "^2.2.0",
     "react-query": "^3.39.0",
-    "@gothicgeeks/design-system": "git+ssh://git@github.com:thrownullexception/design-system.git",
-    "@gothicgeeks/shared": "git+ssh://git@github.com:thrownullexception/shared.git"
+    "@gothicgeeks/design-system": "git+ssh://git@github.com:thrownullexception/design-system.git#6f9743e7664b5f22fc3b742b56e98db09b27a7f0",
+    "@gothicgeeks/shared": "git+ssh://git@github.com:thrownullexception/shared.git#74ffecf5c15097a82131a436ae885ebb2bb1cad4"
   },
   "devDependencies": {
     "@types/react": "^18.0.9",

@@ -29,7 +29,6 @@ export const AppLayout = ({ children }: IProps) => {
           view: <>Demo View</>,
           link: "Foo",
         },
-
         {
           title: "Schema",
           dataTestId: "",

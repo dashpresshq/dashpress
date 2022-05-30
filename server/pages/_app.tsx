@@ -1,3 +1,4 @@
+import { AppWrapper } from "@gothicgeeks/design-system";
 import { QueryClientProvider, QueryClient } from "react-query";
 
 export const queryClient = new QueryClient({
@@ -12,9 +13,11 @@ export const queryClient = new QueryClient({
 
 function MyApp({ Component, pageProps }) {
   return (
+    <AppWrapper>
     <QueryClientProvider client={queryClient}>
       <Component {...pageProps} />
     </QueryClientProvider>
+    </AppWrapper>
   );
 }
 

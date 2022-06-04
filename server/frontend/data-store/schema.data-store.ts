@@ -1,8 +1,7 @@
+import { dataNotFoundMessage, useApi } from "@gothicgeeks/shared";
 import { IJsonSchemaModel } from "../../backend/schema/types";
 import { ILabelValue } from "../../types";
 import { INavigationItem } from "../_layouts/types";
-import { dataNotFoundMessage } from "./useData/errorMessage";
-import { useApi } from "./useData/useApi";
 
 export const useSchemaMenuItems = () => {
   return useApi<INavigationItem[]>("/api/schema/menu", {

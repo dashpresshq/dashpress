@@ -15,35 +15,31 @@ export const AppLayout = ({ children }: IProps) => {
       selectionView={[
         {
           title: "Models",
-          dataTestId: "",
           description: "Your models",
           icon: HardDrive,
-          view: <>Demo View</>,
-          link: "Foo",
+          viewMenuItems: modelNavigation,
+          link: "Models",
         },
         {
           title: "Dashboards",
-          dataTestId: "",
           description: "Your models",
           icon: HardDrive,
           view: <>Demo View</>,
-          link: "Foo",
+          link: "Dashboards",
         },
         {
           title: "Schema",
-          dataTestId: "",
           description: "Your models",
           icon: HardDrive,
           view: <>Demo View</>,
-          link: "Foo",
+          link: "Schema",
         },
         {
           title: "Settings",
-          dataTestId: "",
           description: "Your models",
           icon: HardDrive,
           view: <>Demo View</>,
-          link: "Foo",
+          link: "Settings",
         },
       ]}
     >

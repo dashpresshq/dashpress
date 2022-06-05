@@ -9,15 +9,14 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@gothicgeeks/design-system": "git+ssh://git@github.com:thrownullexception/design-system.git#6600baac921fe426f6ea3a3f0b84baf31880f8a2",
-    "@gothicgeeks/shared": "git+ssh://git@github.com:thrownullexception/shared.git#606b981a7f7bce23d54d47bfe40dda4f6664e748",
+    "@gothicgeeks/design-system": "git+ssh://git@github.com:thrownullexception/design-system.git#fd417352ed7e53b393c592bb3b488a6cd0aa5f23",
+    "@gothicgeeks/shared": "git+ssh://git@github.com:thrownullexception/shared.git#c328b2f74278ab096afbb6ee07dc77df462a0b78",
     "knex": "^2.0.0",
     "next": "12.1.6",
     "react": "18.1.0",
     "react-dom": "18.1.0",
     "react-feather": "^2.0.10",
-    "react-hot-toast": "^2.2.0",
-    "react-query": "^3.39.0"
+    "react-hot-toast": "^2.2.0"
   },
   "devDependencies": {
     "@types/react": "^18.0.9",

@@ -1,41 +1,35 @@
-import {
-  useSchemaFields,
-} from "../../data-store/schema.data-store";
+import { useSchemaFields } from "../../data-store/schema.data-store";
 import { useSlug } from "../../lib/routing/useSlug";
-// import { DynamicTableStateless } from "@atlaskit/dynamic-table";
-import { useState } from "react";
 import { AppLayout } from "../../_layouts/app";
+import { Table } from "@gothicgeeks/design-system";
 
 export function ListModel() {
   const model = useSlug("model");
   const schemaFields = useSchemaFields(model);
 
-  const [pageNumber, setPageNumber] = useState(3);
-  const navigateTo = (pageNumber: number) => {
-    setPageNumber(pageNumber);
-  };
+  const columns = (schemaFields.data || []).map(({ name }) => ({
+    Header: name,
+    accessor: name,
+    // disableSortBy?: boolean;
+    // disableFilters?: boolean;
+    // Filter?: (input: {
+    //   columns: { filterValue: unknown; setFilter: (filter: unknown) => void };
+    // }) => JSX.Element;
+    // Cell?: (cellProps: {
+    //   value: unknown;
+    //   row: { original: Record<string, unknown> };
+    // }) => JSX.Element;
+  }));
 
   return (
     <AppLayout>
-      {/* <DynamicTableStateless
-        head={{
-          cells: (schemaFields.data || []).map(({ name }) => ({
-            key: name,
-            content: name,
-            isSortable: true,
-          })),
-        }}
-        rows={[]}
-        rowsPerPage={5}
-        page={pageNumber}
-        loadingSpinnerSize="large"
-        isLoading={false}
-        // isFixedSize
-        // sortKey="term"
-        // sortOrder="DESC"
-        onSort={() => console.log("onSort")}
-        onSetPage={() => console.log("onSetPage")}
-      /> */}
+      <Table
+        url={`/api/data/${model}/table`}
+        title={model}
+        columns={columns}
+        singular={model}
+        createPath={`${model}/new`}
+      />
     </AppLayout>
   );
 }

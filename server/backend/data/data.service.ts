@@ -1,5 +1,5 @@
 import knex, { Knex } from "knex";
-
+import get from 'lodash/get';
 export class DataService {
   static _dbInstance: Knex = null;
 
@@ -19,8 +19,12 @@ export class DataService {
     return this._dbInstance;
   }
 
+  private afterConnection(){
+
+  }
+
   async count(model: string): Promise<number> {
-    return (await DataService.getInstance().count().from(model))[0].count;
+    return get((await DataService.getInstance().count().from(model)), [0, 'count'], 0);
   }
 
   create() {}

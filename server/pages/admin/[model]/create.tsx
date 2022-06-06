@@ -1,3 +1,1 @@
-export default function CreateModel() {
-  return <div>create</div>;
-}
+export { CreateModel as default } from '../../../frontend/views/models/Create';

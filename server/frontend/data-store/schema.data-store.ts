@@ -7,7 +7,10 @@ export const useSchemaMenuItems = () => {
   return useApi<INavigationItem[]>("/api/schema/menu", {
     errorMessage: dataNotFoundMessage("Menu items"),
     selector: (input: ILabelValue[]) =>
-      input.map(({ label, value }) => ({ title: label, link: `/admin/${value}` })),
+      input.map(({ label, value }) => ({
+        title: label,
+        link: `/admin/${value}`,
+      })),
   });
 };
 
@@ -20,6 +23,16 @@ export const useSchemaList = () => {
 export const useSchemaFields = (model: string) => {
   return useApi<IJsonSchemaModel[]>(`/api/schema/${model}/fields`, {
     errorMessage: dataNotFoundMessage("Schema Fields"),
-    enabled: model !== "loading"
+    enabled: model !== "loading",
+  });
+};
+
+export const useSchemaScalarFields = (model: string) => {
+  return useApi<IJsonSchemaModel[]>(`/api/schema/${model}/fields`, {
+    errorMessage: dataNotFoundMessage("Schema Fields"),
+    enabled: model !== "loading",
+    selector: (data: IJsonSchemaModel[]) => {
+      return data.filter(({ kind }) => kind === "scalar");
+    },
   });
 };

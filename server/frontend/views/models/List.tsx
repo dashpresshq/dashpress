@@ -1,15 +1,15 @@
-import { useSchemaFields } from "../../data-store/schema.data-store";
+import { useSchemaFields, useSchemaScalarFields } from "../../data-store/schema.data-store";
 import { useSlug } from "../../lib/routing/useSlug";
 import { AppLayout } from "../../_layouts/app";
 import { Table } from "@gothicgeeks/design-system";
 
 export function ListModel() {
   const model = useSlug("model");
-  const schemaFields = useSchemaFields(model);
+  const schemaScalarFields = useSchemaScalarFields(model);
 
-  console.log(schemaFields);
+  console.log(schemaScalarFields);
 
-  const columns = (schemaFields.data || []).filter(({kind}) => kind === "scalar" ).map(({ name }) => ({
+  const columns = (schemaScalarFields.data || []).map(({ name }) => ({
     Header: name,
     accessor: name,
     // disableSortBy?: boolean;
@@ -30,7 +30,7 @@ export function ListModel() {
         title={model}
         columns={columns}
         singular={model}
-        createPath={`${model}/new`}
+        createPath={`/admin/${model}/create`}
       />
     </AppLayout>
   );

@@ -13,6 +13,7 @@
     "@gothicgeeks/shared": "git+ssh://git@github.com:thrownullexception/shared.git#c328b2f74278ab096afbb6ee07dc77df462a0b78",
     "knex": "^2.0.0",
     "next": "12.1.6",
+    "pg": "^8.7.3",
     "react": "18.1.0",
     "react-dom": "18.1.0",
     "react-feather": "^2.0.10",

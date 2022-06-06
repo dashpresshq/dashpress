@@ -1,9 +1,5 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
+import { dataController } from "../../../../backend/data/data.controller";
 
-// import { schemaController } from "../../../backend/schema/schema.controller";
-
-export default function handler(req, res) {
-  res
-    .status(200)
-    .json({ data: [], pageIndex: 1, pageSize: 10, totalRecord: 0 });
+export default async function handler(req, res) {
+  res.status(200).json(await dataController.tableData(req.query.model, req.params));
 }

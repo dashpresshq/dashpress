@@ -1,1 +1,10 @@
 https://marmelab.com/react-admin/Tutorial.html
+
+All Models Settings 
+1. All the model to show/hide
+
+Table actions
+// New Item
+// Refresh data
+// Export
+// Multi select

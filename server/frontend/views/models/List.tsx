@@ -7,7 +7,9 @@ export function ListModel() {
   const model = useSlug("model");
   const schemaFields = useSchemaFields(model);
 
-  const columns = (schemaFields.data || []).map(({ name }) => ({
+  console.log(schemaFields);
+
+  const columns = (schemaFields.data || []).filter(({kind}) => kind === "scalar" ).map(({ name }) => ({
     Header: name,
     accessor: name,
     // disableSortBy?: boolean;

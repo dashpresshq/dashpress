@@ -1,14 +1,26 @@
-import { DynamicLayout } from "@gothicgeeks/design-system";
+import {
+  Breadcrumbs,
+  DynamicLayout,
+  Spacer,
+  Text,
+} from "@gothicgeeks/design-system";
+import { IValueLabel } from "@gothicgeeks/design-system/dist/types";
 import React, { ReactNode } from "react";
 import { HardDrive } from "react-feather";
 import { useSchemaMenuItems } from "../../data-store/schema.data-store";
 
 interface IProps {
   children: ReactNode;
+  breadcrumbs: IValueLabel[];
 }
 
-export const AppLayout = ({ children }: IProps) => {
+export const AppLayout = ({ children, breadcrumbs }: IProps) => {
   const modelNavigation = useSchemaMenuItems();
+
+  const homedBreadcrumb = [
+    { label: "Home", value: "/" },
+    ...breadcrumbs,
+  ];
 
   return (
     <DynamicLayout
@@ -43,6 +55,9 @@ export const AppLayout = ({ children }: IProps) => {
         },
       ]}
     >
+      <Text>{homedBreadcrumb[homedBreadcrumb.length - 1]?.label}</Text>
+      <Breadcrumbs items={homedBreadcrumb} />
+      <Spacer />
       {children}
     </DynamicLayout>
   );

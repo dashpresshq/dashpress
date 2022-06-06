@@ -1,4 +1,7 @@
-import { useSchemaFields, useSchemaScalarFields } from "../../data-store/schema.data-store";
+import {
+  useSchemaFields,
+  useSchemaScalarFields,
+} from "../../data-store/schema.data-store";
 import { useSlug } from "../../lib/routing/useSlug";
 import { AppLayout } from "../../_layouts/app";
 import { Table } from "@gothicgeeks/design-system";
@@ -6,8 +9,6 @@ import { Table } from "@gothicgeeks/design-system";
 export function ListModel() {
   const model = useSlug("model");
   const schemaScalarFields = useSchemaScalarFields(model);
-
-  console.log(schemaScalarFields);
 
   const columns = (schemaScalarFields.data || []).map(({ name }) => ({
     Header: name,
@@ -24,7 +25,11 @@ export function ListModel() {
   }));
 
   return (
-    <AppLayout>
+    <AppLayout
+      breadcrumbs={[
+        { label: model, value: `/admin/${model}` },
+      ]}
+    >
       <Table
         url={`/api/data/${model}/table`}
         title={model}

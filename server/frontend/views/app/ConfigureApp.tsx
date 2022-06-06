@@ -1,5 +1,9 @@
 import { AppLayout } from "../../_layouts/app";
 
 export function ConfigureApp() {
-  return <AppLayout>Configure App</AppLayout>;
+  return (
+    <AppLayout breadcrumbs={[]}>
+      Configure App
+    </AppLayout>
+  );
 }

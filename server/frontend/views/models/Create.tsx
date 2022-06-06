@@ -25,12 +25,15 @@ export function CreateModel() {
   const model = useSlug("model");
   const schemaScalarFields = useSchemaScalarFields(model);
 
-  console.log(schemaScalarFields);
-
   const onSubmit = () => {};
   // TODo handle loading || error;
   return (
-    <AppLayout>
+    <AppLayout
+      breadcrumbs={[
+        { label: model, value: `/admin/${model}` },
+        { label: "Create", value: `/admin/${model}/create` },
+      ]}
+    >
       <SectionCenter>
         <SectionBox
           title={TitleLang.create(model)}
@@ -50,18 +53,12 @@ export function CreateModel() {
 }
 
 export const ModelCreateForm: React.FC<{
-    schema: IJsonSchemaModel[],
-    isMakingRequest: boolean,
-    initialValues?: unknown,
-    onSubmit: () => void;
-    resetForm: boolean;
-}> = ({
-  onSubmit,
-  isMakingRequest,
-  initialValues,
-  resetForm,
-  schema,
-}) => {
+  schema: IJsonSchemaModel[];
+  isMakingRequest: boolean;
+  initialValues?: unknown;
+  onSubmit: () => void;
+  resetForm: boolean;
+}> = ({ onSubmit, isMakingRequest, initialValues, resetForm, schema }) => {
   return (
     <Form
       onSubmit={onSubmit}

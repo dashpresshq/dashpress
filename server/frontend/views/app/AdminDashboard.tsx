@@ -11,7 +11,7 @@ export function AdminDashboard() {
   }
 
   return (
-    <AppLayout>
+    <AppLayout breadcrumbs={[]}>
       {schemaList.data.map((field) => (
         <div key={field.value}>{field.label}</div>
       ))}

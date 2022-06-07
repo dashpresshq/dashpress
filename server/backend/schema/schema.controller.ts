@@ -1,20 +1,36 @@
+import {
+  ConfigurationService,
+  configurationService,
+} from "../configuration/configuration.service";
 import { schemaService, SchemaService } from "./schema.service";
 import { IJsonSchemaField } from "./types";
 
 export class SchemaController {
-  constructor(private schemaService: SchemaService) {}
-  getSchemaMenuItems() {
-    return this.schemaService.getAllSchemas();
+  constructor(
+    private schemaService: SchemaService,
+    private configurationService: ConfigurationService
+  ) {}
+ async getSchemaMenuItems() {
+    const schemas = this.schemaService.getAllSchemas();
+    const hiddenSchemas = (await this.configurationService.show("hidden_schemas")) as string[];
+    return schemas.filter(({value}) => !hiddenSchemas.includes(value))
   }
 
   listAllSchema() {
     return this.schemaService.getAllSchemas();
   }
 
-  getSchemaFields(model: string): IJsonSchemaField[]{
-      return this.schemaService.getSchemaFields(model);
+  getSchemaFields(model: string): IJsonSchemaField[] {
+    return this.schemaService.getSchemaFields(model);
+  }
+
+  getSchemaFieldsForTable(model: string): IJsonSchemaField[] {
+    return this.schemaService.getSchemaFields(model);
   }
 
 }
 
-export const schemaController = new SchemaController(schemaService);
+export const schemaController = new SchemaController(
+  schemaService,
+  configurationService
+);

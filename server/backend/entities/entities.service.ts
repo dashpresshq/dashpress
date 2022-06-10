@@ -1,6 +1,6 @@
-import { IJsonSchema, IJsonSchemaField, IJsonSchemaModel } from "./types";
+import { IJsonSchema, IEntityField, IJsonSchemaModel } from "./types";
 
-export class SchemaService {
+export class EntitiesService {
   private JSON_SCHEMA: IJsonSchema;
 
   private refreshSchema = () => {
@@ -25,15 +25,15 @@ export class SchemaService {
     );
   };
 
-  getSchemaFields = (schema: string): IJsonSchemaField[] => {
-    return this.getSchemaModel(schema).fields;
+  getEntityFields = (entity: string): IEntityField[] => {
+    return this.getEntityFromSchema(entity).fields;
   };
 
-  getSchemaModel = (schema: string): IJsonSchemaModel => {
-    return this.getJsonSchemaModels()[schema];
+  getEntityFromSchema = (entity: string): IJsonSchemaModel => {
+    return this.getJsonSchemaModels()[entity];
   };
 
-  getAllSchemas = () => {
+  getAllEntities = () => {
     return this.listJsonSchemaModels().map(({ name }) => ({
       value: name,
       label: name,
@@ -42,4 +42,4 @@ export class SchemaService {
 }
 
 
-export const schemaService = new SchemaService();
+export const entitiesService = new EntitiesService();

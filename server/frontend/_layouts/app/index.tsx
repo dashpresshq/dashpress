@@ -7,7 +7,7 @@ import {
 import { IValueLabel } from "@gothicgeeks/design-system/dist/types";
 import React, { ReactNode } from "react";
 import { HardDrive } from "react-feather";
-import { useSchemaMenuItems } from "../../data-store/schema.data-store";
+import { useEntitiesMenuItems } from "../../data-store/entities.data-store";
 
 interface IProps {
   children: ReactNode;
@@ -15,7 +15,7 @@ interface IProps {
 }
 
 export const AppLayout = ({ children, breadcrumbs }: IProps) => {
-  const modelNavigation = useSchemaMenuItems();
+  const entitiesMenuItems = useEntitiesMenuItems();
 
   const homedBreadcrumb = [
     { label: "Home", value: "/" },
@@ -29,8 +29,8 @@ export const AppLayout = ({ children, breadcrumbs }: IProps) => {
           title: "Tables",
           description: "Your models",
           icon: HardDrive,
-          viewMenuItems: modelNavigation,
-          link: "Models",
+          viewMenuItems: entitiesMenuItems,
+          link: "Tables",
         },
         {
           title: "Dashboards",
@@ -40,11 +40,11 @@ export const AppLayout = ({ children, breadcrumbs }: IProps) => {
           link: "Dashboards",
         },
         {
-          title: "Schema",
+          title: "Entities",
           description: "Your models",
           icon: HardDrive,
           view: <>Demo View</>,
-          link: "Schema",
+          link: "Entities",
         },
         {
           title: "Settings",

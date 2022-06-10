@@ -7,6 +7,7 @@ export class ConfigurationService {
     key: keyof typeof CONFIGURATION_KEYS,
     entity?: string
   ): Promise<unknown> {
+    // Sharing configuration at a central place
     const { requireEntity, defaultValue } = CONFIGURATION_KEYS[key];
     const value = requireEntity ? (CONFIG[key] || {})[entity] : CONFIG[key];
     return value || defaultValue;

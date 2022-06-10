@@ -1,18 +1,18 @@
-import { useSchemaList } from "../../data-store/schema.data-store";
+import { useEntitiesList } from "../../data-store/entities.data-store";
 import { AppLayout } from "../../_layouts/app";
 
 // Improvement, being able to add dashboard items here
 
 export function AdminDashboard() {
-  const schemaList = useSchemaList();
+  const entitiesList = useEntitiesList();
 
-  if (schemaList.isFetching) {
+  if (entitiesList.isFetching) {
     return "Loading";
   }
 
   return (
     <AppLayout breadcrumbs={[]}>
-      {schemaList.data.map((field) => (
+      {entitiesList.data.map((field) => (
         <div key={field.value}>{field.label}</div>
       ))}
     </AppLayout>

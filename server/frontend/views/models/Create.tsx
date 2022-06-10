@@ -1,7 +1,6 @@
 import {
-  useSchemaFields,
-  useSchemaScalarFields,
-} from "../../data-store/schema.data-store";
+  useEntityScalarFields,
+} from "../../data-store/entities.data-store";
 import { useSlug } from "../../lib/routing/useSlug";
 import { AppLayout } from "../../_layouts/app";
 import {
@@ -19,11 +18,11 @@ import {
   TitleLang,
 } from "@gothicgeeks/shared";
 import { Form, Field } from "react-final-form";
-import { IJsonSchemaModel } from "../../../backend/schema/types";
+import { IEntityField } from "../../../backend/entities/types";
 
 export function CreateModel() {
   const model = useSlug("model");
-  const schemaScalarFields = useSchemaScalarFields(model);
+  const entityScalarFields = useEntityScalarFields(model);
 
   const onSubmit = () => {};
   // TODo handle loading || error;
@@ -42,7 +41,7 @@ export function CreateModel() {
           <ErrorAlert message={"error"} />
           <ModelCreateForm
             onSubmit={onSubmit}
-            schema={schemaScalarFields.data || []}
+            fields={entityScalarFields.data || []}
             isMakingRequest={false}
             resetForm={false}
           />
@@ -53,12 +52,12 @@ export function CreateModel() {
 }
 
 export const ModelCreateForm: React.FC<{
-  schema: IJsonSchemaModel[];
+  fields: IEntityField[];
   isMakingRequest: boolean;
   initialValues?: unknown;
   onSubmit: () => void;
   resetForm: boolean;
-}> = ({ onSubmit, isMakingRequest, initialValues, resetForm, schema }) => {
+}> = ({ onSubmit, isMakingRequest, initialValues, resetForm, fields }) => {
   return (
     <Form
       onSubmit={onSubmit}
@@ -74,7 +73,7 @@ export const ModelCreateForm: React.FC<{
             }}
           >
             {/* <WhenFieldChanges field="name" becomes={undefined} set="slug" to={SLUG_VALUE} /> */}
-            {schema.map(({ name }) => {
+            {fields.map(({ name }) => {
               return (
                 <Field
                   key={name}

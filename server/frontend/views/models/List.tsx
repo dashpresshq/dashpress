@@ -1,16 +1,15 @@
 import {
-  useSchemaFields,
-  useSchemaScalarFields,
-} from "../../data-store/schema.data-store";
+  useEntityScalarFields,
+} from "../../data-store/entities.data-store";
 import { useSlug } from "../../lib/routing/useSlug";
 import { AppLayout } from "../../_layouts/app";
 import { Table } from "@gothicgeeks/design-system";
 
 export function ListModel() {
   const model = useSlug("model");
-  const schemaScalarFields = useSchemaScalarFields(model);
+  const entityScalarFields = useEntityScalarFields(model);
 
-  const columns = (schemaScalarFields.data || []).map(({ name }) => ({
+  const columns = (entityScalarFields.data || []).map(({ name }) => ({
     Header: name,
     accessor: name,
     // disableSortBy?: boolean;

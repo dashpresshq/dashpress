@@ -10,12 +10,12 @@ export interface IJsonSchemaEnum {
 export interface IJsonSchemaModel {
   name: string;
   dbName: string[];
-  kind: "scalar" | "object"
-  fields: IJsonSchemaField[];
+  fields: IEntityField[];
 }
 
-export interface IJsonSchemaField {
+export interface IEntityField {
   name: string;
+  kind: "scalar" | "object"
   isRequired: boolean;
   isUnique: boolean;
   isId: true;

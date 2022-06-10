@@ -1,12 +1,31 @@
 import { CONFIGURATION_KEYS } from "./configuration.constants";
-export class ConfigurationService {
 
-  async show(key: keyof typeof CONFIGURATION_KEYS, entity?: string): Promise<unknown> {
-      return "";
+const CONFIG = {};
+
+export class ConfigurationService {
+  async show(
+    key: keyof typeof CONFIGURATION_KEYS,
+    entity?: string
+  ): Promise<unknown> {
+    const { requireEntity, defaultValue } = CONFIGURATION_KEYS[key];
+    const value = requireEntity ? (CONFIG[key] || {})[entity] : CONFIG[key];
+    return value || defaultValue;
   }
 
-  async update(key: string, value: unknown, entity?: string): Promise<void> {
-
+  async upsert(
+    key: keyof typeof CONFIGURATION_KEYS,
+    value: unknown,
+    entity?: string
+  ): Promise<void> {
+    const { requireEntity } = CONFIGURATION_KEYS[key];
+    if (requireEntity) {
+      if (!CONFIG[key]) {
+        CONFIG[key] = {};
+      }
+      CONFIG[key][entity] = value;
+    } else {
+      CONFIG[key] = value;
+    }
   }
 }
 

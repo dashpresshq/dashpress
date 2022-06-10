@@ -7,7 +7,7 @@ import {
 export class ConfigurationController {
   constructor(private configurationService: ConfigurationService) {}
       
- async listData(key: string, entity?: string) {
+ async showConfig(key: string, entity?: string) {
     const configurationKey = this.validateConfig(key, entity);
 
     return await this.configurationService.show(configurationKey, entity);
@@ -16,7 +16,7 @@ export class ConfigurationController {
   async upsertConfig(key: string, value: unknown, entity?: string) {
    const configurationKey = this.validateConfig(key, entity);
 
-    await this.configurationService.update(configurationKey, value, entity);
+    await this.configurationService.upsert(configurationKey, value, entity);
   }
 
   private validateConfig(key: string, entity?: string): keyof typeof CONFIGURATION_KEYS {

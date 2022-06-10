@@ -16,7 +16,8 @@
     "pg": "^8.7.3",
     "react": "18.1.0",
     "react-dom": "18.1.0",
-    "react-feather": "^2.0.10"
+    "react-feather": "^2.0.10",
+    "react-query": "^3.39.1"
   },
   "devDependencies": {
     "@types/react": "^18.0.9",

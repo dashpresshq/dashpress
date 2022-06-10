@@ -26,7 +26,7 @@ export const AppLayout = ({ children, breadcrumbs }: IProps) => {
     <DynamicLayout
       selectionView={[
         {
-          title: "Models",
+          title: "Tables",
           description: "Your models",
           icon: HardDrive,
           viewMenuItems: modelNavigation,

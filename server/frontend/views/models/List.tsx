@@ -39,3 +39,19 @@ export function ListModel() {
     </AppLayout>
   );
 }
+
+/*
+CRUD Settings
+
+Hidden Table Columns
+Table Fields
+
+Hidden Create Columns
+Hidden Update Columns
+Hidden Details Columns
+
+Entity Columns Labels
+Entity Verbiage
+Entity Validations
+
+*/

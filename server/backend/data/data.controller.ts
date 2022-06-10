@@ -13,7 +13,7 @@ export class DataController {
 
   deleteData(model: string) {}
 
-  async tableData(model: string, filters: string) {
+  async tableData(model: string, filters: Record<string, unknown>) {
     return {
       data: await this.dataService.list(model),
       pageIndex: 1,

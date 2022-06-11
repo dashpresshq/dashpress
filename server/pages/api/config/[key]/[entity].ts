@@ -6,7 +6,7 @@ export default async function handler(
   res: NextApiResponse
 ) {
   if (req.method === "GET") {
-    res
+    return res
       .status(200)
       .json(
         await configurationController.showConfig(
@@ -16,7 +16,7 @@ export default async function handler(
       );
       // TODO replace with PUT
   } else if (req.method === "PATCH") {
-    res
+    return res
       .status(204)
       .json(
         await configurationController.upsertConfig(

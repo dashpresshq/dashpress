@@ -8,6 +8,7 @@ import {
 import { useEntityScalarFields } from "../../hooks/entity/entity.store";
 import { Plus, Save } from "react-feather";
 import { useRouter } from "next/router";
+import { SLUG_LOADING_VALUE } from "../../lib/routing/constants";
 
 export function EntityTable() {
   const entity = useEntitySlug();
@@ -28,6 +29,10 @@ export function EntityTable() {
     //   row: { original: Record<string, unknown> };
     // }) => JSX.Element;
   }));
+
+  if(entity === SLUG_LOADING_VALUE){
+    return "TODO Loading Indicator Here";
+  }
 
   return (
     <AppLayout
@@ -59,6 +64,7 @@ export function EntityTable() {
         url={`/api/data/${entity}/table`}
         title={entityDiction.plural}
         columns={columns}
+        // Loading indicator
         singular={entityDiction.singular}
         createPath={NAVIGATION_LINKS.ENTITY.CREATE(entity)}
       />

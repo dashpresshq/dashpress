@@ -1,4 +1,4 @@
-import { CONFIGURATION_KEYS } from "./configuration.constants";
+import { CONFIGURATION_KEYS } from "../../shared/configuration.constants";
 
 const CONFIG = {};
 
@@ -7,6 +7,7 @@ export class ConfigurationService {
     key: keyof typeof CONFIGURATION_KEYS,
     entity?: string
   ): Promise<unknown> {
+    console.log(CONFIG);
     // Sharing configuration at a central place
     const { requireEntity, defaultValue } = CONFIGURATION_KEYS[key];
     const value = requireEntity ? (CONFIG[key] || {})[entity] : CONFIG[key];

@@ -1,4 +1,4 @@
-import { CONFIGURATION_KEYS } from "./configuration.constants";
+import { CONFIGURATION_KEYS } from "../../shared/configuration.constants";
 import {
   configurationService,
   ConfigurationService,

@@ -17,3 +17,15 @@ export function useEntityDiction() {
     plural: entityDiction.data?.plural || capitalCase(entity),
   };
 }
+
+
+export function useEntityCrudSettings() {
+  const entity = useEntitySlug();
+  const entityCrudSettings = useEntityConfiguration<{
+    create: boolean;
+    read: boolean;
+    update: boolean;
+    delete: boolean;
+  }>("entity_crud_settings", entity);
+  return entityCrudSettings;
+}

@@ -17,22 +17,31 @@ export const CONFIGURATION_KEYS: Record<
   hidden_entity_update_columns: { requireEntity: true, defaultValue: [] },
   hidden_entity_details_columns: { requireEntity: true, defaultValue: [] },
   entity_columns_labels: { requireEntity: true, defaultValue: {} }, // {key: label}
-  entity_diction: {requireEntity: true, defaultValue: { singular: "", plural: "" }},
-  entity_crud_settings: {requireEntity: true, defaultValue: { createAble: true, editAble: true, deleteAble: true, detailsAble: true } },
+  entity_diction: {
+    requireEntity: true,
+    defaultValue: { singular: "", plural: "" },
+  },
+  entity_crud_settings: {
+    requireEntity: true,
+    defaultValue: {
+      create: true,
+      read: true,
+      update: true,
+      delete: true,
+    },
+  },
   entity_table_config: {
     requireEntity: true,
-    defaultValue:  {}, //{ orderable: true, filterable: true },
+    defaultValue: {}, //{ orderable: true, filterable: true },
   },
   entity_validations: {
     requireEntity: true,
-    defaultValue: {} // {key: []} //  type,
+    defaultValue: {}, // {key: []} //  type,
   },
   relations_list_fields: { requireEntity: true, defaultValue: [] },
 
   entities_to_hide_from_menu: { requireEntity: false, defaultValue: [] },
 };
-
-
 
 // Plugin System
 

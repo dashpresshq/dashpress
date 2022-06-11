@@ -1,4 +1,3 @@
-
 import { AppLayout } from "../../_layouts/app";
 import {
   ErrorAlert,
@@ -17,27 +16,59 @@ import {
 import { Form, Field } from "react-final-form";
 import { IEntityField } from "../../../backend/entities/types";
 import { NAVIGATION_LINKS } from "../../lib/routing/links";
-import { useEntityDiction, useEntitySlug } from "../../hooks/entity/entity.config";
+import {
+  useEntityDiction,
+  useEntitySlug,
+} from "../../hooks/entity/entity.config";
 import { useEntityScalarFields } from "../../hooks/entity/entity.store";
+import { Plus, Save } from "react-feather";
+import { useRouter } from "next/router";
 
 export function EntityCreate() {
   const entity = useEntitySlug();
   const entityDiction = useEntityDiction();
   const entityScalarFields = useEntityScalarFields(entity);
+  const router = useRouter();
 
   const onSubmit = () => {};
   // TODo handle loading || error;
   return (
     <AppLayout
       breadcrumbs={[
-        { label: entityDiction.plural, value: NAVIGATION_LINKS.ENTITY.TABLE(entity) },
+        {
+          label: entityDiction.plural,
+          value: NAVIGATION_LINKS.ENTITY.TABLE(entity),
+        },
         { label: "Create", value: NAVIGATION_LINKS.ENTITY.CREATE(entity) },
+      ]}
+      actionItems={[
+        {
+          label: "CRUD Settings",
+          IconComponent: Save,
+          onClick: () =>
+            router.push(NAVIGATION_LINKS.ENTITY.CONFIG.CRUD(entity)),
+        },
+        {
+          label: "Create Settings",
+          IconComponent: Plus,
+          onClick: () =>
+            router.push(NAVIGATION_LINKS.ENTITY.CONFIG.CREATE(entity)),
+        },
+        {
+          label: "Entity Fields",
+          IconComponent: Plus,
+          onClick: () =>
+            router.push(NAVIGATION_LINKS.ENTITY.CONFIG.FIELDS(entity)),
+        },
       ]}
     >
       <SectionCenter>
         <SectionBox
           title={TitleLang.create(entityDiction.singular)}
-          backLink={{ link: NAVIGATION_LINKS.ENTITY.TABLE(entity), label: entityDiction.plural }}
+          backLink={{
+            link: NAVIGATION_LINKS.ENTITY.TABLE(entity),
+            label: entityDiction.plural,
+          }}
         >
           <ErrorAlert message={"error"} />
           <CreateEntityForm

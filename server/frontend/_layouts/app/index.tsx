@@ -8,15 +8,24 @@ import {
 } from "@gothicgeeks/design-system";
 import { IValueLabel } from "@gothicgeeks/design-system/dist/types";
 import React, { ReactNode } from "react";
-import { HardDrive, Plus, Save } from "react-feather";
+import { HardDrive, Icon, Plus, Save } from "react-feather";
 import { useEntitiesMenuItems } from "../../hooks/entity/entity.store";
 
 interface IProps {
   children: ReactNode;
   breadcrumbs: IValueLabel[];
+  actionItems?: {
+    label: string;
+    onClick: () => void;
+    IconComponent: Icon;
+  }[];
 }
 
-export const AppLayout = ({ children, breadcrumbs }: IProps) => {
+export const AppLayout = ({
+  children,
+  breadcrumbs,
+  actionItems = [],
+}: IProps) => {
   const entitiesMenuItems = useEntitiesMenuItems();
 
   const homedBreadcrumb = [{ label: "Home", value: "/" }, ...breadcrumbs];
@@ -59,22 +68,8 @@ export const AppLayout = ({ children, breadcrumbs }: IProps) => {
           <Text>{homedBreadcrumb[homedBreadcrumb.length - 1]?.label}</Text>
           <Breadcrumbs items={homedBreadcrumb} />
         </div>
-        <DropDownMenu
-          menuItems={[
-            {
-              label: "Foo",
-              // description: "Foo",
-              IconComponent: Save,
-              onClick: () => console.log("Do nothing"),
-            },
-            {
-              label: "Bar",
-              // description: "Bar",
-              IconComponent: Plus,
-              onClick: () => console.log("Do nothing"),
-            },
-          ]}
-        />
+        {/* Remove this logic on version update */}
+        {actionItems.length > 0 && <DropDownMenu menuItems={actionItems} />}
       </Stack>
       <Spacer />
       {children}

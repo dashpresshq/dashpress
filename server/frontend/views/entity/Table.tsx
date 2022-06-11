@@ -6,11 +6,14 @@ import {
   useEntitySlug,
 } from "../../hooks/entity/entity.config";
 import { useEntityScalarFields } from "../../hooks/entity/entity.store";
+import { Plus, Save } from "react-feather";
+import { useRouter } from "next/router";
 
 export function EntityTable() {
   const entity = useEntitySlug();
   const entityDiction = useEntityDiction();
   const entityScalarFields = useEntityScalarFields(entity);
+  const router = useRouter();
 
   const columns = (entityScalarFields.data || []).map(({ name }) => ({
     Header: name,
@@ -32,6 +35,23 @@ export function EntityTable() {
         {
           label: entityDiction.plural,
           value: NAVIGATION_LINKS.ENTITY.TABLE(entity),
+        },
+      ]}
+      actionItems={[
+        {
+          label: "CRUD Settings",
+          IconComponent: Save,
+          onClick: () => router.push(NAVIGATION_LINKS.ENTITY.CONFIG.CRUD(entity)),
+        },
+        {
+          label: "Table Settings",
+          IconComponent: Plus,
+          onClick: () => router.push(NAVIGATION_LINKS.ENTITY.CONFIG.TABLE(entity)),
+        },
+        {
+          label: "Entity Diction",
+          IconComponent: Plus,
+          onClick: () => router.push(NAVIGATION_LINKS.ENTITY.CONFIG.DICTION(entity)),
         },
       ]}
     >

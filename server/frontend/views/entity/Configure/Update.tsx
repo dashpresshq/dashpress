@@ -10,11 +10,11 @@ export const EntityUpdateSettings = () => {
   return (
     <BaseEntitySettingsLayout
       menuItem={{
-        link: NAVIGATION_LINKS.ENTITY.CONFIG.CRUD(entity),
-        name: "CRUD Settings",
+        link: NAVIGATION_LINKS.ENTITY.CONFIG.UPDATE(entity),
+        name: "Update Settings",
       }}
     >
-      <SectionBox title="CRUD Settings">
+      <SectionBox title="Update Settings">
         <ErrorAlert message={"error"} />
         <CreateEntityForm
           onSubmit={() => {}}

@@ -10,10 +10,13 @@ import { IValueLabel } from "@gothicgeeks/design-system/dist/types";
 import React, { ReactNode } from "react";
 import { HardDrive, Icon } from "react-feather";
 import { useEntitiesMenuItems } from "../../hooks/entity/entity.store";
+import Head from "next/head";
+import { useSiteConfig } from "../../hooks/app/site.config";
 
 interface IProps {
   children: ReactNode;
   breadcrumbs: IValueLabel[];
+  titleNeedsContext?: true;
   actionItems?: {
     label: string;
     onClick: () => void;
@@ -24,11 +27,18 @@ interface IProps {
 export const AppLayout = ({
   children,
   breadcrumbs,
+  titleNeedsContext,
   actionItems = [],
 }: IProps) => {
   const entitiesMenuItems = useEntitiesMenuItems();
+  const siteConfig = useSiteConfig();
 
   const homedBreadcrumb = [{ label: "Home", value: "/" }, ...breadcrumbs];
+
+  const title =
+    (titleNeedsContext ?
+      homedBreadcrumb[homedBreadcrumb.length - 2]?.label + " - " : "") +
+    homedBreadcrumb[homedBreadcrumb.length - 1]?.label;
 
   return (
     <DynamicLayout
@@ -63,9 +73,14 @@ export const AppLayout = ({
         },
       ]}
     >
+      <Head>
+        <title>
+          {title} - {siteConfig.name}
+        </title>
+      </Head>
       <Stack justify="space-between" align="center">
         <div>
-          <Text>{homedBreadcrumb[homedBreadcrumb.length - 1]?.label}</Text>
+          <Text>{title}</Text>
           <Breadcrumbs items={homedBreadcrumb} />
         </div>
         {/* Remove this logic on version update */}

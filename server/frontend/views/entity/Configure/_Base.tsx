@@ -23,6 +23,7 @@ export const BaseEntitySettingsLayout = ({ children, menuItem }: IProps) => {
 
   return (
     <AppLayout
+      titleNeedsContext={true}
       breadcrumbs={[
         {
           label: entityDiction.plural,

@@ -36,6 +36,10 @@ export class DataService {
   show() {}
 
   update() {}
+
+  delete(){
+    
+  }
 }
 
 export const dataService = new DataService();

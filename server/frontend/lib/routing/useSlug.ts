@@ -14,4 +14,3 @@ export function useSlug(name: string) {
     throw new Error("Unexpected handle given by Next.js");
   return value;
 }
-

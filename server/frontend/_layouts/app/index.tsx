@@ -9,7 +9,7 @@ import {
 import { IValueLabel } from "@gothicgeeks/design-system/dist/types";
 import React, { ReactNode } from "react";
 import { HardDrive, Plus, Save } from "react-feather";
-import { useEntitiesMenuItems } from "../../data-store/entities.data-store";
+import { useEntitiesMenuItems } from "../../hooks/entity/entity.store";
 
 interface IProps {
   children: ReactNode;

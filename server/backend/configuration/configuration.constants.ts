@@ -44,9 +44,7 @@ export const CONFIGURATION_KEYS: Record<
   // id column
 
 Table Settings => 
-  Columns to show, 
   add columns,
-  order, 
   default sorting, 
 
 // Filter Tables and / or 

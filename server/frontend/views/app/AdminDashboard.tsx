@@ -1,4 +1,4 @@
-import { useEntitiesList } from "../../data-store/entities.data-store";
+import { useEntitiesList } from "../../hooks/entity/entity.store";
 import { AppLayout } from "../../_layouts/app";
 
 // Improvement, being able to add dashboard items here

@@ -1,7 +1,7 @@
 import { dataNotFoundMessage, useApi } from "@gothicgeeks/shared";
-import { IEntityField } from "../../backend/entities/types";
-import { ILabelValue } from "../../types";
-import { INavigationItem } from "../_layouts/types";
+import { IEntityField } from "../../../backend/entities/types";
+import { ILabelValue } from "../../../types";
+import { INavigationItem } from "../../_layouts/types";
 
 export const useEntitiesMenuItems = () => {
   return useApi<INavigationItem[]>("/api/entities/menu", {

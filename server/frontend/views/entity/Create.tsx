@@ -1,7 +1,4 @@
-import {
-  useEntityScalarFields,
-} from "../../data-store/entities.data-store";
-import { useSlug } from "../../lib/routing/useSlug";
+
 import { AppLayout } from "../../_layouts/app";
 import {
   ErrorAlert,
@@ -19,27 +16,31 @@ import {
 } from "@gothicgeeks/shared";
 import { Form, Field } from "react-final-form";
 import { IEntityField } from "../../../backend/entities/types";
+import { NAVIGATION_LINKS } from "../../lib/routing/links";
+import { useEntityDiction, useEntitySlug } from "../../hooks/entity/entity.config";
+import { useEntityScalarFields } from "../../hooks/entity/entity.store";
 
-export function CreateModel() {
-  const model = useSlug("model");
-  const entityScalarFields = useEntityScalarFields(model);
+export function EntityCreate() {
+  const entity = useEntitySlug();
+  const entityDiction = useEntityDiction();
+  const entityScalarFields = useEntityScalarFields(entity);
 
   const onSubmit = () => {};
   // TODo handle loading || error;
   return (
     <AppLayout
       breadcrumbs={[
-        { label: model, value: `/admin/${model}` },
-        { label: "Create", value: `/admin/${model}/create` },
+        { label: entityDiction.plural, value: NAVIGATION_LINKS.ENTITY.TABLE(entity) },
+        { label: "Create", value: NAVIGATION_LINKS.ENTITY.CREATE(entity) },
       ]}
     >
       <SectionCenter>
         <SectionBox
-          title={TitleLang.create(model)}
-          backLink={{ link: `/admin/${model}`, label: model }}
+          title={TitleLang.create(entityDiction.singular)}
+          backLink={{ link: NAVIGATION_LINKS.ENTITY.TABLE(entity), label: entityDiction.plural }}
         >
           <ErrorAlert message={"error"} />
-          <ModelCreateForm
+          <CreateEntityForm
             onSubmit={onSubmit}
             fields={entityScalarFields.data || []}
             isMakingRequest={false}
@@ -51,7 +52,7 @@ export function CreateModel() {
   );
 }
 
-export const ModelCreateForm: React.FC<{
+export const CreateEntityForm: React.FC<{
   fields: IEntityField[];
   isMakingRequest: boolean;
   initialValues?: unknown;

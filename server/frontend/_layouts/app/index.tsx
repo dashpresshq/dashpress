@@ -8,7 +8,7 @@ import {
 } from "@gothicgeeks/design-system";
 import { IValueLabel } from "@gothicgeeks/design-system/dist/types";
 import React, { ReactNode } from "react";
-import { HardDrive, Icon, Plus, Save } from "react-feather";
+import { HardDrive, Icon } from "react-feather";
 import { useEntitiesMenuItems } from "../../hooks/entity/entity.store";
 
 interface IProps {

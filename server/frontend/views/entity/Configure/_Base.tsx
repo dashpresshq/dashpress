@@ -37,7 +37,12 @@ export const BaseEntitySettingsLayout = ({ children, menuItem }: IProps) => {
             menuItems={[
               {
                 link: NAVIGATION_LINKS.ENTITY.CONFIG.TABLE(entity),
-                name: "Table",
+                name: "Table", // Show, orderable, filterable, order
+                disabled: false,
+              },
+              {
+                link: NAVIGATION_LINKS.ENTITY.CONFIG.DICTION(entity),
+                name: "Diction",
                 disabled: false,
               },
               {
@@ -47,24 +52,29 @@ export const BaseEntitySettingsLayout = ({ children, menuItem }: IProps) => {
               },
               {
                 link: NAVIGATION_LINKS.ENTITY.CONFIG.CREATE(entity),
-                name: "Create",
+                name: "Create", // Fields to hide
                 disabled: false,
               },
               {
                 link: NAVIGATION_LINKS.ENTITY.CONFIG.UPDATE(entity),
-                name: "Update",
+                name: "Update", // Fields to hide
                 disabled: false,
               },
               {
                 link: NAVIGATION_LINKS.ENTITY.CONFIG.DETAILS(entity),
-                name: "Details",
+                name: "Details", // Fields to hide
                 disabled: false,
               },
               {
                 link: NAVIGATION_LINKS.ENTITY.CONFIG.FIELDS(entity),
-                name: "Fields",
+                name: "Fields", // labels and validations
                 disabled: false,
               },
+              // {
+              //   link: NAVIGATION_LINKS.ENTITY.CONFIG.LIST_FIELDS(entity),
+              //   name: "List Fields",
+              //   disabled: false,
+              // },
             ]}
             currentMenuItem={menuItem.link}
           />
@@ -74,3 +84,7 @@ export const BaseEntitySettingsLayout = ({ children, menuItem }: IProps) => {
     </AppLayout>
   );
 };
+
+/*
+Comuted Columns
+*/

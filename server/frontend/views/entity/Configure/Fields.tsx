@@ -4,17 +4,17 @@ import { NAVIGATION_LINKS } from "../../../lib/routing/links";
 import { CreateEntityForm } from "../Create";
 import { BaseEntitySettingsLayout } from "./_Base";
 
-export const EntityTableSettings = () => {
+export const EntityFieldsSettings = () => {
   const entity = useEntitySlug();
 
   return (
     <BaseEntitySettingsLayout
       menuItem={{
-        link: NAVIGATION_LINKS.ENTITY.CONFIG.TABLE(entity),
-        name: "Table Settings",
+        link: NAVIGATION_LINKS.ENTITY.CONFIG.FIELDS(entity),
+        name: "Fields Settings",
       }}
     >
-      <SectionBox title="Table Settings">
+      <SectionBox title="Fields Settings">
         <ErrorAlert message={"error"} />
         <CreateEntityForm
           onSubmit={() => {}}

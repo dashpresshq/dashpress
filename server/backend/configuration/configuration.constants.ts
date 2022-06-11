@@ -4,7 +4,7 @@ export const CONFIGURATION_KEYS: Record<
   | "hidden_entity_update_columns"
   | "hidden_entity_details_columns"
   | "entity_columns_labels"
-  | "entity_verbiage"
+  | "entity_diction"
   | "relations_list_fields"
   | "entities_to_hide_from_menu"
   | "entity_table_config"
@@ -17,7 +17,7 @@ export const CONFIGURATION_KEYS: Record<
   hidden_entity_update_columns: { requireEntity: true, defaultValue: [] },
   hidden_entity_details_columns: { requireEntity: true, defaultValue: [] },
   entity_columns_labels: { requireEntity: true, defaultValue: {} }, // {key: label}
-  entity_verbiage: {requireEntity: true, defaultValue: { singular: "", plural: "" }},
+  entity_diction: {requireEntity: true, defaultValue: { singular: "", plural: "" }},
   entity_crud_settings: {requireEntity: true, defaultValue: { createAble: true, editAble: true, deleteAble: true, detailsAble: true } },
   entity_table_config: {
     requireEntity: true,

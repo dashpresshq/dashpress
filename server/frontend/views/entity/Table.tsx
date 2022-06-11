@@ -66,24 +66,8 @@ export function EntityTable() {
   );
 }
 
-/*
-CRUD Settings
 
-Table Settings
-// Show, orderable, filterable, order
-
-Hidden Create Columns
-Hidden Update Columns
-Hidden Details Columns
-
-Entity Columns Labels
-Entity Diction
-Entity Validations
-
-Comuted Columns
-*/
-
-// Actions will be on the table
+// Data Actions will be on the table
 // Multi Select
 // Export
 // Download

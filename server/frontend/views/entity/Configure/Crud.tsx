@@ -2,7 +2,7 @@ import { ErrorAlert, SectionBox } from "@gothicgeeks/design-system";
 import { useEntitySlug } from "../../../hooks/entity/entity.config";
 import { NAVIGATION_LINKS } from "../../../lib/routing/links";
 import { CreateEntityForm } from "../Create";
-import { BaseEntitySettingsLayout } from "./Base";
+import { BaseEntitySettingsLayout } from "./_Base";
 
 export const EntityCrudSettings = () => {
   const entity = useEntitySlug();

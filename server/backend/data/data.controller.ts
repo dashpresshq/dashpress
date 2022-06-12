@@ -14,10 +14,11 @@ export class DataController {
   deleteData(model: string) {}
 
   async tableData(model: string, filters: Record<string, unknown>) {
+    console.log(filters);
     return {
-      data: await this.dataService.list(model),
-      pageIndex: 1,
-      pageSize: 1,
+      data: await this.dataService.list(model, filters),
+      pageIndex: filters.page,
+      pageSize: filters.take,
       totalRecord: await this.dataService.count(model),
     };
   }

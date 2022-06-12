@@ -68,7 +68,7 @@ export const BaseEntitySettingsLayout = ({ children, menuItem }: IProps) => {
               },
               {
                 link: NAVIGATION_LINKS.ENTITY.CONFIG.FIELDS(entity),
-                name: "Fields", // labels and validations
+                name: "Fields", // labels and validations and type
                 disabled: false,
               },
               // {

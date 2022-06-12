@@ -104,7 +104,6 @@ export const CreateEntityForm: React.FC<{
               });
             }}
           >
-            {/* <WhenFieldChanges field="name" becomes={undefined} set="slug" to={SLUG_VALUE} /> */}
             {fields.map(({ name }) => {
               return (
                 <Field
@@ -119,19 +118,6 @@ export const CreateEntityForm: React.FC<{
                 </Field>
               );
             })}
-
-            {/* <Field
-                name="slug"
-                validate={composeValidators(
-                  required,
-                  maxLength(VALIDATION_LENGTH.NAMES),
-                  isSlug,
-                  uniqueValidation(UniqueValidationEntities.Site, 'slug', initialValues?.id),
-                )}
-                validateFields={[]}
-              >
-                {renderProps => <FormInput label="Slug" required={true} {...renderProps} />}
-              </Field> */}
             <FormButton
               text={ButtonLang.createOrUpdate(initialValues)}
               isMakingRequest={isMakingRequest}

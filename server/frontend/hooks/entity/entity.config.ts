@@ -6,6 +6,10 @@ export function useEntitySlug() {
   return useSlug("entity");
 }
 
+export function useEntityId() {
+  return useSlug("id");
+}
+
 export function useEntityDiction() {
   const entity = useEntitySlug();
   const entityDiction = useEntityConfiguration<{

@@ -1,6 +1,1 @@
-
-export default function DetailsModel() {
-    // const fields = getModelFields("users");
-    return <div>details</div>;
-  }
-  
+export { EntityDetails as default } from "../../../../frontend/views/entity/Details";

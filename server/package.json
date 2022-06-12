@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@gothicgeeks/design-system": "git+ssh://git@github.com:thrownullexception/design-system.git#5f893f61d7f3e27f08b9509a28700799d931267c",
+    "@gothicgeeks/design-system": "git+ssh://git@github.com:thrownullexception/design-system.git#c018a5c098957183459b7e69f06abe8642e6787f",
     "@gothicgeeks/shared": "git+ssh://git@github.com:thrownullexception/shared.git#7b4349ea927783b2d31b2148e15c79efd174141b",
     "change-case": "^4.1.2",
     "knex": "^2.0.0",

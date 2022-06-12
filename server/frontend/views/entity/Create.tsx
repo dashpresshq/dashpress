@@ -74,7 +74,6 @@ export function EntityCreate() {
           <CreateEntityForm
             onSubmit={onSubmit}
             fields={entityScalarFields.data || []}
-            isMakingRequest={false}
             resetForm={false}
           />
         </SectionBox>
@@ -85,16 +84,13 @@ export function EntityCreate() {
 
 export const CreateEntityForm: React.FC<{
   fields: IEntityField[];
-  isMakingRequest: boolean;
-  initialValues?: unknown;
   onSubmit: () => void;
   resetForm: boolean;
-}> = ({ onSubmit, isMakingRequest, initialValues, resetForm, fields }) => {
+}> = ({ onSubmit, resetForm, fields }) => {
   return (
     <Form
       onSubmit={onSubmit}
-      initialValues={initialValues}
-      render={({ handleSubmit, form, values }) => {
+      render={({ handleSubmit, form, values, submitting }) => {
         return (
           <form
             onSubmit={(e) => {
@@ -119,8 +115,8 @@ export const CreateEntityForm: React.FC<{
               );
             })}
             <FormButton
-              text={ButtonLang.createOrUpdate(initialValues)}
-              isMakingRequest={isMakingRequest}
+              text={ButtonLang.create}
+              isMakingRequest={submitting}
             />
           </form>
         );

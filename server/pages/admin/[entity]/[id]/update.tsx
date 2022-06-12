@@ -1,4 +1,1 @@
-export default function UpdateModel() {
-    return <div>update</div>;
-  }
-  
+export { EntityUpdate as default } from "../../../../frontend/views/entity/Update";

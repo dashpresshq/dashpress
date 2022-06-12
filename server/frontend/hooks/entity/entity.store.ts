@@ -36,3 +36,14 @@ export const useEntityScalarFields = (entity: string) => {
     },
   });
 };
+
+export const useEntityIdField = (entity: string) => {
+  return useApi<string>(`/api/entities/${entity}/fields`, {
+    errorMessage: dataNotFoundMessage("Entity Scalar Fields"),
+    enabled: entity !== "loading",
+    selector: (data: IEntityField[]) => {
+      // TODO validate data to have an id
+      return data.find(({ isId}) => isId)?.name || "id";
+    },
+  });
+};

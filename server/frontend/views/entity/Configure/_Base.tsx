@@ -38,7 +38,7 @@ export const BaseEntitySettingsLayout = ({ children, menuItem }: IProps) => {
             menuItems={[
               {
                 link: NAVIGATION_LINKS.ENTITY.CONFIG.TABLE(entity),
-                name: "Table", // Show, orderable, filterable, order
+                name: "Table", // Show, orderable, filterable
                 disabled: false,
               },
               {
@@ -71,6 +71,7 @@ export const BaseEntitySettingsLayout = ({ children, menuItem }: IProps) => {
                 name: "Fields", // labels and validations and type
                 disabled: false,
               },
+              // order
               // {
               //   link: NAVIGATION_LINKS.ENTITY.CONFIG.LIST_FIELDS(entity),
               //   name: "List Fields",

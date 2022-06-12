@@ -1,6 +1,6 @@
 import {
   dataNotFoundMessage,
-  makePatchRequest,
+  makePutRequest,
   MutationHelpers,
   useApi,
   useApiMutateOptions,
@@ -37,8 +37,7 @@ export function useUpsertConfigurationMutation(key: keyof typeof CONFIGURATION_K
 
   return useMutation(
     async (values: Partial<Record<string, string> | unknown[]>) => {
-      // TODO replace with makePutRequest
-      return await makePatchRequest(apiPath(key, entity), { data: values });
+      return await makePutRequest(apiPath(key, entity), { data: values });
     },
     apiMutateOptions
   );

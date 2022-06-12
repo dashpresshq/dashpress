@@ -10,6 +10,14 @@ import { Plus, Save } from "react-feather";
 import { useRouter } from "next/router";
 import { SLUG_LOADING_VALUE } from "../../lib/routing/constants";
 
+// TODO sync table to url
+// actions
+// eyes
+// edit
+// delete
+// inline -edit
+// related models
+
 export function EntityTable() {
   const entity = useEntitySlug();
   const entityDiction = useEntityDiction();

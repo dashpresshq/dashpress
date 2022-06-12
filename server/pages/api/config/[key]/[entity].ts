@@ -14,8 +14,7 @@ export default async function handler(
           req.query.entity as string
         )
       );
-      // TODO replace with PUT
-  } else if (req.method === "PATCH") {
+  } else if (req.method === "PUT") {
     return res
       .status(204)
       .json(

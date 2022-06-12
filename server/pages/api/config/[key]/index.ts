@@ -9,8 +9,7 @@ export default async function handler(
     return res
       .status(200)
       .json(await configurationController.showConfig(req.query.key as string));
-    // TODO replace with PUT
-  } else if (req.method === "PATCH") {
+  } else if (req.method === "PUT") {
     return res
       .status(204)
       .json(

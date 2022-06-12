@@ -1138,14 +1138,14 @@
   dependencies:
     prop-types "^15.8.1"
 
-"@gothicgeeks/design-system@git+ssh://git@github.com:thrownullexception/design-system.git#326be5d286f2c32af3dff87665faf0abfe56853a":
-  version "0.2.21"
-  resolved "git+ssh://git@github.com:thrownullexception/design-system.git#326be5d286f2c32af3dff87665faf0abfe56853a"
+"@gothicgeeks/design-system@git+ssh://git@github.com:thrownullexception/design-system.git#178da2c0254ccbbd2330cd8b87f92e6c1d0fe43f":
+  version "0.2.26"
+  resolved "git+ssh://git@github.com:thrownullexception/design-system.git#178da2c0254ccbbd2330cd8b87f92e6c1d0fe43f"
   dependencies:
     "@fortawesome/fontawesome-svg-core" "^6.1.1"
     "@fortawesome/free-solid-svg-icons" "^6.1.1"
     "@fortawesome/react-fontawesome" "^0.1.18"
-    "@gothicgeeks/shared" "git+ssh://git@github.com:thrownullexception/shared.git#ef277c2197867343e73e0486481241cf8d99be2c"
+    "@gothicgeeks/shared" "git+ssh://git@github.com:thrownullexception/shared.git#7b4349ea927783b2d31b2148e15c79efd174141b"
     "@svgr/webpack" "^6.2.1"
     "@types/prismjs" "^1.26.0"
     "@types/react-datepicker" "^4.4.1"
@@ -1177,9 +1177,9 @@
     tiny-skeleton-loader-react "^1.1.8"
     zustand "3.4.2"
 
-"@gothicgeeks/shared@git+ssh://git@github.com:thrownullexception/shared.git#ef277c2197867343e73e0486481241cf8d99be2c":
-  version "0.2.16"
-  resolved "git+ssh://git@github.com:thrownullexception/shared.git#ef277c2197867343e73e0486481241cf8d99be2c"
+"@gothicgeeks/shared@git+ssh://git@github.com:thrownullexception/shared.git#7b4349ea927783b2d31b2148e15c79efd174141b":
+  version "0.2.18"
+  resolved "git+ssh://git@github.com:thrownullexception/shared.git#7b4349ea927783b2d31b2148e15c79efd174141b"
   dependencies:
     "@types/lodash" "^4.14.182"
     "@types/nprogress" "^0.2.0"

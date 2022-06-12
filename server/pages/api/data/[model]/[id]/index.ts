@@ -1,3 +1,0 @@
-// edit
-// details
-// delete

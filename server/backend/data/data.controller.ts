@@ -3,23 +3,27 @@ import { dataService, DataService } from "./data.service";
 export class DataController {
   constructor(private dataService: DataService) {}
 
-  listData(model: string) {}
+  async listData(entity: string) {}
 
-  showData(model: string) {}
+  async showData(entity: string, id: string) {}
 
-  createData(model: string) {}
+  async createData(entity: string, data: Record<string, unknown>) {}
 
-  updateData(model: string) {}
+  async updateData(entity: string, id: string, data: Record<string, unknown>) {}
 
-  deleteData(model: string) {}
+  async deleteData(entity: string, id: string) {}
 
-  async tableData(model: string, filters: Record<string, unknown>) {
-    console.log(filters);
+  async tableData(entity: string, filters: Record<string, unknown>) {
     return {
-      data: await this.dataService.list(model, filters),
+      data: await this.dataService.list(entity, {
+        take: Number(filters.take),
+        page: Number(filters.page),
+        orderBy: filters.orderBy + "",
+        sortBy: filters.sortBy + "",
+      }),
       pageIndex: filters.page,
       pageSize: filters.take,
-      totalRecord: await this.dataService.count(model),
+      totalRecord: await this.dataService.count(entity),
     };
   }
 }

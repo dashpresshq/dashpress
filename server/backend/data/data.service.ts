@@ -33,7 +33,7 @@ export class DataService {
 
   async list(
     model: string,
-    queryModifiers: {
+    dataFetchingModifiers: {
       take: number;
       page: number;
       orderBy: string;
@@ -41,19 +41,19 @@ export class DataService {
     }
   ) {
     let query = DataService.getInstance().select().from(model);
-    if (queryModifiers.page && queryModifiers.take) {
+    if (dataFetchingModifiers.page && dataFetchingModifiers.take) {
       query = query
-        .limit(Number(queryModifiers.take))
+        .limit(Number(dataFetchingModifiers.take))
         .offset(
-          (Number(queryModifiers.page) - 1) * Number(queryModifiers.take)
+          (Number(dataFetchingModifiers.page) - 1) * Number(dataFetchingModifiers.take)
         );
     }
 
-    if (queryModifiers.orderBy && queryModifiers.sortBy) {
+    if (dataFetchingModifiers.orderBy && dataFetchingModifiers.sortBy) {
       //TODO validate sortBy
       query = query.orderBy(
-        queryModifiers.sortBy,
-        queryModifiers.orderBy.toLowerCase() === "desc" ? "desc" : "asc"
+        dataFetchingModifiers.sortBy,
+        dataFetchingModifiers.orderBy.toLowerCase() === "desc" ? "desc" : "asc"
       );
     }
 

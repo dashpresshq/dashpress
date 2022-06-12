@@ -1,20 +1,22 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { configurationController } from "../../../../backend/configuration/configuration.controller";
+import { validateConfigKeyFromRequest } from "../../../../backend/configuration/configuration.validations";
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
+  const key = validateConfigKeyFromRequest(req.query);
   if (req.method === "GET") {
     return res
       .status(200)
-      .json(await configurationController.showConfig(req.query.key as string));
+      .json(await configurationController.showConfig(key));
   } else if (req.method === "PUT") {
     return res
       .status(204)
       .json(
         await configurationController.upsertConfig(
-          req.query.key as string,
+          key,
           req.body.data
         )
       );

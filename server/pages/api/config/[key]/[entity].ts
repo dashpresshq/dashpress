@@ -1,17 +1,21 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { configurationController } from "../../../../backend/configuration/configuration.controller";
+import { validateConfigKeyFromRequest } from "../../../../backend/configuration/configuration.validations";
+import { validateEntityFromRequest } from "../../../../backend/entities/entities.validations";
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
+  const entity = validateEntityFromRequest(req.query);
+  const key = validateConfigKeyFromRequest(req.query, entity);
   if (req.method === "GET") {
     return res
       .status(200)
       .json(
         await configurationController.showConfig(
-          req.query.key as string,
-          req.query.entity as string
+          key,
+          entity
         )
       );
   } else if (req.method === "PUT") {
@@ -19,9 +23,9 @@ export default async function handler(
       .status(204)
       .json(
         await configurationController.upsertConfig(
-          req.query.key as string,
+          key,
           req.body.data,
-          req.query.entity as string
+          entity
         )
       );
   }

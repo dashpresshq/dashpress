@@ -1,3 +1,4 @@
+import { BadRequestError } from "../lib/errors";
 import { IJsonSchema, IEntityField, IJsonSchemaModel } from "./types";
 
 export class EntitiesService {
@@ -35,7 +36,7 @@ export class EntitiesService {
 
   validateEntityField(entity: string, field: unknown){
     if(!this.getEntityFields(entity).find(({name}) => name === field)){
-      throw new Error(`Invalid field ${field} for ${entity}`);
+      throw new BadRequestError(`Invalid field '${field}' for ${entity}`);
     }
     return field as string;
   }

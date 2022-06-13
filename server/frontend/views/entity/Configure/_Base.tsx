@@ -61,7 +61,7 @@ export const BaseEntitySettingsLayout = ({ children, menuItem }: IProps) => {
               },
               {
                 link: NAVIGATION_LINKS.ENTITY.CONFIG.ACTIONS(entity),
-                name: "ACTIONS",
+                name: "Actions",
                 disabled: false,
               },
               {

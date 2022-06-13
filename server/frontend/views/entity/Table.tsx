@@ -24,10 +24,13 @@ import {
   ENTITY_TABLE_PATH,
   useEntityDataDeletionMutation,
 } from "../../hooks/data/data.store";
-import { EntityActionTypes, useEntityActionMenuItems } from "./Configure/constants";
+import {
+  EntityActionTypes,
+  useEntityActionMenuItems,
+} from "./Configure/constants";
 
 // TODO sync table to url
-
+// TODO when table passes a limit then a non synced columns to show
 export function EntityTable() {
   const entity = useEntitySlug();
   const entityDiction = useEntityDiction();
@@ -36,7 +39,8 @@ export function EntityTable() {
   const router = useRouter();
   const entityDataDeletionMutation = useEntityDataDeletionMutation(entity);
   const actionItems = useEntityActionMenuItems([
-    EntityActionTypes.CRUD, EntityActionTypes.Diction
+    EntityActionTypes.CRUD,
+    EntityActionTypes.Diction,
   ]);
 
   const columns: ITableColumn[] = (entityScalarFields.data || []).map(
@@ -70,23 +74,24 @@ export function EntityTable() {
         <Stack spacing={4} align="center">
           <div>
             <SoftButton
-              to={NAVIGATION_LINKS.ENTITY.UPDATE(entity, idValue)}
-              label="Edit"
-              icon="edit"
-              color="primary"
-              justIcon={true}
-              onClick={() => {}}
-            />
-          </div>
-          <div>
-            <SoftButton
               to={NAVIGATION_LINKS.ENTITY.DETAILS(entity, idValue)}
               label="Details"
-              color="theme"
+              color="primary"
               justIcon={true}
               icon="eye"
             />
           </div>
+          <div>
+            <SoftButton
+              to={NAVIGATION_LINKS.ENTITY.UPDATE(entity, idValue)}
+              label="Edit"
+              icon="edit"
+              color="theme"
+              justIcon={true}
+              onClick={() => {}}
+            />
+          </div>
+
           <div>
             <DeleteButton
               onDelete={() => entityDataDeletionMutation.mutate(idValue)}

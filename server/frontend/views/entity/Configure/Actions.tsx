@@ -4,22 +4,21 @@ import { NAVIGATION_LINKS } from "../../../lib/routing/links";
 import { CreateEntityForm } from "../Create";
 import { BaseEntitySettingsLayout } from "./_Base";
 
-export const EntityUpdateSettings = () => {
+export const EntityActionsSettings = () => {
   const entity = useEntitySlug();
 
   return (
     <BaseEntitySettingsLayout
       menuItem={{
-        link: NAVIGATION_LINKS.ENTITY.CONFIG.UPDATE(entity),
-        name: "Update Settings",
+        link: NAVIGATION_LINKS.ENTITY.CONFIG.ACTIONS(entity),
+        name: "Actions Settings",
       }}
     >
-      <SectionBox title="Update Settings">
+      <SectionBox title="Actions Settings">
         <ErrorAlert message={"error"} />
         <CreateEntityForm
           onSubmit={() => {}}
           fields={[]}
-          resetForm={false}
         />
       </SectionBox>
     </BaseEntitySettingsLayout>

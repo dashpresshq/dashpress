@@ -19,8 +19,6 @@ export const EntityFieldsSettings = () => {
         <CreateEntityForm
           onSubmit={() => {}}
           fields={[]}
-          isMakingRequest={false}
-          resetForm={false}
         />
       </SectionBox>
     </BaseEntitySettingsLayout>

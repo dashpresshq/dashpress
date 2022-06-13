@@ -3,9 +3,14 @@ import type { NextApiRequest, NextApiResponse } from "next";
 
 import { entitiesController } from "../../../../backend/entities/entities.controller";
 import { validateEntityFromRequest } from "../../../../backend/entities/entities.validations";
+import { handleResponseError } from "../../../../backend/lib/errors";
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
-  const entity = validateEntityFromRequest(req.query);
+  try {
+    const entity = validateEntityFromRequest(req.query);
 
-  res.status(200).json(entitiesController.getEntityFields(entity));
+    res.status(200).json(entitiesController.getEntityFields(entity));
+  } catch (error) {
+    handleResponseError(res, error);
+  }
 }

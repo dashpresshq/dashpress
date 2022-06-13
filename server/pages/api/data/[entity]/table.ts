@@ -1,6 +1,9 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { dataController } from "../../../../backend/data/data.controller";
+import { validateEntityFromRequest } from "../../../../backend/entities/entities.validations";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  res.status(200).json(await dataController.tableData(req.query.model as string, req.query));
+  const entity = validateEntityFromRequest(req.query);
+
+  res.status(200).json(await dataController.tableData(entity, req.query));
 }

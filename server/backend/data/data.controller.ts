@@ -1,6 +1,6 @@
 import { EntitiesService, entitiesService } from "../entities/entities.service";
 import { dataService, DataService } from "./data.service";
-// TODO vigorously validate the data here
+
 export class DataController {
   constructor(
     private dataService: DataService,
@@ -11,22 +11,21 @@ export class DataController {
 
   async showData(entity: string, id: string) {
     // validate the showData fields
+    // validate the showData values and that the fields are showable and that this entity is showable
     return await this.dataService.show(entity, {
       [this.entitiesService.getEntityPrimaryField(entity)]: id,
     });
   }
 
   async createData(entity: string, data: Record<string, unknown>) {
-    // TODO validate all the fields
-    // validate the createData fields
-    // this.entitiesService.validateEntityField(entity, filters.sortBy)
+    // validate the createData values and that the fields are createable and that this entity is createable
+    this.entitiesService.validateEntityFields(entity, Object.keys(data));
     await this.dataService.create(entity, data);
   }
 
   async updateData(entity: string, id: string, data: Record<string, unknown>) {
-    // TODO validate all the fields
-    // this.entitiesService.validateEntityField(entity, filters.sortBy)
-    // validate the updateData fields
+    // validate the updateData values and that the fields are updateable and that this entity is updateable
+    this.entitiesService.validateEntityFields(entity, Object.keys(data));
     await this.dataService.update(
       entity,
       {
@@ -45,6 +44,7 @@ export class DataController {
 
   async tableData(entity: string, filters: Record<string, unknown>) {
     // validate the entity is tableable
+    console.log(entity);
     return {
       data: await this.dataService.list(entity, {
         take: Number(filters.take),

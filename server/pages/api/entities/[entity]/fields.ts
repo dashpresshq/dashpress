@@ -2,7 +2,10 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 
 import { entitiesController } from "../../../../backend/entities/entities.controller";
+import { validateEntityFromRequest } from "../../../../backend/entities/entities.validations";
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
-  res.status(200).json(entitiesController.getEntityFields(req.query.model as string));
+  const entity = validateEntityFromRequest(req.query);
+
+  res.status(200).json(entitiesController.getEntityFields(entity));
 }

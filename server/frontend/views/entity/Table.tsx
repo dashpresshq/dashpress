@@ -98,7 +98,7 @@ export function EntityTable() {
           />
           <Spacer />
         </div> */}
-          {/* // inline -edit // related models */}
+          {/* // inline -edit // related entities */}
         </Stack>
       );
     },

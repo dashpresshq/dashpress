@@ -40,6 +40,12 @@ export class EntitiesService {
     return field as string;
   }
 
+  validateEntityFields(entity: string, fields: string[]){
+    fields.forEach((field) => {
+      this.validateEntityField(entity, field);
+    });
+  }
+
   getEntityFromSchema = (entity: string): IJsonSchemaModel => {
     return this.getJsonSchemaModels()[entity];
   };

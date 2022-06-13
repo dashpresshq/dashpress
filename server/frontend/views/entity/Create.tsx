@@ -106,7 +106,7 @@ export const CreateEntityForm: React.FC<{
                 <Field
                   key={name}
                   name={name}
-                  validate={composeValidators(required, maxLength(32))}
+                  // validate={composeValidators(required, maxLength(32))}
                   validateFields={[]}
                 >
                   {(renderProps) => (

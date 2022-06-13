@@ -44,7 +44,6 @@ export class DataController {
 
   async tableData(entity: string, filters: Record<string, unknown>) {
     // validate the entity is tableable
-    console.log(entity);
     return {
       data: await this.dataService.list(entity, {
         take: Number(filters.take),

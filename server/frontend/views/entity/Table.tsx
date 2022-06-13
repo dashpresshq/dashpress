@@ -1,5 +1,11 @@
 import { AppLayout } from "../../_layouts/app";
-import { SoftButton, Spacer, Stack, Table } from "@gothicgeeks/design-system";
+import {
+  DeleteButton,
+  SoftButton,
+  Spacer,
+  Stack,
+  Table,
+} from "@gothicgeeks/design-system";
 import { NAVIGATION_LINKS } from "../../lib/routing/links";
 import {
   useEntityDiction,
@@ -15,7 +21,10 @@ import { SLUG_LOADING_VALUE } from "../../lib/routing/constants";
 import { ITableColumn } from "@gothicgeeks/design-system/dist/components/Table/Table.types";
 import { capitalCase } from "change-case";
 import Link from "next/link";
-import { ENTITY_TABLE_PATH } from "../../hooks/data/data.store";
+import {
+  ENTITY_TABLE_PATH,
+  useEntityDataDeletionMutation,
+} from "../../hooks/data/data.store";
 
 // TODO sync table to url
 
@@ -25,6 +34,7 @@ export function EntityTable() {
   const entityScalarFields = useEntityScalarFields(entity);
   const idField = useEntityIdField(entity);
   const router = useRouter();
+  const entityDataDeletionMutation = useEntityDataDeletionMutation(entity);
 
   const columns: ITableColumn[] = (entityScalarFields.data || []).map(
     ({ name, isId }) => ({
@@ -54,11 +64,10 @@ export function EntityTable() {
     Cell: ({ row }) => {
       const idValue = row.original[idField.data] as string;
       return (
-        <Stack spacing={2}>
+        <Stack spacing={4}>
           <div>
             <SoftButton
               to={NAVIGATION_LINKS.ENTITY.UPDATE(entity, idValue)}
-              pushLeft={true}
               label="Edit"
               icon="edit"
               color="primary"
@@ -70,7 +79,6 @@ export function EntityTable() {
           <div>
             <SoftButton
               to={NAVIGATION_LINKS.ENTITY.DETAILS(entity, idValue)}
-              pushLeft={true}
               label="Details"
               color="theme"
               justIcon={true}
@@ -79,13 +87,10 @@ export function EntityTable() {
             <Spacer />
           </div>
           <div>
-            <SoftButton
-              pushLeft={true}
-              label="Delete"
-              icon="close"
-              color="danger"
-              justIcon={true}
-              onClick={() => {}}
+            <DeleteButton
+              onDelete={() => entityDataDeletionMutation.mutate(idValue)}
+              isMakingDeleteRequest={entityDataDeletionMutation.isLoading}
+              shouldConfirmAlert={true}
             />
             <Spacer />
           </div>

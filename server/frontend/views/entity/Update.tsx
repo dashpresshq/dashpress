@@ -83,7 +83,7 @@ export function EntityUpdate() {
             label: entityDiction.singular,
           }}
         >
-          {dataDetails.isFetching || dataDetails.isIdle ? (
+          {dataDetails.isLoading ? (
             <>TODO Loading Data...</>
           ) : (
             <EntityUpdateForm
@@ -105,6 +105,7 @@ export const EntityUpdateForm: React.FC<{
 }> = ({ onSubmit, initialValues, fields }) => {
   return (
     <Form
+    // TODO Send only changed fields
       onSubmit={onSubmit}
       initialValues={initialValues}
       render={({ handleSubmit, submitting }) => {
@@ -115,7 +116,7 @@ export const EntityUpdateForm: React.FC<{
                 <Field
                   key={name}
                   name={name}
-                  validate={composeValidators(required, maxLength(32))}
+                  // validate={composeValidators(required, maxLength(32))}
                   validateFields={[]}
                 >
                   {(renderProps) => (

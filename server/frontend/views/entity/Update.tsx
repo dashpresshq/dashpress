@@ -5,6 +5,7 @@ import {
   FormInput,
   SectionBox,
   SectionCenter,
+  Spacer,
 } from "@gothicgeeks/design-system";
 import {
   ButtonLang,
@@ -24,6 +25,10 @@ import {
 import { useEntityScalarFields } from "../../hooks/entity/entity.store";
 import { Plus } from "react-feather";
 import { useRouter } from "next/router";
+import {
+  useEntityDataDetails,
+  useEntityDataUpdationMutation,
+} from "../../hooks/data/data.store";
 
 export function EntityUpdate() {
   const entity = useEntitySlug();
@@ -31,9 +36,9 @@ export function EntityUpdate() {
   const entityDiction = useEntityDiction();
   const entityScalarFields = useEntityScalarFields(entity);
   const router = useRouter();
+  const entityDataUpdationMutation = useEntityDataUpdationMutation(entity, id);
+  const dataDetails = useEntityDataDetails(entity, id);
 
-  const onSubmit = () => {};
-  // TODo handle loading || error;
   return (
     <AppLayout
       titleNeedsContext={true}
@@ -64,6 +69,13 @@ export function EntityUpdate() {
       ]}
     >
       <SectionCenter>
+        {dataDetails.error ? (
+          <>
+            <Spacer />
+            <ErrorAlert message={dataDetails.error} />
+            <Spacer />
+          </>
+        ) : null}
         <SectionBox
           title={TitleLang.edit(entityDiction.singular)}
           backLink={{
@@ -71,11 +83,15 @@ export function EntityUpdate() {
             label: entityDiction.singular,
           }}
         >
-          <ErrorAlert message={"error"} />
-          <EntityUpdateForm
-            onSubmit={onSubmit}
-            fields={entityScalarFields.data || []}
-          />
+          {dataDetails.isFetching || dataDetails.isIdle ? (
+            <>TODO Loading Data...</>
+          ) : (
+            <EntityUpdateForm
+              onSubmit={entityDataUpdationMutation.mutateAsync}
+              fields={entityScalarFields.data || []}
+              initialValues={dataDetails.data}
+            />
+          )}
         </SectionBox>
       </SectionCenter>
     </AppLayout>
@@ -84,14 +100,14 @@ export function EntityUpdate() {
 
 export const EntityUpdateForm: React.FC<{
   fields: IEntityField[];
-  initialValues?: unknown;
-  onSubmit: () => void;
+  initialValues?: Record<string, unknown>;
+  onSubmit: (data: Record<string, unknown>) => void;
 }> = ({ onSubmit, initialValues, fields }) => {
   return (
     <Form
       onSubmit={onSubmit}
       initialValues={initialValues}
-      render={({ handleSubmit, form, values, submitting }) => {
+      render={({ handleSubmit, submitting }) => {
         return (
           <form onSubmit={handleSubmit}>
             {fields.map(({ name }) => {

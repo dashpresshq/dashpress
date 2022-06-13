@@ -1,5 +1,10 @@
 import { AppLayout } from "../../_layouts/app";
-import { SectionBox, SectionCenter } from "@gothicgeeks/design-system";
+import {
+  ErrorAlert,
+  SectionBox,
+  SectionCenter,
+  Spacer,
+} from "@gothicgeeks/design-system";
 import { TitleLang } from "@gothicgeeks/shared";
 import { NAVIGATION_LINKS } from "../../lib/routing/links";
 import {
@@ -9,15 +14,17 @@ import {
 } from "../../hooks/entity/entity.config";
 import { Plus } from "react-feather";
 import { useRouter } from "next/router";
+import {
+  useEntityDataDetails,
+} from "../../hooks/data/data.store";
 
 export function EntityDetails() {
   const entity = useEntitySlug();
   const entityDiction = useEntityDiction();
   const id = useEntityId();
-
+  const dataDetails = useEntityDataDetails(entity, id);
   const router = useRouter();
 
-  // TODo handle loading || error;
   return (
     <AppLayout
       titleNeedsContext={true}
@@ -47,6 +54,13 @@ export function EntityDetails() {
       ]}
     >
       <SectionCenter>
+        {dataDetails.error ? (
+          <>
+            <Spacer />
+            <ErrorAlert message={dataDetails.error} />
+            <Spacer />
+          </>
+        ) : null}
         <SectionBox
           title={TitleLang.details(entityDiction.singular)}
           backLink={{
@@ -54,7 +68,11 @@ export function EntityDetails() {
             label: entityDiction.plural,
           }}
         >
-          Details
+          {dataDetails.isFetching || dataDetails.isIdle ? (
+            <>TODO Loading Data...</>
+          ) : (
+            <>{JSON.stringify(dataDetails.data)}</>
+          )}
         </SectionBox>
       </SectionCenter>
     </AppLayout>

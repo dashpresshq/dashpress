@@ -15,6 +15,7 @@ import { SLUG_LOADING_VALUE } from "../../lib/routing/constants";
 import { ITableColumn } from "@gothicgeeks/design-system/dist/components/Table/Table.types";
 import { capitalCase } from "change-case";
 import Link from "next/link";
+import { ENTITY_TABLE_PATH } from "../../hooks/data/data.store";
 
 // TODO sync table to url
 
@@ -138,7 +139,7 @@ export function EntityTable() {
       ]}
     >
       <Table
-        url={`/api/data/${entity}/table`}
+        url={ENTITY_TABLE_PATH(entity)}
         title=""
         columns={columns}
         // ovveride indicator

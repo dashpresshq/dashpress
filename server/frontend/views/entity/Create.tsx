@@ -1,6 +1,5 @@
 import { AppLayout } from "../../_layouts/app";
 import {
-  ErrorAlert,
   FormButton,
   FormInput,
   SectionBox,
@@ -11,6 +10,7 @@ import {
   composeValidators,
   maxLength,
   required,
+  resetFormValues,
   TitleLang,
 } from "@gothicgeeks/shared";
 import { Form, Field } from "react-final-form";
@@ -23,15 +23,15 @@ import {
 import { useEntityScalarFields } from "../../hooks/entity/entity.store";
 import { Plus, Save } from "react-feather";
 import { useRouter } from "next/router";
+import { useEntityDataCreationMutation } from "../../hooks/data/data.store";
 
 export function EntityCreate() {
   const entity = useEntitySlug();
   const entityDiction = useEntityDiction();
   const entityScalarFields = useEntityScalarFields(entity);
   const router = useRouter();
+  const entityDataCreationMutation = useEntityDataCreationMutation(entity);
 
-  const onSubmit = () => {};
-  // TODo handle loading || error;
   return (
     <AppLayout
       breadcrumbs={[
@@ -70,11 +70,9 @@ export function EntityCreate() {
             label: entityDiction.plural,
           }}
         >
-          <ErrorAlert message={"error"} />
           <CreateEntityForm
-            onSubmit={onSubmit}
+            onSubmit={entityDataCreationMutation.mutateAsync}
             fields={entityScalarFields.data || []}
-            resetForm={false}
           />
         </SectionBox>
       </SectionCenter>
@@ -84,9 +82,8 @@ export function EntityCreate() {
 
 export const CreateEntityForm: React.FC<{
   fields: IEntityField[];
-  onSubmit: () => void;
-  resetForm: boolean;
-}> = ({ onSubmit, resetForm, fields }) => {
+  onSubmit: (data: Record<string, unknown>) => void;
+}> = ({ onSubmit, fields }) => {
   return (
     <Form
       onSubmit={onSubmit}
@@ -96,7 +93,11 @@ export const CreateEntityForm: React.FC<{
             onSubmit={(e) => {
               e.preventDefault();
               handleSubmit(e)?.then(() => {
-                //   resetFormValues(resetForm, values, form);
+                resetFormValues(
+                  true,
+                  values as Record<string, string>,
+                  form as any
+                );
               });
             }}
           >
@@ -114,10 +115,7 @@ export const CreateEntityForm: React.FC<{
                 </Field>
               );
             })}
-            <FormButton
-              text={ButtonLang.create}
-              isMakingRequest={submitting}
-            />
+            <FormButton text={ButtonLang.create} isMakingRequest={submitting} />
           </form>
         );
       }}

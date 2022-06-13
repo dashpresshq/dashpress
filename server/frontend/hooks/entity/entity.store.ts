@@ -3,6 +3,8 @@ import { IEntityField } from "../../../backend/entities/types";
 import { ILabelValue } from "../../../types";
 import { INavigationItem } from "../../_layouts/types";
 
+const ENTITY_FIELDS_ENDPOINT = (entity: string) => `/api/entities/${entity}/fields`;
+
 export const useEntitiesMenuItems = () => {
   return useApi<INavigationItem[]>("/api/entities/menu", {
     errorMessage: dataNotFoundMessage("Entities menu items"),
@@ -21,14 +23,14 @@ export const useEntitiesList = () => {
 };
 
 export const useEntityFields = (entity: string) => {
-  return useApi<IEntityField[]>(`/api/entities/${entity}/fields`, {
+  return useApi<IEntityField[]>(ENTITY_FIELDS_ENDPOINT(entity), {
     errorMessage: dataNotFoundMessage("Entity Fields"),
     enabled: entity !== "loading",
   });
 };
 
 export const useEntityScalarFields = (entity: string) => {
-  return useApi<IEntityField[]>(`/api/entities/${entity}/fields`, {
+  return useApi<IEntityField[]>(ENTITY_FIELDS_ENDPOINT(entity), {
     errorMessage: dataNotFoundMessage("Entity Scalar Fields"),
     enabled: entity !== "loading",
     selector: (data: IEntityField[]) => {
@@ -38,7 +40,7 @@ export const useEntityScalarFields = (entity: string) => {
 };
 
 export const useEntityIdField = (entity: string) => {
-  return useApi<string>(`/api/entities/${entity}/fields`, {
+  return useApi<string>(ENTITY_FIELDS_ENDPOINT(entity), {
     errorMessage: dataNotFoundMessage("Entity Scalar Fields"),
     enabled: entity !== "loading",
     selector: (data: IEntityField[]) => {

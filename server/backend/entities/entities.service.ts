@@ -29,6 +29,17 @@ export class EntitiesService {
     return this.getEntityFromSchema(entity).fields;
   };
 
+  getEntityPrimaryField (entity: string): string {
+    return this.getEntityFields(entity).find(({isId}) => isId)?.name;
+  }
+
+  validateEntityField(entity: string, field: unknown){
+    if(!this.getEntityFields(entity).find(({name}) => name === field)){
+      throw new Error(`Invalid field ${field} for ${entity}`);
+    }
+    return field as string;
+  }
+
   getEntityFromSchema = (entity: string): IJsonSchemaModel => {
     return this.getJsonSchemaModels()[entity];
   };

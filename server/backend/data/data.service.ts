@@ -21,18 +21,16 @@ export class DataService {
 
   private afterConnection() {}
 
-  async count(model: string): Promise<number> {
+  async count(entity: string): Promise<number> {
     return get(
-      await DataService.getInstance().count().from(model),
+      await DataService.getInstance().count().from(entity),
       [0, "count"],
       0
     );
   }
 
-  create() {}
-
   async list(
-    model: string,
+    entity: string,
     dataFetchingModifiers: {
       take: number;
       page: number;
@@ -40,12 +38,14 @@ export class DataService {
       sortBy: string;
     }
   ) {
-    let query = DataService.getInstance().select().from(model);
+    // Select
+    let query = DataService.getInstance().select().from(entity);
     if (dataFetchingModifiers.page && dataFetchingModifiers.take) {
       query = query
         .limit(Number(dataFetchingModifiers.take))
         .offset(
-          (Number(dataFetchingModifiers.page) - 1) * Number(dataFetchingModifiers.take)
+          (Number(dataFetchingModifiers.page) - 1) *
+            Number(dataFetchingModifiers.take)
         );
     }
 
@@ -53,18 +53,35 @@ export class DataService {
       //TODO validate sortBy
       query = query.orderBy(
         dataFetchingModifiers.sortBy,
-        dataFetchingModifiers.orderBy.toLowerCase() === "desc" ? "desc" : "asc"
+        dataFetchingModifiers.orderBy
       );
     }
 
     return await query;
   }
 
-  show() {}
+  async show<T>(entity: string, query: Record<string, unknown>): Promise<T> {
+    return await DataService.getInstance().table(entity).where(query).first();
+  }
 
-  update() {}
+  async create(
+    entity: string,
+    data: Record<string, unknown>
+  ) {
+    await DataService.getInstance()(entity).insert(data);
+  }
 
-  delete() {}
+  async update(
+    entity: string,
+    query: Record<string, unknown>,
+    data: Record<string, unknown>
+  ): Promise<void> {
+    await DataService.getInstance()(entity).where(query).update(data);
+  }
+
+  async delete(entity: string, query: Record<string, unknown>): Promise<void> {
+    await DataService.getInstance()(entity).where(query).del();
+  }
 }
 
 export const dataService = new DataService();

@@ -2,7 +2,6 @@ import { AppLayout } from "../../_layouts/app";
 import {
   DeleteButton,
   SoftButton,
-  Spacer,
   Stack,
   Table,
 } from "@gothicgeeks/design-system";
@@ -25,6 +24,7 @@ import {
   ENTITY_TABLE_PATH,
   useEntityDataDeletionMutation,
 } from "../../hooks/data/data.store";
+import { EntityActionTypes, useEntityActionMenuItems } from "./Configure/constants";
 
 // TODO sync table to url
 
@@ -35,6 +35,9 @@ export function EntityTable() {
   const idField = useEntityIdField(entity);
   const router = useRouter();
   const entityDataDeletionMutation = useEntityDataDeletionMutation(entity);
+  const actionItems = useEntityActionMenuItems([
+    EntityActionTypes.CRUD, EntityActionTypes.Diction
+  ]);
 
   const columns: ITableColumn[] = (entityScalarFields.data || []).map(
     ({ name, isId }) => ({
@@ -64,7 +67,7 @@ export function EntityTable() {
     Cell: ({ row }) => {
       const idValue = row.original[idField.data] as string;
       return (
-        <Stack spacing={4}>
+        <Stack spacing={4} align="center">
           <div>
             <SoftButton
               to={NAVIGATION_LINKS.ENTITY.UPDATE(entity, idValue)}
@@ -74,7 +77,6 @@ export function EntityTable() {
               justIcon={true}
               onClick={() => {}}
             />
-            <Spacer />
           </div>
           <div>
             <SoftButton
@@ -84,7 +86,6 @@ export function EntityTable() {
               justIcon={true}
               icon="eye"
             />
-            <Spacer />
           </div>
           <div>
             <DeleteButton
@@ -92,7 +93,6 @@ export function EntityTable() {
               isMakingDeleteRequest={entityDataDeletionMutation.isLoading}
               shouldConfirmAlert={true}
             />
-            <Spacer />
           </div>
           {/* <div>
           <SoftButton
@@ -110,6 +110,24 @@ export function EntityTable() {
     },
   });
 
+  const menuItems = [
+    {
+      label: `Add New ${entityDiction.singular}`,
+      IconComponent: Plus,
+      onClick: () => router.push(NAVIGATION_LINKS.ENTITY.CREATE(entity)),
+    },
+    {
+      label: `Download as CSV`,
+      IconComponent: Download,
+      onClick: () => console.log("TODO"),
+    },
+    {
+      label: `Multi Select Mode`,
+      IconComponent: Download,
+      onClick: () => console.log("TODO"),
+    },
+  ];
+
   if (entity === SLUG_LOADING_VALUE) {
     return "TODO Loading Indicator Here";
   }
@@ -122,49 +140,14 @@ export function EntityTable() {
           value: NAVIGATION_LINKS.ENTITY.TABLE(entity),
         },
       ]}
-      actionItems={[
-        {
-          label: "CRUD Settings",
-          IconComponent: Save,
-          onClick: () =>
-            router.push(NAVIGATION_LINKS.ENTITY.CONFIG.CRUD(entity)),
-        },
-        {
-          label: "Table Settings",
-          IconComponent: Plus,
-          onClick: () =>
-            router.push(NAVIGATION_LINKS.ENTITY.CONFIG.TABLE(entity)),
-        },
-        {
-          label: "Entity Diction",
-          IconComponent: Plus,
-          onClick: () =>
-            router.push(NAVIGATION_LINKS.ENTITY.CONFIG.DICTION(entity)),
-        },
-      ]}
+      actionItems={actionItems}
     >
       <Table
         url={ENTITY_TABLE_PATH(entity)}
         title=""
         columns={columns}
         // ovveride indicator
-        menuItems={[
-          {
-            label: `Add New ${entityDiction.singular}`,
-            IconComponent: Plus,
-            onClick: () => router.push(NAVIGATION_LINKS.ENTITY.CREATE(entity)),
-          },
-          {
-            label: `Download as CSV`,
-            IconComponent: Download,
-            onClick: () => console.log("TODO"),
-          },
-          {
-            label: `Multi Select Mode`,
-            IconComponent: Download,
-            onClick: () => console.log("TODO"),
-          },
-        ]}
+        menuItems={menuItems}
       />
     </AppLayout>
   );

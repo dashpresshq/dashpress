@@ -12,19 +12,19 @@ import {
   useEntityId,
   useEntitySlug,
 } from "../../hooks/entity/entity.config";
-import { Plus } from "react-feather";
-import { useRouter } from "next/router";
 import {
   useEntityDataDetails,
 } from "../../hooks/data/data.store";
+import { EntityActionTypes, useEntityActionMenuItems } from "./Configure/constants";
 
 export function EntityDetails() {
   const entity = useEntitySlug();
   const entityDiction = useEntityDiction();
   const id = useEntityId();
   const dataDetails = useEntityDataDetails(entity, id);
-  const router = useRouter();
-
+  const actionItems = useEntityActionMenuItems([
+    EntityActionTypes.CRUD, EntityActionTypes.Fields
+  ]);
   return (
     <AppLayout
       titleNeedsContext={true}
@@ -38,20 +38,7 @@ export function EntityDetails() {
           value: NAVIGATION_LINKS.ENTITY.DETAILS(entity, id),
         },
       ]}
-      actionItems={[
-        {
-          label: "Details Settings",
-          IconComponent: Plus,
-          onClick: () =>
-            router.push(NAVIGATION_LINKS.ENTITY.CONFIG.DETAILS(entity)),
-        },
-        {
-          label: "Entity Fields",
-          IconComponent: Plus,
-          onClick: () =>
-            router.push(NAVIGATION_LINKS.ENTITY.CONFIG.FIELDS(entity)),
-        },
-      ]}
+      actionItems={actionItems}
     >
       <SectionCenter>
         {dataDetails.error ? (

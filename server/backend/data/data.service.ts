@@ -50,7 +50,6 @@ export class DataService {
     }
 
     if (dataFetchingModifiers.orderBy && dataFetchingModifiers.sortBy) {
-      //TODO validate sortBy
       query = query.orderBy(
         dataFetchingModifiers.sortBy,
         dataFetchingModifiers.orderBy

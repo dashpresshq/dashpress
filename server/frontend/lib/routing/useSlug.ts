@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import { SLUG_LOADING_VALUE } from "./constants";
-
+// TODO nuke this for useRouteParams
 export function useSlug(name: string) {
   const router = useRouter();
 

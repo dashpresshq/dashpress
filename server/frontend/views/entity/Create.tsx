@@ -21,17 +21,18 @@ import {
   useEntitySlug,
 } from "../../hooks/entity/entity.config";
 import { useEntityScalarFields } from "../../hooks/entity/entity.store";
-import { Plus, Save } from "react-feather";
-import { useRouter } from "next/router";
 import { useEntityDataCreationMutation } from "../../hooks/data/data.store";
+import { EntityActionTypes, useEntityActionMenuItems } from "./Configure/constants";
 
 export function EntityCreate() {
   const entity = useEntitySlug();
   const entityDiction = useEntityDiction();
   const entityScalarFields = useEntityScalarFields(entity);
-  const router = useRouter();
   const entityDataCreationMutation = useEntityDataCreationMutation(entity);
-
+  const actionItems = useEntityActionMenuItems([
+    EntityActionTypes.CRUD, EntityActionTypes.Fields
+  ]);
+  
   return (
     <AppLayout
       breadcrumbs={[
@@ -41,26 +42,7 @@ export function EntityCreate() {
         },
         { label: "Create", value: NAVIGATION_LINKS.ENTITY.CREATE(entity) },
       ]}
-      actionItems={[
-        {
-          label: "CRUD Settings",
-          IconComponent: Save,
-          onClick: () =>
-            router.push(NAVIGATION_LINKS.ENTITY.CONFIG.CRUD(entity)),
-        },
-        {
-          label: "Create Settings",
-          IconComponent: Plus,
-          onClick: () =>
-            router.push(NAVIGATION_LINKS.ENTITY.CONFIG.CREATE(entity)),
-        },
-        {
-          label: "Entity Fields",
-          IconComponent: Plus,
-          onClick: () =>
-            router.push(NAVIGATION_LINKS.ENTITY.CONFIG.FIELDS(entity)),
-        },
-      ]}
+      actionItems={actionItems}
     >
       <SectionCenter>
         <SectionBox
@@ -122,3 +104,6 @@ export const CreateEntityForm: React.FC<{
     />
   );
 };
+
+// Create new
+// Settings After create go to settings/ go to table

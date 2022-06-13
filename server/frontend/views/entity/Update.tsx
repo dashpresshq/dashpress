@@ -23,22 +23,22 @@ import {
   useEntitySlug,
 } from "../../hooks/entity/entity.config";
 import { useEntityScalarFields } from "../../hooks/entity/entity.store";
-import { Plus } from "react-feather";
-import { useRouter } from "next/router";
 import {
   useEntityDataDetails,
   useEntityDataUpdationMutation,
 } from "../../hooks/data/data.store";
+import { EntityActionTypes, useEntityActionMenuItems } from "./Configure/constants";
 
 export function EntityUpdate() {
   const entity = useEntitySlug();
   const id = useEntityId();
   const entityDiction = useEntityDiction();
   const entityScalarFields = useEntityScalarFields(entity);
-  const router = useRouter();
   const entityDataUpdationMutation = useEntityDataUpdationMutation(entity, id);
   const dataDetails = useEntityDataDetails(entity, id);
-
+  const actionItems = useEntityActionMenuItems([
+    EntityActionTypes.CRUD, EntityActionTypes.Fields
+  ]);
   return (
     <AppLayout
       titleNeedsContext={true}
@@ -53,20 +53,7 @@ export function EntityUpdate() {
         },
         { label: "Update", value: NAVIGATION_LINKS.ENTITY.UPDATE(entity, id) },
       ]}
-      actionItems={[
-        {
-          label: "Update Settings",
-          IconComponent: Plus,
-          onClick: () =>
-            router.push(NAVIGATION_LINKS.ENTITY.CONFIG.UPDATE(entity)),
-        },
-        {
-          label: "Entity Fields",
-          IconComponent: Plus,
-          onClick: () =>
-            router.push(NAVIGATION_LINKS.ENTITY.CONFIG.FIELDS(entity)),
-        },
-      ]}
+      actionItems={actionItems}
     >
       <SectionCenter>
         {dataDetails.error ? (

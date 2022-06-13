@@ -17,6 +17,19 @@ interface IProps {
   menuItem: { link: string; name: string };
 }
 
+// orderable, filterable
+
+//         CreateAble, UpdateAble, Show on Table, Show on Details, List able, order on list
+// Fields
+// A
+// B
+// C
+
+// On details side bar, 
+// 1 Delete, 
+// 2 Edit,
+// 3 Full details. 
+
 export const BaseEntitySettingsLayout = ({ children, menuItem }: IProps) => {
   const entity = useEntitySlug();
   const entityDiction = useEntityDiction();
@@ -37,11 +50,6 @@ export const BaseEntitySettingsLayout = ({ children, menuItem }: IProps) => {
           <MenuSection
             menuItems={[
               {
-                link: NAVIGATION_LINKS.ENTITY.CONFIG.TABLE(entity),
-                name: "Table", // Show, orderable, filterable
-                disabled: false,
-              },
-              {
                 link: NAVIGATION_LINKS.ENTITY.CONFIG.DICTION(entity),
                 name: "Diction",
                 disabled: false,
@@ -52,18 +60,8 @@ export const BaseEntitySettingsLayout = ({ children, menuItem }: IProps) => {
                 disabled: false,
               },
               {
-                link: NAVIGATION_LINKS.ENTITY.CONFIG.CREATE(entity),
-                name: "Create", // Fields to hide
-                disabled: false,
-              },
-              {
-                link: NAVIGATION_LINKS.ENTITY.CONFIG.UPDATE(entity),
-                name: "Update", // Fields to hide
-                disabled: false,
-              },
-              {
-                link: NAVIGATION_LINKS.ENTITY.CONFIG.DETAILS(entity),
-                name: "Details", // Fields to hide
+                link: NAVIGATION_LINKS.ENTITY.CONFIG.ACTIONS(entity),
+                name: "ACTIONS",
                 disabled: false,
               },
               {
@@ -71,12 +69,8 @@ export const BaseEntitySettingsLayout = ({ children, menuItem }: IProps) => {
                 name: "Fields", // labels and validations and type
                 disabled: false,
               },
-              // order
-              // {
-              //   link: NAVIGATION_LINKS.ENTITY.CONFIG.LIST_FIELDS(entity),
-              //   name: "List Fields",
-              //   disabled: false,
-              // },
+              // Computed Table fields
+              // Computed Details fields
             ]}
             currentMenuItem={menuItem.link}
           />
@@ -86,7 +80,3 @@ export const BaseEntitySettingsLayout = ({ children, menuItem }: IProps) => {
     </AppLayout>
   );
 };
-
-/*
-Comuted Columns
-*/

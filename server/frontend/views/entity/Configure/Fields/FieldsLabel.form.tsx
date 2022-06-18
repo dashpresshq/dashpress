@@ -42,17 +42,3 @@ import {
       />
     );
   };
-  
-  // types
-  // email, password, text, textarea, richtext, url, number, alphanumeric, selection, reference field, boolean, image, color
-
-//   | 'date'
-//   | 'datetime-local'
-//   | 'file'
-//   | 'range'
-//   | 'tel'
-//   | 'time'
-
-
-//   | 'month'
-//   | 'week'

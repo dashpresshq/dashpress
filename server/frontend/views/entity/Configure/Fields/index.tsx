@@ -1,5 +1,9 @@
 import { ErrorAlert, SectionBox, Tabs } from "@gothicgeeks/design-system";
-import { useEntitySlug } from "../../../../hooks/entity/entity.config";
+import {
+  useEntityFieldLabels,
+  useEntityFieldTypes,
+  useEntitySlug,
+} from "../../../../hooks/entity/entity.config";
 import { NAVIGATION_LINKS } from "../../../../lib/routing/links";
 import { BaseEntitySettingsLayout } from ".././_Base";
 import { useEntityScalarFields } from "../../../../hooks/entity/entity.store";
@@ -8,6 +12,7 @@ import {
   useUpsertConfigurationMutation,
 } from "../../../../hooks/configuration/configration.store";
 import { FieldsLabelForm } from "./FieldsLabel.form";
+import { FieldsTypeForm } from "./FieldsType.form";
 
 export const EntityFieldsSettings = () => {
   const entity = useEntitySlug();
@@ -16,11 +21,24 @@ export const EntityFieldsSettings = () => {
     "entity_columns_labels",
     entity
   );
+  const entityFieldTypesMap = useEntityConfiguration<Record<string, string>>(
+    "entity_columns_types",
+    entity
+  );
+
+    const entityFieldTypes = useEntityFieldTypes();
 
   const upsertEntityFieldsMapMutation = useUpsertConfigurationMutation(
     "entity_columns_labels",
     entity
   );
+
+  const upsertEntityTypesMapMutation = useUpsertConfigurationMutation(
+    "entity_columns_types",
+    entity
+  );
+
+  const getEntityFieldLabels = useEntityFieldLabels();
 
   return (
     <BaseEntitySettingsLayout
@@ -30,10 +48,16 @@ export const EntityFieldsSettings = () => {
       }}
     >
       <ErrorAlert
-        message={entityScalarFields.error || entityFieldLabelsMap.error}
+        message={
+          entityScalarFields.error ||
+          entityFieldLabelsMap.error ||
+          entityFieldTypesMap.error
+        }
       />
       <SectionBox title="Fields Settings">
-        {entityScalarFields.isLoading || entityFieldLabelsMap.isLoading ? (
+        {entityScalarFields.isLoading ||
+        entityFieldLabelsMap.isLoading ||
+        entityFieldTypesMap.isLoading ? (
           <>Loading...</>
         ) : (
           <Tabs
@@ -51,10 +75,11 @@ export const EntityFieldsSettings = () => {
               },
               {
                 content: (
-                  <FieldsLabelForm
-                    initialValues={entityFieldLabelsMap.data}
+                  <FieldsTypeForm
+                    initialValues={entityFieldTypes}
                     fields={entityScalarFields.data || []}
-                    onSubmit={upsertEntityFieldsMapMutation.mutateAsync}
+                    onSubmit={upsertEntityTypesMapMutation.mutateAsync}
+                    getEntityFieldLabels={getEntityFieldLabels}
                   />
                 ),
                 label: "Types",

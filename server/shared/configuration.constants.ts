@@ -1,58 +1,23 @@
 export const CONFIGURATION_KEYS: Record<
-  | "hidden_entity_table_columns"
-  | "hidden_entity_create_columns"
-  | "hidden_entity_update_columns"
-  | "hidden_entity_details_columns"
+  | "hidden_entity_table_columns" //
+  | "hidden_entity_create_columns" //
+  | "hidden_entity_update_columns" //
+  | "hidden_entity_details_columns" //
+  | "entity_diction" //
+  | "entity_columns_types" // 
+  | "entity_crud_settings" //
   | "relations_list_fields"
   | "entity_columns_labels"
-  | "entity_diction"
-  | "entities_to_hide_from_menu"
-  | "entity_crud_settings"
-  | "entity_validations",
+  | "entity_validations"
+  | "entities_to_hide_from_menu",
   { requireEntity: boolean; defaultValue: unknown }
 > = {
   hidden_entity_table_columns: { requireEntity: true, defaultValue: [] },
   hidden_entity_create_columns: { requireEntity: true, defaultValue: [] },
   hidden_entity_update_columns: { requireEntity: true, defaultValue: [] },
   hidden_entity_details_columns: { requireEntity: true, defaultValue: [] },
-  entity_columns_labels: { requireEntity: true, defaultValue: {} }, // {key: label}
-  // entity_columns_labels: { requireEntity: true, defaultValue: {
-  //   label: string,
-  //   type: string,
-  //   validations:[
-  //     {
-  //       type: "required",
-  //     },
-  //     {
-  //       type: "postiveNumber",
-  //     },
-  //     {
-  //     },
-  //     {
-  //       type: "matchOtherField",
-  //       value: ""
-  //     },
-  //     {
-  //       type: "unique",
-  //     },
-  //     {
-  //       _type: "requiredIf",
-  //       field: "",
-  //     },
-  //     {
-  //     _type: "regex",
-  //     value: "\\"
-  //   },
-  //   {
-  //     _type: "min",
-  //     value: number
-  //   },
-  //   {
-  //     _type: "max",
-  //     value: number
-  //   }
-  // ]
-  // } }, // {key: label}
+  entity_columns_labels: { requireEntity: true, defaultValue: {} },
+  entity_columns_types: { requireEntity: true, defaultValue: {} },
   entity_diction: {
     requireEntity: true,
     defaultValue: { singular: "", plural: "" },

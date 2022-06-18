@@ -20,7 +20,7 @@ export interface IEntityField {
   isUnique: boolean;
   isId: true;
   hasDefaultValue: boolean;
-  type: "String";
+  type: "String" | "Int" | "Boolean" | "DateTime";
   default?: string | { name: string; args: never[] };
 }
 

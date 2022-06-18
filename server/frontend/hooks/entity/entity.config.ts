@@ -3,6 +3,9 @@ import { useEntityConfiguration } from "../configuration/configration.store";
 import { CONFIGURATION_KEYS } from "../../../shared/configuration.constants";
 import { useRouteParam } from "@gothicgeeks/shared";
 import { useCallback } from "react";
+import { useEntityScalarFields } from "./entity.store";
+import { ENTITY_TYPES_SELECTION_BAG } from "../../../shared/validations.constants";
+import { IEntityField } from "../../../backend/entities/types";
 
 export function useEntitySlug() {
   return useRouteParam("entity");
@@ -31,14 +34,58 @@ export function useEntityFieldLabels() {
     entity
   );
 
-  return useCallback((fieldName: string): string => {
-    if (entityFieldLabelsMap.error || entityFieldLabelsMap.isLoading) {
-      return capitalCase(fieldName);
-    }
-    return entityFieldLabelsMap.data[fieldName] || capitalCase(fieldName);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [entityFieldLabelsMap.isLoading]);
+  return useCallback(
+    (fieldName: string): string => {
+      if (entityFieldLabelsMap.error || entityFieldLabelsMap.isLoading) {
+        return capitalCase(fieldName);
+      }
+      return entityFieldLabelsMap.data[fieldName] || capitalCase(fieldName);
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [entityFieldLabelsMap.isLoading]
+  );
 }
+
+export function useEntityFieldTypes() {
+  const entity = useEntitySlug();
+  const entityFieldTypesMap = useEntityConfiguration<
+    Record<string, keyof typeof ENTITY_TYPES_SELECTION_BAG>
+  >("entity_columns_types", entity);
+
+  const entityScalarFields = useEntityScalarFields(entity);
+  if (
+    entityScalarFields.isLoading ||
+    entityScalarFields.isError ||
+    entityFieldTypesMap.isError ||
+    entityFieldTypesMap.isLoading
+  ) {
+    return {};
+  }
+
+  return Object.fromEntries(
+    (entityScalarFields.data || []).map(({ name, type }) => {
+      let entityFieldType = entityFieldTypesMap.data[name];
+      if (!entityFieldType) {
+        entityFieldType = PRISMA_TYPE_TO_ENTITY_TYPES_MAP[type];
+      }
+      if (!entityFieldType) {
+        // TODO deal with enums
+        entityFieldType = "text";
+      }
+      return [name, entityFieldType];
+    })
+  );
+}
+
+const PRISMA_TYPE_TO_ENTITY_TYPES_MAP: Record<
+  IEntityField["type"],
+  keyof typeof ENTITY_TYPES_SELECTION_BAG
+> = {
+  Boolean: "boolean",
+  DateTime: "datetime-local",
+  Int: "number",
+  String: "text",
+};
 
 export interface IEntityCrudSettings {
   create: boolean;

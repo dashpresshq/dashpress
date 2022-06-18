@@ -22,7 +22,6 @@ import { Download, Plus } from "react-feather";
 import { useRouter } from "next/router";
 import { SLUG_LOADING_VALUE } from "../../lib/routing/constants";
 import { ITableColumn } from "@gothicgeeks/design-system/dist/components/Table/Table.types";
-import { capitalCase } from "change-case";
 import Link from "next/link";
 import {
   ENTITY_TABLE_PATH,

@@ -1,5 +1,4 @@
 import {
-  ErrorAlert,
   FormButton,
   FormInput,
   SectionBox,
@@ -33,7 +32,6 @@ export const EntityDictionSettings = () => {
       }}
     >
       <SectionBox title="Diction Settings">
-        <ErrorAlert message={upsertConfigurationMutation.error} />
         <EntityDictionForm
           onSubmit={async (values) => {
             await upsertConfigurationMutation.mutateAsync(

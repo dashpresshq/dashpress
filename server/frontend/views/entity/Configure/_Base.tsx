@@ -25,11 +25,6 @@ interface IProps {
 // B
 // C
 
-// On details side bar, 
-// 1 Delete, 
-// 2 Edit,
-// 3 Full details. 
-
 export const BaseEntitySettingsLayout = ({ children, menuItem }: IProps) => {
   const entity = useEntitySlug();
   const entityDiction = useEntityDiction();

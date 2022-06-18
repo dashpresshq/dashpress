@@ -14,7 +14,7 @@ import {
   useEntityIdField,
   useEntityScalarFields,
 } from "../../hooks/entity/entity.store";
-import { Download, Plus, Save } from "react-feather";
+import { Download, Plus } from "react-feather";
 import { useRouter } from "next/router";
 import { SLUG_LOADING_VALUE } from "../../lib/routing/constants";
 import { ITableColumn } from "@gothicgeeks/design-system/dist/components/Table/Table.types";
@@ -28,6 +28,7 @@ import {
   EntityActionTypes,
   useEntityActionMenuItems,
 } from "./Configure/constants";
+// import Offcanvas from 'react-bootstrap/Offcanvas'
 
 // TODO sync table to url
 // TODO when table passes a limit then a non synced columns to show
@@ -47,6 +48,7 @@ export function EntityTable() {
     ({ name, isId }) => ({
       Header: capitalCase(name),
       accessor: name,
+      // filter: {_type: index % 2 === 0 ? "string" : "number"},
       // disableSortBy?: boolean;
       Cell: ({ value }) => {
         if (!isId) {

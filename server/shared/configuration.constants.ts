@@ -3,9 +3,9 @@ export const CONFIGURATION_KEYS: Record<
   | "hidden_entity_create_columns"
   | "hidden_entity_update_columns"
   | "hidden_entity_details_columns"
+  | "relations_list_fields"
   | "entity_columns_labels"
   | "entity_diction"
-  | "relations_list_fields"
   | "entities_to_hide_from_menu"
   | "entity_table_config"
   | "entity_crud_settings"
@@ -25,7 +25,8 @@ export const CONFIGURATION_KEYS: Record<
     requireEntity: true,
     defaultValue: {
       create: true,
-      read: true,
+      details: true,
+      table: true,
       update: true,
       delete: true,
     },

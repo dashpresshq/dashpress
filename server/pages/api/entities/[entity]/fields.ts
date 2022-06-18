@@ -1,6 +1,5 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from "next";
-
 import { entitiesController } from "../../../../backend/entities/entities.controller";
 import { validateEntityFromRequest } from "../../../../backend/entities/entities.validations";
 import { handleResponseError } from "../../../../backend/lib/errors";

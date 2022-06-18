@@ -15,11 +15,11 @@ export class DataService {
         searchPath: ["public"],
       });
     }
-
+    this.afterConnection();
     return this._dbInstance;
   }
 
-  private afterConnection() {}
+  static async afterConnection() {}
 
   async count(entity: string): Promise<number> {
     return get(
@@ -63,10 +63,7 @@ export class DataService {
     return await DataService.getInstance().table(entity).where(query).first();
   }
 
-  async create(
-    entity: string,
-    data: Record<string, unknown>
-  ) {
+  async create(entity: string, data: Record<string, unknown>) {
     await DataService.getInstance()(entity).insert(data);
   }
 

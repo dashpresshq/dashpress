@@ -1,6 +1,7 @@
 import { useSlug } from "../../lib/routing/useSlug";
 import { capitalCase } from "change-case";
 import { useEntityConfiguration } from "../configuration/configration.store";
+import { CONFIGURATION_KEYS } from "../../../shared/configuration.constants";
 
 export function useEntitySlug() {
   return useSlug("entity");
@@ -22,14 +23,29 @@ export function useEntityDiction() {
   };
 }
 
+export interface IEntityCrudSettings {
+  create: boolean;
+  details: boolean;
+  table: boolean;
+  update: boolean;
+  delete: boolean;
+}
 
 export function useEntityCrudSettings() {
   const entity = useEntitySlug();
-  const entityCrudSettings = useEntityConfiguration<{
-    create: boolean;
-    read: boolean;
-    update: boolean;
-    delete: boolean;
-  }>("entity_crud_settings", entity);
-  return entityCrudSettings;
+  return useEntityConfiguration<IEntityCrudSettings>("entity_crud_settings", entity);
+}
+
+export function useSelectedEntityColumns(
+  key: keyof Pick<
+    typeof CONFIGURATION_KEYS,
+    | "hidden_entity_table_columns"
+    | "hidden_entity_create_columns"
+    | "hidden_entity_update_columns"
+    | "hidden_entity_details_columns"
+    | "relations_list_fields"
+  >
+) {
+  const entity = useEntitySlug();
+  return useEntityConfiguration<string[]>(key, entity);
 }

@@ -1,15 +1,30 @@
 import { CONFIGURATION_KEYS } from "../../shared/configuration.constants";
 
-const CONFIG = {};
+const LOCAL_CONFIG = {};
 
 export class ConfigurationService {
+  private async getConfiguration() {
+    // TODO Sharing configuration at a central place
+    // if (!process.env.CARDINAL_LICENSE) {
+      return LOCAL_CONFIG;
+    // }
+    // return (await this.cardinalConfig()) as Record<string, unknown>;
+  }
+
+  private async persitentConfig(config: Record<string, unknown>) {
+    // if (!process.env.CARDINAL_LICENSE) {
+    //   return;
+    // }
+    // this.saveConfigSomeWhere();
+  }
+
   async show(
     key: keyof typeof CONFIGURATION_KEYS,
     entity?: string
   ): Promise<unknown> {
-    // TODO Sharing configuration at a central place
+    const config = await this.getConfiguration();
     const { requireEntity, defaultValue } = CONFIGURATION_KEYS[key];
-    const value = requireEntity ? (CONFIG[key] || {})[entity] : CONFIG[key];
+    const value = requireEntity ? (config[key] || {})[entity] : config[key];
     return value || defaultValue;
   }
 
@@ -18,15 +33,18 @@ export class ConfigurationService {
     value: unknown,
     entity?: string
   ): Promise<void> {
+    const config = await this.getConfiguration();
+
     const { requireEntity } = CONFIGURATION_KEYS[key];
     if (requireEntity) {
-      if (!CONFIG[key]) {
-        CONFIG[key] = {};
+      if (!config[key]) {
+        config[key] = {};
       }
-      CONFIG[key][entity] = value;
+      config[key][entity] = value;
     } else {
-      CONFIG[key] = value;
+      config[key] = value;
     }
+    await this.persitentConfig(config);
   }
 }
 

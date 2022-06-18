@@ -1138,9 +1138,9 @@
   dependencies:
     prop-types "^15.8.1"
 
-"@gothicgeeks/design-system@git+ssh://git@github.com:thrownullexception/design-system.git#e13e8ae4378bbce2c4448493436f2946474ab11e":
-  version "0.2.29"
-  resolved "git+ssh://git@github.com:thrownullexception/design-system.git#e13e8ae4378bbce2c4448493436f2946474ab11e"
+"@gothicgeeks/design-system@git+ssh://git@github.com:thrownullexception/design-system.git#ff5ee792d9da8b9cd069a345e1544871f266a982":
+  version "0.2.30"
+  resolved "git+ssh://git@github.com:thrownullexception/design-system.git#ff5ee792d9da8b9cd069a345e1544871f266a982"
   dependencies:
     "@fortawesome/fontawesome-svg-core" "^6.1.1"
     "@fortawesome/free-solid-svg-icons" "^6.1.1"

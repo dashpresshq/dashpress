@@ -1,28 +1,17 @@
-import {
-  ErrorAlert,
-  FormButton,
-  Tabs,
-  Text,
-  RenderList,
-  SectionListItem,
-  Stack,
-  SectionBox,
-  Spacer,
-} from "@gothicgeeks/design-system";
+import { ErrorAlert, Tabs, SectionBox } from "@gothicgeeks/design-system";
 import {
   IEntityCrudSettings,
   useEntityCrudSettings,
   useEntitySlug,
   useSelectedEntityColumns,
-} from "../../../hooks/entity/entity.config";
-import { NAVIGATION_LINKS } from "../../../lib/routing/links";
-import { BaseEntitySettingsLayout } from "./_Base";
-import { ButtonLang } from "@gothicgeeks/shared";
-import { IFormProps } from "../../../lib/form/types";
-import { useUpsertConfigurationMutation } from "../../../hooks/configuration/configration.store";
-import { useEntityScalarFields } from "../../../hooks/entity/entity.store";
-import { IEntityField } from "../../../../backend/entities/types";
-import { useStringSelections } from "../../../lib/selection";
+} from "../../../../hooks/entity/entity.config";
+import noop from "lodash/noop";
+import { NAVIGATION_LINKS } from "../../../../lib/routing/links";
+import { BaseEntitySettingsLayout } from "../_Base";
+import { useUpsertConfigurationMutation } from "../../../../hooks/configuration/configration.store";
+import { useEntityScalarFields } from "../../../../hooks/entity/entity.store";
+import { SelectionTab } from "./SelectionTab";
+
 import { useEffect, useState } from "react";
 
 const LABELS = [
@@ -33,6 +22,8 @@ const LABELS = [
 export const EntityCrudSettings = () => {
   const entity = useEntitySlug();
   const entityCrudSettings = useEntityCrudSettings();
+  const entityScalarFields = useEntityScalarFields(entity);
+
   const hiddenTableColumns = useSelectedEntityColumns(
     "hidden_entity_table_columns"
   );
@@ -46,19 +37,40 @@ export const EntityCrudSettings = () => {
     "hidden_entity_details_columns"
   );
 
-  const entityScalarFields = useEntityScalarFields(entity);
+  const upsertTableColumnsMutation = useUpsertConfigurationMutation(
+    "hidden_entity_table_columns",
+    entity
+  );
 
-  const upsertConfigurationMutation = useUpsertConfigurationMutation(
-    "entity_crud_settings",
+  const upsertCreateColumnsMutation = useUpsertConfigurationMutation(
+    "hidden_entity_create_columns",
+    entity
+  );
+
+  const upsertUpdateColumnsMutation = useUpsertConfigurationMutation(
+    "hidden_entity_update_columns",
+    entity
+  );
+
+  const upsertDetailsColumnsMutation = useUpsertConfigurationMutation(
+    "hidden_entity_details_columns",
     entity
   );
 
   const [entityCrudSettingsState, setEntityCrudSettingsState] =
-    useState<IEntityCrudSettings>();
+    useState<IEntityCrudSettings>({
+      create: true,
+      delete: true,
+      details: true,
+      table: true,
+      update: true,
+    });
 
   useEffect(() => {
-    setEntityCrudSettingsState(entityCrudSettings.data);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    if (entityCrudSettings.data) {
+      setEntityCrudSettingsState(entityCrudSettings.data);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [entityCrudSettings.data]);
 
   const toggleCrudSettings = (field: keyof IEntityCrudSettings) => {
@@ -81,22 +93,21 @@ export const EntityCrudSettings = () => {
       {entityScalarFields.isLoading || entityCrudSettings.isLoading ? (
         <>Loading...</>
       ) : (
-        <SectionBox title="Diction Settings">
+        <SectionBox title="CRUD Settings">
           <Tabs
             // TODO add default tab
             contents={[
               {
                 content: (
                   <SelectionTab
-                    description="Foo"
+                    description="Toggle the fields that are allowed to be created in the Form"
                     entityFields={entityScalarFields.data || []}
                     isLoading={hiddenCreateColumns.isLoading}
                     hiddenColumns={hiddenCreateColumns.data || []}
-                    onSubmit={(data) => {
-                      upsertConfigurationMutation.mutateAsync(data);
-                    }}
+                    onSubmit={(data) => upsertCreateColumnsMutation.mutateAsync(data)}
                     onToggle={() => toggleCrudSettings("create")}
                     enabled={entityCrudSettingsState.create}
+                    labels={["Hide Create Button", "Show Create Button"]}
                   />
                 ),
                 label: "Create",
@@ -104,15 +115,14 @@ export const EntityCrudSettings = () => {
               {
                 content: (
                   <SelectionTab
-                    description="Foo"
+                    description="Toggle the fields that are allowed to be updated in the Form"
                     entityFields={entityScalarFields.data || []}
                     isLoading={hiddenUpdateColumns.isLoading}
-                    hiddenColumns={hiddenCreateColumns.data || []}
+                    hiddenColumns={hiddenUpdateColumns.data || []}
                     onToggle={() => toggleCrudSettings("update")}
-                    onSubmit={(data) => {
-                      upsertConfigurationMutation.mutateAsync(data);
-                    }}
+                    onSubmit={(data) => upsertUpdateColumnsMutation.mutateAsync(data)}
                     enabled={entityCrudSettingsState.update}
+                    labels={["Hide Edit Button", "Show Edit Button"]}
                   />
                 ),
                 label: "Update",
@@ -120,15 +130,14 @@ export const EntityCrudSettings = () => {
               {
                 content: (
                   <SelectionTab
-                    description="Foo"
+                    description="Toggle the fields that should be shown in the details page"
                     entityFields={entityScalarFields.data || []}
                     isLoading={hiddenDetailsColumns.isLoading}
                     hiddenColumns={hiddenDetailsColumns.data || []}
                     onToggle={() => toggleCrudSettings("details")}
-                    onSubmit={(data) => {
-                      upsertConfigurationMutation.mutateAsync(data);
-                    }}
+                    onSubmit={(data) => upsertDetailsColumnsMutation.mutateAsync(data)}
                     enabled={entityCrudSettingsState.details}
+                    labels={["Hide Details Button", "Show Details Button"]}
                   />
                 ),
                 label: "Details",
@@ -136,15 +145,14 @@ export const EntityCrudSettings = () => {
               {
                 content: (
                   <SelectionTab
-                    description="Foo"
+                    description="Toggle the columns that should be shown in the table"
                     entityFields={entityScalarFields.data || []}
                     isLoading={hiddenTableColumns.isLoading}
                     onToggle={() => toggleCrudSettings("table")}
                     hiddenColumns={hiddenTableColumns.data || []}
-                    onSubmit={(data) => {
-                      upsertConfigurationMutation.mutateAsync(data);
-                    }}
+                    onSubmit={(data) => upsertTableColumnsMutation.mutateAsync(data)}
                     enabled={entityCrudSettingsState.table}
+                    labels={["Hide In Table List", "Show In Table List"]}
                   />
                 ),
                 label: "Table",
@@ -152,15 +160,14 @@ export const EntityCrudSettings = () => {
               {
                 content: (
                   <SelectionTab
-                    description="Foo"
+                    description=""
                     entityFields={[]}
                     isLoading={false}
                     onToggle={() => toggleCrudSettings("delete")}
                     hiddenColumns={[]}
-                    onSubmit={(data) => {
-                      upsertConfigurationMutation.mutateAsync(data);
-                    }}
+                    onSubmit={async () => noop()}
                     enabled={entityCrudSettings.data?.delete}
+                    labels={["Hide Delete Button", "Show Delete Button"]}
                   />
                 ),
                 label: "Delete",
@@ -170,80 +177,5 @@ export const EntityCrudSettings = () => {
         </SectionBox>
       )}
     </BaseEntitySettingsLayout>
-  );
-};
-
-const SelectionTab: React.FC<{
-  entityFields: IEntityField[];
-  isLoading: boolean;
-  onToggle: () => void;
-  hiddenColumns: string[];
-  enabled: boolean;
-  description: string;
-}> = ({
-  entityFields,
-  isLoading,
-  enabled,
-  description,
-  onToggle,
-  hiddenColumns,
-}) => {
-  const { toggleSelection, clearAll, currentPageSelection, selectMutiple } =
-    useStringSelections();
-
-  useEffect(() => {
-    selectMutiple(hiddenColumns);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [hiddenColumns]);
-
-  return (
-    <>
-      <Stack justify="space-between">
-        <Text size="5">{description}</Text>
-        <FormButton
-          isMakingRequest={false}
-          size="sm"
-          isInverse={enabled}
-          text="Enable Create"
-          onClick={() => onToggle()}
-        />
-      </Stack>
-      <Spacer size="xxl" />
-      {entityFields.length > 0 && (
-        <RenderList
-          items={entityFields}
-          render={(menuItem) => {
-            const isHidden = currentPageSelection.includes(menuItem.name);
-
-            return (
-              <SectionListItem
-                label={menuItem.name}
-                key={menuItem.name}
-                actionButtons={
-                  enabled
-                    ? [
-                        {
-                          isInverse: isHidden,
-                          text: isHidden ? "Hide" : "Show",
-                          onClick: () => toggleSelection(menuItem.name),
-                          isMakingRequest: false,
-                        },
-                      ]
-                    : []
-                }
-                toNoWhere={true}
-              />
-            );
-          }}
-        />
-      )}
-
-      <Spacer size="xxl" />
-      <FormButton
-        text={"Save Changes"}
-        disabled={false}
-        isMakingRequest={false}
-      />
-    </>
   );
 };

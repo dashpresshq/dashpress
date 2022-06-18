@@ -31,7 +31,7 @@ export function useUpsertConfigurationMutation(key: keyof typeof CONFIGURATION_K
     Partial<Record<string, string> | unknown[]>
   >({
     dataQueryPath: apiPath(key, entity),
-    onMutate: MutationHelpers.mergeObject,
+    onMutate: MutationHelpers.replace,
     successMessage: "App settings saved successfully",
   });
 

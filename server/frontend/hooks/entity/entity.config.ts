@@ -1,14 +1,16 @@
-import { useSlug } from "../../lib/routing/useSlug";
 import { capitalCase } from "change-case";
 import { useEntityConfiguration } from "../configuration/configration.store";
 import { CONFIGURATION_KEYS } from "../../../shared/configuration.constants";
+import {
+  useRouteParam,
+} from "@gothicgeeks/shared";
 
 export function useEntitySlug() {
-  return useSlug("entity");
+  return useRouteParam("entity");
 }
 
 export function useEntityId() {
-  return useSlug("id");
+  return useRouteParam("id");
 }
 
 export function useEntityDiction() {

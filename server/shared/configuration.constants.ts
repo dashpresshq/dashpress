@@ -16,6 +16,43 @@ export const CONFIGURATION_KEYS: Record<
   hidden_entity_update_columns: { requireEntity: true, defaultValue: [] },
   hidden_entity_details_columns: { requireEntity: true, defaultValue: [] },
   entity_columns_labels: { requireEntity: true, defaultValue: {} }, // {key: label}
+  // entity_columns_labels: { requireEntity: true, defaultValue: {
+  //   label: string,
+  //   type: string,
+  //   validations:[
+  //     {
+  //       type: "required",
+  //     },
+  //     {
+  //       type: "postiveNumber",
+  //     },
+  //     {
+  //     },
+  //     {
+  //       type: "matchOtherField",
+  //       value: ""
+  //     },
+  //     {
+  //       type: "unique",
+  //     },
+  //     {
+  //       _type: "requiredIf",
+  //       field: "",
+  //     },
+  //     {
+  //     _type: "regex",
+  //     value: "\\"
+  //   },
+  //   {
+  //     _type: "min",
+  //     value: number
+  //   },
+  //   {
+  //     _type: "max",
+  //     value: number
+  //   }
+  // ]
+  // } }, // {key: label}
   entity_diction: {
     requireEntity: true,
     defaultValue: { singular: "", plural: "" },

@@ -102,7 +102,7 @@ export const EntityCrudSettings = () => {
       }}
     >
       <ErrorAlert
-        message={entityScalarFields.error || entityScalarFields.error}
+        message={entityScalarFields.error || entityCrudSettings.error}
       />
       {entityScalarFields.isLoading || entityCrudSettings.isLoading ? (
         <>Loading...</>

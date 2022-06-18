@@ -42,7 +42,7 @@ export function EntityCreate() {
     "hidden_entity_create_columns"
   );
   const getEntityFieldLabels = useEntityFieldLabels();
-
+  
   return (
     <AppLayout
       breadcrumbs={[

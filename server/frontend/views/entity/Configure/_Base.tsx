@@ -47,13 +47,13 @@ export const BaseEntitySettingsLayout = ({ children, menuItem }: IProps) => {
                 disabled: false,
               },
               {
-                link: NAVIGATION_LINKS.ENTITY.CONFIG.ACTIONS(entity),
-                name: "Actions",
+                link: NAVIGATION_LINKS.ENTITY.CONFIG.FIELDS(entity),
+                name: "Fields",
                 disabled: false,
               },
               {
-                link: NAVIGATION_LINKS.ENTITY.CONFIG.FIELDS(entity),
-                name: "Fields", // labels and validations and type
+                link: NAVIGATION_LINKS.ENTITY.CONFIG.ACTIONS(entity),
+                name: "Actions",
                 disabled: false,
               },
               // Computed Table fields

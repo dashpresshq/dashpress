@@ -10,6 +10,7 @@ import { TitleLang } from "@gothicgeeks/shared";
 import { NAVIGATION_LINKS } from "../../lib/routing/links";
 import {
   useEntityDiction,
+  useEntityFieldLabels,
   useEntityId,
   useEntitySlug,
   useSelectedEntityColumns,
@@ -34,6 +35,7 @@ export function EntityDetails() {
   const hiddenDetailsColumns = useSelectedEntityColumns(
     "hidden_entity_details_columns"
   );
+  const getEntityFieldLabels = useEntityFieldLabels();
 
   return (
     <AppLayout
@@ -78,7 +80,7 @@ export function EntityDetails() {
                 )
                 .map(({ name }) => (
                   <>
-                    <Text size="5" weight="bold">{name}</Text>
+                    <Text size="5" weight="bold">{getEntityFieldLabels(name)}</Text>
                     <Text>{dataDetails.data[name]}</Text>
                     <Spacer />
                   </>

@@ -17,6 +17,7 @@ interface IProps {
   hiddenColumns: string[];
   onSubmit: (columnsSelection: string[]) => Promise<void>;
   enabled: boolean;
+  getEntityFieldLabels: (fieldName: string) => string,
   description: string;
   labels: [string, string];
 }
@@ -25,6 +26,7 @@ export const SelectionTab: React.FC<IProps> = ({
   entityFields,
   isLoading,
   labels,
+  getEntityFieldLabels,
   enabled,
   description,
   onToggle,
@@ -69,7 +71,7 @@ export const SelectionTab: React.FC<IProps> = ({
 
               return (
                 <SectionListItem
-                  label={menuItem.name}
+                  label={getEntityFieldLabels(menuItem.name)}
                   key={menuItem.name}
                   actionButtons={
                     enabled

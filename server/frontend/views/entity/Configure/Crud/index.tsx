@@ -2,6 +2,7 @@ import { ErrorAlert, Tabs, SectionBox } from "@gothicgeeks/design-system";
 import {
   IEntityCrudSettings,
   useEntityCrudSettings,
+  useEntityFieldLabels,
   useEntitySlug,
   useSelectedEntityColumns,
 } from "../../../../hooks/entity/entity.config";
@@ -23,6 +24,7 @@ export const EntityCrudSettings = () => {
   const entity = useEntitySlug();
   const entityCrudSettings = useEntityCrudSettings();
   const entityScalarFields = useEntityScalarFields(entity);
+  const getEntityFieldLabels = useEntityFieldLabels();
 
   const hiddenTableColumns = useSelectedEntityColumns(
     "hidden_entity_table_columns"
@@ -87,6 +89,11 @@ export const EntityCrudSettings = () => {
     upsertCrudSettingsMutation.mutateAsync(newState);
   };
 
+  const sharedFields = {
+    getEntityFieldLabels,
+    entityFields: entityScalarFields.data || [],
+  };
+
   return (
     <BaseEntitySettingsLayout
       menuItem={{
@@ -107,8 +114,8 @@ export const EntityCrudSettings = () => {
               {
                 content: (
                   <SelectionTab
+                    {...sharedFields}
                     description="Toggle the fields that are allowed to be created in the Form"
-                    entityFields={entityScalarFields.data || []}
                     isLoading={hiddenCreateColumns.isLoading}
                     hiddenColumns={hiddenCreateColumns.data || []}
                     onSubmit={(data) =>
@@ -124,8 +131,8 @@ export const EntityCrudSettings = () => {
               {
                 content: (
                   <SelectionTab
+                    {...sharedFields}
                     description="Toggle the fields that are allowed to be updated in the Form"
-                    entityFields={entityScalarFields.data || []}
                     isLoading={hiddenUpdateColumns.isLoading}
                     hiddenColumns={hiddenUpdateColumns.data || []}
                     onToggle={() => toggleCrudSettings("update")}
@@ -141,8 +148,8 @@ export const EntityCrudSettings = () => {
               {
                 content: (
                   <SelectionTab
+                    {...sharedFields}
                     description="Toggle the fields that should be shown in the details page"
-                    entityFields={entityScalarFields.data || []}
                     isLoading={hiddenDetailsColumns.isLoading}
                     hiddenColumns={hiddenDetailsColumns.data || []}
                     onToggle={() => toggleCrudSettings("details")}
@@ -158,8 +165,8 @@ export const EntityCrudSettings = () => {
               {
                 content: (
                   <SelectionTab
+                    {...sharedFields}
                     description="Toggle the columns that should be shown in the table"
-                    entityFields={entityScalarFields.data || []}
                     isLoading={hiddenTableColumns.isLoading}
                     onToggle={() => toggleCrudSettings("table")}
                     hiddenColumns={hiddenTableColumns.data || []}
@@ -180,6 +187,7 @@ export const EntityCrudSettings = () => {
                     isLoading={false}
                     onToggle={() => toggleCrudSettings("delete")}
                     hiddenColumns={[]}
+                    getEntityFieldLabels={() => "Shoud not see this"}
                     onSubmit={async () => noop()}
                     enabled={entityCrudSettingsState.delete}
                     labels={["Hide Delete Button", "Show Delete Button"]}

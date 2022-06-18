@@ -19,6 +19,7 @@ import { IEntityField } from "../../../backend/entities/types";
 import { NAVIGATION_LINKS } from "../../lib/routing/links";
 import {
   useEntityDiction,
+  useEntityFieldLabels,
   useEntityId,
   useEntitySlug,
   useSelectedEntityColumns,
@@ -47,6 +48,7 @@ export function EntityUpdate() {
   const hiddenUpdateColumns = useSelectedEntityColumns(
     "hidden_entity_update_columns"
   );
+  const getEntityFieldLabels = useEntityFieldLabels();
 
   return (
     <AppLayout
@@ -82,7 +84,8 @@ export function EntityUpdate() {
           {dataDetails.isLoading ? (
             <>TODO Loading Data...</>
           ) : (
-            <EntityUpdateForm
+            <UpdateEntityForm
+              getEntityFieldLabels={getEntityFieldLabels}
               onSubmit={entityDataUpdationMutation.mutateAsync}
               fields={(entityScalarFields.data || []).filter(
                 ({ name }) => !(hiddenUpdateColumns.data || []).includes(name)
@@ -96,8 +99,9 @@ export function EntityUpdate() {
   );
 }
 
-export const EntityUpdateForm: React.FC<{
+export const UpdateEntityForm: React.FC<{
   fields: IEntityField[];
+  getEntityFieldLabels: (name: string) => string;
   initialValues?: Record<string, unknown>;
   onSubmit: (data: Record<string, unknown>) => void;
 }> = ({ onSubmit, initialValues, fields }) => {

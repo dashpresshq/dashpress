@@ -7,7 +7,6 @@ export const CONFIGURATION_KEYS: Record<
   | "entity_columns_labels"
   | "entity_diction"
   | "entities_to_hide_from_menu"
-  | "entity_table_config"
   | "entity_crud_settings"
   | "entity_validations",
   { requireEntity: boolean; defaultValue: unknown }
@@ -30,10 +29,6 @@ export const CONFIGURATION_KEYS: Record<
       update: true,
       delete: true,
     },
-  },
-  entity_table_config: {
-    requireEntity: true,
-    defaultValue: {}, //{ orderable: true, filterable: true },
   },
   entity_validations: {
     requireEntity: true,

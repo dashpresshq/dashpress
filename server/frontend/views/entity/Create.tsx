@@ -18,6 +18,7 @@ import { IEntityField } from "../../../backend/entities/types";
 import { NAVIGATION_LINKS } from "../../lib/routing/links";
 import {
   useEntityDiction,
+  useEntityFieldLabels,
   useEntitySlug,
   useSelectedEntityColumns,
 } from "../../hooks/entity/entity.config";
@@ -40,6 +41,7 @@ export function EntityCreate() {
   const hiddenCreateColumns = useSelectedEntityColumns(
     "hidden_entity_create_columns"
   );
+  const getEntityFieldLabels = useEntityFieldLabels();
 
   return (
     <AppLayout
@@ -64,6 +66,7 @@ export function EntityCreate() {
             <>TODO Loading</>
           ) : (
             <CreateEntityForm
+            getEntityFieldLabels={getEntityFieldLabels}
               onSubmit={entityDataCreationMutation.mutateAsync}
               fields={(entityScalarFields.data || []).filter(({ name }) =>
                 !(hiddenCreateColumns.data || []).includes(name)
@@ -78,8 +81,9 @@ export function EntityCreate() {
 
 export const CreateEntityForm: React.FC<{
   fields: IEntityField[];
+  getEntityFieldLabels: (name: string) => string,
   onSubmit: (data: Record<string, unknown>) => void;
-}> = ({ onSubmit, fields }) => {
+}> = ({ onSubmit, fields, getEntityFieldLabels }) => {
   return (
     <Form
       onSubmit={onSubmit}
@@ -106,7 +110,7 @@ export const CreateEntityForm: React.FC<{
                   validateFields={[]}
                 >
                   {(renderProps) => (
-                    <FormInput label={name} required={true} {...renderProps} />
+                    <FormInput label={getEntityFieldLabels(name)} required={true} {...renderProps} />
                   )}
                 </Field>
               );

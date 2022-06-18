@@ -21,6 +21,7 @@ export function useAppConfiguration<T>(key: keyof typeof CONFIGURATION_KEYS) {
 export function useEntityConfiguration<T>(key: keyof typeof CONFIGURATION_KEYS, entity: string) {
   return useApi<T>(apiPath(key, entity), {
     enabled: entity !== SLUG_LOADING_VALUE,
+    wipData: key === "entity_columns_labels" ? {userId: "User Name"} : undefined,
     errorMessage: dataNotFoundMessage("Entity Configuration"),
   });
 }

@@ -10,6 +10,7 @@ import { NAVIGATION_LINKS } from "../../lib/routing/links";
 import {
   useEntityCrudSettings,
   useEntityDiction,
+  useEntityFieldLabels,
   useEntitySlug,
   useSelectedEntityColumns,
 } from "../../hooks/entity/entity.config";
@@ -50,6 +51,7 @@ export function EntityTable() {
   const hiddenTableColumns = useSelectedEntityColumns(
     "hidden_entity_table_columns"
   );
+  const getEntityFieldLabels = useEntityFieldLabels();
 
   if (entityCrudSettings.isLoading || entityScalarFields.isLoading || entityCrudSettings.isLoading || hiddenTableColumns.isLoading) {
     return <>TODO Loading</>;
@@ -64,7 +66,7 @@ export function EntityTable() {
   const columns: ITableColumn[] = (entityScalarFields.data || [])
     .filter(({ name }) => !(hiddenTableColumns.data || []).includes(name))
     .map(({ name, isId }) => ({
-      Header: capitalCase(name),
+      Header: getEntityFieldLabels(name),
       accessor: name,
       // filter: {_type: index % 2 === 0 ? "string" : "number"},
       // disableSortBy?: boolean;

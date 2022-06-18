@@ -4,6 +4,7 @@ import {
   SectionBox,
   SectionCenter,
   Spacer,
+  Text,
 } from "@gothicgeeks/design-system";
 import { TitleLang } from "@gothicgeeks/shared";
 import { NAVIGATION_LINKS } from "../../lib/routing/links";
@@ -11,11 +12,14 @@ import {
   useEntityDiction,
   useEntityId,
   useEntitySlug,
+  useSelectedEntityColumns,
 } from "../../hooks/entity/entity.config";
+import { useEntityDataDetails } from "../../hooks/data/data.store";
 import {
-  useEntityDataDetails,
-} from "../../hooks/data/data.store";
-import { EntityActionTypes, useEntityActionMenuItems } from "./Configure/constants";
+  EntityActionTypes,
+  useEntityActionMenuItems,
+} from "./Configure/constants";
+import { useEntityScalarFields } from "../../hooks/entity/entity.store";
 
 export function EntityDetails() {
   const entity = useEntitySlug();
@@ -23,8 +27,14 @@ export function EntityDetails() {
   const id = useEntityId();
   const dataDetails = useEntityDataDetails(entity, id);
   const actionItems = useEntityActionMenuItems([
-    EntityActionTypes.CRUD, EntityActionTypes.Fields
+    EntityActionTypes.CRUD,
+    EntityActionTypes.Fields,
   ]);
+  const entityScalarFields = useEntityScalarFields(entity);
+  const hiddenDetailsColumns = useSelectedEntityColumns(
+    "hidden_entity_details_columns"
+  );
+
   return (
     <AppLayout
       titleNeedsContext={true}
@@ -55,10 +65,25 @@ export function EntityDetails() {
             label: entityDiction.plural,
           }}
         >
-          {dataDetails.isFetching || dataDetails.isIdle ? (
+          {dataDetails.isLoading ||
+          entityScalarFields.isLoading ||
+          hiddenDetailsColumns.isLoading ? (
             <>TODO Loading Data...</>
           ) : (
-            <>{JSON.stringify(dataDetails.data)}</>
+            <>
+              {(entityScalarFields.data || [])
+                .filter(
+                  ({ name }) =>
+                    !(hiddenDetailsColumns.data || []).includes(name)
+                )
+                .map(({ name }) => (
+                  <>
+                    <Text size="5" weight="bold">{name}</Text>
+                    <Text>{dataDetails.data[name]}</Text>
+                    <Spacer />
+                  </>
+                ))}
+            </>
           )}
         </SectionBox>
       </SectionCenter>

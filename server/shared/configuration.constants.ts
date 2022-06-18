@@ -48,6 +48,8 @@ export const CONFIGURATION_KEYS: Record<
 
 /*
 
+// Clone
+
    Override label,
    // defaultValue
 

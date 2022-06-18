@@ -19,10 +19,14 @@ import { NAVIGATION_LINKS } from "../../lib/routing/links";
 import {
   useEntityDiction,
   useEntitySlug,
+  useSelectedEntityColumns,
 } from "../../hooks/entity/entity.config";
 import { useEntityScalarFields } from "../../hooks/entity/entity.store";
 import { useEntityDataCreationMutation } from "../../hooks/data/data.store";
-import { EntityActionTypes, useEntityActionMenuItems } from "./Configure/constants";
+import {
+  EntityActionTypes,
+  useEntityActionMenuItems,
+} from "./Configure/constants";
 
 export function EntityCreate() {
   const entity = useEntitySlug();
@@ -30,9 +34,13 @@ export function EntityCreate() {
   const entityScalarFields = useEntityScalarFields(entity);
   const entityDataCreationMutation = useEntityDataCreationMutation(entity);
   const actionItems = useEntityActionMenuItems([
-    EntityActionTypes.CRUD, EntityActionTypes.Fields
+    EntityActionTypes.CRUD,
+    EntityActionTypes.Fields,
   ]);
-  
+  const hiddenCreateColumns = useSelectedEntityColumns(
+    "hidden_entity_create_columns"
+  );
+
   return (
     <AppLayout
       breadcrumbs={[
@@ -52,10 +60,16 @@ export function EntityCreate() {
             label: entityDiction.plural,
           }}
         >
-          <CreateEntityForm
-            onSubmit={entityDataCreationMutation.mutateAsync}
-            fields={entityScalarFields.data || []}
-          />
+          {hiddenCreateColumns.isLoading || entityScalarFields.isLoading ? (
+            <>TODO Loading</>
+          ) : (
+            <CreateEntityForm
+              onSubmit={entityDataCreationMutation.mutateAsync}
+              fields={(entityScalarFields.data || []).filter(({ name }) =>
+                !(hiddenCreateColumns.data || []).includes(name)
+              )}
+            />
+          )}
         </SectionBox>
       </SectionCenter>
     </AppLayout>

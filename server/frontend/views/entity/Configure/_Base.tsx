@@ -17,14 +17,6 @@ interface IProps {
   menuItem: { link: string; name: string };
 }
 
-// orderable, filterable
-
-//         CreateAble, UpdateAble, Show on Table, Show on Details, List able, order on list
-// Fields
-// A
-// B
-// C
-
 export const BaseEntitySettingsLayout = ({ children, menuItem }: IProps) => {
   const entity = useEntitySlug();
   const entityDiction = useEntityDiction();

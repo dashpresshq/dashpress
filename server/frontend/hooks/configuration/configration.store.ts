@@ -27,8 +27,8 @@ export function useEntityConfiguration<T>(key: keyof typeof CONFIGURATION_KEYS, 
 
 export function useUpsertConfigurationMutation(key: keyof typeof CONFIGURATION_KEYS, entity?: string) {
   const apiMutateOptions = useApiMutateOptions<
-    Record<string, string> | unknown[],
-    Partial<Record<string, string> | unknown[]>
+    Record<string, unknown> | unknown[],
+    Partial<Record<string, unknown> | unknown[]>
   >({
     dataQueryPath: apiPath(key, entity),
     onMutate: MutationHelpers.replace,

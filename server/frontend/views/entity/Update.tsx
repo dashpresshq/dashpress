@@ -21,14 +21,18 @@ import {
   useEntityDiction,
   useEntityId,
   useEntitySlug,
+  useSelectedEntityColumns,
 } from "../../hooks/entity/entity.config";
 import { useEntityScalarFields } from "../../hooks/entity/entity.store";
 import {
   useEntityDataDetails,
   useEntityDataUpdationMutation,
 } from "../../hooks/data/data.store";
-import { EntityActionTypes, useEntityActionMenuItems } from "./Configure/constants";
-
+import {
+  EntityActionTypes,
+  useEntityActionMenuItems,
+} from "./Configure/constants";
+// TODO bounce if .update is not enabled
 export function EntityUpdate() {
   const entity = useEntitySlug();
   const id = useEntityId();
@@ -37,8 +41,13 @@ export function EntityUpdate() {
   const entityDataUpdationMutation = useEntityDataUpdationMutation(entity, id);
   const dataDetails = useEntityDataDetails(entity, id);
   const actionItems = useEntityActionMenuItems([
-    EntityActionTypes.CRUD, EntityActionTypes.Fields
+    EntityActionTypes.CRUD,
+    EntityActionTypes.Fields,
   ]);
+  const hiddenUpdateColumns = useSelectedEntityColumns(
+    "hidden_entity_update_columns"
+  );
+
   return (
     <AppLayout
       titleNeedsContext={true}
@@ -75,7 +84,9 @@ export function EntityUpdate() {
           ) : (
             <EntityUpdateForm
               onSubmit={entityDataUpdationMutation.mutateAsync}
-              fields={entityScalarFields.data || []}
+              fields={(entityScalarFields.data || []).filter(
+                ({ name }) => !(hiddenUpdateColumns.data || []).includes(name)
+              )}
               initialValues={dataDetails.data}
             />
           )}
@@ -92,7 +103,7 @@ export const EntityUpdateForm: React.FC<{
 }> = ({ onSubmit, initialValues, fields }) => {
   return (
     <Form
-    // TODO Send only changed fields
+      // TODO Send only changed fields
       onSubmit={onSubmit}
       initialValues={initialValues}
       render={({ handleSubmit, submitting }) => {

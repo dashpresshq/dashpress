@@ -1,14 +1,17 @@
 import { AppLayout } from "../../_layouts/app";
 import {
   DeleteButton,
+  ErrorAlert,
   SoftButton,
   Stack,
   Table,
 } from "@gothicgeeks/design-system";
 import { NAVIGATION_LINKS } from "../../lib/routing/links";
 import {
+  useEntityCrudSettings,
   useEntityDiction,
   useEntitySlug,
+  useSelectedEntityColumns,
 } from "../../hooks/entity/entity.config";
 import {
   useEntityIdField,
@@ -38,14 +41,29 @@ export function EntityTable() {
   const entityScalarFields = useEntityScalarFields(entity);
   const idField = useEntityIdField(entity);
   const router = useRouter();
+  const entityCrudSettings = useEntityCrudSettings();
   const entityDataDeletionMutation = useEntityDataDeletionMutation(entity);
   const actionItems = useEntityActionMenuItems([
     EntityActionTypes.CRUD,
     EntityActionTypes.Diction,
   ]);
+  const hiddenTableColumns = useSelectedEntityColumns(
+    "hidden_entity_table_columns"
+  );
 
-  const columns: ITableColumn[] = (entityScalarFields.data || []).map(
-    ({ name, isId }) => ({
+  if (entityCrudSettings.isLoading || entityScalarFields.isLoading || entityCrudSettings.isLoading || hiddenTableColumns.isLoading) {
+    return <>TODO Loading</>;
+  }
+
+  const error = entityCrudSettings.error || entityScalarFields.error || entityCrudSettings.error || hiddenTableColumns.error;
+
+  if(error){
+    return <ErrorAlert message={error} />
+  }
+
+  const columns: ITableColumn[] = (entityScalarFields.data || [])
+    .filter(({ name }) => !(hiddenTableColumns.data || []).includes(name))
+    .map(({ name, isId }) => ({
       Header: capitalCase(name),
       accessor: name,
       // filter: {_type: index % 2 === 0 ? "string" : "number"},
@@ -63,45 +81,53 @@ export function EntityTable() {
           </Link>
         );
       },
-    })
-  );
-
-  columns.push({
-    Header: "Actions",
-    accessor: "__actions__",
-    disableSortBy: true,
-    Cell: ({ row }) => {
-      const idValue = row.original[idField.data] as string;
-      return (
-        <Stack spacing={4} align="center">
-          <div>
-            <SoftButton
-              to={NAVIGATION_LINKS.ENTITY.DETAILS(entity, idValue)}
-              label="Details"
-              color="primary"
-              justIcon={true}
-              icon="eye"
-            />
-          </div>
-          <div>
-            <SoftButton
-              to={NAVIGATION_LINKS.ENTITY.UPDATE(entity, idValue)}
-              label="Edit"
-              icon="edit"
-              color="theme"
-              justIcon={true}
-              onClick={() => {}}
-            />
-          </div>
-
-          <div>
-            <DeleteButton
-              onDelete={() => entityDataDeletionMutation.mutate(idValue)}
-              isMakingDeleteRequest={entityDataDeletionMutation.isLoading}
-              shouldConfirmAlert={true}
-            />
-          </div>
-          {/* <div>
+    }));
+  if (
+    entityCrudSettings.data?.details ||
+    entityCrudSettings.data?.delete ||
+    entityCrudSettings.data?.update
+  ) {
+    columns.push({
+      Header: "Actions",
+      accessor: "__actions__",
+      disableSortBy: true,
+      Cell: ({ row }) => {
+        const idValue = row.original[idField.data] as string;
+        return (
+          <Stack spacing={4} align="center">
+            {entityCrudSettings.data.details && (
+              <div>
+                <SoftButton
+                  to={NAVIGATION_LINKS.ENTITY.DETAILS(entity, idValue)}
+                  label="Details"
+                  color="primary"
+                  justIcon={true}
+                  icon="eye"
+                />
+              </div>
+            )}
+            {entityCrudSettings.data.update && (
+              <div>
+                <SoftButton
+                  to={NAVIGATION_LINKS.ENTITY.UPDATE(entity, idValue)}
+                  label="Edit"
+                  icon="edit"
+                  color="theme"
+                  justIcon={true}
+                  onClick={() => {}}
+                />
+              </div>
+            )}
+            {entityCrudSettings.data.delete && (
+              <div>
+                <DeleteButton
+                  onDelete={() => entityDataDeletionMutation.mutate(idValue)}
+                  isMakingDeleteRequest={entityDataDeletionMutation.isLoading}
+                  shouldConfirmAlert={true}
+                />
+              </div>
+            )}
+            {/* <div>
           <SoftButton
             to={`/edit/foo`}
             pushLeft={true}
@@ -111,18 +137,15 @@ export function EntityTable() {
           />
           <Spacer />
         </div> */}
-          {/* // inline -edit // related entities */}
-        </Stack>
-      );
-    },
-  });
+            {/* Clone */}
+            {/* // inline -edit // related entities */}
+          </Stack>
+        );
+      },
+    });
+  }
 
-  const menuItems = [
-    {
-      label: `Add New ${entityDiction.singular}`,
-      IconComponent: Plus,
-      onClick: () => router.push(NAVIGATION_LINKS.ENTITY.CREATE(entity)),
-    },
+  let menuItems = [
     {
       label: `Download as CSV`,
       IconComponent: Download,
@@ -134,6 +157,17 @@ export function EntityTable() {
       onClick: () => console.log("TODO"),
     },
   ];
+
+  if (entityCrudSettings.data?.create) {
+    menuItems = [
+      {
+        label: `Add New ${entityDiction.singular}`,
+        IconComponent: Plus,
+        onClick: () => router.push(NAVIGATION_LINKS.ENTITY.CREATE(entity)),
+      },
+      ...menuItems,
+    ];
+  }
 
   if (entity === SLUG_LOADING_VALUE) {
     return "TODO Loading Indicator Here";

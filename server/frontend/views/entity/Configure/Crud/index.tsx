@@ -57,6 +57,11 @@ export const EntityCrudSettings = () => {
     entity
   );
 
+  const upsertCrudSettingsMutation = useUpsertConfigurationMutation(
+    "entity_crud_settings",
+    entity
+  );
+
   const [entityCrudSettingsState, setEntityCrudSettingsState] =
     useState<IEntityCrudSettings>({
       create: true,
@@ -74,10 +79,12 @@ export const EntityCrudSettings = () => {
   }, [entityCrudSettings.data]);
 
   const toggleCrudSettings = (field: keyof IEntityCrudSettings) => {
-    setEntityCrudSettingsState({
+    const newState = {
       ...entityCrudSettingsState,
       [field]: !entityCrudSettingsState[field],
-    });
+    };
+    setEntityCrudSettingsState(newState);
+    upsertCrudSettingsMutation.mutateAsync(newState);
   };
 
   return (
@@ -104,7 +111,9 @@ export const EntityCrudSettings = () => {
                     entityFields={entityScalarFields.data || []}
                     isLoading={hiddenCreateColumns.isLoading}
                     hiddenColumns={hiddenCreateColumns.data || []}
-                    onSubmit={(data) => upsertCreateColumnsMutation.mutateAsync(data)}
+                    onSubmit={(data) =>
+                      upsertCreateColumnsMutation.mutateAsync(data)
+                    }
                     onToggle={() => toggleCrudSettings("create")}
                     enabled={entityCrudSettingsState.create}
                     labels={["Hide Create Button", "Show Create Button"]}
@@ -120,7 +129,9 @@ export const EntityCrudSettings = () => {
                     isLoading={hiddenUpdateColumns.isLoading}
                     hiddenColumns={hiddenUpdateColumns.data || []}
                     onToggle={() => toggleCrudSettings("update")}
-                    onSubmit={(data) => upsertUpdateColumnsMutation.mutateAsync(data)}
+                    onSubmit={(data) =>
+                      upsertUpdateColumnsMutation.mutateAsync(data)
+                    }
                     enabled={entityCrudSettingsState.update}
                     labels={["Hide Edit Button", "Show Edit Button"]}
                   />
@@ -135,7 +146,9 @@ export const EntityCrudSettings = () => {
                     isLoading={hiddenDetailsColumns.isLoading}
                     hiddenColumns={hiddenDetailsColumns.data || []}
                     onToggle={() => toggleCrudSettings("details")}
-                    onSubmit={(data) => upsertDetailsColumnsMutation.mutateAsync(data)}
+                    onSubmit={(data) =>
+                      upsertDetailsColumnsMutation.mutateAsync(data)
+                    }
                     enabled={entityCrudSettingsState.details}
                     labels={["Hide Details Button", "Show Details Button"]}
                   />
@@ -150,7 +163,9 @@ export const EntityCrudSettings = () => {
                     isLoading={hiddenTableColumns.isLoading}
                     onToggle={() => toggleCrudSettings("table")}
                     hiddenColumns={hiddenTableColumns.data || []}
-                    onSubmit={(data) => upsertTableColumnsMutation.mutateAsync(data)}
+                    onSubmit={(data) =>
+                      upsertTableColumnsMutation.mutateAsync(data)
+                    }
                     enabled={entityCrudSettingsState.table}
                     labels={["Hide In Table List", "Show In Table List"]}
                   />
@@ -166,7 +181,7 @@ export const EntityCrudSettings = () => {
                     onToggle={() => toggleCrudSettings("delete")}
                     hiddenColumns={[]}
                     onSubmit={async () => noop()}
-                    enabled={entityCrudSettings.data?.delete}
+                    enabled={entityCrudSettingsState.delete}
                     labels={["Hide Delete Button", "Show Delete Button"]}
                   />
                 ),

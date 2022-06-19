@@ -63,19 +63,34 @@ export function useEntityFieldTypes() {
   }
 
   return Object.fromEntries(
-    (entityScalarFields.data || []).map(({ name, type }) => {
-      let entityFieldType = entityFieldTypesMap.data[name];
-      if (!entityFieldType) {
-        entityFieldType = PRISMA_TYPE_TO_ENTITY_TYPES_MAP[type];
-      }
-      if (!entityFieldType) {
-        // TODO deal with enums
-        entityFieldType = "text";
-      }
-      return [name, entityFieldType];
+    (entityScalarFields.data || []).map(({ name, type, kind }) => {
+      return [name, getEntityType(entityFieldTypesMap.data, name, kind, type)];
     })
   );
 }
+
+const getEntityType = (
+  entityFieldTypeMap: Record<string, keyof typeof ENTITY_TYPES_SELECTION_BAG>,
+  name: string,
+  kind: IEntityField["kind"],
+  type: IEntityField["type"]
+): keyof typeof ENTITY_TYPES_SELECTION_BAG => {
+  const preSelectedType = entityFieldTypeMap[name];
+  if (preSelectedType) {
+    return preSelectedType;
+  }
+  // Start guessing
+  if (kind === "enum") {
+    return "selection";
+  }
+
+  const entityFieldType = PRISMA_TYPE_TO_ENTITY_TYPES_MAP[type];
+
+  if (entityFieldType) {
+    return entityFieldType;
+  }
+  return "text";
+};
 
 const PRISMA_TYPE_TO_ENTITY_TYPES_MAP: Record<
   IEntityField["type"],

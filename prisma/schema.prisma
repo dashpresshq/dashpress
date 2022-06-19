@@ -1,5 +1,15 @@
 generator custom_generator {
-  provider = "cd ./generator && ts-node bin.ts"
+  provider = "cd ./prisma/generator && ts-node bin.ts"
+}
+
+generator json_server {
+  provider       = "prisma-json-server-generator"
+  outputFileName = "db.json"
+}
+
+generator class_validator {
+  provider   = "prisma-class-validator-generator"
+  output     = "./generated-models"
 }
 
 datasource db {

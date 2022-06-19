@@ -1,4 +1,8 @@
-import { FormInput, FormTextArea } from "@gothicgeeks/design-system";
+import {
+  FormInput,
+  FormNumberInput,
+  FormTextArea,
+} from "@gothicgeeks/design-system";
 import { ISharedFormInput } from "@gothicgeeks/design-system/dist/components/Form/_types";
 import { IEntityField } from "../../../backend/entities/types";
 import { ENTITY_TYPES_SELECTION_BAG } from "../../../shared/validations.constants";
@@ -24,6 +28,7 @@ export const RenderFormInput = ({
   switch (type) {
     case "email":
     case "password":
+    case "url":
       return (
         <FormInput
           label={label}
@@ -32,6 +37,10 @@ export const RenderFormInput = ({
           {...renderProps}
         />
       );
+    case "number":
+      return (
+        <FormNumberInput label={label} required={required} {...renderProps} />
+      );
 
     case "textarea":
       return (
@@ -39,16 +48,5 @@ export const RenderFormInput = ({
       );
   }
 
-  // if(type === "number"){
-  //   return <FormNumberInput label={label} type={type} required={required} {...renderProps} />;
-  // }
-
-  return (
-    <FormInput
-      label={label}
-      type={type as any}
-      required={required}
-      {...renderProps}
-    />
-  );
+  return <FormInput label={label} required={required} {...renderProps} />;
 };

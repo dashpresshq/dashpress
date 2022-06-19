@@ -32,7 +32,7 @@ export const FieldsTypeForm: React.FC<{
                 >
                   {(renderProps) => (
                     <FormSelect
-                      label={getEntityFieldLabels(name)}
+                      label={"Type for `" + getEntityFieldLabels(name) + "`"}
                       selectData={Object.keys(ENTITY_TYPES_SELECTION_BAG).map(
                         (type) => ({ label: type, value: type })
                       )}

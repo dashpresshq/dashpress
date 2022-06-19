@@ -18,10 +18,10 @@ export const ENTITY_TYPES_SELECTION_BAG: Record<
   password: {},
   text: {},
   textarea: {},
+  number: {},
+  url: {},
 
   richtext: {},
-  url: {},
-  number: {},
   'datetime-local': {},
   image: {},
   color: {},

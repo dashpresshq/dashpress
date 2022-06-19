@@ -17,6 +17,8 @@
   },
   "dependencies": {
     "isomorphic-fetch": "^3.0.0",
-    "node-fetch": "^3.2.4"
+    "node-fetch": "^3.2.4",
+    "prisma-class-validator-generator": "^0.1.0",
+    "prisma-json-server-generator": "^0.1.2"
   }
 }

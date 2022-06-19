@@ -31,7 +31,7 @@ import {
                     validate={composeValidators(minLength(2), maxLength(64))}
                     validateFields={[]}
                   >
-                    {(renderProps) => <FormInput label={name} description="Foo Desc" {...renderProps} />}
+                    {(renderProps) => <FormInput label={name} {...renderProps} />}
                   </Field>
                 );
               })}

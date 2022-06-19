@@ -34,7 +34,9 @@ export const RenderFormInput = ({
       );
 
     case "textarea":
-      return <FormTextArea {...renderProps} required={required} />;
+      return (
+        <FormTextArea {...renderProps} label={label} required={required} />
+      );
   }
 
   // if(type === "number"){

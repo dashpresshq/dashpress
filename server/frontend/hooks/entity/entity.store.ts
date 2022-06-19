@@ -34,7 +34,7 @@ export const useEntityScalarFields = (entity: string) => {
     errorMessage: dataNotFoundMessage("Entity Scalar Fields"),
     enabled: entity !== "loading",
     selector: (data: IEntityField[]) => {
-      return data.filter(({ kind }) => kind === "scalar");
+      return data.filter(({ kind }) => kind === "scalar" || kind === 'enum');
     },
   });
 };

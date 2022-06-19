@@ -1,31 +1,10 @@
-export interface IJsonSchemaEnum {
-  name: string;
-  dbName: string | null;
-  values: {
-    name: string;
-    dbName: string | null;
-  }[];
-}
-
-export interface IJsonSchemaModel {
-  name: string;
-  dbName: string[];
-  fields: IEntityField[];
-}
-
 export interface IEntityField {
   name: string;
-  kind: "scalar" | "object"
+  kind: "scalar" | "object" | "enum";
   isRequired: boolean;
   isUnique: boolean;
   isId: true;
   hasDefaultValue: boolean;
   type: "String" | "Int" | "Boolean" | "DateTime";
   default?: string | { name: string; args: never[] };
-}
-
-export interface IJsonSchema {
-  enums: IJsonSchemaEnum[];
-  models: IJsonSchemaModel[];
-  types: never[];
 }

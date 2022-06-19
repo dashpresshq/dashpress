@@ -23,11 +23,13 @@ export const ENTITY_TYPES_SELECTION_BAG: Record<
   url: {},
   number: {},
   'datetime-local': {},
-  selection: {},
-  reference: {},
-  boolean: {},
   image: {},
   color: {},
+
+// Needs context
+  boolean: {}, // useColors, labels
+  selection: {}, // usecolors, selections
+  reference: {},
 };
 
 

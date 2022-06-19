@@ -1,4 +1,4 @@
-import { FormButton, FormInput, FormSelect } from "@gothicgeeks/design-system";
+import { FormButton, FormSelect } from "@gothicgeeks/design-system";
 import { IEntityField } from "../../../../../backend/entities/types";
 import { Form, Field } from "react-final-form";
 import {
@@ -50,42 +50,3 @@ export const FieldsTypeForm: React.FC<{
     />
   );
 };
-
- // entity_columns_labels: { requireEntity: true, defaultValue: {
-  //   label: string,
-  //   type: string,
-  //   validations:[
-  //     {
-  //       type: "required",
-  //     },
-  //     {
-  //       type: "postiveNumber",
-  //     },
-  //     {
-  //     },
-  //     {
-  //       type: "matchOtherField",
-  //       value: ""
-  //     },
-  //     {
-  //       type: "unique",
-  //     },
-  //     {
-  //       _type: "requiredIf",
-  //       field: "",
-  //     },
-// alphanumeric: {},
-  //     {
-  //     _type: "regex",
-  //     value: "\\"
-  //   },
-  //   {
-  //     _type: "min",
-  //     value: number
-  //   },
-  //   {
-  //     _type: "max",
-  //     value: number
-  //   }
-  // ]
-  // } }, // {key: label}

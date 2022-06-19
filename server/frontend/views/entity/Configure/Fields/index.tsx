@@ -75,6 +75,8 @@ export const EntityFieldsSettings = () => {
               },
               {
                 content: (
+                  // A message here that
+                  // It is un-evitable that this will be touched but try to have a good schema to try to not touch here as much as possible
                   <FieldsTypeForm
                     initialValues={entityFieldTypes}
                     fields={entityScalarFields.data || []}

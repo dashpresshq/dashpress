@@ -21,6 +21,8 @@ import {
   useEntityActionMenuItems,
 } from "./Configure/constants";
 import { useEntityScalarFields } from "../../hooks/entity/entity.store";
+import { IEntityField } from "../../../backend/entities/types";
+import { fitlerOutHiddenScalarColumns } from "./utils";
 
 export function EntityDetails() {
   const entity = useEntitySlug();
@@ -73,18 +75,18 @@ export function EntityDetails() {
             <>TODO Loading Data...</>
           ) : (
             <>
-              {(entityScalarFields.data || [])
-                .filter(
-                  ({ name }) =>
-                    !(hiddenDetailsColumns.data || []).includes(name)
-                )
-                .map(({ name }) => (
-                  <>
-                    <Text size="5" weight="bold">{getEntityFieldLabels(name)}</Text>
-                    <Text>{dataDetails.data[name]}</Text>
-                    <Spacer />
-                  </>
-                ))}
+              {fitlerOutHiddenScalarColumns(
+                entityScalarFields,
+                hiddenDetailsColumns
+              ).map(({ name }) => (
+                <>
+                  <Text size="5" weight="bold">
+                    {getEntityFieldLabels(name)}
+                  </Text>
+                  <Text>{dataDetails.data[name]}</Text>
+                  <Spacer />
+                </>
+              ))}
             </>
           )}
         </SectionBox>
@@ -92,3 +94,4 @@ export function EntityDetails() {
     </AppLayout>
   );
 }
+

@@ -6,7 +6,6 @@ export const ENTITY_TYPES_SELECTION_BAG: Record<
   | "richtext"
   | "url"
   | "number"
-  | "alphanumeric"
   | "selection"
   | "reference"
   | "boolean"
@@ -19,11 +18,11 @@ export const ENTITY_TYPES_SELECTION_BAG: Record<
   password: {},
   text: {},
   textarea: {},
+
   richtext: {},
   url: {},
   number: {},
   'datetime-local': {},
-  alphanumeric: {},
   selection: {},
   reference: {},
   boolean: {},

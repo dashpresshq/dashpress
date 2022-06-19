@@ -1,38 +1,33 @@
-import { AppLayout } from "../../_layouts/app";
+import { AppLayout } from "../../../_layouts/app";
 import {
   ErrorAlert,
-  FormButton,
-  FormInput,
   SectionBox,
   SectionCenter,
   Spacer,
 } from "@gothicgeeks/design-system";
-import {
-  ButtonLang,
-  composeValidators,
-  maxLength,
-  required,
-  TitleLang,
-} from "@gothicgeeks/shared";
-import { Form, Field } from "react-final-form";
-import { IEntityField } from "../../../backend/entities/types";
-import { NAVIGATION_LINKS } from "../../lib/routing/links";
+import { TitleLang } from "@gothicgeeks/shared";
+import { NAVIGATION_LINKS } from "../../../lib/routing/links";
 import {
   useEntityDiction,
   useEntityFieldLabels,
+  useEntityFieldTypes,
   useEntityId,
   useEntitySlug,
   useSelectedEntityColumns,
-} from "../../hooks/entity/entity.config";
-import { useEntityScalarFields } from "../../hooks/entity/entity.store";
+} from "../../../hooks/entity/entity.config";
+import { useEntityScalarFields } from "../../../hooks/entity/entity.store";
 import {
   useEntityDataDetails,
   useEntityDataUpdationMutation,
-} from "../../hooks/data/data.store";
+} from "../../../hooks/data/data.store";
 import {
   EntityActionTypes,
   useEntityActionMenuItems,
-} from "./Configure/constants";
+} from "../Configure/constants";
+import { useEntityConfiguration } from "../../../hooks/configuration/configration.store";
+import { UpdateEntityForm } from "./UpdateEntity.form";
+import { fitlerOutHiddenScalarColumns } from "../utils";
+
 // TODO bounce if .update is not enabled
 export function EntityUpdate() {
   const entity = useEntitySlug();
@@ -45,10 +40,22 @@ export function EntityUpdate() {
     EntityActionTypes.CRUD,
     EntityActionTypes.Fields,
   ]);
+  const entityFieldTypesMap = useEntityConfiguration<Record<string, string>>(
+    "entity_columns_types",
+    entity
+  );
+  const entityFieldTypes = useEntityFieldTypes();
+
   const hiddenUpdateColumns = useSelectedEntityColumns(
     "hidden_entity_update_columns"
   );
   const getEntityFieldLabels = useEntityFieldLabels();
+
+  const error =
+    dataDetails.error ||
+    hiddenUpdateColumns.error ||
+    entityFieldTypesMap.error ||
+    entityScalarFields.error;
 
   return (
     <AppLayout
@@ -67,10 +74,10 @@ export function EntityUpdate() {
       actionItems={actionItems}
     >
       <SectionCenter>
-        {dataDetails.error ? (
+        {error ? (
           <>
             <Spacer />
-            <ErrorAlert message={dataDetails.error} />
+            <ErrorAlert message={error} />
             <Spacer />
           </>
         ) : null}
@@ -81,15 +88,17 @@ export function EntityUpdate() {
             label: entityDiction.singular,
           }}
         >
-          {dataDetails.isLoading ? (
+          {dataDetails.isLoading ||
+          entityFieldTypesMap.isLoading ||
+          hiddenUpdateColumns.isLoading ||
+          entityScalarFields.isLoading ? (
             <>TODO Loading Data...</>
           ) : (
             <UpdateEntityForm
               getEntityFieldLabels={getEntityFieldLabels}
+              entityFieldTypes={entityFieldTypes}
               onSubmit={entityDataUpdationMutation.mutateAsync}
-              fields={(entityScalarFields.data || []).filter(
-                ({ name }) => !(hiddenUpdateColumns.data || []).includes(name)
-              )}
+              fields={fitlerOutHiddenScalarColumns(entityScalarFields, hiddenUpdateColumns)}
               initialValues={dataDetails.data}
             />
           )}
@@ -98,42 +107,3 @@ export function EntityUpdate() {
     </AppLayout>
   );
 }
-
-export const UpdateEntityForm: React.FC<{
-  fields: IEntityField[];
-  getEntityFieldLabels: (name: string) => string;
-  initialValues?: Record<string, unknown>;
-  onSubmit: (data: Record<string, unknown>) => void;
-}> = ({ onSubmit, initialValues, fields }) => {
-  return (
-    <Form
-      // TODO Send only changed fields
-      onSubmit={onSubmit}
-      initialValues={initialValues}
-      render={({ handleSubmit, submitting }) => {
-        return (
-          <form onSubmit={handleSubmit}>
-            {fields.map(({ name }) => {
-              return (
-                <Field
-                  key={name}
-                  name={name}
-                  // validate={composeValidators(required, maxLength(32))}
-                  validateFields={[]}
-                >
-                  {(renderProps) => (
-                    <FormInput label={name} required={true} {...renderProps} />
-                  )}
-                </Field>
-              );
-            })}
-            <FormButton
-              text={ButtonLang.createOrUpdate(initialValues)}
-              isMakingRequest={submitting}
-            />
-          </form>
-        );
-      }}
-    />
-  );
-};

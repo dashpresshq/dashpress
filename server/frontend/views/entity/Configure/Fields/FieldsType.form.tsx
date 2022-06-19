@@ -15,7 +15,6 @@ export const FieldsTypeForm: React.FC<{
   onSubmit: (data: Record<string, unknown>) => void;
   getEntityFieldLabels: (fieldName: string) => string,
 }> = ({ onSubmit, initialValues, fields, getEntityFieldLabels }) => {
-  // Will have do decipher the default types here
   return (
     <Form
       onSubmit={onSubmit}
@@ -75,6 +74,7 @@ export const FieldsTypeForm: React.FC<{
   //       _type: "requiredIf",
   //       field: "",
   //     },
+// alphanumeric: {},
   //     {
   //     _type: "regex",
   //     value: "\\"

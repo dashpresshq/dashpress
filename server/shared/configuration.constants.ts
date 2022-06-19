@@ -34,7 +34,7 @@ export const CONFIGURATION_KEYS: Record<
   },
   entity_validations: {
     requireEntity: true,
-    defaultValue: {}, // {key: []} //  type,
+    defaultValue: {}, // {key: []}
   },
   relations_list_fields: { requireEntity: true, defaultValue: [] },
 

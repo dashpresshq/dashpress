@@ -31,6 +31,7 @@ import {
   EntityActionTypes,
   useEntityActionMenuItems,
 } from "./Configure/constants";
+import { fitlerOutHiddenScalarColumns } from "./utils";
 // import Offcanvas from 'react-bootstrap/Offcanvas'
 
 // TODO sync table to url
@@ -52,37 +53,47 @@ export function EntityTable() {
   );
   const getEntityFieldLabels = useEntityFieldLabels();
 
-  if (entityCrudSettings.isLoading || entityScalarFields.isLoading || entityCrudSettings.isLoading || hiddenTableColumns.isLoading) {
+  if (
+    entityCrudSettings.isLoading ||
+    entityScalarFields.isLoading ||
+    entityCrudSettings.isLoading ||
+    hiddenTableColumns.isLoading
+  ) {
     return <>TODO Loading</>;
   }
 
-  const error = entityCrudSettings.error || entityScalarFields.error || entityCrudSettings.error || hiddenTableColumns.error;
+  const error =
+    entityCrudSettings.error ||
+    entityScalarFields.error ||
+    entityCrudSettings.error ||
+    hiddenTableColumns.error;
 
-  if(error){
-    return <ErrorAlert message={error} />
+  if (error) {
+    return <ErrorAlert message={error} />;
   }
 
-  const columns: ITableColumn[] = (entityScalarFields.data || [])
-    .filter(({ name }) => !(hiddenTableColumns.data || []).includes(name))
-    .map(({ name, isId }) => ({
-      Header: getEntityFieldLabels(name),
-      accessor: name,
-      // filter: {_type: index % 2 === 0 ? "string" : "number"},
-      // disableSortBy?: boolean;
-      Cell: ({ value }) => {
-        if (!isId) {
-          return <>{value as string}</>;
-        }
-        return (
-          <Link
-            href={NAVIGATION_LINKS.ENTITY.DETAILS(entity, value as string)}
-            passHref={true}
-          >
-            {value as string}
-          </Link>
-        );
-      },
-    }));
+  const columns: ITableColumn[] = fitlerOutHiddenScalarColumns(
+    entityScalarFields,
+    hiddenTableColumns
+  ).map(({ name, isId }) => ({
+    Header: getEntityFieldLabels(name),
+    accessor: name,
+    // filter: {_type: index % 2 === 0 ? "string" : "number"},
+    // disableSortBy?: boolean;
+    Cell: ({ value }) => {
+      if (!isId) {
+        return <>{value as string}</>;
+      }
+      return (
+        <Link
+          href={NAVIGATION_LINKS.ENTITY.DETAILS(entity, value as string)}
+          passHref={true}
+        >
+          {value as string}
+        </Link>
+      );
+    },
+  }));
   if (
     entityCrudSettings.data?.details ||
     entityCrudSettings.data?.delete ||

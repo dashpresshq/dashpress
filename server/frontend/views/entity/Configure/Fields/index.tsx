@@ -26,7 +26,7 @@ export const EntityFieldsSettings = () => {
     entity
   );
 
-    const entityFieldTypes = useEntityFieldTypes();
+  const entityFieldTypes = useEntityFieldTypes();
 
   const upsertEntityFieldsMapMutation = useUpsertConfigurationMutation(
     "entity_columns_labels",

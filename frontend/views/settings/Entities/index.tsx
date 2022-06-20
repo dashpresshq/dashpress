@@ -3,6 +3,7 @@ import {
   useAppConfiguration,
   useUpsertConfigurationMutation,
 } from "../../../hooks/configuration/configration.store";
+import { useEntityDictionPlurals } from "../../../hooks/entity/entity.queries";
 import {
   ENTITIES_MENU_ENDPOINT,
   useEntitiesList,
@@ -22,6 +23,8 @@ export const EntitiesSettings = () => {
     { otherEndpoints: [ENTITIES_MENU_ENDPOINT] }
   );
 
+  const entitiesDictionPlurals = useEntityDictionPlurals(entitiesList.data || [], 'value');
+
   return (
     <BaseSettingsLayout
       menuItem={{
@@ -30,7 +33,7 @@ export const EntitiesSettings = () => {
       }}
     >
       <ErrorAlert message={entitiesList.error} />
-      <SectionBox title="Fields Settings">
+      <SectionBox title="Entities Settings">
         <Tabs
           // TODO add default tab
           contents={[
@@ -40,9 +43,7 @@ export const EntitiesSettings = () => {
                   description="Toggle the Entitites that you want on the menu"
                   isLoading={entitiesList.isLoading || entitiesToHide.isLoading}
                   allList={entitiesList.data || []}
-                  getEntityFieldLabels={(input) => {
-                    return input;
-                  }}
+                  getEntityFieldLabels={entitiesDictionPlurals}
                   hiddenList={entitiesToHide.data || []}
                   onSubmit={(data) =>
                     upsertHideFromMenuMutation.mutateAsync(data)

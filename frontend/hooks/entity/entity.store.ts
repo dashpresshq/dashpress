@@ -2,13 +2,15 @@ import { dataNotFoundMessage, useApi } from "@gothicgeeks/shared";
 import { IEntityField } from "../../../backend/entities/types";
 import { ILabelValue } from "../../../types";
 import { INavigationItem } from "../../_layouts/types";
+import { useEntityDictionPlurals } from "./entity.queries";
 
-const ENTITY_FIELDS_ENDPOINT = (entity: string) => `/api/entities/${entity}/fields`;
+const ENTITY_FIELDS_ENDPOINT = (entity: string) =>
+  `/api/entities/${entity}/fields`;
 
-export const ENTITIES_MENU_ENDPOINT = '/api/entities/menu';
+export const ENTITIES_MENU_ENDPOINT = "/api/entities/menu";
 
 export const useEntitiesMenuItems = () => {
-  return useApi<INavigationItem[]>(ENTITIES_MENU_ENDPOINT, {
+  const menuItems = useApi<INavigationItem[]>(ENTITIES_MENU_ENDPOINT, {
     errorMessage: dataNotFoundMessage("Entities menu items"),
     selector: (input: ILabelValue[]) =>
       input.map(({ label, value }) => ({
@@ -16,6 +18,19 @@ export const useEntitiesMenuItems = () => {
         link: `/admin/${value}`,
       })),
   });
+
+  const entitiesDictionPlurals = useEntityDictionPlurals(
+    menuItems.data || [],
+    "title"
+  );
+
+  return {
+    ...menuItems,
+    data: (menuItems.data || []).map(({ title, ...rest }) => ({
+      ...rest,
+      title: entitiesDictionPlurals(title),
+    })),
+  };
 };
 
 export const useEntitiesList = () => {
@@ -36,7 +51,7 @@ export const useEntityScalarFields = (entity: string) => {
     errorMessage: dataNotFoundMessage("Entity Scalar Fields"),
     enabled: entity !== "loading",
     selector: (data: IEntityField[]) => {
-      return data.filter(({ kind }) => kind === "scalar" || kind === 'enum');
+      return data.filter(({ kind }) => kind === "scalar" || kind === "enum");
     },
   });
 };
@@ -47,7 +62,7 @@ export const useEntityIdField = (entity: string) => {
     enabled: entity !== "loading",
     selector: (data: IEntityField[]) => {
       // TODO validate data to have an id
-      return data.find(({ isId}) => isId)?.name || "id";
+      return data.find(({ isId }) => isId)?.name || "id";
     },
   });
 };

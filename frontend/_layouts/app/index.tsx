@@ -12,6 +12,7 @@ import { HardDrive, Icon } from "react-feather";
 import { useEntitiesMenuItems } from "../../hooks/entity/entity.store";
 import Head from "next/head";
 import { useSiteConfig } from "../../hooks/app/site.config";
+import { NAVIGATION_LINKS } from "../../lib/routing/links";
 
 interface IProps {
   children: ReactNode;
@@ -31,6 +32,7 @@ export const AppLayout = ({
   actionItems = [],
 }: IProps) => {
   const entitiesMenuItems = useEntitiesMenuItems();
+
   const siteConfig = useSiteConfig();
 
   const homedBreadcrumb = [{ label: "Home", value: "/" }, ...breadcrumbs];
@@ -55,13 +57,11 @@ export const AppLayout = ({
           description: "Your models",
           icon: HardDrive,
           view: <>Demo View</>,
-          link: "Dashboards",
         },
         {
           title: "Settings",
           icon: HardDrive,
-          link: "/settings",
-          view: <>TODO</>
+          link: NAVIGATION_LINKS.SETTINGS.DEFAULT,
         },
       ]}
     >

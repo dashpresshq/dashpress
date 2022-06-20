@@ -17,7 +17,7 @@ interface IProps {
   hiddenColumns: string[];
   onSubmit: (columnsSelection: string[]) => Promise<void>;
   enabled: boolean;
-  getEntityFieldLabels: (fieldName: string) => string,
+  getEntityFieldLabels: (fieldName: string) => string;
   description: string;
   labels: [string, string];
 }
@@ -33,7 +33,7 @@ export const SelectionTab: React.FC<IProps> = ({
   onSubmit,
   hiddenColumns,
 }) => {
-  const { toggleSelection, clearAll, currentPageSelection, selectMutiple } =
+  const { toggleSelection, currentPageSelection, selectMutiple } =
     useStringSelections();
 
   const [touched, setTouched] = useState(false);
@@ -65,7 +65,9 @@ export const SelectionTab: React.FC<IProps> = ({
       {enabled && entityFields.length > 0 && (
         <>
           <RenderList
+            isLoading={isLoading}
             items={entityFields}
+            singular="Field"
             render={(menuItem) => {
               const isHidden = currentPageSelection.includes(menuItem.name);
 

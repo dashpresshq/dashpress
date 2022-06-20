@@ -1,4 +1,4 @@
-import { capitalCase } from "change-case";
+
 import { useEntityConfiguration } from "../configuration/configration.store";
 import { CONFIGURATION_KEYS } from "../../../shared/configuration.constants";
 import { useRouteParam } from "@gothicgeeks/shared";
@@ -6,6 +6,7 @@ import { useCallback } from "react";
 import { useEntityScalarFields } from "./entity.store";
 import { ENTITY_TYPES_SELECTION_BAG } from "../../../shared/validations.constants";
 import { IEntityField } from "../../../backend/entities/types";
+import { userFriendlyCase } from "../../lib/strings";
 
 export function useEntitySlug() {
   return useRouteParam("entity");
@@ -22,8 +23,8 @@ export function useEntityDiction() {
     singular: string;
   }>("entity_diction", entity);
   return {
-    singular: entityDiction.data?.singular || capitalCase(entity),
-    plural: entityDiction.data?.plural || capitalCase(entity),
+    singular: entityDiction.data?.singular || userFriendlyCase(entity),
+    plural: entityDiction.data?.plural || userFriendlyCase(entity),
   };
 }
 
@@ -37,9 +38,9 @@ export function useEntityFieldLabels() {
   return useCallback(
     (fieldName: string): string => {
       if (entityFieldLabelsMap.error || entityFieldLabelsMap.isLoading) {
-        return capitalCase(fieldName);
+        return userFriendlyCase(fieldName);
       }
-      return entityFieldLabelsMap.data[fieldName] || capitalCase(fieldName);
+      return entityFieldLabelsMap.data[fieldName] || userFriendlyCase(fieldName);
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [entityFieldLabelsMap.isLoading]

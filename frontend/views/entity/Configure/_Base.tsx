@@ -39,22 +39,18 @@ export const BaseEntitySettingsLayout = ({ children, menuItem }: IProps) => {
               {
                 link: NAVIGATION_LINKS.ENTITY.CONFIG.DICTION(entity),
                 name: "Diction",
-                disabled: false,
               },
               {
                 link: NAVIGATION_LINKS.ENTITY.CONFIG.CRUD(entity),
                 name: "CRUD",
-                disabled: false,
               },
               {
                 link: NAVIGATION_LINKS.ENTITY.CONFIG.FIELDS(entity),
                 name: "Fields",
-                disabled: false,
               },
               {
                 link: NAVIGATION_LINKS.ENTITY.CONFIG.ACTIONS(entity),
                 name: "Actions",
-                disabled: false,
               },
               // Computed Table fields
               // Computed Details fields

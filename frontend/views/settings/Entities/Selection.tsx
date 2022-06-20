@@ -46,6 +46,7 @@ export const EntitiesSelection: React.FC<IProps> = ({
         <>
           <RenderList
             items={allList.map(({ label }) => ({ name: label }))}
+            singular="Entity"
             isLoading={isLoading}
             render={(menuItem) => {
               const isHidden = currentPageSelection.includes(menuItem.name);

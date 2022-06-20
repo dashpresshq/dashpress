@@ -26,12 +26,10 @@ export const BaseSettingsLayout = ({ children, menuItem }: IProps) => {
               {
                 link: NAVIGATION_LINKS.SETTINGS.ENTITIES,
                 name: "Entities",
-                disabled: false,
               },
               {
                 link: "TODO",
                 name: "Other Settings",
-                disabled: false,
               },
             ]}
             currentMenuItem={menuItem.link}

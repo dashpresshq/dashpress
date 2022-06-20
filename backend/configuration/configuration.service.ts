@@ -10,8 +10,9 @@ export class ConfigurationService {
   static _config: Record<string, unknown> = null;
 
   static async getConfig() {
-    if (!this._config) {
+    if (!this._config) {``
       try {
+        // TODO allow external config like redis/ db, etc
         this._config = (await fs.readJson(pathToConfigFile, { throws: false })) || DEFAULT_CONFIG;
       } catch (error) {
         this._config = DEFAULT_CONFIG;

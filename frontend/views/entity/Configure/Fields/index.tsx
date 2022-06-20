@@ -96,6 +96,16 @@ export const EntityFieldsSettings = () => {
                 ),
                 label: "Validations",
               },
+              {
+                content: (
+                  <FieldsLabelForm
+                    initialValues={entityFieldLabelsMap.data}
+                    fields={entityScalarFields.data || []}
+                    onSubmit={upsertEntityFieldsMapMutation.mutateAsync}
+                  />
+                ),
+                label: "Order",
+              },
             ]}
           />
         )}

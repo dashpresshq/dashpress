@@ -5,8 +5,10 @@ import { INavigationItem } from "../../_layouts/types";
 
 const ENTITY_FIELDS_ENDPOINT = (entity: string) => `/api/entities/${entity}/fields`;
 
+export const ENTITIES_MENU_ENDPOINT = '/api/entities/menu';
+
 export const useEntitiesMenuItems = () => {
-  return useApi<INavigationItem[]>("/api/entities/menu", {
+  return useApi<INavigationItem[]>(ENTITIES_MENU_ENDPOINT, {
     errorMessage: dataNotFoundMessage("Entities menu items"),
     selector: (input: ILabelValue[]) =>
       input.map(({ label, value }) => ({

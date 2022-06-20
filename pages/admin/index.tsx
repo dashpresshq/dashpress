@@ -1,1 +1,1 @@
-export { AdminDashboard as default } from '../../frontend/views/app/AdminDashboard';
+export { Dashboard as default } from '../../frontend/views/Dashboard';

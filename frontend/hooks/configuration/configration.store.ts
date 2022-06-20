@@ -18,18 +18,30 @@ export function useAppConfiguration<T>(key: keyof typeof CONFIGURATION_KEYS) {
   });
 }
 
-export function useEntityConfiguration<T>(key: keyof typeof CONFIGURATION_KEYS, entity: string) {
+export function useEntityConfiguration<T>(
+  key: keyof typeof CONFIGURATION_KEYS,
+  entity: string
+) {
   return useApi<T>(apiPath(key, entity), {
     enabled: entity !== SLUG_LOADING_VALUE,
     errorMessage: dataNotFoundMessage("Entity Configuration"),
   });
 }
 
-export function useUpsertConfigurationMutation(key: keyof typeof CONFIGURATION_KEYS, entity?: string) {
+interface IUpsertConfigMutationOptions {
+  otherEndpoints?: string[];
+}
+
+export function useUpsertConfigurationMutation(
+  key: keyof typeof CONFIGURATION_KEYS,
+  entity?: string,
+  mutationOptions?: IUpsertConfigMutationOptions
+) {
   const apiMutateOptions = useApiMutateOptions<
     Record<string, unknown> | unknown[],
     Partial<Record<string, unknown> | unknown[]>
   >({
+    ...(mutationOptions || {}),
     dataQueryPath: apiPath(key, entity),
     onMutate: MutationHelpers.replace,
     successMessage: "App settings saved successfully",

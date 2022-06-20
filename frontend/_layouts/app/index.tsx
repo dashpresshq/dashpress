@@ -58,18 +58,10 @@ export const AppLayout = ({
           link: "Dashboards",
         },
         {
-          title: "Entities",
-          description: "Your models",
-          icon: HardDrive,
-          view: <>Demo View</>,
-          link: "Entities",
-        },
-        {
           title: "Settings",
-          description: "Your models",
           icon: HardDrive,
-          view: <>Demo View</>,
-          link: "Settings",
+          link: "/settings",
+          view: <>TODO</>
         },
       ]}
     >

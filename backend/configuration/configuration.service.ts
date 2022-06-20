@@ -1,28 +1,34 @@
 import { CONFIGURATION_KEYS } from "../../shared/configuration.constants";
+import fs from "fs-extra";
+import path from "path";
 
-const LOCAL_CONFIG = {};
+const pathToConfigFile = path.resolve(require("os").homedir(), "cardinal.json");
+
+const DEFAULT_CONFIG = {};
 
 export class ConfigurationService {
-  private async getConfiguration() {
-    // TODO Sharing configuration at a central place
-    // if (!process.env.CARDINAL_LICENSE) {
-      return LOCAL_CONFIG;
-    // }
-    // return (await this.cardinalConfig()) as Record<string, unknown>;
+  static _config: Record<string, unknown> = null;
+
+  static async getConfig() {
+    if (!this._config) {
+      try {
+        this._config = (await fs.readJson(pathToConfigFile, { throws: false })) || DEFAULT_CONFIG;
+      } catch (error) {
+        this._config = DEFAULT_CONFIG;
+      }
+    }
+    return this._config;
   }
 
   private async persitentConfig(config: Record<string, unknown>) {
-    // if (!process.env.CARDINAL_LICENSE) {
-    //   return;
-    // }
-    // this.saveConfigSomeWhere();
+    await fs.writeJson(pathToConfigFile, config, { spaces: 2 });
   }
 
   async show(
     key: keyof typeof CONFIGURATION_KEYS,
     entity?: string
   ): Promise<unknown> {
-    const config = await this.getConfiguration();
+    const config = await ConfigurationService.getConfig();
     const { requireEntity, defaultValue } = CONFIGURATION_KEYS[key];
     const value = requireEntity ? (config[key] || {})[entity] : config[key];
     return value || defaultValue;
@@ -33,7 +39,7 @@ export class ConfigurationService {
     value: unknown,
     entity?: string
   ): Promise<void> {
-    const config = await this.getConfiguration();
+    const config = await ConfigurationService.getConfig();
 
     const { requireEntity } = CONFIGURATION_KEYS[key];
     if (requireEntity) {

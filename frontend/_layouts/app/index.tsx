@@ -50,7 +50,6 @@ export const AppLayout = ({
           description: "Your models",
           icon: HardDrive,
           viewMenuItems: entitiesMenuItems,
-          link: "Tables",
         },
         {
           title: "Dashboards",

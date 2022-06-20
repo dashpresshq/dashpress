@@ -16,7 +16,7 @@ export function useEntityDictionPlurals<T, P extends keyof T>(
   
     return useCallback(
       (fieldName: string): string => {
-        return entityDictions.data[fieldName].plural || userFriendlyCase(fieldName);
+        return entityDictions.data[fieldName]?.plural || userFriendlyCase(fieldName);
       },
       // eslint-disable-next-line react-hooks/exhaustive-deps
       [entityDictions.data]

@@ -40,7 +40,7 @@ export const EntitiesSettings = () => {
             {
               content: (
                 <EntitiesSelection
-                  description="Toggle the Entitites that you want on the menu"
+                  description="Select the entitites that you want on to appear in the app i.e Tables, Home Page, Charts etc"
                   isLoading={entitiesList.isLoading || entitiesToHide.isLoading}
                   allList={entitiesList.data || []}
                   getEntityFieldLabels={entitiesDictionPlurals}

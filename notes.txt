@@ -10,3 +10,51 @@ Table actions
 // Refresh data
 // Export
 // Multi select
+https://spruko.com/demo/noa/Noa/HTML/index.html
+
+
+OPEN SOURCE
+Title of the Table
+Selection Colors
+Disable type of specific fields
+Offcanvas table on details
+off canvas for details
+Validations
+Dahsboard list
+Error on none permitted pages
+Implement filters
+Local state
+url state
+CSV, JSON
+HTTP Actions
+Clone item
+Hide menu items on table
+Reorder menu
+Custom query views
+
+// Free version = 1 user
+Commuity support
+
+// Pro version 10 dollars/user per month
+Hosted Deployment
+Action integrations
+Charts
+Summary views
+Users Authentication
+Custom Dashboard
+Selected theme
+Email Support
+
+// $50 per user per month
+Pro Pro
+  Environments
+  Versions
+  Permissions
+  Branding
+  Custom domain
+  Specific Color Theme
+  Audit logs
+  Self hosting
+  SSO
+  Priority Support
+  2FA

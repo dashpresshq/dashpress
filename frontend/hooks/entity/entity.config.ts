@@ -84,7 +84,7 @@ const getEntityType = (
     return "selection";
   }
 
-  const entityFieldType = PRISMA_TYPE_TO_ENTITY_TYPES_MAP[type];
+  const entityFieldType = FIELD_TYPE_TO_ENTITY_TYPES_MAP[type];
 
   if (entityFieldType) {
     return entityFieldType;
@@ -92,7 +92,7 @@ const getEntityType = (
   return "text";
 };
 
-const PRISMA_TYPE_TO_ENTITY_TYPES_MAP: Record<
+const FIELD_TYPE_TO_ENTITY_TYPES_MAP: Record<
   IEntityField["type"],
   keyof typeof ENTITY_TYPES_SELECTION_BAG
 > = {

@@ -1,24 +1,31 @@
 {
   "name": "cardinal",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "version": "0.1.0",
+  "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "prettier": "^2.6.2",
-    "prisma-json-schema-generator": "^2.0.12",
-    "ts-node": "^10.7.0",
-    "typescript": "^4.6.4"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
   },
   "dependencies": {
-    "isomorphic-fetch": "^3.0.0",
-    "node-fetch": "^3.2.4",
-    "prisma-class-validator-generator": "^0.1.0",
-    "prisma-json-server-generator": "^0.1.2"
+    "@gothicgeeks/design-system": "git+ssh://git@github.com:thrownullexception/design-system.git#e37410adac7c4a9fca50b582b3a8aa9006a841a4",
+    "@gothicgeeks/shared": "git+ssh://git@github.com:thrownullexception/shared.git#cf9ff5a5fbaf15c6e4cee3b032b7da698c604c8b",
+    "change-case": "^4.1.2",
+    "knex": "^2.0.0",
+    "next": "12.1.6",
+    "pg": "^8.7.3",
+    "react": "18.1.0",
+    "react-dom": "18.1.0",
+    "react-feather": "^2.0.10",
+    "react-query": "^3.39.1"
+  },
+  "devDependencies": {
+    "@types/node": "^18.0.0",
+    "@types/react": "^18.0.9",
+    "eslint": "8.15.0",
+    "eslint-config-next": "12.1.6",
+    "prettier": "^2.7.1",
+    "typescript": "^4.7.4"
   }
 }

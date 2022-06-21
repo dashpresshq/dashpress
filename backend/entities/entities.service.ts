@@ -19,7 +19,8 @@ export class EntitiesService {
   };
 
   getEntityPrimaryField(entity: string): string {
-    return this.getEntityFields(entity).find(({ isId }) => isId)?.name;
+    // TODO throw error is no iD field
+    return this.getEntityFields(entity).find(({ isId }) => isId)?.name || "id";
   }
 
   validateEntityField(entity: string, field: unknown) {

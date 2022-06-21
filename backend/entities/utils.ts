@@ -9,12 +9,12 @@ export function sortByList<T extends Record<string, string>, K extends keyof T>(
     return;
   }
   const sortMap = Object.fromEntries(
-    sortList.map((item, index) => [item, index])
+    sortList.map((item, index) => [item, index + 1])
   );
 
   inputArray.sort(
     (a, b) =>
-      (sortMap[b[key]] || SOME_VERY_LARGE_NUMBER) -
-      (sortMap[a[key]] || SOME_VERY_LARGE_NUMBER)
+      (sortMap[a[key]] || SOME_VERY_LARGE_NUMBER) -
+      (sortMap[b[key]] || SOME_VERY_LARGE_NUMBER)
   );
 }

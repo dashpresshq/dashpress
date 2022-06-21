@@ -16,7 +16,7 @@ import {
 } from "@gothicgeeks/shared";
 import { IFormProps } from "../../../lib/form/types";
 import { useUpsertConfigurationMutation } from "../../../hooks/configuration/configration.store";
-
+// TODO validate plurals are unique
 export const EntityDictionSettings = () => {
   const entity = useEntitySlug();
   const entityDiction = useEntityDiction();

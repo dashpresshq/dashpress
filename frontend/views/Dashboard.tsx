@@ -1,4 +1,5 @@
 import {
+  ComponentIsLoading,
   ErrorAlert,
   SoftButton,
   Spacer,
@@ -17,10 +18,6 @@ export function Dashboard() {
   const entitiesMenuItems = useEntitiesMenuItems();
   const router = useRouter();
 
-  if (entitiesMenuItems.isFetching) {
-    return "Loading";
-  }
-
   return (
     <AppLayout
       breadcrumbs={[]}
@@ -34,26 +31,41 @@ export function Dashboard() {
         },
       ]}
     >
-      <ErrorAlert message={entitiesMenuItems.error} />
-      <StyledGrid.Row>
-        {entitiesMenuItems.data.map((field) => (
-          <StyledGrid.Col lg={4} md={6} sm={12} key={field.link}>
-            <StyledCard>
-              <StyledBox>
-                <Stack justify="space-between">
-                  <Text size="4">{field.title}</Text>
-                  <SoftButton to={field.link} label="View Data" icon="eye" />
-                </Stack>
-                <Spacer size="xs"/>
-                <Text size="3" weight="bold">
-                  49
-                </Text>
-              </StyledBox>
-            </StyledCard>
-            <Spacer size="xl" />
-          </StyledGrid.Col>
-        ))}
-      </StyledGrid.Row>
+      {entitiesMenuItems.isLoading ? (
+        <ComponentIsLoading />
+      ) : (
+        <>
+          (
+          {entitiesMenuItems.error ? (
+            <ErrorAlert message={entitiesMenuItems.error} />
+          ) : (
+            <StyledGrid.Row>
+              {entitiesMenuItems.data.map((field) => (
+                <StyledGrid.Col lg={4} md={6} sm={12} key={field.link}>
+                  <StyledCard>
+                    <StyledBox>
+                      <Stack justify="space-between">
+                        <Text size="4">{field.title}</Text>
+                        <SoftButton
+                          to={field.link}
+                          label="View Data"
+                          icon="eye"
+                        />
+                      </Stack>
+                      <Spacer size="xs" />
+                      <Text size="3" weight="bold">
+                        49
+                      </Text>
+                    </StyledBox>
+                  </StyledCard>
+                  <Spacer size="xl" />
+                </StyledGrid.Col>
+              ))}
+            </StyledGrid.Row>
+          )}
+          )
+        </>
+      )}
     </AppLayout>
   );
 }

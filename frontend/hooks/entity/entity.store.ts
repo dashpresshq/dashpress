@@ -10,6 +10,7 @@ const ENTITY_FIELDS_ENDPOINT = (entity: string) =>
 export const ENTITIES_MENU_ENDPOINT = "/api/entities/menu";
 
 export const useEntitiesMenuItems = () => {
+  // sort by name
   const menuItems = useApi<INavigationItem[]>(ENTITIES_MENU_ENDPOINT, {
     errorMessage: dataNotFoundMessage("Entities menu items"),
     selector: (input: ILabelValue[]) =>

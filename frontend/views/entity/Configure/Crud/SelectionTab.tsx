@@ -102,6 +102,7 @@ export const SelectionTab: React.FC<IProps> = ({
               setIsMakingRequest(true);
               await onSubmit(currentPageSelection);
               setIsMakingRequest(false);
+              setTouched(false);
             }}
             text={"Save Changes"}
             disabled={!touched}

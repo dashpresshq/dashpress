@@ -1,11 +1,12 @@
 import { AppLayout } from "../../../_layouts/app";
 import {
   ErrorAlert,
+  FormSkeleton,
   SectionBox,
   SectionCenter,
   Spacer,
 } from "@gothicgeeks/design-system";
-import { TitleLang } from "@gothicgeeks/shared";
+import { TitleLang } from "@gothicgeeks/shared/dist/lang/title.lang";
 import { NAVIGATION_LINKS } from "../../../lib/routing/links";
 import {
   useEntityDiction,
@@ -23,6 +24,7 @@ import {
 import { useEntityConfiguration } from "../../../hooks/configuration/configration.store";
 import { CreateEntityForm } from "./CreateEntity.form";
 import { fitlerOutHiddenScalarColumns } from "../utils";
+import { FormSkeletonSchema } from "@gothicgeeks/design-system/dist/components/Skeleton/FormSkeleton";
 
 export function EntityCreate() {
   const entity = useEntitySlug();
@@ -63,7 +65,6 @@ export function EntityCreate() {
         {error ? (
           <>
             <Spacer />
-            <ErrorAlert message={error} />
             <Spacer />
           </>
         ) : null}
@@ -77,14 +78,30 @@ export function EntityCreate() {
           {hiddenCreateColumns.isLoading ||
           entityScalarFields.isLoading ||
           entityFieldTypesMap.isLoading ? (
-            <>TODO Loading</>
-          ) : (
-            <CreateEntityForm
-              entityFieldTypes={entityFieldTypes}
-              getEntityFieldLabels={getEntityFieldLabels}
-              onSubmit={entityDataCreationMutation.mutateAsync}
-              fields={fitlerOutHiddenScalarColumns(entityScalarFields, hiddenCreateColumns)}
+            <FormSkeleton
+              schema={[
+                FormSkeletonSchema.Input,
+                FormSkeletonSchema.Input,
+                FormSkeletonSchema.Input,
+                FormSkeletonSchema.Textarea,
+              ]}
             />
+          ) : (
+            <>
+              {error ? (
+                <ErrorAlert message={error} />
+              ) : (
+                <CreateEntityForm
+                  entityFieldTypes={entityFieldTypes}
+                  getEntityFieldLabels={getEntityFieldLabels}
+                  onSubmit={entityDataCreationMutation.mutateAsync}
+                  fields={fitlerOutHiddenScalarColumns(
+                    entityScalarFields,
+                    hiddenCreateColumns
+                  )}
+                />
+              )}
+            </>
           )}
         </SectionBox>
       </SectionCenter>

@@ -32,7 +32,7 @@ export const EntitiesSettings = () => {
         name: "Entities Settings",
       }}
     >
-      <ErrorAlert message={entitiesList.error} />
+      <ErrorAlert message={entitiesList.error || entitiesToHide.error} />
       <SectionBox title="Entities Settings">
         <Tabs
           // TODO add default tab

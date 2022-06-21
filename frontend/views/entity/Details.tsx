@@ -1,12 +1,13 @@
 import { AppLayout } from "../../_layouts/app";
 import {
+  ComponentIsLoading,
   ErrorAlert,
   SectionBox,
   SectionCenter,
   Spacer,
   Text,
 } from "@gothicgeeks/design-system";
-import { TitleLang } from "@gothicgeeks/shared";
+import { TitleLang } from "@gothicgeeks/shared/dist/lang/title.lang";
 import { NAVIGATION_LINKS } from "../../lib/routing/links";
 import {
   useEntityDiction,
@@ -21,7 +22,6 @@ import {
   useEntityActionMenuItems,
 } from "./Configure/constants";
 import { useEntityScalarFields } from "../../hooks/entity/entity.store";
-import { IEntityField } from "../../../backend/entities/types";
 import { fitlerOutHiddenScalarColumns } from "./utils";
 
 export function EntityDetails() {
@@ -39,6 +39,8 @@ export function EntityDetails() {
   );
   const getEntityFieldLabels = useEntityFieldLabels();
 
+    const error = dataDetails.error || hiddenDetailsColumns.error || entityScalarFields.error;
+
   return (
     <AppLayout
       titleNeedsContext={true}
@@ -55,13 +57,6 @@ export function EntityDetails() {
       actionItems={actionItems}
     >
       <SectionCenter>
-        {dataDetails.error ? (
-          <>
-            <Spacer />
-            <ErrorAlert message={dataDetails.error} />
-            <Spacer />
-          </>
-        ) : null}
         <SectionBox
           title={TitleLang.details(entityDiction.singular)}
           backLink={{
@@ -72,8 +67,9 @@ export function EntityDetails() {
           {dataDetails.isLoading ||
           entityScalarFields.isLoading ||
           hiddenDetailsColumns.isLoading ? (
-            <>TODO Loading Data...</>
+            <ComponentIsLoading />
           ) : (
+            error ? <ErrorAlert message={error} /> : 
             <>
               {fitlerOutHiddenScalarColumns(
                 entityScalarFields,

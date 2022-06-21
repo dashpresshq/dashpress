@@ -1,9 +1,9 @@
 import { AppLayout } from "../../../_layouts/app";
 import {
   ErrorAlert,
+  FormSkeleton,
   SectionBox,
   SectionCenter,
-  Spacer,
 } from "@gothicgeeks/design-system";
 import { TitleLang } from "@gothicgeeks/shared";
 import { NAVIGATION_LINKS } from "../../../lib/routing/links";
@@ -27,6 +27,7 @@ import {
 import { useEntityConfiguration } from "../../../hooks/configuration/configration.store";
 import { UpdateEntityForm } from "./UpdateEntity.form";
 import { fitlerOutHiddenScalarColumns } from "../utils";
+import { FormSkeletonSchema } from "@gothicgeeks/design-system/dist/components/Skeleton/FormSkeleton";
 
 // TODO bounce if .update is not enabled
 export function EntityUpdate() {
@@ -74,13 +75,6 @@ export function EntityUpdate() {
       actionItems={actionItems}
     >
       <SectionCenter>
-        {error ? (
-          <>
-            <Spacer />
-            <ErrorAlert message={error} />
-            <Spacer />
-          </>
-        ) : null}
         <SectionBox
           title={TitleLang.edit(entityDiction.singular)}
           backLink={{
@@ -92,15 +86,31 @@ export function EntityUpdate() {
           entityFieldTypesMap.isLoading ||
           hiddenUpdateColumns.isLoading ||
           entityScalarFields.isLoading ? (
-            <>TODO Loading Data...</>
-          ) : (
-            <UpdateEntityForm
-              getEntityFieldLabels={getEntityFieldLabels}
-              entityFieldTypes={entityFieldTypes}
-              onSubmit={entityDataUpdationMutation.mutateAsync}
-              fields={fitlerOutHiddenScalarColumns(entityScalarFields, hiddenUpdateColumns)}
-              initialValues={dataDetails.data}
+            <FormSkeleton
+              schema={[
+                FormSkeletonSchema.Input,
+                FormSkeletonSchema.Input,
+                FormSkeletonSchema.Input,
+                FormSkeletonSchema.Textarea,
+              ]}
             />
+          ) : (
+            <>
+              {error ? (
+                <ErrorAlert message={error} />
+              ) : (
+                <UpdateEntityForm
+                  getEntityFieldLabels={getEntityFieldLabels}
+                  entityFieldTypes={entityFieldTypes}
+                  onSubmit={entityDataUpdationMutation.mutateAsync}
+                  fields={fitlerOutHiddenScalarColumns(
+                    entityScalarFields,
+                    hiddenUpdateColumns
+                  )}
+                  initialValues={dataDetails.data}
+                />
+              )}
+            </>
           )}
         </SectionBox>
       </SectionCenter>

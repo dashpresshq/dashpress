@@ -4,6 +4,7 @@ import {
 } from "../configuration/configuration.service";
 import { entitiesService, EntitiesService } from "./entities.service";
 import { IEntityField } from "./types";
+import { sortByList } from "./utils";
 
 export class EntitiesController {
   constructor(
@@ -12,10 +13,21 @@ export class EntitiesController {
   ) {}
   async getMenuEntities() {
     const entities = this.entitiesService.getAllEntities();
-    const hiddenEntities = (await this.configurationService.show(
-      "entities_to_hide_from_menu"
-    )) as string[];
-    return entities.filter(({ value }) => !hiddenEntities.includes(value));
+    const [hiddenEntities, entitiesOrder] = await Promise.all([
+      this.configurationService.show<string[]>("entities_to_hide_from_menu"),
+      this.configurationService.show<string[]>("entities_order"),
+    ]);
+    const entitiesToShow = entities.filter(
+      ({ value }) => !hiddenEntities.includes(value)
+    );
+
+    sortByList(
+      entitiesToShow.sort((a, b) => a.value.localeCompare(b.value)),
+      entitiesOrder,
+      "value"
+    );
+
+    return entitiesToShow;
   }
 
   listAllEntities() {

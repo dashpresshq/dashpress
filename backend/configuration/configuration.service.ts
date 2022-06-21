@@ -25,10 +25,10 @@ export class ConfigurationService {
     await fs.writeJson(pathToConfigFile, config, { spaces: 2 });
   }
 
-  async show(
+  async show<T>(
     key: keyof typeof CONFIGURATION_KEYS,
     entity?: string
-  ): Promise<unknown> {
+  ): Promise<T> {
     const config = await ConfigurationService.getConfig();
     const { requireEntity, defaultValue } = CONFIGURATION_KEYS[key];
     const value = requireEntity ? (config[key] || {})[entity] : config[key];

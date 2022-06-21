@@ -1,7 +1,6 @@
 import { dataNotFoundMessage, useApi } from "@gothicgeeks/shared";
 import { IEntityField } from "../../../backend/entities/types";
 import { ILabelValue } from "../../../types";
-import { INavigationItem } from "../../_layouts/types";
 import { useEntityDictionPlurals } from "./entity.queries";
 
 const ENTITY_FIELDS_ENDPOINT = (entity: string) =>
@@ -10,26 +9,20 @@ const ENTITY_FIELDS_ENDPOINT = (entity: string) =>
 export const ENTITIES_MENU_ENDPOINT = "/api/entities/menu";
 
 export const useEntitiesMenuItems = () => {
-  // sort by name
-  const menuItems = useApi<INavigationItem[]>(ENTITIES_MENU_ENDPOINT, {
+  const menuItems = useApi<ILabelValue[]>(ENTITIES_MENU_ENDPOINT, {
     errorMessage: dataNotFoundMessage("Entities menu items"),
-    selector: (input: ILabelValue[]) =>
-      input.map(({ label, value }) => ({
-        title: label,
-        link: `/admin/${value}`,
-      })),
   });
 
   const entitiesDictionPlurals = useEntityDictionPlurals(
     menuItems.data || [],
-    "title"
+    "value"
   );
 
   return {
     ...menuItems,
-    data: (menuItems.data || []).map(({ title, ...rest }) => ({
-      ...rest,
-      title: entitiesDictionPlurals(title),
+    data: (menuItems.data || []).map(({ value }) => ({
+      value,
+      label: entitiesDictionPlurals(value),
     })),
   };
 };

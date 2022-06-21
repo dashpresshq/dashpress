@@ -7,7 +7,7 @@ import {
   Spacer,
   Text,
 } from "@gothicgeeks/design-system";
-import { TitleLang } from "@gothicgeeks/shared/dist/lang/title.lang";
+import { TitleLang } from "@gothicgeeks/shared";
 import { NAVIGATION_LINKS } from "../../lib/routing/links";
 import {
   useEntityDiction,

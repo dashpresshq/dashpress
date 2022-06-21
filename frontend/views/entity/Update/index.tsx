@@ -4,6 +4,7 @@ import {
   FormSkeleton,
   SectionBox,
   SectionCenter,
+  FormSkeletonSchema,
 } from "@gothicgeeks/design-system";
 import { TitleLang } from "@gothicgeeks/shared";
 import { NAVIGATION_LINKS } from "../../../lib/routing/links";
@@ -27,7 +28,6 @@ import {
 import { useEntityConfiguration } from "../../../hooks/configuration/configration.store";
 import { UpdateEntityForm } from "./UpdateEntity.form";
 import { fitlerOutHiddenScalarColumns } from "../utils";
-import { FormSkeletonSchema } from "@gothicgeeks/design-system/dist/components/Skeleton/FormSkeleton";
 
 // TODO bounce if .update is not enabled
 export function EntityUpdate() {

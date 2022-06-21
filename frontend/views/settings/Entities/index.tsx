@@ -1,4 +1,9 @@
-import { ErrorAlert, SectionBox, Tabs } from "@gothicgeeks/design-system";
+import {
+  ErrorAlert,
+  SectionBox,
+  SortList,
+  Tabs,
+} from "@gothicgeeks/design-system";
 import {
   useAppConfiguration,
   useUpsertConfigurationMutation,
@@ -7,6 +12,7 @@ import { useEntityDictionPlurals } from "../../../hooks/entity/entity.queries";
 import {
   ENTITIES_MENU_ENDPOINT,
   useEntitiesList,
+  useEntitiesMenuItems,
 } from "../../../hooks/entity/entity.store";
 import { NAVIGATION_LINKS } from "../../../lib/routing/links";
 import { BaseSettingsLayout } from ".././_Base";
@@ -17,13 +23,24 @@ export const EntitiesSettings = () => {
   const entitiesToHide = useAppConfiguration<string[]>(
     "entities_to_hide_from_menu"
   );
+  const entitiesMenuItems = useEntitiesMenuItems();
+
   const upsertHideFromMenuMutation = useUpsertConfigurationMutation(
     "entities_to_hide_from_menu",
     "",
     { otherEndpoints: [ENTITIES_MENU_ENDPOINT] }
   );
 
-  const entitiesDictionPlurals = useEntityDictionPlurals(entitiesList.data || [], 'value');
+  const upsertEntitiesOrderMutation = useUpsertConfigurationMutation(
+    "entities_order",
+    "",
+    { otherEndpoints: [ENTITIES_MENU_ENDPOINT] }
+  );
+
+  const entitiesDictionPlurals = useEntityDictionPlurals(
+    entitiesList.data || [],
+    "value"
+  );
 
   return (
     <BaseSettingsLayout
@@ -35,7 +52,7 @@ export const EntitiesSettings = () => {
       <ErrorAlert message={entitiesList.error || entitiesToHide.error} />
       <SectionBox title="Entities Settings">
         <Tabs
-          // TODO add default tab
+          defaultLabel="Order"
           contents={[
             {
               content: (
@@ -45,21 +62,21 @@ export const EntitiesSettings = () => {
                   allList={entitiesList.data || []}
                   getEntityFieldLabels={entitiesDictionPlurals}
                   hiddenList={entitiesToHide.data || []}
-                  onSubmit={(data) =>
-                    upsertHideFromMenuMutation.mutateAsync(data)
-                  }
+                  onSubmit={async (data) => {
+                    await upsertHideFromMenuMutation.mutateAsync(data);
+                  }}
                 />
               ),
               label: "Menu Entities",
             },
             {
               content: (
-                <>TODO</>
-                //   <FieldsLabelForm
-                //     initialValues={entityFieldLabelsMap.data}
-                //     fields={entityScalarFields.data || []}
-                //     onSubmit={upsertEntityFieldsMapMutation.mutateAsync}
-                //   />
+                <SortList
+                  data={entitiesMenuItems}
+                  onSave={async (data) => {
+                    await upsertEntitiesOrderMutation.mutateAsync(data);
+                  }}
+                />
               ),
               label: "Order",
             },

@@ -38,10 +38,9 @@ export const AppLayout = ({
   const homedBreadcrumb = [{ label: "Home", value: "/" }, ...breadcrumbs];
 
   const title =
-    (titleNeedsContext ?
-      homedBreadcrumb[homedBreadcrumb.length - 2]?.label + " - " : "") +
-    homedBreadcrumb[homedBreadcrumb.length - 1]?.label;
-
+    (titleNeedsContext
+      ? homedBreadcrumb[homedBreadcrumb.length - 2]?.label + " - "
+      : "") + homedBreadcrumb[homedBreadcrumb.length - 1]?.label;
   return (
     <DynamicLayout
       selectionView={[
@@ -49,7 +48,13 @@ export const AppLayout = ({
           title: "Tables",
           description: "Your models",
           icon: HardDrive,
-          viewMenuItems: entitiesMenuItems,
+          viewMenuItems: {
+            ...entitiesMenuItems,
+            data: (entitiesMenuItems.data || []).map(({ label, value }) => ({
+              title: label,
+              link: NAVIGATION_LINKS.ENTITY.TABLE(value),
+            })),
+          },
         },
         {
           title: "Dashboards",

@@ -35,19 +35,18 @@ export function Dashboard() {
         <ComponentIsLoading />
       ) : (
         <>
-          (
           {entitiesMenuItems.error ? (
             <ErrorAlert message={entitiesMenuItems.error} />
           ) : (
             <StyledGrid.Row>
               {entitiesMenuItems.data.map((field) => (
-                <StyledGrid.Col lg={4} md={6} sm={12} key={field.link}>
+                <StyledGrid.Col lg={4} md={6} sm={12} key={field.value}>
                   <StyledCard>
                     <StyledBox>
                       <Stack justify="space-between">
-                        <Text size="4">{field.title}</Text>
+                        <Text size="4">{field.label}</Text>
                         <SoftButton
-                          to={field.link}
+                          to={NAVIGATION_LINKS.ENTITY.TABLE(field.value)}
                           label="View Data"
                           icon="eye"
                         />
@@ -63,7 +62,6 @@ export function Dashboard() {
               ))}
             </StyledGrid.Row>
           )}
-          )
         </>
       )}
     </AppLayout>

@@ -5,8 +5,9 @@ import {
   SectionBox,
   SectionCenter,
   Spacer,
+  FormSkeletonSchema
 } from "@gothicgeeks/design-system";
-import { TitleLang } from "@gothicgeeks/shared/dist/lang/title.lang";
+import { TitleLang } from "@gothicgeeks/shared";
 import { NAVIGATION_LINKS } from "../../../lib/routing/links";
 import {
   useEntityDiction,
@@ -24,7 +25,6 @@ import {
 import { useEntityConfiguration } from "../../../hooks/configuration/configration.store";
 import { CreateEntityForm } from "./CreateEntity.form";
 import { fitlerOutHiddenScalarColumns } from "../utils";
-import { FormSkeletonSchema } from "@gothicgeeks/design-system/dist/components/Skeleton/FormSkeleton";
 
 export function EntityCreate() {
   const entity = useEntitySlug();
@@ -59,6 +59,7 @@ export function EntityCreate() {
         },
         { label: "Create", value: NAVIGATION_LINKS.ENTITY.CREATE(entity) },
       ]}
+      titleNeedsContext={true}
       actionItems={actionItems}
     >
       <SectionCenter>

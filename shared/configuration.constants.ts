@@ -7,9 +7,10 @@ export const CONFIGURATION_KEYS: Record<
   | "entity_columns_types" // 
   | "entity_crud_settings" //
   | "relations_list_fields"
-  | "entity_columns_labels"
   | "entity_validations"
-  | "entities_to_hide_from_menu",
+  | "entities_order"
+  | "entity_columns_labels" // 
+  | "entities_to_hide_from_menu", //
   { requireEntity: boolean; defaultValue: unknown }
 > = {
   hidden_entity_table_columns: { requireEntity: true, defaultValue: [] },
@@ -39,6 +40,7 @@ export const CONFIGURATION_KEYS: Record<
   relations_list_fields: { requireEntity: true, defaultValue: [] },
 
   entities_to_hide_from_menu: { requireEntity: false, defaultValue: [] },
+  entities_order: { requireEntity: false, defaultValue: [] }
 };
 
 // Plugin System

@@ -2,6 +2,7 @@ import { AppLayout } from "../../_layouts/app";
 import {
   DeleteButton,
   ErrorAlert,
+  OffCanvas,
   SoftButton,
   Stack,
   Table,
@@ -32,6 +33,8 @@ import {
   useEntityActionMenuItems,
 } from "./Configure/constants";
 import { fitlerOutHiddenScalarColumns } from "./utils";
+import { EntityDetailsView } from "./Details";
+import { useState } from "react";
 // import Offcanvas from 'react-bootstrap/Offcanvas'
 
 // TODO sync table to url
@@ -48,6 +51,9 @@ export function EntityTable() {
     EntityActionTypes.CRUD,
     EntityActionTypes.Diction,
   ]);
+
+  const [showDetailsOffCanvas, setShowDetailsOffCanvas] = useState("");
+
   const hiddenTableColumns = useSelectedEntityColumns(
     "hidden_entity_table_columns"
   );
@@ -104,13 +110,15 @@ export function EntityTable() {
       accessor: "__actions__",
       disableSortBy: true,
       Cell: ({ row }) => {
-        const idValue = row.original[idField.data] as string;
+        const idValue = row.original[idField.data || "id"] as string;
         return (
           <Stack spacing={4} align="center">
             {entityCrudSettings.data.details && (
               <div>
                 <SoftButton
-                  to={NAVIGATION_LINKS.ENTITY.DETAILS(entity, idValue)}
+                  onClick={() => {
+                    setShowDetailsOffCanvas(idValue);
+                  }}
                   label="Details"
                   color="primary"
                   justIcon={true}
@@ -202,6 +210,13 @@ export function EntityTable() {
         // ovveride indicator
         menuItems={menuItems}
       />
+      <OffCanvas
+        title="Details"
+        onClose={() => setShowDetailsOffCanvas("")}
+        show={!!showDetailsOffCanvas}
+      >
+        <EntityDetailsView id={showDetailsOffCanvas} />
+      </OffCanvas>
     </AppLayout>
   );
 }

@@ -52,7 +52,7 @@ export const EntitiesSettings = () => {
       <ErrorAlert message={entitiesList.error || entitiesToHide.error} />
       <SectionBox title="Entities Settings">
         <Tabs
-          defaultLabel="Order"
+          // defaultLabel="Order"
           contents={[
             {
               content: (

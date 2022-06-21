@@ -38,9 +38,27 @@ export const EntitiesSelection: React.FC<IProps> = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [hiddenList]);
 
+  const formButton = (
+    <>
+      <Spacer size="xxl" />
+      <FormButton
+        onClick={async () => {
+          setIsMakingRequest(true);
+          await onSubmit(currentPageSelection);
+          setIsMakingRequest(false);
+          setTouched(false);
+        }}
+        text={"Save Changes"}
+        disabled={!touched}
+        isMakingRequest={isMakingRequest}
+      />
+    </>
+  );
+
   return (
     <>
       <Text size="5">{description}</Text>
+      {formButton}
       <Spacer size="xxl" />
       {allList.length > 0 && (
         <>
@@ -71,19 +89,7 @@ export const EntitiesSelection: React.FC<IProps> = ({
               );
             }}
           />
-
-          <Spacer size="xxl" />
-          <FormButton
-            onClick={async () => {
-              setIsMakingRequest(true);
-              await onSubmit(currentPageSelection);
-              setIsMakingRequest(false);
-              setTouched(false);
-            }}
-            text={"Save Changes"}
-            disabled={!touched}
-            isMakingRequest={isMakingRequest}
-          />
+          {formButton}
         </>
       )}
     </>

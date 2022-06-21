@@ -25,22 +25,13 @@ import { useEntityScalarFields } from "../../hooks/entity/entity.store";
 import { fitlerOutHiddenScalarColumns } from "./utils";
 
 export function EntityDetails() {
-  const entity = useEntitySlug();
   const entityDiction = useEntityDiction();
   const id = useEntityId();
-  const dataDetails = useEntityDataDetails(entity, id);
   const actionItems = useEntityActionMenuItems([
     EntityActionTypes.CRUD,
     EntityActionTypes.Fields,
   ]);
-  const entityScalarFields = useEntityScalarFields(entity);
-  const hiddenDetailsColumns = useSelectedEntityColumns(
-    "hidden_entity_details_columns"
-  );
-  const getEntityFieldLabels = useEntityFieldLabels();
-
-  const error =
-    dataDetails.error || hiddenDetailsColumns.error || entityScalarFields.error;
+  const entity = useEntitySlug();
 
   return (
     <AppLayout
@@ -65,30 +56,49 @@ export function EntityDetails() {
             label: entityDiction.plural,
           }}
         >
-          {dataDetails.isLoading ||
-          entityScalarFields.isLoading ||
-          hiddenDetailsColumns.isLoading ? (
-            <ComponentIsLoading />
-          ) : error ? (
-            <ErrorAlert message={error} />
-          ) : (
-            <>
-              {fitlerOutHiddenScalarColumns(
-                entityScalarFields,
-                hiddenDetailsColumns
-              ).map(({ name }) => (
-                <>
-                  <Text size="5" weight="bold">
-                    {getEntityFieldLabels(name)}
-                  </Text>
-                  <Text>{dataDetails.data[name]}</Text>
-                  <Spacer />
-                </>
-              ))}
-            </>
-          )}
+          <EntityDetailsView id={id} />
         </SectionBox>
       </SectionCenter>
     </AppLayout>
   );
 }
+
+export const EntityDetailsView = ({ id }: { id: string }) => {
+  const entity = useEntitySlug();
+  const dataDetails = useEntityDataDetails(entity, id);
+  const entityScalarFields = useEntityScalarFields(entity);
+  const hiddenDetailsColumns = useSelectedEntityColumns(
+    "hidden_entity_details_columns"
+  );
+  const getEntityFieldLabels = useEntityFieldLabels();
+
+  const error =
+    dataDetails.error || hiddenDetailsColumns.error || entityScalarFields.error;
+
+  return (
+    <>
+      {dataDetails.isLoading ||
+      entityScalarFields.isLoading ||
+      hiddenDetailsColumns.isLoading ? (
+        <ComponentIsLoading />
+      ) : error ? (
+        <ErrorAlert message={error} />
+      ) : (
+        <>
+          {fitlerOutHiddenScalarColumns(
+            entityScalarFields,
+            hiddenDetailsColumns
+          ).map(({ name }) => (
+            <>
+              <Text size="5" weight="bold">
+                {getEntityFieldLabels(name)}
+              </Text>
+              <Text>{dataDetails?.data?.[name]}</Text>
+              <Spacer />
+            </>
+          ))}
+        </>
+      )}
+    </>
+  );
+};

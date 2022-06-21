@@ -5,15 +5,17 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+
     "start": "next start",
     "lint:fix": "eslint --fix",
+    "prepare": "husky install",
     "format:fix": "prettier --write",
     "test": "jest --detectOpenHandles --runInBand",
     "typecheck": "tsc",
-    "verify": "npm run typecheck && npm run lint && npm run format-verify && npm run test",
     "format": "prettier --write \"**/*.{json,md,ts,tsx}\" \"*.{json,md,ts,tsx}\"",
-    "format-verify": "prettier --check \"src/**/*.{json,md,ts,tsx}\" \"*.{json,md,ts,tsx}\"",
-    "lint": "eslint --ext ts,tsx"
+    "format-verify": "prettier --check \"**/*.{json,md,ts,tsx}\" \"*.{json,md,ts,tsx}\"",
+    "lint": "eslint --ext ts,tsx",
+    "verify": "npm run typecheck && npm run lint && npm run format-verify && npm run test"
   },
   "dependencies": {
     "@gothicgeeks/design-system": "git+ssh://git@github.com:thrownullexception/design-system.git#bb1216b8ac69cffaea76f487690a1e31f63d0908",
@@ -33,6 +35,9 @@
     "@types/react": "^18.0.9",
     "eslint": "8.15.0",
     "eslint-config-next": "12.1.6",
+    "husky": "^8.0.1",
+    "jest": "^28.1.1",
+    "lint-staged": "^13.0.2",
     "prettier": "^2.7.1",
     "typescript": "^4.7.4"
   }

@@ -21,7 +21,7 @@ export const useEntityDataDetails = (entity: string, id: string) => {
 
   return useApi<Record<string, string>>(ENTITY_DETAILS_PATH(entity, id), {
     errorMessage: dataNotFoundMessage(entityDiction.singular),
-    enabled: id !== SLUG_LOADING_VALUE,
+    enabled: !!id && id !== SLUG_LOADING_VALUE,
   });
 };
 

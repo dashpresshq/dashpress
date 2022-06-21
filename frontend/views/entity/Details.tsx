@@ -75,6 +75,10 @@ export const EntityDetailsView = ({ id }: { id: string }) => {
   const error =
     dataDetails.error || hiddenDetailsColumns.error || entityScalarFields.error;
 
+  if (!id) {
+    return null;
+  }
+
   return (
     <>
       {dataDetails.isLoading ||

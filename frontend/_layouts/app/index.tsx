@@ -8,7 +8,14 @@ import {
 } from "@gothicgeeks/design-system";
 import { IValueLabel } from "@gothicgeeks/design-system/dist/types";
 import React, { ReactNode } from "react";
-import { HardDrive, Icon } from "react-feather";
+import {
+  HardDrive,
+  Icon,
+  Settings,
+  Home,
+  Table,
+  BarChart,
+} from "react-feather";
 import { useEntitiesMenuItems } from "../../hooks/entity/entity.store";
 import Head from "next/head";
 import { useSiteConfig } from "../../hooks/app/site.config";
@@ -45,9 +52,14 @@ export const AppLayout = ({
     <DynamicLayout
       selectionView={[
         {
+          title: "Home",
+          icon: Home,
+          link: NAVIGATION_LINKS.DASHBOARD,
+        },
+        {
           title: "Tables",
           description: "Your models",
-          icon: HardDrive,
+          icon: Table,
           viewMenuItems: {
             ...entitiesMenuItems,
             data: (entitiesMenuItems.data || []).map(({ label, value }) => ({
@@ -59,12 +71,12 @@ export const AppLayout = ({
         {
           title: "Dashboards",
           description: "Your models",
-          icon: HardDrive,
+          icon: BarChart,
           view: <>Demo View</>,
         },
         {
           title: "Settings",
-          icon: HardDrive,
+          icon: Settings,
           link: NAVIGATION_LINKS.SETTINGS.DEFAULT,
         },
       ]}

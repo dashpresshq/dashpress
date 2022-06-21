@@ -1,4 +1,10 @@
-import { ErrorAlert, SectionBox, Tabs } from "@gothicgeeks/design-system";
+import {
+  ErrorAlert,
+  SectionBox,
+  Spacer,
+  Tabs,
+  Text,
+} from "@gothicgeeks/design-system";
 import {
   useEntityFieldLabels,
   useEntityFieldTypes,
@@ -65,11 +71,19 @@ export const EntityFieldsSettings = () => {
             contents={[
               {
                 content: (
-                  <FieldsLabelForm
-                    initialValues={entityFieldLabelsMap.data}
-                    fields={entityScalarFields.data || []}
-                    onSubmit={upsertEntityFieldsMapMutation.mutateAsync}
-                  />
+                  <>
+                    <Text size="5">
+                      You get the customize the labels, for the field, Say you
+                      want `updatedAt` to be called `Last Updated`. Here is
+                      where you that
+                    </Text>
+                    <Spacer />
+                    <FieldsLabelForm
+                      initialValues={entityFieldLabelsMap.data}
+                      fields={entityScalarFields.data || []}
+                      onSubmit={upsertEntityFieldsMapMutation.mutateAsync}
+                    />
+                  </>
                 ),
                 label: "Labels",
               },
@@ -77,32 +91,58 @@ export const EntityFieldsSettings = () => {
                 content: (
                   // A message here that
                   // It is un-evitable that this will be touched but try to have a good schema to try to not touch here as much as possible
-                  <FieldsTypeForm
-                    initialValues={entityFieldTypes}
-                    fields={entityScalarFields.data || []}
-                    onSubmit={upsertEntityTypesMapMutation.mutateAsync}
-                    getEntityFieldLabels={getEntityFieldLabels}
-                  />
+                  <>
+                    <Text size="5">
+                      You get the superpowers to tell us the specific type of
+                      the fields, Say the type is `email` or `url` or `textarea`
+                      as oppose to just `text` Here is where you get to do that
+                    </Text>
+                    <Spacer />
+
+                    <FieldsTypeForm
+                      initialValues={entityFieldTypes}
+                      fields={entityScalarFields.data || []}
+                      onSubmit={upsertEntityTypesMapMutation.mutateAsync}
+                      getEntityFieldLabels={getEntityFieldLabels}
+                    />
+                  </>
                 ),
                 label: "Types",
               },
               {
                 content: (
-                  <FieldsLabelForm
-                    initialValues={entityFieldLabelsMap.data}
-                    fields={entityScalarFields.data || []}
-                    onSubmit={upsertEntityFieldsMapMutation.mutateAsync}
-                  />
+                  <>
+                    <Text size="5">
+                      You get the superpowers to tell us the data requirement
+                      for the fields, We already try go guess if it is required
+                      or the maxLength etc, But here is where you get to dump to
+                      all us all the data constraint
+                    </Text>
+                    <Spacer />
+
+                    <FieldsLabelForm
+                      initialValues={entityFieldLabelsMap.data}
+                      fields={entityScalarFields.data || []}
+                      onSubmit={upsertEntityFieldsMapMutation.mutateAsync}
+                    />
+                  </>
                 ),
                 label: "Validations",
               },
               {
                 content: (
-                  <FieldsLabelForm
-                    initialValues={entityFieldLabelsMap.data}
-                    fields={entityScalarFields.data || []}
-                    onSubmit={upsertEntityFieldsMapMutation.mutateAsync}
-                  />
+                  <>
+                    <Text size="5">
+                      For some reasons, `createdAt` is showing before
+                      `userName`. This is where you correct that wrong :wink
+                    </Text>
+                    <Spacer />
+                    <FieldsLabelForm
+                      initialValues={entityFieldLabelsMap.data}
+                      fields={entityScalarFields.data || []}
+                      onSubmit={upsertEntityFieldsMapMutation.mutateAsync}
+                    />
+                  </>
                 ),
                 label: "Order",
               },

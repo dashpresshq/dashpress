@@ -15,7 +15,6 @@ Title of the Table
 Selection Colors
 Disable type of specific fields
 Offcanvas table on details
-off canvas for details
 Validations
 Dahsboard list
 Error on none permitted pages

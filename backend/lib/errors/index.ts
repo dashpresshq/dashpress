@@ -30,7 +30,9 @@ export class BadRequestError extends CustomError {
 
 export const handleResponseError = (res: NextApiResponse, error: any) => {
   if (error instanceof CustomError) {
-    return res.status(error.code).json({ message: error.message, name: error.name });
+    return res
+      .status(error.code)
+      .json({ message: error.message, name: error.name });
   }
   return res.status(500).json({ message: error.message });
-}
+};

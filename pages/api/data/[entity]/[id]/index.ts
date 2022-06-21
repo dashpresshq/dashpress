@@ -26,7 +26,7 @@ export default async function handler(
       return res.status(204).json(await dataController.deleteData(entity, id));
     }
   } catch (error) {
-   return handleResponseError(res, error);
+    return handleResponseError(res, error);
   }
 
   res.setHeader("Allow", ["GET", "PATCH", "DELETE"]);

@@ -16,10 +16,7 @@ export const EntityActionsSettings = () => {
     >
       <SectionBox title="Actions Settings">
         <ErrorAlert message={"error"} />
-        <CreateEntityForm
-          onSubmit={() => {}}
-          fields={[]}
-        />
+        <CreateEntityForm onSubmit={() => {}} fields={[]} />
       </SectionBox>
     </BaseEntitySettingsLayout>
   );

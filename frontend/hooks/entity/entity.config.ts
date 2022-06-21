@@ -1,4 +1,3 @@
-
 import { useEntityConfiguration } from "../configuration/configration.store";
 import { CONFIGURATION_KEYS } from "../../../shared/configuration.constants";
 import { useRouteParam } from "@gothicgeeks/shared";
@@ -40,7 +39,9 @@ export function useEntityFieldLabels() {
       if (entityFieldLabelsMap.error || entityFieldLabelsMap.isLoading) {
         return userFriendlyCase(fieldName);
       }
-      return entityFieldLabelsMap.data[fieldName] || userFriendlyCase(fieldName);
+      return (
+        entityFieldLabelsMap.data[fieldName] || userFriendlyCase(fieldName)
+      );
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [entityFieldLabelsMap.isLoading]

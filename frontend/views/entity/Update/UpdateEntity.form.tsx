@@ -40,10 +40,7 @@ export const UpdateEntityForm: React.FC<
                 </Field>
               );
             })}
-            <FormButton
-              text={ButtonLang.update}
-              isMakingRequest={submitting}
-            />
+            <FormButton text={ButtonLang.update} isMakingRequest={submitting} />
           </form>
         );
       }}

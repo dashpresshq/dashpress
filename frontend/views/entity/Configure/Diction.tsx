@@ -1,9 +1,8 @@
+import { FormButton, FormInput, SectionBox } from "@gothicgeeks/design-system";
 import {
-  FormButton,
-  FormInput,
-  SectionBox,
-} from "@gothicgeeks/design-system";
-import { useEntityDiction, useEntitySlug } from "../../../hooks/entity/entity.config";
+  useEntityDiction,
+  useEntitySlug,
+} from "../../../hooks/entity/entity.config";
 import { NAVIGATION_LINKS } from "../../../lib/routing/links";
 import { BaseEntitySettingsLayout } from "./_Base";
 import { Form, Field } from "react-final-form";

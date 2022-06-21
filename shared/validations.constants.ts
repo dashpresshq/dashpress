@@ -22,16 +22,15 @@ export const ENTITY_TYPES_SELECTION_BAG: Record<
   url: {},
 
   richtext: {},
-  'datetime-local': {},
+  "datetime-local": {},
   image: {},
   color: {},
 
-// Needs context
+  // Needs context
   boolean: {}, // useColors, labels
   selection: {}, // usecolors, selections
   reference: {},
 };
-
 
 //   | 'date'
 //   | 'file'

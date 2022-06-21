@@ -3,6 +3,6 @@ export const validateEnumNameFromRequest = (input: Record<string, unknown>) => {
   if (!name) {
     return name;
   }
-    // TODO schema validations that the enum exists in schema
+  // TODO schema validations that the enum exists in schema
   return name;
 };

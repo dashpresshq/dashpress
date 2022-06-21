@@ -6,7 +6,7 @@ export class DataService {
   static getInstance() {
     if (!this._dbInstance) {
       this._dbInstance = knex({
-        client: 'pg',
+        client: "pg",
         connection: {
           database: "kademiks",
           user: "postgres",

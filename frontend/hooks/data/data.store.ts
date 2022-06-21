@@ -34,12 +34,9 @@ export function useEntityDataCreationMutation(entity: string) {
     successMessage: `${entityDiction.singular} created successfully`,
   });
 
-  return useMutation(
-    async (data: Record<string, string>) => {
-      return await makePostRequest(`/api/data/${entity}`, {data});
-    },
-    apiMutateOptions
-  );
+  return useMutation(async (data: Record<string, string>) => {
+    return await makePostRequest(`/api/data/${entity}`, { data });
+  }, apiMutateOptions);
 }
 
 // TODO optimisitc updates here
@@ -53,7 +50,7 @@ export function useEntityDataUpdationMutation(entity: string, id: string) {
   });
 
   return useMutation(async (data: Record<string, string>) => {
-    return await makePatchRequest(`/api/data/${entity}/${id}`, {data});
+    return await makePatchRequest(`/api/data/${entity}/${id}`, { data });
   }, apiMutateOptions);
 }
 

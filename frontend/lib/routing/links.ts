@@ -1,8 +1,8 @@
 export const NAVIGATION_LINKS = {
   DASHBOARD: `/admin`,
   SETTINGS: {
-    DEFAULT: '/admin/settings',
-    ENTITIES: '/admin/settings/entities',
+    DEFAULT: "/admin/settings",
+    ENTITIES: "/admin/settings/entities",
   },
   ENTITY: {
     CREATE: (entity: string) => `/admin/${entity}/create`,

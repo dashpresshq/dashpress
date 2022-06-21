@@ -39,7 +39,8 @@ export function EntityDetails() {
   );
   const getEntityFieldLabels = useEntityFieldLabels();
 
-    const error = dataDetails.error || hiddenDetailsColumns.error || entityScalarFields.error;
+  const error =
+    dataDetails.error || hiddenDetailsColumns.error || entityScalarFields.error;
 
   return (
     <AppLayout
@@ -68,8 +69,9 @@ export function EntityDetails() {
           entityScalarFields.isLoading ||
           hiddenDetailsColumns.isLoading ? (
             <ComponentIsLoading />
+          ) : error ? (
+            <ErrorAlert message={error} />
           ) : (
-            error ? <ErrorAlert message={error} /> : 
             <>
               {fitlerOutHiddenScalarColumns(
                 entityScalarFields,
@@ -90,4 +92,3 @@ export function EntityDetails() {
     </AppLayout>
   );
 }
-

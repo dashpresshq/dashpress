@@ -6,8 +6,14 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint --fix",
-    "format": "prettier --write"
+    "lint:fix": "eslint --fix",
+    "format:fix": "prettier --write",
+    "test": "jest --detectOpenHandles --runInBand",
+    "typecheck": "tsc",
+    "verify": "npm run typecheck && npm run lint && npm run format-verify && npm run test",
+    "format": "prettier --write \"**/*.{json,md,ts,tsx}\" \"*.{json,md,ts,tsx}\"",
+    "format-verify": "prettier --check \"src/**/*.{json,md,ts,tsx}\" \"*.{json,md,ts,tsx}\"",
+    "lint": "eslint --ext ts,tsx"
   },
   "dependencies": {
     "@gothicgeeks/design-system": "git+ssh://git@github.com:thrownullexception/design-system.git#bb1216b8ac69cffaea76f487690a1e31f63d0908",

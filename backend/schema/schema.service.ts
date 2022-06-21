@@ -15,14 +15,13 @@ export class SchemasService {
     return this.JSON_SCHEMA;
   };
 
-   listJsonSchemaModels(): IJsonSchemaModel[] {
+  listJsonSchemaModels(): IJsonSchemaModel[] {
     return this.loadJsonSchema()["models"];
   }
-
 
   listJsonSchemaEnums(): IJsonSchemaEnum[] {
     return this.loadJsonSchema()["enums"];
   }
 }
 
-export const schemasService= new SchemasService();
+export const schemasService = new SchemasService();

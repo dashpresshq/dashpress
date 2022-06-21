@@ -4,12 +4,12 @@ export const CONFIGURATION_KEYS: Record<
   | "hidden_entity_update_columns" //
   | "hidden_entity_details_columns" //
   | "entity_diction" //
-  | "entity_columns_types" // 
+  | "entity_columns_types" //
   | "entity_crud_settings" //
   | "relations_list_fields"
   | "entity_validations"
   | "entities_order"
-  | "entity_columns_labels" // 
+  | "entity_columns_labels" //
   | "entities_to_hide_from_menu", //
   { requireEntity: boolean; defaultValue: unknown }
 > = {
@@ -40,7 +40,7 @@ export const CONFIGURATION_KEYS: Record<
   relations_list_fields: { requireEntity: true, defaultValue: [] },
 
   entities_to_hide_from_menu: { requireEntity: false, defaultValue: [] },
-  entities_order: { requireEntity: false, defaultValue: [] }
+  entities_order: { requireEntity: false, defaultValue: [] },
 };
 
 // Plugin System
@@ -64,41 +64,41 @@ Creator mode
 User mode
 */
 
- // entity_columns_labels: { requireEntity: true, defaultValue: {
-  //   label: string,
-  //   type: string,
-  //   validations:[
-  //     {
-  //       type: "required",
-  //     },
-  //     {
-  //       type: "postiveNumber",
-  //     },
-  //     {
-  //     },
-  //     {
-  //       type: "matchOtherField",
-  //       value: ""
-  //     },
-  //     {
-  //       type: "unique",
-  //     },
-  //     {
-  //       _type: "requiredIf",
-  //       field: "",
-  //     },
+// entity_columns_labels: { requireEntity: true, defaultValue: {
+//   label: string,
+//   type: string,
+//   validations:[
+//     {
+//       type: "required",
+//     },
+//     {
+//       type: "postiveNumber",
+//     },
+//     {
+//     },
+//     {
+//       type: "matchOtherField",
+//       value: ""
+//     },
+//     {
+//       type: "unique",
+//     },
+//     {
+//       _type: "requiredIf",
+//       field: "",
+//     },
 // alphanumeric: {},
-  //     {
-  //     _type: "regex",
-  //     value: "\\"
-  //   },
-  //   {
-  //     _type: "min",
-  //     value: number
-  //   },
-  //   {
-  //     _type: "max",
-  //     value: number
-  //   }
-  // ]
-  // } }, // {key: label}
+//     {
+//     _type: "regex",
+//     value: "\\"
+//   },
+//   {
+//     _type: "min",
+//     value: number
+//   },
+//   {
+//     _type: "max",
+//     value: number
+//   }
+// ]
+// } }, // {key: label}

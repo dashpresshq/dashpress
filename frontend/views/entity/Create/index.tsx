@@ -5,7 +5,7 @@ import {
   SectionBox,
   SectionCenter,
   Spacer,
-  FormSkeletonSchema
+  FormSkeletonSchema,
 } from "@gothicgeeks/design-system";
 import { TitleLang } from "@gothicgeeks/shared";
 import { NAVIGATION_LINKS } from "../../../lib/routing/links";

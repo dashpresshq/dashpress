@@ -13,7 +13,7 @@ export const FieldsTypeForm: React.FC<{
   fields: IEntityField[];
   initialValues?: Record<string, unknown>;
   onSubmit: (data: Record<string, unknown>) => void;
-  getEntityFieldLabels: (fieldName: string) => string,
+  getEntityFieldLabels: (fieldName: string) => string;
 }> = ({ onSubmit, initialValues, fields, getEntityFieldLabels }) => {
   return (
     <Form

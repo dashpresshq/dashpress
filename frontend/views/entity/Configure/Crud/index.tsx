@@ -14,6 +14,7 @@ import { useEntityScalarFields } from "../../../../hooks/entity/entity.store";
 import { SelectionTab } from "./SelectionTab";
 
 import { useEffect, useState } from "react";
+import { ENTITY_TABLE_PATH } from "frontend/hooks/data/data.store";
 
 const LABELS = [
   // TODO
@@ -42,7 +43,10 @@ export const EntityCrudSettings = () => {
 
   const upsertTableColumnsMutation = useUpsertConfigurationMutation(
     "hidden_entity_table_columns",
-    entity
+    entity,
+    {
+      otherEndpoints: [ENTITY_TABLE_PATH(entity)],
+    }
   );
 
   const upsertCreateColumnsMutation = useUpsertConfigurationMutation(
@@ -119,9 +123,9 @@ export const EntityCrudSettings = () => {
                     description="Toggle the fields that are allowed to be created in the Form"
                     isLoading={hiddenCreateColumns.isLoading}
                     hiddenColumns={hiddenCreateColumns.data || []}
-                    onSubmit={(data) =>
-                      upsertCreateColumnsMutation.mutateAsync(data)
-                    }
+                    onSubmit={async (data) => {
+                      await upsertCreateColumnsMutation.mutateAsync(data);
+                    }}
                     onToggle={() => toggleCrudSettings("create")}
                     enabled={entityCrudSettingsState.create}
                     labels={["Hide Create Button", "Show Create Button"]}
@@ -137,9 +141,9 @@ export const EntityCrudSettings = () => {
                     isLoading={hiddenUpdateColumns.isLoading}
                     hiddenColumns={hiddenUpdateColumns.data || []}
                     onToggle={() => toggleCrudSettings("update")}
-                    onSubmit={(data) =>
-                      upsertUpdateColumnsMutation.mutateAsync(data)
-                    }
+                    onSubmit={async (data) => {
+                      await upsertUpdateColumnsMutation.mutateAsync(data);
+                    }}
                     enabled={entityCrudSettingsState.update}
                     labels={["Hide Edit Button", "Show Edit Button"]}
                   />
@@ -154,9 +158,9 @@ export const EntityCrudSettings = () => {
                     isLoading={hiddenDetailsColumns.isLoading}
                     hiddenColumns={hiddenDetailsColumns.data || []}
                     onToggle={() => toggleCrudSettings("details")}
-                    onSubmit={(data) =>
-                      upsertDetailsColumnsMutation.mutateAsync(data)
-                    }
+                    onSubmit={async (data) => {
+                      upsertDetailsColumnsMutation.mutateAsync(data);
+                    }}
                     enabled={entityCrudSettingsState.details}
                     labels={["Hide Details Button", "Show Details Button"]}
                   />
@@ -171,9 +175,9 @@ export const EntityCrudSettings = () => {
                     isLoading={hiddenTableColumns.isLoading}
                     onToggle={() => toggleCrudSettings("table")}
                     hiddenColumns={hiddenTableColumns.data || []}
-                    onSubmit={(data) =>
-                      upsertTableColumnsMutation.mutateAsync(data)
-                    }
+                    onSubmit={async (data) => {
+                      upsertTableColumnsMutation.mutateAsync(data);
+                    }}
                     enabled={entityCrudSettingsState.table}
                     labels={["Hide In Table List", "Show In Table List"]}
                   />

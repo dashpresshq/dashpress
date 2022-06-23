@@ -1,7 +1,7 @@
 import knex, { Knex } from "knex";
 import get from "lodash/get";
 export class DataService {
-  static _dbInstance: Knex = null;
+  static _dbInstance: Knex | null = null;
 
   static getInstance() {
     if (!this._dbInstance) {
@@ -31,6 +31,7 @@ export class DataService {
 
   async list(
     entity: string,
+    select: string[],
     dataFetchingModifiers: {
       take: number;
       page: number;
@@ -38,8 +39,8 @@ export class DataService {
       sortBy: string;
     }
   ) {
-    // Select
-    let query = DataService.getInstance().select().from(entity);
+    // TODO Select
+    let query = DataService.getInstance().select(select).from(entity);
     if (dataFetchingModifiers.page && dataFetchingModifiers.take) {
       query = query
         .limit(Number(dataFetchingModifiers.take))
@@ -55,6 +56,8 @@ export class DataService {
         dataFetchingModifiers.orderBy
       );
     }
+
+    console.log(query.toSQL());
 
     return await query;
   }

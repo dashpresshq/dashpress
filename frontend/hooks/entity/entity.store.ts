@@ -1,4 +1,5 @@
 import { dataNotFoundMessage, useApi } from "@gothicgeeks/shared";
+import { filterScalarEntity } from "shared/entity.logic";
 import { IEntityField } from "../../../backend/entities/types";
 import { ILabelValue } from "../../../types";
 import { useEntityDictionPlurals } from "./entity.queries";
@@ -45,7 +46,7 @@ export const useEntityScalarFields = (entity: string) => {
     errorMessage: dataNotFoundMessage("Entity Scalar Fields"),
     enabled: entity !== "loading",
     selector: (data: IEntityField[]) => {
-      return data.filter(({ kind }) => kind === "scalar" || kind === "enum");
+      return data.filter(filterScalarEntity);
     },
   });
 };

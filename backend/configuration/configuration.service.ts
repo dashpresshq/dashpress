@@ -34,6 +34,9 @@ export class ConfigurationService {
   ): Promise<T> {
     const config = await ConfigurationService.getConfig();
     const { requireEntity, defaultValue } = CONFIGURATION_KEYS[key];
+    if (requireEntity && !entity) {
+      throw new Error(`${key} requires entity to be passed`);
+    }
     const value = requireEntity ? (config[key] || {})[entity] : config[key];
     return value || defaultValue;
   }

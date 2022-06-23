@@ -1,10 +1,15 @@
+import {
+  ConfigurationService,
+  configurationService,
+} from "backend/configuration/configuration.service";
 import { EntitiesService, entitiesService } from "../entities/entities.service";
 import { dataService, DataService } from "./data.service";
 
 export class DataController {
   constructor(
     private dataService: DataService,
-    private entitiesService: EntitiesService
+    private entitiesService: EntitiesService,
+    private configurationService: ConfigurationService
   ) {}
 
   async listData(entity: string) {}
@@ -44,17 +49,34 @@ export class DataController {
 
   async tableData(entity: string, filters: Record<string, unknown>) {
     // validate the entity is tableable
+
+    const entityScalarFields =
+      this.entitiesService.getScalarEntityFields(entity);
+
+    const hiddenColumns = await this.configurationService.show<string[]>(
+      "hidden_entity_table_columns",
+      entity
+    );
+
     return {
-      data: await this.dataService.list(entity, {
-        take: Number(filters.take),
-        page: Number(filters.page),
-        orderBy:
-          (filters.orderBy as string).toLowerCase() === "desc" ? "desc" : "asc",
-        sortBy: this.entitiesService.validateEntityField(
-          entity,
-          filters.sortBy
-        ),
-      }),
+      data: await this.dataService.list(
+        entity,
+        entityScalarFields
+          .filter(({ name }) => !hiddenColumns.includes(name))
+          .map(({ name }) => name),
+        {
+          take: Number(filters.take),
+          page: Number(filters.page),
+          orderBy:
+            (filters.orderBy as string).toLowerCase() === "desc"
+              ? "desc"
+              : "asc",
+          sortBy: this.entitiesService.validateEntityField(
+            entity,
+            filters.sortBy
+          ),
+        }
+      ),
       pageIndex: filters.page,
       pageSize: filters.take,
       totalRecords: await this.dataService.count(entity),
@@ -62,4 +84,8 @@ export class DataController {
   }
 }
 
-export const dataController = new DataController(dataService, entitiesService);
+export const dataController = new DataController(
+  dataService,
+  entitiesService,
+  configurationService
+);

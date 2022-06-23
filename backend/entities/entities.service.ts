@@ -1,3 +1,4 @@
+import { filterScalarEntity } from "shared/entity.logic";
 import { BadRequestError } from "../lib/errors";
 import { SchemasService, schemasService } from "../schema/schema.service";
 import { IJsonSchemaModel } from "../schema/schema.types";
@@ -16,6 +17,10 @@ export class EntitiesService {
 
   getEntityFields = (entity: string): IEntityField[] => {
     return this.getEntityFromSchema(entity).fields;
+  };
+
+  getScalarEntityFields = (entity: string): IEntityField[] => {
+    return this.getEntityFromSchema(entity).fields.filter(filterScalarEntity);
   };
 
   getEntityPrimaryField(entity: string): string {

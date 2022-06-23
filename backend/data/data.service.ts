@@ -39,7 +39,6 @@ export class DataService {
       sortBy: string;
     }
   ) {
-    // TODO Select
     let query = DataService.getInstance().select(select).from(entity);
     if (dataFetchingModifiers.page && dataFetchingModifiers.take) {
       query = query
@@ -62,8 +61,16 @@ export class DataService {
     return await query;
   }
 
-  async show<T>(entity: string, query: Record<string, unknown>): Promise<T> {
-    return await DataService.getInstance().table(entity).where(query).first();
+  async show<T>(
+    entity: string,
+    select: string[],
+    query: Record<string, unknown>
+  ): Promise<T> {
+    return await DataService.getInstance()
+      .table(entity)
+      .select(select)
+      .where(query)
+      .first();
   }
 
   async create(entity: string, data: Record<string, unknown>) {

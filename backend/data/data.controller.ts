@@ -14,10 +14,22 @@ export class DataController {
 
   async listData(entity: string) {}
 
+  async referenceData(entity: string, id: string): Promise<string> {
+    const data = await this.dataService.show<Record<string, unknown>>(
+      entity,
+      [],
+      {
+        [this.entitiesService.getEntityPrimaryField(entity)]: id,
+      }
+    );
+
+    return Object.values(data)[4] as string;
+  }
+
   async showData(entity: string, id: string) {
     // validate the showData fields
     // validate the showData values and that the fields are showable and that this entity is showable
-    return await this.dataService.show(entity, {
+    return await this.dataService.show(entity, [], {
       [this.entitiesService.getEntityPrimaryField(entity)]: id,
     });
   }
@@ -48,7 +60,7 @@ export class DataController {
   }
 
   async tableData(entity: string, filters: Record<string, unknown>) {
-    // validate the entity is tableable
+    // TODO validate the entity is tableable
 
     const entityScalarFields =
       this.entitiesService.getScalarEntityFields(entity);

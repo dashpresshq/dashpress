@@ -46,9 +46,30 @@ export const useEntityScalarFields = (entity: string) => {
     errorMessage: dataNotFoundMessage("Entity Scalar Fields"),
     enabled: entity !== "loading",
     selector: (data: IEntityField[]) => {
+      console.log(data);
       return data.filter(filterScalarEntity);
     },
   });
+};
+
+export const useEntityReferenceFields = (entity: string) => {
+  return useApi<Record<string, string>>(ENTITY_FIELDS_ENDPOINT(entity), {
+    errorMessage: dataNotFoundMessage("Entity Reference Fields"),
+    enabled: entity !== "loading",
+    selector: (data: IEntityField[]) => {
+      return getEntityReferencesMap(data);
+    },
+  });
+};
+
+export const getEntityReferencesMap = (
+  input: IEntityField[]
+): Record<string, string> => {
+  return Object.fromEntries(
+    input
+      .filter(({ relationFromFields }) => relationFromFields?.length === 1)
+      .map(({ relationFromFields, type }) => [relationFromFields?.[0], type])
+  );
 };
 
 export const useEntityIdField = (entity: string) => {

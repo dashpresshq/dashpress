@@ -1,15 +1,36 @@
 import { ITableColumn } from "@gothicgeeks/design-system/dist/components/Table/Table.types";
+import { useEntityDataReference } from "frontend/hooks/data/data.store";
 import {
   useEntityCrudSettings,
   useEntityFieldLabels,
   useEntitySlug,
   useSelectedEntityColumns,
 } from "frontend/hooks/entity/entity.config";
-import { useEntityScalarFields } from "frontend/hooks/entity/entity.store";
+import {
+  useEntityReferenceFields,
+  useEntityScalarFields,
+} from "frontend/hooks/entity/entity.store";
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
 import Link from "next/link";
 import { fitlerOutHiddenScalarColumns } from "../utils";
 import { TableActions } from "./Actions";
+
+const ReferenceComponent: React.FC<{ entity: string; id: string }> = ({
+  entity,
+  id,
+}) => {
+  const entityDataReference = useEntityDataReference(entity, id);
+
+  if (entityDataReference.isLoading) {
+    return <>Loading...</>;
+  }
+
+  if (entityDataReference.error) {
+    return <>{id}</>;
+  }
+
+  return <>{entityDataReference.data || id}</>;
+};
 
 export const useTableColumns = (
   setShowDetailsOffCanvas: (id: string) => void
@@ -18,6 +39,7 @@ export const useTableColumns = (
   const getEntityFieldLabels = useEntityFieldLabels();
   const entityCrudSettings = useEntityCrudSettings();
   const entityScalarFields = useEntityScalarFields(entity);
+  const entityReferenceFields = useEntityReferenceFields(entity);
   const hiddenTableColumns = useSelectedEntityColumns(
     "hidden_entity_table_columns"
   );
@@ -31,17 +53,27 @@ export const useTableColumns = (
     // filter: {_type: index % 2 === 0 ? "string" : "number"},
     // disableSortBy?: boolean;
     Cell: ({ value }) => {
-      if (!isId) {
-        return <>{value as string}</>;
+      if (isId) {
+        return (
+          <Link
+            href={NAVIGATION_LINKS.ENTITY.DETAILS(entity, value as string)}
+            passHref={true}
+          >
+            {value as string}
+          </Link>
+        );
       }
-      return (
-        <Link
-          href={NAVIGATION_LINKS.ENTITY.DETAILS(entity, value as string)}
-          passHref={true}
-        >
-          {value as string}
-        </Link>
-      );
+
+      if (entityReferenceFields.data?.[name]) {
+        return (
+          <ReferenceComponent
+            entity={entityReferenceFields.data?.[name]}
+            id={value as string}
+          />
+        );
+      }
+
+      return <>{value as string}</>;
     },
   }));
   if (

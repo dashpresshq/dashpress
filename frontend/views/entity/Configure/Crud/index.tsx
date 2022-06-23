@@ -16,11 +16,7 @@ import { SelectionTab } from "./SelectionTab";
 import { useEffect, useState } from "react";
 import { ENTITY_TABLE_PATH } from "frontend/hooks/data/data.store";
 
-const LABELS = [
-  // TODO
-  // "List Able",
-  // "Order",
-];
+// TODO "List Able",
 
 export const EntityCrudSettings = () => {
   const entity = useEntitySlug();

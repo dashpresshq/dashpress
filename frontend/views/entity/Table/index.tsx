@@ -26,6 +26,7 @@ import { useTableColumns } from "./useTableColumns";
 
 // TODO sync table to url
 // TODO when table passes a limit then a non synced columns to show
+// TODO crud views validations
 export function EntityTable() {
   const entity = useEntitySlug();
   const entityDiction = useEntityDiction();
@@ -45,7 +46,6 @@ export function EntityTable() {
   const error =
     entityCrudSettings.error ||
     entityScalarFields.error ||
-    entityCrudSettings.error ||
     hiddenTableColumns.error;
 
   return (
@@ -60,7 +60,6 @@ export function EntityTable() {
     >
       {entityCrudSettings.isLoading ||
       entityScalarFields.isLoading ||
-      entityCrudSettings.isLoading ||
       entity === SLUG_LOADING_VALUE ||
       hiddenTableColumns.isLoading ? (
         <ComponentIsLoading />
@@ -73,7 +72,7 @@ export function EntityTable() {
               url={ENTITY_TABLE_PATH(entity)}
               title=""
               columns={columns}
-              // ovveride indicator
+              // ovveride loading indicator
               menuItems={menuItems}
             />
           )}

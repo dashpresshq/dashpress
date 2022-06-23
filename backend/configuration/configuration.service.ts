@@ -7,11 +7,10 @@ const pathToConfigFile = path.resolve(require("os").homedir(), "cardinal.json");
 const DEFAULT_CONFIG = {};
 
 export class ConfigurationService {
-  static _config: Record<string, unknown> = null;
+  static _config: Record<string, unknown> | null = null;
 
   static async getConfig() {
     if (!this._config) {
-      ``;
       try {
         // TODO allow external config like redis/ db, etc
         this._config =

@@ -15,6 +15,8 @@ export const ENTITY_TABLE_PATH = (entity: string) =>
   `/api/data/${entity}/table`;
 export const ENTITY_DETAILS_PATH = (entity: string, id: string) =>
   `/api/data/${entity}/${id}`;
+export const ENTITY_REFERENCE_PATH = (entity: string, id: string) =>
+  `/api/data/${entity}/${id}/reference`;
 
 export const useEntityDataDetails = (entity: string, id: string) => {
   const entityDiction = useEntityDiction();
@@ -22,6 +24,13 @@ export const useEntityDataDetails = (entity: string, id: string) => {
   return useApi<Record<string, string>>(ENTITY_DETAILS_PATH(entity, id), {
     errorMessage: dataNotFoundMessage(entityDiction.singular),
     enabled: !!id && id !== SLUG_LOADING_VALUE,
+  });
+};
+
+export const useEntityDataReference = (entity: string, id: string) => {
+  return useApi<Record<string, string>>(ENTITY_REFERENCE_PATH(entity, id), {
+    errorMessage: dataNotFoundMessage("Reference data not found"),
+    enabled: !!id,
   });
 };
 

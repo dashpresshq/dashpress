@@ -1,4 +1,9 @@
-import { FormButton, FormSelect } from "@gothicgeeks/design-system";
+import {
+  FormButton,
+  FormSelect,
+  FormSkeleton,
+  FormSkeletonSchema,
+} from "@gothicgeeks/design-system";
 import { IEntityField } from "../../../../../backend/entities/types";
 import { Form, Field } from "react-final-form";
 import {
@@ -14,7 +19,20 @@ export const FieldsTypeForm: React.FC<{
   initialValues?: Record<string, unknown>;
   onSubmit: (data: Record<string, unknown>) => void;
   getEntityFieldLabels: (fieldName: string) => string;
-}> = ({ onSubmit, initialValues, fields, getEntityFieldLabels }) => {
+  isLoading: boolean;
+}> = ({ onSubmit, initialValues, fields, getEntityFieldLabels, isLoading }) => {
+  if (isLoading) {
+    return (
+      <FormSkeleton
+        schema={[
+          FormSkeletonSchema.Input,
+          FormSkeletonSchema.Input,
+          FormSkeletonSchema.Input,
+          FormSkeletonSchema.Textarea,
+        ]}
+      />
+    );
+  }
   return (
     <Form
       onSubmit={onSubmit}

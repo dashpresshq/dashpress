@@ -1,3 +1,5 @@
+import qs from "qs";
+
 export const NAVIGATION_LINKS = {
   DASHBOARD: `/admin`,
   SETTINGS: {
@@ -10,10 +12,21 @@ export const NAVIGATION_LINKS = {
     DETAILS: (entity: string, id: string) => `/admin/${entity}/${id}`,
     UPDATE: (entity: string, id: string) => `/admin/${entity}/${id}/update`,
     CONFIG: {
-      CRUD: (entity: string) => `/admin/${entity}/config/crud`,
-      FIELDS: (entity: string) => `/admin/${entity}/config/fields`,
+      CRUD: (entity: string, query?: Record<string, string>) =>
+        `/admin/${entity}/config/crud` + queryObjectToQueryString(query),
+      FIELDS: (entity: string, query?: Record<string, string>) =>
+        `/admin/${entity}/config/fields` + queryObjectToQueryString(query),
       ACTIONS: (entity: string) => `/admin/${entity}/config/actions`,
       DICTION: (entity: string) => `/admin/${entity}/config/diction`,
     },
   },
+};
+
+const queryObjectToQueryString = (
+  queryObject?: Record<string, string>
+): string => {
+  if (!queryObject) {
+    return "";
+  }
+  return "?" + qs.stringify(queryObject);
 };

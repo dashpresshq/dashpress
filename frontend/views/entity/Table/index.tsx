@@ -33,8 +33,10 @@ export function EntityTable() {
   const entityScalarFields = useEntityScalarFields(entity);
   const entityCrudSettings = useEntityCrudSettings();
   const actionItems = useEntityActionMenuItems([
-    EntityActionTypes.CRUD,
+    EntityActionTypes.Table,
     EntityActionTypes.Diction,
+    EntityActionTypes.Labels,
+    EntityActionTypes.Types,
   ]);
   const menuItems = useTableMenuItems();
   const hiddenTableColumns = useSelectedEntityColumns(
@@ -82,6 +84,7 @@ export function EntityTable() {
         </>
       )}
       <OffCanvas
+        // Show the entity title here
         title="Details"
         onClose={closeDetailsCanvas}
         show={!!detailsCanvasEntity}

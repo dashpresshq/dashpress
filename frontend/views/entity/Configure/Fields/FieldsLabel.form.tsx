@@ -1,4 +1,9 @@
-import { FormButton, FormInput } from "@gothicgeeks/design-system";
+import {
+  FormButton,
+  FormInput,
+  FormSkeleton,
+  FormSkeletonSchema,
+} from "@gothicgeeks/design-system";
 import { IEntityField } from "../../../../../backend/entities/types";
 import { Form, Field } from "react-final-form";
 import {
@@ -12,7 +17,20 @@ export const FieldsLabelForm: React.FC<{
   fields: IEntityField[];
   initialValues?: Record<string, unknown>;
   onSubmit: (data: Record<string, unknown>) => void;
-}> = ({ onSubmit, initialValues, fields }) => {
+  isLoading: boolean;
+}> = ({ isLoading, onSubmit, initialValues, fields }) => {
+  if (isLoading) {
+    return (
+      <FormSkeleton
+        schema={[
+          FormSkeletonSchema.Input,
+          FormSkeletonSchema.Input,
+          FormSkeletonSchema.Input,
+          FormSkeletonSchema.Textarea,
+        ]}
+      />
+    );
+  }
   return (
     <Form
       onSubmit={onSubmit}

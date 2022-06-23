@@ -1,5 +1,4 @@
 import { ITableColumn } from "@gothicgeeks/design-system/dist/components/Table/Table.types";
-import { useEntityDataReference } from "frontend/hooks/data/data.store";
 import {
   useEntityCrudSettings,
   useEntityFieldLabels,
@@ -14,46 +13,7 @@ import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
 import Link from "next/link";
 import { fitlerOutHiddenScalarColumns } from "../utils";
 import { TableActions } from "./Actions";
-import { useDetailsOffCanvasStore } from "./hooks/useDetailsOffCanvas.store";
-import styled from "styled-components";
-
-const ReferenceComponent: React.FC<{ entity: string; id: string }> = ({
-  entity,
-  id,
-}) => {
-  const openDetailsCanvas = useDetailsOffCanvasStore((state) => state.open);
-
-  const entityDataReference = useEntityDataReference(entity, id);
-
-  if (entityDataReference.isLoading) {
-    return <>Loading...</>;
-  }
-
-  if (entityDataReference.error) {
-    return <>{id}</>;
-  }
-
-  return (
-    <TextButton
-      onClick={() => openDetailsCanvas({ entity, id })}
-      text={entityDataReference.data || id}
-    />
-  );
-};
-
-const TextButton: React.FC<{ onClick: () => void; text: string }> = ({
-  onClick,
-  text,
-}) => {
-  return <StyledLinkLikeButton onClick={onClick}>{text}</StyledLinkLikeButton>;
-};
-
-const StyledLinkLikeButton = styled.button`
-  &:focus {
-    outline: 0;
-  }
-  background: white;
-`;
+import { ReferenceComponent } from "./ReferenceComponent";
 
 export const useTableColumns = () => {
   const entity = useEntitySlug();

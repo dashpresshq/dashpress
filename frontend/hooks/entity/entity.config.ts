@@ -66,7 +66,10 @@ export function useEntityFieldTypes() {
 
   return Object.fromEntries(
     (entityScalarFields.data || []).map(({ name, type, kind }) => {
-      return [name, getEntityType(entityFieldTypesMap.data, name, kind, type)];
+      return [
+        name,
+        getEntityType(entityFieldTypesMap.data || {}, name, kind, type),
+      ];
     })
   );
 }

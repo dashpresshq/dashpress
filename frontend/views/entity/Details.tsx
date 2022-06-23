@@ -28,8 +28,9 @@ export function EntityDetails() {
   const entityDiction = useEntityDiction();
   const id = useEntityId();
   const actionItems = useEntityActionMenuItems([
-    EntityActionTypes.CRUD,
-    EntityActionTypes.Fields,
+    EntityActionTypes.Details,
+    EntityActionTypes.Types,
+    EntityActionTypes.Labels,
   ]);
   const entity = useEntitySlug();
 

@@ -32,8 +32,8 @@ export function EntityCreate() {
   const entityScalarFields = useEntityScalarFields(entity);
   const entityDataCreationMutation = useEntityDataCreationMutation(entity);
   const actionItems = useEntityActionMenuItems([
-    EntityActionTypes.CRUD,
-    EntityActionTypes.Fields,
+    EntityActionTypes.Create,
+    EntityActionTypes.Validations,
   ]);
   const hiddenCreateColumns = useSelectedEntityColumns(
     "hidden_entity_create_columns"

@@ -23,8 +23,11 @@ import {
 } from "../../../../hooks/configuration/configration.store";
 import { FieldsLabelForm } from "./FieldsLabel.form";
 import { FieldsTypeForm } from "./FieldsType.form";
+import { useRouteParam } from "@gothicgeeks/shared";
 
 export const EntityFieldsSettings = () => {
+  const tabFromUrl = useRouteParam("tab");
+
   const entity = useEntitySlug();
   const entityScalarFields = useEntityScalarFields(entity);
   const entityFieldLabelsMap = useEntityConfiguration<Record<string, string>>(
@@ -57,6 +60,11 @@ export const EntityFieldsSettings = () => {
     }
   );
 
+  const sharedLoadingState =
+    entityScalarFields.isLoading ||
+    entityFieldLabelsMap.isLoading ||
+    entityFieldTypesMap.isLoading;
+
   return (
     <BaseEntitySettingsLayout
       menuItem={{
@@ -72,105 +80,110 @@ export const EntityFieldsSettings = () => {
         }
       />
       <SectionBox title="Fields Settings">
-        {entityScalarFields.isLoading ||
-        entityFieldLabelsMap.isLoading ||
-        entityFieldTypesMap.isLoading ? (
-          <>Loading...</>
-        ) : (
-          <Tabs
-            // TODO add default tab
-            contents={[
-              {
-                content: (
-                  <>
-                    <Text size="5">
-                      You get the customize the labels, for the field, Say you
-                      want `updatedAt` to be called `Last Updated`. Here is
-                      where you that
-                    </Text>
-                    <Spacer />
-                    <FieldsLabelForm
-                      initialValues={entityFieldLabelsMap.data}
-                      fields={entityScalarFields.data || []}
-                      onSubmit={upsertEntityFieldsMapMutation.mutateAsync}
-                    />
-                  </>
-                ),
-                label: "Labels",
-              },
-              {
-                content: (
-                  // A message here that
-                  // It is un-evitable that this will be touched but try to have a good schema to try to not touch here as much as possible
-                  <>
-                    <Text size="5">
-                      You get the superpowers to tell us the specific type of
-                      the fields, Say the type is `email` or `url` or `textarea`
-                      as oppose to just `text` Here is where you get to do that
-                    </Text>
-                    <Spacer />
+        <Tabs
+          currentTab={tabFromUrl}
+          contents={[
+            {
+              content: (
+                <>
+                  <Text size="5">
+                    You get the customize the labels, for the field, Say you
+                    want `updatedAt` to be called `Last Updated`. Here is where
+                    you that
+                  </Text>
+                  <Spacer />
+                  <FieldsLabelForm
+                    isLoading={sharedLoadingState}
+                    initialValues={entityFieldLabelsMap.data}
+                    fields={entityScalarFields.data || []}
+                    onSubmit={async (data) => {
+                      await upsertEntityFieldsMapMutation.mutateAsync(
+                        data as Record<string, string>
+                      );
+                    }}
+                  />
+                </>
+              ),
+              label: "Labels",
+            },
+            {
+              content: (
+                // A message here that
+                // It is un-evitable that this will be touched but try to have a good schema to try to not touch here as much as possible
+                <>
+                  <Text size="5">
+                    You get the superpowers to tell us the specific type of the
+                    fields, Say the type is `email` or `url` or `textarea` as
+                    oppose to just `text` Here is where you get to do that
+                  </Text>
+                  <Spacer />
 
-                    <FieldsTypeForm
-                      initialValues={entityFieldTypes}
-                      fields={entityScalarFields.data || []}
-                      onSubmit={upsertEntityTypesMapMutation.mutateAsync}
-                      getEntityFieldLabels={getEntityFieldLabels}
-                    />
-                  </>
-                ),
-                label: "Types",
-              },
-              {
-                content: (
-                  <>
-                    <Text size="5">
-                      You get the superpowers to tell us the data requirement
-                      for the fields, We already try go guess if it is required
-                      or the maxLength etc, But here is where you get to dump to
-                      all us all the data constraint
-                    </Text>
-                    <Spacer />
+                  <FieldsTypeForm
+                    isLoading={sharedLoadingState}
+                    initialValues={entityFieldTypes}
+                    fields={entityScalarFields.data || []}
+                    onSubmit={async (data) => {
+                      await upsertEntityTypesMapMutation.mutateAsync(
+                        data as Record<string, string>
+                      );
+                    }}
+                    getEntityFieldLabels={getEntityFieldLabels}
+                  />
+                </>
+              ),
+              label: "Types",
+            },
+            {
+              content: (
+                <>
+                  <Text size="5">
+                    You get the superpowers to tell us the data requirement for
+                    the fields, We already try go guess if it is required or the
+                    maxLength etc, But here is where you get to dump to all us
+                    all the data constraint
+                  </Text>
+                  <Spacer />
 
-                    <FieldsLabelForm
-                      initialValues={entityFieldLabelsMap.data}
-                      fields={entityScalarFields.data || []}
-                      onSubmit={upsertEntityFieldsMapMutation.mutateAsync}
-                    />
-                  </>
-                ),
-                label: "Validations",
-              },
-              {
-                content: (
-                  <>
-                    <Text size="5">
-                      For some reasons, `createdAt` is showing before
-                      `userName`. This is where you correct that wrong :wink
-                    </Text>
-                    <Spacer />
-                    <SortList
-                      data={{
-                        ...entityFieldTypesMap,
-                        data: (entityScalarFields.data || []).map(
-                          ({ name }) => ({
-                            value: name,
-                            label: getEntityFieldLabels(name),
-                          })
-                        ),
-                      }}
-                      onSave={async (data) => {
-                        await upsertEntityColumnsOrderMutation.mutateAsync(
-                          data
-                        );
-                      }}
-                    />
-                  </>
-                ),
-                label: "Order",
-              },
-            ]}
-          />
-        )}
+                  <FieldsLabelForm
+                    isLoading={sharedLoadingState}
+                    initialValues={entityFieldLabelsMap.data}
+                    fields={entityScalarFields.data || []}
+                    onSubmit={async (data) => {
+                      await upsertEntityFieldsMapMutation.mutateAsync(
+                        data as Record<string, string>
+                      );
+                    }}
+                  />
+                </>
+              ),
+              label: "Validations",
+            },
+            {
+              content: (
+                <>
+                  <Text size="5">
+                    For some reasons, `createdAt` is showing before `userName`.
+                    This is where you correct that wrong :wink
+                  </Text>
+                  <Spacer />
+                  <SortList
+                    data={{
+                      ...entityFieldTypesMap,
+                      data: (entityScalarFields.data || []).map(({ name }) => ({
+                        value: name,
+                        label: getEntityFieldLabels(name),
+                      })),
+                    }}
+                    onSave={async (data) => {
+                      await upsertEntityColumnsOrderMutation.mutateAsync(data);
+                    }}
+                  />
+                </>
+              ),
+              label: "Order",
+            },
+          ]}
+        />
       </SectionBox>
     </BaseEntitySettingsLayout>
   );

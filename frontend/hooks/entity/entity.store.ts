@@ -3,7 +3,7 @@ import { IEntityField } from "../../../backend/entities/types";
 import { ILabelValue } from "../../../types";
 import { useEntityDictionPlurals } from "./entity.queries";
 
-const ENTITY_FIELDS_ENDPOINT = (entity: string) =>
+export const ENTITY_FIELDS_ENDPOINT = (entity: string) =>
   `/api/entities/${entity}/fields`;
 
 export const ENTITIES_MENU_ENDPOINT = "/api/entities/menu";

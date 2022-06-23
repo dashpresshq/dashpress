@@ -1,6 +1,7 @@
 import {
   ErrorAlert,
   SectionBox,
+  SortList,
   Spacer,
   Tabs,
   Text,
@@ -12,7 +13,10 @@ import {
 } from "../../../../hooks/entity/entity.config";
 import { NAVIGATION_LINKS } from "../../../../lib/routing/links";
 import { BaseEntitySettingsLayout } from ".././_Base";
-import { useEntityScalarFields } from "../../../../hooks/entity/entity.store";
+import {
+  ENTITY_FIELDS_ENDPOINT,
+  useEntityScalarFields,
+} from "../../../../hooks/entity/entity.store";
 import {
   useEntityConfiguration,
   useUpsertConfigurationMutation,
@@ -27,6 +31,7 @@ export const EntityFieldsSettings = () => {
     "entity_columns_labels",
     entity
   );
+  const getEntityFieldLabels = useEntityFieldLabels();
   const entityFieldTypesMap = useEntityConfiguration<Record<string, string>>(
     "entity_columns_types",
     entity
@@ -44,7 +49,13 @@ export const EntityFieldsSettings = () => {
     entity
   );
 
-  const getEntityFieldLabels = useEntityFieldLabels();
+  const upsertEntityColumnsOrderMutation = useUpsertConfigurationMutation(
+    "entity_fields_orders",
+    entity,
+    {
+      otherEndpoints: [ENTITY_FIELDS_ENDPOINT(entity)],
+    }
+  );
 
   return (
     <BaseEntitySettingsLayout
@@ -137,10 +148,21 @@ export const EntityFieldsSettings = () => {
                       `userName`. This is where you correct that wrong :wink
                     </Text>
                     <Spacer />
-                    <FieldsLabelForm
-                      initialValues={entityFieldLabelsMap.data}
-                      fields={entityScalarFields.data || []}
-                      onSubmit={upsertEntityFieldsMapMutation.mutateAsync}
+                    <SortList
+                      data={{
+                        ...entityFieldTypesMap,
+                        data: (entityScalarFields.data || []).map(
+                          ({ name }) => ({
+                            value: name,
+                            label: getEntityFieldLabels(name),
+                          })
+                        ),
+                      }}
+                      onSave={async (data) => {
+                        await upsertEntityColumnsOrderMutation.mutateAsync(
+                          data
+                        );
+                      }}
                     />
                   </>
                 ),

@@ -1,9 +1,8 @@
 import {
   dataNotFoundMessage,
   makePutRequest,
-  MutationHelpers,
   useApi,
-  useApiMutateOptions,
+  useWaitForResponseMutationOptions,
 } from "@gothicgeeks/shared";
 import { useMutation } from "react-query";
 import { CONFIGURATION_KEYS } from "../../../shared/configuration.constants";
@@ -39,13 +38,13 @@ export function useUpsertConfigurationMutation(
   entity?: string,
   mutationOptions?: IUpsertConfigMutationOptions
 ) {
-  const apiMutateOptions = useApiMutateOptions<
-    Record<string, unknown> | unknown[],
-    Partial<Record<string, unknown> | unknown[]>
+  const apiMutateOptions = useWaitForResponseMutationOptions<
+    Record<string, unknown> | unknown[]
   >({
-    ...(mutationOptions || {}),
-    dataQueryPath: configurationApiPath(key, entity),
-    onMutate: MutationHelpers.replace,
+    endpoints: [
+      configurationApiPath(key, entity),
+      ...(mutationOptions?.otherEndpoints || []),
+    ],
     successMessage: "App settings saved successfully",
   });
 

@@ -57,7 +57,7 @@ export class DataController {
       }),
       pageIndex: filters.page,
       pageSize: filters.take,
-      totalRecord: await this.dataService.count(entity),
+      totalRecords: await this.dataService.count(entity),
     };
   }
 }

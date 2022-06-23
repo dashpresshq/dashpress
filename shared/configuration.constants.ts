@@ -5,12 +5,13 @@ export const CONFIGURATION_KEYS: Record<
   | "hidden_entity_details_columns" //
   | "entity_diction" //
   | "entity_columns_types" //
+  | "entity_fields_orders" //
   | "entity_crud_settings" //
-  | "relations_list_fields"
-  | "entity_validations"
-  | "entities_order"
+  | "entities_order" //
   | "entity_columns_labels" //
-  | "entities_to_hide_from_menu", //
+  | "entities_to_hide_from_menu" //
+  | "relations_list_fields"
+  | "entity_validations",
   { requireEntity: boolean; defaultValue: unknown }
 > = {
   hidden_entity_table_columns: { requireEntity: true, defaultValue: [] },
@@ -22,6 +23,10 @@ export const CONFIGURATION_KEYS: Record<
   entity_diction: {
     requireEntity: true,
     defaultValue: { singular: "", plural: "" },
+  },
+  entity_fields_orders: {
+    requireEntity: true,
+    defaultValue: [],
   },
   entity_crud_settings: {
     requireEntity: true,

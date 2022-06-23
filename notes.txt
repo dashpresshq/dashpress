@@ -3,12 +3,9 @@ Budibase
 https://www.appsmith.com/
 
 Table actions
-// New Item
-// Refresh data
-// Export
-// Multi select
 https://spruko.com/demo/noa/Noa/HTML/index.html
-
+https://www.producthunt.com/posts/fusiongrid-powered-by-fusioncharts
+https://www.producthunt.com/posts/interval-2
 
 OPEN SOURCE
 Title of the Table
@@ -16,6 +13,7 @@ Selection Colors
 Disable type of specific fields
 Offcanvas table on details
 Validations
+Multi select
 Dahsboard list
 Error on none permitted pages
 Implement filters

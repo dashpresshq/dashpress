@@ -1,3 +1,4 @@
+import { IValueLabel } from "@gothicgeeks/design-system/dist/types";
 import {
   ConfigurationService,
   configurationService,
@@ -11,7 +12,7 @@ export class EntitiesController {
     private entitiesService: EntitiesService,
     private configurationService: ConfigurationService
   ) {}
-  async getMenuEntities() {
+  async getMenuEntities(): Promise<IValueLabel[]> {
     const entities = this.entitiesService.getAllEntities();
     const [hiddenEntities, entitiesOrder] = await Promise.all([
       this.configurationService.show<string[]>("entities_to_hide_from_menu"),
@@ -34,8 +35,19 @@ export class EntitiesController {
     return this.entitiesService.getAllEntities();
   }
 
-  getEntityFields(entity: string): IEntityField[] {
-    return this.entitiesService.getEntityFields(entity);
+  async getEntityFields(entity: string): Promise<IEntityField[]> {
+    const [entityFields, entityFieldsOrder] = await Promise.all([
+      this.entitiesService.getEntityFields(entity),
+      this.configurationService.show<string[]>("entity_fields_orders", entity),
+    ]);
+
+    sortByList(
+      entityFields as unknown as Record<string, unknown>[],
+      entityFieldsOrder,
+      "name" as keyof IEntityField
+    );
+
+    return entityFields;
   }
 }
 

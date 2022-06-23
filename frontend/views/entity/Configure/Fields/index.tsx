@@ -165,7 +165,7 @@ export const EntityFieldsSettings = () => {
                     For some reasons, `createdAt` is showing before `userName`.
                     This is where you correct that wrong :wink
                   </Text>
-                  <Spacer />
+                  <Spacer size="xl" />
                   <SortList
                     data={{
                       ...entityFieldTypesMap,

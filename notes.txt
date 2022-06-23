@@ -8,11 +8,11 @@ https://www.producthunt.com/posts/fusiongrid-powered-by-fusioncharts
 https://www.producthunt.com/posts/interval-2
 
 OPEN SOURCE
-Title of the Table
+Validations
 Selection Colors
+Title of the Table
 Disable type of specific fields
 Offcanvas table on details
-Validations
 Multi select
 Dahsboard list
 Error on none permitted pages

@@ -40,7 +40,7 @@ export function useEntityFieldLabels() {
         return userFriendlyCase(fieldName);
       }
       return (
-        entityFieldLabelsMap.data[fieldName] || userFriendlyCase(fieldName)
+        entityFieldLabelsMap.data?.[fieldName] || userFriendlyCase(fieldName)
       );
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -128,8 +128,9 @@ export function useSelectedEntityColumns(
     | "hidden_entity_update_columns"
     | "hidden_entity_details_columns"
     | "relations_list_fields"
-  >
+  >,
+  overrideEntity?: string
 ) {
   const entity = useEntitySlug();
-  return useEntityConfiguration<string[]>(key, entity);
+  return useEntityConfiguration<string[]>(key, overrideEntity || entity);
 }

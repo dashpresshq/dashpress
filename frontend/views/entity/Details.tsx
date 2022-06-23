@@ -56,19 +56,25 @@ export function EntityDetails() {
             label: entityDiction.plural,
           }}
         >
-          <EntityDetailsView id={id} />
+          <EntityDetailsView id={id} entity={entity} />
         </SectionBox>
       </SectionCenter>
     </AppLayout>
   );
 }
 
-export const EntityDetailsView = ({ id }: { id: string }) => {
-  const entity = useEntitySlug();
+export const EntityDetailsView = ({
+  id,
+  entity,
+}: {
+  id: string;
+  entity: string;
+}) => {
   const dataDetails = useEntityDataDetails(entity, id);
   const entityScalarFields = useEntityScalarFields(entity);
   const hiddenDetailsColumns = useSelectedEntityColumns(
-    "hidden_entity_details_columns"
+    "hidden_entity_details_columns",
+    entity
   );
   const getEntityFieldLabels = useEntityFieldLabels();
 

@@ -14,11 +14,15 @@ import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
 import Link from "next/link";
 import { fitlerOutHiddenScalarColumns } from "../utils";
 import { TableActions } from "./Actions";
+import { useDetailsOffCanvasStore } from "./hooks/useDetailsOffCanvas.store";
+import styled from "styled-components";
 
 const ReferenceComponent: React.FC<{ entity: string; id: string }> = ({
   entity,
   id,
 }) => {
+  const openDetailsCanvas = useDetailsOffCanvasStore((state) => state.open);
+
   const entityDataReference = useEntityDataReference(entity, id);
 
   if (entityDataReference.isLoading) {
@@ -29,12 +33,29 @@ const ReferenceComponent: React.FC<{ entity: string; id: string }> = ({
     return <>{id}</>;
   }
 
-  return <>{entityDataReference.data || id}</>;
+  return (
+    <TextButton
+      onClick={() => openDetailsCanvas({ entity, id })}
+      text={entityDataReference.data || id}
+    />
+  );
 };
 
-export const useTableColumns = (
-  setShowDetailsOffCanvas: (id: string) => void
-) => {
+const TextButton: React.FC<{ onClick: () => void; text: string }> = ({
+  onClick,
+  text,
+}) => {
+  return <StyledLinkLikeButton onClick={onClick}>{text}</StyledLinkLikeButton>;
+};
+
+const StyledLinkLikeButton = styled.button`
+  &:focus {
+    outline: 0;
+  }
+  background: white;
+`;
+
+export const useTableColumns = () => {
   const entity = useEntitySlug();
   const getEntityFieldLabels = useEntityFieldLabels();
   const entityCrudSettings = useEntityCrudSettings();
@@ -53,6 +74,9 @@ export const useTableColumns = (
     // filter: {_type: index % 2 === 0 ? "string" : "number"},
     // disableSortBy?: boolean;
     Cell: ({ value }) => {
+      if (!value) {
+        return <></>;
+      }
       if (isId) {
         return (
           <Link
@@ -87,11 +111,7 @@ export const useTableColumns = (
       disableSortBy: true,
       Cell: ({ row }) => {
         return (
-          <TableActions
-            row={row}
-            crudSettings={entityCrudSettings.data}
-            setShowDetailsOffCanvas={setShowDetailsOffCanvas}
-          />
+          <TableActions row={row} crudSettings={entityCrudSettings.data} />
         );
       },
     });

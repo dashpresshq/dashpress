@@ -23,14 +23,14 @@ export const useEntityDataDetails = (entity: string, id: string) => {
 
   return useApi<Record<string, string>>(ENTITY_DETAILS_PATH(entity, id), {
     errorMessage: dataNotFoundMessage(entityDiction.singular),
-    enabled: !!id && id !== SLUG_LOADING_VALUE,
+    enabled: !!id && !!entity && id !== SLUG_LOADING_VALUE,
   });
 };
 
 export const useEntityDataReference = (entity: string, id: string) => {
-  return useApi<Record<string, string>>(ENTITY_REFERENCE_PATH(entity, id), {
+  return useApi<string>(ENTITY_REFERENCE_PATH(entity, id), {
     errorMessage: dataNotFoundMessage("Reference data not found"),
-    enabled: !!id,
+    enabled: !!(id && entity),
   });
 };
 

@@ -6,23 +6,20 @@ import {
 } from "frontend/hooks/entity/entity.config";
 import { useEntityIdField } from "frontend/hooks/entity/entity.store";
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
+import { useDetailsOffCanvasStore } from "./hooks/useDetailsOffCanvas.store";
 
 interface IProps {
   crudSettings: IEntityCrudSettings;
-  setShowDetailsOffCanvas: (id: string) => void;
   row: {
     original: Record<string, unknown>;
   };
 }
 
-export const TableActions: React.FC<IProps> = ({
-  crudSettings,
-  setShowDetailsOffCanvas,
-  row,
-}) => {
+export const TableActions: React.FC<IProps> = ({ crudSettings, row }) => {
   const entity = useEntitySlug();
   const idField = useEntityIdField(entity);
   const entityDataDeletionMutation = useEntityDataDeletionMutation(entity);
+  const openDetailsCanvas = useDetailsOffCanvasStore((state) => state.open);
 
   const idValue = row.original[idField.data || "id"] as string;
   return (
@@ -31,7 +28,7 @@ export const TableActions: React.FC<IProps> = ({
         <div>
           <SoftButton
             onClick={() => {
-              setShowDetailsOffCanvas(idValue);
+              openDetailsCanvas({ id: idValue, entity });
             }}
             label="Details"
             color="primary"

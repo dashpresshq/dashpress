@@ -20,9 +20,9 @@ import {
   useEntityActionMenuItems,
 } from "../Configure/constants";
 import { EntityDetailsView } from "../Details";
-import { useState } from "react";
 import { useTableMenuItems } from "./useTableMenuItems";
 import { useTableColumns } from "./useTableColumns";
+import { useDetailsOffCanvasStore } from "./hooks/useDetailsOffCanvas.store";
 
 // TODO sync table to url
 // TODO when table passes a limit then a non synced columns to show
@@ -37,11 +37,14 @@ export function EntityTable() {
     EntityActionTypes.Diction,
   ]);
   const menuItems = useTableMenuItems();
-  const [showDetailsOffCanvas, setShowDetailsOffCanvas] = useState("");
   const hiddenTableColumns = useSelectedEntityColumns(
     "hidden_entity_table_columns"
   );
-  const columns = useTableColumns(setShowDetailsOffCanvas);
+
+  const [closeDetailsCanvas, detailsCanvasEntity, detailsCanvasId] =
+    useDetailsOffCanvasStore((state) => [state.close, state.entity, state.id]);
+
+  const columns = useTableColumns();
 
   const error =
     entityCrudSettings.error ||
@@ -80,10 +83,10 @@ export function EntityTable() {
       )}
       <OffCanvas
         title="Details"
-        onClose={() => setShowDetailsOffCanvas("")}
-        show={!!showDetailsOffCanvas}
+        onClose={closeDetailsCanvas}
+        show={!!detailsCanvasEntity}
       >
-        <EntityDetailsView id={showDetailsOffCanvas} />
+        <EntityDetailsView id={detailsCanvasId} entity={detailsCanvasEntity} />
       </OffCanvas>
     </AppLayout>
   );

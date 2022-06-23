@@ -44,9 +44,8 @@ export const useEntityFields = (entity: string) => {
 export const useEntityScalarFields = (entity: string) => {
   return useApi<IEntityField[]>(ENTITY_FIELDS_ENDPOINT(entity), {
     errorMessage: dataNotFoundMessage("Entity Scalar Fields"),
-    enabled: entity !== "loading",
+    enabled: !!entity && entity !== "loading",
     selector: (data: IEntityField[]) => {
-      console.log(data);
       return data.filter(filterScalarEntity);
     },
   });

@@ -52,5 +52,4 @@ Pro Pro
   Priority Support
   2FA
 
-
 After introspecting remember to sort by name

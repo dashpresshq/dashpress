@@ -1,5 +1,8 @@
 import { dataNotFoundMessage, useApi } from "@gothicgeeks/shared";
-import { filterScalarEntity } from "shared/entity.logic";
+import {
+  filterScalarEntity,
+  getEntityReferencesMap,
+} from "shared/entity.logic";
 import { IEntityField } from "../../../backend/entities/types";
 import { ILabelValue } from "../../../types";
 import { useEntityDictionPlurals } from "./entity.queries";
@@ -59,16 +62,6 @@ export const useEntityReferenceFields = (entity: string) => {
       return getEntityReferencesMap(data);
     },
   });
-};
-
-export const getEntityReferencesMap = (
-  input: IEntityField[]
-): Record<string, string> => {
-  return Object.fromEntries(
-    input
-      .filter(({ relationFromFields }) => relationFromFields?.length === 1)
-      .map(({ relationFromFields, type }) => [relationFromFields?.[0], type])
-  );
 };
 
 export const useEntityIdField = (entity: string) => {

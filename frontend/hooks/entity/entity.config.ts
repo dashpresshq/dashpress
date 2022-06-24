@@ -2,10 +2,14 @@ import { useEntityConfiguration } from "../configuration/configration.store";
 import { CONFIGURATION_KEYS } from "../../../shared/configuration.constants";
 import { useRouteParam } from "@gothicgeeks/shared";
 import { useCallback } from "react";
-import { useEntityScalarFields } from "./entity.store";
+import {
+  useEntityReferenceFields,
+  useEntityScalarFields,
+} from "./entity.store";
 import { ENTITY_TYPES_SELECTION_BAG } from "../../../shared/validations.constants";
 import { IEntityField } from "../../../backend/entities/types";
 import { userFriendlyCase } from "../../lib/strings";
+import { getEntityReferencesMap } from "shared/entity.logic";
 
 export function useEntitySlug() {
   return useRouteParam("entity");
@@ -55,6 +59,8 @@ export function useEntityFieldTypes() {
   >("entity_columns_types", entity);
 
   const entityScalarFields = useEntityScalarFields(entity);
+  const entityReferenceFieldsMap = useEntityReferenceFields(entity);
+
   if (
     entityScalarFields.isLoading ||
     entityScalarFields.isError ||
@@ -68,7 +74,13 @@ export function useEntityFieldTypes() {
     (entityScalarFields.data || []).map(({ name, type, kind }) => {
       return [
         name,
-        getEntityType(entityFieldTypesMap.data || {}, name, kind, type),
+        getEntityType(
+          entityFieldTypesMap.data || {},
+          name,
+          kind,
+          type,
+          entityReferenceFieldsMap.data || {}
+        ),
       ];
     })
   );
@@ -78,12 +90,18 @@ const getEntityType = (
   entityFieldTypeMap: Record<string, keyof typeof ENTITY_TYPES_SELECTION_BAG>,
   name: string,
   kind: IEntityField["kind"],
-  type: IEntityField["type"]
+  type: IEntityField["type"],
+  entityReferenceMap: Record<string, string>
 ): keyof typeof ENTITY_TYPES_SELECTION_BAG => {
   const preSelectedType = entityFieldTypeMap[name];
   if (preSelectedType) {
     return preSelectedType;
   }
+
+  if (entityReferenceMap[name]) {
+    return "reference";
+  }
+
   // Start guessing
   if (kind === "enum") {
     return "selection";

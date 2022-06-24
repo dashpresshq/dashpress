@@ -11,7 +11,6 @@ OPEN SOURCE
 Validations
 Selection Colors
 Title of the Table
-Disable type of specific fields
 Offcanvas table on details
 Multi select
 Dahsboard list

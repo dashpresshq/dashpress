@@ -12,24 +12,34 @@ export const ENTITY_TYPES_SELECTION_BAG: Record<
   | "image"
   | "datetime-local"
   | "color",
-  {}
+  {
+    disabled?: true;
+  }
 > = {
   email: {},
   password: {},
   text: {},
   textarea: {},
-  number: {},
+  number: {
+    disabled: true,
+  },
   url: {},
 
   richtext: {},
-  "datetime-local": {},
+  "datetime-local": {
+    disabled: true,
+  },
   image: {},
   color: {},
 
   // Needs context
-  boolean: {}, // useColors, labels
+  boolean: {
+    disabled: true,
+  }, // useColors, labels
   selection: {}, // usecolors, selections
-  reference: {},
+  reference: {
+    disabled: true,
+  },
 };
 
 //   | 'date'

@@ -14,6 +14,12 @@ import {
 } from "@gothicgeeks/shared";
 import { ENTITY_TYPES_SELECTION_BAG } from "../../../../../shared/validations.constants";
 
+const listOfEntitiesThatCantBeChanged = Object.entries(
+  ENTITY_TYPES_SELECTION_BAG
+)
+  .filter(([_, value]) => value.disabled)
+  .map(([key]) => key);
+
 export const FieldsTypeForm: React.FC<{
   fields: IEntityField[];
   initialValues?: Record<string, unknown>;
@@ -52,9 +58,16 @@ export const FieldsTypeForm: React.FC<{
                     <FormSelect
                       label={"Type for `" + getEntityFieldLabels(name) + "`"}
                       selectData={Object.keys(ENTITY_TYPES_SELECTION_BAG).map(
-                        (type) => ({ label: type, value: type })
+                        (type) => ({
+                          label: type,
+                          value: type,
+                          disaddbled: true,
+                        })
                       )}
-                      nullable={true}
+                      disabledOptions={listOfEntitiesThatCantBeChanged}
+                      disabled={listOfEntitiesThatCantBeChanged.includes(
+                        renderProps.input.value
+                      )}
                       {...renderProps}
                     />
                   )}

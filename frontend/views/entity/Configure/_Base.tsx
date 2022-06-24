@@ -11,6 +11,10 @@ import {
 } from "../../../hooks/entity/entity.config";
 import { NAVIGATION_LINKS } from "../../../lib/routing/links";
 import { AppLayout } from "../../../_layouts/app";
+import {
+  ENTITY_CRUD_SETTINGS_TAB_LABELS,
+  ENTITY_FIELD_SETTINGS_TAB_LABELS,
+} from "./constants";
 
 interface IProps {
   children: ReactNode;
@@ -41,11 +45,15 @@ export const BaseEntitySettingsLayout = ({ children, menuItem }: IProps) => {
                 name: "Diction",
               },
               {
-                link: NAVIGATION_LINKS.ENTITY.CONFIG.CRUD(entity),
+                link: NAVIGATION_LINKS.ENTITY.CONFIG.CRUD(entity, {
+                  tab: ENTITY_CRUD_SETTINGS_TAB_LABELS.CREATE,
+                }),
                 name: "CRUD",
               },
               {
-                link: NAVIGATION_LINKS.ENTITY.CONFIG.FIELDS(entity),
+                link: NAVIGATION_LINKS.ENTITY.CONFIG.FIELDS(entity, {
+                  tab: ENTITY_FIELD_SETTINGS_TAB_LABELS.LABELS,
+                }),
                 name: "Fields",
               },
               {

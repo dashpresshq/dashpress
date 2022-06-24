@@ -16,6 +16,7 @@ import { SelectionTab } from "./SelectionTab";
 import { useEffect, useState } from "react";
 import { ENTITY_TABLE_PATH } from "frontend/hooks/data/data.store";
 import { useRouteParam } from "@gothicgeeks/shared";
+import { ENTITY_CRUD_SETTINGS_TAB_LABELS } from "../constants";
 
 // TODO "List Able",
 
@@ -132,7 +133,7 @@ export const EntityCrudSettings = () => {
                   labels={["Hide Create Button", "Show Create Button"]}
                 />
               ),
-              label: "Create",
+              label: ENTITY_CRUD_SETTINGS_TAB_LABELS.CREATE,
             },
             {
               content: (
@@ -149,7 +150,7 @@ export const EntityCrudSettings = () => {
                   labels={["Hide Edit Button", "Show Edit Button"]}
                 />
               ),
-              label: "Update",
+              label: ENTITY_CRUD_SETTINGS_TAB_LABELS.UPDATE,
             },
             {
               content: (
@@ -166,7 +167,7 @@ export const EntityCrudSettings = () => {
                   labels={["Hide Details Button", "Show Details Button"]}
                 />
               ),
-              label: "Details",
+              label: ENTITY_CRUD_SETTINGS_TAB_LABELS.DETAILS,
             },
             {
               content: (
@@ -183,7 +184,7 @@ export const EntityCrudSettings = () => {
                   labels={["Hide In Table List", "Show In Table List"]}
                 />
               ),
-              label: "Table",
+              label: ENTITY_CRUD_SETTINGS_TAB_LABELS.TABLE,
             },
             {
               content: (
@@ -199,7 +200,7 @@ export const EntityCrudSettings = () => {
                   labels={["Hide Delete Button", "Show Delete Button"]}
                 />
               ),
-              label: "Delete",
+              label: ENTITY_CRUD_SETTINGS_TAB_LABELS.DELETE,
             },
           ]}
         />

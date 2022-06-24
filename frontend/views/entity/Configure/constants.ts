@@ -14,6 +14,21 @@ export enum EntityActionTypes {
   Labels,
 }
 
+export const ENTITY_FIELD_SETTINGS_TAB_LABELS = {
+  LABELS: "Labels",
+  TYPES: "Types",
+  VALIDATIONS: "Validations",
+  ORDER: "Order",
+};
+
+export const ENTITY_CRUD_SETTINGS_TAB_LABELS = {
+  CREATE: "Create",
+  UPDATE: "Update",
+  DETAILS: "Details",
+  TABLE: "Table",
+  DELETE: "Delete",
+};
+
 const ENTITY_ACTION_BAG: Record<
   EntityActionTypes,
   {
@@ -22,47 +37,61 @@ const ENTITY_ACTION_BAG: Record<
     link: (entity: string) => string;
   }
 > = {
-  [EntityActionTypes.Update]: {
-    label: "Update Settings",
-    IconComponent: Settings,
-    link: (entity) =>
-      NAVIGATION_LINKS.ENTITY.CONFIG.CRUD(entity, { tab: "Update" }),
-  },
   [EntityActionTypes.Validations]: {
     label: "Validations Settings",
     IconComponent: Settings,
     link: (entity) =>
-      NAVIGATION_LINKS.ENTITY.CONFIG.FIELDS(entity, { tab: "Validations" }),
+      NAVIGATION_LINKS.ENTITY.CONFIG.FIELDS(entity, {
+        tab: ENTITY_FIELD_SETTINGS_TAB_LABELS.VALIDATIONS,
+      }),
   },
   [EntityActionTypes.Labels]: {
     label: "Labels Settings",
     IconComponent: Settings,
     link: (entity) =>
-      NAVIGATION_LINKS.ENTITY.CONFIG.FIELDS(entity, { tab: "Labels" }),
+      NAVIGATION_LINKS.ENTITY.CONFIG.FIELDS(entity, {
+        tab: ENTITY_FIELD_SETTINGS_TAB_LABELS.LABELS,
+      }),
   },
   [EntityActionTypes.Types]: {
     label: "Types Settings",
     IconComponent: Settings,
     link: (entity) =>
-      NAVIGATION_LINKS.ENTITY.CONFIG.FIELDS(entity, { tab: "Types" }),
+      NAVIGATION_LINKS.ENTITY.CONFIG.FIELDS(entity, {
+        tab: ENTITY_FIELD_SETTINGS_TAB_LABELS.TYPES,
+      }),
+  },
+  [EntityActionTypes.Update]: {
+    label: "Update Settings",
+    IconComponent: Settings,
+    link: (entity) =>
+      NAVIGATION_LINKS.ENTITY.CONFIG.CRUD(entity, {
+        tab: ENTITY_CRUD_SETTINGS_TAB_LABELS.UPDATE,
+      }),
   },
   [EntityActionTypes.Create]: {
     label: "Create Settings",
     IconComponent: Settings,
     link: (entity) =>
-      NAVIGATION_LINKS.ENTITY.CONFIG.CRUD(entity, { tab: "Create" }),
+      NAVIGATION_LINKS.ENTITY.CONFIG.CRUD(entity, {
+        tab: ENTITY_CRUD_SETTINGS_TAB_LABELS.CREATE,
+      }),
   },
   [EntityActionTypes.Table]: {
     label: "Table Settings",
     IconComponent: Settings,
     link: (entity) =>
-      NAVIGATION_LINKS.ENTITY.CONFIG.CRUD(entity, { tab: "Table" }),
+      NAVIGATION_LINKS.ENTITY.CONFIG.CRUD(entity, {
+        tab: ENTITY_CRUD_SETTINGS_TAB_LABELS.TABLE,
+      }),
   },
   [EntityActionTypes.Details]: {
     label: "Details Settings",
     IconComponent: Settings,
     link: (entity) =>
-      NAVIGATION_LINKS.ENTITY.CONFIG.CRUD(entity, { tab: "Details" }),
+      NAVIGATION_LINKS.ENTITY.CONFIG.CRUD(entity, {
+        tab: ENTITY_CRUD_SETTINGS_TAB_LABELS.DETAILS,
+      }),
   },
   [EntityActionTypes.Diction]: {
     label: "Diction Settings",

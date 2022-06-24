@@ -9,7 +9,6 @@ import {
 import { ENTITY_TYPES_SELECTION_BAG } from "../../../shared/validations.constants";
 import { IEntityField } from "../../../backend/entities/types";
 import { userFriendlyCase } from "../../lib/strings";
-import { getEntityReferencesMap } from "shared/entity.logic";
 
 export function useEntitySlug() {
   return useRouteParam("entity");

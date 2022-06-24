@@ -24,6 +24,7 @@ import {
 import { FieldsLabelForm } from "./FieldsLabel.form";
 import { FieldsTypeForm } from "./FieldsType.form";
 import { useRouteParam } from "@gothicgeeks/shared";
+import { ENTITY_FIELD_SETTINGS_TAB_LABELS } from "../constants";
 
 export const EntityFieldsSettings = () => {
   const tabFromUrl = useRouteParam("tab");
@@ -104,7 +105,7 @@ export const EntityFieldsSettings = () => {
                   />
                 </>
               ),
-              label: "Labels",
+              label: ENTITY_FIELD_SETTINGS_TAB_LABELS.LABELS,
             },
             {
               content: (
@@ -131,7 +132,7 @@ export const EntityFieldsSettings = () => {
                   />
                 </>
               ),
-              label: "Types",
+              label: ENTITY_FIELD_SETTINGS_TAB_LABELS.TYPES,
             },
             {
               content: (
@@ -156,7 +157,7 @@ export const EntityFieldsSettings = () => {
                   />
                 </>
               ),
-              label: "Validations",
+              label: ENTITY_FIELD_SETTINGS_TAB_LABELS.VALIDATIONS,
             },
             {
               content: (
@@ -180,7 +181,7 @@ export const EntityFieldsSettings = () => {
                   />
                 </>
               ),
-              label: "Order",
+              label: ENTITY_FIELD_SETTINGS_TAB_LABELS.ORDER,
             },
           ]}
         />

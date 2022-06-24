@@ -10,14 +10,12 @@ export enum EntityActionTypes {
   Details,
   Types,
   Diction,
-  Validations,
   Labels,
 }
 
 export const ENTITY_FIELD_SETTINGS_TAB_LABELS = {
   LABELS: "Labels",
   TYPES: "Types",
-  VALIDATIONS: "Validations",
   ORDER: "Order",
 };
 
@@ -37,14 +35,6 @@ const ENTITY_ACTION_BAG: Record<
     link: (entity: string) => string;
   }
 > = {
-  [EntityActionTypes.Validations]: {
-    label: "Validations Settings",
-    IconComponent: Settings,
-    link: (entity) =>
-      NAVIGATION_LINKS.ENTITY.CONFIG.FIELDS(entity, {
-        tab: ENTITY_FIELD_SETTINGS_TAB_LABELS.VALIDATIONS,
-      }),
-  },
   [EntityActionTypes.Labels]: {
     label: "Labels Settings",
     IconComponent: Settings,

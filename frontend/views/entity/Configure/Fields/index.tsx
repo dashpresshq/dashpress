@@ -138,31 +138,6 @@ export const EntityFieldsSettings = () => {
               content: (
                 <>
                   <Text size="5">
-                    You get the superpowers to tell us the data requirement for
-                    the fields, We already try go guess if it is required or the
-                    maxLength etc, But here is where you get to dump to all us
-                    all the data constraint
-                  </Text>
-                  <Spacer />
-
-                  <FieldsLabelForm
-                    isLoading={sharedLoadingState}
-                    initialValues={entityFieldLabelsMap.data}
-                    fields={entityScalarFields.data || []}
-                    onSubmit={async (data) => {
-                      await upsertEntityFieldsMapMutation.mutateAsync(
-                        data as Record<string, string>
-                      );
-                    }}
-                  />
-                </>
-              ),
-              label: ENTITY_FIELD_SETTINGS_TAB_LABELS.VALIDATIONS,
-            },
-            {
-              content: (
-                <>
-                  <Text size="5">
                     For some reasons, `createdAt` is showing before `userName`.
                     This is where you correct that wrong :wink
                   </Text>

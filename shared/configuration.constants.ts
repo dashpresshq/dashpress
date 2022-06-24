@@ -20,6 +20,10 @@ export const CONFIGURATION_KEYS: Record<
   hidden_entity_details_columns: { requireEntity: true, defaultValue: [] },
   entity_columns_labels: { requireEntity: true, defaultValue: {} },
   entity_columns_types: { requireEntity: true, defaultValue: {} },
+  entity_validations: {
+    requireEntity: true,
+    defaultValue: {}, // key: string[],
+  },
   entity_diction: {
     requireEntity: true,
     defaultValue: { singular: "", plural: "" },
@@ -37,10 +41,6 @@ export const CONFIGURATION_KEYS: Record<
       update: true,
       delete: true,
     },
-  },
-  entity_validations: {
-    requireEntity: true,
-    defaultValue: {}, // {key: []}
   },
   relations_list_fields: { requireEntity: true, defaultValue: [] },
 

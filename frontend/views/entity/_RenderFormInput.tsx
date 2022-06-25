@@ -1,4 +1,5 @@
 import {
+  FormCheckBox,
   FormInput,
   FormNumberInput,
   FormTextArea,
@@ -40,6 +41,12 @@ export const RenderFormInput = ({
     case "number":
       return (
         <FormNumberInput label={label} required={required} {...renderProps} />
+      );
+
+    case "boolean":
+      return (
+        // TODO use switch with labels
+        <FormCheckBox label={label} required={required} {...renderProps} />
       );
 
     case "textarea":

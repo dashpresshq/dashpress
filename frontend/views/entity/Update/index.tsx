@@ -39,7 +39,7 @@ export function EntityUpdate() {
   const dataDetails = useEntityDataDetails(entity, id);
   const actionItems = useEntityActionMenuItems([
     EntityActionTypes.Update,
-    EntityActionTypes.Validations,
+    EntityActionTypes.Types,
   ]);
   const entityFieldTypesMap = useEntityConfiguration<Record<string, string>>(
     "entity_columns_types",

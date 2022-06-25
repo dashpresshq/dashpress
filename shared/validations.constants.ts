@@ -83,17 +83,18 @@ export const ENTITY_TYPES_SELECTION_BAG: Record<
     allowedValidations: ["maxLength", "minLength", "required"],
   },
 
-  // Needs context
+  // useColors, labels
   boolean: {
     typeIsNotChangeAble: true,
     allowedValidations: ["required"],
   },
 
-  // useColors, labels
+  // usecolors, selections
   selection: {
     allowedValidations: ["required"],
   },
-  // usecolors, selections
+
+  // use colors
   reference: {
     typeIsNotChangeAble: true,
     allowedValidations: ["required", "unique"],

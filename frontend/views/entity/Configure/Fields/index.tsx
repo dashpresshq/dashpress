@@ -121,11 +121,15 @@ export const EntityFieldsSettings = () => {
 
                   <FieldsTypeForm
                     isLoading={sharedLoadingState}
-                    initialValues={entityFieldTypes}
+                    initialValues={{
+                      types: entityFieldTypes,
+                      selections: {},
+                      validations: {},
+                    }}
                     fields={entityScalarFields.data || []}
                     onSubmit={async (data) => {
                       await upsertEntityTypesMapMutation.mutateAsync(
-                        data as Record<string, string>
+                        data.types as Record<string, string>
                       );
                     }}
                     getEntityFieldLabels={getEntityFieldLabels}

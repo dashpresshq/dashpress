@@ -33,7 +33,7 @@ export function EntityCreate() {
   const entityDataCreationMutation = useEntityDataCreationMutation(entity);
   const actionItems = useEntityActionMenuItems([
     EntityActionTypes.Create,
-    EntityActionTypes.Validations,
+    EntityActionTypes.Types,
   ]);
   const hiddenCreateColumns = useSelectedEntityColumns(
     "hidden_entity_create_columns"

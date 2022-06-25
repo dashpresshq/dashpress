@@ -17,8 +17,8 @@
     "verify": "npm run typecheck && npm run lint && npm run format-verify && npm run test"
   },
   "dependencies": {
-    "@gothicgeeks/design-system": "git+ssh://git@github.com:thrownullexception/design-system.git#0b8810d0d8332105fc3f0dcda291911a93d3238c",
-    "@gothicgeeks/shared": "git+ssh://git@github.com:thrownullexception/shared.git#cf9ff5a5fbaf15c6e4cee3b032b7da698c604c8b",
+    "@gothicgeeks/design-system": "git+ssh://git@github.com:thrownullexception/design-system.git#de967be4fcd53d53e552e2e462fee05fe335bebc",
+    "@gothicgeeks/shared": "git+ssh://git@github.com:thrownullexception/shared.git#c34f83185244803e6ff11357af6b6e2420c06605",
     "change-case": "^4.1.2",
     "fs-extra": "^10.1.0",
     "knex": "^2.0.0",

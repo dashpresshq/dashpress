@@ -51,14 +51,7 @@ export const ENTITY_TYPES_SELECTION_BAG: Record<
   },
   number: {
     typeIsNotChangeAble: true,
-    allowedValidations: [
-      "max",
-      "min",
-      "postiveNumber",
-      "negativeNumber",
-      "required",
-      "unique",
-    ],
+    allowedValidations: ["max", "min", "postiveNumber", "required", "unique"],
   },
   url: {
     allowedValidations: [
@@ -128,7 +121,6 @@ type SelectableAbleValidations =
   | "regex"
   | "alphanumeric"
   | "matchOtherField"
-  | "negativeNumber"
   | "postiveNumber";
 
 // less than other field
@@ -167,39 +159,48 @@ const ENTITY_VALIDATION_CONFIG: Record<
   isBoolean: {
     isBoundToType: ["boolean"],
   },
-  required: {},
+  required: {
+    message: "$name is required",
+  },
   unique: {},
   alphanumeric: {},
-  postiveNumber: {},
-  negativeNumber: {},
+  postiveNumber: {
+    message: "$name should be positive number",
+  },
   matchOtherField: {
     input: {
       otherField: "",
     },
+    message: "$name should match {{input.otherfield}}",
   },
   min: {
     input: {
       length: 3,
     },
+    message: "$name should be greater than $input",
   },
   max: {
     input: {
       length: 10,
     },
+    message: "$name should be less than $input",
   },
   maxLength: {
     input: {
       length: 100,
     },
+    message: "$name should be less than $input characters",
   },
   minLength: {
     input: {
       length: 3,
     },
+    message: "$name should be greater than $input characters",
   },
   regex: {
     input: {
-      pattern: "",
+      pattern: "//",
     },
+    message: "$name is invalid",
   },
 };

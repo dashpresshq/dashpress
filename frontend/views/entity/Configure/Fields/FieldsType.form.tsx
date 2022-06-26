@@ -111,13 +111,19 @@ export const FieldsTypeForm: React.FC<{
               title={`"${getEntityFieldLabels(
                 showFieldValidations
               )}" Validations`}
+              width={500}
               onClose={() => setShowFieldValidations("")}
               show={!!showFieldValidations}
             >
               <FieldValidationCanvas
-              // field={showFieldValidations}
-              // values={values}
-              // onSubmit={() => {}}
+                field={showFieldValidations}
+                type={
+                  values[`types`][
+                    showFieldValidations
+                  ] as keyof typeof ENTITY_TYPES_SELECTION_BAG
+                }
+                // values={values}
+                // onSubmit={() => {}}
               />
             </OffCanvas>
           </>

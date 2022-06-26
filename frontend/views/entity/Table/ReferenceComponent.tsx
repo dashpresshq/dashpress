@@ -1,6 +1,6 @@
 import { useDetailsOffCanvasStore } from "./hooks/useDetailsOffCanvas.store";
-import styled from "styled-components";
 import { useEntityDataReference } from "frontend/hooks/data/data.store";
+import { StyledLinkLikeButton } from "@gothicgeeks/design-system";
 
 export const ReferenceComponent: React.FC<{ entity: string; id: string }> = ({
   entity,
@@ -32,13 +32,3 @@ const TextButton: React.FC<{ onClick: () => void; text: string }> = ({
 }) => {
   return <StyledLinkLikeButton onClick={onClick}>{text}</StyledLinkLikeButton>;
 };
-
-// TODO move to design-system
-const StyledLinkLikeButton = styled.button`
-  &:focus {
-    outline: 0;
-  }
-  color: #1761fd;
-  border: 0;
-  background: inherit;
-`;

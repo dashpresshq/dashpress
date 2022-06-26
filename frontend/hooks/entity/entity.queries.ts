@@ -2,23 +2,32 @@ import { useApiQueries } from "@gothicgeeks/shared";
 import { useCallback } from "react";
 import { userFriendlyCase } from "../../lib/strings";
 import { configurationApiPath } from "../configuration/configration.store";
+import { ConfigrationStorage } from "../configuration/storage";
 
 export function useEntityDictionPlurals<T, P extends keyof T>(
   input: T[],
   field: P
 ) {
-  // Improvement for a Record<string, T> return for `.data` to remove need for `{}` default at usages
   const entityDictions = useApiQueries<T, { singular: string; plural: string }>(
-    input,
-    (accessor) =>
-      configurationApiPath("entity_diction", accessor as unknown as string),
-    field
+    {
+      input,
+      accessor: field,
+      pathFn: (entity) =>
+        configurationApiPath("entity_diction", entity as unknown as string),
+      placeholderDataFn: (entity) => {
+        return ConfigrationStorage.get(
+          "entity_diction",
+          entity as unknown as string
+        );
+      },
+    }
   );
 
   return useCallback(
     (fieldName: string): string => {
       return (
-        entityDictions.data[fieldName]?.plural || userFriendlyCase(fieldName)
+        entityDictions.data[fieldName]?.data?.plural ||
+        userFriendlyCase(fieldName)
       );
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps

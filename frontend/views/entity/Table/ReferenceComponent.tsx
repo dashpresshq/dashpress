@@ -33,9 +33,12 @@ const TextButton: React.FC<{ onClick: () => void; text: string }> = ({
   return <StyledLinkLikeButton onClick={onClick}>{text}</StyledLinkLikeButton>;
 };
 
+// TODO move to design-system
 const StyledLinkLikeButton = styled.button`
   &:focus {
     outline: 0;
   }
-  background: white;
+  color: #1761fd;
+  border: 0;
+  background: inherit;
 `;

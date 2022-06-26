@@ -28,9 +28,29 @@ export const useTableColumns = () => {
   const columns: ITableColumn[] = fitlerOutHiddenScalarColumns(
     entityScalarFields,
     hiddenTableColumns
-  ).map(({ name, isId }) => ({
+  ).map(({ name, isId }, index) => ({
     Header: getEntityFieldLabels(name),
     accessor: name,
+    filter: {
+      _type: "status",
+      bag: [
+        {
+          label: "Processed",
+          value: "processed",
+          color: "red",
+        },
+        {
+          label: "In Order",
+          value: "in-order",
+          color: "yellow",
+        },
+        {
+          label: "Shipped",
+          value: "shipped",
+          color: "green",
+        },
+      ],
+    },
     // filter: {_type: index % 2 === 0 ? "string" : "number"},
     // disableSortBy?: boolean;
     Cell: ({ value }) => {

@@ -50,3 +50,10 @@ export const useStringSelections = (
 ) => {
   return useSelections<string>(currentPage, filterParams);
 };
+
+export const useNumberselections = (
+  currentPage?: number,
+  filterParams?: string
+) => {
+  return useSelections<number>(currentPage, filterParams);
+};

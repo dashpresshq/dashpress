@@ -3,15 +3,15 @@ export const ENTITY_TYPES_SELECTION_BAG: Record<
   | "password"
   | "text"
   | "textarea"
-  | "richtext"
+  | "richtext" // not inplemeneted
   | "url"
   | "number"
-  | "selection"
-  | "reference"
+  | "selection" // not inplemeneted
+  | "reference" // not inplemeneted
   | "boolean"
-  | "image"
-  | "datetime-local"
-  | "color",
+  | "image" // not inplemeneted
+  | "datetime-local" // not inplemeneted
+  | "color", // not inplemeneted
   {
     typeIsNotChangeAble?: true;
     allowedValidations: Array<SelectableAbleValidations>;
@@ -137,25 +137,29 @@ type SelectableAbleValidations =
 //  isDate
 
 const ENTITY_VALIDATION_CONFIG: Record<
-  ValidationsBoundToType & SelectableAbleValidations,
+  ValidationsBoundToType | SelectableAbleValidations,
   {
     input?: Record<string, unknown>;
     isBoundToType?: Array<keyof typeof ENTITY_TYPES_SELECTION_BAG>;
+    message: string;
   }
 > = {
   // Selection, enum like check
   // reference, that the reference exists in the DB
   isEmail: {
     isBoundToType: ["email"],
+    message: "Invalid email",
   },
   isString: {
     isBoundToType: ["password", "text", "textarea", "richtext", "image"],
+    message: "$name is not a text",
   },
   isColor: {
     isBoundToType: ["color"],
   },
   isUrl: {
     isBoundToType: ["url"],
+    message: "Invalid URL",
   },
   isNumber: {
     isBoundToType: ["number"],

@@ -84,7 +84,7 @@ export const FieldsTypeForm: React.FC<{
                   >
                     {(renderProps) => (
                       <FormSelect
-                        label={"Type for `" + getEntityFieldLabels(name) + "`"}
+                        label={getEntityFieldLabels(name)}
                         selectData={ENTITY_TYPES_SELECTION_BAG_AS_SELECTION}
                         rightAction={{
                           label: "Configure Validation",
@@ -108,7 +108,9 @@ export const FieldsTypeForm: React.FC<{
               />
             </form>
             <OffCanvas
-              title={`Configure ${showFieldValidations} Validations`}
+              title={`"${getEntityFieldLabels(
+                showFieldValidations
+              )}" Validations`}
               onClose={() => setShowFieldValidations("")}
               show={!!showFieldValidations}
             >

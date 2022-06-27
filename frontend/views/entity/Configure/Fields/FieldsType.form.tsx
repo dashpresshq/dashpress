@@ -19,6 +19,7 @@ import {
   FieldValidationCanvas,
   IFieldValidationItem,
 } from "./FieldsValidation";
+import { getFieldTypeBoundedValidations } from "frontend/hooks/entity/guess";
 
 const ENTITY_TYPES_SELECTION_BAG_AS_SELECTION = Object.entries(
   ENTITY_TYPES_SELECTION_BAG
@@ -41,6 +42,16 @@ interface IValues {
   selections: Record<string, unknown>;
   validations: Record<string, IFieldValidationItem[]>;
 }
+
+const resetBoundedValidation = (
+  validations: IFieldValidationItem[],
+  newType: keyof typeof ENTITY_TYPES_SELECTION_BAG
+): IFieldValidationItem[] => {
+  return [
+    ...getFieldTypeBoundedValidations(newType),
+    ...validations.filter(({ fromType }) => !fromType),
+  ];
+};
 
 export const FieldsTypeForm: React.FC<{
   fields: IEntityField[];
@@ -87,7 +98,14 @@ export const FieldsTypeForm: React.FC<{
                   >
                     {(renderProps) => (
                       <FormSelect
-                        label={getEntityFieldLabels(name)}
+                        label={
+                          getEntityFieldLabels(name) +
+                          " [" +
+                          values.validations[name]
+                            .map(({ validationType }) => validationType)
+                            .join(",") +
+                          "]"
+                        }
                         selectData={ENTITY_TYPES_SELECTION_BAG_AS_SELECTION}
                         rightAction={{
                           label: "Configure Validation",
@@ -99,7 +117,22 @@ export const FieldsTypeForm: React.FC<{
                         disabled={listOfEntitiesThatCantBeChanged.includes(
                           renderProps.input.value
                         )}
-                        {...renderProps}
+                        meta={renderProps.meta}
+                        input={{
+                          ...renderProps.input,
+                          onChange: (value) => {
+                            renderProps.input.onChange(value);
+                            console.log(value);
+
+                            form.change("validations", {
+                              ...values.validations,
+                              [name]: resetBoundedValidation(
+                                values.validations[name],
+                                value
+                              ),
+                            });
+                          },
+                        }}
                       />
                     )}
                   </Field>
@@ -131,6 +164,7 @@ export const FieldsTypeForm: React.FC<{
                     ...values.validations,
                     [showFieldValidations]: value,
                   });
+                  setShowFieldValidations("");
                 }}
               />
             </OffCanvas>

@@ -57,8 +57,6 @@ export class ConfigurationService {
       config[key] = value;
     }
 
-    console.log(JSON.stringify(config));
-
     await this.persistConfig(config);
   }
 }

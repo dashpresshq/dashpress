@@ -4,10 +4,11 @@ import {
   FormButton,
   FormInput,
   FormNoValueSelect,
+  FormNumberInput,
   Spacer,
   Stack,
+  Text,
 } from "@gothicgeeks/design-system";
-import { useEntitySlug } from "frontend/hooks/entity/entity.config";
 import {
   ENTITY_TYPES_SELECTION_BAG,
   ENTITY_VALIDATION_CONFIG,
@@ -18,7 +19,6 @@ import { FieldArray } from "react-final-form-arrays";
 import { userFriendlyCase } from "frontend/lib/strings";
 import {
   required,
-  VALIDATION_LENGTH,
   composeValidators,
   maxLength,
   ButtonLang,
@@ -29,6 +29,7 @@ export interface IFieldValidationItem {
   validationType: keyof typeof ENTITY_VALIDATION_CONFIG;
   errorMessage: string;
   fromSchema?: true;
+  fromType?: true;
   constraint?: Record<string, string | number>;
 }
 
@@ -41,16 +42,12 @@ interface IProps {
 
 const ERROR_MESSAGE_LENGTH = 128;
 
-// TODO ValidationsBoundToType
-
 export const FieldValidationCanvas: React.FC<IProps> = ({
   field,
   onSubmit,
   entityType,
   validations,
 }) => {
-  const entity = useEntitySlug();
-
   if (!field) {
     return null;
   }
@@ -99,21 +96,7 @@ export const FieldValidationCanvas: React.FC<IProps> = ({
                               />
                             )}
                           </Stack>
-                          {validationInput && (
-                            <Field
-                              name={`${name}.constraint`}
-                              validate={composeValidators(required)}
-                              validateFields={[]}
-                            >
-                              {(renderProps) => (
-                                <FormInput
-                                  label="Constraint"
-                                  required={true}
-                                  {...renderProps}
-                                />
-                              )}
-                            </Field>
-                          )}
+                          <Spacer />
                           <Field
                             name={`${name}.errorMessage`}
                             validate={composeValidators(
@@ -124,12 +107,52 @@ export const FieldValidationCanvas: React.FC<IProps> = ({
                           >
                             {(renderProps) => (
                               <FormInput
-                                label="Error Message"
+                                label=""
                                 required={true}
                                 {...renderProps}
                               />
                             )}
                           </Field>
+                          {validationInput && (
+                            <>
+                              {Object.entries(validationInput).map(
+                                ([inputKey, inputValue]) => {
+                                  return (
+                                    <Field
+                                      key={inputKey}
+                                      name={`${name}.constraint.${inputKey}`}
+                                      validate={composeValidators(required)}
+                                      validateFields={[]}
+                                    >
+                                      {(renderProps) => (
+                                        <Stack
+                                          justify="space-between"
+                                          align="center"
+                                        >
+                                          <Text>
+                                            {userFriendlyCase(inputKey)}
+                                          </Text>
+                                          {typeof inputValue === "string" ? (
+                                            <FormInput
+                                              label=""
+                                              required={true}
+                                              {...renderProps}
+                                            />
+                                          ) : (
+                                            <FormNumberInput
+                                              label=""
+                                              required={true}
+                                              {...renderProps}
+                                            />
+                                          )}
+                                        </Stack>
+                                      )}
+                                    </Field>
+                                  );
+                                }
+                              )}
+                            </>
+                          )}
                           <Spacer />
                           <Divider />
                           <Spacer />

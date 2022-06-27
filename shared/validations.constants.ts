@@ -103,11 +103,12 @@ export const ENTITY_TYPES_SELECTION_BAG: Record<
 //   | 'month'
 //   | 'week'
 
-type ValidationsBoundToType =
+export type ValidationsBoundToType =
   | "isEmail"
   | "isUrl"
   | "isNumber"
   | "isString"
+  | "isDate"
   | "isBoolean"
   | "isColor";
 
@@ -154,6 +155,10 @@ export const ENTITY_VALIDATION_CONFIG: Record<
     isBoundToType: ["url"],
     message: "Invalid URL",
   },
+  isDate: {
+    isBoundToType: ["datetime-local"],
+    message: "Invalid Date",
+  },
   isNumber: {
     isBoundToType: ["number"],
     message: "$name should be a number",
@@ -178,7 +183,7 @@ export const ENTITY_VALIDATION_CONFIG: Record<
     input: {
       otherField: "",
     },
-    message: "$name should match {{input.otherfield}}",
+    message: "$name should match {{otherField}}",
   },
   min: {
     input: {

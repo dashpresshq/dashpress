@@ -7,10 +7,14 @@ import {
   useEntityScalarFields,
 } from "./entity.store";
 import { ENTITY_TYPES_SELECTION_BAG } from "../../../shared/validations.constants";
-import { IEntityField } from "../../../backend/entities/types";
 import { userFriendlyCase } from "../../lib/strings";
 import { IFieldValidationItem } from "frontend/views/entity/Configure/Fields/FieldsValidation";
 import uniqBy from "lodash/uniqBy";
+import {
+  getFieldTypeBoundedValidations,
+  guessEntityType,
+  guessEntityValidations,
+} from "./guess";
 
 export function useEntitySlug() {
   return useRouteParam("entity");
@@ -94,7 +98,7 @@ export function useEntityFieldValidations() {
   const entityValidationsMap = useEntityConfiguration<
     Record<string, IFieldValidationItem[]>
   >("entity_validations", entity);
-
+  const entityFieldTypes = useEntityFieldTypes();
   const entityScalarFields = useEntityScalarFields(entity);
 
   if (
@@ -121,6 +125,7 @@ export function useEntityFieldValidations() {
           name,
           uniqBy(
             [
+              ...getFieldTypeBoundedValidations(entityFieldTypes[name]),
               ...guessEntityValidations(isUnique, isId, isRequired),
               ...preSelectedValidation,
             ],
@@ -131,66 +136,6 @@ export function useEntityFieldValidations() {
     )
   );
 }
-
-const guessEntityValidations = (
-  isUnique: IEntityField["isUnique"],
-  isId: IEntityField["isId"],
-  isRequired: IEntityField["isRequired"]
-): IFieldValidationItem[] => {
-  const validationItems: IFieldValidationItem[] = [];
-
-  if (isUnique || isId) {
-    validationItems.push({
-      validationType: "unique",
-      errorMessage: "Foo", // TODO check after save message
-      fromSchema: true,
-    });
-  }
-
-  if (isRequired) {
-    validationItems.push({
-      validationType: "required",
-      errorMessage: "Foo",
-      fromSchema: true,
-    });
-  }
-  // TODO guess the maxLength/max
-
-  return validationItems;
-};
-
-const guessEntityType = (
-  name: string,
-  kind: IEntityField["kind"],
-  type: IEntityField["type"],
-  entityReferenceMap: Record<string, string>
-): keyof typeof ENTITY_TYPES_SELECTION_BAG => {
-  if (entityReferenceMap[name]) {
-    return "reference";
-  }
-
-  // Start guessing
-  if (kind === "enum") {
-    return "selection";
-  }
-
-  const entityFieldType = FIELD_TYPE_TO_ENTITY_TYPES_MAP[type];
-
-  if (entityFieldType) {
-    return entityFieldType;
-  }
-  return "text";
-};
-
-const FIELD_TYPE_TO_ENTITY_TYPES_MAP: Record<
-  IEntityField["type"],
-  keyof typeof ENTITY_TYPES_SELECTION_BAG
-> = {
-  Boolean: "boolean",
-  DateTime: "datetime-local",
-  Int: "number",
-  String: "text",
-};
 
 export interface IEntityCrudSettings {
   create: boolean;

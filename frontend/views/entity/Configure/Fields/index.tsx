@@ -153,27 +153,15 @@ export const EntityFieldsSettings = () => {
                     }}
                     fields={entityScalarFields.data || []}
                     onSubmit={async (data) => {
-                      // await Promise.all([
-                      //   upsertEntityTypesMapMutation.mutateAsync(
-                      //     data.types
-                      //   ),
-                      //   upsertEntityValidationsMutation.mutateAsync(
-                      //     data.validations
-                      //   ),
-                      //   upsertEntitySelectionsMutation.mutateAsync(
-                      //     data.selections || {},
-                      //   )
-                      // ]);
-
-                      await upsertEntityTypesMapMutation.mutateAsync(
-                        data.types
-                      );
-                      await upsertEntityValidationsMutation.mutateAsync(
-                        data.validations
-                      );
-                      await upsertEntitySelectionsMutation.mutateAsync(
-                        data.selections || {}
-                      );
+                      await Promise.all([
+                        upsertEntityTypesMapMutation.mutateAsync(data.types),
+                        upsertEntityValidationsMutation.mutateAsync(
+                          data.validations
+                        ),
+                        upsertEntitySelectionsMutation.mutateAsync(
+                          data.selections || {}
+                        ),
+                      ]);
                     }}
                     getEntityFieldLabels={getEntityFieldLabels}
                   />

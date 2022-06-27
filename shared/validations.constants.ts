@@ -76,19 +76,19 @@ export const ENTITY_TYPES_SELECTION_BAG: Record<
     allowedValidations: ["maxLength", "minLength", "required"],
   },
 
-  // useColors, labels
   boolean: {
+    // Configure Labels + must use color
     typeIsNotChangeAble: true,
     allowedValidations: ["required"],
   },
 
-  // usecolors, selections
   selection: {
+    // Configure Selection + maybe use colors
     allowedValidations: ["required"],
   },
 
-  // use colors
   reference: {
+    // use color
     typeIsNotChangeAble: true,
     allowedValidations: ["required", "unique"],
   },
@@ -128,7 +128,7 @@ type SelectableAbleValidations =
 // requiredIf
 //  isDate
 
-const ENTITY_VALIDATION_CONFIG: Record<
+export const ENTITY_VALIDATION_CONFIG: Record<
   ValidationsBoundToType | SelectableAbleValidations,
   {
     input?: Record<string, unknown>;
@@ -148,6 +148,7 @@ const ENTITY_VALIDATION_CONFIG: Record<
   },
   isColor: {
     isBoundToType: ["color"],
+    message: "$name should be a color",
   },
   isUrl: {
     isBoundToType: ["url"],
@@ -155,15 +156,21 @@ const ENTITY_VALIDATION_CONFIG: Record<
   },
   isNumber: {
     isBoundToType: ["number"],
+    message: "$name should be a number",
   },
   isBoolean: {
     isBoundToType: ["boolean"],
+    message: "$name should be a boolean",
   },
   required: {
     message: "$name is required",
   },
-  unique: {},
-  alphanumeric: {},
+  unique: {
+    message: "$name has already been taken",
+  },
+  alphanumeric: {
+    message: "$name should contain only alpabets, numbers and underscore",
+  },
   postiveNumber: {
     message: "$name should be positive number",
   },

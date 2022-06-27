@@ -9,6 +9,8 @@ import {
 import { ENTITY_TYPES_SELECTION_BAG } from "../../../shared/validations.constants";
 import { IEntityField } from "../../../backend/entities/types";
 import { userFriendlyCase } from "../../lib/strings";
+import { IFieldValidationItem } from "frontend/views/entity/Configure/Fields/FieldsValidation";
+import uniqBy from "lodash/uniqBy";
 
 export function useEntitySlug() {
   return useRouteParam("entity");
@@ -71,32 +73,98 @@ export function useEntityFieldTypes() {
 
   return Object.fromEntries(
     (entityScalarFields.data || []).map(({ name, type, kind }) => {
+      const preSelectedType = (entityFieldTypesMap.data || {})[name];
+
       return [
         name,
-        getEntityType(
-          entityFieldTypesMap.data || {},
-          name,
-          kind,
-          type,
-          entityReferenceFieldsMap.data || {}
-        ),
+        preSelectedType ??
+          guessEntityType(
+            name,
+            kind,
+            type,
+            entityReferenceFieldsMap.data || {}
+          ),
       ];
     })
   );
 }
 
-const getEntityType = (
-  entityFieldTypeMap: Record<string, keyof typeof ENTITY_TYPES_SELECTION_BAG>,
+export function useEntityFieldValidations() {
+  const entity = useEntitySlug();
+  const entityValidationsMap = useEntityConfiguration<
+    Record<string, IFieldValidationItem[]>
+  >("entity_validations", entity);
+
+  const entityScalarFields = useEntityScalarFields(entity);
+
+  if (
+    entityScalarFields.isLoading ||
+    entityScalarFields.isError ||
+    entityValidationsMap.isError ||
+    entityValidationsMap.isLoading
+  ) {
+    return {};
+  }
+
+  return Object.fromEntries(
+    (entityScalarFields.data || []).map(
+      ({ name, isUnique, isId, isRequired }) => {
+        // The validation from the DB should override that of the config
+        const preSelectedValidation =
+          (entityValidationsMap.data || {})[name] || [];
+
+        const uniqKey: keyof IFieldValidationItem = "validationType";
+        // Prefering the add new effect over remove old effect
+        // Would be nice to reflect accurately
+        // TODO if the maxLenghth/max changes then update that too :sweat
+        return [
+          name,
+          uniqBy(
+            [
+              ...guessEntityValidations(isUnique, isId, isRequired),
+              ...preSelectedValidation,
+            ],
+            uniqKey
+          ),
+        ];
+      }
+    )
+  );
+}
+
+const guessEntityValidations = (
+  isUnique: IEntityField["isUnique"],
+  isId: IEntityField["isId"],
+  isRequired: IEntityField["isRequired"]
+): IFieldValidationItem[] => {
+  const validationItems: IFieldValidationItem[] = [];
+
+  if (isUnique || isId) {
+    validationItems.push({
+      validationType: "unique",
+      errorMessage: "Foo", // TODO check after save message
+      fromSchema: true,
+    });
+  }
+
+  if (isRequired) {
+    validationItems.push({
+      validationType: "required",
+      errorMessage: "Foo",
+      fromSchema: true,
+    });
+  }
+  // TODO guess the maxLength/max
+
+  return validationItems;
+};
+
+const guessEntityType = (
   name: string,
   kind: IEntityField["kind"],
   type: IEntityField["type"],
   entityReferenceMap: Record<string, string>
 ): keyof typeof ENTITY_TYPES_SELECTION_BAG => {
-  const preSelectedType = entityFieldTypeMap[name];
-  if (preSelectedType) {
-    return preSelectedType;
-  }
-
   if (entityReferenceMap[name]) {
     return "reference";
   }

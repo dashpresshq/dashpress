@@ -11,6 +11,7 @@ export const CONFIGURATION_KEYS: Record<
   | "entity_columns_labels" //
   | "entities_to_hide_from_menu" //
   | "relations_list_fields"
+  | "entity_selections"
   | "entity_validations",
   { requireEntity: boolean; defaultValue: unknown }
 > = {
@@ -23,6 +24,10 @@ export const CONFIGURATION_KEYS: Record<
   entity_validations: {
     requireEntity: true,
     defaultValue: {}, // key: string[],
+  },
+  entity_selections: {
+    requireEntity: true,
+    defaultValue: {},
   },
   entity_diction: {
     requireEntity: true,

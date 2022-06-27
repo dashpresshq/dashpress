@@ -23,7 +23,7 @@ export class ConfigurationService {
     return this._config;
   }
 
-  private async persitentConfig(config: Record<string, unknown>) {
+  private async persistConfig(config: Record<string, unknown>) {
     await fs.writeJson(pathToConfigFile, config, { spaces: 2 });
   }
 
@@ -56,7 +56,10 @@ export class ConfigurationService {
     } else {
       config[key] = value;
     }
-    await this.persitentConfig(config);
+
+    console.log(JSON.stringify(config));
+
+    await this.persistConfig(config);
   }
 }
 

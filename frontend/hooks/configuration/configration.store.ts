@@ -65,7 +65,7 @@ export function useUpsertConfigurationMutation(
   });
 
   return useMutation(
-    async (values: Partial<Record<string, string> | unknown[]>) => {
+    async (values: Partial<Record<string, unknown> | unknown[]>) => {
       await makePutRequest(configurationApiPath(key, entity), {
         data: values,
       });

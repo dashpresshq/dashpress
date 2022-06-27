@@ -15,7 +15,10 @@ import {
 } from "@gothicgeeks/shared";
 import { ENTITY_TYPES_SELECTION_BAG } from "../../../../../shared/validations.constants";
 import { useMemo, useState } from "react";
-import { FieldValidationCanvas } from "./FieldsValidation";
+import {
+  FieldValidationCanvas,
+  IFieldValidationItem,
+} from "./FieldsValidation";
 
 const ENTITY_TYPES_SELECTION_BAG_AS_SELECTION = Object.entries(
   ENTITY_TYPES_SELECTION_BAG
@@ -34,9 +37,9 @@ const listOfEntitiesThatCantBeChanged = Object.entries(
   .map(([key]) => key);
 
 interface IValues {
-  types: Record<string, unknown>;
+  types: Record<string, keyof typeof ENTITY_TYPES_SELECTION_BAG>;
   selections: Record<string, unknown>;
-  validations: Record<string, unknown>;
+  validations: Record<string, IFieldValidationItem[]>;
 }
 
 export const FieldsTypeForm: React.FC<{
@@ -70,7 +73,7 @@ export const FieldsTypeForm: React.FC<{
     <Form
       onSubmit={onSubmit}
       initialValues={memoIzedInitialValuesSoItDoesFlickerOnSubmit}
-      render={({ handleSubmit, submitting, values }) => {
+      render={({ handleSubmit, submitting, values, form }) => {
         return (
           <>
             <form onSubmit={handleSubmit}>
@@ -117,13 +120,18 @@ export const FieldsTypeForm: React.FC<{
             >
               <FieldValidationCanvas
                 field={showFieldValidations}
-                type={
+                entityType={
                   values[`types`][
                     showFieldValidations
                   ] as keyof typeof ENTITY_TYPES_SELECTION_BAG
                 }
-                // values={values}
-                // onSubmit={() => {}}
+                validations={values.validations[showFieldValidations] || []}
+                onSubmit={(value) => {
+                  form.change("validations", {
+                    ...values.validations,
+                    [showFieldValidations]: value,
+                  });
+                }}
               />
             </OffCanvas>
           </>

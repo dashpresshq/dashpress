@@ -9,6 +9,7 @@ import {
 import {
   useEntityFieldLabels,
   useEntityFieldTypes,
+  useEntityFieldValidations,
   useEntitySlug,
 } from "../../../../hooks/entity/entity.config";
 import { NAVIGATION_LINKS } from "../../../../lib/routing/links";
@@ -36,12 +37,24 @@ export const EntityFieldsSettings = () => {
     entity
   );
   const getEntityFieldLabels = useEntityFieldLabels();
-  const entityFieldTypesMap = useEntityConfiguration<Record<string, string>>(
+  const {
+    isLoading: entityFieldTypesMapIsLoading,
+    error: entityFieldTypesMapError,
+  } = useEntityConfiguration<Record<string, string>>(
     "entity_columns_types",
     entity
   );
 
+  const {
+    isLoading: entityValidationsMapIsLoading,
+    error: entityValidationsMapError,
+  } = useEntityConfiguration<Record<string, string>>(
+    "entity_validations",
+    entity
+  );
+
   const entityFieldTypes = useEntityFieldTypes();
+  const entityFieldValidations = useEntityFieldValidations();
 
   const upsertEntityFieldsMapMutation = useUpsertConfigurationMutation(
     "entity_columns_labels",
@@ -50,6 +63,16 @@ export const EntityFieldsSettings = () => {
 
   const upsertEntityTypesMapMutation = useUpsertConfigurationMutation(
     "entity_columns_types",
+    entity
+  );
+
+  const upsertEntityValidationsMutation = useUpsertConfigurationMutation(
+    "entity_validations",
+    entity
+  );
+
+  const upsertEntitySelectionsMutation = useUpsertConfigurationMutation(
+    "entity_selections",
     entity
   );
 
@@ -64,7 +87,8 @@ export const EntityFieldsSettings = () => {
   const sharedLoadingState =
     entityScalarFields.isLoading ||
     entityFieldLabelsMap.isLoading ||
-    entityFieldTypesMap.isLoading;
+    entityValidationsMapIsLoading ||
+    entityFieldTypesMapIsLoading;
 
   return (
     <BaseEntitySettingsLayout
@@ -77,7 +101,8 @@ export const EntityFieldsSettings = () => {
         message={
           entityScalarFields.error ||
           entityFieldLabelsMap.error ||
-          entityFieldTypesMap.error
+          entityValidationsMapError ||
+          entityFieldTypesMapError
         }
       />
       <SectionBox title="Fields Settings">
@@ -124,12 +149,30 @@ export const EntityFieldsSettings = () => {
                     initialValues={{
                       types: entityFieldTypes,
                       selections: {},
-                      validations: {},
+                      validations: entityFieldValidations,
                     }}
                     fields={entityScalarFields.data || []}
                     onSubmit={async (data) => {
+                      // await Promise.all([
+                      //   upsertEntityTypesMapMutation.mutateAsync(
+                      //     data.types
+                      //   ),
+                      //   upsertEntityValidationsMutation.mutateAsync(
+                      //     data.validations
+                      //   ),
+                      //   upsertEntitySelectionsMutation.mutateAsync(
+                      //     data.selections || {},
+                      //   )
+                      // ]);
+
                       await upsertEntityTypesMapMutation.mutateAsync(
-                        data.types as Record<string, string>
+                        data.types
+                      );
+                      await upsertEntityValidationsMutation.mutateAsync(
+                        data.validations
+                      );
+                      await upsertEntitySelectionsMutation.mutateAsync(
+                        data.selections || {}
                       );
                     }}
                     getEntityFieldLabels={getEntityFieldLabels}
@@ -148,7 +191,7 @@ export const EntityFieldsSettings = () => {
                   <Spacer size="xl" />
                   <SortList
                     data={{
-                      ...entityFieldTypesMap,
+                      ...entityScalarFields,
                       data: (entityScalarFields.data || []).map(({ name }) => ({
                         value: name,
                         label: getEntityFieldLabels(name),

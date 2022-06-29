@@ -20,7 +20,11 @@ export const CreateEntityForm: React.FC<
   return (
     <Form
       onSubmit={onSubmit}
-      validate={runValidationError(fields, entityValidationsMap)}
+      validate={runValidationError(
+        fields,
+        entityValidationsMap,
+        getEntityFieldLabels
+      )}
       render={({ handleSubmit, form, values, submitting }) => {
         return (
           <form

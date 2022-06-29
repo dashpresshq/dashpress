@@ -158,7 +158,11 @@ const handleValidation =
     constraints: Record<string, unknown>,
     allValues: Record<string, unknown>
   ) =>
-    validation(value, constraints[parameterKey]) ? undefined : errorMessage;
+    value
+      ? validation(value, constraints[parameterKey])
+        ? undefined
+        : errorMessage
+      : undefined;
 
 export const ENTITY_VALIDATION_CONFIG: Record<
   ValidationsBoundToType | SelectableAbleValidations,
@@ -175,103 +179,104 @@ export const ENTITY_VALIDATION_CONFIG: Record<
   }
 > = {
   // Selection, enum like check
+  required: {
+    message: "{{ name }} is required",
+    implementation: (value, errorMessage) =>
+      isNotEmpty(value) ? undefined : errorMessage,
+  },
   isEmail: {
     isBoundToType: ["email"],
-    message: "Invalid email",
+    message: "{{ name }} is an invalid email",
     implementation: handleValidation(isEmail),
   },
   isReference: {
     isBoundToType: ["reference"],
-    message: "Doesn't exist",
+    message: "{{ name }} doesn't exist",
     implementation: () => undefined,
   },
   isString: {
     isBoundToType: ["password", "text", "textarea", "richtext", "image"],
-    message: "$name is not a text",
+    message: "{{ name }} is not a text",
     implementation: handleValidation(isString),
   },
   isColor: {
     isBoundToType: ["color"],
-    message: "$name should be a color",
+    message: "{{ name }} should be a color",
     implementation: handleValidation(isRgbColor),
   },
   isUrl: {
     isBoundToType: ["url"],
-    message: "Invalid URL",
+    message: "{{ name }} is an invalid URL",
     implementation: handleValidation(isURL),
   },
   isDate: {
     isBoundToType: ["datetime-local"],
-    message: "Invalid Date",
+    message: "{{ name }} is an invalid Date",
     implementation: handleValidation(isDate),
   },
   isNumber: {
     isBoundToType: ["number"],
-    message: "$name should be a number",
+    message: "{{ name }} should be a number",
     implementation: handleValidation(isNumber),
   },
   isBoolean: {
     isBoundToType: ["boolean"],
-    message: "$name should be a boolean",
+    message: "{{ name }} should be a boolean",
     implementation: handleValidation(isBoolean),
   },
-  required: {
-    message: "$name is required",
-    implementation: (value, errorMessage) =>
-      isNotEmpty(value) ? undefined : errorMessage,
-  },
+
   unique: {
-    message: "$name has already been taken",
+    message: "{{ name }} already exists",
     implementation: () => undefined,
   },
   alphanumeric: {
-    message: "$name should contain only alpabets, numbers and underscore",
+    message: "{{ name }} should contain only alpabets, numbers and underscore",
     implementation: handleValidation(isAlphanumeric),
   },
   postiveNumber: {
-    message: "$name should be positive number",
+    message: "{{ name }} should be positive number",
     implementation: handleValidation(isPositive),
   },
   matchOtherField: {
     input: {
       otherField: "",
     },
-    message: "$name should match {{otherField}}",
+    message: "{{ name }} should match {{otherField}}", // :eyes
     implementation: () => undefined,
   },
   min: {
     input: {
       length: 3,
     },
-    message: "$name should be greater than $input",
+    message: "{{ name }} should be greater than {{ length }}",
     implementation: handleValidation(min, "length"),
   },
   max: {
     input: {
       length: 10,
     },
-    message: "$name should be less than $input",
+    message: "{{ name }} should be less than {{ length }}",
     implementation: handleValidation(max, "length"),
   },
   maxLength: {
     input: {
       length: 100,
     },
-    message: "$name should be less than $input characters",
+    message: "{{ name }} should be less than {{ length }} characters",
     implementation: handleValidation(maxLength, "length"),
   },
   minLength: {
     input: {
       length: 3,
     },
-    message: "$name should be greater than $input characters",
+    message: "{{ name }} should be greater than {{ length }} characters",
     implementation: handleValidation(minLength, "length"),
   },
   regex: {
     input: {
       pattern: "//",
     },
-    message: "$name is invalid",
+    message: "{{ name }} is invalid",
     implementation: handleValidation(matches, "pattern"),
   },
 };

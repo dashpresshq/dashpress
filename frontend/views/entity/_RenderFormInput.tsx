@@ -5,6 +5,7 @@ import {
   FormTextArea,
 } from "@gothicgeeks/design-system";
 import { ISharedFormInput } from "@gothicgeeks/design-system/dist/components/Form/_types";
+import { TemplateService } from "frontend/lib/templates";
 import {
   ENTITY_TYPES_SELECTION_BAG,
   ENTITY_VALIDATION_CONFIG,
@@ -68,26 +69,34 @@ export const RenderFormInput = ({
 export const runValidationError =
   (
     fields: string[],
-    entityValidationsMap: Record<string, IFieldValidationItem[]>
+    entityValidationsMap: Record<string, IFieldValidationItem[]>,
+    getEntityFieldLabels: (input: string) => string
   ) =>
   (values: Record<string, unknown>) => {
     const validations = Object.fromEntries(
       fields.map((field) => {
         const validationsToRun = entityValidationsMap[field] || [];
 
-        const errorMessage = validationsToRun.find((validation) => {
-          console.log(validation.validationType);
+        const firstFailedValidation = validationsToRun.find((validation) => {
           return ENTITY_VALIDATION_CONFIG[
             validation.validationType
           ]?.implementation(
             values[field],
             validation.errorMessage,
-            validation.constraint,
+            validation.constraint || {},
             values
           );
-        })?.errorMessage;
+        });
 
-        return [field, errorMessage];
+        return [
+          field,
+          firstFailedValidation
+            ? TemplateService.compile(firstFailedValidation.errorMessage, {
+                name: getEntityFieldLabels(field),
+                ...firstFailedValidation.constraint,
+              })
+            : undefined,
+        ];
       })
     );
     return validations;

@@ -24,7 +24,11 @@ export const UpdateEntityForm: React.FC<
     <Form
       // TODO Send only changed fields
       onSubmit={onSubmit}
-      validate={runValidationError(fields, entityValidationsMap)}
+      validate={runValidationError(
+        fields,
+        entityValidationsMap,
+        getEntityFieldLabels
+      )}
       initialValues={initialValues}
       render={({ handleSubmit, submitting }) => {
         return (

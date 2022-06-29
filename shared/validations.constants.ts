@@ -178,7 +178,6 @@ export const ENTITY_VALIDATION_CONFIG: Record<
     ) => undefined | string;
   }
 > = {
-  // Selection, enum like check
   required: {
     message: "{{ name }} is required",
     implementation: (value, errorMessage) =>
@@ -188,11 +187,6 @@ export const ENTITY_VALIDATION_CONFIG: Record<
     isBoundToType: ["email"],
     message: "{{ name }} is an invalid email",
     implementation: handleValidation(isEmail),
-  },
-  isReference: {
-    isBoundToType: ["reference"],
-    message: "{{ name }} doesn't exist",
-    implementation: () => undefined,
   },
   isString: {
     isBoundToType: ["password", "text", "textarea", "richtext", "image"],
@@ -225,10 +219,6 @@ export const ENTITY_VALIDATION_CONFIG: Record<
     implementation: handleValidation(isBoolean),
   },
 
-  unique: {
-    message: "{{ name }} already exists",
-    implementation: () => undefined,
-  },
   alphanumeric: {
     message: "{{ name }} should contain only alpabets, numbers and underscore",
     implementation: handleValidation(isAlphanumeric),
@@ -236,13 +226,6 @@ export const ENTITY_VALIDATION_CONFIG: Record<
   postiveNumber: {
     message: "{{ name }} should be positive number",
     implementation: handleValidation(isPositive),
-  },
-  matchOtherField: {
-    input: {
-      otherField: "",
-    },
-    message: "{{ name }} should match {{otherField}}", // :eyes
-    implementation: () => undefined,
   },
   min: {
     input: {
@@ -271,6 +254,26 @@ export const ENTITY_VALIDATION_CONFIG: Record<
     },
     message: "{{ name }} should be greater than {{ length }} characters",
     implementation: handleValidation(minLength, "length"),
+  },
+
+  // Needs some work
+  // Selection, enum like check
+
+  isReference: {
+    isBoundToType: ["reference"],
+    message: "{{ name }} doesn't exist",
+    implementation: () => undefined,
+  },
+  unique: {
+    message: "{{ name }} already exists",
+    implementation: () => undefined,
+  },
+  matchOtherField: {
+    input: {
+      otherField: "",
+    },
+    message: "{{ name }} should match {{otherField}}", // :eyes
+    implementation: () => undefined,
   },
   regex: {
     input: {

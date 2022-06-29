@@ -132,13 +132,13 @@ const customJestConfig = {
 
   // The paths to modules that run some code to configure or set up the testing environment before each test
   setupFiles: [
-    "<rootDir>/tests/setupDotEnv.ts",
+    // "<rootDir>/tests/setupDotEnv.ts",
     "<rootDir>/tests/setupGlobals.ts",
-    "<rootDir>/tests/consoleOverrides.js",
+    "<rootDir>/tests/consoleOverrides.ts",
   ],
 
   // A list of paths to modules that run some code to configure or set up the testing framework before each test
-  // setupFilesAfterEnv: [],
+  setupFilesAfterEnv: ["<rootDir>/tests/setupAfterEnv.ts"],
 
   // The number of seconds after which a test is considered as slow and reported as such in the results.
   // slowTestThreshold: 5,

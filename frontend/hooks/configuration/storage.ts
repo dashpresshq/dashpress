@@ -1,10 +1,10 @@
 import { CONFIGURATION_KEYS } from "shared/configuration.constants";
 
-const PREFIX = "__app_config__";
+const PREFIX = "__cardinal_app_config__";
 
 export const ConfigrationStorage = {
   getKey: (key: keyof typeof CONFIGURATION_KEYS, entity?: string) => {
-    return `${PREFIX}${key}${entity}`;
+    return `${PREFIX}${key}_${entity}`;
   },
   set: (
     value: Record<string, unknown> | unknown[],

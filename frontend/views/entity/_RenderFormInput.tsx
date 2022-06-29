@@ -7,12 +7,17 @@ import {
 import { ISharedFormInput } from "@gothicgeeks/design-system/dist/components/Form/_types";
 import { IEntityField } from "../../../backend/entities/types";
 import { ENTITY_TYPES_SELECTION_BAG } from "../../../shared/validations.constants";
+import { IFieldValidationItem } from "./Configure/Fields/FieldsValidation";
 
 export interface IBaseEntityForm {
   fields: IEntityField[];
   getEntityFieldLabels: (name: string) => string;
   onSubmit: (data: Record<string, unknown>) => void;
   entityFieldTypes: Record<string, keyof typeof ENTITY_TYPES_SELECTION_BAG>;
+}
+
+export interface IEntityFormSettings {
+  entityValidationsMap: Record<string, IFieldValidationItem[]>;
 }
 
 export const RenderFormInput = ({

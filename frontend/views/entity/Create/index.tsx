@@ -25,6 +25,7 @@ import {
 import { useEntityConfiguration } from "../../../hooks/configuration/configration.store";
 import { CreateEntityForm } from "./CreateEntity.form";
 import { fitlerOutHiddenScalarColumns } from "../utils";
+import { IFieldValidationItem } from "../Configure/Fields/FieldsValidation";
 
 export function EntityCreate() {
   const entity = useEntitySlug();
@@ -42,12 +43,16 @@ export function EntityCreate() {
     "entity_columns_types",
     entity
   );
+  const entityValidationsMap = useEntityConfiguration<
+    Record<string, IFieldValidationItem[]>
+  >("entity_validations", entity);
   const getEntityFieldLabels = useEntityFieldLabels();
   const entityFieldTypes = useEntityFieldTypes();
 
   const error =
     hiddenCreateColumns.error ||
     entityFieldTypesMap.error ||
+    entityValidationsMap.error ||
     entityScalarFields.error;
 
   return (
@@ -78,6 +83,7 @@ export function EntityCreate() {
         >
           {hiddenCreateColumns.isLoading ||
           entityScalarFields.isLoading ||
+          entityValidationsMap.isLoading ||
           entityFieldTypesMap.isLoading ? (
             <FormSkeleton
               schema={[
@@ -94,6 +100,7 @@ export function EntityCreate() {
               ) : (
                 <CreateEntityForm
                   entityFieldTypes={entityFieldTypes}
+                  entityValidationsMap={entityValidationsMap.data}
                   getEntityFieldLabels={getEntityFieldLabels}
                   onSubmit={entityDataCreationMutation.mutateAsync}
                   fields={fitlerOutHiddenScalarColumns(

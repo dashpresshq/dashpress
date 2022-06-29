@@ -109,6 +109,7 @@ export type ValidationsBoundToType =
   | "isNumber"
   | "isString"
   | "isDate"
+  | "isReference"
   | "isBoolean"
   | "isColor";
 
@@ -142,6 +143,10 @@ export const ENTITY_VALIDATION_CONFIG: Record<
   isEmail: {
     isBoundToType: ["email"],
     message: "Invalid email",
+  },
+  isReference: {
+    isBoundToType: ["reference"],
+    message: "Doesn't exist",
   },
   isString: {
     isBoundToType: ["password", "text", "textarea", "richtext", "image"],

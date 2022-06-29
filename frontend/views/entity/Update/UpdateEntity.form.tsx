@@ -1,12 +1,16 @@
 import { FormButton } from "@gothicgeeks/design-system";
 import { ButtonLang } from "@gothicgeeks/shared";
 import { Form, Field } from "react-final-form";
-import { RenderFormInput, IBaseEntityForm } from "../_RenderFormInput";
+import {
+  RenderFormInput,
+  IBaseEntityForm,
+  IEntityFormSettings,
+} from "../_RenderFormInput";
 
 export const UpdateEntityForm: React.FC<
   IBaseEntityForm & {
     initialValues?: Record<string, unknown>;
-  }
+  } & IEntityFormSettings
 > = ({
   onSubmit,
   initialValues,

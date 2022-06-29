@@ -5,6 +5,7 @@ import {
   RenderFormInput,
   IBaseEntityForm,
   IEntityFormSettings,
+  runValidationError,
 } from "../_RenderFormInput";
 
 export const UpdateEntityForm: React.FC<
@@ -16,24 +17,21 @@ export const UpdateEntityForm: React.FC<
   initialValues,
   fields,
   entityFieldTypes,
+  entityValidationsMap,
   getEntityFieldLabels,
 }) => {
   return (
     <Form
       // TODO Send only changed fields
       onSubmit={onSubmit}
+      validate={runValidationError(fields, entityValidationsMap)}
       initialValues={initialValues}
       render={({ handleSubmit, submitting }) => {
         return (
-          <form onSubmit={handleSubmit}>
-            {fields.map(({ name }) => {
+          <form noValidate={true} onSubmit={handleSubmit}>
+            {fields.map((name) => {
               return (
-                <Field
-                  key={name}
-                  name={name}
-                  // validate={composeValidators(required, maxLength(32))}
-                  validateFields={[]}
-                >
+                <Field key={name} name={name} validateFields={[]}>
                   {(renderProps) => (
                     <RenderFormInput
                       type={entityFieldTypes[name]}

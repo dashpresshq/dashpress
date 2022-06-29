@@ -19,7 +19,9 @@
   "dependencies": {
     "@gothicgeeks/design-system": "git+ssh://git@github.com:thrownullexception/design-system.git#ebe833507bdf6541787ef0c5b30a723f8448bc46",
     "@gothicgeeks/shared": "git+ssh://git@github.com:thrownullexception/shared.git#566b79f9104b0e6fedbc266b6ca063e5ed375f39",
+    "ajv": "^8.11.0",
     "change-case": "^4.1.2",
+    "class-validator": "^0.13.2",
     "final-form-arrays": "^3.0.2",
     "fs-extra": "^10.1.0",
     "knex": "^2.0.0",

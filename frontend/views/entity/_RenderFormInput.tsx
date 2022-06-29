@@ -5,12 +5,14 @@ import {
   FormTextArea,
 } from "@gothicgeeks/design-system";
 import { ISharedFormInput } from "@gothicgeeks/design-system/dist/components/Form/_types";
-import { IEntityField } from "../../../backend/entities/types";
-import { ENTITY_TYPES_SELECTION_BAG } from "../../../shared/validations.constants";
+import {
+  ENTITY_TYPES_SELECTION_BAG,
+  ENTITY_VALIDATION_CONFIG,
+} from "../../../shared/validations.constants";
 import { IFieldValidationItem } from "./Configure/Fields/FieldsValidation";
 
 export interface IBaseEntityForm {
-  fields: IEntityField[];
+  fields: string[];
   getEntityFieldLabels: (name: string) => string;
   onSubmit: (data: Record<string, unknown>) => void;
   entityFieldTypes: Record<string, keyof typeof ENTITY_TYPES_SELECTION_BAG>;
@@ -62,3 +64,31 @@ export const RenderFormInput = ({
 
   return <FormInput label={label} required={required} {...renderProps} />;
 };
+
+export const runValidationError =
+  (
+    fields: string[],
+    entityValidationsMap: Record<string, IFieldValidationItem[]>
+  ) =>
+  (values: Record<string, unknown>) => {
+    const validations = Object.fromEntries(
+      fields.map((field) => {
+        const validationsToRun = entityValidationsMap[field] || [];
+
+        const errorMessage = validationsToRun.find((validation) => {
+          console.log(validation.validationType);
+          return ENTITY_VALIDATION_CONFIG[
+            validation.validationType
+          ]?.implementation(
+            values[field],
+            validation.errorMessage,
+            validation.constraint,
+            values
+          );
+        })?.errorMessage;
+
+        return [field, errorMessage];
+      })
+    );
+    return validations;
+  };

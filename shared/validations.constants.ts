@@ -128,7 +128,37 @@ type SelectableAbleValidations =
 // less than other field
 // not equal to other field
 // requiredIf
-//  isDate
+
+import {
+  isBoolean,
+  isString,
+  isEmail,
+  maxLength,
+  minLength,
+  isURL,
+  isNumber,
+  isPositive,
+  matches,
+  isAlphanumeric,
+  isNotEmpty,
+  isDate,
+  isRgbColor,
+  min,
+  max,
+} from "class-validator";
+
+const handleValidation =
+  (
+    validation: (value: unknown, parameter?: unknown) => boolean,
+    parameterKey?: string
+  ) =>
+  (
+    value: unknown,
+    errorMessage: string,
+    constraints: Record<string, unknown>,
+    allValues: Record<string, unknown>
+  ) =>
+    validation(value, constraints[parameterKey]) ? undefined : errorMessage;
 
 export const ENTITY_VALIDATION_CONFIG: Record<
   ValidationsBoundToType | SelectableAbleValidations,
@@ -136,88 +166,112 @@ export const ENTITY_VALIDATION_CONFIG: Record<
     input?: Record<string, unknown>;
     isBoundToType?: Array<keyof typeof ENTITY_TYPES_SELECTION_BAG>;
     message: string;
+    implementation: (
+      value: unknown,
+      errorMessage: string,
+      constraints: Record<string, unknown>,
+      allValues: Record<string, unknown>
+    ) => undefined | string;
   }
 > = {
   // Selection, enum like check
-  // reference, that the reference exists in the DB
   isEmail: {
     isBoundToType: ["email"],
     message: "Invalid email",
+    implementation: handleValidation(isEmail),
   },
   isReference: {
     isBoundToType: ["reference"],
     message: "Doesn't exist",
+    implementation: () => undefined,
   },
   isString: {
     isBoundToType: ["password", "text", "textarea", "richtext", "image"],
     message: "$name is not a text",
+    implementation: handleValidation(isString),
   },
   isColor: {
     isBoundToType: ["color"],
     message: "$name should be a color",
+    implementation: handleValidation(isRgbColor),
   },
   isUrl: {
     isBoundToType: ["url"],
     message: "Invalid URL",
+    implementation: handleValidation(isURL),
   },
   isDate: {
     isBoundToType: ["datetime-local"],
     message: "Invalid Date",
+    implementation: handleValidation(isDate),
   },
   isNumber: {
     isBoundToType: ["number"],
     message: "$name should be a number",
+    implementation: handleValidation(isNumber),
   },
   isBoolean: {
     isBoundToType: ["boolean"],
     message: "$name should be a boolean",
+    implementation: handleValidation(isBoolean),
   },
   required: {
     message: "$name is required",
+    implementation: (value, errorMessage) =>
+      isNotEmpty(value) ? undefined : errorMessage,
   },
   unique: {
     message: "$name has already been taken",
+    implementation: () => undefined,
   },
   alphanumeric: {
     message: "$name should contain only alpabets, numbers and underscore",
+    implementation: handleValidation(isAlphanumeric),
   },
   postiveNumber: {
     message: "$name should be positive number",
+    implementation: handleValidation(isPositive),
   },
   matchOtherField: {
     input: {
       otherField: "",
     },
     message: "$name should match {{otherField}}",
+    implementation: () => undefined,
   },
   min: {
     input: {
       length: 3,
     },
     message: "$name should be greater than $input",
+    implementation: handleValidation(min, "length"),
   },
   max: {
     input: {
       length: 10,
     },
     message: "$name should be less than $input",
+    implementation: handleValidation(max, "length"),
   },
   maxLength: {
     input: {
       length: 100,
     },
     message: "$name should be less than $input characters",
+    implementation: handleValidation(maxLength, "length"),
   },
   minLength: {
     input: {
       length: 3,
     },
     message: "$name should be greater than $input characters",
+    implementation: handleValidation(minLength, "length"),
   },
   regex: {
     input: {
       pattern: "//",
     },
     message: "$name is invalid",
+    implementation: handleValidation(matches, "pattern"),
   },
 };

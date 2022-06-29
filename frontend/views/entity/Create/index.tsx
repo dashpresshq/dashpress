@@ -106,7 +106,7 @@ export function EntityCreate() {
                   fields={fitlerOutHiddenScalarColumns(
                     entityScalarFields,
                     hiddenCreateColumns
-                  )}
+                  ).map(({ name }) => name)}
                 />
               )}
             </>

@@ -3,7 +3,7 @@ import {
   ENTITY_TYPES_SELECTION_BAG,
   ENTITY_VALIDATION_CONFIG,
   ValidationsBoundToType,
-} from "shared/validations.constants";
+} from "../../../shared/validations.constants";
 import { IEntityField } from "../../../backend/entities/types";
 
 export const getFieldTypeBoundedValidations = (

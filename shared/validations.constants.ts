@@ -145,9 +145,10 @@ import {
   isRgbColor,
   min,
   max,
+  isEmpty,
 } from "class-validator";
 
-const handleValidation =
+export const handleValidation =
   (
     validation: (value: unknown, parameter?: unknown) => boolean,
     parameterKey?: string
@@ -158,7 +159,7 @@ const handleValidation =
     constraints: Record<string, unknown>,
     allValues: Record<string, unknown>
   ) =>
-    value
+    isNotEmpty(value)
       ? validation(value, constraints[parameterKey])
         ? undefined
         : errorMessage
@@ -262,18 +263,18 @@ export const ENTITY_VALIDATION_CONFIG: Record<
   isReference: {
     isBoundToType: ["reference"],
     message: "{{ name }} doesn't exist",
-    implementation: () => undefined,
+    implementation: undefined,
   },
   unique: {
     message: "{{ name }} already exists",
-    implementation: () => undefined,
+    implementation: undefined,
   },
   matchOtherField: {
     input: {
       otherField: "",
     },
     message: "{{ name }} should match {{otherField}}", // :eyes
-    implementation: () => undefined,
+    implementation: undefined,
   },
   regex: {
     input: {

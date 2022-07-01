@@ -9,11 +9,13 @@ export const ENTITY_TYPES_SELECTION_BAG: Record<
   | "selection" // not inplemeneted
   | "reference" // not inplemeneted
   | "boolean"
+  | "selection-enum"
   | "image" // not inplemeneted
   | "datetime-local" // not inplemeneted
   | "color", // not inplemeneted
   {
     typeIsNotChangeAble?: true;
+    configureSelection?: true;
     allowedValidations: Array<SelectableAbleValidations>;
   }
 > = {
@@ -80,17 +82,27 @@ export const ENTITY_TYPES_SELECTION_BAG: Record<
     // Configure Labels + must use color
     typeIsNotChangeAble: true,
     allowedValidations: ["required"],
+    configureSelection: true,
   },
 
   selection: {
     // Configure Selection + maybe use colors
+    allowedValidations: ["required", "maxLength"],
+    configureSelection: true,
+  },
+
+  "selection-enum": {
+    typeIsNotChangeAble: true,
+    // Configure Selection + maybe use colors
     allowedValidations: ["required"],
+    configureSelection: true,
   },
 
   reference: {
     // use color
     typeIsNotChangeAble: true,
     allowedValidations: ["required", "unique"],
+    configureSelection: true,
   },
 };
 
@@ -145,7 +157,6 @@ import {
   isRgbColor,
   min,
   max,
-  isEmpty,
 } from "class-validator";
 
 export const handleValidation =

@@ -62,7 +62,7 @@ export const guessEntityType = (
 
   // Start guessing
   if (kind === "enum") {
-    return "selection";
+    return "selection-enum";
   }
 
   const entityFieldType = FIELD_TYPE_TO_ENTITY_TYPES_MAP[type];

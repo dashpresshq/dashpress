@@ -20,6 +20,11 @@ import {
   IFieldValidationItem,
 } from "./FieldsValidation";
 import { getFieldTypeBoundedValidations } from "frontend/hooks/entity/guess";
+import {
+  EntityTypesForSelection,
+  FieldSelectionCanvas,
+  IColorableSelection,
+} from "./FieldsSelection";
 
 const ENTITY_TYPES_SELECTION_BAG_AS_SELECTION = Object.entries(
   ENTITY_TYPES_SELECTION_BAG
@@ -39,7 +44,7 @@ const listOfEntitiesThatCantBeChanged = Object.entries(
 
 interface IValues {
   types: Record<string, keyof typeof ENTITY_TYPES_SELECTION_BAG>;
-  selections: Record<string, unknown>;
+  selections: Record<string, IColorableSelection[]>;
   validations: Record<string, IFieldValidationItem[]>;
 }
 
@@ -66,6 +71,7 @@ export const FieldsTypeForm: React.FC<{
   }, [JSON.stringify(initialValues)]);
 
   const [showFieldValidations, setShowFieldValidations] = useState("");
+  const [showFieldSelection, setShowFieldSelection] = useState("");
 
   if (isLoading) {
     return (
@@ -96,45 +102,62 @@ export const FieldsTypeForm: React.FC<{
                     validate={composeValidators(minLength(2), maxLength(64))}
                     validateFields={[]}
                   >
-                    {(renderProps) => (
-                      <FormSelect
-                        label={
-                          getEntityFieldLabels(name) +
-                          " [" +
-                          values.validations[name]
-                            .map(({ validationType }) => validationType)
-                            .join(",") +
-                          "]"
-                        }
-                        selectData={ENTITY_TYPES_SELECTION_BAG_AS_SELECTION}
-                        rightAction={{
+                    {(renderProps) => {
+                      const rightActions = [
+                        {
                           label: "Configure Validation",
                           action: () => {
                             setShowFieldValidations(name);
                           },
-                        }}
-                        disabledOptions={listOfEntitiesThatCantBeChanged}
-                        disabled={listOfEntitiesThatCantBeChanged.includes(
-                          renderProps.input.value
-                        )}
-                        meta={renderProps.meta}
-                        input={{
-                          ...renderProps.input,
-                          onChange: (value) => {
-                            renderProps.input.onChange(value);
-                            console.log(value);
+                        },
+                      ];
 
-                            form.change("validations", {
-                              ...values.validations,
-                              [name]: resetBoundedValidation(
-                                values.validations[name],
-                                value
-                              ),
-                            });
+                      if (
+                        ENTITY_TYPES_SELECTION_BAG[
+                          renderProps.input
+                            .value as keyof typeof ENTITY_TYPES_SELECTION_BAG
+                        ].configureSelection
+                      ) {
+                        rightActions.push({
+                          label: "Configure Selections",
+                          action: () => {
+                            setShowFieldSelection(name);
                           },
-                        }}
-                      />
-                    )}
+                        });
+                      }
+                      return (
+                        <FormSelect
+                          label={
+                            getEntityFieldLabels(name) +
+                            " [" +
+                            values.validations[name]
+                              .map(({ validationType }) => validationType)
+                              .join(",") +
+                            "]"
+                          }
+                          selectData={ENTITY_TYPES_SELECTION_BAG_AS_SELECTION}
+                          rightActions={rightActions}
+                          disabledOptions={listOfEntitiesThatCantBeChanged}
+                          disabled={listOfEntitiesThatCantBeChanged.includes(
+                            renderProps.input.value
+                          )}
+                          meta={renderProps.meta}
+                          input={{
+                            ...renderProps.input,
+                            onChange: (value) => {
+                              renderProps.input.onChange(value);
+                              form.change("validations", {
+                                ...values.validations,
+                                [name]: resetBoundedValidation(
+                                  values.validations[name],
+                                  value
+                                ),
+                              });
+                            },
+                          }}
+                        />
+                      );
+                    }}
                   </Field>
                 );
               })}
@@ -147,7 +170,7 @@ export const FieldsTypeForm: React.FC<{
               title={`"${getEntityFieldLabels(
                 showFieldValidations
               )}" Validations`}
-              width={500}
+              width={CANVAS_WIDTH}
               onClose={() => setShowFieldValidations("")}
               show={!!showFieldValidations}
             >
@@ -168,9 +191,32 @@ export const FieldsTypeForm: React.FC<{
                 }}
               />
             </OffCanvas>
+            <OffCanvas
+              title={`"${getEntityFieldLabels(showFieldSelection)}" Selection`}
+              width={CANVAS_WIDTH}
+              onClose={() => setShowFieldSelection("")}
+              show={!!showFieldSelection}
+            >
+              <FieldSelectionCanvas
+                field={showFieldSelection}
+                entityType={
+                  values[`types`][showFieldSelection] as EntityTypesForSelection
+                }
+                selections={values.selections[showFieldSelection] || []}
+                onSubmit={(value) => {
+                  form.change("selections", {
+                    ...values.selections,
+                    [showFieldValidations]: value,
+                  });
+                  setShowFieldSelection("");
+                }}
+              />
+            </OffCanvas>
           </>
         );
       }}
     />
   );
 };
+
+const CANVAS_WIDTH = 500;

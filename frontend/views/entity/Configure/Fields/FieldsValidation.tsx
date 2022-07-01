@@ -168,7 +168,8 @@ export const FieldValidationCanvas: React.FC<IProps> = ({
                           validationType,
                           errorMessage:
                             ENTITY_VALIDATION_CONFIG[validationType].message,
-                        });
+                          constraint: {},
+                        } as IFieldValidationItem);
                       }}
                       selectData={allowedValidations.map((validation) => ({
                         label: validation,

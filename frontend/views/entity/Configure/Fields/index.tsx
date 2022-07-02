@@ -8,6 +8,7 @@ import {
 } from "@gothicgeeks/design-system";
 import {
   useEntityFieldLabels,
+  useEntityFieldSelections,
   useEntityFieldTypes,
   useEntityFieldValidations,
   useEntitySlug,
@@ -55,6 +56,7 @@ export const EntityFieldsSettings = () => {
 
   const entityFieldTypes = useEntityFieldTypes();
   const entityFieldValidations = useEntityFieldValidations();
+  const entityFieldSelections = useEntityFieldSelections();
 
   const upsertEntityFieldsMapMutation = useUpsertConfigurationMutation(
     "entity_columns_labels",

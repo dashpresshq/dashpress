@@ -1,14 +1,12 @@
-import { CONFIGURATION_KEYS } from "shared/configuration.constants";
-
 const PREFIX = "__cardinal_app_config__";
 
 export const ConfigrationStorage = {
-  getKey: (key: keyof typeof CONFIGURATION_KEYS, entity?: string) => {
+  getKey: (key: string, entity?: string) => {
     return `${PREFIX}${key}_${entity}`;
   },
   set: (
     value: Record<string, unknown> | unknown[],
-    key: keyof typeof CONFIGURATION_KEYS,
+    key: string,
     entity?: string
   ) => {
     window.localStorage.setItem(
@@ -16,7 +14,7 @@ export const ConfigrationStorage = {
       JSON.stringify(value)
     );
   },
-  get: (key: keyof typeof CONFIGURATION_KEYS, entity?: string) => {
+  get: (key: string, entity?: string) => {
     if (typeof window === "undefined") {
       return undefined;
     }

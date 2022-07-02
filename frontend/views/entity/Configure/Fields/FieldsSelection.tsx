@@ -13,12 +13,9 @@ import arrayMutators from "final-form-arrays";
 import { FieldArray } from "react-final-form-arrays";
 import { required, composeValidators, ButtonLang } from "@gothicgeeks/shared";
 import React, { useState } from "react";
-import { IValueLabel } from "@gothicgeeks/design-system/dist/types";
 import styled from "styled-components";
-
-export interface IColorableSelection extends IValueLabel {
-  color?: string;
-}
+import { IColorableSelection } from "./types";
+import { isUseColorsFlagOn, SYSTEM_COLORS } from "./selection.utils";
 
 export type EntityTypesForSelection =
   | "selection"
@@ -36,15 +33,6 @@ interface IProps {
   entityType: EntityTypesForSelection;
   onSubmit: (values: IColorableSelection[]) => void;
 }
-
-const isUseColorsFlagOn = (selections: IColorableSelection[]) => {
-  if (selections.length === 0) {
-    return true;
-  }
-  return !!selections[0].color;
-};
-
-const SYSTEM_COLORS = ["#f0f", "#0f0", "#ff0", "#00f"];
 
 export const FieldSelectionCanvas: React.FC<IProps> = ({
   field,
@@ -187,8 +175,8 @@ export const FieldSelectionCanvas: React.FC<IProps> = ({
 };
 
 const StyledColorBox = styled.div<{ background: string; isActive: boolean }>`
-width: 48px;
-height: 48px;
+width: 32px;
+height: 32px;
 ${(props) => props.isActive && `border: 2px solid black`};
 background ${(props) => props.background};
 `;

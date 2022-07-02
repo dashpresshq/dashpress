@@ -17,7 +17,7 @@ export const configurationApiPath = (
 export function useAppConfiguration<T>(key: keyof typeof CONFIGURATION_KEYS) {
   return useApi<T>(configurationApiPath(key), {
     // TODO replace with placeholderdata
-    initialData: ConfigrationStorage.get(key),
+    placeholderData: ConfigrationStorage.get(key),
     selector: (data) => {
       ConfigrationStorage.set(data, key);
       return data;
@@ -33,7 +33,7 @@ export function useEntityConfiguration<T>(
   return useApi<T>(configurationApiPath(key, entity), {
     enabled: entity !== SLUG_LOADING_VALUE,
     // TODO replace with placeholderdata
-    initialData: ConfigrationStorage.get(key, entity),
+    placeholderData: ConfigrationStorage.get(key, entity),
     selector: (data) => {
       ConfigrationStorage.set(data, key, entity);
       return data;

@@ -1,6 +1,6 @@
 import { useEntityConfiguration } from "../configuration/configration.store";
 import { CONFIGURATION_KEYS } from "../../../shared/configuration.constants";
-import { useRouteParam } from "@gothicgeeks/shared";
+import { useApiQueries, useRouteParam } from "@gothicgeeks/shared";
 import { useCallback } from "react";
 import {
   useEntityReferenceFields,
@@ -15,6 +15,13 @@ import {
   guessEntityType,
   guessEntityValidations,
 } from "./guess";
+import { IColorableSelection } from "frontend/views/entity/Configure/Fields/types";
+import {
+  isUseColorsFlagOn,
+  SYSTEM_COLORS,
+} from "frontend/views/entity/Configure/Fields/selection.utils";
+import { EntityTypesForSelection } from "frontend/views/entity/Configure/Fields/FieldsSelection";
+import { ConfigrationStorage } from "../configuration/storage";
 
 export function useEntitySlug() {
   return useRouteParam("entity");
@@ -134,6 +141,112 @@ export function useEntityFieldValidations() {
         ];
       }
     )
+  );
+}
+
+function useEntityEnumOptions() {
+  const entity = useEntitySlug();
+  const entityScalarFields = useEntityScalarFields(entity);
+
+  const enumNames = (entityScalarFields.data || [])
+    .filter(({ kind }) => kind === "enum")
+    .map(({ type }) => ({ type }));
+
+  const cacheKey = "enum_list";
+
+  return useApiQueries({
+    input: enumNames,
+    accessor: "type",
+    pathFn: (enumName) => `/api/enums/${enumName}`,
+    placeholderDataFn: (enumName) =>
+      ConfigrationStorage.get(cacheKey, enumName),
+    // TODO revert on upgrade
+    // dataTransformer: (data: Record<string, unknown>, enumName: string) => {
+    //   ConfigrationStorage.set(data, cacheKey, enumName)
+    //   return data;
+    // }
+  });
+}
+
+export function useEntityFieldSelections() {
+  const entity = useEntitySlug();
+  const entitySelections = useEntityConfiguration<
+    Record<string, IColorableSelection[]>
+  >("entity_selections", entity);
+  const entityFieldTypes = useEntityFieldTypes();
+  const entityScalarFields = useEntityScalarFields(entity);
+  const enumOptions = useEntityEnumOptions();
+
+  if (
+    entityScalarFields.isLoading ||
+    entityScalarFields.isError ||
+    entitySelections.isError ||
+    enumOptions.error ||
+    enumOptions.isLoading ||
+    entitySelections.isLoading
+  ) {
+    return {};
+  }
+
+  return Object.fromEntries(
+    (entityScalarFields.data || [])
+      .filter(
+        ({ name }) =>
+          ENTITY_TYPES_SELECTION_BAG[entityFieldTypes[name]].configureSelection
+      )
+      .map(({ name, type }) => {
+        const preSelectedType = (entitySelections.data || {})[name];
+
+        const entityType = entityFieldTypes[name] as EntityTypesForSelection;
+
+        let selections: IColorableSelection[] = [];
+
+        switch (entityType) {
+          case "boolean":
+            selections = preSelectedType ?? [
+              {
+                value: true,
+                label: "Yes",
+                color: "#ff0",
+              },
+              {
+                value: false,
+                label: "No",
+                color: "#00f",
+              },
+            ];
+            break;
+          case "selection":
+            selections = preSelectedType ?? [];
+            break;
+
+          case "reference":
+            selections = preSelectedType ?? [];
+            break;
+
+          case "selection-enum":
+            const preselection = preSelectedType ?? [];
+
+            const shouldUseColor = isUseColorsFlagOn(preselection);
+            const enumsFromDb = enumOptions.data[type].data || [];
+
+            selections = uniqBy(
+              [
+                ...enumsFromDb.map((enumValue, index) => ({
+                  value: enumValue,
+                  label: userFriendlyCase(enumValue),
+                  color: shouldUseColor ? SYSTEM_COLORS[index] : undefined,
+                })),
+                ...preselection,
+              ],
+              "value"
+            );
+
+            break;
+        }
+
+        return [name, selections];
+      })
   );
 }
 

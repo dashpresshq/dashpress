@@ -23,8 +23,8 @@ import { getFieldTypeBoundedValidations } from "frontend/hooks/entity/guess";
 import {
   EntityTypesForSelection,
   FieldSelectionCanvas,
-  IColorableSelection,
 } from "./FieldsSelection";
+import { IColorableSelection } from "./types";
 
 const ENTITY_TYPES_SELECTION_BAG_AS_SELECTION = Object.entries(
   ENTITY_TYPES_SELECTION_BAG
@@ -105,9 +105,9 @@ export const FieldsTypeForm: React.FC<{
                     {(renderProps) => {
                       const rightActions = [
                         {
-                          label: "Configure Validation",
+                          label: "Configure Selections",
                           action: () => {
-                            setShowFieldValidations(name);
+                            setShowFieldSelection(name);
                           },
                         },
                       ];
@@ -119,9 +119,9 @@ export const FieldsTypeForm: React.FC<{
                         ].configureSelection
                       ) {
                         rightActions.push({
-                          label: "Configure Selections",
+                          label: "Configure Validation",
                           action: () => {
-                            setShowFieldSelection(name);
+                            setShowFieldValidations(name);
                           },
                         });
                       }
@@ -206,7 +206,7 @@ export const FieldsTypeForm: React.FC<{
                 onSubmit={(value) => {
                   form.change("selections", {
                     ...values.selections,
-                    [showFieldValidations]: value,
+                    [showFieldSelection]: value,
                   });
                   setShowFieldSelection("");
                 }}

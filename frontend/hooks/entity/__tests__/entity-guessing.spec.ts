@@ -113,7 +113,9 @@ describe("guessEntityType", () => {
     );
   });
   it("should guess `selection` types", () => {
-    expect(guessEntityType("name", "enum", "Boolean", {})).toBe("selection");
+    expect(guessEntityType("name", "enum", "Boolean", {})).toBe(
+      "selection-enum"
+    );
   });
   it("should map custom fields", () => {
     expect(guessEntityType("name", "scalar", "Int", {})).toBe("number");

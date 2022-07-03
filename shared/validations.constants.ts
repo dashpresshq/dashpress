@@ -1,3 +1,5 @@
+import { TableFilterType } from "@gothicgeeks/design-system/dist/components/Table/Table.types";
+
 export const ENTITY_TYPES_SELECTION_BAG: Record<
   | "email"
   | "password"
@@ -14,12 +16,18 @@ export const ENTITY_TYPES_SELECTION_BAG: Record<
   | "datetime-local" // not inplemeneted
   | "color", // not inplemeneted
   {
+    tableFilterType: TableFilterType | "not-filterable";
+    sortable: boolean;
     typeIsNotChangeAble?: true;
     configureSelection?: true;
     allowedValidations: Array<SelectableAbleValidations>;
   }
 > = {
   email: {
+    sortable: true,
+    tableFilterType: {
+      _type: "string",
+    },
     allowedValidations: [
       "required",
       "unique",
@@ -29,6 +37,8 @@ export const ENTITY_TYPES_SELECTION_BAG: Record<
     ],
   },
   password: {
+    tableFilterType: "not-filterable",
+    sortable: false,
     allowedValidations: [
       "matchOtherField",
       "required",
@@ -38,6 +48,10 @@ export const ENTITY_TYPES_SELECTION_BAG: Record<
     ],
   },
   text: {
+    sortable: true,
+    tableFilterType: {
+      _type: "string",
+    },
     allowedValidations: [
       "alphanumeric",
       "maxLength",
@@ -49,13 +63,25 @@ export const ENTITY_TYPES_SELECTION_BAG: Record<
     ],
   },
   textarea: {
+    sortable: false,
+    tableFilterType: {
+      _type: "string",
+    },
     allowedValidations: ["maxLength", "minLength", "required"],
   },
   number: {
+    tableFilterType: {
+      _type: "number",
+    },
+    sortable: true,
     typeIsNotChangeAble: true,
     allowedValidations: ["max", "min", "postiveNumber", "required", "unique"],
   },
   url: {
+    sortable: false,
+    tableFilterType: {
+      _type: "string",
+    },
     allowedValidations: [
       "maxLength",
       "minLength",
@@ -65,20 +91,37 @@ export const ENTITY_TYPES_SELECTION_BAG: Record<
     ],
   },
   richtext: {
+    sortable: false,
+    tableFilterType: {
+      _type: "string",
+    },
     allowedValidations: ["required", "maxLength", "minLength"],
   },
   "datetime-local": {
+    sortable: true,
+    tableFilterType: {
+      _type: "number", // TODO _type: "date"
+    },
     typeIsNotChangeAble: true,
     allowedValidations: ["required"],
   },
   image: {
+    sortable: false,
+    tableFilterType: "not-filterable",
     allowedValidations: ["maxLength", "minLength", "regex", "required"],
   },
   color: {
+    sortable: false,
+    tableFilterType: "not-filterable",
     allowedValidations: ["maxLength", "minLength", "required"],
   },
 
   boolean: {
+    sortable: true,
+    tableFilterType: {
+      _type: "status",
+      bag: [],
+    },
     // Configure Labels + must use color
     typeIsNotChangeAble: true,
     allowedValidations: ["required"],
@@ -86,12 +129,22 @@ export const ENTITY_TYPES_SELECTION_BAG: Record<
   },
 
   selection: {
+    tableFilterType: {
+      _type: "status",
+      bag: [],
+    },
+    sortable: true,
     // Configure Selection + maybe use colors
     allowedValidations: ["required", "maxLength"],
     configureSelection: true,
   },
 
   "selection-enum": {
+    sortable: true,
+    tableFilterType: {
+      _type: "status",
+      bag: [],
+    },
     typeIsNotChangeAble: true,
     // Configure Selection + maybe use colors
     allowedValidations: ["required"],
@@ -100,6 +153,11 @@ export const ENTITY_TYPES_SELECTION_BAG: Record<
 
   reference: {
     // use color
+    tableFilterType: {
+      _type: "list",
+      bag: [],
+    },
+    sortable: true,
     typeIsNotChangeAble: true,
     allowedValidations: ["required", "unique"],
     configureSelection: true,

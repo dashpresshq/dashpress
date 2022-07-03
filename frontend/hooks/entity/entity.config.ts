@@ -64,7 +64,10 @@ export function useEntityFieldLabels() {
   );
 }
 
-export function useEntityFieldTypes() {
+export function useEntityFieldTypes(): Record<
+  string,
+  keyof typeof ENTITY_TYPES_SELECTION_BAG
+> {
   const entity = useEntitySlug();
   const entityFieldTypesMap = useEntityConfiguration<
     Record<string, keyof typeof ENTITY_TYPES_SELECTION_BAG>
@@ -235,7 +238,9 @@ export function useEntityFieldSelections() {
                 ...enumsFromDb.map((enumValue, index) => ({
                   value: enumValue,
                   label: userFriendlyCase(enumValue),
-                  color: shouldUseColor ? SYSTEM_COLORS[index] : undefined,
+                  color: shouldUseColor
+                    ? SYSTEM_COLORS[index % SYSTEM_COLORS.length]
+                    : undefined,
                 })),
                 ...preselection,
               ],

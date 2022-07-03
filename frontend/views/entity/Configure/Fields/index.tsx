@@ -150,7 +150,7 @@ export const EntityFieldsSettings = () => {
                     isLoading={sharedLoadingState}
                     initialValues={{
                       types: entityFieldTypes,
-                      selections: {},
+                      selections: entityFieldSelections,
                       validations: entityFieldValidations,
                     }}
                     fields={entityScalarFields.data || []}

@@ -101,8 +101,13 @@ export const FieldSelectionCanvas: React.FC<IProps> = ({
                           >
                             {(renderProps) => (
                               <FormInput
+                                disabled={
+                                  !ManagableEntities.includes(entityType)
+                                }
                                 label="value"
-                                required={true}
+                                required={ManagableEntities.includes(
+                                  entityType
+                                )}
                                 {...renderProps}
                               />
                             )}
@@ -146,21 +151,23 @@ export const FieldSelectionCanvas: React.FC<IProps> = ({
                         </React.Fragment>
                       );
                     })}
-                    <SoftButton
-                      icon="add"
-                      label="Add new option"
-                      onClick={() => {
-                        fields.push({
-                          label: "",
-                          value: "",
-                          color: useColors
-                            ? SYSTEM_COLORS[
-                                fields.length % SYSTEM_COLORS.length
-                              ]
-                            : undefined,
-                        } as IColorableSelection);
-                      }}
-                    />
+                    {ManagableEntities.includes(entityType) && (
+                      <SoftButton
+                        icon="add"
+                        label="Add new option"
+                        onClick={() => {
+                          fields.push({
+                            label: "",
+                            value: "",
+                            color: useColors
+                              ? SYSTEM_COLORS[
+                                  fields.length % SYSTEM_COLORS.length
+                                ]
+                              : undefined,
+                          } as IColorableSelection);
+                        }}
+                      />
+                    )}
                   </div>
                 );
               }}

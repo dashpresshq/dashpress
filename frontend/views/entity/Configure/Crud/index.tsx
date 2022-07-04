@@ -114,6 +114,7 @@ export const EntityCrudSettings = () => {
       <ErrorAlert
         message={entityScalarFields.error || entityCrudSettings.error}
       />
+      {/* TODO sync tab to URL */}
       <SectionBox title="CRUD Settings">
         <Tabs
           currentTab={tabFromUrl}

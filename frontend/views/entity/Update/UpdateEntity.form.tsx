@@ -18,6 +18,7 @@ export const UpdateEntityForm: React.FC<
   initialValues,
   fields,
   entityFieldTypes,
+  entityFieldSelections,
   entityValidationsMap,
   getEntityFieldLabels,
 }) => {
@@ -41,6 +42,7 @@ export const UpdateEntityForm: React.FC<
                     <RenderFormInput
                       type={entityFieldTypes[name]}
                       label={getEntityFieldLabels(name)}
+                      entityFieldSelections={entityFieldSelections[name]}
                       required={isFieldRequired(entityValidationsMap, name)}
                       renderProps={renderProps}
                     />

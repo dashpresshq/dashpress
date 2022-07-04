@@ -15,6 +15,7 @@ export const CreateEntityForm: React.FC<
   onSubmit,
   fields,
   getEntityFieldLabels,
+  entityFieldSelections,
   entityFieldTypes,
   entityValidationsMap,
 }) => {
@@ -49,6 +50,7 @@ export const CreateEntityForm: React.FC<
                       type={entityFieldTypes[name]}
                       required={isFieldRequired(entityValidationsMap, name)}
                       label={getEntityFieldLabels(name)}
+                      entityFieldSelections={entityFieldSelections[name]}
                       renderProps={renderProps}
                     />
                   )}

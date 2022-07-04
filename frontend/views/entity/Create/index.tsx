@@ -12,6 +12,7 @@ import { NAVIGATION_LINKS } from "../../../lib/routing/links";
 import {
   useEntityDiction,
   useEntityFieldLabels,
+  useEntityFieldSelections,
   useEntityFieldTypes,
   useEntitySlug,
   useSelectedEntityColumns,
@@ -48,6 +49,7 @@ export function EntityCreate() {
   >("entity_validations", entity);
   const getEntityFieldLabels = useEntityFieldLabels();
   const entityFieldTypes = useEntityFieldTypes();
+  const entityFieldSelections = useEntityFieldSelections();
 
   const error =
     hiddenCreateColumns.error ||
@@ -68,12 +70,6 @@ export function EntityCreate() {
       actionItems={actionItems}
     >
       <SectionCenter>
-        {error ? (
-          <>
-            <Spacer />
-            <Spacer />
-          </>
-        ) : null}
         <SectionBox
           title={TitleLang.create(entityDiction.singular)}
           backLink={{
@@ -102,6 +98,7 @@ export function EntityCreate() {
                   entityFieldTypes={entityFieldTypes}
                   entityValidationsMap={entityValidationsMap.data}
                   getEntityFieldLabels={getEntityFieldLabels}
+                  entityFieldSelections={entityFieldSelections}
                   onSubmit={entityDataCreationMutation.mutateAsync}
                   fields={fitlerOutHiddenScalarColumns(
                     entityScalarFields,

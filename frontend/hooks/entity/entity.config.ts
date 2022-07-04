@@ -60,7 +60,7 @@ export function useEntityFieldLabels() {
       );
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [entityFieldLabelsMap.isLoading]
+    [entityFieldLabelsMap.data]
   );
 }
 

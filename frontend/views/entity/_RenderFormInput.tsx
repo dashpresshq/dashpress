@@ -13,9 +13,11 @@ import {
   ENTITY_VALIDATION_CONFIG,
 } from "../../../shared/validations.constants";
 import { IFieldValidationItem } from "./Configure/Fields/FieldsValidation";
+import { IColorableSelection } from "./Configure/Fields/types";
 
 export interface IBaseEntityForm {
   fields: string[];
+  entityFieldSelections: Record<string, IColorableSelection[]>;
   getEntityFieldLabels: (name: string) => string;
   onSubmit: (data: Record<string, unknown>) => void;
   entityFieldTypes: Record<string, keyof typeof ENTITY_TYPES_SELECTION_BAG>;
@@ -25,17 +27,21 @@ export interface IEntityFormSettings {
   entityValidationsMap: Record<string, IFieldValidationItem[]>;
 }
 
+interface IProps {
+  type: keyof typeof ENTITY_TYPES_SELECTION_BAG;
+  renderProps: ISharedFormInput;
+  entityFieldSelections?: IColorableSelection[];
+  required: boolean;
+  label: string;
+}
+
 export const RenderFormInput = ({
   renderProps,
   label,
   type,
+  entityFieldSelections = [],
   required,
-}: {
-  type: keyof typeof ENTITY_TYPES_SELECTION_BAG;
-  renderProps: ISharedFormInput;
-  required: boolean;
-  label: string;
-}) => {
+}: IProps) => {
   const formProps = {
     label,
     required,
@@ -53,7 +59,7 @@ export const RenderFormInput = ({
     case "selection":
     case "selection-enum":
     case "reference":
-      return <FormSelect {...formProps} selectData={[]} />;
+      return <FormSelect {...formProps} selectData={entityFieldSelections} />;
 
     case "boolean":
       return (

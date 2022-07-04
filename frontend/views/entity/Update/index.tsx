@@ -11,6 +11,7 @@ import { NAVIGATION_LINKS } from "../../../lib/routing/links";
 import {
   useEntityDiction,
   useEntityFieldLabels,
+  useEntityFieldSelections,
   useEntityFieldTypes,
   useEntityId,
   useEntitySlug,
@@ -51,6 +52,8 @@ export function EntityUpdate() {
   >("entity_validations", entity);
 
   const entityFieldTypes = useEntityFieldTypes();
+
+  const entityFieldSelections = useEntityFieldSelections();
 
   const hiddenUpdateColumns = useSelectedEntityColumns(
     "hidden_entity_update_columns"
@@ -109,6 +112,7 @@ export function EntityUpdate() {
                 <UpdateEntityForm
                   getEntityFieldLabels={getEntityFieldLabels}
                   entityFieldTypes={entityFieldTypes}
+                  entityFieldSelections={entityFieldSelections}
                   entityValidationsMap={entityValidationsMap.data}
                   onSubmit={entityDataUpdationMutation.mutateAsync}
                   fields={fitlerOutHiddenScalarColumns(

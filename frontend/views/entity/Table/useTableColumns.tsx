@@ -14,12 +14,14 @@ import {
   useEntityReferenceFields,
   useEntityScalarFields,
 } from "frontend/hooks/entity/entity.store";
+import { lighten } from "polished";
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
 import Link from "next/link";
 import { ENTITY_TYPES_SELECTION_BAG } from "shared/validations.constants";
 import { fitlerOutHiddenScalarColumns } from "../utils";
 import { TableActions } from "./Actions";
 import { ReferenceComponent } from "./ReferenceComponent";
+import styled from "styled-components";
 
 export const buildFilterConfigFromType = (
   entityType: keyof typeof ENTITY_TYPES_SELECTION_BAG
@@ -68,7 +70,7 @@ export const useTableColumns = () => {
       disableSortBy:
         !ENTITY_TYPES_SELECTION_BAG[entityFieldTypes[name]].sortable,
       Cell: ({ value }) => {
-        if (!value) {
+        if (value === undefined || value === null) {
           return <></>;
         }
         if (isId) {
@@ -89,6 +91,20 @@ export const useTableColumns = () => {
               id={value as string}
             />
           );
+        }
+
+        if (entityFieldSelections[name]) {
+          const availableOption = entityFieldSelections[name].find(
+            (option) => option.value === value
+          );
+          console.log(availableOption);
+          if (availableOption) {
+            return (
+              <OptionTag color={availableOption.color}>
+                {availableOption.label}
+              </OptionTag>
+            );
+          }
         }
 
         return <>{value as string}</>;
@@ -114,3 +130,13 @@ export const useTableColumns = () => {
   }
   return columns;
 };
+
+const DEFAULT_TAG_COLOR = "#000000";
+
+const OptionTag = styled.div<{ color: string }>`
+  display: inline-block;
+  padding: 2px 4px;
+  border-radius: 4px;
+  border: 1px solid ${(props) => props.color || DEFAULT_TAG_COLOR};
+  background: ${(props) => lighten(0.4, props.color || DEFAULT_TAG_COLOR)};
+`;

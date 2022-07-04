@@ -43,8 +43,9 @@ export function useEntityDiction() {
   };
 }
 
-export function useEntityFieldLabels() {
-  const entity = useEntitySlug();
+export function useEntityFieldLabels(paramEntity?: string) {
+  const entityFromSlug = useEntitySlug();
+  const entity = paramEntity || entityFromSlug;
   const entityFieldLabelsMap = useEntityConfiguration<Record<string, string>>(
     "entity_columns_labels",
     entity
@@ -64,11 +65,11 @@ export function useEntityFieldLabels() {
   );
 }
 
-export function useEntityFieldTypes(): Record<
-  string,
-  keyof typeof ENTITY_TYPES_SELECTION_BAG
-> {
-  const entity = useEntitySlug();
+export function useEntityFieldTypes(
+  paramEntity?: string
+): Record<string, keyof typeof ENTITY_TYPES_SELECTION_BAG> {
+  const entitySlug = useEntitySlug();
+  const entity = paramEntity || entitySlug;
   const entityFieldTypesMap = useEntityConfiguration<
     Record<string, keyof typeof ENTITY_TYPES_SELECTION_BAG>
   >("entity_columns_types", entity);
@@ -108,7 +109,7 @@ export function useEntityFieldValidations() {
   const entityValidationsMap = useEntityConfiguration<
     Record<string, IFieldValidationItem[]>
   >("entity_validations", entity);
-  const entityFieldTypes = useEntityFieldTypes();
+  const entityFieldTypes = useEntityFieldTypes(entity);
   const entityScalarFields = useEntityScalarFields(entity);
 
   if (
@@ -147,8 +148,11 @@ export function useEntityFieldValidations() {
   );
 }
 
-function useEntityEnumOptions() {
-  const entity = useEntitySlug();
+function useEntityEnumOptions(paramEntity?: string) {
+  const entitySlug = useEntitySlug();
+
+  const entity = paramEntity || entitySlug;
+
   const entityScalarFields = useEntityScalarFields(entity);
 
   const enumNames = (entityScalarFields.data || [])
@@ -171,12 +175,15 @@ function useEntityEnumOptions() {
   });
 }
 
-export function useEntityFieldSelections() {
-  const entity = useEntitySlug();
+export function useEntityFieldSelections(paramEntity?: string) {
+  const entitySlug = useEntitySlug();
+
+  const entity = paramEntity || entitySlug;
+
   const entitySelections = useEntityConfiguration<
     Record<string, IColorableSelection[]>
   >("entity_selections", entity);
-  const entityFieldTypes = useEntityFieldTypes();
+  const entityFieldTypes = useEntityFieldTypes(entity);
   const entityScalarFields = useEntityScalarFields(entity);
   const enumOptions = useEntityEnumOptions();
 
@@ -191,11 +198,13 @@ export function useEntityFieldSelections() {
     return {};
   }
 
+  console.log(entity, paramEntity, entityFieldTypes);
+
   return Object.fromEntries(
     (entityScalarFields.data || [])
       .filter(
         ({ name }) =>
-          ENTITY_TYPES_SELECTION_BAG[entityFieldTypes[name]].configureSelection
+          ENTITY_TYPES_SELECTION_BAG[entityFieldTypes[name]]?.configureSelection
       )
       .map(({ name, type }) => {
         const preSelectedType = (entitySelections.data || {})[name];

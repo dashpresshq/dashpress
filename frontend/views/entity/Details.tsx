@@ -12,6 +12,7 @@ import { NAVIGATION_LINKS } from "../../lib/routing/links";
 import {
   useEntityDiction,
   useEntityFieldLabels,
+  useEntityFieldSelections,
   useEntityId,
   useEntitySlug,
   useSelectedEntityColumns,
@@ -21,8 +22,13 @@ import {
   EntityActionTypes,
   useEntityActionMenuItems,
 } from "./Configure/constants";
-import { useEntityScalarFields } from "../../hooks/entity/entity.store";
+import {
+  useEntityReferenceFields,
+  useEntityScalarFields,
+} from "../../hooks/entity/entity.store";
 import { fitlerOutHiddenScalarColumns } from "./utils";
+import { OptionTag } from "./OptionTag";
+import { ReferenceComponent } from "./Table/ReferenceComponent";
 
 export function EntityDetails() {
   const entityDiction = useEntityDiction();
@@ -77,10 +83,15 @@ export const EntityDetailsView = ({
     "hidden_entity_details_columns",
     entity
   );
-  const getEntityFieldLabels = useEntityFieldLabels();
+  const getEntityFieldLabels = useEntityFieldLabels(entity);
+  const entityReferenceFields = useEntityReferenceFields(entity);
+  const entityFieldSelections = useEntityFieldSelections(entity);
 
   const error =
-    dataDetails.error || hiddenDetailsColumns.error || entityScalarFields.error;
+    dataDetails.error ||
+    hiddenDetailsColumns.error ||
+    entityScalarFields.error ||
+    entityReferenceFields.error;
 
   if (!id) {
     return null;
@@ -89,6 +100,7 @@ export const EntityDetailsView = ({
   return (
     <>
       {dataDetails.isLoading ||
+      entityReferenceFields.isLoading ||
       entityScalarFields.isLoading ||
       hiddenDetailsColumns.isLoading ? (
         <ComponentIsLoading />
@@ -96,18 +108,41 @@ export const EntityDetailsView = ({
         <ErrorAlert message={error} />
       ) : (
         <>
+          {/* TODO use a breadcrumb here for the deep entities */}
           {fitlerOutHiddenScalarColumns(
             entityScalarFields,
             hiddenDetailsColumns
-          ).map(({ name }) => (
-            <>
-              <Text size="5" weight="bold">
-                {getEntityFieldLabels(name)}
-              </Text>
-              <Text>{dataDetails?.data?.[name]}</Text>
-              <Spacer />
-            </>
-          ))}
+          ).map(({ name }) => {
+            const value = dataDetails?.data?.[name];
+
+            let contentToRender = <Text>{value}</Text>;
+
+            if (entityReferenceFields.data?.[name]) {
+              contentToRender = (
+                <ReferenceComponent
+                  entity={entityReferenceFields.data?.[name]}
+                  id={value as string}
+                />
+              );
+            } else if (entityFieldSelections[name]) {
+              const availableOption = entityFieldSelections[name].find(
+                (option) => option.value === value
+              );
+              if (availableOption) {
+                contentToRender = <OptionTag {...availableOption} />;
+              }
+            }
+
+            return (
+              <>
+                <Text size="5" weight="bold">
+                  {getEntityFieldLabels(name)}
+                </Text>
+                {contentToRender}
+                <Spacer />
+              </>
+            );
+          })}
         </>
       )}
     </>

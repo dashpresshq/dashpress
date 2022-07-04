@@ -40,14 +40,14 @@ export const useEntitiesList = () => {
 export const useEntityFields = (entity: string) => {
   return useApi<IEntityField[]>(ENTITY_FIELDS_ENDPOINT(entity), {
     errorMessage: dataNotFoundMessage("Entity Fields"),
-    enabled: entity !== "loading",
+    enabled: entityEnabled(entity),
   });
 };
 
 export const useEntityScalarFields = (entity: string) => {
   return useApi<IEntityField[]>(ENTITY_FIELDS_ENDPOINT(entity), {
     errorMessage: dataNotFoundMessage("Entity Scalar Fields"),
-    enabled: !!entity && entity !== "loading",
+    enabled: entityEnabled(entity),
     selector: (data: IEntityField[]) => {
       return data.filter(filterScalarEntity);
     },
@@ -57,7 +57,7 @@ export const useEntityScalarFields = (entity: string) => {
 export const useEntityReferenceFields = (entity: string) => {
   return useApi<Record<string, string>>(ENTITY_FIELDS_ENDPOINT(entity), {
     errorMessage: dataNotFoundMessage("Entity Reference Fields"),
-    enabled: entity !== "loading",
+    enabled: entityEnabled(entity),
     selector: (data: IEntityField[]) => {
       return getEntityReferencesMap(data);
     },
@@ -67,10 +67,14 @@ export const useEntityReferenceFields = (entity: string) => {
 export const useEntityIdField = (entity: string) => {
   return useApi<string>(ENTITY_FIELDS_ENDPOINT(entity), {
     errorMessage: dataNotFoundMessage("Entity Scalar Fields"),
-    enabled: entity !== "loading",
+    enabled: entityEnabled(entity),
     selector: (data: IEntityField[]) => {
       // TODO validate data to have an id
       return data.find(({ isId }) => isId)?.name || "id";
     },
   });
+};
+
+const entityEnabled = (entity: string): boolean => {
+  return !!entity && entity !== "loading";
 };

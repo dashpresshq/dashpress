@@ -1,12 +1,13 @@
 https://marmelab.com/react-admin/Tutorial.html
 Budibase
 https://www.appsmith.com/
-
-Table actions
+https://interval.com/docs/concepts/
 https://spruko.com/demo/noa/Noa/HTML/index.html
 https://www.producthunt.com/posts/fusiongrid-powered-by-fusioncharts
 https://www.producthunt.com/posts/interval-2
 http://adminator.com/
+
+Table actions
 
 OPEN SOURCE
 Validations
@@ -26,7 +27,7 @@ Reorder menu
 Custom query views
 
 // Free version = 1 user
-Commuity support
+Community support
 
 // Pro version 10 dollars/user per month
 Hosted Deployment

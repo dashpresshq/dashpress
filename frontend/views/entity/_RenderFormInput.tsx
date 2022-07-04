@@ -1,10 +1,12 @@
 import {
-  FormCheckBox,
   FormInput,
   FormNumberInput,
+  FormSelect,
+  FormSwitch,
   FormTextArea,
 } from "@gothicgeeks/design-system";
 import { ISharedFormInput } from "@gothicgeeks/design-system/dist/components/Form/_types";
+import { StringUtils } from "@gothicgeeks/shared";
 import { TemplateService } from "frontend/lib/templates";
 import {
   ENTITY_TYPES_SELECTION_BAG,
@@ -27,43 +29,56 @@ export const RenderFormInput = ({
   renderProps,
   label,
   type,
+  required,
 }: {
   type: keyof typeof ENTITY_TYPES_SELECTION_BAG;
   renderProps: ISharedFormInput;
+  required: boolean;
   label: string;
 }) => {
-  const required = true;
+  const formProps = {
+    label,
+    required,
+    ...renderProps,
+  };
 
   switch (type) {
     case "email":
     case "password":
     case "url":
-      return (
-        <FormInput
-          label={label}
-          type={type}
-          required={required}
-          {...renderProps}
-        />
-      );
+      return <FormInput type={type} {...formProps} />;
     case "number":
-      return (
-        <FormNumberInput label={label} required={required} {...renderProps} />
-      );
+      return <FormNumberInput {...formProps} />;
+
+    case "selection":
+    case "selection-enum":
+    case "reference":
+      return <FormSelect {...formProps} selectData={[]} />;
 
     case "boolean":
       return (
-        // TODO use switch with labels
-        <FormCheckBox label={label} required={required} {...renderProps} />
+        <FormSwitch
+          name={StringUtils.sluggify(label)}
+          value={formProps.input.value}
+          onChange={formProps.input.onChange}
+          {...formProps}
+        />
       );
 
     case "textarea":
-      return (
-        <FormTextArea {...renderProps} label={label} required={required} />
-      );
+      return <FormTextArea {...formProps} />;
   }
 
-  return <FormInput label={label} required={required} {...renderProps} />;
+  return <FormInput {...formProps} />;
+};
+
+export const isFieldRequired = (
+  entityValidationsMap: Record<string, IFieldValidationItem[]>,
+  field: string
+): boolean => {
+  return !!entityValidationsMap[field].find(
+    (item) => item.validationType === "required"
+  );
 };
 
 export const runValidationError =

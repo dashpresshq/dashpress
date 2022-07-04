@@ -210,12 +210,12 @@ export function useEntityFieldSelections() {
               {
                 value: true,
                 label: "Yes",
-                color: "#ff0",
+                color: SYSTEM_COLORS[0],
               },
               {
                 value: false,
                 label: "No",
-                color: "#00f",
+                color: SYSTEM_COLORS[1],
               },
             ];
             break;

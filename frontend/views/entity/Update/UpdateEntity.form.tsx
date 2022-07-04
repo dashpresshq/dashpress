@@ -6,6 +6,7 @@ import {
   IBaseEntityForm,
   IEntityFormSettings,
   runValidationError,
+  isFieldRequired,
 } from "../_RenderFormInput";
 
 export const UpdateEntityForm: React.FC<
@@ -40,6 +41,7 @@ export const UpdateEntityForm: React.FC<
                     <RenderFormInput
                       type={entityFieldTypes[name]}
                       label={getEntityFieldLabels(name)}
+                      required={isFieldRequired(entityValidationsMap, name)}
                       renderProps={renderProps}
                     />
                   )}

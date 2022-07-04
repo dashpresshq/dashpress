@@ -332,18 +332,18 @@ export const ENTITY_VALIDATION_CONFIG: Record<
   isReference: {
     isBoundToType: ["reference"],
     message: "{{ name }} doesn't exist",
-    implementation: undefined,
+    implementation: () => undefined,
   },
   unique: {
     message: "{{ name }} already exists",
-    implementation: undefined,
+    implementation: () => undefined,
   },
   matchOtherField: {
     input: {
       otherField: "",
     },
     message: "{{ name }} should match {{otherField}}", // :eyes
-    implementation: undefined,
+    implementation: () => undefined,
   },
   regex: {
     input: {

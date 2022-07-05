@@ -22,10 +22,11 @@ import { TableActions } from "./Actions";
 import { ReferenceComponent } from "./ReferenceComponent";
 import { StringUtils } from "@gothicgeeks/shared";
 import { OptionTag } from "../OptionTag";
-import { Text } from "@gothicgeeks/design-system";
+import { IColorableSelection } from "../Configure/Fields/types";
 
 export const buildFilterConfigFromType = (
-  entityType: keyof typeof ENTITY_TYPES_SELECTION_BAG
+  entityType: keyof typeof ENTITY_TYPES_SELECTION_BAG,
+  entityFieldSelections: IColorableSelection[]
 ): TableFilterType | undefined => {
   const filterType =
     ENTITY_TYPES_SELECTION_BAG[entityType]?.tableFilterType || "not-filterable";
@@ -39,7 +40,7 @@ export const buildFilterConfigFromType = (
     case "number":
       return filterType;
     case "status":
-      filterType.bag = [];
+      filterType.bag = entityFieldSelections;
       return filterType;
     case "list":
       filterType.bag = [];
@@ -67,7 +68,10 @@ export const useTableColumns = () => {
     const tableColumn: ITableColumn = {
       Header: getEntityFieldLabels(name),
       accessor: name,
-      filter: buildFilterConfigFromType(entityFieldTypes[name]),
+      filter: buildFilterConfigFromType(
+        entityFieldTypes[name],
+        entityFieldSelections[name]
+      ),
       disableSortBy:
         !ENTITY_TYPES_SELECTION_BAG[entityFieldTypes[name]].sortable,
       Cell: ({ value }) => {

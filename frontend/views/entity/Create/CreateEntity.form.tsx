@@ -27,7 +27,7 @@ export const CreateEntityForm: React.FC<
         entityValidationsMap,
         getEntityFieldLabels
       )}
-      render={({ handleSubmit, form, values, submitting }) => {
+      render={({ handleSubmit, form, values, submitting, pristine }) => {
         return (
           <form
             noValidate={true}
@@ -61,6 +61,7 @@ export const CreateEntityForm: React.FC<
               <FormButton
                 text={ButtonLang.create}
                 isMakingRequest={submitting}
+                disabled={pristine}
               />
             </Stack>
           </form>

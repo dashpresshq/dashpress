@@ -13,6 +13,7 @@ import {
   useEntityFieldLabels,
   useEntityFieldSelections,
   useEntityFieldTypes,
+  useEntityFieldValidations,
   useEntityId,
   useEntitySlug,
   useSelectedEntityColumns,
@@ -29,7 +30,6 @@ import {
 import { useEntityConfiguration } from "../../../hooks/configuration/configration.store";
 import { UpdateEntityForm } from "./UpdateEntity.form";
 import { fitlerOutHiddenScalarColumns } from "../utils";
-import { IFieldValidationItem } from "../Configure/Fields/FieldsValidation";
 
 // TODO bounce if .update is not enabled
 export function EntityUpdate() {
@@ -47,9 +47,7 @@ export function EntityUpdate() {
     "entity_columns_types",
     entity
   );
-  const entityValidationsMap = useEntityConfiguration<
-    Record<string, IFieldValidationItem[]>
-  >("entity_validations", entity);
+  const entityValidationsMap = useEntityFieldValidations();
 
   const entityFieldTypes = useEntityFieldTypes();
 
@@ -63,7 +61,6 @@ export function EntityUpdate() {
   const error =
     dataDetails.error ||
     hiddenUpdateColumns.error ||
-    entityValidationsMap.error ||
     entityFieldTypesMap.error ||
     entityScalarFields.error;
 
@@ -93,7 +90,6 @@ export function EntityUpdate() {
         >
           {dataDetails.isLoading ||
           entityFieldTypesMap.isLoading ||
-          entityValidationsMap.isLoading ||
           hiddenUpdateColumns.isLoading ||
           entityScalarFields.isLoading ? (
             <FormSkeleton
@@ -113,7 +109,7 @@ export function EntityUpdate() {
                   getEntityFieldLabels={getEntityFieldLabels}
                   entityFieldTypes={entityFieldTypes}
                   entityFieldSelections={entityFieldSelections}
-                  entityValidationsMap={entityValidationsMap.data}
+                  entityValidationsMap={entityValidationsMap}
                   onSubmit={entityDataUpdationMutation.mutateAsync}
                   fields={fitlerOutHiddenScalarColumns(
                     entityScalarFields,

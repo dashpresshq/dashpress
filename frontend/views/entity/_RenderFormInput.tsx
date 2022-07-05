@@ -82,7 +82,7 @@ export const isFieldRequired = (
   entityValidationsMap: Record<string, IFieldValidationItem[]>,
   field: string
 ): boolean => {
-  return !!entityValidationsMap[field].find(
+  return !!entityValidationsMap[field]?.find(
     (item) => item.validationType === "required"
   );
 };

@@ -1,16 +1,16 @@
 export const CONFIGURATION_KEYS: Record<
-  | "hidden_entity_table_columns" //
-  | "hidden_entity_create_columns" //
-  | "hidden_entity_update_columns" //
-  | "hidden_entity_details_columns" //
-  | "entity_diction" //
-  | "entity_columns_types" //
-  | "entity_fields_orders" //
-  | "entity_crud_settings" //
-  | "entities_order" //
-  | "entity_columns_labels" //
-  | "entities_to_hide_from_menu" //
-  | "relations_list_fields"
+  | "hidden_entity_table_columns"
+  | "hidden_entity_create_columns"
+  | "hidden_entity_update_columns"
+  | "hidden_entity_details_columns"
+  | "entity_diction"
+  | "entity_columns_types"
+  | "entity_fields_orders"
+  | "entity_crud_settings"
+  | "entities_order"
+  | "entity_columns_labels"
+  | "entities_to_hide_from_menu"
+  | "relations_list_fields" //
   | "entity_selections"
   | "entity_validations",
   { requireEntity: boolean; defaultValue: unknown }
@@ -23,7 +23,7 @@ export const CONFIGURATION_KEYS: Record<
   entity_columns_types: { requireEntity: true, defaultValue: {} },
   entity_validations: {
     requireEntity: true,
-    defaultValue: {}, // key: string[],
+    defaultValue: {},
   },
   entity_selections: {
     requireEntity: true,

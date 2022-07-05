@@ -32,7 +32,7 @@ export const UpdateEntityForm: React.FC<
         getEntityFieldLabels
       )}
       initialValues={initialValues}
-      render={({ handleSubmit, submitting }) => {
+      render={({ handleSubmit, submitting, pristine }) => {
         return (
           <form noValidate={true} onSubmit={handleSubmit}>
             {fields.map((name) => {
@@ -50,7 +50,11 @@ export const UpdateEntityForm: React.FC<
                 </Field>
               );
             })}
-            <FormButton text={ButtonLang.update} isMakingRequest={submitting} />
+            <FormButton
+              text={ButtonLang.update}
+              isMakingRequest={submitting}
+              disabled={pristine}
+            />
           </form>
         );
       }}

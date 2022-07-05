@@ -198,8 +198,6 @@ export function useEntityFieldSelections(paramEntity?: string) {
     return {};
   }
 
-  console.log(entity, paramEntity, entityFieldTypes);
-
   return Object.fromEntries(
     (entityScalarFields.data || [])
       .filter(

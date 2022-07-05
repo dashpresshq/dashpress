@@ -12,7 +12,9 @@ export class DataController {
     private configurationService: ConfigurationService
   ) {}
 
-  async listData(entity: string) {}
+  async listData(entity: string): Promise<{ id: string; name: string }[]> {
+    return [];
+  }
 
   async referenceData(entity: string, id: string): Promise<string> {
     const data = await this.dataService.show<Record<string, unknown>>(

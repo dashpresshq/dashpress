@@ -3,10 +3,6 @@ import { IJsonSchema, IJsonSchemaEnum, IJsonSchemaModel } from "./schema.types";
 export class SchemasService {
   private JSON_SCHEMA: IJsonSchema;
 
-  private refreshSchema = () => {
-    this.JSON_SCHEMA = null;
-  };
-
   private loadJsonSchema = (): IJsonSchema => {
     if (this.JSON_SCHEMA) {
       return this.JSON_SCHEMA;

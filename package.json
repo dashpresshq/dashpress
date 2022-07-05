@@ -12,8 +12,8 @@
     "test": "jest --detectOpenHandles --runInBand",
     "typecheck": "tsc",
     "test:cov": "jest --coverage",
-    "format": "prettier --write \"**/*.{json,md,ts,tsx}\" \"*.{json,md,ts,tsx}\"",
-    "format-verify": "prettier --check \"**/*.{json,md,ts,tsx}\" \"*.{json,md,ts,tsx}\"",
+    "format": "prettier --write \"{backend,frontend,shared,pages}/**/*.{json,md,ts,tsx}\" \"*.{json,md,ts,tsx}\"",
+    "format-verify": "prettier --check \"{backend,frontend,shared,pages}/**/*.{json,md,ts,tsx}\" \"*.{json,md,ts,tsx}\"",
     "lint": "eslint --ext ts,tsx",
     "verify": "npm run typecheck && npm run lint && npm run format-verify && npm run test"
   },

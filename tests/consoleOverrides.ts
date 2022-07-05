@@ -12,3 +12,5 @@ console.error = function (message) {
   error.apply(console, arguments);
   throw message;
 };
+
+export {};

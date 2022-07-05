@@ -1,4 +1,5 @@
 import { TableFilterType } from "@gothicgeeks/design-system/dist/components/Table/Table.types";
+import noop from "lodash/noop";
 
 export const ENTITY_TYPES_SELECTION_BAG: Record<
   | "email"
@@ -227,12 +228,15 @@ export const handleValidation =
     errorMessage: string,
     constraints: Record<string, unknown>,
     allValues: Record<string, unknown>
-  ) =>
-    isNotEmpty(value)
+  ) => {
+    noop(allValues);
+
+    return isNotEmpty(value)
       ? validation(value, constraints[parameterKey])
         ? undefined
         : errorMessage
       : undefined;
+  };
 
 export const ENTITY_VALIDATION_CONFIG: Record<
   ValidationsBoundToType | SelectableAbleValidations,

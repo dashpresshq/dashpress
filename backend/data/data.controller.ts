@@ -13,6 +13,7 @@ export class DataController {
   ) {}
 
   async listData(entity: string): Promise<{ id: string; name: string }[]> {
+    console.log(entity);
     return [];
   }
 

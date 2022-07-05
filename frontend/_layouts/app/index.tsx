@@ -8,14 +8,7 @@ import {
 } from "@gothicgeeks/design-system";
 import { IValueLabel } from "@gothicgeeks/design-system/dist/types";
 import React, { ReactNode } from "react";
-import {
-  HardDrive,
-  Icon,
-  Settings,
-  Home,
-  Table,
-  BarChart,
-} from "react-feather";
+import { Icon, Settings, Home, Table, BarChart } from "react-feather";
 import { useEntitiesMenuItems } from "../../hooks/entity/entity.store";
 import Head from "next/head";
 import { useSiteConfig } from "../../hooks/app/site.config";

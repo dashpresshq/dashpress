@@ -35,12 +35,15 @@ export const buildFilterConfigFromType = (
     return undefined;
   }
 
+  console.log(entityFieldSelections);
+
   switch (filterType._type) {
     case "string":
     case "number":
       return filterType;
     case "status":
-      filterType.bag = entityFieldSelections;
+      filterType.bag = [];
+      // filterType.bag = entityFieldSelections;
       return filterType;
     case "list":
       filterType.bag = [];

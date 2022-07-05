@@ -1,7 +1,6 @@
 import { ErrorAlert, SectionBox } from "@gothicgeeks/design-system";
 import { useEntitySlug } from "../../../hooks/entity/entity.config";
 import { NAVIGATION_LINKS } from "../../../lib/routing/links";
-import { CreateEntityForm } from "../Create";
 import { BaseEntitySettingsLayout } from "./_Base";
 
 export const EntityActionsSettings = () => {
@@ -16,7 +15,7 @@ export const EntityActionsSettings = () => {
     >
       <SectionBox title="Actions Settings">
         <ErrorAlert message={"error"} />
-        <CreateEntityForm onSubmit={() => {}} fields={[]} />
+        TODO
       </SectionBox>
     </BaseEntitySettingsLayout>
   );

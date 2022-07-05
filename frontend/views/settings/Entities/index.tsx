@@ -4,6 +4,8 @@ import {
   SortList,
   Tabs,
 } from "@gothicgeeks/design-system";
+import { useRouteParam } from "@gothicgeeks/shared";
+import { useChangeRouterParam } from "frontend/lib/routing/useChangeRouterParam";
 import {
   useAppConfiguration,
   useUpsertConfigurationMutation,
@@ -20,6 +22,9 @@ import { EntitiesSelection } from "./Selection";
 
 export const EntitiesSettings = () => {
   const entitiesList = useEntitiesList();
+  const tabFromUrl = useRouteParam("tab");
+  const changeTabParam = useChangeRouterParam("tab");
+
   const entitiesToHide = useAppConfiguration<string[]>(
     "entities_to_hide_from_menu"
   );
@@ -52,6 +57,8 @@ export const EntitiesSettings = () => {
       <ErrorAlert message={entitiesList.error || entitiesToHide.error} />
       <SectionBox title="Entities Settings">
         <Tabs
+          currentTab={tabFromUrl}
+          onChange={changeTabParam}
           contents={[
             {
               content: (
@@ -66,7 +73,7 @@ export const EntitiesSettings = () => {
                   }}
                 />
               ),
-              label: "Menu Entities",
+              label: "Selection",
             },
             {
               content: (

@@ -27,14 +27,7 @@ import { FieldsLabelForm } from "./FieldsLabel.form";
 import { FieldsTypeForm } from "./FieldsType.form";
 import { useRouteParam } from "@gothicgeeks/shared";
 import { ENTITY_FIELD_SETTINGS_TAB_LABELS } from "../constants";
-import { useRouter } from "next/router";
-
-const useChangeRouterParam = (key: string) => {
-  const router = useRouter();
-  return (newValue) => {
-    // router.push();
-  };
-};
+import { useChangeRouterParam } from "frontend/lib/routing/useChangeRouterParam";
 
 export const EntityFieldsSettings = () => {
   const tabFromUrl = useRouteParam("tab");

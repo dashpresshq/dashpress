@@ -17,6 +17,7 @@ import { useEffect, useState } from "react";
 import { ENTITY_TABLE_PATH } from "frontend/hooks/data/data.store";
 import { useRouteParam } from "@gothicgeeks/shared";
 import { ENTITY_CRUD_SETTINGS_TAB_LABELS } from "../constants";
+import { useChangeRouterParam } from "frontend/lib/routing/useChangeRouterParam";
 
 // TODO "List Able",
 
@@ -27,6 +28,7 @@ export const EntityCrudSettings = () => {
   const getEntityFieldLabels = useEntityFieldLabels();
 
   const tabFromUrl = useRouteParam("tab");
+  const changeTabParam = useChangeRouterParam("tab");
 
   const hiddenTableColumns = useSelectedEntityColumns(
     "hidden_entity_table_columns"
@@ -118,6 +120,7 @@ export const EntityCrudSettings = () => {
       <SectionBox title="CRUD Settings">
         <Tabs
           currentTab={tabFromUrl}
+          onChange={changeTabParam}
           contents={[
             {
               content: (

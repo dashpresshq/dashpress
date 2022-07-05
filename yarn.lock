@@ -498,9 +498,9 @@
   dependencies:
     prop-types "^15.8.1"
 
-"@gothicgeeks/design-system@git+ssh://git@github.com:thrownullexception/design-system.git#6fe0e1ee6bc90ec27a90a7ad4630c6390b8af921":
-  version "0.2.53"
-  resolved "git+ssh://git@github.com:thrownullexception/design-system.git#6fe0e1ee6bc90ec27a90a7ad4630c6390b8af921"
+"@gothicgeeks/design-system@git+ssh://git@github.com:thrownullexception/design-system.git#87906fdb27f6b09855ae4a20297b1b58530eb11f":
+  version "0.2.55"
+  resolved "git+ssh://git@github.com:thrownullexception/design-system.git#87906fdb27f6b09855ae4a20297b1b58530eb11f"
   dependencies:
     "@fortawesome/fontawesome-svg-core" "^6.1.1"
     "@fortawesome/free-solid-svg-icons" "^6.1.1"
@@ -4219,6 +4219,11 @@ natural-compare@^1.4.0:
   version "1.4.0"
   resolved "https://registry.npmjs.org/natural-compare/-/natural-compare-1.4.0.tgz"
   integrity sha1-Sr6/7tdUHywnrPspvbvRXI1bpPc=
+
+next-router-mock@^0.7.4:
+  version "0.7.4"
+  resolved "https://registry.yarnpkg.com/next-router-mock/-/next-router-mock-0.7.4.tgz#6af31bdc3383d29050901bb6a71ad50eefe0fe5b"
+  integrity sha512-phYLFXOQ9klg6gxVRJJdH0QoD+5bAbAdDYM9O3YdGZ+IFEbvIoIns+o9SoSfTkCjzoU2R1ARoFc8WHp0+hnD8A==
 
 next@12.1.6, next@^12.1.6:
   version "12.1.6"

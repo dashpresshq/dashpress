@@ -1,10 +1,12 @@
+/* eslint-disable max-len */
 /*
  * For a detailed explanation regarding each configuration property and type check, visit:
  * https://jestjs.io/docs/configuration
  */
 
-const nextJest = require("next/jest");
-const createJestConfig = nextJest({ dir: "./" });
+const nextJest = require('next/jest');
+
+const createJestConfig = nextJest({ dir: './' });
 
 /**
  *  @type {import("@jest/types").Config.InitialOptions}
@@ -37,7 +39,7 @@ const customJestConfig = {
   // ],
 
   // Indicates which provider should be used to instrument code for coverage
-  coverageProvider: "v8",
+  coverageProvider: 'v8',
 
   // A list of reporter names that Jest uses when writing coverage reports
   // coverageReporters: [
@@ -133,12 +135,12 @@ const customJestConfig = {
   // The paths to modules that run some code to configure or set up the testing environment before each test
   setupFiles: [
     // "<rootDir>/tests/setupDotEnv.ts",
-    "<rootDir>/tests/setupGlobals.ts",
-    "<rootDir>/tests/consoleOverrides.ts",
+    '<rootDir>/tests/setupGlobals.ts',
+    '<rootDir>/tests/consoleOverrides.ts',
   ],
 
   // A list of paths to modules that run some code to configure or set up the testing framework before each test
-  setupFilesAfterEnv: ["<rootDir>/tests/setupAfterEnv.ts"],
+  setupFilesAfterEnv: ['<rootDir>/tests/setupAfterEnv.ts'],
 
   // The number of seconds after which a test is considered as slow and reported as such in the results.
   // slowTestThreshold: 5,
@@ -147,7 +149,7 @@ const customJestConfig = {
   // snapshotSerializers: [],
 
   // The test environment that will be used for testing
-  testEnvironment: "jsdom",
+  testEnvironment: 'jsdom',
 
   // Options that will be passed to the testEnvironment
   // testEnvironmentOptions: {},
@@ -157,8 +159,8 @@ const customJestConfig = {
 
   // The glob patterns Jest uses to detect test files
   testMatch: [
-    "**/__tests__/**/?(*.)+(spec).[jt]s?(x)",
-    "**/?(*.)+(spec).[tj]s?(x)",
+    '**/__tests__/**/?(*.)+(spec).[jt]s?(x)',
+    '**/?(*.)+(spec).[tj]s?(x)',
   ],
 
   // An array of regexp pattern strings that are matched against all test paths, matched tests are skipped
@@ -219,11 +221,9 @@ export default async (...args: any[]) => {
   // At that time you can just do
   // export default createJestConfig(customJestConfig);
 
-  const badDefaultOptionIndex =
-    config.transformIgnorePatterns.indexOf("/node_modules/");
+  const badDefaultOptionIndex = config.transformIgnorePatterns.indexOf('/node_modules/');
   if (badDefaultOptionIndex !== -1) {
-    config.transformIgnorePatterns[badDefaultOptionIndex] =
-      "/node_modules/(?!@theorem)";
+    config.transformIgnorePatterns[badDefaultOptionIndex] = '/node_modules/(?!@theorem)';
   }
   return config;
 };

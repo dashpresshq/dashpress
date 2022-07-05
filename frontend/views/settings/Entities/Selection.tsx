@@ -4,10 +4,10 @@ import {
   RenderList,
   SectionListItem,
   Spacer,
-} from "@gothicgeeks/design-system";
-import { useStringSelections } from "../../../lib/selection";
-import { useEffect, useState } from "react";
-import { ILabelValue } from "../../../../types";
+} from '@gothicgeeks/design-system';
+import React, { useEffect, useState } from 'react';
+import { useStringSelections } from '../../../lib/selection';
+import { ILabelValue } from '../../../../types';
 
 interface IProps {
   isLoading: boolean;
@@ -26,8 +26,7 @@ export const EntitiesSelection: React.FC<IProps> = ({
   onSubmit,
   hiddenList,
 }) => {
-  const { toggleSelection, currentPageSelection, selectMutiple } =
-    useStringSelections();
+  const { toggleSelection, currentPageSelection, selectMutiple } = useStringSelections();
 
   const [touched, setTouched] = useState(false);
 
@@ -48,7 +47,7 @@ export const EntitiesSelection: React.FC<IProps> = ({
           setIsMakingRequest(false);
           setTouched(false);
         }}
-        text={"Save Changes"}
+        text="Save Changes"
         disabled={!touched}
         isMakingRequest={isMakingRequest}
       />
@@ -76,7 +75,7 @@ export const EntitiesSelection: React.FC<IProps> = ({
                   actionButtons={[
                     {
                       isInverse: isHidden,
-                      text: isHidden ? "Show" : "Hide",
+                      text: isHidden ? 'Show' : 'Hide',
                       onClick: () => {
                         setTouched(true);
                         toggleSelection(menuItem.name);
@@ -84,7 +83,7 @@ export const EntitiesSelection: React.FC<IProps> = ({
                       isMakingRequest: false,
                     },
                   ]}
-                  toNoWhere={true}
+                  toNoWhere
                 />
               );
             }}

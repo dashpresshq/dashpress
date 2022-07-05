@@ -1,5 +1,5 @@
-const error = console.error;
-const warn = console.warn;
+const { error } = console;
+const { warn } = console;
 
 console.warn = function (message) {
   // eslint-disable-next-line prefer-rest-params

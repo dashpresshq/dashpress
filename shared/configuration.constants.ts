@@ -1,18 +1,18 @@
 export const CONFIGURATION_KEYS: Record<
-  | "hidden_entity_table_columns"
-  | "hidden_entity_create_columns"
-  | "hidden_entity_update_columns"
-  | "hidden_entity_details_columns"
-  | "entity_diction"
-  | "entity_columns_types"
-  | "entity_fields_orders"
-  | "entity_crud_settings"
-  | "entities_order"
-  | "entity_columns_labels"
-  | "entities_to_hide_from_menu"
-  | "relations_list_fields" //
-  | "entity_selections"
-  | "entity_validations",
+  | 'hidden_entity_table_columns'
+  | 'hidden_entity_create_columns'
+  | 'hidden_entity_update_columns'
+  | 'hidden_entity_details_columns'
+  | 'entity_diction'
+  | 'entity_columns_types'
+  | 'entity_fields_orders'
+  | 'entity_crud_settings'
+  | 'entities_order'
+  | 'entity_columns_labels'
+  | 'entities_to_hide_from_menu'
+  | 'relations_list_fields' //
+  | 'entity_selections'
+  | 'entity_validations',
   { requireEntity: boolean; defaultValue: unknown }
 > = {
   hidden_entity_table_columns: { requireEntity: true, defaultValue: [] },
@@ -31,7 +31,7 @@ export const CONFIGURATION_KEYS: Record<
   },
   entity_diction: {
     requireEntity: true,
-    defaultValue: { singular: "", plural: "" },
+    defaultValue: { singular: '', plural: '' },
   },
   entity_fields_orders: {
     requireEntity: true,
@@ -64,11 +64,11 @@ export const CONFIGURATION_KEYS: Record<
 
   // id column
 
-Table Settings => 
+Table Settings =>
   add columns,
-  default sorting, 
+  default sorting,
 
-// Filter Tables and / or 
+// Filter Tables and / or
 
 Creator mode
 User mode

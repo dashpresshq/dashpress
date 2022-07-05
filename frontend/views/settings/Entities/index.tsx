@@ -3,55 +3,55 @@ import {
   SectionBox,
   SortList,
   Tabs,
-} from "@gothicgeeks/design-system";
-import { useRouteParam } from "@gothicgeeks/shared";
-import { useChangeRouterParam } from "frontend/lib/routing/useChangeRouterParam";
+} from '@gothicgeeks/design-system';
+import { useRouteParam } from '@gothicgeeks/shared';
+import { useChangeRouterParam } from 'frontend/lib/routing/useChangeRouterParam';
 import {
   useAppConfiguration,
   useUpsertConfigurationMutation,
-} from "../../../hooks/configuration/configration.store";
-import { useEntityDictionPlurals } from "../../../hooks/entity/entity.queries";
+} from '../../../hooks/configuration/configration.store';
+import { useEntityDictionPlurals } from '../../../hooks/entity/entity.queries';
 import {
   ENTITIES_MENU_ENDPOINT,
   useEntitiesList,
   useEntitiesMenuItems,
-} from "../../../hooks/entity/entity.store";
-import { NAVIGATION_LINKS } from "../../../lib/routing/links";
-import { BaseSettingsLayout } from ".././_Base";
-import { EntitiesSelection } from "./Selection";
+} from '../../../hooks/entity/entity.store';
+import { NAVIGATION_LINKS } from '../../../lib/routing/links';
+import { BaseSettingsLayout } from '../_Base';
+import { EntitiesSelection } from './Selection';
 
-export const EntitiesSettings = () => {
+export function EntitiesSettings() {
   const entitiesList = useEntitiesList();
-  const tabFromUrl = useRouteParam("tab");
-  const changeTabParam = useChangeRouterParam("tab");
+  const tabFromUrl = useRouteParam('tab');
+  const changeTabParam = useChangeRouterParam('tab');
 
   const entitiesToHide = useAppConfiguration<string[]>(
-    "entities_to_hide_from_menu"
+    'entities_to_hide_from_menu',
   );
   const entitiesMenuItems = useEntitiesMenuItems();
 
   const upsertHideFromMenuMutation = useUpsertConfigurationMutation(
-    "entities_to_hide_from_menu",
-    "",
-    { otherEndpoints: [ENTITIES_MENU_ENDPOINT] }
+    'entities_to_hide_from_menu',
+    '',
+    { otherEndpoints: [ENTITIES_MENU_ENDPOINT] },
   );
 
   const upsertEntitiesOrderMutation = useUpsertConfigurationMutation(
-    "entities_order",
-    "",
-    { otherEndpoints: [ENTITIES_MENU_ENDPOINT] }
+    'entities_order',
+    '',
+    { otherEndpoints: [ENTITIES_MENU_ENDPOINT] },
   );
 
   const entitiesDictionPlurals = useEntityDictionPlurals(
     entitiesList.data || [],
-    "value"
+    'value',
   );
 
   return (
     <BaseSettingsLayout
       menuItem={{
         link: NAVIGATION_LINKS.SETTINGS.ENTITIES,
-        name: "Entities Settings",
+        name: 'Entities Settings',
       }}
     >
       <ErrorAlert message={entitiesList.error || entitiesToHide.error} />
@@ -73,7 +73,7 @@ export const EntitiesSettings = () => {
                   }}
                 />
               ),
-              label: "Selection",
+              label: 'Selection',
             },
             {
               content: (
@@ -84,11 +84,11 @@ export const EntitiesSettings = () => {
                   }}
                 />
               ),
-              label: "Order",
+              label: 'Order',
             },
           ]}
         />
       </SectionBox>
     </BaseSettingsLayout>
   );
-};
+}

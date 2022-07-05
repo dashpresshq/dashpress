@@ -3,20 +3,20 @@ import {
   SectionRight,
   SectionRow,
   MenuSection,
-} from "@gothicgeeks/design-system";
-import { ReactNode } from "react";
-import { NAVIGATION_LINKS } from "../../lib/routing/links";
-import { AppLayout } from "../../_layouts/app";
+} from '@gothicgeeks/design-system';
+import { ReactNode } from 'react';
+import { NAVIGATION_LINKS } from '../../lib/routing/links';
+import { AppLayout } from '../../_layouts/app';
 
 interface IProps {
   children: ReactNode;
   menuItem: { link: string; name: string };
 }
 
-export const BaseSettingsLayout = ({ children, menuItem }: IProps) => {
+export function BaseSettingsLayout({ children, menuItem }: IProps) {
   return (
     <AppLayout
-      titleNeedsContext={true}
+      titleNeedsContext
       breadcrumbs={[{ label: menuItem.name, value: menuItem.link }]}
     >
       <SectionRow>
@@ -25,11 +25,11 @@ export const BaseSettingsLayout = ({ children, menuItem }: IProps) => {
             menuItems={[
               {
                 link: NAVIGATION_LINKS.SETTINGS.ENTITIES,
-                name: "Entities",
+                name: 'Entities',
               },
               {
-                link: "TODO",
-                name: "Other Settings",
+                link: 'TODO',
+                name: 'Other Settings',
               },
             ]}
             currentMenuItem={menuItem.link}
@@ -39,4 +39,4 @@ export const BaseSettingsLayout = ({ children, menuItem }: IProps) => {
       </SectionRow>
     </AppLayout>
   );
-};
+}

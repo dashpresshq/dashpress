@@ -8,12 +8,11 @@ export function sortByList<
     return;
   }
   const sortMap = Object.fromEntries(
-    sortList.map((item, index) => [item, index + 1])
+    sortList.map((item, index) => [item, index + 1]),
   );
 
   inputArray.sort(
-    (a, b) =>
-      (sortMap[a[key] as string] || SOME_VERY_LARGE_NUMBER) -
-      (sortMap[b[key] as string] || SOME_VERY_LARGE_NUMBER)
+    (a, b) => (sortMap[a[key] as string] || SOME_VERY_LARGE_NUMBER)
+      - (sortMap[b[key] as string] || SOME_VERY_LARGE_NUMBER),
   );
 }

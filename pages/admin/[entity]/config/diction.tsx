@@ -1,1 +1,1 @@
-export { EntityDictionSettings as default } from "../../../../frontend/views/entity/Configure/Diction";
+export { EntityDictionSettings as default } from '../../../../frontend/views/entity/Configure/Diction';

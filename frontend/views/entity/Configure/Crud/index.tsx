@@ -1,84 +1,83 @@
-import { ErrorAlert, Tabs, SectionBox } from "@gothicgeeks/design-system";
+import { ErrorAlert, Tabs, SectionBox } from '@gothicgeeks/design-system';
+import noop from 'lodash/noop';
+import { useEffect, useState } from 'react';
+import { ENTITY_TABLE_PATH } from 'frontend/hooks/data/data.store';
+import { useRouteParam } from '@gothicgeeks/shared';
+import { useChangeRouterParam } from 'frontend/lib/routing/useChangeRouterParam';
 import {
   IEntityCrudSettings,
   useEntityCrudSettings,
   useEntityFieldLabels,
   useEntitySlug,
   useSelectedEntityColumns,
-} from "../../../../hooks/entity/entity.config";
-import noop from "lodash/noop";
-import { NAVIGATION_LINKS } from "../../../../lib/routing/links";
-import { BaseEntitySettingsLayout } from "../_Base";
-import { useUpsertConfigurationMutation } from "../../../../hooks/configuration/configration.store";
-import { useEntityScalarFields } from "../../../../hooks/entity/entity.store";
-import { SelectionTab } from "./SelectionTab";
+} from '../../../../hooks/entity/entity.config';
+import { NAVIGATION_LINKS } from '../../../../lib/routing/links';
+import { BaseEntitySettingsLayout } from '../_Base';
+import { useUpsertConfigurationMutation } from '../../../../hooks/configuration/configration.store';
+import { useEntityScalarFields } from '../../../../hooks/entity/entity.store';
+import { SelectionTab } from './SelectionTab';
 
-import { useEffect, useState } from "react";
-import { ENTITY_TABLE_PATH } from "frontend/hooks/data/data.store";
-import { useRouteParam } from "@gothicgeeks/shared";
-import { ENTITY_CRUD_SETTINGS_TAB_LABELS } from "../constants";
-import { useChangeRouterParam } from "frontend/lib/routing/useChangeRouterParam";
+import { ENTITY_CRUD_SETTINGS_TAB_LABELS } from '../constants';
 
 // TODO "List Able",
 
-export const EntityCrudSettings = () => {
+export function EntityCrudSettings() {
   const entity = useEntitySlug();
   const entityCrudSettings = useEntityCrudSettings();
   const entityScalarFields = useEntityScalarFields(entity);
   const getEntityFieldLabels = useEntityFieldLabels();
 
-  const tabFromUrl = useRouteParam("tab");
-  const changeTabParam = useChangeRouterParam("tab");
+  const tabFromUrl = useRouteParam('tab');
+  const changeTabParam = useChangeRouterParam('tab');
 
   const hiddenTableColumns = useSelectedEntityColumns(
-    "hidden_entity_table_columns"
+    'hidden_entity_table_columns',
   );
   const hiddenCreateColumns = useSelectedEntityColumns(
-    "hidden_entity_create_columns"
+    'hidden_entity_create_columns',
   );
   const hiddenUpdateColumns = useSelectedEntityColumns(
-    "hidden_entity_update_columns"
+    'hidden_entity_update_columns',
   );
   const hiddenDetailsColumns = useSelectedEntityColumns(
-    "hidden_entity_details_columns"
+    'hidden_entity_details_columns',
   );
 
   const upsertTableColumnsMutation = useUpsertConfigurationMutation(
-    "hidden_entity_table_columns",
+    'hidden_entity_table_columns',
     entity,
     {
       otherEndpoints: [ENTITY_TABLE_PATH(entity)],
-    }
+    },
   );
 
   const upsertCreateColumnsMutation = useUpsertConfigurationMutation(
-    "hidden_entity_create_columns",
-    entity
+    'hidden_entity_create_columns',
+    entity,
   );
 
   const upsertUpdateColumnsMutation = useUpsertConfigurationMutation(
-    "hidden_entity_update_columns",
-    entity
+    'hidden_entity_update_columns',
+    entity,
   );
 
   const upsertDetailsColumnsMutation = useUpsertConfigurationMutation(
-    "hidden_entity_details_columns",
-    entity
+    'hidden_entity_details_columns',
+    entity,
   );
 
   const upsertCrudSettingsMutation = useUpsertConfigurationMutation(
-    "entity_crud_settings",
-    entity
+    'entity_crud_settings',
+    entity,
   );
 
-  const [entityCrudSettingsState, setEntityCrudSettingsState] =
-    useState<IEntityCrudSettings>({
-      create: true,
-      delete: true,
-      details: true,
-      table: true,
-      update: true,
-    });
+  const [entityCrudSettingsState, setEntityCrudSettingsState] = useState<IEntityCrudSettings>({
+    create: true,
+    delete: true,
+    details: true,
+    table: true,
+    update: true,
+  });
 
   useEffect(() => {
     if (entityCrudSettings.data) {
@@ -94,7 +93,7 @@ export const EntityCrudSettings = () => {
     };
     setEntityCrudSettingsState(newState);
     upsertCrudSettingsMutation.mutateAsync(
-      newState as unknown as Record<string, string>
+      newState as unknown as Record<string, string>,
     );
   };
 
@@ -103,14 +102,13 @@ export const EntityCrudSettings = () => {
     entityFields: entityScalarFields.data || [],
   };
 
-  const sharedLoading =
-    entityScalarFields.isLoading || entityCrudSettings.isLoading;
+  const sharedLoading = entityScalarFields.isLoading || entityCrudSettings.isLoading;
 
   return (
     <BaseEntitySettingsLayout
       menuItem={{
         link: NAVIGATION_LINKS.ENTITY.CONFIG.CRUD(entity),
-        name: "CRUD Settings",
+        name: 'CRUD Settings',
       }}
     >
       <ErrorAlert
@@ -132,9 +130,9 @@ export const EntityCrudSettings = () => {
                   onSubmit={async (data) => {
                     await upsertCreateColumnsMutation.mutateAsync(data);
                   }}
-                  onToggle={() => toggleCrudSettings("create")}
+                  onToggle={() => toggleCrudSettings('create')}
                   enabled={entityCrudSettingsState.create}
-                  labels={["Hide Create Button", "Show Create Button"]}
+                  labels={['Hide Create Button', 'Show Create Button']}
                 />
               ),
               label: ENTITY_CRUD_SETTINGS_TAB_LABELS.CREATE,
@@ -146,12 +144,12 @@ export const EntityCrudSettings = () => {
                   description="Toggle the fields that are allowed to be updated in the Form"
                   isLoading={sharedLoading || hiddenUpdateColumns.isLoading}
                   hiddenColumns={hiddenUpdateColumns.data || []}
-                  onToggle={() => toggleCrudSettings("update")}
+                  onToggle={() => toggleCrudSettings('update')}
                   onSubmit={async (data) => {
                     await upsertUpdateColumnsMutation.mutateAsync(data);
                   }}
                   enabled={entityCrudSettingsState.update}
-                  labels={["Hide Edit Button", "Show Edit Button"]}
+                  labels={['Hide Edit Button', 'Show Edit Button']}
                 />
               ),
               label: ENTITY_CRUD_SETTINGS_TAB_LABELS.UPDATE,
@@ -163,12 +161,12 @@ export const EntityCrudSettings = () => {
                   description="Toggle the fields that should be shown in the details page"
                   isLoading={sharedLoading || hiddenDetailsColumns.isLoading}
                   hiddenColumns={hiddenDetailsColumns.data || []}
-                  onToggle={() => toggleCrudSettings("details")}
+                  onToggle={() => toggleCrudSettings('details')}
                   onSubmit={async (data) => {
                     upsertDetailsColumnsMutation.mutateAsync(data);
                   }}
                   enabled={entityCrudSettingsState.details}
-                  labels={["Hide Details Button", "Show Details Button"]}
+                  labels={['Hide Details Button', 'Show Details Button']}
                 />
               ),
               label: ENTITY_CRUD_SETTINGS_TAB_LABELS.DETAILS,
@@ -179,13 +177,13 @@ export const EntityCrudSettings = () => {
                   {...sharedFields}
                   description="Toggle the columns that should be shown in the table"
                   isLoading={sharedLoading || hiddenTableColumns.isLoading}
-                  onToggle={() => toggleCrudSettings("table")}
+                  onToggle={() => toggleCrudSettings('table')}
                   hiddenColumns={hiddenTableColumns.data || []}
                   onSubmit={async (data) => {
                     upsertTableColumnsMutation.mutateAsync(data);
                   }}
                   enabled={entityCrudSettingsState.table}
-                  labels={["Hide In Table List", "Show In Table List"]}
+                  labels={['Hide In Table List', 'Show In Table List']}
                 />
               ),
               label: ENTITY_CRUD_SETTINGS_TAB_LABELS.TABLE,
@@ -196,12 +194,12 @@ export const EntityCrudSettings = () => {
                   description=""
                   entityFields={[]}
                   isLoading={false}
-                  onToggle={() => toggleCrudSettings("delete")}
+                  onToggle={() => toggleCrudSettings('delete')}
                   hiddenColumns={[]}
-                  getEntityFieldLabels={() => "Shoud not see this"}
+                  getEntityFieldLabels={() => 'Shoud not see this'}
                   onSubmit={async () => noop()}
                   enabled={entityCrudSettingsState.delete}
-                  labels={["Hide Delete Button", "Show Delete Button"]}
+                  labels={['Hide Delete Button', 'Show Delete Button']}
                 />
               ),
               label: ENTITY_CRUD_SETTINGS_TAB_LABELS.DELETE,
@@ -211,4 +209,4 @@ export const EntityCrudSettings = () => {
       </SectionBox>
     </BaseEntitySettingsLayout>
   );
-};
+}

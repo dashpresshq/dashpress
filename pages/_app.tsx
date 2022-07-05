@@ -1,4 +1,4 @@
-import { AppWrapper } from "@gothicgeeks/design-system";
+import { AppWrapper } from '@gothicgeeks/design-system';
 
 function MyApp({ Component, pageProps }) {
   return (

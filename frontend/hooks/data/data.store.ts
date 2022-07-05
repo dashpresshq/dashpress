@@ -5,18 +5,15 @@ import {
   makePostRequest,
   useApi,
   useWaitForResponseMutationOptions,
-} from "@gothicgeeks/shared";
-import { useMutation } from "react-query";
-import { SLUG_LOADING_VALUE } from "../../lib/routing/constants";
-import { NAVIGATION_LINKS } from "../../lib/routing/links";
-import { useEntityDiction } from "../entity/entity.config";
+} from '@gothicgeeks/shared';
+import { useMutation } from 'react-query';
+import { SLUG_LOADING_VALUE } from '../../lib/routing/constants';
+import { NAVIGATION_LINKS } from '../../lib/routing/links';
+import { useEntityDiction } from '../entity/entity.config';
 
-export const ENTITY_TABLE_PATH = (entity: string) =>
-  `/api/data/${entity}/table`;
-export const ENTITY_DETAILS_PATH = (entity: string, id: string) =>
-  `/api/data/${entity}/${id}`;
-export const ENTITY_REFERENCE_PATH = (entity: string, id: string) =>
-  `/api/data/${entity}/${id}/reference`;
+export const ENTITY_TABLE_PATH = (entity: string) => `/api/data/${entity}/table`;
+export const ENTITY_DETAILS_PATH = (entity: string, id: string) => `/api/data/${entity}/${id}`;
+export const ENTITY_REFERENCE_PATH = (entity: string, id: string) => `/api/data/${entity}/${id}/reference`;
 
 export const useEntityDataDetails = (entity: string, id: string) => {
   const entityDiction = useEntityDiction();
@@ -27,12 +24,10 @@ export const useEntityDataDetails = (entity: string, id: string) => {
   });
 };
 
-export const useEntityDataReference = (entity: string, id: string) => {
-  return useApi<string>(ENTITY_REFERENCE_PATH(entity, id), {
-    errorMessage: dataNotFoundMessage("Reference data not found"),
-    enabled: !!(id && entity),
-  });
-};
+export const useEntityDataReference = (entity: string, id: string) => useApi<string>(ENTITY_REFERENCE_PATH(entity, id), {
+  errorMessage: dataNotFoundMessage('Reference data not found'),
+  enabled: !!(id && entity),
+});
 
 export function useEntityDataCreationMutation(entity: string) {
   const entityDiction = useEntityDiction();
@@ -43,9 +38,7 @@ export function useEntityDataCreationMutation(entity: string) {
     successMessage: `${entityDiction.singular} created successfully`,
   });
 
-  return useMutation(async (data: Record<string, string>) => {
-    return await makePostRequest(`/api/data/${entity}`, { data });
-  }, apiMutateOptions);
+  return useMutation(async (data: Record<string, string>) => await makePostRequest(`/api/data/${entity}`, { data }), apiMutateOptions);
 }
 
 // TODO optimisitc updates here
@@ -58,9 +51,7 @@ export function useEntityDataUpdationMutation(entity: string, id: string) {
     successMessage: `${entityDiction.singular} updated successfully`,
   });
 
-  return useMutation(async (data: Record<string, string>) => {
-    return await makePatchRequest(`/api/data/${entity}/${id}`, { data });
-  }, apiMutateOptions);
+  return useMutation(async (data: Record<string, string>) => await makePatchRequest(`/api/data/${entity}/${id}`, { data }), apiMutateOptions);
 }
 
 export function useEntityDataDeletionMutation(entity: string) {
@@ -73,7 +64,5 @@ export function useEntityDataDeletionMutation(entity: string) {
     successMessage: `${entityDiction.singular} deleted successfully`,
   });
 
-  return useMutation(async (id: string) => {
-    return await makeDeleteRequest(`/api/data/${entity}/${id}`);
-  }, apiMutateOptions);
+  return useMutation(async (id: string) => await makeDeleteRequest(`/api/data/${entity}/${id}`), apiMutateOptions);
 }

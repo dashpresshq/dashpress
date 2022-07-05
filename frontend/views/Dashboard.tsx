@@ -5,14 +5,14 @@ import {
   Spacer,
   Stack,
   Text,
-} from "@gothicgeeks/design-system";
-import styled from "styled-components";
-import { useEntitiesMenuItems } from "../hooks/entity/entity.store";
-import { AppLayout } from "../_layouts/app";
-import * as StyledGrid from "styled-bootstrap-grid";
-import { NAVIGATION_LINKS } from "../lib/routing/links";
-import { useRouter } from "next/router";
-import { HardDrive } from "react-feather";
+} from '@gothicgeeks/design-system';
+import styled from 'styled-components';
+import * as StyledGrid from 'styled-bootstrap-grid';
+import { useRouter } from 'next/router';
+import { HardDrive } from 'react-feather';
+import { useEntitiesMenuItems } from '../hooks/entity/entity.store';
+import { AppLayout } from '../_layouts/app';
+import { NAVIGATION_LINKS } from '../lib/routing/links';
 
 export function Dashboard() {
   const entitiesMenuItems = useEntitiesMenuItems();
@@ -23,7 +23,7 @@ export function Dashboard() {
       breadcrumbs={[]}
       actionItems={[
         {
-          label: "Manage Entities",
+          label: 'Manage Entities',
           IconComponent: HardDrive,
           onClick: () => {
             router.push(NAVIGATION_LINKS.SETTINGS.ENTITIES);
@@ -31,39 +31,43 @@ export function Dashboard() {
         },
       ]}
     >
-      {entitiesMenuItems.isLoading ? (
-        <ComponentIsLoading />
-      ) : (
-        <>
-          {entitiesMenuItems.error ? (
-            <ErrorAlert message={entitiesMenuItems.error} />
-          ) : (
-            <StyledGrid.Row>
-              {entitiesMenuItems.data.map((field) => (
-                <StyledGrid.Col lg={4} md={6} sm={12} key={field.value}>
-                  <StyledCard>
-                    <StyledBox>
-                      <Stack justify="space-between">
-                        <Text size="4">{field.label}</Text>
-                        <SoftButton
-                          to={NAVIGATION_LINKS.ENTITY.TABLE(field.value)}
-                          label="View Data"
-                          icon="eye"
-                        />
-                      </Stack>
-                      <Spacer size="xs" />
-                      <Text size="3" weight="bold">
-                        49
-                      </Text>
-                    </StyledBox>
-                  </StyledCard>
-                  <Spacer size="xl" />
-                </StyledGrid.Col>
-              ))}
-            </StyledGrid.Row>
-          )}
-        </>
-      )}
+      {entitiesMenuItems.isLoading
+        ? (
+          <ComponentIsLoading />
+        )
+        : (
+          <>
+            {entitiesMenuItems.error
+              ? (
+                <ErrorAlert message={entitiesMenuItems.error} />
+              )
+              : (
+                <StyledGrid.Row>
+                  {entitiesMenuItems.data.map((field) => (
+                    <StyledGrid.Col lg={4} md={6} sm={12} key={field.value}>
+                      <StyledCard>
+                        <StyledBox>
+                          <Stack justify="space-between">
+                            <Text size="4">{field.label}</Text>
+                            <SoftButton
+                              to={NAVIGATION_LINKS.ENTITY.TABLE(field.value)}
+                              label="View Data"
+                              icon="eye"
+                            />
+                          </Stack>
+                          <Spacer size="xs" />
+                          <Text size="3" weight="bold">
+                            49
+                          </Text>
+                        </StyledBox>
+                      </StyledCard>
+                      <Spacer size="xl" />
+                    </StyledGrid.Col>
+                  ))}
+                </StyledGrid.Row>
+              )}
+          </>
+        )}
     </AppLayout>
   );
 }

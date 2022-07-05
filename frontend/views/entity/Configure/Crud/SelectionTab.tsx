@@ -5,10 +5,10 @@ import {
   SectionListItem,
   Stack,
   Spacer,
-} from "@gothicgeeks/design-system";
-import { IEntityField } from "../../../../../backend/entities/types";
-import { useStringSelections } from "../../../../lib/selection";
-import { useEffect, useState } from "react";
+} from '@gothicgeeks/design-system';
+import { useEffect, useState } from 'react';
+import { IEntityField } from '../../../../../backend/entities/types';
+import { useStringSelections } from '../../../../lib/selection';
 
 interface IProps {
   entityFields: IEntityField[];
@@ -33,8 +33,7 @@ export const SelectionTab: React.FC<IProps> = ({
   onSubmit,
   hiddenColumns,
 }) => {
-  const { toggleSelection, currentPageSelection, selectMutiple } =
-    useStringSelections();
+  const { toggleSelection, currentPageSelection, selectMutiple } = useStringSelections();
 
   const [touched, setTouched] = useState(false);
 
@@ -50,7 +49,7 @@ export const SelectionTab: React.FC<IProps> = ({
   return (
     <>
       <Stack justify="space-between">
-        <div style={{ width: "100%" }}>
+        <div style={{ width: '100%' }}>
           <Text size="5">{description}</Text>
         </div>
         <FormButton
@@ -78,19 +77,19 @@ export const SelectionTab: React.FC<IProps> = ({
                   actionButtons={
                     enabled
                       ? [
-                          {
-                            isInverse: isHidden,
-                            text: isHidden ? "Show" : "Hide",
-                            onClick: () => {
-                              setTouched(true);
-                              toggleSelection(menuItem.name);
-                            },
-                            isMakingRequest: false,
+                        {
+                          isInverse: isHidden,
+                          text: isHidden ? 'Show' : 'Hide',
+                          onClick: () => {
+                            setTouched(true);
+                            toggleSelection(menuItem.name);
                           },
-                        ]
+                          isMakingRequest: false,
+                        },
+                      ]
                       : []
                   }
-                  toNoWhere={true}
+                  toNoWhere
                 />
               );
             }}
@@ -104,7 +103,7 @@ export const SelectionTab: React.FC<IProps> = ({
               setIsMakingRequest(false);
               setTouched(false);
             }}
-            text={"Save Changes"}
+            text="Save Changes"
             disabled={!touched}
             isMakingRequest={isMakingRequest}
           />

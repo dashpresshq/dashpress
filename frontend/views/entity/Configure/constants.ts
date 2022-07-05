@@ -1,7 +1,7 @@
-import { useRouter } from "next/router";
-import { Icon, Save, Settings } from "react-feather";
-import { useEntitySlug } from "../../../hooks/entity/entity.config";
-import { NAVIGATION_LINKS } from "../../../lib/routing/links";
+import { useRouter } from 'next/router';
+import { Icon, Save, Settings } from 'react-feather';
+import { useEntitySlug } from '../../../hooks/entity/entity.config';
+import { NAVIGATION_LINKS } from '../../../lib/routing/links';
 
 export enum EntityActionTypes {
   Update,
@@ -14,17 +14,17 @@ export enum EntityActionTypes {
 }
 
 export const ENTITY_FIELD_SETTINGS_TAB_LABELS = {
-  LABELS: "Labels",
-  TYPES: "Types",
-  ORDER: "Order",
+  LABELS: 'Labels',
+  TYPES: 'Types',
+  ORDER: 'Order',
 };
 
 export const ENTITY_CRUD_SETTINGS_TAB_LABELS = {
-  CREATE: "Create",
-  UPDATE: "Update",
-  DETAILS: "Details",
-  TABLE: "Table",
-  DELETE: "Delete",
+  CREATE: 'Create',
+  UPDATE: 'Update',
+  DETAILS: 'Details',
+  TABLE: 'Table',
+  DELETE: 'Delete',
 };
 
 const ENTITY_ACTION_BAG: Record<
@@ -36,55 +36,49 @@ const ENTITY_ACTION_BAG: Record<
   }
 > = {
   [EntityActionTypes.Labels]: {
-    label: "Labels Settings",
+    label: 'Labels Settings',
     IconComponent: Settings,
-    link: (entity) =>
-      NAVIGATION_LINKS.ENTITY.CONFIG.FIELDS(entity, {
-        tab: ENTITY_FIELD_SETTINGS_TAB_LABELS.LABELS,
-      }),
+    link: (entity) => NAVIGATION_LINKS.ENTITY.CONFIG.FIELDS(entity, {
+      tab: ENTITY_FIELD_SETTINGS_TAB_LABELS.LABELS,
+    }),
   },
   [EntityActionTypes.Types]: {
-    label: "Types Settings",
+    label: 'Types Settings',
     IconComponent: Settings,
-    link: (entity) =>
-      NAVIGATION_LINKS.ENTITY.CONFIG.FIELDS(entity, {
-        tab: ENTITY_FIELD_SETTINGS_TAB_LABELS.TYPES,
-      }),
+    link: (entity) => NAVIGATION_LINKS.ENTITY.CONFIG.FIELDS(entity, {
+      tab: ENTITY_FIELD_SETTINGS_TAB_LABELS.TYPES,
+    }),
   },
   [EntityActionTypes.Update]: {
-    label: "Update Settings",
+    label: 'Update Settings',
     IconComponent: Settings,
-    link: (entity) =>
-      NAVIGATION_LINKS.ENTITY.CONFIG.CRUD(entity, {
-        tab: ENTITY_CRUD_SETTINGS_TAB_LABELS.UPDATE,
-      }),
+    link: (entity) => NAVIGATION_LINKS.ENTITY.CONFIG.CRUD(entity, {
+      tab: ENTITY_CRUD_SETTINGS_TAB_LABELS.UPDATE,
+    }),
   },
   [EntityActionTypes.Create]: {
-    label: "Create Settings",
+    label: 'Create Settings',
     IconComponent: Settings,
-    link: (entity) =>
-      NAVIGATION_LINKS.ENTITY.CONFIG.CRUD(entity, {
-        tab: ENTITY_CRUD_SETTINGS_TAB_LABELS.CREATE,
-      }),
+    link: (entity) => NAVIGATION_LINKS.ENTITY.CONFIG.CRUD(entity, {
+      tab: ENTITY_CRUD_SETTINGS_TAB_LABELS.CREATE,
+    }),
   },
   [EntityActionTypes.Table]: {
-    label: "Table Settings",
+    label: 'Table Settings',
     IconComponent: Settings,
-    link: (entity) =>
-      NAVIGATION_LINKS.ENTITY.CONFIG.CRUD(entity, {
-        tab: ENTITY_CRUD_SETTINGS_TAB_LABELS.TABLE,
-      }),
+    link: (entity) => NAVIGATION_LINKS.ENTITY.CONFIG.CRUD(entity, {
+      tab: ENTITY_CRUD_SETTINGS_TAB_LABELS.TABLE,
+    }),
   },
   [EntityActionTypes.Details]: {
-    label: "Details Settings",
+    label: 'Details Settings',
     IconComponent: Settings,
-    link: (entity) =>
-      NAVIGATION_LINKS.ENTITY.CONFIG.CRUD(entity, {
-        tab: ENTITY_CRUD_SETTINGS_TAB_LABELS.DETAILS,
-      }),
+    link: (entity) => NAVIGATION_LINKS.ENTITY.CONFIG.CRUD(entity, {
+      tab: ENTITY_CRUD_SETTINGS_TAB_LABELS.DETAILS,
+    }),
   },
   [EntityActionTypes.Diction]: {
-    label: "Diction Settings",
+    label: 'Diction Settings',
     IconComponent: Save,
     link: NAVIGATION_LINKS.ENTITY.CONFIG.DICTION,
   },

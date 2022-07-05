@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
-function useSelections<T>(currentPage = 1, filterParams = "") {
+function useSelections<T>(currentPage = 1, filterParams = '') {
   const [selections, setSelections] = useState<Record<number, T[]>>({});
 
   useEffect(() => {
@@ -31,7 +31,7 @@ function useSelections<T>(currentPage = 1, filterParams = "") {
         setSelections({
           ...selections,
           [currentPage]: selections[currentPage].filter(
-            (selection) => selection !== input
+            (selection) => selection !== input,
           ),
         });
         return;
@@ -46,14 +46,10 @@ function useSelections<T>(currentPage = 1, filterParams = "") {
 
 export const useStringSelections = (
   currentPage?: number,
-  filterParams?: string
-) => {
-  return useSelections<string>(currentPage, filterParams);
-};
+  filterParams?: string,
+) => useSelections<string>(currentPage, filterParams);
 
 export const useNumberselections = (
   currentPage?: number,
-  filterParams?: string
-) => {
-  return useSelections<number>(currentPage, filterParams);
-};
+  filterParams?: string,
+) => useSelections<number>(currentPage, filterParams);

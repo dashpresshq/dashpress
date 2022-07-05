@@ -1,22 +1,22 @@
-import { ErrorAlert, SectionBox } from "@gothicgeeks/design-system";
-import { useEntitySlug } from "../../../hooks/entity/entity.config";
-import { NAVIGATION_LINKS } from "../../../lib/routing/links";
-import { BaseEntitySettingsLayout } from "./_Base";
+import { ErrorAlert, SectionBox } from '@gothicgeeks/design-system';
+import { useEntitySlug } from '../../../hooks/entity/entity.config';
+import { NAVIGATION_LINKS } from '../../../lib/routing/links';
+import { BaseEntitySettingsLayout } from './_Base';
 
-export const EntityActionsSettings = () => {
+export function EntityActionsSettings() {
   const entity = useEntitySlug();
 
   return (
     <BaseEntitySettingsLayout
       menuItem={{
         link: NAVIGATION_LINKS.ENTITY.CONFIG.ACTIONS(entity),
-        name: "Actions Settings",
+        name: 'Actions Settings',
       }}
     >
       <SectionBox title="Actions Settings">
-        <ErrorAlert message={"error"} />
+        <ErrorAlert message="error" />
         TODO
       </SectionBox>
     </BaseEntitySettingsLayout>
   );
-};
+}

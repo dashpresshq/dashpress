@@ -1,10 +1,10 @@
-import { enumsService, EnumsService } from "./enums.service";
+import { enumsService, EnumsService } from './enums.service';
 
 export class EnumsController {
-  constructor(private enumsService: EnumsService) {}
+  constructor(private readonly _enumsService: EnumsService) {}
 
   listEnumValues(name: string) {
-    return this.enumsService.getEnumValuesAsList(name);
+    return this._enumsService.getEnumValuesAsList(name);
   }
 }
 

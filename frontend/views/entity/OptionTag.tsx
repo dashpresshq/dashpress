@@ -1,15 +1,21 @@
-import { lighten } from "polished";
-import styled from "styled-components";
-import { IColorableSelection } from "./Configure/Fields/types";
-import { Text } from "@gothicgeeks/design-system";
+import { lighten } from 'polished';
+import styled from 'styled-components';
+import { Text } from '@gothicgeeks/design-system';
+import { IColorableSelection } from './Configure/Fields/types';
 
-const DEFAULT_TAG_COLOR = "#000000";
+const DEFAULT_TAG_COLOR = '#000000';
 
-export const OptionTag = (props: IColorableSelection) => (
-  <Root color={props.color}>
-    <Text size="5"> {props.label} </Text>
-  </Root>
-);
+export function OptionTag(props: IColorableSelection) {
+  return (
+    <Root color={props.color}>
+      <Text size="5">
+        {' '}
+        {props.label}
+        {' '}
+      </Text>
+    </Root>
+  );
+}
 
 const Root = styled.div<{ color: string }>`
   display: inline-block;

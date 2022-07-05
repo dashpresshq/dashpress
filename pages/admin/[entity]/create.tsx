@@ -1,1 +1,1 @@
-export { EntityCreate as default } from "../../../frontend/views/entity/Create";
+export { EntityCreate as default } from '../../../frontend/views/entity/Create';

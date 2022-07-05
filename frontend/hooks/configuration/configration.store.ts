@@ -3,15 +3,15 @@ import {
   makePutRequest,
   useApi,
   useWaitForResponseMutationOptions,
-} from "@gothicgeeks/shared";
-import { useMutation } from "react-query";
-import { CONFIGURATION_KEYS } from "../../../shared/configuration.constants";
-import { SLUG_LOADING_VALUE } from "../../lib/routing/constants";
-import { ConfigrationStorage } from "./storage";
+} from '@gothicgeeks/shared';
+import { useMutation } from 'react-query';
+import { CONFIGURATION_KEYS } from '../../../shared/configuration.constants';
+import { SLUG_LOADING_VALUE } from '../../lib/routing/constants';
+import { ConfigrationStorage } from './storage';
 
 export const configurationApiPath = (
   key: keyof typeof CONFIGURATION_KEYS,
-  entity?: string
+  entity?: string,
 ) => (entity ? `/api/config/${key}/${entity}` : `/api/config/${key}`);
 
 export function useAppConfiguration<T>(key: keyof typeof CONFIGURATION_KEYS) {
@@ -22,13 +22,13 @@ export function useAppConfiguration<T>(key: keyof typeof CONFIGURATION_KEYS) {
       ConfigrationStorage.set(data, key);
       return data;
     },
-    errorMessage: dataNotFoundMessage("App Configuration"),
+    errorMessage: dataNotFoundMessage('App Configuration'),
   });
 }
 
 export function useEntityConfiguration<T>(
   key: keyof typeof CONFIGURATION_KEYS,
-  entity: string
+  entity: string,
 ) {
   return useApi<T>(configurationApiPath(key, entity), {
     enabled: entity !== SLUG_LOADING_VALUE,
@@ -38,7 +38,7 @@ export function useEntityConfiguration<T>(
       ConfigrationStorage.set(data, key, entity);
       return data;
     },
-    errorMessage: dataNotFoundMessage("Entity Configuration"),
+    errorMessage: dataNotFoundMessage('Entity Configuration'),
   });
 }
 
@@ -49,7 +49,7 @@ interface IUpsertConfigMutationOptions {
 export function useUpsertConfigurationMutation(
   key: keyof typeof CONFIGURATION_KEYS,
   entity?: string,
-  mutationOptions?: IUpsertConfigMutationOptions
+  mutationOptions?: IUpsertConfigMutationOptions,
 ) {
   const apiMutateOptions = useWaitForResponseMutationOptions<
     Record<string, unknown> | unknown[]
@@ -61,7 +61,7 @@ export function useUpsertConfigurationMutation(
     onSuccessActionWithFormData: (data) => {
       ConfigrationStorage.set(data, key, entity);
     },
-    successMessage: "App settings saved successfully",
+    successMessage: 'App settings saved successfully',
   });
 
   return useMutation(
@@ -71,6 +71,6 @@ export function useUpsertConfigurationMutation(
       });
       return values;
     },
-    apiMutateOptions
+    apiMutateOptions,
   );
 }

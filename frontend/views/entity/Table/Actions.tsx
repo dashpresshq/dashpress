@@ -1,12 +1,12 @@
-import { DeleteButton, SoftButton, Stack } from "@gothicgeeks/design-system";
-import { useEntityDataDeletionMutation } from "frontend/hooks/data/data.store";
+import { DeleteButton, SoftButton, Stack } from '@gothicgeeks/design-system';
+import { useEntityDataDeletionMutation } from 'frontend/hooks/data/data.store';
 import {
   IEntityCrudSettings,
   useEntitySlug,
-} from "frontend/hooks/entity/entity.config";
-import { useEntityIdField } from "frontend/hooks/entity/entity.store";
-import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
-import { useDetailsOffCanvasStore } from "./hooks/useDetailsOffCanvas.store";
+} from 'frontend/hooks/entity/entity.config';
+import { useEntityIdField } from 'frontend/hooks/entity/entity.store';
+import { NAVIGATION_LINKS } from 'frontend/lib/routing/links';
+import { useDetailsOffCanvasStore } from './hooks/useDetailsOffCanvas.store';
 
 interface IProps {
   crudSettings: IEntityCrudSettings;
@@ -21,7 +21,7 @@ export const TableActions: React.FC<IProps> = ({ crudSettings, row }) => {
   const entityDataDeletionMutation = useEntityDataDeletionMutation(entity);
   const openDetailsCanvas = useDetailsOffCanvasStore((state) => state.open);
 
-  const idValue = row.original[idField.data || "id"] as string;
+  const idValue = row.original[idField.data || 'id'] as string;
   return (
     <Stack spacing={4} align="center">
       {crudSettings.details && (
@@ -32,7 +32,7 @@ export const TableActions: React.FC<IProps> = ({ crudSettings, row }) => {
             }}
             label="Details"
             color="primary"
-            justIcon={true}
+            justIcon
             icon="eye"
           />
         </div>
@@ -44,7 +44,7 @@ export const TableActions: React.FC<IProps> = ({ crudSettings, row }) => {
             label="Edit"
             icon="edit"
             color="theme"
-            justIcon={true}
+            justIcon
             onClick={() => {}}
           />
         </div>
@@ -54,7 +54,7 @@ export const TableActions: React.FC<IProps> = ({ crudSettings, row }) => {
           <DeleteButton
             onDelete={() => entityDataDeletionMutation.mutate(idValue)}
             isMakingDeleteRequest={entityDataDeletionMutation.isLoading}
-            shouldConfirmAlert={true}
+            shouldConfirmAlert
           />
         </div>
       )}

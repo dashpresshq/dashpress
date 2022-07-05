@@ -1,5 +1,3 @@
-export const useSiteConfig = () => {
-  return {
-    name: "Kademiks",
-  };
-};
+export const useSiteConfig = () => ({
+  name: 'Kademiks',
+});

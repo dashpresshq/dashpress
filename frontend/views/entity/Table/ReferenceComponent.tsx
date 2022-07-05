@@ -1,6 +1,6 @@
-import { useDetailsOffCanvasStore } from "./hooks/useDetailsOffCanvas.store";
-import { useEntityDataReference } from "frontend/hooks/data/data.store";
-import { StyledLinkLikeButton } from "@gothicgeeks/design-system";
+import { useEntityDataReference } from 'frontend/hooks/data/data.store';
+import { StyledLinkLikeButton } from '@gothicgeeks/design-system';
+import { useDetailsOffCanvasStore } from './hooks/useDetailsOffCanvas.store';
 
 export const ReferenceComponent: React.FC<{ entity: string; id: string }> = ({
   entity,
@@ -29,6 +29,4 @@ export const ReferenceComponent: React.FC<{ entity: string; id: string }> = ({
 const TextButton: React.FC<{ onClick: () => void; text: string }> = ({
   onClick,
   text,
-}) => {
-  return <StyledLinkLikeButton onClick={onClick}>{text}</StyledLinkLikeButton>;
-};
+}) => <StyledLinkLikeButton onClick={onClick}>{text}</StyledLinkLikeButton>;

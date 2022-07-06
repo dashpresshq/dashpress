@@ -22,7 +22,6 @@ module.exports = {
     '@typescript-eslint',
   ],
   rules: {
-    'import/no-anonymous-default-export': 'off',
     'import/no-unresolved': 'off',
     'import/extensions': 'off',
     'no-underscore-dangle': 'off',

@@ -1,3 +1,3 @@
-import { EntityTable } from "../../../frontend/views/entity/Table";
+import { EntityTable } from '../../../frontend/views/entity/Table';
 
 export default EntityTable;

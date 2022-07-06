@@ -4,10 +4,7 @@ import { entitiesController } from '../../../../backend/entities/entities.contro
 import { validateEntityFromRequest } from '../../../../backend/entities/entities.validations';
 import { handleResponseError } from '../../../../backend/lib/errors';
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse,
-) {
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   try {
     const entity = validateEntityFromRequest(req.query);
 

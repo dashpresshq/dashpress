@@ -1,9 +1,5 @@
 import { IEntityField } from 'backend/entities/types';
-import {
-  getFieldTypeBoundedValidations,
-  guessEntityType,
-  guessEntityValidations,
-} from '../guess';
+import { getFieldTypeBoundedValidations, guessEntityType, guessEntityValidations } from '../guess';
 
 describe('getFieldTypeBoundedValidations', () => {
   it('guess validations by type for single item array', () => {
@@ -43,8 +39,7 @@ describe('getFieldTypeBoundedValidations', () => {
 
 describe('guessEntityValidations', () => {
   it('should guess `unique` validation when is unique only', () => {
-    expect(guessEntityValidations(true, undefined, false))
-      .toMatchInlineSnapshot(`
+    expect(guessEntityValidations(true, undefined, false)).toMatchInlineSnapshot(`
       Array [
         Object {
           "errorMessage": "{{ name }} already exists",
@@ -77,8 +72,7 @@ describe('guessEntityValidations', () => {
     `);
   });
   it('should guess `isRequired` validation when is required', () => {
-    expect(guessEntityValidations(false, undefined, true))
-      .toMatchInlineSnapshot(`
+    expect(guessEntityValidations(false, undefined, true)).toMatchInlineSnapshot(`
       Array [
         Object {
           "errorMessage": "{{ name }} is required",
@@ -108,26 +102,17 @@ describe('guessEntityValidations', () => {
 
 describe('guessEntityType', () => {
   it('should guess `reference` types', () => {
-    expect(guessEntityType('name', 'scalar', 'Boolean', { name: 'Foo' })).toBe(
-      'reference',
-    );
+    expect(guessEntityType('name', 'scalar', 'Boolean', { name: 'Foo' })).toBe('reference');
   });
   it('should guess `selection` types', () => {
-    expect(guessEntityType('name', 'enum', 'Boolean', {})).toBe(
-      'selection-enum',
-    );
+    expect(guessEntityType('name', 'enum', 'Boolean', {})).toBe('selection-enum');
   });
   it('should map custom fields', () => {
     expect(guessEntityType('name', 'scalar', 'Int', {})).toBe('number');
   });
   it('should default to `text` when type is unknown', () => {
-    expect(
-      guessEntityType(
-        'name',
-        'scalar',
-        'an unknown type' as IEntityField['type'],
-        {},
-      ),
-    ).toBe('text');
+    expect(guessEntityType('name', 'scalar', 'an unknown type' as IEntityField['type'], {})).toBe(
+      'text',
+    );
   });
 });

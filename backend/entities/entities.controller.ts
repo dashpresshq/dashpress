@@ -1,8 +1,5 @@
 import { IValueLabel } from '@gothicgeeks/design-system/dist/types';
-import {
-  ConfigurationService,
-  configurationService,
-} from '../configuration/configuration.service';
+import { ConfigurationService, configurationService } from '../configuration/configuration.service';
 import { entitiesService, EntitiesService } from './entities.service';
 import { IEntityField } from './types';
 import { sortByList } from './utils';
@@ -19,9 +16,7 @@ export class EntitiesController {
       this._configurationService.show<string[]>('entities_to_hide_from_menu'),
       this._configurationService.show<string[]>('entities_order'),
     ]);
-    const entitiesToShow = entities.filter(
-      ({ value }) => !hiddenEntities.includes(value),
-    );
+    const entitiesToShow = entities.filter(({ value }) => !hiddenEntities.includes(value));
 
     sortByList(
       entitiesToShow.sort((a, b) => a.value.localeCompare(b.value)),
@@ -52,7 +47,4 @@ export class EntitiesController {
   }
 }
 
-export const entitiesController = new EntitiesController(
-  entitiesService,
-  configurationService,
-);
+export const entitiesController = new EntitiesController(entitiesService, configurationService);

@@ -10,12 +10,9 @@
     "test": "jest --detectOpenHandles --runInBand",
     "typecheck": "tsc",
     "test:cov": "jest --coverage",
-    "format": "prettier --write \"{backend,frontend,shared,pages}/**/*.{json,md,ts,tsx}\" \"*.{json,md,ts,tsx}\"",
-    "format:fix": "prettier --write",
-    "format-verify": "prettier --check \"{backend,frontend,shared,pages}/**/*.{json,md,ts,tsx}\" \"*.{json,md,ts,tsx}\"",
     "lint": "eslint --ext ts,tsx .",
     "lint:fix": "eslint --fix",
-    "verify": "npm run typecheck && npm run lint && npm run format-verify && npm run test"
+    "verify": "npm run typecheck && npm run lint && npm run test"
   },
   "dependencies": {
     "@gothicgeeks/design-system": "git+ssh://git@github.com:thrownullexception/design-system.git#87906fdb27f6b09855ae4a20297b1b58530eb11f",
@@ -65,7 +62,6 @@
     "jest-environment-jsdom": "^28.1.2",
     "lint-staged": "^13.0.2",
     "next-router-mock": "^0.7.4",
-    "prettier": "^2.7.1",
     "ts-node": "^10.8.1",
     "typescript": "^4.7.4"
   }

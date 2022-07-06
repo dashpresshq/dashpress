@@ -1,28 +1,22 @@
 import {
-  ComponentIsLoading,
-  ErrorAlert,
-  OffCanvas,
-  Table,
-} from "@gothicgeeks/design-system";
-import { AppLayout } from "../../../_layouts/app";
-import { NAVIGATION_LINKS } from "../../../lib/routing/links";
+  ComponentIsLoading, ErrorAlert, OffCanvas, Table,
+} from '@gothicgeeks/design-system';
+import { AppLayout } from '../../../_layouts/app';
+import { NAVIGATION_LINKS } from '../../../lib/routing/links';
 import {
   useEntityCrudSettings,
   useEntityDiction,
   useEntitySlug,
   useSelectedEntityColumns,
-} from "../../../hooks/entity/entity.config";
-import { useEntityScalarFields } from "../../../hooks/entity/entity.store";
-import { SLUG_LOADING_VALUE } from "../../../lib/routing/constants";
-import { ENTITY_TABLE_PATH } from "../../../hooks/data/data.store";
-import {
-  EntityActionTypes,
-  useEntityActionMenuItems,
-} from "../Configure/constants";
-import { useTableMenuItems } from "./useTableMenuItems";
-import { useTableColumns } from "./useTableColumns";
-import { useDetailsOffCanvasStore } from "./hooks/useDetailsOffCanvas.store";
-import { EntityDetailsView } from "../Details/DetailsView";
+} from '../../../hooks/entity/entity.config';
+import { useEntityScalarFields } from '../../../hooks/entity/entity.store';
+import { SLUG_LOADING_VALUE } from '../../../lib/routing/constants';
+import { ENTITY_TABLE_PATH } from '../../../hooks/data/data.store';
+import { EntityActionTypes, useEntityActionMenuItems } from '../Configure/constants';
+import { useTableMenuItems } from './useTableMenuItems';
+import { useTableColumns } from './useTableColumns';
+import { useDetailsOffCanvasStore } from './hooks/useDetailsOffCanvas.store';
+import { EntityDetailsView } from '../Details/DetailsView';
 
 // TODO sync table to url
 // TODO when table passes a limit then a non synced columns to show
@@ -39,25 +33,20 @@ export function EntityTable() {
     EntityActionTypes.Types,
   ]);
   const menuItems = useTableMenuItems();
-  const hiddenTableColumns = useSelectedEntityColumns(
-    "hidden_entity_table_columns"
-  );
+  const hiddenTableColumns = useSelectedEntityColumns('hidden_entity_table_columns');
 
-  const [closeDetailsCanvas, detailsCanvasEntity, detailsCanvasId] =
-    useDetailsOffCanvasStore((state) => [state.close, state.entity, state.id]);
+  const [closeDetailsCanvas, detailsCanvasEntity, detailsCanvasId] = useDetailsOffCanvasStore(
+    (state) => [state.close, state.entity, state.id],
+  );
 
   const columns = useTableColumns();
 
-  const error =
-    entityCrudSettings.error ||
-    entityScalarFields.error ||
-    hiddenTableColumns.error;
+  const error = entityCrudSettings.error || entityScalarFields.error || hiddenTableColumns.error;
 
-  const isLoading =
-    entityCrudSettings.isLoading ||
-    entityScalarFields.isLoading ||
-    entity === SLUG_LOADING_VALUE ||
-    hiddenTableColumns.isLoading;
+  const isLoading = entityCrudSettings.isLoading
+    || entityScalarFields.isLoading
+    || entity === SLUG_LOADING_VALUE
+    || hiddenTableColumns.isLoading;
 
   return (
     <AppLayout

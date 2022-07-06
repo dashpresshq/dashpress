@@ -1,10 +1,7 @@
 import mockRouter from 'next-router-mock';
 import { act, renderHook } from '@testing-library/react';
 import singletonRouter from 'next/router';
-import {
-  upsertRouterPathQueryWithValue,
-  useChangeRouterParam,
-} from '../useChangeRouterParam';
+import { upsertRouterPathQueryWithValue, useChangeRouterParam } from '../useChangeRouterParam';
 
 jest.mock('next/router', () => require('next-router-mock'));
 
@@ -24,19 +21,19 @@ describe('useChangeRouterParam', () => {
 
 describe('upsertRouterPathQueryWithValue', () => {
   it('replace router query string by path', () => {
-    expect(
-      upsertRouterPathQueryWithValue('/foo/bar?key=changeme', 'key', 'newvalue'),
-    ).toBe('/foo/bar?key=newvalue');
+    expect(upsertRouterPathQueryWithValue('/foo/bar?key=changeme', 'key', 'newvalue')).toBe(
+      '/foo/bar?key=newvalue',
+    );
   });
   it("create new query key if key doesn't exist", () => {
-    expect(
-      upsertRouterPathQueryWithValue('/foo/bar?key=value', 'newkey', 'newvalue'),
-    ).toBe('/foo/bar?key=value&newkey=newvalue');
+    expect(upsertRouterPathQueryWithValue('/foo/bar?key=value', 'newkey', 'newvalue')).toBe(
+      '/foo/bar?key=value&newkey=newvalue',
+    );
   });
   it('create query paths if not query string', () => {
-    expect(
-      upsertRouterPathQueryWithValue('/foo/bar', 'newkey', 'newvalue'),
-    ).toBe('/foo/bar?newkey=newvalue');
+    expect(upsertRouterPathQueryWithValue('/foo/bar', 'newkey', 'newvalue')).toBe(
+      '/foo/bar?newkey=newvalue',
+    );
   });
   it('keep order of keys', () => {
     expect(

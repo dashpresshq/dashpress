@@ -7,32 +7,28 @@ import {
   SoftButton,
   Spacer,
   Stack,
-} from "@gothicgeeks/design-system";
-import { Form, Field } from "react-final-form";
-import arrayMutators from "final-form-arrays";
-import { FieldArray } from "react-final-form-arrays";
-import { required, composeValidators, ButtonLang } from "@gothicgeeks/shared";
-import React, { useState } from "react";
-import styled from "styled-components";
-import { IColorableSelection } from "./types";
-import { isUseColorsFlagOn, SYSTEM_COLORS } from "./selection.utils";
+} from '@gothicgeeks/design-system';
+import { Form, Field } from 'react-final-form';
+import arrayMutators from 'final-form-arrays';
+import { FieldArray } from 'react-final-form-arrays';
+import { required, composeValidators, ButtonLang } from '@gothicgeeks/shared';
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import { IColorableSelection } from './types';
+import { isUseColorsFlagOn, SYSTEM_COLORS } from './selection.utils';
 
-export type EntityTypesForSelection =
-  | "selection"
-  | "selection-enum"
-  | "reference"
-  | "boolean";
+export type EntityTypesForSelection = 'selection' | 'selection-enum' | 'reference' | 'boolean';
 
 const StyledColorBox = styled.div<{ background: string; isActive: boolean }>`
   width: 32px;
   height: 32px;
-  ${(props) => props.isActive && "border: 2px solid black"};
+  ${(props) => props.isActive && 'border: 2px solid black'};
   background ${(props) => props.background};
   `;
 
 // Reference is a special case basically only use color
 
-const ManagableEntities = ["selection"];
+const ManagableEntities = ['selection'];
 
 interface IProps {
   field: string;
@@ -42,10 +38,7 @@ interface IProps {
 }
 
 export function FieldSelectionCanvas({
-  field,
-  onSubmit,
-  entityType,
-  selections,
+  field, onSubmit, entityType, selections,
 }: IProps) {
   const [useColors, setUseColors] = useState(isUseColorsFlagOn(selections));
   if (!field) {
@@ -72,10 +65,8 @@ export function FieldSelectionCanvas({
               (values as { selections: IColorableSelection[] }).selections.map(
                 (selection, index) => ({
                   ...selection,
-                  color: newUseColorValue
-                    ? SYSTEM_COLORS[index % SYSTEM_COLORS.length]
-                    : undefined,
-                })
+                  color: newUseColorValue ? SYSTEM_COLORS[index % SYSTEM_COLORS.length] : undefined,
+                }),
               );
             }}
           />
@@ -118,12 +109,7 @@ export function FieldSelectionCanvas({
                       validateFields={[]}
                     >
                       {({ meta, input }) => (
-                        <FormInput
-                          label="label"
-                          required
-                          input={input}
-                          meta={meta}
-                        />
+                        <FormInput label="label" required input={input} meta={meta} />
                       )}
                     </Field>
                     {useColors && (
@@ -138,9 +124,7 @@ export function FieldSelectionCanvas({
                               <StyledColorBox
                                 key={systemColor}
                                 background={systemColor}
-                                isActive={
-                                  systemColor === renderProps.input.value
-                                }
+                                isActive={systemColor === renderProps.input.value}
                               />
                             ))}
                           </Stack>
@@ -157,8 +141,8 @@ export function FieldSelectionCanvas({
                     label="Add new option"
                     onClick={() => {
                       fields.push({
-                        label: "",
-                        value: "",
+                        label: '',
+                        value: '',
                         color: useColors
                           ? SYSTEM_COLORS[fields.length % SYSTEM_COLORS.length]
                           : undefined,

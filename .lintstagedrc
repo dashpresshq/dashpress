@@ -1,6 +1,5 @@
 {
-    "{backend,frontend,pages,shared,solution-pack-ui}/**/*.{json,md,ts,tsx}": [
+    "{backend,frontend,pages,shared}/**/*.{json,md,ts,tsx}": [
         "npm run lint:fix",
-        "npm run format:fix",
     ]
 }

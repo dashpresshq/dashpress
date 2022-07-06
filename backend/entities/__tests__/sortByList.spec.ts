@@ -18,12 +18,7 @@ describe('Sort By List', () => {
   });
 
   it('should send the items not in the sortlist to the end', () => {
-    const list = [
-      { name: 'Be Last' },
-      { name: 'Foo' },
-      { name: 'Boo' },
-      { name: 'Be Last Last' },
-    ];
+    const list = [{ name: 'Be Last' }, { name: 'Foo' }, { name: 'Boo' }, { name: 'Be Last Last' }];
     sortByList(list, ['Boo', 'Foo'], 'name');
 
     expect(list).toMatchInlineSnapshot(`

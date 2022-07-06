@@ -8,5 +8,4 @@ export const validateEntityFromRequest = (input: Record<string, unknown>) => {
 };
 
 // This needs to go through some validation, uuid, integer,
-export const validateEntityIdFromRequest = (input: Record<string, unknown>) =>
-  input.id as string;
+export const validateEntityIdFromRequest = (input: Record<string, unknown>) => input.id as string;

@@ -1,13 +1,9 @@
 import {
-  FormButton,
-  Text,
-  RenderList,
-  SectionListItem,
-  Spacer,
-} from "@gothicgeeks/design-system";
-import React, { useEffect, useState } from "react";
-import { useStringSelections } from "../../../lib/selection";
-import { ILabelValue } from "../../../../types";
+  FormButton, Text, RenderList, SectionListItem, Spacer,
+} from '@gothicgeeks/design-system';
+import React, { useEffect, useState } from 'react';
+import { useStringSelections } from '../../../lib/selection';
+import { ILabelValue } from '../../../../types';
 
 interface IProps {
   isLoading: boolean;
@@ -26,8 +22,7 @@ export function EntitiesSelection({
   onSubmit,
   hiddenList,
 }: IProps) {
-  const { toggleSelection, currentPageSelection, selectMutiple } =
-    useStringSelections();
+  const { toggleSelection, currentPageSelection, selectMutiple } = useStringSelections();
 
   const [touched, setTouched] = useState(false);
 
@@ -75,7 +70,7 @@ export function EntitiesSelection({
                   actionButtons={[
                     {
                       isInverse: isHidden,
-                      text: isHidden ? "Show" : "Hide",
+                      text: isHidden ? 'Show' : 'Hide',
                       onClick: () => {
                         setTouched(true);
                         toggleSelection(menuItem.name);

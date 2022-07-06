@@ -1,28 +1,25 @@
-import { filterScalarEntity } from "shared/entity.logic";
-import { BadRequestError } from "../lib/errors";
-import { SchemasService, schemasService } from "../schema/schema.service";
-import { IJsonSchemaModel } from "../schema/schema.types";
-import { IEntityField } from "./types";
+import { filterScalarEntity } from 'shared/entity.logic';
+import { BadRequestError } from '../lib/errors';
+import { SchemasService, schemasService } from '../schema/schema.service';
+import { IJsonSchemaModel } from '../schema/schema.types';
+import { IEntityField } from './types';
 
 export class EntitiesService {
   constructor(private _schemasService: SchemasService) {}
 
-  private getJsonSchemaModels = (): Record<string, IJsonSchemaModel> =>
-    Object.fromEntries(
-      this._schemasService
-        .listJsonSchemaModels()
-        .map((model) => [model.name, model])
-    );
+  private getJsonSchemaModels = (): Record<string, IJsonSchemaModel> => Object.fromEntries(
+    this._schemasService.listJsonSchemaModels().map((model) => [model.name, model]),
+  );
 
-  getEntityFields = (entity: string): IEntityField[] =>
-    this.getEntityFromSchema(entity).fields;
+  getEntityFields = (entity: string): IEntityField[] => this.getEntityFromSchema(entity).fields;
 
-  getScalarEntityFields = (entity: string): IEntityField[] =>
-    this.getEntityFromSchema(entity).fields.filter(filterScalarEntity);
+  getScalarEntityFields = (
+    entity: string,
+  ): IEntityField[] => this.getEntityFromSchema(entity).fields.filter(filterScalarEntity);
 
   getEntityPrimaryField(entity: string): string {
     // TODO throw error is no iD field
-    return this.getEntityFields(entity).find(({ isId }) => isId)?.name || "id";
+    return this.getEntityFields(entity).find(({ isId }) => isId)?.name || 'id';
   }
 
   validateEntityField(entity: string, field: unknown) {
@@ -38,14 +35,12 @@ export class EntitiesService {
     });
   }
 
-  getEntityFromSchema = (entity: string): IJsonSchemaModel =>
-    this.getJsonSchemaModels()[entity];
+  getEntityFromSchema = (entity: string): IJsonSchemaModel => this.getJsonSchemaModels()[entity];
 
-  getAllEntities = () =>
-    this._schemasService.listJsonSchemaModels().map(({ name }) => ({
-      value: name,
-      label: name,
-    }));
+  getAllEntities = () => this._schemasService.listJsonSchemaModels().map(({ name }) => ({
+    value: name,
+    label: name,
+  }));
 }
 
 export const entitiesService = new EntitiesService(schemasService);

@@ -5,10 +5,10 @@ import {
   SectionListItem,
   Stack,
   Spacer,
-} from "@gothicgeeks/design-system";
-import { useEffect, useState } from "react";
-import { IEntityField } from "../../../../../backend/entities/types";
-import { useStringSelections } from "../../../../lib/selection";
+} from '@gothicgeeks/design-system';
+import { useEffect, useState } from 'react';
+import { IEntityField } from '../../../../../backend/entities/types';
+import { useStringSelections } from '../../../../lib/selection';
 
 interface IProps {
   entityFields: IEntityField[];
@@ -33,8 +33,7 @@ export function SelectionTab({
   onSubmit,
   hiddenColumns,
 }: IProps) {
-  const { toggleSelection, currentPageSelection, selectMutiple } =
-    useStringSelections();
+  const { toggleSelection, currentPageSelection, selectMutiple } = useStringSelections();
 
   const [touched, setTouched] = useState(false);
 
@@ -49,7 +48,7 @@ export function SelectionTab({
   return (
     <>
       <Stack justify="space-between">
-        <div style={{ width: "100%" }}>
+        <div style={{ width: '100%' }}>
           <Text size="5">{description}</Text>
         </div>
         <FormButton
@@ -77,16 +76,16 @@ export function SelectionTab({
                   actionButtons={
                     enabled
                       ? [
-                          {
-                            isInverse: isHidden,
-                            text: isHidden ? "Show" : "Hide",
-                            onClick: () => {
-                              setTouched(true);
-                              toggleSelection(menuItem.name);
-                            },
-                            isMakingRequest: false,
+                        {
+                          isInverse: isHidden,
+                          text: isHidden ? 'Show' : 'Hide',
+                          onClick: () => {
+                            setTouched(true);
+                            toggleSelection(menuItem.name);
                           },
-                        ]
+                          isMakingRequest: false,
+                        },
+                      ]
                       : []
                   }
                   toNoWhere

@@ -1,13 +1,13 @@
-import { FormButton } from "@gothicgeeks/design-system";
-import { ButtonLang } from "@gothicgeeks/shared";
-import { Form, Field } from "react-final-form";
+import { FormButton } from '@gothicgeeks/design-system';
+import { ButtonLang } from '@gothicgeeks/shared';
+import { Form, Field } from 'react-final-form';
 import {
   RenderFormInput,
   IBaseEntityForm,
   IEntityFormSettings,
   runValidationError,
   isFieldRequired,
-} from "../_RenderFormInput";
+} from '../_RenderFormInput';
 
 type IProps = IBaseEntityForm & {
   initialValues?: Record<string, unknown>;
@@ -26,11 +26,7 @@ export function UpdateEntityForm({
     <Form
       // TODO Send only changed fields
       onSubmit={onSubmit}
-      validate={runValidationError(
-        fields,
-        entityValidationsMap,
-        getEntityFieldLabels
-      )}
+      validate={runValidationError(fields, entityValidationsMap, getEntityFieldLabels)}
       initialValues={initialValues}
       render={({ handleSubmit, submitting, pristine }) => (
         <form noValidate onSubmit={handleSubmit}>
@@ -47,11 +43,7 @@ export function UpdateEntityForm({
               )}
             </Field>
           ))}
-          <FormButton
-            text={ButtonLang.update}
-            isMakingRequest={submitting}
-            disabled={pristine}
-          />
+          <FormButton text={ButtonLang.update} isMakingRequest={submitting} disabled={pristine} />
         </form>
       )}
     />

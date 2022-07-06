@@ -3,15 +3,12 @@ import {
   FormInput,
   FormSkeleton,
   FormSkeletonSchema,
-} from "@gothicgeeks/design-system";
-import { Form, Field } from "react-final-form";
+} from '@gothicgeeks/design-system';
+import { Form, Field } from 'react-final-form';
 import {
-  ButtonLang,
-  composeValidators,
-  maxLength,
-  minLength,
-} from "@gothicgeeks/shared";
-import { IEntityField } from "../../../../../backend/entities/types";
+  ButtonLang, composeValidators, maxLength, minLength,
+} from '@gothicgeeks/shared';
+import { IEntityField } from '../../../../../backend/entities/types';
 
 interface IProps {
   fields: IEntityField[];
@@ -21,10 +18,7 @@ interface IProps {
 }
 
 export function FieldsLabelForm({
-  isLoading,
-  onSubmit,
-  initialValues,
-  fields,
+  isLoading, onSubmit, initialValues, fields,
 }: IProps) {
   if (isLoading) {
     return (
@@ -51,9 +45,7 @@ export function FieldsLabelForm({
               validate={composeValidators(minLength(2), maxLength(64))}
               validateFields={[]}
             >
-              {({ input, meta }) => (
-                <FormInput label={name} input={input} meta={meta} />
-              )}
+              {({ input, meta }) => <FormInput label={name} input={input} meta={meta} />}
             </Field>
           ))}
           <FormButton text={ButtonLang.upsert} isMakingRequest={submitting} />

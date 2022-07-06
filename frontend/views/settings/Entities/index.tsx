@@ -1,8 +1,5 @@
 import {
-  ErrorAlert,
-  SectionBox,
-  SortList,
-  Tabs,
+  ErrorAlert, SectionBox, SortList, Tabs,
 } from '@gothicgeeks/design-system';
 import { useRouteParam } from '@gothicgeeks/shared';
 import { useChangeRouterParam } from 'frontend/lib/routing/useChangeRouterParam';
@@ -25,9 +22,7 @@ export function EntitiesSettings() {
   const tabFromUrl = useRouteParam('tab');
   const changeTabParam = useChangeRouterParam('tab');
 
-  const entitiesToHide = useAppConfiguration<string[]>(
-    'entities_to_hide_from_menu',
-  );
+  const entitiesToHide = useAppConfiguration<string[]>('entities_to_hide_from_menu');
   const entitiesMenuItems = useEntitiesMenuItems();
 
   const upsertHideFromMenuMutation = useUpsertConfigurationMutation(
@@ -36,16 +31,11 @@ export function EntitiesSettings() {
     { otherEndpoints: [ENTITIES_MENU_ENDPOINT] },
   );
 
-  const upsertEntitiesOrderMutation = useUpsertConfigurationMutation(
-    'entities_order',
-    '',
-    { otherEndpoints: [ENTITIES_MENU_ENDPOINT] },
-  );
+  const upsertEntitiesOrderMutation = useUpsertConfigurationMutation('entities_order', '', {
+    otherEndpoints: [ENTITIES_MENU_ENDPOINT],
+  });
 
-  const entitiesDictionPlurals = useEntityDictionPlurals(
-    entitiesList.data || [],
-    'value',
-  );
+  const entitiesDictionPlurals = useEntityDictionPlurals(entitiesList.data || [], 'value');
 
   return (
     <BaseSettingsLayout

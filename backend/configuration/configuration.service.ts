@@ -13,8 +13,7 @@ export class ConfigurationService {
     if (!this._config) {
       try {
         // TODO allow external config like redis/ db, etc
-        this._config = (await fs.readJson(pathToConfigFile, { throws: false }))
-          || DEFAULT_CONFIG;
+        this._config = (await fs.readJson(pathToConfigFile, { throws: false })) || DEFAULT_CONFIG;
       } catch (error) {
         this._config = DEFAULT_CONFIG;
       }
@@ -26,10 +25,7 @@ export class ConfigurationService {
     await fs.writeJson(pathToConfigFile, config, { spaces: 2 });
   }
 
-  async show<T>(
-    key: keyof typeof CONFIGURATION_KEYS,
-    entity?: string,
-  ): Promise<T> {
+  async show<T>(key: keyof typeof CONFIGURATION_KEYS, entity?: string): Promise<T> {
     const config = await ConfigurationService.getConfig();
     const { requireEntity, defaultValue } = CONFIGURATION_KEYS[key];
     if (requireEntity && !entity) {

@@ -5,14 +5,16 @@ import {
   Spacer,
   Stack,
   Text,
-} from "@gothicgeeks/design-system";
-import { IValueLabel } from "@gothicgeeks/design-system/dist/types";
-import React, { ReactNode } from "react";
-import { Icon, Settings, Home, Table, BarChart } from "react-feather";
-import Head from "next/head";
-import { useEntitiesMenuItems } from "../../hooks/entity/entity.store";
-import { useSiteConfig } from "../../hooks/app/site.config";
-import { NAVIGATION_LINKS } from "../../lib/routing/links";
+} from '@gothicgeeks/design-system';
+import { IValueLabel } from '@gothicgeeks/design-system/dist/types';
+import React, { ReactNode } from 'react';
+import {
+  Icon, Settings, Home, Table, BarChart,
+} from 'react-feather';
+import Head from 'next/head';
+import { useEntitiesMenuItems } from '../../hooks/entity/entity.store';
+import { useSiteConfig } from '../../hooks/app/site.config';
+import { NAVIGATION_LINKS } from '../../lib/routing/links';
 
 interface IProps {
   children: ReactNode;
@@ -26,32 +28,27 @@ interface IProps {
 }
 
 export function AppLayout({
-  children,
-  breadcrumbs,
-  titleNeedsContext,
-  actionItems = [],
+  children, breadcrumbs, titleNeedsContext, actionItems = [],
 }: IProps) {
   const entitiesMenuItems = useEntitiesMenuItems();
 
   const siteConfig = useSiteConfig();
 
-  const homedBreadcrumb = [{ label: "Home", value: "/" }, ...breadcrumbs];
+  const homedBreadcrumb = [{ label: 'Home', value: '/' }, ...breadcrumbs];
 
-  const title =
-    (titleNeedsContext
-      ? `${homedBreadcrumb[homedBreadcrumb.length - 2]?.label} - `
-      : "") + (homedBreadcrumb[homedBreadcrumb.length - 1]?.label || "");
+  const title = (titleNeedsContext ? `${homedBreadcrumb[homedBreadcrumb.length - 2]?.label} - ` : '')
+    + (homedBreadcrumb[homedBreadcrumb.length - 1]?.label || '');
   return (
     <DynamicLayout
       selectionView={[
         {
-          title: "Home",
+          title: 'Home',
           icon: Home,
           link: NAVIGATION_LINKS.DASHBOARD,
         },
         {
-          title: "Tables",
-          description: "Your models",
+          title: 'Tables',
+          description: 'Your models',
           icon: Table,
           viewMenuItems: {
             ...entitiesMenuItems,
@@ -62,13 +59,13 @@ export function AppLayout({
           },
         },
         {
-          title: "Dashboards",
-          description: "Your models",
+          title: 'Dashboards',
+          description: 'Your models',
           icon: BarChart,
           view: <>Demo View</>,
         },
         {
-          title: "Settings",
+          title: 'Settings',
           icon: Settings,
           link: NAVIGATION_LINKS.SETTINGS.DEFAULT,
         },
@@ -76,7 +73,10 @@ export function AppLayout({
     >
       <Head>
         <title>
-          {title} -{siteConfig.name}
+          {title}
+          {' '}
+          -
+          {siteConfig.name}
         </title>
       </Head>
       <Stack justify="space-between" align="center">

@@ -1,8 +1,5 @@
 import {
-  SectionLeft,
-  SectionRight,
-  SectionRow,
-  MenuSection,
+  SectionLeft, SectionRight, SectionRow, MenuSection,
 } from '@gothicgeeks/design-system';
 import { ReactNode } from 'react';
 import { NAVIGATION_LINKS } from '../../lib/routing/links';
@@ -15,10 +12,7 @@ interface IProps {
 
 export function BaseSettingsLayout({ children, menuItem }: IProps) {
   return (
-    <AppLayout
-      titleNeedsContext
-      breadcrumbs={[{ label: menuItem.name, value: menuItem.link }]}
-    >
+    <AppLayout titleNeedsContext breadcrumbs={[{ label: menuItem.name, value: menuItem.link }]}>
       <SectionRow>
         <SectionLeft>
           <MenuSection

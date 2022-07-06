@@ -1,17 +1,10 @@
-import { SectionBox, SectionCenter } from "@gothicgeeks/design-system";
-import { TitleLang } from "@gothicgeeks/shared";
-import { AppLayout } from "../../../_layouts/app";
-import { NAVIGATION_LINKS } from "../../../lib/routing/links";
-import {
-  useEntityDiction,
-  useEntityId,
-  useEntitySlug,
-} from "../../../hooks/entity/entity.config";
-import {
-  EntityActionTypes,
-  useEntityActionMenuItems,
-} from "../Configure/constants";
-import { EntityDetailsView } from "./DetailsView";
+import { SectionBox, SectionCenter } from '@gothicgeeks/design-system';
+import { TitleLang } from '@gothicgeeks/shared';
+import { AppLayout } from '../../../_layouts/app';
+import { NAVIGATION_LINKS } from '../../../lib/routing/links';
+import { useEntityDiction, useEntityId, useEntitySlug } from '../../../hooks/entity/entity.config';
+import { EntityActionTypes, useEntityActionMenuItems } from '../Configure/constants';
+import { EntityDetailsView } from './DetailsView';
 
 export function EntityDetails() {
   const entityDiction = useEntityDiction();
@@ -32,7 +25,7 @@ export function EntityDetails() {
           value: NAVIGATION_LINKS.ENTITY.TABLE(entity),
         },
         {
-          label: "Details",
+          label: 'Details',
           value: NAVIGATION_LINKS.ENTITY.DETAILS(entity, id),
         },
       ]}

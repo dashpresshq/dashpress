@@ -5,14 +5,14 @@ import {
   Spacer,
   Stack,
   Text,
-} from "@gothicgeeks/design-system";
-import styled from "styled-components";
-import * as StyledGrid from "styled-bootstrap-grid";
-import { useRouter } from "next/router";
-import { HardDrive } from "react-feather";
-import { useEntitiesMenuItems } from "../hooks/entity/entity.store";
-import { AppLayout } from "../_layouts/app";
-import { NAVIGATION_LINKS } from "../lib/routing/links";
+} from '@gothicgeeks/design-system';
+import styled from 'styled-components';
+import * as StyledGrid from 'styled-bootstrap-grid';
+import { useRouter } from 'next/router';
+import { HardDrive } from 'react-feather';
+import { useEntitiesMenuItems } from '../hooks/entity/entity.store';
+import { AppLayout } from '../_layouts/app';
+import { NAVIGATION_LINKS } from '../lib/routing/links';
 
 const StyledBox = styled.div`
   padding: 24px;
@@ -36,7 +36,7 @@ export function Dashboard() {
       breadcrumbs={[]}
       actionItems={[
         {
-          label: "Manage Entities",
+          label: 'Manage Entities',
           IconComponent: HardDrive,
           onClick: () => {
             router.push(NAVIGATION_LINKS.SETTINGS.ENTITIES);
@@ -45,9 +45,7 @@ export function Dashboard() {
       ]}
     >
       {entitiesMenuItems.isLoading && <ComponentIsLoading />}
-      {entitiesMenuItems.error && (
-        <ErrorAlert message={entitiesMenuItems.error} />
-      )}
+      {entitiesMenuItems.error && <ErrorAlert message={entitiesMenuItems.error} />}
       {entitiesMenuItems.isLoading && !entitiesMenuItems.error && (
         <StyledGrid.Row>
           {entitiesMenuItems.data.map((field) => (

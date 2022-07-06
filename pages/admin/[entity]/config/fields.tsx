@@ -1,1 +1,3 @@
-export { EntityFieldsSettings as default } from '../../../../frontend/views/entity/Configure/Fields';
+import { EntityFieldsSettings } from "../../../../frontend/views/entity/Configure/Fields";
+
+export default EntityFieldsSettings;

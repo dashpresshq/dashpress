@@ -29,5 +29,13 @@ module.exports = {
     'no-useless-constructor': 'off',
     'react/react-in-jsx-scope': 'off',
     'import/prefer-default-export': 'off',
+    'no-return-await': 'off',
+    'global-require': 'off',
+    'class-methods-use-this': 'off',
+    'react/require-default-props': 'off',
+    'react/jsx-filename-extension': [2, { extensions: ['.tsx'] }],
+    'no-unused-vars': 'off',
+    'no-empty-function': 'off',
+    '@typescript-eslint/no-unused-vars': ['error'],
   },
 };

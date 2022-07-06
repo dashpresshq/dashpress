@@ -1,11 +1,13 @@
-import { useEntityDataReference } from 'frontend/hooks/data/data.store';
-import { StyledLinkLikeButton } from '@gothicgeeks/design-system';
-import { useDetailsOffCanvasStore } from './hooks/useDetailsOffCanvas.store';
+import { useEntityDataReference } from "frontend/hooks/data/data.store";
+import { StyledLinkLikeButton } from "@gothicgeeks/design-system";
+import { useDetailsOffCanvasStore } from "./hooks/useDetailsOffCanvas.store";
 
-export const ReferenceComponent: React.FC<{ entity: string; id: string }> = ({
-  entity,
-  id,
-}) => {
+interface IProps {
+  entity: string;
+  id: string;
+}
+
+export function ReferenceComponent({ entity, id }: IProps) {
   const openDetailsCanvas = useDetailsOffCanvasStore((state) => state.open);
 
   const entityDataReference = useEntityDataReference(entity, id);
@@ -15,18 +17,12 @@ export const ReferenceComponent: React.FC<{ entity: string; id: string }> = ({
   }
 
   if (entityDataReference.error) {
-    return <>{id}</>;
+    return <span>{id}</span>;
   }
 
   return (
-    <TextButton
-      onClick={() => openDetailsCanvas({ entity, id })}
-      text={entityDataReference.data || id}
-    />
+    <StyledLinkLikeButton onClick={() => openDetailsCanvas({ entity, id })}>
+      {entityDataReference.data || id}
+    </StyledLinkLikeButton>
   );
-};
-
-const TextButton: React.FC<{ onClick: () => void; text: string }> = ({
-  onClick,
-  text,
-}) => <StyledLinkLikeButton onClick={onClick}>{text}</StyledLinkLikeButton>;
+}

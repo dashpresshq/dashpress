@@ -1,1 +1,3 @@
-export { EntitiesSettings as default } from '../../../frontend/views/settings/Entities';
+import { EntitiesSettings } from "../../../frontend/views/settings/Entities";
+
+export default EntitiesSettings;

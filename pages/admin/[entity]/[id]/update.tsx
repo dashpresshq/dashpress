@@ -1,1 +1,3 @@
-export { EntityUpdate as default } from '../../../../frontend/views/entity/Update';
+import { EntityUpdate } from "../../../../frontend/views/entity/Update";
+
+export default EntityUpdate;

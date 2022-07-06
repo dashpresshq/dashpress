@@ -3,24 +3,29 @@ import {
   FormInput,
   FormSkeleton,
   FormSkeletonSchema,
-} from '@gothicgeeks/design-system';
-import { Form, Field } from 'react-final-form';
+} from "@gothicgeeks/design-system";
+import { Form, Field } from "react-final-form";
 import {
   ButtonLang,
   composeValidators,
   maxLength,
   minLength,
-} from '@gothicgeeks/shared';
-import { IEntityField } from '../../../../../backend/entities/types';
+} from "@gothicgeeks/shared";
+import { IEntityField } from "../../../../../backend/entities/types";
 
-export const FieldsLabelForm: React.FC<{
+interface IProps {
   fields: IEntityField[];
   initialValues?: Record<string, unknown>;
   onSubmit: (data: Record<string, unknown>) => void;
   isLoading: boolean;
-}> = ({
-  isLoading, onSubmit, initialValues, fields,
-}) => {
+}
+
+export function FieldsLabelForm({
+  isLoading,
+  onSubmit,
+  initialValues,
+  fields,
+}: IProps) {
   if (isLoading) {
     return (
       <FormSkeleton
@@ -46,7 +51,9 @@ export const FieldsLabelForm: React.FC<{
               validate={composeValidators(minLength(2), maxLength(64))}
               validateFields={[]}
             >
-              {(renderProps) => <FormInput label={name} {...renderProps} />}
+              {({ input, meta }) => (
+                <FormInput label={name} input={input} meta={meta} />
+              )}
             </Field>
           ))}
           <FormButton text={ButtonLang.upsert} isMakingRequest={submitting} />
@@ -54,4 +61,4 @@ export const FieldsLabelForm: React.FC<{
       )}
     />
   );
-};
+}

@@ -4,10 +4,10 @@ import {
   SectionBox,
   SectionCenter,
   FormSkeletonSchema,
-} from '@gothicgeeks/design-system';
-import { TitleLang } from '@gothicgeeks/shared';
-import { AppLayout } from '../../../_layouts/app';
-import { NAVIGATION_LINKS } from '../../../lib/routing/links';
+} from "@gothicgeeks/design-system";
+import { TitleLang } from "@gothicgeeks/shared";
+import { AppLayout } from "../../../_layouts/app";
+import { NAVIGATION_LINKS } from "../../../lib/routing/links";
 import {
   useEntityDiction,
   useEntityFieldLabels,
@@ -17,19 +17,19 @@ import {
   useEntityId,
   useEntitySlug,
   useSelectedEntityColumns,
-} from '../../../hooks/entity/entity.config';
-import { useEntityScalarFields } from '../../../hooks/entity/entity.store';
+} from "../../../hooks/entity/entity.config";
+import { useEntityScalarFields } from "../../../hooks/entity/entity.store";
 import {
   useEntityDataDetails,
   useEntityDataUpdationMutation,
-} from '../../../hooks/data/data.store';
+} from "../../../hooks/data/data.store";
 import {
   EntityActionTypes,
   useEntityActionMenuItems,
-} from '../Configure/constants';
-import { useEntityConfiguration } from '../../../hooks/configuration/configration.store';
-import { UpdateEntityForm } from './UpdateEntity.form';
-import { fitlerOutHiddenScalarColumns } from '../utils';
+} from "../Configure/constants";
+import { useEntityConfiguration } from "../../../hooks/configuration/configration.store";
+import { UpdateEntityForm } from "./UpdateEntity.form";
+import { fitlerOutHiddenScalarColumns } from "../utils";
 
 // TODO bounce if .update is not enabled
 export function EntityUpdate() {
@@ -44,8 +44,8 @@ export function EntityUpdate() {
     EntityActionTypes.Types,
   ]);
   const entityFieldTypesMap = useEntityConfiguration<Record<string, string>>(
-    'entity_columns_types',
-    entity,
+    "entity_columns_types",
+    entity
   );
   const entityValidationsMap = useEntityFieldValidations();
 
@@ -54,14 +54,21 @@ export function EntityUpdate() {
   const entityFieldSelections = useEntityFieldSelections();
 
   const hiddenUpdateColumns = useSelectedEntityColumns(
-    'hidden_entity_update_columns',
+    "hidden_entity_update_columns"
   );
   const getEntityFieldLabels = useEntityFieldLabels();
 
-  const error = dataDetails.error
-    || hiddenUpdateColumns.error
-    || entityFieldTypesMap.error
-    || entityScalarFields.error;
+  const error =
+    dataDetails.error ||
+    hiddenUpdateColumns.error ||
+    entityFieldTypesMap.error ||
+    entityScalarFields.error;
+
+  const isLoading =
+    dataDetails.isLoading ||
+    entityFieldTypesMap.isLoading ||
+    hiddenUpdateColumns.isLoading ||
+    entityScalarFields.isLoading;
 
   return (
     <AppLayout
@@ -75,7 +82,7 @@ export function EntityUpdate() {
           label: entityDiction.singular,
           value: NAVIGATION_LINKS.ENTITY.DETAILS(entity, id),
         },
-        { label: 'Update', value: NAVIGATION_LINKS.ENTITY.UPDATE(entity, id) },
+        { label: "Update", value: NAVIGATION_LINKS.ENTITY.UPDATE(entity, id) },
       ]}
       actionItems={actionItems}
     >
@@ -87,42 +94,31 @@ export function EntityUpdate() {
             label: entityDiction.singular,
           }}
         >
-          {dataDetails.isLoading
-          || entityFieldTypesMap.isLoading
-          || hiddenUpdateColumns.isLoading
-          || entityScalarFields.isLoading
-            ? (
-              <FormSkeleton
-                schema={[
-                  FormSkeletonSchema.Input,
-                  FormSkeletonSchema.Input,
-                  FormSkeletonSchema.Input,
-                  FormSkeletonSchema.Textarea,
-                ]}
-              />
-            )
-            : (
-              <>
-                {error
-                  ? (
-                    <ErrorAlert message={error} />
-                  )
-                  : (
-                    <UpdateEntityForm
-                      getEntityFieldLabels={getEntityFieldLabels}
-                      entityFieldTypes={entityFieldTypes}
-                      entityFieldSelections={entityFieldSelections}
-                      entityValidationsMap={entityValidationsMap}
-                      onSubmit={entityDataUpdationMutation.mutateAsync}
-                      fields={fitlerOutHiddenScalarColumns(
-                        entityScalarFields,
-                        hiddenUpdateColumns,
-                      ).map(({ name }) => name)}
-                      initialValues={dataDetails.data}
-                    />
-                  )}
-              </>
-            )}
+          {isLoading && (
+            <FormSkeleton
+              schema={[
+                FormSkeletonSchema.Input,
+                FormSkeletonSchema.Input,
+                FormSkeletonSchema.Input,
+                FormSkeletonSchema.Textarea,
+              ]}
+            />
+          )}
+          {error && <ErrorAlert message={error} />}
+          {!isLoading && !error && (
+            <UpdateEntityForm
+              getEntityFieldLabels={getEntityFieldLabels}
+              entityFieldTypes={entityFieldTypes}
+              entityFieldSelections={entityFieldSelections}
+              entityValidationsMap={entityValidationsMap}
+              onSubmit={entityDataUpdationMutation.mutateAsync}
+              fields={fitlerOutHiddenScalarColumns(
+                entityScalarFields,
+                hiddenUpdateColumns
+              ).map(({ name }) => name)}
+              initialValues={dataDetails.data}
+            />
+          )}
         </SectionBox>
       </SectionCenter>
     </AppLayout>

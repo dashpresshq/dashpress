@@ -1,10 +1,4 @@
-import { IEntityField } from '../entities/types';
-
-export interface IJsonSchema {
-  enums: IJsonSchemaEnum[];
-  models: IJsonSchemaModel[];
-  types: never[];
-}
+import { IEntityField } from "../entities/types";
 
 export interface IJsonSchemaEnum {
   name: string;
@@ -19,4 +13,10 @@ export interface IJsonSchemaModel {
   name: string;
   dbName: string[];
   fields: IEntityField[];
+}
+
+export interface IJsonSchema {
+  enums: IJsonSchemaEnum[];
+  models: IJsonSchemaModel[];
+  types: never[];
 }

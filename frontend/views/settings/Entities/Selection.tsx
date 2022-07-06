@@ -4,10 +4,10 @@ import {
   RenderList,
   SectionListItem,
   Spacer,
-} from '@gothicgeeks/design-system';
-import React, { useEffect, useState } from 'react';
-import { useStringSelections } from '../../../lib/selection';
-import { ILabelValue } from '../../../../types';
+} from "@gothicgeeks/design-system";
+import React, { useEffect, useState } from "react";
+import { useStringSelections } from "../../../lib/selection";
+import { ILabelValue } from "../../../../types";
 
 interface IProps {
   isLoading: boolean;
@@ -18,15 +18,16 @@ interface IProps {
   description: string;
 }
 
-export const EntitiesSelection: React.FC<IProps> = ({
+export function EntitiesSelection({
   isLoading,
   getEntityFieldLabels,
   description,
   allList,
   onSubmit,
   hiddenList,
-}) => {
-  const { toggleSelection, currentPageSelection, selectMutiple } = useStringSelections();
+}: IProps) {
+  const { toggleSelection, currentPageSelection, selectMutiple } =
+    useStringSelections();
 
   const [touched, setTouched] = useState(false);
 
@@ -34,7 +35,6 @@ export const EntitiesSelection: React.FC<IProps> = ({
 
   useEffect(() => {
     selectMutiple(hiddenList);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [hiddenList]);
 
   const formButton = (
@@ -75,7 +75,7 @@ export const EntitiesSelection: React.FC<IProps> = ({
                   actionButtons={[
                     {
                       isInverse: isHidden,
-                      text: isHidden ? 'Show' : 'Hide',
+                      text: isHidden ? "Show" : "Hide",
                       onClick: () => {
                         setTouched(true);
                         toggleSelection(menuItem.name);
@@ -93,4 +93,4 @@ export const EntitiesSelection: React.FC<IProps> = ({
       )}
     </>
   );
-};
+}

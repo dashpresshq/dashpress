@@ -5,72 +5,14 @@ import {
   Spacer,
   Stack,
   Text,
-} from '@gothicgeeks/design-system';
-import styled from 'styled-components';
-import * as StyledGrid from 'styled-bootstrap-grid';
-import { useRouter } from 'next/router';
-import { HardDrive } from 'react-feather';
-import { useEntitiesMenuItems } from '../hooks/entity/entity.store';
-import { AppLayout } from '../_layouts/app';
-import { NAVIGATION_LINKS } from '../lib/routing/links';
-
-export function Dashboard() {
-  const entitiesMenuItems = useEntitiesMenuItems();
-  const router = useRouter();
-
-  return (
-    <AppLayout
-      breadcrumbs={[]}
-      actionItems={[
-        {
-          label: 'Manage Entities',
-          IconComponent: HardDrive,
-          onClick: () => {
-            router.push(NAVIGATION_LINKS.SETTINGS.ENTITIES);
-          },
-        },
-      ]}
-    >
-      {entitiesMenuItems.isLoading
-        ? (
-          <ComponentIsLoading />
-        )
-        : (
-          <>
-            {entitiesMenuItems.error
-              ? (
-                <ErrorAlert message={entitiesMenuItems.error} />
-              )
-              : (
-                <StyledGrid.Row>
-                  {entitiesMenuItems.data.map((field) => (
-                    <StyledGrid.Col lg={4} md={6} sm={12} key={field.value}>
-                      <StyledCard>
-                        <StyledBox>
-                          <Stack justify="space-between">
-                            <Text size="4">{field.label}</Text>
-                            <SoftButton
-                              to={NAVIGATION_LINKS.ENTITY.TABLE(field.value)}
-                              label="View Data"
-                              icon="eye"
-                            />
-                          </Stack>
-                          <Spacer size="xs" />
-                          <Text size="3" weight="bold">
-                            49
-                          </Text>
-                        </StyledBox>
-                      </StyledCard>
-                      <Spacer size="xl" />
-                    </StyledGrid.Col>
-                  ))}
-                </StyledGrid.Row>
-              )}
-          </>
-        )}
-    </AppLayout>
-  );
-}
+} from "@gothicgeeks/design-system";
+import styled from "styled-components";
+import * as StyledGrid from "styled-bootstrap-grid";
+import { useRouter } from "next/router";
+import { HardDrive } from "react-feather";
+import { useEntitiesMenuItems } from "../hooks/entity/entity.store";
+import { AppLayout } from "../_layouts/app";
+import { NAVIGATION_LINKS } from "../lib/routing/links";
 
 const StyledBox = styled.div`
   padding: 24px;
@@ -84,3 +26,53 @@ const StyledCard = styled.div`
   box-shadow: 0 1px 1px rgb(0 0 0 / 10%);
   border-radius: 0.25rem;
 `;
+
+export function Dashboard() {
+  const entitiesMenuItems = useEntitiesMenuItems();
+  const router = useRouter();
+
+  return (
+    <AppLayout
+      breadcrumbs={[]}
+      actionItems={[
+        {
+          label: "Manage Entities",
+          IconComponent: HardDrive,
+          onClick: () => {
+            router.push(NAVIGATION_LINKS.SETTINGS.ENTITIES);
+          },
+        },
+      ]}
+    >
+      {entitiesMenuItems.isLoading && <ComponentIsLoading />}
+      {entitiesMenuItems.error && (
+        <ErrorAlert message={entitiesMenuItems.error} />
+      )}
+      {entitiesMenuItems.isLoading && !entitiesMenuItems.error && (
+        <StyledGrid.Row>
+          {entitiesMenuItems.data.map((field) => (
+            <StyledGrid.Col lg={4} md={6} sm={12} key={field.value}>
+              <StyledCard>
+                <StyledBox>
+                  <Stack justify="space-between">
+                    <Text size="4">{field.label}</Text>
+                    <SoftButton
+                      to={NAVIGATION_LINKS.ENTITY.TABLE(field.value)}
+                      label="View Data"
+                      icon="eye"
+                    />
+                  </Stack>
+                  <Spacer size="xs" />
+                  <Text size="3" weight="bold">
+                    49
+                  </Text>
+                </StyledBox>
+              </StyledCard>
+              <Spacer size="xl" />
+            </StyledGrid.Col>
+          ))}
+        </StyledGrid.Row>
+      )}
+    </AppLayout>
+  );
+}

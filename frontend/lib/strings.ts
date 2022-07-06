@@ -1,3 +1,3 @@
-import { capitalCase } from 'capital-case';
+import { capitalCase } from "change-case";
 
 export const userFriendlyCase = capitalCase;

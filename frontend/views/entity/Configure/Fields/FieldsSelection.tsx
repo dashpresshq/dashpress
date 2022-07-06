@@ -7,25 +7,32 @@ import {
   SoftButton,
   Spacer,
   Stack,
-} from '@gothicgeeks/design-system';
-import { Form, Field } from 'react-final-form';
-import arrayMutators from 'final-form-arrays';
-import { FieldArray } from 'react-final-form-arrays';
-import { required, composeValidators, ButtonLang } from '@gothicgeeks/shared';
-import React, { useState } from 'react';
-import styled from 'styled-components';
-import { IColorableSelection } from './types';
-import { isUseColorsFlagOn, SYSTEM_COLORS } from './selection.utils';
+} from "@gothicgeeks/design-system";
+import { Form, Field } from "react-final-form";
+import arrayMutators from "final-form-arrays";
+import { FieldArray } from "react-final-form-arrays";
+import { required, composeValidators, ButtonLang } from "@gothicgeeks/shared";
+import React, { useState } from "react";
+import styled from "styled-components";
+import { IColorableSelection } from "./types";
+import { isUseColorsFlagOn, SYSTEM_COLORS } from "./selection.utils";
 
 export type EntityTypesForSelection =
-  | 'selection'
-  | 'selection-enum'
-  | 'reference'
-  | 'boolean';
+  | "selection"
+  | "selection-enum"
+  | "reference"
+  | "boolean";
+
+const StyledColorBox = styled.div<{ background: string; isActive: boolean }>`
+  width: 32px;
+  height: 32px;
+  ${(props) => props.isActive && "border: 2px solid black"};
+  background ${(props) => props.background};
+  `;
 
 // Reference is a special case basically only use color
 
-const ManagableEntities = ['selection'];
+const ManagableEntities = ["selection"];
 
 interface IProps {
   field: string;
@@ -34,12 +41,12 @@ interface IProps {
   onSubmit: (values: IColorableSelection[]) => void;
 }
 
-export const FieldSelectionCanvas: React.FC<IProps> = ({
+export function FieldSelectionCanvas({
   field,
   onSubmit,
   entityType,
   selections,
-}) => {
+}: IProps) {
   const [useColors, setUseColors] = useState(isUseColorsFlagOn(selections));
   if (!field) {
     return null;
@@ -62,15 +69,14 @@ export const FieldSelectionCanvas: React.FC<IProps> = ({
             value={useColors}
             onChange={(newUseColorValue) => {
               setUseColors(newUseColorValue);
-              (
-                  values as { selections: IColorableSelection[] }
-              ).selections.map(({ color, ...rest }, index) => ({
-                ...rest,
-
-                color: newUseColorValue
-                  ? SYSTEM_COLORS[index % SYSTEM_COLORS.length]
-                  : undefined,
-              }));
+              (values as { selections: IColorableSelection[] }).selections.map(
+                (selection, index) => ({
+                  ...selection,
+                  color: newUseColorValue
+                    ? SYSTEM_COLORS[index % SYSTEM_COLORS.length]
+                    : undefined,
+                })
+              );
             }}
           />
           <FieldArray name="selections">
@@ -80,14 +86,14 @@ export const FieldSelectionCanvas: React.FC<IProps> = ({
                   <React.Fragment key={name}>
                     <Stack justify="space-between">
                       {ManagableEntities.includes(entityType) && (
-                      <DeleteButton
-                        onDelete={() => {
-                          fields.remove(index);
-                        }}
-                        shouldConfirmAlert={false}
-                        text="Option"
-                        size="xs"
-                      />
+                        <DeleteButton
+                          onDelete={() => {
+                            fields.remove(index);
+                          }}
+                          shouldConfirmAlert={false}
+                          text="Option"
+                          size="xs"
+                        />
                       )}
                     </Stack>
                     <Spacer />
@@ -96,16 +102,13 @@ export const FieldSelectionCanvas: React.FC<IProps> = ({
                       validate={composeValidators(required)}
                       validateFields={[]}
                     >
-                      {(renderProps) => (
+                      {({ meta, input }) => (
                         <FormInput
-                          disabled={
-                                  !ManagableEntities.includes(entityType)
-                                }
+                          disabled={!ManagableEntities.includes(entityType)}
                           label="value"
-                          required={ManagableEntities.includes(
-                            entityType,
-                          )}
-                          {...renderProps}
+                          required={ManagableEntities.includes(entityType)}
+                          input={input}
+                          meta={meta}
                         />
                       )}
                     </Field>
@@ -114,34 +117,35 @@ export const FieldSelectionCanvas: React.FC<IProps> = ({
                       validate={composeValidators(required)}
                       validateFields={[]}
                     >
-                      {(renderProps) => (
+                      {({ meta, input }) => (
                         <FormInput
                           label="label"
                           required
-                          {...renderProps}
+                          input={input}
+                          meta={meta}
                         />
                       )}
                     </Field>
                     {useColors && (
-                    <Field
-                      name={`${name}.color`}
-                      validate={composeValidators(required)}
-                      validateFields={[]}
-                    >
-                      {(renderProps) => (
-                        <Stack>
-                          {SYSTEM_COLORS.map((systemColor) => (
-                            <StyledColorBox
-                              key={systemColor}
-                              background={systemColor}
-                              isActive={
-                                        systemColor === renderProps.input.value
-                                      }
-                            />
-                          ))}
-                        </Stack>
-                      )}
-                    </Field>
+                      <Field
+                        name={`${name}.color`}
+                        validate={composeValidators(required)}
+                        validateFields={[]}
+                      >
+                        {(renderProps) => (
+                          <Stack>
+                            {SYSTEM_COLORS.map((systemColor) => (
+                              <StyledColorBox
+                                key={systemColor}
+                                background={systemColor}
+                                isActive={
+                                  systemColor === renderProps.input.value
+                                }
+                              />
+                            ))}
+                          </Stack>
+                        )}
+                      </Field>
                     )}
                     <Spacer />
                     <Divider />
@@ -153,12 +157,10 @@ export const FieldSelectionCanvas: React.FC<IProps> = ({
                     label="Add new option"
                     onClick={() => {
                       fields.push({
-                        label: '',
-                        value: '',
+                        label: "",
+                        value: "",
                         color: useColors
-                          ? SYSTEM_COLORS[
-                            fields.length % SYSTEM_COLORS.length
-                          ]
+                          ? SYSTEM_COLORS[fields.length % SYSTEM_COLORS.length]
                           : undefined,
                       } as IColorableSelection);
                     }}
@@ -173,11 +175,4 @@ export const FieldSelectionCanvas: React.FC<IProps> = ({
       )}
     />
   );
-};
-
-const StyledColorBox = styled.div<{ background: string; isActive: boolean }>`
-width: 32px;
-height: 32px;
-${(props) => props.isActive && 'border: 2px solid black'};
-background ${(props) => props.background};
-`;
+}

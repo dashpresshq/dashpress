@@ -2,10 +2,11 @@ import {
   useEntityCrudSettings,
   useEntityDiction,
   useEntitySlug,
-} from 'frontend/hooks/entity/entity.config';
-import { NAVIGATION_LINKS } from 'frontend/lib/routing/links';
-import { useRouter } from 'next/router';
-import { Download, Plus } from 'react-feather';
+} from "frontend/hooks/entity/entity.config";
+import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
+import noop from "lodash/noop";
+import { useRouter } from "next/router";
+import { Download, Plus } from "react-feather";
 
 export const useTableMenuItems = () => {
   const router = useRouter();
@@ -15,14 +16,14 @@ export const useTableMenuItems = () => {
 
   let menuItems = [
     {
-      label: 'Download as CSV',
+      label: "Download as CSV",
       IconComponent: Download,
-      onClick: () => console.log('TODO'),
+      onClick: () => noop("TODO"),
     },
     {
-      label: 'Multi Select Mode',
+      label: "Multi Select Mode",
       IconComponent: Download,
-      onClick: () => console.log('TODO'),
+      onClick: () => noop("TODO"),
     },
   ];
 

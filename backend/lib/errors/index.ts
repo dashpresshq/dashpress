@@ -1,11 +1,12 @@
-import { NextApiResponse } from 'next';
+/* eslint max-classes-per-file: ["error", 5] */
+import { NextApiResponse } from "next";
 
 export class CustomError extends Error {
   code: number;
 
   name: string;
 
-  constructor(code: number, name: string, message = 'Action not allowed') {
+  constructor(code: number, name: string, message = "Action not allowed") {
     super(message);
     this.code = code;
     this.name = name;
@@ -13,20 +14,20 @@ export class CustomError extends Error {
 }
 
 export class NotFoundError extends CustomError {
-  constructor(message = 'Resource not found') {
-    super(404, 'BadRequestError', message);
+  constructor(message = "Resource not found") {
+    super(404, "BadRequestError", message);
   }
 }
 
 export class ForbiddenError extends CustomError {
-  constructor(message = 'Action not allowed') {
-    super(401, 'BadRequestError', message);
+  constructor(message = "Action not allowed") {
+    super(401, "BadRequestError", message);
   }
 }
 
 export class BadRequestError extends CustomError {
-  constructor(message = 'Invalid Request') {
-    super(400, 'BadRequestError', message);
+  constructor(message = "Invalid Request") {
+    super(400, "BadRequestError", message);
   }
 }
 

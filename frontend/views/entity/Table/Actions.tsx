@@ -1,12 +1,12 @@
-import { DeleteButton, SoftButton, Stack } from '@gothicgeeks/design-system';
-import { useEntityDataDeletionMutation } from 'frontend/hooks/data/data.store';
+import { DeleteButton, SoftButton, Stack } from "@gothicgeeks/design-system";
+import { useEntityDataDeletionMutation } from "frontend/hooks/data/data.store";
 import {
   IEntityCrudSettings,
   useEntitySlug,
-} from 'frontend/hooks/entity/entity.config';
-import { useEntityIdField } from 'frontend/hooks/entity/entity.store';
-import { NAVIGATION_LINKS } from 'frontend/lib/routing/links';
-import { useDetailsOffCanvasStore } from './hooks/useDetailsOffCanvas.store';
+} from "frontend/hooks/entity/entity.config";
+import { useEntityIdField } from "frontend/hooks/entity/entity.store";
+import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
+import { useDetailsOffCanvasStore } from "./hooks/useDetailsOffCanvas.store";
 
 interface IProps {
   crudSettings: IEntityCrudSettings;
@@ -15,13 +15,13 @@ interface IProps {
   };
 }
 
-export const TableActions: React.FC<IProps> = ({ crudSettings, row }) => {
+export function TableActions({ crudSettings, row }: IProps) {
   const entity = useEntitySlug();
   const idField = useEntityIdField(entity);
   const entityDataDeletionMutation = useEntityDataDeletionMutation(entity);
   const openDetailsCanvas = useDetailsOffCanvasStore((state) => state.open);
 
-  const idValue = row.original[idField.data || 'id'] as string;
+  const idValue = row.original[idField.data || "id"] as string;
   return (
     <Stack spacing={4} align="center">
       {crudSettings.details && (
@@ -72,4 +72,4 @@ export const TableActions: React.FC<IProps> = ({ crudSettings, row }) => {
       {/* // inline -edit // related entities */}
     </Stack>
   );
-};
+}

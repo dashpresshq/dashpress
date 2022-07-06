@@ -5,10 +5,10 @@ import {
   SectionListItem,
   Stack,
   Spacer,
-} from '@gothicgeeks/design-system';
-import { useEffect, useState } from 'react';
-import { IEntityField } from '../../../../../backend/entities/types';
-import { useStringSelections } from '../../../../lib/selection';
+} from "@gothicgeeks/design-system";
+import { useEffect, useState } from "react";
+import { IEntityField } from "../../../../../backend/entities/types";
+import { useStringSelections } from "../../../../lib/selection";
 
 interface IProps {
   entityFields: IEntityField[];
@@ -22,7 +22,7 @@ interface IProps {
   labels: [string, string];
 }
 
-export const SelectionTab: React.FC<IProps> = ({
+export function SelectionTab({
   entityFields,
   isLoading,
   labels,
@@ -32,8 +32,9 @@ export const SelectionTab: React.FC<IProps> = ({
   onToggle,
   onSubmit,
   hiddenColumns,
-}) => {
-  const { toggleSelection, currentPageSelection, selectMutiple } = useStringSelections();
+}: IProps) {
+  const { toggleSelection, currentPageSelection, selectMutiple } =
+    useStringSelections();
 
   const [touched, setTouched] = useState(false);
 
@@ -41,7 +42,6 @@ export const SelectionTab: React.FC<IProps> = ({
 
   useEffect(() => {
     selectMutiple(hiddenColumns);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [hiddenColumns]);
 
   const enableDisableLabel = enabled ? labels[0] : labels[1];
@@ -49,7 +49,7 @@ export const SelectionTab: React.FC<IProps> = ({
   return (
     <>
       <Stack justify="space-between">
-        <div style={{ width: '100%' }}>
+        <div style={{ width: "100%" }}>
           <Text size="5">{description}</Text>
         </div>
         <FormButton
@@ -77,16 +77,16 @@ export const SelectionTab: React.FC<IProps> = ({
                   actionButtons={
                     enabled
                       ? [
-                        {
-                          isInverse: isHidden,
-                          text: isHidden ? 'Show' : 'Hide',
-                          onClick: () => {
-                            setTouched(true);
-                            toggleSelection(menuItem.name);
+                          {
+                            isInverse: isHidden,
+                            text: isHidden ? "Show" : "Hide",
+                            onClick: () => {
+                              setTouched(true);
+                              toggleSelection(menuItem.name);
+                            },
+                            isMakingRequest: false,
                           },
-                          isMakingRequest: false,
-                        },
-                      ]
+                        ]
                       : []
                   }
                   toNoWhere
@@ -111,4 +111,4 @@ export const SelectionTab: React.FC<IProps> = ({
       )}
     </>
   );
-};
+}

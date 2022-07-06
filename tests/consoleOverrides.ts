@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+/* eslint-disable func-names */
 const { error } = console;
 const { warn } = console;
 

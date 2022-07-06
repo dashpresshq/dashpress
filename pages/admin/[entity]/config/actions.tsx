@@ -1,1 +1,3 @@
-export { EntityActionsSettings as default } from '../../../../frontend/views/entity/Configure/Actions';
+import { EntityActionsSettings } from "../../../../frontend/views/entity/Configure/Actions";
+
+export default EntityActionsSettings;

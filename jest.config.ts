@@ -205,25 +205,4 @@ const customJestConfig = {
 };
 
 // eslint-disable-next-line import/no-anonymous-default-export
-export default async (...args: any[]) => {
-  /**
-   *  @type {import("@jest/types").Config.InitialOptions}
-   */
-  const config = await createJestConfig(customJestConfig)(...args);
-  // We have to set the transformIgnorePatterns here,
-  // as currently (Next JS 12.1.0) the next/jest plugin
-  // will automatically add a "node_modules" rule as the first pattern,
-  // which will match BEFORE the "@theorem" pattern.
-  // Thus, we just replace the default "ignore node_modules" with our own
-  // "ignore node_modules, except for @theorem".
-  // This is marked as a bug, and should get fixed in the future.
-  // This code can be removed when https://github.com/vercel/next.js/issues/34768 is fixed.
-  // At that time you can just do
-  // export default createJestConfig(customJestConfig);
-
-  const badDefaultOptionIndex = config.transformIgnorePatterns.indexOf('/node_modules/');
-  if (badDefaultOptionIndex !== -1) {
-    config.transformIgnorePatterns[badDefaultOptionIndex] = '/node_modules/(?!@theorem)';
-  }
-  return config;
-};
+export default async (...args: any[]) => createJestConfig(customJestConfig)(...args);

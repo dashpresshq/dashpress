@@ -1,20 +1,19 @@
-import { FormButton } from '@gothicgeeks/design-system';
-import { ButtonLang } from '@gothicgeeks/shared';
-import { FC } from 'react';
-import { Form, Field } from 'react-final-form';
+import { FormButton } from "@gothicgeeks/design-system";
+import { ButtonLang } from "@gothicgeeks/shared";
+import { Form, Field } from "react-final-form";
 import {
   RenderFormInput,
   IBaseEntityForm,
   IEntityFormSettings,
   runValidationError,
   isFieldRequired,
-} from '../_RenderFormInput';
+} from "../_RenderFormInput";
 
-export const UpdateEntityForm: FC<
-  IBaseEntityForm & {
-    initialValues?: Record<string, unknown>;
-  } & IEntityFormSettings
-> = ({
+type IProps = IBaseEntityForm & {
+  initialValues?: Record<string, unknown>;
+} & IEntityFormSettings;
+
+export function UpdateEntityForm({
   onSubmit,
   initialValues,
   fields,
@@ -22,37 +21,39 @@ export const UpdateEntityForm: FC<
   entityFieldSelections,
   entityValidationsMap,
   getEntityFieldLabels,
-}) => (
-  <Form
+}: IProps) {
+  return (
+    <Form
       // TODO Send only changed fields
-    onSubmit={onSubmit}
-    validate={runValidationError(
-      fields,
-      entityValidationsMap,
-      getEntityFieldLabels,
-    )}
-    initialValues={initialValues}
-    render={({ handleSubmit, submitting, pristine }) => (
-      <form noValidate onSubmit={handleSubmit}>
-        {fields.map((name) => (
-          <Field key={name} name={name} validateFields={[]}>
-            {(renderProps) => (
-              <RenderFormInput
-                type={entityFieldTypes[name]}
-                label={getEntityFieldLabels(name)}
-                entityFieldSelections={entityFieldSelections[name]}
-                required={isFieldRequired(entityValidationsMap, name)}
-                renderProps={renderProps}
-              />
-            )}
-          </Field>
-        ))}
-        <FormButton
-          text={ButtonLang.update}
-          isMakingRequest={submitting}
-          disabled={pristine}
-        />
-      </form>
-    )}
-  />
-);
+      onSubmit={onSubmit}
+      validate={runValidationError(
+        fields,
+        entityValidationsMap,
+        getEntityFieldLabels
+      )}
+      initialValues={initialValues}
+      render={({ handleSubmit, submitting, pristine }) => (
+        <form noValidate onSubmit={handleSubmit}>
+          {fields.map((name) => (
+            <Field key={name} name={name} validateFields={[]}>
+              {(renderProps) => (
+                <RenderFormInput
+                  type={entityFieldTypes[name]}
+                  label={getEntityFieldLabels(name)}
+                  entityFieldSelections={entityFieldSelections[name]}
+                  required={isFieldRequired(entityValidationsMap, name)}
+                  renderProps={renderProps}
+                />
+              )}
+            </Field>
+          ))}
+          <FormButton
+            text={ButtonLang.update}
+            isMakingRequest={submitting}
+            disabled={pristine}
+          />
+        </form>
+      )}
+    />
+  );
+}

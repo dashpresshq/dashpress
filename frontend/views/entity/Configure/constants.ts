@@ -17,7 +17,6 @@ export const ENTITY_CRUD_SETTINGS_TAB_LABELS = {
   DELETE: 'Delete',
 };
 
-// eslint-disable-next-line no-shadow
 export enum EntityActionTypes {
   Update,
   Create,

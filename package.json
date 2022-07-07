@@ -15,9 +15,8 @@
     "verify": "npm run typecheck && npm run lint && npm run test"
   },
   "dependencies": {
-    "@gothicgeeks/design-system": "git+ssh://git@github.com:thrownullexception/design-system.git#87906fdb27f6b09855ae4a20297b1b58530eb11f",
-    "@gothicgeeks/shared": "git+ssh://git@github.com:thrownullexception/shared.git#74e8014cb3b7365247bec5c85cc2725d7c41a30f",
-    "ajv": "^8.11.0",
+    "@gothicgeeks/design-system": "git+ssh://git@github.com:thrownullexception/design-system.git#aaa402bca1ceb27fd481f0dc5175c7fa93f1619b",
+    "@gothicgeeks/shared": "git+ssh://git@github.com:thrownullexception/shared.git#40f68901963101262bb85e66b3ef2be4e06417b5",
     "change-case": "^4.1.2",
     "class-validator": "^0.13.2",
     "final-form-arrays": "^3.0.2",
@@ -35,8 +34,7 @@
     "react-final-form-arrays": "^3.1.3",
     "react-query": "^3.39.1",
     "styled-bootstrap-grid": "^3.1.2",
-    "styled-components": "^5.3.5",
-    "zod": "^3.17.3"
+    "styled-components": "^5.3.5"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.16.4",
@@ -50,7 +48,6 @@
     "eslint": "^7.32.0 || ^8.2.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-next": "12.1.6",
-    "eslint-config-standard": "^17.0.0",
     "eslint-plugin-import": "^2.25.3",
     "eslint-plugin-jsx-a11y": "^6.5.1",
     "eslint-plugin-n": "^15.0.0",
@@ -64,5 +61,9 @@
     "next-router-mock": "^0.7.4",
     "ts-node": "^10.8.1",
     "typescript": "^4.7.4"
+  },
+  "engines": {
+    "node": "=16",
+    "npm": "8"
   }
 }

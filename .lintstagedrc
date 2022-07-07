@@ -1,5 +1,5 @@
 {
     "{backend,frontend,pages,shared}/**/*.{json,md,ts,tsx}": [
-        "npm run lint:fix",
+        "npm run lint:fix"
     ]
 }

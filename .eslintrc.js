@@ -33,8 +33,12 @@ module.exports = {
     'class-methods-use-this': 'off',
     'react/require-default-props': 'off',
     'react/jsx-filename-extension': [2, { extensions: ['.tsx'] }],
-    'no-unused-vars': 'off',
     'no-empty-function': 'off',
+    'no-unused-vars': 'off',
     '@typescript-eslint/no-unused-vars': ['error'],
+    'no-shadow': 'off',
+    '@typescript-eslint/no-shadow': 'error',
+    'react/no-danger': 'off',
+    'import/no-extraneous-dependencies': 'off',
   },
 };

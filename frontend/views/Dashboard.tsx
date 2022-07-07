@@ -46,7 +46,7 @@ export function Dashboard() {
     >
       {entitiesMenuItems.isLoading && <ComponentIsLoading />}
       {entitiesMenuItems.error && <ErrorAlert message={entitiesMenuItems.error} />}
-      {entitiesMenuItems.isLoading && !entitiesMenuItems.error && (
+      {!entitiesMenuItems.isLoading && !entitiesMenuItems.error && (
         <StyledGrid.Row>
           {entitiesMenuItems.data.map((field) => (
             <StyledGrid.Col lg={4} md={6} sm={12} key={field.value}>

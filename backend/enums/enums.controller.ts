@@ -1,4 +1,4 @@
-import { enumsService, EnumsService } from './enums.service';
+import { enumsService, EnumsService } from "./enums.service";
 
 export class EnumsController {
   constructor(private readonly _enumsService: EnumsService) {}

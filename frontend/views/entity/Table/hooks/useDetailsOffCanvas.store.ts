@@ -1,4 +1,4 @@
-import { createStore } from '@gothicgeeks/shared';
+import { createStore } from "@gothicgeeks/shared";
 
 type IStore = {
   entity: string;
@@ -8,16 +8,17 @@ type IStore = {
 };
 
 export const useDetailsOffCanvasStore = createStore<IStore>((set) => ({
-  entity: '',
-  id: '',
-  open: ({ entity, id }) => set(() => ({
-    entity,
-    id,
-  })),
+  entity: "",
+  id: "",
+  open: ({ entity, id }) =>
+    set(() => ({
+      entity,
+      id,
+    })),
   close: () => {
     set(() => ({
-      entity: '',
-      id: '',
+      entity: "",
+      id: "",
     }));
   },
 }));

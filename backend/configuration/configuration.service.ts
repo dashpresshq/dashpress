@@ -1,8 +1,8 @@
-import fs from 'fs-extra';
-import path from 'path';
-import { CONFIGURATION_KEYS } from '../../shared/configuration.constants';
+import fs from "fs-extra";
+import path from "path";
+import { CONFIGURATION_KEYS } from "../../shared/configuration.constants";
 
-const pathToConfigFile = path.resolve(require('os').homedir(), 'cardinal.json');
+const pathToConfigFile = path.resolve(require("os").homedir(), "cardinal.json");
 
 const DEFAULT_CONFIG = {};
 
@@ -13,7 +13,9 @@ export class ConfigurationService {
     if (!this._config) {
       try {
         // TODO allow external config like redis/ db, etc
-        this._config = (await fs.readJson(pathToConfigFile, { throws: false })) || DEFAULT_CONFIG;
+        this._config =
+          (await fs.readJson(pathToConfigFile, { throws: false })) ||
+          DEFAULT_CONFIG;
       } catch (error) {
         this._config = DEFAULT_CONFIG;
       }
@@ -25,7 +27,10 @@ export class ConfigurationService {
     await fs.writeJson(pathToConfigFile, config, { spaces: 2 });
   }
 
-  async show<T>(key: keyof typeof CONFIGURATION_KEYS, entity?: string): Promise<T> {
+  async show<T>(
+    key: keyof typeof CONFIGURATION_KEYS,
+    entity?: string
+  ): Promise<T> {
     const config = await ConfigurationService.getConfig();
     const { requireEntity, defaultValue } = CONFIGURATION_KEYS[key];
     if (requireEntity && !entity) {
@@ -38,7 +43,7 @@ export class ConfigurationService {
   async upsert(
     key: keyof typeof CONFIGURATION_KEYS,
     value: unknown,
-    entity?: string,
+    entity?: string
   ): Promise<void> {
     const config = await ConfigurationService.getConfig();
 

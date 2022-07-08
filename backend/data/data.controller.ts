@@ -1,16 +1,16 @@
 import {
   ConfigurationService,
   configurationService,
-} from 'backend/configuration/configuration.service';
-import noop from 'lodash/noop';
-import { EntitiesService, entitiesService } from '../entities/entities.service';
-import { DataService, dataService } from './data.service';
+} from "backend/configuration/configuration.service";
+import noop from "lodash/noop";
+import { EntitiesService, entitiesService } from "../entities/entities.service";
+import { DataService, dataService } from "./data.service";
 
 export class DataController {
   constructor(
     private _dataService: DataService,
     private _entitiesService: EntitiesService,
-    private _configurationService: ConfigurationService,
+    private _configurationService: ConfigurationService
   ) {}
 
   async listData(entity: string): Promise<{ id: string; name: string }[]> {
@@ -19,9 +19,13 @@ export class DataController {
   }
 
   async referenceData(entity: string, id: string): Promise<string> {
-    const data = await this._dataService.show<Record<string, unknown>>(entity, [], {
-      [this._entitiesService.getEntityPrimaryField(entity)]: id,
-    });
+    const data = await this._dataService.show<Record<string, unknown>>(
+      entity,
+      [],
+      {
+        [this._entitiesService.getEntityPrimaryField(entity)]: id,
+      }
+    );
 
     return Object.values(data)[4] as string;
   }
@@ -51,7 +55,7 @@ export class DataController {
       {
         [this._entitiesService.getEntityPrimaryField(entity)]: id,
       },
-      data,
+      data
     );
   }
 
@@ -65,11 +69,12 @@ export class DataController {
   async tableData(entity: string, filters: Record<string, unknown>) {
     // TODO validate the entity is tableable
 
-    const entityScalarFields = this._entitiesService.getScalarEntityFields(entity);
+    const entityScalarFields =
+      this._entitiesService.getScalarEntityFields(entity);
 
     const hiddenColumns = await this._configurationService.show<string[]>(
-      'hidden_entity_table_columns',
-      entity,
+      "hidden_entity_table_columns",
+      entity
     );
 
     return {
@@ -81,9 +86,15 @@ export class DataController {
         {
           take: Number(filters.take),
           page: Number(filters.page),
-          orderBy: (filters.orderBy as string).toLowerCase() === 'desc' ? 'desc' : 'asc',
-          sortBy: this._entitiesService.validateEntityField(entity, filters.sortBy),
-        },
+          orderBy:
+            (filters.orderBy as string).toLowerCase() === "desc"
+              ? "desc"
+              : "asc",
+          sortBy: this._entitiesService.validateEntityField(
+            entity,
+            filters.sortBy
+          ),
+        }
       ),
       pageIndex: filters.page,
       pageSize: filters.take,
@@ -95,5 +106,5 @@ export class DataController {
 export const dataController = new DataController(
   dataService,
   entitiesService,
-  configurationService,
+  configurationService
 );

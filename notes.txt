@@ -12,13 +12,12 @@ Table actions
 
 OPEN SOURCE
 Validations
-Selection Colors
+Implement filters
 Title of the Table
 Offcanvas table on details
 Multi select
 Dahsboard list
 Error on none permitted pages
-Implement filters
 Local state
 url state
 CSV, JSON
@@ -33,6 +32,7 @@ Community support
 // Pro version 10 dollars/user per month
 Hosted Deployment
 Action integrations
+Current User
 Charts
 Summary views
 Users Authentication

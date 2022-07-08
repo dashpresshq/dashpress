@@ -1,15 +1,24 @@
-const PREFIX = '__cardinal_app_config__';
+const PREFIX = "__cardinal_app_config__";
 
 export const ConfigrationStorage = {
   getKey: (key: string, entity?: string) => `${PREFIX}${key}_${entity}`,
-  set: (value: Record<string, unknown> | unknown[], key: string, entity?: string) => {
-    window.localStorage.setItem(ConfigrationStorage.getKey(key, entity), JSON.stringify(value));
+  set: (
+    value: Record<string, unknown> | unknown[],
+    key: string,
+    entity?: string
+  ) => {
+    window.localStorage.setItem(
+      ConfigrationStorage.getKey(key, entity),
+      JSON.stringify(value)
+    );
   },
   get: (key: string, entity?: string) => {
-    if (typeof window === 'undefined') {
+    if (typeof window === "undefined") {
       return undefined;
     }
-    const data = window.localStorage.getItem(ConfigrationStorage.getKey(key, entity));
+    const data = window.localStorage.getItem(
+      ConfigrationStorage.getKey(key, entity)
+    );
     if (!data) {
       return undefined;
     }

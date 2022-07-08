@@ -1,4 +1,4 @@
-import { IEntityField } from '../entities/types';
+import { IEntityField } from "../entities/types";
 
 export interface IJsonSchemaEnum {
   name: string;

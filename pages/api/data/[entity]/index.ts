@@ -1,17 +1,22 @@
-import type { NextApiRequest, NextApiResponse } from 'next';
-import { dataController } from '../../../../backend/data/data.controller';
-import { validateEntityFromRequest } from '../../../../backend/entities/entities.validations';
-import { handleResponseError } from '../../../../backend/lib/errors';
+import type { NextApiRequest, NextApiResponse } from "next";
+import { dataController } from "../../../../backend/data/data.controller";
+import { validateEntityFromRequest } from "../../../../backend/entities/entities.validations";
+import { handleResponseError } from "../../../../backend/lib/errors";
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
   try {
     const entity = validateEntityFromRequest(req.query);
 
-    if (req.method === 'GET') {
+    if (req.method === "GET") {
       return res.status(200).json(await dataController.listData(entity));
     }
-    if (req.method === 'POST') {
-      return res.status(204).json(await dataController.createData(entity, req.body.data));
+    if (req.method === "POST") {
+      return res
+        .status(204)
+        .json(await dataController.createData(entity, req.body.data));
     }
     // TODO
     //   if (req.method === "PATCH") {
@@ -38,6 +43,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     return handleResponseError(res, error);
   }
 
-  res.setHeader('Allow', ['GET', 'POST']);
+  res.setHeader("Allow", ["GET", "POST"]);
   return res.status(405).end(`Method ${req.method} Not Allowed`);
 }

@@ -1,13 +1,13 @@
-import { FormButton, Stack } from '@gothicgeeks/design-system';
-import { ButtonLang, resetFormValues } from '@gothicgeeks/shared';
-import { Form, Field } from 'react-final-form';
+import { FormButton, Stack } from "@gothicgeeks/design-system";
+import { ButtonLang, resetFormValues } from "@gothicgeeks/shared";
+import { Form, Field } from "react-final-form";
 import {
   RenderFormInput,
   IBaseEntityForm,
   IEntityFormSettings,
   runValidationError,
   isFieldRequired,
-} from '../_RenderFormInput';
+} from "../_RenderFormInput";
 
 export function CreateEntityForm({
   onSubmit,
@@ -20,16 +20,22 @@ export function CreateEntityForm({
   return (
     <Form
       onSubmit={onSubmit}
-      validate={runValidationError(fields, entityValidationsMap, getEntityFieldLabels)}
-      render={({
-        handleSubmit, form, values, submitting, pristine,
-      }) => (
+      validate={runValidationError(
+        fields,
+        entityValidationsMap,
+        getEntityFieldLabels
+      )}
+      render={({ handleSubmit, form, values, submitting, pristine }) => (
         <form
           noValidate
           onSubmit={(e) => {
             e.preventDefault();
             handleSubmit(e)?.then(() => {
-              resetFormValues(true, values as Record<string, string>, form as any);
+              resetFormValues(
+                true,
+                values as Record<string, string>,
+                form as any
+              );
             });
           }}
         >
@@ -47,7 +53,11 @@ export function CreateEntityForm({
             </Field>
           ))}
           <Stack>
-            <FormButton text={ButtonLang.create} isMakingRequest={submitting} disabled={pristine} />
+            <FormButton
+              text={ButtonLang.create}
+              isMakingRequest={submitting}
+              disabled={pristine}
+            />
           </Stack>
         </form>
       )}

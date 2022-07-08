@@ -1,4 +1,4 @@
-import Mustache from 'mustache';
+import Mustache from "mustache";
 
 export class TemplateService {
   static compile(input: string, data: Record<string, unknown>) {

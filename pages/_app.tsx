@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/jsx-props-no-spreading */
-import { AppWrapper } from '@gothicgeeks/design-system';
+import { AppWrapper } from "@gothicgeeks/design-system";
 
 function MyApp({ Component, pageProps }) {
   return (

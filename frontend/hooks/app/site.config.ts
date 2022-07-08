@@ -1,3 +1,3 @@
 export const useSiteConfig = () => ({
-  name: 'Kademiks',
+  name: "Kademiks",
 });

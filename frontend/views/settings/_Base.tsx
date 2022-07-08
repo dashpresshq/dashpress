@@ -1,9 +1,12 @@
 import {
-  SectionLeft, SectionRight, SectionRow, MenuSection,
-} from '@gothicgeeks/design-system';
-import { ReactNode } from 'react';
-import { NAVIGATION_LINKS } from '../../lib/routing/links';
-import { AppLayout } from '../../_layouts/app';
+  SectionLeft,
+  SectionRight,
+  SectionRow,
+  MenuSection,
+} from "@gothicgeeks/design-system";
+import { ReactNode } from "react";
+import { NAVIGATION_LINKS } from "../../lib/routing/links";
+import { AppLayout } from "../../_layouts/app";
 
 interface IProps {
   children: ReactNode;
@@ -12,18 +15,21 @@ interface IProps {
 
 export function BaseSettingsLayout({ children, menuItem }: IProps) {
   return (
-    <AppLayout titleNeedsContext breadcrumbs={[{ label: menuItem.name, value: menuItem.link }]}>
+    <AppLayout
+      titleNeedsContext
+      breadcrumbs={[{ label: menuItem.name, value: menuItem.link }]}
+    >
       <SectionRow>
         <SectionLeft>
           <MenuSection
             menuItems={[
               {
                 link: NAVIGATION_LINKS.SETTINGS.ENTITIES,
-                name: 'Entities',
+                name: "Entities",
               },
               {
-                link: 'TODO',
-                name: 'Other Settings',
+                link: "TODO",
+                name: "Other Settings",
               },
             ]}
             currentMenuItem={menuItem.link}

@@ -1,6 +1,6 @@
-import knex, { Knex } from 'knex';
-import get from 'lodash/get';
-import noop from 'lodash/noop';
+import knex, { Knex } from "knex";
+import get from "lodash/get";
+import noop from "lodash/noop";
 
 export class DataService {
   static _dbInstance: Knex | null = null;
@@ -8,13 +8,13 @@ export class DataService {
   static getInstance() {
     if (!this._dbInstance) {
       this._dbInstance = knex({
-        client: 'pg',
+        client: "pg",
         connection: {
-          database: 'kademiks',
-          user: 'postgres',
-          password: 'password',
+          database: "kademiks",
+          user: "postgres",
+          password: "password",
         },
-        searchPath: ['public'],
+        searchPath: ["public"],
       });
     }
     this.afterConnection();
@@ -26,7 +26,11 @@ export class DataService {
   }
 
   async count(entity: string): Promise<number> {
-    return get(await DataService.getInstance().count().from(entity), [0, 'count'], 0);
+    return get(
+      await DataService.getInstance().count().from(entity),
+      [0, "count"],
+      0
+    );
   }
 
   async list(
@@ -37,17 +41,23 @@ export class DataService {
       page: number;
       orderBy: string;
       sortBy: string;
-    },
+    }
   ) {
     let query = DataService.getInstance().select(select).from(entity);
     if (dataFetchingModifiers.page && dataFetchingModifiers.take) {
       query = query
         .limit(Number(dataFetchingModifiers.take))
-        .offset((Number(dataFetchingModifiers.page) - 1) * Number(dataFetchingModifiers.take));
+        .offset(
+          (Number(dataFetchingModifiers.page) - 1) *
+            Number(dataFetchingModifiers.take)
+        );
     }
 
     if (dataFetchingModifiers.orderBy && dataFetchingModifiers.sortBy) {
-      query = query.orderBy(dataFetchingModifiers.sortBy, dataFetchingModifiers.orderBy);
+      query = query.orderBy(
+        dataFetchingModifiers.sortBy,
+        dataFetchingModifiers.orderBy
+      );
     }
 
     // eslint-disable-next-line no-console
@@ -56,8 +66,15 @@ export class DataService {
     return await query;
   }
 
-  async show<T>(entity: string, select: string[], query: Record<string, unknown>): Promise<T> {
-    return await DataService.getInstance().table(entity).select(select).where(query)
+  async show<T>(
+    entity: string,
+    select: string[],
+    query: Record<string, unknown>
+  ): Promise<T> {
+    return await DataService.getInstance()
+      .table(entity)
+      .select(select)
+      .where(query)
       .first();
   }
 
@@ -68,7 +85,7 @@ export class DataService {
   async update(
     entity: string,
     query: Record<string, unknown>,
-    data: Record<string, unknown>,
+    data: Record<string, unknown>
   ): Promise<void> {
     await DataService.getInstance()(entity).where(query).update(data);
   }

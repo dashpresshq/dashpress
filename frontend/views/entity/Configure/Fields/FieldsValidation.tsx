@@ -8,16 +8,22 @@ import {
   Spacer,
   Stack,
   Text,
-} from '@gothicgeeks/design-system';
-import { FIELD_TYPES_CONFIG_MAP, ENTITY_VALIDATION_CONFIG } from 'shared/validations.constants';
-import { Form, Field } from 'react-final-form';
-import arrayMutators from 'final-form-arrays';
-import { FieldArray } from 'react-final-form-arrays';
-import { userFriendlyCase } from 'frontend/lib/strings';
+} from "@gothicgeeks/design-system";
 import {
-  required, composeValidators, maxLength, ButtonLang,
-} from '@gothicgeeks/shared';
-import React from 'react';
+  FIELD_TYPES_CONFIG_MAP,
+  ENTITY_VALIDATION_CONFIG,
+} from "shared/validations.constants";
+import { Form, Field } from "react-final-form";
+import arrayMutators from "final-form-arrays";
+import { FieldArray } from "react-final-form-arrays";
+import { userFriendlyCase } from "frontend/lib/strings";
+import {
+  required,
+  composeValidators,
+  maxLength,
+  ButtonLang,
+} from "@gothicgeeks/shared";
+import React from "react";
 
 export interface IFieldValidationItem {
   validationType: keyof typeof ENTITY_VALIDATION_CONFIG;
@@ -37,7 +43,10 @@ interface IProps {
 const ERROR_MESSAGE_LENGTH = 128;
 
 export function FieldValidationCanvas({
-  field, onSubmit, entityType, validations,
+  field,
+  onSubmit,
+  entityType,
+  validations,
 }: IProps) {
   if (!field) {
     return null;
@@ -60,15 +69,11 @@ export function FieldValidationCanvas({
             {({ fields }) => (
               <div>
                 {fields.map((name, index) => {
-                  const {
-                    validationType,
-                    fromSchema,
-                  }: IFieldValidationItem = values.validations[index];
+                  const { validationType, fromSchema }: IFieldValidationItem =
+                    values.validations[index];
 
-                  const {
-                    input: validationInput,
-                    isBoundToType,
-                  } = ENTITY_VALIDATION_CONFIG[validationType];
+                  const { input: validationInput, isBoundToType } =
+                    ENTITY_VALIDATION_CONFIG[validationType];
 
                   return (
                     <React.Fragment key={name}>
@@ -88,34 +93,54 @@ export function FieldValidationCanvas({
                       <Spacer />
                       <Field
                         name={`${name}.errorMessage`}
-                        validate={composeValidators(required, maxLength(ERROR_MESSAGE_LENGTH))}
+                        validate={composeValidators(
+                          required,
+                          maxLength(ERROR_MESSAGE_LENGTH)
+                        )}
                         validateFields={[]}
                       >
                         {({ meta, input }) => (
-                          <FormInput label="" required meta={meta} input={input} />
+                          <FormInput
+                            label=""
+                            required
+                            meta={meta}
+                            input={input}
+                          />
                         )}
                       </Field>
                       {validationInput && (
                         <>
-                          {Object.entries(validationInput).map(([inputKey, inputValue]) => (
-                            <Field
-                              key={inputKey}
-                              name={`${name}.constraint.${inputKey}`}
-                              validate={composeValidators(required)}
-                              validateFields={[]}
-                            >
-                              {({ meta, input }) => (
-                                <Stack justify="space-between" align="center">
-                                  <Text>{userFriendlyCase(inputKey)}</Text>
-                                  {typeof inputValue === 'string' ? (
-                                    <FormInput label="" required meta={meta} input={input} />
-                                  ) : (
-                                    <FormNumberInput label="" required meta={meta} input={input} />
-                                  )}
-                                </Stack>
-                              )}
-                            </Field>
-                          ))}
+                          {Object.entries(validationInput).map(
+                            ([inputKey, inputValue]) => (
+                              <Field
+                                key={inputKey}
+                                name={`${name}.constraint.${inputKey}`}
+                                validate={composeValidators(required)}
+                                validateFields={[]}
+                              >
+                                {({ meta, input }) => (
+                                  <Stack justify="space-between" align="center">
+                                    <Text>{userFriendlyCase(inputKey)}</Text>
+                                    {typeof inputValue === "string" ? (
+                                      <FormInput
+                                        label=""
+                                        required
+                                        meta={meta}
+                                        input={input}
+                                      />
+                                    ) : (
+                                      <FormNumberInput
+                                        label=""
+                                        required
+                                        meta={meta}
+                                        input={input}
+                                      />
+                                    )}
+                                  </Stack>
+                                )}
+                              </Field>
+                            )
+                          )}
                         </>
                       )}
                       <Spacer />
@@ -125,13 +150,14 @@ export function FieldValidationCanvas({
                   );
                 })}
                 <FormNoValueSelect
-                  disabledOptions={(values.validations as IFieldValidationItem[]).map(
-                    ({ validationType }) => validationType,
-                  )}
+                  disabledOptions={(
+                    values.validations as IFieldValidationItem[]
+                  ).map(({ validationType }) => validationType)}
                   onChange={(validationType) => {
                     fields.push({
                       validationType,
-                      errorMessage: ENTITY_VALIDATION_CONFIG[validationType].message,
+                      errorMessage:
+                        ENTITY_VALIDATION_CONFIG[validationType].message,
                       constraint: {},
                     } as IFieldValidationItem);
                   }}

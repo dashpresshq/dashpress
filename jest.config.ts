@@ -4,9 +4,9 @@
  * https://jestjs.io/docs/configuration
  */
 
-const nextJest = require('next/jest');
+const nextJest = require("next/jest");
 
-const createJestConfig = nextJest({ dir: './' });
+const createJestConfig = nextJest({ dir: "./" });
 
 /**
  *  @type {import("@jest/types").Config.InitialOptions}
@@ -39,7 +39,7 @@ const customJestConfig = {
   // ],
 
   // Indicates which provider should be used to instrument code for coverage
-  coverageProvider: 'v8',
+  coverageProvider: "v8",
 
   // A list of reporter names that Jest uses when writing coverage reports
   // coverageReporters: [
@@ -135,12 +135,12 @@ const customJestConfig = {
   // The paths to modules that run some code to configure or set up the testing environment before each test
   setupFiles: [
     // "<rootDir>/tests/setupDotEnv.ts",
-    '<rootDir>/tests/setupGlobals.ts',
-    '<rootDir>/tests/consoleOverrides.ts',
+    "<rootDir>/tests/setupGlobals.ts",
+    "<rootDir>/tests/consoleOverrides.ts",
   ],
 
   // A list of paths to modules that run some code to configure or set up the testing framework before each test
-  setupFilesAfterEnv: ['<rootDir>/tests/setupAfterEnv.ts'],
+  setupFilesAfterEnv: ["<rootDir>/tests/setupAfterEnv.ts"],
 
   // The number of seconds after which a test is considered as slow and reported as such in the results.
   // slowTestThreshold: 5,
@@ -149,7 +149,7 @@ const customJestConfig = {
   // snapshotSerializers: [],
 
   // The test environment that will be used for testing
-  testEnvironment: 'jsdom',
+  testEnvironment: "jsdom",
 
   // Options that will be passed to the testEnvironment
   // testEnvironmentOptions: {},
@@ -158,7 +158,10 @@ const customJestConfig = {
   // testLocationInResults: false,
 
   // The glob patterns Jest uses to detect test files
-  testMatch: ['**/__tests__/**/?(*.)+(spec).[jt]s?(x)', '**/?(*.)+(spec).[tj]s?(x)'],
+  testMatch: [
+    "**/__tests__/**/?(*.)+(spec).[jt]s?(x)",
+    "**/?(*.)+(spec).[tj]s?(x)",
+  ],
 
   // An array of regexp pattern strings that are matched against all test paths, matched tests are skipped
   // testPathIgnorePatterns: [
@@ -201,4 +204,5 @@ const customJestConfig = {
   testTimeout: 10000,
 };
 
-export default async (...args: any[]) => createJestConfig(customJestConfig)(...args);
+export default async (...args: any[]) =>
+  createJestConfig(customJestConfig)(...args);

@@ -1,4 +1,4 @@
-import { IJsonSchema, IJsonSchemaEnum, IJsonSchemaModel } from './schema.types';
+import { IJsonSchema, IJsonSchemaEnum, IJsonSchemaModel } from "./schema.types";
 
 export class SchemasService {
   private JSON_SCHEMA: IJsonSchema;
@@ -7,7 +7,7 @@ export class SchemasService {
     if (this.JSON_SCHEMA) {
       return this.JSON_SCHEMA;
     }
-    this.JSON_SCHEMA = require('../../.schema/schema.json');
+    this.JSON_SCHEMA = require("../../.schema/schema.json");
     return this.JSON_SCHEMA;
   };
 

@@ -1,6 +1,6 @@
-import { useEntityDataReference } from 'frontend/hooks/data/data.store';
-import { StyledLinkLikeButton } from '@gothicgeeks/design-system';
-import { useDetailsOffCanvasStore } from './hooks/useDetailsOffCanvas.store';
+import { useEntityDataReference } from "frontend/hooks/data/data.store";
+import { StyledLinkLikeButton } from "@gothicgeeks/design-system";
+import { useDetailsOffCanvasStore } from "./hooks/useDetailsOffCanvas.store";
 
 interface IProps {
   entity: string;

@@ -4,20 +4,31 @@ import {
   FormSkeleton,
   FormSkeletonSchema,
   OffCanvas,
-} from '@gothicgeeks/design-system';
-import { Form, Field } from 'react-final-form';
+} from "@gothicgeeks/design-system";
+import { Form, Field } from "react-final-form";
 import {
-  ButtonLang, composeValidators, maxLength, minLength,
-} from '@gothicgeeks/shared';
-import { useMemo, useState } from 'react';
-import { getFieldTypeBoundedValidations } from 'frontend/hooks/entity/guess';
-import { FIELD_TYPES_CONFIG_MAP } from '../../../../../shared/validations.constants';
-import { FieldValidationCanvas, IFieldValidationItem } from './FieldsValidation';
-import { IEntityField } from '../../../../../backend/entities/types';
-import { EntityTypesForSelection, FieldSelectionCanvas } from './FieldsSelection';
-import { IColorableSelection } from './types';
+  ButtonLang,
+  composeValidators,
+  maxLength,
+  minLength,
+} from "@gothicgeeks/shared";
+import { useMemo, useState } from "react";
+import { getFieldTypeBoundedValidations } from "frontend/hooks/entity/guess";
+import { FIELD_TYPES_CONFIG_MAP } from "../../../../../shared/validations.constants";
+import {
+  FieldValidationCanvas,
+  IFieldValidationItem,
+} from "./FieldsValidation";
+import { IEntityField } from "../../../../../backend/entities/types";
+import {
+  EntityTypesForSelection,
+  FieldSelectionCanvas,
+} from "./FieldsSelection";
+import { IColorableSelection } from "./types";
 
-const FIELD_TYPES_CONFIG_MAP_AS_SELECTION = Object.entries(FIELD_TYPES_CONFIG_MAP)
+const FIELD_TYPES_CONFIG_MAP_AS_SELECTION = Object.entries(
+  FIELD_TYPES_CONFIG_MAP
+)
   .map(([key, { typeIsNotChangeAble }]) => ({
     label: key,
     value: key,
@@ -39,7 +50,7 @@ const CANVAS_WIDTH = 500;
 
 const resetBoundedValidation = (
   validations: IFieldValidationItem[],
-  newType: keyof typeof FIELD_TYPES_CONFIG_MAP,
+  newType: keyof typeof FIELD_TYPES_CONFIG_MAP
 ): IFieldValidationItem[] => [
   ...getFieldTypeBoundedValidations(newType),
   ...validations.filter(({ fromType }) => !fromType),
@@ -62,11 +73,11 @@ export function FieldsTypeForm({
 }: IProps) {
   const memoIzedInitialValuesSoItDoesFlickerOnSubmit = useMemo(
     () => initialValues,
-    [JSON.stringify(initialValues)],
+    [JSON.stringify(initialValues)]
   );
 
-  const [showFieldValidations, setShowFieldValidations] = useState('');
-  const [showFieldSelection, setShowFieldSelection] = useState('');
+  const [showFieldValidations, setShowFieldValidations] = useState("");
+  const [showFieldSelection, setShowFieldSelection] = useState("");
 
   if (isLoading) {
     return (
@@ -85,9 +96,7 @@ export function FieldsTypeForm({
     <Form
       onSubmit={onSubmit}
       initialValues={memoIzedInitialValuesSoItDoesFlickerOnSubmit}
-      render={({
-        handleSubmit, submitting, values, form,
-      }) => (
+      render={({ handleSubmit, submitting, values, form }) => (
         <>
           <form onSubmit={handleSubmit}>
             {fields.map(({ name }) => (
@@ -100,7 +109,7 @@ export function FieldsTypeForm({
                 {(renderProps) => {
                   const rightActions = [
                     {
-                      label: 'Configure Selections',
+                      label: "Configure Selections",
                       action: () => {
                         setShowFieldSelection(name);
                       },
@@ -109,11 +118,12 @@ export function FieldsTypeForm({
 
                   if (
                     FIELD_TYPES_CONFIG_MAP[
-                      renderProps.input.value as keyof typeof FIELD_TYPES_CONFIG_MAP
+                      renderProps.input
+                        .value as keyof typeof FIELD_TYPES_CONFIG_MAP
                     ].configureSelection
                   ) {
                     rightActions.push({
-                      label: 'Configure Validation',
+                      label: "Configure Validation",
                       action: () => {
                         setShowFieldValidations(name);
                       },
@@ -121,21 +131,28 @@ export function FieldsTypeForm({
                   }
                   return (
                     <FormSelect
-                      label={`${getEntityFieldLabels(name)} [${values.validations[name]
+                      label={`${getEntityFieldLabels(
+                        name
+                      )} [${values.validations[name]
                         .map(({ validationType }) => validationType)
-                        .join(',')}]`}
+                        .join(",")}]`}
                       selectData={FIELD_TYPES_CONFIG_MAP_AS_SELECTION}
                       rightActions={rightActions}
                       disabledOptions={listOfEntitiesThatCantBeChanged}
-                      disabled={listOfEntitiesThatCantBeChanged.includes(renderProps.input.value)}
+                      disabled={listOfEntitiesThatCantBeChanged.includes(
+                        renderProps.input.value
+                      )}
                       meta={renderProps.meta}
                       input={{
                         ...renderProps.input,
                         onChange: (value) => {
                           renderProps.input.onChange(value);
-                          form.change('validations', {
+                          form.change("validations", {
                             ...values.validations,
-                            [name]: resetBoundedValidation(values.validations[name], value),
+                            [name]: resetBoundedValidation(
+                              values.validations[name],
+                              value
+                            ),
                           });
                         },
                       }}
@@ -147,40 +164,48 @@ export function FieldsTypeForm({
             <FormButton text={ButtonLang.upsert} isMakingRequest={submitting} />
           </form>
           <OffCanvas
-            title={`"${getEntityFieldLabels(showFieldValidations)}" Validations`}
+            title={`"${getEntityFieldLabels(
+              showFieldValidations
+            )}" Validations`}
             width={CANVAS_WIDTH}
-            onClose={() => setShowFieldValidations('')}
+            onClose={() => setShowFieldValidations("")}
             show={!!showFieldValidations}
           >
             <FieldValidationCanvas
               field={showFieldValidations}
-              entityType={values.types[showFieldValidations] as keyof typeof FIELD_TYPES_CONFIG_MAP}
+              entityType={
+                values.types[
+                  showFieldValidations
+                ] as keyof typeof FIELD_TYPES_CONFIG_MAP
+              }
               validations={values.validations[showFieldValidations] || []}
               onSubmit={(value) => {
-                form.change('validations', {
+                form.change("validations", {
                   ...values.validations,
                   [showFieldValidations]: value,
                 });
-                setShowFieldValidations('');
+                setShowFieldValidations("");
               }}
             />
           </OffCanvas>
           <OffCanvas
             title={`"${getEntityFieldLabels(showFieldSelection)}" Selection`}
             width={CANVAS_WIDTH}
-            onClose={() => setShowFieldSelection('')}
+            onClose={() => setShowFieldSelection("")}
             show={!!showFieldSelection}
           >
             <FieldSelectionCanvas
               field={showFieldSelection}
-              entityType={values.types[showFieldSelection] as EntityTypesForSelection}
+              entityType={
+                values.types[showFieldSelection] as EntityTypesForSelection
+              }
               selections={values.selections[showFieldSelection] || []}
               onSubmit={(value) => {
-                form.change('selections', {
+                form.change("selections", {
                   ...values.selections,
                   [showFieldSelection]: value,
                 });
-                setShowFieldSelection('');
+                setShowFieldSelection("");
               }}
             />
           </OffCanvas>

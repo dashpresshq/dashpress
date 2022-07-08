@@ -40,5 +40,7 @@ module.exports = {
     '@typescript-eslint/no-shadow': 'error',
     'react/no-danger': 'off',
     'import/no-extraneous-dependencies': 'off',
+    'consistent-return': 'off',
+    'default-case': 'off',
   },
 };

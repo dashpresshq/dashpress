@@ -3,10 +3,7 @@ import { useCallback } from 'react';
 import { IFieldValidationItem } from 'frontend/views/entity/Configure/Fields/FieldsValidation';
 import uniqBy from 'lodash/uniqBy';
 import { IColorableSelection } from 'frontend/views/entity/Configure/Fields/types';
-import {
-  isUseColorsFlagOn,
-  SYSTEM_COLORS,
-} from 'frontend/views/entity/Configure/Fields/selection.utils';
+
 import { EntityTypesForSelection } from 'frontend/views/entity/Configure/Fields/FieldsSelection';
 import { getFieldTypeBoundedValidations, guessEntityType, guessEntityValidations } from './guess';
 import { userFriendlyCase } from '../../lib/strings';
@@ -15,6 +12,7 @@ import { useEntityReferenceFields, useEntityScalarFields } from './entity.store'
 import { CONFIGURATION_KEYS } from '../../../shared/configuration.constants';
 import { useEntityConfiguration } from '../configuration/configration.store';
 import { ConfigrationStorage } from '../configuration/storage';
+import { getEntitySelectionConfig } from './logic';
 
 export function useEntitySlug() {
   return useRouteParam('entity');
@@ -145,16 +143,15 @@ function useEntityEnumOptions(paramEntity?: string) {
 
   const cacheKey = 'enum_list';
 
-  return useApiQueries({
+  return useApiQueries<{type: string}, string[]>({
     input: enumNames,
     accessor: 'type',
     pathFn: (enumName) => `/api/enums/${enumName}`,
     placeholderDataFn: (enumName) => ConfigrationStorage.get(cacheKey, enumName),
-    // TODO revert on upgrade
-    // dataTransformer: (data: Record<string, unknown>, enumName: string) => {
-    //   ConfigrationStorage.set(data, cacheKey, enumName)
-    //   return data;
-    // }
+    dataTransformer: (data: string[], enumName: string) => {
+      ConfigrationStorage.set(data, cacheKey, enumName);
+      return data;
+    },
   });
 }
 
@@ -190,56 +187,11 @@ export function useEntityFieldSelections(paramEntity?: string) {
 
         const entityType = entityFieldTypes[name] as EntityTypesForSelection;
 
-        let selections: IColorableSelection[] = [];
-
-        switch (entityType) {
-          case 'boolean':
-            selections = preSelectedType ?? [
-              {
-                value: true,
-                label: 'Yes',
-                color: SYSTEM_COLORS[0],
-              },
-              {
-                value: false,
-                label: 'No',
-                color: SYSTEM_COLORS[1],
-              },
-            ];
-            break;
-          case 'selection':
-            selections = preSelectedType ?? [];
-            break;
-
-          case 'reference':
-            selections = preSelectedType ?? [];
-            break;
-
-          case 'selection-enum': {
-            const preselection = preSelectedType ?? [];
-
-            const shouldUseColor = isUseColorsFlagOn(preselection);
-            const enumsFromDb = enumOptions.data[type].data || [];
-
-            selections = uniqBy(
-              [
-                ...enumsFromDb.map((enumValue, index) => ({
-                  value: enumValue,
-                  label: userFriendlyCase(enumValue),
-                  color: shouldUseColor ? SYSTEM_COLORS[index % SYSTEM_COLORS.length] : undefined,
-                })),
-                ...preselection,
-              ],
-              'value',
-            );
-
-            break;
-          }
-          default:
-            selections = [];
-        }
-
-        return [name, selections];
+        return [name, getEntitySelectionConfig(
+          entityType,
+          preSelectedType,
+          enumOptions.data[type].data,
+        )];
       }),
   );
 }

@@ -48,8 +48,6 @@ export const buildFilterConfigFromType = (
     case 'list':
       filterType.bag = [];
       return filterType;
-    default:
-      return undefined;
   }
 };
 

@@ -51,7 +51,10 @@ export function EntityTable() {
 
   const tableData = usePaginatedData(
     ENTITY_TABLE_PATH(entity),
-    paginatedDataState
+    paginatedDataState,
+    {
+      enabled: entity && entity !== SLUG_LOADING_VALUE,
+    }
   );
 
   const [closeDetailsCanvas, detailsCanvasEntity, detailsCanvasId] =

@@ -210,7 +210,7 @@ export function useEntityFieldSelections(paramEntity?: string) {
           getEntitySelectionConfig(
             entityType,
             preSelectedType,
-            enumOptions.data[type].data
+            enumOptions.data[type]?.data
           ),
         ];
       })

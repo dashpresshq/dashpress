@@ -1,11 +1,8 @@
-import type { NextApiRequest, NextApiResponse } from "next";
 import { entitiesController } from "../../../backend/entities/entities.controller";
-import { handleResponseError } from "../../../backend/lib/errors";
+import { requestHandler } from "../../../backend/lib/request";
 
-export default function handler(_: NextApiRequest, res: NextApiResponse) {
-  try {
-    res.status(200).json(entitiesController.listAllEntities());
-  } catch (error) {
-    handleResponseError(res, error);
-  }
-}
+export default requestHandler({
+  GET: async () => {
+    return entitiesController.listAllEntities();
+  },
+});

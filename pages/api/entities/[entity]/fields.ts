@@ -1,18 +1,11 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import type { NextApiRequest, NextApiResponse } from "next";
 import { entitiesController } from "../../../../backend/entities/entities.controller";
 import { validateEntityFromRequest } from "../../../../backend/entities/entities.validations";
-import { handleResponseError } from "../../../../backend/lib/errors";
+import { requestHandler } from "../../../../backend/lib/request";
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
-  try {
+export default requestHandler({
+  GET: async (req) => {
     const entity = validateEntityFromRequest(req.query);
 
-    res.status(200).json(await entitiesController.getEntityFields(entity));
-  } catch (error) {
-    handleResponseError(res, error);
-  }
-}
+    return await entitiesController.getEntityFields(entity);
+  },
+});

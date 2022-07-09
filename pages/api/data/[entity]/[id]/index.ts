@@ -1,34 +1,27 @@
-import type { NextApiRequest, NextApiResponse } from "next";
 import { dataController } from "../../../../../backend/data/data.controller";
 import {
   validateEntityFromRequest,
   validateEntityIdFromRequest,
 } from "../../../../../backend/entities/entities.validations";
-import { handleResponseError } from "../../../../../backend/lib/errors";
+import { requestHandler } from "../../../../../backend/lib/request";
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
-  try {
+export default requestHandler({
+  GET: async (req) => {
     const entity = validateEntityFromRequest(req.query);
     const id = validateEntityIdFromRequest(req.query);
 
-    if (req.method === "GET") {
-      return res.status(200).json(await dataController.showData(entity, id));
-    }
-    if (req.method === "PATCH") {
-      return res
-        .status(204)
-        .json(await dataController.updateData(entity, id, req.body.data));
-    }
-    if (req.method === "DELETE") {
-      return res.status(204).json(await dataController.deleteData(entity, id));
-    }
-  } catch (error) {
-    return handleResponseError(res, error);
-  }
+    return await dataController.showData(entity, id);
+  },
+  PATCH: async (req) => {
+    const entity = validateEntityFromRequest(req.query);
+    const id = validateEntityIdFromRequest(req.query);
 
-  res.setHeader("Allow", ["GET", "PATCH", "DELETE"]);
-  return res.status(405).end(`Method ${req.method} Not Allowed`);
-}
+    return await dataController.updateData(entity, id, req.body.data);
+  },
+  DELETE: async (req) => {
+    const entity = validateEntityFromRequest(req.query);
+    const id = validateEntityIdFromRequest(req.query);
+
+    return await dataController.deleteData(entity, id);
+  },
+});

@@ -15,8 +15,8 @@
     "verify": "npm run typecheck && npm run lint && npm run test"
   },
   "dependencies": {
-    "@gothicgeeks/design-system": "git+ssh://git@github.com:thrownullexception/design-system.git#631867ffc39769d49c4c6d23709074bca5a06c70",
-    "@gothicgeeks/shared": "git+ssh://git@github.com:thrownullexception/shared.git#40f68901963101262bb85e66b3ef2be4e06417b5",
+    "@gothicgeeks/design-system": "git+ssh://git@github.com:thrownullexception/design-system.git#e6a28659f613dfa950d226a1f2659d0e0ea59a8b",
+    "@gothicgeeks/shared": "git+ssh://git@github.com:thrownullexception/shared.git#d2c38bb7de1419b8a492ad1639dd514c6ba139e9",
     "change-case": "^4.1.2",
     "class-validator": "^0.13.2",
     "final-form-arrays": "^3.0.2",
@@ -56,11 +56,13 @@
     "eslint-plugin-promise": "^6.0.0",
     "eslint-plugin-react": "^7.28.0",
     "eslint-plugin-react-hooks": "^4.3.0",
+    "eslint-plugin-testing-library": "^5.5.1",
     "husky": "^8.0.1",
     "jest": "^28.1.1",
     "jest-environment-jsdom": "^28.1.2",
     "lint-staged": "^13.0.2",
     "next-router-mock": "^0.7.4",
+    "node-mocks-http": "^1.11.0",
     "prettier": "^2.7.1",
     "ts-node": "^10.8.1",
     "typescript": "^4.7.4"

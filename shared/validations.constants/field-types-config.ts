@@ -1,4 +1,5 @@
-import { TableFilterType } from "@gothicgeeks/design-system/dist/components/Table/Table.types";
+import { TableFilterType } from "@gothicgeeks/design-system/dist/components/Table/filters/types";
+import noop from "lodash/noop";
 import { SelectableAbleValidations } from "./types";
 
 // less than other field
@@ -160,7 +161,10 @@ export const FIELD_TYPES_CONFIG_MAP: Record<
     // use color
     tableFilterType: {
       _type: "list",
-      bag: [],
+      bag: {
+        onChange: () => noop("foo"),
+        selections: [],
+      },
     },
     sortable: true,
     typeIsNotChangeAble: true,

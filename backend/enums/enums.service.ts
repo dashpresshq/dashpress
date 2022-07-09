@@ -15,9 +15,7 @@ export class EnumsService {
     this.getJsonSchemaEnumsMap()[name];
 
   getEnumValuesAsList = (name: string): string[] =>
-    this.getJsonSchemaEnumsMap()[name].values.map(
-      (value) => value.dbName || value.name
-    );
+    this.getEnumValues(name).values.map((value) => value.dbName || value.name);
 }
 
 export const enumsService = new EnumsService(schemasService);

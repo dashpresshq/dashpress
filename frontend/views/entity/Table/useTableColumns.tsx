@@ -1,7 +1,4 @@
-import {
-  ITableColumn,
-  TableFilterType,
-} from "@gothicgeeks/design-system/dist/components/Table/Table.types";
+import { TableFilterType } from "@gothicgeeks/design-system/dist/components/Table/filters/types";
 import noop from "lodash/noop";
 import {
   useEntityCrudSettings,
@@ -19,6 +16,7 @@ import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
 import Link from "next/link";
 import { FIELD_TYPES_CONFIG_MAP } from "shared/validations.constants";
 import { StringUtils } from "@gothicgeeks/shared";
+import { ITableColumn } from "@gothicgeeks/design-system";
 import { fitlerOutHiddenScalarColumns } from "../utils";
 import { TableActions } from "./Actions";
 import { ReferenceComponent } from "./ReferenceComponent";
@@ -39,6 +37,8 @@ export const buildFilterConfigFromType = (
   noop(entityFieldSelections);
 
   switch (filterType._type) {
+    case "boolean":
+    case "date":
     case "string":
     case "number":
       return filterType;
@@ -47,7 +47,10 @@ export const buildFilterConfigFromType = (
       // filterType.bag = entityFieldSelections;
       return filterType;
     case "list":
-      filterType.bag = [];
+      filterType.bag = {
+        onChange: () => noop(),
+        selections: [],
+      };
       return filterType;
   }
 };

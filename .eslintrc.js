@@ -8,6 +8,7 @@ module.exports = {
   extends: [
     "plugin:react/recommended",
     "airbnb",
+    "plugin:testing-library/react",
     "plugin:prettier/recommended",
   ],
   parser: "@typescript-eslint/parser",
@@ -18,7 +19,7 @@ module.exports = {
     ecmaVersion: "latest",
     sourceType: "module",
   },
-  plugins: ["react", "@typescript-eslint"],
+  plugins: ["react", "@typescript-eslint", "testing-library"],
   rules: {
     "import/no-unresolved": "off",
     "import/extensions": "off",
@@ -40,5 +41,6 @@ module.exports = {
     "import/no-extraneous-dependencies": "off",
     "consistent-return": "off",
     "default-case": "off",
+    "react/jsx-props-no-spreading": "off",
   },
 };

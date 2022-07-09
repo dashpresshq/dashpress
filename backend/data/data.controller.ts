@@ -77,6 +77,8 @@ export class DataController {
       entity
     );
 
+    console.log(filters);
+
     return {
       data: await this._dataService.list(
         entity,

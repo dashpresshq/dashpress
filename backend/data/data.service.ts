@@ -1,6 +1,12 @@
+import {
+  FilterOperators,
+  IColumnFilterBag,
+} from "@gothicgeeks/design-system/dist/components/Table/filters/types";
 import knex, { Knex } from "knex";
 import get from "lodash/get";
 import noop from "lodash/noop";
+
+export type QueryFilter = { id: string; value: IColumnFilterBag<unknown> };
 
 export class DataService {
   static _dbInstance: Knex | null = null;
@@ -25,17 +31,34 @@ export class DataService {
     noop();
   }
 
-  async count(entity: string): Promise<number> {
-    return get(
-      await DataService.getInstance().count().from(entity),
-      [0, "count"],
-      0
-    );
+  private transformQueryFiltersQueryBuilder = (
+    query$: Knex.QueryBuilder,
+    queryFilter: QueryFilter[]
+  ): Knex.QueryBuilder => {
+    let query = { ...query$ };
+    queryFilter.forEach((filter) => {
+      switch (filter.value.operator) {
+        case FilterOperators.EQUAL_TO:
+          query = query.where(filter.id, "=", filter.value.value);
+          break;
+        case FilterOperators.LESS_THAN:
+          query = query.where(filter.id, "<", filter.value.value);
+          break;
+      }
+    });
+    return query;
+  };
+
+  async count(entity: string, queryFilter: QueryFilter[]): Promise<number> {
+    const query = DataService.getInstance().count().from(entity);
+    // query = this.transformQueryFiltersQueryBuilder(query, queryFilter);
+    return get(await query, [0, "count"], 0);
   }
 
   async list(
     entity: string,
     select: string[],
+    queryFilter: QueryFilter[],
     dataFetchingModifiers: {
       take: number;
       page: number;
@@ -44,6 +67,9 @@ export class DataService {
     }
   ) {
     let query = DataService.getInstance().select(select).from(entity);
+
+    // query = this.transformQueryFiltersQueryBuilder(query, queryFilter);
+
     if (dataFetchingModifiers.page && dataFetchingModifiers.take) {
       query = query
         .limit(Number(dataFetchingModifiers.take))

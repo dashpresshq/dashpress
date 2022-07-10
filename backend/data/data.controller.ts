@@ -3,8 +3,9 @@ import {
   configurationService,
 } from "backend/configuration/configuration.service";
 import noop from "lodash/noop";
+import qs from "qs";
 import { EntitiesService, entitiesService } from "../entities/entities.service";
-import { DataService, dataService } from "./data.service";
+import { DataService, dataService, QueryFilter } from "./data.service";
 
 export class DataController {
   constructor(
@@ -66,7 +67,18 @@ export class DataController {
     });
   }
 
-  async tableData(entity: string, filters: Record<string, unknown>) {
+  transformRequestQueryToQueryFilter(
+    query: Record<string, unknown>
+  ): QueryFilter[] {
+    const filters = (qs.parse(
+      Object.entries(query)
+        .map(([key, value]) => `${key}=${value}`)
+        .join("&")
+    )?.filters || []) as unknown as QueryFilter[];
+    return filters;
+  }
+
+  async tableData(entity: string, query: Record<string, unknown>) {
     // TODO validate the entity is tableable
 
     const entityScalarFields =
@@ -77,7 +89,7 @@ export class DataController {
       entity
     );
 
-    console.log(filters);
+    const queryFilters = this.transformRequestQueryToQueryFilter(query);
 
     return {
       data: await this._dataService.list(
@@ -85,22 +97,21 @@ export class DataController {
         entityScalarFields
           .filter(({ name }) => !hiddenColumns.includes(name))
           .map(({ name }) => name),
+        queryFilters,
         {
-          take: Number(filters.take),
-          page: Number(filters.page),
+          take: Number(query.take),
+          page: Number(query.page),
           orderBy:
-            (filters.orderBy as string).toLowerCase() === "desc"
-              ? "desc"
-              : "asc",
+            (query.orderBy as string).toLowerCase() === "desc" ? "desc" : "asc",
           sortBy: this._entitiesService.validateEntityField(
             entity,
-            filters.sortBy
+            query.sortBy
           ),
         }
       ),
-      pageIndex: filters.page,
-      pageSize: filters.take,
-      totalRecords: await this._dataService.count(entity),
+      pageIndex: query.page,
+      pageSize: query.take,
+      totalRecords: await this._dataService.count(entity, queryFilters),
     };
   }
 }

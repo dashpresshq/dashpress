@@ -17,12 +17,12 @@ export const getEntitySelectionConfig = (
       return (
         preSelectedType ?? [
           {
-            value: "true",
+            value: true,
             label: "Yes",
             color: SYSTEM_COLORS[0],
           },
           {
-            value: "false",
+            value: false,
             label: "No",
             color: SYSTEM_COLORS[1],
           },

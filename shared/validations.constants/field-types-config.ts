@@ -125,7 +125,7 @@ export const FIELD_TYPES_CONFIG_MAP: Record<
   boolean: {
     sortable: true,
     tableFilterType: {
-      _type: "status",
+      _type: "boolean",
       bag: [],
     },
     // Configure Labels + must use color

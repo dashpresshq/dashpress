@@ -1,7 +1,5 @@
-import {
-  FilterOperators,
-  IColumnFilterBag,
-} from "@gothicgeeks/design-system/dist/components/Table/filters/types";
+import { FilterOperators } from "@gothicgeeks/design-system"; // Move this somewhere else
+import { IColumnFilterBag } from "@gothicgeeks/design-system/dist/components/Table/filters/types";
 import knex, { Knex } from "knex";
 import get from "lodash/get";
 import noop from "lodash/noop";
@@ -31,28 +29,64 @@ export class DataService {
     noop();
   }
 
+  private filterOperatorToQuery(
+    query: Knex.QueryBuilder,
+    column: string,
+    { operator, value, value2 }: IColumnFilterBag<unknown>
+  ) {
+    // validate value2 when neede
+    if (!operator || !value || !column) {
+      return query;
+    }
+
+    switch (operator) {
+      case FilterOperators.EQUAL_TO:
+        return query.where(column, "=", value);
+
+      case FilterOperators.LESS_THAN:
+        return query.where(column, "<", value);
+
+      case FilterOperators.GREATER_THAN:
+        return query.where(column, ">", value);
+
+      case FilterOperators.CONTAINS:
+        return query.whereILike(column, `%${value}%`);
+
+      case FilterOperators.IN:
+        return query.whereIn(column, value as string[]);
+
+      case FilterOperators.NOT_EQUAL:
+        return query.whereNot(column, "=", value);
+
+      case FilterOperators.BETWEEN:
+        if (!value2) {
+          return query;
+        }
+        return query.whereBetween(column, [value, value2]);
+
+      case FilterOperators.NOT_IN:
+        return query.whereNotIn(column, value as string[]);
+    }
+    return query;
+  }
+
   private transformQueryFiltersQueryBuilder = (
-    query$: Knex.QueryBuilder,
+    query: Knex.QueryBuilder,
     queryFilter: QueryFilter[]
   ): Knex.QueryBuilder => {
-    let query = { ...query$ };
     queryFilter.forEach((filter) => {
-      switch (filter.value.operator) {
-        case FilterOperators.EQUAL_TO:
-          query = query.where(filter.id, "=", filter.value.value);
-          break;
-        case FilterOperators.LESS_THAN:
-          query = query.where(filter.id, "<", filter.value.value);
-          break;
-      }
+      // eslint-disable-next-line no-param-reassign
+      query = this.filterOperatorToQuery(query, filter.id, filter.value);
     });
     return query;
   };
 
   async count(entity: string, queryFilter: QueryFilter[]): Promise<number> {
-    const query = DataService.getInstance().count().from(entity);
-    // query = this.transformQueryFiltersQueryBuilder(query, queryFilter);
-    return get(await query, [0, "count"], 0);
+    let query = DataService.getInstance().from(entity);
+
+    query = this.transformQueryFiltersQueryBuilder(query, queryFilter);
+
+    return get(await query.count(), [0, "count"], 0);
   }
 
   async list(
@@ -66,9 +100,10 @@ export class DataService {
       sortBy: string;
     }
   ) {
-    let query = DataService.getInstance().select(select).from(entity);
-
-    // query = this.transformQueryFiltersQueryBuilder(query, queryFilter);
+    let query = this.transformQueryFiltersQueryBuilder(
+      DataService.getInstance().select(select).from(entity),
+      queryFilter
+    );
 
     if (dataFetchingModifiers.page && dataFetchingModifiers.take) {
       query = query

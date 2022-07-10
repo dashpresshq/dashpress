@@ -34,17 +34,14 @@ export const buildFilterConfigFromType = (
     return undefined;
   }
 
-  noop(entityFieldSelections);
-
   switch (filterType._type) {
-    case "boolean":
     case "date":
     case "string":
     case "number":
       return filterType;
+    case "boolean":
     case "status":
-      filterType.bag = [];
-      // filterType.bag = entityFieldSelections;
+      filterType.bag = entityFieldSelections;
       return filterType;
     case "list":
       filterType.bag = {

@@ -109,9 +109,9 @@ export function FieldsTypeForm({
                 {(renderProps) => {
                   const rightActions = [
                     {
-                      label: "Configure Selections",
+                      label: "Configure Validation",
                       action: () => {
-                        setShowFieldSelection(name);
+                        setShowFieldValidations(name);
                       },
                     },
                   ];
@@ -123,9 +123,9 @@ export function FieldsTypeForm({
                     ].configureSelection
                   ) {
                     rightActions.push({
-                      label: "Configure Validation",
+                      label: "Configure Selections",
                       action: () => {
-                        setShowFieldValidations(name);
+                        setShowFieldSelection(name);
                       },
                     });
                   }

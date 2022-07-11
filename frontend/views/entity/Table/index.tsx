@@ -87,7 +87,7 @@ export function EntityTable() {
       {error && <ErrorAlert message={error} />}
       {!isLoading && !error && (
         <Table
-          title=""
+          title={`All ${entityDiction.plural}`}
           {...{
             tableData,
             setPaginatedDataState,

@@ -73,3 +73,11 @@ Table Settings =>
 Creator mode
 User mode
 */
+
+export interface IEntityCrudSettings {
+  create: boolean;
+  details: boolean;
+  table: boolean;
+  update: boolean;
+  delete: boolean;
+}

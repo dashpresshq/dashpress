@@ -2,8 +2,10 @@ import {
   ConfigurationService,
   configurationService,
 } from "backend/configuration/configuration.service";
+import { ForbiddenError } from "backend/lib/errors";
 import noop from "lodash/noop";
 import qs from "qs";
+import { IEntityCrudSettings } from "shared/configuration.constants";
 import { EntitiesService, entitiesService } from "../entities/entities.service";
 import { DataService, dataService, QueryFilter } from "./data.service";
 
@@ -14,6 +16,7 @@ export class DataController {
     private _configurationService: ConfigurationService
   ) {}
 
+  // TODO can list data :shrug
   async listData(entity: string): Promise<{ id: string; name: string }[]> {
     noop(entity);
     return [];
@@ -33,8 +36,8 @@ export class DataController {
 
   async showData(entity: string, id: string) {
     // validate the showData fields
-    // validate the showData values and that the fields
-    // are showable and that this entity is showable
+    // validate the showData values and that the fields are showable
+    await this.canCrud(entity, "details");
     return await this._dataService.show(entity, [], {
       [this._entitiesService.getEntityPrimaryField(entity)]: id,
     });
@@ -42,14 +45,14 @@ export class DataController {
 
   async createData(entity: string, data: Record<string, unknown>) {
     // validate the createData values and that the fields are createable
-    // and that this entity is createable
+    await this.canCrud(entity, "create");
     this._entitiesService.validateEntityFields(entity, Object.keys(data));
     await this._dataService.create(entity, data);
   }
 
   async updateData(entity: string, id: string, data: Record<string, unknown>) {
     // validate the updateData values and that the fields are updateable
-    //  and that this entity is updateable
+    await this.canCrud(entity, "update");
     this._entitiesService.validateEntityFields(entity, Object.keys(data));
     await this._dataService.update(
       entity,
@@ -61,7 +64,7 @@ export class DataController {
   }
 
   async deleteData(entity: string, id: string) {
-    // validate the entity is deleteable
+    await this.canCrud(entity, "delete");
     await this._dataService.delete(entity, {
       [this._entitiesService.getEntityPrimaryField(entity)]: id,
     });
@@ -78,8 +81,18 @@ export class DataController {
     return filters;
   }
 
+  private async canCrud(entity: string, action: keyof IEntityCrudSettings) {
+    if (
+      !(await this._configurationService.show("entity_crud_settings", entity))[
+        action
+      ]
+    ) {
+      throw new ForbiddenError();
+    }
+  }
+
   async tableData(entity: string, query: Record<string, unknown>) {
-    // TODO validate the entity is tableable
+    await this.canCrud(entity, "table");
 
     const entityScalarFields =
       this._entitiesService.getScalarEntityFields(entity);

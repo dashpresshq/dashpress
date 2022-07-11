@@ -14,6 +14,7 @@ import { FieldArray } from "react-final-form-arrays";
 import { required, composeValidators, ButtonLang } from "@gothicgeeks/shared";
 import React, { useState } from "react";
 import styled from "styled-components";
+import { isNotEmpty } from "class-validator";
 import { IColorableSelection } from "./types";
 import { isUseColorsFlagOn, SYSTEM_COLORS } from "./selection.utils";
 
@@ -99,7 +100,9 @@ export function FieldSelectionCanvas({
                     <Spacer />
                     <Field
                       name={`${name}.value`}
-                      validate={composeValidators(required)}
+                      validate={composeValidators((value) =>
+                        isNotEmpty(value) ? undefined : "Required"
+                      )}
                       validateFields={[]}
                     >
                       {({ meta, input }) => (

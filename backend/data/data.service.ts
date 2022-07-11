@@ -34,7 +34,6 @@ export class DataService {
     column: string,
     { operator, value, value2 }: IColumnFilterBag<unknown>
   ) {
-    // validate value2 when neede
     if (!operator || !value || !column) {
       return query;
     }
@@ -67,7 +66,6 @@ export class DataService {
       case FilterOperators.NOT_IN:
         return query.whereNotIn(column, value as string[]);
     }
-    return query;
   }
 
   private transformQueryFiltersQueryBuilder = (

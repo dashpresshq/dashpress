@@ -106,7 +106,7 @@ export const FIELD_TYPES_CONFIG_MAP: Record<
   "datetime-local": {
     sortable: true,
     tableFilterType: {
-      _type: "number", // TODO _type: "date"
+      _type: "date",
     },
     typeIsNotChangeAble: true,
     allowedValidations: ["required"],

@@ -21,7 +21,7 @@ export class NotFoundError extends CustomError {
 
 export class ForbiddenError extends CustomError {
   constructor(message = "Action not allowed") {
-    super(401, "BadRequestError", message);
+    super(401, "ForbiddenError", message);
   }
 }
 

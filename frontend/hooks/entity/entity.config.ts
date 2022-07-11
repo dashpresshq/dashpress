@@ -16,7 +16,10 @@ import {
   useEntityReferenceFields,
   useEntityScalarFields,
 } from "./entity.store";
-import { CONFIGURATION_KEYS } from "../../../shared/configuration.constants";
+import {
+  CONFIGURATION_KEYS,
+  IEntityCrudSettings,
+} from "../../../shared/configuration.constants";
 import { useEntityConfiguration } from "../configuration/configration.store";
 import { ConfigrationStorage } from "../configuration/storage";
 import { getEntitySelectionConfig } from "./logic";
@@ -215,14 +218,6 @@ export function useEntityFieldSelections(paramEntity?: string) {
         ];
       })
   );
-}
-
-export interface IEntityCrudSettings {
-  create: boolean;
-  details: boolean;
-  table: boolean;
-  update: boolean;
-  delete: boolean;
 }
 
 export function useEntityCrudSettings() {

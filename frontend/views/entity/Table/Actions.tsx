@@ -1,11 +1,9 @@
 import { DeleteButton, SoftButton, Stack } from "@gothicgeeks/design-system";
 import { useEntityDataDeletionMutation } from "frontend/hooks/data/data.store";
-import {
-  IEntityCrudSettings,
-  useEntitySlug,
-} from "frontend/hooks/entity/entity.config";
+import { useEntitySlug } from "frontend/hooks/entity/entity.config";
 import { useEntityIdField } from "frontend/hooks/entity/entity.store";
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
+import { IEntityCrudSettings } from "shared/configuration.constants";
 import { useDetailsOffCanvasStore } from "./hooks/useDetailsOffCanvas.store";
 
 interface IProps {

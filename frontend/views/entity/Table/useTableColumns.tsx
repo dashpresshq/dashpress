@@ -9,6 +9,7 @@ import {
   useSelectedEntityColumns,
 } from "frontend/hooks/entity/entity.config";
 import {
+  useEntityIdField,
   useEntityReferenceFields,
   useEntityScalarFields,
 } from "frontend/hooks/entity/entity.store";
@@ -62,6 +63,9 @@ export const useTableColumns = () => {
     "hidden_entity_table_columns"
   );
 
+  const idField = useEntityIdField(entity);
+  // TODO primaryIds needs special filter type of equal only
+
   const entityFieldTypes = useEntityFieldTypes();
   const entityFieldSelections = useEntityFieldSelections();
 
@@ -72,10 +76,13 @@ export const useTableColumns = () => {
     const tableColumn: ITableColumn = {
       Header: getEntityFieldLabels(name),
       accessor: name,
-      filter: buildFilterConfigFromType(
-        entityFieldTypes[name],
-        entityFieldSelections[name]
-      ),
+      filter:
+        idField.data === name
+          ? undefined
+          : buildFilterConfigFromType(
+              entityFieldTypes[name],
+              entityFieldSelections[name]
+            ),
       disableSortBy: !FIELD_TYPES_CONFIG_MAP[entityFieldTypes[name]].sortable,
       Cell: ({ value }: { value: unknown }) => {
         if (value === undefined || value === null) {

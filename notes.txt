@@ -11,8 +11,6 @@ http://adminator.com/
 Table actions
 
 OPEN SOURCE
-Validations
-Implement filters
 Title of the Table
 Offcanvas table on details
 Multi select
@@ -55,3 +53,7 @@ Pro Pro
   2FA
 
 After introspecting remember to sort by name
+
+// Needs finesse
+Validations
+Implement filters

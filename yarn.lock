@@ -456,14 +456,14 @@
   dependencies:
     prop-types "^15.8.1"
 
-"@gothicgeeks/design-system@git+ssh://git@github.com:thrownullexception/design-system.git#cc936bf58f90d7f6a06e62cb13b1a950a6c811a9":
-  version "0.2.65"
-  resolved "git+ssh://git@github.com:thrownullexception/design-system.git#cc936bf58f90d7f6a06e62cb13b1a950a6c811a9"
+"@gothicgeeks/design-system@git+ssh://git@github.com:thrownullexception/design-system.git#9785df5c051eb129c4fb1dee073afcb53c416da8":
+  version "0.2.66"
+  resolved "git+ssh://git@github.com:thrownullexception/design-system.git#9785df5c051eb129c4fb1dee073afcb53c416da8"
   dependencies:
     "@fortawesome/fontawesome-svg-core" "^6.1.1"
     "@fortawesome/free-solid-svg-icons" "^6.1.1"
     "@fortawesome/react-fontawesome" "^0.1.18"
-    "@gothicgeeks/shared" "git+ssh://git@github.com:thrownullexception/shared.git#d2c38bb7de1419b8a492ad1639dd514c6ba139e9"
+    "@gothicgeeks/shared" "git+ssh://git@github.com:thrownullexception/shared.git#96003bc150c549c16a55ab9ef1710f1dd2601f37"
     "@types/prismjs" "^1.26.0"
     "@types/react-datepicker" "^4.4.1"
     "@types/react-final-form-listeners" "^1.0.0"
@@ -497,9 +497,9 @@
     tiny-skeleton-loader-react "^1.1.8"
     zustand "3.4.2"
 
-"@gothicgeeks/shared@git+ssh://git@github.com:thrownullexception/shared.git#d2c38bb7de1419b8a492ad1639dd514c6ba139e9":
-  version "0.2.29"
-  resolved "git+ssh://git@github.com:thrownullexception/shared.git#d2c38bb7de1419b8a492ad1639dd514c6ba139e9"
+"@gothicgeeks/shared@git+ssh://git@github.com:thrownullexception/shared.git#96003bc150c549c16a55ab9ef1710f1dd2601f37":
+  version "0.2.33"
+  resolved "git+ssh://git@github.com:thrownullexception/shared.git#96003bc150c549c16a55ab9ef1710f1dd2601f37"
   dependencies:
     "@types/lodash" "^4.14.182"
     "@types/nprogress" "^0.2.0"

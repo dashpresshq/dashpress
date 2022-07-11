@@ -124,8 +124,7 @@ export const useTableColumns = () => {
         }
 
         if (typeof value === "string") {
-          // TODO change to ellipsis
-          return <>{StringUtils.limitTo(value as string, 50)}</>;
+          return <>{StringUtils.ellipsis(value as string, 50)}</>;
         }
 
         return <span>{value as string}</span>;

@@ -11,15 +11,16 @@ http://adminator.com/
 Table actions
 
 OPEN SOURCE
+url state
 Title of the Table
 Offcanvas table on details
 Multi select
 Dahsboard list
 Error on none permitted pages
-Local state
-url state
+off canvas for settings
 CSV, JSON
 HTTP Actions
+users & auth
 Clone item
 Reorder menu
 Custom query views
@@ -57,3 +58,8 @@ After introspecting remember to sort by name
 // Needs finesse
 Validations
 Implement filters
+
+
+secure all requests
+
+prod check for users login

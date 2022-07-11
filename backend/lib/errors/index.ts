@@ -6,7 +6,7 @@ export class CustomError extends Error {
 
   name: string;
 
-  constructor(code: number, name: string, message = "Action not allowed") {
+  constructor(code: number, name: string, message = "An Error Occurred") {
     super(message);
     this.code = code;
     this.name = name;
@@ -20,7 +20,7 @@ export class NotFoundError extends CustomError {
 }
 
 export class ForbiddenError extends CustomError {
-  constructor(message = "Action not allowed") {
+  constructor(message = "Access to resource is denied") {
     super(401, "ForbiddenError", message);
   }
 }

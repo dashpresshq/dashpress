@@ -16,7 +16,7 @@ export class EntitiesController {
   async getMenuEntities(): Promise<IValueLabel[]> {
     const entities = this._entitiesService.getAllEntities();
     const [hiddenEntities, entitiesOrder] = await Promise.all([
-      this._configurationService.show<string[]>("entities_to_hide_from_menu"),
+      this._configurationService.show<string[]>("disabled_entities"),
       this._configurationService.show<string[]>("entities_order"),
     ]);
     const entitiesToShow = entities.filter(

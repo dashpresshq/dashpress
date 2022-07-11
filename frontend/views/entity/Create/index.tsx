@@ -26,6 +26,7 @@ import {
 import { useEntityConfiguration } from "../../../hooks/configuration/configration.store";
 import { CreateEntityForm } from "./CreateEntity.form";
 import { fitlerOutHiddenScalarColumns } from "../utils";
+import { useViewStateMachine } from "../useViewStateMachine";
 
 export function EntityCreate() {
   const entity = useEntitySlug();
@@ -59,6 +60,8 @@ export function EntityCreate() {
     entityScalarFields.isLoading ||
     entityFieldTypesMap.isLoading;
 
+  const viewState = useViewStateMachine(isLoading, error, "create");
+
   return (
     <AppLayout
       breadcrumbs={[
@@ -79,7 +82,7 @@ export function EntityCreate() {
             label: entityDiction.plural,
           }}
         >
-          {isLoading && (
+          {viewState.type === "loading" && (
             <FormSkeleton
               schema={[
                 FormSkeletonSchema.Input,
@@ -89,8 +92,10 @@ export function EntityCreate() {
               ]}
             />
           )}
-          {error && <ErrorAlert message={error} />}
-          {!isLoading && !error && (
+          {viewState.type === "error" && (
+            <ErrorAlert message={viewState.message} />
+          )}
+          {viewState.type === "render" && (
             <CreateEntityForm
               entityFieldTypes={entityFieldTypes}
               entityValidationsMap={entityValidationsMap}

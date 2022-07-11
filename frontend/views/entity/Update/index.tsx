@@ -30,6 +30,7 @@ import {
 import { useEntityConfiguration } from "../../../hooks/configuration/configration.store";
 import { UpdateEntityForm } from "./UpdateEntity.form";
 import { fitlerOutHiddenScalarColumns } from "../utils";
+import { useViewStateMachine } from "../useViewStateMachine";
 
 // TODO bounce if .update is not enabled
 export function EntityUpdate() {
@@ -70,6 +71,8 @@ export function EntityUpdate() {
     hiddenUpdateColumns.isLoading ||
     entityScalarFields.isLoading;
 
+  const viewState = useViewStateMachine(isLoading, error, "update");
+
   return (
     <AppLayout
       titleNeedsContext
@@ -94,7 +97,7 @@ export function EntityUpdate() {
             label: entityDiction.singular,
           }}
         >
-          {isLoading && (
+          {viewState.type === "loading" && (
             <FormSkeleton
               schema={[
                 FormSkeletonSchema.Input,
@@ -104,8 +107,10 @@ export function EntityUpdate() {
               ]}
             />
           )}
-          {error && <ErrorAlert message={error} />}
-          {!isLoading && !error && (
+          {viewState.type === "error" && (
+            <ErrorAlert message={viewState.message} />
+          )}
+          {viewState.type === "render" && (
             <UpdateEntityForm
               getEntityFieldLabels={getEntityFieldLabels}
               entityFieldTypes={entityFieldTypes}

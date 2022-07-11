@@ -9,7 +9,7 @@ export const CONFIGURATION_KEYS: Record<
   | "entity_crud_settings"
   | "entities_order"
   | "entity_columns_labels"
-  | "entities_to_hide_from_menu"
+  | "disabled_entities"
   | "relations_list_fields" //
   | "entity_selections"
   | "entity_validations",
@@ -49,7 +49,7 @@ export const CONFIGURATION_KEYS: Record<
   },
   relations_list_fields: { requireEntity: true, defaultValue: [] },
 
-  entities_to_hide_from_menu: { requireEntity: false, defaultValue: [] },
+  disabled_entities: { requireEntity: false, defaultValue: [] },
   entities_order: { requireEntity: false, defaultValue: [] },
 };
 

@@ -17,6 +17,7 @@ import {
 import { fitlerOutHiddenScalarColumns } from "../utils";
 import { OptionTag } from "../OptionTag";
 import { ReferenceComponent } from "../Table/ReferenceComponent";
+import { useViewStateMachine } from "../useViewStateMachine";
 
 export function EntityDetailsView({
   id,
@@ -47,15 +48,17 @@ export function EntityDetailsView({
     entityScalarFields.isLoading ||
     hiddenDetailsColumns.isLoading;
 
+  const viewState = useViewStateMachine(isLoading, error, "details");
+
   if (!id) {
     return null;
   }
 
   return (
     <>
-      {isLoading && <ComponentIsLoading />}
-      {error && <ErrorAlert message={error} />}
-      {!isLoading && !error && (
+      {viewState.type === "loading" && <ComponentIsLoading />}
+      {viewState.type === "error" && <ErrorAlert message={viewState.message} />}
+      {viewState.type === "render" && (
         <>
           {/* TODO use a breadcrumb here for the deep entities */}
           {fitlerOutHiddenScalarColumns(

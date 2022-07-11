@@ -4,8 +4,8 @@ import { useEffect, useState } from "react";
 import { ENTITY_TABLE_PATH } from "frontend/hooks/data/data.store";
 import { useRouteParam } from "@gothicgeeks/shared";
 import { useChangeRouterParam } from "frontend/lib/routing/useChangeRouterParam";
+import { IEntityCrudSettings } from "shared/configuration.constants";
 import {
-  IEntityCrudSettings,
   useEntityCrudSettings,
   useEntityFieldLabels,
   useEntitySlug,
@@ -121,6 +121,43 @@ export function EntityCrudSettings() {
                 <SelectionTab
                   getEntityFieldLabels={getEntityFieldLabels}
                   entityFields={entityScalarFields.data || []}
+                  description="Toggle the columns that should be shown in the table"
+                  isLoading={sharedLoading || hiddenTableColumns.isLoading}
+                  // onToggle={() => toggleCrudSettings("table")}
+                  hiddenColumns={hiddenTableColumns.data || []}
+                  onSubmit={async (data) => {
+                    upsertTableColumnsMutation.mutateAsync(data);
+                  }}
+                  enabled={entityCrudSettingsState.table}
+                  labels={["Hide In Table List", "Show In Table List"]}
+                />
+              ),
+              label: ENTITY_CRUD_SETTINGS_TAB_LABELS.TABLE,
+            },
+            {
+              content: (
+                <SelectionTab
+                  getEntityFieldLabels={getEntityFieldLabels}
+                  entityFields={entityScalarFields.data || []}
+                  description="Toggle the fields that should be shown in the details page"
+                  isLoading={sharedLoading || hiddenDetailsColumns.isLoading}
+                  hiddenColumns={hiddenDetailsColumns.data || []}
+                  onToggle={() => toggleCrudSettings("details")}
+                  // TODO if you disable details then disable update
+                  onSubmit={async (data) => {
+                    upsertDetailsColumnsMutation.mutateAsync(data);
+                  }}
+                  enabled={entityCrudSettingsState.details}
+                  labels={["Hide Details Button", "Show Details Button"]}
+                />
+              ),
+              label: ENTITY_CRUD_SETTINGS_TAB_LABELS.DETAILS,
+            },
+            {
+              content: (
+                <SelectionTab
+                  getEntityFieldLabels={getEntityFieldLabels}
+                  entityFields={entityScalarFields.data || []}
                   description="Toggle the fields that are allowed to be created in the Form"
                   isLoading={sharedLoading || hiddenCreateColumns.isLoading}
                   hiddenColumns={hiddenCreateColumns.data || []}
@@ -146,47 +183,15 @@ export function EntityCrudSettings() {
                   onSubmit={async (data) => {
                     await upsertUpdateColumnsMutation.mutateAsync(data);
                   }}
-                  enabled={entityCrudSettingsState.update}
+                  // TODO If you enable update then enable details
+                  enabled={
+                    entityCrudSettingsState.update &&
+                    entityCrudSettingsState.details
+                  }
                   labels={["Hide Edit Button", "Show Edit Button"]}
                 />
               ),
               label: ENTITY_CRUD_SETTINGS_TAB_LABELS.UPDATE,
-            },
-            {
-              content: (
-                <SelectionTab
-                  getEntityFieldLabels={getEntityFieldLabels}
-                  entityFields={entityScalarFields.data || []}
-                  description="Toggle the fields that should be shown in the details page"
-                  isLoading={sharedLoading || hiddenDetailsColumns.isLoading}
-                  hiddenColumns={hiddenDetailsColumns.data || []}
-                  onToggle={() => toggleCrudSettings("details")}
-                  onSubmit={async (data) => {
-                    upsertDetailsColumnsMutation.mutateAsync(data);
-                  }}
-                  enabled={entityCrudSettingsState.details}
-                  labels={["Hide Details Button", "Show Details Button"]}
-                />
-              ),
-              label: ENTITY_CRUD_SETTINGS_TAB_LABELS.DETAILS,
-            },
-            {
-              content: (
-                <SelectionTab
-                  getEntityFieldLabels={getEntityFieldLabels}
-                  entityFields={entityScalarFields.data || []}
-                  description="Toggle the columns that should be shown in the table"
-                  isLoading={sharedLoading || hiddenTableColumns.isLoading}
-                  onToggle={() => toggleCrudSettings("table")}
-                  hiddenColumns={hiddenTableColumns.data || []}
-                  onSubmit={async (data) => {
-                    upsertTableColumnsMutation.mutateAsync(data);
-                  }}
-                  enabled={entityCrudSettingsState.table}
-                  labels={["Hide In Table List", "Show In Table List"]}
-                />
-              ),
-              label: ENTITY_CRUD_SETTINGS_TAB_LABELS.TABLE,
             },
             {
               content: (

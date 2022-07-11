@@ -11,12 +11,12 @@ http://adminator.com/
 Table actions
 
 OPEN SOURCE
-url state
+Error on none permitted pages
 Title of the Table
+url state
 Offcanvas table on details
 Multi select
 Dahsboard list
-Error on none permitted pages
 off canvas for settings
 CSV, JSON
 HTTP Actions
@@ -34,7 +34,6 @@ Action integrations
 Current User
 Charts
 Summary views
-Users Authentication
 Custom Dashboard
 Selected theme
 Email Support

@@ -71,22 +71,34 @@ export class DataController {
   }
 
   transformRequestQueryToQueryFilter(
-    query: Record<string, unknown>
+    query: Record<string, unknown>,
+    entity: string
   ): QueryFilter[] {
     const filters = (qs.parse(
       Object.entries(query)
         .map(([key, value]) => `${key}=${value}`)
         .join("&")
     )?.filters || []) as unknown as QueryFilter[];
+
+    this._entitiesService.validateEntityFields(
+      entity,
+      filters.map(({ id }) => id)
+    );
     return filters;
   }
 
   private async canCrud(entity: string, action: keyof IEntityCrudSettings) {
-    if (
-      !(await this._configurationService.show("entity_crud_settings", entity))[
-        action
-      ]
-    ) {
+    const [canAction, disabledEntities] = await Promise.all([
+      (
+        await this._configurationService.show<IEntityCrudSettings>(
+          "entity_crud_settings",
+          entity
+        )
+      )[action],
+      this._configurationService.show<string[]>("disabled_entities"),
+    ]);
+
+    if (!canAction || disabledEntities.includes(entity)) {
       throw new ForbiddenError();
     }
   }
@@ -102,7 +114,7 @@ export class DataController {
       entity
     );
 
-    const queryFilters = this.transformRequestQueryToQueryFilter(query);
+    const queryFilters = this.transformRequestQueryToQueryFilter(query, entity);
 
     return {
       data: await this._dataService.list(

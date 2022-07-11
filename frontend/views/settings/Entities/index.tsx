@@ -25,13 +25,11 @@ export function EntitiesSettings() {
   const tabFromUrl = useRouteParam("tab");
   const changeTabParam = useChangeRouterParam("tab");
 
-  const entitiesToHide = useAppConfiguration<string[]>(
-    "entities_to_hide_from_menu"
-  );
+  const entitiesToHide = useAppConfiguration<string[]>("disabled_entities");
   const entitiesMenuItems = useEntitiesMenuItems();
 
   const upsertHideFromMenuMutation = useUpsertConfigurationMutation(
-    "entities_to_hide_from_menu",
+    "disabled_entities",
     "",
     { otherEndpoints: [ENTITIES_MENU_ENDPOINT] }
   );
@@ -62,10 +60,11 @@ export function EntitiesSettings() {
           currentTab={tabFromUrl}
           onChange={changeTabParam}
           contents={[
+            // TODO Entities to hide in dashboard
             {
               content: (
                 <EntitiesSelection
-                  description="Select the entitites that you want on to appear in the app i.e Tables, Home Page, Charts etc"
+                  description="Disable entitites that you dont want to appear anywhere in the app"
                   isLoading={entitiesList.isLoading || entitiesToHide.isLoading}
                   allList={entitiesList.data || []}
                   getEntityFieldLabels={entitiesDictionPlurals}

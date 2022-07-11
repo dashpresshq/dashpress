@@ -13,7 +13,7 @@ import { useStringSelections } from "../../../../lib/selection";
 interface IProps {
   entityFields: IEntityField[];
   isLoading: boolean;
-  onToggle: () => void;
+  onToggle?: () => void;
   hiddenColumns: string[];
   onSubmit: (columnsSelection: string[]) => Promise<void>;
   enabled: boolean;
@@ -52,13 +52,15 @@ export function SelectionTab({
         <div style={{ width: "100%" }}>
           <Text size="5">{description}</Text>
         </div>
-        <FormButton
-          isMakingRequest={false}
-          size="sm"
-          isInverse={enabled}
-          text={enableDisableLabel}
-          onClick={() => onToggle()}
-        />
+        {onToggle && (
+          <FormButton
+            isMakingRequest={false}
+            size="sm"
+            isInverse={enabled}
+            text={enableDisableLabel}
+            onClick={() => onToggle()}
+          />
+        )}
       </Stack>
       <Spacer size="xxl" />
       {enabled && entityFields.length > 0 && (

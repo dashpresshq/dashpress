@@ -3,6 +3,7 @@ import {
   configurationService,
 } from "backend/configuration/configuration.service";
 import { ForbiddenError } from "backend/lib/errors";
+import { TemplateService } from "shared/lib/templates";
 import noop from "lodash/noop";
 import qs from "qs";
 import { IEntityCrudSettings } from "shared/configuration.constants";
@@ -23,6 +24,10 @@ export class DataController {
   }
 
   async referenceData(entity: string, id: string): Promise<string> {
+    const relationshipSettings = await this._configurationService.show<{
+      format: string;
+    }>("relationship_settings", entity);
+
     const data = await this._dataService.show<Record<string, unknown>>(
       entity,
       [],
@@ -31,7 +36,13 @@ export class DataController {
       }
     );
 
-    return Object.values(data)[4] as string;
+    if (relationshipSettings.format) {
+      return TemplateService.compile(relationshipSettings.format, data);
+    }
+
+    return relationshipSettings.format || "Unset";
+
+    // return Object.values(data)[4] as string;
   }
 
   async showData(entity: string, id: string) {

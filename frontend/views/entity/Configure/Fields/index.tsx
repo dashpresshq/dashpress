@@ -39,6 +39,7 @@ export function EntityFieldsSettings() {
     "entity_columns_labels",
     entity
   );
+
   const getEntityFieldLabels = useEntityFieldLabels();
   const {
     isLoading: entityFieldTypesMapIsLoading,

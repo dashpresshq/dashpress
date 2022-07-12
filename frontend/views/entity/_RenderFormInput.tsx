@@ -7,7 +7,7 @@ import {
 } from "@gothicgeeks/design-system";
 import { ISharedFormInput } from "@gothicgeeks/design-system/dist/components/Form/_types";
 import { StringUtils } from "@gothicgeeks/shared";
-import { TemplateService } from "frontend/lib/templates";
+import { TemplateService } from "shared/lib/templates";
 import {
   FIELD_TYPES_CONFIG_MAP,
   ENTITY_VALIDATION_CONFIG,

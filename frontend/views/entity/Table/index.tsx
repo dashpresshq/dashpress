@@ -98,7 +98,6 @@ export function EntityTable() {
             paginatedDataState,
           }}
           columns={columns}
-          // ovveride loading indicator
           menuItems={menuItems}
         />
       )}

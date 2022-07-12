@@ -57,8 +57,8 @@ describe("/api/error/handling", () => {
     expect(res._getStatusCode()).toBe(401);
     expect(res._getJSONData()).toMatchInlineSnapshot(`
       Object {
-        "message": "You are not allowed",
-        "name": "BadRequestError",
+        "message": "Access to resource is denied",
+        "name": "ForbiddenError",
       }
     `);
   });

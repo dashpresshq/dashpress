@@ -4,6 +4,7 @@ import {
   Spacer,
   Text,
 } from "@gothicgeeks/design-system";
+import { SLUG_LOADING_VALUE } from "@gothicgeeks/shared";
 import {
   useEntityFieldLabels,
   useEntityFieldSelections,
@@ -45,6 +46,7 @@ export function EntityDetailsView({
   const isLoading =
     dataDetails.isLoading ||
     entityReferenceFields.isLoading ||
+    entity === SLUG_LOADING_VALUE ||
     entityScalarFields.isLoading ||
     hiddenDetailsColumns.isLoading;
 

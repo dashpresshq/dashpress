@@ -1,4 +1,11 @@
-import { SectionBox } from "@gothicgeeks/design-system";
+import {
+  ErrorAlert,
+  FormSkeleton,
+  FormSkeletonSchema,
+  SectionBox,
+} from "@gothicgeeks/design-system";
+import { useEntityScalarFields } from "frontend/hooks/entity/entity.store";
+import { SLUG_LOADING_VALUE } from "@gothicgeeks/shared";
 import { useEntitySlug } from "../../../../hooks/entity/entity.config";
 import { NAVIGATION_LINKS } from "../../../../lib/routing/links";
 import { BaseEntitySettingsLayout } from "../_Base";
@@ -7,17 +14,29 @@ import {
   useUpsertConfigurationMutation,
 } from "../../../../hooks/configuration/configration.store";
 import { EntityRelationsForm } from "./Relations.form";
+import { createViewStateMachine } from "../../useViewStateMachine";
 
 export function EntityRelationsSettings() {
   const entity = useEntitySlug();
   const entityRelationFormat = useEntityConfiguration<{
     format: string;
   }>("relationship_settings", entity);
+  const entityScalarFields = useEntityScalarFields(entity);
 
   const upsertConfigurationMutation = useUpsertConfigurationMutation(
     "relationship_settings",
     entity
   );
+
+  const error = entityRelationFormat.error || entityScalarFields.error;
+
+  const isLoading =
+    entityScalarFields.isLoading ||
+    entityRelationFormat.isLoading ||
+    entity === SLUG_LOADING_VALUE;
+
+  const viewStateMachine = createViewStateMachine(isLoading, error);
+
   return (
     <BaseEntitySettingsLayout
       menuItem={{
@@ -26,14 +45,25 @@ export function EntityRelationsSettings() {
       }}
     >
       <SectionBox title="Relationship Settings">
-        <EntityRelationsForm
-          onSubmit={async (values) => {
-            await upsertConfigurationMutation.mutateAsync(
-              values as unknown as Record<string, string>
-            );
-          }}
-          initialValues={entityRelationFormat.data}
-        />
+        {viewStateMachine.type === "error" && (
+          <ErrorAlert message={viewStateMachine.message} />
+        )}
+        {viewStateMachine.type === "loading" && (
+          <FormSkeleton schema={[FormSkeletonSchema.Input]} />
+        )}
+        {viewStateMachine.type === "render" && (
+          <EntityRelationsForm
+            onSubmit={async (values) => {
+              await upsertConfigurationMutation.mutateAsync(
+                values as unknown as Record<string, string>
+              );
+            }}
+            entityFields={(entityScalarFields.data || []).map(
+              ({ name }) => name
+            )}
+            initialValues={entityRelationFormat.data}
+          />
+        )}
       </SectionBox>
     </BaseEntitySettingsLayout>
   );

@@ -17,8 +17,12 @@ export class DataController {
     private _configurationService: ConfigurationService
   ) {}
 
-  // TODO can list data :shrug
   async listData(entity: string): Promise<{ id: string; name: string }[]> {
+    // search by
+    // const relationshipSettings = await this._configurationService.show<{
+    //   format: string;
+    //   fields: string[];
+    // }>("relationship_settings", entity);
     noop(entity);
     return [];
   }
@@ -26,11 +30,12 @@ export class DataController {
   async referenceData(entity: string, id: string): Promise<string> {
     const relationshipSettings = await this._configurationService.show<{
       format: string;
+      fields: string[];
     }>("relationship_settings", entity);
 
     const data = await this._dataService.show<Record<string, unknown>>(
       entity,
-      [],
+      relationshipSettings.fields,
       {
         [this._entitiesService.getEntityPrimaryField(entity)]: id,
       }
@@ -40,9 +45,7 @@ export class DataController {
       return TemplateService.compile(relationshipSettings.format, data);
     }
 
-    return relationshipSettings.format || "Unset";
-
-    // return Object.values(data)[4] as string;
+    return Object.values(data)[4] as string;
   }
 
   async showData(entity: string, id: string) {

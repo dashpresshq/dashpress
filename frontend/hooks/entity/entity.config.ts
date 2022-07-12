@@ -235,7 +235,6 @@ export function useSelectedEntityColumns(
     | "hidden_entity_create_columns"
     | "hidden_entity_update_columns"
     | "hidden_entity_details_columns"
-    | "relations_list_fields"
   >,
   overrideEntity?: string
 ) {

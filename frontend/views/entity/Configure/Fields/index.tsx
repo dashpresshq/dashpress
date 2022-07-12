@@ -6,7 +6,7 @@ import {
   Tabs,
   Text,
 } from "@gothicgeeks/design-system";
-import { useRouteParam } from "@gothicgeeks/shared";
+import { SLUG_LOADING_VALUE, useRouteParam } from "@gothicgeeks/shared";
 import { useChangeRouterParam } from "frontend/lib/routing/useChangeRouterParam";
 import {
   useEntityFieldLabels,
@@ -91,6 +91,7 @@ export function EntityFieldsSettings() {
 
   const sharedLoadingState =
     entityScalarFields.isLoading ||
+    entity === SLUG_LOADING_VALUE ||
     entityFieldLabelsMap.isLoading ||
     entityValidationsMapIsLoading ||
     entityFieldTypesMapIsLoading;

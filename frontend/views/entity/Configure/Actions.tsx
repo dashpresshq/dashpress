@@ -5,7 +5,7 @@ import { BaseEntitySettingsLayout } from "./_Base";
 
 export function EntityActionsSettings() {
   const entity = useEntitySlug();
-
+  // entity is loadig
   return (
     <BaseEntitySettingsLayout
       menuItem={{

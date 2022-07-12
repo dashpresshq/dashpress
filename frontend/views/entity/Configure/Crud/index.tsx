@@ -2,7 +2,7 @@ import { Tabs, SectionBox } from "@gothicgeeks/design-system";
 import noop from "lodash/noop";
 import { useEffect, useState } from "react";
 import { ENTITY_TABLE_PATH } from "frontend/hooks/data/data.store";
-import { useRouteParam } from "@gothicgeeks/shared";
+import { SLUG_LOADING_VALUE, useRouteParam } from "@gothicgeeks/shared";
 import { useChangeRouterParam } from "frontend/lib/routing/useChangeRouterParam";
 import { IEntityCrudSettings } from "shared/configuration.constants";
 import {
@@ -77,7 +77,9 @@ export function useEntityCrudView() {
     });
 
   const sharedLoading =
-    entityScalarFields.isLoading || entityCrudSettings.isLoading;
+    entityScalarFields.isLoading ||
+    entityCrudSettings.isLoading ||
+    entity === SLUG_LOADING_VALUE;
 
   useEffect(() => {
     if (entityCrudSettings.data) {

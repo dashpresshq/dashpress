@@ -5,7 +5,7 @@ import {
   SectionCenter,
   FormSkeletonSchema,
 } from "@gothicgeeks/design-system";
-import { TitleLang } from "@gothicgeeks/shared";
+import { SLUG_LOADING_VALUE, TitleLang } from "@gothicgeeks/shared";
 import { AppLayout } from "../../../_layouts/app";
 import { NAVIGATION_LINKS } from "../../../lib/routing/links";
 import {
@@ -69,6 +69,7 @@ export function EntityUpdate() {
     dataDetails.isLoading ||
     entityFieldTypesMap.isLoading ||
     hiddenUpdateColumns.isLoading ||
+    entity === SLUG_LOADING_VALUE ||
     entityScalarFields.isLoading;
 
   const viewState = useViewStateMachine(isLoading, error, "update");

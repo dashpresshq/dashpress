@@ -42,7 +42,7 @@ export function FieldsLabelForm({
     <Form
       onSubmit={onSubmit}
       initialValues={initialValues}
-      render={({ handleSubmit, submitting }) => (
+      render={({ handleSubmit, submitting, pristine }) => (
         <form onSubmit={handleSubmit}>
           {fields.map(({ name }) => (
             <Field
@@ -56,7 +56,11 @@ export function FieldsLabelForm({
               )}
             </Field>
           ))}
-          <FormButton text={ButtonLang.upsert} isMakingRequest={submitting} />
+          <FormButton
+            text={ButtonLang.upsert}
+            isMakingRequest={submitting}
+            disabled={pristine}
+          />
         </form>
       )}
     />

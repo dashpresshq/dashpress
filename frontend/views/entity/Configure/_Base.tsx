@@ -57,8 +57,16 @@ export function BaseEntitySettingsLayout({ children, menuItem }: IProps) {
                 name: "Fields",
               },
               {
+                link: NAVIGATION_LINKS.ENTITY.CONFIG.RELATIONS(entity),
+                name: "Relations",
+              },
+              {
                 link: NAVIGATION_LINKS.ENTITY.CONFIG.ACTIONS(entity),
-                name: "Actions",
+                name: "//Actions",
+              },
+              {
+                link: NAVIGATION_LINKS.ENTITY.CONFIG.ACTIONS(entity),
+                name: "//Table Tabs",
               },
               // Computed Table fields
               // Computed Details fields

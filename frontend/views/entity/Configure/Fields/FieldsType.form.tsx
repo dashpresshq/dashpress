@@ -44,6 +44,9 @@ interface IValues {
   types: Record<string, keyof typeof FIELD_TYPES_CONFIG_MAP>;
   selections: Record<string, IColorableSelection[]>;
   validations: Record<string, IFieldValidationItem[]>;
+  validationsChanged: boolean;
+  selectionsChanged: boolean;
+  typesChanged: boolean;
 }
 
 const CANVAS_WIDTH = 500;
@@ -146,6 +149,7 @@ export function FieldsTypeForm({
                       input={{
                         ...renderProps.input,
                         onChange: (value) => {
+                          form.change("typesChanged", true);
                           renderProps.input.onChange(value);
                           form.change("validations", {
                             ...values.validations,
@@ -161,7 +165,17 @@ export function FieldsTypeForm({
                 }}
               </Field>
             ))}
-            <FormButton text={ButtonLang.upsert} isMakingRequest={submitting} />
+            <FormButton
+              text={ButtonLang.upsert}
+              isMakingRequest={submitting}
+              disabled={
+                !(
+                  values.selectionsChanged ||
+                  values.typesChanged ||
+                  values.validationsChanged
+                )
+              }
+            />
           </form>
           <OffCanvas
             title={`"${getEntityFieldLabels(
@@ -180,6 +194,7 @@ export function FieldsTypeForm({
               }
               validations={values.validations[showFieldValidations] || []}
               onSubmit={(value) => {
+                form.change("validationsChanged", true);
                 form.change("validations", {
                   ...values.validations,
                   [showFieldValidations]: value,
@@ -201,6 +216,7 @@ export function FieldsTypeForm({
               }
               selections={values.selections[showFieldSelection] || []}
               onSubmit={(value) => {
+                form.change("selectionsChanged", true);
                 form.change("selections", {
                   ...values.selections,
                   [showFieldSelection]: value,

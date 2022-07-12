@@ -13,10 +13,8 @@ Table actions
 OPEN SOURCE
 Title of the Table
 url state
-Offcanvas table on details
 Multi select
 Dahsboard list
-off canvas for settings
 CSV, JSON
 HTTP Actions
 relation settings
@@ -62,3 +60,6 @@ Implement filters
 secure all requests
 
 prod check for users login
+
+
+copy link / view details

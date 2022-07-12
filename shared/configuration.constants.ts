@@ -11,7 +11,7 @@ export const CONFIGURATION_KEYS: Record<
   | "entity_columns_labels"
   | "disabled_entities"
   | "dashboard_entities"
-  | "relations_list_fields" //
+  | "relations_list_format" //
   | "entity_selections"
   | "entity_validations",
   { requireEntity: boolean; defaultValue: unknown }
@@ -48,8 +48,7 @@ export const CONFIGURATION_KEYS: Record<
       delete: true,
     },
   },
-  relations_list_fields: { requireEntity: true, defaultValue: [] },
-
+  relations_list_format: { requireEntity: true, defaultValue: "" },
   disabled_entities: { requireEntity: false, defaultValue: [] },
   dashboard_entities: { requireEntity: false, defaultValue: [] },
   entities_order: { requireEntity: false, defaultValue: [] },

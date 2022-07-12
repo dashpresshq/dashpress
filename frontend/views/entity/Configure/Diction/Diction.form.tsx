@@ -23,7 +23,7 @@ export function EntityDictionForm({
     <Form
       onSubmit={onSubmit}
       initialValues={initialValues}
-      render={({ handleSubmit, submitting }) => (
+      render={({ handleSubmit, submitting, pristine }) => (
         <form onSubmit={handleSubmit}>
           <Field
             name="plural"
@@ -52,6 +52,7 @@ export function EntityDictionForm({
           <FormButton
             text={`${ButtonLang.update} Diction`}
             isMakingRequest={submitting}
+            disabled={pristine}
           />
         </form>
       )}

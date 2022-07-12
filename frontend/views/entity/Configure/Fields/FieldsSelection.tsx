@@ -62,7 +62,7 @@ export function FieldSelectionCanvas({
         ...arrayMutators,
       }}
       initialValues={{ selections }}
-      render={({ handleSubmit, values }) => (
+      render={({ handleSubmit, values, pristine }) => (
         <form onSubmit={handleSubmit}>
           <FormSwitch
             label="Use Colors"
@@ -173,7 +173,11 @@ export function FieldSelectionCanvas({
             )}
           </FieldArray>
           <Spacer />
-          <FormButton isMakingRequest={false} text={ButtonLang.upsert} />
+          <FormButton
+            isMakingRequest={false}
+            text={ButtonLang.upsert}
+            disabled={pristine}
+          />
         </form>
       )}
     />

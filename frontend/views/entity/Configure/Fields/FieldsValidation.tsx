@@ -63,7 +63,7 @@ export function FieldValidationCanvas({
         ...arrayMutators,
       }}
       initialValues={{ validations }}
-      render={({ handleSubmit, values }) => (
+      render={({ handleSubmit, values, pristine }) => (
         <form onSubmit={handleSubmit}>
           <FieldArray name="validations">
             {({ fields }) => (
@@ -170,7 +170,11 @@ export function FieldValidationCanvas({
             )}
           </FieldArray>
           <Spacer />
-          <FormButton isMakingRequest={false} text={ButtonLang.upsert} />
+          <FormButton
+            isMakingRequest={false}
+            text={ButtonLang.upsert}
+            disabled={pristine}
+          />
         </form>
       )}
     />

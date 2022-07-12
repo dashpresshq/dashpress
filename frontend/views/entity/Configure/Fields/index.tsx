@@ -156,18 +156,27 @@ export function EntityFieldsSettings() {
                       types: entityFieldTypes,
                       selections: entityFieldSelections,
                       validations: entityFieldValidations,
+                      validationsChanged: false,
+                      selectionsChanged: false,
+                      typesChanged: false,
                     }}
                     fields={entityScalarFields.data || []}
                     onSubmit={async (data) => {
-                      await upsertEntityTypesMapMutation.mutateAsync(
-                        data.types
-                      );
-                      await upsertEntityValidationsMutation.mutateAsync(
-                        data.validations
-                      );
-                      await upsertEntitySelectionsMutation.mutateAsync(
-                        data.selections || {}
-                      );
+                      if (data.typesChanged) {
+                        await upsertEntityTypesMapMutation.mutateAsync(
+                          data.types
+                        );
+                      }
+                      if (data.validationsChanged) {
+                        await upsertEntityValidationsMutation.mutateAsync(
+                          data.validations
+                        );
+                      }
+                      if (data.selectionsChanged) {
+                        await upsertEntitySelectionsMutation.mutateAsync(
+                          data.selections || {}
+                        );
+                      }
                     }}
                     getEntityFieldLabels={getEntityFieldLabels}
                   />

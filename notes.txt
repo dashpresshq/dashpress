@@ -19,6 +19,7 @@ Dahsboard list
 off canvas for settings
 CSV, JSON
 HTTP Actions
+relation settings
 Hide from dashboard
 users & auth
 Clone item
@@ -57,7 +58,6 @@ After introspecting remember to sort by name
 // Needs finesse
 Validations
 Implement filters
-Error on none permitted pages
 
 secure all requests
 

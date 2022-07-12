@@ -5,6 +5,7 @@ import {
   SectionListItem,
   Stack,
   Spacer,
+  ErrorAlert,
 } from "@gothicgeeks/design-system";
 import { useEffect, useState } from "react";
 import { IEntityField } from "../../../../../backend/entities/types";
@@ -14,6 +15,7 @@ interface IProps {
   entityFields: IEntityField[];
   isLoading: boolean;
   onToggle?: () => void;
+  error: unknown;
   hiddenColumns: string[];
   onSubmit: (columnsSelection: string[]) => Promise<void>;
   enabled: boolean;
@@ -29,6 +31,7 @@ export function SelectionTab({
   getEntityFieldLabels,
   enabled,
   description,
+  error,
   onToggle,
   onSubmit,
   hiddenColumns,
@@ -45,6 +48,10 @@ export function SelectionTab({
   }, [hiddenColumns]);
 
   const enableDisableLabel = enabled ? labels[0] : labels[1];
+
+  if (error) {
+    return <ErrorAlert message={error} />;
+  }
 
   return (
     <>

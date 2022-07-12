@@ -6,7 +6,7 @@ import {
   DEFAULT_TABLE_PARAMS,
 } from "@gothicgeeks/design-system";
 import { IBEPaginatedDataState, usePaginatedData } from "@gothicgeeks/shared";
-import { useStateSyncedToUrl } from "frontend/lib/routing/useStateSyncedToUrl";
+import { useState } from "react";
 import { AppLayout } from "../../../_layouts/app";
 import { NAVIGATION_LINKS } from "../../../lib/routing/links";
 import {
@@ -49,7 +49,7 @@ export function EntityTable() {
   );
 
   const [paginatedDataState, setPaginatedDataState] =
-    useStateSyncedToUrl<IBEPaginatedDataState>(DEFAULT_TABLE_PARAMS);
+    useState<IBEPaginatedDataState>(DEFAULT_TABLE_PARAMS);
 
   const tableData = usePaginatedData(
     ENTITY_TABLE_PATH(entity),

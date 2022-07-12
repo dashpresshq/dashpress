@@ -50,7 +50,7 @@ describe("/api/error/handling", () => {
 
     await requestHandler({
       GET: async () => {
-        throw new ForbiddenError("You are not allowed");
+        throw new ForbiddenError("Access to resource is denied");
       },
     })(req, res);
 

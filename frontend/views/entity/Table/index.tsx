@@ -27,6 +27,7 @@ import { useTableMenuItems } from "./useTableMenuItems";
 import { useTableColumns } from "./useTableColumns";
 import { useDetailsOffCanvasStore } from "./hooks/useDetailsOffCanvas.store";
 import { EntityDetailsView } from "../Details/DetailsView";
+import { useViewStateMachine } from "../useViewStateMachine";
 
 // TODO sync table to url
 // TODO when table passes a limit then a non synced columns to show
@@ -74,6 +75,8 @@ export function EntityTable() {
     entity === SLUG_LOADING_VALUE ||
     hiddenTableColumns.isLoading;
 
+  const viewState = useViewStateMachine(isLoading, error);
+
   return (
     <AppLayout
       breadcrumbs={[
@@ -84,9 +87,9 @@ export function EntityTable() {
       ]}
       actionItems={actionItems}
     >
-      {isLoading && <ComponentIsLoading />}
-      {error && <ErrorAlert message={error} />}
-      {!isLoading && !error && (
+      {viewState.type === "loading" && <ComponentIsLoading />}
+      {viewState.type === "error" && <ErrorAlert message={viewState.message} />}
+      {viewState.type === "render" && (
         <Table
           title={`All ${entityDiction.plural}`}
           {...{

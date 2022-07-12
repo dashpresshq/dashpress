@@ -8,7 +8,7 @@ import { IEntityCrudSettings } from "shared/configuration.constants";
 export const useViewStateMachine = (
   isLoading: boolean,
   error: unknown,
-  actionKey: keyof IEntityCrudSettings
+  actionKey?: keyof IEntityCrudSettings
 ):
   | { type: "loading" }
   | { type: "render" }
@@ -26,7 +26,7 @@ export const useViewStateMachine = (
     return { type: "loading" };
   }
   if (
-    !entityCrudSettings?.data?.[actionKey] ||
+    (actionKey && !entityCrudSettings?.data?.[actionKey]) ||
     entitiesToHide.data?.includes(entity)
   ) {
     return { type: "error", message: "Resource Not Available" };

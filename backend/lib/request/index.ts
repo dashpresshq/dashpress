@@ -25,6 +25,7 @@ export const requestHandler =
           .json(await methodHandler[req.method](req));
       }
     } catch (error) {
+      console.log(error);
       return handleResponseError(res, error);
     }
     res.setHeader("Allow", Object.keys(methodHandler));

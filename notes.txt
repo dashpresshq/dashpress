@@ -11,7 +11,6 @@ http://adminator.com/
 Table actions
 
 OPEN SOURCE
-Error on none permitted pages
 Title of the Table
 url state
 Offcanvas table on details
@@ -20,6 +19,7 @@ Dahsboard list
 off canvas for settings
 CSV, JSON
 HTTP Actions
+Hide from dashboard
 users & auth
 Clone item
 Reorder menu
@@ -57,7 +57,7 @@ After introspecting remember to sort by name
 // Needs finesse
 Validations
 Implement filters
-
+Error on none permitted pages
 
 secure all requests
 

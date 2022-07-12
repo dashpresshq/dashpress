@@ -87,14 +87,21 @@ export class DataController {
     return filters;
   }
 
-  private async canCrud(entity: string, action: keyof IEntityCrudSettings) {
-    const [canAction, disabledEntities] = await Promise.all([
-      (
+  private async canCrud(entity: string, action?: keyof IEntityCrudSettings) {
+    const doCanAction = async () => {
+      if (!action) {
+        return true;
+      }
+      return (
         await this._configurationService.show<IEntityCrudSettings>(
           "entity_crud_settings",
           entity
         )
-      )[action],
+      )[action];
+    };
+
+    const [canAction, disabledEntities] = await Promise.all([
+      doCanAction(),
       this._configurationService.show<string[]>("disabled_entities"),
     ]);
 
@@ -104,7 +111,7 @@ export class DataController {
   }
 
   async tableData(entity: string, query: Record<string, unknown>) {
-    await this.canCrud(entity, "table");
+    await this.canCrud(entity);
 
     const entityScalarFields =
       this._entitiesService.getScalarEntityFields(entity);
@@ -127,7 +134,9 @@ export class DataController {
           take: Number(query.take),
           page: Number(query.page),
           orderBy:
-            (query.orderBy as string).toLowerCase() === "desc" ? "desc" : "asc",
+            (query.orderBy as string)?.toLowerCase() === "desc"
+              ? "desc"
+              : "asc",
           sortBy: this._entitiesService.validateEntityField(
             entity,
             query.sortBy

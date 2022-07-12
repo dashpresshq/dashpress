@@ -25,7 +25,10 @@ export class EntitiesService {
     return this.getEntityFields(entity).find(({ isId }) => isId)?.name || "id";
   }
 
-  validateEntityField(entity: string, field: unknown) {
+  validateEntityField(entity: string, field?: unknown): string | undefined {
+    if (!field) {
+      return field as undefined;
+    }
     if (!this.getEntityFields(entity).find(({ name }) => name === field)) {
       throw new BadRequestError(`Invalid field '${field}' for ${entity}`);
     }

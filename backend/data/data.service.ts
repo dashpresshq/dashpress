@@ -95,7 +95,7 @@ export class DataService {
       take: number;
       page: number;
       orderBy: string;
-      sortBy: string;
+      sortBy?: string;
     }
   ) {
     let query = this.transformQueryFiltersQueryBuilder(

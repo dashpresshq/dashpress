@@ -10,6 +10,7 @@ export const CONFIGURATION_KEYS: Record<
   | "entities_order"
   | "entity_columns_labels"
   | "disabled_entities"
+  | "dashboard_entities"
   | "relations_list_fields" //
   | "entity_selections"
   | "entity_validations",
@@ -50,6 +51,7 @@ export const CONFIGURATION_KEYS: Record<
   relations_list_fields: { requireEntity: true, defaultValue: [] },
 
   disabled_entities: { requireEntity: false, defaultValue: [] },
+  dashboard_entities: { requireEntity: false, defaultValue: [] },
   entities_order: { requireEntity: false, defaultValue: [] },
 };
 
@@ -77,7 +79,6 @@ User mode
 export interface IEntityCrudSettings {
   create: boolean;
   details: boolean;
-  table: boolean;
   update: boolean;
   delete: boolean;
 }

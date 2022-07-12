@@ -76,7 +76,6 @@ export function EntityCrudSettings() {
       create: true,
       delete: true,
       details: true,
-      table: true,
       update: true,
     });
 
@@ -123,12 +122,11 @@ export function EntityCrudSettings() {
                   entityFields={entityScalarFields.data || []}
                   description="Toggle the columns that should be shown in the table"
                   isLoading={sharedLoading || hiddenTableColumns.isLoading}
-                  // onToggle={() => toggleCrudSettings("table")}
                   hiddenColumns={hiddenTableColumns.data || []}
                   onSubmit={async (data) => {
                     upsertTableColumnsMutation.mutateAsync(data);
                   }}
-                  enabled={entityCrudSettingsState.table}
+                  enabled
                   labels={["Hide In Table List", "Show In Table List"]}
                 />
               ),

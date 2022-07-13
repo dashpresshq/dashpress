@@ -18,20 +18,35 @@ export class DataController {
   ) {}
 
   async listData(entity: string): Promise<{ id: string; name: string }[]> {
-    // search by
-    // const relationshipSettings = await this._configurationService.show<{
-    //   format: string;
-    //   fields: string[];
-    // }>("relationship_settings", entity);
+    // search by  const relationshipSettings = await this.getRelationshipSettings(entity);
     noop(entity);
     return [];
   }
 
-  async referenceData(entity: string, id: string): Promise<string> {
+  private async getRelationshipSettings(entity: string): Promise<{
+    format: string;
+    fields: string[];
+  }> {
     const relationshipSettings = await this._configurationService.show<{
       format: string;
       fields: string[];
     }>("relationship_settings", entity);
+
+    if (relationshipSettings.fields.length === 0) {
+      // Will want to cache this
+      // const field =
+      // get all the fields that are showable then pick the first one by other
+      return {
+        fields: [],
+        format: `{{ field }}`,
+      };
+    }
+
+    return relationshipSettings;
+  }
+
+  async referenceData(entity: string, id: string): Promise<string> {
+    const relationshipSettings = await this.getRelationshipSettings(entity);
 
     const data = await this._dataService.show<Record<string, unknown>>(
       entity,
@@ -41,11 +56,7 @@ export class DataController {
       }
     );
 
-    if (relationshipSettings.format) {
-      return TemplateService.compile(relationshipSettings.format, data);
-    }
-
-    return Object.values(data)[4] as string;
+    return TemplateService.compile(relationshipSettings.format, data);
   }
 
   async showData(entity: string, id: string) {
@@ -61,7 +72,8 @@ export class DataController {
     // validate the createData values and that the fields are createable
     await this.canCrud(entity, "create");
     this._entitiesService.validateEntityFields(entity, Object.keys(data));
-    await this._dataService.create(entity, data);
+    const primaryField = this._entitiesService.getEntityPrimaryField(entity);
+    return { id: await this._dataService.create(entity, data, primaryField) };
   }
 
   async updateData(entity: string, id: string, data: Record<string, unknown>) {

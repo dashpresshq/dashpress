@@ -5,6 +5,7 @@ import {
   Text,
 } from "@gothicgeeks/design-system";
 import { SLUG_LOADING_VALUE } from "@gothicgeeks/shared";
+import React from "react";
 import {
   useEntityFieldLabels,
   useEntityFieldSelections,
@@ -94,13 +95,13 @@ export function EntityDetailsView({
             }
 
             return (
-              <>
+              <React.Fragment key={name}>
                 <Text size="5" weight="bold">
                   {getEntityFieldLabels(name)}
                 </Text>
                 {contentToRender}
                 <Spacer />
-              </>
+              </React.Fragment>
             );
           })}
         </>

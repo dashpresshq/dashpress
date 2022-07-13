@@ -137,8 +137,16 @@ export class DataService {
       .first();
   }
 
-  async create(entity: string, data: Record<string, unknown>) {
-    await DataService.getInstance()(entity).insert(data);
+  async create(
+    entity: string,
+    data: Record<string, unknown>,
+    primaryField: string
+  ) {
+    const result = await DataService.getInstance()(entity).insert(
+      data,
+      primaryField
+    );
+    return result[0][primaryField];
   }
 
   async update(

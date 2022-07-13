@@ -64,6 +64,3 @@ export function CreateEntityForm({
     />
   );
 }
-
-// Create new
-// Settings After create go to settings/ go to table

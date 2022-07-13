@@ -91,7 +91,7 @@ export function EntityTable() {
       {viewState.type === "error" && <ErrorAlert message={viewState.message} />}
       {viewState.type === "render" && (
         <Table
-          title={`All ${entityDiction.plural}`}
+          title=""
           {...{
             tableData,
             setPaginatedDataState,

@@ -6,6 +6,7 @@ import {
   useApi,
   useWaitForResponseMutationOptions,
 } from "@gothicgeeks/shared";
+import { useRouter } from "next/router";
 import { useMutation } from "react-query";
 import { SLUG_LOADING_VALUE } from "../../lib/routing/constants";
 import { NAVIGATION_LINKS } from "../../lib/routing/links";
@@ -35,11 +36,18 @@ export const useEntityDataReference = (entity: string, id: string) =>
 
 export function useEntityDataCreationMutation(entity: string) {
   const entityDiction = useEntityDiction();
+  const router = useRouter();
   const apiMutateOptions = useWaitForResponseMutationOptions<
     Record<string, string>
   >({
     endpoints: [ENTITY_TABLE_PATH(entity)],
-    successMessage: `${entityDiction.singular} created successfully`,
+    smartSuccessMessage: ({ id }) => ({
+      message: `${entityDiction.singular} created successfully`,
+      action: {
+        label: `Click here to view ${entityDiction.singular}`,
+        action: () => router.push(NAVIGATION_LINKS.ENTITY.DETAILS(entity, id)),
+      },
+    }),
   });
 
   return useMutation(

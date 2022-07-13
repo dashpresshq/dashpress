@@ -11,10 +11,9 @@ http://adminator.com/
 Table actions
 
 OPEN SOURCE
-Title of the Table
-url state
-Multi select
 Dahsboard list
+url state
+Multi select + action
 CSV, JSON
 HTTP Actions
 relation settings

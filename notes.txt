@@ -11,17 +11,18 @@ http://adminator.com/
 Table actions
 
 OPEN SOURCE
-Dahsboard list
+introspect
 url state
-Multi select + action
+Multi select + update / delete
 CSV, JSON
 HTTP Actions
-relation settings
+Relation ship list
 Hide from dashboard
 users & auth
 Clone item
-Reorder menu
+Reorder menu for table
 Custom query views
+Dahsboard list
 
 // Free version = 1 user
 Community support
@@ -31,10 +32,13 @@ Hosted Deployment
 Action integrations
 Current User
 Charts
+Custom domain
 Summary views
 Custom Dashboard
 Selected theme
+Custom Table views
 Email Support
+max of 25 users
 
 // $50 per user per month
 Pro Pro
@@ -42,13 +46,13 @@ Pro Pro
   Versions
   Permissions
   Branding
-  Custom domain
   Specific Color Theme
   Audit logs
   Self hosting
   SSO
   Priority Support
   2FA
+  over charge of 100 users
 
 After introspecting remember to sort by name
 
@@ -56,9 +60,6 @@ After introspecting remember to sort by name
 Validations
 Implement filters
 
-secure all requests
+validate even the fields all requests
 
-prod check for users login
-
-
-copy link / view details
+prod check for users aren't empty

@@ -32,3 +32,6 @@ yarn-error.log*
 .vercel
 
 tsconfig.tsbuildinfo
+
+.config-data/*.json
+!.config-data/*.test.json

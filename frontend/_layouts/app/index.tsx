@@ -76,7 +76,7 @@ export function AppLayout({
     >
       <Head>
         <title>
-          {title} -{siteConfig.name}
+          {title} - {siteConfig.name}
         </title>
       </Head>
       <Stack justify="space-between" align="center">

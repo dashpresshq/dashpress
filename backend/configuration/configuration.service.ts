@@ -1,8 +1,5 @@
-import fs from "fs-extra";
-import path from "path";
+import { ConfigData } from "backend/lib/config-data";
 import { CONFIGURATION_KEYS } from "../../shared/configuration.constants";
-
-const pathToConfigFile = path.resolve(require("os").homedir(), "cardinal.json");
 
 const DEFAULT_CONFIG = {};
 
@@ -10,21 +7,14 @@ export class ConfigurationService {
   static _config: Record<string, unknown> | null = null;
 
   static async getConfig() {
-    if (!this._config) {
-      try {
-        // TODO allow external config like redis/ db, etc
-        this._config =
-          (await fs.readJson(pathToConfigFile, { throws: false })) ||
-          DEFAULT_CONFIG;
-      } catch (error) {
-        this._config = DEFAULT_CONFIG;
-      }
+    if (this._config) {
+      return this._config;
     }
-    return this._config;
+    return await ConfigData.get("app-config", DEFAULT_CONFIG);
   }
 
   private async persistConfig(config: Record<string, unknown>) {
-    await fs.writeJson(pathToConfigFile, config, { spaces: 2 });
+    await ConfigData.put("app-config", config);
   }
 
   async show<T>(

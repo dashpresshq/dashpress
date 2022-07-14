@@ -1,4 +1,4 @@
-import { ConfigData } from "backend/lib/config-data";
+import { ConfigData } from "../lib/config-data";
 import { CONFIGURATION_KEYS } from "../../shared/configuration.constants";
 
 const DEFAULT_CONFIG = {};

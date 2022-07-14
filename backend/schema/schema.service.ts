@@ -1,5 +1,5 @@
 import { introspect } from "@gothicgeeks/introspect";
-import { ConfigData } from "backend/lib/config-data";
+import { ConfigData } from "../lib/config-data";
 import { IJsonSchema, IJsonSchemaEnum, IJsonSchemaModel } from "./schema.types";
 
 export class SchemasService {

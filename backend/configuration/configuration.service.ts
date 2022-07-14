@@ -1,20 +1,14 @@
 import { ConfigData } from "../lib/config-data";
 import { CONFIGURATION_KEYS } from "../../shared/configuration.constants";
 
-const DEFAULT_CONFIG = {};
-
 export class ConfigurationService {
-  static _config: Record<string, unknown> | null = null;
+  static _config: Record<string, unknown> | undefined;
 
   static async getConfig() {
     if (this._config) {
       return this._config;
     }
-    return await ConfigData.get("app-config", DEFAULT_CONFIG);
-  }
-
-  private async persistConfig(config: Record<string, unknown>) {
-    await ConfigData.put("app-config", config);
+    return await ConfigData.get("app-config", {});
   }
 
   async show<T>(
@@ -47,7 +41,7 @@ export class ConfigurationService {
       config[key] = value;
     }
 
-    await this.persistConfig(config);
+    await ConfigData.put("app-config", config);
   }
 }
 

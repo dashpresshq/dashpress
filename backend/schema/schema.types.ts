@@ -20,3 +20,25 @@ export interface IJsonSchema {
   models: IJsonSchemaModel[];
   types: never[];
 }
+
+export interface IDBSchema {
+  name: string;
+  columns: {
+    name: string;
+    isRequired?: true;
+    length?: number;
+    isId?: true;
+    isReference?: true;
+    type: "string" | "number" | "boolean" | "date" | "enum";
+    enumeration?: string[];
+  }[];
+  uniqueColumns: string[][];
+  relations: {
+    table: string;
+    relationType: string;
+    joinColumnOptions?: {
+      name: string;
+      referencedColumnName: string;
+    };
+  }[];
+}

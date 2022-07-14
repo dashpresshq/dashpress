@@ -17,8 +17,11 @@ export class DataService {
           database: "kademiks",
           user: "postgres",
           password: "password",
+          host: "127.0.0.1",
+          port: 5432,
+          ssl: false,
         },
-        searchPath: ["public"],
+        // searchPath: ["public"],
       });
     }
     this.afterConnection();

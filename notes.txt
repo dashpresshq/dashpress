@@ -11,12 +11,12 @@ http://adminator.com/
 Table actions
 
 OPEN SOURCE
-introspect
+Relation ship list
+After introspecting remember to sort by name of tables
 url state
 Multi select + update / delete
 CSV, JSON
 HTTP Actions
-Relation ship list
 Hide from dashboard
 users & auth
 Clone item
@@ -36,7 +36,7 @@ Custom domain
 Summary views
 Custom Dashboard
 Selected theme
-Custom Table views
+Custom Table view render
 Email Support
 max of 25 users
 
@@ -54,11 +54,10 @@ Pro Pro
   2FA
   over charge of 100 users
 
-After introspecting remember to sort by name
-
 // Needs finesse
 Validations
 Implement filters
+introspect
 
 validate even the fields all requests
 

@@ -1,9 +1,8 @@
-import { useApiQueries, useRouteParam } from "@gothicgeeks/shared";
+import { useRouteParam } from "@gothicgeeks/shared";
 import { useCallback } from "react";
 import { IFieldValidationItem } from "frontend/views/entity/Configure/Fields/FieldsValidation";
 import uniqBy from "lodash/uniqBy";
 import { IColorableSelection } from "frontend/views/entity/Configure/Fields/types";
-
 import { EntityTypesForSelection } from "frontend/views/entity/Configure/Fields/FieldsSelection";
 import {
   getFieldTypeBoundedValidations,
@@ -12,16 +11,12 @@ import {
 } from "./guess";
 import { userFriendlyCase } from "../../lib/strings";
 import { FIELD_TYPES_CONFIG_MAP } from "../../../shared/validations.constants";
-import {
-  useEntityReferenceFields,
-  useEntityScalarFields,
-} from "./entity.store";
+import { useEntityFields } from "./entity.store";
 import {
   CONFIGURATION_KEYS,
   IEntityCrudSettings,
 } from "../../../shared/configuration.constants";
 import { useEntityConfiguration } from "../configuration/configration.store";
-import { ConfigrationStorage } from "../configuration/storage";
 import { getEntitySelectionConfig } from "./logic";
 
 export function useEntitySlug() {
@@ -74,12 +69,11 @@ export function useEntityFieldTypes(
     Record<string, keyof typeof FIELD_TYPES_CONFIG_MAP>
   >("entity_columns_types", entity);
 
-  const entityScalarFields = useEntityScalarFields(entity);
-  const entityReferenceFieldsMap = useEntityReferenceFields(entity);
+  const entityFields = useEntityFields(entity);
 
   if (
-    entityScalarFields.isLoading ||
-    entityScalarFields.isError ||
+    entityFields.isLoading ||
+    entityFields.isError ||
     entityFieldTypesMap.isError ||
     entityFieldTypesMap.isLoading
   ) {
@@ -87,19 +81,10 @@ export function useEntityFieldTypes(
   }
 
   return Object.fromEntries(
-    (entityScalarFields.data || []).map(({ name, type, kind }) => {
+    (entityFields.data || []).map(({ name, type, isReference }) => {
       const preSelectedType = (entityFieldTypesMap.data || {})[name];
 
-      return [
-        name,
-        preSelectedType ??
-          guessEntityType(
-            name,
-            kind,
-            type,
-            entityReferenceFieldsMap.data || {}
-          ),
-      ];
+      return [name, preSelectedType ?? guessEntityType(type, isReference)];
     })
   );
 }
@@ -110,11 +95,11 @@ export function useEntityFieldValidations() {
     Record<string, IFieldValidationItem[]>
   >("entity_validations", entity);
   const entityFieldTypes = useEntityFieldTypes(entity);
-  const entityScalarFields = useEntityScalarFields(entity);
+  const entityFields = useEntityFields(entity);
 
   if (
-    entityScalarFields.isLoading ||
-    entityScalarFields.isError ||
+    entityFields.isLoading ||
+    entityFields.isError ||
     entityValidationsMap.isError ||
     entityValidationsMap.isLoading
   ) {
@@ -122,56 +107,30 @@ export function useEntityFieldValidations() {
   }
 
   return Object.fromEntries(
-    (entityScalarFields.data || []).map(
-      ({ name, isUnique, isId, isRequired }) => {
-        // The validation from the DB should override that of the config
-        const preSelectedValidation =
-          (entityValidationsMap.data || {})[name] || [];
+    (entityFields.data || []).map((entityField) => {
+      // The validation from the DB should override that of the config
+      const preSelectedValidation =
+        (entityValidationsMap.data || {})[entityField.name] || [];
 
-        const uniqKey: keyof IFieldValidationItem = "validationType";
-        // Prefering the add new effect over remove old effect
-        // Would be nice to reflect accurately
-        // TODO if the maxLenghth/max changes then update that too :sweat
-        return [
-          name,
-          uniqBy(
-            [
-              ...getFieldTypeBoundedValidations(entityFieldTypes[name]),
-              ...guessEntityValidations(isUnique, isId, isRequired),
-              ...preSelectedValidation,
-            ],
-            uniqKey
-          ),
-        ];
-      }
-    )
+      const uniqKey: keyof IFieldValidationItem = "validationType";
+      // Prefering the add new effect over remove old effect
+      // Would be nice to reflect accurately
+      // TODO if the maxLenghth/max changes then update that too :sweat
+      return [
+        entityField.name,
+        uniqBy(
+          [
+            ...getFieldTypeBoundedValidations(
+              entityFieldTypes[entityField.name]
+            ),
+            ...guessEntityValidations(entityField),
+            ...preSelectedValidation,
+          ],
+          uniqKey
+        ),
+      ];
+    })
   );
-}
-
-function useEntityEnumOptions(paramEntity?: string) {
-  const entitySlug = useEntitySlug();
-
-  const entity = paramEntity || entitySlug;
-
-  const entityScalarFields = useEntityScalarFields(entity);
-
-  const enumNames = (entityScalarFields.data || [])
-    .filter(({ kind }) => kind === "enum")
-    .map(({ type }) => ({ type }));
-
-  const cacheKey = "enum_list";
-
-  return useApiQueries<{ type: string }, string[]>({
-    input: enumNames,
-    accessor: "type",
-    pathFn: (enumName) => `/api/enums/${enumName}`,
-    placeholderDataFn: (enumName) =>
-      ConfigrationStorage.get(cacheKey, enumName),
-    dataTransformer: (data: string[], enumName: string) => {
-      ConfigrationStorage.set(data, cacheKey, enumName);
-      return data;
-    },
-  });
 }
 
 export function useEntityFieldSelections(paramEntity?: string) {
@@ -183,27 +142,31 @@ export function useEntityFieldSelections(paramEntity?: string) {
     Record<string, IColorableSelection[]>
   >("entity_selections", entity);
   const entityFieldTypes = useEntityFieldTypes(entity);
-  const entityScalarFields = useEntityScalarFields(entity);
-  const enumOptions = useEntityEnumOptions();
+  const entityFields = useEntityFields(entity);
+  const enumOptions = Object.fromEntries(
+    (entityFields.data || [])
+      .filter((field) => {
+        return field.enumeration;
+      })
+      .map((field) => [field.name, field.enumeration])
+  );
 
   if (
-    entityScalarFields.isLoading ||
-    entityScalarFields.isError ||
+    entityFields.isLoading ||
+    entityFields.isError ||
     entitySelections.isError ||
-    enumOptions.error ||
-    enumOptions.isLoading ||
     entitySelections.isLoading
   ) {
     return {};
   }
 
   return Object.fromEntries(
-    (entityScalarFields.data || [])
+    (entityFields.data || [])
       .filter(
         ({ name }) =>
           FIELD_TYPES_CONFIG_MAP[entityFieldTypes[name]]?.configureSelection
       )
-      .map(({ name, type }) => {
+      .map(({ name }) => {
         const preSelectedType = (entitySelections.data || {})[name];
 
         const entityType = entityFieldTypes[name] as EntityTypesForSelection;
@@ -213,7 +176,7 @@ export function useEntityFieldSelections(paramEntity?: string) {
           getEntitySelectionConfig(
             entityType,
             preSelectedType,
-            enumOptions.data[type]?.data
+            enumOptions[name]
           ),
         ];
       })

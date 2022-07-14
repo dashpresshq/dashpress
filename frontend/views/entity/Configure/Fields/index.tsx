@@ -19,7 +19,7 @@ import { NAVIGATION_LINKS } from "../../../../lib/routing/links";
 import { BaseEntitySettingsLayout } from "../_Base";
 import {
   ENTITY_FIELDS_ENDPOINT,
-  useEntityScalarFields,
+  useEntityFieldLists,
 } from "../../../../hooks/entity/entity.store";
 import {
   useEntityConfiguration,
@@ -34,7 +34,7 @@ export function EntityFieldsSettings() {
   const changeTabParam = useChangeRouterParam("tab");
 
   const entity = useEntitySlug();
-  const entityScalarFields = useEntityScalarFields(entity);
+  const entityFieldLists = useEntityFieldLists(entity);
   const entityFieldLabelsMap = useEntityConfiguration<Record<string, string>>(
     "entity_columns_labels",
     entity
@@ -90,7 +90,7 @@ export function EntityFieldsSettings() {
   );
 
   const sharedLoadingState =
-    entityScalarFields.isLoading ||
+    entityFieldLists.isLoading ||
     entity === SLUG_LOADING_VALUE ||
     entityFieldLabelsMap.isLoading ||
     entityValidationsMapIsLoading ||
@@ -105,7 +105,7 @@ export function EntityFieldsSettings() {
     >
       <ErrorAlert
         message={
-          entityScalarFields.error ||
+          entityFieldLists.error ||
           entityFieldLabelsMap.error ||
           entityValidationsMapError ||
           entityFieldTypesMapError
@@ -128,7 +128,7 @@ export function EntityFieldsSettings() {
                   <FieldsLabelForm
                     isLoading={sharedLoadingState}
                     initialValues={entityFieldLabelsMap.data}
-                    fields={entityScalarFields.data || []}
+                    fields={entityFieldLists.data || []}
                     onSubmit={async (data) => {
                       await upsertEntityFieldsMapMutation.mutateAsync(
                         data as Record<string, string>
@@ -162,7 +162,7 @@ export function EntityFieldsSettings() {
                       selectionsChanged: false,
                       typesChanged: false,
                     }}
-                    fields={entityScalarFields.data || []}
+                    fields={entityFieldLists.data || []}
                     onSubmit={async (data) => {
                       if (data.typesChanged) {
                         await upsertEntityTypesMapMutation.mutateAsync(
@@ -196,8 +196,8 @@ export function EntityFieldsSettings() {
                   <Spacer size="xl" />
                   <SortList
                     data={{
-                      ...entityScalarFields,
-                      data: (entityScalarFields.data || []).map(({ name }) => ({
+                      ...entityFieldLists,
+                      data: (entityFieldLists.data || []).map((name) => ({
                         value: name,
                         label: getEntityFieldLabels(name),
                       })),

@@ -16,7 +16,7 @@ import {
   useSelectedEntityColumns,
 } from "../../../hooks/entity/entity.config";
 
-import { useEntityScalarFields } from "../../../hooks/entity/entity.store";
+import { useEntityFields } from "../../../hooks/entity/entity.store";
 import { SLUG_LOADING_VALUE } from "../../../lib/routing/constants";
 import { ENTITY_TABLE_PATH } from "../../../hooks/data/data.store";
 import {
@@ -35,7 +35,7 @@ import { useViewStateMachine } from "../useViewStateMachine";
 export function EntityTable() {
   const entity = useEntitySlug();
   const entityDiction = useEntityDiction();
-  const entityScalarFields = useEntityScalarFields(entity);
+  const entityFields = useEntityFields(entity);
   const entityCrudSettings = useEntityCrudSettings();
   const actionItems = useEntityActionMenuItems([
     EntityActionTypes.Table,
@@ -65,13 +65,11 @@ export function EntityTable() {
   const columns = useTableColumns();
 
   const error =
-    entityCrudSettings.error ||
-    entityScalarFields.error ||
-    hiddenTableColumns.error;
+    entityCrudSettings.error || entityFields.error || hiddenTableColumns.error;
 
   const isLoading =
     entityCrudSettings.isLoading ||
-    entityScalarFields.isLoading ||
+    entityFields.isLoading ||
     entity === SLUG_LOADING_VALUE ||
     hiddenTableColumns.isLoading;
 

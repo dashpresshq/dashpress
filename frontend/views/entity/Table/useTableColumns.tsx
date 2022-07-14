@@ -11,7 +11,7 @@ import {
 import {
   useEntityIdField,
   useEntityReferenceFields,
-  useEntityScalarFields,
+  useEntityFields,
 } from "frontend/hooks/entity/entity.store";
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
 import Link from "next/link";
@@ -57,7 +57,7 @@ export const useTableColumns = () => {
   const entity = useEntitySlug();
   const getEntityFieldLabels = useEntityFieldLabels();
   const entityCrudSettings = useEntityCrudSettings();
-  const entityScalarFields = useEntityScalarFields(entity);
+  const entityFields = useEntityFields(entity);
   const entityReferenceFields = useEntityReferenceFields(entity);
   const hiddenTableColumns = useSelectedEntityColumns(
     "hidden_entity_table_columns"
@@ -70,7 +70,7 @@ export const useTableColumns = () => {
   const entityFieldSelections = useEntityFieldSelections();
 
   const columns: ITableColumn[] = fitlerOutHiddenScalarColumns(
-    entityScalarFields,
+    entityFields,
     hiddenTableColumns
   ).map(({ name, isId }) => {
     const tableColumn: ITableColumn = {
@@ -99,10 +99,10 @@ export const useTableColumns = () => {
           );
         }
 
-        if (entityReferenceFields.data?.[name]) {
+        if (entityReferenceFields.data?.toOne[name]) {
           return (
             <ReferenceComponent
-              entity={entityReferenceFields.data?.[name]}
+              entity={entityReferenceFields.data?.toOne[name]}
               id={value as string}
             />
           );

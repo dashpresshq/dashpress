@@ -4,7 +4,7 @@ import {
   FormSkeletonSchema,
   SectionBox,
 } from "@gothicgeeks/design-system";
-import { useEntityScalarFields } from "frontend/hooks/entity/entity.store";
+import { useEntityFields } from "frontend/hooks/entity/entity.store";
 import { SLUG_LOADING_VALUE } from "@gothicgeeks/shared";
 import { useEntitySlug } from "../../../../hooks/entity/entity.config";
 import { NAVIGATION_LINKS } from "../../../../lib/routing/links";
@@ -21,17 +21,17 @@ export function EntityRelationsSettings() {
   const entityRelationFormat = useEntityConfiguration<{
     format: string;
   }>("relationship_settings", entity);
-  const entityScalarFields = useEntityScalarFields(entity);
+  const entityFields = useEntityFields(entity);
 
   const upsertConfigurationMutation = useUpsertConfigurationMutation(
     "relationship_settings",
     entity
   );
 
-  const error = entityRelationFormat.error || entityScalarFields.error;
+  const error = entityRelationFormat.error || entityFields.error;
 
   const isLoading =
-    entityScalarFields.isLoading ||
+    entityFields.isLoading ||
     entityRelationFormat.isLoading ||
     entity === SLUG_LOADING_VALUE;
 
@@ -58,9 +58,7 @@ export function EntityRelationsSettings() {
                 values as unknown as Record<string, string>
               );
             }}
-            entityFields={(entityScalarFields.data || []).map(
-              ({ name }) => name
-            )}
+            entityFields={(entityFields.data || []).map(({ name }) => name)}
             initialValues={entityRelationFormat.data}
           />
         )}

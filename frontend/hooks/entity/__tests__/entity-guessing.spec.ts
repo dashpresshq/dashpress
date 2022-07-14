@@ -1,4 +1,4 @@
-import { IEntityField } from "backend/entities/types";
+import { IEntityField } from "shared/types";
 import {
   getFieldTypeBoundedValidations,
   guessEntityType,
@@ -42,20 +42,12 @@ describe("getFieldTypeBoundedValidations", () => {
 });
 
 describe("guessEntityValidations", () => {
-  it("should guess `unique` validation when is unique only", () => {
-    expect(guessEntityValidations(true, undefined, false))
-      .toMatchInlineSnapshot(`
-      Array [
-        Object {
-          "errorMessage": "{{ name }} already exists",
-          "fromSchema": true,
-          "validationType": "unique",
-        },
-      ]
-    `);
-  });
   it("should guess `unique` validation when is ID only", () => {
-    expect(guessEntityValidations(false, true, false)).toMatchInlineSnapshot(`
+    expect(
+      guessEntityValidations({
+        isId: true,
+      })
+    ).toMatchInlineSnapshot(`
       Array [
         Object {
           "errorMessage": "{{ name }} already exists",
@@ -65,20 +57,13 @@ describe("guessEntityValidations", () => {
       ]
     `);
   });
-  it("should guess `unique` validation when is ID or unique", () => {
-    expect(guessEntityValidations(true, true, false)).toMatchInlineSnapshot(`
-      Array [
-        Object {
-          "errorMessage": "{{ name }} already exists",
-          "fromSchema": true,
-          "validationType": "unique",
-        },
-      ]
-    `);
-  });
+
   it("should guess `isRequired` validation when is required", () => {
-    expect(guessEntityValidations(false, undefined, true))
-      .toMatchInlineSnapshot(`
+    expect(
+      guessEntityValidations({
+        isRequired: true,
+      })
+    ).toMatchInlineSnapshot(`
       Array [
         Object {
           "errorMessage": "{{ name }} is required",
@@ -88,46 +73,36 @@ describe("guessEntityValidations", () => {
       ]
     `);
   });
+
+  it("should guess `maxLength` validation when there is length on the column", () => {
+    expect(
+      guessEntityValidations({
+        length: 50,
+      })
+    ).toMatchInlineSnapshot();
+  });
+
   it("should combine all gotten validation ", () => {
-    expect(guessEntityValidations(true, true, true)).toMatchInlineSnapshot(`
-      Array [
-        Object {
-          "errorMessage": "{{ name }} already exists",
-          "fromSchema": true,
-          "validationType": "unique",
-        },
-        Object {
-          "errorMessage": "{{ name }} is required",
-          "fromSchema": true,
-          "validationType": "required",
-        },
-      ]
-    `);
+    expect(
+      guessEntityValidations({
+        isId: true,
+        isRequired: true,
+        length: 40,
+      })
+    ).toMatchInlineSnapshot();
   });
 });
 
 describe("guessEntityType", () => {
   it("should guess `reference` types", () => {
-    expect(guessEntityType("name", "scalar", "Boolean", { name: "Foo" })).toBe(
-      "reference"
-    );
-  });
-  it("should guess `selection` types", () => {
-    expect(guessEntityType("name", "enum", "Boolean", {})).toBe(
-      "selection-enum"
-    );
+    expect(guessEntityType("string", true)).toBe("reference");
   });
   it("should map custom fields", () => {
-    expect(guessEntityType("name", "scalar", "Int", {})).toBe("number");
+    expect(guessEntityType("enum")).toBe("selection-enum");
   });
   it("should default to `text` when type is unknown", () => {
-    expect(
-      guessEntityType(
-        "name",
-        "scalar",
-        "an unknown type" as IEntityField["type"],
-        {}
-      )
-    ).toBe("text");
+    expect(guessEntityType("an unknown type" as IEntityField["type"])).toBe(
+      "text"
+    );
   });
 });

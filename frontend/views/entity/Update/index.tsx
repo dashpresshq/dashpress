@@ -18,7 +18,7 @@ import {
   useEntitySlug,
   useSelectedEntityColumns,
 } from "../../../hooks/entity/entity.config";
-import { useEntityScalarFields } from "../../../hooks/entity/entity.store";
+import { useEntityFields } from "../../../hooks/entity/entity.store";
 import {
   useEntityDataDetails,
   useEntityDataUpdationMutation,
@@ -37,7 +37,7 @@ export function EntityUpdate() {
   const entity = useEntitySlug();
   const id = useEntityId();
   const entityDiction = useEntityDiction();
-  const entityScalarFields = useEntityScalarFields(entity);
+  const entityFields = useEntityFields(entity);
   const entityDataUpdationMutation = useEntityDataUpdationMutation(entity, id);
   const dataDetails = useEntityDataDetails(entity, id);
   const actionItems = useEntityActionMenuItems([
@@ -63,14 +63,14 @@ export function EntityUpdate() {
     dataDetails.error ||
     hiddenUpdateColumns.error ||
     entityFieldTypesMap.error ||
-    entityScalarFields.error;
+    entityFields.error;
 
   const isLoading =
     dataDetails.isLoading ||
     entityFieldTypesMap.isLoading ||
     hiddenUpdateColumns.isLoading ||
     entity === SLUG_LOADING_VALUE ||
-    entityScalarFields.isLoading;
+    entityFields.isLoading;
 
   const viewState = useViewStateMachine(isLoading, error, "update");
 
@@ -119,7 +119,7 @@ export function EntityUpdate() {
               entityValidationsMap={entityValidationsMap}
               onSubmit={entityDataUpdationMutation.mutateAsync}
               fields={fitlerOutHiddenScalarColumns(
-                entityScalarFields,
+                entityFields,
                 hiddenUpdateColumns
               ).map(({ name }) => name)}
               initialValues={dataDetails.data}

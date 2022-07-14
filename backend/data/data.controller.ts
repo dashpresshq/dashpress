@@ -46,13 +46,16 @@ export class DataController {
   }
 
   async referenceData(entity: string, id: string): Promise<string> {
-    const relationshipSettings = await this.getRelationshipSettings(entity);
+    const [relationshipSettings, primaryField] = await Promise.all([
+      this.getRelationshipSettings(entity),
+      this._entitiesService.getEntityPrimaryField(entity),
+    ]);
 
     const data = await this._dataService.show<Record<string, unknown>>(
       entity,
       relationshipSettings.fields,
       {
-        [this._entitiesService.getEntityPrimaryField(entity)]: id,
+        [primaryField]: id,
       }
     );
 
@@ -64,26 +67,31 @@ export class DataController {
     // validate the showData values and that the fields are showable
     await this.canCrud(entity, "details");
     return await this._dataService.show(entity, [], {
-      [this._entitiesService.getEntityPrimaryField(entity)]: id,
+      [await this._entitiesService.getEntityPrimaryField(entity)]: id,
     });
   }
 
   async createData(entity: string, data: Record<string, unknown>) {
     // validate the createData values and that the fields are createable
     await this.canCrud(entity, "create");
-    this._entitiesService.validateEntityFields(entity, Object.keys(data));
-    const primaryField = this._entitiesService.getEntityPrimaryField(entity);
+    await this._entitiesService.validateEntityFields(entity, Object.keys(data));
+    const primaryField = await this._entitiesService.getEntityPrimaryField(
+      entity
+    );
     return { id: await this._dataService.create(entity, data, primaryField) };
   }
 
   async updateData(entity: string, id: string, data: Record<string, unknown>) {
     // validate the updateData values and that the fields are updateable
-    await this.canCrud(entity, "update");
-    this._entitiesService.validateEntityFields(entity, Object.keys(data));
+    await Promise.all([
+      this.canCrud(entity, "update"),
+      this._entitiesService.validateEntityFields(entity, Object.keys(data)),
+    ]);
+
     await this._dataService.update(
       entity,
       {
-        [this._entitiesService.getEntityPrimaryField(entity)]: id,
+        [await this._entitiesService.getEntityPrimaryField(entity)]: id,
       },
       data
     );
@@ -92,21 +100,21 @@ export class DataController {
   async deleteData(entity: string, id: string) {
     await this.canCrud(entity, "delete");
     await this._dataService.delete(entity, {
-      [this._entitiesService.getEntityPrimaryField(entity)]: id,
+      [await this._entitiesService.getEntityPrimaryField(entity)]: id,
     });
   }
 
-  transformRequestQueryToQueryFilter(
+  async transformRequestQueryToQueryFilter(
     query: Record<string, unknown>,
     entity: string
-  ): QueryFilter[] {
+  ): Promise<QueryFilter[]> {
     const filters = (qs.parse(
       Object.entries(query)
         .map(([key, value]) => `${key}=${value}`)
         .join("&")
     )?.filters || []) as unknown as QueryFilter[];
 
-    this._entitiesService.validateEntityFields(
+    await this._entitiesService.validateEntityFields(
       entity,
       filters.map(({ id }) => id)
     );
@@ -139,20 +147,21 @@ export class DataController {
   async tableData(entity: string, query: Record<string, unknown>) {
     await this.canCrud(entity);
 
-    const entityScalarFields =
-      this._entitiesService.getScalarEntityFields(entity);
+    const [entityFields, hiddenColumns, sortBy, queryFilters] =
+      await Promise.all([
+        this._entitiesService.getEntityFields(entity),
+        this._configurationService.show<string[]>(
+          "hidden_entity_table_columns",
+          entity
+        ),
+        this._entitiesService.validateEntityField(entity, query.sortBy),
+        this.transformRequestQueryToQueryFilter(query, entity),
+      ]);
 
-    const hiddenColumns = await this._configurationService.show<string[]>(
-      "hidden_entity_table_columns",
-      entity
-    );
-
-    const queryFilters = this.transformRequestQueryToQueryFilter(query, entity);
-
-    return {
-      data: await this._dataService.list(
+    const [data, totalRecords] = await Promise.all([
+      this._dataService.list(
         entity,
-        entityScalarFields
+        entityFields
           .filter(({ name }) => !hiddenColumns.includes(name))
           .map(({ name }) => name),
         queryFilters,
@@ -163,15 +172,17 @@ export class DataController {
             (query.orderBy as string)?.toLowerCase() === "desc"
               ? "desc"
               : "asc",
-          sortBy: this._entitiesService.validateEntityField(
-            entity,
-            query.sortBy
-          ),
+          sortBy,
         }
       ),
+      this._dataService.count(entity, queryFilters),
+    ]);
+
+    return {
+      data,
       pageIndex: query.page,
       pageSize: query.take,
-      totalRecords: await this._dataService.count(entity, queryFilters),
+      totalRecords,
     };
   }
 }

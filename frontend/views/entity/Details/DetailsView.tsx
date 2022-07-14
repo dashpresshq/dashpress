@@ -14,7 +14,7 @@ import {
 import { useEntityDataDetails } from "../../../hooks/data/data.store";
 import {
   useEntityReferenceFields,
-  useEntityScalarFields,
+  useEntityFields,
 } from "../../../hooks/entity/entity.store";
 import { fitlerOutHiddenScalarColumns } from "../utils";
 import { OptionTag } from "../OptionTag";
@@ -29,7 +29,7 @@ export function EntityDetailsView({
   entity: string;
 }) {
   const dataDetails = useEntityDataDetails(entity, id);
-  const entityScalarFields = useEntityScalarFields(entity);
+  const entityFields = useEntityFields(entity);
   const hiddenDetailsColumns = useSelectedEntityColumns(
     "hidden_entity_details_columns",
     entity
@@ -41,14 +41,14 @@ export function EntityDetailsView({
   const error =
     dataDetails.error ||
     hiddenDetailsColumns.error ||
-    entityScalarFields.error ||
+    entityFields.error ||
     entityReferenceFields.error;
 
   const isLoading =
     dataDetails.isLoading ||
     entityReferenceFields.isLoading ||
     entity === SLUG_LOADING_VALUE ||
-    entityScalarFields.isLoading ||
+    entityFields.isLoading ||
     hiddenDetailsColumns.isLoading;
 
   const viewState = useViewStateMachine(isLoading, error, "details");
@@ -64,46 +64,45 @@ export function EntityDetailsView({
       {viewState.type === "render" && (
         <>
           {/* TODO use a breadcrumb here for the deep entities */}
-          {fitlerOutHiddenScalarColumns(
-            entityScalarFields,
-            hiddenDetailsColumns
-          ).map(({ name }) => {
-            const value = dataDetails?.data?.[name];
+          {fitlerOutHiddenScalarColumns(entityFields, hiddenDetailsColumns).map(
+            ({ name }) => {
+              const value = dataDetails?.data?.[name];
 
-            let contentToRender = <Text>{value}</Text>;
+              let contentToRender = <Text>{value}</Text>;
 
-            if (entityReferenceFields.data?.[name]) {
-              contentToRender = (
-                <ReferenceComponent
-                  entity={entityReferenceFields.data?.[name]}
-                  id={value as string}
-                />
-              );
-            } else if (entityFieldSelections[name]) {
-              const availableOption = entityFieldSelections[name].find(
-                (option) => option.value === value
-              );
-              if (availableOption) {
+              if (entityReferenceFields.data?.toOne[name]) {
                 contentToRender = (
-                  <OptionTag
-                    color={availableOption.color}
-                    label={availableOption.label}
-                    value={availableOption.value}
+                  <ReferenceComponent
+                    entity={entityReferenceFields.data?.toOne[name]}
+                    id={value as string}
                   />
                 );
+              } else if (entityFieldSelections[name]) {
+                const availableOption = entityFieldSelections[name].find(
+                  (option) => option.value === value
+                );
+                if (availableOption) {
+                  contentToRender = (
+                    <OptionTag
+                      color={availableOption.color}
+                      label={availableOption.label}
+                      value={availableOption.value}
+                    />
+                  );
+                }
               }
-            }
 
-            return (
-              <React.Fragment key={name}>
-                <Text size="5" weight="bold">
-                  {getEntityFieldLabels(name)}
-                </Text>
-                {contentToRender}
-                <Spacer />
-              </React.Fragment>
-            );
-          })}
+              return (
+                <React.Fragment key={name}>
+                  <Text size="5" weight="bold">
+                    {getEntityFieldLabels(name)}
+                  </Text>
+                  {contentToRender}
+                  <Spacer />
+                </React.Fragment>
+              );
+            }
+          )}
         </>
       )}
     </>

@@ -1,20 +1,15 @@
 import { introspect, Entity } from "@gothicgeeks/introspect";
+import { IDBSchema, IEntityField } from "shared/types";
 import { ConfigData } from "../lib/config-data";
-import {
-  IDBSchema,
-  IJsonSchema,
-  IJsonSchemaEnum,
-  IJsonSchemaModel,
-} from "./schema.types";
 
 export class SchemasService {
-  private JSON_SCHEMA: IJsonSchema;
+  private dbSchema: IDBSchema[];
 
-  private loadJsonSchema = (): IJsonSchema => {
-    if (this.JSON_SCHEMA) {
-      return this.JSON_SCHEMA;
+  private async loadDbSchema(): Promise<IDBSchema[]> {
+    if (this.dbSchema) {
+      return this.dbSchema;
     }
-    introspect({
+    const schema = await introspect({
       databaseType: "postgres",
       host: "localhost",
       password: "password",
@@ -23,20 +18,21 @@ export class SchemasService {
       port: 5432,
       ssl: false,
       user: "postgres",
-    }).then((data) => {
-      ConfigData.put("schema", this.formatIntrospectData(data));
     });
 
-    this.JSON_SCHEMA = require("../../.schema/schema.json");
-    return this.JSON_SCHEMA;
-  };
+    this.dbSchema = this.formatIntrospectData(schema);
 
-  formatIntrospectData(rawEntity: Entity[]): IDBSchema[] {
+    ConfigData.put("schema", this.dbSchema);
+
+    return this.dbSchema;
+  }
+
+  private formatIntrospectData(rawEntity: Entity[]): IDBSchema[] {
     const dbSchema = rawEntity.map((entity) => {
       return {
         name: entity.name,
-        columns: entity.columns.map((column) => {
-          const column$: IDBSchema["columns"][0] = {
+        fields: entity.columns.map((column) => {
+          const column$: IEntityField = {
             name: column.options.name,
             isRequired: column.options.nullable ? true : undefined,
             length: column.options.length,
@@ -44,7 +40,7 @@ export class SchemasService {
             isReference: column.isUsedInRelationAsOwner ? true : undefined,
             type: column.options.enum
               ? "enum"
-              : (column.tscType.toLocaleLowerCase() as IDBSchema["columns"][0]["type"]),
+              : (column.tscType.toLocaleLowerCase() as IEntityField["type"]),
             enumeration: column.options.enum,
           };
           return column$;
@@ -57,7 +53,7 @@ export class SchemasService {
           };
           return relation$;
         }),
-        uniqueColumns: entity.indices
+        uniqueFields: entity.indices
           .filter((index) => index.options.unique)
           .map((index) => index.columns),
       } as IDBSchema;
@@ -66,12 +62,8 @@ export class SchemasService {
     return dbSchema;
   }
 
-  listJsonSchemaModels(): IJsonSchemaModel[] {
-    return this.loadJsonSchema().models;
-  }
-
-  listJsonSchemaEnums(): IJsonSchemaEnum[] {
-    return this.loadJsonSchema().enums;
+  async getDBSchema(): Promise<IDBSchema[]> {
+    return await this.loadDbSchema();
   }
 }
 

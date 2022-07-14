@@ -1,10 +1,10 @@
 import { IValueLabel } from "@gothicgeeks/design-system/dist/types";
+import { IEntityField } from "shared/types";
 import {
   ConfigurationService,
   configurationService,
 } from "../configuration/configuration.service";
 import { entitiesService, EntitiesService } from "./entities.service";
-import { IEntityField } from "./types";
 import { sortByList } from "./utils";
 
 export class EntitiesController {
@@ -14,10 +14,10 @@ export class EntitiesController {
   ) {}
 
   async getMenuEntities(): Promise<IValueLabel[]> {
-    const entities = this._entitiesService.getAllEntities();
-    const [hiddenEntities, entitiesOrder] = await Promise.all([
+    const [hiddenEntities, entitiesOrder, entities] = await Promise.all([
       this._configurationService.show<string[]>("disabled_entities"),
       this._configurationService.show<string[]>("entities_order"),
+      this._entitiesService.getAllEntities(),
     ]);
     const entitiesToShow = entities.filter(
       ({ value }) => !hiddenEntities.includes(value)
@@ -32,8 +32,29 @@ export class EntitiesController {
     return entitiesToShow;
   }
 
-  listAllEntities() {
-    return this._entitiesService.getAllEntities();
+  async listAllEntities(): Promise<IValueLabel[]> {
+    return await this._entitiesService.getAllEntities();
+  }
+
+  async getEntityRelations(
+    entity: string
+  ): Promise<{ toMany: string[]; toOne: Record<string, string> }> {
+    const [entityRelations] = await Promise.all([
+      this._entitiesService.getEntityRelations(entity),
+    ]);
+
+    return {
+      toOne: Object.fromEntries(
+        entityRelations
+          .filter((relation) => relation?.joinColumnOptions?.name)
+          .map((relation) => {
+            return [relation?.joinColumnOptions?.name, relation.table];
+          })
+      ),
+      toMany: entityRelations
+        .filter((relation) => !relation?.joinColumnOptions?.name)
+        .map((relation) => relation.table),
+    };
   }
 
   async getEntityFields(entity: string): Promise<IEntityField[]> {

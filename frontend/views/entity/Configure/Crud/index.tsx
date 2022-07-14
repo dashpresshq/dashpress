@@ -14,7 +14,7 @@ import {
 import { NAVIGATION_LINKS } from "../../../../lib/routing/links";
 import { BaseEntitySettingsLayout } from "../_Base";
 import { useUpsertConfigurationMutation } from "../../../../hooks/configuration/configration.store";
-import { useEntityScalarFields } from "../../../../hooks/entity/entity.store";
+import { useEntityFields } from "../../../../hooks/entity/entity.store";
 import { SelectionTab } from "./SelectionTab";
 
 import { ENTITY_CRUD_SETTINGS_TAB_LABELS } from "../constants";
@@ -23,7 +23,7 @@ export function useEntityCrudView() {
   const entity = useEntitySlug();
 
   const entityCrudSettings = useEntityCrudSettings();
-  const entityScalarFields = useEntityScalarFields(entity);
+  const entityFields = useEntityFields(entity);
 
   const getEntityFieldLabels = useEntityFieldLabels();
 
@@ -77,7 +77,7 @@ export function useEntityCrudView() {
     });
 
   const sharedLoading =
-    entityScalarFields.isLoading ||
+    entityFields.isLoading ||
     entityCrudSettings.isLoading ||
     entity === SLUG_LOADING_VALUE;
 
@@ -98,13 +98,13 @@ export function useEntityCrudView() {
     );
   };
 
-  const error = entityScalarFields.error || entityCrudSettings.error;
+  const error = entityFields.error || entityCrudSettings.error;
 
   return {
     [ENTITY_CRUD_SETTINGS_TAB_LABELS.TABLE]: (
       <SelectionTab
         getEntityFieldLabels={getEntityFieldLabels}
-        entityFields={entityScalarFields.data || []}
+        entityFields={entityFields.data || []}
         description="Toggle the columns that should be shown in the table"
         isLoading={sharedLoading || hiddenTableColumns.isLoading}
         hiddenColumns={hiddenTableColumns.data || []}
@@ -119,7 +119,7 @@ export function useEntityCrudView() {
     [ENTITY_CRUD_SETTINGS_TAB_LABELS.DETAILS]: (
       <SelectionTab
         getEntityFieldLabels={getEntityFieldLabels}
-        entityFields={entityScalarFields.data || []}
+        entityFields={entityFields.data || []}
         description="Toggle the fields that should be shown in the details page"
         isLoading={sharedLoading || hiddenDetailsColumns.isLoading}
         hiddenColumns={hiddenDetailsColumns.data || []}
@@ -136,7 +136,7 @@ export function useEntityCrudView() {
     [ENTITY_CRUD_SETTINGS_TAB_LABELS.CREATE]: (
       <SelectionTab
         getEntityFieldLabels={getEntityFieldLabels}
-        entityFields={entityScalarFields.data || []}
+        entityFields={entityFields.data || []}
         description="Toggle the fields that are allowed to be created in the Form"
         isLoading={sharedLoading || hiddenCreateColumns.isLoading}
         hiddenColumns={hiddenCreateColumns.data || []}
@@ -152,7 +152,7 @@ export function useEntityCrudView() {
     [ENTITY_CRUD_SETTINGS_TAB_LABELS.UPDATE]: (
       <SelectionTab
         getEntityFieldLabels={getEntityFieldLabels}
-        entityFields={entityScalarFields.data || []}
+        entityFields={entityFields.data || []}
         description="Toggle the fields that are allowed to be updated in the Form"
         isLoading={sharedLoading || hiddenUpdateColumns.isLoading}
         hiddenColumns={hiddenUpdateColumns.data || []}

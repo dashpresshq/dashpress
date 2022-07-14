@@ -11,10 +11,9 @@ import {
   maxLength,
   minLength,
 } from "@gothicgeeks/shared";
-import { IEntityField } from "../../../../../backend/entities/types";
 
 interface IProps {
-  fields: IEntityField[];
+  fields: string[];
   initialValues?: Record<string, unknown>;
   onSubmit: (data: Record<string, unknown>) => void;
   isLoading: boolean;
@@ -44,15 +43,15 @@ export function FieldsLabelForm({
       initialValues={initialValues}
       render={({ handleSubmit, submitting, pristine }) => (
         <form onSubmit={handleSubmit}>
-          {fields.map(({ name }) => (
+          {fields.map((field) => (
             <Field
-              key={name}
-              name={name}
+              key={field}
+              name={field}
               validate={composeValidators(minLength(2), maxLength(64))}
               validateFields={[]}
             >
               {({ input, meta }) => (
-                <FormInput label={name} input={input} meta={meta} />
+                <FormInput label={field} input={input} meta={meta} />
               )}
             </Field>
           ))}

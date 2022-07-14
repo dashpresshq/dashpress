@@ -1,4 +1,4 @@
-import { IEntityField } from "../../../backend/entities/types";
+import { IEntityField } from "shared/types";
 
 export const fitlerOutHiddenScalarColumns = (
   scalarFields: { data?: IEntityField[] },

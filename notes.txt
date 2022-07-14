@@ -62,3 +62,9 @@ introspect
 validate even the fields all requests
 
 prod check for users aren't empty
+
+Inmprove the gate for all request,
+
+isAuthenticated
+isDeveloper
+isEntityAllowed

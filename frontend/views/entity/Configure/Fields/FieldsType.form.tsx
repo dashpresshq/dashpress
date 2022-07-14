@@ -19,7 +19,6 @@ import {
   FieldValidationCanvas,
   IFieldValidationItem,
 } from "./FieldsValidation";
-import { IEntityField } from "../../../../../backend/entities/types";
 import {
   EntityTypesForSelection,
   FieldSelectionCanvas,
@@ -60,7 +59,7 @@ const resetBoundedValidation = (
 ];
 
 interface IProps {
-  fields: IEntityField[];
+  fields: string[];
   initialValues?: IValues;
   onSubmit: (data: IValues) => void;
   getEntityFieldLabels: (fieldName: string) => string;
@@ -102,7 +101,7 @@ export function FieldsTypeForm({
       render={({ handleSubmit, submitting, values, form }) => (
         <>
           <form onSubmit={handleSubmit}>
-            {fields.map(({ name }) => (
+            {fields.map((name) => (
               <Field
                 key={name}
                 name={`types.${name}`}

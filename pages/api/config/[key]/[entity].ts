@@ -4,12 +4,14 @@ import { validateEntityFromRequest } from "../../../../backend/entities/entities
 import { requestHandler } from "../../../../backend/lib/request";
 
 export default requestHandler({
+  // is authenticated
   GET: async (req) => {
     const entity = validateEntityFromRequest(req.query);
     const key = validateConfigKeyFromRequest(req.query, entity);
 
     return await configurationController.showConfig(key, entity);
   },
+  // TODO validate is developer
   PUT: async (req) => {
     const entity = validateEntityFromRequest(req.query);
     const key = validateConfigKeyFromRequest(req.query, entity);

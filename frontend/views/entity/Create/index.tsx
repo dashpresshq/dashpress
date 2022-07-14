@@ -17,7 +17,7 @@ import {
   useEntitySlug,
   useSelectedEntityColumns,
 } from "../../../hooks/entity/entity.config";
-import { useEntityScalarFields } from "../../../hooks/entity/entity.store";
+import { useEntityFields } from "../../../hooks/entity/entity.store";
 import { useEntityDataCreationMutation } from "../../../hooks/data/data.store";
 import {
   EntityActionTypes,
@@ -31,7 +31,7 @@ import { useViewStateMachine } from "../useViewStateMachine";
 export function EntityCreate() {
   const entity = useEntitySlug();
   const entityDiction = useEntityDiction();
-  const entityScalarFields = useEntityScalarFields(entity);
+  const entityFields = useEntityFields(entity);
   const entityDataCreationMutation = useEntityDataCreationMutation(entity);
   const actionItems = useEntityActionMenuItems([
     EntityActionTypes.Create,
@@ -53,11 +53,11 @@ export function EntityCreate() {
   const error =
     hiddenCreateColumns.error ||
     entityFieldTypesMap.error ||
-    entityScalarFields.error;
+    entityFields.error;
 
   const isLoading =
     hiddenCreateColumns.isLoading ||
-    entityScalarFields.isLoading ||
+    entityFields.isLoading ||
     entity === SLUG_LOADING_VALUE ||
     entityFieldTypesMap.isLoading;
 
@@ -104,7 +104,7 @@ export function EntityCreate() {
               entityFieldSelections={entityFieldSelections}
               onSubmit={entityDataCreationMutation.mutateAsync}
               fields={fitlerOutHiddenScalarColumns(
-                entityScalarFields,
+                entityFields,
                 hiddenCreateColumns
               ).map(({ name }) => name)}
             />

@@ -46,13 +46,13 @@ export class EntitiesController {
     return {
       toOne: Object.fromEntries(
         entityRelations
-          .filter((relation) => relation?.joinColumnOptions?.name)
+          .filter((relation) => relation?.joinColumnOptions?.[0].name)
           .map((relation) => {
-            return [relation?.joinColumnOptions?.name, relation.table];
+            return [relation?.joinColumnOptions?.[0].name, relation.table];
           })
       ),
       toMany: entityRelations
-        .filter((relation) => !relation?.joinColumnOptions?.name)
+        .filter((relation) => !relation?.joinColumnOptions?.[0].name)
         .map((relation) => relation.table),
     };
   }

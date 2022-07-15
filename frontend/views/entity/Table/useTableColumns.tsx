@@ -18,6 +18,7 @@ import Link from "next/link";
 import { FIELD_TYPES_CONFIG_MAP } from "shared/validations.constants";
 import { StringUtils } from "@gothicgeeks/shared";
 import { ITableColumn } from "@gothicgeeks/design-system";
+import { useMemo } from "react";
 import { fitlerOutHiddenScalarColumns } from "../utils";
 import { TableActions } from "./Actions";
 import { ReferenceComponent } from "./ReferenceComponent";
@@ -69,10 +70,20 @@ export const useTableColumns = () => {
   const entityFieldTypes = useEntityFieldTypes();
   const entityFieldSelections = useEntityFieldSelections();
 
-  const columns: ITableColumn[] = fitlerOutHiddenScalarColumns(
-    entityFields,
-    hiddenTableColumns
-  ).map(({ name, isId }) => {
+  const columnsToShow = useMemo(() => {
+    return fitlerOutHiddenScalarColumns(entityFields, hiddenTableColumns);
+  }, [
+    (entityFields?.data || []).length,
+    (hiddenTableColumns.data || []).length,
+  ]);
+
+  // A Fix for the Cell that is memoized internall and the value for this is not getting updated
+  // so we need to wait for things to load before we render it
+  if (entityReferenceFields.isLoading) {
+    return [];
+  }
+
+  const columns: ITableColumn[] = columnsToShow.map(({ name, isId }) => {
     const tableColumn: ITableColumn = {
       Header: getEntityFieldLabels(name),
       accessor: name,

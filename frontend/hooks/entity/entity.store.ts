@@ -11,7 +11,7 @@ const ENTITY_RELATIONS_ENDPOINT = (entity: string) =>
 
 export const ENTITIES_MENU_ENDPOINT = "/api/entities/menu";
 
-const entityEnabled = (entity: string): boolean =>
+const isEntityEnabled = (entity: string): boolean =>
   !!entity && entity !== "loading";
 
 export const useEntitiesMenuItems = () => {
@@ -41,13 +41,13 @@ export const useEntitiesList = () =>
 export const useEntityFields = (entity: string) =>
   useApi<IEntityField[]>(ENTITY_FIELDS_ENDPOINT(entity), {
     errorMessage: dataNotFoundMessage("Entity Fields"),
-    enabled: entityEnabled(entity),
+    enabled: isEntityEnabled(entity),
   });
 
 export const useEntityFieldLists = (entity: string) =>
   useApi<string[]>(ENTITY_FIELDS_ENDPOINT(entity), {
     errorMessage: dataNotFoundMessage("Entity Fields List"),
-    enabled: entityEnabled(entity),
+    enabled: isEntityEnabled(entity),
     selector: (data: IEntityField[]) => data.map(({ name }) => name),
   });
 
@@ -56,14 +56,14 @@ export const useEntityReferenceFields = (entity: string) =>
     ENTITY_RELATIONS_ENDPOINT(entity),
     {
       errorMessage: dataNotFoundMessage("Entity Reference Fields"),
-      enabled: entityEnabled(entity),
+      enabled: isEntityEnabled(entity),
     }
   );
 
 export const useEntityIdField = (entity: string) =>
   useApi<string>(ENTITY_FIELDS_ENDPOINT(entity), {
     errorMessage: dataNotFoundMessage("Entity Id Field"),
-    enabled: entityEnabled(entity),
+    enabled: isEntityEnabled(entity),
     selector: (data: IEntityField[]) =>
       data.find(({ isId }) => isId)?.name || "id",
   });

@@ -58,6 +58,7 @@ export function EntityDetails() {
             link: NAVIGATION_LINKS.ENTITY.TABLE(entity),
             label: entityDiction.plural,
           }}
+          isLoading
           deleteAction={() => console.log("")}
           isMakingDeleteRequest={false}
           iconButtons={[

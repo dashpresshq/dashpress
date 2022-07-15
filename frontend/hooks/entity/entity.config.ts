@@ -19,8 +19,9 @@ import {
 import { useEntityConfiguration } from "../configuration/configration.store";
 import { getEntitySelectionConfig } from "./logic";
 
-export function useEntitySlug() {
-  return useRouteParam("entity");
+export function useEntitySlug(overrideValue?: string) {
+  const routeParam = useRouteParam("entity");
+  return overrideValue || routeParam;
 }
 
 export function useEntityId() {
@@ -40,8 +41,7 @@ export function useEntityDiction() {
 }
 
 export function useEntityFieldLabels(paramEntity?: string) {
-  const entityFromSlug = useEntitySlug();
-  const entity = paramEntity || entityFromSlug;
+  const entity = useEntitySlug(paramEntity);
   const entityFieldLabelsMap = useEntityConfiguration<Record<string, string>>(
     "entity_columns_labels",
     entity
@@ -63,8 +63,7 @@ export function useEntityFieldLabels(paramEntity?: string) {
 export function useEntityFieldTypes(
   paramEntity?: string
 ): Record<string, keyof typeof FIELD_TYPES_CONFIG_MAP> {
-  const entitySlug = useEntitySlug();
-  const entity = paramEntity || entitySlug;
+  const entity = useEntitySlug(paramEntity);
   const entityFieldTypesMap = useEntityConfiguration<
     Record<string, keyof typeof FIELD_TYPES_CONFIG_MAP>
   >("entity_columns_types", entity);
@@ -134,9 +133,7 @@ export function useEntityFieldValidations() {
 }
 
 export function useEntityFieldSelections(paramEntity?: string) {
-  const entitySlug = useEntitySlug();
-
-  const entity = paramEntity || entitySlug;
+  const entity = useEntitySlug(paramEntity);
 
   const entitySelections = useEntityConfiguration<
     Record<string, IColorableSelection[]>

@@ -1,9 +1,18 @@
-import { SectionBox, SectionCenter } from "@gothicgeeks/design-system";
+import {
+  RenderList,
+  SectionBox,
+  SectionCenter,
+  SectionListItem,
+  Spacer,
+} from "@gothicgeeks/design-system";
 import { TitleLang } from "@gothicgeeks/shared";
+import { useEntityReferenceFields } from "frontend/hooks/entity/entity.store";
 import { AppLayout } from "../../../_layouts/app";
 import { NAVIGATION_LINKS } from "../../../lib/routing/links";
 import {
+  useEntityCrudSettings,
   useEntityDiction,
+  useEntityFieldLabels,
   useEntityId,
   useEntitySlug,
 } from "../../../hooks/entity/entity.config";
@@ -22,6 +31,10 @@ export function EntityDetails() {
     EntityActionTypes.Labels,
   ]);
   const entity = useEntitySlug();
+
+  const referenceFields = useEntityReferenceFields(entity);
+  const getEntityFieldLabels = useEntityFieldLabels();
+  const entityCrudSettings = useEntityCrudSettings();
 
   return (
     <AppLayout
@@ -45,8 +58,33 @@ export function EntityDetails() {
             link: NAVIGATION_LINKS.ENTITY.TABLE(entity),
             label: entityDiction.plural,
           }}
+          deleteAction={() => console.log("")}
+          isMakingDeleteRequest={false}
+          iconButtons={[
+            { icon: "edit", link: "", label: "Edit" },
+            { icon: "save", link: "", label: "Clone" },
+          ]}
         >
-          <EntityDetailsView id={id} entity={entity} />
+          <EntityDetailsView displayFrom="details" id={id} entity={entity} />
+        </SectionBox>
+        <Spacer size="xl" />
+        <SectionBox title="Relations">
+          <RenderList
+            items={(referenceFields.data?.toMany || []).map(
+              (relatedEntity) => ({ name: relatedEntity })
+            )}
+            singular="Relation"
+            isLoading={referenceFields.isLoading}
+            render={(menuItem) => {
+              return (
+                <SectionListItem
+                  label={getEntityFieldLabels(menuItem.name)}
+                  key={menuItem.name}
+                  to={NAVIGATION_LINKS.ENTITY.TABLE(menuItem.name)}
+                />
+              );
+            }}
+          />
         </SectionBox>
       </SectionCenter>
     </AppLayout>

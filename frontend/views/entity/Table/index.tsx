@@ -4,6 +4,8 @@ import {
   OffCanvas,
   Table,
   DEFAULT_TABLE_PARAMS,
+  SoftButton,
+  Spacer,
 } from "@gothicgeeks/design-system";
 import { IBEPaginatedDataState, usePaginatedData } from "@gothicgeeks/shared";
 import { useState } from "react";
@@ -12,6 +14,7 @@ import { NAVIGATION_LINKS } from "../../../lib/routing/links";
 import {
   useEntityCrudSettings,
   useEntityDiction,
+  useEntityFieldLabels,
   useEntitySlug,
   useSelectedEntityColumns,
 } from "../../../hooks/entity/entity.config";
@@ -37,6 +40,7 @@ export function EntityTable() {
   const entityDiction = useEntityDiction();
   const entityFields = useEntityFields(entity);
   const entityCrudSettings = useEntityCrudSettings();
+  const getEntityFieldLabels = useEntityFieldLabels();
   const actionItems = useEntityActionMenuItems([
     EntityActionTypes.Table,
     EntityActionTypes.Diction,
@@ -100,12 +104,24 @@ export function EntityTable() {
         />
       )}
       <OffCanvas
-        // Show the entity title here
-        title="Details"
+        title={`${getEntityFieldLabels(detailsCanvasEntity)} Details`}
         onClose={closeDetailsCanvas}
         show={!!detailsCanvasEntity}
       >
-        <EntityDetailsView id={detailsCanvasId} entity={detailsCanvasEntity} />
+        <EntityDetailsView
+          id={detailsCanvasId}
+          entity={detailsCanvasEntity}
+          displayFrom="canvas"
+        />
+        <Spacer />
+        <SoftButton
+          label="View Full Details"
+          block
+          to={NAVIGATION_LINKS.ENTITY.DETAILS(
+            detailsCanvasEntity,
+            detailsCanvasId
+          )}
+        />
       </OffCanvas>
     </AppLayout>
   );

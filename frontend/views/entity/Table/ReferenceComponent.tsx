@@ -1,14 +1,18 @@
 import { useEntityDataReference } from "frontend/hooks/data/data.store";
 import { StyledLinkLikeButton } from "@gothicgeeks/design-system";
+import { useRouter } from "next/router";
+import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
 import { useDetailsOffCanvasStore } from "./hooks/useDetailsOffCanvas.store";
 
 interface IProps {
   entity: string;
   id: string;
+  displayFrom: "table" | "details" | "canvas";
 }
 
-export function ReferenceComponent({ entity, id }: IProps) {
+export function ReferenceComponent({ entity, id, displayFrom }: IProps) {
   const openDetailsCanvas = useDetailsOffCanvasStore((state) => state.open);
+  const router = useRouter();
 
   const entityDataReference = useEntityDataReference(entity, id);
 
@@ -20,9 +24,24 @@ export function ReferenceComponent({ entity, id }: IProps) {
     return <span>{id}</span>;
   }
 
+  const displayText = entityDataReference.data || id;
+
+  if (displayFrom === "canvas") {
+    // eslint-disable-next-line react/jsx-no-useless-fragment
+    return <>{displayText}</>;
+  }
+
   return (
-    <StyledLinkLikeButton onClick={() => openDetailsCanvas({ entity, id })}>
-      {entityDataReference.data || id}
+    <StyledLinkLikeButton
+      onClick={() => {
+        if (displayFrom === "table") {
+          openDetailsCanvas({ entity, id });
+        } else {
+          router.push(NAVIGATION_LINKS.ENTITY.DETAILS(entity, id));
+        }
+      }}
+    >
+      {displayText}
     </StyledLinkLikeButton>
   );
 }

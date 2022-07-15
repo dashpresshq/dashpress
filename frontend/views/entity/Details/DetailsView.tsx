@@ -24,9 +24,11 @@ import { useViewStateMachine } from "../useViewStateMachine";
 export function EntityDetailsView({
   id,
   entity,
+  displayFrom,
 }: {
   id: string;
   entity: string;
+  displayFrom: "details" | "canvas";
 }) {
   const dataDetails = useEntityDataDetails(entity, id);
   const entityFields = useEntityFields(entity);
@@ -75,6 +77,7 @@ export function EntityDetailsView({
                   <ReferenceComponent
                     entity={entityReferenceFields.data?.toOne[name]}
                     id={value as string}
+                    displayFrom={displayFrom}
                   />
                 );
               } else if (entityFieldSelections[name]) {

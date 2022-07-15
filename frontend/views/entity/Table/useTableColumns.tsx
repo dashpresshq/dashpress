@@ -104,6 +104,7 @@ export const useTableColumns = () => {
             <ReferenceComponent
               entity={entityReferenceFields.data?.toOne[name]}
               id={value as string}
+              displayFrom="table"
             />
           );
         }

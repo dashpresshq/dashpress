@@ -8,7 +8,8 @@ export class ConfigurationService {
     if (this._config) {
       return this._config;
     }
-    return await ConfigData.get("app-config", {});
+    this._config = await ConfigData.get("app-config", {});
+    return this._config;
   }
 
   async show<T>(
@@ -17,9 +18,6 @@ export class ConfigurationService {
   ): Promise<T> {
     const config = await ConfigurationService.getConfig();
     const { requireEntity, defaultValue } = CONFIGURATION_KEYS[key];
-    if (requireEntity && !entity) {
-      throw new Error(`${key} requires entity to be passed`);
-    }
     const value = requireEntity ? (config[key] || {})[entity] : config[key];
     return value || defaultValue;
   }

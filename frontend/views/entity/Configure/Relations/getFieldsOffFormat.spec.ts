@@ -2,6 +2,7 @@ import { getFieldsOffFormat } from "./utils";
 
 describe("getFieldsOffFormat", () => {
   it("should extract formats correctly", () => {
+    expect(getFieldsOffFormat("")).toEqual([]);
     expect(getFieldsOffFormat("{{name}}")).toEqual(["name"]);
     expect(getFieldsOffFormat("{{name  }}")).toEqual(["name"]);
     expect(getFieldsOffFormat("   {{    name  }}")).toEqual(["name"]);

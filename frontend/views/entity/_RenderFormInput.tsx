@@ -61,7 +61,6 @@ export function RenderFormInput({
     case "reference":
       return <FormSelect {...formProps} selectData={entityFieldSelections} />;
 
-    // TODO default value to false
     case "boolean":
       return (
         <FormSwitch

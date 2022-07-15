@@ -99,8 +99,6 @@ export const useTableColumns = () => {
           );
         }
 
-        console.log(entityReferenceFields.data);
-
         if (entityReferenceFields.data?.toOne[name]) {
           return (
             <ReferenceComponent

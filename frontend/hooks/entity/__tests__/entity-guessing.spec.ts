@@ -79,7 +79,18 @@ describe("guessEntityValidations", () => {
       guessEntityValidations({
         length: 50,
       })
-    ).toMatchInlineSnapshot();
+    ).toMatchInlineSnapshot(`
+      Array [
+        Object {
+          "constraint": Object {
+            "length": 50,
+          },
+          "errorMessage": "{{ name }} is required",
+          "fromSchema": true,
+          "validationType": "maxLength",
+        },
+      ]
+    `);
   });
 
   it("should combine all gotten validation ", () => {
@@ -89,7 +100,28 @@ describe("guessEntityValidations", () => {
         isRequired: true,
         length: 40,
       })
-    ).toMatchInlineSnapshot();
+    ).toMatchInlineSnapshot(`
+      Array [
+        Object {
+          "errorMessage": "{{ name }} already exists",
+          "fromSchema": true,
+          "validationType": "unique",
+        },
+        Object {
+          "errorMessage": "{{ name }} is required",
+          "fromSchema": true,
+          "validationType": "required",
+        },
+        Object {
+          "constraint": Object {
+            "length": 40,
+          },
+          "errorMessage": "{{ name }} is required",
+          "fromSchema": true,
+          "validationType": "maxLength",
+        },
+      ]
+    `);
   });
 });
 

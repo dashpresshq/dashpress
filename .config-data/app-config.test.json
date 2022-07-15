@@ -1,0 +1,9 @@
+{
+  "disabled_entities": ["foo", "bar", "baz"],
+  "entity_diction": {
+    "foo": {
+      "singular": "Singular Foo",
+      "plural": "Plural Foo"
+    }
+  }
+}

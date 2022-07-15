@@ -3,8 +3,11 @@ import path from "path";
 
 type ConfigTypes = "users" | "schema" | "credentials" | "app-config";
 
-const pathToConfigFile = (type: ConfigTypes) =>
-  path.resolve(process.cwd(), ".config-data", `${type}.json`);
+const pathToConfigFile = (type: ConfigTypes) => {
+  const file =
+    process.env.NODE_ENV === "test" ? `${type}.test.json` : `${type}.json`;
+  return path.resolve(process.cwd(), ".config-data", file);
+};
 
 export class ConfigData {
   static async get(type: ConfigTypes, defaultValue: unknown) {
@@ -20,6 +23,11 @@ export class ConfigData {
   }
 
   static async put(type: ConfigTypes, data: unknown) {
+    // Extensions.excecute("CONFIG.PUT", async ({ type, data }) => {
+    if (process.env.NODE_ENV === "test") {
+      return;
+    }
     await fs.writeJson(pathToConfigFile(type), data, { spaces: 2 });
+    // });
   }
 }

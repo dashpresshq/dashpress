@@ -23,7 +23,6 @@ export class EntitiesService {
   }
 
   async getEntityPrimaryField(entity: string): Promise<string> {
-    // TODO throw error is no iD field
     return (
       (await this.getEntityFields(entity)).find(({ isId }) => isId)?.name ||
       "id"

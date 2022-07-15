@@ -6,22 +6,29 @@ https://spruko.com/demo/noa/Noa/HTML/index.html
 https://www.missionkontrol.io/documentation/task_queues/#outcome-options
 https://www.producthunt.com/posts/fusiongrid-powered-by-fusioncharts
 https://www.producthunt.com/posts/interval-2
-http://adminator.com/
 
 Table actions
 
+count
+
 OPEN SOURCE
 Relation ship list
-After introspecting remember to sort by name of tables
+users & auth
+add schema view
+
+settings go back
+delete and edit button on the details page
+
+HTTP Actions
+Custom query tabs
+
 url state
 Multi select + update / delete
-CSV, JSON
-HTTP Actions
-Hide from dashboard
-users & auth
+CSV, JSON, XML
 Clone item
 Reorder menu for table
-Custom query views
+Hide from dashboard
+
 Dahsboard list
 
 // Free version = 1 user
@@ -60,11 +67,3 @@ Implement filters
 introspect
 
 validate even the fields all requests
-
-prod check for users aren't empty
-
-Inmprove the gate for all request,
-
-isAuthenticated
-isDeveloper
-isEntityAllowed

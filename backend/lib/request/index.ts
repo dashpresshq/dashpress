@@ -11,13 +11,17 @@ const RequestMethodResponseCode: Record<RequestMethod, number> = {
   PUT: 204,
 };
 
+// type ValidationKeys = "isAuthenticated" | "isDeveloper" | "isEntityAllowed";
+
 export const requestHandler =
   (
     methodHandler: Partial<
       Record<RequestMethod, (req: NextApiRequest) => Promise<unknown>>
     >
+    // validations: ValidationKeys[]
   ) =>
   async (req: NextApiRequest, res: NextApiResponse) => {
+    // run the validations here
     try {
       if (Object.keys(methodHandler).includes(req.method)) {
         return res

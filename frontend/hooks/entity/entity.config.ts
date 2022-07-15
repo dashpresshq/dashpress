@@ -28,8 +28,8 @@ export function useEntityId() {
   return useRouteParam("id");
 }
 
-export function useEntityDiction() {
-  const entity = useEntitySlug();
+export function useEntityDiction(paramEntity?: string) {
+  const entity = useEntitySlug(paramEntity);
   const entityDiction = useEntityConfiguration<{
     plural: string;
     singular: string;

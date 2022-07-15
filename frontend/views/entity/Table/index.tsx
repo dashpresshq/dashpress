@@ -14,11 +14,9 @@ import { NAVIGATION_LINKS } from "../../../lib/routing/links";
 import {
   useEntityCrudSettings,
   useEntityDiction,
-  useEntityFieldLabels,
   useEntitySlug,
   useSelectedEntityColumns,
 } from "../../../hooks/entity/entity.config";
-
 import { useEntityFields } from "../../../hooks/entity/entity.store";
 import { SLUG_LOADING_VALUE } from "../../../lib/routing/constants";
 import { ENTITY_TABLE_PATH } from "../../../hooks/data/data.store";
@@ -34,13 +32,11 @@ import { useViewStateMachine } from "../useViewStateMachine";
 
 // TODO sync table to url
 // TODO when table passes a limit then a non synced columns to show
-// TODO crud views validations
 export function EntityTable() {
   const entity = useEntitySlug();
   const entityDiction = useEntityDiction();
   const entityFields = useEntityFields(entity);
   const entityCrudSettings = useEntityCrudSettings();
-  const getEntityFieldLabels = useEntityFieldLabels();
   const actionItems = useEntityActionMenuItems([
     EntityActionTypes.Table,
     EntityActionTypes.Diction,
@@ -65,6 +61,8 @@ export function EntityTable() {
 
   const [closeDetailsCanvas, detailsCanvasEntity, detailsCanvasId] =
     useDetailsOffCanvasStore((state) => [state.close, state.entity, state.id]);
+
+  const canvasEntityDiction = useEntityDiction(detailsCanvasEntity);
 
   const columns = useTableColumns();
 
@@ -104,7 +102,7 @@ export function EntityTable() {
         />
       )}
       <OffCanvas
-        title={`${getEntityFieldLabels(detailsCanvasEntity)} Details`}
+        title={`${canvasEntityDiction.singular} Details`}
         onClose={closeDetailsCanvas}
         show={!!detailsCanvasEntity}
       >

@@ -10,6 +10,7 @@ import styled from "styled-components";
 import * as StyledGrid from "styled-bootstrap-grid";
 import { useRouter } from "next/router";
 import { HardDrive } from "react-feather";
+import { useEntitiesCount } from "frontend/hooks/data/data.store";
 import { useEntitiesMenuItems } from "../hooks/entity/entity.store";
 import { AppLayout } from "../_layouts/app";
 import { NAVIGATION_LINKS } from "../lib/routing/links";
@@ -29,6 +30,9 @@ const StyledCard = styled.div`
 
 export function Dashboard() {
   const entitiesMenuItems = useEntitiesMenuItems();
+  const entitiesCount = useEntitiesCount(
+    (entitiesMenuItems?.data || []).map(({ value }) => value)
+  );
   const router = useRouter();
 
   return (
@@ -64,7 +68,9 @@ export function Dashboard() {
                   </Stack>
                   <Spacer size="xs" />
                   <Text size="3" weight="bold">
-                    49
+                    {entitiesCount.data[field.value]?.isLoading
+                      ? "Counting..."
+                      : entitiesCount.data[field.value]?.data?.count}
                   </Text>
                 </StyledBox>
               </StyledCard>

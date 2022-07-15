@@ -87,7 +87,7 @@ export class DataService {
 
     query = this.transformQueryFiltersQueryBuilder(query, queryFilter);
 
-    return get(await query.count(), [0, "count"], 0);
+    return +get(await query.count(), [0, "count"], 0);
   }
 
   async list(

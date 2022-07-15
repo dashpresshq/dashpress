@@ -4,6 +4,7 @@ import {
   makePatchRequest,
   makePostRequest,
   useApi,
+  useApiQueries,
   useWaitForResponseMutationOptions,
 } from "@gothicgeeks/shared";
 import { useRouter } from "next/router";
@@ -14,8 +15,13 @@ import { useEntityDiction } from "../entity/entity.config";
 
 export const ENTITY_TABLE_PATH = (entity: string) =>
   `/api/data/${entity}/table`;
+
+export const ENTITY_COUNT_PATH = (entity: string) =>
+  `/api/data/${entity}/count`;
+
 export const ENTITY_DETAILS_PATH = (entity: string, id: string) =>
   `/api/data/${entity}/${id}`;
+
 export const ENTITY_REFERENCE_PATH = (entity: string, id: string) =>
   `/api/data/${entity}/${id}/reference`;
 
@@ -26,6 +32,15 @@ export const useEntityDataDetails = (entity: string, id: string) => {
     errorMessage: dataNotFoundMessage(entityDiction.singular),
     enabled: !!id && !!entity && id !== SLUG_LOADING_VALUE,
   });
+};
+
+export const useEntitiesCount = (entities: string[]) => {
+  const entitiesCount = useApiQueries<{ entity: string }, { count: number }>({
+    input: entities.map((entity) => ({ entity })),
+    accessor: "entity",
+    pathFn: (entity) => ENTITY_COUNT_PATH(entity),
+  });
+  return entitiesCount;
 };
 
 export const useEntityDataReference = (entity: string, id: string) =>
@@ -40,7 +55,7 @@ export function useEntityDataCreationMutation(entity: string) {
   const apiMutateOptions = useWaitForResponseMutationOptions<
     Record<string, string>
   >({
-    endpoints: [ENTITY_TABLE_PATH(entity)],
+    endpoints: [ENTITY_TABLE_PATH(entity), ENTITY_COUNT_PATH(entity)],
     smartSuccessMessage: ({ id }) => ({
       message: `${entityDiction.singular} created successfully`,
       action: {
@@ -57,7 +72,6 @@ export function useEntityDataCreationMutation(entity: string) {
   );
 }
 
-// TODO optimisitc updates here
 export function useEntityDataUpdationMutation(entity: string, id: string) {
   const entityDiction = useEntityDiction();
   const apiMutateOptions = useWaitForResponseMutationOptions<
@@ -79,7 +93,7 @@ export function useEntityDataDeletionMutation(entity: string) {
   const apiMutateOptions = useWaitForResponseMutationOptions<
     Record<string, string>
   >({
-    endpoints: [ENTITY_TABLE_PATH(entity)],
+    endpoints: [ENTITY_TABLE_PATH(entity), ENTITY_COUNT_PATH(entity)],
     redirect: NAVIGATION_LINKS.ENTITY.TABLE(entity),
     successMessage: `${entityDiction.singular} deleted successfully`,
   });

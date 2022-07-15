@@ -144,6 +144,17 @@ export class DataController {
     }
   }
 
+  async countData(entity: string, query: Record<string, unknown>) {
+    await this.canCrud(entity);
+    const queryFilters = await this.transformRequestQueryToQueryFilter(
+      query,
+      entity
+    );
+    return {
+      count: await this._dataService.count(entity, queryFilters),
+    };
+  }
+
   async tableData(entity: string, query: Record<string, unknown>) {
     await this.canCrud(entity);
 
@@ -158,6 +169,9 @@ export class DataController {
         this.transformRequestQueryToQueryFilter(query, entity),
       ]);
 
+    const take = Number(query.take) || 10;
+    const page = Number(query.page) || 1;
+
     const [data, totalRecords] = await Promise.all([
       this._dataService.list(
         entity,
@@ -166,8 +180,8 @@ export class DataController {
           .map(({ name }) => name),
         queryFilters,
         {
-          take: Number(query.take),
-          page: Number(query.page),
+          take,
+          page,
           orderBy:
             (query.orderBy as string)?.toLowerCase() === "desc"
               ? "desc"
@@ -180,8 +194,8 @@ export class DataController {
 
     return {
       data,
-      pageIndex: query.page,
-      pageSize: query.take,
+      pageIndex: page,
+      pageSize: take,
       totalRecords,
     };
   }

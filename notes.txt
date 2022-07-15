@@ -9,8 +9,6 @@ https://www.producthunt.com/posts/interval-2
 
 Table actions
 
-count
-
 OPEN SOURCE
 Relation ship list
 users & auth

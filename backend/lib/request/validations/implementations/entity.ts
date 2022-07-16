@@ -1,6 +1,6 @@
-import { configurationService } from "backend/configuration/configuration.service";
-import { entitiesService } from "backend/entities/entities.service";
-import { ForbiddenError } from "backend/lib/errors";
+import { ForbiddenError } from "../../../errors";
+import { entitiesService } from "../../../../entities/entities.service";
+import { configurationService } from "../../../../configuration/configuration.service";
 import { ValidationImplType } from "./types";
 
 export const entityValidationImpl: ValidationImplType<string> = async (req) => {

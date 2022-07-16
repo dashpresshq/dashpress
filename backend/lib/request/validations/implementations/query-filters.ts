@@ -1,5 +1,5 @@
-import { QueryFilter } from "backend/data/data.service";
 import qs from "qs";
+import { QueryFilter } from "../../../../data/data.service";
 import { ValidationImplType } from "./types";
 import { entityValidationImpl } from "./entity";
 import { validateEntityFields } from "./_validateEntityField";

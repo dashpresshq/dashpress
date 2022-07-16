@@ -1,6 +1,6 @@
-import { entitiesService } from "backend/entities/entities.service";
-import { BadRequestError } from "backend/lib/errors";
 import { IEntityField } from "shared/types";
+import { entitiesService } from "../../../../entities/entities.service";
+import { BadRequestError } from "../../../errors";
 
 const _validateEntityField = (
   entities: IEntityField[],

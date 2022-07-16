@@ -1,4 +1,5 @@
 import {
+  ErrorAlert,
   RenderList,
   SectionBox,
   SectionCenter,
@@ -22,6 +23,7 @@ import {
   useEntityActionMenuItems,
 } from "../Configure/constants";
 import { EntityDetailsView } from "./DetailsView";
+import { useViewStateMachine } from "../useViewStateMachine";
 
 export function EntityDetails() {
   const entityDiction = useEntityDiction();
@@ -46,6 +48,10 @@ export function EntityDetails() {
   const relatedEntitiesCounts = useEntitiesCount(
     relatedEntities.map(({ name }) => name)
   );
+
+  const { isLoading, error } = referenceFields;
+
+  const viewState = useViewStateMachine(isLoading, error, "details");
 
   return (
     <AppLayout
@@ -80,23 +86,29 @@ export function EntityDetails() {
         </SectionBox>
         <Spacer size="xl" />
         <SectionBox title="Relations">
-          <RenderList
-            items={relatedEntities}
-            singular="Relation"
-            isLoading={referenceFields.isLoading}
-            render={(menuItem) => {
-              const count = relatedEntitiesCounts.data[menuItem.name]?.isLoading
-                ? "Loading..."
-                : relatedEntitiesCounts.data[menuItem.name]?.data?.count;
-              return (
-                <SectionListItem
-                  label={`${getEntityFieldLabels(menuItem.name)} (${count})`}
-                  key={menuItem.name}
-                  to={NAVIGATION_LINKS.ENTITY.TABLE(menuItem.name)}
-                />
-              );
-            }}
-          />
+          {viewState.type === "error" && (
+            <ErrorAlert message={viewState.message} />
+          )}
+          {(viewState.type === "render" || viewState.type === "loading") && (
+            <RenderList
+              items={relatedEntities}
+              singular="Relation"
+              isLoading={viewState.type === "loading"}
+              render={(menuItem) => {
+                const count = relatedEntitiesCounts.data[menuItem.name]
+                  ?.isLoading
+                  ? "Loading..."
+                  : relatedEntitiesCounts.data[menuItem.name]?.data?.count;
+                return (
+                  <SectionListItem
+                    label={`${getEntityFieldLabels(menuItem.name)} (${count})`}
+                    key={menuItem.name}
+                    to={NAVIGATION_LINKS.ENTITY.TABLE(menuItem.name)}
+                  />
+                );
+              }}
+            />
+          )}
         </SectionBox>
       </SectionCenter>
     </AppLayout>

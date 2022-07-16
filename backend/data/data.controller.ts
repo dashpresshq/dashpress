@@ -1,9 +1,9 @@
+import { TemplateService } from "shared/lib/templates";
+import noop from "lodash/noop";
 import {
   ConfigurationService,
   configurationService,
-} from "backend/configuration/configuration.service";
-import { TemplateService } from "shared/lib/templates";
-import noop from "lodash/noop";
+} from "../configuration/configuration.service";
 import { EntitiesService, entitiesService } from "../entities/entities.service";
 import { DataService, dataService, QueryFilter } from "./data.service";
 import { IPaginationFilters } from "./types";

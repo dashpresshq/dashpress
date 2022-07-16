@@ -7,7 +7,6 @@ export default requestHandler({
       "entity",
       "queryFilters",
     ]);
-
     return await dataController.countData(
       validatedRequest.entity,
       validatedRequest.queryFilters

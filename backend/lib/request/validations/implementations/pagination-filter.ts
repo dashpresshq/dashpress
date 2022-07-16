@@ -1,4 +1,4 @@
-import { IPaginationFilters } from "backend/data/types";
+import { IPaginationFilters } from "../../../../data/types";
 import { entityValidationImpl } from "./entity";
 import { ValidationImplType } from "./types";
 import { validateEntityField } from "./_validateEntityField";
@@ -9,8 +9,8 @@ export const paginationFilterValidationImpl: ValidationImplType<
   const take = Number(req.query.take) || 10;
   const page = Number(req.query.page) || 1;
 
-  const orderBy =
-    (req.query.orderBy as string)?.toLowerCase() === "desc" ? "desc" : "asc";
+  // TODO fix me
+  const orderBy = (req.query.orderBy as string) ? "desc" : "asc";
 
   const entity = await entityValidationImpl(req);
 

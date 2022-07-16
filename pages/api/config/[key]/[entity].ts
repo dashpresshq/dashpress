@@ -3,17 +3,26 @@ import { requestHandler } from "../../../../backend/lib/request";
 
 export default requestHandler(
   {
-    GET: async (getRequest) => {
+    GET: async (getValidatedRequest) => {
+      const validatedRequest = await getValidatedRequest([
+        "configKey",
+        "entity",
+      ]);
       return await configurationController.showConfig(
-        getRequest("configKey"),
-        getRequest("entity")
+        validatedRequest.configKey,
+        validatedRequest.entity
       );
     },
-    PUT: async (getRequest) => {
+    PUT: async (getValidatedRequest) => {
+      const validatedRequest = await getValidatedRequest([
+        "configKey",
+        "entity",
+        "configBody",
+      ]);
       return await configurationController.upsertConfig(
-        getRequest("configKey"),
-        getRequest("configBody"),
-        getRequest("entity")
+        validatedRequest.configKey,
+        validatedRequest.configBody,
+        validatedRequest.entity
       );
     },
   },

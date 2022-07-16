@@ -2,10 +2,12 @@ import { dataController } from "../../../../../backend/data/data.controller";
 import { requestHandler } from "../../../../../backend/lib/request";
 
 export default requestHandler({
-  GET: async (getRequest) => {
+  GET: async (getValidatedRequest) => {
+    const validatedRequest = await getValidatedRequest(["entity", "entityId"]);
+
     return await dataController.referenceData(
-      getRequest("entity"),
-      getRequest("entityId")
+      validatedRequest.entity,
+      validatedRequest.entityId
     );
   },
 });

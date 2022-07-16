@@ -11,7 +11,11 @@ export const requestHandler =
     methodHandler: Partial<
       Record<
         RequestMethod,
-        (getRequest: <T>(key: ValidationKeys["_type"]) => T) => Promise<unknown>
+        (
+          getRequest: <T extends ValidationKeys["_type"]>(
+            key: T[]
+          ) => Promise<Record<T, any>>
+        ) => unknown
       >
     >,
     validations?: ValidationKeys[]
@@ -26,28 +30,31 @@ export const requestHandler =
       }
       return false;
     });
-    const validatedRequest = Object.fromEntries(
-      await Promise.all(
-        [...DEFAULT_VALIDATIONS, ...validationsToRun].map(
-          async (validation) => {
-            return [validation, await ValidationImpl[validation._type](req)];
-          }
-        )
-      )
+    await Promise.all(
+      [...DEFAULT_VALIDATIONS, ...validationsToRun].map(async (validation) => {
+        return await ValidationImpl[validation._type](req);
+      })
     );
     try {
-      if (Object.keys(methodHandler).includes(req.method)) {
-        return res.status(RequestMethodResponseCode[req.method]).json(
-          await methodHandler[req.method](
-            (requestKey: ValidationKeys["_type"]) => {
-              return validatedRequest[requestKey];
-            }
-          )
-        );
+      if (!Object.keys(methodHandler).includes(req.method)) {
+        res.setHeader("Allow", Object.keys(methodHandler));
+        return res.status(405).end(`Method '${req.method}' Not Allowed`);
       }
+      return res.status(RequestMethodResponseCode[req.method]).json(
+        await methodHandler[req.method](
+          async (requestKeys: ValidationKeys["_type"][]) => {
+            await Promise.all(
+              requestKeys.map(async (requestKey) => [
+                requestKey,
+                await ValidationImpl[requestKey](req),
+              ])
+            );
+          }
+        )
+      );
     } catch (error) {
       return handleResponseError(res, error);
     }
-    res.setHeader("Allow", Object.keys(methodHandler));
-    return res.status(405).end(`Method '${req.method}' Not Allowed`);
   };
+
+// security, correctness vs speed and repetition

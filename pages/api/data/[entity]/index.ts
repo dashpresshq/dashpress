@@ -3,13 +3,18 @@ import { requestHandler } from "../../../../backend/lib/request";
 
 export default requestHandler(
   {
-    GET: async (getRequest) => {
-      return await dataController.listData(getRequest("entity"));
+    GET: async (getValidatedRequest) => {
+      const validatedRequest = await getValidatedRequest(["entity"]);
+      return await dataController.listData(validatedRequest.entity);
     },
-    POST: async (getRequest) => {
+    POST: async (getValidatedRequest) => {
+      const validatedRequest = await getValidatedRequest([
+        "entity",
+        "requestBody",
+      ]);
       return await dataController.createData(
-        getRequest("entity"),
-        getRequest("requestBody")
+        validatedRequest.entity,
+        validatedRequest.requestBody
       );
     },
     PATCH: async () => {

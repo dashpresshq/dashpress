@@ -13,8 +13,8 @@ describe("/api/requestHandler", () => {
     });
 
     await requestHandler({
-      GET: async (getRequest) => {
-        return { foo: getRequest("queryFilters") };
+      GET: async (getValidatedRequest) => {
+        return { foo: getValidatedRequest(["queryFilters"]) };
       },
     })(req, res);
 
@@ -33,8 +33,8 @@ describe("/api/requestHandler", () => {
     });
 
     await requestHandler({
-      POST: async (getRequest) => {
-        return { foo: getRequest("requestBody") };
+      POST: async (getValidatedRequest) => {
+        return { foo: getValidatedRequest(["requestBody"]) };
       },
     })(req, res);
 

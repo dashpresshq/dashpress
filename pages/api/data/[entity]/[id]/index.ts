@@ -3,23 +3,37 @@ import { requestHandler } from "../../../../../backend/lib/request";
 
 export default requestHandler(
   {
-    GET: async (getRequest) => {
+    GET: async (getValidatedRequest) => {
+      const validatedRequest = await getValidatedRequest([
+        "entity",
+        "entityId",
+      ]);
+
       return await dataController.showData(
-        getRequest("entity"),
-        getRequest("entityId")
+        validatedRequest.entity,
+        validatedRequest.entityId
       );
     },
-    PATCH: async (getRequest) => {
+    PATCH: async (getValidatedRequest) => {
+      const validatedRequest = await getValidatedRequest([
+        "entity",
+        "entityId",
+        "requestBody",
+      ]);
       return await dataController.updateData(
-        getRequest("entity"),
-        getRequest("entityId"),
-        getRequest("requestBody")
+        validatedRequest.entity,
+        validatedRequest.entityId,
+        validatedRequest.requestBody
       );
     },
-    DELETE: async (getRequest) => {
+    DELETE: async (getValidatedRequest) => {
+      const validatedRequest = await getValidatedRequest([
+        "entity",
+        "entityId",
+      ]);
       return await dataController.deleteData(
-        getRequest("entity"),
-        getRequest("entityId")
+        validatedRequest.entity,
+        validatedRequest.entityId
       );
     },
   },

@@ -1,6 +1,8 @@
 import { createMocks } from "node-mocks-http";
 import handler from "../../../../pages/api/config/[key]/[entity]";
 
+// TODO check that the before entity keys are empty before testing
+
 describe("/api/config/[key]/[entity]", () => {
   it("should return save keys", async () => {
     const { req, res } = createMocks({

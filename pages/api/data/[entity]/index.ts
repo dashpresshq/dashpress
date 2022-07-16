@@ -9,7 +9,7 @@ export default requestHandler(
     POST: async (getRequest) => {
       return await dataController.createData(
         getRequest("entity"),
-        getRequest("request_body")
+        getRequest("requestBody")
       );
     },
     PATCH: async () => {
@@ -25,7 +25,7 @@ export default requestHandler(
   },
   [
     {
-      _type: "can_crud",
+      _type: "canCrud",
       method: ["POST"],
     },
   ]

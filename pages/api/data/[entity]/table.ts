@@ -5,8 +5,8 @@ export default requestHandler({
   GET: async (getRequest) => {
     return await dataController.tableData(
       getRequest("entity"),
-      getRequest("query_filters"),
-      getRequest("pagination_filter")
+      getRequest("queryFilters"),
+      getRequest("paginationFilter")
     );
   },
 });

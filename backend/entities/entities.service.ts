@@ -1,5 +1,4 @@
 import { IDBSchema, IEntityField, IEntityRelation } from "shared/types";
-import { BadRequestError } from "../lib/errors";
 import { SchemasService, schemasService } from "../schema/schema.service";
 
 export class EntitiesService {
@@ -27,32 +26,6 @@ export class EntitiesService {
       (await this.getEntityFields(entity)).find(({ isId }) => isId)?.name ||
       "id"
     );
-  }
-
-  private async _validateEntityField(
-    entities: IEntityField[],
-    entity: string,
-    field?: string
-  ): Promise<string | undefined> {
-    if (!entities.find(({ name }) => name === field)) {
-      throw new BadRequestError(`Invalid field '${field}' for ${entity}`);
-    }
-    return field as string;
-  }
-
-  async validateEntityField(entity: string, field: unknown): Promise<string> {
-    if (!field) {
-      return field as undefined;
-    }
-    const entities = await this.getEntityFields(entity);
-    return await this._validateEntityField(entities, entity, field as string);
-  }
-
-  async validateEntityFields(entity: string, fields: string[]) {
-    const entities = await this.getEntityFields(entity);
-    fields.forEach(async (field) => {
-      await this._validateEntityField(entities, entity, field);
-    });
   }
 
   async getEntityFromSchema(entity: string): Promise<IDBSchema> {

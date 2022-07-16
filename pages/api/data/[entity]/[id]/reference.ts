@@ -5,7 +5,7 @@ export default requestHandler({
   GET: async (getRequest) => {
     return await dataController.referenceData(
       getRequest("entity"),
-      getRequest("entity_id")
+      getRequest("entityId")
     );
   },
 });

@@ -4,18 +4,18 @@ import { requestHandler } from "../../../../backend/lib/request";
 export default requestHandler(
   {
     GET: async (getRequest) => {
-      return await configurationController.showConfig(getRequest("config_key"));
+      return await configurationController.showConfig(getRequest("configKey"));
     },
     PUT: async (getRequest) => {
       return await configurationController.upsertConfig(
-        getRequest("config_key"),
-        getRequest("config_body")
+        getRequest("configKey"),
+        getRequest("configBody")
       );
     },
   },
   [
     {
-      _type: "is_developer",
+      _type: "isDeveloper",
       method: ["PUT"],
     },
   ]

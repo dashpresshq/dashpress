@@ -7,13 +7,14 @@ describe("/api/requestHandler", () => {
     const { req, res } = createMocks({
       method: "GET",
       query: {
-        foo: "test_name",
+        take: "5",
+        page: "15",
       },
     });
 
     await requestHandler({
-      GET: async (req$) => {
-        return { foo: req$.query.foo };
+      GET: async (getRequest) => {
+        return { foo: getRequest("queryFilters") };
       },
     })(req, res);
 
@@ -25,13 +26,15 @@ describe("/api/requestHandler", () => {
     const { req, res } = createMocks({
       method: "POST",
       body: {
-        foo: "test_input",
+        data: {
+          name: "test-name",
+        },
       },
     });
 
     await requestHandler({
-      POST: async (req$1) => {
-        return { foo: req$1.body.foo };
+      POST: async (getRequest) => {
+        return { foo: getRequest("requestBody") };
       },
     })(req, res);
 

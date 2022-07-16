@@ -1,7 +1,10 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { handleResponseError } from "../errors";
 import { RequestMethod, RequestMethodResponseCode } from "./methods";
-import { ValidationImpl, ValidationKeys } from "./validation";
+import { ValidationKeys } from "./validations";
+import { ValidationImpl } from "./validations/implementations";
+
+const DEFAULT_VALIDATIONS: ValidationKeys[] = [{ _type: "isAuthenticated" }];
 
 export const requestHandler =
   (
@@ -14,7 +17,6 @@ export const requestHandler =
     validations?: ValidationKeys[]
   ) =>
   async (req: NextApiRequest, res: NextApiResponse) => {
-    // TODO default is authenticated
     const validationsToRun = (validations || []).filter((validation) => {
       if (!validation.method) {
         return true;
@@ -26,9 +28,11 @@ export const requestHandler =
     });
     const validatedRequest = Object.fromEntries(
       await Promise.all(
-        validationsToRun.map(async (validation) => {
-          return [validation, await ValidationImpl[validation._type](req)];
-        })
+        [...DEFAULT_VALIDATIONS, ...validationsToRun].map(
+          async (validation) => {
+            return [validation, await ValidationImpl[validation._type](req)];
+          }
+        )
       )
     );
     try {

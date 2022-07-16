@@ -46,7 +46,7 @@ describe("/api/config/[key]/[entity]", () => {
       method: "GET",
       query: {
         key: "entity_diction",
-        entity: "bar",
+        entity: "fish",
       },
     });
 
@@ -133,7 +133,7 @@ describe("/api/config/[key]/[entity]", () => {
       method: "PUT",
       query: {
         key: "entity_diction",
-        entity: "bar",
+        entity: "fish",
       },
       body: {
         data: {
@@ -151,7 +151,7 @@ describe("/api/config/[key]/[entity]", () => {
       method: "GET",
       query: {
         key: "entity_diction",
-        entity: "bar",
+        entity: "fish",
       },
     });
 

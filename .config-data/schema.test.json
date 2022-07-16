@@ -87,5 +87,11 @@
     "fields": [],
     "relations": [],
     "uniqueFields": []
+  },
+  {
+    "name": "fish",
+    "fields": [],
+    "relations": [],
+    "uniqueFields": []
   }
 ]

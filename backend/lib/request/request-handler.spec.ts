@@ -7,6 +7,7 @@ describe("/api/requestHandler", () => {
     const { req, res } = createMocks({
       method: "GET",
       query: {
+        entity: "foo",
         take: "5",
         page: "15",
       },
@@ -14,32 +15,50 @@ describe("/api/requestHandler", () => {
 
     await requestHandler({
       GET: async (getValidatedRequest) => {
-        return { foo: getValidatedRequest(["queryFilters"]) };
+        return {
+          foo: (await getValidatedRequest(["paginationFilter"]))
+            .paginationFilter,
+        };
       },
     })(req, res);
 
     expect(res._getStatusCode()).toBe(200);
-    expect(res._getJSONData()).toEqual({ foo: "test_name" });
+    expect(res._getJSONData()).toEqual({
+      foo: {
+        orderBy: "asc",
+        page: 15,
+        take: 5,
+      },
+    });
   });
 
   it("should call 'POST' correctly and pass body request", async () => {
     const { req, res } = createMocks({
       method: "POST",
+      query: {
+        entity: "foo",
+      },
       body: {
         data: {
-          name: "test-name",
+          title: "test-title",
         },
       },
     });
 
     await requestHandler({
       POST: async (getValidatedRequest) => {
-        return { foo: getValidatedRequest(["requestBody"]) };
+        return {
+          foo: (await getValidatedRequest(["requestBody"])).requestBody,
+        };
       },
     })(req, res);
 
     expect(res._getStatusCode()).toBe(201);
-    expect(res._getJSONData()).toEqual({ foo: "test_input" });
+    expect(res._getJSONData()).toEqual({
+      foo: {
+        title: "test-title",
+      },
+    });
   });
 
   it("should call error on non implemented request method", async () => {

@@ -1,4 +1,4 @@
-import { CONFIGURATION_KEYS } from "shared/configuration.constants";
+import { CONFIGURATION_KEYS } from "../../../../../shared/configuration.constants";
 import { BadRequestError } from "../../../errors";
 import { ValidationImplType } from "./types";
 

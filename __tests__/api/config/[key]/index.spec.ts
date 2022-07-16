@@ -4,7 +4,7 @@ import handler from "../../../../pages/api/config/[key]/index";
 // TODO check that the before enttity keys are empty before testing
 
 describe("/api/config/[key]/index", () => {
-  it("should return save keys", async () => {
+  it("should return saved keys", async () => {
     const { req, res } = createMocks({
       method: "GET",
       query: {
@@ -15,7 +15,7 @@ describe("/api/config/[key]/index", () => {
     await handler(req, res);
 
     expect(res._getStatusCode()).toBe(200);
-    expect(res._getJSONData()).toEqual(["foo", "bar", "baz"]);
+    expect(res._getJSONData()).toEqual(["bar", "baz"]);
   });
 
   it("should return default value for empty keys", async () => {

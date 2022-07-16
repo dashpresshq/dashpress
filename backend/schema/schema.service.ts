@@ -9,20 +9,22 @@ export class SchemasService {
     if (this.dbSchema) {
       return this.dbSchema;
     }
-    const schema = await introspect({
-      databaseType: "postgres",
-      host: "localhost",
-      password: "password",
-      schemaNames: ["public"],
-      database: "kademiks",
-      port: 5432,
-      ssl: false,
-      user: "postgres",
-    });
+    // const schema = await introspect({
+    //   databaseType: "postgres",
+    //   host: "localhost",
+    //   password: "password",
+    //   schemaNames: ["public"],
+    //   database: "kademiks",
+    //   port: 5432,
+    //   ssl: false,
+    //   user: "postgres",
+    // });
 
-    this.dbSchema = this.formatIntrospectData(schema);
+    // this.dbSchema = this.formatIntrospectData(schema);
 
-    ConfigData.put("schema", this.dbSchema);
+    // ConfigData.put("schema", this.dbSchema);
+
+    this.dbSchema = await ConfigData.get("schema", []);
 
     return this.dbSchema;
   }

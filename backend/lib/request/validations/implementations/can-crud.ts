@@ -1,4 +1,4 @@
-import { IEntityCrudSettings } from "shared/configuration.constants";
+import { IEntityCrudSettings } from "../../../../../shared/configuration.constants";
 import { configurationService } from "../../../../configuration/configuration.service";
 import { ForbiddenError } from "../../../errors";
 import { RequestMethod } from "../../methods";

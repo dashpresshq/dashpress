@@ -1,5 +1,5 @@
 {
-  "disabled_entities": ["foo", "bar", "baz"],
+  "disabled_entities": ["bar", "baz"],
   "entity_diction": {
     "foo": {
       "singular": "Singular Foo",

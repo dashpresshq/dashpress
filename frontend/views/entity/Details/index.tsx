@@ -7,10 +7,11 @@ import {
 } from "@gothicgeeks/design-system";
 import { TitleLang } from "@gothicgeeks/shared";
 import { useEntityReferenceFields } from "frontend/hooks/entity/entity.store";
+import { useEntitiesCount } from "frontend/hooks/data/data.store";
 import { AppLayout } from "../../../_layouts/app";
 import { NAVIGATION_LINKS } from "../../../lib/routing/links";
 import {
-  useEntityCrudSettings,
+  // useEntityCrudSettings,
   useEntityDiction,
   useEntityFieldLabels,
   useEntityId,
@@ -34,7 +35,17 @@ export function EntityDetails() {
 
   const referenceFields = useEntityReferenceFields(entity);
   const getEntityFieldLabels = useEntityFieldLabels();
-  const entityCrudSettings = useEntityCrudSettings();
+  // const entityCrudSettings = useEntityCrudSettings();
+
+  const relatedEntities = (referenceFields.data?.toMany || []).map(
+    (relatedEntity) => ({ name: relatedEntity })
+  );
+
+  console.log(relatedEntities);
+
+  const relatedEntitiesCounts = useEntitiesCount(
+    relatedEntities.map(({ name }) => name)
+  );
 
   return (
     <AppLayout
@@ -58,7 +69,6 @@ export function EntityDetails() {
             link: NAVIGATION_LINKS.ENTITY.TABLE(entity),
             label: entityDiction.plural,
           }}
-          isLoading
           deleteAction={() => console.log("")}
           isMakingDeleteRequest={false}
           iconButtons={[
@@ -71,15 +81,16 @@ export function EntityDetails() {
         <Spacer size="xl" />
         <SectionBox title="Relations">
           <RenderList
-            items={(referenceFields.data?.toMany || []).map(
-              (relatedEntity) => ({ name: relatedEntity })
-            )}
+            items={relatedEntities}
             singular="Relation"
             isLoading={referenceFields.isLoading}
             render={(menuItem) => {
+              const count = relatedEntitiesCounts.data[menuItem.name]?.isLoading
+                ? "Loading..."
+                : relatedEntitiesCounts.data[menuItem.name]?.data?.count;
               return (
                 <SectionListItem
-                  label={getEntityFieldLabels(menuItem.name)}
+                  label={`${getEntityFieldLabels(menuItem.name)} (${count})`}
                   key={menuItem.name}
                   to={NAVIGATION_LINKS.ENTITY.TABLE(menuItem.name)}
                 />
@@ -91,3 +102,13 @@ export function EntityDetails() {
     </AppLayout>
   );
 }
+
+// How to get relation count
+
+// How many views a deal item has
+
+// So we need to send a request
+
+// count /dealViews/:dealItemId/dealItem
+
+// SELECT * FROM dealviews where dealItemId = :dealItemId

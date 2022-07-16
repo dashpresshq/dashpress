@@ -1,27 +1,27 @@
 import { dataController } from "../../../../../backend/data/data.controller";
-import {
-  validateEntityFromRequest,
-  validateEntityIdFromRequest,
-} from "../../../../../backend/entities/entities.validations";
 import { requestHandler } from "../../../../../backend/lib/request";
 
-export default requestHandler({
-  GET: async (req) => {
-    const entity = validateEntityFromRequest(req.query);
-    const id = validateEntityIdFromRequest(req.query);
-
-    return await dataController.showData(entity, id);
+export default requestHandler(
+  {
+    GET: async (getRequest) => {
+      return await dataController.showData(
+        getRequest("entity"),
+        getRequest("entity_id")
+      );
+    },
+    PATCH: async (getRequest) => {
+      return await dataController.updateData(
+        getRequest("entity"),
+        getRequest("entity_id"),
+        getRequest("request_body")
+      );
+    },
+    DELETE: async (getRequest) => {
+      return await dataController.deleteData(
+        getRequest("entity"),
+        getRequest("entity_id")
+      );
+    },
   },
-  PATCH: async (req) => {
-    const entity = validateEntityFromRequest(req.query);
-    const id = validateEntityIdFromRequest(req.query);
-
-    return await dataController.updateData(entity, id, req.body.data);
-  },
-  DELETE: async (req) => {
-    const entity = validateEntityFromRequest(req.query);
-    const id = validateEntityIdFromRequest(req.query);
-
-    return await dataController.deleteData(entity, id);
-  },
-});
+  [{ _type: "can_crud" }]
+);

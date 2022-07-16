@@ -1,11 +1,12 @@
 import { dataController } from "../../../../backend/data/data.controller";
-import { validateEntityFromRequest } from "../../../../backend/entities/entities.validations";
 import { requestHandler } from "../../../../backend/lib/request";
 
 export default requestHandler({
-  GET: async (req) => {
-    const entity = validateEntityFromRequest(req.query);
-
-    return await dataController.tableData(entity, req.query);
+  GET: async (getRequest) => {
+    return await dataController.tableData(
+      getRequest("entity"),
+      getRequest("query_filters"),
+      getRequest("pagination_filter")
+    );
   },
 });

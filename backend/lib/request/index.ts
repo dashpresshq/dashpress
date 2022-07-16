@@ -1,32 +1,45 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { handleResponseError } from "../errors";
-
-type RequestMethod = "GET" | "POST" | "PATCH" | "DELETE" | "PUT";
-
-const RequestMethodResponseCode: Record<RequestMethod, number> = {
-  DELETE: 204,
-  GET: 200,
-  PATCH: 200,
-  POST: 201,
-  PUT: 204,
-};
-
-// type ValidationKeys = "isAuthenticated" | "isDeveloper" | "isEntityAllowed";
+import { RequestMethod, RequestMethodResponseCode } from "./methods";
+import { ValidationImpl, ValidationKeys } from "./validation";
 
 export const requestHandler =
   (
     methodHandler: Partial<
-      Record<RequestMethod, (req: NextApiRequest) => Promise<unknown>>
-    >
-    // validations: ValidationKeys[]
+      Record<
+        RequestMethod,
+        (getRequest: <T>(key: ValidationKeys["_type"]) => T) => Promise<unknown>
+      >
+    >,
+    validations?: ValidationKeys[]
   ) =>
   async (req: NextApiRequest, res: NextApiResponse) => {
-    // run the validations here
+    // TODO default is authenticated
+    const validationsToRun = (validations || []).filter((validation) => {
+      if (!validation.method) {
+        return true;
+      }
+      if (validation.method.includes(req.method as RequestMethod)) {
+        return true;
+      }
+      return false;
+    });
+    const validatedRequest = Object.fromEntries(
+      await Promise.all(
+        validationsToRun.map(async (validation) => {
+          return [validation, await ValidationImpl[validation._type](req)];
+        })
+      )
+    );
     try {
       if (Object.keys(methodHandler).includes(req.method)) {
-        return res
-          .status(RequestMethodResponseCode[req.method])
-          .json(await methodHandler[req.method](req));
+        return res.status(RequestMethodResponseCode[req.method]).json(
+          await methodHandler[req.method](
+            (requestKey: ValidationKeys["_type"]) => {
+              return validatedRequest[requestKey];
+            }
+          )
+        );
       }
     } catch (error) {
       return handleResponseError(res, error);

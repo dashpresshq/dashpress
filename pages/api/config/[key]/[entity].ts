@@ -1,25 +1,26 @@
 import { configurationController } from "../../../../backend/configuration/configuration.controller";
-import { validateConfigKeyFromRequest } from "../../../../backend/configuration/configuration.validations";
-import { validateEntityFromRequest } from "../../../../backend/entities/entities.validations";
 import { requestHandler } from "../../../../backend/lib/request";
 
-export default requestHandler({
-  // is authenticated
-  GET: async (req) => {
-    const entity = validateEntityFromRequest(req.query);
-    const key = validateConfigKeyFromRequest(req.query, entity);
-
-    return await configurationController.showConfig(key, entity);
+export default requestHandler(
+  {
+    GET: async (getRequest) => {
+      return await configurationController.showConfig(
+        getRequest("config_key"),
+        getRequest("entity")
+      );
+    },
+    PUT: async (getRequest) => {
+      return await configurationController.upsertConfig(
+        getRequest("config_key"),
+        getRequest("config_body"),
+        getRequest("entity")
+      );
+    },
   },
-  // TODO validate is developer
-  PUT: async (req) => {
-    const entity = validateEntityFromRequest(req.query);
-    const key = validateConfigKeyFromRequest(req.query, entity);
-
-    return await configurationController.upsertConfig(
-      key,
-      req.body.data,
-      entity
-    );
-  },
-});
+  [
+    {
+      _type: "is_developer",
+      method: ["PUT"],
+    },
+  ]
+);

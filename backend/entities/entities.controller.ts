@@ -39,19 +39,24 @@ export class EntitiesController {
   async getEntityRelations(
     entity: string
   ): Promise<{ toMany: string[]; toOne: Record<string, string> }> {
-    const [entityRelations] = await Promise.all([
+    const [entityRelations, disabledEntities] = await Promise.all([
       this._entitiesService.getEntityRelations(entity),
+      this._configurationService.show<string[]>("disabled_entities"),
     ]);
+
+    const allowedEntityRelation = entityRelations.filter(
+      ({ table }) => !disabledEntities.includes(table)
+    );
 
     return {
       toOne: Object.fromEntries(
-        entityRelations
+        allowedEntityRelation
           .filter((relation) => relation?.joinColumnOptions?.[0].name)
           .map((relation) => {
             return [relation?.joinColumnOptions?.[0].name, relation.table];
           })
       ),
-      toMany: entityRelations
+      toMany: allowedEntityRelation
         .filter((relation) => !relation?.joinColumnOptions?.[0].name)
         .map((relation) => relation.table),
     };

@@ -3,6 +3,7 @@ import { IColumnFilterBag } from "@gothicgeeks/design-system/dist/components/Tab
 import knex, { Knex } from "knex";
 import get from "lodash/get";
 import noop from "lodash/noop";
+import { IPaginationFilters } from "./types";
 
 export type QueryFilter = { id: string; value: IColumnFilterBag<unknown> };
 
@@ -94,12 +95,7 @@ export class DataService {
     entity: string,
     select: string[],
     queryFilter: QueryFilter[],
-    dataFetchingModifiers: {
-      take: number;
-      page: number;
-      orderBy: string;
-      sortBy?: string;
-    }
+    dataFetchingModifiers: IPaginationFilters
   ) {
     let query = this.transformQueryFiltersQueryBuilder(
       DataService.getInstance().select(select).from(entity),

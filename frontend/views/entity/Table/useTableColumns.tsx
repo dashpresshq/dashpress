@@ -94,7 +94,7 @@ export const useTableColumns = () => {
               entityFieldTypes[name],
               entityFieldSelections[name]
             ),
-      disableSortBy: !FIELD_TYPES_CONFIG_MAP[entityFieldTypes[name]].sortable,
+      disableSortBy: !FIELD_TYPES_CONFIG_MAP[entityFieldTypes[name]]?.sortable,
       Cell: ({ value }: { value: unknown }) => {
         if (value === undefined || value === null) {
           return null;

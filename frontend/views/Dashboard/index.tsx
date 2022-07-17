@@ -11,9 +11,9 @@ import * as StyledGrid from "styled-bootstrap-grid";
 import { useRouter } from "next/router";
 import { HardDrive } from "react-feather";
 import { useEntitiesCount } from "frontend/hooks/data/data.store";
-import { useEntitiesMenuItems } from "../hooks/entity/entity.store";
-import { AppLayout } from "../_layouts/app";
-import { NAVIGATION_LINKS } from "../lib/routing/links";
+import { useEntitiesMenuItems } from "../../hooks/entity/entity.store";
+import { AppLayout } from "../../_layouts/app";
+import { NAVIGATION_LINKS } from "../../lib/routing/links";
 
 const StyledBox = styled.div`
   padding: 24px;

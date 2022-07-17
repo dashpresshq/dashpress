@@ -43,8 +43,6 @@ export function EntityDetails() {
     (relatedEntity) => ({ name: relatedEntity })
   );
 
-  console.log(relatedEntities);
-
   const relatedEntitiesCounts = useEntitiesCount(
     relatedEntities.map(({ name }) => name)
   );
@@ -114,6 +112,8 @@ export function EntityDetails() {
     </AppLayout>
   );
 }
+
+// TODO
 
 // How to get relation count
 

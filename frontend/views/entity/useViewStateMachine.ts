@@ -17,12 +17,7 @@ export const useViewStateMachine = (
   const entitiesToHide = useAppConfiguration<string[]>("disabled_entities");
   const entity = useEntitySlug();
 
-  if (
-    isLoading ||
-    entityCrudSettings.isLoading ||
-    entitiesToHide.isLoading ||
-    entityCrudSettings?.data === undefined
-  ) {
+  if (isLoading || entityCrudSettings.isLoading || entitiesToHide.isLoading) {
     return { type: "loading" };
   }
   if (

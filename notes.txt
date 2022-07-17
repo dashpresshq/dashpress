@@ -1,8 +1,8 @@
 
 Table actions
-
+https://activeadmin.info/
 OPEN SOURCE
-Relation ship list
+Relation ship list => settings
 users & auth
 add schema view
 
@@ -10,7 +10,7 @@ settings go back
 delete and edit button on the details page
 
 HTTP Actions
-Custom query tabs
+Custom query tabs scope
 
 url state
 Multi select + update / delete
@@ -24,7 +24,7 @@ Dahsboard list
 // Free version = 1 user
 Community support
 
-// Pro version 10 dollars/user per month
+// Pro version 250 dollars per month
 Hosted Deployment // secure way to get the credentials
 Action integrations
 Current User
@@ -35,10 +35,11 @@ Custom Dashboard
 Selected theme
 Custom Table view render
 Email Support
-max of 25 users
+20 seats + 10 per extra 
 black / white
+Multiple connections in the same app
 
-// $50 per user per month
+// 1250 per month
 Pro Pro
   Environments
   Versions
@@ -50,11 +51,9 @@ Pro Pro
   SSO
   Priority Support
   2FA
-  over charge of 100 users
+  100 seats + 10 per seat
 
 // Needs finesse
 Validations
 Implement filters
 introspect
-
-validate even the fields all requests

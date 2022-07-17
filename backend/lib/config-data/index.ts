@@ -9,6 +9,12 @@ const pathToConfigFile = (type: ConfigTypes) => {
   return path.resolve(process.cwd(), ".config-data", file);
 };
 
+// TODO Allow adaptors for other file types
+// DB
+// Redis
+// Firebase
+// Memory
+
 export class ConfigData {
   static async get(type: ConfigTypes, defaultValue: unknown) {
     try {

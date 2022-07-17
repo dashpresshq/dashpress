@@ -16,7 +16,6 @@ export class ConfigurationController {
     value: unknown,
     entity?: string
   ) {
-    // TODO value needs some kind of data validation
     await this._configurationService.upsert(key, value, entity);
   }
 }

@@ -8,7 +8,7 @@ import { isAuthenticatedValidationImpl as isAuthenticated } from "./is-authentic
 import { isDeveloperValidationImpl as isDeveloper } from "./is-developer";
 import { paginationFilterValidationImpl as paginationFilter } from "./pagination-filter";
 import { queryFilterValidationImpl as queryFilters } from "./query-filters";
-import { requestBodyValidationImpl as requestBody } from "./request-body";
+import { dataRequestBodyValidationImpl as dataRequestBody } from "./data-request-body";
 import { ValidationImplType } from "./types";
 
 export const ValidationImpl: Record<
@@ -17,9 +17,11 @@ export const ValidationImpl: Record<
 > = {
   isAuthenticated,
   canCrud,
+  // requestBody,
+  // guest,
   isDeveloper,
   configBody,
-  requestBody,
+  dataRequestBody,
   entity,
   paginationFilter,
   queryFilters,

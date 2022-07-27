@@ -19,6 +19,8 @@ Clone item
 Reorder menu for table
 Hide from dashboard
 
+decouple state from memory
+
 Dahsboard list
 
 // Free version = 1 user
@@ -57,3 +59,14 @@ Pro Pro
 Validations
 Implement filters
 introspect
+
+// const schema = await introspect({
+//   databaseType: "postgres",
+//   host: "localhost",
+//   password: "password",
+//   schemaNames: ["public"],
+//   database: "kademiks",
+//   port: 5432,
+//   ssl: false,
+//   user: "postgres",
+// });

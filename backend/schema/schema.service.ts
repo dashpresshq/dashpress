@@ -1,30 +1,50 @@
 import { introspect, Entity } from "@gothicgeeks/introspect";
+import {
+  CredentialsService,
+  credentialsService,
+} from "backend/credentials/credentials.service";
+import {
+  CREDENTIALS_DOMAINS,
+  IDBCrendentials,
+} from "backend/credentials/crendential.types";
+import { AbstractConfigDataPersistenceService } from "backend/lib/config-data/AbstractConfigDataPersistenceService";
 import { IDBSchema, IEntityField } from "shared/types";
-import { ConfigData } from "../lib/config-data";
+import { createConfigDomainPersistenceService } from "../lib/config-data";
 
 export class SchemasService {
   private dbSchema: IDBSchema[];
+
+  constructor(
+    private _schemaConfigDataPersistenceService: AbstractConfigDataPersistenceService<IDBSchema>,
+    private _credentialsService: CredentialsService
+  ) {}
 
   private async loadDbSchema(): Promise<IDBSchema[]> {
     if (this.dbSchema) {
       return this.dbSchema;
     }
-    // const schema = await introspect({
-    //   databaseType: "postgres",
-    //   host: "localhost",
-    //   password: "password",
-    //   schemaNames: ["public"],
-    //   database: "kademiks",
-    //   port: 5432,
-    //   ssl: false,
-    //   user: "postgres",
-    // });
+    const dbCredentials =
+      await this._credentialsService.getDomainCredentials<IDBCrendentials>(
+        CREDENTIALS_DOMAINS.database
+      );
 
-    // this.dbSchema = this.formatIntrospectData(schema);
+    const schema = await introspect({
+      databaseType: dbCredentials.databaseType,
+      host: dbCredentials.host,
+      password: dbCredentials.password,
+      schemaNames: dbCredentials.schemaNames,
+      database: dbCredentials.host,
+      port: dbCredentials.port,
+      ssl: dbCredentials.ssl,
+      user: dbCredentials.user,
+    });
 
-    // ConfigData.put("schema", this.dbSchema);
+    this.dbSchema = this.formatIntrospectData(schema);
 
-    this.dbSchema = await ConfigData.get("schema", []);
+    this._schemaConfigDataPersistenceService.saveAllItems(
+      "name",
+      this.dbSchema
+    );
 
     return this.dbSchema;
   }
@@ -70,4 +90,10 @@ export class SchemasService {
   }
 }
 
-export const schemasService = new SchemasService();
+const schemaPersistenceService =
+  createConfigDomainPersistenceService<IDBSchema>("schema");
+
+export const schemasService = new SchemasService(
+  schemaPersistenceService,
+  credentialsService
+);

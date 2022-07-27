@@ -2,35 +2,51 @@ import { FilterOperators } from "@gothicgeeks/design-system"; // Move this somew
 import { IColumnFilterBag } from "@gothicgeeks/design-system/dist/components/Table/filters/types";
 import knex, { Knex } from "knex";
 import get from "lodash/get";
-import noop from "lodash/noop";
+import { credentialsService } from "backend/credentials/credentials.service";
+import {
+  CREDENTIALS_DOMAINS,
+  IDBCrendentials,
+  SupportedDatabaseTypes,
+} from "backend/credentials/crendential.types";
 import { IPaginationFilters } from "./types";
 
 export type QueryFilter = { id: string; value: IColumnFilterBag<unknown> };
 
+const SupportedDatabaseTypeToKnexClientMap: Record<
+  SupportedDatabaseTypes,
+  string
+> = {
+  mssql: "tedious",
+  postgres: "pg",
+  mysql: "mysql2",
+  sqlite: "better-sqlite3",
+};
+
 export class DataService {
   static _dbInstance: Knex | null = null;
 
-  static getInstance() {
-    if (!this._dbInstance) {
-      this._dbInstance = knex({
-        client: "pg",
-        connection: {
-          database: "kademiks",
-          user: "postgres",
-          password: "password",
-          host: "127.0.0.1",
-          port: 5432,
-          ssl: false,
-        },
-        // searchPath: ["public"],
-      });
+  static async getInstance() {
+    if (this._dbInstance) {
+      return this._dbInstance;
     }
-    this.afterConnection();
-    return this._dbInstance;
-  }
 
-  static async afterConnection() {
-    noop();
+    const dbCredentials: IDBCrendentials =
+      await credentialsService.getDomainCredentials<IDBCrendentials>(
+        CREDENTIALS_DOMAINS.database
+      );
+
+    this._dbInstance = knex({
+      client: SupportedDatabaseTypeToKnexClientMap[dbCredentials.databaseType],
+      connection: {
+        database: dbCredentials.database,
+        user: dbCredentials.user,
+        password: dbCredentials.password,
+        host: dbCredentials.host,
+        port: dbCredentials.port,
+        ssl: dbCredentials.ssl,
+      },
+    });
+    return this._dbInstance;
   }
 
   private filterOperatorToQuery(
@@ -84,7 +100,7 @@ export class DataService {
   };
 
   async count(entity: string, queryFilter: QueryFilter[]): Promise<number> {
-    let query = DataService.getInstance().from(entity);
+    let query = (await DataService.getInstance()).from(entity);
 
     query = this.transformQueryFiltersQueryBuilder(query, queryFilter);
 
@@ -98,7 +114,7 @@ export class DataService {
     dataFetchingModifiers: IPaginationFilters
   ) {
     let query = this.transformQueryFiltersQueryBuilder(
-      DataService.getInstance().select(select).from(entity),
+      (await DataService.getInstance()).select(select).from(entity),
       queryFilter
     );
 
@@ -129,7 +145,7 @@ export class DataService {
     select: string[],
     query: Record<string, unknown>
   ): Promise<T> {
-    return await DataService.getInstance()
+    return await (await DataService.getInstance())
       .table(entity)
       .select(select)
       .where(query)
@@ -141,10 +157,9 @@ export class DataService {
     data: Record<string, unknown>,
     primaryField: string
   ) {
-    const result = await DataService.getInstance()(entity).insert(
-      data,
-      primaryField
-    );
+    const result = await (
+      await DataService.getInstance()
+    )(entity).insert(data, primaryField);
     return result[0][primaryField];
   }
 
@@ -153,11 +168,11 @@ export class DataService {
     query: Record<string, unknown>,
     data: Record<string, unknown>
   ): Promise<void> {
-    await DataService.getInstance()(entity).where(query).update(data);
+    await (await DataService.getInstance())(entity).where(query).update(data);
   }
 
   async delete(entity: string, query: Record<string, unknown>): Promise<void> {
-    await DataService.getInstance()(entity).where(query).del();
+    await (await DataService.getInstance())(entity).where(query).del();
   }
 }
 

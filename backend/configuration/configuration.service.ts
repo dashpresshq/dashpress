@@ -1,24 +1,20 @@
-import { ConfigData } from "../lib/config-data";
+import { AbstractConfigDataPersistenceService } from "backend/lib/config-data/AbstractConfigDataPersistenceService";
+import { createConfigDomainPersistenceService } from "../lib/config-data";
 import { CONFIGURATION_KEYS } from "../../shared/configuration.constants";
 
 export class ConfigurationService {
-  static _config: Record<string, unknown> | undefined;
-
-  static async getConfig() {
-    if (this._config) {
-      return this._config;
-    }
-    this._config = await ConfigData.get("app-config", {});
-    return this._config;
-  }
+  constructor(
+    private _appConfigPersistenceService: AbstractConfigDataPersistenceService<unknown>
+  ) {}
 
   async show<T>(
     key: keyof typeof CONFIGURATION_KEYS,
     entity?: string
   ): Promise<T> {
-    const config = await ConfigurationService.getConfig();
+    const config = await this._appConfigPersistenceService.getItem(key);
+
     const { requireEntity, defaultValue } = CONFIGURATION_KEYS[key];
-    const value = requireEntity ? (config[key] || {})[entity] : config[key];
+    const value = requireEntity ? (config || {})[entity] : config;
     return value || defaultValue;
   }
 
@@ -27,20 +23,25 @@ export class ConfigurationService {
     value: unknown,
     entity?: string
   ): Promise<void> {
-    const config = await ConfigurationService.getConfig();
+    let config = await this._appConfigPersistenceService.getItem(key);
 
     const { requireEntity } = CONFIGURATION_KEYS[key];
-    if (requireEntity) {
-      if (!config[key]) {
-        config[key] = {};
-      }
-      config[key][entity] = value;
-    } else {
-      config[key] = value;
-    }
 
-    await ConfigData.put("app-config", config);
+    if (requireEntity) {
+      if (!config) {
+        config = {};
+      }
+      config[entity] = value;
+    } else {
+      config = value;
+    }
+    await this._appConfigPersistenceService.upsertItem(key, config);
   }
 }
 
-export const configurationService = new ConfigurationService();
+const appConfigPersistenceService =
+  createConfigDomainPersistenceService("app-config");
+
+export const configurationService = new ConfigurationService(
+  appConfigPersistenceService
+);

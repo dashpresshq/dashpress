@@ -40,6 +40,7 @@ export const requestHandler =
       }
       return false;
     });
+    // if request contains `guest` the remove the validation `isAuthenticated`
     await Promise.all(
       [...DEFAULT_VALIDATIONS, ...validationsToRun].map(async (validation) => {
         return await ValidationImpl[validation._type](req);

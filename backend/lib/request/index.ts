@@ -14,6 +14,8 @@ import { ValidationImpl } from "./validations/implementations";
  1. Speed => Kind of like a child of the above issue, Await/Async will hopefully alleviate this a bit
 */
 
+type GetValidatedRequestOptions<T> = Array<T | { _type: T; options: unknown }>;
+
 export const requestHandler =
   (
     methodHandler: Partial<
@@ -21,7 +23,7 @@ export const requestHandler =
         RequestMethod,
         (
           getRequest: <T extends ValidationKeys["_type"]>(
-            key: T[]
+            key: GetValidatedRequestOptions<T>
           ) => Promise<Record<T, any>>
         ) => unknown
       >
@@ -48,31 +50,40 @@ export const requestHandler =
       },
     ];
 
-    await Promise.all(
-      [...AUTH_VALIDATIONS, ...validationsToRun].map(async (validation) => {
-        return await ValidationImpl[validation._type](req, validation.body);
-      })
-    );
     try {
+      await Promise.all(
+        [...AUTH_VALIDATIONS, ...validationsToRun].map(async (validation) => {
+          return await ValidationImpl[validation._type](req, validation.body);
+        })
+      );
+
       if (!Object.keys(methodHandler).includes(req.method)) {
         res.setHeader("Allow", Object.keys(methodHandler));
         return res.status(405).end(`Method '${req.method}' Not Allowed`);
       }
       return res.status(RequestMethodResponseCode[req.method]).json(
         await methodHandler[req.method](
-          async (requestKeys: ValidationKeys["_type"][]) => {
+          async (
+            requestKeys: GetValidatedRequestOptions<ValidationKeys["_type"]>
+          ) => {
             return Object.fromEntries(
               await Promise.all(
-                requestKeys.map(async (requestKey) => [
-                  requestKey,
-                  await ValidationImpl[requestKey](req),
-                ])
+                requestKeys.map(async (requestKeyInput) => {
+                  const [requestKey, requestOptions] =
+                    typeof requestKeyInput === "string"
+                      ? [requestKeyInput, null]
+                      : [requestKeyInput._type, requestKeyInput.options];
+                  return [
+                    requestKey,
+                    await ValidationImpl[requestKey](req, requestOptions),
+                  ];
+                })
               )
             );
           }
         )
       );
     } catch (error) {
-      return handleResponseError(res, error);
+      return handleResponseError(req, res, error);
     }
   };

@@ -1,10 +1,10 @@
-import { IFieldValidationItem } from "frontend/views/entity/Configure/Fields/FieldsValidation";
 import { IEntityField } from "shared/types";
+import { IFieldValidationItem } from "shared/validations/types";
 import {
   FIELD_TYPES_CONFIG_MAP,
   ENTITY_VALIDATION_CONFIG,
   ValidationsBoundToType,
-} from "../../../shared/validations.constants";
+} from "../../../shared/validations";
 
 export const getFieldTypeBoundedValidations = (
   fieldType: keyof typeof FIELD_TYPES_CONFIG_MAP

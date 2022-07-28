@@ -1,6 +1,6 @@
 import { isBoolean, maxLength } from "class-validator";
-import { handleValidation } from "../validations.constants/handle-validation";
-import { ENTITY_VALIDATION_CONFIG } from "../validations.constants";
+import { handleValidation } from "../validations/handle-validation";
+import { ENTITY_VALIDATION_CONFIG } from "../validations";
 
 describe("Handle Validation", () => {
   it("should return error message when validation expectation are not met", () => {

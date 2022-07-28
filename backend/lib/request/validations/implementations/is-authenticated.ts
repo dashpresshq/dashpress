@@ -4,7 +4,7 @@ import { ValidationImplType } from "./types";
 
 export const isAuthenticatedValidationImpl: ValidationImplType<void> = async (
   req,
-  protectedRoute
+  protectedRoute: boolean
 ) => {
   try {
     const reqHeaders = req.headers.authorization;

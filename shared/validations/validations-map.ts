@@ -17,10 +17,10 @@ import {
 } from "class-validator";
 import { FIELD_TYPES_CONFIG_MAP } from "./field-types-config";
 import { handleValidation } from "./handle-validation";
-import { SelectableAbleValidations, ValidationsBoundToType } from "./types";
+import { ValidationTypes } from "./types";
 
 export const ENTITY_VALIDATION_CONFIG: Record<
-  ValidationsBoundToType | SelectableAbleValidations,
+  ValidationTypes,
   {
     input?: Record<string, unknown>;
     isBoundToType?: Array<keyof typeof FIELD_TYPES_CONFIG_MAP>;

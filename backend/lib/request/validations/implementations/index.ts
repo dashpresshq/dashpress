@@ -8,7 +8,10 @@ import { isAuthenticatedValidationImpl as isAuthenticated } from "./is-authentic
 import { isCreatorValidationImpl as isCreator } from "./is-creator";
 import { paginationFilterValidationImpl as paginationFilter } from "./pagination-filter";
 import { queryFilterValidationImpl as queryFilters } from "./query-filters";
-import { dataRequestBodyValidationImpl as dataRequestBody } from "./data-request-body";
+import { entityRequestBodyValidationImpl as entityRequestBody } from "./entity-request-body";
+import { requestBodyValidationImpl as requestBody } from "./request-body";
+import { guestValidationImpl as guest } from "./guest";
+
 import { ValidationImplType } from "./types";
 
 export const ValidationImpl: Record<
@@ -17,17 +20,11 @@ export const ValidationImpl: Record<
 > = {
   isAuthenticated,
   canCrud,
-  requestBody: async () => {
-    // TODO
-  },
-  guest: async () => {
-    /*
-    This is just to statify TS
-    */
-  },
+  requestBody,
+  guest,
   isCreator,
   configBody,
-  dataRequestBody,
+  entityRequestBody,
   entity,
   paginationFilter,
   queryFilters,

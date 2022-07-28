@@ -11,7 +11,7 @@ export type ValidationKeys = {
     | "canCrud"
     | "requestBody"
     | "entityId"
-    | "dataRequestBody"
+    | "entityRequestBody"
     | "queryFilters"
     | "configBody";
   method?: RequestMethod[];

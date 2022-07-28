@@ -7,12 +7,8 @@ import {
 } from "@gothicgeeks/design-system";
 import { ISharedFormInput } from "@gothicgeeks/design-system/dist/components/Form/_types";
 import { StringUtils } from "@gothicgeeks/shared";
-import { TemplateService } from "shared/lib/templates";
-import {
-  FIELD_TYPES_CONFIG_MAP,
-  ENTITY_VALIDATION_CONFIG,
-} from "../../../shared/validations.constants";
-import { IFieldValidationItem } from "./Configure/Fields/FieldsValidation";
+import { IFieldValidationItem } from "shared/validations/types";
+import { FIELD_TYPES_CONFIG_MAP } from "../../../shared/validations";
 import { IColorableSelection } from "./Configure/Fields/types";
 
 export interface IBaseEntityForm {
@@ -85,37 +81,3 @@ export const isFieldRequired = (
   !!entityValidationsMap[field]?.find(
     (item) => item.validationType === "required"
   );
-
-export const runValidationError =
-  (
-    fields: string[],
-    entityValidationsMap: Record<string, IFieldValidationItem[]>,
-    getEntityFieldLabels: (input: string) => string
-  ) =>
-  (values: Record<string, unknown>) => {
-    const validations = Object.fromEntries(
-      fields.map((field) => {
-        const validationsToRun = entityValidationsMap[field] || [];
-
-        const firstFailedValidation = validationsToRun.find((validation) =>
-          ENTITY_VALIDATION_CONFIG[validation.validationType]?.implementation(
-            values[field],
-            validation.errorMessage,
-            validation.constraint || {},
-            values
-          )
-        );
-
-        return [
-          field,
-          firstFailedValidation
-            ? TemplateService.compile(firstFailedValidation.errorMessage, {
-                name: getEntityFieldLabels(field),
-                ...firstFailedValidation.constraint,
-              })
-            : undefined,
-        ];
-      })
-    );
-    return validations;
-  };

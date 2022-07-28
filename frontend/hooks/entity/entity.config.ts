@@ -1,16 +1,16 @@
 import { useRouteParam } from "@gothicgeeks/shared";
 import { useCallback } from "react";
-import { IFieldValidationItem } from "frontend/views/entity/Configure/Fields/FieldsValidation";
 import uniqBy from "lodash/uniqBy";
 import { IColorableSelection } from "frontend/views/entity/Configure/Fields/types";
 import { EntityTypesForSelection } from "frontend/views/entity/Configure/Fields/FieldsSelection";
+import { IFieldValidationItem } from "shared/validations/types";
 import {
   getFieldTypeBoundedValidations,
   guessEntityType,
   guessEntityValidations,
 } from "./guess";
 import { userFriendlyCase } from "../../lib/strings";
-import { FIELD_TYPES_CONFIG_MAP } from "../../../shared/validations.constants";
+import { FIELD_TYPES_CONFIG_MAP } from "../../../shared/validations";
 import { useEntityFields } from "./entity.store";
 import {
   CONFIGURATION_KEYS,

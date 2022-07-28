@@ -14,21 +14,21 @@ const tokenValidations = (value: string, label: string) => {
       `${label} needs to be more than ${TOKEN_LENGTH} characters`
     );
   }
-  if (
-    /^(?=.*[a-z])(?=.*[A-Z])(?=.*d)(?=.*[@$!%*?&])[A-Za-zd@$!%*?&]{64,}$/.test(
-      value
-    )
-  ) {
-    throw new Error(
-      `${label} must contain uppercase letters, lowercase letters, numbers and symbols`
-    );
-  }
+  // if (
+  //   !/^(?=.*[a-z])(?=.*[A-Z])(?=.*d)(?=.*[@$!%*?&])[A-Za-zd@$!%*?&]{64,}$/.test(
+  //     value
+  //   )
+  // ) {
+  //   throw new Error(
+  //     `${label} must contain uppercase letters, lowercase letters, numbers and symbols`
+  //   );
+  // }
 };
 
 const optionsValidation = (value: string, label: string, options: string[]) => {
   if (!options.includes(value as ConfigAdaptorTypes)) {
     throw new Error(
-      `Invalid ${label} name provided ${value}. Valid values are ${options}`
+      `Invalid ${label} name provided '${value}'. Valid values are ${options}`
     );
   }
 };

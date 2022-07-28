@@ -12,7 +12,7 @@ import {
 import {
   FIELD_TYPES_CONFIG_MAP,
   ENTITY_VALIDATION_CONFIG,
-} from "shared/validations.constants";
+} from "shared/validations";
 import { Form, Field } from "react-final-form";
 import arrayMutators from "final-form-arrays";
 import { FieldArray } from "react-final-form-arrays";
@@ -24,14 +24,7 @@ import {
   ButtonLang,
 } from "@gothicgeeks/shared";
 import React from "react";
-
-export interface IFieldValidationItem {
-  validationType: keyof typeof ENTITY_VALIDATION_CONFIG;
-  errorMessage: string;
-  fromSchema?: true;
-  fromType?: true;
-  constraint?: Record<string, string | number>;
-}
+import { IFieldValidationItem } from "shared/validations/types";
 
 interface IProps {
   field: string;

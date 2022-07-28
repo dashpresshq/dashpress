@@ -19,3 +19,15 @@ export type SelectableAbleValidations =
   | "alphanumeric"
   | "matchOtherField"
   | "postiveNumber";
+
+export type ValidationTypes =
+  | ValidationsBoundToType
+  | SelectableAbleValidations;
+
+export interface IFieldValidationItem {
+  validationType: ValidationTypes;
+  errorMessage: string;
+  fromSchema?: true;
+  fromType?: true;
+  constraint?: Record<string, string | number>;
+}

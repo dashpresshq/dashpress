@@ -1,7 +1,7 @@
-
-Table actions
 https://activeadmin.info/
+
 OPEN SOURCE
+Custom actions
 Relation ship list => settings
 users & auth
 add schema view
@@ -18,8 +18,6 @@ CSV, JSON, XML
 Clone item
 Reorder menu for table
 Hide from dashboard
-
-decouple state from memory
 
 Dahsboard list
 
@@ -70,3 +68,5 @@ introspect
 //   ssl: false,
 //   user: "postgres",
 // });
+
+https://docs.jetadmin.io/

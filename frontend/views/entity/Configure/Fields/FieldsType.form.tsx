@@ -14,11 +14,9 @@ import {
 } from "@gothicgeeks/shared";
 import { useMemo, useState } from "react";
 import { getFieldTypeBoundedValidations } from "frontend/hooks/entity/guess";
-import { FIELD_TYPES_CONFIG_MAP } from "../../../../../shared/validations.constants";
-import {
-  FieldValidationCanvas,
-  IFieldValidationItem,
-} from "./FieldsValidation";
+import { IFieldValidationItem } from "shared/validations/types";
+import { FIELD_TYPES_CONFIG_MAP } from "../../../../../shared/validations";
+import { FieldValidationCanvas } from "./FieldsValidation";
 import {
   EntityTypesForSelection,
   FieldSelectionCanvas,

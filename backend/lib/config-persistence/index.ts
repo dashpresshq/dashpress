@@ -11,16 +11,26 @@ export { AbstractConfigDataPersistenceService };
 export function createConfigDomainPersistenceService<T>(
   configDomain: ConfigDomain
 ): AbstractConfigDataPersistenceService<T> {
-  switch (
-    configService.getConfigValue<ConfigAdaptorTypes>(ConfigKeys.CONFIG_ADAPTOR)
-  ) {
-    case ConfigAdaptorTypes.JsonFile:
-      return new JsonFileConfigDataPersistenceAdaptor<T>(configDomain);
-    case ConfigAdaptorTypes.Memory:
-      return new MemoryConfigDataPersistenceAdaptor<T>(configDomain);
-    case ConfigAdaptorTypes.Redis:
-      return new RedisConfigDataPersistenceAdaptor<T>(configDomain);
-    case ConfigAdaptorTypes.Database:
-      return new DatabaseConfigDataPersistenceAdaptor<T>(configDomain);
-  }
+  const getInstance = () => {
+    switch (
+      configService.getConfigValue<ConfigAdaptorTypes>(
+        ConfigKeys.CONFIG_ADAPTOR
+      )
+    ) {
+      case ConfigAdaptorTypes.JsonFile:
+        return new JsonFileConfigDataPersistenceAdaptor<T>(configDomain);
+      case ConfigAdaptorTypes.Memory:
+        return new MemoryConfigDataPersistenceAdaptor<T>(configDomain);
+      case ConfigAdaptorTypes.Redis:
+        return new RedisConfigDataPersistenceAdaptor<T>(configDomain);
+      case ConfigAdaptorTypes.Database:
+        return new DatabaseConfigDataPersistenceAdaptor<T>(configDomain);
+    }
+  };
+
+  const instance = getInstance();
+
+  instance.initialize();
+
+  return instance;
 }

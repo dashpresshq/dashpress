@@ -24,7 +24,7 @@ export default requestHandler(
   },
   [
     {
-      _type: "isDeveloper",
+      _type: "isCreator",
       method: ["PUT"],
     },
   ]

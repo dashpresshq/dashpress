@@ -39,13 +39,22 @@ Object.entries(ConfigBag).forEach(([key, configBag]) => {
       });
     }
   }
-  configBag.validate(value);
 });
 
 if (newEnvEntries.length > 0) {
+  newEnvEntries.forEach((envEntry) => {
+    process.env[envEntry.key] = envEntry.value;
+  });
   // TODO save this to the env local file
 }
+
+Object.entries(ConfigBag).forEach(([key, configBag]) => {
+  const value = process.env[key];
+  configBag.validate(value);
+});
 
 export const configService = new ConfigService();
 
 configService.getConfigValue(ConfigKeys.AUTH_TOKEN_KEY);
+
+// TODO send a request to boostsrap the application

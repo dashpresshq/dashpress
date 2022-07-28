@@ -1,11 +1,11 @@
 import { FormButton, Stack } from "@gothicgeeks/design-system";
 import { ButtonLang, resetFormValues } from "@gothicgeeks/shared";
 import { Form, Field } from "react-final-form";
+import { runValidationError } from "shared/validations/run";
 import {
   RenderFormInput,
   IBaseEntityForm,
   IEntityFormSettings,
-  runValidationError,
   isFieldRequired,
 } from "../_RenderFormInput";
 

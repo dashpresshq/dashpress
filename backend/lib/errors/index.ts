@@ -1,8 +1,10 @@
 /* eslint max-classes-per-file: ["error", 5] */
-import { NextApiResponse } from "next";
+import { NextApiRequest, NextApiResponse } from "next";
 
 export class CustomError extends Error {
   code: number;
+
+  validations?: Record<string, unknown> = {};
 
   name: string;
 
@@ -26,16 +28,36 @@ export class ForbiddenError extends CustomError {
 }
 
 export class BadRequestError extends CustomError {
-  constructor(message = "Invalid Request") {
+  constructor(
+    message = "Invalid Request",
+    validations: Record<string, unknown> = {}
+  ) {
     super(400, "BadRequestError", message);
+    this.validations = validations;
   }
 }
 
-export const handleResponseError = (res: NextApiResponse, error: any) => {
+export const handleResponseError = (
+  req: NextApiRequest,
+  res: NextApiResponse,
+  error: any
+) => {
+  const baseErrorOptions = {
+    path: req.url,
+    method: req.method,
+    timestamp: new Date().toISOString(),
+  };
+
   if (error instanceof CustomError) {
-    return res
-      .status(error.code)
-      .json({ message: error.message, name: error.name });
+    return res.status(error.code).json({
+      message: error.message,
+      statusCode: error.code,
+      name: error.name,
+      validations: error?.validations,
+      ...baseErrorOptions,
+    });
   }
-  return res.status(500).json({ message: error.message });
+  return res
+    .status(500)
+    .json({ message: error.message, statusCode: 500, ...baseErrorOptions });
 };

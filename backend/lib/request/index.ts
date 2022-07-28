@@ -4,8 +4,6 @@ import { RequestMethod, RequestMethodResponseCode } from "./methods";
 import { ValidationKeys } from "./validations";
 import { ValidationImpl } from "./validations/implementations";
 
-const DEFAULT_VALIDATIONS: ValidationKeys[] = [{ _type: "isAuthenticated" }];
-
 /*
  The function below chooses 
  1. security => All request will be validated infact is impossible to not validate a request since you dont access to the Request object
@@ -40,10 +38,19 @@ export const requestHandler =
       }
       return false;
     });
-    // if request contains `guest` the remove the validation `isAuthenticated`
+
+    const AUTH_VALIDATIONS: ValidationKeys[] = [
+      {
+        _type: "isAuthenticated",
+        body: !validationsToRun.some(
+          (validation) => validation._type === "guest"
+        ),
+      },
+    ];
+
     await Promise.all(
-      [...DEFAULT_VALIDATIONS, ...validationsToRun].map(async (validation) => {
-        return await ValidationImpl[validation._type](req);
+      [...AUTH_VALIDATIONS, ...validationsToRun].map(async (validation) => {
+        return await ValidationImpl[validation._type](req, validation.body);
       })
     );
     try {

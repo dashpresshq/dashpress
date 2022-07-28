@@ -1,12 +1,15 @@
 import fs from "fs-extra";
 import path from "path";
+import { configService, NodeEnvironments } from "../config/config.service";
 
 import { AbstractConfigDataPersistenceService } from "./AbstractConfigDataPersistenceService";
 import { ConfigDomain } from "./types";
 
 const pathToConfigDomain = (type: ConfigDomain) => {
   const file =
-    process.env.NODE_ENV === "test" ? `${type}.test.json` : `${type}.json`;
+    configService.getNodeEnvironment() === NodeEnvironments.Test
+      ? `${type}.test.json`
+      : `${type}.json`;
   return path.resolve(process.cwd(), ".config-data", file);
 };
 
@@ -32,7 +35,7 @@ export class JsonFileConfigDataPersistenceAdaptor<
   }
 
   private async persist(data: Record<string, T>) {
-    if (process.env.NODE_ENV === "test") {
+    if (configService.getNodeEnvironment() === NodeEnvironments.Test) {
       return;
     }
     await fs.writeJson(pathToConfigDomain(this.configDomain), data, {

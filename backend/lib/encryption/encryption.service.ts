@@ -1,11 +1,18 @@
 import { Crypter, DecryptionError, EncryptionError } from "async-crypter";
+import {
+  ConfigKeys,
+  configService,
+  ConfigService,
+} from "../config/config.service";
 import { BadRequestError } from "../errors";
 
 export class EncryptionService {
   private encyptionInstance: Crypter;
 
-  constructor() {
-    this.encyptionInstance = new Crypter(process.env.ENCRYPTION_KEY);
+  constructor(private readonly _configService: ConfigService) {
+    this.encyptionInstance = new Crypter(
+      this._configService.getConfigValue(ConfigKeys.ENCRYPTION_KEY)
+    );
   }
 
   async encrypt(text: string): Promise<string> {
@@ -25,4 +32,4 @@ export class EncryptionService {
   }
 }
 
-export const encryptionService = new EncryptionService();
+export const encryptionService = new EncryptionService(configService);

@@ -1,5 +1,7 @@
-import { createConfigDomainPersistenceService } from "backend/lib/config-data";
-import { AbstractConfigDataPersistenceService } from "backend/lib/config-data/AbstractConfigDataPersistenceService";
+import {
+  createConfigDomainPersistenceService,
+  AbstractConfigDataPersistenceService,
+} from "backend/lib/config-persistence";
 import {
   EncryptionService,
   encryptionService,

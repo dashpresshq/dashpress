@@ -7,9 +7,11 @@ import {
   CREDENTIALS_DOMAINS,
   IDBCrendentials,
 } from "backend/credentials/crendential.types";
-import { AbstractConfigDataPersistenceService } from "backend/lib/config-data/AbstractConfigDataPersistenceService";
 import { IDBSchema, IEntityField } from "shared/types";
-import { createConfigDomainPersistenceService } from "../lib/config-data";
+import {
+  createConfigDomainPersistenceService,
+  AbstractConfigDataPersistenceService,
+} from "../lib/config-persistence";
 
 export class SchemasService {
   private dbSchema: IDBSchema[];

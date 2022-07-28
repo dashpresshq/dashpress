@@ -1,5 +1,11 @@
-import { createConfigDomainPersistenceService } from "backend/lib/config-data";
-import { AbstractConfigDataPersistenceService } from "backend/lib/config-data/AbstractConfigDataPersistenceService";
+import {
+  AuthTokenService,
+  authTokenService,
+} from "backend/lib/auth-token/auth-token.service";
+import {
+  createConfigDomainPersistenceService,
+  AbstractConfigDataPersistenceService,
+} from "backend/lib/config-persistence";
 import { BadRequestError, ForbiddenError } from "backend/lib/errors";
 import { HashService } from "backend/lib/hash/hash.service";
 import { IUser } from "./users.types";
@@ -8,13 +14,12 @@ import { IUser } from "./users.types";
 // name, password
 // admins can update all those expect username
 
-// TODO setup a random JWT_SERVICE_TOKEN on setup in the credentials
-
 const INVALID_LOGIN_MESSAGE = "Invalid Login";
 
 export class UsersService {
   constructor(
-    private _usersPersistenceService: AbstractConfigDataPersistenceService<IUser>
+    private readonly _usersPersistenceService: AbstractConfigDataPersistenceService<IUser>,
+    private readonly _authTokenService: AuthTokenService
   ) {}
 
   async tryAuthenticate(authCrendetials: {
@@ -32,7 +37,7 @@ export class UsersService {
       throw new ForbiddenError(INVALID_LOGIN_MESSAGE);
     }
     delete user.password; // :eyes
-    // return JWTService.foo(user); TODO
+    return { token: this._authTokenService.sign(user) };
   }
 
   async registerUser(user: IUser) {
@@ -85,4 +90,7 @@ export class UsersService {
 const usersPersistenceService =
   createConfigDomainPersistenceService<IUser>("users");
 
-export const usersService = new UsersService(usersPersistenceService);
+export const usersService = new UsersService(
+  usersPersistenceService,
+  authTokenService
+);

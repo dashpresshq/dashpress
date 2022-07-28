@@ -4,7 +4,7 @@ export type ValidationKeys = {
   _type:
     | "isAuthenticated"
     | "guest"
-    | "isDeveloper"
+    | "isCreator"
     | "entity"
     | "configKey"
     | "paginationFilter"

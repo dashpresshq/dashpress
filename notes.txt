@@ -2,8 +2,11 @@ https://activeadmin.info/
 
 OPEN SOURCE
 Relation ship list => settings
-users & auth
+
+users management
+auth
 add schema view
+setup
 
 settings go back
 delete and edit button on the details page
@@ -41,7 +44,6 @@ Custom Table view render
 Email Support
 10 seats + $10 per extra 
 black / white
-Multiple connections in the same app
 
 // 1250 per month
 Pro Pro

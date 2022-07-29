@@ -10,10 +10,6 @@ import { BadRequestError, ForbiddenError } from "backend/lib/errors";
 import { HashService } from "backend/lib/hash/hash.service";
 import { IUser } from "./users.types";
 
-// users and update only
-// name, password
-// admins can update all those expect username
-
 const INVALID_LOGIN_MESSAGE = "Invalid Login";
 
 export class UsersService {
@@ -61,17 +57,23 @@ export class UsersService {
     await this._usersPersistenceService.removeItem(username);
   }
 
-  async changePassword(input: {
-    username: string;
-    oldPassword: string;
-    newPassword: string;
-  }) {
-    const user = await this._usersPersistenceService.getItem(input.username);
+  async getUser(username: string) {
+    return await this._usersPersistenceService.getItem(username);
+  }
+
+  async changePassword(
+    username: string,
+    input: {
+      oldPassword: string;
+      newPassword: string;
+    }
+  ) {
+    const user = await this._usersPersistenceService.getItem(username);
 
     if (!(await HashService.compare(input.oldPassword, user.password))) {
       throw new BadRequestError("Incorrect password");
     }
-    await this.updateUser(input.username, {
+    await this.updateUser(username, {
       password: await HashService.make(input.newPassword),
     });
   }

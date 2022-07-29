@@ -1,4 +1,7 @@
-export type UserRole = "creator" | "viewer";
+export enum UserRole {
+  Creator = "creator",
+  viewer = "viewer",
+}
 
 export interface IUser {
   name: string;

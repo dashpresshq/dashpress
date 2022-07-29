@@ -6,6 +6,7 @@ export type ValidationKeys = {
     | "guest"
     | "isCreator"
     | "entity"
+    | "authenticatedUser"
     | "configKey"
     | "paginationFilter"
     | "canCrud"

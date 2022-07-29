@@ -15,6 +15,7 @@ export type SelectableAbleValidations =
   | "max"
   | "maxLength"
   | "minLength"
+  | "isIn"
   | "regex"
   | "alphanumeric"
   | "matchOtherField"
@@ -29,5 +30,5 @@ export interface IFieldValidationItem {
   errorMessage: string;
   fromSchema?: true;
   fromType?: true;
-  constraint?: Record<string, string | number>;
+  constraint?: Record<string, string | number | string[]>;
 }

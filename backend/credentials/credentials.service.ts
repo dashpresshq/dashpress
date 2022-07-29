@@ -6,6 +6,7 @@ import {
   EncryptionService,
   encryptionService,
 } from "backend/lib/encryption/encryption.service";
+import { ForbiddenError } from "backend/lib/errors";
 
 export class CredentialsService {
   constructor(
@@ -14,6 +15,15 @@ export class CredentialsService {
     >,
     private _encryptionService: EncryptionService
   ) {}
+
+  async hasDomainCredentials(domain: string): Promise<boolean> {
+    try {
+      await this.getDomainCredentials(domain);
+      return true;
+    } catch {
+      return false;
+    }
+  }
 
   async upsertDomainCredentials(
     domain: string,
@@ -44,7 +54,7 @@ export class CredentialsService {
       domain
     );
     if (!credentials) {
-      return {} as T;
+      throw new ForbiddenError(`No credentials available for ${domain}`);
     }
 
     const decryptedCredentials: [string, unknown][] = await Promise.all(

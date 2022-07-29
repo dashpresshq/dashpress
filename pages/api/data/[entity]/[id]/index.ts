@@ -18,12 +18,12 @@ export default requestHandler(
       const validatedRequest = await getValidatedRequest([
         "entity",
         "entityId",
-        "requestBody",
+        "entityRequestBody",
       ]);
       return await dataController.updateData(
         validatedRequest.entity,
         validatedRequest.entityId,
-        validatedRequest.requestBody
+        validatedRequest.entityRequestBody
       );
     },
     DELETE: async (getValidatedRequest) => {

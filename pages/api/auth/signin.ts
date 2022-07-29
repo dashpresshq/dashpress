@@ -1,8 +1,11 @@
 import { IRequestValidation } from "shared/validations/makeRequestValidationRunnable";
-import { usersController } from "../../../backend/users/users.controller";
+import {
+  IAuthCredentials,
+  usersController,
+} from "../../../backend/users/users.controller";
 import { requestHandler } from "../../../backend/lib/request";
 
-const signinRequestSchema: IRequestValidation = {
+const signinRequestSchema: IRequestValidation<IAuthCredentials> = {
   username: {
     validations: [
       {

@@ -1,20 +1,20 @@
 import { StringUtils } from "@gothicgeeks/shared";
 import { runValidationError } from "./run";
-import { ValidationTypes } from "./types";
+import { IFieldValidationItem, ValidationTypes } from "./types";
 import { ENTITY_VALIDATION_CONFIG } from "./validations-map";
 
 interface IRequestValidationSchema {
   label?: string;
   validations: {
     validationType: ValidationTypes;
-    constraint?: Record<string, string | number>;
+    constraint?: IFieldValidationItem["constraint"];
   }[];
 }
 
-export type IRequestValidation = Record<string, IRequestValidationSchema>;
+export type IRequestValidation<T> = Record<keyof T, IRequestValidationSchema>;
 
 export const makeRequestValidationRunnable = (
-  requestValidation: IRequestValidation
+  requestValidation: IRequestValidation<any>
 ) =>
   runValidationError(
     Object.keys(requestValidation),

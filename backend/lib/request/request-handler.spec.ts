@@ -48,7 +48,8 @@ describe("/api/requestHandler", () => {
     await requestHandler({
       POST: async (getValidatedRequest) => {
         return {
-          foo: (await getValidatedRequest(["requestBody"])).requestBody,
+          foo: (await getValidatedRequest(["entityRequestBody"]))
+            .entityRequestBody,
         };
       },
     })(req, res);

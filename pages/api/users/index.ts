@@ -7,3 +7,5 @@
 // update profile
 
 // update password
+
+export const foo = {};

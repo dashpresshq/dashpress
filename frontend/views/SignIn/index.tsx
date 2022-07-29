@@ -171,3 +171,5 @@
 // }
 
 // export default SignIn;
+
+export const Foo = {};

@@ -47,7 +47,14 @@ export class UsersService {
     if (userExists) {
       throw new BadRequestError("Username already exists");
     }
-    await this._usersPersistenceService.upsertItem(user.username, user);
+    await this._usersPersistenceService.upsertItem(user.username, {
+      ...user,
+      password: await HashService.make(user.password),
+    });
+  }
+
+  async hasUsers() {
+    return (await this._usersPersistenceService.getAllItems()).length > 0;
   }
 
   async removeUser(username: string) {

@@ -1,7 +1,6 @@
 https://activeadmin.info/
 
 OPEN SOURCE
-Custom actions
 Relation ship list => settings
 users & auth
 add schema view
@@ -25,9 +24,14 @@ Dahsboard list
 Community support
 
 // Pro version 250 dollars per month
+More Data integations, Airtable, Google sheets, Firebase, MongoDB
 Hosted Deployment // secure way to get the credentials
 Action integrations
 Current User
+Custom actions
+Multiple connections
+Multiple Relation
+async Validations
 Charts
 Custom domain
 Summary views
@@ -35,7 +39,7 @@ Custom Dashboard
 Selected theme
 Custom Table view render
 Email Support
-20 seats + 10 per extra 
+10 seats + $10 per extra 
 black / white
 Multiple connections in the same app
 
@@ -51,7 +55,7 @@ Pro Pro
   SSO
   Priority Support
   2FA
-  100 seats + 10 per seat
+  25 seats + $10 per seat
 
 // Needs finesse
 Validations

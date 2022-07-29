@@ -1,4 +1,9 @@
-export type SupportedDatabaseTypes = "postgres" | "mysql" | "mssql" | "sqlite";
+export enum SupportedDatabaseTypes {
+  Postgres = "postgres",
+  MySql = "mysql",
+  MsSql = "mssql",
+  Sqlite = "sqlite",
+}
 
 export type IDBCrendentials = {
   databaseType: SupportedDatabaseTypes;

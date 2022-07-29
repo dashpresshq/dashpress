@@ -1,10 +1,15 @@
 import { UsersService, usersService } from "./users.service";
 import { IUser } from "./users.types";
 
+export interface IAuthCredentials {
+  username: string;
+  password: string;
+}
+
 export class UsersController {
   constructor(private _usersService: UsersService) {}
 
-  async login(authCrendetials: { username: string; password: string }) {
+  async login(authCrendetials: IAuthCredentials) {
     return await this._usersService.tryAuthenticate(authCrendetials);
   }
 

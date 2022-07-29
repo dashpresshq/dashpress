@@ -4,6 +4,6 @@ export interface IUser {
   name: string;
   username: string;
   password: string;
-  systemId: string;
+  systemId?: string;
   role: UserRole;
 }

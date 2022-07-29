@@ -15,7 +15,7 @@ import {
 } from "frontend/hooks/entity/entity.store";
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
 import Link from "next/link";
-import { FIELD_TYPES_CONFIG_MAP } from "shared/validations.constants";
+import { FIELD_TYPES_CONFIG_MAP } from "shared/validations";
 import { StringUtils } from "@gothicgeeks/shared";
 import { ITableColumn } from "@gothicgeeks/design-system";
 import { useMemo } from "react";

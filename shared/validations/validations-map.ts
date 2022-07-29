@@ -14,6 +14,7 @@ import {
   isRgbColor,
   min,
   max,
+  isIn,
 } from "class-validator";
 import { FIELD_TYPES_CONFIG_MAP } from "./field-types-config";
 import { handleValidation } from "./handle-validation";
@@ -109,6 +110,13 @@ export const ENTITY_VALIDATION_CONFIG: Record<
     },
     message: "{{ name }} should be greater than {{ length }} characters",
     implementation: handleValidation(minLength, "length"),
+  },
+  isIn: {
+    input: {
+      options: [],
+    },
+    message: "{{ name }} is invalid. Allowed values are {{ options }}",
+    implementation: handleValidation(isIn, "options"),
   },
 
   // Needs some work

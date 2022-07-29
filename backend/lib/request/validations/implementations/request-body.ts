@@ -1,10 +1,16 @@
 import { BadRequestError } from "backend/lib/errors";
-import { makeRequestValidationRunnable } from "shared/validations/makeRequestValidationRunnable";
-import { ValidationImplType, IRequestValidation } from "./types";
+import {
+  IRequestValidation,
+  makeRequestValidationRunnable,
+} from "shared/validations/makeRequestValidationRunnable";
+import { ValidationImplType } from "./types";
 
 export const requestBodyValidationImpl: ValidationImplType<
   Record<string, unknown>
-> = async (req, requestValidation: IRequestValidation) => {
+> = async (req, requestValidation: IRequestValidation<any>) => {
+  if (!requestValidation) {
+    throw new Error("Please provide the request validation");
+  }
   const reqBodyData = req.body;
 
   const validationsError =

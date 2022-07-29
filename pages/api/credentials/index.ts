@@ -7,3 +7,5 @@
 // list keys
 
 // isDeveloper
+
+export const foo = {};

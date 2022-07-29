@@ -10,11 +10,11 @@ export default requestHandler(
     POST: async (getValidatedRequest) => {
       const validatedRequest = await getValidatedRequest([
         "entity",
-        "requestBody",
+        "entityRequestBody",
       ]);
       return await dataController.createData(
         validatedRequest.entity,
-        validatedRequest.requestBody
+        validatedRequest.entityRequestBody
       );
     },
     PATCH: async () => {

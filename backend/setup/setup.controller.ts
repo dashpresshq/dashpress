@@ -5,7 +5,7 @@ import {
 import { CREDENTIALS_DOMAINS } from "backend/credentials/crendential.types";
 import { BadRequestError } from "backend/lib/errors";
 import { usersService, UsersService } from "backend/users/users.service";
-import { IUser } from "backend/users/users.types";
+import { IUser, UserRole } from "backend/users/users.types";
 
 interface ISetupCheck {
   hasDbCredentials: boolean;
@@ -41,7 +41,7 @@ export class SetupController {
 
     await this._usersService.registerUser({
       ...user,
-      role: "creator",
+      role: UserRole.Creator,
     });
 
     return await this._usersService.tryAuthenticate(user);

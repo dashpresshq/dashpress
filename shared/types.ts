@@ -23,3 +23,7 @@ export interface IDBSchema {
   uniqueFields: string[][];
   relations: IEntityRelation[];
 }
+
+export interface ISuccessfullAuthenticationResponse {
+  token: string;
+}

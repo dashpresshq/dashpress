@@ -20,8 +20,9 @@ CSV, JSON, XML
 Clone item
 Reorder menu for table
 Hide from dashboard
-
+Current User
 Dahsboard list
+black / white
 
 // Free version = 1 user
 Community support
@@ -30,25 +31,25 @@ Community support
 More Data integations, Airtable, Google sheets, Firebase, MongoDB
 Hosted Deployment // secure way to get the credentials
 Action integrations
-Current User
 Custom actions
 Multiple connections
 Multiple Relation
 async Validations
 Charts
-Custom domain
+
 Summary views
 Custom Dashboard
 Selected theme
 Custom Table view render
 Email Support
 10 seats + $10 per extra 
-black / white
+selection of colors
 
 // 1250 per month
 Pro Pro
   Environments
   Versions
+  Custom domain
   Permissions
   Branding
   Specific Color Theme
@@ -76,3 +77,6 @@ introspect
 // });
 
 https://docs.jetadmin.io/
+
+
+250 * 1

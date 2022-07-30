@@ -7,7 +7,6 @@ import {
   required,
   VALIDATION_LENGTH,
 } from "@gothicgeeks/shared";
-
 import { IFormProps } from "../../../../lib/form/types";
 
 interface IDictionSettings {

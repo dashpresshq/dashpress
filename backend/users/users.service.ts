@@ -8,6 +8,7 @@ import {
 } from "backend/lib/config-persistence";
 import { BadRequestError, ForbiddenError } from "backend/lib/errors";
 import { HashService } from "backend/lib/hash/hash.service";
+import { ISuccessfullAuthenticationResponse } from "shared/types";
 import { IUser } from "./users.types";
 
 const INVALID_LOGIN_MESSAGE = "Invalid Login";
@@ -21,7 +22,7 @@ export class UsersService {
   async tryAuthenticate(authCrendetials: {
     username: string;
     password: string;
-  }) {
+  }): Promise<ISuccessfullAuthenticationResponse> {
     const user = await this._usersPersistenceService.getItem(
       authCrendetials.username
     );

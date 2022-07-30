@@ -1,3 +1,3 @@
-export default function AuthPage() {
-  return <p>TODO</p>;
-}
+import { SignIn } from "../../frontend/views/SignIn";
+
+export default SignIn;

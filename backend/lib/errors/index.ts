@@ -4,14 +4,22 @@ import { NextApiRequest, NextApiResponse } from "next";
 export class CustomError extends Error {
   code: number;
 
+  errorCode?: string;
+
   validations?: Record<string, unknown> = {};
 
   name: string;
 
-  constructor(code: number, name: string, message = "An Error Occurred") {
+  constructor(
+    code: number,
+    name: string,
+    message = "An Error Occurred",
+    errorCode: string = undefined
+  ) {
     super(message);
     this.code = code;
     this.name = name;
+    this.errorCode = errorCode;
   }
 }
 
@@ -22,8 +30,8 @@ export class NotFoundError extends CustomError {
 }
 
 export class ForbiddenError extends CustomError {
-  constructor(message = "Access to resource is denied") {
-    super(401, "ForbiddenError", message);
+  constructor(message = "Access to resource is denied", errorCode = "") {
+    super(401, "ForbiddenError", message, errorCode);
   }
 }
 
@@ -53,6 +61,7 @@ export const handleResponseError = (
       message: error.message,
       statusCode: error.code,
       name: error.name,
+      errorCode: error.errorCode,
       validations: error?.validations,
       ...baseErrorOptions,
     });

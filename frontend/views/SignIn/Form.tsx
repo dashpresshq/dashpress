@@ -18,12 +18,7 @@ export function SignInForm({ onSubmit }: IFormProps<ISignInForm>) {
     <Form
       onSubmit={onSubmit}
       render={({ handleSubmit, submitting, pristine }) => (
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            handleSubmit(e);
-          }}
-        >
+        <form onSubmit={handleSubmit}>
           <Field name="username" validate={required} validateFields={[]}>
             {({ input, meta }) => (
               <FormInput

@@ -3,10 +3,11 @@ https://activeadmin.info/
 OPEN SOURCE
 Relation ship list => settings
 
-users management
 auth
 add schema view
 setup
+
+users management
 
 settings go back
 delete and edit button on the details page

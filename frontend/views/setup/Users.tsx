@@ -30,7 +30,7 @@ function useSignInMutation() {
   );
 }
 
-export function SignIn() {
+export function UserSetup() {
   const signInMutation = useSignInMutation();
   // setup check here
   return (

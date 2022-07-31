@@ -1,5 +1,5 @@
+import { IDBCrendentials } from "shared/types";
 import { credentialsService, CredentialsService } from "./credentials.service";
-import { IDBCrendentials } from "./crendential.types";
 
 export class CredentialController {
   constructor(private _credentialsService: CredentialsService) {}

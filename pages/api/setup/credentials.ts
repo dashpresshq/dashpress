@@ -1,8 +1,5 @@
-import {
-  IDBCrendentials,
-  SupportedDatabaseTypes,
-} from "backend/credentials/crendential.types";
 import { setupController } from "backend/setup/setup.controller";
+import { SupportedDatabaseTypes, IDBCrendentials } from "shared/types";
 import { IRequestValidation } from "shared/validations/makeRequestValidationRunnable";
 import { requestHandler } from "../../../backend/lib/request";
 

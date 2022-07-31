@@ -10,6 +10,8 @@ import { AuthLayout } from "frontend/_layouts/guest";
 import { ISuccessfullAuthenticationResponse } from "shared/types";
 import { useRouter } from "next/router";
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
+import { useSetupCheck } from "frontend/hooks/setup/setup.store";
+import { ComponentIsLoading } from "@gothicgeeks/design-system";
 import { SignInForm, ISignInForm } from "./Form";
 
 function useSignInMutation() {
@@ -32,7 +34,13 @@ function useSignInMutation() {
 
 export function SignIn() {
   const signInMutation = useSignInMutation();
-  // setup check here
+
+  const isChecking = useSetupCheck();
+
+  if (isChecking) {
+    return <ComponentIsLoading />;
+  }
+
   return (
     <AuthLayout
       title="Sign In Into Your Account"

@@ -3,11 +3,8 @@ import { IColumnFilterBag } from "@gothicgeeks/design-system/dist/components/Tab
 import knex, { Knex } from "knex";
 import get from "lodash/get";
 import { credentialsService } from "backend/credentials/credentials.service";
-import {
-  CREDENTIALS_DOMAINS,
-  IDBCrendentials,
-  SupportedDatabaseTypes,
-} from "backend/credentials/crendential.types";
+import { CREDENTIALS_DOMAINS } from "backend/credentials/crendential.types";
+import { IDBCrendentials, SupportedDatabaseTypes } from "shared/types";
 import { IPaginationFilters } from "./types";
 
 export type QueryFilter = { id: string; value: IColumnFilterBag<unknown> };

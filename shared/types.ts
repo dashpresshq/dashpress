@@ -27,3 +27,26 @@ export interface IDBSchema {
 export interface ISuccessfullAuthenticationResponse {
   token: string;
 }
+
+export interface ISetupCheck {
+  hasDbCredentials: boolean;
+  hasUsers: boolean;
+}
+
+export enum SupportedDatabaseTypes {
+  Postgres = "postgres",
+  MySql = "mysql",
+  MsSql = "mssql",
+  Sqlite = "sqlite",
+}
+
+export type IDBCrendentials = {
+  databaseType: SupportedDatabaseTypes;
+  host: string;
+  user: string;
+  password: string;
+  schemaNames: string[];
+  database: string;
+  port: number;
+  ssl: boolean;
+};

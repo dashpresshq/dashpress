@@ -13,6 +13,11 @@ const queryObjectToQueryString = (
 
 export const NAVIGATION_LINKS = {
   DASHBOARD: "/admin",
+  SIGN: "/auth",
+  SETUP: {
+    USER: "/setup/user",
+    CREDENTIALS: "/setup/credentials",
+  },
   SETTINGS: {
     DEFAULT: "/admin/settings",
     ENTITIES: "/admin/settings/entities",

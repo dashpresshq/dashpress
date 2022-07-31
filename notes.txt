@@ -81,3 +81,5 @@ https://docs.jetadmin.io/
 
 
 250 * 1
+
+// Notes have a script to check that BE is not importing from FE and otherwise

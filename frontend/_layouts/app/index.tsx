@@ -1,5 +1,6 @@
 import {
   Breadcrumbs,
+  ComponentIsLoading,
   DropDownMenu,
   DynamicLayout,
   Spacer,
@@ -7,9 +8,11 @@ import {
   Text,
 } from "@gothicgeeks/design-system";
 import { IValueLabel } from "@gothicgeeks/design-system/dist/types";
-import React, { ReactNode } from "react";
+import React, { ReactNode, useEffect, useState } from "react";
 import { Icon, Settings, Home, Table, BarChart } from "react-feather";
 import Head from "next/head";
+import { AuthService } from "@gothicgeeks/shared";
+import { useRouter } from "next/router";
 import { useEntitiesMenuItems } from "../../hooks/entity/entity.store";
 import { useSiteConfig } from "../../hooks/app/site.config";
 import { NAVIGATION_LINKS } from "../../lib/routing/links";
@@ -25,6 +28,24 @@ interface IProps {
   }[];
 }
 
+const useUserAuthCheck = () => {
+  const [isChecking, setIsChecking] = useState(true);
+  const router = useRouter();
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      if (!AuthService.isAuthenticated()) {
+        router.replace(NAVIGATION_LINKS.SIGN);
+        return;
+      }
+      // TODO isCreator check
+      setIsChecking(false);
+    }
+  }, [typeof window]);
+
+  return isChecking;
+};
+
 export function AppLayout({
   children,
   breadcrumbs,
@@ -32,9 +53,8 @@ export function AppLayout({
   actionItems = [],
 }: IProps) {
   const entitiesMenuItems = useEntitiesMenuItems();
-
   const siteConfig = useSiteConfig();
-
+  const isChecking = useUserAuthCheck();
   const homedBreadcrumb = [{ label: "Home", value: "/" }, ...breadcrumbs];
 
   const title =
@@ -42,7 +62,9 @@ export function AppLayout({
       ? `${homedBreadcrumb[homedBreadcrumb.length - 2]?.label} - `
       : "") + (homedBreadcrumb[homedBreadcrumb.length - 1]?.label || "");
 
-  // const
+  if (isChecking) {
+    return <ComponentIsLoading />;
+  }
 
   return (
     <DynamicLayout

@@ -6,11 +6,7 @@ import { CREDENTIALS_DOMAINS } from "backend/credentials/crendential.types";
 import { BadRequestError } from "backend/lib/errors";
 import { usersService, UsersService } from "backend/users/users.service";
 import { IUser, UserRole } from "backend/users/users.types";
-
-interface ISetupCheck {
-  hasDbCredentials: boolean;
-  hasUsers: boolean;
-}
+import { ISetupCheck } from "shared/types";
 
 export type IUserSetupFields = Pick<IUser, "name" | "username" | "password">;
 

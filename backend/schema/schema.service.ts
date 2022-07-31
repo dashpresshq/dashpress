@@ -3,11 +3,8 @@ import {
   CredentialsService,
   credentialsService,
 } from "backend/credentials/credentials.service";
-import {
-  CREDENTIALS_DOMAINS,
-  IDBCrendentials,
-} from "backend/credentials/crendential.types";
-import { IDBSchema, IEntityField } from "shared/types";
+import { CREDENTIALS_DOMAINS } from "backend/credentials/crendential.types";
+import { IDBCrendentials, IDBSchema, IEntityField } from "shared/types";
 import {
   createConfigDomainPersistenceService,
   AbstractConfigDataPersistenceService,

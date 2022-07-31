@@ -1,29 +1,36 @@
-import {
-  FormCheckBox,
-  FormInput,
-  FormButton,
-} from "@gothicgeeks/design-system";
+import { FormInput, FormButton } from "@gothicgeeks/design-system";
 import { Form, Field } from "react-final-form";
-import { required } from "@gothicgeeks/shared";
+import { alphaNumeric, composeValidators, required } from "@gothicgeeks/shared";
 import { IFormProps } from "frontend/lib/form/types";
 
-export interface ISignInForm {
+export interface IUserSetupForm {
+  name: string;
   username: string;
   password: string;
-  rememberMe: boolean;
 }
 
-export function SignInForm({ onSubmit }: IFormProps<ISignInForm>) {
+export function UserSetupForm({ onSubmit }: IFormProps<IUserSetupForm>) {
   return (
     <Form
       onSubmit={onSubmit}
       render={({ handleSubmit, submitting, pristine }) => (
         <form onSubmit={handleSubmit}>
-          <Field name="username" validate={required} validateFields={[]}>
+          <Field
+            name="username"
+            validate={composeValidators(required, alphaNumeric)}
+            validateFields={[]}
+          >
             {({ input, meta }) => (
               <FormInput label="Username" meta={meta} input={input} />
             )}
           </Field>
+
+          <Field name="name" validate={required} validateFields={[]}>
+            {({ input, meta }) => (
+              <FormInput label="Name" meta={meta} input={input} />
+            )}
+          </Field>
+
           <Field name="password" validate={required} validateFields={[]}>
             {({ input, meta }) => (
               <FormInput
@@ -35,13 +42,8 @@ export function SignInForm({ onSubmit }: IFormProps<ISignInForm>) {
             )}
           </Field>
 
-          <Field name="rememberMe" validateFields={[]} type="checkbox">
-            {({ input, meta }) => (
-              <FormCheckBox label="Remember Me" meta={meta} input={input} />
-            )}
-          </Field>
           <FormButton
-            text="Sign In"
+            text="Create First User"
             isMakingRequest={submitting}
             disabled={pristine}
             block

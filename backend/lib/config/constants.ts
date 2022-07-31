@@ -14,14 +14,14 @@ const tokenValidations = (value: string, label: string) => {
       `${label} needs to be more than ${TOKEN_LENGTH} characters`
     );
   }
+  // TODO
   // if (
   //   !/^(?=.*[a-z])(?=.*[A-Z])(?=.*d)(?=.*[@$!%*?&])[A-Za-zd@$!%*?&]{64,}$/.test(
   //     value
   //   )
   // ) {
-  //   throw new Error(
-  //     `${label} must contain uppercase letters, lowercase letters, numbers and symbols`
-  //   );
+  //   const errorText = `${label} must contain uppercase letters, lowercase letters, numbers, special characters and be more than 64 characters`;
+  //   throw new Error(errorText);
   // }
 };
 
@@ -48,7 +48,7 @@ export const ConfigBag: Record<ConfigKeys, IConfigBag> = {
   },
   ENCRYPTION_KEY: {
     defaultValue: () => {
-      return StringUtils.generateRandomString(128);
+      return StringUtils.generateRandomGibberish(128);
     },
     validate: (value) => {
       tokenValidations(value, "Encryption Key");
@@ -66,7 +66,7 @@ export const ConfigBag: Record<ConfigKeys, IConfigBag> = {
   },
   AUTH_TOKEN_KEY: {
     defaultValue: () => {
-      return StringUtils.generateRandomString(128);
+      return StringUtils.generateRandomGibberish(128);
     },
     validate: (value) => {
       tokenValidations(value, "Auth token Key");

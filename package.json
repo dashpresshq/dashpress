@@ -15,14 +15,15 @@
     "verify": "npm run typecheck && npm run lint && npm run test"
   },
   "dependencies": {
-    "@gothicgeeks/design-system": "git+ssh://git@github.com:thrownullexception/design-system.git#2bb7ae5c1a73a51e9931f1c1f0c682dba040ff1d",
+    "@gothicgeeks/design-system": "git+ssh://git@github.com:thrownullexception/design-system.git#3b13c70c023ded9e8005c4aca2c836a332fe5b23",
     "@gothicgeeks/introspect": "git+ssh://git@github.com:thrownullexception/introspect.git#99a7337c3d115f52a1051eaad971a1f7e2e7084c",
-    "@gothicgeeks/shared": "git+ssh://git@github.com:thrownullexception/shared.git#fb1671aa6740b5e8fb15aec025ace6e4385faa86",
+    "@gothicgeeks/shared": "git+ssh://git@github.com:thrownullexception/shared.git#776aa90ad3e9b41e205df4a53aa92f2dfe10d4c2",
     "@types/cryptr": "^4.0.1",
     "@types/jsonwebtoken": "^8.5.8",
     "bcrypt": "^5.0.1",
     "change-case": "^4.1.2",
     "class-validator": "^0.13.2",
+    "crypto-random-string": "^5.0.0",
     "cryptr": "^6.0.3",
     "final-form-arrays": "^3.0.2",
     "fs-extra": "^10.1.0",

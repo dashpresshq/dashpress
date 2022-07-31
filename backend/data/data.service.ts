@@ -1,23 +1,14 @@
 import { FilterOperators } from "@gothicgeeks/design-system"; // Move this somewhere else
 import { IColumnFilterBag } from "@gothicgeeks/design-system/dist/components/Table/filters/types";
-import knex, { Knex } from "knex";
+import { Knex } from "knex";
 import get from "lodash/get";
 import { credentialsService } from "backend/credentials/credentials.service";
+import { getKnexConnection } from "backend/lib/connection/db";
 import { CREDENTIALS_DOMAINS } from "backend/credentials/crendential.types";
-import { IDBCrendentials, SupportedDatabaseTypes } from "shared/types";
+import { IDBCrendentials } from "shared/types";
 import { IPaginationFilters } from "./types";
 
 export type QueryFilter = { id: string; value: IColumnFilterBag<unknown> };
-
-const SupportedDatabaseTypeToKnexClientMap: Record<
-  SupportedDatabaseTypes,
-  string
-> = {
-  mssql: "tedious",
-  postgres: "pg",
-  mysql: "mysql2",
-  sqlite: "better-sqlite3",
-};
 
 export class DataService {
   static _dbInstance: Knex | null = null;
@@ -32,17 +23,8 @@ export class DataService {
         CREDENTIALS_DOMAINS.database
       );
 
-    this._dbInstance = knex({
-      client: SupportedDatabaseTypeToKnexClientMap[dbCredentials.databaseType],
-      connection: {
-        database: dbCredentials.database,
-        user: dbCredentials.user,
-        password: dbCredentials.password,
-        host: dbCredentials.host,
-        port: dbCredentials.port,
-        ssl: dbCredentials.ssl,
-      },
-    });
+    this._dbInstance = await getKnexConnection(dbCredentials);
+
     return this._dbInstance;
   }
 

@@ -1,3 +1,5 @@
+import fs from "fs-extra";
+import path from "path";
 import { ConfigBag } from "./constants";
 import { ConfigKeys, NodeEnvironments } from "./types";
 
@@ -42,10 +44,18 @@ Object.entries(ConfigBag).forEach(([key, configBag]) => {
 });
 
 if (newEnvEntries.length > 0) {
+  const envContent: string[] = [
+    "# AUTOMATICALLY GENERATED ENV CONFIG FOR DEVELOPMENT STARTS HERE",
+  ];
   newEnvEntries.forEach((envEntry) => {
     process.env[envEntry.key] = envEntry.value;
+    envContent.push(`${envEntry.key}=${envEntry.value}`);
   });
-  // TODO save this to the env local file
+  envContent.push("# GENERATED ENV ENDS HERE");
+  fs.appendFile(
+    path.resolve(process.cwd(), ".env.local"),
+    envContent.join("\n")
+  );
 }
 
 Object.entries(ConfigBag).forEach(([key, configBag]) => {
@@ -54,7 +64,5 @@ Object.entries(ConfigBag).forEach(([key, configBag]) => {
 });
 
 export const configService = new ConfigService();
-
-configService.getConfigValue(ConfigKeys.AUTH_TOKEN_KEY);
 
 // TODO send a request to boostsrap the application

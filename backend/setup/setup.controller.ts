@@ -3,10 +3,11 @@ import {
   CredentialsService,
 } from "backend/credentials/credentials.service";
 import { CREDENTIALS_DOMAINS } from "backend/credentials/crendential.types";
+import { getKnexConnection } from "backend/lib/connection/db";
 import { BadRequestError } from "backend/lib/errors";
 import { usersService, UsersService } from "backend/users/users.service";
 import { IUser, UserRole } from "backend/users/users.types";
-import { ISetupCheck } from "shared/types";
+import { IDBCrendentials, ISetupCheck } from "shared/types";
 
 export type IUserSetupFields = Pick<IUser, "name" | "username" | "password">;
 
@@ -43,7 +44,7 @@ export class SetupController {
     return await this._usersService.tryAuthenticate(user);
   }
 
-  async setUpDBCredentials(dbCrendetials: Record<string, unknown>) {
+  async setUpDBCredentials(dbCrendetials: IDBCrendentials) {
     if (
       await this._credentialsService.hasDomainCredentials(
         CREDENTIALS_DOMAINS.database
@@ -51,6 +52,14 @@ export class SetupController {
     ) {
       throw new BadRequestError(
         "Primary database credentials already configured"
+      );
+    }
+
+    try {
+      await getKnexConnection(dbCrendetials);
+    } catch (error: unknown) {
+      throw new BadRequestError(
+        `Couldn't not connect to database '${(error as Error).message}'`
       );
     }
 

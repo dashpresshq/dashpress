@@ -66,20 +66,6 @@ Validations
 Implement filters
 introspect
 
-// const schema = await introspect({
-//   databaseType: "postgres",
-//   host: "localhost",
-//   password: "password",
-//   schemaNames: ["public"],
-//   database: "kademiks",
-//   port: 5432,
-//   ssl: false,
-//   user: "postgres",
-// });
-
 https://docs.jetadmin.io/
-
-
-250 * 1
 
 // Notes have a script to check that BE is not importing from FE and otherwise

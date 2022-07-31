@@ -13,7 +13,7 @@ import { IDBCrendentials, SupportedDatabaseTypes } from "shared/types";
 const DEFAULT_DATABASE_TYPE_PORT: Record<SupportedDatabaseTypes, number> = {
   [SupportedDatabaseTypes.MySql]: 3306,
   [SupportedDatabaseTypes.Postgres]: 5432,
-  [SupportedDatabaseTypes.Sqlite]: 12,
+  [SupportedDatabaseTypes.Sqlite]: 0,
   [SupportedDatabaseTypes.MsSql]: 1433,
 };
 

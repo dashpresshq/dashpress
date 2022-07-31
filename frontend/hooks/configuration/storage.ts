@@ -1,7 +1,7 @@
 const PREFIX = "__cardinal_app_config__";
 
 export const ConfigrationStorage = {
-  getKey: (key: string, entity?: string) => `${PREFIX}${key}_${entity}`,
+  getKey: (key: string, entity = "") => `${PREFIX}${key}_${entity}`,
   set: (
     value: Record<string, unknown> | unknown[],
     key: string,

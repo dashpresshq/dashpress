@@ -18,26 +18,33 @@ import { ConfigrationStorage } from "../configuration/storage";
 
 const SETUP_URL = "/api/setup/check";
 
-export function useSetupCheck() {
+interface ISetupCheckConfig {
+  key: keyof ISetupCheck;
+  value: boolean;
+  url: string;
+}
+
+export function useSetupCheck(config: ISetupCheckConfig[]) {
   const router = useRouter();
   const { isLoading, data } = useApi<ISetupCheck>(SETUP_URL, {
     placeholderData: ConfigrationStorage.get(SETUP_URL),
     selector: (response) => {
       ConfigrationStorage.set(response, SETUP_URL);
-      return data;
+      return response;
     },
     errorMessage: dataNotFoundMessage("Setup Check"),
   });
-  if (!isLoading) {
-    if (!data.hasDbCredentials) {
-      router.replace(NAVIGATION_LINKS.SETUP.CREDENTIALS);
-    } else if (!data.hasUsers) {
-      router.replace(NAVIGATION_LINKS.SETUP.USER);
-    }
-    return true;
+  if (isLoading) {
+    return isLoading;
   }
 
-  return isLoading;
+  config.forEach((configItem) => {
+    if (data[configItem.key] === configItem.value) {
+      router.replace(configItem.url);
+    }
+  });
+
+  return false;
 }
 
 export function useSetupCredentialsMutation() {

@@ -51,6 +51,11 @@ export function CredentialsSetupForm({
               />
             )}
           </Field>
+          <Field name="user" validate={required} validateFields={[]}>
+            {({ input, meta }) => (
+              <FormInput label="User" meta={meta} input={input} />
+            )}
+          </Field>
           <Field name="password" validate={required} validateFields={[]}>
             {({ input, meta }) => (
               <FormInput
@@ -82,7 +87,7 @@ export function CredentialsSetupForm({
 
           <Field name="ssl" validateFields={[]} type="checkbox">
             {({ input, meta }) => (
-              <FormCheckBox label="SSL" meta={meta} input={input} />
+              <FormCheckBox label="Use SSL" meta={meta} input={input} />
             )}
           </Field>
 

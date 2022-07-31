@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   AuthService,
   makePostRequest,
@@ -32,12 +32,40 @@ function useSignInMutation() {
   );
 }
 
+const useGuestCheck = () => {
+  const [isChecking, setIsChecking] = useState(true);
+  const router = useRouter();
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      if (AuthService.isAuthenticated()) {
+        router.replace(NAVIGATION_LINKS.DASHBOARD);
+        return;
+      }
+      setIsChecking(false);
+    }
+  }, [typeof window]);
+
+  return isChecking;
+};
+
 export function SignIn() {
   const signInMutation = useSignInMutation();
+  const guestCheck = useGuestCheck();
+  const setupCheck = useSetupCheck([
+    {
+      key: "hasDbCredentials",
+      value: false,
+      url: NAVIGATION_LINKS.SETUP.CREDENTIALS,
+    },
+    {
+      key: "hasUsers",
+      value: false,
+      url: NAVIGATION_LINKS.SETUP.USER,
+    },
+  ]);
 
-  const isChecking = useSetupCheck();
-
-  if (isChecking) {
+  if (setupCheck || guestCheck) {
     return <ComponentIsLoading />;
   }
 

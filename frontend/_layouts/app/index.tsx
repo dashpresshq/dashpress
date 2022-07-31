@@ -35,7 +35,7 @@ const useUserAuthCheck = () => {
   useEffect(() => {
     if (typeof window !== "undefined") {
       if (!AuthService.isAuthenticated()) {
-        router.replace(NAVIGATION_LINKS.SIGN);
+        router.replace(NAVIGATION_LINKS.AUTH_SIGNIN);
         return;
       }
       // TODO isCreator check

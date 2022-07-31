@@ -32,9 +32,7 @@ export class CredentialsService {
     const encryptedCredentials: [string, unknown][] = await Promise.all(
       Object.entries(credentials).map(async ([key, value]) => [
         key,
-        typeof value === "string"
-          ? await this._encryptionService.encrypt(value)
-          : value,
+        await this._encryptionService.encrypt(JSON.stringify(value)),
       ])
     );
     await this._credentialsPersistenceService.upsertItem(
@@ -60,9 +58,7 @@ export class CredentialsService {
     const decryptedCredentials: [string, unknown][] = await Promise.all(
       Object.entries(credentials).map(async ([key, value]) => [
         key,
-        typeof value === "string"
-          ? await this._encryptionService.decrypt(value)
-          : value,
+        JSON.parse(await this._encryptionService.decrypt(value as string)),
       ])
     );
 

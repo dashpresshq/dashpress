@@ -5,12 +5,24 @@ import {
   useSetupUserMutation,
 } from "frontend/hooks/setup/setup.store";
 import { ComponentIsLoading } from "@gothicgeeks/design-system";
+import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
 import { UserSetupForm } from "./Form";
 
 export function UserSetup() {
   const setupUserMutation = useSetupUserMutation();
 
-  const isChecking = useSetupCheck();
+  const isChecking = useSetupCheck([
+    {
+      key: "hasDbCredentials",
+      value: false,
+      url: NAVIGATION_LINKS.SETUP.CREDENTIALS,
+    },
+    {
+      key: "hasUsers",
+      value: true,
+      url: NAVIGATION_LINKS.AUTH_SIGNIN,
+    },
+  ]);
 
   if (isChecking) {
     return <ComponentIsLoading />;

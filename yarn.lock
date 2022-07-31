@@ -716,6 +716,7 @@
     "@types/randomstring" "^1.1.8"
     "@types/react" "^18.0.11"
     "@types/uuid" "^8.3.4"
+    axios "^0.27.2"
     date-fns "^2.28.0"
     final-form "^4.20.7"
     immer "9.0.3"
@@ -1428,6 +1429,11 @@
   resolved "https://registry.yarnpkg.com/@types/cookie/-/cookie-0.4.1.tgz#bfd02c1f2224567676c1545199f87c3a861d878d"
   integrity sha512-XW/Aa8APYr6jSVVA1y/DEIZX0/GMKLEVekNG727R8cs56ahETkRAy/3DR7+fJyh7oUgGwNQaRfXCun0+KbWY7Q==
 
+"@types/cryptr@^4.0.1":
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/@types/cryptr/-/cryptr-4.0.1.tgz#d4128be91d1064a2678e695a318b217912881083"
+  integrity sha512-Nn8fvr+8XYWK5h422lj4xQACfOg6vdhKI+Rh9ERa5Mg0cZvPL9Vn3845vSY07dNZnEs5cqkSNVMdhmf70lAYkA==
+
 "@types/debug@^4.1.7":
   version "4.1.7"
   resolved "https://registry.yarnpkg.com/@types/debug/-/debug-4.1.7.tgz#7cc0ea761509124709b8b2d1090d8f6c17aadb82"
@@ -2092,11 +2098,6 @@ astral-regex@^2.0.0:
   resolved "https://registry.yarnpkg.com/astral-regex/-/astral-regex-2.0.0.tgz#483143c567aeed4785759c0865786dc77d7d2e31"
   integrity sha512-Z7tMw1ytTXt5jqMcOP+OQteU1VuNK9Y02uuJtKQ1Sv69jXQKKg5cibLwGJow8yzZP+eAc18EmLGPal0bp36rvQ==
 
-async-crypter@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/async-crypter/-/async-crypter-1.0.0.tgz#815f1b7f61294312bbad799a0c6f7f1947d9551e"
-  integrity sha512-pWhqG54P+MueE0ffmO0yak+Tn2AbJgYVeg6dB3y1bDtqn+tYGFsOD5XW3Exz240V5vibff3ZGkpnqNqORnxxIQ==
-
 asynckit@^0.4.0:
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/asynckit/-/asynckit-0.4.0.tgz#c79ed97f7f34cb8f2ba1bc9790bcc366474b4b79"
@@ -2121,6 +2122,14 @@ axe-core@^4.4.2:
   version "4.4.2"
   resolved "https://registry.yarnpkg.com/axe-core/-/axe-core-4.4.2.tgz#dcf7fb6dea866166c3eab33d68208afe4d5f670c"
   integrity sha512-LVAaGp/wkkgYJcjmHsoKx4juT1aQvJyPcW09MLCjVTh3V2cc6PnyempiLMNH5iMdfIX/zdbjUx2KDjMLCTdPeA==
+
+axios@^0.27.2:
+  version "0.27.2"
+  resolved "https://registry.yarnpkg.com/axios/-/axios-0.27.2.tgz#207658cc8621606e586c85db4b41a750e756d972"
+  integrity sha512-t+yRIyySRTp/wua5xEr+z1q60QmLq8ABsS5O9Me1AsE5dfKqgnCFzwiCZZ/cGNd1lq4/7akDWMxdhVlucjmnOQ==
+  dependencies:
+    follow-redirects "^1.14.9"
+    form-data "^4.0.0"
 
 axobject-query@^2.2.0:
   version "2.2.0"
@@ -2737,6 +2746,11 @@ cross-spawn@^7.0.2, cross-spawn@^7.0.3:
     path-key "^3.1.0"
     shebang-command "^2.0.0"
     which "^2.0.1"
+
+cryptr@^6.0.3:
+  version "6.0.3"
+  resolved "https://registry.yarnpkg.com/cryptr/-/cryptr-6.0.3.tgz#669364e7993a1cd19d77e32e90ffef38455ecd74"
+  integrity sha512-Nhaxn3CYl/OoWF3JSZlF8B6FQO600RRkU3g8213OGEIq4YvMlc3od8hL9chubhY1SmTq8ienvCRq1MSFjMTpOg==
 
 css-color-keywords@^1.0.0:
   version "1.0.0"

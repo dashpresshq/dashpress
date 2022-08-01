@@ -4,6 +4,8 @@ import {
   SectionRow,
   MenuSection,
 } from "@gothicgeeks/design-system";
+import { AuthService } from "@gothicgeeks/shared";
+import { useRouter } from "next/router";
 import { ReactNode } from "react";
 import { NAVIGATION_LINKS } from "../../lib/routing/links";
 import { AppLayout } from "../../_layouts/app";
@@ -14,6 +16,7 @@ interface IProps {
 }
 
 export function BaseAccountLayout({ children, menuItem }: IProps) {
+  const router = useRouter();
   return (
     <AppLayout
       titleNeedsContext
@@ -32,7 +35,11 @@ export function BaseAccountLayout({ children, menuItem }: IProps) {
                 name: "Password",
               },
               {
-                link: "TODO",
+                link: "",
+                action: () => {
+                  AuthService.removeAuthToken();
+                  router.replace(NAVIGATION_LINKS.AUTH_SIGNIN);
+                },
                 name: "Log Out",
               },
             ]}

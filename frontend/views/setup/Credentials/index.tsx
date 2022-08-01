@@ -1,11 +1,11 @@
 import React from "react";
-import { AuthLayout } from "frontend/_layouts/guest";
+import { ComponentIsLoading } from "@gothicgeeks/design-system";
+import { AuthLayout } from "../../../_layouts/guest";
 import {
   useSetupCheck,
   useSetupCredentialsMutation,
-} from "frontend/hooks/setup/setup.store";
-import { ComponentIsLoading } from "@gothicgeeks/design-system";
-import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
+} from "../../../hooks/setup/setup.store";
+import { NAVIGATION_LINKS } from "../../../lib/routing/links";
 import { CredentialsSetupForm } from "./Form";
 
 export function CredentialsSetup() {
@@ -25,7 +25,7 @@ export function CredentialsSetup() {
 
   return (
     <AuthLayout
-      title="Setup your DB crendentials"
+      title="Setup DB crendentials"
       subTitle="Enter the crendentials of the data you want to manage"
     >
       <CredentialsSetupForm onSubmit={setupCredentialsMutation.mutateAsync} />

@@ -9,7 +9,15 @@ import {
 } from "@gothicgeeks/design-system";
 import { IValueLabel } from "@gothicgeeks/design-system/dist/types";
 import React, { ReactNode, useEffect, useState } from "react";
-import { Icon, Settings, Home, Table, BarChart } from "react-feather";
+import {
+  Icon,
+  Settings,
+  Home,
+  Table,
+  BarChart,
+  Users,
+  User,
+} from "react-feather";
 import Head from "next/head";
 import { AuthService } from "@gothicgeeks/shared";
 import { useRouter } from "next/router";
@@ -96,6 +104,16 @@ export function AppLayout({
           title: "Settings",
           icon: Settings,
           link: NAVIGATION_LINKS.SETTINGS.DEFAULT,
+        },
+        {
+          title: "Users",
+          icon: Users,
+          link: NAVIGATION_LINKS.USERS,
+        },
+        {
+          title: "Account",
+          icon: User,
+          link: NAVIGATION_LINKS.ACCOUNT,
         },
       ]}
     >

@@ -16,7 +16,7 @@ import {
 import { NAVIGATION_LINKS } from "../../lib/routing/links";
 import { ConfigrationStorage } from "../configuration/storage";
 
-const SETUP_URL = "/api/setup/check";
+const SETUP_URL = "http://localhost:3000/api/setup/check";
 
 interface ISetupCheckConfig {
   key: keyof ISetupCheck;

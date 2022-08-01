@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import {
   AuthService,
   makePostRequest,
+  SLUG_LOADING_VALUE,
   ToastService,
   useRouteParam,
 } from "@gothicgeeks/shared";
@@ -23,7 +24,11 @@ function useSignInMutation() {
     {
       onSuccess: (data: ISuccessfullAuthenticationResponse, formData) => {
         AuthService.setAuthToken(data.token, formData.rememberMe);
-        router.push(nextRoute || NAVIGATION_LINKS.DASHBOARD);
+        router.push(
+          nextRoute === SLUG_LOADING_VALUE || !nextRoute
+            ? NAVIGATION_LINKS.DASHBOARD
+            : nextRoute
+        );
       },
       onError: (error: { message: string }) => {
         ToastService.error(error.message);
@@ -70,10 +75,7 @@ export function SignIn() {
   }
 
   return (
-    <AuthLayout
-      title="Sign In Into Your Account"
-      subTitle="Enter you crendentials to continue"
-    >
+    <AuthLayout title="Sign In" subTitle="Enter your credentials to continue">
       <SignInForm onSubmit={signInMutation.mutateAsync} />
     </AuthLayout>
   );

@@ -1,18 +1,18 @@
 import { rest } from "msw";
 
 const handlers = [
-  rest.get("/login", async (req, res, ctx) => {
-    const user = await users.login(JSON.parse(req.body));
-    return res(ctx.json({ user }));
+  rest.get("http://localhost:3000/api/setup/check", async (req, res, ctx) => {
+    return res(
+      ctx.json({
+        hasUsers: false,
+        hasDbCredentials: false,
+      })
+    );
   }),
-  rest.post("/checkout", async (req, res, ctx) => {
-    const user = await users.login(JSON.parse(req.body));
-    const isAuthorized = user.authorize(req.headers.Authorization);
-    if (!isAuthorized) {
-      return res(ctx.status(401), ctx.json({ message: "Not authorized" }));
-    }
-    const shoppingCart = JSON.parse(req.body);
-    // do whatever other things you need to do with this shopping cart
+  rest.post("/api/setup/credentials", async (req, res, ctx) => {
+    return res(ctx.json({ success: true }));
+  }),
+  rest.post("/api/setup/user", async (req, res, ctx) => {
     return res(ctx.json({ success: true }));
   }),
 ];

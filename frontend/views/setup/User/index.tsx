@@ -30,8 +30,8 @@ export function UserSetup() {
 
   return (
     <AuthLayout
-      title="Create first creator account"
-      subTitle="Enter your crendentials to continue"
+      title="Admin Account Setup"
+      subTitle="Create first creator account"
     >
       <UserSetupForm onSubmit={setupUserMutation.mutateAsync} />
     </AuthLayout>

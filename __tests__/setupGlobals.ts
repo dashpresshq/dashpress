@@ -1,3 +1,5 @@
+import "isomorphic-fetch";
+
 Object.defineProperty(window, "matchMedia", {
   writable: true,
   value: jest.fn().mockImplementation((query) => ({

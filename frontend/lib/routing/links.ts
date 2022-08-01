@@ -14,6 +14,8 @@ const queryObjectToQueryString = (
 export const NAVIGATION_LINKS = {
   DASHBOARD: "/admin",
   AUTH_SIGNIN: "/auth",
+  USERS: "/users",
+  ACCOUNT: "/account",
   SETUP: {
     USER: "/setup/user",
     CREDENTIALS: "/setup/credentials",

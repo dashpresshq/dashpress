@@ -704,9 +704,9 @@
     pg "^8.7.3"
     sqlite3 "^5.0.8"
 
-"@gothicgeeks/shared@git+ssh://git@github.com:thrownullexception/shared.git#139abd5b64bc5ad2ccc01cf7bd6f4a989e542bd8":
-  version "0.2.43"
-  resolved "git+ssh://git@github.com:thrownullexception/shared.git#139abd5b64bc5ad2ccc01cf7bd6f4a989e542bd8"
+"@gothicgeeks/shared@git+ssh://git@github.com:thrownullexception/shared.git#c5bd8d9e68612205ebed16f93413f675232d9ce0":
+  version "0.2.44"
+  resolved "git+ssh://git@github.com:thrownullexception/shared.git#c5bd8d9e68612205ebed16f93413f675232d9ce0"
   dependencies:
     "@types/lodash" "^4.14.182"
     "@types/nprogress" "^0.2.0"

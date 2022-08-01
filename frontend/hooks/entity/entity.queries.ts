@@ -14,7 +14,9 @@ export function useEntityDictionPlurals<T, P extends keyof T>(
       pathFn: (entity) =>
         configurationApiPath("entity_diction", entity as unknown as string),
       placeholderDataFn: (entity) =>
-        AppStorage.get("entity_diction", entity as unknown as string),
+        AppStorage.get(
+          configurationApiPath("entity_diction", entity as unknown as string)
+        ),
     }
   );
 

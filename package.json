@@ -17,7 +17,7 @@
   "dependencies": {
     "@gothicgeeks/design-system": "git+ssh://git@github.com:thrownullexception/design-system.git#73d5f819478ea61f8990b4bf4f7175a62a7adafb",
     "@gothicgeeks/introspect": "git+ssh://git@github.com:thrownullexception/introspect.git#99a7337c3d115f52a1051eaad971a1f7e2e7084c",
-    "@gothicgeeks/shared": "git+ssh://git@github.com:thrownullexception/shared.git#139abd5b64bc5ad2ccc01cf7bd6f4a989e542bd8",
+    "@gothicgeeks/shared": "git+ssh://git@github.com:thrownullexception/shared.git#c5bd8d9e68612205ebed16f93413f675232d9ce0",
     "@types/cryptr": "^4.0.1",
     "@types/jsonwebtoken": "^8.5.8",
     "bcrypt": "^5.0.1",

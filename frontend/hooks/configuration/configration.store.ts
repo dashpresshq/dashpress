@@ -2,7 +2,6 @@ import {
   AppStorage,
   dataNotFoundMessage,
   makePutRequest,
-  useApi,
   useStorageApi,
   useWaitForResponseMutationOptions,
 } from "@gothicgeeks/shared";
@@ -25,13 +24,8 @@ export function useEntityConfiguration<T>(
   key: keyof typeof CONFIGURATION_KEYS,
   entity: string
 ) {
-  return useApi<T>(configurationApiPath(key, entity), {
+  return useStorageApi<T>(configurationApiPath(key, entity), {
     enabled: entity !== SLUG_LOADING_VALUE,
-    placeholderData: AppStorage.get(key, entity),
-    selector: (data) => {
-      AppStorage.set(data, key, entity);
-      return data;
-    },
     errorMessage: dataNotFoundMessage("Entity Configuration"),
   });
 }
@@ -53,7 +47,7 @@ export function useUpsertConfigurationMutation(
       ...(mutationOptions?.otherEndpoints || []),
     ],
     onSuccessActionWithFormData: (data) => {
-      AppStorage.set(data, key, entity);
+      AppStorage.set(configurationApiPath(key, entity), data);
     },
     successMessage: "App settings saved successfully",
   });

@@ -1,13 +1,14 @@
 import {
+  AppStorage,
   dataNotFoundMessage,
   makePutRequest,
   useApi,
+  useStorageApi,
   useWaitForResponseMutationOptions,
 } from "@gothicgeeks/shared";
 import { useMutation } from "react-query";
 import { CONFIGURATION_KEYS } from "../../../shared/configuration.constants";
 import { SLUG_LOADING_VALUE } from "../../lib/routing/constants";
-import { ConfigrationStorage } from "./storage";
 
 export const configurationApiPath = (
   key: keyof typeof CONFIGURATION_KEYS,
@@ -15,12 +16,7 @@ export const configurationApiPath = (
 ) => (entity ? `/api/config/${key}/${entity}` : `/api/config/${key}`);
 
 export function useAppConfiguration<T>(key: keyof typeof CONFIGURATION_KEYS) {
-  return useApi<T>(configurationApiPath(key), {
-    placeholderData: ConfigrationStorage.get(key),
-    selector: (data) => {
-      ConfigrationStorage.set(data, key);
-      return data;
-    },
+  return useStorageApi<T>(configurationApiPath(key), {
     errorMessage: dataNotFoundMessage("App Configuration"),
   });
 }
@@ -31,9 +27,9 @@ export function useEntityConfiguration<T>(
 ) {
   return useApi<T>(configurationApiPath(key, entity), {
     enabled: entity !== SLUG_LOADING_VALUE,
-    placeholderData: ConfigrationStorage.get(key, entity),
+    placeholderData: AppStorage.get(key, entity),
     selector: (data) => {
-      ConfigrationStorage.set(data, key, entity);
+      AppStorage.set(data, key, entity);
       return data;
     },
     errorMessage: dataNotFoundMessage("Entity Configuration"),
@@ -57,7 +53,7 @@ export function useUpsertConfigurationMutation(
       ...(mutationOptions?.otherEndpoints || []),
     ],
     onSuccessActionWithFormData: (data) => {
-      ConfigrationStorage.set(data, key, entity);
+      AppStorage.set(data, key, entity);
     },
     successMessage: "App settings saved successfully",
   });

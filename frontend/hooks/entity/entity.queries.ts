@@ -1,8 +1,7 @@
-import { useApiQueries } from "@gothicgeeks/shared";
+import { AppStorage, useApiQueries } from "@gothicgeeks/shared";
 import { useCallback } from "react";
 import { userFriendlyCase } from "../../lib/strings";
 import { configurationApiPath } from "../configuration/configration.store";
-import { ConfigrationStorage } from "../configuration/storage";
 
 export function useEntityDictionPlurals<T, P extends keyof T>(
   input: T[],
@@ -15,7 +14,7 @@ export function useEntityDictionPlurals<T, P extends keyof T>(
       pathFn: (entity) =>
         configurationApiPath("entity_diction", entity as unknown as string),
       placeholderDataFn: (entity) =>
-        ConfigrationStorage.get("entity_diction", entity as unknown as string),
+        AppStorage.get("entity_diction", entity as unknown as string),
     }
   );
 

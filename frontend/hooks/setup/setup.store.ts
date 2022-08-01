@@ -2,7 +2,7 @@ import {
   AuthService,
   dataNotFoundMessage,
   makePostRequest,
-  useApi,
+  useStorageApi,
   useWaitForResponseMutationOptions,
 } from "@gothicgeeks/shared";
 import { IUserSetupForm } from "frontend/views/setup/User/Form";
@@ -14,7 +14,6 @@ import {
   ISuccessfullAuthenticationResponse,
 } from "shared/types";
 import { NAVIGATION_LINKS } from "../../lib/routing/links";
-import { ConfigrationStorage } from "../configuration/storage";
 
 const SETUP_URL = "/api/setup/check";
 
@@ -26,12 +25,7 @@ interface ISetupCheckConfig {
 
 export function useSetupCheck(config: ISetupCheckConfig[]) {
   const router = useRouter();
-  const { isLoading, data } = useApi<ISetupCheck>(SETUP_URL, {
-    placeholderData: ConfigrationStorage.get(SETUP_URL),
-    selector: (response) => {
-      ConfigrationStorage.set(response, SETUP_URL);
-      return response;
-    },
+  const { isLoading, data } = useStorageApi<ISetupCheck>(SETUP_URL, {
     errorMessage: dataNotFoundMessage("Setup Check"),
   });
   if (isLoading) {

@@ -1,5 +1,5 @@
 import noop from "lodash/noop";
-import { useRouter } from "next-router-mock";
+import { useRouter } from "next/router";
 import qs from "qs";
 import { useEffect, useState } from "react";
 

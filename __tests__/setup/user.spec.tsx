@@ -1,10 +1,18 @@
 import * as React from "react";
 import { render, screen } from "@testing-library/react";
 import { AppWrapper } from "@gothicgeeks/design-system";
-import { rest, server } from "__tests__/server";
+// import { rest, server } from "__tests__/server";
+// import singletonRouter from "next/router";
+import mockRouter from "next-router-mock";
 import DBCrendentials from "../../pages/setup/credentials";
 
-describe("<DBCrendentials /> 1", () => {
+jest.mock("next/router", () => require("next-router-mock"));
+
+describe("<DBCrendentials />", () => {
+  beforeEach(() => {
+    mockRouter.setCurrentUrl("/initial");
+  });
+
   it("should render form", async () => {
     render(
       <AppWrapper>
@@ -12,11 +20,18 @@ describe("<DBCrendentials /> 1", () => {
       </AppWrapper>
     );
 
+    // expect(singletonRouter.pathname).toBe("/initial");
+
     expect(
       await screen.findByText("Setup DB crendentials")
     ).toBeInTheDocument();
+
+    // expect(singletonRouter.pathname).toBe("/initial");
+
+    // expect(await screen.findByText("Admin Account Setup")).toBeInTheDocument();
   });
 });
+
 // describe("<DBCrendentials /> 2", () => {
 //   //   beforeEach(() => {
 //   //     server.use(
@@ -43,4 +58,3 @@ describe("<DBCrendentials /> 1", () => {
 
 //     expect(await screen.findByText("Admin Account Setup")).toBeInTheDocument();
 //   });
-});

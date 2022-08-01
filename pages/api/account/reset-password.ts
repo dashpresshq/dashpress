@@ -1,10 +1,10 @@
 import { usersController } from "backend/users/users.controller";
-import { IUser } from "backend/users/users.types";
+import { IAccountUser } from "backend/users/users.types";
 import { IRequestValidation } from "shared/validations/makeRequestValidationRunnable";
 import { requestHandler } from "../../../backend/lib/request";
 
 const resetPasswordRequestSchema: IRequestValidation<
-  Pick<IUser, "username" | "password">
+  Pick<IAccountUser, "username" | "password">
 > = {
   username: {
     validations: [
@@ -32,8 +32,8 @@ export default requestHandler(
         },
       ]);
       return await usersController.resetPassword(
-        (validatedRequest.requestBody as IUser).username,
-        (validatedRequest.requestBody as IUser).password
+        (validatedRequest.requestBody as IAccountUser).username,
+        (validatedRequest.requestBody as IAccountUser).password
       );
     },
   },

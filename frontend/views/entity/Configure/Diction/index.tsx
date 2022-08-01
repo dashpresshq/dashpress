@@ -11,7 +11,7 @@ import {
 import { NAVIGATION_LINKS } from "../../../../lib/routing/links";
 import { BaseEntitySettingsLayout } from "../_Base";
 import { useUpsertConfigurationMutation } from "../../../../hooks/configuration/configration.store";
-import { EntityDictionForm } from "./Diction.form";
+import { EntityDictionForm } from "./Form";
 import { createViewStateMachine } from "../../useViewStateMachine";
 
 // TODO validate plurals are unique

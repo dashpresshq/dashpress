@@ -1,5 +1,5 @@
 import { UsersService, usersService } from "./users.service";
-import { IUser } from "./users.types";
+import { IAccountUser } from "./users.types";
 
 export interface IAuthCredentials {
   username: string;
@@ -12,11 +12,13 @@ export interface IChangePassword {
 }
 
 export type ICreateUser = Pick<
-  IUser,
+  IAccountUser,
   "name" | "password" | "role" | "username"
 >;
 
-export type IUpdateUserByCreator = Pick<IUser, "role" | "systemId">;
+export type IUpdateUserByCreator = Pick<IAccountUser, "role" | "systemId">;
+
+export type IAccountProfile = Omit<IAccountUser, "password">;
 
 export class UsersController {
   constructor(private _usersService: UsersService) {}
@@ -25,7 +27,7 @@ export class UsersController {
     return await this._usersService.tryAuthenticate(authCrendetials);
   }
 
-  async createUser(user: IUser) {
+  async createUser(user: IAccountUser) {
     await this._usersService.registerUser(user);
   }
 
@@ -33,8 +35,10 @@ export class UsersController {
     await this._usersService.removeUser(username);
   }
 
-  async getUserProfile(username: string) {
-    await this._usersService.getUser(username);
+  async getUserProfile(username: string): Promise<IAccountProfile> {
+    const user = await this._usersService.getUser(username);
+    delete user.password;
+    return user;
   }
 
   async resetPassword(username: string, password: string) {
@@ -45,7 +49,7 @@ export class UsersController {
     await this._usersService.changePassword(username, input);
   }
 
-  async updateProfile(username: string, userDetails: IUser) {
+  async updateProfile(username: string, userDetails: IAccountUser) {
     await this._usersService.updateUser(username, userDetails);
   }
 }

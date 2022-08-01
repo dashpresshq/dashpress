@@ -4,7 +4,7 @@ OPEN SOURCE
 Relation ship list => settings
 
 users management
-Account management
+Account management => Update Profile, Change Password, Logout
 
 settings go back
 delete and edit button on the details page

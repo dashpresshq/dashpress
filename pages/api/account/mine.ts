@@ -1,9 +1,11 @@
 import { usersController } from "backend/users/users.controller";
-import { IUser } from "backend/users/users.types";
+import { IAccountUser } from "backend/users/users.types";
 import { IRequestValidation } from "shared/validations/makeRequestValidationRunnable";
 import { requestHandler } from "../../../backend/lib/request";
 
-const updateProfileRequestSchema: IRequestValidation<Pick<IUser, "name">> = {
+const updateProfileRequestSchema: IRequestValidation<
+  Pick<IAccountUser, "name">
+> = {
   name: {
     validations: [
       {
@@ -23,14 +25,14 @@ export default requestHandler({
       },
     ]);
     return await usersController.updateProfile(
-      (validatedRequest.authenticatedUser as IUser).username,
+      (validatedRequest.authenticatedUser as IAccountUser).username,
       validatedRequest.requestBody
     );
   },
   GET: async (getValidatedRequest) => {
     const validatedRequest = await getValidatedRequest(["authenticatedUser"]);
     return await usersController.getUserProfile(
-      (validatedRequest.authenticatedUser as IUser).username
+      (validatedRequest.authenticatedUser as IAccountUser).username
     );
   },
 });

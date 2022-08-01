@@ -15,7 +15,10 @@ export const NAVIGATION_LINKS = {
   DASHBOARD: "/admin",
   AUTH_SIGNIN: "/auth",
   USERS: "/users",
-  ACCOUNT: "/account",
+  ACCOUNT: {
+    PROFILE: "/account/profile",
+    PASSWORD: "/account/password",
+  },
   SETUP: {
     USER: "/setup/user",
     CREDENTIALS: "/setup/credentials",

@@ -1,12 +1,12 @@
-export enum UserRole {
+export enum AccountRole {
   Creator = "creator",
   viewer = "viewer",
 }
 
-export interface IUser {
+export interface IAccountUser {
   name: string;
   username: string;
   password: string;
   systemId?: string;
-  role: UserRole;
+  role: AccountRole;
 }

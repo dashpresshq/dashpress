@@ -1,4 +1,4 @@
-import { FormButton, Stack } from "@gothicgeeks/design-system";
+import { FormButton } from "@gothicgeeks/design-system";
 import { ButtonLang, resetFormValues } from "@gothicgeeks/shared";
 import { Form, Field } from "react-final-form";
 import { runValidationError } from "shared/validations/run";
@@ -52,13 +52,11 @@ export function CreateEntityForm({
               )}
             </Field>
           ))}
-          <Stack>
-            <FormButton
-              text={ButtonLang.create}
-              isMakingRequest={submitting}
-              disabled={pristine}
-            />
-          </Stack>
+          <FormButton
+            text={ButtonLang.create}
+            isMakingRequest={submitting}
+            disabled={pristine}
+          />
         </form>
       )}
     />

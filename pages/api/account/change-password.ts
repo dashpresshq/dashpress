@@ -2,7 +2,7 @@ import {
   IChangePassword,
   usersController,
 } from "backend/users/users.controller";
-import { IUser } from "backend/users/users.types";
+import { IAccountUser } from "backend/users/users.types";
 import { IRequestValidation } from "shared/validations/makeRequestValidationRunnable";
 import { requestHandler } from "../../../backend/lib/request";
 
@@ -33,7 +33,7 @@ export default requestHandler({
       },
     ]);
     return await usersController.updatePassword(
-      (validatedRequest.authenticatedUser as IUser).username,
+      (validatedRequest.authenticatedUser as IAccountUser).username,
       validatedRequest.requestBody
     );
   },

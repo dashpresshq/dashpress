@@ -113,7 +113,7 @@ export function AppLayout({
         {
           title: "Account",
           icon: User,
-          link: NAVIGATION_LINKS.ACCOUNT,
+          link: NAVIGATION_LINKS.ACCOUNT.PROFILE,
         },
       ]}
     >

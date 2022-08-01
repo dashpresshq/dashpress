@@ -1,11 +1,11 @@
 import {
-  IUserSetupFields,
+  IAccountUserSetupFields,
   setupController,
 } from "backend/setup/setup.controller";
 import { IRequestValidation } from "shared/validations/makeRequestValidationRunnable";
 import { requestHandler } from "../../../backend/lib/request";
 
-const userSetupRequestSchema: IRequestValidation<IUserSetupFields> = {
+const userSetupRequestSchema: IRequestValidation<IAccountUserSetupFields> = {
   username: {
     validations: [
       {

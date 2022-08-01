@@ -1,8 +1,8 @@
-import { IUser } from "backend/users/users.types";
+import { IAccountUser } from "backend/users/users.types";
 import { ValidationImplType } from "./types";
 
 export const authenticatedUserValidationImpl: ValidationImplType<
-  IUser
+  IAccountUser
 > = async (req) => {
   if (!req.user) {
     throw new Error(

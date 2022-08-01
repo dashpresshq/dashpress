@@ -9,13 +9,13 @@ import {
 import { BadRequestError, ForbiddenError } from "backend/lib/errors";
 import { HashService } from "backend/lib/hash/hash.service";
 import { ISuccessfullAuthenticationResponse } from "shared/types";
-import { IUser } from "./users.types";
+import { IAccountUser } from "./users.types";
 
 const INVALID_LOGIN_MESSAGE = "Invalid Login";
 
 export class UsersService {
   constructor(
-    private readonly _usersPersistenceService: AbstractConfigDataPersistenceService<IUser>,
+    private readonly _usersPersistenceService: AbstractConfigDataPersistenceService<IAccountUser>,
     private readonly _authTokenService: AuthTokenService
   ) {}
 
@@ -37,7 +37,7 @@ export class UsersService {
     return { token: this._authTokenService.sign(user) };
   }
 
-  async registerUser(user: IUser) {
+  async registerUser(user: IAccountUser) {
     const userExists = await this._usersPersistenceService.getItem(
       user.username
     );
@@ -85,7 +85,7 @@ export class UsersService {
     });
   }
 
-  async updateUser(username: string, userDetails: Partial<IUser>) {
+  async updateUser(username: string, userDetails: Partial<IAccountUser>) {
     const user = await this._usersPersistenceService.getItem(username);
     if (!user) {
       return;
@@ -98,7 +98,7 @@ export class UsersService {
 }
 
 const usersPersistenceService =
-  createConfigDomainPersistenceService<IUser>("users");
+  createConfigDomainPersistenceService<IAccountUser>("users");
 
 export const usersService = new UsersService(
   usersPersistenceService,

@@ -6,10 +6,13 @@ import { CREDENTIALS_DOMAINS } from "backend/credentials/crendential.types";
 import { getKnexConnection } from "backend/lib/connection/db";
 import { BadRequestError } from "backend/lib/errors";
 import { usersService, UsersService } from "backend/users/users.service";
-import { IUser, UserRole } from "backend/users/users.types";
+import { IAccountUser, AccountRole } from "backend/users/users.types";
 import { IDBCrendentials, ISetupCheck } from "shared/types";
 
-export type IUserSetupFields = Pick<IUser, "name" | "username" | "password">;
+export type IAccountUserSetupFields = Pick<
+  IAccountUser,
+  "name" | "username" | "password"
+>;
 
 export class SetupController {
   constructor(
@@ -31,14 +34,14 @@ export class SetupController {
     };
   }
 
-  async setUpFirstUser(user: IUserSetupFields) {
+  async setUpFirstUser(user: IAccountUserSetupFields) {
     if (await this._usersService.hasUsers()) {
       throw new BadRequestError("Primary user already setup");
     }
 
     await this._usersService.registerUser({
       ...user,
-      role: UserRole.Creator,
+      role: AccountRole.Creator,
     });
 
     return await this._usersService.tryAuthenticate(user);

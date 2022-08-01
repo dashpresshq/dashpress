@@ -1,4 +1,4 @@
-import { IUser } from "backend/users/users.types";
+import { IAccountUser } from "backend/users/users.types";
 import jsonwebtoken from "jsonwebtoken";
 import {
   ConfigKeys,
@@ -20,18 +20,18 @@ export class AuthTokenService {
     );
   }
 
-  async verify(token: string): Promise<IUser> {
+  async verify(token: string): Promise<IAccountUser> {
     return new Promise((resolve, reject) => {
       jsonwebtoken.verify(token, this.authToken, (err, decoded) => {
         if (err) {
           return reject(err);
         }
-        return resolve(decoded as IUser);
+        return resolve(decoded as IAccountUser);
       });
     });
   }
 
-  sign(payload: IUser): string {
+  sign(payload: IAccountUser): string {
     return jsonwebtoken.sign(payload, this.authToken, {
       expiresIn: `${this.tokenValiditityDurationInDays}d`,
     });

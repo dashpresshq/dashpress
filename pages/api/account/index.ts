@@ -3,7 +3,7 @@ import {
   ICreateUser,
   IUpdateUserByCreator,
 } from "backend/users/users.controller";
-import { IUser, UserRole } from "backend/users/users.types";
+import { IAccountUser, AccountRole } from "backend/users/users.types";
 import { IRequestValidation } from "shared/validations/makeRequestValidationRunnable";
 import { requestHandler } from "../../../backend/lib/request";
 
@@ -33,7 +33,7 @@ const createUserRequestSchema: IRequestValidation<ICreateUser> = {
       {
         validationType: "isIn",
         constraint: {
-          options: Object.values(UserRole),
+          options: Object.values(AccountRole),
         },
       },
     ],
@@ -47,7 +47,9 @@ const createUserRequestSchema: IRequestValidation<ICreateUser> = {
   },
 };
 
-const deleteUserRequestSchema: IRequestValidation<Pick<IUser, "username">> = {
+const deleteUserRequestSchema: IRequestValidation<
+  Pick<IAccountUser, "username">
+> = {
   username: {
     validations: [
       {
@@ -58,7 +60,7 @@ const deleteUserRequestSchema: IRequestValidation<Pick<IUser, "username">> = {
 };
 
 const patchUserRequestSchema: IRequestValidation<
-  Pick<IUser, "username"> & IUpdateUserByCreator
+  Pick<IAccountUser, "username"> & IUpdateUserByCreator
 > = {
   username: {
     validations: [
@@ -75,7 +77,7 @@ const patchUserRequestSchema: IRequestValidation<
       {
         validationType: "isIn",
         constraint: {
-          options: Object.values(UserRole),
+          options: Object.values(AccountRole),
         },
       },
     ],
@@ -108,7 +110,7 @@ export default requestHandler(
         },
       ]);
       return await usersController.removeUser(
-        (validatedRequest.requestBody as IUser).username
+        (validatedRequest.requestBody as IAccountUser).username
       );
     },
     PATCH: async (getValidatedRequest) => {
@@ -119,8 +121,8 @@ export default requestHandler(
         },
       ]);
       return await usersController.updateProfile(
-        (validatedRequest.requestBody as IUser).username,
-        validatedRequest.requestBody as IUser
+        (validatedRequest.requestBody as IAccountUser).username,
+        validatedRequest.requestBody as IAccountUser
       );
     },
   },

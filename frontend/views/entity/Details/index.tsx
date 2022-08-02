@@ -39,6 +39,8 @@ export function EntityDetails() {
   const getEntityFieldLabels = useEntityFieldLabels();
   // const entityCrudSettings = useEntityCrudSettings();
 
+  console.log(referenceFields.data);
+
   const relatedEntities = (referenceFields.data?.toMany || []).map(
     (relatedEntity) => ({ name: relatedEntity })
   );

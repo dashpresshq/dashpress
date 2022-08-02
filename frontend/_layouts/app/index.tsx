@@ -43,6 +43,7 @@ const useUserAuthCheck = () => {
   useEffect(() => {
     if (typeof window !== "undefined") {
       if (!AuthService.isAuthenticated()) {
+        //  TODO router.replace(`${NAVIGATION_LINKS.AUTH_SIGNIN}?next=${router.asPath}`);
         router.replace(NAVIGATION_LINKS.AUTH_SIGNIN);
         return;
       }

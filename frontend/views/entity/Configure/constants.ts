@@ -1,4 +1,4 @@
-import { useRouter } from "next/router";
+import { useGoBackContext } from "frontend/lib/routing/useGoBackContext";
 import { Icon, Save, Settings } from "react-feather";
 import { useEntitySlug } from "../../../hooks/entity/entity.config";
 import { NAVIGATION_LINKS } from "../../../lib/routing/links";
@@ -91,15 +91,15 @@ const ENTITY_ACTION_BAG: Record<
 };
 
 export const useEntityActionMenuItems = (actionTypes: EntityActionTypes[]) => {
-  const router = useRouter();
   const slugEntity = useEntitySlug();
+  const goBackContext = useGoBackContext();
 
   return actionTypes.map((actionType) => {
     const { link, ...actionBag } = ENTITY_ACTION_BAG[actionType];
     return {
       ...actionBag,
       onClick: () => {
-        router.push(link(slugEntity));
+        goBackContext.goTo(link(slugEntity));
       },
     };
   });

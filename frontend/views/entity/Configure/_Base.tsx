@@ -3,7 +3,10 @@ import {
   SectionRight,
   SectionRow,
   MenuSection,
+  SoftButton,
+  Spacer,
 } from "@gothicgeeks/design-system";
+import { useGoBackContext } from "frontend/lib/routing/useGoBackContext";
 import { ReactNode } from "react";
 import {
   useEntityDiction,
@@ -24,6 +27,7 @@ interface IProps {
 export function BaseEntitySettingsLayout({ children, menuItem }: IProps) {
   const entity = useEntitySlug();
   const entityDiction = useEntityDiction();
+  const { canGoBack, goBack } = useGoBackContext();
 
   return (
     <AppLayout
@@ -36,6 +40,20 @@ export function BaseEntitySettingsLayout({ children, menuItem }: IProps) {
         { label: menuItem.name, value: menuItem.link },
       ]}
     >
+      {canGoBack() && (
+        <>
+          <SoftButton
+            icon="back"
+            size="xs"
+            label="Go Back"
+            onClick={() => {
+              goBack();
+            }}
+          />
+          <Spacer />
+        </>
+      )}
+
       <SectionRow>
         <SectionLeft>
           <MenuSection

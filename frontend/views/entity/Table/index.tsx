@@ -115,7 +115,7 @@ export function EntityTable() {
         <SoftButton
           label="View Full Details"
           block
-          to={NAVIGATION_LINKS.ENTITY.DETAILS(
+          action={NAVIGATION_LINKS.ENTITY.DETAILS(
             detailsCanvasEntity,
             detailsCanvasId
           )}

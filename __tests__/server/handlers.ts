@@ -1,7 +1,7 @@
 import { rest } from "msw";
 
 const handlers = [
-  rest.get("http://localhost:3000/api/setup/check", async (req, res, ctx) => {
+  rest.get("http://localhost:3000/api/setup/check", async (_, res, ctx) => {
     return res(
       ctx.json({
         hasUsers: false,
@@ -9,10 +9,10 @@ const handlers = [
       })
     );
   }),
-  rest.post("/api/setup/credentials", async (req, res, ctx) => {
+  rest.post("/api/setup/credentials", async (_, res, ctx) => {
     return res(ctx.json({ success: true }));
   }),
-  rest.post("/api/setup/user", async (req, res, ctx) => {
+  rest.post("/api/setup/user", async (_, res, ctx) => {
     return res(ctx.json({ success: true }));
   }),
 ];

@@ -158,7 +158,7 @@ export function FieldSelectionCanvas({
                   <SoftButton
                     icon="add"
                     label="Add new option"
-                    onClick={() => {
+                    action={() => {
                       fields.push({
                         label: "",
                         value: "",

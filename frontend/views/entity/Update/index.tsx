@@ -32,7 +32,6 @@ import { UpdateEntityForm } from "./UpdateEntity.form";
 import { fitlerOutHiddenScalarColumns } from "../utils";
 import { useViewStateMachine } from "../useViewStateMachine";
 
-// TODO bounce if .update is not enabled
 export function EntityUpdate() {
   const entity = useEntitySlug();
   const id = useEntityId();
@@ -94,7 +93,7 @@ export function EntityUpdate() {
         <SectionBox
           title={TitleLang.edit(entityDiction.singular)}
           backLink={{
-            link: NAVIGATION_LINKS.ENTITY.DETAILS(entity, id),
+            action: NAVIGATION_LINKS.ENTITY.DETAILS(entity, id),
             label: entityDiction.singular,
           }}
         >

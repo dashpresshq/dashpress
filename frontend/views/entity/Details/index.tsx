@@ -39,8 +39,6 @@ export function EntityDetails() {
   const getEntityFieldLabels = useEntityFieldLabels();
   // const entityCrudSettings = useEntityCrudSettings();
 
-  console.log(referenceFields.data);
-
   const relatedEntities = (referenceFields.data?.toMany || []).map(
     (relatedEntity) => ({ name: relatedEntity })
   );
@@ -72,14 +70,14 @@ export function EntityDetails() {
         <SectionBox
           title={TitleLang.details(entityDiction.singular)}
           backLink={{
-            link: NAVIGATION_LINKS.ENTITY.TABLE(entity),
-            label: entityDiction.plural,
+            action: NAVIGATION_LINKS.ENTITY.TABLE(entity),
+            label: `${entityDiction.plural}dsd`,
           }}
           deleteAction={() => console.log("")}
           isMakingDeleteRequest={false}
           iconButtons={[
-            { icon: "edit", link: "", label: "Edit" },
-            { icon: "save", link: "", label: "Clone" },
+            { icon: "edit", action: "", label: "Edit" },
+            { icon: "save", action: "", label: "Clone" },
           ]}
         >
           <EntityDetailsView displayFrom="details" id={id} entity={entity} />

@@ -79,7 +79,7 @@ export function EntityCreate() {
         <SectionBox
           title={TitleLang.create(entityDiction.singular)}
           backLink={{
-            link: NAVIGATION_LINKS.ENTITY.TABLE(entity),
+            action: NAVIGATION_LINKS.ENTITY.TABLE(entity),
             label: entityDiction.plural,
           }}
         >

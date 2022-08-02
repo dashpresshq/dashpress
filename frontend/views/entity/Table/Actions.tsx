@@ -4,7 +4,6 @@ import { useEntitySlug } from "frontend/hooks/entity/entity.config";
 import { useEntityIdField } from "frontend/hooks/entity/entity.store";
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
 import { IEntityCrudSettings } from "shared/configuration.constants";
-import { useDetailsOffCanvasStore } from "./hooks/useDetailsOffCanvas.store";
 
 interface IProps {
   crudSettings: IEntityCrudSettings;
@@ -17,7 +16,6 @@ export function TableActions({ crudSettings, row }: IProps) {
   const entity = useEntitySlug();
   const idField = useEntityIdField(entity);
   const entityDataDeletionMutation = useEntityDataDeletionMutation(entity);
-  const openDetailsCanvas = useDetailsOffCanvasStore((state) => state.open);
 
   const idValue = row.original[idField.data || "id"] as string;
   return (
@@ -25,9 +23,11 @@ export function TableActions({ crudSettings, row }: IProps) {
       {crudSettings.details && (
         <div>
           <SoftButton
-            onClick={() => {
-              openDetailsCanvas({ id: idValue, entity });
-            }}
+            // onClick={() => {
+            //   console.log("Hello");
+            //   // openDetailsCanvas({ id: idValue, entity });
+            // }}
+            action={NAVIGATION_LINKS.ENTITY.DETAILS(entity, idValue)}
             label="Details"
             color="primary"
             justIcon
@@ -38,12 +38,11 @@ export function TableActions({ crudSettings, row }: IProps) {
       {crudSettings.update && (
         <div>
           <SoftButton
-            to={NAVIGATION_LINKS.ENTITY.UPDATE(entity, idValue)}
+            action={NAVIGATION_LINKS.ENTITY.UPDATE(entity, idValue)}
             label="Edit"
             icon="edit"
             color="theme"
             justIcon
-            onClick={() => {}}
           />
         </div>
       )}

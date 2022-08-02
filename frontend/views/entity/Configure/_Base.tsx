@@ -46,7 +46,7 @@ export function BaseEntitySettingsLayout({ children, menuItem }: IProps) {
             icon="back"
             size="xs"
             label="Go Back"
-            onClick={() => {
+            action={() => {
               goBack();
             }}
           />

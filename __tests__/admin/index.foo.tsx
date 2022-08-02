@@ -6,7 +6,7 @@ import { render } from "@testing-library/react";
 import Dashboard from "pages";
 
 const server = setupServer(
-  rest.get("/api/entities/menu", (req, res, ctx) => {
+  rest.get("/api/entities/menu", (_, res, ctx) => {
     return res(
       ctx.json([
         {

@@ -61,7 +61,7 @@ export function Dashboard() {
                   <Stack justify="space-between">
                     <Text size="4">{field.label}</Text>
                     <SoftButton
-                      to={NAVIGATION_LINKS.ENTITY.TABLE(field.value)}
+                      action={NAVIGATION_LINKS.ENTITY.TABLE(field.value)}
                       label="View Data"
                       icon="eye"
                     />

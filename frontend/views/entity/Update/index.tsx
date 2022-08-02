@@ -6,6 +6,7 @@ import {
   FormSkeletonSchema,
 } from "@gothicgeeks/design-system";
 import { SLUG_LOADING_VALUE, TitleLang } from "@gothicgeeks/shared";
+import { useNavigationStack } from "frontend/lib/routing/useGoBackContext";
 import { AppLayout } from "../../../_layouts/app";
 import { NAVIGATION_LINKS } from "../../../lib/routing/links";
 import {
@@ -72,6 +73,7 @@ export function EntityUpdate() {
     entityFields.isLoading;
 
   const viewState = useViewStateMachine(isLoading, error, "update");
+  const { canGoBack, goBack } = useNavigationStack("Update Entity");
 
   return (
     <AppLayout
@@ -92,10 +94,14 @@ export function EntityUpdate() {
       <SectionCenter>
         <SectionBox
           title={TitleLang.edit(entityDiction.singular)}
-          backLink={{
-            action: NAVIGATION_LINKS.ENTITY.DETAILS(entity, id),
-            label: entityDiction.singular,
-          }}
+          backLink={
+            canGoBack()
+              ? {
+                  action: goBack,
+                  label: "Go Back",
+                }
+              : undefined
+          }
         >
           {viewState.type === "loading" && (
             <FormSkeleton

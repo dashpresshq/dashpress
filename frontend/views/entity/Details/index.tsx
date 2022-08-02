@@ -9,6 +9,7 @@ import {
 import { TitleLang } from "@gothicgeeks/shared";
 import { useEntityReferenceFields } from "frontend/hooks/entity/entity.store";
 import { useEntitiesCount } from "frontend/hooks/data/data.store";
+import { useNavigationStack } from "frontend/lib/routing/useGoBackContext";
 import { AppLayout } from "../../../_layouts/app";
 import { NAVIGATION_LINKS } from "../../../lib/routing/links";
 import {
@@ -50,6 +51,7 @@ export function EntityDetails() {
   const { isLoading, error } = referenceFields;
 
   const viewState = useViewStateMachine(isLoading, error, "details");
+  const { canGoBack, goBack } = useNavigationStack("Entity Details");
 
   return (
     <AppLayout
@@ -69,10 +71,14 @@ export function EntityDetails() {
       <SectionCenter>
         <SectionBox
           title={TitleLang.details(entityDiction.singular)}
-          backLink={{
-            action: NAVIGATION_LINKS.ENTITY.TABLE(entity),
-            label: `${entityDiction.plural}dsd`,
-          }}
+          backLink={
+            canGoBack()
+              ? {
+                  action: goBack,
+                  label: "Go Back",
+                }
+              : undefined
+          }
           deleteAction={() => console.log("")}
           isMakingDeleteRequest={false}
           iconButtons={[

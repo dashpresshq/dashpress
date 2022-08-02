@@ -6,6 +6,7 @@ import {
   FormSkeletonSchema,
 } from "@gothicgeeks/design-system";
 import { SLUG_LOADING_VALUE, TitleLang } from "@gothicgeeks/shared";
+import { useNavigationStack } from "frontend/lib/routing/useGoBackContext";
 import { AppLayout } from "../../../_layouts/app";
 import { NAVIGATION_LINKS } from "../../../lib/routing/links";
 import {
@@ -62,6 +63,7 @@ export function EntityCreate() {
     entityFieldTypesMap.isLoading;
 
   const viewState = useViewStateMachine(isLoading, error, "create");
+  const { canGoBack, goBack } = useNavigationStack("Create Entity");
 
   return (
     <AppLayout
@@ -78,10 +80,14 @@ export function EntityCreate() {
       <SectionCenter>
         <SectionBox
           title={TitleLang.create(entityDiction.singular)}
-          backLink={{
-            action: NAVIGATION_LINKS.ENTITY.TABLE(entity),
-            label: entityDiction.plural,
-          }}
+          backLink={
+            canGoBack()
+              ? {
+                  action: goBack,
+                  label: "Go Back",
+                }
+              : undefined
+          }
         >
           {viewState.type === "loading" && (
             <FormSkeleton

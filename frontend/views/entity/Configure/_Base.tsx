@@ -6,7 +6,7 @@ import {
   SoftButton,
   Spacer,
 } from "@gothicgeeks/design-system";
-import { useGoBackContext } from "frontend/lib/routing/useGoBackContext";
+import { useNavigationStack } from "frontend/lib/routing/useGoBackContext";
 import { ReactNode } from "react";
 import {
   useEntityDiction,
@@ -27,7 +27,7 @@ interface IProps {
 export function BaseEntitySettingsLayout({ children, menuItem }: IProps) {
   const entity = useEntitySlug();
   const entityDiction = useEntityDiction();
-  const { canGoBack, goBack } = useGoBackContext();
+  const { canGoBack, goBack } = useNavigationStack(menuItem.name);
 
   return (
     <AppLayout

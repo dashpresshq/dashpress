@@ -21,6 +21,7 @@ import {
 import Head from "next/head";
 import { AuthService } from "@gothicgeeks/shared";
 import { useRouter } from "next/router";
+import { useNavigationStack } from "frontend/lib/routing/useGoBackContext";
 import { useEntitiesMenuItems } from "../../hooks/entity/entity.store";
 import { useSiteConfig } from "../../hooks/app/site.config";
 import { NAVIGATION_LINKS } from "../../lib/routing/links";
@@ -64,8 +65,15 @@ export function AppLayout({
   const entitiesMenuItems = useEntitiesMenuItems();
   const siteConfig = useSiteConfig();
   const isChecking = useUserAuthCheck();
-  const homedBreadcrumb = [{ label: "Home", value: "/" }, ...breadcrumbs];
-
+  const { history } = useNavigationStack("Foo");
+  const homedBreadcrumb = [
+    { label: "Home", value: "/" },
+    ...history.map((historyItem) => ({
+      value: historyItem.link,
+      label: historyItem.title,
+    })),
+  ];
+  console.log(breadcrumbs);
   const title =
     (titleNeedsContext
       ? `${homedBreadcrumb[homedBreadcrumb.length - 2]?.label} - `
@@ -126,7 +134,12 @@ export function AppLayout({
       <Stack justify="space-between" align="center">
         <div>
           <Text>{title}</Text>
-          <Breadcrumbs items={homedBreadcrumb} />
+          <Breadcrumbs
+            items={homedBreadcrumb}
+            onItemClick={(item) => {
+              console.log("item", item);
+            }}
+          />
         </div>
         {/* Remove this logic on version update */}
         {actionItems.length > 0 && <DropDownMenu menuItems={actionItems} />}

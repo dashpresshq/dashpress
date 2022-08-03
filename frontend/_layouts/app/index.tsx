@@ -60,7 +60,7 @@ export function AppLayout({ children, actionItems = [] }: IProps) {
   const entitiesMenuItems = useEntitiesMenuItems();
   const siteConfig = useSiteConfig();
   const isChecking = useUserAuthCheck();
-  const { history, pushToStack } = useNavigationStack();
+  const { history, pushToStack, goToLinkIndex } = useNavigationStack();
   const router = useRouter();
   const pageTitle = usePageTitleStore((store) => store.pageTitle);
 
@@ -130,12 +130,7 @@ export function AppLayout({ children, actionItems = [] }: IProps) {
       <Stack justify="space-between" align="center">
         <div>
           <Text>{pageTitle}</Text>
-          <Breadcrumbs
-            items={homedBreadcrumb}
-            onItemClick={(item) => {
-              console.log("item", item);
-            }}
-          />
+          <Breadcrumbs items={homedBreadcrumb} onCrumbClick={goToLinkIndex} />
         </div>
         {/* Remove this logic on version update */}
         {actionItems.length > 0 && <DropDownMenu menuItems={actionItems} />}

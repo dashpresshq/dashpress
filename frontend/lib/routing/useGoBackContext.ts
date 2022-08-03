@@ -31,7 +31,7 @@ export const usePageTitleStore = createStore<IStore>((set) => ({
     })),
 }));
 
-export const useSetPageTitle = (pageTitle) => {
+export const useSetPageTitle = (pageTitle: string) => {
   const setPageTitle = usePageTitleStore((store) => store.setPageTitle);
   setPageTitle(pageTitle);
 };
@@ -60,7 +60,7 @@ export const useNavigationStack = () => {
       goToLinkIndex: (index: number) => {
         const newHistory = [...history];
 
-        let loopIndex = index;
+        let loopIndex = newHistory.length - index;
         let lastHistory = newHistory[newHistory.length - 1];
         while (loopIndex > 0) {
           lastHistory = newHistory.pop();

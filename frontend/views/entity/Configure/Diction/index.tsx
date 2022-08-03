@@ -4,11 +4,11 @@ import {
   SectionBox,
 } from "@gothicgeeks/design-system";
 import { SLUG_LOADING_VALUE } from "@gothicgeeks/shared";
+import { useSetPageTitle } from "frontend/lib/routing/useGoBackContext";
 import {
   useEntityDiction,
   useEntitySlug,
 } from "../../../../hooks/entity/entity.config";
-import { NAVIGATION_LINKS } from "../../../../lib/routing/links";
 import { BaseEntitySettingsLayout } from "../_Base";
 import { useUpsertConfigurationMutation } from "../../../../hooks/configuration/configration.store";
 import { EntityDictionForm } from "./Form";
@@ -26,13 +26,9 @@ export function EntityDictionSettings() {
     entity === SLUG_LOADING_VALUE,
     false
   );
+  useSetPageTitle("Diction Settings");
   return (
-    <BaseEntitySettingsLayout
-      menuItem={{
-        link: NAVIGATION_LINKS.ENTITY.CONFIG.DICTION(entity),
-        name: "Diction Settings",
-      }}
-    >
+    <BaseEntitySettingsLayout>
       <SectionBox title="Diction Settings">
         {viewStateMachine.type === "loading" && (
           <FormSkeleton

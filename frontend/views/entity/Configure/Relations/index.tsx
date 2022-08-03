@@ -6,8 +6,8 @@ import {
 } from "@gothicgeeks/design-system";
 import { useEntityFields } from "frontend/hooks/entity/entity.store";
 import { SLUG_LOADING_VALUE } from "@gothicgeeks/shared";
+import { useSetPageTitle } from "frontend/lib/routing/useGoBackContext";
 import { useEntitySlug } from "../../../../hooks/entity/entity.config";
-import { NAVIGATION_LINKS } from "../../../../lib/routing/links";
 import { BaseEntitySettingsLayout } from "../_Base";
 import {
   useEntityConfiguration,
@@ -22,6 +22,7 @@ export function EntityRelationsSettings() {
     format: string;
   }>("relationship_settings", entity);
   const entityFields = useEntityFields(entity);
+  useSetPageTitle("Relationship Settings");
 
   const upsertConfigurationMutation = useUpsertConfigurationMutation(
     "relationship_settings",
@@ -38,12 +39,7 @@ export function EntityRelationsSettings() {
   const viewStateMachine = createViewStateMachine(isLoading, error);
 
   return (
-    <BaseEntitySettingsLayout
-      menuItem={{
-        link: NAVIGATION_LINKS.ENTITY.CONFIG.RELATIONS(entity),
-        name: "Relationship Settings",
-      }}
-    >
+    <BaseEntitySettingsLayout>
       <SectionBox title="Relationship Settings">
         {viewStateMachine.type === "error" && (
           <ErrorAlert message={viewStateMachine.message} />

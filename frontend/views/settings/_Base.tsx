@@ -4,21 +4,19 @@ import {
   SectionRow,
   MenuSection,
 } from "@gothicgeeks/design-system";
+import { useRouter } from "next/router";
 import { ReactNode } from "react";
 import { NAVIGATION_LINKS } from "../../lib/routing/links";
 import { AppLayout } from "../../_layouts/app";
 
 interface IProps {
   children: ReactNode;
-  menuItem: { link: string; name: string };
 }
 
-export function BaseSettingsLayout({ children, menuItem }: IProps) {
+export function BaseSettingsLayout({ children }: IProps) {
+  const router = useRouter();
   return (
-    <AppLayout
-      titleNeedsContext
-      breadcrumbs={[{ label: menuItem.name, value: menuItem.link }]}
-    >
+    <AppLayout>
       <SectionRow>
         <SectionLeft>
           <MenuSection
@@ -32,7 +30,7 @@ export function BaseSettingsLayout({ children, menuItem }: IProps) {
                 name: "Other Settings",
               },
             ]}
-            currentMenuItem={menuItem.link}
+            currentMenuItem={router.asPath}
           />
         </SectionLeft>
         <SectionRight>{children}</SectionRight>

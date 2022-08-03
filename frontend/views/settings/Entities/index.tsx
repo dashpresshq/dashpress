@@ -6,6 +6,7 @@ import {
 } from "@gothicgeeks/design-system";
 import { useRouteParam } from "@gothicgeeks/shared";
 import { useChangeRouterParam } from "frontend/lib/routing/useChangeRouterParam";
+import { useSetPageTitle } from "frontend/lib/routing/useGoBackContext";
 import {
   useAppConfiguration,
   useUpsertConfigurationMutation,
@@ -16,13 +17,14 @@ import {
   useEntitiesList,
   useEntitiesMenuItems,
 } from "../../../hooks/entity/entity.store";
-import { NAVIGATION_LINKS } from "../../../lib/routing/links";
 import { BaseSettingsLayout } from "../_Base";
 import { EntitiesSelection } from "./Selection";
 
 export function EntitiesSettings() {
   const entitiesList = useEntitiesList();
   const tabFromUrl = useRouteParam("tab");
+  useSetPageTitle("Entities Settings");
+
   const changeTabParam = useChangeRouterParam("tab");
 
   const entitiesToHide = useAppConfiguration<string[]>("disabled_entities");
@@ -48,12 +50,7 @@ export function EntitiesSettings() {
   );
 
   return (
-    <BaseSettingsLayout
-      menuItem={{
-        link: NAVIGATION_LINKS.SETTINGS.ENTITIES,
-        name: "Entities Settings",
-      }}
-    >
+    <BaseSettingsLayout>
       <ErrorAlert message={entitiesList.error || entitiesToHide.error} />
       <SectionBox title="Entities Settings">
         <Tabs

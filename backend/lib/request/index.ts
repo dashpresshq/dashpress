@@ -51,11 +51,11 @@ export const requestHandler =
     ];
 
     try {
-      await Promise.all(
-        [...AUTH_VALIDATIONS, ...validationsToRun].map(async (validation) => {
-          return await ValidationImpl[validation._type](req, validation.body);
-        })
-      );
+      // eslint-disable-next-line no-restricted-syntax
+      for (const validation of [...AUTH_VALIDATIONS, ...validationsToRun]) {
+        // eslint-disable-next-line no-await-in-loop
+        await ValidationImpl[validation._type](req, validation.body);
+      }
 
       if (!Object.keys(methodHandler).includes(req.method)) {
         res.setHeader("Allow", Object.keys(methodHandler));

@@ -1,6 +1,8 @@
 import { useRouter } from "next/router";
 import { useEffect, useMemo, useState } from "react";
 
+import { createStore } from "@gothicgeeks/shared";
+
 export const TemporayStorageService = {
   getString: (path: string): string | null =>
     typeof window !== "undefined" && window.sessionStorage.getItem(path),
@@ -16,13 +18,31 @@ interface INavigationItem {
   title: string;
 }
 
-export const useNavigationStack = (title: string) => {
+type IStore = {
+  pageTitle?: string;
+  setPageTitle: (pageTitle: string) => void;
+};
+
+export const usePageTitleStore = createStore<IStore>((set) => ({
+  pageTitle: "",
+  setPageTitle: (pageTitle: string) =>
+    set(() => ({
+      pageTitle,
+    })),
+}));
+
+export const useSetPageTitle = (pageTitle) => {
+  const setPageTitle = usePageTitleStore((store) => store.setPageTitle);
+  setPageTitle(pageTitle);
+};
+
+export const useNavigationStack = () => {
   const router = useRouter();
   const [history, setHistory] = useState<INavigationItem[]>(
     JSON.parse(TemporayStorageService.getString(key) || "[]")
   );
+  const pageTitle = usePageTitleStore((store) => store.pageTitle);
   useEffect(() => {
-    console.log(history);
     TemporayStorageService.setString(key, JSON.stringify(history));
   }, [history]);
   return useMemo(
@@ -32,7 +52,7 @@ export const useNavigationStack = (title: string) => {
         setHistory([
           ...history,
           {
-            title,
+            title: pageTitle,
             link: router.asPath,
           },
         ]);

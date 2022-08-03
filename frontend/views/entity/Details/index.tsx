@@ -9,7 +9,10 @@ import {
 import { TitleLang } from "@gothicgeeks/shared";
 import { useEntityReferenceFields } from "frontend/hooks/entity/entity.store";
 import { useEntitiesCount } from "frontend/hooks/data/data.store";
-import { useNavigationStack } from "frontend/lib/routing/useGoBackContext";
+import {
+  useNavigationStack,
+  useSetPageTitle,
+} from "frontend/lib/routing/useGoBackContext";
 import { AppLayout } from "../../../_layouts/app";
 import { NAVIGATION_LINKS } from "../../../lib/routing/links";
 import {
@@ -51,23 +54,11 @@ export function EntityDetails() {
   const { isLoading, error } = referenceFields;
 
   const viewState = useViewStateMachine(isLoading, error, "details");
-  const { canGoBack, goBack } = useNavigationStack("Entity Details");
+  const { canGoBack, goBack } = useNavigationStack();
+  useSetPageTitle(`${entityDiction.singular} Details`);
 
   return (
-    <AppLayout
-      titleNeedsContext
-      breadcrumbs={[
-        {
-          label: entityDiction.plural,
-          value: NAVIGATION_LINKS.ENTITY.TABLE(entity),
-        },
-        {
-          label: "Details",
-          value: NAVIGATION_LINKS.ENTITY.DETAILS(entity, id),
-        },
-      ]}
-      actionItems={actionItems}
-    >
+    <AppLayout actionItems={actionItems}>
       <SectionCenter>
         <SectionBox
           title={TitleLang.details(entityDiction.singular)}

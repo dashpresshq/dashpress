@@ -8,6 +8,7 @@ import {
 } from "@gothicgeeks/design-system";
 import { SLUG_LOADING_VALUE, useRouteParam } from "@gothicgeeks/shared";
 import { useChangeRouterParam } from "frontend/lib/routing/useChangeRouterParam";
+import { useSetPageTitle } from "frontend/lib/routing/useGoBackContext";
 import {
   useEntityFieldLabels,
   useEntityFieldSelections,
@@ -15,7 +16,6 @@ import {
   useEntityFieldValidations,
   useEntitySlug,
 } from "../../../../hooks/entity/entity.config";
-import { NAVIGATION_LINKS } from "../../../../lib/routing/links";
 import { BaseEntitySettingsLayout } from "../_Base";
 import {
   ENTITY_FIELDS_ENDPOINT,
@@ -89,6 +89,8 @@ export function EntityFieldsSettings() {
     }
   );
 
+  useSetPageTitle("Field Settings");
+
   const sharedLoadingState =
     entityFieldLists.isLoading ||
     entity === SLUG_LOADING_VALUE ||
@@ -97,12 +99,7 @@ export function EntityFieldsSettings() {
     entityFieldTypesMapIsLoading;
 
   return (
-    <BaseEntitySettingsLayout
-      menuItem={{
-        link: NAVIGATION_LINKS.ENTITY.CONFIG.FIELDS(entity),
-        name: "Fields Settings",
-      }}
-    >
+    <BaseEntitySettingsLayout>
       <ErrorAlert
         message={
           entityFieldLists.error ||

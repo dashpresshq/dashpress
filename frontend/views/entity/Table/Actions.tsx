@@ -1,12 +1,8 @@
 import { DeleteButton, SoftButton, Stack } from "@gothicgeeks/design-system";
 import { useEntityDataDeletionMutation } from "frontend/hooks/data/data.store";
-import {
-  useEntityDiction,
-  useEntitySlug,
-} from "frontend/hooks/entity/entity.config";
+import { useEntitySlug } from "frontend/hooks/entity/entity.config";
 import { useEntityIdField } from "frontend/hooks/entity/entity.store";
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
-import { useNavigationStack } from "frontend/lib/routing/useGoBackContext";
 import { IEntityCrudSettings } from "shared/configuration.constants";
 
 interface IProps {
@@ -20,8 +16,6 @@ export function TableActions({ crudSettings, row }: IProps) {
   const entity = useEntitySlug();
   const idField = useEntityIdField(entity);
   const entityDataDeletionMutation = useEntityDataDeletionMutation(entity);
-  const entityDiction = useEntityDiction(entity);
-  const { pushToStack } = useNavigationStack(entityDiction.plural);
 
   const idValue = row.original[idField.data || "id"] as string;
   return (
@@ -30,9 +24,6 @@ export function TableActions({ crudSettings, row }: IProps) {
         <div>
           <SoftButton
             action={NAVIGATION_LINKS.ENTITY.DETAILS(entity, idValue)}
-            secondaryAction={() => {
-              pushToStack();
-            }}
             label="Details"
             color="primary"
             justIcon
@@ -44,9 +35,6 @@ export function TableActions({ crudSettings, row }: IProps) {
         <div>
           <SoftButton
             action={NAVIGATION_LINKS.ENTITY.UPDATE(entity, idValue)}
-            secondaryAction={() => {
-              pushToStack();
-            }}
             label="Edit"
             icon="edit"
             color="theme"

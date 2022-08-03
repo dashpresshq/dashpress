@@ -6,9 +6,11 @@ import {
   FormSkeletonSchema,
 } from "@gothicgeeks/design-system";
 import { SLUG_LOADING_VALUE, TitleLang } from "@gothicgeeks/shared";
-import { useNavigationStack } from "frontend/lib/routing/useGoBackContext";
+import {
+  useNavigationStack,
+  useSetPageTitle,
+} from "frontend/lib/routing/useGoBackContext";
 import { AppLayout } from "../../../_layouts/app";
-import { NAVIGATION_LINKS } from "../../../lib/routing/links";
 import {
   useEntityDiction,
   useEntityFieldLabels,
@@ -63,20 +65,11 @@ export function EntityCreate() {
     entityFieldTypesMap.isLoading;
 
   const viewState = useViewStateMachine(isLoading, error, "create");
-  const { canGoBack, goBack } = useNavigationStack("Create Entity");
+  const { canGoBack, goBack } = useNavigationStack();
+  useSetPageTitle(`Create ${entityDiction.plural}`);
 
   return (
-    <AppLayout
-      breadcrumbs={[
-        {
-          label: entityDiction.plural,
-          value: NAVIGATION_LINKS.ENTITY.TABLE(entity),
-        },
-        { label: "Create", value: NAVIGATION_LINKS.ENTITY.CREATE(entity) },
-      ]}
-      titleNeedsContext
-      actionItems={actionItems}
-    >
+    <AppLayout actionItems={actionItems}>
       <SectionCenter>
         <SectionBox
           title={TitleLang.create(entityDiction.singular)}

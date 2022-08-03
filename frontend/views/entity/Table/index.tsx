@@ -9,6 +9,7 @@ import {
 } from "@gothicgeeks/design-system";
 import { IBEPaginatedDataState, usePaginatedData } from "@gothicgeeks/shared";
 import { useState } from "react";
+import { useSetPageTitle } from "frontend/lib/routing/useGoBackContext";
 import { AppLayout } from "../../../_layouts/app";
 import { NAVIGATION_LINKS } from "../../../lib/routing/links";
 import {
@@ -77,16 +78,10 @@ export function EntityTable() {
 
   const viewState = useViewStateMachine(isLoading, error);
 
+  useSetPageTitle(entityDiction.plural);
+
   return (
-    <AppLayout
-      breadcrumbs={[
-        {
-          label: entityDiction.plural,
-          value: NAVIGATION_LINKS.ENTITY.TABLE(entity),
-        },
-      ]}
-      actionItems={actionItems}
-    >
+    <AppLayout actionItems={actionItems}>
       {viewState.type === "loading" && <ComponentIsLoading />}
       {viewState.type === "error" && <ErrorAlert message={viewState.message} />}
       {viewState.type === "render" && (

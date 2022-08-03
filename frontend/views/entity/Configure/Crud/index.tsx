@@ -5,13 +5,13 @@ import { ENTITY_TABLE_PATH } from "frontend/hooks/data/data.store";
 import { SLUG_LOADING_VALUE, useRouteParam } from "@gothicgeeks/shared";
 import { useChangeRouterParam } from "frontend/lib/routing/useChangeRouterParam";
 import { IEntityCrudSettings } from "shared/configuration.constants";
+import { useSetPageTitle } from "frontend/lib/routing/useGoBackContext";
 import {
   useEntityCrudSettings,
   useEntityFieldLabels,
   useEntitySlug,
   useSelectedEntityColumns,
 } from "../../../../hooks/entity/entity.config";
-import { NAVIGATION_LINKS } from "../../../../lib/routing/links";
 import { BaseEntitySettingsLayout } from "../_Base";
 import { useUpsertConfigurationMutation } from "../../../../hooks/configuration/configration.store";
 import { useEntityFields } from "../../../../hooks/entity/entity.store";
@@ -188,15 +188,10 @@ export function useEntityCrudView() {
 export function EntityCrudSettings() {
   const tabFromUrl = useRouteParam("tab");
   const changeTabParam = useChangeRouterParam("tab");
-  const entity = useEntitySlug();
   const entityCrudView = useEntityCrudView();
+  useSetPageTitle("CRUD Settings");
   return (
-    <BaseEntitySettingsLayout
-      menuItem={{
-        link: NAVIGATION_LINKS.ENTITY.CONFIG.CRUD(entity),
-        name: "CRUD Settings",
-      }}
-    >
+    <BaseEntitySettingsLayout>
       <SectionBox title="CRUD Settings">
         <Tabs
           currentTab={tabFromUrl}

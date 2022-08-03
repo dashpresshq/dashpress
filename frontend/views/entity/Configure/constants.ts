@@ -1,4 +1,3 @@
-import { useNavigationStack } from "frontend/lib/routing/useGoBackContext";
 import { useRouter } from "next/router";
 import { Icon, Save, Settings } from "react-feather";
 import { useEntitySlug } from "../../../hooks/entity/entity.config";
@@ -94,16 +93,12 @@ const ENTITY_ACTION_BAG: Record<
 export const useEntityActionMenuItems = (actionTypes: EntityActionTypes[]) => {
   const slugEntity = useEntitySlug();
   const router = useRouter();
-  const { pushToStack } = useNavigationStack(
-    `Entity CREATE/UPDATE/DETAILS/TABLE`
-  );
 
   return actionTypes.map((actionType) => {
     const { link, ...actionBag } = ENTITY_ACTION_BAG[actionType];
     return {
       ...actionBag,
       onClick: () => {
-        pushToStack();
         router.push(link(slugEntity));
       },
     };

@@ -7,7 +7,6 @@ import {
   Stack,
   Text,
 } from "@gothicgeeks/design-system";
-import { IValueLabel } from "@gothicgeeks/design-system/dist/types";
 import React, { ReactNode, useEffect, useState } from "react";
 import {
   Icon,
@@ -21,15 +20,16 @@ import {
 import Head from "next/head";
 import { AuthService } from "@gothicgeeks/shared";
 import { useRouter } from "next/router";
-import { useNavigationStack } from "frontend/lib/routing/useGoBackContext";
+import {
+  useNavigationStack,
+  usePageTitleStore,
+} from "frontend/lib/routing/useGoBackContext";
 import { useEntitiesMenuItems } from "../../hooks/entity/entity.store";
 import { useSiteConfig } from "../../hooks/app/site.config";
 import { NAVIGATION_LINKS } from "../../lib/routing/links";
 
 interface IProps {
   children: ReactNode;
-  breadcrumbs: IValueLabel[];
-  titleNeedsContext?: true;
   actionItems?: {
     label: string;
     onClick: () => void;
@@ -56,28 +56,24 @@ const useUserAuthCheck = () => {
   return isChecking;
 };
 
-export function AppLayout({
-  children,
-  breadcrumbs,
-  titleNeedsContext,
-  actionItems = [],
-}: IProps) {
+export function AppLayout({ children, actionItems = [] }: IProps) {
   const entitiesMenuItems = useEntitiesMenuItems();
   const siteConfig = useSiteConfig();
   const isChecking = useUserAuthCheck();
-  const { history } = useNavigationStack("Foo");
-  const homedBreadcrumb = [
-    { label: "Home", value: "/" },
-    ...history.map((historyItem) => ({
-      value: historyItem.link,
-      label: historyItem.title,
-    })),
-  ];
-  console.log(breadcrumbs);
-  const title =
-    (titleNeedsContext
-      ? `${homedBreadcrumb[homedBreadcrumb.length - 2]?.label} - `
-      : "") + (homedBreadcrumb[homedBreadcrumb.length - 1]?.label || "");
+  const { history, pushToStack } = useNavigationStack();
+  const router = useRouter();
+  const pageTitle = usePageTitleStore((store) => store.pageTitle);
+
+  useEffect(() => {
+    pushToStack();
+  }, [router.asPath]);
+
+  const homedBreadcrumb = history.map((historyItem) => ({
+    value: historyItem.link,
+    label: historyItem.title,
+  }));
+
+  homedBreadcrumb.push({ value: "", label: pageTitle });
 
   if (isChecking) {
     return <ComponentIsLoading />;
@@ -128,12 +124,12 @@ export function AppLayout({
     >
       <Head>
         <title>
-          {title} - {siteConfig.name}
+          {pageTitle} - {siteConfig.name}
         </title>
       </Head>
       <Stack justify="space-between" align="center">
         <div>
-          <Text>{title}</Text>
+          <Text>{pageTitle}</Text>
           <Breadcrumbs
             items={homedBreadcrumb}
             onItemClick={(item) => {

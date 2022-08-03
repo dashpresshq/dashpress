@@ -13,8 +13,6 @@ import {
   useEntityReferenceFields,
   useEntityFields,
 } from "frontend/hooks/entity/entity.store";
-import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
-import Link from "next/link";
 import { FIELD_TYPES_CONFIG_MAP } from "shared/validations";
 import { StringUtils } from "@gothicgeeks/shared";
 import { ITableColumn } from "@gothicgeeks/design-system";
@@ -101,12 +99,12 @@ export const useTableColumns = () => {
         }
         if (isId) {
           return (
-            <Link
-              href={NAVIGATION_LINKS.ENTITY.DETAILS(entity, value as string)}
-              passHref
-            >
-              {value as string}
-            </Link>
+            // <Link
+            //   href={NAVIGATION_LINKS.ENTITY.DETAILS(entity, value as string)}
+            //   passHref
+            // >
+            <span>{value as string}</span>
+            // </Link>
           );
         }
 

@@ -7,11 +7,9 @@ import {
   Spacer,
 } from "@gothicgeeks/design-system";
 import { useNavigationStack } from "frontend/lib/routing/useGoBackContext";
+import { useRouter } from "next/router";
 import { ReactNode } from "react";
-import {
-  useEntityDiction,
-  useEntitySlug,
-} from "../../../hooks/entity/entity.config";
+import { useEntitySlug } from "../../../hooks/entity/entity.config";
 import { NAVIGATION_LINKS } from "../../../lib/routing/links";
 import { AppLayout } from "../../../_layouts/app";
 import {
@@ -21,25 +19,14 @@ import {
 
 interface IProps {
   children: ReactNode;
-  menuItem: { link: string; name: string };
 }
 
-export function BaseEntitySettingsLayout({ children, menuItem }: IProps) {
+export function BaseEntitySettingsLayout({ children }: IProps) {
   const entity = useEntitySlug();
-  const entityDiction = useEntityDiction();
-  const { canGoBack, goBack } = useNavigationStack(menuItem.name);
-
+  const { canGoBack, goBack } = useNavigationStack();
+  const router = useRouter();
   return (
-    <AppLayout
-      titleNeedsContext
-      breadcrumbs={[
-        {
-          label: entityDiction.plural,
-          value: NAVIGATION_LINKS.ENTITY.TABLE(entity),
-        },
-        { label: menuItem.name, value: menuItem.link },
-      ]}
-    >
+    <AppLayout>
       {canGoBack() && (
         <>
           <SoftButton
@@ -89,7 +76,7 @@ export function BaseEntitySettingsLayout({ children, menuItem }: IProps) {
               // Computed Table fields
               // Computed Details fields
             ]}
-            currentMenuItem={menuItem.link}
+            currentMenuItem={router.asPath}
           />
         </SectionLeft>
         <SectionRight>{children}</SectionRight>

@@ -6,9 +6,11 @@ import {
   FormSkeletonSchema,
 } from "@gothicgeeks/design-system";
 import { SLUG_LOADING_VALUE, TitleLang } from "@gothicgeeks/shared";
-import { useNavigationStack } from "frontend/lib/routing/useGoBackContext";
+import {
+  useNavigationStack,
+  useSetPageTitle,
+} from "frontend/lib/routing/useGoBackContext";
 import { AppLayout } from "../../../_layouts/app";
-import { NAVIGATION_LINKS } from "../../../lib/routing/links";
 import {
   useEntityDiction,
   useEntityFieldLabels,
@@ -73,24 +75,11 @@ export function EntityUpdate() {
     entityFields.isLoading;
 
   const viewState = useViewStateMachine(isLoading, error, "update");
-  const { canGoBack, goBack } = useNavigationStack("Update Entity");
+  const { canGoBack, goBack } = useNavigationStack();
+  useSetPageTitle(`Update ${entityDiction.plural}`);
 
   return (
-    <AppLayout
-      titleNeedsContext
-      breadcrumbs={[
-        {
-          label: entityDiction.plural,
-          value: NAVIGATION_LINKS.ENTITY.TABLE(entity),
-        },
-        {
-          label: entityDiction.singular,
-          value: NAVIGATION_LINKS.ENTITY.DETAILS(entity, id),
-        },
-        { label: "Update", value: NAVIGATION_LINKS.ENTITY.UPDATE(entity, id) },
-      ]}
-      actionItems={actionItems}
-    >
+    <AppLayout actionItems={actionItems}>
       <SectionCenter>
         <SectionBox
           title={TitleLang.edit(entityDiction.singular)}

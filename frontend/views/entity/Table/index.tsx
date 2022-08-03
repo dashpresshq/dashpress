@@ -9,7 +9,7 @@ import {
 } from "@gothicgeeks/design-system";
 import { IBEPaginatedDataState, usePaginatedData } from "@gothicgeeks/shared";
 import { useState } from "react";
-import { useSetPageTitle } from "frontend/lib/routing/useGoBackContext";
+import { useSetPageTitle } from "frontend/lib/routing";
 import { AppLayout } from "../../../_layouts/app";
 import { NAVIGATION_LINKS } from "../../../lib/routing/links";
 import {

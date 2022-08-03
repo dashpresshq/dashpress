@@ -6,7 +6,7 @@ import {
   SoftButton,
   Spacer,
 } from "@gothicgeeks/design-system";
-import { useNavigationStack } from "frontend/lib/routing/useGoBackContext";
+import { useNavigationStack } from "frontend/lib/routing";
 import { useRouter } from "next/router";
 import { ReactNode } from "react";
 import { useEntitySlug } from "../../../hooks/entity/entity.config";

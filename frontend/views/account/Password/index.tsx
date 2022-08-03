@@ -1,5 +1,5 @@
 import { SectionBox } from "@gothicgeeks/design-system";
-import { useSetPageTitle } from "frontend/lib/routing/useGoBackContext";
+import { useSetPageTitle } from "frontend/lib/routing";
 import { useChangePasswordMutation } from "../account.store";
 
 import { BaseAccountLayout } from "../_Base";

@@ -10,7 +10,7 @@ import { useMutation } from "react-query";
 import { AuthLayout } from "frontend/_layouts/guest";
 import { ISuccessfullAuthenticationResponse } from "shared/types";
 import { useRouter } from "next/router";
-import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
+import { NAVIGATION_LINKS } from "frontend/lib/routing";
 import { useSetupCheck } from "frontend/hooks/setup/setup.store";
 import { ComponentIsLoading } from "@gothicgeeks/design-system";
 import { SignInForm, ISignInForm } from "./Form";

@@ -1,7 +1,6 @@
 import { useRouter } from "next/router";
 import { useEffect, useMemo, useState } from "react";
-
-import { createStore } from "@gothicgeeks/shared";
+import { usePageTitleStore } from "./usePageTItle";
 
 export const TemporayStorageService = {
   getString: (path: string): string | null =>
@@ -18,24 +17,6 @@ interface INavigationItem {
   title: string;
 }
 
-type IStore = {
-  pageTitle?: string;
-  setPageTitle: (pageTitle: string) => void;
-};
-
-export const usePageTitleStore = createStore<IStore>((set) => ({
-  pageTitle: "",
-  setPageTitle: (pageTitle: string) =>
-    set(() => ({
-      pageTitle,
-    })),
-}));
-
-export const useSetPageTitle = (pageTitle: string) => {
-  const setPageTitle = usePageTitleStore((store) => store.setPageTitle);
-  setPageTitle(pageTitle);
-};
-
 export const useNavigationStack = () => {
   const router = useRouter();
   const [history, setHistory] = useState<INavigationItem[]>(
@@ -47,6 +28,9 @@ export const useNavigationStack = () => {
   }, [history]);
   return useMemo(
     () => ({
+      clear: () => {
+        setHistory([]);
+      },
       history,
       pushToStack: () => {
         setHistory([

@@ -4,7 +4,7 @@ import {
   SectionBox,
 } from "@gothicgeeks/design-system";
 import { SLUG_LOADING_VALUE } from "@gothicgeeks/shared";
-import { useSetPageTitle } from "frontend/lib/routing/useGoBackContext";
+import { useSetPageTitle } from "frontend/lib/routing";
 import {
   useEntityDiction,
   useEntitySlug,

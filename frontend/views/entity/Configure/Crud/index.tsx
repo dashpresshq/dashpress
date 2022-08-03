@@ -3,9 +3,8 @@ import noop from "lodash/noop";
 import { useEffect, useState } from "react";
 import { ENTITY_TABLE_PATH } from "frontend/hooks/data/data.store";
 import { SLUG_LOADING_VALUE, useRouteParam } from "@gothicgeeks/shared";
-import { useChangeRouterParam } from "frontend/lib/routing/useChangeRouterParam";
 import { IEntityCrudSettings } from "shared/configuration.constants";
-import { useSetPageTitle } from "frontend/lib/routing/useGoBackContext";
+import { useSetPageTitle, useChangeRouterParam } from "frontend/lib/routing";
 import {
   useEntityCrudSettings,
   useEntityFieldLabels,

@@ -11,7 +11,7 @@ import * as StyledGrid from "styled-bootstrap-grid";
 import { useRouter } from "next/router";
 import { HardDrive } from "react-feather";
 import { useEntitiesCount } from "frontend/hooks/data/data.store";
-import { useSetPageTitle } from "frontend/lib/routing/useGoBackContext";
+import { useSetPageTitle } from "frontend/lib/routing";
 import { useEntitiesMenuItems } from "../../hooks/entity/entity.store";
 import { AppLayout } from "../../_layouts/app";
 import { NAVIGATION_LINKS } from "../../lib/routing/links";

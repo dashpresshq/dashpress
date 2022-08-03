@@ -4,7 +4,7 @@ import {
   FormSkeletonSchema,
   SectionBox,
 } from "@gothicgeeks/design-system";
-import { useSetPageTitle } from "frontend/lib/routing/useGoBackContext";
+import { useSetPageTitle } from "frontend/lib/routing";
 import { useMyProfile, useUpdateProfileMutation } from "../account.store";
 import { BaseAccountLayout } from "../_Base";
 import { UpdateProfileForm } from "./Form";

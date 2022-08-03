@@ -1,5 +1,5 @@
 import { ErrorAlert, SectionBox } from "@gothicgeeks/design-system";
-import { useSetPageTitle } from "frontend/lib/routing/useGoBackContext";
+import { useSetPageTitle } from "frontend/lib/routing";
 import { BaseEntitySettingsLayout } from "./_Base";
 
 export function EntityActionsSettings() {

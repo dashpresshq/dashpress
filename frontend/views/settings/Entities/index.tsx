@@ -5,8 +5,7 @@ import {
   Tabs,
 } from "@gothicgeeks/design-system";
 import { useRouteParam } from "@gothicgeeks/shared";
-import { useChangeRouterParam } from "frontend/lib/routing/useChangeRouterParam";
-import { useSetPageTitle } from "frontend/lib/routing/useGoBackContext";
+import { useSetPageTitle, useChangeRouterParam } from "frontend/lib/routing";
 import {
   useAppConfiguration,
   useUpsertConfigurationMutation,

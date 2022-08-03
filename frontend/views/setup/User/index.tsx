@@ -5,7 +5,7 @@ import {
   useSetupUserMutation,
 } from "frontend/hooks/setup/setup.store";
 import { ComponentIsLoading } from "@gothicgeeks/design-system";
-import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
+import { NAVIGATION_LINKS } from "frontend/lib/routing";
 import { UserSetupForm } from "./Form";
 
 export function UserSetup() {

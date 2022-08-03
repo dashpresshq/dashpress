@@ -3,7 +3,7 @@ import {
   useEntityDiction,
   useEntitySlug,
 } from "frontend/hooks/entity/entity.config";
-import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
+import { NAVIGATION_LINKS } from "frontend/lib/routing";
 import noop from "lodash/noop";
 import { useRouter } from "next/router";
 import { Download, Plus } from "react-feather";

@@ -9,10 +9,7 @@ import {
 import { TitleLang } from "@gothicgeeks/shared";
 import { useEntityReferenceFields } from "frontend/hooks/entity/entity.store";
 import { useEntitiesCount } from "frontend/hooks/data/data.store";
-import {
-  useNavigationStack,
-  useSetPageTitle,
-} from "frontend/lib/routing/useGoBackContext";
+import { useNavigationStack, useSetPageTitle } from "frontend/lib/routing";
 import { AppLayout } from "../../../_layouts/app";
 import { NAVIGATION_LINKS } from "../../../lib/routing/links";
 import {

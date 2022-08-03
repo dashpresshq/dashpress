@@ -7,8 +7,7 @@ import {
   Text,
 } from "@gothicgeeks/design-system";
 import { SLUG_LOADING_VALUE, useRouteParam } from "@gothicgeeks/shared";
-import { useChangeRouterParam } from "frontend/lib/routing/useChangeRouterParam";
-import { useSetPageTitle } from "frontend/lib/routing/useGoBackContext";
+import { useSetPageTitle, useChangeRouterParam } from "frontend/lib/routing";
 import {
   useEntityFieldLabels,
   useEntityFieldSelections,

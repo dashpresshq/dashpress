@@ -6,10 +6,7 @@ import {
   FormSkeletonSchema,
 } from "@gothicgeeks/design-system";
 import { SLUG_LOADING_VALUE, TitleLang } from "@gothicgeeks/shared";
-import {
-  useNavigationStack,
-  useSetPageTitle,
-} from "frontend/lib/routing/useGoBackContext";
+import { useNavigationStack, useSetPageTitle } from "frontend/lib/routing";
 import { AppLayout } from "../../../_layouts/app";
 import {
   useEntityDiction,

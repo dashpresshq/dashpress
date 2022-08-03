@@ -6,7 +6,7 @@ import {
 } from "@gothicgeeks/design-system";
 import { useEntityFields } from "frontend/hooks/entity/entity.store";
 import { SLUG_LOADING_VALUE } from "@gothicgeeks/shared";
-import { useSetPageTitle } from "frontend/lib/routing/useGoBackContext";
+import { useSetPageTitle } from "frontend/lib/routing";
 import { useEntitySlug } from "../../../../hooks/entity/entity.config";
 import { BaseEntitySettingsLayout } from "../_Base";
 import {

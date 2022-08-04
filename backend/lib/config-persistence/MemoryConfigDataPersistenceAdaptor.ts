@@ -7,15 +7,14 @@ export class MemoryConfigDataPersistenceAdaptor<
 > extends AbstractConfigDataPersistenceService<T> {
   private data: Record<string, Record<string, T>> = {};
 
-  async setup() {
-    this.data = { ...this.data, [this.configDomain]: {} };
-  }
-
   constructor(configDomain: ConfigDomain, configService: ConfigService) {
     super(configDomain, configService);
   }
 
   private getDomainData() {
+    if (!this.data[this.configDomain]) {
+      this.data = { ...this.data, [this.configDomain]: {} };
+    }
     return this.data[this.configDomain];
   }
 

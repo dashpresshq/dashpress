@@ -9,8 +9,6 @@ export class RedisConfigDataPersistenceAdaptor<
 > extends AbstractConfigDataPersistenceService<T> {
   private redisConnection: RedisClientType;
 
-  async setup() {}
-
   async getRedisInstance() {
     if (this.redisConnection) {
       return this.redisConnection;

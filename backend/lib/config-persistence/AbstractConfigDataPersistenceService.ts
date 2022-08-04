@@ -11,8 +11,6 @@ export abstract class AbstractConfigDataPersistenceService<T> {
     this.configService = configService;
   }
 
-  public abstract setup(): Promise<void>;
-
   // Might need to introduce second key
   public abstract getItem(key: string): Promise<T | undefined>;
 

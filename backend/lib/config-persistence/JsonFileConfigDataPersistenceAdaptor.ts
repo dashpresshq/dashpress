@@ -8,10 +8,6 @@ import { ConfigDomain } from "./types";
 export class JsonFileConfigDataPersistenceAdaptor<
   T
 > extends AbstractConfigDataPersistenceService<T> {
-  async setup() {
-    // TODO create the JSON file
-  }
-
   constructor(configDomain: ConfigDomain, configService: ConfigService) {
     super(configDomain, configService);
   }

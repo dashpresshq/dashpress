@@ -40,8 +40,10 @@ export function EntityDetails() {
   const getEntityFieldLabels = useEntityFieldLabels();
   // const entityCrudSettings = useEntityCrudSettings();
 
-  const relatedEntities = (referenceFields.data?.toMany || []).map(
-    (relatedEntity) => ({ name: relatedEntity })
+  const relatedEntities = (referenceFields.data || []).map(
+    ({ table: referenceTable }) => ({
+      name: referenceTable,
+    })
   );
 
   const relatedEntitiesCounts = useEntitiesCount(

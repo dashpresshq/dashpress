@@ -1,5 +1,5 @@
 import { dataNotFoundMessage, useApi } from "@gothicgeeks/shared";
-import { IEntityField } from "shared/types";
+import { IEntityField, IEntityRelation } from "shared/types";
 import { ILabelValue } from "../../../types";
 import { useEntityDictionPlurals } from "./entity.queries";
 
@@ -52,13 +52,23 @@ export const useEntityFieldLists = (entity: string) =>
   });
 
 export const useEntityReferenceFields = (entity: string) =>
-  useApi<{ toMany: string[]; toOne: Record<string, string> }>(
-    ENTITY_RELATIONS_ENDPOINT(entity),
-    {
-      errorMessage: dataNotFoundMessage("Entity Reference Fields"),
-      enabled: isEntityEnabled(entity),
-    }
-  );
+  useApi<IEntityRelation[]>(ENTITY_RELATIONS_ENDPOINT(entity), {
+    errorMessage: dataNotFoundMessage("Entity Reference Fields"),
+    enabled: isEntityEnabled(entity),
+  });
+
+export const useEntityToOneReferenceFields = (entity: string) =>
+  useApi<Record<string, string>>(ENTITY_RELATIONS_ENDPOINT(entity), {
+    errorMessage: dataNotFoundMessage("Entity Reference Fields"),
+    enabled: isEntityEnabled(entity),
+    selector: (input: IEntityRelation[]) => {
+      return Object.fromEntries(
+        input
+          .filter(({ type }) => type === "toOne")
+          .map(({ field, table }) => [field, table])
+      );
+    },
+  });
 
 export const useEntityIdField = (entity: string) =>
   useApi<string>(ENTITY_FIELDS_ENDPOINT(entity), {

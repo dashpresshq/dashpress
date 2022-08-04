@@ -8,7 +8,7 @@ export interface IEntityField {
   enumeration?: string[];
 }
 
-export interface IEntityRelation {
+interface IDBSchemaRelation {
   table: string;
   relationType: string;
   joinColumnOptions?: {
@@ -21,7 +21,7 @@ export interface IDBSchema {
   name: string;
   fields: IEntityField[];
   uniqueFields: string[][];
-  relations: IEntityRelation[];
+  relations: IDBSchemaRelation[];
 }
 
 export interface ISuccessfullAuthenticationResponse {
@@ -50,3 +50,9 @@ export type IDBCrendentials = {
   port: number;
   ssl: boolean;
 };
+
+export interface IEntityRelation {
+  table: string;
+  field?: string;
+  type: "toOne" | "toMany";
+}

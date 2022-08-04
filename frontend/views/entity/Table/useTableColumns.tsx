@@ -10,8 +10,8 @@ import {
 } from "frontend/hooks/entity/entity.config";
 import {
   useEntityIdField,
-  useEntityReferenceFields,
   useEntityFields,
+  useEntityToOneReferenceFields,
 } from "frontend/hooks/entity/entity.store";
 import { FIELD_TYPES_CONFIG_MAP } from "shared/validations";
 import { StringUtils } from "@gothicgeeks/shared";
@@ -57,7 +57,7 @@ export const useTableColumns = () => {
   const getEntityFieldLabels = useEntityFieldLabels();
   const entityCrudSettings = useEntityCrudSettings();
   const entityFields = useEntityFields(entity);
-  const entityReferenceFields = useEntityReferenceFields(entity);
+  const entityToOneReferenceFields = useEntityToOneReferenceFields(entity);
   const hiddenTableColumns = useSelectedEntityColumns(
     "hidden_entity_table_columns"
   );
@@ -77,7 +77,7 @@ export const useTableColumns = () => {
 
   // A Fix for the Cell that is memoized internall and the value for this is not getting updated
   // so we need to wait for things to load before we render it
-  if (entityReferenceFields.isLoading) {
+  if (entityToOneReferenceFields.isLoading) {
     return [];
   }
 
@@ -108,10 +108,10 @@ export const useTableColumns = () => {
           );
         }
 
-        if (entityReferenceFields.data?.toOne[name]) {
+        if (entityToOneReferenceFields.data?.[name]) {
           return (
             <ReferenceComponent
-              entity={entityReferenceFields.data?.toOne[name]}
+              entity={entityToOneReferenceFields.data?.[name]}
               id={value as string}
               displayFrom="table"
             />

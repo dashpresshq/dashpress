@@ -1,4 +1,4 @@
-import { IDBSchema, IEntityField, IEntityRelation } from "shared/types";
+import { IDBSchema, IEntityField } from "shared/types";
 import { SchemasService, schemasService } from "../schema/schema.service";
 
 export class EntitiesService {
@@ -17,7 +17,7 @@ export class EntitiesService {
     return (await this.getEntityFromSchema(entity)).fields;
   }
 
-  async getEntityRelations(entity: string): Promise<IEntityRelation[]> {
+  async getEntityRelations(entity: string): Promise<IDBSchema["relations"]> {
     return (await this.getEntityFromSchema(entity)).relations;
   }
 

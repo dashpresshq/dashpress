@@ -1,5 +1,5 @@
 import { IValueLabel } from "@gothicgeeks/design-system/dist/types";
-import { IEntityField } from "shared/types";
+import { IEntityField, IEntityRelation } from "shared/types";
 import {
   ConfigurationService,
   configurationService,
@@ -36,9 +36,7 @@ export class EntitiesController {
     return await this._entitiesService.getAllEntities();
   }
 
-  async getEntityRelations(
-    entity: string
-  ): Promise<{ toMany: string[]; toOne: Record<string, string> }> {
+  async getEntityRelations(entity: string): Promise<IEntityRelation[]> {
     const [entityRelations, disabledEntities] = await Promise.all([
       this._entitiesService.getEntityRelations(entity),
       this._configurationService.show<string[]>("disabled_entities"),
@@ -48,18 +46,16 @@ export class EntitiesController {
       ({ table }) => !disabledEntities.includes(table)
     );
 
-    return {
-      toOne: Object.fromEntries(
-        allowedEntityRelation
-          .filter((relation) => relation?.joinColumnOptions?.[0].name)
-          .map((relation) => {
-            return [relation?.joinColumnOptions?.[0].name, relation.table];
-          })
-      ),
-      toMany: allowedEntityRelation
-        .filter((relation) => !relation?.joinColumnOptions?.[0].name)
-        .map((relation) => relation.table),
-    };
+    return allowedEntityRelation.map((relation) => {
+      const type = relation?.joinColumnOptions?.[0].name ? "toOne" : "toMany";
+
+      return {
+        table: relation.table,
+        type,
+        field:
+          type === "toOne" ? relation?.joinColumnOptions?.[0].name : undefined,
+      };
+    });
   }
 
   async getEntityFields(entity: string): Promise<IEntityField[]> {

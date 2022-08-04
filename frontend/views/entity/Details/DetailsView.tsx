@@ -13,8 +13,8 @@ import {
 } from "../../../hooks/entity/entity.config";
 import { useEntityDataDetails } from "../../../hooks/data/data.store";
 import {
-  useEntityReferenceFields,
   useEntityFields,
+  useEntityToOneReferenceFields,
 } from "../../../hooks/entity/entity.store";
 import { fitlerOutHiddenScalarColumns } from "../utils";
 import { OptionTag } from "../OptionTag";
@@ -37,18 +37,18 @@ export function EntityDetailsView({
     entity
   );
   const getEntityFieldLabels = useEntityFieldLabels(entity);
-  const entityReferenceFields = useEntityReferenceFields(entity);
+  const entityToOneReferenceFields = useEntityToOneReferenceFields(entity);
   const entityFieldSelections = useEntityFieldSelections(entity);
 
   const error =
     dataDetails.error ||
     hiddenDetailsColumns.error ||
     entityFields.error ||
-    entityReferenceFields.error;
+    entityToOneReferenceFields.error;
 
   const isLoading =
     dataDetails.isLoading ||
-    entityReferenceFields.isLoading ||
+    entityToOneReferenceFields.isLoading ||
     entity === SLUG_LOADING_VALUE ||
     entityFields.isLoading ||
     hiddenDetailsColumns.isLoading;
@@ -72,10 +72,10 @@ export function EntityDetailsView({
 
               let contentToRender = <Text>{value}</Text>;
 
-              if (entityReferenceFields.data?.toOne[name]) {
+              if (entityToOneReferenceFields.data?.[name]) {
                 contentToRender = (
                   <ReferenceComponent
-                    entity={entityReferenceFields.data?.toOne[name]}
+                    entity={entityToOneReferenceFields.data?.[name]}
                     id={value as string}
                     displayFrom={displayFrom}
                   />

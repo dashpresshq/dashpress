@@ -1,4 +1,5 @@
 import { createStore } from "@gothicgeeks/shared";
+import { useEffect } from "react";
 
 type IStore = {
   pageTitle?: string;
@@ -18,5 +19,7 @@ export const usePageTitleStore = createStore<IStore>((set) => ({
 
 export const useSetPageTitle = (pageTitle: string, viewKey: string) => {
   const setPageTitle = usePageTitleStore((store) => store.setPageTitle);
-  setPageTitle(pageTitle, viewKey);
+  useEffect(() => {
+    setPageTitle(pageTitle, viewKey);
+  }, [pageTitle, viewKey]);
 };

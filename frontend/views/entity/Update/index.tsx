@@ -36,6 +36,7 @@ export function EntityUpdate() {
   const entity = useEntitySlug();
   const id = useEntityId();
   const entityDiction = useEntityDiction();
+  useSetPageTitle(`Update ${entityDiction.plural}`, "ENTITIES_DETAILS");
   const entityFields = useEntityFields(entity);
   const entityDataUpdationMutation = useEntityDataUpdationMutation(entity, id);
   const dataDetails = useEntityDataDetails(entity, id);
@@ -73,7 +74,6 @@ export function EntityUpdate() {
 
   const viewState = useViewStateMachine(isLoading, error, "update");
   const { canGoBack, goBack } = useNavigationStack();
-  useSetPageTitle(`Update ${entityDiction.plural}`, "ENTITIES_TABLE");
 
   return (
     <AppLayout actionItems={actionItems}>

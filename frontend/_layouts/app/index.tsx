@@ -53,6 +53,7 @@ export function AppLayout({ children, actionItems = [] }: IProps) {
   const router = useRouter();
   const pageTitle = usePageTitleStore((store) => store.pageTitle);
   const selectionViews = useSelectionViews();
+
   useEffect(() => {
     pushToStack();
   }, [router.asPath]);

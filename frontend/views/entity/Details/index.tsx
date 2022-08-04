@@ -25,6 +25,7 @@ import {
 } from "../Configure/constants";
 import { EntityDetailsView } from "./DetailsView";
 import { useViewStateMachine } from "../useViewStateMachine";
+import { getEntitiesTabsCount } from "./utils";
 
 export function EntityDetails() {
   const entityDiction = useEntityDiction();
@@ -46,8 +47,17 @@ export function EntityDetails() {
     })
   );
 
+  const relatedEntitiesMap = Object.fromEntries(
+    (referenceFields.data || []).map((relatedEntity) => [
+      relatedEntity.table,
+      relatedEntity,
+    ])
+  );
+
   const relatedEntitiesCounts = useEntitiesCount(
-    relatedEntities.map(({ name }) => name)
+    relatedEntities
+      .filter(({ name }) => relatedEntitiesMap[name].type === "toMany")
+      .map(({ name }) => name)
   );
 
   const { isLoading, error } = referenceFields;
@@ -89,13 +99,15 @@ export function EntityDetails() {
               singular="Relation"
               isLoading={viewState.type === "loading"}
               render={(menuItem) => {
-                const count = relatedEntitiesCounts.data[menuItem.name]
-                  ?.isLoading
-                  ? "Loading..."
-                  : relatedEntitiesCounts.data[menuItem.name]?.data?.count;
+                const entityCount = getEntitiesTabsCount(
+                  relatedEntitiesMap[menuItem.name].type,
+                  relatedEntitiesCounts.data[menuItem.name]
+                );
                 return (
                   <SectionListItem
-                    label={`${getEntityFieldLabels(menuItem.name)} (${count})`}
+                    label={`${getEntityFieldLabels(
+                      menuItem.name
+                    )} ${entityCount}`}
                     key={menuItem.name}
                     to={NAVIGATION_LINKS.ENTITY.TABLE(menuItem.name)}
                   />

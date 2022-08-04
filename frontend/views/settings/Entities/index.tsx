@@ -16,13 +16,14 @@ import {
   useEntitiesList,
   useEntitiesMenuItems,
 } from "../../../hooks/entity/entity.store";
+import { SETTINGS_VIEW_KEY } from "../constants";
 import { BaseSettingsLayout } from "../_Base";
 import { EntitiesSelection } from "./Selection";
 
 export function EntitiesSettings() {
   const entitiesList = useEntitiesList();
   const tabFromUrl = useRouteParam("tab");
-  useSetPageTitle("Entities Settings");
+  useSetPageTitle("Entities Settings", SETTINGS_VIEW_KEY);
 
   const changeTabParam = useChangeRouterParam("tab");
 

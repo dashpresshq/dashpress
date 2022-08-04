@@ -73,7 +73,7 @@ export function EntityUpdate() {
 
   const viewState = useViewStateMachine(isLoading, error, "update");
   const { canGoBack, goBack } = useNavigationStack();
-  useSetPageTitle(`Update ${entityDiction.plural}`);
+  useSetPageTitle(`Update ${entityDiction.plural}`, "ENTITIES_TABLE");
 
   return (
     <AppLayout actionItems={actionItems}>

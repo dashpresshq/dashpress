@@ -15,14 +15,35 @@ const key = "__go_back_context__";
 interface INavigationItem {
   link: string;
   title: string;
+  viewKey: string;
 }
+
+const handleHistoryMutation = (
+  oldHistory: INavigationItem[],
+  newEntry: INavigationItem
+): INavigationItem[] => {
+  if (oldHistory.length === 0) {
+    return [newEntry];
+  }
+
+  const lastHistory = oldHistory.at(-1);
+  if (lastHistory.viewKey !== newEntry.viewKey) {
+    return [...oldHistory, newEntry];
+  }
+  // const historyCopy = [...oldHistory];
+  // historyCopy[historyCopy.length - 1] = newEntry;
+  return oldHistory;
+};
 
 export const useNavigationStack = () => {
   const router = useRouter();
   const [history, setHistory] = useState<INavigationItem[]>(
     JSON.parse(TemporayStorageService.getString(key) || "[]")
   );
-  const pageTitle = usePageTitleStore((store) => store.pageTitle);
+  const [pageTitle, viewKey] = usePageTitleStore((store) => [
+    store.pageTitle,
+    store.viewKey,
+  ]);
   useEffect(() => {
     TemporayStorageService.setString(key, JSON.stringify(history));
   }, [history]);
@@ -33,13 +54,13 @@ export const useNavigationStack = () => {
       },
       history,
       pushToStack: () => {
-        setHistory([
-          ...history,
-          {
-            title: pageTitle,
-            link: router.asPath,
-          },
-        ]);
+        const newStackEntry = {
+          title: pageTitle,
+          link: router.asPath,
+          viewKey,
+        };
+
+        setHistory(handleHistoryMutation(history, newStackEntry));
       },
       goToLinkIndex: (index: number) => {
         const newHistory = [...history];

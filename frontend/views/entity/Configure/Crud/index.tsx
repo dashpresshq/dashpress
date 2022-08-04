@@ -16,7 +16,10 @@ import { useUpsertConfigurationMutation } from "../../../../hooks/configuration/
 import { useEntityFields } from "../../../../hooks/entity/entity.store";
 import { SelectionTab } from "./SelectionTab";
 
-import { ENTITY_CRUD_SETTINGS_TAB_LABELS } from "../constants";
+import {
+  ENTITY_CONFIGURATION_VIEW,
+  ENTITY_CRUD_SETTINGS_TAB_LABELS,
+} from "../constants";
 
 export function useEntityCrudView() {
   const entity = useEntitySlug();
@@ -188,7 +191,7 @@ export function EntityCrudSettings() {
   const tabFromUrl = useRouteParam("tab");
   const changeTabParam = useChangeRouterParam("tab");
   const entityCrudView = useEntityCrudView();
-  useSetPageTitle("CRUD Settings");
+  useSetPageTitle("CRUD Settings", ENTITY_CONFIGURATION_VIEW);
   return (
     <BaseEntitySettingsLayout>
       <SectionBox title="CRUD Settings">

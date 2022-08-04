@@ -13,6 +13,7 @@ import { BaseEntitySettingsLayout } from "../_Base";
 import { useUpsertConfigurationMutation } from "../../../../hooks/configuration/configration.store";
 import { EntityDictionForm } from "./Form";
 import { createViewStateMachine } from "../../useViewStateMachine";
+import { ENTITY_CONFIGURATION_VIEW } from "../constants";
 
 // TODO validate plurals are unique
 export function EntityDictionSettings() {
@@ -26,7 +27,7 @@ export function EntityDictionSettings() {
     entity === SLUG_LOADING_VALUE,
     false
   );
-  useSetPageTitle("Diction Settings");
+  useSetPageTitle("Diction Settings", ENTITY_CONFIGURATION_VIEW);
   return (
     <BaseEntitySettingsLayout>
       <SectionBox title="Diction Settings">

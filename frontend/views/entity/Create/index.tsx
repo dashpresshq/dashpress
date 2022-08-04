@@ -63,7 +63,7 @@ export function EntityCreate() {
 
   const viewState = useViewStateMachine(isLoading, error, "create");
   const { canGoBack, goBack } = useNavigationStack();
-  useSetPageTitle(`Create ${entityDiction.plural}`);
+  useSetPageTitle(`Create ${entityDiction.plural}`, "CREATE_ENTITY");
 
   return (
     <AppLayout actionItems={actionItems}>

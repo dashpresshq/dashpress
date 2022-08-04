@@ -64,7 +64,7 @@ export function EntityDetails() {
 
   const viewState = useViewStateMachine(isLoading, error, "details");
   const { canGoBack, goBack } = useNavigationStack();
-  useSetPageTitle(`${entityDiction.singular} Details`);
+  useSetPageTitle(`${entityDiction.singular} Details`, "ENTITY_DETAILS");
 
   return (
     <AppLayout actionItems={actionItems}>

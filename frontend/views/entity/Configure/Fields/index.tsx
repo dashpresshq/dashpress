@@ -26,7 +26,10 @@ import {
 } from "../../../../hooks/configuration/configration.store";
 import { FieldsLabelForm } from "./FieldsLabel.form";
 import { FieldsTypeForm } from "./FieldsType.form";
-import { ENTITY_FIELD_SETTINGS_TAB_LABELS } from "../constants";
+import {
+  ENTITY_CONFIGURATION_VIEW,
+  ENTITY_FIELD_SETTINGS_TAB_LABELS,
+} from "../constants";
 
 export function EntityFieldsSettings() {
   const tabFromUrl = useRouteParam("tab");
@@ -88,7 +91,7 @@ export function EntityFieldsSettings() {
     }
   );
 
-  useSetPageTitle("Field Settings");
+  useSetPageTitle("Field Settings", ENTITY_CONFIGURATION_VIEW);
 
   const sharedLoadingState =
     entityFieldLists.isLoading ||

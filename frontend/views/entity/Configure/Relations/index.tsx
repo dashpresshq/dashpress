@@ -15,6 +15,7 @@ import {
 } from "../../../../hooks/configuration/configration.store";
 import { EntityRelationsForm } from "./Relations.form";
 import { createViewStateMachine } from "../../useViewStateMachine";
+import { ENTITY_CONFIGURATION_VIEW } from "../constants";
 
 export function EntityRelationsSettings() {
   const entity = useEntitySlug();
@@ -22,7 +23,7 @@ export function EntityRelationsSettings() {
     format: string;
   }>("relationship_settings", entity);
   const entityFields = useEntityFields(entity);
-  useSetPageTitle("Relationship Settings");
+  useSetPageTitle("Relationship Settings", ENTITY_CONFIGURATION_VIEW);
 
   const upsertConfigurationMutation = useUpsertConfigurationMutation(
     "relationship_settings",

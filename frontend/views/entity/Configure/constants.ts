@@ -3,6 +3,8 @@ import { Icon, Save, Settings } from "react-feather";
 import { useEntitySlug } from "../../../hooks/entity/entity.config";
 import { NAVIGATION_LINKS } from "../../../lib/routing/links";
 
+export const ENTITY_CONFIGURATION_VIEW = "ENTITY_CONFIGURATION_VIEW";
+
 export const ENTITY_FIELD_SETTINGS_TAB_LABELS = {
   LABELS: "Labels",
   TYPES: "Types",

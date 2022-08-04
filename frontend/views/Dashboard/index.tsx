@@ -36,7 +36,7 @@ export function Dashboard() {
   );
   const router = useRouter();
 
-  useSetPageTitle("Home");
+  useSetPageTitle("Home", "HOME");
 
   return (
     <AppLayout

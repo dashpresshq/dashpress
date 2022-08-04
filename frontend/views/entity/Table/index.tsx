@@ -78,7 +78,7 @@ export function EntityTable() {
 
   const viewState = useViewStateMachine(isLoading, error);
 
-  useSetPageTitle(entityDiction.plural);
+  useSetPageTitle(entityDiction.plural, "ENTITY_TABLE");
 
   return (
     <AppLayout actionItems={actionItems}>

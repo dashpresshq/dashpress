@@ -1,0 +1,1 @@
+export const ACCOUNT_VIEW_KEY = "ACCOUNT_VIEW_KEY";

@@ -1,0 +1,1 @@
+export const SETTINGS_VIEW_KEY = "SETTINGS_VIEW_KEY";

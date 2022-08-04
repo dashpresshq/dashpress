@@ -6,6 +6,7 @@ import {
 } from "@gothicgeeks/design-system";
 import { useSetPageTitle } from "frontend/lib/routing";
 import { useMyProfile, useUpdateProfileMutation } from "../account.store";
+import { ACCOUNT_VIEW_KEY } from "../constants";
 import { BaseAccountLayout } from "../_Base";
 import { UpdateProfileForm } from "./Form";
 
@@ -13,7 +14,7 @@ export function AccountProfile() {
   const myProfile = useMyProfile();
   const updateProfileMutation = useUpdateProfileMutation();
 
-  useSetPageTitle("Update Profile");
+  useSetPageTitle("Update Profile", ACCOUNT_VIEW_KEY);
 
   return (
     <BaseAccountLayout>

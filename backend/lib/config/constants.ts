@@ -54,7 +54,7 @@ export const ConfigBag: Record<ConfigKeys, IConfigBag> = {
   },
   CONFIG_ADAPTOR_CONNECTION_STRING: {
     defaultValue: () => {
-      return "";
+      return "PLACE_HOLDER_CONFIG_ADAPTOR_CONNECTION_STRING";
     },
     validate: (value) => {
       stringValidation(value, "Config Adaptor Connection", true);

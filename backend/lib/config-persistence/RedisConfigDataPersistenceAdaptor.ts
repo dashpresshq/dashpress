@@ -1,5 +1,5 @@
 import { RedisClientType } from "redis";
-import { ConfigService } from "../config/config.service";
+import { ConfigKeys, ConfigService } from "../config/config.service";
 import { getRedisConnection } from "../connection/redis";
 import { AbstractConfigDataPersistenceService } from "./AbstractConfigDataPersistenceService";
 import { ConfigDomain } from "./types";
@@ -15,12 +15,16 @@ export class RedisConfigDataPersistenceAdaptor<
     if (this.redisConnection) {
       return this.redisConnection;
     }
-    this.redisConnection = await getRedisConnection();
+    this.redisConnection = await getRedisConnection(
+      this.configService.getConfigValue(
+        ConfigKeys.CONFIG_ADAPTOR_CONNECTION_STRING
+      )
+    );
     return this.redisConnection;
   }
 
-  constructor() {
-    super();
+  constructor(configDomain: ConfigDomain, configService: ConfigService) {
+    super(configDomain, configService);
   }
 
   private wrapWithConfigDomain() {

@@ -28,7 +28,10 @@ export function createConfigDomainPersistenceService<T>(
           configService
         );
       case ConfigAdaptorTypes.Redis:
-        return new RedisConfigDataPersistenceAdaptor<T>();
+        return new RedisConfigDataPersistenceAdaptor<T>(
+          configDomain,
+          configService
+        );
       case ConfigAdaptorTypes.Database:
         return new DatabaseConfigDataPersistenceAdaptor<T>(
           configDomain,

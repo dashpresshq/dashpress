@@ -39,7 +39,7 @@ export function BaseAccountLayout({ children }: IProps) {
                 name: "Log Out",
               },
             ]}
-            currentMenuItem={router.asPath}
+            currentMenuItem={router.asPath.split("?")[0]}
           />
         </SectionLeft>
         <SectionRight>{children}</SectionRight>

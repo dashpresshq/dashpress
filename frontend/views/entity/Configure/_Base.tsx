@@ -25,6 +25,7 @@ export function BaseEntitySettingsLayout({ children }: IProps) {
   const entity = useEntitySlug();
   const { canGoBack, goBack } = useNavigationStack();
   const router = useRouter();
+
   return (
     <AppLayout>
       {canGoBack() && (
@@ -76,7 +77,7 @@ export function BaseEntitySettingsLayout({ children }: IProps) {
               // Computed Table fields
               // Computed Details fields
             ]}
-            currentMenuItem={router.asPath}
+            currentMenuItem={router.asPath.split("?")[0]}
           />
         </SectionLeft>
         <SectionRight>{children}</SectionRight>

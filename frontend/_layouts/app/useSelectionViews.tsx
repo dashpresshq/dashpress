@@ -2,6 +2,7 @@ import { Settings, Home, Table, BarChart, Users, User } from "react-feather";
 import { ISelectionView } from "@gothicgeeks/design-system/dist/Layouts/types";
 import { NAVIGATION_LINKS } from "frontend/lib/routing";
 import { useEntitiesMenuItems } from "../../hooks/entity/entity.store";
+import { ROOT_LINKS_TO_CLEAR_BREADCRUMBS } from "./constants";
 
 export const useSelectionViews = (): ISelectionView[] => {
   const entitiesMenuItems = useEntitiesMenuItems();
@@ -10,7 +11,7 @@ export const useSelectionViews = (): ISelectionView[] => {
     {
       title: "Home",
       icon: Home,
-      link: NAVIGATION_LINKS.DASHBOARD,
+      link: ROOT_LINKS_TO_CLEAR_BREADCRUMBS.HOME,
     },
     {
       title: "Tables",
@@ -37,17 +38,17 @@ export const useSelectionViews = (): ISelectionView[] => {
     {
       title: "Settings",
       icon: Settings,
-      link: NAVIGATION_LINKS.SETTINGS.DEFAULT,
+      link: ROOT_LINKS_TO_CLEAR_BREADCRUMBS.SETTINGS,
     },
     {
       title: "Users",
       icon: Users,
-      link: NAVIGATION_LINKS.USERS,
+      link: ROOT_LINKS_TO_CLEAR_BREADCRUMBS.USERS,
     },
     {
       title: "Account",
       icon: User,
-      link: NAVIGATION_LINKS.ACCOUNT.PROFILE,
+      link: ROOT_LINKS_TO_CLEAR_BREADCRUMBS.ACCOUNT,
     },
   ];
 };

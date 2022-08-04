@@ -12,7 +12,7 @@ export const entityValidationImpl: ValidationImplType<string> = async (req) => {
   ]);
 
   if (disabledEntities.includes(entity) || !entityExists) {
-    throw new ForbiddenError(`Entity ${entity} is not allowed`);
+    throw new ForbiddenError(`Entity '${entity}' doesn't exist or is disabled`);
   }
 
   return entity;

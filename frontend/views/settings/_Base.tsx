@@ -30,7 +30,7 @@ export function BaseSettingsLayout({ children }: IProps) {
                 name: "Other Settings",
               },
             ]}
-            currentMenuItem={router.asPath}
+            currentMenuItem={router.asPath.split("?")[0]}
           />
         </SectionLeft>
         <SectionRight>{children}</SectionRight>

@@ -1,3 +1,4 @@
+import { ROOT_LINKS_TO_CLEAR_BREADCRUMBS } from "frontend/_layouts/app/constants";
 import { useRouter } from "next/router";
 import { useEffect, useMemo, useState } from "react";
 import { usePageTitleStore } from "./usePageTItle";
@@ -26,13 +27,16 @@ const handleHistoryMutation = (
     return [newEntry];
   }
 
+  if (Object.values(ROOT_LINKS_TO_CLEAR_BREADCRUMBS).includes(newEntry.link)) {
+    return [];
+  }
+
   const lastHistory = oldHistory.at(-1);
   if (lastHistory.viewKey !== newEntry.viewKey) {
     return [...oldHistory, newEntry];
   }
-  // const historyCopy = [...oldHistory];
-  // historyCopy[historyCopy.length - 1] = newEntry;
-  return oldHistory;
+
+  return [...oldHistory];
 };
 
 export const useNavigationStack = () => {
@@ -54,13 +58,16 @@ export const useNavigationStack = () => {
       },
       history,
       pushToStack: () => {
+        if (!pageTitle) {
+          return;
+        }
         const newStackEntry = {
           title: pageTitle,
           link: router.asPath,
           viewKey,
         };
-
-        setHistory(handleHistoryMutation(history, newStackEntry));
+        const newHistory = handleHistoryMutation(history, newStackEntry);
+        setHistory(newHistory);
       },
       goToLinkIndex: (index: number) => {
         const newHistory = [...history];

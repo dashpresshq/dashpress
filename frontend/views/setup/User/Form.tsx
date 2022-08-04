@@ -21,21 +21,27 @@ export function UserSetupForm({ onSubmit }: IFormProps<IUserSetupForm>) {
             validateFields={[]}
           >
             {({ input, meta }) => (
-              <FormInput label="Username" meta={meta} input={input} />
+              <FormInput label="Username" meta={meta} required input={input} />
             )}
           </Field>
 
           <Field name="name" validate={required} validateFields={[]}>
             {({ input, meta }) => (
-              <FormInput label="Name" meta={meta} input={input} />
+              <FormInput label="Name" meta={meta} required input={input} />
             )}
           </Field>
 
-          <Field name="password" validate={required} validateFields={[]}>
+          <Field
+            name="password"
+            validate={required}
+            required
+            validateFields={[]}
+          >
             {({ input, meta }) => (
               <FormInput
                 label="Password"
                 type="password"
+                required
                 meta={meta}
                 input={input}
               />

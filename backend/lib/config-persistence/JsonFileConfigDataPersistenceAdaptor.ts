@@ -22,7 +22,7 @@ export class JsonFileConfigDataPersistenceAdaptor<
     super(configDomain);
   }
 
-  private async getAllIndexedItems(): Promise<Record<string, T>> {
+  private async getDomainData(): Promise<Record<string, T>> {
     try {
       return (
         (await fs.readJson(pathToConfigDomain(this.configDomain), {
@@ -44,12 +44,12 @@ export class JsonFileConfigDataPersistenceAdaptor<
   }
 
   async getAllItems() {
-    const allIndexedItems = await this.getAllIndexedItems();
+    const allIndexedItems = await this.getDomainData();
     return Object.values(allIndexedItems);
   }
 
   async getItem(key: string) {
-    const allIndexedItems = await this.getAllIndexedItems();
+    const allIndexedItems = await this.getDomainData();
     const currentItem = allIndexedItems[key];
     if (currentItem) {
       return currentItem;
@@ -58,13 +58,13 @@ export class JsonFileConfigDataPersistenceAdaptor<
   }
 
   async upsertItem(key: string, data: T) {
-    const allIndexedItems = await this.getAllIndexedItems();
+    const allIndexedItems = await this.getDomainData();
     allIndexedItems[key] = data;
     await this.persist(allIndexedItems);
   }
 
   async removeItem(key: string): Promise<void> {
-    const allIndexedItems = await this.getAllIndexedItems();
+    const allIndexedItems = await this.getDomainData();
     delete allIndexedItems[key];
     await this.persist(allIndexedItems);
   }

@@ -4,20 +4,30 @@ import { ConfigDomain } from "./types";
 export class MemoryConfigDataPersistenceAdaptor<
   T
 > extends AbstractConfigDataPersistenceService<T> {
-  private data: Record<string, T> = {};
+  private data: Record<string, Record<string, T>> = {};
 
-  async initialize() {}
+  async initialize() {
+    this.data = { ...this.data, [this.configDomain]: {} };
+  }
 
   constructor(configDomain: ConfigDomain) {
     super(configDomain);
   }
 
+  private getDomainData() {
+    return this.data[this.configDomain];
+  }
+
+  private persistDomainData(data: Record<string, T>) {
+    this.data[this.configDomain] = data;
+  }
+
   async getAllItems() {
-    return Object.values(this.data);
+    return Object.values(this.getDomainData());
   }
 
   async getItem(key: string) {
-    const currentItem = this.data[key];
+    const currentItem = this.getDomainData()[key];
     if (currentItem) {
       return currentItem;
     }
@@ -25,16 +35,22 @@ export class MemoryConfigDataPersistenceAdaptor<
   }
 
   async upsertItem(key: string, data: T) {
-    this.data[key] = data;
+    const domainData = this.getDomainData();
+    domainData[key] = data;
+    this.persistDomainData(domainData);
   }
 
   public async removeItem(key: string): Promise<void> {
-    delete this.data[key];
+    const domainData = this.getDomainData();
+
+    delete domainData[key];
+
+    this.persistDomainData(domainData);
   }
 
   async saveAllItems(keyField: keyof T, data: T[]) {
-    this.data = Object.fromEntries(
-      data.map((datum) => [datum[keyField], datum])
+    this.persistDomainData(
+      Object.fromEntries(data.map((datum) => [datum[keyField], datum]))
     );
   }
 }

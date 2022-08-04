@@ -18,19 +18,28 @@ export function createConfigDomainPersistenceService<T>(
       )
     ) {
       case ConfigAdaptorTypes.JsonFile:
-        return new JsonFileConfigDataPersistenceAdaptor<T>(configDomain);
+        return new JsonFileConfigDataPersistenceAdaptor<T>(
+          configDomain,
+          configService
+        );
       case ConfigAdaptorTypes.Memory:
-        return new MemoryConfigDataPersistenceAdaptor<T>(configDomain);
+        return new MemoryConfigDataPersistenceAdaptor<T>(
+          configDomain,
+          configService
+        );
       case ConfigAdaptorTypes.Redis:
-        return new RedisConfigDataPersistenceAdaptor<T>(configDomain);
+        return new RedisConfigDataPersistenceAdaptor<T>();
       case ConfigAdaptorTypes.Database:
-        return new DatabaseConfigDataPersistenceAdaptor<T>(configDomain);
+        return new DatabaseConfigDataPersistenceAdaptor<T>(
+          configDomain,
+          configService
+        );
     }
   };
 
   const instance = getInstance();
 
-  instance.initialize();
+  instance.setup();
 
   return instance;
 }

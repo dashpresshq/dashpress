@@ -1,3 +1,4 @@
+import { ConfigService } from "../config/config.service";
 import { AbstractConfigDataPersistenceService } from "./AbstractConfigDataPersistenceService";
 import { ConfigDomain } from "./types";
 
@@ -7,10 +8,10 @@ export class DatabaseConfigDataPersistenceAdaptor<
 > extends AbstractConfigDataPersistenceService<T> {
   private data: Record<string, T> = {};
 
-  async initialize() {}
+  async setup() {}
 
-  constructor(configDomain: ConfigDomain) {
-    super(configDomain);
+  constructor(configDomain: ConfigDomain, configService: ConfigService) {
+    super(configDomain, configService);
   }
 
   async getAllItems() {

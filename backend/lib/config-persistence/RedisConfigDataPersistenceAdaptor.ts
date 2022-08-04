@@ -1,42 +1,67 @@
+import { RedisClientType } from "redis";
+import { ConfigService } from "../config/config.service";
+import { getRedisConnection } from "../connection/redis";
 import { AbstractConfigDataPersistenceService } from "./AbstractConfigDataPersistenceService";
 import { ConfigDomain } from "./types";
-
-// TODO
 
 export class RedisConfigDataPersistenceAdaptor<
   T
 > extends AbstractConfigDataPersistenceService<T> {
-  private data: Record<string, T> = {};
+  private redisConnection: RedisClientType;
 
-  async initialize() {}
+  async setup() {}
 
-  constructor(configDomain: ConfigDomain) {
-    super(configDomain);
+  async getRedisInstance() {
+    if (this.redisConnection) {
+      return this.redisConnection;
+    }
+    this.redisConnection = await getRedisConnection();
+    return this.redisConnection;
+  }
+
+  constructor() {
+    super();
+  }
+
+  private wrapWithConfigDomain() {
+    return `__app_config__${this.configDomain}`;
   }
 
   async getAllItems() {
-    return Object.values(this.data);
+    const allData = await (
+      await this.getRedisInstance()
+    ).hGetAll(this.wrapWithConfigDomain());
+    return Object.values(allData).map((value) => JSON.parse(value));
   }
 
   async getItem(key: string) {
-    const currentItem = this.data[key];
-    if (currentItem) {
-      return currentItem;
-    }
-    return undefined;
+    return JSON.parse(
+      await (
+        await this.getRedisInstance()
+      ).hGet(this.wrapWithConfigDomain(), key)
+    );
   }
 
   async upsertItem(key: string, data: T) {
-    this.data[key] = data;
+    await (
+      await this.getRedisInstance()
+    ).hSet(this.wrapWithConfigDomain(), { [key]: JSON.stringify(data) });
   }
 
   public async removeItem(key: string): Promise<void> {
-    delete this.data[key];
+    await (
+      await this.getRedisInstance()
+    ).hDel(this.wrapWithConfigDomain(), key);
   }
 
   async saveAllItems(keyField: keyof T, data: T[]) {
-    this.data = Object.fromEntries(
-      data.map((datum) => [datum[keyField], datum])
+    await (
+      await this.getRedisInstance()
+    ).hSet(
+      this.wrapWithConfigDomain(),
+      Object.fromEntries(
+        data.map((datum) => [datum[keyField], JSON.stringify(datum)])
+      )
     );
   }
 }

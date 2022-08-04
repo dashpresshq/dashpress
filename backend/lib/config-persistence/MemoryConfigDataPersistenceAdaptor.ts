@@ -1,3 +1,4 @@
+import { ConfigService } from "../config/config.service";
 import { AbstractConfigDataPersistenceService } from "./AbstractConfigDataPersistenceService";
 import { ConfigDomain } from "./types";
 
@@ -6,12 +7,12 @@ export class MemoryConfigDataPersistenceAdaptor<
 > extends AbstractConfigDataPersistenceService<T> {
   private data: Record<string, Record<string, T>> = {};
 
-  async initialize() {
+  async setup() {
     this.data = { ...this.data, [this.configDomain]: {} };
   }
 
-  constructor(configDomain: ConfigDomain) {
-    super(configDomain);
+  constructor(configDomain: ConfigDomain, configService: ConfigService) {
+    super(configDomain, configService);
   }
 
   private getDomainData() {

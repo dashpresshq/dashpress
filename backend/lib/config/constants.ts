@@ -33,6 +33,12 @@ const optionsValidation = (value: string, label: string, options: string[]) => {
   }
 };
 
+const stringValidation = (value: string, label: string, optional?: true) => {
+  if (!optional && !value) {
+    throw new Error(`'${label}'is required`);
+  }
+};
+
 export const ConfigBag: Record<ConfigKeys, IConfigBag> = {
   CONFIG_ADAPTOR: {
     defaultValue: () => {
@@ -44,6 +50,14 @@ export const ConfigBag: Record<ConfigKeys, IConfigBag> = {
         "Config Adaptor",
         Object.values(ConfigAdaptorTypes)
       );
+    },
+  },
+  CONFIG_ADAPTOR_CONNECTION_STRING: {
+    defaultValue: () => {
+      return "";
+    },
+    validate: (value) => {
+      stringValidation(value, "Config Adaptor Connection", true);
     },
   },
   ENCRYPTION_KEY: {

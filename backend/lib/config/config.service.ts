@@ -1,3 +1,4 @@
+import { isDefined } from "class-validator";
 import fs from "fs-extra";
 import path from "path";
 import { ConfigBag } from "./constants";
@@ -30,7 +31,7 @@ const newEnvEntries: { key: ConfigKeys; value: string }[] = [];
 
 Object.entries(ConfigBag).forEach(([key, configBag]) => {
   const value = process.env[key];
-  if (!value) {
+  if (!isDefined(value)) {
     if (process.env.NODE_ENV === "production") {
       const message = `ENV variable with key '${key}' is missing`;
       throw new Error(message);

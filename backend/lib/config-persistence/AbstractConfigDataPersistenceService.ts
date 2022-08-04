@@ -1,13 +1,17 @@
+import { ConfigService } from "../config/config.service";
 import { ConfigDomain } from "./types";
 
 export abstract class AbstractConfigDataPersistenceService<T> {
-  protected readonly configDomain: ConfigDomain;
+  protected readonly configDomain!: ConfigDomain;
 
-  constructor(configDomain: ConfigDomain) {
-    this.configDomain = configDomain;
-  }
+  protected readonly configService!: ConfigService;
 
-  public abstract initialize(): Promise<void>;
+  // constructor(configDomain: ConfigDomain, configService: ConfigService) {
+  //   this.configDomain = configDomain;
+  //   this.configService = configService;
+  // }
+
+  public abstract setup(): Promise<void>;
 
   // Might need to introduce second key
   public abstract getItem(key: string): Promise<T | undefined>;

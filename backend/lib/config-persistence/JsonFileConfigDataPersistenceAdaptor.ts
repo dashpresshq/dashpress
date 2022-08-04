@@ -1,31 +1,33 @@
 import fs from "fs-extra";
 import path from "path";
-import { configService, NodeEnvironments } from "../config/config.service";
+import { ConfigService, NodeEnvironments } from "../config/config.service";
 
 import { AbstractConfigDataPersistenceService } from "./AbstractConfigDataPersistenceService";
 import { ConfigDomain } from "./types";
 
-const pathToConfigDomain = (type: ConfigDomain) => {
-  const file =
-    configService.getNodeEnvironment() === NodeEnvironments.Test
-      ? `${type}.test.json`
-      : `${type}.json`;
-  return path.resolve(process.cwd(), ".config-data", file);
-};
-
 export class JsonFileConfigDataPersistenceAdaptor<
   T
 > extends AbstractConfigDataPersistenceService<T> {
-  async initialize() {}
-
-  constructor(configDomain: ConfigDomain) {
-    super(configDomain);
+  async setup() {
+    // TODO create the JSON file
   }
+
+  constructor(configDomain: ConfigDomain, configService: ConfigService) {
+    super(configDomain, configService);
+  }
+
+  private pathToConfigDomain = (type: ConfigDomain) => {
+    const file =
+      this.configService.getNodeEnvironment() === NodeEnvironments.Test
+        ? `${type}.test.json`
+        : `${type}.json`;
+    return path.resolve(process.cwd(), ".config-data", file);
+  };
 
   private async getDomainData(): Promise<Record<string, T>> {
     try {
       return (
-        (await fs.readJson(pathToConfigDomain(this.configDomain), {
+        (await fs.readJson(this.pathToConfigDomain(this.configDomain), {
           throws: false,
         })) || {}
       );
@@ -35,10 +37,10 @@ export class JsonFileConfigDataPersistenceAdaptor<
   }
 
   private async persist(data: Record<string, T>) {
-    if (configService.getNodeEnvironment() === NodeEnvironments.Test) {
+    if (this.configService.getNodeEnvironment() === NodeEnvironments.Test) {
       return;
     }
-    await fs.writeJson(pathToConfigDomain(this.configDomain), data, {
+    await fs.writeJson(this.pathToConfigDomain(this.configDomain), data, {
       spaces: 2,
     });
   }

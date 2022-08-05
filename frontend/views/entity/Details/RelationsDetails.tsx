@@ -10,19 +10,20 @@ import { EntityDetailsView } from "./DetailsView";
 import { DetailsLayout } from "./_Layout";
 
 export function EntityRelationDetails() {
-  const entityDiction = useEntityDiction();
   const childEntity = useRouteParam("childEntity");
+  const childEntityDiction = useEntityDiction(childEntity);
+
   const childId = useRouteParam("childId");
   const entity = useEntitySlug();
   // const entityCrudSettings = useEntityCrudSettings();
 
   const { canGoBack, goBack } = useNavigationStack();
-  useSetPageTitle(`${entityDiction.singular} Details`, "ENTITY_DETAILS");
+  useSetPageTitle(`${childEntityDiction.singular} Details`, "ENTITY_DETAILS");
 
   return (
-    <DetailsLayout entity={entity}>
+    <DetailsLayout entity={entity} menuKey={childEntity}>
       <SectionBox
-        title={TitleLang.details(entityDiction.singular)}
+        title={TitleLang.details(childEntityDiction.singular)}
         backLink={
           canGoBack()
             ? {

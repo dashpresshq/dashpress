@@ -8,7 +8,7 @@ import {
   useEntitySlug,
 } from "../../../hooks/entity/entity.config";
 import { EntityDetailsView } from "./DetailsView";
-import { DetailsLayout } from "./_Layout";
+import { DetailsLayout, DETAILS_LAYOUT_KEY } from "./_Layout";
 
 export function EntityDetails() {
   const entityDiction = useEntityDiction();
@@ -20,7 +20,7 @@ export function EntityDetails() {
   useSetPageTitle(`${entityDiction.singular} Details`, "ENTITY_DETAILS");
 
   return (
-    <DetailsLayout entity={entity}>
+    <DetailsLayout entity={entity} menuKey={DETAILS_LAYOUT_KEY}>
       <SectionBox
         title={TitleLang.details(entityDiction.singular)}
         backLink={

@@ -9,7 +9,10 @@ import {
 } from "@gothicgeeks/design-system";
 import { ReactNode } from "react";
 import { useEntityReferenceFields } from "frontend/hooks/entity/entity.store";
-import { useEntitiesCount } from "frontend/hooks/data/data.store";
+import {
+  useEntitiesCount,
+  useEntityDataDetails,
+} from "frontend/hooks/data/data.store";
 import {
   useEntityFieldLabels,
   useEntityId,
@@ -23,18 +26,23 @@ import { getEntitiesTabsCount } from "./utils";
 import { NAVIGATION_LINKS } from "../../../lib/routing/links";
 import { useViewStateMachine } from "../useViewStateMachine";
 
+export const DETAILS_LAYOUT_KEY = "___DETAILS_KEY__";
+
 interface IProps {
   children: ReactNode;
   entity: string;
+  menuKey: string;
 }
 
-export function DetailsLayout({ children, entity }: IProps) {
+export function DetailsLayout({ children, entity, menuKey }: IProps) {
   const actionItems = useEntityActionMenuItems([
     EntityActionTypes.Details,
     EntityActionTypes.Types,
     EntityActionTypes.Labels,
   ]);
   const entityId = useEntityId();
+
+  const dataDetails = useEntityDataDetails(entity, entityId); // :eyes all the fields
 
   const referenceFields = useEntityReferenceFields(entity);
 
@@ -60,22 +68,39 @@ export function DetailsLayout({ children, entity }: IProps) {
 
   const { isLoading, error } = referenceFields;
 
-  const viewState = useViewStateMachine(isLoading, error, "details");
+  const viewState = useViewStateMachine(
+    isLoading || dataDetails.isLoading,
+    error || dataDetails.error,
+    "details"
+  );
 
   return (
     <AppLayout actionItems={actionItems}>
       <SectionRow>
         <SectionLeft>
-          <SectionBox title="Relations">
+          <SectionBox headLess title="">
             {viewState.type === "error" && (
               <ErrorAlert message={viewState.message} />
             )}
             {(viewState.type === "render" || viewState.type === "loading") && (
               <RenderList
-                items={relatedEntities}
+                items={[
+                  { name: DETAILS_LAYOUT_KEY, label: "Details" },
+                  ...relatedEntities,
+                ]}
                 singular="Relation"
                 isLoading={viewState.type === "loading"}
                 render={(menuItem) => {
+                  if (menuItem.name === DETAILS_LAYOUT_KEY) {
+                    return (
+                      <SectionListItem
+                        label="Details"
+                        key={menuItem.name}
+                        active={menuKey === DETAILS_LAYOUT_KEY}
+                        to={NAVIGATION_LINKS.ENTITY.DETAILS(entity, entityId)}
+                      />
+                    );
+                  }
                   const entityType = relatedEntitiesMap[menuItem.name].type;
                   const entityCount = getEntitiesTabsCount(
                     entityType,
@@ -88,13 +113,16 @@ export function DetailsLayout({ children, entity }: IProps) {
                         menuItem.name
                       )} ${entityCount}`}
                       key={menuItem.name}
+                      active={menuKey === menuItem.name}
                       to={
                         entityType === "toOne"
                           ? NAVIGATION_LINKS.ENTITY.RELATION_DETAILS(
                               entity,
                               entityId,
                               menuItem.name,
-                              ""
+                              dataDetails.data[
+                                relatedEntitiesMap[menuItem.name].field
+                              ]
                             )
                           : NAVIGATION_LINKS.ENTITY.RELATION_TABLE(
                               entity,

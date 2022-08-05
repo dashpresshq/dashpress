@@ -5,7 +5,6 @@ import {
   useEntityFieldLabels,
   useEntityFieldSelections,
   useEntityFieldTypes,
-  useEntitySlug,
   useSelectedEntityColumns,
 } from "frontend/hooks/entity/entity.config";
 import {
@@ -52,21 +51,21 @@ export const buildFilterConfigFromType = (
   }
 };
 
-export const useTableColumns = () => {
-  const entity = useEntitySlug();
-  const getEntityFieldLabels = useEntityFieldLabels();
-  const entityCrudSettings = useEntityCrudSettings();
+export const useTableColumns = (entity: string) => {
+  const getEntityFieldLabels = useEntityFieldLabels(entity);
+  const entityCrudSettings = useEntityCrudSettings(entity);
   const entityFields = useEntityFields(entity);
   const entityToOneReferenceFields = useEntityToOneReferenceFields(entity);
   const hiddenTableColumns = useSelectedEntityColumns(
-    "hidden_entity_table_columns"
+    "hidden_entity_table_columns",
+    entity
   );
 
   const idField = useEntityIdField(entity);
   // TODO primaryIds needs special filter type of equal only
 
-  const entityFieldTypes = useEntityFieldTypes();
-  const entityFieldSelections = useEntityFieldSelections();
+  const entityFieldTypes = useEntityFieldTypes(entity);
+  const entityFieldSelections = useEntityFieldSelections(entity);
 
   const columnsToShow = useMemo(() => {
     return fitlerOutHiddenScalarColumns(entityFields, hiddenTableColumns);

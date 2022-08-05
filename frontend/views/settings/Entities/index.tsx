@@ -63,7 +63,7 @@ export function EntitiesSettings() {
                 <EntitiesSelection
                   description="Disable entitites that you dont want to appear anywhere in the app"
                   isLoading={entitiesList.isLoading || entitiesToHide.isLoading}
-                  allList={entitiesList.data || []}
+                  allList={(entitiesList.data || []).map(({ label }) => label)}
                   getEntityFieldLabels={entitiesDictionPlurals}
                   hiddenList={entitiesToHide.data || []}
                   onSubmit={async (data) => {

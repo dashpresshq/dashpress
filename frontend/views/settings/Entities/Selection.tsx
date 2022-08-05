@@ -7,12 +7,11 @@ import {
 } from "@gothicgeeks/design-system";
 import React, { useEffect, useState } from "react";
 import { useStringSelections } from "../../../lib/selection";
-import { ILabelValue } from "../../../../types";
 
 interface IProps {
   isLoading: boolean;
   hiddenList: string[];
-  allList: ILabelValue[];
+  allList: string[];
   onSubmit: (columnsSelection: string[]) => Promise<void>;
   getEntityFieldLabels: (fieldName: string) => string;
   description: string;
@@ -62,7 +61,7 @@ export function EntitiesSelection({
       {allList.length > 0 && (
         <>
           <RenderList
-            items={allList.map(({ label }) => ({ name: label }))}
+            items={allList.map((listItem) => ({ name: listItem }))}
             singular="Entity"
             isLoading={isLoading}
             render={(menuItem) => {

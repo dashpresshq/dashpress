@@ -29,7 +29,8 @@ export function EntityRelationsForm({
           (field) => !entityFields.includes(field)
         );
         if (invalidField) {
-          error.format = `'${invalidField}' is not a valid entity field`;
+          const validFields = entityFields.map((field) => ` '${field}' `);
+          error.format = `'${invalidField}' is not a valid entity field. Valid fields are ${validFields}`;
         }
         return error;
       }}

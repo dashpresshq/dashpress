@@ -53,6 +53,7 @@ export type IDBCrendentials = {
 
 export interface IEntityRelation {
   table: string;
+  label: string;
   field?: string;
   type: "toOne" | "toMany";
 }

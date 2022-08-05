@@ -28,7 +28,7 @@ export class DataController {
     const relationshipSettings = await this._configurationService.show<{
       format: string;
       fields: string[];
-    }>("relationship_settings", entity);
+    }>("entity_relation_template", entity);
 
     if (relationshipSettings.fields.length === 0) {
       // Will want to cache this

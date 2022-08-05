@@ -42,8 +42,9 @@ export function EntityDetails() {
   // const entityCrudSettings = useEntityCrudSettings();
 
   const relatedEntities = (referenceFields.data || []).map(
-    ({ table: referenceTable }) => ({
+    ({ table: referenceTable, label }) => ({
       name: referenceTable,
+      label,
     })
   );
 
@@ -103,11 +104,11 @@ export function EntityDetails() {
                   relatedEntitiesMap[menuItem.name].type,
                   relatedEntitiesCounts.data[menuItem.name]
                 );
+                const label =
+                  menuItem.label || getEntityFieldLabels(menuItem.name);
                 return (
                   <SectionListItem
-                    label={`${getEntityFieldLabels(
-                      menuItem.name
-                    )} ${entityCount}`}
+                    label={`${label} ${entityCount}`}
                     key={menuItem.name}
                     to={NAVIGATION_LINKS.ENTITY.TABLE(menuItem.name)}
                   />

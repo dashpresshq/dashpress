@@ -11,9 +11,12 @@ export const CONFIGURATION_KEYS: Record<
   | "entity_columns_labels"
   | "disabled_entities"
   | "dashboard_entities"
-  | "relationship_settings"
+  | "entity_relation_template"
   | "entity_selections"
-  | "entity_validations",
+  | "entity_validations"
+  | "entity_relations_labels"
+  | "hidden_entity_relations"
+  | "entity_relations_order",
   { requireEntity: boolean; defaultValue: unknown }
 > = {
   hidden_entity_table_columns: { requireEntity: true, defaultValue: [] },
@@ -48,10 +51,19 @@ export const CONFIGURATION_KEYS: Record<
       delete: true,
     },
   },
-  relationship_settings: {
+  entity_relations_order: {
+    requireEntity: true,
+    defaultValue: [],
+  },
+  hidden_entity_relations: {
+    requireEntity: true,
+    defaultValue: [],
+  },
+  entity_relation_template: {
     requireEntity: true,
     defaultValue: { format: "", fields: [] },
   },
+  entity_relations_labels: { requireEntity: true, defaultValue: {} },
   disabled_entities: { requireEntity: false, defaultValue: [] },
   dashboard_entities: { requireEntity: false, defaultValue: [] },
   entities_order: { requireEntity: false, defaultValue: [] },

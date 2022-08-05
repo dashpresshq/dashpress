@@ -6,7 +6,7 @@ import { useEntityDictionPlurals } from "./entity.queries";
 export const ENTITY_FIELDS_ENDPOINT = (entity: string) =>
   `/api/entities/${entity}/fields`;
 
-const ENTITY_RELATIONS_ENDPOINT = (entity: string) =>
+export const ENTITY_RELATIONS_ENDPOINT = (entity: string) =>
   `/api/entities/${entity}/relations`;
 
 export const ENTITIES_MENU_ENDPOINT = "/api/entities/menu";
@@ -41,6 +41,12 @@ export const useEntitiesList = () =>
 export const useEntityFields = (entity: string) =>
   useApi<IEntityField[]>(ENTITY_FIELDS_ENDPOINT(entity), {
     errorMessage: dataNotFoundMessage("Entity Fields"),
+    enabled: isEntityEnabled(entity),
+  });
+
+export const useEntityRelationsList = (entity: string) =>
+  useApi<string[]>(`/api/entities/${entity}/relation-list`, {
+    errorMessage: dataNotFoundMessage("Entity Relations List"),
     enabled: isEntityEnabled(entity),
   });
 

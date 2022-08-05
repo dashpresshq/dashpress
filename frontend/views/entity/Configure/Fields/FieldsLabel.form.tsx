@@ -32,7 +32,7 @@ export function FieldsLabelForm({
           FormSkeletonSchema.Input,
           FormSkeletonSchema.Input,
           FormSkeletonSchema.Input,
-          FormSkeletonSchema.Textarea,
+          FormSkeletonSchema.Input,
         ]}
       />
     );

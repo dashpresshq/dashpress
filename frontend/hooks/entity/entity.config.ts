@@ -180,8 +180,9 @@ export function useEntityFieldSelections(paramEntity?: string) {
   );
 }
 
-export function useEntityCrudSettings() {
-  const entity = useEntitySlug();
+export function useEntityCrudSettings(paramEntity?: string) {
+  const entity = useEntitySlug(paramEntity);
+
   return useEntityConfiguration<IEntityCrudSettings>(
     "entity_crud_settings",
     entity

@@ -31,6 +31,14 @@ export const NAVIGATION_LINKS = {
     CREATE: (entity: string) => `/admin/${entity}/create`,
     TABLE: (entity: string) => `/admin/${entity}`,
     DETAILS: (entity: string, id: string) => `/admin/${entity}/${id}`,
+    RELATION_DETAILS: (
+      entity: string,
+      id: string,
+      childEntity: string,
+      childId: string
+    ) => `/admin/${entity}/${id}/relation/${childEntity}/${childId}`,
+    RELATION_TABLE: (entity: string, id: string, childEntity: string) =>
+      `/admin/${entity}/${id}/relation/${childEntity}`,
     UPDATE: (entity: string, id: string) => `/admin/${entity}/${id}/update`,
     CONFIG: {
       CRUD: (entity: string, query?: Record<string, string>) =>

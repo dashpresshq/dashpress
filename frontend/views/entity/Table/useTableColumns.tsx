@@ -151,7 +151,11 @@ export const useTableColumns = (entity: string) => {
       accessor: "__actions__",
       disableSortBy: true,
       Cell: ({ row }: { row: { original: Record<string, unknown> } }) => (
-        <TableActions row={row} crudSettings={entityCrudSettings.data} />
+        <TableActions
+          row={row}
+          crudSettings={entityCrudSettings.data}
+          entity={entity}
+        />
       ),
     });
   }

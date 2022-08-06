@@ -94,7 +94,7 @@ export function useEntityDataDeletionMutation(entity: string) {
     Record<string, string>
   >({
     endpoints: [ENTITY_TABLE_PATH(entity), ENTITY_COUNT_PATH(entity)],
-    redirect: NAVIGATION_LINKS.ENTITY.TABLE(entity),
+    redirect: NAVIGATION_LINKS.ENTITY.TABLE(entity), // TODO needs to be reworked based on where it is coming from
     successMessage: `${entityDiction.singular} deleted successfully`,
   });
 

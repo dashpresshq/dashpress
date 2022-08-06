@@ -107,11 +107,12 @@ export function DetailsLayout({ children, entity, menuKey }: IProps) {
                     relatedEntitiesCounts.data[menuItem.name]
                   );
 
+                  const label =
+                    menuItem.label || getEntityFieldLabels(menuItem.name);
+
                   return (
                     <SectionListItem
-                      label={`${getEntityFieldLabels(
-                        menuItem.name
-                      )} ${entityCount}`}
+                      label={`${label} ${entityCount}`}
                       key={menuItem.name}
                       active={menuKey === menuItem.name}
                       to={

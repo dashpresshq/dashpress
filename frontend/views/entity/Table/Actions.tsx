@@ -1,19 +1,18 @@
 import { DeleteButton, SoftButton, Stack } from "@gothicgeeks/design-system";
 import { useEntityDataDeletionMutation } from "frontend/hooks/data/data.store";
-import { useEntitySlug } from "frontend/hooks/entity/entity.config";
 import { useEntityIdField } from "frontend/hooks/entity/entity.store";
 import { NAVIGATION_LINKS } from "frontend/lib/routing";
 import { IEntityCrudSettings } from "shared/configuration.constants";
 
 interface IProps {
   crudSettings: IEntityCrudSettings;
+  entity: string;
   row: {
     original: Record<string, unknown>;
   };
 }
 
-export function TableActions({ crudSettings, row }: IProps) {
-  const entity = useEntitySlug();
+export function TableActions({ crudSettings, row, entity }: IProps) {
   const idField = useEntityIdField(entity);
   const entityDataDeletionMutation = useEntityDataDeletionMutation(entity);
 

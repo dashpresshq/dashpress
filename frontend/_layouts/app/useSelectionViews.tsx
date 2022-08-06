@@ -22,9 +22,6 @@ export const useSelectionViews = (): ISelectionView[] => {
         data: (entitiesMenuItems.data || []).map(({ label, value }) => ({
           title: label,
           link: NAVIGATION_LINKS.ENTITY.TABLE(value),
-          // link: () => {
-          //   goTo(NAVIGATION_LINKS.ENTITY.TABLE(value));
-          // },
         })),
       },
     },

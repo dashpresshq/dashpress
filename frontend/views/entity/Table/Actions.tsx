@@ -58,6 +58,7 @@ export function TableActions({ crudSettings, row, entity }: IProps) {
         justIcon={true}
         icon="save"
       />
+      //
       <Spacer />
     </div> */}
       {/* Clone */}

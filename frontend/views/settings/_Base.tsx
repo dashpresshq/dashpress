@@ -25,10 +25,6 @@ export function BaseSettingsLayout({ children }: IProps) {
                 link: NAVIGATION_LINKS.SETTINGS.ENTITIES,
                 name: "Entities",
               },
-              {
-                link: "TODO",
-                name: "Other Settings",
-              },
             ]}
             currentMenuItem={router.asPath.split("?")[0]}
           />

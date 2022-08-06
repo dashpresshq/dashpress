@@ -17,16 +17,6 @@ export default requestHandler(
         validatedRequest.entityRequestBody
       );
     },
-    PATCH: async () => {
-      // TODO
-      // const entity = validateEntityFromRequest(req.query);
-      // return await dataController.updateManyData(entity);
-    },
-    DELETE: async () => {
-      // TODO
-      // const entity = validateEntityFromRequest(req.query);
-      // return await dataController.deleteManyData(entity, req.body.data);
-    },
   },
   [
     {

@@ -34,7 +34,6 @@ export function EntityRelationDetails() {
         }
         // TODO iconButtons={[
         //   { icon: "edit", action: "", label: "Edit" },
-        //   { icon: "save", action: "", label: "Clone" },
         // ]}
       >
         <EntityDetailsView

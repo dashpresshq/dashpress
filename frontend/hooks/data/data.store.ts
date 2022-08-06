@@ -7,11 +7,15 @@ import {
   useApiQueries,
   useWaitForResponseMutationOptions,
 } from "@gothicgeeks/shared";
+import qs from "qs";
 import { useRouter } from "next/router";
 import { useMutation } from "react-query";
+import { FilterOperators } from "@gothicgeeks/design-system";
+import { QueryFilter } from "shared/types";
 import { SLUG_LOADING_VALUE } from "../../lib/routing/constants";
 import { NAVIGATION_LINKS } from "../../lib/routing/links";
 import { useEntityDiction } from "../entity/entity.config";
+import { useMultipleEntityReferenceFields } from "../entity/entity.store";
 
 export const ENTITY_TABLE_PATH = (entity: string) =>
   `/api/data/${entity}/table`;
@@ -35,12 +39,53 @@ export const useEntityDataDetails = (entity: string, id: string) => {
 };
 
 export const useEntitiesCount = (entities: string[]) => {
-  const entitiesCount = useApiQueries<{ entity: string }, { count: number }>({
+  return useApiQueries<{ entity: string }, { count: number }>({
     input: entities.map((entity) => ({ entity })),
     accessor: "entity",
     pathFn: (entity) => ENTITY_COUNT_PATH(entity),
   });
-  return entitiesCount;
+};
+
+export const useEntityReferenceCount = (
+  entities: string[],
+  reference: { entity: string; entityId: string }
+) => {
+  const multipleEntityReferenceFields =
+    useMultipleEntityReferenceFields(entities);
+
+  const entitiesReferences = Object.entries(
+    multipleEntityReferenceFields.data || {}
+  )
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    .filter(([_, requestResponse]) => !requestResponse.isLoading)
+    .map(([entity, requestResponse]) => {
+      const referenceField = requestResponse.data.find(
+        ({ table }) => table === reference.entity
+      )?.field;
+      return {
+        entity,
+        referenceField,
+      };
+    });
+
+  return useApiQueries<{ entity: string }, { count: number }>({
+    input: entitiesReferences,
+    accessor: "entity",
+    pathFn: (entity) => {
+      const queryFilter: QueryFilter = {
+        id: entitiesReferences.find(
+          (entityReference) => entity === entityReference.entity
+        ).referenceField,
+        value: {
+          operator: FilterOperators.EQUAL_TO,
+          value: reference.entityId,
+        },
+      };
+      return `${ENTITY_COUNT_PATH(entity)}?${qs.stringify({
+        filters: [queryFilter],
+      })}`;
+    },
+  });
 };
 
 export const useEntityDataReference = (entity: string, id: string) =>

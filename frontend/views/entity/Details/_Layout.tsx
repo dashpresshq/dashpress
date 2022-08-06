@@ -10,8 +10,8 @@ import {
 import { ReactNode } from "react";
 import { useEntityReferenceFields } from "frontend/hooks/entity/entity.store";
 import {
-  useEntitiesCount,
   useEntityDataDetails,
+  useEntityReferenceCount,
 } from "frontend/hooks/data/data.store";
 import {
   useEntityFieldLabels,
@@ -42,7 +42,7 @@ export function DetailsLayout({ children, entity, menuKey }: IProps) {
   ]);
   const entityId = useEntityId();
 
-  const dataDetails = useEntityDataDetails(entity, entityId); // :eyes all the fields
+  const dataDetails = useEntityDataDetails(entity, entityId); // :eyes on getting all the fields so that errors dont show up if the required field is disabled
 
   const referenceFields = useEntityReferenceFields(entity);
 
@@ -60,10 +60,14 @@ export function DetailsLayout({ children, entity, menuKey }: IProps) {
       relatedEntity,
     ])
   );
-  const relatedEntitiesCounts = useEntitiesCount(
+  const relatedEntitiesCounts = useEntityReferenceCount(
     relatedEntities
       .filter(({ name }) => relatedEntitiesMap[name].type === "toMany")
-      .map(({ name }) => name)
+      .map(({ name }) => name),
+    {
+      entity,
+      entityId,
+    }
   );
 
   const { isLoading, error } = referenceFields;

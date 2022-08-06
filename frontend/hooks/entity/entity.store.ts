@@ -1,4 +1,8 @@
-import { dataNotFoundMessage, useApi } from "@gothicgeeks/shared";
+import {
+  dataNotFoundMessage,
+  useApi,
+  useApiQueries,
+} from "@gothicgeeks/shared";
 import { IEntityField, IEntityRelation } from "shared/types";
 import { ILabelValue } from "../../../types";
 import { useEntityDictionPlurals } from "./entity.queries";
@@ -62,6 +66,14 @@ export const useEntityReferenceFields = (entity: string) =>
     errorMessage: dataNotFoundMessage("Entity Reference Fields"),
     enabled: isEntityEnabled(entity),
   });
+
+export const useMultipleEntityReferenceFields = (entities: string[]) => {
+  return useApiQueries<{ entity: string }, IEntityRelation[]>({
+    input: entities.map((entity) => ({ entity })),
+    accessor: "entity",
+    pathFn: (entity) => ENTITY_RELATIONS_ENDPOINT(entity),
+  });
+};
 
 export const useEntityToOneReferenceFields = (entity: string) =>
   useApi<Record<string, string>>(ENTITY_RELATIONS_ENDPOINT(entity), {

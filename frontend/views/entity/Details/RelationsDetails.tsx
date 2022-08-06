@@ -32,9 +32,7 @@ export function EntityRelationDetails() {
               }
             : undefined
         }
-        // deleteAction={undefined}
-        // isMakingDeleteRequest={false}
-        // iconButtons={[
+        // TODO iconButtons={[
         //   { icon: "edit", action: "", label: "Edit" },
         //   { icon: "save", action: "", label: "Clone" },
         // ]}

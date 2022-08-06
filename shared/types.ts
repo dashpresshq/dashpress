@@ -1,3 +1,5 @@
+import { IColumnFilterBag } from "@gothicgeeks/design-system";
+
 export interface IEntityField {
   name: string;
   isRequired?: true;
@@ -57,3 +59,5 @@ export interface IEntityRelation {
   field?: string;
   type: "toOne" | "toMany";
 }
+
+export type QueryFilter = { id: string; value: IColumnFilterBag<unknown> };

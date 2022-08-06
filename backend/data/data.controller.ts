@@ -1,11 +1,12 @@
 import { TemplateService } from "shared/lib/templates";
 import noop from "lodash/noop";
+import { QueryFilter } from "shared/types";
 import {
   ConfigurationService,
   configurationService,
 } from "../configuration/configuration.service";
 import { EntitiesService, entitiesService } from "../entities/entities.service";
-import { DataService, dataService, QueryFilter } from "./data.service";
+import { DataService, dataService } from "./data.service";
 import { IPaginationFilters } from "./types";
 
 export class DataController {

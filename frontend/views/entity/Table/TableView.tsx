@@ -9,6 +9,11 @@ import {
 } from "@gothicgeeks/design-system";
 import { IBEPaginatedDataState, usePaginatedData } from "@gothicgeeks/shared";
 import { useState } from "react";
+// import {
+//   FilterOperators,
+//   IColumnFilterBag,
+// } from "@gothicgeeks/design-system/dist/components/Table/filters/types";
+import { QueryFilter } from "shared/types";
 import { NAVIGATION_LINKS } from "../../../lib/routing/links";
 import {
   useEntityCrudSettings,
@@ -26,9 +31,10 @@ import { useViewStateMachine } from "../useViewStateMachine";
 
 interface IProps {
   entity: string;
+  persitentFilters?: QueryFilter[];
 }
 
-export function EntityTableView({ entity }: IProps) {
+export function EntityTableView({ entity, persitentFilters = [] }: IProps) {
   const menuItems = useTableMenuItems(entity);
   const entityFields = useEntityFields(entity);
   const entityCrudSettings = useEntityCrudSettings(entity);
@@ -42,7 +48,10 @@ export function EntityTableView({ entity }: IProps) {
 
   const tableData = usePaginatedData(
     ENTITY_TABLE_PATH(entity),
-    paginatedDataState,
+    {
+      ...paginatedDataState,
+      filters: [...paginatedDataState.filters, ...persitentFilters],
+    },
     {
       enabled: entity && entity !== SLUG_LOADING_VALUE,
     }

@@ -147,11 +147,3 @@ export function DetailsLayout({ children, entity, menuKey }: IProps) {
 // TODO
 
 // How to get relation count
-
-// How many views a deal item has
-
-// So we need to send a request
-
-// count /dealViews/:dealItemId/dealItem
-
-// SELECT * FROM dealviews where dealItemId = :dealItemId

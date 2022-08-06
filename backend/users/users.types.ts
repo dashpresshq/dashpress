@@ -10,3 +10,14 @@ export interface IAccountUser {
   systemId?: string;
   role: AccountRole;
 }
+
+// Reset Password
+// Update Profile, role | systemId | name
+// Delete
+
+// Create
+
+/*
+ Roles
+ Permissions
+*/

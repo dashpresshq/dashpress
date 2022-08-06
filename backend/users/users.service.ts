@@ -54,6 +54,10 @@ export class UsersService {
     return (await this._usersPersistenceService.getAllItems()).length > 0;
   }
 
+  async listUsers() {
+    return await this._usersPersistenceService.getAllItems();
+  }
+
   async removeUser(username: string) {
     await this._usersPersistenceService.removeItem(username);
   }

@@ -5,19 +5,12 @@ import {
   useStorageApi,
   useWaitForResponseMutationOptions,
 } from "@gothicgeeks/shared";
-import { AccountRole } from "backend/users/users.types";
 import { useMutation } from "react-query";
+import { IAccountUser } from "../users/types";
 import { IChangePasswordForm } from "./Password/Form";
 import { IAccountProfile } from "./Profile/Form";
 
 const ACCOUNT_URL = "/api/account/mine";
-
-export interface IAccountUser {
-  name: string;
-  username: string;
-  systemId?: string;
-  role: AccountRole;
-}
 
 export function useMyProfile() {
   return useStorageApi<IAccountUser>(ACCOUNT_URL, {

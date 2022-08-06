@@ -27,6 +27,14 @@ export class UsersController {
     return await this._usersService.tryAuthenticate(authCrendetials);
   }
 
+  async listUsers() {
+    const users = await this._usersService.listUsers();
+    return users.map((user) => {
+      delete user.password;
+      return user;
+    });
+  }
+
   async createUser(user: IAccountUser) {
     await this._usersService.registerUser(user);
   }

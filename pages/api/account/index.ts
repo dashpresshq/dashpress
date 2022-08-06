@@ -60,9 +60,9 @@ const deleteUserRequestSchema: IRequestValidation<
 };
 
 const patchUserRequestSchema: IRequestValidation<
-  Pick<IAccountUser, "username"> & IUpdateUserByCreator
+  Pick<IAccountUser, "name"> & IUpdateUserByCreator
 > = {
-  username: {
+  name: {
     validations: [
       {
         validationType: "required",
@@ -93,6 +93,10 @@ const patchUserRequestSchema: IRequestValidation<
 
 export default requestHandler(
   {
+    GET: async () => {
+      return await usersController.listUsers();
+    },
+
     POST: async (getValidatedRequest) => {
       const validatedRequest = await getValidatedRequest([
         {

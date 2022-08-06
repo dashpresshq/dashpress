@@ -14,10 +14,13 @@ const queryObjectToQueryString = (
 export const NAVIGATION_LINKS = {
   DASHBOARD: "/admin",
   AUTH_SIGNIN: "/auth",
-  USERS: "/users",
   ACCOUNT: {
     PROFILE: "/account/profile",
     PASSWORD: "/account/password",
+  },
+  USERS: {
+    LIST: "/users",
+    DETAILS: (username: string) => `/users/${username}`,
   },
   SETUP: {
     USER: "/setup/user",

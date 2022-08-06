@@ -57,7 +57,6 @@ export function EntitiesSettings() {
           currentTab={tabFromUrl}
           onChange={changeTabParam}
           contents={[
-            // TODO Entities to hide in dashboard
             {
               content: (
                 <EntitiesSelection

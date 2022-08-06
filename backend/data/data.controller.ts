@@ -17,7 +17,7 @@ export class DataController {
   ) {}
 
   async listData(entity: string): Promise<{ id: string; name: string }[]> {
-    // search by  const relationshipSettings = await this.getRelationshipSettings(entity);
+    // search by const relationshipSettings = await this.getRelationshipSettings(entity);
     noop(entity);
     return [];
   }

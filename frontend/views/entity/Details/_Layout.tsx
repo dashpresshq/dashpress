@@ -147,7 +147,3 @@ export function DetailsLayout({ children, entity, menuKey }: IProps) {
     </AppLayout>
   );
 }
-
-// TODO
-
-// How to get relation count

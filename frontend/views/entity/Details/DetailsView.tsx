@@ -65,7 +65,6 @@ export function EntityDetailsView({
       {viewState.type === "error" && <ErrorAlert message={viewState.message} />}
       {viewState.type === "render" && (
         <>
-          {/* TODO use a breadcrumb here for the deep entities */}
           {fitlerOutHiddenScalarColumns(entityFields, hiddenDetailsColumns).map(
             ({ name }) => {
               const value = dataDetails?.data?.[name];

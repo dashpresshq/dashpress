@@ -1,5 +1,6 @@
+import noop from "lodash/noop";
+import { IAccountUser } from "shared/types";
 import { UsersService, usersService } from "./users.service";
-import { IAccountUser } from "./users.types";
 
 export interface IAuthCredentials {
   username: string;
@@ -16,7 +17,7 @@ export type ICreateUser = Pick<
   "name" | "password" | "role" | "username"
 >;
 
-export type IUpdateUserByCreator = Pick<IAccountUser, "role" | "systemId">;
+export type IUpdateUserByCreator = Pick<IAccountUser, "role" | "systemProfile">;
 
 export type IAccountProfile = Omit<IAccountUser, "password">;
 
@@ -29,8 +30,8 @@ export class UsersController {
 
   async listUsers() {
     const users = await this._usersService.listUsers();
-    return users.map((user) => {
-      delete user.password;
+    return users.map(({ password, ...user }) => {
+      noop(password);
       return user;
     });
   }

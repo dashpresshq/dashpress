@@ -7,7 +7,7 @@ import {
 } from "@gothicgeeks/shared";
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
 import { useMutation } from "react-query";
-import { IAccountUser } from "./types";
+import { IAccountUser } from "shared/types";
 
 export const ADMIN_USERS_LIST_ENDPOINT = "/api/account";
 
@@ -34,8 +34,21 @@ export function useUpdateUserMutation() {
   });
 
   return useMutation(
-    async (data: IAccountUser) =>
+    async (data: Partial<IAccountUser>) =>
       await makePatchRequest(ADMIN_USERS_LIST_ENDPOINT, data),
+    apiMutateOptions
+  );
+}
+
+export function useResetUserPasswordMutation() {
+  const apiMutateOptions = useWaitForResponseMutationOptions<void>({
+    endpoints: [],
+    successMessage: MutationsLang.edit("Password"),
+  });
+
+  return useMutation(
+    async (data: { username: string; password: string }) =>
+      await makePostRequest("/api/account/reset-password", data),
     apiMutateOptions
   );
 }

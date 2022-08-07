@@ -6,18 +6,19 @@ export enum AccountRole {
 export interface IAccountUser {
   name: string;
   username: string;
+  systemProfile?: string;
   password: string;
-  systemId?: string;
   role: AccountRole;
 }
 
-// Reset Password
-// Update Profile, role | systemId | name
 // Delete
-
-// Create
 
 /*
  Roles
- Permissions
+ Permissions Group
 */
+
+export const USER_PERMISSIONS = {
+  CAN_MANAGE_USER: 1,
+  CAN_RESET_PASSWORD: 1,
+};

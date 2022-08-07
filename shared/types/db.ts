@@ -1,4 +1,18 @@
-import { IColumnFilterBag } from "@gothicgeeks/design-system";
+interface IDBSchemaRelation {
+  table: string;
+  relationType: string;
+  joinColumnOptions?: {
+    name: string;
+    referencedColumnName: string;
+  }[];
+}
+
+export interface IEntityRelation {
+  table: string;
+  label: string;
+  field?: string;
+  type: "toOne" | "toMany";
+}
 
 export interface IEntityField {
   name: string;
@@ -10,29 +24,11 @@ export interface IEntityField {
   enumeration?: string[];
 }
 
-interface IDBSchemaRelation {
-  table: string;
-  relationType: string;
-  joinColumnOptions?: {
-    name: string;
-    referencedColumnName: string;
-  }[];
-}
-
 export interface IDBSchema {
   name: string;
   fields: IEntityField[];
   uniqueFields: string[][];
   relations: IDBSchemaRelation[];
-}
-
-export interface ISuccessfullAuthenticationResponse {
-  token: string;
-}
-
-export interface ISetupCheck {
-  hasDbCredentials: boolean;
-  hasUsers: boolean;
 }
 
 export enum SupportedDatabaseTypes {
@@ -52,12 +48,3 @@ export type IDBCrendentials = {
   port: number;
   ssl: boolean;
 };
-
-export interface IEntityRelation {
-  table: string;
-  label: string;
-  field?: string;
-  type: "toOne" | "toMany";
-}
-
-export type QueryFilter = { id: string; value: IColumnFilterBag<unknown> };

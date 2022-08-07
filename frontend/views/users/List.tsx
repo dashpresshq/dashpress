@@ -9,7 +9,7 @@ import { IFEPaginatedDataState, useFEPaginatedData } from "@gothicgeeks/shared";
 import { useState } from "react";
 import { AppLayout } from "frontend/_layouts/app";
 import { UserPlus } from "react-feather";
-import { NAVIGATION_LINKS } from "frontend/lib/routing";
+import { NAVIGATION_LINKS, useSetPageTitle } from "frontend/lib/routing";
 import router from "next/router";
 import {
   ADMIN_USERS_LIST_ENDPOINT,
@@ -20,17 +20,18 @@ import { IAccountUser } from "./types";
 export function ListUsers() {
   const [paginatedDataState, setPaginatedDataState] = useState<
     IFEPaginatedDataState<IAccountUser>
-  >({ ...DEFAULT_TABLE_PARAMS, sortBy: undefined });
+  >({ ...DEFAULT_TABLE_PARAMS, pageIndex: 1 });
+
+  useSetPageTitle("Manage Users", "USERS_LIST");
 
   const userDeletionMutation = useUserDeletionMutation();
 
   const tableData = useFEPaginatedData(ADMIN_USERS_LIST_ENDPOINT, {
     ...paginatedDataState,
     sortBy: undefined,
+    pageIndex: 1,
     filters: undefined,
   });
-
-  console.log(tableData);
 
   return (
     <AppLayout>
@@ -56,6 +57,7 @@ export function ListUsers() {
           },
           {
             Header: "Action",
+            // eslint-disable-next-line react/no-unstable-nested-components
             Cell: ({ row }: { row: { original: IAccountUser } }) => (
               <Stack spacing={4} align="center">
                 <SoftButton

@@ -3,7 +3,7 @@ import {
   ICreateUser,
   IUpdateUserByCreator,
 } from "backend/users/users.controller";
-import { IAccountUser, AccountRole } from "backend/users/users.types";
+import { IAccountUser, AccountRole } from "shared/types";
 import { IRequestValidation } from "shared/validations/makeRequestValidationRunnable";
 import { requestHandler } from "../../../backend/lib/request";
 
@@ -82,7 +82,7 @@ const patchUserRequestSchema: IRequestValidation<
       },
     ],
   },
-  systemId: {
+  systemProfile: {
     validations: [
       {
         validationType: "required",

@@ -5,9 +5,9 @@ import {
   useStorageApi,
   useWaitForResponseMutationOptions,
 } from "@gothicgeeks/shared";
-import { IUserSetupForm } from "frontend/views/setup/User/Form";
 import { useRouter } from "next/router";
 import { useMutation } from "react-query";
+import { ISetupUserForm } from "shared/form-schemas/setup/user";
 import {
   IDBCrendentials,
   ISetupCheck,
@@ -74,7 +74,7 @@ export function useSetupUserMutation() {
     });
 
   return useMutation(
-    async (data: IUserSetupForm) =>
+    async (data: ISetupUserForm) =>
       await makePostRequest(`/api/setup/user`, data),
     apiMutateOptions
   );

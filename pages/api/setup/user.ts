@@ -1,36 +1,6 @@
-import {
-  IAccountUserSetupFields,
-  setupController,
-} from "backend/setup/setup.controller";
-import { IRequestValidation } from "shared/validations/makeRequestValidationRunnable";
+import { setupController } from "backend/setup/setup.controller";
+import { SETUP_USER_FORM_SCHEMA } from "shared/form-schemas/setup/user";
 import { requestHandler } from "../../../backend/lib/request";
-
-const userSetupRequestSchema: IRequestValidation<IAccountUserSetupFields> = {
-  username: {
-    validations: [
-      {
-        validationType: "required",
-      },
-      {
-        validationType: "alphanumeric",
-      },
-    ],
-  },
-  name: {
-    validations: [
-      {
-        validationType: "required",
-      },
-    ],
-  },
-  password: {
-    validations: [
-      {
-        validationType: "required",
-      },
-    ],
-  },
-};
 
 export default requestHandler(
   {
@@ -38,7 +8,7 @@ export default requestHandler(
       const validatedRequest = await getValidatedRequest([
         {
           _type: "requestBody",
-          options: userSetupRequestSchema,
+          options: SETUP_USER_FORM_SCHEMA,
         },
       ]);
       return await setupController.setUpFirstUser(validatedRequest.requestBody);

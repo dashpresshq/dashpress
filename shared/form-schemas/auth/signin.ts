@@ -1,4 +1,4 @@
-import { ISchemaFormConfig } from "..";
+import { IAppliedSchemaFormConfig } from "..";
 
 export type ISignInForm = {
   username: string;
@@ -6,10 +6,7 @@ export type ISignInForm = {
   rememberMe: boolean;
 };
 
-export const AUTH_SIGNIN_FORM_SCHEMA: Record<
-  keyof ISignInForm,
-  ISchemaFormConfig
-> = {
+export const AUTH_SIGNIN_FORM_SCHEMA: IAppliedSchemaFormConfig<ISignInForm> = {
   username: {
     type: "text",
     validations: [

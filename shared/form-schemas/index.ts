@@ -8,3 +8,5 @@ export interface ISchemaFormConfig {
   label?: string;
   validations: IFieldValidationItem[];
 }
+
+export type IAppliedSchemaFormConfig<T> = Record<keyof T, ISchemaFormConfig>;

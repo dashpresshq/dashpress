@@ -1,61 +1,16 @@
-import { FormInput, FormButton } from "@gothicgeeks/design-system";
-import { Form, Field } from "react-final-form";
-import { alphaNumeric, composeValidators, required } from "@gothicgeeks/shared";
 import { IFormProps } from "frontend/lib/form/types";
+import {
+  ISetupUserForm,
+  SETUP_USER_FORM_SCHEMA,
+} from "shared/form-schemas/setup/user";
+import { SchemaForm } from "frontend/lib/form/SchemaForm";
 
-export interface IUserSetupForm {
-  name: string;
-  username: string;
-  password: string;
-}
-
-export function UserSetupForm({ onSubmit }: IFormProps<IUserSetupForm>) {
+export function UserSetupForm({ onSubmit }: IFormProps<ISetupUserForm>) {
   return (
-    <Form
+    <SchemaForm<ISetupUserForm>
+      buttonText="Create First User"
       onSubmit={onSubmit}
-      render={({ handleSubmit, submitting, pristine }) => (
-        <form onSubmit={handleSubmit}>
-          <Field
-            name="username"
-            validate={composeValidators(required, alphaNumeric)}
-            validateFields={[]}
-          >
-            {({ input, meta }) => (
-              <FormInput label="Username" meta={meta} required input={input} />
-            )}
-          </Field>
-
-          <Field name="name" validate={required} validateFields={[]}>
-            {({ input, meta }) => (
-              <FormInput label="Name" meta={meta} required input={input} />
-            )}
-          </Field>
-
-          <Field
-            name="password"
-            validate={required}
-            required
-            validateFields={[]}
-          >
-            {({ input, meta }) => (
-              <FormInput
-                label="Password"
-                type="password"
-                required
-                meta={meta}
-                input={input}
-              />
-            )}
-          </Field>
-
-          <FormButton
-            text="Create First User"
-            isMakingRequest={submitting}
-            disabled={pristine}
-            block
-          />
-        </form>
-      )}
+      fields={SETUP_USER_FORM_SCHEMA}
     />
   );
 }

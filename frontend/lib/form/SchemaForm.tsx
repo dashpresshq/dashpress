@@ -2,12 +2,15 @@ import { FormButton } from "@gothicgeeks/design-system";
 import { resetFormValues } from "@gothicgeeks/shared";
 import { RenderFormInput } from "frontend/views/entity/_RenderFormInput";
 import { Field, Form } from "react-final-form";
-import { ISchemaFormConfig } from "shared/form-schemas";
+import {
+  IAppliedSchemaFormConfig,
+  ISchemaFormConfig,
+} from "shared/form-schemas";
 import { runValidationError } from "shared/validations/run";
 import { userFriendlyCase } from "../strings";
 
 interface IProps<T> {
-  fields: Record<keyof T, ISchemaFormConfig>;
+  fields: IAppliedSchemaFormConfig<T>;
   onSubmit: (data: T) => void;
   initialValues?: Partial<T>;
   buttonText: string;

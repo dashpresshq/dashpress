@@ -1,51 +1,11 @@
 import {
   usersController,
-  ICreateUser,
   IUpdateUserByCreator,
 } from "backend/users/users.controller";
+import { CREATE_USER_FORM_SCHEMA } from "shared/form-schemas/users/create";
 import { IAccountUser, AccountRole } from "shared/types";
 import { IRequestValidation } from "shared/validations/makeRequestValidationRunnable";
 import { requestHandler } from "../../../backend/lib/request";
-
-const createUserRequestSchema: IRequestValidation<ICreateUser> = {
-  username: {
-    validations: [
-      {
-        validationType: "required",
-      },
-      {
-        validationType: "alphanumeric",
-      },
-    ],
-  },
-  name: {
-    validations: [
-      {
-        validationType: "required",
-      },
-    ],
-  },
-  role: {
-    validations: [
-      {
-        validationType: "required",
-      },
-      {
-        validationType: "isIn",
-        constraint: {
-          options: Object.values(AccountRole),
-        },
-      },
-    ],
-  },
-  password: {
-    validations: [
-      {
-        validationType: "required",
-      },
-    ],
-  },
-};
 
 const deleteUserRequestSchema: IRequestValidation<
   Pick<IAccountUser, "username">
@@ -101,7 +61,7 @@ export default requestHandler(
       const validatedRequest = await getValidatedRequest([
         {
           _type: "requestBody",
-          options: createUserRequestSchema,
+          options: CREATE_USER_FORM_SCHEMA,
         },
       ]);
       return await usersController.createUser(validatedRequest.requestBody);

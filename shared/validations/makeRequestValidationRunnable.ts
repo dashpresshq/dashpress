@@ -1,17 +1,9 @@
 import { StringUtils } from "@gothicgeeks/shared";
+import { ISchemaFormConfig } from "shared/form-schemas";
 import { runValidationError } from "./run";
-import { IFieldValidationItem, ValidationTypes } from "./types";
 import { ENTITY_VALIDATION_CONFIG } from "./validations-map";
 
-interface IRequestValidationSchema {
-  label?: string;
-  validations: {
-    validationType: ValidationTypes;
-    constraint?: IFieldValidationItem["constraint"];
-  }[];
-}
-
-export type IRequestValidation<T> = Record<keyof T, IRequestValidationSchema>;
+export type IRequestValidation<T> = Record<keyof T, ISchemaFormConfig>;
 
 export const makeRequestValidationRunnable = (
   requestValidation: IRequestValidation<any>

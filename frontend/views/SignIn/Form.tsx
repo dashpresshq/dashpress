@@ -21,7 +21,7 @@ export function SignInForm({ onSubmit }: IFormProps<ISignInForm>) {
         <form onSubmit={handleSubmit}>
           <Field name="username" validate={required} validateFields={[]}>
             {({ input, meta }) => (
-              <FormInput label="Username" meta={meta} input={input} />
+              <FormInput label="Username" required meta={meta} input={input} />
             )}
           </Field>
           <Field name="password" validate={required} validateFields={[]}>
@@ -29,6 +29,7 @@ export function SignInForm({ onSubmit }: IFormProps<ISignInForm>) {
               <FormInput
                 label="Password"
                 type="password"
+                required
                 meta={meta}
                 input={input}
               />

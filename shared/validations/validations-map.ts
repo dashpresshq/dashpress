@@ -76,7 +76,7 @@ export const ENTITY_VALIDATION_CONFIG: Record<
   },
 
   alphanumeric: {
-    message: "{{ name }} should contain only alpabets, numbers and underscore",
+    message: "{{ name }} should contain only alphabets and numbers",
     implementation: handleValidation(isAlphanumeric),
   },
   postiveNumber: {

@@ -1,18 +1,9 @@
 import { FormButton } from "@gothicgeeks/design-system";
-import { IColorableSelection } from "frontend/views/entity/Configure/Fields/types";
 import { RenderFormInput } from "frontend/views/entity/_RenderFormInput";
 import { Field, Form } from "react-final-form";
-import { FIELD_TYPES_CONFIG_MAP } from "shared/validations";
+import { ISchemaFormConfig } from "shared/form-schemas";
 import { runValidationError } from "shared/validations/run";
-import { IFieldValidationItem } from "shared/validations/types";
 import { userFriendlyCase } from "../strings";
-
-interface ISchemaFormConfig {
-  selections?: IColorableSelection[];
-  type: keyof typeof FIELD_TYPES_CONFIG_MAP;
-  label?: string;
-  validations: IFieldValidationItem[];
-}
 
 interface IProps<T> {
   fields: Record<keyof T, ISchemaFormConfig>;

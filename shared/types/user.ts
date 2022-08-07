@@ -1,6 +1,6 @@
 export enum AccountRole {
   Creator = "creator",
-  viewer = "viewer",
+  Viewer = "viewer",
 }
 
 export interface IAccountUser {
@@ -21,4 +21,14 @@ export interface IAccountUser {
 export const USER_PERMISSIONS = {
   CAN_MANAGE_USER: 1,
   CAN_RESET_PASSWORD: 1,
+  CAN_MANAGE_PERMISSIONS: 1,
 };
+
+// Must not be empty when deleting
+// Create, Update, Delete, List, Details permission group
+
+// Assign permisson
+
+// Un-assign permission
+
+// list group permissions

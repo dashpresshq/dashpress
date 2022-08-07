@@ -1,4 +1,4 @@
-import { IAccountUser } from "backend/users/users.types";
+import { IAccountUser } from "shared/types";
 import { ValidationImplType } from "./types";
 
 export const authenticatedUserValidationImpl: ValidationImplType<

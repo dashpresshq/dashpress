@@ -8,8 +8,7 @@ import {
 } from "backend/lib/config-persistence";
 import { BadRequestError, ForbiddenError } from "backend/lib/errors";
 import { HashService } from "backend/lib/hash/hash.service";
-import { ISuccessfullAuthenticationResponse } from "shared/types";
-import { IAccountUser } from "./users.types";
+import { ISuccessfullAuthenticationResponse, IAccountUser } from "shared/types";
 
 const INVALID_LOGIN_MESSAGE = "Invalid Login";
 

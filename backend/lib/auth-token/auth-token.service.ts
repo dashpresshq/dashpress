@@ -1,5 +1,5 @@
-import { IAccountUser } from "backend/users/users.types";
 import jsonwebtoken from "jsonwebtoken";
+import { IAccountUser } from "shared/types";
 import {
   ConfigKeys,
   configService,

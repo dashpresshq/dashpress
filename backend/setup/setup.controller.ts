@@ -6,8 +6,12 @@ import { CREDENTIALS_DOMAINS } from "backend/credentials/crendential.types";
 import { getKnexConnection } from "backend/lib/connection/db";
 import { BadRequestError } from "backend/lib/errors";
 import { usersService, UsersService } from "backend/users/users.service";
-import { IAccountUser, AccountRole } from "backend/users/users.types";
-import { IDBCrendentials, ISetupCheck } from "shared/types";
+import {
+  IAccountUser,
+  AccountRole,
+  IDBCrendentials,
+  ISetupCheck,
+} from "shared/types";
 
 export type IAccountUserSetupFields = Pick<
   IAccountUser,

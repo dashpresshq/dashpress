@@ -6,7 +6,7 @@ import {
   useWaitForResponseMutationOptions,
 } from "@gothicgeeks/shared";
 import { useMutation } from "react-query";
-import { IAccountUser } from "../users/types";
+import { IAccountUser } from "shared/types";
 import { IChangePasswordForm } from "./Password/Form";
 import { IAccountProfile } from "./Profile/Form";
 

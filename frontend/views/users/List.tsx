@@ -11,11 +11,11 @@ import { AppLayout } from "frontend/_layouts/app";
 import { UserPlus } from "react-feather";
 import { NAVIGATION_LINKS, useSetPageTitle } from "frontend/lib/routing";
 import router from "next/router";
+import { IAccountUser } from "shared/types";
 import {
   ADMIN_USERS_LIST_ENDPOINT,
   useUserDeletionMutation,
 } from "./users.store";
-import { IAccountUser } from "./types";
 
 export function ListUsers() {
   const [paginatedDataState, setPaginatedDataState] = useState<

@@ -2,7 +2,7 @@ import {
   IChangePassword,
   usersController,
 } from "backend/users/users.controller";
-import { IAccountUser } from "backend/users/users.types";
+import { IAccountUser } from "shared/types";
 import { IRequestValidation } from "shared/validations/makeRequestValidationRunnable";
 import { requestHandler } from "../../../backend/lib/request";
 

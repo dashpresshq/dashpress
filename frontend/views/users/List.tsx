@@ -83,7 +83,7 @@ export function ListUsers() {
             label: "Add new user",
             IconComponent: UserPlus,
             onClick: () => {
-              router.push("/");
+              router.push(NAVIGATION_LINKS.USERS.CREATE);
             },
           },
         ]}

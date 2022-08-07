@@ -20,6 +20,7 @@ export const NAVIGATION_LINKS = {
   },
   USERS: {
     LIST: "/users",
+    CREATE: "/users/create",
     DETAILS: (username: string) => `/users/${username}`,
   },
   SETUP: {

@@ -16,7 +16,8 @@ export const runValidationError =
         const firstFailedValidation = validationsToRun.find((validation) =>
           ENTITY_VALIDATION_CONFIG[validation.validationType]?.implementation(
             values[field],
-            validation.errorMessage,
+            validation.errorMessage ||
+              ENTITY_VALIDATION_CONFIG[validation.validationType].message,
             validation.constraint || {},
             values
           )
@@ -25,10 +26,15 @@ export const runValidationError =
         return [
           field,
           firstFailedValidation
-            ? TemplateService.compile(firstFailedValidation.errorMessage, {
-                name: getEntityFieldLabels(field),
-                ...firstFailedValidation.constraint,
-              })
+            ? TemplateService.compile(
+                firstFailedValidation.errorMessage ||
+                  ENTITY_VALIDATION_CONFIG[firstFailedValidation.validationType]
+                    .message,
+                {
+                  name: getEntityFieldLabels(field),
+                  ...firstFailedValidation.constraint,
+                }
+              )
             : undefined,
         ];
       })

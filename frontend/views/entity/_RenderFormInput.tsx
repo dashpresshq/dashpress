@@ -44,6 +44,10 @@ export function RenderFormInput({
     ...renderProps,
   };
 
+  if (entityFieldSelections.length > 0) {
+    return <FormSelect {...formProps} selectData={entityFieldSelections} />;
+  }
+
   switch (type) {
     case "email":
     case "password":

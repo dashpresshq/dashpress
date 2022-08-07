@@ -11,6 +11,7 @@ import { queryFilterValidationImpl as queryFilters } from "./query-filters";
 import { entityRequestBodyValidationImpl as entityRequestBody } from "./entity-request-body";
 import { requestBodyValidationImpl as requestBody } from "./request-body";
 import { guestValidationImpl as guest } from "./guest";
+import { canUserValidationImpl as canUser } from "./can-user";
 import { authenticatedUserValidationImpl as authenticatedUser } from "./authenticated-user";
 
 import { ValidationImplType } from "./types";
@@ -24,6 +25,7 @@ export const ValidationImpl: Record<
   requestBody,
   guest,
   isCreator,
+  canUser,
   authenticatedUser,
   configBody,
   entityRequestBody,

@@ -13,7 +13,7 @@ export function UserUpdate() {
   const updateUserMutation = useUpdateUserMutation();
   const resetPasswordMutation = useResetUserPasswordMutation();
   const { canGoBack, goBack } = useNavigationStack();
-  useSetPageTitle(`Create User`, "CREATE_USER");
+  useSetPageTitle(`Update User`, "UPDATE_USER");
 
   return (
     <AppLayout>

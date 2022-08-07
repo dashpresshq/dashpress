@@ -6,6 +6,7 @@ import {
   useWaitForResponseMutationOptions,
 } from "@gothicgeeks/shared";
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
+import { useRouter } from "next/router";
 import { useMutation } from "react-query";
 import { IAccountUser } from "shared/types";
 
@@ -54,14 +55,21 @@ export function useResetUserPasswordMutation() {
 }
 
 export function useCreateUserMutation() {
-  const apiMutateOptions = useWaitForResponseMutationOptions<void>({
+  const router = useRouter();
+  const apiMutateOptions = useWaitForResponseMutationOptions<IAccountUser>({
     endpoints: [ADMIN_USERS_LIST_ENDPOINT],
+    smartSuccessMessage: ({ username }) => ({
+      message: `User created successfully`,
+      action: {
+        label: `Click here to view user`,
+        action: () => router.push(NAVIGATION_LINKS.USERS.DETAILS(username)),
+      },
+    }),
     successMessage: MutationsLang.create("User"),
   });
 
-  return useMutation(
-    async (data: IAccountUser) =>
-      await makePostRequest(ADMIN_USERS_LIST_ENDPOINT, data),
-    apiMutateOptions
-  );
+  return useMutation(async (data: IAccountUser) => {
+    await makePostRequest(ADMIN_USERS_LIST_ENDPOINT, data);
+    return data;
+  }, apiMutateOptions);
 }

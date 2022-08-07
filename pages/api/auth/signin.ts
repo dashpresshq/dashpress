@@ -1,26 +1,6 @@
-import { IRequestValidation } from "shared/validations/makeRequestValidationRunnable";
-import {
-  IAuthCredentials,
-  usersController,
-} from "../../../backend/users/users.controller";
+import { AUTH_SIGNIN_FORM_SCHEMA } from "shared/form-schemas/auth/signin";
+import { usersController } from "../../../backend/users/users.controller";
 import { requestHandler } from "../../../backend/lib/request";
-
-const signinRequestSchema: IRequestValidation<IAuthCredentials> = {
-  username: {
-    validations: [
-      {
-        validationType: "required",
-      },
-    ],
-  },
-  password: {
-    validations: [
-      {
-        validationType: "required",
-      },
-    ],
-  },
-};
 
 export default requestHandler(
   {
@@ -28,7 +8,7 @@ export default requestHandler(
       const validatedRequest = await getValidatedRequest([
         {
           _type: "requestBody",
-          options: signinRequestSchema,
+          options: AUTH_SIGNIN_FORM_SCHEMA,
         },
       ]);
       return await usersController.login(validatedRequest.requestBody);

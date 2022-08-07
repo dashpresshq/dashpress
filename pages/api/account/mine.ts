@@ -1,19 +1,7 @@
 import { usersController } from "backend/users/users.controller";
+import { UPDATE_PROFILE_FORM_SCHEMA } from "shared/form-schemas/profile/update";
 import { IAccountUser } from "shared/types";
-import { IRequestValidation } from "shared/validations/makeRequestValidationRunnable";
 import { requestHandler } from "../../../backend/lib/request";
-
-const updateProfileRequestSchema: IRequestValidation<
-  Pick<IAccountUser, "name">
-> = {
-  name: {
-    validations: [
-      {
-        validationType: "required",
-      },
-    ],
-  },
-};
 
 export default requestHandler({
   PATCH: async (getValidatedRequest) => {
@@ -21,7 +9,7 @@ export default requestHandler({
       "authenticatedUser",
       {
         _type: "requestBody",
-        options: updateProfileRequestSchema,
+        options: UPDATE_PROFILE_FORM_SCHEMA,
       },
     ]);
     return await usersController.updateProfile(

@@ -1,4 +1,5 @@
 import { FormButton } from "@gothicgeeks/design-system";
+import { resetFormValues } from "@gothicgeeks/shared";
 import { RenderFormInput } from "frontend/views/entity/_RenderFormInput";
 import { Field, Form } from "react-final-form";
 import { ISchemaFormConfig } from "shared/form-schemas";
@@ -8,8 +9,9 @@ import { userFriendlyCase } from "../strings";
 interface IProps<T> {
   fields: Record<keyof T, ISchemaFormConfig>;
   onSubmit: (data: T) => void;
-  initialValues?: T;
+  initialValues?: Partial<T>;
   buttonText: string;
+  resetForm?: true;
 }
 
 export function SchemaForm<T extends Record<string, unknown>>({
@@ -17,6 +19,7 @@ export function SchemaForm<T extends Record<string, unknown>>({
   fields,
   buttonText,
   initialValues,
+  resetForm,
 }: IProps<T>) {
   return (
     <Form
@@ -33,8 +36,20 @@ export function SchemaForm<T extends Record<string, unknown>>({
         (field: keyof T) =>
           fields[field].label || userFriendlyCase(field as string)
       )}
-      render={({ handleSubmit, submitting, pristine }) => (
-        <form onSubmit={handleSubmit}>
+      render={({ handleSubmit, submitting, values, form, pristine }) => (
+        <form
+          noValidate
+          onSubmit={(e) => {
+            e.preventDefault();
+            handleSubmit(e)?.then(() => {
+              resetFormValues(
+                resetForm,
+                values as Record<string, string>,
+                form as any
+              );
+            });
+          }}
+        >
           {Object.entries(fields).map(
             ([field, bag]: [string, ISchemaFormConfig]) => (
               <Field key={field} name={field} validateFields={[]}>

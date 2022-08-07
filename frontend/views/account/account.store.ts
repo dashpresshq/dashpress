@@ -6,9 +6,9 @@ import {
   useWaitForResponseMutationOptions,
 } from "@gothicgeeks/shared";
 import { useMutation } from "react-query";
+import { IUpdateUserForm } from "shared/form-schemas/profile/update";
 import { IAccountUser } from "shared/types";
 import { IChangePasswordForm } from "./Password/Form";
-import { IAccountProfile } from "./Profile/Form";
 
 const ACCOUNT_URL = "/api/account/mine";
 
@@ -25,7 +25,7 @@ export function useUpdateProfileMutation() {
   });
 
   return useMutation(
-    async (data: IAccountProfile) => await makePatchRequest(ACCOUNT_URL, data),
+    async (data: IUpdateUserForm) => await makePatchRequest(ACCOUNT_URL, data),
     apiMutateOptions
   );
 }

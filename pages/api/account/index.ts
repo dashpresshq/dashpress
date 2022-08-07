@@ -11,6 +11,7 @@ const deleteUserRequestSchema: IRequestValidation<
   Pick<IAccountUser, "username">
 > = {
   username: {
+    type: "text",
     validations: [
       {
         validationType: "required",

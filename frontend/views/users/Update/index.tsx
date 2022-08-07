@@ -14,6 +14,7 @@ export function UserUpdate() {
   const resetPasswordMutation = useResetUserPasswordMutation();
   const { canGoBack, goBack } = useNavigationStack();
   useSetPageTitle(`Update User`, "UPDATE_USER");
+  //   const myProfile = useMyProfile();
 
   return (
     <AppLayout>
@@ -29,7 +30,11 @@ export function UserUpdate() {
               : undefined
           }
         >
+          {/* {myProfile.isLoading ? (
+            <FormSkeleton schema={[FormSkeletonSchema.Input]} />
+          ) : ( */}
           <UpdateUserForm onSubmit={updateUserMutation.mutateAsync} />
+          {/* )} */}
         </SectionBox>
         <Spacer />
         <SectionBox title="Reset User Password">

@@ -58,10 +58,12 @@ export function ListUsers() {
           {
             Header: "Action",
             // eslint-disable-next-line react/no-unstable-nested-components
-            Cell: ({ row }: { row: { original: IAccountUser } }) => (
+            Cell: ({ row }: { row: { original: unknown } }) => (
               <Stack spacing={4} align="center">
                 <SoftButton
-                  action={NAVIGATION_LINKS.USERS.DETAILS(row.original.username)}
+                  action={NAVIGATION_LINKS.USERS.DETAILS(
+                    (row.original as unknown as IAccountUser).username
+                  )}
                   label="Details"
                   color="primary"
                   justIcon
@@ -69,7 +71,9 @@ export function ListUsers() {
                 />
                 <DeleteButton
                   onDelete={() =>
-                    userDeletionMutation.mutate(row.original.username)
+                    userDeletionMutation.mutate(
+                      (row.original as unknown as IAccountUser).username
+                    )
                   }
                   isMakingDeleteRequest={userDeletionMutation.isLoading}
                   shouldConfirmAlert

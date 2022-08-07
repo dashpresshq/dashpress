@@ -8,6 +8,7 @@ import {
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
 import { useRouter } from "next/router";
 import { useMutation } from "react-query";
+import { ICreateUserForm } from "shared/form-schemas/users/create";
 import { IAccountUser } from "shared/types";
 
 export const ADMIN_USERS_LIST_ENDPOINT = "/api/account";
@@ -56,7 +57,7 @@ export function useResetUserPasswordMutation() {
 
 export function useCreateUserMutation() {
   const router = useRouter();
-  const apiMutateOptions = useWaitForResponseMutationOptions<IAccountUser>({
+  const apiMutateOptions = useWaitForResponseMutationOptions<ICreateUserForm>({
     endpoints: [ADMIN_USERS_LIST_ENDPOINT],
     smartSuccessMessage: ({ username }) => ({
       message: `User created successfully`,
@@ -68,7 +69,7 @@ export function useCreateUserMutation() {
     successMessage: MutationsLang.create("User"),
   });
 
-  return useMutation(async (data: IAccountUser) => {
+  return useMutation(async (data: ICreateUserForm) => {
     await makePostRequest(ADMIN_USERS_LIST_ENDPOINT, data);
     return data;
   }, apiMutateOptions);

@@ -12,6 +12,7 @@ export function CreateUserForm({ onSubmit }: IFormProps<ICreateUserForm>) {
       onSubmit={onSubmit}
       buttonText={ButtonLang.create}
       fields={CREATE_USER_FORM_SCHEMA}
+      resetForm
     />
   );
 }

@@ -1,34 +1,21 @@
-import { FormInput, FormButton } from "@gothicgeeks/design-system";
-import { Form, Field } from "react-final-form";
-import { required } from "@gothicgeeks/shared";
+import { ButtonLang } from "@gothicgeeks/shared";
 import { IFormProps } from "frontend/lib/form/types";
-
-export interface IAccountProfile {
-  name: string;
-}
+import { SchemaForm } from "frontend/lib/form/SchemaForm";
+import {
+  IUpdateUserForm,
+  UPDATE_PROFILE_FORM_SCHEMA,
+} from "shared/form-schemas/profile/update";
 
 export function UpdateProfileForm({
   onSubmit,
   initialValues,
-}: IFormProps<IAccountProfile>) {
+}: IFormProps<IUpdateUserForm>) {
   return (
-    <Form
+    <SchemaForm<IUpdateUserForm>
       onSubmit={onSubmit}
       initialValues={initialValues}
-      render={({ handleSubmit, submitting, pristine }) => (
-        <form onSubmit={handleSubmit}>
-          <Field name="name" validate={required} validateFields={[]}>
-            {({ input, meta }) => (
-              <FormInput label="Name" required meta={meta} input={input} />
-            )}
-          </Field>
-          <FormButton
-            text="Update Profile"
-            isMakingRequest={submitting}
-            disabled={pristine}
-          />
-        </form>
-      )}
+      buttonText={ButtonLang.update}
+      fields={UPDATE_PROFILE_FORM_SCHEMA}
     />
   );
 }

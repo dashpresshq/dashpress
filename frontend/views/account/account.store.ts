@@ -6,9 +6,9 @@ import {
   useWaitForResponseMutationOptions,
 } from "@gothicgeeks/shared";
 import { useMutation } from "react-query";
+import { IChangePasswordForm } from "shared/form-schemas/profile/password";
 import { IUpdateUserForm } from "shared/form-schemas/profile/update";
 import { IAccountUser } from "shared/types";
-import { IChangePasswordForm } from "./Password/Form";
 
 const ACCOUNT_URL = "/api/account/mine";
 

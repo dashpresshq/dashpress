@@ -1,27 +1,7 @@
-import {
-  IChangePassword,
-  usersController,
-} from "backend/users/users.controller";
+import { usersController } from "backend/users/users.controller";
+import { CHANGE_PASSWORD_FORM_SCHEMA } from "shared/form-schemas/profile/password";
 import { IAccountUser } from "shared/types";
-import { IRequestValidation } from "shared/validations/makeRequestValidationRunnable";
 import { requestHandler } from "../../../backend/lib/request";
-
-const changePasswordRequestSchema: IRequestValidation<IChangePassword> = {
-  oldPassword: {
-    validations: [
-      {
-        validationType: "required",
-      },
-    ],
-  },
-  newPassword: {
-    validations: [
-      {
-        validationType: "required",
-      },
-    ],
-  },
-};
 
 export default requestHandler({
   POST: async (getValidatedRequest) => {
@@ -29,7 +9,7 @@ export default requestHandler({
       "authenticatedUser",
       {
         _type: "requestBody",
-        options: changePasswordRequestSchema,
+        options: CHANGE_PASSWORD_FORM_SCHEMA,
       },
     ]);
     return await usersController.updatePassword(

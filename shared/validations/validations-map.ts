@@ -118,6 +118,18 @@ export const ENTITY_VALIDATION_CONFIG: Record<
     message: "{{ name }} is invalid. Allowed values are {{ options }}",
     implementation: handleValidation(isIn, "options"),
   },
+  matchOtherField: {
+    input: {
+      otherField: "",
+    },
+    message: "{{ name }} should match {{otherField}}",
+    implementation: handleValidation((value, parameter, allValues) => {
+      if (value === allValues[parameter as string]) {
+        return true;
+      }
+      return false;
+    }, "otherField"),
+  },
 
   // Needs some work
   // Selection, enum like check
@@ -131,13 +143,7 @@ export const ENTITY_VALIDATION_CONFIG: Record<
     message: "{{ name }} already exists",
     implementation: () => undefined,
   },
-  matchOtherField: {
-    input: {
-      otherField: "",
-    },
-    message: "{{ name }} should match {{otherField}}", // :eyes
-    implementation: () => undefined,
-  },
+
   regex: {
     input: {
       pattern: "//",

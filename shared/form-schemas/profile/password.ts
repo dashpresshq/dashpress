@@ -1,18 +1,43 @@
 import { ISchemaFormConfig } from "..";
 
 export type IChangePasswordForm = {
-  name: string;
+  oldPassword: string;
+  newPassword: string;
+  reNewPassword: string;
 };
 
 export const CHANGE_PASSWORD_FORM_SCHEMA: Record<
   keyof IChangePasswordForm,
   ISchemaFormConfig
 > = {
-  name: {
+  oldPassword: {
     type: "password",
     validations: [
       {
         validationType: "required",
+      },
+    ],
+  },
+  newPassword: {
+    type: "password",
+    validations: [
+      {
+        validationType: "required",
+      },
+    ],
+  },
+  reNewPassword: {
+    type: "password",
+    label: "New Password Again",
+    validations: [
+      {
+        validationType: "required",
+      },
+      {
+        validationType: "matchOtherField",
+        constraint: {
+          otherField: "newPassword",
+        },
       },
     ],
   },

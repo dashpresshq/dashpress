@@ -13,7 +13,8 @@ import { useRouter } from "next/router";
 import { NAVIGATION_LINKS } from "frontend/lib/routing";
 import { useSetupCheck } from "frontend/hooks/setup/setup.store";
 import { ComponentIsLoading } from "@gothicgeeks/design-system";
-import { SignInForm, ISignInForm } from "./Form";
+import { ISignInForm } from "shared/form-schemas/auth/signin";
+import { SignInForm } from "./Form";
 
 function useSignInMutation() {
   const nextRoute = useRouteParam("next");

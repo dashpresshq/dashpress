@@ -1,10 +1,11 @@
 import { setupController } from "backend/setup/setup.controller";
+import { IAppliedSchemaFormConfig } from "shared/form-schemas";
 import { SupportedDatabaseTypes, IDBCrendentials } from "shared/types";
-import { IRequestValidation } from "shared/validations/makeRequestValidationRunnable";
 import { requestHandler } from "../../../backend/lib/request";
 
-const credentialRequestSchema: IRequestValidation<IDBCrendentials> = {
+const credentialRequestSchema: IAppliedSchemaFormConfig<IDBCrendentials> = {
   databaseType: {
+    type: "selection",
     validations: [
       {
         validationType: "required",
@@ -18,9 +19,11 @@ const credentialRequestSchema: IRequestValidation<IDBCrendentials> = {
     ],
   },
   schemaNames: {
+    type: "text",
     validations: [],
   },
   database: {
+    type: "text",
     validations: [
       {
         validationType: "isString",
@@ -28,6 +31,7 @@ const credentialRequestSchema: IRequestValidation<IDBCrendentials> = {
     ],
   },
   password: {
+    type: "password",
     validations: [
       {
         validationType: "isString",
@@ -35,6 +39,7 @@ const credentialRequestSchema: IRequestValidation<IDBCrendentials> = {
     ],
   },
   user: {
+    type: "text",
     validations: [
       {
         validationType: "isString",
@@ -42,6 +47,7 @@ const credentialRequestSchema: IRequestValidation<IDBCrendentials> = {
     ],
   },
   host: {
+    type: "text",
     validations: [
       {
         validationType: "isString",
@@ -49,6 +55,7 @@ const credentialRequestSchema: IRequestValidation<IDBCrendentials> = {
     ],
   },
   port: {
+    type: "number",
     validations: [
       {
         validationType: "isNumber",
@@ -65,6 +72,7 @@ const credentialRequestSchema: IRequestValidation<IDBCrendentials> = {
     ],
   },
   ssl: {
+    type: "boolean",
     validations: [
       {
         validationType: "isBoolean",

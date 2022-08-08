@@ -84,7 +84,7 @@ export function ListUsers() {
         ]}
         menuItems={[
           {
-            label: "Add new user",
+            label: "Add New User",
             IconComponent: UserPlus,
             onClick: () => {
               router.push(NAVIGATION_LINKS.USERS.CREATE);

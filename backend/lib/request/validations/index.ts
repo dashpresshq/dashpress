@@ -12,6 +12,7 @@ export type ValidationKeys = {
     | "canUser"
     | "canCrud"
     | "requestBody"
+    | "requestQuery"
     | "entityId"
     | "entityRequestBody"
     | "queryFilters"

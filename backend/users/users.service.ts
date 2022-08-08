@@ -54,15 +54,24 @@ export class UsersService {
   }
 
   async listUsers() {
-    return await this._usersPersistenceService.getAllItems();
+    const users = await this._usersPersistenceService.getAllItems();
+
+    return users.map((user) => {
+      const userCopy = { ...user };
+      delete userCopy.password;
+      delete userCopy.systemProfile;
+      return user;
+    });
   }
 
   async removeUser(username: string) {
     await this._usersPersistenceService.removeItem(username);
   }
 
-  async getUser(username: string) {
-    return await this._usersPersistenceService.getItem(username);
+  async getUser(username: string): Promise<Omit<IAccountUser, "password">> {
+    const user = await this._usersPersistenceService.getItem(username);
+    delete user.password;
+    return user;
   }
 
   async changePassword(

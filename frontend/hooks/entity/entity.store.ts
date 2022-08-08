@@ -4,6 +4,7 @@ import {
   useApiQueries,
 } from "@gothicgeeks/shared";
 import { IEntityField, IEntityRelation } from "shared/types";
+import { isRouterParamEnabled } from "..";
 import { ILabelValue } from "../../../types";
 import { useEntityDictionPlurals } from "./entity.queries";
 
@@ -14,9 +15,6 @@ export const ENTITY_RELATIONS_ENDPOINT = (entity: string) =>
   `/api/entities/${entity}/relations`;
 
 export const ENTITIES_MENU_ENDPOINT = "/api/entities/menu";
-
-const isEntityEnabled = (entity: string): boolean =>
-  !!entity && entity !== "loading";
 
 export const useEntitiesMenuItems = () => {
   const menuItems = useApi<ILabelValue[]>(ENTITIES_MENU_ENDPOINT, {
@@ -45,26 +43,26 @@ export const useEntitiesList = () =>
 export const useEntityFields = (entity: string) =>
   useApi<IEntityField[]>(ENTITY_FIELDS_ENDPOINT(entity), {
     errorMessage: dataNotFoundMessage("Entity Fields"),
-    enabled: isEntityEnabled(entity),
+    enabled: isRouterParamEnabled(entity),
   });
 
 export const useEntityRelationsList = (entity: string) =>
   useApi<string[]>(`/api/entities/${entity}/relation-list`, {
     errorMessage: dataNotFoundMessage("Entity Relations List"),
-    enabled: isEntityEnabled(entity),
+    enabled: isRouterParamEnabled(entity),
   });
 
 export const useEntityFieldLists = (entity: string) =>
   useApi<string[]>(ENTITY_FIELDS_ENDPOINT(entity), {
     errorMessage: dataNotFoundMessage("Entity Fields List"),
-    enabled: isEntityEnabled(entity),
+    enabled: isRouterParamEnabled(entity),
     selector: (data: IEntityField[]) => data.map(({ name }) => name),
   });
 
 export const useEntityReferenceFields = (entity: string) =>
   useApi<IEntityRelation[]>(ENTITY_RELATIONS_ENDPOINT(entity), {
     errorMessage: dataNotFoundMessage("Entity Reference Fields"),
-    enabled: isEntityEnabled(entity),
+    enabled: isRouterParamEnabled(entity),
   });
 
 export const useMultipleEntityReferenceFields = (entities: string[]) => {
@@ -78,7 +76,7 @@ export const useMultipleEntityReferenceFields = (entities: string[]) => {
 export const useEntityToOneReferenceFields = (entity: string) =>
   useApi<Record<string, string>>(ENTITY_RELATIONS_ENDPOINT(entity), {
     errorMessage: dataNotFoundMessage("Entity Reference Fields"),
-    enabled: isEntityEnabled(entity),
+    enabled: isRouterParamEnabled(entity),
     selector: (input: IEntityRelation[]) => {
       return Object.fromEntries(
         input
@@ -91,7 +89,7 @@ export const useEntityToOneReferenceFields = (entity: string) =>
 export const useEntityIdField = (entity: string) =>
   useApi<string>(ENTITY_FIELDS_ENDPOINT(entity), {
     errorMessage: dataNotFoundMessage("Entity Id Field"),
-    enabled: isEntityEnabled(entity),
+    enabled: isRouterParamEnabled(entity),
     selector: (data: IEntityField[]) =>
       data.find(({ isId }) => isId)?.name || "id",
   });

@@ -1,10 +1,20 @@
-import { SectionBox, SectionCenter, Spacer } from "@gothicgeeks/design-system";
+import {
+  ErrorAlert,
+  FormSkeleton,
+  FormSkeletonSchema,
+  SectionBox,
+  SectionCenter,
+  Spacer,
+} from "@gothicgeeks/design-system";
 import { TitleLang } from "@gothicgeeks/shared";
 import { useNavigationStack, useSetPageTitle } from "frontend/lib/routing";
+import { useViewStateMachine } from "frontend/views/entity/useViewStateMachine";
 import { AppLayout } from "../../../_layouts/app";
+import { useUsernameFromRouteParam } from "../hooks";
 import {
   useUpdateUserMutation,
   useResetUserPasswordMutation,
+  useUserDetails,
 } from "../users.store";
 import { ResetUserPasswordForm } from "./ResetPassword.form";
 import { UpdateUserForm } from "./Update.Form";
@@ -13,8 +23,16 @@ export function UserUpdate() {
   const updateUserMutation = useUpdateUserMutation();
   const resetPasswordMutation = useResetUserPasswordMutation();
   const { canGoBack, goBack } = useNavigationStack();
+  const username = useUsernameFromRouteParam();
+  const userDetails = useUserDetails(username);
+
   useSetPageTitle(`Update User`, "UPDATE_USER");
-  //   const myProfile = useMyProfile();
+
+  const { isLoading } = userDetails;
+
+  const { error } = userDetails;
+
+  const viewStateMachine = useViewStateMachine(isLoading, error);
 
   return (
     <AppLayout>
@@ -30,11 +48,24 @@ export function UserUpdate() {
               : undefined
           }
         >
-          {/* {myProfile.isLoading ? (
-            <FormSkeleton schema={[FormSkeletonSchema.Input]} />
-          ) : ( */}
-          <UpdateUserForm onSubmit={updateUserMutation.mutateAsync} />
-          {/* )} */}
+          {viewStateMachine.type === "loading" && (
+            <FormSkeleton
+              schema={[
+                FormSkeletonSchema.Input,
+                FormSkeletonSchema.Input,
+                FormSkeletonSchema.RichTextArea,
+              ]}
+            />
+          )}
+
+          {viewStateMachine.type === "error" && <ErrorAlert message={error} />}
+
+          {viewStateMachine.type === "render" && (
+            <UpdateUserForm
+              onSubmit={updateUserMutation.mutateAsync}
+              initialValues={userDetails.data}
+            />
+          )}
         </SectionBox>
         <Spacer />
         <SectionBox title="Reset User Password">

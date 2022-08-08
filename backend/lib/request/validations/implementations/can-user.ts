@@ -20,14 +20,13 @@ export const canUserValidationImpl: ValidationImplType<void> = async (
   if (req.user.role) {
     throw new ForbiddenError(ERROR_MESSAGE);
   }
-  if (req.user.role === "creator") {
-    return;
-  }
-  if (!req.user.permissionGroup) {
-    throw new ForbiddenError(ERROR_MESSAGE);
-  }
-  // TODO Permission group data
-  if (!req.user.permissionGroup) {
-    throw new ForbiddenError(ERROR_MESSAGE);
-  }
+  // if (req.user.role === "creator") {
+  // }
+  // if (!req.user.permissionGroup) {
+  //   throw new ForbiddenError(ERROR_MESSAGE);
+  // }
+  // // TODO Permission group data
+  // if (!req.user.permissionGroup) {
+  //   throw new ForbiddenError(ERROR_MESSAGE);
+  // }
 };

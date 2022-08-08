@@ -1,39 +1,18 @@
-import noop from "lodash/noop";
+import { ISignInForm } from "shared/form-schemas/auth/signin";
+import { IChangePasswordForm } from "shared/form-schemas/profile/password";
+import { IResetPasswordForm } from "shared/form-schemas/users/reset-password";
 import { IAccountUser } from "shared/types";
 import { UsersService, usersService } from "./users.service";
-
-export interface IAuthCredentials {
-  username: string;
-  password: string;
-}
-
-export interface IChangePassword {
-  oldPassword: string;
-  newPassword: string;
-}
-
-export type ICreateUser = Pick<
-  IAccountUser,
-  "name" | "password" | "role" | "username"
->;
-
-export type IUpdateUserByCreator = Pick<IAccountUser, "role" | "systemProfile">;
-
-export type IAccountProfile = Omit<IAccountUser, "password">;
 
 export class UsersController {
   constructor(private _usersService: UsersService) {}
 
-  async login(authCrendetials: IAuthCredentials) {
+  async login(authCrendetials: ISignInForm) {
     return await this._usersService.tryAuthenticate(authCrendetials);
   }
 
   async listUsers() {
-    const users = await this._usersService.listUsers();
-    return users.map(({ password, ...user }) => {
-      noop(password);
-      return user;
-    });
+    return await this._usersService.listUsers();
   }
 
   async createUser(user: IAccountUser) {
@@ -44,17 +23,15 @@ export class UsersController {
     await this._usersService.removeUser(username);
   }
 
-  async getUserProfile(username: string): Promise<IAccountProfile> {
-    const user = await this._usersService.getUser(username);
-    delete user.password;
-    return user;
+  async getUserProfile(username: string) {
+    return await this._usersService.getUser(username);
   }
 
-  async resetPassword(username: string, password: string) {
-    await this._usersService.resetPassword(username, password);
+  async resetPassword(username: string, input: IResetPasswordForm) {
+    await this._usersService.resetPassword(username, input.password);
   }
 
-  async updatePassword(username: string, input: IChangePassword) {
+  async updatePassword(username: string, input: IChangePasswordForm) {
     await this._usersService.changePassword(username, input);
   }
 

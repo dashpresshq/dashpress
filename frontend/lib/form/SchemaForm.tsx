@@ -1,12 +1,12 @@
 import { FormButton } from "@gothicgeeks/design-system";
 import { resetFormValues } from "@gothicgeeks/shared";
-import { RenderFormInput } from "frontend/views/entity/_RenderFormInput";
 import { Field, Form } from "react-final-form";
 import {
   IAppliedSchemaFormConfig,
   ISchemaFormConfig,
 } from "shared/form-schemas";
 import { runValidationError } from "shared/validations/run";
+import { RenderFormInput } from "./_RenderFormInput";
 import { userFriendlyCase } from "../strings";
 
 interface IProps<T> {
@@ -38,17 +38,7 @@ export function SchemaForm<T extends Record<string, unknown>>({
     <Form
       onSubmit={onSubmit}
       initialValues={initialValues}
-      validate={runValidationError(
-        Object.keys(fields),
-        Object.fromEntries(
-          Object.entries(fields).map(([field, config]) => [
-            field,
-            config.validations,
-          ])
-        ),
-        (field: keyof T) =>
-          fields[field].label || userFriendlyCase(field as string)
-      )}
+      validate={runValidationError(fields)}
       render={({ handleSubmit, submitting, values, form, pristine }) => (
         <form
           noValidate

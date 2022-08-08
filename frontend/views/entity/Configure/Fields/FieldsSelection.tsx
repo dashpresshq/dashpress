@@ -15,7 +15,7 @@ import { required, composeValidators, ButtonLang } from "@gothicgeeks/shared";
 import React, { useState } from "react";
 import styled from "styled-components";
 import { isNotEmpty } from "class-validator";
-import { IColorableSelection } from "./types";
+import { IColorableSelection } from "shared/types";
 import { isUseColorsFlagOn, SYSTEM_COLORS } from "./selection.utils";
 
 export type EntityTypesForSelection =

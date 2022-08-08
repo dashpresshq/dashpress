@@ -1,6 +1,6 @@
 import { BadRequestError } from "backend/lib/errors";
 import { IAppliedSchemaFormConfig } from "shared/form-schemas";
-import { makeRequestValidationRunnable } from "shared/validations/makeRequestValidationRunnable";
+import { runValidationError } from "shared/validations/run";
 import { ValidationImplType } from "./types";
 
 export const requestBodyValidationImpl: ValidationImplType<
@@ -11,8 +11,7 @@ export const requestBodyValidationImpl: ValidationImplType<
   }
   const reqBodyData = req.body;
 
-  const validationsError =
-    makeRequestValidationRunnable(requestValidation)(reqBodyData);
+  const validationsError = runValidationError(requestValidation)(reqBodyData);
 
   if (Object.values(validationsError).filter((x) => x).length > 0) {
     throw new BadRequestError("Invalid Request", validationsError);

@@ -1,7 +1,7 @@
 import { lighten } from "polished";
 import styled from "styled-components";
 import { Text } from "@gothicgeeks/design-system";
-import { IColorableSelection } from "./Configure/Fields/types";
+import { IColorableSelection } from "shared/types";
 
 const DEFAULT_TAG_COLOR = "#000000";
 

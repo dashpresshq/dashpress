@@ -1,4 +1,4 @@
-import { IColorableSelection } from "frontend/views/entity/Configure/Fields/types";
+import { IColorableSelection } from "shared/types";
 import { FIELD_TYPES_CONFIG_MAP } from "shared/validations";
 import { IFieldValidationItem } from "shared/validations/types";
 

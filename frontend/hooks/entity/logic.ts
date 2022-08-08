@@ -4,8 +4,8 @@ import {
   isUseColorsFlagOn,
   SYSTEM_COLORS,
 } from "frontend/views/entity/Configure/Fields/selection.utils";
-import { IColorableSelection } from "frontend/views/entity/Configure/Fields/types";
 import { uniqBy } from "lodash";
+import { IColorableSelection } from "shared/types";
 
 export const getEntitySelectionConfig = (
   entityType: EntityTypesForSelection,

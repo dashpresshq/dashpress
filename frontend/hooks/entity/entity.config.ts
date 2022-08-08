@@ -1,9 +1,9 @@
 import { useRouteParam } from "@gothicgeeks/shared";
 import { useCallback } from "react";
 import uniqBy from "lodash/uniqBy";
-import { IColorableSelection } from "frontend/views/entity/Configure/Fields/types";
 import { EntityTypesForSelection } from "frontend/views/entity/Configure/Fields/FieldsSelection";
 import { IFieldValidationItem } from "shared/validations/types";
+import { IColorableSelection } from "shared/types";
 import {
   getFieldTypeBoundedValidations,
   guessEntityType,

@@ -7,21 +7,8 @@ import {
 } from "@gothicgeeks/design-system";
 import { ISharedFormInput } from "@gothicgeeks/design-system/dist/components/Form/_types";
 import { StringUtils } from "@gothicgeeks/shared";
-import { IFieldValidationItem } from "shared/validations/types";
-import { FIELD_TYPES_CONFIG_MAP } from "../../../shared/validations";
-import { IColorableSelection } from "./Configure/Fields/types";
-
-export interface IBaseEntityForm {
-  fields: string[];
-  entityFieldSelections: Record<string, IColorableSelection[]>;
-  getEntityFieldLabels: (name: string) => string;
-  onSubmit: (data: Record<string, unknown>) => void;
-  entityFieldTypes: Record<string, keyof typeof FIELD_TYPES_CONFIG_MAP>;
-}
-
-export interface IEntityFormSettings {
-  entityValidationsMap: Record<string, IFieldValidationItem[]>;
-}
+import { IColorableSelection } from "shared/types";
+import { FIELD_TYPES_CONFIG_MAP } from "shared/validations";
 
 interface IProps {
   type: keyof typeof FIELD_TYPES_CONFIG_MAP;
@@ -80,11 +67,3 @@ export function RenderFormInput({
       return <FormInput {...formProps} />;
   }
 }
-
-export const isFieldRequired = (
-  entityValidationsMap: Record<string, IFieldValidationItem[]>,
-  field: string
-): boolean =>
-  !!entityValidationsMap[field]?.find(
-    (item) => item.validationType === "required"
-  );

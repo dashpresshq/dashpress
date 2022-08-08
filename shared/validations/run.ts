@@ -1,17 +1,14 @@
+import { userFriendlyCase } from "frontend/lib/strings";
+import { IAppliedSchemaFormConfig } from "shared/form-schemas";
 import { TemplateService } from "../lib/templates";
-import { IFieldValidationItem } from "./types";
 import { ENTITY_VALIDATION_CONFIG } from "./validations-map";
 
 export const runValidationError =
-  (
-    fields: string[],
-    entityValidationsMap: Record<string, IFieldValidationItem[]>,
-    getEntityFieldLabels: (input: string) => string
-  ) =>
+  (fields: IAppliedSchemaFormConfig<any>) =>
   (values: Record<string, unknown>) => {
     const validations = Object.fromEntries(
-      fields.map((field) => {
-        const validationsToRun = entityValidationsMap[field] || [];
+      Object.entries(fields).map(([field, config]) => {
+        const validationsToRun = config.validations || [];
 
         const firstFailedValidation = validationsToRun.find((validation) =>
           ENTITY_VALIDATION_CONFIG[validation.validationType]?.implementation(
@@ -31,7 +28,7 @@ export const runValidationError =
                   ENTITY_VALIDATION_CONFIG[firstFailedValidation.validationType]
                     .message,
                 {
-                  name: getEntityFieldLabels(field),
+                  name: config.label || userFriendlyCase(field),
                   ...firstFailedValidation.constraint,
                 }
               )

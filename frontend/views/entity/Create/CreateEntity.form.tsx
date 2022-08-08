@@ -1,64 +1,16 @@
-import { FormButton } from "@gothicgeeks/design-system";
-import { ButtonLang, resetFormValues } from "@gothicgeeks/shared";
-import { Form, Field } from "react-final-form";
-import { runValidationError } from "shared/validations/run";
-import {
-  RenderFormInput,
-  IBaseEntityForm,
-  IEntityFormSettings,
-  isFieldRequired,
-} from "../_RenderFormInput";
+import { ButtonLang } from "@gothicgeeks/shared";
+import { SchemaForm } from "frontend/lib/form/SchemaForm";
+import { IBaseEntityForm, IEntityFormSettings } from "../types";
+import { buildAppliedSchemaFormConfig } from "../buildAppliedSchemaFormConfig";
 
-export function CreateEntityForm({
-  onSubmit,
-  fields,
-  getEntityFieldLabels,
-  entityFieldSelections,
-  entityFieldTypes,
-  entityValidationsMap,
-}: IBaseEntityForm & IEntityFormSettings) {
+export function CreateEntityForm(props: IBaseEntityForm & IEntityFormSettings) {
+  const { onSubmit } = props;
   return (
-    <Form
+    <SchemaForm
+      buttonText={ButtonLang.create}
+      resetForm
       onSubmit={onSubmit}
-      validate={runValidationError(
-        fields,
-        entityValidationsMap,
-        getEntityFieldLabels
-      )}
-      render={({ handleSubmit, form, values, submitting, pristine }) => (
-        <form
-          noValidate
-          onSubmit={(e) => {
-            e.preventDefault();
-            handleSubmit(e)?.then(() => {
-              resetFormValues(
-                true,
-                values as Record<string, string>,
-                form as any
-              );
-            });
-          }}
-        >
-          {fields.map((name) => (
-            <Field key={name} name={name} validateFields={[]}>
-              {(renderProps) => (
-                <RenderFormInput
-                  type={entityFieldTypes[name]}
-                  required={isFieldRequired(entityValidationsMap, name)}
-                  label={getEntityFieldLabels(name)}
-                  entityFieldSelections={entityFieldSelections[name]}
-                  renderProps={renderProps}
-                />
-              )}
-            </Field>
-          ))}
-          <FormButton
-            text={ButtonLang.create}
-            isMakingRequest={submitting}
-            disabled={pristine}
-          />
-        </form>
-      )}
+      fields={buildAppliedSchemaFormConfig(props)}
     />
   );
 }

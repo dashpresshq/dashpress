@@ -1,4 +1,4 @@
-import { IColorableSelection } from "./types";
+import { IColorableSelection } from "shared/types";
 
 export const isUseColorsFlagOn = (selections: IColorableSelection[]) => {
   if (selections.length === 0) {

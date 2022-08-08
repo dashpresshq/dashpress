@@ -16,11 +16,11 @@ import { FIELD_TYPES_CONFIG_MAP } from "shared/validations";
 import { StringUtils } from "@gothicgeeks/shared";
 import { ITableColumn } from "@gothicgeeks/design-system";
 import { useMemo } from "react";
+import { IColorableSelection } from "shared/types";
 import { fitlerOutHiddenScalarColumns } from "../utils";
 import { TableActions } from "./Actions";
 import { ReferenceComponent } from "./ReferenceComponent";
 import { OptionTag } from "../OptionTag";
-import { IColorableSelection } from "../Configure/Fields/types";
 
 export const buildFilterConfigFromType = (
   entityType: keyof typeof FIELD_TYPES_CONFIG_MAP,

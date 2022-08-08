@@ -15,6 +15,15 @@ interface IProps<T> {
   initialValues?: Partial<T>;
   buttonText: string;
   resetForm?: true;
+  fieldState?: Partial<
+    Record<
+      keyof T,
+      {
+        disabled?: boolean;
+        hidden?: boolean;
+      }
+    >
+  >;
 }
 
 export function SchemaForm<T extends Record<string, unknown>>({
@@ -22,6 +31,7 @@ export function SchemaForm<T extends Record<string, unknown>>({
   fields,
   buttonText,
   initialValues,
+  fieldState = {},
   resetForm,
 }: IProps<T>) {
   return (
@@ -53,12 +63,16 @@ export function SchemaForm<T extends Record<string, unknown>>({
             });
           }}
         >
-          {Object.entries(fields).map(
-            ([field, bag]: [string, ISchemaFormConfig]) => (
+          {Object.entries(fields)
+            .filter(([field]) => {
+              return !fieldState[field]?.hidden;
+            })
+            .map(([field, bag]: [string, ISchemaFormConfig]) => (
               <Field key={field} name={field} validateFields={[]}>
                 {(renderProps) => (
                   <RenderFormInput
                     type={bag.type}
+                    disabled={fieldState[field]?.disabled}
                     required={bag.validations.some(
                       (validation) => validation.validationType === "required"
                     )}
@@ -68,8 +82,7 @@ export function SchemaForm<T extends Record<string, unknown>>({
                   />
                 )}
               </Field>
-            )
-          )}
+            ))}
           <FormButton
             text={buttonText}
             isMakingRequest={submitting}

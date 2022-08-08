@@ -28,6 +28,7 @@ interface IProps {
   renderProps: ISharedFormInput;
   entityFieldSelections?: IColorableSelection[];
   required: boolean;
+  disabled: boolean;
   label: string;
 }
 
@@ -37,10 +38,12 @@ export function RenderFormInput({
   type,
   entityFieldSelections = [],
   required,
+  disabled,
 }: IProps) {
   const formProps = {
     label,
     required,
+    disabled,
     ...renderProps,
   };
 

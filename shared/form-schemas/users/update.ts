@@ -29,7 +29,6 @@ export const UPDATE_USER_FORM_SCHEMA: IAppliedSchemaFormConfig<IUpdateUserForm> 
         {
           validationType: "required",
         },
-
         {
           validationType: "isIn",
           constraint: {
@@ -41,10 +40,6 @@ export const UPDATE_USER_FORM_SCHEMA: IAppliedSchemaFormConfig<IUpdateUserForm> 
     systemProfile: {
       type: "textarea",
       //    :eyes to move to form code editor
-      validations: [
-        {
-          validationType: "required",
-        },
-      ],
+      validations: [],
     },
   };

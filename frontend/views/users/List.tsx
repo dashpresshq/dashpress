@@ -71,7 +71,7 @@ export function ListUsers() {
                 />
                 <DeleteButton
                   onDelete={() =>
-                    userDeletionMutation.mutate(
+                    userDeletionMutation.mutateAsync(
                       (row.original as unknown as IAccountUser).username
                     )
                   }

@@ -8,6 +8,7 @@ import {
 } from "@gothicgeeks/design-system";
 import { TitleLang } from "@gothicgeeks/shared";
 import { useNavigationStack, useSetPageTitle } from "frontend/lib/routing";
+import { useMyProfile } from "frontend/views/account/account.store";
 import { useViewStateMachine } from "frontend/views/entity/useViewStateMachine";
 import { AppLayout } from "../../../_layouts/app";
 import { useUsernameFromRouteParam } from "../hooks";
@@ -25,6 +26,7 @@ export function UserUpdate() {
   const { canGoBack, goBack } = useNavigationStack();
   const username = useUsernameFromRouteParam();
   const userDetails = useUserDetails(username);
+  const myProfile = useMyProfile();
 
   useSetPageTitle(`Update User`, "UPDATE_USER");
 
@@ -64,13 +66,18 @@ export function UserUpdate() {
             <UpdateUserForm
               onSubmit={updateUserMutation.mutateAsync}
               initialValues={userDetails.data}
+              isMe={myProfile.data?.username === username}
             />
           )}
         </SectionBox>
         <Spacer />
-        <SectionBox title="Reset User Password">
-          <ResetUserPasswordForm onSubmit={resetPasswordMutation.mutateAsync} />
-        </SectionBox>
+        {myProfile.data?.username !== username && (
+          <SectionBox title="Reset User Password">
+            <ResetUserPasswordForm
+              onSubmit={resetPasswordMutation.mutateAsync}
+            />
+          </SectionBox>
+        )}
       </SectionCenter>
     </AppLayout>
   );

@@ -10,7 +10,7 @@ export const entityValidationImpl: ValidationImplType<string> = async (req) => {
     entitiesService.getEntityFromSchema(entity),
     configurationService.show<string[]>("disabled_entities"),
   ]);
-
+  //
   if (disabledEntities.includes(entity) || !entityExists) {
     throw new ForbiddenError(`Entity '${entity}' doesn't exist or is disabled`);
   }

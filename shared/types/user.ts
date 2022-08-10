@@ -1,4 +1,4 @@
-export enum AccountRole {
+export enum SystemRoles {
   Creator = "creator",
   Viewer = "viewer",
 }
@@ -8,27 +8,14 @@ export interface IAccountUser {
   username: string;
   systemProfile?: string;
   password: string;
-  role: AccountRole;
+  role: string;
 }
-
-// Delete
-
-/*
- Roles
- Permissions Group
-*/
 
 export const USER_PERMISSIONS = {
   CAN_MANAGE_USER: "CAN_MANAGE_USER",
+  CAN_CONFIGURE_APP: "CAN_CONFIGURE_APP",
   CAN_RESET_PASSWORD: "CAN_RESET_PASSWORD",
   CAN_MANAGE_PERMISSIONS: "CAN_MANAGE_PERMISSIONS",
+  CAN_VIEW_ENTITY: "CAN_VIEW_ENTITY",
+  CAN_VIEW_ENTITY_ALL: "CAN_VIEW_ENTITY:ALL_ENTITIES",
 };
-
-// Must not be empty when deleting
-// Create, Update, Delete, List, Details permission group
-
-// Assign permisson
-
-// Un-assign permission
-
-// list group permissions

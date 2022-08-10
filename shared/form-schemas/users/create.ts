@@ -1,11 +1,9 @@
-import { StringUtils } from "@gothicgeeks/shared";
-import { AccountRole } from "shared/types";
 import { IAppliedSchemaFormConfig } from "..";
 
 export type ICreateUserForm = {
   name: string;
   username: string;
-  role: AccountRole;
+  role: string;
   password: string;
 };
 
@@ -32,10 +30,11 @@ export const CREATE_USER_FORM_SCHEMA: IAppliedSchemaFormConfig<ICreateUserForm> 
     },
     role: {
       type: "selection",
-      selections: Object.values(AccountRole).map((role) => ({
-        value: role,
-        label: StringUtils.upperCaseFirstLetter(role),
-      })),
+      selections: [],
+      // selections: Object.values(AccountRole).map((role) => ({
+      //   value: role,
+      //   label: StringUtils.upperCaseFirstLetter(role),
+      // })),
       validations: [
         {
           validationType: "required",

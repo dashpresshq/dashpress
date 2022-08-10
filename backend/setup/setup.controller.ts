@@ -8,7 +8,7 @@ import { BadRequestError } from "backend/lib/errors";
 import { usersService, UsersService } from "backend/users/users.service";
 import {
   IAccountUser,
-  AccountRole,
+  SystemRoles,
   IDBCrendentials,
   ISetupCheck,
 } from "shared/types";
@@ -45,7 +45,7 @@ export class SetupController {
 
     await this._usersService.registerUser({
       ...user,
-      role: AccountRole.Creator,
+      role: SystemRoles.Creator,
     });
 
     return await this._usersService.tryAuthenticate(user);

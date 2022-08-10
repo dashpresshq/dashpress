@@ -1,4 +1,9 @@
-export type ConfigDomain = "users" | "schema" | "credentials" | "app-config";
+export type ConfigDomain =
+  | "users"
+  | "schema"
+  | "credentials"
+  | "app-config"
+  | "roles";
 
 export enum ConfigAdaptorTypes {
   JsonFile = "json-file",

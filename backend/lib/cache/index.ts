@@ -1,6 +1,7 @@
 import { ConfigKeys, configService } from "../config/config.service";
 import { AbstractCacheService } from "./AbstractCacheService";
 import { MemoryCacheAdaptor } from "./MemoryCacheAdaptor";
+import { RedisCacheAdaptor } from "./RedisCacheAdaptor";
 import { CacheAdaptorTypes } from "./types";
 
 export { AbstractCacheService };
@@ -13,8 +14,7 @@ export function createCacheService(prefix: string): AbstractCacheService {
       case CacheAdaptorTypes.Memory:
         return new MemoryCacheAdaptor(prefix, configService);
       case CacheAdaptorTypes.Redis:
-        // TODO
-        return new MemoryCacheAdaptor(prefix, configService);
+        return new RedisCacheAdaptor(prefix, configService);
     }
   };
 

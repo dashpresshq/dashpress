@@ -8,7 +8,7 @@ import { getKnexConnection } from "../connection/db";
 import { AbstractConfigDataPersistenceService } from "./AbstractConfigDataPersistenceService";
 import { ConfigDomain } from "./types";
 
-// TODO
+// TODO implement
 export class DatabaseConfigDataPersistenceAdaptor<
   T
 > extends AbstractConfigDataPersistenceService<T> {
@@ -43,7 +43,7 @@ export class DatabaseConfigDataPersistenceAdaptor<
     (await this.getDomainQueryBuilder()).where({ key }).update({ data });
   }
 
-  public async removeItem(key: string): Promise<void> {
+  async removeItem(key: string): Promise<void> {
     (await this.getDomainQueryBuilder()).where({ key }).del();
   }
 
@@ -58,6 +58,4 @@ export class DatabaseConfigDataPersistenceAdaptor<
   }
 }
 
-// domain: string
-// key: string,
-// value: string,
+// TODO cacheService should be employed here

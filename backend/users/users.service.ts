@@ -60,7 +60,7 @@ export class UsersService {
       const userCopy = { ...user };
       delete userCopy.password;
       delete userCopy.systemProfile;
-      return user;
+      return userCopy;
     });
   }
 

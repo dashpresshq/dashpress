@@ -1,10 +1,8 @@
-import { StringUtils } from "@gothicgeeks/shared";
-import { AccountRole } from "shared/types";
 import { IAppliedSchemaFormConfig } from "..";
 
 export type IUpdateUserForm = {
   name: string;
-  role: AccountRole;
+  role: string;
   systemProfile: string;
 };
 
@@ -22,19 +20,14 @@ export const UPDATE_USER_FORM_SCHEMA: IAppliedSchemaFormConfig<IUpdateUserForm> 
     role: {
       type: "selection",
       // :eyes
-      selections: Object.values(AccountRole).map((role) => ({
-        value: role,
-        label: StringUtils.upperCaseFirstLetter(role),
-      })),
+      selections: [],
+      // selections: Object.values(AccountRole).map((role) => ({
+      //   value: role,
+      //   label: StringUtils.upperCaseFirstLetter(role),
+      // })),
       validations: [
         {
           validationType: "required",
-        },
-        {
-          validationType: "isIn",
-          constraint: {
-            options: Object.values(AccountRole),
-          },
         },
       ],
     },

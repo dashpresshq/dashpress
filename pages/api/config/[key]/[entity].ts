@@ -1,3 +1,4 @@
+import { USER_PERMISSIONS } from "shared/types";
 import { configurationController } from "../../../../backend/configuration/configuration.controller";
 import { requestHandler } from "../../../../backend/lib/request";
 
@@ -28,8 +29,8 @@ export default requestHandler(
   },
   [
     {
-      _type: "isCreator",
-      method: ["PUT"],
+      _type: "canUser",
+      body: USER_PERMISSIONS.CAN_CONFIGURE_APP,
     },
   ]
 );

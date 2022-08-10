@@ -1,5 +1,6 @@
 import { usersController } from "backend/users/users.controller";
 import { UPDATE_USER_FORM_SCHEMA } from "shared/form-schemas/users/update";
+import { USER_PERMISSIONS } from "shared/types";
 import { requestHandler } from "../../../../backend/lib/request";
 
 const REQUEST_QUERY_FIELD = "username";
@@ -46,7 +47,8 @@ export default requestHandler(
   },
   [
     {
-      _type: "isCreator",
+      _type: "canUser",
+      body: USER_PERMISSIONS.CAN_MANAGE_USER,
     },
   ]
 );

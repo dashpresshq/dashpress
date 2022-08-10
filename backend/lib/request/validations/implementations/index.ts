@@ -5,7 +5,6 @@ import { configKeyFilterValidationImpl as configKey } from "./config-key";
 import { entityValidationImpl as entity } from "./entity";
 import { entityIdFilterValidationImpl as entityId } from "./entity-id";
 import { isAuthenticatedValidationImpl as isAuthenticated } from "./is-authenticated";
-import { isCreatorValidationImpl as isCreator } from "./is-creator";
 import { paginationFilterValidationImpl as paginationFilter } from "./pagination-filter";
 import { queryFilterValidationImpl as queryFilters } from "./query-filters";
 import { entityRequestBodyValidationImpl as entityRequestBody } from "./entity-request-body";
@@ -25,7 +24,6 @@ export const ValidationImpl: Record<
   canCrud,
   requestBody,
   guest,
-  isCreator,
   requestQuery,
   canUser,
   authenticatedUser,

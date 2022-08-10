@@ -1,5 +1,6 @@
 import { usersController } from "backend/users/users.controller";
 import { RESET_PASSWORD_FORM_SCHEMA } from "shared/form-schemas/users/reset-password";
+import { USER_PERMISSIONS } from "shared/types";
 import { requestHandler } from "../../../../backend/lib/request";
 
 export default requestHandler(
@@ -23,7 +24,8 @@ export default requestHandler(
   },
   [
     {
-      _type: "isCreator",
+      _type: "canUser",
+      body: USER_PERMISSIONS.CAN_RESET_PASSWORD,
     },
   ]
 );

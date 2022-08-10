@@ -1,5 +1,6 @@
 import { rolesController } from "backend/roles/roles.controller";
 import { UPDATE_ROLE_FORM_SCHEMA } from "shared/form-schemas/roles/update";
+import { USER_PERMISSIONS } from "shared/types";
 import { requestHandler } from "../../../../backend/lib/request";
 
 const REQUEST_QUERY_FIELD = "roleId";
@@ -35,7 +36,8 @@ export default requestHandler(
   },
   [
     {
-      _type: "isCreator",
+      _type: "canUser",
+      body: USER_PERMISSIONS.CAN_MANAGE_PERMISSIONS,
     },
   ]
 );

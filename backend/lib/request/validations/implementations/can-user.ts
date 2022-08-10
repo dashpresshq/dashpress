@@ -1,4 +1,5 @@
 import { ForbiddenError } from "backend/lib/errors";
+import { rolesService } from "backend/roles/roles.service";
 import { USER_PERMISSIONS } from "shared/types";
 import { ValidationImplType } from "./types";
 
@@ -8,7 +9,7 @@ const ERROR_MESSAGE =
 export const canUserValidationImpl: ValidationImplType<void> = async (
   req,
   requiredPermission: string
-) => {
+): Promise<void> => {
   if (!requiredPermission) {
     throw new Error("Please provide the required permission");
   }
@@ -17,16 +18,7 @@ export const canUserValidationImpl: ValidationImplType<void> = async (
     throw new Error("The provided permission seems to be invalid");
   }
 
-  if (req.user.role) {
+  if (!(await rolesService.canRoleDoThis(req.user.role, requiredPermission))) {
     throw new ForbiddenError(ERROR_MESSAGE);
   }
-  // if (req.user.role === "creator") {
-  // }
-  // if (!req.user.permissionGroup) {
-  //   throw new ForbiddenError(ERROR_MESSAGE);
-  // }
-  // // TODO Permission group data
-  // if (!req.user.permissionGroup) {
-  //   throw new ForbiddenError(ERROR_MESSAGE);
-  // }
 };

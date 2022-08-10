@@ -24,28 +24,33 @@ export class RolesService {
 
   async getRolePermissions(roleId: string): Promise<string[]> {
     const role = await this._rolesPersistenceService.getItem(roleId);
+    if (!role) {
+      return [USER_PERMISSIONS.CAN_ACCESS_ALL_ENTITIES];
+    }
     return role.permissions;
   }
 
-  async canRoleDoThis(roleId: string, permission: string) {
+  async canRoleDoThis(roleId$1: string, permission: string) {
+    const roleId = roleId$1 || SystemRoles.Viewer;
+
     if (roleId === SystemRoles.Creator) {
       return true;
     }
 
     if (roleId === SystemRoles.Viewer) {
-      return permission.startsWith(USER_PERMISSIONS.CAN_VIEW_ENTITY);
+      return permission.startsWith(USER_PERMISSIONS.CAN_ACCESS_ENTITY);
     }
 
-    const role = await this._rolesPersistenceService.getItem(roleId);
+    const rolePermissions = await this.getRolePermissions(roleId);
 
     if (
-      permission.startsWith(USER_PERMISSIONS.CAN_VIEW_ENTITY) &&
-      role.permissions.includes(USER_PERMISSIONS.CAN_VIEW_ENTITY_ALL)
+      permission.startsWith(USER_PERMISSIONS.CAN_ACCESS_ENTITY) &&
+      rolePermissions.includes(USER_PERMISSIONS.CAN_ACCESS_ALL_ENTITIES)
     ) {
       return true;
     }
 
-    return role.permissions.includes(permission);
+    return rolePermissions.includes(permission);
   }
 
   async createRole({ id }: Pick<IRole, "id">) {
@@ -71,7 +76,7 @@ export class RolesService {
     }
 
     const newRole = await this._rolesPersistenceService.getItem(
-      StringUtils.sluggify(id)
+      RolesService.makeRoleId(id)
     );
 
     if ((Object.values(SystemRoles) as string[]).includes(id)) {
@@ -84,15 +89,17 @@ export class RolesService {
 
     await this._rolesPersistenceService.upsertItem(roleId, {
       ...role,
-      id: StringUtils.sluggify(id),
+      id: RolesService.makeRoleId(id),
     });
-    // alert that renaming a role will cause a errors for current users and they will have to refresh their browser
-    // change all user with old role to new role
+    // TODO alert that renaming a role will cause a errors for current users and they will have to refresh their browser
+  }
+
+  static makeRoleId(roleName: string) {
+    return StringUtils.sluggify(roleName);
   }
 
   async removeRole(roleId: string) {
     await this._rolesPersistenceService.removeItem(roleId);
-    // change all user with that role to SystemRole.User
   }
 
   async addPermission(roleId: string, permission: string) {

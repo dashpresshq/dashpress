@@ -32,7 +32,7 @@ export class UsersService {
     if (!(await HashService.compare(authCrendetials.password, user.password))) {
       throw new ForbiddenError(INVALID_LOGIN_MESSAGE);
     }
-    delete user.password; // :eyes
+    delete user.password;
     return { token: this._authTokenService.sign(user) };
   }
 

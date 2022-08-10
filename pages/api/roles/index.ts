@@ -1,5 +1,6 @@
 import { rolesController } from "backend/roles/roles.controller";
 import { CREATE_ROLE_FORM_SCHEMA } from "shared/form-schemas/roles/create";
+import { USER_PERMISSIONS } from "shared/types";
 import { requestHandler } from "../../../backend/lib/request";
 
 export default requestHandler(
@@ -20,7 +21,8 @@ export default requestHandler(
   },
   [
     {
-      _type: "isCreator",
+      _type: "canUser",
+      body: USER_PERMISSIONS.CAN_MANAGE_PERMISSIONS,
     },
   ]
 );

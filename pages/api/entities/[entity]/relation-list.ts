@@ -1,3 +1,4 @@
+import { USER_PERMISSIONS } from "shared/types";
 import { entitiesController } from "../../../../backend/entities/entities.controller";
 import { requestHandler } from "../../../../backend/lib/request";
 
@@ -13,7 +14,8 @@ export default requestHandler(
   },
   [
     {
-      _type: "isCreator",
+      _type: "canUser",
+      body: USER_PERMISSIONS.CAN_CONFIGURE_APP,
     },
   ]
 );

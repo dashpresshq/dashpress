@@ -1,4 +1,5 @@
 import { StringUtils } from "@gothicgeeks/shared";
+import { AbstractCacheService, createCacheService } from "backend/lib/cache";
 import {
   createConfigDomainPersistenceService,
   AbstractConfigDataPersistenceService,
@@ -13,7 +14,8 @@ interface IRole {
 
 export class RolesService {
   constructor(
-    private readonly _rolesPersistenceService: AbstractConfigDataPersistenceService<IRole>
+    private readonly _rolesPersistenceService: AbstractConfigDataPersistenceService<IRole>,
+    private readonly _cacheService: AbstractCacheService
   ) {}
 
   async listRoles(): Promise<string[]> {
@@ -23,16 +25,16 @@ export class RolesService {
   }
 
   async getRolePermissions(roleId: string): Promise<string[]> {
-    const role = await this._rolesPersistenceService.getItem(roleId);
-    if (!role) {
-      return [USER_PERMISSIONS.CAN_ACCESS_ALL_ENTITIES];
-    }
-    return role.permissions;
+    return await this._cacheService.getItem<string[]>(roleId, async () => {
+      const role = await this._rolesPersistenceService.getItem(roleId);
+      if (!role) {
+        return [];
+      }
+      return role.permissions;
+    });
   }
 
-  async canRoleDoThis(roleId$1: string, permission: string) {
-    const roleId = roleId$1 || SystemRoles.Viewer;
-
+  async canRoleDoThis(roleId: string, permission: string) {
     if (roleId === SystemRoles.Creator) {
       return true;
     }
@@ -75,13 +77,13 @@ export class RolesService {
       return;
     }
 
-    const newRole = await this._rolesPersistenceService.getItem(
-      RolesService.makeRoleId(id)
-    );
+    const madeRoleId = RolesService.makeRoleId(id);
 
-    if ((Object.values(SystemRoles) as string[]).includes(id)) {
+    if ((Object.values(SystemRoles) as string[]).includes(madeRoleId)) {
       throw new BadRequestError("Role already exist");
     }
+
+    const newRole = await this._rolesPersistenceService.getItem(madeRoleId);
 
     if (newRole) {
       throw new BadRequestError("Role already exist");
@@ -89,7 +91,7 @@ export class RolesService {
 
     await this._rolesPersistenceService.upsertItem(roleId, {
       ...role,
-      id: RolesService.makeRoleId(id),
+      id: madeRoleId,
     });
     // TODO alert that renaming a role will cause a errors for current users and they will have to refresh their browser
   }
@@ -100,6 +102,7 @@ export class RolesService {
 
   async removeRole(roleId: string) {
     await this._rolesPersistenceService.removeItem(roleId);
+    await this._cacheService.clearItem(roleId);
   }
 
   async addPermission(roleId: string, permission: string) {
@@ -112,6 +115,7 @@ export class RolesService {
       ...role,
       permissions: [...role.permissions, permission],
     });
+    await this._cacheService.clearItem(roleId);
   }
 
   async removePermission(roleId: string, permission: string) {
@@ -125,10 +129,16 @@ export class RolesService {
         (loopPermission) => loopPermission !== permission
       ),
     });
+    await this._cacheService.clearItem(roleId);
   }
 }
 
 const rolesPersistenceService =
   createConfigDomainPersistenceService<IRole>("roles");
 
-export const rolesService = new RolesService(rolesPersistenceService);
+const cacheService = createCacheService("permission");
+
+export const rolesService = new RolesService(
+  rolesPersistenceService,
+  cacheService
+);

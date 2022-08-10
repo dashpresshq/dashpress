@@ -1,4 +1,5 @@
 import { StringUtils } from "@gothicgeeks/shared";
+import { CacheAdaptorTypes } from "../cache/types";
 import { ConfigAdaptorTypes } from "../config-persistence/types";
 import { ConfigKeys } from "./types";
 
@@ -51,6 +52,17 @@ export const ConfigBag: Record<ConfigKeys, IConfigBag> = {
         Object.values(ConfigAdaptorTypes)
       );
     },
+  },
+  CACHE_ADAPTOR: {
+    defaultValue: () => {
+      return CacheAdaptorTypes.Memory;
+    },
+    validate: (value) =>
+      optionsValidation(
+        value,
+        "Cache Adaptor",
+        Object.values(CacheAdaptorTypes)
+      ),
   },
   CONFIG_ADAPTOR_CONNECTION_STRING: {
     defaultValue: () => {

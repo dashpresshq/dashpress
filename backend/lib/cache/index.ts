@@ -9,7 +9,7 @@ export { AbstractCacheService };
 export function createCacheService(prefix: string): AbstractCacheService {
   const getInstance = () => {
     switch (
-      configService.getConfigValue<CacheAdaptorTypes>(ConfigKeys.CONFIG_ADAPTOR)
+      configService.getConfigValue<CacheAdaptorTypes>(ConfigKeys.CACHE_ADAPTOR)
     ) {
       case CacheAdaptorTypes.Memory:
         return new MemoryCacheAdaptor(prefix, configService);

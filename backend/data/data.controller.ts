@@ -1,6 +1,7 @@
 import { TemplateService } from "shared/lib/templates";
-import { QueryFilter } from "shared/types";
+import { IEntityField, QueryFilter } from "shared/types";
 import { FilterOperators } from "@gothicgeeks/design-system";
+import { AbstractCacheService, createCacheService } from "backend/lib/cache";
 import {
   ConfigurationService,
   configurationService,
@@ -11,11 +12,14 @@ import { IPaginationFilters } from "./types";
 
 const DEFAULT_LIST_LIMIT = 50;
 
+const GOOD_FIELD_TYPES_FOR_LIST: IEntityField["type"][] = ["enum", "string"];
+
 export class DataController {
   constructor(
     private _dataService: DataService,
     private _entitiesService: EntitiesService,
-    private _configurationService: ConfigurationService
+    private _configurationService: ConfigurationService,
+    private _cacheService: AbstractCacheService
   ) {}
 
   async listData(
@@ -31,7 +35,7 @@ export class DataController {
       entity,
       [...relationshipSettings.fields, primaryField],
       [relationshipSettings.fields[0]].map((field) => ({
-        // relationshipSettings.fields.map((field) => ({
+        // TODO relationshipSettings.fields.map((field) => ({
         id: field,
         value: {
           operator: FilterOperators.CONTAINS,
@@ -61,17 +65,35 @@ export class DataController {
       fields: string[];
     }>("entity_relation_template", entity);
 
-    if (relationshipSettings.fields.length === 0) {
-      // TODO Will want to cache this
-      // const field =
-      // get all the fields that are showable then pick the first one by other
-      return {
-        fields: [],
-        format: `{{ field }}`,
-      };
+    if (relationshipSettings.fields.length > 0) {
+      return relationshipSettings;
     }
+    const displayField = await this._cacheService.getItem(
+      `computed-relationship-field-${entity}`,
+      async () => {
+        const [hiddenColumns, primaryField, entityFields] = await Promise.all([
+          this._configurationService.show<string[]>(
+            "hidden_entity_table_columns"
+          ),
+          this._entitiesService.getEntityPrimaryField(entity),
+          this._entitiesService.getEntityFields(entity),
+        ]);
+        return (
+          entityFields.filter((field) => {
+            return (
+              field.name !== primaryField &&
+              !hiddenColumns.includes(field.name) &&
+              GOOD_FIELD_TYPES_FOR_LIST.includes(field.type)
+            );
+          })[0]?.name || primaryField
+        );
+      }
+    );
 
-    return relationshipSettings;
+    return {
+      fields: [displayField],
+      format: `{{ ${displayField} }}`,
+    };
   }
 
   async referenceData(entity: string, id: string): Promise<string> {
@@ -164,8 +186,11 @@ export class DataController {
   }
 }
 
+const cacheService = createCacheService("data");
+
 export const dataController = new DataController(
   dataService,
   entitiesService,
-  configurationService
+  configurationService,
+  cacheService
 );

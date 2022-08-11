@@ -10,7 +10,14 @@ export class RolesController {
   ) {}
 
   async listRoles() {
-    return await this._rolesService.listRoles();
+    const roles = await this._rolesService.listRoles();
+
+    roles.push(SystemRoles.Creator, SystemRoles.Viewer);
+
+    return roles.map((value) => ({
+      value,
+      label: value,
+    }));
   }
 
   async getRolePermissions(roleId: string) {

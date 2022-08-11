@@ -1,6 +1,6 @@
 import { TemplateService } from "shared/lib/templates";
-import noop from "lodash/noop";
 import { QueryFilter } from "shared/types";
+import { FilterOperators } from "@gothicgeeks/design-system";
 import {
   ConfigurationService,
   configurationService,
@@ -9,6 +9,8 @@ import { EntitiesService, entitiesService } from "../entities/entities.service";
 import { DataService, dataService } from "./data.service";
 import { IPaginationFilters } from "./types";
 
+const DEFAULT_LIST_LIMIT = 50;
+
 export class DataController {
   constructor(
     private _dataService: DataService,
@@ -16,10 +18,38 @@ export class DataController {
     private _configurationService: ConfigurationService
   ) {}
 
-  async listData(entity: string): Promise<{ id: string; name: string }[]> {
-    // search by const relationshipSettings = await this.getRelationshipSettings(entity);
-    noop(entity);
-    return [];
+  async listData(
+    entity: string,
+    searchValue?: string
+  ): Promise<{ value: string; label: string }[]> {
+    const [relationshipSettings, primaryField] = await Promise.all([
+      this.getRelationshipSettings(entity),
+      this._entitiesService.getEntityPrimaryField(entity),
+    ]);
+
+    const data = await this._dataService.list(
+      entity,
+      [...relationshipSettings.fields, primaryField],
+      [relationshipSettings.fields[0]].map((field) => ({
+        // relationshipSettings.fields.map((field) => ({
+        id: field,
+        value: {
+          operator: FilterOperators.CONTAINS,
+          value: searchValue,
+        },
+      })),
+      {
+        take: DEFAULT_LIST_LIMIT,
+        page: 1,
+      }
+    );
+
+    return data.map((datum: Record<string, unknown>) => {
+      return {
+        value: datum[primaryField],
+        label: TemplateService.compile(relationshipSettings.format, datum),
+      };
+    });
   }
 
   private async getRelationshipSettings(entity: string): Promise<{
@@ -32,7 +62,7 @@ export class DataController {
     }>("entity_relation_template", entity);
 
     if (relationshipSettings.fields.length === 0) {
-      // Will want to cache this
+      // TODO Will want to cache this
       // const field =
       // get all the fields that are showable then pick the first one by other
       return {

@@ -1,6 +1,6 @@
 export interface IPaginationFilters {
   take: number;
   page: number;
-  orderBy: string;
+  orderBy?: string;
   sortBy?: string;
 }

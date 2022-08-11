@@ -19,12 +19,7 @@ export const UPDATE_USER_FORM_SCHEMA: IAppliedSchemaFormConfig<IUpdateUserForm> 
     },
     role: {
       type: "selection",
-      // :eyes
-      selections: [],
-      // selections: Object.values(AccountRole).map((role) => ({
-      //   value: role,
-      //   label: StringUtils.upperCaseFirstLetter(role),
-      // })),
+      selections: "/api/roles",
       validations: [
         {
           validationType: "required",

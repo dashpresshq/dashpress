@@ -5,6 +5,8 @@ import { entitiesService } from "../../../../entities/entities.service";
 import { configurationService } from "../../../../configuration/configuration.service";
 import { ValidationImplType } from "./types";
 
+const ERROR_MESSAGE = `This resource doesn't exist or is disabled or you dont have access to it`;
+
 export const entityValidationImpl: ValidationImplType<string> = async (req) => {
   const entity = req.query.entity as string;
 
@@ -14,7 +16,7 @@ export const entityValidationImpl: ValidationImplType<string> = async (req) => {
   ]);
 
   if (disabledEntities.includes(entity) || !entityExists) {
-    throw new ForbiddenError(`Entity '${entity}' doesn't exist or is disabled`);
+    throw new ForbiddenError(ERROR_MESSAGE);
   }
 
   if (
@@ -23,7 +25,7 @@ export const entityValidationImpl: ValidationImplType<string> = async (req) => {
       APPLIED_CAN_ACCESS_ENTITY(entity)
     ))
   ) {
-    throw new ForbiddenError(`You dont enug`);
+    throw new ForbiddenError(ERROR_MESSAGE);
   }
 
   return entity;

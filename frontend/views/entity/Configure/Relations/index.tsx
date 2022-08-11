@@ -18,6 +18,7 @@ import { SLUG_LOADING_VALUE, useRouteParam } from "@gothicgeeks/shared";
 import { useChangeRouterParam, useSetPageTitle } from "frontend/lib/routing";
 import { EntitiesSelection } from "frontend/views/settings/Entities/Selection";
 import { useEntityDictionPlurals } from "frontend/hooks/entity/entity.queries";
+import { createViewStateMachine } from "frontend/lib/create-view-state-machine";
 import { useEntitySlug } from "../../../../hooks/entity/entity.config";
 import { BaseEntitySettingsLayout } from "../_Base";
 import {
@@ -25,7 +26,6 @@ import {
   useUpsertConfigurationMutation,
 } from "../../../../hooks/configuration/configration.store";
 import { EntityRelationsForm } from "./Relations.form";
-import { createViewStateMachine } from "../../useViewStateMachine";
 import { ENTITY_CONFIGURATION_VIEW } from "../constants";
 import { FieldsLabelForm } from "../Fields/FieldsLabel.form";
 

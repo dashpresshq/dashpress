@@ -33,7 +33,7 @@ import {
 import { useEntityConfiguration } from "../../../hooks/configuration/configration.store";
 import { UpdateEntityForm } from "./UpdateEntity.form";
 import { fitlerOutHiddenScalarColumns } from "../utils";
-import { useViewStateMachine } from "../useViewStateMachine";
+import { useEntityViewStateMachine } from "../useEntityViewStateMachine";
 
 export function EntityUpdate() {
   const entity = useEntitySlug();
@@ -79,7 +79,7 @@ export function EntityUpdate() {
     entity === SLUG_LOADING_VALUE ||
     entityFields.isLoading;
 
-  const viewState = useViewStateMachine(isLoading, error, "update");
+  const viewState = useEntityViewStateMachine(isLoading, error, "update");
   const { canGoBack, goBack } = useNavigationStack();
 
   return (

@@ -29,7 +29,7 @@ import {
 import { useEntityConfiguration } from "../../../hooks/configuration/configration.store";
 import { CreateEntityForm } from "./CreateEntity.form";
 import { fitlerOutHiddenScalarColumns } from "../utils";
-import { useViewStateMachine } from "../useViewStateMachine";
+import { useEntityViewStateMachine } from "../useEntityViewStateMachine";
 
 export function EntityCreate() {
   const entity = useEntitySlug();
@@ -67,7 +67,7 @@ export function EntityCreate() {
     entity === SLUG_LOADING_VALUE ||
     entityFieldTypesMap.isLoading;
 
-  const viewState = useViewStateMachine(isLoading, error, "create");
+  const viewState = useEntityViewStateMachine(isLoading, error, "create");
   const { canGoBack, goBack } = useNavigationStack();
   useSetPageTitle(`Create ${entityDiction.plural}`, "CREATE_ENTITY");
 

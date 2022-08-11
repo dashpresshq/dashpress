@@ -9,11 +9,8 @@ import {
 } from "@gothicgeeks/design-system";
 import { IBEPaginatedDataState, usePaginatedData } from "@gothicgeeks/shared";
 import { useState } from "react";
-// import {
-//   FilterOperators,
-//   IColumnFilterBag,
-// } from "@gothicgeeks/design-system/dist/components/Table/filters/types";
 import { QueryFilter } from "shared/types";
+import { createViewStateMachine } from "frontend/lib/create-view-state-machine";
 import { NAVIGATION_LINKS } from "../../../lib/routing/links";
 import {
   useEntityCrudSettings,
@@ -27,7 +24,6 @@ import { useTableMenuItems } from "./useTableMenuItems";
 import { useTableColumns } from "./useTableColumns";
 import { useDetailsOffCanvasStore } from "./hooks/useDetailsOffCanvas.store";
 import { EntityDetailsView } from "../Details/DetailsView";
-import { useViewStateMachine } from "../useViewStateMachine";
 
 interface IProps {
   entity: string;
@@ -73,7 +69,7 @@ export function EntityTableView({ entity, persitentFilters = [] }: IProps) {
     entity === SLUG_LOADING_VALUE ||
     hiddenTableColumns.isLoading;
 
-  const viewState = useViewStateMachine(isLoading, error);
+  const viewState = createViewStateMachine(isLoading, error);
 
   return (
     <>

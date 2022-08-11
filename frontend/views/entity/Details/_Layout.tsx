@@ -24,7 +24,7 @@ import {
 import { AppLayout } from "../../../_layouts/app";
 import { getEntitiesTabsCount } from "./utils";
 import { NAVIGATION_LINKS } from "../../../lib/routing/links";
-import { useViewStateMachine } from "../useViewStateMachine";
+import { useEntityViewStateMachine } from "../useEntityViewStateMachine";
 
 export const DETAILS_LAYOUT_KEY = "___DETAILS_KEY__";
 
@@ -72,7 +72,7 @@ export function DetailsLayout({ children, entity, menuKey }: IProps) {
 
   const { isLoading, error } = referenceFields;
 
-  const viewState = useViewStateMachine(
+  const viewState = useEntityViewStateMachine(
     isLoading || dataDetails.isLoading,
     error || dataDetails.error,
     "details"

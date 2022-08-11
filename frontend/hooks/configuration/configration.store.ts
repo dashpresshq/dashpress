@@ -2,6 +2,7 @@ import {
   AppStorage,
   dataNotFoundMessage,
   makePutRequest,
+  MutationsLang,
   useStorageApi,
   useWaitForResponseMutationOptions,
 } from "@gothicgeeks/shared";
@@ -49,7 +50,7 @@ export function useUpsertConfigurationMutation(
     onSuccessActionWithFormData: (data) => {
       AppStorage.set(configurationApiPath(key, entity), data);
     },
-    successMessage: "App settings saved successfully",
+    successMessage: MutationsLang.saved("App Settings"),
   });
 
   return useMutation(

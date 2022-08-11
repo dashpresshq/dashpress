@@ -1,12 +1,10 @@
 import React from "react";
 import { AuthLayout } from "frontend/_layouts/guest";
-import {
-  useSetupCheck,
-  useSetupUserMutation,
-} from "frontend/hooks/setup/setup.store";
+import { useSetupCheck } from "frontend/hooks/setup/setup.store";
 import { ComponentIsLoading } from "@gothicgeeks/design-system";
 import { NAVIGATION_LINKS } from "frontend/lib/routing";
 import { UserSetupForm } from "./Form";
+import { useSetupUserMutation } from "../setup.store";
 
 export function UserSetup() {
   const setupUserMutation = useSetupUserMutation();

@@ -80,7 +80,7 @@ export function useCreateUserMutation() {
   const apiMutateOptions = useWaitForResponseMutationOptions<ICreateUserForm>({
     endpoints: [ADMIN_USERS_LIST_ENDPOINT],
     smartSuccessMessage: ({ username }) => ({
-      message: `User created successfully`,
+      message: MutationsLang.create("User"),
       action: {
         label: `Click here to view user`,
         action: () => router.push(NAVIGATION_LINKS.USERS.DETAILS(username)),

@@ -5,6 +5,7 @@ import {
 } from "@gothicgeeks/design-system";
 import { SLUG_LOADING_VALUE } from "@gothicgeeks/shared";
 import { useSetPageTitle } from "frontend/lib/routing";
+import { createViewStateMachine } from "frontend/lib/create-view-state-machine";
 import {
   useEntityDiction,
   useEntitySlug,
@@ -12,7 +13,6 @@ import {
 import { BaseEntitySettingsLayout } from "../_Base";
 import { useUpsertConfigurationMutation } from "../../../../hooks/configuration/configration.store";
 import { EntityDictionForm } from "./Form";
-import { createViewStateMachine } from "../../useViewStateMachine";
 import { ENTITY_CONFIGURATION_VIEW } from "../constants";
 
 // TODO validate plurals are unique

@@ -23,6 +23,11 @@ export const NAVIGATION_LINKS = {
     CREATE: "/users/create",
     DETAILS: (username: string) => `/users/${username}`,
   },
+  ROLES: {
+    LIST: "/roles",
+    CREATE: "/roles/create",
+    DETAILS: (role: string) => `/roles/${role}`,
+  },
   SETUP: {
     USER: "/setup/user",
     CREDENTIALS: "/setup/credentials",

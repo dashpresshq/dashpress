@@ -7,9 +7,9 @@ import {
   Spacer,
 } from "@gothicgeeks/design-system";
 import { TitleLang } from "@gothicgeeks/shared";
+import { createViewStateMachine } from "frontend/lib/create-view-state-machine";
 import { useNavigationStack, useSetPageTitle } from "frontend/lib/routing";
 import { useMyProfile } from "frontend/views/account/account.store";
-import { useViewStateMachine } from "frontend/views/entity/useViewStateMachine";
 import { AppLayout } from "../../../_layouts/app";
 import { useUsernameFromRouteParam } from "../hooks";
 import {
@@ -34,7 +34,7 @@ export function UserUpdate() {
 
   const { error } = userDetails;
 
-  const viewStateMachine = useViewStateMachine(isLoading, error);
+  const viewStateMachine = createViewStateMachine(isLoading, error);
 
   return (
     <AppLayout>

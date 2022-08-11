@@ -5,10 +5,10 @@ import {
 } from "frontend/hooks/entity/entity.config";
 import { IEntityCrudSettings } from "shared/configuration.constants";
 
-export const useViewStateMachine = (
+export const useEntityViewStateMachine = (
   isLoading: boolean,
   error: unknown,
-  actionKey?: keyof IEntityCrudSettings
+  actionKey: keyof IEntityCrudSettings
 ):
   | { type: "loading" }
   | { type: "render" }
@@ -27,23 +27,6 @@ export const useViewStateMachine = (
     return { type: "error", message: "Resource Not Available" };
   }
   if (error || entityCrudSettings.error || entityCrudSettings.error) {
-    return { type: "error", message: error };
-  }
-  return { type: "render" };
-};
-
-export const createViewStateMachine = (
-  isLoading: boolean,
-  error: unknown
-):
-  | { type: "loading" }
-  | { type: "render" }
-  | { type: "error"; message: unknown } => {
-  if (isLoading) {
-    return { type: "loading" };
-  }
-
-  if (error) {
     return { type: "error", message: error };
   }
   return { type: "render" };

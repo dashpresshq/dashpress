@@ -2,6 +2,7 @@ import {
   dataNotFoundMessage,
   makePatchRequest,
   makePostRequest,
+  MutationsLang,
   useStorageApi,
   useWaitForResponseMutationOptions,
 } from "@gothicgeeks/shared";
@@ -21,7 +22,7 @@ export function useMyProfile() {
 export function useUpdateProfileMutation() {
   const apiMutateOptions = useWaitForResponseMutationOptions<void>({
     endpoints: [ACCOUNT_URL],
-    successMessage: "Profile updated successfully",
+    successMessage: MutationsLang.edit("Profile"),
   });
 
   return useMutation(
@@ -33,7 +34,7 @@ export function useUpdateProfileMutation() {
 export function useChangePasswordMutation() {
   const apiMutateOptions = useWaitForResponseMutationOptions<void>({
     endpoints: [],
-    successMessage: "Password changed successfully",
+    successMessage: MutationsLang.edit("Password"),
   });
 
   return useMutation(

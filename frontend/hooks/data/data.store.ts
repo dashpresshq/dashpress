@@ -3,6 +3,7 @@ import {
   makeDeleteRequest,
   makePatchRequest,
   makePostRequest,
+  MutationsLang,
   useApi,
   useApiQueries,
   useWaitForResponseMutationOptions,
@@ -108,7 +109,7 @@ export function useEntityDataCreationMutation(entity: string) {
       ENTITY_LIST_PATH(entity),
     ],
     smartSuccessMessage: ({ id }) => ({
-      message: `${entityDiction.singular} created successfully`,
+      message: MutationsLang.create(entityDiction.singular),
       action: {
         label: `Click here to view ${entityDiction.singular}`,
         action: () => router.push(NAVIGATION_LINKS.ENTITY.DETAILS(entity, id)),
@@ -133,7 +134,7 @@ export function useEntityDataUpdationMutation(entity: string, id: string) {
       ENTITY_DETAILS_PATH(entity, id),
       ENTITY_LIST_PATH(entity),
     ],
-    successMessage: `${entityDiction.singular} updated successfully`,
+    successMessage: MutationsLang.edit(entityDiction.singular),
   });
 
   return useMutation(
@@ -154,7 +155,7 @@ export function useEntityDataDeletionMutation(entity: string) {
       ENTITY_LIST_PATH(entity),
     ],
     redirect: NAVIGATION_LINKS.ENTITY.TABLE(entity), // TODO needs to be reworked based on where it is coming from
-    successMessage: `${entityDiction.singular} deleted successfully`,
+    successMessage: MutationsLang.delete(entityDiction.singular),
   });
 
   return useMutation(

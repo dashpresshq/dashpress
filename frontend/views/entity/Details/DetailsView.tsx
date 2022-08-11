@@ -19,7 +19,7 @@ import {
 import { fitlerOutHiddenScalarColumns } from "../utils";
 import { OptionTag } from "../OptionTag";
 import { ReferenceComponent } from "../Table/ReferenceComponent";
-import { useViewStateMachine } from "../useViewStateMachine";
+import { useEntityViewStateMachine } from "../useEntityViewStateMachine";
 
 export function EntityDetailsView({
   id,
@@ -53,7 +53,7 @@ export function EntityDetailsView({
     entityFields.isLoading ||
     hiddenDetailsColumns.isLoading;
 
-  const viewState = useViewStateMachine(isLoading, error, "details");
+  const viewState = useEntityViewStateMachine(isLoading, error, "details");
 
   if (!id) {
     return null;

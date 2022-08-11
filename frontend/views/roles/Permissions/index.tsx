@@ -62,7 +62,7 @@ export function RolePermissions() {
         >
           {viewStateMachine.type === "error" && <ErrorAlert message={error} />}
 
-          <Text size="5">Edit the roles to your satisfcafton</Text>
+          <Text size="5">TODO some help text on the cruxes of permissions</Text>
           <Spacer size="xxl" />
           {allList.length > 0 && (
             <RenderList

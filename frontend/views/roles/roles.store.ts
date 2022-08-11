@@ -3,7 +3,6 @@ import {
   makePatchRequest,
   makePostRequest,
   MutationsLang,
-  StringUtils,
   useWaitForResponseMutationOptions,
 } from "@gothicgeeks/shared";
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
@@ -11,6 +10,7 @@ import { useRouter } from "next/router";
 import { useMutation } from "react-query";
 import { ICreateRoleForm } from "shared/form-schemas/roles/create";
 import { IUpdateRoleForm } from "shared/form-schemas/roles/update";
+import { makeRoleId } from "shared/types";
 import { useRoleIdFromRouteParam } from "./hooks";
 
 export const ADMIN_ROLES_ENDPOINT = "/api/roles";
@@ -57,9 +57,7 @@ export function useCreateRoleMutation() {
       action: {
         label: `Click here to view role`,
         action: () =>
-          router.push(
-            NAVIGATION_LINKS.ROLES.DETAILS(StringUtils.sluggify(name))
-          ),
+          router.push(NAVIGATION_LINKS.ROLES.DETAILS(makeRoleId(name))),
       },
     }),
   });

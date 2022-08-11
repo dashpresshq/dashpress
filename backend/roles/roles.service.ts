@@ -1,4 +1,3 @@
-import { StringUtils } from "@gothicgeeks/shared";
 import { AbstractCacheService, createCacheService } from "backend/lib/cache";
 import {
   createConfigDomainPersistenceService,
@@ -7,6 +6,8 @@ import {
 import { BadRequestError, NotFoundError } from "backend/lib/errors";
 import {
   APPLIED_CAN_ACCESS_ENTITY,
+  isSystemRole,
+  makeRoleId,
   SystemRoles,
   USER_PERMISSIONS,
 } from "shared/types";
@@ -29,6 +30,9 @@ export class RolesService {
   }
 
   async getRolePermissions(roleId: string): Promise<string[]> {
+    if (isSystemRole(roleId)) {
+      return [];
+    }
     return await this._cacheService.getItem<string[]>(roleId, async () => {
       const role = await this._rolesPersistenceService.getItem(roleId);
       if (!role) {
@@ -60,7 +64,7 @@ export class RolesService {
   }
 
   async createRole(input: Pick<IRole, "id">) {
-    const id = RolesService.makeRoleId(input.id);
+    const id = makeRoleId(input.id);
     const role = await this._rolesPersistenceService.getItem(id);
     if (role) {
       throw new BadRequestError("Role already exist");
@@ -82,7 +86,7 @@ export class RolesService {
       return;
     }
 
-    const madeRoleId = RolesService.makeRoleId(id);
+    const madeRoleId = makeRoleId(id);
 
     if ((Object.values(SystemRoles) as string[]).includes(madeRoleId)) {
       throw new BadRequestError("Role already exist");
@@ -99,10 +103,6 @@ export class RolesService {
       id: madeRoleId,
     });
     // TODO alert that renaming a role will cause a errors for current users and they will have to refresh their browser
-  }
-
-  static makeRoleId(roleName: string) {
-    return StringUtils.sluggify(roleName);
   }
 
   async removeRole(roleId: string) {

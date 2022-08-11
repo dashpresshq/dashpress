@@ -8,3 +8,11 @@ export function useAuthenticatedUserBag() {
     errorMessage: dataNotFoundMessage("Your account details"),
   });
 }
+
+export function usePageRequiresPermission(permission: string) {
+  return permission;
+}
+
+export function useCanUser(permission: string) {
+  return permission;
+}

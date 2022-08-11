@@ -1,7 +1,17 @@
+import { StringUtils } from "@gothicgeeks/shared";
+
 export enum SystemRoles {
   Creator = "creator",
   Viewer = "viewer",
 }
+
+export const isSystemRole = (roleId: string) => {
+  return (Object.values(SystemRoles) as string[]).includes(roleId);
+};
+
+export const makeRoleId = (roleName: string) => {
+  return StringUtils.sluggify(roleName);
+};
 
 export interface IAccountUser {
   name: string;

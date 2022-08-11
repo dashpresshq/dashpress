@@ -43,7 +43,7 @@ export function RenderFormInput({
   }
 
   if (selectionUrl) {
-    return <AsyncFormSelect {...formProps} url={selectionUrl} limit={2} />; // :eyess
+    return <AsyncFormSelect {...formProps} url={selectionUrl} />;
   }
 
   switch (type) {

@@ -2,6 +2,7 @@ import {
   IAppliedSchemaFormConfig,
   ISchemaFormConfig,
 } from "shared/form-schemas";
+import { ENTITY_LIST_PATH } from "frontend/hooks/data/data.store";
 import { IBaseEntityForm, IEntityFormSettings } from "./types";
 import { userFriendlyCase } from "../../lib/strings";
 
@@ -21,7 +22,7 @@ export const buildAppliedSchemaFormConfig = ({
           selections: entityFieldSelections[field] || [],
           selectionUrl:
             entityFieldTypes[field] === "reference"
-              ? `/api/data/${entityToOneReferenceFields[field]}`
+              ? ENTITY_LIST_PATH(entityToOneReferenceFields[field])
               : undefined,
           type: entityFieldTypes[field] || {},
           label: getEntityFieldLabels(field) || userFriendlyCase(field),

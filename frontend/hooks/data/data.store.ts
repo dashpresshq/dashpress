@@ -29,6 +29,8 @@ export const ENTITY_DETAILS_PATH = (entity: string, id: string) =>
 export const ENTITY_REFERENCE_PATH = (entity: string, id: string) =>
   `/api/data/${entity}/${id}/reference`;
 
+export const ENTITY_LIST_PATH = (entity: string) => `/api/data/${entity}`;
+
 export const useEntityDataDetails = (entity: string, id: string) => {
   const entityDiction = useEntityDiction();
 
@@ -100,7 +102,11 @@ export function useEntityDataCreationMutation(entity: string) {
   const apiMutateOptions = useWaitForResponseMutationOptions<
     Record<string, string>
   >({
-    endpoints: [ENTITY_TABLE_PATH(entity), ENTITY_COUNT_PATH(entity)],
+    endpoints: [
+      ENTITY_TABLE_PATH(entity),
+      ENTITY_COUNT_PATH(entity),
+      ENTITY_LIST_PATH(entity),
+    ],
     smartSuccessMessage: ({ id }) => ({
       message: `${entityDiction.singular} created successfully`,
       action: {
@@ -122,7 +128,11 @@ export function useEntityDataUpdationMutation(entity: string, id: string) {
   const apiMutateOptions = useWaitForResponseMutationOptions<
     Record<string, string>
   >({
-    endpoints: [ENTITY_TABLE_PATH(entity), ENTITY_DETAILS_PATH(entity, id)],
+    endpoints: [
+      ENTITY_TABLE_PATH(entity),
+      ENTITY_DETAILS_PATH(entity, id),
+      ENTITY_LIST_PATH(entity),
+    ],
     successMessage: `${entityDiction.singular} updated successfully`,
   });
 
@@ -138,7 +148,11 @@ export function useEntityDataDeletionMutation(entity: string) {
   const apiMutateOptions = useWaitForResponseMutationOptions<
     Record<string, string>
   >({
-    endpoints: [ENTITY_TABLE_PATH(entity), ENTITY_COUNT_PATH(entity)],
+    endpoints: [
+      ENTITY_TABLE_PATH(entity),
+      ENTITY_COUNT_PATH(entity),
+      ENTITY_LIST_PATH(entity),
+    ],
     redirect: NAVIGATION_LINKS.ENTITY.TABLE(entity), // TODO needs to be reworked based on where it is coming from
     successMessage: `${entityDiction.singular} deleted successfully`,
   });

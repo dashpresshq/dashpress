@@ -9,7 +9,7 @@ export const paginationFilterValidationImpl: ValidationImplType<
   const take = Number(req.query.take) || 10;
   const page = Number(req.query.page) || 1;
 
-  const orderBy = (req.query.orderBy as string) ? "desc" : "asc";
+  const orderBy = req.query.orderBy === "desc" ? "desc" : "asc";
 
   const entity = await entityValidationImpl(req);
 

@@ -1,5 +1,4 @@
 import { TableFilterType } from "@gothicgeeks/design-system/dist/components/Table/filters/types";
-import noop from "lodash/noop";
 import {
   useEntityCrudSettings,
   useEntityFieldLabels,
@@ -17,14 +16,16 @@ import { StringUtils } from "@gothicgeeks/shared";
 import { ITableColumn } from "@gothicgeeks/design-system";
 import { useMemo } from "react";
 import { IColorableSelection } from "shared/types";
+import { ENTITY_LIST_PATH } from "frontend/hooks/data/data.store";
 import { fitlerOutHiddenScalarColumns } from "../utils";
 import { TableActions } from "./Actions";
 import { ReferenceComponent } from "./ReferenceComponent";
 import { OptionTag } from "../OptionTag";
 
-export const buildFilterConfigFromType = (
+const buildFilterConfigFromType = (
   entityType: keyof typeof FIELD_TYPES_CONFIG_MAP,
-  entityFieldSelections: IColorableSelection[]
+  entityFieldSelections: IColorableSelection[],
+  referenceField?: string
 ): TableFilterType | undefined => {
   const filterType =
     FIELD_TYPES_CONFIG_MAP[entityType]?.tableFilterType || "not-filterable";
@@ -43,10 +44,7 @@ export const buildFilterConfigFromType = (
       filterType.bag = entityFieldSelections;
       return filterType;
     case "list":
-      filterType.bag = {
-        onChange: () => noop(),
-        selections: [],
-      };
+      filterType.bag = ENTITY_LIST_PATH(referenceField);
       return filterType;
   }
 };
@@ -79,7 +77,6 @@ export const useTableColumns = (entity: string) => {
   if (entityToOneReferenceFields.isLoading) {
     return [];
   }
-
   const columns: ITableColumn[] = columnsToShow.map(({ name, isId }) => {
     const tableColumn: ITableColumn = {
       Header: getEntityFieldLabels(name),
@@ -89,7 +86,8 @@ export const useTableColumns = (entity: string) => {
           ? undefined
           : buildFilterConfigFromType(
               entityFieldTypes[name],
-              entityFieldSelections[name]
+              entityFieldSelections[name],
+              entityToOneReferenceFields.data[name]
             ),
       disableSortBy: !FIELD_TYPES_CONFIG_MAP[entityFieldTypes[name]]?.sortable,
       Cell: ({ value }: { value: unknown }) => {

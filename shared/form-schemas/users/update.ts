@@ -10,7 +10,6 @@ export const UPDATE_USER_FORM_SCHEMA: IAppliedSchemaFormConfig<IUpdateUserForm> 
   {
     name: {
       type: "text",
-
       validations: [
         {
           validationType: "required",
@@ -19,7 +18,7 @@ export const UPDATE_USER_FORM_SCHEMA: IAppliedSchemaFormConfig<IUpdateUserForm> 
     },
     role: {
       type: "selection",
-      selections: "/api/roles",
+      selectionUrl: "/api/roles",
       validations: [
         {
           validationType: "required",
@@ -27,8 +26,11 @@ export const UPDATE_USER_FORM_SCHEMA: IAppliedSchemaFormConfig<IUpdateUserForm> 
       ],
     },
     systemProfile: {
-      type: "textarea",
-      //    :eyes to move to form code editor
-      validations: [],
+      type: "json",
+      validations: [
+        {
+          validationType: "isJson",
+        },
+      ],
     },
   };

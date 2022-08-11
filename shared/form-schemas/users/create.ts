@@ -30,7 +30,7 @@ export const CREATE_USER_FORM_SCHEMA: IAppliedSchemaFormConfig<ICreateUserForm> 
     },
     role: {
       type: "selection",
-      selections: "/api/roles",
+      selectionUrl: "/api/roles",
       validations: [
         {
           validationType: "required",

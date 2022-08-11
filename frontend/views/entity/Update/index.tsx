@@ -18,7 +18,10 @@ import {
   useEntitySlug,
   useSelectedEntityColumns,
 } from "../../../hooks/entity/entity.config";
-import { useEntityFields } from "../../../hooks/entity/entity.store";
+import {
+  useEntityFields,
+  useEntityToOneReferenceFields,
+} from "../../../hooks/entity/entity.store";
 import {
   useEntityDataDetails,
   useEntityDataUpdationMutation,
@@ -48,6 +51,8 @@ export function EntityUpdate() {
     "entity_columns_types",
     entity
   );
+  const entityToOneReferenceFields = useEntityToOneReferenceFields(entity);
+
   const entityValidationsMap = useEntityFieldValidations();
 
   const entityFieldTypes = useEntityFieldTypes();
@@ -63,12 +68,14 @@ export function EntityUpdate() {
     dataDetails.error ||
     hiddenUpdateColumns.error ||
     entityFieldTypesMap.error ||
+    entityToOneReferenceFields.error ||
     entityFields.error;
 
   const isLoading =
     dataDetails.isLoading ||
     entityFieldTypesMap.isLoading ||
     hiddenUpdateColumns.isLoading ||
+    entityToOneReferenceFields.isLoading ||
     entity === SLUG_LOADING_VALUE ||
     entityFields.isLoading;
 
@@ -104,6 +111,7 @@ export function EntityUpdate() {
           )}
           {viewState.type === "render" && (
             <UpdateEntityForm
+              entityToOneReferenceFields={entityToOneReferenceFields.data}
               getEntityFieldLabels={getEntityFieldLabels}
               entityFieldTypes={entityFieldTypes}
               entityFieldSelections={entityFieldSelections}

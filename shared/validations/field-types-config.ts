@@ -14,6 +14,7 @@ export const FIELD_TYPES_CONFIG_MAP: Record<
   | "richtext" // not inplemeneted
   | "url"
   | "number"
+  | "json"
   | "selection" // not inplemeneted
   | "reference" // not inplemeneted
   | "boolean"
@@ -69,6 +70,14 @@ export const FIELD_TYPES_CONFIG_MAP: Record<
     ],
   },
   textarea: {
+    sortable: false,
+    tableFilterType: {
+      _type: "string",
+    },
+    allowedValidations: ["maxLength", "minLength", "required"],
+  },
+  json: {
+    // TODO pick this up from DB
     sortable: false,
     tableFilterType: {
       _type: "string",
@@ -169,7 +178,6 @@ export const FIELD_TYPES_CONFIG_MAP: Record<
     sortable: true,
     typeIsNotChangeAble: true,
     allowedValidations: ["required", "unique"],
-    configureSelection: true,
   },
 };
 

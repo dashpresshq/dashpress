@@ -6,6 +6,7 @@ import {
   minLength,
   isURL,
   isNumber,
+  isJSON,
   isPositive,
   matches,
   isAlphanumeric,
@@ -43,6 +44,11 @@ export const ENTITY_VALIDATION_CONFIG: Record<
     isBoundToType: ["email"],
     message: "{{ name }} is an invalid email",
     implementation: handleValidation(isEmail),
+  },
+  isJson: {
+    isBoundToType: ["json"],
+    message: "{{ name }} is an invalid json",
+    implementation: handleValidation(isJSON),
   },
   isString: {
     isBoundToType: ["password", "text", "textarea", "richtext", "image"],

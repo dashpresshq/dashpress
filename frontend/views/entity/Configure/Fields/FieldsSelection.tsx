@@ -21,7 +21,6 @@ import { isUseColorsFlagOn, SYSTEM_COLORS } from "./selection.utils";
 export type EntityTypesForSelection =
   | "selection"
   | "selection-enum"
-  | "reference"
   | "boolean";
 
 const StyledColorBox = styled.div<{ background: string; isActive: boolean }>`

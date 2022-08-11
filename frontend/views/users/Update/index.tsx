@@ -55,7 +55,7 @@ export function UserUpdate() {
               schema={[
                 FormSkeletonSchema.Input,
                 FormSkeletonSchema.Input,
-                FormSkeletonSchema.RichTextArea,
+                FormSkeletonSchema.Textarea,
               ]}
             />
           )}

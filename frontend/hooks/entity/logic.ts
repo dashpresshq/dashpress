@@ -31,9 +31,6 @@ export const getEntitySelectionConfig = (
     case "selection":
       return preSelectedType ?? [];
 
-    case "reference":
-      return preSelectedType ?? [];
-
     case "selection-enum": {
       const preselection = preSelectedType ?? [];
 

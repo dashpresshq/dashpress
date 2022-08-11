@@ -4,6 +4,7 @@ import { IFieldValidationItem } from "shared/validations/types";
 
 export interface IBaseEntityForm {
   fields: string[];
+  entityToOneReferenceFields: Record<string, string>;
   entityFieldSelections: Record<string, IColorableSelection[]>;
   getEntityFieldLabels: (name: string) => string;
   onSubmit: (data: Record<string, unknown>) => void;

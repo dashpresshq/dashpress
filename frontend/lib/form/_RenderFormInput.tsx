@@ -1,4 +1,6 @@
 import {
+  AsyncFormSelect,
+  FormCodeEditor,
   FormInput,
   FormNumberInput,
   FormSelect,
@@ -13,6 +15,7 @@ import { FIELD_TYPES_CONFIG_MAP } from "shared/validations";
 interface IProps {
   type: keyof typeof FIELD_TYPES_CONFIG_MAP;
   renderProps: ISharedFormInput;
+  selectionUrl?: string;
   entityFieldSelections?: IColorableSelection[];
   required: boolean;
   disabled: boolean;
@@ -24,6 +27,7 @@ export function RenderFormInput({
   label,
   type,
   entityFieldSelections = [],
+  selectionUrl,
   required,
   disabled,
 }: IProps) {
@@ -38,6 +42,10 @@ export function RenderFormInput({
     return <FormSelect {...formProps} selectData={entityFieldSelections} />;
   }
 
+  if (selectionUrl) {
+    return <AsyncFormSelect {...formProps} url={selectionUrl} limit={2} />; // :eyess
+  }
+
   switch (type) {
     case "email":
     case "password":
@@ -48,8 +56,10 @@ export function RenderFormInput({
 
     case "selection":
     case "selection-enum":
-    case "reference":
       return <FormSelect {...formProps} selectData={entityFieldSelections} />;
+
+    case "reference":
+      return <AsyncFormSelect {...formProps} url={selectionUrl} />;
 
     case "boolean":
       return (
@@ -60,6 +70,9 @@ export function RenderFormInput({
           {...formProps}
         />
       );
+
+    case "json":
+      return <FormCodeEditor {...formProps} />;
 
     case "textarea":
       return <FormTextArea {...formProps} />;

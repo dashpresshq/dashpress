@@ -8,6 +8,7 @@ import { userFriendlyCase } from "../../lib/strings";
 export const buildAppliedSchemaFormConfig = ({
   fields,
   entityFieldTypes,
+  entityToOneReferenceFields,
   entityFieldSelections,
   getEntityFieldLabels,
   entityValidationsMap,
@@ -18,6 +19,10 @@ export const buildAppliedSchemaFormConfig = ({
         field,
         {
           selections: entityFieldSelections[field] || [],
+          selectionUrl:
+            entityFieldTypes[field] === "reference"
+              ? `/api/data/${entityToOneReferenceFields[field]}`
+              : undefined,
           type: entityFieldTypes[field] || {},
           label: getEntityFieldLabels(field) || userFriendlyCase(field),
           validations: entityValidationsMap[field] || [],

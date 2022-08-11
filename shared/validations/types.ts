@@ -6,6 +6,7 @@ export type ValidationsBoundToType =
   | "isDate"
   | "isReference"
   | "isBoolean"
+  | "isJson"
   | "isColor";
 
 export type SelectableAbleValidations =

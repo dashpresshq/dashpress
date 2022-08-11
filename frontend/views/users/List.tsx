@@ -6,12 +6,13 @@ import {
   Stack,
 } from "@gothicgeeks/design-system";
 import { IFEPaginatedDataState, useFEPaginatedData } from "@gothicgeeks/shared";
-import { useState } from "react";
+import React, { useState } from "react";
 import { AppLayout } from "frontend/_layouts/app";
 import { UserPlus } from "react-feather";
 import { NAVIGATION_LINKS, useSetPageTitle } from "frontend/lib/routing";
 import router from "next/router";
 import { IAccountUser } from "shared/types";
+import { userFriendlyCase } from "frontend/lib/strings";
 import {
   ADMIN_USERS_LIST_ENDPOINT,
   useUserDeletionMutation,
@@ -26,12 +27,41 @@ export function ListUsers() {
 
   const userDeletionMutation = useUserDeletionMutation();
 
-  const tableData = useFEPaginatedData(ADMIN_USERS_LIST_ENDPOINT, {
-    ...paginatedDataState,
-    sortBy: undefined,
-    pageIndex: 1,
-    filters: undefined,
-  });
+  const MemoizedAction = React.useCallback(
+    ({ row }: any) => (
+      <Stack spacing={4} align="center">
+        <SoftButton
+          action={NAVIGATION_LINKS.USERS.DETAILS(
+            (row.original as unknown as IAccountUser).username
+          )}
+          label="Details"
+          color="primary"
+          justIcon
+          icon="eye"
+        />
+        <DeleteButton
+          onDelete={() =>
+            userDeletionMutation.mutateAsync(
+              (row.original as unknown as IAccountUser).username
+            )
+          }
+          isMakingDeleteRequest={userDeletionMutation.isLoading}
+          shouldConfirmAlert
+        />
+      </Stack>
+    ),
+    [userDeletionMutation.isLoading]
+  );
+
+  const tableData = useFEPaginatedData<Record<string, unknown>>(
+    ADMIN_USERS_LIST_ENDPOINT,
+    {
+      ...paginatedDataState,
+      sortBy: undefined,
+      pageIndex: 1,
+      filters: undefined,
+    }
+  );
 
   return (
     <AppLayout>
@@ -54,32 +84,11 @@ export function ListUsers() {
           {
             Header: "Role",
             accessor: "role",
+            Cell: (value) => userFriendlyCase(value.value as string),
           },
           {
             Header: "Action",
-            // eslint-disable-next-line react/no-unstable-nested-components
-            Cell: ({ row }: { row: { original: unknown } }) => (
-              <Stack spacing={4} align="center">
-                <SoftButton
-                  action={NAVIGATION_LINKS.USERS.DETAILS(
-                    (row.original as unknown as IAccountUser).username
-                  )}
-                  label="Details"
-                  color="primary"
-                  justIcon
-                  icon="eye"
-                />
-                <DeleteButton
-                  onDelete={() =>
-                    userDeletionMutation.mutateAsync(
-                      (row.original as unknown as IAccountUser).username
-                    )
-                  }
-                  isMakingDeleteRequest={userDeletionMutation.isLoading}
-                  shouldConfirmAlert
-                />
-              </Stack>
-            ),
+            Cell: MemoizedAction,
           },
         ]}
         menuItems={[

@@ -17,7 +17,10 @@ import {
   useEntitySlug,
   useSelectedEntityColumns,
 } from "../../../hooks/entity/entity.config";
-import { useEntityFields } from "../../../hooks/entity/entity.store";
+import {
+  useEntityFields,
+  useEntityToOneReferenceFields,
+} from "../../../hooks/entity/entity.store";
 import { useEntityDataCreationMutation } from "../../../hooks/data/data.store";
 import {
   EntityActionTypes,
@@ -37,6 +40,7 @@ export function EntityCreate() {
     EntityActionTypes.Create,
     EntityActionTypes.Types,
   ]);
+  const entityToOneReferenceFields = useEntityToOneReferenceFields(entity);
   const hiddenCreateColumns = useSelectedEntityColumns(
     "hidden_entity_create_columns"
   );
@@ -53,11 +57,13 @@ export function EntityCreate() {
   const error =
     hiddenCreateColumns.error ||
     entityFieldTypesMap.error ||
+    entityToOneReferenceFields.error ||
     entityFields.error;
 
   const isLoading =
     hiddenCreateColumns.isLoading ||
     entityFields.isLoading ||
+    entityToOneReferenceFields.isLoading ||
     entity === SLUG_LOADING_VALUE ||
     entityFieldTypesMap.isLoading;
 
@@ -94,6 +100,7 @@ export function EntityCreate() {
           )}
           {viewState.type === "render" && (
             <CreateEntityForm
+              entityToOneReferenceFields={entityToOneReferenceFields.data}
               entityFieldTypes={entityFieldTypes}
               entityValidationsMap={entityValidationsMap}
               getEntityFieldLabels={getEntityFieldLabels}

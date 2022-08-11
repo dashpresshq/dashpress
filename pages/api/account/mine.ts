@@ -19,7 +19,7 @@ export default requestHandler({
   },
   GET: async (getValidatedRequest) => {
     const validatedRequest = await getValidatedRequest(["authenticatedUser"]);
-    return await usersController.getUserProfile(
+    return await usersController.getAuthenticatedUserBag(
       (validatedRequest.authenticatedUser as IAccountUser).username
     );
   },

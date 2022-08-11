@@ -11,6 +11,10 @@ export interface IAccountUser {
   role: string;
 }
 
+export interface IAuthenticatedUserBag extends Omit<IAccountUser, "password"> {
+  permissions: string[];
+}
+
 const CAN_ACCESS_ENTITY = "CAN_ACCESS_ENTITY";
 
 export const APPLIED_CAN_ACCESS_ENTITY = (entity: string) =>
@@ -21,6 +25,5 @@ export const USER_PERMISSIONS = {
   CAN_CONFIGURE_APP: "CAN_CONFIGURE_APP",
   CAN_RESET_PASSWORD: "CAN_RESET_PASSWORD",
   CAN_MANAGE_PERMISSIONS: "CAN_MANAGE_PERMISSIONS",
-  CAN_ACCESS_ENTITY,
   CAN_ACCESS_ALL_ENTITIES: APPLIED_CAN_ACCESS_ENTITY("ALL_ENTITIES"),
 };

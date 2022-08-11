@@ -58,7 +58,6 @@ export function useCreateRoleMutation() {
         action: () => router.push(NAVIGATION_LINKS.ROLES.DETAILS(name)),
       },
     }),
-    successMessage: MutationsLang.create("Role"),
   });
 
   return useMutation(async (data: ICreateRoleForm) => {

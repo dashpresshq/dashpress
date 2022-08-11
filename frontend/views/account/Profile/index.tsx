@@ -4,28 +4,29 @@ import {
   FormSkeletonSchema,
   SectionBox,
 } from "@gothicgeeks/design-system";
+import { useAuthenticatedUserBag } from "frontend/hooks/auth/user.store";
 import { useSetPageTitle } from "frontend/lib/routing";
-import { useMyProfile, useUpdateProfileMutation } from "../account.store";
+import { useUpdateProfileMutation } from "../account.store";
 import { ACCOUNT_VIEW_KEY } from "../constants";
 import { BaseAccountLayout } from "../_Base";
 import { UpdateProfileForm } from "./Form";
 
 export function AccountProfile() {
-  const myProfile = useMyProfile();
+  const authenticatedUserBag = useAuthenticatedUserBag();
   const updateProfileMutation = useUpdateProfileMutation();
 
   useSetPageTitle("Update Profile", ACCOUNT_VIEW_KEY);
 
   return (
     <BaseAccountLayout>
-      <ErrorAlert message={myProfile.error} />
+      <ErrorAlert message={authenticatedUserBag.error} />
       <SectionBox title="Account Profile">
-        {myProfile.isLoading ? (
+        {authenticatedUserBag.isLoading ? (
           <FormSkeleton schema={[FormSkeletonSchema.Input]} />
         ) : (
           <UpdateProfileForm
             onSubmit={updateProfileMutation.mutateAsync}
-            initialValues={myProfile.data}
+            initialValues={authenticatedUserBag.data}
           />
         )}
       </SectionBox>

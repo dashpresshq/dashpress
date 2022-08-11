@@ -2,19 +2,17 @@ import {
   dataNotFoundMessage,
   makeDeleteRequest,
   makePostRequest,
+  MutationHelpers,
   MutationsLang,
   useApi,
-  useWaitForResponseMutationOptions,
+  useApiMutateOptions,
 } from "@gothicgeeks/shared";
 import { isRouterParamEnabled } from "frontend/hooks";
-import { NAVIGATION_LINKS } from "frontend/lib/routing";
-import { useRouter } from "next-router-mock";
 import { useMutation } from "react-query";
-import { ICreateRoleForm } from "shared/form-schemas/roles/create";
-import {
-  ADMIN_ROLES_ENDPOINT,
-  ADMIN_ROLES_DETAILS_ENDPOINT,
-} from "./roles.store";
+import { useRoleIdFromRouteParam } from "./hooks";
+import { ADMIN_ROLES_DETAILS_ENDPOINT } from "./roles.store";
+
+const SINGULAR = "Role Permission";
 
 export const ADMIN_ROLE_PERMISSION_ENDPOINT = (roleId: string) =>
   `/api/roles/${roleId}/permissions`;
@@ -22,42 +20,43 @@ export const ADMIN_ROLE_PERMISSION_ENDPOINT = (roleId: string) =>
 export function useRolePermissions(roleId: string) {
   return useApi<string[]>(ADMIN_ROLE_PERMISSION_ENDPOINT(roleId), {
     enabled: isRouterParamEnabled(roleId),
-    errorMessage: dataNotFoundMessage("Role permission"),
+    errorMessage: dataNotFoundMessage(SINGULAR),
   });
 }
 
 export function useRolePermissionDeletionMutation() {
-  const apiMutateOptions = useWaitForResponseMutationOptions<
-    Record<string, string>
-  >({
-    endpoints: [ADMIN_ROLES_ENDPOINT],
-    redirect: NAVIGATION_LINKS.ROLES.LIST,
-    successMessage: MutationsLang.delete("Role"),
+  const roleId = useRoleIdFromRouteParam();
+
+  const apiMutateOptions = useApiMutateOptions<string[], string>({
+    dataQueryPath: ADMIN_ROLE_PERMISSION_ENDPOINT(roleId),
+    // onMutate: MutationHelpers.remove,
+    onMutate: (old: [], formData) => [
+      ...old.filter((oldItem) => formData !== oldItem),
+    ],
+    successMessage: MutationsLang.delete(SINGULAR),
   });
 
-  return useMutation(
-    async (roleId: string) =>
-      await makeDeleteRequest(ADMIN_ROLES_DETAILS_ENDPOINT(roleId)),
-    apiMutateOptions
-  );
+  return useMutation(async (permission: string) => {
+    await makeDeleteRequest(ADMIN_ROLES_DETAILS_ENDPOINT(roleId), {
+      permission,
+    });
+    return permission;
+  }, apiMutateOptions);
 }
 
 export function useCreateRolePermissionMutation() {
-  const router = useRouter();
-  const apiMutateOptions = useWaitForResponseMutationOptions<ICreateRoleForm>({
-    endpoints: [ADMIN_ROLES_ENDPOINT],
-    smartSuccessMessage: ({ name }) => ({
-      message: MutationsLang.create("Role"),
-      action: {
-        label: `Click here to view role`,
-        action: () => router.push(NAVIGATION_LINKS.ROLES.DETAILS(name)),
-      },
-    }),
-    successMessage: MutationsLang.create("Role"),
+  const roleId = useRoleIdFromRouteParam();
+
+  const apiMutateOptions = useApiMutateOptions<string[], string>({
+    dataQueryPath: ADMIN_ROLE_PERMISSION_ENDPOINT(roleId),
+    onMutate: MutationHelpers.append,
+    successMessage: MutationsLang.create(SINGULAR),
   });
 
-  return useMutation(async (data: ICreateRoleForm) => {
-    await makePostRequest(ADMIN_ROLES_ENDPOINT, data);
-    return data;
+  return useMutation(async (permission: string) => {
+    await makePostRequest(ADMIN_ROLE_PERMISSION_ENDPOINT(roleId), {
+      permission,
+    });
+    return permission;
   }, apiMutateOptions);
 }

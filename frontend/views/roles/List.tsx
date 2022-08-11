@@ -28,7 +28,7 @@ export function ListRoles() {
     ({ row }: any) => (
       <Stack spacing={4} align="center">
         <SoftButton
-          action={NAVIGATION_LINKS.USERS.DETAILS(
+          action={NAVIGATION_LINKS.ROLES.DETAILS(
             (row.original as unknown as IValueLabel).value
           )}
           label="Details"
@@ -72,7 +72,7 @@ export function ListRoles() {
         columns={[
           {
             Header: "Role",
-            accessor: "role",
+            accessor: "label",
             Cell: (value) => userFriendlyCase(value.value as string),
           },
           {

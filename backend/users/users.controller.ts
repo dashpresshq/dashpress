@@ -1,11 +1,15 @@
+import { RolesService, rolesService } from "backend/roles/roles.service";
 import { ISignInForm } from "shared/form-schemas/auth/signin";
 import { IChangePasswordForm } from "shared/form-schemas/profile/password";
 import { IResetPasswordForm } from "shared/form-schemas/users/reset-password";
-import { IAccountUser } from "shared/types";
+import { IAccountUser, IAuthenticatedUserBag } from "shared/types";
 import { UsersService, usersService } from "./users.service";
 
 export class UsersController {
-  constructor(private _usersService: UsersService) {}
+  constructor(
+    private _usersService: UsersService,
+    private _rolesService: RolesService
+  ) {}
 
   async login(authCrendetials: ISignInForm) {
     return await this._usersService.tryAuthenticate(authCrendetials);
@@ -27,6 +31,19 @@ export class UsersController {
     return await this._usersService.getUser(username);
   }
 
+  async getAuthenticatedUserBag(
+    authenticatedUsername: string
+  ): Promise<IAuthenticatedUserBag> {
+    const profile = await this._usersService.getUser(authenticatedUsername);
+    const permissions = await this._rolesService.getRolePermissions(
+      profile.role
+    );
+    return {
+      ...profile,
+      permissions,
+    };
+  }
+
   async resetPassword(username: string, input: IResetPasswordForm) {
     await this._usersService.resetPassword(username, input.password);
   }
@@ -40,4 +57,4 @@ export class UsersController {
   }
 }
 
-export const usersController = new UsersController(usersService);
+export const usersController = new UsersController(usersService, rolesService);

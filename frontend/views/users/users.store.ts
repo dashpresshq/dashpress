@@ -86,7 +86,6 @@ export function useCreateUserMutation() {
         action: () => router.push(NAVIGATION_LINKS.USERS.DETAILS(username)),
       },
     }),
-    successMessage: MutationsLang.create("User"),
   });
 
   return useMutation(async (data: ICreateUserForm) => {

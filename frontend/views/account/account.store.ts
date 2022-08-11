@@ -1,32 +1,23 @@
 import {
-  dataNotFoundMessage,
   makePatchRequest,
   makePostRequest,
   MutationsLang,
-  useStorageApi,
   useWaitForResponseMutationOptions,
 } from "@gothicgeeks/shared";
+import { AUTHENTICATED_ACCOUNT_URL } from "frontend/hooks/auth/user.store";
 import { useMutation } from "react-query";
 import { IChangePasswordForm } from "shared/form-schemas/profile/password";
 import { IUpdateUserForm } from "shared/form-schemas/profile/update";
-import { IAccountUser } from "shared/types";
-
-const ACCOUNT_URL = "/api/account/mine";
-
-export function useMyProfile() {
-  return useStorageApi<IAccountUser>(ACCOUNT_URL, {
-    errorMessage: dataNotFoundMessage("Your account details"),
-  });
-}
 
 export function useUpdateProfileMutation() {
   const apiMutateOptions = useWaitForResponseMutationOptions<void>({
-    endpoints: [ACCOUNT_URL],
+    endpoints: [AUTHENTICATED_ACCOUNT_URL],
     successMessage: MutationsLang.edit("Profile"),
   });
 
   return useMutation(
-    async (data: IUpdateUserForm) => await makePatchRequest(ACCOUNT_URL, data),
+    async (data: IUpdateUserForm) =>
+      await makePatchRequest(AUTHENTICATED_ACCOUNT_URL, data),
     apiMutateOptions
   );
 }

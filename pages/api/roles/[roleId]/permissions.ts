@@ -39,12 +39,12 @@ export default requestHandler(
     POST: async (getValidatedRequest) => {
       const validatedRequest = await getValidatedRequest([
         {
-          _type: "requestBody",
-          options: BASE_PERMISSION_FORM_SCHEMA,
-        },
-        {
           _type: "requestQuery",
           options: REQUEST_QUERY_FIELD,
+        },
+        {
+          _type: "requestBody",
+          options: BASE_PERMISSION_FORM_SCHEMA,
         },
       ]);
       return await rolesController.addPermission(

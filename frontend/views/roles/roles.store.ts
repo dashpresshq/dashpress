@@ -3,6 +3,7 @@ import {
   makePatchRequest,
   makePostRequest,
   MutationsLang,
+  StringUtils,
   useWaitForResponseMutationOptions,
 } from "@gothicgeeks/shared";
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
@@ -55,7 +56,10 @@ export function useCreateRoleMutation() {
       message: MutationsLang.create("Role"),
       action: {
         label: `Click here to view role`,
-        action: () => router.push(NAVIGATION_LINKS.ROLES.DETAILS(name)),
+        action: () =>
+          router.push(
+            NAVIGATION_LINKS.ROLES.DETAILS(StringUtils.sluggify(name))
+          ),
       },
     }),
   });

@@ -4,8 +4,12 @@ import {
   createConfigDomainPersistenceService,
   AbstractConfigDataPersistenceService,
 } from "backend/lib/config-persistence";
-import { BadRequestError } from "backend/lib/errors";
-import { SystemRoles, USER_PERMISSIONS } from "shared/types";
+import { BadRequestError, NotFoundError } from "backend/lib/errors";
+import {
+  APPLIED_CAN_ACCESS_ENTITY,
+  SystemRoles,
+  USER_PERMISSIONS,
+} from "shared/types";
 
 interface IRole {
   id: string;
@@ -28,7 +32,7 @@ export class RolesService {
     return await this._cacheService.getItem<string[]>(roleId, async () => {
       const role = await this._rolesPersistenceService.getItem(roleId);
       if (!role) {
-        return [];
+        throw new NotFoundError("Role Not Found");
       }
       return role.permissions;
     });
@@ -40,13 +44,13 @@ export class RolesService {
     }
 
     if (roleId === SystemRoles.Viewer) {
-      return permission.startsWith(USER_PERMISSIONS.CAN_ACCESS_ENTITY);
+      return permission.startsWith(APPLIED_CAN_ACCESS_ENTITY(""));
     }
 
     const rolePermissions = await this.getRolePermissions(roleId);
 
     if (
-      permission.startsWith(USER_PERMISSIONS.CAN_ACCESS_ENTITY) &&
+      permission.startsWith(APPLIED_CAN_ACCESS_ENTITY("")) &&
       rolePermissions.includes(USER_PERMISSIONS.CAN_ACCESS_ALL_ENTITIES)
     ) {
       return true;
@@ -55,7 +59,8 @@ export class RolesService {
     return rolePermissions.includes(permission);
   }
 
-  async createRole({ id }: Pick<IRole, "id">) {
+  async createRole(input: Pick<IRole, "id">) {
+    const id = RolesService.makeRoleId(input.id);
     const role = await this._rolesPersistenceService.getItem(id);
     if (role) {
       throw new BadRequestError("Role already exist");
@@ -66,7 +71,7 @@ export class RolesService {
     }
 
     await this._rolesPersistenceService.upsertItem(id, {
-      id: StringUtils.sluggify(id),
+      id,
       permissions: [],
     });
   }

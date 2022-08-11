@@ -13,6 +13,7 @@ import { NAVIGATION_LINKS, useSetPageTitle } from "frontend/lib/routing";
 import router from "next/router";
 import { userFriendlyCase } from "frontend/lib/strings";
 import { IValueLabel } from "@gothicgeeks/design-system/dist/types";
+import { SystemRoles } from "shared/types";
 import { ADMIN_ROLES_ENDPOINT, useRoleDeletionMutation } from "./roles.store";
 
 export function ListRoles() {
@@ -25,28 +26,28 @@ export function ListRoles() {
   const roleDeletionMutation = useRoleDeletionMutation();
 
   const MemoizedAction = React.useCallback(
-    ({ row }: any) => (
-      <Stack spacing={4} align="center">
-        <SoftButton
-          action={NAVIGATION_LINKS.ROLES.DETAILS(
-            (row.original as unknown as IValueLabel).value
-          )}
-          label="Details"
-          color="primary"
-          justIcon
-          icon="eye"
-        />
-        <DeleteButton
-          onDelete={() =>
-            roleDeletionMutation.mutateAsync(
-              (row.original as unknown as IValueLabel).value
-            )
-          }
-          isMakingDeleteRequest={roleDeletionMutation.isLoading}
-          shouldConfirmAlert
-        />
-      </Stack>
-    ),
+    ({ row }: any) => {
+      const roleId = (row.original as unknown as IValueLabel).value;
+      if ((Object.values(SystemRoles) as string[]).includes(roleId)) {
+        return null;
+      }
+      return (
+        <Stack spacing={4} align="center">
+          <SoftButton
+            action={NAVIGATION_LINKS.ROLES.DETAILS(roleId)}
+            label="Details"
+            color="primary"
+            justIcon
+            icon="eye"
+          />
+          <DeleteButton
+            onDelete={() => roleDeletionMutation.mutateAsync(roleId)}
+            isMakingDeleteRequest={roleDeletionMutation.isLoading}
+            shouldConfirmAlert
+          />
+        </Stack>
+      );
+    },
     [roleDeletionMutation.isLoading]
   );
 

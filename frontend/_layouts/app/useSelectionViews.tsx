@@ -1,4 +1,12 @@
-import { Settings, Home, Table, BarChart, Users, User } from "react-feather";
+import {
+  Settings,
+  Home,
+  Table,
+  BarChart,
+  Users,
+  User,
+  Shield,
+} from "react-feather";
 import { ISelectionView } from "@gothicgeeks/design-system/dist/Layouts/types";
 import { NAVIGATION_LINKS } from "frontend/lib/routing";
 import { useEntitiesMenuItems } from "../../hooks/entity/entity.store";
@@ -41,6 +49,11 @@ export const useSelectionViews = (): ISelectionView[] => {
       title: "Users",
       icon: Users,
       link: ROOT_LINKS_TO_CLEAR_BREADCRUMBS.USERS,
+    },
+    {
+      title: "Roles",
+      icon: Shield,
+      link: ROOT_LINKS_TO_CLEAR_BREADCRUMBS.ROLES,
     },
     {
       title: "Account",

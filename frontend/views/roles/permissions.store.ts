@@ -10,7 +10,6 @@ import {
 import { isRouterParamEnabled } from "frontend/hooks";
 import { useMutation } from "react-query";
 import { useRoleIdFromRouteParam } from "./hooks";
-import { ADMIN_ROLES_DETAILS_ENDPOINT } from "./roles.store";
 
 const SINGULAR = "Role Permission";
 
@@ -37,7 +36,7 @@ export function useRolePermissionDeletionMutation() {
   });
 
   return useMutation(async (permission: string) => {
-    await makeDeleteRequest(ADMIN_ROLES_DETAILS_ENDPOINT(roleId), {
+    await makeDeleteRequest(ADMIN_ROLE_PERMISSION_ENDPOINT(roleId), {
       permission,
     });
     return permission;

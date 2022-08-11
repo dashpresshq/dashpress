@@ -81,7 +81,7 @@ export function RolePermissions() {
                     actionButtons={[
                       {
                         isInverse: isPermissionSelected,
-                        text: isPermissionSelected ? "Add" : "Drop",
+                        text: isPermissionSelected ? "Drop" : "Add",
                         onClick: () => {
                           if (isPermissionSelected) {
                             rolePermissionDeletionMutation.mutate(

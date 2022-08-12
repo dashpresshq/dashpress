@@ -7,7 +7,10 @@ import {
   Spacer,
 } from "@gothicgeeks/design-system";
 import { TitleLang } from "@gothicgeeks/shared";
-import { useAuthenticatedUserBag } from "frontend/hooks/auth/user.store";
+import {
+  useAuthenticatedUserBag,
+  useCanUser,
+} from "frontend/hooks/auth/user.store";
 import { createViewStateMachine } from "frontend/lib/create-view-state-machine";
 import { useNavigationStack, useSetPageDetails } from "frontend/lib/routing";
 import { USER_PERMISSIONS } from "shared/types";
@@ -29,10 +32,14 @@ export function UserUpdate() {
   const userDetails = useUserDetails(username);
   const authenticatedUserBag = useAuthenticatedUserBag();
 
+  const hasResetPasswordPermission = useCanUser(
+    USER_PERMISSIONS.CAN_RESET_PASSWORD
+  );
+
   useSetPageDetails({
     pageTitle: "Update User",
     viewKey: "UPDATE_USER",
-    permission: USER_PERMISSIONS.CAN_MANAGE_USER, // :eyes on permission heirachy
+    permission: USER_PERMISSIONS.CAN_MANAGE_USER,
   });
 
   const { isLoading } = userDetails;
@@ -76,13 +83,14 @@ export function UserUpdate() {
           )}
         </SectionBox>
         <Spacer />
-        {authenticatedUserBag.data?.username !== username && (
-          <SectionBox title="Reset User Password">
-            <ResetUserPasswordForm
-              onSubmit={resetPasswordMutation.mutateAsync}
-            />
-          </SectionBox>
-        )}
+        {hasResetPasswordPermission === true &&
+          authenticatedUserBag.data?.username !== username && (
+            <SectionBox title="Reset User Password">
+              <ResetUserPasswordForm
+                onSubmit={resetPasswordMutation.mutateAsync}
+              />
+            </SectionBox>
+          )}
       </SectionCenter>
     </AppLayout>
   );

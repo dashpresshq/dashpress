@@ -38,13 +38,15 @@ export const META_USER_PERMISSIONS = {
   NO_PERMISSION_REQUIRED,
 };
 
+// TODO on permission heirachy, CAN_RESET_PASSWORD > CAN_MANAGE_USER
+
 export const USER_PERMISSIONS = {
   CAN_MANAGE_USER: "CAN_MANAGE_USER",
   CAN_CONFIGURE_APP: "CAN_CONFIGURE_APP",
   CAN_RESET_PASSWORD: "CAN_RESET_PASSWORD",
   CAN_MANAGE_PERMISSIONS: "CAN_MANAGE_PERMISSIONS",
   CAN_ACCESS_ALL_ENTITIES:
-    META_USER_PERMISSIONS.APPLIED_CAN_ACCESS_ENTITY("ALL_ENTITIES"),
+    META_USER_PERMISSIONS.APPLIED_CAN_ACCESS_ENTITY("ALL_ENTITIES"), // TODO hiding from view i.e merging it wuth hiding entities
 };
 
 const doesPermissionAllowPermission = (
@@ -81,7 +83,7 @@ const doSystemRoleCheck = (
 export const canRoleDoThis = async (
   userRole: string,
   permission: string,
-  getRolePermission: (role: string) => Promise<string[]> | string[]
+  getRolePermission: (role: string) => Promise<string[]>
 ): Promise<boolean> => {
   const systemRoleCheck = doSystemRoleCheck(userRole, permission);
 
@@ -90,6 +92,20 @@ export const canRoleDoThis = async (
   }
 
   const rolePermissions = await getRolePermission(userRole);
+
+  return doesPermissionAllowPermission(rolePermissions, permission);
+};
+
+export const canRoleDoThisSync = (
+  userRole: string,
+  permission: string,
+  rolePermissions: string[]
+): boolean => {
+  const systemRoleCheck = doSystemRoleCheck(userRole, permission);
+
+  if (typeof systemRoleCheck === "boolean") {
+    return systemRoleCheck;
+  }
 
   return doesPermissionAllowPermission(rolePermissions, permission);
 };

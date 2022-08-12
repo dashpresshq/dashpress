@@ -14,6 +14,7 @@ import { AuthService } from "@gothicgeeks/shared";
 import { useRouter } from "next/router";
 import { useNavigationStack } from "frontend/lib/routing";
 import { usePageDetailsStore } from "frontend/lib/routing/usePageDetails";
+import { usePageRequiresPermission } from "frontend/hooks/auth/user.store";
 import { useSiteConfig } from "../../hooks/app/site.config";
 import { NAVIGATION_LINKS } from "../../lib/routing/links";
 import { useSelectionViews } from "./useSelectionViews";
@@ -51,8 +52,13 @@ export function AppLayout({ children, actionItems = [] }: IProps) {
   const isChecking = useUserAuthCheck();
   const { history, pushToStack, goToLinkIndex } = useNavigationStack();
   const router = useRouter();
-  const pageTitle = usePageDetailsStore((store) => store.pageTitle);
+  const [pageTitle, permission] = usePageDetailsStore((store) => [
+    store.pageTitle,
+    store.permission,
+  ]);
   const selectionViews = useSelectionViews();
+
+  usePageRequiresPermission(permission);
 
   useEffect(() => {
     pushToStack();

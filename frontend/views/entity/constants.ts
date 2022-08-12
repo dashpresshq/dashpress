@@ -2,6 +2,7 @@ import { useRouter } from "next/router";
 import { Icon, Save, Settings } from "react-feather";
 import { useEntitySlug } from "frontend/hooks/entity/entity.config";
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
+import { useCanUserConfigureApp } from "frontend/hooks/auth/user.store";
 
 export const ENTITY_CONFIGURATION_VIEW = "ENTITY_CONFIGURATION_VIEW";
 
@@ -95,6 +96,12 @@ const ENTITY_ACTION_BAG: Record<
 export const useEntityActionMenuItems = (actionTypes: EntityActionTypes[]) => {
   const slugEntity = useEntitySlug();
   const router = useRouter();
+
+  const canUserConfigureApp = useCanUserConfigureApp();
+
+  if (canUserConfigureApp !== true) {
+    return [];
+  }
 
   return actionTypes.map((actionType) => {
     const { link, ...actionBag } = ENTITY_ACTION_BAG[actionType];

@@ -7,7 +7,11 @@ import {
   SoftButton,
   Spacer,
 } from "@gothicgeeks/design-system";
-import { IBEPaginatedDataState, usePaginatedData } from "@gothicgeeks/shared";
+import {
+  IBEPaginatedDataState,
+  usePaginatedData,
+  SLUG_LOADING_VALUE,
+} from "@gothicgeeks/shared";
 import { useState } from "react";
 import { QueryFilter } from "shared/types";
 import { createViewStateMachine } from "frontend/lib/create-view-state-machine";
@@ -18,7 +22,6 @@ import {
   useSelectedEntityColumns,
 } from "../../../hooks/entity/entity.config";
 import { useEntityFields } from "../../../hooks/entity/entity.store";
-import { SLUG_LOADING_VALUE } from "../../../lib/routing/constants";
 import { ENTITY_TABLE_PATH } from "../../../hooks/data/data.store";
 import { useTableMenuItems } from "./useTableMenuItems";
 import { useTableColumns } from "./useTableColumns";

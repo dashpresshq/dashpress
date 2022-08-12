@@ -1,11 +1,13 @@
 import { SectionBox } from "@gothicgeeks/design-system";
 import { TitleLang, useRouteParam } from "@gothicgeeks/shared";
-import { useNavigationStack, useSetPageTitle } from "frontend/lib/routing";
+import { useNavigationStack, useSetPageDetails } from "frontend/lib/routing";
+import { META_USER_PERMISSIONS } from "shared/types";
 import {
   // useEntityCrudSettings,
   useEntityDiction,
   useEntitySlug,
 } from "../../../hooks/entity/entity.config";
+import { ENTITY_DETAILS_VIEW_KEY } from "./constants";
 import { EntityDetailsView } from "./DetailsView";
 import { DetailsLayout } from "./_Layout";
 
@@ -18,7 +20,12 @@ export function EntityRelationDetails() {
   // const entityCrudSettings = useEntityCrudSettings();
 
   const { canGoBack, goBack } = useNavigationStack();
-  useSetPageTitle(`${childEntityDiction.singular} Details`, "ENTITY_DETAILS");
+
+  useSetPageDetails({
+    pageTitle: `${childEntityDiction.singular} Details`,
+    viewKey: ENTITY_DETAILS_VIEW_KEY,
+    permission: META_USER_PERMISSIONS.APPLIED_CAN_ACCESS_ENTITY(childEntity),
+  });
 
   return (
     <DetailsLayout entity={entity} menuKey={childEntity}>

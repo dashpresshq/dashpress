@@ -6,7 +6,8 @@ import {
   FormSkeletonSchema,
 } from "@gothicgeeks/design-system";
 import { SLUG_LOADING_VALUE, TitleLang } from "@gothicgeeks/shared";
-import { useNavigationStack, useSetPageTitle } from "frontend/lib/routing";
+import { useNavigationStack, useSetPageDetails } from "frontend/lib/routing";
+import { META_USER_PERMISSIONS } from "shared/types";
 import { AppLayout } from "../../../_layouts/app";
 import {
   useEntityDiction,
@@ -39,7 +40,13 @@ export function EntityUpdate() {
   const entity = useEntitySlug();
   const id = useEntityId();
   const entityDiction = useEntityDiction();
-  useSetPageTitle(`Update ${entityDiction.plural}`, "ENTITIES_DETAILS");
+
+  useSetPageDetails({
+    pageTitle: `Update ${entityDiction.plural}`,
+    viewKey: "ENTITIES_DETAILS",
+    permission: META_USER_PERMISSIONS.APPLIED_CAN_ACCESS_ENTITY(entity),
+  });
+
   const entityFields = useEntityFields(entity);
   const entityDataUpdationMutation = useEntityDataUpdationMutation(entity, id);
   const dataDetails = useEntityDataDetails(entity, id);

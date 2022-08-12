@@ -5,10 +5,10 @@ import {
   MutationsLang,
   useStorageApi,
   useWaitForResponseMutationOptions,
+  SLUG_LOADING_VALUE,
 } from "@gothicgeeks/shared";
 import { useMutation } from "react-query";
 import { CONFIGURATION_KEYS } from "../../../shared/configuration.constants";
-import { SLUG_LOADING_VALUE } from "../../lib/routing/constants";
 
 export const configurationApiPath = (
   key: keyof typeof CONFIGURATION_KEYS,

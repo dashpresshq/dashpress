@@ -1,4 +1,5 @@
-import { useSetPageTitle } from "frontend/lib/routing";
+import { useSetPageDetails } from "frontend/lib/routing";
+import { META_USER_PERMISSIONS } from "shared/types";
 import { AppLayout } from "../../../_layouts/app";
 import {
   useEntityDiction,
@@ -23,7 +24,11 @@ export function EntityTable() {
     EntityActionTypes.Types,
   ]);
 
-  useSetPageTitle(entityDiction.plural, "ENTITY_TABLE");
+  useSetPageDetails({
+    pageTitle: entityDiction.plural,
+    viewKey: "ENTITY_TABLE",
+    permission: META_USER_PERMISSIONS.APPLIED_CAN_ACCESS_ENTITY(entity),
+  });
 
   return (
     <AppLayout actionItems={actionItems}>

@@ -1,20 +1,22 @@
 import { FilterOperators } from "@gothicgeeks/design-system";
 import { useRouteParam } from "@gothicgeeks/shared";
 import { useEntityReferenceFields } from "frontend/hooks/entity/entity.store";
-import { useSetPageTitle } from "frontend/lib/routing";
+import { useSetPageDetails } from "frontend/lib/routing";
+import { META_USER_PERMISSIONS } from "shared/types";
 import {
   useEntityDiction,
   useEntityId,
   useEntitySlug,
 } from "../../../hooks/entity/entity.config";
 import { EntityTableView } from "../Table/TableView";
+import { ENTITY_DETAILS_VIEW_KEY } from "./constants";
 import { DetailsLayout } from "./_Layout";
 
 export function EntityRelationTable() {
-  const entityDiction = useEntityDiction();
   const entity = useEntitySlug();
   const entityId = useEntityId();
   const childEntity = useRouteParam("childEntity");
+  const childEntityDiction = useEntityDiction(childEntity);
 
   const childEntityRelations = useEntityReferenceFields(childEntity);
 
@@ -23,7 +25,11 @@ export function EntityRelationTable() {
     ({ table }) => table === entity
   )?.field;
 
-  useSetPageTitle(`${entityDiction.singular} Details`, "ENTITY_DETAILS");
+  useSetPageDetails({
+    pageTitle: `${childEntityDiction.singular} Table`,
+    viewKey: ENTITY_DETAILS_VIEW_KEY,
+    permission: META_USER_PERMISSIONS.APPLIED_CAN_ACCESS_ENTITY(childEntity),
+  });
 
   return (
     <DetailsLayout entity={entity} menuKey={childEntity}>

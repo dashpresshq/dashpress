@@ -6,6 +6,7 @@ import {
   MutationsLang,
   useApi,
   useApiQueries,
+  SLUG_LOADING_VALUE,
   useWaitForResponseMutationOptions,
 } from "@gothicgeeks/shared";
 import qs from "qs";
@@ -13,7 +14,6 @@ import { useRouter } from "next/router";
 import { useMutation } from "react-query";
 import { FilterOperators } from "@gothicgeeks/design-system";
 import { QueryFilter } from "shared/types";
-import { SLUG_LOADING_VALUE } from "../../lib/routing/constants";
 import { NAVIGATION_LINKS } from "../../lib/routing/links";
 import { useEntityDiction } from "../entity/entity.config";
 import { useMultipleEntityReferenceFields } from "../entity/entity.store";

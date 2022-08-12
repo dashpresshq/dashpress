@@ -6,7 +6,8 @@ import {
   FormSkeletonSchema,
 } from "@gothicgeeks/design-system";
 import { SLUG_LOADING_VALUE, TitleLang } from "@gothicgeeks/shared";
-import { useNavigationStack, useSetPageTitle } from "frontend/lib/routing";
+import { useNavigationStack, useSetPageDetails } from "frontend/lib/routing";
+import { META_USER_PERMISSIONS } from "shared/types";
 import { AppLayout } from "../../../_layouts/app";
 import {
   useEntityDiction,
@@ -69,7 +70,12 @@ export function EntityCreate() {
 
   const viewState = useEntityViewStateMachine(isLoading, error, "create");
   const { canGoBack, goBack } = useNavigationStack();
-  useSetPageTitle(`Create ${entityDiction.plural}`, "CREATE_ENTITY");
+
+  useSetPageDetails({
+    pageTitle: `Create ${entityDiction.plural}`,
+    viewKey: "CREATE_ENTITY",
+    permission: META_USER_PERMISSIONS.APPLIED_CAN_ACCESS_ENTITY(entity),
+  });
 
   return (
     <AppLayout actionItems={actionItems}>

@@ -1,4 +1,4 @@
-import { StringUtils } from "@gothicgeeks/shared";
+import { StringUtils, SLUG_LOADING_VALUE } from "@gothicgeeks/shared";
 
 export enum SystemRoles {
   Creator = "creator",
@@ -26,11 +26,16 @@ export interface IAuthenticatedUserBag extends Omit<IAccountUser, "password"> {
 }
 
 const CAN_ACCESS_ENTITY = "CAN_ACCESS_ENTITY";
+const NO_PERMISSION_REQUIRED = "NO_PERMISSION_REQUIRED";
 
 export const META_USER_PERMISSIONS = {
-  APPLIED_CAN_ACCESS_ENTITY: (entity: string) =>
-    `${CAN_ACCESS_ENTITY}:${entity.toUpperCase()}`,
-  NO_PERMISSION_REQUIRED: "NO_PERMISSION_REQUIRED",
+  APPLIED_CAN_ACCESS_ENTITY: (entity: string) => {
+    if (entity === SLUG_LOADING_VALUE) {
+      return NO_PERMISSION_REQUIRED;
+    }
+    return `${CAN_ACCESS_ENTITY}:${entity.toUpperCase()}`;
+  },
+  NO_PERMISSION_REQUIRED,
 };
 
 export const USER_PERMISSIONS = {

@@ -1,4 +1,4 @@
-export { useSetPageTitle } from "./usePageTItle";
+export { useSetPageDetails } from "./usePageDetails";
 export { useNavigationStack } from "./useNavigationStack";
 export { NAVIGATION_LINKS } from "./links";
 export { SLUG_LOADING_VALUE } from "./constants";

@@ -5,11 +5,10 @@ import {
 } from "backend/lib/config-persistence";
 import { BadRequestError, NotFoundError } from "backend/lib/errors";
 import {
-  APPLIED_CAN_ACCESS_ENTITY,
+  canRoleDoThis,
   isSystemRole,
   makeRoleId,
   SystemRoles,
-  USER_PERMISSIONS,
 } from "shared/types";
 
 interface IRole {
@@ -43,24 +42,7 @@ export class RolesService {
   }
 
   async canRoleDoThis(roleId: string, permission: string) {
-    if (roleId === SystemRoles.Creator) {
-      return true;
-    }
-
-    if (roleId === SystemRoles.Viewer) {
-      return permission.startsWith(APPLIED_CAN_ACCESS_ENTITY(""));
-    }
-
-    const rolePermissions = await this.getRolePermissions(roleId);
-
-    if (
-      permission.startsWith(APPLIED_CAN_ACCESS_ENTITY("")) &&
-      rolePermissions.includes(USER_PERMISSIONS.CAN_ACCESS_ALL_ENTITIES)
-    ) {
-      return true;
-    }
-
-    return rolePermissions.includes(permission);
+    return await canRoleDoThis(roleId, permission, this.getRolePermissions);
   }
 
   async createRole(input: Pick<IRole, "id">) {
@@ -102,7 +84,6 @@ export class RolesService {
       ...role,
       id: madeRoleId,
     });
-    // TODO alert that renaming a role will cause a errors for current users and they will have to refresh their browser
   }
 
   async removeRole(roleId: string) {

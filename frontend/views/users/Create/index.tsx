@@ -1,6 +1,7 @@
 import { SectionBox, SectionCenter } from "@gothicgeeks/design-system";
 import { TitleLang } from "@gothicgeeks/shared";
-import { useNavigationStack, useSetPageTitle } from "frontend/lib/routing";
+import { useNavigationStack, useSetPageDetails } from "frontend/lib/routing";
+import { USER_PERMISSIONS } from "shared/types";
 import { AppLayout } from "../../../_layouts/app";
 import { useCreateUserMutation } from "../users.store";
 import { CreateUserForm } from "./Form";
@@ -8,7 +9,11 @@ import { CreateUserForm } from "./Form";
 export function UserCreate() {
   const userCreationMutation = useCreateUserMutation();
   const { canGoBack, goBack } = useNavigationStack();
-  useSetPageTitle(`Create User`, "CREATE_USER");
+  useSetPageDetails({
+    pageTitle: "Create User",
+    viewKey: "CREATE_USER",
+    permission: USER_PERMISSIONS.CAN_MANAGE_USER,
+  });
 
   return (
     <AppLayout>

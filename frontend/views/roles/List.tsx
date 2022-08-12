@@ -9,11 +9,11 @@ import { IFEPaginatedDataState, useFEPaginatedData } from "@gothicgeeks/shared";
 import React, { useState } from "react";
 import { AppLayout } from "frontend/_layouts/app";
 import { Plus } from "react-feather";
-import { NAVIGATION_LINKS, useSetPageTitle } from "frontend/lib/routing";
+import { NAVIGATION_LINKS, useSetPageDetails } from "frontend/lib/routing";
 import router from "next/router";
 import { userFriendlyCase } from "frontend/lib/strings";
 import { IValueLabel } from "@gothicgeeks/design-system/dist/types";
-import { SystemRoles } from "shared/types";
+import { SystemRoles, USER_PERMISSIONS } from "shared/types";
 import { ADMIN_ROLES_ENDPOINT, useRoleDeletionMutation } from "./roles.store";
 
 export function ListRoles() {
@@ -21,7 +21,11 @@ export function ListRoles() {
     IFEPaginatedDataState<IValueLabel>
   >({ ...DEFAULT_TABLE_PARAMS, pageIndex: 1 });
 
-  useSetPageTitle("Manage Roles", "ROLES_LIST");
+  useSetPageDetails({
+    pageTitle: "Manage Roles",
+    viewKey: "ROLES_LIST",
+    permission: USER_PERMISSIONS.CAN_MANAGE_PERMISSIONS,
+  });
 
   const roleDeletionMutation = useRoleDeletionMutation();
 

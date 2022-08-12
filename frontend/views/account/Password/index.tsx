@@ -1,5 +1,6 @@
 import { SectionBox } from "@gothicgeeks/design-system";
-import { useSetPageTitle } from "frontend/lib/routing";
+import { useSetPageDetails } from "frontend/lib/routing";
+import { META_USER_PERMISSIONS } from "shared/types";
 import { useChangePasswordMutation } from "../account.store";
 import { ACCOUNT_VIEW_KEY } from "../constants";
 
@@ -8,7 +9,11 @@ import { ChangePasswordForm } from "./Form";
 
 export function AccountPassword() {
   const changePasswordMutation = useChangePasswordMutation();
-  useSetPageTitle("Change Password", ACCOUNT_VIEW_KEY);
+  useSetPageDetails({
+    pageTitle: "Change Password",
+    viewKey: ACCOUNT_VIEW_KEY,
+    permission: META_USER_PERMISSIONS.NO_PERMISSION_REQUIRED,
+  });
 
   return (
     <BaseAccountLayout>

@@ -1,6 +1,7 @@
 import { SectionBox, SectionCenter } from "@gothicgeeks/design-system";
 import { TitleLang } from "@gothicgeeks/shared";
-import { useNavigationStack, useSetPageTitle } from "frontend/lib/routing";
+import { useNavigationStack, useSetPageDetails } from "frontend/lib/routing";
+import { USER_PERMISSIONS } from "shared/types";
 import { AppLayout } from "../../../_layouts/app";
 import { useCreateRoleMutation } from "../roles.store";
 import { CreateRoleForm } from "./Form";
@@ -8,7 +9,12 @@ import { CreateRoleForm } from "./Form";
 export function RoleCreate() {
   const roleCreationMutation = useCreateRoleMutation();
   const { canGoBack, goBack } = useNavigationStack();
-  useSetPageTitle(`Create Role`, "CREATE_ROLE");
+
+  useSetPageDetails({
+    pageTitle: "Create Role",
+    viewKey: "CREATE_ROLE",
+    permission: USER_PERMISSIONS.CAN_MANAGE_PERMISSIONS,
+  });
 
   return (
     <AppLayout>

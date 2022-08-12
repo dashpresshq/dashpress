@@ -9,9 +9,9 @@ import { IFEPaginatedDataState, useFEPaginatedData } from "@gothicgeeks/shared";
 import React, { useState } from "react";
 import { AppLayout } from "frontend/_layouts/app";
 import { UserPlus } from "react-feather";
-import { NAVIGATION_LINKS, useSetPageTitle } from "frontend/lib/routing";
+import { NAVIGATION_LINKS, useSetPageDetails } from "frontend/lib/routing";
 import router from "next/router";
-import { IAccountUser } from "shared/types";
+import { IAccountUser, USER_PERMISSIONS } from "shared/types";
 import { userFriendlyCase } from "frontend/lib/strings";
 import {
   ADMIN_USERS_LIST_ENDPOINT,
@@ -23,7 +23,11 @@ export function ListUsers() {
     IFEPaginatedDataState<IAccountUser>
   >({ ...DEFAULT_TABLE_PARAMS, pageIndex: 1 });
 
-  useSetPageTitle("Manage Users", "USERS_LIST");
+  useSetPageDetails({
+    pageTitle: "Manage User",
+    viewKey: "USERS_LIST",
+    permission: USER_PERMISSIONS.CAN_MANAGE_USER,
+  });
 
   const userDeletionMutation = useUserDeletionMutation();
 

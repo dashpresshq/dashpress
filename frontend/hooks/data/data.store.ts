@@ -154,7 +154,7 @@ export function useEntityDataDeletionMutation(entity: string) {
       ENTITY_COUNT_PATH(entity),
       ENTITY_LIST_PATH(entity),
     ],
-    redirect: NAVIGATION_LINKS.ENTITY.TABLE(entity), // TODO needs to be reworked based on where it is coming from
+    redirect: NAVIGATION_LINKS.ENTITY.TABLE(entity), // TODO needs to be reworked based on where it is coming from especially from nested tables
     successMessage: MutationsLang.delete(entityDiction.singular),
   });
 

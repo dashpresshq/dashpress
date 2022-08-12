@@ -1,7 +1,7 @@
 import { ROOT_LINKS_TO_CLEAR_BREADCRUMBS } from "frontend/_layouts/app/constants";
 import { useRouter } from "next/router";
 import { useEffect, useMemo, useState } from "react";
-import { usePageTitleStore } from "./usePageTItle";
+import { usePageDetailsStore } from "./usePageDetails";
 
 export const TemporayStorageService = {
   getString: (path: string): string | null =>
@@ -44,7 +44,7 @@ export const useNavigationStack = () => {
   const [history, setHistory] = useState<INavigationItem[]>(
     JSON.parse(TemporayStorageService.getString(key) || "[]")
   );
-  const [pageTitle, viewKey] = usePageTitleStore((store) => [
+  const [pageTitle, viewKey] = usePageDetailsStore((store) => [
     store.pageTitle,
     store.viewKey,
   ]);

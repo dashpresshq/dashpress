@@ -9,7 +9,8 @@ import {
 import { TitleLang } from "@gothicgeeks/shared";
 import { useAuthenticatedUserBag } from "frontend/hooks/auth/user.store";
 import { createViewStateMachine } from "frontend/lib/create-view-state-machine";
-import { useNavigationStack, useSetPageTitle } from "frontend/lib/routing";
+import { useNavigationStack, useSetPageDetails } from "frontend/lib/routing";
+import { USER_PERMISSIONS } from "shared/types";
 import { AppLayout } from "../../../_layouts/app";
 import { useUsernameFromRouteParam } from "../hooks";
 import {
@@ -28,7 +29,11 @@ export function UserUpdate() {
   const userDetails = useUserDetails(username);
   const authenticatedUserBag = useAuthenticatedUserBag();
 
-  useSetPageTitle(`Update User`, "UPDATE_USER");
+  useSetPageDetails({
+    pageTitle: "Update User",
+    viewKey: "UPDATE_USER",
+    permission: USER_PERMISSIONS.CAN_MANAGE_USER, // :eyes on permission heirachy
+  });
 
   const { isLoading } = userDetails;
 

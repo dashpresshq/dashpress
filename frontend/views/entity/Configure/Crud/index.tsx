@@ -4,7 +4,8 @@ import { useEffect, useState } from "react";
 import { ENTITY_TABLE_PATH } from "frontend/hooks/data/data.store";
 import { SLUG_LOADING_VALUE, useRouteParam } from "@gothicgeeks/shared";
 import { IEntityCrudSettings } from "shared/configuration.constants";
-import { useSetPageTitle, useChangeRouterParam } from "frontend/lib/routing";
+import { useSetPageDetails, useChangeRouterParam } from "frontend/lib/routing";
+import { USER_PERMISSIONS } from "shared/types";
 import {
   useEntityCrudSettings,
   useEntityFieldLabels,
@@ -191,7 +192,11 @@ export function EntityCrudSettings() {
   const tabFromUrl = useRouteParam("tab");
   const changeTabParam = useChangeRouterParam("tab");
   const entityCrudView = useEntityCrudView();
-  useSetPageTitle("CRUD Settings", ENTITY_CONFIGURATION_VIEW);
+  useSetPageDetails({
+    pageTitle: "CRUD Settings",
+    viewKey: ENTITY_CONFIGURATION_VIEW,
+    permission: USER_PERMISSIONS.CAN_CONFIGURE_APP,
+  });
   return (
     <BaseEntitySettingsLayout>
       <SectionBox title="CRUD Settings">

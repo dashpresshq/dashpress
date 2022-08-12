@@ -3,7 +3,7 @@ import { userFriendlyCase } from "frontend/lib/strings";
 import { ICreateRoleForm } from "shared/form-schemas/roles/create";
 import { IBasePermissionForm } from "shared/form-schemas/roles/permissions/base";
 import { IUpdateRoleForm } from "shared/form-schemas/roles/update";
-import { SystemRoles } from "shared/types";
+import { makeRoleId, SystemRoles } from "shared/types";
 import { RolesService, rolesService } from "./roles.service";
 
 export class RolesController {
@@ -34,7 +34,7 @@ export class RolesController {
   async updateRoleDetails(roleId: string, { name }: IUpdateRoleForm) {
     await this._rolesService.updateRoleDetails(roleId, { id: name });
 
-    await this.updateUsersRole(roleId, RolesService.makeRoleId(name));
+    await this.updateUsersRole(roleId, makeRoleId(name));
   }
 
   private async updateUsersRole(fromRole: string, toRole: string) {

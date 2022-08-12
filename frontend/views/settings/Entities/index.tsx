@@ -5,7 +5,8 @@ import {
   Tabs,
 } from "@gothicgeeks/design-system";
 import { useRouteParam } from "@gothicgeeks/shared";
-import { useSetPageTitle, useChangeRouterParam } from "frontend/lib/routing";
+import { useChangeRouterParam, useSetPageDetails } from "frontend/lib/routing";
+import { USER_PERMISSIONS } from "shared/types";
 import {
   useAppConfiguration,
   useUpsertConfigurationMutation,
@@ -23,7 +24,12 @@ import { EntitiesSelection } from "./Selection";
 export function EntitiesSettings() {
   const entitiesList = useEntitiesList();
   const tabFromUrl = useRouteParam("tab");
-  useSetPageTitle("Entities Settings", SETTINGS_VIEW_KEY);
+
+  useSetPageDetails({
+    pageTitle: "Entities Settings",
+    viewKey: SETTINGS_VIEW_KEY,
+    permission: USER_PERMISSIONS.CAN_CONFIGURE_APP,
+  });
 
   const changeTabParam = useChangeRouterParam("tab");
 

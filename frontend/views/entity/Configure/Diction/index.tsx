@@ -4,8 +4,9 @@ import {
   SectionBox,
 } from "@gothicgeeks/design-system";
 import { SLUG_LOADING_VALUE } from "@gothicgeeks/shared";
-import { useSetPageTitle } from "frontend/lib/routing";
+import { useSetPageDetails } from "frontend/lib/routing";
 import { createViewStateMachine } from "frontend/lib/create-view-state-machine";
+import { USER_PERMISSIONS } from "shared/types";
 import {
   useEntityDiction,
   useEntitySlug,
@@ -27,7 +28,11 @@ export function EntityDictionSettings() {
     entity === SLUG_LOADING_VALUE,
     false
   );
-  useSetPageTitle("Diction Settings", ENTITY_CONFIGURATION_VIEW);
+  useSetPageDetails({
+    pageTitle: "Diction Settings",
+    viewKey: ENTITY_CONFIGURATION_VIEW,
+    permission: USER_PERMISSIONS.CAN_CONFIGURE_APP,
+  });
   return (
     <BaseEntitySettingsLayout>
       <SectionBox title="Diction Settings">

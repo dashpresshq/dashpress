@@ -15,10 +15,11 @@ import {
   useEntityRelationsList,
 } from "frontend/hooks/entity/entity.store";
 import { SLUG_LOADING_VALUE, useRouteParam } from "@gothicgeeks/shared";
-import { useChangeRouterParam, useSetPageTitle } from "frontend/lib/routing";
+import { useChangeRouterParam, useSetPageDetails } from "frontend/lib/routing";
 import { EntitiesSelection } from "frontend/views/settings/Entities/Selection";
 import { useEntityDictionPlurals } from "frontend/hooks/entity/entity.queries";
 import { createViewStateMachine } from "frontend/lib/create-view-state-machine";
+import { USER_PERMISSIONS } from "shared/types";
 import { useEntitySlug } from "../../../../hooks/entity/entity.config";
 import { BaseEntitySettingsLayout } from "../_Base";
 import {
@@ -36,7 +37,12 @@ export function EntityRelationsSettings() {
   const entityFields = useEntityFields(entity);
   const entityRelationList = useEntityRelationsList(entity);
   const referenceFields = useEntityReferenceFields(entity);
-  useSetPageTitle("Relationship Settings", ENTITY_CONFIGURATION_VIEW);
+
+  useSetPageDetails({
+    pageTitle: "Relationship Settings",
+    viewKey: ENTITY_CONFIGURATION_VIEW,
+    permission: USER_PERMISSIONS.CAN_CONFIGURE_APP,
+  });
 
   const entityRelationTemplate = useEntityConfiguration<{
     format: string;

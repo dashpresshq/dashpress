@@ -13,7 +13,7 @@ import Head from "next/head";
 import { AuthService } from "@gothicgeeks/shared";
 import { useRouter } from "next/router";
 import { useNavigationStack } from "frontend/lib/routing";
-import { usePageTitleStore } from "frontend/lib/routing/usePageTItle";
+import { usePageDetailsStore } from "frontend/lib/routing/usePageDetails";
 import { useSiteConfig } from "../../hooks/app/site.config";
 import { NAVIGATION_LINKS } from "../../lib/routing/links";
 import { useSelectionViews } from "./useSelectionViews";
@@ -51,7 +51,7 @@ export function AppLayout({ children, actionItems = [] }: IProps) {
   const isChecking = useUserAuthCheck();
   const { history, pushToStack, goToLinkIndex } = useNavigationStack();
   const router = useRouter();
-  const pageTitle = usePageTitleStore((store) => store.pageTitle);
+  const pageTitle = usePageDetailsStore((store) => store.pageTitle);
   const selectionViews = useSelectionViews();
 
   useEffect(() => {

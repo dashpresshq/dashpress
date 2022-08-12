@@ -11,7 +11,8 @@ import * as StyledGrid from "styled-bootstrap-grid";
 import { useRouter } from "next/router";
 import { HardDrive } from "react-feather";
 import { useEntitiesCount } from "frontend/hooks/data/data.store";
-import { useSetPageTitle } from "frontend/lib/routing";
+import { useSetPageDetails } from "frontend/lib/routing";
+import { META_USER_PERMISSIONS } from "shared/types";
 import { useEntitiesMenuItems } from "../../hooks/entity/entity.store";
 import { AppLayout } from "../../_layouts/app";
 import { NAVIGATION_LINKS } from "../../lib/routing/links";
@@ -36,7 +37,11 @@ export function Dashboard() {
   );
   const router = useRouter();
 
-  useSetPageTitle("Home", "HOME");
+  useSetPageDetails({
+    pageTitle: "Home",
+    viewKey: "HOME",
+    permission: META_USER_PERMISSIONS.NO_PERMISSION_REQUIRED,
+  });
 
   return (
     <AppLayout

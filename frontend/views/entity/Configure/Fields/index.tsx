@@ -7,7 +7,8 @@ import {
   Text,
 } from "@gothicgeeks/design-system";
 import { SLUG_LOADING_VALUE, useRouteParam } from "@gothicgeeks/shared";
-import { useSetPageTitle, useChangeRouterParam } from "frontend/lib/routing";
+import { useChangeRouterParam, useSetPageDetails } from "frontend/lib/routing";
+import { USER_PERMISSIONS } from "shared/types";
 import {
   useEntityFieldLabels,
   useEntityFieldSelections,
@@ -91,7 +92,11 @@ export function EntityFieldsSettings() {
     }
   );
 
-  useSetPageTitle("Field Settings", ENTITY_CONFIGURATION_VIEW);
+  useSetPageDetails({
+    pageTitle: "Field Settings",
+    viewKey: ENTITY_CONFIGURATION_VIEW,
+    permission: USER_PERMISSIONS.CAN_CONFIGURE_APP,
+  });
 
   const sharedLoadingState =
     entityFieldLists.isLoading ||

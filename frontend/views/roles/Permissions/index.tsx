@@ -10,9 +10,9 @@ import {
 import { TitleLang } from "@gothicgeeks/shared";
 import { useEntitiesList } from "frontend/hooks/entity/entity.store";
 import { createViewStateMachine } from "frontend/lib/create-view-state-machine";
-import { useNavigationStack, useSetPageTitle } from "frontend/lib/routing";
+import { useNavigationStack, useSetPageDetails } from "frontend/lib/routing";
 import { userFriendlyCase } from "frontend/lib/strings";
-import { APPLIED_CAN_ACCESS_ENTITY, USER_PERMISSIONS } from "shared/types";
+import { USER_PERMISSIONS, META_USER_PERMISSIONS } from "shared/types";
 import { AppLayout } from "../../../_layouts/app";
 import { useRoleIdFromRouteParam } from "../hooks";
 import {
@@ -31,7 +31,11 @@ export function RolePermissions() {
 
   const { canGoBack, goBack } = useNavigationStack();
 
-  useSetPageTitle(`Role Permissions`, "ROLE_PERMISSION");
+  useSetPageDetails({
+    pageTitle: "Role Permissions",
+    viewKey: "ROLE_PERMISSION",
+    permission: USER_PERMISSIONS.CAN_MANAGE_PERMISSIONS,
+  });
 
   const isLoading = rolePermissions.isLoading || entitiesList.isLoading;
 
@@ -42,7 +46,7 @@ export function RolePermissions() {
   const allList = [
     ...Object.values(USER_PERMISSIONS),
     ...(entitiesList.data || []).map((entity) =>
-      APPLIED_CAN_ACCESS_ENTITY(entity.value)
+      META_USER_PERMISSIONS.APPLIED_CAN_ACCESS_ENTITY(entity.value)
     ),
   ];
 

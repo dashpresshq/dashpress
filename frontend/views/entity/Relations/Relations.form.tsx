@@ -2,7 +2,7 @@ import { FormButton, FormInput } from "@gothicgeeks/design-system";
 import { Form, Field } from "react-final-form";
 import { ButtonLang, composeValidators, required } from "@gothicgeeks/shared";
 
-import { IFormProps } from "../../../../lib/form/types";
+import { IFormProps } from "frontend/lib/form/types";
 import { getFieldsOffFormat } from "./utils";
 
 interface IRelationsSettings {

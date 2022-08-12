@@ -9,7 +9,7 @@ import {
 } from "@gothicgeeks/design-system";
 import { useEffect, useState } from "react";
 import { IEntityField } from "shared/types";
-import { useStringSelections } from "../../../../lib/selection";
+import { useStringSelections } from "../../../lib/selection";
 
 interface IProps {
   entityFields: IEntityField[];

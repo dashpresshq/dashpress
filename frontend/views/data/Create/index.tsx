@@ -15,7 +15,6 @@ import {
   useEntityFieldSelections,
   useEntityFieldTypes,
   useEntityFieldValidations,
-  useEntityId,
   useEntitySlug,
   useSelectedEntityColumns,
 } from "../../../hooks/entity/entity.config";
@@ -23,77 +22,66 @@ import {
   useEntityFields,
   useEntityToOneReferenceFields,
 } from "../../../hooks/entity/entity.store";
-import {
-  useEntityDataDetails,
-  useEntityDataUpdationMutation,
-} from "../../../hooks/data/data.store";
+import { useEntityDataCreationMutation } from "../../../hooks/data/data.store";
 import {
   EntityActionTypes,
   useEntityActionMenuItems,
-} from "../Configure/constants";
+} from "../../entity/constants";
 import { useEntityConfiguration } from "../../../hooks/configuration/configration.store";
-import { UpdateEntityForm } from "./UpdateEntity.form";
+import { CreateEntityForm } from "./CreateEntity.form";
 import { fitlerOutHiddenScalarColumns } from "../utils";
 import { useEntityViewStateMachine } from "../useEntityViewStateMachine";
 
-export function EntityUpdate() {
+export function EntityCreate() {
   const entity = useEntitySlug();
-  const id = useEntityId();
   const entityDiction = useEntityDiction();
-
-  useSetPageDetails({
-    pageTitle: `Update ${entityDiction.plural}`,
-    viewKey: "ENTITIES_DETAILS",
-    permission: META_USER_PERMISSIONS.APPLIED_CAN_ACCESS_ENTITY(entity),
-  });
-
   const entityFields = useEntityFields(entity);
-  const entityDataUpdationMutation = useEntityDataUpdationMutation(entity, id);
-  const dataDetails = useEntityDataDetails(entity, id);
+  const entityDataCreationMutation = useEntityDataCreationMutation(entity);
   const actionItems = useEntityActionMenuItems([
-    EntityActionTypes.Update,
+    EntityActionTypes.Create,
     EntityActionTypes.Types,
   ]);
+  const entityToOneReferenceFields = useEntityToOneReferenceFields(entity);
+  const hiddenCreateColumns = useSelectedEntityColumns(
+    "hidden_entity_create_columns"
+  );
   const entityFieldTypesMap = useEntityConfiguration<Record<string, string>>(
     "entity_columns_types",
     entity
   );
-  const entityToOneReferenceFields = useEntityToOneReferenceFields(entity);
-
   const entityValidationsMap = useEntityFieldValidations();
 
+  const getEntityFieldLabels = useEntityFieldLabels();
   const entityFieldTypes = useEntityFieldTypes();
-
   const entityFieldSelections = useEntityFieldSelections();
 
-  const hiddenUpdateColumns = useSelectedEntityColumns(
-    "hidden_entity_update_columns"
-  );
-  const getEntityFieldLabels = useEntityFieldLabels();
-
   const error =
-    dataDetails.error ||
-    hiddenUpdateColumns.error ||
+    hiddenCreateColumns.error ||
     entityFieldTypesMap.error ||
     entityToOneReferenceFields.error ||
     entityFields.error;
 
   const isLoading =
-    dataDetails.isLoading ||
-    entityFieldTypesMap.isLoading ||
-    hiddenUpdateColumns.isLoading ||
+    hiddenCreateColumns.isLoading ||
+    entityFields.isLoading ||
     entityToOneReferenceFields.isLoading ||
     entity === SLUG_LOADING_VALUE ||
-    entityFields.isLoading;
+    entityFieldTypesMap.isLoading;
 
-  const viewState = useEntityViewStateMachine(isLoading, error, "update");
+  const viewState = useEntityViewStateMachine(isLoading, error, "create");
   const { canGoBack, goBack } = useNavigationStack();
+
+  useSetPageDetails({
+    pageTitle: `Create ${entityDiction.plural}`,
+    viewKey: "CREATE_ENTITY",
+    permission: META_USER_PERMISSIONS.APPLIED_CAN_ACCESS_ENTITY(entity),
+  });
 
   return (
     <AppLayout actionItems={actionItems}>
       <SectionCenter>
         <SectionBox
-          title={TitleLang.edit(entityDiction.singular)}
+          title={TitleLang.create(entityDiction.singular)}
           backLink={
             canGoBack()
               ? {
@@ -117,18 +105,17 @@ export function EntityUpdate() {
             <ErrorAlert message={viewState.message} />
           )}
           {viewState.type === "render" && (
-            <UpdateEntityForm
+            <CreateEntityForm
               entityToOneReferenceFields={entityToOneReferenceFields.data}
-              getEntityFieldLabels={getEntityFieldLabels}
               entityFieldTypes={entityFieldTypes}
-              entityFieldSelections={entityFieldSelections}
               entityValidationsMap={entityValidationsMap}
-              onSubmit={entityDataUpdationMutation.mutateAsync}
+              getEntityFieldLabels={getEntityFieldLabels}
+              entityFieldSelections={entityFieldSelections}
+              onSubmit={entityDataCreationMutation.mutateAsync}
               fields={fitlerOutHiddenScalarColumns(
                 entityFields,
-                hiddenUpdateColumns
+                hiddenCreateColumns
               ).map(({ name }) => name)}
-              initialValues={dataDetails.data}
             />
           )}
         </SectionBox>

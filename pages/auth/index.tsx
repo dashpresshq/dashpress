@@ -1,3 +1,3 @@
-import { SignIn } from "../../frontend/views/SignIn";
+import { SignIn } from "frontend/views/SignIn";
 
 export default SignIn;

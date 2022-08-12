@@ -9,9 +9,9 @@ import {
 import { useNavigationStack } from "frontend/lib/routing";
 import { useRouter } from "next/router";
 import { ReactNode } from "react";
-import { useEntitySlug } from "../../../hooks/entity/entity.config";
-import { NAVIGATION_LINKS } from "../../../lib/routing/links";
-import { AppLayout } from "../../../_layouts/app";
+import { useEntitySlug } from "frontend/hooks/entity/entity.config";
+import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
+import { AppLayout } from "frontend/_layouts/app";
 import {
   ENTITY_CRUD_SETTINGS_TAB_LABELS,
   ENTITY_FIELD_SETTINGS_TAB_LABELS,

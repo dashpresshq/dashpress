@@ -1,3 +1,3 @@
-import { EntityRelationsSettings } from "../../../../frontend/views/entity/Configure/Relations";
+import { EntityRelationsSettings } from "frontend/views/entity/Relations";
 
 export default EntityRelationsSettings;

@@ -1,3 +1,3 @@
-import { EntityRelationDetails } from "../../../../../../frontend/views/entity/Details/RelationsDetails";
+import { EntityRelationDetails } from "frontend/views/data/Details/RelationsDetails";
 
 export default EntityRelationDetails;

@@ -20,12 +20,12 @@ import { EntitiesSelection } from "frontend/views/settings/Entities/Selection";
 import { useEntityDictionPlurals } from "frontend/hooks/entity/entity.queries";
 import { createViewStateMachine } from "frontend/lib/create-view-state-machine";
 import { USER_PERMISSIONS } from "shared/types";
-import { useEntitySlug } from "../../../../hooks/entity/entity.config";
-import { BaseEntitySettingsLayout } from "../_Base";
+import { useEntitySlug } from "frontend/hooks/entity/entity.config";
 import {
   useEntityConfiguration,
   useUpsertConfigurationMutation,
-} from "../../../../hooks/configuration/configration.store";
+} from "frontend/hooks/configuration/configration.store";
+import { BaseEntitySettingsLayout } from "../_Base";
 import { EntityRelationsForm } from "./Relations.form";
 import { ENTITY_CONFIGURATION_VIEW } from "../constants";
 import { FieldsLabelForm } from "../Fields/FieldsLabel.form";

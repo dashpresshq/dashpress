@@ -1,3 +1,3 @@
-import { EntityUpdate } from "../../../../frontend/views/entity/Update";
+import { EntityUpdate } from "frontend/views/data/Update";
 
 export default EntityUpdate;

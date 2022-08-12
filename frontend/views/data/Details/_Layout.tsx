@@ -16,14 +16,14 @@ import {
 import {
   useEntityFieldLabels,
   useEntityId,
-} from "../../../hooks/entity/entity.config";
+} from "frontend/hooks/entity/entity.config";
+import { AppLayout } from "frontend/_layouts/app";
+import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
 import {
   EntityActionTypes,
   useEntityActionMenuItems,
-} from "../Configure/constants";
-import { AppLayout } from "../../../_layouts/app";
+} from "../../entity/constants";
 import { getEntitiesTabsCount } from "./utils";
-import { NAVIGATION_LINKS } from "../../../lib/routing/links";
 import { useEntityViewStateMachine } from "../useEntityViewStateMachine";
 
 export const DETAILS_LAYOUT_KEY = "___DETAILS_KEY__";

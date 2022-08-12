@@ -16,7 +16,7 @@ import { useMemo, useState } from "react";
 import { getFieldTypeBoundedValidations } from "frontend/hooks/entity/guess";
 import { IFieldValidationItem } from "shared/validations/types";
 import { IColorableSelection } from "shared/types";
-import { FIELD_TYPES_CONFIG_MAP } from "../../../../../shared/validations";
+import { FIELD_TYPES_CONFIG_MAP } from "shared/validations";
 import { FieldValidationCanvas } from "./FieldsValidation";
 import {
   EntityTypesForSelection,

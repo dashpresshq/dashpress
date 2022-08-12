@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import { Icon, Save, Settings } from "react-feather";
-import { useEntitySlug } from "../../../hooks/entity/entity.config";
-import { NAVIGATION_LINKS } from "../../../lib/routing/links";
+import { useEntitySlug } from "frontend/hooks/entity/entity.config";
+import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
 
 export const ENTITY_CONFIGURATION_VIEW = "ENTITY_CONFIGURATION_VIEW";
 

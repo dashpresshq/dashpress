@@ -1,3 +1,3 @@
-import { EntityDetails } from "../../../../frontend/views/entity/Details";
+import { EntityDetails } from "frontend/views/data/Details";
 
 export default EntityDetails;

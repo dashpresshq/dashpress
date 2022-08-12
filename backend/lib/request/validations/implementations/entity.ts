@@ -1,5 +1,5 @@
 import { rolesService } from "backend/roles/roles.service";
-import { APPLIED_CAN_ACCESS_ENTITY } from "shared/types";
+import { META_USER_PERMISSIONS } from "shared/types";
 import { ForbiddenError } from "../../../errors";
 import { entitiesService } from "../../../../entities/entities.service";
 import { configurationService } from "../../../../configuration/configuration.service";
@@ -22,7 +22,7 @@ export const entityValidationImpl: ValidationImplType<string> = async (req) => {
   if (
     !(await rolesService.canRoleDoThis(
       req.user.role,
-      APPLIED_CAN_ACCESS_ENTITY(entity)
+      META_USER_PERMISSIONS.APPLIED_CAN_ACCESS_ENTITY(entity)
     ))
   ) {
     throw new ForbiddenError(ERROR_MESSAGE);

@@ -15,16 +15,16 @@ import {
   useEntityFieldTypes,
   useEntityFieldValidations,
   useEntitySlug,
-} from "../../../../hooks/entity/entity.config";
-import { BaseEntitySettingsLayout } from "../_Base";
+} from "frontend/hooks/entity/entity.config";
 import {
   ENTITY_FIELDS_ENDPOINT,
   useEntityFieldLists,
-} from "../../../../hooks/entity/entity.store";
+} from "frontend/hooks/entity/entity.store";
 import {
   useEntityConfiguration,
   useUpsertConfigurationMutation,
-} from "../../../../hooks/configuration/configration.store";
+} from "frontend/hooks/configuration/configration.store";
+import { BaseEntitySettingsLayout } from "../_Base";
 import { FieldsLabelForm } from "./FieldsLabel.form";
 import { FieldsTypeForm } from "./FieldsType.form";
 import {

@@ -1,3 +1,3 @@
-import { AccountProfile } from "../../frontend/views/account/Profile";
+import { AccountProfile } from "frontend/views/account/Profile";
 
 export default AccountProfile;

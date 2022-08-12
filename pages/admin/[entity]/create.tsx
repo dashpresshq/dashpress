@@ -1,3 +1,3 @@
-import { EntityCreate } from "../../../frontend/views/entity/Create";
+import { EntityCreate } from "frontend/views/data/Create";
 
 export default EntityCreate;

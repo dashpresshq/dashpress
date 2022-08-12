@@ -11,10 +11,10 @@ import {
   useEntityFieldLabels,
   useEntitySlug,
   useSelectedEntityColumns,
-} from "../../../../hooks/entity/entity.config";
+} from "../../../hooks/entity/entity.config";
 import { BaseEntitySettingsLayout } from "../_Base";
-import { useUpsertConfigurationMutation } from "../../../../hooks/configuration/configration.store";
-import { useEntityFields } from "../../../../hooks/entity/entity.store";
+import { useUpsertConfigurationMutation } from "../../../hooks/configuration/configration.store";
+import { useEntityFields } from "../../../hooks/entity/entity.store";
 import { SelectionTab } from "./SelectionTab";
 
 import {

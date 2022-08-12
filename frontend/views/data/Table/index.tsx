@@ -8,7 +8,7 @@ import {
 import {
   EntityActionTypes,
   useEntityActionMenuItems,
-} from "../Configure/constants";
+} from "../../entity/constants";
 import { EntityTableView } from "./TableView";
 
 // TODO sync table to url

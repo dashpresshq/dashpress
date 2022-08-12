@@ -10,9 +10,9 @@ import { USER_PERMISSIONS } from "shared/types";
 import {
   useEntityDiction,
   useEntitySlug,
-} from "../../../../hooks/entity/entity.config";
+} from "frontend/hooks/entity/entity.config";
+import { useUpsertConfigurationMutation } from "frontend/hooks/configuration/configration.store";
 import { BaseEntitySettingsLayout } from "../_Base";
-import { useUpsertConfigurationMutation } from "../../../../hooks/configuration/configration.store";
 import { EntityDictionForm } from "./Form";
 import { ENTITY_CONFIGURATION_VIEW } from "../constants";
 

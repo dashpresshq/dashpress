@@ -22,7 +22,7 @@ import {
   ENTITY_CRUD_SETTINGS_TAB_LABELS,
 } from "../constants";
 
-export function useEntityCrudView() {
+function useEntityCrudView() {
   const entity = useEntitySlug();
 
   const entityCrudSettings = useEntityCrudSettings();

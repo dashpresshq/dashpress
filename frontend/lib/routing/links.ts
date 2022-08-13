@@ -56,6 +56,7 @@ export const NAVIGATION_LINKS = {
         `/admin/${entity}/config/fields${queryObjectToQueryString(query)}`,
       ACTIONS: (entity: string) => `/admin/${entity}/config/actions`,
       DICTION: (entity: string) => `/admin/${entity}/config/diction`,
+      FORM: (entity: string) => `/admin/${entity}/config/form`,
       RELATIONS: (entity: string) => `/admin/${entity}/config/relations`,
     },
   },

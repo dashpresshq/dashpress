@@ -15,6 +15,7 @@ export const CONFIGURATION_KEYS: Record<
   | "entity_selections"
   | "entity_validations"
   | "entity_relations_labels"
+  | "entity_form_settings"
   | "hidden_entity_relations"
   | "entity_relations_order",
   { requireEntity: boolean; defaultValue: unknown }
@@ -36,6 +37,14 @@ export const CONFIGURATION_KEYS: Record<
   entity_diction: {
     requireEntity: true,
     defaultValue: { singular: "", plural: "" },
+  },
+  entity_form_settings: {
+    requireEntity: true,
+    defaultValue: {
+      fieldsState: "",
+      beforeSubmit: "",
+      afterSubmit: "",
+    },
   },
   entity_fields_orders: {
     requireEntity: true,

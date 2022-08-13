@@ -50,6 +50,8 @@ export function RolePermissions() {
     ),
   ];
 
+  // TODO need to show the entity label here
+
   return (
     <AppLayout>
       <SectionCenter>

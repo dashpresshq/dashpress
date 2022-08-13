@@ -39,7 +39,6 @@ const useUserAuthCheck = () => {
         router.replace(NAVIGATION_LINKS.AUTH_SIGNIN);
         return;
       }
-      // TODO isCreator check
       setIsChecking(false);
     }
   }, [typeof window]);

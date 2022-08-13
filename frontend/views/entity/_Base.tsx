@@ -67,8 +67,8 @@ export function BaseEntitySettingsLayout({ children }: IProps) {
                 name: "Relations",
               },
               {
-                link: NAVIGATION_LINKS.ENTITY.CONFIG.ACTIONS(entity),
-                name: "//Actions",
+                link: NAVIGATION_LINKS.ENTITY.CONFIG.FORM(entity),
+                name: "Form",
               },
               {
                 link: NAVIGATION_LINKS.ENTITY.CONFIG.ACTIONS(entity),

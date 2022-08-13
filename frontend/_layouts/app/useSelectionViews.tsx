@@ -10,7 +10,7 @@ import {
 import { ISelectionView } from "@gothicgeeks/design-system/dist/Layouts/types";
 import { NAVIGATION_LINKS } from "frontend/lib/routing";
 import { USER_PERMISSIONS } from "shared/types";
-import { useCanUserPermissions } from "frontend/hooks/auth/user.store";
+import { useUserHasPermissions } from "frontend/hooks/auth/user.store";
 import { useEntitiesMenuItems } from "../../hooks/entity/entity.store";
 import { ROOT_LINKS_TO_CLEAR_BREADCRUMBS } from "./constants";
 
@@ -20,7 +20,7 @@ interface ILayoutSelectionView extends ISelectionView {
 
 export const useSelectionViews = (): ILayoutSelectionView[] => {
   const entitiesMenuItems = useEntitiesMenuItems();
-  const canUser = useCanUserPermissions([
+  const hasPermission = useUserHasPermissions([
     USER_PERMISSIONS.CAN_CONFIGURE_APP,
     USER_PERMISSIONS.CAN_MANAGE_USER,
     USER_PERMISSIONS.CAN_MANAGE_PERMISSIONS,
@@ -54,19 +54,21 @@ export const useSelectionViews = (): ILayoutSelectionView[] => {
       title: "Settings",
       icon: Settings,
       link: ROOT_LINKS_TO_CLEAR_BREADCRUMBS.SETTINGS,
-      isPermissionAllowed: canUser(USER_PERMISSIONS.CAN_CONFIGURE_APP),
+      isPermissionAllowed: hasPermission(USER_PERMISSIONS.CAN_CONFIGURE_APP),
     },
     {
       title: "Users",
       icon: Users,
       link: ROOT_LINKS_TO_CLEAR_BREADCRUMBS.USERS,
-      isPermissionAllowed: canUser(USER_PERMISSIONS.CAN_MANAGE_USER),
+      isPermissionAllowed: hasPermission(USER_PERMISSIONS.CAN_MANAGE_USER),
     },
     {
       title: "Roles",
       icon: Shield,
       link: ROOT_LINKS_TO_CLEAR_BREADCRUMBS.ROLES,
-      isPermissionAllowed: canUser(USER_PERMISSIONS.CAN_MANAGE_PERMISSIONS),
+      isPermissionAllowed: hasPermission(
+        USER_PERMISSIONS.CAN_MANAGE_PERMISSIONS
+      ),
     },
     {
       title: "Account",

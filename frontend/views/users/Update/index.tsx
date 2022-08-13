@@ -9,7 +9,7 @@ import {
 import { TitleLang } from "@gothicgeeks/shared";
 import {
   useAuthenticatedUserBag,
-  useCanUser,
+  useUserHasPermission,
 } from "frontend/hooks/auth/user.store";
 import { createViewStateMachine } from "frontend/lib/create-view-state-machine";
 import { useNavigationStack, useSetPageDetails } from "frontend/lib/routing";
@@ -32,7 +32,7 @@ export function UserUpdate() {
   const userDetails = useUserDetails(username);
   const authenticatedUserBag = useAuthenticatedUserBag();
 
-  const hasResetPasswordPermission = useCanUser(
+  const hasResetPasswordPermission = useUserHasPermission(
     USER_PERMISSIONS.CAN_RESET_PASSWORD
   );
 

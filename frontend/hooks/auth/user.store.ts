@@ -36,12 +36,12 @@ const doPermissionCheck = (
   return canRoleDoThisSync(role, requiredPermission, permissions);
 };
 
-export function useCanUser(permission: string): boolean | "loading" {
+export function useUserHasPermission(permission: string): boolean | "loading" {
   const userProfile = useAuthenticatedUserBag();
   return doPermissionCheck(permission, userProfile.isLoading, userProfile.data);
 }
 
-export function useCanUserPermissions(
+export function useUserHasPermissions(
   permissions: string[]
 ): (permision: string) => boolean {
   const userProfile = useAuthenticatedUserBag();
@@ -66,7 +66,7 @@ export function usePageRequiresPermission(
   permission: string
 ): "loading" | void {
   const router = useRouter();
-  const canUser = useCanUser(permission);
+  const canUser = useUserHasPermission(permission);
   if (canUser === "loading") {
     return "loading";
   }
@@ -77,4 +77,4 @@ export function usePageRequiresPermission(
 }
 
 export const useCanUserConfigureApp = () =>
-  useCanUser(USER_PERMISSIONS.CAN_CONFIGURE_APP);
+  useUserHasPermission(USER_PERMISSIONS.CAN_CONFIGURE_APP);

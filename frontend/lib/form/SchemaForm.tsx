@@ -98,6 +98,8 @@ export function SchemaForm<T extends Record<string, unknown>>({
   resetForm,
 }: IProps<T>) {
   const scriptContext = useSciptContext();
+  console.log(formCustomization);
+
   return (
     <Form
       onSubmit={async (formValues) => {
@@ -106,6 +108,9 @@ export function SchemaForm<T extends Record<string, unknown>>({
           scriptContext,
           formValues
         );
+
+        console.log("modifiedFormValues", modifiedFormValues);
+
         if (typeof modifiedFormValues !== "object") {
           ToastService.error(modifiedFormValues);
           return;

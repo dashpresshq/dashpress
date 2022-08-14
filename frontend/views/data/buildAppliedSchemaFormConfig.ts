@@ -3,8 +3,20 @@ import {
   ISchemaFormConfig,
 } from "shared/form-schemas";
 import { ENTITY_LIST_PATH } from "frontend/hooks/data/data.store";
-import { IBaseEntityForm, IEntityFormSettings } from "./types";
+
+import { IColorableSelection } from "shared/types";
+import { FIELD_TYPES_CONFIG_MAP } from "shared/validations";
+import { IFieldValidationItem } from "shared/validations/types";
 import { userFriendlyCase } from "../../lib/strings";
+
+interface IEntitySchemaFormConfigProps {
+  fields: string[];
+  entityToOneReferenceFields: Record<string, string>;
+  entityFieldSelections: Record<string, IColorableSelection[]>;
+  getEntityFieldLabels: (name: string) => string;
+  entityFieldTypes: Record<string, keyof typeof FIELD_TYPES_CONFIG_MAP>;
+  entityValidationsMap: Record<string, IFieldValidationItem[]>;
+}
 
 export const buildAppliedSchemaFormConfig = ({
   fields,
@@ -13,7 +25,7 @@ export const buildAppliedSchemaFormConfig = ({
   entityFieldSelections,
   getEntityFieldLabels,
   entityValidationsMap,
-}: IBaseEntityForm & IEntityFormSettings): IAppliedSchemaFormConfig<any> => {
+}: IEntitySchemaFormConfigProps): IAppliedSchemaFormConfig<any> => {
   return Object.fromEntries(
     fields.map((field) => {
       return [

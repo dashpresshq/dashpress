@@ -1,3 +1,4 @@
+import { isRouterParamEnabled } from "frontend/hooks";
 import { useAppConfiguration } from "frontend/hooks/configuration/configration.store";
 import {
   useEntityCrudSettings,
@@ -17,12 +18,17 @@ export const useEntityViewStateMachine = (
   const entitiesToHide = useAppConfiguration<string[]>("disabled_entities");
   const entity = useEntitySlug();
 
-  if (isLoading || entityCrudSettings.isLoading || entitiesToHide.isLoading) {
+  if (
+    isLoading ||
+    entityCrudSettings.isLoading ||
+    entitiesToHide.isLoading ||
+    !isRouterParamEnabled(entity)
+  ) {
     return { type: "loading" };
   }
   if (
-    entitiesToHide.data?.includes(entity) ||
-    (actionKey && !entityCrudSettings?.data?.[actionKey])
+    (actionKey && !entityCrudSettings?.data?.[actionKey]) ||
+    entitiesToHide.data?.includes(entity)
   ) {
     return { type: "error", message: "Resource Not Available" };
   }

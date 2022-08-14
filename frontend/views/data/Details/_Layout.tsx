@@ -47,12 +47,20 @@ export function DetailsLayout({ children, entity, menuKey }: IProps) {
   const referenceFields = useEntityReferenceFields(entity);
 
   const getEntityFieldLabels = useEntityFieldLabels();
-  const relatedEntities = (referenceFields.data || []).map(
-    ({ table: referenceTable, label }) => ({
+  const relatedEntities = (referenceFields.data || [])
+    .filter(({ type, field }) => {
+      if (type === "toMany") {
+        return true;
+      }
+      if (dataDetails.isLoading) {
+        return true;
+      }
+      return dataDetails.data[field];
+    })
+    .map(({ table: referenceTable, label }) => ({
       name: referenceTable,
       label,
-    })
-  );
+    }));
 
   const relatedEntitiesMap = Object.fromEntries(
     (referenceFields.data || []).map((relatedEntity) => [

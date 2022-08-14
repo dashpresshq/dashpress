@@ -43,14 +43,12 @@ export const useSelectionViews = (): ILayoutSelectionView[] => {
           action: NAVIGATION_LINKS.ENTITY.TABLE(value),
         })),
       },
-      action: () => console.log("Baz"),
     },
     {
       title: "Dashboards",
       description: "Your models",
       icon: BarChart,
       view: <>Demo View</>,
-      action: () => console.log("Baz"),
     },
     {
       title: "Settings",

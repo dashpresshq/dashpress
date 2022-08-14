@@ -33,7 +33,7 @@ export const ENTITY_REFERENCE_PATH = (entity: string, id: string) =>
 export const ENTITY_LIST_PATH = (entity: string) => `/api/data/${entity}`;
 
 export const useEntityDataDetails = (entity: string, id: string) => {
-  const entityDiction = useEntityDiction();
+  const entityDiction = useEntityDiction(entity);
 
   return useApi<Record<string, string>>(ENTITY_DETAILS_PATH(entity, id), {
     errorMessage: dataNotFoundMessage(entityDiction.singular),

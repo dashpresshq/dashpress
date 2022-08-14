@@ -31,6 +31,21 @@ export function EntityRelationDetails() {
     permission: META_USER_PERMISSIONS.APPLIED_CAN_ACCESS_ENTITY(childEntity),
   });
 
+  const actions = [
+    {
+      icon: "eye" as const,
+      action: NAVIGATION_LINKS.ENTITY.DETAILS(childEntity, childId),
+      label: "Details",
+      crudSetting: childEntityCrudSettings.data?.details,
+    },
+    {
+      icon: "edit" as const,
+      action: NAVIGATION_LINKS.ENTITY.UPDATE(childEntity, childId),
+      label: "Edit",
+      crudSetting: childEntityCrudSettings.data?.update,
+    },
+  ];
+
   return (
     <DetailsLayout entity={entity} menuKey={childEntity}>
       <SectionBox
@@ -43,17 +58,7 @@ export function EntityRelationDetails() {
               }
             : undefined
         }
-        iconButtons={
-          childEntityCrudSettings.data?.update
-            ? [
-                {
-                  icon: "edit",
-                  action: NAVIGATION_LINKS.ENTITY.UPDATE(childEntity, childId),
-                  label: "Edit",
-                },
-              ]
-            : []
-        }
+        iconButtons={actions.filter(({ crudSetting }) => crudSetting)}
       >
         <EntityDetailsView
           displayFrom="details"

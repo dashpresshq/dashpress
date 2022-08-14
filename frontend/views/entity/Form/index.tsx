@@ -2,6 +2,7 @@ import { Tabs, SectionBox, Text, Spacer } from "@gothicgeeks/design-system";
 import { SLUG_LOADING_VALUE } from "@gothicgeeks/shared";
 import { useSetPageDetails } from "frontend/lib/routing";
 import { USER_PERMISSIONS } from "shared/types";
+import { IFormCustomization } from "frontend/lib/form/types";
 import { useEntitySlug } from "../../../hooks/entity/entity.config";
 import { BaseEntitySettingsLayout } from "../_Base";
 import {
@@ -13,18 +14,12 @@ import { useEntityFields } from "../../../hooks/entity/entity.store";
 import { ENTITY_CONFIGURATION_VIEW } from "../constants";
 import { ScriptForm } from "./ScriptForm";
 
-interface IEntityFormSetting {
-  fieldsState: string;
-  beforeSubmit: string;
-  afterSubmit: string;
-}
-
 function useEntityCrudView() {
   const entity = useEntitySlug();
 
   const entityFields = useEntityFields(entity);
 
-  const entityFormSettings = useEntityConfiguration<IEntityFormSetting>(
+  const entityFormSettings = useEntityConfiguration<IFormCustomization>(
     "entity_form_settings",
     entity
   );
@@ -42,7 +37,7 @@ function useEntityCrudView() {
   const error = entityFields.error || entityFormSettings.error;
 
   const onScriptSubmit =
-    (key: keyof IEntityFormSetting) => async (value: string) => {
+    (key: keyof IFormCustomization) => async (value: string) => {
       upsertEntityFormSettingsMutation.mutateAsync({
         ...entityFormSettings.data,
         [key]: value,

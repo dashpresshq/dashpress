@@ -9,18 +9,19 @@ import {
 export function UpdateUserForm({
   onSubmit,
   initialValues,
-  isMe,
-}: IFormProps<IUpdateUserForm> & { isMe: boolean }) {
+}: IFormProps<IUpdateUserForm>) {
   return (
     <SchemaForm
       buttonText={ButtonLang.update}
       onSubmit={onSubmit}
       initialValues={initialValues}
       fields={UPDATE_USER_FORM_SCHEMA}
-      fieldState={{
-        role: {
-          disabled: isMe,
-        },
+      formCustomization={{
+        fieldsState: `return {
+          role: {
+              disabled: $.auth.username === $.routeParams.username 
+          }
+        }`,
       }}
     />
   );

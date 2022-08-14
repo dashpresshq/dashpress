@@ -78,7 +78,6 @@ export function UserUpdate() {
             <UpdateUserForm
               onSubmit={updateUserMutation.mutateAsync}
               initialValues={userDetails.data}
-              isMe={authenticatedUserBag.data?.username === username}
             />
           )}
         </SectionBox>

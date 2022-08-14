@@ -50,19 +50,6 @@ export function TableActions({ crudSettings, row, entity }: IProps) {
           />
         </div>
       )}
-      {/* <div>
-      <SoftButton
-        to={`/edit/foo`}
-        pushLeft={true}
-        label="Details"
-        justIcon={true}
-        icon="save"
-      />
-      //
-      <Spacer />
-    </div> */}
-      {/* Clone */}
-      {/* // inline -edit // related entities */}
     </Stack>
   );
 }

@@ -47,31 +47,31 @@ export function BaseEntitySettingsLayout({ children }: IProps) {
           <MenuSection
             menuItems={[
               {
-                link: NAVIGATION_LINKS.ENTITY.CONFIG.DICTION(entity),
+                action: NAVIGATION_LINKS.ENTITY.CONFIG.DICTION(entity),
                 name: "Diction",
               },
               {
-                link: NAVIGATION_LINKS.ENTITY.CONFIG.CRUD(entity, {
+                action: NAVIGATION_LINKS.ENTITY.CONFIG.CRUD(entity, {
                   tab: ENTITY_CRUD_SETTINGS_TAB_LABELS.CREATE,
                 }),
                 name: "CRUD",
               },
               {
-                link: NAVIGATION_LINKS.ENTITY.CONFIG.FIELDS(entity, {
+                action: NAVIGATION_LINKS.ENTITY.CONFIG.FIELDS(entity, {
                   tab: ENTITY_FIELD_SETTINGS_TAB_LABELS.LABELS,
                 }),
                 name: "Fields",
               },
               {
-                link: NAVIGATION_LINKS.ENTITY.CONFIG.RELATIONS(entity),
+                action: NAVIGATION_LINKS.ENTITY.CONFIG.RELATIONS(entity),
                 name: "Relations",
               },
               {
-                link: NAVIGATION_LINKS.ENTITY.CONFIG.FORM(entity),
+                action: NAVIGATION_LINKS.ENTITY.CONFIG.FORM(entity),
                 name: "Form",
               },
               {
-                link: NAVIGATION_LINKS.ENTITY.CONFIG.ACTIONS(entity),
+                action: NAVIGATION_LINKS.ENTITY.CONFIG.ACTIONS(entity),
                 name: "//Table Tabs",
               },
               // Computed Table fields

@@ -82,7 +82,7 @@ export function useCreateUserMutation() {
     smartSuccessMessage: ({ username }) => ({
       message: MutationsLang.create("User"),
       action: {
-        label: `Click here to view user`,
+        label: MutationsLang.viewDetails("user"),
         action: () => router.push(NAVIGATION_LINKS.USERS.DETAILS(username)),
       },
     }),

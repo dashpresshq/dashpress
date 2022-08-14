@@ -23,15 +23,14 @@ export function BaseAccountLayout({ children }: IProps) {
           <MenuSection
             menuItems={[
               {
-                link: NAVIGATION_LINKS.ACCOUNT.PROFILE,
+                action: NAVIGATION_LINKS.ACCOUNT.PROFILE,
                 name: "Profile",
               },
               {
-                link: NAVIGATION_LINKS.ACCOUNT.PASSWORD,
+                action: NAVIGATION_LINKS.ACCOUNT.PASSWORD,
                 name: "Password",
               },
               {
-                link: "",
                 action: () => {
                   AuthService.removeAuthToken();
                   router.replace(NAVIGATION_LINKS.AUTH_SIGNIN);

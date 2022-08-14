@@ -85,7 +85,6 @@ export function EntitiesSelection({
                       isMakingRequest: false,
                     },
                   ]}
-                  toNoWhere
                 />
               );
             }}

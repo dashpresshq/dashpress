@@ -101,7 +101,10 @@ export function DetailsLayout({ children, entity, menuKey }: IProps) {
                         label="Details"
                         key={menuItem.name}
                         active={menuKey === DETAILS_LAYOUT_KEY}
-                        to={NAVIGATION_LINKS.ENTITY.DETAILS(entity, entityId)}
+                        action={NAVIGATION_LINKS.ENTITY.DETAILS(
+                          entity,
+                          entityId
+                        )}
                       />
                     );
                   }
@@ -119,7 +122,7 @@ export function DetailsLayout({ children, entity, menuKey }: IProps) {
                       label={`${label} ${entityCount}`}
                       key={menuItem.name}
                       active={menuKey === menuItem.name}
-                      to={
+                      action={
                         entityType === "toOne"
                           ? NAVIGATION_LINKS.ENTITY.RELATION_DETAILS(
                               entity,

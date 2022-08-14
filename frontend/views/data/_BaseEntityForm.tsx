@@ -75,7 +75,7 @@ export function BaseEntityForm({
     entity === SLUG_LOADING_VALUE ||
     entityFieldTypesMap.isLoading;
 
-  const viewState = useEntityViewStateMachine(isLoading, error, "create");
+  const viewState = useEntityViewStateMachine(isLoading, error, action);
 
   const fields = fitlerOutHiddenScalarColumns(entityFields, hiddenColumns).map(
     ({ name }) => name
@@ -113,7 +113,7 @@ export function BaseEntityForm({
   }
 
   if (viewState.type === "error") {
-    <ErrorAlert message={viewState.message} />;
+    return <ErrorAlert message={viewState.message} />;
   }
 
   return (

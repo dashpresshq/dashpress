@@ -104,7 +104,6 @@ export function RolePermissions() {
                         isMakingRequest: false,
                       },
                     ]}
-                    toNoWhere
                   />
                 );
               }}

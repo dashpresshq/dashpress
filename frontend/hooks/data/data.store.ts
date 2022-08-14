@@ -111,7 +111,7 @@ export function useEntityDataCreationMutation(entity: string) {
     smartSuccessMessage: ({ id }) => ({
       message: MutationsLang.create(entityDiction.singular),
       action: {
-        label: `Click here to view ${entityDiction.singular}`,
+        label: MutationsLang.viewDetails(entityDiction.singular),
         action: () => router.push(NAVIGATION_LINKS.ENTITY.DETAILS(entity, id)),
       },
     }),
@@ -144,7 +144,10 @@ export function useEntityDataUpdationMutation(entity: string, id: string) {
   );
 }
 
-export function useEntityDataDeletionMutation(entity: string) {
+export function useEntityDataDeletionMutation(
+  entity: string,
+  redirectTo?: string
+) {
   const entityDiction = useEntityDiction();
   const apiMutateOptions = useWaitForResponseMutationOptions<
     Record<string, string>
@@ -154,7 +157,7 @@ export function useEntityDataDeletionMutation(entity: string) {
       ENTITY_COUNT_PATH(entity),
       ENTITY_LIST_PATH(entity),
     ],
-    redirect: NAVIGATION_LINKS.ENTITY.TABLE(entity), // TODO needs to be reworked based on where it is coming from especially from nested tables
+    redirect: redirectTo,
     successMessage: MutationsLang.delete(entityDiction.singular),
   });
 

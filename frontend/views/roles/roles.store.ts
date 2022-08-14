@@ -55,7 +55,7 @@ export function useCreateRoleMutation() {
     smartSuccessMessage: ({ name }) => ({
       message: MutationsLang.create("Role"),
       action: {
-        label: `Click here to view role`,
+        label: MutationsLang.viewDetails("role"),
         action: () =>
           router.push(NAVIGATION_LINKS.ROLES.DETAILS(makeRoleId(name))),
       },

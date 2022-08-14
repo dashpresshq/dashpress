@@ -50,7 +50,6 @@ export class SchemasService {
 
   private formatIntrospectData(rawEntity: Entity[]): IDBSchema[] {
     const dbSchema = rawEntity.map((entity) => {
-      // TODO throw error is no iD field
       return {
         name: entity.name,
         fields: entity.columns.map((column) => {

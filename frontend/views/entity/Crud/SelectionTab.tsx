@@ -98,7 +98,6 @@ export function SelectionTab({
                         ]
                       : []
                   }
-                  toNoWhere
                 />
               );
             }}

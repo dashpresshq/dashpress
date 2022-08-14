@@ -29,7 +29,7 @@ export const useSelectionViews = (): ILayoutSelectionView[] => {
     {
       title: "Home",
       icon: Home,
-      link: ROOT_LINKS_TO_CLEAR_BREADCRUMBS.HOME,
+      action: ROOT_LINKS_TO_CLEAR_BREADCRUMBS.HOME,
     },
     {
       title: "Tables",
@@ -39,33 +39,35 @@ export const useSelectionViews = (): ILayoutSelectionView[] => {
         ...entitiesMenuItems,
         data: (entitiesMenuItems.data || []).map(({ label, value }) => ({
           title: label,
-          link: NAVIGATION_LINKS.ENTITY.TABLE(value),
+          searchKeywordsField: value,
+          action: NAVIGATION_LINKS.ENTITY.TABLE(value),
         })),
       },
+      action: () => console.log("Baz"),
     },
     {
       title: "Dashboards",
       description: "Your models",
       icon: BarChart,
       view: <>Demo View</>,
-      // action: () => console.log("Baz"), TODO
+      action: () => console.log("Baz"),
     },
     {
       title: "Settings",
       icon: Settings,
-      link: ROOT_LINKS_TO_CLEAR_BREADCRUMBS.SETTINGS,
+      action: ROOT_LINKS_TO_CLEAR_BREADCRUMBS.SETTINGS,
       isPermissionAllowed: hasPermission(USER_PERMISSIONS.CAN_CONFIGURE_APP),
     },
     {
       title: "Users",
       icon: Users,
-      link: ROOT_LINKS_TO_CLEAR_BREADCRUMBS.USERS,
+      action: ROOT_LINKS_TO_CLEAR_BREADCRUMBS.USERS,
       isPermissionAllowed: hasPermission(USER_PERMISSIONS.CAN_MANAGE_USER),
     },
     {
       title: "Roles",
       icon: Shield,
-      link: ROOT_LINKS_TO_CLEAR_BREADCRUMBS.ROLES,
+      action: ROOT_LINKS_TO_CLEAR_BREADCRUMBS.ROLES,
       isPermissionAllowed: hasPermission(
         USER_PERMISSIONS.CAN_MANAGE_PERMISSIONS
       ),
@@ -73,7 +75,7 @@ export const useSelectionViews = (): ILayoutSelectionView[] => {
     {
       title: "Account",
       icon: User,
-      link: ROOT_LINKS_TO_CLEAR_BREADCRUMBS.ACCOUNT,
+      action: ROOT_LINKS_TO_CLEAR_BREADCRUMBS.ACCOUNT,
     },
   ].filter(({ isPermissionAllowed }) => {
     if (isPermissionAllowed === undefined) {

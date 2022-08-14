@@ -21,8 +21,8 @@ export const useEntityViewStateMachine = (
     return { type: "loading" };
   }
   if (
-    (actionKey && !entityCrudSettings?.data?.[actionKey]) ||
-    entitiesToHide.data?.includes(entity)
+    entitiesToHide.data?.includes(entity) ||
+    (actionKey && !entityCrudSettings?.data?.[actionKey])
   ) {
     return { type: "error", message: "Resource Not Available" };
   }

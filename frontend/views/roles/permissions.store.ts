@@ -28,10 +28,7 @@ export function useRolePermissionDeletionMutation() {
 
   const apiMutateOptions = useApiMutateOptions<string[], string>({
     dataQueryPath: ADMIN_ROLE_PERMISSION_ENDPOINT(roleId),
-    // onMutate: MutationHelpers.remove,
-    onMutate: (old: [], formData) => [
-      ...old.filter((oldItem) => formData !== oldItem),
-    ],
+    onMutate: MutationHelpers.remove,
     successMessage: MutationsLang.delete(SINGULAR),
   });
 

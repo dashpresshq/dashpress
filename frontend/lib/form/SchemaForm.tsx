@@ -51,11 +51,9 @@ export function SchemaForm<T extends Record<string, unknown>>({
 
         await onSubmit(modifiedFormValues);
 
-        await runFormAfterSubmit(
-          formExtension?.afterSubmit,
-          scriptContext,
-          formValues
-        );
+        runFormAfterSubmit(formExtension?.afterSubmit, scriptContext, {
+          formValues,
+        });
       }}
       initialValues={initialValues}
       validate={runValidationError(fields)}

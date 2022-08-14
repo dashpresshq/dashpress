@@ -22,7 +22,7 @@ export function BaseSettingsLayout({ children }: IProps) {
           <MenuSection
             menuItems={[
               {
-                link: NAVIGATION_LINKS.SETTINGS.ENTITIES,
+                action: NAVIGATION_LINKS.SETTINGS.ENTITIES,
                 name: "Entities",
               },
             ]}

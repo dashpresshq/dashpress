@@ -1,9 +1,14 @@
 import { SectionBox } from "@gothicgeeks/design-system";
 import { TitleLang } from "@gothicgeeks/shared";
-import { useNavigationStack, useSetPageDetails } from "frontend/lib/routing";
+import { useEntityDataDeletionMutation } from "frontend/hooks/data/data.store";
+import {
+  NAVIGATION_LINKS,
+  useNavigationStack,
+  useSetPageDetails,
+} from "frontend/lib/routing";
 import { META_USER_PERMISSIONS } from "shared/types";
 import {
-  // useEntityCrudSettings,
+  useEntityCrudSettings,
   useEntityDiction,
   useEntityId,
   useEntitySlug,
@@ -16,7 +21,11 @@ export function EntityDetails() {
   const entityDiction = useEntityDiction();
   const id = useEntityId();
   const entity = useEntitySlug();
-  // const entityCrudSettings = useEntityCrudSettings();
+  const entityCrudSettings = useEntityCrudSettings();
+  const entityDataDeletionMutation = useEntityDataDeletionMutation(
+    entity,
+    NAVIGATION_LINKS.ENTITY.TABLE(entity)
+  );
 
   const { canGoBack, goBack } = useNavigationStack();
 
@@ -38,12 +47,24 @@ export function EntityDetails() {
               }
             : undefined
         }
-        deleteAction={undefined}
-        isMakingDeleteRequest={false}
-        iconButtons={[
-          { icon: "edit", action: "", label: "Edit" },
-          { icon: "save", action: "", label: "Clone" },
-        ]}
+        deleteAction={{
+          action: entityCrudSettings.data?.delete
+            ? () => entityDataDeletionMutation.mutate(id)
+            : undefined,
+
+          isMakingDeleteRequest: entityDataDeletionMutation.isLoading,
+        }}
+        iconButtons={
+          entityCrudSettings.data?.update
+            ? [
+                {
+                  icon: "edit",
+                  action: NAVIGATION_LINKS.ENTITY.UPDATE(entity, id),
+                  label: "Edit",
+                },
+              ]
+            : []
+        }
       >
         <EntityDetailsView displayFrom="details" id={id} entity={entity} />
       </SectionBox>

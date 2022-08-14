@@ -1,9 +1,13 @@
 import { SectionBox } from "@gothicgeeks/design-system";
 import { TitleLang, useRouteParam } from "@gothicgeeks/shared";
-import { useNavigationStack, useSetPageDetails } from "frontend/lib/routing";
+import {
+  NAVIGATION_LINKS,
+  useNavigationStack,
+  useSetPageDetails,
+} from "frontend/lib/routing";
 import { META_USER_PERMISSIONS } from "shared/types";
 import {
-  // useEntityCrudSettings,
+  useEntityCrudSettings,
   useEntityDiction,
   useEntitySlug,
 } from "../../../hooks/entity/entity.config";
@@ -17,7 +21,7 @@ export function EntityRelationDetails() {
 
   const childId = useRouteParam("childId");
   const entity = useEntitySlug();
-  // const entityCrudSettings = useEntityCrudSettings();
+  const childEntityCrudSettings = useEntityCrudSettings(childEntity);
 
   const { canGoBack, goBack } = useNavigationStack();
 
@@ -39,9 +43,17 @@ export function EntityRelationDetails() {
               }
             : undefined
         }
-        // TODO iconButtons={[
-        //   { icon: "edit", action: "", label: "Edit" },
-        // ]}
+        iconButtons={
+          childEntityCrudSettings.data?.update
+            ? [
+                {
+                  icon: "edit",
+                  action: NAVIGATION_LINKS.ENTITY.UPDATE(childEntity, childId),
+                  label: "Edit",
+                },
+              ]
+            : []
+        }
       >
         <EntityDetailsView
           displayFrom="details"

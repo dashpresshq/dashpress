@@ -17,6 +17,7 @@ export const runJavascriptString = (
   }
 };
 
+// TODO
 export const runAsyncJavascriptString = async (
   javascriptString: string,
   globals: Record<string, unknown>,
@@ -25,7 +26,13 @@ export const runAsyncJavascriptString = async (
   const AsyncFunction = async function X() {}.constructor;
   try {
     // eslint-disable-next-line no-new-func
-    await new AsyncFunction("$", javascriptString)({ ...globals, ...context });
+    return await AsyncFunction(
+      "$",
+      javascriptString
+    )({
+      ...globals,
+      ...context,
+    });
   } catch (e) {
     // eslint-disable-next-line no-console
     console.warn(

@@ -127,8 +127,8 @@ export function EntityRelationsSettings() {
                   {viewStateMachine.type === "render" && (
                     <>
                       <Text size="5">
-                        You get to customize how this entity gets to be rendered
-                        when other entity references it
+                        LINK_TO_DOC You get to customize how this entity gets to
+                        be rendered when other entity references it
                       </Text>
                       <Spacer />
                       <EntityRelationsForm
@@ -155,9 +155,9 @@ export function EntityRelationsSettings() {
                     <ErrorAlert message={viewStateMachine.message} />
                   )}
                   <Text size="5">
-                    You get the customize the labels, for the field, Say you
-                    want `updatedAt` to be called `Last Updated`. Here is where
-                    you that
+                    LINK_TO_DOC You get the customize the labels, for the field,
+                    Say you want `updatedAt` to be called `Last Updated`. Here
+                    is where you that
                   </Text>
                   <Spacer />
                   <FieldsLabelForm
@@ -198,7 +198,7 @@ export function EntityRelationsSettings() {
               content: (
                 <>
                   <Text size="5">
-                    Order the relations how you want them to appear
+                    LINK_TO_DOC Order the relations how you want them to appear
                   </Text>
                   <Spacer size="xl" />
                   <SortList

@@ -124,9 +124,9 @@ export function EntityFieldsSettings() {
               content: (
                 <>
                   <Text size="5">
-                    You get the customize the labels, for the field, Say you
-                    want `updatedAt` to be called `Last Updated`. Here is where
-                    you that
+                    LINK_TO_DOC You get the customize the labels, for the field,
+                    Say you want `updatedAt` to be called `Last Updated`. Here
+                    is where you that
                   </Text>
                   <Spacer />
                   <FieldsLabelForm
@@ -150,9 +150,10 @@ export function EntityFieldsSettings() {
                 // good schema to try to not touch here as much as possible
                 <>
                   <Text size="5">
-                    You get the superpowers to tell us the specific type of the
-                    fields, Say the type is `email` or `url` or `textarea` as
-                    oppose to just `text` Here is where you get to do that
+                    LINK_TO_DOC You get the superpowers to tell us the specific
+                    type of the fields, Say the type is `email` or `url` or
+                    `textarea` as oppose to just `text` Here is where you get to
+                    do that
                   </Text>
                   <Spacer />
 
@@ -194,8 +195,8 @@ export function EntityFieldsSettings() {
               content: (
                 <>
                   <Text size="5">
-                    For some reasons, `createdAt` is showing before `userName`.
-                    This is where you correct that wrong :wink
+                    LINK_TO_DOC For some reasons, `createdAt` is showing before
+                    `userName`. This is where you correct that wrong :wink
                   </Text>
                   <Spacer size="xl" />
                   <SortList

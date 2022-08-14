@@ -57,7 +57,7 @@ export function SelectionTab({
     <>
       <Stack justify="space-between">
         <div style={{ width: "100%" }}>
-          <Text size="5">{description}</Text>
+          <Text size="5">{description} LINK_TO_DOC</Text>
         </div>
         {onToggle && (
           <FormButton

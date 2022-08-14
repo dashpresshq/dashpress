@@ -16,7 +16,7 @@ export function UpdateUserForm({
       onSubmit={onSubmit}
       initialValues={initialValues}
       fields={UPDATE_USER_FORM_SCHEMA}
-      formCustomization={{
+      formExtension={{
         fieldsState: `return {
           role: {
               disabled: $.auth.username === $.routeParams.username 

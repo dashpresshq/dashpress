@@ -6,30 +6,15 @@ import {
   ISchemaFormConfig,
 } from "shared/form-schemas";
 import { runValidationError } from "shared/validations/run";
-import { useRouter } from "next/router";
-import { useAuthenticatedUserBag } from "frontend/hooks/auth/user.store";
 import { RenderFormInput } from "./_RenderFormInput";
 import { userFriendlyCase } from "../strings";
 import { IFormExtension } from "./types";
-
-const runJavascriptString = (
-  javascriptString: string,
-  globals: Record<string, unknown>,
-  context: Record<string, unknown>
-) => {
-  try {
-    // eslint-disable-next-line no-new-func
-    return Function("$", javascriptString)({ ...globals, ...context });
-  } catch (e) {
-    // eslint-disable-next-line no-console
-    console.warn(
-      `•Expression:'${javascriptString}'\n•JS-Error: `,
-      e,
-      "\n•Context: ",
-      context
-    );
-  }
-};
+import {
+  runFormAfterSubmit,
+  runFormBeforeSubmit,
+  runFormFieldState,
+} from "./form-run";
+import { useGlobalScriptContext } from "./useGlobalScriptContext";
 
 interface IProps<T> {
   fields: IAppliedSchemaFormConfig<T>;
@@ -40,55 +25,6 @@ interface IProps<T> {
   formExtension?: Partial<IFormExtension>;
 }
 
-const computeFieldState = (
-  fieldStateString: string,
-  globals: Record<string, unknown>,
-  context: Record<string, unknown>
-) => {
-  if (!fieldStateString) {
-    return {};
-  }
-  const response = runJavascriptString(fieldStateString, globals, context);
-  if (typeof response !== "object") {
-    return {}; // :eyes on this check
-  }
-  return response;
-};
-
-const computeBeforeSubmit = (
-  beforeSubmitString: string,
-  globals: Record<string, unknown>,
-  formValues: Record<string, unknown>
-) => {
-  if (!beforeSubmitString) {
-    return formValues;
-  }
-  const response = runJavascriptString(beforeSubmitString, globals, {
-    formValues,
-  });
-  return response;
-};
-
-const computeAfterSubmit = async (
-  afterSubmitString: string,
-  globals: Record<string, unknown>,
-  context: Record<string, unknown>
-): Promise<void> => {
-  if (!afterSubmitString) {
-    return;
-  }
-  runJavascriptString(afterSubmitString, globals, context);
-};
-
-const useSciptContext = () => {
-  const router = useRouter();
-  const authUser = useAuthenticatedUserBag();
-  return {
-    routeParams: router.query,
-    auth: authUser.data,
-  };
-};
-
 export function SchemaForm<T extends Record<string, unknown>>({
   onSubmit,
   fields,
@@ -97,12 +33,12 @@ export function SchemaForm<T extends Record<string, unknown>>({
   formExtension,
   resetForm,
 }: IProps<T>) {
-  const scriptContext = useSciptContext();
+  const scriptContext = useGlobalScriptContext();
 
   return (
     <Form
       onSubmit={async (formValues) => {
-        const modifiedFormValues = computeBeforeSubmit(
+        const modifiedFormValues = runFormBeforeSubmit(
           formExtension?.beforeSubmit,
           scriptContext,
           formValues
@@ -115,7 +51,7 @@ export function SchemaForm<T extends Record<string, unknown>>({
 
         await onSubmit(modifiedFormValues);
 
-        await computeAfterSubmit(
+        await runFormAfterSubmit(
           formExtension?.afterSubmit,
           scriptContext,
           formValues
@@ -124,7 +60,7 @@ export function SchemaForm<T extends Record<string, unknown>>({
       initialValues={initialValues}
       validate={runValidationError(fields)}
       render={({ handleSubmit, submitting, values, form, pristine }) => {
-        const fieldState = computeFieldState(
+        const fieldState = runFormFieldState(
           formExtension?.fieldsState,
           scriptContext,
           { formValues: values }

@@ -45,7 +45,9 @@ function useEntityFormView() {
   return {
     "Fields State": (
       <>
-        <Text size="5">Here you modify the behaviour of the form</Text>
+        <Text size="5">
+          Here you modify the behaviour of the form LINK_TO_DOC
+        </Text>
         <Spacer />
         <ScriptForm
           value={entityFormExtensionSettings.data?.fieldsState}
@@ -59,7 +61,7 @@ function useEntityFormView() {
       <>
         <Text size="5">
           Here, you get to modify your form just before submit so that you add
-          or remove fields based on requirement
+          or remove fields based on requirement LINK_TO_DOC
         </Text>
         <Spacer />
         <ScriptForm
@@ -74,6 +76,7 @@ function useEntityFormView() {
       <>
         <Text size="5">
           Here, you get to run any action just after the action is submitted
+          LINK_TO_DOC
         </Text>
         <Spacer />
         <ScriptForm

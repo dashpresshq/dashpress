@@ -55,7 +55,10 @@ export function EntitiesSelection({
 
   return (
     <>
-      <Text size="5">{description}</Text>
+      <Text size="5">
+        LINK_TO_DOC
+        {description}
+      </Text>
       {formButton}
       <Spacer size="xxl" />
       {allList.length > 0 && (

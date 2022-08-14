@@ -7,7 +7,7 @@ import { SchemaForm } from "frontend/lib/form/SchemaForm";
 
 interface IProps {
   value: string;
-  onSubmit: (value: string) => void;
+  onSubmit: (value: string) => Promise<void>;
   isLoading: boolean;
   error?: unknown;
 }
@@ -16,24 +16,22 @@ export function ScriptForm({ value, onSubmit, error, isLoading }: IProps) {
   if (isLoading) {
     return <FormSkeleton schema={[FormSkeletonSchema.RichTextArea]} />;
   }
+
   if (error) {
     return <ErrorAlert message={error} />;
   }
+
   return (
     <SchemaForm
       fields={{
         script: {
           type: "json",
           label: "",
-          validations: [
-            {
-              validationType: "isJson",
-            },
-          ],
+          validations: [],
         },
       }}
-      onSubmit={(data) => {
-        onSubmit(data.script as string);
+      onSubmit={async (data) => {
+        await onSubmit(data.script as string);
       }}
       buttonText="Save"
       initialValues={{

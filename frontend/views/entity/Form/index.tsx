@@ -14,7 +14,7 @@ import { useEntityFields } from "../../../hooks/entity/entity.store";
 import { ENTITY_CONFIGURATION_VIEW } from "../constants";
 import { ScriptForm } from "./ScriptForm";
 
-function useEntityCrudView() {
+function useEntityFormView() {
   const entity = useEntitySlug();
 
   const entityFields = useEntityFields(entity);
@@ -90,7 +90,7 @@ function useEntityCrudView() {
 }
 
 export function EntityFormSettings() {
-  const entityCrudView = useEntityCrudView();
+  const entityFormView = useEntityFormView();
   useSetPageDetails({
     pageTitle: "Form Settings",
     viewKey: ENTITY_CONFIGURATION_VIEW,
@@ -100,7 +100,7 @@ export function EntityFormSettings() {
     <BaseEntitySettingsLayout>
       <SectionBox title="Form Settings">
         <Tabs
-          contents={Object.entries(entityCrudView).map(([key, value]) => ({
+          contents={Object.entries(entityFormView).map(([key, value]) => ({
             label: key,
             content: value,
           }))}

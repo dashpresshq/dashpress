@@ -86,8 +86,7 @@ export function AppLayout({ children, actionItems = [] }: IProps) {
           <Text>{pageTitle}</Text>
           <Breadcrumbs items={homedBreadcrumb} onCrumbClick={goToLinkIndex} />
         </div>
-        {/* Remove this logic on version update */}
-        {actionItems.length > 0 && <DropDownMenu menuItems={actionItems} />}
+        <DropDownMenu menuItems={actionItems} />
       </Stack>
       <Spacer />
       {children}

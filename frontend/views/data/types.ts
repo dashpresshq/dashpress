@@ -7,7 +7,7 @@ export interface IBaseEntityForm {
   entityToOneReferenceFields: Record<string, string>;
   entityFieldSelections: Record<string, IColorableSelection[]>;
   getEntityFieldLabels: (name: string) => string;
-  onSubmit: (data: Record<string, unknown>) => void;
+  onSubmit: (data: Record<string, unknown>) => Promise<void>;
   entityFieldTypes: Record<string, keyof typeof FIELD_TYPES_CONFIG_MAP>;
 }
 

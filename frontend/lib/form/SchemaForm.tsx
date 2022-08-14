@@ -1,5 +1,5 @@
 import { FormButton } from "@gothicgeeks/design-system";
-import { resetFormValues } from "@gothicgeeks/shared";
+import { resetFormValues, ToastService } from "@gothicgeeks/shared";
 import { Field, Form } from "react-final-form";
 import {
   IAppliedSchemaFormConfig,
@@ -33,7 +33,7 @@ const runJavascriptString = (
 
 interface IProps<T> {
   fields: IAppliedSchemaFormConfig<T>;
-  onSubmit: (data: T) => void;
+  onSubmit: (data: T) => Promise<void>;
   initialValues?: Partial<T>;
   buttonText: string;
   resetForm?: true;
@@ -48,22 +48,36 @@ const computeFieldState = (
   if (!fieldStateString) {
     return {};
   }
-  return runJavascriptString(fieldStateString, globals, context);
+  const response = runJavascriptString(fieldStateString, globals, context);
+  if (typeof response !== "object") {
+    return {}; // :eyes on this check
+  }
+  return response;
 };
 
 const computeBeforeSubmit = (
   beforeSubmitString: string,
-  formValue: Record<string, unknown>
+  globals: Record<string, unknown>,
+  formValues: Record<string, unknown>
 ) => {
   if (!beforeSubmitString) {
-    return formValue;
+    return formValues;
   }
+  const response = runJavascriptString(beforeSubmitString, globals, {
+    formValues,
+  });
+  return response;
 };
 
-const computeAfterSubmit = (afterSubmitString: string) => {
+const computeAfterSubmit = async (
+  afterSubmitString: string,
+  globals: Record<string, unknown>,
+  context: Record<string, unknown>
+): Promise<void> => {
   if (!afterSubmitString) {
-    return {};
+    return;
   }
+  runJavascriptString(afterSubmitString, globals, context);
 };
 
 const useSciptContext = () => {
@@ -84,10 +98,27 @@ export function SchemaForm<T extends Record<string, unknown>>({
   resetForm,
 }: IProps<T>) {
   const scriptContext = useSciptContext();
-  console.log(scriptContext);
   return (
     <Form
-      onSubmit={onSubmit}
+      onSubmit={async (formValues) => {
+        const modifiedFormValues = computeBeforeSubmit(
+          formCustomization?.beforeSubmit,
+          scriptContext,
+          formValues
+        );
+        if (typeof modifiedFormValues !== "object") {
+          ToastService.error(modifiedFormValues);
+          return;
+        }
+
+        await onSubmit(modifiedFormValues);
+
+        await computeAfterSubmit(
+          formCustomization?.afterSubmit,
+          scriptContext,
+          formValues
+        );
+      }}
       initialValues={initialValues}
       validate={runValidationError(fields)}
       render={({ handleSubmit, submitting, values, form, pristine }) => {

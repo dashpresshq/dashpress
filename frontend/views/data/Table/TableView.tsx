@@ -11,6 +11,7 @@ import {
   IBEPaginatedDataState,
   usePaginatedData,
   SLUG_LOADING_VALUE,
+  IFEPaginatedDataState,
 } from "@gothicgeeks/shared";
 import { useState } from "react";
 import { QueryFilter } from "shared/types";
@@ -42,14 +43,20 @@ export function EntityTableView({ entity, persitentFilters = [] }: IProps) {
     entity
   );
 
-  const [paginatedDataState, setPaginatedDataState] =
-    useState<IBEPaginatedDataState>(DEFAULT_TABLE_PARAMS);
+  const [paginatedDataState, setPaginatedDataState] = useState<
+    IBEPaginatedDataState | IFEPaginatedDataState<any>
+  >(DEFAULT_TABLE_PARAMS);
 
   const tableData = usePaginatedData(
     ENTITY_TABLE_PATH(entity),
     {
       ...paginatedDataState,
-      filters: [...paginatedDataState.filters, ...persitentFilters],
+      filters: [
+        ...(paginatedDataState.filters as Array<
+          IBEPaginatedDataState | IFEPaginatedDataState<any>
+        >),
+        ...persitentFilters,
+      ],
     },
     {
       enabled: entity && entity !== SLUG_LOADING_VALUE,

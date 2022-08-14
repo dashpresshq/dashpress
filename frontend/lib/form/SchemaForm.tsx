@@ -10,7 +10,7 @@ import { useRouter } from "next/router";
 import { useAuthenticatedUserBag } from "frontend/hooks/auth/user.store";
 import { RenderFormInput } from "./_RenderFormInput";
 import { userFriendlyCase } from "../strings";
-import { IFormCustomization } from "./types";
+import { IFormExtension } from "./types";
 
 const runJavascriptString = (
   javascriptString: string,
@@ -37,7 +37,7 @@ interface IProps<T> {
   initialValues?: Partial<T>;
   buttonText: string;
   resetForm?: true;
-  formCustomization?: Partial<IFormCustomization>;
+  formExtension?: Partial<IFormExtension>;
 }
 
 const computeFieldState = (
@@ -94,22 +94,19 @@ export function SchemaForm<T extends Record<string, unknown>>({
   fields,
   buttonText,
   initialValues,
-  formCustomization,
+  formExtension,
   resetForm,
 }: IProps<T>) {
   const scriptContext = useSciptContext();
-  console.log(formCustomization);
 
   return (
     <Form
       onSubmit={async (formValues) => {
         const modifiedFormValues = computeBeforeSubmit(
-          formCustomization?.beforeSubmit,
+          formExtension?.beforeSubmit,
           scriptContext,
           formValues
         );
-
-        console.log("modifiedFormValues", modifiedFormValues);
 
         if (typeof modifiedFormValues !== "object") {
           ToastService.error(modifiedFormValues);
@@ -119,7 +116,7 @@ export function SchemaForm<T extends Record<string, unknown>>({
         await onSubmit(modifiedFormValues);
 
         await computeAfterSubmit(
-          formCustomization?.afterSubmit,
+          formExtension?.afterSubmit,
           scriptContext,
           formValues
         );
@@ -128,7 +125,7 @@ export function SchemaForm<T extends Record<string, unknown>>({
       validate={runValidationError(fields)}
       render={({ handleSubmit, submitting, values, form, pristine }) => {
         const fieldState = computeFieldState(
-          formCustomization?.fieldsState,
+          formExtension?.fieldsState,
           scriptContext,
           { formValues: values }
         );

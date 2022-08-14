@@ -3,7 +3,7 @@ export interface IFormProps<T> {
   initialValues?: Partial<T>;
 }
 
-export interface IFormCustomization {
+export interface IFormExtension {
   fieldsState: string;
   beforeSubmit: string;
   afterSubmit: string;

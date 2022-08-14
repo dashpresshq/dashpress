@@ -1,3 +1,3 @@
-import { EntityFormSettings } from "frontend/views/entity/Form";
+import { EntityFormExtensionSettings } from "frontend/views/entity/Form";
 
-export default EntityFormSettings;
+export default EntityFormExtensionSettings;

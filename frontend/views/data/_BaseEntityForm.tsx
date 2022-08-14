@@ -21,6 +21,8 @@ import {
   useEntityFieldValidations,
   useEntitySlug,
 } from "frontend/hooks/entity/entity.config";
+import { IFormExtension } from "frontend/lib/form/types";
+import { useMemo } from "react";
 import { buildAppliedSchemaFormConfig } from "./buildAppliedSchemaFormConfig";
 import { useEntityViewStateMachine } from "./useEntityViewStateMachine";
 import { fitlerOutHiddenScalarColumns } from "./utils";
@@ -33,7 +35,6 @@ type IProps = {
   onSubmit: (data: Record<string, unknown>) => Promise<void>;
 };
 
-// TODO Send only changed fields for 'update' action
 export function BaseEntityForm({
   initialValues,
   action,
@@ -51,12 +52,17 @@ export function BaseEntityForm({
     "entity_columns_types",
     entity
   );
+  const entityFormExtension = useEntityConfiguration<IFormExtension>(
+    "entity_form_extension",
+    entity
+  );
   const entityToOneReferenceFields = useEntityToOneReferenceFields(entity);
 
   const error =
     entityFieldTypesMap.error ||
     hiddenColumns.error ||
     additionalDataState?.error ||
+    entityFormExtension.error ||
     entityToOneReferenceFields.error ||
     entityFields.error;
 
@@ -65,10 +71,24 @@ export function BaseEntityForm({
     hiddenColumns.isLoading ||
     additionalDataState?.isLoading ||
     entityToOneReferenceFields.isLoading ||
+    entityFormExtension.isLoading ||
     entity === SLUG_LOADING_VALUE ||
     entityFieldTypesMap.isLoading;
 
   const viewState = useEntityViewStateMachine(isLoading, error, "create");
+
+  const fields = fitlerOutHiddenScalarColumns(entityFields, hiddenColumns).map(
+    ({ name }) => name
+  );
+
+  const fieldsInitialValues = useMemo(() => {
+    if (!initialValues) {
+      return initialValues;
+    }
+    return Object.fromEntries(
+      fields.map((field) => [field, initialValues[field]])
+    );
+  }, [initialValues, hiddenColumns]);
 
   const formSchemaConfig = {
     entityToOneReferenceFields: entityToOneReferenceFields.data,
@@ -76,9 +96,7 @@ export function BaseEntityForm({
     entityFieldTypes,
     entityFieldSelections,
     entityValidationsMap,
-    fields: fitlerOutHiddenScalarColumns(entityFields, hiddenColumns).map(
-      ({ name }) => name
-    ),
+    fields,
   };
 
   if (viewState.type === "loading") {
@@ -103,8 +121,9 @@ export function BaseEntityForm({
       buttonText={action === "update" ? ButtonLang.update : ButtonLang.create}
       resetForm={action === "create" ? true : undefined}
       onSubmit={onSubmit}
-      initialValues={initialValues}
+      initialValues={fieldsInitialValues}
       fields={buildAppliedSchemaFormConfig(formSchemaConfig)}
+      formExtension={entityFormExtension.data}
     />
   );
 }

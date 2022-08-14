@@ -2,7 +2,7 @@ import { Tabs, SectionBox, Text, Spacer } from "@gothicgeeks/design-system";
 import { SLUG_LOADING_VALUE } from "@gothicgeeks/shared";
 import { useSetPageDetails } from "frontend/lib/routing";
 import { USER_PERMISSIONS } from "shared/types";
-import { IFormCustomization } from "frontend/lib/form/types";
+import { IFormExtension } from "frontend/lib/form/types";
 import { useEntitySlug } from "../../../hooks/entity/entity.config";
 import { BaseEntitySettingsLayout } from "../_Base";
 import {
@@ -19,27 +19,25 @@ function useEntityFormView() {
 
   const entityFields = useEntityFields(entity);
 
-  const entityFormSettings = useEntityConfiguration<IFormCustomization>(
-    "entity_form_settings",
+  const entityFormExtensionSettings = useEntityConfiguration<IFormExtension>(
+    "entity_form_extension",
     entity
   );
 
-  const upsertEntityFormSettingsMutation = useUpsertConfigurationMutation(
-    "entity_form_settings",
-    entity
-  );
+  const upsertEntityFormExtensionSettingsMutation =
+    useUpsertConfigurationMutation("entity_form_extension", entity);
 
   const sharedLoading =
     entityFields.isLoading ||
-    entityFormSettings.isLoading ||
+    entityFormExtensionSettings.isLoading ||
     entity === SLUG_LOADING_VALUE;
 
-  const error = entityFields.error || entityFormSettings.error;
+  const error = entityFields.error || entityFormExtensionSettings.error;
 
   const onScriptSubmit =
-    (key: keyof IFormCustomization) => async (value: string) => {
-      upsertEntityFormSettingsMutation.mutateAsync({
-        ...entityFormSettings.data,
+    (key: keyof IFormExtension) => async (value: string) => {
+      upsertEntityFormExtensionSettingsMutation.mutateAsync({
+        ...entityFormExtensionSettings.data,
         [key]: value,
       });
     };
@@ -50,7 +48,7 @@ function useEntityFormView() {
         <Text size="5">Here you modify the behaviour of the form</Text>
         <Spacer />
         <ScriptForm
-          value={entityFormSettings.data?.fieldsState}
+          value={entityFormExtensionSettings.data?.fieldsState}
           isLoading={sharedLoading}
           onSubmit={onScriptSubmit("fieldsState")}
           error={error}
@@ -65,7 +63,7 @@ function useEntityFormView() {
         </Text>
         <Spacer />
         <ScriptForm
-          value={entityFormSettings.data?.beforeSubmit}
+          value={entityFormExtensionSettings.data?.beforeSubmit}
           isLoading={sharedLoading}
           onSubmit={onScriptSubmit("beforeSubmit")}
           error={error}
@@ -79,7 +77,7 @@ function useEntityFormView() {
         </Text>
         <Spacer />
         <ScriptForm
-          value={entityFormSettings.data?.afterSubmit}
+          value={entityFormExtensionSettings.data?.afterSubmit}
           isLoading={sharedLoading}
           onSubmit={onScriptSubmit("afterSubmit")}
           error={error}
@@ -89,7 +87,7 @@ function useEntityFormView() {
   };
 }
 
-export function EntityFormSettings() {
+export function EntityFormExtensionSettings() {
   const entityFormView = useEntityFormView();
   useSetPageDetails({
     pageTitle: "Form Settings",

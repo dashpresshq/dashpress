@@ -18,7 +18,7 @@
     "jsx": "preserve",
     "allowSyntheticDefaultImports": true,
     "noImplicitReturns": true,
-    "baseUrl": ".",
+    "baseUrl": "./src",
     "strict": false
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],

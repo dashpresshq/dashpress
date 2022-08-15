@@ -1,0 +1,32 @@
+---
+name: Lock
+
+on:
+  schedule:
+    - cron: "0 9 * * *"
+  workflow_dispatch:
+
+jobs:
+  lock:
+    name: 🔒 Lock closed issues and PRs
+    runs-on: ubuntu-latest
+    steps:
+      - uses: dessant/lock-threads@v2.0.3
+        with:
+          github-token: ${{ github.token }}
+          issue-lock-inactive-days: "30"
+          issue-lock-reason: ""
+          issue-comment: >
+            Issue closed and locked due to lack of activity.
+
+            If you encounter this same issue, please open a new issue and refer
+            to this closed one.
+          pr-lock-inactive-days: "1"
+          pr-lock-reason: ""
+          pr-comment: >
+            Pull Request closed and locked due to lack of activity.
+
+            If you'd like to build on this closed PR, you can clone it using
+            this method: https://stackoverflow.com/a/14969986
+
+            Then open a new PR, referencing this closed PR in your message.

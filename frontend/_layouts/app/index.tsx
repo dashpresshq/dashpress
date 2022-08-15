@@ -40,12 +40,12 @@ const useUserAuthCheck = () => {
     }
   }, [userAuthenticatedState]);
 
-  return userAuthenticatedState === "loading";
+  return userAuthenticatedState;
 };
 
 export function AppLayout({ children, actionItems = [] }: IProps) {
   const siteConfig = useSiteConfig();
-  const isChecking = useUserAuthCheck();
+  const userAuthenticatedState = useUserAuthCheck();
   const { history, pushToStack, goToLinkIndex } = useNavigationStack();
   const router = useRouter();
   const [pageTitle, permission] = usePageDetailsStore((store) => [
@@ -67,7 +67,7 @@ export function AppLayout({ children, actionItems = [] }: IProps) {
 
   homedBreadcrumb.push({ value: "", label: pageTitle });
 
-  if (isChecking) {
+  if (userAuthenticatedState !== true) {
     return <ComponentIsLoading />;
   }
 

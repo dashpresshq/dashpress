@@ -7,7 +7,7 @@ import {
   Stack,
   Text,
 } from "@adminator/chromista";
-import React, { ReactNode, useEffect, useState } from "react";
+import React, { ReactNode, useEffect } from "react";
 import { Icon } from "react-feather";
 import Head from "next/head";
 import { AuthService } from "@adminator/protozoa";
@@ -15,6 +15,7 @@ import { useRouter } from "next/router";
 import { useNavigationStack } from "frontend/lib/routing";
 import { usePageDetailsStore } from "frontend/lib/routing/usePageDetails";
 import { usePageRequiresPermission } from "frontend/hooks/auth/user.store";
+import { useUserAuthenticatedState } from "frontend/hooks/auth/useAuthenticateUser";
 import { useSiteConfig } from "../../hooks/app/site.config";
 import { NAVIGATION_LINKS } from "../../lib/routing/links";
 import { useSelectionViews } from "./useSelectionViews";
@@ -29,21 +30,17 @@ interface IProps {
 }
 
 const useUserAuthCheck = () => {
-  const [isChecking, setIsChecking] = useState(true);
+  const userAuthenticatedState = useUserAuthenticatedState();
   const router = useRouter();
 
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      if (!AuthService.isAuthenticated()) {
-        //  TODO router.replace(`${NAVIGATION_LINKS.AUTH_SIGNIN}?next=${router.asPath}`);
-        router.replace(NAVIGATION_LINKS.AUTH_SIGNIN);
-        return;
-      }
-      setIsChecking(false);
+    if (userAuthenticatedState === false) {
+      AuthService.removeAuthToken();
+      router.replace(NAVIGATION_LINKS.AUTH_SIGNIN);
     }
-  }, [typeof window]);
+  }, [userAuthenticatedState]);
 
-  return isChecking;
+  return userAuthenticatedState === "loading";
 };
 
 export function AppLayout({ children, actionItems = [] }: IProps) {

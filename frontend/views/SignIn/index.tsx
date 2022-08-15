@@ -1,11 +1,5 @@
-import React, { useEffect, useState } from "react";
-import {
-  AuthService,
-  makePostRequest,
-  SLUG_LOADING_VALUE,
-  ToastService,
-  useRouteParam,
-} from "@adminator/protozoa";
+import React, { useEffect } from "react";
+import { makePostRequest, ToastService } from "@adminator/protozoa";
 import { useMutation } from "react-query";
 import { AuthLayout } from "frontend/_layouts/guest";
 import { ISuccessfullAuthenticationResponse } from "shared/types";
@@ -14,22 +8,20 @@ import { NAVIGATION_LINKS } from "frontend/lib/routing";
 import { useSetupCheck } from "frontend/hooks/setup/setup.store";
 import { ComponentIsLoading } from "@adminator/chromista";
 import { ISignInForm } from "shared/form-schemas/auth/signin";
+import {
+  useAuthenticateUser,
+  useUserAuthenticatedState,
+} from "frontend/hooks/auth/useAuthenticateUser";
 import { SignInForm } from "./Form";
 
 function useSignInMutation() {
-  const nextRoute = useRouteParam("next");
-  const router = useRouter();
+  const authenticateUser = useAuthenticateUser();
   return useMutation(
     async (values: ISignInForm) =>
       await makePostRequest(`/api/auth/signin`, values),
     {
       onSuccess: (data: ISuccessfullAuthenticationResponse, formData) => {
-        AuthService.setAuthToken(data.token, formData.rememberMe);
-        router.push(
-          nextRoute === SLUG_LOADING_VALUE || !nextRoute
-            ? NAVIGATION_LINKS.DASHBOARD
-            : nextRoute
-        );
+        authenticateUser(data.token, formData.rememberMe);
       },
       onError: (error: { message: string }) => {
         ToastService.error(error.message);
@@ -39,20 +31,16 @@ function useSignInMutation() {
 }
 
 const useGuestCheck = () => {
-  const [isChecking, setIsChecking] = useState(true);
+  const userAuthenticatedState = useUserAuthenticatedState();
   const router = useRouter();
 
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      if (AuthService.isAuthenticated()) {
-        router.replace(NAVIGATION_LINKS.DASHBOARD);
-        return;
-      }
-      setIsChecking(false);
+    if (userAuthenticatedState === true) {
+      router.replace(NAVIGATION_LINKS.DASHBOARD);
     }
   }, [typeof window]);
 
-  return isChecking;
+  return userAuthenticatedState === "loading";
 };
 
 export function SignIn() {

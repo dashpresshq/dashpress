@@ -11,12 +11,17 @@ import {
   META_USER_PERMISSIONS,
   USER_PERMISSIONS,
 } from "shared/types";
+import { useIsAuthenticatedStore } from "./useAuthenticateUser";
 
 export const AUTHENTICATED_ACCOUNT_URL = "/api/account/mine";
 
 export function useAuthenticatedUserBag() {
+  const isAuthenticated = useIsAuthenticatedStore(
+    (store) => store.isAuthenticated
+  );
   return useStorageApi<IAuthenticatedUserBag>(AUTHENTICATED_ACCOUNT_URL, {
     errorMessage: dataNotFoundMessage("Your account details"),
+    enabled: isAuthenticated === true,
   });
 }
 
@@ -25,11 +30,11 @@ const doPermissionCheck = (
   isLoadingUser: boolean,
   userData: IAuthenticatedUserBag
 ) => {
+  if (isLoadingUser || !userData) {
+    return "loading";
+  }
   if (requiredPermission === META_USER_PERMISSIONS.NO_PERMISSION_REQUIRED) {
     return true;
-  }
-  if (isLoadingUser) {
-    return "loading";
   }
   const { role, permissions } = userData;
 

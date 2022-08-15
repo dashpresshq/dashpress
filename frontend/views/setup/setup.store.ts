@@ -1,9 +1,9 @@
 import {
-  AuthService,
   makePostRequest,
   MutationsLang,
   useWaitForResponseMutationOptions,
 } from "@adminator/protozoa";
+import { useAuthenticateUser } from "frontend/hooks/auth/useAuthenticateUser";
 import { SETUP_CHECK_URL } from "frontend/hooks/setup/setup.store";
 import { useRouter } from "next/router";
 import { useMutation } from "react-query";
@@ -34,15 +34,14 @@ export function useSetupCredentialsMutation() {
 }
 
 export function useSetupUserMutation() {
-  const router = useRouter();
+  const authenticateUser = useAuthenticateUser();
+
   const apiMutateOptions =
     useWaitForResponseMutationOptions<ISuccessfullAuthenticationResponse>({
       endpoints: [SETUP_CHECK_URL],
       successMessage: MutationsLang.create("User"),
       onSuccessActionWithFormData: (response) => {
-        AuthService.setAuthToken(response.token, true);
-
-        router.push(NAVIGATION_LINKS.DASHBOARD);
+        authenticateUser(response.token, true);
       },
     });
 

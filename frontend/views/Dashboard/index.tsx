@@ -77,7 +77,9 @@ export function Dashboard() {
                   <Text size="3" weight="bold">
                     {entitiesCount.data[field.value]?.isLoading
                       ? "Counting..."
-                      : entitiesCount.data[field.value]?.data?.count}
+                      : Intl.NumberFormat("en-US").format(
+                          entitiesCount.data[field.value]?.data?.count || 0
+                        )}
                   </Text>
                 </StyledBox>
               </StyledCard>

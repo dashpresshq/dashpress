@@ -4,14 +4,14 @@ import {
   FormSkeleton,
   FormSkeletonSchema,
   OffCanvas,
-} from "@gothicgeeks/design-system";
+} from "@adminator/chromista";
 import { Form, Field } from "react-final-form";
 import {
   ButtonLang,
   composeValidators,
   maxLength,
   minLength,
-} from "@gothicgeeks/shared";
+} from "@adminator/protozoa";
 import { useMemo, useState } from "react";
 import { getFieldTypeBoundedValidations } from "frontend/hooks/entity/guess";
 import { IFieldValidationItem } from "shared/validations/types";

@@ -6,7 +6,7 @@ import {
   MutationsLang,
   useApi,
   useWaitForResponseMutationOptions,
-} from "@gothicgeeks/shared";
+} from "@adminator/protozoa";
 import { isRouterParamEnabled } from "frontend/hooks";
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
 import { useRouter } from "next/router";

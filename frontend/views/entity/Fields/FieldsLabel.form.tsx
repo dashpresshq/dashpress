@@ -3,14 +3,14 @@ import {
   FormInput,
   FormSkeleton,
   FormSkeletonSchema,
-} from "@gothicgeeks/design-system";
+} from "@adminator/chromista";
 import { Form, Field } from "react-final-form";
 import {
   ButtonLang,
   composeValidators,
   maxLength,
   minLength,
-} from "@gothicgeeks/shared";
+} from "@adminator/protozoa";
 
 interface IProps {
   fields: string[];

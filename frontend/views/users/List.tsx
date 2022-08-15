@@ -4,8 +4,8 @@ import {
   DeleteButton,
   SoftButton,
   Stack,
-} from "@gothicgeeks/design-system";
-import { IFEPaginatedDataState, useFEPaginatedData } from "@gothicgeeks/shared";
+} from "@adminator/chromista";
+import { IFEPaginatedDataState, useFEPaginatedData } from "@adminator/protozoa";
 import React, { useState } from "react";
 import { AppLayout } from "frontend/_layouts/app";
 import { UserPlus } from "react-feather";

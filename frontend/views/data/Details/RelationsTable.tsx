@@ -1,5 +1,5 @@
-import { FilterOperators } from "@gothicgeeks/design-system";
-import { useRouteParam } from "@gothicgeeks/shared";
+import { FilterOperators } from "@adminator/chromista";
+import { useRouteParam } from "@adminator/protozoa";
 import { useEntityReferenceFields } from "frontend/hooks/entity/entity.store";
 import { useSetPageDetails } from "frontend/lib/routing";
 import { META_USER_PERMISSIONS } from "shared/types";

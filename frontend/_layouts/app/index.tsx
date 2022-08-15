@@ -6,11 +6,11 @@ import {
   Spacer,
   Stack,
   Text,
-} from "@gothicgeeks/design-system";
+} from "@adminator/chromista";
 import React, { ReactNode, useEffect, useState } from "react";
 import { Icon } from "react-feather";
 import Head from "next/head";
-import { AuthService } from "@gothicgeeks/shared";
+import { AuthService } from "@adminator/protozoa";
 import { useRouter } from "next/router";
 import { useNavigationStack } from "frontend/lib/routing";
 import { usePageDetailsStore } from "frontend/lib/routing/usePageDetails";

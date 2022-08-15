@@ -1,6 +1,6 @@
 import { TemplateService } from "shared/lib/templates";
 import { IEntityField, QueryFilter } from "shared/types";
-import { FilterOperators } from "@gothicgeeks/design-system";
+import { FilterOperators } from "@adminator/chromista";
 import { AbstractCacheService, createCacheService } from "backend/lib/cache";
 import {
   ConfigurationService,

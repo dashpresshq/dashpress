@@ -1,6 +1,6 @@
-import { FormButton, FormInput } from "@gothicgeeks/design-system";
+import { FormButton, FormInput } from "@adminator/chromista";
 import { Form, Field } from "react-final-form";
-import { ButtonLang, composeValidators, required } from "@gothicgeeks/shared";
+import { ButtonLang, composeValidators, required } from "@adminator/protozoa";
 
 import { IFormProps } from "frontend/lib/form/types";
 import { getFieldsOffFormat } from "./utils";

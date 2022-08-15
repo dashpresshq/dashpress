@@ -1,4 +1,4 @@
-import { SectionBox } from "@gothicgeeks/design-system";
+import { SectionBox } from "@adminator/chromista";
 import { useSetPageDetails } from "frontend/lib/routing";
 import { META_USER_PERMISSIONS } from "shared/types";
 import { useChangePasswordMutation } from "../account.store";

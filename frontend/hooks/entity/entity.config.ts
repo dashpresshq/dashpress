@@ -1,4 +1,4 @@
-import { useRouteParam } from "@gothicgeeks/shared";
+import { useRouteParam } from "@adminator/protozoa";
 import { useCallback } from "react";
 import uniqBy from "lodash/uniqBy";
 import { IFieldValidationItem } from "shared/validations/types";

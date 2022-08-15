@@ -8,7 +8,7 @@ import {
   Spacer,
   Stack,
   Text,
-} from "@gothicgeeks/design-system";
+} from "@adminator/chromista";
 import {
   FIELD_TYPES_CONFIG_MAP,
   ENTITY_VALIDATION_CONFIG,
@@ -22,7 +22,7 @@ import {
   composeValidators,
   maxLength,
   ButtonLang,
-} from "@gothicgeeks/shared";
+} from "@adminator/protozoa";
 import React from "react";
 import { IFieldValidationItem } from "shared/validations/types";
 

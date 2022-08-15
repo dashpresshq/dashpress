@@ -6,8 +6,8 @@ import {
   SectionListItem,
   Spacer,
   Text,
-} from "@gothicgeeks/design-system";
-import { TitleLang } from "@gothicgeeks/shared";
+} from "@adminator/chromista";
+import { TitleLang } from "@adminator/protozoa";
 import { useEntitiesList } from "frontend/hooks/entity/entity.store";
 import { createViewStateMachine } from "frontend/lib/create-view-state-machine";
 import { useNavigationStack, useSetPageDetails } from "frontend/lib/routing";

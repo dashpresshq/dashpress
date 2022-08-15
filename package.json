@@ -1,7 +1,7 @@
 {
-  "name": "cardinal",
+  "name": "adminator",
   "version": "0.1.0",
-  "private": true,
+  "license": "GPL-3.0-or-later",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -15,9 +15,9 @@
     "verify": "npm run typecheck && npm run lint && npm run test"
   },
   "dependencies": {
-    "@gothicgeeks/design-system": "git+ssh://git@github.com:thrownullexception/design-system.git#0727399d0e94737f6b20dfdf5d0b699fb1e03b13",
-    "@gothicgeeks/introspect": "git+ssh://git@github.com:thrownullexception/introspect.git#99a7337c3d115f52a1051eaad971a1f7e2e7084c",
-    "@gothicgeeks/shared": "git+ssh://git@github.com:thrownullexception/shared.git#17b4f71328de1e6a612978a0f614466140e0ca5f",
+    "@adminator/chromista": "git+https://github.com/adminatorhq/chromista.git#0727399d0e94737f6b20dfdf5d0b699fb1e03b13",
+    "@adminator/bacteria": "git+https://github.com/adminatorhq/bacteria.git#99a7337c3d115f52a1051eaad971a1f7e2e7084c",
+    "@adminator/protozoa": "git+https://github.com/adminatorhq/protozoa.git#17b4f71328de1e6a612978a0f614466140e0ca5f",
     "@types/cryptr": "^4.0.1",
     "@types/jsonwebtoken": "^8.5.8",
     "bcrypt": "^5.0.1",
@@ -45,7 +45,7 @@
     "styled-components": "^5.3.5"
   },
   "devDependencies": {
-    "@gothicgeeks/eslint-config": "git+ssh://git@github.com:thrownullexception/eslint-config.git#c002cdbbc8097daa41ae09e9927f41e2ad90babd",
+    "@adminator/eslint-config": "git+https://github.com/adminatorhq/eslint-config.git#c002cdbbc8097daa41ae09e9927f41e2ad90babd",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.3.0",
     "@testing-library/react-hooks": "^8.0.1",

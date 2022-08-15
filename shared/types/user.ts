@@ -1,4 +1,4 @@
-import { StringUtils, SLUG_LOADING_VALUE } from "@gothicgeeks/shared";
+import { StringUtils, SLUG_LOADING_VALUE } from "@adminator/protozoa";
 
 export enum SystemRoles {
   Creator = "creator",

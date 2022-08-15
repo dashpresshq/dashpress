@@ -1,4 +1,4 @@
-import { IValueLabel } from "@gothicgeeks/design-system/dist/types";
+import { IValueLabel } from "@adminator/chromista/dist/types";
 import { IEntityField, IEntityRelation } from "shared/types";
 import {
   ConfigurationService,

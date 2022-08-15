@@ -2,12 +2,12 @@ import {
   ButtonLang,
   DataStateKeys,
   SLUG_LOADING_VALUE,
-} from "@gothicgeeks/shared";
+} from "@adminator/protozoa";
 import {
   ErrorAlert,
   FormSkeleton,
   FormSkeletonSchema,
-} from "@gothicgeeks/design-system";
+} from "@adminator/chromista";
 import { SchemaForm } from "frontend/lib/form/SchemaForm";
 import { useEntityConfiguration } from "frontend/hooks/configuration/configration.store";
 import {

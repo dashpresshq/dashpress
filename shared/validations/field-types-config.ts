@@ -1,4 +1,4 @@
-import { TableFilterType } from "@gothicgeeks/design-system/dist/components/Table/filters/types";
+import { TableFilterType } from "@adminator/chromista/dist/components/Table/filters/types";
 import { SelectableAbleValidations } from "./types";
 
 // less than other field

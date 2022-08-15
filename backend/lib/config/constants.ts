@@ -1,4 +1,4 @@
-import { StringUtils } from "@gothicgeeks/shared";
+import { StringUtils } from "@adminator/protozoa";
 import { CacheAdaptorTypes } from "../cache/types";
 import { ConfigAdaptorTypes } from "../config-persistence/types";
 import { ConfigKeys } from "./types";

@@ -4,15 +4,15 @@ import {
   DeleteButton,
   SoftButton,
   Stack,
-} from "@gothicgeeks/design-system";
-import { IFEPaginatedDataState, useFEPaginatedData } from "@gothicgeeks/shared";
+} from "@adminator/chromista";
+import { IFEPaginatedDataState, useFEPaginatedData } from "@adminator/protozoa";
 import React, { useState } from "react";
 import { AppLayout } from "frontend/_layouts/app";
 import { Plus } from "react-feather";
 import { NAVIGATION_LINKS, useSetPageDetails } from "frontend/lib/routing";
 import router from "next/router";
 import { userFriendlyCase } from "frontend/lib/strings";
-import { IValueLabel } from "@gothicgeeks/design-system/dist/types";
+import { IValueLabel } from "@adminator/chromista/dist/types";
 import { SystemRoles, USER_PERMISSIONS } from "shared/types";
 import { ADMIN_ROLES_ENDPOINT, useRoleDeletionMutation } from "./roles.store";
 

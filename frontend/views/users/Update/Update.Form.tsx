@@ -1,4 +1,4 @@
-import { ButtonLang } from "@gothicgeeks/shared";
+import { ButtonLang } from "@adminator/protozoa";
 import { IFormProps } from "frontend/lib/form/types";
 import { SchemaForm } from "frontend/lib/form/SchemaForm";
 import {

@@ -6,7 +6,7 @@ import {
   useStorageApi,
   useWaitForResponseMutationOptions,
   SLUG_LOADING_VALUE,
-} from "@gothicgeeks/shared";
+} from "@adminator/protozoa";
 import { useMutation } from "react-query";
 import { CONFIGURATION_KEYS } from "../../../shared/configuration.constants";
 

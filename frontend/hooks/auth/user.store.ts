@@ -2,7 +2,7 @@ import {
   dataNotFoundMessage,
   ToastService,
   useStorageApi,
-} from "@gothicgeeks/shared";
+} from "@adminator/protozoa";
 import { NAVIGATION_LINKS } from "frontend/lib/routing";
 import { useRouter } from "next/router";
 import {

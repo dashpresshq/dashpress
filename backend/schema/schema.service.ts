@@ -1,4 +1,4 @@
-import { introspect, Entity } from "@gothicgeeks/introspect";
+import { introspect, Entity } from "@adminator/bacteria";
 import {
   CredentialsService,
   credentialsService,

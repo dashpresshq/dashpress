@@ -1,5 +1,5 @@
-import { FormButton } from "@gothicgeeks/design-system";
-import { resetFormValues, ToastService } from "@gothicgeeks/shared";
+import { FormButton } from "@adminator/chromista";
+import { resetFormValues, ToastService } from "@adminator/protozoa";
 import { Field, Form } from "react-final-form";
 import {
   IAppliedSchemaFormConfig,

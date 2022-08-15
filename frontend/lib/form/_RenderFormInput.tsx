@@ -6,9 +6,9 @@ import {
   FormSelect,
   FormSwitch,
   FormTextArea,
-} from "@gothicgeeks/design-system";
-import { ISharedFormInput } from "@gothicgeeks/design-system/dist/components/Form/_types";
-import { StringUtils } from "@gothicgeeks/shared";
+} from "@adminator/chromista";
+import { ISharedFormInput } from "@adminator/chromista/dist/components/Form/_types";
+import { StringUtils } from "@adminator/protozoa";
 import { IColorableSelection } from "shared/types";
 import { FIELD_TYPES_CONFIG_MAP } from "shared/validations";
 

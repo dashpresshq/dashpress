@@ -1,10 +1,5 @@
-import {
-  ErrorAlert,
-  SectionBox,
-  SortList,
-  Tabs,
-} from "@gothicgeeks/design-system";
-import { useRouteParam } from "@gothicgeeks/shared";
+import { ErrorAlert, SectionBox, SortList, Tabs } from "@adminator/chromista";
+import { useRouteParam } from "@adminator/protozoa";
 import { useChangeRouterParam, useSetPageDetails } from "frontend/lib/routing";
 import { USER_PERMISSIONS } from "shared/types";
 import {

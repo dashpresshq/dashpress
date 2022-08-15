@@ -1,5 +1,5 @@
-import { SectionBox, SectionCenter } from "@gothicgeeks/design-system";
-import { TitleLang } from "@gothicgeeks/shared";
+import { SectionBox, SectionCenter } from "@adminator/chromista";
+import { TitleLang } from "@adminator/protozoa";
 import { useNavigationStack, useSetPageDetails } from "frontend/lib/routing";
 import { META_USER_PERMISSIONS } from "shared/types";
 import { AppLayout } from "../../../_layouts/app";

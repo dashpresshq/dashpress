@@ -8,11 +8,11 @@ import {
   useApiQueries,
   SLUG_LOADING_VALUE,
   useWaitForResponseMutationOptions,
-} from "@gothicgeeks/shared";
+} from "@adminator/protozoa";
 import qs from "qs";
 import { useRouter } from "next/router";
 import { useMutation } from "react-query";
-import { FilterOperators } from "@gothicgeeks/design-system";
+import { FilterOperators } from "@adminator/chromista";
 import { QueryFilter } from "shared/types";
 import { NAVIGATION_LINKS } from "../../lib/routing/links";
 import { useEntityDiction } from "../entity/entity.config";

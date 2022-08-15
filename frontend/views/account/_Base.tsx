@@ -3,8 +3,8 @@ import {
   SectionRight,
   SectionRow,
   MenuSection,
-} from "@gothicgeeks/design-system";
-import { AuthService } from "@gothicgeeks/shared";
+} from "@adminator/chromista";
+import { AuthService } from "@adminator/protozoa";
 import { useRouter } from "next/router";
 import { ReactNode } from "react";
 import { NAVIGATION_LINKS } from "../../lib/routing/links";

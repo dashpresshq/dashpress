@@ -4,7 +4,7 @@ import {
   RenderList,
   SectionListItem,
   Spacer,
-} from "@gothicgeeks/design-system";
+} from "@adminator/chromista";
 import React, { useEffect, useState } from "react";
 import { useStringSelections } from "../../../lib/selection";
 

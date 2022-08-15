@@ -1,4 +1,4 @@
-import { GuestLayout } from "@gothicgeeks/design-system";
+import { GuestLayout } from "@adminator/chromista";
 import React, { ReactNode } from "react";
 import Head from "next/head";
 import { useSiteConfig } from "../../hooks/app/site.config";

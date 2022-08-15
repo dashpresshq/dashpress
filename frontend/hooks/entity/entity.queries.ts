@@ -1,4 +1,4 @@
-import { AppStorage, useApiQueries } from "@gothicgeeks/shared";
+import { AppStorage, useApiQueries } from "@adminator/protozoa";
 import { useCallback } from "react";
 import { userFriendlyCase } from "../../lib/strings";
 import { configurationApiPath } from "../configuration/configration.store";

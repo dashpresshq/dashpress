@@ -5,7 +5,7 @@ import {
   Spacer,
   Stack,
   Text,
-} from "@gothicgeeks/design-system";
+} from "@adminator/chromista";
 import styled from "styled-components";
 import * as StyledGrid from "styled-bootstrap-grid";
 import { useRouter } from "next/router";

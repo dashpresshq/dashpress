@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { AppWrapper } from "@gothicgeeks/design-system";
+import { AppWrapper } from "@adminator/chromista";
 
 function MyApp({ Component, pageProps }) {
   return (

@@ -1,4 +1,4 @@
-import { ErrorAlert, SectionBox } from "@gothicgeeks/design-system";
+import { ErrorAlert, SectionBox } from "@adminator/chromista";
 import { useSetPageDetails } from "frontend/lib/routing";
 import { USER_PERMISSIONS } from "shared/types";
 import { ENTITY_CONFIGURATION_VIEW } from "./constants";

@@ -2,8 +2,8 @@ import {
   FormSkeleton,
   FormSkeletonSchema,
   SectionBox,
-} from "@gothicgeeks/design-system";
-import { SLUG_LOADING_VALUE } from "@gothicgeeks/shared";
+} from "@adminator/chromista";
+import { SLUG_LOADING_VALUE } from "@adminator/protozoa";
 import { useSetPageDetails } from "frontend/lib/routing";
 import { createViewStateMachine } from "frontend/lib/create-view-state-machine";
 import { USER_PERMISSIONS } from "shared/types";

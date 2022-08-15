@@ -5,8 +5,8 @@ import {
   Spacer,
   Tabs,
   Text,
-} from "@gothicgeeks/design-system";
-import { SLUG_LOADING_VALUE, useRouteParam } from "@gothicgeeks/shared";
+} from "@adminator/chromista";
+import { SLUG_LOADING_VALUE, useRouteParam } from "@adminator/protozoa";
 import { useChangeRouterParam, useSetPageDetails } from "frontend/lib/routing";
 import { USER_PERMISSIONS } from "shared/types";
 import {

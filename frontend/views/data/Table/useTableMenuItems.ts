@@ -1,4 +1,4 @@
-import { IDropDownMenuItem } from "@gothicgeeks/design-system";
+import { IDropDownMenuItem } from "@adminator/chromista";
 import {
   useEntityCrudSettings,
   useEntityDiction,

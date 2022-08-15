@@ -3,7 +3,7 @@ import {
   makePostRequest,
   MutationsLang,
   useWaitForResponseMutationOptions,
-} from "@gothicgeeks/shared";
+} from "@adminator/protozoa";
 import { SETUP_CHECK_URL } from "frontend/hooks/setup/setup.store";
 import { useRouter } from "next/router";
 import { useMutation } from "react-query";

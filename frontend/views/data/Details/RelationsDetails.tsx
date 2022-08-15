@@ -1,5 +1,5 @@
-import { SectionBox } from "@gothicgeeks/design-system";
-import { TitleLang, useRouteParam } from "@gothicgeeks/shared";
+import { SectionBox } from "@adminator/chromista";
+import { TitleLang, useRouteParam } from "@adminator/protozoa";
 import {
   NAVIGATION_LINKS,
   useNavigationStack,

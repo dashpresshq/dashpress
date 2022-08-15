@@ -1,6 +1,6 @@
 import * as React from "react";
 import { render, screen } from "@testing-library/react";
-import { AppWrapper } from "@gothicgeeks/design-system";
+import { AppWrapper } from "@adminator/chromista";
 // import { rest, server } from "__tests__/server";
 // import singletonRouter from "next/router";
 import mockRouter from "next-router-mock";

@@ -2,7 +2,7 @@ import {
   dataNotFoundMessage,
   useApi,
   useApiQueries,
-} from "@gothicgeeks/shared";
+} from "@adminator/protozoa";
 import { IEntityField, IEntityRelation } from "shared/types";
 import { isRouterParamEnabled } from "..";
 import { ILabelValue } from "../../../types";

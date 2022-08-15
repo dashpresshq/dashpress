@@ -5,8 +5,8 @@ import {
   SectionBox,
   SectionCenter,
   Spacer,
-} from "@gothicgeeks/design-system";
-import { TitleLang } from "@gothicgeeks/shared";
+} from "@adminator/chromista";
+import { TitleLang } from "@adminator/protozoa";
 import {
   useAuthenticatedUserBag,
   useUserHasPermission,

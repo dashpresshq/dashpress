@@ -1,4 +1,4 @@
-import { FormButton, FormInput } from "@gothicgeeks/design-system";
+import { FormButton, FormInput } from "@adminator/chromista";
 import { Form, Field } from "react-final-form";
 import {
   ButtonLang,
@@ -6,7 +6,7 @@ import {
   maxLength,
   required,
   VALIDATION_LENGTH,
-} from "@gothicgeeks/shared";
+} from "@adminator/protozoa";
 import { IFormProps } from "frontend/lib/form/types";
 
 interface IDictionSettings {

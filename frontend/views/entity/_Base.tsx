@@ -5,7 +5,7 @@ import {
   MenuSection,
   SoftButton,
   Spacer,
-} from "@gothicgeeks/design-system";
+} from "@adminator/chromista";
 import { useNavigationStack } from "frontend/lib/routing";
 import { useRouter } from "next/router";
 import { ReactNode } from "react";

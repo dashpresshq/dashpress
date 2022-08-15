@@ -1,4 +1,4 @@
-import { createStore } from "@gothicgeeks/shared";
+import { createStore } from "@adminator/protozoa";
 
 type IStore = {
   entity: string;

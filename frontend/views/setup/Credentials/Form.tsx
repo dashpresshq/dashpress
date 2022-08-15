@@ -4,9 +4,9 @@ import {
   FormButton,
   FormNumberInput,
   FormSelect,
-} from "@gothicgeeks/design-system";
+} from "@adminator/chromista";
 import { Form, Field } from "react-final-form";
-import { required, StringUtils } from "@gothicgeeks/shared";
+import { required, StringUtils } from "@adminator/protozoa";
 import { IFormProps } from "frontend/lib/form/types";
 import { IDBCrendentials, SupportedDatabaseTypes } from "shared/types";
 

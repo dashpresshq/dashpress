@@ -3,7 +3,7 @@ import {
   FormSkeleton,
   FormSkeletonSchema,
   SectionBox,
-} from "@gothicgeeks/design-system";
+} from "@adminator/chromista";
 import { useAuthenticatedUserBag } from "frontend/hooks/auth/user.store";
 import { useSetPageDetails } from "frontend/lib/routing";
 import { META_USER_PERMISSIONS } from "shared/types";

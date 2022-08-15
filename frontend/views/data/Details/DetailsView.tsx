@@ -3,8 +3,8 @@ import {
   ErrorAlert,
   Spacer,
   Text,
-} from "@gothicgeeks/design-system";
-import { SLUG_LOADING_VALUE } from "@gothicgeeks/shared";
+} from "@adminator/chromista";
+import { SLUG_LOADING_VALUE } from "@adminator/protozoa";
 import React from "react";
 import {
   useEntityFieldLabels,

@@ -7,14 +7,14 @@ import {
   Spacer,
   Tabs,
   Text,
-} from "@gothicgeeks/design-system";
+} from "@adminator/chromista";
 import {
   ENTITY_RELATIONS_ENDPOINT,
   useEntityFields,
   useEntityReferenceFields,
   useEntityRelationsList,
 } from "frontend/hooks/entity/entity.store";
-import { SLUG_LOADING_VALUE, useRouteParam } from "@gothicgeeks/shared";
+import { SLUG_LOADING_VALUE, useRouteParam } from "@adminator/protozoa";
 import { useChangeRouterParam, useSetPageDetails } from "frontend/lib/routing";
 import { EntitiesSelection } from "frontend/views/settings/Entities/Selection";
 import { useEntityDictionPlurals } from "frontend/hooks/entity/entity.queries";

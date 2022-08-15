@@ -1,5 +1,5 @@
 import { IEntityRelation } from "shared/types";
-import { DataStateKeys } from "@gothicgeeks/shared";
+import { DataStateKeys } from "@adminator/protozoa";
 
 export const getEntitiesTabsCount = (
   type: IEntityRelation["type"],

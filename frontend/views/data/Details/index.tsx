@@ -1,5 +1,5 @@
-import { SectionBox } from "@gothicgeeks/design-system";
-import { TitleLang } from "@gothicgeeks/shared";
+import { SectionBox } from "@adminator/chromista";
+import { TitleLang } from "@adminator/protozoa";
 import { useEntityDataDeletionMutation } from "frontend/hooks/data/data.store";
 import {
   NAVIGATION_LINKS,

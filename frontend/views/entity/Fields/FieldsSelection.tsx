@@ -7,11 +7,11 @@ import {
   SoftButton,
   Spacer,
   Stack,
-} from "@gothicgeeks/design-system";
+} from "@adminator/chromista";
 import { Form, Field } from "react-final-form";
 import arrayMutators from "final-form-arrays";
 import { FieldArray } from "react-final-form-arrays";
-import { required, composeValidators, ButtonLang } from "@gothicgeeks/shared";
+import { required, composeValidators, ButtonLang } from "@adminator/protozoa";
 import React, { useState } from "react";
 import styled from "styled-components";
 import { isNotEmpty } from "class-validator";

@@ -627,9 +627,9 @@
   resolved "https://registry.yarnpkg.com/@gar/promisify/-/promisify-1.1.3.tgz#555193ab2e3bb3b6adc3d551c9c030d9e860daf6"
   integrity sha512-k2Ty1JcVojjJFwrg/ThKi2ujJ7XNLYaFGNB/bWT9wGR+oSMJHMa5w+CUq6p/pVrKeNNgA7pCqEcjSnHVoqJQFw==
 
-"@gothicgeeks/design-system@git+ssh://git@github.com:thrownullexception/design-system.git#9c68c4026c090174ab317bbe152674d7dc9f5005":
-  version "0.2.96"
-  resolved "git+ssh://git@github.com:thrownullexception/design-system.git#9c68c4026c090174ab317bbe152674d7dc9f5005"
+"@gothicgeeks/design-system@git+ssh://git@github.com:thrownullexception/design-system.git#0727399d0e94737f6b20dfdf5d0b699fb1e03b13":
+  version "0.2.98"
+  resolved "git+ssh://git@github.com:thrownullexception/design-system.git#0727399d0e94737f6b20dfdf5d0b699fb1e03b13"
   dependencies:
     "@fortawesome/fontawesome-svg-core" "^6.1.1"
     "@fortawesome/free-solid-svg-icons" "^6.1.1"

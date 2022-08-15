@@ -83,20 +83,16 @@ export function SelectionTab({
                 <SectionListItem
                   label={getEntityFieldLabels(menuItem.name)}
                   key={menuItem.name}
-                  actionButtons={
+                  toggle={
                     enabled
-                      ? [
-                          {
-                            isInverse: isHidden,
-                            text: isHidden ? "Show" : "Hide",
-                            onClick: () => {
-                              setTouched(true);
-                              toggleSelection(menuItem.name);
-                            },
-                            isMakingRequest: false,
+                      ? {
+                          selected: !isHidden,
+                          onChange: () => {
+                            setTouched(true);
+                            toggleSelection(menuItem.name);
                           },
-                        ]
-                      : []
+                        }
+                      : undefined
                   }
                 />
               );

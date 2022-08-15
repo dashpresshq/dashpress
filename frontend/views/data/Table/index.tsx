@@ -11,8 +11,6 @@ import {
 } from "../../entity/constants";
 import { EntityTableView } from "./TableView";
 
-// TODO sync table to url
-// TODO when table passes a limit then a non synced columns to show
 export function EntityTable() {
   const entity = useEntitySlug();
   const entityDiction = useEntityDiction(entity);

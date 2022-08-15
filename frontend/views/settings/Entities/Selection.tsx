@@ -69,22 +69,17 @@ export function EntitiesSelection({
             isLoading={isLoading}
             render={(menuItem) => {
               const isHidden = currentPageSelection.includes(menuItem.name);
-
               return (
                 <SectionListItem
                   label={getEntityFieldLabels(menuItem.name)}
                   key={menuItem.name}
-                  actionButtons={[
-                    {
-                      isInverse: isHidden,
-                      text: isHidden ? "Show" : "Hide",
-                      onClick: () => {
-                        setTouched(true);
-                        toggleSelection(menuItem.name);
-                      },
-                      isMakingRequest: false,
+                  toggle={{
+                    selected: !isHidden,
+                    onChange: () => {
+                      setTouched(true);
+                      toggleSelection(menuItem.name);
                     },
-                  ]}
+                  }}
                 />
               );
             }}

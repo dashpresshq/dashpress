@@ -50,7 +50,7 @@ export function RolePermissions() {
     ),
   ];
 
-  // TODO need to show the entity label here
+  // TODO need to show the real entity label here
 
   return (
     <AppLayout>
@@ -86,24 +86,16 @@ export function RolePermissions() {
                   <SectionListItem
                     label={userFriendlyCase(menuItem.name)}
                     key={menuItem.name}
-                    actionButtons={[
-                      {
-                        isInverse: isPermissionSelected,
-                        text: isPermissionSelected ? "Drop" : "Add",
-                        onClick: () => {
-                          if (isPermissionSelected) {
-                            rolePermissionDeletionMutation.mutate(
-                              menuItem.name
-                            );
-                          } else {
-                            rolePermissionCreationMutation.mutate(
-                              menuItem.name
-                            );
-                          }
-                        },
-                        isMakingRequest: false,
+                    toggle={{
+                      selected: isPermissionSelected,
+                      onChange: () => {
+                        if (isPermissionSelected) {
+                          rolePermissionDeletionMutation.mutate(menuItem.name);
+                        } else {
+                          rolePermissionCreationMutation.mutate(menuItem.name);
+                        }
                       },
-                    ]}
+                    }}
                   />
                 );
               }}

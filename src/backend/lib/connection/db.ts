@@ -1,5 +1,5 @@
 import knex from "knex";
-import { IDBCrendentials, SupportedDatabaseTypes } from "shared/types";
+import { IDBCredentials, SupportedDatabaseTypes } from "shared/types";
 
 const SupportedDatabaseTypeToKnexClientMap: Record<
   SupportedDatabaseTypes,
@@ -11,7 +11,7 @@ const SupportedDatabaseTypeToKnexClientMap: Record<
   sqlite: "better-sqlite3",
 };
 
-export const getKnexConnection = async (dbCredentials: IDBCrendentials) => {
+export const getKnexConnection = async (dbCredentials: IDBCredentials) => {
   const connection = knex({
     client: SupportedDatabaseTypeToKnexClientMap[dbCredentials.databaseType],
     connection: {

@@ -5,7 +5,11 @@ import {
   SoftButton,
   Stack,
 } from "@adminator/chromista";
-import { IFEPaginatedDataState, useFEPaginatedData } from "@adminator/protozoa";
+import {
+  IBEPaginatedDataState,
+  IFEPaginatedDataState,
+  useFEPaginatedData,
+} from "@adminator/protozoa";
 import React, { useState } from "react";
 import { AppLayout } from "frontend/_layouts/app";
 import { UserPlus } from "react-feather";
@@ -20,7 +24,7 @@ import {
 
 export function ListUsers() {
   const [paginatedDataState, setPaginatedDataState] = useState<
-    IFEPaginatedDataState<IAccountUser>
+    IFEPaginatedDataState<IAccountUser> | IBEPaginatedDataState
   >({ ...DEFAULT_TABLE_PARAMS, pageIndex: 1 });
 
   useSetPageDetails({

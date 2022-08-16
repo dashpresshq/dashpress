@@ -4,11 +4,11 @@ import { AppWrapper } from "@adminator/chromista";
 // import { rest, server } from "__tests__/server";
 // import singletonRouter from "next/router";
 import mockRouter from "next-router-mock";
-import DBCrendentials from "../../pages/setup/credentials";
+import DBCredentials from "../../pages/setup/credentials";
 
 jest.mock("next/router", () => require("next-router-mock"));
 
-describe("<DBCrendentials />", () => {
+describe("<DBCredentials />", () => {
   beforeEach(() => {
     mockRouter.setCurrentUrl("/initial");
   });
@@ -16,15 +16,13 @@ describe("<DBCrendentials />", () => {
   it("should render form", async () => {
     render(
       <AppWrapper>
-        <DBCrendentials />
+        <DBCredentials />
       </AppWrapper>
     );
 
     // expect(singletonRouter.pathname).toBe("/initial");
 
-    expect(
-      await screen.findByText("Setup DB crendentials")
-    ).toBeInTheDocument();
+    expect(await screen.findByText("Setup DB credentials")).toBeInTheDocument();
 
     // expect(singletonRouter.pathname).toBe("/initial");
 
@@ -32,7 +30,7 @@ describe("<DBCrendentials />", () => {
   });
 });
 
-// describe("<DBCrendentials /> 2", () => {
+// describe("<DBCredentials /> 2", () => {
 //   //   beforeEach(() => {
 //   //     server.use(
 //   //       rest.get(
@@ -52,7 +50,7 @@ describe("<DBCrendentials />", () => {
 //   it("should redirect to users page when DB credentials is set", async () => {
 //     render(
 //       <AppWrapper>
-//         <DBCrendentials />
+//         <DBCredentials />
 //       </AppWrapper>
 //     );
 

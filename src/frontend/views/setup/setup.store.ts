@@ -9,7 +9,7 @@ import { useRouter } from "next/router";
 import { useMutation } from "react-query";
 import { ISetupUserForm } from "shared/form-schemas/setup/user";
 import {
-  IDBCrendentials,
+  IDBCredentials,
   ISuccessfullAuthenticationResponse,
 } from "shared/types";
 import { NAVIGATION_LINKS } from "../../lib/routing/links";
@@ -27,7 +27,7 @@ export function useSetupCredentialsMutation() {
   });
 
   return useMutation(
-    async (data: IDBCrendentials) =>
+    async (data: IDBCredentials) =>
       await makePostRequest(`/api/setup/credentials`, data),
     apiMutateOptions
   );

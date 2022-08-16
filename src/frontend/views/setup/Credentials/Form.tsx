@@ -8,7 +8,7 @@ import {
 import { Form, Field } from "react-final-form";
 import { required, StringUtils } from "@adminator/protozoa";
 import { IFormProps } from "frontend/lib/form/types";
-import { IDBCrendentials, SupportedDatabaseTypes } from "shared/types";
+import { IDBCredentials, SupportedDatabaseTypes } from "shared/types";
 
 const DEFAULT_DATABASE_TYPE_PORT: Record<SupportedDatabaseTypes, number> = {
   [SupportedDatabaseTypes.MySql]: 3306,
@@ -17,9 +17,7 @@ const DEFAULT_DATABASE_TYPE_PORT: Record<SupportedDatabaseTypes, number> = {
   [SupportedDatabaseTypes.MsSql]: 1433,
 };
 
-export function CredentialsSetupForm({
-  onSubmit,
-}: IFormProps<IDBCrendentials>) {
+export function CredentialsSetupForm({ onSubmit }: IFormProps<IDBCredentials>) {
   return (
     <Form
       onSubmit={onSubmit}

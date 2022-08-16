@@ -1,9 +1,9 @@
 import { setupController } from "backend/setup/setup.controller";
 import { IAppliedSchemaFormConfig } from "shared/form-schemas";
-import { SupportedDatabaseTypes, IDBCrendentials } from "shared/types";
+import { SupportedDatabaseTypes, IDBCredentials } from "shared/types";
 import { requestHandler } from "../../../backend/lib/request";
 
-const credentialRequestSchema: IAppliedSchemaFormConfig<IDBCrendentials> = {
+const credentialRequestSchema: IAppliedSchemaFormConfig<IDBCredentials> = {
   databaseType: {
     type: "selection",
     validations: [

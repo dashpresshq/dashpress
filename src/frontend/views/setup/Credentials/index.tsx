@@ -23,8 +23,8 @@ export function CredentialsSetup() {
 
   return (
     <AuthLayout
-      title="Setup DB crendentials"
-      subTitle="Enter the crendentials of the data you want to manage"
+      title="Setup DB credentials"
+      subTitle="Enter the credentials of the data you want to manage"
     >
       <CredentialsSetupForm onSubmit={setupCredentialsMutation.mutateAsync} />
     </AuthLayout>

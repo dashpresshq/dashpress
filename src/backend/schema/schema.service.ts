@@ -4,7 +4,7 @@ import {
   credentialsService,
 } from "backend/credentials/credentials.service";
 import { CREDENTIALS_DOMAINS } from "backend/credentials/crendential.types";
-import { IDBCrendentials, IDBSchema, IEntityField } from "shared/types";
+import { IDBCredentials, IDBSchema, IEntityField } from "shared/types";
 import {
   createConfigDomainPersistenceService,
   AbstractConfigDataPersistenceService,
@@ -23,7 +23,7 @@ export class SchemasService {
       return this.dbSchema;
     }
     const dbCredentials =
-      await this._credentialsService.getDomainCredentials<IDBCrendentials>(
+      await this._credentialsService.getDomainCredentials<IDBCredentials>(
         CREDENTIALS_DOMAINS.database
       );
 

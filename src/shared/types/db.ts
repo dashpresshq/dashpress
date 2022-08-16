@@ -38,7 +38,7 @@ export enum SupportedDatabaseTypes {
   Sqlite = "sqlite",
 }
 
-export type IDBCrendentials = {
+export type IDBCredentials = {
   databaseType: SupportedDatabaseTypes;
   host: string;
   user: string;

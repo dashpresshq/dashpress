@@ -5,7 +5,11 @@ import {
   SoftButton,
   Stack,
 } from "@adminator/chromista";
-import { IFEPaginatedDataState, useFEPaginatedData } from "@adminator/protozoa";
+import {
+  IBEPaginatedDataState,
+  IFEPaginatedDataState,
+  useFEPaginatedData,
+} from "@adminator/protozoa";
 import React, { useState } from "react";
 import { AppLayout } from "frontend/_layouts/app";
 import { Plus } from "react-feather";
@@ -18,7 +22,7 @@ import { ADMIN_ROLES_ENDPOINT, useRoleDeletionMutation } from "./roles.store";
 
 export function ListRoles() {
   const [paginatedDataState, setPaginatedDataState] = useState<
-    IFEPaginatedDataState<IValueLabel>
+    IFEPaginatedDataState<IValueLabel> | IBEPaginatedDataState
   >({ ...DEFAULT_TABLE_PARAMS, pageIndex: 1 });
 
   useSetPageDetails({

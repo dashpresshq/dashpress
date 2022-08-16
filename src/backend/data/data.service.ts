@@ -4,7 +4,7 @@ import get from "lodash/get";
 import { credentialsService } from "backend/credentials/credentials.service";
 import { getKnexConnection } from "backend/lib/connection/db";
 import { CREDENTIALS_DOMAINS } from "backend/credentials/crendential.types";
-import { IDBCrendentials, QueryFilter } from "shared/types";
+import { IDBCredentials, QueryFilter } from "shared/types";
 import { IPaginationFilters } from "./types";
 
 export class DataService {
@@ -15,8 +15,8 @@ export class DataService {
       return this._dbInstance;
     }
 
-    const dbCredentials: IDBCrendentials =
-      await credentialsService.getDomainCredentials<IDBCrendentials>(
+    const dbCredentials: IDBCredentials =
+      await credentialsService.getDomainCredentials<IDBCredentials>(
         CREDENTIALS_DOMAINS.database
       );
 

@@ -6,6 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "prestart": "npm run build",
     "prepare": "husky install",
     "test": "jest --detectOpenHandles --runInBand",
     "typecheck": "tsc",

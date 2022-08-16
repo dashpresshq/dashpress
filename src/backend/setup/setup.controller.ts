@@ -9,7 +9,7 @@ import { usersService, UsersService } from "backend/users/users.service";
 import {
   IAccountUser,
   SystemRoles,
-  IDBCrendentials,
+  IDBCredentials,
   ISetupCheck,
 } from "shared/types";
 
@@ -51,7 +51,7 @@ export class SetupController {
     return await this._usersService.tryAuthenticate(user);
   }
 
-  async setUpDBCredentials(dbCrendetials: IDBCrendentials) {
+  async setUpDBCredentials(dbCrendetials: IDBCredentials) {
     if (
       await this._credentialsService.hasDomainCredentials(
         CREDENTIALS_DOMAINS.database

@@ -14,14 +14,25 @@ To set up a development environment, please follow these steps:
 1. Clone the repo
 
    ```sh
-   git clone https://github.com/thrownullexception/adminator
+   git clone https://github.com/adminatorhq/adminator  <project_name> && cd <project_name>
    ```
 
-2. TODO
+2. Install dependencies
+
+   ```sh
+   yarn install
+   ```
+
+3. Run the app
+
+   ```sh
+   npm run dev
+   ```
+
 
 ## Issues and feature requests
 
-You've found a bug in the source code, a mistake in the documentation or maybe you'd like a new feature?Take a look at [GitHub Discussions](https://github.com/thrownullexception/adminator/discussions) to see if it's already being discussed.  You can help us by [submitting an issue on GitHub](https://github.com/thrownullexception/adminator/issues). Before you create an issue, make sure to search the issue archive -- your issue may have already been addressed!
+You've found a bug in the source code, a mistake in the documentation or maybe you'd like a new feature?Take a look at [GitHub Discussions](https://github.com/adminatorhq/adminator/discussions) to see if it's already being discussed.  You can help us by [submitting an issue on GitHub](https://github.com/adminatorhq/adminator/issues). Before you create an issue, make sure to search the issue archive -- your issue may have already been addressed!
 
 Please try to create bug reports that are:
 
@@ -35,10 +46,10 @@ Please try to create bug reports that are:
 ### How to submit a Pull Request
 
 1. Search our repository for open or closed
-   [Pull Requests](https://github.com/thrownullexception/adminator/pulls)
+   [Pull Requests](https://github.com/adminatorhq/adminator/pulls)
    that relate to your submission. You don't want to duplicate effort.
 2. Fork the project
 3. Create your feature branch (`git checkout -b feat/amazing_feature`)
 4. Commit your changes (`git commit -m 'feat: add amazing_feature'`) Adminator uses [conventional commits](https://www.conventionalcommits.org), so please follow the specification in your commit messages.
 5. Push to the branch (`git push origin feat/amazing_feature`)
-6. [Open a Pull Request](https://github.com/thrownullexception/adminator/compare?expand=1)
+6. [Open a Pull Request](https://github.com/adminatorhq/adminator/compare?expand=1)

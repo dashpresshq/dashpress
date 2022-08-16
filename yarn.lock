@@ -18,9 +18,9 @@
     pg "^8.7.3"
     sqlite3 "^5.0.8"
 
-"@adminator/chromista@git+https://github.com/adminatorhq/chromista.git#1c12938ad97698286a2abac904e7005cd546a272":
-  version "0.2.101"
-  resolved "git+https://github.com/adminatorhq/chromista.git#1c12938ad97698286a2abac904e7005cd546a272"
+"@adminator/chromista@git+https://github.com/adminatorhq/chromista.git#046d2a7d5cd029fee46da8c73eee3c9af28ded6c":
+  version "0.2.103"
+  resolved "git+https://github.com/adminatorhq/chromista.git#046d2a7d5cd029fee46da8c73eee3c9af28ded6c"
   dependencies:
     "@adminator/protozoa" "git+https://github.com/adminatorhq/protozoa.git#e692186aa58909fcd7dd301abd6deb2b2d0db6bb"
     "@fortawesome/fontawesome-svg-core" "^6.1.1"

@@ -32,7 +32,7 @@
 
 - [About](#about)
   - [How it looks](#how-it-looks)
-  - [Built With](#built-with)
+  - [Motivation](#motivation)
 - [Getting Started](#getting-started)
   - [Prerequisites](#prerequisites)
   - [Installation](#installation)
@@ -45,7 +45,7 @@
 - [Authors & contributors](#authors--contributors)
 - [Security](#security)
 - [License](#license)
-- [Acknowledgements](#acknowledgements)
+- [Built With](#acknowledgements)
 
 </details>
 
@@ -55,13 +55,15 @@
 
 Adminator is a internal dashboard framework that reflects your database models. It is all batteries included but extremely customizable in the UI through checkboxes and text inputs
 
-
 ### How it looks
 <img src="docs/images/screenshot.png" title="Home Page" width="100%">
 
-### Built With
+### Motivation
+There are lot of good internal dashboard tools out there, The ones bundled with your framework are good but not usually highly customizable and they are obviously tied to your framework, The good ones are paid for and the free version are usually heavily restricted
+The motivation for Adminator is to build something that is language or framework agnostic, doesn't need to watch vidoes for days to learn to use their drag and drop system, 
+Even though is free, it is featured packed enough for most users to not look for a paid solution
 
-- KnexJS, NextJS, Typescript, React Query, React Table
+
 ## Getting Started
 
 ### Prerequisites
@@ -92,7 +94,8 @@ After installation, You will be asked to provide your database credentials and c
 
 ## Features
  - Authentication
- - Authorization
+ - Role and Permissions
+ - Rich text editor
  - Users management
  - Deep navigation
  - CRUD
@@ -153,13 +156,21 @@ Adminator is provided **"as is"** without any **warranty**. Use at your own risk
 
 _For more information and to report security issues, please refer to our [security documentation](docs/SECURITY.md)._
 
+## Built With
+- KnexJS
+- NextJS
+- Typescript
+- React Query
+- React Table
+- React Final Form
+- Styled-components
+- Class Validator
+- Zustand 
+- Bootstrap
+- Prismjs
+
 ## License
 
 This project is licensed under the **GNU General Public License v3**.
 
 See [LICENSE](LICENSE) for more information.
-
-## Acknowledgements
-
-> **[?]**
-> If your work relies on other software libraries, or was inspired by looking at other work, it is appropriate to acknowledge this intellectual debt too.

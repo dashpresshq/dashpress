@@ -36,7 +36,7 @@ export function TableActions({ crudSettings, row, entity }: IProps) {
             action={NAVIGATION_LINKS.ENTITY.UPDATE(entity, idValue)}
             label="Edit"
             icon="edit"
-            color="theme"
+            color="primary"
             justIcon
           />
         </div>

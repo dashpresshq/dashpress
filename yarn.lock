@@ -18,11 +18,11 @@
     pg "^8.7.3"
     sqlite3 "^5.0.8"
 
-"@adminator/chromista@git+https://github.com/adminatorhq/chromista.git#046d2a7d5cd029fee46da8c73eee3c9af28ded6c":
-  version "0.2.103"
-  resolved "git+https://github.com/adminatorhq/chromista.git#046d2a7d5cd029fee46da8c73eee3c9af28ded6c"
+"@adminator/chromista@git+https://github.com/adminatorhq/chromista.git#59c224e0b462fc5781fa2561567611d959cba84f":
+  version "0.2.104"
+  resolved "git+https://github.com/adminatorhq/chromista.git#59c224e0b462fc5781fa2561567611d959cba84f"
   dependencies:
-    "@adminator/protozoa" "git+https://github.com/adminatorhq/protozoa.git#e692186aa58909fcd7dd301abd6deb2b2d0db6bb"
+    "@adminator/protozoa" "git+https://github.com/adminatorhq/protozoa.git#790e501c4aeabed2786050235349fd29698ae32a"
     "@fortawesome/fontawesome-svg-core" "^6.1.1"
     "@fortawesome/free-solid-svg-icons" "^6.1.1"
     "@fortawesome/react-fontawesome" "^0.1.18"
@@ -79,16 +79,15 @@
     eslint-plugin-testing-library "^5.5.1"
     prettier "^2.7.1"
 
-"@adminator/protozoa@git+https://github.com/adminatorhq/protozoa.git#e692186aa58909fcd7dd301abd6deb2b2d0db6bb":
-  version "0.2.46"
-  resolved "git+https://github.com/adminatorhq/protozoa.git#e692186aa58909fcd7dd301abd6deb2b2d0db6bb"
+"@adminator/protozoa@git+https://github.com/adminatorhq/protozoa.git#790e501c4aeabed2786050235349fd29698ae32a":
+  version "0.2.47"
+  resolved "git+https://github.com/adminatorhq/protozoa.git#790e501c4aeabed2786050235349fd29698ae32a"
   dependencies:
     "@types/lodash" "^4.14.182"
     "@types/nprogress" "^0.2.0"
     "@types/pluralize" "^0.0.29"
     "@types/qs" "^6.9.7"
     "@types/ramda" "0.27.40"
-    "@types/randomstring" "^1.1.8"
     "@types/react" "^18.0.11"
     "@types/uuid" "^8.3.4"
     date-fns "^2.28.0"
@@ -1668,11 +1667,6 @@
   integrity sha512-V99ZfTH2tqVYdLDAlgh2uT+N074HPgqnAsMjALKSBqogYd0HbuuGMqNukJ6fk9Ml/Htaus76fsc4Yh3p7q1VdQ==
   dependencies:
     ts-toolbelt "^6.15.1"
-
-"@types/randomstring@^1.1.8":
-  version "1.1.8"
-  resolved "https://registry.yarnpkg.com/@types/randomstring/-/randomstring-1.1.8.tgz#799ce94adbe162964e655df954bf3dc85576747d"
-  integrity sha512-NPOJcW+TTjT9Qiog0UjSoG3Sj24c7EfzZO39BU9E61D7fQtwNmBNblyQhSsK9+5s9Fm0o31rvX+ZyZkpE/c7jA==
 
 "@types/react-datepicker@^4.4.1":
   version "4.4.2"

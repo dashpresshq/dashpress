@@ -16,9 +16,9 @@
     "verify": "npm run typecheck && npm run lint && npm run test"
   },
   "dependencies": {
-    "@adminator/chromista": "git+https://github.com/adminatorhq/chromista.git#046d2a7d5cd029fee46da8c73eee3c9af28ded6c",
+    "@adminator/chromista": "git+https://github.com/adminatorhq/chromista.git#59c224e0b462fc5781fa2561567611d959cba84f",
     "@adminator/bacteria": "git+https://github.com/adminatorhq/bacteria.git#74cbab862bf48848d60ee860db7f647a28480acf",
-    "@adminator/protozoa": "git+https://github.com/adminatorhq/protozoa.git#e692186aa58909fcd7dd301abd6deb2b2d0db6bb",
+    "@adminator/protozoa": "git+https://github.com/adminatorhq/protozoa.git#790e501c4aeabed2786050235349fd29698ae32a",
     "@types/cryptr": "^4.0.1",
     "@types/jsonwebtoken": "^8.5.8",
     "bcrypt": "^5.0.1",

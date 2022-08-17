@@ -51,7 +51,7 @@ export class SetupController {
     return await this._usersService.tryAuthenticate(user);
   }
 
-  async setUpDBCredentials(dbCrendetials: IDBCredentials) {
+  async setUpDBCredentials(dbCredentials: IDBCredentials) {
     if (
       await this._credentialsService.hasDomainCredentials(
         CREDENTIALS_DOMAINS.database
@@ -63,7 +63,7 @@ export class SetupController {
     }
 
     try {
-      await getKnexConnection(dbCrendetials);
+      await getKnexConnection(dbCredentials);
     } catch (error: unknown) {
       throw new BadRequestError(
         `Couldn't not connect to database '${(error as Error).message}'`
@@ -72,7 +72,7 @@ export class SetupController {
 
     await this._credentialsService.upsertDomainCredentials(
       CREDENTIALS_DOMAINS.database,
-      dbCrendetials
+      dbCredentials
     );
   }
 }

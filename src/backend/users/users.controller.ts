@@ -11,8 +11,8 @@ export class UsersController {
     private _rolesService: RolesService
   ) {}
 
-  async login(authCrendetials: ISignInForm) {
-    return await this._usersService.tryAuthenticate(authCrendetials);
+  async login(authCredentials: ISignInForm) {
+    return await this._usersService.tryAuthenticate(authCredentials);
   }
 
   async listUsers() {

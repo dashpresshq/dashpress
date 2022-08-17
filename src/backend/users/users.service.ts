@@ -18,18 +18,18 @@ export class UsersService {
     private readonly _authTokenService: AuthTokenService
   ) {}
 
-  async tryAuthenticate(authCrendetials: {
+  async tryAuthenticate(authCredentials: {
     username: string;
     password: string;
   }): Promise<ISuccessfullAuthenticationResponse> {
     const user = await this._usersPersistenceService.getItem(
-      authCrendetials.username
+      authCredentials.username
     );
 
     if (!user) {
       throw new ForbiddenError(INVALID_LOGIN_MESSAGE);
     }
-    if (!(await HashService.compare(authCrendetials.password, user.password))) {
+    if (!(await HashService.compare(authCredentials.password, user.password))) {
       throw new ForbiddenError(INVALID_LOGIN_MESSAGE);
     }
     delete user.password;

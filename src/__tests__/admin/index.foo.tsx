@@ -3,7 +3,7 @@ import React from "react";
 import { rest } from "msw";
 import { setupServer } from "msw/node";
 import { render } from "@testing-library/react";
-import Dashboard from "src/pages";
+import Dashboard from "pages/admin";
 
 const server = setupServer(
   rest.get("/api/entities/menu", (_, res, ctx) => {

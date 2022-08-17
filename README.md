@@ -56,7 +56,7 @@
 Adminator is a internal dashboard framework that reflects your database models. It is all batteries included but extremely customizable in the UI through checkboxes and text inputs
 
 ### How it looks
-<img src="docs/images/screenshot.png" title="Home Page" width="100%">
+<img src="./docs/demo.gif" title="Adminator Demo" width="100%">
 
 ### Motivation
 There are lot of good internal dashboard tools out there, The ones bundled with your framework are good but not usually highly customizable and they are obviously tied to your framework, The good ones are paid for and the free version are usually heavily restricted

@@ -33,6 +33,7 @@
 - [About](#about)
   - [How it looks](#how-it-looks)
   - [Motivation](#motivation)
+  - [Why you should try Adminator](#why-you-should-try-adminator)
 - [Getting Started](#getting-started)
   - [Prerequisites](#prerequisites)
   - [Installation](#installation)
@@ -53,16 +54,23 @@
 
 ## About
 
-Adminator is a internal dashboard framework that reflects your database models. It is all batteries included but extremely customizable in the UI through checkboxes and text inputs
+Adminator is a admin dashboard framework that reflects your database models. It is all batteries included and extremely customizable
 
 ### How it looks
 <img src="./docs/demo.gif" title="Adminator Demo" width="100%">
 
 ### Motivation
-There are lot of good internal dashboard tools out there, The ones bundled with your framework are good but not usually highly customizable and they are obviously tied to your framework, The good ones are paid for and the free version are usually heavily restricted
-The motivation for Adminator is to build something that is language or framework agnostic, doesn't need to watch vidoes for days to learn to use their drag and drop system, 
-Even though is free, it is featured packed enough for most users to not look for a paid solution
+There are lot of good internal dashboard tools out there, The ones bundled with your framework are usually good but not usually highly customizable so they usually dont end up in your clients hand. The good ones are paid for and the free version are usually heavily restricted and they usually require weeks to master with some techinical know-how of SQL and javascript
 
+Adminator takes another approach to building internal apps by building all the features you will ever need based on the metadata of your database which you can also edit in the app and allowing you to toogle off the ones you dont need
+
+### Why you should try Adminator
+- It is free
+- Easy to setup, You setup it all up literally as fast you can type your DB credentials
+- Little learning curve with almost zero technical knowledge requirement
+- Lot of features that you will expect from a paid solution
+- It is not tied to any language or framework
+- Lastly, It is open source, It doesn't get more customizable than that
 
 ## Getting Started
 
@@ -86,11 +94,11 @@ $ cd <project_name>
 $ yarn install
 
 # Run the app
-$ npm run start
+$ npm run dev
 ```
 
 ## Usage
-After installation, You will be asked to provide your database credentials and create your admin account and you will be able to start using the application
+After installation, You will be asked to provide your database credentials and create your admin account then you will be able to start using the application
 
 ## Features
  - Authentication
@@ -157,17 +165,17 @@ Adminator is provided **"as is"** without any **warranty**. Use at your own risk
 _For more information and to report security issues, please refer to our [security documentation](docs/SECURITY.md)._
 
 ## Built With
-- KnexJS
-- NextJS
-- Typescript
-- React Query
-- React Table
-- React Final Form
-- Styled-components
-- Class Validator
-- Zustand 
-- Bootstrap
-- Prismjs
+- [KnexJS](https://github.com/knex/knex)
+- [React](https://github.com/facebook/react)
+- [NextJS](https://github.com/vercel/next.js)
+- [Typescript](https://github.com/microsoft/TypeScript)
+- [React Query](https://github.com/TanStack/query)
+- [React Table](https://github.com/TanStack/table)
+- [React Final Form](https://github.com/final-form/react-final-form)
+- [Styled-components](https://github.com/styled-components/styled-components)
+- [Class Validator](https://github.com/typestack/class-validator)
+- [Zustand](https://github.com/pmndrs/zustand) 
+- [Prismjs](https://github.com/PrismJS/prism)
 
 ## License
 

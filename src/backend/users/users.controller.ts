@@ -2,7 +2,11 @@ import { RolesService, rolesService } from "backend/roles/roles.service";
 import { ISignInForm } from "shared/form-schemas/auth/signin";
 import { IChangePasswordForm } from "shared/form-schemas/profile/password";
 import { IResetPasswordForm } from "shared/form-schemas/users/reset-password";
-import { IAccountUser, IAuthenticatedUserBag } from "shared/types";
+import {
+  IAccountProfile,
+  IAccountUser,
+  IAuthenticatedUserBag,
+} from "shared/types";
 import { UsersService, usersService } from "./users.service";
 
 export class UsersController {
@@ -52,7 +56,7 @@ export class UsersController {
     await this._usersService.changePassword(username, input);
   }
 
-  async updateProfile(username: string, userDetails: IAccountUser) {
+  async updateProfile(username: string, userDetails: IAccountProfile) {
     await this._usersService.updateUser(username, userDetails);
   }
 }

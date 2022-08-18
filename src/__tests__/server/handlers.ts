@@ -1,7 +1,7 @@
 import { rest } from "msw";
 
 const handlers = [
-  rest.get("http://localhost:3000/api/setup/check", async (_, res, ctx) => {
+  rest.get("http://api.test.com/api/setup/check", async (_, res, ctx) => {
     return res(
       ctx.json({
         hasUsers: false,

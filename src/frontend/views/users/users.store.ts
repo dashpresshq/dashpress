@@ -13,7 +13,7 @@ import { useRouter } from "next/router";
 import { useMutation } from "react-query";
 import { ICreateUserForm } from "shared/form-schemas/users/create";
 import { IResetPasswordForm } from "shared/form-schemas/users/reset-password";
-import { IAccountUser } from "shared/types";
+import { IAccountProfile } from "shared/types";
 import { useUsernameFromRouteParam } from "./hooks";
 
 export const ADMIN_USERS_LIST_ENDPOINT = "/api/account";
@@ -22,7 +22,7 @@ export const ADMIN_USER_DETAILS_ENDPOINT = (username: string) =>
   `/api/account/${username}`;
 
 export function useUserDetails(username: string) {
-  return useApi<IAccountUser>(ADMIN_USER_DETAILS_ENDPOINT(username), {
+  return useApi<IAccountProfile>(ADMIN_USER_DETAILS_ENDPOINT(username), {
     enabled: isRouterParamEnabled(username),
     errorMessage: dataNotFoundMessage("User details"),
   });
@@ -55,7 +55,7 @@ export function useUpdateUserMutation() {
   });
 
   return useMutation(
-    async (data: Partial<IAccountUser>) =>
+    async (data: Partial<IAccountProfile>) =>
       await makePatchRequest(ADMIN_USER_DETAILS_ENDPOINT(username), data),
     apiMutateOptions
   );

@@ -8,6 +8,8 @@ type IAccount = {
   password: string;
 };
 
+jest.mock("next/router", () => require("next-router-mock"));
+
 describe("<SchemaForm />", () => {
   it("should render form", async () => {
     render(

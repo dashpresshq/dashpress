@@ -21,7 +21,9 @@ export interface IAccountUser {
   role: string;
 }
 
-export interface IAuthenticatedUserBag extends Omit<IAccountUser, "password"> {
+export type IAccountProfile = Omit<IAccountUser, "password">;
+
+export interface IAuthenticatedUserBag extends IAccountProfile {
   permissions: string[];
 }
 

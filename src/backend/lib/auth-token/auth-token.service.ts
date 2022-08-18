@@ -1,5 +1,5 @@
 import jsonwebtoken from "jsonwebtoken";
-import { IAccountUser } from "shared/types";
+import { IAccountProfile } from "shared/types";
 import {
   ConfigKeys,
   configService,
@@ -20,18 +20,18 @@ export class AuthTokenService {
     );
   }
 
-  async verify(token: string): Promise<Omit<IAccountUser, "password">> {
+  async verify(token: string): Promise<IAccountProfile> {
     return new Promise((resolve, reject) => {
       jsonwebtoken.verify(token, this.authToken, (err, decoded) => {
         if (err) {
           return reject(err);
         }
-        return resolve(decoded as IAccountUser);
+        return resolve(decoded as IAccountProfile);
       });
     });
   }
 
-  sign(payload: Omit<IAccountUser, "password">): string {
+  sign(payload: IAccountProfile): string {
     return jsonwebtoken.sign(payload, this.authToken, {
       expiresIn: `${this.tokenValiditityDurationInDays}d`,
     });

@@ -92,7 +92,6 @@ describe("/api/requestHandler", () => {
         "name": "BadRequestError",
         "path": "",
         "statusCode": 400,
-        "validations": Object {},
       }
     `);
   });

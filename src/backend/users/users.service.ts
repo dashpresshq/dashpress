@@ -8,7 +8,11 @@ import {
 } from "backend/lib/config-persistence";
 import { BadRequestError, ForbiddenError } from "backend/lib/errors";
 import { HashService } from "backend/lib/hash/hash.service";
-import { ISuccessfullAuthenticationResponse, IAccountUser } from "shared/types";
+import {
+  ISuccessfullAuthenticationResponse,
+  IAccountUser,
+  IAccountProfile,
+} from "shared/types";
 
 const INVALID_LOGIN_MESSAGE = "Invalid Login";
 
@@ -68,7 +72,7 @@ export class UsersService {
     await this._usersPersistenceService.removeItem(username);
   }
 
-  async getUser(username: string): Promise<Omit<IAccountUser, "password">> {
+  async getUser(username: string): Promise<IAccountProfile> {
     const user = await this._usersPersistenceService.getItem(username);
     delete user.password;
     return user;

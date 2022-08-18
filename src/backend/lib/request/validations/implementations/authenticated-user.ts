@@ -1,8 +1,8 @@
-import { IAccountUser } from "shared/types";
+import { IAccountProfile } from "shared/types";
 import { ValidationImplType } from "./types";
 
 export const authenticatedUserValidationImpl: ValidationImplType<
-  IAccountUser
+  IAccountProfile
 > = async (req) => {
   if (!req.user) {
     throw new Error(

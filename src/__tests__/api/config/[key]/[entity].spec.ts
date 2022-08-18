@@ -1,11 +1,11 @@
-import { createMocks } from "node-mocks-http";
+import { createAuthenticatedMocks } from "__tests__/helpers";
 import handler from "../../../../pages/api/config/[key]/[entity]";
 
 // TODO check that the before entity keys are empty before testing
 
 describe("/api/config/[key]/[entity]", () => {
   it("should return save keys", async () => {
-    const { req, res } = createMocks({
+    const { req, res } = createAuthenticatedMocks({
       method: "GET",
       query: {
         key: "entity_diction",
@@ -23,7 +23,7 @@ describe("/api/config/[key]/[entity]", () => {
   });
 
   it("should request for entity when required", async () => {
-    const { req, res } = createMocks({
+    const { req, res } = createAuthenticatedMocks({
       method: "GET",
       query: {
         key: "entity_diction",
@@ -42,7 +42,7 @@ describe("/api/config/[key]/[entity]", () => {
   });
 
   it("should return default value for empty entity keys", async () => {
-    const { req, res } = createMocks({
+    const { req, res } = createAuthenticatedMocks({
       method: "GET",
       query: {
         key: "entity_diction",
@@ -60,7 +60,7 @@ describe("/api/config/[key]/[entity]", () => {
   });
 
   it("should return default value for empty config key", async () => {
-    const { req, res } = createMocks({
+    const { req, res } = createAuthenticatedMocks({
       method: "GET",
       query: {
         key: "hidden_entity_table_columns",
@@ -75,7 +75,7 @@ describe("/api/config/[key]/[entity]", () => {
   });
 
   it("should return 400 for invalid keys", async () => {
-    const { req, res } = createMocks({
+    const { req, res } = createAuthenticatedMocks({
       method: "GET",
       query: {
         key: "some invalid key",
@@ -93,7 +93,7 @@ describe("/api/config/[key]/[entity]", () => {
   });
   //
   it("should update config when present", async () => {
-    const putReq = createMocks({
+    const putReq = createAuthenticatedMocks({
       method: "PUT",
       query: {
         key: "entity_diction",
@@ -111,7 +111,7 @@ describe("/api/config/[key]/[entity]", () => {
 
     expect(putReq.res._getStatusCode()).toBe(204);
 
-    const getReq = createMocks({
+    const getReq = createAuthenticatedMocks({
       method: "GET",
       query: {
         key: "entity_diction",
@@ -129,7 +129,7 @@ describe("/api/config/[key]/[entity]", () => {
   });
 
   it("should create config when not present for entity", async () => {
-    const putReq = createMocks({
+    const putReq = createAuthenticatedMocks({
       method: "PUT",
       query: {
         key: "entity_diction",
@@ -147,7 +147,7 @@ describe("/api/config/[key]/[entity]", () => {
 
     expect(putReq.res._getStatusCode()).toBe(204);
 
-    const getReq = createMocks({
+    const getReq = createAuthenticatedMocks({
       method: "GET",
       query: {
         key: "entity_diction",
@@ -165,7 +165,7 @@ describe("/api/config/[key]/[entity]", () => {
   });
 
   it("should create config when not config key is not present", async () => {
-    const putReq = createMocks({
+    const putReq = createAuthenticatedMocks({
       method: "PUT",
       query: {
         key: "entity_columns_labels",
@@ -183,7 +183,7 @@ describe("/api/config/[key]/[entity]", () => {
 
     expect(putReq.res._getStatusCode()).toBe(204);
 
-    const getReq = createMocks({
+    const getReq = createAuthenticatedMocks({
       method: "GET",
       query: {
         key: "entity_columns_labels",

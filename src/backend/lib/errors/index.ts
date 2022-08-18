@@ -6,7 +6,7 @@ export class CustomError extends Error {
 
   errorCode?: string;
 
-  validations?: Record<string, unknown> = {};
+  validations?: Record<string, unknown>;
 
   name: string;
 
@@ -36,10 +36,7 @@ export class ForbiddenError extends CustomError {
 }
 
 export class BadRequestError extends CustomError {
-  constructor(
-    message = "Invalid Request",
-    validations: Record<string, unknown> = {}
-  ) {
+  constructor(message: string, validations?: Record<string, unknown>) {
     super(400, "BadRequestError", message);
     this.validations = validations;
   }

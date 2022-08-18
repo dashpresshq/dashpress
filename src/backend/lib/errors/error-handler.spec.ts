@@ -8,17 +8,30 @@ describe("/api/error/handling", () => {
       method: "GET",
     });
 
-    await requestHandler({
-      GET: async () => {
-        throw new BadRequestError("Name is required");
+    await requestHandler(
+      {
+        GET: async () => {
+          throw new BadRequestError("Name is required", { name: "Required" });
+        },
       },
-    })(req, res);
+      [
+        {
+          _type: "guest",
+        },
+      ]
+    )(req, res);
 
     expect(res._getStatusCode()).toBe(400);
     expect(res._getJSONData()).toMatchInlineSnapshot(`
       Object {
         "message": "Name is required",
+        "method": "GET",
         "name": "BadRequestError",
+        "path": "",
+        "statusCode": 400,
+        "validations": Object {
+          "name": "Required",
+        },
       }
     `);
   });
@@ -28,17 +41,27 @@ describe("/api/error/handling", () => {
       method: "GET",
     });
 
-    await requestHandler({
-      GET: async () => {
-        throw new NotFoundError("User not found");
+    await requestHandler(
+      {
+        GET: async () => {
+          throw new NotFoundError("User not found");
+        },
       },
-    })(req, res);
+      [
+        {
+          _type: "guest",
+        },
+      ]
+    )(req, res);
 
     expect(res._getStatusCode()).toBe(404);
     expect(res._getJSONData()).toMatchInlineSnapshot(`
       Object {
         "message": "User not found",
+        "method": "GET",
         "name": "BadRequestError",
+        "path": "",
+        "statusCode": 404,
       }
     `);
   });
@@ -48,17 +71,31 @@ describe("/api/error/handling", () => {
       method: "GET",
     });
 
-    await requestHandler({
-      GET: async () => {
-        throw new ForbiddenError("Access to resource is denied");
+    await requestHandler(
+      {
+        GET: async () => {
+          throw new ForbiddenError(
+            "Access to resource is denied",
+            "DEMO_ERROR_CODE"
+          );
+        },
       },
-    })(req, res);
+      [
+        {
+          _type: "guest",
+        },
+      ]
+    )(req, res);
 
     expect(res._getStatusCode()).toBe(401);
     expect(res._getJSONData()).toMatchInlineSnapshot(`
       Object {
+        "errorCode": "DEMO_ERROR_CODE",
         "message": "Access to resource is denied",
+        "method": "GET",
         "name": "ForbiddenError",
+        "path": "",
+        "statusCode": 401,
       }
     `);
   });
@@ -68,16 +105,26 @@ describe("/api/error/handling", () => {
       method: "GET",
     });
 
-    await requestHandler({
-      GET: async () => {
-        throw new Error("Something went wrong");
+    await requestHandler(
+      {
+        GET: async () => {
+          throw new Error("Something went wrong");
+        },
       },
-    })(req, res);
+      [
+        {
+          _type: "guest",
+        },
+      ]
+    )(req, res);
 
     expect(res._getStatusCode()).toBe(500);
     expect(res._getJSONData()).toMatchInlineSnapshot(`
       Object {
         "message": "Something went wrong",
+        "method": "GET",
+        "path": "",
+        "statusCode": 500,
       }
     `);
   });

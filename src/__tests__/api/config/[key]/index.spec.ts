@@ -1,11 +1,11 @@
-import { createMocks } from "node-mocks-http";
 import handler from "pages/api/config/[key]/index";
+import { createAuthenticatedMocks } from "__tests__/helpers";
 
 // TODO check that the before enttity keys are empty before testing
 
 describe("/api/config/[key]/index", () => {
   it("should return saved keys", async () => {
-    const { req, res } = createMocks({
+    const { req, res } = createAuthenticatedMocks({
       method: "GET",
       query: {
         key: "disabled_entities",
@@ -19,7 +19,7 @@ describe("/api/config/[key]/index", () => {
   });
 
   it("should return default value for empty keys", async () => {
-    const { req, res } = createMocks({
+    const { req, res } = createAuthenticatedMocks({
       method: "GET",
       query: {
         key: "entities_order",
@@ -33,7 +33,7 @@ describe("/api/config/[key]/index", () => {
   });
 
   it("should return 400 for invalid keys", async () => {
-    const { req, res } = createMocks({
+    const { req, res } = createAuthenticatedMocks({
       method: "GET",
       query: {
         key: "some invalid key",
@@ -50,7 +50,7 @@ describe("/api/config/[key]/index", () => {
   });
 
   it("should update config when present", async () => {
-    const putReq = createMocks({
+    const putReq = createAuthenticatedMocks({
       method: "PUT",
       query: {
         key: "disabled_entities",
@@ -64,7 +64,7 @@ describe("/api/config/[key]/index", () => {
 
     expect(putReq.res._getStatusCode()).toBe(204);
 
-    const getReq = createMocks({
+    const getReq = createAuthenticatedMocks({
       method: "GET",
       query: {
         key: "disabled_entities",
@@ -78,7 +78,7 @@ describe("/api/config/[key]/index", () => {
   });
 
   it("should create config when not present", async () => {
-    const putReq = createMocks({
+    const putReq = createAuthenticatedMocks({
       method: "PUT",
       query: {
         key: "entities_order",
@@ -92,7 +92,7 @@ describe("/api/config/[key]/index", () => {
 
     expect(putReq.res._getStatusCode()).toBe(204);
 
-    const getReq = createMocks({
+    const getReq = createAuthenticatedMocks({
       method: "GET",
       query: {
         key: "entities_order",

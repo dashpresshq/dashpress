@@ -33,9 +33,6 @@ export class JsonFileConfigDataPersistenceAdaptor<
   }
 
   private async persist(data: Record<string, T>) {
-    if (this.configService.getNodeEnvironment() === NodeEnvironments.Test) {
-      return;
-    }
     await fs.writeJson(this.pathToConfigDomain(this.configDomain), data, {
       spaces: 2,
     });

@@ -36,7 +36,10 @@ describe("/api/config/[key]/[entity]", () => {
     expect(res._getJSONData()).toMatchInlineSnapshot(`
       Object {
         "message": "Configuration of key 'entity_diction' requires entity",
+        "method": "GET",
         "name": "BadRequestError",
+        "path": "",
+        "statusCode": 400,
       }
     `);
   });
@@ -86,10 +89,15 @@ describe("/api/config/[key]/[entity]", () => {
     await handler(req, res);
 
     expect(res._getStatusCode()).toBe(400);
-    expect(res._getJSONData()).toEqual({
-      message: "Configuration doesn't key 'some invalid key' doesn't exist",
-      name: "BadRequestError",
-    });
+    expect(res._getJSONData()).toMatchInlineSnapshot(`
+      Object {
+        "message": "Configuration key 'some invalid key' doesn't exist",
+        "method": "GET",
+        "name": "BadRequestError",
+        "path": "",
+        "statusCode": 400,
+      }
+    `);
   });
   //
   it("should update config when present", async () => {

@@ -1,9 +1,26 @@
 {
-  "disabled_entities": ["bar", "baz"],
+  "disabled_entities": [
+    "bar",
+    "baz"
+  ],
   "entity_diction": {
     "foo": {
-      "singular": "Singular Foo",
-      "plural": "Plural Foo"
+      "singular": "Singular Updated",
+      "plural": "Plural Updated"
+    },
+    "fish": {
+      "singular": "New Singular",
+      "plural": "New Plural"
+    }
+  },
+  "entities_order": [
+    "order-1",
+    "order-2"
+  ],
+  "entity_columns_labels": {
+    "foo": {
+      "userName": "User Name",
+      "updatedAt": "Last Login"
     }
   }
 }

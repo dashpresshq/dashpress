@@ -8,9 +8,7 @@ export const configKeyFilterValidationImpl: ValidationImplType<
   const key = req.query.key as string;
   const configBag = CONFIGURATION_KEYS[key];
   if (!configBag) {
-    throw new BadRequestError(
-      `Configuration doesn't key '${key}' doesn't exist`
-    );
+    throw new BadRequestError(`Configuration key '${key}' doesn't exist`);
   }
   if (configBag.requireEntity && !req.query.entity) {
     throw new BadRequestError(`Configuration of key '${key}' requires entity`);

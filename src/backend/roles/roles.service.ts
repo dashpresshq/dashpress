@@ -11,7 +11,7 @@ import {
   SystemRoles,
 } from "shared/types";
 
-interface IRole {
+export interface IRole {
   id: string;
   permissions: string[];
 }

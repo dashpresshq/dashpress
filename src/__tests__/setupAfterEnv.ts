@@ -1,9 +1,13 @@
 import { cleanup } from "@testing-library/react";
-import { server } from "./server";
-
 import "@testing-library/jest-dom/extend-expect";
 
-beforeAll(() => server.listen());
+import { setupAllTestData } from "./setup-test-data";
+import { server } from "./server";
+
+beforeAll(async () => {
+  server.listen();
+  await setupAllTestData();
+});
 
 afterEach(() => {
   cleanup();

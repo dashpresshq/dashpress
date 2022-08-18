@@ -70,10 +70,10 @@ export function BaseEntitySettingsLayout({ children }: IProps) {
                 action: NAVIGATION_LINKS.ENTITY.CONFIG.FORM(entity),
                 name: "Form",
               },
-              {
-                action: NAVIGATION_LINKS.ENTITY.CONFIG.ACTIONS(entity),
-                name: "//Table Tabs",
-              },
+              // {
+              //   action: NAVIGATION_LINKS.ENTITY.CONFIG.ACTIONS(entity),
+              //   name: "//Table Tabs",
+              // },
               // Computed Table fields
               // Computed Details fields
             ]}

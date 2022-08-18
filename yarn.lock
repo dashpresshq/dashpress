@@ -2,9 +2,9 @@
 # yarn lockfile v1
 
 
-"@adminator/bacteria@git+https://github.com/adminatorhq/bacteria.git#74cbab862bf48848d60ee860db7f647a28480acf":
-  version "0.1.4"
-  resolved "git+https://github.com/adminatorhq/bacteria.git#74cbab862bf48848d60ee860db7f647a28480acf"
+"@adminator/bacteria@git+https://github.com/adminatorhq/bacteria.git#4e156104933dcf3fdf7a1f806aa41670639cebb0":
+  version "0.1.5"
+  resolved "git+https://github.com/adminatorhq/bacteria.git#4e156104933dcf3fdf7a1f806aa41670639cebb0"
   dependencies:
     "@types/fs-extra" "^9.0.13"
     "@types/mssql" "^8.0.3"
@@ -18,11 +18,11 @@
     pg "^8.7.3"
     sqlite3 "^5.0.8"
 
-"@adminator/chromista@git+https://github.com/adminatorhq/chromista.git#59c224e0b462fc5781fa2561567611d959cba84f":
-  version "0.2.104"
-  resolved "git+https://github.com/adminatorhq/chromista.git#59c224e0b462fc5781fa2561567611d959cba84f"
+"@adminator/chromista@git+https://github.com/adminatorhq/chromista.git#42354bffebe6ef8458f4bdaeb19d3ff34ff665a5":
+  version "0.2.105"
+  resolved "git+https://github.com/adminatorhq/chromista.git#42354bffebe6ef8458f4bdaeb19d3ff34ff665a5"
   dependencies:
-    "@adminator/protozoa" "git+https://github.com/adminatorhq/protozoa.git#790e501c4aeabed2786050235349fd29698ae32a"
+    "@adminator/protozoa" "git+https://github.com/adminatorhq/protozoa.git#cd123d7e97e2d7f8b6ad8f5c731d7f2bbb6169e7"
     "@fortawesome/fontawesome-svg-core" "^6.1.1"
     "@fortawesome/free-solid-svg-icons" "^6.1.1"
     "@fortawesome/react-fontawesome" "^0.1.18"
@@ -79,36 +79,9 @@
     eslint-plugin-testing-library "^5.5.1"
     prettier "^2.7.1"
 
-"@adminator/protozoa@git+https://github.com/adminatorhq/protozoa.git#5617a27abd1882bfb1fcddbf0989fd484be0f149":
-  version "0.2.48"
-  resolved "git+https://github.com/adminatorhq/protozoa.git#5617a27abd1882bfb1fcddbf0989fd484be0f149"
-  dependencies:
-    "@types/lodash" "^4.14.182"
-    "@types/nprogress" "^0.2.0"
-    "@types/pluralize" "^0.0.29"
-    "@types/qs" "^6.9.7"
-    "@types/ramda" "0.27.40"
-    "@types/react" "^18.0.11"
-    "@types/uuid" "^8.3.4"
-    date-fns "^2.28.0"
-    final-form "^4.20.7"
-    immer "9.0.3"
-    lodash "^4.17.21"
-    next "^12.1.6"
-    nprogress "^0.2.0"
-    pluralize "^8.0.0"
-    ramda "0.27.1"
-    randomstring "^1.2.2"
-    react "18.1.0"
-    react-dom "18.1.0"
-    react-hot-toast "^2.2.0"
-    react-query "^3.39.1"
-    uuid "^8.3.2"
-    zustand "3.4.2"
-
-"@adminator/protozoa@git+https://github.com/adminatorhq/protozoa.git#790e501c4aeabed2786050235349fd29698ae32a":
-  version "0.2.47"
-  resolved "git+https://github.com/adminatorhq/protozoa.git#790e501c4aeabed2786050235349fd29698ae32a"
+"@adminator/protozoa@git+https://github.com/adminatorhq/protozoa.git#cd123d7e97e2d7f8b6ad8f5c731d7f2bbb6169e7":
+  version "0.2.50"
+  resolved "git+https://github.com/adminatorhq/protozoa.git#cd123d7e97e2d7f8b6ad8f5c731d7f2bbb6169e7"
   dependencies:
     "@types/lodash" "^4.14.182"
     "@types/nprogress" "^0.2.0"

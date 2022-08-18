@@ -2,9 +2,10 @@
 # yarn lockfile v1
 
 
-"@adminator/bacteria@git+https://github.com/adminatorhq/bacteria.git#4e156104933dcf3fdf7a1f806aa41670639cebb0":
-  version "0.1.5"
-  resolved "git+https://github.com/adminatorhq/bacteria.git#4e156104933dcf3fdf7a1f806aa41670639cebb0"
+"@adminator/bacteria@^0.1.6":
+  version "0.1.6"
+  resolved "https://registry.yarnpkg.com/@adminator/bacteria/-/bacteria-0.1.6.tgz#3e25ea257c58cb8fadca06c7fa1b13e39a01a87a"
+  integrity sha512-ylAJ578aAjvKBfPCTiFlLkT80tn6iSuXf0i4KRG2l2wynoGZNXtq71AKPqq3sqyjiPSEXRTzTLp+aFHRJBPf/Q==
   dependencies:
     "@types/fs-extra" "^9.0.13"
     "@types/mssql" "^8.0.3"
@@ -18,11 +19,12 @@
     pg "^8.7.3"
     sqlite3 "^5.0.8"
 
-"@adminator/chromista@git+https://github.com/adminatorhq/chromista.git#42354bffebe6ef8458f4bdaeb19d3ff34ff665a5":
-  version "0.2.105"
-  resolved "git+https://github.com/adminatorhq/chromista.git#42354bffebe6ef8458f4bdaeb19d3ff34ff665a5"
+"@adminator/chromista@^0.2.106":
+  version "0.2.106"
+  resolved "https://registry.yarnpkg.com/@adminator/chromista/-/chromista-0.2.106.tgz#c0a19a0cfaf8955b40edaff164d8e3d3994a1755"
+  integrity sha512-syMaRBhQqm6/SGZFjaqkc6GAKThyqd0rvfygFrO/8mu7K8tXaVnl6k/Ejvo3Heji0Xnf6YSzdEWUFs16heHbjA==
   dependencies:
-    "@adminator/protozoa" "git+https://github.com/adminatorhq/protozoa.git#cd123d7e97e2d7f8b6ad8f5c731d7f2bbb6169e7"
+    "@adminator/protozoa" "^0.2.51"
     "@fortawesome/fontawesome-svg-core" "^6.1.1"
     "@fortawesome/free-solid-svg-icons" "^6.1.1"
     "@fortawesome/react-fontawesome" "^0.1.18"
@@ -59,9 +61,10 @@
     tiny-skeleton-loader-react "^1.1.8"
     zustand "3.4.2"
 
-"@adminator/eslint-config@git+https://github.com/adminatorhq/eslint-config.git#fa543075dfc90bd210834a53c16ecb6775ee781f":
+"@adminator/eslint-config@^0.1.8":
   version "0.1.8"
-  resolved "git+https://github.com/adminatorhq/eslint-config.git#fa543075dfc90bd210834a53c16ecb6775ee781f"
+  resolved "https://registry.yarnpkg.com/@adminator/eslint-config/-/eslint-config-0.1.8.tgz#6da44895712480c1c355dff08a9b70ad43122d67"
+  integrity sha512-OTHu6l7KUG2MXGfqn1ha56FdCaZrjVg2YN0G2lqyxyT6RffNKAahAB3qmJOMWI+1VQpXWA3bByaVaqgf0nRrhA==
   dependencies:
     "@typescript-eslint/eslint-plugin" "^5.30.5"
     "@typescript-eslint/parser" "^5.30.5"
@@ -79,9 +82,10 @@
     eslint-plugin-testing-library "^5.5.1"
     prettier "^2.7.1"
 
-"@adminator/protozoa@git+https://github.com/adminatorhq/protozoa.git#cd123d7e97e2d7f8b6ad8f5c731d7f2bbb6169e7":
-  version "0.2.50"
-  resolved "git+https://github.com/adminatorhq/protozoa.git#cd123d7e97e2d7f8b6ad8f5c731d7f2bbb6169e7"
+"@adminator/protozoa@^0.2.51", "@adminator/protozoa@^0.2.53":
+  version "0.2.53"
+  resolved "https://registry.yarnpkg.com/@adminator/protozoa/-/protozoa-0.2.53.tgz#ca5ed8d24d15a55289bf253dd98af812017dcd18"
+  integrity sha512-QRYTwOtXpbuCmbIkJ9bgZm8IIX0+aTc9/DGo5jx4fhs3NwW6IzLWsoubyf0e99Uk/wBh5VF8ZyUc5Owdh3Av9A==
   dependencies:
     "@types/lodash" "^4.14.182"
     "@types/nprogress" "^0.2.0"

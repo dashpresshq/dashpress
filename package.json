@@ -16,9 +16,9 @@
     "verify": "npm run typecheck && npm run lint && npm run test"
   },
   "dependencies": {
-    "@adminator/bacteria": "git+https://github.com/adminatorhq/bacteria.git#4e156104933dcf3fdf7a1f806aa41670639cebb0",
-    "@adminator/chromista": "git+https://github.com/adminatorhq/chromista.git#42354bffebe6ef8458f4bdaeb19d3ff34ff665a5",
-    "@adminator/protozoa": "git+https://github.com/adminatorhq/protozoa.git#cd123d7e97e2d7f8b6ad8f5c731d7f2bbb6169e7",
+    "@adminator/bacteria": "^0.1.6",
+    "@adminator/chromista": "^0.2.106",
+    "@adminator/protozoa": "^0.2.53",
     "@types/cryptr": "^4.0.1",
     "@types/jsonwebtoken": "^8.5.8",
     "bcrypt": "^5.0.1",
@@ -46,7 +46,7 @@
     "styled-components": "^5.3.5"
   },
   "devDependencies": {
-    "@adminator/eslint-config": "git+https://github.com/adminatorhq/eslint-config.git#fa543075dfc90bd210834a53c16ecb6775ee781f",
+    "@adminator/eslint-config": "^0.1.8",
     "@babel/preset-env": "^7.18.10",
     "@babel/preset-react": "^7.18.6",
     "@babel/preset-typescript": "^7.18.6",

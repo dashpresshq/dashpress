@@ -99,8 +99,11 @@ const TEST_DB_SCHEMA: IDBSchema[] = [
   },
 ];
 
-export const setupSchemaTestData = async () =>
-  createConfigDomainPersistenceService<IDBSchema>("schema").saveAllItems(
-    "name",
-    TEST_DB_SCHEMA
-  );
+export const setupSchemaTestData = async () => {
+  const configPersistenceService =
+    createConfigDomainPersistenceService<IDBSchema>("schema");
+
+  await configPersistenceService.resetToEmpty();
+
+  await configPersistenceService.saveAllItems("name", TEST_DB_SCHEMA);
+};

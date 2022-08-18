@@ -1,4 +1,5 @@
 import { Knex } from "knex";
+import noop from "lodash/noop";
 import {
   ConfigKeys,
   configService,
@@ -26,6 +27,10 @@ export class DatabaseConfigDataPersistenceAdaptor<
 
   constructor(configDomain: ConfigDomain, _configService: ConfigService) {
     super(configDomain, _configService);
+  }
+
+  async resetToEmpty() {
+    noop("TODO");
   }
 
   async getAllItems() {

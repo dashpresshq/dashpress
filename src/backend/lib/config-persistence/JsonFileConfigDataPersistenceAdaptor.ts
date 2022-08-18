@@ -20,6 +20,10 @@ export class JsonFileConfigDataPersistenceAdaptor<
     return path.resolve(process.cwd(), ".config-data", file);
   };
 
+  async resetToEmpty() {
+    fs.removeSync(this.pathToConfigDomain(this.configDomain));
+  }
+
   private async getDomainData(): Promise<Record<string, T>> {
     try {
       return (

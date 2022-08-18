@@ -11,14 +11,16 @@ const TEST_APP_CONFIG: Record<string, unknown> = {
 };
 
 export const setupAppConfigTestData = async () => {
-  const appConfigPersistenceService =
+  const configPersistenceService =
     createConfigDomainPersistenceService("app-config");
+
+  await configPersistenceService.resetToEmpty();
 
   const configAsArray = Object.entries(TEST_APP_CONFIG);
 
   // eslint-disable-next-line no-restricted-syntax
   for (const [key, value] of configAsArray) {
     // eslint-disable-next-line no-await-in-loop
-    await appConfigPersistenceService.upsertItem(key, value);
+    await configPersistenceService.upsertItem(key, value);
   }
 };

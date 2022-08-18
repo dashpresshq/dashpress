@@ -18,6 +18,10 @@ export class MemoryConfigDataPersistenceAdaptor<
     return this.data[this.configDomain];
   }
 
+  async resetToEmpty() {
+    this.data[this.configDomain] = {};
+  }
+
   private persistDomainData(data: Record<string, T>) {
     this.data[this.configDomain] = data;
   }

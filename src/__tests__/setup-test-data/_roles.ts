@@ -25,8 +25,11 @@ const TEST_ROLES: IRole[] = [
   },
 ];
 
-export const setupRolesTestData = async () =>
-  createConfigDomainPersistenceService<IRole>("roles").saveAllItems(
-    "id",
-    TEST_ROLES
-  );
+export const setupRolesTestData = async () => {
+  const configPersistenceService =
+    createConfigDomainPersistenceService<IRole>("roles");
+
+  await configPersistenceService.resetToEmpty();
+
+  await configPersistenceService.saveAllItems("id", TEST_ROLES);
+};

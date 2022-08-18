@@ -34,4 +34,3 @@ yarn-error.log*
 tsconfig.tsbuildinfo
 
 .config-data/*.json
-!.config-data/*.test.json

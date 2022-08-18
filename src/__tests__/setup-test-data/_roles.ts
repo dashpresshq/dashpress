@@ -1,7 +1,7 @@
 import { createConfigDomainPersistenceService } from "backend/lib/config-persistence";
 import { IRole } from "backend/roles/roles.service";
 
-const TEST_ROLE: IRole[] = [
+const TEST_ROLES: IRole[] = [
   {
     id: "hello-there",
     permissions: [
@@ -28,5 +28,5 @@ const TEST_ROLE: IRole[] = [
 export const setupRolesTestData = async () =>
   createConfigDomainPersistenceService<IRole>("roles").saveAllItems(
     "id",
-    TEST_ROLE
+    TEST_ROLES
   );

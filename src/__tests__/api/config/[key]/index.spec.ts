@@ -1,5 +1,5 @@
 import { createMocks } from "node-mocks-http";
-import handler from "../../../../pages/api/config/[key]/index";
+import handler from "pages/api/config/[key]/index";
 
 // TODO check that the before enttity keys are empty before testing
 

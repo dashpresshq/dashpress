@@ -4,6 +4,12 @@ import {
   credentialsService,
 } from "backend/credentials/credentials.service";
 import { CREDENTIALS_DOMAINS } from "backend/credentials/crendential.types";
+import {
+  ConfigKeys,
+  ConfigService,
+  configService,
+} from "backend/lib/config/config.service";
+import { BooleanConfigValue } from "backend/lib/config/types";
 import { IDBCredentials, IDBSchema, IEntityField } from "shared/types";
 import {
   createConfigDomainPersistenceService,
@@ -15,13 +21,39 @@ export class SchemasService {
 
   constructor(
     private _schemaConfigDataPersistenceService: AbstractConfigDataPersistenceService<IDBSchema>,
-    private _credentialsService: CredentialsService
+    private _credentialsService: CredentialsService,
+    private _configService: ConfigService
   ) {}
 
   private async loadDbSchema(): Promise<IDBSchema[]> {
     if (this.dbSchema) {
       return this.dbSchema;
     }
+
+    this.dbSchema = await this.initDBSchema();
+
+    return this.dbSchema;
+  }
+
+  private async initDBSchema() {
+    if (
+      this._configService.getConfigValue(ConfigKeys.FORCE_INTROSPECTION) ===
+      BooleanConfigValue.TRUE
+    ) {
+      return await this.doIntrospection();
+    }
+
+    const savedDbSchema =
+      await this._schemaConfigDataPersistenceService.getAllItems();
+
+    if (savedDbSchema) {
+      return savedDbSchema;
+    }
+
+    return await this.doIntrospection();
+  }
+
+  private async doIntrospection() {
     const dbCredentials =
       await this._credentialsService.getDomainCredentials<IDBCredentials>(
         CREDENTIALS_DOMAINS.database
@@ -38,14 +70,14 @@ export class SchemasService {
       user: dbCredentials.user,
     });
 
-    this.dbSchema = this.formatIntrospectData(schema);
+    const dbSchema = this.formatIntrospectData(schema);
 
-    this._schemaConfigDataPersistenceService.saveAllItems(
+    await this._schemaConfigDataPersistenceService.saveAllItems(
       "name",
-      this.dbSchema
+      dbSchema
     );
 
-    return this.dbSchema;
+    return dbSchema;
   }
 
   private formatIntrospectData(rawEntity: Entity[]): IDBSchema[] {
@@ -93,5 +125,6 @@ const schemaPersistenceService =
 
 export const schemasService = new SchemasService(
   schemaPersistenceService,
-  credentialsService
+  credentialsService,
+  configService
 );

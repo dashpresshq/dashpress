@@ -74,7 +74,11 @@ const customJestConfig = {
   // maxWorkers: "50%",
 
   // An array of directory names to be searched recursively up from the requiring module's location
-  moduleDirectories: ["node_modules", "<rootDir>"],
+  moduleDirectories: ["node_modules", "src"],
+
+  modulePaths: ["<rootDir>/src"],
+
+  roots: ["src"],
 
   // An array of file extensions your modules use
   // moduleFileExtensions: [
@@ -133,12 +137,12 @@ const customJestConfig = {
   // The paths to modules that run some code to configure or set up the testing environment before each test
   setupFiles: [
     // "<rootDir>/__tests__/setupDotEnv.ts",
-    "<rootDir>/__tests__/setupGlobals.ts",
-    "<rootDir>/__tests__/consoleOverrides.ts",
+    "<rootDir>/src/__tests__/setupGlobals.ts",
+    "<rootDir>/src/__tests__/consoleOverrides.ts",
   ],
 
   // A list of paths to modules that run some code to configure or set up the testing framework before each test
-  setupFilesAfterEnv: ["<rootDir>/__tests__/setupAfterEnv.ts"],
+  setupFilesAfterEnv: ["<rootDir>/src/__tests__/setupAfterEnv.ts"],
 
   // The number of seconds after which a test is considered as slow and reported as such in the results.
   // slowTestThreshold: 5,

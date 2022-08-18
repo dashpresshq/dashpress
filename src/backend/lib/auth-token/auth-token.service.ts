@@ -20,7 +20,7 @@ export class AuthTokenService {
     );
   }
 
-  async verify(token: string): Promise<IAccountUser> {
+  async verify(token: string): Promise<Omit<IAccountUser, "password">> {
     return new Promise((resolve, reject) => {
       jsonwebtoken.verify(token, this.authToken, (err, decoded) => {
         if (err) {
@@ -31,7 +31,7 @@ export class AuthTokenService {
     });
   }
 
-  sign(payload: IAccountUser): string {
+  sign(payload: Omit<IAccountUser, "password">): string {
     return jsonwebtoken.sign(payload, this.authToken, {
       expiresIn: `${this.tokenValiditityDurationInDays}d`,
     });

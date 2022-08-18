@@ -53,7 +53,6 @@ export const handleResponseError = (
   const baseErrorOptions = {
     path: req.url,
     method: req.method,
-    timestamp: new Date().toISOString(),
   };
 
   if (error instanceof CustomError) {

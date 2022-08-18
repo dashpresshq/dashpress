@@ -1,7 +1,7 @@
 import { StringUtils } from "@adminator/protozoa";
 import { CacheAdaptorTypes } from "../cache/types";
 import { ConfigAdaptorTypes } from "../config-persistence/types";
-import { ConfigKeys } from "./types";
+import { BooleanConfigValue, ConfigKeys } from "./types";
 
 interface IConfigBag {
   defaultValue: () => string;
@@ -34,9 +34,9 @@ const optionsValidation = (value: string, label: string, options: string[]) => {
   }
 };
 
-const stringValidation = (value: string, label: string, optional?: true) => {
-  if (!optional && !value) {
-    throw new Error(`'${label}'is required`);
+const stringValidation = (value: string, label: string) => {
+  if (!value) {
+    throw new Error(`'${label}' is required`);
   }
 };
 
@@ -69,7 +69,7 @@ export const ConfigBag: Record<ConfigKeys, IConfigBag> = {
       return "PLACE_HOLDER_CONFIG_ADAPTOR_CONNECTION_STRING";
     },
     validate: (value) => {
-      stringValidation(value, "Config Adaptor Connection", true);
+      stringValidation(value, "Config Adaptor Connection");
     },
   },
   CONFIG_CACHE_CONNECTION_STRING: {
@@ -77,7 +77,7 @@ export const ConfigBag: Record<ConfigKeys, IConfigBag> = {
       return "PLACE_HOLDER_CONFIG_CACHE_CONNECTION_STRING";
     },
     validate: (value) => {
-      stringValidation(value, "Cache Adaptor Connection", true);
+      stringValidation(value, "Cache Adaptor Connection");
     },
   },
   ENCRYPTION_KEY: {
@@ -104,6 +104,17 @@ export const ConfigBag: Record<ConfigKeys, IConfigBag> = {
     },
     validate: (value) => {
       tokenValidations(value, "Auth token Key");
+    },
+  },
+  FORCE_INTROSPECTION: {
+    defaultValue: () => {
+      return BooleanConfigValue.FALSE;
+    },
+    validate: (value) => {
+      optionsValidation(value, "Force introspection", [
+        BooleanConfigValue.TRUE,
+        BooleanConfigValue.FALSE,
+      ]);
     },
   },
 };

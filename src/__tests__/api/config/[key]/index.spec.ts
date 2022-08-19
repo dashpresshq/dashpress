@@ -1,9 +1,14 @@
 import handler from "pages/api/config/[key]/index";
 import { createAuthenticatedMocks } from "__tests__/helpers";
+import { setupAllTestData } from "__tests__/setup-test-data";
 
 // TODO check that the before enttity keys are empty before testing
 
 describe("/api/config/[key]/index", () => {
+  beforeAll(async () => {
+    await setupAllTestData();
+  });
+
   it("should return saved keys", async () => {
     const { req, res } = createAuthenticatedMocks({
       method: "GET",

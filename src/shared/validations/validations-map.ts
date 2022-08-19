@@ -137,14 +137,12 @@ export const ENTITY_VALIDATION_CONFIG: Record<
     }, "otherField"),
   },
 
-  // Needs some work
-  // Selection, enum like check
-
   isReference: {
     isBoundToType: ["reference"],
     message: "{{ name }} doesn't exist",
     implementation: () => undefined,
   },
+
   unique: {
     message: "{{ name }} already exists",
     implementation: () => undefined,

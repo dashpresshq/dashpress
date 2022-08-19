@@ -36,4 +36,32 @@ describe("/api/roles/index", () => {
       ]
     `);
   });
+
+  it("should create new role", async () => {
+    const postRequest = createAuthenticatedMocks({
+      method: "POST",
+      body: {
+        name: "New Role",
+      },
+    });
+
+    await handler(postRequest.req, postRequest.res);
+
+    expect(postRequest.res._getStatusCode()).toBe(201);
+
+    const { req, res } = createAuthenticatedMocks({
+      method: "GET",
+    });
+
+    await handler(req, res);
+
+    expect(res._getStatusCode()).toBe(200);
+    expect(res._getJSONData()).toHaveLength(5);
+    expect(res._getJSONData()[2]).toMatchInlineSnapshot(`
+      Object {
+        "label": "New Role",
+        "value": "new-role",
+      }
+    `);
+  });
 });

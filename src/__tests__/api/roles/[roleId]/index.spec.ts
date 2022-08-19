@@ -1,5 +1,6 @@
 import handler from "pages/api/roles/[roleId]/index";
 import rolesIndexhandler from "pages/api/roles/index";
+import accountDetailsHandler from "pages/api/account/[username]/index";
 import { createAuthenticatedMocks } from "__tests__/helpers";
 import { setupRolesTestData } from "__tests__/setup-test-data/_roles";
 import { setupUsersTestData } from "__tests__/setup-test-data/_users";
@@ -47,14 +48,28 @@ describe("/api/roles/[roleId]/index", () => {
     expect(deleteRequest.res._getStatusCode()).toBe(204);
 
     // Assert that role has been deleted
-    const { req, res } = createAuthenticatedMocks({
+    const rolesIndexRequest = createAuthenticatedMocks({
       method: "GET",
     });
 
-    await rolesIndexhandler(req, res);
+    await rolesIndexhandler(rolesIndexRequest.req, rolesIndexRequest.res);
 
-    expect(res._getJSONData()).toHaveLength(3);
-    // TODO check the user role is updated
+    expect(rolesIndexRequest.res._getJSONData()).toHaveLength(3);
+
+    // Assert that user roles has been synced to `viewer`
+    const accountDetailsRequest = createAuthenticatedMocks({
+      method: "GET",
+      query: {
+        username: "role-to-delete__user",
+      },
+    });
+
+    await accountDetailsHandler(
+      accountDetailsRequest.req,
+      accountDetailsRequest.res
+    );
+
+    expect(accountDetailsRequest.res._getJSONData().role).toBe("viewer");
   });
 
   it("should update role details and propagate new role to users", async () => {
@@ -101,6 +116,19 @@ describe("/api/roles/[roleId]/index", () => {
       ]
     `);
 
-    // TODO check the user role is updated
+    // Assert that role propagates to users
+    const accountDetailsRequest = createAuthenticatedMocks({
+      method: "GET",
+      query: {
+        username: "role-to-update__user",
+      },
+    });
+
+    await accountDetailsHandler(
+      accountDetailsRequest.req,
+      accountDetailsRequest.res
+    );
+
+    expect(accountDetailsRequest.res._getJSONData().role).toBe("update-role");
   });
 });

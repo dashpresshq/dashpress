@@ -6,6 +6,11 @@ import {
   ConfigService,
 } from "../config/config.service";
 
+interface IWithJWTMetadataAccountProfile extends IAccountProfile {
+  iat: number;
+  exp: number;
+}
+
 export class AuthTokenService {
   private authToken: string;
 
@@ -20,13 +25,13 @@ export class AuthTokenService {
     );
   }
 
-  async verify(token: string): Promise<IAccountProfile> {
+  async verify(token: string): Promise<IWithJWTMetadataAccountProfile> {
     return new Promise((resolve, reject) => {
       jsonwebtoken.verify(token, this.authToken, (err, decoded) => {
         if (err) {
           return reject(err);
         }
-        return resolve(decoded as IAccountProfile);
+        return resolve(decoded as IWithJWTMetadataAccountProfile);
       });
     });
   }

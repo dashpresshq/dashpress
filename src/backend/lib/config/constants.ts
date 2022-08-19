@@ -9,21 +9,14 @@ interface IConfigBag {
 }
 
 const tokenValidations = (value: string, label: string) => {
-  const TOKEN_LENGTH = 64;
-  if (value.length < TOKEN_LENGTH) {
-    throw new Error(
-      `${label} needs to be more than ${TOKEN_LENGTH} characters`
-    );
+  if (
+    !/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*_]).{64,}$/.test(
+      value
+    )
+  ) {
+    const errorText = `${label} must contain uppercase letters, lowercase letters, numbers, special characters and be more than 64 characters`;
+    throw new Error(errorText);
   }
-  // TODO
-  // if (
-  //   !/^(?=.*[a-z])(?=.*[A-Z])(?=.*d)(?=.*[@$!%*?&])[A-Za-zd@$!%*?&]{64,}$/.test(
-  //     value
-  //   )
-  // ) {
-  //   const errorText = `${label} must contain uppercase letters, lowercase letters, numbers, special characters and be more than 64 characters`;
-  //   throw new Error(errorText);
-  // }
 };
 
 const optionsValidation = (value: string, label: string, options: string[]) => {

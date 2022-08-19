@@ -6,7 +6,7 @@ import { setupUsersTestData } from "__tests__/setup-test-data/_users";
 
 describe("/api/setup/check", () => {
   beforeAll(async () => {
-    await setupAllTestData();
+    await setupAllTestData(["credentials", "users"]);
   });
 
   it("should return true when the data exists and are valid", async () => {

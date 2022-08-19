@@ -6,7 +6,7 @@ import handler from "pages/api/config/[key]/[entity]";
 
 describe("/api/config/[key]/[entity]", () => {
   beforeAll(async () => {
-    await setupAllTestData();
+    await setupAllTestData(["app-config", "schema"]);
   });
 
   it("should return save keys", async () => {

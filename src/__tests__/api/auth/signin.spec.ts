@@ -5,7 +5,7 @@ import { authTokenService } from "backend/lib/auth-token/auth-token.service";
 
 describe("/api/auth/signin", () => {
   beforeAll(async () => {
-    await setupAllTestData();
+    await setupAllTestData(["users"]);
   });
 
   it("should sign in valid credentials", async () => {

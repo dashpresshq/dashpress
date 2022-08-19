@@ -6,7 +6,7 @@ import { setupAllTestData } from "__tests__/setup-test-data";
 
 describe("/api/config/[key]/index", () => {
   beforeAll(async () => {
-    await setupAllTestData();
+    await setupAllTestData(["app-config", "schema"]);
   });
 
   it("should return saved keys", async () => {

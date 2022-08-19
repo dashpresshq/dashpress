@@ -4,7 +4,7 @@ import { setupAllTestData } from "__tests__/setup-test-data";
 
 describe("/api/entities/list", () => {
   beforeAll(async () => {
-    await setupAllTestData();
+    await setupAllTestData(["schema"]);
   });
 
   it("should list all entities", async () => {

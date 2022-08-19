@@ -46,7 +46,7 @@ export class SchemasService {
     const savedDbSchema =
       await this._schemaConfigDataPersistenceService.getAllItems();
 
-    if (savedDbSchema) {
+    if (savedDbSchema.length > 0) {
       return savedDbSchema;
     }
 

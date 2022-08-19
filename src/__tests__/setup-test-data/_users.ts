@@ -11,11 +11,17 @@ const TEST_USERS: IAccountUser[] = [
   },
 ];
 
-export const setupUsersTestData = async () => {
+export const setupUsersTestData = async (
+  testUsers: IAccountUser[] | false = TEST_USERS
+) => {
   const configPersistenceService =
     createConfigDomainPersistenceService<IAccountUser>("users");
 
   await configPersistenceService.resetToEmpty();
 
-  await configPersistenceService.saveAllItems("username", TEST_USERS);
+  if (testUsers === false) {
+    return;
+  }
+
+  await configPersistenceService.saveAllItems("username", testUsers);
 };

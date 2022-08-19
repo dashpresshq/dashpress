@@ -1,6 +1,6 @@
 import { createAuthenticatedMocks } from "__tests__/helpers";
 import { setupAllTestData } from "__tests__/setup-test-data";
-import handler from "../../../../pages/api/config/[key]/[entity]";
+import handler from "pages/api/config/[key]/[entity]";
 
 // TODO check that the before entity keys are empty before testing
 

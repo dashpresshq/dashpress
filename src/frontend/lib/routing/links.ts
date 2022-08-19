@@ -1,15 +1,4 @@
-// TODO unit-test
-const queryObjectToQueryString = (
-  queryObject?: Record<string, string>
-): string => {
-  if (!queryObject) {
-    return "";
-  }
-  const querystring = Object.entries(queryObject)
-    .map(([key, value]) => `${key}=${value}`)
-    .join("&");
-  return `?${querystring}`;
-};
+import { queryObjectToQueryString } from "./queryObjectToQueryString";
 
 export const NAVIGATION_LINKS = {
   DASHBOARD: "/admin",

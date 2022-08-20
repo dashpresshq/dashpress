@@ -42,6 +42,15 @@ export class BadRequestError extends CustomError {
   }
 }
 
+const returnError = (
+  res: NextApiResponse,
+  statusCode: number,
+  errorBody: Record<string, unknown>
+) => {
+  console.error(errorBody);
+  return res.status(statusCode).json(errorBody);
+};
+
 export const handleResponseError = (
   req: NextApiRequest,
   res: NextApiResponse,
@@ -53,7 +62,7 @@ export const handleResponseError = (
   };
 
   if (error instanceof CustomError) {
-    return res.status(error.code).json({
+    return returnError(res, error.code, {
       message: error.message,
       statusCode: error.code,
       name: error.name,
@@ -62,7 +71,9 @@ export const handleResponseError = (
       ...baseErrorOptions,
     });
   }
-  return res
-    .status(500)
-    .json({ message: error.message, statusCode: 500, ...baseErrorOptions });
+  return returnError(res, 500, {
+    message: error.message,
+    statusCode: 500,
+    ...baseErrorOptions,
+  });
 };

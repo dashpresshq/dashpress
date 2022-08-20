@@ -47,7 +47,6 @@ const returnError = (
   statusCode: number,
   errorBody: Record<string, unknown>
 ) => {
-  console.error(errorBody);
   return res.status(statusCode).json(errorBody);
 };
 

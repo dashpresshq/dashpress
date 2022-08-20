@@ -10,6 +10,8 @@ import { ConfigDomain } from "./types";
 
 const CONFIG_TABLE_PREFIX = (domain: string) => `app-config__${domain}`;
 
+// TODO finesse
+
 export class DatabaseConfigDataPersistenceAdaptor<
   T
 > extends AbstractConfigDataPersistenceService<T> {

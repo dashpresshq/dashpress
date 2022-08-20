@@ -5,7 +5,7 @@ import { setupAppConfigTestData } from "__tests__/setup-test-data/_app-config";
 
 describe("/api/entities/menu", () => {
   beforeAll(async () => {
-    await setupAllTestData(["schema"]);
+    await setupAllTestData(["schema", "app-config"]);
   });
 
   it("should list all entities not disabled", async () => {

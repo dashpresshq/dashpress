@@ -13,11 +13,17 @@ export class ConfigurationService {
     key: keyof typeof CONFIGURATION_KEYS,
     entity?: string
   ): Promise<T> {
-    const config = await this._appConfigPersistenceService.getItem(key);
+    const value =
+      await this._appConfigPersistenceService.getItemWithMaybeSecondaryKey(
+        key,
+        entity
+      );
 
-    const { requireEntity, defaultValue } = CONFIGURATION_KEYS[key];
-    const value = requireEntity ? (config || {})[entity] : config;
-    return value || defaultValue;
+    if (value) {
+      return value as T;
+    }
+
+    return CONFIGURATION_KEYS[key].defaultValue as T;
   }
 
   async upsert(
@@ -25,19 +31,11 @@ export class ConfigurationService {
     value: unknown,
     entity?: string
   ): Promise<void> {
-    let config = await this._appConfigPersistenceService.getItem(key);
-
-    const { requireEntity } = CONFIGURATION_KEYS[key];
-
-    if (requireEntity) {
-      if (!config) {
-        config = {};
-      }
-      config[entity] = value;
-    } else {
-      config = value;
-    }
-    await this._appConfigPersistenceService.upsertItem(key, config);
+    await this._appConfigPersistenceService.upsertItemWithMaybeSecondaryKey(
+      key,
+      value,
+      entity
+    );
   }
 }
 

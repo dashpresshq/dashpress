@@ -11,13 +11,39 @@ export abstract class AbstractConfigDataPersistenceService<T> {
     this.configService = configService;
   }
 
-  // Might need to introduce second key
+  private mergeKeyWithSecondaryKey(key: string, secondaryKey: string) {
+    return `${key}__${secondaryKey}`;
+  }
+
   public abstract getItem(key: string): Promise<T | undefined>;
+
+  public async getItemWithMaybeSecondaryKey(
+    key: string,
+    secondaryKey?: string
+  ): Promise<T | undefined> {
+    if (!secondaryKey) {
+      return await this.getItem(key);
+    }
+    return await this.getItem(this.mergeKeyWithSecondaryKey(key, secondaryKey));
+  }
 
   public abstract getAllItems(): Promise<T[]>;
 
-  // Might need to introduce second key
   public abstract upsertItem(key: string, data: T): Promise<void>;
+
+  public async upsertItemWithMaybeSecondaryKey(
+    key: string,
+    value: T,
+    secondaryKey?: string
+  ): Promise<void> {
+    if (!secondaryKey) {
+      return await this.upsertItem(key, value);
+    }
+    return await this.upsertItem(
+      this.mergeKeyWithSecondaryKey(key, secondaryKey),
+      value
+    );
+  }
 
   public abstract removeItem(key: string): Promise<void>;
 

@@ -1,6 +1,5 @@
 import {
   makePatchRequest,
-  makePostRequest,
   MutationsLang,
   useWaitForResponseMutationOptions,
 } from "@adminator/protozoa";
@@ -30,7 +29,7 @@ export function useChangePasswordMutation() {
 
   return useMutation(
     async (data: IChangePasswordForm) =>
-      await makePostRequest(`/api/account/change-password`, data),
+      await makePatchRequest(`/api/account/change-password`, data),
     apiMutateOptions
   );
 }

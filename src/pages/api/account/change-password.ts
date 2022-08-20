@@ -4,7 +4,7 @@ import { IAccountProfile } from "shared/types";
 import { requestHandler } from "../../../backend/lib/request";
 
 export default requestHandler({
-  POST: async (getValidatedRequest) => {
+  PATCH: async (getValidatedRequest) => {
     const validatedRequest = await getValidatedRequest([
       "authenticatedUser",
       {

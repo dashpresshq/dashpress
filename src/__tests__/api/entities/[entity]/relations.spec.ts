@@ -66,9 +66,7 @@ describe("/api/entities/[entity]/relations", () => {
   it("should hide hidden entity relations", async () => {
     await setupAppConfigTestData({
       disabled_entities: ["disabled-entity-1", "disabled-entity-2"],
-      hidden_entity_relations: {
-        "base-model": ["users", "friends"],
-      },
+      "hidden_entity_relations__base-model": ["users", "friends"],
     });
 
     const { req, res } = createAuthenticatedMocks({
@@ -86,9 +84,7 @@ describe("/api/entities/[entity]/relations", () => {
   it("should order entity relations when order is set", async () => {
     await setupAppConfigTestData({
       disabled_entities: ["disabled-entity-1", "disabled-entity-2"],
-      entity_relations_order: {
-        "base-model": ["profile", "users", "friends"],
-      },
+      "entity_relations_order__base-model": ["profile", "users", "friends"],
     });
 
     const { req, res } = createAuthenticatedMocks({
@@ -110,11 +106,9 @@ describe("/api/entities/[entity]/relations", () => {
   it("should label the relations when present", async () => {
     await setupAppConfigTestData({
       disabled_entities: ["disabled-entity-1", "disabled-entity-2"],
-      entity_relations_labels: {
-        "base-model": {
-          profile: "Labelled Profile",
-          users: "Renamed Users",
-        },
+      "entity_relations_labels__base-model": {
+        profile: "Labelled Profile",
+        users: "Renamed Users",
       },
     });
 

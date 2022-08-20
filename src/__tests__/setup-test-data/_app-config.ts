@@ -1,22 +1,15 @@
 import { createConfigDomainPersistenceService } from "backend/lib/config-persistence";
-import { CONFIGURATION_KEYS } from "shared/configuration.constants";
 
-const TEST_APP_CONFIG: Partial<
-  Record<keyof typeof CONFIGURATION_KEYS, unknown>
-> = {
+const TEST_APP_CONFIG: Partial<Record<string, unknown>> = {
   disabled_entities: ["disabled-entity-1", "disabled-entity-2"],
-  entity_diction: {
-    "base-model": {
-      singular: "Base Model",
-      plural: "Base Models",
-    },
+  "entity_diction__base-model": {
+    singular: "Base Model",
+    plural: "Base Models",
   },
 };
 
 export const setupAppConfigTestData = async (
-  appConfig: Partial<
-    Record<keyof typeof CONFIGURATION_KEYS, unknown>
-  > = TEST_APP_CONFIG
+  appConfig: Partial<Record<string, unknown>> = TEST_APP_CONFIG
 ) => {
   const configPersistenceService =
     createConfigDomainPersistenceService("app-config");

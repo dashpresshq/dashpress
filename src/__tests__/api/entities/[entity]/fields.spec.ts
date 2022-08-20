@@ -65,9 +65,7 @@ describe("/api/entities/[entity]/fields", () => {
 
   it("should order entity fields when provided", async () => {
     await setupAppConfigTestData({
-      entity_fields_orders: {
-        "base-model": ["message", "title", "typeId"],
-      },
+      "entity_fields_orders__base-model": ["message", "title", "typeId"],
     });
 
     const { req, res } = createAuthenticatedMocks({

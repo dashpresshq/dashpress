@@ -6,7 +6,11 @@ import {
   createConfigDomainPersistenceService,
   AbstractConfigDataPersistenceService,
 } from "backend/lib/config-persistence";
-import { BadRequestError, ForbiddenError } from "backend/lib/errors";
+import {
+  BadRequestError,
+  ForbiddenError,
+  NotFoundError,
+} from "backend/lib/errors";
 import { HashService } from "backend/lib/hash/hash.service";
 import {
   ISuccessfullAuthenticationResponse,
@@ -74,6 +78,9 @@ export class UsersService {
 
   async getUser(username: string): Promise<IAccountProfile> {
     const user = await this._usersPersistenceService.getItem(username);
+    if (!user) {
+      throw new NotFoundError("User not found");
+    }
     delete user.password;
     return user;
   }

@@ -70,7 +70,7 @@ export function useResetUserPasswordMutation() {
 
   return useMutation(
     async (data: IResetPasswordForm) =>
-      await makePostRequest(`/api/account/${username}/reset-password`, data),
+      await makePatchRequest(`/api/account/${username}/reset-password`, data),
     apiMutateOptions
   );
 }

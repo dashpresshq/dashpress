@@ -53,17 +53,7 @@ const TEST_DB_SCHEMA: IDBSchema[] = [
         ],
       },
       {
-        table: "users",
-        relationType: "ManyToOne",
-        joinColumnOptions: [
-          {
-            name: "createdById",
-            referencedColumnName: "id",
-          },
-        ],
-      },
-      {
-        table: "courses",
+        table: "friends",
         relationType: "ManyToOne",
         joinColumnOptions: [
           {
@@ -73,7 +63,11 @@ const TEST_DB_SCHEMA: IDBSchema[] = [
         ],
       },
       {
-        table: "contactUsThread",
+        table: "profile",
+        relationType: "OneToMany",
+      },
+      {
+        table: "disabled-entity-1",
         relationType: "OneToMany",
       },
     ],

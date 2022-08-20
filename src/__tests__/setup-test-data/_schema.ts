@@ -3,7 +3,7 @@ import { IDBSchema } from "shared/types";
 
 const TEST_DB_SCHEMA: IDBSchema[] = [
   {
-    name: "foo",
+    name: "base-model",
     fields: [
       {
         name: "id",
@@ -80,19 +80,19 @@ const TEST_DB_SCHEMA: IDBSchema[] = [
     uniqueFields: [["id"]],
   },
   {
-    name: "bar",
+    name: "disabled-entity-1",
     fields: [],
     relations: [],
     uniqueFields: [],
   },
   {
-    name: "baz",
+    name: "disabled-entity-1",
     fields: [],
     relations: [],
     uniqueFields: [],
   },
   {
-    name: "fish",
+    name: "secondary-model",
     fields: [],
     relations: [],
     uniqueFields: [],

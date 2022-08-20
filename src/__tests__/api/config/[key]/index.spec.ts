@@ -2,8 +2,6 @@ import handler from "pages/api/config/[key]/index";
 import { createAuthenticatedMocks } from "__tests__/helpers";
 import { setupAllTestData } from "__tests__/setup-test-data";
 
-// TODO check that the before enttity keys are empty before testing
-
 describe("/api/config/[key]/index", () => {
   beforeAll(async () => {
     await setupAllTestData(["app-config", "schema"]);
@@ -20,7 +18,10 @@ describe("/api/config/[key]/index", () => {
     await handler(req, res);
 
     expect(res._getStatusCode()).toBe(200);
-    expect(res._getJSONData()).toEqual(["bar", "baz"]);
+    expect(res._getJSONData()).toEqual([
+      "disabled-entity-1",
+      "disabled-entity-2",
+    ]);
   });
 
   it("should return default value for empty keys", async () => {

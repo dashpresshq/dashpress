@@ -7,7 +7,7 @@ describe("/api/requestHandler", () => {
     const { req, res } = createAuthenticatedMocks({
       method: "GET",
       query: {
-        entity: "foo",
+        entity: "base-model",
         take: "5",
         page: "15",
       },
@@ -36,7 +36,7 @@ describe("/api/requestHandler", () => {
     const { req, res } = createAuthenticatedMocks({
       method: "POST",
       query: {
-        entity: "foo",
+        entity: "base-model",
       },
       body: {
         data: {

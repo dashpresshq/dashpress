@@ -10,7 +10,7 @@
     "setup-husky": "husky install",
     "test": "jest --detectOpenHandles --runInBand",
     "typecheck": "tsc",
-    "test:cov": "jest --coverage",
+    "test:cov": "jest --runInBand --coverage",
     "lint": "eslint --ext ts,tsx .",
     "lint:fix": "eslint --fix",
     "verify": "npm run typecheck && npm run lint && npm run test"

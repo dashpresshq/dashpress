@@ -2,8 +2,6 @@ import { createAuthenticatedMocks } from "__tests__/helpers";
 import { setupAllTestData } from "__tests__/setup-test-data";
 import handler from "pages/api/config/[key]/[entity]";
 
-// TODO check that the before entity keys are empty before testing
-
 describe("/api/config/[key]/[entity]", () => {
   beforeAll(async () => {
     await setupAllTestData(["app-config", "schema"]);
@@ -14,7 +12,7 @@ describe("/api/config/[key]/[entity]", () => {
       method: "GET",
       query: {
         key: "entity_diction",
-        entity: "foo",
+        entity: "base-model",
       },
     });
 
@@ -22,8 +20,8 @@ describe("/api/config/[key]/[entity]", () => {
 
     expect(res._getStatusCode()).toBe(200);
     expect(res._getJSONData()).toEqual({
-      singular: "Singular Foo",
-      plural: "Plural Foo",
+      singular: "Base Model",
+      plural: "Base Models",
     });
   });
 
@@ -54,7 +52,7 @@ describe("/api/config/[key]/[entity]", () => {
       method: "GET",
       query: {
         key: "entity_diction",
-        entity: "fish",
+        entity: "secondary-model",
       },
     });
 
@@ -72,7 +70,7 @@ describe("/api/config/[key]/[entity]", () => {
       method: "GET",
       query: {
         key: "hidden_entity_table_columns",
-        entity: "foo",
+        entity: "base-model",
       },
     });
 
@@ -87,7 +85,7 @@ describe("/api/config/[key]/[entity]", () => {
       method: "GET",
       query: {
         key: "some invalid key",
-        entity: "foo",
+        entity: "base-model",
       },
     });
 
@@ -110,7 +108,7 @@ describe("/api/config/[key]/[entity]", () => {
       method: "PUT",
       query: {
         key: "entity_diction",
-        entity: "foo",
+        entity: "base-model",
       },
       body: {
         data: {
@@ -128,7 +126,7 @@ describe("/api/config/[key]/[entity]", () => {
       method: "GET",
       query: {
         key: "entity_diction",
-        entity: "foo",
+        entity: "base-model",
       },
     });
 
@@ -146,7 +144,7 @@ describe("/api/config/[key]/[entity]", () => {
       method: "PUT",
       query: {
         key: "entity_diction",
-        entity: "fish",
+        entity: "secondary-model",
       },
       body: {
         data: {
@@ -164,7 +162,7 @@ describe("/api/config/[key]/[entity]", () => {
       method: "GET",
       query: {
         key: "entity_diction",
-        entity: "fish",
+        entity: "secondary-model",
       },
     });
 
@@ -182,7 +180,7 @@ describe("/api/config/[key]/[entity]", () => {
       method: "PUT",
       query: {
         key: "entity_columns_labels",
-        entity: "foo",
+        entity: "base-model",
       },
       body: {
         data: {
@@ -200,7 +198,7 @@ describe("/api/config/[key]/[entity]", () => {
       method: "GET",
       query: {
         key: "entity_columns_labels",
-        entity: "foo",
+        entity: "base-model",
       },
     });
 

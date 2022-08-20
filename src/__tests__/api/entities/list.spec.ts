@@ -18,20 +18,16 @@ describe("/api/entities/list", () => {
     expect(res._getJSONData()).toMatchInlineSnapshot(`
       Array [
         Object {
-          "label": "foo",
-          "value": "foo",
+          "label": "base-model",
+          "value": "base-model",
         },
         Object {
-          "label": "bar",
-          "value": "bar",
+          "label": "disabled-entity-1",
+          "value": "disabled-entity-1",
         },
         Object {
-          "label": "baz",
-          "value": "baz",
-        },
-        Object {
-          "label": "fish",
-          "value": "fish",
+          "label": "secondary-model",
+          "value": "secondary-model",
         },
       ]
     `);

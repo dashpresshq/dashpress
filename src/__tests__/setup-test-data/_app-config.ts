@@ -1,11 +1,11 @@
 import { createConfigDomainPersistenceService } from "backend/lib/config-persistence";
 
 const TEST_APP_CONFIG: Record<string, unknown> = {
-  disabled_entities: ["bar", "baz"],
+  disabled_entities: ["disabled-entity-1", "disabled-entity-2"],
   entity_diction: {
-    foo: {
-      singular: "Singular Foo",
-      plural: "Plural Foo",
+    "base-model": {
+      singular: "Base Model",
+      plural: "Base Models",
     },
   },
 };

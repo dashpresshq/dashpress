@@ -22,7 +22,7 @@ describe("/api/requestHandler", () => {
       },
     })(req, res);
 
-    // expect(res._getStatusCode()).toBe(200);
+    expect(res._getStatusCode()).toBe(200);
     expect(res._getJSONData()).toEqual({
       foo: {
         orderBy: "asc",
@@ -54,7 +54,7 @@ describe("/api/requestHandler", () => {
       },
     })(req, res);
 
-    // expect(res._getStatusCode()).toBe(201);
+    expect(res._getStatusCode()).toBe(201);
     expect(res._getJSONData()).toEqual({
       foo: {
         title: "test-title",

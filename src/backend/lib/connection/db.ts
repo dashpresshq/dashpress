@@ -11,27 +11,47 @@ const SupportedDatabaseTypeToKnexClientMap: Record<
   sqlite: "better-sqlite3",
 };
 
+const SAVED_CONNECTIONS: Record<string, any> = {};
+
+const getConnection = (dbCredentials: IDBCredentials | string) => {
+  if (typeof dbCredentials === "string") {
+    return knex(dbCredentials);
+  }
+  return knex({
+    client: SupportedDatabaseTypeToKnexClientMap[dbCredentials.databaseType],
+
+    connection: {
+      database: dbCredentials.database,
+      user: dbCredentials.user,
+      password: dbCredentials.password,
+      host: dbCredentials.host,
+      port: dbCredentials.port,
+      ssl: dbCredentials.ssl,
+    },
+  });
+};
+
+const getConnectionHashKey = (
+  dbCredentials: IDBCredentials | string
+): string => {
+  return typeof dbCredentials === "string"
+    ? dbCredentials
+    : JSON.stringify(dbCredentials);
+};
+
 export const getKnexConnection = async (
   dbCredentials: IDBCredentials | string
 ) => {
-  let connection: any;
+  const savedConnection =
+    SAVED_CONNECTIONS[getConnectionHashKey(dbCredentials)];
 
-  if (typeof dbCredentials === "string") {
-    connection = knex(dbCredentials);
-  } else {
-    connection = knex({
-      client: SupportedDatabaseTypeToKnexClientMap[dbCredentials.databaseType],
-
-      connection: {
-        database: dbCredentials.database,
-        user: dbCredentials.user,
-        password: dbCredentials.password,
-        host: dbCredentials.host,
-        port: dbCredentials.port,
-        ssl: dbCredentials.ssl,
-      },
-    });
+  if (savedConnection) {
+    return savedConnection;
   }
+
+  const connection = getConnection(dbCredentials);
+
+  SAVED_CONNECTIONS[getConnectionHashKey(dbCredentials)] = connection;
 
   await connection.raw("SELECT 1");
 

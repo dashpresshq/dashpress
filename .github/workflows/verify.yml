@@ -1,4 +1,4 @@
-name: UNIT TESTS CI
+name: VERIFY CI
 
 on:
   push:
@@ -12,5 +12,5 @@ jobs:
     - uses: actions/checkout@v2
     - name: Install modules
       run: yarn
-    - name: Run tests
-      run: yarn test
+    - name: Run Verification
+      run: yarn run verify

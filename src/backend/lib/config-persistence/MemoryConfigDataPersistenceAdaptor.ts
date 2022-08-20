@@ -5,33 +5,40 @@ import { ConfigDomain } from "./types";
 export class MemoryConfigDataPersistenceAdaptor<
   T
 > extends AbstractConfigDataPersistenceService<T> {
-  private data: Record<string, Record<string, T>> = {};
+  private static data: Record<string, Record<string, any>> = {};
 
   constructor(configDomain: ConfigDomain, configService: ConfigService) {
     super(configDomain, configService);
   }
 
-  private getDomainData() {
-    if (!this.data[this.configDomain]) {
-      this.data = { ...this.data, [this.configDomain]: {} };
+  static getDomainData(configDomain: ConfigDomain) {
+    if (!MemoryConfigDataPersistenceAdaptor.data[configDomain]) {
+      MemoryConfigDataPersistenceAdaptor.data = {
+        ...MemoryConfigDataPersistenceAdaptor.data,
+        [configDomain]: {},
+      };
     }
-    return this.data[this.configDomain];
+    return MemoryConfigDataPersistenceAdaptor.data[configDomain];
   }
 
   async resetToEmpty() {
-    this.data[this.configDomain] = {};
+    MemoryConfigDataPersistenceAdaptor.data[this.configDomain] = {};
   }
 
   private persistDomainData(data: Record<string, T>) {
-    this.data[this.configDomain] = data;
+    MemoryConfigDataPersistenceAdaptor.data[this.configDomain] = data;
   }
 
   async getAllItems() {
-    return Object.values(this.getDomainData());
+    return Object.values(
+      MemoryConfigDataPersistenceAdaptor.getDomainData(this.configDomain)
+    );
   }
 
   async getItem(key: string) {
-    const currentItem = this.getDomainData()[key];
+    const currentItem = MemoryConfigDataPersistenceAdaptor.getDomainData(
+      this.configDomain
+    )[key];
     if (currentItem) {
       return currentItem;
     }
@@ -39,13 +46,17 @@ export class MemoryConfigDataPersistenceAdaptor<
   }
 
   async upsertItem(key: string, data: T) {
-    const domainData = this.getDomainData();
+    const domainData = MemoryConfigDataPersistenceAdaptor.getDomainData(
+      this.configDomain
+    );
     domainData[key] = data;
     this.persistDomainData(domainData);
   }
 
   public async removeItem(key: string): Promise<void> {
-    const domainData = this.getDomainData();
+    const domainData = MemoryConfigDataPersistenceAdaptor.getDomainData(
+      this.configDomain
+    );
 
     delete domainData[key];
 

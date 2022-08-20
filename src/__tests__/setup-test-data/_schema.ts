@@ -86,7 +86,7 @@ const TEST_DB_SCHEMA: IDBSchema[] = [
     uniqueFields: [],
   },
   {
-    name: "disabled-entity-1",
+    name: "disabled-entity-2",
     fields: [],
     relations: [],
     uniqueFields: [],

@@ -1,6 +1,9 @@
 import { createConfigDomainPersistenceService } from "backend/lib/config-persistence";
+import { CONFIGURATION_KEYS } from "shared/configuration.constants";
 
-const TEST_APP_CONFIG: Record<string, unknown> = {
+const TEST_APP_CONFIG: Partial<
+  Record<keyof typeof CONFIGURATION_KEYS, unknown>
+> = {
   disabled_entities: ["disabled-entity-1", "disabled-entity-2"],
   entity_diction: {
     "base-model": {
@@ -10,13 +13,17 @@ const TEST_APP_CONFIG: Record<string, unknown> = {
   },
 };
 
-export const setupAppConfigTestData = async () => {
+export const setupAppConfigTestData = async (
+  appConfig: Partial<
+    Record<keyof typeof CONFIGURATION_KEYS, unknown>
+  > = TEST_APP_CONFIG
+) => {
   const configPersistenceService =
     createConfigDomainPersistenceService("app-config");
 
   await configPersistenceService.resetToEmpty();
 
-  const configAsArray = Object.entries(TEST_APP_CONFIG);
+  const configAsArray = Object.entries(appConfig);
 
   // eslint-disable-next-line no-restricted-syntax
   for (const [key, value] of configAsArray) {

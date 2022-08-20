@@ -26,6 +26,10 @@ describe("/api/entities/list", () => {
           "value": "disabled-entity-1",
         },
         Object {
+          "label": "disabled-entity-2",
+          "value": "disabled-entity-2",
+        },
+        Object {
           "label": "secondary-model",
           "value": "secondary-model",
         },

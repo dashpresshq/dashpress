@@ -16,11 +16,8 @@ export async function connectionManager<T, K>(
   const savedConnection = SAVED_CONNECTIONS[getConnectionHashKey(credentials)];
 
   if (savedConnection) {
-    console.log("Reusing", credentials);
     return savedConnection;
   }
-
-  console.log("Making", credentials);
 
   const connection = implementation.make(credentials);
 

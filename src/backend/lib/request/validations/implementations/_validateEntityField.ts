@@ -17,7 +17,6 @@ export const validateEntityField = async (
   entity: string,
   field: unknown
 ): Promise<string> => {
-  // :eyes
   if (!field) {
     return field as undefined;
   }

@@ -24,7 +24,7 @@ export function TableActions({ crudSettings, row, entity }: IProps) {
           <SoftButton
             action={NAVIGATION_LINKS.ENTITY.DETAILS(entity, idValue)}
             label="Details"
-            color="primary"
+            color="accent"
             justIcon
             icon="eye"
           />
@@ -36,7 +36,7 @@ export function TableActions({ crudSettings, row, entity }: IProps) {
             action={NAVIGATION_LINKS.ENTITY.UPDATE(entity, idValue)}
             label="Edit"
             icon="edit"
-            color="primary"
+            color="accent"
             justIcon
           />
         </div>

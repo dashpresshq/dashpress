@@ -55,7 +55,7 @@ export function SelectionTab({
 
   return (
     <>
-      <Stack justify="space-between">
+      <Stack justify="space-between" align="flex-start">
         <div style={{ width: "100%" }}>
           <Text size="5">{description} LINK_TO_DOC</Text>
         </div>

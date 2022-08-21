@@ -43,7 +43,7 @@ export function ListUsers() {
             (row.original as unknown as IAccountProfile).username
           )}
           label="Details"
-          color="primary"
+          color="accent"
           justIcon
           icon="eye"
         />

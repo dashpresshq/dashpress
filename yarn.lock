@@ -19,10 +19,10 @@
     pg "^8.7.3"
     sqlite3 "^5.0.8"
 
-"@adminator/chromista@^0.2.108":
-  version "0.2.108"
-  resolved "https://registry.yarnpkg.com/@adminator/chromista/-/chromista-0.2.108.tgz#07b05fba2edaf48d51d0ff21a5db546c7236fdc2"
-  integrity sha512-cDFGzEBTJCt5gDmE1TgrxT+oYYZo+LSvSd1FoFipDtmeMD3yIRN0lZLnGayfBuA7+lNRiRuNEEupEePlG5eq6A==
+"@adminator/chromista@^0.2.110":
+  version "0.2.110"
+  resolved "https://registry.yarnpkg.com/@adminator/chromista/-/chromista-0.2.110.tgz#f58844578c3ba7821473b5f05c2989c39fbbf652"
+  integrity sha512-fTxs9/Tcw3mkd6KcUIuFAxLvA52szy72vvmv1E7+6DWw5GvJmAfjl4WHz3M9X4wI7oN6WLECXGVNmGmAnApdxA==
   dependencies:
     "@adminator/protozoa" "^0.2.51"
     "@fortawesome/fontawesome-svg-core" "^6.1.1"

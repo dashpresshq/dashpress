@@ -96,7 +96,7 @@ export function EntityDetailsView({
 
               return (
                 <React.Fragment key={name}>
-                  <Text size="5" weight="bold">
+                  <Text size="6" weight="bold">
                     {getEntityFieldLabels(name)}
                   </Text>
                   {contentToRender}

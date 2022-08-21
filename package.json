@@ -17,7 +17,7 @@
   },
   "dependencies": {
     "@adminator/bacteria": "^0.1.6",
-    "@adminator/chromista": "^0.2.108",
+    "@adminator/chromista": "^0.2.110",
     "@adminator/protozoa": "^0.2.53",
     "@types/cryptr": "^4.0.1",
     "@types/jsonwebtoken": "^8.5.8",

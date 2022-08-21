@@ -1,5 +1,5 @@
 export const useSiteConfig = () => ({
-  name: process.env.NEXT_PUBLIC_SITE_NAME || "My Site",
+  name: process.env.NEXT_PUBLIC_SITE_NAME || "Adminator",
   homeLink: "/",
-  logo: "/assets/images/logo.svg",
+  logo: "/assets/images/logo.png",
 });

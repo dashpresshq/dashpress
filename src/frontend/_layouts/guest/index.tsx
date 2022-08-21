@@ -13,7 +13,11 @@ export function AuthLayout({ children, title, subTitle }: IProps) {
   const siteConfig = useSiteConfig();
 
   return (
-    <GuestLayout title={title} subTitle={subTitle} appDetails={siteConfig}>
+    <GuestLayout
+      title={title}
+      subTitle={subTitle}
+      appDetails={{ ...siteConfig, logo: siteConfig.fullLogo }}
+    >
       <Head>
         <title>
           {title} - {siteConfig.name}

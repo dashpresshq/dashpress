@@ -4,7 +4,7 @@ import {
   configService,
   ConfigService,
 } from "../config/config.service";
-import { getKnexConnection } from "../connection/db";
+import { getDbConnection } from "../connection/db";
 import { AbstractConfigDataPersistenceService } from "./AbstractConfigDataPersistenceService";
 import { ConfigDomain } from "./types";
 
@@ -19,7 +19,7 @@ export class DatabaseConfigDataPersistenceAdaptor<
     if (this._dbInstance) {
       return this._dbInstance;
     }
-    this._dbInstance = await getKnexConnection(
+    this._dbInstance = await getDbConnection(
       configService.getConfigValue(ConfigKeys.CONFIG_ADAPTOR_CONNECTION_STRING)
     );
 

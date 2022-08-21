@@ -2,7 +2,7 @@ import { FilterOperators, IColumnFilterBag } from "@adminator/chromista"; // Mov
 import { Knex } from "knex";
 import get from "lodash/get";
 import { credentialsService } from "backend/credentials/credentials.service";
-import { getKnexConnection } from "backend/lib/connection/db";
+import { getDbConnection } from "backend/lib/connection/db";
 import { CREDENTIALS_DOMAINS } from "backend/credentials/crendential.types";
 import { IDBCredentials, QueryFilter } from "shared/types";
 import { IPaginationFilters } from "./types";
@@ -20,7 +20,7 @@ export class DataService {
         CREDENTIALS_DOMAINS.database
       );
 
-    this._dbInstance = await getKnexConnection(dbCredentials);
+    this._dbInstance = await getDbConnection(dbCredentials);
 
     return this._dbInstance;
   }

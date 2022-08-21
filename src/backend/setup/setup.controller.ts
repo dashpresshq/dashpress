@@ -3,7 +3,7 @@ import {
   CredentialsService,
 } from "backend/credentials/credentials.service";
 import { CREDENTIALS_DOMAINS } from "backend/credentials/crendential.types";
-import { getKnexConnection } from "backend/lib/connection/db";
+import { getDbConnection } from "backend/lib/connection/db";
 import { BadRequestError } from "backend/lib/errors";
 import { usersService, UsersService } from "backend/users/users.service";
 import {
@@ -63,7 +63,7 @@ export class SetupController {
     }
 
     try {
-      await getKnexConnection(dbCredentials);
+      await getDbConnection(dbCredentials);
     } catch (error: unknown) {
       throw new BadRequestError(
         `Couldn't not connect to database '${(error as Error).message}'`

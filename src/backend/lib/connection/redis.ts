@@ -1,18 +1,20 @@
 import { createClient, RedisClientType } from "redis";
+import { connectionManager } from "./_manager";
 
-export const getRedisConnection = async (
-  connectionString?: string
-): Promise<RedisClientType> => {
-  try {
-    const client = createClient({
-      url: connectionString,
-    });
-    await client.connect();
-    await client.get("test");
-    return client as RedisClientType;
-  } catch (error) {
-    // eslint-disable-next-line no-console
-    console.error("Error", error);
-    throw error;
-  }
+const make = (credentials?: string) => {
+  return createClient({
+    url: credentials,
+  }) as RedisClientType;
+};
+
+const verify = async (connection: RedisClientType) => {
+  await connection.connect();
+  await connection.get("test");
+};
+
+export const getRedisConnection = async (credentials?: string) => {
+  return await connectionManager(credentials, {
+    make,
+    verify,
+  });
 };

@@ -1,3 +1,4 @@
+import { ForbiddenError } from "backend/lib/errors";
 import { RolesService, rolesService } from "backend/roles/roles.service";
 import { ISignInForm } from "shared/form-schemas/auth/signin";
 import { IChangePasswordForm } from "shared/form-schemas/profile/password";
@@ -38,14 +39,21 @@ export class UsersController {
   async getAuthenticatedUserBag(
     authenticatedUsername: string
   ): Promise<IAuthenticatedUserBag> {
-    const profile = await this._usersService.getUser(authenticatedUsername);
-    const permissions = await this._rolesService.getRolePermissions(
-      profile.role
-    );
-    return {
-      ...profile,
-      permissions,
-    };
+    try {
+      const profile = await this._usersService.getUser(authenticatedUsername);
+      const permissions = await this._rolesService.getRolePermissions(
+        profile.role
+      );
+      return {
+        ...profile,
+        permissions,
+      };
+    } catch (error) {
+      /*
+        Any error here should make the user redirect to login page
+      */
+      throw new ForbiddenError("Invalid User");
+    }
   }
 
   async resetPassword(username: string, input: IResetPasswordForm) {

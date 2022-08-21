@@ -9,10 +9,22 @@ export class ConfigurationService {
     private _appConfigPersistenceService: AbstractConfigDataPersistenceService<unknown>
   ) {}
 
+  private checkConfigKeyEntityRequirement(
+    key: keyof typeof CONFIGURATION_KEYS,
+    entity?: string
+  ) {
+    if (CONFIGURATION_KEYS[key].requireEntity && !entity) {
+      throw new Error(
+        `Configuration '${key}' requires an entity to be passed in`
+      );
+    }
+  }
+
   async show<T>(
     key: keyof typeof CONFIGURATION_KEYS,
     entity?: string
   ): Promise<T> {
+    this.checkConfigKeyEntityRequirement(key, entity);
     const value =
       await this._appConfigPersistenceService.getItemWithMaybeSecondaryKey(
         key,
@@ -31,6 +43,7 @@ export class ConfigurationService {
     value: unknown,
     entity?: string
   ): Promise<void> {
+    this.checkConfigKeyEntityRequirement(key, entity);
     await this._appConfigPersistenceService.upsertItemWithMaybeSecondaryKey(
       key,
       value,

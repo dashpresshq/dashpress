@@ -73,7 +73,8 @@ export class DataController {
       async () => {
         const [hiddenColumns, primaryField, entityFields] = await Promise.all([
           this._configurationService.show<string[]>(
-            "hidden_entity_table_columns"
+            "hidden_entity_table_columns",
+            entity
           ),
           this._entitiesService.getEntityPrimaryField(entity),
           this._entitiesService.getEntityFields(entity),

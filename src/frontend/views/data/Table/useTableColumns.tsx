@@ -83,7 +83,9 @@ export const useTableColumns = (entity: string) => {
       accessor: name,
       filter:
         idField.data === name
-          ? undefined
+          ? {
+              _type: "idField",
+            }
           : buildFilterConfigFromType(
               entityFieldTypes[name],
               entityFieldSelections[name],

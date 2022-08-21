@@ -20,10 +20,10 @@
 <div align="center">
 <br />
 
-[![Project license](https://img.shields.io/github/license/adminatorhq/adminator.svg?style=flat-square)](LICENSE)
+<!-- [![Project license](https://img.shields.io/github/license/adminatorhq/adminator.svg?style=flat-square)](LICENSE)
 
 [![Pull Requests welcome](https://img.shields.io/badge/PRs-welcome-ff69b4.svg?style=flat-square)](https://github.com/adminatorhq/adminator/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22)
-[![code with love by thrownullexception](https://img.shields.io/badge/%3C%2F%3E%20with%20%E2%99%A5%20by-thrownullexception-ff1414.svg?style=flat-square)](https://github.com/thrownullexception)
+[![code with love by thrownullexception](https://img.shields.io/badge/%3C%2F%3E%20with%20%E2%99%A5%20by-thrownullexception-ff1414.svg?style=flat-square)](https://github.com/thrownullexception) -->
 
 </div>
 

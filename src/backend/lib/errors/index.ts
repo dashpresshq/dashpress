@@ -47,6 +47,8 @@ const returnError = (
   statusCode: number,
   errorBody: Record<string, unknown>
 ) => {
+  // eslint-disable-next-line no-console
+  console.log(errorBody);
   return res.status(statusCode).json(errorBody);
 };
 

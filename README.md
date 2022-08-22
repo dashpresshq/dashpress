@@ -54,7 +54,7 @@
 
 ## About
 
-Adminator is a admin dashboard framework that reflects your database models. It is all batteries included and extremely customizable
+Adminator is a admin dashboard framework that build itself based on your database schema and your configurations. It is all batteries included and extremely customizable
 
 ### How it looks
 <img src="./docs/demo.gif" title="Adminator Demo" width="100%">

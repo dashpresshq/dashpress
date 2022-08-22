@@ -38,6 +38,7 @@ const buildFilterConfigFromType = (
     case "date":
     case "string":
     case "number":
+    case "idField":
       return filterType;
     case "boolean":
     case "status":
@@ -60,7 +61,6 @@ export const useTableColumns = (entity: string) => {
   );
 
   const idField = useEntityIdField(entity);
-  // TODO primaryIds needs special filter type of equal only
 
   const entityFieldTypes = useEntityFieldTypes(entity);
   const entityFieldSelections = useEntityFieldSelections(entity);

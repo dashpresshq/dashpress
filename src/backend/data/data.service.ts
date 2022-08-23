@@ -121,6 +121,11 @@ export class DataService {
     select: string[],
     query: Record<string, unknown>
   ): Promise<T> {
+    if (select.length === 0) {
+      throw new Error(
+        "We dont do that here, Please define the fields you want to select"
+      );
+    }
     return await (await DataService.getInstance())
       .table(entity)
       .select(select)

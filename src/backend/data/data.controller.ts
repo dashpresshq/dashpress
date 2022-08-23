@@ -115,11 +115,39 @@ export class DataController {
     return TemplateService.compile(relationshipSettings.format, data);
   }
 
+  private async getAllowedCrudsFieldsToShow(
+    entity: string,
+    crudKey: "hidden_entity_details_columns"
+  ): Promise<string[]> {
+    const [hiddenFields, entityFields] = await Promise.all([
+      this._configurationService.show<string[]>(crudKey, entity),
+      this._entitiesService.getEntityFields(entity),
+    ]);
+
+    if (hiddenFields.length === 0) {
+      return entityFields.map(({ name }) => name);
+    }
+
+    const hiddenFieldsMap = Object.fromEntries(
+      hiddenFields.map((field) => [field, 1])
+    );
+
+    return entityFields
+      .filter((entityField) => !hiddenFieldsMap[entityField.name])
+      .map(({ name }) => name);
+  }
+
   async showData(entity: string, id: string) {
-    // Send in the show fields
-    return await this._dataService.show(entity, [], {
-      [await this._entitiesService.getEntityPrimaryField(entity)]: id,
-    });
+    return await this._dataService.show(
+      entity,
+      await this.getAllowedCrudsFieldsToShow(
+        entity,
+        "hidden_entity_details_columns"
+      ),
+      {
+        [await this._entitiesService.getEntityPrimaryField(entity)]: id,
+      }
+    );
   }
 
   async createData(entity: string, data: Record<string, unknown>) {

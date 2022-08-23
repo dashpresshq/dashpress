@@ -114,7 +114,6 @@ const customJestConfig = {
   setupFiles: [
     // "<rootDir>/__tests__/setupDotEnv.ts",
     "<rootDir>/src/__tests__/setupGlobals.ts",
-    "<rootDir>/src/__tests__/consoleOverrides.ts",
   ],
 
   // A list of paths to modules that run some code to configure or set up the testing framework before each test
@@ -143,18 +142,6 @@ const customJestConfig = {
   //   "/node_modules/"
   // ],
 
-  // The regexp pattern or array of patterns that Jest uses to detect test files
-  // testRegex: [],
-
-  // This option allows the use of a custom results processor
-  // testResultsProcessor: undefined,
-
-  // This option allows use of a custom test runner
-  // testRunner: "jest-circus/runner",
-
-  // This option sets the URL for the jsdom environment. It is reflected in properties such as location.href
-  // testURL: "http://localhost",
-
   // Setting this value to "fake" allows the use of fake timers for functions such as "setTimeout"
   // timers: "real",
 
@@ -163,18 +150,6 @@ const customJestConfig = {
 
   // An array of regexp pattern strings that are matched against all source file paths, matched files will skip transformation
   transformIgnorePatterns: [],
-
-  // An array of regexp pattern strings that are matched against all modules before the module loader will automatically return a mock for them
-  // unmockedModulePathPatterns: undefined,
-
-  // Indicates whether each individual test should be reported during the run
-  // verbose: undefined,
-
-  // An array of regexp patterns that are matched against all source file paths before re-running tests in watch mode
-  // watchPathIgnorePatterns: [],
-
-  // Whether to use watchman for file crawling
-  // watchman: true,
 
   testTimeout: 10000,
 };

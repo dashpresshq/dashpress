@@ -1,7 +1,10 @@
 import { Tabs, SectionBox } from "@adminator/chromista";
 import noop from "lodash/noop";
 import { useEffect, useState } from "react";
-import { ENTITY_TABLE_PATH } from "frontend/hooks/data/data.store";
+import {
+  ENTITY_LIST_PATH,
+  ENTITY_TABLE_PATH,
+} from "frontend/hooks/data/data.store";
 import { SLUG_LOADING_VALUE, useRouteParam } from "@adminator/protozoa";
 import { IEntityCrudSettings } from "shared/configuration.constants";
 import { useSetPageDetails, useChangeRouterParam } from "frontend/lib/routing";
@@ -63,7 +66,12 @@ function useEntityCrudView() {
 
   const upsertDetailsColumnsMutation = useUpsertConfigurationMutation(
     "hidden_entity_details_columns",
-    entity
+    entity,
+    {
+      /* This is an hack for  ENTITY_DETAILS_PATH(entity, id) to clear all details 
+      and it quite necessary for the detail page */
+      otherEndpoints: [ENTITY_LIST_PATH(entity)],
+    }
   );
 
   const upsertCrudSettingsMutation = useUpsertConfigurationMutation(

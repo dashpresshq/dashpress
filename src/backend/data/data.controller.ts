@@ -117,7 +117,10 @@ export class DataController {
 
   private async getAllowedCrudsFieldsToShow(
     entity: string,
-    crudKey: "hidden_entity_details_columns"
+    crudKey:
+      | "hidden_entity_details_columns"
+      | "hidden_entity_create_columns"
+      | "hidden_entity_update_columns"
   ): Promise<string[]> {
     const [hiddenFields, entityFields] = await Promise.all([
       this._configurationService.show<string[]>(crudKey, entity),
@@ -138,34 +141,54 @@ export class DataController {
   }
 
   async showData(entity: string, id: string) {
-    return await this._dataService.show(
-      entity,
-      await this.getAllowedCrudsFieldsToShow(
-        entity,
-        "hidden_entity_details_columns"
-      ),
-      {
-        [await this._entitiesService.getEntityPrimaryField(entity)]: id,
-      }
-    );
+    const [fieldsToShow, primaryField] = await Promise.all([
+      this.getAllowedCrudsFieldsToShow(entity, "hidden_entity_details_columns"),
+      this._entitiesService.getEntityPrimaryField(entity),
+    ]);
+    return await this._dataService.show(entity, fieldsToShow, {
+      [primaryField]: id,
+    });
   }
 
   async createData(entity: string, data: Record<string, unknown>) {
-    // validate the createData values and that the fields are createable
-    const primaryField = await this._entitiesService.getEntityPrimaryField(
-      entity
-    );
-    return { id: await this._dataService.create(entity, data, primaryField) };
+    // validate the createData values
+    const [allowedFields, primaryField] = await Promise.all([
+      this.getAllowedCrudsFieldsToShow(entity, "hidden_entity_create_columns"),
+      this._entitiesService.getEntityPrimaryField(entity),
+    ]);
+
+    return {
+      id: await this._dataService.create(
+        entity,
+        this.returnOnlyDataThatAreAllowed(data, allowedFields),
+        primaryField
+      ),
+    };
   }
 
   async updateData(entity: string, id: string, data: Record<string, unknown>) {
-    // validate the updateData values and that the fields are updateable
+    // validate the updateData values
+
+    const [allowedFields, primaryField] = await Promise.all([
+      this.getAllowedCrudsFieldsToShow(entity, "hidden_entity_update_columns"),
+      this._entitiesService.getEntityPrimaryField(entity),
+    ]);
+
     await this._dataService.update(
       entity,
       {
-        [await this._entitiesService.getEntityPrimaryField(entity)]: id,
+        [primaryField]: id,
       },
-      data
+      this.returnOnlyDataThatAreAllowed(data, allowedFields)
+    );
+  }
+
+  private returnOnlyDataThatAreAllowed(
+    data: Record<string, unknown>,
+    allowedFields: string[]
+  ) {
+    return Object.fromEntries(
+      allowedFields.map((field) => [field, data[field]])
     );
   }
 

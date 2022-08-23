@@ -2,6 +2,7 @@ import { SectionBox, SectionCenter } from "@adminator/chromista";
 import { TitleLang } from "@adminator/protozoa";
 import { useNavigationStack, useSetPageDetails } from "frontend/lib/routing";
 import { META_USER_PERMISSIONS } from "shared/types";
+import { useCanUserConfigureApp } from "frontend/hooks/auth/user.store";
 import { AppLayout } from "../../../_layouts/app";
 import {
   useEntityDiction,
@@ -37,6 +38,8 @@ export function EntityUpdate() {
     permission: META_USER_PERMISSIONS.APPLIED_CAN_ACCESS_ENTITY(entity),
   });
 
+  const canUserConfigureApp = useCanUserConfigureApp();
+
   const hiddenUpdateColumns = useSelectedEntityColumns(
     "hidden_entity_update_columns"
   );
@@ -50,6 +53,11 @@ export function EntityUpdate() {
       <SectionCenter>
         <SectionBox
           title={TitleLang.edit(entityDiction.singular)}
+          description={
+            canUserConfigureApp
+              ? "For security reasons, Any data that is hidden in details view will not show up here, So rememeber to toggle on all fields there if you want to update them here"
+              : undefined
+          }
           backLink={
             canGoBack()
               ? {

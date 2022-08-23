@@ -91,17 +91,17 @@ export const ENTITY_VALIDATION_CONFIG: Record<
   },
   min: {
     input: {
-      length: 3,
+      value: 3,
     },
-    message: "{{ name }} should be greater than {{ length }}",
-    implementation: handleValidation(min, "length"),
+    message: "{{ name }} should be greater than {{ value }}",
+    implementation: handleValidation(min, "value"),
   },
   max: {
     input: {
-      length: 10,
+      value: 10,
     },
-    message: "{{ name }} should be less than {{ length }}",
-    implementation: handleValidation(max, "length"),
+    message: "{{ name }} should be less than {{ value }}",
+    implementation: handleValidation(max, "value"),
   },
   maxLength: {
     input: {

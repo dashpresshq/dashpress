@@ -1,20 +1,17 @@
 import { TableFilterType } from "@adminator/chromista/dist/components/Table/filters/types";
 import { SelectableAbleValidations } from "./types";
 
-// less than other field
-// requiredIf
-
 export const FIELD_TYPES_CONFIG_MAP: Record<
   | "email"
   | "password"
   | "text"
   | "textarea"
-  | "richtext" // not inplemeneted
+  | "richtext"
   | "url"
   | "number"
   | "json"
-  | "selection" // not inplemeneted
-  | "reference" // not inplemeneted
+  | "selection"
+  | "reference"
   | "boolean"
   | "selection-enum"
   | "image" // not inplemeneted

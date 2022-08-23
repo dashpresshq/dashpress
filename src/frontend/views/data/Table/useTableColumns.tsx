@@ -72,8 +72,10 @@ export const useTableColumns = (entity: string) => {
     (hiddenTableColumns.data || []).length,
   ]);
 
-  // A Fix for the Cell that is memoized internall and the value for this is not getting updated
-  // so we need to wait for things to load before we render it
+  /* 
+   A Fix for the Cell that is memoized internall and the value for this is not getting updated
+   so we need to wait for things to load before we render it
+   */
   if (entityToOneReferenceFields.isLoading) {
     return [];
   }
@@ -97,14 +99,7 @@ export const useTableColumns = (entity: string) => {
           return null;
         }
         if (isId) {
-          return (
-            // <Link
-            //   href={NAVIGATION_LINKS.ENTITY.DETAILS(entity, value as string)}
-            //   passHref
-            // >
-            <span>{value as string}</span>
-            // </Link>
-          );
+          return <span>{value as string}</span>;
         }
 
         if (entityToOneReferenceFields.data?.[name]) {

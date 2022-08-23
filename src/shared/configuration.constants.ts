@@ -95,8 +95,6 @@ Table Settings =>
 
 // Filter Tables and / or
 
-Creator mode
-User mode
 */
 
 export interface IEntityCrudSettings {

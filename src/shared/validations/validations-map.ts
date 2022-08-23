@@ -124,16 +124,44 @@ export const ENTITY_VALIDATION_CONFIG: Record<
     message: "{{ name }} is invalid. Allowed values are {{ options }}",
     implementation: handleValidation(isIn, "options"),
   },
+
   matchOtherField: {
     input: {
       otherField: "",
     },
     message: "{{ name }} should match {{otherField}}",
     implementation: handleValidation((value, parameter, allValues) => {
-      if (value === allValues[parameter as string]) {
-        return true;
-      }
-      return false;
+      return value === allValues[parameter as string];
+    }, "otherField"),
+  },
+
+  lessThanOtherField: {
+    input: {
+      otherField: "",
+    },
+    message: "{{ name }} should be less than {{otherField}}",
+    implementation: handleValidation((value, parameter, allValues) => {
+      return value < allValues[parameter as string];
+    }, "otherField"),
+  },
+
+  greaterThanOtherField: {
+    input: {
+      otherField: "",
+    },
+    message: "{{ name }} should be greater than {{otherField}}",
+    implementation: handleValidation((value, parameter, allValues) => {
+      return value > allValues[parameter as string];
+    }, "otherField"),
+  },
+
+  doesntMatchOtherField: {
+    input: {
+      otherField: "",
+    },
+    message: "{{ name }} should not match {{otherField}}",
+    implementation: handleValidation((value, parameter, allValues) => {
+      return value !== allValues[parameter as string];
     }, "otherField"),
   },
 

@@ -4,9 +4,9 @@
   "license": "GPL-3.0-or-later",
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "build webpack",
     "start": "next start",
-    "prestart": "npm run build",
+    "prestart": "next build",
     "setup-husky": "husky install",
     "test": "jest --detectOpenHandles --runInBand",
     "typecheck": "tsc",
@@ -15,8 +15,13 @@
     "lint:fix": "eslint --fix",
     "verify": "npm run typecheck && npm run lint && npm run test"
   },
+  "files": [
+    "dist/",
+    "src",
+    "public"
+  ],
   "bin": {
-    "adminator": "bin/start"
+    "adminator": "dist/bin/start"
   },
   "dependencies": {
     "@adminator/bacteria": "^0.1.6",

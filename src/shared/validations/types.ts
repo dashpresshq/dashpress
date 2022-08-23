@@ -20,6 +20,9 @@ export type SelectableAbleValidations =
   | "regex"
   | "alphanumeric"
   | "matchOtherField"
+  | "doesntMatchOtherField"
+  | "lessThanOtherField"
+  | "greaterThanOtherField"
   | "postiveNumber";
 
 export type ValidationTypes =

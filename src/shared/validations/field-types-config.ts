@@ -2,7 +2,6 @@ import { TableFilterType } from "@adminator/chromista/dist/components/Table/filt
 import { SelectableAbleValidations } from "./types";
 
 // less than other field
-// not equal to other field
 // requiredIf
 
 export const FIELD_TYPES_CONFIG_MAP: Record<
@@ -66,6 +65,7 @@ export const FIELD_TYPES_CONFIG_MAP: Record<
       "regex",
       "unique",
       "matchOtherField",
+      "doesntMatchOtherField",
     ],
   },
   textarea: {
@@ -89,7 +89,15 @@ export const FIELD_TYPES_CONFIG_MAP: Record<
     },
     sortable: true,
     typeIsNotChangeAble: true,
-    allowedValidations: ["max", "min", "postiveNumber", "required", "unique"],
+    allowedValidations: [
+      "max",
+      "min",
+      "postiveNumber",
+      "required",
+      "unique",
+      "greaterThanOtherField",
+      "lessThanOtherField",
+    ],
   },
   url: {
     sortable: false,
@@ -149,7 +157,7 @@ export const FIELD_TYPES_CONFIG_MAP: Record<
     },
     sortable: true,
     // Configure Selection + maybe use colors
-    allowedValidations: ["required", "maxLength"],
+    allowedValidations: ["required", "maxLength", "doesntMatchOtherField"],
     configureSelection: true,
   },
 
@@ -161,7 +169,7 @@ export const FIELD_TYPES_CONFIG_MAP: Record<
     },
     typeIsNotChangeAble: true,
     // Configure Selection + maybe use colors
-    allowedValidations: ["required"],
+    allowedValidations: ["required", "doesntMatchOtherField"],
     configureSelection: true,
   },
 

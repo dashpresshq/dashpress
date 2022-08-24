@@ -22,7 +22,9 @@
     "tsconfig.json",
     "yarn.lock"
   ],
-  "bin": "./bin/hadmean",
+  "bin": {
+    "@hadmean/run": "./bin/hadmean"
+  },
   "dependencies": {
     "@hadmean/bacteria": "^0.0.0",
     "@hadmean/chromista": "^1.0.1",

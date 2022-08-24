@@ -1,6 +1,6 @@
 {
   "name": "hadmean",
-  "version": "0.0.1",
+  "version": "0.0.9",
   "license": "GPL-3.0-or-later",
   "scripts": {
     "dev": "next dev",
@@ -17,6 +17,7 @@
   "files": [
     "src",
     "bin",
+    "docs",
     "public",
     "next.config.js",
     "tsconfig.json",
@@ -24,9 +25,9 @@
   ],
   "bin": "./bin/hadmean",
   "dependencies": {
-    "@hadmean/bacteria": "^0.0.0",
-    "@hadmean/chromista": "^1.0.1",
-    "@hadmean/protozoa": "^1.0.0",
+    "@hadmean/bacteria": "^0.0.1",
+    "@hadmean/chromista": "^1.0.2",
+    "@hadmean/protozoa": "^1.0.1",
     "@types/cryptr": "^4.0.1",
     "@types/jsonwebtoken": "^8.5.8",
     "bcrypt": "^5.0.1",

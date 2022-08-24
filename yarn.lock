@@ -1416,10 +1416,10 @@
   resolved "https://registry.yarnpkg.com/@gar/promisify/-/promisify-1.1.3.tgz#555193ab2e3bb3b6adc3d551c9c030d9e860daf6"
   integrity sha512-k2Ty1JcVojjJFwrg/ThKi2ujJ7XNLYaFGNB/bWT9wGR+oSMJHMa5w+CUq6p/pVrKeNNgA7pCqEcjSnHVoqJQFw==
 
-"@hadmean/bacteria@^0.0.0":
-  version "0.0.0"
-  resolved "https://registry.yarnpkg.com/@hadmean/bacteria/-/bacteria-0.0.0.tgz#d4db3a1f885bd8b464a93e5ee6eb0e41201fbd5a"
-  integrity sha512-d4l5RHn7f6ST4Jks29I46Q8sl50WimgzlyyaVhZMpi7ExhlTtOLVS4P7g284m7KKW1QH/h2bS10tQ3a3MWy9jQ==
+"@hadmean/bacteria@^0.0.1":
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/@hadmean/bacteria/-/bacteria-0.0.1.tgz#ef642228a1d7d76b4c5757e15a1fce7f31b99c1f"
+  integrity sha512-amcxl7M8LyU4ps12MryklhcdT6IO8lgiPbGNFSrsYEagHs8L9ZsjFyEa6eHsUbbQ8t9oIQTcCjqukGcpUNf7sA==
   dependencies:
     "@types/fs-extra" "^9.0.13"
     "@types/mssql" "^8.0.3"
@@ -1433,10 +1433,10 @@
     pg "^8.7.3"
     sqlite3 "^5.0.8"
 
-"@hadmean/chromista@^1.0.1":
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/@hadmean/chromista/-/chromista-1.0.1.tgz#a26715e9d8d77fd7f77d4764681b4d14fa89e896"
-  integrity sha512-tEJsiFWaPsIHq3Ub9yycJQDFtlLbrhCM1iZelC9HlibIxjX5n26gm+/CAMg7pNb+n4yPrk8l7WpemNyFrLwCmg==
+"@hadmean/chromista@^1.0.2":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@hadmean/chromista/-/chromista-1.0.2.tgz#66a72bd954ab4bf3bd24eae8a4895ecdb875eb2d"
+  integrity sha512-deXwVlRlOJBb74lt0cpaZBzbxmmL0vZZcMymHDIawn/Vo2P87QUX43c/5aRlTAF3YLrgkvYccNWj3Fp2r4nwog==
   dependencies:
     "@fortawesome/fontawesome-svg-core" "^6.1.1"
     "@fortawesome/free-solid-svg-icons" "^6.1.1"
@@ -1444,7 +1444,6 @@
     "@hadmean/protozoa" "^1.0.0"
     "@types/prismjs" "^1.26.0"
     "@types/react-datepicker" "^4.4.1"
-    "@types/react-final-form-listeners" "^1.0.0"
     "@types/styled-components" "^5.1.25"
     country-currency-map "^2.1.7"
     lodash-es "^4.17.21"
@@ -1458,7 +1457,6 @@
     react-easy-sort "^1.5.0"
     react-feather "^2.0.9"
     react-final-form "^6.5.9"
-    react-final-form-listeners "^1.0.3"
     react-hot-toast "^2.2.0"
     react-image-lightbox "^5.1.4"
     react-paginate "^8.1.3"
@@ -1500,6 +1498,34 @@
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/@hadmean/protozoa/-/protozoa-1.0.0.tgz#2c9f5b489bc6af9371a918c19760f91047ab6091"
   integrity sha512-Ax4ye8Y83xKr4YburgNwHHSeld5xHio7h2X1fWpljQqQs0jMwZ3iRWKJtVK0AtlCFtoTKj64hX4TeJ5tZBkcFA==
+  dependencies:
+    "@types/lodash" "^4.14.182"
+    "@types/nprogress" "^0.2.0"
+    "@types/pluralize" "^0.0.29"
+    "@types/qs" "^6.9.7"
+    "@types/ramda" "0.27.40"
+    "@types/react" "^18.0.11"
+    "@types/uuid" "^8.3.4"
+    date-fns "^2.28.0"
+    final-form "^4.20.7"
+    immer "9.0.3"
+    lodash "^4.17.21"
+    next "^12.1.6"
+    nprogress "^0.2.0"
+    pluralize "^8.0.0"
+    ramda "0.27.1"
+    randomstring "^1.2.2"
+    react "18.1.0"
+    react-dom "18.1.0"
+    react-hot-toast "^2.2.0"
+    react-query "^3.39.1"
+    uuid "^8.3.2"
+    zustand "3.4.2"
+
+"@hadmean/protozoa@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@hadmean/protozoa/-/protozoa-1.0.1.tgz#b628210e80f14390aa6cad138f83c8e0af6710fb"
+  integrity sha512-W0XQ4E+NndQN/N1F6vQsW1j6QjT+9hmLaSCNTXPeHLP0vKgZ4C6L2A/bm8Y1g58AnNE/jMwOS50sOxpTsLvgog==
   dependencies:
     "@types/lodash" "^4.14.182"
     "@types/nprogress" "^0.2.0"
@@ -2475,13 +2501,6 @@
   version "18.0.6"
   resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-18.0.6.tgz#36652900024842b74607a17786b6662dd1e103a1"
   integrity sha512-/5OFZgfIPSwy+YuIBP/FgJnQnsxhZhjjrnxudMddeblOouIodEQ75X14Rr4wGSG/bknL+Omy9iWlLo1u/9GzAA==
-  dependencies:
-    "@types/react" "*"
-
-"@types/react-final-form-listeners@^1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@types/react-final-form-listeners/-/react-final-form-listeners-1.0.0.tgz#f45e91665d40792c16129429c4709650f0dcccf4"
-  integrity sha512-DovKaDfBqBzPnThFV8mGXL4iAbMCObEFIPUkH7wbD/EN3jZEjpDuPibrqY+w4W1dzicO109YP1LT9KsDDxdYnw==
   dependencies:
     "@types/react" "*"
 
@@ -7350,13 +7369,6 @@ react-final-form-arrays@^3.1.3:
   integrity sha512-dzBiLfbr9l1YRExARBpJ8uA/djBenCvFrbrsXjd362joDl3vT+WhmMKKr6HDQMJffjA8T4gZ3n5+G9M59yZfuQ==
   dependencies:
     "@babel/runtime" "^7.12.1"
-
-react-final-form-listeners@^1.0.3:
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/react-final-form-listeners/-/react-final-form-listeners-1.0.3.tgz#88e0bd6af06edc9a74b81ddad2ce0ded53f3331e"
-  integrity sha512-OrdCNxSS4JQS/EXD+R530kZKFqaPfa+WcXPgVro/h4BpaBDF/Ja+BtHyCzDezCIb5rWaGGdOJIj+tN2YdtvrXg==
-  dependencies:
-    "@babel/runtime" "^7.12.5"
 
 react-final-form@^6.5.9:
   version "6.5.9"

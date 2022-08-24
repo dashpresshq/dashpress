@@ -17,7 +17,6 @@
   "files": [
     "src",
     "bin",
-    "docs",
     "public",
     "next.config.js",
     "tsconfig.json",

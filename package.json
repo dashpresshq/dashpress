@@ -1,6 +1,6 @@
 {
-  "name": "@hadmean/run",
-  "version": "0.0.8",
+  "name": "hadmean",
+  "version": "0.0.1",
   "license": "GPL-3.0-or-later",
   "scripts": {
     "dev": "next dev",
@@ -14,7 +14,6 @@
     "lint:fix": "eslint --fix",
     "verify": "npm run typecheck && npm run lint && npm run test"
   },
-  "main": "bin/hadmean",
   "files": [
     "src",
     "bin",

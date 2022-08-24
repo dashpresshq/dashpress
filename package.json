@@ -4,7 +4,6 @@
   "license": "GPL-3.0-or-later",
   "scripts": {
     "dev": "next dev",
-    "build": "build webpack",
     "start": "next start",
     "prestart": "next build",
     "setup-husky": "husky install",
@@ -16,16 +15,19 @@
     "verify": "npm run typecheck && npm run lint && npm run test"
   },
   "files": [
-    "dist/",
     "src",
-    "public"
+    "bin",
+    "public",
+    "next.config.js",
+    "tsconfig.json",
+    "yarn.lock"
   ],
   "bin": {
-    "hadmean": "dist/bin/start"
+    "hadmean": "bin/run"
   },
   "dependencies": {
     "@hadmean/bacteria": "^0.0.0",
-    "@hadmean/chromista": "^1.0.0",
+    "@hadmean/chromista": "^1.0.1",
     "@hadmean/protozoa": "^1.0.0",
     "@types/cryptr": "^4.0.1",
     "@types/jsonwebtoken": "^8.5.8",

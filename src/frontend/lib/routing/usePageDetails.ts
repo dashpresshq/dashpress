@@ -1,4 +1,4 @@
-import { createStore } from "@adminator/protozoa";
+import { createStore } from "@hadmean/protozoa";
 import { useEffect } from "react";
 import { META_USER_PERMISSIONS } from "shared/types";
 

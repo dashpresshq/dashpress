@@ -1,7 +1,10 @@
 import { TemplateService } from "shared/lib/templates";
 import { IEntityField, QueryFilter } from "shared/types";
-import { FilterOperators } from "@adminator/chromista";
+import { FilterOperators } from "@hadmean/chromista";
 import { AbstractCacheService, createCacheService } from "backend/lib/cache";
+import { IFieldValidationItem } from "shared/validations/types";
+// import { runValidationError } from "shared/validations/run";
+import noop from "lodash/noop";
 import {
   ConfigurationService,
   configurationService,
@@ -152,10 +155,16 @@ export class DataController {
 
   async createData(entity: string, data: Record<string, unknown>) {
     // validate the createData values
-    const [allowedFields, primaryField] = await Promise.all([
+    const [allowedFields, primaryField, entityValidations] = await Promise.all([
       this.getAllowedCrudsFieldsToShow(entity, "hidden_entity_create_columns"),
       this._entitiesService.getEntityPrimaryField(entity),
+      this._configurationService.show<Record<string, IFieldValidationItem[]>>(
+        "entity_validations",
+        entity
+      ),
     ]);
+
+    noop(entityValidations);
 
     return {
       id: await this._dataService.create(
@@ -169,10 +178,20 @@ export class DataController {
   async updateData(entity: string, id: string, data: Record<string, unknown>) {
     // validate the updateData values
 
-    const [allowedFields, primaryField] = await Promise.all([
+    const [allowedFields, primaryField, entityValidations] = await Promise.all([
       this.getAllowedCrudsFieldsToShow(entity, "hidden_entity_update_columns"),
       this._entitiesService.getEntityPrimaryField(entity),
+      this._configurationService.show<Record<string, IFieldValidationItem[]>>(
+        "entity_validations",
+        entity
+      ),
     ]);
+
+    noop(entityValidations);
+
+    // const validations = runValidationError({})(data);
+
+    // console.log(entityValidations);
 
     await this._dataService.update(
       entity,

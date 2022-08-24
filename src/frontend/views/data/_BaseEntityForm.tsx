@@ -2,12 +2,12 @@ import {
   ButtonLang,
   DataStateKeys,
   SLUG_LOADING_VALUE,
-} from "@adminator/protozoa";
+} from "@hadmean/protozoa";
 import {
   ErrorAlert,
   FormSkeleton,
   FormSkeletonSchema,
-} from "@adminator/chromista";
+} from "@hadmean/chromista";
 import { SchemaForm } from "frontend/lib/form/SchemaForm";
 import { useEntityConfiguration } from "frontend/hooks/configuration/configration.store";
 import {

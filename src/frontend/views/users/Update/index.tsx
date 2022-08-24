@@ -5,8 +5,8 @@ import {
   SectionBox,
   SectionCenter,
   Spacer,
-} from "@adminator/chromista";
-import { TitleLang } from "@adminator/protozoa";
+} from "@hadmean/chromista";
+import { TitleLang } from "@hadmean/protozoa";
 import {
   useAuthenticatedUserBag,
   useUserHasPermission,

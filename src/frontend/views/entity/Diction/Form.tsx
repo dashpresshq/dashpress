@@ -1,4 +1,4 @@
-import { FormButton, FormInput } from "@adminator/chromista";
+import { FormButton, FormInput } from "@hadmean/chromista";
 import { Form, Field } from "react-final-form";
 import {
   ButtonLang,
@@ -6,7 +6,7 @@ import {
   maxLength,
   required,
   VALIDATION_LENGTH,
-} from "@adminator/protozoa";
+} from "@hadmean/protozoa";
 import { IFormProps } from "frontend/lib/form/types";
 
 interface IDictionSettings {

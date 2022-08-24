@@ -4,7 +4,7 @@ import {
   makePostRequest,
   MutationsLang,
   useWaitForResponseMutationOptions,
-} from "@adminator/protozoa";
+} from "@hadmean/protozoa";
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
 import { useRouter } from "next/router";
 import { useMutation } from "react-query";

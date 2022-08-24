@@ -3,7 +3,7 @@ import {
   SectionRight,
   SectionRow,
   MenuSection,
-} from "@adminator/chromista";
+} from "@hadmean/chromista";
 import { useIsAuthenticatedStore } from "frontend/hooks/auth/useAuthenticateUser";
 import { useRouter } from "next/router";
 import { ReactNode } from "react";

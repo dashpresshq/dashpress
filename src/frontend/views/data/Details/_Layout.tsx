@@ -6,7 +6,7 @@ import {
   SectionRight,
   SectionListItem,
   SectionRow,
-} from "@adminator/chromista";
+} from "@hadmean/chromista";
 import { ReactNode } from "react";
 import { useEntityReferenceFields } from "frontend/hooks/entity/entity.store";
 import {

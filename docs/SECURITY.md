@@ -2,9 +2,9 @@
 
 ## Reporting a Vulnerability
 
-If there are any vulnerabilities in **Adminator**, don't hesitate to _report them_.
+If there are any vulnerabilities in **Hadmean**, don't hesitate to _report them_.
 
-1. Use any of the [private contact addresses](akingbadefred@gmail.com).
+1. Use any of the [private contact addresses](security@hadmean.com).
 2. Describe the vulnerability.
 
    If you have a fix, that is most welcome -- please attach or summarize it in your message!

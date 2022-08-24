@@ -1,4 +1,4 @@
-import { useRouteParam } from "@adminator/protozoa";
+import { useRouteParam } from "@hadmean/protozoa";
 import { useCallback } from "react";
 import uniqBy from "lodash/uniqBy";
 import { IFieldValidationItem } from "shared/validations/types";

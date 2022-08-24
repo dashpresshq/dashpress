@@ -1,5 +1,5 @@
-import { SectionBox } from "@adminator/chromista";
-import { TitleLang } from "@adminator/protozoa";
+import { SectionBox } from "@hadmean/chromista";
+import { TitleLang } from "@hadmean/protozoa";
 import { useEntityDataDeletionMutation } from "frontend/hooks/data/data.store";
 import {
   NAVIGATION_LINKS,

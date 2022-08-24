@@ -7,7 +7,7 @@ import {
   User,
   Shield,
 } from "react-feather";
-import { ISelectionView } from "@adminator/chromista/dist/Layouts/types";
+import { ISelectionView } from "@hadmean/chromista/dist/Layouts/types";
 import { NAVIGATION_LINKS } from "frontend/lib/routing";
 import { USER_PERMISSIONS } from "shared/types";
 import { useUserHasPermissions } from "frontend/hooks/auth/user.store";

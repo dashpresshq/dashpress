@@ -2,7 +2,7 @@ import {
   ErrorAlert,
   FormSkeleton,
   FormSkeletonSchema,
-} from "@adminator/chromista";
+} from "@hadmean/chromista";
 import { SchemaForm } from "frontend/lib/form/SchemaForm";
 
 interface IProps {

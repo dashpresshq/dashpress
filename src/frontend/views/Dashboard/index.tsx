@@ -6,7 +6,7 @@ import {
   StyledCard,
   Stack,
   Text,
-} from "@adminator/chromista";
+} from "@hadmean/chromista";
 import styled from "styled-components";
 import * as StyledGrid from "styled-bootstrap-grid";
 import { useRouter } from "next/router";

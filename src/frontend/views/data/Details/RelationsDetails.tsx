@@ -1,5 +1,5 @@
-import { SectionBox } from "@adminator/chromista";
-import { TitleLang, useRouteParam } from "@adminator/protozoa";
+import { SectionBox } from "@hadmean/chromista";
+import { TitleLang, useRouteParam } from "@hadmean/protozoa";
 import {
   NAVIGATION_LINKS,
   useNavigationStack,

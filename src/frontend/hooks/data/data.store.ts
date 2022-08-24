@@ -8,11 +8,11 @@ import {
   useApiQueries,
   SLUG_LOADING_VALUE,
   useWaitForResponseMutationOptions,
-} from "@adminator/protozoa";
+} from "@hadmean/protozoa";
 import qs from "qs";
 import { useRouter } from "next/router";
 import { useMutation } from "react-query";
-import { FilterOperators } from "@adminator/chromista";
+import { FilterOperators } from "@hadmean/chromista";
 import { QueryFilter } from "shared/types";
 import { NAVIGATION_LINKS } from "../../lib/routing/links";
 import { useEntityDiction } from "../entity/entity.config";

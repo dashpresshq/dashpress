@@ -1,8 +1,4 @@
-import {
-  dataNotFoundMessage,
-  useApi,
-  useApiQueries,
-} from "@adminator/protozoa";
+import { dataNotFoundMessage, useApi, useApiQueries } from "@hadmean/protozoa";
 import { IEntityField, IEntityRelation } from "shared/types";
 import { isRouterParamEnabled } from "..";
 import { ILabelValue } from "../../../types";

@@ -1,5 +1,5 @@
-import { Tabs, SectionBox, Text, Spacer } from "@adminator/chromista";
-import { SLUG_LOADING_VALUE } from "@adminator/protozoa";
+import { Tabs, SectionBox, Text, Spacer } from "@hadmean/chromista";
+import { SLUG_LOADING_VALUE } from "@hadmean/protozoa";
 import { useSetPageDetails } from "frontend/lib/routing";
 import { USER_PERMISSIONS } from "shared/types";
 import { IFormExtension } from "frontend/lib/form/types";

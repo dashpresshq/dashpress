@@ -3,8 +3,8 @@ import {
   ErrorAlert,
   Spacer,
   Text,
-} from "@adminator/chromista";
-import { SLUG_LOADING_VALUE } from "@adminator/protozoa";
+} from "@hadmean/chromista";
+import { SLUG_LOADING_VALUE } from "@hadmean/protozoa";
 import React from "react";
 import {
   useEntityFieldLabels,

@@ -6,8 +6,8 @@ import {
   SectionListItem,
   Spacer,
   Text,
-} from "@adminator/chromista";
-import { TitleLang } from "@adminator/protozoa";
+} from "@hadmean/chromista";
+import { TitleLang } from "@hadmean/protozoa";
 import { useEntitiesList } from "frontend/hooks/entity/entity.store";
 import { createViewStateMachine } from "frontend/lib/create-view-state-machine";
 import { useNavigationStack, useSetPageDetails } from "frontend/lib/routing";

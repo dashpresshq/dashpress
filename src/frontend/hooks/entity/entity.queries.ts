@@ -1,4 +1,4 @@
-import { AppStorage, useApiQueries } from "@adminator/protozoa";
+import { AppStorage, useApiQueries } from "@hadmean/protozoa";
 import { useCallback } from "react";
 import { userFriendlyCase } from "../../lib/strings";
 import { configurationApiPath } from "../configuration/configration.store";

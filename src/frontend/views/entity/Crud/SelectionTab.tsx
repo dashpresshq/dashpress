@@ -6,7 +6,7 @@ import {
   Stack,
   Spacer,
   ErrorAlert,
-} from "@adminator/chromista";
+} from "@hadmean/chromista";
 import { useEffect, useState } from "react";
 import { IEntityField } from "shared/types";
 import { useStringSelections } from "../../../lib/selection";

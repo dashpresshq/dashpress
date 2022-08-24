@@ -6,9 +6,9 @@ import {
   FormSelect,
   FormSwitch,
   FormTextArea,
-} from "@adminator/chromista";
-import { ISharedFormInput } from "@adminator/chromista/dist/components/Form/_types";
-import { StringUtils } from "@adminator/protozoa";
+} from "@hadmean/chromista";
+import { ISharedFormInput } from "@hadmean/chromista/dist/components/Form/_types";
+import { StringUtils } from "@hadmean/protozoa";
 import { IColorableSelection } from "shared/types";
 import { FIELD_TYPES_CONFIG_MAP } from "shared/validations";
 

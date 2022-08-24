@@ -1,5 +1,5 @@
 import React from "react";
-import { ComponentIsLoading } from "@adminator/chromista";
+import { ComponentIsLoading } from "@hadmean/chromista";
 import { useSetupCheck } from "frontend/hooks/setup/setup.store";
 import { AuthLayout } from "frontend/_layouts/guest";
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";

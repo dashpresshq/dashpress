@@ -5,8 +5,8 @@ import {
   Spacer,
   Tabs,
   Text,
-} from "@adminator/chromista";
-import { SLUG_LOADING_VALUE, useRouteParam } from "@adminator/protozoa";
+} from "@hadmean/chromista";
+import { SLUG_LOADING_VALUE, useRouteParam } from "@hadmean/protozoa";
 import { useChangeRouterParam, useSetPageDetails } from "frontend/lib/routing";
 import { USER_PERMISSIONS } from "shared/types";
 import {

@@ -7,14 +7,14 @@ import {
   Spacer,
   Tabs,
   Text,
-} from "@adminator/chromista";
+} from "@hadmean/chromista";
 import {
   ENTITY_RELATIONS_ENDPOINT,
   useEntityFields,
   useEntityReferenceFields,
   useEntityRelationsList,
 } from "frontend/hooks/entity/entity.store";
-import { SLUG_LOADING_VALUE, useRouteParam } from "@adminator/protozoa";
+import { SLUG_LOADING_VALUE, useRouteParam } from "@hadmean/protozoa";
 import { useChangeRouterParam, useSetPageDetails } from "frontend/lib/routing";
 import { EntitiesSelection } from "frontend/views/settings/Entities/Selection";
 import { useEntityDictionPlurals } from "frontend/hooks/entity/entity.queries";

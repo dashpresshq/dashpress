@@ -1,5 +1,5 @@
-import { FormButton } from "@adminator/chromista";
-import { resetFormValues, ToastService } from "@adminator/protozoa";
+import { FormButton } from "@hadmean/chromista";
+import { resetFormValues, ToastService } from "@hadmean/protozoa";
 import { Field, Form } from "react-final-form";
 import {
   IAppliedSchemaFormConfig,

@@ -1,3 +1,3 @@
-import { useRouteParam } from "@adminator/protozoa";
+import { useRouteParam } from "@hadmean/protozoa";
 
 export const useUsernameFromRouteParam = () => useRouteParam("username");

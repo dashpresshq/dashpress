@@ -3,7 +3,7 @@ import {
   SectionRight,
   SectionRow,
   MenuSection,
-} from "@adminator/chromista";
+} from "@hadmean/chromista";
 import { useRouter } from "next/router";
 import { ReactNode } from "react";
 import { NAVIGATION_LINKS } from "../../lib/routing/links";

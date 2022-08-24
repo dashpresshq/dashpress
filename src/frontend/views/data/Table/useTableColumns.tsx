@@ -1,4 +1,4 @@
-import { TableFilterType } from "@adminator/chromista/dist/components/Table/filters/types";
+import { TableFilterType } from "@hadmean/chromista/dist/components/Table/filters/types";
 import {
   useEntityCrudSettings,
   useEntityFieldLabels,
@@ -12,8 +12,8 @@ import {
   useEntityToOneReferenceFields,
 } from "frontend/hooks/entity/entity.store";
 import { FIELD_TYPES_CONFIG_MAP } from "shared/validations";
-import { StringUtils } from "@adminator/protozoa";
-import { ITableColumn } from "@adminator/chromista";
+import { StringUtils } from "@hadmean/protozoa";
+import { ITableColumn } from "@hadmean/chromista";
 import { useMemo } from "react";
 import { IColorableSelection } from "shared/types";
 import { ENTITY_LIST_PATH } from "frontend/hooks/data/data.store";

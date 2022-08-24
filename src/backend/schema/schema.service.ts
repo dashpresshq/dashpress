@@ -1,4 +1,4 @@
-import { introspect, Entity } from "@adminator/bacteria";
+import { introspect, Entity } from "@hadmean/bacteria";
 import {
   CredentialsService,
   credentialsService,

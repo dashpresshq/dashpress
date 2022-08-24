@@ -2,7 +2,7 @@ import {
   makePatchRequest,
   MutationsLang,
   useWaitForResponseMutationOptions,
-} from "@adminator/protozoa";
+} from "@hadmean/protozoa";
 import { AUTHENTICATED_ACCOUNT_URL } from "frontend/hooks/auth/user.store";
 import { useMutation } from "react-query";
 import { IChangePasswordForm } from "shared/form-schemas/profile/password";

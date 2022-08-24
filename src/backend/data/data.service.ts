@@ -1,4 +1,4 @@
-import { FilterOperators, IColumnFilterBag } from "@adminator/chromista"; // Move this somewhere else
+import { FilterOperators, IColumnFilterBag } from "@hadmean/chromista"; // Move this somewhere else
 import { Knex } from "knex";
 import get from "lodash/get";
 import { credentialsService } from "backend/credentials/credentials.service";

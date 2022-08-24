@@ -2,7 +2,7 @@ import {
   makePostRequest,
   MutationsLang,
   useWaitForResponseMutationOptions,
-} from "@adminator/protozoa";
+} from "@hadmean/protozoa";
 import { useAuthenticateUser } from "frontend/hooks/auth/useAuthenticateUser";
 import { SETUP_CHECK_URL } from "frontend/hooks/setup/setup.store";
 import { useRouter } from "next/router";

@@ -6,13 +6,13 @@ import {
   DEFAULT_TABLE_PARAMS,
   SoftButton,
   Spacer,
-} from "@adminator/chromista";
+} from "@hadmean/chromista";
 import {
   IBEPaginatedDataState,
   usePaginatedData,
   SLUG_LOADING_VALUE,
   IFEPaginatedDataState,
-} from "@adminator/protozoa";
+} from "@hadmean/protozoa";
 import { useState } from "react";
 import { QueryFilter } from "shared/types";
 import { createViewStateMachine } from "frontend/lib/create-view-state-machine";

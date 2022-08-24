@@ -6,11 +6,11 @@ import {
   Spacer,
   Stack,
   Text,
-} from "@adminator/chromista";
+} from "@hadmean/chromista";
 import React, { ReactNode, useEffect } from "react";
 import { Icon } from "react-feather";
 import Head from "next/head";
-import { AuthService } from "@adminator/protozoa";
+import { AuthService } from "@hadmean/protozoa";
 import { useRouter } from "next/router";
 import { useNavigationStack } from "frontend/lib/routing";
 import { usePageDetailsStore } from "frontend/lib/routing/usePageDetails";

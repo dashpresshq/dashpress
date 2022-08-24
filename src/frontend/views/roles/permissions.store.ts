@@ -6,7 +6,7 @@ import {
   MutationsLang,
   useApi,
   useApiMutateOptions,
-} from "@adminator/protozoa";
+} from "@hadmean/protozoa";
 import { isRouterParamEnabled } from "frontend/hooks";
 import { useMutation } from "react-query";
 import { useRoleIdFromRouteParam } from "./hooks";

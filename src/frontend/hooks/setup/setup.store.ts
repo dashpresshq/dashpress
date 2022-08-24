@@ -1,4 +1,4 @@
-import { dataNotFoundMessage, useStorageApi } from "@adminator/protozoa";
+import { dataNotFoundMessage, useStorageApi } from "@hadmean/protozoa";
 import { useRouter } from "next/router";
 import { ISetupCheck } from "shared/types";
 

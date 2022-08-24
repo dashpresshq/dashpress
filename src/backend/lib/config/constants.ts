@@ -1,4 +1,4 @@
-import { StringUtils } from "@adminator/protozoa";
+import { StringUtils } from "@hadmean/protozoa";
 import { CacheAdaptorTypes } from "../cache/types";
 import { ConfigAdaptorTypes } from "../config-persistence/types";
 import { BooleanConfigValue, ConfigKeys } from "./types";

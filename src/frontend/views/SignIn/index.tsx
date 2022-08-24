@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
-import { makePostRequest, ToastService } from "@adminator/protozoa";
+import { makePostRequest, ToastService } from "@hadmean/protozoa";
 import { useMutation } from "react-query";
 import { AuthLayout } from "frontend/_layouts/guest";
 import { ISuccessfullAuthenticationResponse } from "shared/types";
 import { useRouter } from "next/router";
 import { NAVIGATION_LINKS } from "frontend/lib/routing";
 import { useSetupCheck } from "frontend/hooks/setup/setup.store";
-import { ComponentIsLoading } from "@adminator/chromista";
+import { ComponentIsLoading } from "@hadmean/chromista";
 import { ISignInForm } from "shared/form-schemas/auth/signin";
 import {
   useAuthenticateUser,

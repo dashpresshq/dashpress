@@ -1,5 +1,5 @@
-import { SectionBox, SectionCenter } from "@adminator/chromista";
-import { TitleLang } from "@adminator/protozoa";
+import { SectionBox, SectionCenter } from "@hadmean/chromista";
+import { TitleLang } from "@hadmean/protozoa";
 import { useNavigationStack, useSetPageDetails } from "frontend/lib/routing";
 import { USER_PERMISSIONS } from "shared/types";
 import { AppLayout } from "../../../_layouts/app";

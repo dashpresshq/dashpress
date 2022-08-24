@@ -1,6 +1,6 @@
 import { lighten } from "polished";
 import styled from "styled-components";
-import { Text } from "@adminator/chromista";
+import { Text } from "@hadmean/chromista";
 import { IColorableSelection } from "shared/types";
 
 const DEFAULT_TAG_COLOR = "#000000";

@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { AppWrapper } from "@adminator/chromista";
+import { AppWrapper } from "@hadmean/chromista";
 import "../static/fonts/font-face.css";
 
 function MyApp({ Component, pageProps }) {

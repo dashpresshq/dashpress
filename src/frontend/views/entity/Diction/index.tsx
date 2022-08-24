@@ -2,8 +2,8 @@ import {
   FormSkeleton,
   FormSkeletonSchema,
   SectionBox,
-} from "@adminator/chromista";
-import { SLUG_LOADING_VALUE } from "@adminator/protozoa";
+} from "@hadmean/chromista";
+import { SLUG_LOADING_VALUE } from "@hadmean/protozoa";
 import { useSetPageDetails } from "frontend/lib/routing";
 import { createViewStateMachine } from "frontend/lib/create-view-state-machine";
 import { USER_PERMISSIONS } from "shared/types";

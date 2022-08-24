@@ -1,4 +1,4 @@
-import { IDropDownMenuItem } from "@adminator/chromista";
+import { IDropDownMenuItem } from "@hadmean/chromista";
 import {
   useEntityCrudSettings,
   useEntityDiction,

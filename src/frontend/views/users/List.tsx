@@ -4,12 +4,12 @@ import {
   DeleteButton,
   SoftButton,
   Stack,
-} from "@adminator/chromista";
+} from "@hadmean/chromista";
 import {
   IBEPaginatedDataState,
   IFEPaginatedDataState,
   useFEPaginatedData,
-} from "@adminator/protozoa";
+} from "@hadmean/protozoa";
 import React, { useState } from "react";
 import { AppLayout } from "frontend/_layouts/app";
 import { UserPlus } from "react-feather";

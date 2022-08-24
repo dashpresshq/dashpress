@@ -1,6 +1,6 @@
 ---
 name: Bug Report
-about: Create a report to help Adminator to improve
+about: Create a report to help Hadmean to improve
 title: "bug: "
 labels: "bug"
 assignees: ""
@@ -8,7 +8,7 @@ assignees: ""
 
 # Bug Report
 
-**Adminator version:**
+**Hadmean version:**
 
 <!-- Please specify commit or tag version. -->
 

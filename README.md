@@ -83,17 +83,9 @@ Hadmean takes another approach to building internal apps by building all the fea
 ### Installation
 
 ```bash
-# Clone this repository
-$ git clone https://github.com/hadmean/hadmean <project_name>
-
-# Go into the repository
 $ cd <project_name>
 
-# Install dependencies
-$ yarn install
-
-# Run the app
-$ npm run dev
+$ npx hadmean@latest
 ```
 
 ## Usage

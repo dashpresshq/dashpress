@@ -6,6 +6,7 @@
     "dev": "next dev",
     "start": "next start",
     "build:next": "next build",
+    "build": "tsup ./src/bin/index.ts",
     "setup-husky": "husky install",
     "test": "jest --detectOpenHandles --runInBand",
     "typecheck": "tsc",
@@ -82,6 +83,7 @@
     "node-mocks-http": "^1.11.0",
     "prettier": "^2.7.1",
     "ts-node": "^10.8.1",
+    "tsup": "^6.2.2",
     "typescript": "^4.7.4"
   },
   "engines": {

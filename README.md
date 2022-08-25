@@ -1,6 +1,6 @@
 <h1 align="center">
   <a href="https://github.com/hadmean/hadmean">
-    <img src="public/assets/images/full-logo-white.png" alt="Logo" height="100">
+    <img src="./public/assets/images/full-logo-white.png" alt="Logo" height="100">
   </a>
 </h1>
 

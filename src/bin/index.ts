@@ -31,7 +31,7 @@
   console.log(`✨ You're about to run Hadmean v${currentPkgJson.version}`);
 
   await fs.copyFile(
-    path.join(process.cwd(), "./.env.example"),
+    path.join(__dirname, "../.env.example"),
     path.join(process.cwd(), "./.env.local")
   );
 

@@ -28,7 +28,7 @@
 
   const currentPkgJson = require("../../package.json");
 
-  console.log(`✨ You're about to run Hadmean v${currentPkgJson.version}`);
+  console.log(`✨ You're about to TODO run Hadmean v${currentPkgJson.version}`);
 
   await fs.copyFile(
     path.join(__dirname, "../.env.example"),

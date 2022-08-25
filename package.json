@@ -31,10 +31,12 @@
     "@types/cryptr": "^4.0.1",
     "@types/jsonwebtoken": "^8.5.8",
     "bcrypt": "^5.0.1",
+    "chalk": "^5.0.1",
     "change-case": "^4.1.2",
     "class-validator": "^0.13.2",
     "crypto-random-string": "^5.0.0",
     "cryptr": "^6.0.3",
+    "execa": "^6.1.0",
     "final-form-arrays": "^3.0.2",
     "fs-extra": "^10.1.0",
     "jsonwebtoken": "^8.5.1",
@@ -42,6 +44,8 @@
     "lodash": "^4.17.21",
     "mustache": "^4.2.0",
     "next": "12.1.6",
+    "ora": "^6.1.2",
+    "path": "^0.12.7",
     "pg": "^8.7.3",
     "polished": "^4.2.2",
     "react": "18.1.0",
@@ -52,7 +56,8 @@
     "react-query": "^3.39.1",
     "redis": "^4.2.0",
     "styled-bootstrap-grid": "^3.1.2",
-    "styled-components": "^5.3.5"
+    "styled-components": "^5.3.5",
+    "terminal-link": "^3.0.0"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.18.10",

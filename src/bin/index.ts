@@ -7,7 +7,6 @@
   const { StringUtils } = require("@hadmean/protozoa");
   const { default: terminalLink } = await import("terminal-link");
   const { default: c } = await import("chalk");
-  const { default: ora } = await import("ora");
   const { execa } = await import("execa");
 
   const replaceRandomCharaters = (envContent: string) => {
@@ -22,7 +21,7 @@
     );
   };
 
-  const moveEnv = () => {
+  const defaultEnv = () => {
     if (fs.existsSync(path.join(process.cwd(), "./.env.local"))) {
       return;
     }
@@ -38,31 +37,16 @@
     );
   };
 
-  const startApplication = async () => {
-    const spinner = ora(
-      "Building your application. This may take a few minutes."
-    ).start();
+  const copyEnvHere = () => {
+    const envContent: string = fs.readFileSync(
+      path.join(process.cwd(), "./.env.local"),
+      "utf8"
+    );
 
-    try {
-      await execa("npm", ["run", "build"], {
-        cwd: path.join(__dirname, ".."),
-      });
-
-      fs.moveSync(
-        path.join(__dirname, "../.next"),
-        path.join(process.cwd(), "./.next")
-      );
-
-      spinner.succeed("App built successfully");
-    } catch (_err: any) {
-      console.error(_err);
-      const err = _err;
-      if (err.failed) {
-        spinner.fail("Failed to build application.");
-        process.exit(1);
-      }
-      throw err;
-    }
+    fs.writeFileSync(
+      path.join(__dirname, "../.env.local"),
+      `${envContent}\nCURRENT_WORKING_DIRECTORY=${process.cwd()}`
+    );
   };
 
   const currentPkgJson = require("../../package.json");
@@ -71,11 +55,9 @@
 
   console.log(`✨ You're about to run Hadmean v${currentPkgJson.version}`);
 
-  moveEnv();
+  defaultEnv();
 
-  process.stdout.write("\n");
-
-  await startApplication();
+  copyEnvHere();
 
   process.stdout.write("\n");
 
@@ -99,7 +81,7 @@
       )}
     `);
 
-  execa("npm", ["run", "start"]);
+  execa("npm", ["run", "start"], { cwd: path.join(__dirname, "..") });
 })().catch((err) => {
   console.error(err);
   process.exit(1);

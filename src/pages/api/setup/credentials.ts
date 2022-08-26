@@ -66,7 +66,7 @@ const credentialRequestSchema: IAppliedSchemaFormConfig<IDBCredentials> = {
       {
         validationType: "max",
         constraint: {
-          length: 65535,
+          value: 65535,
         },
       },
     ],

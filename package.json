@@ -1,13 +1,13 @@
 {
   "name": "hadmean",
-  "version": "0.0.20",
+  "version": "0.0.21",
   "license": "GPL-3.0-or-later",
   "scripts": {
     "dev": "next dev",
     "start": "next start",
-    "build": "next build",
-    "prepare": "npm run build:bin",
+    "build:next": "next build",
     "build:bin": "tsup ./src/bin/index.ts",
+    "prepare": "npm run build:bin && npm run build:next",
     "setup-husky": "husky install",
     "test": "jest --detectOpenHandles --runInBand",
     "typecheck": "tsc",
@@ -17,15 +17,11 @@
     "verify": "npm run typecheck && npm run lint && npm run test"
   },
   "files": [
-    "src",
+    ".next",
     "dist",
     "bin",
-    ".eslintrc.js",
     "public",
-    ".env.example",
-    "next.config.js",
-    "tsconfig.json",
-    "yarn.lock"
+    ".env.example"
   ],
   "bin": "./bin/hadmean",
   "dependencies": {
@@ -53,7 +49,6 @@
     "lodash": "^4.17.21",
     "mustache": "^4.2.0",
     "next": "12.1.6",
-    "ora": "^6.1.2",
     "path": "^0.12.7",
     "pg": "^8.7.3",
     "polished": "^4.2.2",

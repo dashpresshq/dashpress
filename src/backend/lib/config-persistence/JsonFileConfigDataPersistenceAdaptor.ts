@@ -17,7 +17,11 @@ export class JsonFileConfigDataPersistenceAdaptor<
       this.configService.getNodeEnvironment() === NodeEnvironments.Test
         ? `${type}.test.json`
         : `${type}.json`;
-    return path.resolve(process.cwd(), ".config-data", file);
+    return path.resolve(
+      process.env.CURRENT_WORKING_DIRECTORY || process.cwd(),
+      ".config-data",
+      file
+    );
   };
 
   async resetToEmpty() {

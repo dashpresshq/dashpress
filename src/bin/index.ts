@@ -14,7 +14,7 @@
       (reducedEnvContent, currentKey) => {
         return reducedEnvContent.replace(
           `${currentKey}=RANDOM_CHARACTERS`,
-          `${currentKey}=${StringUtils.generateRandomGibberish(128)}`
+          `${currentKey}=${StringUtils.generateRandomString(128)}`
         );
       },
       envContent

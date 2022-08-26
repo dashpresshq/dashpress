@@ -10,11 +10,12 @@ interface IConfigBag {
 
 const tokenValidations = (value: string, label: string) => {
   if (
-    !/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*_]).{64,}$/.test(
+    !/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{64,}$/.test(
+      // !/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*_]).{64,}$/.test(
       value
     )
   ) {
-    const errorText = `${label} must contain uppercase letters, lowercase letters, numbers, special characters and be more than 64 characters`;
+    const errorText = `${label} must contain uppercase letters, lowercase letters, numbers and be more than 64 characters`;
     throw new Error(errorText);
   }
 };
@@ -75,7 +76,7 @@ export const ConfigBag: Record<ConfigKeys, IConfigBag> = {
   },
   ENCRYPTION_KEY: {
     defaultValue: () => {
-      return StringUtils.generateRandomGibberish(128);
+      return StringUtils.generateRandomString(128);
     },
     validate: (value) => {
       tokenValidations(value, "Encryption Key");
@@ -93,7 +94,7 @@ export const ConfigBag: Record<ConfigKeys, IConfigBag> = {
   },
   AUTH_TOKEN_KEY: {
     defaultValue: () => {
-      return StringUtils.generateRandomGibberish(128);
+      return StringUtils.generateRandomString(128);
     },
     validate: (value) => {
       tokenValidations(value, "Auth token Key");

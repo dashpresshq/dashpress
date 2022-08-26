@@ -1,26 +1,49 @@
+/* eslint-disable no-console */
+
 // Support port
 (async () => {
   const path = require("path");
   const fs = require("fs-extra");
+  const { StringUtils } = require("@hadmean/protozoa");
   const { default: terminalLink } = await import("terminal-link");
   const { default: c } = await import("chalk");
   const { default: ora } = await import("ora");
   const { execa } = await import("execa");
 
+  const moveEnv = () => {
+    const envContent: string = fs.readFileSync(
+      path.join(__dirname, "../.env.example")
+    );
+
+    envContent.replaceAll(
+      "RANDOM_CHARACTERS",
+      StringUtils.generateRandomGibberish(64)
+    );
+
+    fs.writeFileSync(path.join(process.cwd(), "./.env.local"), envContent);
+  };
+
   const startApplication = async () => {
     const spinner = ora(
       "Building your application. This may take a few minutes."
     ).start();
-    try {
-      await execa("npm", ["run", "build:next"]);
 
-      spinner.succeed("App build successfully");
+    try {
+      await execa("npm", ["run", "build"], {
+        cwd: path.join(__dirname, ".."),
+      });
+
+      fs.moveSync(
+        path.join(__dirname, "../.next"),
+        path.join(process.cwd(), "./.next")
+      );
+
+      spinner.succeed("App built successfully");
     } catch (_err: any) {
       const err = _err;
       if (err.failed) {
         spinner.fail("Failed to build application.");
-        process.stdout.write("\n");
-        return;
+        process.exit(1);
       }
       throw err;
     }
@@ -28,14 +51,9 @@
 
   const currentPkgJson = require("../../package.json");
 
-  console.log(`✨ You're about to TODO run Hadmean v${currentPkgJson.version}`);
+  console.log(`✨ You're about to run Hadmean v${currentPkgJson.version}`);
 
-  await fs.copyFile(
-    path.join(__dirname, "../.env.example"),
-    path.join(process.cwd(), "./.env.local")
-  );
-
-  // TODO mangle the .env.example
+  moveEnv();
 
   process.stdout.write("\n");
 
@@ -63,7 +81,7 @@
       )}
     `);
 
-  await execa("npm", ["run", "start"]);
+  execa("npm", ["run", "start"]);
 })().catch((err) => {
   console.error(err);
   process.exit(1);

@@ -10,17 +10,32 @@
   const { default: ora } = await import("ora");
   const { execa } = await import("execa");
 
+  const replaceRandomCharaters = (envContent: string) => {
+    return ["ENCRYPTION_KEY", "AUTH_TOKEN_KEY"].reduce(
+      (reducedEnvContent, currentKey) => {
+        return reducedEnvContent.replace(
+          `${currentKey}=RANDOM_CHARACTERS`,
+          `${currentKey}=${StringUtils.generateRandomGibberish(64)}`
+        );
+      },
+      envContent
+    );
+  };
+
   const moveEnv = () => {
+    if (fs.existsSync(path.join(process.cwd(), "./.env.local"))) {
+      return;
+    }
+
     const envContent: string = fs.readFileSync(
-      path.join(__dirname, "../.env.example")
+      path.join(__dirname, "../.env.example"),
+      "utf8"
     );
 
-    envContent.replaceAll(
-      "RANDOM_CHARACTERS",
-      StringUtils.generateRandomGibberish(64)
+    fs.writeFileSync(
+      path.join(process.cwd(), "./.env.local"),
+      replaceRandomCharaters(envContent)
     );
-
-    fs.writeFileSync(path.join(process.cwd(), "./.env.local"), envContent);
   };
 
   const startApplication = async () => {

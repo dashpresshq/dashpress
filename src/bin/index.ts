@@ -55,6 +55,7 @@
 
       spinner.succeed("App built successfully");
     } catch (_err: any) {
+      console.error(_err);
       const err = _err;
       if (err.failed) {
         spinner.fail("Failed to build application.");
@@ -65,6 +66,8 @@
   };
 
   const currentPkgJson = require("../../package.json");
+
+  process.stdout.write("\n");
 
   console.log(`✨ You're about to run Hadmean v${currentPkgJson.version}`);
 

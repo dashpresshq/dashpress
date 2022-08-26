@@ -14,7 +14,7 @@
       (reducedEnvContent, currentKey) => {
         return reducedEnvContent.replace(
           `${currentKey}=RANDOM_CHARACTERS`,
-          `${currentKey}=${StringUtils.generateRandomGibberish(64)}`
+          `${currentKey}=${StringUtils.generateRandomGibberish(128)}`
         );
       },
       envContent
@@ -81,7 +81,11 @@
       )}
     `);
 
-  execa("npm", ["run", "start"], { cwd: path.join(__dirname, "..") });
+  const { stdout, stderr } = execa("npm", ["run", "start"], {
+    cwd: path.join(__dirname, ".."),
+  });
+  stdout.pipe(process.stdout);
+  stderr.pipe(process.stderr);
 })().catch((err) => {
   console.error(err);
   process.exit(1);

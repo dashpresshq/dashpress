@@ -7,22 +7,18 @@
 <div align="center">
   Hadmean
   <br />
-  <a href="#about"><strong>Explore the screenshots »</strong></a>
-  <br />
-  <br />
   <a href="https://github.com/hadmean/hadmean/issues/new?assignees=&labels=bug&template=01_BUG_REPORT.md&title=bug%3A+">Report a Bug</a>
   ·
   <a href="https://github.com/hadmean/hadmean/issues/new?assignees=&labels=enhancement&template=02_FEATURE_REQUEST.md&title=feat%3A+">Request a Feature</a>
-  .<a href="https://github.com/hadmean/hadmean/discussions">Ask a Question</a>
+  ·
+  <a href="https://github.com/hadmean/hadmean/discussions">Ask a Question</a>
 </div>
 
 <div align="center">
 <br />
 
-<!-- [![Project license](https://img.shields.io/github/license/hadmean/hadmean.svg?style=flat-square)](LICENSE)
-
+[![Project license](https://img.shields.io/github/license/hadmean/hadmean.svg?style=flat-square)](LICENSE)
 [![Pull Requests welcome](https://img.shields.io/badge/PRs-welcome-ff69b4.svg?style=flat-square)](https://github.com/hadmean/hadmean/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22)
-[![code with love by thrownullexception](https://img.shields.io/badge/%3C%2F%3E%20with%20%E2%99%A5%20by-thrownullexception-ff1414.svg?style=flat-square)](https://github.com/thrownullexception) -->
 
 </div>
 
@@ -53,7 +49,7 @@
 
 ## About
 
-Hadmean is a admin dashboard framework that build itself based on your database schema and your configurations. It is all batteries included and extremely customizable
+Hadmean is a internal tool generator that build itself based on your database schema and your configurations. It is all batteries included and extremely customizable
 
 ### How it works
 

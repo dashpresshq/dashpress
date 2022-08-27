@@ -1,12 +1,4 @@
-import {
-  Settings,
-  Home,
-  Table,
-  BarChart,
-  Users,
-  User,
-  Shield,
-} from "react-feather";
+import { Settings, Home, Table, Users, User, Shield } from "react-feather";
 import { ISelectionView } from "@hadmean/chromista/dist/Layouts/types";
 import { NAVIGATION_LINKS } from "frontend/lib/routing";
 import { USER_PERMISSIONS } from "shared/types";
@@ -43,12 +35,6 @@ export const useSelectionViews = (): ILayoutSelectionView[] => {
           action: NAVIGATION_LINKS.ENTITY.TABLE(value),
         })),
       },
-    },
-    {
-      title: "Dashboards",
-      description: "Your models",
-      icon: BarChart,
-      view: <>Demo View</>,
     },
     {
       title: "Settings",

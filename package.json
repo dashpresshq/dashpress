@@ -7,7 +7,7 @@
     "start": "next start",
     "build:next": "next build",
     "build:bin": "tsup ./src/bin/index.ts",
-    "prepare": "rimraf .next && npm run build:bin && npm run build:next && rimraf .next/cache",
+    "prepublishOnly": "rimraf .next && npm run build:bin && npm run build:next && rimraf .next/cache",
     "setup-husky": "husky install",
     "test": "jest --detectOpenHandles --runInBand",
     "typecheck": "tsc",
@@ -26,7 +26,7 @@
   "bin": "./bin/hadmean",
   "dependencies": {
     "@hadmean/bacteria": "^0.0.1",
-    "@hadmean/chromista": "^1.0.3",
+    "@hadmean/chromista": "^1.0.6",
     "@hadmean/protozoa": "^1.0.1",
     "@types/cryptr": "^4.0.1",
     "@types/jsonwebtoken": "^8.5.8",

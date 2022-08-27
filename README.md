@@ -30,7 +30,7 @@
 <summary>Table of Contents</summary>
 
 - [About](#about)
-  - [How it looks](#how-it-looks)
+  - [How it works](#how-it-works)
   - [Motivation](#motivation)
   - [Why you should try Hadmean](#why-you-should-try-hadmean)
 - [Getting Started](#getting-started)
@@ -55,8 +55,10 @@
 
 Hadmean is a admin dashboard framework that build itself based on your database schema and your configurations. It is all batteries included and extremely customizable
 
-### How it looks
-<img src="./docs/demo.gif" title="Hadmean Demo" width="100%">
+### How it works
+
+https://user-images.githubusercontent.com/51802801/187038561-73b8a86d-ab97-4efc-97d6-585cc4fb9f00.mp4
+
 
 ### Motivation
 There are lot of good internal dashboard tools out there, The ones bundled with your framework are usually good but not usually highly customizable so they usually dont end up in your clients hand. The good ones are paid for and the free version are usually heavily restricted and they usually require weeks to master with some techinical know-how of SQL and javascript

@@ -34,6 +34,8 @@ const StyledColorBox = styled.div<{ background: string; isActive: boolean }>`
 
 const ManagableEntities = ["selection"];
 
+// TODO color selection
+
 interface IProps {
   field: string;
   selections: IColorableSelection[];

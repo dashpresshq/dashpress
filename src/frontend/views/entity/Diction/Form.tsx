@@ -1,13 +1,6 @@
-import { FormButton, FormInput } from "@hadmean/chromista";
-import { Form, Field } from "react-final-form";
-import {
-  ButtonLang,
-  composeValidators,
-  maxLength,
-  required,
-  VALIDATION_LENGTH,
-} from "@hadmean/protozoa";
+import { ButtonLang, VALIDATION_LENGTH } from "@hadmean/protozoa";
 import { IFormProps } from "frontend/lib/form/types";
+import { SchemaForm } from "frontend/lib/form/SchemaForm";
 
 type IDictionSettings = {
   plural: string;
@@ -19,42 +12,40 @@ export function EntityDictionForm({
   initialValues,
 }: IFormProps<IDictionSettings>) {
   return (
-    <Form
+    <SchemaForm<IDictionSettings>
       onSubmit={onSubmit}
       initialValues={initialValues}
-      render={({ handleSubmit, submitting, pristine }) => (
-        <form onSubmit={handleSubmit}>
-          <Field
-            name="plural"
-            validate={composeValidators(
-              required,
-              maxLength(VALIDATION_LENGTH.NAMES)
-            )}
-            validateFields={[]}
-          >
-            {({ input, meta }) => (
-              <FormInput label="Plural" required meta={meta} input={input} />
-            )}
-          </Field>
-          <Field
-            name="singular"
-            validate={composeValidators(
-              required,
-              maxLength(VALIDATION_LENGTH.NAMES)
-            )}
-            validateFields={[]}
-          >
-            {({ input, meta }) => (
-              <FormInput label="Singular" required meta={meta} input={input} />
-            )}
-          </Field>
-          <FormButton
-            text={`${ButtonLang.update} Diction`}
-            isMakingRequest={submitting}
-            disabled={pristine}
-          />
-        </form>
-      )}
+      buttonText={`${ButtonLang.update} Diction`}
+      fields={{
+        plural: {
+          type: "text",
+          validations: [
+            {
+              validationType: "required",
+            },
+            {
+              validationType: "maxLength",
+              constraint: {
+                length: VALIDATION_LENGTH.NAMES,
+              },
+            },
+          ],
+        },
+        singular: {
+          type: "text",
+          validations: [
+            {
+              validationType: "required",
+            },
+            {
+              validationType: "maxLength",
+              constraint: {
+                length: VALIDATION_LENGTH.NAMES,
+              },
+            },
+          ],
+        },
+      }}
     />
   );
 }

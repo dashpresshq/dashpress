@@ -34,6 +34,7 @@ export function ReferenceComponent({ entity, id, displayFrom }: IProps) {
   }
 
   return (
+    // :eyes on the padding on details view
     <StyledLinkLikeButton
       onClick={() => {
         if (displayFrom === "table") {

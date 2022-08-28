@@ -7,4 +7,4 @@ export const isUseColorsFlagOn = (selections: IColorableSelection[]) => {
   return !!selections[0].color;
 };
 
-export const SYSTEM_COLORS = ["#f0f", "#0f0", "#ff0", "#00f"];
+export const SYSTEM_COLORS = ["#0f0", "#f0f", "#ff0", "#00f"];

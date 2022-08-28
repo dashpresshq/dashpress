@@ -70,43 +70,48 @@ export function FieldSelectionCanvas({
       initialValues={{ selections }}
       render={({ handleSubmit, values, pristine, form }) => (
         <form onSubmit={handleSubmit}>
-          <FormSwitch
-            label="Use Colors"
-            name="use-colors"
-            value={useColors}
-            onChange={(newUseColorValue) => {
-              setUseColors(newUseColorValue);
-              form.change(
-                "selections",
-                (
-                  values as { selections: IColorableSelection[] }
-                ).selections.map((selection, index) => ({
-                  ...selection,
-                  color: newUseColorValue
-                    ? SYSTEM_COLORS[index % SYSTEM_COLORS.length]
-                    : undefined,
-                }))
-              );
-            }}
-          />
+          {entityType !== "boolean" && (
+            <FormSwitch
+              label="Use Colors"
+              name="use-colors"
+              value={useColors}
+              onChange={(newUseColorValue) => {
+                setUseColors(newUseColorValue);
+                form.change(
+                  "selections",
+                  (
+                    values as { selections: IColorableSelection[] }
+                  ).selections.map((selection, index) => ({
+                    ...selection,
+                    color: newUseColorValue
+                      ? SYSTEM_COLORS[index % SYSTEM_COLORS.length]
+                      : undefined,
+                  }))
+                );
+              }}
+            />
+          )}
           <FieldArray name="selections">
             {({ fields }) => (
               <div>
                 {fields.map((name, index) => (
                   <React.Fragment key={name}>
-                    <Spacer />
-                    <Stack justify="end">
-                      {ManagableEntities.includes(entityType) && (
-                        <DeleteButton
-                          onDelete={() => {
-                            fields.remove(index);
-                          }}
-                          shouldConfirmAlert={false}
-                          text="Option"
-                          size="xs"
-                        />
-                      )}
-                    </Stack>
+                    {ManagableEntities.includes(entityType) && (
+                      <>
+                        <Spacer />
+                        <Stack justify="end">
+                          <DeleteButton
+                            onDelete={() => {
+                              fields.remove(index);
+                            }}
+                            shouldConfirmAlert={false}
+                            text="Option"
+                            size="xs"
+                          />
+                        </Stack>
+                      </>
+                    )}
+
                     <Spacer />
                     <Field
                       name={`${name}.value`}

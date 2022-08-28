@@ -39,6 +39,7 @@ export const getEntitySelectionConfig = (
 
       return uniqBy(
         [
+          ...preselection,
           ...enumsFromDb.map((enumValue, index) => ({
             value: enumValue,
             label: userFriendlyCase(enumValue),
@@ -46,7 +47,6 @@ export const getEntitySelectionConfig = (
               ? SYSTEM_COLORS[index % SYSTEM_COLORS.length]
               : undefined,
           })),
-          ...preselection,
         ],
         "value"
       );

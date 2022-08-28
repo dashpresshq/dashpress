@@ -107,7 +107,7 @@ export function FieldsTypeForm({
                 validateFields={[]}
               >
                 {(renderProps) => {
-                  const rightActions = [
+                  let rightActions = [
                     {
                       label: "Configure Validation",
                       action: () => {
@@ -122,12 +122,15 @@ export function FieldsTypeForm({
                         .value as keyof typeof FIELD_TYPES_CONFIG_MAP
                     ].configureSelection
                   ) {
-                    rightActions.push({
-                      label: "Configure Selections",
-                      action: () => {
-                        setShowFieldSelection(name);
+                    rightActions = [
+                      {
+                        label: "Configure Selections",
+                        action: () => {
+                          setShowFieldSelection(name);
+                        },
                       },
-                    });
+                      ...rightActions,
+                    ];
                   }
                   return (
                     <FormSelect

@@ -16,25 +16,30 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { isNotEmpty } from "class-validator";
 import { IColorableSelection } from "shared/types";
+import { Check } from "react-feather";
 import { isUseColorsFlagOn, SYSTEM_COLORS } from "./selection.utils";
+import { isBlackOrWhite } from "./isBlackOrWhite";
 
 export type EntityTypesForSelection =
   | "selection"
   | "selection-enum"
   | "boolean";
 
-const StyledColorBox = styled.div<{ background: string; isActive: boolean }>`
-  width: 32px;
-  height: 32px;
-  ${(props) => props.isActive && "border: 2px solid black"};
-  background ${(props) => props.background};
-  `;
+const StyledColorBox = styled.button<{ color: string }>`
+  height: 24px;
+  wifth: 24px;
+  border-radius: 5px;
+  width: 100%;
+  margin-bottom: 0;
+  padding-bottom: 0px;
+  outline: none;
+  border: 0;
+  background: ${(props) => props.color};
+`;
 
 // Reference is a special case basically only use color
 
 const ManagableEntities = ["selection"];
-
-// TODO color selection
 
 interface IProps {
   field: string;
@@ -63,7 +68,7 @@ export function FieldSelectionCanvas({
         ...arrayMutators,
       }}
       initialValues={{ selections }}
-      render={({ handleSubmit, values, pristine }) => (
+      render={({ handleSubmit, values, pristine, form }) => (
         <form onSubmit={handleSubmit}>
           <FormSwitch
             label="Use Colors"
@@ -71,13 +76,16 @@ export function FieldSelectionCanvas({
             value={useColors}
             onChange={(newUseColorValue) => {
               setUseColors(newUseColorValue);
-              (values as { selections: IColorableSelection[] }).selections.map(
-                (selection, index) => ({
+              form.change(
+                "selections",
+                (
+                  values as { selections: IColorableSelection[] }
+                ).selections.map((selection, index) => ({
                   ...selection,
                   color: newUseColorValue
                     ? SYSTEM_COLORS[index % SYSTEM_COLORS.length]
                     : undefined,
-                })
+                }))
               );
             }}
           />
@@ -86,7 +94,8 @@ export function FieldSelectionCanvas({
               <div>
                 {fields.map((name, index) => (
                   <React.Fragment key={name}>
-                    <Stack justify="space-between">
+                    <Spacer />
+                    <Stack justify="end">
                       {ManagableEntities.includes(entityType) && (
                         <DeleteButton
                           onDelete={() => {
@@ -139,13 +148,24 @@ export function FieldSelectionCanvas({
                         {(renderProps) => (
                           <Stack>
                             {SYSTEM_COLORS.map((systemColor) => (
-                              <StyledColorBox
-                                key={systemColor}
-                                background={systemColor}
-                                isActive={
-                                  systemColor === renderProps.input.value
-                                }
-                              />
+                              <div key={systemColor}>
+                                <StyledColorBox
+                                  type="button"
+                                  color={systemColor}
+                                  onClick={() =>
+                                    renderProps.input.onChange(systemColor)
+                                  }
+                                >
+                                  <Check
+                                    color={
+                                      systemColor === renderProps.input.value
+                                        ? isBlackOrWhite(systemColor)
+                                        : systemColor
+                                    }
+                                    size="18"
+                                  />
+                                </StyledColorBox>
+                              </div>
                             ))}
                           </Stack>
                         )}
@@ -156,19 +176,24 @@ export function FieldSelectionCanvas({
                   </React.Fragment>
                 ))}
                 {ManagableEntities.includes(entityType) && (
-                  <SoftButton
-                    icon="add"
-                    label="Add new option"
-                    action={() => {
-                      fields.push({
-                        label: "",
-                        value: "",
-                        color: useColors
-                          ? SYSTEM_COLORS[fields.length % SYSTEM_COLORS.length]
-                          : undefined,
-                      } as IColorableSelection);
-                    }}
-                  />
+                  <>
+                    <Spacer />
+                    <SoftButton
+                      icon="add"
+                      label="Add new option"
+                      action={() => {
+                        fields.push({
+                          label: "",
+                          value: "",
+                          color: useColors
+                            ? SYSTEM_COLORS[
+                                fields.length % SYSTEM_COLORS.length
+                              ]
+                            : undefined,
+                        } as IColorableSelection);
+                      }}
+                    />
+                  </>
                 )}
               </div>
             )}

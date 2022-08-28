@@ -17,6 +17,7 @@ export const viewSpecialDataTypes = (
   entityFieldTypes: Record<string, keyof typeof FIELD_TYPES_CONFIG_MAP>,
   options: {
     displayFrom: ReferenceDisplayFromTypes;
+    defaultDateFormat: string;
   }
 ) => {
   if (
@@ -25,7 +26,7 @@ export const viewSpecialDataTypes = (
   ) {
     return (
       <span>
-        {format(new Date(value as string), "MMMM do, yyyy") as string}
+        {format(new Date(value as string), options.defaultDateFormat) as string}
       </span>
     );
   }

@@ -22,7 +22,10 @@ export const CONFIGURATION_KEYS: Record<
   { requireEntity: boolean; defaultValue: unknown }
 > = {
   hidden_entity_table_columns: { requireEntity: true, defaultValue: [] },
-  default_date_format: { requireEntity: false, defaultValue: "MMMM do, yyyy" },
+  default_date_format: {
+    requireEntity: false,
+    defaultValue: "do MMM yyyy, h:MM aa",
+  },
   hidden_entity_create_columns: { requireEntity: true, defaultValue: [] },
   hidden_entity_update_columns: { requireEntity: true, defaultValue: [] },
   hidden_entity_details_columns: { requireEntity: true, defaultValue: [] },

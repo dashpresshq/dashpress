@@ -17,6 +17,7 @@ import { ITableColumn } from "@hadmean/chromista";
 import { useMemo } from "react";
 import { IColorableSelection } from "shared/types";
 import { ENTITY_LIST_PATH } from "frontend/hooks/data/data.store";
+import { useAppConfiguration } from "frontend/hooks/configuration/configuration.store";
 import { fitlerOutHiddenScalarColumns } from "../utils";
 import { TableActions } from "./Actions";
 import { viewSpecialDataTypes } from "../viewSpecialDataTypes";
@@ -58,6 +59,7 @@ export const useTableColumns = (entity: string) => {
     "hidden_entity_table_columns",
     entity
   );
+  const defaultDateFormat = useAppConfiguration<string>("default_date_format");
 
   const idField = useEntityIdField(entity);
 
@@ -75,7 +77,7 @@ export const useTableColumns = (entity: string) => {
    A Fix for the Cell that is memoized internall and the value for this is not getting updated
    so we need to wait for things to load before we render it
    */
-  if (entityToOneReferenceFields.isLoading) {
+  if (entityToOneReferenceFields.isLoading || defaultDateFormat.isLoading) {
     return [];
   }
 
@@ -111,6 +113,7 @@ export const useTableColumns = (entity: string) => {
           entityFieldTypes,
           {
             displayFrom: "table",
+            defaultDateFormat: defaultDateFormat.data,
           }
         );
 

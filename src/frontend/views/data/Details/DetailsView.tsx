@@ -6,6 +6,7 @@ import {
 } from "@hadmean/chromista";
 import { SLUG_LOADING_VALUE } from "@hadmean/protozoa";
 import React from "react";
+import { useAppConfiguration } from "frontend/hooks/configuration/configuration.store";
 import {
   useEntityFieldLabels,
   useEntityFieldSelections,
@@ -37,6 +38,7 @@ export function EntityDetailsView({
     "hidden_entity_details_columns",
     entity
   );
+  const defaultDateFormat = useAppConfiguration<string>("default_date_format");
   const getEntityFieldLabels = useEntityFieldLabels(entity);
   const entityToOneReferenceFields = useEntityToOneReferenceFields(entity);
   const entityFieldSelections = useEntityFieldSelections(entity);
@@ -45,11 +47,13 @@ export function EntityDetailsView({
     dataDetails.error ||
     hiddenDetailsColumns.error ||
     entityFieldTypes.error ||
+    defaultDateFormat.error ||
     entityFields.error ||
     entityToOneReferenceFields.error;
 
   const isLoading =
     dataDetails.isLoading ||
+    defaultDateFormat.isLoading ||
     entityToOneReferenceFields.isLoading ||
     entity === SLUG_LOADING_VALUE ||
     entityFields.isLoading ||
@@ -79,6 +83,7 @@ export function EntityDetailsView({
                 entityFieldTypes,
                 {
                   displayFrom,
+                  defaultDateFormat: defaultDateFormat.data,
                 }
               );
 

@@ -173,9 +173,7 @@ function useEntityCrudView() {
           await upsertUpdateColumnsMutation.mutateAsync(data);
         }}
         // TODO If you enable update then enable details
-        enabled={
-          entityCrudSettingsState.update && entityCrudSettingsState.details
-        }
+        enabled={entityCrudSettingsState.update}
         labels={["Hide Edit Button", "Show Edit Button"]}
       />
     ),

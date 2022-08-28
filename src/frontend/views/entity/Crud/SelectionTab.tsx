@@ -52,7 +52,6 @@ export function SelectionTab({
   if (error) {
     return <ErrorAlert message={error} />;
   }
-
   return (
     <>
       <Stack justify="space-between" align="flex-start">

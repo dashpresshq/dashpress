@@ -47,13 +47,14 @@ export function EntityDetails() {
               }
             : undefined
         }
-        deleteAction={{
-          action: entityCrudSettings.data?.delete
-            ? () => entityDataDeletionMutation.mutate(id)
-            : undefined,
-
-          isMakingDeleteRequest: entityDataDeletionMutation.isLoading,
-        }}
+        deleteAction={
+          entityCrudSettings.data?.delete
+            ? {
+                action: () => entityDataDeletionMutation.mutate(id),
+                isMakingDeleteRequest: entityDataDeletionMutation.isLoading,
+              }
+            : undefined
+        }
         iconButtons={
           entityCrudSettings.data?.update
             ? [

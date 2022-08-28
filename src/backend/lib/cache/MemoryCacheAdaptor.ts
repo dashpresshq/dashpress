@@ -1,4 +1,3 @@
-import { isNotEmpty } from "class-validator";
 import { ConfigService } from "../config/config.service";
 import { AbstractCacheService } from "./AbstractCacheService";
 
@@ -9,24 +8,12 @@ export class MemoryCacheAdaptor extends AbstractCacheService {
     super(prefix, configService);
   }
 
-  private prefixKey(key: string) {
-    return `${this.prefix}:${key}`;
+  public async pullItem<T>(key: string): Promise<T | undefined> {
+    return this.data[key] as T;
   }
 
-  async getItem<T>(rawKey: string, fetcher: () => Promise<T>) {
-    const key = this.prefixKey(rawKey);
-
-    const data = this.data[key];
-
-    if (isNotEmpty(data)) {
-      return data as T;
-    }
-
-    const fetchedData = await fetcher();
-
-    this.data[key] = fetchedData;
-
-    return fetchedData;
+  public async persistData(key: string, data: unknown): Promise<void> {
+    this.data[key] = data;
   }
 
   async clearItem(key: string) {

@@ -1,3 +1,4 @@
+import { isNotEmpty } from "class-validator";
 import { ConfigService } from "../config/config.service";
 
 export abstract class AbstractCacheService {
@@ -10,10 +11,29 @@ export abstract class AbstractCacheService {
     this.configService = configService;
   }
 
-  public abstract getItem<T>(
-    key: string,
-    fetcher: () => Promise<T>
-  ): Promise<T | undefined>;
+  protected prefixKey(key: string) {
+    return `${this.prefix}:${key}`;
+  }
 
-  public abstract clearItem(key: string): Promise<void>;
+  protected abstract pullItem<T>(key: string): Promise<T | undefined>;
+
+  protected abstract persistData(key: string, data: unknown): Promise<void>;
+
+  abstract clearItem(key: string): Promise<void>;
+
+  async getItem<T>(rawKey: string, fetcher: () => Promise<T>) {
+    const key = this.prefixKey(rawKey);
+
+    const data = await this.pullItem<T>(key);
+
+    if (isNotEmpty(data)) {
+      return data;
+    }
+
+    const fetchedData = await fetcher();
+
+    await this.persistData(key, fetchedData);
+
+    return fetchedData;
+  }
 }

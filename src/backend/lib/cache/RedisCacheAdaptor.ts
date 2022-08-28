@@ -1,4 +1,3 @@
-import { isNotEmpty } from "class-validator";
 import { RedisClientType } from "redis";
 import { ConfigKeys, ConfigService } from "../config/config.service";
 import { getRedisConnection } from "../connection/redis";
@@ -23,24 +22,16 @@ export class RedisCacheAdaptor extends AbstractCacheService {
     return this.redisConnection;
   }
 
-  private prefixKey(key: string) {
-    return `${this.prefix}:${key}`;
+  public async pullItem<T>(key: string): Promise<T> {
+    const data = await (await this.getRedisInstance()).get(key);
+    if (!data) {
+      return undefined;
+    }
+    return JSON.parse(data);
   }
 
-  async getItem<T>(rawKey: string, fetcher: () => Promise<T>) {
-    const key = this.prefixKey(rawKey);
-
-    const data = await (await this.getRedisInstance()).get(key);
-
-    if (isNotEmpty(data)) {
-      return JSON.parse(data) as T;
-    }
-
-    const fetchedData = await fetcher();
-
-    await (await this.getRedisInstance()).set(key, JSON.stringify(fetchedData));
-
-    return fetchedData;
+  public async persistData(key: string, data: unknown): Promise<void> {
+    await (await this.getRedisInstance()).set(key, JSON.stringify(data));
   }
 
   async clearItem(key: string) {

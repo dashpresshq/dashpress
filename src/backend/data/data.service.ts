@@ -110,9 +110,6 @@ export class DataService {
       );
     }
 
-    // eslint-disable-next-line no-console
-    console.log(query.toSQL());
-
     return await query;
   }
 

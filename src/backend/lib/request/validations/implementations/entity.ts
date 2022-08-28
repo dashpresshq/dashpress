@@ -1,6 +1,6 @@
 import { rolesService } from "backend/roles/roles.service";
-import { META_USER_PERMISSIONS } from "shared/types";
-import { ForbiddenError } from "../../../errors";
+import { META_USER_PERMISSIONS, USER_PERMISSIONS } from "shared/types";
+import { NotFoundError } from "../../../errors";
 import { entitiesService } from "../../../../entities/entities.service";
 import { configurationService } from "../../../../configuration/configuration.service";
 import { ValidationImplType } from "./types";
@@ -15,8 +15,19 @@ export const entityValidationImpl: ValidationImplType<string> = async (req) => {
     configurationService.show<string[]>("disabled_entities"),
   ]);
 
-  if (disabledEntities.includes(entity) || !entityExists) {
-    throw new ForbiddenError(ERROR_MESSAGE);
+  if (!entityExists) {
+    throw new NotFoundError(ERROR_MESSAGE);
+  }
+
+  if (disabledEntities.includes(entity)) {
+    if (
+      !(await rolesService.canRoleDoThis(
+        req.user.role,
+        USER_PERMISSIONS.CAN_CONFIGURE_APP
+      ))
+    ) {
+      throw new NotFoundError(ERROR_MESSAGE);
+    }
   }
 
   if (
@@ -25,7 +36,7 @@ export const entityValidationImpl: ValidationImplType<string> = async (req) => {
       META_USER_PERMISSIONS.APPLIED_CAN_ACCESS_ENTITY(entity)
     ))
   ) {
-    throw new ForbiddenError(ERROR_MESSAGE);
+    throw new NotFoundError(ERROR_MESSAGE);
   }
 
   return entity;

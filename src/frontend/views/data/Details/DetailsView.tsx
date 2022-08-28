@@ -9,6 +9,7 @@ import React from "react";
 import {
   useEntityFieldLabels,
   useEntityFieldSelections,
+  useEntityFieldTypes,
   useSelectedEntityColumns,
 } from "../../../hooks/entity/entity.config";
 import { useEntityDataDetails } from "../../../hooks/data/data.store";
@@ -17,9 +18,8 @@ import {
   useEntityToOneReferenceFields,
 } from "../../../hooks/entity/entity.store";
 import { fitlerOutHiddenScalarColumns } from "../utils";
-import { OptionTag } from "../OptionTag";
-import { ReferenceComponent } from "../Table/ReferenceComponent";
 import { useEntityViewStateMachine } from "../useEntityViewStateMachine";
+import { viewSpecialDataTypes } from "../viewSpecialDataTypes";
 
 export function EntityDetailsView({
   id,
@@ -32,6 +32,7 @@ export function EntityDetailsView({
 }) {
   const dataDetails = useEntityDataDetails(entity, id);
   const entityFields = useEntityFields(entity);
+  const entityFieldTypes = useEntityFieldTypes(entity);
   const hiddenDetailsColumns = useSelectedEntityColumns(
     "hidden_entity_details_columns",
     entity
@@ -43,6 +44,7 @@ export function EntityDetailsView({
   const error =
     dataDetails.error ||
     hiddenDetailsColumns.error ||
+    entityFieldTypes.error ||
     entityFields.error ||
     entityToOneReferenceFields.error;
 
@@ -69,30 +71,20 @@ export function EntityDetailsView({
             ({ name }) => {
               const value = dataDetails?.data?.[name];
 
-              let contentToRender = <Text>{value}</Text>;
-
-              if (entityToOneReferenceFields.data?.[name]) {
-                contentToRender = (
-                  <ReferenceComponent
-                    entity={entityToOneReferenceFields.data?.[name]}
-                    id={value as string}
-                    displayFrom={displayFrom}
-                  />
-                );
-              } else if (entityFieldSelections[name]) {
-                const availableOption = entityFieldSelections[name].find(
-                  (option) => option.value === value
-                );
-                if (availableOption) {
-                  contentToRender = (
-                    <OptionTag
-                      color={availableOption.color}
-                      label={availableOption.label}
-                      value={availableOption.value}
-                    />
-                  );
+              const specialDataTypeRender = viewSpecialDataTypes(
+                name,
+                value,
+                entityToOneReferenceFields.data || {},
+                entityFieldSelections,
+                entityFieldTypes,
+                {
+                  displayFrom,
                 }
-              }
+              );
+
+              const contentToRender = specialDataTypeRender || (
+                <Text>{value}</Text>
+              );
 
               return (
                 <React.Fragment key={name}>

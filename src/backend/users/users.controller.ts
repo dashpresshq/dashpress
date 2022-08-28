@@ -1,5 +1,6 @@
 import { ForbiddenError } from "backend/lib/errors";
 import { RolesService, rolesService } from "backend/roles/roles.service";
+import { REQUEST_ERROR_CODES } from "shared/constants";
 import { ISignInForm } from "shared/form-schemas/auth/signin";
 import { IChangePasswordForm } from "shared/form-schemas/profile/password";
 import { IResetPasswordForm } from "shared/form-schemas/users/reset-password";
@@ -52,7 +53,10 @@ export class UsersController {
       /*
         Any error here should make the user redirect to login page
       */
-      throw new ForbiddenError("Invalid User");
+      throw new ForbiddenError(
+        "Invalid User",
+        REQUEST_ERROR_CODES.NOT_AUTHENTICATED
+      );
     }
   }
 

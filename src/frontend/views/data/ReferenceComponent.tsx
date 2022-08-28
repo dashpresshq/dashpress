@@ -2,12 +2,14 @@ import { useEntityDataReference } from "frontend/hooks/data/data.store";
 import { StyledLinkLikeButton } from "@hadmean/chromista";
 import { useRouter } from "next/router";
 import { NAVIGATION_LINKS } from "frontend/lib/routing";
-import { useDetailsOffCanvasStore } from "./hooks/useDetailsOffCanvas.store";
+import { useDetailsOffCanvasStore } from "./Table/hooks/useDetailsOffCanvas.store";
+
+export type ReferenceDisplayFromTypes = "table" | "details" | "canvas";
 
 interface IProps {
   entity: string;
   id: string;
-  displayFrom: "table" | "details" | "canvas";
+  displayFrom: ReferenceDisplayFromTypes;
 }
 
 export function ReferenceComponent({ entity, id, displayFrom }: IProps) {

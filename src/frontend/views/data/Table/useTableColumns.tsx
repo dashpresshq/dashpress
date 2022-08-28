@@ -19,8 +19,7 @@ import { IColorableSelection } from "shared/types";
 import { ENTITY_LIST_PATH } from "frontend/hooks/data/data.store";
 import { fitlerOutHiddenScalarColumns } from "../utils";
 import { TableActions } from "./Actions";
-import { ReferenceComponent } from "./ReferenceComponent";
-import { OptionTag } from "../OptionTag";
+import { viewSpecialDataTypes } from "../viewSpecialDataTypes";
 
 const buildFilterConfigFromType = (
   entityType: keyof typeof FIELD_TYPES_CONFIG_MAP,
@@ -79,6 +78,7 @@ export const useTableColumns = (entity: string) => {
   if (entityToOneReferenceFields.isLoading) {
     return [];
   }
+
   const columns: ITableColumn[] = columnsToShow.map(({ name, isId }) => {
     const tableColumn: ITableColumn = {
       Header: getEntityFieldLabels(name),
@@ -98,33 +98,24 @@ export const useTableColumns = (entity: string) => {
         if (value === undefined || value === null) {
           return null;
         }
+
         if (isId) {
           return <span>{value as string}</span>;
         }
 
-        if (entityToOneReferenceFields.data?.[name]) {
-          return (
-            <ReferenceComponent
-              entity={entityToOneReferenceFields.data?.[name]}
-              id={value as string}
-              displayFrom="table"
-            />
-          );
-        }
-
-        if (entityFieldSelections[name]) {
-          const availableOption = entityFieldSelections[name].find(
-            (option) => option.value === value
-          );
-          if (availableOption) {
-            return (
-              <OptionTag
-                color={availableOption.color}
-                label={availableOption.label}
-                value={availableOption.value}
-              />
-            );
+        const specialDataTypeRender = viewSpecialDataTypes(
+          name,
+          value,
+          entityToOneReferenceFields.data || {},
+          entityFieldSelections,
+          entityFieldTypes,
+          {
+            displayFrom: "table",
           }
+        );
+
+        if (specialDataTypeRender) {
+          return specialDataTypeRender;
         }
 
         if (typeof value === "string") {

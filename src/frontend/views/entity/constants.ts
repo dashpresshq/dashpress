@@ -3,6 +3,7 @@ import { Icon, Save, Settings } from "react-feather";
 import { useEntitySlug } from "frontend/hooks/entity/entity.config";
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
 import { useCanUserConfigureApp } from "frontend/hooks/auth/user.store";
+import { SLUG_LOADING_VALUE } from "@hadmean/protozoa";
 
 export const ENTITY_CONFIGURATION_VIEW = "ENTITY_CONFIGURATION_VIEW";
 
@@ -100,6 +101,10 @@ export const useEntityActionMenuItems = (actionTypes: EntityActionTypes[]) => {
   const canUserConfigureApp = useCanUserConfigureApp();
 
   if (canUserConfigureApp !== true) {
+    return [];
+  }
+
+  if (slugEntity === SLUG_LOADING_VALUE) {
     return [];
   }
 

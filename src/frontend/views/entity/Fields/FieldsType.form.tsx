@@ -200,6 +200,7 @@ export function FieldsTypeForm({
                   [showFieldValidations]: value,
                 });
                 setShowFieldValidations("");
+                handleSubmit();
               }}
             />
           </OffCanvas>
@@ -222,6 +223,7 @@ export function FieldsTypeForm({
                   [showFieldSelection]: value,
                 });
                 setShowFieldSelection("");
+                handleSubmit();
               }}
             />
           </OffCanvas>

@@ -9,10 +9,10 @@ import {
 } from "@hadmean/protozoa";
 import { IFormProps } from "frontend/lib/form/types";
 
-interface IDictionSettings {
+type IDictionSettings = {
   plural: string;
   singular: string;
-}
+};
 
 export function EntityDictionForm({
   onSubmit,

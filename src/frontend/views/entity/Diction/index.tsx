@@ -1,4 +1,5 @@
 import {
+  ErrorAlert,
   FormSkeleton,
   FormSkeletonSchema,
   SectionBox,
@@ -11,7 +12,7 @@ import {
   useEntityDiction,
   useEntitySlug,
 } from "frontend/hooks/entity/entity.config";
-import { useUpsertConfigurationMutation } from "frontend/hooks/configuration/configration.store";
+import { useUpsertConfigurationMutation } from "frontend/hooks/configuration/configuration.store";
 import { BaseEntitySettingsLayout } from "../_Base";
 import { EntityDictionForm } from "./Form";
 import { ENTITY_CONFIGURATION_VIEW } from "../constants";
@@ -36,6 +37,9 @@ export function EntityDictionSettings() {
   return (
     <BaseEntitySettingsLayout>
       <SectionBox title="Diction Settings">
+        {viewStateMachine.type === "error" && (
+          <ErrorAlert message={viewStateMachine.message} />
+        )}
         {viewStateMachine.type === "loading" && (
           <FormSkeleton
             schema={[FormSkeletonSchema.Input, FormSkeletonSchema.Input]}

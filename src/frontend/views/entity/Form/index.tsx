@@ -8,7 +8,7 @@ import { BaseEntitySettingsLayout } from "../_Base";
 import {
   useEntityConfiguration,
   useUpsertConfigurationMutation,
-} from "../../../hooks/configuration/configration.store";
+} from "../../../hooks/configuration/configuration.store";
 import { useEntityFields } from "../../../hooks/entity/entity.store";
 
 import { ENTITY_CONFIGURATION_VIEW } from "../constants";

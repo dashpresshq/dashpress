@@ -5,7 +5,7 @@ import { USER_PERMISSIONS } from "shared/types";
 import {
   useAppConfiguration,
   useUpsertConfigurationMutation,
-} from "../../../hooks/configuration/configration.store";
+} from "../../../hooks/configuration/configuration.store";
 import { useEntityDictionPlurals } from "../../../hooks/entity/entity.queries";
 import {
   ENTITIES_MENU_ENDPOINT,

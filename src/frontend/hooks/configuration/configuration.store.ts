@@ -53,13 +53,10 @@ export function useUpsertConfigurationMutation(
     successMessage: MutationsLang.saved("App Settings"),
   });
 
-  return useMutation(
-    async (values: Partial<Record<string, unknown> | unknown[]>) => {
-      await makePutRequest(configurationApiPath(key, entity), {
-        data: values,
-      });
-      return values;
-    },
-    apiMutateOptions
-  );
+  return useMutation(async (values: unknown) => {
+    await makePutRequest(configurationApiPath(key, entity), {
+      data: values,
+    });
+    return values;
+  }, apiMutateOptions);
 }

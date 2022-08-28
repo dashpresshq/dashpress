@@ -16,7 +16,7 @@ import {
   useSelectedEntityColumns,
 } from "../../../hooks/entity/entity.config";
 import { BaseEntitySettingsLayout } from "../_Base";
-import { useUpsertConfigurationMutation } from "../../../hooks/configuration/configration.store";
+import { useUpsertConfigurationMutation } from "../../../hooks/configuration/configuration.store";
 import { useEntityFields } from "../../../hooks/entity/entity.store";
 import { SelectionTab } from "./SelectionTab";
 

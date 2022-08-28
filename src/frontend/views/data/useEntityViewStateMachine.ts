@@ -1,5 +1,5 @@
 import { isRouterParamEnabled } from "frontend/hooks";
-import { useAppConfiguration } from "frontend/hooks/configuration/configration.store";
+import { useAppConfiguration } from "frontend/hooks/configuration/configuration.store";
 import {
   useEntityCrudSettings,
   useEntitySlug,

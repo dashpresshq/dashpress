@@ -22,8 +22,9 @@ export const NAVIGATION_LINKS = {
     CREDENTIALS: "/setup/credentials",
   },
   SETTINGS: {
-    DEFAULT: "/admin/settings",
+    DEFAULT: "/admin/settings/entities",
     ENTITIES: "/admin/settings/entities",
+    DATE: "/admin/settings/date",
   },
   ENTITY: {
     CREATE: (entity: string) => `/admin/${entity}/create`,

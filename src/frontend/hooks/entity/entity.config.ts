@@ -16,7 +16,7 @@ import {
   CONFIGURATION_KEYS,
   IEntityCrudSettings,
 } from "../../../shared/configuration.constants";
-import { useEntityConfiguration } from "../configuration/configration.store";
+import { useEntityConfiguration } from "../configuration/configuration.store";
 import { getEntitySelectionConfig } from "./logic";
 
 export function useEntitySlug(overrideValue?: string) {

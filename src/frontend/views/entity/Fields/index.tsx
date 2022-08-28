@@ -23,7 +23,7 @@ import {
 import {
   useEntityConfiguration,
   useUpsertConfigurationMutation,
-} from "frontend/hooks/configuration/configration.store";
+} from "frontend/hooks/configuration/configuration.store";
 import { BaseEntitySettingsLayout } from "../_Base";
 import { FieldsLabelForm } from "./FieldsLabel.form";
 import { FieldsTypeForm } from "./FieldsType.form";

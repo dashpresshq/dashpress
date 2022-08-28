@@ -8,6 +8,7 @@ export const CONFIGURATION_KEYS: Record<
   | "entity_fields_orders"
   | "entity_crud_settings"
   | "entities_order"
+  | "default_date_format"
   | "entity_columns_labels"
   | "disabled_entities"
   | "dashboard_entities"
@@ -21,6 +22,7 @@ export const CONFIGURATION_KEYS: Record<
   { requireEntity: boolean; defaultValue: unknown }
 > = {
   hidden_entity_table_columns: { requireEntity: true, defaultValue: [] },
+  default_date_format: { requireEntity: false, defaultValue: "MMMM do, yyyy" },
   hidden_entity_create_columns: { requireEntity: true, defaultValue: [] },
   hidden_entity_update_columns: { requireEntity: true, defaultValue: [] },
   hidden_entity_details_columns: { requireEntity: true, defaultValue: [] },

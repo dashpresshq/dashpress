@@ -25,6 +25,10 @@ export function BaseSettingsLayout({ children }: IProps) {
                 action: NAVIGATION_LINKS.SETTINGS.ENTITIES,
                 name: "Entities",
               },
+              {
+                action: NAVIGATION_LINKS.SETTINGS.DATE,
+                name: "Date Format",
+              },
             ]}
             currentMenuItem={router.asPath.split("?")[0]}
           />

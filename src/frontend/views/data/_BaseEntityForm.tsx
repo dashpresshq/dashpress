@@ -9,7 +9,7 @@ import {
   FormSkeletonSchema,
 } from "@hadmean/chromista";
 import { SchemaForm } from "frontend/lib/form/SchemaForm";
-import { useEntityConfiguration } from "frontend/hooks/configuration/configration.store";
+import { useEntityConfiguration } from "frontend/hooks/configuration/configuration.store";
 import {
   useEntityFields,
   useEntityToOneReferenceFields,

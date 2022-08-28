@@ -24,7 +24,7 @@ import { useEntitySlug } from "frontend/hooks/entity/entity.config";
 import {
   useEntityConfiguration,
   useUpsertConfigurationMutation,
-} from "frontend/hooks/configuration/configration.store";
+} from "frontend/hooks/configuration/configuration.store";
 import { BaseEntitySettingsLayout } from "../_Base";
 import { EntityRelationsForm } from "./Relations.form";
 import { ENTITY_CONFIGURATION_VIEW } from "../constants";

@@ -26,13 +26,12 @@
 <summary>Table of Contents</summary>
 
 - [About](#about)
-  - [How it works](#how-it-works)
+  - [Quick Demo](#quick-demo)
   - [Motivation](#motivation)
   - [Why you should try Hadmean](#why-you-should-try-hadmean)
 - [Getting Started](#getting-started)
   - [Prerequisites](#prerequisites)
   - [Installation](#installation)
-- [Usage](#usage)
 - [Features](#features)
 - [Roadmap](#roadmap)
 - [Support](#support)
@@ -49,34 +48,35 @@
 
 ## About
 
-Hadmean is a internal tool generator that build itself based on your database schema and your configurations. It is all batteries included and extremely customizable
+Hadmean is your agnostic, powerful, one-line install, customizable, all batteries included and free admin apps generator
 
-### How it works
+### Quick Demo
 
 https://user-images.githubusercontent.com/51802801/187038561-73b8a86d-ab97-4efc-97d6-585cc4fb9f00.mp4
 
 
 ### Motivation
-There are lot of good internal dashboard tools out there, The ones bundled with your framework are usually good but not usually highly customizable so they usually dont end up in your clients hand. The good ones are paid for and the free version are usually heavily restricted and they usually require weeks to master with some techinical know-how of SQL and javascript
+There are plenty admin project out there usually free or paid
 
-Hadmean takes another approach to building internal apps by building all the features you will ever need based on the metadata of your database which you can also edit in the app and allowing you to toogle off the ones you dont need
+The free ones are usually tied to a framework and all your experience with it are useless when you hop to your next shiny language. They are usually not asthetically pleasing and always require a developer to make any change
+
+The paid ones are usually good but very restricted as their free version are usually demo plans for you to get a taste of what they can do and you will have to get to the paywall to get to be usable for your day to day
+
+The primary reason to build Hadmean was to build something that will be free and very usable and language agnostic
 
 ### Why you should try Hadmean
 - It is free
-- Easy to setup, You setup it all up literally as fast you can type your DB credentials
-- You will always be running the lastest version without any steps on your side
+- Easiest installation, Just one command to install and run
+- You will always be running the lastest version
 - Little learning curve with truly less that 5% technical knowledge requirement
-- Lot of features that you will expect from a paid solution
-- It is not tied to any language or framework
+- Tons of features
+- Language/framework agnostic
 - Lastly, It is open source, It doesn't get more customizable than that
 
 ## Getting Started
 
 ### Prerequisites
-
- - [Git](https://git-scm.com)
  - [Node.js](https://nodejs.org/en/download/)
- - [Yarn](https://yarnpkg.com/getting-started/install)
  - Supported database (MySQL, Postgres, MsSQL, SQLite)
 
 ### Installation
@@ -86,9 +86,6 @@ $ cd <project_name>
 
 $ npx hadmean@latest
 ```
-
-## Usage
-After installation, You will be asked to provide your database credentials and create your admin account then you will be able to start using the application
 
 ## Features
  - Authentication
@@ -103,11 +100,11 @@ After installation, You will be asked to provide your database credentials and c
  - Fields selection/ ordering
  - Cache configurations
  - Credentials Storage
- - Disabling/Hiding of forms
- - Introspection
+ - Forms fields customization
+ - Automatic Introspection
  - Selection Colors
  - Form validation
- - Filters
+ - Powerful Filters
 
 
 ## Roadmap
@@ -165,7 +162,6 @@ _For more information and to report security issues, please refer to our [securi
 - [Styled-components](https://github.com/styled-components/styled-components)
 - [Class Validator](https://github.com/typestack/class-validator)
 - [Zustand](https://github.com/pmndrs/zustand) 
-- [Prismjs](https://github.com/PrismJS/prism)
 
 ## License
 

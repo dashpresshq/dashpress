@@ -9,12 +9,7 @@ interface IConfigBag {
 }
 
 const tokenValidations = (value: string, label: string) => {
-  if (
-    !/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{64,}$/.test(
-      // !/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*_]).{64,}$/.test(
-      value
-    )
-  ) {
+  if (!/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{64,}$/.test(value)) {
     const errorText = `${label} must contain uppercase letters, lowercase letters, numbers and be more than 64 characters`;
     throw new Error(errorText);
   }

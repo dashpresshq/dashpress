@@ -55,7 +55,6 @@ export const guessEntityValidations = ({
     const { message } = ENTITY_VALIDATION_CONFIG.required;
     validationItems.push({
       validationType: "maxLength",
-      // :eyes
       constraint: {
         length,
       },

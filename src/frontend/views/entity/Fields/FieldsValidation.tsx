@@ -146,7 +146,7 @@ export function FieldValidationCanvas({
                   disabledOptions={(
                     values.validations as IFieldValidationItem[]
                   ).map(({ validationType }) => validationType)}
-                  // defaultLabel="Add New Validation" :eyes
+                  defaultLabel="Add New Validation"
                   onChange={(validationType) => {
                     fields.push({
                       validationType,

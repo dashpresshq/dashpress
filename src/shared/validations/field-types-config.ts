@@ -141,7 +141,6 @@ export const FIELD_TYPES_CONFIG_MAP: Record<
       _type: "boolean",
       bag: [],
     },
-    // Configure Labels + must use color
     typeIsNotChangeAble: true,
     allowedValidations: ["required"],
     configureSelection: true,
@@ -153,7 +152,6 @@ export const FIELD_TYPES_CONFIG_MAP: Record<
       bag: [],
     },
     sortable: true,
-    // Configure Selection + maybe use colors
     allowedValidations: ["required", "maxLength", "doesntMatchOtherField"],
     configureSelection: true,
   },

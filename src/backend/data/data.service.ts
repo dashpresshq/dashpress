@@ -134,7 +134,7 @@ export class DataService {
     entity: string,
     data: Record<string, unknown>,
     primaryField: string
-  ) {
+  ): Promise<string | number> {
     const result = await (
       await DataService.getInstance()
     )(entity).insert(data, primaryField);

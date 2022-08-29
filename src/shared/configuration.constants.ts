@@ -83,25 +83,6 @@ export const CONFIGURATION_KEYS: Record<
   entities_order: { requireEntity: false, defaultValue: [] },
 };
 
-// Plugin System
-
-/*
-
-// Clone
-
-   Override label,
-   // defaultValue
-
-  // id column
-
-Table Settings =>
-  add columns,
-  default sorting,
-
-// Filter Tables and / or
-
-*/
-
 export interface IEntityCrudSettings {
   create: boolean;
   details: boolean;

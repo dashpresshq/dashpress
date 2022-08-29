@@ -175,7 +175,11 @@ export class DataController {
     };
   }
 
-  async updateData(entity: string, id: string, data: Record<string, unknown>) {
+  async updateData(
+    entity: string,
+    id: string,
+    data: Record<string, unknown>
+  ): Promise<void> {
     // validate the updateData values
 
     const [allowedFields, primaryField, entityValidations] = await Promise.all([

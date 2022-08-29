@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunk_hadmean_archaea=self.webpackChunk_hadmean_archaea||[]).push([[3577],{3588:a=>{a.exports=JSON.parse('{"permalink":"/hadmean/blog","page":1,"postsPerPage":10,"totalPages":1,"totalCount":4,"blogDescription":"Blog","blogTitle":"Blog"}')}}]);

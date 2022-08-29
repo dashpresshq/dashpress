@@ -1,6 +1,6 @@
 {
   "name": "hadmean",
-  "version": "0.0.25",
+  "version": "0.0.26",
   "license": "GPL-3.0-or-later",
   "scripts": {
     "dev": "next dev",

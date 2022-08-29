@@ -64,7 +64,8 @@ Hadmean takes another approach to building internal apps by building all the fea
 ### Why you should try Hadmean
 - It is free
 - Easy to setup, You setup it all up literally as fast you can type your DB credentials
-- Little learning curve with almost zero technical knowledge requirement
+- You will always be running the lastest version without any steps on your side
+- Little learning curve with truly less that 5% technical knowledge requirement
 - Lot of features that you will expect from a paid solution
 - It is not tied to any language or framework
 - Lastly, It is open source, It doesn't get more customizable than that

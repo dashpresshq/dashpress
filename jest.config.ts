@@ -18,18 +18,11 @@ const customJestConfig = {
   // Stop running tests after `n` failures
   // bail: 0,
 
-  // The directory where Jest should store its cached dependency information
-  // cacheDirectory: "/private/var/folders/_v/m0gkkf9s2pj4zdrbg322bk5m0000gn/T/jest_dx",
-
-  // Automatically clear mock calls and instances between every test
   clearMocks: true,
 
   coverageProvider: "v8",
   // An object that configures minimum threshold enforcement for coverage results
   // coverageThreshold: undefined,
-
-  // A path to a custom dependency extractor
-  // dependencyExtractor: undefined,
 
   // Make calling deprecated APIs throw helpful error messages
   // errorOnDeprecated: false,

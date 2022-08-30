@@ -27,7 +27,7 @@ export function useStateSyncedToUrl<T>(defaultValue: T) {
 
     const queryParams = `${qs.stringify(state)}`;
 
-    // Reat router hasn't finished loading
+    /* Reat router hasn't finished loading */
     if (router.asPath.includes("[")) {
       return;
     }

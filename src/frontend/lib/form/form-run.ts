@@ -1,13 +1,13 @@
+/* eslint-disable no-console */
+/* eslint-disable no-new-func */
 export const runJavascriptString = (
   javascriptString: string,
   globals: Record<string, unknown>,
   context: Record<string, unknown>
 ) => {
   try {
-    // eslint-disable-next-line no-new-func
     return Function("$", javascriptString)({ ...globals, ...context });
   } catch (e) {
-    // eslint-disable-next-line no-console
     console.warn(
       `•Expression:'${javascriptString}'\n•JS-Error: `,
       e,
@@ -25,7 +25,6 @@ export const runAsyncJavascriptString = async (
 ) => {
   const AsyncFunction = async function X() {}.constructor;
   try {
-    // eslint-disable-next-line no-new-func
     return await AsyncFunction(
       "$",
       javascriptString
@@ -34,7 +33,6 @@ export const runAsyncJavascriptString = async (
       ...context,
     });
   } catch (e) {
-    // eslint-disable-next-line no-console
     console.warn(
       `•Expression:'${javascriptString}'\n•JS-Error: `,
       e,

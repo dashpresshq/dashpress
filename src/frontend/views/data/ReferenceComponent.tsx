@@ -29,8 +29,7 @@ export function ReferenceComponent({ entity, id, displayFrom }: IProps) {
   const displayText = entityDataReference.data || id;
 
   if (displayFrom === "canvas") {
-    // eslint-disable-next-line react/jsx-no-useless-fragment
-    return <>{displayText}</>;
+    return <span>{displayText}</span>;
   }
 
   return (

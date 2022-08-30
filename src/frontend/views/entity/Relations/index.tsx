@@ -6,7 +6,6 @@ import {
   SortList,
   Spacer,
   Tabs,
-  Text,
 } from "@hadmean/chromista";
 import {
   ENTITY_RELATIONS_ENDPOINT,
@@ -25,6 +24,7 @@ import {
   useEntityConfiguration,
   useUpsertConfigurationMutation,
 } from "frontend/hooks/configuration/configuration.store";
+import { LINK_TO_DOCS } from "frontend/views/constants";
 import { BaseEntitySettingsLayout } from "../_Base";
 import { EntityRelationsForm } from "./Relations.form";
 import { ENTITY_CONFIGURATION_VIEW } from "../constants";
@@ -110,7 +110,16 @@ export function EntityRelationsSettings() {
 
   return (
     <BaseEntitySettingsLayout>
-      <SectionBox title="Relationship Settings">
+      <SectionBox
+        title="Relationship Settings"
+        iconButtons={[
+          {
+            action: LINK_TO_DOCS("app-configuration/relations"),
+            icon: "help",
+            label: "Relationship Settings Documentation",
+          },
+        ]}
+      >
         <Tabs
           currentTab={tabFromUrl}
           onChange={changeTabParam}
@@ -125,24 +134,17 @@ export function EntityRelationsSettings() {
                     <FormSkeleton schema={[FormSkeletonSchema.Input]} />
                   )}
                   {viewStateMachine.type === "render" && (
-                    <>
-                      <Text size="5">
-                        LINK_TO_DOC You get to customize how this entity gets to
-                        be rendered when other entity references it
-                      </Text>
-                      <Spacer />
-                      <EntityRelationsForm
-                        onSubmit={async (values) => {
-                          await upsertEntityRelationTemplateMutation.mutateAsync(
-                            values as unknown as Record<string, string>
-                          );
-                        }}
-                        entityFields={(entityFields.data || []).map(
-                          ({ name }) => name
-                        )}
-                        initialValues={entityRelationTemplate.data}
-                      />
-                    </>
+                    <EntityRelationsForm
+                      onSubmit={async (values) => {
+                        await upsertEntityRelationTemplateMutation.mutateAsync(
+                          values as unknown as Record<string, string>
+                        );
+                      }}
+                      entityFields={(entityFields.data || []).map(
+                        ({ name }) => name
+                      )}
+                      initialValues={entityRelationTemplate.data}
+                    />
                   )}
                 </>
               ),
@@ -154,11 +156,6 @@ export function EntityRelationsSettings() {
                   {viewStateMachine.type === "error" && (
                     <ErrorAlert message={viewStateMachine.message} />
                   )}
-                  <Text size="5">
-                    LINK_TO_DOC You get the customize the labels, for the field,
-                    Say you want `updatedAt` to be called `Last Updated`. Here
-                    is where you that
-                  </Text>
                   <Spacer />
                   <FieldsLabelForm
                     isLoading={viewStateMachine.type === "loading"}
@@ -195,28 +192,20 @@ export function EntityRelationsSettings() {
             },
             {
               content: (
-                <>
-                  <Text size="5">
-                    LINK_TO_DOC Order the relations how you want them to appear
-                  </Text>
-                  <Spacer size="xl" />
-                  <SortList
-                    data={{
-                      ...referenceFields,
-                      data: (referenceFields.data || []).map(
-                        ({ table, label }) => ({
-                          value: table,
-                          label: label || getEntitiesDictionPlurals(table),
-                        })
-                      ),
-                    }}
-                    onSave={async (data) => {
-                      await upsertEntityRelationsOrderMutation.mutateAsync(
-                        data
-                      );
-                    }}
-                  />
-                </>
+                <SortList
+                  data={{
+                    ...referenceFields,
+                    data: (referenceFields.data || []).map(
+                      ({ table, label }) => ({
+                        value: table,
+                        label: label || getEntitiesDictionPlurals(table),
+                      })
+                    ),
+                  }}
+                  onSave={async (data) => {
+                    await upsertEntityRelationsOrderMutation.mutateAsync(data);
+                  }}
+                />
               ),
               label: "Order",
             },

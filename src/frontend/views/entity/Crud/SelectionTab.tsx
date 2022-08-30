@@ -1,6 +1,5 @@
 import {
   FormButton,
-  Text,
   RenderList,
   SectionListItem,
   Stack,
@@ -20,7 +19,6 @@ interface IProps {
   onSubmit: (columnsSelection: string[]) => Promise<void>;
   enabled: boolean;
   getEntityFieldLabels: (fieldName: string) => string;
-  description: string;
   labels: [string, string];
 }
 
@@ -30,7 +28,6 @@ export function SelectionTab({
   labels,
   getEntityFieldLabels,
   enabled,
-  description,
   error,
   onToggle,
   onSubmit,
@@ -55,9 +52,6 @@ export function SelectionTab({
   return (
     <>
       <Stack justify="space-between" align="flex-start">
-        <div style={{ width: "100%" }}>
-          <Text size="5">{description} LINK_TO_DOC</Text>
-        </div>
         {onToggle && (
           <FormButton
             isMakingRequest={false}

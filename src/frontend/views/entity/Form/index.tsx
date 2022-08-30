@@ -1,8 +1,9 @@
-import { Tabs, SectionBox, Text, Spacer } from "@hadmean/chromista";
+import { Tabs, SectionBox } from "@hadmean/chromista";
 import { SLUG_LOADING_VALUE } from "@hadmean/protozoa";
 import { useSetPageDetails } from "frontend/lib/routing";
 import { USER_PERMISSIONS } from "shared/types";
 import { IFormExtension } from "frontend/lib/form/types";
+import { LINK_TO_DOCS } from "frontend/views/constants";
 import { useEntitySlug } from "../../../hooks/entity/entity.config";
 import { BaseEntitySettingsLayout } from "../_Base";
 import {
@@ -44,48 +45,28 @@ function useEntityFormView() {
 
   return {
     "Fields State": (
-      <>
-        <Text size="5">
-          Here you modify the behaviour of the form LINK_TO_DOC
-        </Text>
-        <Spacer />
-        <ScriptForm
-          value={entityFormExtensionSettings.data?.fieldsState}
-          isLoading={sharedLoading}
-          onSubmit={onScriptSubmit("fieldsState")}
-          error={error}
-        />
-      </>
+      <ScriptForm
+        value={entityFormExtensionSettings.data?.fieldsState}
+        isLoading={sharedLoading}
+        onSubmit={onScriptSubmit("fieldsState")}
+        error={error}
+      />
     ),
     "Before Submit": (
-      <>
-        <Text size="5">
-          Here, you get to modify your form just before submit so that you add
-          or remove fields based on requirement LINK_TO_DOC
-        </Text>
-        <Spacer />
-        <ScriptForm
-          value={entityFormExtensionSettings.data?.beforeSubmit}
-          isLoading={sharedLoading}
-          onSubmit={onScriptSubmit("beforeSubmit")}
-          error={error}
-        />
-      </>
+      <ScriptForm
+        value={entityFormExtensionSettings.data?.beforeSubmit}
+        isLoading={sharedLoading}
+        onSubmit={onScriptSubmit("beforeSubmit")}
+        error={error}
+      />
     ),
     "After Submit": (
-      <>
-        <Text size="5">
-          Here, you get to run any action just after the action is submitted
-          LINK_TO_DOC
-        </Text>
-        <Spacer />
-        <ScriptForm
-          value={entityFormExtensionSettings.data?.afterSubmit}
-          isLoading={sharedLoading}
-          onSubmit={onScriptSubmit("afterSubmit")}
-          error={error}
-        />
-      </>
+      <ScriptForm
+        value={entityFormExtensionSettings.data?.afterSubmit}
+        isLoading={sharedLoading}
+        onSubmit={onScriptSubmit("afterSubmit")}
+        error={error}
+      />
     ),
   };
 }
@@ -99,7 +80,16 @@ export function EntityFormExtensionSettings() {
   });
   return (
     <BaseEntitySettingsLayout>
-      <SectionBox title="Form Settings">
+      <SectionBox
+        title="Form Settings"
+        iconButtons={[
+          {
+            action: LINK_TO_DOCS("app-configuration/form"),
+            icon: "help",
+            label: "Form Settings Documentation",
+          },
+        ]}
+      >
         <Tabs
           contents={Object.entries(entityFormView).map(([key, value]) => ({
             label: key,

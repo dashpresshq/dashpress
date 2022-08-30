@@ -13,6 +13,7 @@ import {
   useEntitySlug,
 } from "frontend/hooks/entity/entity.config";
 import { useUpsertConfigurationMutation } from "frontend/hooks/configuration/configuration.store";
+import { LINK_TO_DOCS } from "frontend/views/constants";
 import { BaseEntitySettingsLayout } from "../_Base";
 import { EntityDictionForm } from "./Form";
 import { ENTITY_CONFIGURATION_VIEW } from "../constants";
@@ -36,7 +37,16 @@ export function EntityDictionSettings() {
   });
   return (
     <BaseEntitySettingsLayout>
-      <SectionBox title="Diction Settings">
+      <SectionBox
+        title="Diction Settings"
+        iconButtons={[
+          {
+            action: LINK_TO_DOCS("app-configuration/diction"),
+            icon: "help",
+            label: "Diction Settings Documentation",
+          },
+        ]}
+      >
         {viewStateMachine.type === "error" && (
           <ErrorAlert message={viewStateMachine.message} />
         )}

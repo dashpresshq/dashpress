@@ -9,6 +9,7 @@ import { SLUG_LOADING_VALUE, useRouteParam } from "@hadmean/protozoa";
 import { IEntityCrudSettings } from "shared/configuration.constants";
 import { useSetPageDetails, useChangeRouterParam } from "frontend/lib/routing";
 import { USER_PERMISSIONS } from "shared/types";
+import { LINK_TO_DOCS } from "frontend/views/constants";
 import {
   useEntityCrudSettings,
   useEntityFieldLabels,
@@ -116,7 +117,6 @@ function useEntityCrudView() {
       <SelectionTab
         getEntityFieldLabels={getEntityFieldLabels}
         entityFields={entityFields.data || []}
-        description="Toggle the columns that should be shown in the table"
         isLoading={sharedLoading || hiddenTableColumns.isLoading}
         hiddenColumns={hiddenTableColumns.data || []}
         onSubmit={async (data) => {
@@ -131,7 +131,6 @@ function useEntityCrudView() {
       <SelectionTab
         getEntityFieldLabels={getEntityFieldLabels}
         entityFields={entityFields.data || []}
-        description="Toggle the fields that should be shown in the details page"
         isLoading={sharedLoading || hiddenDetailsColumns.isLoading}
         hiddenColumns={hiddenDetailsColumns.data || []}
         onToggle={() => toggleCrudSettings("details")}
@@ -148,7 +147,6 @@ function useEntityCrudView() {
       <SelectionTab
         getEntityFieldLabels={getEntityFieldLabels}
         entityFields={entityFields.data || []}
-        description="Toggle the fields that are allowed to be created in the Form"
         isLoading={sharedLoading || hiddenCreateColumns.isLoading}
         hiddenColumns={hiddenCreateColumns.data || []}
         error={error}
@@ -164,7 +162,6 @@ function useEntityCrudView() {
       <SelectionTab
         getEntityFieldLabels={getEntityFieldLabels}
         entityFields={entityFields.data || []}
-        description="Toggle the fields that are allowed to be updated in the Form"
         isLoading={sharedLoading || hiddenUpdateColumns.isLoading}
         hiddenColumns={hiddenUpdateColumns.data || []}
         error={error}
@@ -179,7 +176,6 @@ function useEntityCrudView() {
     ),
     [ENTITY_CRUD_SETTINGS_TAB_LABELS.DELETE]: (
       <SelectionTab
-        description=""
         entityFields={[]}
         isLoading={false}
         error={error}
@@ -205,7 +201,16 @@ export function EntityCrudSettings() {
   });
   return (
     <BaseEntitySettingsLayout>
-      <SectionBox title="CRUD Settings">
+      <SectionBox
+        title="CRUD Settings"
+        iconButtons={[
+          {
+            action: LINK_TO_DOCS("app-configuration/crud"),
+            icon: "help",
+            label: "CRUD Settings Documentation",
+          },
+        ]}
+      >
         <Tabs
           currentTab={tabFromUrl}
           onChange={changeTabParam}

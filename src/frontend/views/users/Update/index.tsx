@@ -13,6 +13,7 @@ import {
 } from "frontend/hooks/auth/user.store";
 import { createViewStateMachine } from "frontend/lib/create-view-state-machine";
 import { useNavigationStack, useSetPageDetails } from "frontend/lib/routing";
+import { LINK_TO_DOCS } from "frontend/views/constants";
 import { USER_PERMISSIONS } from "shared/types";
 import { AppLayout } from "../../../_layouts/app";
 import { useUsernameFromRouteParam } from "../hooks";
@@ -53,6 +54,13 @@ export function UserUpdate() {
       <SectionCenter>
         <SectionBox
           title={TitleLang.edit("User")}
+          iconButtons={[
+            {
+              action: LINK_TO_DOCS("accounts/system-profile"),
+              icon: "help",
+              label: "System Profile Documentation",
+            },
+          ]}
           backLink={
             canGoBack()
               ? {

@@ -5,13 +5,13 @@ import {
   SectionCenter,
   SectionListItem,
   Spacer,
-  Text,
 } from "@hadmean/chromista";
 import { TitleLang } from "@hadmean/protozoa";
 import { useEntitiesList } from "frontend/hooks/entity/entity.store";
 import { createViewStateMachine } from "frontend/lib/create-view-state-machine";
 import { useNavigationStack, useSetPageDetails } from "frontend/lib/routing";
 import { userFriendlyCase } from "frontend/lib/strings";
+import { LINK_TO_DOCS } from "frontend/views/constants";
 import { USER_PERMISSIONS, META_USER_PERMISSIONS } from "shared/types";
 import { AppLayout } from "../../../_layouts/app";
 import { useRoleIdFromRouteParam } from "../hooks";
@@ -65,12 +65,16 @@ export function RolePermissions() {
                 }
               : undefined
           }
+          iconButtons={[
+            {
+              action: LINK_TO_DOCS("accounts/roles"),
+              icon: "help",
+              label: "Permissions Documentation",
+            },
+          ]}
         >
           {viewStateMachine.type === "error" && <ErrorAlert message={error} />}
 
-          <Text size="5">
-            LINK_TO_DOC some help text on the cruxes of permissions
-          </Text>
           <Spacer size="xxl" />
           {allList.length > 0 && (
             <RenderList

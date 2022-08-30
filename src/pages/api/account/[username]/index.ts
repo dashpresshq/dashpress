@@ -1,6 +1,6 @@
 import { usersController } from "backend/users/users.controller";
 import { UPDATE_USER_FORM_SCHEMA } from "shared/form-schemas/users/update";
-import { USER_PERMISSIONS } from "shared/types";
+import { IAccountProfile, USER_PERMISSIONS } from "shared/types";
 import { requestHandler } from "../../../../backend/lib/request";
 
 const REQUEST_QUERY_FIELD = "username";
@@ -21,12 +21,16 @@ export default requestHandler(
 
     DELETE: async (getValidatedRequest) => {
       const validatedRequest = await getValidatedRequest([
+        "authenticatedUser",
         {
           _type: "requestQuery",
           options: REQUEST_QUERY_FIELD,
         },
       ]);
-      return await usersController.removeUser(validatedRequest.requestQuery);
+      return await usersController.removeUser(
+        validatedRequest.requestQuery,
+        (validatedRequest.authenticatedUser as IAccountProfile).username
+      );
     },
     PATCH: async (getValidatedRequest) => {
       const validatedRequest = await getValidatedRequest([

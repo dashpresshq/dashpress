@@ -29,8 +29,8 @@ export class UsersController {
     await this._usersService.registerUser(user);
   }
 
-  async removeUser(username: string) {
-    await this._usersService.removeUser(username);
+  async removeUser(username: string, myUsername: string) {
+    await this._usersService.removeUser(username, myUsername);
   }
 
   async getUserProfile(username: string) {

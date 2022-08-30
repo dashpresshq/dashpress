@@ -84,14 +84,17 @@ export function ListUsers() {
           {
             Header: "Username",
             accessor: "username",
+            disableSortBy: true,
           },
           {
             Header: "Name",
             accessor: "name",
+            disableSortBy: true,
           },
           {
             Header: "Role",
             accessor: "role",
+            disableSortBy: true,
             Cell: (value) => userFriendlyCase(value.value as string),
           },
           {

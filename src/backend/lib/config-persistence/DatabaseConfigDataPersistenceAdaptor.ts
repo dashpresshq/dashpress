@@ -8,7 +8,7 @@ import { getDbConnection } from "../connection/db";
 import { AbstractConfigDataPersistenceService } from "./AbstractConfigDataPersistenceService";
 import { ConfigDomain } from "./types";
 
-const CONFIG_TABLE_PREFIX = (domain: string) => `app-config__${domain}`;
+const CONFIG_TABLE_PREFIX = (domain: string) => `hadmean__${domain}`;
 
 export class DatabaseConfigDataPersistenceAdaptor<
   T

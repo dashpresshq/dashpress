@@ -1,6 +1,5 @@
 import {
   FormButton,
-  Text,
   RenderList,
   SectionListItem,
   Spacer,
@@ -14,13 +13,11 @@ interface IProps {
   allList: string[];
   onSubmit: (columnsSelection: string[]) => Promise<void>;
   getEntityFieldLabels: (fieldName: string) => string;
-  description: string;
 }
 
 export function EntitiesSelection({
   isLoading,
   getEntityFieldLabels,
-  description,
   allList,
   onSubmit,
   hiddenList,
@@ -55,10 +52,6 @@ export function EntitiesSelection({
 
   return (
     <>
-      <Text size="5">
-        LINK_TO_DOC
-        {description}
-      </Text>
       {formButton}
       <Spacer size="xxl" />
       {allList.length > 0 && (

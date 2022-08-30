@@ -179,7 +179,6 @@ export function EntityRelationsSettings() {
             {
               content: (
                 <EntitiesSelection
-                  description="Disable entitites that you dont want to appear anywhere in the app"
                   isLoading={viewStateMachine.type === "loading"}
                   allList={entityRelationList.data || []}
                   getEntityFieldLabels={(relation) =>

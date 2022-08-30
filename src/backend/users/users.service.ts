@@ -74,7 +74,7 @@ export class UsersService {
 
   async removeUser(username: string, myUsername: string) {
     if (username === myUsername) {
-      throw new NotFoundError("Can't delete your account");
+      throw new BadRequestError("Can't delete your account");
     }
     await this._usersPersistenceService.removeItem(username);
   }

@@ -1,6 +1,7 @@
 import { ErrorAlert, SectionBox, SortList, Tabs } from "@hadmean/chromista";
 import { useRouteParam } from "@hadmean/protozoa";
 import { useChangeRouterParam, useSetPageDetails } from "frontend/lib/routing";
+import { LINK_TO_DOCS } from "frontend/views/constants";
 import { USER_PERMISSIONS } from "shared/types";
 import {
   useAppConfiguration,
@@ -53,7 +54,16 @@ export function EntitiesSettings() {
   return (
     <BaseSettingsLayout>
       <ErrorAlert message={entitiesList.error || entitiesToHide.error} />
-      <SectionBox title="Entities Settings">
+      <SectionBox
+        title="Entities Settings"
+        iconButtons={[
+          {
+            action: LINK_TO_DOCS("app-configuration/entities"),
+            icon: "help",
+            label: "Entities Settings Documentation",
+          },
+        ]}
+      >
         <Tabs
           currentTab={tabFromUrl}
           onChange={changeTabParam}
@@ -61,7 +71,6 @@ export function EntitiesSettings() {
             {
               content: (
                 <EntitiesSelection
-                  description="Disable entitites that you dont want to appear anywhere in the app"
                   isLoading={entitiesList.isLoading || entitiesToHide.isLoading}
                   allList={(entitiesList.data || []).map(({ label }) => label)}
                   getEntityFieldLabels={entitiesDictionPlurals}

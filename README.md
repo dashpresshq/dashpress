@@ -56,9 +56,9 @@ https://user-images.githubusercontent.com/51802801/187038561-73b8a86d-ab97-4efc-
 
 
 ### Motivation
-There are plenty admin project out there usually free or paid
+There are plenty of admin projects out there usually free or paid
 
-The free ones are usually tied to a framework and all your experience with it are useless when you hop to your next shiny language. They are usually not asthetically pleasing and always require a developer to make any change
+The free ones are usually tied to a framework and all your experience with it is useless when you hop to your next shiny language. They are usually not aesthetically pleasing and always require a developer to make any change
 
 The paid ones are usually good but very restricted as their free version are usually demo plans for you to get a taste of what they can do and you will have to get to the paywall to get to be usable for your day to day
 
@@ -67,8 +67,8 @@ The primary reason to build Hadmean was to build something that will be free and
 ### Why you should try Hadmean
 - It is free
 - Easiest installation, Just one command to install and run
-- You will always be running the lastest version
-- Little learning curve with truly less that 5% technical knowledge requirement
+- You will always be running the latest version
+- The little learning curve with truly less than 5% technical knowledge requirement
 - Tons of features
 - Language/framework agnostic
 - Lastly, It is open source, It doesn't get more customizable than that
@@ -123,7 +123,7 @@ Reach out to the maintainer at one of the following places:
 
 ## Project assistance
 
-If you want to say **thank you** or/and support active development of Hadmean:
+If you want to say **thank you** or/and support the active development of Hadmean:
 
 - Add a [GitHub Star](https://github.com/hadmean/hadmean) to the project.
 - Tweet about Hadmean.
@@ -146,7 +146,7 @@ For a full list of all authors and contributors, see [the contributors page](htt
 
 ## Security
 
-Hadmean  takes security at heart and follows all known good practices of security, but 100% security cannot be assured.
+Hadmean takes security at heart and follows all known good practices of security, but 100% security cannot be assured.
 Hadmean is provided **"as is"** without any **warranty**. Use at your own risk.
 
 _For more information and to report security issues, please refer to our [security documentation](docs/SECURITY.md)._

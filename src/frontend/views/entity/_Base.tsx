@@ -47,14 +47,14 @@ export function BaseEntitySettingsLayout({ children }: IProps) {
           <MenuSection
             menuItems={[
               {
-                action: NAVIGATION_LINKS.ENTITY.CONFIG.DICTION(entity),
-                name: "Diction",
-              },
-              {
                 action: NAVIGATION_LINKS.ENTITY.CONFIG.CRUD(entity, {
                   tab: ENTITY_CRUD_SETTINGS_TAB_LABELS.CREATE,
                 }),
                 name: "CRUD",
+              },
+              {
+                action: NAVIGATION_LINKS.ENTITY.CONFIG.DICTION(entity),
+                name: "Diction",
               },
               {
                 action: NAVIGATION_LINKS.ENTITY.CONFIG.FIELDS(entity, {

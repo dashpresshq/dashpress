@@ -3,8 +3,8 @@
   "version": "0.0.27",
   "license": "GPL-3.0-or-later",
   "scripts": {
-    "dev": "next dev",
-    "start": "next start",
+    "start": "next dev",
+    "start:prod": "next start",
     "build:next": "next build",
     "build:bin": "tsup ./src/bin/index.ts",
     "build": "rimraf .next && npm run build:bin && npm run build:next && rimraf .next/cache",

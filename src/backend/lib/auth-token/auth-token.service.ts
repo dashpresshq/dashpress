@@ -1,3 +1,7 @@
+import {
+  configurationService,
+  ConfigurationService,
+} from "backend/configuration/configuration.service";
 import jsonwebtoken from "jsonwebtoken";
 import { IAccountProfile } from "shared/types";
 import {
@@ -14,14 +18,12 @@ interface IWithJWTMetadataAccountProfile extends IAccountProfile {
 export class AuthTokenService {
   private authToken: string;
 
-  private tokenValiditityDurationInDays: number;
-
-  constructor(private readonly _configService: ConfigService) {
+  constructor(
+    private readonly _configService: ConfigService,
+    private readonly _configurationService: ConfigurationService
+  ) {
     this.authToken = this._configService.getConfigValue(
       ConfigKeys.AUTH_TOKEN_KEY
-    );
-    this.tokenValiditityDurationInDays = this._configService.getConfigValue(
-      ConfigKeys.TOKEN_VALIDITY_DURATION_IN_DAYS
     );
   }
 
@@ -36,11 +38,19 @@ export class AuthTokenService {
     });
   }
 
-  sign(payload: IAccountProfile): string {
+  async sign(payload: IAccountProfile): Promise<string> {
+    const tokenValidityDurationInDays =
+      await this._configurationService.getSystemSettings(
+        "tokenValidityDurationInDays"
+      );
+
     return jsonwebtoken.sign(payload, this.authToken, {
-      expiresIn: `${this.tokenValiditityDurationInDays}d`,
+      expiresIn: `${tokenValidityDurationInDays}d`,
     });
   }
 }
 
-export const authTokenService = new AuthTokenService(configService);
+export const authTokenService = new AuthTokenService(
+  configService,
+  configurationService
+);

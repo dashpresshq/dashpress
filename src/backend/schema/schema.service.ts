@@ -1,15 +1,13 @@
 import { introspect, Entity } from "@hadmean/bacteria";
 import {
+  ConfigurationService,
+  configurationService,
+} from "backend/configuration/configuration.service";
+import {
   CredentialsService,
   credentialsService,
 } from "backend/credentials/credentials.service";
 import { CREDENTIALS_DOMAINS } from "backend/credentials/crendential.types";
-import {
-  ConfigKeys,
-  ConfigService,
-  configService,
-} from "backend/lib/config/config.service";
-import { BooleanConfigValue } from "backend/lib/config/types";
 import { IDBCredentials, IDBSchema, IEntityField } from "shared/types";
 import {
   createConfigDomainPersistenceService,
@@ -22,7 +20,7 @@ export class SchemasService {
   constructor(
     private _schemaConfigDataPersistenceService: AbstractConfigDataPersistenceService<IDBSchema>,
     private _credentialsService: CredentialsService,
-    private _configService: ConfigService
+    private _configurationService: ConfigurationService
   ) {}
 
   private async loadDbSchema(): Promise<IDBSchema[]> {
@@ -37,8 +35,7 @@ export class SchemasService {
 
   private async initDBSchema() {
     if (
-      this._configService.getConfigValue(ConfigKeys.FORCE_INTROSPECTION) ===
-      BooleanConfigValue.TRUE
+      await this._configurationService.getSystemSettings("forceIntrospection")
     ) {
       return await this.doIntrospection();
     }
@@ -126,5 +123,5 @@ const schemaPersistenceService =
 export const schemasService = new SchemasService(
   schemaPersistenceService,
   credentialsService,
-  configService
+  configurationService
 );

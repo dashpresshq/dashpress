@@ -41,7 +41,7 @@ export class UsersService {
       throw new ForbiddenError(INVALID_LOGIN_MESSAGE);
     }
     delete user.password;
-    return { token: this._authTokenService.sign(user) };
+    return { token: await this._authTokenService.sign(user) };
   }
 
   async registerUser(user: IAccountUser) {

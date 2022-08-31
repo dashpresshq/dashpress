@@ -1,3 +1,8 @@
+export const DEFAULT_SYSTEM_SETTINGS = {
+  forceIntrospection: false,
+  tokenValidityDurationInDays: 14,
+};
+
 export const CONFIGURATION_KEYS: Record<
   | "hidden_entity_table_columns"
   | "hidden_entity_create_columns"
@@ -17,15 +22,13 @@ export const CONFIGURATION_KEYS: Record<
   | "entity_validations"
   | "entity_relations_labels"
   | "entity_form_extension"
+  | "system_settings"
   | "hidden_entity_relations"
   | "entity_relations_order",
   { requireEntity: boolean; defaultValue: unknown }
 > = {
   hidden_entity_table_columns: { requireEntity: true, defaultValue: [] },
-  default_date_format: {
-    requireEntity: false,
-    defaultValue: "do MMM yyyy, h:MM aa",
-  },
+
   hidden_entity_create_columns: { requireEntity: true, defaultValue: [] },
   hidden_entity_update_columns: { requireEntity: true, defaultValue: [] },
   hidden_entity_details_columns: { requireEntity: true, defaultValue: [] },
@@ -81,6 +84,14 @@ export const CONFIGURATION_KEYS: Record<
   disabled_entities: { requireEntity: false, defaultValue: [] },
   dashboard_entities: { requireEntity: false, defaultValue: [] },
   entities_order: { requireEntity: false, defaultValue: [] },
+  default_date_format: {
+    requireEntity: false,
+    defaultValue: "do MMM yyyy, h:MM aa",
+  },
+  system_settings: {
+    requireEntity: false,
+    defaultValue: DEFAULT_SYSTEM_SETTINGS,
+  },
 };
 
 export interface IEntityCrudSettings {
@@ -88,4 +99,9 @@ export interface IEntityCrudSettings {
   details: boolean;
   update: boolean;
   delete: boolean;
+}
+
+export interface ISystemSettings {
+  forceIntrospection: boolean;
+  tokenValidityDurationInDays: number;
 }

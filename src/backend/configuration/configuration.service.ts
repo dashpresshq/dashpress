@@ -2,7 +2,11 @@ import {
   createConfigDomainPersistenceService,
   AbstractConfigDataPersistenceService,
 } from "../lib/config-persistence";
-import { CONFIGURATION_KEYS } from "../../shared/configuration.constants";
+import {
+  CONFIGURATION_KEYS,
+  DEFAULT_SYSTEM_SETTINGS,
+  ISystemSettings,
+} from "../../shared/configuration.constants";
 
 export class ConfigurationService {
   constructor(
@@ -36,6 +40,13 @@ export class ConfigurationService {
     }
 
     return CONFIGURATION_KEYS[key].defaultValue as T;
+  }
+
+  async getSystemSettings<T extends keyof ISystemSettings>(
+    key: T
+  ): Promise<ISystemSettings[T]> {
+    const systemSettings = await this.show<ISystemSettings>("system_settings");
+    return { ...DEFAULT_SYSTEM_SETTINGS, ...systemSettings }[key];
   }
 
   async upsert(

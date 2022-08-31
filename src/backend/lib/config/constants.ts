@@ -1,7 +1,7 @@
 import { StringUtils } from "@hadmean/protozoa";
 import { CacheAdaptorTypes } from "../cache/types";
 import { ConfigAdaptorTypes } from "../config-persistence/types";
-import { BooleanConfigValue, ConfigKeys } from "./types";
+import { ConfigKeys } from "./types";
 
 interface IConfigBag {
   defaultValue: () => string;
@@ -77,33 +77,12 @@ export const ConfigBag: Record<ConfigKeys, IConfigBag> = {
       tokenValidations(value, "Encryption Key");
     },
   },
-  TOKEN_VALIDITY_DURATION_IN_DAYS: {
-    defaultValue: () => {
-      return "14";
-    },
-    validate: (value) => {
-      if (Number.isNaN(value)) {
-        throw new Error(`Token Expiration in days needs to be a number`);
-      }
-    },
-  },
   AUTH_TOKEN_KEY: {
     defaultValue: () => {
       return StringUtils.generateRandomString(128);
     },
     validate: (value) => {
       tokenValidations(value, "Auth token Key");
-    },
-  },
-  FORCE_INTROSPECTION: {
-    defaultValue: () => {
-      return BooleanConfigValue.FALSE;
-    },
-    validate: (value) => {
-      optionsValidation(value, "Force introspection", [
-        BooleanConfigValue.TRUE,
-        BooleanConfigValue.FALSE,
-      ]);
     },
   },
 };

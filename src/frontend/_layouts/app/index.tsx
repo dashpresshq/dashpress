@@ -16,6 +16,7 @@ import { useNavigationStack } from "frontend/lib/routing";
 import { usePageDetailsStore } from "frontend/lib/routing/usePageDetails";
 import { usePageRequiresPermission } from "frontend/hooks/auth/user.store";
 import { useUserAuthenticatedState } from "frontend/hooks/auth/useAuthenticateUser";
+import noop from "lodash/noop";
 import { useSiteConfig } from "../../hooks/app/site.config";
 import { NAVIGATION_LINKS } from "../../lib/routing/links";
 import { useSelectionViews } from "./useSelectionViews";
@@ -60,10 +61,13 @@ export function AppLayout({ children, actionItems = [] }: IProps) {
     pushToStack();
   }, [router.asPath]);
 
-  const homedBreadcrumb = history.map((historyItem) => ({
-    value: historyItem.link,
-    label: historyItem.title,
-  }));
+  noop(history);
+  // const homedBreadcrumb = history.map((historyItem) => ({
+  //   value: historyItem.link,
+  //   label: historyItem.title,
+  // }));
+
+  const homedBreadcrumb = [];
 
   homedBreadcrumb.push({ value: "", label: pageTitle });
 

@@ -34,7 +34,7 @@ export function SchemaForm<T extends Record<string, unknown>>({
   resetForm,
 }: IProps<T>) {
   const scriptContext = useGlobalScriptContext();
-
+  // :eyes needs finnesing
   return (
     <Form
       onSubmit={async (formValues) => {
@@ -58,11 +58,12 @@ export function SchemaForm<T extends Record<string, unknown>>({
       initialValues={initialValues}
       validate={runValidationError(fields)}
       render={({ handleSubmit, submitting, values, form, pristine }) => {
-        const fieldState = runFormFieldState(
-          formExtension?.fieldsState,
-          scriptContext,
-          { formValues: values }
-        );
+        const fieldState: Record<
+          string,
+          { hidden: boolean; disabled: boolean }
+        > = runFormFieldState(formExtension?.fieldsState, scriptContext, {
+          formValues: values,
+        });
         return (
           <form
             noValidate

@@ -24,6 +24,7 @@ export const NAVIGATION_LINKS = {
   SETTINGS: {
     DEFAULT: "/admin/settings/entities",
     ENTITIES: "/admin/settings/entities",
+    SYSTEM: "/admin/settings/system",
     DATE: "/admin/settings/date",
   },
   ENTITY: {

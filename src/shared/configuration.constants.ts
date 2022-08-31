@@ -101,7 +101,7 @@ export interface IEntityCrudSettings {
   delete: boolean;
 }
 
-export interface ISystemSettings {
+export type ISystemSettings = {
   forceIntrospection: boolean;
   tokenValidityDurationInDays: number;
-}
+};

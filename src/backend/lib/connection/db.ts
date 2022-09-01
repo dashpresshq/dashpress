@@ -12,10 +12,29 @@ const SupportedDatabaseTypeToKnexClientMap: Record<
   sqlite: "better-sqlite3",
 };
 
+const handleStringCredentials = (credentials: string) => {
+  if (credentials.startsWith("sqlite")) {
+    return knex({
+      client: "better-sqlite3",
+      connection: {
+        filename: credentials.split(":")[1],
+      },
+      useNullAsDefault: true,
+    });
+  }
+
+  return knex(credentials);
+};
+
 const make = (credentials: IDBCredentials | string) => {
   if (typeof credentials === "string") {
-    return knex(credentials);
+    return handleStringCredentials(credentials);
   }
+
+  if (credentials.connectionString) {
+    return handleStringCredentials(credentials.connectionString);
+  }
+
   return knex({
     client: SupportedDatabaseTypeToKnexClientMap[credentials.databaseType],
 

@@ -39,6 +39,7 @@ export enum SupportedDatabaseTypes {
 }
 
 export type IDBCredentials = {
+  connectionString: string;
   databaseType: SupportedDatabaseTypes;
   host: string;
   user: string;

@@ -36,3 +36,5 @@ tsconfig.tsbuildinfo
 .config-data/*.json
 
 dist/
+
+*.sqlite

@@ -13,22 +13,22 @@ const CONFIG_TABLE_PREFIX = (domain: string) => `hadmean__${domain}`;
 export class DatabaseConfigDataPersistenceAdaptor<
   T
 > extends AbstractConfigDataPersistenceService<T> {
-  static _dbInstance: Knex | null = null;
+  static _dbInstance: Record<string, Knex | null> = {};
 
-  static async getDbInstance(configDomain: ConfigDomain) {
-    if (this._dbInstance) {
-      return this._dbInstance;
+  static async getDbInstance(configDomain: ConfigDomain): Promise<Knex> {
+    if (this._dbInstance[configDomain]) {
+      return this._dbInstance[configDomain];
     }
-    this._dbInstance = await getDbConnection(
+    this._dbInstance[configDomain] = await getDbConnection(
       configService.getConfigValue(ConfigKeys.CONFIG_ADAPTOR_CONNECTION_STRING)
     );
 
     if (
-      !(await this._dbInstance.schema.hasTable(
+      !(await this._dbInstance[configDomain].schema.hasTable(
         CONFIG_TABLE_PREFIX(configDomain)
       ))
     ) {
-      await this._dbInstance.schema.createTable(
+      await this._dbInstance[configDomain].schema.createTableIfNotExists(
         CONFIG_TABLE_PREFIX(configDomain),
         (table) => {
           table.increments("id");
@@ -38,7 +38,7 @@ export class DatabaseConfigDataPersistenceAdaptor<
       );
     }
 
-    return this._dbInstance;
+    return this._dbInstance[configDomain];
   }
 
   constructor(configDomain: ConfigDomain, _configService: ConfigService) {
@@ -68,11 +68,10 @@ export class DatabaseConfigDataPersistenceAdaptor<
   }
 
   async getItem(key: string) {
-    const queryResponse = await (
-      await DatabaseConfigDataPersistenceAdaptor.getDbInstance(
-        this.configDomain
-      )
-    )
+    const connection = await DatabaseConfigDataPersistenceAdaptor.getDbInstance(
+      this.configDomain
+    );
+    const queryResponse = await connection
       .table(CONFIG_TABLE_PREFIX(this.configDomain))
       .select(["value"])
       .where({ key })

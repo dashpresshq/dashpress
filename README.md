@@ -147,7 +147,7 @@ For a full list of all authors and contributors, see [the contributors page](htt
 ## Security
 
 Hadmean takes security at heart and follows all known good practices of security, but 100% security cannot be assured.
-Hadmean is provided **"as is"** without any **warranty**. Use at your own risk.
+Hadmean is provided **"as is"** without any **warranty**.
 
 _For more information and to report security issues, please refer to our [security documentation](docs/SECURITY.md)._
 

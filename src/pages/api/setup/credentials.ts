@@ -18,6 +18,14 @@ const credentialRequestSchema: IAppliedSchemaFormConfig<IDBCredentials> = {
       },
     ],
   },
+  connectionString: {
+    type: "text",
+    validations: [
+      {
+        validationType: "isString",
+      },
+    ],
+  },
   schemaNames: {
     type: "text",
     validations: [],

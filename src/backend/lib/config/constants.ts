@@ -61,9 +61,9 @@ export const ConfigBag: Record<ConfigKeys, IConfigBag> = {
       stringValidation(value, "Config Adaptor Connection");
     },
   },
-  CONFIG_CACHE_CONNECTION_STRING: {
+  CACHE_ADAPTOR_CONNECTION_STRING: {
     defaultValue: () => {
-      return "PLACE_HOLDER_CONFIG_CACHE_CONNECTION_STRING";
+      return "PLACE_HOLDER_CACHE_ADAPTOR_CONNECTION_STRING_STRING";
     },
     validate: (value) => {
       stringValidation(value, "Cache Adaptor Connection");

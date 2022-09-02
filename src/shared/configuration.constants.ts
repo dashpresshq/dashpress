@@ -1,5 +1,5 @@
 export const DEFAULT_SYSTEM_SETTINGS = {
-  forceIntrospection: true,
+  forceIntrospection: process.env.NODE_ENV === "production",
   tokenValidityDurationInDays: 14,
 };
 

@@ -121,6 +121,12 @@ export class DatabaseConfigDataPersistenceAdaptor<
       await DatabaseConfigDataPersistenceAdaptor.getDbInstance(
         this.configDomain
       )
+    )(CONFIG_TABLE_PREFIX(this.configDomain)).del();
+
+    await (
+      await DatabaseConfigDataPersistenceAdaptor.getDbInstance(
+        this.configDomain
+      )
     )(CONFIG_TABLE_PREFIX(this.configDomain)).insert(
       values.map((value) => ({
         key: value[keyField],

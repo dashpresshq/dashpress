@@ -1,16 +1,15 @@
-import { rest } from "msw";
-import { setupServer } from "msw/node";
+import { setupApiHandlers } from "./setup";
+import { accountApiHandlers } from "./account";
+import { authApiHandlers } from "./auth";
+import { entitiesApiHandlers } from "./entities";
+import { dataApiHandlers } from "./data";
+import { configApiHandlers } from "./config";
 
-import { setupHandlers } from "./setup";
-import { accountHandlers } from "./account";
-import { authHandlers } from "./auth";
-
-export const serverHandlers = [
-  ...setupHandlers,
-  ...authHandlers,
-  ...accountHandlers,
+export const apiHandlers = [
+  ...setupApiHandlers,
+  ...authApiHandlers,
+  ...accountApiHandlers,
+  ...entitiesApiHandlers,
+  ...dataApiHandlers,
+  ...configApiHandlers,
 ];
-
-const server = setupServer(...serverHandlers);
-
-export { server, rest };

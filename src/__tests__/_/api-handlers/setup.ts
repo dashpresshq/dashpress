@@ -1,7 +1,7 @@
 import { rest } from "msw";
 import { BASE_TEST_URL } from "./_utils";
 
-export const setupHandlers = [
+export const setupApiHandlers = [
   rest.get(BASE_TEST_URL("/api/setup/check"), async (_, res, ctx) => {
     return res(
       ctx.json({

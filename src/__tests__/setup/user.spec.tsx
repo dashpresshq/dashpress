@@ -4,9 +4,12 @@ import { AppWrapper } from "@hadmean/chromista";
 // import { rest, server } from "__tests__/server";
 // import singletonRouter from "next/router";
 import mockRouter from "next-router-mock";
+import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 import DBCredentials from "../../pages/setup/credentials";
 
 jest.mock("next/router", () => require("next-router-mock"));
+
+setupApiHandlers();
 
 describe("<DBCredentials />", () => {
   beforeEach(() => {

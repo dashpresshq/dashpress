@@ -92,7 +92,7 @@ export function AppLayout({ children, actionItems = [] }: IProps) {
         ) : null}
       </Stack>
       <Spacer />
-      {children}
+      <div data-testid="app-layout__content">{children}</div>
     </DynamicLayout>
   );
 }

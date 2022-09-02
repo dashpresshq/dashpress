@@ -107,6 +107,7 @@ const customJestConfig = {
   setupFiles: [
     // "<rootDir>/__tests__/setupDotEnv.ts",
     "<rootDir>/src/__tests__/setupGlobals.ts",
+    "<rootDir>/src/__tests__/consoleOverrides.ts",
   ],
 
   // A list of paths to modules that run some code to configure or set up the testing framework before each test

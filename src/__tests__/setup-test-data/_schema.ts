@@ -138,7 +138,5 @@ export const setupSchemaTestData = async () => {
   const configPersistenceService =
     createConfigDomainPersistenceService<IDBSchema>("schema");
 
-  await configPersistenceService.resetToEmpty();
-
   await configPersistenceService.resetState("name", TEST_DB_SCHEMA);
 };

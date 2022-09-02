@@ -6,6 +6,10 @@ const TEST_APP_CONFIG: Partial<Record<string, unknown>> = {
     singular: "Base Model",
     plural: "Base Models",
   },
+  system_settings: {
+    forceIntrospection: false,
+    tokenValidityDurationInDays: 1,
+  },
 };
 
 export const setupAppConfigTestData = async (

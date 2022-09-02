@@ -1,5 +1,5 @@
 export const DEFAULT_SYSTEM_SETTINGS = {
-  forceIntrospection: false,
+  forceIntrospection: true,
   tokenValidityDurationInDays: 14,
 };
 

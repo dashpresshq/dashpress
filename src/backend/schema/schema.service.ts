@@ -46,7 +46,6 @@ export class SchemasService {
     if (savedDbSchema.length > 0) {
       return savedDbSchema;
     }
-
     return await this.doIntrospection();
   }
 

@@ -20,7 +20,7 @@ export const setupAppConfigTestData = async (
 
   await configPersistenceService.resetToEmpty();
 
-  const configAsArray = Object.entries(appConfig);
+  const configAsArray = Object.entries({ ...TEST_APP_CONFIG, ...appConfig });
 
   // eslint-disable-next-line no-restricted-syntax
   for (const [key, value] of configAsArray) {

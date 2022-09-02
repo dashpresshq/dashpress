@@ -25,6 +25,10 @@ describe("/api/entities/menu", () => {
           "label": "secondary-model",
           "value": "secondary-model",
         },
+        Object {
+          "label": "tests",
+          "value": "tests",
+        },
       ]
     `);
   });
@@ -50,6 +54,10 @@ describe("/api/entities/menu", () => {
         Object {
           "label": "base-model",
           "value": "base-model",
+        },
+        Object {
+          "label": "tests",
+          "value": "tests",
         },
       ]
     `);

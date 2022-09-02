@@ -12,6 +12,7 @@ Please check the type of change your PR introduces:
 - [ ] Refactoring (no functional changes, no API changes)
 - [ ] Build-related changes
 - [ ] Documentation content changes
+- [ ] Tests
 - [ ] Other (please describe):
 
 ## What is the current behavior?

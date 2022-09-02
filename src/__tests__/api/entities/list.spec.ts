@@ -33,6 +33,10 @@ describe("/api/entities/list", () => {
           "label": "secondary-model",
           "value": "secondary-model",
         },
+        Object {
+          "label": "tests",
+          "value": "tests",
+        },
       ]
     `);
   });

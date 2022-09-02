@@ -18,5 +18,5 @@ export const setupRolesTestData = async (testRoles: IRole[] = TEST_ROLES) => {
 
   await configPersistenceService.resetToEmpty();
 
-  await configPersistenceService.saveAllItems("id", testRoles);
+  await configPersistenceService.resetState("id", testRoles);
 };

@@ -47,7 +47,12 @@ export abstract class AbstractConfigDataPersistenceService<T> {
 
   public abstract removeItem(key: string): Promise<void>;
 
-  public abstract saveAllItems(keyField: keyof T, data: T[]): Promise<void>;
+  public async resetState(keyField: keyof T, data: T[]) {
+    await this.resetToEmpty();
+    await this.saveAllItems(keyField, data);
+  }
+
+  protected abstract saveAllItems(keyField: keyof T, data: T[]): Promise<void>;
 
   public abstract resetToEmpty(): Promise<void>;
 }

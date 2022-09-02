@@ -68,10 +68,7 @@ export class SchemasService {
 
     const dbSchema = this.formatIntrospectData(schema);
 
-    await this._schemaConfigDataPersistenceService.saveAllItems(
-      "name",
-      dbSchema
-    );
+    await this._schemaConfigDataPersistenceService.resetState("name", dbSchema);
 
     return dbSchema;
   }

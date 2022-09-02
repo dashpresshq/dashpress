@@ -23,5 +23,5 @@ export const setupUsersTestData = async (
     return;
   }
 
-  await configPersistenceService.saveAllItems("username", testUsers);
+  await configPersistenceService.resetState("username", testUsers);
 };

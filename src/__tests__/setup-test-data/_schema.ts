@@ -140,5 +140,5 @@ export const setupSchemaTestData = async () => {
 
   await configPersistenceService.resetToEmpty();
 
-  await configPersistenceService.saveAllItems("name", TEST_DB_SCHEMA);
+  await configPersistenceService.resetState("name", TEST_DB_SCHEMA);
 };

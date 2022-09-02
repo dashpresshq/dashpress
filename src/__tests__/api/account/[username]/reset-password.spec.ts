@@ -1,8 +1,10 @@
-import { setupAllTestData } from "__tests__/setup-test-data";
 import handler from "pages/api/account/[username]/reset-password";
 import signInHandler from "pages/api/auth/signin";
-import { createAuthenticatedMocks } from "__tests__/helpers";
 import { createMocks } from "node-mocks-http";
+import {
+  setupAllTestData,
+  createAuthenticatedMocks,
+} from "__tests__/api/_test-utils";
 
 describe("/api/account/[username]/reset-password", () => {
   beforeAll(async () => {

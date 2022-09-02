@@ -1,7 +1,7 @@
-import { setupAllTestData } from "__tests__/setup-test-data";
 import handler from "pages/api/auth/signin";
 import { createMocks } from "node-mocks-http";
 import { authTokenService } from "backend/lib/auth-token/auth-token.service";
+import { setupAllTestData } from "__tests__/api/_test-utils";
 
 describe("/api/auth/signin", () => {
   beforeAll(async () => {

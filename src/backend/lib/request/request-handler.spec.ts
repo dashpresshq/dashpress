@@ -1,4 +1,4 @@
-import { createAuthenticatedMocks } from "__tests__/helpers";
+import { createAuthenticatedMocks } from "__tests__/api/_test-utils";
 import { requestHandler } from "../request";
 import { BadRequestError } from "../errors";
 

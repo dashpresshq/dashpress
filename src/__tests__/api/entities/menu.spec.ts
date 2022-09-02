@@ -1,7 +1,9 @@
 import handler from "pages/api/entities/menu";
-import { createAuthenticatedMocks } from "__tests__/helpers";
-import { setupAllTestData } from "__tests__/setup-test-data";
-import { setupAppConfigTestData } from "__tests__/setup-test-data/_app-config";
+import {
+  setupAllTestData,
+  createAuthenticatedMocks,
+  setupAppConfigTestData,
+} from "__tests__/api/_test-utils";
 
 describe("/api/entities/menu", () => {
   beforeAll(async () => {

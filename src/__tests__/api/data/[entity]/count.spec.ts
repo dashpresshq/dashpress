@@ -1,7 +1,9 @@
 import handler from "pages/api/data/[entity]/count";
-import { createAuthenticatedMocks } from "__tests__/helpers";
-import { setupAllTestData } from "__tests__/setup-test-data";
-import { setupTestDatabaseData } from "__tests__/setup-test-data/_data";
+import {
+  setupAllTestData,
+  setupTestDatabaseData,
+  createAuthenticatedMocks,
+} from "__tests__/api/_test-utils";
 
 describe("/api/data/[entity]/count", () => {
   beforeAll(async () => {

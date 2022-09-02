@@ -1,6 +1,6 @@
 import handler from "pages/api/setup/credentials";
 import { createMocks } from "node-mocks-http";
-import { setupCredentialsTestData } from "__tests__/setup-test-data/_credentials";
+import { setupCredentialsTestData } from "__tests__/api/_test-utils";
 
 describe("/api/setup/credentials", () => {
   beforeAll(async () => {

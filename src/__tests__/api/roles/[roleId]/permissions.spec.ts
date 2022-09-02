@@ -1,6 +1,8 @@
 import handler from "pages/api/roles/[roleId]/permissions";
-import { createAuthenticatedMocks } from "__tests__/helpers";
-import { setupRolesTestData } from "__tests__/setup-test-data/_roles";
+import {
+  setupRolesTestData,
+  createAuthenticatedMocks,
+} from "__tests__/api/_test-utils";
 
 describe("/api/roles/[roleId]/permissions", () => {
   beforeAll(async () => {

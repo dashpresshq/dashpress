@@ -1,8 +1,10 @@
-import { setupAllTestData } from "__tests__/setup-test-data";
 import handler from "pages/api/setup/check";
 import { createMocks } from "node-mocks-http";
-import { setupCredentialsTestData } from "__tests__/setup-test-data/_credentials";
-import { setupUsersTestData } from "__tests__/setup-test-data/_users";
+import {
+  setupCredentialsTestData,
+  setupAllTestData,
+  setupUsersTestData,
+} from "__tests__/api/_test-utils";
 
 describe("/api/setup/check", () => {
   beforeAll(async () => {

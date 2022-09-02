@@ -1,7 +1,7 @@
 import { cleanup } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 
-import { server } from "./server";
+import { server } from "./api-handlers";
 
 beforeAll(() => {
   server.listen();

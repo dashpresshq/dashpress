@@ -1,9 +1,11 @@
 import handler from "pages/api/roles/[roleId]/index";
 import rolesIndexhandler from "pages/api/roles/index";
 import accountDetailsHandler from "pages/api/account/[username]/index";
-import { createAuthenticatedMocks } from "__tests__/helpers";
-import { setupRolesTestData } from "__tests__/setup-test-data/_roles";
-import { setupUsersTestData } from "__tests__/setup-test-data/_users";
+import {
+  setupUsersTestData,
+  setupRolesTestData,
+  createAuthenticatedMocks,
+} from "__tests__/api/_test-utils";
 
 describe("/api/roles/[roleId]/index", () => {
   beforeEach(async () => {

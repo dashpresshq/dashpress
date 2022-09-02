@@ -1,6 +1,8 @@
-import { setupAllTestData } from "__tests__/setup-test-data";
 import handler from "pages/api/account/mine";
-import { createAuthenticatedMocks } from "__tests__/helpers";
+import {
+  createAuthenticatedMocks,
+  setupAllTestData,
+} from "__tests__/api/_test-utils";
 
 describe("/api/account/mine", () => {
   beforeAll(async () => {

@@ -41,10 +41,6 @@ export class CredentialsService {
     );
   }
 
-  async removeDomainCredentials(domain: string) {
-    await this._credentialsPersistenceService.removeItem(domain);
-  }
-
   async getDomainCredentials<T extends Record<string, unknown>>(
     domain: string
   ): Promise<T> {

@@ -4,10 +4,6 @@ import { credentialsService, CredentialsService } from "./credentials.service";
 export class CredentialController {
   constructor(private _credentialsService: CredentialsService) {}
 
-  async remove(domain: string) {
-    await this._credentialsService.removeDomainCredentials(domain);
-  }
-
   async upsert(domain: string, credentials: IDBCredentials) {
     await this._credentialsService.upsertDomainCredentials(domain, credentials);
   }

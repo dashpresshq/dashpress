@@ -39,15 +39,8 @@ describe("pages/admin (Dashboard)", () => {
 //   screen.getByRole("textbox", { name: /username/i }),
 //   "john.maverick"
 // );
-// userEvent.type(
-//   screen.getByRole("textbox", { name: /password/i }),
-//   "super-secret"
-// );
-// userEvent.click(screen.getByText(/submit/i));
 // const alert = await screen.findByRole("alert");
-
 // // Assert successful login state
-// expect(alert).toHaveTextContent(/welcome/i);
 // expect(window.sessionStorage.getItem("token")).toEqual(
 //   fakeUserResponse.token
 // );
@@ -61,20 +54,5 @@ describe("pages/admin (Dashboard)", () => {
 //       );
 //     })
 //   );
-
-//   render(<Login />);
-//   userEvent.type(
-//     screen.getByRole("textbox", { name: /username/i }),
-//     "john.maverick"
-//   );
-//   userEvent.type(
-//     screen.getByRole("textbox", { name: /password/i }),
-//     "super-secret"
-//   );
-//   userEvent.click(screen.getByText(/submit/i));
-
-//   // Assert meaningful error message shown to the user
-//   expect(alert).toHaveTextContent(/sorry, something went wrong/i);
 //   expect(window.sessionStorage.getItem("token")).toBeNull();
 // });
-// //

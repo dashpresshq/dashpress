@@ -1,7 +1,6 @@
 import * as React from "react";
 import { render, screen } from "@testing-library/react";
 import { AppWrapper } from "@hadmean/chromista";
-// import { rest, server } from "__tests__/server";
 // import singletonRouter from "next/router";
 import mockRouter from "next-router-mock";
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";

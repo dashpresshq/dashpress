@@ -1,6 +1,10 @@
 import { ErrorAlert, SectionBox, SortList, Tabs } from "@hadmean/chromista";
-import { SLUG_LOADING_VALUE, useRouteParam } from "@hadmean/protozoa";
-import { useChangeRouterParam, useSetPageDetails } from "frontend/lib/routing";
+import { SLUG_LOADING_VALUE } from "@hadmean/protozoa";
+import {
+  useChangeRouterParam,
+  useRouteParam,
+  useSetPageDetails,
+} from "frontend/lib/routing";
 import { USER_PERMISSIONS } from "shared/types";
 import {
   useEntityFieldLabels,

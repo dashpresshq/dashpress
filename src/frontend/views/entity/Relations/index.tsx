@@ -13,8 +13,12 @@ import {
   useEntityReferenceFields,
   useEntityRelationsList,
 } from "frontend/hooks/entity/entity.store";
-import { SLUG_LOADING_VALUE, useRouteParam } from "@hadmean/protozoa";
-import { useChangeRouterParam, useSetPageDetails } from "frontend/lib/routing";
+import { SLUG_LOADING_VALUE } from "@hadmean/protozoa";
+import {
+  useRouteParam,
+  useChangeRouterParam,
+  useSetPageDetails,
+} from "frontend/lib/routing";
 import { EntitiesSelection } from "frontend/views/settings/Entities/Selection";
 import { useEntityDictionPlurals } from "frontend/hooks/entity/entity.queries";
 import { createViewStateMachine } from "frontend/lib/create-view-state-machine";

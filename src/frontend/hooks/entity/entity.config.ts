@@ -1,10 +1,9 @@
-import { SLUG_LOADING_VALUE } from "@hadmean/protozoa";
 import { useCallback } from "react";
 import uniqBy from "lodash/uniqBy";
 import { IFieldValidationItem } from "shared/validations/types";
 import { IColorableSelection } from "shared/types";
 import { EntityTypesForSelection } from "frontend/views/entity/Fields/FieldsSelection";
-import { useRouter } from "next/router";
+import { useRouteParam } from "frontend/lib/routing";
 import {
   getFieldTypeBoundedValidations,
   guessEntityType,
@@ -19,20 +18,6 @@ import {
 } from "../../../shared/configuration.constants";
 import { useEntityConfiguration } from "../configuration/configuration.store";
 import { getEntitySelectionConfig } from "./logic";
-
-export function useRouteParam(name: string) {
-  const router = useRouter();
-
-  if (typeof window === "undefined") return SLUG_LOADING_VALUE;
-
-  const value = router.query[name];
-
-  if (!value) return SLUG_LOADING_VALUE;
-
-  if (Array.isArray(value))
-    throw new Error("Unexpected handle given by Next.js");
-  return value;
-}
 
 export function useEntitySlug(overrideValue?: string) {
   const routeParam = useRouteParam("entity");

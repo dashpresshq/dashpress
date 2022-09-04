@@ -2,9 +2,8 @@ import {
   AuthService,
   createStore,
   SLUG_LOADING_VALUE,
-  useRouteParam,
 } from "@hadmean/protozoa";
-import { NAVIGATION_LINKS } from "frontend/lib/routing";
+import { NAVIGATION_LINKS, useRouteParam } from "frontend/lib/routing";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 

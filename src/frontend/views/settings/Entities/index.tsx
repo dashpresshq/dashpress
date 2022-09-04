@@ -1,6 +1,9 @@
 import { ErrorAlert, SectionBox, SortList, Tabs } from "@hadmean/chromista";
-import { useRouteParam } from "@hadmean/protozoa";
-import { useChangeRouterParam, useSetPageDetails } from "frontend/lib/routing";
+import {
+  useRouteParam,
+  useChangeRouterParam,
+  useSetPageDetails,
+} from "frontend/lib/routing";
 import { LINK_TO_DOCS } from "frontend/views/constants";
 import { USER_PERMISSIONS } from "shared/types";
 import {

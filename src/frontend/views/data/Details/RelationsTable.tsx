@@ -1,7 +1,6 @@
 import { FilterOperators } from "@hadmean/chromista";
-import { useRouteParam } from "@hadmean/protozoa";
 import { useEntityReferenceFields } from "frontend/hooks/entity/entity.store";
-import { useSetPageDetails } from "frontend/lib/routing";
+import { useSetPageDetails, useRouteParam } from "frontend/lib/routing";
 import { META_USER_PERMISSIONS } from "shared/types";
 import {
   useEntityDiction,

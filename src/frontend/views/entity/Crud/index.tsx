@@ -5,9 +5,13 @@ import {
   ENTITY_LIST_PATH,
   ENTITY_TABLE_PATH,
 } from "frontend/hooks/data/data.store";
-import { SLUG_LOADING_VALUE, useRouteParam } from "@hadmean/protozoa";
+import { SLUG_LOADING_VALUE } from "@hadmean/protozoa";
 import { IEntityCrudSettings } from "shared/configuration.constants";
-import { useSetPageDetails, useChangeRouterParam } from "frontend/lib/routing";
+import {
+  useSetPageDetails,
+  useChangeRouterParam,
+  useRouteParam,
+} from "frontend/lib/routing";
 import { USER_PERMISSIONS } from "shared/types";
 import { LINK_TO_DOCS } from "frontend/views/constants";
 import {

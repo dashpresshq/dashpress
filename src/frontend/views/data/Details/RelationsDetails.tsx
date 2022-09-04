@@ -1,9 +1,10 @@
 import { SectionBox } from "@hadmean/chromista";
-import { TitleLang, useRouteParam } from "@hadmean/protozoa";
+import { TitleLang } from "@hadmean/protozoa";
 import {
   NAVIGATION_LINKS,
   useNavigationStack,
   useSetPageDetails,
+  useRouteParam,
 } from "frontend/lib/routing";
 import { META_USER_PERMISSIONS } from "shared/types";
 import {

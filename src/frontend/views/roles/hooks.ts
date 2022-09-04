@@ -1,3 +1,3 @@
-import { useRouteParam } from "@hadmean/protozoa";
+import { useRouteParam } from "frontend/lib/routing";
 
 export const useRoleIdFromRouteParam = () => useRouteParam("roleId");

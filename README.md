@@ -47,8 +47,7 @@
 ---
 
 ## About
-
-Hadmean is your agnostic, powerful, one-line install, customizable, all batteries included and free admin apps generator
+Hadmean is an internal tool generator. It is language agnostic, schema driven, extremely customizable, fully featured, user-friendly and has just one installation step.
 
 ### Quick Demo
 
@@ -56,7 +55,7 @@ https://user-images.githubusercontent.com/51802801/187038561-73b8a86d-ab97-4efc-
 
 
 ### Motivation
-There are plenty of admin projects out there usually free or paid
+There are plenty of admin projects out there usually free or paid.
 
 The free ones are usually tied to a framework and all your experience with it is useless when you hop to your next shiny language. They are usually not aesthetically pleasing and always require a developer to make any change
 
@@ -86,6 +85,9 @@ $ cd <project_name>
 
 $ npx hadmean@latest
 ```
+
+That is all, You will be able to see the application on http://localhost:3000
+
 
 ## Features
  - Authentication

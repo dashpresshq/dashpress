@@ -1,6 +1,5 @@
 import {
   ComponentIsLoading,
-  ErrorAlert,
   SoftButton,
   Spacer,
   StyledCard,
@@ -14,6 +13,7 @@ import { HardDrive } from "react-feather";
 import { useEntitiesCount } from "frontend/hooks/data/data.store";
 import { useSetPageDetails } from "frontend/lib/routing";
 import { META_USER_PERMISSIONS } from "shared/types";
+import { ViewStateMachine } from "frontend/lib/ViewStateMachine";
 import { useEntitiesMenuItems } from "../../hooks/entity/entity.store";
 import { AppLayout } from "../../_layouts/app";
 import { NAVIGATION_LINKS } from "../../lib/routing/links";
@@ -47,11 +47,11 @@ export function Dashboard() {
         },
       ]}
     >
-      {entitiesMenuItems.isLoading && <ComponentIsLoading />}
-      {entitiesMenuItems.error && (
-        <ErrorAlert message={entitiesMenuItems.error} />
-      )}
-      {!entitiesMenuItems.isLoading && !entitiesMenuItems.error && (
+      <ViewStateMachine
+        loading={entitiesMenuItems.isLoading}
+        error={entitiesMenuItems.error}
+        loader={<ComponentIsLoading />}
+      >
         <StyledGrid.Row>
           {entitiesMenuItems.data.map((field) => (
             <StyledGrid.Col lg={4} md={6} sm={12} key={field.value}>
@@ -79,7 +79,7 @@ export function Dashboard() {
             </StyledGrid.Col>
           ))}
         </StyledGrid.Row>
-      )}
+      </ViewStateMachine>
     </AppLayout>
   );
 }

@@ -1,12 +1,11 @@
 import {
-  ErrorAlert,
   FormSkeleton,
   FormSkeletonSchema,
   SectionBox,
 } from "@hadmean/chromista";
 import { SLUG_LOADING_VALUE } from "@hadmean/protozoa";
 import { useSetPageDetails } from "frontend/lib/routing";
-import { createViewStateMachine } from "frontend/lib/create-view-state-machine";
+import { ViewStateMachine } from "frontend/lib/ViewStateMachine";
 import { USER_PERMISSIONS } from "shared/types";
 import {
   useEntityDiction,
@@ -26,10 +25,7 @@ export function EntityDictionSettings() {
     "entity_diction",
     entity
   );
-  const viewStateMachine = createViewStateMachine(
-    entity === SLUG_LOADING_VALUE,
-    false
-  );
+
   useSetPageDetails({
     pageTitle: "Diction Settings",
     viewKey: ENTITY_CONFIGURATION_VIEW,
@@ -47,15 +43,15 @@ export function EntityDictionSettings() {
           },
         ]}
       >
-        {viewStateMachine.type === "error" && (
-          <ErrorAlert message={viewStateMachine.message} />
-        )}
-        {viewStateMachine.type === "loading" && (
-          <FormSkeleton
-            schema={[FormSkeletonSchema.Input, FormSkeletonSchema.Input]}
-          />
-        )}
-        {viewStateMachine.type === "render" && (
+        <ViewStateMachine
+          loading={entity === SLUG_LOADING_VALUE}
+          error={false}
+          loader={
+            <FormSkeleton
+              schema={[FormSkeletonSchema.Input, FormSkeletonSchema.Input]}
+            />
+          }
+        >
           <EntityDictionForm
             onSubmit={async (values) => {
               await upsertConfigurationMutation.mutateAsync(
@@ -64,7 +60,7 @@ export function EntityDictionSettings() {
             }}
             initialValues={entityDiction}
           />
-        )}
+        </ViewStateMachine>
       </SectionBox>
     </BaseEntitySettingsLayout>
   );

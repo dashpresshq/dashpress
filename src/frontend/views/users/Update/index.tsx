@@ -1,5 +1,4 @@
 import {
-  ErrorAlert,
   FormSkeleton,
   FormSkeletonSchema,
   SectionBox,
@@ -11,8 +10,8 @@ import {
   useAuthenticatedUserBag,
   useUserHasPermission,
 } from "frontend/hooks/auth/user.store";
-import { createViewStateMachine } from "frontend/lib/create-view-state-machine";
 import { useNavigationStack, useSetPageDetails } from "frontend/lib/routing";
+import { ViewStateMachine } from "frontend/lib/ViewStateMachine";
 import { LINK_TO_DOCS } from "frontend/views/constants";
 import { USER_PERMISSIONS } from "shared/types";
 import { AppLayout } from "../../../_layouts/app";
@@ -47,8 +46,6 @@ export function UserUpdate() {
 
   const { error } = userDetails;
 
-  const viewStateMachine = createViewStateMachine(isLoading, error);
-
   return (
     <AppLayout>
       <SectionCenter>
@@ -70,24 +67,24 @@ export function UserUpdate() {
               : undefined
           }
         >
-          {viewStateMachine.type === "loading" && (
-            <FormSkeleton
-              schema={[
-                FormSkeletonSchema.Input,
-                FormSkeletonSchema.Input,
-                FormSkeletonSchema.Textarea,
-              ]}
-            />
-          )}
-
-          {viewStateMachine.type === "error" && <ErrorAlert message={error} />}
-
-          {viewStateMachine.type === "render" && (
+          <ViewStateMachine
+            loading={isLoading}
+            error={error}
+            loader={
+              <FormSkeleton
+                schema={[
+                  FormSkeletonSchema.Input,
+                  FormSkeletonSchema.Input,
+                  FormSkeletonSchema.Textarea,
+                ]}
+              />
+            }
+          >
             <UpdateUserForm
               onSubmit={updateUserMutation.mutateAsync}
               initialValues={userDetails.data}
             />
-          )}
+          </ViewStateMachine>
         </SectionBox>
         <Spacer />
         {hasResetPasswordPermission === true &&

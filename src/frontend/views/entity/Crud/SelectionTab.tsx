@@ -65,7 +65,7 @@ export function SelectionTab({
         )}
       </Stack>
       <Spacer size="xxl" />
-      {enabled && entityFields.length > 0 && (
+      {entityFields.length > 0 && (
         <>
           <RenderList
             items={entityFields}
@@ -77,6 +77,7 @@ export function SelectionTab({
                 <SectionListItem
                   label={getEntityFieldLabels(menuItem.name)}
                   key={menuItem.name}
+                  disabled={!enabled}
                   toggle={
                     enabled
                       ? {

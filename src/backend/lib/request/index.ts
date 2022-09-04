@@ -61,28 +61,29 @@ export const requestHandler =
         res.setHeader("Allow", Object.keys(methodHandler));
         return res.status(405).end(`Method '${req.method}' Not Allowed`);
       }
-      return res.status(RequestMethodResponseCode[req.method]).json(
-        await methodHandler[req.method](
-          async (
-            requestKeys: GetValidatedRequestOptions<ValidationKeys["_type"]>
-          ) => {
-            return Object.fromEntries(
-              await Promise.all(
-                requestKeys.map(async (requestKeyInput) => {
-                  const [requestKey, requestOptions] =
-                    typeof requestKeyInput === "string"
-                      ? [requestKeyInput, null]
-                      : [requestKeyInput._type, requestKeyInput.options];
-                  return [
-                    requestKey,
-                    await ValidationImpl[requestKey](req, requestOptions),
-                  ];
-                })
-              )
-            );
-          }
-        )
+
+      const response = await methodHandler[req.method](
+        async (
+          requestKeys: GetValidatedRequestOptions<ValidationKeys["_type"]>
+        ) => {
+          return Object.fromEntries(
+            await Promise.all(
+              requestKeys.map(async (requestKeyInput) => {
+                const [requestKey, requestOptions] =
+                  typeof requestKeyInput === "string"
+                    ? [requestKeyInput, null]
+                    : [requestKeyInput._type, requestKeyInput.options];
+                return [
+                  requestKey,
+                  await ValidationImpl[requestKey](req, requestOptions),
+                ];
+              })
+            )
+          );
+        }
       );
+
+      return res.status(RequestMethodResponseCode[req.method]).json(response);
     } catch (error) {
       return handleResponseError(req, res, error);
     }

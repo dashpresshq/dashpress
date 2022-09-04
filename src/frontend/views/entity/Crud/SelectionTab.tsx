@@ -4,8 +4,9 @@ import {
   SectionListItem,
   Stack,
   Spacer,
-  ErrorAlert,
+  ListSkeleton,
 } from "@hadmean/chromista";
+import { ViewStateMachine } from "frontend/lib/ViewStateMachine";
 import { useEffect, useState } from "react";
 import { IEntityField } from "shared/types";
 import { useStringSelections } from "../../../lib/selection";
@@ -46,11 +47,12 @@ export function SelectionTab({
 
   const enableDisableLabel = enabled ? labels[0] : labels[1];
 
-  if (error) {
-    return <ErrorAlert message={error} />;
-  }
   return (
-    <>
+    <ViewStateMachine
+      error={error}
+      loading={isLoading}
+      loader={<ListSkeleton />}
+    >
       <Stack justify="space-between" align="flex-start">
         {onToggle && (
           <FormButton
@@ -66,7 +68,6 @@ export function SelectionTab({
       {enabled && entityFields.length > 0 && (
         <>
           <RenderList
-            isLoading={isLoading}
             items={entityFields}
             singular="Field"
             render={(menuItem) => {
@@ -106,6 +107,6 @@ export function SelectionTab({
           />
         </>
       )}
-    </>
+    </ViewStateMachine>
   );
 }

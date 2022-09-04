@@ -13,4 +13,10 @@ export const configApiHandlers = [
       );
     }
   ),
+  rest.put(
+    BASE_TEST_URL("/api/config/entity_diction/:entity"),
+    async (req, res, ctx) => {
+      return res(ctx.status(201));
+    }
+  ),
 ];

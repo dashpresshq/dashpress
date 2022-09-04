@@ -21,6 +21,8 @@ describe("pages/admin (Dashboard)", () => {
       </AppWrapper>
     );
     const layoutContent = screen.getByTestId("app-layout__content");
+
+    expect(await within(layoutContent).findAllByText("8")).toHaveLength(3);
     expect(
       await within(layoutContent).findByText("Plural entity-1")
     ).toBeInTheDocument();
@@ -35,15 +37,6 @@ describe("pages/admin (Dashboard)", () => {
   });
 });
 
-// userEvent.type(
-//   screen.getByRole("textbox", { name: /username/i }),
-//   "john.maverick"
-// );
-// const alert = await screen.findByRole("alert");
-// // Assert successful login state
-// expect(window.sessionStorage.getItem("token")).toEqual(
-//   fakeUserResponse.token
-// );
 // test("handles login exception", () => {
 //   server.use(
 //     rest.post("/login", (req, res, ctx) => {
@@ -54,5 +47,4 @@ describe("pages/admin (Dashboard)", () => {
 //       );
 //     })
 //   );
-//   expect(window.sessionStorage.getItem("token")).toBeNull();
 // });

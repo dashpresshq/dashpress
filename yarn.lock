@@ -1448,10 +1448,10 @@
     pg "^8.7.3"
     sqlite3 "^5.0.8"
 
-"@hadmean/chromista@^1.0.9":
-  version "1.0.9"
-  resolved "https://registry.yarnpkg.com/@hadmean/chromista/-/chromista-1.0.9.tgz#f5877650f0f64584fb609f9d74694f667ff00013"
-  integrity sha512-Zv3hf7YQHuRmWBu1hoZmSvaz49tBeDSe5p61sAtUtzMozLucbk5lWfxvLpNtrzDeqCzZeW9ip3XyqdAbMtuqDw==
+"@hadmean/chromista@^1.0.11":
+  version "1.0.11"
+  resolved "https://registry.yarnpkg.com/@hadmean/chromista/-/chromista-1.0.11.tgz#e80892ffbe5309184dcb2649e3c33862c22bcd0f"
+  integrity sha512-sAyzbi54E+1AK98uvuPnjLtl/VBWpwfY9SvCunz8BfRhyBBmtxyUeOlMJ0IfsVScT5igPEtFJlhbq2XYVYt9Pg==
   dependencies:
     "@fortawesome/fontawesome-svg-core" "^6.1.1"
     "@fortawesome/free-solid-svg-icons" "^6.1.1"
@@ -6784,6 +6784,11 @@ next-router-mock@^0.7.4:
   version "0.7.4"
   resolved "https://registry.npmjs.org/next-router-mock/-/next-router-mock-0.7.4.tgz"
   integrity sha512-phYLFXOQ9klg6gxVRJJdH0QoD+5bAbAdDYM9O3YdGZ+IFEbvIoIns+o9SoSfTkCjzoU2R1ARoFc8WHp0+hnD8A==
+
+next-router-provider@^0.6.0:
+  version "0.6.0"
+  resolved "https://registry.yarnpkg.com/next-router-provider/-/next-router-provider-0.6.0.tgz#fdf251c4dd5ab091ae5a788b7c2721923dd64283"
+  integrity sha512-CAAxH8EnauaJb14xyCqYLPwqydHWpeceFwGL255ss7RTSBkcqEFo/skN1nDQ/Yc0ps0HwBnMx05mHVgJnmiC4w==
 
 next@12.1.6:
   version "12.1.6"

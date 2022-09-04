@@ -1,4 +1,4 @@
-import { ErrorAlert, SectionBox } from "@hadmean/chromista";
+import { SectionBox } from "@hadmean/chromista";
 import { useSetPageDetails } from "frontend/lib/routing";
 import { USER_PERMISSIONS } from "shared/types";
 import { ENTITY_CONFIGURATION_VIEW } from "./constants";
@@ -13,10 +13,7 @@ export function EntityActionsSettings() {
 
   return (
     <BaseEntitySettingsLayout>
-      <SectionBox title="Actions Settings">
-        <ErrorAlert message="error" />
-        TODO
-      </SectionBox>
+      <SectionBox title="Actions Settings">TODO</SectionBox>
     </BaseEntitySettingsLayout>
   );
 }

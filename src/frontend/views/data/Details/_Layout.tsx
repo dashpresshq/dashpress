@@ -1,11 +1,11 @@
 import {
-  ErrorAlert,
   RenderList,
   SectionBox,
   SectionLeft,
   SectionRight,
   SectionListItem,
   SectionRow,
+  ListSkeleton,
 } from "@hadmean/chromista";
 import { ReactNode } from "react";
 import { useEntityReferenceFields } from "frontend/hooks/entity/entity.store";
@@ -19,6 +19,7 @@ import {
 } from "frontend/hooks/entity/entity.config";
 import { AppLayout } from "frontend/_layouts/app";
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
+import { ViewStateMachine } from "frontend/lib/ViewStateMachine";
 import {
   EntityActionTypes,
   useEntityActionMenuItems,
@@ -91,17 +92,17 @@ export function DetailsLayout({ children, entity, menuKey }: IProps) {
       <SectionRow>
         <SectionLeft>
           <SectionBox headLess title="">
-            {viewState.type === "error" && (
-              <ErrorAlert message={viewState.message} />
-            )}
-            {(viewState.type === "render" || viewState.type === "loading") && (
+            <ViewStateMachine
+              loading={viewState.type === "loading"}
+              error={viewState.type === "error" ? viewState.message : undefined}
+              loader={<ListSkeleton />}
+            >
               <RenderList
                 items={[
                   { name: DETAILS_LAYOUT_KEY, label: "Details" },
                   ...relatedEntities,
                 ]}
                 singular="Relation"
-                isLoading={viewState.type === "loading"}
                 render={(menuItem) => {
                   if (menuItem.name === DETAILS_LAYOUT_KEY) {
                     return (
@@ -150,7 +151,7 @@ export function DetailsLayout({ children, entity, menuKey }: IProps) {
                   );
                 }}
               />
-            )}
+            </ViewStateMachine>
           </SectionBox>
         </SectionLeft>
         <SectionRight>{children}</SectionRight>

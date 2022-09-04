@@ -1,12 +1,8 @@
-import {
-  ComponentIsLoading,
-  ErrorAlert,
-  Spacer,
-  Text,
-} from "@hadmean/chromista";
+import { ComponentIsLoading, Spacer, Text } from "@hadmean/chromista";
 import { SLUG_LOADING_VALUE } from "@hadmean/protozoa";
 import React from "react";
 import { useAppConfiguration } from "frontend/hooks/configuration/configuration.store";
+import { ViewStateMachine } from "frontend/lib/ViewStateMachine";
 import {
   useEntityFieldLabels,
   useEntityFieldSelections,
@@ -66,44 +62,44 @@ export function EntityDetailsView({
   }
 
   return (
-    <>
-      {viewState.type === "loading" && <ComponentIsLoading />}
-      {viewState.type === "error" && <ErrorAlert message={viewState.message} />}
-      {viewState.type === "render" && (
-        <>
-          {fitlerOutHiddenScalarColumns(entityFields, hiddenDetailsColumns).map(
-            ({ name }) => {
-              const value = dataDetails?.data?.[name];
+    <ViewStateMachine
+      loading={viewState.type === "loading"}
+      error={viewState.type === "error" ? viewState.message : undefined}
+      loader={<ComponentIsLoading />}
+    >
+      <>
+        {fitlerOutHiddenScalarColumns(entityFields, hiddenDetailsColumns).map(
+          ({ name }) => {
+            const value = dataDetails?.data?.[name];
 
-              const specialDataTypeRender = viewSpecialDataTypes(
-                name,
-                value,
-                entityToOneReferenceFields.data || {},
-                entityFieldSelections,
-                entityFieldTypes,
-                {
-                  displayFrom,
-                  defaultDateFormat: defaultDateFormat.data,
-                }
-              );
+            const specialDataTypeRender = viewSpecialDataTypes(
+              name,
+              value,
+              entityToOneReferenceFields.data || {},
+              entityFieldSelections,
+              entityFieldTypes,
+              {
+                displayFrom,
+                defaultDateFormat: defaultDateFormat.data,
+              }
+            );
 
-              const contentToRender = specialDataTypeRender || (
-                <Text>{value}</Text>
-              );
+            const contentToRender = specialDataTypeRender || (
+              <Text>{value}</Text>
+            );
 
-              return (
-                <React.Fragment key={name}>
-                  <Text size="6" weight="bold">
-                    {getEntityFieldLabels(name)}
-                  </Text>
-                  {contentToRender}
-                  <Spacer />
-                </React.Fragment>
-              );
-            }
-          )}
-        </>
-      )}
-    </>
+            return (
+              <React.Fragment key={name}>
+                <Text size="6" weight="bold">
+                  {getEntityFieldLabels(name)}
+                </Text>
+                {contentToRender}
+                <Spacer />
+              </React.Fragment>
+            );
+          }
+        )}
+      </>
+    </ViewStateMachine>
   );
 }

@@ -1,6 +1,5 @@
 import {
   ComponentIsLoading,
-  ErrorAlert,
   OffCanvas,
   Table,
   DEFAULT_TABLE_PARAMS,
@@ -15,7 +14,7 @@ import {
 } from "@hadmean/protozoa";
 import { useState } from "react";
 import { QueryFilter } from "shared/types";
-import { createViewStateMachine } from "frontend/lib/create-view-state-machine";
+import { ViewStateMachine } from "frontend/lib/ViewStateMachine";
 import { NAVIGATION_LINKS } from "../../../lib/routing/links";
 import {
   useEntityCrudSettings,
@@ -79,13 +78,13 @@ export function EntityTableView({ entity, persitentFilters = [] }: IProps) {
     entity === SLUG_LOADING_VALUE ||
     hiddenTableColumns.isLoading;
 
-  const viewState = createViewStateMachine(isLoading, error);
-
   return (
     <>
-      {viewState.type === "loading" && <ComponentIsLoading />}
-      {viewState.type === "error" && <ErrorAlert message={viewState.message} />}
-      {viewState.type === "render" && (
+      <ViewStateMachine
+        error={error}
+        loading={isLoading}
+        loader={<ComponentIsLoading />}
+      >
         <Table
           title=""
           {...{
@@ -96,7 +95,8 @@ export function EntityTableView({ entity, persitentFilters = [] }: IProps) {
           columns={columns}
           menuItems={menuItems}
         />
-      )}
+      </ViewStateMachine>
+
       <OffCanvas
         title={`${canvasEntityDiction.singular} Details`}
         onClose={closeDetailsCanvas}

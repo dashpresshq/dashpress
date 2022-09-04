@@ -3,11 +3,7 @@ import {
   DataStateKeys,
   SLUG_LOADING_VALUE,
 } from "@hadmean/protozoa";
-import {
-  ErrorAlert,
-  FormSkeleton,
-  FormSkeletonSchema,
-} from "@hadmean/chromista";
+import { FormSkeleton, FormSkeletonSchema } from "@hadmean/chromista";
 import { SchemaForm } from "frontend/lib/form/SchemaForm";
 import { useEntityConfiguration } from "frontend/hooks/configuration/configuration.store";
 import {
@@ -23,6 +19,7 @@ import {
 } from "frontend/hooks/entity/entity.config";
 import { IFormExtension } from "frontend/lib/form/types";
 import { useMemo } from "react";
+import { ViewStateMachine } from "frontend/lib/ViewStateMachine";
 import { buildAppliedSchemaFormConfig } from "./buildAppliedSchemaFormConfig";
 import { useEntityViewStateMachine } from "./useEntityViewStateMachine";
 import { fitlerOutHiddenScalarColumns } from "./utils";
@@ -99,31 +96,29 @@ export function BaseEntityForm({
     fields,
   };
 
-  if (viewState.type === "loading") {
-    return (
-      <FormSkeleton
-        schema={[
-          FormSkeletonSchema.Input,
-          FormSkeletonSchema.Input,
-          FormSkeletonSchema.Input,
-          FormSkeletonSchema.Textarea,
-        ]}
-      />
-    );
-  }
-
-  if (viewState.type === "error") {
-    return <ErrorAlert message={viewState.message} />;
-  }
-
   return (
-    <SchemaForm
-      buttonText={action === "update" ? ButtonLang.update : ButtonLang.create}
-      resetForm={action === "create" ? true : undefined}
-      onSubmit={onSubmit}
-      initialValues={fieldsInitialValues}
-      fields={buildAppliedSchemaFormConfig(formSchemaConfig)}
-      formExtension={entityFormExtension.data}
-    />
+    <ViewStateMachine
+      loading={viewState.type === "loading"}
+      error={viewState.type === "error" ? viewState.message : undefined}
+      loader={
+        <FormSkeleton
+          schema={[
+            FormSkeletonSchema.Input,
+            FormSkeletonSchema.Input,
+            FormSkeletonSchema.Input,
+            FormSkeletonSchema.Textarea,
+          ]}
+        />
+      }
+    >
+      <SchemaForm
+        buttonText={action === "update" ? ButtonLang.update : ButtonLang.create}
+        resetForm={action === "create" ? true : undefined}
+        onSubmit={onSubmit}
+        initialValues={fieldsInitialValues}
+        fields={buildAppliedSchemaFormConfig(formSchemaConfig)}
+        formExtension={entityFormExtension.data}
+      />
+    </ViewStateMachine>
   );
 }

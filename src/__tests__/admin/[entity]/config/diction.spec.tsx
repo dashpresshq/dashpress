@@ -34,8 +34,6 @@ describe("pages/admin/[entity]/config/diction", () => {
   });
 
   it("update diction successfully", async () => {
-    localStorage.setItem("__auth-token__", "foo");
-
     render(
       <AppWrapper>
         <EntityDictionSettings />
@@ -45,7 +43,9 @@ describe("pages/admin/[entity]/config/diction", () => {
     userEvent.type(screen.getByLabelText("Plural"), "Update Plural");
     userEvent.type(screen.getByLabelText("Singular"), "Update Singular");
 
-    await userEvent.click(screen.getByText("Update Diction"));
+    await userEvent.click(
+      screen.getByRole("button", { name: "Update Diction" })
+    );
 
     expect(await screen.findByRole("status")).toHaveTextContent(
       "App Settings Saved Successfully"

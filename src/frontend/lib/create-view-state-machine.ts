@@ -1,10 +1,12 @@
+type ViewState =
+  | { type: "loading" }
+  | { type: "render" }
+  | { type: "error"; message: unknown };
+
 export const createViewStateMachine = (
   isLoading: boolean,
   error: unknown
-):
-  | { type: "loading" }
-  | { type: "render" }
-  | { type: "error"; message: unknown } => {
+): ViewState => {
   if (isLoading) {
     return { type: "loading" };
   }

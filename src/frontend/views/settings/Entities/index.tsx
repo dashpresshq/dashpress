@@ -1,9 +1,10 @@
-import { ErrorAlert, SectionBox, SortList, Tabs } from "@hadmean/chromista";
+import { ListSkeleton, SectionBox, SortList, Tabs } from "@hadmean/chromista";
 import {
   useRouteParam,
   useChangeRouterParam,
   useSetPageDetails,
 } from "frontend/lib/routing";
+import { ViewStateMachine } from "frontend/lib/ViewStateMachine";
 import { LINK_TO_DOCS } from "frontend/views/constants";
 import { USER_PERMISSIONS } from "shared/types";
 import {
@@ -54,9 +55,12 @@ export function EntitiesSettings() {
     "value"
   );
 
+  const error = entitiesList.error || entitiesToHide.error;
+
+  const isLoading = entitiesList.isLoading || entitiesToHide.isLoading;
+
   return (
     <BaseSettingsLayout>
-      <ErrorAlert message={entitiesList.error || entitiesToHide.error} />
       <SectionBox
         title="Entities Settings"
         iconButtons={[
@@ -73,26 +77,39 @@ export function EntitiesSettings() {
           contents={[
             {
               content: (
-                <EntitiesSelection
-                  isLoading={entitiesList.isLoading || entitiesToHide.isLoading}
-                  allList={(entitiesList.data || []).map(({ label }) => label)}
-                  getEntityFieldLabels={entitiesDictionPlurals}
-                  hiddenList={entitiesToHide.data || []}
-                  onSubmit={async (data) => {
-                    await upsertHideFromMenuMutation.mutateAsync(data);
-                  }}
-                />
+                <ViewStateMachine
+                  error={error}
+                  loading={isLoading}
+                  loader={<ListSkeleton />}
+                >
+                  <EntitiesSelection
+                    allList={(entitiesList.data || []).map(
+                      ({ label }) => label
+                    )}
+                    getEntityFieldLabels={entitiesDictionPlurals}
+                    hiddenList={entitiesToHide.data || []}
+                    onSubmit={async (data) => {
+                      await upsertHideFromMenuMutation.mutateAsync(data);
+                    }}
+                  />
+                </ViewStateMachine>
               ),
               label: "Selection",
             },
             {
               content: (
-                <SortList
-                  data={entitiesMenuItems}
-                  onSave={async (data) => {
-                    await upsertEntitiesOrderMutation.mutateAsync(data);
-                  }}
-                />
+                <ViewStateMachine
+                  error={error}
+                  loading={isLoading}
+                  loader={<ListSkeleton />}
+                >
+                  <SortList
+                    data={entitiesMenuItems}
+                    onSave={async (data) => {
+                      await upsertEntitiesOrderMutation.mutateAsync(data);
+                    }}
+                  />
+                </ViewStateMachine>
               ),
               label: "Order",
             },

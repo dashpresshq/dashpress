@@ -16,27 +16,20 @@ interface IProps {
   fields: string[];
   initialValues?: Record<string, unknown>;
   onSubmit: (data: Record<string, unknown>) => void;
-  isLoading: boolean;
 }
 
-export function FieldsLabelForm({
-  isLoading,
-  onSubmit,
-  initialValues,
-  fields,
-}: IProps) {
-  if (isLoading) {
-    return (
-      <FormSkeleton
-        schema={[
-          FormSkeletonSchema.Input,
-          FormSkeletonSchema.Input,
-          FormSkeletonSchema.Input,
-          FormSkeletonSchema.Input,
-        ]}
-      />
-    );
-  }
+export const loadingFieldsLabelForm = (
+  <FormSkeleton
+    schema={[
+      FormSkeletonSchema.Input,
+      FormSkeletonSchema.Input,
+      FormSkeletonSchema.Input,
+      FormSkeletonSchema.Input,
+    ]}
+  />
+);
+
+export function FieldsLabelForm({ onSubmit, initialValues, fields }: IProps) {
   return (
     <Form
       onSubmit={onSubmit}

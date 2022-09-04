@@ -1,10 +1,4 @@
-import {
-  FormButton,
-  FormSelect,
-  FormSkeleton,
-  FormSkeletonSchema,
-  OffCanvas,
-} from "@hadmean/chromista";
+import { FormButton, FormSelect, OffCanvas } from "@hadmean/chromista";
 import { Form, Field } from "react-final-form";
 import {
   ButtonLang,
@@ -61,7 +55,6 @@ interface IProps {
   initialValues?: IValues;
   onSubmit: (data: IValues) => void;
   getEntityFieldLabels: (fieldName: string) => string;
-  isLoading: boolean;
 }
 
 export function FieldsTypeForm({
@@ -69,7 +62,6 @@ export function FieldsTypeForm({
   initialValues,
   fields,
   getEntityFieldLabels,
-  isLoading,
 }: IProps) {
   const memoIzedInitialValuesSoItDoesFlickerOnSubmit = useMemo(
     () => initialValues,
@@ -78,19 +70,6 @@ export function FieldsTypeForm({
 
   const [showFieldValidations, setShowFieldValidations] = useState("");
   const [showFieldSelection, setShowFieldSelection] = useState("");
-
-  if (isLoading) {
-    return (
-      <FormSkeleton
-        schema={[
-          FormSkeletonSchema.Input,
-          FormSkeletonSchema.Input,
-          FormSkeletonSchema.Input,
-          FormSkeletonSchema.Textarea,
-        ]}
-      />
-    );
-  }
 
   return (
     <Form

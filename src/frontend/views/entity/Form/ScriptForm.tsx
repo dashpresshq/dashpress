@@ -1,9 +1,6 @@
-import {
-  ErrorAlert,
-  FormSkeleton,
-  FormSkeletonSchema,
-} from "@hadmean/chromista";
+import { FormSkeleton, FormSkeletonSchema } from "@hadmean/chromista";
 import { SchemaForm } from "frontend/lib/form/SchemaForm";
+import { ViewStateMachine } from "frontend/lib/ViewStateMachine";
 
 interface IProps {
   value: string;
@@ -13,30 +10,28 @@ interface IProps {
 }
 
 export function ScriptForm({ value, onSubmit, error, isLoading }: IProps) {
-  if (isLoading) {
-    return <FormSkeleton schema={[FormSkeletonSchema.RichTextArea]} />;
-  }
-
-  if (error) {
-    return <ErrorAlert message={error} />;
-  }
-
   return (
-    <SchemaForm
-      fields={{
-        script: {
-          type: "json",
-          label: "",
-          validations: [],
-        },
-      }}
-      onSubmit={async (data) => {
-        await onSubmit(data.script as string);
-      }}
-      buttonText="Save"
-      initialValues={{
-        script: value,
-      }}
-    />
+    <ViewStateMachine
+      loading={isLoading}
+      error={error}
+      loader={<FormSkeleton schema={[FormSkeletonSchema.RichTextArea]} />}
+    >
+      <SchemaForm
+        fields={{
+          script: {
+            type: "json",
+            label: "",
+            validations: [],
+          },
+        }}
+        onSubmit={async (data) => {
+          await onSubmit(data.script as string);
+        }}
+        buttonText="Save"
+        initialValues={{
+          script: value,
+        }}
+      />
+    </ViewStateMachine>
   );
 }

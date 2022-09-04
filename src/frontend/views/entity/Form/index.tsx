@@ -28,7 +28,7 @@ function useEntityFormView() {
   const upsertEntityFormExtensionSettingsMutation =
     useUpsertConfigurationMutation("entity_form_extension", entity);
 
-  const sharedLoading =
+  const isLoading =
     entityFields.isLoading ||
     entityFormExtensionSettings.isLoading ||
     entity === SLUG_LOADING_VALUE;
@@ -47,7 +47,7 @@ function useEntityFormView() {
     "Fields State": (
       <ScriptForm
         value={entityFormExtensionSettings.data?.fieldsState}
-        isLoading={sharedLoading}
+        isLoading={isLoading}
         onSubmit={onScriptSubmit("fieldsState")}
         error={error}
       />
@@ -55,7 +55,7 @@ function useEntityFormView() {
     "Before Submit": (
       <ScriptForm
         value={entityFormExtensionSettings.data?.beforeSubmit}
-        isLoading={sharedLoading}
+        isLoading={isLoading}
         onSubmit={onScriptSubmit("beforeSubmit")}
         error={error}
       />
@@ -63,7 +63,7 @@ function useEntityFormView() {
     "After Submit": (
       <ScriptForm
         value={entityFormExtensionSettings.data?.afterSubmit}
-        isLoading={sharedLoading}
+        isLoading={isLoading}
         onSubmit={onScriptSubmit("afterSubmit")}
         error={error}
       />

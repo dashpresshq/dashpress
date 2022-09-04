@@ -8,7 +8,6 @@ import React, { useEffect, useState } from "react";
 import { useStringSelections } from "../../../lib/selection";
 
 interface IProps {
-  isLoading: boolean;
   hiddenList: string[];
   allList: string[];
   onSubmit: (columnsSelection: string[]) => Promise<void>;
@@ -16,7 +15,6 @@ interface IProps {
 }
 
 export function EntitiesSelection({
-  isLoading,
   getEntityFieldLabels,
   allList,
   onSubmit,
@@ -59,7 +57,6 @@ export function EntitiesSelection({
           <RenderList
             items={allList.map((listItem) => ({ name: listItem }))}
             singular="Entity"
-            isLoading={isLoading}
             render={(menuItem) => {
               const isHidden = currentPageSelection.includes(menuItem.name);
               return (

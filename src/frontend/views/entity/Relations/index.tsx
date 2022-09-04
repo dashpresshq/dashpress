@@ -1,7 +1,7 @@
 import {
-  ErrorAlert,
   FormSkeleton,
   FormSkeletonSchema,
+  ListSkeleton,
   SectionBox,
   SortList,
   Spacer,
@@ -21,7 +21,6 @@ import {
 } from "frontend/lib/routing";
 import { EntitiesSelection } from "frontend/views/settings/Entities/Selection";
 import { useEntityDictionPlurals } from "frontend/hooks/entity/entity.queries";
-import { createViewStateMachine } from "frontend/lib/create-view-state-machine";
 import { USER_PERMISSIONS } from "shared/types";
 import { useEntitySlug } from "frontend/hooks/entity/entity.config";
 import {
@@ -29,10 +28,14 @@ import {
   useUpsertConfigurationMutation,
 } from "frontend/hooks/configuration/configuration.store";
 import { LINK_TO_DOCS } from "frontend/views/constants";
+import { ViewStateMachine } from "frontend/lib/ViewStateMachine";
 import { BaseEntitySettingsLayout } from "../_Base";
 import { EntityRelationsForm } from "./Relations.form";
 import { ENTITY_CONFIGURATION_VIEW } from "../constants";
-import { FieldsLabelForm } from "../Fields/FieldsLabel.form";
+import {
+  FieldsLabelForm,
+  loadingFieldsLabelForm,
+} from "../Fields/FieldsLabel.form";
 
 export function EntityRelationsSettings() {
   const entity = useEntitySlug();
@@ -110,8 +113,6 @@ export function EntityRelationsSettings() {
     referenceFields.isLoading ||
     entity === SLUG_LOADING_VALUE;
 
-  const viewStateMachine = createViewStateMachine(isLoading, error);
-
   return (
     <BaseEntitySettingsLayout>
       <SectionBox
@@ -130,39 +131,35 @@ export function EntityRelationsSettings() {
           contents={[
             {
               content: (
-                <>
-                  {viewStateMachine.type === "error" && (
-                    <ErrorAlert message={viewStateMachine.message} />
-                  )}
-                  {viewStateMachine.type === "loading" && (
-                    <FormSkeleton schema={[FormSkeletonSchema.Input]} />
-                  )}
-                  {viewStateMachine.type === "render" && (
-                    <EntityRelationsForm
-                      onSubmit={async (values) => {
-                        await upsertEntityRelationTemplateMutation.mutateAsync(
-                          values as unknown as Record<string, string>
-                        );
-                      }}
-                      entityFields={(entityFields.data || []).map(
-                        ({ name }) => name
-                      )}
-                      initialValues={entityRelationTemplate.data}
-                    />
-                  )}
-                </>
+                <ViewStateMachine
+                  error={error}
+                  loading={isLoading}
+                  loader={<FormSkeleton schema={[FormSkeletonSchema.Input]} />}
+                >
+                  <EntityRelationsForm
+                    onSubmit={async (values) => {
+                      await upsertEntityRelationTemplateMutation.mutateAsync(
+                        values as unknown as Record<string, string>
+                      );
+                    }}
+                    entityFields={(entityFields.data || []).map(
+                      ({ name }) => name
+                    )}
+                    initialValues={entityRelationTemplate.data}
+                  />
+                </ViewStateMachine>
               ),
               label: "Reference Template",
             },
             {
               content: (
-                <>
-                  {viewStateMachine.type === "error" && (
-                    <ErrorAlert message={viewStateMachine.message} />
-                  )}
+                <ViewStateMachine
+                  error={error}
+                  loading={isLoading}
+                  loader={loadingFieldsLabelForm}
+                >
                   <Spacer />
                   <FieldsLabelForm
-                    isLoading={viewStateMachine.type === "loading"}
                     initialValues={entityRelationsLabelsMap.data}
                     fields={(referenceFields.data || []).map(
                       ({ table }) => table
@@ -173,43 +170,56 @@ export function EntityRelationsSettings() {
                       );
                     }}
                   />
-                </>
+                </ViewStateMachine>
               ),
               label: "Labels",
             },
             {
               content: (
-                <EntitiesSelection
-                  isLoading={viewStateMachine.type === "loading"}
-                  allList={entityRelationList.data || []}
-                  getEntityFieldLabels={(relation) =>
-                    entityRelationsLabelsMap.data?.[relation] ||
-                    getEntitiesDictionPlurals(relation)
-                  }
-                  hiddenList={hiddenEntityRelations.data || []}
-                  onSubmit={async (data) => {
-                    await upsertHideEntityRelationMutation.mutateAsync(data);
-                  }}
-                />
+                <ViewStateMachine
+                  error={error}
+                  loading={isLoading}
+                  loader={<ListSkeleton />}
+                >
+                  <EntitiesSelection
+                    allList={entityRelationList.data || []}
+                    getEntityFieldLabels={(relation) =>
+                      entityRelationsLabelsMap.data?.[relation] ||
+                      getEntitiesDictionPlurals(relation)
+                    }
+                    hiddenList={hiddenEntityRelations.data || []}
+                    onSubmit={async (data) => {
+                      await upsertHideEntityRelationMutation.mutateAsync(data);
+                    }}
+                  />
+                </ViewStateMachine>
               ),
               label: "Selection",
             },
             {
               content: (
-                <SortList
-                  data={{
-                    ...referenceFields,
-                    data: (referenceFields.data || []).map(
-                      ({ table, label }) => ({
-                        value: table,
-                        label: label || getEntitiesDictionPlurals(table),
-                      })
-                    ),
-                  }}
-                  onSave={async (data) => {
-                    await upsertEntityRelationsOrderMutation.mutateAsync(data);
-                  }}
-                />
+                <ViewStateMachine
+                  error={error}
+                  loading={isLoading}
+                  loader={<ListSkeleton />}
+                >
+                  <SortList
+                    data={{
+                      ...referenceFields,
+                      data: (referenceFields.data || []).map(
+                        ({ table, label }) => ({
+                          value: table,
+                          label: label || getEntitiesDictionPlurals(table),
+                        })
+                      ),
+                    }}
+                    onSave={async (data) => {
+                      await upsertEntityRelationsOrderMutation.mutateAsync(
+                        data
+                      );
+                    }}
+                  />
+                </ViewStateMachine>
               ),
               label: "Order",
             },

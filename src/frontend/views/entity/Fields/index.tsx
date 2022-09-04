@@ -1,4 +1,11 @@
-import { ErrorAlert, SectionBox, SortList, Tabs } from "@hadmean/chromista";
+import {
+  FormSkeleton,
+  FormSkeletonSchema,
+  ListSkeleton,
+  SectionBox,
+  SortList,
+  Tabs,
+} from "@hadmean/chromista";
 import { SLUG_LOADING_VALUE } from "@hadmean/protozoa";
 import {
   useChangeRouterParam,
@@ -22,8 +29,9 @@ import {
   useUpsertConfigurationMutation,
 } from "frontend/hooks/configuration/configuration.store";
 import { LINK_TO_DOCS } from "frontend/views/constants";
+import { ViewStateMachine } from "frontend/lib/ViewStateMachine";
 import { BaseEntitySettingsLayout } from "../_Base";
-import { FieldsLabelForm } from "./FieldsLabel.form";
+import { FieldsLabelForm, loadingFieldsLabelForm } from "./FieldsLabel.form";
 import { FieldsTypeForm } from "./FieldsType.form";
 import {
   ENTITY_CONFIGURATION_VIEW,
@@ -103,16 +111,14 @@ export function EntityFieldsSettings() {
     entityValidationsMapIsLoading ||
     entityFieldTypesMapIsLoading;
 
+  const error =
+    entityFieldLists.error ||
+    entityFieldLabelsMap.error ||
+    entityValidationsMapError ||
+    entityFieldTypesMapError;
+
   return (
     <BaseEntitySettingsLayout>
-      <ErrorAlert
-        message={
-          entityFieldLists.error ||
-          entityFieldLabelsMap.error ||
-          entityValidationsMapError ||
-          entityFieldTypesMapError
-        }
-      />
       <SectionBox
         title="Fields Settings"
         iconButtons={[
@@ -129,68 +135,93 @@ export function EntityFieldsSettings() {
           contents={[
             {
               content: (
-                <FieldsLabelForm
-                  isLoading={sharedLoadingState}
-                  initialValues={entityFieldLabelsMap.data}
-                  fields={entityFieldLists.data || []}
-                  onSubmit={async (data) => {
-                    await upsertEntityFieldsMapMutation.mutateAsync(
-                      data as Record<string, string>
-                    );
-                  }}
-                />
+                <ViewStateMachine
+                  loader={loadingFieldsLabelForm}
+                  loading={sharedLoadingState}
+                  error={error}
+                >
+                  <FieldsLabelForm
+                    initialValues={entityFieldLabelsMap.data}
+                    fields={entityFieldLists.data || []}
+                    onSubmit={async (data) => {
+                      await upsertEntityFieldsMapMutation.mutateAsync(
+                        data as Record<string, string>
+                      );
+                    }}
+                  />
+                </ViewStateMachine>
               ),
               label: ENTITY_FIELD_SETTINGS_TAB_LABELS.LABELS,
             },
             {
               content: (
-                <FieldsTypeForm
-                  isLoading={sharedLoadingState}
-                  initialValues={{
-                    types: entityFieldTypes,
-                    selections: entityFieldSelections,
-                    validations: entityFieldValidations,
-                    validationsChanged: false,
-                    selectionsChanged: false,
-                    typesChanged: false,
-                  }}
-                  fields={entityFieldLists.data || []}
-                  onSubmit={async (data) => {
-                    if (data.typesChanged) {
-                      await upsertEntityTypesMapMutation.mutateAsync(
-                        data.types
-                      );
-                    }
-                    if (data.validationsChanged) {
-                      await upsertEntityValidationsMutation.mutateAsync(
-                        data.validations
-                      );
-                    }
-                    if (data.selectionsChanged) {
-                      await upsertEntitySelectionsMutation.mutateAsync(
-                        data.selections || {}
-                      );
-                    }
-                  }}
-                  getEntityFieldLabels={getEntityFieldLabels}
-                />
+                <ViewStateMachine
+                  loader={
+                    <FormSkeleton
+                      schema={[
+                        FormSkeletonSchema.Input,
+                        FormSkeletonSchema.Input,
+                        FormSkeletonSchema.Input,
+                        FormSkeletonSchema.Textarea,
+                      ]}
+                    />
+                  }
+                  loading={sharedLoadingState}
+                  error={error}
+                >
+                  <FieldsTypeForm
+                    initialValues={{
+                      types: entityFieldTypes,
+                      selections: entityFieldSelections,
+                      validations: entityFieldValidations,
+                      validationsChanged: false,
+                      selectionsChanged: false,
+                      typesChanged: false,
+                    }}
+                    fields={entityFieldLists.data || []}
+                    onSubmit={async (data) => {
+                      if (data.typesChanged) {
+                        await upsertEntityTypesMapMutation.mutateAsync(
+                          data.types
+                        );
+                      }
+                      if (data.validationsChanged) {
+                        await upsertEntityValidationsMutation.mutateAsync(
+                          data.validations
+                        );
+                      }
+                      if (data.selectionsChanged) {
+                        await upsertEntitySelectionsMutation.mutateAsync(
+                          data.selections || {}
+                        );
+                      }
+                    }}
+                    getEntityFieldLabels={getEntityFieldLabels}
+                  />
+                </ViewStateMachine>
               ),
               label: ENTITY_FIELD_SETTINGS_TAB_LABELS.TYPES,
             },
             {
               content: (
-                <SortList
-                  data={{
-                    ...entityFieldLists,
-                    data: (entityFieldLists.data || []).map((name) => ({
-                      value: name,
-                      label: getEntityFieldLabels(name),
-                    })),
-                  }}
-                  onSave={async (data) => {
-                    await upsertEntityColumnsOrderMutation.mutateAsync(data);
-                  }}
-                />
+                <ViewStateMachine
+                  loader={<ListSkeleton />}
+                  loading={sharedLoadingState}
+                  error={error}
+                >
+                  <SortList
+                    data={{
+                      ...entityFieldLists,
+                      data: (entityFieldLists.data || []).map((name) => ({
+                        value: name,
+                        label: getEntityFieldLabels(name),
+                      })),
+                    }}
+                    onSave={async (data) => {
+                      await upsertEntityColumnsOrderMutation.mutateAsync(data);
+                    }}
+                  />
+                </ViewStateMachine>
               ),
               label: ENTITY_FIELD_SETTINGS_TAB_LABELS.ORDER,
             },

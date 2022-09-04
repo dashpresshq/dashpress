@@ -1,5 +1,5 @@
 import {
-  ErrorAlert,
+  ListSkeleton,
   RenderList,
   SectionBox,
   SectionCenter,
@@ -8,9 +8,9 @@ import {
 } from "@hadmean/chromista";
 import { TitleLang } from "@hadmean/protozoa";
 import { useEntitiesList } from "frontend/hooks/entity/entity.store";
-import { createViewStateMachine } from "frontend/lib/create-view-state-machine";
 import { useNavigationStack, useSetPageDetails } from "frontend/lib/routing";
 import { userFriendlyCase } from "frontend/lib/strings";
+import { ViewStateMachine } from "frontend/lib/ViewStateMachine";
 import { LINK_TO_DOCS } from "frontend/views/constants";
 import { USER_PERMISSIONS, META_USER_PERMISSIONS } from "shared/types";
 import { AppLayout } from "../../../_layouts/app";
@@ -39,9 +39,7 @@ export function RolePermissions() {
 
   const isLoading = rolePermissions.isLoading || entitiesList.isLoading;
 
-  const error = rolePermissions.error || entitiesList.isLoading;
-
-  const viewStateMachine = createViewStateMachine(isLoading, error);
+  const error = rolePermissions.error || entitiesList.error;
 
   const allList = [
     ...Object.values(USER_PERMISSIONS),
@@ -73,38 +71,47 @@ export function RolePermissions() {
             },
           ]}
         >
-          {viewStateMachine.type === "error" && <ErrorAlert message={error} />}
+          <ViewStateMachine
+            error={error}
+            loading={isLoading}
+            loader={<ListSkeleton />}
+          >
+            <>
+              <Spacer size="xxl" />
+              {allList.length > 0 && (
+                <RenderList
+                  items={allList.map((listItem) => ({ name: listItem }))}
+                  singular="Entity"
+                  render={(menuItem) => {
+                    const isPermissionSelected = rolePermissions.data.includes(
+                      menuItem.name
+                    );
 
-          <Spacer size="xxl" />
-          {allList.length > 0 && (
-            <RenderList
-              items={allList.map((listItem) => ({ name: listItem }))}
-              singular="Entity"
-              isLoading={isLoading}
-              render={(menuItem) => {
-                const isPermissionSelected = rolePermissions.data.includes(
-                  menuItem.name
-                );
-
-                return (
-                  <SectionListItem
-                    label={userFriendlyCase(menuItem.name)}
-                    key={menuItem.name}
-                    toggle={{
-                      selected: isPermissionSelected,
-                      onChange: () => {
-                        if (isPermissionSelected) {
-                          rolePermissionDeletionMutation.mutate(menuItem.name);
-                        } else {
-                          rolePermissionCreationMutation.mutate(menuItem.name);
-                        }
-                      },
-                    }}
-                  />
-                );
-              }}
-            />
-          )}
+                    return (
+                      <SectionListItem
+                        label={userFriendlyCase(menuItem.name)}
+                        key={menuItem.name}
+                        toggle={{
+                          selected: isPermissionSelected,
+                          onChange: () => {
+                            if (isPermissionSelected) {
+                              rolePermissionDeletionMutation.mutate(
+                                menuItem.name
+                              );
+                            } else {
+                              rolePermissionCreationMutation.mutate(
+                                menuItem.name
+                              );
+                            }
+                          },
+                        }}
+                      />
+                    );
+                  }}
+                />
+              )}
+            </>
+          </ViewStateMachine>
         </SectionBox>
         <Spacer />
       </SectionCenter>

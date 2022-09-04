@@ -6,6 +6,7 @@ import {
 } from "@hadmean/chromista";
 import { useRouter } from "next/router";
 import { ReactNode } from "react";
+import { Calendar, Columns, Server } from "react-feather";
 import { NAVIGATION_LINKS } from "../../lib/routing/links";
 import { AppLayout } from "../../_layouts/app";
 
@@ -24,14 +25,17 @@ export function BaseSettingsLayout({ children }: IProps) {
               {
                 action: NAVIGATION_LINKS.SETTINGS.ENTITIES,
                 name: "Entities",
+                IconComponent: Columns,
               },
               {
                 action: NAVIGATION_LINKS.SETTINGS.DATE,
                 name: "Date Format",
+                IconComponent: Calendar,
               },
               {
                 action: NAVIGATION_LINKS.SETTINGS.SYSTEM,
                 name: "System",
+                IconComponent: Server,
               },
             ]}
             currentMenuItem={router.asPath.split("?")[0]}

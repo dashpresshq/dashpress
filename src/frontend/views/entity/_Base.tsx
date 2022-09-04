@@ -12,6 +12,7 @@ import { ReactNode } from "react";
 import { useEntitySlug } from "frontend/hooks/entity/entity.config";
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
 import { AppLayout } from "frontend/_layouts/app";
+import { Code, Link2, Type, Sliders, File } from "react-feather";
 import {
   ENTITY_CRUD_SETTINGS_TAB_LABELS,
   ENTITY_FIELD_SETTINGS_TAB_LABELS,
@@ -50,25 +51,30 @@ export function BaseEntitySettingsLayout({ children }: IProps) {
                 action: NAVIGATION_LINKS.ENTITY.CONFIG.CRUD(entity, {
                   tab: ENTITY_CRUD_SETTINGS_TAB_LABELS.CREATE,
                 }),
+                IconComponent: Sliders,
                 name: "CRUD",
               },
               {
                 action: NAVIGATION_LINKS.ENTITY.CONFIG.DICTION(entity),
                 name: "Diction",
+                IconComponent: Type,
               },
               {
                 action: NAVIGATION_LINKS.ENTITY.CONFIG.FIELDS(entity, {
                   tab: ENTITY_FIELD_SETTINGS_TAB_LABELS.LABELS,
                 }),
                 name: "Fields",
+                IconComponent: File,
               },
               {
                 action: NAVIGATION_LINKS.ENTITY.CONFIG.RELATIONS(entity),
                 name: "Relations",
+                IconComponent: Link2,
               },
               {
                 action: NAVIGATION_LINKS.ENTITY.CONFIG.FORM(entity),
                 name: "Form",
+                IconComponent: Code,
               },
               // Computed Table fields
               // Computed Details fields

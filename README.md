@@ -47,7 +47,7 @@
 ---
 
 ## About
-Hadmean is an internal tool generator. It is language agnostic, schema driven, extremely customizable, fully featured, user-friendly and has just one installation step.
+Hadmean is a no-code internal tool generator. It is language agnostic, schema driven, extremely customizable, fully featured, user-friendly and has just one installation step.
 
 ### Quick Demo
 

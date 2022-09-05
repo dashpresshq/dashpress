@@ -129,5 +129,3 @@ export class DatabaseConfigDataPersistenceAdaptor<
     );
   }
 }
-
-// TODO cacheService should be employed here

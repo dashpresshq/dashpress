@@ -1,6 +1,5 @@
 /* eslint-disable no-console */
 
-// Support port
 (async () => {
   const path = require("path");
   const fs = require("fs-extra");
@@ -68,11 +67,9 @@
   
       ${c.bold("Next steps:")}
   
-      - Edit the generated ${c.bold(`.env.local`)} to your desire.
-  
       - ${terminalLink(
-        "Know all you can do with Hadmean",
-        "https://docs.hadmean.com"
+        "Read the documentation",
+        "https://hadmean.github.io/hadmean/"
       )}
   
       - ${terminalLink(

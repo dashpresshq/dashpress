@@ -27,16 +27,14 @@ describe("/api/data/[entity]/count", () => {
     });
   });
 
-  it.skip("should count filtered data correctly", async () => {
+  it("should count filtered data correctly", async () => {
     const { req, res } = createAuthenticatedMocks({
       method: "GET",
       query: {
         entity: "tests",
-        query: {
-          "filters%5B0%5D%%5Bid%5D%": "id",
-          "filters%5B0%5D%%5Bvalue%5D%%5Boperator%5D%": "e",
-          "filters%5B0%5D%%5Bvalue%5D%%5Bvalue%5D%": 1,
-        },
+        "filters[0][id]": "id",
+        "filters[0][value][operator]": "e",
+        "filters[0][value][value]": 1,
       },
     });
 

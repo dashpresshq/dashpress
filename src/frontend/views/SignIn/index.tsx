@@ -33,12 +33,11 @@ function useSignInMutation() {
 const useGuestCheck = () => {
   const userAuthenticatedState = useUserAuthenticatedState();
   const router = useRouter();
-
   useEffect(() => {
     if (userAuthenticatedState === true) {
       router.replace(NAVIGATION_LINKS.DASHBOARD);
     }
-  }, [typeof window]);
+  }, [typeof window, userAuthenticatedState]);
 
   return userAuthenticatedState === "loading";
 };

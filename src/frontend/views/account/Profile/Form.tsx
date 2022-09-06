@@ -14,7 +14,7 @@ export function UpdateProfileForm({
     <SchemaForm<IUpdateUserForm>
       onSubmit={onSubmit}
       initialValues={initialValues}
-      buttonText={ButtonLang.update}
+      buttonText={`${ButtonLang.update} Profile`}
       fields={UPDATE_PROFILE_FORM_SCHEMA}
     />
   );

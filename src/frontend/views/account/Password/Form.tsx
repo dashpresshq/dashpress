@@ -11,7 +11,7 @@ export function ChangePasswordForm({
   return (
     <SchemaForm<IChangePasswordForm>
       onSubmit={onSubmit}
-      buttonText="Update Password"
+      buttonText="Change Password"
       fields={CHANGE_PASSWORD_FORM_SCHEMA}
       resetForm
     />

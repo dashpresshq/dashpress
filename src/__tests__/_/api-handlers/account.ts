@@ -13,4 +13,13 @@ export const accountApiHandlers = [
       })
     );
   }),
+  rest.patch(BASE_TEST_URL("/api/account/mine"), async (_, res, ctx) => {
+    return res(ctx.status(204));
+  }),
+  rest.patch(
+    BASE_TEST_URL("/api/account/change-password"),
+    async (_, res, ctx) => {
+      return res(ctx.status(204));
+    }
+  ),
 ];

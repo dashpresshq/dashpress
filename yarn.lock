@@ -1509,7 +1509,7 @@
     eslint-plugin-testing-library "^5.5.1"
     prettier "^2.7.1"
 
-"@hadmean/protozoa@^1.0.0", "@hadmean/protozoa@^1.0.1":
+"@hadmean/protozoa@1.0.1", "@hadmean/protozoa@^1.0.0":
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/@hadmean/protozoa/-/protozoa-1.0.1.tgz#b628210e80f14390aa6cad138f83c8e0af6710fb"
   integrity sha512-W0XQ4E+NndQN/N1F6vQsW1j6QjT+9hmLaSCNTXPeHLP0vKgZ4C6L2A/bm8Y1g58AnNE/jMwOS50sOxpTsLvgog==
@@ -6784,11 +6784,6 @@ next-router-mock@^0.7.4:
   version "0.7.4"
   resolved "https://registry.npmjs.org/next-router-mock/-/next-router-mock-0.7.4.tgz"
   integrity sha512-phYLFXOQ9klg6gxVRJJdH0QoD+5bAbAdDYM9O3YdGZ+IFEbvIoIns+o9SoSfTkCjzoU2R1ARoFc8WHp0+hnD8A==
-
-next-router-provider@^0.6.0:
-  version "0.6.0"
-  resolved "https://registry.yarnpkg.com/next-router-provider/-/next-router-provider-0.6.0.tgz#fdf251c4dd5ab091ae5a788b7c2721923dd64283"
-  integrity sha512-CAAxH8EnauaJb14xyCqYLPwqydHWpeceFwGL255ss7RTSBkcqEFo/skN1nDQ/Yc0ps0HwBnMx05mHVgJnmiC4w==
 
 next@12.1.6:
   version "12.1.6"

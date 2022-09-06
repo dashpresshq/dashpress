@@ -13,10 +13,6 @@ export function setupApiHandlers() {
   });
 
   afterAll(() => server.close());
-}
 
-// server.use(
-//   rest.post('/checkout', async (req, res, ctx) => {
-//     return res(ctx.status(500), ctx.json({message: testErrorMessage}))
-//   }),
-// )
+  return server;
+}

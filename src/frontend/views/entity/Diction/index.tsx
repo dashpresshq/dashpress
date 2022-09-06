@@ -17,7 +17,6 @@ import { BaseEntitySettingsLayout } from "../_Base";
 import { EntityDictionForm } from "./Form";
 import { ENTITY_CONFIGURATION_VIEW } from "../constants";
 
-// TODO validate plurals are unique
 export function EntityDictionSettings() {
   const entity = useEntitySlug();
   const entityDiction = useEntityDiction();

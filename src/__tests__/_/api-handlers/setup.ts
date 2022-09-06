@@ -5,8 +5,8 @@ export const setupApiHandlers = [
   rest.get(BASE_TEST_URL("/api/setup/check"), async (_, res, ctx) => {
     return res(
       ctx.json({
-        hasUsers: false,
-        hasDbCredentials: false,
+        hasUsers: true,
+        hasDbCredentials: true,
       })
     );
   }),

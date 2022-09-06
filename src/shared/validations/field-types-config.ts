@@ -73,7 +73,6 @@ export const FIELD_TYPES_CONFIG_MAP: Record<
     allowedValidations: ["maxLength", "minLength", "required"],
   },
   json: {
-    // TODO pick this up from DB
     sortable: false,
     tableFilterType: {
       _type: "string",

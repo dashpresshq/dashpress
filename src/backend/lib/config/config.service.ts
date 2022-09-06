@@ -64,5 +64,3 @@ Object.entries(ConfigBag).forEach(([key, configBag]) => {
 });
 
 export const configService = new ConfigService();
-
-// TODO send a request to boostsrap the application

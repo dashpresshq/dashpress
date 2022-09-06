@@ -37,7 +37,7 @@ export const guessEntityValidations = ({
     const { message } = ENTITY_VALIDATION_CONFIG.unique;
     validationItems.push({
       validationType: "unique",
-      errorMessage: message, // TODO check after save message
+      errorMessage: message,
       fromSchema: true,
     });
   }

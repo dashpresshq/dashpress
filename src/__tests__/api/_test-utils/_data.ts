@@ -15,7 +15,7 @@ const testTable = "tests";
 const DEFAULT_TEST_DATA: ITestDataSchema[] = [
   {
     age: 5,
-    createdAt: new Date(2022, 9, 13),
+    createdAt: new Date("2022-08-17T11:29:57.330Z"),
     id: 1,
     name: "John Doe",
     status: "closed",
@@ -24,7 +24,7 @@ const DEFAULT_TEST_DATA: ITestDataSchema[] = [
   },
   {
     age: 9,
-    createdAt: new Date(2021, 8, 20),
+    createdAt: new Date("2021-09-17T11:29:57.330Z"),
     id: 2,
     name: "Jane Doe",
     status: "opened",

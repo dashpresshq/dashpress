@@ -28,7 +28,7 @@ describe("/api/data/[entity]/table", () => {
         "data": Array [
           Object {
             "age": 5,
-            "createdAt": 1665615600000,
+            "createdAt": 1660735797330,
             "id": 1,
             "name": "John Doe",
             "referenceId": 3,
@@ -37,7 +37,7 @@ describe("/api/data/[entity]/table", () => {
           },
           Object {
             "age": 9,
-            "createdAt": 1632092400000,
+            "createdAt": 1631878197330,
             "id": 2,
             "name": "Jane Doe",
             "referenceId": 5,
@@ -70,7 +70,7 @@ describe("/api/data/[entity]/table", () => {
         "data": Array [
           Object {
             "age": 9,
-            "createdAt": 1632092400000,
+            "createdAt": 1631878197330,
             "id": 2,
             "name": "Jane Doe",
             "referenceId": 5,
@@ -79,7 +79,7 @@ describe("/api/data/[entity]/table", () => {
           },
           Object {
             "age": 5,
-            "createdAt": 1665615600000,
+            "createdAt": 1660735797330,
             "id": 1,
             "name": "John Doe",
             "referenceId": 3,
@@ -112,7 +112,7 @@ describe("/api/data/[entity]/table", () => {
         "data": Array [
           Object {
             "age": 9,
-            "createdAt": 1632092400000,
+            "createdAt": 1631878197330,
             "id": 2,
             "name": "Jane Doe",
             "referenceId": 5,
@@ -146,7 +146,7 @@ describe("/api/data/[entity]/table", () => {
         "data": Array [
           Object {
             "age": 5,
-            "createdAt": 1665615600000,
+            "createdAt": 1660735797330,
             "id": 1,
             "name": "John Doe",
             "referenceId": 3,

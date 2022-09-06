@@ -27,7 +27,7 @@ describe("/api/data/[entity]/[id]/index", () => {
     expect(res._getJSONData()).toMatchInlineSnapshot(`
       Object {
         "age": 5,
-        "createdAt": 1665615600000,
+        "createdAt": 1660735797330,
         "id": 1,
         "name": "John Doe",
         "referenceId": 3,

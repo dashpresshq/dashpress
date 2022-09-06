@@ -123,6 +123,7 @@ export class DataController {
     crudKey:
       | "hidden_entity_details_columns"
       | "hidden_entity_create_columns"
+      | "hidden_entity_table_columns"
       | "hidden_entity_update_columns"
   ): Promise<string[]> {
     const [hiddenFields, entityFields] = await Promise.all([
@@ -232,20 +233,13 @@ export class DataController {
     queryFilters: QueryFilter[],
     paginationFilters: IPaginationFilters
   ) {
-    const [entityFields, hiddenColumns] = await Promise.all([
-      this._entitiesService.getEntityFields(entity),
-      this._configurationService.show<string[]>(
-        "hidden_entity_table_columns",
-        entity
-      ),
-    ]);
-
     const [data, totalRecords] = await Promise.all([
       this._dataService.list(
         entity,
-        entityFields
-          .filter(({ name }) => !hiddenColumns.includes(name))
-          .map(({ name }) => name),
+        await this.getAllowedCrudsFieldsToShow(
+          entity,
+          "hidden_entity_table_columns"
+        ),
         queryFilters,
         paginationFilters
       ),

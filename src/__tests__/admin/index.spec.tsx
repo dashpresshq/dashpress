@@ -13,8 +13,6 @@ jest.mock("next/router", () => require("next-router-mock"));
 
 describe("pages/admin (Dashboard)", () => {
   it("render menu items correctly", async () => {
-    localStorage.setItem("__auth-token__", "foo");
-
     render(
       <AppWrapper>
         <Dashboard />

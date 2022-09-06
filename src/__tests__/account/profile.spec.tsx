@@ -12,10 +12,6 @@ setupApiHandlers();
 jest.mock("next/router", () => require("next-router-mock"));
 
 describe("pages/account/profile", () => {
-  beforeAll(() => {
-    localStorage.setItem("__auth-token__", "foo");
-  });
-
   it("should display profile details", async () => {
     render(
       <AppWrapper>

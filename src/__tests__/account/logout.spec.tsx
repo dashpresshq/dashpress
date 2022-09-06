@@ -20,10 +20,6 @@ describe("pages/account/logout", () => {
     asPath: "/",
   }));
 
-  beforeAll(() => {
-    localStorage.setItem("__auth-token__", "foo");
-  });
-
   it("should update password", async () => {
     render(
       <AppWrapper>

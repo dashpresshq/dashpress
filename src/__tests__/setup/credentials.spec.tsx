@@ -11,6 +11,10 @@ const server = setupApiHandlers();
 describe("pages/setup/credentials", () => {
   const useRouter = jest.spyOn(require("next/router"), "useRouter");
 
+  beforeAll(() => {
+    localStorage.clear();
+  });
+
   it("should redirect to users page DB credentials is set", async () => {
     const replaceMock = jest.fn();
     useRouter.mockImplementation(() => ({

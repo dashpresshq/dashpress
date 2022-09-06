@@ -12,10 +12,6 @@ setupApiHandlers();
 jest.mock("next/router", () => require("next-router-mock"));
 
 describe("pages/account/password", () => {
-  beforeAll(() => {
-    localStorage.setItem("__auth-token__", "foo");
-  });
-
   it("should update password", async () => {
     render(
       <AppWrapper>

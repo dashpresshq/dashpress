@@ -18,7 +18,6 @@ describe("pages/admin/[entity]/config/diction", () => {
         entity: "entity-1",
       },
     }));
-    localStorage.setItem("__auth-token__", "foo");
   });
 
   it("display diction values", async () => {

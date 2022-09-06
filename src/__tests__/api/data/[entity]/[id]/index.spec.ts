@@ -63,4 +63,39 @@ describe("/api/data/[entity]/[id]/index", () => {
       }
     `);
   });
+
+  it("should delete data", async () => {
+    const { req, res } = createAuthenticatedMocks({
+      method: "DELETE",
+      query: {
+        entity: "tests",
+        id: 1,
+      },
+    });
+
+    await handler(req, res);
+
+    expect(res._getStatusCode()).toBe(204);
+
+    const { req: getReq, res: getRes } = createAuthenticatedMocks({
+      method: "GET",
+      query: {
+        entity: "tests",
+        id: 1,
+      },
+    });
+
+    await handler(getReq, getRes);
+
+    expect(getRes._getStatusCode()).toBe(404);
+    expect(getRes._getJSONData()).toMatchInlineSnapshot(`
+      Object {
+        "message": "Entity 'tests' with id '1' is not found",
+        "method": "GET",
+        "name": "BadRequestError",
+        "path": "",
+        "statusCode": 404,
+      }
+    `);
+  });
 });

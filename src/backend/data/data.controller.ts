@@ -5,6 +5,7 @@ import { AbstractCacheService, createCacheService } from "backend/lib/cache";
 import { IFieldValidationItem } from "shared/validations/types";
 // import { runValidationError } from "shared/validations/run";
 import noop from "lodash/noop";
+import { NotFoundError } from "backend/lib/errors";
 import {
   ConfigurationService,
   configurationService,
@@ -149,9 +150,15 @@ export class DataController {
       this.getAllowedCrudsFieldsToShow(entity, "hidden_entity_details_columns"),
       this._entitiesService.getEntityPrimaryField(entity),
     ]);
-    return await this._dataService.show(entity, fieldsToShow, {
+    const data = await this._dataService.show(entity, fieldsToShow, {
       [primaryField]: id,
     });
+    if (!data) {
+      throw new NotFoundError(
+        `Entity '${entity}' with id '${id}' is not found`
+      );
+    }
+    return data;
   }
 
   async createData(entity: string, data: Record<string, unknown>) {

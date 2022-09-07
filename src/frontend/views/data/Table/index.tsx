@@ -1,5 +1,10 @@
-import { useSetPageDetails } from "frontend/lib/routing";
+import {
+  useChangeRouterParam,
+  useRouteParam,
+  useSetPageDetails,
+} from "frontend/lib/routing";
 import { META_USER_PERMISSIONS } from "shared/types";
+import { StyledCard, Tabs } from "@hadmean/chromista";
 import { AppLayout } from "../../../_layouts/app";
 import {
   useEntityDiction,
@@ -31,9 +36,33 @@ export function EntityTable() {
 
   const menuItems = useTableMenuItems(entity);
 
+  const tabFromUrl = useRouteParam("tab");
+
+  const changeTabParam = useChangeRouterParam("tab");
+
   return (
     <AppLayout actionItems={menuItems} secondaryActionItems={actionItems}>
-      <EntityTableView entity={entity} />
+      <StyledCard>
+        <Tabs
+          padContent={false}
+          currentTab={tabFromUrl}
+          onChange={changeTabParam}
+          contents={[
+            {
+              content: <EntityTableView entity={entity} />,
+              label: "In Progress",
+            },
+            {
+              content: <EntityTableView entity={entity} />,
+              label: "Active",
+            },
+            {
+              content: <EntityTableView entity={entity} />,
+              label: "Declined",
+            },
+          ]}
+        />
+      </StyledCard>
     </AppLayout>
   );
 }

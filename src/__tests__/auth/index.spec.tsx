@@ -33,15 +33,14 @@ describe("pages/auth", () => {
     });
   });
 
+  // Need to be able to tell jest to ignore 401 errors as the test crashes after hitting it
   it.skip("should prompt invalid login when invalid credentials are put in", async () => {
     const useRouter = jest.spyOn(require("next/router"), "useRouter");
 
     const pushMock = jest.fn();
     useRouter.mockImplementation(() => ({
       push: pushMock,
-      query: {
-        entity: "entity-1",
-      },
+      query: {},
     }));
 
     render(

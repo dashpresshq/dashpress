@@ -36,6 +36,7 @@ describe("/api/data/[entity]/index", () => {
     `);
   });
 
+  // SQLITE doesn't support ilike
   it.skip("should search list data", async () => {
     const { req, res } = createAuthenticatedMocks({
       method: "GET",

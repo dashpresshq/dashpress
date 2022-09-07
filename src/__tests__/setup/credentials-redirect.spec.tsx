@@ -1,5 +1,5 @@
 import * as React from "react";
-import { render, screen } from "@testing-library/react";
+import { render, waitFor } from "@testing-library/react";
 import { AppWrapper } from "@hadmean/chromista";
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 import { rest } from "msw";
@@ -8,6 +8,14 @@ import CredentialsSetup from "pages/setup/credentials";
 
 const server = setupApiHandlers();
 
+/*
+ Because react-query caches the get responses and there is no external way of clearing it
+ As the expose way is through hooks and that wont work here
+ So to simulate multiple setup check responses 
+ A new file has to be created for all the difference cases
+ :face-palm
+*/
+
 describe("pages/setup/credentials", () => {
   const useRouter = jest.spyOn(require("next/router"), "useRouter");
 
@@ -15,9 +23,7 @@ describe("pages/setup/credentials", () => {
     localStorage.clear();
   });
 
-  it("should render form when there is no DB credentials", async () => {
-    server.resetHandlers();
-    localStorage.clear();
+  it("should redirect to users page DB credentials is set", async () => {
     const replaceMock = jest.fn();
     useRouter.mockImplementation(() => ({
       replace: replaceMock,
@@ -28,7 +34,7 @@ describe("pages/setup/credentials", () => {
         return res(
           ctx.json({
             hasUsers: false,
-            hasDbCredentials: false,
+            hasDbCredentials: true,
           })
         );
       })
@@ -39,8 +45,8 @@ describe("pages/setup/credentials", () => {
         <CredentialsSetup />
       </AppWrapper>
     );
-
-    expect(await screen.findByText("Setup DB credentials")).toBeInTheDocument();
-    expect(replaceMock).not.toHaveBeenCalled();
+    await waitFor(() => {
+      expect(replaceMock).toHaveBeenCalledWith("/setup/user");
+    });
   });
 });

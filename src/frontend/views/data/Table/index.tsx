@@ -50,14 +50,6 @@ export function EntityTable() {
           contents={[
             {
               content: <EntityTableView entity={entity} />,
-              label: "In Progress",
-            },
-            {
-              content: <EntityTableView entity={entity} />,
-              label: "Active",
-            },
-            {
-              content: <EntityTableView entity={entity} />,
               label: "Declined",
             },
           ]}

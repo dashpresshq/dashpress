@@ -51,3 +51,5 @@ export function EntityRelationTable() {
     </DetailsLayout>
   );
 }
+
+// TODO const menuItems = useTableMenuItems(entity); and add default value link

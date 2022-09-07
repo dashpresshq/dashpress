@@ -28,7 +28,7 @@ export function ListUsers() {
   >({ ...DEFAULT_TABLE_PARAMS, pageIndex: 1 });
 
   useSetPageDetails({
-    pageTitle: "Manage User",
+    pageTitle: "Users",
     viewKey: "USERS_LIST",
     permission: USER_PERMISSIONS.CAN_MANAGE_USER,
   });
@@ -72,9 +72,18 @@ export function ListUsers() {
   );
 
   return (
-    <AppLayout>
+    <AppLayout
+      actionItems={[
+        {
+          label: "Add New User",
+          IconComponent: UserPlus,
+          onClick: () => {
+            router.push(NAVIGATION_LINKS.USERS.CREATE);
+          },
+        },
+      ]}
+    >
       <Table
-        title="Users"
         {...{
           tableData,
           setPaginatedDataState,
@@ -100,15 +109,6 @@ export function ListUsers() {
           {
             Header: "Action",
             Cell: MemoizedAction,
-          },
-        ]}
-        menuItems={[
-          {
-            label: "Add New User",
-            IconComponent: UserPlus,
-            onClick: () => {
-              router.push(NAVIGATION_LINKS.USERS.CREATE);
-            },
           },
         ]}
       />

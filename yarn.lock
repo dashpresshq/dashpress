@@ -1448,10 +1448,10 @@
     pg "^8.7.3"
     sqlite3 "^5.0.8"
 
-"@hadmean/chromista@^1.0.11":
-  version "1.0.11"
-  resolved "https://registry.yarnpkg.com/@hadmean/chromista/-/chromista-1.0.11.tgz#e80892ffbe5309184dcb2649e3c33862c22bcd0f"
-  integrity sha512-sAyzbi54E+1AK98uvuPnjLtl/VBWpwfY9SvCunz8BfRhyBBmtxyUeOlMJ0IfsVScT5igPEtFJlhbq2XYVYt9Pg==
+"@hadmean/chromista@^1.0.12":
+  version "1.0.12"
+  resolved "https://registry.yarnpkg.com/@hadmean/chromista/-/chromista-1.0.12.tgz#fe31dad8de2c96eea17859eab1653266eefea556"
+  integrity sha512-3KPCOvrbUu+31Tw4KvHbCnO3z8f1bGb6I111SeAzIXtD9vgo66OfGYaLVLEYprQm0GzqkaV+Wu+/4CoFpctUVw==
   dependencies:
     "@fortawesome/fontawesome-svg-core" "^6.1.1"
     "@fortawesome/free-solid-svg-icons" "^6.1.1"

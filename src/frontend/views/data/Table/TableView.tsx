@@ -23,7 +23,6 @@ import {
 } from "../../../hooks/entity/entity.config";
 import { useEntityFields } from "../../../hooks/entity/entity.store";
 import { ENTITY_TABLE_PATH } from "../../../hooks/data/data.store";
-import { useTableMenuItems } from "./useTableMenuItems";
 import { useTableColumns } from "./useTableColumns";
 import { useDetailsOffCanvasStore } from "./hooks/useDetailsOffCanvas.store";
 import { EntityDetailsView } from "../Details/DetailsView";
@@ -34,7 +33,6 @@ interface IProps {
 }
 
 export function EntityTableView({ entity, persitentFilters = [] }: IProps) {
-  const menuItems = useTableMenuItems(entity);
   const entityFields = useEntityFields(entity);
   const entityCrudSettings = useEntityCrudSettings(entity);
   const hiddenTableColumns = useSelectedEntityColumns(
@@ -86,14 +84,12 @@ export function EntityTableView({ entity, persitentFilters = [] }: IProps) {
         loader={<ComponentIsLoading />}
       >
         <Table
-          title=""
           {...{
             tableData,
             setPaginatedDataState,
             paginatedDataState,
           }}
           columns={columns}
-          menuItems={menuItems}
         />
       </ViewStateMachine>
 

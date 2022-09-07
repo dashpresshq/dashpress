@@ -26,7 +26,7 @@ export function ListRoles() {
   >({ ...DEFAULT_TABLE_PARAMS, pageIndex: 1 });
 
   useSetPageDetails({
-    pageTitle: "Manage Roles",
+    pageTitle: "Roles",
     viewKey: "ROLES_LIST",
     permission: USER_PERMISSIONS.CAN_MANAGE_PERMISSIONS,
   });
@@ -70,9 +70,18 @@ export function ListRoles() {
   );
 
   return (
-    <AppLayout>
+    <AppLayout
+      actionItems={[
+        {
+          label: "Add New Role",
+          IconComponent: Plus,
+          onClick: () => {
+            router.push(NAVIGATION_LINKS.ROLES.CREATE);
+          },
+        },
+      ]}
+    >
       <Table
-        title="Roles"
         {...{
           tableData,
           setPaginatedDataState,
@@ -88,15 +97,6 @@ export function ListRoles() {
           {
             Header: "Action",
             Cell: MemoizedAction,
-          },
-        ]}
-        menuItems={[
-          {
-            label: "Add New Role",
-            IconComponent: Plus,
-            onClick: () => {
-              router.push(NAVIGATION_LINKS.ROLES.CREATE);
-            },
           },
         ]}
       />

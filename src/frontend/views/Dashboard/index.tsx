@@ -9,7 +9,7 @@ import {
 import styled from "styled-components";
 import * as StyledGrid from "styled-bootstrap-grid";
 import { useRouter } from "next/router";
-import { HardDrive } from "react-feather";
+import { Settings } from "react-feather";
 import { useEntitiesCount } from "frontend/hooks/data/data.store";
 import { useSetPageDetails } from "frontend/lib/routing";
 import { META_USER_PERMISSIONS } from "shared/types";
@@ -40,7 +40,7 @@ export function Dashboard() {
       actionItems={[
         {
           label: "Manage Entities",
-          IconComponent: HardDrive,
+          IconComponent: Settings,
           onClick: () => {
             router.push(NAVIGATION_LINKS.SETTINGS.ENTITIES);
           },

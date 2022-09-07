@@ -10,6 +10,7 @@ import {
   useEntityActionMenuItems,
 } from "../../entity/constants";
 import { EntityTableView } from "./TableView";
+import { useTableMenuItems } from "./useTableMenuItems";
 
 export function EntityTable() {
   const entity = useEntitySlug();
@@ -28,8 +29,10 @@ export function EntityTable() {
     permission: META_USER_PERMISSIONS.APPLIED_CAN_ACCESS_ENTITY(entity),
   });
 
+  const menuItems = useTableMenuItems(entity);
+
   return (
-    <AppLayout actionItems={actionItems}>
+    <AppLayout actionItems={menuItems} secondaryActionItems={actionItems}>
       <EntityTableView entity={entity} />
     </AppLayout>
   );

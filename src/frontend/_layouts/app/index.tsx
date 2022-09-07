@@ -3,12 +3,12 @@ import {
   ComponentIsLoading,
   DropDownMenu,
   DynamicLayout,
+  IDropDownMenuItem,
   Spacer,
   Stack,
   Text,
 } from "@hadmean/chromista";
 import React, { ReactNode, useEffect } from "react";
-import { Icon } from "react-feather";
 import Head from "next/head";
 import { AuthService } from "@hadmean/protozoa";
 import { useRouter } from "next/router";
@@ -23,11 +23,8 @@ import { useSelectionViews } from "./useSelectionViews";
 
 interface IProps {
   children: ReactNode;
-  actionItems?: {
-    label: string;
-    onClick: () => void;
-    IconComponent: Icon;
-  }[];
+  actionItems?: IDropDownMenuItem[];
+  secondaryActionItems?: IDropDownMenuItem[];
 }
 
 const useUserAuthCheck = () => {
@@ -44,7 +41,11 @@ const useUserAuthCheck = () => {
   return userAuthenticatedState;
 };
 
-export function AppLayout({ children, actionItems = [] }: IProps) {
+export function AppLayout({
+  children,
+  actionItems = [],
+  secondaryActionItems = [],
+}: IProps) {
   const siteConfig = useSiteConfig();
   const userAuthenticatedState = useUserAuthCheck();
   const { history, pushToStack, goToLinkIndex } = useNavigationStack();
@@ -87,9 +88,16 @@ export function AppLayout({ children, actionItems = [] }: IProps) {
           <Text>{pageTitle}</Text>
           <Breadcrumbs items={homedBreadcrumb} onCrumbClick={goToLinkIndex} />
         </div>
-        {actionItems.length > 0 ? (
-          <DropDownMenu menuItems={actionItems} />
-        ) : null}
+        <div>
+          <Stack>
+            {actionItems.length > 0 ? (
+              <DropDownMenu menuItems={actionItems} />
+            ) : null}
+            {secondaryActionItems.length > 0 ? (
+              <DropDownMenu menuItems={secondaryActionItems} />
+            ) : null}
+          </Stack>
+        </div>
       </Stack>
       <Spacer />
       <div data-testid="app-layout__content">{children}</div>

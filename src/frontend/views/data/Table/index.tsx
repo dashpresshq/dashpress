@@ -37,7 +37,7 @@ export function EntityTable() {
   const menuItems = useTableMenuItems(entity);
 
   // const tabFromUrl = useRouteParam("tab");
-  // Tinker with build
+
   // const changeTabParam = useChangeRouterParam("tab");
 
   return (

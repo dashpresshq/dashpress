@@ -42,7 +42,7 @@ export function EntityScopeSettings() {
             />
           }
         >
-          TODO
+          WIP
         </ViewStateMachine>
       </SectionBox>
     </BaseEntitySettingsLayout>

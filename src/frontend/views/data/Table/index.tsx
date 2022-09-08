@@ -1,10 +1,10 @@
 import {
-  useChangeRouterParam,
-  useRouteParam,
+  // useChangeRouterParam,
+  // useRouteParam,
   useSetPageDetails,
 } from "frontend/lib/routing";
 import { META_USER_PERMISSIONS } from "shared/types";
-import { StyledCard, Tabs } from "@hadmean/chromista";
+import { StyledCard } from "@hadmean/chromista";
 import { AppLayout } from "../../../_layouts/app";
 import {
   useEntityDiction,
@@ -36,24 +36,25 @@ export function EntityTable() {
 
   const menuItems = useTableMenuItems(entity);
 
-  const tabFromUrl = useRouteParam("tab");
+  // const tabFromUrl = useRouteParam("tab");
 
-  const changeTabParam = useChangeRouterParam("tab");
+  // const changeTabParam = useChangeRouterParam("tab");
 
   return (
     <AppLayout actionItems={menuItems} secondaryActionItems={actionItems}>
       <StyledCard>
-        <Tabs
+        {/* <Tabs
           padContent={false}
           currentTab={tabFromUrl}
           onChange={changeTabParam}
           contents={[
             {
               content: <EntityTableView entity={entity} />,
-              label: "Declined",
+              label: "DEFAULT",
             },
           ]}
-        />
+        /> */}
+        <EntityTableView entity={entity} />
       </StyledCard>
     </AppLayout>
   );

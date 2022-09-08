@@ -7,7 +7,7 @@
     "start:prod": "next start",
     "build:next": "next build",
     "build:bin": "tsup ./src/bin/index.ts",
-    "build": "rimraf .next && npm run build:bin && npm run build:next && rimraf .next/cache && rimraf .next/trace",
+    "build": "npm run build:bin && npm run build:next && rimraf .next/cache && rimraf .next/trace",
     "prepublishOnly": "npm run build",
     "setup-husky": "husky install",
     "test": "jest --detectOpenHandles --runInBand",

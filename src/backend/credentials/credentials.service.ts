@@ -57,6 +57,7 @@ export class CredentialsService implements IApplicationService {
     const credentials = await this._credentialsPersistenceService.getItem(
       domain
     );
+
     if (!credentials) {
       throw new ForbiddenError(`No credentials available for ${domain}`);
     }

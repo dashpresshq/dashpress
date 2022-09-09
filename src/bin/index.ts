@@ -8,6 +8,7 @@
   const { default: c } = await import("chalk");
   const { execa } = await import("execa");
 
+  const { default: fetch } = await import("node-fetch");
   const replaceRandomCharaters = (envContent: string) => {
     return ["ENCRYPTION_KEY", "AUTH_TOKEN_KEY"].reduce(
       (reducedEnvContent, currentKey) => {
@@ -60,10 +61,9 @@
 
   process.stdout.write("\n");
 
-  console.log(`🎉 ${terminalLink(
-    "Open the application",
-    "http://localhost:3000"
-  )}
+  const endpoint = `http://localhost:${process.env.PORT || 3000}`;
+
+  console.log(`🎉 ${terminalLink("Open the application", endpoint)}
   
       ${c.bold("Next steps:")}
   
@@ -81,6 +81,19 @@
   const { stdout, stderr } = execa("npm", ["run", "start:prod"], {
     cwd: path.join(__dirname, ".."),
   });
+
+  const WAIT_FOR_NEXT_TO_START = 1000;
+
+  /*
+  We want to ping the application to bootstrap itself from here
+  Else it boostraps on the first request which messes a lot of things up
+  We dont want the ping to crash the application if the port is not ready yet
+  Hence the catch(() => {});
+  */
+  setTimeout(() => {
+    fetch(`${endpoint}/api/healthcheck`).catch(() => {});
+  }, WAIT_FOR_NEXT_TO_START);
+
   stdout.pipe(process.stdout);
   stderr.pipe(process.stderr);
 })().catch((err) => {

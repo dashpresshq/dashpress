@@ -1,3 +1,4 @@
+import noop from "lodash/noop";
 import { ConfigService } from "../config/config.service";
 import { AbstractCacheService } from "./AbstractCacheService";
 
@@ -6,6 +7,10 @@ export class MemoryCacheAdaptor extends AbstractCacheService {
 
   constructor(prefix: string, configService: ConfigService) {
     super(prefix, configService);
+  }
+
+  async setup() {
+    noop();
   }
 
   public async pullItem<T>(key: string): Promise<T | undefined> {

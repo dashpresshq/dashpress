@@ -8,21 +8,25 @@ import {
   credentialsService,
 } from "backend/credentials/credentials.service";
 import { CREDENTIALS_DOMAINS } from "backend/credentials/crendential.types";
+import { IApplicationService } from "backend/types";
 import { IDBCredentials, IDBSchema, IEntityField } from "shared/types";
 import {
   createConfigDomainPersistenceService,
   AbstractConfigDataPersistenceService,
 } from "../lib/config-persistence";
 
-export class SchemasService {
+export class SchemasService implements IApplicationService {
   private dbSchema: IDBSchema[];
 
   constructor(
     private _schemaConfigDataPersistenceService: AbstractConfigDataPersistenceService<IDBSchema>,
     private _credentialsService: CredentialsService,
     private _configurationService: ConfigurationService
-  ) {
-    this.loadDbSchema();
+  ) {}
+
+  async bootstrap() {
+    await this._schemaConfigDataPersistenceService.setup();
+    await this.loadDbSchema();
   }
 
   private async loadDbSchema(): Promise<IDBSchema[]> {

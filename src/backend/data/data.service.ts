@@ -5,9 +5,10 @@ import { credentialsService } from "backend/credentials/credentials.service";
 import { getDbConnection } from "backend/lib/connection/db";
 import { CREDENTIALS_DOMAINS } from "backend/credentials/crendential.types";
 import { IDBCredentials, QueryFilter } from "shared/types";
+import { IApplicationService } from "backend/types";
 import { IPaginationFilters } from "./types";
 
-export class DataService {
+export class DataService implements IApplicationService {
   static _dbInstance: Knex | null = null;
 
   static async getInstance() {
@@ -23,6 +24,10 @@ export class DataService {
     this._dbInstance = await getDbConnection(dbCredentials);
 
     return this._dbInstance;
+  }
+
+  async bootstrap() {
+    await DataService.getInstance();
   }
 
   private filterOperatorToQuery(
@@ -155,7 +160,3 @@ export class DataService {
 }
 
 export const dataService = new DataService();
-
-// (() => {
-//   DataService.getInstance();
-// })();

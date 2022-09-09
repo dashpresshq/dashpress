@@ -7,14 +7,19 @@ import {
   encryptionService,
 } from "backend/lib/encryption/encryption.service";
 import { ForbiddenError } from "backend/lib/errors";
+import { IApplicationService } from "backend/types";
 
-export class CredentialsService {
+export class CredentialsService implements IApplicationService {
   constructor(
     private _credentialsPersistenceService: AbstractConfigDataPersistenceService<
       Record<string, unknown>
     >,
     private _encryptionService: EncryptionService
   ) {}
+
+  async bootstrap() {
+    await this._credentialsPersistenceService.setup();
+  }
 
   async hasDomainCredentials(domain: string): Promise<boolean> {
     try {

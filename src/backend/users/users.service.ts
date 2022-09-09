@@ -12,6 +12,7 @@ import {
   NotFoundError,
 } from "backend/lib/errors";
 import { HashService } from "backend/lib/hash/hash.service";
+import { IApplicationService } from "backend/types";
 import {
   ISuccessfullAuthenticationResponse,
   IAccountUser,
@@ -20,7 +21,7 @@ import {
 
 const INVALID_LOGIN_MESSAGE = "Invalid Login";
 
-export class UsersService {
+export class UsersService implements IApplicationService {
   constructor(
     private readonly _usersPersistenceService: AbstractConfigDataPersistenceService<IAccountUser>,
     private readonly _authTokenService: AuthTokenService
@@ -42,6 +43,10 @@ export class UsersService {
     }
     delete user.password;
     return { token: await this._authTokenService.sign(user) };
+  }
+
+  async bootstrap() {
+    await this._usersPersistenceService.setup();
   }
 
   async registerUser(user: IAccountUser) {

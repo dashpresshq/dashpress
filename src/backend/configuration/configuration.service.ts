@@ -1,3 +1,4 @@
+import { IApplicationService } from "backend/types";
 import {
   createConfigDomainPersistenceService,
   AbstractConfigDataPersistenceService,
@@ -8,10 +9,14 @@ import {
   ISystemSettings,
 } from "../../shared/configuration.constants";
 
-export class ConfigurationService {
+export class ConfigurationService implements IApplicationService {
   constructor(
     private _appConfigPersistenceService: AbstractConfigDataPersistenceService<unknown>
   ) {}
+
+  async bootstrap() {
+    await this._appConfigPersistenceService.setup();
+  }
 
   private checkConfigKeyEntityRequirement(
     key: keyof typeof CONFIGURATION_KEYS,

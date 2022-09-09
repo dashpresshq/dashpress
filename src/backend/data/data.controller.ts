@@ -268,5 +268,5 @@ export const dataController = new DataController(
   dataService,
   entitiesService,
   configurationService,
-  cacheService
+  cacheService // :eyes needs to be boostrap
 );

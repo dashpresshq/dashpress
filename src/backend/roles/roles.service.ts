@@ -4,6 +4,7 @@ import {
   AbstractConfigDataPersistenceService,
 } from "backend/lib/config-persistence";
 import { BadRequestError, NotFoundError } from "backend/lib/errors";
+import { IApplicationService } from "backend/types";
 import {
   canRoleDoThis,
   isSystemRole,
@@ -16,11 +17,16 @@ export interface IRole {
   permissions: string[];
 }
 
-export class RolesService {
+export class RolesService implements IApplicationService {
   constructor(
     private readonly _rolesPersistenceService: AbstractConfigDataPersistenceService<IRole>,
     private readonly _cacheService: AbstractCacheService
   ) {}
+
+  async bootstrap() {
+    await this._rolesPersistenceService.setup();
+    await this._cacheService.setup();
+  }
 
   async listRoles(): Promise<string[]> {
     const roles = await this._rolesPersistenceService.getAllItems();

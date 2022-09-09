@@ -22,6 +22,10 @@ export class RedisCacheAdaptor extends AbstractCacheService {
     return this.redisConnection;
   }
 
+  async setup() {
+    await this.getRedisInstance();
+  }
+
   public async pullItem<T>(key: string): Promise<T> {
     const data = await (await this.getRedisInstance()).get(key);
     if (!data) {

@@ -11,16 +11,16 @@ import { requestHandler } from "../../../backend/lib/request";
 export default requestHandler(
   {
     GET: async () => {
+      dataService.bootstrap();
+      schemasService.bootstrap();
+      configService.bootstrap();
+      usersService.bootstrap();
+      rolesService.bootstrap();
+      credentialsService.bootstrap();
+      entitiesService.bootstrap();
+      configurationService.bootstrap();
       return {
         ok: true,
-        dataService: !!dataService,
-        configService: !!configService,
-        schemasService: !!schemasService,
-        configurationService: !!configurationService,
-        credentialsService: !!credentialsService,
-        entitiesService: !!entitiesService,
-        rolesService: !!rolesService,
-        usersService: !!usersService,
       };
     },
   },

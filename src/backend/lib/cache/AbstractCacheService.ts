@@ -11,6 +11,8 @@ export abstract class AbstractCacheService {
     this.configService = configService;
   }
 
+  public abstract setup(): Promise<void>;
+
   protected prefixKey(key: string) {
     return `${this.prefix}:${key}`;
   }

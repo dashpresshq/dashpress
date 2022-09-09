@@ -1,8 +1,14 @@
+import { IApplicationService } from "backend/types";
+import noop from "lodash/noop";
 import { IDBSchema, IEntityField } from "shared/types";
 import { SchemasService, schemasService } from "../schema/schema.service";
 
-export class EntitiesService {
+export class EntitiesService implements IApplicationService {
   constructor(private _schemasService: SchemasService) {}
+
+  async bootstrap() {
+    noop();
+  }
 
   private async getDBSchemaModels(): Promise<Record<string, IDBSchema>> {
     return Object.fromEntries(

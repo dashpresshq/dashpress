@@ -19,6 +19,7 @@ export class DatabaseConfigDataPersistenceAdaptor<
     if (this._dbInstance[configDomain]) {
       return this._dbInstance[configDomain];
     }
+
     this._dbInstance[configDomain] = await getDbConnection(
       configService.getConfigValue(ConfigKeys.CONFIG_ADAPTOR_CONNECTION_STRING)
     );
@@ -43,6 +44,10 @@ export class DatabaseConfigDataPersistenceAdaptor<
 
   constructor(configDomain: ConfigDomain, _configService: ConfigService) {
     super(configDomain, _configService);
+  }
+
+  async setup() {
+    await DatabaseConfigDataPersistenceAdaptor.getDbInstance(this.configDomain);
   }
 
   async resetToEmpty() {

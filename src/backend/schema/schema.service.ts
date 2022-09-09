@@ -21,7 +21,9 @@ export class SchemasService {
     private _schemaConfigDataPersistenceService: AbstractConfigDataPersistenceService<IDBSchema>,
     private _credentialsService: CredentialsService,
     private _configurationService: ConfigurationService
-  ) {}
+  ) {
+    this.loadDbSchema();
+  }
 
   private async loadDbSchema(): Promise<IDBSchema[]> {
     if (this.dbSchema) {

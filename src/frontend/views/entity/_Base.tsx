@@ -71,11 +71,11 @@ export function BaseEntitySettingsLayout({ children }: IProps) {
                 name: "Relations",
                 IconComponent: Link2,
               },
-              {
-                action: NAVIGATION_LINKS.ENTITY.CONFIG.SCOPE(entity),
-                name: "Scope",
-                IconComponent: Filter,
-              },
+              // {
+              //   action: NAVIGATION_LINKS.ENTITY.CONFIG.SCOPE(entity),
+              //   name: "Scope",
+              //   IconComponent: Filter,
+              // },
               {
                 action: NAVIGATION_LINKS.ENTITY.CONFIG.FORM(entity),
                 name: "Form",

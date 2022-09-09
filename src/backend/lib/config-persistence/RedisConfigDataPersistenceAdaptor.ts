@@ -1,5 +1,9 @@
 import { RedisClientType } from "redis";
-import { ConfigKeys, ConfigService } from "../config/config.service";
+import {
+  ConfigKeys,
+  ConfigService,
+  configService,
+} from "../config/config.service";
 import { getRedisConnection } from "../connection/redis";
 import { AbstractConfigDataPersistenceService } from "./AbstractConfigDataPersistenceService";
 import { ConfigDomain } from "./types";
@@ -7,26 +11,34 @@ import { ConfigDomain } from "./types";
 export class RedisConfigDataPersistenceAdaptor<
   T
 > extends AbstractConfigDataPersistenceService<T> {
-  private redisConnection: RedisClientType;
+  static _redisConnection: Record<string, RedisClientType | null> = {};
 
-  async getRedisInstance() {
-    if (this.redisConnection) {
-      return this.redisConnection;
+  static async getRedisInstance(
+    configDomain: ConfigDomain
+  ): Promise<RedisClientType> {
+    if (this._redisConnection[configDomain]) {
+      return this._redisConnection[configDomain];
     }
-    this.redisConnection = await getRedisConnection(
-      this.configService.getConfigValue(
-        ConfigKeys.CONFIG_ADAPTOR_CONNECTION_STRING
-      )
+    this._redisConnection[configDomain] = await getRedisConnection(
+      configService.getConfigValue(ConfigKeys.CONFIG_ADAPTOR_CONNECTION_STRING)
     );
-    return this.redisConnection;
+    return this._redisConnection[configDomain];
   }
 
-  constructor(configDomain: ConfigDomain, configService: ConfigService) {
-    super(configDomain, configService);
+  async setup() {
+    await RedisConfigDataPersistenceAdaptor.getRedisInstance(this.configDomain);
+  }
+
+  constructor(configDomain: ConfigDomain, _configService: ConfigService) {
+    super(configDomain, _configService);
   }
 
   async resetToEmpty() {
-    await (await this.getRedisInstance()).del(this.wrapWithConfigDomain());
+    await (
+      await RedisConfigDataPersistenceAdaptor.getRedisInstance(
+        this.configDomain
+      )
+    ).del(this.wrapWithConfigDomain());
   }
 
   private wrapWithConfigDomain() {
@@ -35,7 +47,9 @@ export class RedisConfigDataPersistenceAdaptor<
 
   async getAllItems() {
     const allData = await (
-      await this.getRedisInstance()
+      await RedisConfigDataPersistenceAdaptor.getRedisInstance(
+        this.configDomain
+      )
     ).hGetAll(this.wrapWithConfigDomain());
     return Object.values(allData).map((value) => JSON.parse(value));
   }
@@ -43,26 +57,34 @@ export class RedisConfigDataPersistenceAdaptor<
   async getItem(key: string) {
     return JSON.parse(
       await (
-        await this.getRedisInstance()
+        await RedisConfigDataPersistenceAdaptor.getRedisInstance(
+          this.configDomain
+        )
       ).hGet(this.wrapWithConfigDomain(), key)
     );
   }
 
   async upsertItem(key: string, data: T) {
     await (
-      await this.getRedisInstance()
+      await RedisConfigDataPersistenceAdaptor.getRedisInstance(
+        this.configDomain
+      )
     ).hSet(this.wrapWithConfigDomain(), { [key]: JSON.stringify(data) });
   }
 
   public async removeItem(key: string): Promise<void> {
     await (
-      await this.getRedisInstance()
+      await RedisConfigDataPersistenceAdaptor.getRedisInstance(
+        this.configDomain
+      )
     ).hDel(this.wrapWithConfigDomain(), key);
   }
 
   async saveAllItems(keyField: keyof T, data: T[]) {
     await (
-      await this.getRedisInstance()
+      await RedisConfigDataPersistenceAdaptor.getRedisInstance(
+        this.configDomain
+      )
     ).hSet(
       this.wrapWithConfigDomain(),
       Object.fromEntries(

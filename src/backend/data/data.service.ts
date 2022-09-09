@@ -155,3 +155,7 @@ export class DataService {
 }
 
 export const dataService = new DataService();
+
+(() => {
+  DataService.getInstance();
+})();

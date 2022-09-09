@@ -1,4 +1,5 @@
 import fs from "fs-extra";
+import noop from "lodash/noop";
 import path from "path";
 import { ConfigService, NodeEnvironments } from "../config/config.service";
 
@@ -10,6 +11,10 @@ export class JsonFileConfigDataPersistenceAdaptor<
 > extends AbstractConfigDataPersistenceService<T> {
   constructor(configDomain: ConfigDomain, configService: ConfigService) {
     super(configDomain, configService);
+  }
+
+  async setup() {
+    noop();
   }
 
   private pathToConfigDomain = (type: ConfigDomain) => {

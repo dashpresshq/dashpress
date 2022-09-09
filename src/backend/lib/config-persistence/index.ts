@@ -42,5 +42,7 @@ export function createConfigDomainPersistenceService<T>(
 
   const instance = getInstance();
 
+  instance.setup();
+
   return instance;
 }

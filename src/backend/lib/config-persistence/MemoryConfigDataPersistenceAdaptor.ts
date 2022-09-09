@@ -1,3 +1,4 @@
+import noop from "lodash/noop";
 import { ConfigService } from "../config/config.service";
 import { AbstractConfigDataPersistenceService } from "./AbstractConfigDataPersistenceService";
 import { ConfigDomain } from "./types";
@@ -9,6 +10,10 @@ export class MemoryConfigDataPersistenceAdaptor<
 
   constructor(configDomain: ConfigDomain, configService: ConfigService) {
     super(configDomain, configService);
+  }
+
+  async setup() {
+    noop();
   }
 
   static getDomainData(configDomain: ConfigDomain) {

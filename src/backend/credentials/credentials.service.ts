@@ -8,6 +8,7 @@ import {
 } from "backend/lib/encryption/encryption.service";
 import { ForbiddenError } from "backend/lib/errors";
 import { IApplicationService } from "backend/types";
+import noop from "lodash/noop";
 
 export class CredentialsService implements IApplicationService {
   constructor(
@@ -18,7 +19,11 @@ export class CredentialsService implements IApplicationService {
   ) {}
 
   async bootstrap() {
-    await this._credentialsPersistenceService.setup();
+    try {
+      await this._credentialsPersistenceService.setup();
+    } catch (error) {
+      noop();
+    }
   }
 
   async hasDomainCredentials(domain: string): Promise<boolean> {

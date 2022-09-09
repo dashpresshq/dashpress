@@ -49,11 +49,19 @@ export function CredentialsSetupForm({ onSubmit }: IFormProps<IDBCredentials>) {
               />
             )}
           </Field>
+
+          <Field name="host" validate={required} validateFields={[]}>
+            {({ input, meta }) => (
+              <FormInput label="Host" meta={meta} input={input} />
+            )}
+          </Field>
+
           <Field name="user" validate={required} validateFields={[]}>
             {({ input, meta }) => (
               <FormInput label="User" meta={meta} input={input} />
             )}
           </Field>
+
           <Field name="password" validate={required} validateFields={[]}>
             {({ input, meta }) => (
               <FormInput
@@ -68,12 +76,6 @@ export function CredentialsSetupForm({ onSubmit }: IFormProps<IDBCredentials>) {
           <Field name="database" validate={required} validateFields={[]}>
             {({ input, meta }) => (
               <FormInput label="Database" meta={meta} input={input} />
-            )}
-          </Field>
-
-          <Field name="host" validate={required} validateFields={[]}>
-            {({ input, meta }) => (
-              <FormInput label="Host" meta={meta} input={input} />
             )}
           </Field>
 

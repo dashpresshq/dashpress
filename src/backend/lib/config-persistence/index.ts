@@ -42,13 +42,7 @@ export function createConfigDomainPersistenceService<T>(
 
   const instance = getInstance();
 
-  /*
-  We dont need to setup for tests as it will break it
-  This is because this will run before the test data is setup
-  */
-  if (process.env.NODE_ENV !== "test") {
-    instance.setup();
-  }
+  instance.setup();
 
   return instance;
 }

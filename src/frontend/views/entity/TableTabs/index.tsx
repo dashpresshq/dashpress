@@ -8,7 +8,6 @@ import { useSetPageDetails } from "frontend/lib/routing";
 import { ViewStateMachine } from "frontend/lib/ViewStateMachine";
 import { USER_PERMISSIONS } from "shared/types";
 import { useEntitySlug } from "frontend/hooks/entity/entity.config";
-// import { useUpsertConfigurationMutation } from "frontend/hooks/configuration/configuration.store";
 import { LINK_TO_DOCS } from "frontend/views/constants";
 import {
   useEntityConfiguration,

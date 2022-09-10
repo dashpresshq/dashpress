@@ -29,20 +29,21 @@ interface IProps {
   values: ITableTab[];
 }
 
-function Foo({ values }: IProps) {
+function TabForm({ values }: IProps) {
   const { fields } = useFieldArray("tabs");
   const [currentTab, setCurrentTab] = useState("");
   return (
     <>
-      <SoftButton
-        icon="add"
-        label="Add new tab"
-        action={() => {
-          fields.push({ title: `Tab ${fields.length + 1}`, filters: [] });
-          console.log(fields.value[4].title);
-          setCurrentTab(fields.value[fields.length]?.title);
-        }}
-      />
+      <Stack justify="end">
+        <SoftButton
+          icon="add"
+          label="Add new tab"
+          action={() => {
+            fields.push({ title: `Tab ${fields.length + 1}`, filters: [] });
+            setCurrentTab(`Tab ${fields.length + 1}`);
+          }}
+        />
+      </Stack>
       {values.length > 0 && (
         <Tabs
           currentTab={currentTab}
@@ -54,7 +55,7 @@ function Foo({ values }: IProps) {
                   <DeleteButton
                     onDelete={() => {
                       fields.remove(index);
-                      setCurrentTab(fields.value[index - 1]?.title);
+                      setCurrentTab(`Tab ${index}`);
                     }}
                     shouldConfirmAlert={false}
                     text="Tab"
@@ -92,7 +93,7 @@ export function EntityTableTabForm({
 }: IFormProps<ITableTab[]>) {
   return (
     <Form
-      onSubmit={({ tab }) => onSubmit(tab)}
+      onSubmit={({ tabs }) => onSubmit(tabs)}
       mutators={{
         ...arrayMutators,
       }}
@@ -100,10 +101,11 @@ export function EntityTableTabForm({
       render={({ handleSubmit, values, pristine }) => {
         return (
           <>
-            <Foo values={values.tabs} />
+            <TabForm values={values.tabs} />
+            <Spacer />
             <FormButton
               isMakingRequest={false}
-              onClick={() => handleSubmit(values.tabs)}
+              onClick={handleSubmit}
               text={ButtonLang.upsert}
               disabled={pristine}
             />

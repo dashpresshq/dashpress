@@ -12,7 +12,7 @@ import { ReactNode } from "react";
 import { useEntitySlug } from "frontend/hooks/entity/entity.config";
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
 import { AppLayout } from "frontend/_layouts/app";
-import { Code, Link2, Type, Sliders, File } from "react-feather";
+import { Code, Link2, Type, Filter, Sliders, File } from "react-feather";
 import {
   ENTITY_CRUD_SETTINGS_TAB_LABELS,
   ENTITY_FIELD_SETTINGS_TAB_LABELS,
@@ -71,11 +71,11 @@ export function BaseEntitySettingsLayout({ children }: IProps) {
                 name: "Relations",
                 IconComponent: Link2,
               },
-              // {
-              //   action: NAVIGATION_LINKS.ENTITY.CONFIG.SCOPE(entity),
-              //   name: "Scope",
-              //   IconComponent: Filter,
-              // },
+              {
+                action: NAVIGATION_LINKS.ENTITY.CONFIG.TABLE_TABS(entity),
+                name: "Table Tabs",
+                IconComponent: Filter,
+              },
               {
                 action: NAVIGATION_LINKS.ENTITY.CONFIG.FORM(entity),
                 name: "Form",

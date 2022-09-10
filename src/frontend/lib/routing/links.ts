@@ -48,7 +48,7 @@ export const NAVIGATION_LINKS = {
       ACTIONS: (entity: string) => `/admin/${entity}/config/actions`,
       DICTION: (entity: string) => `/admin/${entity}/config/diction`,
       FORM: (entity: string) => `/admin/${entity}/config/form`,
-      SCOPE: (entity: string) => `/admin/${entity}/config/scope`,
+      TABLE_TABS: (entity: string) => `/admin/${entity}/config/table-tabs`,
       RELATIONS: (entity: string) => `/admin/${entity}/config/relations`,
     },
   },

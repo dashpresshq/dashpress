@@ -12,6 +12,7 @@ export const CONFIGURATION_KEYS: Record<
   | "entity_columns_types"
   | "entity_fields_orders"
   | "entity_crud_settings"
+  | "entity_table_tabs"
   | "entities_order"
   | "default_date_format"
   | "entity_columns_labels"
@@ -67,6 +68,10 @@ export const CONFIGURATION_KEYS: Record<
       update: true,
       delete: true,
     },
+  },
+  entity_table_tabs: {
+    requireEntity: true,
+    defaultValue: [],
   },
   entity_relations_order: {
     requireEntity: true,

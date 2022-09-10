@@ -67,7 +67,10 @@ export const useTableColumns = (entity: string) => {
   const entityFieldSelections = useEntityFieldSelections(entity);
 
   const columnsToShow = useMemo(() => {
-    return fitlerOutHiddenScalarColumns(entityFields, hiddenTableColumns);
+    return fitlerOutHiddenScalarColumns(
+      entityFields.data,
+      hiddenTableColumns.data
+    );
   }, [
     (entityFields?.data || []).length,
     (hiddenTableColumns.data || []).length,

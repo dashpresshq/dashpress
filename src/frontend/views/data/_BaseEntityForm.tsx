@@ -74,9 +74,10 @@ export function BaseEntityForm({
 
   const viewState = useEntityViewStateMachine(isLoading, error, action);
 
-  const fields = fitlerOutHiddenScalarColumns(entityFields, hiddenColumns).map(
-    ({ name }) => name
-  );
+  const fields = fitlerOutHiddenScalarColumns(
+    (entityFields.data || []).filter(({ isId }) => !isId),
+    hiddenColumns.data
+  ).map(({ name }) => name);
 
   const fieldsInitialValues = useMemo(() => {
     if (!initialValues) {

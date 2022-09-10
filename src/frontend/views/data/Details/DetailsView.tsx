@@ -68,37 +68,36 @@ export function EntityDetailsView({
       loader={<ComponentIsLoading />}
     >
       <>
-        {fitlerOutHiddenScalarColumns(entityFields, hiddenDetailsColumns).map(
-          ({ name }) => {
-            const value = dataDetails?.data?.[name];
+        {fitlerOutHiddenScalarColumns(
+          entityFields.data,
+          hiddenDetailsColumns.data
+        ).map(({ name }) => {
+          const value = dataDetails?.data?.[name];
 
-            const specialDataTypeRender = viewSpecialDataTypes(
-              name,
-              value,
-              entityToOneReferenceFields.data || {},
-              entityFieldSelections,
-              entityFieldTypes,
-              {
-                displayFrom,
-                defaultDateFormat: defaultDateFormat.data,
-              }
-            );
+          const specialDataTypeRender = viewSpecialDataTypes(
+            name,
+            value,
+            entityToOneReferenceFields.data || {},
+            entityFieldSelections,
+            entityFieldTypes,
+            {
+              displayFrom,
+              defaultDateFormat: defaultDateFormat.data,
+            }
+          );
 
-            const contentToRender = specialDataTypeRender || (
-              <Text>{value}</Text>
-            );
+          const contentToRender = specialDataTypeRender || <Text>{value}</Text>;
 
-            return (
-              <React.Fragment key={name}>
-                <Text size="6" weight="bold">
-                  {getEntityFieldLabels(name)}
-                </Text>
-                {contentToRender}
-                <Spacer />
-              </React.Fragment>
-            );
-          }
-        )}
+          return (
+            <React.Fragment key={name}>
+              <Text size="6" weight="bold">
+                {getEntityFieldLabels(name)}
+              </Text>
+              {contentToRender}
+              <Spacer />
+            </React.Fragment>
+          );
+        })}
       </>
     </ViewStateMachine>
   );

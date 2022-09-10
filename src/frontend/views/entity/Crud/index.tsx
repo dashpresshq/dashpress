@@ -150,7 +150,7 @@ function useEntityCrudView() {
     [ENTITY_CRUD_SETTINGS_TAB_LABELS.CREATE]: (
       <SelectionTab
         getEntityFieldLabels={getEntityFieldLabels}
-        entityFields={entityFields.data || []}
+        entityFields={(entityFields.data || []).filter(({ isId }) => !isId)}
         isLoading={sharedLoading || hiddenCreateColumns.isLoading}
         hiddenColumns={hiddenCreateColumns.data || []}
         error={error}
@@ -165,7 +165,7 @@ function useEntityCrudView() {
     [ENTITY_CRUD_SETTINGS_TAB_LABELS.UPDATE]: (
       <SelectionTab
         getEntityFieldLabels={getEntityFieldLabels}
-        entityFields={entityFields.data || []}
+        entityFields={(entityFields.data || []).filter(({ isId }) => !isId)}
         isLoading={sharedLoading || hiddenUpdateColumns.isLoading}
         hiddenColumns={hiddenUpdateColumns.data || []}
         error={error}

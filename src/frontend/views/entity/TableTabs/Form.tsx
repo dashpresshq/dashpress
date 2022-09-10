@@ -5,7 +5,7 @@ import {
   required,
 } from "@hadmean/protozoa";
 import { IFormProps } from "frontend/lib/form/types";
-import { QueryFilter } from "shared/types";
+import { ITableTab } from "shared/types";
 import { Form, Field } from "react-final-form";
 import arrayMutators from "final-form-arrays";
 import { useFieldArray } from "react-final-form-arrays";
@@ -19,11 +19,6 @@ import {
   Tabs,
 } from "@hadmean/chromista";
 import React, { useState } from "react";
-
-export type ITableTab = {
-  title: string;
-  filters: QueryFilter[];
-};
 
 interface IProps {
   values: ITableTab[];
@@ -80,6 +75,7 @@ function TabForm({ values }: IProps) {
               </>
             ),
             label: `Tab ${index + 1}`,
+            overrideLabel: fields.value[index]?.title,
           }))}
         />
       )}

@@ -6,7 +6,7 @@ import {
 import { SLUG_LOADING_VALUE } from "@hadmean/protozoa";
 import { useSetPageDetails } from "frontend/lib/routing";
 import { ViewStateMachine } from "frontend/lib/ViewStateMachine";
-import { USER_PERMISSIONS } from "shared/types";
+import { USER_PERMISSIONS, ITableTab } from "shared/types";
 import { useEntitySlug } from "frontend/hooks/entity/entity.config";
 import { LINK_TO_DOCS } from "frontend/views/constants";
 import {
@@ -15,7 +15,7 @@ import {
 } from "frontend/hooks/configuration/configuration.store";
 import { BaseEntitySettingsLayout } from "../_Base";
 import { ENTITY_CONFIGURATION_VIEW } from "../constants";
-import { EntityTableTabForm, ITableTab } from "./Form";
+import { EntityTableTabForm } from "./Form";
 
 export function EntityTableTabsSettings() {
   const entity = useEntitySlug();

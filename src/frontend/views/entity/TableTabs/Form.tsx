@@ -5,32 +5,33 @@ import {
   required,
 } from "@hadmean/protozoa";
 import { IFormProps } from "frontend/lib/form/types";
-import { IEntityField, ITableTab, QueryFilter } from "shared/types";
-import { Form, Field } from "react-final-form";
+import { ITableTab } from "shared/types";
+import { Form, Field, useField } from "react-final-form";
 import arrayMutators from "final-form-arrays";
-import { Row, Col } from "styled-bootstrap-grid";
-import { FieldArray, useFieldArray } from "react-final-form-arrays";
+import { useFieldArray } from "react-final-form-arrays";
 import {
   DeleteButton,
   FormButton,
   FormInput,
-  FormNoValueSelect,
-  FormSelect,
   SoftButton,
   Spacer,
   Stack,
+  Table,
   Tabs,
 } from "@hadmean/chromista";
 import React, { useState } from "react";
+import { useTableColumns } from "frontend/views/data/Table/useTableColumns";
+import { useEntitySlug } from "frontend/hooks/entity/entity.config";
 
 interface IProps {
   values: ITableTab[];
-  entityFields: IEntityField[];
 }
 
-function TabForm({ values, entityFields }: IProps) {
+function TabForm({ values }: IProps) {
   const { fields } = useFieldArray("tabs");
   const [currentTab, setCurrentTab] = useState("");
+  const entity = useEntitySlug();
+  const columns = useTableColumns(entity);
   return (
     <>
       <Stack justify="end">
@@ -40,9 +41,7 @@ function TabForm({ values, entityFields }: IProps) {
           action={() => {
             const newTab: ITableTab = {
               title: `Tab ${fields.length + 1}`,
-              filters: [],
-              orderBy: "desc",
-              sortBy: "",
+              dataState: { filters: [], pageSize: undefined, sortBy: [] },
             };
             fields.push(newTab);
             setCurrentTab(`Tab ${fields.length + 1}`);
@@ -82,96 +81,31 @@ function TabForm({ values, entityFields }: IProps) {
                     />
                   )}
                 </Field>
-                <Row>
-                  <Col md={6} sm={12}>
-                    <Field name={`${field}.sortBy`} validateFields={[]}>
-                      {({ meta, input }) => (
-                        <FormSelect
-                          label="Sort By"
-                          meta={meta}
-                          input={input}
-                          selectData={[
-                            ...entityFields.map(({ name }) => ({
-                              value: name,
-                              label: name,
-                            })),
-                          ]}
-                        />
-                      )}
-                    </Field>
-                  </Col>
-                  <Col md={6} sm={12}>
-                    <Field name={`${field}.orderBy`} validateFields={[]}>
-                      {({ meta, input }) => (
-                        <FormSelect
-                          label="Direction"
-                          meta={meta}
-                          disabled={!fields.value[index].sortBy}
-                          input={input}
-                          selectData={[
-                            {
-                              label: "Descending",
-                              value: "desc",
-                            },
-                            {
-                              label: "Ascending",
-                              value: "asc",
-                            },
-                          ]}
-                        />
-                      )}
-                    </Field>
-                  </Col>
-                </Row>
-                <FieldArray name={`${field}.filters`}>
-                  {({ fields: filterFields }) => (
+                <Field name={`${field}.dataState`} validateFields={[]}>
+                  {({ input }) => (
                     <>
-                      {filterFields.map((name, filterIndex) => (
-                        <React.Fragment key={name}>
-                          <>
-                            <Spacer />
-                            <Stack justify="end">
-                              <DeleteButton
-                                onDelete={() => {
-                                  filterFields.remove(filterIndex);
-                                }}
-                                shouldConfirmAlert={false}
-                                text="Field"
-                                size="xs"
-                              />
-                            </Stack>
-                          </>
-                          <Field name={`${name}.id`} validateFields={[]}>
-                            {({ meta, input }) => (
-                              <FormInput
-                                disabled
-                                label="Field"
-                                required
-                                input={input}
-                                meta={meta}
-                              />
-                            )}
-                          </Field>
-                        </React.Fragment>
-                      ))}
-                      <FormNoValueSelect
-                        disabledOptions={[]}
-                        defaultLabel="Add New Field"
-                        onChange={(filterField) => {
-                          const queryFilter: QueryFilter = {
-                            id: filterField,
-                            value: {},
-                          };
-                          filterFields.push(queryFilter);
+                      {JSON.stringify(input.value)}
+                      <Table
+                        {...{
+                          tableData: {
+                            error: false,
+                            isLoading: false,
+                            isPreviousData: false,
+                            data: {
+                              data: [],
+                              pageIndex: 0,
+                              pageSize: 0,
+                              totalRecords: 0,
+                            },
+                          },
+                          setPaginatedDataState: () => {},
+                          paginatedDataState: input.value,
                         }}
-                        selectData={entityFields.map(({ name }) => ({
-                          label: name,
-                          value: name,
-                        }))}
+                        columns={columns}
                       />
                     </>
                   )}
-                </FieldArray>
+                </Field>
               </>
             ),
             label: `Tab ${index + 1}`,
@@ -186,8 +120,7 @@ function TabForm({ values, entityFields }: IProps) {
 export function EntityTableTabForm({
   onSubmit,
   initialValues,
-  entityFields,
-}: IFormProps<ITableTab[]> & { entityFields: IEntityField[] }) {
+}: IFormProps<ITableTab[]>) {
   return (
     <Form
       onSubmit={({ tabs }) => onSubmit(tabs)}
@@ -198,7 +131,7 @@ export function EntityTableTabForm({
       render={({ handleSubmit, values, pristine }) => {
         return (
           <>
-            <TabForm values={values.tabs} entityFields={entityFields} />
+            <TabForm values={values.tabs} />
             <Spacer />
             <FormButton
               isMakingRequest={false}

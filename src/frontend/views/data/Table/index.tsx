@@ -4,7 +4,12 @@ import {
   useSetPageDetails,
 } from "frontend/lib/routing";
 import { ITableTab, META_USER_PERMISSIONS } from "shared/types";
-import { ComponentIsLoading, StyledCard, Tabs } from "@hadmean/chromista";
+import {
+  ComponentIsLoading,
+  DEFAULT_TABLE_PARAMS,
+  StyledCard,
+  Tabs,
+} from "@hadmean/chromista";
 import { useEntityConfiguration } from "frontend/hooks/configuration/configuration.store";
 import { ViewStateMachine } from "frontend/lib/ViewStateMachine";
 import { AppLayout } from "../../../_layouts/app";
@@ -48,9 +53,7 @@ export function EntityTable() {
 
   const firstTabView: ITableTab = (entityTableTabs.data || [])?.[0] || {
     title: "",
-    filters: [],
-    orderBy: "desc",
-    sortBy: "",
+    dataState: DEFAULT_TABLE_PARAMS,
   };
 
   return (
@@ -67,15 +70,12 @@ export function EntityTable() {
               currentTab={tabFromUrl}
               onChange={changeTabParam}
               contents={(entityTableTabs.data || []).map(
-                ({ filters, title, orderBy, sortBy }) => {
+                ({ title, dataState }) => {
                   return {
                     content: (
                       <EntityTableView
                         entity={entity}
-                        persitentFilters={filters}
-                        defaultOrdering={[
-                          { desc: orderBy === "desc", id: sortBy },
-                        ]}
+                        defaultTableState={dataState}
                       />
                     ),
                     label: title,
@@ -86,13 +86,7 @@ export function EntityTable() {
           ) : (
             <EntityTableView
               entity={entity}
-              persitentFilters={firstTabView.filters}
-              defaultOrdering={[
-                {
-                  id: firstTabView.sortBy,
-                  desc: firstTabView.orderBy === "desc",
-                },
-              ]}
+              defaultTableState={firstTabView.dataState}
             />
           )}
         </ViewStateMachine>

@@ -6,7 +6,7 @@ import {
 } from "@hadmean/protozoa";
 import { IFormProps } from "frontend/lib/form/types";
 import { ITableTab } from "shared/types";
-import { Form, Field, useField } from "react-final-form";
+import { Form, Field } from "react-final-form";
 import arrayMutators from "final-form-arrays";
 import { useFieldArray } from "react-final-form-arrays";
 import {
@@ -83,27 +83,24 @@ function TabForm({ values }: IProps) {
                 </Field>
                 <Field name={`${field}.dataState`} validateFields={[]}>
                   {({ input }) => (
-                    <>
-                      {JSON.stringify(input.value)}
-                      <Table
-                        {...{
-                          tableData: {
-                            error: false,
-                            isLoading: false,
-                            isPreviousData: false,
-                            data: {
-                              data: [],
-                              pageIndex: 0,
-                              pageSize: 0,
-                              totalRecords: 0,
-                            },
+                    <Table
+                      {...{
+                        tableData: {
+                          error: false,
+                          isLoading: false,
+                          isPreviousData: false,
+                          data: {
+                            data: [],
+                            pageIndex: 0,
+                            pageSize: 10,
+                            totalRecords: 1,
                           },
-                          setPaginatedDataState: () => {},
-                          paginatedDataState: input.value,
-                        }}
-                        columns={columns}
-                      />
-                    </>
+                        },
+                        setPaginatedDataState: input.onChange,
+                        paginatedDataState: input.value,
+                      }}
+                      columns={columns}
+                    />
                   )}
                 </Field>
               </>

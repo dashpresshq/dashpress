@@ -90,6 +90,7 @@ function TabForm({ values }: IProps) {
             </Field>
             <Field name={`${field}.dataState`} validateFields={[]}>
               {({ input }) => (
+                // TODO implement, `isNull`, `isNotNull`, `currentUser`
                 <Table
                   {...{
                     tableData: {

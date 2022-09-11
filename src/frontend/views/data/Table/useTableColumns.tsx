@@ -22,6 +22,8 @@ import { fitlerOutHiddenScalarColumns } from "../utils";
 import { TableActions } from "./Actions";
 import { viewSpecialDataTypes } from "../viewSpecialDataTypes";
 
+export const ACTIONS_ACCESSOR = "__actions__";
+
 const buildFilterConfigFromType = (
   entityType: keyof typeof FIELD_TYPES_CONFIG_MAP,
   entityFieldSelections: IColorableSelection[],
@@ -140,7 +142,7 @@ export const useTableColumns = (entity: string) => {
   ) {
     columns.push({
       Header: "Actions",
-      accessor: "__actions__",
+      accessor: ACTIONS_ACCESSOR,
       disableSortBy: true,
       Cell: ({ row }: { row: { original: Record<string, unknown> } }) => (
         <TableActions

@@ -48,7 +48,7 @@ export function EntityTableTabsSettings() {
           {
             action: LINK_TO_DOCS("app-configuration/table-tabs"),
             icon: "help",
-            label: "Table Tabs Documentation TODO",
+            label: "Table Tabs Documentation",
           },
         ]}
       >
@@ -57,7 +57,7 @@ export function EntityTableTabsSettings() {
           error={error}
           loader={
             <FormSkeleton
-              schema={[FormSkeletonSchema.Input, FormSkeletonSchema.Input]}
+              schema={[FormSkeletonSchema.Input, FormSkeletonSchema.Textarea]}
             />
           }
         >

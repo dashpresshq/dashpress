@@ -7,7 +7,7 @@ import {
   Text,
 } from "@hadmean/chromista";
 import styled from "styled-components";
-import * as StyledGrid from "styled-bootstrap-grid";
+import { Row, Col } from "styled-bootstrap-grid";
 import { useRouter } from "next/router";
 import { Settings } from "react-feather";
 import { useEntitiesCount } from "frontend/hooks/data/data.store";
@@ -52,9 +52,9 @@ export function Dashboard() {
         error={entitiesMenuItems.error}
         loader={<ComponentIsLoading />}
       >
-        <StyledGrid.Row>
+        <Row>
           {entitiesMenuItems.data.map((field) => (
-            <StyledGrid.Col lg={4} md={6} sm={12} key={field.value}>
+            <Col lg={4} md={6} sm={12} key={field.value}>
               <StyledCard>
                 <StyledBox>
                   <Stack justify="space-between">
@@ -76,9 +76,9 @@ export function Dashboard() {
                 </StyledBox>
               </StyledCard>
               <Spacer size="xl" />
-            </StyledGrid.Col>
+            </Col>
           ))}
-        </StyledGrid.Row>
+        </Row>
       </ViewStateMachine>
     </AppLayout>
   );

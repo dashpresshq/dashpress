@@ -11,6 +11,7 @@ import {
   usePaginatedData,
   SLUG_LOADING_VALUE,
   IFEPaginatedDataState,
+  OrderValue,
 } from "@hadmean/protozoa";
 import { useState } from "react";
 import { QueryFilter } from "shared/types";
@@ -30,9 +31,14 @@ import { EntityDetailsView } from "../Details/DetailsView";
 interface IProps {
   entity: string;
   persitentFilters?: QueryFilter[];
+  defaultOrdering?: OrderValue[];
 }
 
-export function EntityTableView({ entity, persitentFilters = [] }: IProps) {
+export function EntityTableView({
+  entity,
+  persitentFilters = [],
+  defaultOrdering = [],
+}: IProps) {
   const entityFields = useEntityFields(entity);
   const entityCrudSettings = useEntityCrudSettings(entity);
   const hiddenTableColumns = useSelectedEntityColumns(
@@ -54,6 +60,10 @@ export function EntityTableView({ entity, persitentFilters = [] }: IProps) {
         >),
         ...persitentFilters,
       ],
+      sortBy:
+        paginatedDataState?.sortBy && paginatedDataState.sortBy.length > 0
+          ? paginatedDataState.sortBy
+          : defaultOrdering,
     },
     {
       enabled: entity && entity !== SLUG_LOADING_VALUE,

@@ -5,14 +5,16 @@ import {
   required,
 } from "@hadmean/protozoa";
 import { IFormProps } from "frontend/lib/form/types";
-import { ITableTab } from "shared/types";
+import { IEntityField, ITableTab } from "shared/types";
 import { Form, Field } from "react-final-form";
 import arrayMutators from "final-form-arrays";
+import { Row, Col } from "styled-bootstrap-grid";
 import { useFieldArray } from "react-final-form-arrays";
 import {
   DeleteButton,
   FormButton,
   FormInput,
+  FormSelect,
   SoftButton,
   Spacer,
   Stack,
@@ -22,9 +24,10 @@ import React, { useState } from "react";
 
 interface IProps {
   values: ITableTab[];
+  entityFields: IEntityField[];
 }
 
-function TabForm({ values }: IProps) {
+function TabForm({ values, entityFields }: IProps) {
   const { fields } = useFieldArray("tabs");
   const [currentTab, setCurrentTab] = useState("");
   return (
@@ -34,7 +37,13 @@ function TabForm({ values }: IProps) {
           icon="add"
           label="Add new tab"
           action={() => {
-            fields.push({ title: `Tab ${fields.length + 1}`, filters: [] });
+            const newTab: ITableTab = {
+              title: `Tab ${fields.length + 1}`,
+              filters: [],
+              orderBy: "desc",
+              sortBy: "",
+            };
+            fields.push(newTab);
             setCurrentTab(`Tab ${fields.length + 1}`);
           }}
         />
@@ -72,6 +81,47 @@ function TabForm({ values }: IProps) {
                     />
                   )}
                 </Field>
+                <Row>
+                  <Col md={6} sm={12}>
+                    <Field name={`${field}.sortBy`} validateFields={[]}>
+                      {({ meta, input }) => (
+                        <FormSelect
+                          label="Sort By"
+                          meta={meta}
+                          input={input}
+                          selectData={[
+                            ...entityFields.map(({ name }) => ({
+                              value: name,
+                              label: name,
+                            })),
+                          ]}
+                        />
+                      )}
+                    </Field>
+                  </Col>
+                  <Col md={6} sm={12}>
+                    <Field name={`${field}.orderBy`} validateFields={[]}>
+                      {({ meta, input }) => (
+                        <FormSelect
+                          label="Direction"
+                          meta={meta}
+                          disabled={!fields.value[index].sortBy}
+                          input={input}
+                          selectData={[
+                            {
+                              label: "Descending",
+                              value: "desc",
+                            },
+                            {
+                              label: "Ascending",
+                              value: "asc",
+                            },
+                          ]}
+                        />
+                      )}
+                    </Field>
+                  </Col>
+                </Row>
               </>
             ),
             label: `Tab ${index + 1}`,
@@ -86,7 +136,8 @@ function TabForm({ values }: IProps) {
 export function EntityTableTabForm({
   onSubmit,
   initialValues,
-}: IFormProps<ITableTab[]>) {
+  entityFields,
+}: IFormProps<ITableTab[]> & { entityFields: IEntityField[] }) {
   return (
     <Form
       onSubmit={({ tabs }) => onSubmit(tabs)}
@@ -97,7 +148,7 @@ export function EntityTableTabForm({
       render={({ handleSubmit, values, pristine }) => {
         return (
           <>
-            <TabForm values={values.tabs} />
+            <TabForm values={values.tabs} entityFields={entityFields} />
             <Spacer />
             <FormButton
               isMakingRequest={false}

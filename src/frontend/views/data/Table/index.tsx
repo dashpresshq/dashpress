@@ -46,6 +46,13 @@ export function EntityTable() {
   const tabFromUrl = useRouteParam("tab");
   const changeTabParam = useChangeRouterParam("tab");
 
+  const firstTabView: ITableTab = (entityTableTabs.data || [])?.[0] || {
+    title: "",
+    filters: [],
+    orderBy: "desc",
+    sortBy: "",
+  };
+
   return (
     <AppLayout actionItems={menuItems} secondaryActionItems={actionItems}>
       <StyledCard>
@@ -60,21 +67,32 @@ export function EntityTable() {
               currentTab={tabFromUrl}
               onChange={changeTabParam}
               contents={(entityTableTabs.data || []).map(
-                ({ filters, title }) => ({
-                  content: (
-                    <EntityTableView
-                      entity={entity}
-                      persitentFilters={filters}
-                    />
-                  ),
-                  label: title,
-                })
+                ({ filters, title, orderBy, sortBy }) => {
+                  return {
+                    content: (
+                      <EntityTableView
+                        entity={entity}
+                        persitentFilters={filters}
+                        defaultOrdering={[
+                          { desc: orderBy === "desc", id: sortBy },
+                        ]}
+                      />
+                    ),
+                    label: title,
+                  };
+                }
               )}
             />
           ) : (
             <EntityTableView
               entity={entity}
-              persitentFilters={(entityTableTabs.data || [])?.[0]?.filters}
+              persitentFilters={firstTabView.filters}
+              defaultOrdering={[
+                {
+                  id: firstTabView.sortBy,
+                  desc: firstTabView.orderBy === "desc",
+                },
+              ]}
             />
           )}
         </ViewStateMachine>

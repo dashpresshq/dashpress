@@ -13,6 +13,7 @@ import {
   useEntityConfiguration,
   useUpsertConfigurationMutation,
 } from "frontend/hooks/configuration/configuration.store";
+import { useEntityFields } from "frontend/hooks/entity/entity.store";
 import { BaseEntitySettingsLayout } from "../_Base";
 import { ENTITY_CONFIGURATION_VIEW } from "../constants";
 import { EntityTableTabForm } from "./Form";
@@ -30,11 +31,20 @@ export function EntityTableTabsSettings() {
     entity
   );
 
+  const entityFields = useEntityFields(entity);
+
   useSetPageDetails({
     pageTitle: "Table Tabs Settings",
     viewKey: ENTITY_CONFIGURATION_VIEW,
     permission: USER_PERMISSIONS.CAN_CONFIGURE_APP,
   });
+
+  const isLoading =
+    entity === SLUG_LOADING_VALUE ||
+    entityFields.isLoading ||
+    entityTableTabs.isLoading;
+
+  const error = entityFields.error || entityTableTabs.error;
 
   return (
     <BaseEntitySettingsLayout>
@@ -49,8 +59,8 @@ export function EntityTableTabsSettings() {
         ]}
       >
         <ViewStateMachine
-          loading={entity === SLUG_LOADING_VALUE}
-          error={false}
+          loading={isLoading}
+          error={error}
           loader={
             <FormSkeleton
               schema={[FormSkeletonSchema.Input, FormSkeletonSchema.Input]}
@@ -62,6 +72,7 @@ export function EntityTableTabsSettings() {
             onSubmit={async (data) => {
               await upsertEntityTableTabsMutation.mutateAsync(data);
             }}
+            entityFields={entityFields.data || []}
           />
         </ViewStateMachine>
       </SectionBox>

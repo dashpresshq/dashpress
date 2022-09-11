@@ -32,10 +32,30 @@ function TabForm({ values }: IProps) {
   const [currentTab, setCurrentTab] = useState("");
   const entity = useEntitySlug();
   const columns = useTableColumns(entity);
+
+  const newTabButton = (
+    <SoftButton
+      icon="add"
+      label="Add new tab"
+      action={() => {
+        const newTab: ITableTab = {
+          title: `Tab ${fields.length + 1}`,
+          dataState: {
+            filters: [],
+            pageSize: undefined,
+            sortBy: [],
+          },
+        };
+        fields.push(newTab);
+        setCurrentTab(`Tab ${fields.length + 1}`);
+      }}
+    />
+  );
+
   return (
     <>
       <Stack justify="end">
-        <SoftButton
+        {/* <SoftButton
           icon="add"
           label="Add new tab"
           action={() => {
@@ -46,9 +66,9 @@ function TabForm({ values }: IProps) {
             fields.push(newTab);
             setCurrentTab(`Tab ${fields.length + 1}`);
           }}
-        />
+        /> */}
       </Stack>
-      {values.length > 0 && (
+      {values.length > 0 ? (
         <Tabs
           currentTab={currentTab}
           onChange={setCurrentTab}
@@ -65,6 +85,7 @@ function TabForm({ values }: IProps) {
                     text="Tab"
                     size="xs"
                   />
+                  {newTabButton}
                 </Stack>
                 <Spacer />
                 <Field
@@ -93,7 +114,7 @@ function TabForm({ values }: IProps) {
                             data: [],
                             pageIndex: 0,
                             pageSize: 10,
-                            totalRecords: 1,
+                            totalRecords: 0,
                           },
                         },
                         setPaginatedDataState: input.onChange,
@@ -109,6 +130,8 @@ function TabForm({ values }: IProps) {
             overrideLabel: fields.value[index]?.title,
           }))}
         />
+      ) : (
+        <Stack justify="end">{newTabButton}</Stack>
       )}
     </>
   );
@@ -125,17 +148,17 @@ export function EntityTableTabForm({
         ...arrayMutators,
       }}
       initialValues={{ tabs: initialValues }}
-      render={({ handleSubmit, values, pristine }) => {
+      render={({ handleSubmit, values, pristine, submitting }) => {
         return (
           <>
-            <TabForm values={values.tabs} />
-            <Spacer />
             <FormButton
-              isMakingRequest={false}
+              isMakingRequest={submitting}
               onClick={handleSubmit}
-              text={ButtonLang.upsert}
+              text={`${ButtonLang.upsert} Changes`}
               disabled={pristine}
             />
+            <Spacer />
+            <TabForm values={values.tabs} />
           </>
         );
       }}

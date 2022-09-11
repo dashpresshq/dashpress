@@ -24,7 +24,10 @@ import {
   ButtonLang,
 } from "@hadmean/protozoa";
 import React from "react";
-import { IFieldValidationItem } from "shared/validations/types";
+import {
+  IFieldValidationItem,
+  ValidationTypes,
+} from "shared/validations/types";
 
 interface IProps {
   field: string;
@@ -147,13 +150,14 @@ export function FieldValidationCanvas({
                     values.validations as IFieldValidationItem[]
                   ).map(({ validationType }) => validationType)}
                   defaultLabel="Add New Validation"
-                  onChange={(validationType) => {
-                    fields.push({
+                  onChange={(validationType: ValidationTypes) => {
+                    const validationItem: IFieldValidationItem = {
                       validationType,
                       errorMessage:
                         ENTITY_VALIDATION_CONFIG[validationType].message,
                       constraint: {},
-                    } as IFieldValidationItem);
+                    };
+                    fields.push(validationItem);
                   }}
                   selectData={allowedValidations.map((validation) => ({
                     label: validation,

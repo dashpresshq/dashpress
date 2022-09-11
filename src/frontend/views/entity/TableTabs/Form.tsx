@@ -5,15 +5,16 @@ import {
   required,
 } from "@hadmean/protozoa";
 import { IFormProps } from "frontend/lib/form/types";
-import { IEntityField, ITableTab } from "shared/types";
+import { IEntityField, ITableTab, QueryFilter } from "shared/types";
 import { Form, Field } from "react-final-form";
 import arrayMutators from "final-form-arrays";
 import { Row, Col } from "styled-bootstrap-grid";
-import { useFieldArray } from "react-final-form-arrays";
+import { FieldArray, useFieldArray } from "react-final-form-arrays";
 import {
   DeleteButton,
   FormButton,
   FormInput,
+  FormNoValueSelect,
   FormSelect,
   SoftButton,
   Spacer,
@@ -122,6 +123,55 @@ function TabForm({ values, entityFields }: IProps) {
                     </Field>
                   </Col>
                 </Row>
+                <FieldArray name={`${field}.filters`}>
+                  {({ fields: filterFields }) => (
+                    <>
+                      {filterFields.map((name, filterIndex) => (
+                        <React.Fragment key={name}>
+                          <>
+                            <Spacer />
+                            <Stack justify="end">
+                              <DeleteButton
+                                onDelete={() => {
+                                  filterFields.remove(filterIndex);
+                                }}
+                                shouldConfirmAlert={false}
+                                text="Field"
+                                size="xs"
+                              />
+                            </Stack>
+                          </>
+                          <Field name={`${name}.id`} validateFields={[]}>
+                            {({ meta, input }) => (
+                              <FormInput
+                                disabled
+                                label="Field"
+                                required
+                                input={input}
+                                meta={meta}
+                              />
+                            )}
+                          </Field>
+                        </React.Fragment>
+                      ))}
+                      <FormNoValueSelect
+                        disabledOptions={[]}
+                        defaultLabel="Add New Field"
+                        onChange={(filterField) => {
+                          const queryFilter: QueryFilter = {
+                            id: filterField,
+                            value: {},
+                          };
+                          filterFields.push(queryFilter);
+                        }}
+                        selectData={entityFields.map(({ name }) => ({
+                          label: name,
+                          value: name,
+                        }))}
+                      />
+                    </>
+                  )}
+                </FieldArray>
               </>
             ),
             label: `Tab ${index + 1}`,
@@ -162,89 +212,3 @@ export function EntityTableTabForm({
     />
   );
 }
-
-/* <FieldArray name="filters">
-            {({ fields }) => (
-              <div>
-                {fields.map((name) => {
-                  //   const { validationType, fromSchema }: IFieldValidationItem =
-                  //     values.validations[index];
-
-                  return (
-                    <React.Fragment key={name}>
-                      <Field
-                        name={`${name}.title`}
-                        validate={composeValidators(required, maxLength(64))}
-                        validateFields={[]}
-                      >
-                        {({ meta, input }) => (
-                          <FormInput
-                            label="Title"
-                            required
-                            meta={meta}
-                            input={input}
-                          />
-                        )}
-                      </Field> */
-/* {validationInput && (
-                        <>
-                          {Object.entries(validationInput).map(
-                            ([inputKey, inputValue]) => (
-                              <Field
-                                key={inputKey}
-                                name={`${name}.constraint.${inputKey}`}
-                                validate={composeValidators(required)}
-                                validateFields={[]}
-                              >
-                                {({ meta, input }) => (
-                                  <Stack justify="space-between" align="center">
-                                    <Text>{userFriendlyCase(inputKey)}</Text>
-                                    {typeof inputValue === "string" ? (
-                                      <FormInput
-                                        label=""
-                                        required
-                                        meta={meta}
-                                        input={input}
-                                      />
-                                    ) : (
-                                      <FormNumberInput
-                                        label=""
-                                        required
-                                        meta={meta}
-                                        input={input}
-                                      />
-                                    )}
-                                  </Stack>
-                                )}
-                              </Field>
-                            )
-                          )}
-                        </>
-                      )} */
-/* <Spacer />
-                    </React.Fragment>
-                  );
-                })} */
-/* <FormNoValueSelect
-                  disabledOptions={(
-                    values.validations as IFieldValidationItem[]
-                  ).map(({ validationType }) => validationType)}
-                  defaultLabel="Add New Field"
-                  onChange={(validationType) => {
-                    fields.push({
-                      validationType,
-                      errorMessage:
-                        ENTITY_VALIDATION_CONFIG[validationType].message,
-                      constraint: {},
-                    } as IFieldValidationItem);
-                  }}
-                  selectData={allowedValidations.map((validation) => ({
-                    label: validation,
-                    value: validation,
-                  }))}
-                /> */
-/* </div>
-            )}
-          </FieldArray>
-          <Spacer />
-       */

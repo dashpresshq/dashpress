@@ -6,9 +6,12 @@ import {
   Stack,
   Text,
   DeleteButton,
+  OffCanvas,
+  FormNoValueSelect,
+  FormInput,
 } from "@hadmean/chromista";
 import styled from "styled-components";
-import { Check, Settings } from "react-feather";
+import { Check, Plus, Settings } from "react-feather";
 import { useEntitiesCount } from "frontend/hooks/data/data.store";
 import { useSetPageDetails } from "frontend/lib/routing";
 import { META_USER_PERMISSIONS } from "shared/types";
@@ -36,6 +39,8 @@ const Root = styled.div`
     user-select: none;
   }
 `;
+
+const NEW_DASHBOARD_ITEM = "__new_dashboard_item__";
 
 export function Dashboard() {
   const entitiesMenuItems = useEntitiesMenuItems();
@@ -65,76 +70,142 @@ export function Dashboard() {
     setManagingDashboard(!managingDashboard);
   };
 
+  const [currentDashboardItem, setCurrentDashboardItem] = useState("");
+
+  const closeDashboardItem = () => {
+    setCurrentDashboardItem("");
+  };
+
   return (
-    <AppLayout
-      actionItems={[
-        {
-          label: managingDashboard ? " Done " : "Manage Dashboard",
-          IconComponent: managingDashboard ? Check : Settings,
-          onClick: toggleManagingState,
-        },
-      ]}
-    >
-      <ViewStateMachine
-        loading={entitiesMenuItems.isLoading}
-        error={entitiesMenuItems.error}
-        loader={<ComponentIsLoading />}
+    <>
+      <AppLayout
+        secondaryActionItems={[
+          {
+            label: managingDashboard ? " Done " : "Manage Dashboard",
+            IconComponent: managingDashboard ? Check : Settings,
+            onClick: toggleManagingState,
+          },
+        ]}
+        actionItems={
+          managingDashboard
+            ? [
+                {
+                  label: "New Dashboard Item",
+                  IconComponent: Plus,
+                  onClick: () => setCurrentDashboardItem(NEW_DASHBOARD_ITEM),
+                },
+              ]
+            : []
+        }
       >
-        <Root>
-          <SortableList
-            onSortEnd={onSortEnd}
-            className="list"
-            draggedItemClassName="dragged"
-          >
-            {items.map((field) => (
-              <SortableItem key={field.label}>
-                <div className="item">
-                  <StyledCard>
-                    <StyledBox>
-                      <Stack justify="space-between">
-                        <Text size="4">{field.label}</Text>
-                        <Stack width="auto">
-                          {managingDashboard ? (
-                            <>
+        <ViewStateMachine
+          loading={entitiesMenuItems.isLoading}
+          error={entitiesMenuItems.error}
+          loader={<ComponentIsLoading />}
+        >
+          <Root>
+            <SortableList
+              onSortEnd={onSortEnd}
+              className="list"
+              draggedItemClassName="dragged"
+            >
+              {items.map((field) => (
+                <SortableItem key={field.label}>
+                  <div className="item">
+                    <StyledCard>
+                      <StyledBox>
+                        <Stack justify="space-between">
+                          <Text size="4">{field.label}</Text>
+                          <Stack width="auto">
+                            {managingDashboard ? (
+                              <>
+                                <SoftButton
+                                  action={() =>
+                                    setCurrentDashboardItem(field.label)
+                                  }
+                                  icon="edit"
+                                />
+                                <DeleteButton
+                                  onDelete={() => {}}
+                                  isMakingDeleteRequest={false}
+                                  shouldConfirmAlert
+                                />
+                              </>
+                            ) : (
                               <SoftButton
                                 action={NAVIGATION_LINKS.ENTITY.TABLE(
                                   field.value
                                 )}
-                                icon="edit"
+                                icon="eye"
                               />
-                              <DeleteButton
-                                onDelete={() => {}}
-                                isMakingDeleteRequest={false}
-                                shouldConfirmAlert
-                              />
-                            </>
-                          ) : (
-                            <SoftButton
-                              action={NAVIGATION_LINKS.ENTITY.TABLE(
-                                field.value
-                              )}
-                              icon="eye"
-                            />
-                          )}
-                        </Stack>
-                      </Stack>
-                      <Spacer size="xs" />
-                      <Text size="3" weight="bold">
-                        {entitiesCount.data[field.value]?.isLoading
-                          ? "Counting..."
-                          : Intl.NumberFormat("en-US").format(
-                              entitiesCount.data[field.value]?.data?.count || 0
                             )}
-                      </Text>
-                    </StyledBox>
-                  </StyledCard>
-                  <Spacer size="xl" />
-                </div>
-              </SortableItem>
-            ))}
-          </SortableList>
-        </Root>
-      </ViewStateMachine>
-    </AppLayout>
+                          </Stack>
+                        </Stack>
+                        <Spacer size="xs" />
+                        <Text size="3" weight="bold">
+                          {entitiesCount.data[field.value]?.isLoading
+                            ? "Counting..."
+                            : Intl.NumberFormat("en-US").format(
+                                entitiesCount.data[field.value]?.data?.count ||
+                                  0
+                              )}
+                        </Text>
+                      </StyledBox>
+                    </StyledCard>
+                    <Spacer size="xl" />
+                  </div>
+                </SortableItem>
+              ))}
+            </SortableList>
+          </Root>
+        </ViewStateMachine>
+      </AppLayout>
+
+      <OffCanvas
+        title={
+          currentDashboardItem === NEW_DASHBOARD_ITEM
+            ? "New Dashboard Item"
+            : currentDashboardItem
+        }
+        onClose={closeDashboardItem}
+        show={!!currentDashboardItem}
+      >
+        <FormNoValueSelect
+          disabledOptions={[]}
+          selectData={[
+            {
+              label: "Summary Card",
+              value: "Summary Card",
+            },
+            {
+              label: "Bar Chart",
+              value: "Bar Chart",
+            },
+            {
+              label: "Line Chart",
+              value: "Line Chart",
+            },
+            {
+              label: "Pie Chart",
+              value: "Pie Chart",
+            },
+            {
+              label: "Pivot Table",
+              value: "Pivot Table",
+            },
+            {
+              label: "Table",
+              value: "Table",
+            },
+            {
+              label: "Histogram",
+              value: "Histogram",
+            },
+          ]}
+          onChange={() => {}}
+        />
+        {currentDashboardItem}
+      </OffCanvas>
+    </>
   );
 }

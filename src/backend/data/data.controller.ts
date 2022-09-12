@@ -1,7 +1,6 @@
 import { TemplateService } from "shared/lib/templates";
 import { IEntityField, QueryFilter } from "shared/types";
 import { FilterOperators } from "@hadmean/chromista";
-import { AbstractCacheService, createCacheService } from "backend/lib/cache";
 import { IFieldValidationItem } from "shared/validations/types";
 // import { runValidationError } from "shared/validations/run";
 import noop from "lodash/noop";
@@ -22,8 +21,7 @@ export class DataController {
   constructor(
     private _dataService: DataService,
     private _entitiesService: EntitiesService,
-    private _configurationService: ConfigurationService,
-    private _cacheService: AbstractCacheService
+    private _configurationService: ConfigurationService
   ) {}
 
   async listData(
@@ -72,33 +70,35 @@ export class DataController {
     if (relationshipSettings.fields.length > 0) {
       return relationshipSettings;
     }
-    const displayField = await this._cacheService.getItem(
-      `computed-relationship-field-${entity}`,
-      async () => {
-        const [hiddenColumns, primaryField, entityFields] = await Promise.all([
-          this._configurationService.show<string[]>(
-            "hidden_entity_table_columns",
-            entity
-          ),
-          this._entitiesService.getEntityPrimaryField(entity),
-          this._entitiesService.getEntityFields(entity),
-        ]);
+    const [hiddenColumns, primaryField, entityFields] = await Promise.all([
+      this._configurationService.show<string[]>(
+        "hidden_entity_table_columns",
+        entity
+      ),
+      this._entitiesService.getEntityPrimaryField(entity),
+      this._entitiesService.getEntityFields(entity),
+    ]);
+    const displayField =
+      entityFields.filter((field) => {
         return (
-          entityFields.filter((field) => {
-            return (
-              field.name !== primaryField &&
-              !hiddenColumns.includes(field.name) &&
-              GOOD_FIELD_TYPES_FOR_LIST.includes(field.type)
-            );
-          })[0]?.name || primaryField
+          field.name !== primaryField &&
+          !hiddenColumns.includes(field.name) &&
+          GOOD_FIELD_TYPES_FOR_LIST.includes(field.type)
         );
-      }
-    );
+      })[0]?.name || primaryField;
 
-    return {
+    const configuration = {
       fields: [displayField],
       format: `{{ ${displayField} }}`,
     };
+
+    await this._configurationService.upsert(
+      "entity_relation_template",
+      configuration,
+      entity
+    );
+    // :eyes
+    return configuration;
   }
 
   async referenceData(entity: string, id: string): Promise<string> {
@@ -262,11 +262,8 @@ export class DataController {
   }
 }
 
-const cacheService = createCacheService("data");
-
 export const dataController = new DataController(
   dataService,
   entitiesService,
-  configurationService,
-  cacheService // :eyes needs to be boostrap
+  configurationService
 );

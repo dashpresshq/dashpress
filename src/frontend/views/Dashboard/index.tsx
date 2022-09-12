@@ -8,7 +8,6 @@ import {
   DeleteButton,
   OffCanvas,
   FormNoValueSelect,
-  FormInput,
 } from "@hadmean/chromista";
 import styled from "styled-components";
 import { Check, Plus, Settings } from "react-feather";

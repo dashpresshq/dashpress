@@ -40,6 +40,14 @@ export class MemoryConfigDataPersistenceAdaptor<
     );
   }
 
+  async getAllItemsIn(itemIds: string[]) {
+    const allItems = MemoryConfigDataPersistenceAdaptor.getDomainData(
+      this.configDomain
+    );
+
+    return itemIds.map((itemId) => allItems[itemId]);
+  }
+
   async getItem(key: string) {
     const currentItem = MemoryConfigDataPersistenceAdaptor.getDomainData(
       this.configDomain

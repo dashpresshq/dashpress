@@ -83,7 +83,9 @@ export class DashboardService implements IApplicationService {
     }
 
     const dashboardItems =
-      (await this._dashboardPersistenceService.getAllItems()) as IDashboardConfig[];
+      (await this._dashboardPersistenceService.getAllItemsIn(
+        itemsList
+      )) as IDashboardConfig[];
 
     return this.buildDashboardItems(itemsList, dashboardItems);
   }

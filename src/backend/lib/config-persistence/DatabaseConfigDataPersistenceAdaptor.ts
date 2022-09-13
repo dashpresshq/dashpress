@@ -74,6 +74,21 @@ export class DatabaseConfigDataPersistenceAdaptor<
     return items.map(({ value }) => JSON.parse(value));
   }
 
+  async getAllItemsIn(itemIds: string[]) {
+    const query = (
+      await DatabaseConfigDataPersistenceAdaptor.getDbInstance(
+        this.configDomain
+      )
+    )
+      .select(["value", "key"])
+      .whereIn("key", itemIds)
+      .from(CONFIG_TABLE_PREFIX(this.configDomain));
+
+    const items = await query;
+
+    return items.map(({ value }) => JSON.parse(value));
+  }
+
   async getItem(key: string) {
     const connection = await DatabaseConfigDataPersistenceAdaptor.getDbInstance(
       this.configDomain

@@ -2,6 +2,7 @@ export type ConfigDomain =
   | "users"
   | "schema"
   | "credentials"
+  | "dashboard"
   | "app-config"
   | "roles";
 

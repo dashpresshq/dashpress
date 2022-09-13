@@ -10,7 +10,7 @@ const server = setupApiHandlers();
 
 /*
  Because react-query caches the get responses and there is no external way of clearing it
- As the expose way is through hooks and that wont work here
+ As the way to clear is through hooks and that wont work here
  So to simulate multiple setup check responses 
  A new file has to be created for all the difference cases
  :face-palm

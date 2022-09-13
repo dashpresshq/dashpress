@@ -1,42 +1,61 @@
 /*
 
 // List Dashboard
-
 List Dashboard Items
+
+Sort Dashboard
+New Dashboard Item
 Delete Dashboard Item
 Update Dasbboard Item
-New Dashboard Item
-Sort Dashboard
 */
 
-import { QueryFilter } from "shared/types";
+import { dashboardController } from "backend/dashboard/dashboard.controller";
+import { USER_PERMISSIONS } from "shared/types";
+import { dataController } from "../../../../backend/dashboard/dashboard.controller";
+import { requestHandler } from "../../../backend/lib/request";
 
-const schema: Record<
-  string,
+const HOME_KEY = "__home__";
+
+export default requestHandler(
   {
-    title: string;
-    svg?: string;
-    config:
-      | { _type: "table"; model: string; filter: QueryFilter[] }
-      | {
-          _type: "summary-card";
-          model: string;
-          statusIndicator:
-            | false
-            | {
-                field: string;
-                period: "day" | "week" | "month" | "quarter" | "year";
-              };
-        };
-  }[]
-> = {
-  home: [
-    {
-      title: "Deal Images",
-      svg: "foo",
-      config: { _type: "summary-card", model: "users", statusIndicator: false },
+    GET: async (getValidatedRequest) => {
+      const validatedRequest = await getValidatedRequest([
+        "entity",
+        {
+          _type: "requestQuery",
+          options: "search",
+        },
+      ]);
+      return await dataController.listData(
+        validatedRequest.entity,
+        validatedRequest.requestQuery
+      );
     },
-  ],
-};
-
-console.log(schema);
+    POST: async (getValidatedRequest) => {
+      const validatedRequest = await getValidatedRequest([
+        "entity",
+        { _type: "requestBody", options: {} },
+      ]);
+      return await dashboardController.createDashboard(
+        validatedRequest.entity,
+        validatedRequest.requestBody
+      );
+    },
+    PATCH: async (getValidatedRequest) => {
+      const validatedRequest = await getValidatedRequest([
+        "entity",
+        "entityRequestBody",
+      ]);
+      return await dataController.createData(
+        validatedRequest.entity,
+        validatedRequest.entityRequestBody
+      );
+    },
+  },
+  [
+    {
+      _type: "canUser",
+      body: USER_PERMISSIONS.CAN_MANAGE_DASHBOARD,
+    },
+  ]
+);

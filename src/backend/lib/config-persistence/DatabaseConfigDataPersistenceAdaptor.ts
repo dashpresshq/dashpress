@@ -51,6 +51,7 @@ export class DatabaseConfigDataPersistenceAdaptor<
   }
 
   async resetToEmpty() {
+    // TODO get those keys and delete only those key
     await (
       await DatabaseConfigDataPersistenceAdaptor.getDbInstance(
         this.configDomain
@@ -65,6 +66,7 @@ export class DatabaseConfigDataPersistenceAdaptor<
       )
     )
       .select(["value", "key"])
+      // .whereIn("key", [])
       .from(CONFIG_TABLE_PREFIX(this.configDomain));
 
     const items = await query;

@@ -8,6 +8,7 @@ import {
 } from "backend/lib/config-persistence";
 import { IApplicationService } from "backend/types";
 import { nanoid } from "nanoid";
+import { userFriendlyCase } from "frontend/lib/strings";
 import { IDashboardConfig } from "./dashboard.types";
 
 const HOME_KEY = "__home__";
@@ -47,7 +48,7 @@ export class DashboardService implements IApplicationService {
     const defaultDashboardItems: IDashboardConfig[] = entities.map((entity) => {
       return {
         id: nanoid(),
-        title: `Foo ${entity.value}`,
+        title: userFriendlyCase(`Foo ${entity.value}`),
         config: {
           _type: "summary-card",
           model: entity.value,

@@ -29,6 +29,11 @@ export abstract class AbstractConfigDataPersistenceService<T> {
     return await this.getItem(this.mergeKeyWithSecondaryKey(key, secondaryKey));
   }
 
+  public async getAllItemsIn(itemsIds: string[]): Promise<T[]> {
+    const allItems = await this.getAllItems();
+    return item;
+  }
+
   public abstract getAllItems(): Promise<T[]>;
 
   public abstract upsertItem(key: string, data: T): Promise<void>;

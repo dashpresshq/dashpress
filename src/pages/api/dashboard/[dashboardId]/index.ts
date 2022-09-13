@@ -1,20 +1,7 @@
-/*
-
-// List Dashboard
-List Dashboard Items
-
-Sort Dashboard
-New Dashboard Item
-Delete Dashboard Item
-Update Dasbboard Item
-*/
-
 import { dashboardController } from "backend/dashboard/dashboard.controller";
 import { USER_PERMISSIONS } from "shared/types";
-import { dataController } from "../../../../backend/dashboard/dashboard.controller";
-import { requestHandler } from "../../../backend/lib/request";
-
-const HOME_KEY = "__home__";
+import { dashboardController } from "../../../../backend/dashboard/dashboard.controller";
+import { requestHandler } from "../../../../backend/lib/request";
 
 export default requestHandler(
   {

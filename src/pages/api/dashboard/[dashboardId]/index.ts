@@ -1,41 +1,35 @@
 import { dashboardController } from "backend/dashboard/dashboard.controller";
 import { USER_PERMISSIONS } from "shared/types";
-import { dashboardController } from "../../../../backend/dashboard/dashboard.controller";
 import { requestHandler } from "../../../../backend/lib/request";
 
 export default requestHandler(
   {
     GET: async (getValidatedRequest) => {
       const validatedRequest = await getValidatedRequest([
-        "entity",
-        {
-          _type: "requestQuery",
-          options: "search",
-        },
+        { _type: "requestQuery", options: "dashboardId" },
       ]);
-      return await dataController.listData(
-        validatedRequest.entity,
+      return await dashboardController.listDashboardItems(
         validatedRequest.requestQuery
       );
     },
     POST: async (getValidatedRequest) => {
       const validatedRequest = await getValidatedRequest([
-        "entity",
+        { _type: "requestQuery", options: "dashboardId" },
         { _type: "requestBody", options: {} },
       ]);
-      return await dashboardController.createDashboard(
-        validatedRequest.entity,
-        validatedRequest.requestBody
+      return await dashboardController.createDashboardItem(
+        validatedRequest.requestBody,
+        validatedRequest.requestQuery
       );
     },
     PATCH: async (getValidatedRequest) => {
       const validatedRequest = await getValidatedRequest([
-        "entity",
-        "entityRequestBody",
+        { _type: "requestQuery", options: "dashboardId" },
+        { _type: "requestBody", options: {} },
       ]);
-      return await dataController.createData(
-        validatedRequest.entity,
-        validatedRequest.entityRequestBody
+      return await dashboardController.updateDashboardList(
+        validatedRequest.requestQuery,
+        validatedRequest.requestBody
       );
     },
   },

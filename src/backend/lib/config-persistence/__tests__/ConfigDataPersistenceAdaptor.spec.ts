@@ -6,6 +6,7 @@ import { AbstractConfigDataPersistenceService } from "../AbstractConfigDataPersi
 import { DatabaseConfigDataPersistenceAdaptor } from "../DatabaseConfigDataPersistenceAdaptor";
 import { JsonFileConfigDataPersistenceAdaptor } from "../JsonFileConfigDataPersistenceAdaptor";
 import { MemoryConfigDataPersistenceAdaptor } from "../MemoryConfigDataPersistenceAdaptor";
+import { RedisConfigDataPersistenceAdaptor } from "../RedisConfigDataPersistenceAdaptor";
 import { ConfigDomain } from "../types";
 
 interface ITestData {
@@ -21,11 +22,26 @@ const testConfigService: ConfigService = {
   bootstrap() {
     throw new Error("Not implemented");
   },
+  getNodeEnvironment() {
+    return NodeEnvironments.Test;
+  },
   getConfigValue<T>() {
     return "sqlite3:./test-adaptor.sqlite" as T;
   },
+};
+
+const redisTestConfigService: ConfigService = {
+  assertConfiguration() {
+    throw new Error("Not implemented");
+  },
+  bootstrap() {
+    throw new Error("Not implemented");
+  },
   getNodeEnvironment() {
     return NodeEnvironments.Test;
+  },
+  getConfigValue<T>() {
+    return "redis://localhost" as T;
   },
 };
 
@@ -54,6 +70,13 @@ const PERSITENT_ADAPTORS: {
     adaptor: new DatabaseConfigDataPersistenceAdaptor<ITestData>(
       TEST_DOMAIN,
       testConfigService
+    ),
+  },
+  {
+    title: "Redis",
+    adaptor: new RedisConfigDataPersistenceAdaptor<ITestData>(
+      TEST_DOMAIN,
+      redisTestConfigService
     ),
   },
 ];
@@ -94,7 +117,7 @@ describe.each(PERSITENT_ADAPTORS)("$title adaptor", ({ adaptor }) => {
 
     await adaptor.removeItem("foo");
 
-    expect(await adaptor.getItem("foo")).toBeUndefined();
+    expect(await adaptor.getItem("foo")).toBeFalsy();
   });
 
   it("should insert new items when reseting state", async () => {

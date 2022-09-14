@@ -12,5 +12,7 @@ jobs:
     - uses: actions/checkout@v2
     - name: Install modules
       run: yarn
+    - name: Start Redis
+      uses: supercharge/redis-github-action@1.4.0
     - name: Run Verification
       run: yarn run verify

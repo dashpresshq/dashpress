@@ -5,9 +5,9 @@ import {
 } from "frontend/lib/routing";
 import { ITableTab, META_USER_PERMISSIONS } from "shared/types";
 import {
-  ComponentIsLoading,
   DEFAULT_TABLE_PARAMS,
   StyledCard,
+  TableSkeleton,
   Tabs,
 } from "@hadmean/chromista";
 import { useEntityConfiguration } from "frontend/hooks/configuration/configuration.store";
@@ -62,7 +62,7 @@ export function EntityTable() {
         <ViewStateMachine
           error={entityTableTabs.error}
           loading={entityTableTabs.isLoading}
-          loader={<ComponentIsLoading />}
+          loader={<TableSkeleton />}
         >
           {(entityTableTabs.data || []).length > 1 ? (
             <Tabs

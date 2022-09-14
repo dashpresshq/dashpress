@@ -1,10 +1,10 @@
 import {
-  ComponentIsLoading,
   OffCanvas,
   Table,
   DEFAULT_TABLE_PARAMS,
   SoftButton,
   Spacer,
+  TableSkeleton,
 } from "@hadmean/chromista";
 import {
   IBEPaginatedDataState,
@@ -89,7 +89,7 @@ export function EntityTableView({
       <ViewStateMachine
         error={error}
         loading={isLoading}
-        loader={<ComponentIsLoading />}
+        loader={<TableSkeleton />}
       >
         <Table
           {...{

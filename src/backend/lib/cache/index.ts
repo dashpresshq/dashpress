@@ -7,18 +7,12 @@ import { CacheAdaptorTypes } from "./types";
 export { AbstractCacheService };
 
 export function createCacheService(prefix: string): AbstractCacheService {
-  const getInstance = () => {
-    switch (
-      configService.getConfigValue<CacheAdaptorTypes>(ConfigKeys.CACHE_ADAPTOR)
-    ) {
-      case CacheAdaptorTypes.Memory:
-        return new MemoryCacheAdaptor(prefix, configService);
-      case CacheAdaptorTypes.Redis:
-        return new RedisCacheAdaptor(prefix, configService);
-    }
+  const configBag: Record<CacheAdaptorTypes, AbstractCacheService> = {
+    [CacheAdaptorTypes.Memory]: new MemoryCacheAdaptor(prefix, configService),
+    [CacheAdaptorTypes.Redis]: new RedisCacheAdaptor(prefix, configService),
   };
 
-  const instance = getInstance();
-
-  return instance;
+  return configBag[
+    configService.getConfigValue<CacheAdaptorTypes>(ConfigKeys.CACHE_ADAPTOR)
+  ];
 }

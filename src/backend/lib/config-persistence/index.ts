@@ -11,36 +11,29 @@ export { AbstractConfigDataPersistenceService };
 export function createConfigDomainPersistenceService<T>(
   configDomain: ConfigDomain
 ): AbstractConfigDataPersistenceService<T> {
-  const getInstance = () => {
-    switch (
-      configService.getConfigValue<ConfigAdaptorTypes>(
-        ConfigKeys.CONFIG_ADAPTOR
-      )
-    ) {
-      case ConfigAdaptorTypes.JsonFile:
-        return new JsonFileConfigDataPersistenceAdaptor<T>(
-          configDomain,
-          configService
-        );
-      case ConfigAdaptorTypes.Memory:
-        return new MemoryConfigDataPersistenceAdaptor<T>(
-          configDomain,
-          configService
-        );
-      case ConfigAdaptorTypes.Redis:
-        return new RedisConfigDataPersistenceAdaptor<T>(
-          configDomain,
-          configService
-        );
-      case ConfigAdaptorTypes.Database:
-        return new DatabaseConfigDataPersistenceAdaptor<T>(
-          configDomain,
-          configService
-        );
-    }
+  const configBag: Record<
+    ConfigAdaptorTypes,
+    AbstractConfigDataPersistenceService<T>
+  > = {
+    [ConfigAdaptorTypes.JsonFile]: new JsonFileConfigDataPersistenceAdaptor<T>(
+      configDomain,
+      configService
+    ),
+    [ConfigAdaptorTypes.Memory]: new MemoryConfigDataPersistenceAdaptor<T>(
+      configDomain,
+      configService
+    ),
+    [ConfigAdaptorTypes.Redis]: new RedisConfigDataPersistenceAdaptor<T>(
+      configDomain,
+      configService
+    ),
+    [ConfigAdaptorTypes.Database]: new DatabaseConfigDataPersistenceAdaptor<T>(
+      configDomain,
+      configService
+    ),
   };
 
-  const instance = getInstance();
-
-  return instance;
+  return configBag[
+    configService.getConfigValue<ConfigAdaptorTypes>(ConfigKeys.CONFIG_ADAPTOR)
+  ];
 }

@@ -81,77 +81,84 @@ const PERSITENT_ADAPTORS: {
   },
 ];
 
-describe.each(PERSITENT_ADAPTORS)("$title adaptor", ({ adaptor }) => {
-  beforeAll(async () => {
-    await adaptor.setup();
-  });
-
-  it("should get create new item when upserting", async () => {
-    await adaptor.upsertItem("foo", { age: 5, id: "foo", name: "Hello" });
-  });
-
-  it("should getItem", async () => {
-    expect(await adaptor.getItem("foo")).toEqual({
-      age: 5,
-      id: "foo",
-      name: "Hello",
-    });
-  });
-
-  it("should get update existing when upserting", async () => {
-    await adaptor.upsertItem("foo", { age: 5, id: "updated", name: "Updated" });
-
-    expect(await adaptor.getItem("foo")).toEqual({
-      age: 5,
-      id: "updated",
-      name: "Updated",
-    });
-  });
-
-  it("should remove existing item", async () => {
-    expect(await adaptor.getItem("foo")).toEqual({
-      age: 5,
-      id: "updated",
-      name: "Updated",
+describe.each(PERSITENT_ADAPTORS)(
+  "$title persistence adaptor",
+  ({ adaptor }) => {
+    beforeAll(async () => {
+      await adaptor.setup();
     });
 
-    await adaptor.removeItem("foo");
+    it("should get create new item when upserting", async () => {
+      await adaptor.upsertItem("foo", { age: 5, id: "foo", name: "Hello" });
+    });
 
-    expect(await adaptor.getItem("foo")).toBeFalsy();
-  });
+    it("should getItem", async () => {
+      expect(await adaptor.getItem("foo")).toEqual({
+        age: 5,
+        id: "foo",
+        name: "Hello",
+      });
+    });
 
-  it("should insert new items when reseting state", async () => {
-    await adaptor.resetState("id", [
-      { age: 1, id: "id-1", name: "First Item" },
-      { age: 2, id: "id-2", name: "Second Item" },
-    ]);
-  });
+    it("should get update existing when upserting", async () => {
+      await adaptor.upsertItem("foo", {
+        age: 5,
+        id: "updated",
+        name: "Updated",
+      });
 
-  it("should getAllItems", async () => {
-    expect(await adaptor.getAllItems()).toEqual([
-      { age: 1, id: "id-1", name: "First Item" },
-      { age: 2, id: "id-2", name: "Second Item" },
-    ]);
-  });
+      expect(await adaptor.getItem("foo")).toEqual({
+        age: 5,
+        id: "updated",
+        name: "Updated",
+      });
+    });
 
-  it("should wipe old data and create new items when reseting state", async () => {
-    await adaptor.resetState("id", [
-      { age: 4, id: "id-4", name: "Fourth Item" },
-      { age: 3, id: "id-3", name: "Third Item" },
-      { age: 2, id: "id-2", name: "Second Item" },
-    ]);
+    it("should remove existing item", async () => {
+      expect(await adaptor.getItem("foo")).toEqual({
+        age: 5,
+        id: "updated",
+        name: "Updated",
+      });
 
-    expect(await adaptor.getAllItems()).toEqual([
-      { age: 4, id: "id-4", name: "Fourth Item" },
-      { age: 3, id: "id-3", name: "Third Item" },
-      { age: 2, id: "id-2", name: "Second Item" },
-    ]);
-  });
+      await adaptor.removeItem("foo");
 
-  it("should getAllItemsIn", async () => {
-    expect(await adaptor.getAllItemsIn(["id-2", "id-3"])).toEqual([
-      { age: 2, id: "id-2", name: "Second Item" },
-      { age: 3, id: "id-3", name: "Third Item" },
-    ]);
-  });
-});
+      expect(await adaptor.getItem("foo")).toBeFalsy();
+    });
+
+    it("should insert new items when reseting state", async () => {
+      await adaptor.resetState("id", [
+        { age: 1, id: "id-1", name: "First Item" },
+        { age: 2, id: "id-2", name: "Second Item" },
+      ]);
+    });
+
+    it("should getAllItems", async () => {
+      expect(await adaptor.getAllItems()).toEqual([
+        { age: 1, id: "id-1", name: "First Item" },
+        { age: 2, id: "id-2", name: "Second Item" },
+      ]);
+    });
+
+    it("should wipe old data and create new items when reseting state", async () => {
+      await adaptor.resetState("id", [
+        { age: 4, id: "id-4", name: "Fourth Item" },
+        { age: 3, id: "id-3", name: "Third Item" },
+        { age: 2, id: "id-2", name: "Second Item" },
+      ]);
+
+      expect(await adaptor.getAllItems()).toEqual([
+        { age: 4, id: "id-4", name: "Fourth Item" },
+        { age: 3, id: "id-3", name: "Third Item" },
+        { age: 2, id: "id-2", name: "Second Item" },
+      ]);
+    });
+
+    it("should getAllItemsIn", async () => {
+      expect(await adaptor.getAllItemsIn(["id-2", "id-3"])).toEqual([
+        { age: 2, id: "id-2", name: "Second Item" },
+        { age: 3, id: "id-3", name: "Third Item" },
+      ]);
+    });
+  }
+);

@@ -13,11 +13,11 @@ export class MemoryCacheAdaptor extends AbstractCacheService {
     noop();
   }
 
-  public async pullItem<T>(key: string): Promise<T | undefined> {
+  async pullItem<T>(key: string): Promise<T | undefined> {
     return this.data[key] as T;
   }
 
-  public async persistData(key: string, data: unknown): Promise<void> {
+  async persistData(key: string, data: unknown): Promise<void> {
     this.data[key] = data;
   }
 

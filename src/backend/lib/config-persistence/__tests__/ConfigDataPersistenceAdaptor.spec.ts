@@ -26,7 +26,7 @@ const testConfigService: ConfigService = {
     return NodeEnvironments.Test;
   },
   getConfigValue<T>() {
-    return "sqlite3:./test-adaptor.sqlite" as T;
+    return "sqlite3:./test-adaptor.sqlite" as unknown as T;
   },
 };
 
@@ -41,7 +41,7 @@ const redisTestConfigService: ConfigService = {
     return NodeEnvironments.Test;
   },
   getConfigValue<T>() {
-    return "redis://localhost" as T;
+    return "redis://localhost" as unknown as T;
   },
 };
 

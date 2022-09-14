@@ -1,6 +1,6 @@
 import { QueryFilter } from "shared/types";
 
-export interface IDashboardConfig {
+export interface IWidgetConfig {
   id: string;
   title: string;
   svg?: string;

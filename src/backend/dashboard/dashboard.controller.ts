@@ -1,36 +1,27 @@
 import { DashboardService, dashboardService } from "./dashboard.service";
-import { IDashboardConfig } from "./dashboard.types";
+import { IWidgetConfig } from "./dashboard.types";
 
 export class DashboardController {
   constructor(private _dashboardService: DashboardService) {}
 
-  async listDashboardItems(dashboardId: string) {
-    return await this._dashboardService.listDashboardItems(dashboardId);
+  async listDashboardWidgets(dashboardId: string) {
+    return await this._dashboardService.listDashboardWidgets(dashboardId);
   }
 
-  async createDashboardItem(config: IDashboardConfig, dashboardId: string) {
-    await this._dashboardService.createDashboardItem(config, dashboardId);
+  async createWidget(widget: IWidgetConfig, dashboardId: string) {
+    await this._dashboardService.createWidget(widget, dashboardId);
   }
 
-  async updateDashboardList(
-    dashboardItemId: string,
-    dasboardItemsList: string[]
-  ) {
-    await this._dashboardService.updateDashboardList(
-      dashboardItemId,
-      dasboardItemsList
-    );
+  async updateWidgetList(dashboardId: string, widgetList: string[]) {
+    await this._dashboardService.updateWidgetList(dashboardId, widgetList);
   }
 
-  async updateDashboardItem(dashboardItemId: string, config: IDashboardConfig) {
-    await this._dashboardService.updateDashboardItem(dashboardItemId, config);
+  async updateWidget(widgetId: string, widget: IWidgetConfig) {
+    await this._dashboardService.updateWidget(widgetId, widget);
   }
 
-  async removeDashboardItem(dashboardItemId: string, dashboardId: string) {
-    await this._dashboardService.removeDashboardItem(
-      dashboardItemId,
-      dashboardId
-    );
+  async removeWidget(widgetId: string, dashboardId: string) {
+    await this._dashboardService.removeWidget(widgetId, dashboardId);
   }
 }
 

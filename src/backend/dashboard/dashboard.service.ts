@@ -9,14 +9,14 @@ import {
 import { IApplicationService } from "backend/types";
 import { nanoid } from "nanoid";
 import { userFriendlyCase } from "frontend/lib/strings";
-import { IDashboardConfig } from "./dashboard.types";
+import { IWidgetConfig } from "./dashboard.types";
 
 const HOME_KEY = "__home__";
 
 export class DashboardService implements IApplicationService {
   constructor(
     private readonly _dashboardPersistenceService: AbstractConfigDataPersistenceService<
-      IDashboardConfig | string[]
+      IWidgetConfig | string[]
     >,
     private readonly _entitiesService: EntitiesService
   ) {}
@@ -25,27 +25,27 @@ export class DashboardService implements IApplicationService {
     await this._dashboardPersistenceService.setup();
   }
 
-  private async getDashboardItems(dashboardId: string): Promise<string[]> {
+  private async getDashboardWidgets(dashboardId: string): Promise<string[]> {
     return (await this._dashboardPersistenceService.getItem(
       dashboardId
     )) as string[];
   }
 
-  private buildDashboardItems(
-    list: string[],
-    configs: IDashboardConfig[]
-  ): IDashboardConfig[] {
+  private orderDashboardWidgets(
+    widetsOrder: string[],
+    widgets: IWidgetConfig[]
+  ): IWidgetConfig[] {
     const dashboardItemsMap = Object.fromEntries(
-      configs.map((item) => [item.id, item])
+      widgets.map((item) => [item.id, item])
     );
 
-    return list.map((item) => dashboardItemsMap[item]);
+    return widetsOrder.map((item) => dashboardItemsMap[item]);
   }
 
-  private async generateDefaultDashboardItems() {
+  private async generateDefaultDashboardWidgets() {
     const entities = await this._entitiesService.getAllEntities();
 
-    const defaultDashboardItems: IDashboardConfig[] = entities.map((entity) => {
+    const defaultWidgets: IWidgetConfig[] = entities.map((entity) => {
       return {
         id: nanoid(),
         title: userFriendlyCase(`Foo ${entity.value}`),
@@ -61,76 +61,72 @@ export class DashboardService implements IApplicationService {
     });
 
     await Promise.all(
-      defaultDashboardItems.map((config) =>
+      defaultWidgets.map((config) =>
         this._dashboardPersistenceService.upsertItem(config.id, config)
       )
     );
 
-    const dashboardList = defaultDashboardItems.map(({ id }) => id);
+    const widgetList = defaultWidgets.map(({ id }) => id);
 
-    await this._dashboardPersistenceService.upsertItem(HOME_KEY, dashboardList);
+    await this._dashboardPersistenceService.upsertItem(HOME_KEY, widgetList);
 
-    return this.buildDashboardItems(dashboardList, defaultDashboardItems);
+    return this.orderDashboardWidgets(widgetList, defaultWidgets);
   }
 
-  async listDashboardItems(dashboardId: string): Promise<IDashboardConfig[]> {
-    const itemsList = await this.getDashboardItems(dashboardId);
-    if (!itemsList) {
+  async listDashboardWidgets(dashboardId: string): Promise<IWidgetConfig[]> {
+    const widgetList = await this.getDashboardWidgets(dashboardId);
+    if (!widgetList) {
       if (dashboardId !== HOME_KEY) {
         return [];
       }
-      return await this.generateDefaultDashboardItems();
+      return await this.generateDefaultDashboardWidgets();
     }
 
-    const dashboardItems =
-      (await this._dashboardPersistenceService.getAllItemsIn(
-        itemsList
-      )) as IDashboardConfig[];
+    const widgets = (await this._dashboardPersistenceService.getAllItemsIn(
+      widgetList
+    )) as IWidgetConfig[];
 
-    return this.buildDashboardItems(itemsList, dashboardItems);
+    return this.orderDashboardWidgets(widgetList, widgets);
   }
 
-  async createDashboardItem(config: IDashboardConfig, dashboardId: string) {
-    await this._dashboardPersistenceService.upsertItem(config.id, config);
+  async createWidget(widget: IWidgetConfig, dashboardId: string) {
+    await this._dashboardPersistenceService.upsertItem(widget.id, widget);
 
-    const itemsList = await this.getDashboardItems(dashboardId);
+    const widgetList = await this.getDashboardWidgets(dashboardId);
 
     await this._dashboardPersistenceService.upsertItem(dashboardId, [
-      ...itemsList,
-      config.id,
+      ...widgetList,
+      widget.id,
     ]);
   }
 
-  async updateDashboardList(dashboardId: string, dasboardItemsList: string[]) {
-    await this._dashboardPersistenceService.upsertItem(
-      dashboardId,
-      dasboardItemsList
-    );
+  async updateWidgetList(dashboardId: string, widgetList: string[]) {
+    await this._dashboardPersistenceService.upsertItem(dashboardId, widgetList);
   }
 
-  async updateDashboardItem(dashboardItemId: string, config: IDashboardConfig) {
-    await this._dashboardPersistenceService.upsertItem(dashboardItemId, config);
+  async updateWidget(widgetId: string, widget: IWidgetConfig) {
+    await this._dashboardPersistenceService.upsertItem(widgetId, widget);
   }
 
   // TODO when disabling entities then remove the correspoding entity here
-  async removeDashboardItem(dashboardItemId: string, dashboardId: string) {
-    await this._dashboardPersistenceService.removeItem(dashboardItemId);
+  async removeWidget(widgetId: string, dashboardId: string) {
+    await this._dashboardPersistenceService.removeItem(widgetId);
 
-    const itemsList = await this.getDashboardItems(dashboardId);
+    const widgetList = await this.getDashboardWidgets(dashboardId);
 
-    const newItemsList = itemsList.filter(
-      (itemId) => itemId !== dashboardItemId
+    const newWidgetList = widgetList.filter(
+      (widgetId$1) => widgetId$1 !== widgetId
     );
 
     await this._dashboardPersistenceService.upsertItem(
       dashboardId,
-      newItemsList
+      newWidgetList
     );
   }
 }
 
 const dashboardPersistenceService = createConfigDomainPersistenceService<
-  IDashboardConfig | string[]
+  IWidgetConfig | string[]
 >("dashboard");
 
 export const dashboardService = new DashboardService(

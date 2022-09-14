@@ -6,10 +6,10 @@ export default requestHandler(
   {
     PATCH: async (getValidatedRequest) => {
       const validatedRequest = await getValidatedRequest([
-        { _type: "requestQuery", options: "dashboardItemId" },
+        { _type: "requestQuery", options: "widgetId" },
         { _type: "requestBody", options: {} },
       ]);
-      return await dashboardController.updateDashboardItem(
+      return await dashboardController.updateWidget(
         validatedRequest.requestQuery,
         validatedRequest.requestBody
       );
@@ -19,8 +19,8 @@ export default requestHandler(
         { _type: "requestQuery", options: "dashboardId" },
         { _type: "requestBody", options: {} },
       ]);
-      return await dashboardController.removeDashboardItem(
-        validatedRequest.requestBody.dashboardItemId,
+      return await dashboardController.removeWidget(
+        validatedRequest.requestBody.widgetId,
         validatedRequest.requestQuery
       );
     },

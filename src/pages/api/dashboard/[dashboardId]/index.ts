@@ -8,7 +8,7 @@ export default requestHandler(
       const validatedRequest = await getValidatedRequest([
         { _type: "requestQuery", options: "dashboardId" },
       ]);
-      return await dashboardController.listDashboardItems(
+      return await dashboardController.listDashboardWidgets(
         validatedRequest.requestQuery
       );
     },
@@ -17,7 +17,7 @@ export default requestHandler(
         { _type: "requestQuery", options: "dashboardId" },
         { _type: "requestBody", options: {} },
       ]);
-      return await dashboardController.createDashboardItem(
+      return await dashboardController.createWidget(
         validatedRequest.requestBody,
         validatedRequest.requestQuery
       );
@@ -27,7 +27,7 @@ export default requestHandler(
         { _type: "requestQuery", options: "dashboardId" },
         { _type: "requestBody", options: {} },
       ]);
-      return await dashboardController.updateDashboardList(
+      return await dashboardController.updateWidgetList(
         validatedRequest.requestQuery,
         validatedRequest.requestBody
       );

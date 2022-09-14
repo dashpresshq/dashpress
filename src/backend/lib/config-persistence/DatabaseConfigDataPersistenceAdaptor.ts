@@ -66,7 +66,6 @@ export class DatabaseConfigDataPersistenceAdaptor<
       )
     )
       .select(["value", "key"])
-      // .whereIn("key", [])
       .from(CONFIG_TABLE_PREFIX(this.configDomain));
 
     const items = await query;

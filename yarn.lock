@@ -1448,15 +1448,15 @@
     pg "^8.7.3"
     sqlite3 "^5.0.8"
 
-"@hadmean/chromista@^1.0.17":
-  version "1.0.17"
-  resolved "https://registry.yarnpkg.com/@hadmean/chromista/-/chromista-1.0.17.tgz#f36f9b3f2133dd8ad32a30d595065ec8064e4041"
-  integrity sha512-59VVqp9sBra5ZcAjaeCh6560BT+ExmVr86xlMb8ROUFZVeZHy7MuC3hOjD3ArBY+1QVSFi7yqwn7bImQi9t0cA==
+"@hadmean/chromista@^1.0.18":
+  version "1.0.18"
+  resolved "https://registry.yarnpkg.com/@hadmean/chromista/-/chromista-1.0.18.tgz#0a09a42dd9a0fb50413f4ceb5dc08e3048514183"
+  integrity sha512-u3ZhqdtWPKn6zr/QefY/X3Iq3ZVkuvHcvt22m2u+uDLKJKp6Erax3e3uLsUdXiio7+L0chrzUnCL5v6GkxIJog==
   dependencies:
     "@fortawesome/fontawesome-svg-core" "^6.1.1"
     "@fortawesome/free-solid-svg-icons" "^6.1.1"
     "@fortawesome/react-fontawesome" "^0.1.18"
-    "@hadmean/protozoa" "^1.0.0"
+    "@hadmean/protozoa" "1.0.4"
     "@types/prismjs" "^1.26.0"
     "@types/react-datepicker" "^4.4.1"
     "@types/styled-components" "^5.1.25"
@@ -1509,10 +1509,10 @@
     eslint-plugin-testing-library "^5.5.1"
     prettier "^2.7.1"
 
-"@hadmean/protozoa@1.0.1", "@hadmean/protozoa@^1.0.0":
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/@hadmean/protozoa/-/protozoa-1.0.1.tgz#b628210e80f14390aa6cad138f83c8e0af6710fb"
-  integrity sha512-W0XQ4E+NndQN/N1F6vQsW1j6QjT+9hmLaSCNTXPeHLP0vKgZ4C6L2A/bm8Y1g58AnNE/jMwOS50sOxpTsLvgog==
+"@hadmean/protozoa@1.0.4", "@hadmean/protozoa@^1.0.4":
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/@hadmean/protozoa/-/protozoa-1.0.4.tgz#86becebdcac94ad671cacc5c51871c4252c929e6"
+  integrity sha512-9FkHrtgpfAE/Vegk1wyLZhX/1oNZ5VtfERR3eymigW6DWhSQQR+qkAjKYscZLub3XQikIOvL6PuJ3Bg/FNXNQQ==
   dependencies:
     "@types/lodash" "^4.14.182"
     "@types/nprogress" "^0.2.0"

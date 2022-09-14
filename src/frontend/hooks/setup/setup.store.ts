@@ -15,7 +15,8 @@ export function useSetupCheck(config: ISetupCheckConfig[]) {
   const { isLoading, data } = useStorageApi<ISetupCheck>(SETUP_CHECK_URL, {
     errorMessage: dataNotFoundMessage("Setup Check"),
   });
-  if (isLoading) {
+
+  if (isLoading || !data) {
     return isLoading;
   }
 

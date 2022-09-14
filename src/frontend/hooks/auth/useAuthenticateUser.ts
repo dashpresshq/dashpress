@@ -43,11 +43,11 @@ export function useAuthenticateUser() {
 
   return (authToken: string, rememberMe: boolean) => {
     AuthService.setAuthToken(authToken, rememberMe);
+    setIsAuthenticated(true);
     router.push(
       nextRoute === SLUG_LOADING_VALUE || !nextRoute
         ? NAVIGATION_LINKS.DASHBOARD
         : nextRoute
     );
-    setIsAuthenticated(true);
   };
 }

@@ -1,8 +1,9 @@
 import React from "react";
 import { AuthLayout } from "frontend/_layouts/guest";
 import { useSetupCheck } from "frontend/hooks/setup/setup.store";
-import { ComponentIsLoading } from "@hadmean/chromista";
+import { FormSkeleton, FormSkeletonSchema } from "@hadmean/chromista";
 import { NAVIGATION_LINKS } from "frontend/lib/routing";
+import { ViewStateMachine } from "frontend/lib/ViewStateMachine";
 import { UserSetupForm } from "./Form";
 import { useSetupUserMutation } from "../setup.store";
 
@@ -18,20 +19,30 @@ export function UserSetup() {
     {
       key: "hasUsers",
       value: true,
-      url: NAVIGATION_LINKS.AUTH_SIGNIN,
+      url: NAVIGATION_LINKS.DASHBOARD,
     },
   ]);
-
-  if (isChecking) {
-    return <ComponentIsLoading />;
-  }
 
   return (
     <AuthLayout
       title="Admin Account Setup"
       subTitle="Create first creator account"
     >
-      <UserSetupForm onSubmit={setupUserMutation.mutateAsync} />
+      <ViewStateMachine
+        loading={isChecking}
+        error={false}
+        loader={
+          <FormSkeleton
+            schema={[
+              FormSkeletonSchema.Input,
+              FormSkeletonSchema.Input,
+              FormSkeletonSchema.Input,
+            ]}
+          />
+        }
+      >
+        <UserSetupForm onSubmit={setupUserMutation.mutateAsync} />
+      </ViewStateMachine>
     </AuthLayout>
   );
 }

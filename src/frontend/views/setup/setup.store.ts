@@ -5,25 +5,19 @@ import {
 } from "@hadmean/protozoa";
 import { useAuthenticateUser } from "frontend/hooks/auth/useAuthenticateUser";
 import { SETUP_CHECK_URL } from "frontend/hooks/setup/setup.store";
-import { useRouter } from "next/router";
 import { useMutation } from "react-query";
 import { ISetupUserForm } from "shared/form-schemas/setup/user";
 import {
   IDBCredentials,
   ISuccessfullAuthenticationResponse,
 } from "shared/types";
-import { NAVIGATION_LINKS } from "../../lib/routing/links";
 
 export function useSetupCredentialsMutation() {
-  const router = useRouter();
   const apiMutateOptions = useWaitForResponseMutationOptions<
     Record<string, string>
   >({
     endpoints: [SETUP_CHECK_URL],
     successMessage: MutationsLang.create("Setup Credentials"),
-    onSuccessActionWithFormData: () => {
-      router.push(NAVIGATION_LINKS.SETUP.USER);
-    },
   });
 
   return useMutation(

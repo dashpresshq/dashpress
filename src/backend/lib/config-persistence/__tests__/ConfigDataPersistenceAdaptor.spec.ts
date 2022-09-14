@@ -3,6 +3,7 @@ import {
   NodeEnvironments,
 } from "backend/lib/config/config.service";
 import { AbstractConfigDataPersistenceService } from "../AbstractConfigDataPersistenceService";
+import { DatabaseConfigDataPersistenceAdaptor } from "../DatabaseConfigDataPersistenceAdaptor";
 import { JsonFileConfigDataPersistenceAdaptor } from "../JsonFileConfigDataPersistenceAdaptor";
 import { MemoryConfigDataPersistenceAdaptor } from "../MemoryConfigDataPersistenceAdaptor";
 import { ConfigDomain } from "../types";
@@ -20,8 +21,8 @@ const testConfigService: ConfigService = {
   bootstrap() {
     throw new Error("Not implemented");
   },
-  getConfigValue() {
-    throw new Error("Not implemented");
+  getConfigValue<T>() {
+    return "sqlite3:./test-adaptor.sqlite" as T;
   },
   getNodeEnvironment() {
     return NodeEnvironments.Test;
@@ -44,6 +45,13 @@ const PERSITENT_ADAPTORS: {
   {
     title: "Memory",
     adaptor: new MemoryConfigDataPersistenceAdaptor<ITestData>(
+      TEST_DOMAIN,
+      testConfigService
+    ),
+  },
+  {
+    title: "Database",
+    adaptor: new DatabaseConfigDataPersistenceAdaptor<ITestData>(
       TEST_DOMAIN,
       testConfigService
     ),
@@ -118,9 +126,9 @@ describe.each(PERSITENT_ADAPTORS)("$title adaptor", ({ adaptor }) => {
   });
 
   it("should getAllItemsIn", async () => {
-    expect(await adaptor.getAllItemsIn(["id-3", "id-2"])).toEqual([
-      { age: 3, id: "id-3", name: "Third Item" },
+    expect(await adaptor.getAllItemsIn(["id-2", "id-3"])).toEqual([
       { age: 2, id: "id-2", name: "Second Item" },
+      { age: 3, id: "id-3", name: "Third Item" },
     ]);
   });
 });

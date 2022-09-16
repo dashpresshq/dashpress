@@ -23,6 +23,7 @@ export const NAVIGATION_LINKS = {
   },
   SETTINGS: {
     DEFAULT: "/admin/settings/entities",
+    DASHBOARD: "/admin/settings/dashboard",
     ENTITIES: "/admin/settings/entities",
     SYSTEM: "/admin/settings/system",
     DATE: "/admin/settings/date",

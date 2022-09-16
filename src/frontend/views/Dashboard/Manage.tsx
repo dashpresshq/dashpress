@@ -5,23 +5,22 @@ import {
   FormNoValueSelect,
 } from "@hadmean/chromista";
 import styled from "styled-components";
-import { Check, Plus, Settings } from "react-feather";
-import { useSetPageDetails } from "frontend/lib/routing";
+import { Check, Plus } from "react-feather";
+import { NAVIGATION_LINKS, useSetPageDetails } from "frontend/lib/routing";
 import { IWidgetConfig, USER_PERMISSIONS } from "shared/types";
 import { ViewStateMachine } from "frontend/lib/ViewStateMachine";
 import arrayMove from "array-move";
 import SortableList, { SortableItem } from "react-easy-sort";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 import { AppLayout } from "../../_layouts/app";
 import { SummaryCard } from "./cards/SummaryCard";
 import { useDashboardWidgets } from "./dashboard.store";
+import { gridRoot } from "./styles";
 
 const Root = styled.div`
   .list {
-    user-select: none;
-    display: grid;
-    grid-template-columns: auto auto auto auto;
-    grid-gap: 16px;
+    ${gridRoot};
   }
   .item {
     cursor: grab;
@@ -33,10 +32,10 @@ const NEW_DASHBOARD_ITEM = "__new_dashboard_item__";
 
 // codesandbox.io/s/react-easy-sort-custom-knob-demo-ij37h?file=/src/styles.css
 
-export function Dashboard() {
-  const widgets = useDashboardWidgets();
+export function ManageDashboard() {
+  const router = useRouter();
 
-  const [managingDashboard, setManagingDashboard] = useState(false);
+  const widgets = useDashboardWidgets();
 
   const [items, setItems] = useState<IWidgetConfig[]>([]);
 
@@ -49,14 +48,10 @@ export function Dashboard() {
   }, [JSON.stringify(widgets.data || [])]);
 
   useSetPageDetails({
-    pageTitle: "Home",
-    viewKey: "HOME",
+    pageTitle: "Manage Dashbaord",
+    viewKey: "MANAGE_DASHBOARD",
     permission: USER_PERMISSIONS.CAN_MANAGE_DASHBOARD,
   });
-
-  const toggleManagingState = () => {
-    setManagingDashboard(!managingDashboard);
-  };
 
   const [currentDashboardItem, setCurrentDashboardItem] = useState("");
 
@@ -69,22 +64,18 @@ export function Dashboard() {
       <AppLayout
         secondaryActionItems={[
           {
-            label: managingDashboard ? " Done " : "Manage Dashboard",
-            IconComponent: managingDashboard ? Check : Settings,
-            onClick: toggleManagingState,
+            label: "Done",
+            IconComponent: Check,
+            onClick: () => router.replace(NAVIGATION_LINKS.DASHBOARD),
           },
         ]}
-        actionItems={
-          managingDashboard
-            ? [
-                {
-                  label: "New Dashboard Item",
-                  IconComponent: Plus,
-                  onClick: () => setCurrentDashboardItem(NEW_DASHBOARD_ITEM),
-                },
-              ]
-            : []
-        }
+        actionItems={[
+          {
+            label: "New Dashboard Item",
+            IconComponent: Plus,
+            onClick: () => setCurrentDashboardItem(NEW_DASHBOARD_ITEM),
+          },
+        ]}
       >
         <ViewStateMachine
           loading={widgets.isLoading}

@@ -1,16 +1,24 @@
 import { ComponentIsLoading, Spacer } from "@hadmean/chromista";
 import { Settings } from "react-feather";
-import { useSetPageDetails } from "frontend/lib/routing";
+import { NAVIGATION_LINKS, useSetPageDetails } from "frontend/lib/routing";
 import { META_USER_PERMISSIONS, USER_PERMISSIONS } from "shared/types";
 import { ViewStateMachine } from "frontend/lib/ViewStateMachine";
 import React from "react";
 import { useUserHasPermission } from "frontend/hooks/auth/user.store";
+import styled from "styled-components";
+import { useRouter } from "next/router";
 import { AppLayout } from "../../_layouts/app";
 import { SummaryCard } from "./cards/SummaryCard";
 import { useDashboardWidgets } from "./dashboard.store";
+import { gridRoot } from "./styles";
+
+const Root = styled.div`
+  ${gridRoot};
+`;
 
 export function Dashboard() {
   const widgets = useDashboardWidgets();
+  const router = useRouter();
 
   useSetPageDetails({
     pageTitle: "Home",
@@ -30,7 +38,8 @@ export function Dashboard() {
               {
                 label: "Manage Dashboard",
                 IconComponent: Settings,
-                onClick: () => {},
+                onClick: () =>
+                  router.replace(NAVIGATION_LINKS.SETTINGS.DASHBOARD),
               },
             ]
           : []
@@ -41,12 +50,14 @@ export function Dashboard() {
         error={widgets.error}
         loader={<ComponentIsLoading />}
       >
-        {(widgets.data || []).map((config) => (
-          <React.Fragment key={config.id}>
-            <SummaryCard config={config} />
-            <Spacer size="xl" />
-          </React.Fragment>
-        ))}
+        <Root>
+          {(widgets.data || []).map((config) => (
+            <div key={config.id}>
+              <SummaryCard config={config} />
+              <Spacer size="xl" />
+            </div>
+          ))}
+        </Root>
       </ViewStateMachine>
     </AppLayout>
   );

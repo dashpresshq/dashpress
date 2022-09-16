@@ -24,6 +24,7 @@ interface IProps {
 
 export function SummaryCard({ config: widgetConfig, setting }: IProps) {
   const { config, id, title, link } = widgetConfig;
+
   // TODO svg
   const count = useEntityFilterCount(config.entity, config.filter);
 

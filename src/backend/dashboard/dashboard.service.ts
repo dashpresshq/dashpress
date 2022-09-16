@@ -10,6 +10,7 @@ import { IApplicationService } from "backend/types";
 import { nanoid } from "nanoid";
 import { userFriendlyCase } from "frontend/lib/strings";
 import { IWidgetConfig, HOME_DASHBOARD_KEY } from "shared/types";
+import { NAVIGATION_LINKS } from "frontend/lib/routing";
 
 export class DashboardService implements IApplicationService {
   constructor(
@@ -46,7 +47,11 @@ export class DashboardService implements IApplicationService {
     const defaultWidgets: IWidgetConfig[] = entities.map((entity) => {
       return {
         id: nanoid(),
-        title: userFriendlyCase(`Foo ${entity.value}`),
+        title: userFriendlyCase(`${entity.value}`),
+        link: {
+          title: "View Data",
+          link: NAVIGATION_LINKS.ENTITY.TABLE(entity.value),
+        },
         config: {
           _type: "summary-card",
           entity: entity.value,
@@ -59,11 +64,7 @@ export class DashboardService implements IApplicationService {
       };
     });
 
-    await Promise.all(
-      defaultWidgets.map((config) =>
-        this._dashboardPersistenceService.upsertItem(config.id, config)
-      )
-    );
+    await this._dashboardPersistenceService.resetState("id", defaultWidgets);
 
     const widgetList = defaultWidgets.map(({ id }) => id);
 
@@ -77,6 +78,7 @@ export class DashboardService implements IApplicationService {
 
   async listDashboardWidgets(dashboardId: string): Promise<IWidgetConfig[]> {
     const widgetList = await this.getDashboardWidgets(dashboardId);
+
     if (!widgetList) {
       if (dashboardId !== HOME_DASHBOARD_KEY) {
         return [];

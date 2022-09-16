@@ -64,7 +64,11 @@ export class DashboardService implements IApplicationService {
       };
     });
 
-    await this._dashboardPersistenceService.resetState("id", defaultWidgets);
+    // eslint-disable-next-line no-restricted-syntax
+    for (const widget of defaultWidgets) {
+      // eslint-disable-next-line no-await-in-loop
+      await this._dashboardPersistenceService.upsertItem(widget.id, widget);
+    }
 
     const widgetList = defaultWidgets.map(({ id }) => id);
 

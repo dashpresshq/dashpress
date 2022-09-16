@@ -17,8 +17,8 @@ const StyledBox = styled.div`
 interface IProps {
   config: IWidgetConfig;
   setting?: {
-    setId: (id: string) => {};
-    delete: (id: string) => {};
+    setId: (id: string) => void;
+    delete: (id: string) => void;
   };
 }
 
@@ -42,9 +42,9 @@ export function SummaryCard({ config: widgetConfig, setting }: IProps) {
                   isMakingDeleteRequest={false}
                   shouldConfirmAlert
                 />
-                {link && <SoftButton action={link.link} label={link.title} />}
               </>
             )}
+            {link && <SoftButton action={link.link} label={link.title} />}
           </Stack>
         </Stack>
         <Spacer size="xs" />

@@ -91,7 +91,10 @@ export function ManageDashboard() {
               {items.map((config) => (
                 <SortableItem key={config.id}>
                   <div className="item">
-                    <SummaryCard config={config} />
+                    <SummaryCard
+                      config={config}
+                      setting={{ delete: () => {}, setId: () => {} }}
+                    />
                     <Spacer size="xl" />
                   </div>
                 </SortableItem>

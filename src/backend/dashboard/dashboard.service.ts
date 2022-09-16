@@ -9,9 +9,7 @@ import {
 import { IApplicationService } from "backend/types";
 import { nanoid } from "nanoid";
 import { userFriendlyCase } from "frontend/lib/strings";
-import { IWidgetConfig } from "./dashboard.types";
-
-const HOME_KEY = "__home__";
+import { IWidgetConfig, HOME_DASHBOARD_KEY } from "shared/types";
 
 export class DashboardService implements IApplicationService {
   constructor(
@@ -51,7 +49,8 @@ export class DashboardService implements IApplicationService {
         title: userFriendlyCase(`Foo ${entity.value}`),
         config: {
           _type: "summary-card",
-          model: entity.value,
+          entity: entity.value,
+          filter: [],
           statusIndicator: {
             field: "createdAt",
             period: "month",
@@ -68,7 +67,10 @@ export class DashboardService implements IApplicationService {
 
     const widgetList = defaultWidgets.map(({ id }) => id);
 
-    await this._dashboardPersistenceService.upsertItem(HOME_KEY, widgetList);
+    await this._dashboardPersistenceService.upsertItem(
+      HOME_DASHBOARD_KEY,
+      widgetList
+    );
 
     return this.orderDashboardWidgets(widgetList, defaultWidgets);
   }
@@ -76,7 +78,7 @@ export class DashboardService implements IApplicationService {
   async listDashboardWidgets(dashboardId: string): Promise<IWidgetConfig[]> {
     const widgetList = await this.getDashboardWidgets(dashboardId);
     if (!widgetList) {
-      if (dashboardId !== HOME_KEY) {
+      if (dashboardId !== HOME_DASHBOARD_KEY) {
         return [];
       }
       return await this.generateDefaultDashboardWidgets();

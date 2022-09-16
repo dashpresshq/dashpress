@@ -4,11 +4,13 @@ export interface IWidgetConfig {
   id: string;
   title: string;
   svg?: string;
+  link?: { title: string; link: string };
   config:
-    | { _type: "table"; model: string; filter: QueryFilter[] }
+    | { _type: "table"; entity: string; filter: QueryFilter[] }
     | {
         _type: "summary-card";
-        model: string;
+        filter: QueryFilter[];
+        entity: string;
         statusIndicator:
           | false
           | {
@@ -17,3 +19,5 @@ export interface IWidgetConfig {
             };
       };
 }
+
+export const HOME_DASHBOARD_KEY = "__home__";

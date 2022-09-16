@@ -28,8 +28,8 @@
   "bin": "./bin/hadmean",
   "dependencies": {
     "@hadmean/bacteria": "^0.0.1",
-    "@hadmean/chromista": "^1.0.18",
-    "@hadmean/protozoa": "^1.0.4",
+    "@hadmean/chromista": "^1.0.21",
+    "@hadmean/protozoa": "^1.0.6",
     "@types/cryptr": "^4.0.1",
     "@types/jsonwebtoken": "^8.5.8",
     "bcrypt": "^5.0.1",

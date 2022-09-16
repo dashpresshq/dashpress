@@ -41,12 +41,21 @@ export const useEntityDataDetails = (entity: string, id: string) => {
   });
 };
 
-export const useEntitiesCount = (entities: string[]) => {
-  return useApiQueries<{ entity: string }, { count: number }>({
-    input: entities.map((entity) => ({ entity })),
-    accessor: "entity",
-    pathFn: (entity) => ENTITY_COUNT_PATH(entity),
-  });
+const buildFilterCountQueryString = (
+  entity: string,
+  queryFilter: QueryFilter[]
+) =>
+  `${ENTITY_COUNT_PATH(entity)}?${qs.stringify({
+    filters: [queryFilter],
+  })}`;
+
+export const useEntityFilterCount = (entity: string, filter: QueryFilter[]) => {
+  return useApi<{ count: number }>(
+    buildFilterCountQueryString(entity, filter),
+    {
+      errorMessage: dataNotFoundMessage(`${entity} count`),
+    }
+  );
 };
 
 export const useEntityReferenceCount = (
@@ -84,9 +93,7 @@ export const useEntityReferenceCount = (
           value: reference.entityId,
         },
       };
-      return `${ENTITY_COUNT_PATH(entity)}?${qs.stringify({
-        filters: [queryFilter],
-      })}`;
+      return buildFilterCountQueryString(entity, [queryFilter]);
     },
   });
 };

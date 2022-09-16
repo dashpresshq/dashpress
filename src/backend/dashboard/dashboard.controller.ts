@@ -1,5 +1,5 @@
+import { IWidgetConfig } from "shared/types";
 import { DashboardService, dashboardService } from "./dashboard.service";
-import { IWidgetConfig } from "./dashboard.types";
 
 export class DashboardController {
   constructor(private _dashboardService: DashboardService) {}

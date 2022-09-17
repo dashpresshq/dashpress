@@ -1,14 +1,8 @@
-import {
-  SoftButton,
-  Spacer,
-  StyledCard,
-  Stack,
-  Text,
-  DeleteButton,
-} from "@hadmean/chromista";
+import { Spacer, StyledCard, Text } from "@hadmean/chromista";
 import { useEntityFilterCount } from "frontend/hooks/data/data.store";
 import { ISummaryWidgetConfig } from "shared/types";
 import styled from "styled-components";
+import { WidgetHeader } from "./Header";
 import { IWidgetSetting } from "./types";
 
 const StyledBox = styled.div`
@@ -20,31 +14,16 @@ interface IProps {
   setting?: IWidgetSetting;
 }
 
-export function SummaryWidget({ config: widgetConfig, setting }: IProps) {
-  const { title, link, filter, entity } = widgetConfig;
+export function SummaryWidget({ config, setting }: IProps) {
+  const { filters, entity } = config;
 
   // TODO svg
-  const count = useEntityFilterCount(entity, filter);
+  const count = useEntityFilterCount(entity, filters);
 
   return (
     <StyledCard>
       <StyledBox>
-        <Stack justify="space-between">
-          <Text size="4">{title}</Text>
-          <Stack width="auto">
-            {setting && (
-              <>
-                <SoftButton action={() => setting.setId()} icon="edit" />
-                <DeleteButton
-                  onDelete={() => setting.delete()}
-                  isMakingDeleteRequest={false}
-                  shouldConfirmAlert
-                />
-              </>
-            )}
-            {link && <SoftButton action={link.link} label={link.title} />}
-          </Stack>
-        </Stack>
+        <WidgetHeader setting={setting} config={config} />
         <Spacer size="xs" />
         <Text size="3" weight="bold">
           {count?.isLoading

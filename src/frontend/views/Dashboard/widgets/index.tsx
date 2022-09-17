@@ -1,6 +1,6 @@
 import { IWidgetConfig } from "shared/types";
 import { forwardRef } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { SummaryWidget } from "./Summary";
 import { TableWidget } from "./Table";
 import { IWidgetSetting } from "./types";
@@ -10,25 +10,38 @@ interface IProps {
   setting?: IWidgetSetting;
 }
 
-const Root = styled.div`
+const Root = styled.div<{ hasSetting: boolean }>`
+  ${(props) =>
+    props.hasSetting &&
+    css`
+      cursor: grab;
+      user-select: none;
+    `}
+`;
+
+const TableRoot = styled(Root)`
   grid-column-start: 1;
   grid-column-end: 5;
 `;
 
 export const DashboardWidget = forwardRef<HTMLInputElement, IProps>(
   ({ config, setting }, ref) => {
+    const rootProps = {
+      ref,
+      hasSetting: !!setting,
+    };
     if (config._type === "summary-card") {
       return (
-        <div ref={ref}>
+        <Root {...rootProps}>
           <SummaryWidget config={config} setting={setting} />
-        </div>
+        </Root>
       );
     }
     if (config._type === "table") {
       return (
-        <Root ref={ref}>
+        <TableRoot {...rootProps}>
           <TableWidget config={config} setting={setting} />
-        </Root>
+        </TableRoot>
       );
     }
     return null;

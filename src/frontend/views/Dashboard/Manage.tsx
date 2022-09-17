@@ -16,15 +16,11 @@ import {
   useDeleteDashboardWidgetMutation,
 } from "./dashboard.store";
 import { gridRoot } from "./styles";
-import { DashbaordSettings } from "./settings";
+import { DashboardSettings } from "./settings";
 
 const Root = styled.div`
   .list {
     ${gridRoot};
-  }
-  .item {
-    cursor: grab;
-    user-select: none;
   }
 `;
 
@@ -46,7 +42,7 @@ export function ManageDashboard() {
   };
 
   useSetPageDetails({
-    pageTitle: "Manage Dashbaord",
+    pageTitle: "Manage Dashboard",
     viewKey: "MANAGE_DASHBOARD",
     permission: USER_PERMISSIONS.CAN_MANAGE_DASHBOARD,
   });
@@ -114,7 +110,7 @@ export function ManageDashboard() {
         onClose={closeDashboardItem}
         show={!!currentDashboardItem}
       >
-        <DashbaordSettings />
+        <DashboardSettings />
         {currentDashboardItem}
       </OffCanvas>
     </>

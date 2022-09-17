@@ -58,7 +58,7 @@ export class DashboardService implements IApplicationService {
           },
           _type: "summary-card",
           entity: entity.value,
-          filter: [],
+          filters: [],
           statusIndicator: {
             field: "createdAt",
             period: "month",
@@ -77,7 +77,7 @@ export class DashboardService implements IApplicationService {
       },
       _type: "table",
       entity: firstEntity.value,
-      filter: [],
+      filters: [],
     });
 
     // eslint-disable-next-line no-restricted-syntax

@@ -116,7 +116,7 @@ export function useArrangeDashboardWidgetMutation(
   const apiMutateOptions = useApiMutateOptions<IWidgetConfig[], string[]>({
     dataQueryPath: DASHBOARD_ENDPOINT(dashboardId),
     onMutate: MutationHelpers.sortOrder,
-    successMessage: MutationsLang.saved("Order"),
+    successMessage: MutationsLang.saved("Widget Order"),
   });
 
   return useMutation(async (widgetList: string[]) => {

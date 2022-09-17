@@ -1,6 +1,6 @@
 import { FormNoValueSelect } from "@hadmean/chromista";
 
-export function DashbaordSettings() {
+export function DashboardSettings() {
   return (
     <FormNoValueSelect
       disabledOptions={[]}

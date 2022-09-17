@@ -4,7 +4,7 @@ export interface ISharedWidgetConfig {
   id: string;
   title: string;
   link?: { title: string; link: string };
-  filter: QueryFilter[];
+  filters: QueryFilter[];
   entity: string;
 }
 

@@ -5,7 +5,7 @@ export interface ISharedWidgetConfig {
   title: string;
   entity: string;
   link?: { title: string; link: string };
-  filters: QueryFilter[];
+  filters?: QueryFilter[];
 }
 
 export interface ITableWidgetConfig extends ISharedWidgetConfig {

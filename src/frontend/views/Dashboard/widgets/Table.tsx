@@ -15,7 +15,7 @@ interface IProps {
 }
 
 export function TableWidget({ config, setting }: IProps) {
-  const { filters, entity } = config;
+  const { filters = [], entity } = config;
   // TODO pagesize, order
   return (
     <StyledCard>

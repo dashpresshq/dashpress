@@ -1,4 +1,9 @@
-import { ComponentIsLoading, OffCanvas } from "@hadmean/chromista";
+import {
+  ComponentIsLoading,
+  FormSkeleton,
+  FormSkeletonSchema,
+  OffCanvas,
+} from "@hadmean/chromista";
 import styled from "styled-components";
 import { Check, Plus } from "react-feather";
 import { NAVIGATION_LINKS, useSetPageDetails } from "frontend/lib/routing";
@@ -8,12 +13,16 @@ import arrayMove from "array-move";
 import SortableList, { SortableItem } from "react-easy-sort";
 import { useState } from "react";
 import { useRouter } from "next/router";
+import { useEntitiesMenuItems } from "frontend/hooks/entity/entity.store";
+import { nanoid } from "nanoid";
 import { AppLayout } from "../../_layouts/app";
 import { DashboardWidget } from "./widgets";
 import {
   useArrangeDashboardWidgetMutation,
+  useCreateDashboardWidgetMutation,
   useDashboardWidgets,
   useDeleteDashboardWidgetMutation,
+  useUpdateDashboardWidgetMutation,
 } from "./dashboard.store";
 import { gridRoot } from "./styles";
 import { DashboardSettings } from "./settings";
@@ -33,8 +42,12 @@ export function ManageDashboard() {
 
   const widgets = useDashboardWidgets();
 
+  const entities = useEntitiesMenuItems();
+
   const deleteDashboardWidgetMutation = useDeleteDashboardWidgetMutation();
   const arrangeDashboardWidgetMutation = useArrangeDashboardWidgetMutation();
+  const createDashboardWidgetMutation = useCreateDashboardWidgetMutation();
+  const updateDashboardWidgetMutation = useUpdateDashboardWidgetMutation();
 
   const onSortEnd = (oldIndex: number, newIndex: number) => {
     const newOrder = arrayMove(widgets.data || [], oldIndex, newIndex);
@@ -109,8 +122,38 @@ export function ManageDashboard() {
         onClose={closeDashboardItem}
         show={!!currentDashboardItem}
       >
-        <DashboardSettings />
-        {currentDashboardItem}
+        <ViewStateMachine
+          loading={entities.isLoading}
+          error={entities.error}
+          loader={
+            <FormSkeleton
+              schema={[
+                FormSkeletonSchema.Input,
+                FormSkeletonSchema.Input,
+                FormSkeletonSchema.Input,
+                FormSkeletonSchema.Input,
+              ]}
+            />
+          }
+        >
+          <DashboardSettings
+            entities={entities.data || []}
+            onSubmit={async (config) => {
+              if (currentDashboardItem === NEW_DASHBOARD_ITEM) {
+                createDashboardWidgetMutation.mutate({
+                  ...config,
+                  id: nanoid(),
+                });
+              } else {
+                updateDashboardWidgetMutation.mutate(config);
+              }
+              closeDashboardItem();
+            }}
+            initialValues={(widgets.data || []).find(
+              ({ id }) => id === currentDashboardItem
+            )}
+          />
+        </ViewStateMachine>
       </OffCanvas>
     </>
   );

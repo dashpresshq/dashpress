@@ -1,4 +1,4 @@
-import { ComponentIsLoading, Spacer, OffCanvas } from "@hadmean/chromista";
+import { ComponentIsLoading, OffCanvas } from "@hadmean/chromista";
 import styled from "styled-components";
 import { Check, Plus } from "react-feather";
 import { NAVIGATION_LINKS, useSetPageDetails } from "frontend/lib/routing";
@@ -88,19 +88,16 @@ export function ManageDashboard() {
             >
               {(widgets.data || []).map((config) => (
                 <SortableItem key={config.id}>
-                  <div className="item">
-                    <DashboardWidget
-                      config={config}
-                      setting={{
-                        delete: () =>
-                          deleteDashboardWidgetMutation.mutate(config.id),
-                        setId: () => {
-                          setCurrentDashboardItem(config.id);
-                        },
-                      }}
-                    />
-                    <Spacer size="xl" />
-                  </div>
+                  <DashboardWidget
+                    config={config}
+                    setting={{
+                      delete: () =>
+                        deleteDashboardWidgetMutation.mutate(config.id),
+                      setId: () => {
+                        setCurrentDashboardItem(config.id);
+                      },
+                    }}
+                  />
                 </SortableItem>
               ))}
             </SortableList>

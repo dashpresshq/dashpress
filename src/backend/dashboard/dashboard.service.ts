@@ -12,6 +12,8 @@ import { userFriendlyCase } from "frontend/lib/strings";
 import { IWidgetConfig, HOME_DASHBOARD_KEY } from "shared/types";
 import { NAVIGATION_LINKS } from "frontend/lib/routing";
 
+const DFAULT_NUMBER_OF_SUMMARY_CARDS = 8;
+
 export class DashboardService implements IApplicationService {
   constructor(
     private readonly _dashboardPersistenceService: AbstractConfigDataPersistenceService<
@@ -44,15 +46,16 @@ export class DashboardService implements IApplicationService {
   private async generateDefaultDashboardWidgets() {
     const entities = await this._entitiesService.getAllEntities();
 
-    const defaultWidgets: IWidgetConfig[] = entities.map((entity) => {
-      return {
-        id: nanoid(),
-        title: userFriendlyCase(`${entity.value}`),
-        link: {
-          title: "View Data",
-          link: NAVIGATION_LINKS.ENTITY.TABLE(entity.value),
-        },
-        config: {
+    const defaultWidgets: IWidgetConfig[] = entities
+      .slice(0, DFAULT_NUMBER_OF_SUMMARY_CARDS)
+      .map((entity) => {
+        return {
+          id: nanoid(),
+          title: userFriendlyCase(`${entity.value}`),
+          link: {
+            title: "View Data",
+            link: NAVIGATION_LINKS.ENTITY.TABLE(entity.value),
+          },
           _type: "summary-card",
           entity: entity.value,
           filter: [],
@@ -60,8 +63,21 @@ export class DashboardService implements IApplicationService {
             field: "createdAt",
             period: "month",
           },
-        },
-      };
+        };
+      });
+
+    const firstEntity = entities[0];
+
+    defaultWidgets.push({
+      id: nanoid(),
+      title: userFriendlyCase(`${firstEntity.value}`),
+      link: {
+        title: "View Data",
+        link: NAVIGATION_LINKS.ENTITY.TABLE(firstEntity.value),
+      },
+      _type: "table",
+      entity: firstEntity.value,
+      filter: [],
     });
 
     // eslint-disable-next-line no-restricted-syntax

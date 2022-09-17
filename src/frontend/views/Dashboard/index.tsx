@@ -1,4 +1,4 @@
-import { ComponentIsLoading, Spacer } from "@hadmean/chromista";
+import { ComponentIsLoading } from "@hadmean/chromista";
 import { Settings } from "react-feather";
 import { NAVIGATION_LINKS, useSetPageDetails } from "frontend/lib/routing";
 import { META_USER_PERMISSIONS, USER_PERMISSIONS } from "shared/types";
@@ -52,10 +52,7 @@ export function Dashboard() {
       >
         <Root>
           {(widgets.data || []).map((config) => (
-            <div key={config.id}>
-              <DashboardWidget config={config} />
-              <Spacer size="xl" />
-            </div>
+            <DashboardWidget config={config} key={config.id} />
           ))}
         </Root>
       </ViewStateMachine>

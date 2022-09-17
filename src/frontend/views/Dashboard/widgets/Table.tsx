@@ -42,7 +42,7 @@ export function TableWidget({ config: widgetConfig, setting }: IProps) {
             {link && <SoftButton action={link.link} label={link.title} />}
           </Stack>
         </Stack>
-        <Spacer size="xs" />
+        <Spacer />
         <EntityTableView
           entity={entity}
           defaultTableState={{ filters: filter }}

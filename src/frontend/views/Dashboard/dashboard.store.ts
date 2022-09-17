@@ -60,23 +60,6 @@ export const useDashboardWidgets = (dashboardId = HOME_DASHBOARD_KEY) => {
   });
 };
 
-export function useDeleteDashboardWidgetMutation(
-  dashboardId = HOME_DASHBOARD_KEY
-) {
-  const apiMutateOptions = useApiMutateOptions<IWidgetConfig[], string>({
-    dataQueryPath: DASHBOARD_ENDPOINT(dashboardId),
-    onMutate: MutationHelpers.delete,
-    successMessage: MutationsLang.delete("Widget"),
-  });
-
-  return useMutation(async (widgetId: string) => {
-    await makeDeleteRequest(`${DASHBOARD_ENDPOINT(dashboardId)}/${widgetId}`, {
-      widgetId,
-    });
-    return widgetId;
-  }, apiMutateOptions);
-}
-
 export function useCreateDashboardWidgetMutation(
   dashboardId = HOME_DASHBOARD_KEY
 ) {
@@ -110,12 +93,30 @@ export function useUpdateDashboardWidgetMutation(
   }, apiMutateOptions);
 }
 
+export function useDeleteDashboardWidgetMutation(
+  dashboardId = HOME_DASHBOARD_KEY
+) {
+  const apiMutateOptions = useApiMutateOptions<IWidgetConfig[], string>({
+    dataQueryPath: DASHBOARD_ENDPOINT(dashboardId),
+    onMutate: MutationHelpers.delete,
+    successMessage: MutationsLang.delete("Widget"),
+  });
+
+  return useMutation(async (widgetId: string) => {
+    await makeDeleteRequest(`${DASHBOARD_ENDPOINT(dashboardId)}/${widgetId}`, {
+      widgetId,
+    });
+    return widgetId;
+  }, apiMutateOptions);
+}
+
 export function useArrangeDashboardWidgetMutation(
   dashboardId = HOME_DASHBOARD_KEY
 ) {
   const apiMutateOptions = useApiMutateOptions<IWidgetConfig[], string[]>({
     dataQueryPath: DASHBOARD_ENDPOINT(dashboardId),
     onMutate: MutationHelpers.sortOrder,
+    successMessage: MutationsLang.saved("Order"),
   });
 
   return useMutation(async (widgetList: string[]) => {

@@ -7,15 +7,19 @@ import {
 import styled from "styled-components";
 import { Check, Plus } from "react-feather";
 import { NAVIGATION_LINKS, useSetPageDetails } from "frontend/lib/routing";
-import { IWidgetConfig, USER_PERMISSIONS } from "shared/types";
+import { USER_PERMISSIONS } from "shared/types";
 import { ViewStateMachine } from "frontend/lib/ViewStateMachine";
 import arrayMove from "array-move";
 import SortableList, { SortableItem } from "react-easy-sort";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useRouter } from "next/router";
 import { AppLayout } from "../../_layouts/app";
 import { SummaryCard } from "./cards/SummaryCard";
-import { useDashboardWidgets } from "./dashboard.store";
+import {
+  useArrangeDashboardWidgetMutation,
+  useDashboardWidgets,
+  useDeleteDashboardWidgetMutation,
+} from "./dashboard.store";
 import { gridRoot } from "./styles";
 
 const Root = styled.div`
@@ -37,15 +41,13 @@ export function ManageDashboard() {
 
   const widgets = useDashboardWidgets();
 
-  const [items, setItems] = useState<IWidgetConfig[]>([]);
+  const deleteDashboardWidgetMutation = useDeleteDashboardWidgetMutation();
+  const arrangeDashboardWidgetMutation = useArrangeDashboardWidgetMutation();
 
   const onSortEnd = (oldIndex: number, newIndex: number) => {
-    setItems((array) => arrayMove(array, oldIndex, newIndex));
+    const newOrder = arrayMove(widgets.data || [], oldIndex, newIndex);
+    arrangeDashboardWidgetMutation.mutate(newOrder.map(({ id }) => id));
   };
-
-  useEffect(() => {
-    setItems(widgets.data || []);
-  }, [JSON.stringify(widgets.data || [])]);
 
   useSetPageDetails({
     pageTitle: "Manage Dashbaord",
@@ -88,12 +90,18 @@ export function ManageDashboard() {
               className="list"
               draggedItemClassName="dragged"
             >
-              {items.map((config) => (
+              {(widgets.data || []).map((config) => (
                 <SortableItem key={config.id}>
                   <div className="item">
                     <SummaryCard
                       config={config}
-                      setting={{ delete: () => {}, setId: () => {} }}
+                      setting={{
+                        delete: () =>
+                          deleteDashboardWidgetMutation.mutate(config.id),
+                        setId: () => {
+                          setCurrentDashboardItem(config.id);
+                        },
+                      }}
                     />
                     <Spacer size="xl" />
                   </div>

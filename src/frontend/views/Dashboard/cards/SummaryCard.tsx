@@ -17,13 +17,13 @@ const StyledBox = styled.div`
 interface IProps {
   config: IWidgetConfig;
   setting?: {
-    setId: (id: string) => void;
-    delete: (id: string) => void;
+    setId: () => void;
+    delete: () => void;
   };
 }
 
 export function SummaryCard({ config: widgetConfig, setting }: IProps) {
-  const { config, id, title, link } = widgetConfig;
+  const { config, title, link } = widgetConfig;
 
   // TODO svg
   const count = useEntityFilterCount(config.entity, config.filter);
@@ -36,9 +36,9 @@ export function SummaryCard({ config: widgetConfig, setting }: IProps) {
           <Stack width="auto">
             {setting && (
               <>
-                <SoftButton action={() => setting.setId(id)} icon="edit" />
+                <SoftButton action={() => setting.setId()} icon="edit" />
                 <DeleteButton
-                  onDelete={() => setting.delete(id)}
+                  onDelete={() => setting.delete()}
                   isMakingDeleteRequest={false}
                   shouldConfirmAlert
                 />

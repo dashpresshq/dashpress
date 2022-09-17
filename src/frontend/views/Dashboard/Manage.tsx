@@ -100,7 +100,6 @@ export function ManageDashboard() {
           </Root>
         </ViewStateMachine>
       </AppLayout>
-
       <OffCanvas
         title={
           currentDashboardItem === NEW_DASHBOARD_ITEM

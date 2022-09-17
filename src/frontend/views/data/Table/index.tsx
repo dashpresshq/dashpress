@@ -52,6 +52,7 @@ export function EntityTable() {
   const changeTabParam = useChangeRouterParam("tab");
 
   const firstTabView: ITableTab = (entityTableTabs.data || [])?.[0] || {
+    id: "",
     title: "",
     dataState: DEFAULT_TABLE_PARAMS,
   };

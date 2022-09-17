@@ -25,6 +25,7 @@ import {
   useTableColumns,
 } from "frontend/views/data/Table/useTableColumns";
 import { useEntitySlug } from "frontend/hooks/entity/entity.config";
+import { nanoid } from "nanoid";
 
 interface IProps {
   values: ITableTab[];
@@ -46,6 +47,7 @@ function TabForm({ values }: IProps) {
       label="Add new tab"
       action={() => {
         const newTab: ITableTab = {
+          id: nanoid(),
           title: `Tab ${fields.length + 1}`,
           dataState: {
             filters: [],

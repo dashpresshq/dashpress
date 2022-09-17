@@ -1,23 +1,26 @@
 import { QueryFilter } from "shared/types";
 
-export interface IWidgetConfig {
+export interface ISharedWidgetConfig {
   id: string;
   title: string;
-  svg?: string;
   link?: { title: string; link: string };
-  config:
-    | { _type: "table"; entity: string; filter: QueryFilter[] }
-    | {
-        _type: "summary-card";
-        filter: QueryFilter[];
-        entity: string;
-        statusIndicator:
-          | false
-          | {
-              field: string;
-              period: "day" | "week" | "month" | "quarter" | "year";
-            };
-      };
+  filter: QueryFilter[];
+  entity: string;
 }
+
+export interface ITableWidgetConfig extends ISharedWidgetConfig {
+  _type: "table";
+}
+
+export interface ISummaryWidgetConfig extends ISharedWidgetConfig {
+  _type: "summary-card";
+  svg?: string;
+  statusIndicator?: {
+    field: string;
+    period: "day" | "week" | "month" | "quarter" | "year";
+  };
+}
+
+export type IWidgetConfig = ITableWidgetConfig | ISummaryWidgetConfig;
 
 export const HOME_DASHBOARD_KEY = "__home__";

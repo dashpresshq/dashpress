@@ -7,26 +7,24 @@ import {
   DeleteButton,
 } from "@hadmean/chromista";
 import { useEntityFilterCount } from "frontend/hooks/data/data.store";
-import { IWidgetConfig } from "shared/types";
+import { ISummaryWidgetConfig } from "shared/types";
 import styled from "styled-components";
+import { IWidgetSetting } from "./types";
 
 const StyledBox = styled.div`
   padding: 24px;
 `;
 
 interface IProps {
-  config: IWidgetConfig;
-  setting?: {
-    setId: () => void;
-    delete: () => void;
-  };
+  config: ISummaryWidgetConfig;
+  setting?: IWidgetSetting;
 }
 
-export function SummaryCard({ config: widgetConfig, setting }: IProps) {
-  const { config, title, link } = widgetConfig;
+export function SummaryWidget({ config: widgetConfig, setting }: IProps) {
+  const { title, link, filter, entity } = widgetConfig;
 
   // TODO svg
-  const count = useEntityFilterCount(config.entity, config.filter);
+  const count = useEntityFilterCount(entity, filter);
 
   return (
     <StyledCard>

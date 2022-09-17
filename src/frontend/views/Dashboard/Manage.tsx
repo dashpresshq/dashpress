@@ -1,9 +1,4 @@
-import {
-  ComponentIsLoading,
-  Spacer,
-  OffCanvas,
-  FormNoValueSelect,
-} from "@hadmean/chromista";
+import { ComponentIsLoading, Spacer, OffCanvas } from "@hadmean/chromista";
 import styled from "styled-components";
 import { Check, Plus } from "react-feather";
 import { NAVIGATION_LINKS, useSetPageDetails } from "frontend/lib/routing";
@@ -14,13 +9,14 @@ import SortableList, { SortableItem } from "react-easy-sort";
 import { useState } from "react";
 import { useRouter } from "next/router";
 import { AppLayout } from "../../_layouts/app";
-import { SummaryCard } from "./cards/SummaryCard";
+import { DashboardWidget } from "./widgets";
 import {
   useArrangeDashboardWidgetMutation,
   useDashboardWidgets,
   useDeleteDashboardWidgetMutation,
 } from "./dashboard.store";
 import { gridRoot } from "./styles";
+import { DashbaordSettings } from "./settings";
 
 const Root = styled.div`
   .list {
@@ -93,7 +89,7 @@ export function ManageDashboard() {
               {(widgets.data || []).map((config) => (
                 <SortableItem key={config.id}>
                   <div className="item">
-                    <SummaryCard
+                    <DashboardWidget
                       config={config}
                       setting={{
                         delete: () =>
@@ -121,40 +117,7 @@ export function ManageDashboard() {
         onClose={closeDashboardItem}
         show={!!currentDashboardItem}
       >
-        <FormNoValueSelect
-          disabledOptions={[]}
-          selectData={[
-            {
-              label: "Summary Card",
-              value: "Summary Card",
-            },
-            {
-              label: "Bar Chart",
-              value: "Bar Chart",
-            },
-            {
-              label: "Line Chart",
-              value: "Line Chart",
-            },
-            {
-              label: "Pie Chart",
-              value: "Pie Chart",
-            },
-            {
-              label: "Pivot Table",
-              value: "Pivot Table",
-            },
-            {
-              label: "Table",
-              value: "Table",
-            },
-            {
-              label: "Histogram",
-              value: "Histogram",
-            },
-          ]}
-          onChange={() => {}}
-        />
+        <DashbaordSettings />
         {currentDashboardItem}
       </OffCanvas>
     </>

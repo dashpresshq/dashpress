@@ -8,9 +8,9 @@ import { useUserHasPermission } from "frontend/hooks/auth/user.store";
 import styled from "styled-components";
 import { useRouter } from "next/router";
 import { AppLayout } from "../../_layouts/app";
-import { SummaryCard } from "./cards/SummaryCard";
 import { useDashboardWidgets } from "./dashboard.store";
 import { gridRoot } from "./styles";
+import { DashboardWidget } from "./widgets";
 
 const Root = styled.div`
   ${gridRoot};
@@ -53,7 +53,7 @@ export function Dashboard() {
         <Root>
           {(widgets.data || []).map((config) => (
             <div key={config.id}>
-              <SummaryCard config={config} />
+              <DashboardWidget config={config} />
               <Spacer size="xl" />
             </div>
           ))}

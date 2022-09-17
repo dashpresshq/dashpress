@@ -12,7 +12,7 @@ setupApiHandlers();
 jest.mock("next/router", () => require("next-router-mock"));
 
 describe("pages/admin (Dashboard)", () => {
-  it("render menu items correctly", async () => {
+  it.skip("render menu items correctly", async () => {
     render(
       <AppWrapper>
         <Dashboard />

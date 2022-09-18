@@ -80,18 +80,6 @@ export function DashboardSettings({
               )}
             </Field>
 
-            {/* <Field name="port" validate={required} validateFields={[]}>
-            {({ input, meta }) => (
-              <FormNumberInput label="Port" meta={meta} input={input} />
-            )}
-          </Field>
-
-          <Field name="ssl" validateFields={[]} type="checkbox">
-            {({ input, meta }) => (
-              <FormCheckBox label="Use SSL" meta={meta} input={input} />
-            )}
-          </Field> */}
-
             <FormButton
               text="Save"
               isMakingRequest={false}

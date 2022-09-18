@@ -46,7 +46,7 @@ const buildFilterCountQueryString = (
   queryFilter: QueryFilter[]
 ) =>
   `${ENTITY_COUNT_PATH(entity)}?${qs.stringify({
-    filters: [queryFilter],
+    filters: queryFilter,
   })}`;
 
 export const useEntityFilterCount = (

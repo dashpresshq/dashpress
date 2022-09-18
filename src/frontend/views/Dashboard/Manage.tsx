@@ -117,7 +117,7 @@ export function ManageDashboard() {
         title={
           currentDashboardItem === NEW_DASHBOARD_ITEM
             ? "New Dashboard Item"
-            : currentDashboardItem
+            : "Edit Dashboard Item"
         }
         onClose={closeDashboardItem}
         show={!!currentDashboardItem}

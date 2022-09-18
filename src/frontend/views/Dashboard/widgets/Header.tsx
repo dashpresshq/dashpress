@@ -1,6 +1,8 @@
 import { Stack, Text, SoftButton, DeleteButton } from "@hadmean/chromista";
+import { SLUG_LOADING_VALUE } from "@hadmean/protozoa";
+import { useEntityConfiguration } from "frontend/hooks/configuration/configuration.store";
 import { NAVIGATION_LINKS } from "frontend/lib/routing";
-import { ISharedWidgetConfig } from "shared/types";
+import { ISharedWidgetConfig, ITableTab } from "shared/types";
 import { IWidgetSetting } from "./types";
 
 interface IProps {
@@ -11,7 +13,16 @@ interface IProps {
 export function WidgetHeader({ config, setting }: IProps) {
   const { title, entity, filter } = config;
 
-  const tabFilter = filter ? `?tab=${filter}` : "";
+  const entityTableTabs = useEntityConfiguration<ITableTab[]>(
+    "entity_table_tabs",
+    filter ? config.entity : SLUG_LOADING_VALUE
+  );
+
+  const tabTitle = (entityTableTabs.data || []).find(
+    ({ id }) => id === filter
+  )?.title;
+
+  const tabFilter = filter ? `?tab=${tabTitle}` : "";
 
   return (
     <Stack justify="space-between">

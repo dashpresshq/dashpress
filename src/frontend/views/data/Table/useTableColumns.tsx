@@ -27,8 +27,12 @@ export const ACTIONS_ACCESSOR = "__actions__";
 const buildFilterConfigFromType = (
   entityType: keyof typeof FIELD_TYPES_CONFIG_MAP,
   entityFieldSelections: IColorableSelection[],
-  referenceField?: string
+  referenceField?: string,
+  lean?: true
 ): TableFilterType | undefined => {
+  if (lean) {
+    return undefined;
+  }
   const filterType =
     FIELD_TYPES_CONFIG_MAP[entityType]?.tableFilterType || "not-filterable";
 
@@ -52,7 +56,7 @@ const buildFilterConfigFromType = (
   }
 };
 
-export const useTableColumns = (entity: string) => {
+export const useTableColumns = (entity: string, lean?: true) => {
   const getEntityFieldLabels = useEntityFieldLabels(entity);
   const entityCrudSettings = useEntityCrudSettings(entity);
   const entityFields = useEntityFields(entity);
@@ -98,9 +102,12 @@ export const useTableColumns = (entity: string) => {
           : buildFilterConfigFromType(
               entityFieldTypes[name],
               entityFieldSelections[name],
-              entityToOneReferenceFields.data[name]
+              entityToOneReferenceFields.data[name],
+              lean
             ),
-      disableSortBy: !FIELD_TYPES_CONFIG_MAP[entityFieldTypes[name]]?.sortable,
+      disableSortBy: lean
+        ? true
+        : !FIELD_TYPES_CONFIG_MAP[entityFieldTypes[name]]?.sortable,
       Cell: ({ value }: { value: unknown }) => {
         if (value === undefined || value === null) {
           return null;
@@ -140,18 +147,20 @@ export const useTableColumns = (entity: string) => {
     entityCrudSettings.data?.delete ||
     entityCrudSettings.data?.update
   ) {
-    columns.push({
-      Header: "Actions",
-      accessor: ACTIONS_ACCESSOR,
-      disableSortBy: true,
-      Cell: ({ row }: { row: { original: Record<string, unknown> } }) => (
-        <TableActions
-          row={row}
-          crudSettings={entityCrudSettings.data}
-          entity={entity}
-        />
-      ),
-    });
+    if (!lean) {
+      columns.push({
+        Header: "Actions",
+        accessor: ACTIONS_ACCESSOR,
+        disableSortBy: true,
+        Cell: ({ row }: { row: { original: Record<string, unknown> } }) => (
+          <TableActions
+            row={row}
+            crudSettings={entityCrudSettings.data}
+            entity={entity}
+          />
+        ),
+      });
+    }
   }
   return columns;
 };

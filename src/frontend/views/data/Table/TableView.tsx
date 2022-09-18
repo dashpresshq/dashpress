@@ -29,6 +29,7 @@ import { EntityDetailsView } from "../Details/DetailsView";
 
 interface IProps {
   entity: string;
+  lean?: true;
   persitentFilters?: QueryFilter[];
   defaultTableState?: Pick<
     IBEPaginatedDataState,
@@ -38,6 +39,7 @@ interface IProps {
 
 export function EntityTableView({
   entity,
+  lean,
   persitentFilters = [],
   defaultTableState,
 }: IProps) {
@@ -73,7 +75,7 @@ export function EntityTableView({
 
   const canvasEntityDiction = useEntityDiction(detailsCanvasEntity);
 
-  const columns = useTableColumns(entity);
+  const columns = useTableColumns(entity, lean);
 
   const error =
     entityCrudSettings.error || entityFields.error || hiddenTableColumns.error;
@@ -97,6 +99,7 @@ export function EntityTableView({
             setPaginatedDataState,
             paginatedDataState,
           }}
+          lean={lean}
           columns={columns}
         />
       </ViewStateMachine>

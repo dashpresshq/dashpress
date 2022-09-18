@@ -36,6 +36,7 @@ export function TableWidget({ config, setting }: IProps) {
         <EntityTableView
           entity={entityTableTabs.isLoading ? SLUG_LOADING_VALUE : entity}
           defaultTableState={{ ...dataState, pageSize: 5 }}
+          lean
         />
       </StyledBox>
     </StyledCard>

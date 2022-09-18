@@ -1,6 +1,7 @@
 import { Spacer, StyledCard, Text } from "@hadmean/chromista";
+import { useEntityConfiguration } from "frontend/hooks/configuration/configuration.store";
 import { useEntityFilterCount } from "frontend/hooks/data/data.store";
-import { ISummaryWidgetConfig } from "shared/types";
+import { ISummaryWidgetConfig, ITableTab, QueryFilter } from "shared/types";
 import styled from "styled-components";
 import { WidgetHeader } from "./Header";
 import { IWidgetSetting } from "./types";
@@ -15,10 +16,22 @@ interface IProps {
 }
 
 export function SummaryWidget({ config, setting }: IProps) {
-  const { filters, entity } = config;
+  const { filter, entity } = config;
+
+  const entityTableTabs = useEntityConfiguration<ITableTab[]>(
+    "entity_table_tabs",
+    config.entity
+  );
+
+  const filters: QueryFilter[] =
+    ((entityTableTabs.data || []).find(({ id }) => id === filter)?.dataState
+      ?.filters as QueryFilter[]) || [];
 
   // TODO svg
-  const count = useEntityFilterCount(entity, filters);
+  const count = useEntityFilterCount(
+    entity,
+    entityTableTabs.isLoading ? "loading" : filters
+  );
 
   return (
     <StyledCard>

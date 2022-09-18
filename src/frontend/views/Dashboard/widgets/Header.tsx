@@ -1,4 +1,5 @@
 import { Stack, Text, SoftButton, DeleteButton } from "@hadmean/chromista";
+import { NAVIGATION_LINKS } from "frontend/lib/routing";
 import { ISharedWidgetConfig } from "shared/types";
 import { IWidgetSetting } from "./types";
 
@@ -8,7 +9,10 @@ interface IProps {
 }
 
 export function WidgetHeader({ config, setting }: IProps) {
-  const { title, link } = config;
+  const { title, entity, filter } = config;
+
+  const tabFilter = filter ? `?tab=${filter}` : "";
+
   return (
     <Stack justify="space-between">
       <Text size="4">{title}</Text>
@@ -24,7 +28,11 @@ export function WidgetHeader({ config, setting }: IProps) {
             />
           </>
         )}
-        {link && <SoftButton action={link.link} label={link.title} size="xs" />}
+        <SoftButton
+          action={NAVIGATION_LINKS.ENTITY.TABLE(entity) + tabFilter}
+          label="View"
+          size="xs"
+        />
       </Stack>
     </Stack>
   );

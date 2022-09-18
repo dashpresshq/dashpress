@@ -1,11 +1,8 @@
-import { QueryFilter } from "shared/types";
-
 export interface ISharedWidgetConfig {
   id: string;
   title: string;
   entity: string;
-  link?: { title: string; link: string };
-  filters?: QueryFilter[];
+  filter: string;
 }
 
 export interface ITableWidgetConfig extends ISharedWidgetConfig {

@@ -49,11 +49,15 @@ const buildFilterCountQueryString = (
     filters: [queryFilter],
   })}`;
 
-export const useEntityFilterCount = (entity: string, filter: QueryFilter[]) => {
+export const useEntityFilterCount = (
+  entity: string,
+  filters: QueryFilter[] | "loading"
+) => {
   return useApi<{ count: number }>(
-    buildFilterCountQueryString(entity, filter),
+    buildFilterCountQueryString(entity, filters === "loading" ? [] : filters),
     {
       errorMessage: dataNotFoundMessage(`${entity} count`),
+      enabled: filters !== "loading",
     }
   );
 };

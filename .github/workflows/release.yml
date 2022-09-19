@@ -13,6 +13,8 @@ jobs:
         with:
           node-version: 16
       - run: yarn install
+      - name: Start Redis
+        uses: supercharge/redis-github-action@1.4.0
       - run: yarn run verify
       - uses: JS-DevTools/npm-publish@v1
         with:

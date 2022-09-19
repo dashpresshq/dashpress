@@ -97,7 +97,6 @@ export class DataController {
       configuration,
       entity
     );
-    // :eyes
     return configuration;
   }
 

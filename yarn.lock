@@ -1448,15 +1448,15 @@
     pg "^8.7.3"
     sqlite3 "^5.0.8"
 
-"@hadmean/chromista@^1.0.24":
-  version "1.0.24"
-  resolved "https://registry.yarnpkg.com/@hadmean/chromista/-/chromista-1.0.24.tgz#b7567e72e60e7eed9a66d5d9e1a95c6bf415bb39"
-  integrity sha512-5pGaGA3HLw0Fk9KLiLM8s+0Z6WX96C2xShSfsI/uyCPwdV8z5JKZmcj02wujrg3PQQT8BSnO5YIGd3WCgh0D3g==
+"@hadmean/chromista@^1.0.25":
+  version "1.0.25"
+  resolved "https://registry.yarnpkg.com/@hadmean/chromista/-/chromista-1.0.25.tgz#3d01a216be08d926ab85c06355f39078d205051b"
+  integrity sha512-0alUs2V4hReU9XZeD0mBZK5954OOAq4N06gjH/3P7aEOMvyU56R9rMYqFH0m/tDqMlbgE/dMLN/czcWl2u3c9g==
   dependencies:
     "@fortawesome/fontawesome-svg-core" "^6.1.1"
     "@fortawesome/free-solid-svg-icons" "^6.1.1"
     "@fortawesome/react-fontawesome" "^0.1.18"
-    "@hadmean/protozoa" "1.0.6"
+    "@hadmean/protozoa" "1.0.8"
     "@types/prismjs" "^1.26.0"
     "@types/react-datepicker" "^4.4.1"
     "@types/styled-components" "^5.1.25"
@@ -1488,10 +1488,10 @@
     tiny-skeleton-loader-react "^1.1.8"
     zustand "3.4.2"
 
-"@hadmean/eslint-config@^1.0.0":
-  version "1.0.0"
-  resolved "https://registry.npmjs.org/@hadmean/eslint-config/-/eslint-config-1.0.0.tgz"
-  integrity sha512-siNDMEY+LjkuOYwtZFDsxOWj7Sft7pX9/iPhI++XF6NpST22EQqrlIUfZ4gHuw9FQ/kYysVQPErskgcQgbshqA==
+"@hadmean/eslint-config@^1.0.2":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@hadmean/eslint-config/-/eslint-config-1.0.2.tgz#051468d4c2ae3ae43f8a87076e7000e84245d639"
+  integrity sha512-XxjDviq1+mo6CXrBqWWx1E8Js/LwxQ9mkVZnEzdr8YlL6bGIdTBgJL/VWRKY5Ql9L7xKE5EKB7PsbfJ+15A6+Q==
   dependencies:
     "@typescript-eslint/eslint-plugin" "^5.30.5"
     "@typescript-eslint/parser" "^5.30.5"
@@ -1509,10 +1509,10 @@
     eslint-plugin-testing-library "^5.5.1"
     prettier "^2.7.1"
 
-"@hadmean/protozoa@1.0.6", "@hadmean/protozoa@^1.0.6":
-  version "1.0.6"
-  resolved "https://registry.yarnpkg.com/@hadmean/protozoa/-/protozoa-1.0.6.tgz#6cb9076a21a1f5b7848623c4fe405cdcc3e35671"
-  integrity sha512-5RUqPfva+o1XWzH1ENE5I4SO0V6JRFdqSe/E32tOZHcO5k0SjfIkRrlFJsaGEmIyW3kF1ds8SaOjuF5fqT398Q==
+"@hadmean/protozoa@1.0.8", "@hadmean/protozoa@^1.0.8":
+  version "1.0.8"
+  resolved "https://registry.yarnpkg.com/@hadmean/protozoa/-/protozoa-1.0.8.tgz#02a976535021fb2a1f7bfc517fd8d2efed962946"
+  integrity sha512-RJ6slXHGrPm9xIqCnVhUGpkUNlJdZFExUbOlXc+XHjW5oUgZd6pLp1us0hgnBI6gfl2JizD6oMvtWCKvzTOrdw==
   dependencies:
     "@types/lodash" "^4.14.182"
     "@types/nprogress" "^0.2.0"

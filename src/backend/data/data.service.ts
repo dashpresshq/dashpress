@@ -1,4 +1,8 @@
-import { FilterOperators, IColumnFilterBag } from "@hadmean/chromista"; // Move this somewhere else
+import {
+  FilterOperators,
+  IColumnFilterBag,
+  DATE_FILTER_VALUE,
+} from "@hadmean/protozoa";
 import { Knex } from "knex";
 import get from "lodash/get";
 import { credentialsService } from "backend/credentials/credentials.service";
@@ -6,6 +10,14 @@ import { getDbConnection } from "backend/lib/connection/db";
 import { CREDENTIALS_DOMAINS } from "backend/credentials/crendential.types";
 import { IDBCredentials, QueryFilter } from "shared/types";
 import { IApplicationService } from "backend/types";
+import {
+  subDays,
+  subHours,
+  subMonths,
+  subQuarters,
+  subYears,
+  subWeeks,
+} from "date-fns";
 import { IPaginationFilters } from "./types";
 
 export class DataService implements IApplicationService {
@@ -30,6 +42,40 @@ export class DataService implements IApplicationService {
     await DataService.getInstance();
   }
 
+  private dateFilterToTime(value: string) {
+    if (value === DATE_FILTER_VALUE.BEGINNING_OF_TIME_VALUE) {
+      return new Date(0, 0, 0);
+    }
+    if (value === DATE_FILTER_VALUE.NOW) {
+      return new Date();
+    }
+    if (value === DATE_FILTER_VALUE.YEAR) {
+      return new Date(new Date().getFullYear(), 0, 0);
+    }
+    const [countString, field] = value.split(":");
+    const count = +countString;
+
+    if (field === DATE_FILTER_VALUE.HOUR) {
+      return subHours(new Date(), count);
+    }
+    if (field === DATE_FILTER_VALUE.DAY) {
+      return subDays(new Date(), count);
+    }
+    if (field === DATE_FILTER_VALUE.WEEK) {
+      return subWeeks(new Date(), count);
+    }
+    if (field === DATE_FILTER_VALUE.MONTH) {
+      return subMonths(new Date(), count);
+    }
+    if (field === DATE_FILTER_VALUE.QUARTER) {
+      return subQuarters(new Date(), count);
+    }
+    if (field === DATE_FILTER_VALUE.YEAR) {
+      return subYears(new Date(), count);
+    }
+    return new Date();
+  }
+
   private filterOperatorToQuery(
     query: Knex.QueryBuilder,
     column: string,
@@ -38,7 +84,6 @@ export class DataService implements IApplicationService {
     if (!operator || !value || !column) {
       return query;
     }
-
     switch (operator) {
       case FilterOperators.EQUAL_TO:
         return query.where(column, "=", value);
@@ -63,6 +108,14 @@ export class DataService implements IApplicationService {
           return query;
         }
         return query.whereBetween(column, [value, value2]);
+
+      case FilterOperators.DATE:
+        return query.whereBetween(column, [
+          this.dateFilterToTime(
+            (value as string) || DATE_FILTER_VALUE.BEGINNING_OF_TIME_VALUE
+          ),
+          this.dateFilterToTime((value2 as string) || DATE_FILTER_VALUE.NOW),
+        ]);
 
       case FilterOperators.NOT_IN:
         return query.whereNotIn(column, value as string[]);

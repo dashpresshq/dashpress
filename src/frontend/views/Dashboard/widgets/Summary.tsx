@@ -16,7 +16,7 @@ interface IProps {
 }
 
 export function SummaryWidget({ config, setting }: IProps) {
-  const { filter, entity } = config;
+  const { queryId, entity } = config;
 
   const entityTableTabs = useEntityConfiguration<ITableTab[]>(
     "entity_table_tabs",
@@ -24,10 +24,10 @@ export function SummaryWidget({ config, setting }: IProps) {
   );
 
   const filters: QueryFilter[] =
-    ((entityTableTabs.data || []).find(({ id }) => id === filter)?.dataState
+    ((entityTableTabs.data || []).find(({ id }) => id === queryId)?.dataState
       ?.filters as QueryFilter[]) || [];
 
-  // TODO svg
+  // TODO statusIndicator
   const count = useEntityFilterCount(
     entity,
     entityTableTabs.isLoading ? "loading" : filters

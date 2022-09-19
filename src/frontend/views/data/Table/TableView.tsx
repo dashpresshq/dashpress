@@ -91,7 +91,7 @@ export function EntityTableView({
       <ViewStateMachine
         error={error}
         loading={isLoading}
-        loader={<TableSkeleton />}
+        loader={<TableSkeleton lean={lean} />}
       >
         <Table
           {...{

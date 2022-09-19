@@ -11,18 +11,18 @@ interface IProps {
 }
 
 export function WidgetHeader({ config, setting }: IProps) {
-  const { title, entity, filter } = config;
+  const { title, entity, queryId } = config;
 
   const entityTableTabs = useEntityConfiguration<ITableTab[]>(
     "entity_table_tabs",
-    filter ? config.entity : SLUG_LOADING_VALUE
+    queryId ? config.entity : SLUG_LOADING_VALUE
   );
 
   const tabTitle = (entityTableTabs.data || []).find(
-    ({ id }) => id === filter
+    ({ id }) => id === queryId
   )?.title;
 
-  const tabFilter = filter ? `?tab=${tabTitle}` : "";
+  const tabFilter = queryId ? `?tab=${tabTitle}` : "";
 
   return (
     <Stack justify="space-between">

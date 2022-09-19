@@ -17,7 +17,7 @@ interface IProps {
 }
 
 export function TableWidget({ config, setting }: IProps) {
-  const { filter, entity } = config;
+  const { queryId, entity } = config;
 
   const entityTableTabs = useEntityConfiguration<ITableTab[]>(
     "entity_table_tabs",
@@ -25,7 +25,7 @@ export function TableWidget({ config, setting }: IProps) {
   );
 
   const dataState = (entityTableTabs.data || []).find(
-    ({ id }) => id === filter
+    ({ id }) => id === queryId
   )?.dataState;
 
   return (

@@ -2,6 +2,8 @@ import { FormButton, FormInput, FormSelect } from "@hadmean/chromista";
 import { required } from "@hadmean/protozoa";
 import { useEntityConfiguration } from "frontend/hooks/configuration/configuration.store";
 import { IFormProps } from "frontend/lib/form/types";
+import { NAVIGATION_LINKS } from "frontend/lib/routing";
+import { useRouter } from "next/router";
 import { Field, Form } from "react-final-form";
 import { ITableTab, IWidgetConfig } from "shared/types";
 import { ILabelValue } from "types";
@@ -25,6 +27,7 @@ export function DashboardSettings({
   initialValues,
   entities,
 }: IFormProps<IWidgetConfig> & { entities: ILabelValue[] }) {
+  const router = useRouter();
   return (
     <Form
       onSubmit={onSubmit}
@@ -69,11 +72,22 @@ export function DashboardSettings({
             <Field name="filter" validateFields={[]}>
               {({ input, meta }) => (
                 <FormSelect
-                  label="Filter"
+                  label="Query"
                   disabledOptions={[]}
                   selectData={(entityTableTabs.data || []).map(
                     ({ id, title }) => ({ label: title, value: id })
                   )}
+                  rightActions={[
+                    {
+                      label: "Manage Queries",
+                      action: () =>
+                        router.push(
+                          NAVIGATION_LINKS.ENTITY.CONFIG.TABLE_TABS(
+                            values.entity
+                          )
+                        ),
+                    },
+                  ]}
                   meta={meta}
                   input={input}
                 />

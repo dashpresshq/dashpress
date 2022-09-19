@@ -10,7 +10,6 @@ import { IApplicationService } from "backend/types";
 import { nanoid } from "nanoid";
 import { userFriendlyCase } from "frontend/lib/strings";
 import { IWidgetConfig, HOME_DASHBOARD_KEY } from "shared/types";
-import { NAVIGATION_LINKS } from "frontend/lib/routing";
 
 const DFAULT_NUMBER_OF_SUMMARY_CARDS = 8;
 
@@ -52,17 +51,10 @@ export class DashboardService implements IApplicationService {
         return {
           id: nanoid(),
           title: userFriendlyCase(`${entity.value}`),
-          link: {
-            title: "View Data",
-            link: NAVIGATION_LINKS.ENTITY.TABLE(entity.value),
-          },
           _type: "summary-card",
           entity: entity.value,
-          filters: [],
-          statusIndicator: {
-            field: "createdAt",
-            period: "month",
-          },
+          queryId: "",
+          statusField: "createdAt", // :eyes
         };
       });
 
@@ -71,13 +63,9 @@ export class DashboardService implements IApplicationService {
     defaultWidgets.push({
       id: nanoid(),
       title: userFriendlyCase(`${firstEntity.value}`),
-      link: {
-        title: "View Data",
-        link: NAVIGATION_LINKS.ENTITY.TABLE(firstEntity.value),
-      },
       _type: "table",
       entity: firstEntity.value,
-      filters: [],
+      queryId: "",
     });
 
     // eslint-disable-next-line no-restricted-syntax

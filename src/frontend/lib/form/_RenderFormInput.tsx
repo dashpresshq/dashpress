@@ -1,6 +1,7 @@
 import {
   AsyncFormSelect,
   FormCodeEditor,
+  FormDateInput,
   FormInput,
   FormNumberInput,
   FormSelect,
@@ -53,6 +54,9 @@ export function RenderFormInput({
       return <FormInput type={type} {...formProps} />;
     case "number":
       return <FormNumberInput {...formProps} />;
+
+    case "datetime-local":
+      return <FormDateInput {...formProps} />;
 
     case "selection":
     case "selection-enum":

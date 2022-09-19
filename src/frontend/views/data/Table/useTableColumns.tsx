@@ -27,11 +27,17 @@ export const ACTIONS_ACCESSOR = "__actions__";
 const buildFilterConfigFromType = (
   entityType: keyof typeof FIELD_TYPES_CONFIG_MAP,
   entityFieldSelections: IColorableSelection[],
+  isIdField: boolean,
   referenceField?: string,
   lean?: true
 ): TableFilterType | undefined => {
   if (lean) {
     return undefined;
+  }
+  if (isIdField) {
+    return {
+      _type: "idField",
+    };
   }
   const filterType =
     FIELD_TYPES_CONFIG_MAP[entityType]?.tableFilterType || "not-filterable";
@@ -94,17 +100,13 @@ export const useTableColumns = (entity: string, lean?: true) => {
     const tableColumn: ITableColumn = {
       Header: getEntityFieldLabels(name),
       accessor: name,
-      filter:
-        idField.data === name
-          ? {
-              _type: "idField",
-            }
-          : buildFilterConfigFromType(
-              entityFieldTypes[name],
-              entityFieldSelections[name],
-              entityToOneReferenceFields.data[name],
-              lean
-            ),
+      filter: buildFilterConfigFromType(
+        entityFieldTypes[name],
+        entityFieldSelections[name],
+        idField.data === name,
+        entityToOneReferenceFields.data[name],
+        lean
+      ),
       disableSortBy: lean
         ? true
         : !FIELD_TYPES_CONFIG_MAP[entityFieldTypes[name]]?.sortable,

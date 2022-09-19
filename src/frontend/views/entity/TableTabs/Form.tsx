@@ -2,9 +2,9 @@ import {
   ButtonLang,
   composeValidators,
   maxLength,
+  IFormProps,
   required,
 } from "@hadmean/protozoa";
-import { IFormProps } from "frontend/lib/form/types";
 import { ITableTab } from "shared/types";
 import { Form, Field } from "react-final-form";
 import arrayMutators from "final-form-arrays";

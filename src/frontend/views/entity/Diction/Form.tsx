@@ -1,5 +1,4 @@
-import { ButtonLang, VALIDATION_LENGTH } from "@hadmean/protozoa";
-import { IFormProps } from "frontend/lib/form/types";
+import { ButtonLang, IFormProps, VALIDATION_LENGTH } from "@hadmean/protozoa";
 import { SchemaForm } from "frontend/lib/form/SchemaForm";
 
 type IDictionSettings = {

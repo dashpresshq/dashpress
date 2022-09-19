@@ -6,8 +6,7 @@ import {
   FormSelect,
 } from "@hadmean/chromista";
 import { Form, Field } from "react-final-form";
-import { required, StringUtils } from "@hadmean/protozoa";
-import { IFormProps } from "frontend/lib/form/types";
+import { required, StringUtils, IFormProps } from "@hadmean/protozoa";
 import { IDBCredentials, SupportedDatabaseTypes } from "shared/types";
 
 const DEFAULT_DATABASE_TYPE_PORT: Record<SupportedDatabaseTypes, number> = {

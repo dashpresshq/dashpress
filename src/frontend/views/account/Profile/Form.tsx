@@ -1,5 +1,4 @@
-import { ButtonLang } from "@hadmean/protozoa";
-import { IFormProps } from "frontend/lib/form/types";
+import { ButtonLang, IFormProps } from "@hadmean/protozoa";
 import { SchemaForm } from "frontend/lib/form/SchemaForm";
 import {
   IUpdateUserForm,

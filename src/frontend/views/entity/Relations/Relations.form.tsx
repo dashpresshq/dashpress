@@ -1,8 +1,12 @@
 import { FormButton, FormInput } from "@hadmean/chromista";
 import { Form, Field } from "react-final-form";
-import { ButtonLang, composeValidators, required } from "@hadmean/protozoa";
+import {
+  ButtonLang,
+  IFormProps,
+  composeValidators,
+  required,
+} from "@hadmean/protozoa";
 
-import { IFormProps } from "frontend/lib/form/types";
 import { getFieldsOffFormat } from "./utils";
 
 interface IRelationsSettings {

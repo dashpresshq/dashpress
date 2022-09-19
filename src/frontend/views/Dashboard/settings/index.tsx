@@ -1,7 +1,6 @@
 import { FormButton, FormInput, FormSelect } from "@hadmean/chromista";
-import { required } from "@hadmean/protozoa";
+import { required, IFormProps } from "@hadmean/protozoa";
 import { useEntityConfiguration } from "frontend/hooks/configuration/configuration.store";
-import { IFormProps } from "frontend/lib/form/types";
 import { NAVIGATION_LINKS } from "frontend/lib/routing";
 import { useRouter } from "next/router";
 import { Field, Form } from "react-final-form";

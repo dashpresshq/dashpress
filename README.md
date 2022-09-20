@@ -26,6 +26,7 @@
 <summary>Table of Contents</summary>
 
 - [About](#about)
+  - [Live Demo](#live-demo)
   - [Quick Demo](#quick-demo)
   - [Motivation](#motivation)
   - [Why you should try Hadmean](#why-you-should-try-hadmean)
@@ -48,6 +49,13 @@
 
 ## About
 Hadmean is a no-code, internal tool generator. It is language agnostic, schema driven, extremely customizable, fully featured, user-friendly and has just one installation step.
+
+### Live Demo
+You can play with a live demo at https://hadmean-demo.up.railway.app
+
+Username is `root`
+
+Password is `password`
 
 ### Quick Demo
 
@@ -90,23 +98,29 @@ That is all, You will be able to see the application on http://localhost:3000
 
 
 ## Features
+ - One line installation 
  - Authentication
  - Role and Permissions
- - Rich text editor
  - Users management
- - Deep navigation
+ - Dashboard builder 
  - CRUD
- - Data Count
+ - Form validation
+ - Powerful form manipulation (hiding fields, disabling fields, editing values before submitting)
  - Relationships
+ - Powerful Filters
+ - DB Introspection
+ - Color Customization
+ - Rich text editor
+ - Deep navigation
+ - Reusable Queries
+ - Table Tabs
+ - Data Count
  - Synced DB Validation
  - Fields selection/ ordering
- - Cache configurations
- - Credentials Storage
+ - Cache
+ - Secure Credentials Storage
  - Forms fields customization
- - Automatic Introspection
  - Selection Colors
- - Form validation
- - Powerful Filters
 
 
 ## Roadmap

@@ -27,7 +27,7 @@ export const CONFIGURATION_KEYS: Record<
   | "system_settings"
   | "hidden_entity_relations"
   | "entity_relations_order",
-  { requireEntity: boolean; defaultValue: unknown }
+  { requireEntity?: true; defaultValue: unknown; guest?: true }
 > = {
   hidden_entity_table_columns: { requireEntity: true, defaultValue: [] },
 
@@ -87,19 +87,17 @@ export const CONFIGURATION_KEYS: Record<
     defaultValue: { format: "", fields: [] },
   },
   entity_relations_labels: { requireEntity: true, defaultValue: {} },
-  disabled_entities: { requireEntity: false, defaultValue: [] },
-  dashboard_entities: { requireEntity: false, defaultValue: [] },
-  entities_order: { requireEntity: false, defaultValue: [] },
+  disabled_entities: { defaultValue: [] },
+  dashboard_entities: { defaultValue: [] },
+  entities_order: { defaultValue: [] },
   default_date_format: {
-    requireEntity: false,
     defaultValue: "do MMM yyyy, h:MM aa",
   },
   system_settings: {
-    requireEntity: false,
     defaultValue: DEFAULT_SYSTEM_SETTINGS,
   },
   theme_color: {
-    requireEntity: false,
+    guest: true,
     defaultValue: {
       primary: "#4b38b3",
     },

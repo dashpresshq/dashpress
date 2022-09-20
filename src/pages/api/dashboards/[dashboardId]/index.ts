@@ -35,6 +35,7 @@ export default requestHandler(
   },
   [
     {
+      method: ["PATCH", "POST"],
       _type: "canUser",
       body: USER_PERMISSIONS.CAN_MANAGE_DASHBOARD,
     },

@@ -29,6 +29,7 @@ export default requestHandler(
   },
   [
     {
+      method: ["PUT"],
       _type: "canUser",
       body: USER_PERMISSIONS.CAN_CONFIGURE_APP,
     },

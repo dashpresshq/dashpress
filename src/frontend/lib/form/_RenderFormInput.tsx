@@ -51,6 +51,7 @@ export function RenderFormInput({
     case "email":
     case "password":
     case "url":
+    case "color":
       return <FormInput type={type} {...formProps} />;
     case "number":
       return <FormNumberInput {...formProps} />;

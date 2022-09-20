@@ -27,6 +27,7 @@ export const NAVIGATION_LINKS = {
     ENTITIES: "/admin/settings/entities",
     SYSTEM: "/admin/settings/system",
     DATE: "/admin/settings/date",
+    THEME: "/admin/settings/theme",
   },
   ENTITY: {
     CREATE: (entity: string) => `/admin/${entity}/create`,

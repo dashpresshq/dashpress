@@ -44,7 +44,6 @@ export function ListRoles() {
           <SoftButton
             action={NAVIGATION_LINKS.ROLES.DETAILS(roleId)}
             label="Details"
-            color="accent"
             justIcon
             icon="eye"
           />

@@ -10,6 +10,7 @@ export const CONFIGURATION_KEYS: Record<
   | "hidden_entity_details_columns"
   | "entity_diction"
   | "entity_columns_types"
+  | "theme_color"
   | "entity_fields_orders"
   | "entity_crud_settings"
   | "entity_table_tabs"
@@ -96,6 +97,12 @@ export const CONFIGURATION_KEYS: Record<
   system_settings: {
     requireEntity: false,
     defaultValue: DEFAULT_SYSTEM_SETTINGS,
+  },
+  theme_color: {
+    requireEntity: false,
+    defaultValue: {
+      primary: "#4b38b3",
+    },
   },
 };
 

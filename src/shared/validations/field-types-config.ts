@@ -15,8 +15,8 @@ export const FIELD_TYPES_CONFIG_MAP: Record<
   | "boolean"
   | "selection-enum"
   | "image" // not inplemeneted
-  | "datetime-local" // not inplemeneted
-  | "color", // not inplemeneted
+  | "datetime-local"
+  | "color",
   {
     tableFilterType: TableFilterType | "not-filterable";
     sortable: boolean;
@@ -179,10 +179,8 @@ export const FIELD_TYPES_CONFIG_MAP: Record<
   },
 };
 
-//   | 'date'
 //   | 'file'
 //   | 'range'
-//   | 'tel'
 //   | 'time'
 
 //   | 'month'

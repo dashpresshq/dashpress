@@ -43,8 +43,8 @@ export class DashboardService implements IApplicationService {
   }
 
   private async generateDefaultDashboardWidgets() {
+    // :eyes show only enabled entities
     const entities = await this._entitiesService.getAllEntities();
-
     const defaultWidgets: IWidgetConfig[] = entities
       .slice(0, DFAULT_NUMBER_OF_SUMMARY_CARDS)
       .map((entity) => {
@@ -86,8 +86,7 @@ export class DashboardService implements IApplicationService {
 
   async listDashboardWidgets(dashboardId: string): Promise<IWidgetConfig[]> {
     const widgetList = await this.getDashboardWidgets(dashboardId);
-
-    if (!widgetList) {
+    if (!widgetList || widgetList.length === 0) {
       if (dashboardId !== HOME_DASHBOARD_KEY) {
         return [];
       }

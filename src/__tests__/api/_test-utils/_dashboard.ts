@@ -32,10 +32,18 @@ export const setupDashboardTestData = async (
     IWidgetConfig | string[]
   >("dashboard");
 
-  await configPersistenceService.resetState("id", testDashboard);
+  await configPersistenceService.resetToEmpty();
 
-  await configPersistenceService.upsertItem(HOME_DASHBOARD_KEY, [
-    "widget-1",
-    "widget-2",
-  ]);
+  // eslint-disable-next-line no-restricted-syntax
+  for (const widget of testDashboard) {
+    // eslint-disable-next-line no-await-in-loop
+    await configPersistenceService.upsertItem(widget.id, widget);
+  }
+
+  await configPersistenceService.upsertItem(
+    HOME_DASHBOARD_KEY,
+    testDashboard
+      .filter(({ id }) => id !== "not-in-dashboard")
+      .map(({ id }) => id)
+  );
 };

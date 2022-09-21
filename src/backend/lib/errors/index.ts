@@ -47,8 +47,6 @@ const returnError = (
   statusCode: number,
   errorBody: Record<string, unknown>
 ) => {
-  // eslint-disable-next-line no-console
-  console.error(errorBody);
   return res.status(statusCode).json(errorBody);
 };
 
@@ -61,7 +59,10 @@ export const handleResponseError = (
     path: req.url,
     method: req.method,
   };
-
+  if (process.env.NODE_ENV === "development") {
+    // eslint-disable-next-line no-console
+    console.error(error);
+  }
   if (error instanceof CustomError) {
     return returnError(res, error.code, {
       message: error.message,

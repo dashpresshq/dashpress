@@ -64,7 +64,7 @@ describe("/api/dashboards/[dashboardId]/index", () => {
 
     await handler(postRequest.req, postRequest.res);
 
-    expect(postRequest.res._getStatusCode()).toBe(201);
+    expect(postRequest.res._getStatusCode()).toBe(200);
 
     const { req, res } = createAuthenticatedMocks({
       method: "GET",
@@ -76,7 +76,24 @@ describe("/api/dashboards/[dashboardId]/index", () => {
     await handler(req, res);
 
     expect(res._getStatusCode()).toBe(200);
-    expect(res._getJSONData()).toMatchInlineSnapshot();
+    expect(res._getJSONData()).toMatchInlineSnapshot(`
+      [
+        {
+          "_type": "summary-card",
+          "entity": "base-model",
+          "id": "widget-2",
+          "queryId": "",
+          "title": "Widget 2",
+        },
+        {
+          "_type": "table",
+          "entity": "base-model",
+          "id": "widget-1",
+          "queryId": "",
+          "title": "Widget 1",
+        },
+      ]
+    `);
   });
 
   it("should create new dashboard widget", async () => {
@@ -85,7 +102,13 @@ describe("/api/dashboards/[dashboardId]/index", () => {
       query: {
         dashboardId: HOME_DASHBOARD_KEY,
       },
-      body: {},
+      body: {
+        _type: "table",
+        entity: "base-model",
+        id: "widget-3",
+        queryId: "some-test-query-id",
+        title: "Widget 3",
+      },
     });
 
     await handler(postRequest.req, postRequest.res);
@@ -102,7 +125,15 @@ describe("/api/dashboards/[dashboardId]/index", () => {
     await handler(req, res);
 
     expect(res._getStatusCode()).toBe(200);
-    expect(res._getJSONData()[2]).toMatchInlineSnapshot();
+    expect(res._getJSONData()[2]).toMatchInlineSnapshot(`
+      {
+        "_type": "table",
+        "entity": "base-model",
+        "id": "widget-3",
+        "queryId": "some-test-query-id",
+        "title": "Widget 3",
+      }
+    `);
   });
 });
 

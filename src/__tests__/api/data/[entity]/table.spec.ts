@@ -24,9 +24,9 @@ describe("/api/data/[entity]/table", () => {
 
     expect(res._getStatusCode()).toBe(200);
     expect(res._getJSONData()).toMatchInlineSnapshot(`
-      Object {
-        "data": Array [
-          Object {
+      {
+        "data": [
+          {
             "age": 5,
             "createdAt": 1660735797330,
             "id": 1,
@@ -35,7 +35,7 @@ describe("/api/data/[entity]/table", () => {
             "status": "closed",
             "verified": 1,
           },
-          Object {
+          {
             "age": 9,
             "createdAt": 1631878197330,
             "id": 2,
@@ -66,9 +66,9 @@ describe("/api/data/[entity]/table", () => {
 
     expect(res._getStatusCode()).toBe(200);
     expect(res._getJSONData()).toMatchInlineSnapshot(`
-      Object {
-        "data": Array [
-          Object {
+      {
+        "data": [
+          {
             "age": 9,
             "createdAt": 1631878197330,
             "id": 2,
@@ -77,7 +77,7 @@ describe("/api/data/[entity]/table", () => {
             "status": "opened",
             "verified": 0,
           },
-          Object {
+          {
             "age": 5,
             "createdAt": 1660735797330,
             "id": 1,
@@ -108,9 +108,9 @@ describe("/api/data/[entity]/table", () => {
 
     expect(res._getStatusCode()).toBe(200);
     expect(res._getJSONData()).toMatchInlineSnapshot(`
-      Object {
-        "data": Array [
-          Object {
+      {
+        "data": [
+          {
             "age": 9,
             "createdAt": 1631878197330,
             "id": 2,
@@ -142,9 +142,9 @@ describe("/api/data/[entity]/table", () => {
 
     expect(res._getStatusCode()).toBe(200);
     expect(res._getJSONData()).toMatchInlineSnapshot(`
-      Object {
-        "data": Array [
-          Object {
+      {
+        "data": [
+          {
             "age": 5,
             "createdAt": 1660735797330,
             "id": 1,
@@ -177,16 +177,16 @@ describe("/api/data/[entity]/table", () => {
 
     expect(res._getStatusCode()).toBe(200);
     expect(res._getJSONData()).toMatchInlineSnapshot(`
-      Object {
-        "data": Array [
-          Object {
+      {
+        "data": [
+          {
             "age": 5,
             "id": 1,
             "name": "John Doe",
             "referenceId": 3,
             "status": "closed",
           },
-          Object {
+          {
             "age": 9,
             "id": 2,
             "name": "Jane Doe",

@@ -25,22 +25,22 @@ describe("/api/entities/[entity]/relations", () => {
     await handler(req, res);
 
     expect(res._getJSONData()).toMatchInlineSnapshot(`
-      Array [
-        Object {
+      [
+        {
           "field": "addressedById",
           "table": "users",
           "type": "toOne",
         },
-        Object {
+        {
           "field": "typeId",
           "table": "friends",
           "type": "toOne",
         },
-        Object {
+        {
           "table": "profile",
           "type": "toMany",
         },
-        Object {
+        {
           "table": "disabled-entity-1",
           "type": "toMany",
         },
@@ -124,19 +124,19 @@ describe("/api/entities/[entity]/relations", () => {
     await handler(req, res);
 
     expect(res._getJSONData()).toMatchInlineSnapshot(`
-      Array [
-        Object {
+      [
+        {
           "field": "addressedById",
           "label": "Renamed Users",
           "table": "users",
           "type": "toOne",
         },
-        Object {
+        {
           "field": "typeId",
           "table": "friends",
           "type": "toOne",
         },
-        Object {
+        {
           "label": "Labelled Profile",
           "table": "profile",
           "type": "toMany",

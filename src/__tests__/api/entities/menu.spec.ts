@@ -18,16 +18,16 @@ describe("/api/entities/menu", () => {
     await handler(req, res);
 
     expect(res._getJSONData()).toMatchInlineSnapshot(`
-      Array [
-        Object {
+      [
+        {
           "label": "base-model",
           "value": "base-model",
         },
-        Object {
+        {
           "label": "secondary-model",
           "value": "secondary-model",
         },
-        Object {
+        {
           "label": "tests",
           "value": "tests",
         },
@@ -48,16 +48,16 @@ describe("/api/entities/menu", () => {
     await handler(req, res);
 
     expect(res._getJSONData()).toMatchInlineSnapshot(`
-      Array [
-        Object {
+      [
+        {
           "label": "secondary-model",
           "value": "secondary-model",
         },
-        Object {
+        {
           "label": "base-model",
           "value": "base-model",
         },
-        Object {
+        {
           "label": "tests",
           "value": "tests",
         },

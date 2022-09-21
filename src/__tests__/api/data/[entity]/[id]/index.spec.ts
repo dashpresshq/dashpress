@@ -25,7 +25,7 @@ describe("/api/data/[entity]/[id]/index", () => {
 
     expect(res._getStatusCode()).toBe(200);
     expect(res._getJSONData()).toMatchInlineSnapshot(`
-      Object {
+      {
         "age": 5,
         "createdAt": 1660735797330,
         "id": 1,
@@ -54,7 +54,7 @@ describe("/api/data/[entity]/[id]/index", () => {
 
     expect(res._getStatusCode()).toBe(200);
     expect(res._getJSONData()).toMatchInlineSnapshot(`
-      Object {
+      {
         "age": 5,
         "id": 1,
         "name": "John Doe",
@@ -89,7 +89,7 @@ describe("/api/data/[entity]/[id]/index", () => {
 
     expect(getRes._getStatusCode()).toBe(404);
     expect(getRes._getJSONData()).toMatchInlineSnapshot(`
-      Object {
+      {
         "message": "Entity 'tests' with id '1' is not found",
         "method": "GET",
         "name": "BadRequestError",

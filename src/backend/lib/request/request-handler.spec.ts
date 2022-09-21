@@ -86,7 +86,7 @@ describe("/api/requestHandler", () => {
 
     expect(res._getStatusCode()).toBe(400);
     expect(res._getJSONData()).toMatchInlineSnapshot(`
-      Object {
+      {
         "message": "Name is required",
         "method": "PUT",
         "name": "BadRequestError",

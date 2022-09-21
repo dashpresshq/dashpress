@@ -39,7 +39,7 @@ describe("/api/config/[key]/[entity]", () => {
 
     expect(res._getStatusCode()).toBe(400);
     expect(res._getJSONData()).toMatchInlineSnapshot(`
-      Object {
+      {
         "message": "Configuration of key 'entity_diction' requires entity",
         "method": "GET",
         "name": "BadRequestError",
@@ -95,7 +95,7 @@ describe("/api/config/[key]/[entity]", () => {
 
     expect(res._getStatusCode()).toBe(400);
     expect(res._getJSONData()).toMatchInlineSnapshot(`
-      Object {
+      {
         "message": "Configuration key 'some invalid key' doesn't exist",
         "method": "GET",
         "name": "BadRequestError",

@@ -28,7 +28,7 @@ describe("/api/setup/user", () => {
     );
 
     expect(decodedToken).toMatchInlineSnapshot(`
-      Object {
+      {
         "name": "New Setup User",
         "role": "creator",
         "username": "newsetupuser",
@@ -51,7 +51,7 @@ describe("/api/setup/user", () => {
     expect(postRequest.res._getStatusCode()).toBe(400);
 
     expect(postRequest.res._getJSONData()).toMatchInlineSnapshot(`
-      Object {
+      {
         "message": "Primary user already setup",
         "method": "POST",
         "name": "BadRequestError",

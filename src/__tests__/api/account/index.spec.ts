@@ -19,8 +19,8 @@ describe("/api/account/index", () => {
     expect(res._getStatusCode()).toBe(200);
 
     expect(res._getJSONData()).toMatchInlineSnapshot(`
-      Array [
-        Object {
+      [
+        {
           "name": "Root User",
           "role": "creator",
           "username": "root",
@@ -53,7 +53,7 @@ describe("/api/account/index", () => {
     expect(getRequest.res._getJSONData()).toHaveLength(2);
 
     expect(getRequest.res._getJSONData()[1]).toMatchInlineSnapshot(`
-      Object {
+      {
         "name": "New user",
         "role": "viewer",
         "username": "newuser",

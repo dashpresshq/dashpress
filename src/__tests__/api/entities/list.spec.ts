@@ -18,24 +18,24 @@ describe("/api/entities/list", () => {
 
     expect(res._getStatusCode()).toBe(200);
     expect(res._getJSONData()).toMatchInlineSnapshot(`
-      Array [
-        Object {
+      [
+        {
           "label": "base-model",
           "value": "base-model",
         },
-        Object {
+        {
           "label": "disabled-entity-1",
           "value": "disabled-entity-1",
         },
-        Object {
+        {
           "label": "disabled-entity-2",
           "value": "disabled-entity-2",
         },
-        Object {
+        {
           "label": "secondary-model",
           "value": "secondary-model",
         },
-        Object {
+        {
           "label": "tests",
           "value": "tests",
         },

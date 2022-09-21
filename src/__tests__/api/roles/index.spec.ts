@@ -18,20 +18,20 @@ describe("/api/roles/index", () => {
 
     expect(res._getStatusCode()).toBe(200);
     expect(res._getJSONData()).toMatchInlineSnapshot(`
-      Array [
-        Object {
+      [
+        {
           "label": "Some Admin Permissions",
           "value": "some-admin-permissions",
         },
-        Object {
+        {
           "label": "View All Data Only",
           "value": "view-all-data-only",
         },
-        Object {
+        {
           "label": "Creator",
           "value": "creator",
         },
-        Object {
+        {
           "label": "Viewer",
           "value": "viewer",
         },
@@ -60,7 +60,7 @@ describe("/api/roles/index", () => {
     expect(res._getStatusCode()).toBe(200);
     expect(res._getJSONData()).toHaveLength(5);
     expect(res._getJSONData()[2]).toMatchInlineSnapshot(`
-      Object {
+      {
         "label": "New Role",
         "value": "new-role",
       }

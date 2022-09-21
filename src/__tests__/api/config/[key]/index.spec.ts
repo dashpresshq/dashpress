@@ -52,7 +52,7 @@ describe("/api/config/[key]/index", () => {
 
     expect(res._getStatusCode()).toBe(400);
     expect(res._getJSONData()).toMatchInlineSnapshot(`
-      Object {
+      {
         "message": "Configuration key 'some invalid key' doesn't exist",
         "method": "GET",
         "name": "BadRequestError",

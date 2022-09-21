@@ -98,20 +98,20 @@ describe("/api/roles/[roleId]/index", () => {
 
     expect(res._getJSONData()).toHaveLength(4);
     expect(res._getJSONData()).toMatchInlineSnapshot(`
-      Array [
-        Object {
+      [
+        {
           "label": "Update Role",
           "value": "update-role",
         },
-        Object {
+        {
           "label": "Role To Delete",
           "value": "role-to-delete",
         },
-        Object {
+        {
           "label": "Creator",
           "value": "creator",
         },
-        Object {
+        {
           "label": "Viewer",
           "value": "viewer",
         },

@@ -27,10 +27,10 @@ describe("/api/auth/signin", () => {
     );
 
     expect(decodedToken).toMatchInlineSnapshot(`
-      Object {
+      {
         "name": "Root User",
         "role": "creator",
-        "systemProfile": "{\\"userId\\": \\"1\\"}",
+        "systemProfile": "{"userId": "1"}",
         "username": "root",
       }
     `);
@@ -50,7 +50,7 @@ describe("/api/auth/signin", () => {
     expect(res._getStatusCode()).toBe(401);
 
     expect(res._getJSONData()).toMatchInlineSnapshot(`
-      Object {
+      {
         "errorCode": "",
         "message": "Invalid Login",
         "method": "POST",
@@ -75,7 +75,7 @@ describe("/api/auth/signin", () => {
     expect(res._getStatusCode()).toBe(401);
 
     expect(res._getJSONData()).toMatchInlineSnapshot(`
-      Object {
+      {
         "errorCode": "",
         "message": "Invalid Login",
         "method": "POST",

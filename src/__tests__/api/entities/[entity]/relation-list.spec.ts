@@ -24,7 +24,7 @@ describe("/api/entities/[entity]/relation-list", () => {
     await handler(req, res);
 
     expect(res._getJSONData()).toMatchInlineSnapshot(`
-      Array [
+      [
         "users",
         "friends",
         "profile",
@@ -48,7 +48,7 @@ describe("/api/entities/[entity]/relation-list", () => {
     await handler(req, res);
 
     expect(res._getJSONData()).toMatchInlineSnapshot(`
-      Array [
+      [
         "users",
         "friends",
         "profile",

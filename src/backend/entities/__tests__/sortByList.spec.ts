@@ -6,11 +6,11 @@ describe("Sort By List", () => {
     sortByList(list, ["Boo", "Foo"], "name");
 
     expect(list).toMatchInlineSnapshot(`
-      Array [
-        Object {
+      [
+        {
           "name": "Boo",
         },
-        Object {
+        {
           "name": "Foo",
         },
       ]
@@ -27,17 +27,17 @@ describe("Sort By List", () => {
     sortByList(list, ["Boo", "Foo"], "name");
 
     expect(list).toMatchInlineSnapshot(`
-      Array [
-        Object {
+      [
+        {
           "name": "Boo",
         },
-        Object {
+        {
           "name": "Foo",
         },
-        Object {
+        {
           "name": "Be Last",
         },
-        Object {
+        {
           "name": "Be Last Last",
         },
       ]
@@ -49,11 +49,11 @@ describe("Sort By List", () => {
     sortByList(list, ["Boo", "Foo", "no damage be done"], "name");
 
     expect(list).toMatchInlineSnapshot(`
-      Array [
-        Object {
+      [
+        {
           "name": "Boo",
         },
-        Object {
+        {
           "name": "Foo",
         },
       ]
@@ -73,26 +73,26 @@ describe("Sort By List", () => {
     sortByList(list, ["A", "B", "C", "D", "E", "F", "G"], "name");
 
     expect(list).toMatchInlineSnapshot(`
-      Array [
-        Object {
+      [
+        {
           "name": "A",
         },
-        Object {
+        {
           "name": "B",
         },
-        Object {
+        {
           "name": "C",
         },
-        Object {
+        {
           "name": "D",
         },
-        Object {
+        {
           "name": "E",
         },
-        Object {
+        {
           "name": "F",
         },
-        Object {
+        {
           "name": "G",
         },
       ]
@@ -111,11 +111,11 @@ describe("Sort By List", () => {
     sortByList(list, [], "name");
 
     expect(list).toMatchInlineSnapshot(`
-      Array [
-        Object {
+      [
+        {
           "name": "Foo",
         },
-        Object {
+        {
           "name": "Boo",
         },
       ]

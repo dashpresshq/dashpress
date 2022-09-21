@@ -21,34 +21,34 @@ describe("/api/entities/[entity]/fields", () => {
     await handler(req, res);
 
     expect(res._getJSONData()).toMatchInlineSnapshot(`
-      Array [
-        Object {
+      [
+        {
           "isId": true,
           "name": "id",
           "type": "string",
         },
-        Object {
+        {
           "name": "createdAt",
           "type": "date",
         },
-        Object {
+        {
           "isReference": true,
           "name": "typeId",
           "type": "string",
         },
-        Object {
+        {
           "isRequired": true,
           "length": 200,
           "name": "title",
           "type": "string",
         },
-        Object {
+        {
           "length": 1000,
           "name": "message",
           "type": "string",
         },
-        Object {
-          "enumeration": Array [
+        {
+          "enumeration": [
             "un-addressed",
             "addressed",
             "closed",
@@ -56,7 +56,7 @@ describe("/api/entities/[entity]/fields", () => {
           "name": "state",
           "type": "enum",
         },
-        Object {
+        {
           "isReference": true,
           "name": "createdById",
           "type": "string",
@@ -80,34 +80,34 @@ describe("/api/entities/[entity]/fields", () => {
     await handler(req, res);
 
     expect(res._getJSONData()).toMatchInlineSnapshot(`
-      Array [
-        Object {
+      [
+        {
           "length": 1000,
           "name": "message",
           "type": "string",
         },
-        Object {
+        {
           "isRequired": true,
           "length": 200,
           "name": "title",
           "type": "string",
         },
-        Object {
+        {
           "isReference": true,
           "name": "typeId",
           "type": "string",
         },
-        Object {
+        {
           "isId": true,
           "name": "id",
           "type": "string",
         },
-        Object {
+        {
           "name": "createdAt",
           "type": "date",
         },
-        Object {
-          "enumeration": Array [
+        {
+          "enumeration": [
             "un-addressed",
             "addressed",
             "closed",
@@ -115,7 +115,7 @@ describe("/api/entities/[entity]/fields", () => {
           "name": "state",
           "type": "enum",
         },
-        Object {
+        {
           "isReference": true,
           "name": "createdById",
           "type": "string",

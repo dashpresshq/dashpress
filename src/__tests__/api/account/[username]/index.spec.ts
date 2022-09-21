@@ -39,10 +39,10 @@ describe("/account/[username]/index", () => {
     expect(res._getStatusCode()).toBe(200);
 
     expect(res._getJSONData()).toMatchInlineSnapshot(`
-      Object {
+      {
         "name": "Test User 1",
         "role": "creator",
-        "systemProfile": "{\\"userId\\": \\"1\\"}",
+        "systemProfile": "{"userId": "1"}",
         "username": "testuser1",
       }
     `);
@@ -99,10 +99,10 @@ describe("/account/[username]/index", () => {
     await handler(getRequest.req, getRequest.res);
 
     expect(getRequest.res._getJSONData()).toMatchInlineSnapshot(`
-      Object {
+      {
         "name": "Test Name Updated",
         "role": "creator",
-        "systemProfile": "{\\"updatedUserId\\": \\"2\\"}",
+        "systemProfile": "{"updatedUserId": "2"}",
         "username": "testuser2",
       }
     `);

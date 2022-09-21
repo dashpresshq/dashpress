@@ -8,8 +8,8 @@ import {
 describe("getFieldTypeBoundedValidations", () => {
   it("guess validations by type for single item array", () => {
     expect(getFieldTypeBoundedValidations("boolean")).toMatchInlineSnapshot(`
-      Array [
-        Object {
+      [
+        {
           "errorMessage": "{{ name }} should be a boolean",
           "fromType": true,
           "validationType": "isBoolean",
@@ -20,8 +20,8 @@ describe("getFieldTypeBoundedValidations", () => {
 
   it("guess validations by type for multiple items array", () => {
     expect(getFieldTypeBoundedValidations("text")).toMatchInlineSnapshot(`
-      Array [
-        Object {
+      [
+        {
           "errorMessage": "{{ name }} is not a text",
           "fromType": true,
           "validationType": "isString",
@@ -30,8 +30,8 @@ describe("getFieldTypeBoundedValidations", () => {
     `);
 
     expect(getFieldTypeBoundedValidations("richtext")).toMatchInlineSnapshot(`
-      Array [
-        Object {
+      [
+        {
           "errorMessage": "{{ name }} is not a text",
           "fromType": true,
           "validationType": "isString",
@@ -48,8 +48,8 @@ describe("guessEntityValidations", () => {
         isId: true,
       })
     ).toMatchInlineSnapshot(`
-      Array [
-        Object {
+      [
+        {
           "errorMessage": "{{ name }} already exists",
           "fromSchema": true,
           "validationType": "unique",
@@ -64,8 +64,8 @@ describe("guessEntityValidations", () => {
         isRequired: true,
       })
     ).toMatchInlineSnapshot(`
-      Array [
-        Object {
+      [
+        {
           "errorMessage": "{{ name }} is required",
           "fromSchema": true,
           "validationType": "required",
@@ -80,9 +80,9 @@ describe("guessEntityValidations", () => {
         length: 50,
       })
     ).toMatchInlineSnapshot(`
-      Array [
-        Object {
-          "constraint": Object {
+      [
+        {
+          "constraint": {
             "length": 50,
           },
           "errorMessage": "{{ name }} is required",
@@ -101,19 +101,19 @@ describe("guessEntityValidations", () => {
         length: 40,
       })
     ).toMatchInlineSnapshot(`
-      Array [
-        Object {
+      [
+        {
           "errorMessage": "{{ name }} already exists",
           "fromSchema": true,
           "validationType": "unique",
         },
-        Object {
+        {
           "errorMessage": "{{ name }} is required",
           "fromSchema": true,
           "validationType": "required",
         },
-        Object {
-          "constraint": Object {
+        {
+          "constraint": {
             "length": 40,
           },
           "errorMessage": "{{ name }} is required",

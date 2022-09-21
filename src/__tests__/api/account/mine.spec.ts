@@ -19,11 +19,11 @@ describe("/api/account/mine", () => {
     expect(res._getStatusCode()).toBe(200);
 
     expect(res._getJSONData()).toMatchInlineSnapshot(`
-      Object {
+      {
         "name": "Root User",
-        "permissions": Array [],
+        "permissions": [],
         "role": "creator",
-        "systemProfile": "{\\"userId\\": \\"1\\"}",
+        "systemProfile": "{"userId": "1"}",
         "username": "root",
       }
     `);
@@ -48,11 +48,11 @@ describe("/api/account/mine", () => {
     await handler(getRequest.req, getRequest.res);
 
     expect(getRequest.res._getJSONData()).toMatchInlineSnapshot(`
-      Object {
+      {
         "name": "Updated Name",
-        "permissions": Array [],
+        "permissions": [],
         "role": "creator",
-        "systemProfile": "{\\"userId\\": \\"1\\"}",
+        "systemProfile": "{"userId": "1"}",
         "username": "root",
       }
     `);

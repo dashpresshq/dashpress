@@ -23,13 +23,13 @@ describe("/api/error/handling", () => {
 
     expect(res._getStatusCode()).toBe(400);
     expect(res._getJSONData()).toMatchInlineSnapshot(`
-      Object {
+      {
         "message": "Name is required",
         "method": "GET",
         "name": "BadRequestError",
         "path": "",
         "statusCode": 400,
-        "validations": Object {
+        "validations": {
           "name": "Required",
         },
       }
@@ -56,7 +56,7 @@ describe("/api/error/handling", () => {
 
     expect(res._getStatusCode()).toBe(404);
     expect(res._getJSONData()).toMatchInlineSnapshot(`
-      Object {
+      {
         "message": "User not found",
         "method": "GET",
         "name": "BadRequestError",
@@ -89,7 +89,7 @@ describe("/api/error/handling", () => {
 
     expect(res._getStatusCode()).toBe(401);
     expect(res._getJSONData()).toMatchInlineSnapshot(`
-      Object {
+      {
         "errorCode": "DEMO_ERROR_CODE",
         "message": "Access to resource is denied",
         "method": "GET",
@@ -120,7 +120,7 @@ describe("/api/error/handling", () => {
 
     expect(res._getStatusCode()).toBe(500);
     expect(res._getJSONData()).toMatchInlineSnapshot(`
-      Object {
+      {
         "message": "Something went wrong",
         "method": "GET",
         "path": "",

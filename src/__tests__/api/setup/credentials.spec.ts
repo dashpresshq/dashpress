@@ -20,7 +20,7 @@ describe("/api/setup/credentials", () => {
 
     expect(res._getStatusCode()).toBe(400);
     expect(res._getJSONData()).toMatchInlineSnapshot(`
-      Object {
+      {
         "message": "Couldn't not connect to database 'getaddrinfo ENOTFOUND some invalid host'",
         "method": "POST",
         "name": "BadRequestError",
@@ -57,7 +57,7 @@ describe("/api/setup/credentials", () => {
 
     expect(res._getStatusCode()).toBe(400);
     expect(res._getJSONData()).toMatchInlineSnapshot(`
-      Object {
+      {
         "message": "Primary database credentials already configured",
         "method": "POST",
         "name": "BadRequestError",

@@ -23,12 +23,12 @@ describe("/api/data/[entity]/index", () => {
 
     expect(res._getStatusCode()).toBe(200);
     expect(res._getJSONData()).toMatchInlineSnapshot(`
-      Array [
-        Object {
+      [
+        {
           "label": "John Doe",
           "value": 1,
         },
-        Object {
+        {
           "label": "Jane Doe",
           "value": 2,
         },

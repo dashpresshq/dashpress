@@ -1,4 +1,5 @@
 import { IFormProps } from "@hadmean/protozoa";
+import { Text } from "@hadmean/chromista";
 import { SchemaForm } from "frontend/lib/form/SchemaForm";
 import {
   AUTH_SIGNIN_FORM_SCHEMA,
@@ -6,21 +7,24 @@ import {
 } from "shared/form-schemas/auth/signin";
 
 export function SignInForm({ onSubmit }: IFormProps<ISignInForm>) {
-  const defaultValue = process.env.NEXT_PUBLIC_IS_DEMO
-    ? {
-        username: "root",
-        password: "password",
-      }
-    : {};
   return (
-    <SchemaForm<ISignInForm>
-      onSubmit={onSubmit}
-      initialValues={{
-        ...defaultValue,
-        rememberMe: true,
-      }}
-      buttonText="Sign In"
-      fields={AUTH_SIGNIN_FORM_SCHEMA}
-    />
+    <>
+      {process.env.NEXT_PUBLIC_IS_DEMO && (
+        <>
+          <Text size="6">
+            Username is <b>root</b>
+          </Text>
+          <Text size="6">
+            Password is <b>password</b>
+          </Text>
+        </>
+      )}
+      <SchemaForm<ISignInForm>
+        onSubmit={onSubmit}
+        initialValues={{ rememberMe: true }}
+        buttonText="Sign In"
+        fields={AUTH_SIGNIN_FORM_SCHEMA}
+      />
+    </>
   );
 }

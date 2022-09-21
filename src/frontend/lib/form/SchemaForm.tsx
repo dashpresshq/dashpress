@@ -102,7 +102,7 @@ export function SchemaForm<T extends Record<string, unknown>>({
             <FormButton
               text={buttonText}
               isMakingRequest={submitting}
-              disabled={process.env.NEXT_PUBLIC_IS_DEMO ? false : pristine}
+              disabled={pristine}
             />
           </form>
         );

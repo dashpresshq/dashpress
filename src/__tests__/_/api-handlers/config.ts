@@ -13,7 +13,7 @@ export const configApiHandlers = [
       );
     }
   ),
-  rest.get(BASE_TEST_URL("/api/config/theme_color"), async (req, res, ctx) => {
+  rest.get(BASE_TEST_URL("/api/config/theme_color"), async (_, res, ctx) => {
     return res(
       ctx.json({
         primary: `#000000`,

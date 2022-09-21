@@ -6,10 +6,19 @@ import {
 } from "shared/form-schemas/auth/signin";
 
 export function SignInForm({ onSubmit }: IFormProps<ISignInForm>) {
+  const defaultValue = process.env.NEXT_PUBLIC_IS_DEMO
+    ? {
+        username: "root",
+        password: "password",
+      }
+    : {};
   return (
     <SchemaForm<ISignInForm>
       onSubmit={onSubmit}
-      initialValues={{ rememberMe: true }}
+      initialValues={{
+        ...defaultValue,
+        rememberMe: true,
+      }}
       buttonText="Sign In"
       fields={AUTH_SIGNIN_FORM_SCHEMA}
     />

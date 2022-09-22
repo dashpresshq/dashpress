@@ -2,7 +2,7 @@ import { GuestLayout } from "@hadmean/chromista";
 import React, { ReactNode } from "react";
 import Head from "next/head";
 import { useSiteConfig } from "../../hooks/app/site.config";
-// import { useAppTheme } from "../useAppTheme";
+import { useAppTheme } from "../useAppTheme";
 
 interface IProps {
   children: ReactNode;
@@ -12,7 +12,7 @@ interface IProps {
 
 export function AuthLayout({ children, title, subTitle }: IProps) {
   const siteConfig = useSiteConfig();
-  // useAppTheme();
+  useAppTheme();
 
   return (
     <GuestLayout

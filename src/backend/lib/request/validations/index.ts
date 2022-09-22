@@ -9,6 +9,7 @@ export type ValidationKeys = {
     | "configKey"
     | "paginationFilter"
     | "canUser"
+    | "anyBody"
     | "canCrud"
     | "requestBody"
     | "requestQuery"

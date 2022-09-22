@@ -41,14 +41,18 @@ export const requestHandler =
       return false;
     });
 
-    const AUTH_VALIDATIONS: ValidationKeys[] = [
-      {
-        _type: "isAuthenticated",
-        body: !validationsToRun.some(
-          (validation) => validation._type === "guest"
-        ),
-      },
-    ];
+    const AUTH_VALIDATIONS: ValidationKeys[] = validationsToRun.some(
+      (validation) => validation._type === "anyBody"
+    )
+      ? []
+      : [
+          {
+            _type: "isAuthenticated",
+            body: !validationsToRun.some(
+              (validation) => validation._type === "guest"
+            ),
+          },
+        ];
 
     try {
       // eslint-disable-next-line no-restricted-syntax

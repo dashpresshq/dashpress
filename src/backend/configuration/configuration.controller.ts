@@ -1,3 +1,4 @@
+import { BadRequestError } from "backend/lib/errors";
 import { CONFIGURATION_KEYS } from "../../shared/configuration.constants";
 import {
   configurationService,
@@ -9,6 +10,13 @@ export class ConfigurationController {
 
   async showConfig(key: keyof typeof CONFIGURATION_KEYS, entity?: string) {
     return await this._configurationService.show(key, entity);
+  }
+
+  async showGuestConfig(key: keyof typeof CONFIGURATION_KEYS) {
+    if (!CONFIGURATION_KEYS[key].guest) {
+      throw new BadRequestError(`Invalid guest config key ${key}`);
+    }
+    return await this.showConfig(key);
   }
 
   async upsertConfig(

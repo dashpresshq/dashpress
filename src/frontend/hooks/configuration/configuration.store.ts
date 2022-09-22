@@ -13,7 +13,17 @@ import { CONFIGURATION_KEYS } from "../../../shared/configuration.constants";
 export const configurationApiPath = (
   key: keyof typeof CONFIGURATION_KEYS,
   entity?: string
-) => (entity ? `/api/config/${key}/${entity}` : `/api/config/${key}`);
+) => {
+  if (entity) {
+    return `/api/config/${key}/${entity}`;
+  }
+
+  if (CONFIGURATION_KEYS[key].guest) {
+    return `/api/config/${key}/__guest`;
+  }
+
+  return `/api/config/${key}`;
+};
 
 export function useAppConfiguration<T>(key: keyof typeof CONFIGURATION_KEYS) {
   return useStorageApi<T>(configurationApiPath(key), {

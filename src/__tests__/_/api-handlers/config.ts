@@ -13,13 +13,16 @@ export const configApiHandlers = [
       );
     }
   ),
-  rest.get(BASE_TEST_URL("/api/config/theme_color"), async (_, res, ctx) => {
-    return res(
-      ctx.json({
-        primary: `#000000`,
-      })
-    );
-  }),
+  rest.get(
+    BASE_TEST_URL("/api/config/theme_color/__guest"),
+    async (_, res, ctx) => {
+      return res(
+        ctx.json({
+          primary: `#000000`,
+        })
+      );
+    }
+  ),
   rest.put(
     BASE_TEST_URL("/api/config/entity_diction/:entity"),
     async (_, res, ctx) => {

@@ -1,4 +1,4 @@
-import { Settings, Home, Table, Users, User, Shield } from "react-feather";
+import { Settings, Home, Table, Users, Shield } from "react-feather";
 import { ISelectionView } from "@hadmean/chromista/dist/Layouts/types";
 import { NAVIGATION_LINKS } from "frontend/lib/routing";
 import { USER_PERMISSIONS } from "shared/types";
@@ -55,11 +55,6 @@ export const useSelectionViews = (): ILayoutSelectionView[] => {
       isPermissionAllowed: hasPermission(
         USER_PERMISSIONS.CAN_MANAGE_PERMISSIONS
       ),
-    },
-    {
-      title: "Account",
-      icon: User,
-      action: ROOT_LINKS_TO_CLEAR_BREADCRUMBS.ACCOUNT,
     },
   ].filter(({ isPermissionAllowed }) => {
     if (isPermissionAllowed === undefined) {

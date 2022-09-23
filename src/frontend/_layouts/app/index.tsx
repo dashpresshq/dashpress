@@ -16,10 +16,12 @@ import { useNavigationStack } from "frontend/lib/routing";
 import { usePageDetailsStore } from "frontend/lib/routing/usePageDetails";
 import { usePageRequiresPermission } from "frontend/hooks/auth/user.store";
 import { useUserAuthenticatedState } from "frontend/hooks/auth/useAuthenticateUser";
+import { User } from "react-feather";
 import { useSiteConfig } from "../../hooks/app/site.config";
 import { NAVIGATION_LINKS } from "../../lib/routing/links";
 import { useSelectionViews } from "./useSelectionViews";
 import { useAppTheme } from "../useAppTheme";
+import { ROOT_LINKS_TO_CLEAR_BREADCRUMBS } from "./constants";
 
 interface IProps {
   children: ReactNode;
@@ -77,7 +79,16 @@ export function AppLayout({
   }
 
   return (
-    <DynamicLayout selectionView={selectionViews}>
+    <DynamicLayout
+      selectionView={selectionViews}
+      secondarySelectionView={[
+        {
+          title: "Account",
+          icon: User,
+          action: ROOT_LINKS_TO_CLEAR_BREADCRUMBS.ACCOUNT,
+        },
+      ]}
+    >
       <Head>
         <title>
           {pageTitle} - {siteConfig.name}

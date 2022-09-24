@@ -12,13 +12,14 @@ import { CONFIGURATION_KEYS } from "../../../shared/configuration.constants";
 
 export const configurationApiPath = (
   key: keyof typeof CONFIGURATION_KEYS,
-  entity?: string
+  entity?: string,
+  method: "GET" | "PUT" = "GET"
 ) => {
   if (entity) {
     return `/api/config/${key}/${entity}`;
   }
 
-  if (CONFIGURATION_KEYS[key].guest) {
+  if (CONFIGURATION_KEYS[key].guest && method === "GET") {
     return `/api/config/${key}/__guest`;
   }
 
@@ -64,7 +65,7 @@ export function useUpsertConfigurationMutation(
   });
 
   return useMutation(async (values: unknown) => {
-    await makePutRequest(configurationApiPath(key, entity), {
+    await makePutRequest(configurationApiPath(key, entity, "PUT"), {
       data: values,
     });
     return values;

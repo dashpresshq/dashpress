@@ -18,7 +18,7 @@ export const configApiHandlers = [
     async (_, res, ctx) => {
       return res(
         ctx.json({
-          primary: `#000000`,
+          primary: `#459211`,
         })
       );
     }

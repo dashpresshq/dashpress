@@ -29,6 +29,17 @@ export const configApiHandlers = [
       return res(ctx.json("do MMM yyyy"));
     }
   ),
+  rest.get(
+    BASE_TEST_URL("/api/config/system_settings"),
+    async (_, res, ctx) => {
+      return res(
+        ctx.json({
+          forceIntrospection: true,
+          tokenValidityDurationInDays: 5,
+        })
+      );
+    }
+  ),
   rest.put(BASE_TEST_URL("/api/config/:key"), async (_, res, ctx) => {
     return res(ctx.status(201));
   }),

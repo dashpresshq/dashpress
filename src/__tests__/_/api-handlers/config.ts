@@ -23,10 +23,16 @@ export const configApiHandlers = [
       );
     }
   ),
-  rest.put(
-    BASE_TEST_URL("/api/config/entity_diction/:entity"),
+  rest.get(
+    BASE_TEST_URL("/api/config/default_date_format"),
     async (_, res, ctx) => {
-      return res(ctx.status(201));
+      return res(ctx.json("do MMM yyyy"));
     }
   ),
+  rest.put(BASE_TEST_URL("/api/config/:key"), async (_, res, ctx) => {
+    return res(ctx.status(201));
+  }),
+  rest.put(BASE_TEST_URL("/api/config/:key/:entity"), async (_, res, ctx) => {
+    return res(ctx.status(201));
+  }),
 ];

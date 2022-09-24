@@ -180,24 +180,8 @@ describe("/api/dashboards/[dashboardId]/index generation", () => {
         },
         {
           "_type": "summary-card",
-          "entity": "disabled-entity-1",
-          "id": "2",
-          "queryId": "",
-          "statusField": "createdAt",
-          "title": "Disabled Entity 1",
-        },
-        {
-          "_type": "summary-card",
-          "entity": "disabled-entity-2",
-          "id": "3",
-          "queryId": "",
-          "statusField": "createdAt",
-          "title": "Disabled Entity 2",
-        },
-        {
-          "_type": "summary-card",
           "entity": "secondary-model",
-          "id": "4",
+          "id": "2",
           "queryId": "",
           "statusField": "createdAt",
           "title": "Secondary Model",
@@ -205,7 +189,7 @@ describe("/api/dashboards/[dashboardId]/index generation", () => {
         {
           "_type": "summary-card",
           "entity": "tests",
-          "id": "5",
+          "id": "3",
           "queryId": "",
           "statusField": "createdAt",
           "title": "Tests",
@@ -213,7 +197,7 @@ describe("/api/dashboards/[dashboardId]/index generation", () => {
         {
           "_type": "table",
           "entity": "base-model",
-          "id": "6",
+          "id": "4",
           "queryId": "",
           "title": "Base Model",
         },

@@ -10,6 +10,10 @@ import { IApplicationService } from "backend/types";
 import { nanoid } from "nanoid";
 import { userFriendlyCase } from "frontend/lib/strings";
 import { IWidgetConfig, HOME_DASHBOARD_KEY } from "shared/types";
+import {
+  ConfigurationService,
+  configurationService,
+} from "backend/configuration/configuration.service";
 
 const DFAULT_NUMBER_OF_SUMMARY_CARDS = 8;
 
@@ -18,7 +22,8 @@ export class DashboardService implements IApplicationService {
     private readonly _dashboardPersistenceService: AbstractConfigDataPersistenceService<
       IWidgetConfig | string[]
     >,
-    private readonly _entitiesService: EntitiesService
+    private readonly _entitiesService: EntitiesService,
+    private readonly _configurationService: ConfigurationService
   ) {}
 
   async bootstrap() {
@@ -43,9 +48,16 @@ export class DashboardService implements IApplicationService {
   }
 
   private async generateDefaultDashboardWidgets() {
-    // :eyes show only enabled entities
-    const entities = await this._entitiesService.getAllEntities();
-    const defaultWidgets: IWidgetConfig[] = entities
+    const [hiddenEntities, entities] = await Promise.all([
+      this._configurationService.show<string[]>("disabled_entities"),
+      this._entitiesService.getAllEntities(),
+    ]);
+
+    const entitiesToShow = entities.filter(
+      ({ value }) => !hiddenEntities.includes(value)
+    );
+
+    const defaultWidgets: IWidgetConfig[] = entitiesToShow
       .slice(0, DFAULT_NUMBER_OF_SUMMARY_CARDS)
       .map((entity) => {
         return {
@@ -58,15 +70,16 @@ export class DashboardService implements IApplicationService {
         };
       });
 
-    const firstEntity = entities[0];
-
-    defaultWidgets.push({
-      id: nanoid(),
-      title: userFriendlyCase(`${firstEntity.value}`),
-      _type: "table",
-      entity: firstEntity.value,
-      queryId: "",
-    });
+    const firstEntity = entitiesToShow[0];
+    if (firstEntity) {
+      defaultWidgets.push({
+        id: nanoid(),
+        title: userFriendlyCase(`${firstEntity.value}`),
+        _type: "table",
+        entity: firstEntity.value,
+        queryId: "",
+      });
+    }
 
     // eslint-disable-next-line no-restricted-syntax
     for (const widget of defaultWidgets) {
@@ -142,5 +155,6 @@ const dashboardPersistenceService = createConfigDomainPersistenceService<
 
 export const dashboardService = new DashboardService(
   dashboardPersistenceService,
-  entitiesService
+  entitiesService,
+  configurationService
 );

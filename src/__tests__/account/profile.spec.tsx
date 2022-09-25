@@ -30,7 +30,7 @@ describe("pages/account/profile", () => {
       </AppWrapper>
     );
 
-    userEvent.type(screen.getByLabelText("Name"), "Updated Name");
+    await userEvent.type(screen.getByLabelText("Name"), "Updated Name");
 
     await userEvent.click(
       screen.getByRole("button", { name: "Update Profile" })

@@ -18,9 +18,12 @@ describe("pages/account/password", () => {
         <AccountPassword />
       </AppWrapper>
     );
-    userEvent.type(screen.getByLabelText("Old Password"), "Old Password");
-    userEvent.type(screen.getByLabelText("New Password"), "New Password");
-    userEvent.type(screen.getByLabelText("New Password Again"), "New Password");
+    await userEvent.type(screen.getByLabelText("Old Password"), "Old Password");
+    await userEvent.type(screen.getByLabelText("New Password"), "New Password");
+    await userEvent.type(
+      screen.getByLabelText("New Password Again"),
+      "New Password"
+    );
 
     await userEvent.click(
       screen.getByRole("button", { name: "Change Password" })

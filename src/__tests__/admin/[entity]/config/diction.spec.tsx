@@ -39,8 +39,8 @@ describe("pages/admin/[entity]/config/diction", () => {
       </AppWrapper>
     );
 
-    userEvent.type(screen.getByLabelText("Plural"), "Update Plural");
-    userEvent.type(screen.getByLabelText("Singular"), "Update Singular");
+    await userEvent.type(screen.getByLabelText("Plural"), "Update Plural");
+    await userEvent.type(screen.getByLabelText("Singular"), "Update Singular");
 
     await userEvent.click(
       screen.getByRole("button", { name: "Update Diction" })

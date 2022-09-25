@@ -35,7 +35,9 @@ describe("pages/admin/settings/date", () => {
       </AppWrapper>
     );
 
-    userEvent.type(screen.getByLabelText("Format"), "yyyy MMM do");
+    await userEvent.clear(screen.getByLabelText("Format"));
+
+    await userEvent.type(screen.getByLabelText("Format"), "yyyy MMM do");
 
     await userEvent.click(
       screen.getByRole("button", { name: "Update Date Format" })

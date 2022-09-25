@@ -30,18 +30,9 @@ export const configApiHandlers = [
       return res(ctx.json(CONFIG_KEY.theme_color));
     }
   ),
-  rest.get(
-    BASE_TEST_URL("/api/config/default_date_format"),
-    async (_, res, ctx) => {
-      return res(ctx.json(CONFIG_KEY.default_date_format));
-    }
-  ),
-  rest.get(
-    BASE_TEST_URL("/api/config/system_settings"),
-    async (_, res, ctx) => {
-      return res(ctx.json(CONFIG_KEY.system_settings));
-    }
-  ),
+  rest.get(BASE_TEST_URL("/api/config/:key"), async (req, res, ctx) => {
+    return res(ctx.json(CONFIG_KEY[req.params.key as string]));
+  }),
   rest.put(BASE_TEST_URL("/api/config/:key"), async (req, res, ctx) => {
     CONFIG_KEY[req.params.key as string] = (await req.json()).data;
     return res(ctx.status(201));

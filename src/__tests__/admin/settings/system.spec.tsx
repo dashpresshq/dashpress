@@ -38,7 +38,7 @@ describe("pages/admin/settings/system", () => {
       </AppWrapper>
     );
 
-    userEvent.type(
+    await userEvent.type(
       screen.getByLabelText("Token Validity Duration In Days"),
       "9"
     );

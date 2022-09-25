@@ -30,22 +30,3 @@ export interface IDBSchema {
   uniqueFields: string[][];
   relations: IDBSchemaRelation[];
 }
-
-export enum SupportedDatabaseTypes {
-  Postgres = "postgres",
-  MySql = "mysql",
-  MsSql = "mssql",
-  Sqlite = "sqlite",
-}
-
-export type IDBCredentials = {
-  connectionString: string;
-  databaseType: SupportedDatabaseTypes;
-  host: string;
-  user: string;
-  password: string;
-  schemaNames: string[];
-  database: string;
-  port: number;
-  ssl: boolean;
-};

@@ -9,7 +9,7 @@ import {
 } from "backend/credentials/credentials.service";
 import { CREDENTIALS_DOMAINS } from "backend/credentials/crendential.types";
 import { IApplicationService } from "backend/types";
-import { IDBCredentials, IDBSchema, IEntityField } from "shared/types";
+import { IDataSourceCredentials, IDBSchema, IEntityField } from "shared/types";
 import {
   createConfigDomainPersistenceService,
   AbstractConfigDataPersistenceService,
@@ -57,12 +57,12 @@ export class SchemasService implements IApplicationService {
 
   private async doIntrospection() {
     const dbCredentials =
-      await this._credentialsService.getDomainCredentials<IDBCredentials>(
+      await this._credentialsService.getDomainCredentials<IDataSourceCredentials>(
         CREDENTIALS_DOMAINS.database
       );
 
     const schema = await introspect({
-      databaseType: dbCredentials.databaseType,
+      dataSourceType: dbCredentials.dataSourceType,
       host: dbCredentials.host,
       password: dbCredentials.password,
       schemaNames: ["public"],

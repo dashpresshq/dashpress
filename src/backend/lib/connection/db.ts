@@ -1,9 +1,9 @@
 import knex, { Knex } from "knex";
-import { IDBCredentials, SupportedDatabaseTypes } from "shared/types";
+import { IDataSourceCredentials, SupportedDataSources } from "shared/types";
 import { connectionManager } from "./_manager";
 
-const SupportedDatabaseTypeToKnexClientMap: Record<
-  SupportedDatabaseTypes,
+const SupportedDataSourceToKnexClientMap: Record<
+  Partial<SupportedDataSources>,
   string
 > = {
   mssql: "tedious",
@@ -26,7 +26,7 @@ const handleStringCredentials = (credentials: string) => {
   return knex(credentials);
 };
 
-const make = (credentials: IDBCredentials | string) => {
+const make = (credentials: IDataSourceCredentials | string) => {
   if (typeof credentials === "string") {
     return handleStringCredentials(credentials);
   }
@@ -36,7 +36,7 @@ const make = (credentials: IDBCredentials | string) => {
   }
 
   return knex({
-    client: SupportedDatabaseTypeToKnexClientMap[credentials.databaseType],
+    client: SupportedDataSourceToKnexClientMap[credentials.dataSourceType],
 
     connection: {
       database: credentials.database,
@@ -53,7 +53,9 @@ const verify = async (connection: Knex) => {
   await connection.raw("SELECT 1");
 };
 
-export const getDbConnection = async (credentials: IDBCredentials | string) => {
+export const getDbConnection = async (
+  credentials: IDataSourceCredentials | string
+) => {
   return await connectionManager(credentials, {
     make,
     verify,

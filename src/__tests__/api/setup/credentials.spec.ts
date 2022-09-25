@@ -11,7 +11,7 @@ describe("/api/setup/credentials", () => {
     const { req, res } = createMocks({
       method: "POST",
       body: {
-        databaseType: "postgres",
+        dataSourceType: "postgres",
         host: "some invalid host",
       },
     });
@@ -34,7 +34,7 @@ describe("/api/setup/credentials", () => {
     const { req, res } = createMocks({
       method: "POST",
       body: {
-        databaseType: "postgres",
+        dataSourceType: "postgres",
         connectionString: "sqlite:./test.sqlite",
       },
     });
@@ -48,7 +48,7 @@ describe("/api/setup/credentials", () => {
     const { req, res } = createMocks({
       method: "POST",
       body: {
-        databaseType: "postgres",
+        dataSourceType: "postgres",
         connectionString: "sqlite:./test.sqlite",
       },
     });

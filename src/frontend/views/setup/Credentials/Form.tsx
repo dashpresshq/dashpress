@@ -7,97 +7,118 @@ import {
 } from "@hadmean/chromista";
 import { Form, Field } from "react-final-form";
 import { required, StringUtils, IFormProps } from "@hadmean/protozoa";
-import { IDBCredentials, SupportedDatabaseTypes } from "shared/types";
+import {
+  IDataSourceCredentials,
+  SupportedDataSources,
+  DATA_SOURCES_CONFIG,
+} from "shared/types";
 
-const DEFAULT_DATABASE_TYPE_PORT: Record<SupportedDatabaseTypes, number> = {
-  [SupportedDatabaseTypes.MySql]: 3306,
-  [SupportedDatabaseTypes.Postgres]: 5432,
-  [SupportedDatabaseTypes.Sqlite]: 0,
-  [SupportedDatabaseTypes.MsSql]: 1433,
-};
-
-export function CredentialsSetupForm({ onSubmit }: IFormProps<IDBCredentials>) {
+export function CredentialsSetupForm({
+  onSubmit,
+}: IFormProps<IDataSourceCredentials>) {
   return (
     <Form
       onSubmit={onSubmit}
       initialValues={{
-        port: DEFAULT_DATABASE_TYPE_PORT[
-          Object.values(DEFAULT_DATABASE_TYPE_PORT)[0]
-        ],
+        port: Object.values(DATA_SOURCES_CONFIG)[0].port,
       }}
-      render={({ handleSubmit, submitting, pristine, form }) => (
-        <form onSubmit={handleSubmit}>
-          <Field name="databaseType" validate={required} validateFields={[]}>
-            {({ input, meta }) => (
-              <FormSelect
-                label="Database Type"
-                selectData={Object.values(SupportedDatabaseTypes).map(
-                  (databaseType) => ({
-                    label: StringUtils.upperCaseFirstLetter(databaseType),
-                    value: databaseType,
-                  })
+      render={({ handleSubmit, submitting, pristine, form, values }) => {
+        const dataSourceConfig = DATA_SOURCES_CONFIG[values.dataSourceType];
+        return (
+          <form onSubmit={handleSubmit}>
+            <Field
+              name="dataSourceType"
+              validate={required}
+              validateFields={[]}
+            >
+              {({ input, meta }) => (
+                <FormSelect
+                  label="Database Type"
+                  selectData={Object.values(SupportedDataSources).map(
+                    (dataSourceType) => ({
+                      label: StringUtils.upperCaseFirstLetter(dataSourceType),
+                      value: dataSourceType,
+                    })
+                  )}
+                  meta={meta}
+                  input={{
+                    ...input,
+                    onChange: (value) => {
+                      form.change("port", DATA_SOURCES_CONFIG[value].port);
+                      input.onChange(value);
+                    },
+                  }}
+                />
+              )}
+            </Field>
+
+            {dataSourceConfig.fields.includes("host") && (
+              <Field name="host" validate={required} validateFields={[]}>
+                {({ input, meta }) => (
+                  <FormInput label="Host" meta={meta} input={input} />
                 )}
-                meta={meta}
-                input={{
-                  ...input,
-                  onChange: (value) => {
-                    form.change("port", DEFAULT_DATABASE_TYPE_PORT[value]);
-                    input.onChange(value);
-                  },
-                }}
-              />
+              </Field>
             )}
-          </Field>
-
-          <Field name="host" validate={required} validateFields={[]}>
-            {({ input, meta }) => (
-              <FormInput label="Host" meta={meta} input={input} />
+            {dataSourceConfig.fields.includes("user") && (
+              <Field name="user" validate={required} validateFields={[]}>
+                {({ input, meta }) => (
+                  <FormInput label="User" meta={meta} input={input} />
+                )}
+              </Field>
             )}
-          </Field>
 
-          <Field name="user" validate={required} validateFields={[]}>
-            {({ input, meta }) => (
-              <FormInput label="User" meta={meta} input={input} />
+            {dataSourceConfig.fields.includes("password") && (
+              <Field name="password" validate={required} validateFields={[]}>
+                {({ input, meta }) => (
+                  <FormInput
+                    label="Password"
+                    type="password"
+                    meta={meta}
+                    input={input}
+                  />
+                )}
+              </Field>
             )}
-          </Field>
-
-          <Field name="password" validate={required} validateFields={[]}>
-            {({ input, meta }) => (
-              <FormInput
-                label="Password"
-                type="password"
-                meta={meta}
-                input={input}
-              />
+            {dataSourceConfig.fields.includes("database") && (
+              <Field name="database" validate={required} validateFields={[]}>
+                {({ input, meta }) => (
+                  <FormInput label="Database" meta={meta} input={input} />
+                )}
+              </Field>
             )}
-          </Field>
-
-          <Field name="database" validate={required} validateFields={[]}>
-            {({ input, meta }) => (
-              <FormInput label="Database" meta={meta} input={input} />
+            {dataSourceConfig.fields.includes("port") && (
+              <Field name="port" validate={required} validateFields={[]}>
+                {({ input, meta }) => (
+                  <FormNumberInput label="Port" meta={meta} input={input} />
+                )}
+              </Field>
             )}
-          </Field>
 
-          <Field name="port" validate={required} validateFields={[]}>
-            {({ input, meta }) => (
-              <FormNumberInput label="Port" meta={meta} input={input} />
+            {dataSourceConfig.fields.includes("ssl") && (
+              <Field name="ssl" validateFields={[]} type="checkbox">
+                {({ input, meta }) => (
+                  <FormCheckBox label="Use SSL" meta={meta} input={input} />
+                )}
+              </Field>
             )}
-          </Field>
 
-          <Field name="ssl" validateFields={[]} type="checkbox">
-            {({ input, meta }) => (
-              <FormCheckBox label="Use SSL" meta={meta} input={input} />
+            {dataSourceConfig.fields.includes("path") && (
+              <Field name="path" validateFields={[]} type="checkbox">
+                {({ input, meta }) => (
+                  <FormInput label="Path" meta={meta} input={input} />
+                )}
+              </Field>
             )}
-          </Field>
 
-          <FormButton
-            text="Setup Credentials"
-            isMakingRequest={submitting}
-            disabled={pristine}
-            block
-          />
-        </form>
-      )}
+            <FormButton
+              text="Setup Credentials"
+              isMakingRequest={submitting}
+              disabled={pristine}
+              block
+            />
+          </form>
+        );
+      }}
     />
   );
 }

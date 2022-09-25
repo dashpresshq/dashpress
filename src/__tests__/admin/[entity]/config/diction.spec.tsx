@@ -20,7 +20,7 @@ describe("pages/admin/[entity]/config/diction", () => {
     }));
   });
 
-  it("display diction values", async () => {
+  it("should display diction values", async () => {
     render(
       <AppWrapper>
         <EntityDictionSettings />
@@ -32,7 +32,7 @@ describe("pages/admin/[entity]/config/diction", () => {
     expect(screen.getByLabelText("Singular")).toHaveValue("Singular entity-1");
   });
 
-  it("update diction successfully", async () => {
+  it("should update diction successfully", async () => {
     render(
       <AppWrapper>
         <EntityDictionSettings />

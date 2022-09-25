@@ -17,7 +17,7 @@ describe("pages/admin/settings/theme", () => {
     }));
   });
 
-  it("display theme values", async () => {
+  it("should display theme values", async () => {
     render(
       <AppWrapper>
         <ThemeSettings />
@@ -28,7 +28,7 @@ describe("pages/admin/settings/theme", () => {
     });
   });
 
-  it("update system settings successfully", async () => {
+  it("should update system settings successfully", async () => {
     render(
       <AppWrapper>
         <ThemeSettings />
@@ -44,5 +44,16 @@ describe("pages/admin/settings/theme", () => {
     expect(await screen.findByRole("status")).toHaveTextContent(
       "App Settings Saved Successfully"
     );
+  });
+
+  it("should display updated theme values", async () => {
+    render(
+      <AppWrapper>
+        <ThemeSettings />
+      </AppWrapper>
+    );
+    await waitFor(() => {
+      expect(screen.getByLabelText("Primary")).toHaveValue("#111111");
+    });
   });
 });

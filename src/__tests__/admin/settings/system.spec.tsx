@@ -17,7 +17,7 @@ describe("pages/admin/settings/system", () => {
     }));
   });
 
-  it("display system values", async () => {
+  it("should display system values", async () => {
     render(
       <AppWrapper>
         <SystemSettings />
@@ -31,7 +31,7 @@ describe("pages/admin/settings/system", () => {
     expect(screen.getByLabelText("Force Introspection")).toBeChecked();
   });
 
-  it("update system settings successfully", async () => {
+  it("should update system settings successfully", async () => {
     render(
       <AppWrapper>
         <SystemSettings />
@@ -40,7 +40,7 @@ describe("pages/admin/settings/system", () => {
 
     userEvent.type(
       screen.getByLabelText("Token Validity Duration In Days"),
-      "5"
+      "9"
     );
 
     userEvent.click(screen.getByLabelText("Force Introspection"));
@@ -52,5 +52,19 @@ describe("pages/admin/settings/system", () => {
     expect(await screen.findByRole("status")).toHaveTextContent(
       "App Settings Saved Successfully"
     );
+  });
+
+  it("should display updated system values", async () => {
+    render(
+      <AppWrapper>
+        <SystemSettings />
+      </AppWrapper>
+    );
+    await waitFor(() => {
+      expect(
+        screen.getByLabelText("Token Validity Duration In Days")
+      ).toHaveValue(59);
+    });
+    expect(screen.getByLabelText("Force Introspection")).not.toBeChecked();
   });
 });

@@ -17,7 +17,7 @@ describe("pages/admin/settings/date", () => {
     }));
   });
 
-  it("display date values", async () => {
+  it("should display date values", async () => {
     render(
       <AppWrapper>
         <DateFormatSettings />
@@ -28,7 +28,7 @@ describe("pages/admin/settings/date", () => {
     });
   });
 
-  it("update date successfully", async () => {
+  it("should update date successfully", async () => {
     render(
       <AppWrapper>
         <DateFormatSettings />
@@ -44,5 +44,16 @@ describe("pages/admin/settings/date", () => {
     expect(await screen.findByRole("status")).toHaveTextContent(
       "App Settings Saved Successfully"
     );
+  });
+
+  it("should display updated date values", async () => {
+    render(
+      <AppWrapper>
+        <DateFormatSettings />
+      </AppWrapper>
+    );
+    await waitFor(() => {
+      expect(screen.getByLabelText("Format")).toHaveValue("yyyy MMM do");
+    });
   });
 });

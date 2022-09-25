@@ -43,6 +43,7 @@ const make = (credentials: IDataSourceCredentials | string) => {
       user: credentials.user,
       password: credentials.password,
       host: credentials.host,
+      filename: credentials.filename,
       port: credentials.port,
       ssl: credentials.ssl,
     },

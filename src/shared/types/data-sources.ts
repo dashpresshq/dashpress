@@ -11,14 +11,14 @@ export type IDataSourceCredentials = {
   host: string;
   user: string;
   password: string;
-  path: string;
+  filename: string;
   schemaNames: string[];
   database: string;
   port: number;
   ssl: boolean;
 };
 
-const DATABASE_FIELDS: Array<keyof IDBCredentials> = [
+const DATABASE_FIELDS: Array<keyof IDataSourceCredentials> = [
   "host",
   "user",
   "password",
@@ -47,6 +47,6 @@ export const DATA_SOURCES_CONFIG: Record<
     port: 3306,
   },
   [SupportedDataSources.Sqlite]: {
-    fields: ["path"],
+    fields: ["filename"],
   },
 };

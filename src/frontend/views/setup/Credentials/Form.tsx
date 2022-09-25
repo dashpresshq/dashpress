@@ -23,7 +23,9 @@ export function CredentialsSetupForm({
         port: Object.values(DATA_SOURCES_CONFIG)[0].port,
       }}
       render={({ handleSubmit, submitting, pristine, form, values }) => {
-        const dataSourceConfig = DATA_SOURCES_CONFIG[values.dataSourceType];
+        const dataSourceConfig = DATA_SOURCES_CONFIG[values.dataSourceType] || {
+          fields: [],
+        };
         return (
           <form onSubmit={handleSubmit}>
             <Field
@@ -102,10 +104,10 @@ export function CredentialsSetupForm({
               </Field>
             )}
 
-            {dataSourceConfig.fields.includes("path") && (
-              <Field name="path" validateFields={[]} type="checkbox">
+            {dataSourceConfig.fields.includes("filename") && (
+              <Field name="filename" validateFields={[]}>
                 {({ input, meta }) => (
-                  <FormInput label="Path" meta={meta} input={input} />
+                  <FormInput label="File Name" meta={meta} input={input} />
                 )}
               </Field>
             )}

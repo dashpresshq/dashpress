@@ -35,8 +35,6 @@ const Root = styled.div`
 
 const NEW_DASHBOARD_ITEM = "__new_dashboard_item__";
 
-// codesandbox.io/s/react-easy-sort-custom-knob-demo-ij37h?file=/src/styles.css
-
 export function ManageDashboard() {
   const router = useRouter();
 

@@ -22,9 +22,7 @@ export const setupAppConfigTestData = async (
 
   const configAsArray = Object.entries({ ...TEST_APP_CONFIG, ...appConfig });
 
-  // eslint-disable-next-line no-restricted-syntax
   for (const [key, value] of configAsArray) {
-    // eslint-disable-next-line no-await-in-loop
     await configPersistenceService.upsertItem(key, value);
   }
 };

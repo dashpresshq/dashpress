@@ -81,9 +81,7 @@ export class DashboardService implements IApplicationService {
       });
     }
 
-    // eslint-disable-next-line no-restricted-syntax
     for (const widget of defaultWidgets) {
-      // eslint-disable-next-line no-await-in-loop
       await this._dashboardPersistenceService.upsertItem(widget.id, widget);
     }
 

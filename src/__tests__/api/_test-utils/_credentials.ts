@@ -23,9 +23,7 @@ export const setupCredentialsTestData = async (
 
   const configAsArray = Object.entries(credentials);
 
-  // eslint-disable-next-line no-restricted-syntax
   for (const [key, value] of configAsArray) {
-    // eslint-disable-next-line no-await-in-loop
     await configPersistenceService.upsertItem(key, value);
   }
 };

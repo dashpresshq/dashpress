@@ -34,9 +34,7 @@ export const setupDashboardTestData = async (
 
   await configPersistenceService.resetToEmpty();
 
-  // eslint-disable-next-line no-restricted-syntax
   for (const widget of testDashboard) {
-    // eslint-disable-next-line no-await-in-loop
     await configPersistenceService.upsertItem(widget.id, widget);
   }
 

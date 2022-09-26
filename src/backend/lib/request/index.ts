@@ -55,9 +55,7 @@ export const requestHandler =
         ];
 
     try {
-      // eslint-disable-next-line no-restricted-syntax
       for (const validation of [...AUTH_VALIDATIONS, ...validationsToRun]) {
-        // eslint-disable-next-line no-await-in-loop
         await ValidationImpl[validation._type](req, validation.body);
       }
 

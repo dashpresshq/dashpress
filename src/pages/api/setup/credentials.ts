@@ -88,7 +88,7 @@ const credentialRequestSchema: IAppliedSchemaFormConfig<IDataSourceCredentials> 
         },
       ],
     },
-    path: {
+    filename: {
       type: "text",
       validations: [
         {

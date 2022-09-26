@@ -8,7 +8,7 @@ import { SETUP_CHECK_URL } from "frontend/hooks/setup/setup.store";
 import { useMutation } from "react-query";
 import { ISetupUserForm } from "shared/form-schemas/setup/user";
 import {
-  IDBCredentials,
+  IDataSourceCredentials,
   ISuccessfullAuthenticationResponse,
 } from "shared/types";
 
@@ -21,7 +21,7 @@ export function useSetupCredentialsMutation() {
   });
 
   return useMutation(
-    async (data: IDBCredentials) =>
+    async (data: IDataSourceCredentials) =>
       await makePostRequest(`/api/setup/credentials`, data),
     apiMutateOptions
   );

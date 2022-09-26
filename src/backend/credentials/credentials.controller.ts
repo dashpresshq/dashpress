@@ -1,10 +1,10 @@
-import { IDBCredentials } from "shared/types";
+import { IDataSourceCredentials } from "shared/types";
 import { credentialsService, CredentialsService } from "./credentials.service";
 
 export class CredentialController {
   constructor(private _credentialsService: CredentialsService) {}
 
-  async upsert(domain: string, credentials: IDBCredentials) {
+  async upsert(domain: string, credentials: IDataSourceCredentials) {
     await this._credentialsService.upsertDomainCredentials(domain, credentials);
   }
 
@@ -15,7 +15,7 @@ export class CredentialController {
     return { data: !!credentials };
   }
 
-  async read(domain: string): Promise<IDBCredentials> {
+  async read(domain: string): Promise<IDataSourceCredentials> {
     return await this._credentialsService.getDomainCredentials(domain);
   }
 }

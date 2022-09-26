@@ -8,7 +8,7 @@ import get from "lodash/get";
 import { credentialsService } from "backend/credentials/credentials.service";
 import { getDbConnection } from "backend/lib/connection/db";
 import { CREDENTIALS_DOMAINS } from "backend/credentials/crendential.types";
-import { IDBCredentials, QueryFilter } from "shared/types";
+import { IDataSourceCredentials, QueryFilter } from "shared/types";
 import { IApplicationService } from "backend/types";
 import {
   subDays,
@@ -28,8 +28,8 @@ export class DataService implements IApplicationService {
       return this._dbInstance;
     }
 
-    const dbCredentials: IDBCredentials =
-      await credentialsService.getDomainCredentials<IDBCredentials>(
+    const dbCredentials: IDataSourceCredentials =
+      await credentialsService.getDomainCredentials<IDataSourceCredentials>(
         CREDENTIALS_DOMAINS.database
       );
 

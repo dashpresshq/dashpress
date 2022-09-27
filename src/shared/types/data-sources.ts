@@ -1,4 +1,22 @@
-import { RDMSSources, IRDMSConnectionOptions } from "@hadmean/bacteria";
+enum RDMSSources {
+  Postgres = "postgres",
+  MySql = "mysql",
+  MsSql = "mssql",
+  Sqlite = "sqlite",
+}
+
+type IRDMSConnectionOptions = {
+  dataSourceType: RDMSSources;
+  connectionString?: string;
+  host?: string;
+  port?: number;
+  database?: string;
+  user?: string;
+  password?: string;
+  filename?: string;
+  ssl?: boolean;
+  schemaNames?: string[];
+};
 
 export type IDataSourceCredentials = IRDMSConnectionOptions;
 

@@ -9,9 +9,14 @@ const verify = async (connection: Knex) => {
 
 export const getDbConnection = async (
   credentials: IDataSourceCredentials | string
-) => {
-  return await connectionManager(credentials, {
-    make: makeDbConnection,
+): Promise<Knex<any, any[]>> => {
+  return await connectionManager<
+    IDataSourceCredentials | string,
+    Knex<any, any[]>
+  >(credentials, {
+    make: (credentials$1) => {
+      return makeDbConnection(credentials$1) as unknown as Knex<any, any[]>;
+    },
     verify,
   });
 };

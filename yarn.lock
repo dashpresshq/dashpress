@@ -1448,10 +1448,10 @@
     pg "^8.7.3"
     sqlite3 "^5.0.8"
 
-"@hadmean/chromista@^1.0.28":
-  version "1.0.28"
-  resolved "https://registry.yarnpkg.com/@hadmean/chromista/-/chromista-1.0.28.tgz#bec31fa4984bc251f319c131ee081edcf285d87f"
-  integrity sha512-HDA8qEX3I6SHpvaYOxxR3z5AYLzV3bD6fHCCVb+1ChRg8TyeyE8xC13X1OXbD+J9CSItdigtDkOp6OXprmhymQ==
+"@hadmean/chromista@^1.0.29":
+  version "1.0.29"
+  resolved "https://registry.yarnpkg.com/@hadmean/chromista/-/chromista-1.0.29.tgz#bee8a409904c62f921bb7a20cacef55c3fa2162d"
+  integrity sha512-SU/FKKmX3gmXuQzFgnHvXoPHl0BrAf/2by+rE4iMCwcZ9Mo9qejfaK8rpcSJ8y74B0/kewIt3vSVjgRIGiwiMQ==
   dependencies:
     "@fortawesome/fontawesome-svg-core" "^6.1.1"
     "@fortawesome/free-solid-svg-icons" "^6.1.1"
@@ -1488,10 +1488,10 @@
     tiny-skeleton-loader-react "^1.1.8"
     zustand "3.4.2"
 
-"@hadmean/eslint-config@^1.0.2":
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/@hadmean/eslint-config/-/eslint-config-1.0.2.tgz#051468d4c2ae3ae43f8a87076e7000e84245d639"
-  integrity sha512-XxjDviq1+mo6CXrBqWWx1E8Js/LwxQ9mkVZnEzdr8YlL6bGIdTBgJL/VWRKY5Ql9L7xKE5EKB7PsbfJ+15A6+Q==
+"@hadmean/eslint-config@^1.0.3":
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/@hadmean/eslint-config/-/eslint-config-1.0.3.tgz#786716c78a15df5a654a3a1dfd8bc2ff5341a840"
+  integrity sha512-vglLMXl/6GcYdtdG7QRFq5oOfroB39nVEO3UcnUct07PjN6XfEYOIYtQL4A5bSCHe99A/gJm2ijY64rpEmxOhw==
   dependencies:
     "@typescript-eslint/eslint-plugin" "^5.30.5"
     "@typescript-eslint/parser" "^5.30.5"

@@ -42,6 +42,12 @@ export function CredentialsSetupForm({
                       value: dataSourceType,
                     })
                   )}
+                  rightActions={[
+                    {
+                      action: () => {},
+                      label: "Toggle Connection URL",
+                    },
+                  ]}
                   meta={meta}
                   input={{
                     ...input,

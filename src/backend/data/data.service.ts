@@ -43,13 +43,16 @@ export class DataService implements IApplicationService {
   }
 
   private dateFilterToTime(value: string) {
+    if (value && new Date(value).toString() !== "Invalid Date") {
+      return new Date(value);
+    }
     if (value === DATE_FILTER_VALUE.BEGINNING_OF_TIME_VALUE) {
       return new Date(0, 0, 0);
     }
     if (value === DATE_FILTER_VALUE.NOW) {
       return new Date();
     }
-    if (value === DATE_FILTER_VALUE.YEAR) {
+    if (value === DATE_FILTER_VALUE.BEGINNING_OF_YEAR) {
       return new Date(new Date().getFullYear(), 0, 0);
     }
     const [countString, field] = value.split(":");

@@ -112,14 +112,20 @@ export class DataService implements IApplicationService {
         }
         return query.whereBetween(column, [value, value2]);
 
-      case FilterOperators.DATE:
-        return query.whereBetween(column, [
-          this.dateFilterToTime(
-            (value as string) || DATE_FILTER_VALUE.BEGINNING_OF_TIME_VALUE
-          ),
-          this.dateFilterToTime((value2 as string) || DATE_FILTER_VALUE.NOW),
-        ]);
+      case FilterOperators.DATE: {
+        const firstTime = this.dateFilterToTime(
+          (value as string) || DATE_FILTER_VALUE.BEGINNING_OF_TIME_VALUE
+        );
+        const secondTime = this.dateFilterToTime(
+          (value2 as string) || DATE_FILTER_VALUE.NOW
+        );
+        const timeBetween: [Date, Date] =
+          firstTime.getTime() < secondTime.getTime()
+            ? [firstTime, secondTime]
+            : [secondTime, firstTime];
 
+        return query.whereBetween(column, timeBetween);
+      }
       case FilterOperators.NOT_IN:
         return query.whereNotIn(column, value as string[]);
     }

@@ -7,15 +7,13 @@ import {
 } from "@hadmean/chromista";
 import { Form, Field } from "react-final-form";
 import { required, StringUtils, IFormProps } from "@hadmean/protozoa";
-import {
-  IDataSourceCredentials,
-  SupportedDataSources,
-  DATA_SOURCES_CONFIG,
-} from "shared/types";
+import { IDataSourceCredentials, DATA_SOURCES_CONFIG } from "shared/types";
+import { useState } from "react";
 
 export function CredentialsSetupForm({
   onSubmit,
 }: IFormProps<IDataSourceCredentials>) {
+  const [useConnectionString, setUseConnectionString] = useState(false);
   return (
     <Form
       onSubmit={onSubmit}
@@ -25,6 +23,7 @@ export function CredentialsSetupForm({
       render={({ handleSubmit, submitting, pristine, form, values }) => {
         const dataSourceConfig = DATA_SOURCES_CONFIG[values.dataSourceType] || {
           fields: [],
+          useConnectionString: false,
         };
         return (
           <form onSubmit={handleSubmit}>
@@ -36,22 +35,29 @@ export function CredentialsSetupForm({
               {({ input, meta }) => (
                 <FormSelect
                   label="Database Type"
-                  selectData={Object.values(SupportedDataSources).map(
+                  selectData={Object.keys(DATA_SOURCES_CONFIG).map(
                     (dataSourceType) => ({
                       label: StringUtils.upperCaseFirstLetter(dataSourceType),
                       value: dataSourceType,
                     })
                   )}
-                  rightActions={[
-                    {
-                      action: () => {},
-                      label: "Toggle Connection URL",
-                    },
-                  ]}
+                  rightActions={
+                    dataSourceConfig.useConnectionString
+                      ? [
+                          {
+                            action: () => {
+                              setUseConnectionString(!useConnectionString);
+                            },
+                            label: "Toggle Connection URL",
+                          },
+                        ]
+                      : []
+                  }
                   meta={meta}
                   input={{
                     ...input,
                     onChange: (value) => {
+                      setUseConnectionString(false);
                       form.change("port", DATA_SOURCES_CONFIG[value].port);
                       input.onChange(value);
                     },
@@ -59,63 +65,84 @@ export function CredentialsSetupForm({
                 />
               )}
             </Field>
+            {useConnectionString ? (
+              <Field
+                name="connectionString"
+                validate={required}
+                validateFields={[]}
+              >
+                {({ input, meta }) => (
+                  <FormInput label="Connection URL" meta={meta} input={input} />
+                )}
+              </Field>
+            ) : (
+              <>
+                {dataSourceConfig.fields.includes("host") && (
+                  <Field name="host" validate={required} validateFields={[]}>
+                    {({ input, meta }) => (
+                      <FormInput label="Host" meta={meta} input={input} />
+                    )}
+                  </Field>
+                )}
+                {dataSourceConfig.fields.includes("user") && (
+                  <Field name="user" validate={required} validateFields={[]}>
+                    {({ input, meta }) => (
+                      <FormInput label="User" meta={meta} input={input} />
+                    )}
+                  </Field>
+                )}
 
-            {dataSourceConfig.fields.includes("host") && (
-              <Field name="host" validate={required} validateFields={[]}>
-                {({ input, meta }) => (
-                  <FormInput label="Host" meta={meta} input={input} />
+                {dataSourceConfig.fields.includes("password") && (
+                  <Field
+                    name="password"
+                    validate={required}
+                    validateFields={[]}
+                  >
+                    {({ input, meta }) => (
+                      <FormInput
+                        label="Password"
+                        type="password"
+                        meta={meta}
+                        input={input}
+                      />
+                    )}
+                  </Field>
                 )}
-              </Field>
-            )}
-            {dataSourceConfig.fields.includes("user") && (
-              <Field name="user" validate={required} validateFields={[]}>
-                {({ input, meta }) => (
-                  <FormInput label="User" meta={meta} input={input} />
+                {dataSourceConfig.fields.includes("database") && (
+                  <Field
+                    name="database"
+                    validate={required}
+                    validateFields={[]}
+                  >
+                    {({ input, meta }) => (
+                      <FormInput label="Database" meta={meta} input={input} />
+                    )}
+                  </Field>
                 )}
-              </Field>
-            )}
+                {dataSourceConfig.fields.includes("port") && (
+                  <Field name="port" validate={required} validateFields={[]}>
+                    {({ input, meta }) => (
+                      <FormNumberInput label="Port" meta={meta} input={input} />
+                    )}
+                  </Field>
+                )}
 
-            {dataSourceConfig.fields.includes("password") && (
-              <Field name="password" validate={required} validateFields={[]}>
-                {({ input, meta }) => (
-                  <FormInput
-                    label="Password"
-                    type="password"
-                    meta={meta}
-                    input={input}
-                  />
+                {dataSourceConfig.fields.includes("ssl") && (
+                  <Field name="ssl" validateFields={[]} type="checkbox">
+                    {({ input, meta }) => (
+                      <FormCheckBox label="Use SSL" meta={meta} input={input} />
+                    )}
+                  </Field>
                 )}
-              </Field>
-            )}
-            {dataSourceConfig.fields.includes("database") && (
-              <Field name="database" validate={required} validateFields={[]}>
-                {({ input, meta }) => (
-                  <FormInput label="Database" meta={meta} input={input} />
-                )}
-              </Field>
-            )}
-            {dataSourceConfig.fields.includes("port") && (
-              <Field name="port" validate={required} validateFields={[]}>
-                {({ input, meta }) => (
-                  <FormNumberInput label="Port" meta={meta} input={input} />
-                )}
-              </Field>
-            )}
 
-            {dataSourceConfig.fields.includes("ssl") && (
-              <Field name="ssl" validateFields={[]} type="checkbox">
-                {({ input, meta }) => (
-                  <FormCheckBox label="Use SSL" meta={meta} input={input} />
+                {dataSourceConfig.fields.includes("filename") && (
+                  <Field name="filename" validateFields={[]}>
+                    {({ input, meta }) => (
+                      <FormInput label="File Name" meta={meta} input={input} />
+                    )}
+                  </Field>
                 )}
-              </Field>
-            )}
-
-            {dataSourceConfig.fields.includes("filename") && (
-              <Field name="filename" validateFields={[]}>
-                {({ input, meta }) => (
-                  <FormInput label="File Name" meta={meta} input={input} />
-                )}
-              </Field>
+              </>
             )}
 
             <FormButton

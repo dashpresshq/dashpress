@@ -8,7 +8,7 @@ import get from "lodash/get";
 import { credentialsService } from "backend/credentials/credentials.service";
 import { getDbConnection } from "backend/lib/connection/db";
 import { CREDENTIALS_DOMAINS } from "backend/credentials/crendential.types";
-import { IDataSourceCredentials, QueryFilter } from "shared/types";
+import { QueryFilter } from "shared/types";
 import { IApplicationService } from "backend/types";
 import {
   subDays,
@@ -18,6 +18,7 @@ import {
   subYears,
   subWeeks,
 } from "date-fns";
+import { IRDMSConnectionOptions } from "@hadmean/bacteria";
 import { IPaginationFilters } from "./types";
 
 export class DataService implements IApplicationService {
@@ -28,12 +29,13 @@ export class DataService implements IApplicationService {
       return this._dbInstance;
     }
 
-    const dbCredentials: IDataSourceCredentials =
-      await credentialsService.getDomainCredentials<IDataSourceCredentials>(
-        CREDENTIALS_DOMAINS.database
-      );
+    const dbCredentials = (await credentialsService.getDomainCredentials(
+      CREDENTIALS_DOMAINS.database
+    )) as unknown as IRDMSConnectionOptions;
 
-    this._dbInstance = await getDbConnection(dbCredentials);
+    this._dbInstance = (await getDbConnection(
+      dbCredentials
+    )) as unknown as Knex;
 
     return this._dbInstance;
   }

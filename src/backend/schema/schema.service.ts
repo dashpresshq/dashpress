@@ -61,16 +61,7 @@ export class SchemasService implements IApplicationService {
         CREDENTIALS_DOMAINS.database
       );
 
-    const schema = await introspect({
-      dataSourceType: dbCredentials.dataSourceType,
-      host: dbCredentials.host,
-      password: dbCredentials.password,
-      schemaNames: ["public"],
-      database: dbCredentials.database,
-      port: dbCredentials.port,
-      ssl: dbCredentials.ssl,
-      user: dbCredentials.user,
-    });
+    const schema = await introspect(dbCredentials);
 
     const dbSchema = this.formatIntrospectData(schema);
 

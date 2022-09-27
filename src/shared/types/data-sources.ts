@@ -1,22 +1,6 @@
-export enum SupportedDataSources {
-  Postgres = "postgres",
-  MySql = "mysql",
-  MsSql = "mssql",
-  Sqlite = "sqlite",
-}
+import { RDMSSources, IRDMSConnectionOptions } from "@hadmean/bacteria";
 
-export type IDataSourceCredentials = {
-  connectionString: string;
-  dataSourceType: SupportedDataSources;
-  host: string;
-  user: string;
-  password: string;
-  filename: string;
-  schemaNames: string[];
-  database: string;
-  port: number;
-  ssl: boolean;
-};
+export type IDataSourceCredentials = IRDMSConnectionOptions;
 
 const DATABASE_FIELDS: Array<keyof IDataSourceCredentials> = [
   "host",
@@ -28,25 +12,29 @@ const DATABASE_FIELDS: Array<keyof IDataSourceCredentials> = [
 ];
 
 export const DATA_SOURCES_CONFIG: Record<
-  SupportedDataSources,
+  string,
   {
     fields: Array<keyof IDataSourceCredentials>;
     port?: number;
+    useConnectionString?: boolean;
   }
 > = {
-  [SupportedDataSources.Postgres]: {
+  [RDMSSources.Postgres]: {
     fields: DATABASE_FIELDS,
     port: 5432,
+    useConnectionString: true,
   },
-  [SupportedDataSources.MsSql]: {
+  [RDMSSources.MsSql]: {
     fields: DATABASE_FIELDS,
     port: 1433,
+    useConnectionString: true,
   },
-  [SupportedDataSources.MySql]: {
+  [RDMSSources.MySql]: {
     fields: DATABASE_FIELDS,
     port: 3306,
+    useConnectionString: true,
   },
-  [SupportedDataSources.Sqlite]: {
+  [RDMSSources.Sqlite]: {
     fields: ["filename"],
   },
 };

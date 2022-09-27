@@ -1,6 +1,6 @@
 import { setupController } from "backend/setup/setup.controller";
 import { IAppliedSchemaFormConfig } from "shared/form-schemas";
-import { SupportedDataSources, IDataSourceCredentials } from "shared/types";
+import { DATA_SOURCES_CONFIG, IDataSourceCredentials } from "shared/types";
 import { requestHandler } from "../../../backend/lib/request";
 
 const credentialRequestSchema: IAppliedSchemaFormConfig<IDataSourceCredentials> =
@@ -14,7 +14,7 @@ const credentialRequestSchema: IAppliedSchemaFormConfig<IDataSourceCredentials> 
         {
           validationType: "isIn",
           constraint: {
-            options: Object.values(SupportedDataSources),
+            options: Object.keys(DATA_SOURCES_CONFIG),
           },
         },
       ],

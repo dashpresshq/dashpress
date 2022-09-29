@@ -70,8 +70,6 @@ export function AppLayout({
     label: historyItem.title,
   }));
 
-  // const homedBreadcrumb = [];
-
   homedBreadcrumb.push({ value: "", label: pageTitle });
 
   if (userAuthenticatedState !== true) {

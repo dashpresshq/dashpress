@@ -79,6 +79,7 @@ export function EntityTable() {
                         defaultTableState={dataState}
                       />
                     ),
+                    // TODO add count to table tabs
                     label: title,
                   };
                 }

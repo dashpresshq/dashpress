@@ -44,9 +44,10 @@ export const useNavigationStack = () => {
   const [history, setHistory] = useState<INavigationItem[]>(
     JSON.parse(TemporayStorageService.getString(key) || "[]")
   );
-  const [pageTitle, viewKey] = usePageDetailsStore((store) => [
+  const [pageTitle, viewKey, pageLink] = usePageDetailsStore((store) => [
     store.pageTitle,
     store.viewKey,
+    store.pageLink,
   ]);
   useEffect(() => {
     TemporayStorageService.setString(key, JSON.stringify(history));
@@ -63,10 +64,12 @@ export const useNavigationStack = () => {
         }
         const newStackEntry = {
           title: pageTitle,
-          link: router.asPath,
+          link: pageLink,
           viewKey,
         };
+
         const newHistory = handleHistoryMutation(history, newStackEntry);
+
         setHistory(newHistory);
       },
       goToLinkIndex: (index: number) => {
@@ -92,6 +95,6 @@ export const useNavigationStack = () => {
       },
       canGoBack: () => history.length > 0,
     }),
-    [typeof window]
+    [typeof window, history]
   );
 };

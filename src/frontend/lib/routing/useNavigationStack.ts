@@ -1,6 +1,7 @@
+import { createStore } from "@hadmean/protozoa";
 import { ROOT_LINKS_TO_CLEAR_BREADCRUMBS } from "frontend/_layouts/app/constants";
 import { useRouter } from "next/router";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo } from "react";
 import { usePageDetailsStore } from "./usePageDetails";
 
 export const TemporayStorageService = {
@@ -23,6 +24,7 @@ const handleHistoryMutation = (
   oldHistory: INavigationItem[],
   newEntry: INavigationItem
 ): INavigationItem[] => {
+  console.log({ oldHistory, newEntry });
   if (oldHistory.length === 0) {
     return [newEntry];
   }
@@ -31,27 +33,48 @@ const handleHistoryMutation = (
     return [];
   }
 
-  const lastHistory = oldHistory.at(-1);
-  if (lastHistory.viewKey !== newEntry.viewKey) {
+  if (oldHistory.findIndex((old) => old.link === newEntry.link) === -1) {
     return [...oldHistory, newEntry];
   }
 
   return [...oldHistory];
 };
 
+type IStore = {
+  history: INavigationItem[];
+  setHistory: (history: INavigationItem[]) => void;
+};
+
+export const useNavigationHistoryStore = createStore<IStore>((set) => ({
+  history: JSON.parse(TemporayStorageService.getString(key) || "[]"),
+  setHistory: (history: INavigationItem[]) =>
+    set(() => ({
+      history,
+    })),
+}));
+
 export const useNavigationStack = () => {
   const router = useRouter();
-  const [history, setHistory] = useState<INavigationItem[]>(
-    JSON.parse(TemporayStorageService.getString(key) || "[]")
-  );
+
+  const [history, setHistory] = useNavigationHistoryStore((store) => [
+    store.history,
+    store.setHistory,
+  ]);
+
+  // useEffect(() => {
+  //   setHistory(JSON.parse(TemporayStorageService.getString(key) || "[]"));
+  // }, [typeof window]);
+
   const [pageTitle, viewKey, pageLink] = usePageDetailsStore((store) => [
     store.pageTitle,
     store.viewKey,
     store.pageLink,
   ]);
+
   useEffect(() => {
     TemporayStorageService.setString(key, JSON.stringify(history));
   }, [history]);
+
   return useMemo(
     () => ({
       clear: () => {
@@ -86,11 +109,16 @@ export const useNavigationStack = () => {
         router.replace(lastHistory.link);
       },
       goBack: () => {
+        console.log({ goBackBefore: history });
+
         const newHistory = [...history];
 
         const lastHistory = newHistory.pop();
 
         setHistory(newHistory);
+
+        console.log({ goBackNew: newHistory });
+
         router.replace(lastHistory.link);
       },
       canGoBack: () => history.length > 0,

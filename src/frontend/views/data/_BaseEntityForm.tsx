@@ -66,11 +66,11 @@ export function BaseEntityForm({
   const isLoading =
     entityFields.isLoading ||
     hiddenColumns.isLoading ||
-    additionalDataState?.isLoading ||
     entityToOneReferenceFields.isLoading ||
     entityFormExtension.isLoading ||
     entity === SLUG_LOADING_VALUE ||
-    entityFieldTypesMap.isLoading;
+    entityFieldTypesMap.isLoading ||
+    additionalDataState?.isLoading;
 
   const viewState = useEntityViewStateMachine(isLoading, error, action);
 
@@ -89,7 +89,7 @@ export function BaseEntityForm({
   }, [initialValues, hiddenColumns]);
 
   const formSchemaConfig = {
-    entityToOneReferenceFields: entityToOneReferenceFields.data,
+    entityToOneReferenceFields: entityToOneReferenceFields.data || {},
     getEntityFieldLabels,
     entityFieldTypes,
     entityFieldSelections,

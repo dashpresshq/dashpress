@@ -103,16 +103,8 @@ export const useNavigationStack = () => {
         setHistory(newHistory);
       },
       goToLinkIndex: (index: number) => {
-        const newHistory = [...history];
+        const lastHistory = [...history].at(index);
 
-        let loopIndex = newHistory.length - index;
-        let lastHistory = newHistory[newHistory.length - 1];
-        while (loopIndex > 0) {
-          lastHistory = [...newHistory].pop();
-          loopIndex -= 1;
-        }
-
-        // setHistory(newHistory);
         router.replace(lastHistory.link);
       },
       goBack: () => {

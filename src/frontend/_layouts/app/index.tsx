@@ -63,14 +63,12 @@ export function AppLayout({
 
   useEffect(() => {
     pushToStack();
-  }, [router.asPath]);
+  }, [router.asPath, pageTitle]);
 
   const homedBreadcrumb = history.map((historyItem) => ({
     value: historyItem.link,
     label: historyItem.title,
   }));
-
-  homedBreadcrumb.push({ value: "", label: pageTitle });
 
   if (userAuthenticatedState !== true) {
     return <ComponentIsLoading />;

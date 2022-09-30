@@ -17,5 +17,6 @@ export function ViewStateMachine({ loading, error, children, loader }: Props) {
   if (error) {
     return <ErrorAlert message={error} />;
   }
+
   return <>{children}</>;
 }

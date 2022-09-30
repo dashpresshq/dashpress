@@ -89,6 +89,7 @@ export function BaseEntityForm({
   }, [initialValues, hiddenColumns]);
 
   const formSchemaConfig = {
+    // This is weird bug with react, It is not suppose to render this until rendered but React does :shrug
     entityToOneReferenceFields: entityToOneReferenceFields.data || {},
     getEntityFieldLabels,
     entityFieldTypes,

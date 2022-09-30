@@ -24,20 +24,31 @@ const handleHistoryMutation = (
   oldHistory: INavigationItem[],
   newEntry: INavigationItem
 ): INavigationItem[] => {
-  console.log({ oldHistory, newEntry });
   if (oldHistory.length === 0) {
     return [newEntry];
   }
 
   if (Object.values(ROOT_LINKS_TO_CLEAR_BREADCRUMBS).includes(newEntry.link)) {
-    return [];
+    return [newEntry];
   }
 
-  if (oldHistory.findIndex((old) => old.link === newEntry.link) === -1) {
+  const lastHistory = oldHistory.at(-1);
+  // If the viewkey is the last then dont update it
+  if (lastHistory.viewKey === newEntry.viewKey) {
+    const clone = [...oldHistory];
+    clone.pop();
+    return [...clone, newEntry];
+  }
+
+  const historyIndex = oldHistory.findIndex(
+    (old) => old.link === newEntry.link
+  );
+
+  if (historyIndex === -1) {
     return [...oldHistory, newEntry];
   }
 
-  return [...oldHistory];
+  return oldHistory.slice(0, historyIndex + 1);
 };
 
 type IStore = {
@@ -60,10 +71,6 @@ export const useNavigationStack = () => {
     store.history,
     store.setHistory,
   ]);
-
-  // useEffect(() => {
-  //   setHistory(JSON.parse(TemporayStorageService.getString(key) || "[]"));
-  // }, [typeof window]);
 
   const [pageTitle, viewKey, pageLink] = usePageDetailsStore((store) => [
     store.pageTitle,
@@ -101,28 +108,20 @@ export const useNavigationStack = () => {
         let loopIndex = newHistory.length - index;
         let lastHistory = newHistory[newHistory.length - 1];
         while (loopIndex > 0) {
-          lastHistory = newHistory.pop();
+          lastHistory = [...newHistory].pop();
           loopIndex -= 1;
         }
 
-        setHistory(newHistory);
+        // setHistory(newHistory);
         router.replace(lastHistory.link);
       },
       goBack: () => {
-        console.log({ goBackBefore: history });
-
-        const newHistory = [...history];
-
-        const lastHistory = newHistory.pop();
-
-        setHistory(newHistory);
-
-        console.log({ goBackNew: newHistory });
+        const lastHistory = [...history].at(-2);
 
         router.replace(lastHistory.link);
       },
-      canGoBack: () => history.length > 0,
+      canGoBack: () => history.length > 1,
     }),
-    [typeof window, history]
+    [typeof window, history, pageTitle, viewKey, pageLink]
   );
 };

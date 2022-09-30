@@ -21,9 +21,9 @@ export async function connectionManager<T, K>(
 
   const connection = implementation.make(credentials);
 
-  SAVED_CONNECTIONS[getConnectionHashKey(credentials)] = connection;
-
   await implementation.verify(connection);
+
+  SAVED_CONNECTIONS[getConnectionHashKey(credentials)] = connection;
 
   return connection;
 }

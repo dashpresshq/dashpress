@@ -17,38 +17,38 @@ import { BaseEntitySettingsLayout } from "../_Base";
 import { ENTITY_CONFIGURATION_VIEW } from "../constants";
 import { EntityTableTabForm } from "./Form";
 
-export function EntityTableTabsSettings() {
+export function EntityViewsSettings() {
   const entity = useEntitySlug();
 
-  const upsertEntityTableTabsMutation = useUpsertConfigurationMutation(
-    "entity_table_tabs",
+  const upsertEntityViewsMutation = useUpsertConfigurationMutation(
+    "entity_views",
     entity
   );
 
-  const entityTableTabs = useEntityConfiguration<ITableTab[]>(
-    "entity_table_tabs",
+  const entityViews = useEntityConfiguration<ITableTab[]>(
+    "entity_views",
     entity
   );
 
   useSetPageDetails({
-    pageTitle: "Table Tabs Settings",
+    pageTitle: "Views Settings",
     viewKey: ENTITY_CONFIGURATION_VIEW,
     permission: USER_PERMISSIONS.CAN_CONFIGURE_APP,
   });
 
-  const isLoading = entity === SLUG_LOADING_VALUE || entityTableTabs.isLoading;
+  const isLoading = entity === SLUG_LOADING_VALUE || entityViews.isLoading;
 
-  const { error } = entityTableTabs;
+  const { error } = entityViews;
 
   return (
     <BaseEntitySettingsLayout>
       <SectionBox
-        title="Table Tabs Settings"
+        title="Views Settings"
         iconButtons={[
           {
-            action: LINK_TO_DOCS("app-configuration/table-tabs"),
+            action: LINK_TO_DOCS("app-configuration/views"),
             icon: "help",
-            label: "Table Tabs Documentation",
+            label: "Views Documentation",
           },
         ]}
       >
@@ -62,9 +62,9 @@ export function EntityTableTabsSettings() {
           }
         >
           <EntityTableTabForm
-            initialValues={entityTableTabs.data || []}
+            initialValues={entityViews.data || []}
             onSubmit={async (data) => {
-              await upsertEntityTableTabsMutation.mutateAsync(data);
+              await upsertEntityViewsMutation.mutateAsync(data);
             }}
           />
         </ViewStateMachine>

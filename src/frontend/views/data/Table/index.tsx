@@ -41,8 +41,8 @@ export function EntityTable() {
     permission: META_USER_PERMISSIONS.APPLIED_CAN_ACCESS_ENTITY(entity),
   });
 
-  const entityTableTabs = useEntityConfiguration<ITableTab[]>(
-    "entity_table_tabs",
+  const entityViews = useEntityConfiguration<ITableTab[]>(
+    "entity_views",
     entity
   );
 
@@ -51,7 +51,7 @@ export function EntityTable() {
   const tabFromUrl = useRouteParam("tab");
   const changeTabParam = useChangeRouterParam("tab");
 
-  const firstTabView: ITableTab = (entityTableTabs.data || [])?.[0] || {
+  const firstTabView: ITableTab = (entityViews.data || [])?.[0] || {
     id: "",
     title: "",
     dataState: DEFAULT_TABLE_PARAMS,
@@ -61,29 +61,27 @@ export function EntityTable() {
     <AppLayout actionItems={menuItems} secondaryActionItems={actionItems}>
       <StyledCard>
         <ViewStateMachine
-          error={entityTableTabs.error}
-          loading={entityTableTabs.isLoading}
+          error={entityViews.error}
+          loading={entityViews.isLoading}
           loader={<TableSkeleton />}
         >
-          {(entityTableTabs.data || []).length > 1 ? (
+          {(entityViews.data || []).length > 1 ? (
             <Tabs
               padContent={false}
               currentTab={tabFromUrl}
               onChange={changeTabParam}
-              contents={(entityTableTabs.data || []).map(
-                ({ title, dataState }) => {
-                  return {
-                    content: (
-                      <EntityTableView
-                        entity={entity}
-                        defaultTableState={dataState}
-                      />
-                    ),
-                    // TODO add count to table tabs
-                    label: title,
-                  };
-                }
-              )}
+              contents={(entityViews.data || []).map(({ title, dataState }) => {
+                return {
+                  content: (
+                    <EntityTableView
+                      entity={entity}
+                      defaultTableState={dataState}
+                    />
+                  ),
+                  // TODO add count to views
+                  label: title,
+                };
+              })}
             />
           ) : (
             <EntityTableView

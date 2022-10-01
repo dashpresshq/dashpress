@@ -50,7 +50,7 @@ export const NAVIGATION_LINKS = {
       ACTIONS: (entity: string) => `/admin/${entity}/config/actions`,
       DICTION: (entity: string) => `/admin/${entity}/config/diction`,
       FORM: (entity: string) => `/admin/${entity}/config/form`,
-      TABLE_TABS: (entity: string) => `/admin/${entity}/config/table-tabs`,
+      VIEWS: (entity: string) => `/admin/${entity}/config/views`,
       RELATIONS: (entity: string) => `/admin/${entity}/config/relations`,
     },
   },

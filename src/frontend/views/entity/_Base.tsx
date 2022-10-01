@@ -72,8 +72,8 @@ export function BaseEntitySettingsLayout({ children }: IProps) {
                 IconComponent: Link2,
               },
               {
-                action: NAVIGATION_LINKS.ENTITY.CONFIG.TABLE_TABS(entity),
-                name: "Table Tabs",
+                action: NAVIGATION_LINKS.ENTITY.CONFIG.VIEWS(entity),
+                name: "Views",
                 IconComponent: Filter,
               },
               {

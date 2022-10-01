@@ -32,8 +32,8 @@ export function DashboardSettings({
       onSubmit={onSubmit}
       initialValues={initialValues}
       render={({ handleSubmit, pristine, values }) => {
-        const entityTableTabs = useEntityConfiguration<ITableTab[]>(
-          "entity_table_tabs",
+        const entityViews = useEntityConfiguration<ITableTab[]>(
+          "entity_views",
           values.entity
         );
         return (
@@ -73,17 +73,16 @@ export function DashboardSettings({
                 <FormSelect
                   label="Query"
                   disabledOptions={[]}
-                  selectData={(entityTableTabs.data || []).map(
-                    ({ id, title }) => ({ label: title, value: id })
-                  )}
+                  selectData={(entityViews.data || []).map(({ id, title }) => ({
+                    label: title,
+                    value: id,
+                  }))}
                   rightActions={[
                     {
                       label: "Manage Queries",
                       action: () =>
                         router.push(
-                          NAVIGATION_LINKS.ENTITY.CONFIG.TABLE_TABS(
-                            values.entity
-                          )
+                          NAVIGATION_LINKS.ENTITY.CONFIG.VIEWS(values.entity)
                         ),
                     },
                   ]}

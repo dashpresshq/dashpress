@@ -13,7 +13,7 @@ export const CONFIGURATION_KEYS: Record<
   | "theme_color"
   | "entity_fields_orders"
   | "entity_crud_settings"
-  | "entity_table_tabs"
+  | "entity_views"
   | "entities_order"
   | "default_date_format"
   | "entity_columns_labels"
@@ -70,7 +70,7 @@ export const CONFIGURATION_KEYS: Record<
       delete: true,
     },
   },
-  entity_table_tabs: {
+  entity_views: {
     requireEntity: true,
     defaultValue: [],
   },

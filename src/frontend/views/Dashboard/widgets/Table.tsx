@@ -19,12 +19,12 @@ interface IProps {
 export function TableWidget({ config, setting }: IProps) {
   const { queryId, entity } = config;
 
-  const entityTableTabs = useEntityConfiguration<ITableTab[]>(
-    "entity_table_tabs",
+  const entityViews = useEntityConfiguration<ITableTab[]>(
+    "entity_views",
     config.entity
   );
 
-  const dataState = (entityTableTabs.data || []).find(
+  const dataState = (entityViews.data || []).find(
     ({ id }) => id === queryId
   )?.dataState;
 
@@ -34,7 +34,7 @@ export function TableWidget({ config, setting }: IProps) {
         <WidgetHeader setting={setting} config={config} />
         <Spacer />
         <EntityTableView
-          entity={entityTableTabs.isLoading ? SLUG_LOADING_VALUE : entity}
+          entity={entityViews.isLoading ? SLUG_LOADING_VALUE : entity}
           defaultTableState={{ ...dataState, pageSize: 5 }}
           lean
         />

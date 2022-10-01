@@ -3,6 +3,7 @@ import { ForbiddenError } from "backend/lib/errors";
 import { REQUEST_ERROR_CODES } from "shared/constants";
 import { ValidationImplType } from "./types";
 
+// :eyes use this in the FE to redirect on login page
 const NO_AUTH_ERROR_CODE = REQUEST_ERROR_CODES.NOT_AUTHENTICATED;
 
 export const isAuthenticatedValidationImpl: ValidationImplType<void> = async (

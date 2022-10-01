@@ -18,19 +18,19 @@ interface IProps {
 export function SummaryWidget({ config, setting }: IProps) {
   const { queryId, entity } = config;
 
-  const entityTableTabs = useEntityConfiguration<ITableTab[]>(
-    "entity_table_tabs",
+  const entityViews = useEntityConfiguration<ITableTab[]>(
+    "entity_views",
     config.entity
   );
 
   const filters: QueryFilter[] =
-    ((entityTableTabs.data || []).find(({ id }) => id === queryId)?.dataState
+    ((entityViews.data || []).find(({ id }) => id === queryId)?.dataState
       ?.filters as QueryFilter[]) || [];
 
   // TODO statusIndicator
   const count = useEntityFilterCount(
     entity,
-    entityTableTabs.isLoading ? "loading" : filters
+    entityViews.isLoading ? "loading" : filters
   );
 
   return (

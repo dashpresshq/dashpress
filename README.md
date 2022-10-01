@@ -113,7 +113,7 @@ That is all, You will be able to see the application on http://localhost:3000
  - Rich text editor
  - Deep navigation
  - Reusable Queries
- - Table Tabs
+ - Views
  - Data Count
  - Synced DB Validation
  - Fields selection/ ordering

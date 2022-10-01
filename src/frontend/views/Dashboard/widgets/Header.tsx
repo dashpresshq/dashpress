@@ -13,12 +13,12 @@ interface IProps {
 export function WidgetHeader({ config, setting }: IProps) {
   const { title, entity, queryId } = config;
 
-  const entityTableTabs = useEntityConfiguration<ITableTab[]>(
-    "entity_table_tabs",
+  const entityViews = useEntityConfiguration<ITableTab[]>(
+    "entity_views",
     queryId ? config.entity : SLUG_LOADING_VALUE
   );
 
-  const tabTitle = (entityTableTabs.data || []).find(
+  const tabTitle = (entityViews.data || []).find(
     ({ id }) => id === queryId
   )?.title;
 

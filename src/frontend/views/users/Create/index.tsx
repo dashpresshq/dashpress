@@ -9,6 +9,7 @@ import { CreateUserForm } from "./Form";
 export function UserCreate() {
   const userCreationMutation = useCreateUserMutation();
   const { canGoBack, goBack } = useNavigationStack();
+
   useSetPageDetails({
     pageTitle: "Create User",
     viewKey: "CREATE_USER",

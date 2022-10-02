@@ -42,7 +42,7 @@ export const accountApiHandlers = [
   rest.post(BASE_TEST_URL("/api/account"), async (req, res, ctx) => {
     if (
       JSON.stringify(await req.json()) ===
-      `{"oldPassword":"Old Password","newPassword":"New Password","reNewPassword":"New Password"}`
+      `{"username":"someusername","name":"Some Name","role":"viewer","password":"Password"}`
     ) {
       return res(ctx.status(204));
     }

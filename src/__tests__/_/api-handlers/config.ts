@@ -13,15 +13,19 @@ const CONFIG_KEY = {
   disabled_entities: ["disabled-entity-1", "disabled-entity-2"],
 };
 
+const ENTITY_CONFIG = {};
+
 export const configApiHandlers = [
   rest.get(
     BASE_TEST_URL("/api/config/entity_diction/:entity"),
     async (req, res, ctx) => {
       return res(
-        ctx.json({
-          singular: `Singular ${req.params.entity}`,
-          plural: `Plural ${req.params.entity}`,
-        })
+        ctx.json(
+          ENTITY_CONFIG[req.params.entity as string]?.entity_diction || {
+            singular: `Singular ${req.params.entity}`,
+            plural: `Plural ${req.params.entity}`,
+          }
+        )
       );
     }
   ),
@@ -38,7 +42,12 @@ export const configApiHandlers = [
     CONFIG_KEY[req.params.key as string] = (await req.json()).data;
     return res(ctx.status(201));
   }),
-  rest.put(BASE_TEST_URL("/api/config/:key/:entity"), async (_, res, ctx) => {
+  rest.put(BASE_TEST_URL("/api/config/:key/:entity"), async (req, res, ctx) => {
+    const entityConfig = ENTITY_CONFIG[req.params.entity as string] || {};
+    ENTITY_CONFIG[req.params.entity as string] = {
+      ...entityConfig,
+      [req.params.key as string]: (await req.json()).data,
+    };
     return res(ctx.status(201));
   }),
 ];

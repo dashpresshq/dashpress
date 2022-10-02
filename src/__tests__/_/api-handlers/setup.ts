@@ -10,8 +10,18 @@ export const setupApiHandlers = [
       })
     );
   }),
-  rest.post(BASE_TEST_URL("/api/setup/credentials"), async (_, res, ctx) => {
-    return res(ctx.json({ success: true }));
+  rest.post(BASE_TEST_URL("/api/setup/credentials"), async (req, res, ctx) => {
+    const reqBody = JSON.stringify(await req.json());
+    if (
+      [
+        `{"port":8080,"dataSourceType":"postgres","host":"127.0.0.1","user":"root","password":"password","database":"hadmean"}`,
+        `{"port":5432,"dataSourceType":"postgres","connectionString":"some-connection-url"}`,
+        `{"dataSourceType":"sqlite","filename":"some-sqlite-file-name"}`,
+      ].includes(reqBody)
+    ) {
+      return res(ctx.json({ success: true }));
+    }
+    return res(ctx.status(500));
   }),
   rest.post(BASE_TEST_URL("/api/setup/user"), async (req, res, ctx) => {
     if (

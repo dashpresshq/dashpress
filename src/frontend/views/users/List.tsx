@@ -14,7 +14,7 @@ import React, { useState } from "react";
 import { AppLayout } from "frontend/_layouts/app";
 import { UserPlus } from "react-feather";
 import { NAVIGATION_LINKS, useSetPageDetails } from "frontend/lib/routing";
-import router from "next/router";
+import { useRouter } from "next/router";
 import { IAccountProfile, USER_PERMISSIONS } from "shared/types";
 import { userFriendlyCase } from "frontend/lib/strings";
 import {
@@ -26,6 +26,8 @@ export function ListUsers() {
   const [paginatedDataState, setPaginatedDataState] = useState<
     IFEPaginatedDataState<IAccountProfile> | IBEPaginatedDataState
   >({ ...DEFAULT_TABLE_PARAMS, pageIndex: 1 });
+
+  const router = useRouter();
 
   useSetPageDetails({
     pageTitle: "Users",

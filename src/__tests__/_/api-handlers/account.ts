@@ -9,7 +9,32 @@ let ME = {
   username: "root",
 };
 
+let USERS = [
+  {
+    name: "User 1",
+    username: "user-1",
+    systemProfile: "user-1-system-profile",
+    role: "role-1",
+  },
+  {
+    name: "User 2",
+    username: "user-2",
+    systemProfile: "user-2-system-profile",
+    role: "role-2",
+  },
+  {
+    name: "User 3",
+    username: "user-3",
+    systemProfile: "user-3-system-profile",
+    role: "role-3",
+  },
+];
+
 export const accountApiHandlers = [
+  rest.get(BASE_TEST_URL("/api/account"), async (_, res, ctx) => {
+    return res(ctx.json(USERS));
+  }),
+
   rest.get(BASE_TEST_URL("/api/account/mine"), async (_, res, ctx) => {
     return res(ctx.json(ME));
   }),
@@ -17,6 +42,13 @@ export const accountApiHandlers = [
     ME = { ...ME, ...(await req.json()) };
     return res(ctx.status(204));
   }),
+  rest.delete(
+    BASE_TEST_URL("/api/account/:username"),
+    async (req, res, ctx) => {
+      USERS = USERS.filter(({ username }) => username !== req.params.username);
+      return res(ctx.status(204));
+    }
+  ),
   rest.patch(
     BASE_TEST_URL("/api/account/change-password"),
     async (req, res, ctx) => {

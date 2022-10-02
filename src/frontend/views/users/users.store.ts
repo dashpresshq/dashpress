@@ -33,7 +33,7 @@ export function useUserDeletionMutation() {
     Record<string, string>
   >({
     endpoints: [ADMIN_USERS_LIST_ENDPOINT],
-    redirect: NAVIGATION_LINKS.USERS.LIST,
+    // redirect: NAVIGATION_LINKS.USERS.LIST,
     successMessage: MutationsLang.delete("User"),
   });
 

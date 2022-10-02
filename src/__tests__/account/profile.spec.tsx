@@ -30,6 +30,8 @@ describe("pages/account/profile", () => {
       </AppWrapper>
     );
 
+    await userEvent.clear(screen.getByLabelText("Name"));
+
     await userEvent.type(screen.getByLabelText("Name"), "Updated Name");
 
     await userEvent.click(
@@ -39,5 +41,16 @@ describe("pages/account/profile", () => {
     expect(await screen.findByRole("status")).toHaveTextContent(
       "Profile Updated Successfully"
     );
+  });
+
+  it("should display updated profile details", async () => {
+    render(
+      <AppWrapper>
+        <AccountProfile />
+      </AppWrapper>
+    );
+    await waitFor(() => {
+      expect(screen.getByLabelText("Name")).toHaveValue("Updated Name");
+    });
   });
 });

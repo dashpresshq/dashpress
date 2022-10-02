@@ -47,7 +47,7 @@ describe("pages/admin/[entity]/config/diction", () => {
     );
 
     expect(await screen.findByRole("status")).toHaveTextContent(
-      "App Settings Saved Successfully"
+      "App Settings Saved Successfully" //
     );
   });
 });

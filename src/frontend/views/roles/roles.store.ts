@@ -19,11 +19,15 @@ export const ADMIN_ROLES_DETAILS_ENDPOINT = (roleId: string) =>
   `/api/roles/${roleId}`;
 
 export function useRoleDeletionMutation() {
+  const router = useRouter();
   const apiMutateOptions = useWaitForResponseMutationOptions<
     Record<string, string>
   >({
     endpoints: [ADMIN_ROLES_ENDPOINT],
-    redirect: NAVIGATION_LINKS.ROLES.LIST,
+    onSuccessActionWithFormData: () => {
+      router.replace(NAVIGATION_LINKS.ROLES.LIST);
+    },
+
     successMessage: MutationsLang.delete("Role"),
   });
 

@@ -38,6 +38,17 @@ export const accountApiHandlers = [
   rest.get(BASE_TEST_URL("/api/account/mine"), async (_, res, ctx) => {
     return res(ctx.json(ME));
   }),
+
+  rest.post(BASE_TEST_URL("/api/account"), async (req, res, ctx) => {
+    if (
+      JSON.stringify(await req.json()) ===
+      `{"oldPassword":"Old Password","newPassword":"New Password","reNewPassword":"New Password"}`
+    ) {
+      return res(ctx.status(204));
+    }
+    return res(ctx.status(500));
+  }),
+
   rest.patch(BASE_TEST_URL("/api/account/mine"), async (req, res, ctx) => {
     ME = { ...ME, ...(await req.json()) };
     return res(ctx.status(204));

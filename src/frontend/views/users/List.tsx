@@ -4,6 +4,8 @@ import {
   DeleteButton,
   SoftButton,
   Stack,
+  TableSkeleton,
+  StyledCard,
 } from "@hadmean/chromista";
 import {
   IBEPaginatedDataState,
@@ -17,6 +19,7 @@ import { NAVIGATION_LINKS, useSetPageDetails } from "frontend/lib/routing";
 import { useRouter } from "next/router";
 import { IAccountProfile, USER_PERMISSIONS } from "shared/types";
 import { userFriendlyCase } from "frontend/lib/strings";
+import { ViewStateMachine } from "frontend/lib/ViewStateMachine";
 import {
   ADMIN_USERS_LIST_ENDPOINT,
   useUserDeletionMutation,
@@ -84,35 +87,43 @@ export function ListUsers() {
         },
       ]}
     >
-      <Table
-        {...{
-          tableData,
-          setPaginatedDataState,
-          paginatedDataState,
-        }}
-        columns={[
-          {
-            Header: "Username",
-            accessor: "username",
-            disableSortBy: true,
-          },
-          {
-            Header: "Name",
-            accessor: "name",
-            disableSortBy: true,
-          },
-          {
-            Header: "Role",
-            accessor: "role",
-            disableSortBy: true,
-            Cell: (value) => userFriendlyCase(value.value as string),
-          },
-          {
-            Header: "Action",
-            Cell: MemoizedAction,
-          },
-        ]}
-      />
+      <StyledCard>
+        <ViewStateMachine
+          error={tableData.error}
+          loading={tableData.isLoading}
+          loader={<TableSkeleton />}
+        >
+          <Table
+            {...{
+              tableData,
+              setPaginatedDataState,
+              paginatedDataState,
+            }}
+            columns={[
+              {
+                Header: "Username",
+                accessor: "username",
+                disableSortBy: true,
+              },
+              {
+                Header: "Name",
+                accessor: "name",
+                disableSortBy: true,
+              },
+              {
+                Header: "Role",
+                accessor: "role",
+                disableSortBy: true,
+                Cell: (value) => userFriendlyCase(value.value as string),
+              },
+              {
+                Header: "Action",
+                Cell: MemoizedAction,
+              },
+            ]}
+          />
+        </ViewStateMachine>
+      </StyledCard>
     </AppLayout>
   );
 }

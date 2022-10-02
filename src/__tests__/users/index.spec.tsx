@@ -115,9 +115,7 @@ describe("pages/users", () => {
       "User Deleted Successfully"
     );
 
-    // expect(replaceMock).toHaveBeenCalledWith("replaceMock");
+    expect(replaceMock).toHaveBeenCalledWith("/users");
     expect(await screen.findAllByRole("row")).toHaveLength(3);
   });
 });
-
-// TODO test on all pages useSetPageDetails

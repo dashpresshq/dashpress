@@ -1,6 +1,8 @@
-// eslint-disable-next-line no-console, func-names
-console.error = function () {
-  // eslint-disable-next-line prefer-rest-params
-};
+/* eslint-disable no-console */
+/* eslint-disable func-names */
+console.error = function () {};
+
+// :eyes fix all warning
+console.warn = function () {};
 
 export {};

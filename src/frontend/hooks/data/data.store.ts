@@ -159,6 +159,7 @@ export function useEntityDataDeletionMutation(
   entity: string,
   redirectTo?: string
 ) {
+  const router = useRouter();
   const entityDiction = useEntityDiction();
   const apiMutateOptions = useWaitForResponseMutationOptions<
     Record<string, string>
@@ -168,7 +169,9 @@ export function useEntityDataDeletionMutation(
       ENTITY_COUNT_PATH(entity),
       ENTITY_LIST_PATH(entity),
     ],
-    redirect: redirectTo,
+    onSuccessActionWithFormData: () => {
+      router.replace(redirectTo);
+    },
     successMessage: MutationsLang.delete(entityDiction.singular),
   });
 

@@ -4,6 +4,8 @@ import {
   DeleteButton,
   SoftButton,
   Stack,
+  TableSkeleton,
+  StyledCard,
 } from "@hadmean/chromista";
 import {
   IBEPaginatedDataState,
@@ -18,6 +20,7 @@ import router from "next/router";
 import { userFriendlyCase } from "frontend/lib/strings";
 import { IValueLabel } from "@hadmean/chromista/dist/types";
 import { SystemRoles, USER_PERMISSIONS } from "shared/types";
+import { ViewStateMachine } from "frontend/lib/ViewStateMachine";
 import { ADMIN_ROLES_ENDPOINT, useRoleDeletionMutation } from "./roles.store";
 
 export function ListRoles() {
@@ -80,25 +83,33 @@ export function ListRoles() {
         },
       ]}
     >
-      <Table
-        {...{
-          tableData,
-          setPaginatedDataState,
-          paginatedDataState,
-        }}
-        columns={[
-          {
-            Header: "Role",
-            accessor: "label",
-            Cell: (value) => userFriendlyCase(value.value as string),
-            disableSortBy: true,
-          },
-          {
-            Header: "Action",
-            Cell: MemoizedAction,
-          },
-        ]}
-      />
+      <StyledCard>
+        <ViewStateMachine
+          error={tableData.error}
+          loading={tableData.isLoading}
+          loader={<TableSkeleton />}
+        >
+          <Table
+            {...{
+              tableData,
+              setPaginatedDataState,
+              paginatedDataState,
+            }}
+            columns={[
+              {
+                Header: "Role",
+                accessor: "label",
+                Cell: (value) => userFriendlyCase(value.value as string),
+                disableSortBy: true,
+              },
+              {
+                Header: "Action",
+                Cell: MemoizedAction,
+              },
+            ]}
+          />
+        </ViewStateMachine>
+      </StyledCard>
     </AppLayout>
   );
 }

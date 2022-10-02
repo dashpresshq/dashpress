@@ -29,11 +29,14 @@ export function useUserDetails(username: string) {
 }
 
 export function useUserDeletionMutation() {
+  const router = useRouter();
   const apiMutateOptions = useWaitForResponseMutationOptions<
     Record<string, string>
   >({
     endpoints: [ADMIN_USERS_LIST_ENDPOINT],
-    // redirect: NAVIGATION_LINKS.USERS.LIST,
+    onSuccessActionWithFormData: () => {
+      router.replace(NAVIGATION_LINKS.USERS.LIST);
+    },
     successMessage: MutationsLang.delete("User"),
   });
 

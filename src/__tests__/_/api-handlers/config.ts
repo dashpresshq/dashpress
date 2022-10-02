@@ -10,6 +10,7 @@ const CONFIG_KEY = {
   theme_color: {
     primary: `#459211`,
   },
+  disabled_entities: ["disabled-entity-1", "disabled-entity-2"],
 };
 
 export const configApiHandlers = [

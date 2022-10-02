@@ -13,7 +13,13 @@ export const setupApiHandlers = [
   rest.post(BASE_TEST_URL("/api/setup/credentials"), async (_, res, ctx) => {
     return res(ctx.json({ success: true }));
   }),
-  rest.post(BASE_TEST_URL("/api/setup/user"), async (_, res, ctx) => {
-    return res(ctx.json({ success: true }));
+  rest.post(BASE_TEST_URL("/api/setup/user"), async (req, res, ctx) => {
+    if (
+      JSON.stringify(await req.json()) ===
+      `{"username":"testusername","name":"testname","password":"Some Password"}`
+    ) {
+      return res(ctx.json({ success: true, token: true }));
+    }
+    return res(ctx.status(500));
   }),
 ];

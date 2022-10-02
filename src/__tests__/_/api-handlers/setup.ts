@@ -16,6 +16,10 @@ export const setupApiHandlers = [
       [
         `{"port":8080,"dataSourceType":"postgres","host":"127.0.0.1","user":"root","password":"password","database":"hadmean"}`,
         `{"port":5432,"dataSourceType":"postgres","connectionString":"some-connection-url"}`,
+        `{"port":8080,"dataSourceType":"mysql","host":"127.0.0.1","user":"root","password":"password","database":"hadmean"}`,
+        `{"port":3306,"dataSourceType":"mysql","connectionString":"some-connection-url"}`,
+        `{"port":8080,"dataSourceType":"mssql","host":"127.0.0.1","user":"root","password":"password","database":"hadmean"}`,
+        `{"port":1433,"dataSourceType":"mssql","connectionString":"some-connection-url"}`,
         `{"dataSourceType":"sqlite","filename":"some-sqlite-file-name"}`,
       ].includes(reqBody)
     ) {

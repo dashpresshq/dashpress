@@ -11,6 +11,24 @@ import userEvent from "@testing-library/user-event";
 
 const server = setupApiHandlers();
 
+const POSTGRES_MYSQL_MSSQL: {
+  title: string;
+  port: number;
+}[] = [
+  {
+    title: "Mysql",
+    port: 3306,
+  },
+  {
+    title: "Postgres",
+    port: 5432,
+  },
+  {
+    title: "Mssql",
+    port: 1433,
+  },
+];
+
 describe("pages/setup/credentials", () => {
   const useRouter = jest.spyOn(require("next/router"), "useRouter");
 
@@ -119,88 +137,6 @@ describe("pages/setup/credentials", () => {
     expect(screen.queryByLabelText("Connection URL")).not.toBeInTheDocument();
   });
 
-  describe("Postgres", () => {
-    it("should submit connection successfully", async () => {
-      const replaceMock = jest.fn();
-      useRouter.mockImplementation(() => ({
-        replace: replaceMock,
-      }));
-
-      const { container } = render(
-        <AppWrapper>
-          <CredentialsSetup />
-        </AppWrapper>
-      );
-
-      await userEvent.type(
-        await screen.findByLabelText("Database Type"),
-        "Postgres"
-      );
-
-      await userEvent.keyboard("{Enter}");
-
-      expect(screen.getByLabelText("Port")).toHaveValue(5432);
-
-      expect(container.querySelectorAll("label")).toHaveLength(7);
-
-      await userEvent.type(screen.getByLabelText("Host"), "127.0.0.1");
-      await userEvent.type(screen.getByLabelText("User"), "root");
-      await userEvent.type(screen.getByLabelText("Password"), "password");
-      await userEvent.type(screen.getByLabelText("Database"), "hadmean");
-
-      await userEvent.clear(screen.getByLabelText("Port"));
-
-      await userEvent.type(screen.getByLabelText("Port"), "8080");
-
-      await userEvent.click(
-        screen.getByRole("button", { name: "Setup Credentials" })
-      );
-
-      expect(await screen.findByRole("status")).toHaveTextContent(
-        "Setup Credentials Created Successfully"
-      );
-
-      expect(replaceMock).toHaveBeenCalledWith("/setup/user");
-    });
-
-    it("should submit connection through URL successfully", async () => {
-      const replaceMock = jest.fn();
-      useRouter.mockImplementation(() => ({
-        replace: replaceMock,
-      }));
-
-      const { container } = render(
-        <AppWrapper>
-          <CredentialsSetup />
-        </AppWrapper>
-      );
-
-      await userEvent.type(
-        await screen.findByLabelText("Database Type"),
-        "Postgres"
-      );
-
-      await userEvent.keyboard("{Enter}");
-
-      await userEvent.click(
-        await screen.findByRole("button", { name: "Toggle Connection URL" })
-      );
-
-      expect(container.querySelectorAll("label")).toHaveLength(2);
-
-      await userEvent.type(
-        screen.getByLabelText("Connection URL"),
-        "some-connection-url"
-      );
-
-      await userEvent.click(
-        screen.getByRole("button", { name: "Setup Credentials" })
-      );
-
-      expect(replaceMock).toHaveBeenCalledWith("/setup/user");
-    });
-  });
-
   describe("Sqlite", () => {
     it("should submit connection successfully", async () => {
       const replaceMock = jest.fn();
@@ -231,6 +167,88 @@ describe("pages/setup/credentials", () => {
       expect(
         screen.queryByRole("button", { name: "Toggle Connection URL" })
       ).not.toBeInTheDocument();
+
+      await userEvent.click(
+        screen.getByRole("button", { name: "Setup Credentials" })
+      );
+
+      expect(await screen.findByRole("status")).toHaveTextContent(
+        "Setup Credentials Created Successfully"
+      );
+
+      expect(replaceMock).toHaveBeenCalledWith("/setup/user");
+    });
+  });
+
+  describe.each(POSTGRES_MYSQL_MSSQL)("$title", ({ port, title }) => {
+    it("should submit connection successfully", async () => {
+      const replaceMock = jest.fn();
+      useRouter.mockImplementation(() => ({
+        replace: replaceMock,
+      }));
+
+      const { container } = render(
+        <AppWrapper>
+          <CredentialsSetup />
+        </AppWrapper>
+      );
+
+      await userEvent.type(
+        await screen.findByLabelText("Database Type"),
+        title
+      );
+
+      await userEvent.keyboard("{Enter}");
+
+      expect(screen.getByLabelText("Port")).toHaveValue(port);
+
+      expect(container.querySelectorAll("label")).toHaveLength(7);
+
+      await userEvent.type(screen.getByLabelText("Host"), "127.0.0.1");
+      await userEvent.type(screen.getByLabelText("User"), "root");
+      await userEvent.type(screen.getByLabelText("Password"), "password");
+      await userEvent.type(screen.getByLabelText("Database"), "hadmean");
+
+      await userEvent.clear(screen.getByLabelText("Port"));
+
+      await userEvent.type(screen.getByLabelText("Port"), "8080");
+
+      await userEvent.click(
+        screen.getByRole("button", { name: "Setup Credentials" })
+      );
+
+      expect(replaceMock).toHaveBeenCalledWith("/setup/user");
+    });
+
+    it("should submit connection through URL successfully", async () => {
+      const replaceMock = jest.fn();
+      useRouter.mockImplementation(() => ({
+        replace: replaceMock,
+      }));
+
+      const { container } = render(
+        <AppWrapper>
+          <CredentialsSetup />
+        </AppWrapper>
+      );
+
+      await userEvent.type(
+        await screen.findByLabelText("Database Type"),
+        title
+      );
+
+      await userEvent.keyboard("{Enter}");
+
+      await userEvent.click(
+        await screen.findByRole("button", { name: "Toggle Connection URL" })
+      );
+
+      expect(container.querySelectorAll("label")).toHaveLength(2);
+
+      await userEvent.type(
+        screen.getByLabelText("Connection URL"),
+        "some-connection-url"
+      );
 
       await userEvent.click(
         screen.getByRole("button", { name: "Setup Credentials" })

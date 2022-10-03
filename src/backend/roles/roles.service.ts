@@ -86,7 +86,9 @@ export class RolesService implements IApplicationService {
       throw new BadRequestError("Role already exist");
     }
 
-    await this._rolesPersistenceService.upsertItem(roleId, {
+    await this._rolesPersistenceService.removeItem(roleId);
+
+    await this._rolesPersistenceService.upsertItem(madeRoleId, {
       ...role,
       id: madeRoleId,
     });

@@ -66,4 +66,62 @@ describe("/api/roles/index", () => {
       }
     `);
   });
+
+  it("should not re-create existing role", async () => {
+    const postRequest = createAuthenticatedMocks({
+      method: "POST",
+      body: {
+        name: "New Role",
+      },
+    });
+
+    await handler(postRequest.req, postRequest.res);
+
+    expect(postRequest.res._getStatusCode()).toBe(400);
+    expect(postRequest.res._getJSONData()).toEqual({
+      message: "Role already exist",
+      method: "POST",
+      name: "BadRequestError",
+      path: "",
+      statusCode: 400,
+    });
+
+    const { req, res } = createAuthenticatedMocks({
+      method: "GET",
+    });
+
+    await handler(req, res);
+
+    expect(res._getStatusCode()).toBe(200);
+    expect(res._getJSONData()).toHaveLength(5);
+  });
+
+  it("should not create system role", async () => {
+    const postRequest = createAuthenticatedMocks({
+      method: "POST",
+      body: {
+        name: "Viewer",
+      },
+    });
+
+    await handler(postRequest.req, postRequest.res);
+
+    expect(postRequest.res._getStatusCode()).toBe(400);
+    expect(postRequest.res._getJSONData()).toEqual({
+      message: "Role already exist",
+      method: "POST",
+      name: "BadRequestError",
+      path: "",
+      statusCode: 400,
+    });
+
+    const { req, res } = createAuthenticatedMocks({
+      method: "GET",
+    });
+
+    await handler(req, res);
+
+    expect(res._getStatusCode()).toBe(200);
+    expect(res._getJSONData()).toHaveLength(5);
+  });
 });

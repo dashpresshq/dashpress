@@ -46,6 +46,11 @@ export const accountApiHandlers = [
     return res(ctx.json(ME));
   }),
 
+  rest.patch(BASE_TEST_URL("/api/account/mine"), async (req, res, ctx) => {
+    ME = { ...ME, ...(await req.json()) };
+    return res(ctx.status(204));
+  }),
+
   rest.get(BASE_TEST_URL("/api/account/:username"), async (_, res, ctx) => {
     return res(ctx.json(USER));
   }),
@@ -75,10 +80,6 @@ export const accountApiHandlers = [
     return res(ctx.status(500));
   }),
 
-  rest.patch(BASE_TEST_URL("/api/account/mine"), async (req, res, ctx) => {
-    ME = { ...ME, ...(await req.json()) };
-    return res(ctx.status(204));
-  }),
   rest.delete(
     BASE_TEST_URL("/api/account/:username"),
     async (req, res, ctx) => {

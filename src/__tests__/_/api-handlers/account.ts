@@ -33,7 +33,7 @@ let USERS = [
 let USER = {
   name: "Some Name",
   username: "someuseranme",
-  systemProfile: `{foo: "bar"}`,
+  systemProfile: `{"foo": "bar"}`,
   role: "viewer",
 };
 
@@ -51,12 +51,16 @@ export const accountApiHandlers = [
     return res(ctx.status(204));
   }),
 
-  rest.get(BASE_TEST_URL("/api/account/:username"), async (_, res, ctx) => {
-    return res(ctx.json(USER));
+  rest.get(BASE_TEST_URL("/api/account/:username"), async (req, res, ctx) => {
+    return res(ctx.json({ ...USER, username: req.params.username }));
   }),
 
   rest.patch(BASE_TEST_URL("/api/account/:username"), async (req, res, ctx) => {
-    USER = { ...USER, ...(await req.json()) };
+    USER = {
+      ...USER,
+      ...(await req.json()),
+      username: req.params.username as string,
+    };
     return res(ctx.json(204));
   }),
 

@@ -26,7 +26,7 @@
 <summary>Table of Contents</summary>
 
 - [About](#about)
-  - [Live Demo](#live-demo)
+  - [Demo](#demo)
   - [Quick Demo](#quick-demo)
   - [Motivation](#motivation)
   - [Why you should try Hadmean](#why-you-should-try-hadmean)
@@ -50,8 +50,8 @@
 ## About
 Hadmean is a no-code, internal tool generator. It is language agnostic, schema driven, extremely customizable, fully featured, user-friendly and has just one installation step.
 
-### Live Demo
-You can play with a live demo at https://hadmean-demo.up.railway.app
+### Demo
+Here is an application built with Hadmean in under 30 seconds with just database configuration https://hadmean-demo.up.railway.app
 
 ### Quick Demo
 
@@ -59,13 +59,14 @@ https://user-images.githubusercontent.com/51802801/187038561-73b8a86d-ab97-4efc-
 
 
 ### Motivation
-There are plenty of admin projects out there usually free or paid.
+Most internal tool generators make you build from the ground up i.e you get a blank canvas, drag and drop components, and wire them together with SQL and Javascript/Python to satisfy your business requirement. This I believe has many problems.
 
-The free ones are usually tied to a framework and all your experience with it is useless when you hop to your next shiny language. They are usually not aesthetically pleasing and always require a developer to make any change
+- They require some technical know-how. 
+- They require some learning curve. 
+- They require time to build and maintain. 
+- You duplicate a lot of business logic already in your database.
 
-The paid ones are usually good but very restricted as their free version are usually demo plans for you to get a taste of what they can do and you will have to get to the paywall to get to be usable for your day to day
-
-The primary reason to build Hadmean was to build something that will be free and very usable and language agnostic
+Hadmean attempts internal tool generation with a new approach by introspecting your database and building a multi-page application based on all the info it can find like your field types, relationships, constraints etc. You literally can have your admin app done under 1 minute without any tutorial or coding.
 
 ### Why you should try Hadmean
 - It is free
@@ -131,6 +132,7 @@ See the [open issues](https://github.com/hadmean/hadmean/issues) for a list of p
 
 Join the community at one of the following places:
 - [Discord](https://discord.gg/aV6DxwXhzN)
+- [Twitter](https://twitter.com/hadmeanHQ)
 - [GitHub Discussions](https://github.com/hadmean/hadmean/discussions)
 
 

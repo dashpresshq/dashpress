@@ -64,6 +64,7 @@ export function SchemaForm<T extends Record<string, unknown>>({
         > = runFormFieldState(formExtension?.fieldsState, scriptContext, {
           formValues: values,
         });
+
         return (
           <form
             noValidate

@@ -11,7 +11,7 @@ export function UpdateUserForm({
 }: IFormProps<IUpdateUserForm>) {
   return (
     <SchemaForm
-      buttonText={ButtonLang.update}
+      buttonText={`${ButtonLang.update} Profile`}
       onSubmit={onSubmit}
       initialValues={initialValues}
       fields={UPDATE_USER_FORM_SCHEMA}

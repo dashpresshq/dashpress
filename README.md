@@ -129,9 +129,10 @@ See the [open issues](https://github.com/hadmean/hadmean/issues) for a list of p
 
 ## Support
 
-Reach out to the maintainer at one of the following places:
+Join the community at one of the following places:
+- [Discord](https://discord.gg/aV6DxwXhzN)
 - [GitHub Discussions](https://github.com/hadmean/hadmean/discussions)
-- Contact options listed on [this GitHub profile](https://github.com/thrownullexception)
+
 
 ## Project assistance
 
@@ -139,7 +140,7 @@ If you want to say **thank you** or/and support the active development of Hadmea
 
 - Add a [GitHub Star](https://github.com/hadmean/hadmean) to the project.
 - Tweet about Hadmean.
-- Write interesting articles about Hadmean on [Dev.to](https://dev.to/), [Medium](https://medium.com/) or your personal blog.
+- Write interesting articles about Hadmean on [Dev.to](https://dev.to/), [Medium](https://medium.com/) or your blog.
 
 Together, we can make Hadmean **better**!
 

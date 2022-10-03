@@ -30,6 +30,13 @@ let USERS = [
   },
 ];
 
+let USER = {
+  name: "Some Name",
+  username: "someuseranme",
+  systemProfile: `{foo: "bar"}`,
+  role: "viewer",
+};
+
 export const accountApiHandlers = [
   rest.get(BASE_TEST_URL("/api/account"), async (_, res, ctx) => {
     return res(ctx.json(USERS));
@@ -38,6 +45,25 @@ export const accountApiHandlers = [
   rest.get(BASE_TEST_URL("/api/account/mine"), async (_, res, ctx) => {
     return res(ctx.json(ME));
   }),
+
+  rest.get(BASE_TEST_URL("/api/account/:username"), async (_, res, ctx) => {
+    return res(ctx.json(USER));
+  }),
+
+  rest.patch(BASE_TEST_URL("/api/account/:username"), async (req, res, ctx) => {
+    USER = { ...USER, ...(await req.json()) };
+    return res(ctx.json(204));
+  }),
+
+  rest.patch(
+    BASE_TEST_URL("/api/account/:username/reset-password"),
+    async (req, res, ctx) => {
+      if ((await req.json()).password === "password") {
+        return res(ctx.status(204));
+      }
+      return res(ctx.status(500));
+    }
+  ),
 
   rest.post(BASE_TEST_URL("/api/account"), async (req, res, ctx) => {
     if (

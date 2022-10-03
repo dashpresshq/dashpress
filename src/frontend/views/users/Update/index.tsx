@@ -50,7 +50,7 @@ export function UserUpdate() {
     <AppLayout>
       <SectionCenter>
         <SectionBox
-          title={TitleLang.edit("User")}
+          title={TitleLang.edit("User Profile")}
           iconButtons={[
             {
               action: LINK_TO_DOCS("accounts/system-profile"),

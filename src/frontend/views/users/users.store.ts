@@ -54,7 +54,7 @@ export function useUpdateUserMutation() {
       ADMIN_USERS_LIST_ENDPOINT,
       ADMIN_USER_DETAILS_ENDPOINT(username),
     ],
-    successMessage: MutationsLang.edit("User"),
+    successMessage: MutationsLang.edit("User Profile"),
   });
 
   return useMutation(

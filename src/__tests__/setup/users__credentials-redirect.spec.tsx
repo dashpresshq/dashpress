@@ -15,7 +15,7 @@ describe("pages/setup/user", () => {
     localStorage.clear();
   });
 
-  it("should redirect to dashboard if there are both users and credentials in setup", async () => {
+  it("should redirect to credentials if when credentials is not setup", async () => {
     const replaceMock = jest.fn();
     useRouter.mockImplementation(() => ({
       replace: replaceMock,

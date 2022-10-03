@@ -133,60 +133,15 @@ describe("pages/users/[username]/index", () => {
           <UserUpdate />
         </AppWrapper>
       );
-      /* Used as a ganrantue that the page has loaded can be more elegant than this */
+
       await waitFor(() => {
-        expect(screen.getByLabelText("Role")).toBeDisabled();
+        expect(screen.getByLabelText("Role")).toBeInTheDocument();
       });
 
       expect(
         screen.queryByRole("heading", { name: "Reset User Password" })
       ).not.toBeInTheDocument();
     });
-
-    // it("should be hidden when user doesn't have the permission to reset password", async () => {
-    //     useRouter.mockImplementation(() => ({
-    //       asPath: "/",
-    //       query: {
-    //         username: "root",
-    //       },
-    //     }));
-    //     render(
-    //       <AppWrapper>
-    //         <UserUpdate />
-    //       </AppWrapper>
-    //     );
-    //     /* Used as a ganrantue that the page has loaded can be more elegant than this */
-    //     await waitFor(() => {
-    //       expect(screen.getByLabelText("Role")).toBeDisabled();
-    //     });
-
-    //     expect(
-    //       screen.queryByRole("heading", { name: "Reset User Password" })
-    //     ).not.toBeInTheDocument();
-    //   });
-
-    // it("should be hidden when user doesn't have the permission to reset password and is current user", async () => {
-    //     useRouter.mockImplementation(() => ({
-    //       asPath: "/",
-    //       query: {
-    //         username: "root",
-    //       },
-    //     }));
-    //     render(
-    //       <AppWrapper>
-    //         <UserUpdate />
-    //       </AppWrapper>
-    //     );
-    //     /* Used as a ganrantue that the page has loaded can be more elegant than this */
-    //     await waitFor(() => {
-    //       expect(screen.getByLabelText("Role")).toBeDisabled();
-    //     });
-
-    //     expect(
-    //       screen.queryByRole("heading", { name: "Reset User Password" })
-    //     ).not.toBeInTheDocument();
-    //   });
-
     it("should reset password", async () => {
       useRouter.mockImplementation(() => ({
         asPath: "/",

@@ -1,7 +1,8 @@
 import { rest } from "msw";
+import { IAuthenticatedUserBag } from "shared/types";
 import { BASE_TEST_URL } from "./_utils";
 
-let ME = {
+let ME: IAuthenticatedUserBag = {
   name: "Root User",
   permissions: [],
   role: "creator",

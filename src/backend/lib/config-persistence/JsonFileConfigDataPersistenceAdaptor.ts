@@ -1,7 +1,7 @@
 import fs from "fs-extra";
 import noop from "lodash/noop";
 import path from "path";
-import { ConfigService, NodeEnvironments } from "../config/config.service";
+import { ConfigService } from "../config/config.service";
 
 import { AbstractConfigDataPersistenceService } from "./AbstractConfigDataPersistenceService";
 import { ConfigDomain } from "./types";
@@ -19,7 +19,7 @@ export class JsonFileConfigDataPersistenceAdaptor<
 
   private pathToConfigDomain = (type: ConfigDomain) => {
     const file =
-      this.configService.getNodeEnvironment() === NodeEnvironments.Test
+      this.configService.getNodeEnvironment() === "test"
         ? `${type}.test.json`
         : `${type}.json`;
     return path.resolve(

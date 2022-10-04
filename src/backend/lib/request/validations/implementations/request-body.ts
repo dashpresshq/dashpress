@@ -1,5 +1,5 @@
 import { BadRequestError } from "backend/lib/errors";
-import { IAppliedSchemaFormConfig } from "shared/form-schemas";
+import { IAppliedSchemaFormConfig } from "shared/form-schemas/types";
 import { runValidationError } from "shared/validations/run";
 import { ValidationImplType } from "./types";
 

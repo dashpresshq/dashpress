@@ -4,7 +4,7 @@ import { Field, Form } from "react-final-form";
 import {
   IAppliedSchemaFormConfig,
   ISchemaFormConfig,
-} from "shared/form-schemas";
+} from "shared/form-schemas/types";
 import { runValidationError } from "shared/validations/run";
 import { RenderFormInput } from "./_RenderFormInput";
 import { userFriendlyCase } from "../strings";

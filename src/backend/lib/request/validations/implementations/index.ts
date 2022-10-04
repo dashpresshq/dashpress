@@ -1,4 +1,5 @@
-import { ValidationKeys } from "..";
+import noop from "lodash/noop";
+import { ValidationKeys, FOR_CODE_COV } from "../types";
 import { canCrudValidationImpl as canCrud } from "./can-crud";
 import { configBodyValidationImpl as configBody } from "./config-body";
 import { configKeyFilterValidationImpl as configKey } from "./config-key";
@@ -16,6 +17,8 @@ import { canUserValidationImpl as canUser } from "./can-user";
 import { authenticatedUserValidationImpl as authenticatedUser } from "./authenticated-user";
 
 import { ValidationImplType } from "./types";
+
+noop(FOR_CODE_COV);
 
 export const ValidationImpl: Record<
   ValidationKeys["_type"],

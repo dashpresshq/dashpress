@@ -2,15 +2,17 @@ import { IApplicationService } from "backend/types";
 import fs from "fs-extra";
 import path from "path";
 import { ConfigBag } from "./constants";
-import { ConfigKeys, NodeEnvironments } from "./types";
+import { ConfigKeys } from "./types";
 
-export { ConfigKeys, NodeEnvironments };
+export { ConfigKeys };
 
 export class ConfigService implements IApplicationService {
   static isInitialized = false;
 
-  getNodeEnvironment(): NodeEnvironments {
-    return this.processEnv.NODE_ENV as NodeEnvironments;
+  // eslint-disable-next-line no-undef
+  getNodeEnvironment(): NodeJS.ProcessEnv["NODE_ENV"] {
+    // eslint-disable-next-line no-undef
+    return this.processEnv.NODE_ENV as NodeJS.ProcessEnv["NODE_ENV"];
   }
 
   // eslint-disable-next-line no-undef
@@ -36,7 +38,7 @@ export class ConfigService implements IApplicationService {
     Object.entries(ConfigBag).forEach(([key, configBag]) => {
       const value = this.processEnv[key];
       if (!value) {
-        if (this.processEnv.NODE_ENV === "production") {
+        if (this.getNodeEnvironment() === "production") {
           const message = `ENV variable with key '${key}' is missing`;
           throw new Error(message);
         } else {

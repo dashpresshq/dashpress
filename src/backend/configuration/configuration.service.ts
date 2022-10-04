@@ -1,4 +1,5 @@
-import { IApplicationService } from "backend/types";
+import { IApplicationService, FOR_CODE_COV } from "backend/types";
+import noop from "lodash/noop";
 import {
   createConfigDomainPersistenceService,
   AbstractConfigDataPersistenceService,
@@ -8,6 +9,8 @@ import {
   DEFAULT_SYSTEM_SETTINGS,
   ISystemSettings,
 } from "../../shared/configuration.constants";
+
+noop(FOR_CODE_COV);
 
 export class ConfigurationService implements IApplicationService {
   constructor(

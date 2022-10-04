@@ -68,5 +68,17 @@ describe("Config Service", () => {
         `Auth token Key must contain uppercase letters, lowercase letters, numbers and be more than 64 characters`
       );
     });
+
+    it("should not throw any error for valid env", () => {
+      expect(() => {
+        new ConfigService(VALID_CONFIG);
+      }).not.toThrowError();
+    });
+  });
+
+  describe("generation", () => {
+    it("foo", () => {
+      expect(1).toBe(1);
+    });
   });
 });

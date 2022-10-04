@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { handleResponseError } from "../errors";
 import { RequestMethod, RequestMethodResponseCode } from "./methods";
-import { ValidationKeys } from "./validations";
+import { ValidationKeys } from "./validations/types";
 import { ValidationImpl } from "./validations/implementations";
 
 /*

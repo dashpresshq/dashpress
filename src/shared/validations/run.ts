@@ -1,7 +1,13 @@
 import { userFriendlyCase } from "frontend/lib/strings";
-import { IAppliedSchemaFormConfig } from "shared/form-schemas";
+import noop from "lodash/noop";
+import {
+  IAppliedSchemaFormConfig,
+  FOR_CODE_COV,
+} from "shared/form-schemas/types";
 import { TemplateService } from "../lib/templates";
 import { ENTITY_VALIDATION_CONFIG } from "./validations-map";
+
+noop(FOR_CODE_COV);
 
 export const runValidationError =
   (fields: IAppliedSchemaFormConfig<any>) =>

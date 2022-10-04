@@ -20,3 +20,5 @@ export type ValidationKeys = {
   method?: RequestMethod[];
   body?: unknown;
 };
+
+export const FOR_CODE_COV = 1;

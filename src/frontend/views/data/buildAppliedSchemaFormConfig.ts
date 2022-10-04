@@ -1,7 +1,7 @@
 import {
   IAppliedSchemaFormConfig,
   ISchemaFormConfig,
-} from "shared/form-schemas";
+} from "shared/form-schemas/types";
 import { ENTITY_LIST_PATH } from "frontend/hooks/data/data.store";
 
 import { IColorableSelection } from "shared/types";

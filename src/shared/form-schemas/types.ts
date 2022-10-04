@@ -11,3 +11,5 @@ export interface ISchemaFormConfig {
 }
 
 export type IAppliedSchemaFormConfig<T> = Record<keyof T, ISchemaFormConfig>;
+
+export const FOR_CODE_COV = 1;

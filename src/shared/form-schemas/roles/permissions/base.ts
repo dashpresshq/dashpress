@@ -1,4 +1,4 @@
-import { IAppliedSchemaFormConfig } from "../..";
+import { IAppliedSchemaFormConfig } from "../../types";
 
 export type IBasePermissionForm = {
   permission: string;

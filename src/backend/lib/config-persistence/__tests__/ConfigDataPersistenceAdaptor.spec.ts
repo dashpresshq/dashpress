@@ -22,38 +22,38 @@ const PERSITENT_ADAPTORS: {
     title: "JSON File",
     adaptor: new JsonFileConfigDataPersistenceAdaptor<ITestData>(
       TEST_DOMAIN,
-      new ConfigService({}, false)
+      new ConfigService({
+        DO_NOT_BOOSTRAP_CONFIG: true,
+      })
     ),
   },
   {
     title: "Memory",
     adaptor: new MemoryConfigDataPersistenceAdaptor<ITestData>(
       TEST_DOMAIN,
-      new ConfigService({}, false)
+      new ConfigService({
+        DO_NOT_BOOSTRAP_CONFIG: true,
+      })
     ),
   },
   {
     title: "Database",
     adaptor: new DatabaseConfigDataPersistenceAdaptor<ITestData>(
       TEST_DOMAIN,
-      new ConfigService(
-        {
-          CONFIG_ADAPTOR_CONNECTION_STRING: "sqlite3:./test-adaptor.sqlite",
-        },
-        false
-      )
+      new ConfigService({
+        DO_NOT_BOOSTRAP_CONFIG: true,
+        CONFIG_ADAPTOR_CONNECTION_STRING: "sqlite3:./test-adaptor.sqlite",
+      })
     ),
   },
   {
     title: "Redis",
     adaptor: new RedisConfigDataPersistenceAdaptor<ITestData>(
       TEST_DOMAIN,
-      new ConfigService(
-        {
-          CONFIG_ADAPTOR_CONNECTION_STRING: "redis://localhost",
-        },
-        false
-      )
+      new ConfigService({
+        DO_NOT_BOOSTRAP_CONFIG: true,
+        CONFIG_ADAPTOR_CONNECTION_STRING: "redis://localhost",
+      })
     ),
   },
 ];

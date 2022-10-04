@@ -1,4 +1,6 @@
 /* eslint-disable no-new */
+import fs from "fs-extra";
+import path from "path";
 import { ConfigKeys, ConfigService } from "./config.service";
 
 const VALID_CONFIG: Record<ConfigKeys, string> = {
@@ -17,14 +19,13 @@ const VALID_CONFIG: Record<ConfigKeys, string> = {
 };
 
 const bootstrapConfig = (changes: Record<string, unknown>) => {
-  new ConfigService(
-    {
-      ...VALID_CONFIG,
-      ...changes,
-    },
-    true
-  );
+  new ConfigService({
+    ...VALID_CONFIG,
+    ...changes,
+  });
 };
+
+const ENV_LOCAL_FILE = ".env.unit.local";
 
 describe("Config Service", () => {
   beforeEach(() => {
@@ -34,13 +35,13 @@ describe("Config Service", () => {
     it("should validate `CACHE_ADAPTOR_CONNECTION_STRING`", async () => {
       expect(() => {
         bootstrapConfig({ CACHE_ADAPTOR_CONNECTION_STRING: true });
-      }).toThrowError(`'Cache Adaptor Connection' is required`);
+      }).toThrowError(`'Cache Adaptor Connection' should be a string`);
     });
 
     it("should validate `CONFIG_ADAPTOR_CONNECTION_STRING`", () => {
       expect(() => {
         bootstrapConfig({ CONFIG_ADAPTOR_CONNECTION_STRING: true });
-      }).toThrowError(`'Config Adaptor Connection' is required`);
+      }).toThrowError(`'Config Adaptor Connection' should be a string`);
     });
 
     it("should validate `CONFIG_ADAPTOR`", () => {
@@ -80,16 +81,88 @@ describe("Config Service", () => {
     });
 
     it("should not throw any error for valid env", () => {
-      expect(async () => await bootstrapConfig({})).not.toThrowError();
+      expect(() => bootstrapConfig({})).not.toThrowError();
     });
   });
 
   describe("generation", () => {
-    it("should create new config file when empty", () => {
-      expect(1).toBe(1);
+    const fullPath = path.resolve(process.cwd(), ENV_LOCAL_FILE);
+    beforeEach(() => {
+      fs.removeSync(fullPath);
     });
-    it("should append config keys not found", () => {
-      expect(1).toBe(1);
+
+    it("should throw error on prod for empty env", async () => {
+      ConfigService.isInitialized = false;
+
+      expect(() =>
+        new ConfigService({
+          ENV_LOCAL_FILE,
+          NODE_ENV: "production",
+        }).bootstrap()
+      ).toThrowError();
+    });
+
+    it("should create new valid config file when empty", async () => {
+      new ConfigService({ ENV_LOCAL_FILE }).bootstrap();
+
+      const content = fs.readFileSync(fullPath).toString();
+
+      const newEnv = Object.fromEntries(
+        content
+          .split("\n")
+          .filter((value) => value)
+          .filter((value) => !value.startsWith("#"))
+          .map((value) => value.split("="))
+      );
+
+      expect(() => new ConfigService(newEnv)).not.toThrowError();
+
+      ConfigService.isInitialized = false;
+
+      newEnv.CONFIG_ADAPTOR = "hello";
+
+      expect(() => new ConfigService(newEnv)).toThrowError(
+        "Invalid Config Adaptor name provided 'hello'. Valid values are json-file,database,memory,redis"
+      );
+    });
+
+    it("should only append missing config fields", async () => {
+      const oldEnv = {
+        CONFIG_ADAPTOR_CONNECTION_STRING: "test",
+        CACHE_ADAPTOR: "redis",
+        ENCRYPTION_KEY:
+          "TEST123*!@#foobfoobfoobfoobfoobfoobfoobfoobfoobfoobfoobfoobfoobfoobfoobfoobfoobfoobfoobtesttesttesttest",
+      };
+
+      fs.writeFileSync(
+        fullPath,
+        Object.entries(oldEnv)
+          .map(([key, value]) => `${key}=${value}`)
+          .join("\n")
+      );
+
+      new ConfigService({
+        ...oldEnv,
+        ENV_LOCAL_FILE,
+      }).bootstrap();
+
+      const content = fs.readFileSync(fullPath).toString();
+
+      const newEnv = Object.fromEntries(
+        content
+          .split("\n")
+          .filter((value) => value)
+          .filter((value) => !value.startsWith("#"))
+          .map((value) => value.split("="))
+      );
+
+      expect(() => new ConfigService(newEnv)).not.toThrowError();
+
+      expect(newEnv.CONFIG_ADAPTOR_CONNECTION_STRING).toBe("test");
+      expect(newEnv.CACHE_ADAPTOR).toBe("redis");
+      expect(newEnv.ENCRYPTION_KEY).toBe(
+        "TEST123*!@#foobfoobfoobfoobfoobfoobfoobfoobfoobfoobfoobfoobfoobfoobfoobfoobfoobfoobfoobtesttesttesttest"
+      );
     });
   });
 });

@@ -29,7 +29,7 @@ const optionsValidation = (
 
 const stringValidation = (value: unknown, label: string) => {
   if (typeof value !== "string") {
-    throw new Error(`'${label}' is required`);
+    throw new Error(`'${label}' should be a string`);
   }
 };
 

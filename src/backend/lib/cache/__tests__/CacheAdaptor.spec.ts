@@ -11,18 +11,19 @@ const CACHE_ADAPTORS: {
 }[] = [
   {
     title: "Memory",
-    adaptor: new MemoryCacheAdaptor(prefix, new ConfigService({}, false)),
+    adaptor: new MemoryCacheAdaptor(
+      prefix,
+      new ConfigService({ DO_NOT_BOOSTRAP_CONFIG: false })
+    ),
   },
   {
     title: "Redis",
     adaptor: new RedisCacheAdaptor(
       prefix,
-      new ConfigService(
-        {
-          CACHE_ADAPTOR_CONNECTION_STRING: "redis://localhost",
-        },
-        false
-      )
+      new ConfigService({
+        DO_NOT_BOOSTRAP_CONFIG: false,
+        CACHE_ADAPTOR_CONNECTION_STRING: "redis://localhost",
+      })
     ),
   },
 ];

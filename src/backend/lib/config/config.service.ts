@@ -14,11 +14,8 @@ export class ConfigService {
     return this.processEnv.NODE_ENV as NodeJS.ProcessEnv["NODE_ENV"];
   }
 
-  constructor(
-    protected processEnv: Record<string, unknown>,
-    bootstrap: boolean
-  ) {
-    if (bootstrap) {
+  constructor(protected processEnv: Record<string, unknown>) {
+    if (!this.processEnv.DO_NOT_BOOSTRAP_CONFIG) {
       this.bootstrap();
     }
   }
@@ -36,7 +33,6 @@ export class ConfigService {
       return;
     }
     ConfigService.isInitialized = true;
-
     const newEnvEntries: { key: ConfigKeys; value: string }[] = [];
 
     Object.entries(ConfigBag).forEach(([key, configBag]) => {
@@ -56,22 +52,21 @@ export class ConfigService {
 
     if (newEnvEntries.length > 0) {
       const envContent: string[] = [
-        "# AUTOMATICALLY GENERATED ENV CONFIG FOR DEVELOPMENT STARTS HERE",
+        "\n# AUTOMATICALLY GENERATED ENV CONFIG FOR STARTS HERE",
       ];
       newEnvEntries.forEach((envEntry) => {
         this.processEnv[envEntry.key] = envEntry.value;
         envContent.push(`${envEntry.key}=${envEntry.value}`);
       });
       envContent.push("# GENERATED ENV ENDS HERE");
-      fs.appendFile(
+      fs.appendFileSync(
         path.resolve(
           process.cwd(),
-          (this.processEnv.ENV_LOCAL as string) || ".env.local"
+          (this.processEnv.ENV_LOCAL_FILE as string) || ".env.local"
         ),
         envContent.join("\n")
       );
     }
-
     Object.entries(ConfigBag).forEach(([key, configBag]) => {
       const value = this.processEnv[key];
       configBag.validate(value);
@@ -79,4 +74,4 @@ export class ConfigService {
   }
 }
 
-export const configService = new ConfigService(process.env, true);
+export const configService = new ConfigService(process.env);

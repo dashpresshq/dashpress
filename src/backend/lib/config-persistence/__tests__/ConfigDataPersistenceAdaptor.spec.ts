@@ -1,7 +1,4 @@
-import {
-  ConfigService,
-  NodeEnvironments,
-} from "backend/lib/config/config.service";
+import { ConfigService } from "backend/lib/config/config.service";
 import { AbstractConfigDataPersistenceService } from "../AbstractConfigDataPersistenceService";
 import { DatabaseConfigDataPersistenceAdaptor } from "../DatabaseConfigDataPersistenceAdaptor";
 import { JsonFileConfigDataPersistenceAdaptor } from "../JsonFileConfigDataPersistenceAdaptor";
@@ -15,36 +12,6 @@ interface ITestData {
   age: number;
 }
 
-const testConfigService: ConfigService = {
-  assertConfiguration() {
-    throw new Error("Not implemented");
-  },
-  bootstrap() {
-    throw new Error("Not implemented");
-  },
-  getNodeEnvironment() {
-    return NodeEnvironments.Test;
-  },
-  getConfigValue<T>() {
-    return "sqlite3:./test-adaptor.sqlite" as unknown as T;
-  },
-};
-
-const redisTestConfigService: ConfigService = {
-  assertConfiguration() {
-    throw new Error("Not implemented");
-  },
-  bootstrap() {
-    throw new Error("Not implemented");
-  },
-  getNodeEnvironment() {
-    return NodeEnvironments.Test;
-  },
-  getConfigValue<T>() {
-    return "redis://localhost" as unknown as T;
-  },
-};
-
 const TEST_DOMAIN = "test" as ConfigDomain;
 
 const PERSITENT_ADAPTORS: {
@@ -55,28 +22,32 @@ const PERSITENT_ADAPTORS: {
     title: "JSON File",
     adaptor: new JsonFileConfigDataPersistenceAdaptor<ITestData>(
       TEST_DOMAIN,
-      testConfigService
+      new ConfigService({})
     ),
   },
   {
     title: "Memory",
     adaptor: new MemoryConfigDataPersistenceAdaptor<ITestData>(
       TEST_DOMAIN,
-      testConfigService
+      new ConfigService({})
     ),
   },
   {
     title: "Database",
     adaptor: new DatabaseConfigDataPersistenceAdaptor<ITestData>(
       TEST_DOMAIN,
-      testConfigService
+      new ConfigService({
+        CONFIG_ADAPTOR_CONNECTION_STRING: "sqlite3:./test-adaptor.sqlite",
+      })
     ),
   },
   {
     title: "Redis",
     adaptor: new RedisConfigDataPersistenceAdaptor<ITestData>(
       TEST_DOMAIN,
-      redisTestConfigService
+      new ConfigService({
+        CONFIG_ADAPTOR_CONNECTION_STRING: "redis://localhost",
+      })
     ),
   },
 ];

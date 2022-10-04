@@ -6,25 +6,15 @@ import { ConfigKeys, NodeEnvironments } from "./types";
 
 export { ConfigKeys, NodeEnvironments };
 
-let initialized = false;
-
 export class ConfigService implements IApplicationService {
+  static isInitialized = false;
+
   getNodeEnvironment(): NodeEnvironments {
-    const env = process.env.NODE_ENV as NodeEnvironments;
-    if (!env) {
-      throw new Error("NODE_ENV is not set");
-    }
-    if (!Object.values(NodeEnvironments).includes(env)) {
-      throw new Error(
-        `Invalid NODE_ENV provided '${env}'. Valid values are ${Object.values(
-          NodeEnvironments
-        )}`
-      );
-    }
-    return env;
+    return this.processEnv.NODE_ENV as NodeEnvironments;
   }
 
-  constructor() {
+  // eslint-disable-next-line no-undef
+  constructor(protected processEnv: Record<string, unknown> = process.env) {
     this.assertConfiguration();
   }
 
@@ -33,20 +23,20 @@ export class ConfigService implements IApplicationService {
   }
 
   getConfigValue<T>(key: ConfigKeys): T {
-    return process.env[key] as unknown as T;
+    return this.processEnv[key] as unknown as T;
   }
 
   assertConfiguration() {
-    if (initialized) {
-      return;
-    }
-    initialized = true;
+    // if (ConfigService.isInitialized) {
+    //   return;
+    // }
+    // ConfigService.isInitialized = true;
     const newEnvEntries: { key: ConfigKeys; value: string }[] = [];
 
     Object.entries(ConfigBag).forEach(([key, configBag]) => {
-      const value = process.env[key];
+      const value = this.processEnv[key];
       if (!value) {
-        if (process.env.NODE_ENV === "production") {
+        if (this.processEnv.NODE_ENV === "production") {
           const message = `ENV variable with key '${key}' is missing`;
           throw new Error(message);
         } else {
@@ -63,18 +53,21 @@ export class ConfigService implements IApplicationService {
         "# AUTOMATICALLY GENERATED ENV CONFIG FOR DEVELOPMENT STARTS HERE",
       ];
       newEnvEntries.forEach((envEntry) => {
-        process.env[envEntry.key] = envEntry.value;
+        this.processEnv[envEntry.key] = envEntry.value;
         envContent.push(`${envEntry.key}=${envEntry.value}`);
       });
       envContent.push("# GENERATED ENV ENDS HERE");
       fs.appendFile(
-        path.resolve(process.cwd(), ".env.local"),
+        path.resolve(
+          process.cwd(),
+          (this.processEnv.ENV_LOCAL as string) || ".env.local"
+        ),
         envContent.join("\n")
       );
     }
 
     Object.entries(ConfigBag).forEach(([key, configBag]) => {
-      const value = process.env[key];
+      const value = this.processEnv[key];
       configBag.validate(value);
     });
   }

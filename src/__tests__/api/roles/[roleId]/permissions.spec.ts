@@ -31,6 +31,20 @@ describe("/api/roles/[roleId]/permissions", () => {
     ]);
   });
 
+  it("should return empty for system permission", async () => {
+    const { req, res } = createAuthenticatedMocks({
+      method: "GET",
+      query: {
+        roleId: "viewer",
+      },
+    });
+
+    await handler(req, res);
+
+    expect(res._getStatusCode()).toBe(200);
+    expect(res._getJSONData()).toEqual([]);
+  });
+
   it("should remove permission from role", async () => {
     const deleteRequest = createAuthenticatedMocks({
       method: "DELETE",

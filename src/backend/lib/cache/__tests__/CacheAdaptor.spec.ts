@@ -1,27 +1,9 @@
-import {
-  ConfigService,
-  NodeEnvironments,
-} from "backend/lib/config/config.service";
+import { ConfigService } from "backend/lib/config/config.service";
 import { AbstractCacheService } from "../AbstractCacheService";
 import { MemoryCacheAdaptor } from "../MemoryCacheAdaptor";
 import { RedisCacheAdaptor } from "../RedisCacheAdaptor";
 
 const prefix = "__test-cache-adaptor__";
-
-const testConfigService: ConfigService = {
-  assertConfiguration() {
-    throw new Error("Not implemented");
-  },
-  bootstrap() {
-    throw new Error("Not implemented");
-  },
-  getNodeEnvironment() {
-    return NodeEnvironments.Test;
-  },
-  getConfigValue<T>() {
-    return "redis://localhost" as unknown as T;
-  },
-};
 
 const CACHE_ADAPTORS: {
   title: string;
@@ -29,11 +11,16 @@ const CACHE_ADAPTORS: {
 }[] = [
   {
     title: "Memory",
-    adaptor: new MemoryCacheAdaptor(prefix, testConfigService),
+    adaptor: new MemoryCacheAdaptor(prefix, new ConfigService({})),
   },
   {
     title: "Redis",
-    adaptor: new RedisCacheAdaptor(prefix, testConfigService),
+    adaptor: new RedisCacheAdaptor(
+      prefix,
+      new ConfigService({
+        CACHE_ADAPTOR_CONNECTION_STRING: "redis://localhost",
+      })
+    ),
   },
 ];
 

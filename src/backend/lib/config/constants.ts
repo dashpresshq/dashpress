@@ -5,17 +5,21 @@ import { ConfigKeys } from "./types";
 
 interface IConfigBag {
   defaultValue: () => string;
-  validate: (value: string) => void;
+  validate: (value: unknown) => void;
 }
 
-const tokenValidations = (value: string, label: string) => {
-  if (!/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{64,}$/.test(value)) {
+const tokenValidations = (value: unknown, label: string) => {
+  if (!/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{64,}$/.test(value as string)) {
     const errorText = `${label} must contain uppercase letters, lowercase letters, numbers and be more than 64 characters`;
     throw new Error(errorText);
   }
 };
 
-const optionsValidation = (value: string, label: string, options: string[]) => {
+const optionsValidation = (
+  value: unknown,
+  label: string,
+  options: string[]
+) => {
   if (!options.includes(value as ConfigAdaptorTypes)) {
     throw new Error(
       `Invalid ${label} name provided '${value}'. Valid values are ${options}`
@@ -23,8 +27,8 @@ const optionsValidation = (value: string, label: string, options: string[]) => {
   }
 };
 
-const stringValidation = (value: string, label: string) => {
-  if (!value) {
+const stringValidation = (value: unknown, label: string) => {
+  if (typeof value !== "string") {
     throw new Error(`'${label}' is required`);
   }
 };

@@ -20,6 +20,6 @@ export class CredentialController {
   }
 }
 
-export const configurationController = new CredentialController(
+export const credentialController = new CredentialController(
   credentialsService
 );

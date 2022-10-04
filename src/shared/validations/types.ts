@@ -36,3 +36,5 @@ export interface IFieldValidationItem {
   fromType?: true;
   constraint?: Record<string, string | number | string[]>;
 }
+
+export const FOR_CODE_COV = 1;

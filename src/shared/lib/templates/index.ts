@@ -5,7 +5,7 @@ export class TemplateService {
     try {
       return Mustache.render(input, data);
     } catch (error) {
-      return input;
+      return (error as Error).message;
     }
   }
 }

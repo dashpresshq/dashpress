@@ -31,4 +31,14 @@ describe("Template service", () => {
       })
     ).toEqual("John");
   });
+
+  it("should return error message", async () => {
+    expect(
+      TemplateService.compile(undefined, {
+        person: { name: "John" },
+      })
+    ).toBe(
+      'Invalid template! Template should be a "string" but "undefined" was given as the first argument for mustache#render(template, view, partials)'
+    );
+  });
 });

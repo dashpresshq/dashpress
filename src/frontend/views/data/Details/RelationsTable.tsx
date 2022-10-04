@@ -1,4 +1,4 @@
-import { FilterOperators } from "@hadmean/chromista";
+import { FilterOperators, StyledCard } from "@hadmean/chromista";
 import { useEntityReferenceFields } from "frontend/hooks/entity/entity.store";
 import { useSetPageDetails, useRouteParam } from "frontend/lib/routing";
 import { META_USER_PERMISSIONS } from "shared/types";
@@ -32,22 +32,24 @@ export function EntityRelationTable() {
 
   return (
     <DetailsLayout entity={entity} menuKey={childEntity}>
-      <EntityTableView
-        entity={childEntity}
-        persitentFilters={
-          referenceField
-            ? [
-                {
-                  id: referenceField,
-                  value: {
-                    operator: FilterOperators.EQUAL_TO,
-                    value: entityId,
+      <StyledCard>
+        <EntityTableView
+          entity={childEntity}
+          persitentFilters={
+            referenceField
+              ? [
+                  {
+                    id: referenceField,
+                    value: {
+                      operator: FilterOperators.EQUAL_TO,
+                      value: entityId,
+                    },
                   },
-                },
-              ]
-            : []
-        }
-      />
+                ]
+              : []
+          }
+        />
+      </StyledCard>
     </DetailsLayout>
   );
 }

@@ -1,11 +1,8 @@
 import { dataNotFoundMessage, useApi, useApiQueries } from "@hadmean/protozoa";
 import { IEntityField, IEntityRelation } from "shared/types";
-import { ILabelValue, FOR_CODE_COV } from "types";
-import noop from "lodash/noop";
+import { ILabelValue } from "types";
 import { isRouterParamEnabled } from "..";
 import { useEntityDictionPlurals } from "./entity.queries";
-
-noop(FOR_CODE_COV);
 
 export const ENTITY_FIELDS_ENDPOINT = (entity: string) =>
   `/api/entities/${entity}/fields`;

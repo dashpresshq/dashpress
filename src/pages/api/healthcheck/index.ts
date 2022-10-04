@@ -13,7 +13,7 @@ export default requestHandler(
   {
     GET: async () => {
       try {
-        await configService.bootstrap();
+        configService.bootstrap();
         await dataService.bootstrap();
         await schemasService.bootstrap();
         await usersService.bootstrap();

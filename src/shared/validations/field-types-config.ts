@@ -1,8 +1,5 @@
 import { TableFilterType } from "@hadmean/chromista/dist/components/Table/filters/types";
-import noop from "lodash/noop";
-import { SelectableAbleValidations, FOR_CODE_COV } from "./types";
-
-noop(FOR_CODE_COV);
+import { SelectableAbleValidations } from "./types";
 
 export const FIELD_TYPES_CONFIG_MAP: Record<
   | "email"
@@ -17,7 +14,7 @@ export const FIELD_TYPES_CONFIG_MAP: Record<
   | "reference"
   | "boolean"
   | "selection-enum"
-  | "image" // not inplemeneted
+  | "image" // not implemeneted
   | "datetime-local"
   | "color",
   {

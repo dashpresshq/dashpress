@@ -22,32 +22,38 @@ const PERSITENT_ADAPTORS: {
     title: "JSON File",
     adaptor: new JsonFileConfigDataPersistenceAdaptor<ITestData>(
       TEST_DOMAIN,
-      new ConfigService({})
+      new ConfigService({}, false)
     ),
   },
   {
     title: "Memory",
     adaptor: new MemoryConfigDataPersistenceAdaptor<ITestData>(
       TEST_DOMAIN,
-      new ConfigService({})
+      new ConfigService({}, false)
     ),
   },
   {
     title: "Database",
     adaptor: new DatabaseConfigDataPersistenceAdaptor<ITestData>(
       TEST_DOMAIN,
-      new ConfigService({
-        CONFIG_ADAPTOR_CONNECTION_STRING: "sqlite3:./test-adaptor.sqlite",
-      })
+      new ConfigService(
+        {
+          CONFIG_ADAPTOR_CONNECTION_STRING: "sqlite3:./test-adaptor.sqlite",
+        },
+        false
+      )
     ),
   },
   {
     title: "Redis",
     adaptor: new RedisConfigDataPersistenceAdaptor<ITestData>(
       TEST_DOMAIN,
-      new ConfigService({
-        CONFIG_ADAPTOR_CONNECTION_STRING: "redis://localhost",
-      })
+      new ConfigService(
+        {
+          CONFIG_ADAPTOR_CONNECTION_STRING: "redis://localhost",
+        },
+        false
+      )
     ),
   },
 ];

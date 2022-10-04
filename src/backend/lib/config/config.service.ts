@@ -1,4 +1,3 @@
-import { IApplicationService } from "backend/types";
 import fs from "fs-extra";
 import path from "path";
 import { ConfigBag } from "./constants";
@@ -6,7 +5,7 @@ import { ConfigKeys } from "./types";
 
 export { ConfigKeys };
 
-export class ConfigService implements IApplicationService {
+export class ConfigService {
   static isInitialized = false;
 
   // eslint-disable-next-line no-undef
@@ -15,12 +14,16 @@ export class ConfigService implements IApplicationService {
     return this.processEnv.NODE_ENV as NodeJS.ProcessEnv["NODE_ENV"];
   }
 
-  // eslint-disable-next-line no-undef
-  constructor(protected processEnv: Record<string, unknown> = process.env) {
-    this.assertConfiguration();
+  constructor(
+    protected processEnv: Record<string, unknown>,
+    bootstrap: boolean
+  ) {
+    if (bootstrap) {
+      this.bootstrap();
+    }
   }
 
-  async bootstrap() {
+  bootstrap() {
     this.assertConfiguration();
   }
 
@@ -29,10 +32,11 @@ export class ConfigService implements IApplicationService {
   }
 
   assertConfiguration() {
-    // if (ConfigService.isInitialized) {
-    //   return;
-    // }
-    // ConfigService.isInitialized = true;
+    if (ConfigService.isInitialized) {
+      return;
+    }
+    ConfigService.isInitialized = true;
+
     const newEnvEntries: { key: ConfigKeys; value: string }[] = [];
 
     Object.entries(ConfigBag).forEach(([key, configBag]) => {
@@ -75,4 +79,4 @@ export class ConfigService implements IApplicationService {
   }
 }
 
-export const configService = new ConfigService();
+export const configService = new ConfigService(process.env, true);

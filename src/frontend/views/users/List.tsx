@@ -47,9 +47,9 @@ export function ListUsers() {
           action={NAVIGATION_LINKS.USERS.DETAILS(
             (row.original as unknown as IAccountProfile).username
           )}
-          label="Details"
+          label="Edit"
           justIcon
-          icon="eye"
+          icon="edit"
         />
         <DeleteButton
           onDelete={() =>

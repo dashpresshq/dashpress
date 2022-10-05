@@ -27,13 +27,13 @@ describe("pages/users", () => {
       await screen.findByRole("row", { name: "Username Name Role Action" })
     ).toBeInTheDocument();
     expect(
-      screen.getByRole("row", { name: "user-1 User 1 Role 1 Details" })
+      screen.getByRole("row", { name: "user-1 User 1 Role 1 Edit" })
     ).toBeInTheDocument();
     expect(
-      screen.getByRole("row", { name: "user-2 User 2 Role 2 Details" })
+      screen.getByRole("row", { name: "user-2 User 2 Role 2 Edit" })
     ).toBeInTheDocument();
     expect(
-      screen.getByRole("row", { name: "user-3 User 3 Role 3 Details" })
+      screen.getByRole("row", { name: "user-3 User 3 Role 3 Edit" })
     ).toBeInTheDocument();
   });
 
@@ -56,7 +56,7 @@ describe("pages/users", () => {
     });
   });
 
-  it("should link to user details", async () => {
+  it("should link to user edit", async () => {
     const pushMock = jest.fn();
 
     useRouter.mockImplementation(() => ({
@@ -70,7 +70,7 @@ describe("pages/users", () => {
       </AppWrapper>
     );
 
-    const tableRows = await screen.findAllByRole("link", { name: "Details" });
+    const tableRows = await screen.findAllByRole("link", { name: "Edit" });
 
     expect(tableRows[0]).toHaveAttribute("href", "/users/user-1");
     expect(tableRows[1]).toHaveAttribute("href", "/users/user-2");

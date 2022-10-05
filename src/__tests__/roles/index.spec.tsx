@@ -29,10 +29,10 @@ describe("pages/roles", () => {
     expect(screen.getByRole("row", { name: "Creator" })).toBeInTheDocument();
     expect(screen.getByRole("row", { name: "Viewer" })).toBeInTheDocument();
     expect(
-      screen.getByRole("row", { name: "Role 1 Details" })
+      screen.getByRole("row", { name: "Role 1 Edit" })
     ).toBeInTheDocument();
     expect(
-      screen.getByRole("row", { name: "Role 2 Details" })
+      screen.getByRole("row", { name: "Role 2 Edit" })
     ).toBeInTheDocument();
   });
 
@@ -69,7 +69,7 @@ describe("pages/roles", () => {
       </AppWrapper>
     );
 
-    const tableRows = await screen.findAllByRole("link", { name: "Details" });
+    const tableRows = await screen.findAllByRole("link", { name: "Edit" });
 
     expect(tableRows).toHaveLength(2);
 

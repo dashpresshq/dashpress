@@ -48,9 +48,9 @@ export function ListRoles() {
         <Stack spacing={4} align="center">
           <SoftButton
             action={NAVIGATION_LINKS.ROLES.DETAILS(roleId)}
-            label="Details"
+            label="Edit"
             justIcon
-            icon="eye"
+            icon="edit"
           />
           <DeleteButton
             onDelete={() => roleDeletionMutation.mutateAsync(roleId)}

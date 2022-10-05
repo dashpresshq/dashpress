@@ -1,6 +1,6 @@
 {
   "name": "hadmean",
-  "version": "0.0.42",
+  "version": "0.0.43",
   "license": "GPL-3.0-or-later",
   "scripts": {
     "start": "next dev",
@@ -28,7 +28,7 @@
   "bin": "./bin/hadmean",
   "dependencies": {
     "@hadmean/bacteria": "^0.0.5",
-    "@hadmean/chromista": "^1.0.32",
+    "@hadmean/chromista": "^1.0.33",
     "@hadmean/protozoa": "^1.0.8",
     "@types/cryptr": "^4.0.1",
     "@types/jsonwebtoken": "^8.5.8",

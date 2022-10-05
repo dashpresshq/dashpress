@@ -139,6 +139,10 @@ export const useTableColumns = (entity: string, lean?: true) => {
           return <>{StringUtils.ellipsis(value as string, 50)}</>;
         }
 
+        if (typeof value === "object") {
+          return <>{JSON.stringify(value)}</>;
+        }
+
         return <span>{value as string}</span>;
       },
     };

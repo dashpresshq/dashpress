@@ -170,7 +170,9 @@ export function useEntityDataDeletionMutation(
       ENTITY_LIST_PATH(entity),
     ],
     onSuccessActionWithFormData: () => {
-      router.replace(redirectTo);
+      if (redirectTo) {
+        router.replace(redirectTo);
+      }
     },
     successMessage: MutationsLang.delete(entityDiction.singular),
   });

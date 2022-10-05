@@ -11,6 +11,7 @@ import { AppLayout } from "../../_layouts/app";
 import { useDashboardWidgets } from "./dashboard.store";
 import { gridRoot } from "./styles";
 import { DashboardWidget } from "./widgets";
+import { DemoVideo } from "./Demo";
 
 const Root = styled.div`
   ${gridRoot};
@@ -45,6 +46,7 @@ export function Dashboard() {
           : []
       }
     >
+      <DemoVideo />
       <ViewStateMachine
         loading={widgets.isLoading}
         error={widgets.error}

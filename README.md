@@ -5,13 +5,11 @@
 </h1>
 
 <div align="center">
-  Hadmean
-  <br />
-  <a href="https://github.com/hadmean/hadmean/issues/new?assignees=&labels=bug&template=01_BUG_REPORT.md&title=bug%3A+">Report a Bug</a>
+  <a href="https://hadmean-demo.up.railway.app" target="_blank">Live Demo</a>
   ·
-  <a href="https://github.com/hadmean/hadmean/issues/new?assignees=&labels=enhancement&template=02_FEATURE_REQUEST.md&title=feat%3A+">Request a Feature</a>
-  ·
-  <a href="https://github.com/hadmean/hadmean/discussions">Ask a Question</a>
+  <a href="https://discord.gg/aV6DxwXhzN" target="_blank">Join Community</a>
+    ·
+  <a href="https://hadmean.github.io/hadmean/" target="_blank">Documentation</a>
 </div>
 
 <div align="center">

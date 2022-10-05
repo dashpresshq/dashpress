@@ -9,14 +9,15 @@ import { IEntityCrudSettings } from "shared/configuration.constants";
 export const useEntityViewStateMachine = (
   isLoading: boolean,
   error: unknown,
-  actionKey: keyof IEntityCrudSettings
+  actionKey: keyof IEntityCrudSettings,
+  entityOverride?: string
 ):
   | { type: "loading" }
   | { type: "render" }
   | { type: "error"; message: unknown } => {
-  const entityCrudSettings = useEntityCrudSettings();
+  const entityCrudSettings = useEntityCrudSettings(entityOverride);
   const entitiesToHide = useAppConfiguration<string[]>("disabled_entities");
-  const entity = useEntitySlug();
+  const entity = useEntitySlug(entityOverride);
 
   if (
     isLoading ||

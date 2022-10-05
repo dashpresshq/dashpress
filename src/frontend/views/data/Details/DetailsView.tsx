@@ -55,7 +55,12 @@ export function EntityDetailsView({
     entityFields.isLoading ||
     hiddenDetailsColumns.isLoading;
 
-  const viewState = useEntityViewStateMachine(isLoading, error, "details");
+  const viewState = useEntityViewStateMachine(
+    isLoading,
+    error,
+    "details",
+    entity
+  );
 
   if (!id) {
     return null;

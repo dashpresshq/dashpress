@@ -8,7 +8,7 @@ import { CreateUserForm } from "./Form";
 
 export function UserCreate() {
   const userCreationMutation = useCreateUserMutation();
-  const { canGoBack, goBack } = useNavigationStack();
+  const { backLink } = useNavigationStack();
 
   useSetPageDetails({
     pageTitle: "Create User",
@@ -19,17 +19,7 @@ export function UserCreate() {
   return (
     <AppLayout>
       <SectionCenter>
-        <SectionBox
-          title={TitleLang.create("User")}
-          backLink={
-            canGoBack()
-              ? {
-                  action: goBack,
-                  label: "Go Back",
-                }
-              : undefined
-          }
-        >
+        <SectionBox title={TitleLang.create("User")} backLink={backLink}>
           <CreateUserForm
             onSubmit={async (user) => {
               await userCreationMutation.mutateAsync(user);

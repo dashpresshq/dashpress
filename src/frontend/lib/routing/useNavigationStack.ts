@@ -82,6 +82,14 @@ export const useNavigationStack = () => {
     TemporayStorageService.setString(key, JSON.stringify(history));
   }, [history]);
 
+  const goBack = () => {
+    const lastHistory = [...history].at(-2);
+
+    router.replace(lastHistory.link);
+  };
+
+  const canGoBack = () => history.length > 1;
+
   return useMemo(
     () => ({
       clear: () => {
@@ -107,12 +115,14 @@ export const useNavigationStack = () => {
 
         router.replace(lastHistory.link);
       },
-      goBack: () => {
-        const lastHistory = [...history].at(-2);
-
-        router.replace(lastHistory.link);
-      },
-      canGoBack: () => history.length > 1,
+      goBack,
+      canGoBack,
+      backLink: canGoBack()
+        ? {
+            action: goBack,
+            label: "Go Back",
+          }
+        : undefined,
     }),
     [typeof window, history, pageTitle, viewKey, pageLink]
   );

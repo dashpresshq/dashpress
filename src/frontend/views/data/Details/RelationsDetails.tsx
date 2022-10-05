@@ -24,7 +24,7 @@ export function EntityRelationDetails() {
   const entity = useEntitySlug();
   const childEntityCrudSettings = useEntityCrudSettings(childEntity);
 
-  const { canGoBack, goBack } = useNavigationStack();
+  const { backLink } = useNavigationStack();
 
   useSetPageDetails({
     pageTitle: `${childEntityDiction.singular} Details`,
@@ -51,14 +51,7 @@ export function EntityRelationDetails() {
     <DetailsLayout entity={entity} menuKey={childEntity}>
       <SectionBox
         title={TitleLang.details(childEntityDiction.singular)}
-        backLink={
-          canGoBack()
-            ? {
-                action: goBack,
-                label: "Go Back",
-              }
-            : undefined
-        }
+        backLink={backLink}
         iconButtons={actions.filter(({ crudSetting }) => crudSetting)}
       >
         <EntityDetailsView

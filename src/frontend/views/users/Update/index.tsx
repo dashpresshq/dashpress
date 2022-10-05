@@ -27,7 +27,7 @@ import { UpdateUserForm } from "./Update.Form";
 export function UserUpdate() {
   const updateUserMutation = useUpdateUserMutation();
   const resetPasswordMutation = useResetUserPasswordMutation();
-  const { canGoBack, goBack } = useNavigationStack();
+  const { backLink } = useNavigationStack();
   const username = useUsernameFromRouteParam();
   const userDetails = useUserDetails(username);
   const authenticatedUserBag = useAuthenticatedUserBag();
@@ -58,14 +58,7 @@ export function UserUpdate() {
               label: "System Profile Documentation",
             },
           ]}
-          backLink={
-            canGoBack()
-              ? {
-                  action: goBack,
-                  label: "Go Back",
-                }
-              : undefined
-          }
+          backLink={backLink}
         >
           <ViewStateMachine
             loading={isLoading}

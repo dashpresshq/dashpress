@@ -29,7 +29,7 @@ export function RolePermissions() {
   const rolePermissionDeletionMutation = useRolePermissionDeletionMutation();
   const rolePermissionCreationMutation = useCreateRolePermissionMutation();
 
-  const { canGoBack, goBack } = useNavigationStack();
+  const { backLink } = useNavigationStack();
 
   useSetPageDetails({
     pageTitle: "Role Permissions",
@@ -55,14 +55,7 @@ export function RolePermissions() {
       <SectionCenter>
         <SectionBox
           title={TitleLang.edit("Role Permission")}
-          backLink={
-            canGoBack()
-              ? {
-                  action: goBack,
-                  label: "Go Back",
-                }
-              : undefined
-          }
+          backLink={backLink}
           iconButtons={[
             {
               action: LINK_TO_DOCS("accounts/roles"),

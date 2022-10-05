@@ -8,7 +8,7 @@ import { CreateRoleForm } from "./Form";
 
 export function RoleCreate() {
   const roleCreationMutation = useCreateRoleMutation();
-  const { canGoBack, goBack } = useNavigationStack();
+  const { backLink } = useNavigationStack();
 
   useSetPageDetails({
     pageTitle: "Create Role",
@@ -19,17 +19,7 @@ export function RoleCreate() {
   return (
     <AppLayout>
       <SectionCenter>
-        <SectionBox
-          title={TitleLang.create("Role")}
-          backLink={
-            canGoBack()
-              ? {
-                  action: goBack,
-                  label: "Go Back",
-                }
-              : undefined
-          }
-        >
+        <SectionBox title={TitleLang.create("Role")} backLink={backLink}>
           <CreateRoleForm
             onSubmit={async (role) => {
               await roleCreationMutation.mutateAsync(role);

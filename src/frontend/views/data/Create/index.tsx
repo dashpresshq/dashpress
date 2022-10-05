@@ -36,21 +36,14 @@ export function EntityCreate() {
     "hidden_entity_create_columns"
   );
 
-  const { canGoBack, goBack } = useNavigationStack();
+  const { backLink } = useNavigationStack();
 
   return (
     <AppLayout actionItems={actionItems}>
       <SectionCenter>
         <SectionBox
           title={TitleLang.create(entityDiction.singular)}
-          backLink={
-            canGoBack()
-              ? {
-                  action: goBack,
-                  label: "Go Back",
-                }
-              : undefined
-          }
+          backLink={backLink}
         >
           <BaseEntityForm
             action="create"

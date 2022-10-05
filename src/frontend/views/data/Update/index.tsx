@@ -46,7 +46,7 @@ export function EntityUpdate() {
 
   const dataDetails = useEntityDataDetails(entity, id);
 
-  const { canGoBack, goBack } = useNavigationStack();
+  const { backLink } = useNavigationStack();
 
   return (
     <AppLayout actionItems={actionItems}>
@@ -58,14 +58,7 @@ export function EntityUpdate() {
               ? "For security reasons, Any data that is hidden in details view will not show up here, So rememeber to toggle on all fields there if you want to update them here"
               : undefined
           }
-          backLink={
-            canGoBack()
-              ? {
-                  action: goBack,
-                  label: "Go Back",
-                }
-              : undefined
-          }
+          backLink={backLink}
         >
           <BaseEntityForm
             action="update"

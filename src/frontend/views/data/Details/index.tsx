@@ -27,7 +27,7 @@ export function EntityDetails() {
     NAVIGATION_LINKS.ENTITY.TABLE(entity)
   );
 
-  const { canGoBack, goBack } = useNavigationStack();
+  const { backLink } = useNavigationStack();
 
   useSetPageDetails({
     pageTitle: `${entityDiction.singular} Details`,
@@ -39,14 +39,7 @@ export function EntityDetails() {
     <DetailsLayout entity={entity} menuKey={DETAILS_LAYOUT_KEY}>
       <SectionBox
         title={TitleLang.details(entityDiction.singular)}
-        backLink={
-          canGoBack()
-            ? {
-                action: goBack,
-                label: "Go Back",
-              }
-            : undefined
-        }
+        backLink={backLink}
         deleteAction={
           entityCrudSettings.data?.delete
             ? {

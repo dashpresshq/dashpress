@@ -11,7 +11,7 @@
     "build:clean": "rimraf .next/cache && rimraf .next/trace",
     "prepublishOnly": "npm run build && npm run build:clean",
     "setup-husky": "husky install",
-    "test": "jest --forceExit --runInBand",
+    "test": "jest --forceExit --logHeapUsage --runInBand",
     "typecheck": "tsc",
     "test:cov": "jest --coverage",
     "lint": "eslint --ext ts,tsx .",

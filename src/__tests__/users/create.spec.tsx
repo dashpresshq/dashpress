@@ -13,7 +13,7 @@ setupApiHandlers();
 describe("pages/users/create", () => {
   const useRouter = jest.spyOn(require("next/router"), "useRouter");
 
-  it("should create users", async () => {
+  it("should create new user", async () => {
     const pushMock = jest.fn();
     useRouter.mockImplementation(() => ({
       asPath: "/",

@@ -2,7 +2,7 @@ import { createMocks } from "node-mocks-http";
 import handler from "pages/api/healthcheck";
 
 describe("/api/healthcheck", () => {
-  it("sets up app successfuly", async () => {
+  it("should set up app successfuly", async () => {
     const { req, res } = createMocks({
       method: "GET",
     });

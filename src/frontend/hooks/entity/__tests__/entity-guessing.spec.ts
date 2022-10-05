@@ -6,7 +6,7 @@ import {
 } from "../guess";
 
 describe("getFieldTypeBoundedValidations", () => {
-  it("guess validations by type for single item array", () => {
+  it("should guess validations by type for single item array", () => {
     expect(getFieldTypeBoundedValidations("boolean")).toMatchInlineSnapshot(`
       [
         {
@@ -18,7 +18,7 @@ describe("getFieldTypeBoundedValidations", () => {
     `);
   });
 
-  it("guess validations by type for multiple items array", () => {
+  it("should guess validations by type for multiple items array", () => {
     expect(getFieldTypeBoundedValidations("text")).toMatchInlineSnapshot(`
       [
         {

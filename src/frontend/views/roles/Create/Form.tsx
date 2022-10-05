@@ -9,7 +9,7 @@ export function CreateRoleForm({ onSubmit }: IFormProps<ICreateRoleForm>) {
   return (
     <SchemaForm<ICreateRoleForm>
       onSubmit={onSubmit}
-      buttonText={ButtonLang.create}
+      buttonText={`${ButtonLang.create} Role`}
       fields={CREATE_ROLE_FORM_SCHEMA}
       resetForm
     />

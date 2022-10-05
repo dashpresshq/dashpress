@@ -12,7 +12,7 @@ describe("useChangeRouterParam", () => {
   beforeEach(() => {
     mockRouter.setCurrentUrl("/initial");
   });
-  it("pushes new url when called", () => {
+  it("should pushes new url when called", () => {
     const { result } = renderHook(() => useChangeRouterParam("foo"));
     expect(singletonRouter.asPath).toBe("/initial");
     act(() => {
@@ -23,22 +23,22 @@ describe("useChangeRouterParam", () => {
 });
 
 describe("upsertRouterPathQueryWithValue", () => {
-  it("replace router query string by path", () => {
+  it("should replace router query string by path", () => {
     expect(
       upsertRouterPathQueryWithValue("/foo/bar?key=changeme", "key", "newvalue")
     ).toBe("/foo/bar?key=newvalue");
   });
-  it("create new query key if key doesn't exist", () => {
+  it("should create new query key if key doesn't exist", () => {
     expect(
       upsertRouterPathQueryWithValue("/foo/bar?key=value", "newkey", "newvalue")
     ).toBe("/foo/bar?key=value&newkey=newvalue");
   });
-  it("create query paths if not query string", () => {
+  it("should create query paths if not query string", () => {
     expect(
       upsertRouterPathQueryWithValue("/foo/bar", "newkey", "newvalue")
     ).toBe("/foo/bar?newkey=newvalue");
   });
-  it("keep order of keys", () => {
+  it("should keep order of keys", () => {
     expect(
       upsertRouterPathQueryWithValue(
         "/foo/bar?key1=value1&key2=value2&key3=value3",

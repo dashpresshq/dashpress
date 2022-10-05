@@ -28,4 +28,10 @@ export const rolesApiHandlers = [
     ROLES = ROLES.filter(({ value }) => value !== req.params.roleId);
     return res(ctx.status(204));
   }),
+  rest.post(BASE_TEST_URL("/api/roles"), async (req, res, ctx) => {
+    if (JSON.stringify(await req.json()) === `{"name":"Some New Role"}`) {
+      return res(ctx.status(204));
+    }
+    return res(ctx.status(500));
+  }),
 ];

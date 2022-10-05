@@ -1,6 +1,5 @@
 import {
   makeDeleteRequest,
-  makePatchRequest,
   makePostRequest,
   MutationsLang,
   useWaitForResponseMutationOptions,
@@ -9,9 +8,7 @@ import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
 import { useRouter } from "next/router";
 import { useMutation } from "react-query";
 import { ICreateRoleForm } from "shared/form-schemas/roles/create";
-import { IUpdateRoleForm } from "shared/form-schemas/roles/update";
 import { makeRoleId } from "shared/types";
-import { useRoleIdFromRouteParam } from "./hooks";
 
 export const ADMIN_ROLES_ENDPOINT = "/api/roles";
 
@@ -34,20 +31,6 @@ export function useRoleDeletionMutation() {
   return useMutation(
     async (roleId: string) =>
       await makeDeleteRequest(ADMIN_ROLES_DETAILS_ENDPOINT(roleId)),
-    apiMutateOptions
-  );
-}
-
-export function useUpdateRoleMutation() {
-  const roleId = useRoleIdFromRouteParam();
-  const apiMutateOptions = useWaitForResponseMutationOptions<void>({
-    endpoints: [ADMIN_ROLES_ENDPOINT, ADMIN_ROLES_DETAILS_ENDPOINT(roleId)],
-    successMessage: MutationsLang.edit("User"),
-  });
-
-  return useMutation(
-    async (data: Partial<IUpdateRoleForm>) =>
-      await makePatchRequest(ADMIN_ROLES_DETAILS_ENDPOINT(roleId), data),
     apiMutateOptions
   );
 }

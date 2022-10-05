@@ -34,15 +34,3 @@ describe("pages/admin (Dashboard)", () => {
     ).toBeInTheDocument();
   });
 });
-
-// test("handles login exception", () => {
-//   server.use(
-//     rest.post("/login", (req, res, ctx) => {
-//       // Respond with "500 Internal Server Error" status for this test.
-//       return res(
-//         ctx.status(500),
-//         ctx.json({ message: "Internal Server Error" })
-//       );
-//     })
-//   );
-// });

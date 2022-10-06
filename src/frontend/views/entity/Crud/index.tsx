@@ -144,7 +144,10 @@ function useEntityCrudView() {
           upsertDetailsColumnsMutation.mutateAsync(data);
         }}
         enabled={entityCrudSettingsState.details}
-        labels={["Hide Details Button", "Show Details Button"]}
+        labels={[
+          "Disable Details Functionality ",
+          "Enable Details Functionality",
+        ]}
       />
     ),
     [ENTITY_CRUD_SETTINGS_TAB_LABELS.CREATE]: (
@@ -159,7 +162,7 @@ function useEntityCrudView() {
         }}
         onToggle={() => toggleCrudSettings("create")}
         enabled={entityCrudSettingsState.create}
-        labels={["Hide Create Button", "Show Create Button"]}
+        labels={["Disable Create Functionality", "Enable Create Functionality"]}
       />
     ),
     [ENTITY_CRUD_SETTINGS_TAB_LABELS.UPDATE]: (
@@ -175,7 +178,7 @@ function useEntityCrudView() {
         }}
         // TODO If you enable update then enable details
         enabled={entityCrudSettingsState.update}
-        labels={["Hide Edit Button", "Show Edit Button"]}
+        labels={["Disable Edit Functionality", "Enable Edit Functionality"]}
       />
     ),
     [ENTITY_CRUD_SETTINGS_TAB_LABELS.DELETE]: (
@@ -188,7 +191,7 @@ function useEntityCrudView() {
         getEntityFieldLabels={() => "Shoud not see this"}
         onSubmit={async () => noop()}
         enabled={entityCrudSettingsState.delete}
-        labels={["Hide Delete Button", "Show Delete Button"]}
+        labels={["Disable Delete Functionality", "Enable Delete Functionality"]}
       />
     ),
   };
@@ -204,26 +207,26 @@ export function EntityCrudSettings() {
     permission: USER_PERMISSIONS.CAN_CONFIGURE_APP,
   });
   return (
-    <BaseEntitySettingsLayout>
-      <SectionBox
-        title="CRUD Settings"
-        iconButtons={[
-          {
-            action: LINK_TO_DOCS("app-configuration/crud"),
-            icon: "help",
-            label: "CRUD Settings Documentation",
-          },
-        ]}
-      >
-        <Tabs
-          currentTab={tabFromUrl}
-          onChange={changeTabParam}
-          contents={Object.entries(entityCrudView).map(([key, value]) => ({
-            label: key,
-            content: value,
-          }))}
-        />
-      </SectionBox>
-    </BaseEntitySettingsLayout>
+    // <BaseEntitySettingsLayout>
+    //   <SectionBox
+    //     title="CRUD Settings"
+    //     iconButtons={[
+    //       {
+    //         action: LINK_TO_DOCS("app-configuration/crud"),
+    //         icon: "help",
+    //         label: "CRUD Settings Documentation",
+    //       },
+    //     ]}
+    //   >
+    <Tabs
+      currentTab={tabFromUrl}
+      onChange={changeTabParam}
+      contents={Object.entries(entityCrudView).map(([key, value]) => ({
+        label: key,
+        content: value,
+      }))}
+    />
+    //   </SectionBox>
+    // </BaseEntitySettingsLayout>
   );
 }

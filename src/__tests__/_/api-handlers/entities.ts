@@ -1,4 +1,5 @@
 import { rest } from "msw";
+import { IEntityField } from "shared/types";
 import { BASE_TEST_URL } from "./_utils";
 
 export const entitiesApiHandlers = [
@@ -46,4 +47,49 @@ export const entitiesApiHandlers = [
       ])
     );
   }),
+
+  rest.get(
+    BASE_TEST_URL("/api/entities/:entity/field"),
+    async (req, res, ctx) => {
+      const fields: IEntityField[] = [
+        {
+          name: `${req.params.entity}-field-1`,
+          isRequired: true,
+          isId: true,
+          type: "number",
+        },
+        {
+          name: `${req.params.entity}-field-2`,
+          isReference: true,
+          type: "string",
+        },
+
+        {
+          name: `${req.params.entity}-field-3`,
+          isRequired: true,
+          type: "string",
+          length: 30,
+        },
+        {
+          name: `${req.params.entity}-field-4`,
+          type: "number",
+          length: 30,
+        },
+        {
+          name: `${req.params.entity}-field-5`,
+          type: "boolean",
+        },
+        {
+          name: `${req.params.entity}-field-6`,
+          type: "date",
+        },
+        {
+          name: `${req.params.entity}-field-7`,
+          type: "enum",
+          enumeration: ["foo", "bar"],
+        },
+      ];
+      return res(ctx.json(fields));
+    }
+  ),
 ];

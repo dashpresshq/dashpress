@@ -22,16 +22,10 @@ let ROLES = [
 
 let PERMISSIONS = [
   "CAN_MANAGE_USER",
-  // "CAN_CONFIGURE_APP",
   "CAN_RESET_PASSWORD",
-  // "CAN_MANAGE_DASHBOARD",
   "CAN_MANAGE_PERMISSIONS",
   "CAN_ACCESS_ENTITY:ALL_ENTITIES",
-
-  // "CAN_ACCESS_ENTITY:ENTITY-1",
   "CAN_ACCESS_ENTITY:ENTITY-2",
-  // "CAN_ACCESS_ENTITY:ENTITY-3",
-  // "CAN_ACCESS_ENTITY:DISABLED-ENTITY-1",
   "CAN_ACCESS_ENTITY:DISABLED-ENTITY-2",
 ];
 
@@ -58,7 +52,7 @@ export const rolesApiHandlers = [
     async (req, res, ctx) => {
       const { permission } = await req.json();
       PERMISSIONS = PERMISSIONS.filter(
-        (permission$1) => permission$1 === permission
+        (permission$1) => permission$1 !== permission
       );
       return res(ctx.json(204));
     }

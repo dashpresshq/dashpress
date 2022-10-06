@@ -34,7 +34,7 @@ describe("pages/admin/settings/entities", () => {
     });
 
     expect(
-      await screen.findByRole("checkbox", { name: "Plural disabled-entity-2" })
+      screen.getByRole("checkbox", { name: "Plural disabled-entity-2" })
     ).not.toBeChecked();
 
     expect(

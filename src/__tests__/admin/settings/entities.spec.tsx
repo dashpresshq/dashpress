@@ -25,17 +25,27 @@ describe("pages/admin/settings/entities", () => {
       </AppWrapper>
     );
 
-    const allCheckBoxes = await screen.findAllByRole("checkbox");
-
-    expect(allCheckBoxes).toHaveLength(5);
-
-    expect(allCheckBoxes[0]).toBeChecked();
-    expect(allCheckBoxes[1]).toBeChecked();
-    expect(allCheckBoxes[2]).toBeChecked();
-    await waitFor(() => {
-      expect(allCheckBoxes[3]).not.toBeChecked();
+    await waitFor(async () => {
+      expect(
+        await screen.findByRole("checkbox", {
+          name: "Plural disabled-entity-1",
+        })
+      ).not.toBeChecked();
     });
-    expect(allCheckBoxes[4]).not.toBeChecked();
+
+    expect(
+      await screen.findByRole("checkbox", { name: "Plural disabled-entity-2" })
+    ).not.toBeChecked();
+
+    expect(
+      screen.getByRole("checkbox", { name: "Plural entity-1" })
+    ).toBeChecked();
+    expect(
+      screen.getByRole("checkbox", { name: "Plural entity-2" })
+    ).toBeChecked();
+    expect(
+      screen.getByRole("checkbox", { name: "Plural entity-3" })
+    ).toBeChecked();
   });
 
   it("should toogle entities state successfully", async () => {
@@ -45,14 +55,12 @@ describe("pages/admin/settings/entities", () => {
       </AppWrapper>
     );
 
-    const allCheckBoxes = await screen.findAllByRole("checkbox");
-
-    userEvent.click(allCheckBoxes[0]);
-    userEvent.click(allCheckBoxes[0]);
-
-    userEvent.click(allCheckBoxes[1]);
-
-    userEvent.click(allCheckBoxes[3]);
+    userEvent.click(screen.getByRole("checkbox", { name: "Plural entity-1" }));
+    userEvent.click(screen.getByRole("checkbox", { name: "Plural entity-1" }));
+    userEvent.click(screen.getByRole("checkbox", { name: "Plural entity-2" }));
+    userEvent.click(
+      screen.getByRole("checkbox", { name: "Plural disabled-entity-2" })
+    );
 
     await userEvent.click(
       screen.getAllByRole("button", { name: "Save Changes" })[0]
@@ -70,14 +78,24 @@ describe("pages/admin/settings/entities", () => {
       </AppWrapper>
     );
 
-    const allCheckBoxes = await screen.findAllByRole("checkbox");
+    expect(
+      screen.getByRole("checkbox", { name: "Plural entity-1" })
+    ).toBeChecked();
 
-    expect(allCheckBoxes[0]).toBeChecked();
     await waitFor(() => {
-      expect(allCheckBoxes[1]).not.toBeChecked();
+      expect(
+        screen.getByRole("checkbox", { name: "Plural entity-2" })
+      ).not.toBeChecked();
     });
-    expect(allCheckBoxes[2]).toBeChecked();
-    expect(allCheckBoxes[3]).toBeChecked();
-    expect(allCheckBoxes[4]).not.toBeChecked();
+    expect(
+      screen.getByRole("checkbox", { name: "Plural entity-3" })
+    ).toBeChecked();
+
+    expect(
+      screen.getByRole("checkbox", { name: "Plural disabled-entity-1" })
+    ).not.toBeChecked();
+    expect(
+      screen.getByRole("checkbox", { name: "Plural disabled-entity-2" })
+    ).toBeChecked();
   });
 });

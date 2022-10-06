@@ -74,7 +74,6 @@ export function RolePermissions() {
               {allList.length > 0 && (
                 <RenderList
                   items={allList.map((listItem) => ({ name: listItem }))}
-                  singular="Entity"
                   render={(menuItem) => {
                     const isPermissionSelected = rolePermissions.data.includes(
                       menuItem.name

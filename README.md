@@ -52,8 +52,7 @@ Hadmean is a no-code, internal tool generator. It is language agnostic, schema d
 Here is an application built with Hadmean in under 30 seconds with just database configuration https://hadmean-demo.up.railway.app
 
 ### Quick Demo
-
-https://user-images.githubusercontent.com/51802801/187038561-73b8a86d-ab97-4efc-97d6-585cc4fb9f00.mp4
+https://www.loom.com/share/cd2f39681ecf4677a431eb2825339db8
 
 
 ### Motivation

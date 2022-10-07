@@ -188,7 +188,6 @@ function useEntityCrudView() {
         error={error}
         onToggle={() => toggleCrudSettings("delete")}
         hiddenColumns={[]}
-        getEntityFieldLabels={() => "Shoud not see this"}
         onSubmit={async () => noop()}
         enabled={entityCrudSettingsState.delete}
         labels={["Disable Delete Functionality", "Enable Delete Functionality"]}

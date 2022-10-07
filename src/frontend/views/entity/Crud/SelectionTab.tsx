@@ -19,7 +19,7 @@ interface IProps {
   hiddenColumns: string[];
   onSubmit: (columnsSelection: string[]) => Promise<void>;
   enabled: boolean;
-  getEntityFieldLabels: (fieldName: string) => string;
+  getEntityFieldLabels?: (fieldName: string) => string;
   labels: [string, string];
 }
 
@@ -75,7 +75,7 @@ export function SelectionTab({
 
               return (
                 <SectionListItem
-                  label={getEntityFieldLabels(menuItem.name)}
+                  label={getEntityFieldLabels?.(menuItem.name)}
                   key={menuItem.name}
                   disabled={!enabled}
                   toggle={

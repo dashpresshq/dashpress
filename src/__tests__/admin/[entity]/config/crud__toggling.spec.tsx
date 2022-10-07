@@ -32,40 +32,23 @@ describe("pages/admin/[entity]/config/crud", () => {
 
   const useRouter = jest.spyOn(require("next/router"), "useRouter");
 
-  describe("Details", () => {
-    useRouter.mockImplementation(() => ({
-      asPath: "/",
-      query: {
-        entity: "entity-1",
-        tab: "Details",
-      },
-    }));
-
-    it("should go to toggle off details functionality", async () => {
-      render(
-        <AppWrapper>
-          <EntityCrudSettings />
-        </AppWrapper>
-      );
-
-      await userEvent.click(
-        await screen.findByRole("button", {
-          name: "Disable Details Functionality",
-        })
-      );
-
-      expect(await screen.findByRole("status")).toHaveTextContent(
-        "App Settings Saved Successfully"
-      );
-
-      expect(
-        screen.queryByRole("button", {
-          name: "Disable Details Functionality",
-        })
-      ).not.toBeInTheDocument();
+  describe.each([
+    { tab: "Details" },
+    { tab: "Create" },
+    { tab: "Update" },
+    { tab: "Delete" },
+  ])("$tab feature", ({ tab }) => {
+    beforeAll(() => {
+      useRouter.mockImplementation(() => ({
+        asPath: "/",
+        query: {
+          entity: "entity-1",
+          tab,
+        },
+      }));
     });
 
-    it("should go to toggle on details functionality", async () => {
+    it("should toggle off functionality", async () => {
       render(
         <AppWrapper>
           <EntityCrudSettings />
@@ -74,7 +57,7 @@ describe("pages/admin/[entity]/config/crud", () => {
 
       await userEvent.click(
         await screen.findByRole("button", {
-          name: "Enable Details Functionality",
+          name: `Disable ${tab} Functionality`,
         })
       );
 
@@ -84,7 +67,31 @@ describe("pages/admin/[entity]/config/crud", () => {
 
       expect(
         screen.queryByRole("button", {
-          name: "Enable Details Functionality",
+          name: `Disable ${tab} Functionality`,
+        })
+      ).not.toBeInTheDocument();
+    });
+
+    it("should toggle on functionality", async () => {
+      render(
+        <AppWrapper>
+          <EntityCrudSettings />
+        </AppWrapper>
+      );
+
+      await userEvent.click(
+        await screen.findByRole("button", {
+          name: `Enable ${tab} Functionality`,
+        })
+      );
+
+      expect((await screen.findAllByRole("status"))[0]).toHaveTextContent(
+        "App Settings Saved Successfully"
+      );
+
+      expect(
+        screen.queryByRole("button", {
+          name: `Enable ${tab} Functionality`,
         })
       ).not.toBeInTheDocument();
     });

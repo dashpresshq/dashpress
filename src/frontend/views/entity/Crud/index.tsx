@@ -178,7 +178,7 @@ function useEntityCrudView() {
         }}
         // TODO If you enable update then enable details
         enabled={entityCrudSettingsState.update}
-        labels={["Disable Edit Functionality", "Enable Edit Functionality"]}
+        labels={["Disable Update Functionality", "Enable Update Functionality"]}
       />
     ),
     [ENTITY_CRUD_SETTINGS_TAB_LABELS.DELETE]: (
@@ -207,26 +207,26 @@ export function EntityCrudSettings() {
     permission: USER_PERMISSIONS.CAN_CONFIGURE_APP,
   });
   return (
-    // <BaseEntitySettingsLayout>
-    //   <SectionBox
-    //     title="CRUD Settings"
-    //     iconButtons={[
-    //       {
-    //         action: LINK_TO_DOCS("app-configuration/crud"),
-    //         icon: "help",
-    //         label: "CRUD Settings Documentation",
-    //       },
-    //     ]}
-    //   >
-    <Tabs
-      currentTab={tabFromUrl}
-      onChange={changeTabParam}
-      contents={Object.entries(entityCrudView).map(([key, value]) => ({
-        label: key,
-        content: value,
-      }))}
-    />
-    //   </SectionBox>
-    // </BaseEntitySettingsLayout>
+    <BaseEntitySettingsLayout>
+      <SectionBox
+        title="CRUD Settings"
+        iconButtons={[
+          {
+            action: LINK_TO_DOCS("app-configuration/crud"),
+            icon: "help",
+            label: "CRUD Settings Documentation",
+          },
+        ]}
+      >
+        <Tabs
+          currentTab={tabFromUrl}
+          onChange={changeTabParam}
+          contents={Object.entries(entityCrudView).map(([key, value]) => ({
+            label: key,
+            content: value,
+          }))}
+        />
+      </SectionBox>
+    </BaseEntitySettingsLayout>
   );
 }

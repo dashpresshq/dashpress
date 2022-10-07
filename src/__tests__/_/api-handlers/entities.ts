@@ -49,7 +49,7 @@ export const entitiesApiHandlers = [
   }),
 
   rest.get(
-    BASE_TEST_URL("/api/entities/:entity/field"),
+    BASE_TEST_URL("/api/entities/:entity/fields"),
     async (req, res, ctx) => {
       const fields: IEntityField[] = [
         {

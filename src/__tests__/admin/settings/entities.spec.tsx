@@ -87,6 +87,7 @@ describe("pages/admin/settings/entities", () => {
         screen.getByRole("checkbox", { name: "Plural entity-2" })
       ).not.toBeChecked();
     });
+
     expect(
       screen.getByRole("checkbox", { name: "Plural entity-3" })
     ).toBeChecked();

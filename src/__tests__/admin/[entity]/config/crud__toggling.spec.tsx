@@ -1,6 +1,6 @@
 import "@testing-library/jest-dom";
 import React from "react";
-import { render, screen } from "@testing-library/react";
+import { render, screen, within } from "@testing-library/react";
 import { AppWrapper } from "@hadmean/chromista";
 import userEvent from "@testing-library/user-event";
 import EntityCrudSettings from "pages/admin/[entity]/config/crud";
@@ -21,7 +21,6 @@ describe("pages/admin/[entity]/config/crud", () => {
             {
               name: `field-1`,
               isRequired: true,
-              isId: true,
               type: "number",
             },
           ])
@@ -91,18 +90,31 @@ describe("pages/admin/[entity]/config/crud", () => {
         </AppWrapper>
       );
 
+      const currentTab = screen.getByRole("tabpanel");
+
+      if (tab !== "Delete") {
+        expect(
+          await within(currentTab).findByRole("checkbox", { name: "Field 1" })
+        ).toBeInTheDocument();
+      }
+
       await userEvent.click(
-        await screen.findByRole("button", {
+        await within(currentTab).findByRole("button", {
           name: `Disable ${tab} Functionality`,
         })
       );
+      if (tab !== "Delete") {
+        expect(
+          within(currentTab).queryByRole("checkbox", { name: "Field 1" })
+        ).not.toBeInTheDocument();
+      }
 
       expect((await screen.findAllByRole("status"))[0]).toHaveTextContent(
         "App Settings Saved Successfully"
       );
 
       expect(
-        screen.queryByRole("button", {
+        within(currentTab).queryByRole("button", {
           name: `Disable ${tab} Functionality`,
         })
       ).not.toBeInTheDocument();
@@ -115,18 +127,24 @@ describe("pages/admin/[entity]/config/crud", () => {
         </AppWrapper>
       );
 
+      const currentTab = screen.getByRole("tabpanel");
+
       await userEvent.click(
-        await screen.findByRole("button", {
+        await within(currentTab).findByRole("button", {
           name: `Enable ${tab} Functionality`,
         })
       );
-
+      if (tab !== "Delete") {
+        expect(
+          within(currentTab).getByRole("checkbox", { name: "Field 1" })
+        ).toBeInTheDocument();
+      }
       expect((await screen.findAllByRole("status"))[0]).toHaveTextContent(
         "App Settings Saved Successfully"
       );
 
       expect(
-        screen.queryByRole("button", {
+        within(currentTab).queryByRole("button", {
           name: `Enable ${tab} Functionality`,
         })
       ).not.toBeInTheDocument();

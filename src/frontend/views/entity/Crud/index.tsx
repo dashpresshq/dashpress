@@ -128,7 +128,7 @@ function useEntityCrudView() {
         }}
         enabled
         error={error}
-        label="Table"
+        label={ENTITY_CRUD_SETTINGS_TAB_LABELS.TABLE}
       />
     ),
     [ENTITY_CRUD_SETTINGS_TAB_LABELS.DETAILS]: (
@@ -144,7 +144,7 @@ function useEntityCrudView() {
           upsertDetailsColumnsMutation.mutateAsync(data);
         }}
         enabled={entityCrudSettingsState.details}
-        label="Details"
+        label={ENTITY_CRUD_SETTINGS_TAB_LABELS.DETAILS}
       />
     ),
     [ENTITY_CRUD_SETTINGS_TAB_LABELS.CREATE]: (
@@ -159,7 +159,7 @@ function useEntityCrudView() {
         }}
         onToggle={() => toggleCrudSettings("create")}
         enabled={entityCrudSettingsState.create}
-        label="Create"
+        label={ENTITY_CRUD_SETTINGS_TAB_LABELS.CREATE}
       />
     ),
     [ENTITY_CRUD_SETTINGS_TAB_LABELS.UPDATE]: (
@@ -175,7 +175,7 @@ function useEntityCrudView() {
         }}
         // TODO If you enable update then enable details
         enabled={entityCrudSettingsState.update}
-        label="Update"
+        label={ENTITY_CRUD_SETTINGS_TAB_LABELS.UPDATE}
       />
     ),
     [ENTITY_CRUD_SETTINGS_TAB_LABELS.DELETE]: (
@@ -187,7 +187,7 @@ function useEntityCrudView() {
         hiddenColumns={[]}
         onSubmit={async () => noop()}
         enabled={entityCrudSettingsState.delete}
-        label="Delete"
+        label={ENTITY_CRUD_SETTINGS_TAB_LABELS.DELETE}
       />
     ),
   };

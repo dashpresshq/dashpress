@@ -1,8 +1,16 @@
 <h1 align="center">
   <a href="https://github.com/hadmean/hadmean">
-    <img src="./public/assets/images/full-logo-white.png" alt="Logo" height="100">
+    <img src="public/assets/images/full-logo-white.png" alt="Logo" height="100">
   </a>
 </h1>
+
+<div align="center">
+
+[![Project license](https://img.shields.io/github/license/hadmean/hadmean.svg?style=flat-square)](LICENSE)
+[![Pull Requests welcome](https://img.shields.io/badge/PRs-welcome-ff69b4.svg?style=flat-square)](https://github.com/hadmean/hadmean/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22)
+
+</div>
+
 
 <div align="center">
   <a href="https://hadmean-demo.up.railway.app" target="_blank">Live Demo</a>
@@ -12,13 +20,6 @@
   <a href="https://hadmean.github.io/hadmean/" target="_blank">Documentation</a>
 </div>
 
-<div align="center">
-<br />
-
-[![Project license](https://img.shields.io/github/license/hadmean/hadmean.svg?style=flat-square)](LICENSE)
-[![Pull Requests welcome](https://img.shields.io/badge/PRs-welcome-ff69b4.svg?style=flat-square)](https://github.com/hadmean/hadmean/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22)
-
-</div>
 
 <details open="open">
 <summary>Table of Contents</summary>

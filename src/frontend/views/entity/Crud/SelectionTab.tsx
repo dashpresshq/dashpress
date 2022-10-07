@@ -20,13 +20,13 @@ interface IProps {
   onSubmit: (columnsSelection: string[]) => Promise<void>;
   enabled: boolean;
   getEntityFieldLabels?: (fieldName: string) => string;
-  labels: [string, string];
+  label: string;
 }
 
 export function SelectionTab({
   entityFields,
   isLoading,
-  labels,
+  label,
   getEntityFieldLabels,
   enabled,
   error,
@@ -45,7 +45,9 @@ export function SelectionTab({
     selectMutiple(hiddenColumns);
   }, [hiddenColumns]);
 
-  const enableDisableLabel = enabled ? labels[0] : labels[1];
+  const enableDisableLabel = enabled
+    ? `Disable ${label} Functionality`
+    : `Enable ${label} Functionality`;
 
   return (
     <ViewStateMachine

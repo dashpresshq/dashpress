@@ -52,7 +52,12 @@ describe("pages/admin/[entity]/config/crud", () => {
     ).toHaveTextContent("Table");
   });
 
-  it("should go to details", async () => {
+  it.each([
+    { tab: "Details" },
+    { tab: "Create" },
+    { tab: "Update" },
+    { tab: "Delete" },
+  ])("should be tab-able to $tab", async ({ tab }) => {
     render(
       <AppWrapper>
         <EntityCrudSettings />
@@ -60,105 +65,22 @@ describe("pages/admin/[entity]/config/crud", () => {
     );
     expect(
       await screen.findByRole("button", {
-        name: "Disable Details Functionality",
+        name: `Disable ${tab} Functionality`,
         hidden: true,
       })
     ).not.toBeVisible();
 
-    await userEvent.click(screen.getByRole("tab", { name: "Details" }));
+    await userEvent.click(screen.getByRole("tab", { name: tab }));
 
-    expect(screen.getByRole("tab", { selected: true })).toHaveTextContent(
-      "Details"
-    );
+    expect(screen.getByRole("tab", { selected: true })).toHaveTextContent(tab);
 
     expect(
       await screen.findByRole("button", {
-        name: "Disable Details Functionality",
+        name: `Disable ${tab} Functionality`,
       })
     ).toBeVisible();
 
-    expect(replaceMock).toHaveBeenCalledWith(
-      "/hello-there?foo=bar&tab=Details"
-    );
-  });
-
-  it("should go to create", async () => {
-    render(
-      <AppWrapper>
-        <EntityCrudSettings />
-      </AppWrapper>
-    );
-    expect(
-      screen.queryByRole("button", {
-        name: "Disable Create Functionality",
-        hidden: true,
-      })
-    ).not.toBeVisible();
-
-    await userEvent.click(screen.getByRole("tab", { name: "Create" }));
-
-    expect(screen.getByRole("tab", { selected: true })).toHaveTextContent(
-      "Create"
-    );
-
-    expect(
-      screen.getByRole("button", { name: "Disable Create Functionality" })
-    ).toBeVisible();
-
-    expect(replaceMock).toHaveBeenCalledWith("/hello-there?foo=bar&tab=Create");
-  });
-
-  it("should go to update", async () => {
-    render(
-      <AppWrapper>
-        <EntityCrudSettings />
-      </AppWrapper>
-    );
-    expect(
-      screen.queryByRole("button", {
-        name: "Disable Update Functionality",
-        hidden: true,
-      })
-    ).not.toBeVisible();
-
-    await userEvent.click(screen.getByRole("tab", { name: "Update" }));
-
-    expect(screen.getByRole("tab", { selected: true })).toHaveTextContent(
-      "Update"
-    );
-
-    expect(
-      screen.getByRole("button", { name: "Disable Update Functionality" })
-    ).toBeVisible();
-
-    expect(replaceMock).toHaveBeenCalledWith("/hello-there?foo=bar&tab=Update");
-  });
-
-  it("should go to delete", async () => {
-    render(
-      <AppWrapper>
-        <EntityCrudSettings />
-      </AppWrapper>
-    );
-
-    expect(
-      screen.queryByRole("button", {
-        name: "Disable Delete Functionality",
-        hidden: true,
-      })
-    ).not.toBeVisible();
-
-    await userEvent.click(screen.getByRole("tab", { name: "Delete" }));
-
-    expect(screen.getByRole("tab", { selected: true })).toHaveTextContent(
-      "Delete"
-    );
-
-    expect(
-      screen.getByRole("button", { name: "Disable Delete Functionality" })
-    ).toBeVisible();
-
-    expect(replaceMock).toHaveBeenCalledWith("/hello-there?foo=bar&tab=Delete");
+    expect(replaceMock).toHaveBeenCalledWith(`/hello-there?foo=bar&tab=${tab}`);
   });
 
   it("should default to the tab from query and be to go back to table", async () => {

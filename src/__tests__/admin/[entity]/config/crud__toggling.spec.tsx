@@ -32,6 +32,42 @@ describe("pages/admin/[entity]/config/crud", () => {
 
   const useRouter = jest.spyOn(require("next/router"), "useRouter");
 
+  it("should not have toggling functionality for tables", async () => {
+    useRouter.mockImplementation(() => ({
+      asPath: "/",
+      query: {
+        entity: "entity-1",
+      },
+    }));
+    render(
+      <AppWrapper>
+        <EntityCrudSettings />
+      </AppWrapper>
+    );
+
+    expect(
+      await screen.findByRole("button", {
+        name: `Disable Create Functionality`,
+        hidden: true,
+      })
+    ).not.toBeVisible();
+
+    expect(
+      await screen.findByRole("tab", { selected: true })
+    ).toHaveTextContent("Table");
+
+    expect(
+      screen.queryByRole("button", {
+        name: `Disable Table Functionality`,
+      })
+    ).not.toBeInTheDocument();
+    expect(
+      screen.queryByRole("button", {
+        name: `Enable Table Functionality`,
+      })
+    ).not.toBeInTheDocument();
+  });
+
   describe.each([
     { tab: "Details" },
     { tab: "Create" },

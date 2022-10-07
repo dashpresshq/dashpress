@@ -1,5 +1,4 @@
 import { Tabs, SectionBox } from "@hadmean/chromista";
-import noop from "lodash/noop";
 import { useEffect, useState } from "react";
 import {
   ENTITY_LIST_PATH,
@@ -119,75 +118,90 @@ function useEntityCrudView() {
   return {
     [ENTITY_CRUD_SETTINGS_TAB_LABELS.TABLE]: (
       <SelectionTab
-        getEntityFieldLabels={getEntityFieldLabels}
-        entityFields={entityFields.data || []}
-        isLoading={sharedLoading || hiddenTableColumns.isLoading}
-        hiddenColumns={hiddenTableColumns.data || []}
-        onSubmit={async (data) => {
-          upsertTableColumnsMutation.mutateAsync(data);
+        columns={{
+          fields: entityFields.data || [],
+          submit: async (data) => {
+            await upsertTableColumnsMutation.mutateAsync(data);
+          },
+          hidden: hiddenTableColumns.data || [],
+          getEntityFieldLabels,
         }}
-        enabled
+        isLoading={sharedLoading || hiddenTableColumns.isLoading}
+        enabled={{
+          enabled: true,
+          label: ENTITY_CRUD_SETTINGS_TAB_LABELS.TABLE,
+        }}
         error={error}
-        label={ENTITY_CRUD_SETTINGS_TAB_LABELS.TABLE}
       />
     ),
     [ENTITY_CRUD_SETTINGS_TAB_LABELS.DETAILS]: (
       <SelectionTab
-        getEntityFieldLabels={getEntityFieldLabels}
-        entityFields={entityFields.data || []}
-        isLoading={sharedLoading || hiddenDetailsColumns.isLoading}
-        hiddenColumns={hiddenDetailsColumns.data || []}
-        onToggle={() => toggleCrudSettings("details")}
-        error={error}
-        // TODO if you disable details then disable update
-        onSubmit={async (data) => {
-          upsertDetailsColumnsMutation.mutateAsync(data);
+        columns={{
+          fields: entityFields.data || [],
+          submit: async (data) => {
+            await upsertDetailsColumnsMutation.mutateAsync(data);
+          },
+          hidden: hiddenDetailsColumns.data || [],
+          getEntityFieldLabels,
         }}
-        enabled={entityCrudSettingsState.details}
-        label={ENTITY_CRUD_SETTINGS_TAB_LABELS.DETAILS}
+        isLoading={sharedLoading || hiddenDetailsColumns.isLoading}
+        error={error}
+        enabled={{
+          onToggle: () => toggleCrudSettings("details"),
+          // TODO if you disable details then disable update
+          enabled: entityCrudSettingsState.details,
+          label: ENTITY_CRUD_SETTINGS_TAB_LABELS.DETAILS,
+        }}
       />
     ),
     [ENTITY_CRUD_SETTINGS_TAB_LABELS.CREATE]: (
       <SelectionTab
-        getEntityFieldLabels={getEntityFieldLabels}
-        entityFields={(entityFields.data || []).filter(({ isId }) => !isId)}
-        isLoading={sharedLoading || hiddenCreateColumns.isLoading}
-        hiddenColumns={hiddenCreateColumns.data || []}
-        error={error}
-        onSubmit={async (data) => {
-          await upsertCreateColumnsMutation.mutateAsync(data);
+        columns={{
+          fields: (entityFields.data || []).filter(({ isId }) => !isId),
+          submit: async (data) => {
+            await upsertCreateColumnsMutation.mutateAsync(data);
+          },
+          hidden: hiddenCreateColumns.data || [],
+          getEntityFieldLabels,
         }}
-        onToggle={() => toggleCrudSettings("create")}
-        enabled={entityCrudSettingsState.create}
-        label={ENTITY_CRUD_SETTINGS_TAB_LABELS.CREATE}
+        isLoading={sharedLoading || hiddenCreateColumns.isLoading}
+        error={error}
+        enabled={{
+          onToggle: () => toggleCrudSettings("create"),
+          enabled: entityCrudSettingsState.create,
+          label: ENTITY_CRUD_SETTINGS_TAB_LABELS.CREATE,
+        }}
       />
     ),
     [ENTITY_CRUD_SETTINGS_TAB_LABELS.UPDATE]: (
       <SelectionTab
-        getEntityFieldLabels={getEntityFieldLabels}
-        entityFields={(entityFields.data || []).filter(({ isId }) => !isId)}
-        isLoading={sharedLoading || hiddenUpdateColumns.isLoading}
-        hiddenColumns={hiddenUpdateColumns.data || []}
-        error={error}
-        onToggle={() => toggleCrudSettings("update")}
-        onSubmit={async (data) => {
-          await upsertUpdateColumnsMutation.mutateAsync(data);
+        columns={{
+          fields: (entityFields.data || []).filter(({ isId }) => !isId),
+          submit: async (data) => {
+            await upsertUpdateColumnsMutation.mutateAsync(data);
+          },
+          hidden: hiddenUpdateColumns.data || [],
+          getEntityFieldLabels,
         }}
-        // TODO If you enable update then enable details
-        enabled={entityCrudSettingsState.update}
-        label={ENTITY_CRUD_SETTINGS_TAB_LABELS.UPDATE}
+        enabled={{
+          onToggle: () => toggleCrudSettings("update"),
+          // TODO If you enable update then enable details
+          enabled: entityCrudSettingsState.update,
+          label: ENTITY_CRUD_SETTINGS_TAB_LABELS.UPDATE,
+        }}
+        isLoading={sharedLoading || hiddenUpdateColumns.isLoading}
+        error={error}
       />
     ),
     [ENTITY_CRUD_SETTINGS_TAB_LABELS.DELETE]: (
       <SelectionTab
-        entityFields={[]}
         isLoading={false}
         error={error}
-        onToggle={() => toggleCrudSettings("delete")}
-        hiddenColumns={[]}
-        onSubmit={async () => noop()}
-        enabled={entityCrudSettingsState.delete}
-        label={ENTITY_CRUD_SETTINGS_TAB_LABELS.DELETE}
+        enabled={{
+          onToggle: () => toggleCrudSettings("delete"),
+          enabled: entityCrudSettingsState.delete,
+          label: ENTITY_CRUD_SETTINGS_TAB_LABELS.DELETE,
+        }}
       />
     ),
   };

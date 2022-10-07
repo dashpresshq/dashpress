@@ -12,28 +12,22 @@ import { IEntityField } from "shared/types";
 import { useStringSelections } from "../../../lib/selection";
 
 interface IProps {
-  entityFields: IEntityField[];
+  columns?: {
+    fields: IEntityField[];
+    submit?: (columnsSelection: string[]) => Promise<void>;
+    hidden: string[];
+    getEntityFieldLabels?: (fieldName: string) => string;
+  };
+  enabled: {
+    onToggle?: () => void;
+    enabled: boolean;
+    label: string;
+  };
   isLoading: boolean;
-  onToggle?: () => void;
   error: unknown;
-  hiddenColumns: string[];
-  onSubmit: (columnsSelection: string[]) => Promise<void>;
-  enabled: boolean;
-  getEntityFieldLabels?: (fieldName: string) => string;
-  label: string;
 }
 
-export function SelectionTab({
-  entityFields,
-  isLoading,
-  label,
-  getEntityFieldLabels,
-  enabled,
-  error,
-  onToggle,
-  onSubmit,
-  hiddenColumns,
-}: IProps) {
+export function SelectionTab({ columns, isLoading, enabled, error }: IProps) {
   const { toggleSelection, currentPageSelection, selectMutiple } =
     useStringSelections();
 
@@ -42,12 +36,12 @@ export function SelectionTab({
   const [isMakingRequest, setIsMakingRequest] = useState(false);
 
   useEffect(() => {
-    selectMutiple(hiddenColumns);
-  }, [hiddenColumns]);
+    selectMutiple(columns?.hidden || []);
+  }, [columns?.hidden]);
 
-  const enableDisableLabel = enabled
-    ? `Disable ${label} Functionality`
-    : `Enable ${label} Functionality`;
+  const enableDisableLabel = enabled?.enabled
+    ? `Disable ${enabled.label} Functionality`
+    : `Enable ${enabled?.label} Functionality`;
 
   return (
     <ViewStateMachine
@@ -56,32 +50,32 @@ export function SelectionTab({
       loader={<ListSkeleton />}
     >
       <Stack justify="space-between" align="flex-start">
-        {onToggle && (
+        {enabled && enabled.onToggle && (
           <FormButton
             isMakingRequest={false}
             size="sm"
-            isInverse={enabled}
+            isInverse={enabled.enabled}
             text={enableDisableLabel}
-            onClick={() => onToggle()}
+            onClick={() => enabled.onToggle()}
           />
         )}
       </Stack>
       <Spacer size="xxl" />
-      {entityFields.length > 0 && (
+      {columns && (
         <>
           <RenderList
-            items={entityFields}
+            items={columns.fields}
             singular="Field"
             render={(menuItem) => {
               const isHidden = currentPageSelection.includes(menuItem.name);
 
               return (
                 <SectionListItem
-                  label={getEntityFieldLabels?.(menuItem.name)}
+                  label={columns.getEntityFieldLabels(menuItem.name)}
                   key={menuItem.name}
-                  disabled={!enabled}
+                  disabled={!enabled.enabled}
                   toggle={
-                    enabled
+                    enabled.enabled
                       ? {
                           selected: !isHidden,
                           onChange: () => {
@@ -100,7 +94,7 @@ export function SelectionTab({
           <FormButton
             onClick={async () => {
               setIsMakingRequest(true);
-              await onSubmit(currentPageSelection);
+              await columns.submit(currentPageSelection);
               setIsMakingRequest(false);
               setTouched(false);
             }}

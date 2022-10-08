@@ -18,7 +18,7 @@ interface IProps {
     hidden: string[];
     getEntityFieldLabels?: (fieldName: string) => string;
   };
-  enabled: {
+  toggling: {
     onToggle?: () => void;
     enabled: boolean;
     label: string;
@@ -27,7 +27,7 @@ interface IProps {
   error: unknown;
 }
 
-export function SelectionTab({ columns, isLoading, enabled, error }: IProps) {
+export function SelectionTab({ columns, isLoading, toggling, error }: IProps) {
   const { toggleSelection, currentPageSelection, selectMutiple } =
     useStringSelections();
 
@@ -39,9 +39,9 @@ export function SelectionTab({ columns, isLoading, enabled, error }: IProps) {
     selectMutiple(columns?.hidden || []);
   }, [columns?.hidden]);
 
-  const enableDisableLabel = enabled?.enabled
-    ? `Disable ${enabled.label} Functionality`
-    : `Enable ${enabled?.label} Functionality`;
+  const enableDisableLabel = toggling?.enabled
+    ? `Disable ${toggling.label} Functionality`
+    : `Enable ${toggling?.label} Functionality`;
 
   return (
     <ViewStateMachine
@@ -50,13 +50,13 @@ export function SelectionTab({ columns, isLoading, enabled, error }: IProps) {
       loader={<ListSkeleton />}
     >
       <Stack justify="space-between" align="flex-start">
-        {enabled && enabled.onToggle && (
+        {toggling && toggling.onToggle && (
           <FormButton
             isMakingRequest={false}
             size="sm"
-            isInverse={enabled.enabled}
+            isInverse={toggling.enabled}
             text={enableDisableLabel}
-            onClick={() => enabled.onToggle()}
+            onClick={() => toggling.onToggle()}
           />
         )}
       </Stack>
@@ -73,9 +73,9 @@ export function SelectionTab({ columns, isLoading, enabled, error }: IProps) {
                 <SectionListItem
                   label={columns.getEntityFieldLabels(menuItem.name)}
                   key={menuItem.name}
-                  disabled={!enabled.enabled}
+                  disabled={!toggling.enabled}
                   toggle={
-                    enabled.enabled
+                    toggling.enabled
                       ? {
                           selected: !isHidden,
                           onChange: () => {

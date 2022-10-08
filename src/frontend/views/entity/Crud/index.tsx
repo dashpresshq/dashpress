@@ -127,7 +127,7 @@ function useEntityCrudView() {
           getEntityFieldLabels,
         }}
         isLoading={sharedLoading || hiddenTableColumns.isLoading}
-        enabled={{
+        toggling={{
           enabled: true,
           label: ENTITY_CRUD_SETTINGS_TAB_LABELS.TABLE,
         }}
@@ -146,7 +146,7 @@ function useEntityCrudView() {
         }}
         isLoading={sharedLoading || hiddenDetailsColumns.isLoading}
         error={error}
-        enabled={{
+        toggling={{
           onToggle: () => toggleCrudSettings("details"),
           // TODO if you disable details then disable update
           enabled: entityCrudSettingsState.details,
@@ -166,7 +166,7 @@ function useEntityCrudView() {
         }}
         isLoading={sharedLoading || hiddenCreateColumns.isLoading}
         error={error}
-        enabled={{
+        toggling={{
           onToggle: () => toggleCrudSettings("create"),
           enabled: entityCrudSettingsState.create,
           label: ENTITY_CRUD_SETTINGS_TAB_LABELS.CREATE,
@@ -183,7 +183,7 @@ function useEntityCrudView() {
           hidden: hiddenUpdateColumns.data || [],
           getEntityFieldLabels,
         }}
-        enabled={{
+        toggling={{
           onToggle: () => toggleCrudSettings("update"),
           // TODO If you enable update then enable details
           enabled: entityCrudSettingsState.update,
@@ -197,7 +197,7 @@ function useEntityCrudView() {
       <SelectionTab
         isLoading={false}
         error={error}
-        enabled={{
+        toggling={{
           onToggle: () => toggleCrudSettings("delete"),
           enabled: entityCrudSettingsState.delete,
           label: ENTITY_CRUD_SETTINGS_TAB_LABELS.DELETE,

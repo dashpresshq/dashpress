@@ -31,10 +31,10 @@ const DEFAULT_ENTITY_CONFIG_VALUES: Record<
       plural: `Plural ${entity}`,
     };
   },
-  hidden_entity_table_columns: () => [],
-  hidden_entity_create_columns: () => [],
-  hidden_entity_update_columns: () => [],
-  hidden_entity_details_columns: () => [],
+  hidden_entity_table_columns: () => ["hidden-field-1"],
+  hidden_entity_create_columns: () => ["hidden-field-1"],
+  hidden_entity_update_columns: () => ["hidden-field-1"],
+  hidden_entity_details_columns: () => ["hidden-field-1"],
   entity_columns_labels: () => ({}),
 };
 
@@ -55,7 +55,6 @@ export const configApiHandlers = [
   rest.get(BASE_TEST_URL("/api/config/:key/:entity"), async (req, res, ctx) => {
     const mutatedData =
       ENTITY_CONFIG[req.params.entity as string]?.[req.params.key];
-
     if (mutatedData) {
       return res(ctx.json(mutatedData));
     }

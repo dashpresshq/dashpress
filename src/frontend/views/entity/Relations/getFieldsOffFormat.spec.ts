@@ -16,4 +16,7 @@ describe("getFieldsOffFormat", () => {
       getFieldsOffFormat("{{ name  }} - {{ age}} / {{ gender }} ")
     ).toEqual(["name", "age", "gender"]);
   });
+  it("should not error when no field is found", () => {
+    expect(getFieldsOffFormat("ddd")).toEqual([]);
+  });
 });

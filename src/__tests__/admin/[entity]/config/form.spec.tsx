@@ -74,13 +74,45 @@ describe("pages/admin/[entity]/config/form", () => {
 
       const currentTab = screen.getByRole("tabpanel");
 
-      expect(await within(currentTab).findByLabelText("Script")).toHaveValue(
-        `${section}Updated`
-      );
-
       expect(within(currentTab).getByLabelText("Script")).toHaveValue(
         `${section}Updated`
       );
+    });
+
+    it("should be able to be cleared", async () => {
+      render(
+        <AppWrapper>
+          <EntityFormExtensionSettings />
+        </AppWrapper>
+      );
+
+      await userEvent.click(await screen.findByRole("tab", { name: label }));
+
+      const currentTab = screen.getByRole("tabpanel");
+
+      await userEvent.clear(within(currentTab).getByLabelText("Script"));
+
+      await userEvent.click(
+        within(currentTab).getByRole("button", { name: "Save" })
+      );
+
+      expect((await screen.findAllByRole("status"))[0]).toHaveTextContent(
+        "App Settings Saved Successfully"
+      );
+    });
+
+    it("should display cleared value correctly", async () => {
+      render(
+        <AppWrapper>
+          <EntityFormExtensionSettings />
+        </AppWrapper>
+      );
+
+      await userEvent.click(await screen.findByRole("tab", { name: label }));
+
+      const currentTab = screen.getByRole("tabpanel");
+
+      expect(within(currentTab).getByLabelText("Script")).toHaveValue(``);
     });
   });
 });

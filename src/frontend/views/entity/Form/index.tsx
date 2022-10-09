@@ -84,12 +84,12 @@ export function EntityFormExtensionSettings() {
   return (
     <BaseEntitySettingsLayout>
       <SectionBox
-        title="Form Settings"
+        title="Form Scripts"
         iconButtons={[
           {
             action: LINK_TO_DOCS("app-configuration/form"),
             icon: "help",
-            label: "Form Settings Documentation",
+            label: "Form Scripts Documentation",
           },
         ]}
       >

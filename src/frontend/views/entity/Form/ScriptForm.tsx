@@ -6,10 +6,17 @@ interface IProps {
   value: string;
   onSubmit: (value: string) => Promise<void>;
   isLoading: boolean;
+  field: string;
   error?: unknown;
 }
 
-export function ScriptForm({ value, onSubmit, error, isLoading }: IProps) {
+export function ScriptForm({
+  value,
+  onSubmit,
+  field,
+  error,
+  isLoading,
+}: IProps) {
   return (
     <ViewStateMachine
       loading={isLoading}
@@ -18,18 +25,18 @@ export function ScriptForm({ value, onSubmit, error, isLoading }: IProps) {
     >
       <SchemaForm
         fields={{
-          script: {
+          [`script${field}`]: {
             type: "json",
-            label: "",
+            label: "Script",
             validations: [],
           },
         }}
         onSubmit={async (data) => {
-          await onSubmit(data.script as string);
+          await onSubmit(data[`script${field}`] as string);
         }}
         buttonText="Save"
         initialValues={{
-          script: value,
+          [`script${field}`]: value,
         }}
       />
     </ViewStateMachine>

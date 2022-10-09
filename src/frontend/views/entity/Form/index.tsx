@@ -49,6 +49,7 @@ function useEntityFormView() {
         value={entityFormExtensionSettings.data?.fieldsState}
         isLoading={isLoading}
         onSubmit={onScriptSubmit("fieldsState")}
+        field="fieldsState"
         error={error}
       />
     ),
@@ -56,6 +57,7 @@ function useEntityFormView() {
       <ScriptForm
         value={entityFormExtensionSettings.data?.beforeSubmit}
         isLoading={isLoading}
+        field="beforeSubmit"
         onSubmit={onScriptSubmit("beforeSubmit")}
         error={error}
       />
@@ -64,6 +66,7 @@ function useEntityFormView() {
       <ScriptForm
         value={entityFormExtensionSettings.data?.afterSubmit}
         isLoading={isLoading}
+        field="afterSubmit"
         onSubmit={onScriptSubmit("afterSubmit")}
         error={error}
       />

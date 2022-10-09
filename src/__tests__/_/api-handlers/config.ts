@@ -31,6 +31,11 @@ const DEFAULT_ENTITY_CONFIG_VALUES: Record<
       plural: `Plural ${entity}`,
     };
   },
+  entity_form_extension: () => ({
+    fieldsState: "fieldsState",
+    beforeSubmit: "beforeSubmit",
+    afterSubmit: "afterSubmit",
+  }),
   hidden_entity_table_columns: () => ["hidden-field-1"],
   hidden_entity_create_columns: () => ["hidden-field-1"],
   hidden_entity_update_columns: () => ["hidden-field-1"],

@@ -217,9 +217,11 @@ export function EntityFieldsSettings() {
                         label: getEntityFieldLabels(name),
                       })),
                     }}
-                    onSave={async (data) => {
-                      await upsertEntityColumnsOrderMutation.mutateAsync(data);
-                    }}
+                    onSave={
+                      upsertEntityColumnsOrderMutation.mutateAsync as (
+                        data: string[]
+                      ) => Promise<void>
+                    }
                   />
                 </ViewStateMachine>
               ),

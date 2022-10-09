@@ -105,9 +105,11 @@ export function EntitiesSettings() {
                 >
                   <SortList
                     data={entitiesMenuItems}
-                    onSave={async (data) => {
-                      await upsertEntitiesOrderMutation.mutateAsync(data);
-                    }}
+                    onSave={
+                      upsertEntitiesOrderMutation.mutateAsync as (
+                        data: string[]
+                      ) => Promise<void>
+                    }
                   />
                 </ViewStateMachine>
               ),

@@ -213,11 +213,11 @@ export function EntityRelationsSettings() {
                         })
                       ),
                     }}
-                    onSave={async (data) => {
-                      await upsertEntityRelationsOrderMutation.mutateAsync(
-                        data
-                      );
-                    }}
+                    onSave={
+                      upsertEntityRelationsOrderMutation.mutateAsync as (
+                        data: string[]
+                      ) => Promise<void>
+                    }
                   />
                 </ViewStateMachine>
               ),

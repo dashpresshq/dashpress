@@ -100,3 +100,5 @@ describe("pages/admin/settings/entities", () => {
     ).toBeChecked();
   });
 });
+
+// TODO test sorting

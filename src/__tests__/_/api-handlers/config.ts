@@ -40,7 +40,12 @@ const DEFAULT_ENTITY_CONFIG_VALUES: Record<
   hidden_entity_create_columns: () => ["hidden-field-1"],
   hidden_entity_update_columns: () => ["hidden-field-1"],
   hidden_entity_details_columns: () => ["hidden-field-1"],
+  hidden_entity_relations: () => ["hidden-field-1"],
   entity_columns_labels: () => ({}),
+  entity_relation_template: (entity) => ({
+    format: `${entity} - {{ name }}`,
+    fields: ["name"],
+  }),
 };
 
 export const configApiHandlers = [

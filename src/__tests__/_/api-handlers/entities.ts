@@ -10,14 +10,6 @@ export const entitiesApiHandlers = [
           value: "entity-1",
           label: "entity-1",
         },
-        {
-          value: "entity-2",
-          label: "entity-2",
-        },
-        {
-          value: "entity-3",
-          label: "entity-3",
-        },
       ])
     );
   }),
@@ -47,6 +39,34 @@ export const entitiesApiHandlers = [
       ])
     );
   }),
+
+  rest.get(
+    BASE_TEST_URL("/api/entities/:entity/relations"),
+    async (_, res, ctx) => {
+      return res(
+        ctx.json([
+          {
+            table: "entity-2",
+            label: "Entity 2 Label",
+            type: "toMany",
+          },
+          {
+            table: "entity-3",
+            label: "Entity 3 Label",
+            field: "foo-1",
+            type: "toOne",
+          },
+        ])
+      );
+    }
+  ),
+
+  rest.get(
+    BASE_TEST_URL("/api/entities/:entity/relation-list"),
+    async (_, res, ctx) => {
+      return res(ctx.json(["entity-2", "entity-3"]));
+    }
+  ),
 
   rest.get(
     BASE_TEST_URL("/api/entities/:entity/fields"),

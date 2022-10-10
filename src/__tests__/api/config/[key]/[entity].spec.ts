@@ -104,7 +104,7 @@ describe("/api/config/[key]/[entity]", () => {
       }
     `);
   });
-  //
+
   it("should update config when present", async () => {
     const putReq = createAuthenticatedMocks({
       method: "PUT",

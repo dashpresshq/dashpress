@@ -49,7 +49,7 @@ export function FieldsLabelForm({ onSubmit, initialValues, fields }: IProps) {
             </Field>
           ))}
           <FormButton
-            text={ButtonLang.upsert}
+            text={`${ButtonLang.upsert} Labels`}
             isMakingRequest={submitting}
             disabled={pristine}
           />

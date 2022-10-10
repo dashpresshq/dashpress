@@ -37,9 +37,8 @@ const DEFAULT_ENTITY_CONFIG_VALUES: Record<
     afterSubmit: "afterSubmit",
   }),
   entity_relations_labels: () => ({
-    forumThreads: "My Threads",
-    semesters: "My semesters",
-    forumTopics: "My Topics",
+    "entity-2": "Custom Label For Entity 2",
+    "entity-4": "Custom Label For Entity 4",
   }),
   hidden_entity_table_columns: () => ["hidden-field-1"],
   hidden_entity_create_columns: () => ["hidden-field-1"],

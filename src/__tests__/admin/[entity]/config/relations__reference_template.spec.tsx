@@ -1,8 +1,8 @@
 import "@testing-library/jest-dom";
 import React from "react";
-import { render, screen, waitFor } from "@testing-library/react";
+import { render, screen, waitFor, within } from "@testing-library/react";
 import { AppWrapper } from "@hadmean/chromista";
-// import userEvent from "@testing-library/user-event";
+import userEvent from "@testing-library/user-event";
 import EntityRelationsSettings from "pages/admin/[entity]/config/relations";
 
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
@@ -33,39 +33,70 @@ describe("pages/admin/[entity]/config/relations", () => {
       });
     });
 
-    //   it("should update reference template", async () => {
-    //     render(
-    //       <AppWrapper>
-    //         <EntityRelationsSettings />
-    //       </AppWrapper>
-    //     );
+    it("should error when invalid template is provided", async () => {
+      render(
+        <AppWrapper>
+          <EntityRelationsSettings />
+        </AppWrapper>
+      );
 
-    //     await userEvent.type(screen.getByLabelText("Plural"), "Updated");
-    //     await userEvent.type(screen.getByLabelText("Singular"), "Updated");
+      const currentTab = screen.getByRole("tabpanel");
 
-    //     await userEvent.click(
-    //       screen.getByRole("button", { name: "Update Diction" })
-    //     );
+      await userEvent.clear(
+        await within(currentTab).findByLabelText("Display Format")
+      );
 
-    //     expect(await screen.findByRole("status")).toHaveTextContent(
-    //       "App Settings Saved Successfully"
-    //     );
-    //   });
+      await userEvent.type(
+        within(currentTab).getByLabelText("Display Format"),
+        "{{ this-entity-does-not-exist }}"
+      );
 
-    //   it("should display updated diction values", async () => {
-    //     render(
-    //       <AppWrapper>
-    //         <EntityDictionSettings />
-    //       </AppWrapper>
-    //     );
-    //     await waitFor(() => {
-    //       expect(screen.getByLabelText("Plural")).toHaveValue(
-    //         "Plural entity-1Updated"
-    //       );
-    //     });
-    //     expect(screen.getByLabelText("Singular")).toHaveValue(
-    //       "Singular entity-1Updated"
-    //     );
-    //   });
+      await userEvent.click(
+        within(currentTab).getByRole("button", { name: "Update Format" })
+      );
+
+      expect(within(currentTab).getByRole("alert")).toHaveTextContent(
+        "'this-entity-does-not-exist' is not a valid entity field. Valid fields are 'entity-1-field-1', 'entity-1-field-2', 'entity-1-field-3', 'entity-1-field-4', 'entity-1-field-5', 'entity-1-field-6', 'entity-1-field-7'"
+      );
+    });
+
+    it("should save valid template", async () => {
+      render(
+        <AppWrapper>
+          <EntityRelationsSettings />
+        </AppWrapper>
+      );
+
+      const currentTab = screen.getByRole("tabpanel");
+
+      await userEvent.clear(
+        await within(currentTab).findByLabelText("Display Format")
+      );
+
+      await userEvent.type(
+        within(currentTab).getByLabelText("Display Format"),
+        "{{{{ entity-1-field-1 }} - {{{{ entity-1-field-2 }} hello"
+      );
+
+      await userEvent.click(
+        within(currentTab).getByRole("button", { name: "Update Format" })
+      );
+      expect(await screen.findByRole("status")).toHaveTextContent(
+        "App Settings Saved Successfully"
+      );
+    });
+
+    it("should display saved template", async () => {
+      render(
+        <AppWrapper>
+          <EntityRelationsSettings />
+        </AppWrapper>
+      );
+      await waitFor(() => {
+        expect(screen.getByLabelText("Display Format")).toHaveValue(
+          "{{ entity-1-field-1 }} - {{ entity-1-field-2 }} hello"
+        );
+      });
+    });
   });
 });

@@ -58,10 +58,7 @@ export function CredentialsSetupForm({
                     ...input,
                     onChange: (value) => {
                       setUseConnectionString(false);
-                      form.change(
-                        "port",
-                        DATA_SOURCES_CONFIG[value]?.port || 0
-                      );
+                      form.change("port", DATA_SOURCES_CONFIG[value]?.port);
                       input.onChange(value);
                     },
                   }}

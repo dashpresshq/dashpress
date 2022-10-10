@@ -56,6 +56,12 @@ export const entitiesApiHandlers = [
             field: "foo-1",
             type: "toOne",
           },
+          {
+            table: "entity-4",
+            label: "Entity 4 Label",
+            field: "foo-1",
+            type: "toOne",
+          },
         ])
       );
     }

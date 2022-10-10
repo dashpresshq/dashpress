@@ -31,15 +31,21 @@ describe("pages/admin/[entity]/config/relations", () => {
       const currentTab = screen.getByRole("tabpanel");
 
       await waitFor(() => {
-        expect(within(currentTab).getByLabelText("entity-2")).toHaveValue(
-          "Custom Label For Entity 2"
-        );
+        expect(
+          within(currentTab).getByLabelText("related-entity-2")
+        ).toHaveValue("Custom Label For Entity 2");
       });
 
-      expect(within(currentTab).getByLabelText("entity-3")).toHaveValue("");
-      expect(within(currentTab).getByLabelText("entity-4")).toHaveValue(
+      expect(within(currentTab).getByLabelText("related-entity-3")).toHaveValue(
+        ""
+      );
+      expect(within(currentTab).getByLabelText("related-entity-4")).toHaveValue(
         "Custom Label For Entity 4"
       );
+
+      expect(
+        within(currentTab).queryByLabelText("hidden-related-entity-5")
+      ).not.toBeInTheDocument();
     });
 
     it("should save labels", async () => {
@@ -52,16 +58,16 @@ describe("pages/admin/[entity]/config/relations", () => {
       const currentTab = screen.getByRole("tabpanel");
 
       await userEvent.clear(
-        await within(currentTab).findByLabelText("entity-2")
+        await within(currentTab).findByLabelText("related-entity-2")
       );
 
       await userEvent.type(
-        within(currentTab).getByLabelText("entity-3"),
+        within(currentTab).getByLabelText("related-entity-3"),
         "Custom Label For Entity 3"
       );
 
       await userEvent.type(
-        within(currentTab).getByLabelText("entity-4"),
+        within(currentTab).getByLabelText("related-entity-4"),
         "Updated"
       );
 
@@ -83,13 +89,15 @@ describe("pages/admin/[entity]/config/relations", () => {
       const currentTab = screen.getByRole("tabpanel");
 
       await waitFor(() => {
-        expect(within(currentTab).getByLabelText("entity-2")).toHaveValue("");
+        expect(
+          within(currentTab).getByLabelText("related-entity-2")
+        ).toHaveValue("");
       });
 
-      expect(within(currentTab).getByLabelText("entity-3")).toHaveValue(
+      expect(within(currentTab).getByLabelText("related-entity-3")).toHaveValue(
         "Custom Label For Entity 3"
       );
-      expect(within(currentTab).getByLabelText("entity-4")).toHaveValue(
+      expect(within(currentTab).getByLabelText("related-entity-4")).toHaveValue(
         "Custom Label For Entity 4Updated"
       );
     });

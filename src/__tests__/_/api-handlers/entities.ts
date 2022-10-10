@@ -46,18 +46,18 @@ export const entitiesApiHandlers = [
       return res(
         ctx.json([
           {
-            table: "entity-2",
+            table: "related-entity-2",
             label: "Entity 2 Label",
             type: "toMany",
           },
           {
-            table: "entity-3",
+            table: "related-entity-3",
             label: "Entity 3 Label",
             field: "foo-1",
             type: "toOne",
           },
           {
-            table: "entity-4",
+            table: "related-entity-4",
             label: "Entity 4 Label",
             field: "foo-1",
             type: "toOne",
@@ -70,7 +70,14 @@ export const entitiesApiHandlers = [
   rest.get(
     BASE_TEST_URL("/api/entities/:entity/relation-list"),
     async (_, res, ctx) => {
-      return res(ctx.json(["entity-2", "entity-3"]));
+      return res(
+        ctx.json([
+          "related-entity-2",
+          "related-entity-3",
+          "related-entity-4",
+          "hidden-related-entity-5",
+        ])
+      );
     }
   ),
 

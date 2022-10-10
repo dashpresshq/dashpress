@@ -37,14 +37,14 @@ const DEFAULT_ENTITY_CONFIG_VALUES: Record<
     afterSubmit: "afterSubmit",
   }),
   entity_relations_labels: () => ({
-    "entity-2": "Custom Label For Entity 2",
-    "entity-4": "Custom Label For Entity 4",
+    "related-entity-2": "Custom Label For Entity 2",
+    "related-entity-4": "Custom Label For Entity 4",
   }),
   hidden_entity_table_columns: () => ["hidden-field-1"],
   hidden_entity_create_columns: () => ["hidden-field-1"],
   hidden_entity_update_columns: () => ["hidden-field-1"],
   hidden_entity_details_columns: () => ["hidden-field-1"],
-  hidden_entity_relations: () => ["hidden-field-1"],
+  hidden_entity_relations: () => ["hidden-related-entity-5"],
   entity_columns_labels: () => ({}),
   entity_relation_template: (entity) => ({
     format: `${entity} - {{ name }}`,

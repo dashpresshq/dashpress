@@ -48,17 +48,23 @@ describe("pages/admin/settings/entities", () => {
     ).toBeChecked();
   });
 
-  it("should toogle entities state successfully", async () => {
+  it("should toggle entities state successfully", async () => {
     render(
       <AppWrapper>
         <EntitiesSettings />
       </AppWrapper>
     );
 
-    userEvent.click(screen.getByRole("checkbox", { name: "Plural entity-1" }));
-    userEvent.click(screen.getByRole("checkbox", { name: "Plural entity-1" }));
-    userEvent.click(screen.getByRole("checkbox", { name: "Plural entity-2" }));
-    userEvent.click(
+    await userEvent.click(
+      screen.getByRole("checkbox", { name: "Plural entity-1" })
+    );
+    await userEvent.click(
+      screen.getByRole("checkbox", { name: "Plural entity-1" })
+    );
+    await userEvent.click(
+      screen.getByRole("checkbox", { name: "Plural entity-2" })
+    );
+    await userEvent.click(
       screen.getByRole("checkbox", { name: "Plural disabled-entity-2" })
     );
 

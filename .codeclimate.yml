@@ -1,0 +1,2 @@
+exclude_patterns:
+- "src/__tests__/"

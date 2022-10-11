@@ -13,10 +13,10 @@
     "setup-husky": "husky install",
     "test": "NODE_OPTIONS=--max_old_space_size=4096 jest --forceExit --logHeapUsage --runInBand",
     "typecheck": "tsc",
-    "test:cov": "jest --coverage",
+    "test:cov": "NODE_OPTIONS=--max_old_space_size=4096 jest --forceExit --logHeapUsage --runInBand --coverage",
     "lint": "eslint --ext ts,tsx .",
     "lint:fix": "eslint --fix",
-    "verify": "npm run typecheck && npm run lint && npm run test"
+    "verify": "npm run typecheck && npm run lint && npm run test:cov"
   },
   "files": [
     ".next",

@@ -6,12 +6,13 @@
 
 <div align="center">
 
-[![Project license](https://img.shields.io/github/license/hadmean/hadmean.svg?style=flat-square)](LICENSE)
-<img src="https://img.shields.io/github/languages/top/hadmean/hadmean?style=flat-square" />
-[![Pull Requests welcome](https://img.shields.io/badge/PRs-welcome-ff69b4.svg?style=flat-square)](https://github.com/hadmean/hadmean/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22)
+[![Project license](https://img.shields.io/github/license/hadmean/hadmean.svg)](LICENSE)
+  [![HitCount](https://hits.dwyl.com/hadmean/hadmean.svg?show=unique)](http://hits.dwyl.com/hadmean/hadmean)
+![GitHub CI](https://github.com/hadmean/hadmean/actions/workflows/verify.yml/badge.svg)
+<img src="https://img.shields.io/github/languages/top/hadmean/hadmean" />
+[![Pull Requests welcome](https://img.shields.io/badge/PRs-welcome-ff69b4.svg)](https://github.com/hadmean/hadmean/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22)
 
 </div>
-
 
 <div align="center">
   <a href="https://hadmean-demo.up.railway.app" target="_blank">Live Demo</a>

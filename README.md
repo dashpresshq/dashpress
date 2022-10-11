@@ -7,10 +7,15 @@
 <div align="center">
 
 [![Project license](https://img.shields.io/github/license/hadmean/hadmean.svg)](LICENSE)
-  [![HitCount](https://hits.dwyl.com/hadmean/hadmean.svg?show=unique)](http://hits.dwyl.com/hadmean/hadmean)
+[![Pull Requests welcome](https://img.shields.io/badge/PRs-welcome-ff69b4.svg)](https://github.com/hadmean/hadmean/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22)
+
+
 ![GitHub CI](https://github.com/hadmean/hadmean/actions/workflows/verify.yml/badge.svg)
 <img src="https://img.shields.io/github/languages/top/hadmean/hadmean" />
-[![Pull Requests welcome](https://img.shields.io/badge/PRs-welcome-ff69b4.svg)](https://github.com/hadmean/hadmean/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22)
+<img src="https://img.shields.io/codeclimate/maintainability/hadmean/hadmean" />
+<img src="https://img.shields.io/codeclimate/coverage/hadmean/hadmean" />
+
+[![HitCount](https://hits.dwyl.com/hadmean/hadmean.svg?show=unique)](http://hits.dwyl.com/hadmean/hadmean)
 
 </div>
 

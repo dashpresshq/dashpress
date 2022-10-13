@@ -21,8 +21,3 @@ jobs:
       uses: paambaati/codeclimate-action@v3.0.0
       env:
         CC_TEST_REPORTER_ID: 00fa2af1b50105f491c0e31d7841ecf1e7c495f1b7522ffa6b458d3db566de08
-    - name: Publish coverage reports to Codecov
-      run: |
-        curl -Os https://uploader.codecov.io/latest/linux/codecov
-        chmod +x codecov
-        ./codecov -t cb8cd3f3-62e2-42b1-b7a2-951eb00df26a

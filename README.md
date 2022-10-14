@@ -119,7 +119,7 @@ That is all, You will be able to see the application on http://localhost:3000
  - Views
  - Data Count
  - Synced DB Validation
- - Fields selection/ ordering
+ - Fields selection / ordering
  - Cache
  - Secure Credentials Storage
  - Forms fields customization

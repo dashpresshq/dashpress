@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunk_hadmean_archaea=self.webpackChunk_hadmean_archaea||[]).push([[754],{3503:a=>{a.exports=JSON.parse('[{"label":"introduction","permalink":"/hadmean/blog/tags/introduction","count":2}]')}}]);

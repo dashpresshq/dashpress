@@ -6,77 +6,32 @@ import {
   EncryptionService,
   encryptionService,
 } from "backend/lib/encryption/encryption.service";
-import { ForbiddenError } from "backend/lib/errors";
-import { IApplicationService } from "backend/types";
-import noop from "lodash/noop";
+import { BaseApplicationConfigs } from "./_base.service";
 
-export class CredentialsService implements IApplicationService {
+export class CredentialsService extends BaseApplicationConfigs {
   constructor(
-    private _credentialsPersistenceService: AbstractConfigDataPersistenceService<
+    _credentialsPersistenceService: AbstractConfigDataPersistenceService<
       Record<string, unknown>
     >,
-    private _encryptionService: EncryptionService
-  ) {}
-
-  async bootstrap() {
-    try {
-      await this._credentialsPersistenceService.setup();
-    } catch (error) {
-      noop();
-    }
-  }
-
-  async hasDomainCredentials(domain: string): Promise<boolean> {
-    try {
-      await this.getDomainCredentials(domain);
-      return true;
-    } catch {
-      return false;
-    }
-  }
-
-  async upsertDomainCredentials(
-    domain: string,
-    credentials: Record<string, unknown>
+    _encryptionService: EncryptionService
   ) {
-    const encryptedCredentials: [string, unknown][] = await Promise.all(
-      Object.entries(credentials).map(async ([key, value]) => [
-        key,
-        await this._encryptionService.encrypt(JSON.stringify(value)),
-      ])
-    );
-    await this._credentialsPersistenceService.upsertItem(
-      domain,
-      Object.fromEntries(encryptedCredentials)
-    );
-  }
-
-  async getDomainCredentials<T extends Record<string, unknown>>(
-    domain: string
-  ): Promise<T> {
-    const credentials = await this._credentialsPersistenceService.getItem(
-      domain
-    );
-
-    if (!credentials) {
-      throw new ForbiddenError(`No credentials available for ${domain}`);
-    }
-
-    const decryptedCredentials: [string, unknown][] = await Promise.all(
-      Object.entries(credentials).map(async ([key, value]) => [
-        key,
-        JSON.parse(await this._encryptionService.decrypt(value as string)),
-      ])
-    );
-
-    return Object.fromEntries(decryptedCredentials) as T;
+    super(_credentialsPersistenceService, _encryptionService);
   }
 }
 
-const credentialsPersistenceService =
-  createConfigDomainPersistenceService<Record<string, unknown>>("credentials");
-
 export const credentialsService = new CredentialsService(
-  credentialsPersistenceService,
+  createConfigDomainPersistenceService<Record<string, unknown>>("credentials"),
+  encryptionService
+);
+
+export const constantsService = new CredentialsService(
+  createConfigDomainPersistenceService<Record<string, unknown>>("constants"),
+  encryptionService
+);
+
+export const environmentVariablesService = new CredentialsService(
+  createConfigDomainPersistenceService<Record<string, unknown>>(
+    "environment-variables"
+  ),
   encryptionService
 );

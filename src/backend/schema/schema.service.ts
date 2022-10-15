@@ -57,7 +57,7 @@ export class SchemasService implements IApplicationService {
 
   private async doIntrospection() {
     const dbCredentials =
-      await this._credentialsService.getDomainCredentials<IDataSourceCredentials>(
+      await this._credentialsService.getValue<IDataSourceCredentials>(
         CREDENTIALS_DOMAINS.database
       );
 

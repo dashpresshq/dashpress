@@ -2,6 +2,8 @@ export type ConfigDomain =
   | "users"
   | "schema"
   | "credentials"
+  | "constants"
+  | "environment-variables"
   | "dashboard"
   | "app-config"
   | "roles";

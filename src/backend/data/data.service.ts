@@ -29,7 +29,7 @@ export class DataService implements IApplicationService {
       return this._dbInstance;
     }
 
-    const dbCredentials = (await credentialsService.getDomainCredentials(
+    const dbCredentials = (await credentialsService.getValue(
       CREDENTIALS_DOMAINS.database
     )) as unknown as IRDMSConnectionOptions;
 

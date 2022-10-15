@@ -26,9 +26,7 @@ export class SetupController {
 
   async check(): Promise<ISetupCheck> {
     const [hasDbCredentials, hasUsers] = await Promise.all([
-      this._credentialsService.hasDomainCredentials(
-        CREDENTIALS_DOMAINS.database
-      ),
+      this._credentialsService.hasKey(CREDENTIALS_DOMAINS.database),
       this._usersService.hasUsers(),
     ]);
 
@@ -52,11 +50,7 @@ export class SetupController {
   }
 
   async setUpDBCredentials(dbCredentials: IDataSourceCredentials) {
-    if (
-      await this._credentialsService.hasDomainCredentials(
-        CREDENTIALS_DOMAINS.database
-      )
-    ) {
+    if (await this._credentialsService.hasKey(CREDENTIALS_DOMAINS.database)) {
       throw new BadRequestError(
         "Primary database credentials already configured"
       );
@@ -70,7 +64,7 @@ export class SetupController {
       );
     }
 
-    await this._credentialsService.upsertDomainCredentials(
+    await this._credentialsService.upsert(
       CREDENTIALS_DOMAINS.database,
       dbCredentials
     );

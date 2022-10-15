@@ -10,9 +10,7 @@ import { BaseApplicationConfigs } from "./_base.service";
 
 export class CredentialsService extends BaseApplicationConfigs {
   constructor(
-    _credentialsPersistenceService: AbstractConfigDataPersistenceService<
-      Record<string, unknown>
-    >,
+    _credentialsPersistenceService: AbstractConfigDataPersistenceService<string>,
     _encryptionService: EncryptionService
   ) {
     super(_credentialsPersistenceService, _encryptionService);
@@ -20,18 +18,16 @@ export class CredentialsService extends BaseApplicationConfigs {
 }
 
 export const credentialsService = new CredentialsService(
-  createConfigDomainPersistenceService<Record<string, unknown>>("credentials"),
+  createConfigDomainPersistenceService<string>("credentials"),
   encryptionService
 );
 
 export const constantsService = new CredentialsService(
-  createConfigDomainPersistenceService<Record<string, unknown>>("constants"),
+  createConfigDomainPersistenceService<string>("constants"),
   encryptionService
 );
 
 export const environmentVariablesService = new CredentialsService(
-  createConfigDomainPersistenceService<Record<string, unknown>>(
-    "environment-variables"
-  ),
+  createConfigDomainPersistenceService<string>("environment-variables"),
   encryptionService
 );

@@ -6,9 +6,7 @@ import noop from "lodash/noop";
 
 export abstract class BaseApplicationConfigs implements IApplicationService {
   constructor(
-    private _credentialsPersistenceService: AbstractConfigDataPersistenceService<
-      Record<string, unknown>
-    >,
+    private _credentialsPersistenceService: AbstractConfigDataPersistenceService<string>,
     private _encryptionService: EncryptionService
   ) {}
 
@@ -29,7 +27,7 @@ export abstract class BaseApplicationConfigs implements IApplicationService {
     }
   }
 
-  async getValue<T extends Record<string, unknown>>(key: string): Promise<T> {
+  async getValue(key: string): Promise<string> {
     const credentials = await this._credentialsPersistenceService.getItem(key);
 
     if (!credentials) {
@@ -46,7 +44,13 @@ export abstract class BaseApplicationConfigs implements IApplicationService {
     return Object.fromEntries(decryptedCredentials) as T;
   }
 
-  async upsert(key: string, value: Record<string, unknown>) {
+  async list() {}
+
+  async upsertGroup() {}
+
+  async getGroup() {}
+
+  async upsert(key: string, value: string) {
     const encryptedCredentials: [string, unknown][] = await Promise.all(
       Object.entries(value).map(async ([key$1, value$1]) => [
         key$1,

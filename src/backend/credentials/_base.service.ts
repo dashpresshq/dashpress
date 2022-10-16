@@ -27,17 +27,18 @@ export abstract class BaseApplicationConfigs implements IApplicationService {
 
   async hasGroupKey(groupKey: CredentialsGroup): Promise<boolean> {
     const groupFields = CREDENTIALS_GROUP[groupKey];
-
-    return (
-      (await this.hasKey(
-        this.generateGroupKeyPrefix(groupKey, groupFields[0])
-      )) !== undefined
+    return await this.hasKey(
+      this.generateGroupKeyPrefix(groupKey, groupFields[0])
     );
   }
 
-  abstract processDataToSave(data: string): Promise<string>;
+  async processDataToSave(data: string): Promise<string> {
+    return data;
+  }
 
-  abstract processDataAfterFetch(data: string): Promise<string>;
+  async processDataAfterFetch(data: string): Promise<string> {
+    return data;
+  }
 
   async list() {}
 
@@ -50,18 +51,22 @@ export abstract class BaseApplicationConfigs implements IApplicationService {
 
     const values = await Promise.all(
       allGroupKeys.map(async (key) => {
-        return [
-          key,
-          await this.getValue(this.generateGroupKeyPrefix(groupKey, key)),
-        ];
+        return [key, await this.getValue(key)];
       })
     );
 
-    if (values.length === 0) {
+    const filteredValues = values.filter(([, value]) => value);
+
+    if (filteredValues.length === 0) {
       throw new ForbiddenError(`No credentials available for ${groupKey}`);
     }
 
-    return Object.fromEntries(values);
+    return Object.fromEntries(
+      filteredValues.map(([key, value]) => [
+        key.split(GROUP_DEMILITER)[1],
+        value,
+      ])
+    ) as T;
   }
 
   async getValue(key: string): Promise<string | undefined> {
@@ -87,16 +92,17 @@ export abstract class BaseApplicationConfigs implements IApplicationService {
     groupValue: Record<string, string>
   ) {
     const groupFields = CREDENTIALS_GROUP[groupKey];
-    await Promise.all(
-      groupFields
-        .filter((field) => groupValue[field] !== undefined)
-        .map((field) =>
-          this.upsert(
-            this.generateGroupKeyPrefix(groupKey, field),
-            groupValue[field]
-          )
-        )
+
+    const fieldsToUpsert = groupFields.filter(
+      (field) => groupValue[field] !== undefined
     );
+
+    for (const field of fieldsToUpsert) {
+      await this.upsert(
+        this.generateGroupKeyPrefix(groupKey, field),
+        groupValue[field]
+      );
+    }
   }
 
   async upsert(key: string, value: string) {
@@ -107,6 +113,6 @@ export abstract class BaseApplicationConfigs implements IApplicationService {
   }
 
   private generateGroupKeyPrefix = (groupKey: string, groupField: string) => {
-    return `${groupKey.toUpperCase()}${GROUP_DEMILITER}${groupField.toUpperCase()}`;
+    return `${groupKey.toUpperCase()}${GROUP_DEMILITER}${groupField}`;
   };
 }

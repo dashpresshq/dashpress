@@ -27,9 +27,7 @@ describe("/api/setup/check", () => {
 
   it("should return false for hasDbCredentials when invalid", async () => {
     await setupCredentialsTestData({
-      database: {
-        port: "invalid value",
-      },
+      DATABASE___port: "invalid value",
     });
 
     const { req, res } = createMocks({

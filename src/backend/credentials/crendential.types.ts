@@ -1,6 +1,9 @@
-export const CREDENTIALS_DOMAINS = { database: "database" };
+export enum CredentialsGroup {
+  MAIL = "mail",
+  DATABASE = "database",
+}
 
-export const CREDENTIALS_GROUP = {
+export const CREDENTIALS_GROUP: Record<CredentialsGroup, string[]> = {
   mail: ["host", "user", "password", "ssl"],
   database: [
     "dataSourceType",

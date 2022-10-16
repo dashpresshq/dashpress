@@ -2,7 +2,7 @@ import {
   credentialsService,
   CredentialsService,
 } from "backend/credentials/credentials.service";
-import { CREDENTIALS_DOMAINS } from "backend/credentials/crendential.types";
+import { CredentialsGroup } from "backend/credentials/crendential.types";
 import { getDbConnection } from "backend/lib/connection/db";
 import { BadRequestError } from "backend/lib/errors";
 import { usersService, UsersService } from "backend/users/users.service";
@@ -26,7 +26,7 @@ export class SetupController {
 
   async check(): Promise<ISetupCheck> {
     const [hasDbCredentials, hasUsers] = await Promise.all([
-      this._credentialsService.hasKey(CREDENTIALS_DOMAINS.database),
+      this._credentialsService.hasGroupKey(CredentialsGroup.DATABASE),
       this._usersService.hasUsers(),
     ]);
 
@@ -50,7 +50,7 @@ export class SetupController {
   }
 
   async setUpDBCredentials(dbCredentials: IDataSourceCredentials) {
-    if (await this._credentialsService.hasKey(CREDENTIALS_DOMAINS.database)) {
+    if (await this._credentialsService.hasGroupKey(CredentialsGroup.DATABASE)) {
       throw new BadRequestError(
         "Primary database credentials already configured"
       );
@@ -64,9 +64,9 @@ export class SetupController {
       );
     }
 
-    await this._credentialsService.upsert(
-      CREDENTIALS_DOMAINS.database,
-      dbCredentials
+    await this._credentialsService.upsertGroup(
+      CredentialsGroup.DATABASE,
+      dbCredentials as unknown as Record<string, string>
     );
   }
 }

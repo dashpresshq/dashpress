@@ -3,63 +3,110 @@ import { EncryptionService } from "backend/lib/encryption/encryption.service";
 import { ForbiddenError } from "backend/lib/errors";
 import { IApplicationService } from "backend/types";
 import noop from "lodash/noop";
+import { CredentialsGroup, CREDENTIALS_GROUP } from "./crendential.types";
+
+const GROUP_DEMILITER = "___";
 
 export abstract class BaseApplicationConfigs implements IApplicationService {
   constructor(
-    private _credentialsPersistenceService: AbstractConfigDataPersistenceService<string>,
-    private _encryptionService: EncryptionService
+    protected _persistenceService: AbstractConfigDataPersistenceService<string>,
+    protected _encryptionService: EncryptionService
   ) {}
 
   async bootstrap() {
     try {
-      await this._credentialsPersistenceService.setup();
+      await this._persistenceService.setup();
     } catch (error) {
       noop();
     }
   }
 
   async hasKey(key: string): Promise<boolean> {
-    try {
-      await this.getValue(key);
-      return true;
-    } catch {
-      return false;
-    }
+    return (await this.getValue(key)) !== undefined;
   }
 
-  async getValue(key: string): Promise<string> {
-    const credentials = await this._credentialsPersistenceService.getItem(key);
+  async hasGroupKey(groupKey: CredentialsGroup): Promise<boolean> {
+    const groupFields = CREDENTIALS_GROUP[groupKey];
 
-    if (!credentials) {
-      throw new ForbiddenError(`No credentials available for ${key}`);
-    }
-
-    const decryptedCredentials: [string, unknown][] = await Promise.all(
-      Object.entries(credentials).map(async ([key$1, value]) => [
-        key$1,
-        JSON.parse(await this._encryptionService.decrypt(value as string)),
-      ])
+    return (
+      (await this.hasKey(
+        this.generateGroupKeyPrefix(groupKey, groupFields[0])
+      )) !== undefined
     );
-
-    return Object.fromEntries(decryptedCredentials) as T;
   }
+
+  abstract processDataToSave(data: string): Promise<string>;
+
+  abstract processDataAfterFetch(data: string): Promise<string>;
 
   async list() {}
 
-  async upsertGroup() {}
+  async useGroupValue<T>(groupKey: CredentialsGroup): Promise<T> {
+    const groupFields = CREDENTIALS_GROUP[groupKey];
 
-  async getGroup() {}
-
-  async upsert(key: string, value: string) {
-    const encryptedCredentials: [string, unknown][] = await Promise.all(
-      Object.entries(value).map(async ([key$1, value$1]) => [
-        key$1,
-        await this._encryptionService.encrypt(JSON.stringify(value$1)),
-      ])
+    const allGroupKeys = groupFields.map((field) =>
+      this.generateGroupKeyPrefix(groupKey, field)
     );
-    await this._credentialsPersistenceService.upsertItem(
-      key,
-      Object.fromEntries(encryptedCredentials)
+
+    const values = await Promise.all(
+      allGroupKeys.map(async (key) => {
+        return [
+          key,
+          await this.getValue(this.generateGroupKeyPrefix(groupKey, key)),
+        ];
+      })
+    );
+
+    if (values.length === 0) {
+      throw new ForbiddenError(`No credentials available for ${groupKey}`);
+    }
+
+    return Object.fromEntries(values);
+  }
+
+  async getValue(key: string): Promise<string | undefined> {
+    const data = await this._persistenceService.getItem(key);
+
+    if (!data) {
+      return undefined;
+    }
+
+    return await this.processDataAfterFetch(data);
+  }
+
+  async useValue(key: string): Promise<string> {
+    const value = this.getValue(key);
+    if (value === undefined) {
+      throw new ForbiddenError(`No credentials available for ${key}`);
+    }
+    return value;
+  }
+
+  async upsertGroup(
+    groupKey: CredentialsGroup,
+    groupValue: Record<string, string>
+  ) {
+    const groupFields = CREDENTIALS_GROUP[groupKey];
+    await Promise.all(
+      groupFields
+        .filter((field) => groupValue[field] !== undefined)
+        .map((field) =>
+          this.upsert(
+            this.generateGroupKeyPrefix(groupKey, field),
+            groupValue[field]
+          )
+        )
     );
   }
+
+  async upsert(key: string, value: string) {
+    await this._persistenceService.upsertItem(
+      key,
+      await this.processDataToSave(value)
+    );
+  }
+
+  private generateGroupKeyPrefix = (groupKey: string, groupField: string) => {
+    return `${groupKey.toUpperCase()}${GROUP_DEMILITER}${groupField.toUpperCase()}`;
+  };
 }

@@ -7,7 +7,7 @@ import { Knex } from "knex";
 import get from "lodash/get";
 import { credentialsService } from "backend/credentials/credentials.service";
 import { getDbConnection } from "backend/lib/connection/db";
-import { CREDENTIALS_DOMAINS } from "backend/credentials/crendential.types";
+import { CredentialsGroup } from "backend/credentials/crendential.types";
 import { QueryFilter } from "shared/types";
 import { IApplicationService } from "backend/types";
 import {
@@ -29,9 +29,10 @@ export class DataService implements IApplicationService {
       return this._dbInstance;
     }
 
-    const dbCredentials = (await credentialsService.getValue(
-      CREDENTIALS_DOMAINS.database
-    )) as unknown as IRDMSConnectionOptions;
+    const dbCredentials =
+      await credentialsService.useGroupValue<IRDMSConnectionOptions>(
+        CredentialsGroup.DATABASE
+      );
 
     this._dbInstance = (await getDbConnection(
       dbCredentials

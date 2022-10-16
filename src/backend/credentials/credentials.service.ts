@@ -15,6 +15,14 @@ export class CredentialsService extends BaseApplicationConfigs {
   ) {
     super(_credentialsPersistenceService, _encryptionService);
   }
+
+  async processDataToSave(data: string) {
+    return await this._encryptionService.encrypt(JSON.stringify(data));
+  }
+
+  async processDataAfterFetch(data: string) {
+    return JSON.parse(await this._encryptionService.decrypt(data));
+  }
 }
 
 export const credentialsService = new CredentialsService(

@@ -8,8 +8,6 @@ import {
   CREDENTIALS_GROUP,
 } from "../integrations-configurations.types";
 
-const GROUP_DEMILITER = "___";
-
 export abstract class IntegrationsConfigurationService
   implements IApplicationService
 {
@@ -17,6 +15,8 @@ export abstract class IntegrationsConfigurationService
     protected _persistenceService: AbstractConfigDataPersistenceService<string>,
     protected _encryptionService: EncryptionService
   ) {}
+
+  static GROUP_DEMILITER = "___";
 
   async bootstrap() {
     try {
@@ -70,7 +70,7 @@ export abstract class IntegrationsConfigurationService
 
     return Object.fromEntries(
       filteredValues.map(([key, value]) => [
-        key.split(GROUP_DEMILITER)[1],
+        key.split(IntegrationsConfigurationService.GROUP_DEMILITER)[1],
         value,
       ])
     ) as T;
@@ -119,7 +119,13 @@ export abstract class IntegrationsConfigurationService
     );
   }
 
+  async delete(key: string) {
+    await this._persistenceService.removeItem(key);
+  }
+
   private generateGroupKeyPrefix = (groupKey: string, groupField: string) => {
-    return `${groupKey.toUpperCase()}${GROUP_DEMILITER}${groupField}`;
+    return `${groupKey.toUpperCase()}${
+      IntegrationsConfigurationService.GROUP_DEMILITER
+    }${groupField}`;
   };
 }

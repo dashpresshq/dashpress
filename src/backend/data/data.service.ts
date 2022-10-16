@@ -8,7 +8,7 @@ import get from "lodash/get";
 import { credentialsService } from "backend/credentials/credentials.service";
 import { getDbConnection } from "backend/lib/connection/db";
 import { CredentialsGroup } from "backend/credentials/crendential.types";
-import { QueryFilter } from "shared/types";
+import { IDataSourceCredentials, QueryFilter } from "shared/types";
 import { IApplicationService } from "backend/types";
 import {
   subDays,
@@ -18,7 +18,6 @@ import {
   subYears,
   subWeeks,
 } from "date-fns";
-import { IRDMSConnectionOptions } from "@hadmean/bacteria";
 import { IPaginationFilters } from "./types";
 
 export class DataService implements IApplicationService {
@@ -30,7 +29,7 @@ export class DataService implements IApplicationService {
     }
 
     const dbCredentials =
-      await credentialsService.useGroupValue<IRDMSConnectionOptions>(
+      await credentialsService.useGroupValue<IDataSourceCredentials>(
         CredentialsGroup.DATABASE
       );
 

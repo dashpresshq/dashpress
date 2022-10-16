@@ -42,7 +42,9 @@ export abstract class BaseApplicationConfigs implements IApplicationService {
 
   async list() {}
 
-  async useGroupValue<T>(groupKey: CredentialsGroup): Promise<T> {
+  async useGroupValue<T extends Record<string, unknown>>(
+    groupKey: CredentialsGroup
+  ): Promise<T> {
     const groupFields = CREDENTIALS_GROUP[groupKey];
 
     const allGroupKeys = groupFields.map((field) =>

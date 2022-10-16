@@ -6,8 +6,8 @@ import {
 import {
   CredentialsService,
   credentialsService,
-} from "backend/credentials/credentials.service";
-import { CredentialsGroup } from "backend/credentials/crendential.types";
+  CredentialsGroup,
+} from "backend/integrations-configurations";
 import { IApplicationService } from "backend/types";
 import { IDataSourceCredentials, IDBSchema, IEntityField } from "shared/types";
 import {

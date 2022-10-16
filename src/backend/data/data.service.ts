@@ -5,9 +5,7 @@ import {
 } from "@hadmean/protozoa";
 import { Knex } from "knex";
 import get from "lodash/get";
-import { credentialsService } from "backend/credentials/credentials.service";
 import { getDbConnection } from "backend/lib/connection/db";
-import { CredentialsGroup } from "backend/credentials/crendential.types";
 import { IDataSourceCredentials, QueryFilter } from "shared/types";
 import { IApplicationService } from "backend/types";
 import {
@@ -18,6 +16,10 @@ import {
   subYears,
   subWeeks,
 } from "date-fns";
+import {
+  credentialsService,
+  CredentialsGroup,
+} from "backend/integrations-configurations";
 import { IPaginationFilters } from "./types";
 
 export class DataService implements IApplicationService {

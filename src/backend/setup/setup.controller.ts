@@ -1,8 +1,8 @@
 import {
   credentialsService,
   CredentialsService,
-} from "backend/credentials/credentials.service";
-import { CredentialsGroup } from "backend/credentials/crendential.types";
+  CredentialsGroup,
+} from "backend/integrations-configurations";
 import { getDbConnection } from "backend/lib/connection/db";
 import { BadRequestError } from "backend/lib/errors";
 import { usersService, UsersService } from "backend/users/users.service";

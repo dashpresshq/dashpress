@@ -3,11 +3,16 @@ import { EncryptionService } from "backend/lib/encryption/encryption.service";
 import { ForbiddenError } from "backend/lib/errors";
 import { IApplicationService } from "backend/types";
 import noop from "lodash/noop";
-import { CredentialsGroup, CREDENTIALS_GROUP } from "./crendential.types";
+import {
+  CredentialsGroup,
+  CREDENTIALS_GROUP,
+} from "../integrations-configurations.types";
 
 const GROUP_DEMILITER = "___";
 
-export abstract class BaseApplicationConfigs implements IApplicationService {
+export abstract class IntegrationsConfigurationService
+  implements IApplicationService
+{
   constructor(
     protected _persistenceService: AbstractConfigDataPersistenceService<string>,
     protected _encryptionService: EncryptionService

@@ -1,5 +1,5 @@
 import { configurationService } from "backend/configuration/configuration.service";
-import { credentialsService } from "backend/credentials/credentials.service";
+import { credentialsService } from "backend/integrations-configurations";
 import { dataService } from "backend/data/data.service";
 import { entitiesService } from "backend/entities/entities.service";
 import { configService } from "backend/lib/config/config.service";

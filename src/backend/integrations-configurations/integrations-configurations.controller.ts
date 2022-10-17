@@ -18,10 +18,17 @@ export class IntegrationsConfigurationController {
     private _environmentVariablesService: IntegrationsConfigurationService
   ) {}
 
-  async upsert(key: string, value: string) {
-    // Check if key exist as we need create/update
-    // Can't create configuration key with `___`
-    await this._credentialsService.upsert(key, value);
+  async upsert(
+    group: IntegrationsConfigurationGroup,
+    key: string,
+    value: string
+  ) {
+    if (!this.getService(group).hasKey(key) && this.isKeyAGroupKey(key)) {
+      throw new Error(
+        "Group keys can't be created. They should be updated in the plugin settings"
+      );
+    }
+    await this.getService(group).upsert(key, value);
   }
 
   async delete(group: IntegrationsConfigurationGroup, key: string) {
@@ -34,10 +41,13 @@ export class IntegrationsConfigurationController {
   }
 
   async list(group: IntegrationsConfigurationGroup) {
-    // return "XXXXX" for keys
-    // Order by key
-
     const items = await this.getService(group).list();
+    if (group === IntegrationsConfigurationGroup.Credentials) {
+      return Object.fromEntries(
+        Object.keys(items).map((itemKey) => [itemKey, "XXXXXX"])
+      );
+    }
+    return items;
   }
 
   private isKeyAGroupKey(key: string) {

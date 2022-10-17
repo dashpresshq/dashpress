@@ -46,7 +46,7 @@ export abstract class IntegrationsConfigurationService
   }
 
   async list() {
-    return await this._persistenceService.getAllItems();
+    return await this._persistenceService.getAllAsKeyValuePair();
   }
 
   async useGroupValue<T extends Record<string, unknown>>(

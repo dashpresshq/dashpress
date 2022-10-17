@@ -34,10 +34,12 @@ export class MemoryConfigDataPersistenceAdaptor<
     MemoryConfigDataPersistenceAdaptor.data[this.configDomain] = data;
   }
 
+  async getAllAsKeyValuePair() {
+    return MemoryConfigDataPersistenceAdaptor.getDomainData(this.configDomain);
+  }
+
   async getAllItems() {
-    return Object.values(
-      MemoryConfigDataPersistenceAdaptor.getDomainData(this.configDomain)
-    );
+    return Object.values(await this.getAllAsKeyValuePair());
   }
 
   async getAllItemsIn(itemIds: string[]) {

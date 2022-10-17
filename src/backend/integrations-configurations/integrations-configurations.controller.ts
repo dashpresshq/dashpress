@@ -18,18 +18,6 @@ export class IntegrationsConfigurationController {
     private _environmentVariablesService: IntegrationsConfigurationService
   ) {}
 
-  private getService(group: IntegrationsConfigurationGroup) {
-    const groupImplementation: Record<
-      IntegrationsConfigurationGroup,
-      IntegrationsConfigurationService
-    > = {
-      "app-constant": this._appConstantsService,
-      env: this._environmentVariablesService,
-      credentials: this._credentialsService,
-    };
-    return groupImplementation[group];
-  }
-
   async upsert(key: string, value: string) {
     // Check if key exist as we need create/update
     // Can't create configuration key with `___`
@@ -45,14 +33,27 @@ export class IntegrationsConfigurationController {
     await this.getService(group).delete(key);
   }
 
+  async list(group: IntegrationsConfigurationGroup) {
+    // return "XXXXX" for keys
+    // Order by key
+
+    const items = await this.getService(group).list();
+  }
+
   private isKeyAGroupKey(key: string) {
     return key.includes(IntegrationsConfigurationService.GROUP_DEMILITER);
   }
 
-  async list() {
-    // return "XXXXX" for keys
-    // Order by key
-    return [];
+  private getService(group: IntegrationsConfigurationGroup) {
+    const groupImplementation: Record<
+      IntegrationsConfigurationGroup,
+      IntegrationsConfigurationService
+    > = {
+      "app-constant": this._appConstantsService,
+      env: this._environmentVariablesService,
+      credentials: this._credentialsService,
+    };
+    return groupImplementation[group];
   }
 }
 

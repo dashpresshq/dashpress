@@ -51,9 +51,12 @@ export class JsonFileConfigDataPersistenceAdaptor<
     });
   }
 
+  async getAllAsKeyValuePair() {
+    return await this.getDomainData();
+  }
+
   async getAllItems() {
-    const allIndexedItems = await this.getDomainData();
-    return Object.values(allIndexedItems);
+    return Object.values(await this.getAllAsKeyValuePair());
   }
 
   async getAllItemsIn(itemIds: string[]) {

@@ -31,6 +31,8 @@ export abstract class AbstractConfigDataPersistenceService<T> {
 
   public abstract getAllItemsIn(itemIds: string[]): Promise<T[]>;
 
+  public abstract getAllAsKeyValuePair(): Promise<Record<string, T>>;
+
   public abstract getAllItems(): Promise<T[]>;
 
   public abstract upsertItem(key: string, data: T): Promise<void>;

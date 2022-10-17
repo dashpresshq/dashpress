@@ -60,14 +60,20 @@ export class DatabaseConfigDataPersistenceAdaptor<
     )(CONFIG_TABLE_PREFIX(this.configDomain)).del();
   }
 
-  async getAllItems() {
+  async getAllAsKeyValuePair(): Promise<Record<string, T>> {
     const query = (await this.getDbInstance())
       .select(["value", "key"])
       .from(CONFIG_TABLE_PREFIX(this.configDomain));
 
     const items = await query;
 
-    return items.map(({ value }) => JSON.parse(value));
+    return Object.fromEntries(
+      items.map(({ value, key }) => [key, JSON.parse(value)])
+    );
+  }
+
+  async getAllItems() {
+    return Object.values(await this.getAllAsKeyValuePair());
   }
 
   async getAllItemsIn(itemIds: string[]) {

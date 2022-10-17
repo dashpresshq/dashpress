@@ -45,7 +45,9 @@ export abstract class IntegrationsConfigurationService
     return data;
   }
 
-  async list() {}
+  async list() {
+    return await this._persistenceService.getAllItems();
+  }
 
   async useGroupValue<T extends Record<string, unknown>>(
     groupKey: CredentialsGroup

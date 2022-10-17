@@ -117,6 +117,13 @@ describe.each(PERSITENT_ADAPTORS)(
       ]);
     });
 
+    it("should getAllItems", async () => {
+      expect(await adaptor.getAllAsKeyValuePair()).toEqual({
+        "id-1": { age: 1, id: "id-1", name: "First Item" },
+        "id-2": { age: 2, id: "id-2", name: "Second Item" },
+      });
+    });
+
     it("should wipe old data and create new items when reseting state", async () => {
       await adaptor.resetState("id", [
         { age: 4, id: "id-4", name: "Fourth Item" },

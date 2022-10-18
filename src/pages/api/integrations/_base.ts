@@ -1,10 +1,8 @@
 import { USER_PERMISSIONS } from "shared/types";
 import { requestHandler } from "backend/lib/request";
-import {
-  integrationsConfigurationController,
-  IntegrationsConfigurationGroup,
-} from "backend/integrations-configurations/integrations-configurations.controller";
+import { integrationsConfigurationController } from "backend/integrations-configurations/integrations-configurations.controller";
 import { IAppliedSchemaFormConfig } from "shared/form-schemas/types";
+import { IntegrationsConfigurationGroup } from "shared/types/integrations";
 
 export const integrationsConfigurationListRequestHandler = (
   group: IntegrationsConfigurationGroup

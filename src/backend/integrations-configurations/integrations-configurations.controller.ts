@@ -1,15 +1,10 @@
+import { IntegrationsConfigurationGroup } from "shared/types/integrations";
 import { credentialsService } from "./services/credentials.service";
 import {
   appConstantsService,
   environmentVariablesService,
 } from "./services/env-variable.service";
 import { IntegrationsConfigurationService } from "./services/_base";
-
-export enum IntegrationsConfigurationGroup {
-  Credentials = "credentials",
-  Env = "env",
-  AppConstants = "app-constant",
-}
 
 export class IntegrationsConfigurationController {
   constructor(
@@ -59,7 +54,7 @@ export class IntegrationsConfigurationController {
       IntegrationsConfigurationGroup,
       IntegrationsConfigurationService
     > = {
-      "app-constant": this._appConstantsService,
+      constant: this._appConstantsService,
       env: this._environmentVariablesService,
       credentials: this._credentialsService,
     };

@@ -1,6 +1,6 @@
-import { IntegrationsConfigurationGroup } from "backend/integrations-configurations/integrations-configurations.controller";
+import { IntegrationsConfigurationGroup } from "shared/types/integrations";
 import { integrationsConfigurationDetailsRequestHandler } from "../_base";
 
 export default integrationsConfigurationDetailsRequestHandler(
-  IntegrationsConfigurationGroup.AppConstants
+  IntegrationsConfigurationGroup.Constants
 );

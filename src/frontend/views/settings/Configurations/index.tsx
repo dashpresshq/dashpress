@@ -10,13 +10,13 @@ import { ViewStateMachine } from "frontend/lib/ViewStateMachine";
 import { IntegrationsConfigurationGroup } from "shared/types/integrations";
 import { LINK_TO_DOCS } from "frontend/views/constants";
 import { BaseSettingsLayout } from "../_Base";
-// import { DateFormatSettingsForm } from "./Form";
 import { SETTINGS_VIEW_KEY } from "../constants";
 import {
   useIntegrationConfigurationDeletionMutation,
   useIntegrationConfigurationUpdationMutation,
   useIntegrationsConfigurationList,
 } from "./configurations.store";
+import { KeyValueForm } from "./Form";
 
 function Base({ group }: { group: IntegrationsConfigurationGroup }) {
   const configurationList = useIntegrationsConfigurationList(group);
@@ -47,12 +47,10 @@ function Base({ group }: { group: IntegrationsConfigurationGroup }) {
                 FormSkeletonSchema.Input,
                 FormSkeletonSchema.Input,
                 FormSkeletonSchema.Input,
-                FormSkeletonSchema.Input,
               ]}
             />
           }
         >
-          {JSON.stringify(configurationList.data)}
           {/* <DateFormatSettingsForm
           onSave={async (values: { key: string; value: string }) => {
             await upsertConfigurationMutation.mutateAsync(values);
@@ -62,6 +60,12 @@ function Base({ group }: { group: IntegrationsConfigurationGroup }) {
           }}
           initialValues={configurationList}
         /> */}
+          <KeyValueForm
+            initialValues={configurationList.data || {}}
+            onSubmit={async (values: { key: string; value: string }) => {
+              await upsertConfigurationMutation.mutateAsync(values);
+            }}
+          />
         </ViewStateMachine>
       </SectionBox>
       <Spacer />
@@ -80,9 +84,9 @@ export function IntegrationsConfigurationSettings() {
 
   return (
     <BaseSettingsLayout>
-      <Base group={IntegrationsConfigurationGroup.Constants} />
       <Base group={IntegrationsConfigurationGroup.Credentials} />
       <Base group={IntegrationsConfigurationGroup.Env} />
+      <Base group={IntegrationsConfigurationGroup.Constants} />
     </BaseSettingsLayout>
   );
 }

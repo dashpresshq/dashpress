@@ -5,7 +5,7 @@ import {
 } from "./services/env-variable.service";
 import { IntegrationsConfigurationService } from "./services/_base";
 
-enum IntegrationsConfigurationGroup {
+export enum IntegrationsConfigurationGroup {
   Credentials = "credentials",
   Env = "env",
   AppConstants = "app-constant",

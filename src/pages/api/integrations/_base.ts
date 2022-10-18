@@ -4,6 +4,7 @@ import {
   integrationsConfigurationController,
   IntegrationsConfigurationGroup,
 } from "backend/integrations-configurations/integrations-configurations.controller";
+import { IAppliedSchemaFormConfig } from "shared/form-schemas/types";
 
 export const integrationsConfigurationListRequestHandler = (
   group: IntegrationsConfigurationGroup
@@ -25,16 +26,57 @@ export const integrationsConfigurationListRequestHandler = (
   );
 };
 
+const REQUEST_KEY_FIELD = "key";
+
+type IUpdateIntegrationValueForm = {
+  value: string;
+};
+
+export const UPSERT_INTEGRATION_VALUE_FORM_SCHEMA: IAppliedSchemaFormConfig<IUpdateIntegrationValueForm> =
+  {
+    value: {
+      type: "text",
+      validations: [
+        {
+          validationType: "required",
+        },
+      ],
+    },
+  };
+
 export const integrationsConfigurationDetailsRequestHandler = (
   group: IntegrationsConfigurationGroup
 ) => {
   return requestHandler(
     {
-      PUT: async () => {
-        return await integrationsConfigurationController.list(group);
+      PUT: async (getValidatedRequest) => {
+        const validatedRequest = await getValidatedRequest([
+          {
+            _type: "requestQuery",
+            options: REQUEST_KEY_FIELD,
+          },
+          {
+            _type: "requestBody",
+            options: UPSERT_INTEGRATION_VALUE_FORM_SCHEMA,
+          },
+        ]);
+        return await integrationsConfigurationController.upsert(
+          group,
+          validatedRequest.requestQuery,
+          validatedRequest.requestBody
+        );
       },
-      DELETE: async () => {
-        return await integrationsConfigurationController.list(group);
+      DELETE: async (getValidatedRequest) => {
+        const validatedRequest = await getValidatedRequest([
+          {
+            _type: "requestQuery",
+            options: REQUEST_KEY_FIELD,
+          },
+        ]);
+        return await integrationsConfigurationController.delete(
+          group,
+          validatedRequest.requestQuery
+        );
       },
     },
 

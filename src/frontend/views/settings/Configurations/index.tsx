@@ -2,6 +2,7 @@ import {
   FormSkeleton,
   FormSkeletonSchema,
   SectionBox,
+  Spacer,
 } from "@hadmean/chromista";
 import { useSetPageDetails } from "frontend/lib/routing";
 import { USER_PERMISSIONS } from "shared/types";
@@ -25,33 +26,34 @@ function Base({ group }: { group: IntegrationsConfigurationGroup }) {
     useIntegrationConfigurationDeletionMutation(group);
 
   return (
-    <SectionBox
-      title="Configurations"
-      iconButtons={[
-        {
-          action: LINK_TO_DOCS(`integrations-configuration/${group}`),
-          icon: "help",
-          label: "Configurations Documentation",
-        },
-      ]}
-    >
-      <ViewStateMachine
-        loading={configurationList.isLoading}
-        error={configurationList.error}
-        loader={
-          <FormSkeleton
-            schema={[
-              FormSkeletonSchema.Input,
-              FormSkeletonSchema.Input,
-              FormSkeletonSchema.Input,
-              FormSkeletonSchema.Input,
-              FormSkeletonSchema.Input,
-            ]}
-          />
-        }
+    <>
+      <SectionBox
+        title={`${group} Configurations`}
+        iconButtons={[
+          {
+            action: LINK_TO_DOCS(`integrations-configuration/${group}`),
+            icon: "help",
+            label: `${group} Configurations Documentation`,
+          },
+        ]}
       >
-        ofofo
-        {/* <DateFormatSettingsForm
+        <ViewStateMachine
+          loading={configurationList.isLoading}
+          error={configurationList.error}
+          loader={
+            <FormSkeleton
+              schema={[
+                FormSkeletonSchema.Input,
+                FormSkeletonSchema.Input,
+                FormSkeletonSchema.Input,
+                FormSkeletonSchema.Input,
+                FormSkeletonSchema.Input,
+              ]}
+            />
+          }
+        >
+          {JSON.stringify(configurationList.data)}
+          {/* <DateFormatSettingsForm
           onSave={async (values: { key: string; value: string }) => {
             await upsertConfigurationMutation.mutateAsync(values);
           }}
@@ -60,8 +62,10 @@ function Base({ group }: { group: IntegrationsConfigurationGroup }) {
           }}
           initialValues={configurationList}
         /> */}
-      </ViewStateMachine>
-    </SectionBox>
+        </ViewStateMachine>
+      </SectionBox>
+      <Spacer />
+    </>
   );
 }
 

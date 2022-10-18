@@ -1,5 +1,9 @@
 import { configurationService } from "backend/configuration/configuration.service";
-import { credentialsService } from "backend/integrations-configurations";
+import {
+  credentialsService,
+  environmentVariablesService,
+  appConstantsService,
+} from "backend/integrations-configurations";
 import { dataService } from "backend/data/data.service";
 import { entitiesService } from "backend/entities/entities.service";
 import { configService } from "backend/lib/config/config.service";
@@ -7,6 +11,7 @@ import { rolesService } from "backend/roles/roles.service";
 import { schemasService } from "backend/schema/schema.service";
 import { usersService } from "backend/users/users.service";
 import noop from "lodash/noop";
+
 import { requestHandler } from "../../../backend/lib/request";
 
 export default requestHandler(
@@ -21,6 +26,8 @@ export default requestHandler(
         await credentialsService.bootstrap();
         await entitiesService.bootstrap();
         await configurationService.bootstrap();
+        await environmentVariablesService.bootstrap();
+        await appConstantsService.bootstrap();
       } catch (error) {
         noop();
       }

@@ -54,9 +54,9 @@ export class IntegrationsConfigurationController {
       IntegrationsConfigurationGroup,
       IntegrationsConfigurationService
     > = {
-      constant: this._appConstantsService,
-      env: this._environmentVariablesService,
-      credentials: this._credentialsService,
+      [IntegrationsConfigurationGroup.Constants]: this._appConstantsService,
+      [IntegrationsConfigurationGroup.Env]: this._environmentVariablesService,
+      [IntegrationsConfigurationGroup.Credentials]: this._credentialsService,
     };
     return groupImplementation[group];
   }

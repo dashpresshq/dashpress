@@ -51,19 +51,13 @@ function Base({ group }: { group: IntegrationsConfigurationGroup }) {
             />
           }
         >
-          {/* <DateFormatSettingsForm
-          onSave={async (values: { key: string; value: string }) => {
-            await upsertConfigurationMutation.mutateAsync(values);
-          }}
-          onDelete={async (key: string) => {
-            await deleteConfigurationMutation.mutateAsync({ key });
-          }}
-          initialValues={configurationList}
-        /> */}
           <KeyValueForm
             initialValues={configurationList.data || {}}
             onSubmit={async (values: { key: string; value: string }) => {
               await upsertConfigurationMutation.mutateAsync(values);
+            }}
+            onDelete={async (key: string) => {
+              await deleteConfigurationMutation.mutateAsync({ key });
             }}
           />
         </ViewStateMachine>

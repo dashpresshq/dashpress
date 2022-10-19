@@ -30,7 +30,7 @@ describe("pages/roles/[roleId]/index", () => {
     const allCheckBoxes = await screen.findAllByRole("checkbox");
 
     await waitFor(() => {
-      expect(allCheckBoxes).toHaveLength(11);
+      expect(allCheckBoxes).toHaveLength(12);
     });
 
     await waitFor(async () => {

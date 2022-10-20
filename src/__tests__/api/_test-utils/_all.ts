@@ -10,7 +10,6 @@ import { setupIntegrationsEnvTestData } from "./_integrations-env";
 
 export const setupAllTestData = async (domains: ConfigDomain[]) => {
   const allTestData: [ConfigDomain, () => Promise<void>][] = [
-    ["credentials", setupCredentialsTestData],
     ["roles", setupRolesTestData],
     ["app-config", setupAppConfigTestData],
     ["users", setupUsersTestData],
@@ -18,6 +17,7 @@ export const setupAllTestData = async (domains: ConfigDomain[]) => {
     ["schema", setupSchemaTestData],
     ["constants", setupIntegrationsConstantsTestData],
     ["environment-variables", setupIntegrationsEnvTestData],
+    ["credentials", setupCredentialsTestData],
   ];
 
   await Promise.all(

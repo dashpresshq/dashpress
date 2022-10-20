@@ -7,6 +7,7 @@ const TEST_ENVS: Record<string, string> = {
   [`GROUP_ENV${INTEGRATION_CONFIG_GROUP_DEMILITER}KEY_3`]: "ENV_KEY_3",
   [`GROUP_ENV${INTEGRATION_CONFIG_GROUP_DEMILITER}KEY_4`]: "ENV_KEY_4",
 };
+
 export const setupIntegrationsEnvTestData = async () => {
   const configPersistenceService = createConfigDomainPersistenceService<string>(
     "environment-variables"

@@ -39,7 +39,7 @@ export class IntegrationsConfigurationController {
     const items = await this.getService(group).list();
     if (group === IntegrationsConfigurationGroup.Credentials) {
       return Object.fromEntries(
-        Object.keys(items).map((itemKey) => [itemKey, "XXXXXX"])
+        Object.keys(items).map((itemKey) => [itemKey, "XXXYYZ"])
       );
     }
     return items;

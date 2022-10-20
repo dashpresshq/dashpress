@@ -1,7 +1,7 @@
 import handler from "pages/api/integrations/constants";
 import {
   setupAllTestData,
-  createAuthenticatedMocks,
+  createAuthenticatedViewerMocks,
 } from "__tests__/api/_test-utils";
 
 describe("/api/integrations/constants", () => {
@@ -10,7 +10,7 @@ describe("/api/integrations/constants", () => {
   });
 
   it("should list constants for all users", async () => {
-    const { req, res } = createAuthenticatedMocks({
+    const { req, res } = createAuthenticatedViewerMocks({
       method: "GET",
     });
 
@@ -21,8 +21,8 @@ describe("/api/integrations/constants", () => {
       {
         "CONSTANT_KEY_1": "CONSTANT_KEY_1",
         "CONSTANT_KEY_2": "CONSTANT_KEY_2",
-        "GROUP____KEY_3": "CONSTANT_KEY_3",
-        "GROUP____KEY_4": "CONSTANT_KEY_4",
+        "GROUP_CONSTANT___KEY_3": "CONSTANT_KEY_3",
+        "GROUP_CONSTANT___KEY_4": "CONSTANT_KEY_4",
       }
     `);
   });

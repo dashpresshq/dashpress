@@ -5,4 +5,7 @@ export { setupSchemaTestData } from "./_schema";
 export { setupUsersTestData } from "./_users";
 export { setupAllTestData } from "./_all";
 export { setupTestDatabaseData } from "./_data";
-export { createAuthenticatedMocks } from "./_authenticatedMock";
+export {
+  createAuthenticatedMocks,
+  createAuthenticatedViewerMocks,
+} from "./_authenticatedMock";

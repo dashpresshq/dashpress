@@ -9,6 +9,7 @@ import { USER_PERMISSIONS } from "shared/types";
 import { ViewStateMachine } from "frontend/lib/ViewStateMachine";
 import { IntegrationsConfigurationGroup } from "shared/types/integrations";
 import { LINK_TO_DOCS } from "frontend/views/constants";
+import noop from "lodash/noop";
 import { BaseSettingsLayout } from "../_Base";
 import { SETTINGS_VIEW_KEY } from "../constants";
 import {
@@ -24,6 +25,7 @@ function Base({ group }: { group: IntegrationsConfigurationGroup }) {
     useIntegrationConfigurationUpdationMutation(group);
   const deleteConfigurationMutation =
     useIntegrationConfigurationDeletionMutation(group);
+  noop(deleteConfigurationMutation);
 
   return (
     <>
@@ -56,9 +58,9 @@ function Base({ group }: { group: IntegrationsConfigurationGroup }) {
             onSubmit={async (values: { key: string; value: string }) => {
               await upsertConfigurationMutation.mutateAsync(values);
             }}
-            onDelete={async (key: string) => {
-              await deleteConfigurationMutation.mutateAsync({ key });
-            }}
+            // onDelete={async (key: string) => {
+            //   await deleteConfigurationMutation.mutateAsync({ key });
+            // }}
           />
         </ViewStateMachine>
       </SectionBox>

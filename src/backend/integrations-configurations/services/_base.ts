@@ -8,6 +8,8 @@ import {
   CREDENTIALS_GROUP,
 } from "../integrations-configurations.types";
 
+export const INTEGRATION_CONFIG_GROUP_DEMILITER = "___";
+
 export abstract class IntegrationsConfigurationService
   implements IApplicationService
 {
@@ -16,7 +18,7 @@ export abstract class IntegrationsConfigurationService
     protected _encryptionService: EncryptionService
   ) {}
 
-  static GROUP_DEMILITER = "___";
+  static GROUP_DEMILITER = INTEGRATION_CONFIG_GROUP_DEMILITER;
 
   async bootstrap() {
     try {

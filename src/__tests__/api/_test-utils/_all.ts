@@ -1,5 +1,6 @@
 import { ConfigDomain } from "backend/lib/config-persistence/types";
 import { setupAppConfigTestData } from "./_app-config";
+import { setupConstantsTestData } from "./_constants";
 import { setupCredentialsTestData } from "./_credentials";
 import { setupDashboardTestData } from "./_dashboard";
 import { setupRolesTestData } from "./_roles";
@@ -14,6 +15,7 @@ export const setupAllTestData = async (domains: ConfigDomain[]) => {
     ["users", setupUsersTestData],
     ["dashboard", setupDashboardTestData],
     ["schema", setupSchemaTestData],
+    ["constants", setupConstantsTestData],
   ];
 
   await Promise.all(

@@ -8,4 +8,5 @@ export { setupTestDatabaseData } from "./_data";
 export {
   createAuthenticatedMocks,
   createAuthenticatedViewerMocks,
+  createAuthenticatedCustomRoleMocks,
 } from "./_authenticatedMock";

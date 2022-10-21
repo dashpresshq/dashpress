@@ -1,5 +1,5 @@
-import handler from "pages/api/integrations/env/[key]";
-import listHandler from "pages/api/integrations/env";
+import handler from "pages/api/integrations/constants/[key]";
+import listHandler from "pages/api/integrations/constants";
 import {
   setupAllTestData,
   createAuthenticatedMocks,
@@ -18,9 +18,9 @@ const currentState = async () => {
   return res._getJSONData();
 };
 
-describe("/api/integrations/env/[key]", () => {
+describe("/api/integrations/constants/[key]", () => {
   beforeAll(async () => {
-    await setupAllTestData(["environment-variables"]);
+    await setupAllTestData(["constants"]);
   });
 
   describe("Plain keys", () => {
@@ -28,10 +28,10 @@ describe("/api/integrations/env/[key]", () => {
       const { req, res } = createAuthenticatedMocks({
         method: "PUT",
         query: {
-          key: "NEW_ENV_KEY",
+          key: "NEW_CONSTANT_KEY",
         },
         body: {
-          value: "NEW_ENV_VALUE",
+          value: "NEW_CONSTANT_VALUE",
         },
       });
 
@@ -40,11 +40,11 @@ describe("/api/integrations/env/[key]", () => {
       expect(res._getStatusCode()).toBe(204);
       expect(await currentState()).toMatchInlineSnapshot(`
         {
-          "ENV_KEY_1": "ENV_KEY_1",
-          "ENV_KEY_2": "ENV_KEY_2",
-          "GROUP_ENV___KEY_3": "ENV_KEY_3",
-          "GROUP_ENV___KEY_4": "ENV_KEY_4",
-          "NEW_ENV_KEY": "NEW_ENV_VALUE",
+          "CONSTANT_KEY_1": "CONSTANT_KEY_1",
+          "CONSTANT_KEY_2": "CONSTANT_KEY_2",
+          "GROUP_CONSTANT___KEY_3": "CONSTANT_KEY_3",
+          "GROUP_CONSTANT___KEY_4": "CONSTANT_KEY_4",
+          "NEW_CONSTANT_KEY": "NEW_CONSTANT_VALUE",
         }
       `);
     });
@@ -53,10 +53,10 @@ describe("/api/integrations/env/[key]", () => {
       const { req, res } = createAuthenticatedMocks({
         method: "PUT",
         query: {
-          key: "ENV_KEY_2",
+          key: "CONSTANT_KEY_2",
         },
         body: {
-          value: "UPDATED_ENV_KEY_2",
+          value: "UPDATED_CONSTANT_KEY_2",
         },
       });
 
@@ -65,11 +65,11 @@ describe("/api/integrations/env/[key]", () => {
       expect(res._getStatusCode()).toBe(204);
       expect(await currentState()).toMatchInlineSnapshot(`
         {
-          "ENV_KEY_1": "ENV_KEY_1",
-          "ENV_KEY_2": "UPDATED_ENV_KEY_2",
-          "GROUP_ENV___KEY_3": "ENV_KEY_3",
-          "GROUP_ENV___KEY_4": "ENV_KEY_4",
-          "NEW_ENV_KEY": "NEW_ENV_VALUE",
+          "CONSTANT_KEY_1": "CONSTANT_KEY_1",
+          "CONSTANT_KEY_2": "UPDATED_CONSTANT_KEY_2",
+          "GROUP_CONSTANT___KEY_3": "CONSTANT_KEY_3",
+          "GROUP_CONSTANT___KEY_4": "CONSTANT_KEY_4",
+          "NEW_CONSTANT_KEY": "NEW_CONSTANT_VALUE",
         }
       `);
     });
@@ -78,7 +78,7 @@ describe("/api/integrations/env/[key]", () => {
       const { req, res } = createAuthenticatedMocks({
         method: "DELETE",
         query: {
-          key: "ENV_KEY_1",
+          key: "CONSTANT_KEY_1",
         },
       });
 
@@ -87,10 +87,10 @@ describe("/api/integrations/env/[key]", () => {
       expect(res._getStatusCode()).toBe(204);
       expect(await currentState()).toMatchInlineSnapshot(`
         {
-          "ENV_KEY_2": "UPDATED_ENV_KEY_2",
-          "GROUP_ENV___KEY_3": "ENV_KEY_3",
-          "GROUP_ENV___KEY_4": "ENV_KEY_4",
-          "NEW_ENV_KEY": "NEW_ENV_VALUE",
+          "CONSTANT_KEY_2": "UPDATED_CONSTANT_KEY_2",
+          "GROUP_CONSTANT___KEY_3": "CONSTANT_KEY_3",
+          "GROUP_CONSTANT___KEY_4": "CONSTANT_KEY_4",
+          "NEW_CONSTANT_KEY": "NEW_CONSTANT_VALUE",
         }
       `);
     });
@@ -101,10 +101,10 @@ describe("/api/integrations/env/[key]", () => {
       const { req, res } = createAuthenticatedMocks({
         method: "PUT",
         query: {
-          key: "NEW_ENV___KEY",
+          key: "NEW_CONSTANT___KEY",
         },
         body: {
-          value: "NEW_ENV_VALUE",
+          value: "NEW_CONSTANT_VALUE",
         },
       });
 
@@ -123,10 +123,10 @@ describe("/api/integrations/env/[key]", () => {
 
       expect(await currentState()).toMatchInlineSnapshot(`
         {
-          "ENV_KEY_2": "UPDATED_ENV_KEY_2",
-          "GROUP_ENV___KEY_3": "ENV_KEY_3",
-          "GROUP_ENV___KEY_4": "ENV_KEY_4",
-          "NEW_ENV_KEY": "NEW_ENV_VALUE",
+          "CONSTANT_KEY_2": "UPDATED_CONSTANT_KEY_2",
+          "GROUP_CONSTANT___KEY_3": "CONSTANT_KEY_3",
+          "GROUP_CONSTANT___KEY_4": "CONSTANT_KEY_4",
+          "NEW_CONSTANT_KEY": "NEW_CONSTANT_VALUE",
         }
       `);
     });
@@ -135,10 +135,10 @@ describe("/api/integrations/env/[key]", () => {
       const { req, res } = createAuthenticatedMocks({
         method: "PUT",
         query: {
-          key: "GROUP_ENV___KEY_3",
+          key: "GROUP_CONSTANT___KEY_3",
         },
         body: {
-          value: "UPDATED_ENV_KEY_3",
+          value: "UPDATED_CONSTANT_KEY_3",
         },
       });
 
@@ -148,10 +148,10 @@ describe("/api/integrations/env/[key]", () => {
 
       expect(await currentState()).toMatchInlineSnapshot(`
         {
-          "ENV_KEY_2": "UPDATED_ENV_KEY_2",
-          "GROUP_ENV___KEY_3": "UPDATED_ENV_KEY_3",
-          "GROUP_ENV___KEY_4": "ENV_KEY_4",
-          "NEW_ENV_KEY": "NEW_ENV_VALUE",
+          "CONSTANT_KEY_2": "UPDATED_CONSTANT_KEY_2",
+          "GROUP_CONSTANT___KEY_3": "UPDATED_CONSTANT_KEY_3",
+          "GROUP_CONSTANT___KEY_4": "CONSTANT_KEY_4",
+          "NEW_CONSTANT_KEY": "NEW_CONSTANT_VALUE",
         }
       `);
     });
@@ -160,7 +160,7 @@ describe("/api/integrations/env/[key]", () => {
       const { req, res } = createAuthenticatedMocks({
         method: "DELETE",
         query: {
-          key: "GROUP_ENV___KEY_3",
+          key: "GROUP_CONSTANT___KEY_3",
         },
       });
 
@@ -179,10 +179,10 @@ describe("/api/integrations/env/[key]", () => {
 
       expect(await currentState()).toMatchInlineSnapshot(`
         {
-          "ENV_KEY_2": "UPDATED_ENV_KEY_2",
-          "GROUP_ENV___KEY_3": "UPDATED_ENV_KEY_3",
-          "GROUP_ENV___KEY_4": "ENV_KEY_4",
-          "NEW_ENV_KEY": "NEW_ENV_VALUE",
+          "CONSTANT_KEY_2": "UPDATED_CONSTANT_KEY_2",
+          "GROUP_CONSTANT___KEY_3": "UPDATED_CONSTANT_KEY_3",
+          "GROUP_CONSTANT___KEY_4": "CONSTANT_KEY_4",
+          "NEW_CONSTANT_KEY": "NEW_CONSTANT_VALUE",
         }
       `);
     });
@@ -193,10 +193,10 @@ describe("/api/integrations/env/[key]", () => {
       const { req, res } = createAuthenticatedViewerMocks({
         method: "PUT",
         query: {
-          key: "NEW_ENV_KEY",
+          key: "NEW_CONSTANT_KEY",
         },
         body: {
-          value: "NEW_ENV_VALUE",
+          value: "NEW_CONSTANT_VALUE",
         },
       });
 
@@ -215,10 +215,10 @@ describe("/api/integrations/env/[key]", () => {
       const { req, res } = createAuthenticatedCustomRoleMocks({
         method: "PUT",
         query: {
-          key: "NEW_ENV_KEY",
+          key: "NEW_CONSTANT_KEY",
         },
         body: {
-          value: "NEW_ENV_VALUE",
+          value: "NEW_CONSTANT_VALUE",
         },
       });
 

@@ -3,7 +3,10 @@ import listHandler from "pages/api/integrations/env";
 import {
   setupAllTestData,
   createAuthenticatedMocks,
+  createAuthenticatedViewerMocks,
+  setupRolesTestData,
 } from "__tests__/api/_test-utils";
+import { createAuthenticatedCustomRoleMocks } from "__tests__/api/_test-utils/_authenticatedMock";
 
 const currentState = async () => {
   const { req, res } = createAuthenticatedMocks({
@@ -19,8 +22,6 @@ describe("/api/integrations/env/[key]", () => {
   beforeAll(async () => {
     await setupAllTestData(["environment-variables"]);
   });
-
-  // should work for only CAN_CONFIGURE_APP
 
   describe("Plain keys", () => {
     it("should create new entry for non-existing key", async () => {
@@ -184,6 +185,46 @@ describe("/api/integrations/env/[key]", () => {
           "NEW_ENV_KEY": "NEW_ENV_VALUE",
         }
       `);
+    });
+  });
+
+  describe("permission", () => {
+    it("should return 401 when user has no permission", async () => {
+      const { req, res } = createAuthenticatedViewerMocks({
+        method: "PUT",
+        query: {
+          key: "NEW_ENV_KEY",
+        },
+        body: {
+          value: "NEW_ENV_VALUE",
+        },
+      });
+
+      await handler(req, res);
+
+      expect(res._getStatusCode()).toBe(401);
+    });
+    it("should work when user has correct permission", async () => {
+      await setupRolesTestData([
+        {
+          id: "custom-role",
+          permissions: ["CAN_CONFIGURE_APP"],
+        },
+      ]);
+
+      const { req, res } = createAuthenticatedCustomRoleMocks({
+        method: "PUT",
+        query: {
+          key: "NEW_ENV_KEY",
+        },
+        body: {
+          value: "NEW_ENV_VALUE",
+        },
+      });
+
+      await handler(req, res);
+
+      expect(res._getStatusCode()).toBe(204);
     });
   });
 });

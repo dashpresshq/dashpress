@@ -48,7 +48,9 @@ export class RolesService implements IApplicationService {
   }
 
   async canRoleDoThis(roleId: string, permission: string) {
-    return await canRoleDoThis(roleId, permission, this.getRolePermissions);
+    return await canRoleDoThis(roleId, permission, (roleId$1: string) =>
+      this.getRolePermissions(roleId$1)
+    );
   }
 
   async createRole(input: Pick<IRole, "id">) {

@@ -6,6 +6,9 @@ const ROOT_USER_AUTH_TOKEN =
 const VIEWER_AUTH_TOKEN =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiVmlld2VyIFVzZXIiLCJyb2xlIjoidmlld2VyIiwidXNlcm5hbWUiOiJ2aWV3ZXIiLCJpYXQiOjE2NjYzMDM5MzUsImV4cCI6MTAzMDYzMDM5MzV9.1A-ESlL1f0626vFz7NpmsLMupX0VHX7zHmbkjydYjdI";
 
+const CUSTOM_ROLE_AUTH_TOKEN =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiQ3VzdG9tIFJvbGUiLCJyb2xlIjoiY3VzdG9tLXJvbGUiLCJ1c2VybmFtZSI6ImN1c3RvbS1yb2xlIiwic3lzdGVtUHJvZmlsZSI6IiIsImlhdCI6MTY2NjM4MTk4MCwiZXhwIjoxNjY2NDY4MzgwfQ.pDHiUlDaJrBKPBghNDi_KFAH9FojCXO5_i7m7ozjlW8";
+
 const authorizedHeader = (token: string) => ({
   headers: {
     authorization: `Bearer ${token}`,
@@ -18,4 +21,8 @@ export const createAuthenticatedMocks = (mock: RequestOptions) => {
 
 export const createAuthenticatedViewerMocks = (mock: RequestOptions) => {
   return createMocks({ ...mock, ...authorizedHeader(VIEWER_AUTH_TOKEN) });
+};
+
+export const createAuthenticatedCustomRoleMocks = (mock: RequestOptions) => {
+  return createMocks({ ...mock, ...authorizedHeader(CUSTOM_ROLE_AUTH_TOKEN) });
 };

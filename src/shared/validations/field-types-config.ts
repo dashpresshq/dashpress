@@ -32,7 +32,7 @@ export const FIELD_TYPES_CONFIG_MAP: Record<
     },
     allowedValidations: [
       "required",
-      "unique",
+      // "unique",
       "maxLength",
       "minLength",
       "regex",
@@ -60,7 +60,7 @@ export const FIELD_TYPES_CONFIG_MAP: Record<
       "minLength",
       "required",
       "regex",
-      "unique",
+      // "unique",
       "matchOtherField",
       "doesntMatchOtherField",
     ],
@@ -90,7 +90,7 @@ export const FIELD_TYPES_CONFIG_MAP: Record<
       "min",
       "postiveNumber",
       "required",
-      "unique",
+      // "unique",
       "greaterThanOtherField",
       "lessThanOtherField",
     ],
@@ -104,7 +104,7 @@ export const FIELD_TYPES_CONFIG_MAP: Record<
       "maxLength",
       "minLength",
       "required",
-      "unique",
+      // "unique",
       "regex",
     ],
   },
@@ -175,7 +175,10 @@ export const FIELD_TYPES_CONFIG_MAP: Record<
     },
     sortable: true,
     typeIsNotChangeAble: true,
-    allowedValidations: ["required", "unique"],
+    allowedValidations: [
+      "required",
+      // "unique"
+    ],
   },
 };
 

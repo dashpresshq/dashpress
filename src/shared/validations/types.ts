@@ -4,14 +4,14 @@ export type ValidationsBoundToType =
   | "isNumber"
   | "isString"
   | "isDate"
-  | "isReference"
+  // | "isReference"
   | "isBoolean"
   | "isJson"
   | "isColor";
 
 export type SelectableAbleValidations =
   | "required"
-  | "unique"
+  // | "unique"
   | "min"
   | "max"
   | "maxLength"

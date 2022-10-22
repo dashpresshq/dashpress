@@ -17,6 +17,12 @@ import {
   max,
   isIn,
 } from "class-validator";
+import {
+  doesntMatchOtherField,
+  greaterThanOtherField,
+  lessThanOtherField,
+  matchOtherField,
+} from "./custom-validations";
 import { FIELD_TYPES_CONFIG_MAP } from "./field-types-config";
 import { handleValidation } from "./handle-validation";
 import { ValidationTypes } from "./types";
@@ -130,9 +136,7 @@ export const ENTITY_VALIDATION_CONFIG: Record<
       otherField: "",
     },
     message: "{{ name }} should match {{otherField}}",
-    implementation: handleValidation((value, parameter, allValues) => {
-      return value === allValues[parameter as string];
-    }, "otherField"),
+    implementation: handleValidation(matchOtherField, "otherField"),
   },
 
   lessThanOtherField: {
@@ -140,9 +144,7 @@ export const ENTITY_VALIDATION_CONFIG: Record<
       otherField: "",
     },
     message: "{{ name }} should be less than {{otherField}}",
-    implementation: handleValidation((value, parameter, allValues) => {
-      return value < allValues[parameter as string];
-    }, "otherField"),
+    implementation: handleValidation(lessThanOtherField, "otherField"),
   },
 
   greaterThanOtherField: {
@@ -150,9 +152,7 @@ export const ENTITY_VALIDATION_CONFIG: Record<
       otherField: "",
     },
     message: "{{ name }} should be greater than {{otherField}}",
-    implementation: handleValidation((value, parameter, allValues) => {
-      return value > allValues[parameter as string];
-    }, "otherField"),
+    implementation: handleValidation(greaterThanOtherField, "otherField"),
   },
 
   doesntMatchOtherField: {
@@ -160,21 +160,19 @@ export const ENTITY_VALIDATION_CONFIG: Record<
       otherField: "",
     },
     message: "{{ name }} should not match {{otherField}}",
-    implementation: handleValidation((value, parameter, allValues) => {
-      return value !== allValues[parameter as string];
-    }, "otherField"),
+    implementation: handleValidation(doesntMatchOtherField, "otherField"),
   },
 
-  isReference: {
-    isBoundToType: ["reference"],
-    message: "{{ name }} doesn't exist",
-    implementation: () => undefined,
-  },
+  // isReference: {
+  //   isBoundToType: ["reference"],
+  //   message: "{{ name }} doesn't exist",
+  //   implementation: () => undefined,
+  // },
 
-  unique: {
-    message: "{{ name }} already exists",
-    implementation: () => undefined,
-  },
+  // unique: {
+  //   message: "{{ name }} already exists",
+  //   implementation: () => undefined,
+  // },
 
   regex: {
     input: {

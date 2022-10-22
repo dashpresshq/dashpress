@@ -11,9 +11,9 @@
     "build:clean": "rimraf .next/cache && rimraf .next/trace",
     "prepublishOnly": "npm run build && npm run build:clean",
     "setup-husky": "husky install",
-    "test": "NODE_OPTIONS=--max_old_space_size=4096 jest --forceExit --logHeapUsage --runInBand",
+    "test": "NODE_OPTIONS=--max_old_space_size=4096 jest --forceExit --runInBand",
     "typecheck": "tsc",
-    "test:cov": "NODE_OPTIONS=--max_old_space_size=4096 jest --forceExit --logHeapUsage --runInBand --coverage",
+    "test:cov": "npm run test -- --coverage",
     "lint": "eslint --ext ts,tsx .",
     "lint:fix": "eslint --fix",
     "verify": "npm run typecheck && npm run lint && npm run test:cov"

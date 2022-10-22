@@ -5,12 +5,8 @@ import {
 } from "backend/lib/config-persistence";
 import { BadRequestError, NotFoundError } from "backend/lib/errors";
 import { IApplicationService } from "backend/types";
-import {
-  canRoleDoThis,
-  isSystemRole,
-  makeRoleId,
-  SystemRoles,
-} from "shared/types";
+import { canRoleDoThisAsync } from "shared/logic/permissions";
+import { isSystemRole, makeRoleId, SystemRoles } from "shared/types";
 
 export interface IRole {
   id: string;
@@ -48,7 +44,7 @@ export class RolesService implements IApplicationService {
   }
 
   async canRoleDoThis(roleId: string, permission: string) {
-    return await canRoleDoThis(roleId, permission, (roleId$1: string) =>
+    return await canRoleDoThisAsync(roleId, permission, (roleId$1: string) =>
       this.getRolePermissions(roleId$1)
     );
   }

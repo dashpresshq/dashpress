@@ -6,11 +6,11 @@ import {
 import { NAVIGATION_LINKS } from "frontend/lib/routing";
 import { useRouter } from "next/router";
 import {
-  canRoleDoThisSync,
   IAuthenticatedUserBag,
   META_USER_PERMISSIONS,
   USER_PERMISSIONS,
 } from "shared/types";
+import { canRoleDoThisSync } from "shared/logic/permissions";
 import { useIsAuthenticatedStore } from "./useAuthenticateUser";
 
 export const AUTHENTICATED_ACCOUNT_URL = "/api/account/mine";

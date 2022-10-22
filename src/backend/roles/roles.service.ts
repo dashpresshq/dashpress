@@ -37,7 +37,7 @@ export class RolesService implements IApplicationService {
     return await this._cacheService.getItem<string[]>(roleId, async () => {
       const role = await this._rolesPersistenceService.getItem(roleId);
       if (!role) {
-        throw new NotFoundError("Role Not Found");
+        throw new NotFoundError("Role not found");
       }
       return role.permissions;
     });

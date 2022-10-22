@@ -54,7 +54,7 @@ export class UsersController {
         Any error here should make the user redirect to login page
       */
       throw new ForbiddenError(
-        "Invalid User",
+        error.message,
         REQUEST_ERROR_CODES.NOT_AUTHENTICATED
       );
     }

@@ -19,15 +19,17 @@ export default requestHandler(
     GET: async () => {
       try {
         configService.bootstrap();
-        await dataService.bootstrap();
-        await schemasService.bootstrap();
-        await usersService.bootstrap();
-        await rolesService.bootstrap();
+
         await credentialsService.bootstrap();
-        await entitiesService.bootstrap();
         await configurationService.bootstrap();
         await environmentVariablesService.bootstrap();
         await appConstantsService.bootstrap();
+        await rolesService.bootstrap();
+
+        await dataService.bootstrap();
+        await schemasService.bootstrap();
+        await usersService.bootstrap();
+        await entitiesService.bootstrap();
       } catch (error) {
         noop();
       }

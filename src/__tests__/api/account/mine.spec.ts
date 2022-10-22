@@ -1,7 +1,10 @@
 import handler from "pages/api/account/mine";
 import {
+  createAuthenticatedCustomRoleMocks,
   createAuthenticatedMocks,
   setupAllTestData,
+  setupRolesTestData,
+  setupUsersTestData,
 } from "__tests__/api/_test-utils";
 
 describe("/api/account/mine", () => {
@@ -54,6 +57,60 @@ describe("/api/account/mine", () => {
         "role": "creator",
         "systemProfile": "{"userId": "1"}",
         "username": "root",
+      }
+    `);
+  });
+
+  it("should return 401 when user doesn't exist", async () => {
+    await setupUsersTestData(false);
+    const { req, res } = createAuthenticatedMocks({
+      method: "GET",
+    });
+
+    await handler(req, res);
+
+    expect(res._getStatusCode()).toBe(401);
+
+    expect(res._getJSONData()).toMatchInlineSnapshot(`
+      {
+        "errorCode": "NOT_AUTHENTICATED",
+        "message": "User not found",
+        "method": "GET",
+        "name": "ForbiddenError",
+        "path": "",
+        "statusCode": 401,
+      }
+    `);
+  });
+
+  it("should return 401 when role doesn't exist", async () => {
+    await setupUsersTestData([
+      {
+        username: "custom-role",
+        password:
+          "$2b$10$/9tw363jvQrylf4eLisJt.afEUphLLaDSfhkweYPhC0ayTJp7Zo0a",
+        name: "Custom Role",
+        role: "role-doesn't-exist",
+        systemProfile: "",
+      },
+    ]);
+
+    const { req, res } = createAuthenticatedCustomRoleMocks({
+      method: "GET",
+    });
+
+    await handler(req, res);
+
+    expect(res._getStatusCode()).toBe(401);
+
+    expect(res._getJSONData()).toMatchInlineSnapshot(`
+      {
+        "errorCode": "NOT_AUTHENTICATED",
+        "message": "Role not found",
+        "method": "GET",
+        "name": "ForbiddenError",
+        "path": "",
+        "statusCode": 401,
       }
     `);
   });

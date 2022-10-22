@@ -1,4 +1,4 @@
-import { IWidgetConfig } from "shared/types";
+import { IWidgetConfig } from "shared/types/dashboard";
 import { forwardRef } from "react";
 import styled, { css } from "styled-components";
 import { SummaryWidget } from "./Summary";

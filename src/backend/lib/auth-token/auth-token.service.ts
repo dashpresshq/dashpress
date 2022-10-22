@@ -3,7 +3,7 @@ import {
   ConfigurationService,
 } from "backend/configuration/configuration.service";
 import jsonwebtoken from "jsonwebtoken";
-import { IAccountProfile } from "shared/types";
+import { IAccountProfile } from "shared/types/user";
 import {
   ConfigKeys,
   configService,

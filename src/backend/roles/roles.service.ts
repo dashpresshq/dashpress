@@ -6,7 +6,7 @@ import {
 import { BadRequestError, NotFoundError } from "backend/lib/errors";
 import { IApplicationService } from "backend/types";
 import { canRoleDoThisAsync } from "shared/logic/permissions";
-import { isSystemRole, makeRoleId, SystemRoles } from "shared/types";
+import { isSystemRole, makeRoleId, SystemRoles } from "shared/types/user";
 
 export interface IRole {
   id: string;

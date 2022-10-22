@@ -9,7 +9,7 @@ import {
   IAuthenticatedUserBag,
   META_USER_PERMISSIONS,
   USER_PERMISSIONS,
-} from "shared/types";
+} from "shared/types/user";
 import { canRoleDoThisSync } from "shared/logic/permissions";
 import { useIsAuthenticatedStore } from "./useAuthenticateUser";
 

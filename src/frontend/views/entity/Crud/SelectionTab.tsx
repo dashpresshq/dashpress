@@ -8,7 +8,7 @@ import {
 } from "@hadmean/chromista";
 import { ViewStateMachine } from "frontend/lib/ViewStateMachine";
 import { useEffect, useState } from "react";
-import { IEntityField } from "shared/types";
+import { IEntityField } from "shared/types/db";
 import { useStringSelections } from "../../../lib/selection";
 
 interface IProps {

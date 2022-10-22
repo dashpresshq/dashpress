@@ -1,6 +1,6 @@
 import { usersController } from "backend/users/users.controller";
 import { CHANGE_PASSWORD_FORM_SCHEMA } from "shared/form-schemas/profile/password";
-import { IAccountProfile } from "shared/types";
+import { IAccountProfile } from "shared/types/user";
 import { requestHandler } from "../../../backend/lib/request";
 
 export default requestHandler({

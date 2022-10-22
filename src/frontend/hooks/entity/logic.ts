@@ -5,7 +5,7 @@ import {
   SYSTEM_COLORS,
 } from "frontend/views/entity/Fields/selection.utils";
 import uniqBy from "lodash/uniqBy";
-import { IColorableSelection } from "shared/types";
+import { IColorableSelection } from "shared/types/ui";
 
 export const getEntitySelectionConfig = (
   entityType: EntityTypesForSelection,

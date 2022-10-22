@@ -1,6 +1,6 @@
 import { IApplicationService } from "backend/types";
 import noop from "lodash/noop";
-import { IDBSchema, IEntityField } from "shared/types";
+import { IDBSchema, IEntityField } from "shared/types/db";
 import { SchemasService, schemasService } from "../schema/schema.service";
 
 export class EntitiesService implements IApplicationService {

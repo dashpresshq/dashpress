@@ -1,4 +1,4 @@
-import { IEntityField } from "shared/types";
+import { IEntityField } from "shared/types/db";
 import { IFieldValidationItem } from "shared/validations/types";
 import {
   FIELD_TYPES_CONFIG_MAP,

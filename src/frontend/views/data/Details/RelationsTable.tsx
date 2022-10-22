@@ -1,7 +1,7 @@
 import { FilterOperators, StyledCard } from "@hadmean/chromista";
 import { useEntityReferenceFields } from "frontend/hooks/entity/entity.store";
 import { useSetPageDetails, useRouteParam } from "frontend/lib/routing";
-import { META_USER_PERMISSIONS } from "shared/types";
+import { META_USER_PERMISSIONS } from "shared/types/user";
 import {
   useEntityDiction,
   useEntityId,

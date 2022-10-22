@@ -1,6 +1,6 @@
 import { rolesController } from "backend/roles/roles.controller";
 import { CREATE_ROLE_FORM_SCHEMA } from "shared/form-schemas/roles/create";
-import { USER_PERMISSIONS } from "shared/types";
+import { USER_PERMISSIONS } from "shared/types/user";
 import { requestHandler } from "../../../backend/lib/request";
 
 export default requestHandler(

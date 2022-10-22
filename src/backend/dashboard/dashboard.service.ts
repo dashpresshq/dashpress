@@ -9,7 +9,7 @@ import {
 import { IApplicationService } from "backend/types";
 import { nanoid } from "nanoid";
 import { userFriendlyCase } from "frontend/lib/strings";
-import { IWidgetConfig, HOME_DASHBOARD_KEY } from "shared/types";
+import { IWidgetConfig, HOME_DASHBOARD_KEY } from "shared/types/dashboard";
 import {
   ConfigurationService,
   configurationService,

@@ -1,5 +1,5 @@
 import { IValueLabel } from "@hadmean/chromista/dist/types";
-import { IEntityField, IEntityRelation } from "shared/types";
+import { IEntityField, IEntityRelation } from "shared/types/db";
 import {
   ConfigurationService,
   configurationService,

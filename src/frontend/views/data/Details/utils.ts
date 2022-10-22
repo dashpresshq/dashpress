@@ -1,4 +1,4 @@
-import { IEntityRelation } from "shared/types";
+import { IEntityRelation } from "shared/types/db";
 import { DataStateKeys } from "@hadmean/protozoa";
 
 export const getEntitiesTabsCount = (

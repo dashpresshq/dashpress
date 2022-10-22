@@ -8,7 +8,7 @@ import {
   IAccountProfile,
   IAccountUser,
   IAuthenticatedUserBag,
-} from "shared/types";
+} from "shared/types/user";
 import { UsersService, usersService } from "./users.service";
 
 export class UsersController {

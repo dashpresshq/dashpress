@@ -4,7 +4,7 @@ import {
 } from "shared/form-schemas/types";
 import { ENTITY_LIST_PATH } from "frontend/hooks/data/data.store";
 
-import { IColorableSelection } from "shared/types";
+import { IColorableSelection } from "shared/types/ui";
 import { FIELD_TYPES_CONFIG_MAP } from "shared/validations";
 import { IFieldValidationItem } from "shared/validations/types";
 import { userFriendlyCase } from "../../lib/strings";

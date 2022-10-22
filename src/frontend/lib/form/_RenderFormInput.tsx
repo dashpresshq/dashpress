@@ -10,7 +10,7 @@ import {
 } from "@hadmean/chromista";
 import { ISharedFormInput } from "@hadmean/chromista/dist/components/Form/_types";
 import { StringUtils } from "@hadmean/protozoa";
-import { IColorableSelection } from "shared/types";
+import { IColorableSelection } from "shared/types/ui";
 import { FIELD_TYPES_CONFIG_MAP } from "shared/validations";
 
 interface IProps {

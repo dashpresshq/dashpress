@@ -21,7 +21,7 @@ import {
 } from "frontend/lib/routing";
 import { EntitiesSelection } from "frontend/views/settings/Entities/Selection";
 import { useEntityDictionPlurals } from "frontend/hooks/entity/entity.queries";
-import { USER_PERMISSIONS } from "shared/types";
+import { USER_PERMISSIONS } from "shared/types/user";
 import { useEntitySlug } from "frontend/hooks/entity/entity.config";
 import {
   useEntityConfiguration,

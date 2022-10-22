@@ -13,11 +13,8 @@ import {
 } from "backend/lib/errors";
 import { HashService } from "backend/lib/hash/hash.service";
 import { IApplicationService } from "backend/types";
-import {
-  ISuccessfullAuthenticationResponse,
-  IAccountUser,
-  IAccountProfile,
-} from "shared/types";
+import { IAccountUser, IAccountProfile } from "shared/types/user";
+import { ISuccessfullAuthenticationResponse } from "shared/types/auth";
 
 const INVALID_LOGIN_MESSAGE = "Invalid Login";
 

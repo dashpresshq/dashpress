@@ -1,5 +1,5 @@
 import { createConfigDomainPersistenceService } from "backend/lib/config-persistence";
-import { HOME_DASHBOARD_KEY, IWidgetConfig } from "shared/types";
+import { HOME_DASHBOARD_KEY, IWidgetConfig } from "shared/types/dashboard";
 
 const TEST_DASHBOARDS: Array<IWidgetConfig> = [
   {

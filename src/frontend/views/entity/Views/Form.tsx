@@ -5,7 +5,7 @@ import {
   IFormProps,
   required,
 } from "@hadmean/protozoa";
-import { ITableTab } from "shared/types";
+import { ITableTab } from "shared/types/data";
 import { Form, Field } from "react-final-form";
 import arrayMutators from "final-form-arrays";
 import { useFieldArray } from "react-final-form-arrays";

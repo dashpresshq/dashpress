@@ -2,7 +2,8 @@ import { Stack, Text, SoftButton, DeleteButton } from "@hadmean/chromista";
 import { SLUG_LOADING_VALUE } from "@hadmean/protozoa";
 import { useEntityConfiguration } from "frontend/hooks/configuration/configuration.store";
 import { NAVIGATION_LINKS } from "frontend/lib/routing";
-import { ISharedWidgetConfig, ITableTab } from "shared/types";
+import { ITableTab } from "shared/types/data";
+import { ISharedWidgetConfig } from "shared/types/dashboard";
 import { IWidgetSetting } from "./types";
 
 interface IProps {

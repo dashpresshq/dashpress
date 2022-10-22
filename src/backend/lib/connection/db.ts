@@ -1,6 +1,6 @@
 import { Knex } from "knex";
 import { makeDbConnection } from "@hadmean/bacteria";
-import { IDataSourceCredentials } from "shared/types";
+import { IDataSourceCredentials } from "shared/types/data-sources";
 import { connectionManager } from "./_manager";
 
 const verify = async (connection: Knex) => {

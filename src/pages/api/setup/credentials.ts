@@ -1,6 +1,9 @@
 import { setupController } from "backend/setup/setup.controller";
 import { IAppliedSchemaFormConfig } from "shared/form-schemas/types";
-import { DATA_SOURCES_CONFIG, IDataSourceCredentials } from "shared/types";
+import {
+  DATA_SOURCES_CONFIG,
+  IDataSourceCredentials,
+} from "shared/types/data-sources";
 import { requestHandler } from "../../../backend/lib/request";
 
 const credentialRequestSchema: IAppliedSchemaFormConfig<IDataSourceCredentials> =

@@ -1,4 +1,4 @@
-import { IEntityField } from "shared/types";
+import { IEntityField } from "shared/types/db";
 import { entitiesService } from "../../../../entities/entities.service";
 import { BadRequestError } from "../../../errors";
 

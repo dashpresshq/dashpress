@@ -4,7 +4,7 @@ import {
   SectionBox,
 } from "@hadmean/chromista";
 import { useSetPageDetails } from "frontend/lib/routing";
-import { USER_PERMISSIONS } from "shared/types";
+import { USER_PERMISSIONS } from "shared/types/user";
 import {
   useAppConfiguration,
   useUpsertConfigurationMutation,

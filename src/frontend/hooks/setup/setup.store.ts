@@ -1,6 +1,6 @@
 import { dataNotFoundMessage, useStorageApi } from "@hadmean/protozoa";
 import { useRouter } from "next/router";
-import { ISetupCheck } from "shared/types";
+import { ISetupCheck } from "shared/types/auth";
 
 export const SETUP_CHECK_URL = "/api/setup/check";
 

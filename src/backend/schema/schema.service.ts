@@ -9,7 +9,8 @@ import {
   CredentialsGroup,
 } from "backend/integrations-configurations";
 import { IApplicationService } from "backend/types";
-import { IDataSourceCredentials, IDBSchema, IEntityField } from "shared/types";
+import { IDBSchema, IEntityField } from "shared/types/db";
+import { IDataSourceCredentials } from "shared/types/data-sources";
 import {
   createConfigDomainPersistenceService,
   AbstractConfigDataPersistenceService,

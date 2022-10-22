@@ -12,7 +12,7 @@ import { useNavigationStack, useSetPageDetails } from "frontend/lib/routing";
 import { userFriendlyCase } from "frontend/lib/strings";
 import { ViewStateMachine } from "frontend/lib/ViewStateMachine";
 import { LINK_TO_DOCS } from "frontend/views/constants";
-import { USER_PERMISSIONS, META_USER_PERMISSIONS } from "shared/types";
+import { USER_PERMISSIONS, META_USER_PERMISSIONS } from "shared/types/user";
 import { AppLayout } from "../../../_layouts/app";
 import { useRoleIdFromRouteParam } from "../hooks";
 import {

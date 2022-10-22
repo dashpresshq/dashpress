@@ -15,7 +15,7 @@ import { required, composeValidators, ButtonLang } from "@hadmean/protozoa";
 import React, { useState } from "react";
 import styled from "styled-components";
 import { isNotEmpty } from "class-validator";
-import { IColorableSelection } from "shared/types";
+import { IColorableSelection } from "shared/types/ui";
 import { Check } from "react-feather";
 import { isUseColorsFlagOn, SYSTEM_COLORS } from "./selection.utils";
 import { isBlackOrWhite } from "./isBlackOrWhite";

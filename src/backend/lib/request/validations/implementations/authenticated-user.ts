@@ -1,4 +1,4 @@
-import { IAccountProfile } from "shared/types";
+import { IAccountProfile } from "shared/types/user";
 import { ValidationImplType } from "./types";
 
 export const authenticatedUserValidationImpl: ValidationImplType<

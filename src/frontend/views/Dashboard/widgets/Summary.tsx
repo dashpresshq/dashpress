@@ -1,7 +1,8 @@
 import { Spacer, StyledCard, Text } from "@hadmean/chromista";
 import { useEntityConfiguration } from "frontend/hooks/configuration/configuration.store";
 import { useEntityFilterCount } from "frontend/hooks/data/data.store";
-import { ISummaryWidgetConfig, ITableTab, QueryFilter } from "shared/types";
+import { ITableTab, QueryFilter } from "shared/types/data";
+import { ISummaryWidgetConfig } from "shared/types/dashboard";
 import styled from "styled-components";
 import { WidgetHeader } from "./Header";
 import { IWidgetSetting } from "./types";

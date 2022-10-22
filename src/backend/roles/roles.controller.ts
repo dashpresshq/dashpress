@@ -3,7 +3,7 @@ import { userFriendlyCase } from "frontend/lib/strings";
 import { ICreateRoleForm } from "shared/form-schemas/roles/create";
 import { IBasePermissionForm } from "shared/form-schemas/roles/permissions/base";
 import { IUpdateRoleForm } from "shared/form-schemas/roles/update";
-import { makeRoleId, SystemRoles } from "shared/types";
+import { makeRoleId, SystemRoles } from "shared/types/user";
 import { RolesService, rolesService } from "./roles.service";
 
 export class RolesController {

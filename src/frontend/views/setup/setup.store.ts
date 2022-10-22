@@ -7,10 +7,8 @@ import { useAuthenticateUser } from "frontend/hooks/auth/useAuthenticateUser";
 import { SETUP_CHECK_URL } from "frontend/hooks/setup/setup.store";
 import { useMutation } from "react-query";
 import { ISetupUserForm } from "shared/form-schemas/setup/user";
-import {
-  IDataSourceCredentials,
-  ISuccessfullAuthenticationResponse,
-} from "shared/types";
+import { ISuccessfullAuthenticationResponse } from "shared/types/auth";
+import { IDataSourceCredentials } from "shared/types/data-sources";
 
 export function useSetupCredentialsMutation() {
   const apiMutateOptions = useWaitForResponseMutationOptions<

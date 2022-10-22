@@ -2,7 +2,7 @@ import {
   META_USER_PERMISSIONS,
   SystemRoles,
   USER_PERMISSIONS,
-} from "shared/types";
+} from "shared/types/user";
 
 export const doesPermissionAllowPermission = (
   permissions: string[],

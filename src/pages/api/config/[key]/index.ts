@@ -1,6 +1,6 @@
-import { USER_PERMISSIONS } from "../../../../shared/types";
-import { configurationController } from "../../../../backend/configuration/configuration.controller";
-import { requestHandler } from "../../../../backend/lib/request";
+import { USER_PERMISSIONS } from "shared/types/user";
+import { configurationController } from "backend/configuration/configuration.controller";
+import { requestHandler } from "backend/lib/request";
 
 export default requestHandler(
   {

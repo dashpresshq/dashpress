@@ -1,7 +1,7 @@
 import { useCallback } from "react";
 import uniqBy from "lodash/uniqBy";
 import { IFieldValidationItem } from "shared/validations/types";
-import { IColorableSelection } from "shared/types";
+import { IColorableSelection } from "shared/types/ui";
 import { EntityTypesForSelection } from "frontend/views/entity/Fields/FieldsSelection";
 import { useRouteParam } from "frontend/lib/routing";
 import {

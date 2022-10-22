@@ -1,6 +1,6 @@
 import { ForbiddenError } from "backend/lib/errors";
 import { rolesService } from "backend/roles/roles.service";
-import { USER_PERMISSIONS } from "shared/types";
+import { USER_PERMISSIONS } from "shared/types/user";
 import { ValidationImplType } from "./types";
 
 const ERROR_MESSAGE =

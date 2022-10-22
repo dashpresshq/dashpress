@@ -3,7 +3,7 @@ import {
   useRouteParam,
   useSetPageDetails,
 } from "frontend/lib/routing";
-import { ITableTab, META_USER_PERMISSIONS } from "shared/types";
+import { ITableTab } from "shared/types/data";
 import {
   DEFAULT_TABLE_PARAMS,
   StyledCard,
@@ -12,6 +12,7 @@ import {
 } from "@hadmean/chromista";
 import { useEntityConfiguration } from "frontend/hooks/configuration/configuration.store";
 import { ViewStateMachine } from "frontend/lib/ViewStateMachine";
+import { META_USER_PERMISSIONS } from "shared/types/user";
 import { AppLayout } from "../../../_layouts/app";
 import {
   useEntityDiction,

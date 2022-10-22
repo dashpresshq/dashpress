@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { makePostRequest, ToastService } from "@hadmean/protozoa";
 import { useMutation } from "react-query";
 import { AuthLayout } from "frontend/_layouts/guest";
-import { ISuccessfullAuthenticationResponse } from "shared/types";
+import { ISuccessfullAuthenticationResponse } from "shared/types/auth";
 import { useRouter } from "next/router";
 import { NAVIGATION_LINKS } from "frontend/lib/routing";
 import { useSetupCheck } from "frontend/hooks/setup/setup.store";

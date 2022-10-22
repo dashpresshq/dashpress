@@ -13,7 +13,7 @@ import {
   IFEPaginatedDataState,
 } from "@hadmean/protozoa";
 import { useState } from "react";
-import { QueryFilter } from "shared/types";
+import { QueryFilter } from "shared/types/data";
 import { ViewStateMachine } from "frontend/lib/ViewStateMachine";
 import { NAVIGATION_LINKS } from "../../../lib/routing/links";
 import {

@@ -15,7 +15,7 @@ import { FIELD_TYPES_CONFIG_MAP } from "shared/validations";
 import { StringUtils } from "@hadmean/protozoa";
 import { ITableColumn } from "@hadmean/chromista";
 import { useMemo } from "react";
-import { IColorableSelection } from "shared/types";
+import { IColorableSelection } from "shared/types/ui";
 import { ENTITY_LIST_PATH } from "frontend/hooks/data/data.store";
 import { useAppConfiguration } from "frontend/hooks/configuration/configuration.store";
 import { fitlerOutHiddenScalarColumns } from "../utils";

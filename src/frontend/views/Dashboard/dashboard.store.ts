@@ -9,7 +9,7 @@ import {
   useApiMutateOptions,
 } from "@hadmean/protozoa";
 import { useMutation } from "react-query";
-import { HOME_DASHBOARD_KEY, IWidgetConfig } from "shared/types";
+import { HOME_DASHBOARD_KEY, IWidgetConfig } from "shared/types/dashboard";
 
 const DASHBOARD_ENDPOINT = (dashboardId: string) =>
   `/api/dashboards/${dashboardId}`;

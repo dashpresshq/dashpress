@@ -1,6 +1,6 @@
 import { SectionBox } from "@hadmean/chromista";
 import { useSetPageDetails } from "frontend/lib/routing";
-import { USER_PERMISSIONS } from "shared/types";
+import { USER_PERMISSIONS } from "shared/types/user";
 import { ENTITY_CONFIGURATION_VIEW } from "./constants";
 import { BaseEntitySettingsLayout } from "./_Base";
 

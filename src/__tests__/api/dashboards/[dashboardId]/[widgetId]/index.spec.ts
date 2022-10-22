@@ -1,6 +1,6 @@
 import handler from "pages/api/dashboards/[dashboardId]/[widgetId]/index";
 import getHandler from "pages/api/dashboards/[dashboardId]";
-import { HOME_DASHBOARD_KEY } from "shared/types";
+import { HOME_DASHBOARD_KEY } from "shared/types/dashboard";
 import {
   setupAllTestData,
   createAuthenticatedMocks,

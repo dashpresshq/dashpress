@@ -11,7 +11,7 @@ import {
   useChangeRouterParam,
   useRouteParam,
 } from "frontend/lib/routing";
-import { USER_PERMISSIONS } from "shared/types";
+import { USER_PERMISSIONS } from "shared/types/user";
 import { LINK_TO_DOCS } from "frontend/views/constants";
 import {
   useEntityCrudSettings,

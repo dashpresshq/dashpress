@@ -1,7 +1,7 @@
 import { Settings, Home, Table, Users, Shield } from "react-feather";
 import { ISelectionView } from "@hadmean/chromista/dist/Layouts/types";
 import { NAVIGATION_LINKS } from "frontend/lib/routing";
-import { USER_PERMISSIONS } from "shared/types";
+import { USER_PERMISSIONS } from "shared/types/user";
 import { useUserHasPermissions } from "frontend/hooks/auth/user.store";
 import { useEntitiesMenuItems } from "../../hooks/entity/entity.store";
 import { ROOT_LINKS_TO_CLEAR_BREADCRUMBS } from "./constants";

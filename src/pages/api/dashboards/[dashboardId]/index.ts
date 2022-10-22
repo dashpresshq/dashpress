@@ -1,5 +1,5 @@
 import { dashboardController } from "backend/dashboard/dashboard.controller";
-import { USER_PERMISSIONS } from "shared/types";
+import { USER_PERMISSIONS } from "shared/types/user";
 import { requestHandler } from "../../../../backend/lib/request";
 
 export default requestHandler(

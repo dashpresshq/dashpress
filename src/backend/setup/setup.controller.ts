@@ -6,12 +6,9 @@ import {
 import { getDbConnection } from "backend/lib/connection/db";
 import { BadRequestError } from "backend/lib/errors";
 import { usersService, UsersService } from "backend/users/users.service";
-import {
-  IAccountUser,
-  SystemRoles,
-  IDataSourceCredentials,
-  ISetupCheck,
-} from "shared/types";
+import { ISetupCheck } from "shared/types/auth";
+import { IAccountUser, SystemRoles } from "shared/types/user";
+import { IDataSourceCredentials } from "shared/types/data-sources";
 
 export type IAccountUserSetupFields = Pick<
   IAccountUser,

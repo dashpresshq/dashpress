@@ -1,5 +1,5 @@
 import { dataNotFoundMessage, useApi, useApiQueries } from "@hadmean/protozoa";
-import { IEntityField, IEntityRelation } from "shared/types";
+import { IEntityField, IEntityRelation } from "shared/types/db";
 import { ILabelValue } from "types";
 import { isRouterParamEnabled } from "..";
 import { useEntityDictionPlurals } from "./entity.queries";

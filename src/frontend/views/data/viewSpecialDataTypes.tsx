@@ -1,5 +1,5 @@
 import { format } from "date-fns";
-import { IColorableSelection } from "shared/types";
+import { IColorableSelection } from "shared/types/ui";
 import { FIELD_TYPES_CONFIG_MAP } from "shared/validations";
 import {
   ReferenceComponent,

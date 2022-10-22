@@ -24,7 +24,7 @@ describe("Handle Validation", () => {
     ).toBeUndefined();
   });
 
-  it("should run validation for those that require paramets", () => {
+  it("should run validation for those that require parameters", () => {
     expect(
       handleValidation(maxLength, "length")(
         "should error out",

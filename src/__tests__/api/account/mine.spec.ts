@@ -3,7 +3,6 @@ import {
   createAuthenticatedCustomRoleMocks,
   createAuthenticatedMocks,
   setupAllTestData,
-  setupRolesTestData,
   setupUsersTestData,
 } from "__tests__/api/_test-utils";
 

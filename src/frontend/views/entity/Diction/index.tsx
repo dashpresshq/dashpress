@@ -6,7 +6,7 @@ import {
 import { SLUG_LOADING_VALUE } from "@hadmean/protozoa";
 import { useSetPageDetails } from "frontend/lib/routing";
 import { ViewStateMachine } from "frontend/lib/ViewStateMachine";
-import { USER_PERMISSIONS } from "shared/types";
+import { USER_PERMISSIONS } from "shared/types/user";
 import {
   useEntityDiction,
   useEntitySlug,

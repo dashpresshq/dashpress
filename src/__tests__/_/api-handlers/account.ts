@@ -1,5 +1,5 @@
 import { rest } from "msw";
-import { IAuthenticatedUserBag } from "shared/types";
+import { IAuthenticatedUserBag } from "shared/types/user";
 import { BASE_TEST_URL } from "./_utils";
 
 let ME: IAuthenticatedUserBag = {

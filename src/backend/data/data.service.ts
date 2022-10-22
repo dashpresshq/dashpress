@@ -6,7 +6,7 @@ import {
 import { Knex } from "knex";
 import get from "lodash/get";
 import { getDbConnection } from "backend/lib/connection/db";
-import { IDataSourceCredentials, QueryFilter } from "shared/types";
+import { QueryFilter } from "shared/types/data";
 import { IApplicationService } from "backend/types";
 import {
   subDays,
@@ -20,6 +20,7 @@ import {
   credentialsService,
   CredentialsGroup,
 } from "backend/integrations-configurations";
+import { IDataSourceCredentials } from "shared/types/data-sources";
 import { IPaginationFilters } from "./types";
 
 export class DataService implements IApplicationService {

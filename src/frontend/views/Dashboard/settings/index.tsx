@@ -4,7 +4,8 @@ import { useEntityConfiguration } from "frontend/hooks/configuration/configurati
 import { NAVIGATION_LINKS } from "frontend/lib/routing";
 import { useRouter } from "next/router";
 import { Field, Form } from "react-final-form";
-import { ITableTab, IWidgetConfig } from "shared/types";
+import { ITableTab } from "shared/types/data";
+import { IWidgetConfig } from "shared/types/dashboard";
 import { ILabelValue } from "types";
 
 const DashboardTypesOptions: {

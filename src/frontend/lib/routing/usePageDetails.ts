@@ -1,7 +1,7 @@
 import { createStore } from "@hadmean/protozoa";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
-import { META_USER_PERMISSIONS } from "shared/types";
+import { META_USER_PERMISSIONS } from "shared/types/user";
 
 interface IPageDetails {
   pageTitle: string;

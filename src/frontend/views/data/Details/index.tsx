@@ -6,7 +6,7 @@ import {
   useNavigationStack,
   useSetPageDetails,
 } from "frontend/lib/routing";
-import { META_USER_PERMISSIONS } from "shared/types";
+import { META_USER_PERMISSIONS } from "shared/types/user";
 import {
   useEntityCrudSettings,
   useEntityDiction,

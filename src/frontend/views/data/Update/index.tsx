@@ -1,7 +1,7 @@
 import { SectionBox, SectionCenter } from "@hadmean/chromista";
 import { TitleLang } from "@hadmean/protozoa";
 import { useNavigationStack, useSetPageDetails } from "frontend/lib/routing";
-import { META_USER_PERMISSIONS } from "shared/types";
+import { META_USER_PERMISSIONS } from "shared/types/user";
 import { useCanUserConfigureApp } from "frontend/hooks/auth/user.store";
 import { AppLayout } from "../../../_layouts/app";
 import {

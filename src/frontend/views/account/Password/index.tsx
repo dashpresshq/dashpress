@@ -1,6 +1,6 @@
 import { SectionBox } from "@hadmean/chromista";
 import { useSetPageDetails } from "frontend/lib/routing";
-import { META_USER_PERMISSIONS } from "shared/types";
+import { META_USER_PERMISSIONS } from "shared/types/user";
 import { useChangePasswordMutation } from "../account.store";
 import { ACCOUNT_VIEW_KEY } from "../constants";
 

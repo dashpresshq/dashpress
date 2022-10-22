@@ -1,5 +1,5 @@
 import { rolesService } from "backend/roles/roles.service";
-import { META_USER_PERMISSIONS, USER_PERMISSIONS } from "shared/types";
+import { META_USER_PERMISSIONS, USER_PERMISSIONS } from "shared/types/user";
 import { NotFoundError } from "../../../errors";
 import { entitiesService } from "../../../../entities/entities.service";
 import { configurationService } from "../../../../configuration/configuration.service";

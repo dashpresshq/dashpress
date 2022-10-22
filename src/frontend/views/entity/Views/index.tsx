@@ -6,13 +6,14 @@ import {
 import { SLUG_LOADING_VALUE } from "@hadmean/protozoa";
 import { useSetPageDetails } from "frontend/lib/routing";
 import { ViewStateMachine } from "frontend/lib/ViewStateMachine";
-import { USER_PERMISSIONS, ITableTab } from "shared/types";
+import { ITableTab } from "shared/types/data";
 import { useEntitySlug } from "frontend/hooks/entity/entity.config";
 import { LINK_TO_DOCS } from "frontend/views/constants";
 import {
   useEntityConfiguration,
   useUpsertConfigurationMutation,
 } from "frontend/hooks/configuration/configuration.store";
+import { USER_PERMISSIONS } from "shared/types/user";
 import { BaseEntitySettingsLayout } from "../_Base";
 import { ENTITY_CONFIGURATION_VIEW } from "../constants";
 import { EntityTableTabForm } from "./Form";

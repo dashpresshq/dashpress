@@ -13,7 +13,7 @@ import { useRouter } from "next/router";
 import { useMutation } from "react-query";
 import { ICreateUserForm } from "shared/form-schemas/users/create";
 import { IResetPasswordForm } from "shared/form-schemas/users/reset-password";
-import { IAccountProfile } from "shared/types";
+import { IAccountProfile } from "shared/types/user";
 import { useUsernameFromRouteParam } from "./hooks";
 
 export const ADMIN_USERS_LIST_ENDPOINT = "/api/account";

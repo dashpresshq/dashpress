@@ -17,7 +17,7 @@ import { AppLayout } from "frontend/_layouts/app";
 import { UserPlus } from "react-feather";
 import { NAVIGATION_LINKS, useSetPageDetails } from "frontend/lib/routing";
 import { useRouter } from "next/router";
-import { IAccountProfile, USER_PERMISSIONS } from "shared/types";
+import { IAccountProfile, USER_PERMISSIONS } from "shared/types/user";
 import { userFriendlyCase } from "frontend/lib/strings";
 import { ViewStateMachine } from "frontend/lib/ViewStateMachine";
 import {

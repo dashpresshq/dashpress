@@ -19,7 +19,7 @@ import { NAVIGATION_LINKS, useSetPageDetails } from "frontend/lib/routing";
 import { useRouter } from "next/router";
 import { userFriendlyCase } from "frontend/lib/strings";
 import { IValueLabel } from "@hadmean/chromista/dist/types";
-import { SystemRoles, USER_PERMISSIONS } from "shared/types";
+import { SystemRoles, USER_PERMISSIONS } from "shared/types/user";
 import { ViewStateMachine } from "frontend/lib/ViewStateMachine";
 import { ADMIN_ROLES_ENDPOINT, useRoleDeletionMutation } from "./roles.store";
 

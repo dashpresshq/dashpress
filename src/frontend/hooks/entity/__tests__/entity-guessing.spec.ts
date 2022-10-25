@@ -42,21 +42,21 @@ describe("getFieldTypeBoundedValidations", () => {
 });
 
 describe("guessEntityValidations", () => {
-  it("should guess `unique` validation when is ID only", () => {
-    expect(
-      guessEntityValidations({
-        isId: true,
-      })
-    ).toMatchInlineSnapshot(`
-      [
-        {
-          "errorMessage": "{{ name }} already exists",
-          "fromSchema": true,
-          "validationType": "unique",
-        },
-      ]
-    `);
-  });
+  // it("should guess `unique` validation when is ID only", () => {
+  //   expect(
+  //     guessEntityValidations({
+  //       isId: true,
+  //     })
+  //   ).toMatchInlineSnapshot(`
+  //     [
+  //       {
+  //         "errorMessage": "{{ name }} already exists",
+  //         "fromSchema": true,
+  //         "validationType": "unique",
+  //       },
+  //     ]
+  //   `);
+  // });
 
   it("should guess `isRequired` validation when is required", () => {
     expect(
@@ -102,11 +102,6 @@ describe("guessEntityValidations", () => {
       })
     ).toMatchInlineSnapshot(`
       [
-        {
-          "errorMessage": "{{ name }} already exists",
-          "fromSchema": true,
-          "validationType": "unique",
-        },
         {
           "errorMessage": "{{ name }} is required",
           "fromSchema": true,

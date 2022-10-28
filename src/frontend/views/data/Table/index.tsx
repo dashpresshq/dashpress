@@ -3,7 +3,7 @@ import {
   useRouteParam,
   useSetPageDetails,
 } from "frontend/lib/routing";
-import { ITableTab } from "shared/types/data";
+import { ITableTab, QueryFilter } from "shared/types/data";
 import {
   DEFAULT_TABLE_PARAMS,
   StyledCard,
@@ -13,6 +13,7 @@ import {
 import { useEntityConfiguration } from "frontend/hooks/configuration/configuration.store";
 import { ViewStateMachine } from "frontend/lib/ViewStateMachine";
 import { META_USER_PERMISSIONS } from "shared/types/user";
+import { useEntitiesFilterCount } from "frontend/hooks/data/data.store";
 import { AppLayout } from "../../../_layouts/app";
 import {
   useEntityDiction,
@@ -58,6 +59,16 @@ export function EntityTable() {
     dataState: DEFAULT_TABLE_PARAMS,
   };
 
+  const tableViewsCount = useEntitiesFilterCount(
+    (entityViews.data || []).length <= 1
+      ? []
+      : entityViews.data.map(({ id, dataState }) => ({
+          entity,
+          id,
+          filters: (dataState.filters as QueryFilter[]) || [],
+        }))
+  );
+
   return (
     <AppLayout actionItems={menuItems} secondaryActionItems={actionItems}>
       <StyledCard>
@@ -71,18 +82,28 @@ export function EntityTable() {
               padContent={false}
               currentTab={tabFromUrl}
               onChange={changeTabParam}
-              contents={(entityViews.data || []).map(({ title, dataState }) => {
-                return {
-                  content: (
-                    <EntityTableView
-                      entity={entity}
-                      defaultTableState={dataState}
-                    />
-                  ),
-                  // TODO add count to views
-                  label: title,
-                };
-              })}
+              contents={(entityViews.data || []).map(
+                ({ title, dataState, id }) => {
+                  const currentViewSlice = tableViewsCount.data[id];
+
+                  const currentCount = currentViewSlice.isLoading
+                    ? "Counting..."
+                    : Intl.NumberFormat("en-US").format(
+                        currentViewSlice?.data?.count || 0
+                      );
+
+                  return {
+                    content: (
+                      <EntityTableView
+                        entity={entity}
+                        defaultTableState={dataState}
+                      />
+                    ),
+                    label: title,
+                    overrideLabel: `${title}(${currentCount})`,
+                  };
+                }
+              )}
             />
           ) : (
             <EntityTableView

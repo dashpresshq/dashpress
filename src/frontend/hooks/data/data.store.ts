@@ -62,6 +62,23 @@ export const useEntityFilterCount = (
   );
 };
 
+export const useEntitiesFilterCount = (
+  entityFilters: { entity: string; filters: QueryFilter[]; id: string }[]
+) => {
+  const filterHashMap = Object.fromEntries(
+    entityFilters.map(({ id, ...rest }) => [id, rest])
+  );
+
+  return useApiQueries<{ id: string }, { count: number }>({
+    input: entityFilters,
+    accessor: "id",
+    pathFn: (id) => {
+      const { entity, filters } = filterHashMap[id];
+      return buildFilterCountQueryString(entity, filters);
+    },
+  });
+};
+
 export const useEntityReferenceCount = (
   entities: string[],
   reference: { entity: string; entityId: string }

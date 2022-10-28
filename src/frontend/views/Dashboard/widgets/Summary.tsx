@@ -29,7 +29,6 @@ export function SummaryWidget({ config, setting }: IProps) {
     ((entityViews.data || []).find(({ id }) => id === queryId)?.dataState
       ?.filters as QueryFilter[]) || [];
 
-  // TODO statusIndicator
   const count = useEntityFilterCount(
     entity,
     entityViews.isLoading ? "loading" : filters

@@ -14,6 +14,7 @@ import { useEntityConfiguration } from "frontend/hooks/configuration/configurati
 import { ViewStateMachine } from "frontend/lib/ViewStateMachine";
 import { META_USER_PERMISSIONS } from "shared/types/user";
 import { useEntitiesFilterCount } from "frontend/hooks/data/data.store";
+import { abbreviateNumber } from "frontend/lib/numbers";
 import { AppLayout } from "../../../_layouts/app";
 import {
   useEntityDiction,
@@ -88,9 +89,7 @@ export function EntityTable() {
 
                   const currentCount = currentViewSlice.isLoading
                     ? "Counting..."
-                    : Intl.NumberFormat("en-US").format(
-                        currentViewSlice?.data?.count || 0
-                      );
+                    : abbreviateNumber(currentViewSlice?.data?.count || 0);
 
                   return {
                     content: (

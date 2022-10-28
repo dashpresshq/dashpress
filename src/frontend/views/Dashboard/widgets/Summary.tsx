@@ -4,6 +4,7 @@ import { useEntityFilterCount } from "frontend/hooks/data/data.store";
 import { ITableTab, QueryFilter } from "shared/types/data";
 import { ISummaryWidgetConfig } from "shared/types/dashboard";
 import styled from "styled-components";
+import { abbreviateNumber } from "frontend/lib/numbers";
 import { WidgetHeader } from "./Header";
 import { IWidgetSetting } from "./types";
 
@@ -42,7 +43,7 @@ export function SummaryWidget({ config, setting }: IProps) {
         <Text size="3" weight="bold">
           {count?.isLoading
             ? "Counting..."
-            : Intl.NumberFormat("en-US").format(count?.data?.count || 0)}
+            : abbreviateNumber(count?.data?.count || 0)}
         </Text>
       </StyledBox>
     </StyledCard>

@@ -7,6 +7,8 @@ import { Field, Form } from "react-final-form";
 import { ITableTab } from "shared/types/data";
 import { IWidgetConfig } from "shared/types/dashboard";
 import { ILabelValue } from "types";
+import { ROYGBIV } from "shared/constants/colors";
+import { useEntityFields } from "frontend/hooks/entity/entity.store";
 
 const DashboardTypesOptions: {
   label: string;
@@ -37,22 +39,18 @@ export function DashboardSettings({
           "entity_views",
           values.entity
         );
+
+        const entityFields = useEntityFields(values.entity);
+
+        const fields = (entityFields.data || [])
+          .filter(({ type }) => type === "date")
+          .map(({ name }) => ({ value: name, label: name }));
+
         return (
           <form onSubmit={handleSubmit}>
             <Field name="title" validate={required} validateFields={[]}>
               {({ input, meta }) => (
                 <FormInput label="Title" meta={meta} input={input} />
-              )}
-            </Field>
-            <Field name="_type" validate={required} validateFields={[]}>
-              {({ input, meta }) => (
-                <FormSelect
-                  label="Type"
-                  disabledOptions={[]}
-                  selectData={DashboardTypesOptions}
-                  meta={meta}
-                  input={input}
-                />
               )}
             </Field>
 
@@ -68,6 +66,48 @@ export function DashboardSettings({
                 />
               )}
             </Field>
+
+            <Field name="_type" validate={required} validateFields={[]}>
+              {({ input, meta }) => (
+                <FormSelect
+                  label="Type"
+                  disabledOptions={[]}
+                  selectData={DashboardTypesOptions}
+                  meta={meta}
+                  input={input}
+                />
+              )}
+            </Field>
+
+            {values._type === "summary-card" && (
+              <>
+                <Field name="color" validate={required} validateFields={[]}>
+                  {({ input, meta }) => (
+                    <FormSelect
+                      label="Color"
+                      selectData={Object.keys(ROYGBIV).map((value) => ({
+                        value,
+                        label: value,
+                      }))}
+                      meta={meta}
+                      input={input}
+                    />
+                  )}
+                </Field>
+                <Field name="dateField" validate={required} validateFields={[]}>
+                  {({ input, meta }) => (
+                    <FormSelect
+                      label="Date Field"
+                      selectData={fields}
+                      meta={meta}
+                      input={input}
+                    />
+                  )}
+                </Field>
+              </>
+            )}
+
+            {/* logo,  */}
 
             <Field name="filter" validateFields={[]}>
               {({ input, meta }) => (

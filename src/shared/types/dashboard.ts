@@ -12,7 +12,7 @@ export interface ITableWidgetConfig extends ISharedWidgetConfig {
 export interface ISummaryWidgetConfig extends ISharedWidgetConfig {
   _type: "summary-card";
   dateField?: string;
-  logo: string;
+  icon: string;
   color: string;
 }
 

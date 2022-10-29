@@ -8,7 +8,7 @@ import {
 import { useEntityConfiguration } from "frontend/hooks/configuration/configuration.store";
 import { useEntityFilterCount } from "frontend/hooks/data/data.store";
 import { ITableTab, QueryFilter } from "shared/types/data";
-import { ArrowDownLeft, ArrowUpRight, Icon, Users } from "react-feather";
+import { ArrowDownLeft, ArrowUpRight, Icon } from "react-feather";
 import { ISummaryWidgetConfig } from "shared/types/dashboard";
 import styled from "styled-components";
 import { ROYGBIV } from "shared/constants/colors";
@@ -47,6 +47,7 @@ interface IPresensentationProps extends IProps {
   color: string;
   fullCount: string;
   relativeCount: string;
+  icon: string;
   direction: "up" | "down" | "side";
 }
 
@@ -78,6 +79,7 @@ function Presentation({
   config,
   direction,
   setting,
+  icon,
 }: IPresensentationProps) {
   const { Icon: DirectionIcon, color: directionColor } =
     DirectionImplementation[direction];
@@ -86,9 +88,10 @@ function Presentation({
     <StyledCard>
       <StyledBox>
         <Stack spacing={18}>
-          <IconRoot color={ROYGBIV[color]}>
-            <Users />
-          </IconRoot>
+          <IconRoot
+            color={ROYGBIV[color]}
+            dangerouslySetInnerHTML={{ __html: icon }}
+          />
           <div style={{ width: "100%" }}>
             <WidgetHeader setting={setting} config={config} />
             <Spacer size="xs" />
@@ -111,7 +114,7 @@ function Presentation({
 }
 
 export function SummaryWidget({ config, setting }: IProps) {
-  const { queryId, entity, color, dateField } = config;
+  const { queryId, entity, color, dateField, icon } = config;
 
   const entityViews = useEntityConfiguration<ITableTab[]>(
     "entity_views",
@@ -157,6 +160,7 @@ export function SummaryWidget({ config, setting }: IProps) {
       color={color}
       setting={setting}
       config={config}
+      icon={icon}
       fullCount={fullCount$1}
       relativeCount={relativeCount$1}
       direction={direction}

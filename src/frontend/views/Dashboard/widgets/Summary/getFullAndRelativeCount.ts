@@ -18,11 +18,13 @@ export const getFullAndRelativeCount = (
 
   const difference = fullCount - relativeCount;
 
-  const percentage = ((fullCount - relativeCount) / relativeCount) * 100;
+  const percentage = Math.abs(
+    ((fullCount - relativeCount) / relativeCount) * 100
+  );
 
   return [
     fullCountReturn,
-    `${percentage.toFixed(2)}%`,
+    `${Math.round(percentage)}%`,
     // eslint-disable-next-line no-nested-ternary
     difference === 0 ? "side" : difference >= 0 ? "up" : "down",
   ];

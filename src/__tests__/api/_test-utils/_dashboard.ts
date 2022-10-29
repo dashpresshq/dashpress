@@ -1,4 +1,5 @@
 import { createConfigDomainPersistenceService } from "backend/lib/config-persistence";
+import { ROYGBIV } from "shared/constants/colors";
 import { HOME_DASHBOARD_KEY, IWidgetConfig } from "shared/types/dashboard";
 
 const TEST_DASHBOARDS: Array<IWidgetConfig> = [
@@ -15,6 +16,8 @@ const TEST_DASHBOARDS: Array<IWidgetConfig> = [
     title: "Widget 2",
     entity: "base-model",
     queryId: "",
+    color: ROYGBIV.blue,
+    logo: "home",
   },
   {
     id: "not-in-dashboard",

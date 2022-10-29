@@ -14,6 +14,7 @@ import {
   ConfigurationService,
   configurationService,
 } from "backend/configuration/configuration.service";
+import { ROYGBIV } from "shared/constants/colors";
 
 const DFAULT_NUMBER_OF_SUMMARY_CARDS = 8;
 
@@ -57,18 +58,29 @@ export class DashboardService implements IApplicationService {
       ({ value }) => !hiddenEntities.includes(value)
     );
 
-    const defaultWidgets: IWidgetConfig[] = entitiesToShow
-      .slice(0, DFAULT_NUMBER_OF_SUMMARY_CARDS)
-      .map((entity) => {
-        return {
-          id: nanoid(),
-          title: userFriendlyCase(`${entity.value}`),
-          _type: "summary-card",
-          entity: entity.value,
-          queryId: "",
-          statusField: "createdAt", // :eyes
-        };
-      });
+    const colorsList = Object.keys(ROYGBIV);
+
+    const defaultWidgets: IWidgetConfig[] = await Promise.all(
+      entitiesToShow
+        .slice(0, DFAULT_NUMBER_OF_SUMMARY_CARDS)
+        .map(async (entity, index) => {
+          const dateField = await this._entitiesService.getEntityFirstFieldType(
+            entity.value,
+            "date"
+          );
+
+          return {
+            id: nanoid(),
+            title: userFriendlyCase(`${entity.value}`),
+            _type: "summary-card",
+            entity: entity.value,
+            queryId: "",
+            color: colorsList[index % (colorsList.length - 1)],
+            dateField,
+            logo: "",
+          };
+        })
+    );
 
     const firstEntity = entitiesToShow[0];
     if (firstEntity) {

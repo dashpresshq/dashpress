@@ -1,6 +1,6 @@
 import { authTokenService } from "backend/lib/auth-token/auth-token.service";
 import { ForbiddenError } from "backend/lib/errors";
-import { REQUEST_ERROR_CODES } from "shared/constants";
+import { REQUEST_ERROR_CODES } from "shared/constants/auth";
 import { ValidationImplType } from "./types";
 
 // :eyes use this in the FE to redirect on login page

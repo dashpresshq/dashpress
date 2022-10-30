@@ -1,4 +1,9 @@
-import { FormButton, FormInput, FormSelect } from "@hadmean/chromista";
+import {
+  FormButton,
+  FormInput,
+  FormSelect,
+  FormTextArea,
+} from "@hadmean/chromista";
 import { required, IFormProps } from "@hadmean/protozoa";
 import { useEntityConfiguration } from "frontend/hooks/configuration/configuration.store";
 import { NAVIGATION_LINKS } from "frontend/lib/routing";
@@ -61,7 +66,6 @@ export function DashboardSettings({
                   disabledOptions={[]}
                   selectData={entities}
                   meta={meta}
-                  //
                   input={input}
                 />
               )}
@@ -104,10 +108,18 @@ export function DashboardSettings({
                     />
                   )}
                 </Field>
+                <Field name="icon" validateFields={[]}>
+                  {({ input, meta }) => (
+                    <FormTextArea
+                      rows={10}
+                      label="SVG"
+                      meta={meta}
+                      input={input}
+                    />
+                  )}
+                </Field>
               </>
             )}
-
-            {/* logo,  */}
 
             <Field name="filter" validateFields={[]}>
               {({ input, meta }) => (

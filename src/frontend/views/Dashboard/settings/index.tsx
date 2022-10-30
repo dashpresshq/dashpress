@@ -112,6 +112,7 @@ export function DashboardSettings({
                   {({ input, meta }) => (
                     <FormTextArea
                       rows={10}
+                      description="Pass in valid SVG in here and with `fill='currentColor'`"
                       label="SVG"
                       meta={meta}
                       input={input}

@@ -1,4 +1,4 @@
-import { abbreviateNumber } from "frontend/lib/numbers";
+import { abbreviateNumber } from "@hadmean/protozoa";
 
 export const getFullAndRelativeCount = (
   fullCount: "loading" | number,

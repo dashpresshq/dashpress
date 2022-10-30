@@ -94,7 +94,7 @@ export function DashboardSettings({
                     />
                   )}
                 </Field>
-                <Field name="dateField" validate={required} validateFields={[]}>
+                <Field name="dateField" validateFields={[]}>
                   {({ input, meta }) => (
                     <FormSelect
                       label="Date Field"

@@ -25,7 +25,7 @@
   ·
   <a href="https://discord.gg/aV6DxwXhzN" target="_blank">Join Community</a>
     ·
-  <a href="https://hadmean.github.io/hadmean/" target="_blank">Documentation</a>
+  <a href="https://hadmean.com" target="_blank">Documentation</a>
 </div>
 
 

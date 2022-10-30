@@ -6,7 +6,7 @@ export const getFullAndRelativeCount = (
   hasDateField: boolean
 ): [string, string, "up" | "down" | "side"] => {
   if (fullCount === "loading" || relativeCount === "loading") {
-    return ["counting", "counting", "side"];
+    return ["Counting", "Counting", "side"];
   }
   const fullCountReturn = abbreviateNumber(fullCount);
   if (!hasDateField) {

@@ -67,10 +67,7 @@
   
       ${c.bold("Next steps:")}
   
-      - ${terminalLink(
-        "Read the documentation",
-        "https://hadmean.github.io/hadmean/"
-      )}
+      - ${terminalLink("Read the documentation", "https://hadmean.com")}
   
       - ${terminalLink(
         "Star Hadmean on GitHub",

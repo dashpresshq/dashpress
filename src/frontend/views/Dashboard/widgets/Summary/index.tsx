@@ -10,6 +10,7 @@ import { DATE_FILTER_VALUE } from "@hadmean/protozoa";
 import { ROYGBIV } from "shared/constants/colors";
 import { IWidgetProps } from "../types";
 import { getFullAndRelativeCount } from "./getFullAndRelativeCount";
+import { useDashboardRelativeDayStore } from "../../relativeTime.store";
 
 export function SummaryWidget({
   config,
@@ -32,6 +33,10 @@ export function SummaryWidget({
     entityViews.isLoading ? "loading" : filters
   );
 
+  const currentRelativeDay = useDashboardRelativeDayStore(
+    (store) => store.currentRelativeDay
+  );
+
   const relativeCount = useEntityFilterCount(
     entity,
     entityViews.isLoading || !dateField
@@ -43,9 +48,7 @@ export function SummaryWidget({
             value: {
               operator: FilterOperators.DATE,
               value: DATE_FILTER_VALUE.BEGINNING_OF_TIME_VALUE,
-              value2: `5:${DATE_FILTER_VALUE.MONTH}`,
-              // value2: DATE_FILTER_VALUE.BEGINNING_OF_TIME_VALUE,
-              // value2: `:${DATE_FILTER_VALUE.MONTH}`,
+              value2: currentRelativeDay,
             },
           },
         ]

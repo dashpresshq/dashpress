@@ -1,20 +1,20 @@
 import { getFullAndRelativeCount } from "../getFullAndRelativeCount";
 
 describe("getFullAndRelativeCount", () => {
-  it("should return `counting` for all any loading state", () => {
+  it("should return `Counting` for all any loading state", () => {
     expect(getFullAndRelativeCount("loading", "loading", true)).toEqual([
-      "counting",
-      "counting",
+      "Counting",
+      "Counting",
       "side",
     ]);
     expect(getFullAndRelativeCount(1, "loading", true)).toEqual([
-      "counting",
-      "counting",
+      "Counting",
+      "Counting",
       "side",
     ]);
     expect(getFullAndRelativeCount("loading", 1, true)).toEqual([
-      "counting",
-      "counting",
+      "Counting",
+      "Counting",
       "side",
     ]);
   });

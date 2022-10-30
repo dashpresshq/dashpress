@@ -21,7 +21,7 @@
 </div>
 
 <div align="center">
-  <a href="https://hadmean-demo.up.railway.app" target="_blank">Live Demo</a>
+  <a href="https://demo.hadmean.com" target="_blank">Live Demo</a>
   ·
   <a href="https://discord.gg/aV6DxwXhzN" target="_blank">Join Community</a>
     ·
@@ -58,7 +58,7 @@
 Hadmean is a no-code, internal tool generator. It is language agnostic, schema driven, extremely customizable, fully featured, user-friendly and has just one installation step.
 
 ### Demo
-Here is an application built with Hadmean in under 30 seconds with just database configuration https://hadmean-demo.up.railway.app
+Here is an application built with Hadmean in under 30 seconds with just database configuration https://demo.hadmean.com
 
 ### Quick Demo
 https://www.loom.com/share/cd2f39681ecf4677a431eb2825339db8

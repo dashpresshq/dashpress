@@ -17,7 +17,7 @@ const TEST_DASHBOARDS: Array<IWidgetConfig> = [
     entity: "base-model",
     queryId: "",
     color: ROYGBIV.blue,
-    logo: "home",
+    icon: "home",
   },
   {
     id: "not-in-dashboard",

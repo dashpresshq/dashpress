@@ -1,3 +1,4 @@
+import { ROYGBIV } from "shared/constants/colors";
 import { IColorableSelection } from "shared/types/ui";
 
 export const isUseColorsFlagOn = (selections: IColorableSelection[]) => {
@@ -7,4 +8,11 @@ export const isUseColorsFlagOn = (selections: IColorableSelection[]) => {
   return !!selections[0].color;
 };
 
-export const SYSTEM_COLORS = ["#0f0", "#f0f", "#ff0", "#00f"];
+export const SYSTEM_COLORS = [
+  ROYGBIV.green,
+  ROYGBIV.red,
+  ROYGBIV.orange,
+  ROYGBIV.yellow,
+  ROYGBIV.indigo,
+  ROYGBIV.violet,
+];

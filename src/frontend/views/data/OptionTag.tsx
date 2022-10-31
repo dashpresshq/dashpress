@@ -1,4 +1,3 @@
-import { lighten } from "polished";
 import styled from "styled-components";
 import { Text } from "@hadmean/chromista";
 import { IColorableSelection } from "shared/types/ui";
@@ -10,13 +9,19 @@ const Root = styled.div<{ color: string }>`
   padding: 2px 8px;
   border-radius: 4px;
   border: 1px solid ${(props) => props.color || DEFAULT_TAG_COLOR};
-  background: ${(props) => lighten(0.45, props.color || DEFAULT_TAG_COLOR)};
+  background: ${(props) => props.color || DEFAULT_TAG_COLOR}1A;
+`;
+
+const TextColor = styled(Text)<{ customColor: string }>`
+  color: ${(props) => props.customColor};
 `;
 
 export function OptionTag({ color, label }: IColorableSelection) {
   return (
     <Root color={color}>
-      <Text size="5"> {label} </Text>
+      <TextColor customColor={color} size="5">
+        {label}
+      </TextColor>
     </Root>
   );
 }

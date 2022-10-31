@@ -3,6 +3,7 @@ import { SchemaForm } from "frontend/lib/form/SchemaForm";
 
 type IThemeSettings = {
   primary: string;
+  dark: boolean;
 };
 
 export function ThemeSettingsForm({
@@ -22,6 +23,10 @@ export function ThemeSettingsForm({
               validationType: "required",
             },
           ],
+        },
+        dark: {
+          type: "boolean",
+          validations: [],
         },
       }}
     />

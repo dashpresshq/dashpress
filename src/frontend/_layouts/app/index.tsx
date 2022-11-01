@@ -133,7 +133,7 @@ export function AppLayout({
                   },
                   {
                     IconComponent: Globe,
-                    label: "Visit our website for docs",
+                    label: "Visit our website",
                     description: `For more links on documentation, roadmap, blog etc`,
                     onClick: () => {
                       window.open("https://hadmean.com");

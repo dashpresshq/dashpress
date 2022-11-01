@@ -1,3 +1,4 @@
+import { IUserPreferences } from "shared/types/user";
 import { IAppliedSchemaFormConfig } from "../types";
 
 export type IUpdateUserForm = {
@@ -13,5 +14,13 @@ export const UPDATE_PROFILE_FORM_SCHEMA: IAppliedSchemaFormConfig<IUpdateUserFor
           validationType: "required",
         },
       ],
+    },
+  };
+
+export const UPDATE_USER_PREFERENCES_FORM_SCHEMA: IAppliedSchemaFormConfig<IUserPreferences> =
+  {
+    theme: {
+      type: "text",
+      validations: [],
     },
   };

@@ -70,6 +70,7 @@ export class UsersService implements IApplicationService {
       const userCopy = { ...user };
       delete userCopy.password;
       delete userCopy.systemProfile;
+      delete userCopy.preferences;
       return userCopy;
     });
   }

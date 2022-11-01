@@ -7,6 +7,7 @@ import { NAVIGATION_LINKS } from "frontend/lib/routing";
 import { useRouter } from "next/router";
 import {
   IAuthenticatedUserBag,
+  IUserPreferences,
   META_USER_PERMISSIONS,
   USER_PERMISSIONS,
 } from "shared/types/user";
@@ -22,6 +23,21 @@ export function useAuthenticatedUserBag() {
   return useStorageApi<IAuthenticatedUserBag>(AUTHENTICATED_ACCOUNT_URL, {
     errorMessage: dataNotFoundMessage("Your account details"),
     enabled: isAuthenticated === true,
+  });
+}
+
+export function useAuthenticatedUserPreferences() {
+  const isAuthenticated = useIsAuthenticatedStore(
+    (store) => store.isAuthenticated
+  );
+  return useStorageApi<IUserPreferences>(AUTHENTICATED_ACCOUNT_URL, {
+    returnUndefinedOnError: true,
+    enabled: isAuthenticated === true,
+    selector: (data: IAuthenticatedUserBag) => {
+      return data.preferences
+        ? JSON.parse(data.preferences)
+        : { theme: "light" };
+    },
   });
 }
 

@@ -8,6 +8,7 @@ import { AUTHENTICATED_ACCOUNT_URL } from "frontend/hooks/auth/user.store";
 import { useMutation } from "react-query";
 import { IChangePasswordForm } from "shared/form-schemas/profile/password";
 import { IUpdateUserForm } from "shared/form-schemas/profile/update";
+import { IUserPreferences } from "shared/types/user";
 
 export function useUpdateProfileMutation() {
   const apiMutateOptions = useWaitForResponseMutationOptions<void>({
@@ -18,6 +19,19 @@ export function useUpdateProfileMutation() {
   return useMutation(
     async (data: IUpdateUserForm) =>
       await makePatchRequest(AUTHENTICATED_ACCOUNT_URL, data),
+    apiMutateOptions
+  );
+}
+
+export function useUpdateProfilePreferencesMutation() {
+  const apiMutateOptions = useWaitForResponseMutationOptions<void>({
+    endpoints: [AUTHENTICATED_ACCOUNT_URL],
+    successMessage: MutationsLang.edit("Preferences"),
+  });
+
+  return useMutation(
+    async (data: IUserPreferences) =>
+      await makePatchRequest("/api/account/preferences", data),
     apiMutateOptions
   );
 }

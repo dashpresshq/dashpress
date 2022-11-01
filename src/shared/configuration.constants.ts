@@ -102,7 +102,6 @@ export const CONFIGURATION_KEYS: Record<
     defaultValue: {
       primary: "#4b38b3",
       primaryDark: "#8c68cd",
-      dark: undefined,
     },
   },
   site_settings: {

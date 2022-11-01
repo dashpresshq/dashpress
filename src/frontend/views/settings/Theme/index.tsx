@@ -10,15 +10,23 @@ import {
   useUpsertConfigurationMutation,
 } from "frontend/hooks/configuration/configuration.store";
 import { ViewStateMachine } from "frontend/lib/ViewStateMachine";
+import { useUpdateProfilePreferencesMutation } from "frontend/views/account/account.store";
+import { useAuthenticatedUserPreferences } from "frontend/hooks/auth/user.store";
+import { IThemeSettings } from "frontend/_layouts/useAppTheme";
 import { BaseSettingsLayout } from "../_Base";
 import { ThemeSettingsForm } from "./Form";
 import { SETTINGS_VIEW_KEY } from "../constants";
 
 export function ThemeSettings() {
-  const themeColor = useAppConfiguration<{ primary: string }>("theme_color");
+  const themeColor = useAppConfiguration<IThemeSettings>("theme_color");
+
+  const userPreferences = useAuthenticatedUserPreferences();
 
   const upsertConfigurationMutation =
     useUpsertConfigurationMutation("theme_color");
+
+  const updateProfilePreferencesMutation =
+    useUpdateProfilePreferencesMutation();
 
   useSetPageDetails({
     pageTitle: "Theme Settings",
@@ -30,15 +38,21 @@ export function ThemeSettings() {
     <BaseSettingsLayout>
       <SectionBox title="Theme Settings">
         <ViewStateMachine
-          loading={themeColor.isLoading}
-          error={themeColor.error}
+          loading={themeColor.isLoading || userPreferences.isLoading}
+          error={themeColor.error || userPreferences.error}
           loader={<FormSkeleton schema={[FormSkeletonSchema.Input]} />}
         >
           <ThemeSettingsForm
-            onSubmit={async (values) => {
-              await upsertConfigurationMutation.mutateAsync(values);
+            onSubmit={async ({ primary, primaryDark, theme }) => {
+              await Promise.all([
+                updateProfilePreferencesMutation.mutateAsync({ theme }),
+                upsertConfigurationMutation.mutateAsync({
+                  primary,
+                  primaryDark,
+                }),
+              ]);
             }}
-            initialValues={themeColor.data}
+            initialValues={{ ...themeColor.data, ...userPreferences.data }}
           />
         </ViewStateMachine>
       </SectionBox>

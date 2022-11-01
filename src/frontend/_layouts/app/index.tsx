@@ -76,6 +76,7 @@ export function AppLayout({
 
   return (
     <DynamicLayout
+      // logo={siteConfig.logo}
       selectionView={selectionViews}
       secondarySelectionView={[
         {

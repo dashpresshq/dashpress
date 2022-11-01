@@ -1,10 +1,6 @@
 import { ButtonLang, IFormProps } from "@hadmean/protozoa";
 import { SchemaForm } from "frontend/lib/form/SchemaForm";
-
-type IThemeSettings = {
-  primary: string;
-  dark: boolean;
-};
+import { IThemeSettings } from "frontend/_layouts/useAppTheme";
 
 export function ThemeSettingsForm({
   onSubmit,
@@ -15,8 +11,29 @@ export function ThemeSettingsForm({
       onSubmit={onSubmit}
       initialValues={initialValues}
       buttonText={`${ButtonLang.update} Theme`}
+      formExtension={{
+        fieldsState: `
+        return {
+          primaryDark: {
+            hidden: !$.formValues.dark
+          },
+          primary: {
+            hidden: !!$.formValues.dark
+          }
+        }`,
+      }}
       fields={{
         primary: {
+          label: "Light Color Scheme",
+          type: "color",
+          validations: [
+            {
+              validationType: "required",
+            },
+          ],
+        },
+        primaryDark: {
+          label: "Dark Color Scheme",
           type: "color",
           validations: [
             {

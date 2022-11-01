@@ -19,6 +19,7 @@ export const CONFIGURATION_KEYS: Record<
   | "entity_columns_labels"
   | "disabled_entities"
   | "dashboard_entities"
+  | "site_settings"
   | "entity_relation_template"
   | "entity_selections"
   | "entity_validations"
@@ -100,6 +101,17 @@ export const CONFIGURATION_KEYS: Record<
     guest: true,
     defaultValue: {
       primary: "#4b38b3",
+      primaryDark: "#8c68cd",
+      dark: undefined,
+    },
+  },
+  site_settings: {
+    guest: true,
+    defaultValue: {
+      name: "Hadmean",
+      fullLogo: "/assets/images/full-logo.png",
+      homeLink: "https://hadmean.com",
+      logo: "/assets/images/logo.png",
     },
   },
 };

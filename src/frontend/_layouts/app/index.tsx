@@ -16,7 +16,7 @@ import { useNavigationStack } from "frontend/lib/routing";
 import { usePageDetailsStore } from "frontend/lib/routing/usePageDetails";
 import { usePageRequiresPermission } from "frontend/hooks/auth/user.store";
 import { useUserAuthenticatedState } from "frontend/hooks/auth/useAuthenticateUser";
-import { User } from "react-feather";
+import { GitHub, Globe, Twitter, User, Users } from "react-feather";
 import { useSiteConfig } from "../../hooks/app/site.config";
 import { NAVIGATION_LINKS } from "../../lib/routing/links";
 import { useSelectionViews } from "./useSelectionViews";
@@ -104,6 +104,44 @@ export function AppLayout({
             {secondaryActionItems.length > 0 ? (
               <DropDownMenu menuItems={secondaryActionItems} />
             ) : null}
+            {process.env.NEXT_PUBLIC_IS_DEMO && (
+              <DropDownMenu
+                menuItems={[
+                  {
+                    IconComponent: GitHub,
+                    label: "Give Us A Star",
+                    description: `Tell us Hadmean is a useful project by dropping us a star`,
+                    onClick: () => {
+                      window.open("https://github.com/hadmean/hadmean");
+                    },
+                  },
+                  {
+                    IconComponent: Twitter,
+                    label: "Follow us on Twitter",
+                    description: `Tweet at @hadmeanHQ if you know others will benefit using Hadmean`,
+                    onClick: () => {
+                      window.open("https://twitter.com/hadmeanHQ");
+                    },
+                  },
+                  {
+                    IconComponent: Users,
+                    label: "Join our Discord community",
+                    description: `Ask your questions here`,
+                    onClick: () => {
+                      window.open("https://discord.gg/aV6DxwXhzN");
+                    },
+                  },
+                  {
+                    IconComponent: Globe,
+                    label: "Visit our website for docs",
+                    description: `For more links on documentation, roadmap, blog etc`,
+                    onClick: () => {
+                      window.open("https://hadmean.com");
+                    },
+                  },
+                ]}
+              />
+            )}
           </Stack>
         </div>
       </Stack>

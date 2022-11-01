@@ -8,9 +8,16 @@ const CONFIG_VALUES = {
     forceIntrospection: true,
     tokenValidityDurationInDays: 5,
   },
+  site_settings: {
+    name: "Hadmean",
+    homeLink: "/",
+    logo: "/assets/images/logo.png",
+    fullLogo: "/assets/images/full-logo.png",
+  },
   default_date_format: "do MMM yyyy",
   theme_color: {
     primary: `#459211`,
+    primaryDark: `#111111`,
   },
   disabled_entities: ["disabled-entity-1", "disabled-entity-2"],
 };
@@ -57,6 +64,12 @@ export const configApiHandlers = [
     BASE_TEST_URL("/api/config/theme_color/__guest"),
     async (_, res, ctx) => {
       return res(ctx.json(CONFIG_VALUES.theme_color));
+    }
+  ),
+  rest.get(
+    BASE_TEST_URL("/api/config/site_settings/__guest"),
+    async (_, res, ctx) => {
+      return res(ctx.json(CONFIG_VALUES.site_settings));
     }
   ),
   rest.get(BASE_TEST_URL("/api/config/:key"), async (req, res, ctx) => {

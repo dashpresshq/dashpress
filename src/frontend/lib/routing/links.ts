@@ -28,6 +28,7 @@ export const NAVIGATION_LINKS = {
     ENTITIES: "/admin/settings/entities",
     SYSTEM: "/admin/settings/system",
     DATE: "/admin/settings/date",
+    SITE: "/admin/settings/site",
     THEME: "/admin/settings/theme",
     CONFIGURATIONS: "/admin/settings/configurations",
   },

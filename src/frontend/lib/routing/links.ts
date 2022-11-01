@@ -6,6 +6,7 @@ export const NAVIGATION_LINKS = {
   ACCOUNT: {
     PROFILE: "/account/profile",
     PASSWORD: "/account/password",
+    PREFERENCES: "/account/preferences",
   },
   USERS: {
     LIST: "/users",

@@ -7,7 +7,7 @@ import {
 import { useIsAuthenticatedStore } from "frontend/hooks/auth/useAuthenticateUser";
 import { useRouter } from "next/router";
 import { ReactNode } from "react";
-import { Lock, LogOut, User } from "react-feather";
+import { Lock, LogOut, User, Settings } from "react-feather";
 import { NAVIGATION_LINKS } from "../../lib/routing/links";
 import { AppLayout } from "../../_layouts/app";
 
@@ -31,6 +31,11 @@ export function BaseAccountLayout({ children }: IProps) {
                 action: NAVIGATION_LINKS.ACCOUNT.PROFILE,
                 name: "Profile",
                 IconComponent: User,
+              },
+              {
+                action: NAVIGATION_LINKS.ACCOUNT.PREFERENCES,
+                name: "Preferences",
+                IconComponent: Settings,
               },
               {
                 action: NAVIGATION_LINKS.ACCOUNT.PASSWORD,

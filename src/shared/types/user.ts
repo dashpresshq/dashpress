@@ -28,9 +28,9 @@ export interface IAuthenticatedUserBag extends IAccountProfile {
   permissions: string[];
 }
 
-export interface IUserPreferences {
+export type IUserPreferences = {
   theme: "light" | "dark";
-}
+};
 
 const CAN_ACCESS_ENTITY = "CAN_ACCESS_ENTITY";
 const NO_PERMISSION_REQUIRED = "NO_PERMISSION_REQUIRED";

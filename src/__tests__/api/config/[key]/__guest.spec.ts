@@ -23,6 +23,7 @@ describe("/api/config/[key]/__guest", () => {
     expect(res._getStatusCode()).toBe(200);
     expect(res._getJSONData()).toEqual({
       primary: "#4b38b3",
+      primaryDark: "#8c68cd",
     });
   });
 
@@ -39,6 +40,7 @@ describe("/api/config/[key]/__guest", () => {
     expect(res._getStatusCode()).toBe(200);
     expect(res._getJSONData()).toEqual({
       primary: "#4b38b3",
+      primaryDark: "#8c68cd",
     });
   });
 

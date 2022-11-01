@@ -10,7 +10,7 @@ import {
   useUpsertConfigurationMutation,
 } from "frontend/hooks/configuration/configuration.store";
 import { ViewStateMachine } from "frontend/lib/ViewStateMachine";
-import { useUpdateProfilePreferencesMutation } from "frontend/views/account/account.store";
+import { useUpdateUserPreferencesMutation } from "frontend/views/account/account.store";
 import { useAuthenticatedUserPreferences } from "frontend/hooks/auth/user.store";
 import { IThemeSettings } from "frontend/_layouts/useAppTheme";
 import { BaseSettingsLayout } from "../_Base";
@@ -25,8 +25,7 @@ export function ThemeSettings() {
   const upsertConfigurationMutation =
     useUpsertConfigurationMutation("theme_color");
 
-  const updateProfilePreferencesMutation =
-    useUpdateProfilePreferencesMutation();
+  const updateUserPreferencesMutation = useUpdateUserPreferencesMutation();
 
   useSetPageDetails({
     pageTitle: "Theme Settings",
@@ -45,7 +44,7 @@ export function ThemeSettings() {
           <ThemeSettingsForm
             onSubmit={async ({ primary, primaryDark, theme }) => {
               await Promise.all([
-                updateProfilePreferencesMutation.mutateAsync({ theme }),
+                updateUserPreferencesMutation.mutateAsync({ theme }),
                 upsertConfigurationMutation.mutateAsync({
                   primary,
                   primaryDark,

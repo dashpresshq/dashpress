@@ -23,7 +23,7 @@ export function useUpdateProfileMutation() {
   );
 }
 
-export function useUpdateProfilePreferencesMutation() {
+export function useUpdateUserPreferencesMutation() {
   const apiMutateOptions = useWaitForResponseMutationOptions<void>({
     endpoints: [AUTHENTICATED_ACCOUNT_URL],
     successMessage: MutationsLang.edit("Preferences"),

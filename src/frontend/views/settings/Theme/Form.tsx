@@ -1,6 +1,7 @@
 import { ButtonLang, IFormProps } from "@hadmean/protozoa";
 import { SchemaForm } from "frontend/lib/form/SchemaForm";
 import { IThemeSettings } from "frontend/_layouts/useAppTheme";
+import { UPDATE_USER_PREFERENCES_FORM_SCHEMA } from "shared/form-schemas/profile/update";
 
 type Settings = IThemeSettings & { theme: "dark" | "light" };
 
@@ -43,24 +44,7 @@ export function ThemeSettingsForm({
             },
           ],
         },
-        theme: {
-          type: "selection",
-          validations: [
-            {
-              validationType: "required",
-            },
-          ],
-          selections: [
-            {
-              label: "Light",
-              value: "light",
-            },
-            {
-              label: "Dark",
-              value: "dark",
-            },
-          ],
-        },
+        theme: UPDATE_USER_PREFERENCES_FORM_SCHEMA.theme,
       }}
     />
   );

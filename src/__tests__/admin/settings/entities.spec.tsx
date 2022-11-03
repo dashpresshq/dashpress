@@ -4,6 +4,7 @@ import { render, screen, waitFor } from "@testing-library/react";
 import { AppWrapper } from "@hadmean/chromista";
 import userEvent from "@testing-library/user-event";
 import EntitiesSettings from "pages/admin/settings/entities";
+import EntitiesSettings1 from "pages/admin/settings";
 
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 
@@ -21,7 +22,7 @@ describe("pages/admin/settings/entities", () => {
   it("should display all entities with correct state", async () => {
     render(
       <AppWrapper>
-        <EntitiesSettings />
+        <EntitiesSettings1 />
       </AppWrapper>
     );
 

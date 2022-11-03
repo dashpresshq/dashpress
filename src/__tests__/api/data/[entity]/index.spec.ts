@@ -170,6 +170,61 @@ describe("/api/data/[entity]/index", () => {
         }
       `);
     });
+
+    it("should disable creation when CRUD setting is turned off for create", async () => {
+      await setupAppConfigTestData({
+        entity_crud_settings__tests: {
+          create: false,
+          details: true,
+          update: true,
+          delete: true,
+        },
+      });
+
+      const { req, res } = createAuthenticatedMocks({
+        method: "POST",
+        query: {
+          entity: "tests",
+        },
+        body: {
+          data: {
+            age: 100,
+            createdAt: new Date("2022-08-17T11:29:57.330Z"),
+            id: 100,
+            name: "Newly Created",
+            status: "closed",
+            verified: true,
+            referenceId: 9,
+          },
+        },
+      });
+
+      await handler(req, res);
+
+      expect(res._getStatusCode()).toBe(401);
+      expect(res._getJSONData()).toMatchInlineSnapshot(`
+        {
+          "errorCode": "",
+          "message": "Action 'create' has been disabled for 'tests'",
+          "method": "POST",
+          "name": "ForbiddenError",
+          "path": "",
+          "statusCode": 401,
+        }
+      `);
+
+      const detailsMock = createAuthenticatedMocks({
+        method: "GET",
+        query: {
+          entity: "tests",
+          id: 100,
+        },
+      });
+
+      await detailsHandler(detailsMock.req, detailsMock.res);
+
+      expect(detailsMock.res._getStatusCode()).toBe(404);
+    });
   });
 });
 

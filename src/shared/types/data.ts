@@ -8,3 +8,5 @@ export type ITableTab = {
   title: string;
   dataState: Pick<IBEPaginatedDataState, "filters" | "sortBy" | "pageSize">;
 };
+
+export const FOR_CODE_COV = 1;

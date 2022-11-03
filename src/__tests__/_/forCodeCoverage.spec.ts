@@ -5,8 +5,12 @@ import { FOR_CODE_COV as $2 } from "backend/types";
 import { FOR_CODE_COV as $3 } from "shared/form-schemas/types";
 import { FOR_CODE_COV as $4 } from "shared/validations/types";
 import { FOR_CODE_COV as $5 } from "types";
+import { FOR_CODE_COV as $6 } from "shared/types/auth";
+import { FOR_CODE_COV as $7 } from "shared/types/data";
+import { FOR_CODE_COV as $8 } from "shared/types/db";
+import { FOR_CODE_COV as $9 } from "shared/types/ui";
 
-noop($1, $2, $3, $4, $5);
+noop($1, $2, $3, $4, $5, $6, $7, $8, $9);
 
 describe("Code coverage ignores plain types file", () => {
   it("should be run once to be counted", () => {

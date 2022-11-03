@@ -12,19 +12,20 @@ describe("/api/data/[entity]/[id]/index", () => {
     await setupTestDatabaseData();
   });
 
-  it("should show data", async () => {
-    const { req, res } = createAuthenticatedMocks({
-      method: "GET",
-      query: {
-        entity: "tests",
-        id: 1,
-      },
-    });
+  describe("GET", () => {
+    it("should show data", async () => {
+      const { req, res } = createAuthenticatedMocks({
+        method: "GET",
+        query: {
+          entity: "tests",
+          id: 1,
+        },
+      });
 
-    await handler(req, res);
+      await handler(req, res);
 
-    expect(res._getStatusCode()).toBe(200);
-    expect(res._getJSONData()).toMatchInlineSnapshot(`
+      expect(res._getStatusCode()).toBe(200);
+      expect(res._getJSONData()).toMatchInlineSnapshot(`
       {
         "age": 5,
         "createdAt": 1660735797330,
@@ -35,25 +36,25 @@ describe("/api/data/[entity]/[id]/index", () => {
         "verified": 1,
       }
     `);
-  });
-
-  it("should hide hidden columns from table data", async () => {
-    await setupAppConfigTestData({
-      hidden_entity_details_columns__tests: ["createdAt", "verified"],
     });
 
-    const { req, res } = createAuthenticatedMocks({
-      method: "GET",
-      query: {
-        entity: "tests",
-        id: 1,
-      },
-    });
+    it("should hide hidden columns from details data", async () => {
+      await setupAppConfigTestData({
+        hidden_entity_details_columns__tests: ["createdAt", "verified"],
+      });
 
-    await handler(req, res);
+      const { req, res } = createAuthenticatedMocks({
+        method: "GET",
+        query: {
+          entity: "tests",
+          id: 1,
+        },
+      });
 
-    expect(res._getStatusCode()).toBe(200);
-    expect(res._getJSONData()).toMatchInlineSnapshot(`
+      await handler(req, res);
+
+      expect(res._getStatusCode()).toBe(200);
+      expect(res._getJSONData()).toMatchInlineSnapshot(`
       {
         "age": 5,
         "id": 1,
@@ -62,33 +63,140 @@ describe("/api/data/[entity]/[id]/index", () => {
         "status": "closed",
       }
     `);
+    });
   });
 
-  it("should delete data", async () => {
-    const { req, res } = createAuthenticatedMocks({
-      method: "DELETE",
-      query: {
-        entity: "tests",
-        id: 1,
-      },
+  describe("PATCH", () => {
+    beforeAll(async () => {
+      await setupAppConfigTestData({
+        hidden_entity_details_columns__tests: [],
+      });
+    });
+    it("should update data", async () => {
+      const { req, res } = createAuthenticatedMocks({
+        method: "PATCH",
+        query: {
+          entity: "tests",
+          id: 1,
+        },
+        body: {
+          data: {
+            age: 6,
+            createdAt: new Date("2032-08-17T11:29:57.330Z"),
+            name: "John Doe Updated",
+            referenceId: 6,
+            status: "opened",
+            verified: false,
+          },
+        },
+      });
+
+      await handler(req, res);
+
+      expect(res._getStatusCode()).toBe(200);
+
+      const detailsMock = createAuthenticatedMocks({
+        method: "GET",
+        query: {
+          entity: "tests",
+          id: 1,
+        },
+      });
+
+      await handler(detailsMock.req, detailsMock.res);
+
+      expect(detailsMock.res._getStatusCode()).toBe(200);
+      expect(detailsMock.res._getJSONData()).toMatchInlineSnapshot(`
+          {
+            "age": 6,
+            "createdAt": 1976354997330,
+            "id": 1,
+            "name": "John Doe Updated",
+            "referenceId": 6,
+            "status": "opened",
+            "verified": 0,
+          }
+        `);
     });
 
-    await handler(req, res);
+    it("should update only allowed fields", async () => {
+      await setupAppConfigTestData({
+        hidden_entity_update_columns__tests: ["referenceId"],
+      });
 
-    expect(res._getStatusCode()).toBe(204);
+      const { req, res } = createAuthenticatedMocks({
+        method: "PATCH",
+        query: {
+          entity: "tests",
+          id: 1,
+        },
+        body: {
+          data: {
+            age: 6,
+            createdAt: new Date("2032-08-17T11:29:57.330Z"),
+            name: "John Doe Updated Again",
+            referenceId: 4444,
+            status: "opened",
+            verified: false,
+          },
+        },
+      });
 
-    const { req: getReq, res: getRes } = createAuthenticatedMocks({
-      method: "GET",
-      query: {
-        entity: "tests",
-        id: 1,
-      },
+      await handler(req, res);
+
+      expect(res._getStatusCode()).toBe(200);
+
+      const detailsMock = createAuthenticatedMocks({
+        method: "GET",
+        query: {
+          entity: "tests",
+          id: 1,
+        },
+      });
+
+      await handler(detailsMock.req, detailsMock.res);
+
+      expect(detailsMock.res._getStatusCode()).toBe(200);
+      expect(detailsMock.res._getJSONData()).toMatchInlineSnapshot(`
+          {
+            "age": 6,
+            "createdAt": 1976354997330,
+            "id": 1,
+            "name": "John Doe Updated Again",
+            "referenceId": 6,
+            "status": "opened",
+            "verified": 0,
+          }
+        `);
     });
+  });
 
-    await handler(getReq, getRes);
+  describe("DELETE", () => {
+    it("should delete data", async () => {
+      const { req, res } = createAuthenticatedMocks({
+        method: "DELETE",
+        query: {
+          entity: "tests",
+          id: 1,
+        },
+      });
 
-    expect(getRes._getStatusCode()).toBe(404);
-    expect(getRes._getJSONData()).toMatchInlineSnapshot(`
+      await handler(req, res);
+
+      expect(res._getStatusCode()).toBe(204);
+
+      const { req: getReq, res: getRes } = createAuthenticatedMocks({
+        method: "GET",
+        query: {
+          entity: "tests",
+          id: 1,
+        },
+      });
+
+      await handler(getReq, getRes);
+
+      expect(getRes._getStatusCode()).toBe(404);
+      expect(getRes._getJSONData()).toMatchInlineSnapshot(`
       {
         "message": "Entity 'tests' with id '1' is not found",
         "method": "GET",
@@ -97,5 +205,6 @@ describe("/api/data/[entity]/[id]/index", () => {
         "statusCode": 404,
       }
     `);
+    });
   });
 });

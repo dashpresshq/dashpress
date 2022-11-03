@@ -57,7 +57,7 @@ describe("/api/account/preferences", () => {
     });
 
     await mineHandler(getRequest.req, getRequest.res);
-
+    // Would be nice to test that it doesn't reset other fields data
     expect(getRequest.res._getJSONData()).toMatchInlineSnapshot(`
       {
         "name": "Root User",

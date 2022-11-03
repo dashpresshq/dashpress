@@ -9,8 +9,9 @@ import { FOR_CODE_COV as $6 } from "shared/types/auth";
 import { FOR_CODE_COV as $7 } from "shared/types/data";
 import { FOR_CODE_COV as $8 } from "shared/types/db";
 import { FOR_CODE_COV as $9 } from "shared/types/ui";
+import { FOR_CODE_COV as $10 } from "backend/data/types";
 
-noop($1, $2, $3, $4, $5, $6, $7, $8, $9);
+noop($1, $2, $3, $4, $5, $6, $7, $8, $9, $10);
 
 describe("Code coverage ignores plain types file", () => {
   it("should be run once to be counted", () => {

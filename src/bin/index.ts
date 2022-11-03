@@ -9,6 +9,7 @@
   const { execa } = await import("execa");
 
   const { default: fetch } = await import("node-fetch");
+
   const replaceRandomCharaters = (envContent: string) => {
     return ["ENCRYPTION_KEY", "AUTH_TOKEN_KEY"].reduce(
       (reducedEnvContent, currentKey) => {

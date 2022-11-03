@@ -1,7 +1,7 @@
 import { IWidgetConfig } from "shared/types/dashboard";
 import { forwardRef } from "react";
 import styled, { css } from "styled-components";
-import { IWidgetSettingProps } from "@hadmean/chromista";
+import { IWidgetSettingProps, BREAKPOINTS } from "@hadmean/chromista";
 import { SummaryWidget } from "./Summary";
 import { TableWidget } from "./Table";
 import { useWidgetNavigationLink } from "./useWidgetNavigationLink";
@@ -23,6 +23,13 @@ const Root = styled.div<{ hasSetting: boolean }>`
 const TableRoot = styled(Root)`
   grid-column-start: 1;
   grid-column-end: 5;
+
+  @media (max-width: ${BREAKPOINTS.lg}) {
+    grid-column-end: 3;
+  }
+  @media (max-width: ${BREAKPOINTS.sm}) {
+    grid-column-end: 2;
+  }
 `;
 
 export const DashboardWidget = forwardRef<HTMLInputElement, IProps>(

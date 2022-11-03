@@ -18,10 +18,10 @@ describe("dateFilterToTime", () => {
     });
     it("should return correct value for BEGINNING_OF_TIME_VALUE", () => {
       expect(
-        DataService.dateFilterToTime(
-          DATE_FILTER_VALUE.BEGINNING_OF_TIME_VALUE
-        ).toISOString()
-      ).toBe("1899-12-30T23:46:25.000Z");
+        DataService.dateFilterToTime(DATE_FILTER_VALUE.BEGINNING_OF_TIME_VALUE)
+          .toISOString()
+          .substring(0, 7)
+      ).toBe("1899-12");
     });
     it("should return correct value for NOW", () => {
       expect(
@@ -30,10 +30,10 @@ describe("dateFilterToTime", () => {
     });
     it("should return correct value for BEGINNING_OF_YEAR", () => {
       expect(
-        DataService.dateFilterToTime(
-          DATE_FILTER_VALUE.BEGINNING_OF_YEAR
-        ).toISOString()
-      ).toBe("2019-12-30T23:00:00.000Z");
+        DataService.dateFilterToTime(DATE_FILTER_VALUE.BEGINNING_OF_YEAR)
+          .toISOString()
+          .substring(0, 7)
+      ).toBe("2019-12");
     });
   });
   describe("Dynamic", () => {

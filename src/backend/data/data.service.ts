@@ -21,6 +21,7 @@ import {
   CredentialsGroup,
 } from "backend/integrations-configurations";
 import { IDataSourceCredentials } from "shared/types/data-sources";
+import { progammingError } from "backend/lib/errors";
 import { IPaginationFilters } from "./types";
 
 export class DataService implements IApplicationService {
@@ -190,11 +191,11 @@ export class DataService implements IApplicationService {
     select: string[],
     query: Record<string, unknown>
   ): Promise<T> {
-    if (select.length === 0) {
-      throw new Error(
-        "We dont do that here, Please define the fields you want to select"
-      );
-    }
+    progammingError(
+      "We dont do that here, Please define the fields you want to select",
+      select.length === 0
+    );
+
     return await (await DataService.getInstance())
       .table(entity)
       .select(select)

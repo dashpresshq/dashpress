@@ -1,4 +1,4 @@
-import { ForbiddenError } from "backend/lib/errors";
+import { ForbiddenError, progammingError } from "backend/lib/errors";
 import { rolesService } from "backend/roles/roles.service";
 import { USER_PERMISSIONS } from "shared/types/user";
 import { ValidationImplType } from "./types";
@@ -10,9 +10,10 @@ export const canUserValidationImpl: ValidationImplType<void> = async (
   req,
   requiredPermission: string
 ): Promise<void> => {
-  if (!requiredPermission) {
-    throw new Error("Please provide the required permission");
-  }
+  progammingError(
+    "Please provide the required permission",
+    !requiredPermission
+  );
 
   if (!Object.values(USER_PERMISSIONS).includes(requiredPermission)) {
     throw new Error("The provided permission seems to be invalid");

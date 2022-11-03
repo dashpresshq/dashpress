@@ -47,7 +47,7 @@ export class DataService implements IApplicationService {
     await DataService.getInstance();
   }
 
-  private dateFilterToTime(value: string) {
+  static dateFilterToTime(value: string) {
     if (value && new Date(value).toString() !== "Invalid Date") {
       return new Date(value);
     }
@@ -118,10 +118,10 @@ export class DataService implements IApplicationService {
         return query.whereBetween(column, [value, value2]);
 
       case FilterOperators.DATE: {
-        const firstTime = this.dateFilterToTime(
+        const firstTime = DataService.dateFilterToTime(
           (value as string) || DATE_FILTER_VALUE.BEGINNING_OF_TIME_VALUE
         );
-        const secondTime = this.dateFilterToTime(
+        const secondTime = DataService.dateFilterToTime(
           (value2 as string) || DATE_FILTER_VALUE.NOW
         );
         const timeBetween: [Date, Date] =

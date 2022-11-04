@@ -16,7 +16,7 @@ const customJestConfig = {
 
   coverageProvider: "v8",
 
-  collectCoverageFrom: ["src/**/*.{ts,tsx}"],
+  // collectCoverageFrom: ["src/**/*.{ts,tsx}"],
 
   moduleDirectories: ["node_modules", "src"],
 

@@ -5,6 +5,60 @@ import { BASE_TEST_URL } from "./_utils";
 
 const ENTITY_CONFIG = {};
 
+const ENTITY_VIEWS: ITableTab[] = [
+  {
+    id: "foo",
+    title: "Foo Entity View",
+    dataState: {
+      pageSize: 15,
+      sortBy: [{ id: "userName", desc: true }],
+      filters: [
+        {
+          id: "username",
+          value: {
+            operator: FilterOperators.BETWEEN,
+            value: "me",
+          },
+        },
+      ],
+    },
+  },
+  {
+    id: "bar",
+    title: "Bar Entity View",
+    dataState: {
+      pageSize: 16,
+      sortBy: [{ id: "userName", desc: true }],
+      filters: [
+        {
+          id: "username",
+          value: {
+            operator: FilterOperators.BETWEEN,
+            value: "me",
+          },
+        },
+      ],
+    },
+  },
+  {
+    id: "baz",
+    title: "Baz Entity View",
+    dataState: {
+      pageSize: 17,
+      sortBy: [{ id: "userName", desc: true }],
+      filters: [
+        {
+          id: "username",
+          value: {
+            operator: FilterOperators.BETWEEN,
+            value: "me",
+          },
+        },
+      ],
+    },
+  },
+];
+
 const CONFIG_VALUES = {
   system_settings: {
     forceIntrospection: true,
@@ -22,7 +76,6 @@ const CONFIG_VALUES = {
     primaryDark: `#111111`,
   },
   disabled_entities: ["disabled-entity-1", "disabled-entity-2"],
-  entity_views: ENTITY_VIEWS,
 };
 
 const DEFAULT_ENTITY_CONFIG_VALUES: Record<
@@ -50,6 +103,7 @@ const DEFAULT_ENTITY_CONFIG_VALUES: Record<
     "related-entity-2": "Custom Label For Entity 2",
     "related-entity-4": "Custom Label For Entity 4",
   }),
+  entity_views: () => ENTITY_VIEWS,
   hidden_entity_table_columns: () => ["hidden-field-1"],
   hidden_entity_create_columns: () => ["hidden-field-1"],
   hidden_entity_update_columns: () => ["hidden-field-1"],

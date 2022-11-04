@@ -1,4 +1,6 @@
+import { FilterOperators } from "@hadmean/protozoa";
 import { rest } from "msw";
+import { ITableTab } from "shared/types/data";
 import { BASE_TEST_URL } from "./_utils";
 
 const ENTITY_CONFIG = {};
@@ -20,6 +22,7 @@ const CONFIG_VALUES = {
     primaryDark: `#111111`,
   },
   disabled_entities: ["disabled-entity-1", "disabled-entity-2"],
+  entity_views: ENTITY_VIEWS,
 };
 
 const DEFAULT_ENTITY_CONFIG_VALUES: Record<

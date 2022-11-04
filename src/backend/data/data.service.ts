@@ -85,7 +85,7 @@ export class DataService implements IApplicationService {
     return new Date();
   }
 
-  private filterOperatorToQuery(
+  static filterOperatorToQuery(
     query: Knex.QueryBuilder,
     column: string,
     { operator, value, value2 }: IColumnFilterBag<unknown>
@@ -137,13 +137,13 @@ export class DataService implements IApplicationService {
     }
   }
 
-  private transformQueryFiltersQueryBuilder = (
+  static transformQueryFiltersQueryBuilder = (
     query: Knex.QueryBuilder,
     queryFilter: QueryFilter[]
   ): Knex.QueryBuilder => {
     queryFilter.forEach((filter) => {
       // eslint-disable-next-line no-param-reassign
-      query = this.filterOperatorToQuery(query, filter.id, filter.value);
+      query = DataService.filterOperatorToQuery(query, filter.id, filter.value);
     });
     return query;
   };
@@ -151,7 +151,7 @@ export class DataService implements IApplicationService {
   async count(entity: string, queryFilter: QueryFilter[]): Promise<number> {
     let query = (await DataService.getInstance()).from(entity);
 
-    query = this.transformQueryFiltersQueryBuilder(query, queryFilter);
+    query = DataService.transformQueryFiltersQueryBuilder(query, queryFilter);
 
     return +get(await query.count({ count: "*" }), [0, "count"], 0);
   }
@@ -162,7 +162,7 @@ export class DataService implements IApplicationService {
     queryFilter: QueryFilter[],
     dataFetchingModifiers: IPaginationFilters
   ) {
-    let query = this.transformQueryFiltersQueryBuilder(
+    let query = DataService.transformQueryFiltersQueryBuilder(
       (await DataService.getInstance()).select(select).from(entity),
       queryFilter
     );

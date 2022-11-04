@@ -2,7 +2,6 @@ import "@testing-library/jest-dom";
 import React from "react";
 import { render, screen, within } from "@testing-library/react";
 import { AppWrapper } from "@hadmean/chromista";
-// import userEvent from "@testing-library/user-event";
 import EntityViewsSettings from "pages/admin/[entity]/config/views";
 
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
@@ -107,6 +106,23 @@ describe("pages/admin/[entity]/config/views", () => {
 
     expect(screen.queryByRole("table")).not.toBeInTheDocument();
     expect(screen.queryByLabelText("Title")).not.toBeInTheDocument();
+
+    await userEvent.click(screen.getByRole("button", { name: "Save Changes" }));
+
+    expect(await screen.findByRole("status")).toHaveTextContent(
+      "App Settings Saved Successfully"
+    );
+  });
+
+  it("should display delete changes", () => {
+    render(
+      <AppWrapper>
+        <EntityViewsSettings />
+      </AppWrapper>
+    );
+    expect(screen.queryAllByRole("tab")).toHaveLength(0);
+    expect(screen.queryByRole("table")).not.toBeInTheDocument();
+    expect(screen.queryByLabelText("Title")).not.toBeInTheDocument();
   });
 
   it("should add new tab", async () => {
@@ -115,28 +131,78 @@ describe("pages/admin/[entity]/config/views", () => {
         <EntityViewsSettings />
       </AppWrapper>
     );
-    expect(
-      await screen.findByRole("tab", { name: "Foo Entity View" })
-    ).toBeInTheDocument();
 
     await userEvent.click(screen.getByRole("button", { name: "Add New Tab" }));
 
     expect(
       await within(screen.getByRole("tabpanel")).findByLabelText("Title")
-    ).toHaveValue("Tab 4");
+    ).toHaveValue("Tab 1");
 
     expect(screen.getByRole("tab", { selected: true })).toHaveTextContent(
-      "Tab 4"
+      "Tab 1"
     );
 
     await userEvent.click(screen.getByRole("button", { name: "Add New Tab" }));
 
     expect(
       await within(screen.getByRole("tabpanel")).findByLabelText("Title")
-    ).toHaveValue("Tab 5");
+    ).toHaveValue("Tab 2");
 
     expect(screen.getByRole("tab", { selected: true })).toHaveTextContent(
-      "Tab 5"
+      "Tab 2"
+    );
+
+    await userEvent.click(screen.getByRole("button", { name: "Save Changes" }));
+
+    expect((await screen.findAllByRole("status"))[0]).toHaveTextContent(
+      "App Settings Saved Successfully"
+    );
+  });
+
+  it("should edit existing tabs", async () => {
+    render(
+      <AppWrapper>
+        <EntityViewsSettings />
+      </AppWrapper>
+    );
+    expect(
+      await screen.findByRole("tab", { name: "Tab 1" })
+    ).toBeInTheDocument();
+
+    await userEvent.type(
+      within(screen.getByRole("tabpanel")).getByLabelText("Title"),
+      "Updated"
+    );
+
+    expect(screen.getByRole("tab", { selected: true })).toHaveTextContent(
+      "Tab 1Updated"
+    );
+
+    expect(screen.getByRole("tab", { name: "Tab 2" })).toBeInTheDocument();
+
+    await userEvent.click(screen.getByRole("button", { name: "Save Changes" }));
+
+    expect((await screen.findAllByRole("status"))[0]).toHaveTextContent(
+      "App Settings Saved Successfully"
+    );
+  });
+
+  it("should save edit changes", async () => {
+    render(
+      <AppWrapper>
+        <EntityViewsSettings />
+      </AppWrapper>
+    );
+    expect(
+      await screen.findByRole("tab", { name: "Tab 1Updated" })
+    ).toBeInTheDocument();
+    expect(screen.getByRole("tab", { name: "Tab 2" })).toBeInTheDocument();
+
+    await userEvent.type(
+      within(screen.getByRole("tabpanel")).getByLabelText("Title"),
+      "Updated"
     );
   });
 });
+
+// add to these test when the sort and filters are accessible

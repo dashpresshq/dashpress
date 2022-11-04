@@ -44,7 +44,7 @@ function TabForm({ values }: IProps) {
   const newTabButton = (
     <SoftButton
       icon="add"
-      label="Add new tab"
+      label="Add New Tab"
       action={() => {
         const newTab: ITableTab = {
           id: StringUtils.generateRandomString(12),

@@ -4,12 +4,16 @@ import { render, screen, within } from "@testing-library/react";
 import { AppWrapper } from "@hadmean/chromista";
 
 import Dashboard from "pages/admin";
+import Dashboard1 from "pages";
 
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
+import noop from "lodash/noop";
 
 setupApiHandlers();
 
 jest.mock("next/router", () => require("next-router-mock"));
+
+noop(Dashboard1);
 
 describe("pages/admin (Dashboard)", () => {
   it.skip("render menu items correctly", async () => {

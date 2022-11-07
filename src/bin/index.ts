@@ -74,6 +74,10 @@
         "Star Hadmean on GitHub",
         "https://github.com/hadmean/hadmean"
       )}
+
+      - ${terminalLink("Join our community", "https://discord.gg/aV6DxwXhzN")}
+
+      - ${terminalLink("Follow us on Twitter", "https://twitter.com/hadmeanHQ")}
     `);
 
   const { stdout, stderr } = execa("npm", ["run", "start:prod"], {

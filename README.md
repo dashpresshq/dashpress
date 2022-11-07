@@ -1,6 +1,6 @@
 <h1 align="center">
   <a href="https://github.com/hadmean/hadmean">
-    <img src="public/assets/images/full-logo-white.png" alt="Logo" height="100">
+    <img src="https://hadmean.com/img/logo.png" alt="Logo" height="100">
   </a>
 </h1>
 
@@ -34,7 +34,7 @@
 
 - [About](#about)
   - [Demo](#demo)
-  - [Quick Demo](#quick-demo)
+  - [Features Walkthrough Video](#features-walkthrough-video)
   - [Motivation](#motivation)
   - [Why you should try Hadmean](#why-you-should-try-hadmean)
 - [Getting Started](#getting-started)
@@ -60,8 +60,8 @@ Hadmean is a no-code, internal tool generator. It is language agnostic, schema d
 ### Demo
 Here is an application built with Hadmean in under 30 seconds with just database configuration https://demo.hadmean.com
 
-### Quick Demo
-https://www.loom.com/share/cd2f39681ecf4677a431eb2825339db8
+### Features Walkthrough Video
+[![Watch the video](https://img.youtube.com/vi/J43YtoSPFRw/mqdefault.jpg)](https://youtu.be/J43YtoSPFRw)
 
 
 ### Motivation
@@ -119,7 +119,7 @@ That is all, You will be able to see the application on http://localhost:3000
  - Views
  - Data Count
  - Synced DB Validation
- - Fields selection / ordering
+ - Fields selection/ordering
  - Cache
  - Secure Credentials Storage
  - Forms fields customization

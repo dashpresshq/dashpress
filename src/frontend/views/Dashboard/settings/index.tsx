@@ -122,7 +122,7 @@ export function DashboardSettings({
               </>
             )}
 
-            <Field name="filter" validateFields={[]}>
+            <Field name="queryId" validateFields={[]}>
               {({ input, meta }) => (
                 <FormSelect
                   label="Query"

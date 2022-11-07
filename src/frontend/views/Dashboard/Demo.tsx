@@ -26,7 +26,7 @@ export function DemoVideo() {
       <StyledCard>
         <StyledBox>
           <Stack justify="space-between">
-            <Text size="4">Intro to Hadmean's features</Text>
+            <Text size="4">Features Walkthrough</Text>
             <Stack width="auto">
               <SoftButton
                 action={() => setValue("false")}

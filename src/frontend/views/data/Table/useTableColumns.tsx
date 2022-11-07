@@ -24,13 +24,16 @@ import { viewSpecialDataTypes } from "../viewSpecialDataTypes";
 
 export const ACTIONS_ACCESSOR = "__actions__";
 
-const buildFilterConfigFromType = (
-  entityType: keyof typeof FIELD_TYPES_CONFIG_MAP,
-  entityFieldSelections: IColorableSelection[],
-  isIdField: boolean,
-  referenceField?: string,
-  lean?: true
-): TableFilterType | undefined => {
+const buildFilterConfigFromType = (prop: {
+  entityType: keyof typeof FIELD_TYPES_CONFIG_MAP;
+  entityFieldSelections: IColorableSelection[];
+  isIdField: boolean;
+  referenceField?: string;
+  lean?: true;
+}): TableFilterType | undefined => {
+  const { entityType, entityFieldSelections, isIdField, referenceField, lean } =
+    prop;
+
   if (lean) {
     return undefined;
   }
@@ -39,12 +42,14 @@ const buildFilterConfigFromType = (
       _type: "idField",
     };
   }
-  const filterType =
+  const filterType$1 =
     FIELD_TYPES_CONFIG_MAP[entityType]?.tableFilterType || "not-filterable";
 
-  if (filterType === "not-filterable") {
+  if (filterType$1 === "not-filterable") {
     return undefined;
   }
+
+  const filterType: TableFilterType = JSON.parse(JSON.stringify(filterType$1));
 
   switch (filterType._type) {
     case "date":
@@ -100,13 +105,13 @@ export const useTableColumns = (entity: string, lean?: true) => {
     const tableColumn: ITableColumn = {
       Header: getEntityFieldLabels(name),
       accessor: name,
-      filter: buildFilterConfigFromType(
-        entityFieldTypes[name],
-        entityFieldSelections[name],
-        idField.data === name,
-        entityToOneReferenceFields.data[name],
-        lean
-      ),
+      filter: buildFilterConfigFromType({
+        entityType: entityFieldTypes[name],
+        entityFieldSelections: entityFieldSelections[name],
+        isIdField: idField.data === name,
+        referenceField: entityToOneReferenceFields.data[name],
+        lean,
+      }),
       disableSortBy: lean
         ? true
         : !FIELD_TYPES_CONFIG_MAP[entityFieldTypes[name]]?.sortable,

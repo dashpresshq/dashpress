@@ -55,12 +55,18 @@
 ---
 
 ## About
-Hadmean is a no-code, internal tool generator. It is language agnostic, schema driven, extremely customizable, fully featured, user-friendly and has just one installation step.
+Hadmean is an admin app generator. 
+
+It generates powerful internal tools in seconds with just one command, no learning curve, no technical skills and finally zero maintenance.
+
+Hadmean will help you focus your engineering resources on building exciting features and not building and maintaining admin dashboards.
 
 ### Demo
-Here is an application built with Hadmean in under 30 seconds with just database configuration https://demo.hadmean.com
+https://demo.hadmean.com is an example admin app generated with zero programming knowledge.
 
 ### Features Walkthrough Video
+Click on the image below to see what you get with Hadmean.
+
 [![Watch the video](https://img.youtube.com/vi/J43YtoSPFRw/mqdefault.jpg)](https://youtu.be/J43YtoSPFRw)
 
 

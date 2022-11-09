@@ -15,7 +15,7 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/23516bfbcca7557d80a5/maintainability)](https://codeclimate.com/github/hadmean/hadmean/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/23516bfbcca7557d80a5/test_coverage)](https://codeclimate.com/github/hadmean/hadmean/test_coverage)
 <img src="https://img.shields.io/codeclimate/tech-debt/hadmean/hadmean" />
-![GitHub CI](https://github.com/hadmean/hadmean/actions/workflows/verify.yml/badge.svg)
+![GitHub CI](https://github.com/hadmean/hadmean/actions/workflows/release.yml/badge.svg)
 
 
 </div>

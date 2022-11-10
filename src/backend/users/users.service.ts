@@ -79,6 +79,9 @@ export class UsersService implements IApplicationService {
     if (username === myUsername) {
       throw new BadRequestError("Can't delete your account");
     }
+    if (username === "root") {
+      throw new BadRequestError("Can't delete root account");
+    }
     await this._usersPersistenceService.removeItem(username);
   }
 

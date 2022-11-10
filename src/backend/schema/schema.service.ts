@@ -72,36 +72,38 @@ export class SchemasService implements IApplicationService {
   }
 
   private formatIntrospectData(rawEntity: Entity[]): IDBSchema[] {
-    const dbSchema = rawEntity.map((entity) => {
-      return {
-        name: entity.name,
-        fields: entity.columns.map((column) => {
-          const column$: IEntityField = {
-            name: column.options.name,
-            isRequired: column.options.nullable ? true : undefined,
-            length: column.options.length,
-            isId: column.primary ? true : undefined,
-            isReference: column.isUsedInRelationAsOwner ? true : undefined,
-            type: column.options.enum
-              ? "enum"
-              : (column.tscType.toLocaleLowerCase() as IEntityField["type"]),
-            enumeration: column.options.enum,
-          };
-          return column$;
-        }),
-        relations: entity.relations.map((relation) => {
-          const relation$: IDBSchema["relations"][0] = {
-            table: relation.relatedTable,
-            relationType: relation.relationType,
-            joinColumnOptions: relation.joinColumnOptions,
-          };
-          return relation$;
-        }),
-        uniqueFields: entity.indices
-          .filter((index) => index.options.unique)
-          .map((index) => index.columns),
-      } as IDBSchema;
-    });
+    const dbSchema = rawEntity
+      .filter(({ name }) => !name.startsWith("hadmean"))
+      .map((entity) => {
+        return {
+          name: entity.name,
+          fields: entity.columns.map((column) => {
+            const column$: IEntityField = {
+              name: column.options.name,
+              isRequired: column.options.nullable ? true : undefined,
+              length: column.options.length,
+              isId: column.primary ? true : undefined,
+              isReference: column.isUsedInRelationAsOwner ? true : undefined,
+              type: column.options.enum
+                ? "enum"
+                : (column.tscType.toLocaleLowerCase() as IEntityField["type"]),
+              enumeration: column.options.enum,
+            };
+            return column$;
+          }),
+          relations: entity.relations.map((relation) => {
+            const relation$: IDBSchema["relations"][0] = {
+              table: relation.relatedTable,
+              relationType: relation.relationType,
+              joinColumnOptions: relation.joinColumnOptions,
+            };
+            return relation$;
+          }),
+          uniqueFields: entity.indices
+            .filter((index) => index.options.unique)
+            .map((index) => index.columns),
+        } as IDBSchema;
+      });
     dbSchema.sort((a, b) => a.name.localeCompare(b.name));
     return dbSchema;
   }

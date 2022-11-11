@@ -21,6 +21,7 @@ interface IProps<T> {
   onSubmit: (data: T) => Promise<void>;
   initialValues?: Partial<T>;
   buttonText: string;
+  action?: string;
   resetForm?: true;
   formExtension?: Partial<IFormExtension>;
 }
@@ -30,10 +31,12 @@ export function SchemaForm<T extends Record<string, unknown>>({
   fields,
   buttonText,
   initialValues,
+  action,
   formExtension,
   resetForm,
 }: IProps<T>) {
-  const scriptContext = useGlobalScriptContext();
+  const scriptContext$1 = useGlobalScriptContext();
+  const scriptContext = { ...scriptContext$1, action };
   // :eyes needs finnesing
   return (
     <Form

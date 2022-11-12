@@ -1,23 +1,21 @@
-import { Spacer, StyledCard } from "@hadmean/chromista";
+import { Spacer, StyledCard, WidgetHeader } from "@hadmean/chromista";
 import { SLUG_LOADING_VALUE } from "@hadmean/protozoa";
 import { useEntityConfiguration } from "frontend/hooks/configuration/configuration.store";
 import { EntityTableView } from "frontend/views/data/Table/TableView";
 import { ITableTab } from "shared/types/data";
 import { ITableWidgetConfig } from "shared/types/dashboard";
 import styled from "styled-components";
-import { WidgetHeader } from "./Header";
-import { IWidgetSetting } from "./types";
+import { IWidgetProps } from "./types";
 
 const StyledBox = styled.div`
   padding: 24px;
 `;
 
-interface IProps {
-  config: ITableWidgetConfig;
-  setting?: IWidgetSetting;
-}
-
-export function TableWidget({ config, setting }: IProps) {
+export function TableWidget({
+  config,
+  setting,
+  link,
+}: IWidgetProps<ITableWidgetConfig>) {
   const { queryId, entity } = config;
 
   const entityViews = useEntityConfiguration<ITableTab[]>(
@@ -32,7 +30,7 @@ export function TableWidget({ config, setting }: IProps) {
   return (
     <StyledCard>
       <StyledBox>
-        <WidgetHeader setting={setting} config={config} />
+        <WidgetHeader setting={setting} title={config.title} link={link} />
         <Spacer />
         <EntityTableView
           entity={entityViews.isLoading ? SLUG_LOADING_VALUE : entity}

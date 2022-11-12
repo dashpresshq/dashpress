@@ -42,6 +42,12 @@ export class BadRequestError extends CustomError {
   }
 }
 
+export function progammingError(errorMessage: string, throwWhen: boolean) {
+  if (throwWhen) {
+    throw new Error(errorMessage);
+  }
+}
+
 const returnError = (
   res: NextApiResponse,
   statusCode: number,

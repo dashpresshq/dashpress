@@ -1,13 +1,14 @@
 import { IWidgetConfig } from "shared/types/dashboard";
 import { forwardRef } from "react";
 import styled, { css } from "styled-components";
+import { IWidgetSettingProps, BREAKPOINTS } from "@hadmean/chromista";
 import { SummaryWidget } from "./Summary";
 import { TableWidget } from "./Table";
-import { IWidgetSetting } from "./types";
+import { useWidgetNavigationLink } from "./useWidgetNavigationLink";
 
 interface IProps {
   config: IWidgetConfig;
-  setting?: IWidgetSetting;
+  setting?: IWidgetSettingProps;
 }
 
 const Root = styled.div<{ hasSetting: boolean }>`
@@ -22,6 +23,13 @@ const Root = styled.div<{ hasSetting: boolean }>`
 const TableRoot = styled(Root)`
   grid-column-start: 1;
   grid-column-end: 5;
+
+  @media (max-width: ${BREAKPOINTS.lg}) {
+    grid-column-end: 3;
+  }
+  @media (max-width: ${BREAKPOINTS.sm}) {
+    grid-column-end: 2;
+  }
 `;
 
 export const DashboardWidget = forwardRef<HTMLInputElement, IProps>(
@@ -30,17 +38,28 @@ export const DashboardWidget = forwardRef<HTMLInputElement, IProps>(
       ref,
       hasSetting: !!setting,
     };
+
+    const navigationLink = useWidgetNavigationLink(
+      config.entity,
+      config.queryId
+    );
+
+    const sharedWidgetProps = {
+      setting,
+      link: navigationLink,
+    };
+
     if (config._type === "summary-card") {
       return (
         <Root {...rootProps}>
-          <SummaryWidget config={config} setting={setting} />
+          <SummaryWidget {...sharedWidgetProps} config={config} />
         </Root>
       );
     }
     if (config._type === "table") {
       return (
         <TableRoot {...rootProps}>
-          <TableWidget config={config} setting={setting} />
+          <TableWidget {...sharedWidgetProps} config={config} />
         </TableRoot>
       );
     }

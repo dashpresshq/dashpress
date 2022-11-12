@@ -6,7 +6,7 @@ import {
 
 describe("/api/entities/list", () => {
   beforeAll(async () => {
-    await setupAllTestData(["schema"]);
+    await setupAllTestData(["schema", "credentials"]);
   });
 
   it("should list all entities", async () => {

@@ -6,7 +6,7 @@ import {
 } from "@hadmean/chromista";
 import { useRouter } from "next/router";
 import { ReactNode } from "react";
-import { Calendar, Columns, Eye, Server } from "react-feather";
+import { Calendar, Columns, Eye, Server, Globe } from "react-feather";
 import { NAVIGATION_LINKS } from "../../lib/routing/links";
 import { AppLayout } from "../../_layouts/app";
 
@@ -41,6 +41,11 @@ export function BaseSettingsLayout({ children }: IProps) {
                 action: NAVIGATION_LINKS.SETTINGS.THEME,
                 name: "Theme",
                 IconComponent: Eye,
+              },
+              {
+                action: NAVIGATION_LINKS.SETTINGS.SITE,
+                name: "Site",
+                IconComponent: Globe,
               },
               // {
               //   action: NAVIGATION_LINKS.SETTINGS.CONFIGURATIONS,

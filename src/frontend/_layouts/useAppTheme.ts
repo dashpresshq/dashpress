@@ -1,19 +1,20 @@
 import { useAppConfiguration } from "frontend/hooks/configuration/configuration.store";
-import { useEffect } from "react";
+import { useTheme } from "@hadmean/chromista";
+import { useAuthenticatedUserPreferences } from "frontend/hooks/auth/user.store";
+
+export type IThemeSettings = {
+  primary: string;
+  primaryDark: string;
+};
 
 export const useAppTheme = () => {
-  const themeColor = useAppConfiguration<{ primary: string }>("theme_color");
-  useEffect(() => {
-    if (themeColor.data?.primary) {
-      const primaryColor = themeColor.data?.primary;
-      document.documentElement.style.setProperty(
-        "--hadmean-primary-color",
-        primaryColor
-      );
-      document.documentElement.style.setProperty(
-        "--hadmean-primary-shade-color",
-        `${primaryColor}1A`
-      );
-    }
-  }, [themeColor]);
+  const themeColor = useAppConfiguration<IThemeSettings>("theme_color");
+  const userPreferences = useAuthenticatedUserPreferences();
+
+  const theme = userPreferences.data?.theme || "light";
+
+  useTheme(
+    theme === "dark" ? themeColor.data?.primaryDark : themeColor.data?.primary,
+    theme
+  );
 };

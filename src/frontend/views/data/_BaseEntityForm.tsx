@@ -117,6 +117,7 @@ export function BaseEntityForm({
         buttonText={action === "update" ? ButtonLang.update : ButtonLang.create}
         resetForm={action === "create" ? true : undefined}
         onSubmit={onSubmit}
+        action={action}
         initialValues={fieldsInitialValues}
         fields={buildAppliedSchemaFormConfig(formSchemaConfig)}
         formExtension={entityFormExtension.data}

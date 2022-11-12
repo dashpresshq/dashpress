@@ -1,16 +1,79 @@
+import { FilterOperators } from "@hadmean/protozoa";
 import { rest } from "msw";
+import { ITableTab } from "shared/types/data";
 import { BASE_TEST_URL } from "./_utils";
 
 const ENTITY_CONFIG = {};
+
+const ENTITY_VIEWS: ITableTab[] = [
+  {
+    id: "foo",
+    title: "Foo Entity View",
+    dataState: {
+      pageSize: 15,
+      sortBy: [{ id: "userName", desc: true }],
+      filters: [
+        {
+          id: "username",
+          value: {
+            operator: FilterOperators.BETWEEN,
+            value: "me",
+          },
+        },
+      ],
+    },
+  },
+  {
+    id: "bar",
+    title: "Bar Entity View",
+    dataState: {
+      pageSize: 16,
+      sortBy: [{ id: "userName", desc: true }],
+      filters: [
+        {
+          id: "username",
+          value: {
+            operator: FilterOperators.BETWEEN,
+            value: "me",
+          },
+        },
+      ],
+    },
+  },
+  {
+    id: "baz",
+    title: "Baz Entity View",
+    dataState: {
+      pageSize: 17,
+      sortBy: [{ id: "userName", desc: true }],
+      filters: [
+        {
+          id: "username",
+          value: {
+            operator: FilterOperators.BETWEEN,
+            value: "me",
+          },
+        },
+      ],
+    },
+  },
+];
 
 const CONFIG_VALUES = {
   system_settings: {
     forceIntrospection: true,
     tokenValidityDurationInDays: 5,
   },
+  site_settings: {
+    name: "Hadmean",
+    homeLink: "/",
+    logo: "/assets/images/logo.png",
+    fullLogo: "/assets/images/full-logo.png",
+  },
   default_date_format: "do MMM yyyy",
   theme_color: {
     primary: `#459211`,
+    primaryDark: `#111111`,
   },
   disabled_entities: ["disabled-entity-1", "disabled-entity-2"],
 };
@@ -40,6 +103,7 @@ const DEFAULT_ENTITY_CONFIG_VALUES: Record<
     "related-entity-2": "Custom Label For Entity 2",
     "related-entity-4": "Custom Label For Entity 4",
   }),
+  entity_views: () => ENTITY_VIEWS,
   hidden_entity_table_columns: () => ["hidden-field-1"],
   hidden_entity_create_columns: () => ["hidden-field-1"],
   hidden_entity_update_columns: () => ["hidden-field-1"],
@@ -57,6 +121,12 @@ export const configApiHandlers = [
     BASE_TEST_URL("/api/config/theme_color/__guest"),
     async (_, res, ctx) => {
       return res(ctx.json(CONFIG_VALUES.theme_color));
+    }
+  ),
+  rest.get(
+    BASE_TEST_URL("/api/config/site_settings/__guest"),
+    async (_, res, ctx) => {
+      return res(ctx.json(CONFIG_VALUES.site_settings));
     }
   ),
   rest.get(BASE_TEST_URL("/api/config/:key"), async (req, res, ctx) => {

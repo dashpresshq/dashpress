@@ -15,7 +15,7 @@ const StyledBox = styled.div`
 export function DemoVideo() {
   const [value, setValue] = useSessionStorage("show-demo", "true");
 
-  if (!process.env.NEXT_PUBLIC_DEMO_VIDEO_LINK) {
+  if (!process.env.NEXT_PUBLIC_YOUTUBE_ID) {
     return null;
   }
   if (value !== "true") {
@@ -26,14 +26,12 @@ export function DemoVideo() {
       <StyledCard>
         <StyledBox>
           <Stack justify="space-between">
-            <Text size="4">
-              Take a sneak peek into Hadmean powerful features
-            </Text>
+            <Text size="4">Features Walkthrough</Text>
             <Stack width="auto">
               <SoftButton
                 action={() => setValue("false")}
                 size="xs"
-                label="Close Demo"
+                label="Close Intro"
                 icon="close"
               />
             </Stack>
@@ -45,20 +43,22 @@ export function DemoVideo() {
               position: "relative",
               textAlign: "center",
               paddingBottom: "500px",
+              overflow: "hidden",
               height: "0",
             }}
           >
-            {/* eslint-disable-next-line jsx-a11y/iframe-has-title */}
             <iframe
-              src={process.env.NEXT_PUBLIC_DEMO_VIDEO_LINK}
+              src={`https://www.youtube.com/embed/${process.env.NEXT_PUBLIC_YOUTUBE_ID}`}
               frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
+              title="Hadmean Features"
               style={{
                 position: "absolute",
                 top: "0",
                 left: "0",
                 width: "100%",
-                height: "500px",
+                height: "100%",
               }}
             />
           </div>

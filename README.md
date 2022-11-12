@@ -1,6 +1,6 @@
 <h1 align="center">
   <a href="https://github.com/hadmean/hadmean">
-    <img src="public/assets/images/full-logo-white.png" alt="Logo" height="100">
+    <img src="https://hadmean.com/img/logo.png" alt="Logo" height="100">
   </a>
 </h1>
 
@@ -15,17 +15,17 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/23516bfbcca7557d80a5/maintainability)](https://codeclimate.com/github/hadmean/hadmean/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/23516bfbcca7557d80a5/test_coverage)](https://codeclimate.com/github/hadmean/hadmean/test_coverage)
 <img src="https://img.shields.io/codeclimate/tech-debt/hadmean/hadmean" />
-![GitHub CI](https://github.com/hadmean/hadmean/actions/workflows/verify.yml/badge.svg)
+![GitHub CI](https://github.com/hadmean/hadmean/actions/workflows/release.yml/badge.svg)
 
 
 </div>
 
 <div align="center">
-  <a href="https://hadmean-demo.up.railway.app" target="_blank">Live Demo</a>
+  <a href="https://demo.hadmean.com" target="_blank">Live Demo</a>
   ·
   <a href="https://discord.gg/aV6DxwXhzN" target="_blank">Join Community</a>
     ·
-  <a href="https://hadmean.github.io/hadmean/" target="_blank">Documentation</a>
+  <a href="https://hadmean.com" target="_blank">Documentation</a>
 </div>
 
 
@@ -34,7 +34,7 @@
 
 - [About](#about)
   - [Demo](#demo)
-  - [Quick Demo](#quick-demo)
+  - [Features Walkthrough Video](#features-walkthrough-video)
   - [Motivation](#motivation)
   - [Why you should try Hadmean](#why-you-should-try-hadmean)
 - [Getting Started](#getting-started)
@@ -55,13 +55,19 @@
 ---
 
 ## About
-Hadmean is a no-code, internal tool generator. It is language agnostic, schema driven, extremely customizable, fully featured, user-friendly and has just one installation step.
+Hadmean is an admin app generator. 
+
+It generates powerful internal tools in seconds with just one command, no learning curve, no technical skills and finally zero maintenance.
+
+Hadmean will help you focus your engineering resources on building exciting features and not building and maintaining admin dashboards.
 
 ### Demo
-Here is an application built with Hadmean in under 30 seconds with just database configuration https://hadmean-demo.up.railway.app
+https://demo.hadmean.com is an example admin app generated with zero programming knowledge.
 
-### Quick Demo
-https://www.loom.com/share/cd2f39681ecf4677a431eb2825339db8
+### Features Walkthrough Video
+Click on the image below to see what you get with Hadmean.
+
+[![Watch the video](https://img.youtube.com/vi/J43YtoSPFRw/mqdefault.jpg)](https://youtu.be/J43YtoSPFRw)
 
 
 ### Motivation
@@ -119,7 +125,7 @@ That is all, You will be able to see the application on http://localhost:3000
  - Views
  - Data Count
  - Synced DB Validation
- - Fields selection / ordering
+ - Fields selection/ordering
  - Cache
  - Secure Credentials Storage
  - Forms fields customization

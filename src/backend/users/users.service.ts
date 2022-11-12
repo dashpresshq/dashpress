@@ -70,6 +70,7 @@ export class UsersService implements IApplicationService {
       const userCopy = { ...user };
       delete userCopy.password;
       delete userCopy.systemProfile;
+      delete userCopy.preferences;
       return userCopy;
     });
   }
@@ -77,6 +78,9 @@ export class UsersService implements IApplicationService {
   async removeUser(username: string, myUsername: string) {
     if (username === myUsername) {
       throw new BadRequestError("Can't delete your account");
+    }
+    if (username === "root") {
+      throw new BadRequestError("Can't delete root account");
     }
     await this._usersPersistenceService.removeItem(username);
   }

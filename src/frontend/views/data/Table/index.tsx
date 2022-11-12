@@ -14,7 +14,7 @@ import { useEntityConfiguration } from "frontend/hooks/configuration/configurati
 import { ViewStateMachine } from "frontend/lib/ViewStateMachine";
 import { META_USER_PERMISSIONS } from "shared/types/user";
 import { useEntitiesFilterCount } from "frontend/hooks/data/data.store";
-import { abbreviateNumber } from "frontend/lib/numbers";
+import { abbreviateNumber } from "@hadmean/protozoa";
 import { AppLayout } from "../../../_layouts/app";
 import {
   useEntityDiction,

@@ -4,6 +4,7 @@ import {
   maxLength,
   IFormProps,
   required,
+  StringUtils,
 } from "@hadmean/protozoa";
 import { ITableTab } from "shared/types/data";
 import { Form, Field } from "react-final-form";
@@ -25,7 +26,6 @@ import {
   useTableColumns,
 } from "frontend/views/data/Table/useTableColumns";
 import { useEntitySlug } from "frontend/hooks/entity/entity.config";
-import { nanoid } from "nanoid";
 
 interface IProps {
   values: ITableTab[];
@@ -44,10 +44,10 @@ function TabForm({ values }: IProps) {
   const newTabButton = (
     <SoftButton
       icon="add"
-      label="Add new tab"
+      label="Add New Tab"
       action={() => {
         const newTab: ITableTab = {
-          id: nanoid(),
+          id: StringUtils.generateRandomString(12),
           title: `Tab ${fields.length + 1}`,
           dataState: {
             filters: [],

@@ -9,6 +9,7 @@
   const { execa } = await import("execa");
 
   const { default: fetch } = await import("node-fetch");
+
   const replaceRandomCharaters = (envContent: string) => {
     return ["ENCRYPTION_KEY", "AUTH_TOKEN_KEY"].reduce(
       (reducedEnvContent, currentKey) => {
@@ -67,15 +68,16 @@
   
       ${c.bold("Next steps:")}
   
-      - ${terminalLink(
-        "Read the documentation",
-        "https://hadmean.github.io/hadmean/"
-      )}
+      - ${terminalLink("Read the documentation", "https://hadmean.com")}
   
       - ${terminalLink(
         "Star Hadmean on GitHub",
         "https://github.com/hadmean/hadmean"
       )}
+
+      - ${terminalLink("Join our community", "https://discord.gg/aV6DxwXhzN")}
+
+      - ${terminalLink("Follow us on Twitter", "https://twitter.com/hadmeanHQ")}
     `);
 
   const { stdout, stderr } = execa("npm", ["run", "start:prod"], {

@@ -31,6 +31,16 @@ export const viewSpecialDataTypes = (
     );
   }
 
+  if (entityFieldTypes[fieldName] === "image") {
+    return (
+      <img
+        src={value as string}
+        alt={fieldName}
+        width={options.displayFrom === "table" ? "48px" : undefined}
+      />
+    );
+  }
+
   if (entityToOneReferenceFields?.[fieldName]) {
     return (
       <ReferenceComponent

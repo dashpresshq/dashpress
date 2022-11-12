@@ -1,4 +1,9 @@
-import { FormButton, FormInput, FormSelect } from "@hadmean/chromista";
+import {
+  FormButton,
+  FormInput,
+  FormSelect,
+  FormTextArea,
+} from "@hadmean/chromista";
 import { required, IFormProps } from "@hadmean/protozoa";
 import { useEntityConfiguration } from "frontend/hooks/configuration/configuration.store";
 import { NAVIGATION_LINKS } from "frontend/lib/routing";
@@ -7,6 +12,8 @@ import { Field, Form } from "react-final-form";
 import { ITableTab } from "shared/types/data";
 import { IWidgetConfig } from "shared/types/dashboard";
 import { ILabelValue } from "types";
+import { ROYGBIV } from "shared/constants/colors";
+import { useEntityFields } from "frontend/hooks/entity/entity.store";
 
 const DashboardTypesOptions: {
   label: string;
@@ -37,6 +44,13 @@ export function DashboardSettings({
           "entity_views",
           values.entity
         );
+
+        const entityFields = useEntityFields(values.entity);
+
+        const fields = (entityFields.data || [])
+          .filter(({ type }) => type === "date")
+          .map(({ name }) => ({ value: name, label: name }));
+
         return (
           <form onSubmit={handleSubmit}>
             <Field name="title" validate={required} validateFields={[]}>
@@ -44,6 +58,19 @@ export function DashboardSettings({
                 <FormInput label="Title" meta={meta} input={input} />
               )}
             </Field>
+
+            <Field name="entity" validate={required} validateFields={[]}>
+              {({ input, meta }) => (
+                <FormSelect
+                  label="Entity"
+                  disabledOptions={[]}
+                  selectData={entities}
+                  meta={meta}
+                  input={input}
+                />
+              )}
+            </Field>
+
             <Field name="_type" validate={required} validateFields={[]}>
               {({ input, meta }) => (
                 <FormSelect
@@ -56,20 +83,46 @@ export function DashboardSettings({
               )}
             </Field>
 
-            <Field name="entity" validate={required} validateFields={[]}>
-              {({ input, meta }) => (
-                <FormSelect
-                  label="Entity"
-                  disabledOptions={[]}
-                  selectData={entities}
-                  meta={meta}
-                  //
-                  input={input}
-                />
-              )}
-            </Field>
+            {values._type === "summary-card" && (
+              <>
+                <Field name="color" validate={required} validateFields={[]}>
+                  {({ input, meta }) => (
+                    <FormSelect
+                      label="Color"
+                      selectData={Object.keys(ROYGBIV).map((value) => ({
+                        value,
+                        label: value,
+                      }))}
+                      meta={meta}
+                      input={input}
+                    />
+                  )}
+                </Field>
+                <Field name="dateField" validateFields={[]}>
+                  {({ input, meta }) => (
+                    <FormSelect
+                      label="Date Field"
+                      selectData={fields}
+                      meta={meta}
+                      input={input}
+                    />
+                  )}
+                </Field>
+                <Field name="icon" validateFields={[]}>
+                  {({ input, meta }) => (
+                    <FormTextArea
+                      rows={10}
+                      description="Pass in valid SVG in here with the prop `fill='currentColor'`"
+                      label="SVG"
+                      meta={meta}
+                      input={input}
+                    />
+                  )}
+                </Field>
+              </>
+            )}
 
-            <Field name="filter" validateFields={[]}>
+            <Field name="queryId" validateFields={[]}>
               {({ input, meta }) => (
                 <FormSelect
                   label="Query"

@@ -10,14 +10,14 @@ export function SignInForm({ onSubmit }: IFormProps<ISignInForm>) {
   return (
     <>
       {process.env.NEXT_PUBLIC_IS_DEMO && (
-        <>
+        <div data-testid="NEXT_PUBLIC_IS_DEMO">
           <Text size="6">
             Username is <b>root</b>
           </Text>
           <Text size="6">
             Password is <b>password</b>
           </Text>
-        </>
+        </div>
       )}
       <SchemaForm<ISignInForm>
         onSubmit={onSubmit}

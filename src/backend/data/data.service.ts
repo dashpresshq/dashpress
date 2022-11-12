@@ -21,6 +21,7 @@ import {
   CredentialsGroup,
 } from "backend/integrations-configurations";
 import { IDataSourceCredentials } from "shared/types/data-sources";
+import { progammingError } from "backend/lib/errors";
 import { IPaginationFilters } from "./types";
 
 export class DataService implements IApplicationService {
@@ -47,7 +48,7 @@ export class DataService implements IApplicationService {
     await DataService.getInstance();
   }
 
-  private dateFilterToTime(value: string) {
+  static dateFilterToTime(value: string) {
     if (value && new Date(value).toString() !== "Invalid Date") {
       return new Date(value);
     }
@@ -84,7 +85,7 @@ export class DataService implements IApplicationService {
     return new Date();
   }
 
-  private filterOperatorToQuery(
+  static filterOperatorToQuery(
     query: Knex.QueryBuilder,
     column: string,
     { operator, value, value2 }: IColumnFilterBag<unknown>
@@ -118,10 +119,10 @@ export class DataService implements IApplicationService {
         return query.whereBetween(column, [value, value2]);
 
       case FilterOperators.DATE: {
-        const firstTime = this.dateFilterToTime(
+        const firstTime = DataService.dateFilterToTime(
           (value as string) || DATE_FILTER_VALUE.BEGINNING_OF_TIME_VALUE
         );
-        const secondTime = this.dateFilterToTime(
+        const secondTime = DataService.dateFilterToTime(
           (value2 as string) || DATE_FILTER_VALUE.NOW
         );
         const timeBetween: [Date, Date] =
@@ -136,13 +137,13 @@ export class DataService implements IApplicationService {
     }
   }
 
-  private transformQueryFiltersQueryBuilder = (
+  static transformQueryFiltersQueryBuilder = (
     query: Knex.QueryBuilder,
     queryFilter: QueryFilter[]
   ): Knex.QueryBuilder => {
     queryFilter.forEach((filter) => {
       // eslint-disable-next-line no-param-reassign
-      query = this.filterOperatorToQuery(query, filter.id, filter.value);
+      query = DataService.filterOperatorToQuery(query, filter.id, filter.value);
     });
     return query;
   };
@@ -150,7 +151,7 @@ export class DataService implements IApplicationService {
   async count(entity: string, queryFilter: QueryFilter[]): Promise<number> {
     let query = (await DataService.getInstance()).from(entity);
 
-    query = this.transformQueryFiltersQueryBuilder(query, queryFilter);
+    query = DataService.transformQueryFiltersQueryBuilder(query, queryFilter);
 
     return +get(await query.count({ count: "*" }), [0, "count"], 0);
   }
@@ -161,7 +162,7 @@ export class DataService implements IApplicationService {
     queryFilter: QueryFilter[],
     dataFetchingModifiers: IPaginationFilters
   ) {
-    let query = this.transformQueryFiltersQueryBuilder(
+    let query = DataService.transformQueryFiltersQueryBuilder(
       (await DataService.getInstance()).select(select).from(entity),
       queryFilter
     );
@@ -190,11 +191,11 @@ export class DataService implements IApplicationService {
     select: string[],
     query: Record<string, unknown>
   ): Promise<T> {
-    if (select.length === 0) {
-      throw new Error(
-        "We dont do that here, Please define the fields you want to select"
-      );
-    }
+    progammingError(
+      "We dont do that here, Please define the fields you want to select",
+      select.length === 0
+    );
+
     return await (await DataService.getInstance())
       .table(entity)
       .select(select)

@@ -30,3 +30,5 @@ export interface IDBSchema {
   uniqueFields: string[][];
   relations: IDBSchemaRelation[];
 }
+
+export const FOR_CODE_COV = 1;

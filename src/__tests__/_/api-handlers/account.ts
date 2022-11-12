@@ -8,6 +8,7 @@ let ME: IAuthenticatedUserBag = {
   role: "creator",
   systemProfile: "{userId: 1}",
   username: "root",
+  preferences: '{"theme":"dark"}',
 };
 
 let USERS = [
@@ -51,6 +52,20 @@ export const accountApiHandlers = [
     ME = { ...ME, ...(await req.json()) };
     return res(ctx.status(204));
   }),
+
+  rest.patch(
+    BASE_TEST_URL("/api/account/preferences"),
+    async (req, res, ctx) => {
+      ME = {
+        ...ME,
+        preferences: JSON.stringify({
+          ...JSON.parse(ME.preferences),
+          ...(await req.json()),
+        }),
+      };
+      return res(ctx.status(204));
+    }
+  ),
 
   rest.get(BASE_TEST_URL("/api/account/:username"), async (_, res, ctx) => {
     return res(ctx.json(USER));

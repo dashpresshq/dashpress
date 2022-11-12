@@ -11,7 +11,9 @@ export interface ITableWidgetConfig extends ISharedWidgetConfig {
 
 export interface ISummaryWidgetConfig extends ISharedWidgetConfig {
   _type: "summary-card";
-  statusField?: string;
+  dateField?: string;
+  icon: string;
+  color: string;
 }
 
 export type IWidgetConfig = ITableWidgetConfig | ISummaryWidgetConfig;

@@ -3945,18 +3945,6 @@ commitlint-config-git-commit-emoji@^1.0.0:
   resolved "https://registry.yarnpkg.com/commitlint-config-git-commit-emoji/-/commitlint-config-git-commit-emoji-1.0.0.tgz#56b9c9b164c55c608da71d8e82424430c87c1dd2"
   integrity sha512-AnWvAu50BZ2ikzlsECKya4nAvPdu62RC3U/8wmb8TlSiLbaLrz10jV8On/8tc2UW1C9ckuLQx3WkLhaiFcvPhg==
 
-commitlint-config-semantic-commit-emoji@^1.0.5:
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/commitlint-config-semantic-commit-emoji/-/commitlint-config-semantic-commit-emoji-1.0.5.tgz#1f1823ce46fb6133a4b7b9c98024930204c2f54c"
-  integrity sha512-39osya7imFCms5hOESKgQyFFQ+1JeAnhVI1pk7Whna3t5+za8oGDUPwuUVYhKicHaEExZjJt1H3zWsEvEjWVcg==
-  dependencies:
-    commitlint-plugin-semantic-commit-emoji "1.0.4"
-
-commitlint-plugin-semantic-commit-emoji@1.0.4:
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/commitlint-plugin-semantic-commit-emoji/-/commitlint-plugin-semantic-commit-emoji-1.0.4.tgz#2cdf78fdf10d427b2f0c3d656551ba597b525e43"
-  integrity sha512-M0UrYiDbH7GZ/ZMybyyz3ivWA9kRTZGXcPzDqwA6LhqpKtfPiBCp6/u5UT3738LYstCCBXeUIitBh9CXMytnbg==
-
 compare-func@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/compare-func/-/compare-func-2.0.0.tgz#fb65e75edbddfd2e568554e8b5b05fff7a51fcb3"

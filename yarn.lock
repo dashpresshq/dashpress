@@ -3920,7 +3920,7 @@ commander@^9.1.0, commander@^9.3.0:
   resolved "https://registry.npmjs.org/commander/-/commander-9.3.0.tgz"
   integrity sha512-hv95iU5uXPbK83mjrJKuZyFM/LBAoCV/XhVGkS5Je6tl7sxr6A0ITMw5WoRV46/UaJ46Nllm3Xt7IaJhXTIkzw==
 
-commitizen@^4.0.3:
+commitizen@^4.0.3, commitizen@^4.2.4:
   version "4.2.5"
   resolved "https://registry.yarnpkg.com/commitizen/-/commitizen-4.2.5.tgz#48e5a5c28334c6e8ed845cc24fc9f072efd3961e"
   integrity sha512-9sXju8Qrz1B4Tw7kC5KhnvwYQN88qs2zbiB8oyMsnXZyJ24PPGiNM3nHr73d32dnE3i8VJEXddBFIbOgYSEXtQ==
@@ -3939,6 +3939,23 @@ commitizen@^4.0.3:
     minimist "1.2.6"
     strip-bom "4.0.0"
     strip-json-comments "3.1.1"
+
+commitlint-config-git-commit-emoji@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/commitlint-config-git-commit-emoji/-/commitlint-config-git-commit-emoji-1.0.0.tgz#56b9c9b164c55c608da71d8e82424430c87c1dd2"
+  integrity sha512-AnWvAu50BZ2ikzlsECKya4nAvPdu62RC3U/8wmb8TlSiLbaLrz10jV8On/8tc2UW1C9ckuLQx3WkLhaiFcvPhg==
+
+commitlint-config-semantic-commit-emoji@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/commitlint-config-semantic-commit-emoji/-/commitlint-config-semantic-commit-emoji-1.0.5.tgz#1f1823ce46fb6133a4b7b9c98024930204c2f54c"
+  integrity sha512-39osya7imFCms5hOESKgQyFFQ+1JeAnhVI1pk7Whna3t5+za8oGDUPwuUVYhKicHaEExZjJt1H3zWsEvEjWVcg==
+  dependencies:
+    commitlint-plugin-semantic-commit-emoji "1.0.4"
+
+commitlint-plugin-semantic-commit-emoji@1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/commitlint-plugin-semantic-commit-emoji/-/commitlint-plugin-semantic-commit-emoji-1.0.4.tgz#2cdf78fdf10d427b2f0c3d656551ba597b525e43"
+  integrity sha512-M0UrYiDbH7GZ/ZMybyyz3ivWA9kRTZGXcPzDqwA6LhqpKtfPiBCp6/u5UT3738LYstCCBXeUIitBh9CXMytnbg==
 
 compare-func@^2.0.0:
   version "2.0.0"
@@ -4346,6 +4363,15 @@ cz-conventional-changelog@3.3.0:
     word-wrap "^1.0.3"
   optionalDependencies:
     "@commitlint/load" ">6.1.1"
+
+cz-emoji-conventional@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/cz-emoji-conventional/-/cz-emoji-conventional-1.0.1.tgz#8f3112c2a8512e60c8363d854507dba939f08a00"
+  integrity sha512-jY+jmmbQ9n671gLWSSI34a7efDz1YPfzM3QZC5T+r8CJCCo1/myW8Ik09NV9KQ5hVSc2BBfvcq7e5IsBOZjyjg==
+  dependencies:
+    chalk "^4.1.1"
+    commitizen "^4.2.4"
+    word-wrap "^1.2.3"
 
 damerau-levenshtein@^1.0.8:
   version "1.0.8"

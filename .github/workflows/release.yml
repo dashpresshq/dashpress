@@ -15,7 +15,7 @@ jobs:
       - run: yarn install
       - name: Start Redis
         uses: supercharge/redis-github-action@1.4.0
-      - run: yarn run verify
+      - run: yarn run verify-release
       - uses: JS-DevTools/npm-publish@v1
         with:
           token: ${{ secrets.NPM_TOKEN }}

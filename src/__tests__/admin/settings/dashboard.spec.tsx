@@ -11,7 +11,7 @@ setupApiHandlers();
 
 jest.mock("next/router", () => require("next-router-mock"));
 
-describe("pages/admin/settings/dashboard", () => {
+describe.skip("pages/admin/settings/dashboard", () => {
   it("should render dashboard widgets correctly", async () => {
     render(
       <AppWrapper>

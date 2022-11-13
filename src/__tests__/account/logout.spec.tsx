@@ -20,7 +20,7 @@ describe("pages/account/logout", () => {
     asPath: "/",
   }));
 
-  it("should update password", async () => {
+  it("should log user out", async () => {
     render(
       <AppWrapper>
         <AccountPassword />

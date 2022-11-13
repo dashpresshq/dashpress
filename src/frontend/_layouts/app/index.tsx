@@ -10,13 +10,17 @@ import {
 } from "@hadmean/chromista";
 import React, { ReactNode, useEffect } from "react";
 import Head from "next/head";
-import { AuthService } from "@hadmean/protozoa";
+import { AuthService, getQueryCachekey } from "@hadmean/protozoa";
 import { useRouter } from "next/router";
 import { useNavigationStack } from "frontend/lib/routing";
 import { usePageDetailsStore } from "frontend/lib/routing/usePageDetails";
-import { usePageRequiresPermission } from "frontend/hooks/auth/user.store";
+import {
+  AUTHENTICATED_ACCOUNT_URL,
+  usePageRequiresPermission,
+} from "frontend/hooks/auth/user.store";
 import { useUserAuthenticatedState } from "frontend/hooks/auth/useAuthenticateUser";
 import { GitHub, Globe, Twitter, User, Users } from "react-feather";
+import { useQueryClient } from "react-query";
 import { useSiteConfig } from "../../hooks/app/site.config";
 import { NAVIGATION_LINKS } from "../../lib/routing/links";
 import { useSelectionViews } from "./useSelectionViews";
@@ -32,11 +36,15 @@ interface IProps {
 const useUserAuthCheck = () => {
   const userAuthenticatedState = useUserAuthenticatedState();
   const router = useRouter();
+  const queryClient = useQueryClient();
 
   useEffect(() => {
     if (userAuthenticatedState === false) {
       AuthService.removeAuthToken();
       router.replace(NAVIGATION_LINKS.AUTH_SIGNIN);
+      queryClient.invalidateQueries(
+        getQueryCachekey(AUTHENTICATED_ACCOUNT_URL)
+      );
     }
   }, [userAuthenticatedState]);
 

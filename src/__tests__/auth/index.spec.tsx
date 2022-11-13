@@ -94,33 +94,46 @@ describe("pages/auth", () => {
 
     expect(pushMock).toHaveBeenCalledWith("/admin");
   });
-});
 
-describe("NEXT_PUBLIC_IS_DEMO", () => {
-  beforeAll(() => {
-    localStorage.clear();
-  });
+  describe("demo", () => {
+    const OLD_ENV = process.env;
 
-  it("should hide demo elements when NEXT_PUBLIC_IS_DEMO is false", async () => {
-    render(
-      <AppWrapper>
-        <SignIn />
-      </AppWrapper>
-    );
+    beforeEach(() => {
+      jest.resetModules();
+      process.env = { ...OLD_ENV };
+    });
 
-    expect(screen.queryByTestId("NEXT_PUBLIC_IS_DEMO")).not.toBeInTheDocument();
-  });
+    afterEach(() => {
+      process.env = OLD_ENV;
+    });
 
-  it("should show demo elements when NEXT_PUBLIC_IS_DEMO is true", async () => {
-    process.env.NEXT_PUBLIC_IS_DEMO = "true";
-    render(
-      <AppWrapper>
-        <SignIn />
-      </AppWrapper>
-    );
+    beforeAll(() => {
+      localStorage.clear();
+    });
 
-    expect(screen.queryByTestId("NEXT_PUBLIC_IS_DEMO")).toHaveTextContent(
-      "Username is rootPassword is password"
-    );
+    it("should hide demo elements when NEXT_PUBLIC_IS_DEMO is false", async () => {
+      render(
+        <AppWrapper>
+          <SignIn />
+        </AppWrapper>
+      );
+
+      expect(
+        screen.queryByTestId("NEXT_PUBLIC_IS_DEMO")
+      ).not.toBeInTheDocument();
+    });
+
+    it("should show demo elements when NEXT_PUBLIC_IS_DEMO is true", async () => {
+      process.env.NEXT_PUBLIC_IS_DEMO = "true";
+      render(
+        <AppWrapper>
+          <SignIn />
+        </AppWrapper>
+      );
+
+      expect(screen.queryByTestId("NEXT_PUBLIC_IS_DEMO")).toHaveTextContent(
+        "Username is rootPassword is password"
+      );
+    });
   });
 });

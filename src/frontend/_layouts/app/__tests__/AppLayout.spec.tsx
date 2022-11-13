@@ -14,7 +14,18 @@ describe("AppLayout", () => {
       replace: jest.fn(),
     }));
   });
-  describe("NEXT_PUBLIC_IS_DEMO", () => {
+  describe("demo", () => {
+    const OLD_ENV = process.env;
+
+    beforeEach(() => {
+      jest.resetModules();
+      process.env = { ...OLD_ENV };
+    });
+
+    afterEach(() => {
+      process.env = OLD_ENV;
+    });
+
     it("should hide demo elements when NEXT_PUBLIC_IS_DEMO is false", async () => {
       render(
         <AppWrapper>

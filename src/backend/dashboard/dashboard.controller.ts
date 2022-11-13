@@ -12,7 +12,6 @@ export class DashboardController {
     await this._dashboardService.createWidget(widget, dashboardId);
   }
 
-  // Hello
   async updateWidgetList(dashboardId: string, widgetList: string[]) {
     await this._dashboardService.updateWidgetList(dashboardId, widgetList);
   }

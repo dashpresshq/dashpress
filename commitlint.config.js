@@ -7,7 +7,7 @@ module.exports = {
       [
         "🎉 init",
         "✨ feat",
-        "🐞 fix",
+        "🐛 fix",
         "📃 docs",
         "🌈 style",
         "🦄 refactor",

@@ -11,6 +11,10 @@ setupApiHandlers();
 
 jest.mock("next/router", () => require("next-router-mock"));
 
+jest.mock("nanoid", () => ({
+  nanoid: jest.fn().mockReturnValueOnce("1"),
+}));
+
 describe.skip("pages/admin/settings/dashboard", () => {
   it("should render dashboard widgets correctly", async () => {
     render(

@@ -1,4 +1,5 @@
 import { IApplicationService } from "backend/types";
+import { progammingError } from "backend/lib/errors";
 import {
   createConfigDomainPersistenceService,
   AbstractConfigDataPersistenceService,
@@ -22,11 +23,10 @@ export class ConfigurationService implements IApplicationService {
     key: keyof typeof CONFIGURATION_KEYS,
     entity?: string
   ) {
-    if (CONFIGURATION_KEYS[key].requireEntity && !entity) {
-      throw new Error(
-        `Configuration '${key}' requires an entity to be passed in`
-      );
-    }
+    progammingError(
+      `Configuration '${key}' requires an entity to be passed in`,
+      CONFIGURATION_KEYS[key].requireEntity && !entity
+    );
   }
 
   async show<T>(

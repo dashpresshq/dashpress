@@ -16,7 +16,7 @@ const DASHBOARD_WIDGETS: IWidgetConfig[] = [
     color: "#ff00ff",
     icon: "",
     queryId: "",
-    title: "Sumary Widget 1",
+    title: "Summary Widget 1",
     dateField: "",
     id: "2",
   },

@@ -7,6 +7,17 @@ import {
 } from "__tests__/api/_test-utils";
 
 describe("/api/account/change-password", () => {
+  const OLD_ENV = process.env;
+
+  beforeEach(() => {
+    jest.resetModules();
+    process.env = { ...OLD_ENV };
+  });
+
+  afterEach(() => {
+    process.env = OLD_ENV;
+  });
+
   beforeAll(async () => {
     await setupAllTestData(["users"]);
   });
@@ -24,6 +35,35 @@ describe("/api/account/change-password", () => {
     await handler(req, res);
 
     expect(res._getStatusCode()).toBe(400);
+
+    const signInRequest = createMocks({
+      method: "POST",
+      body: {
+        username: "root",
+        password: "password",
+      },
+    });
+
+    await signInHandler(signInRequest.req, signInRequest.res);
+
+    expect(signInRequest.res._getStatusCode()).toBe(201);
+  });
+
+  it("should not change password on demo account", async () => {
+    process.env.NEXT_PUBLIC_IS_DEMO = "true";
+
+    const { req, res } = createAuthenticatedMocks({
+      method: "PATCH",
+      body: {
+        oldPassword: "password",
+        newPassword: "password-updated",
+        reNewPassword: "password-updated",
+      },
+    });
+
+    await handler(req, res);
+
+    expect(res._getStatusCode()).toBe(200);
 
     const signInRequest = createMocks({
       method: "POST",

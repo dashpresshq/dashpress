@@ -1,7 +1,6 @@
 import {
   makePatchRequest,
   MutationsLang,
-  ToastService,
   useWaitForResponseMutationOptions,
 } from "@hadmean/protozoa";
 import { AUTHENTICATED_ACCOUNT_URL } from "frontend/hooks/auth/user.store";
@@ -39,13 +38,12 @@ export function useUpdateUserPreferencesMutation() {
 export function useChangePasswordMutation() {
   const apiMutateOptions = useWaitForResponseMutationOptions<void>({
     endpoints: [],
-    successMessage: MutationsLang.edit("Password"),
+    successMessage: process.env.NEXT_PUBLIC_IS_DEMO
+      ? "Password will not be changed on demo account"
+      : MutationsLang.edit("Password"),
   });
 
   return useMutation(async (data: IChangePasswordForm) => {
-    if (process.env.NEXT_PUBLIC_IS_DEMO) {
-      return ToastService.success("Password can't be changed on demo account");
-    }
     return await makePatchRequest(`/api/account/change-password`, data);
   }, apiMutateOptions);
 }

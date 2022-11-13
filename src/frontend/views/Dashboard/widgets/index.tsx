@@ -49,20 +49,20 @@ export const DashboardWidget = forwardRef<HTMLInputElement, IProps>(
       link: navigationLink,
     };
 
-    if (config._type === "summary-card") {
-      return (
-        <Root {...rootProps}>
-          <SummaryWidget {...sharedWidgetProps} config={config} />
-        </Root>
-      );
+    switch (config._type) {
+      case "summary-card":
+        return (
+          <Root {...rootProps}>
+            <SummaryWidget {...sharedWidgetProps} config={config} />
+          </Root>
+        );
+
+      case "table":
+        return (
+          <TableRoot {...rootProps}>
+            <TableWidget {...sharedWidgetProps} config={config} />
+          </TableRoot>
+        );
     }
-    if (config._type === "table") {
-      return (
-        <TableRoot {...rootProps}>
-          <TableWidget {...sharedWidgetProps} config={config} />
-        </TableRoot>
-      );
-    }
-    return null;
   }
 );

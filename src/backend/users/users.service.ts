@@ -101,6 +101,9 @@ export class UsersService implements IApplicationService {
       newPassword: string;
     }
   ) {
+    if (process.env.NEXT_PUBLIC_IS_DEMO) {
+      return;
+    }
     const user = await this._usersPersistenceService.getItem(username);
 
     if (!(await HashService.compare(input.oldPassword, user.password))) {
@@ -112,6 +115,9 @@ export class UsersService implements IApplicationService {
   }
 
   async resetPassword(username: string, newPassword: string) {
+    if (process.env.NEXT_PUBLIC_IS_DEMO) {
+      return;
+    }
     await this.updateUser(username, {
       password: await HashService.make(newPassword),
     });

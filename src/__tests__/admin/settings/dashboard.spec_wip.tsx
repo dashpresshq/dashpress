@@ -23,7 +23,6 @@ describe.skip("pages/admin/settings/dashboard", () => {
       </AppWrapper>
     );
 
-    // soss ssas
     const layoutContent = screen.getByTestId("app-layout__content");
 
     expect(

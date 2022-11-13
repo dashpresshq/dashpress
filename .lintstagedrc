@@ -1,5 +1,5 @@
 {
-  "{src,docs}/**/*.{json,md,ts,tsx}": [
+  "src/**/*.{json,ts,tsx}": [
     "npm run lint:fix"
   ]
 }

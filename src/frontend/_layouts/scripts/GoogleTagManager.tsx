@@ -1,3 +1,5 @@
+import Script from "next/script";
+
 export function GoogleTagManager() {
   const GOOGLE_TAG_ID = process.env.NEXT_PUBLIC_GOOGLE_TAG_ID;
 
@@ -7,21 +9,19 @@ export function GoogleTagManager() {
 
   return (
     <>
-      <script
-        async
+      <Script
         src={`https://www.googletagmanager.com/gtag/js?id=${GOOGLE_TAG_ID}`}
+        strategy="afterInteractive"
       />
-      <script
-        type="text/javascript"
-        dangerouslySetInnerHTML={{
-          __html: `
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-      
-        gtag('config', ${GOOGLE_TAG_ID});`,
-        }}
-      />
+      <Script id="google-analytics" strategy="afterInteractive">
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){window.dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', '${GOOGLE_TAG_ID}');
+        `}
+      </Script>
     </>
   );
 }

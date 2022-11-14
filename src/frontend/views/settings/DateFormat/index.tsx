@@ -10,6 +10,8 @@ import {
   useUpsertConfigurationMutation,
 } from "frontend/hooks/configuration/configuration.store";
 import { ViewStateMachine } from "frontend/lib/ViewStateMachine";
+import { format as dateFnsFormat } from "date-fns";
+import { ToastService } from "@hadmean/protozoa";
 import { BaseSettingsLayout } from "../_Base";
 import { DateFormatSettingsForm } from "./Form";
 import { SETTINGS_VIEW_KEY } from "../constants";
@@ -39,8 +41,15 @@ export function DateFormatSettings() {
           loader={<FormSkeleton schema={[FormSkeletonSchema.Input]} />}
         >
           <DateFormatSettingsForm
-            onSubmit={async (values) => {
-              await upsertConfigurationMutation.mutateAsync(values.format);
+            onSubmit={async ({ format }) => {
+              try {
+                dateFnsFormat(new Date(), format);
+                await upsertConfigurationMutation.mutateAsync(format);
+              } catch (error) {
+                ToastService.error(
+                  "Invalid Date Format!. Please go to https://date-fns.org/docs/format to see valid formats"
+                );
+              }
             }}
             initialValues={{ format: defaultDateFormat.data }}
           />

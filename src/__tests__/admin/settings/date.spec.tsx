@@ -58,4 +58,37 @@ describe("pages/admin/settings/date", () => {
       expect(screen.getByLabelText("Format")).toHaveValue("yyyy MMM do");
     });
   });
+
+  describe("invalid date formats", () => {
+    it("should not be updated", async () => {
+      render(
+        <AppWrapper>
+          <DateFormatSettings />
+        </AppWrapper>
+      );
+
+      await userEvent.clear(screen.getByLabelText("Format"));
+
+      await userEvent.type(screen.getByLabelText("Format"), "yyYXXYY");
+
+      await userEvent.click(
+        screen.getByRole("button", { name: "Update Date Format" })
+      );
+
+      expect((await screen.findAllByRole("status"))[0]).toHaveTextContent(
+        `Invalid Date Format!. Please go to https://date-fns.org/docs/format to see valid formats`
+      );
+    });
+
+    it("should should show date format", async () => {
+      render(
+        <AppWrapper>
+          <DateFormatSettings />
+        </AppWrapper>
+      );
+      await waitFor(() => {
+        expect(screen.getByLabelText("Format")).toHaveValue("yyyy MMM do");
+      });
+    });
+  });
 });

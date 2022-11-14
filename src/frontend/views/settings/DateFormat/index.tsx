@@ -34,6 +34,13 @@ export function DateFormatSettings() {
       <SectionBox
         title="Date Format Settings"
         description="Using format from https://date-fns.org/docs/format"
+        iconButtons={[
+          {
+            action: "https://date-fns.org/docs/format",
+            icon: "help",
+            label: "Go to https://date-fns.org/docs/format",
+          },
+        ]}
       >
         <ViewStateMachine
           loading={defaultDateFormat.isLoading}

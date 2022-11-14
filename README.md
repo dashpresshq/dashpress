@@ -100,7 +100,7 @@ Hadmean attempts internal tool generation with a new approach by introspecting y
 ```bash
 $ cd <project_name>
 
-$ npx hadmean@latest
+$ npx hadmean
 ```
 
 That is all, You will be able to see the application on http://localhost:3000

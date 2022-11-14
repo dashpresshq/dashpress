@@ -3,6 +3,7 @@ import React, { ReactNode } from "react";
 import Head from "next/head";
 import { useSiteConfig } from "../../hooks/app/site.config";
 import { useAppTheme } from "../useAppTheme";
+import { GoogleTagManager } from "../scripts/GoogleTagManager";
 
 interface IProps {
   children: ReactNode;
@@ -26,6 +27,7 @@ export function AuthLayout({ children, title, subTitle }: IProps) {
         </title>
       </Head>
       {children}
+      <GoogleTagManager />
     </GuestLayout>
   );
 }

@@ -26,6 +26,7 @@ import { NAVIGATION_LINKS } from "../../lib/routing/links";
 import { useSelectionViews } from "./useSelectionViews";
 import { useAppTheme } from "../useAppTheme";
 import { ROOT_LINKS_TO_CLEAR_BREADCRUMBS } from "./constants";
+import { GoogleTagManager } from "../scripts/GoogleTagManager";
 
 interface IProps {
   children: ReactNode;
@@ -155,6 +156,7 @@ export function AppLayout({
       </Stack>
       <Spacer />
       <div data-testid="app-layout__content">{children}</div>
+      <GoogleTagManager />
     </DynamicLayout>
   );
 }

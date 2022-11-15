@@ -6,7 +6,7 @@ const DASHBOARD_WIDGETS: IWidgetConfig[] = [
   {
     _type: "table",
     entity: "entity-1",
-    id: "1",
+    id: "table_id_1",
     queryId: "",
     title: "Table Widget 1",
   },
@@ -14,11 +14,11 @@ const DASHBOARD_WIDGETS: IWidgetConfig[] = [
     _type: "summary-card",
     entity: "entity-1",
     color: "#ff00ff",
-    icon: "",
+    icon: "<p>Some SVG Here</p>",
     queryId: "",
     title: "Summary Widget 1",
     dateField: "",
-    id: "2",
+    id: "summary_card_id_1",
   },
 ];
 

@@ -37,6 +37,7 @@ export const DashboardWidget = forwardRef<HTMLInputElement, IProps>(
     const rootProps = {
       ref,
       hasSetting: !!setting,
+      "data-testid": `widget__${config.id}`,
     };
 
     const navigationLink = useWidgetNavigationLink(

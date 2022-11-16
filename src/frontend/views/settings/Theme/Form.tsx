@@ -18,10 +18,10 @@ export function ThemeSettingsForm({
         fieldsState: `
         return {
           primaryDark: {
-            hidden: $.formValues.theme === "light"
+            hidden: $.formValues.theme === "light" || !$.formValues.theme
           },
           primary: {
-            hidden: $.formValues.theme === "dark"
+            hidden: $.formValues.theme === "dark" || !$.formValues.theme
           }
         }`,
       }}

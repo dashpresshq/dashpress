@@ -29,4 +29,11 @@ export const dashboardApiHandlers = [
       return res(ctx.json(DASHBOARD_WIDGETS));
     }
   ),
+  rest.post(
+    BASE_TEST_URL("/api/dashboards/:dashboardId"),
+    async (req, res, ctx) => {
+      DASHBOARD_WIDGETS.push(await req.json());
+      return res(ctx.json(204));
+    }
+  ),
 ];

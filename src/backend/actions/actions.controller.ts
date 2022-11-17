@@ -7,9 +7,14 @@ export class ActionsController {
     return this._actionsService.listAllActions();
   }
 
-  // async listActiveActions() {
-  //   return await this._actionsService.listActiveActions();
-  // }
+  async listActivedActions() {
+    return await this._actionsService.listActivedActions();
+  }
 }
 
 export const actionsController = new ActionsController(actionsService);
+
+// register
+// de-register
+// list
+// update

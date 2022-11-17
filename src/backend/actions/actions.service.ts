@@ -7,15 +7,17 @@ import {
   AbstractConfigDataPersistenceService,
 } from "backend/lib/config-persistence";
 import { IApplicationService } from "backend/types";
-import noop from "lodash/noop";
+import { nanoid } from "nanoid";
 import { ACTION_INTEGRATIONS } from ".";
+import { IActionIntegrationsImplemention } from "./types";
 
-export interface IActivatedAction {
+interface IActivatedAction {
   activationId: string;
+  integrationKey: string;
   credentialsGroupKey: string;
 }
 
-export interface IActionsToTrigger {
+interface IActionsToTrigger {
   triggerId: string;
   activatedActionId: string;
   entity: string;
@@ -33,25 +35,89 @@ export class ActionsService implements IApplicationService {
   async bootstrap() {
     await this._activatedActionsPersistenceService.setup();
     await this._actionsToTriggerPersistenceService.setup();
-    noop(this._credentialsService);
   }
 
   // perform(entity: string, formAction: string) {
   //   //
   // }
 
-  listAllActions(): Array<{ title: string; description: string }> {
-    return Object.values(ACTION_INTEGRATIONS).map(({ title, description }) => ({
-      description,
-      title,
-    }));
+  listAllActions(): Array<
+    { key: string } & Pick<
+      IActionIntegrationsImplemention,
+      "title" | "description"
+    >
+  > {
+    return Object.entries(ACTION_INTEGRATIONS).map(
+      ([key, { title, description }]) => ({
+        description,
+        title,
+        key,
+      })
+    );
   }
 
-  // async listActiveActions(): Promise<{ title: string; description: string }[]> {
-  //   return this.listAllActions().filter();
-  // }
+  async listActivedActions(): Promise<IActivatedAction[]> {
+    return await this._activatedActionsPersistenceService.getAllItems();
+  }
 
-  // async deactivateAction(actionKey: string): Promise<void> {}
+  async activateAction(
+    integrationKey: string,
+    configuration: Record<string, string>
+  ): Promise<void> {
+    const activationId = nanoid();
+    const credentialsGroupKey = integrationKey.toUpperCase();
+    await this._activatedActionsPersistenceService.upsertItem(activationId, {
+      activationId,
+      integrationKey,
+      credentialsGroupKey,
+    });
+    await this._credentialsService.upsertGroup(
+      {
+        key: credentialsGroupKey,
+        fields: Object.keys(ACTION_INTEGRATIONS[integrationKey]),
+      },
+      configuration
+    );
+  }
+
+  async updateActionConfig(
+    activationId: string,
+    configuration: Record<string, string>
+  ): Promise<void> {
+    const { integrationKey, credentialsGroupKey } =
+      await this._activatedActionsPersistenceService.getItem(activationId);
+    await this._credentialsService.upsertGroup(
+      {
+        key: credentialsGroupKey,
+        fields: Object.keys(ACTION_INTEGRATIONS[integrationKey]),
+      },
+      configuration
+    );
+  }
+
+  async deactivateAction(activationId: string): Promise<void> {
+    const action = await this._activatedActionsPersistenceService.getItem(
+      activationId
+    );
+
+    this._credentialsService.deleteGroup({
+      key: action.credentialsGroupKey,
+      fields: Object.keys(ACTION_INTEGRATIONS[action.integrationKey]),
+    });
+
+    await this._activatedActionsPersistenceService.removeItem(activationId);
+
+    const triggers =
+      await this._actionsToTriggerPersistenceService.getAllItems();
+
+    for (const trigger of triggers) {
+      if (trigger.activatedActionId === activationId) {
+        await this._actionsToTriggerPersistenceService.removeItem(
+          trigger.triggerId
+        );
+      }
+    }
+  }
 }
 
 const activatedActionsPersistenceService =

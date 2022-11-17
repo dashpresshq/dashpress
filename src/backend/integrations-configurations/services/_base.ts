@@ -93,19 +93,24 @@ export abstract class IntegrationsConfigurationService
   }
 
   async upsertGroup(
-    groupKey: string,
-    groupFields: string[],
+    group: IGroupCredential,
     groupValue: Record<string, string>
   ) {
-    const fieldsToUpsert = groupFields.filter(
+    const fieldsToUpsert = group.fields.filter(
       (field) => groupValue[field] !== undefined
     );
 
     for (const field of fieldsToUpsert) {
       await this.upsert(
-        this.generateGroupKeyPrefix(groupKey, field),
+        this.generateGroupKeyPrefix(group.key, field),
         groupValue[field]
       );
+    }
+  }
+
+  async deleteGroup(group: IGroupCredential) {
+    for (const field of group.fields) {
+      await this.delete(this.generateGroupKeyPrefix(group.key, field));
     }
   }
 

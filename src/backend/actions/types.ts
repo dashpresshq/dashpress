@@ -1,3 +1,5 @@
+import { IAppliedSchemaFormConfig } from "shared/form-schemas/types";
+
 export interface IPerformsImplementation {
   label: string;
   configurationSchema: Record<string, string>;
@@ -7,13 +9,6 @@ export interface IPerformsImplementation {
 export interface IActionIntegrationsImplemention {
   title: string;
   description: string;
-  configurationSchema: Record<string, string>;
+  configurationSchema: IAppliedSchemaFormConfig<any>;
   performsImplementation: Record<string, IPerformsImplementation>;
 }
-
-// Actions controller
-// Activate
-// Deactivate => WILL REMOVE ALL CONFIGURATIONS AND INTEGRATIONS, THIS IS NOT REVERSIBLE
-// config
-// register
-// de-register

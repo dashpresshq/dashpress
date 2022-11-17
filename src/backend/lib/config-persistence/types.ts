@@ -6,6 +6,8 @@ export type ConfigDomain =
   | "environment-variables"
   | "dashboard"
   | "app-config"
+  | "trigger_actions"
+  | "activated_actions"
   | "roles";
 
 export enum ConfigAdaptorTypes {

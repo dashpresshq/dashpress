@@ -6,11 +6,11 @@ import {
 import {
   CredentialsService,
   credentialsService,
-  CredentialsGroup,
 } from "backend/integrations-configurations";
 import { IApplicationService } from "backend/types";
 import { IDBSchema, IEntityField } from "shared/types/db";
 import { IDataSourceCredentials } from "shared/types/data-sources";
+import { DATABASE_CREDENTIAL_GROUP } from "backend/data/fields";
 import {
   createConfigDomainPersistenceService,
   AbstractConfigDataPersistenceService,
@@ -59,7 +59,7 @@ export class SchemasService implements IApplicationService {
   private async doIntrospection() {
     const dbCredentials =
       await this._credentialsService.useGroupValue<IDataSourceCredentials>(
-        CredentialsGroup.DATABASE
+        DATABASE_CREDENTIAL_GROUP
       );
 
     const schema = await introspect(dbCredentials);

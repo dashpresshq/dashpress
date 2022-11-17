@@ -16,13 +16,11 @@ import {
   subYears,
   subWeeks,
 } from "date-fns";
-import {
-  credentialsService,
-  CredentialsGroup,
-} from "backend/integrations-configurations";
+import { credentialsService } from "backend/integrations-configurations";
 import { IDataSourceCredentials } from "shared/types/data-sources";
 import { progammingError } from "backend/lib/errors";
 import { IPaginationFilters } from "./types";
+import { DATABASE_CREDENTIAL_GROUP } from "./fields";
 
 export class DataService implements IApplicationService {
   static _dbInstance: Knex | null = null;
@@ -34,7 +32,7 @@ export class DataService implements IApplicationService {
 
     const dbCredentials =
       await credentialsService.useGroupValue<IDataSourceCredentials>(
-        CredentialsGroup.DATABASE
+        DATABASE_CREDENTIAL_GROUP
       );
 
     this._dbInstance = (await getDbConnection(

@@ -3,10 +3,7 @@ import { EncryptionService } from "backend/lib/encryption/encryption.service";
 import { ForbiddenError } from "backend/lib/errors";
 import { IApplicationService } from "backend/types";
 import noop from "lodash/noop";
-import {
-  CredentialsGroup,
-  CREDENTIALS_GROUP,
-} from "../integrations-configurations.types";
+import { IGroupCredential } from "../types";
 
 export const INTEGRATION_CONFIG_GROUP_DEMILITER = "___";
 
@@ -32,10 +29,9 @@ export abstract class IntegrationsConfigurationService
     return (await this.getValue(key)) !== undefined;
   }
 
-  async hasGroupKey(groupKey: CredentialsGroup): Promise<boolean> {
-    const groupFields = CREDENTIALS_GROUP[groupKey];
+  async hasGroupKey(group: IGroupCredential): Promise<boolean> {
     return await this.hasKey(
-      this.generateGroupKeyPrefix(groupKey, groupFields[0])
+      this.generateGroupKeyPrefix(group.key, group.fields[0])
     );
   }
 
@@ -52,12 +48,10 @@ export abstract class IntegrationsConfigurationService
   }
 
   async useGroupValue<T extends Record<string, unknown>>(
-    groupKey: CredentialsGroup
+    group: IGroupCredential
   ): Promise<T> {
-    const groupFields = CREDENTIALS_GROUP[groupKey];
-
-    const allGroupKeys = groupFields.map((field) =>
-      this.generateGroupKeyPrefix(groupKey, field)
+    const allGroupKeys = group.fields.map((field) =>
+      this.generateGroupKeyPrefix(group.key, field)
     );
 
     const values = await Promise.all(
@@ -69,7 +63,7 @@ export abstract class IntegrationsConfigurationService
     const filteredValues = values.filter(([, value]) => value);
 
     if (filteredValues.length === 0) {
-      throw new ForbiddenError(`No credentials available for ${groupKey}`);
+      throw new ForbiddenError(`No credentials available for ${group.key}`);
     }
 
     return Object.fromEntries(
@@ -99,11 +93,10 @@ export abstract class IntegrationsConfigurationService
   }
 
   async upsertGroup(
-    groupKey: CredentialsGroup,
+    groupKey: string,
+    groupFields: string[],
     groupValue: Record<string, string>
   ) {
-    const groupFields = CREDENTIALS_GROUP[groupKey];
-
     const fieldsToUpsert = groupFields.filter(
       (field) => groupValue[field] !== undefined
     );

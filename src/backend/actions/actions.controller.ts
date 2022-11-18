@@ -13,8 +13,3 @@ export class ActionsController {
 }
 
 export const actionsController = new ActionsController(actionsService);
-
-// register
-// de-register
-// list
-// update

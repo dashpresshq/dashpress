@@ -21,6 +21,7 @@ interface IActionsToTrigger {
   triggerId: string;
   activatedActionId: string;
   entity: string;
+  triggerLogic: string;
   formAction: "create" | "update";
   configuration: Record<string, string>;
 }
@@ -40,6 +41,34 @@ export class ActionsService implements IApplicationService {
   // perform(entity: string, formAction: string) {
   //   //
   // }
+
+  async registerAction(action: Omit<IActionsToTrigger, "triggerId">) {
+    const triggerId = nanoid();
+
+    await this._actionsToTriggerPersistenceService.upsertItem(triggerId, {
+      ...action,
+      triggerId,
+    });
+  }
+
+  async updateTriggerAction(action: IActionsToTrigger) {
+    await this._actionsToTriggerPersistenceService.upsertItem(
+      action.triggerId,
+      action
+    );
+  }
+
+  async deRegisterAction(triggerId: string) {
+    await this._actionsToTriggerPersistenceService.removeItem(triggerId);
+  }
+
+  async listEntityActions(entity$1: string) {
+    return (
+      await this._actionsToTriggerPersistenceService.getAllItems()
+    ).filter(({ entity }) => entity === entity$1);
+  }
+
+  //
 
   listAllActions(): Array<
     { key: string } & Pick<

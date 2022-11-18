@@ -44,14 +44,15 @@ export class ActionsService implements IApplicationService {
   listAllActions(): Array<
     { key: string } & Pick<
       IActionIntegrationsImplemention,
-      "title" | "description"
+      "title" | "description" | "configurationSchema"
     >
   > {
     return Object.entries(ACTION_INTEGRATIONS).map(
-      ([key, { title, description }]) => ({
+      ([key, { title, description, configurationSchema }]) => ({
         description,
         title,
         key,
+        configurationSchema,
       })
     );
   }

@@ -1,5 +1,20 @@
 import { IAppliedSchemaFormConfig } from "shared/form-schemas/types";
 
+export interface IActivatedAction {
+  activationId: string;
+  integrationKey: string;
+  credentialsGroupKey: string;
+}
+
+export interface IActionsToTrigger {
+  triggerId: string;
+  activatedActionId: string;
+  entity: string;
+  triggerLogic: string;
+  formAction: "create" | "update";
+  configuration: Record<string, string>;
+}
+
 export interface IPerformsImplementation {
   label: string;
   configurationSchema: IAppliedSchemaFormConfig<any>;
@@ -17,17 +32,7 @@ export interface IActionIntegrationsImplemention {
   performsImplementation: Record<string, IPerformsImplementation>;
 }
 
-export interface IActivatedAction {
-  activationId: string;
-  integrationKey: string;
-  credentialsGroupKey: string;
-}
-
-export interface IActionsToTrigger {
-  triggerId: string;
-  activatedActionId: string;
-  entity: string;
-  triggerLogic: string;
-  formAction: "create" | "update";
-  configuration: Record<string, string>;
-}
+export type IActionsList = { key: string } & Pick<
+  IActionIntegrationsImplemention,
+  "title" | "description" | "configurationSchema"
+>;

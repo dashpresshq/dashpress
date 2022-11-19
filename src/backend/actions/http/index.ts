@@ -1,4 +1,4 @@
-import { IActionIntegrationsImplemention } from "../types";
+import { IActionIntegrationsImplemention } from "shared/types/actions";
 
 export const HTTP_ACTION_INTEGRATION: IActionIntegrationsImplemention = {
   title: "HTTP",

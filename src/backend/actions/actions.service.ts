@@ -8,12 +8,12 @@ import {
 } from "backend/lib/config-persistence";
 import { IApplicationService } from "backend/types";
 import { nanoid } from "nanoid";
-import { ACTION_INTEGRATIONS } from ".";
 import {
-  IActionIntegrationsImplemention,
+  IActionsList,
   IActionsToTrigger,
   IActivatedAction,
-} from "./types";
+} from "shared/types/actions";
+import { ACTION_INTEGRATIONS } from ".";
 
 export class ActionsService implements IApplicationService {
   constructor(
@@ -66,12 +66,7 @@ export class ActionsService implements IApplicationService {
 
   //
 
-  listAllActions(): Array<
-    { key: string } & Pick<
-      IActionIntegrationsImplemention,
-      "title" | "description" | "configurationSchema"
-    >
-  > {
+  listAllActions(): IActionsList[] {
     return Object.entries(ACTION_INTEGRATIONS).map(
       ([key, { title, description, configurationSchema }]) => ({
         description,

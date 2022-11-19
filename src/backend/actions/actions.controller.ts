@@ -1,5 +1,5 @@
+import { IActionsToTrigger } from "shared/types/actions";
 import { ActionsService, actionsService } from "./actions.service";
-import { IActionsToTrigger } from "./types";
 
 export class ActionsController {
   constructor(private _actionsService: ActionsService) {}

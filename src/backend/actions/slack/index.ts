@@ -1,5 +1,5 @@
 import { IAppliedSchemaFormConfig } from "shared/form-schemas/types";
-import { IActionIntegrationsImplemention } from "../types";
+import { IActionIntegrationsImplemention } from "shared/types/actions";
 
 interface ISlackActionConfig {
   token: string;

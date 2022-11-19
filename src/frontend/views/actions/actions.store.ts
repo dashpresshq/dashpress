@@ -1,56 +1,68 @@
 import {
   dataNotFoundMessage,
   makeDeleteRequest,
-  makePutRequest,
+  makePatchRequest,
+  makePostRequest,
   MutationsLang,
   useApi,
   useWaitForResponseMutationOptions,
 } from "@hadmean/protozoa";
 import { useMutation } from "react-query";
-import { IntegrationsConfigurationGroup } from "shared/types/integrations";
+import { IActionsList, IActivatedAction } from "shared/types/actions";
 
-const INTEGRATIONS_GROUP_ENDPOINT = (group: IntegrationsConfigurationGroup) =>
-  `/api/integrations/${group}`;
+const ACTIVE_ACTIONS_ENDPOINT = "/api/actions/active";
 
-export const useIntegrationsConfigurationList = (
-  group: IntegrationsConfigurationGroup
-) =>
-  useApi<Record<string, string>>(INTEGRATIONS_GROUP_ENDPOINT(group), {
-    errorMessage: dataNotFoundMessage("Configuration"),
+export const useActionsList = () =>
+  useApi<IActionsList[]>("/api/actions", {
+    errorMessage: dataNotFoundMessage("Actions"),
   });
 
-// export function useIntegrationConfigurationUpdationMutation(
-//   group: IntegrationsConfigurationGroup
-// ) {
-//   const apiMutateOptions = useWaitForResponseMutationOptions<
-//     Record<string, string>
-//   >({
-//     endpoints: [INTEGRATIONS_GROUP_ENDPOINT(group)],
-//     successMessage: MutationsLang.saved("Configuration"),
-//   });
+export const useActiveActionList = () =>
+  useApi<IActivatedAction[]>(ACTIVE_ACTIONS_ENDPOINT, {
+    errorMessage: dataNotFoundMessage("Active Actions"),
+  });
 
-//   return useMutation(
-//     async (data: { key: string; value: string }) =>
-//       await makePutRequest(`/api/integrations/${group}/${data.key}`, {
-//         value: data.value,
-//       }),
-//     apiMutateOptions
-//   );
-// }
+export function useDeactivateActionMutation() {
+  const apiMutateOptions = useWaitForResponseMutationOptions<
+    Record<string, string>
+  >({
+    endpoints: [ACTIVE_ACTIONS_ENDPOINT],
+    successMessage: MutationsLang.delete("Action"),
+  });
 
-// export function useIntegrationConfigurationDeletionMutation(
-//   group: IntegrationsConfigurationGroup
-// ) {
-//   const apiMutateOptions = useWaitForResponseMutationOptions<
-//     Record<string, string>
-//   >({
-//     endpoints: [INTEGRATIONS_GROUP_ENDPOINT(group)],
-//     successMessage: MutationsLang.delete("Configuration"),
-//   });
+  return useMutation(
+    async (activationId: string) =>
+      await makeDeleteRequest(`/api/actions/${activationId}`),
+    apiMutateOptions
+  );
+}
 
-//   return useMutation(
-//     async (data: { key: string }) =>
-//       await makeDeleteRequest(`/api/integrations/${group}/${data.key}`),
-//     apiMutateOptions
-//   );
-// }
+export function useActivateActionMutation(integrationKey: string) {
+  const apiMutateOptions = useWaitForResponseMutationOptions<
+    Record<string, string>
+  >({
+    endpoints: [ACTIVE_ACTIONS_ENDPOINT],
+    successMessage: MutationsLang.create("Action"),
+  });
+
+  return useMutation(
+    async (configuration: Record<string, string>) =>
+      await makePostRequest(`/api/actions/${integrationKey}`, configuration),
+    apiMutateOptions
+  );
+}
+
+export function useUpdateActivatedActionMutation(activationId: string) {
+  const apiMutateOptions = useWaitForResponseMutationOptions<
+    Record<string, string>
+  >({
+    endpoints: [ACTIVE_ACTIONS_ENDPOINT],
+    successMessage: MutationsLang.saved("Action"),
+  });
+
+  return useMutation(
+    async (configuration: Record<string, string>) =>
+      await makePatchRequest(`/api/actions/${activationId}`, configuration),
+    apiMutateOptions
+  );
+}

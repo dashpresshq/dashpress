@@ -1,6 +1,6 @@
-import { Settings, Home, Table, Users, Shield } from "react-feather";
+import { Settings, Home, Table, Users, Shield, Zap } from "react-feather";
 import { ISelectionView } from "@hadmean/chromista/dist/Layouts/types";
-import { NAVIGATION_LINKS } from "frontend/lib/routing";
+import { NAVIGATION_LINKS, useNavigationStack } from "frontend/lib/routing";
 import { USER_PERMISSIONS } from "shared/types/user";
 import { useUserHasPermissions } from "frontend/hooks/auth/user.store";
 import { useEntitiesMenuItems } from "../../hooks/entity/entity.store";
@@ -16,7 +16,11 @@ export const useSelectionViews = (): ILayoutSelectionView[] => {
     USER_PERMISSIONS.CAN_CONFIGURE_APP,
     USER_PERMISSIONS.CAN_MANAGE_USER,
     USER_PERMISSIONS.CAN_MANAGE_PERMISSIONS,
+    USER_PERMISSIONS.CAN_MANAGE_ACTIONS,
   ]);
+
+  const { clear } = useNavigationStack();
+
   return [
     {
       title: "Home",
@@ -32,9 +36,19 @@ export const useSelectionViews = (): ILayoutSelectionView[] => {
         data: (entitiesMenuItems.data || []).map(({ label, value }) => ({
           title: label,
           searchKeywordsField: value,
+          secondaryAction: () => {
+            // :eyes
+            clear();
+          },
           action: NAVIGATION_LINKS.ENTITY.TABLE(value),
         })),
       },
+    },
+    {
+      title: "Actions",
+      icon: Zap,
+      action: ROOT_LINKS_TO_CLEAR_BREADCRUMBS.ACTIONS,
+      isPermissionAllowed: hasPermission(USER_PERMISSIONS.CAN_MANAGE_ACTIONS),
     },
     {
       title: "Settings",

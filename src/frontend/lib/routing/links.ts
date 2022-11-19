@@ -8,6 +8,10 @@ export const NAVIGATION_LINKS = {
     PASSWORD: "/account/password",
     PREFERENCES: "/account/preferences",
   },
+  ACTIONS: {
+    LIST: "/actions",
+    DETAILS: (actionId: string) => `/actions/${actionId}`,
+  },
   USERS: {
     LIST: "/users",
     CREATE: "/users/create",

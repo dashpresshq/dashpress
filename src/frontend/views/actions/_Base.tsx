@@ -15,6 +15,7 @@ interface IProps {
 
 export function BaseActionsLayout({ children }: IProps) {
   const router = useRouter();
+
   return (
     <AppLayout>
       <SectionRow>

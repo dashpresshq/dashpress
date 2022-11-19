@@ -16,3 +16,18 @@ export interface IActionIntegrationsImplemention {
   connect: (config: Record<string, string>) => Promise<unknown>;
   performsImplementation: Record<string, IPerformsImplementation>;
 }
+
+export interface IActivatedAction {
+  activationId: string;
+  integrationKey: string;
+  credentialsGroupKey: string;
+}
+
+export interface IActionsToTrigger {
+  triggerId: string;
+  activatedActionId: string;
+  entity: string;
+  triggerLogic: string;
+  formAction: "create" | "update";
+  configuration: Record<string, string>;
+}

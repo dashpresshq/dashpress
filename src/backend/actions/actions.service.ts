@@ -9,22 +9,11 @@ import {
 import { IApplicationService } from "backend/types";
 import { nanoid } from "nanoid";
 import { ACTION_INTEGRATIONS } from ".";
-import { IActionIntegrationsImplemention } from "./types";
-
-interface IActivatedAction {
-  activationId: string;
-  integrationKey: string;
-  credentialsGroupKey: string;
-}
-
-interface IActionsToTrigger {
-  triggerId: string;
-  activatedActionId: string;
-  entity: string;
-  triggerLogic: string;
-  formAction: "create" | "update";
-  configuration: Record<string, string>;
-}
+import {
+  IActionIntegrationsImplemention,
+  IActionsToTrigger,
+  IActivatedAction,
+} from "./types";
 
 export class ActionsService implements IApplicationService {
   constructor(
@@ -42,18 +31,25 @@ export class ActionsService implements IApplicationService {
   //   //
   // }
 
-  async registerAction(action: Omit<IActionsToTrigger, "triggerId">) {
+  async registerAction(
+    entity: string,
+    action: Omit<IActionsToTrigger, "triggerId">
+  ) {
     const triggerId = nanoid();
+    // TODO validate the schema before inserting
 
     await this._actionsToTriggerPersistenceService.upsertItem(triggerId, {
       ...action,
+      entity,
       triggerId,
     });
   }
 
-  async updateTriggerAction(action: IActionsToTrigger) {
+  async updateTriggerAction(triggerId: string, action: IActionsToTrigger) {
+    // TODO validate the schema before inserting
+
     await this._actionsToTriggerPersistenceService.upsertItem(
-      action.triggerId,
+      triggerId,
       action
     );
   }
@@ -86,7 +82,7 @@ export class ActionsService implements IApplicationService {
     );
   }
 
-  async listActivedActions(): Promise<IActivatedAction[]> {
+  async listActivatedActions(): Promise<IActivatedAction[]> {
     return await this._activatedActionsPersistenceService.getAllItems();
   }
 
@@ -101,6 +97,7 @@ export class ActionsService implements IApplicationService {
       integrationKey,
       credentialsGroupKey,
     });
+    // TODO validate the schema before inserting
     await this._credentialsService.upsertGroup(
       {
         key: credentialsGroupKey,
@@ -116,6 +113,8 @@ export class ActionsService implements IApplicationService {
   ): Promise<void> {
     const { integrationKey, credentialsGroupKey } =
       await this._activatedActionsPersistenceService.getItem(activationId);
+    // TODO validate the schema before inserting
+
     await this._credentialsService.upsertGroup(
       {
         key: credentialsGroupKey,

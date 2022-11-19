@@ -1,6 +1,5 @@
 import { BadRequestError } from "backend/lib/errors";
 import { IntegrationsConfigurationGroup } from "shared/types/integrations";
-import { credentialsService } from "./services/credentials.service";
 import {
   appConstantsService,
   environmentVariablesService,
@@ -9,7 +8,6 @@ import { IntegrationsConfigurationService } from "./services/_base";
 
 export class IntegrationsConfigurationController {
   constructor(
-    private _credentialsService: IntegrationsConfigurationService,
     private _appConstantsService: IntegrationsConfigurationService,
     private _environmentVariablesService: IntegrationsConfigurationService
   ) {}
@@ -40,13 +38,7 @@ export class IntegrationsConfigurationController {
   }
 
   async list(group: IntegrationsConfigurationGroup) {
-    const items = await this.getService(group).list();
-    if (group === IntegrationsConfigurationGroup.Credentials) {
-      return Object.fromEntries(
-        Object.keys(items).map((itemKey) => [itemKey, "XXXYYZ"])
-      );
-    }
-    return items;
+    return await this.getService(group).list();
   }
 
   private isKeyAGroupKey(key: string) {
@@ -60,7 +52,6 @@ export class IntegrationsConfigurationController {
     > = {
       [IntegrationsConfigurationGroup.Constants]: this._appConstantsService,
       [IntegrationsConfigurationGroup.Env]: this._environmentVariablesService,
-      [IntegrationsConfigurationGroup.Credentials]: this._credentialsService,
     };
     return groupImplementation[group];
   }
@@ -68,7 +59,6 @@ export class IntegrationsConfigurationController {
 
 export const integrationsConfigurationController =
   new IntegrationsConfigurationController(
-    credentialsService,
     appConstantsService,
     environmentVariablesService
   );

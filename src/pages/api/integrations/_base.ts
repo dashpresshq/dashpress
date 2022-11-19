@@ -7,21 +7,11 @@ import { IntegrationsConfigurationGroup } from "shared/types/integrations";
 export const integrationsConfigurationListRequestHandler = (
   group: IntegrationsConfigurationGroup
 ) => {
-  return requestHandler(
-    {
-      GET: async () => {
-        return await integrationsConfigurationController.list(group);
-      },
+  return requestHandler({
+    GET: async () => {
+      return await integrationsConfigurationController.list(group);
     },
-    group === IntegrationsConfigurationGroup.Credentials
-      ? [
-          {
-            _type: "canUser",
-            body: USER_PERMISSIONS.CAN_MANAGE_CREDENTIALS,
-          },
-        ]
-      : undefined
-  );
+  });
 };
 
 const REQUEST_KEY_FIELD = "key";
@@ -81,10 +71,7 @@ export const integrationsConfigurationDetailsRequestHandler = (
     [
       {
         _type: "canUser",
-        body:
-          group === IntegrationsConfigurationGroup.Credentials
-            ? USER_PERMISSIONS.CAN_MANAGE_CREDENTIALS
-            : USER_PERMISSIONS.CAN_CONFIGURE_APP,
+        body: USER_PERMISSIONS.CAN_CONFIGURE_APP,
       },
     ]
   );

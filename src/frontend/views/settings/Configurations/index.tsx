@@ -76,12 +76,8 @@ export function IntegrationsConfigurationSettings() {
     permission: USER_PERMISSIONS.CAN_CONFIGURE_APP,
   });
 
-  //   USER_PERMISSIONS.CAN_MANAGE_CREDENTIALS
-
   return (
     <BaseSettingsLayout>
-      <Base group={IntegrationsConfigurationGroup.Credentials} />
-      <Base group={IntegrationsConfigurationGroup.Env} />
       <Base group={IntegrationsConfigurationGroup.Constants} />
     </BaseSettingsLayout>
   );

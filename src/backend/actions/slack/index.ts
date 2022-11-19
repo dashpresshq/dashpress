@@ -45,7 +45,7 @@ export const SLACK_ACTION_INTEGRATION: IActionIntegrationsImplemention = {
   description: "Send Message to the ones you love",
   configurationSchema: CONFIGURATION_SCHEMA,
   connect: async () => {
-    console.log("Connect to slack");
+    // console.log("Connect to slack");
   },
   performsImplementation: {
     SEND_MESSAGE: {

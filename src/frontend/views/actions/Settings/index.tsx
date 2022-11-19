@@ -6,11 +6,20 @@ import {
 import { useRouteParam, useSetPageDetails } from "frontend/lib/routing";
 import { USER_PERMISSIONS } from "shared/types/user";
 import { ViewStateMachine } from "frontend/lib/ViewStateMachine";
+import { SchemaForm } from "frontend/lib/form/SchemaForm";
 import { BaseActionsLayout } from "../_Base";
-import { DEFAULT_ACTION_KEY } from "../constants";
+import { useActionsList, useActivateActionMutation } from "../actions.store";
 
 export function ActionSettings() {
-  const key = useRouteParam("key") || DEFAULT_ACTION_KEY;
+  const currentKey = useRouteParam("key");
+
+  const actionsList = useActionsList();
+
+  const activateActionMutation = useActivateActionMutation(currentKey);
+
+  const currentAction = (actionsList.data || []).find(
+    ({ key }) => key === currentKey
+  );
 
   useSetPageDetails({
     pageTitle: "Actions Settings",
@@ -20,10 +29,19 @@ export function ActionSettings() {
 
   return (
     <BaseActionsLayout>
-      <SectionBox title="Site Settings">
+      <SectionBox
+        title={currentAction ? currentAction.title : "Loading..."}
+        description={currentAction ? currentAction.description : ""}
+        deleteAction={{
+          action: () => {
+            console.log("dsd");
+          },
+          isMakingDeleteRequest: false,
+        }}
+      >
         <ViewStateMachine
-          loading={false}
-          error=""
+          loading={actionsList.isLoading}
+          error={actionsList.error}
           loader={
             <FormSkeleton
               schema={[
@@ -35,7 +53,12 @@ export function ActionSettings() {
             />
           }
         >
-          {key}
+          <SchemaForm
+            fields={currentAction.configurationSchema}
+            onSubmit={activateActionMutation.mutateAsync}
+            initialValues={{}}
+            buttonText="Activate Action"
+          />
         </ViewStateMachine>
       </SectionBox>
     </BaseActionsLayout>

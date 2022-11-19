@@ -13,14 +13,13 @@ import { ReactNode } from "react";
 import { NAVIGATION_LINKS } from "../../lib/routing/links";
 import { AppLayout } from "../../_layouts/app";
 import { useActionsList, useActiveActionList } from "./actions.store";
-import { DEFAULT_ACTION_KEY } from "./constants";
 
 interface IProps {
   children: ReactNode;
 }
 
 export function BaseActionsLayout({ children }: IProps) {
-  const currentKey = useRouteParam("key") || DEFAULT_ACTION_KEY;
+  const currentKey = useRouteParam("key");
 
   const actionsList = useActionsList();
 

@@ -19,7 +19,13 @@ export const handleValidation =
       return undefined;
     }
 
-    return validate(value, constraints[parameterKey], allValues)
+    return validate(
+      value,
+      parameterKey === "pattern"
+        ? new RegExp(constraints[parameterKey] as string)
+        : constraints[parameterKey],
+      allValues
+    )
       ? undefined
       : errorMessage;
   };

@@ -3,8 +3,6 @@ import { SchemaForm } from "frontend/lib/form/SchemaForm";
 import { IAppliedSchemaFormConfig } from "shared/form-schemas/types";
 import { IKeyValue } from "./types";
 
-// Only capital letters no spaces
-
 export const FORM_SCHEMA: IAppliedSchemaFormConfig<IKeyValue> = {
   key: {
     type: "text",
@@ -13,10 +11,11 @@ export const FORM_SCHEMA: IAppliedSchemaFormConfig<IKeyValue> = {
         validationType: "required",
       },
       {
-        validationType: "alphanumeric",
-      },
-      {
-        validationType: "isUpperCase",
+        validationType: "regex",
+        constraint: {
+          pattern: "[A-Z_]+$",
+        },
+        errorMessage: "Only capital letters and underscores are allowed",
       },
     ],
   },

@@ -26,17 +26,9 @@ import {
 } from "./configurations.store";
 import { KeyValueForm } from "./Form";
 import { IKeyValue } from "./types";
+import { INTEGRATIONS_GROUP_LABEL } from "./constants";
 
 const NEW_CONFIG_ITEM = "__new_config_item__";
-
-const GROUP_LABEL: Record<IntegrationsConfigurationGroup, { label: string }> = {
-  constants: {
-    label: "Constants",
-  },
-  env: {
-    label: "Environment Variables",
-  },
-};
 
 export function BaseIntegrationsConfiguration({
   group,
@@ -95,19 +87,19 @@ export function BaseIntegrationsConfiguration({
   return (
     <>
       <SectionBox
-        title={`Manage ${GROUP_LABEL[group].label}`}
+        title={`Manage ${INTEGRATIONS_GROUP_LABEL[group].label}`}
         iconButtons={[
           {
             action: () => {
               setCurrentConfigItem(NEW_CONFIG_ITEM);
             },
             icon: "add",
-            label: `Add New ${GROUP_LABEL[group].label}`,
+            label: `Add New ${INTEGRATIONS_GROUP_LABEL[group].singular}`,
           },
           {
             action: LINK_TO_DOCS(`integrations-configuration/${group}`),
             icon: "help",
-            label: `${GROUP_LABEL[group].label} Configurations Documentation`,
+            label: `${INTEGRATIONS_GROUP_LABEL[group].label} Configurations Documentation`,
           },
         ]}
       >

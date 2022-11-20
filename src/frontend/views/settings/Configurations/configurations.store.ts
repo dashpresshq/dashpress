@@ -8,6 +8,7 @@ import {
 } from "@hadmean/protozoa";
 import { useMutation } from "react-query";
 import { IntegrationsConfigurationGroup } from "shared/types/integrations";
+import { INTEGRATIONS_GROUP_LABEL } from "./constants";
 
 export const INTEGRATIONS_GROUP_ENDPOINT = (
   group: IntegrationsConfigurationGroup
@@ -17,7 +18,7 @@ export const useIntegrationsConfigurationList = (
   group: IntegrationsConfigurationGroup
 ) =>
   useApi<Record<string, string>>(INTEGRATIONS_GROUP_ENDPOINT(group), {
-    errorMessage: dataNotFoundMessage("Configuration"),
+    errorMessage: dataNotFoundMessage(INTEGRATIONS_GROUP_LABEL[group].label),
   });
 
 export function useIntegrationConfigurationUpdationMutation(
@@ -27,7 +28,9 @@ export function useIntegrationConfigurationUpdationMutation(
     Record<string, string>
   >({
     endpoints: [INTEGRATIONS_GROUP_ENDPOINT(group)],
-    successMessage: MutationsLang.saved("Configuration"),
+    successMessage: MutationsLang.saved(
+      INTEGRATIONS_GROUP_LABEL[group].singular
+    ),
   });
 
   return useMutation(
@@ -46,7 +49,9 @@ export function useIntegrationConfigurationDeletionMutation(
     Record<string, string>
   >({
     endpoints: [INTEGRATIONS_GROUP_ENDPOINT(group)],
-    successMessage: MutationsLang.delete("Configuration"),
+    successMessage: MutationsLang.delete(
+      INTEGRATIONS_GROUP_LABEL[group].singular
+    ),
   });
 
   return useMutation(

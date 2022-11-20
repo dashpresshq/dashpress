@@ -49,7 +49,7 @@ export function BaseSettingsLayout({ children }: IProps) {
               },
               {
                 action: NAVIGATION_LINKS.SETTINGS.CONFIGURATIONS,
-                name: "Configurations",
+                name: "Constants",
                 IconComponent: Edit3,
               },
             ]}

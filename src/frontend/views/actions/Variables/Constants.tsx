@@ -1,22 +1,22 @@
 import { useSetPageDetails } from "frontend/lib/routing";
 import { USER_PERMISSIONS } from "shared/types/user";
+import { BaseIntegrationsConfiguration } from "frontend/views/settings/Configurations/Base";
 import { IntegrationsConfigurationGroup } from "shared/types/integrations";
-import { BaseSettingsLayout } from "../_Base";
-import { SETTINGS_VIEW_KEY } from "../constants";
-import { BaseIntegrationsConfiguration } from "./Base";
+import { BaseActionsLayout } from "../_Base";
+import { ACTIONS_VIEW_KEY } from "../constants";
 
-export function IntegrationsConfigurationSettings() {
+export function ManageConstants() {
   useSetPageDetails({
     pageTitle: "Manage Constants",
-    viewKey: SETTINGS_VIEW_KEY,
+    viewKey: ACTIONS_VIEW_KEY,
     permission: USER_PERMISSIONS.CAN_CONFIGURE_APP,
   });
 
   return (
-    <BaseSettingsLayout>
+    <BaseActionsLayout>
       <BaseIntegrationsConfiguration
         group={IntegrationsConfigurationGroup.Constants}
       />
-    </BaseSettingsLayout>
+    </BaseActionsLayout>
   );
 }

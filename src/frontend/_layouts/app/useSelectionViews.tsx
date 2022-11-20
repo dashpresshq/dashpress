@@ -35,9 +35,8 @@ export const useSelectionViews = (): ILayoutSelectionView[] => {
         ...entitiesMenuItems,
         data: (entitiesMenuItems.data || []).map(({ label, value }) => ({
           title: label,
-          searchKeywordsField: value,
+          searchKeywords: value,
           secondaryAction: () => {
-            // :eyes
             clear();
           },
           action: NAVIGATION_LINKS.ENTITY.TABLE(value),

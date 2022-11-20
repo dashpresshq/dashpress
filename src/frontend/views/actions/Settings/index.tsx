@@ -2,6 +2,7 @@ import {
   FormSkeleton,
   FormSkeletonSchema,
   SectionBox,
+  Text,
 } from "@hadmean/chromista";
 import { useRouteParam, useSetPageDetails } from "frontend/lib/routing";
 import { USER_PERMISSIONS } from "shared/types/user";
@@ -9,6 +10,7 @@ import { ViewStateMachine } from "frontend/lib/ViewStateMachine";
 import { SchemaForm } from "frontend/lib/form/SchemaForm";
 import { BaseActionsLayout } from "../_Base";
 import { useActionsList, useActivateActionMutation } from "../actions.store";
+import { ACTIONS_VIEW_KEY } from "../constants";
 
 export function ActionSettings() {
   const currentKey = useRouteParam("key");
@@ -23,7 +25,7 @@ export function ActionSettings() {
 
   useSetPageDetails({
     pageTitle: "Actions Settings",
-    viewKey: "ACTIONS_VIEW_KEY",
+    viewKey: ACTIONS_VIEW_KEY,
     permission: USER_PERMISSIONS.CAN_MANAGE_ACTIONS,
   });
 
@@ -53,12 +55,16 @@ export function ActionSettings() {
             />
           }
         >
-          <SchemaForm
-            fields={currentAction.configurationSchema}
-            onSubmit={activateActionMutation.mutateAsync}
-            initialValues={{}}
-            buttonText="Activate Action"
-          />
+          {currentAction ? (
+            <SchemaForm
+              fields={currentAction.configurationSchema}
+              onSubmit={activateActionMutation.mutateAsync}
+              initialValues={{}}
+              buttonText="Activate Action"
+            />
+          ) : (
+            <Text>UnKnown Action</Text>
+          )}
         </ViewStateMachine>
       </SectionBox>
     </BaseActionsLayout>

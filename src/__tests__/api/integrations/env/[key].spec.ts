@@ -39,13 +39,28 @@ describe("/api/integrations/env/[key]", () => {
 
       expect(res._getStatusCode()).toBe(204);
       expect(await currentState()).toMatchInlineSnapshot(`
-        {
-          "ENV_KEY_1": "ENV_KEY_1",
-          "ENV_KEY_2": "ENV_KEY_2",
-          "GROUP_ENV___KEY_3": "ENV_KEY_3",
-          "GROUP_ENV___KEY_4": "ENV_KEY_4",
-          "NEW_ENV_KEY": "NEW_ENV_VALUE",
-        }
+        [
+          {
+            "key": "ENV_KEY_1",
+            "value": "ENV_KEY_1",
+          },
+          {
+            "key": "ENV_KEY_2",
+            "value": "ENV_KEY_2",
+          },
+          {
+            "key": "GROUP_ENV___KEY_3",
+            "value": "ENV_KEY_3",
+          },
+          {
+            "key": "GROUP_ENV___KEY_4",
+            "value": "ENV_KEY_4",
+          },
+          {
+            "key": "NEW_ENV_KEY",
+            "value": "NEW_ENV_VALUE",
+          },
+        ]
       `);
     });
 
@@ -64,13 +79,28 @@ describe("/api/integrations/env/[key]", () => {
 
       expect(res._getStatusCode()).toBe(204);
       expect(await currentState()).toMatchInlineSnapshot(`
-        {
-          "ENV_KEY_1": "ENV_KEY_1",
-          "ENV_KEY_2": "UPDATED_ENV_KEY_2",
-          "GROUP_ENV___KEY_3": "ENV_KEY_3",
-          "GROUP_ENV___KEY_4": "ENV_KEY_4",
-          "NEW_ENV_KEY": "NEW_ENV_VALUE",
-        }
+        [
+          {
+            "key": "ENV_KEY_1",
+            "value": "ENV_KEY_1",
+          },
+          {
+            "key": "ENV_KEY_2",
+            "value": "UPDATED_ENV_KEY_2",
+          },
+          {
+            "key": "GROUP_ENV___KEY_3",
+            "value": "ENV_KEY_3",
+          },
+          {
+            "key": "GROUP_ENV___KEY_4",
+            "value": "ENV_KEY_4",
+          },
+          {
+            "key": "NEW_ENV_KEY",
+            "value": "NEW_ENV_VALUE",
+          },
+        ]
       `);
     });
 
@@ -86,12 +116,24 @@ describe("/api/integrations/env/[key]", () => {
 
       expect(res._getStatusCode()).toBe(204);
       expect(await currentState()).toMatchInlineSnapshot(`
-        {
-          "ENV_KEY_2": "UPDATED_ENV_KEY_2",
-          "GROUP_ENV___KEY_3": "ENV_KEY_3",
-          "GROUP_ENV___KEY_4": "ENV_KEY_4",
-          "NEW_ENV_KEY": "NEW_ENV_VALUE",
-        }
+        [
+          {
+            "key": "ENV_KEY_2",
+            "value": "UPDATED_ENV_KEY_2",
+          },
+          {
+            "key": "GROUP_ENV___KEY_3",
+            "value": "ENV_KEY_3",
+          },
+          {
+            "key": "GROUP_ENV___KEY_4",
+            "value": "ENV_KEY_4",
+          },
+          {
+            "key": "NEW_ENV_KEY",
+            "value": "NEW_ENV_VALUE",
+          },
+        ]
       `);
     });
   });
@@ -122,12 +164,24 @@ describe("/api/integrations/env/[key]", () => {
       `);
 
       expect(await currentState()).toMatchInlineSnapshot(`
-        {
-          "ENV_KEY_2": "UPDATED_ENV_KEY_2",
-          "GROUP_ENV___KEY_3": "ENV_KEY_3",
-          "GROUP_ENV___KEY_4": "ENV_KEY_4",
-          "NEW_ENV_KEY": "NEW_ENV_VALUE",
-        }
+        [
+          {
+            "key": "ENV_KEY_2",
+            "value": "UPDATED_ENV_KEY_2",
+          },
+          {
+            "key": "GROUP_ENV___KEY_3",
+            "value": "ENV_KEY_3",
+          },
+          {
+            "key": "GROUP_ENV___KEY_4",
+            "value": "ENV_KEY_4",
+          },
+          {
+            "key": "NEW_ENV_KEY",
+            "value": "NEW_ENV_VALUE",
+          },
+        ]
       `);
     });
 
@@ -147,12 +201,24 @@ describe("/api/integrations/env/[key]", () => {
       expect(res._getStatusCode()).toBe(204);
 
       expect(await currentState()).toMatchInlineSnapshot(`
-        {
-          "ENV_KEY_2": "UPDATED_ENV_KEY_2",
-          "GROUP_ENV___KEY_3": "UPDATED_ENV_KEY_3",
-          "GROUP_ENV___KEY_4": "ENV_KEY_4",
-          "NEW_ENV_KEY": "NEW_ENV_VALUE",
-        }
+        [
+          {
+            "key": "ENV_KEY_2",
+            "value": "UPDATED_ENV_KEY_2",
+          },
+          {
+            "key": "GROUP_ENV___KEY_3",
+            "value": "UPDATED_ENV_KEY_3",
+          },
+          {
+            "key": "GROUP_ENV___KEY_4",
+            "value": "ENV_KEY_4",
+          },
+          {
+            "key": "NEW_ENV_KEY",
+            "value": "NEW_ENV_VALUE",
+          },
+        ]
       `);
     });
 
@@ -178,12 +244,24 @@ describe("/api/integrations/env/[key]", () => {
       `);
 
       expect(await currentState()).toMatchInlineSnapshot(`
-        {
-          "ENV_KEY_2": "UPDATED_ENV_KEY_2",
-          "GROUP_ENV___KEY_3": "UPDATED_ENV_KEY_3",
-          "GROUP_ENV___KEY_4": "ENV_KEY_4",
-          "NEW_ENV_KEY": "NEW_ENV_VALUE",
-        }
+        [
+          {
+            "key": "ENV_KEY_2",
+            "value": "UPDATED_ENV_KEY_2",
+          },
+          {
+            "key": "GROUP_ENV___KEY_3",
+            "value": "UPDATED_ENV_KEY_3",
+          },
+          {
+            "key": "GROUP_ENV___KEY_4",
+            "value": "ENV_KEY_4",
+          },
+          {
+            "key": "NEW_ENV_KEY",
+            "value": "NEW_ENV_VALUE",
+          },
+        ]
       `);
     });
   });

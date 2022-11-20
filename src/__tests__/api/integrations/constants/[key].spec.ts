@@ -39,13 +39,28 @@ describe("/api/integrations/constants/[key]", () => {
 
       expect(res._getStatusCode()).toBe(204);
       expect(await currentState()).toMatchInlineSnapshot(`
-        {
-          "CONSTANT_KEY_1": "CONSTANT_KEY_1",
-          "CONSTANT_KEY_2": "CONSTANT_KEY_2",
-          "GROUP_CONSTANT___KEY_3": "CONSTANT_KEY_3",
-          "GROUP_CONSTANT___KEY_4": "CONSTANT_KEY_4",
-          "NEW_CONSTANT_KEY": "NEW_CONSTANT_VALUE",
-        }
+        [
+          {
+            "key": "CONSTANT_KEY_1",
+            "value": "CONSTANT_KEY_1",
+          },
+          {
+            "key": "CONSTANT_KEY_2",
+            "value": "CONSTANT_KEY_2",
+          },
+          {
+            "key": "GROUP_CONSTANT___KEY_3",
+            "value": "CONSTANT_KEY_3",
+          },
+          {
+            "key": "GROUP_CONSTANT___KEY_4",
+            "value": "CONSTANT_KEY_4",
+          },
+          {
+            "key": "NEW_CONSTANT_KEY",
+            "value": "NEW_CONSTANT_VALUE",
+          },
+        ]
       `);
     });
 
@@ -64,13 +79,28 @@ describe("/api/integrations/constants/[key]", () => {
 
       expect(res._getStatusCode()).toBe(204);
       expect(await currentState()).toMatchInlineSnapshot(`
-        {
-          "CONSTANT_KEY_1": "CONSTANT_KEY_1",
-          "CONSTANT_KEY_2": "UPDATED_CONSTANT_KEY_2",
-          "GROUP_CONSTANT___KEY_3": "CONSTANT_KEY_3",
-          "GROUP_CONSTANT___KEY_4": "CONSTANT_KEY_4",
-          "NEW_CONSTANT_KEY": "NEW_CONSTANT_VALUE",
-        }
+        [
+          {
+            "key": "CONSTANT_KEY_1",
+            "value": "CONSTANT_KEY_1",
+          },
+          {
+            "key": "CONSTANT_KEY_2",
+            "value": "UPDATED_CONSTANT_KEY_2",
+          },
+          {
+            "key": "GROUP_CONSTANT___KEY_3",
+            "value": "CONSTANT_KEY_3",
+          },
+          {
+            "key": "GROUP_CONSTANT___KEY_4",
+            "value": "CONSTANT_KEY_4",
+          },
+          {
+            "key": "NEW_CONSTANT_KEY",
+            "value": "NEW_CONSTANT_VALUE",
+          },
+        ]
       `);
     });
 
@@ -86,12 +116,24 @@ describe("/api/integrations/constants/[key]", () => {
 
       expect(res._getStatusCode()).toBe(204);
       expect(await currentState()).toMatchInlineSnapshot(`
-        {
-          "CONSTANT_KEY_2": "UPDATED_CONSTANT_KEY_2",
-          "GROUP_CONSTANT___KEY_3": "CONSTANT_KEY_3",
-          "GROUP_CONSTANT___KEY_4": "CONSTANT_KEY_4",
-          "NEW_CONSTANT_KEY": "NEW_CONSTANT_VALUE",
-        }
+        [
+          {
+            "key": "CONSTANT_KEY_2",
+            "value": "UPDATED_CONSTANT_KEY_2",
+          },
+          {
+            "key": "GROUP_CONSTANT___KEY_3",
+            "value": "CONSTANT_KEY_3",
+          },
+          {
+            "key": "GROUP_CONSTANT___KEY_4",
+            "value": "CONSTANT_KEY_4",
+          },
+          {
+            "key": "NEW_CONSTANT_KEY",
+            "value": "NEW_CONSTANT_VALUE",
+          },
+        ]
       `);
     });
   });
@@ -122,12 +164,24 @@ describe("/api/integrations/constants/[key]", () => {
       `);
 
       expect(await currentState()).toMatchInlineSnapshot(`
-        {
-          "CONSTANT_KEY_2": "UPDATED_CONSTANT_KEY_2",
-          "GROUP_CONSTANT___KEY_3": "CONSTANT_KEY_3",
-          "GROUP_CONSTANT___KEY_4": "CONSTANT_KEY_4",
-          "NEW_CONSTANT_KEY": "NEW_CONSTANT_VALUE",
-        }
+        [
+          {
+            "key": "CONSTANT_KEY_2",
+            "value": "UPDATED_CONSTANT_KEY_2",
+          },
+          {
+            "key": "GROUP_CONSTANT___KEY_3",
+            "value": "CONSTANT_KEY_3",
+          },
+          {
+            "key": "GROUP_CONSTANT___KEY_4",
+            "value": "CONSTANT_KEY_4",
+          },
+          {
+            "key": "NEW_CONSTANT_KEY",
+            "value": "NEW_CONSTANT_VALUE",
+          },
+        ]
       `);
     });
 
@@ -147,12 +201,24 @@ describe("/api/integrations/constants/[key]", () => {
       expect(res._getStatusCode()).toBe(204);
 
       expect(await currentState()).toMatchInlineSnapshot(`
-        {
-          "CONSTANT_KEY_2": "UPDATED_CONSTANT_KEY_2",
-          "GROUP_CONSTANT___KEY_3": "UPDATED_CONSTANT_KEY_3",
-          "GROUP_CONSTANT___KEY_4": "CONSTANT_KEY_4",
-          "NEW_CONSTANT_KEY": "NEW_CONSTANT_VALUE",
-        }
+        [
+          {
+            "key": "CONSTANT_KEY_2",
+            "value": "UPDATED_CONSTANT_KEY_2",
+          },
+          {
+            "key": "GROUP_CONSTANT___KEY_3",
+            "value": "UPDATED_CONSTANT_KEY_3",
+          },
+          {
+            "key": "GROUP_CONSTANT___KEY_4",
+            "value": "CONSTANT_KEY_4",
+          },
+          {
+            "key": "NEW_CONSTANT_KEY",
+            "value": "NEW_CONSTANT_VALUE",
+          },
+        ]
       `);
     });
 
@@ -178,12 +244,24 @@ describe("/api/integrations/constants/[key]", () => {
       `);
 
       expect(await currentState()).toMatchInlineSnapshot(`
-        {
-          "CONSTANT_KEY_2": "UPDATED_CONSTANT_KEY_2",
-          "GROUP_CONSTANT___KEY_3": "UPDATED_CONSTANT_KEY_3",
-          "GROUP_CONSTANT___KEY_4": "CONSTANT_KEY_4",
-          "NEW_CONSTANT_KEY": "NEW_CONSTANT_VALUE",
-        }
+        [
+          {
+            "key": "CONSTANT_KEY_2",
+            "value": "UPDATED_CONSTANT_KEY_2",
+          },
+          {
+            "key": "GROUP_CONSTANT___KEY_3",
+            "value": "UPDATED_CONSTANT_KEY_3",
+          },
+          {
+            "key": "GROUP_CONSTANT___KEY_4",
+            "value": "CONSTANT_KEY_4",
+          },
+          {
+            "key": "NEW_CONSTANT_KEY",
+            "value": "NEW_CONSTANT_VALUE",
+          },
+        ]
       `);
     });
   });

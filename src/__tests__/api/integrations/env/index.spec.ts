@@ -18,12 +18,24 @@ describe("/api/integrations/env", () => {
 
     expect(res._getStatusCode()).toBe(200);
     expect(res._getJSONData()).toMatchInlineSnapshot(`
-      {
-        "ENV_KEY_1": "ENV_KEY_1",
-        "ENV_KEY_2": "ENV_KEY_2",
-        "GROUP_ENV___KEY_3": "ENV_KEY_3",
-        "GROUP_ENV___KEY_4": "ENV_KEY_4",
-      }
+      [
+        {
+          "key": "ENV_KEY_1",
+          "value": "ENV_KEY_1",
+        },
+        {
+          "key": "ENV_KEY_2",
+          "value": "ENV_KEY_2",
+        },
+        {
+          "key": "GROUP_ENV___KEY_3",
+          "value": "ENV_KEY_3",
+        },
+        {
+          "key": "GROUP_ENV___KEY_4",
+          "value": "ENV_KEY_4",
+        },
+      ]
     `);
   });
 });

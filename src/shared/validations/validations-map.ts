@@ -16,6 +16,7 @@ import {
   min,
   max,
   isIn,
+  isUppercase,
 } from "class-validator";
 import {
   doesntMatchOtherField,
@@ -91,6 +92,12 @@ export const ENTITY_VALIDATION_CONFIG: Record<
     message: "{{ name }} should contain only alphabets and numbers",
     implementation: handleValidation(isAlphanumeric),
   },
+
+  isUpperCase: {
+    message: "{{ name }} should contain only upper cases",
+    implementation: handleValidation(isUppercase),
+  },
+
   postiveNumber: {
     message: "{{ name }} should be positive number",
     implementation: handleValidation(isPositive),

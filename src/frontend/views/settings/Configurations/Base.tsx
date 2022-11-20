@@ -1,41 +1,113 @@
 import {
+  DEFAULT_TABLE_PARAMS,
+  DeleteButton,
   FormSkeleton,
   FormSkeletonSchema,
+  OffCanvas,
   SectionBox,
-  Spacer,
+  SoftButton,
+  Stack,
+  Table,
 } from "@hadmean/chromista";
 import { ViewStateMachine } from "frontend/lib/ViewStateMachine";
 import { IntegrationsConfigurationGroup } from "shared/types/integrations";
 import { LINK_TO_DOCS } from "frontend/views/constants";
-import noop from "lodash/noop";
 import {
+  IBEPaginatedDataState,
+  IFEPaginatedDataState,
+  useFEPaginatedData,
+} from "@hadmean/protozoa";
+import { useCallback, useState } from "react";
+import {
+  INTEGRATIONS_GROUP_ENDPOINT,
   useIntegrationConfigurationDeletionMutation,
   useIntegrationConfigurationUpdationMutation,
   useIntegrationsConfigurationList,
 } from "./configurations.store";
 import { KeyValueForm } from "./Form";
+import { IKeyValue } from "./types";
+
+const NEW_CONFIG_ITEM = "__new_config_item__";
+
+const GROUP_LABEL: Record<IntegrationsConfigurationGroup, { label: string }> = {
+  constants: {
+    label: "Constants",
+  },
+  env: {
+    label: "Environment Variables",
+  },
+};
 
 export function BaseIntegrationsConfiguration({
   group,
 }: {
   group: IntegrationsConfigurationGroup;
 }) {
+  const [paginatedDataState, setPaginatedDataState] = useState<
+    IFEPaginatedDataState<IKeyValue> | IBEPaginatedDataState
+  >({ ...DEFAULT_TABLE_PARAMS, pageIndex: 1 });
+
   const configurationList = useIntegrationsConfigurationList(group);
   const upsertConfigurationMutation =
     useIntegrationConfigurationUpdationMutation(group);
   const deleteConfigurationMutation =
     useIntegrationConfigurationDeletionMutation(group);
-  noop(deleteConfigurationMutation);
+
+  const tableData = useFEPaginatedData<Record<string, unknown>>(
+    INTEGRATIONS_GROUP_ENDPOINT(group),
+    {
+      ...paginatedDataState,
+      sortBy: undefined,
+      pageIndex: 1,
+      filters: undefined,
+    }
+  );
+
+  const [currentConfigItem, setCurrentConfigItem] = useState("");
+
+  const closeConfigItem = () => {
+    setCurrentConfigItem("");
+  };
+
+  const MemoizedAction = useCallback(
+    ({ row }: any) => (
+      <Stack spacing={4} align="center">
+        <SoftButton
+          action={() => setCurrentConfigItem((row.original as IKeyValue).key)}
+          label="Edit"
+          justIcon
+          icon="edit"
+        />
+        <DeleteButton
+          onDelete={() =>
+            deleteConfigurationMutation.mutateAsync(
+              (row.original as IKeyValue).key
+            )
+          }
+          isMakingDeleteRequest={deleteConfigurationMutation.isLoading}
+          shouldConfirmAlert
+        />
+      </Stack>
+    ),
+    [deleteConfigurationMutation.isLoading]
+  );
 
   return (
     <>
       <SectionBox
-        title={`Manage ${group}`}
+        title={`Manage ${GROUP_LABEL[group].label}`}
         iconButtons={[
+          {
+            action: () => {
+              setCurrentConfigItem(NEW_CONFIG_ITEM);
+            },
+            icon: "add",
+            label: `Add New ${GROUP_LABEL[group].label}`,
+          },
           {
             action: LINK_TO_DOCS(`integrations-configuration/${group}`),
             icon: "help",
-            label: `${group} Configurations Documentation`,
+            label: `${GROUP_LABEL[group].label} Configurations Documentation`,
           },
         ]}
       >
@@ -53,18 +125,49 @@ export function BaseIntegrationsConfiguration({
             />
           }
         >
-          <KeyValueForm
-            initialValues={configurationList.data || {}}
-            onSubmit={async (values: { key: string; value: string }) => {
-              await upsertConfigurationMutation.mutateAsync(values);
+          <Table
+            {...{
+              tableData,
+              setPaginatedDataState,
+              paginatedDataState,
             }}
-            // onDelete={async (key: string) => {
-            //   await deleteConfigurationMutation.mutateAsync({ key });
-            // }}
+            columns={[
+              {
+                Header: "Key",
+                accessor: "key",
+                disableSortBy: true,
+              },
+              {
+                Header: "Value",
+                accessor: "value",
+                disableSortBy: true,
+              },
+              {
+                Header: "Action",
+                Cell: MemoizedAction,
+              },
+            ]}
           />
         </ViewStateMachine>
       </SectionBox>
-      <Spacer />
+
+      <OffCanvas
+        title={
+          currentConfigItem === NEW_CONFIG_ITEM ? "New Entry" : "Edit Entry"
+        }
+        onClose={closeConfigItem}
+        show={!!currentConfigItem}
+      >
+        <KeyValueForm
+          initialValues={(tableData?.data?.data || []).find(
+            ({ key }) => key === currentConfigItem
+          )}
+          onSubmit={async (values: { key: string; value: string }) => {
+            await upsertConfigurationMutation.mutateAsync(values);
+            closeConfigItem();
+          }}
+        />
+      </OffCanvas>
     </>
   );
 }

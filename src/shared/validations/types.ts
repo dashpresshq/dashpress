@@ -19,6 +19,7 @@ export type SelectableAbleValidations =
   | "isIn"
   | "regex"
   | "alphanumeric"
+  | "isUpperCase"
   | "matchOtherField"
   | "doesntMatchOtherField"
   | "lessThanOtherField"

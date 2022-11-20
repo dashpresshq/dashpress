@@ -1,54 +1,55 @@
-import { FormButton, FormInput } from "@hadmean/chromista";
-import { IFormProps, required } from "@hadmean/protozoa";
-import { Field, Form } from "react-final-form";
+import { IFormProps } from "@hadmean/protozoa";
+import { SchemaForm } from "frontend/lib/form/SchemaForm";
+import { IAppliedSchemaFormConfig } from "shared/form-schemas/types";
+import { IKeyValue } from "./types";
+
+// Only capital letters no spaces
+
+export const FORM_SCHEMA: IAppliedSchemaFormConfig<IKeyValue> = {
+  key: {
+    type: "text",
+    validations: [
+      {
+        validationType: "required",
+      },
+      {
+        validationType: "alphanumeric",
+      },
+      {
+        validationType: "isUpperCase",
+      },
+    ],
+  },
+  value: {
+    type: "text",
+    validations: [
+      {
+        validationType: "required",
+      },
+    ],
+  },
+};
 
 export function KeyValueForm({
   onSubmit,
   initialValues,
-}: IFormProps<Record<string, string>>) {
+}: IFormProps<IKeyValue>) {
   return (
-    <Form
+    <SchemaForm<IKeyValue>
       onSubmit={onSubmit}
       initialValues={initialValues}
-      render={({ handleSubmit, submitting, pristine, values }) => {
-        return (
-          <form onSubmit={handleSubmit}>
-            {Object.entries(values).map(([key]) => (
-              <Field
-                name={key}
-                key={key}
-                validate={required}
-                validateFields={[]}
-              >
-                {({ input, meta }) => (
-                  <FormInput
-                    label={key}
-                    rightActions={[
-                      {
-                        action: () => {},
-                        label: "Remove",
-                      },
-                    ]}
-                    meta={meta}
-                    input={{
-                      ...input,
-                      onChange: (value) => {
-                        input.onChange(value);
-                      },
-                    }}
-                  />
-                )}
-              </Field>
-            ))}
-
-            <FormButton
-              text="Save Changes"
-              isMakingRequest={submitting}
-              disabled={pristine}
-            />
-          </form>
-        );
+      buttonText="Save"
+      action={initialValues ? "update" : "create"}
+      formExtension={{
+        fieldsState: `
+          return {
+            key: {
+              disabled: $.action === "update"
+            }
+          }
+        `,
       }}
+      fields={FORM_SCHEMA}
     />
   );
 }

@@ -9,8 +9,9 @@ import {
 import { useMutation } from "react-query";
 import { IntegrationsConfigurationGroup } from "shared/types/integrations";
 
-const INTEGRATIONS_GROUP_ENDPOINT = (group: IntegrationsConfigurationGroup) =>
-  `/api/integrations/${group}`;
+export const INTEGRATIONS_GROUP_ENDPOINT = (
+  group: IntegrationsConfigurationGroup
+) => `/api/integrations/${group}`;
 
 export const useIntegrationsConfigurationList = (
   group: IntegrationsConfigurationGroup
@@ -49,8 +50,8 @@ export function useIntegrationConfigurationDeletionMutation(
   });
 
   return useMutation(
-    async (data: { key: string }) =>
-      await makeDeleteRequest(`/api/integrations/${group}/${data.key}`),
+    async (key: string) =>
+      await makeDeleteRequest(`/api/integrations/${group}/${key}`),
     apiMutateOptions
   );
 }

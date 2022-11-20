@@ -31,11 +31,12 @@ export function BaseActionsLayout({ children }: IProps) {
 
   const activeActionList = useActiveActionList();
 
-  //   const activeList = (activeActionList.data || []).map(
-  //     ({ integrationKey }) => integrationKey
-  //   );
-
-  const activeList = ["http", "slack"];
+  const activeList = [
+    ...(activeActionList.data || []).map(
+      ({ integrationKey }) => integrationKey
+    ),
+    "http",
+  ];
 
   return (
     <AppLayout>
@@ -52,7 +53,6 @@ export function BaseActionsLayout({ children }: IProps) {
                   name: title,
                   key,
                 }))}
-                singular=""
                 render={(menuItem) => {
                   const isActive = activeList.includes(menuItem.key);
                   return (

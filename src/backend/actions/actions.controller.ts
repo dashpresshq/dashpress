@@ -1,8 +1,13 @@
+import { BadRequestError } from "backend/lib/errors";
+import { usersService, UsersService } from "backend/users/users.service";
 import { IActionsToTrigger } from "shared/types/actions";
 import { ActionsService, actionsService } from "./actions.service";
 
 export class ActionsController {
-  constructor(private _actionsService: ActionsService) {}
+  constructor(
+    private _actionsService: ActionsService,
+    private _usersService: UsersService
+  ) {}
 
   listAllActions() {
     return this._actionsService.listAllActions();
@@ -50,6 +55,24 @@ export class ActionsController {
   ) {
     await this._actionsService.registerAction(entity, action);
   }
+
+  async showActionConfig(
+    activationId: string,
+    user: {
+      username: string;
+      password: string;
+    }
+  ) {
+    try {
+      await this._usersService.checkUserPassword(user);
+    } catch (error) {
+      throw new BadRequestError("Invalid Password");
+    }
+    return await this._actionsService.showActionConfig(activationId);
+  }
 }
 
-export const actionsController = new ActionsController(actionsService);
+export const actionsController = new ActionsController(
+  actionsService,
+  usersService
+);

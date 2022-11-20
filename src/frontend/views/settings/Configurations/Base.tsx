@@ -145,7 +145,9 @@ export function BaseIntegrationsConfiguration({
 
       <OffCanvas
         title={
-          currentConfigItem === NEW_CONFIG_ITEM ? "New Entry" : "Edit Entry"
+          currentConfigItem === NEW_CONFIG_ITEM
+            ? `New ${INTEGRATIONS_GROUP_LABEL[group].singular}`
+            : `Edit ${INTEGRATIONS_GROUP_LABEL[group].singular}`
         }
         onClose={closeConfigItem}
         show={!!currentConfigItem}

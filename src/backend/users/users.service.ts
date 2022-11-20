@@ -28,18 +28,13 @@ export class UsersService implements IApplicationService {
     username: string;
     password: string;
   }): Promise<ISuccessfullAuthenticationResponse> {
-    const user = await this._usersPersistenceService.getItem(
-      authCredentials.username
-    );
-
-    if (!user) {
+    try {
+      const user = await this.checkUserPassword(authCredentials);
+      delete user.password;
+      return { token: await this._authTokenService.sign(user) };
+    } catch (error) {
       throw new ForbiddenError(INVALID_LOGIN_MESSAGE);
     }
-    if (!(await HashService.compare(authCredentials.password, user.password))) {
-      throw new ForbiddenError(INVALID_LOGIN_MESSAGE);
-    }
-    delete user.password;
-    return { token: await this._authTokenService.sign(user) };
   }
 
   async bootstrap() {
@@ -94,6 +89,26 @@ export class UsersService implements IApplicationService {
     return user;
   }
 
+  async checkUserPassword({
+    password,
+    username,
+  }: {
+    username: string;
+    password: string;
+  }) {
+    const user = await this._usersPersistenceService.getItem(username);
+
+    if (!user) {
+      throw new Error();
+    }
+
+    if (!(await HashService.compare(password, user.password))) {
+      throw new Error();
+    }
+
+    return user;
+  }
+
   async changePassword(
     username: string,
     input: {
@@ -104,11 +119,16 @@ export class UsersService implements IApplicationService {
     if (process.env.NEXT_PUBLIC_IS_DEMO) {
       return;
     }
-    const user = await this._usersPersistenceService.getItem(username);
 
-    if (!(await HashService.compare(input.oldPassword, user.password))) {
+    try {
+      await this.checkUserPassword({
+        username,
+        password: input.oldPassword,
+      });
+    } catch (error) {
       throw new BadRequestError("Incorrect password");
     }
+
     await this.updateUser(username, {
       password: await HashService.make(input.newPassword),
     });

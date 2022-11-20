@@ -35,9 +35,7 @@ export function ActionSettings() {
         title={currentAction ? currentAction.title : "Loading..."}
         description={currentAction ? currentAction.description : ""}
         deleteAction={{
-          action: () => {
-            console.log("dsd");
-          },
+          action: () => {},
           isMakingDeleteRequest: false,
         }}
       >
@@ -63,10 +61,14 @@ export function ActionSettings() {
               buttonText="Activate Action"
             />
           ) : (
-            <Text>UnKnown Action</Text>
+            <Text>404: Unknown Action</Text>
           )}
         </ViewStateMachine>
       </SectionBox>
     </BaseActionsLayout>
   );
 }
+
+// if not active then just activate
+// if activated then Integrations, Configure, Deactivate
+// Your Password to view the configuration

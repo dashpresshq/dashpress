@@ -96,10 +96,26 @@ export class ActionsService implements IApplicationService {
     await this._credentialsService.upsertGroup(
       {
         key: credentialsGroupKey,
-        fields: Object.keys(ACTION_INTEGRATIONS[integrationKey]),
+        fields: Object.keys(
+          ACTION_INTEGRATIONS[integrationKey].configurationSchema
+        ),
       },
       configuration
     );
+  }
+
+  async showActionConfig(
+    activationId: string
+  ): Promise<Record<string, unknown>> {
+    const { credentialsGroupKey, integrationKey } =
+      await this._activatedActionsPersistenceService.getItem(activationId);
+
+    return await this._credentialsService.useGroupValue({
+      key: credentialsGroupKey,
+      fields: Object.keys(
+        ACTION_INTEGRATIONS[integrationKey].configurationSchema
+      ),
+    });
   }
 
   async updateActionConfig(
@@ -113,7 +129,9 @@ export class ActionsService implements IApplicationService {
     await this._credentialsService.upsertGroup(
       {
         key: credentialsGroupKey,
-        fields: Object.keys(ACTION_INTEGRATIONS[integrationKey]),
+        fields: Object.keys(
+          ACTION_INTEGRATIONS[integrationKey].configurationSchema
+        ),
       },
       configuration
     );
@@ -126,7 +144,9 @@ export class ActionsService implements IApplicationService {
 
     this._credentialsService.deleteGroup({
       key: action.credentialsGroupKey,
-      fields: Object.keys(ACTION_INTEGRATIONS[action.integrationKey]),
+      fields: Object.keys(
+        ACTION_INTEGRATIONS[action.integrationKey].configurationSchema
+      ),
     });
 
     await this._activatedActionsPersistenceService.removeItem(activationId);

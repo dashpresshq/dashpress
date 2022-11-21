@@ -9,8 +9,13 @@ import {
 } from "@hadmean/protozoa";
 import { useMutation } from "react-query";
 import { IActionsList, IActivatedAction } from "shared/types/actions";
+import { usePasswordStore } from "./password.store";
 
 const ACTIVE_ACTIONS_ENDPOINT = "/api/actions/active";
+
+const ACTIVATION_CONFIG = (activationId) => {
+  return `/api/actions/${activationId}/credential`;
+};
 
 export const useActionsList = () =>
   useApi<IActionsList[]>("/api/actions", {
@@ -21,6 +26,20 @@ export const useActiveActionList = () =>
   useApi<IActivatedAction[]>(ACTIVE_ACTIONS_ENDPOINT, {
     errorMessage: dataNotFoundMessage("Active Actions"),
   });
+
+export const useActivationConfiguration = (activationId: string) => {
+  const rootPassword = usePasswordStore((state) => state.password);
+  return useApi<IActivatedAction[]>(ACTIVATION_CONFIG(activationId), {
+    request: {
+      body: {
+        password: rootPassword,
+      },
+      method: "POST",
+    },
+    errorMessage: dataNotFoundMessage("Action Credentials"),
+    enabled: !!rootPassword,
+  });
+};
 
 export function useDeactivateActionMutation() {
   const apiMutateOptions = useWaitForResponseMutationOptions<

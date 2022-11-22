@@ -51,7 +51,12 @@ export const HTTP_ACTION_INTEGRATION: IActionIntegrationsImplemention = {
     GET: {
       label: "GET",
       configurationSchema: BASE_CONFIGURATION_SCHEMA,
-      do: async () => {},
+      do: async (_, configuration: IBase) => {
+        const response = await fetch(configuration.url, {
+          headers: JSON.parse(configuration.url),
+        });
+        return await response.json();
+      },
     },
     POST: {
       label: "POST",

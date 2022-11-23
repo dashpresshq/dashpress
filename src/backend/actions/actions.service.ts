@@ -9,6 +9,7 @@ import {
 import { IApplicationService } from "backend/types";
 import { nanoid } from "nanoid";
 import {
+  HTTP_ACTION_KEY,
   IActionsList,
   IActionsToTrigger,
   IActivatedAction,
@@ -85,7 +86,7 @@ export class ActionsService implements IApplicationService {
       {
         activationId: "DEFAULT",
         credentialsGroupKey: "DEFAULT",
-        integrationKey: "http",
+        integrationKey: HTTP_ACTION_KEY,
       },
     ];
   }

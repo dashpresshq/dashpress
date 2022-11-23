@@ -17,11 +17,11 @@ export function ActionSettings() {
   const actionsList = useActionsList();
   const activeActionsList = useActiveActionList();
 
-  const currentAction = (actionsList.data || []).find(
+  const actionDetails = (actionsList.data || []).find(
     ({ key }) => key === currentKey
   );
 
-  const isActionActive = (activeActionsList.data || []).find(
+  const activeAction = (activeActionsList.data || []).find(
     ({ integrationKey }) => integrationKey === currentKey
   );
 
@@ -34,8 +34,8 @@ export function ActionSettings() {
   return (
     <BaseActionsLayout>
       <SectionBox
-        title={currentAction ? currentAction.title : "Loading..."}
-        description={currentAction ? currentAction.description : ""}
+        title={actionDetails ? actionDetails.title : "Loading..."}
+        description={actionDetails ? actionDetails.description : ""}
       >
         <ViewStateMachine
           loading={actionsList.isLoading || activeActionsList.isLoading}
@@ -52,9 +52,8 @@ export function ActionSettings() {
           }
         >
           <ActionSettingsView
-            currentAction={currentAction}
-            isActionActive={!!isActionActive}
-            currentKey={currentKey}
+            actionDetails={actionDetails}
+            activeAction={activeAction}
           />
         </ViewStateMachine>
       </SectionBox>

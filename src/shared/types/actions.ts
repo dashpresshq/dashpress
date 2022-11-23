@@ -36,3 +36,5 @@ export type IActionsList = { key: string } & Pick<
   IActionIntegrationsImplemention,
   "title" | "description" | "configurationSchema"
 >;
+
+export const HTTP_ACTION_KEY = "http";

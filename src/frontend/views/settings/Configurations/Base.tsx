@@ -99,6 +99,7 @@ export function BaseIntegrationsConfiguration({
           {
             action: LINK_TO_DOCS(`integrations-configuration/${group}`),
             icon: "help",
+            // TODO documentation
             label: `${INTEGRATIONS_GROUP_LABEL[group].label} Configurations Documentation`,
           },
         ]}
@@ -123,6 +124,7 @@ export function BaseIntegrationsConfiguration({
               setPaginatedDataState,
               paginatedDataState,
             }}
+            // TODO emptyMessage="No ${INTEGRATIONS_GROUP_LABEL[group].label}"
             columns={[
               {
                 Header: "Key",

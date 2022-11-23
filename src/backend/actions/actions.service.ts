@@ -78,7 +78,16 @@ export class ActionsService implements IApplicationService {
   }
 
   async listActivatedActions(): Promise<IActivatedAction[]> {
-    return await this._activatedActionsPersistenceService.getAllItems();
+    const activatedActions =
+      await this._activatedActionsPersistenceService.getAllItems();
+    return [
+      ...activatedActions,
+      {
+        activationId: "DEFAULT",
+        credentialsGroupKey: "DEFAULT",
+        integrationKey: "http",
+      },
+    ];
   }
 
   async activateAction(

@@ -35,7 +35,6 @@ export function BaseActionsLayout({ children }: IProps) {
     ...(activeActionList.data || []).map(
       ({ integrationKey }) => integrationKey
     ),
-    "http",
   ];
 
   return (

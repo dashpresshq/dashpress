@@ -20,7 +20,7 @@ export interface IPerformsImplementation {
   configurationSchema: IAppliedSchemaFormConfig<any>;
   do: (
     connection: unknown,
-    configuration: Record<string, string>
+    configuration: Record<string, unknown>
   ) => Promise<any>;
 }
 

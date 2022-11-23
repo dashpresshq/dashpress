@@ -3,7 +3,7 @@ import { IActionIntegrationsImplemention } from "shared/types/actions";
 
 interface ISMTPActionConfig {
   host: string;
-  port: 465;
+  port: number;
   secure: true;
   authUser: string;
   authPassword: string;
@@ -11,22 +11,60 @@ interface ISMTPActionConfig {
   defaultSenderAddress: string;
 }
 
-const CONFIGURATION_SCHEMA: IAppliedSchemaFormConfig<ISMTPActionConfig> = {
-  token: {
-    type: "text",
-    validations: [
-      {
-        validationType: "required",
-      },
-    ],
-  },
-};
+export const CONFIGURATION_SCHEMA: IAppliedSchemaFormConfig<ISMTPActionConfig> =
+  {
+    host: {
+      type: "text",
+      validations: [
+        {
+          validationType: "required",
+        },
+      ],
+    },
+    port: {
+      type: "number",
+      validations: [
+        {
+          validationType: "required",
+        },
+      ],
+    },
+    secure: {
+      type: "boolean",
+      validations: [],
+    },
+    authUser: {
+      type: "text",
+      validations: [
+        {
+          validationType: "required",
+        },
+      ],
+    },
+    authPassword: {
+      type: "text",
+      validations: [
+        {
+          validationType: "required",
+        },
+      ],
+    },
+    defaultSenderName: {
+      type: "text",
+      validations: [],
+    },
+    defaultSenderAddress: {
+      type: "text",
+      validations: [],
+    },
+  };
 
 interface ISendMessageConfig {
   to: string;
-  cc: string;
   subject: string;
   body: string;
+  overrideSenderName: string;
+  overrideSenderAddress: string;
 }
 
 const SEND_MAIL_SCHEMA: IAppliedSchemaFormConfig<ISendMessageConfig> = {
@@ -37,10 +75,6 @@ const SEND_MAIL_SCHEMA: IAppliedSchemaFormConfig<ISendMessageConfig> = {
         validationType: "required",
       },
     ],
-  },
-  cc: {
-    type: "text",
-    validations: [],
   },
   subject: {
     type: "text",
@@ -58,6 +92,14 @@ const SEND_MAIL_SCHEMA: IAppliedSchemaFormConfig<ISendMessageConfig> = {
       },
     ],
   },
+  overrideSenderName: {
+    type: "text",
+    validations: [],
+  },
+  overrideSenderAddress: {
+    type: "text",
+    validations: [],
+  },
 };
 
 export const SMTP_ACTION_INTEGRATION: IActionIntegrationsImplemention = {
@@ -65,7 +107,7 @@ export const SMTP_ACTION_INTEGRATION: IActionIntegrationsImplemention = {
   description: "Send Message to the ones you love",
   configurationSchema: CONFIGURATION_SCHEMA,
   connect: async () => {
-    // console.log("Connect to slack");
+    // console.log("Connect to mail");
   },
   performsImplementation: {
     SEND_MESSAGE: {

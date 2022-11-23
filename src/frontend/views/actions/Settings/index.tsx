@@ -1,30 +1,21 @@
-/* eslint-disable no-nested-ternary */
 import {
   FormSkeleton,
   FormSkeletonSchema,
   SectionBox,
-  Tabs,
-  Text,
 } from "@hadmean/chromista";
 import { useRouteParam, useSetPageDetails } from "frontend/lib/routing";
 import { USER_PERMISSIONS } from "shared/types/user";
 import { ViewStateMachine } from "frontend/lib/ViewStateMachine";
-import { SchemaForm } from "frontend/lib/form/SchemaForm";
 import { BaseActionsLayout } from "../_Base";
-import {
-  useActionsList,
-  useActivateActionMutation,
-  useActiveActionList,
-} from "../actions.store";
+import { useActionsList, useActiveActionList } from "../actions.store";
 import { ACTIONS_VIEW_KEY } from "../constants";
+import { ActionSettingsView } from "./View";
 
 export function ActionSettings() {
   const currentKey = useRouteParam("key");
 
   const actionsList = useActionsList();
   const activeActionsList = useActiveActionList();
-
-  const activateActionMutation = useActivateActionMutation(currentKey);
 
   const currentAction = (actionsList.data || []).find(
     ({ key }) => key === currentKey
@@ -60,43 +51,11 @@ export function ActionSettings() {
             />
           }
         >
-          {currentAction ? (
-            isActionActive ? (
-              <Tabs
-                contents={[
-                  {
-                    label: "Usages",
-                    content: <>Usages</>,
-                  },
-                  {
-                    label: "Configure",
-                    content: (
-                      // Your Password to view the configuration
-                      <SchemaForm
-                        fields={currentAction.configurationSchema}
-                        onSubmit={activateActionMutation.mutateAsync}
-                        initialValues={{}}
-                        buttonText="Update Configuration"
-                      />
-                    ),
-                  },
-                  {
-                    label: "Deactivate",
-                    content: <>Some Red Button and can not Deactivate HTTP</>,
-                  },
-                ]}
-              />
-            ) : (
-              <SchemaForm
-                fields={currentAction.configurationSchema}
-                onSubmit={activateActionMutation.mutateAsync}
-                initialValues={{}}
-                buttonText="Activate Action"
-              />
-            )
-          ) : (
-            <Text>404: Unknown Action</Text>
-          )}
+          <ActionSettingsView
+            currentAction={currentAction}
+            isActionActive={!!isActionActive}
+            currentKey={currentKey}
+          />
         </ViewStateMachine>
       </SectionBox>
     </BaseActionsLayout>

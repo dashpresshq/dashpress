@@ -10,6 +10,7 @@ export interface IActionsToTrigger {
   triggerId: string;
   activatedActionId: string;
   entity: string;
+  performId: string;
   triggerLogic: string;
   formAction: "create" | "update";
   configuration: Record<string, string>;
@@ -28,7 +29,7 @@ export interface IActionIntegrationsImplemention {
   title: string;
   description: string;
   configurationSchema: IAppliedSchemaFormConfig<any>;
-  connect: (config: Record<string, string>) => Promise<unknown>;
+  connect: (config: Record<string, unknown>) => Promise<unknown>;
   performsImplementation: Record<string, IPerformsImplementation>;
 }
 

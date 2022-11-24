@@ -28,9 +28,37 @@ export class ActionsService implements IApplicationService {
     await this._actionsToTriggerPersistenceService.setup();
   }
 
-  // perform(entity: string, formAction: string) {
-  //   //
-  // }
+  async perform(entity: string, formAction: string) {
+    const entityActions = await this.listEntityActions(entity);
+    const actionsToRun = entityActions.filter(
+      (action) => action.formAction === formAction
+    );
+
+    for (const action of actionsToRun) {
+      const { configuration, performId, activatedActionId } = action;
+      // run triggerLogic triggerLogic
+      const activatedAction =
+        await this._activatedActionsPersistenceService.getItem(
+          activatedActionId
+        );
+      if (!activatedAction) {
+        return;
+      }
+
+      const actionConfiguration = await this.showActionConfig(
+        activatedActionId
+      );
+
+      const connection =
+        ACTION_INTEGRATIONS[activatedAction.integrationKey].connect(
+          actionConfiguration
+        );
+
+      await ACTION_INTEGRATIONS[
+        activatedAction.integrationKey
+      ].performsImplementation[performId].do(connection, configuration);
+    }
+  }
 
   async registerAction(
     entity: string,

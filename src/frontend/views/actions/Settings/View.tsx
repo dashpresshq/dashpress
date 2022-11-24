@@ -5,6 +5,8 @@ import {
   IActionsList,
   IActivatedAction,
 } from "shared/types/actions";
+import { useEffect } from "react";
+import { ToastService } from "@hadmean/protozoa";
 import {
   useActivateActionMutation,
   useActivationConfiguration,
@@ -30,6 +32,12 @@ export function ActionSettingsView({ actionDetails, activeAction }: IProps) {
   const deactivateActionMutation = useDeactivateActionMutation();
 
   const passwordStore = usePasswordStore();
+
+  useEffect(() => {
+    if (activationConfiguration.error) {
+      ToastService.error(activationConfiguration.error);
+    }
+  }, [activationConfiguration.error]);
 
   if (!actionDetails) {
     return <Text>404: Unknown Action</Text>;
@@ -61,9 +69,9 @@ export function ActionSettingsView({ actionDetails, activeAction }: IProps) {
             // eslint-disable-next-line no-nested-ternary
             Object.keys(actionDetails.configurationSchema).length === 0 ? (
               <Text>This action does not have configuration</Text>
-            ) : //   Better UX
-            // && activationConfiguration.isSuccess
-            !passwordStore.password ? (
+            ) : activationConfiguration.error ||
+              activationConfiguration.isLoading ||
+              !passwordStore.password ? (
               <>
                 <Text textStyle="italic" size="5">
                   For security reasons, Please input your account password to
@@ -84,7 +92,11 @@ export function ActionSettingsView({ actionDetails, activeAction }: IProps) {
                   onSubmit={async ({ password }: { password: string }) => {
                     passwordStore.setPassword(password);
                   }}
-                  buttonText="Set Password"
+                  buttonText={
+                    activationConfiguration.isLoading
+                      ? "Just a sec..."
+                      : "Submit"
+                  }
                 />
               </>
             ) : (
@@ -120,6 +132,10 @@ export function ActionSettingsView({ actionDetails, activeAction }: IProps) {
                             pattern: `${deactivationKey}$`,
                           },
                           errorMessage: "Incorrect value",
+                        },
+                        {
+                          validationType: "required",
+                          errorMessage: "Required",
                         },
                       ],
                     },

@@ -28,7 +28,7 @@ export class ActionsService implements IApplicationService {
     await this._actionsToTriggerPersistenceService.setup();
   }
 
-  async perform(entity: string, formAction: string) {
+  async runAction(entity: string, formAction: string) {
     const entityActions = await this.listEntityActions(entity);
     const actionsToRun = entityActions.filter(
       (action) => action.formAction === formAction

@@ -1,5 +1,5 @@
 import { SchemaForm } from "frontend/lib/form/SchemaForm";
-import { Tabs, Text } from "@hadmean/chromista";
+import { Spacer, Tabs, Text } from "@hadmean/chromista";
 import {
   HTTP_ACTION_KEY,
   IActionsList,
@@ -20,13 +20,14 @@ interface IProps {
 
 export function ActionSettingsView({ actionDetails, activeAction }: IProps) {
   const activateActionMutation = useActivateActionMutation(actionDetails?.key);
-  const deactivateActionMutation = useDeactivateActionMutation();
   const activationConfiguration = useActivationConfiguration(
-    activeAction.activationId
+    activeAction?.activationId
   );
   const updateActivatedActionMutation = useUpdateActivatedActionMutation(
-    activeAction.activationId
+    activeAction?.activationId
   );
+
+  const deactivateActionMutation = useDeactivateActionMutation();
 
   const passwordStore = usePasswordStore();
 
@@ -45,6 +46,8 @@ export function ActionSettingsView({ actionDetails, activeAction }: IProps) {
     );
   }
 
+  const deactivationKey = `DEACTIVATE_${actionDetails.key}`.toUpperCase();
+
   return (
     <Tabs
       contents={[
@@ -59,23 +62,31 @@ export function ActionSettingsView({ actionDetails, activeAction }: IProps) {
             Object.keys(actionDetails.configurationSchema).length === 0 ? (
               <Text>This action does not have configuration</Text>
             ) : //   Better UX
-            passwordStore.password || activationConfiguration.error ? (
-              <SchemaForm
-                fields={{
-                  password: {
-                    type: "password",
-                    validations: [
-                      {
-                        validationType: "required",
-                      },
-                    ],
-                  },
-                }}
-                onSubmit={async ({ password }: { password: string }) => {
-                  passwordStore.setPassword(password);
-                }}
-                buttonText="Set Password"
-              />
+            // && activationConfiguration.isSuccess
+            !passwordStore.password ? (
+              <>
+                <Text textStyle="italic" size="5">
+                  For security reasons, Please input your account password to
+                  reveal this action configuration
+                </Text>
+                <Spacer />
+                <SchemaForm
+                  fields={{
+                    password: {
+                      type: "password",
+                      validations: [
+                        {
+                          validationType: "required",
+                        },
+                      ],
+                    },
+                  }}
+                  onSubmit={async ({ password }: { password: string }) => {
+                    passwordStore.setPassword(password);
+                  }}
+                  buttonText="Set Password"
+                />
+              </>
             ) : (
               <SchemaForm
                 fields={actionDetails.configurationSchema}
@@ -92,20 +103,21 @@ export function ActionSettingsView({ actionDetails, activeAction }: IProps) {
               <Text>The HTTP action can not be deactivated</Text>
             ) : (
               <>
-                <Text>
+                <Text textStyle="italic" size="5">
                   Deactivating an action will irrevocabily delete its
                   configurations and remove all its instances
                 </Text>
+                <Spacer />
                 <SchemaForm
                   fields={{
                     confirm: {
                       type: "text",
+                      label: `Input ${deactivationKey} to continue`,
                       validations: [
                         {
                           validationType: "regex",
                           constraint: {
-                            pattern:
-                              `DEACTIVATE ${actionDetails.title}`.toUpperCase(),
+                            pattern: `${deactivationKey}$`,
                           },
                           errorMessage: "Incorrect value",
                         },

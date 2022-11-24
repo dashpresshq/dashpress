@@ -14,7 +14,7 @@ import { usePasswordStore } from "./password.store";
 const ACTIVE_ACTIONS_ENDPOINT = "/api/actions/active";
 
 const ACTIVATION_CONFIG = (activationId) => {
-  return `/api/actions/${activationId}/credential`;
+  return `/api/actions/${activationId}/credentials`;
 };
 
 export const useActionsList = () =>
@@ -46,7 +46,7 @@ export function useDeactivateActionMutation() {
     Record<string, string>
   >({
     endpoints: [ACTIVE_ACTIONS_ENDPOINT],
-    successMessage: MutationsLang.delete("Action"),
+    successMessage: "Action Deactivated Successfully",
   });
 
   return useMutation(
@@ -61,7 +61,7 @@ export function useActivateActionMutation(integrationKey: string) {
     Record<string, string>
   >({
     endpoints: [ACTIVE_ACTIONS_ENDPOINT],
-    successMessage: MutationsLang.create("Action"),
+    successMessage: "Action Activated Successfully",
   });
 
   return useMutation(

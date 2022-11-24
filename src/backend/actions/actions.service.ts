@@ -145,8 +145,18 @@ export class ActionsService implements IApplicationService {
   async showActionConfig(
     activationId: string
   ): Promise<Record<string, unknown>> {
+    if (activationId === "DEFAULT") {
+      return {};
+    }
     const { credentialsGroupKey, integrationKey } =
       await this._activatedActionsPersistenceService.getItem(activationId);
+
+    if (
+      Object.keys(ACTION_INTEGRATIONS[integrationKey].configurationSchema)
+        .length === 0
+    ) {
+      return {};
+    }
 
     return await this._credentialsService.useGroupValue({
       key: credentialsGroupKey,

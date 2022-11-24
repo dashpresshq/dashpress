@@ -9,7 +9,11 @@ import {
 } from "@hadmean/protozoa";
 import { useMutation } from "react-query";
 import { reduceStringToNumber } from "shared/lib/templates/reduceStringToNumber";
-import { IActionsList, IActivatedAction } from "shared/types/actions";
+import {
+  HTTP_ACTION_KEY,
+  IActionsList,
+  IActivatedAction,
+} from "shared/types/actions";
 import { usePasswordStore } from "./password.store";
 
 const ACTIVE_ACTIONS_ENDPOINT = "/api/actions/active";
@@ -40,7 +44,8 @@ export const useActivationConfiguration = (activationId: string) => {
         method: "POST",
       },
       errorMessage: dataNotFoundMessage("Action Credentials"),
-      enabled: !!rootPassword,
+      enabled:
+        !!activationId && !!rootPassword && activationId !== HTTP_ACTION_KEY,
     }
   );
 };

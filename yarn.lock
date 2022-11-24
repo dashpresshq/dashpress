@@ -2193,24 +2193,24 @@
   dependencies:
     "@babel/runtime" "^7.6.2"
 
-"@redis/bloom@1.0.2":
-  version "1.0.2"
-  resolved "https://registry.npmjs.org/@redis/bloom/-/bloom-1.0.2.tgz"
-  integrity sha512-EBw7Ag1hPgFzdznK2PBblc1kdlj5B5Cw3XwI9/oG7tSn85/HKy3X9xHy/8tm/eNXJYHLXHJL/pkwBpFMVVefkw==
+"@redis/bloom@1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@redis/bloom/-/bloom-1.1.0.tgz#64e310ddee72010676e14296076329e594a1f6c7"
+  integrity sha512-9QovlxmpRtvxVbN0UBcv8WfdSMudNZZTFqCsnBszcQXqaZb/TVe30ScgGEO7u1EAIacTPAo7/oCYjYAxiHLanQ==
 
-"@redis/client@1.3.0":
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/@redis/client/-/client-1.3.0.tgz#c62ccd707f16370a2dc2f9e158a28b7da049fa77"
-  integrity sha512-XCFV60nloXAefDsPnYMjHGtvbtHR8fV5Om8cQ0JYqTNbWcQo/4AryzJ2luRj4blveWazRK/j40gES8M7Cp6cfQ==
+"@redis/client@1.4.0":
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/@redis/client/-/client-1.4.0.tgz#d2c56ce26c3e2fe3412db5cfb1814169662167eb"
+  integrity sha512-1gEj1AkyXPlkcC/9/T5xpDcQF8ntERURjLBgEWMTdUZqe181zfI9BY3jc2OzjTLkvZh5GV7VT4ktoJG2fV2ufw==
   dependencies:
-    cluster-key-slot "1.1.0"
-    generic-pool "3.8.2"
+    cluster-key-slot "1.1.1"
+    generic-pool "3.9.0"
     yallist "4.0.0"
 
-"@redis/graph@1.0.1":
-  version "1.0.1"
-  resolved "https://registry.npmjs.org/@redis/graph/-/graph-1.0.1.tgz"
-  integrity sha512-oDE4myMCJOCVKYMygEMWuriBgqlS5FqdWerikMoJxzmmTUErnTRRgmIDa2VcgytACZMFqpAOWDzops4DOlnkfQ==
+"@redis/graph@1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@redis/graph/-/graph-1.1.0.tgz#cc2b82e5141a29ada2cce7d267a6b74baa6dd519"
+  integrity sha512-16yZWngxyXPd+MJxeSr0dqh2AIOi8j9yXKcKCwVaKDbH3HTuETpDVPcLujhFYVPtYrngSco31BUcSa9TH31Gqg==
 
 "@redis/json@1.0.4":
   version "1.0.4"
@@ -2222,10 +2222,10 @@
   resolved "https://registry.yarnpkg.com/@redis/search/-/search-1.1.0.tgz#7abb18d431f27ceafe6bcb4dd83a3fa67e9ab4df"
   integrity sha512-NyFZEVnxIJEybpy+YskjgOJRNsfTYqaPbK/Buv6W2kmFNaRk85JiqjJZA5QkRmWvGbyQYwoO5QfDi2wHskKrQQ==
 
-"@redis/time-series@1.0.3":
-  version "1.0.3"
-  resolved "https://registry.npmjs.org/@redis/time-series/-/time-series-1.0.3.tgz"
-  integrity sha512-OFp0q4SGrTH0Mruf6oFsHGea58u8vS/iI5+NpYdicaM+7BgqBZH8FFvNZ8rYYLrUO/QRqMq72NpXmxLVNcdmjA==
+"@redis/time-series@1.0.4":
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/@redis/time-series/-/time-series-1.0.4.tgz#af85eb080f6934580e4d3b58046026b6c2b18717"
+  integrity sha512-ThUIgo2U/g7cCuZavucQTQzA9g9JbDDY2f64u3AbAoz/8vE2lt2U37LamDUVChhaDA3IRT9R6VvJwqnUfTJzng==
 
 "@restart/hooks@^0.4.6", "@restart/hooks@^0.4.7":
   version "0.4.7"
@@ -3736,10 +3736,10 @@ clone@^2.1.1:
   resolved "https://registry.yarnpkg.com/clone/-/clone-2.1.2.tgz#1b7f4b9f591f1e8f83670401600345a02887435f"
   integrity sha512-3Pe/CF1Nn94hyhIYpjtiLhdCoEoz0DqQ+988E9gmeEdQZlojxnOb74wctFyuwWQHzqyf9X7C7MG8juUpqBJT8w==
 
-cluster-key-slot@1.1.0:
-  version "1.1.0"
-  resolved "https://registry.npmjs.org/cluster-key-slot/-/cluster-key-slot-1.1.0.tgz"
-  integrity sha512-2Nii8p3RwAPiFwsnZvukotvow2rIHM+yQ6ZcBXGHdniadkYGZYiGmkHJIbZPIV9nfv7m/U1IPMVVcAhoWFeklw==
+cluster-key-slot@1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/cluster-key-slot/-/cluster-key-slot-1.1.1.tgz#10ccb9ded0729464b6d2e7d714b100a2d1259d43"
+  integrity sha512-rwHwUfXL40Chm1r08yrhU3qpUvdVlgkKNeyeGPOxnW8/SyVDvgRaed/Uz54AqWNaTCAThlj6QAs3TZcKI0xDEw==
 
 co@^4.6.0:
   version "4.6.0"
@@ -5505,10 +5505,10 @@ generate-function@^2.3.1:
   dependencies:
     is-property "^1.0.2"
 
-generic-pool@3.8.2:
-  version "3.8.2"
-  resolved "https://registry.npmjs.org/generic-pool/-/generic-pool-3.8.2.tgz"
-  integrity sha512-nGToKy6p3PAbYQ7p1UlWl6vSPwfwU6TMSWK7TTu+WUY4ZjyZQGniGGt2oNVvyNSpyZYSB43zMXVLcBm08MTMkg==
+generic-pool@3.9.0:
+  version "3.9.0"
+  resolved "https://registry.yarnpkg.com/generic-pool/-/generic-pool-3.9.0.tgz#36f4a678e963f4fdb8707eab050823abc4e8f5e4"
+  integrity sha512-hymDOu5B53XvN4QT9dBmZxPX4CWhBPPLguTZ9MMFeFa/Kg0xWVfylOVNlJji/E7yTZWFd/q9GO5TxDLq156D7g==
 
 gensync@^1.0.0-beta.2:
   version "1.0.0-beta.2"
@@ -8918,17 +8918,17 @@ redent@^3.0.0:
     indent-string "^4.0.0"
     strip-indent "^3.0.0"
 
-redis@^4.3.1:
-  version "4.3.1"
-  resolved "https://registry.yarnpkg.com/redis/-/redis-4.3.1.tgz#290532a0c22221e05e991162ac4dca1e1b2ff6da"
-  integrity sha512-cM7yFU5CA6zyCF7N/+SSTcSJQSRMEKN0k0Whhu6J7n9mmXRoXugfWDBo5iOzGwABmsWKSwGPTU5J4Bxbl+0mrA==
+redis@^4.4.0:
+  version "4.5.0"
+  resolved "https://registry.yarnpkg.com/redis/-/redis-4.5.0.tgz#8a461c8718e380ea899ba3711aa0bb217b112089"
+  integrity sha512-oZGAmOKG+RPnHo0UxM5GGjJ0dBd/Vi4fs3MYwM1p2baDoXC0wpm0yOdpxVS9K+0hM84ycdysp2eHg2xGoQ4FEw==
   dependencies:
-    "@redis/bloom" "1.0.2"
-    "@redis/client" "1.3.0"
-    "@redis/graph" "1.0.1"
+    "@redis/bloom" "1.1.0"
+    "@redis/client" "1.4.0"
+    "@redis/graph" "1.1.0"
     "@redis/json" "1.0.4"
     "@redis/search" "1.1.0"
-    "@redis/time-series" "1.0.3"
+    "@redis/time-series" "1.0.4"
 
 regenerate-unicode-properties@^10.0.1:
   version "10.0.1"

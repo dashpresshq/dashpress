@@ -70,14 +70,3 @@ export const runFormBeforeSubmit = (
   });
   return response;
 };
-
-export const runFormAfterSubmit = async (
-  afterSubmitString: string,
-  globals: Record<string, unknown>,
-  context: Record<string, unknown>
-): Promise<void> => {
-  if (!afterSubmitString) {
-    return;
-  }
-  await runAsyncJavascriptString(afterSubmitString, globals, context);
-};

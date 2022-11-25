@@ -62,15 +62,6 @@ function useEntityFormView() {
         error={error}
       />
     ),
-    "After Submit": (
-      <ScriptForm
-        value={entityFormExtensionSettings.data?.afterSubmit}
-        isLoading={isLoading}
-        field="afterSubmit"
-        onSubmit={onScriptSubmit("afterSubmit")}
-        error={error}
-      />
-    ),
   };
 }
 

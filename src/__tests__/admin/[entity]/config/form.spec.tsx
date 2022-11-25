@@ -22,7 +22,6 @@ describe("pages/admin/[entity]/config/form", () => {
   describe.each([
     { section: "fieldsState", label: "Fields State" },
     { section: "beforeSubmit", label: "Before Submit" },
-    { section: "afterSubmit", label: "After Submit" },
   ])("$section section", ({ label, section }) => {
     it("should show current section value", async () => {
       render(

@@ -54,7 +54,6 @@ export const CONFIGURATION_KEYS: Record<
     defaultValue: {
       fieldsState: "",
       beforeSubmit: "",
-      afterSubmit: "",
     },
   },
   entity_fields_orders: {

@@ -9,11 +9,7 @@ import { runValidationError } from "shared/validations/run";
 import { RenderFormInput } from "./_RenderFormInput";
 import { userFriendlyCase } from "../strings";
 import { IFormExtension } from "./types";
-import {
-  runFormAfterSubmit,
-  runFormBeforeSubmit,
-  runFormFieldState,
-} from "./form-run";
+import { runFormBeforeSubmit, runFormFieldState } from "./form-run";
 import { useGlobalScriptContext } from "./useGlobalScriptContext";
 
 interface IProps<T> {
@@ -53,10 +49,6 @@ export function SchemaForm<T extends Record<string, unknown>>({
         }
 
         await onSubmit(modifiedFormValues);
-
-        runFormAfterSubmit(formExtension?.afterSubmit, scriptContext, {
-          formValues,
-        });
       }}
       initialValues={initialValues}
       validate={runValidationError(fields)}

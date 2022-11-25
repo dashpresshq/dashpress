@@ -97,7 +97,6 @@ const DEFAULT_ENTITY_CONFIG_VALUES: Record<
   entity_form_extension: () => ({
     fieldsState: "fieldsState",
     beforeSubmit: "beforeSubmit",
-    afterSubmit: "afterSubmit",
   }),
   entity_relations_labels: () => ({
     "related-entity-2": "Custom Label For Entity 2",

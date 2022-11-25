@@ -1,67 +1,60 @@
 name: Bug Report
-description: Create a report to help Hadmean to improve
+description: File a bug report
+title: "[Bug]: "
+labels: ["bug"]
 body:
   - type: markdown
     attributes:
       value: |
-        Hi, thank you for taking the time to create an issue!
-
-        Before opening this issue, please make sure that:
-        
-        - You're using [the latest version of Hadmean](https://www.npmjs.com/package/hadmean).
-        - There's [no other issue](https://github.com/hadmean/hadmean/issues?q=is%3Aopen+is%3Aissue+label%3Abug) that already describes the problem.
-     
-  - type: textarea
-    attributes:
-      label: Current behavior
-      description: A clear and concise description of how the bug manifests.
-    validations:
-      required: true
-
-  - type: textarea
-    attributes:
-      label: Expected behavior
-      description:
-        Describe what you expect the behavior to be without the bug.
-    validations:
-      required: true
-
-  - type: textarea
-    attributes:
-      label: Steps to reproduce
-      description: Explain the steps required to duplicate the issue, especially if you are able to provide a sample application
-
+        Thanks for taking the time to fill out this bug report!
   - type: input
-    id: hadmean-version
+    id: contact
     attributes:
-      label: What version of Hadmean are you using?
-      description: 'Version is displayed in the terminal. For example: 1.0.1'
+      label: Contact Details
+      description: How can we get in touch with you if we need more info?
+      placeholder: ex. email@example.com
     validations:
-      required: true
-
-  - type: input
-    id: node-version
-    attributes:
-      label: What version of Node.js are you using?
-      description: 'For example: 12.0.0'
-    validations:
-      required: true
-
-  - type: input
-    attributes:
-      label: What database are you using?
-      description: 'For example: Postgres 13, MySQL 5'
-    validations:
-      required: true
-
-  - type: input
-    attributes:
-      label: What browser are you using?
-      description: 'For example: Chrome, Safari'
-    validations:
-      required: true
-  
+      required: false
   - type: textarea
+    id: what-happened
     attributes:
-      label: Other information
-      description: List any other information that is relevant to your issue. Related issues, suggestions on how to fix, Stack Overflow links, forum links, etc.
+      label: What happened?
+      description: Also tell us, what did you expect to happen?
+      placeholder: Tell us what you see!
+      value: "A bug happened!"
+    validations:
+      required: true
+  - type: dropdown
+    id: version
+    attributes:
+      label: Version
+      description: What version of our software are you running?
+      options:
+        - 1.0.2 (Default)
+        - 1.0.3 (Edge)
+    validations:
+      required: true
+  - type: dropdown
+    id: browsers
+    attributes:
+      label: What browsers are you seeing the problem on?
+      multiple: true
+      options:
+        - Firefox
+        - Chrome
+        - Safari
+        - Microsoft Edge
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant log output
+      description: Please copy and paste any relevant log output. This will be automatically formatted into code, so no need for backticks.
+      render: shell
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Code of Conduct
+      description: By submitting this issue, you agree to follow our [Code of Conduct](https://example.com)
+      options:
+        - label: I agree to follow this project's Code of Conduct
+          required: true

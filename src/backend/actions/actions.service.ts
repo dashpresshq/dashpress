@@ -39,7 +39,7 @@ export class ActionsService implements IApplicationService {
       const { configuration, performKey, activatedActionId } = action;
       // run triggerLogic triggerLogic
       const activatedAction =
-        await this._activatedActionsPersistenceService.getItem(
+        await this._activatedActionsPersistenceService.getItemOrFail(
           activatedActionId
         );
       if (!activatedAction) {
@@ -155,7 +155,9 @@ export class ActionsService implements IApplicationService {
       return {};
     }
     const { credentialsGroupKey, integrationKey } =
-      await this._activatedActionsPersistenceService.getItem(activationId);
+      await this._activatedActionsPersistenceService.getItemOrFail(
+        activationId
+      );
 
     if (
       Object.keys(ACTION_INTEGRATIONS[integrationKey].configurationSchema)
@@ -198,7 +200,7 @@ export class ActionsService implements IApplicationService {
   }
 
   async deactivateAction(activationId: string): Promise<void> {
-    const action = await this._activatedActionsPersistenceService.getItem(
+    const action = await this._activatedActionsPersistenceService.getItemOrFail(
       activationId
     );
 

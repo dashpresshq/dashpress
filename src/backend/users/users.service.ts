@@ -6,11 +6,7 @@ import {
   createConfigDomainPersistenceService,
   AbstractConfigDataPersistenceService,
 } from "backend/lib/config-persistence";
-import {
-  BadRequestError,
-  ForbiddenError,
-  NotFoundError,
-} from "backend/lib/errors";
+import { BadRequestError, ForbiddenError } from "backend/lib/errors";
 import { HashService } from "backend/lib/hash/hash.service";
 import { IApplicationService } from "backend/types";
 import { IAccountUser, IAccountProfile } from "shared/types/user";
@@ -81,10 +77,7 @@ export class UsersService implements IApplicationService {
   }
 
   async getUser(username: string): Promise<IAccountProfile> {
-    const user = await this._usersPersistenceService.getItem(username);
-    if (!user) {
-      throw new NotFoundError("User not found");
-    }
+    const user = await this._usersPersistenceService.getItemOrFail(username);
     delete user.password;
     return user;
   }
@@ -96,11 +89,7 @@ export class UsersService implements IApplicationService {
     username: string;
     password: string;
   }) {
-    const user = await this._usersPersistenceService.getItem(username);
-
-    if (!user) {
-      throw new Error();
-    }
+    const user = await this._usersPersistenceService.getItemOrFail(username);
 
     if (!(await HashService.compare(password, user.password))) {
       throw new Error();
@@ -144,7 +133,7 @@ export class UsersService implements IApplicationService {
   }
 
   async updateUser(username: string, userDetails: Partial<IAccountUser>) {
-    const user = await this._usersPersistenceService.getItem(username);
+    const user = await this._usersPersistenceService.getItemOrFail(username);
     if (!user) {
       return;
     }

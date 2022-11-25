@@ -3,7 +3,7 @@ import {
   createConfigDomainPersistenceService,
   AbstractConfigDataPersistenceService,
 } from "backend/lib/config-persistence";
-import { BadRequestError, NotFoundError } from "backend/lib/errors";
+import { BadRequestError } from "backend/lib/errors";
 import { IApplicationService } from "backend/types";
 import { canRoleDoThisAsync } from "shared/logic/permissions";
 import { isSystemRole, makeRoleId, SystemRoles } from "shared/types/user";
@@ -35,11 +35,10 @@ export class RolesService implements IApplicationService {
       return [];
     }
     return await this._cacheService.getItem<string[]>(roleId, async () => {
-      const role = await this._rolesPersistenceService.getItem(roleId);
-      if (!role) {
-        throw new NotFoundError("Role not found");
-      }
-      return role.permissions;
+      const { permissions } = await this._rolesPersistenceService.getItemOrFail(
+        roleId
+      );
+      return permissions;
     });
   }
 
@@ -67,10 +66,7 @@ export class RolesService implements IApplicationService {
   }
 
   async updateRoleDetails(roleId: string, { id }: Pick<IRole, "id">) {
-    const role = await this._rolesPersistenceService.getItem(roleId);
-    if (!role) {
-      return;
-    }
+    const role = await this._rolesPersistenceService.getItemOrFail(roleId);
 
     const madeRoleId = makeRoleId(id);
 
@@ -98,10 +94,7 @@ export class RolesService implements IApplicationService {
   }
 
   async addPermission(roleId: string, permission: string) {
-    const role = await this._rolesPersistenceService.getItem(roleId);
-    if (!role) {
-      return;
-    }
+    const role = await this._rolesPersistenceService.getItemOrFail(roleId);
 
     await this._rolesPersistenceService.upsertItem(roleId, {
       ...role,
@@ -111,10 +104,8 @@ export class RolesService implements IApplicationService {
   }
 
   async removePermission(roleId: string, permission: string) {
-    const role = await this._rolesPersistenceService.getItem(roleId);
-    if (!role) {
-      return;
-    }
+    const role = await this._rolesPersistenceService.getItemOrFail(roleId);
+
     await this._rolesPersistenceService.upsertItem(roleId, {
       ...role,
       permissions: role.permissions.filter(

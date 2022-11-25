@@ -22,10 +22,10 @@ export abstract class AbstractConfigDataPersistenceService<T> {
 
   public async getItemOrFail(key: string): Promise<T> {
     const data = await this.getItem(key);
-    if (!data) {
-      throw new NotFoundError(`${key} not found for '${this.configDomain}'`);
+    if (data) {
+      return data;
     }
-    return data;
+    throw new NotFoundError(`${key} not found for '${this.configDomain}'`);
   }
 
   public async getItemWithMaybeSecondaryKey(

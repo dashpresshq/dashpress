@@ -8,19 +8,12 @@ import get from "lodash/get";
 import { getDbConnection } from "backend/lib/connection/db";
 import { QueryFilter } from "shared/types/data";
 import { IApplicationService } from "backend/types";
-import {
-  subDays,
-  subHours,
-  subMonths,
-  subQuarters,
-  subYears,
-  subWeeks,
-} from "date-fns";
 import { credentialsService } from "backend/integrations-configurations";
 import { IDataSourceCredentials } from "shared/types/data-sources";
 import { progammingError } from "backend/lib/errors";
 import { IPaginationFilters } from "./types";
 import { DATABASE_CREDENTIAL_GROUP } from "./fields";
+import { CONSTANT_TIME_MAP, RELATIVE_TIME_MAP } from "./time.constants";
 
 export class DataService implements IApplicationService {
   static _dbInstance: Knex | null = null;
@@ -50,36 +43,22 @@ export class DataService implements IApplicationService {
     if (value && new Date(value).toString() !== "Invalid Date") {
       return new Date(value);
     }
-    if (value === DATE_FILTER_VALUE.BEGINNING_OF_TIME_VALUE) {
-      return new Date(0, 0, 0);
+
+    const constantTimeImplementation = CONSTANT_TIME_MAP[value];
+
+    if (constantTimeImplementation) {
+      return constantTimeImplementation();
     }
-    if (value === DATE_FILTER_VALUE.NOW) {
-      return new Date();
-    }
-    if (value === DATE_FILTER_VALUE.BEGINNING_OF_YEAR) {
-      return new Date(new Date().getFullYear(), 0, 0);
-    }
+
     const [countString, field] = value.split(":");
     const count = +countString;
 
-    if (field === DATE_FILTER_VALUE.HOUR) {
-      return subHours(new Date(), count);
+    const relativeTimeImplementation = RELATIVE_TIME_MAP[field];
+
+    if (relativeTimeImplementation) {
+      return relativeTimeImplementation(count);
     }
-    if (field === DATE_FILTER_VALUE.DAY) {
-      return subDays(new Date(), count);
-    }
-    if (field === DATE_FILTER_VALUE.WEEK) {
-      return subWeeks(new Date(), count);
-    }
-    if (field === DATE_FILTER_VALUE.MONTH) {
-      return subMonths(new Date(), count);
-    }
-    if (field === DATE_FILTER_VALUE.QUARTER) {
-      return subQuarters(new Date(), count);
-    }
-    if (field === DATE_FILTER_VALUE.YEAR) {
-      return subYears(new Date(), count);
-    }
+
     return new Date();
   }
 

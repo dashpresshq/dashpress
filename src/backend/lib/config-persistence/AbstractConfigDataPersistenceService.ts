@@ -1,4 +1,5 @@
 import { ConfigService } from "../config/config.service";
+import { NotFoundError } from "../errors";
 import { ConfigDomain } from "./types";
 
 export abstract class AbstractConfigDataPersistenceService<T> {
@@ -18,6 +19,14 @@ export abstract class AbstractConfigDataPersistenceService<T> {
   }
 
   public abstract getItem(key: string): Promise<T | undefined>;
+
+  public async getItemOrFail(key: string): Promise<T> {
+    const data = await this.getItem(key);
+    if (!data) {
+      throw new NotFoundError(`${key} not found for '${this.configDomain}'`);
+    }
+    return data;
+  }
 
   public async getItemWithMaybeSecondaryKey(
     key: string,

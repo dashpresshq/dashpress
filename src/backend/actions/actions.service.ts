@@ -6,6 +6,7 @@ import {
   createConfigDomainPersistenceService,
   AbstractConfigDataPersistenceService,
 } from "backend/lib/config-persistence";
+import { validateSchemaRequestBody } from "backend/lib/errors/validate-schema-request-input";
 import { IApplicationService } from "backend/types";
 import { nanoid } from "nanoid";
 import {
@@ -130,7 +131,12 @@ export class ActionsService implements IApplicationService {
       integrationKey,
       credentialsGroupKey,
     });
-    // TODO validate the schema before inserting
+
+    validateSchemaRequestBody(
+      ACTION_INTEGRATIONS[integrationKey].configurationSchema,
+      configuration
+    );
+
     await this._credentialsService.upsertGroup(
       {
         key: credentialsGroupKey,
@@ -171,8 +177,14 @@ export class ActionsService implements IApplicationService {
     configuration: Record<string, string>
   ): Promise<void> {
     const { integrationKey, credentialsGroupKey } =
-      await this._activatedActionsPersistenceService.getItem(activationId);
-    // TODO validate the schema before inserting
+      await this._activatedActionsPersistenceService.getItemOrFail(
+        activationId
+      );
+
+    validateSchemaRequestBody(
+      ACTION_INTEGRATIONS[integrationKey].configurationSchema,
+      configuration
+    );
 
     await this._credentialsService.upsertGroup(
       {

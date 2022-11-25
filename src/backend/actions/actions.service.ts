@@ -35,7 +35,7 @@ export class ActionsService implements IApplicationService {
     );
 
     for (const action of actionsToRun) {
-      const { configuration, performId, activatedActionId } = action;
+      const { configuration, performKey, activatedActionId } = action;
       // run triggerLogic triggerLogic
       const activatedAction =
         await this._activatedActionsPersistenceService.getItem(
@@ -56,7 +56,7 @@ export class ActionsService implements IApplicationService {
 
       await ACTION_INTEGRATIONS[
         activatedAction.integrationKey
-      ].performsImplementation[performId].do(connection, configuration);
+      ].performsImplementation[performKey].do(connection, configuration);
     }
   }
 

@@ -10,11 +10,25 @@ export interface IActionsToTrigger {
   triggerId: string;
   activatedActionId: string;
   entity: string;
-  performId: string;
+  performKey: string;
   triggerLogic: string;
   formAction: "create" | "update";
   configuration: Record<string, string>;
 }
+
+// Entity Will be inferred
+// entity;
+
+// formaction : selection
+// activatedActionId : selection
+// performKey ? the action to actuall perform
+// triggerLogic : JSON
+// configuration: <Schema />
+
+// Table
+// Entity
+// action
+// performKey
 
 export interface IPerformsImplementation {
   label: string;

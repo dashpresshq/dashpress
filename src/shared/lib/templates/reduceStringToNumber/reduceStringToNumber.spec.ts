@@ -19,11 +19,11 @@ describe("reduceStringToNumber", () => {
     expect(reduceStringToNumber(" fo o")).toBe(reduceStringToNumber("foo"));
   });
   it("should return value", () => {
-    expect(reduceStringToNumber("foo")).toBe(5);
-    expect(reduceStringToNumber("foo**")).toBe(5);
-    expect(reduceStringToNumber("I am you")).toBe(64);
+    expect(reduceStringToNumber("foo")).toBe(33);
+    expect(reduceStringToNumber("foo**")).toBe(33);
+    expect(reduceStringToNumber("I am you")).toBe(78);
     expect(reduceStringToNumber("some very very very long charecters")).toBe(
-      352
+      380
     );
     expect(reduceStringToNumber("a")).toBe(0);
     expect(reduceStringToNumber("z")).toBe(25);

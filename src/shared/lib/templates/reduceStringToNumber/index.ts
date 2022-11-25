@@ -14,7 +14,7 @@ const ALPHABETS = Object.fromEntries(
     "L",
     "M",
     "N",
-    "0",
+    "O",
     "P",
     "Q",
     "R",

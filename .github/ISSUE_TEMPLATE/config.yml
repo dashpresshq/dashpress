@@ -1,6 +1,9 @@
 ---
 blank_issues_enabled: false
 contact_links:
+  - name: Feature Request
+    url: https://github.com/hadmean/hadmean/discussions/new
+    about: Share your ideas on how to make Hadmean better.
   - name: Hadmean Community Support
-    url: https://github.com/hadmean/hadmean/discussions
+    url: https://discord.gg/aV6DxwXhzN
     about: Please ask and answer questions here.

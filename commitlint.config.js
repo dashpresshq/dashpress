@@ -8,7 +8,7 @@ module.exports = {
         "🎉 init",
         "✨ feat",
         "🐛 fix",
-        "📃 docs",
+        "📝 docs",
         "💎 style",
         "♻️ refactor",
         "🎈 perf",

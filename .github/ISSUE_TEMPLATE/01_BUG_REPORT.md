@@ -1,8 +1,5 @@
 name: Bug Report
 description: Create a report to help Hadmean to improve
-about: 
-title: "bug: "
-labels: "bug"
 body:
   - type: markdown
     attributes:

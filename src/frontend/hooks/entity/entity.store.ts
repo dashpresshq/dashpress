@@ -12,7 +12,7 @@ export const ENTITY_RELATIONS_ENDPOINT = (entity: string) =>
 
 export const ENTITIES_MENU_ENDPOINT = "/api/entities/menu";
 
-export const useEntitiesMenuItems = () => {
+export const useActiveEntities = () => {
   const menuItems = useApi<ILabelValue[]>(ENTITIES_MENU_ENDPOINT, {
     errorMessage: dataNotFoundMessage("Entities menu items"),
   });

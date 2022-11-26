@@ -15,7 +15,7 @@ import { useEntityDictionPlurals } from "../../../hooks/entity/entity.queries";
 import {
   ENTITIES_MENU_ENDPOINT,
   useEntitiesList,
-  useEntitiesMenuItems,
+  useActiveEntities,
 } from "../../../hooks/entity/entity.store";
 import { SETTINGS_VIEW_KEY } from "../constants";
 import { BaseSettingsLayout } from "../_Base";
@@ -34,7 +34,7 @@ export function EntitiesSettings() {
   const changeTabParam = useChangeRouterParam("tab");
 
   const entitiesToHide = useAppConfiguration<string[]>("disabled_entities");
-  const entitiesMenuItems = useEntitiesMenuItems();
+  const activeEntities = useActiveEntities();
 
   const upsertHideFromMenuMutation = useUpsertConfigurationMutation(
     "disabled_entities",
@@ -104,7 +104,7 @@ export function EntitiesSettings() {
                   loader={<ListSkeleton />}
                 >
                   <SortList
-                    data={entitiesMenuItems}
+                    data={activeEntities}
                     onSave={
                       upsertEntitiesOrderMutation.mutateAsync as (
                         data: string[]

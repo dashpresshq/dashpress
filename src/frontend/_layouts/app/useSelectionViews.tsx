@@ -3,7 +3,7 @@ import { ISelectionView } from "@hadmean/chromista/dist/Layouts/types";
 import { NAVIGATION_LINKS, useNavigationStack } from "frontend/lib/routing";
 import { USER_PERMISSIONS } from "shared/types/user";
 import { useUserHasPermissions } from "frontend/hooks/auth/user.store";
-import { useEntitiesMenuItems } from "../../hooks/entity/entity.store";
+import { useActiveEntities } from "../../hooks/entity/entity.store";
 import { ROOT_LINKS_TO_CLEAR_BREADCRUMBS } from "./constants";
 
 interface ILayoutSelectionView extends ISelectionView {
@@ -11,7 +11,7 @@ interface ILayoutSelectionView extends ISelectionView {
 }
 
 export const useSelectionViews = (): ILayoutSelectionView[] => {
-  const entitiesMenuItems = useEntitiesMenuItems();
+  const activeEntities = useActiveEntities();
   const hasPermission = useUserHasPermissions([
     USER_PERMISSIONS.CAN_CONFIGURE_APP,
     USER_PERMISSIONS.CAN_MANAGE_USER,
@@ -32,8 +32,8 @@ export const useSelectionViews = (): ILayoutSelectionView[] => {
       description: "Your models",
       icon: Table,
       viewMenuItems: {
-        ...entitiesMenuItems,
-        data: (entitiesMenuItems.data || []).map(({ label, value }) => ({
+        ...activeEntities,
+        data: (activeEntities.data || []).map(({ label, value }) => ({
           title: label,
           searchKeywords: value,
           secondaryAction: () => {

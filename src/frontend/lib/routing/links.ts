@@ -55,12 +55,11 @@ export const NAVIGATION_LINKS = {
         `/admin/${entity}/config/crud${queryObjectToQueryString(query)}`,
       FIELDS: (entity: string, query?: Record<string, string>) =>
         `/admin/${entity}/config/fields${queryObjectToQueryString(query)}`,
-      ACTIONS: (entity: string) => `/admin/${entity}/config/actions`,
       DICTION: (entity: string) => `/admin/${entity}/config/diction`,
       FORM: (entity: string) => `/admin/${entity}/config/form`,
       VIEWS: (entity: string) => `/admin/${entity}/config/views`,
       RELATIONS: (entity: string) => `/admin/${entity}/config/relations`,
-      INTEGRATIONS: (entity: string) => `/admin/${entity}/config/integrations`,
+      ACTIONS: (entity: string) => `/admin/${entity}/config/actions`,
     },
   },
 };

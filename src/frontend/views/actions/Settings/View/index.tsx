@@ -3,7 +3,7 @@ import { Tabs, Text } from "@hadmean/chromista";
 import { IActionsList, IActivatedAction } from "shared/types/actions";
 import { useEffect } from "react";
 import { ToastService } from "@hadmean/protozoa";
-import { BaseActionInstances } from "frontend/views/entity/Integrations/Base";
+import { BaseActionInstances } from "frontend/views/entity/Actions/Base";
 import {
   useActivateActionMutation,
   useActivationConfiguration,

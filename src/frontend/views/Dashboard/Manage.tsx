@@ -13,7 +13,7 @@ import arrayMove from "array-move";
 import SortableList, { SortableItem } from "react-easy-sort";
 import { useState } from "react";
 import { useRouter } from "next/router";
-import { useEntitiesMenuItems } from "frontend/hooks/entity/entity.store";
+import { useActiveEntities } from "frontend/hooks/entity/entity.store";
 import { nanoid } from "nanoid";
 import { AppLayout } from "../../_layouts/app";
 import { DashboardWidget } from "./widgets";
@@ -40,7 +40,7 @@ export function ManageDashboard() {
 
   const widgets = useDashboardWidgets();
 
-  const entities = useEntitiesMenuItems();
+  const activeEntities = useActiveEntities();
 
   const deleteDashboardWidgetMutation = useDeleteDashboardWidgetMutation();
   const arrangeDashboardWidgetMutation = useArrangeDashboardWidgetMutation();
@@ -121,8 +121,8 @@ export function ManageDashboard() {
         show={!!currentDashboardItem}
       >
         <ViewStateMachine
-          loading={entities.isLoading}
-          error={entities.error}
+          loading={activeEntities.isLoading}
+          error={activeEntities.error}
           loader={
             <FormSkeleton
               schema={[
@@ -135,7 +135,7 @@ export function ManageDashboard() {
           }
         >
           <DashboardSettings
-            entities={entities.data || []}
+            entities={activeEntities.data || []}
             onSubmit={async (config) => {
               if (currentDashboardItem === NEW_DASHBOARD_ITEM) {
                 createDashboardWidgetMutation.mutate({

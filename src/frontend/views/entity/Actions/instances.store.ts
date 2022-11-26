@@ -10,7 +10,7 @@ import { IActionInstance } from "shared/types/actions";
 
 const BASE_ACTIONS_ENDPOINT = `/api/actions`;
 
-const SINGULAR = `Action Integration`;
+const SINGULAR = `Form Action`;
 
 export const LIST_ACTION_INSTANCES = ({
   entity,

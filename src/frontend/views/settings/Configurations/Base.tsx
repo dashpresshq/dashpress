@@ -44,7 +44,7 @@ export function BaseIntegrationsConfiguration({
   const deleteConfigurationMutation =
     useIntegrationConfigurationDeletionMutation(group);
 
-  const tableData = useFEPaginatedData<Record<string, unknown>>(
+  const tableData = useFEPaginatedData<IKeyValue>(
     INTEGRATIONS_GROUP_ENDPOINT(group),
     {
       ...paginatedDataState,

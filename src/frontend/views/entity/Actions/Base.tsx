@@ -1,6 +1,7 @@
 import {
   DEFAULT_TABLE_PARAMS,
   DeleteButton,
+  ErrorAlert,
   OffCanvas,
   SoftButton,
   Stack,
@@ -13,14 +14,20 @@ import {
   SLUG_LOADING_VALUE,
   useFEPaginatedData,
 } from "@hadmean/protozoa";
+import { useActiveEntities } from "frontend/hooks/entity/entity.store";
 import { ViewStateMachine } from "frontend/lib/ViewStateMachine";
+import {
+  useActionsList,
+  useActiveActionList,
+} from "frontend/views/actions/actions.store";
 import { useCallback, useState } from "react";
 import { IActionInstance } from "shared/types/actions";
+import { ActionForm } from "./Form";
 import {
   LIST_ACTION_INSTANCES,
-  //   useCreateActionInstanceMutation,
+  useCreateActionInstanceMutation,
   useDeleteActionInstanceMutation,
-  //   useUpdateActionInstanceMutation,
+  useUpdateActionInstanceMutation,
 } from "./instances.store";
 
 interface IProps {
@@ -35,7 +42,7 @@ export function BaseActionInstances({ entity, integrationKey }: IProps) {
     IFEPaginatedDataState<IActionInstance> | IBEPaginatedDataState
   >({ ...DEFAULT_TABLE_PARAMS, pageIndex: 1 });
 
-  const tableData = useFEPaginatedData<Record<string, unknown>>(
+  const tableData = useFEPaginatedData<IActionInstance>(
     LIST_ACTION_INSTANCES({ entity, integrationKey }),
     {
       ...paginatedDataState,
@@ -45,9 +52,13 @@ export function BaseActionInstances({ entity, integrationKey }: IProps) {
     }
   );
 
+  const activeActionList = useActiveActionList();
+  const actionList = useActionsList();
+  const activeEntities = useActiveEntities();
+
   const deleteActionInstanceMutation = useDeleteActionInstanceMutation();
-  //   const updateActionInstanceMutation = useUpdateActionInstanceMutation();
-  //   const createActionInstanceMutation = useCreateActionInstanceMutation();
+  const updateActionInstanceMutation = useUpdateActionInstanceMutation();
+  const createActionInstanceMutation = useCreateActionInstanceMutation();
 
   const [currentInstanceId, setCurrentInstanceItem] = useState("");
 
@@ -80,11 +91,19 @@ export function BaseActionInstances({ entity, integrationKey }: IProps) {
     [deleteActionInstanceMutation.isLoading]
   );
 
+  if (!entity && !integrationKey) {
+    return <ErrorAlert message="Pass in either of entity or the integration" />;
+  }
+
   return (
     <>
       <ViewStateMachine
-        loading={entity === SLUG_LOADING_VALUE}
-        error={false}
+        loading={
+          entity === SLUG_LOADING_VALUE ||
+          activeActionList.isLoading ||
+          actionList.isLoading
+        }
+        error={activeActionList.error || actionList.error}
         loader={<TableSkeleton />}
       >
         <Table
@@ -95,16 +114,17 @@ export function BaseActionInstances({ entity, integrationKey }: IProps) {
           }}
           // TODO emptyMessage="No ${INTEGRATIONS_GROUP_LABEL[group].label}"
           columns={[
-            {
-              Header: "Entity",
-              accessor: "entity",
-              disableSortBy: true,
-            },
-            {
-              Header: "Integration Key",
-              accessor: "entity",
-              disableSortBy: true,
-            },
+            integrationKey
+              ? {
+                  Header: "Entity",
+                  accessor: "entity",
+                  disableSortBy: true,
+                }
+              : {
+                  Header: "Integration Key",
+                  accessor: "entity",
+                  disableSortBy: true,
+                },
             {
               Header: "Action",
               accessor: "action",
@@ -124,20 +144,28 @@ export function BaseActionInstances({ entity, integrationKey }: IProps) {
       </ViewStateMachine>
       <OffCanvas
         title={
-          currentInstanceId === NEW_ACTION_ITEM ? `New Action` : `Edit Action`
+          currentInstanceId === NEW_ACTION_ITEM
+            ? `New Form Action`
+            : `Edit Form Action`
         }
         onClose={closeConfigItem}
         show={!!currentInstanceId}
       >
-        {/* <KeyValueForm
-          initialValues={(tableData?.data?.data || []).find(
-            ({ key }) => key === currentInstanceId
-          )}
-          onSubmit={async (values: { key: string; value: string }) => {
-            await upsertConfigurationMutation.mutateAsync(values);
+        <ActionForm
+          onSubmit={async (data) => {
+            if (currentInstanceId === NEW_ACTION_ITEM) {
+              await createActionInstanceMutation.mutateAsync(data);
+            } else {
+              await updateActionInstanceMutation.mutateAsync(data);
+            }
             closeConfigItem();
           }}
-        /> */}
+          currentView={{ entity, integrationKey }}
+          initialValues={(tableData?.data?.data || []).find(
+            ({ instanceId }) => instanceId === currentInstanceId
+          )}
+          entities={activeEntities.data || []}
+        />
       </OffCanvas>
     </>
   );

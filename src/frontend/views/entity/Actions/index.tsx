@@ -7,23 +7,23 @@ import { BaseEntitySettingsLayout } from "../_Base";
 import { ENTITY_CONFIGURATION_VIEW } from "../constants";
 import { BaseActionInstances } from "./Base";
 
-export function EntityIntegrationsSettings() {
+export function EntityFormActionsSettings() {
   const entity = useEntitySlug();
 
   useSetPageDetails({
-    pageTitle: "Form Integrations",
+    pageTitle: "Form Actions",
     viewKey: ENTITY_CONFIGURATION_VIEW,
     permission: USER_PERMISSIONS.CAN_CONFIGURE_APP,
   });
   return (
     <BaseEntitySettingsLayout>
       <SectionBox
-        title="Form Integrations"
+        title="Form Actions"
         iconButtons={[
           {
             action: LINK_TO_DOCS("app-configuration/TODO"),
             icon: "help",
-            label: "Integrations Documentation",
+            label: "Form Actions Documentation",
           },
         ]}
       >

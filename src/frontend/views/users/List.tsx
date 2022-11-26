@@ -65,7 +65,7 @@ export function ListUsers() {
     [userDeletionMutation.isLoading]
   );
 
-  const tableData = useFEPaginatedData<Record<string, unknown>>(
+  const tableData = useFEPaginatedData<IAccountProfile>(
     ADMIN_USERS_LIST_ENDPOINT,
     {
       ...paginatedDataState,

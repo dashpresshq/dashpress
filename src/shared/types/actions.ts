@@ -20,10 +20,7 @@ export type IActionInstance = {
 export interface IPerformsImplementation {
   label: string;
   configurationSchema: IAppliedSchemaFormConfig<any>;
-  do: (
-    connection: unknown,
-    configuration: Record<string, unknown>
-  ) => Promise<any>;
+  do: (connection: unknown, configuration: unknown) => Promise<any>;
 }
 
 export interface IActionIntegrationsImplemention {

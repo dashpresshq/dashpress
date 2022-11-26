@@ -54,7 +54,7 @@ export class ActionsService implements IApplicationService {
         ACTION_INTEGRATIONS[activatedAction.integrationKey].connect(
           actionConfiguration
         );
-
+      // TODO compile the configuration here
       await ACTION_INTEGRATIONS[
         activatedAction.integrationKey
       ].performsImplementation[performKey].do(connection, configuration);

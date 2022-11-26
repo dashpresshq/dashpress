@@ -73,7 +73,7 @@ describe("/api/account/mine", () => {
     expect(res._getJSONData()).toMatchInlineSnapshot(`
       {
         "errorCode": "NOT_AUTHENTICATED",
-        "message": "User not found",
+        "message": "root not found for 'users'",
         "method": "GET",
         "name": "ForbiddenError",
         "path": "",
@@ -105,7 +105,7 @@ describe("/api/account/mine", () => {
     expect(res._getJSONData()).toMatchInlineSnapshot(`
       {
         "errorCode": "NOT_AUTHENTICATED",
-        "message": "Role not found",
+        "message": "role-doesn't-exist not found for 'roles'",
         "method": "GET",
         "name": "ForbiddenError",
         "path": "",

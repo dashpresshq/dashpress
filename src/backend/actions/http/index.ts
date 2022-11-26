@@ -41,38 +41,74 @@ const ACTION_CONFIGURATION_SCHEMA: IAppliedSchemaFormConfig<IAction> = {
   },
 };
 
+const makeActionRequest = async (
+  method: "POST" | "PUT" | "PATCH" | "DELETE",
+  configuration: IAction
+) => {
+  const response = await fetch(configuration.url, {
+    method,
+    headers: JSON.parse(configuration.headers),
+    body: configuration.body ? JSON.stringify(configuration.body) : undefined,
+  });
+  if (response.ok) {
+    try {
+      return await response.json();
+    } catch (error) {
+      return response;
+    }
+  }
+  const error = await response.json();
+  throw new Error(error.message);
+};
+
 export const HTTP_ACTION_INTEGRATION: IActionIntegrationsImplemention = {
   title: "HTTP",
   description: "Performs HTTP request",
   configurationSchema: {},
   connect: async () => {},
   performsImplementation: {
-    PUT: { label: "PUT", configurationSchema: {}, do: async () => {} },
     GET: {
       label: "GET",
       configurationSchema: BASE_CONFIGURATION_SCHEMA,
-      // do: async (_, configuration: IBase) => {
-      //   const response = await fetch(configuration.url, {
-      //     headers: JSON.parse(configuration.url),
-      //   });
-      //   return await response.json();
-      // },
-      do: async () => {},
+      do: async (_, configuration: IBase) => {
+        const response = await fetch(configuration.url, {
+          method: "GET",
+          headers: JSON.parse(configuration.headers),
+        });
+        if (response.ok) {
+          return await response.json();
+        }
+        const error = await response.json();
+        throw new Error(error.message);
+      },
+    },
+    PUT: {
+      label: "PUT",
+      configurationSchema: {},
+      do: async (_, configuration: IAction) => {
+        await makeActionRequest("POST", configuration);
+      },
     },
     POST: {
       label: "POST",
       configurationSchema: ACTION_CONFIGURATION_SCHEMA,
-      do: async () => {},
+      do: async (_, configuration: IAction) => {
+        await makeActionRequest("POST", configuration);
+      },
     },
     PATCH: {
       label: "PATCH",
       configurationSchema: ACTION_CONFIGURATION_SCHEMA,
-      do: async () => {},
+      do: async (_, configuration: IAction) => {
+        await makeActionRequest("PATCH", configuration);
+      },
     },
     DELETE: {
       label: "DELETE",
       configurationSchema: ACTION_CONFIGURATION_SCHEMA,
-      do: async () => {},
+      do: async (_, configuration: IAction) => {
+        await makeActionRequest("DELETE", configuration);
+      },
     },
   },
 };

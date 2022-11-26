@@ -3,7 +3,6 @@ import { IEntityField } from "shared/types/db";
 import { QueryFilter } from "shared/types/data";
 import { FilterOperators } from "@hadmean/chromista";
 import { IFieldValidationItem } from "shared/validations/types";
-// import { runValidationError } from "shared/validations/run";
 import noop from "lodash/noop";
 import { NotFoundError } from "backend/lib/errors";
 import {

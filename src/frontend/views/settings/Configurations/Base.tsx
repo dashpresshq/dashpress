@@ -1,13 +1,12 @@
 import {
   DEFAULT_TABLE_PARAMS,
   DeleteButton,
-  FormSkeleton,
-  FormSkeletonSchema,
   OffCanvas,
   SectionBox,
   SoftButton,
   Stack,
   Table,
+  TableSkeleton,
 } from "@hadmean/chromista";
 import { ViewStateMachine } from "frontend/lib/ViewStateMachine";
 import { IntegrationsConfigurationGroup } from "shared/types/integrations";
@@ -107,16 +106,7 @@ export function BaseIntegrationsConfiguration({
         <ViewStateMachine
           loading={configurationList.isLoading}
           error={configurationList.error}
-          loader={
-            <FormSkeleton
-              schema={[
-                FormSkeletonSchema.Input,
-                FormSkeletonSchema.Input,
-                FormSkeletonSchema.Input,
-                FormSkeletonSchema.Input,
-              ]}
-            />
-          }
+          loader={<TableSkeleton />}
         >
           <Table
             {...{

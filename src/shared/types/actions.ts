@@ -9,6 +9,7 @@ export interface IActivatedAction {
 export interface IActionsToTrigger {
   triggerId: string;
   activatedActionId: string;
+  integrationKey: string;
   entity: string;
   performKey: string;
   triggerLogic: string;
@@ -24,11 +25,6 @@ export interface IActionsToTrigger {
 // performKey ? the action to actuall perform
 // triggerLogic : JSON
 // configuration: <Schema />
-
-// Table
-// Entity
-// action
-// performKey
 
 export interface IPerformsImplementation {
   label: string;

@@ -38,7 +38,11 @@ export class ActionsController {
   //
 
   async listEntityActions(entity: string) {
-    await this._actionsService.listEntityActions(entity);
+    return await this._actionsService.listEntityActions(entity);
+  }
+
+  async listIntegrationActions(integrationKey: string) {
+    return await this._actionsService.listIntegrationActions(integrationKey);
   }
 
   async deRegisterAction(triggerId: string) {

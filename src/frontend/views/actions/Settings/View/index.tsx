@@ -3,11 +3,11 @@ import { Tabs, Text } from "@hadmean/chromista";
 import { IActionsList, IActivatedAction } from "shared/types/actions";
 import { useEffect } from "react";
 import { ToastService } from "@hadmean/protozoa";
+import { BaseActionInstances } from "frontend/views/entity/Integrations/Base";
 import {
   useActivateActionMutation,
   useActivationConfiguration,
 } from "../../actions.store";
-import { Instances } from "./Instances";
 import { Deactivate } from "./Deactivate";
 import { Configure } from "./Configure";
 
@@ -48,7 +48,9 @@ export function ActionSettingsView({ actionDetails, activeAction }: IProps) {
       contents={[
         {
           label: "Instances",
-          content: <Instances />,
+          content: (
+            <BaseActionInstances integrationKey={activeAction.integrationKey} />
+          ),
         },
         {
           label: "Configure",

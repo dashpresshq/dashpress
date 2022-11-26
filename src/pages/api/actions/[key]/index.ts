@@ -6,6 +6,18 @@ const REQUEST_KEY_FIELD = "key";
 
 export default requestHandler(
   {
+    GET: async (getValidatedRequest) => {
+      const validatedRequest = await getValidatedRequest([
+        {
+          _type: "requestQuery",
+          options: REQUEST_KEY_FIELD,
+        },
+      ]);
+
+      return await actionsController.listIntegrationActions(
+        validatedRequest.requestQuery
+      );
+    },
     POST: async (getValidatedRequest) => {
       const validatedRequest = await getValidatedRequest([
         {

@@ -94,6 +94,12 @@ export class ActionsService implements IApplicationService {
     ).filter(({ entity }) => entity === entity$1);
   }
 
+  async listIntegrationActions(integrationKey$1: string) {
+    return (
+      await this._actionsToTriggerPersistenceService.getAllItems()
+    ).filter(({ integrationKey }) => integrationKey === integrationKey$1);
+  }
+
   //
 
   listAllActions(): IActionsList[] {

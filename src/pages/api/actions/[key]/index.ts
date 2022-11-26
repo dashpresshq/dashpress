@@ -14,7 +14,7 @@ export default requestHandler(
         },
       ]);
 
-      return await actionsController.listIntegrationActions(
+      return await actionsController.listIntegrationActionInstances(
         validatedRequest.requestQuery
       );
     },

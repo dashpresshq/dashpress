@@ -1,6 +1,6 @@
 import { BadRequestError } from "backend/lib/errors";
 import { usersService, UsersService } from "backend/users/users.service";
-import { IActionsToTrigger } from "shared/types/actions";
+import { IActionInstance } from "shared/types/actions";
 import { ActionsService, actionsService } from "./actions.service";
 
 export class ActionsController {
@@ -24,42 +24,6 @@ export class ActionsController {
     await this._actionsService.activateAction(integrationKey, configuration);
   }
 
-  async updateActionConfig(
-    activationId: string,
-    configuration: Record<string, string>
-  ) {
-    await this._actionsService.updateActionConfig(activationId, configuration);
-  }
-
-  async deactivateAction(activationId: string) {
-    await this._actionsService.deactivateAction(activationId);
-  }
-
-  //
-
-  async listEntityActions(entity: string) {
-    return await this._actionsService.listEntityActions(entity);
-  }
-
-  async listIntegrationActions(integrationKey: string) {
-    return await this._actionsService.listIntegrationActions(integrationKey);
-  }
-
-  async deRegisterAction(triggerId: string) {
-    await this._actionsService.deRegisterAction(triggerId);
-  }
-
-  async updateTriggerAction(triggerId: string, action: IActionsToTrigger) {
-    await this._actionsService.updateTriggerAction(triggerId, action);
-  }
-
-  async registerAction(
-    entity: string,
-    action: Omit<IActionsToTrigger, "triggerId">
-  ) {
-    await this._actionsService.registerAction(entity, action);
-  }
-
   async showActionConfig(
     activationId: string,
     user: {
@@ -73,6 +37,39 @@ export class ActionsController {
       throw new BadRequestError("Invalid Password");
     }
     return await this._actionsService.showActionConfig(activationId);
+  }
+
+  async updateActionConfig(
+    activationId: string,
+    configuration: Record<string, string>
+  ) {
+    await this._actionsService.updateActionConfig(activationId, configuration);
+  }
+
+  async deactivateAction(activationId: string) {
+    await this._actionsService.deactivateAction(activationId);
+  }
+
+  //
+
+  async listEntityActionInstances(entity: string) {
+    return await this._actionsService.listEntityActionInstances(entity);
+  }
+
+  async listIntegrationActionInstances(integrationKey: string) {
+    return await this._actionsService.listIntegrationActions(integrationKey);
+  }
+
+  async deleteActionInstance(instanceId: string) {
+    await this._actionsService.deleteActionInstance(instanceId);
+  }
+
+  async updateActionInstance(instanceId: string, action: IActionInstance) {
+    await this._actionsService.updateActionInstance(instanceId, action);
+  }
+
+  async instantiateAction(action: Omit<IActionInstance, "instanceId">) {
+    await this._actionsService.instantiateAction(action);
   }
 }
 

@@ -12,7 +12,7 @@ import { nanoid } from "nanoid";
 import {
   HTTP_ACTION_KEY,
   IActionsList,
-  IActionsToTrigger,
+  IActionInstance,
   IActivatedAction,
 } from "shared/types/actions";
 import { ACTION_INTEGRATIONS } from ".";
@@ -20,18 +20,18 @@ import { ACTION_INTEGRATIONS } from ".";
 export class ActionsService implements IApplicationService {
   constructor(
     private readonly _activatedActionsPersistenceService: AbstractConfigDataPersistenceService<IActivatedAction>,
-    private readonly _actionsToTriggerPersistenceService: AbstractConfigDataPersistenceService<IActionsToTrigger>,
+    private readonly _actionInstancesPersistenceService: AbstractConfigDataPersistenceService<IActionInstance>,
     private readonly _credentialsService: CredentialsService
   ) {}
 
   async bootstrap() {
     await this._activatedActionsPersistenceService.setup();
-    await this._actionsToTriggerPersistenceService.setup();
+    await this._actionInstancesPersistenceService.setup();
   }
 
   async runAction(entity: string, formAction: string) {
-    const entityActions = await this.listEntityActions(entity);
-    const actionsToRun = entityActions.filter(
+    const instances = await this.listEntityActionInstances(entity);
+    const actionsToRun = instances.filter(
       (action) => action.formAction === formAction
     );
 
@@ -61,43 +61,39 @@ export class ActionsService implements IApplicationService {
     }
   }
 
-  async registerAction(
-    entity: string,
-    action: Omit<IActionsToTrigger, "triggerId">
-  ) {
-    const triggerId = nanoid();
+  async instantiateAction(action: Omit<IActionInstance, "instanceId">) {
+    const instanceId = nanoid();
     // TODO validate the schema before inserting
 
-    await this._actionsToTriggerPersistenceService.upsertItem(triggerId, {
+    await this._actionInstancesPersistenceService.upsertItem(instanceId, {
       ...action,
-      entity,
-      triggerId,
+      instanceId,
     });
   }
 
-  async updateTriggerAction(triggerId: string, action: IActionsToTrigger) {
+  async updateActionInstance(instanceId: string, instance: IActionInstance) {
     // TODO validate the schema before inserting
 
-    await this._actionsToTriggerPersistenceService.upsertItem(
-      triggerId,
-      action
+    await this._actionInstancesPersistenceService.upsertItem(
+      instanceId,
+      instance
     );
   }
 
-  async deRegisterAction(triggerId: string) {
-    await this._actionsToTriggerPersistenceService.removeItem(triggerId);
+  async deleteActionInstance(instanceId: string) {
+    await this._actionInstancesPersistenceService.removeItem(instanceId);
   }
 
-  async listEntityActions(entity$1: string) {
-    return (
-      await this._actionsToTriggerPersistenceService.getAllItems()
-    ).filter(({ entity }) => entity === entity$1);
+  async listEntityActionInstances(entity$1: string) {
+    return (await this._actionInstancesPersistenceService.getAllItems()).filter(
+      ({ entity }) => entity === entity$1
+    );
   }
 
   async listIntegrationActions(integrationKey$1: string) {
-    return (
-      await this._actionsToTriggerPersistenceService.getAllItems()
-    ).filter(({ integrationKey }) => integrationKey === integrationKey$1);
+    return (await this._actionInstancesPersistenceService.getAllItems()).filter(
+      ({ integrationKey }) => integrationKey === integrationKey$1
+    );
   }
 
   //
@@ -219,13 +215,13 @@ export class ActionsService implements IApplicationService {
 
     await this._activatedActionsPersistenceService.removeItem(activationId);
 
-    const triggers =
-      await this._actionsToTriggerPersistenceService.getAllItems();
+    const instances =
+      await this._actionInstancesPersistenceService.getAllItems();
 
-    for (const trigger of triggers) {
-      if (trigger.activatedActionId === activationId) {
-        await this._actionsToTriggerPersistenceService.removeItem(
-          trigger.triggerId
+    for (const instance of instances) {
+      if (instance.activatedActionId === activationId) {
+        await this._actionInstancesPersistenceService.removeItem(
+          instance.instanceId
         );
       }
     }
@@ -235,11 +231,11 @@ export class ActionsService implements IApplicationService {
 const activatedActionsPersistenceService =
   createConfigDomainPersistenceService<IActivatedAction>("activated_actions");
 
-const actionsToTriggerPersistenceService =
-  createConfigDomainPersistenceService<IActionsToTrigger>("trigger_actions");
+const actionInstancesPersistenceService =
+  createConfigDomainPersistenceService<IActionInstance>("action_instances");
 
 export const actionsService = new ActionsService(
   activatedActionsPersistenceService,
-  actionsToTriggerPersistenceService,
+  actionInstancesPersistenceService,
   credentialsService
 );

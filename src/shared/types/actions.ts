@@ -6,8 +6,8 @@ export interface IActivatedAction {
   credentialsGroupKey: string;
 }
 
-export interface IActionsToTrigger {
-  triggerId: string;
+export interface IActionInstance {
+  instanceId: string;
   activatedActionId: string;
   integrationKey: string;
   entity: string;

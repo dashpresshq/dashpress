@@ -14,25 +14,8 @@ export default requestHandler(
         },
       ]);
 
-      return await actionsController.listEntityActions(
+      return await actionsController.listEntityActionInstances(
         validatedRequest.requestQuery
-      );
-    },
-    POST: async (getValidatedRequest) => {
-      const validatedRequest = await getValidatedRequest([
-        {
-          _type: "requestQuery",
-          options: REQUEST_KEY_FIELD,
-        },
-        {
-          _type: "requestBody",
-          options: {},
-        },
-      ]);
-
-      return await actionsController.registerAction(
-        validatedRequest.requestQuery,
-        validatedRequest.requestBody
       );
     },
     PATCH: async (getValidatedRequest) => {
@@ -47,7 +30,7 @@ export default requestHandler(
         },
       ]);
 
-      return await actionsController.updateTriggerAction(
+      return await actionsController.updateActionInstance(
         validatedRequest.requestQuery,
         validatedRequest.requestBody
       );
@@ -60,7 +43,7 @@ export default requestHandler(
         },
       ]);
 
-      return await actionsController.deRegisterAction(
+      return await actionsController.deleteActionInstance(
         validatedRequest.requestQuery
       );
     },

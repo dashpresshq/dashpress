@@ -6,7 +6,7 @@ export type ConfigDomain =
   | "environment-variables"
   | "dashboard"
   | "app-config"
-  | "trigger_actions"
+  | "action_instances"
   | "activated_actions"
   | "roles";
 

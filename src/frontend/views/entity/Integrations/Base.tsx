@@ -10,11 +10,18 @@ import {
 import {
   IBEPaginatedDataState,
   IFEPaginatedDataState,
+  SLUG_LOADING_VALUE,
   useFEPaginatedData,
 } from "@hadmean/protozoa";
 import { ViewStateMachine } from "frontend/lib/ViewStateMachine";
 import { useCallback, useState } from "react";
-import { IActionsToTrigger } from "shared/types/actions";
+import { IActionInstance } from "shared/types/actions";
+import {
+  LIST_ACTION_INSTANCES,
+  //   useCreateActionInstanceMutation,
+  useDeleteActionInstanceMutation,
+  //   useUpdateActionInstanceMutation,
+} from "./instances.store";
 
 interface IProps {
   entity?: string;
@@ -25,11 +32,11 @@ const NEW_ACTION_ITEM = "__new_action_item__";
 
 export function BaseActionInstances({ entity, integrationKey }: IProps) {
   const [paginatedDataState, setPaginatedDataState] = useState<
-    IFEPaginatedDataState<IActionsToTrigger> | IBEPaginatedDataState
+    IFEPaginatedDataState<IActionInstance> | IBEPaginatedDataState
   >({ ...DEFAULT_TABLE_PARAMS, pageIndex: 1 });
 
   const tableData = useFEPaginatedData<Record<string, unknown>>(
-    INTEGRATIONS_GROUP_ENDPOINT(group),
+    LIST_ACTION_INSTANCES({ entity, integrationKey }),
     {
       ...paginatedDataState,
       sortBy: undefined,
@@ -38,33 +45,39 @@ export function BaseActionInstances({ entity, integrationKey }: IProps) {
     }
   );
 
-  const [currentConfigItem, setCurrentConfigItem] = useState("");
+  const deleteActionInstanceMutation = useDeleteActionInstanceMutation();
+  //   const updateActionInstanceMutation = useUpdateActionInstanceMutation();
+  //   const createActionInstanceMutation = useCreateActionInstanceMutation();
+
+  const [currentInstanceId, setCurrentInstanceItem] = useState("");
 
   const closeConfigItem = () => {
-    setCurrentConfigItem("");
+    setCurrentInstanceItem("");
   };
 
   const MemoizedAction = useCallback(
     ({ row }: any) => (
       <Stack spacing={4} align="center">
         <SoftButton
-          action={() => setCurrentConfigItem((row.original as IKeyValue).key)}
+          action={() =>
+            setCurrentInstanceItem((row.original as IActionInstance).instanceId)
+          }
           label="Edit"
           justIcon
           icon="edit"
         />
         <DeleteButton
           onDelete={() =>
-            deleteConfigurationMutation.mutateAsync(
-              (row.original as IKeyValue).key
+            deleteActionInstanceMutation.mutateAsync(
+              (row.original as IActionInstance).instanceId
             )
           }
-          isMakingDeleteRequest={deleteConfigurationMutation.isLoading}
+          isMakingDeleteRequest={deleteActionInstanceMutation.isLoading}
           shouldConfirmAlert
         />
       </Stack>
     ),
-    [deleteConfigurationMutation.isLoading]
+    [deleteActionInstanceMutation.isLoading]
   );
 
   return (
@@ -111,20 +124,20 @@ export function BaseActionInstances({ entity, integrationKey }: IProps) {
       </ViewStateMachine>
       <OffCanvas
         title={
-          currentConfigItem === NEW_ACTION_ITEM ? `New Action` : `Edit Action`
+          currentInstanceId === NEW_ACTION_ITEM ? `New Action` : `Edit Action`
         }
         onClose={closeConfigItem}
-        show={!!currentConfigItem}
+        show={!!currentInstanceId}
       >
-        <KeyValueForm
+        {/* <KeyValueForm
           initialValues={(tableData?.data?.data || []).find(
-            ({ key }) => key === currentConfigItem
+            ({ key }) => key === currentInstanceId
           )}
           onSubmit={async (values: { key: string; value: string }) => {
             await upsertConfigurationMutation.mutateAsync(values);
             closeConfigItem();
           }}
-        />
+        /> */}
       </OffCanvas>
     </>
   );

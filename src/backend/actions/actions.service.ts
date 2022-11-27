@@ -14,6 +14,7 @@ import {
   IIntegrationsList,
   IActionInstance,
   IActivatedAction,
+  IIntegrationImplementationList,
 } from "shared/types/actions";
 import { ACTION_INTEGRATIONS } from ".";
 
@@ -36,7 +37,7 @@ export class ActionsService implements IApplicationService {
     );
 
     for (const action of actionsToRun) {
-      const { configuration, performKey, activatedActionId } = action;
+      const { configuration, implementationKey, activatedActionId } = action;
       // run triggerLogic triggerLogic
       const activatedAction =
         await this._activatedActionsPersistenceService.getItemOrFail(
@@ -57,7 +58,7 @@ export class ActionsService implements IApplicationService {
       // TODO compile the configuration here
       await ACTION_INTEGRATIONS[
         activatedAction.integrationKey
-      ].performsImplementation[performKey].do(connection, configuration);
+      ].performsImplementation[implementationKey].do(connection, configuration);
     }
   }
 
@@ -110,6 +111,18 @@ export class ActionsService implements IApplicationService {
         configurationSchema,
       })
     );
+  }
+
+  listIntegrationImplementations(
+    integrationKey: string
+  ): IIntegrationImplementationList[] {
+    return Object.entries(
+      ACTION_INTEGRATIONS[integrationKey].performsImplementation
+    ).map(([key, { configurationSchema, label }]) => ({
+      label,
+      key,
+      configurationSchema,
+    }));
   }
 
   async listActivatedActions(): Promise<IActivatedAction[]> {

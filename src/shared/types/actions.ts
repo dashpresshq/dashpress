@@ -11,7 +11,7 @@ export type IActionInstance = {
   activatedActionId: string;
   integrationKey: string;
   entity: string;
-  performKey: string;
+  implementationKey: string;
   triggerLogic: string;
   formAction: "create" | "update";
   configuration: Record<string, string>;
@@ -34,6 +34,11 @@ export interface IActionIntegrationsImplemention {
 export type IIntegrationsList = { key: string } & Pick<
   IActionIntegrationsImplemention,
   "title" | "description" | "configurationSchema"
+>;
+
+export type IIntegrationImplementationList = { key: string } & Pick<
+  IPerformsImplementation,
+  "label" | "configurationSchema"
 >;
 
 export const HTTP_ACTION_KEY = "http";

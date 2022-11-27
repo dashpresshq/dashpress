@@ -13,6 +13,10 @@ export class ActionsController {
     return this._actionsService.listIntegrations();
   }
 
+  listIntegrationImplementations(integrationKey: string) {
+    return this._actionsService.listIntegrationImplementations(integrationKey);
+  }
+
   async listActivatedActions() {
     return await this._actionsService.listActivatedActions();
   }

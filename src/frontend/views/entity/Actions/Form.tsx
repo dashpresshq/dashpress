@@ -1,12 +1,14 @@
 /* eslint-disable no-param-reassign */
 import { IValueLabel } from "@hadmean/chromista/dist/types";
 import { SchemaForm } from "frontend/lib/form/SchemaForm";
+import { useState } from "react";
 import { IAppliedSchemaFormConfig } from "shared/form-schemas/types";
 import {
   IActionInstance,
   IIntegrationsList,
   IActivatedAction,
 } from "shared/types/actions";
+import { useIntegrationImplementationsList } from "./instances.store";
 
 interface IProps {
   onSubmit: (instance: IActionInstance) => Promise<void>;
@@ -20,9 +22,6 @@ interface IProps {
     integrationKey?: string;
   };
 }
-
-// performKey: string;
-// configuration: Record<string, string>;
 
 export function ActionForm({
   onSubmit,
@@ -48,6 +47,19 @@ export function ActionForm({
       value: activationId,
     }));
 
+  const [formValues, setFormValues] = useState<Partial<IActionInstance>>({});
+
+  const implementations = useIntegrationImplementationsList(
+    activatedActions.find(
+      ({ activationId }) => formValues.activatedActionId === activationId
+    )?.integrationKey
+  );
+
+  const selectedImplementation =
+    (implementations.data || []).find(
+      ({ key }) => key === formValues.implementationKey
+    )?.configurationSchema || {};
+
   const fields: IAppliedSchemaFormConfig<any> = {
     formAction: {
       type: "selection",
@@ -67,20 +79,29 @@ export function ActionForm({
         },
       ],
     },
-    activatedActionId: {
-      selections: activatedOptions,
-      type: "selection",
-      validations: [{ validationType: "required" }],
-    },
     entity: {
       type: "selection",
       validations: [{ validationType: "required" }],
       selections: entities,
     },
+    activatedActionId: {
+      selections: activatedOptions,
+      type: "selection",
+      validations: [{ validationType: "required" }],
+    },
+    implementationKey: {
+      type: "selection",
+      validations: [{ validationType: "required" }],
+      selections: (implementations.data || []).map(({ key, label }) => ({
+        label,
+        value: key,
+      })),
+    },
     triggerLogic: {
       type: "json",
       validations: [],
     },
+    ...selectedImplementation,
   };
   if (currentView.entity) {
     delete fields.entity;
@@ -93,11 +114,13 @@ export function ActionForm({
       activatedActionId: activatedOptions[0].value,
     };
   }
+
   return (
     <SchemaForm<IActionInstance>
       buttonText="Save"
       initialValues={initialValues}
       fields={fields}
+      onChange={setFormValues}
       action={formAction}
       onSubmit={async (instance) => {
         const integrationKey = activatedActions.find(

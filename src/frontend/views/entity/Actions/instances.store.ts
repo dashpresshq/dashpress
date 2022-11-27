@@ -1,12 +1,17 @@
 import {
+  dataNotFoundMessage,
   makeDeleteRequest,
   makePatchRequest,
   makePostRequest,
   MutationsLang,
+  useApi,
   useWaitForResponseMutationOptions,
 } from "@hadmean/protozoa";
 import { useMutation } from "react-query";
-import { IActionInstance } from "shared/types/actions";
+import {
+  IActionInstance,
+  IIntegrationImplementationList,
+} from "shared/types/actions";
 
 const BASE_ACTIONS_ENDPOINT = `/api/actions`;
 
@@ -24,6 +29,15 @@ export const LIST_ACTION_INSTANCES = ({
   }
   return `${BASE_ACTIONS_ENDPOINT}/${integrationKey}`;
 };
+
+export const useIntegrationImplementationsList = (integrationKey: string) =>
+  useApi<IIntegrationImplementationList[]>(
+    `/api/actions/integrations/${integrationKey}`,
+    {
+      errorMessage: dataNotFoundMessage("Integration Implementations"),
+      enabled: !!integrationKey,
+    }
+  );
 
 export function useDeleteActionInstanceMutation() {
   const apiMutateOptions = useWaitForResponseMutationOptions<

@@ -136,8 +136,8 @@ export function BaseActionInstances({ entity, integrationKey }: IProps) {
               disableSortBy: true,
             },
             {
-              Header: "Perform Key",
-              accessor: "performKey",
+              Header: "Implementation Key",
+              accessor: "implementationKey",
               disableSortBy: true,
             },
             {

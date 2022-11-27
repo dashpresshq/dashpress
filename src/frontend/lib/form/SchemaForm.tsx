@@ -18,6 +18,7 @@ interface IProps<T> {
   initialValues?: Partial<T>;
   buttonText: string;
   action?: string;
+  onChange?: (data: T) => void;
   resetForm?: true;
   formExtension?: Partial<IFormExtension>;
 }
@@ -25,6 +26,7 @@ interface IProps<T> {
 export function SchemaForm<T extends Record<string, unknown>>({
   onSubmit,
   fields,
+  onChange,
   buttonText,
   initialValues,
   action,
@@ -53,6 +55,7 @@ export function SchemaForm<T extends Record<string, unknown>>({
       initialValues={initialValues}
       validate={runValidationError(fields)}
       render={({ handleSubmit, submitting, values, form, pristine }) => {
+        onChange(values as T);
         const fieldState: Record<
           string,
           { hidden: boolean; disabled: boolean }

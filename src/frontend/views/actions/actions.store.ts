@@ -23,8 +23,8 @@ const ACTIVATION_CONFIG = (activationId) => {
 };
 
 export const useIntegrationsList = () =>
-  useApi<IIntegrationsList[]>("/api/actions", {
-    errorMessage: dataNotFoundMessage("Actions"),
+  useApi<IIntegrationsList[]>("/api/actions/integrations", {
+    errorMessage: dataNotFoundMessage("Integrations"),
   });
 
 export const useActiveActionList = () =>

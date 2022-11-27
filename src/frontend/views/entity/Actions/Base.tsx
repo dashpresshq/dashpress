@@ -4,6 +4,7 @@ import {
   ErrorAlert,
   OffCanvas,
   SoftButton,
+  Spacer,
   Stack,
   Table,
   TableSkeleton,
@@ -111,6 +112,14 @@ export function BaseActionInstances({ entity, integrationKey }: IProps) {
         }
         loader={<TableSkeleton />}
       >
+        <Stack justify="end">
+          <SoftButton
+            action={() => setCurrentInstanceItem(NEW_ACTION_ITEM)}
+            icon="add"
+            label="Add New Form Action"
+          />
+        </Stack>
+        <Spacer />
         <Table
           {...{
             tableData,
@@ -126,17 +135,17 @@ export function BaseActionInstances({ entity, integrationKey }: IProps) {
                   disableSortBy: true,
                 }
               : {
-                  Header: "Integration Key",
-                  accessor: "entity",
+                  Header: "Integration",
+                  accessor: "integrationKey",
                   disableSortBy: true,
                 },
             {
-              Header: "Action",
-              accessor: "action",
+              Header: "Form Action",
+              accessor: "formAction",
               disableSortBy: true,
             },
             {
-              Header: "Implementation Key",
+              Header: "Action",
               accessor: "implementationKey",
               disableSortBy: true,
             },

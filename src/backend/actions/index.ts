@@ -21,6 +21,3 @@ export const ACTION_INTEGRATIONS: Record<
   zapier: SLACK_ACTION_INTEGRATION,
   // stripe: SLACK_ACTION_INTEGRATION,
 };
-
-// : string;
-// configuration: Record<string, string>;

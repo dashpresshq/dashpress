@@ -1,19 +1,19 @@
 import { Stack, Text, Spacer } from "@hadmean/chromista";
-import { HTTP_ACTION_KEY, IActionsList } from "shared/types/actions";
+import { HTTP_ACTION_KEY, IIntegrationsList } from "shared/types/actions";
 import { SchemaForm } from "frontend/lib/form/SchemaForm";
 import { useDeactivateActionMutation } from "../../actions.store";
 
 interface IProps {
-  actionDetails: IActionsList;
+  integrationDetail: IIntegrationsList;
   activationId: string;
 }
 
-export function Deactivate({ actionDetails, activationId }: IProps) {
+export function Deactivate({ integrationDetail, activationId }: IProps) {
   const deactivateActionMutation = useDeactivateActionMutation();
 
-  const deactivationKey = `DEACTIVATE_${actionDetails.key}`.toUpperCase();
+  const deactivationKey = `DEACTIVATE_${integrationDetail.key}`.toUpperCase();
 
-  if (actionDetails.key === HTTP_ACTION_KEY) {
+  if (integrationDetail.key === HTTP_ACTION_KEY) {
     return (
       <Stack justify="center">
         <Text textStyle="italic" size="5">
@@ -51,7 +51,7 @@ export function Deactivate({ actionDetails, activationId }: IProps) {
           },
         }}
         onSubmit={() => deactivateActionMutation.mutateAsync(activationId)}
-        buttonText={`Deactivate ${actionDetails.title}`}
+        buttonText={`Deactivate ${integrationDetail.title}`}
       />
     </>
   );

@@ -1,6 +1,6 @@
 import { SchemaForm } from "frontend/lib/form/SchemaForm";
 import { Tabs, Text } from "@hadmean/chromista";
-import { IActionsList, IActivatedAction } from "shared/types/actions";
+import { IIntegrationsList, IActivatedAction } from "shared/types/actions";
 import { useEffect } from "react";
 import { ToastService } from "@hadmean/protozoa";
 import { BaseActionInstances } from "frontend/views/entity/Actions/Base";
@@ -12,12 +12,17 @@ import { Deactivate } from "./Deactivate";
 import { Configure } from "./Configure";
 
 interface IProps {
-  actionDetails?: IActionsList;
+  integrationDetail?: IIntegrationsList;
   activeAction?: IActivatedAction;
 }
 
-export function ActionSettingsView({ actionDetails, activeAction }: IProps) {
-  const activateActionMutation = useActivateActionMutation(actionDetails?.key);
+export function ActionSettingsView({
+  integrationDetail,
+  activeAction,
+}: IProps) {
+  const activateActionMutation = useActivateActionMutation(
+    integrationDetail?.key
+  );
   const activationConfiguration = useActivationConfiguration(
     activeAction?.activationId
   );
@@ -28,17 +33,17 @@ export function ActionSettingsView({ actionDetails, activeAction }: IProps) {
     }
   }, [activationConfiguration.error]);
 
-  if (!actionDetails) {
+  if (!integrationDetail) {
     return <Text>404: Unknown Action</Text>;
   }
 
   if (!activeAction) {
     return (
       <SchemaForm
-        fields={actionDetails.configurationSchema}
+        fields={integrationDetail.configurationSchema}
         onSubmit={activateActionMutation.mutateAsync}
         initialValues={{}}
-        buttonText={`Activate ${actionDetails.title}`}
+        buttonText={`Activate ${integrationDetail.title}`}
       />
     );
   }
@@ -57,7 +62,7 @@ export function ActionSettingsView({ actionDetails, activeAction }: IProps) {
           content: (
             <Configure
               activationId={activeAction.activationId}
-              actionDetails={actionDetails}
+              integrationDetail={integrationDetail}
             />
           ),
         },
@@ -66,7 +71,7 @@ export function ActionSettingsView({ actionDetails, activeAction }: IProps) {
           content: (
             <Deactivate
               activationId={activeAction.activationId}
-              actionDetails={actionDetails}
+              integrationDetail={integrationDetail}
             />
           ),
         },

@@ -21,11 +21,7 @@ const BASE_CONFIGURATION_SCHEMA: IAppliedSchemaFormConfig<IBase> = {
   },
   headers: {
     type: "json",
-    validations: [
-      {
-        validationType: "required",
-      },
-    ],
+    validations: [],
   },
 };
 
@@ -33,11 +29,7 @@ const ACTION_CONFIGURATION_SCHEMA: IAppliedSchemaFormConfig<IAction> = {
   ...BASE_CONFIGURATION_SCHEMA,
   body: {
     type: "json",
-    validations: [
-      {
-        validationType: "required",
-      },
-    ],
+    validations: [],
   },
 };
 
@@ -84,7 +76,7 @@ export const HTTP_ACTION_INTEGRATION: IActionIntegrationsImplemention = {
     },
     PUT: {
       label: "PUT",
-      configurationSchema: {},
+      configurationSchema: ACTION_CONFIGURATION_SCHEMA,
       do: async (_, configuration: IAction) => {
         await makeActionRequest("POST", configuration);
       },

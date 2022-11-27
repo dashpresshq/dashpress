@@ -55,7 +55,7 @@ export function SchemaForm<T extends Record<string, unknown>>({
       initialValues={initialValues}
       validate={runValidationError(fields)}
       render={({ handleSubmit, submitting, values, form, pristine }) => {
-        onChange(values as T);
+        onChange?.(values as T);
         const fieldState: Record<
           string,
           { hidden: boolean; disabled: boolean }

@@ -23,6 +23,8 @@ interface IProps {
   };
 }
 
+const CONFIGURATION_FORM_PREFIX = "configuration__";
+
 export function ActionForm({
   onSubmit,
   initialValues = {},
@@ -55,12 +57,30 @@ export function ActionForm({
     )?.integrationKey
   );
 
-  const selectedImplementation =
-    (implementations.data || []).find(
-      ({ key }) => key === formValues.implementationKey
-    )?.configurationSchema || {};
+  const currentActionTitle =
+    integrationsListMap[
+      activatedActions.find(
+        ({ activationId }) => formValues.activatedActionId === activationId
+      )?.integrationKey
+    ]?.title;
+
+  const selectedImplementation = Object.fromEntries(
+    Object.entries(
+      (implementations.data || []).find(
+        ({ key }) => key === formValues.implementationKey
+      )?.configurationSchema || {}
+    ).map(([key, value]) => [
+      `${CONFIGURATION_FORM_PREFIX}${key}`,
+      { ...value, label: `${currentActionTitle}: ${key}` },
+    ])
+  );
 
   const fields: IAppliedSchemaFormConfig<any> = {
+    entity: {
+      type: "selection",
+      validations: [{ validationType: "required" }],
+      selections: entities,
+    },
     formAction: {
       type: "selection",
       selections: [
@@ -79,17 +99,14 @@ export function ActionForm({
         },
       ],
     },
-    entity: {
-      type: "selection",
-      validations: [{ validationType: "required" }],
-      selections: entities,
-    },
     activatedActionId: {
+      label: "Integration",
       selections: activatedOptions,
       type: "selection",
       validations: [{ validationType: "required" }],
     },
     implementationKey: {
+      label: "Action",
       type: "selection",
       validations: [{ validationType: "required" }],
       selections: (implementations.data || []).map(({ key, label }) => ({
@@ -97,11 +114,11 @@ export function ActionForm({
         value: key,
       })),
     },
+    ...selectedImplementation,
     triggerLogic: {
       type: "json",
       validations: [],
     },
-    ...selectedImplementation,
   };
   if (currentView.entity) {
     delete fields.entity;
@@ -126,7 +143,22 @@ export function ActionForm({
         const integrationKey = activatedActions.find(
           ({ activationId }) => instance.activatedActionId === activationId
         )?.integrationKey;
-        await onSubmit({ ...instance, integrationKey });
+
+        const cleanedConfigurationForm = Object.entries(instance).reduce(
+          (cleanForm, [formKey, formValue]) => {
+            if (formKey.startsWith(CONFIGURATION_FORM_PREFIX)) {
+              const key = formKey.replace(CONFIGURATION_FORM_PREFIX, "");
+              return {
+                ...cleanForm,
+                configuration: { ...cleanForm.configuration, [key]: formValue },
+              };
+            }
+            return { ...cleanForm, [formKey]: formValue };
+          },
+          { configuration: {} }
+        ) as IActionInstance;
+
+        await onSubmit({ ...cleanedConfigurationForm, integrationKey });
       }}
       formExtension={{
         fieldsState: `
@@ -134,7 +166,6 @@ export function ActionForm({
                 entity: {
                     hidden: $.action === "update"
                 },
-                //: eyes
                 activatedActionId: {
                     hidden: $.action === "update"
                 }

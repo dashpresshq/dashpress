@@ -23,7 +23,7 @@ interface ISendMessageConfig {
 
 const SEND_MESSAGE_SCHEMA: IAppliedSchemaFormConfig<ISendMessageConfig> = {
   message: {
-    type: "text",
+    type: "textarea",
     validations: [
       {
         validationType: "required",

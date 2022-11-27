@@ -1,6 +1,6 @@
 import { Spacer, Stack, Text } from "@hadmean/chromista";
 import { SchemaForm } from "frontend/lib/form/SchemaForm";
-import { IActionsList } from "shared/types/actions";
+import { IIntegrationsList } from "shared/types/actions";
 import {
   useActivationConfiguration,
   useUpdateActivatedActionMutation,
@@ -8,18 +8,18 @@ import {
 import { usePasswordStore } from "../../password.store";
 
 interface IProps {
-  actionDetails: IActionsList;
+  integrationDetail: IIntegrationsList;
   activationId: string;
 }
 
-export function Configure({ activationId, actionDetails }: IProps) {
+export function Configure({ activationId, integrationDetail }: IProps) {
   const updateActivatedActionMutation =
     useUpdateActivatedActionMutation(activationId);
   const activationConfiguration = useActivationConfiguration(activationId);
 
   const passwordStore = usePasswordStore();
 
-  if (Object.keys(actionDetails.configurationSchema).length === 0) {
+  if (Object.keys(integrationDetail.configurationSchema).length === 0) {
     return (
       <Stack justify="center">
         <Text textStyle="italic" size="5">
@@ -58,7 +58,7 @@ export function Configure({ activationId, actionDetails }: IProps) {
           buttonText={
             activationConfiguration.isLoading
               ? "Just a sec..."
-              : `Reveal ${actionDetails.title}'s Configuration`
+              : `Reveal ${integrationDetail.title}'s Configuration`
           }
         />
       </>
@@ -66,7 +66,7 @@ export function Configure({ activationId, actionDetails }: IProps) {
   }
   return (
     <SchemaForm
-      fields={actionDetails.configurationSchema}
+      fields={integrationDetail.configurationSchema}
       onSubmit={updateActivatedActionMutation.mutateAsync}
       initialValues={activationConfiguration.data || {}}
       buttonText="Update Configuration"

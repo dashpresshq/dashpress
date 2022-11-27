@@ -17,7 +17,7 @@ import {
 import { useActiveEntities } from "frontend/hooks/entity/entity.store";
 import { ViewStateMachine } from "frontend/lib/ViewStateMachine";
 import {
-  useActionsList,
+  useIntegrationsList,
   useActiveActionList,
 } from "frontend/views/actions/actions.store";
 import { useCallback, useState } from "react";
@@ -53,7 +53,7 @@ export function BaseActionInstances({ entity, integrationKey }: IProps) {
   );
 
   const activeActionList = useActiveActionList();
-  const actionList = useActionsList();
+  const integrationsList = useIntegrationsList();
   const activeEntities = useActiveEntities();
 
   const deleteActionInstanceMutation = useDeleteActionInstanceMutation();
@@ -101,9 +101,14 @@ export function BaseActionInstances({ entity, integrationKey }: IProps) {
         loading={
           entity === SLUG_LOADING_VALUE ||
           activeActionList.isLoading ||
-          actionList.isLoading
+          activeEntities.isLoading ||
+          integrationsList.isLoading
         }
-        error={activeActionList.error || actionList.error}
+        error={
+          activeActionList.error ||
+          activeEntities.error ||
+          integrationsList.error
+        }
         loader={<TableSkeleton />}
       >
         <Table
@@ -164,6 +169,11 @@ export function BaseActionInstances({ entity, integrationKey }: IProps) {
           initialValues={(tableData?.data?.data || []).find(
             ({ instanceId }) => instanceId === currentInstanceId
           )}
+          formAction={
+            currentInstanceId === NEW_ACTION_ITEM ? "create" : "update"
+          }
+          integrationsList={integrationsList.data || []}
+          activatedActions={activeActionList.data || []}
           entities={activeEntities.data || []}
         />
       </OffCanvas>

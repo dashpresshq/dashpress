@@ -3,6 +3,6 @@ import { requestHandler } from "backend/lib/request";
 
 export default requestHandler({
   GET: () => {
-    return actionsController.listAllActions();
+    return actionsController.listIntegrations();
   },
 });

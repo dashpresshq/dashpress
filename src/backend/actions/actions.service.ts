@@ -11,7 +11,7 @@ import { IApplicationService } from "backend/types";
 import { nanoid } from "nanoid";
 import {
   HTTP_ACTION_KEY,
-  IActionsList,
+  IIntegrationsList,
   IActionInstance,
   IActivatedAction,
 } from "shared/types/actions";
@@ -63,17 +63,20 @@ export class ActionsService implements IApplicationService {
 
   async instantiateAction(action: Omit<IActionInstance, "instanceId">) {
     const instanceId = nanoid();
-    // TODO validate the schema before inserting
+    const activatedActions = await this.listActivatedActions();
+
+    const integrationKey = activatedActions.find(
+      ({ activationId }) => action.activatedActionId === activationId
+    )?.integrationKey;
 
     await this._actionInstancesPersistenceService.upsertItem(instanceId, {
       ...action,
+      integrationKey,
       instanceId,
     });
   }
 
   async updateActionInstance(instanceId: string, instance: IActionInstance) {
-    // TODO validate the schema before inserting
-
     await this._actionInstancesPersistenceService.upsertItem(
       instanceId,
       instance
@@ -98,7 +101,7 @@ export class ActionsService implements IApplicationService {
 
   //
 
-  listAllActions(): IActionsList[] {
+  listIntegrations(): IIntegrationsList[] {
     return Object.entries(ACTION_INTEGRATIONS).map(
       ([key, { title, description, configurationSchema }]) => ({
         description,

@@ -11,7 +11,7 @@ import { useMutation } from "react-query";
 import { reduceStringToNumber } from "shared/lib/templates/reduceStringToNumber";
 import {
   HTTP_ACTION_KEY,
-  IActionsList,
+  IIntegrationsList,
   IActivatedAction,
 } from "shared/types/actions";
 import { usePasswordStore } from "./password.store";
@@ -22,8 +22,8 @@ const ACTIVATION_CONFIG = (activationId) => {
   return `/api/actions/${activationId}/credentials`;
 };
 
-export const useActionsList = () =>
-  useApi<IActionsList[]>("/api/actions", {
+export const useIntegrationsList = () =>
+  useApi<IIntegrationsList[]>("/api/actions", {
     errorMessage: dataNotFoundMessage("Actions"),
   });
 

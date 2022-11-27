@@ -7,17 +7,17 @@ import { useRouteParam, useSetPageDetails } from "frontend/lib/routing";
 import { USER_PERMISSIONS } from "shared/types/user";
 import { ViewStateMachine } from "frontend/lib/ViewStateMachine";
 import { BaseActionsLayout } from "../_Base";
-import { useActionsList, useActiveActionList } from "../actions.store";
+import { useIntegrationsList, useActiveActionList } from "../actions.store";
 import { ACTIONS_VIEW_KEY } from "../constants";
 import { ActionSettingsView } from "./View";
 
 export function ActionSettings() {
   const currentKey = useRouteParam("key");
 
-  const actionsList = useActionsList();
+  const integrationsList = useIntegrationsList();
   const activeActionsList = useActiveActionList();
 
-  const actionDetails = (actionsList.data || []).find(
+  const actionDetails = (integrationsList.data || []).find(
     ({ key }) => key === currentKey
   );
 
@@ -38,8 +38,8 @@ export function ActionSettings() {
         description={actionDetails ? actionDetails.description : ""}
       >
         <ViewStateMachine
-          loading={actionsList.isLoading || activeActionsList.isLoading}
-          error={actionsList.error || activeActionsList.error}
+          loading={integrationsList.isLoading || activeActionsList.isLoading}
+          error={integrationsList.error || activeActionsList.error}
           loader={
             <FormSkeleton
               schema={[

@@ -9,8 +9,8 @@ export class ActionsController {
     private _usersService: UsersService
   ) {}
 
-  listAllActions() {
-    return this._actionsService.listAllActions();
+  listIntegrations() {
+    return this._actionsService.listIntegrations();
   }
 
   async listActivatedActions() {

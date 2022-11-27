@@ -31,7 +31,7 @@ export interface IActionIntegrationsImplemention {
   performsImplementation: Record<string, IPerformsImplementation>;
 }
 
-export type IActionsList = { key: string } & Pick<
+export type IIntegrationsList = { key: string } & Pick<
   IActionIntegrationsImplemention,
   "title" | "description" | "configurationSchema"
 >;

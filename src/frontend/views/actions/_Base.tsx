@@ -16,7 +16,7 @@ import { ReactNode } from "react";
 import { Code, Zap, ZapOff } from "react-feather";
 import { NAVIGATION_LINKS } from "../../lib/routing/links";
 import { AppLayout } from "../../_layouts/app";
-import { useActionsList, useActiveActionList } from "./actions.store";
+import { useIntegrationsList, useActiveActionList } from "./actions.store";
 
 interface IProps {
   children: ReactNode;
@@ -25,7 +25,7 @@ interface IProps {
 export function BaseActionsLayout({ children }: IProps) {
   const currentKey = useRouteParam("key");
 
-  const actionsList = useActionsList();
+  const integrationsList = useIntegrationsList();
 
   const router = useRouter();
 
@@ -43,12 +43,12 @@ export function BaseActionsLayout({ children }: IProps) {
         <SectionLeft>
           <SectionBox headLess title="">
             <ViewStateMachine
-              loading={actionsList.isLoading || activeActionList.isLoading}
-              error={actionsList.error || activeActionList.error}
+              loading={integrationsList.isLoading || activeActionList.isLoading}
+              error={integrationsList.error || activeActionList.error}
               loader={<ListSkeleton />}
             >
               <RenderList
-                items={(actionsList.data || []).map(({ title, key }) => ({
+                items={(integrationsList.data || []).map(({ title, key }) => ({
                   name: title,
                   key,
                 }))}

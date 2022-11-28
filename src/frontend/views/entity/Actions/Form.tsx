@@ -7,6 +7,7 @@ import {
   IActionInstance,
   IIntegrationsList,
   IActivatedAction,
+  BaseAction,
 } from "shared/types/actions";
 import { useIntegrationImplementationsList } from "./instances.store";
 
@@ -86,11 +87,15 @@ export function ActionForm({
       selections: [
         {
           label: "Create",
-          value: "create",
+          value: BaseAction.Create,
         },
         {
           label: "Update",
-          value: "update",
+          value: BaseAction.Update,
+        },
+        {
+          label: "Delete",
+          value: BaseAction.Delete,
         },
       ],
       validations: [

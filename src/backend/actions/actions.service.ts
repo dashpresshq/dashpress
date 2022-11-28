@@ -8,6 +8,7 @@ import {
 } from "backend/lib/config-persistence";
 import { validateSchemaRequestBody } from "backend/lib/errors/validate-schema-request-input";
 import { IApplicationService } from "backend/types";
+import { noop } from "lodash";
 import { nanoid } from "nanoid";
 import {
   HTTP_ACTION_KEY,
@@ -30,7 +31,8 @@ export class ActionsService implements IApplicationService {
     await this._actionInstancesPersistenceService.setup();
   }
 
-  async runAction(entity: string, formAction: string) {
+  async runAction(entity: string, formAction: string, id: unknown) {
+    noop(id);
     const instances = await this.listEntityActionInstances(entity);
     const actionsToRun = instances.filter(
       (action) => action.formAction === formAction

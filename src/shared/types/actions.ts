@@ -6,6 +6,12 @@ export interface IActivatedAction {
   credentialsGroupKey: string;
 }
 
+export enum BaseAction {
+  Create = "create",
+  Update = "update",
+  Delete = "delete",
+}
+
 export type IActionInstance = {
   instanceId: string;
   activatedActionId: string;
@@ -13,7 +19,7 @@ export type IActionInstance = {
   entity: string;
   implementationKey: string;
   triggerLogic: string;
-  formAction: "create" | "update";
+  formAction: BaseAction | string;
   configuration: Record<string, string>;
 };
 

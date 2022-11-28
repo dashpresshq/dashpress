@@ -6,6 +6,11 @@ import { IFieldValidationItem } from "shared/validations/types";
 import noop from "lodash/noop";
 import { NotFoundError } from "backend/lib/errors";
 import {
+  actionsService,
+  ActionsService,
+} from "backend/actions/actions.service";
+import { BaseAction } from "shared/types/actions";
+import {
   ConfigurationService,
   configurationService,
 } from "../configuration/configuration.service";
@@ -21,7 +26,8 @@ export class DataController {
   constructor(
     private _dataService: DataService,
     private _entitiesService: EntitiesService,
-    private _configurationService: ConfigurationService
+    private _configurationService: ConfigurationService,
+    private _actionsService: ActionsService
   ) {}
 
   async listData(
@@ -160,7 +166,10 @@ export class DataController {
     return data;
   }
 
-  async createData(entity: string, data: Record<string, unknown>) {
+  async createData(
+    entity: string,
+    data: Record<string, unknown>
+  ): Promise<{ id: unknown }> {
     // TODO validate the createData values
     const [allowedFields, primaryField, entityValidations] = await Promise.all([
       this.getAllowedCrudsFieldsToShow(entity, "hidden_entity_create_columns"),
@@ -173,13 +182,15 @@ export class DataController {
 
     noop(entityValidations);
 
-    return {
-      id: await this._dataService.create(
-        entity,
-        this.returnOnlyDataThatAreAllowed(data, allowedFields),
-        primaryField
-      ),
-    };
+    const id = await this._dataService.create(
+      entity,
+      this.returnOnlyDataThatAreAllowed(data, allowedFields),
+      primaryField
+    );
+
+    await this._actionsService.runAction(entity, BaseAction.Create, id);
+
+    return { id };
   }
 
   async updateData(
@@ -211,6 +222,8 @@ export class DataController {
       },
       this.returnOnlyDataThatAreAllowed(data, allowedFields)
     );
+
+    await this._actionsService.runAction(entity, BaseAction.Update, id);
   }
 
   private returnOnlyDataThatAreAllowed(
@@ -223,6 +236,8 @@ export class DataController {
   }
 
   async deleteData(entity: string, id: string) {
+    await this._actionsService.runAction(entity, "delete", id);
+
     await this._dataService.delete(entity, {
       [await this._entitiesService.getEntityPrimaryField(entity)]: id,
     });
@@ -264,5 +279,6 @@ export class DataController {
 export const dataController = new DataController(
   dataService,
   entitiesService,
-  configurationService
+  configurationService,
+  actionsService
 );

@@ -1,5 +1,5 @@
 import { Stack, Text, Spacer } from "@hadmean/chromista";
-import { HTTP_ACTION_KEY, IIntegrationsList } from "shared/types/actions";
+import { HTTP_INTEGRATION_KEY, IIntegrationsList } from "shared/types/actions";
 import { SchemaForm } from "frontend/lib/form/SchemaForm";
 import { useDeactivateActionMutation } from "../../actions.store";
 
@@ -13,7 +13,7 @@ export function Deactivate({ integrationDetail, activationId }: IProps) {
 
   const deactivationKey = `DEACTIVATE_${integrationDetail.key}`.toUpperCase();
 
-  if (integrationDetail.key === HTTP_ACTION_KEY) {
+  if (integrationDetail.key === HTTP_INTEGRATION_KEY) {
     return (
       <Stack justify="center">
         <Text textStyle="italic" size="5">

@@ -116,7 +116,7 @@ export function BaseActionInstances({ entity, integrationKey }: IProps) {
           <SoftButton
             action={() => setCurrentInstanceItem(NEW_ACTION_ITEM)}
             icon="add"
-            label="Add New Form Action"
+            label="Add New Form Integration"
           />
         </Stack>
         <Spacer />

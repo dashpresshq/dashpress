@@ -15,7 +15,7 @@ import {
 
 const BASE_ACTIONS_ENDPOINT = `/api/actions`;
 
-const SINGULAR = `Form Action`;
+const SINGULAR = `Form Integration`;
 
 export const LIST_ACTION_INSTANCES = ({
   entity,

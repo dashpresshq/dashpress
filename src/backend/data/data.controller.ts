@@ -150,14 +150,21 @@ export class DataController {
       .map(({ name }) => name);
   }
 
-  async showData(entity: string, id: string) {
+  async showData(
+    entity: string,
+    id: string | number
+  ): Promise<Record<string, unknown>> {
     const [fieldsToShow, primaryField] = await Promise.all([
       this.getAllowedCrudsFieldsToShow(entity, "hidden_entity_details_columns"),
       this._entitiesService.getEntityPrimaryField(entity),
     ]);
-    const data = await this._dataService.show(entity, fieldsToShow, {
-      [primaryField]: id,
-    });
+    const data = await this._dataService.show<Record<string, unknown>>(
+      entity,
+      fieldsToShow,
+      {
+        [primaryField]: id,
+      }
+    );
     if (!data) {
       throw new NotFoundError(
         `Entity '${entity}' with id '${id}' is not found`
@@ -188,7 +195,11 @@ export class DataController {
       primaryField
     );
 
-    await this._actionsService.runAction(entity, BaseAction.Create, id);
+    await this._actionsService.runAction(
+      entity,
+      BaseAction.Create,
+      async () => await this.showData(entity, id)
+    );
 
     return { id };
   }
@@ -223,7 +234,11 @@ export class DataController {
       this.returnOnlyDataThatAreAllowed(data, allowedFields)
     );
 
-    await this._actionsService.runAction(entity, BaseAction.Update, id);
+    await this._actionsService.runAction(
+      entity,
+      BaseAction.Update,
+      async () => await this.showData(entity, id)
+    );
   }
 
   private returnOnlyDataThatAreAllowed(
@@ -236,7 +251,11 @@ export class DataController {
   }
 
   async deleteData(entity: string, id: string) {
-    await this._actionsService.runAction(entity, "delete", id);
+    await this._actionsService.runAction(
+      entity,
+      "delete",
+      async () => await this.showData(entity, id)
+    );
 
     await this._dataService.delete(entity, {
       [await this._entitiesService.getEntityPrimaryField(entity)]: id,

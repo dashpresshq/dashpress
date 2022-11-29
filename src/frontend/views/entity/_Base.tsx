@@ -82,8 +82,9 @@ export function BaseEntitySettingsLayout({ children }: IProps) {
                 IconComponent: Code,
               },
               {
-                action: NAVIGATION_LINKS.ENTITY.CONFIG.ACTIONS(entity),
-                name: "Form Actions",
+                action:
+                  NAVIGATION_LINKS.ENTITY.CONFIG.FORM_INTEGRATIONS(entity),
+                name: "Form Integrations",
                 IconComponent: Zap,
               },
               // Computed Table fields

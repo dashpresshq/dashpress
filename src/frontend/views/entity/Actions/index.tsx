@@ -11,19 +11,19 @@ export function EntityFormActionsSettings() {
   const entity = useEntitySlug();
 
   useSetPageDetails({
-    pageTitle: "Form Actions",
+    pageTitle: "Form Integrations",
     viewKey: ENTITY_CONFIGURATION_VIEW,
     permission: USER_PERMISSIONS.CAN_CONFIGURE_APP,
   });
   return (
     <BaseEntitySettingsLayout>
       <SectionBox
-        title="Form Actions"
+        title="Form Integrations"
         iconButtons={[
           {
             action: LINK_TO_DOCS("app-configuration/TODO"),
             icon: "help",
-            label: "Form Actions Documentation",
+            label: "Form Integrations Documentation",
           },
         ]}
       >

@@ -59,7 +59,7 @@ export const NAVIGATION_LINKS = {
       FORM: (entity: string) => `/admin/${entity}/config/form`,
       VIEWS: (entity: string) => `/admin/${entity}/config/views`,
       RELATIONS: (entity: string) => `/admin/${entity}/config/relations`,
-      ACTIONS: (entity: string) => `/admin/${entity}/config/actions`,
+      FORM_INTEGRATIONS: (entity: string) => `/admin/${entity}/config/actions`,
     },
   },
 };

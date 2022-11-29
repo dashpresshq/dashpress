@@ -40,7 +40,7 @@ const makeActionRequest = async (
   const response = await fetch(configuration.url, {
     method,
     headers: JSON.parse(configuration.headers),
-    body: configuration.body ? JSON.stringify(configuration.body) : undefined,
+    body: configuration.body ? configuration.body : undefined,
   });
   if (response.ok) {
     try {

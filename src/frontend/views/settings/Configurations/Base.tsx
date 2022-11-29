@@ -120,6 +120,12 @@ export function BaseIntegrationsConfiguration({
                 Header: "Key",
                 accessor: "key",
                 disableSortBy: true,
+                // eslint-disable-next-line react/no-unstable-nested-components
+                Cell: ({ value }: { value: unknown }) => (
+                  <span
+                    dangerouslySetInnerHTML={{ __html: `{{ ENV.${value} }}` }}
+                  />
+                ),
               },
               {
                 Header: "Value",

@@ -1,17 +1,19 @@
 import {
+  appConstantsService,
   credentialsService,
   CredentialsService,
 } from "backend/integrations-configurations";
+import { IntegrationsConfigurationService } from "backend/integrations-configurations/services/_base";
 import {
   createConfigDomainPersistenceService,
   AbstractConfigDataPersistenceService,
 } from "backend/lib/config-persistence";
 import { validateSchemaRequestBody } from "backend/lib/errors/validate-schema-request-input";
 import { IApplicationService } from "backend/types";
-import { noop } from "lodash";
 import { nanoid } from "nanoid";
+import { TemplateService } from "shared/lib/templates";
 import {
-  HTTP_ACTION_KEY,
+  HTTP_INTEGRATION_KEY,
   IIntegrationsList,
   IActionInstance,
   IActivatedAction,
@@ -23,7 +25,8 @@ export class ActionsService implements IApplicationService {
   constructor(
     private readonly _activatedActionsPersistenceService: AbstractConfigDataPersistenceService<IActivatedAction>,
     private readonly _actionInstancesPersistenceService: AbstractConfigDataPersistenceService<IActionInstance>,
-    private readonly _credentialsService: CredentialsService
+    private readonly _credentialsService: CredentialsService,
+    private readonly _appConstantsService: IntegrationsConfigurationService
   ) {}
 
   async bootstrap() {
@@ -31,36 +34,58 @@ export class ActionsService implements IApplicationService {
     await this._actionInstancesPersistenceService.setup();
   }
 
-  async runAction(entity: string, formAction: string, id: unknown) {
-    noop(id);
+  async runAction(
+    entity: string,
+    formAction: string,
+    getData: () => Promise<Record<string, unknown>>
+  ) {
     const instances = await this.listEntityActionInstances(entity);
     const actionsToRun = instances.filter(
       (action) => action.formAction === formAction
     );
 
+    if (actionsToRun.length === 0) {
+      return;
+    }
+
+    const data = await getData();
+
     for (const action of actionsToRun) {
       const { configuration, implementationKey, activatedActionId } = action;
       // run triggerLogic triggerLogic
-      const activatedAction =
-        await this._activatedActionsPersistenceService.getItemOrFail(
-          activatedActionId
-        );
-      if (!activatedAction) {
-        return;
-      }
+
+      const integrationKey = await this.getIntegrationKeyFromActivatedActionId(
+        activatedActionId
+      );
 
       const actionConfiguration = await this.showActionConfig(
         activatedActionId
       );
 
       const connection =
-        ACTION_INTEGRATIONS[activatedAction.integrationKey].connect(
-          actionConfiguration
-        );
-      // TODO compile the configuration here
-      await ACTION_INTEGRATIONS[
-        activatedAction.integrationKey
-      ].performsImplementation[implementationKey].do(connection, configuration);
+        ACTION_INTEGRATIONS[integrationKey].connect(actionConfiguration);
+
+      const env = Object.fromEntries(
+        (await this._appConstantsService.list()).map(({ key, value }) => [
+          key,
+          value,
+        ])
+      );
+
+      const compiledConfiguration = Object.fromEntries(
+        Object.entries(configuration || {}).map(([key, value]) => [
+          key,
+          TemplateService.compile(value, {
+            data,
+            ENV: env,
+            auth: "TODO",
+          }),
+        ])
+      );
+
+      await ACTION_INTEGRATIONS[integrationKey].performsImplementation[
+        implementationKey
+      ].do(connection, compiledConfiguration);
     }
   }
 
@@ -135,7 +160,7 @@ export class ActionsService implements IApplicationService {
       {
         activationId: "DEFAULT",
         credentialsGroupKey: "DEFAULT",
-        integrationKey: HTTP_ACTION_KEY,
+        integrationKey: HTTP_INTEGRATION_KEY,
       },
     ];
   }
@@ -166,6 +191,19 @@ export class ActionsService implements IApplicationService {
       },
       configuration
     );
+  }
+
+  async getIntegrationKeyFromActivatedActionId(
+    activatedActionId: string
+  ): Promise<string> {
+    if (activatedActionId === "DEFAULT") {
+      return HTTP_INTEGRATION_KEY;
+    }
+    const activatedAction =
+      await this._activatedActionsPersistenceService.getItemOrFail(
+        activatedActionId
+      );
+    return activatedAction.integrationKey;
   }
 
   async showActionConfig(
@@ -255,5 +293,6 @@ const actionInstancesPersistenceService =
 export const actionsService = new ActionsService(
   activatedActionsPersistenceService,
   actionInstancesPersistenceService,
-  credentialsService
+  credentialsService,
+  appConstantsService
 );

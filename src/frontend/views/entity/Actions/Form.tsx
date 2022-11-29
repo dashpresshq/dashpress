@@ -120,10 +120,11 @@ export function ActionForm({
       })),
     },
     ...selectedImplementation,
-    triggerLogic: {
-      type: "json",
-      validations: [],
-    },
+    // TODO
+    // triggerLogic: {
+    //   type: "json",
+    //   validations: [],
+    // },
   };
   if (currentView.entity) {
     delete fields.entity;
@@ -137,10 +138,16 @@ export function ActionForm({
     };
   }
 
+  const initialValues$1 = Object.entries(
+    initialValues.configuration || {}
+  ).reduce((values, [key, value]) => {
+    return { ...values, [`${CONFIGURATION_FORM_PREFIX}${key}`]: value };
+  }, initialValues);
+
   return (
     <SchemaForm<IActionInstance>
       buttonText="Save"
-      initialValues={initialValues}
+      initialValues={initialValues$1}
       fields={fields}
       onChange={setFormValues}
       action={formAction}

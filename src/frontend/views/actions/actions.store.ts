@@ -10,7 +10,7 @@ import {
 import { useMutation } from "react-query";
 import { reduceStringToNumber } from "shared/lib/templates/reduceStringToNumber";
 import {
-  HTTP_ACTION_KEY,
+  HTTP_INTEGRATION_KEY,
   IIntegrationsList,
   IActivatedAction,
 } from "shared/types/actions";
@@ -45,7 +45,9 @@ export const useActivationConfiguration = (activationId: string) => {
       },
       errorMessage: dataNotFoundMessage("Action Credentials"),
       enabled:
-        !!activationId && !!rootPassword && activationId !== HTTP_ACTION_KEY,
+        !!activationId &&
+        !!rootPassword &&
+        activationId !== HTTP_INTEGRATION_KEY,
     }
   );
 };

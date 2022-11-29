@@ -1,5 +1,5 @@
 import {
-  HTTP_ACTION_KEY,
+  HTTP_INTEGRATION_KEY,
   IActionIntegrationsImplemention,
 } from "shared/types/actions";
 import { HTTP_ACTION_INTEGRATION } from "./http";
@@ -12,7 +12,7 @@ export const ACTION_INTEGRATIONS: Record<
   string,
   IActionIntegrationsImplemention
 > = {
-  [HTTP_ACTION_KEY]: HTTP_ACTION_INTEGRATION,
+  [HTTP_INTEGRATION_KEY]: HTTP_ACTION_INTEGRATION,
   slack: SLACK_ACTION_INTEGRATION,
   smtp: SMTP_ACTION_INTEGRATION,
   sendgrid: SEND_GRID_ACTION_INTEGRATION,

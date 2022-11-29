@@ -47,4 +47,4 @@ export type IIntegrationImplementationList = { key: string } & Pick<
   "label" | "configurationSchema"
 >;
 
-export const HTTP_ACTION_KEY = "http";
+export const HTTP_INTEGRATION_KEY = "http";

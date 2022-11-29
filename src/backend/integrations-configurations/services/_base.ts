@@ -1,6 +1,6 @@
 import { AbstractConfigDataPersistenceService } from "backend/lib/config-persistence";
 import { EncryptionService } from "backend/lib/encryption/encryption.service";
-import { ForbiddenError } from "backend/lib/errors";
+import { ForbiddenError, progammingError } from "backend/lib/errors";
 import { IApplicationService } from "backend/types";
 import noop from "lodash/noop";
 import { IGroupCredential } from "../types";
@@ -52,6 +52,11 @@ export abstract class IntegrationsConfigurationService
   async useGroupValue<T extends Record<string, unknown>>(
     group: IGroupCredential
   ): Promise<T> {
+    progammingError(
+      "Trying to access group credentials for empty fields",
+      group.fields.length === 0
+    );
+
     const allGroupKeys = group.fields.map((field) =>
       this.generateGroupKeyPrefix(group.key, field)
     );

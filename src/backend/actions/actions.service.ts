@@ -111,11 +111,14 @@ export class ActionsService implements IApplicationService {
     });
   }
 
-  async updateActionInstance(instanceId: string, instance: IActionInstance) {
-    await this._actionInstancesPersistenceService.upsertItem(
+  async updateActionInstance(
+    instanceId: string,
+    instance: Omit<IActionInstance, "instanceId">
+  ) {
+    await this._actionInstancesPersistenceService.upsertItem(instanceId, {
+      ...instance,
       instanceId,
-      instance
-    );
+    });
   }
 
   async deleteActionInstance(instanceId: string) {
@@ -198,7 +201,7 @@ export class ActionsService implements IApplicationService {
     );
   }
 
-  async getIntegrationKeyFromActivatedActionId(
+  private async getIntegrationKeyFromActivatedActionId(
     activatedActionId: string
   ): Promise<string> {
     if (activatedActionId === "DEFAULT") {
@@ -221,13 +224,6 @@ export class ActionsService implements IApplicationService {
       await this._activatedActionsPersistenceService.getItemOrFail(
         activationId
       );
-
-    if (
-      Object.keys(ACTION_INTEGRATIONS[integrationKey].configurationSchema)
-        .length === 0
-    ) {
-      return {};
-    }
 
     return await this._credentialsService.useGroupValue({
       key: credentialsGroupKey,

@@ -7,6 +7,8 @@ import { setupRolesTestData } from "./_roles";
 import { setupSchemaTestData } from "./_schema";
 import { setupUsersTestData } from "./_users";
 import { setupIntegrationsEnvTestData } from "./_integrations-env";
+import { setupActivatedActionTestData } from "./_activated-actions";
+import { setupActionInstanceTestData } from "./_action-instances";
 
 export const setupAllTestData = async (domains: ConfigDomain[]) => {
   const allTestData: [ConfigDomain, () => Promise<void>][] = [
@@ -15,6 +17,8 @@ export const setupAllTestData = async (domains: ConfigDomain[]) => {
     ["users", setupUsersTestData],
     ["dashboard", setupDashboardTestData],
     ["schema", setupSchemaTestData],
+    ["activated_actions", setupActivatedActionTestData],
+    ["action_instances", setupActionInstanceTestData],
     ["constants", setupIntegrationsConstantsTestData],
     ["environment-variables", setupIntegrationsEnvTestData],
     ["credentials", setupCredentialsTestData],

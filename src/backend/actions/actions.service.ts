@@ -8,6 +8,7 @@ import {
   createConfigDomainPersistenceService,
   AbstractConfigDataPersistenceService,
 } from "backend/lib/config-persistence";
+import { BadRequestError } from "backend/lib/errors";
 import { validateSchemaRequestBody } from "backend/lib/errors/validate-schema-request-input";
 import { IApplicationService } from "backend/types";
 import { nanoid } from "nanoid";
@@ -97,6 +98,12 @@ export class ActionsService implements IApplicationService {
       ({ activationId }) => action.activatedActionId === activationId
     )?.integrationKey;
 
+    if (!integrationKey) {
+      throw new BadRequestError(
+        `Integration Key not found for activatedActionId '${action.activatedActionId}'`
+      );
+    }
+
     await this._actionInstancesPersistenceService.upsertItem(instanceId, {
       ...action,
       integrationKey,
@@ -126,8 +133,6 @@ export class ActionsService implements IApplicationService {
       ({ integrationKey }) => integrationKey === integrationKey$1
     );
   }
-
-  //
 
   listIntegrations(): IIntegrationsList[] {
     return Object.entries(ACTION_INTEGRATIONS).map(

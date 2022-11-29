@@ -54,8 +54,6 @@ export class ActionsController {
     await this._actionsService.deactivateAction(activationId);
   }
 
-  //
-
   async listEntityActionInstances(entity: string) {
     return await this._actionsService.listEntityActionInstances(entity);
   }

@@ -24,7 +24,9 @@ const customJestConfig = {
 
   roots: ["src"],
 
-  moduleNameMapper: {},
+  moduleNameMapper: {
+    nanoid: "<rootDir>/src/__tests__/__mocks__/nanoid.ts",
+  },
 
   setupFiles: [
     "<rootDir>/src/__tests__/_/setupGlobals.ts",

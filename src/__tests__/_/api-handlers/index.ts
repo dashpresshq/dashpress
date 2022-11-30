@@ -6,6 +6,7 @@ import { dataApiHandlers } from "./data";
 import { rolesApiHandlers } from "./roles";
 import { configApiHandlers } from "./config";
 import { dashboardApiHandlers } from "./dashboard";
+import { integrationsApiHandlers } from "./integrations";
 
 export const apiHandlers = [
   ...setupApiHandlers,
@@ -14,6 +15,7 @@ export const apiHandlers = [
   ...entitiesApiHandlers,
   ...dataApiHandlers,
   ...dataApiHandlers,
+  ...integrationsApiHandlers,
   ...rolesApiHandlers,
   ...configApiHandlers,
   ...dashboardApiHandlers,

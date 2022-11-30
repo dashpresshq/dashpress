@@ -97,7 +97,7 @@ describe("pages/users", () => {
 
     expect(tableRows).toHaveLength(4);
 
-    userEvent.click(
+    await userEvent.click(
       within(tableRows[1]).getByRole("button", {
         name: "Delete Button",
       })
@@ -107,7 +107,7 @@ describe("pages/users", () => {
       name: "Confirm Delete",
     });
 
-    userEvent.click(
+    await userEvent.click(
       await within(confirmBox).findByRole("button", { name: "Confirm" })
     );
 

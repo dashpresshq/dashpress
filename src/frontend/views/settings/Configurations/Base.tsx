@@ -6,9 +6,7 @@ import {
   SoftButton,
   Stack,
   Table,
-  TableSkeleton,
 } from "@hadmean/chromista";
-import { ViewStateMachine } from "frontend/lib/ViewStateMachine";
 import { IntegrationsConfigurationGroup } from "shared/types/integrations";
 import { LINK_TO_DOCS } from "frontend/views/constants";
 import {
@@ -21,7 +19,6 @@ import {
   INTEGRATIONS_GROUP_ENDPOINT,
   useIntegrationConfigurationDeletionMutation,
   useIntegrationConfigurationUpdationMutation,
-  useIntegrationsConfigurationList,
 } from "./configurations.store";
 import { KeyValueForm } from "./Form";
 import { IKeyValue } from "./types";
@@ -38,7 +35,6 @@ export function BaseIntegrationsConfiguration({
     IFEPaginatedDataState<IKeyValue> | IBEPaginatedDataState
   >({ ...DEFAULT_TABLE_PARAMS, pageIndex: 1 });
 
-  const configurationList = useIntegrationsConfigurationList(group);
   const upsertConfigurationMutation =
     useIntegrationConfigurationUpdationMutation(group);
   const deleteConfigurationMutation =
@@ -103,49 +99,43 @@ export function BaseIntegrationsConfiguration({
           },
         ]}
       >
-        <ViewStateMachine
-          loading={configurationList.isLoading}
-          error={configurationList.error}
-          loader={<TableSkeleton />}
-        >
-          <Table
-            {...{
-              tableData,
-              setPaginatedDataState,
-              paginatedDataState,
-            }}
-            // TODO emptyMessage="No ${INTEGRATIONS_GROUP_LABEL[group].label}"
-            columns={[
-              {
-                Header: "Key",
-                accessor: "key",
-                disableSortBy: true,
-                // eslint-disable-next-line react/no-unstable-nested-components
-                Cell: ({ value }: { value: unknown }) => (
-                  <span
-                    dangerouslySetInnerHTML={{ __html: `{{ ENV.${value} }}` }}
-                  />
-                ),
-              },
-              {
-                Header: "Value",
-                accessor: "value",
-                disableSortBy: true,
-              },
-              {
-                Header: "Action",
-                Cell: MemoizedAction,
-              },
-            ]}
-          />
-        </ViewStateMachine>
+        <Table
+          {...{
+            tableData,
+            setPaginatedDataState,
+            paginatedDataState,
+          }}
+          // TODO emptyMessage="No ${INTEGRATIONS_GROUP_LABEL[group].label}"
+          columns={[
+            {
+              Header: "Key",
+              accessor: "key",
+              disableSortBy: true,
+              // eslint-disable-next-line react/no-unstable-nested-components
+              Cell: ({ value }: { value: unknown }) => (
+                <span
+                  dangerouslySetInnerHTML={{ __html: `{{ ENV.${value} }}` }}
+                />
+              ),
+            },
+            {
+              Header: "Value",
+              accessor: "value",
+              disableSortBy: true,
+            },
+            {
+              Header: "Action",
+              Cell: MemoizedAction,
+            },
+          ]}
+        />
       </SectionBox>
 
       <OffCanvas
         title={
           currentConfigItem === NEW_CONFIG_ITEM
-            ? `New ${INTEGRATIONS_GROUP_LABEL[group].singular}`
-            : `Edit ${INTEGRATIONS_GROUP_LABEL[group].singular}`
+            ? `Create ${INTEGRATIONS_GROUP_LABEL[group].singular}`
+            : `Update ${INTEGRATIONS_GROUP_LABEL[group].singular}`
         }
         onClose={closeConfigItem}
         show={!!currentConfigItem}

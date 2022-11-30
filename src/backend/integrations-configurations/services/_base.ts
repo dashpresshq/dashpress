@@ -53,7 +53,7 @@ export abstract class IntegrationsConfigurationService
     group: IGroupCredential
   ): Promise<T> {
     progammingError(
-      "Trying to access group credentials for empty fields",
+      "You are trying to access group credentials with empty fields",
       group.fields.length === 0
     );
 

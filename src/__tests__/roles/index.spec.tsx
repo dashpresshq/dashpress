@@ -109,7 +109,7 @@ describe("pages/roles", () => {
       })
     ).not.toBeInTheDocument();
 
-    userEvent.click(
+    await userEvent.click(
       within(tableRows[4]).getByRole("button", {
         name: "Delete Button",
       })
@@ -119,7 +119,7 @@ describe("pages/roles", () => {
       name: "Confirm Delete",
     });
 
-    userEvent.click(
+    await userEvent.click(
       await within(confirmBox).findByRole("button", { name: "Confirm" })
     );
 

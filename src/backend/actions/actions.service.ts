@@ -177,18 +177,19 @@ export class ActionsService implements IApplicationService {
     integrationKey: string,
     configuration: Record<string, string>
   ): Promise<void> {
+    validateSchemaRequestBody(
+      ACTION_INTEGRATIONS[integrationKey].configurationSchema,
+      configuration
+    );
+
     const activationId = nanoid();
     const credentialsGroupKey = integrationKey.toUpperCase();
+
     await this._activatedActionsPersistenceService.upsertItem(activationId, {
       activationId,
       integrationKey,
       credentialsGroupKey,
     });
-
-    validateSchemaRequestBody(
-      ACTION_INTEGRATIONS[integrationKey].configurationSchema,
-      configuration
-    );
 
     await this._credentialsService.upsertGroup(
       {
@@ -233,6 +234,7 @@ export class ActionsService implements IApplicationService {
     });
   }
 
+  // TODO require password to update action config
   async updateActionConfig(
     activationId: string,
     configuration: Record<string, string>

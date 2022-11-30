@@ -1,9 +1,7 @@
 import {
-  dataNotFoundMessage,
   makeDeleteRequest,
   makePutRequest,
   MutationsLang,
-  useApi,
   useWaitForResponseMutationOptions,
 } from "@hadmean/protozoa";
 import { useMutation } from "react-query";
@@ -13,13 +11,6 @@ import { INTEGRATIONS_GROUP_LABEL } from "./constants";
 export const INTEGRATIONS_GROUP_ENDPOINT = (
   group: IntegrationsConfigurationGroup
 ) => `/api/integrations/${group}`;
-
-export const useIntegrationsConfigurationList = (
-  group: IntegrationsConfigurationGroup
-) =>
-  useApi<Record<string, string>>(INTEGRATIONS_GROUP_ENDPOINT(group), {
-    errorMessage: dataNotFoundMessage(INTEGRATIONS_GROUP_LABEL[group].label),
-  });
 
 export function useIntegrationConfigurationUpdationMutation(
   group: IntegrationsConfigurationGroup

@@ -29,7 +29,7 @@ describe("/api/actions/active", () => {
           "integrationKey": "slack",
         },
         {
-          "activationId": "DEFAULT",
+          "activationId": "http",
           "credentialsGroupKey": "none-existent",
           "integrationKey": "http",
         },

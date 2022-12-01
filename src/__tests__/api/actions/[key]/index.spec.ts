@@ -16,7 +16,7 @@ jest.mock("nanoid", () => ({
 
 describe("/api/actions/[key]/index", () => {
   beforeAll(async () => {
-    await setupAllTestData(["action_instances", "users"]);
+    await setupAllTestData(["activated_actions", "users"]);
 
     await setupActionInstanceTestData([
       {

@@ -1,4 +1,5 @@
 import handler from "pages/api/actions/[key]/credentials";
+import { HTTP_ACTIVATION_ID } from "shared/types/actions";
 import {
   createAuthenticatedMocks,
   setupAllTestData,
@@ -72,7 +73,7 @@ describe("/api/actions/[key]/credentials", () => {
     const { req, res } = createAuthenticatedMocks({
       method: "POST",
       query: {
-        key: "DEFAULT",
+        key: HTTP_ACTIVATION_ID,
       },
       body: {
         password: "password",

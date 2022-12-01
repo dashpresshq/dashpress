@@ -1,5 +1,6 @@
 import handler from "pages/api/actions/instances/index";
 import getHandler from "pages/api/actions/instances/[key]";
+import { HTTP_ACTIVATION_ID } from "shared/types/actions";
 import {
   createAuthenticatedMocks,
   setupAllTestData,
@@ -43,7 +44,7 @@ describe("/api/actions/instances/index", () => {
     const { req, res } = createAuthenticatedMocks({
       method: "POST",
       body: {
-        activatedActionId: "DEFAULT",
+        activatedActionId: HTTP_ACTIVATION_ID,
         entity: "test-entity",
         implementationKey: "PUT",
         triggerLogic: "some trigger logic",
@@ -117,7 +118,7 @@ describe("/api/actions/instances/index", () => {
           "triggerLogic": "some trigger logic",
         },
         {
-          "activatedActionId": "DEFAULT",
+          "activatedActionId": "http",
           "configuration": {
             "body": "{"me": "you"}",
             "headers": "{"me": "you"}",

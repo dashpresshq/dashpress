@@ -1,5 +1,5 @@
 import handler from "pages/api/actions/instances/[key]";
-import { IActionInstance } from "shared/types/actions";
+import { HTTP_ACTIVATION_ID, IActionInstance } from "shared/types/actions";
 import {
   createAuthenticatedMocks,
   setupAllTestData,
@@ -45,7 +45,7 @@ const TEST_ACTION_INSTANCES: IActionInstance[] = [
   },
   {
     instanceId: "instance-id-4",
-    activatedActionId: "DEFAULT",
+    activatedActionId: HTTP_ACTIVATION_ID,
     integrationKey: "http",
     entity: "secondary-model",
     implementationKey: "POST",

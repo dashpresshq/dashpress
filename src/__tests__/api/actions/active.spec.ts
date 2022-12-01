@@ -30,7 +30,7 @@ describe("/api/actions/active", () => {
         },
         {
           "activationId": "DEFAULT",
-          "credentialsGroupKey": "DEFAULT",
+          "credentialsGroupKey": "none-existent",
           "integrationKey": "http",
         },
       ]

@@ -48,3 +48,4 @@ export type IIntegrationImplementationList = { key: string } & Pick<
 >;
 
 export const HTTP_INTEGRATION_KEY = "http";
+export const HTTP_ACTIVATION_ID = "http";

@@ -1,5 +1,5 @@
 import { createConfigDomainPersistenceService } from "backend/lib/config-persistence";
-import { IActionInstance } from "shared/types/actions";
+import { HTTP_ACTIVATION_ID, IActionInstance } from "shared/types/actions";
 
 const TEST_ACTION_INSTANCES: IActionInstance[] = [
   {
@@ -16,7 +16,7 @@ const TEST_ACTION_INSTANCES: IActionInstance[] = [
   },
   {
     instanceId: "instance-id-2",
-    activatedActionId: "DEFAULT",
+    activatedActionId: HTTP_ACTIVATION_ID,
     integrationKey: "http",
     entity: "secondary-model",
     implementationKey: "POST",

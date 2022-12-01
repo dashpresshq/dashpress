@@ -19,6 +19,7 @@ import {
   IActionInstance,
   IActivatedAction,
   IIntegrationImplementationList,
+  HTTP_ACTIVATION_ID,
 } from "shared/types/actions";
 import { ACTION_INTEGRATIONS } from ".";
 
@@ -166,8 +167,8 @@ export class ActionsService implements IApplicationService {
     return [
       ...activatedActions,
       {
-        activationId: "DEFAULT",
-        credentialsGroupKey: "DEFAULT",
+        activationId: HTTP_ACTIVATION_ID,
+        credentialsGroupKey: "none-existent",
         integrationKey: HTTP_INTEGRATION_KEY,
       },
     ];
@@ -205,7 +206,7 @@ export class ActionsService implements IApplicationService {
   private async getIntegrationKeyFromActivatedActionId(
     activatedActionId: string
   ): Promise<string> {
-    if (activatedActionId === "DEFAULT") {
+    if (activatedActionId === HTTP_ACTIVATION_ID) {
       return HTTP_INTEGRATION_KEY;
     }
     const activatedAction =
@@ -218,7 +219,7 @@ export class ActionsService implements IApplicationService {
   async showActionConfig(
     activationId: string
   ): Promise<Record<string, unknown>> {
-    if (activationId === "DEFAULT") {
+    if (activationId === HTTP_ACTIVATION_ID) {
       return {};
     }
     const { credentialsGroupKey, integrationKey } =

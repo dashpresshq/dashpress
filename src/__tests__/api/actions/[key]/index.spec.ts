@@ -140,8 +140,8 @@ describe("/api/actions/[key]/index", () => {
                   "integrationKey": "slack",
                 },
                 {
-                  "activationId": "DEFAULT",
-                  "credentialsGroupKey": "DEFAULT",
+                  "activationId": "http",
+                  "credentialsGroupKey": "none-existent",
                   "integrationKey": "http",
                 },
               ]
@@ -324,8 +324,8 @@ describe("/api/actions/[key]/index", () => {
                   "integrationKey": "slack",
                 },
                 {
-                  "activationId": "DEFAULT",
-                  "credentialsGroupKey": "DEFAULT",
+                  "activationId": "http",
+                  "credentialsGroupKey": "none-existent",
                   "integrationKey": "http",
                 },
               ]

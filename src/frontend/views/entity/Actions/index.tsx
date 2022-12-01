@@ -20,6 +20,8 @@ export function EntityFormActionsSettings() {
       <SectionBox
         title="Form Integrations"
         iconButtons={[
+          // TODO link to constants
+          // TODO link to add more integrations
           {
             action: LINK_TO_DOCS("app-configuration/TODO"),
             icon: "help",

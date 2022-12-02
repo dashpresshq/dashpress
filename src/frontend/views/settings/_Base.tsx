@@ -16,43 +16,49 @@ interface IProps {
 
 export function BaseSettingsLayout({ children }: IProps) {
   const router = useRouter();
+  const baseMenuItems = [
+    {
+      action: NAVIGATION_LINKS.SETTINGS.ENTITIES,
+      name: "Entities",
+      IconComponent: Columns,
+    },
+    {
+      action: NAVIGATION_LINKS.SETTINGS.DATE,
+      name: "Date Format",
+      IconComponent: Calendar,
+    },
+    {
+      action: NAVIGATION_LINKS.SETTINGS.SYSTEM,
+      name: "System",
+      IconComponent: Server,
+    },
+    {
+      action: NAVIGATION_LINKS.SETTINGS.THEME,
+      name: "Theme",
+      IconComponent: Eye,
+    },
+    {
+      action: NAVIGATION_LINKS.SETTINGS.SITE,
+      name: "Site",
+      IconComponent: Globe,
+    },
+  ];
+
+  const featureFlagMenuItems = process.env.NEXT_PUBLIC_SHOW_UNFINISHED_FEATURES
+    ? [
+        {
+          action: NAVIGATION_LINKS.SETTINGS.CONFIGURATIONS,
+          name: "Constants",
+          IconComponent: Edit3,
+        },
+      ]
+    : [];
   return (
     <AppLayout>
       <SectionRow>
         <SectionLeft>
           <MenuSection
-            menuItems={[
-              {
-                action: NAVIGATION_LINKS.SETTINGS.ENTITIES,
-                name: "Entities",
-                IconComponent: Columns,
-              },
-              {
-                action: NAVIGATION_LINKS.SETTINGS.DATE,
-                name: "Date Format",
-                IconComponent: Calendar,
-              },
-              {
-                action: NAVIGATION_LINKS.SETTINGS.SYSTEM,
-                name: "System",
-                IconComponent: Server,
-              },
-              {
-                action: NAVIGATION_LINKS.SETTINGS.THEME,
-                name: "Theme",
-                IconComponent: Eye,
-              },
-              {
-                action: NAVIGATION_LINKS.SETTINGS.SITE,
-                name: "Site",
-                IconComponent: Globe,
-              },
-              {
-                action: NAVIGATION_LINKS.SETTINGS.CONFIGURATIONS,
-                name: "Constants",
-                IconComponent: Edit3,
-              },
-            ]}
+            menuItems={[...baseMenuItems, ...featureFlagMenuItems]}
             currentMenuItem={router.asPath.split("?")[0]}
           />
         </SectionLeft>

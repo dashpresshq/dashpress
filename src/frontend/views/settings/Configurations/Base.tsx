@@ -105,7 +105,7 @@ export function BaseIntegrationsConfiguration({
             setPaginatedDataState,
             paginatedDataState,
           }}
-          // TODO emptyMessage="No ${INTEGRATIONS_GROUP_LABEL[group].label}"
+          emptyMessage={`No ${INTEGRATIONS_GROUP_LABEL[group].label} Has Been Added Yet`}
           columns={[
             {
               Header: "Key",

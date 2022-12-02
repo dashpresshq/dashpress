@@ -126,7 +126,9 @@ export function BaseActionInstances({ entity, integrationKey }: IProps) {
             setPaginatedDataState,
             paginatedDataState,
           }}
-          // TODO emptyMessage="No ${INTEGRATIONS_GROUP_LABEL[group].label}"
+          emptyMessage={`No Form Integration Has Been Registered For This ${
+            entity ? "Entity" : "Action"
+          }`}
           columns={[
             integrationKey
               ? {

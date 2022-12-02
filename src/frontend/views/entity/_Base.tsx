@@ -64,7 +64,7 @@ export function BaseEntitySettingsLayout({ children }: IProps) {
     },
   ];
 
-  const featureFlagMenuItems = process.env.NEXT_PUBLIC_FEATURE_FLAG
+  const featureFlagMenuItems = process.env.NEXT_PUBLIC_SHOW_UNFINISHED_FEATURES
     ? [
         {
           action: NAVIGATION_LINKS.ENTITY.CONFIG.FORM_INTEGRATIONS(entity),

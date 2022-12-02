@@ -72,7 +72,7 @@ export const useSelectionViews = (): ILayoutSelectionView[] => {
     },
   ].filter(({ isPermissionAllowed, featureFlag }) => {
     if (featureFlag) {
-      return process.env.NEXT_PUBLIC_FEATURE_FLAG;
+      return process.env.NEXT_PUBLIC_SHOW_UNFINISHED_FEATURES;
     }
     if (isPermissionAllowed === undefined) {
       return true;

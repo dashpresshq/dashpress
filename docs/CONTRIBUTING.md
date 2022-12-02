@@ -20,7 +20,7 @@ To set up a development environment, please follow these steps:
 2. Install dependencies
 
    ```sh
-   yarn install
+   npm install
    ```
 
 3. Run the app

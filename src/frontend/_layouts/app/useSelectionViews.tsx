@@ -48,6 +48,7 @@ export const useSelectionViews = (): ILayoutSelectionView[] => {
       icon: Zap,
       action: ROOT_LINKS_TO_CLEAR_BREADCRUMBS.ACTIONS,
       isPermissionAllowed: hasPermission(USER_PERMISSIONS.CAN_MANAGE_ACTIONS),
+      featureFlag: true,
     },
     {
       title: "Settings",
@@ -69,7 +70,10 @@ export const useSelectionViews = (): ILayoutSelectionView[] => {
         USER_PERMISSIONS.CAN_MANAGE_PERMISSIONS
       ),
     },
-  ].filter(({ isPermissionAllowed }) => {
+  ].filter(({ isPermissionAllowed, featureFlag }) => {
+    if (featureFlag) {
+      return process.env.NEXT_PUBLIC_FEATURE_FLAG;
+    }
     if (isPermissionAllowed === undefined) {
       return true;
     }

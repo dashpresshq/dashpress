@@ -12,11 +12,11 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Install modules
-      run: yarn
+      run: npm install
     - name: Start Redis
       uses: supercharge/redis-github-action@1.4.0
     - name: Run Verification
-      run: yarn run verify
+      run: npm run verify
     - name: Publish code coverage to CodeClimate
       uses: paambaati/codeclimate-action@v3.0.0
       env:

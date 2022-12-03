@@ -35,7 +35,7 @@ describe("/api/actions/integrations/index", () => {
                 },
               ],
             },
-            "defaultSenderAddress": {
+            "defaultSenderEmail": {
               "type": "text",
               "validations": [],
             },
@@ -89,7 +89,7 @@ describe("/api/actions/integrations/index", () => {
                 },
               ],
             },
-            "defaultSenderAddress": {
+            "defaultSenderEmail": {
               "type": "text",
               "validations": [],
             },
@@ -111,6 +111,14 @@ describe("/api/actions/integrations/index", () => {
                   "validationType": "required",
                 },
               ],
+            },
+            "defaultSenderEmail": {
+              "type": "text",
+              "validations": [],
+            },
+            "defaultSenderName": {
+              "type": "text",
+              "validations": [],
             },
             "domain": {
               "type": "text",

@@ -20,6 +20,14 @@ const CONFIGURATION_SCHEMA: IAppliedSchemaFormConfig<IActionConfig> = {
       },
     ],
   },
+  defaultSenderName: {
+    type: "text",
+    validations: [],
+  },
+  defaultSenderEmail: {
+    type: "text",
+    validations: [],
+  },
 };
 
 export const MAIL_GUN_ACTION_INTEGRATION: IActionIntegrationsImplemention = {

@@ -139,14 +139,14 @@ describe("/api/actions/integrations/[key]", () => {
         {
           "configurationSchema": {
             "body": {
-              "type": "textarea",
+              "type": "richtext",
               "validations": [
                 {
                   "validationType": "required",
                 },
               ],
             },
-            "overrideSenderAddress": {
+            "overrideSenderEmail": {
               "type": "text",
               "validations": [],
             },
@@ -171,8 +171,8 @@ describe("/api/actions/integrations/[key]", () => {
               ],
             },
           },
-          "key": "SEND_MESSAGE",
-          "label": "Send Message",
+          "key": "SEND_MAIL",
+          "label": "Send Mail",
         },
       ]
     `);

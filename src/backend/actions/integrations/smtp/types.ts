@@ -4,5 +4,5 @@ export type IActionConfig = {
   authUser: string;
   authPassword: string;
   defaultSenderName: string;
-  defaultSenderAddress: string;
+  defaultSenderEmail: string;
 };

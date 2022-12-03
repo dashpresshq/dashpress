@@ -1,4 +1,4 @@
-import { HTTP_ACTION_INTEGRATION } from ".";
+import { HTTP_ACTION_INTEGRATION } from "..";
 
 describe.skip("HTTP Action", () => {
   it("should call go GET correctly", () => {

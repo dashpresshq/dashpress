@@ -41,7 +41,7 @@ const CONFIGURATION_SCHEMA: IAppliedSchemaFormConfig<IActionConfig> = {
     type: "text",
     validations: [],
   },
-  defaultSenderAddress: {
+  defaultSenderEmail: {
     type: "text",
     validations: [],
   },

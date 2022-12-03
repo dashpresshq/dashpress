@@ -1,5 +1,5 @@
 export type IActionConfig = {
   apiKey: string;
-  defaultSenderName: string;
-  defaultSenderAddress: string;
+  defaultSenderName?: string;
+  defaultSenderEmail?: string;
 };

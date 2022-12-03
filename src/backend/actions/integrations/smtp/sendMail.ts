@@ -7,7 +7,7 @@ interface IConfig {
   subject: string;
   body: string;
   overrideSenderName: string;
-  overrideSenderAddress: string;
+  overrideSenderEmail: string;
 }
 
 const CONFIG_SCHEMA: IAppliedSchemaFormConfig<IConfig> = {
@@ -28,7 +28,7 @@ const CONFIG_SCHEMA: IAppliedSchemaFormConfig<IConfig> = {
     ],
   },
   body: {
-    type: "textarea",
+    type: "richtext",
     validations: [
       {
         validationType: "required",
@@ -39,7 +39,7 @@ const CONFIG_SCHEMA: IAppliedSchemaFormConfig<IConfig> = {
     type: "text",
     validations: [],
   },
-  overrideSenderAddress: {
+  overrideSenderEmail: {
     type: "text",
     validations: [],
   },
@@ -53,9 +53,9 @@ export const SEND_MAIL = {
     config: IConfig
   ) => {
     await instance[0].sendMail({
-      from: config.overrideSenderAddress
-        ? `${config.overrideSenderName} <${config.overrideSenderAddress}>`
-        : `${instance[1].defaultSenderName} <${instance[1].defaultSenderAddress}>`,
+      from: config.overrideSenderEmail
+        ? `${config.overrideSenderName} <${config.overrideSenderEmail}>`
+        : `${instance[1].defaultSenderName} <${instance[1].defaultSenderEmail}>`,
       to: config.to, // "bar@example.com, baz@example.com",
       subject: config.subject,
       html: config.body,

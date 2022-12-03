@@ -8,16 +8,16 @@ interface IConfig {
 }
 
 const CONFIG_SCHEMA: IAppliedSchemaFormConfig<IConfig> = {
-  message: {
-    type: "textarea",
+  channel: {
+    type: "text",
     validations: [
       {
         validationType: "required",
       },
     ],
   },
-  channel: {
-    type: "text",
+  message: {
+    type: "richtext", // :eyes
     validations: [
       {
         validationType: "required",
@@ -38,7 +38,7 @@ export const SEND_MESSAGE = {
       }),
       headers: JSON.stringify({
         "Content-Type": "application/json",
-        Authorization: `Bearer  ${config.token}`,
+        Authorization: `Bearer ${config.token}`,
       }),
     });
   },

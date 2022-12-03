@@ -1,9 +1,10 @@
 import { IAppliedSchemaFormConfig } from "shared/form-schemas/types";
 import { IActionIntegrationsImplemention } from "shared/types/actions";
+import nodemailer from "nodemailer";
 import { SEND_MAIL } from "./sendMail";
 import { IActionConfig } from "./types";
 
-export const CONFIGURATION_SCHEMA: IAppliedSchemaFormConfig<IActionConfig> = {
+const CONFIGURATION_SCHEMA: IAppliedSchemaFormConfig<IActionConfig> = {
   host: {
     type: "text",
     validations: [
@@ -19,10 +20,6 @@ export const CONFIGURATION_SCHEMA: IAppliedSchemaFormConfig<IActionConfig> = {
         validationType: "required",
       },
     ],
-  },
-  secure: {
-    type: "boolean",
-    validations: [],
   },
   authUser: {
     type: "text",
@@ -55,7 +52,18 @@ export const SMTP_ACTION_INTEGRATION: IActionIntegrationsImplemention = {
   description: "Send emails through SMTP",
   configurationSchema: CONFIGURATION_SCHEMA,
   connect: async (config: IActionConfig) => {
-    return config;
+    return [
+      nodemailer.createTransport({
+        host: config.host,
+        port: config.port,
+        secure: `${config.port}` === "465",
+        auth: {
+          user: config.authUser,
+          pass: config.authPassword,
+        },
+      }),
+      config,
+    ];
   },
   performsImplementation: {
     SEND_MAIL,

@@ -60,7 +60,7 @@ export const SEND_MAIL = {
       body: form,
       headers: JSON.stringify({
         "Content-Type": "application/x-www-form-urlencoded",
-        Authorization: `Basic ${btoa("api:YOUR_API_KEY")}`,
+        Authorization: `Basic ${btoa(`api:${config.apiKey}`)}`,
       }),
     });
   },

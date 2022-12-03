@@ -19,45 +19,6 @@ describe("/api/actions/integrations/index", () => {
         },
         {
           "configurationSchema": {
-            "token": {
-              "type": "text",
-              "validations": [
-                {
-                  "validationType": "required",
-                },
-              ],
-            },
-          },
-          "description": "Send Message to the ones you love",
-          "key": "slack",
-          "title": "Slack",
-        },
-        {
-          "configurationSchema": {
-            "accountSid": {
-              "label": "Account SID",
-              "type": "text",
-              "validations": [
-                {
-                  "validationType": "required",
-                },
-              ],
-            },
-            "authToken": {
-              "type": "text",
-              "validations": [
-                {
-                  "validationType": "required",
-                },
-              ],
-            },
-          },
-          "description": "Send Message to the ones you love",
-          "key": "twilio",
-          "title": "Twilio",
-        },
-        {
-          "configurationSchema": {
             "authPassword": {
               "type": "text",
               "validations": [
@@ -98,14 +59,25 @@ describe("/api/actions/integrations/index", () => {
                 },
               ],
             },
-            "secure": {
-              "type": "boolean",
-              "validations": [],
-            },
           },
-          "description": "Send Message to the ones you love",
+          "description": "Send emails through SMTP",
           "key": "smtp",
           "title": "SMTP",
+        },
+        {
+          "configurationSchema": {
+            "token": {
+              "type": "text",
+              "validations": [
+                {
+                  "validationType": "required",
+                },
+              ],
+            },
+          },
+          "description": "Send messages to your Slack channels",
+          "key": "slack",
+          "title": "Slack",
         },
         {
           "configurationSchema": {
@@ -117,8 +89,16 @@ describe("/api/actions/integrations/index", () => {
                 },
               ],
             },
+            "defaultSenderAddress": {
+              "type": "text",
+              "validations": [],
+            },
+            "defaultSenderName": {
+              "type": "text",
+              "validations": [],
+            },
           },
-          "description": "Send Message to the ones you love",
+          "description": "Send emails through SendGrid",
           "key": "sendgrid",
           "title": "SendGrid",
         },
@@ -141,9 +121,33 @@ describe("/api/actions/integrations/index", () => {
               ],
             },
           },
-          "description": "Send Message to the ones you love",
+          "description": "Send emails through Mailgun",
           "key": "mailgun",
           "title": "Mail Gun",
+        },
+        {
+          "configurationSchema": {
+            "accountSid": {
+              "label": "Account SID",
+              "type": "text",
+              "validations": [
+                {
+                  "validationType": "required",
+                },
+              ],
+            },
+            "authToken": {
+              "type": "text",
+              "validations": [
+                {
+                  "validationType": "required",
+                },
+              ],
+            },
+          },
+          "description": "Send SMS through Twilio",
+          "key": "twilio",
+          "title": "Twilio",
         },
       ]
     `);

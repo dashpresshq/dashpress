@@ -34,6 +34,7 @@
     "@hadmean/protozoa": "^1.0.14",
     "@types/cryptr": "^4.0.1",
     "@types/jsonwebtoken": "^8.5.8",
+    "@types/nodemailer": "^6.4.6",
     "bcrypt": "^5.0.1",
     "chalk": "^5.0.1",
     "change-case": "^4.1.2",

@@ -3,7 +3,7 @@ import { IActionIntegrationsImplemention } from "shared/types/actions";
 import { SEND_MAIL } from "./sendMail";
 import { IActionConfig } from "./types";
 
-export const CONFIGURATION_SCHEMA: IAppliedSchemaFormConfig<IActionConfig> = {
+const CONFIGURATION_SCHEMA: IAppliedSchemaFormConfig<IActionConfig> = {
   apiKey: {
     type: "text",
     validations: [

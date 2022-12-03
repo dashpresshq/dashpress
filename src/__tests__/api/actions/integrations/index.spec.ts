@@ -34,6 +34,30 @@ describe("/api/actions/integrations/index", () => {
         },
         {
           "configurationSchema": {
+            "accountSid": {
+              "label": "Account SID",
+              "type": "text",
+              "validations": [
+                {
+                  "validationType": "required",
+                },
+              ],
+            },
+            "authToken": {
+              "type": "text",
+              "validations": [
+                {
+                  "validationType": "required",
+                },
+              ],
+            },
+          },
+          "description": "Send Message to the ones you love",
+          "key": "twilio",
+          "title": "Twilio",
+        },
+        {
+          "configurationSchema": {
             "authPassword": {
               "type": "text",
               "validations": [
@@ -120,36 +144,6 @@ describe("/api/actions/integrations/index", () => {
           "description": "Send Message to the ones you love",
           "key": "mailgun",
           "title": "Mail Gun",
-        },
-        {
-          "configurationSchema": {
-            "token": {
-              "type": "text",
-              "validations": [
-                {
-                  "validationType": "required",
-                },
-              ],
-            },
-          },
-          "description": "Send Message to the ones you love",
-          "key": "twilio",
-          "title": "Slack",
-        },
-        {
-          "configurationSchema": {
-            "token": {
-              "type": "text",
-              "validations": [
-                {
-                  "validationType": "required",
-                },
-              ],
-            },
-          },
-          "description": "Send Message to the ones you love",
-          "key": "zapier",
-          "title": "Slack",
         },
       ]
     `);

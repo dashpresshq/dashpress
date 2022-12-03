@@ -21,7 +21,7 @@ import {
   IIntegrationImplementationList,
   HTTP_ACTIVATION_ID,
 } from "shared/types/actions";
-import { ACTION_INTEGRATIONS } from ".";
+import { ACTION_INTEGRATIONS } from "./integrations";
 
 export class ActionsService implements IApplicationService {
   constructor(

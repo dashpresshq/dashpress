@@ -1,7 +1,7 @@
 import { IAppliedSchemaFormConfig } from "shared/form-schemas/types";
 import { IActionIntegrationsImplemention } from "shared/types/actions";
 
-interface ISMTPActionConfig {
+type IActionConfig = {
   host: string;
   port: number;
   secure: true;
@@ -9,55 +9,54 @@ interface ISMTPActionConfig {
   authPassword: string;
   defaultSenderName: string;
   defaultSenderAddress: string;
-}
+};
 
-export const CONFIGURATION_SCHEMA: IAppliedSchemaFormConfig<ISMTPActionConfig> =
-  {
-    host: {
-      type: "text",
-      validations: [
-        {
-          validationType: "required",
-        },
-      ],
-    },
-    port: {
-      type: "number",
-      validations: [
-        {
-          validationType: "required",
-        },
-      ],
-    },
-    secure: {
-      type: "boolean",
-      validations: [],
-    },
-    authUser: {
-      type: "text",
-      validations: [
-        {
-          validationType: "required",
-        },
-      ],
-    },
-    authPassword: {
-      type: "text",
-      validations: [
-        {
-          validationType: "required",
-        },
-      ],
-    },
-    defaultSenderName: {
-      type: "text",
-      validations: [],
-    },
-    defaultSenderAddress: {
-      type: "text",
-      validations: [],
-    },
-  };
+export const CONFIGURATION_SCHEMA: IAppliedSchemaFormConfig<IActionConfig> = {
+  host: {
+    type: "text",
+    validations: [
+      {
+        validationType: "required",
+      },
+    ],
+  },
+  port: {
+    type: "number",
+    validations: [
+      {
+        validationType: "required",
+      },
+    ],
+  },
+  secure: {
+    type: "boolean",
+    validations: [],
+  },
+  authUser: {
+    type: "text",
+    validations: [
+      {
+        validationType: "required",
+      },
+    ],
+  },
+  authPassword: {
+    type: "text",
+    validations: [
+      {
+        validationType: "required",
+      },
+    ],
+  },
+  defaultSenderName: {
+    type: "text",
+    validations: [],
+  },
+  defaultSenderAddress: {
+    type: "text",
+    validations: [],
+  },
+};
 
 interface ISendMessageConfig {
   to: string;
@@ -104,9 +103,10 @@ const SEND_MAIL_SCHEMA: IAppliedSchemaFormConfig<ISendMessageConfig> = {
 
 export const SMTP_ACTION_INTEGRATION: IActionIntegrationsImplemention = {
   title: "SMTP",
-  description: "Send Message to the ones you love",
+  description: "Send emails through SMTP",
   configurationSchema: CONFIGURATION_SCHEMA,
-  connect: async () => {
+  connect: async (config: IActionConfig) => {
+    return config;
     // console.log("Connect to mail");
   },
   performsImplementation: {

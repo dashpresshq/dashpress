@@ -1,12 +1,12 @@
 import { IAppliedSchemaFormConfig } from "shared/form-schemas/types";
 import { IActionIntegrationsImplemention } from "shared/types/actions";
-import { makeActionRequest } from "../makeActionRequest";
+import { makeIntegrationRequest } from "../makeIntegrationRequest";
 
-type ISlackActionConfig = {
+type IActionConfig = {
   token: string;
 };
 
-const CONFIGURATION_SCHEMA: IAppliedSchemaFormConfig<ISlackActionConfig> = {
+const CONFIGURATION_SCHEMA: IAppliedSchemaFormConfig<IActionConfig> = {
   token: {
     type: "text",
     validations: [
@@ -43,20 +43,15 @@ const SEND_MESSAGE_SCHEMA: IAppliedSchemaFormConfig<ISendMessageConfig> = {
 
 export const SLACK_ACTION_INTEGRATION: IActionIntegrationsImplemention = {
   title: "Slack",
-  description: "Send Message to the ones you love",
+  description: "Send messages to your Slack channels",
   configurationSchema: CONFIGURATION_SCHEMA,
-  connect: async (config: ISlackActionConfig) => {
-    return config;
-  },
+  connect: async (config: IActionConfig) => config,
   performsImplementation: {
     SEND_MESSAGE: {
       label: "Send Message",
       configurationSchema: SEND_MESSAGE_SCHEMA,
-      do: async (
-        config: ISlackActionConfig,
-        messageConfig: ISendMessageConfig
-      ) => {
-        makeActionRequest("POST", {
+      do: async (config: IActionConfig, messageConfig: ISendMessageConfig) => {
+        makeIntegrationRequest("POST", {
           url: "https://slack.com/api/chat.postMessage",
           body: JSON.stringify({
             channel: messageConfig.channel,

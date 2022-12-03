@@ -1,6 +1,6 @@
 import { IAppliedSchemaFormConfig } from "shared/form-schemas/types";
 import { IActionIntegrationsImplemention } from "shared/types/actions";
-import { makeActionRequest } from "../makeActionRequest";
+import { makeIntegrationRequest } from "../makeIntegrationRequest";
 
 interface IBase {
   url: string;
@@ -59,28 +59,28 @@ export const HTTP_ACTION_INTEGRATION: IActionIntegrationsImplemention = {
       label: "PUT",
       configurationSchema: ACTION_CONFIGURATION_SCHEMA,
       do: async (_, configuration: IAction) => {
-        await makeActionRequest("POST", configuration);
+        await makeIntegrationRequest("POST", configuration);
       },
     },
     POST: {
       label: "POST",
       configurationSchema: ACTION_CONFIGURATION_SCHEMA,
       do: async (_, configuration: IAction) => {
-        await makeActionRequest("POST", configuration);
+        await makeIntegrationRequest("POST", configuration);
       },
     },
     PATCH: {
       label: "PATCH",
       configurationSchema: ACTION_CONFIGURATION_SCHEMA,
       do: async (_, configuration: IAction) => {
-        await makeActionRequest("PATCH", configuration);
+        await makeIntegrationRequest("PATCH", configuration);
       },
     },
     DELETE: {
       label: "DELETE",
       configurationSchema: ACTION_CONFIGURATION_SCHEMA,
       do: async (_, configuration: IAction) => {
-        await makeActionRequest("DELETE", configuration);
+        await makeIntegrationRequest("DELETE", configuration);
       },
     },
   },

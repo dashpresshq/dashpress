@@ -1,6 +1,6 @@
 import { IAppliedSchemaFormConfig } from "shared/form-schemas/types";
 import { IActionIntegrationsImplemention } from "shared/types/actions";
-import { makeActionRequest } from "../makeActionRequest";
+import { makeIntegrationRequest } from "../makeIntegrationRequest";
 
 type IActionConfig = {
   authToken: string;
@@ -62,19 +62,21 @@ const SEND_MESSAGE_SCHEMA: IAppliedSchemaFormConfig<ISendMessageConfig> = {
 
 export const TWILIO_ACTION_INTEGRATION: IActionIntegrationsImplemention = {
   title: "Twilio",
-  description: "Send Message to the ones you love",
+  description: "Send SMS through Twilio",
   configurationSchema: CONFIGURATION_SCHEMA,
-  connect: async (config: IActionConfig) => {
-    return config;
-  },
+  connect: async (config: IActionConfig) => config,
   performsImplementation: {
     SEND_MESSAGE: {
       label: "Send Message",
       configurationSchema: SEND_MESSAGE_SCHEMA,
       do: async (config: IActionConfig, messageConfig: ISendMessageConfig) => {
-        makeActionRequest("POST", {
+        makeIntegrationRequest("POST", {
           url: `https://api.twilio.com/2010-04-01/Accounts/${config.accountSid}/Messages.json`,
-          body: `From=${messageConfig.from}&Body=${messageConfig.body}&To=${messageConfig.from}`,
+          body: new URLSearchParams({
+            Body: messageConfig.body,
+            From: messageConfig.from,
+            To: messageConfig.to,
+          }).toString(),
           headers: JSON.stringify({
             "Content-Type": "application/x-www-form-urlencoded",
             Authorization: `Basic ${btoa(

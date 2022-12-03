@@ -1,9 +1,10 @@
 interface IConfig {
-  body: string;
+  body: string | FormData;
   url: string;
   headers: string;
 }
-export const makeActionRequest = async (
+
+export const makeIntegrationRequest = async (
   method: "POST" | "PUT" | "PATCH" | "DELETE",
   configuration: IConfig
 ) => {

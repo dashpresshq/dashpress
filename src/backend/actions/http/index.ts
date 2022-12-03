@@ -1,5 +1,6 @@
 import { IAppliedSchemaFormConfig } from "shared/form-schemas/types";
 import { IActionIntegrationsImplemention } from "shared/types/actions";
+import { makeActionRequest } from "../makeActionRequest";
 
 interface IBase {
   url: string;
@@ -31,26 +32,6 @@ const ACTION_CONFIGURATION_SCHEMA: IAppliedSchemaFormConfig<IAction> = {
     type: "json",
     validations: [],
   },
-};
-
-const makeActionRequest = async (
-  method: "POST" | "PUT" | "PATCH" | "DELETE",
-  configuration: IAction
-) => {
-  const response = await fetch(configuration.url, {
-    method,
-    headers: JSON.parse(configuration.headers),
-    body: configuration.body ? configuration.body : undefined,
-  });
-  if (response.ok) {
-    try {
-      return await response.json();
-    } catch (error) {
-      return response;
-    }
-  }
-  const error = await response.json();
-  throw new Error(error.message);
 };
 
 export const HTTP_ACTION_INTEGRATION: IActionIntegrationsImplemention = {

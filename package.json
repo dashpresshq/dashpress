@@ -39,7 +39,6 @@
     "chalk": "^5.0.1",
     "change-case": "^4.1.2",
     "class-validator": "^0.13.2",
-    "crypto-random-string": "^5.0.0",
     "cryptr": "^6.0.3",
     "execa": "^6.1.0",
     "final-form-arrays": "^3.0.2",
@@ -60,7 +59,6 @@
     "react-query": "^3.39.2",
     "react-use": "^17.4.0",
     "redis": "^4.4.0",
-    "styled-bootstrap-grid": "^3.1.2",
     "styled-components": "^5.3.6",
     "terminal-link": "^3.0.0"
   },
@@ -91,7 +89,6 @@
     "prettier": "^2.7.1",
     "rimraf": "^3.0.2",
     "standard-version": "^9.5.0",
-    "ts-node": "^10.8.1",
     "tsup": "^6.2.2",
     "typescript": "^4.7.4"
   },

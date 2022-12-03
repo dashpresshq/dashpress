@@ -1,5 +1,5 @@
 import { SchemaForm } from "frontend/lib/form/SchemaForm";
-import { Tabs, Text } from "@hadmean/chromista";
+import { Spacer, Tabs, Text } from "@hadmean/chromista";
 import { IIntegrationsList, IActivatedAction } from "shared/types/actions";
 import { useEffect } from "react";
 import { ToastService } from "@hadmean/protozoa";
@@ -39,12 +39,19 @@ export function ActionSettingsView({
 
   if (!activeAction) {
     return (
-      <SchemaForm
-        fields={integrationDetail.configurationSchema}
-        onSubmit={activateActionMutation.mutateAsync}
-        initialValues={{}}
-        buttonText={`Activate ${integrationDetail.title}`}
-      />
+      <>
+        <Text textStyle="italic" size="5">
+          All the values provided from this form will encrypted using
+          `aes-256-gcm` before been saved.
+        </Text>
+        <Spacer />
+        <SchemaForm
+          fields={integrationDetail.configurationSchema}
+          onSubmit={activateActionMutation.mutateAsync}
+          initialValues={{}}
+          buttonText={`Activate ${integrationDetail.title}`}
+        />
+      </>
     );
   }
 

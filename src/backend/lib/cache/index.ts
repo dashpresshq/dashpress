@@ -6,7 +6,7 @@ import { CacheAdaptorTypes } from "./types";
 
 export { AbstractCacheService };
 
-export function createCacheService(prefix: string): AbstractCacheService {
+export function createCacheService(prefix: "permission"): AbstractCacheService {
   const configBag: Record<CacheAdaptorTypes, AbstractCacheService> = {
     [CacheAdaptorTypes.Memory]: new MemoryCacheAdaptor(prefix, configService),
     [CacheAdaptorTypes.Redis]: new RedisCacheAdaptor(prefix, configService),

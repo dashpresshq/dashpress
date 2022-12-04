@@ -1,6 +1,9 @@
 import { requestHandler } from "backend/lib/request";
 import { createMocks } from "node-mocks-http";
-import { createAuthenticatedMocks } from "__tests__/api/_test-utils";
+import {
+  createAuthenticatedMocks,
+  setupAllTestData,
+} from "__tests__/api/_test-utils";
 
 const handler = requestHandler({
   GET: async (getValidatedRequest) => {
@@ -10,6 +13,9 @@ const handler = requestHandler({
 });
 
 describe("Request Validations => authenticatedUserValidationImpl", () => {
+  beforeAll(() => {
+    setupAllTestData(["users"]);
+  });
   it("should return authenticated user", async () => {
     const { req, res } = createAuthenticatedMocks({
       method: "GET",

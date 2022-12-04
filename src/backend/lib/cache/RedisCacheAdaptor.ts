@@ -41,4 +41,8 @@ export class RedisCacheAdaptor extends AbstractCacheService {
   async clearItem(key: string) {
     await (await this.getRedisInstance()).del(this.prefixKey(key));
   }
+
+  async purge() {
+    await (await this.getRedisInstance()).flushAll();
+  }
 }

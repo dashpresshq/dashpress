@@ -10,7 +10,7 @@ import { queryFilterValidationImpl as queryFilters } from "./query-filters";
 import { entityRequestBodyValidationImpl as entityRequestBody } from "./entity-request-body";
 import { requestBodyValidationImpl as requestBody } from "./request-body";
 import { guestValidationImpl as guest } from "./guest";
-import { anyBodyValidationImpl as anyBody } from "./anyBody";
+import { anyBodyValidationImpl as anyBody } from "./any-body";
 import { requestQueryValidationImpl as requestQuery } from "./request-query";
 import { canUserValidationImpl as canUser } from "./can-user";
 import { authenticatedUserValidationImpl as authenticatedUser } from "./authenticated-user";
@@ -27,13 +27,13 @@ export const ValidationImpl: Record<
   guest,
   anyBody,
   requestQuery,
-  canUser, //
+  canUser,
   authenticatedUser,
   configBody,
   entityRequestBody,
-  entity, //
-  paginationFilter, //
-  queryFilters, //
+  entity,
+  paginationFilter,
+  queryFilters,
   entityId,
   configKey,
 };

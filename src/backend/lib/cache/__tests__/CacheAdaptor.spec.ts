@@ -71,4 +71,18 @@ describe.each(CACHE_ADAPTORS)("$title cache adaptor", ({ adaptor }) => {
     expect(data).toEqual({ foo: "new-value" });
     expect(implementationMock).toHaveBeenCalled();
   });
+
+  it("should call fetcher after purging key", async () => {
+    const implementationMock = jest.fn();
+
+    await adaptor.purge();
+
+    const data = await adaptor.getItem("foo", async () => {
+      implementationMock();
+      return { foo: "new-value" };
+    });
+
+    expect(data).toEqual({ foo: "new-value" });
+    expect(implementationMock).toHaveBeenCalled();
+  });
 });

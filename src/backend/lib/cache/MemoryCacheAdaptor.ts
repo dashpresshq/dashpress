@@ -3,10 +3,15 @@ import { ConfigService } from "../config/config.service";
 import { AbstractCacheService } from "./AbstractCacheService";
 
 export class MemoryCacheAdaptor extends AbstractCacheService {
-  private data: Record<string, unknown> = {};
+  static data: Record<string, Record<string, unknown>> = {};
 
   constructor(prefix: string, configService: ConfigService) {
     super(prefix, configService);
+    MemoryCacheAdaptor.data[this.prefix] = {};
+  }
+
+  private getData(): Record<string, unknown> {
+    return MemoryCacheAdaptor.data[this.prefix];
   }
 
   async setup() {
@@ -14,14 +19,18 @@ export class MemoryCacheAdaptor extends AbstractCacheService {
   }
 
   async pullItem<T>(key: string): Promise<T | undefined> {
-    return this.data[key] as T;
+    return this.getData()[key] as T;
   }
 
   async persistData(key: string, data: unknown): Promise<void> {
-    this.data[key] = data;
+    MemoryCacheAdaptor.data[this.prefix][key] = data;
   }
 
   async clearItem(key: string) {
-    delete this.data[this.prefixKey(key)];
+    delete this.getData()[this.prefixKey(key)];
+  }
+
+  async purge() {
+    MemoryCacheAdaptor.data[this.prefix] = {};
   }
 }

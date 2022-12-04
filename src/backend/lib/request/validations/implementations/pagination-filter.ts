@@ -1,7 +1,7 @@
 import { IPaginationFilters } from "../../../../data/types";
 import { entityValidationImpl } from "./entity";
 import { ValidationImplType } from "./types";
-import { validateEntityField } from "./_validateEntityField";
+import { validateEntityFields } from "./_validateEntityField";
 
 export const paginationFilterValidationImpl: ValidationImplType<
   IPaginationFilters
@@ -15,7 +15,9 @@ export const paginationFilterValidationImpl: ValidationImplType<
 
   const sortBy = req.query.sortBy as string;
 
-  await validateEntityField(entity, sortBy);
+  if (sortBy) {
+    await validateEntityFields(entity, [sortBy]);
+  }
 
   return {
     take,

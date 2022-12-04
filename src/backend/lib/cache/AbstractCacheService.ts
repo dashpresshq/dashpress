@@ -23,6 +23,8 @@ export abstract class AbstractCacheService {
 
   abstract clearItem(key: string): Promise<void>;
 
+  abstract purge(): Promise<void>;
+
   async getItem<T>(rawKey: string, fetcher: () => Promise<T>) {
     const key = this.prefixKey(rawKey);
 

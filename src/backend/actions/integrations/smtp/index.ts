@@ -1,6 +1,6 @@
 import { IAppliedSchemaFormConfig } from "shared/form-schemas/types";
 import { IActionIntegrationsImplemention } from "shared/types/actions";
-import nodemailer from "nodemailer";
+import { createTransport } from "nodemailer";
 import { SEND_MAIL } from "./sendMail";
 import { IActionConfig } from "./types";
 
@@ -53,7 +53,7 @@ export const SMTP_ACTION_INTEGRATION: IActionIntegrationsImplemention = {
   configurationSchema: CONFIGURATION_SCHEMA,
   connect: async (config: IActionConfig) => {
     return [
-      nodemailer.createTransport({
+      createTransport({
         host: config.host,
         port: config.port,
         secure: `${config.port}` === "465",

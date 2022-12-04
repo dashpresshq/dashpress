@@ -1,11 +1,11 @@
 interface IConfig {
-  body: string | FormData;
+  body?: string | FormData;
   url: string;
   headers: string;
 }
 
 export const makeIntegrationRequest = async (
-  method: "POST" | "PUT" | "PATCH" | "DELETE",
+  method: "POST" | "PUT" | "PATCH" | "DELETE" | "GET",
   configuration: IConfig
 ) => {
   const response = await fetch(configuration.url, {

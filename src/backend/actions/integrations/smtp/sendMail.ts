@@ -1,13 +1,13 @@
 import { IAppliedSchemaFormConfig } from "shared/form-schemas/types";
-import nodemailer from "nodemailer";
+import { Transporter } from "nodemailer";
 import { IActionConfig } from "./types";
 
 interface IConfig {
   to: string;
   subject: string;
   body: string;
-  overrideSenderName: string;
-  overrideSenderEmail: string;
+  overrideSenderName?: string;
+  overrideSenderEmail?: string;
 }
 
 const CONFIG_SCHEMA: IAppliedSchemaFormConfig<IConfig> = {
@@ -49,7 +49,7 @@ export const SEND_MAIL = {
   label: "Send Mail",
   configurationSchema: CONFIG_SCHEMA,
   do: async (
-    instance: [nodemailer.Transporter, IActionConfig],
+    instance: [Partial<Transporter>, IActionConfig],
     config: IConfig
   ) => {
     await instance[0].sendMail({

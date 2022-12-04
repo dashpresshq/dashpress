@@ -44,22 +44,14 @@ export const HTTP_ACTION_INTEGRATION: IActionIntegrationsImplemention = {
       label: "GET",
       configurationSchema: BASE_CONFIGURATION_SCHEMA,
       do: async (_, configuration: IBase) => {
-        const response = await fetch(configuration.url, {
-          method: "GET",
-          headers: JSON.parse(configuration.headers),
-        });
-        if (response.ok) {
-          return await response.json();
-        }
-        const error = await response.json();
-        throw new Error(error.message);
+        await makeIntegrationRequest("GET", configuration);
       },
     },
     PUT: {
       label: "PUT",
       configurationSchema: ACTION_CONFIGURATION_SCHEMA,
       do: async (_, configuration: IAction) => {
-        await makeIntegrationRequest("POST", configuration);
+        await makeIntegrationRequest("PUT", configuration);
       },
     },
     POST: {

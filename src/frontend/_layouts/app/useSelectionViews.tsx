@@ -26,6 +26,7 @@ export const useSelectionViews = (): ILayoutSelectionView[] => {
       title: "Home",
       icon: Home,
       action: ROOT_LINKS_TO_CLEAR_BREADCRUMBS.HOME,
+      featureFlag: false,
     },
     {
       title: "Tables",
@@ -48,7 +49,6 @@ export const useSelectionViews = (): ILayoutSelectionView[] => {
       icon: Zap,
       action: ROOT_LINKS_TO_CLEAR_BREADCRUMBS.ACTIONS,
       isPermissionAllowed: hasPermission(USER_PERMISSIONS.CAN_MANAGE_ACTIONS),
-      featureFlag: true,
     },
     {
       title: "Settings",

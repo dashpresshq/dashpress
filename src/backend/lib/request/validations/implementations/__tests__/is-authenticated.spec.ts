@@ -1,19 +1,24 @@
+import { requestHandler } from "backend/lib/request";
 import { createMocks } from "node-mocks-http";
-import handler from "pages/api/account/mine";
 import signInhandler from "pages/api/auth/signin";
 import { createAuthenticatedMocks } from "__tests__/api/_test-utils";
 
-describe("authenticated ", () => {
-  describe("protectedRoute", () => {
-    it("should return error when no token is passed", async () => {
-      const { req, res } = createMocks({
-        method: "GET",
-      });
+const handler = requestHandler({
+  GET: async () => {
+    return { foo: "bar" };
+  },
+});
 
-      await handler(req, res);
+describe("Request Validations => isAuthenticatedValidationImpl", () => {
+  it("should return error when no token is passed", async () => {
+    const { req, res } = createMocks({
+      method: "GET",
+    });
 
-      expect(res._getStatusCode()).toBe(401);
-      expect(res._getJSONData()).toMatchInlineSnapshot(`
+    await handler(req, res);
+
+    expect(res._getStatusCode()).toBe(401);
+    expect(res._getJSONData()).toMatchInlineSnapshot(`
                 {
                   "errorCode": "NOT_AUTHENTICATED",
                   "message": "No authorization token provided",
@@ -23,20 +28,20 @@ describe("authenticated ", () => {
                   "statusCode": 401,
                 }
               `);
+  });
+
+  it("should return error when empty token is passed", async () => {
+    const { req, res } = createMocks({
+      method: "GET",
+      headers: {
+        authorization: `Bearer `,
+      },
     });
 
-    it("should return error when empty token is passed", async () => {
-      const { req, res } = createMocks({
-        method: "GET",
-        headers: {
-          authorization: `Bearer `,
-        },
-      });
+    await handler(req, res);
 
-      await handler(req, res);
-
-      expect(res._getStatusCode()).toBe(401);
-      expect(res._getJSONData()).toMatchInlineSnapshot(`
+    expect(res._getStatusCode()).toBe(401);
+    expect(res._getJSONData()).toMatchInlineSnapshot(`
                 {
                   "errorCode": "NOT_AUTHENTICATED",
                   "message": "The authorization token provided is empty",
@@ -46,20 +51,20 @@ describe("authenticated ", () => {
                   "statusCode": 401,
                 }
               `);
+  });
+
+  it("should return error when invalid token is passed", async () => {
+    const { req, res } = createMocks({
+      method: "GET",
+      headers: {
+        authorization: `Bearer SOME BAD TOKEN`,
+      },
     });
 
-    it("should return error when invalid token is passed", async () => {
-      const { req, res } = createMocks({
-        method: "GET",
-        headers: {
-          authorization: `Bearer SOME BAD TOKEN`,
-        },
-      });
+    await handler(req, res);
 
-      await handler(req, res);
-
-      expect(res._getStatusCode()).toBe(401);
-      expect(res._getJSONData()).toMatchInlineSnapshot(`
+    expect(res._getStatusCode()).toBe(401);
+    expect(res._getJSONData()).toMatchInlineSnapshot(`
                 {
                   "errorCode": "NOT_AUTHENTICATED",
                   "message": "Invalid Token",
@@ -69,10 +74,24 @@ describe("authenticated ", () => {
                   "statusCode": 401,
                 }
               `);
-    });
   });
 
-  describe("protectedRoute", () => {
+  it("should return correct data for correctly authenticated request", async () => {
+    const { req, res } = createAuthenticatedMocks({
+      method: "GET",
+    });
+
+    await handler(req, res);
+
+    expect(res._getStatusCode()).toBe(200);
+    expect(res._getJSONData()).toMatchInlineSnapshot(`
+        {
+          "foo": "bar",
+        }
+      `);
+  });
+
+  describe("Guest Route", () => {
     it("should return error when request is authenticated", async () => {
       const { req, res } = createAuthenticatedMocks({
         method: "POST",

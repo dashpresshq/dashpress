@@ -81,6 +81,10 @@ export function RenderFormInput({
 
     case "textarea":
       return <FormTextArea {...formProps} />;
+
+    case "richtext":
+      return <FormTextArea {...formProps} />;
+
     default:
       return <FormInput {...formProps} />;
   }

@@ -23,19 +23,19 @@ export const ValidationImpl: Record<
   ValidationKeys["_type"],
   ValidationImplType<any>
 > = {
-  isAuthenticated,
+  isAuthenticated, //
   canCrud,
-  requestBody,
+  requestBody, //
   guest,
-  anyBody,
-  requestQuery,
+  anyBody, //
+  requestQuery, //
   canUser,
-  authenticatedUser,
-  configBody,
-  entityRequestBody,
+  authenticatedUser, //
+  configBody, //
+  entityRequestBody, //
   entity,
   paginationFilter,
   queryFilters,
   entityId,
-  configKey,
+  configKey, //
 };

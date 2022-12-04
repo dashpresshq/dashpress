@@ -42,16 +42,15 @@ export function BaseSettingsLayout({ children }: IProps) {
       name: "Site",
       IconComponent: Globe,
     },
+    {
+      action: NAVIGATION_LINKS.SETTINGS.CONFIGURATIONS,
+      name: "Constants",
+      IconComponent: Edit3,
+    },
   ];
 
   const featureFlagMenuItems = process.env.NEXT_PUBLIC_SHOW_UNFINISHED_FEATURES
-    ? [
-        {
-          action: NAVIGATION_LINKS.SETTINGS.CONFIGURATIONS,
-          name: "Constants",
-          IconComponent: Edit3,
-        },
-      ]
+    ? []
     : [];
   return (
     <AppLayout>

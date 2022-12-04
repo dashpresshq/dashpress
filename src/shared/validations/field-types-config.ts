@@ -126,7 +126,7 @@ export const FIELD_TYPES_CONFIG_MAP: Record<
   image: {
     sortable: false,
     tableFilterType: "not-filterable",
-    allowedValidations: ["maxLength", "minLength", "regex", "required"],
+    allowedValidations: ["required"],
   },
   color: {
     sortable: false,

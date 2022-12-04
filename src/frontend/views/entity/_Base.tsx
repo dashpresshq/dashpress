@@ -62,16 +62,15 @@ export function BaseEntitySettingsLayout({ children }: IProps) {
       name: "Form Scripts",
       IconComponent: Code,
     },
+    {
+      action: NAVIGATION_LINKS.ENTITY.CONFIG.FORM_INTEGRATIONS(entity),
+      name: "Form Integrations",
+      IconComponent: Zap,
+    },
   ];
 
   const featureFlagMenuItems = process.env.NEXT_PUBLIC_SHOW_UNFINISHED_FEATURES
-    ? [
-        {
-          action: NAVIGATION_LINKS.ENTITY.CONFIG.FORM_INTEGRATIONS(entity),
-          name: "Form Integrations",
-          IconComponent: Zap,
-        },
-      ]
+    ? []
     : [];
 
   return (

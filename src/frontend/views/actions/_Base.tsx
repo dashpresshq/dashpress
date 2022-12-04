@@ -77,6 +77,12 @@ export function BaseActionsLayout({ children }: IProps) {
                 name: "Manage Constants",
                 IconComponent: Code,
               },
+              // TODO
+              // {
+              //   action: NAVIGATION_LINKS.ACTIONS.CONSTANTS,
+              //   name: "Manage Credentials",
+              //   IconComponent: Lock,
+              // },
             ]}
             currentMenuItem={router.asPath.split("?")[0]}
           />

@@ -12,4 +12,8 @@ export const INTEGRATIONS_GROUP_LABEL: Record<
     label: "Environment Variables",
     singular: "Environment Variable",
   },
+  credentials: {
+    label: "Credentials",
+    singular: "Credential",
+  },
 };

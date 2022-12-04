@@ -13,7 +13,7 @@ import { useRouteParam } from "@hadmean/protozoa";
 import { ViewStateMachine } from "frontend/lib/ViewStateMachine";
 import { useRouter } from "next/router";
 import { ReactNode } from "react";
-import { Code, Zap, ZapOff } from "react-feather";
+import { Code, Zap, Lock, ZapOff } from "react-feather";
 import { NAVIGATION_LINKS } from "../../lib/routing/links";
 import { AppLayout } from "../../_layouts/app";
 import { useIntegrationsList, useActiveActionList } from "./actions.store";
@@ -77,12 +77,11 @@ export function BaseActionsLayout({ children }: IProps) {
                 name: "Manage Constants",
                 IconComponent: Code,
               },
-              // TODO
-              // {
-              //   action: NAVIGATION_LINKS.ACTIONS.CONSTANTS,
-              //   name: "Manage Credentials",
-              //   IconComponent: Lock,
-              // },
+              {
+                action: NAVIGATION_LINKS.ACTIONS.CREDENTIALS,
+                name: "Manage Credentials",
+                IconComponent: Lock,
+              },
             ]}
             currentMenuItem={router.asPath.split("?")[0]}
           />

@@ -22,7 +22,7 @@ export const ValidationImpl: Record<
   ValidationImplType<any>
 > = {
   isAuthenticated,
-  canCrud, //
+  canCrud,
   requestBody,
   guest,
   anyBody,

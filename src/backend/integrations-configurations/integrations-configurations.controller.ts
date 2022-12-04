@@ -1,5 +1,6 @@
 import { BadRequestError } from "backend/lib/errors";
 import { IntegrationsConfigurationGroup } from "shared/types/integrations";
+import { credentialsService } from "./services/credentials.service";
 import {
   appConstantsService,
   environmentVariablesService,
@@ -9,7 +10,8 @@ import { IntegrationsConfigurationService } from "./services/_base";
 export class IntegrationsConfigurationController {
   constructor(
     private _appConstantsService: IntegrationsConfigurationService,
-    private _environmentVariablesService: IntegrationsConfigurationService
+    private _environmentVariablesService: IntegrationsConfigurationService,
+    private _credentialsService: IntegrationsConfigurationService
   ) {}
 
   async upsert(
@@ -52,6 +54,7 @@ export class IntegrationsConfigurationController {
     > = {
       [IntegrationsConfigurationGroup.Constants]: this._appConstantsService,
       [IntegrationsConfigurationGroup.Env]: this._environmentVariablesService,
+      [IntegrationsConfigurationGroup.Credentials]: this._credentialsService,
     };
     return groupImplementation[group];
   }
@@ -60,5 +63,6 @@ export class IntegrationsConfigurationController {
 export const integrationsConfigurationController =
   new IntegrationsConfigurationController(
     appConstantsService,
-    environmentVariablesService
+    environmentVariablesService,
+    credentialsService
   );

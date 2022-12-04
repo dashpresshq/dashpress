@@ -1,67 +1,7 @@
 import { createAuthenticatedMocks } from "__tests__/api/_test-utils";
 import { requestHandler } from "../request";
-import { BadRequestError } from "../errors";
 
 describe("/api/requestHandler", () => {
-  it("should call 'GET' correctly and pass queries", async () => {
-    const { req, res } = createAuthenticatedMocks({
-      method: "GET",
-      query: {
-        entity: "base-model",
-        take: "5",
-        page: "15",
-      },
-    });
-
-    await requestHandler({
-      GET: async (getValidatedRequest) => {
-        return {
-          foo: (await getValidatedRequest(["paginationFilter"]))
-            .paginationFilter,
-        };
-      },
-    })(req, res);
-
-    expect(res._getStatusCode()).toBe(200);
-    expect(res._getJSONData()).toEqual({
-      foo: {
-        orderBy: "asc",
-        page: 15,
-        take: 5,
-      },
-    });
-  });
-
-  it("should call 'POST' correctly and pass body request", async () => {
-    const { req, res } = createAuthenticatedMocks({
-      method: "POST",
-      query: {
-        entity: "base-model",
-      },
-      body: {
-        data: {
-          title: "test-title",
-        },
-      },
-    });
-
-    await requestHandler({
-      POST: async (getValidatedRequest) => {
-        return {
-          foo: (await getValidatedRequest(["entityRequestBody"]))
-            .entityRequestBody,
-        };
-      },
-    })(req, res);
-
-    expect(res._getStatusCode()).toBe(201);
-    expect(res._getJSONData()).toEqual({
-      foo: {
-        title: "test-title",
-      },
-    });
-  });
-
   it("should call error on non implemented request method", async () => {
     const { req, res } = createAuthenticatedMocks({
       method: "OPTIONS",
@@ -73,29 +13,67 @@ describe("/api/requestHandler", () => {
     expect(res._getData()).toBe("Method 'OPTIONS' Not Allowed");
   });
 
-  it("should call handle errors thrown to HTTP responses", async () => {
+  it("should perform selective method validations correctly", async () => {
+    const handler = requestHandler(
+      {
+        GET: () => {
+          return true;
+        },
+        POST: () => {
+          return true;
+        },
+      },
+      [
+        {
+          _type: "guest",
+          method: ["GET"],
+        },
+      ]
+    );
     const { req, res } = createAuthenticatedMocks({
-      method: "PUT",
+      method: "POST",
     });
 
-    await requestHandler({
-      PUT: async () => {
-        throw new BadRequestError("Name is required");
-      },
-    })(req, res);
+    await handler(req, res);
 
-    expect(res._getStatusCode()).toBe(400);
-    expect(res._getJSONData()).toMatchInlineSnapshot(`
+    expect(res._getStatusCode()).toBe(201);
+
+    const { req: guestReq, res: guestRes } = createAuthenticatedMocks({
+      method: "GET",
+    });
+
+    await handler(guestReq, guestRes);
+
+    expect(guestRes._getStatusCode()).toBe(401);
+  });
+
+  it("should perform all appended validations", async () => {
+    const handler = requestHandler(
       {
-        "message": "Name is required",
-        "method": "PUT",
-        "name": "BadRequestError",
-        "path": "",
-        "statusCode": 400,
-      }
-    `);
+        GET: () => {
+          return true;
+        },
+      },
+      [
+        {
+          _type: "guest",
+        },
+      ]
+    );
+    const { req, res } = createAuthenticatedMocks({
+      method: "POST",
+    });
+
+    await handler(req, res);
+
+    expect(res._getStatusCode()).toBe(201);
+
+    const { req: guestReq, res: guestRes } = createAuthenticatedMocks({
+      method: "GET",
+    });
+
+    await handler(guestReq, guestRes);
+
+    expect(guestRes._getStatusCode()).toBe(401);
   });
 });
-
-// test that multiple validations are called
-// selected route

@@ -11,6 +11,7 @@ export const NAVIGATION_LINKS = {
   ACTIONS: {
     LIST: "/actions",
     CONSTANTS: "/actions/constants",
+    CREDENTIALS: "/actions/credentials",
     DETAILS: (actionId: string) => `/actions/${actionId}`,
   },
   USERS: {

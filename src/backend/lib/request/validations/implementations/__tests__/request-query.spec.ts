@@ -74,7 +74,7 @@ describe("Request Validations => requestQueryValidationImpl", () => {
     `);
   });
 
-  it("should return programming error when the query field is not a  strinf", async () => {
+  it("should return programming error when the query field is not a string", async () => {
     const { req, res } = createAuthenticatedMocks({
       method: "GET",
       query: {

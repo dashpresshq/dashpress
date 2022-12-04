@@ -1,6 +1,5 @@
 import { requestHandler } from "backend/lib/request";
 import { createMocks } from "node-mocks-http";
-import signInhandler from "pages/api/auth/signin";
 import { createAuthenticatedMocks } from "__tests__/api/_test-utils";
 
 const handler = requestHandler({
@@ -89,31 +88,5 @@ describe("Request Validations => isAuthenticatedValidationImpl", () => {
           "foo": "bar",
         }
       `);
-  });
-
-  describe("Guest Route", () => {
-    it("should return error when request is authenticated", async () => {
-      const { req, res } = createAuthenticatedMocks({
-        method: "POST",
-        body: {
-          username: "root",
-          password: "password",
-        },
-      });
-
-      await signInhandler(req, res);
-
-      expect(res._getStatusCode()).toBe(401);
-      expect(res._getJSONData()).toMatchInlineSnapshot(`
-                {
-                  "errorCode": "ALREADY_AUTHENTICATED",
-                  "message": "You are already authenticated, Please logout to continue with request",
-                  "method": "POST",
-                  "name": "ForbiddenError",
-                  "path": "",
-                  "statusCode": 401,
-                }
-              `);
-    });
   });
 });

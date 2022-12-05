@@ -1,16 +1,22 @@
 import {
   DeleteButton,
   OffCanvas,
-  SectionBox,
   SoftButton,
   Stack,
+  StyledCard,
+  Tabs,
 } from "@hadmean/chromista";
 import { IntegrationsConfigurationGroup } from "shared/types/integrations";
 import { LINK_TO_DOCS } from "frontend/views/constants";
-import { useCallback, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 
 import { FEPaginationTable } from "frontend/lib/FEPaginationTable";
 import { useApi } from "@hadmean/protozoa";
+import {
+  IPageDetails,
+  useSetCurrentActionItems,
+} from "frontend/lib/routing/usePageDetails";
+import { HelpCircle, Plus } from "react-feather";
 import {
   INTEGRATIONS_GROUP_ENDPOINT,
   useIntegrationConfigurationDeletionMutation,
@@ -24,10 +30,12 @@ const NEW_CONFIG_ITEM = "__new_config_item__";
 
 /* CAN_MANAGE_INTEGRATIONS will be able to reveal, update, and delete */
 
-export function BaseIntegrationsConfiguration({
+function BaseIntegrationsConfiguration({
   group,
+  currentTab,
 }: {
   group: IntegrationsConfigurationGroup;
+  currentTab: IntegrationsConfigurationGroup;
 }) {
   const dataEndpoint = INTEGRATIONS_GROUP_ENDPOINT(group);
   const upsertConfigurationMutation =
@@ -66,55 +74,66 @@ export function BaseIntegrationsConfiguration({
     [deleteConfigurationMutation.isLoading]
   );
 
+  const actionItems:
+    | Pick<IPageDetails, "actionItems" | "secondaryActionItems">
+    | undefined = useMemo(() => {
+    if (group !== currentTab) {
+      return undefined;
+    }
+    return {
+      actionItems: [
+        {
+          onClick: () => {
+            setCurrentConfigItem(NEW_CONFIG_ITEM);
+          },
+          IconComponent: Plus,
+          label: `Add New ${INTEGRATIONS_GROUP_CONFIG[group].singular}`,
+        },
+      ],
+      secondaryActionItems: [
+        {
+          onClick: () =>
+            window.open(LINK_TO_DOCS(`integrations-configuration/${group}`)),
+          IconComponent: HelpCircle,
+          // TODO documentation
+          label: `What are ${INTEGRATIONS_GROUP_CONFIG[group].label}`,
+        },
+      ],
+    };
+  }, [group, currentTab]);
+
+  useSetCurrentActionItems(actionItems);
+
   return (
     <>
-      <SectionBox
-        title={`Manage ${INTEGRATIONS_GROUP_CONFIG[group].label}`}
-        iconButtons={[
+      <FEPaginationTable<IKeyValue>
+        dataEndpoint={dataEndpoint}
+        emptyMessage={`No ${INTEGRATIONS_GROUP_CONFIG[group].label} Has Been Added Yet`}
+        columns={[
           {
-            action: () => {
-              setCurrentConfigItem(NEW_CONFIG_ITEM);
-            },
-            icon: "add",
-            label: `Add New ${INTEGRATIONS_GROUP_CONFIG[group].singular}`,
+            Header: "Key",
+            accessor: "key",
+            disableSortBy: true,
+            // eslint-disable-next-line react/no-unstable-nested-components
+            Cell: ({ value }: { value: unknown }) => (
+              <span
+                dangerouslySetInnerHTML={{
+                  __html: `{{ ${INTEGRATIONS_GROUP_CONFIG[group].prefix}.${value} }}`,
+                }}
+              />
+            ),
           },
           {
-            action: LINK_TO_DOCS(`integrations-configuration/${group}`),
-            icon: "help",
-            // TODO documentation
-            label: `What are ${INTEGRATIONS_GROUP_CONFIG[group].label}`,
+            Header: "Value",
+            accessor: "value",
+            disableSortBy: true,
+          },
+          {
+            Header: "Action",
+            Cell: MemoizedAction,
           },
         ]}
-      >
-        <FEPaginationTable<IKeyValue>
-          dataEndpoint={dataEndpoint}
-          emptyMessage={`No ${INTEGRATIONS_GROUP_CONFIG[group].label} Has Been Added Yet`}
-          columns={[
-            {
-              Header: "Key",
-              accessor: "key",
-              disableSortBy: true,
-              // eslint-disable-next-line react/no-unstable-nested-components
-              Cell: ({ value }: { value: unknown }) => (
-                <span
-                  dangerouslySetInnerHTML={{
-                    __html: `{{ ${INTEGRATIONS_GROUP_CONFIG[group].prefix}.${value} }}`,
-                  }}
-                />
-              ),
-            },
-            {
-              Header: "Value",
-              accessor: "value",
-              disableSortBy: true,
-            },
-            {
-              Header: "Action",
-              Cell: MemoizedAction,
-            },
-          ]}
-        />
-      </SectionBox>
+      />
 
       <OffCanvas
         title={
@@ -138,3 +157,44 @@ export function BaseIntegrationsConfiguration({
     </>
   );
 }
+
+export function BaseManageVariables() {
+  const [currentTab, setCurrentTab] = useState<IntegrationsConfigurationGroup>(
+    IntegrationsConfigurationGroup.Constants
+  );
+  return (
+    <StyledCard>
+      <Tabs
+        padContent={false}
+        currentTab={currentTab}
+        onChange={(newTab) =>
+          setCurrentTab(newTab as IntegrationsConfigurationGroup)
+        }
+        contents={[
+          {
+            overrideLabel: INTEGRATIONS_GROUP_CONFIG.constants.label,
+            label: IntegrationsConfigurationGroup.Constants,
+            content: (
+              <BaseIntegrationsConfiguration
+                group={IntegrationsConfigurationGroup.Constants}
+                currentTab={currentTab}
+              />
+            ),
+          },
+          {
+            overrideLabel: INTEGRATIONS_GROUP_CONFIG.credentials.label,
+            label: IntegrationsConfigurationGroup.Credentials,
+            content: (
+              <BaseIntegrationsConfiguration
+                group={IntegrationsConfigurationGroup.Credentials}
+                currentTab={currentTab}
+              />
+            ),
+          },
+        ]}
+      />
+    </StyledCard>
+  );
+}
+
+export const MangeVariablesPageTitle = "Manage Variables";

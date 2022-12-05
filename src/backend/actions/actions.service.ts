@@ -11,6 +11,7 @@ import {
 import { BadRequestError } from "backend/lib/errors";
 import { validateSchemaRequestBody } from "backend/lib/errors/validate-schema-request-input";
 import { IApplicationService } from "backend/types";
+import { INTEGRATIONS_GROUP_CONFIG } from "frontend/views/settings/Configurations/constants";
 import { nanoid } from "nanoid";
 import { TemplateService } from "shared/lib/templates";
 import {
@@ -67,7 +68,7 @@ export class ActionsService implements IApplicationService {
       const connection =
         ACTION_INTEGRATIONS[integrationKey].connect(actionConfiguration);
 
-      const env = Object.fromEntries(
+      const appConstants = Object.fromEntries(
         (await this._appConstantsService.list()).map(({ key, value }) => [
           key,
           value,
@@ -79,7 +80,7 @@ export class ActionsService implements IApplicationService {
           key,
           TemplateService.compile(value, {
             data,
-            ENV: env,
+            [INTEGRATIONS_GROUP_CONFIG.constants.prefix]: appConstants,
             auth: "TODO",
           }),
         ])

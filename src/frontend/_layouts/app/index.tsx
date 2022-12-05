@@ -62,9 +62,16 @@ export function AppLayout({
   const userAuthenticatedState = useUserAuthCheck();
   const { history, pushToStack, goToLinkIndex } = useNavigationStack();
   const router = useRouter();
-  const [pageTitle, permission] = usePageDetailsStore((store) => [
+  const [
+    pageTitle,
+    permission,
+    pageActionItems = [],
+    pageSecondaryActionItems = [],
+  ] = usePageDetailsStore((store) => [
     store.pageTitle,
     store.permission,
+    store.actionItems,
+    store.secondaryActionItems,
   ]);
   const selectionViews = useSelectionViews();
 
@@ -82,6 +89,12 @@ export function AppLayout({
   if (userAuthenticatedState !== true) {
     return <ComponentIsLoading />;
   }
+
+  const actionMenuItems = [...actionItems, ...pageActionItems];
+  const secondaryMenuItems = [
+    ...secondaryActionItems,
+    ...pageSecondaryActionItems,
+  ];
 
   return (
     <DynamicLayout
@@ -107,11 +120,11 @@ export function AppLayout({
         </div>
         <div>
           <Stack>
-            {actionItems.length > 0 ? (
-              <DropDownMenu menuItems={actionItems} />
+            {actionMenuItems.length > 0 ? (
+              <DropDownMenu menuItems={actionMenuItems} />
             ) : null}
-            {secondaryActionItems.length > 0 ? (
-              <DropDownMenu menuItems={secondaryActionItems} />
+            {secondaryMenuItems.length > 0 ? (
+              <DropDownMenu menuItems={secondaryMenuItems} />
             ) : null}
             {process.env.NEXT_PUBLIC_IS_DEMO && (
               <DropDownMenu

@@ -44,7 +44,7 @@ export class IntegrationsConfigurationController {
   ): Promise<{ key: string; value: string }[]> {
     const items = await this.getService(group).list();
     if (group === IntegrationsConfigurationGroup.Credentials) {
-      return items.map(({ key }) => ({ key, value: "XXXYYZ" }));
+      return items.map(({ key }) => ({ key, value: "***********" }));
     }
     return items;
   }

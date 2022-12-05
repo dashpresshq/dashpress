@@ -4,16 +4,6 @@ import { integrationsConfigurationController } from "backend/integrations-config
 import { IAppliedSchemaFormConfig } from "shared/form-schemas/types";
 import { IntegrationsConfigurationGroup } from "shared/types/integrations";
 
-export const integrationsConfigurationListRequestHandler = (
-  group: IntegrationsConfigurationGroup
-) => {
-  return requestHandler({
-    GET: async () => {
-      return await integrationsConfigurationController.list(group);
-    },
-  });
-};
-
 const REQUEST_KEY_FIELD = "key";
 
 type IUpdateIntegrationValueForm = {
@@ -71,7 +61,10 @@ export const integrationsConfigurationDetailsRequestHandler = (
     [
       {
         _type: "canUser",
-        body: USER_PERMISSIONS.CAN_CONFIGURE_APP,
+        body:
+          group === IntegrationsConfigurationGroup.Credentials
+            ? USER_PERMISSIONS.CAN_MANAGE_INTEGRATIONS
+            : USER_PERMISSIONS.CAN_CONFIGURE_APP,
       },
     ]
   );

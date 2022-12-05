@@ -68,7 +68,7 @@ export default requestHandler(
   [
     {
       _type: "canUser",
-      body: USER_PERMISSIONS.CAN_MANAGE_ACTIONS,
+      body: USER_PERMISSIONS.CAN_MANAGE_INTEGRATIONS,
     },
   ]
 );

@@ -23,6 +23,7 @@ export const doesPermissionAllowPermission = (
   }
 
   // TODO on permission heirachy, CAN_RESET_PASSWORD > CAN_MANAGE_USER
+  // TODO CAN_MANAGE_INTEGRATIONS => CAN_CONFIGURE_APP
 
   return false;
 };

@@ -39,8 +39,14 @@ export class IntegrationsConfigurationController {
     await this.getService(group).delete(key);
   }
 
-  async list(group: IntegrationsConfigurationGroup) {
-    return await this.getService(group).list();
+  async list(
+    group: IntegrationsConfigurationGroup
+  ): Promise<{ key: string; value: string }[]> {
+    const items = await this.getService(group).list();
+    if (group === IntegrationsConfigurationGroup.Credentials) {
+      return items.map(({ key }) => ({ key, value: "XXXYYZ" }));
+    }
+    return items;
   }
 
   private isKeyAGroupKey(key: string) {

@@ -10,8 +10,7 @@ export const NAVIGATION_LINKS = {
   },
   ACTIONS: {
     LIST: "/actions",
-    CONSTANTS: "/actions/constants",
-    CREDENTIALS: "/actions/credentials",
+    VARIABLES: "/actions/variables",
     DETAILS: (actionId: string) => `/actions/${actionId}`,
   },
   USERS: {

@@ -28,7 +28,7 @@ export function ActionSettings() {
   useSetPageDetails({
     pageTitle: "Actions Settings",
     viewKey: ACTIONS_VIEW_KEY,
-    permission: USER_PERMISSIONS.CAN_MANAGE_ACTIONS,
+    permission: USER_PERMISSIONS.CAN_MANAGE_INTEGRATIONS,
   });
 
   return (

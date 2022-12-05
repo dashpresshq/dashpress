@@ -95,7 +95,7 @@ export function BaseIntegrationsConfiguration({
             action: LINK_TO_DOCS(`integrations-configuration/${group}`),
             icon: "help",
             // TODO documentation
-            label: `${INTEGRATIONS_GROUP_LABEL[group].label} Configurations Documentation`,
+            label: `What are ${INTEGRATIONS_GROUP_LABEL[group].label}`,
           },
         ]}
       >

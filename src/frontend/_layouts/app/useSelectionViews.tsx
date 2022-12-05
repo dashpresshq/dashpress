@@ -16,7 +16,7 @@ export const useSelectionViews = (): ILayoutSelectionView[] => {
     USER_PERMISSIONS.CAN_CONFIGURE_APP,
     USER_PERMISSIONS.CAN_MANAGE_USER,
     USER_PERMISSIONS.CAN_MANAGE_PERMISSIONS,
-    USER_PERMISSIONS.CAN_MANAGE_ACTIONS,
+    USER_PERMISSIONS.CAN_MANAGE_INTEGRATIONS,
   ]);
 
   const { clear } = useNavigationStack();
@@ -48,7 +48,9 @@ export const useSelectionViews = (): ILayoutSelectionView[] => {
       title: "Actions",
       icon: Zap,
       action: ROOT_LINKS_TO_CLEAR_BREADCRUMBS.ACTIONS,
-      isPermissionAllowed: hasPermission(USER_PERMISSIONS.CAN_MANAGE_ACTIONS),
+      isPermissionAllowed: hasPermission(
+        USER_PERMISSIONS.CAN_MANAGE_INTEGRATIONS
+      ),
     },
     {
       title: "Settings",

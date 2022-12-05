@@ -4,16 +4,13 @@ import {
   SectionBox,
   SoftButton,
   Stack,
-  Table,
 } from "@hadmean/chromista";
 import { IntegrationsConfigurationGroup } from "shared/types/integrations";
 import { LINK_TO_DOCS } from "frontend/views/constants";
-import { IFEPaginatedDataState, useFEPaginatedData } from "@hadmean/protozoa";
 import { useCallback, useState } from "react";
-import {
-  createFEPaginationOptions,
-  DEFAULT_FE_TABLE_PARAMS,
-} from "frontend/lib/pagination";
+
+import { FEPaginationTable } from "frontend/lib/FEPaginationTable";
+import { useApi } from "@hadmean/protozoa";
 import {
   INTEGRATIONS_GROUP_ENDPOINT,
   useIntegrationConfigurationDeletionMutation,
@@ -32,18 +29,13 @@ export function BaseIntegrationsConfiguration({
 }: {
   group: IntegrationsConfigurationGroup;
 }) {
-  const [paginatedDataState, setPaginatedDataState] = useState<
-    IFEPaginatedDataState<unknown>
-  >(DEFAULT_FE_TABLE_PARAMS);
-
+  const dataEndpoint = INTEGRATIONS_GROUP_ENDPOINT(group);
   const upsertConfigurationMutation =
     useIntegrationConfigurationUpdationMutation(group);
   const deleteConfigurationMutation =
     useIntegrationConfigurationDeletionMutation(group);
-  const tableData = useFEPaginatedData<IKeyValue>(
-    INTEGRATIONS_GROUP_ENDPOINT(group),
-    createFEPaginationOptions(paginatedDataState)
-  );
+
+  const tableData = useApi<IKeyValue[]>(dataEndpoint);
 
   const [currentConfigItem, setCurrentConfigItem] = useState("");
 
@@ -94,12 +86,8 @@ export function BaseIntegrationsConfiguration({
           },
         ]}
       >
-        <Table
-          {...{
-            tableData,
-            setPaginatedDataState,
-            paginatedDataState,
-          }}
+        <FEPaginationTable<IKeyValue>
+          dataEndpoint={dataEndpoint}
           emptyMessage={`No ${INTEGRATIONS_GROUP_CONFIG[group].label} Has Been Added Yet`}
           columns={[
             {
@@ -138,7 +126,7 @@ export function BaseIntegrationsConfiguration({
         show={!!currentConfigItem}
       >
         <KeyValueForm
-          initialValues={(tableData?.data?.data || []).find(
+          initialValues={(tableData?.data || []).find(
             ({ key }) => key === currentConfigItem
           )}
           onSubmit={async (values: { key: string; value: string }) => {

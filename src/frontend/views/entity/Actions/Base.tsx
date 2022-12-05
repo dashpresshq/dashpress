@@ -5,16 +5,11 @@ import {
   SoftButton,
   Spacer,
   Stack,
-  Table,
   TableSkeleton,
 } from "@hadmean/chromista";
-import {
-  IFEPaginatedDataState,
-  SLUG_LOADING_VALUE,
-  useFEPaginatedData,
-} from "@hadmean/protozoa";
+import { SLUG_LOADING_VALUE, useApi } from "@hadmean/protozoa";
 import { useActiveEntities } from "frontend/hooks/entity/entity.store";
-import { DEFAULT_FE_TABLE_PARAMS } from "frontend/lib/pagination";
+import { FEPaginationTable } from "frontend/lib/FEPaginationTable";
 import { ViewStateMachine } from "frontend/lib/ViewStateMachine";
 import {
   useIntegrationsList,
@@ -38,18 +33,13 @@ interface IProps {
 const NEW_ACTION_ITEM = "__new_action_item__";
 
 export function BaseActionInstances({ entity, integrationKey }: IProps) {
-  const [paginatedDataState, setPaginatedDataState] = useState<
-    IFEPaginatedDataState<unknown>
-  >(DEFAULT_FE_TABLE_PARAMS);
-
-  const tableData = useFEPaginatedData<IActionInstance>(
-    LIST_ACTION_INSTANCES({ entity, integrationKey }),
-    paginatedDataState
-  );
-
   const activeActionList = useActiveActionList();
   const integrationsList = useIntegrationsList();
   const activeEntities = useActiveEntities();
+
+  const dataEndpoint = LIST_ACTION_INSTANCES({ entity, integrationKey });
+
+  const tableData = useApi<IActionInstance[]>(dataEndpoint);
 
   const deleteActionInstanceMutation = useDeleteActionInstanceMutation();
   const updateActionInstanceMutation = useUpdateActionInstanceMutation();
@@ -114,15 +104,11 @@ export function BaseActionInstances({ entity, integrationKey }: IProps) {
           />
         </Stack>
         <Spacer />
-        <Table
-          {...{
-            tableData,
-            setPaginatedDataState,
-            paginatedDataState,
-          }}
+        <FEPaginationTable
           emptyMessage={`No Form Integration Has Been Registered For This ${
             entity ? "Entity" : "Action"
           }`}
+          dataEndpoint={dataEndpoint}
           columns={[
             integrationKey
               ? {
@@ -171,7 +157,7 @@ export function BaseActionInstances({ entity, integrationKey }: IProps) {
             closeConfigItem();
           }}
           currentView={{ entity, integrationKey }}
-          initialValues={(tableData?.data?.data || []).find(
+          initialValues={(tableData?.data || []).find(
             ({ instanceId }) => instanceId === currentInstanceId
           )}
           formAction={

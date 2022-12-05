@@ -1,34 +1,21 @@
 import {
-  Table,
-  DEFAULT_TABLE_PARAMS,
   DeleteButton,
   SoftButton,
   Stack,
-  TableSkeleton,
   StyledCard,
 } from "@hadmean/chromista";
-import {
-  IBEPaginatedDataState,
-  IFEPaginatedDataState,
-  useFEPaginatedData,
-} from "@hadmean/protozoa";
-import React, { useState } from "react";
+import { useCallback } from "react";
 import { AppLayout } from "frontend/_layouts/app";
 import { Plus } from "react-feather";
 import { NAVIGATION_LINKS, useSetPageDetails } from "frontend/lib/routing";
 import { useRouter } from "next/router";
+import { FEPaginationTable } from "frontend/lib/FEPaginationTable";
 import { userFriendlyCase } from "frontend/lib/strings";
 import { IValueLabel } from "@hadmean/chromista/dist/types";
 import { SystemRoles, USER_PERMISSIONS } from "shared/types/user";
-import { ViewStateMachine } from "frontend/lib/ViewStateMachine";
-import { createFEPaginationOptions } from "frontend/lib/pagination";
 import { ADMIN_ROLES_ENDPOINT, useRoleDeletionMutation } from "./roles.store";
 
 export function ListRoles() {
-  const [paginatedDataState, setPaginatedDataState] = useState<
-    IFEPaginatedDataState<IValueLabel> | IBEPaginatedDataState
-  >(DEFAULT_TABLE_PARAMS);
-
   const router = useRouter();
 
   useSetPageDetails({
@@ -39,7 +26,7 @@ export function ListRoles() {
 
   const roleDeletionMutation = useRoleDeletionMutation();
 
-  const MemoizedAction = React.useCallback(
+  const MemoizedAction = useCallback(
     ({ row }: any) => {
       const roleId = (row.original as unknown as IValueLabel).value;
       if ((Object.values(SystemRoles) as string[]).includes(roleId)) {
@@ -64,11 +51,6 @@ export function ListRoles() {
     [roleDeletionMutation.isLoading]
   );
 
-  const tableData = useFEPaginatedData<Record<string, unknown>>(
-    ADMIN_ROLES_ENDPOINT,
-    createFEPaginationOptions(paginatedDataState)
-  );
-
   return (
     <AppLayout
       actionItems={[
@@ -82,31 +64,21 @@ export function ListRoles() {
       ]}
     >
       <StyledCard>
-        <ViewStateMachine
-          error={tableData.error}
-          loading={tableData.isLoading}
-          loader={<TableSkeleton />}
-        >
-          <Table
-            {...{
-              tableData,
-              setPaginatedDataState,
-              paginatedDataState,
-            }}
-            columns={[
-              {
-                Header: "Role",
-                accessor: "label",
-                Cell: (value) => userFriendlyCase(value.value as string),
-                disableSortBy: true,
-              },
-              {
-                Header: "Action",
-                Cell: MemoizedAction,
-              },
-            ]}
-          />
-        </ViewStateMachine>
+        <FEPaginationTable
+          dataEndpoint={ADMIN_ROLES_ENDPOINT}
+          columns={[
+            {
+              Header: "Role",
+              accessor: "label",
+              Cell: (value) => userFriendlyCase(value.value as string),
+              disableSortBy: true,
+            },
+            {
+              Header: "Action",
+              Cell: MemoizedAction,
+            },
+          ]}
+        />
       </StyledCard>
     </AppLayout>
   );

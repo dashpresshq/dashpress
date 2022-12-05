@@ -14,7 +14,7 @@ export const useSelectionViews = (): ILayoutSelectionView[] => {
   const activeEntities = useActiveEntities();
   const hasPermission = useUserHasPermissions([
     USER_PERMISSIONS.CAN_CONFIGURE_APP,
-    USER_PERMISSIONS.CAN_MANAGE_USER,
+    USER_PERMISSIONS.CAN_MANAGE_USERS,
     USER_PERMISSIONS.CAN_MANAGE_PERMISSIONS,
     USER_PERMISSIONS.CAN_MANAGE_INTEGRATIONS,
   ]);
@@ -62,7 +62,7 @@ export const useSelectionViews = (): ILayoutSelectionView[] => {
       title: "Users",
       icon: Users,
       action: ROOT_LINKS_TO_CLEAR_BREADCRUMBS.USERS,
-      isPermissionAllowed: hasPermission(USER_PERMISSIONS.CAN_MANAGE_USER),
+      isPermissionAllowed: hasPermission(USER_PERMISSIONS.CAN_MANAGE_USERS),
     },
     {
       title: "Roles",

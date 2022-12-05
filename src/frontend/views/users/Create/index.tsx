@@ -13,7 +13,7 @@ export function UserCreate() {
   useSetPageDetails({
     pageTitle: "Create User",
     viewKey: "CREATE_USER",
-    permission: USER_PERMISSIONS.CAN_MANAGE_USER,
+    permission: USER_PERMISSIONS.CAN_MANAGE_USERS,
   });
 
   return (

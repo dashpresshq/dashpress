@@ -23,7 +23,7 @@ export function ListUsers() {
   useSetPageDetails({
     pageTitle: "Users",
     viewKey: "USERS_LIST",
-    permission: USER_PERMISSIONS.CAN_MANAGE_USER,
+    permission: USER_PERMISSIONS.CAN_MANAGE_USERS,
   });
 
   const userDeletionMutation = useUserDeletionMutation();

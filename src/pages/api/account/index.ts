@@ -22,7 +22,7 @@ export default requestHandler(
   [
     {
       _type: "canUser",
-      body: USER_PERMISSIONS.CAN_MANAGE_USER,
+      body: USER_PERMISSIONS.CAN_MANAGE_USERS,
     },
   ]
 );

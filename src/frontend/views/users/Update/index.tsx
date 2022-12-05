@@ -39,7 +39,7 @@ export function UserUpdate() {
   useSetPageDetails({
     pageTitle: "Update User",
     viewKey: "UPDATE_USER",
-    permission: USER_PERMISSIONS.CAN_MANAGE_USER,
+    permission: USER_PERMISSIONS.CAN_MANAGE_USERS,
   });
 
   const { isLoading } = userDetails;

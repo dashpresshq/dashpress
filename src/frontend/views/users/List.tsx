@@ -20,6 +20,7 @@ import { useRouter } from "next/router";
 import { IAccountProfile, USER_PERMISSIONS } from "shared/types/user";
 import { userFriendlyCase } from "frontend/lib/strings";
 import { ViewStateMachine } from "frontend/lib/ViewStateMachine";
+import { createFEPaginationOptions } from "frontend/lib/pagination";
 import {
   ADMIN_USERS_LIST_ENDPOINT,
   useUserDeletionMutation,
@@ -28,7 +29,12 @@ import {
 export function ListUsers() {
   const [paginatedDataState, setPaginatedDataState] = useState<
     IFEPaginatedDataState<IAccountProfile> | IBEPaginatedDataState
-  >({ ...DEFAULT_TABLE_PARAMS, pageIndex: 1 });
+  >(DEFAULT_TABLE_PARAMS);
+
+  const tableData = useFEPaginatedData<IAccountProfile>(
+    ADMIN_USERS_LIST_ENDPOINT,
+    createFEPaginationOptions(paginatedDataState)
+  );
 
   const router = useRouter();
 
@@ -63,16 +69,6 @@ export function ListUsers() {
       </Stack>
     ),
     [userDeletionMutation.isLoading]
-  );
-
-  const tableData = useFEPaginatedData<IAccountProfile>(
-    ADMIN_USERS_LIST_ENDPOINT,
-    {
-      ...paginatedDataState,
-      sortBy: undefined,
-      pageIndex: 1,
-      filters: undefined,
-    }
   );
 
   return (

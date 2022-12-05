@@ -1,5 +1,4 @@
 import {
-  DEFAULT_TABLE_PARAMS,
   DeleteButton,
   ErrorAlert,
   OffCanvas,
@@ -10,12 +9,12 @@ import {
   TableSkeleton,
 } from "@hadmean/chromista";
 import {
-  IBEPaginatedDataState,
   IFEPaginatedDataState,
   SLUG_LOADING_VALUE,
   useFEPaginatedData,
 } from "@hadmean/protozoa";
 import { useActiveEntities } from "frontend/hooks/entity/entity.store";
+import { DEFAULT_FE_TABLE_PARAMS } from "frontend/lib/pagination";
 import { ViewStateMachine } from "frontend/lib/ViewStateMachine";
 import {
   useIntegrationsList,
@@ -40,17 +39,12 @@ const NEW_ACTION_ITEM = "__new_action_item__";
 
 export function BaseActionInstances({ entity, integrationKey }: IProps) {
   const [paginatedDataState, setPaginatedDataState] = useState<
-    IFEPaginatedDataState<IActionInstance> | IBEPaginatedDataState
-  >({ ...DEFAULT_TABLE_PARAMS, pageIndex: 1 });
+    IFEPaginatedDataState<unknown>
+  >(DEFAULT_FE_TABLE_PARAMS);
 
   const tableData = useFEPaginatedData<IActionInstance>(
     LIST_ACTION_INSTANCES({ entity, integrationKey }),
-    {
-      ...paginatedDataState,
-      sortBy: undefined,
-      pageIndex: 1,
-      filters: undefined,
-    }
+    paginatedDataState
   );
 
   const activeActionList = useActiveActionList();

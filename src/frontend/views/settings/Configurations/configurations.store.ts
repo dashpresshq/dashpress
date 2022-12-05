@@ -6,7 +6,7 @@ import {
 } from "@hadmean/protozoa";
 import { useMutation } from "react-query";
 import { IntegrationsConfigurationGroup } from "shared/types/integrations";
-import { INTEGRATIONS_GROUP_LABEL } from "./constants";
+import { INTEGRATIONS_GROUP_CONFIG } from "./constants";
 
 export const INTEGRATIONS_GROUP_ENDPOINT = (
   group: IntegrationsConfigurationGroup
@@ -20,7 +20,7 @@ export function useIntegrationConfigurationUpdationMutation(
   >({
     endpoints: [INTEGRATIONS_GROUP_ENDPOINT(group)],
     successMessage: MutationsLang.saved(
-      INTEGRATIONS_GROUP_LABEL[group].singular
+      INTEGRATIONS_GROUP_CONFIG[group].singular
     ),
   });
 
@@ -41,7 +41,7 @@ export function useIntegrationConfigurationDeletionMutation(
   >({
     endpoints: [INTEGRATIONS_GROUP_ENDPOINT(group)],
     successMessage: MutationsLang.delete(
-      INTEGRATIONS_GROUP_LABEL[group].singular
+      INTEGRATIONS_GROUP_CONFIG[group].singular
     ),
   });
 

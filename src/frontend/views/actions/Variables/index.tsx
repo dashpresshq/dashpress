@@ -19,8 +19,6 @@ export function ManageVariables() {
         group={IntegrationsConfigurationGroup.Constants}
       />
       <Spacer />
-      {/*  */}
-      {/* CAN_MANAGE_INTEGRATIONS will be able to reveal, update, and delete */}
       <BaseIntegrationsConfiguration
         group={IntegrationsConfigurationGroup.Credentials}
       />

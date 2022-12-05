@@ -21,12 +21,13 @@ import { userFriendlyCase } from "frontend/lib/strings";
 import { IValueLabel } from "@hadmean/chromista/dist/types";
 import { SystemRoles, USER_PERMISSIONS } from "shared/types/user";
 import { ViewStateMachine } from "frontend/lib/ViewStateMachine";
+import { createFEPaginationOptions } from "frontend/lib/pagination";
 import { ADMIN_ROLES_ENDPOINT, useRoleDeletionMutation } from "./roles.store";
 
 export function ListRoles() {
   const [paginatedDataState, setPaginatedDataState] = useState<
     IFEPaginatedDataState<IValueLabel> | IBEPaginatedDataState
-  >({ ...DEFAULT_TABLE_PARAMS, pageIndex: 1 });
+  >(DEFAULT_TABLE_PARAMS);
 
   const router = useRouter();
 
@@ -65,12 +66,7 @@ export function ListRoles() {
 
   const tableData = useFEPaginatedData<Record<string, unknown>>(
     ADMIN_ROLES_ENDPOINT,
-    {
-      ...paginatedDataState,
-      sortBy: undefined,
-      pageIndex: 1,
-      filters: undefined,
-    }
+    createFEPaginationOptions(paginatedDataState)
   );
 
   return (

@@ -27,14 +27,6 @@ describe("/api/integrations/env", () => {
           "key": "ENV_KEY_2",
           "value": "ENV_KEY_2",
         },
-        {
-          "key": "GROUP_ENV___KEY_3",
-          "value": "ENV_KEY_3",
-        },
-        {
-          "key": "GROUP_ENV___KEY_4",
-          "value": "ENV_KEY_4",
-        },
       ]
     `);
   });

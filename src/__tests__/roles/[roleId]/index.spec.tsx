@@ -40,7 +40,7 @@ describe("pages/roles/[roleId]/index", () => {
     });
 
     expect(
-      screen.getByRole("checkbox", { name: "Can Manage User" })
+      screen.getByRole("checkbox", { name: "Can Manage Users" })
     ).toBeChecked();
 
     expect(
@@ -107,13 +107,13 @@ describe("pages/roles/[roleId]/index", () => {
     );
 
     await userEvent.click(
-      screen.getByRole("checkbox", { name: "Can Manage User" })
+      screen.getByRole("checkbox", { name: "Can Manage Users" })
     );
     expect((await screen.findAllByRole("status"))[0]).toHaveTextContent(
       "Role Permission Deleted Successfully"
     );
     await userEvent.click(
-      screen.getByRole("checkbox", { name: "Can Manage User" })
+      screen.getByRole("checkbox", { name: "Can Manage Users" })
     );
     expect((await screen.findAllByRole("status"))[0]).toHaveTextContent(
       "Role Permission Created Successfully"
@@ -136,7 +136,7 @@ describe("pages/roles/[roleId]/index", () => {
     });
 
     expect(
-      screen.getByRole("checkbox", { name: "Can Manage User" })
+      screen.getByRole("checkbox", { name: "Can Manage Users" })
     ).toBeChecked();
 
     expect(

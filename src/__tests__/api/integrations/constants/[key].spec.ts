@@ -49,14 +49,6 @@ describe("/api/integrations/constants/[key]", () => {
             "value": "CONSTANT_KEY_2",
           },
           {
-            "key": "GROUP_CONSTANT___KEY_3",
-            "value": "CONSTANT_KEY_3",
-          },
-          {
-            "key": "GROUP_CONSTANT___KEY_4",
-            "value": "CONSTANT_KEY_4",
-          },
-          {
             "key": "NEW_CONSTANT_KEY",
             "value": "NEW_CONSTANT_VALUE",
           },
@@ -89,14 +81,6 @@ describe("/api/integrations/constants/[key]", () => {
             "value": "UPDATED_CONSTANT_KEY_2",
           },
           {
-            "key": "GROUP_CONSTANT___KEY_3",
-            "value": "CONSTANT_KEY_3",
-          },
-          {
-            "key": "GROUP_CONSTANT___KEY_4",
-            "value": "CONSTANT_KEY_4",
-          },
-          {
             "key": "NEW_CONSTANT_KEY",
             "value": "NEW_CONSTANT_VALUE",
           },
@@ -120,14 +104,6 @@ describe("/api/integrations/constants/[key]", () => {
           {
             "key": "CONSTANT_KEY_2",
             "value": "UPDATED_CONSTANT_KEY_2",
-          },
-          {
-            "key": "GROUP_CONSTANT___KEY_3",
-            "value": "CONSTANT_KEY_3",
-          },
-          {
-            "key": "GROUP_CONSTANT___KEY_4",
-            "value": "CONSTANT_KEY_4",
           },
           {
             "key": "NEW_CONSTANT_KEY",
@@ -170,14 +146,6 @@ describe("/api/integrations/constants/[key]", () => {
             "value": "UPDATED_CONSTANT_KEY_2",
           },
           {
-            "key": "GROUP_CONSTANT___KEY_3",
-            "value": "CONSTANT_KEY_3",
-          },
-          {
-            "key": "GROUP_CONSTANT___KEY_4",
-            "value": "CONSTANT_KEY_4",
-          },
-          {
             "key": "NEW_CONSTANT_KEY",
             "value": "NEW_CONSTANT_VALUE",
           },
@@ -205,14 +173,6 @@ describe("/api/integrations/constants/[key]", () => {
           {
             "key": "CONSTANT_KEY_2",
             "value": "UPDATED_CONSTANT_KEY_2",
-          },
-          {
-            "key": "GROUP_CONSTANT___KEY_3",
-            "value": "UPDATED_CONSTANT_KEY_3",
-          },
-          {
-            "key": "GROUP_CONSTANT___KEY_4",
-            "value": "CONSTANT_KEY_4",
           },
           {
             "key": "NEW_CONSTANT_KEY",
@@ -248,14 +208,6 @@ describe("/api/integrations/constants/[key]", () => {
           {
             "key": "CONSTANT_KEY_2",
             "value": "UPDATED_CONSTANT_KEY_2",
-          },
-          {
-            "key": "GROUP_CONSTANT___KEY_3",
-            "value": "UPDATED_CONSTANT_KEY_3",
-          },
-          {
-            "key": "GROUP_CONSTANT___KEY_4",
-            "value": "CONSTANT_KEY_4",
           },
           {
             "key": "NEW_CONSTANT_KEY",

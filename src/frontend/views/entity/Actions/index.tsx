@@ -22,7 +22,7 @@ export function EntityFormActionsSettings() {
         iconButtons={[
           {
             action: NAVIGATION_LINKS.SETTINGS.VARIABLES,
-            icon: "eye",
+            icon: "settings",
             label: "Manage Variables",
           },
           {

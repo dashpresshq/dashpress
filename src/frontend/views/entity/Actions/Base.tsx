@@ -5,6 +5,7 @@ import {
   SoftButton,
   Spacer,
   Stack,
+  Text,
   TableSkeleton,
 } from "@hadmean/chromista";
 import { SLUG_LOADING_VALUE, useApi } from "@hadmean/protozoa";
@@ -15,6 +16,7 @@ import {
   useIntegrationsList,
   useActiveActionList,
 } from "frontend/views/actions/actions.store";
+import { INTEGRATIONS_GROUP_CONFIG } from "frontend/views/settings/Variables/constants";
 import { useCallback, useState } from "react";
 import { IActionInstance } from "shared/types/actions";
 import { ActionForm } from "./Form";
@@ -122,7 +124,7 @@ export function BaseActionInstances({ entity, integrationKey }: IProps) {
                   disableSortBy: true,
                 },
             {
-              Header: "Form Action",
+              Header: "Trigger",
               accessor: "formAction",
               disableSortBy: true,
             },
@@ -147,6 +149,20 @@ export function BaseActionInstances({ entity, integrationKey }: IProps) {
         onClose={closeConfigItem}
         show={!!currentInstanceId}
       >
+        <Text textStyle="italic" size="5">
+          Use your {`{{`}
+          {INTEGRATIONS_GROUP_CONFIG.credentials.prefix}.ENTRY{`}}`} and {`{{`}
+          {INTEGRATIONS_GROUP_CONFIG.constants.prefix}.ENTRY
+          {`}}`} here.
+        </Text>
+        <Spacer />
+        <Text textStyle="italic" size="5">
+          {" "}
+          Access the current data with {`{{`}
+          data.anyValidEntityField
+          {`}}`}
+        </Text>
+        <Spacer />
         <ActionForm
           onSubmit={async (data) => {
             if (currentInstanceId === NEW_ACTION_ITEM) {

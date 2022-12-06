@@ -49,14 +49,6 @@ describe("/api/integrations/env/[key]", () => {
             "value": "ENV_KEY_2",
           },
           {
-            "key": "GROUP_ENV___KEY_3",
-            "value": "ENV_KEY_3",
-          },
-          {
-            "key": "GROUP_ENV___KEY_4",
-            "value": "ENV_KEY_4",
-          },
-          {
             "key": "NEW_ENV_KEY",
             "value": "NEW_ENV_VALUE",
           },
@@ -89,14 +81,6 @@ describe("/api/integrations/env/[key]", () => {
             "value": "UPDATED_ENV_KEY_2",
           },
           {
-            "key": "GROUP_ENV___KEY_3",
-            "value": "ENV_KEY_3",
-          },
-          {
-            "key": "GROUP_ENV___KEY_4",
-            "value": "ENV_KEY_4",
-          },
-          {
             "key": "NEW_ENV_KEY",
             "value": "NEW_ENV_VALUE",
           },
@@ -120,14 +104,6 @@ describe("/api/integrations/env/[key]", () => {
           {
             "key": "ENV_KEY_2",
             "value": "UPDATED_ENV_KEY_2",
-          },
-          {
-            "key": "GROUP_ENV___KEY_3",
-            "value": "ENV_KEY_3",
-          },
-          {
-            "key": "GROUP_ENV___KEY_4",
-            "value": "ENV_KEY_4",
           },
           {
             "key": "NEW_ENV_KEY",
@@ -170,14 +146,6 @@ describe("/api/integrations/env/[key]", () => {
             "value": "UPDATED_ENV_KEY_2",
           },
           {
-            "key": "GROUP_ENV___KEY_3",
-            "value": "ENV_KEY_3",
-          },
-          {
-            "key": "GROUP_ENV___KEY_4",
-            "value": "ENV_KEY_4",
-          },
-          {
             "key": "NEW_ENV_KEY",
             "value": "NEW_ENV_VALUE",
           },
@@ -205,14 +173,6 @@ describe("/api/integrations/env/[key]", () => {
           {
             "key": "ENV_KEY_2",
             "value": "UPDATED_ENV_KEY_2",
-          },
-          {
-            "key": "GROUP_ENV___KEY_3",
-            "value": "UPDATED_ENV_KEY_3",
-          },
-          {
-            "key": "GROUP_ENV___KEY_4",
-            "value": "ENV_KEY_4",
           },
           {
             "key": "NEW_ENV_KEY",
@@ -248,14 +208,6 @@ describe("/api/integrations/env/[key]", () => {
           {
             "key": "ENV_KEY_2",
             "value": "UPDATED_ENV_KEY_2",
-          },
-          {
-            "key": "GROUP_ENV___KEY_3",
-            "value": "UPDATED_ENV_KEY_3",
-          },
-          {
-            "key": "GROUP_ENV___KEY_4",
-            "value": "ENV_KEY_4",
           },
           {
             "key": "NEW_ENV_KEY",

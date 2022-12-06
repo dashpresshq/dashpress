@@ -77,12 +77,8 @@ export function ActionForm({
   );
 
   const fields: IAppliedSchemaFormConfig<any> = {
-    entity: {
-      type: "selection",
-      validations: [{ validationType: "required" }],
-      selections: entities,
-    },
     formAction: {
+      label: "Trigger",
       type: "selection",
       selections: [
         {
@@ -103,6 +99,11 @@ export function ActionForm({
           validationType: "required",
         },
       ],
+    },
+    entity: {
+      type: "selection",
+      validations: [{ validationType: "required" }],
+      selections: entities,
     },
     activatedActionId: {
       label: "Integration",

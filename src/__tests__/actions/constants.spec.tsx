@@ -3,7 +3,7 @@ import React from "react";
 import { render, screen, within } from "@testing-library/react";
 import { AppWrapper } from "@hadmean/chromista";
 
-import ManageConstants from "pages/actions/constants";
+import ManageVariables from "pages/actions/variables";
 
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 import userEvent from "@testing-library/user-event";
@@ -25,7 +25,7 @@ describe("pages/actions/constants", () => {
     it("should list constants", async () => {
       render(
         <AppWrapper>
-          <ManageConstants />
+          <ManageVariables />
         </AppWrapper>
       );
 
@@ -52,7 +52,7 @@ describe("pages/actions/constants", () => {
     it("should create new constant", async () => {
       render(
         <AppWrapper>
-          <ManageConstants />
+          <ManageVariables />
         </AppWrapper>
       );
       await userEvent.click(
@@ -76,7 +76,7 @@ describe("pages/actions/constants", () => {
     it("should show created constant", async () => {
       render(
         <AppWrapper>
-          <ManageConstants />
+          <ManageVariables />
         </AppWrapper>
       );
 
@@ -92,7 +92,7 @@ describe("pages/actions/constants", () => {
     it("should update constant", async () => {
       render(
         <AppWrapper>
-          <ManageConstants />
+          <ManageVariables />
         </AppWrapper>
       );
 
@@ -124,7 +124,7 @@ describe("pages/actions/constants", () => {
     it("should show updated constant", async () => {
       render(
         <AppWrapper>
-          <ManageConstants />
+          <ManageVariables />
         </AppWrapper>
       );
 
@@ -140,7 +140,7 @@ describe("pages/actions/constants", () => {
     it("should delete constants", async () => {
       render(
         <AppWrapper>
-          <ManageConstants />
+          <ManageVariables />
         </AppWrapper>
       );
 

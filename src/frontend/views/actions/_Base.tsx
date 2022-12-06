@@ -13,7 +13,7 @@ import { useRouteParam } from "@hadmean/protozoa";
 import { ViewStateMachine } from "frontend/lib/ViewStateMachine";
 import { useRouter } from "next/router";
 import { ReactNode } from "react";
-import { Code, Zap, ZapOff } from "react-feather";
+import { Book, Zap, ZapOff } from "react-feather";
 import { NAVIGATION_LINKS } from "../../lib/routing/links";
 import { AppLayout } from "../../_layouts/app";
 import { useIntegrationsList, useActiveActionList } from "./actions.store";
@@ -75,7 +75,7 @@ export function BaseActionsLayout({ children }: IProps) {
               {
                 action: NAVIGATION_LINKS.ACTIONS.VARIABLES,
                 name: "Variables",
-                IconComponent: Code,
+                IconComponent: Book,
               },
             ]}
             currentMenuItem={router.asPath.split("?")[0]}

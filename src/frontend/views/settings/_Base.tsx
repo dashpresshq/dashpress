@@ -6,7 +6,7 @@ import {
 } from "@hadmean/chromista";
 import { useRouter } from "next/router";
 import { ReactNode } from "react";
-import { Calendar, Columns, Eye, Server, Globe, Edit3 } from "react-feather";
+import { Calendar, Columns, Eye, Server, Globe, Book } from "react-feather";
 import { NAVIGATION_LINKS } from "../../lib/routing/links";
 import { AppLayout } from "../../_layouts/app";
 
@@ -43,9 +43,9 @@ export function BaseSettingsLayout({ children }: IProps) {
       IconComponent: Globe,
     },
     {
-      action: NAVIGATION_LINKS.SETTINGS.CONFIGURATIONS,
+      action: NAVIGATION_LINKS.SETTINGS.VARIABLES,
       name: "Variables",
-      IconComponent: Edit3,
+      IconComponent: Book,
     },
   ];
 

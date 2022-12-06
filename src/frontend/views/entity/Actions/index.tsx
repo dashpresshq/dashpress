@@ -1,5 +1,5 @@
 import { SectionBox } from "@hadmean/chromista";
-import { useSetPageDetails } from "frontend/lib/routing";
+import { NAVIGATION_LINKS, useSetPageDetails } from "frontend/lib/routing";
 import { USER_PERMISSIONS } from "shared/types/user";
 import { useEntitySlug } from "frontend/hooks/entity/entity.config";
 import { LINK_TO_DOCS } from "frontend/views/constants";
@@ -20,10 +20,13 @@ export function EntityFormActionsSettings() {
       <SectionBox
         title="Form Integrations"
         iconButtons={[
-          // TODO link to constants
-          // TODO link to add more integrations
           {
-            action: LINK_TO_DOCS("app-configuration/TODO"),
+            action: NAVIGATION_LINKS.SETTINGS.VARIABLES,
+            icon: "eye",
+            label: "Manage Variables",
+          },
+          {
+            action: LINK_TO_DOCS(`integrations/form`),
             icon: "help",
             label: "Form Integrations Documentation",
           },

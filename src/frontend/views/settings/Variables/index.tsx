@@ -4,7 +4,7 @@ import { BaseSettingsLayout } from "../_Base";
 import { SETTINGS_VIEW_KEY } from "../constants";
 import { BaseManageVariables, MangeVariablesPageTitle } from "./Base";
 
-export function IntegrationsConfigurationSettings() {
+export function VariablesSettings() {
   useSetPageDetails({
     pageTitle: MangeVariablesPageTitle,
     viewKey: SETTINGS_VIEW_KEY,

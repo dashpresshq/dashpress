@@ -6,6 +6,7 @@ import {
 import { useRouteParam, useSetPageDetails } from "frontend/lib/routing";
 import { USER_PERMISSIONS } from "shared/types/user";
 import { ViewStateMachine } from "frontend/lib/ViewStateMachine";
+import { LINK_TO_DOCS } from "frontend/views/constants";
 import { BaseActionsLayout } from "../_Base";
 import { useIntegrationsList, useActiveActionList } from "../actions.store";
 import { ACTIONS_VIEW_KEY } from "../constants";
@@ -36,6 +37,13 @@ export function ActionSettings() {
       <SectionBox
         title={integrationDetail ? integrationDetail.title : "Loading..."}
         description={integrationDetail ? integrationDetail.description : ""}
+        iconButtons={[
+          {
+            action: LINK_TO_DOCS(`integrations/form`),
+            icon: "help",
+            label: "Form Integrations Documentation",
+          },
+        ]}
       >
         <ViewStateMachine
           loading={integrationsList.isLoading || activeActionsList.isLoading}

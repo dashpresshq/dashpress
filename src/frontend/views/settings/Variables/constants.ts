@@ -15,8 +15,8 @@ export const INTEGRATIONS_GROUP_CONFIG: Record<
     prefix: "ENV",
   },
   credentials: {
-    label: "Credentials",
-    singular: "Credential",
-    prefix: "CREDENTIAL",
+    label: "Secrets",
+    singular: "Secret",
+    prefix: "SECRET",
   },
 };

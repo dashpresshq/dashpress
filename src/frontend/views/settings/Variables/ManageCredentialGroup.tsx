@@ -133,9 +133,8 @@ export function ManageCredentialGroup({
       secondaryActionItems: [
         {
           onClick: () =>
-            window.open(LINK_TO_DOCS(`integrations-configuration/${group}`)),
+            window.open(LINK_TO_DOCS(`integrations/variables#${group}`)),
           IconComponent: HelpCircle,
-          // TODO documentation
           label: `What are ${INTEGRATIONS_GROUP_CONFIG[group].label}`,
         },
       ],
@@ -202,7 +201,7 @@ export function ManageCredentialGroup({
               buttonText={
                 revealedCredentials.isLoading
                   ? "Just a sec..."
-                  : "Reveal Credential Values"
+                  : "Reveal Secrets"
               }
             />
             <Spacer />
@@ -212,8 +211,8 @@ export function ManageCredentialGroup({
         <HSpacer>
           <Spacer />
           <Text textStyle="italic" size="5">
-            Your account does not have the permission to view credentials values
-            or manage them
+            Your account does not have the permission to view secret values or
+            manage them
           </Text>
           <Spacer />
         </HSpacer>

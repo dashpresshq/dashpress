@@ -30,7 +30,7 @@ export function useIntegrationConfigurationUpdationMutation(
     Record<string, string>
   >({
     endpoints: rootPassword
-      ? [REVEAL_CREDENTIALS_ENDPOINT]
+      ? [REVEAL_CREDENTIALS_ENDPOINT, INTEGRATIONS_GROUP_ENDPOINT(group)]
       : [INTEGRATIONS_GROUP_ENDPOINT(group)],
     successMessage: MutationsLang.saved(
       INTEGRATIONS_GROUP_CONFIG[group].singular
@@ -55,7 +55,7 @@ export function useIntegrationConfigurationDeletionMutation(
     Record<string, string>
   >({
     endpoints: rootPassword
-      ? [REVEAL_CREDENTIALS_ENDPOINT]
+      ? [REVEAL_CREDENTIALS_ENDPOINT, INTEGRATIONS_GROUP_ENDPOINT(group)]
       : [INTEGRATIONS_GROUP_ENDPOINT(group)],
     successMessage: MutationsLang.delete(
       INTEGRATIONS_GROUP_CONFIG[group].singular

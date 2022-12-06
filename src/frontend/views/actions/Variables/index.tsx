@@ -3,7 +3,7 @@ import { USER_PERMISSIONS } from "shared/types/user";
 import {
   BaseManageVariables,
   MangeVariablesPageTitle,
-} from "frontend/views/settings/Configurations/Base";
+} from "frontend/views/settings/Variables/Base";
 import { BaseActionsLayout } from "../_Base";
 import { ACTIONS_VIEW_KEY } from "../constants";
 

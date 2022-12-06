@@ -33,16 +33,18 @@ describe("pages/actions/constants", () => {
         await screen.findByRole("row", { name: "Key Value Action" })
       ).toBeInTheDocument();
       expect(
-        screen.getByRole("row", { name: "{{ ENV.BASE_URL }} http://base.com" })
-      ).toBeInTheDocument();
-      expect(
         screen.getByRole("row", {
-          name: "{{ ENV.FOO_CONSTANT_KEY }} foo constant value",
+          name: "{{ CONSTANT.BASE_URL }} http://base.com",
         })
       ).toBeInTheDocument();
       expect(
         screen.getByRole("row", {
-          name: "{{ ENV.BAR_CONSTANT_KEY }} bar constant value",
+          name: "{{ CONSTANT.FOO_CONSTANT_KEY }} foo constant value",
+        })
+      ).toBeInTheDocument();
+      expect(
+        screen.getByRole("row", {
+          name: "{{ CONSTANT.BAR_CONSTANT_KEY }} bar constant value",
         })
       ).toBeInTheDocument();
     });
@@ -56,7 +58,7 @@ describe("pages/actions/constants", () => {
         </AppWrapper>
       );
       await userEvent.click(
-        screen.getByRole("button", { name: "Add New Constant" })
+        await screen.findByRole("button", { name: "Add New Constant" })
       );
 
       expect(
@@ -82,7 +84,7 @@ describe("pages/actions/constants", () => {
 
       expect(
         screen.getByRole("row", {
-          name: "{{ ENV.NEW_KEY }} new value",
+          name: "{{ CONSTANT.NEW_KEY }} new value",
         })
       ).toBeInTheDocument();
     });
@@ -130,7 +132,7 @@ describe("pages/actions/constants", () => {
 
       expect(
         screen.getByRole("row", {
-          name: "{{ ENV.BASE_URL }} http://base.com/updated",
+          name: "{{ CONSTANT.BASE_URL }} http://base.com/updated",
         })
       ).toBeInTheDocument();
     });

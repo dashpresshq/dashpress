@@ -2,6 +2,8 @@ import handler from "pages/api/integrations/env";
 import {
   setupAllTestData,
   createAuthenticatedViewerMocks,
+  createAuthenticatedCustomRoleMocks,
+  setupRolesTestData,
 } from "__tests__/api/_test-utils";
 
 describe("/api/integrations/env", () => {
@@ -9,8 +11,15 @@ describe("/api/integrations/env", () => {
     await setupAllTestData(["environment-variables"]);
   });
 
-  it("should list envs for all users", async () => {
-    const { req, res } = createAuthenticatedViewerMocks({
+  it("should list only plain envs for users with CAN_CONFIGURE_APP role", async () => {
+    await setupRolesTestData([
+      {
+        id: "custom-role",
+        permissions: ["CAN_CONFIGURE_APP"],
+      },
+    ]);
+
+    const { req, res } = createAuthenticatedCustomRoleMocks({
       method: "GET",
     });
 
@@ -28,6 +37,26 @@ describe("/api/integrations/env", () => {
           "value": "ENV_KEY_2",
         },
       ]
+    `);
+  });
+
+  it("should not list constants for normal users", async () => {
+    const { req, res } = createAuthenticatedViewerMocks({
+      method: "GET",
+    });
+
+    await handler(req, res);
+
+    expect(res._getStatusCode()).toBe(401);
+    expect(res._getJSONData()).toMatchInlineSnapshot(`
+      {
+        "errorCode": "",
+        "message": "Your account doesn't have enough priviledge to perform this action",
+        "method": "GET",
+        "name": "ForbiddenError",
+        "path": "",
+        "statusCode": 401,
+      }
     `);
   });
 });

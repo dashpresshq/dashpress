@@ -3,7 +3,10 @@ import {
   credentialsService,
   CredentialsService,
 } from "backend/integrations-configurations";
-import { IntegrationsConfigurationService } from "backend/integrations-configurations/services/_base";
+import {
+  IntegrationsConfigurationService,
+  INTEGRATION_CONFIG_GROUP_DEMILITER,
+} from "backend/integrations-configurations/services/_base";
 import {
   createConfigDomainPersistenceService,
   AbstractConfigDataPersistenceService,
@@ -75,12 +78,26 @@ export class ActionsService implements IApplicationService {
         ])
       );
 
+      const credentials = Object.fromEntries(
+        await Promise.all(
+          (await this._credentialsService.list())
+            .filter(
+              ({ key }) => !key.includes(INTEGRATION_CONFIG_GROUP_DEMILITER)
+            )
+            .map(async ({ key, value }) => [
+              key,
+              await this._credentialsService.processDataAfterFetch(value),
+            ])
+        )
+      );
+
       const compiledConfiguration = Object.fromEntries(
         Object.entries(configuration || {}).map(([key, value]) => [
           key,
           TemplateService.compile(value, {
             data,
             [INTEGRATIONS_GROUP_CONFIG.constants.prefix]: appConstants,
+            [INTEGRATIONS_GROUP_CONFIG.credentials.prefix]: credentials,
             auth: "TODO",
           }),
         ])

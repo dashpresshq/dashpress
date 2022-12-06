@@ -2,6 +2,8 @@ import handler from "pages/api/integrations/constants";
 import {
   setupAllTestData,
   createAuthenticatedViewerMocks,
+  createAuthenticatedCustomRoleMocks,
+  setupRolesTestData,
 } from "__tests__/api/_test-utils";
 
 describe("/api/integrations/constants", () => {
@@ -9,8 +11,15 @@ describe("/api/integrations/constants", () => {
     await setupAllTestData(["constants"]);
   });
 
-  it("should list constants for all users", async () => {
-    const { req, res } = createAuthenticatedViewerMocks({
+  it("should list only plain constants for users with CAN_CONFIGURE_APP role", async () => {
+    await setupRolesTestData([
+      {
+        id: "custom-role",
+        permissions: ["CAN_CONFIGURE_APP"],
+      },
+    ]);
+
+    const { req, res } = createAuthenticatedCustomRoleMocks({
       method: "GET",
     });
 
@@ -27,15 +36,27 @@ describe("/api/integrations/constants", () => {
           "key": "CONSTANT_KEY_2",
           "value": "CONSTANT_KEY_2",
         },
-        {
-          "key": "GROUP_CONSTANT___KEY_3",
-          "value": "CONSTANT_KEY_3",
-        },
-        {
-          "key": "GROUP_CONSTANT___KEY_4",
-          "value": "CONSTANT_KEY_4",
-        },
       ]
+    `);
+  });
+
+  it("should not list constants for normal users", async () => {
+    const { req, res } = createAuthenticatedViewerMocks({
+      method: "GET",
+    });
+
+    await handler(req, res);
+
+    expect(res._getStatusCode()).toBe(401);
+    expect(res._getJSONData()).toMatchInlineSnapshot(`
+      {
+        "errorCode": "",
+        "message": "Your account doesn't have enough priviledge to perform this action",
+        "method": "GET",
+        "name": "ForbiddenError",
+        "path": "",
+        "statusCode": 401,
+      }
     `);
   });
 });

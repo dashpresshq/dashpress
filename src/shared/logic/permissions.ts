@@ -4,6 +4,15 @@ import {
   USER_PERMISSIONS,
 } from "shared/types/user";
 
+// TODO
+// const PERMISSION_HEIRACHIES = [
+//   [USER_PERMISSIONS.CAN_RESET_PASSWORD, USER_PERMISSIONS.CAN_MANAGE_USERS],
+//   [
+//     USER_PERMISSIONS.CAN_MANAGE_INTEGRATIONS,
+//     USER_PERMISSIONS.CAN_CONFIGURE_APP,
+//   ],
+// ];
+
 export const doesPermissionAllowPermission = (
   permissions: string[],
   requiredPermission: string
@@ -21,9 +30,6 @@ export const doesPermissionAllowPermission = (
   if (can) {
     return can;
   }
-
-  // TODO on permission heirachy, CAN_RESET_PASSWORD > CAN_MANAGE_USERS
-  // TODO CAN_MANAGE_INTEGRATIONS => CAN_CONFIGURE_APP
 
   return false;
 };

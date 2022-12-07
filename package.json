@@ -1,6 +1,6 @@
 {
   "name": "hadmean",
-  "version": "0.0.54",
+  "version": "0.1.0",
   "license": "GPL-3.0-or-later",
   "scripts": {
     "start": "next dev",
@@ -10,7 +10,7 @@
     "release": "standard-version",
     "build:bin": "tsup ./src/bin/index.ts",
     "build": "npm run build:bin && npm run build:next",
-    "build:clean": "rimraf .next/cache && rimraf .next/trace",
+    "build:clean": "rimraf .next/cache && rimraf .next/trace && rimraf .next/**/*.nft.json",
     "prepublishOnly": "npm run build && npm run build:clean",
     "setup-husky": "husky install",
     "test": "NODE_OPTIONS=--max_old_space_size=4096 jest --forceExit --runInBand",

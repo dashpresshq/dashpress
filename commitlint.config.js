@@ -11,7 +11,7 @@ module.exports = {
         "📝 docs",
         "💎 style",
         "♻️ refactor",
-        "🎈 perf",
+        "📈 perf",
         "🧪 test",
         "🏗️ build",
         "📦 ci",

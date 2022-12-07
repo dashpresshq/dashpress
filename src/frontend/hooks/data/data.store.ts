@@ -172,6 +172,8 @@ export function useEntityDataUpdationMutation(entity: string, id: string) {
   );
 }
 
+// TODO fix delete on details page showing 404
+
 export function useEntityDataDeletionMutation(
   entity: string,
   redirectTo?: string

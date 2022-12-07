@@ -45,7 +45,7 @@ export function BaseActionsLayout({ children }: IProps) {
             <ViewStateMachine
               loading={integrationsList.isLoading || activeActionList.isLoading}
               error={integrationsList.error || activeActionList.error}
-              loader={<ListSkeleton />}
+              loader={<ListSkeleton count={7} />}
             >
               <RenderList
                 items={(integrationsList.data || []).map(({ title, key }) => ({

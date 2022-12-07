@@ -80,7 +80,7 @@ export function EntitiesSettings() {
                 <ViewStateMachine
                   error={error}
                   loading={isLoading}
-                  loader={<ListSkeleton />}
+                  loader={<ListSkeleton count={20} />}
                 >
                   <EntitiesSelection
                     allList={(entitiesList.data || []).map(
@@ -101,7 +101,7 @@ export function EntitiesSettings() {
                 <ViewStateMachine
                   error={error}
                   loading={isLoading}
-                  loader={<ListSkeleton />}
+                  loader={<ListSkeleton count={20} />}
                 >
                   <SortList
                     data={activeEntities}

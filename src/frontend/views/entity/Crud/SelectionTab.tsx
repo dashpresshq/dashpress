@@ -47,7 +47,7 @@ export function SelectionTab({ columns, isLoading, toggling, error }: IProps) {
     <ViewStateMachine
       error={error}
       loading={isLoading}
-      loader={<ListSkeleton />}
+      loader={<ListSkeleton count={10} />}
     >
       <Stack justify="space-between" align="flex-start">
         {toggling && toggling.onToggle && (

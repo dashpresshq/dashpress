@@ -1,4 +1,11 @@
-import { ComponentIsLoading, Spacer, Text } from "@hadmean/chromista";
+import {
+  BlockSkeleton,
+  ComponentIsLoading,
+  FormSkeleton,
+  FormSkeletonSchema,
+  Spacer,
+  Text,
+} from "@hadmean/chromista";
 import { SLUG_LOADING_VALUE } from "@hadmean/protozoa";
 import React from "react";
 import { useAppConfiguration } from "frontend/hooks/configuration/configuration.store";
@@ -68,9 +75,14 @@ export function EntityDetailsView({
 
   return (
     <ViewStateMachine
-      loading={viewState.type === "loading"}
+      loading
       error={viewState.type === "error" ? viewState.message : undefined}
-      loader={<ComponentIsLoading />}
+      loader={
+        <>
+          <BlockSkeleton height="20px" />
+          <BlockSkeleton height="20px" />
+        </>
+      }
     >
       <>
         {fitlerOutHiddenScalarColumns(

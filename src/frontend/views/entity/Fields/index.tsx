@@ -205,7 +205,7 @@ export function EntityFieldsSettings() {
             {
               content: (
                 <ViewStateMachine
-                  loader={<ListSkeleton />}
+                  loader={<ListSkeleton count={10} />}
                   loading={sharedLoadingState}
                   error={error}
                 >

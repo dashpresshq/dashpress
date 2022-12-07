@@ -95,7 +95,7 @@ export function DetailsLayout({ children, entity, menuKey }: IProps) {
             <ViewStateMachine
               loading={viewState.type === "loading"}
               error={viewState.type === "error" ? viewState.message : undefined}
-              loader={<ListSkeleton />}
+              loader={<ListSkeleton count={5} />}
             >
               <RenderList
                 items={[

@@ -179,7 +179,7 @@ export function EntityRelationsSettings() {
                 <ViewStateMachine
                   error={error}
                   loading={isLoading}
-                  loader={<ListSkeleton />}
+                  loader={<ListSkeleton count={5} />}
                 >
                   <EntitiesSelection
                     allList={entityRelationList.data || []}
@@ -201,7 +201,7 @@ export function EntityRelationsSettings() {
                 <ViewStateMachine
                   error={error}
                   loading={isLoading}
-                  loader={<ListSkeleton />}
+                  loader={<ListSkeleton count={5} />}
                 >
                   <SortList
                     data={{

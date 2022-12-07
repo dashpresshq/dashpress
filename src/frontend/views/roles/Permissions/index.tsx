@@ -67,7 +67,7 @@ export function RolePermissions() {
           <ViewStateMachine
             error={error}
             loading={isLoading}
-            loader={<ListSkeleton />}
+            loader={<ListSkeleton count={20} />}
           >
             <>
               <Spacer size="xxl" />

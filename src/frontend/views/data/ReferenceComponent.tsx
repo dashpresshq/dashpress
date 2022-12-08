@@ -1,5 +1,5 @@
 import { useEntityDataReference } from "frontend/hooks/data/data.store";
-import { StyledLinkLikeButton } from "@hadmean/chromista";
+import { BaseSkeleton, StyledLinkLikeButton } from "@hadmean/chromista";
 import { useRouter } from "next/router";
 import { NAVIGATION_LINKS } from "frontend/lib/routing";
 import { useDetailsOffCanvasStore } from "./Table/hooks/useDetailsOffCanvas.store";
@@ -19,7 +19,7 @@ export function ReferenceComponent({ entity, id, displayFrom }: IProps) {
   const entityDataReference = useEntityDataReference(entity, id);
 
   if (entityDataReference.isLoading) {
-    return <>Loading...</>;
+    return <BaseSkeleton width="150px" height="20px" />;
   }
 
   if (entityDataReference.error) {

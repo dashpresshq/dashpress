@@ -1,5 +1,4 @@
 import {
-  ComponentIsLoading,
   FormSkeleton,
   FormSkeletonSchema,
   OffCanvas,
@@ -26,6 +25,7 @@ import {
 } from "./dashboard.store";
 import { gridRoot } from "./styles";
 import { DashboardSettings } from "./settings";
+import { DashboardSkeleton } from "./Skeleton";
 
 const Root = styled.div`
   .list {
@@ -85,7 +85,7 @@ export function ManageDashboard() {
         <ViewStateMachine
           loading={widgets.isLoading}
           error={widgets.error}
-          loader={<ComponentIsLoading />}
+          loader={<DashboardSkeleton />}
         >
           <Root>
             <SortableList

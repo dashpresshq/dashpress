@@ -1,13 +1,6 @@
-import {
-  BlockSkeleton,
-  ComponentIsLoading,
-  FormSkeleton,
-  FormSkeletonSchema,
-  Spacer,
-  Text,
-} from "@hadmean/chromista";
+import { BaseSkeleton, Spacer, Text } from "@hadmean/chromista";
 import { SLUG_LOADING_VALUE } from "@hadmean/protozoa";
-import React from "react";
+import React, { Fragment } from "react";
 import { useAppConfiguration } from "frontend/hooks/configuration/configuration.store";
 import { ViewStateMachine } from "frontend/lib/ViewStateMachine";
 import {
@@ -75,12 +68,16 @@ export function EntityDetailsView({
 
   return (
     <ViewStateMachine
-      loading
+      loading={viewState.type === "loading"}
       error={viewState.type === "error" ? viewState.message : undefined}
       loader={
         <>
-          <BlockSkeleton height="20px" />
-          <BlockSkeleton height="20px" />
+          {Array.from({ length: 7 }, (_, k) => k).map((key) => (
+            <Fragment key={key}>
+              <BaseSkeleton height="18px" width="100px" bottom={8} />
+              <BaseSkeleton height="20px" bottom={16} />
+            </Fragment>
+          ))}
         </>
       }
     >

@@ -24,7 +24,7 @@ import {
   EntityActionTypes,
   useEntityActionMenuItems,
 } from "../../entity/constants";
-import { getEntitiesTabsCount } from "./utils";
+import { getEntitiesRelationsCount } from "./utils";
 import { useEntityViewStateMachine } from "../useEntityViewStateMachine";
 
 export const DETAILS_LAYOUT_KEY = "___DETAILS_KEY__";
@@ -118,7 +118,7 @@ export function DetailsLayout({ children, entity, menuKey }: IProps) {
                     );
                   }
                   const entityType = relatedEntitiesMap[menuItem.name].type;
-                  const entityCount = getEntitiesTabsCount(
+                  const entityCount = getEntitiesRelationsCount(
                     entityType,
                     relatedEntitiesCounts.data[menuItem.name]
                   );

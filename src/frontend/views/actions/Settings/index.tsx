@@ -35,7 +35,8 @@ export function ActionSettings() {
   return (
     <BaseActionsLayout>
       <SectionBox
-        title={integrationDetail ? integrationDetail.title : "Loading..."}
+        isLoading={!integrationDetail}
+        title={integrationDetail?.title}
         description={integrationDetail ? integrationDetail.description : ""}
         iconButtons={[
           {

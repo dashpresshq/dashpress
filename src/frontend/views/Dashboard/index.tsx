@@ -1,4 +1,3 @@
-import { ComponentIsLoading } from "@hadmean/chromista";
 import { Filter, Settings } from "react-feather";
 import { NAVIGATION_LINKS, useSetPageDetails } from "frontend/lib/routing";
 import { META_USER_PERMISSIONS, USER_PERMISSIONS } from "shared/types/user";
@@ -15,6 +14,7 @@ import { DashboardWidget } from "./widgets";
 import { DemoVideo } from "./Demo";
 import { useDashboardRelativeDayStore } from "./relativeTime.store";
 import { DASHBOARD_RELATIVE_DAYS } from "./constants";
+import { DashboardSkeleton } from "./Skeleton";
 
 const Root = styled.div`
   ${gridRoot};
@@ -64,7 +64,7 @@ export function Dashboard() {
       <ViewStateMachine
         loading={widgets.isLoading}
         error={widgets.error}
-        loader={<ComponentIsLoading />}
+        loader={<DashboardSkeleton />}
       >
         <Root>
           {(widgets.data || []).map((config) => (

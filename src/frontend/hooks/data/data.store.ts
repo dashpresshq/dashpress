@@ -30,7 +30,7 @@ export const ENTITY_DETAILS_PATH = (entity: string, id: string) =>
 export const ENTITY_REFERENCE_PATH = (entity: string, id: string) =>
   `/api/data/${entity}/${id}/reference`;
 
-export const ENTITY_LIST_PATH = (entity: string) => `/api/data/${entity}`;
+export const ENTITY_LIST_PATH = (entity: string) => `/api/data/${entity}/list`;
 
 export const useEntityDataDetails = (entity: string, id: string) => {
   const entityDiction = useEntityDiction(entity);
@@ -171,8 +171,6 @@ export function useEntityDataUpdationMutation(entity: string, id: string) {
     apiMutateOptions
   );
 }
-
-// TODO fix delete on details page showing 404
 
 export function useEntityDataDeletionMutation(
   entity: string,

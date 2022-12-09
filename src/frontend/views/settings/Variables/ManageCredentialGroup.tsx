@@ -147,7 +147,6 @@ export function ManageCredentialGroup({
     {
       Header: "Key",
       accessor: "key",
-      disableSortBy: true,
       // eslint-disable-next-line react/no-unstable-nested-components
       Cell: ({ value }: { value: unknown }) => (
         <span
@@ -160,7 +159,6 @@ export function ManageCredentialGroup({
     {
       Header: "Value",
       accessor: "value",
-      disableSortBy: true,
     },
   ];
 

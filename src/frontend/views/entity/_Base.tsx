@@ -97,6 +97,7 @@ export function BaseEntitySettingsLayout({ children }: IProps) {
               ...featureFlagMenuItems,
               // Computed Table fields
               // Computed Details fields
+              // Custom Render
             ]}
             currentMenuItem={router.asPath.split("?")[0]}
           />

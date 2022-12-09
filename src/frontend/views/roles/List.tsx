@@ -71,7 +71,6 @@ export function ListRoles() {
               Header: "Role",
               accessor: "label",
               Cell: (value) => userFriendlyCase(value.value as string),
-              disableSortBy: true,
             },
             {
               Header: "Action",

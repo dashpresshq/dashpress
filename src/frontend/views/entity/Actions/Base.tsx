@@ -116,22 +116,18 @@ export function BaseActionInstances({ entity, integrationKey }: IProps) {
               ? {
                   Header: "Entity",
                   accessor: "entity",
-                  disableSortBy: true,
                 }
               : {
                   Header: "Integration",
                   accessor: "integrationKey",
-                  disableSortBy: true,
                 },
             {
               Header: "Trigger",
               accessor: "formAction",
-              disableSortBy: true,
             },
             {
               Header: "Action",
               accessor: "implementationKey",
-              disableSortBy: true,
             },
             {
               Header: "Action",

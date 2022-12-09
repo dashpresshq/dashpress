@@ -30,9 +30,12 @@ export function FEPaginationTable<T extends Record<string, unknown>>({
 
   const tableData = useFEPaginatedData<T>(dataEndpoint, {
     ...paginatedDataState,
-    sortBy: undefined,
+    sortBy: paginatedDataState.sortBy,
     pageIndex: paginatedDataState.pageIndex + 1,
     filters: undefined,
+    // filters: {
+    //   label: "Root User",
+    // },
   });
 
   return (

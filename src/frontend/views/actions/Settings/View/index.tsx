@@ -1,4 +1,4 @@
-import { SchemaForm } from "frontend/lib/form/SchemaForm";
+import { SchemaForm } from "frontend/components/SchemaForm/SchemaForm";
 import { Spacer, Tabs, Text } from "@hadmean/chromista";
 import { IIntegrationsList, IActivatedAction } from "shared/types/actions";
 import { useEffect } from "react";

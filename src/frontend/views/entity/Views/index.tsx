@@ -5,7 +5,7 @@ import {
 } from "@hadmean/chromista";
 import { SLUG_LOADING_VALUE } from "@hadmean/protozoa";
 import { useSetPageDetails } from "frontend/lib/routing";
-import { ViewStateMachine } from "frontend/lib/ViewStateMachine";
+import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { ITableTab } from "shared/types/data";
 import { useEntitySlug } from "frontend/hooks/entity/entity.config";
 import { LINK_TO_DOCS } from "frontend/views/constants";

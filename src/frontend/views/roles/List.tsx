@@ -9,7 +9,7 @@ import { AppLayout } from "frontend/_layouts/app";
 import { Plus } from "react-feather";
 import { NAVIGATION_LINKS, useSetPageDetails } from "frontend/lib/routing";
 import { useRouter } from "next/router";
-import { FEPaginationTable } from "frontend/lib/FEPaginationTable";
+import { FEPaginationTable } from "frontend/components/FEPaginationTable";
 import { userFriendlyCase } from "frontend/lib/strings";
 import { IValueLabel } from "@hadmean/chromista/dist/types";
 import { SystemRoles, USER_PERMISSIONS } from "shared/types/user";

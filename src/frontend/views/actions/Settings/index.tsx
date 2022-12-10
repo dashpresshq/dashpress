@@ -5,7 +5,7 @@ import {
 } from "@hadmean/chromista";
 import { useRouteParam, useSetPageDetails } from "frontend/lib/routing";
 import { USER_PERMISSIONS } from "shared/types/user";
-import { ViewStateMachine } from "frontend/lib/ViewStateMachine";
+import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { LINK_TO_DOCS } from "frontend/views/constants";
 import { BaseActionsLayout } from "../_Base";
 import { useIntegrationsList, useActiveActionList } from "../actions.store";

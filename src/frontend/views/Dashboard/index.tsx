@@ -1,7 +1,7 @@
 import { Filter, Settings } from "react-feather";
 import { NAVIGATION_LINKS, useSetPageDetails } from "frontend/lib/routing";
 import { META_USER_PERMISSIONS, USER_PERMISSIONS } from "shared/types/user";
-import { ViewStateMachine } from "frontend/lib/ViewStateMachine";
+import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import React from "react";
 import { useUserHasPermission } from "frontend/hooks/auth/user.store";
 import styled from "styled-components";

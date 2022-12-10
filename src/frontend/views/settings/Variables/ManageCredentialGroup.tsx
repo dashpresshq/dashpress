@@ -10,14 +10,14 @@ import {
 import { IntegrationsConfigurationGroup } from "shared/types/integrations";
 import { LINK_TO_DOCS } from "frontend/views/constants";
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { FEPaginationTable } from "frontend/lib/FEPaginationTable";
+import { FEPaginationTable } from "frontend/components/FEPaginationTable";
 import { ToastService, useApi } from "@hadmean/protozoa";
 import {
   IPageDetails,
   useSetCurrentActionItems,
 } from "frontend/lib/routing/usePageDetails";
 import { HelpCircle, Plus } from "react-feather";
-import { SchemaForm } from "frontend/lib/form/SchemaForm";
+import { SchemaForm } from "frontend/components/SchemaForm/SchemaForm";
 import { usePasswordStore } from "frontend/views/actions/password.store";
 import { useUserHasPermissions } from "frontend/hooks/auth/user.store";
 import { USER_PERMISSIONS } from "shared/types/user";

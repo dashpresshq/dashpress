@@ -13,7 +13,7 @@ const handler = requestHandler({
 
 describe("Request Validations => paginationFilterValidationImpl", () => {
   beforeAll(() => {
-    setupAllTestData(["schema"]);
+    setupAllTestData(["schema", "credentials"]);
   });
   it("should return correct pagination object", async () => {
     const { req, res } = createAuthenticatedMocks({

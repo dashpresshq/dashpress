@@ -3,7 +3,7 @@ import { AuthLayout } from "frontend/_layouts/guest";
 import { useSetupCheck } from "frontend/hooks/setup/setup.store";
 import { FormSkeleton, FormSkeletonSchema } from "@hadmean/chromista";
 import { NAVIGATION_LINKS } from "frontend/lib/routing";
-import { ViewStateMachine } from "frontend/lib/ViewStateMachine";
+import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { UserSetupForm } from "./Form";
 import { useSetupUserMutation } from "../setup.store";
 

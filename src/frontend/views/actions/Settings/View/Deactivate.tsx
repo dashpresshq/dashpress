@@ -1,6 +1,6 @@
 import { Stack, Text, Spacer } from "@hadmean/chromista";
 import { HTTP_INTEGRATION_KEY, IIntegrationsList } from "shared/types/actions";
-import { SchemaForm } from "frontend/lib/form/SchemaForm";
+import { SchemaForm } from "frontend/components/SchemaForm/SchemaForm";
 import { useDeactivateActionMutation } from "../../actions.store";
 
 interface IProps {

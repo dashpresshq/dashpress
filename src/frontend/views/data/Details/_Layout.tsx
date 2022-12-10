@@ -19,7 +19,7 @@ import {
 } from "frontend/hooks/entity/entity.config";
 import { AppLayout } from "frontend/_layouts/app";
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
-import { ViewStateMachine } from "frontend/lib/ViewStateMachine";
+import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import {
   EntityActionTypes,
   useEntityActionMenuItems,

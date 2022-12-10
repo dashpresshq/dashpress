@@ -14,7 +14,7 @@ import {
 } from "@hadmean/protozoa";
 import { useState } from "react";
 import { QueryFilter } from "shared/types/data";
-import { ViewStateMachine } from "frontend/lib/ViewStateMachine";
+import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { NAVIGATION_LINKS } from "../../../lib/routing/links";
 import {
   useEntityCrudSettings,

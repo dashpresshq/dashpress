@@ -1,7 +1,7 @@
 import * as React from "react";
 import { render, screen } from "@testing-library/react";
 import { AppWrapper } from "@hadmean/chromista";
-import { SchemaForm } from "./SchemaForm";
+import { SchemaForm } from ".";
 
 type IAccount = {
   name: string;

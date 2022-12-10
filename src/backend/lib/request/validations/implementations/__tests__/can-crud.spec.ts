@@ -1,6 +1,7 @@
 import { requestHandler } from "backend/lib/request";
 import {
   createAuthenticatedMocks,
+  setupAllTestData,
   setupAppConfigTestData,
 } from "__tests__/api/_test-utils";
 
@@ -27,6 +28,9 @@ const handler = requestHandler(
 );
 
 describe("Request Validations => canCrudValidationImpl", () => {
+  beforeAll(async () => {
+    await setupAllTestData(["schema"]);
+  });
   it("should throw error on invalid entity", async () => {
     const { req, res } = createAuthenticatedMocks({
       method: "GET",

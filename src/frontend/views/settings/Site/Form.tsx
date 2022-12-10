@@ -1,6 +1,6 @@
 import { ButtonLang, IFormProps } from "@hadmean/protozoa";
 import { ISiteSettings } from "frontend/hooks/app/site.config";
-import { SchemaForm } from "frontend/lib/form/SchemaForm";
+import { SchemaForm } from "frontend/components/SchemaForm/SchemaForm";
 
 export function SiteSettingsForm({
   onSubmit,

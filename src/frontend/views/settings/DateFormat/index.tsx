@@ -9,7 +9,7 @@ import {
   useAppConfiguration,
   useUpsertConfigurationMutation,
 } from "frontend/hooks/configuration/configuration.store";
-import { ViewStateMachine } from "frontend/lib/ViewStateMachine";
+import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { format as dateFnsFormat } from "date-fns";
 import { ToastService } from "@hadmean/protozoa";
 import { BaseSettingsLayout } from "../_Base";

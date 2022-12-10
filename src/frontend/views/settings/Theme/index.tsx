@@ -9,7 +9,7 @@ import {
   useAppConfiguration,
   useUpsertConfigurationMutation,
 } from "frontend/hooks/configuration/configuration.store";
-import { ViewStateMachine } from "frontend/lib/ViewStateMachine";
+import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { useUpdateUserPreferencesMutation } from "frontend/views/account/account.store";
 import { useAuthenticatedUserPreferences } from "frontend/hooks/auth/user.store";
 import { IThemeSettings } from "frontend/_layouts/useAppTheme";

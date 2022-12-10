@@ -11,14 +11,14 @@ import {
   TableSkeleton,
   ITableColumn,
 } from "@hadmean/chromista";
-import { ViewStateMachine } from "./ViewStateMachine";
+import { ViewStateMachine } from "../ViewStateMachine";
 
 interface IProps {
   columns: ITableColumn[];
   dataEndpoint: string;
   emptyMessage?: string;
 }
-// TODO FE search
+
 export function FEPaginationTable<T extends Record<string, unknown>>({
   columns,
   dataEndpoint,

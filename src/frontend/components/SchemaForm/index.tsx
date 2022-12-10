@@ -7,7 +7,7 @@ import {
 } from "shared/form-schemas/types";
 import { runValidationError } from "shared/validations/run";
 import { RenderFormInput } from "./_RenderFormInput";
-import { userFriendlyCase } from "../strings";
+import { userFriendlyCase } from "../../lib/strings";
 import { IFormExtension } from "./types";
 import { runFormBeforeSubmit, runFormFieldState } from "./form-run";
 import { useGlobalScriptContext } from "./useGlobalScriptContext";

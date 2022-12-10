@@ -10,8 +10,8 @@ import {
 } from "@hadmean/chromista";
 import { SLUG_LOADING_VALUE, useApi } from "@hadmean/protozoa";
 import { useActiveEntities } from "frontend/hooks/entity/entity.store";
-import { FEPaginationTable } from "frontend/lib/FEPaginationTable";
-import { ViewStateMachine } from "frontend/lib/ViewStateMachine";
+import { FEPaginationTable } from "frontend/components/FEPaginationTable";
+import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import {
   useIntegrationsList,
   useActiveActionList,

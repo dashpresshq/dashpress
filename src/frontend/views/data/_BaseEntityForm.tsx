@@ -4,7 +4,7 @@ import {
   SLUG_LOADING_VALUE,
 } from "@hadmean/protozoa";
 import { FormSkeleton, FormSkeletonSchema } from "@hadmean/chromista";
-import { SchemaForm } from "frontend/lib/form/SchemaForm";
+import { SchemaForm } from "frontend/components/SchemaForm/SchemaForm";
 import { useEntityConfiguration } from "frontend/hooks/configuration/configuration.store";
 import {
   useEntityFields,
@@ -17,9 +17,9 @@ import {
   useEntityFieldValidations,
   useEntitySlug,
 } from "frontend/hooks/entity/entity.config";
-import { IFormExtension } from "frontend/lib/form/types";
+import { IFormExtension } from "frontend/components/SchemaForm/types";
 import { useMemo } from "react";
-import { ViewStateMachine } from "frontend/lib/ViewStateMachine";
+import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { buildAppliedSchemaFormConfig } from "./buildAppliedSchemaFormConfig";
 import { useEntityViewStateMachine } from "./useEntityViewStateMachine";
 import { fitlerOutHiddenScalarColumns } from "./utils";

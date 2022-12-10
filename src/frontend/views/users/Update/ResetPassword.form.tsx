@@ -1,5 +1,5 @@
 import { IFormProps } from "@hadmean/protozoa";
-import { SchemaForm } from "frontend/lib/form/SchemaForm";
+import { SchemaForm } from "frontend/components/SchemaForm/SchemaForm";
 import {
   IResetPasswordForm,
   RESET_PASSWORD_FORM_SCHEMA,

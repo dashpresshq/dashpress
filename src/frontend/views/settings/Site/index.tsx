@@ -9,7 +9,7 @@ import {
   useAppConfiguration,
   useUpsertConfigurationMutation,
 } from "frontend/hooks/configuration/configuration.store";
-import { ViewStateMachine } from "frontend/lib/ViewStateMachine";
+import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { ISiteSettings } from "frontend/hooks/app/site.config";
 import { BaseSettingsLayout } from "../_Base";
 import { SiteSettingsForm } from "./Form";

@@ -1,5 +1,5 @@
 import { ButtonLang, IFormProps } from "@hadmean/protozoa";
-import { SchemaForm } from "frontend/lib/form/SchemaForm";
+import { SchemaForm } from "frontend/components/SchemaForm/SchemaForm";
 import {
   CREATE_ROLE_FORM_SCHEMA,
   ICreateRoleForm,

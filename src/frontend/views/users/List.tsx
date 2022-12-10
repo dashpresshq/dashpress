@@ -11,7 +11,7 @@ import { NAVIGATION_LINKS, useSetPageDetails } from "frontend/lib/routing";
 import { useRouter } from "next/router";
 import { IAccountProfile, USER_PERMISSIONS } from "shared/types/user";
 import { userFriendlyCase } from "frontend/lib/strings";
-import { FEPaginationTable } from "frontend/lib/FEPaginationTable";
+import { FEPaginationTable } from "frontend/components/FEPaginationTable";
 import {
   ADMIN_USERS_LIST_ENDPOINT,
   useUserDeletionMutation,

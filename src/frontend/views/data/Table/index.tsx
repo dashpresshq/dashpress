@@ -11,7 +11,7 @@ import {
   Tabs,
 } from "@hadmean/chromista";
 import { useEntityConfiguration } from "frontend/hooks/configuration/configuration.store";
-import { ViewStateMachine } from "frontend/lib/ViewStateMachine";
+import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { META_USER_PERMISSIONS } from "shared/types/user";
 import { useEntitiesFilterCount } from "frontend/hooks/data/data.store";
 import { abbreviateNumber } from "@hadmean/protozoa";

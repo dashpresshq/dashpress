@@ -1,5 +1,5 @@
 import { ButtonLang, IFormProps } from "@hadmean/protozoa";
-import { SchemaForm } from "frontend/lib/form/SchemaForm";
+import { SchemaForm } from "frontend/components/SchemaForm/SchemaForm";
 import { UPDATE_USER_PREFERENCES_FORM_SCHEMA } from "shared/form-schemas/profile/update";
 import { IUserPreferences } from "shared/types/user";
 

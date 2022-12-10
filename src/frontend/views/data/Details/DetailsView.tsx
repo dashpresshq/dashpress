@@ -2,7 +2,7 @@ import { BaseSkeleton, Spacer, Text } from "@hadmean/chromista";
 import { SLUG_LOADING_VALUE } from "@hadmean/protozoa";
 import React, { Fragment } from "react";
 import { useAppConfiguration } from "frontend/hooks/configuration/configuration.store";
-import { ViewStateMachine } from "frontend/lib/ViewStateMachine";
+import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import {
   useEntityFieldLabels,
   useEntityFieldSelections,

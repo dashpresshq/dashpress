@@ -1,5 +1,5 @@
 import { IFormProps } from "@hadmean/protozoa";
-import { SchemaForm } from "frontend/lib/form/SchemaForm";
+import { SchemaForm } from "frontend/components/SchemaForm/SchemaForm";
 import { IAppliedSchemaFormConfig } from "shared/form-schemas/types";
 import { IKeyValue } from "./types";
 

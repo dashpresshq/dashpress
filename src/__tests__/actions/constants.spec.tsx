@@ -30,7 +30,9 @@ describe("pages/actions/constants", () => {
       );
 
       expect(
-        await screen.findByRole("row", { name: "Key Value Action" })
+        await screen.findByRole("row", {
+          name: "Key Sort By Key Value Sort By Value Action",
+        })
       ).toBeInTheDocument();
       expect(
         screen.getByRole("row", {

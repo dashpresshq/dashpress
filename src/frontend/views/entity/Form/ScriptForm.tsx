@@ -1,6 +1,6 @@
 import { FormSkeleton, FormSkeletonSchema } from "@hadmean/chromista";
-import { SchemaForm } from "frontend/lib/form/SchemaForm";
-import { ViewStateMachine } from "frontend/lib/ViewStateMachine";
+import { SchemaForm } from "frontend/components/SchemaForm/SchemaForm";
+import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 
 interface IProps {
   value: string;

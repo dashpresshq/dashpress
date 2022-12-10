@@ -24,7 +24,9 @@ describe("pages/users", () => {
     );
 
     expect(
-      await screen.findByRole("row", { name: "Username Name Role Action" })
+      await screen.findByRole("row", {
+        name: "Username Sort By Username Name Sort By Name Role Sort By Role Action",
+      })
     ).toBeInTheDocument();
     expect(
       screen.getByRole("row", { name: "user-1 User 1 Role 1 Edit" })

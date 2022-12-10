@@ -10,7 +10,7 @@ import {
   MenuSection,
 } from "@hadmean/chromista";
 import { useRouteParam } from "@hadmean/protozoa";
-import { ViewStateMachine } from "frontend/lib/ViewStateMachine";
+import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { useRouter } from "next/router";
 import { ReactNode } from "react";
 import { Book, Zap, ZapOff } from "react-feather";

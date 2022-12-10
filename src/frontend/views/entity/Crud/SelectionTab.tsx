@@ -6,7 +6,7 @@ import {
   Spacer,
   ListSkeleton,
 } from "@hadmean/chromista";
-import { ViewStateMachine } from "frontend/lib/ViewStateMachine";
+import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { useEffect, useState } from "react";
 import { IEntityField } from "shared/types/db";
 import { useStringSelections } from "../../../lib/selection";

@@ -11,7 +11,7 @@ import {
   useUserHasPermission,
 } from "frontend/hooks/auth/user.store";
 import { useNavigationStack, useSetPageDetails } from "frontend/lib/routing";
-import { ViewStateMachine } from "frontend/lib/ViewStateMachine";
+import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { LINK_TO_DOCS } from "frontend/views/constants";
 import { USER_PERMISSIONS } from "shared/types/user";
 import { AppLayout } from "../../../_layouts/app";

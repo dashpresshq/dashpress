@@ -29,7 +29,7 @@ import {
   useUpsertConfigurationMutation,
 } from "frontend/hooks/configuration/configuration.store";
 import { LINK_TO_DOCS } from "frontend/views/constants";
-import { ViewStateMachine } from "frontend/lib/ViewStateMachine";
+import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { BaseEntitySettingsLayout } from "../_Base";
 import { FieldsLabelForm, loadingFieldsLabelForm } from "./FieldsLabel.form";
 import { FieldsTypeForm } from "./FieldsType.form";

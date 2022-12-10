@@ -24,7 +24,7 @@ describe("pages/roles", () => {
     );
 
     expect(
-      await screen.findByRole("row", { name: "Role Action" })
+      await screen.findByRole("row", { name: "Role Sort By Role Action" })
     ).toBeInTheDocument();
     expect(screen.getByRole("row", { name: "Creator" })).toBeInTheDocument();
     expect(screen.getByRole("row", { name: "Viewer" })).toBeInTheDocument();

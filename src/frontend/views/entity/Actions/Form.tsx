@@ -1,6 +1,6 @@
 /* eslint-disable no-param-reassign */
 import { IValueLabel } from "@hadmean/chromista/dist/types";
-import { SchemaForm } from "frontend/lib/form/SchemaForm";
+import { SchemaForm } from "frontend/components/SchemaForm/SchemaForm";
 import { useState } from "react";
 import { IAppliedSchemaFormConfig } from "shared/form-schemas/types";
 import {

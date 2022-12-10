@@ -28,10 +28,7 @@ export function FEPaginationTable<T extends Record<string, unknown>>({
     ...paginatedDataState,
     sortBy: paginatedDataState.sortBy,
     pageIndex: paginatedDataState.pageIndex + 1,
-    filters: undefined,
-    // filters: {
-    //   label: "Root User",
-    // },
+    filters: paginatedDataState.filters as unknown as Record<string, T>[],
   });
 
   return (

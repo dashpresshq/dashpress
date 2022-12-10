@@ -7,8 +7,8 @@ import {
   IUseApiOptions,
   PaginatedData,
   IPaginatedDataState,
-  IColumnFilterBag,
 } from "@hadmean/protozoa";
+import { QueryFilter } from "shared/types/data";
 
 const DEFAULT_PAGE_SIZE = 10;
 
@@ -35,27 +35,30 @@ export function useFEPaginatedData<T>(
         let returnData: T[] = data as unknown as T[];
         const pageSize = dataState.pageSize || DEFAULT_PAGE_SIZE;
         if (dataState.filters) {
-          returnData = returnData.filter((datum) =>
-            Object.entries(dataState.filters || {}).every(
-              ([filterField, filterValue]) => {
-                const currentValue = get(datum, filterField);
-                switch ((filterValue as IColumnFilterBag<any>).operator) {
-                  case FilterOperators.CONTAINS:
-                    return currentValue.includes(filterValue);
-                  case FilterOperators.EQUAL_TO:
-                    return currentValue === filterValue;
-                  case FilterOperators.NOT_EQUAL:
-                    return currentValue !== filterValue;
-                  case FilterOperators.LESS_THAN:
-                    return currentValue < filterValue;
-                  case FilterOperators.GREATER_THAN:
-                    return currentValue > filterValue;
-                }
-                return true;
+          returnData = returnData.filter((datum) => {
+            return Object.values(dataState.filters || {}).every(($filter) => {
+              const filter = $filter as unknown as QueryFilter;
+              const filterValue = filter.value.value;
+              const currentValue = get(datum, filter.id);
+              switch (filter.value.operator) {
+                case FilterOperators.CONTAINS:
+                  return currentValue
+                    .toLowerCase()
+                    .includes(((filterValue || "") as string).toLowerCase());
+                case FilterOperators.EQUAL_TO:
+                  return currentValue === filterValue;
+                case FilterOperators.NOT_EQUAL:
+                  return currentValue !== filterValue;
+                case FilterOperators.LESS_THAN:
+                  return currentValue < filterValue;
+                case FilterOperators.GREATER_THAN:
+                  return currentValue > filterValue;
               }
-            )
-          );
+              return true;
+            });
+          });
         }
+
         if (dataState.sortBy && dataState.sortBy.length > 0) {
           const { id, desc } = dataState.sortBy[0];
           returnData = returnData.sort((a, b) => {

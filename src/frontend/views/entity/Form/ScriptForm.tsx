@@ -9,7 +9,7 @@ interface IProps {
   field: string;
   error?: unknown;
 }
-
+// TODO error on invalid JS
 export function ScriptForm({
   value,
   onSubmit,

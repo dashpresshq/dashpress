@@ -10,7 +10,6 @@ import { Plus } from "react-feather";
 import { NAVIGATION_LINKS, useSetPageDetails } from "frontend/lib/routing";
 import { useRouter } from "next/router";
 import { FEPaginationTable } from "frontend/components/FEPaginationTable";
-import { userFriendlyCase } from "frontend/lib/strings";
 import { IValueLabel } from "@hadmean/chromista/dist/types";
 import { SystemRoles, USER_PERMISSIONS } from "shared/types/user";
 import { ADMIN_ROLES_ENDPOINT, useRoleDeletionMutation } from "./roles.store";
@@ -70,7 +69,9 @@ export function ListRoles() {
             {
               Header: "Role",
               accessor: "label",
-              Cell: (value) => userFriendlyCase(value.value as string),
+              filter: {
+                _type: "string",
+              },
             },
             {
               Header: "Action",

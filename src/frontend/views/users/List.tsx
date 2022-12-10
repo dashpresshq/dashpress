@@ -10,7 +10,6 @@ import { UserPlus } from "react-feather";
 import { NAVIGATION_LINKS, useSetPageDetails } from "frontend/lib/routing";
 import { useRouter } from "next/router";
 import { IAccountProfile, USER_PERMISSIONS } from "shared/types/user";
-import { userFriendlyCase } from "frontend/lib/strings";
 import { FEPaginationTable } from "frontend/components/FEPaginationTable";
 import {
   ADMIN_USERS_LIST_ENDPOINT,
@@ -72,15 +71,24 @@ export function ListUsers() {
             {
               Header: "Username",
               accessor: "username",
+              filter: {
+                _type: "string",
+              },
             },
             {
               Header: "Name",
               accessor: "name",
+              filter: {
+                _type: "string",
+              },
             },
             {
+              // TODO use role list
               Header: "Role",
               accessor: "role",
-              Cell: (value) => userFriendlyCase(value.value as string),
+              filter: {
+                _type: "string",
+              },
             },
             {
               Header: "Action",

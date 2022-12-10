@@ -116,18 +116,30 @@ export function BaseActionInstances({ entity, integrationKey }: IProps) {
               ? {
                   Header: "Entity",
                   accessor: "entity",
+                  filter: {
+                    _type: "string",
+                  },
                 }
               : {
                   Header: "Integration",
                   accessor: "integrationKey",
+                  filter: {
+                    _type: "string",
+                  },
                 },
             {
               Header: "Trigger",
               accessor: "formAction",
+              filter: {
+                _type: "string",
+              },
             },
             {
               Header: "Action",
               accessor: "implementationKey",
+              filter: {
+                _type: "string",
+              },
             },
             {
               Header: "Action",

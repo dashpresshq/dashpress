@@ -1,8 +1,3 @@
-import {
-  IBEPaginatedDataState,
-  IFEPaginatedDataState,
-  useFEPaginatedData,
-} from "@hadmean/protozoa";
 import { useState } from "react";
 
 import {
@@ -11,7 +6,9 @@ import {
   TableSkeleton,
   ITableColumn,
 } from "@hadmean/chromista";
+import { IPaginatedDataState } from "@hadmean/protozoa";
 import { ViewStateMachine } from "../ViewStateMachine";
+import { useFEPaginatedData } from "./useFEPagination";
 
 interface IProps {
   columns: ITableColumn[];
@@ -25,8 +22,8 @@ export function FEPaginationTable<T extends Record<string, unknown>>({
   emptyMessage,
 }: IProps) {
   const [paginatedDataState, setPaginatedDataState] = useState<
-    IFEPaginatedDataState<T> | IBEPaginatedDataState
-  >(DEFAULT_TABLE_PARAMS);
+    IPaginatedDataState<T>
+  >(DEFAULT_TABLE_PARAMS as IPaginatedDataState<unknown>);
 
   const tableData = useFEPaginatedData<T>(dataEndpoint, {
     ...paginatedDataState,

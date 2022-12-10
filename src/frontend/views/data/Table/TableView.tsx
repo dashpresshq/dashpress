@@ -7,10 +7,9 @@ import {
   TableSkeleton,
 } from "@hadmean/chromista";
 import {
-  IBEPaginatedDataState,
   usePaginatedData,
   SLUG_LOADING_VALUE,
-  IFEPaginatedDataState,
+  IPaginatedDataState,
 } from "@hadmean/protozoa";
 import { useState } from "react";
 import { QueryFilter } from "shared/types/data";
@@ -32,7 +31,7 @@ interface IProps {
   lean?: true;
   persitentFilters?: QueryFilter[];
   defaultTableState?: Pick<
-    IBEPaginatedDataState,
+    IPaginatedDataState<unknown>,
     "pageSize" | "sortBy" | "filters"
   >;
 }
@@ -51,19 +50,14 @@ export function EntityTableView({
   );
 
   const [paginatedDataState, setPaginatedDataState] = useState<
-    IBEPaginatedDataState | IFEPaginatedDataState<any>
+    IPaginatedDataState<any>
   >({ ...DEFAULT_TABLE_PARAMS, ...defaultTableState });
 
   const tableData = usePaginatedData(
     ENTITY_TABLE_PATH(entity),
     {
       ...paginatedDataState,
-      filters: [
-        ...(paginatedDataState.filters as Array<
-          IBEPaginatedDataState | IFEPaginatedDataState<any>
-        >),
-        ...persitentFilters,
-      ],
+      filters: [...paginatedDataState.filters, ...persitentFilters],
     },
     {
       enabled: entity && entity !== SLUG_LOADING_VALUE,

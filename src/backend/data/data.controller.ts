@@ -1,7 +1,7 @@
 import { TemplateService } from "shared/lib/templates";
 import { IEntityField } from "shared/types/db";
 import { QueryFilter } from "shared/types/data";
-import { FilterOperators } from "@hadmean/chromista";
+import { FilterOperators } from "@hadmean/protozoa";
 import { IFieldValidationItem } from "shared/validations/types";
 import noop from "lodash/noop";
 import { NotFoundError } from "backend/lib/errors";

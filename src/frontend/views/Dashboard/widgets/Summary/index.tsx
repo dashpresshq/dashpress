@@ -1,12 +1,9 @@
-import {
-  FilterOperators,
-  SummaryWidget as SummaryWidgetPresentation,
-} from "@hadmean/chromista";
+import { SummaryWidget as SummaryWidgetPresentation } from "@hadmean/chromista";
 import { useEntityConfiguration } from "frontend/hooks/configuration/configuration.store";
 import { useEntityFilterCount } from "frontend/hooks/data/data.store";
 import { ITableTab, QueryFilter } from "shared/types/data";
 import { ISummaryWidgetConfig } from "shared/types/dashboard";
-import { DATE_FILTER_VALUE } from "@hadmean/protozoa";
+import { DATE_FILTER_VALUE, FilterOperators } from "@hadmean/protozoa";
 import { ROYGBIV } from "shared/constants/colors";
 import { IWidgetProps } from "../types";
 import { getFullAndRelativeCount } from "./getFullAndRelativeCount";

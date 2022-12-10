@@ -1,0 +1,1 @@
+git checkout release && git rebase master  && git push --no-verify && git checkout master && git push --no-verify

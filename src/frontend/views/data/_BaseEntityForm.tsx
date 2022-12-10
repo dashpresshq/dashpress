@@ -4,7 +4,7 @@ import {
   SLUG_LOADING_VALUE,
 } from "@hadmean/protozoa";
 import { FormSkeleton, FormSkeletonSchema } from "@hadmean/chromista";
-import { SchemaForm } from "frontend/components/SchemaForm/SchemaForm";
+import { SchemaForm } from "frontend/components/SchemaForm";
 import { useEntityConfiguration } from "frontend/hooks/configuration/configuration.store";
 import {
   useEntityFields,

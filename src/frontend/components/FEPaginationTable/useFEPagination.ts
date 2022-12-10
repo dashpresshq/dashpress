@@ -4,9 +4,9 @@ import {
   FilterOperators,
   makeGetRequest,
   getQueryCachekey,
-  IFEPaginatedDataState,
   IUseApiOptions,
   PaginatedData,
+  IBEPaginatedDataState,
 } from "@hadmean/protozoa";
 
 const DEFAULT_PAGE_SIZE = 10;
@@ -17,7 +17,7 @@ const compareString = (value1: string, value2: string) =>
 
 export function useFEPaginatedData<T>(
   endPoint: string,
-  dataState: IFEPaginatedDataState,
+  dataState: IBEPaginatedDataState,
   options: IUseApiOptions<T[]> = {}
 ): UseQueryResult<PaginatedData<T>> {
   return useQuery<PaginatedData<T>>(

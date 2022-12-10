@@ -3,7 +3,7 @@ import {
   ISetupUserForm,
   SETUP_USER_FORM_SCHEMA,
 } from "shared/form-schemas/setup/user";
-import { SchemaForm } from "frontend/components/SchemaForm/SchemaForm";
+import { SchemaForm } from "frontend/components/SchemaForm";
 
 export function UserSetupForm({ onSubmit }: IFormProps<ISetupUserForm>) {
   return (

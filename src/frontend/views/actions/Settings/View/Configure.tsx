@@ -1,5 +1,5 @@
 import { Spacer, Stack, Text } from "@hadmean/chromista";
-import { SchemaForm } from "frontend/components/SchemaForm/SchemaForm";
+import { SchemaForm } from "frontend/components/SchemaForm";
 import { IIntegrationsList } from "shared/types/actions";
 import {
   useActivationConfiguration,

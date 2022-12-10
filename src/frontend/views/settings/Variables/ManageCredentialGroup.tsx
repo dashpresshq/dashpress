@@ -17,7 +17,7 @@ import {
   useSetCurrentActionItems,
 } from "frontend/lib/routing/usePageDetails";
 import { HelpCircle, Plus } from "react-feather";
-import { SchemaForm } from "frontend/components/SchemaForm/SchemaForm";
+import { SchemaForm } from "frontend/components/SchemaForm";
 import { usePasswordStore } from "frontend/views/actions/password.store";
 import { useUserHasPermissions } from "frontend/hooks/auth/user.store";
 import { USER_PERMISSIONS } from "shared/types/user";

@@ -1,6 +1,6 @@
 import { IFormProps } from "@hadmean/protozoa";
 import { Text } from "@hadmean/chromista";
-import { SchemaForm } from "frontend/components/SchemaForm/SchemaForm";
+import { SchemaForm } from "frontend/components/SchemaForm";
 import {
   AUTH_SIGNIN_FORM_SCHEMA,
   ISignInForm,

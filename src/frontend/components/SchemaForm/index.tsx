@@ -35,7 +35,9 @@ export function SchemaForm<T extends Record<string, unknown>>({
 }: IProps<T>) {
   const scriptContext$1 = useGlobalScriptContext();
   const scriptContext = { ...scriptContext$1, action };
-  // :eyes needs finnesing
+
+  console.log(scriptContext);
+
   return (
     <Form
       onSubmit={async (formValues) => {

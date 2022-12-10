@@ -1,5 +1,5 @@
 import { ButtonLang, IFormProps, VALIDATION_LENGTH } from "@hadmean/protozoa";
-import { SchemaForm } from "frontend/components/SchemaForm/SchemaForm";
+import { SchemaForm } from "frontend/components/SchemaForm";
 
 type IDictionSettings = {
   plural: string;

@@ -1,5 +1,5 @@
 import { ButtonLang, IFormProps } from "@hadmean/protozoa";
-import { SchemaForm } from "frontend/components/SchemaForm/SchemaForm";
+import { SchemaForm } from "frontend/components/SchemaForm";
 
 type IDateFormatSettings = {
   format: string;

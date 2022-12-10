@@ -3,7 +3,7 @@ import {
   CHANGE_PASSWORD_FORM_SCHEMA,
   IChangePasswordForm,
 } from "shared/form-schemas/profile/password";
-import { SchemaForm } from "frontend/components/SchemaForm/SchemaForm";
+import { SchemaForm } from "frontend/components/SchemaForm";
 
 export function ChangePasswordForm({
   onSubmit,

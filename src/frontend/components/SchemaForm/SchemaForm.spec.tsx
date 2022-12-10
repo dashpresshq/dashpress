@@ -54,7 +54,7 @@ const FIELD_STATE = `
 `;
 
 describe("<SchemaForm />", () => {
-  it("should submit valid form", async () => {
+  it("should submit valid form and persist value", async () => {
     const mockOnSubmit = jest.fn();
     render(
       <AppWrapper>
@@ -74,6 +74,32 @@ describe("<SchemaForm />", () => {
       name: "Mary",
       email: "mary@mail.com",
     });
+
+    expect(screen.getByLabelText("Name")).toHaveValue("Mary");
+    expect(screen.getByLabelText("Email")).toHaveValue("mary@mail.com");
+  });
+
+  it("should reset form state when resetForm is true", async () => {
+    const mockOnSubmit = jest.fn();
+    render(
+      <AppWrapper>
+        <SchemaForm<IAccount>
+          onSubmit={mockOnSubmit}
+          buttonText="Submit Form"
+          fields={BASE_FIELDS}
+          resetForm
+        />
+      </AppWrapper>
+    );
+
+    await userEvent.type(screen.getByLabelText("Name"), "Mary");
+    await userEvent.type(screen.getByLabelText("Email"), "mary@mail.com");
+    await userEvent.click(screen.getByRole("button", { name: "Submit Form" }));
+
+    expect(mockOnSubmit).toHaveBeenCalled();
+
+    expect(screen.getByLabelText("Name")).toHaveValue("");
+    expect(screen.getByLabelText("Email")).toHaveValue("");
   });
 
   it("should submit valid form on empty beforeSubmit", async () => {
@@ -126,6 +152,31 @@ describe("<SchemaForm />", () => {
       customName: "Mary",
       customEmail: "mary@mail.com",
       action: "custom-action",
+    });
+  });
+
+  it("should submit valid form on invalid beforeSubmit JS", async () => {
+    const mockOnSubmit = jest.fn();
+    render(
+      <AppWrapper>
+        <SchemaForm<IAccount>
+          onSubmit={mockOnSubmit}
+          buttonText="Submit Form"
+          fields={BASE_FIELDS}
+          formExtension={{
+            beforeSubmit: "sm ks ks dsldm sl dm",
+          }}
+        />
+      </AppWrapper>
+    );
+
+    await userEvent.type(screen.getByLabelText("Name"), "Mary");
+    await userEvent.type(screen.getByLabelText("Email"), "mary@mail.com");
+    await userEvent.click(screen.getByRole("button", { name: "Submit Form" }));
+
+    expect(mockOnSubmit).toHaveBeenCalledWith({
+      name: "Mary",
+      email: "mary@mail.com",
     });
   });
 
@@ -249,6 +300,152 @@ describe("<SchemaForm />", () => {
     await userEvent.type(screen.getByLabelText("Name"), "-");
 
     expect(screen.getByLabelText("Email")).toBeInTheDocument();
+  });
+
+  it("should ignore form fields when it recieveds invalid JS", async () => {
+    const mockOnSubmit = jest.fn();
+    render(
+      <AppWrapper>
+        <SchemaForm<IAccount>
+          onSubmit={mockOnSubmit}
+          buttonText="Submit Form"
+          fields={{
+            ...BASE_FIELDS,
+          }}
+          action="edit"
+          formExtension={{
+            beforeSubmit: BEFORE_SUBMIT,
+            fieldsState: "sdmsd smd slmd s;ld sl",
+          }}
+        />
+      </AppWrapper>
+    );
+
+    await userEvent.type(screen.getByLabelText("Name"), "Hidden");
+    await userEvent.type(screen.getByLabelText("Email"), "Hidden");
+
+    await userEvent.click(screen.getByRole("button", { name: "Submit Form" }));
+
+    expect(mockOnSubmit).toHaveBeenCalledWith({
+      action: "edit",
+      customEmail: "Hidden",
+      customName: "Hidden",
+    });
+  });
+
+  it("should show validation errors", async () => {
+    const mockOnSubmit = jest.fn();
+    render(
+      <AppWrapper>
+        <SchemaForm<IAccount>
+          onSubmit={mockOnSubmit}
+          buttonText="Submit Form"
+          fields={{
+            ...BASE_FIELDS,
+          }}
+        />
+      </AppWrapper>
+    );
+
+    await userEvent.type(screen.getByLabelText("Name"), "h");
+    await userEvent.clear(screen.getByLabelText("Name"));
+
+    await userEvent.click(screen.getByRole("button", { name: "Submit Form" }));
+
+    expect(screen.getByRole("alert")).toHaveTextContent("Name is required");
+
+    await userEvent.type(screen.getByLabelText("Name"), "f");
+
+    await userEvent.type(screen.getByLabelText("Email"), "h");
+    await userEvent.clear(screen.getByLabelText("Email"));
+
+    await userEvent.click(screen.getByRole("button", { name: "Submit Form" }));
+
+    expect(screen.getByRole("alert")).toHaveTextContent("Email is required");
+
+    expect(mockOnSubmit).not.toHaveBeenCalledWith();
+
+    await userEvent.type(screen.getByLabelText("Email"), "f");
+
+    await userEvent.click(screen.getByRole("button", { name: "Submit Form" }));
+
+    expect(screen.queryByRole("alert")).not.toBeInTheDocument();
+
+    expect(mockOnSubmit).toHaveBeenCalledWith({ email: "f", name: "f" });
+  });
+
+  it("should use custom labels", async () => {
+    const mockOnSubmit = jest.fn();
+    render(
+      <AppWrapper>
+        <SchemaForm<{ name: string }>
+          onSubmit={mockOnSubmit}
+          buttonText="Submit Form"
+          fields={{
+            name: {
+              type: "text",
+              label: "Custom Name Label",
+              validations: [],
+            },
+          }}
+        />
+      </AppWrapper>
+    );
+
+    await userEvent.type(
+      screen.getByLabelText("Custom Name Label"),
+      "some name"
+    );
+
+    await userEvent.click(screen.getByRole("button", { name: "Submit Form" }));
+
+    expect(mockOnSubmit).toHaveBeenCalledWith({ name: "some name" });
+  });
+
+  it("should render * for required field", async () => {
+    const mockOnSubmit = jest.fn();
+    render(
+      <AppWrapper>
+        <SchemaForm<{ hello: string }>
+          onSubmit={mockOnSubmit}
+          buttonText="Submit Form"
+          fields={{
+            ...BASE_FIELDS,
+            hello: {
+              type: "text",
+              label: "Custom Name Label",
+              validations: [],
+            },
+          }}
+        />
+      </AppWrapper>
+    );
+
+    expect(screen.getAllByText("*").length).toBe(2);
+  });
+
+  it("should have form button disabled by default", async () => {
+    const mockOnSubmit = jest.fn();
+    render(
+      <AppWrapper>
+        <SchemaForm<{ name: string }>
+          onSubmit={mockOnSubmit}
+          buttonText="Submit Form"
+          fields={{
+            name: {
+              type: "text",
+              validations: [],
+            },
+          }}
+        />
+      </AppWrapper>
+    );
+
+    expect(screen.getByRole("button", { name: "Submit Form" })).toBeDisabled();
+    await userEvent.type(screen.getByLabelText("Name"), "Foo");
+    expect(
+      screen.getByRole("button", { name: "Submit Form" })
+    ).not.toBeDisabled();
   });
 
   it("should can onChange when fieldChanges", async () => {

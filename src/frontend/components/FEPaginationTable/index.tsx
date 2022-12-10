@@ -21,9 +21,8 @@ export function FEPaginationTable<T extends Record<string, unknown>>({
   dataEndpoint,
   emptyMessage,
 }: IProps) {
-  const [paginatedDataState, setPaginatedDataState] = useState<
-    IPaginatedDataState<T>
-  >(DEFAULT_TABLE_PARAMS as IPaginatedDataState<unknown>);
+  const [paginatedDataState, setPaginatedDataState] =
+    useState<IPaginatedDataState<unknown>>(DEFAULT_TABLE_PARAMS);
 
   const tableData = useFEPaginatedData<T>(dataEndpoint, {
     ...paginatedDataState,

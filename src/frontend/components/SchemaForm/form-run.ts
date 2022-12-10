@@ -17,30 +17,29 @@ export const runJavascriptString = (
   }
 };
 
-// TODO
-export const runAsyncJavascriptString = async (
-  javascriptString: string,
-  globals: Record<string, unknown>,
-  context: Record<string, unknown>
-) => {
-  const AsyncFunction = async function X() {}.constructor;
-  try {
-    return await AsyncFunction(
-      "$",
-      javascriptString
-    )({
-      ...globals,
-      ...context,
-    });
-  } catch (e) {
-    console.warn(
-      `•Expression:'${javascriptString}'\n•JS-Error: `,
-      e,
-      "\n•Context: ",
-      context
-    );
-  }
-};
+// export const runAsyncJavascriptString = async (
+//   javascriptString: string,
+//   globals: Record<string, unknown>,
+//   context: Record<string, unknown>
+// ) => {
+//   const AsyncFunction = async function X() {}.constructor;
+//   try {
+//     return await AsyncFunction(
+//       "$",
+//       javascriptString
+//     )({
+//       ...globals,
+//       ...context,
+//     });
+//   } catch (e) {
+//     console.warn(
+//       `•Expression:'${javascriptString}'\n•JS-Error: `,
+//       e,
+//       "\n•Context: ",
+//       context
+//     );
+//   }
+// };
 
 export const runFormFieldState = (
   fieldStateString: string,
@@ -52,7 +51,7 @@ export const runFormFieldState = (
   }
   const response = runJavascriptString(fieldStateString, globals, context);
   if (typeof response !== "object") {
-    return {}; // :eyes on this check
+    return {};
   }
   return response;
 };
@@ -68,5 +67,10 @@ export const runFormBeforeSubmit = (
   const response = runJavascriptString(beforeSubmitString, globals, {
     formValues,
   });
+
+  if (!response) {
+    return formValues;
+  }
+
   return response;
 };

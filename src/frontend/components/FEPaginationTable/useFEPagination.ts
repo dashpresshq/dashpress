@@ -7,6 +7,7 @@ import {
   IUseApiOptions,
   PaginatedData,
   IPaginatedDataState,
+  IColumnFilterBag,
 } from "@hadmean/protozoa";
 
 const DEFAULT_PAGE_SIZE = 10;
@@ -38,7 +39,7 @@ export function useFEPaginatedData<T>(
             Object.entries(dataState.filters || {}).every(
               ([filterField, filterValue]) => {
                 const currentValue = get(datum, filterField);
-                switch (filterValue.operator as FilterOperators) {
+                switch ((filterValue as IColumnFilterBag<any>).operator) {
                   case FilterOperators.CONTAINS:
                     return currentValue.includes(filterValue);
                   case FilterOperators.EQUAL_TO:

@@ -32,6 +32,7 @@
     "@hadmean/bacteria": "^0.0.6",
     "@hadmean/chromista": "^1.0.61",
     "@hadmean/protozoa": "^1.0.15",
+    "@testing-library/react-hooks": "^8.0.1",
     "@types/cryptr": "^4.0.1",
     "@types/jsonwebtoken": "^8.5.8",
     "@types/nodemailer": "^6.4.6",

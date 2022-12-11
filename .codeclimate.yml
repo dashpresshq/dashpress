@@ -1,2 +1,4 @@
 exclude_patterns:
 - "src/__tests__/"
+- "**/*.spec.ts"
+- "**/*.spec.tsx"

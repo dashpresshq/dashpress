@@ -24,19 +24,15 @@ export function useFEPaginatedData<T>(
   return useQuery<PaginatedData<T>>(
     getQueryCachekey(endPoint),
     async () => {
-      if (options?.wipData) {
-        return options.wipData;
-      }
       return await makeGetRequest(endPoint, "Data could not be retrieved");
     },
     {
       enabled: options.enabled,
       select: (data: any) => {
         let returnData: T[] = data as unknown as T[];
-        const pageSize = dataState.pageSize || DEFAULT_PAGE_SIZE;
         if (dataState.filters) {
           returnData = returnData.filter((datum) => {
-            return Object.values(dataState.filters || {}).every(($filter) => {
+            return (dataState.filters || []).every(($filter) => {
               const filter = $filter as unknown as QueryFilter;
               const filterValue = filter.value.value;
               const currentValue = get(datum, filter.id);
@@ -74,6 +70,8 @@ export function useFEPaginatedData<T>(
           });
         }
         const totalReturnData = returnData.length;
+        const pageSize = dataState.pageSize || DEFAULT_PAGE_SIZE;
+
         return {
           pageIndex: dataState.pageIndex,
           pageSize,

@@ -25,17 +25,17 @@ describe("pages/users", () => {
 
     expect(
       await screen.findByRole("row", {
-        name: "Username Sort By Username Name Sort By Name Role Sort By Role Action",
+        name: "Username Sort By Username Filter By Search Name Sort By Name Filter By Search Role Sort By Role Filter By Search Action",
       })
     ).toBeInTheDocument();
     expect(
-      screen.getByRole("row", { name: "user-1 User 1 Role 1 Edit" })
+      screen.getByRole("row", { name: "user-1 User 1 role-1 Edit" })
     ).toBeInTheDocument();
     expect(
-      screen.getByRole("row", { name: "user-2 User 2 Role 2 Edit" })
+      screen.getByRole("row", { name: "user-2 User 2 role-2 Edit" })
     ).toBeInTheDocument();
     expect(
-      screen.getByRole("row", { name: "user-3 User 3 Role 3 Edit" })
+      screen.getByRole("row", { name: "user-3 User 3 role-3 Edit" })
     ).toBeInTheDocument();
   });
 

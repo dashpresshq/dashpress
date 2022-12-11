@@ -22,7 +22,7 @@ describe("/api/account/index", () => {
       [
         {
           "name": "Root User",
-          "role": "creator",
+          "role": "Creator",
           "username": "root",
         },
       ]
@@ -55,7 +55,7 @@ describe("/api/account/index", () => {
     expect(getRequest.res._getJSONData()[1]).toMatchInlineSnapshot(`
       {
         "name": "New user",
-        "role": "viewer",
+        "role": "Viewer",
         "username": "newuser",
       }
     `);
@@ -97,7 +97,7 @@ describe("/api/account/index", () => {
     expect(getRequest.res._getJSONData()[1]).toMatchInlineSnapshot(`
       {
         "name": "New user",
-        "role": "viewer",
+        "role": "Viewer",
         "username": "newuser",
       }
     `);

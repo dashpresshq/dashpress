@@ -11,7 +11,6 @@ import { HashService } from "backend/lib/hash/hash.service";
 import { IApplicationService } from "backend/types";
 import { IAccountUser, IAccountProfile } from "shared/types/user";
 import { ISuccessfullAuthenticationResponse } from "shared/types/auth";
-import { userFriendlyCase } from "frontend/lib/strings";
 
 const INVALID_LOGIN_MESSAGE = "Invalid Login";
 
@@ -64,7 +63,7 @@ export class UsersService implements IApplicationService {
       delete userCopy.systemProfile;
       delete userCopy.preferences;
 
-      return { ...userCopy, role: userFriendlyCase(user.role) };
+      return userCopy;
     });
   }
 

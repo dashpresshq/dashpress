@@ -29,7 +29,7 @@ const handler = requestHandler(
 
 describe("Request Validations => canCrudValidationImpl", () => {
   beforeAll(async () => {
-    await setupAllTestData(["schema", "users", "roles"]);
+    await setupAllTestData(["schema", "users", "roles", "app-config"]);
   });
   it("should throw error on invalid entity", async () => {
     const { req, res } = createAuthenticatedMocks({

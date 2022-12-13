@@ -157,6 +157,48 @@ describe("/api/actions/integrations/index", () => {
           "key": "twilio",
           "title": "Twilio",
         },
+        {
+          "configurationSchema": {
+            "defaultSenderEmail": {
+              "type": "text",
+              "validations": [],
+            },
+            "serverToken": {
+              "type": "text",
+              "validations": [
+                {
+                  "validationType": "required",
+                },
+              ],
+            },
+          },
+          "description": "Send emails through Postmark",
+          "key": "postmark",
+          "title": "Postmark",
+        },
+        {
+          "configurationSchema": {
+            "apiKey": {
+              "type": "text",
+              "validations": [
+                {
+                  "validationType": "required",
+                },
+              ],
+            },
+            "defaultSenderEmail": {
+              "type": "text",
+              "validations": [],
+            },
+            "defaultSenderName": {
+              "type": "text",
+              "validations": [],
+            },
+          },
+          "description": "Send emails through SendInBlue",
+          "key": "sendInBlue",
+          "title": "SendInBlue",
+        },
       ]
     `);
   });

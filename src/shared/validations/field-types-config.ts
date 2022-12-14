@@ -14,11 +14,12 @@ export const FIELD_TYPES_CONFIG_MAP: Record<
   | "reference"
   | "boolean"
   | "selection-enum"
-  | "image" // not implemeneted
+  | "file"
+  | "image"
   | "datetime-local"
   | "color",
   {
-    tableFilterType: TableFilterType | "not-filterable";
+    tableFilterType?: TableFilterType;
     sortable: boolean;
     typeIsNotChangeAble?: true;
     configureSelection?: true;
@@ -39,7 +40,6 @@ export const FIELD_TYPES_CONFIG_MAP: Record<
     ],
   },
   password: {
-    tableFilterType: "not-filterable",
     sortable: false,
     allowedValidations: [
       "matchOtherField",
@@ -125,12 +125,14 @@ export const FIELD_TYPES_CONFIG_MAP: Record<
   },
   image: {
     sortable: false,
-    tableFilterType: "not-filterable",
     allowedValidations: ["required"],
+  },
+  file: {
+    allowedValidations: ["required"],
+    sortable: false,
   },
   color: {
     sortable: false,
-    tableFilterType: "not-filterable",
     allowedValidations: ["maxLength", "minLength", "required"],
   },
 
@@ -182,9 +184,7 @@ export const FIELD_TYPES_CONFIG_MAP: Record<
   },
 };
 
-//   | 'file'
 //   | 'range'
 //   | 'time'
-
 //   | 'month'
 //   | 'week'

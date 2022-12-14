@@ -11,8 +11,8 @@ import { rolesService } from "backend/roles/roles.service";
 import { schemasService } from "backend/schema/schema.service";
 import { usersService } from "backend/users/users.service";
 import noop from "lodash/noop";
-
-import { requestHandler } from "../../../backend/lib/request";
+import { packagesService } from "backend/packages/packages.service";
+import { requestHandler } from "backend/lib/request";
 
 export default requestHandler(
   {
@@ -30,6 +30,10 @@ export default requestHandler(
         await schemasService.bootstrap();
         await usersService.bootstrap();
         await entitiesService.bootstrap();
+
+        await packagesService.bootstrap();
+
+        await packagesService.installPackages();
       } catch (error) {
         noop();
       }

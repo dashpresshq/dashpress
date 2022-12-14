@@ -41,7 +41,7 @@ export function BaseActionsLayout({ children }: IProps) {
     <AppLayout>
       <SectionRow>
         <SectionLeft>
-          <SectionBox headLess title="">
+          <SectionBox title="Actions">
             <ViewStateMachine
               loading={integrationsList.isLoading || activeActionList.isLoading}
               error={integrationsList.error || activeActionList.error}
@@ -80,6 +80,41 @@ export function BaseActionsLayout({ children }: IProps) {
             ]}
             currentMenuItem={router.asPath.split("?")[0]}
           />
+
+          <Spacer />
+
+          <SectionBox title="File Storage">
+            <MenuSection
+              menuItems={[
+                {
+                  action: NAVIGATION_LINKS.ACTIONS.VARIABLES,
+                  name: "AWS S3",
+                  IconComponent: Book,
+                },
+                {
+                  action: NAVIGATION_LINKS.ACTIONS.VARIABLES,
+                  name: "Firebase Storage",
+                  IconComponent: Book,
+                },
+                {
+                  action: NAVIGATION_LINKS.ACTIONS.VARIABLES,
+                  name: "Minio",
+                  IconComponent: Book,
+                },
+                {
+                  action: NAVIGATION_LINKS.ACTIONS.VARIABLES,
+                  name: "Cloudinary",
+                  IconComponent: Book,
+                },
+                {
+                  action: NAVIGATION_LINKS.ACTIONS.VARIABLES,
+                  name: "Google Cloud Storage",
+                  IconComponent: Book,
+                },
+              ]}
+              currentMenuItem={router.asPath.split("?")[0]}
+            />
+          </SectionBox>
         </SectionLeft>
         <SectionRight>{children}</SectionRight>
       </SectionRow>

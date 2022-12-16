@@ -58,3 +58,11 @@ const packagesPersistenceService =
   createConfigDomainPersistenceService<IPackage>("packages");
 
 export const packagesService = new PackagesService(packagesPersistenceService);
+
+/*
+https://github.com/khaosdoctor/multer-firebase-storage
+https://www.npmjs.com/package/multer-minio-storage-engine
+https://www.npmjs.com/package/multer-storage-cloudinary
+https://www.npmjs.com/package/multer-cloud-storage
+https://www.npmjs.com/package/multer-s3
+*/

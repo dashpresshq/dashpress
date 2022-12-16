@@ -1,6 +1,7 @@
 import { format } from "date-fns";
 import { IColorableSelection } from "shared/types/ui";
 import { FIELD_TYPES_CONFIG_MAP } from "shared/validations";
+import { SoftButton } from "@hadmean/chromista";
 import {
   ReferenceComponent,
   ReferenceDisplayFromTypes,
@@ -39,6 +40,11 @@ export const viewSpecialDataTypes = (
         width={options.displayFrom === "table" ? "48px" : undefined}
       />
     );
+  }
+
+  // :eyes
+  if (entityFieldTypes[fieldName] === "file") {
+    return <SoftButton action={value as string} icon="save" label="Download" />;
   }
 
   if (entityToOneReferenceFields?.[fieldName]) {

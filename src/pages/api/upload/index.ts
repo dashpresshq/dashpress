@@ -1,18 +1,23 @@
 import { NextApiRequest, NextApiResponse, PageConfig } from "next";
 import nc from "next-connect";
 
-// TODO validation
+// TODO auth validation
 
 const multer = require("multer");
 
-const upload = multer({ dest: "uploads/" });
+const upload = multer({
+  dest: "uploads/",
+  filename: (_, file, callback) => {
+    // originalname is the uploaded file's name with extn
+    callback(null, file.originalname);
+  },
+});
 
 const handler = nc<NextApiRequest, NextApiResponse>({
-  onError: (err, req, res) => {
-    console.error(err.stack);
+  onError: (_1, _2, res) => {
     res.status(500).end("Something broke!");
   },
-  onNoMatch: (req, res) => {
+  onNoMatch: (_, res) => {
     res.status(404).end("Page is not found");
   },
 })
@@ -33,11 +38,12 @@ const handler = nc<NextApiRequest, NextApiResponse>({
     next();
   })
   .use(upload.single("file"))
-  .options((req, res) => {
+  .options((_, res) => {
     res.json({});
   })
   .post((req, res) => {
-    res.json({ hello: "world", fileUrl: req.file });
+    // Move the file
+    res.json({ hello: "world", fileUrl: (req as any).file.path });
   });
 
 export default handler;
@@ -47,3 +53,5 @@ export const config: PageConfig = {
     bodyParser: false,
   },
 };
+
+// TODO disable file upload in DEMO

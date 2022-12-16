@@ -156,7 +156,7 @@ export class ActionsService implements IApplicationService {
     );
   }
 
-  listIntegrations(): IIntegrationsList[] {
+  listActionIntegrations(): IIntegrationsList[] {
     return Object.entries(ACTION_INTEGRATIONS).map(
       ([key, { title, description, configurationSchema }]) => ({
         description,
@@ -284,7 +284,7 @@ export class ActionsService implements IApplicationService {
       activationId
     );
 
-    this._credentialsService.deleteGroup({
+    await this._credentialsService.deleteGroup({
       key: action.credentialsGroupKey,
       fields: Object.keys(
         ACTION_INTEGRATIONS[action.integrationKey].configurationSchema

@@ -10,7 +10,7 @@ export class ActionsController {
   ) {}
 
   listIntegrations() {
-    return this._actionsService.listIntegrations();
+    return this._actionsService.listActionIntegrations();
   }
 
   listIntegrationImplementations(integrationKey: string) {

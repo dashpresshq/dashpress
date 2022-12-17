@@ -13,7 +13,7 @@ import { useActiveEntities } from "frontend/hooks/entity/entity.store";
 import { FEPaginationTable } from "frontend/components/FEPaginationTable";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import {
-  useIntegrationsList,
+  useActionIntegrationsList,
   useActiveActionList,
 } from "frontend/views/actions/actions.store";
 import { INTEGRATIONS_GROUP_CONFIG } from "frontend/views/settings/Variables/constants";
@@ -36,7 +36,7 @@ const NEW_ACTION_ITEM = "__new_action_item__";
 
 export function BaseActionInstances({ entity, integrationKey }: IProps) {
   const activeActionList = useActiveActionList();
-  const integrationsList = useIntegrationsList();
+  const integrationsList = useActionIntegrationsList();
   const activeEntities = useActiveEntities();
 
   const dataEndpoint = LIST_ACTION_INSTANCES({ entity, integrationKey });

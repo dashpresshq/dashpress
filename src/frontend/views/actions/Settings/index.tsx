@@ -8,14 +8,17 @@ import { USER_PERMISSIONS } from "shared/types/user";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { LINK_TO_DOCS } from "frontend/views/constants";
 import { BaseActionsLayout } from "../_Base";
-import { useIntegrationsList, useActiveActionList } from "../actions.store";
+import {
+  useActionIntegrationsList,
+  useActiveActionList,
+} from "../actions.store";
 import { ACTIONS_VIEW_KEY } from "../constants";
 import { ActionSettingsView } from "./View";
 
 export function ActionSettings() {
   const currentKey = useRouteParam("key");
 
-  const integrationsList = useIntegrationsList();
+  const integrationsList = useActionIntegrationsList();
   const activeActionsList = useActiveActionList();
 
   const integrationDetail = (integrationsList.data || []).find(

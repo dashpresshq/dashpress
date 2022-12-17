@@ -22,8 +22,8 @@ const ACTIVATION_CONFIG = (activationId) => {
   return `/api/actions/${activationId}/credentials`;
 };
 
-export const useIntegrationsList = () =>
-  useApi<IIntegrationsList[]>("/api/actions/integrations", {
+export const useActionIntegrationsList = () =>
+  useApi<IIntegrationsList[]>("/api/actions/list", {
     errorMessage: dataNotFoundMessage("Integrations"),
   });
 

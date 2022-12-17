@@ -1,5 +1,7 @@
 import { IStorageIntegrationsImplemention } from "backend/storage/types";
 
+// https://www.npmjs.com/package/multer-cloud-storage
+
 export const GOOGLE_STORAGE_INTEGRATION: IStorageIntegrationsImplemention<{
   folder: string;
 }> = {

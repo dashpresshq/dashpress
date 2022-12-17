@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import {
   Table,
-  DEFAULT_TABLE_PARAMS,
+  DEFAULT_TABLE_STATE,
   TableSkeleton,
   ITableColumn,
 } from "@hadmean/chromista";
@@ -22,7 +22,7 @@ export function FEPaginationTable<T extends Record<string, unknown>>({
   emptyMessage,
 }: IProps) {
   const [paginatedDataState, setPaginatedDataState] =
-    useState<IPaginatedDataState<unknown>>(DEFAULT_TABLE_PARAMS);
+    useState<IPaginatedDataState<unknown>>(DEFAULT_TABLE_STATE);
 
   const tableData = useFEPagination<T>(dataEndpoint, {
     ...paginatedDataState,

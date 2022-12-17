@@ -12,6 +12,10 @@ export interface IPackage {
   pkg: string;
 }
 
+/*
+  Install all the DB packages on init and then the current ones on subsequent installation for the project
+*/
+
 export class PackagesService implements IApplicationService {
   constructor(
     private readonly _packagesPersistenceService: AbstractConfigDataPersistenceService<IPackage>
@@ -58,11 +62,3 @@ const packagesPersistenceService =
   createConfigDomainPersistenceService<IPackage>("packages");
 
 export const packagesService = new PackagesService(packagesPersistenceService);
-
-/*
-https://github.com/khaosdoctor/multer-firebase-storage
-https://www.npmjs.com/package/multer-minio-storage-engine
-https://www.npmjs.com/package/multer-storage-cloudinary
-https://www.npmjs.com/package/multer-cloud-storage
-https://www.npmjs.com/package/multer-s3
-*/

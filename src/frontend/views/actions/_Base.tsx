@@ -16,7 +16,10 @@ import { ReactNode } from "react";
 import { Book, Zap, ZapOff } from "react-feather";
 import { NAVIGATION_LINKS } from "../../lib/routing/links";
 import { AppLayout } from "../../_layouts/app";
-import { useIntegrationsList, useActiveActionList } from "./actions.store";
+import {
+  useActionIntegrationsList,
+  useActiveActionList,
+} from "./actions.store";
 
 interface IProps {
   children: ReactNode;
@@ -25,7 +28,7 @@ interface IProps {
 export function BaseActionsLayout({ children }: IProps) {
   const currentKey = useRouteParam("key");
 
-  const integrationsList = useIntegrationsList();
+  const actionIntegrationsList = useActionIntegrationsList();
 
   const router = useRouter();
 
@@ -43,15 +46,19 @@ export function BaseActionsLayout({ children }: IProps) {
         <SectionLeft>
           <SectionBox title="Actions">
             <ViewStateMachine
-              loading={integrationsList.isLoading || activeActionList.isLoading}
-              error={integrationsList.error || activeActionList.error}
+              loading={
+                actionIntegrationsList.isLoading || activeActionList.isLoading
+              }
+              error={actionIntegrationsList.error || activeActionList.error}
               loader={<ListSkeleton count={7} />}
             >
               <RenderList
-                items={(integrationsList.data || []).map(({ title, key }) => ({
-                  name: title,
-                  key,
-                }))}
+                items={(actionIntegrationsList.data || []).map(
+                  ({ title, key }) => ({
+                    name: title,
+                    key,
+                  })
+                )}
                 render={(menuItem) => {
                   const isActive = activeList.includes(menuItem.key);
                   return (

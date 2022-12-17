@@ -1,7 +1,7 @@
 import {
   OffCanvas,
   Table,
-  DEFAULT_TABLE_PARAMS,
+  DEFAULT_TABLE_STATE,
   SoftButton,
   Spacer,
   TableSkeleton,
@@ -51,7 +51,7 @@ export function EntityTableView({
 
   const [paginatedDataState, setPaginatedDataState] = useState<
     IPaginatedDataState<any>
-  >({ ...DEFAULT_TABLE_PARAMS, ...defaultTableState });
+  >({ ...DEFAULT_TABLE_STATE, ...defaultTableState });
 
   const tableData = usePaginatedData(
     ENTITY_TABLE_PATH(entity),

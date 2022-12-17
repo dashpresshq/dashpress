@@ -1,11 +1,13 @@
 import { IStorageIntegrationsImplemention } from "backend/storage/types";
 
+// https://github.com/khaosdoctor/multer-firebase-storage
+
 export const FIREBASE_STORAGE_INTEGRATION: IStorageIntegrationsImplemention<{
   folder: string;
 }> = {
   title: "Firebase Storage",
   credentialsGroupKey: "FIREBASE_STORAGE",
-  packages: ["aws-sdk"],
+  packages: [],
   configurationSchema: {
     folder: {
       type: "text",

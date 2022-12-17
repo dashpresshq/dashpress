@@ -32,7 +32,7 @@ export const LIST_ACTION_INSTANCES = ({
 
 export const useIntegrationImplementationsList = (integrationKey: string) =>
   useApi<IIntegrationImplementationList[]>(
-    `/api/actions/integrations/${integrationKey}`,
+    `/api/actions/${integrationKey}/implementations`,
     {
       errorMessage: dataNotFoundMessage("Integration Implementations"),
       enabled: !!integrationKey,

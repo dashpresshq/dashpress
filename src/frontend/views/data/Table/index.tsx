@@ -5,7 +5,7 @@ import {
 } from "frontend/lib/routing";
 import { ITableTab, QueryFilter } from "shared/types/data";
 import {
-  DEFAULT_TABLE_PARAMS,
+  DEFAULT_TABLE_STATE,
   StyledCard,
   TableSkeleton,
   Tabs,
@@ -57,7 +57,7 @@ export function EntityTable() {
   const firstTabView: ITableTab = (entityViews.data || [])?.[0] || {
     id: "",
     title: "",
-    dataState: DEFAULT_TABLE_PARAMS,
+    dataState: DEFAULT_TABLE_STATE,
   };
 
   const tableViewsCount = useEntitiesFilterCount(

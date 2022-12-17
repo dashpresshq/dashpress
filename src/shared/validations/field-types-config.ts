@@ -130,7 +130,7 @@ export const FIELD_TYPES_CONFIG_MAP: Record<
   file: {
     allowedValidations: ["required"],
     sortable: false,
-    // :eyes
+    // TODO
     // Max Size
     // file type
   },

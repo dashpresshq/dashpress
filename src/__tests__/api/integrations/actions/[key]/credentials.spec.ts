@@ -1,4 +1,4 @@
-import handler from "pages/api/actions/[key]/credentials";
+import handler from "pages/api/integrations/actions/[key]/credentials";
 import { HTTP_ACTIVATION_ID } from "shared/types/actions";
 import {
   createAuthenticatedMocks,
@@ -6,7 +6,7 @@ import {
   setupCredentialsTestData,
 } from "__tests__/api/_test-utils";
 
-describe("/api/actions/[key]/credentials", () => {
+describe("/api/integrations/actions/[key]/credentials", () => {
   beforeAll(async () => {
     await setupAllTestData(["activated_actions", "users"]);
     await setupCredentialsTestData({

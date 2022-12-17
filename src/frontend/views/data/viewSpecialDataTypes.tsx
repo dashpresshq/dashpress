@@ -42,7 +42,6 @@ export const viewSpecialDataTypes = (
     );
   }
 
-  // :eyes
   if (entityFieldTypes[fieldName] === "file") {
     return <SoftButton action={value as string} icon="save" label="Download" />;
   }

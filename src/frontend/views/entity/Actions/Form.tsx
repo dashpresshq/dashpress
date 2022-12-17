@@ -82,15 +82,15 @@ export function ActionForm({
       type: "selection",
       selections: [
         {
-          label: "Create",
+          label: "On Create",
           value: BaseAction.Create,
         },
         {
-          label: "Update",
+          label: "On Update",
           value: BaseAction.Update,
         },
         {
-          label: "Delete",
+          label: "On Delete",
           value: BaseAction.Delete,
         },
       ],

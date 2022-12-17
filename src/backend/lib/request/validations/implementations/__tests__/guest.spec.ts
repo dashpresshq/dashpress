@@ -1,6 +1,6 @@
 import { requestHandler } from "backend/lib/request";
-import { createMocks } from "node-mocks-http";
 import { createAuthenticatedMocks } from "__tests__/api/_test-utils";
+import { createUnAuthenticatedMocks } from "__tests__/api/_test-utils/_authenticatedMock";
 
 const handler = requestHandler(
   {
@@ -17,7 +17,7 @@ const handler = requestHandler(
 
 describe("Request Validations => guestValidationImpl", () => {
   it("should return data when request is not authenticated", async () => {
-    const { req, res } = createMocks({
+    const { req, res } = createUnAuthenticatedMocks({
       method: "GET",
     });
 

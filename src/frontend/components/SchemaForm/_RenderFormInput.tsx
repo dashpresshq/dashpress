@@ -2,6 +2,7 @@ import {
   AsyncFormSelect,
   FormCodeEditor,
   FormDateInput,
+  FormFileInput,
   FormInput,
   FormNumberInput,
   FormSelect,
@@ -84,6 +85,10 @@ export function RenderFormInput({
 
     case "richtext":
       return <FormTextArea {...formProps} />;
+
+    case "image":
+    case "file":
+      return <FormFileInput {...formProps} uploadUrl="/api/upload" />;
 
     default:
       return <FormInput {...formProps} />;

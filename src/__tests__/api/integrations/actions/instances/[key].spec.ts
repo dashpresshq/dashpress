@@ -1,4 +1,4 @@
-import handler from "pages/api/actions/instances/[key]";
+import handler from "pages/api/integrations/actions/instances/[key]";
 import { HTTP_ACTIVATION_ID, IActionInstance } from "shared/types/actions";
 import {
   createAuthenticatedMocks,
@@ -57,7 +57,7 @@ const TEST_ACTION_INSTANCES: IActionInstance[] = [
   },
 ];
 
-describe("/api/actions/instances/[key]", () => {
+describe("/api/integrations/actions/instances/[key]", () => {
   beforeAll(async () => {
     await setupAllTestData(["activated_actions"]);
     await setupActionInstanceTestData(TEST_ACTION_INSTANCES);

@@ -1,6 +1,6 @@
 import { requestHandler } from "backend/lib/request";
-import { createMocks } from "node-mocks-http";
 import { createAuthenticatedMocks } from "__tests__/api/_test-utils";
+import { createUnAuthenticatedMocks } from "__tests__/api/_test-utils/_authenticatedMock";
 
 const handler = requestHandler({
   GET: async () => {
@@ -10,7 +10,7 @@ const handler = requestHandler({
 
 describe("Request Validations => isAuthenticatedValidationImpl", () => {
   it("should return error when no token is passed", async () => {
-    const { req, res } = createMocks({
+    const { req, res } = createUnAuthenticatedMocks({
       method: "GET",
     });
 
@@ -30,7 +30,7 @@ describe("Request Validations => isAuthenticatedValidationImpl", () => {
   });
 
   it("should return error when empty token is passed", async () => {
-    const { req, res } = createMocks({
+    const { req, res } = createUnAuthenticatedMocks({
       method: "GET",
       headers: {
         authorization: `Bearer `,
@@ -53,7 +53,7 @@ describe("Request Validations => isAuthenticatedValidationImpl", () => {
   });
 
   it("should return error when invalid token is passed", async () => {
-    const { req, res } = createMocks({
+    const { req, res } = createUnAuthenticatedMocks({
       method: "GET",
       headers: {
         authorization: `Bearer SOME BAD TOKEN`,

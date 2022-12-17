@@ -1,4 +1,4 @@
-import { createMocks, RequestOptions } from "node-mocks-http";
+import { createMocks, Mocks, RequestOptions } from "node-mocks-http";
 
 const ROOT_USER_AUTH_TOKEN =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiUm9vdCBVc2VyIiwicm9sZSI6ImNyZWF0b3IiLCJ1c2VybmFtZSI6InJvb3QiLCJpYXQiOjE2NjA4MjAzNTksImV4cCI6ODY0MDE2NjA3MzM5NTl9.5YlccsGd3_DysFzS-9LsoX8C4e0AJrRZhLT-epirAu4";
@@ -15,14 +15,26 @@ const authorizedHeader = (token: string) => ({
   },
 });
 
-export const createAuthenticatedMocks = (mock: RequestOptions) => {
+export const createUnAuthenticatedMocks = (
+  mock: RequestOptions
+): Mocks<any, any> => {
+  return createMocks({ ...mock });
+};
+
+export const createAuthenticatedMocks = (
+  mock: RequestOptions
+): Mocks<any, any> => {
   return createMocks({ ...mock, ...authorizedHeader(ROOT_USER_AUTH_TOKEN) });
 };
 
-export const createAuthenticatedViewerMocks = (mock: RequestOptions) => {
+export const createAuthenticatedViewerMocks = (
+  mock: RequestOptions
+): Mocks<any, any> => {
   return createMocks({ ...mock, ...authorizedHeader(VIEWER_AUTH_TOKEN) });
 };
 
-export const createAuthenticatedCustomRoleMocks = (mock: RequestOptions) => {
+export const createAuthenticatedCustomRoleMocks = (
+  mock: RequestOptions
+): Mocks<any, any> => {
   return createMocks({ ...mock, ...authorizedHeader(CUSTOM_ROLE_AUTH_TOKEN) });
 };

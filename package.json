@@ -30,7 +30,7 @@
   "bin": "./bin/hadmean",
   "dependencies": {
     "@hadmean/bacteria": "^0.0.6",
-    "@hadmean/chromista": "^1.0.62",
+    "@hadmean/chromista": "^1.0.63",
     "@hadmean/protozoa": "^1.0.16",
     "@types/cryptr": "^4.0.1",
     "@types/jsonwebtoken": "^8.5.8",

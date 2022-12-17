@@ -1,7 +1,7 @@
-import handler from "pages/api/actions/integrations/[key]";
+import handler from "pages/api/integrations/actions/[key]/implementations";
 import { createAuthenticatedMocks } from "__tests__/api/_test-utils";
 
-describe("/api/actions/integrations/[key]", () => {
+describe("/api/integrations/actions/[key]/implementations", () => {
   it("should show the integration implementation for http", async () => {
     const { req, res } = createAuthenticatedMocks({
       method: "GET",

@@ -1,10 +1,10 @@
 import handler from "pages/api/account/change-password";
 import signInHandler from "pages/api/auth/signin";
-import { createMocks } from "node-mocks-http";
 import {
   createAuthenticatedMocks,
   setupAllTestData,
 } from "__tests__/api/_test-utils";
+import { createUnAuthenticatedMocks } from "../_test-utils/_authenticatedMock";
 
 describe("/api/account/change-password", () => {
   const OLD_ENV = process.env;
@@ -36,7 +36,7 @@ describe("/api/account/change-password", () => {
 
     expect(res._getStatusCode()).toBe(400);
 
-    const signInRequest = createMocks({
+    const signInRequest = createUnAuthenticatedMocks({
       method: "POST",
       body: {
         username: "root",
@@ -65,7 +65,7 @@ describe("/api/account/change-password", () => {
 
     expect(res._getStatusCode()).toBe(200);
 
-    const signInRequest = createMocks({
+    const signInRequest = createUnAuthenticatedMocks({
       method: "POST",
       body: {
         username: "root",
@@ -92,7 +92,7 @@ describe("/api/account/change-password", () => {
 
     expect(res._getStatusCode()).toBe(200);
 
-    const signInRequest = createMocks({
+    const signInRequest = createUnAuthenticatedMocks({
       method: "POST",
       body: {
         username: "root",

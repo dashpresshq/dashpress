@@ -1,9 +1,9 @@
 import { requestHandler } from "backend/lib/request";
-import { createMocks } from "node-mocks-http";
 import {
   createAuthenticatedMocks,
   setupAllTestData,
 } from "__tests__/api/_test-utils";
+import { createUnAuthenticatedMocks } from "__tests__/api/_test-utils/_authenticatedMock";
 
 const handler = requestHandler({
   GET: async (getValidatedRequest) => {
@@ -35,7 +35,7 @@ describe("Request Validations => authenticatedUserValidationImpl", () => {
   });
 
   it("should programming error when called on a guest route", async () => {
-    const { req, res } = createMocks({
+    const { req, res } = createUnAuthenticatedMocks({
       method: "GET",
     });
 

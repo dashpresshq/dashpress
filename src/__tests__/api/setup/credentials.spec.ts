@@ -1,6 +1,6 @@
 import handler from "pages/api/setup/credentials";
-import { createMocks } from "node-mocks-http";
 import { setupCredentialsTestData } from "__tests__/api/_test-utils";
+import { createUnAuthenticatedMocks } from "../_test-utils/_authenticatedMock";
 
 describe("/api/setup/credentials", () => {
   beforeAll(async () => {
@@ -8,7 +8,7 @@ describe("/api/setup/credentials", () => {
   });
 
   it("should throw error when saving invalid credentials", async () => {
-    const { req, res } = createMocks({
+    const { req, res } = createUnAuthenticatedMocks({
       method: "POST",
       body: {
         dataSourceType: "postgres",
@@ -31,7 +31,7 @@ describe("/api/setup/credentials", () => {
   });
 
   it("should save valid credentials", async () => {
-    const { req, res } = createMocks({
+    const { req, res } = createUnAuthenticatedMocks({
       method: "POST",
       body: {
         dataSourceType: "postgres",
@@ -45,7 +45,7 @@ describe("/api/setup/credentials", () => {
   });
 
   it("should throw error when db credentials already exist", async () => {
-    const { req, res } = createMocks({
+    const { req, res } = createUnAuthenticatedMocks({
       method: "POST",
       body: {
         dataSourceType: "postgres",

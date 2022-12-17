@@ -1,9 +1,9 @@
-import { createMocks } from "node-mocks-http";
 import handler from "pages/api/config/[key]/__guest";
 import {
   createAuthenticatedMocks,
   setupAllTestData,
 } from "__tests__/api/_test-utils";
+import { createUnAuthenticatedMocks } from "__tests__/api/_test-utils/_authenticatedMock";
 
 describe("/api/config/[key]/__guest", () => {
   beforeAll(async () => {
@@ -28,7 +28,7 @@ describe("/api/config/[key]/__guest", () => {
   });
 
   it("should get guest fields for non-authenticated users", async () => {
-    const { req, res } = createMocks({
+    const { req, res } = createUnAuthenticatedMocks({
       method: "GET",
       query: {
         key: "theme_color",

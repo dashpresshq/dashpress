@@ -1,6 +1,6 @@
 import { requestHandler } from "backend/lib/request";
-import { createMocks } from "node-mocks-http";
 import { createAuthenticatedMocks } from "__tests__/api/_test-utils";
+import { createUnAuthenticatedMocks } from "__tests__/api/_test-utils/_authenticatedMock";
 
 const handler = requestHandler(
   {
@@ -32,7 +32,7 @@ describe("Request Validations => anyBodyValidationImpl", () => {
   });
 
   it("should work for guest users", async () => {
-    const { req, res } = createMocks({
+    const { req, res } = createUnAuthenticatedMocks({
       method: "GET",
     });
 

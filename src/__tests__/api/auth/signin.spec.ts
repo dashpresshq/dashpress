@@ -1,7 +1,7 @@
 import handler from "pages/api/auth/signin";
-import { createMocks } from "node-mocks-http";
 import { authTokenService } from "backend/lib/auth-token/auth-token.service";
 import { setupAllTestData } from "__tests__/api/_test-utils";
+import { createUnAuthenticatedMocks } from "../_test-utils/_authenticatedMock";
 
 describe("/api/auth/signin", () => {
   beforeAll(async () => {
@@ -9,7 +9,7 @@ describe("/api/auth/signin", () => {
   });
 
   it("should sign in valid credentials", async () => {
-    const { req, res } = createMocks({
+    const { req, res } = createUnAuthenticatedMocks({
       method: "POST",
       body: {
         username: "root",
@@ -37,7 +37,7 @@ describe("/api/auth/signin", () => {
   });
 
   it("should not authenticate invalid username", async () => {
-    const { req, res } = createMocks({
+    const { req, res } = createUnAuthenticatedMocks({
       method: "POST",
       body: {
         username: "invalid username",
@@ -62,7 +62,7 @@ describe("/api/auth/signin", () => {
   });
 
   it("should not authenticate invalid password", async () => {
-    const { req, res } = createMocks({
+    const { req, res } = createUnAuthenticatedMocks({
       method: "POST",
       body: {
         username: "root",

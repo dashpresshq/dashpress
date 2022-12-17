@@ -1,10 +1,10 @@
 import handler from "pages/api/setup/check";
-import { createMocks } from "node-mocks-http";
 import {
   setupCredentialsTestData,
   setupAllTestData,
   setupUsersTestData,
 } from "__tests__/api/_test-utils";
+import { createUnAuthenticatedMocks } from "../_test-utils/_authenticatedMock";
 
 describe("/api/setup/check", () => {
   beforeAll(async () => {
@@ -12,7 +12,7 @@ describe("/api/setup/check", () => {
   });
 
   it("should return true when the data exists and are valid", async () => {
-    const { req, res } = createMocks({
+    const { req, res } = createUnAuthenticatedMocks({
       method: "GET",
     });
 
@@ -30,7 +30,7 @@ describe("/api/setup/check", () => {
       DATABASE___port: "invalid value",
     });
 
-    const { req, res } = createMocks({
+    const { req, res } = createUnAuthenticatedMocks({
       method: "GET",
     });
 
@@ -47,7 +47,7 @@ describe("/api/setup/check", () => {
     await setupCredentialsTestData(false);
     await setupUsersTestData(false);
 
-    const { req, res } = createMocks({
+    const { req, res } = createUnAuthenticatedMocks({
       method: "GET",
     });
 

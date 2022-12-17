@@ -13,7 +13,7 @@ import {
   IIntegrationImplementationList,
 } from "shared/types/actions";
 
-const BASE_ACTIONS_ENDPOINT = `/api/actions`;
+const BASE_ACTIONS_ENDPOINT = `/api/integrations/actions`;
 
 const SINGULAR = `Form Integration`;
 
@@ -32,7 +32,7 @@ export const LIST_ACTION_INSTANCES = ({
 
 export const useIntegrationImplementationsList = (integrationKey: string) =>
   useApi<IIntegrationImplementationList[]>(
-    `/api/actions/${integrationKey}/implementations`,
+    `/api/integrations/actions/${integrationKey}/implementations`,
     {
       errorMessage: dataNotFoundMessage("Integration Implementations"),
       enabled: !!integrationKey,
@@ -49,7 +49,9 @@ export function useDeleteActionInstanceMutation() {
 
   return useMutation(
     async (instanceId: string) =>
-      await makeDeleteRequest(`/api/actions/instances/${instanceId}`),
+      await makeDeleteRequest(
+        `/api/integrations/actions/instances/${instanceId}`
+      ),
     apiMutateOptions
   );
 }
@@ -64,7 +66,10 @@ export function useCreateActionInstanceMutation() {
 
   return useMutation(
     async (configuration: IActionInstance) =>
-      await makePostRequest(`/api/actions/instances`, configuration),
+      await makePostRequest(
+        `/api/integrations/actions/instances`,
+        configuration
+      ),
     apiMutateOptions
   );
 }
@@ -80,7 +85,7 @@ export function useUpdateActionInstanceMutation() {
   return useMutation(
     async (configuration: IActionInstance) =>
       await makePatchRequest(
-        `/api/actions/instances/${configuration.instanceId}`,
+        `/api/integrations/actions/instances/${configuration.instanceId}`,
         configuration
       ),
     apiMutateOptions

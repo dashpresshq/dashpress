@@ -5,7 +5,7 @@ import {
 import { BadRequestError } from "backend/lib/errors";
 import { IApplicationService } from "backend/types";
 
-import { execa } from "execa";
+// import { execa } from "execa";
 import { PACKAGES_VERSIONS } from "./constants";
 
 export interface IPackage {
@@ -26,16 +26,13 @@ export class PackagesService implements IApplicationService {
   }
 
   async installPackages(): Promise<void> {
-    const packages = (await this.listPackages()).map((pkg) =>
-      PACKAGES_VERSIONS[pkg] ? `${pkg}@${PACKAGES_VERSIONS[pkg]}` : pkg
-    );
-
-    const installPath = ["install"];
-
-    const { stdout, stderr } = execa("npm", [...installPath, ...packages]);
-
-    stdout.pipe(process.stdout);
-    stderr.pipe(process.stderr);
+    // const packages = (await this.listPackages()).map((pkg) =>
+    //   PACKAGES_VERSIONS[pkg] ? `${pkg}@${PACKAGES_VERSIONS[pkg]}` : pkg
+    // );
+    // const installPath = ["install"];
+    // const { stdout, stderr } = execa("npm", [...installPath, ...packages]);
+    // stdout.pipe(process.stdout);
+    // stderr.pipe(process.stderr);
   }
 
   async listPackages(): Promise<string[]> {

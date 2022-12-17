@@ -16,14 +16,14 @@ import {
 } from "shared/types/actions";
 import { usePasswordStore } from "./password.store";
 
-const ACTIVE_ACTIONS_ENDPOINT = "/api/actions/active";
+const ACTIVE_ACTIONS_ENDPOINT = "/api/integrations/actions/active";
 
 const ACTIVATION_CONFIG = (activationId) => {
-  return `/api/actions/${activationId}/credentials`;
+  return `/api/integrations/actions/${activationId}/credentials`;
 };
 
 export const useActionIntegrationsList = () =>
-  useApi<IIntegrationsList[]>("/api/actions/list", {
+  useApi<IIntegrationsList[]>("/api/integrations/actions/list", {
     errorMessage: dataNotFoundMessage("Integrations"),
   });
 
@@ -62,7 +62,7 @@ export function useDeactivateActionMutation() {
 
   return useMutation(
     async (activationId: string) =>
-      await makeDeleteRequest(`/api/actions/${activationId}`),
+      await makeDeleteRequest(`/api/integrations/actions/${activationId}`),
     apiMutateOptions
   );
 }
@@ -77,7 +77,10 @@ export function useActivateActionMutation(integrationKey: string) {
 
   return useMutation(
     async (configuration: Record<string, string>) =>
-      await makePostRequest(`/api/actions/${integrationKey}`, configuration),
+      await makePostRequest(
+        `/api/integrations/actions/${integrationKey}`,
+        configuration
+      ),
     apiMutateOptions
   );
 }
@@ -92,7 +95,10 @@ export function useUpdateActivatedActionMutation(activationId: string) {
 
   return useMutation(
     async (configuration: Record<string, string>) =>
-      await makePatchRequest(`/api/actions/${activationId}`, configuration),
+      await makePatchRequest(
+        `/api/integrations/actions/${activationId}`,
+        configuration
+      ),
     apiMutateOptions
   );
 }

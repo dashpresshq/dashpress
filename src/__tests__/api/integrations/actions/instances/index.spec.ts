@@ -1,5 +1,5 @@
-import handler from "pages/api/actions/instances/index";
-import getHandler from "pages/api/actions/instances/[key]";
+import handler from "pages/api/integrations/actions/instances/index";
+import getHandler from "pages/api/integrations/actions/instances/[key]";
 import { HTTP_ACTIVATION_ID } from "shared/types/actions";
 import {
   createAuthenticatedMocks,
@@ -13,7 +13,7 @@ jest.mock("nanoid", () => ({
     .mockReturnValueOnce("nano-id-2"),
 }));
 
-describe("/api/actions/instances/index", () => {
+describe("/api/integrations/actions/instances/index", () => {
   beforeAll(async () => {
     await setupAllTestData(["action_instances", "activated_actions"]);
   });

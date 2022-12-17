@@ -1,7 +1,7 @@
 import handler from "pages/api/setup/user";
-import { createMocks } from "node-mocks-http";
 import { authTokenService } from "backend/lib/auth-token/auth-token.service";
 import { setupUsersTestData } from "__tests__/api/_test-utils";
+import { createUnAuthenticatedMocks } from "../_test-utils/_authenticatedMock";
 
 describe("/api/setup/user", () => {
   beforeAll(async () => {
@@ -9,7 +9,7 @@ describe("/api/setup/user", () => {
   });
 
   it("should set up first user successfully", async () => {
-    const postRequest = createMocks({
+    const postRequest = createUnAuthenticatedMocks({
       method: "POST",
       body: {
         username: "newsetupuser",
@@ -37,7 +37,7 @@ describe("/api/setup/user", () => {
   });
 
   it("should block request if users already exists", async () => {
-    const postRequest = createMocks({
+    const postRequest = createUnAuthenticatedMocks({
       method: "POST",
       body: {
         username: "anothernewsetupuser",

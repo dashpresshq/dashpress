@@ -17,7 +17,7 @@ const handler = requestHandler({
 
 describe("Request Validations => entityValidationImpl", () => {
   beforeAll(() => {
-    setupAllTestData(["schema", "users"]);
+    setupAllTestData(["schema", "users", "app-config"]);
   });
   it("should return back valid entity", async () => {
     const { req, res } = createAuthenticatedMocks({

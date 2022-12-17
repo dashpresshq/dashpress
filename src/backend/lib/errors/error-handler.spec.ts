@@ -1,10 +1,10 @@
-import { createMocks } from "node-mocks-http";
+import { createUnAuthenticatedMocks } from "__tests__/api/_test-utils/_authenticatedMock";
 import { requestHandler } from "../request";
 import { BadRequestError, ForbiddenError, NotFoundError } from ".";
 
 describe("/api/error/handling", () => {
   it("should transform BadRequestError correctly", async () => {
-    const { req, res } = createMocks({
+    const { req, res } = createUnAuthenticatedMocks({
       method: "GET",
     });
 
@@ -37,7 +37,7 @@ describe("/api/error/handling", () => {
   });
 
   it("should transform NotFoundError correctly", async () => {
-    const { req, res } = createMocks({
+    const { req, res } = createUnAuthenticatedMocks({
       method: "GET",
     });
 
@@ -67,7 +67,7 @@ describe("/api/error/handling", () => {
   });
 
   it("should transform ForbiddenError correctly", async () => {
-    const { req, res } = createMocks({
+    const { req, res } = createUnAuthenticatedMocks({
       method: "GET",
     });
 
@@ -101,7 +101,7 @@ describe("/api/error/handling", () => {
   });
 
   it("should transform plain Error correctly", async () => {
-    const { req, res } = createMocks({
+    const { req, res } = createUnAuthenticatedMocks({
       method: "GET",
     });
 

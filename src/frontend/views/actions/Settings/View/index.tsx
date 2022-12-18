@@ -1,13 +1,8 @@
 import { SchemaForm } from "frontend/components/SchemaForm";
 import { Spacer, Tabs, Text } from "@hadmean/chromista";
 import { IIntegrationsList, IActivatedAction } from "shared/types/actions";
-import { useEffect } from "react";
-import { ToastService } from "@hadmean/protozoa";
 import { BaseActionInstances } from "frontend/views/entity/Actions/Base";
-import {
-  useActivateActionMutation,
-  useActivationConfiguration,
-} from "../../actions.store";
+import { useActivateActionMutation } from "../../actions.store";
 import { Deactivate } from "./Deactivate";
 import { Configure } from "./Configure";
 
@@ -23,15 +18,6 @@ export function ActionSettingsView({
   const activateActionMutation = useActivateActionMutation(
     integrationDetail?.key
   );
-  const activationConfiguration = useActivationConfiguration(
-    activeAction?.activationId
-  );
-
-  useEffect(() => {
-    if (activationConfiguration.error) {
-      ToastService.error(activationConfiguration.error);
-    }
-  }, [activationConfiguration.error]);
 
   if (!integrationDetail) {
     return <Text>404: Unknown Action</Text>;

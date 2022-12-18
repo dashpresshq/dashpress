@@ -30,7 +30,7 @@ export function ActionSettings() {
   );
 
   useSetPageDetails({
-    pageTitle: "Actions Settings",
+    pageTitle: "Manage Integrations",
     viewKey: ACTIONS_VIEW_KEY,
     permission: USER_PERMISSIONS.CAN_MANAGE_INTEGRATIONS,
   });

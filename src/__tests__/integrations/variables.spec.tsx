@@ -3,7 +3,7 @@ import React from "react";
 import { render, screen, within } from "@testing-library/react";
 import { AppWrapper } from "@hadmean/chromista";
 
-import ManageVariables from "pages/actions/variables";
+import ManageVariables from "pages/integrations/variables";
 
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 import userEvent from "@testing-library/user-event";

@@ -1,5 +1,7 @@
 import { Spacer, Stack, Text } from "@hadmean/chromista";
+import { ToastService } from "@hadmean/protozoa";
 import { SchemaForm } from "frontend/components/SchemaForm";
+import { useEffect } from "react";
 import { IIntegrationsList } from "shared/types/actions";
 import {
   useActivationConfiguration,
@@ -16,6 +18,12 @@ export function Configure({ activationId, integrationDetail }: IProps) {
   const updateActivatedActionMutation =
     useUpdateActivatedActionMutation(activationId);
   const activationConfiguration = useActivationConfiguration(activationId);
+
+  useEffect(() => {
+    if (activationConfiguration.error) {
+      ToastService.error(activationConfiguration.error);
+    }
+  }, [activationConfiguration.error]);
 
   const passwordStore = usePasswordStore();
 

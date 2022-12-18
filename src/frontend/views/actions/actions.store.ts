@@ -16,25 +16,25 @@ import {
 } from "shared/types/actions";
 import { usePasswordStore } from "./password.store";
 
-const ACTIVE_ACTIONS_ENDPOINT = "/api/integrations/actions/active";
+const ACTIVE_ACTIONS_INTEGRATIONS_ENDPOINT = "/api/integrations/actions/active";
 
-const ACTIVATION_CONFIG = (activationId) => {
+const ACTIVATION_CONFIG = (activationId: string) => {
   return `/api/integrations/actions/${activationId}/credentials`;
 };
 
 export const useActionIntegrationsList = () =>
   useApi<IIntegrationsList[]>("/api/integrations/actions/list", {
-    errorMessage: dataNotFoundMessage("Integrations"),
+    errorMessage: dataNotFoundMessage("Actions Integrations"),
   });
 
 export const useActiveActionList = () =>
-  useApi<IActivatedAction[]>(ACTIVE_ACTIONS_ENDPOINT, {
+  useApi<IActivatedAction[]>(ACTIVE_ACTIONS_INTEGRATIONS_ENDPOINT, {
     errorMessage: dataNotFoundMessage("Active Actions"),
   });
 
 export const useActivationConfiguration = (activationId: string) => {
   const rootPassword = usePasswordStore((state) => state.password);
-  return useApi<IActivatedAction[]>(
+  return useApi<Record<string, string>>(
     `${ACTIVATION_CONFIG(activationId)}?${reduceStringToNumber(rootPassword)}`,
     {
       request: {
@@ -56,8 +56,8 @@ export function useDeactivateActionMutation() {
   const apiMutateOptions = useWaitForResponseMutationOptions<
     Record<string, string>
   >({
-    endpoints: [ACTIVE_ACTIONS_ENDPOINT],
-    successMessage: "Action Deactivated Successfully",
+    endpoints: [ACTIVE_ACTIONS_INTEGRATIONS_ENDPOINT],
+    successMessage: "Action Integration Deactivated Successfully",
   });
 
   return useMutation(
@@ -71,8 +71,8 @@ export function useActivateActionMutation(integrationKey: string) {
   const apiMutateOptions = useWaitForResponseMutationOptions<
     Record<string, string>
   >({
-    endpoints: [ACTIVE_ACTIONS_ENDPOINT],
-    successMessage: "Action Activated Successfully",
+    endpoints: [ACTIVE_ACTIONS_INTEGRATIONS_ENDPOINT],
+    successMessage: "Action Integration Activated Successfully",
   });
 
   return useMutation(
@@ -89,8 +89,8 @@ export function useUpdateActivatedActionMutation(activationId: string) {
   const apiMutateOptions = useWaitForResponseMutationOptions<
     Record<string, string>
   >({
-    endpoints: [ACTIVE_ACTIONS_ENDPOINT],
-    successMessage: MutationsLang.saved("Action"),
+    endpoints: [ACTIVE_ACTIONS_INTEGRATIONS_ENDPOINT],
+    successMessage: MutationsLang.saved("Action Integration"),
   });
 
   return useMutation(

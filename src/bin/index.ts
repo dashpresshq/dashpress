@@ -11,7 +11,7 @@
   const { default: fetch } = await import("node-fetch");
 
   const replaceRandomCharaters = (envContent: string) => {
-    return ["ENCRYPTION_KEY", "AUTH_TOKEN_KEY"].reduce(
+    return ["CREDENTIALS_ENCRYPTION_KEY", "AUTH_TOKEN_KEY"].reduce(
       (reducedEnvContent, currentKey) => {
         return reducedEnvContent.replace(
           `${currentKey}=RANDOM_CHARACTERS`,

@@ -73,12 +73,12 @@ export const ConfigBag: Record<ConfigKeys, IConfigBag> = {
       stringValidation(value, "Cache Adaptor Connection");
     },
   },
-  ENCRYPTION_KEY: {
+  CREDENTIALS_ENCRYPTION_KEY: {
     defaultValue: () => {
       return StringUtils.generateRandomString(128);
     },
     validate: (value) => {
-      tokenValidations(value, "Encryption Key");
+      tokenValidations(value, "Credentials Encryption Key");
     },
   },
   AUTH_TOKEN_KEY: {

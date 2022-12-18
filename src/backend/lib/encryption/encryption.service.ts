@@ -10,7 +10,7 @@ export class EncryptionService {
 
   constructor(private readonly _configService: ConfigService) {
     this.encyptionInstance = new Cryptr(
-      this._configService.getConfigValue(ConfigKeys.ENCRYPTION_KEY)
+      this._configService.getConfigValue(ConfigKeys.CREDENTIALS_ENCRYPTION_KEY)
     );
   }
 

@@ -12,7 +12,7 @@ const VALID_CONFIG: Record<ConfigKeys, string> = {
   CACHE_ADAPTOR_CONNECTION_STRING:
     "PLACE_HOLDER_CACHE_ADAPTOR_CONNECTION_STRING",
 
-  ENCRYPTION_KEY:
+  CREDENTIALS_ENCRYPTION_KEY:
     "TEST123*!@#testtesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttest",
   AUTH_TOKEN_KEY:
     "TEST123*!@#testtesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttest",
@@ -60,10 +60,11 @@ describe("Config Service", () => {
       );
     });
 
-    it("should validate `ENCRYPTION_KEY`", () => {
+    it("should validate `CREDENTIALS_ENCRYPTION_KEY`", () => {
       expect(() =>
         bootstrapConfig({
-          ENCRYPTION_KEY: "less-than-64-chars-no-uppercase-no-numbers",
+          CREDENTIALS_ENCRYPTION_KEY:
+            "less-than-64-chars-no-uppercase-no-numbers",
         })
       ).toThrowError(
         `Encryption Key must contain uppercase letters, lowercase letters, numbers and be more than 64 characters`
@@ -130,7 +131,7 @@ describe("Config Service", () => {
       const oldEnv = {
         CONFIG_ADAPTOR_CONNECTION_STRING: "test",
         CACHE_ADAPTOR: "redis",
-        ENCRYPTION_KEY:
+        CREDENTIALS_ENCRYPTION_KEY:
           "TEST123*!@#foobfoobfoobfoobfoobfoobfoobfoobfoobfoobfoobfoobfoobfoobfoobfoobfoobfoobfoobtesttesttesttest",
       };
 
@@ -160,7 +161,7 @@ describe("Config Service", () => {
 
       expect(newEnv.CONFIG_ADAPTOR_CONNECTION_STRING).toBe("test");
       expect(newEnv.CACHE_ADAPTOR).toBe("redis");
-      expect(newEnv.ENCRYPTION_KEY).toBe(
+      expect(newEnv.CREDENTIALS_ENCRYPTION_KEY).toBe(
         "TEST123*!@#foobfoobfoobfoobfoobfoobfoobfoobfoobfoobfoobfoobfoobfoobfoobfoobfoobfoobfoobtesttesttesttest"
       );
     });

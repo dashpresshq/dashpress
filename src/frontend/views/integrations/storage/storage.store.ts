@@ -10,7 +10,7 @@ import {
 import { useMutation } from "react-query";
 import { reduceStringToNumber } from "shared/lib/templates/reduceStringToNumber";
 import { IIntegrationsList } from "shared/types/actions";
-import { usePasswordStore } from "./password.store";
+import { usePasswordStore } from "../password.store";
 
 export const useStorageIntegrationsList = () =>
   useApi<IIntegrationsList[]>("/api/integrations/storage/list", {

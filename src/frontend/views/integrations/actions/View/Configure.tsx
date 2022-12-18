@@ -6,7 +6,7 @@ import { IIntegrationsList } from "shared/types/actions";
 import {
   useActivationConfiguration,
   useUpdateActivatedActionMutation,
-} from "../../actions.store";
+} from "../actions.store";
 import { usePasswordStore } from "../../password.store";
 
 interface IProps {

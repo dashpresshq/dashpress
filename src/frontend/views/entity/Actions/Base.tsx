@@ -15,7 +15,7 @@ import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import {
   useActionIntegrationsList,
   useActiveActionList,
-} from "frontend/views/actions/actions.store";
+} from "frontend/views/integrations/actions/actions.store";
 import { INTEGRATIONS_GROUP_CONFIG } from "frontend/views/settings/Variables/constants";
 import { useCallback, useState } from "react";
 import { IActionInstance } from "shared/types/actions";

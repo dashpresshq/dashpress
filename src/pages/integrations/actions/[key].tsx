@@ -1,3 +1,3 @@
-import { ActionSettings } from "frontend/views/actions/Settings";
+import { ActionsIntegrations } from "frontend/views/integrations/actions";
 
-export default ActionSettings;
+export default ActionsIntegrations;

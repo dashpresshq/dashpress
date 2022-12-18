@@ -2,7 +2,7 @@ import { SchemaForm } from "frontend/components/SchemaForm";
 import { Spacer, Tabs, Text } from "@hadmean/chromista";
 import { IIntegrationsList, IActivatedAction } from "shared/types/actions";
 import { BaseActionInstances } from "frontend/views/entity/Actions/Base";
-import { useActivateActionMutation } from "../../actions.store";
+import { useActivateActionMutation } from "../actions.store";
 import { Deactivate } from "./Deactivate";
 import { Configure } from "./Configure";
 

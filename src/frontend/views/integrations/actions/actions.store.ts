@@ -14,7 +14,7 @@ import {
   IIntegrationsList,
   IActivatedAction,
 } from "shared/types/actions";
-import { usePasswordStore } from "./password.store";
+import { usePasswordStore } from "../password.store";
 
 const ACTIVE_ACTIONS_INTEGRATIONS_ENDPOINT = "/api/integrations/actions/active";
 

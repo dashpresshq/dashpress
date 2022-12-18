@@ -11,11 +11,11 @@ import { BaseActionsLayout } from "../_Base";
 import {
   useActionIntegrationsList,
   useActiveActionList,
-} from "../actions.store";
+} from "./actions.store";
 import { ACTIONS_VIEW_KEY } from "../constants";
 import { ActionSettingsView } from "./View";
 
-export function ActionSettings() {
+export function ActionsIntegrations() {
   const currentKey = useRouteParam("key");
 
   const integrationsList = useActionIntegrationsList();

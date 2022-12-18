@@ -19,11 +19,11 @@ import { AppLayout } from "../../_layouts/app";
 import {
   useActionIntegrationsList,
   useActiveActionList,
-} from "./actions.store";
+} from "./actions/actions.store";
 import {
   useActiveStorageIntegrationList,
   useStorageIntegrationsList,
-} from "./storage.store";
+} from "./storage/storage.store";
 
 interface IProps {
   children: ReactNode;

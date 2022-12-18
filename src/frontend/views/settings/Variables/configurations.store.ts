@@ -7,7 +7,7 @@ import {
   useApi,
   useWaitForResponseMutationOptions,
 } from "@hadmean/protozoa";
-import { usePasswordStore } from "frontend/views/actions/password.store";
+import { usePasswordStore } from "frontend/views/integrations/password.store";
 import { useEffect } from "react";
 import { useMutation, useQueryClient } from "react-query";
 import { reduceStringToNumber } from "shared/lib/templates/reduceStringToNumber";

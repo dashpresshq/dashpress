@@ -16,4 +16,5 @@ export const STORAGE_INTEGRATIONS: Record<
   minio: MINIO_STORAGE_INTEGRATION,
   cloudinary: CLOUDINARY_STORAGE_INTEGRATION,
   google: GOOGLE_STORAGE_INTEGRATION,
+  // digital: Digital Ocean Space
 };

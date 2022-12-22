@@ -49,34 +49,30 @@ export function EntitiesSelection({
   );
 
   return (
-    <>
-      {formButton}
-      <Spacer size="xxl" />
-      {allList.length > 0 && (
-        <>
-          <RenderList
-            items={allList.map((listItem) => ({ name: listItem }))}
-            singular="Entity"
-            render={(menuItem) => {
-              const isHidden = currentPageSelection.includes(menuItem.name);
-              return (
-                <SectionListItem
-                  label={getEntityFieldLabels(menuItem.name)}
-                  key={menuItem.name}
-                  toggle={{
-                    selected: !isHidden,
-                    onChange: () => {
-                      setTouched(true);
-                      toggleSelection(menuItem.name);
-                    },
-                  }}
-                />
-              );
-            }}
-          />
-          {formButton}
-        </>
-      )}
-    </>
+    allList.length > 0 && (
+      <>
+        <RenderList
+          items={allList.map((listItem) => ({ name: listItem }))}
+          singular="Entity"
+          render={(menuItem) => {
+            const isHidden = currentPageSelection.includes(menuItem.name);
+            return (
+              <SectionListItem
+                label={getEntityFieldLabels(menuItem.name)}
+                key={menuItem.name}
+                toggle={{
+                  selected: !isHidden,
+                  onChange: () => {
+                    setTouched(true);
+                    toggleSelection(menuItem.name);
+                  },
+                }}
+              />
+            );
+          }}
+        />
+        {formButton}
+      </>
+    )
   );
 }

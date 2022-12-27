@@ -80,24 +80,22 @@ describe("SchemaService", () => {
           "fields": [
             {
               "isId": true,
+              "isRequired": true,
               "name": "id",
               "type": "number",
             },
             {
-              "isRequired": true,
               "length": 255,
               "name": "lastName",
               "type": "string",
             },
             {
-              "isRequired": true,
               "length": 255,
               "name": "firstName",
               "type": "string",
             },
             {
               "isReference": true,
-              "isRequired": true,
               "length": 255,
               "name": "userId",
               "type": "string",
@@ -122,37 +120,32 @@ describe("SchemaService", () => {
           "fields": [
             {
               "isId": true,
+              "isRequired": true,
               "name": "id",
               "type": "number",
             },
             {
-              "isRequired": true,
               "name": "age",
               "type": "number",
             },
             {
-              "isRequired": true,
               "length": 255,
               "name": "name",
               "type": "string",
             },
             {
-              "isRequired": true,
               "name": "status",
               "type": "string",
             },
             {
-              "isRequired": true,
               "name": "verified",
               "type": "boolean",
             },
             {
-              "isRequired": true,
               "name": "referenceId",
               "type": "number",
             },
             {
-              "isRequired": true,
               "name": "createdAt",
               "type": "string",
             },

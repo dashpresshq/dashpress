@@ -80,7 +80,7 @@ export class SchemasService implements IApplicationService {
           fields: entity.columns.map((column) => {
             const column$: IEntityField = {
               name: column.options.name,
-              isRequired: column.options.nullable ? true : undefined,
+              isRequired: column.options.nullable ? undefined : true,
               length: column.options.length,
               isId: column.primary ? true : undefined,
               isReference: column.isUsedInRelationAsOwner ? true : undefined,

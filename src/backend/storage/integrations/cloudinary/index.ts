@@ -1,12 +1,16 @@
 import { IStorageIntegrationsImplemention } from "backend/storage/types";
 
-export const CLOUDINARY_STORAGE_INTEGRATION: IStorageIntegrationsImplemention<{
-  folder: string;
-}> = {
+export const CLOUDINARY_STORAGE_INTEGRATION: IStorageIntegrationsImplemention<
+  {},
+  {
+    folder: string;
+  }
+> = {
   title: "Cloudinary",
   packages: ["cloudinary", "multer-storage-cloudinary"],
   credentialsGroupKey: "CLOUDINARY",
-  configurationSchema: {
+  integrationConfigurationSchema: {},
+  uploadConfigurationSchema: {
     folder: {
       type: "text",
       validations: [
@@ -16,7 +20,7 @@ export const CLOUDINARY_STORAGE_INTEGRATION: IStorageIntegrationsImplemention<{
       ],
     },
   },
-  store: async () => {
+  store: async (integrationConfig, uploadConfig, file) => {
     // const cloudinary = require("cloudinary").v2;
     // const { CloudinaryStorage } = require("multer-storage-cloudinary");
 
@@ -31,6 +35,6 @@ export const CLOUDINARY_STORAGE_INTEGRATION: IStorageIntegrationsImplemention<{
 
     // storage._handleFile(req, file, (details) => {});
 
-    return "";
+    return `${integrationConfig} ${uploadConfig} ${file}`;
   },
 };

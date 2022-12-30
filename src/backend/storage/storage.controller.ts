@@ -1,12 +1,7 @@
-import { BadRequestError } from "backend/lib/errors";
-import { usersService, UsersService } from "backend/users/users.service";
 import { StorageService, storageService } from "./storage.service";
 
 export class StorageController {
-  constructor(
-    private _storageService: StorageService,
-    private _usersService: UsersService
-  ) {}
+  constructor(private _storageService: StorageService) {}
 
   listIntegrations() {
     return this._storageService.listStorageIntegrations();
@@ -23,18 +18,7 @@ export class StorageController {
     await this._storageService.activateStorage(storageKey, configuration);
   }
 
-  async showStorageConfig(
-    storageKey: string,
-    user: {
-      username: string;
-      password: string;
-    }
-  ) {
-    try {
-      await this._usersService.checkUserPassword(user);
-    } catch (error) {
-      throw new BadRequestError("Invalid Password");
-    }
+  async showStorageConfig(storageKey: string) {
     return await this._storageService.showStorageConfig(storageKey);
   }
 
@@ -50,7 +34,4 @@ export class StorageController {
   }
 }
 
-export const storageController = new StorageController(
-  storageService,
-  usersService
-);
+export const storageController = new StorageController(storageService);

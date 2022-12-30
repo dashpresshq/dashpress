@@ -1,4 +1,3 @@
-import { createCacheService } from "backend/lib/cache";
 import { requestHandler } from "backend/lib/request";
 import { META_USER_PERMISSIONS, USER_PERMISSIONS } from "shared/types/user";
 import {
@@ -85,10 +84,6 @@ describe("Request Validations => entityValidationImpl", () => {
   });
 
   it("should not allow users with only `CAN_CONFIGURE_APP` role view disabled entities", async () => {
-    const cacheService = createCacheService("permission");
-
-    await cacheService.purge();
-
     await setupRolesTestData([
       {
         id: "custom-role",
@@ -117,10 +112,6 @@ describe("Request Validations => entityValidationImpl", () => {
   });
 
   it("should not allow users can `CAN_CONFIGURE_APP` but not view disabled entity view the entity", async () => {
-    const cacheService = createCacheService("permission");
-
-    await cacheService.purge();
-
     await setupRolesTestData([
       {
         id: "custom-role",
@@ -149,10 +140,6 @@ describe("Request Validations => entityValidationImpl", () => {
   });
 
   it("should not allow users who have access to the disabled entity but not `CAN_CONFIGURE_APP` view the disabled entity", async () => {
-    const cacheService = createCacheService("permission");
-
-    await cacheService.purge();
-
     await setupRolesTestData([
       {
         id: "custom-role",

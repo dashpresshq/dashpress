@@ -1,12 +1,16 @@
 import { IStorageIntegrationsImplemention } from "backend/storage/types";
 
-export const LOCAL_STORAGE_INTEGRATION: IStorageIntegrationsImplemention<{
-  folder: string;
-}> = {
+export const LOCAL_STORAGE_INTEGRATION: IStorageIntegrationsImplemention<
+  {},
+  {
+    folder: string;
+  }
+> = {
   title: "Local Storage",
   credentialsGroupKey: "FILE",
   packages: [],
-  configurationSchema: {
+  integrationConfigurationSchema: {},
+  uploadConfigurationSchema: {
     folder: {
       type: "text",
       validations: [
@@ -16,9 +20,9 @@ export const LOCAL_STORAGE_INTEGRATION: IStorageIntegrationsImplemention<{
       ],
     },
   },
-  store: async (config, file: File) => {
+  store: async (integrationConfig, uploadConfig, file) => {
     // eslint-disable-next-line no-console
-    console.log(config, file);
+    console.log(integrationConfig, uploadConfig, file);
     return "";
   },
 };

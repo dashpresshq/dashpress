@@ -204,7 +204,7 @@ describe("/api/integrations/actions/[key]/index", () => {
   });
 
   describe("PATCH", () => {
-    it("should update integration configuration", async () => {
+    it("should update action configuration", async () => {
       const { req, res } = createAuthenticatedMocks({
         method: "PATCH",
         query: {

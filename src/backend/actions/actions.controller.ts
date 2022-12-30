@@ -1,13 +1,8 @@
-import { BadRequestError } from "backend/lib/errors";
-import { usersService, UsersService } from "backend/users/users.service";
 import { IActionInstance } from "shared/types/actions";
 import { ActionsService, actionsService } from "./actions.service";
 
 export class ActionsController {
-  constructor(
-    private _actionsService: ActionsService,
-    private _usersService: UsersService
-  ) {}
+  constructor(private _actionsService: ActionsService) {}
 
   listIntegrations() {
     return this._actionsService.listActionIntegrations();
@@ -28,18 +23,7 @@ export class ActionsController {
     await this._actionsService.activateAction(integrationKey, configuration);
   }
 
-  async showActionConfig(
-    activationId: string,
-    user: {
-      username: string;
-      password: string;
-    }
-  ) {
-    try {
-      await this._usersService.checkUserPassword(user);
-    } catch (error) {
-      throw new BadRequestError("Invalid Password");
-    }
+  async showActionConfig(activationId: string) {
     return await this._actionsService.showActionConfig(activationId);
   }
 
@@ -75,7 +59,4 @@ export class ActionsController {
   }
 }
 
-export const actionsController = new ActionsController(
-  actionsService,
-  usersService
-);
+export const actionsController = new ActionsController(actionsService);

@@ -8,7 +8,7 @@ export function GoogleTagManager() {
   }
 
   return (
-    <>
+    <div>
       <Script
         src={`https://www.googletagmanager.com/gtag/js?id=${GOOGLE_TAG_ID}`}
         strategy="afterInteractive"
@@ -22,6 +22,6 @@ export function GoogleTagManager() {
           gtag('config', '${GOOGLE_TAG_ID}');
         `}
       </Script>
-    </>
+    </div>
   );
 }

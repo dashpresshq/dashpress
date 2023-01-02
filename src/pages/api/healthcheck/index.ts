@@ -13,6 +13,9 @@ import { usersService } from "backend/users/users.service";
 import noop from "lodash/noop";
 import { packagesService } from "backend/packages/packages.service";
 import { requestHandler } from "backend/lib/request";
+import { storageService } from "backend/storage/storage.service";
+import { actionsService } from "backend/actions/actions.service";
+import { dashboardService } from "backend/dashboard/dashboard.service";
 
 export default requestHandler(
   {
@@ -30,6 +33,9 @@ export default requestHandler(
         await schemasService.bootstrap();
         await usersService.bootstrap();
         await entitiesService.bootstrap();
+        await actionsService.bootstrap();
+        await dashboardService.bootstrap();
+        await storageService.bootstrap();
 
         await packagesService.bootstrap();
 

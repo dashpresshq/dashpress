@@ -2,6 +2,7 @@ import { requestHandler } from "backend/lib/request";
 import {
   createAuthenticatedMocks,
   createAuthenticatedViewerMocks,
+  setupAllTestData,
 } from "__tests__/api/_test-utils";
 
 const handler = requestHandler(
@@ -18,6 +19,9 @@ const handler = requestHandler(
 );
 
 describe("Request Validations => withPasswordValidationImpl", () => {
+  beforeAll(async () => {
+    await setupAllTestData(["users"]);
+  });
   it("should return data when correct password is sent", async () => {
     const { req, res } = createAuthenticatedMocks({
       method: "POST",

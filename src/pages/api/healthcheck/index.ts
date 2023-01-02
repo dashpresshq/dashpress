@@ -50,7 +50,7 @@ export default requestHandler(
   },
   [
     {
-      _type: "guest",
+      _type: "anyBody",
     },
   ]
 );

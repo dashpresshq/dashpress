@@ -1,6 +1,8 @@
 import handler from "pages/api/account/[username]/index";
 import {
+  createAuthenticatedCustomRoleMocks,
   createAuthenticatedMocks,
+  setupRolesTestData,
   setupUsersTestData,
 } from "__tests__/api/_test-utils";
 
@@ -91,6 +93,65 @@ describe("/account/[username]/index", () => {
     await handler(deleteRequest.req, deleteRequest.res);
 
     expect(deleteRequest.res._getStatusCode()).toBe(400);
+
+    expect(deleteRequest.res._getJSONData()).toMatchInlineSnapshot(`
+      {
+        "message": "Can't delete your account",
+        "method": "DELETE",
+        "name": "BadRequestError",
+        "path": "",
+        "statusCode": 400,
+      }
+    `);
+
+    const getRequest = createAuthenticatedMocks({
+      method: "GET",
+      query: {
+        username: "root",
+      },
+    });
+
+    await handler(getRequest.req, getRequest.res);
+
+    expect(getRequest.res._getStatusCode()).toBe(200);
+    expect(getRequest.res._getJSONData()).toMatchInlineSnapshot(`
+      {
+        "name": "Root 1",
+        "role": "creator",
+        "systemProfile": "{"userId": "1"}",
+        "username": "root",
+      }
+    `);
+  });
+
+  it("should block deleting root user", async () => {
+    await setupRolesTestData([
+      {
+        id: "custom-role",
+        permissions: ["CAN_MANAGE_USERS"],
+      },
+    ]);
+
+    const deleteRequest = createAuthenticatedCustomRoleMocks({
+      method: "DELETE",
+      query: {
+        username: "root",
+      },
+    });
+
+    await handler(deleteRequest.req, deleteRequest.res);
+
+    expect(deleteRequest.res._getStatusCode()).toBe(400);
+
+    expect(deleteRequest.res._getJSONData()).toMatchInlineSnapshot(`
+      {
+        "message": "Can't delete root account",
+        "method": "DELETE",
+        "name": "BadRequestError",
+        "path": "",
+        "statusCode": 400,
+      }
+    `);
 
     const getRequest = createAuthenticatedMocks({
       method: "GET",

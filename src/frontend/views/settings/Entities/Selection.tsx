@@ -14,6 +14,8 @@ interface IProps {
   getEntityFieldLabels: (fieldName: string) => string;
 }
 
+const LONG_LIST_THRESHOLD = 10;
+
 export function EntitiesSelection({
   getEntityFieldLabels,
   allList,
@@ -50,8 +52,12 @@ export function EntitiesSelection({
 
   return (
     <>
-      {formButton}
-      <Spacer size="xxl" />
+      {allList.length > LONG_LIST_THRESHOLD && (
+        <>
+          {formButton}
+          <Spacer size="xxl" />
+        </>
+      )}
       {allList.length > 0 && (
         <>
           <RenderList

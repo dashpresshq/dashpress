@@ -13,6 +13,7 @@ import { guestValidationImpl as guest } from "./guest";
 import { anyBodyValidationImpl as anyBody } from "./any-body";
 import { requestQueryValidationImpl as requestQuery } from "./request-query";
 import { canUserValidationImpl as canUser } from "./can-user";
+import { withPasswordValidationImpl as withPassword } from "./with-password";
 import { authenticatedUserValidationImpl as authenticatedUser } from "./authenticated-user";
 
 import { ValidationImplType } from "./types";
@@ -35,5 +36,6 @@ export const ValidationImpl: Record<
   paginationFilter,
   queryFilters,
   entityId,
+  withPassword,
   configKey,
 };

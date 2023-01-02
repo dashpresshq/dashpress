@@ -16,6 +16,7 @@ export type ValidationKeys = {
     | "entityId"
     | "entityRequestBody"
     | "queryFilters"
+    | "withPassword"
     | "configBody";
   method?: RequestMethod[];
   body?: unknown;

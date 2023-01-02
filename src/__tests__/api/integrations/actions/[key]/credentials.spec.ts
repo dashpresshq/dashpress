@@ -23,7 +23,7 @@ describe("/api/integrations/actions/[key]/credentials", () => {
     });
   });
 
-  it("should not show action details when password is incorrect", async () => {
+  it("should not show action credentials when password is incorrect", async () => {
     const { req, res } = createAuthenticatedMocks({
       method: "POST",
       query: {

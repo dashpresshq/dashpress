@@ -1,5 +1,5 @@
-import handler from "pages/api/integrations/constants/[key]";
-import listHandler from "pages/api/integrations/constants";
+import handler from "pages/api/integrations/credentials/[key]";
+import revealHandler from "pages/api/integrations/credentials/reveal";
 import {
   setupAllTestData,
   createAuthenticatedMocks,
@@ -10,17 +10,20 @@ import {
 
 const currentState = async () => {
   const { req, res } = createAuthenticatedMocks({
-    method: "GET",
+    method: "POST",
+    body: {
+      password: "password",
+    },
   });
 
-  await listHandler(req, res);
+  await revealHandler(req, res);
 
   return res._getJSONData();
 };
 
-describe("/api/integrations/constants/[key]", () => {
+describe("/api/integrations/credentials/[key]", () => {
   beforeAll(async () => {
-    await setupAllTestData(["constants"]);
+    await setupAllTestData(["credentials", "users"]);
   });
 
   describe("Plain keys", () => {
@@ -28,10 +31,10 @@ describe("/api/integrations/constants/[key]", () => {
       const { req, res } = createAuthenticatedMocks({
         method: "PUT",
         query: {
-          key: "NEW_CONSTANT_KEY",
+          key: "NEW_CREDENTIAL_KEY",
         },
         body: {
-          value: "NEW_CONSTANT_VALUE",
+          value: "NEW_CREDENTIAL_VALUE",
         },
       });
 
@@ -41,16 +44,16 @@ describe("/api/integrations/constants/[key]", () => {
       expect(await currentState()).toMatchInlineSnapshot(`
         [
           {
-            "key": "CONSTANT_KEY_1",
-            "value": "CONSTANT_KEY_1",
+            "key": "CREDENTIAL_KEY_1",
+            "value": "CREDENTIAL_VALUE_1",
           },
           {
-            "key": "CONSTANT_KEY_2",
-            "value": "CONSTANT_KEY_2",
+            "key": "CREDENTIAL_KEY_2",
+            "value": "CREDENTIAL_VALUE_2",
           },
           {
-            "key": "NEW_CONSTANT_KEY",
-            "value": "NEW_CONSTANT_VALUE",
+            "key": "NEW_CREDENTIAL_KEY",
+            "value": "NEW_CREDENTIAL_VALUE",
           },
         ]
       `);
@@ -60,10 +63,10 @@ describe("/api/integrations/constants/[key]", () => {
       const { req, res } = createAuthenticatedMocks({
         method: "PUT",
         query: {
-          key: "CONSTANT_KEY_2",
+          key: "CREDENTIAL_KEY_2",
         },
         body: {
-          value: "UPDATED_CONSTANT_KEY_2",
+          value: "UPDATED_CREDENTIAL_VALUE_2",
         },
       });
 
@@ -73,16 +76,16 @@ describe("/api/integrations/constants/[key]", () => {
       expect(await currentState()).toMatchInlineSnapshot(`
         [
           {
-            "key": "CONSTANT_KEY_1",
-            "value": "CONSTANT_KEY_1",
+            "key": "CREDENTIAL_KEY_1",
+            "value": "CREDENTIAL_VALUE_1",
           },
           {
-            "key": "CONSTANT_KEY_2",
-            "value": "UPDATED_CONSTANT_KEY_2",
+            "key": "CREDENTIAL_KEY_2",
+            "value": "UPDATED_CREDENTIAL_VALUE_2",
           },
           {
-            "key": "NEW_CONSTANT_KEY",
-            "value": "NEW_CONSTANT_VALUE",
+            "key": "NEW_CREDENTIAL_KEY",
+            "value": "NEW_CREDENTIAL_VALUE",
           },
         ]
       `);
@@ -92,7 +95,7 @@ describe("/api/integrations/constants/[key]", () => {
       const { req, res } = createAuthenticatedMocks({
         method: "DELETE",
         query: {
-          key: "CONSTANT_KEY_1",
+          key: "CREDENTIAL_KEY_1",
         },
       });
 
@@ -102,12 +105,12 @@ describe("/api/integrations/constants/[key]", () => {
       expect(await currentState()).toMatchInlineSnapshot(`
         [
           {
-            "key": "CONSTANT_KEY_2",
-            "value": "UPDATED_CONSTANT_KEY_2",
+            "key": "CREDENTIAL_KEY_2",
+            "value": "UPDATED_CREDENTIAL_VALUE_2",
           },
           {
-            "key": "NEW_CONSTANT_KEY",
-            "value": "NEW_CONSTANT_VALUE",
+            "key": "NEW_CREDENTIAL_KEY",
+            "value": "NEW_CREDENTIAL_VALUE",
           },
         ]
       `);
@@ -119,10 +122,10 @@ describe("/api/integrations/constants/[key]", () => {
       const { req, res } = createAuthenticatedMocks({
         method: "PUT",
         query: {
-          key: "NEW_CONSTANT___KEY",
+          key: "NEW_CREDENTIAL___KEY",
         },
         body: {
-          value: "NEW_CONSTANT_VALUE",
+          value: "NEW_CREDENTIL_VALUE",
         },
       });
 
@@ -142,12 +145,12 @@ describe("/api/integrations/constants/[key]", () => {
       expect(await currentState()).toMatchInlineSnapshot(`
         [
           {
-            "key": "CONSTANT_KEY_2",
-            "value": "UPDATED_CONSTANT_KEY_2",
+            "key": "CREDENTIAL_KEY_2",
+            "value": "UPDATED_CREDENTIAL_VALUE_2",
           },
           {
-            "key": "NEW_CONSTANT_KEY",
-            "value": "NEW_CONSTANT_VALUE",
+            "key": "NEW_CREDENTIAL_KEY",
+            "value": "NEW_CREDENTIAL_VALUE",
           },
         ]
       `);
@@ -157,7 +160,7 @@ describe("/api/integrations/constants/[key]", () => {
       const { req, res } = createAuthenticatedMocks({
         method: "PUT",
         query: {
-          key: "GROUP_CONSTANT___KEY_3",
+          key: "DATABASE___dataSourceType",
         },
         body: {
           value: "UPDATED_CONSTANT_KEY_3",
@@ -180,12 +183,12 @@ describe("/api/integrations/constants/[key]", () => {
       expect(await currentState()).toMatchInlineSnapshot(`
         [
           {
-            "key": "CONSTANT_KEY_2",
-            "value": "UPDATED_CONSTANT_KEY_2",
+            "key": "CREDENTIAL_KEY_2",
+            "value": "UPDATED_CREDENTIAL_VALUE_2",
           },
           {
-            "key": "NEW_CONSTANT_KEY",
-            "value": "NEW_CONSTANT_VALUE",
+            "key": "NEW_CREDENTIAL_KEY",
+            "value": "NEW_CREDENTIAL_VALUE",
           },
         ]
       `);
@@ -195,7 +198,7 @@ describe("/api/integrations/constants/[key]", () => {
       const { req, res } = createAuthenticatedMocks({
         method: "DELETE",
         query: {
-          key: "GROUP_CONSTANT___KEY_3",
+          key: "DATABASE___dataSourceType",
         },
       });
 
@@ -215,12 +218,12 @@ describe("/api/integrations/constants/[key]", () => {
       expect(await currentState()).toMatchInlineSnapshot(`
         [
           {
-            "key": "CONSTANT_KEY_2",
-            "value": "UPDATED_CONSTANT_KEY_2",
+            "key": "CREDENTIAL_KEY_2",
+            "value": "UPDATED_CREDENTIAL_VALUE_2",
           },
           {
-            "key": "NEW_CONSTANT_KEY",
-            "value": "NEW_CONSTANT_VALUE",
+            "key": "NEW_CREDENTIAL_KEY",
+            "value": "NEW_CREDENTIAL_VALUE",
           },
         ]
       `);
@@ -228,14 +231,20 @@ describe("/api/integrations/constants/[key]", () => {
   });
 
   describe("permission", () => {
-    it("should return 401 when user has no permission", async () => {
+    it("should return 401 when user has incorrect permission", async () => {
+      await setupRolesTestData([
+        {
+          id: "custom-role",
+          permissions: ["CAN_CONFIGURE_APP"],
+        },
+      ]);
       const { req, res } = createAuthenticatedViewerMocks({
         method: "PUT",
         query: {
-          key: "NEW_CONSTANT_KEY",
+          key: "NEW_CREDENTIAL_KEY",
         },
         body: {
-          value: "NEW_CONSTANT_VALUE",
+          value: "NEW_CREDENTIAL_VALUE",
         },
       });
 
@@ -247,17 +256,17 @@ describe("/api/integrations/constants/[key]", () => {
       await setupRolesTestData([
         {
           id: "custom-role",
-          permissions: ["CAN_CONFIGURE_APP"],
+          permissions: ["CAN_MANAGE_INTEGRATIONS"],
         },
       ]);
 
       const { req, res } = createAuthenticatedCustomRoleMocks({
         method: "PUT",
         query: {
-          key: "NEW_CONSTANT_KEY",
+          key: "NEW_CREDENTIAL_KEY",
         },
         body: {
-          value: "NEW_CONSTANT_VALUE",
+          value: "NEW_CREDENTIAL_VALUE",
         },
       });
 

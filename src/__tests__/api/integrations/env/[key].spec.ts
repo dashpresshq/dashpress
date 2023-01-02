@@ -131,7 +131,7 @@ describe("/api/integrations/env/[key]", () => {
       expect(res._getStatusCode()).toBe(400);
       expect(res._getJSONData()).toMatchInlineSnapshot(`
         {
-          "message": "Group keys can't be created. They should be updated in the plugin settings",
+          "message": "Group keys can't be created or updated. They should be updated in the plugin settings",
           "method": "PUT",
           "name": "BadRequestError",
           "path": "",
@@ -153,7 +153,7 @@ describe("/api/integrations/env/[key]", () => {
       `);
     });
 
-    it("should update value for existing key", async () => {
+    it("should not update value for existing key", async () => {
       const { req, res } = createAuthenticatedMocks({
         method: "PUT",
         query: {
@@ -166,7 +166,16 @@ describe("/api/integrations/env/[key]", () => {
 
       await handler(req, res);
 
-      expect(res._getStatusCode()).toBe(204);
+      expect(res._getStatusCode()).toBe(400);
+      expect(res._getJSONData()).toMatchInlineSnapshot(`
+        {
+          "message": "Group keys can't be created or updated. They should be updated in the plugin settings",
+          "method": "PUT",
+          "name": "BadRequestError",
+          "path": "",
+          "statusCode": 400,
+        }
+      `);
 
       expect(await currentState()).toMatchInlineSnapshot(`
         [

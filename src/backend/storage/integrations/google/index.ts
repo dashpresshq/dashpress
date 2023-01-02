@@ -2,13 +2,17 @@ import { IStorageIntegrationsImplemention } from "backend/storage/types";
 
 // https://www.npmjs.com/package/multer-cloud-storage
 
-export const GOOGLE_STORAGE_INTEGRATION: IStorageIntegrationsImplemention<{
-  folder: string;
-}> = {
+export const GOOGLE_STORAGE_INTEGRATION: IStorageIntegrationsImplemention<
+  {},
+  {
+    folder: string;
+  }
+> = {
   title: "Google Cloud Storage",
   credentialsGroupKey: "GOOGLE_CLOUD_STORAGE",
   packages: ["aws-sdk"],
-  configurationSchema: {
+  integrationConfigurationSchema: {},
+  uploadConfigurationSchema: {
     folder: {
       type: "text",
       validations: [
@@ -18,9 +22,9 @@ export const GOOGLE_STORAGE_INTEGRATION: IStorageIntegrationsImplemention<{
       ],
     },
   },
-  store: async (config, file: File) => {
+  store: async (integrationConfig, uploadConfig, file) => {
     // eslint-disable-next-line no-console
-    console.log(config, file);
+    console.log(integrationConfig, uploadConfig, file);
     return "";
   },
 };

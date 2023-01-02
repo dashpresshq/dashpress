@@ -56,7 +56,8 @@ type IStore = {
   setHistory: (history: INavigationItem[]) => void;
 };
 
-export const useNavigationHistoryStore = createStore<IStore>((set) => ({
+/** This has to be createStore instead of useState so that the vaule is persisted through all pages */
+const useNavigationHistoryStore = createStore<IStore>((set) => ({
   history: JSON.parse(TemporayStorageService.getString(key) || "[]"),
   setHistory: (history: INavigationItem[]) =>
     set(() => ({

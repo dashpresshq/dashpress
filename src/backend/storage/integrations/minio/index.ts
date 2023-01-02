@@ -2,13 +2,17 @@ import { IStorageIntegrationsImplemention } from "backend/storage/types";
 
 // https://www.npmjs.com/package/multer-minio-storage-engine
 
-export const MINIO_STORAGE_INTEGRATION: IStorageIntegrationsImplemention<{
-  folder: string;
-}> = {
+export const MINIO_STORAGE_INTEGRATION: IStorageIntegrationsImplemention<
+  {},
+  {
+    folder: string;
+  }
+> = {
   title: "Minio",
   credentialsGroupKey: "MINIO",
   packages: ["multer-minio-storage-engine@1.0.0", "minio"],
-  configurationSchema: {
+  integrationConfigurationSchema: {},
+  uploadConfigurationSchema: {
     folder: {
       type: "text",
       validations: [
@@ -18,9 +22,9 @@ export const MINIO_STORAGE_INTEGRATION: IStorageIntegrationsImplemention<{
       ],
     },
   },
-  store: async (config, file: File) => {
+  store: async (integrationConfig, uploadConfig, file) => {
     // eslint-disable-next-line no-console
-    console.log(config, file);
+    console.log(integrationConfig, uploadConfig, file);
     return "";
   },
 };

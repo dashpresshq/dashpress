@@ -1,11 +1,8 @@
 import { useEffect, useState } from "react";
 
-function useSelections<T>(currentPage = 1, filterParams = "") {
+function useSelections<T>() {
   const [selections, setSelections] = useState<Record<number, T[]>>({});
-
-  useEffect(() => {
-    setSelections({ [currentPage]: [] });
-  }, [filterParams]);
+  const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
     // So that I dont dirty this code with things like `(selections[currentPage] || []).doSomething`
@@ -24,6 +21,7 @@ function useSelections<T>(currentPage = 1, filterParams = "") {
     clearAll: () => {
       setSelections({ ...selections, [currentPage]: [] });
     },
+    setCurrentPage,
     toggleSelection: (input: T) => {
       if (selections[currentPage].includes(input)) {
         setSelections({
@@ -42,12 +40,4 @@ function useSelections<T>(currentPage = 1, filterParams = "") {
   };
 }
 
-export const useStringSelections = (
-  currentPage?: number,
-  filterParams?: string
-) => useSelections<string>(currentPage, filterParams);
-
-export const useNumberselections = (
-  currentPage?: number,
-  filterParams?: string
-) => useSelections<number>(currentPage, filterParams);
+export const useStringSelections = () => useSelections<string>();

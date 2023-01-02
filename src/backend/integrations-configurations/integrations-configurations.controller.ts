@@ -1,5 +1,4 @@
 import { BadRequestError } from "backend/lib/errors";
-import { usersService, UsersService } from "backend/users/users.service";
 import { IntegrationsConfigurationGroup } from "shared/types/integrations";
 import { credentialsService } from "./services/credentials.service";
 import {
@@ -15,8 +14,7 @@ export class IntegrationsConfigurationController {
   constructor(
     private _appConstantsService: IntegrationsConfigurationService,
     private _environmentVariablesService: IntegrationsConfigurationService,
-    private _credentialsService: IntegrationsConfigurationService,
-    private _usersService: UsersService
+    private _credentialsService: IntegrationsConfigurationService
   ) {}
 
   async upsert(
@@ -24,12 +22,9 @@ export class IntegrationsConfigurationController {
     key: string,
     { value }: { value: string }
   ) {
-    if (
-      !(await this.getService(group).hasKey(key)) &&
-      this.isKeyAGroupKey(key)
-    ) {
+    if (this.isKeyAGroupKey(key)) {
       throw new BadRequestError(
-        "Group keys can't be created. They should be updated in the plugin settings"
+        "Group keys can't be created or updated. They should be updated in the plugin settings"
       );
     }
     await this.getService(group).upsert(key, value);
@@ -62,15 +57,7 @@ export class IntegrationsConfigurationController {
     return items;
   }
 
-  async listWithRevealedValues(user: {
-    username: string;
-    password: string;
-  }): Promise<{ key: string; value: string }[]> {
-    try {
-      await this._usersService.checkUserPassword(user);
-    } catch (error) {
-      throw new BadRequestError("Invalid Password");
-    }
+  async listWithRevealedValues(): Promise<{ key: string; value: string }[]> {
     const items = await this.listUnGrouped(
       IntegrationsConfigurationGroup.Credentials
     );
@@ -103,6 +90,5 @@ export const integrationsConfigurationController =
   new IntegrationsConfigurationController(
     appConstantsService,
     environmentVariablesService,
-    credentialsService,
-    usersService
+    credentialsService
   );

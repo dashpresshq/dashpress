@@ -1,7 +1,7 @@
 import handler from "pages/api/integrations/actions/list";
 import { createAuthenticatedMocks } from "__tests__/api/_test-utils";
 
-describe("/api/integrations/actions/integrations/index", () => {
+describe("/api/integrations/actions/list", () => {
   it("should list integrations", async () => {
     const { req, res } = createAuthenticatedMocks({
       method: "GET",

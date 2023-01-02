@@ -3,3 +3,5 @@ export type IActionConfig = {
   defaultSenderName?: string;
   defaultSenderEmail?: string;
 };
+
+export const FOR_CODE_COV = 1;

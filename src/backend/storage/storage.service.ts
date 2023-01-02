@@ -9,11 +9,8 @@ import {
 import { validateSchemaRequestBody } from "backend/lib/errors/validate-schema-request-input";
 import { IApplicationService } from "backend/types";
 import { IIntegrationsList } from "shared/types/actions";
+import { IActivatedStorage } from "shared/types/storage";
 import { STORAGE_INTEGRATIONS } from "./integrations";
-
-interface IActivatedStorage {
-  key: string;
-}
 
 export class StorageService implements IApplicationService {
   constructor(
@@ -27,11 +24,11 @@ export class StorageService implements IApplicationService {
 
   listStorageIntegrations(): IIntegrationsList[] {
     return Object.entries(STORAGE_INTEGRATIONS).map(
-      ([key, { title, configurationSchema }]) => ({
+      ([key, { title, integrationConfigurationSchema }]) => ({
         title,
         key,
         description: `Store uploaded files to ${title}`,
-        configurationSchema,
+        configurationSchema: integrationConfigurationSchema,
       })
     );
   }
@@ -47,7 +44,7 @@ export class StorageService implements IApplicationService {
     configuration: Record<string, string>
   ): Promise<void> {
     validateSchemaRequestBody(
-      STORAGE_INTEGRATIONS[storageKey].configurationSchema,
+      STORAGE_INTEGRATIONS[storageKey].integrationConfigurationSchema,
       configuration
     );
 
@@ -59,7 +56,7 @@ export class StorageService implements IApplicationService {
       {
         key: STORAGE_INTEGRATIONS[storageKey].credentialsGroupKey,
         fields: Object.keys(
-          STORAGE_INTEGRATIONS[storageKey].configurationSchema
+          STORAGE_INTEGRATIONS[storageKey].integrationConfigurationSchema
         ),
       },
       configuration
@@ -71,7 +68,9 @@ export class StorageService implements IApplicationService {
   ): Promise<Record<string, unknown>> {
     return await this._credentialsService.useGroupValue({
       key: STORAGE_INTEGRATIONS[storageKey].credentialsGroupKey,
-      fields: Object.keys(STORAGE_INTEGRATIONS[storageKey].configurationSchema),
+      fields: Object.keys(
+        STORAGE_INTEGRATIONS[storageKey].integrationConfigurationSchema
+      ),
     });
   }
 
@@ -80,7 +79,7 @@ export class StorageService implements IApplicationService {
     configuration: Record<string, string>
   ): Promise<void> {
     validateSchemaRequestBody(
-      STORAGE_INTEGRATIONS[storageKey].configurationSchema,
+      STORAGE_INTEGRATIONS[storageKey].integrationConfigurationSchema,
       configuration
     );
 
@@ -88,7 +87,7 @@ export class StorageService implements IApplicationService {
       {
         key: STORAGE_INTEGRATIONS[storageKey].credentialsGroupKey,
         fields: Object.keys(
-          STORAGE_INTEGRATIONS[storageKey].configurationSchema
+          STORAGE_INTEGRATIONS[storageKey].integrationConfigurationSchema
         ),
       },
       configuration
@@ -98,7 +97,9 @@ export class StorageService implements IApplicationService {
   async deactivateStorage(storageKey: string): Promise<void> {
     await this._credentialsService.deleteGroup({
       key: STORAGE_INTEGRATIONS[storageKey].credentialsGroupKey,
-      fields: Object.keys(STORAGE_INTEGRATIONS[storageKey].configurationSchema),
+      fields: Object.keys(
+        STORAGE_INTEGRATIONS[storageKey].integrationConfigurationSchema
+      ),
     });
 
     await this._activatedStoragePersistenceService.removeItem(storageKey);

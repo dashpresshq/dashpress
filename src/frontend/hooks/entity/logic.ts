@@ -10,7 +10,7 @@ import { IColorableSelection } from "shared/types/ui";
 export const getEntitySelectionConfig = (
   entityType: EntityTypesForSelection,
   preSelectedType: IColorableSelection[],
-  enumList: string[]
+  enumList$1: string[]
 ): IColorableSelection[] => {
   switch (entityType) {
     case "boolean":
@@ -35,12 +35,12 @@ export const getEntitySelectionConfig = (
       const preselection = preSelectedType ?? [];
 
       const shouldUseColor = isUseColorsFlagOn(preselection);
-      const enumsFromDb = enumList || [];
+      const enumList = enumList$1 || [];
 
       return uniqBy(
         [
           ...preselection,
-          ...enumsFromDb.map((enumValue, index) => ({
+          ...enumList.map((enumValue, index) => ({
             value: enumValue,
             label: userFriendlyCase(enumValue),
             color: shouldUseColor

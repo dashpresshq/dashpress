@@ -1,6 +1,6 @@
 import { AbstractConfigDataPersistenceService } from "backend/lib/config-persistence";
 import { EncryptionService } from "backend/lib/encryption/encryption.service";
-import { ForbiddenError, progammingError } from "backend/lib/errors";
+import { BadRequestError, progammingError } from "backend/lib/errors";
 import { IApplicationService } from "backend/types";
 import noop from "lodash/noop";
 import { IGroupCredential } from "../types";
@@ -70,7 +70,7 @@ export abstract class IntegrationsConfigurationService
     const filteredValues = values.filter(([, value]) => value);
 
     if (filteredValues.length === 0) {
-      throw new ForbiddenError(`No credentials available for ${group.key}`);
+      throw new BadRequestError(`No credentials available for ${group.key}`);
     }
 
     return Object.fromEntries(
@@ -91,13 +91,13 @@ export abstract class IntegrationsConfigurationService
     return await this.processDataAfterFetch(data);
   }
 
-  async useValue(key: string): Promise<string> {
-    const value = this.getValue(key);
-    if (value === undefined) {
-      throw new ForbiddenError(`No credentials available for ${key}`);
-    }
-    return value;
-  }
+  // async useValue(key: string): Promise<string> {
+  //   const value = this.getValue(key);
+  //   if (value === undefined) {
+  //     throw new BadRequestError(`No credentials available for ${key}`);
+  //   }
+  //   return value;
+  // }
 
   async upsertGroup(
     group: IGroupCredential,

@@ -3,6 +3,8 @@ import { SchemaForm } from "frontend/components/SchemaForm";
 import { IAppliedSchemaFormConfig } from "shared/form-schemas/types";
 import { IKeyValue } from "./types";
 
+export const CAPITAL_AND_UNDERSCORE_REGEX = `^[A-Z_]+$`;
+
 export const FORM_SCHEMA: IAppliedSchemaFormConfig<IKeyValue> = {
   key: {
     type: "text",
@@ -13,7 +15,7 @@ export const FORM_SCHEMA: IAppliedSchemaFormConfig<IKeyValue> = {
       {
         validationType: "regex",
         constraint: {
-          pattern: "[A-Z_]+$",
+          pattern: CAPITAL_AND_UNDERSCORE_REGEX,
         },
         errorMessage: "Only capital letters and underscores are allowed",
       },

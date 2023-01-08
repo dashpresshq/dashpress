@@ -104,8 +104,6 @@ describe("pages/integrations/variables => credentials", () => {
     });
   });
 
-  // reveal should not be available for users without action role
-
   describe("list", () => {
     it("should list credentials", async () => {
       render(

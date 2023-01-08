@@ -33,19 +33,6 @@ import { INTEGRATIONS_GROUP_CONFIG } from "./constants";
 
 const NEW_CONFIG_ITEM = "__new_config_item__";
 
-export function HSpacer({ children }: any) {
-  return (
-    <div
-      style={{
-        marginLeft: 12,
-        marginRight: 12,
-      }}
-    >
-      {children}
-    </div>
-  );
-}
-
 export function ManageCredentialGroup({
   group,
   currentTab,
@@ -178,8 +165,7 @@ export function ManageCredentialGroup({
         hasPermission(USER_PERMISSIONS.CAN_MANAGE_INTEGRATIONS) &&
         (tableData?.data || []).length > 0 &&
         !revealedCredentials.data && (
-          <HSpacer>
-            <Spacer />
+          <Spacer>
             <Text textStyle="italic" size="5">
               For security reasons, Please input your account password to be
               able to reveal values
@@ -205,18 +191,15 @@ export function ManageCredentialGroup({
                   : "Reveal Secrets"
               }
             />
-            <Spacer />
-          </HSpacer>
+          </Spacer>
         )}
-      {!canManageAction && (
-        <HSpacer>
-          <Spacer />
+      {!canManageAction && (tableData?.data || []).length > 0 && (
+        <Spacer>
           <Text textStyle="italic" size="5">
             Your account does not have the permission to view secret values or
             manage them
           </Text>
-          <Spacer />
-        </HSpacer>
+        </Spacer>
       )}
 
       <FEPaginationTable<IKeyValue>

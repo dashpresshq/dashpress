@@ -19,6 +19,7 @@ import { FOR_CODE_COV as $16 } from "backend/actions/integrations/slack/types";
 import { FOR_CODE_COV as $17 } from "backend/actions/integrations/smtp/types";
 import { FOR_CODE_COV as $18 } from "backend/actions/integrations/twilio/types";
 import { FOR_CODE_COV as $19 } from "backend/storage/types";
+import { FOR_CODE_COV as $20 } from "frontend/views/settings/Variables/types";
 
 noop(
   $1,
@@ -39,7 +40,8 @@ noop(
   $16,
   $17,
   $18,
-  $19
+  $19,
+  $20
 );
 
 describe("Code coverage ignores plain types file", () => {

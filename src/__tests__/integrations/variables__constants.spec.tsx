@@ -10,7 +10,7 @@ import userEvent from "@testing-library/user-event";
 
 setupApiHandlers();
 
-describe("pages/actions/constants", () => {
+describe("pages/integrations/variables => constants", () => {
   const useRouter = jest.spyOn(require("next/router"), "useRouter");
   beforeAll(() => {
     useRouter.mockImplementation(() => ({

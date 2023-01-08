@@ -161,46 +161,48 @@ export function ManageCredentialGroup({
 
   return (
     <>
-      {group === IntegrationsConfigurationGroup.Credentials &&
-        hasPermission(USER_PERMISSIONS.CAN_MANAGE_INTEGRATIONS) &&
-        (tableData?.data || []).length > 0 &&
-        !revealedCredentials.data && (
+      <section aria-label={`${group} priviledge section`}>
+        {group === IntegrationsConfigurationGroup.Credentials &&
+          hasPermission(USER_PERMISSIONS.CAN_MANAGE_INTEGRATIONS) &&
+          (tableData?.data || []).length > 0 &&
+          !revealedCredentials.data && (
+            <Spacer>
+              <Text textStyle="italic" size="5">
+                For security reasons, Please input your account password to be
+                able to reveal values
+              </Text>
+              <Spacer />
+              <SchemaForm
+                fields={{
+                  password: {
+                    type: "password",
+                    validations: [
+                      {
+                        validationType: "required",
+                      },
+                    ],
+                  },
+                }}
+                onSubmit={async ({ password }: { password: string }) => {
+                  passwordStore.setPassword(password);
+                }}
+                buttonText={
+                  revealedCredentials.isLoading
+                    ? "Just a sec..."
+                    : "Reveal Secrets"
+                }
+              />
+            </Spacer>
+          )}
+        {!canManageAction && (tableData?.data || []).length > 0 && (
           <Spacer>
             <Text textStyle="italic" size="5">
-              For security reasons, Please input your account password to be
-              able to reveal values
+              Your account does not have the permission to view secret values or
+              manage them
             </Text>
-            <Spacer />
-            <SchemaForm
-              fields={{
-                password: {
-                  type: "password",
-                  validations: [
-                    {
-                      validationType: "required",
-                    },
-                  ],
-                },
-              }}
-              onSubmit={async ({ password }: { password: string }) => {
-                passwordStore.setPassword(password);
-              }}
-              buttonText={
-                revealedCredentials.isLoading
-                  ? "Just a sec..."
-                  : "Reveal Secrets"
-              }
-            />
           </Spacer>
         )}
-      {!canManageAction && (tableData?.data || []).length > 0 && (
-        <Spacer>
-          <Text textStyle="italic" size="5">
-            Your account does not have the permission to view secret values or
-            manage them
-          </Text>
-        </Spacer>
-      )}
+      </section>
 
       <FEPaginationTable<IKeyValue>
         dataEndpoint={dataEndpoint}

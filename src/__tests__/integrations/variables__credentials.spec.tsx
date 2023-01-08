@@ -37,19 +37,28 @@ describe("pages/integrations/variables => credentials", () => {
           <ManageVariables />
         </AuthenticatedAppWrapper>
       );
+
+      const priviledgeSection = screen.getByLabelText(
+        "constants priviledge section"
+      );
+
       expect(
-        screen.queryByText(
+        within(priviledgeSection).queryByText(
           `For security reasons, Please input your account password to be able to reveal values`
         )
       ).not.toBeInTheDocument();
       expect(
-        screen.queryByText(
+        within(priviledgeSection).queryByText(
           `Your account does not have the permission to view secret values or manage them`
         )
       ).not.toBeInTheDocument();
-      expect(screen.queryByLabelText(`Password`)).not.toBeInTheDocument();
       expect(
-        screen.queryByRole(`button`, { name: "Reveal Secrets" })
+        within(priviledgeSection).queryByLabelText(`Password`)
+      ).not.toBeInTheDocument();
+      expect(
+        within(priviledgeSection).queryByRole(`button`, {
+          name: "Reveal Secrets",
+        })
       ).not.toBeInTheDocument();
       expect(
         await screen.findAllByRole("button", {
@@ -64,20 +73,28 @@ describe("pages/integrations/variables => credentials", () => {
           <ManageVariables />
         </AuthenticatedAppWrapper>
       );
+      const priviledgeSection = screen.getByLabelText(
+        "credentials priviledge section"
+      );
+
       await userEvent.click(screen.getByRole("tab", { name: "Secrets" }));
       expect(
-        screen.getByText(
+        within(priviledgeSection).getByText(
           `For security reasons, Please input your account password to be able to reveal values`
         )
       ).toBeInTheDocument();
       expect(
-        screen.queryByText(
+        within(priviledgeSection).queryByText(
           `Your account does not have the permission to view secret values or manage them`
         )
       ).not.toBeInTheDocument();
-      expect(screen.getByLabelText(`Password`)).toBeInTheDocument();
       expect(
-        screen.getByRole(`button`, { name: "Reveal Secrets" })
+        within(priviledgeSection).getByLabelText(`Password`)
+      ).toBeInTheDocument();
+      expect(
+        within(priviledgeSection).getByRole(`button`, {
+          name: "Reveal Secrets",
+        })
       ).toBeInTheDocument();
       expect(
         screen.getAllByRole("button", {
@@ -99,23 +116,25 @@ describe("pages/integrations/variables => credentials", () => {
 
       await userEvent.click(screen.getByRole("tab", { name: "Secrets" }));
 
+      const table = screen.getByRole("table");
+
       expect(
-        await screen.findByRole("row", {
+        await within(table).findByRole("row", {
           name: "Key Sort By Key Filter By Search Value Sort By Value Action",
         })
       ).toBeInTheDocument();
       expect(
-        screen.getByRole("row", {
+        within(table).getByRole("row", {
           name: "{{ SECRET.PAYMENT_API_KEY }} **********",
         })
       ).toBeInTheDocument();
       expect(
-        screen.getByRole("row", {
+        within(table).getByRole("row", {
           name: "{{ SECRET.MAIL_PASSWORD }} **********",
         })
       ).toBeInTheDocument();
       expect(
-        screen.getByRole("row", {
+        within(table).getByRole("row", {
           name: "{{ SECRET.ROOT_PASSWORD }} **********",
         })
       ).toBeInTheDocument();
@@ -130,27 +149,35 @@ describe("pages/integrations/variables => credentials", () => {
         </AuthenticatedAppWrapper>
       );
 
+      const priviledgeSection = screen.getByLabelText(
+        "credentials priviledge section"
+      );
+
       await userEvent.click(screen.getByRole("tab", { name: "Secrets" }));
 
       await userEvent.type(
-        screen.getByLabelText("Password"),
+        within(priviledgeSection).getByLabelText("Password"),
         "invalid password"
       );
       await userEvent.click(
-        screen.getByRole("button", { name: "Reveal Secrets" })
+        within(priviledgeSection).getByRole("button", {
+          name: "Reveal Secrets",
+        })
       );
 
       expect(await screen.findByRole("status")).toHaveTextContent(
         "Invalid Password"
       );
 
+      const table = screen.getByRole("table");
+
       expect(
-        screen.queryByRole("row", {
+        within(table).queryByRole("row", {
           name: "{{ SECRET.ROOT_PASSWORD }} confidential",
         })
       ).not.toBeInTheDocument();
       expect(
-        await screen.findByRole("row", {
+        await within(table).findByRole("row", {
           name: "{{ SECRET.ROOT_PASSWORD }} **********",
         })
       ).toBeInTheDocument();
@@ -163,20 +190,31 @@ describe("pages/integrations/variables => credentials", () => {
         </AuthenticatedAppWrapper>
       );
 
-      await userEvent.click(screen.getByRole("tab", { name: "Secrets" }));
-
-      await userEvent.type(screen.getByLabelText("Password"), "password");
-      await userEvent.click(
-        screen.getByRole("button", { name: "Reveal Secrets" })
+      const priviledgeSection = screen.getByLabelText(
+        "credentials priviledge section"
       );
 
+      await userEvent.click(screen.getByRole("tab", { name: "Secrets" }));
+
+      await userEvent.type(
+        within(priviledgeSection).getByLabelText("Password"),
+        "password"
+      );
+      await userEvent.click(
+        within(priviledgeSection).getByRole("button", {
+          name: "Reveal Secrets",
+        })
+      );
+
+      const table = screen.getByRole("table");
+
       expect(
-        await screen.findByRole("row", {
+        await within(table).findByRole("row", {
           name: "Key Sort By Key Filter By Search Value Sort By Value Action",
         })
       ).toBeInTheDocument();
       expect(
-        await screen.findByRole(
+        await within(table).findByRole(
           "row",
           {
             name: "{{ SECRET.PAYMENT_API_KEY }} super-secret",
@@ -187,30 +225,35 @@ describe("pages/integrations/variables => credentials", () => {
           }
         )
       ).toBeInTheDocument();
+
       expect(
-        screen.getByRole("row", {
+        within(table).getByRole("row", {
           name: "{{ SECRET.MAIL_PASSWORD }} do-not-share",
         })
       ).toBeInTheDocument();
       expect(
-        screen.getByRole("row", {
+        within(table).getByRole("row", {
           name: "{{ SECRET.ROOT_PASSWORD }} confidential",
         })
       ).toBeInTheDocument();
       expect(
-        screen.queryByRole("row", {
+        within(table).queryByRole("row", {
           name: "{{ SECRET.ROOT_PASSWORD }} **********",
         })
       ).not.toBeInTheDocument();
 
       expect(
-        screen.queryByText(
+        within(priviledgeSection).queryByText(
           `For security reasons, Please input your account password to be able to reveal values`
         )
       ).not.toBeInTheDocument();
-      expect(screen.queryByLabelText(`Password`)).not.toBeInTheDocument();
       expect(
-        screen.queryByRole(`button`, { name: "Reveal Secrets" })
+        within(priviledgeSection).queryByLabelText(`Password`)
+      ).not.toBeInTheDocument();
+      expect(
+        within(priviledgeSection).queryByRole(`button`, {
+          name: "Reveal Secrets",
+        })
       ).not.toBeInTheDocument();
     });
   });
@@ -225,11 +268,6 @@ describe("pages/integrations/variables => credentials", () => {
 
       await userEvent.click(screen.getByRole("tab", { name: "Secrets" }));
 
-      // await userEvent.type(screen.getByLabelText("Password"), "password");
-      // await userEvent.click(
-      //   screen.getByRole("button", { name: "Reveal Secrets" })
-      // );
-
       await userEvent.click(
         await screen.findByRole(
           "button",
@@ -238,14 +276,19 @@ describe("pages/integrations/variables => credentials", () => {
         )
       );
 
-      expect(
-        within(screen.getByRole("dialog")).getByText("Create Secret")
-      ).toBeInTheDocument();
+      const dialog = screen.getByRole("dialog");
 
-      await userEvent.type(screen.getByLabelText("Key"), "NEW_SECRET");
-      await userEvent.type(screen.getByLabelText("Value"), "new secret");
+      expect(within(dialog).getByText("Create Secret")).toBeInTheDocument();
 
-      await userEvent.click(screen.getByRole("button", { name: "Save" }));
+      await userEvent.type(within(dialog).getByLabelText("Key"), "NEW_SECRET");
+      await userEvent.type(
+        within(dialog).getByLabelText("Value"),
+        "new secret"
+      );
+
+      await userEvent.click(
+        within(dialog).getByRole("button", { name: "Save" })
+      );
 
       expect((await screen.findAllByRole("status"))[0]).toHaveTextContent(
         "Secret Saved Successfully"
@@ -276,8 +319,10 @@ describe("pages/integrations/variables => credentials", () => {
 
       await userEvent.click(screen.getByRole("tab", { name: "Secrets" }));
 
+      const table = screen.getByRole("table");
+
       expect(
-        await screen.findByRole(
+        await within(table).findByRole(
           "row",
           {
             name: "{{ SECRET.PAYMENT_API_KEY }} super-secret",
@@ -290,27 +335,32 @@ describe("pages/integrations/variables => credentials", () => {
       ).toBeInTheDocument();
 
       await userEvent.click(
-        within((await screen.findAllByRole("row"))[1]).getByRole("button", {
-          name: "Edit",
-        })
+        within((await within(table).findAllByRole("row"))[1]).getByRole(
+          "button",
+          {
+            name: "Edit",
+          }
+        )
       );
 
-      expect(
-        within(screen.getByRole("dialog")).getByText("Update Secret")
-      ).toBeInTheDocument();
+      const dialog = screen.getByRole("dialog");
 
-      expect(screen.getByLabelText("Key")).toBeDisabled();
+      expect(within(dialog).getByText("Update Secret")).toBeInTheDocument();
 
-      await userEvent.type(screen.getByLabelText("Value"), "__updated");
+      expect(within(dialog).getByLabelText("Key")).toBeDisabled();
 
-      await userEvent.click(screen.getByRole("button", { name: "Save" }));
+      await userEvent.type(within(dialog).getByLabelText("Value"), "__updated");
+
+      await userEvent.click(
+        within(dialog).getByRole("button", { name: "Save" })
+      );
 
       expect((await screen.findAllByRole("status"))[0]).toHaveTextContent(
         "Secret Saved Successfully"
       );
 
       expect(
-        await screen.findByRole("row", {
+        await within(table).findByRole("row", {
           name: "{{ SECRET.PAYMENT_API_KEY }} super-secret__updated",
         })
       ).toBeInTheDocument();

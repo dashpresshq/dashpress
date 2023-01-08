@@ -29,23 +29,25 @@ describe("pages/integrations/variables => constants", () => {
         </AppWrapper>
       );
 
+      const table = await screen.findByRole("table");
+
       expect(
-        await screen.findByRole("row", {
+        await within(table).findByRole("row", {
           name: "Key Sort By Key Filter By Search Value Sort By Value Action",
         })
       ).toBeInTheDocument();
       expect(
-        screen.getByRole("row", {
+        within(table).getByRole("row", {
           name: "{{ CONSTANT.BASE_URL }} http://base.com",
         })
       ).toBeInTheDocument();
       expect(
-        screen.getByRole("row", {
+        within(table).getByRole("row", {
           name: "{{ CONSTANT.FOO_CONSTANT_KEY }} foo constant value",
         })
       ).toBeInTheDocument();
       expect(
-        screen.getByRole("row", {
+        within(table).getByRole("row", {
           name: "{{ CONSTANT.BAR_CONSTANT_KEY }} bar constant value",
         })
       ).toBeInTheDocument();
@@ -63,14 +65,16 @@ describe("pages/integrations/variables => constants", () => {
         await screen.findByRole("button", { name: "Add New Constant" })
       );
 
-      expect(
-        within(screen.getByRole("dialog")).getByText("Create Constant")
-      ).toBeInTheDocument();
+      const dialog = screen.getByRole("dialog");
 
-      await userEvent.type(screen.getByLabelText("Key"), "NEW_KEY");
-      await userEvent.type(screen.getByLabelText("Value"), "new value");
+      expect(within(dialog).getByText("Create Constant")).toBeInTheDocument();
 
-      await userEvent.click(screen.getByRole("button", { name: "Save" }));
+      await userEvent.type(within(dialog).getByLabelText("Key"), "NEW_KEY");
+      await userEvent.type(within(dialog).getByLabelText("Value"), "new value");
+
+      await userEvent.click(
+        within(dialog).getByRole("button", { name: "Save" })
+      );
 
       expect(await screen.findByRole("status")).toHaveTextContent(
         "Constant Saved Successfully"
@@ -84,8 +88,12 @@ describe("pages/integrations/variables => constants", () => {
         </AppWrapper>
       );
 
+      const table = screen.getByRole("table");
+
+      expect(within(table).getAllByRole("row")).toHaveLength(5);
+
       expect(
-        screen.getByRole("row", {
+        within(table).getByRole("row", {
           name: "{{ CONSTANT.NEW_KEY }} new value",
         })
       ).toBeInTheDocument();
@@ -100,9 +108,9 @@ describe("pages/integrations/variables => constants", () => {
         </AppWrapper>
       );
 
-      const tableRows = await screen.findAllByRole("row");
+      const table = screen.getByRole("table");
 
-      expect(tableRows).toHaveLength(5);
+      const tableRows = await within(table).findAllByRole("row");
 
       await userEvent.click(
         within(tableRows[1]).getByRole("button", {
@@ -110,15 +118,17 @@ describe("pages/integrations/variables => constants", () => {
         })
       );
 
-      expect(
-        within(screen.getByRole("dialog")).getByText("Update Constant")
-      ).toBeInTheDocument();
+      const dialog = screen.getByRole("dialog");
 
-      expect(screen.getByLabelText("Key")).toBeDisabled();
+      expect(within(dialog).getByText("Update Constant")).toBeInTheDocument();
 
-      await userEvent.type(screen.getByLabelText("Value"), "/updated");
+      expect(within(dialog).getByLabelText("Key")).toBeDisabled();
 
-      await userEvent.click(screen.getByRole("button", { name: "Save" }));
+      await userEvent.type(within(dialog).getByLabelText("Value"), "/updated");
+
+      await userEvent.click(
+        within(dialog).getByRole("button", { name: "Save" })
+      );
 
       expect((await screen.findAllByRole("status"))[0]).toHaveTextContent(
         "Constant Saved Successfully"
@@ -132,8 +142,10 @@ describe("pages/integrations/variables => constants", () => {
         </AppWrapper>
       );
 
+      const table = screen.getByRole("table");
+
       expect(
-        screen.getByRole("row", {
+        within(table).getByRole("row", {
           name: "{{ CONSTANT.BASE_URL }} http://base.com/updated",
         })
       ).toBeInTheDocument();
@@ -148,7 +160,9 @@ describe("pages/integrations/variables => constants", () => {
         </AppWrapper>
       );
 
-      const tableRows = await screen.findAllByRole("row");
+      const table = screen.getByRole("table");
+
+      const tableRows = await within(table).findAllByRole("row");
 
       expect(tableRows).toHaveLength(5);
 
@@ -166,7 +180,7 @@ describe("pages/integrations/variables => constants", () => {
         await within(confirmBox).findByRole("button", { name: "Confirm" })
       );
 
-      expect(await screen.findAllByRole("row")).toHaveLength(4);
+      expect(await within(table).findAllByRole("row")).toHaveLength(4);
 
       expect((await screen.findAllByRole("status"))[0]).toHaveTextContent(
         "Constant Deleted Successfully"

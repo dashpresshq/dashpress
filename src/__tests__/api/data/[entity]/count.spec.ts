@@ -1,14 +1,12 @@
 import handler from "pages/api/data/[entity]/count";
 import {
   setupAllTestData,
-  setupTestDatabaseData,
   createAuthenticatedMocks,
 } from "__tests__/api/_test-utils";
 
 describe("/api/data/[entity]/count", () => {
   beforeAll(async () => {
-    await setupAllTestData(["schema", "credentials", "app-config"]);
-    await setupTestDatabaseData();
+    await setupAllTestData(["schema", "credentials", "app-config", "data"]);
   });
 
   it("should count data correctly", async () => {

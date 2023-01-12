@@ -1,15 +1,13 @@
 import handler from "pages/api/data/[entity]/[id]/reference";
 import {
   setupAllTestData,
-  setupTestDatabaseData,
   createAuthenticatedMocks,
   setupAppConfigTestData,
 } from "__tests__/api/_test-utils";
 
 describe("/api/data/[entity]/[id]/reference", () => {
   beforeAll(async () => {
-    await setupAllTestData(["schema", "credentials", "app-config"]);
-    await setupTestDatabaseData();
+    await setupAllTestData(["schema", "credentials", "app-config", "data"]);
   });
 
   it("should show reference data with generated fields when config is empty", async () => {

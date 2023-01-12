@@ -10,14 +10,18 @@ import { setupIntegrationsEnvTestData } from "./_integrations-env";
 import { setupActivatedActionTestData } from "./_activated-actions";
 import { setupActionInstanceTestData } from "./_action-instances";
 import { setupActivatedStorageTestData } from "./_activated-storage";
+import { setupTestDatabaseData } from "./_data";
 
-export const setupAllTestData = async (domains: ConfigDomain[]) => {
-  const allTestData: [ConfigDomain, () => Promise<void>][] = [
+export const setupAllTestData = async (
+  domains: Array<ConfigDomain | "data">
+) => {
+  const allTestData: [ConfigDomain | "data", () => Promise<void>][] = [
     ["roles", setupRolesTestData],
     ["app-config", setupAppConfigTestData],
     ["users", setupUsersTestData],
     ["dashboard", setupDashboardTestData],
     ["schema", setupSchemaTestData],
+    ["data", setupTestDatabaseData],
     ["activated_actions", setupActivatedActionTestData],
     ["activated_storage", setupActivatedStorageTestData],
     ["action_instances", setupActionInstanceTestData],
@@ -29,9 +33,6 @@ export const setupAllTestData = async (domains: ConfigDomain[]) => {
   await Promise.all(
     allTestData
       .filter(([domain]) => {
-        if (domains.length === 0) {
-          return true;
-        }
         return domains.includes(domain);
       })
       // eslint-disable-next-line @typescript-eslint/no-unused-vars

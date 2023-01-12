@@ -253,7 +253,7 @@ export class DataController {
   async deleteData(entity: string, id: string) {
     await this._actionsService.runAction(
       entity,
-      "delete",
+      BaseAction.Delete,
       async () => await this.showData(entity, id)
     );
 

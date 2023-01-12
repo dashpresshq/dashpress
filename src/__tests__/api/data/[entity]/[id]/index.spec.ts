@@ -1,15 +1,13 @@
 import handler from "pages/api/data/[entity]/[id]/index";
 import {
   setupAllTestData,
-  setupTestDatabaseData,
   createAuthenticatedMocks,
   setupAppConfigTestData,
 } from "__tests__/api/_test-utils";
 
 describe("/api/data/[entity]/[id]/index", () => {
   beforeAll(async () => {
-    await setupAllTestData(["schema", "credentials", "app-config"]);
-    await setupTestDatabaseData();
+    await setupAllTestData(["schema", "credentials", "app-config", "data"]);
   });
 
   describe("GET", () => {

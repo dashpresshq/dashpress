@@ -58,7 +58,7 @@ export class ActionsService implements IApplicationService {
 
     for (const action of actionsToRun) {
       const { configuration, implementationKey, activatedActionId } = action;
-      // run triggerLogic triggerLogic
+      // run triggerLogic
 
       const integrationKey = await this.getIntegrationKeyFromActivatedActionId(
         activatedActionId

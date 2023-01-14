@@ -68,8 +68,9 @@ export class ActionsService implements IApplicationService {
         activatedActionId
       );
 
-      const connection =
-        ACTION_INTEGRATIONS[integrationKey].connect(actionConfiguration);
+      const connection = await ACTION_INTEGRATIONS[integrationKey].connect(
+        actionConfiguration
+      );
 
       const appConstants = Object.fromEntries(
         (await this._appConstantsService.list()).map(({ key, value }) => [

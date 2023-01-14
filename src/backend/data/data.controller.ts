@@ -224,8 +224,6 @@ export class DataController {
 
     // const validations = runValidationError({})(data);
 
-    // console.log(entityValidations);
-
     await this._dataService.update(
       entity,
       {

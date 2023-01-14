@@ -10,7 +10,9 @@ export const makeIntegrationRequest = async (
 ) => {
   const response = await fetch(configuration.url, {
     method,
-    headers: JSON.parse(configuration.headers),
+    headers: configuration.headers
+      ? JSON.parse(configuration.headers)
+      : undefined,
     body: configuration.body ? configuration.body : undefined,
   });
   if (response.ok) {

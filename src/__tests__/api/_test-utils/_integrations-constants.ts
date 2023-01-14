@@ -10,13 +10,15 @@ const TEST_CONSTANTS: Record<string, string> = {
     "CONSTANT_KEY_4",
 };
 
-export const setupIntegrationsConstantsTestData = async () => {
+export const setupIntegrationsConstantsTestData = async (
+  testConstants = TEST_CONSTANTS
+) => {
   const configPersistenceService =
     createConfigDomainPersistenceService<string>("constants");
 
   await configPersistenceService.resetToEmpty();
 
-  for (const [key, value] of Object.entries(TEST_CONSTANTS)) {
+  for (const [key, value] of Object.entries(testConstants)) {
     await configPersistenceService.upsertItem(key, value);
   }
 };

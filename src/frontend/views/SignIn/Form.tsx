@@ -10,7 +10,7 @@ export function SignInForm({ onSubmit }: IFormProps<ISignInForm>) {
   return (
     <>
       {process.env.NEXT_PUBLIC_IS_DEMO && (
-        <div data-testid="NEXT_PUBLIC_IS_DEMO">
+        <div aria-label="Demo App Credentials">
           <Text size="6">
             Username is <b>root</b>
           </Text>

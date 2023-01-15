@@ -16,7 +16,7 @@ jest.mock("nanoid", () => ({
   nanoid: jest.fn().mockReturnValueOnce("new_id_1").mockReturnValueOnce("2"),
 }));
 
-describe.skip("pages/admin/settings/dashboard", () => {
+describe("pages/admin/settings/dashboard", () => {
   describe("Summary Card", () => {
     it("should create summary card widget", async () => {
       render(
@@ -29,23 +29,40 @@ describe.skip("pages/admin/settings/dashboard", () => {
         screen.getByRole("button", { name: "New Dashboard Item" })
       );
 
-      // await screen.findByRole("p", { name: "New Dashboard Item" });
+      const dialog = screen.getByRole("dialog");
 
-      await userEvent.type(screen.getByLabelText("Title"), "New Summary Card");
+      expect(
+        within(dialog).getByText("New Dashboard Item")
+      ).toBeInTheDocument();
 
-      await userEvent.type(screen.getByLabelText("Entity"), "Entity 1");
+      await userEvent.type(
+        await within(dialog).findByLabelText("Title"),
+        "New Summary Card"
+      );
+
+      await userEvent.type(
+        within(dialog).getByLabelText("Entity"),
+        "Plural entity-1"
+      );
       await userEvent.keyboard("{Enter}");
 
-      await userEvent.type(screen.getByLabelText("Type"), "Summary Card");
+      await userEvent.type(
+        within(dialog).getByLabelText("Type"),
+        "Summary Card"
+      );
       await userEvent.keyboard("{Enter}");
 
-      await userEvent.type(screen.getByLabelText("Color"), "green");
+      await userEvent.type(within(dialog).getByLabelText("Color"), "green");
       await userEvent.keyboard("{Enter}");
 
-      await userEvent.type(screen.getByLabelText("SVG"), "<p>Demo SVG</p>");
-      await userEvent.keyboard("{Enter}");
+      await userEvent.type(
+        within(dialog).getByLabelText("SVG"),
+        "<p>Demo SVG</p>"
+      );
 
-      await userEvent.click(screen.getByRole("button", { name: "Save" }));
+      await userEvent.click(
+        within(dialog).getByRole("button", { name: "Save" })
+      );
 
       expect(await screen.findByRole("status")).toHaveTextContent(
         "Widget Created Successfully"

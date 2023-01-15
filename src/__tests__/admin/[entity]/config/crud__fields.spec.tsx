@@ -84,7 +84,7 @@ describe("pages/admin/[entity]/config/crud", () => {
 
       expect(
         within(currentTab).getByRole("checkbox", {
-          name: "Field 1",
+          name: "Field 2",
         })
       ).toBeChecked();
     });

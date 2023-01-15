@@ -95,7 +95,7 @@ describe("pages/auth", () => {
     expect(pushMock).toHaveBeenCalledWith("/admin");
   });
 
-  describe("demo", () => {
+  describe("Demo Credentials", () => {
     const OLD_ENV = process.env;
 
     beforeEach(() => {
@@ -111,7 +111,7 @@ describe("pages/auth", () => {
       localStorage.clear();
     });
 
-    it("should hide demo elements when NEXT_PUBLIC_IS_DEMO is false", async () => {
+    it("should be hidden when NEXT_PUBLIC_IS_DEMO is false", async () => {
       render(
         <AppWrapper>
           <SignIn />
@@ -119,11 +119,11 @@ describe("pages/auth", () => {
       );
 
       expect(
-        screen.queryByTestId("NEXT_PUBLIC_IS_DEMO")
+        screen.queryByLabelText("Demo App Credentials")
       ).not.toBeInTheDocument();
     });
 
-    it("should show demo elements when NEXT_PUBLIC_IS_DEMO is true", async () => {
+    it("should be shown when NEXT_PUBLIC_IS_DEMO is true", async () => {
       process.env.NEXT_PUBLIC_IS_DEMO = "true";
       render(
         <AppWrapper>
@@ -131,7 +131,7 @@ describe("pages/auth", () => {
         </AppWrapper>
       );
 
-      expect(screen.queryByTestId("NEXT_PUBLIC_IS_DEMO")).toHaveTextContent(
+      expect(screen.getByLabelText("Demo App Credentials")).toHaveTextContent(
         "Username is rootPassword is password"
       );
     });

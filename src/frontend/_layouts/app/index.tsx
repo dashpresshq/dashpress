@@ -168,7 +168,7 @@ export function AppLayout({
         </div>
       </Stack>
       <Spacer />
-      <div data-testid="app-layout__content">{children}</div>
+      <main>{children}</main>
       <GoogleTagManager />
     </DynamicLayout>
   );

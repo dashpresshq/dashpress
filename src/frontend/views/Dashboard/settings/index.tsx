@@ -46,7 +46,6 @@ export function DashboardSettings({
         );
 
         const entityFields = useEntityFields(values.entity);
-
         const fields = (entityFields.data || [])
           .filter(({ type }) => type === "date")
           .map(({ name }) => ({ value: name, label: name }));

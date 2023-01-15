@@ -13,23 +13,23 @@ export class EntitiesController {
     private _configurationService: ConfigurationService
   ) {}
 
-  async getMenuEntities(): Promise<IValueLabel[]> {
+  async getActiveEntities(): Promise<IValueLabel[]> {
     const [hiddenEntities, entitiesOrder, entities] = await Promise.all([
       this._configurationService.show<string[]>("disabled_entities"),
       this._configurationService.show<string[]>("entities_order"),
       this._entitiesService.getAllEntities(),
     ]);
-    const entitiesToShow = entities.filter(
+    const activeEntities = entities.filter(
       ({ value }) => !hiddenEntities.includes(value)
     );
 
     sortByList(
-      entitiesToShow.sort((a, b) => a.value.localeCompare(b.value)),
+      activeEntities.sort((a, b) => a.value.localeCompare(b.value)),
       entitiesOrder,
       "value"
     );
 
-    return entitiesToShow;
+    return activeEntities;
   }
 
   async listAllEntities(): Promise<IValueLabel[]> {

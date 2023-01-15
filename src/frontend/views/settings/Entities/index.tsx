@@ -13,7 +13,7 @@ import {
 } from "../../../hooks/configuration/configuration.store";
 import { useEntityDictionPlurals } from "../../../hooks/entity/entity.queries";
 import {
-  ENTITIES_MENU_ENDPOINT,
+  ACTIVE_ENTITIES_ENDPOINT,
   useEntitiesList,
   useActiveEntities,
 } from "../../../hooks/entity/entity.store";
@@ -39,14 +39,14 @@ export function EntitiesSettings() {
   const upsertHideFromMenuMutation = useUpsertConfigurationMutation(
     "disabled_entities",
     "",
-    { otherEndpoints: [ENTITIES_MENU_ENDPOINT] }
+    { otherEndpoints: [ACTIVE_ENTITIES_ENDPOINT] }
   );
 
   const upsertEntitiesOrderMutation = useUpsertConfigurationMutation(
     "entities_order",
     "",
     {
-      otherEndpoints: [ENTITIES_MENU_ENDPOINT],
+      otherEndpoints: [ACTIVE_ENTITIES_ENDPOINT],
     }
   );
 

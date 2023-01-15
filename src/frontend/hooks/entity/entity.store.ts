@@ -10,10 +10,10 @@ export const ENTITY_FIELDS_ENDPOINT = (entity: string) =>
 export const ENTITY_RELATIONS_ENDPOINT = (entity: string) =>
   `/api/entities/${entity}/relations`;
 
-export const ENTITIES_MENU_ENDPOINT = "/api/entities/menu";
+export const ACTIVE_ENTITIES_ENDPOINT = "/api/entities/active";
 
 export const useActiveEntities = () => {
-  const menuItems = useApi<ILabelValue[]>(ENTITIES_MENU_ENDPOINT, {
+  const menuItems = useApi<ILabelValue[]>(ACTIVE_ENTITIES_ENDPOINT, {
     errorMessage: dataNotFoundMessage("Entities menu items"),
   });
 

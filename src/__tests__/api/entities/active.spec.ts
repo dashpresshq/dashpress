@@ -1,4 +1,4 @@
-import handler from "pages/api/entities/menu";
+import handler from "pages/api/entities/active";
 import {
   setupAllTestData,
   createAuthenticatedMocks,

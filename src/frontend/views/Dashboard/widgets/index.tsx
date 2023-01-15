@@ -16,7 +16,7 @@ export const DashboardWidget = forwardRef<HTMLInputElement, IProps>(
     const rootProps = {
       ref,
       hasSetting: !!setting,
-      "data-testid": `widget__${config.id}`,
+      "aria-label": `${config.title} Widget`,
     };
 
     const navigationLink = useWidgetNavigationLink(

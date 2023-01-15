@@ -10,7 +10,12 @@ import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 
 setupApiHandlers();
 
-jest.mock("next/router", () => require("next-router-mock"));
+const useRouter = jest.spyOn(require("next/router"), "useRouter");
+
+useRouter.mockImplementation(() => ({
+  asPath: "/",
+  query: {},
+}));
 
 jest.mock("nanoid", () => ({
   nanoid: jest.fn().mockReturnValueOnce("new_id_1").mockReturnValueOnce("2"),
@@ -69,21 +74,42 @@ describe("pages/admin/settings/dashboard", () => {
       );
     });
 
-    it.skip("should show the new summary card widget", async () => {
+    it("should show the new summary card widget", async () => {
       render(
         <AppWrapper>
           <ManageDashboard />
         </AppWrapper>
       );
-      const secondWidget = await screen.findByTestId("widget__new_id_1");
+
+      const widget = await screen.findByLabelText("New Summary Card Widget");
 
       expect(
-        await within(secondWidget).findByText("New Summary Card")
+        await within(widget).findByText("New Summary Card")
       ).toBeInTheDocument();
-      expect(
-        await within(secondWidget).findByText("Demo SVG")
-      ).toBeInTheDocument();
-      expect(await within(secondWidget).findByText("8")).toBeInTheDocument();
+      expect(within(widget).getByText("Demo SVG")).toBeInTheDocument();
+      expect(within(widget).getByLabelText("Total Count")).toHaveTextContent(
+        "8"
+      );
+    });
+  });
+
+  describe("Action Button", () => {
+    it("should go to home page on 'Done'", async () => {
+      const replaceMock = jest.fn();
+      useRouter.mockImplementation(() => ({
+        replace: replaceMock,
+        query: {},
+      }));
+
+      render(
+        <AppWrapper>
+          <ManageDashboard />
+        </AppWrapper>
+      );
+
+      await userEvent.click(screen.getByRole("button", { name: "Done" }));
+
+      expect(replaceMock).toHaveBeenCalledWith("/admin");
     });
   });
 

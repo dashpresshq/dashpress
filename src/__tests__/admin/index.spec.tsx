@@ -19,7 +19,7 @@ describe("pages/admin", () => {
       </AppWrapper>
     );
 
-    const firstWidget = await screen.findByTestId("widget__table_id_1");
+    const firstWidget = await screen.findByLabelText("Table Widget 1 Widget");
 
     expect(
       await within(firstWidget).findByText("Table Widget 1")
@@ -45,15 +45,17 @@ describe("pages/admin", () => {
       </AppWrapper>
     );
 
-    const secondWidget = await screen.findByTestId("widget__summary_card_id_1");
+    const secondWidget = await screen.findByLabelText(
+      "Summary Widget 1 Widget"
+    );
 
     expect(
       await within(secondWidget).findByText("Summary Widget 1")
     ).toBeInTheDocument();
+    expect(within(secondWidget).getByText("Some SVG Here")).toBeInTheDocument();
     expect(
-      await within(secondWidget).findByText("Some SVG Here")
-    ).toBeInTheDocument();
-    expect(await within(secondWidget).findByText("8")).toBeInTheDocument();
+      within(secondWidget).getByLabelText("Total Count")
+    ).toHaveTextContent("8");
   });
 
   it("should render correct buttons for table widget", async () => {
@@ -63,7 +65,7 @@ describe("pages/admin", () => {
       </AppWrapper>
     );
 
-    const widget = await screen.findByTestId("widget__table_id_1");
+    const widget = await screen.findByLabelText("Table Widget 1 Widget");
 
     expect(within(widget).getByRole("link", { name: "View" })).toHaveAttribute(
       "href",
@@ -84,7 +86,7 @@ describe("pages/admin", () => {
       </AppWrapper>
     );
 
-    const widget = await screen.findByTestId("widget__summary_card_id_1");
+    const widget = await screen.findByLabelText("Summary Widget 1 Widget");
 
     expect(within(widget).getByRole("link", { name: "View" })).toHaveAttribute(
       "href",

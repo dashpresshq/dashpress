@@ -7,7 +7,13 @@ import {
 
 describe("/api/data/[entity]/[id]/index", () => {
   beforeAll(async () => {
-    await setupAllTestData(["schema", "credentials", "app-config", "data"]);
+    await setupAllTestData([
+      "schema",
+      "credentials",
+      "app-config",
+      "data",
+      "action_instances",
+    ]);
   });
 
   describe("GET", () => {

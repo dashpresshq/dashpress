@@ -20,6 +20,7 @@ import { FOR_CODE_COV as $17 } from "backend/actions/integrations/smtp/types";
 import { FOR_CODE_COV as $18 } from "backend/actions/integrations/twilio/types";
 import { FOR_CODE_COV as $19 } from "backend/storage/types";
 import { FOR_CODE_COV as $20 } from "frontend/views/settings/Variables/types";
+import { FOR_CODE_COV as $21 } from "frontend/views/Dashboard/widgets/types";
 
 noop(
   $1,
@@ -41,7 +42,8 @@ noop(
   $17,
   $18,
   $19,
-  $20
+  $20,
+  $21
 );
 
 describe("Code coverage ignores plain types file", () => {

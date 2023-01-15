@@ -23,7 +23,6 @@ const sendMail = jest.fn();
 describe("Run Action", () => {
   beforeAll(async () => {
     await setupAllTestData([
-      "action_instances",
       "activated_actions",
       "schema",
       "app-config",

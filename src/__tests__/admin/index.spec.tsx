@@ -27,13 +27,18 @@ describe("pages/admin", () => {
 
     const allRoles = await within(firstWidget).findAllByRole("row");
 
-    expect(allRoles.map((row) => row.textContent.replace("23:00:00.000", "")))
-      .toMatchInlineSnapshot(`
+    expect(
+      allRoles.map((row) =>
+        row.textContent
+          .replace("-06T23:00:00.000Z", "")
+          .replace("07T00:00:00.000Z", "")
+      )
+    ).toMatchInlineSnapshot(`
       [
         "Entity 1 Field 1Entity 1 Field 2Entity 1 Field 3Entity 1 Field 4Entity 1 Field 5Entity 1 Field 6Entity 1 Field 7",
-        "12hello342022-05-06TZfoo",
-        "23there212021-05-06TZfoo",
-        "32today182022-02-06TZbar",
+        "12hello342022-05foo",
+        "23there212021-05foo",
+        "32today182022-02bar",
       ]
     `);
   });

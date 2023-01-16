@@ -31,7 +31,7 @@ describe("pages/admin", () => {
       allRoles.map((row) =>
         row.textContent
           .replace("-06T23:00:00.000Z", "")
-          .replace("07T00:00:00.000Z", "")
+          .replace("-07T00:00:00.000Z", "")
       )
     ).toMatchInlineSnapshot(`
       [

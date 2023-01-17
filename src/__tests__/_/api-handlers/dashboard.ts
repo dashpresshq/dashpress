@@ -36,4 +36,25 @@ export const dashboardApiHandlers = [
       return res(ctx.json(204));
     }
   ),
+  rest.patch(
+    BASE_TEST_URL("/api/dashboards/:dashboardId/:widgetId"),
+    async (req, res, ctx) => {
+      const index = DASHBOARD_WIDGETS.findIndex(
+        ({ id }) => id === req.params.widgetId
+      );
+      DASHBOARD_WIDGETS[index] = await req.json();
+      return res(ctx.json(204));
+    }
+  ),
+  rest.delete(
+    BASE_TEST_URL("/api/dashboards/:dashboardId/:widgetId"),
+    async (req, res, ctx) => {
+      DASHBOARD_WIDGETS.splice(
+        DASHBOARD_WIDGETS.findIndex(({ id }) => id === req.params.widgetId),
+        1
+      );
+
+      return res(ctx.json(204));
+    }
+  ),
 ];

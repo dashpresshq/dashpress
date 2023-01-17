@@ -61,7 +61,9 @@ describe("pages/admin", () => {
     expect(
       within(widget).getByLabelText("Total Entity 1 Icon")
     ).toHaveAttribute("color", "#FF165D");
-    expect(within(widget).getByLabelText("Total Count")).toHaveTextContent("8");
+    expect(within(widget).getByLabelText("Total Count")).toHaveTextContent(
+      "113"
+    );
     expect(within(widget).getByRole("link", { name: "View" })).toHaveAttribute(
       "href",
       "/admin/entity-1"

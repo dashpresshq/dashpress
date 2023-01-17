@@ -46,21 +46,34 @@ export function DashboardSettings({
         );
 
         const entityFields = useEntityFields(values.entity);
-        const fields = (entityFields.data || [])
+        const dateFields = (entityFields.data || [])
           .filter(({ type }) => type === "date")
           .map(({ name }) => ({ value: name, label: name }));
 
         return (
           <form onSubmit={handleSubmit}>
+            <Field name="_type" validate={required} validateFields={[]}>
+              {({ input, meta }) => (
+                <FormSelect
+                  required
+                  label="Type"
+                  disabledOptions={[]}
+                  selectData={DashboardTypesOptions}
+                  meta={meta}
+                  input={input}
+                />
+              )}
+            </Field>
             <Field name="title" validate={required} validateFields={[]}>
               {({ input, meta }) => (
-                <FormInput label="Title" meta={meta} input={input} />
+                <FormInput required label="Title" meta={meta} input={input} />
               )}
             </Field>
 
             <Field name="entity" validate={required} validateFields={[]}>
               {({ input, meta }) => (
                 <FormSelect
+                  required
                   label="Entity"
                   disabledOptions={[]}
                   selectData={entities}
@@ -70,17 +83,33 @@ export function DashboardSettings({
               )}
             </Field>
 
-            <Field name="_type" validate={required} validateFields={[]}>
-              {({ input, meta }) => (
-                <FormSelect
-                  label="Type"
-                  disabledOptions={[]}
-                  selectData={DashboardTypesOptions}
-                  meta={meta}
-                  input={input}
-                />
-              )}
-            </Field>
+            {values.entity && (
+              <Field name="queryId" validateFields={[]}>
+                {({ input, meta }) => (
+                  <FormSelect
+                    label="Query"
+                    disabledOptions={[]}
+                    selectData={(entityViews.data || []).map(
+                      ({ id, title }) => ({
+                        label: title,
+                        value: id,
+                      })
+                    )}
+                    rightActions={[
+                      {
+                        label: "Manage Queries",
+                        action: () =>
+                          router.push(
+                            NAVIGATION_LINKS.ENTITY.CONFIG.VIEWS(values.entity)
+                          ),
+                      },
+                    ]}
+                    meta={meta}
+                    input={input}
+                  />
+                )}
+              </Field>
+            )}
 
             {values._type === "summary-card" && (
               <>
@@ -88,6 +117,7 @@ export function DashboardSettings({
                   {({ input, meta }) => (
                     <FormSelect
                       label="Color"
+                      required
                       selectData={Object.keys(ROYGBIV).map((value) => ({
                         value,
                         label: value,
@@ -101,7 +131,7 @@ export function DashboardSettings({
                   {({ input, meta }) => (
                     <FormSelect
                       label="Date Field"
-                      selectData={fields}
+                      selectData={dateFields}
                       meta={meta}
                       input={input}
                     />
@@ -120,30 +150,6 @@ export function DashboardSettings({
                 </Field>
               </>
             )}
-
-            <Field name="queryId" validateFields={[]}>
-              {({ input, meta }) => (
-                <FormSelect
-                  label="Query"
-                  disabledOptions={[]}
-                  selectData={(entityViews.data || []).map(({ id, title }) => ({
-                    label: title,
-                    value: id,
-                  }))}
-                  rightActions={[
-                    {
-                      label: "Manage Queries",
-                      action: () =>
-                        router.push(
-                          NAVIGATION_LINKS.ENTITY.CONFIG.VIEWS(values.entity)
-                        ),
-                    },
-                  ]}
-                  meta={meta}
-                  input={input}
-                />
-              )}
-            </Field>
 
             <FormButton
               text="Save"

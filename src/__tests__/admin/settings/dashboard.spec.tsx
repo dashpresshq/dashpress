@@ -7,6 +7,7 @@ import userEvent from "@testing-library/user-event";
 import ManageDashboard from "pages/admin/settings/dashboard";
 
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
+import { IWidgetConfig } from "shared/types/dashboard";
 
 setupApiHandlers();
 
@@ -90,7 +91,7 @@ describe("pages/admin/settings/dashboard", () => {
         within(widget).getByLabelText("New Summary Card Icon")
       ).toHaveTextContent("Demo SVG");
       expect(within(widget).getByLabelText("Total Count")).toHaveTextContent(
-        "8"
+        "113"
       );
       expect(
         within(widget).getByLabelText("New Summary Card Icon")
@@ -107,7 +108,6 @@ describe("pages/admin/settings/dashboard", () => {
         </AppWrapper>
       );
 
-      // const widget = await screen.findByLabelText("Summary Widget 1 Widget");
       const widget = await screen.findByLabelText("New Summary Card Widget");
 
       await userEvent.click(
@@ -143,9 +143,9 @@ describe("pages/admin/settings/dashboard", () => {
         within(dialog).getByRole("button", { name: "Save" })
       );
 
-      // expect((await screen.findAllByRole("status"))[0]).toHaveTextContent(
-      //   "Widget Updated Successfully"
-      // );
+      expect((await screen.findAllByRole("status"))[0]).toHaveTextContent(
+        "Widget Updated Successfully"
+      );
     });
 
     it("should show the updated summary card widget", async () => {
@@ -169,11 +169,43 @@ describe("pages/admin/settings/dashboard", () => {
         within(widget).getByLabelText("New Summary Card Updated Icon")
       ).toHaveAttribute("color", "#FF165D");
       expect(within(widget).getByLabelText("Total Count")).toHaveTextContent(
-        "8"
+        "114"
       );
       expect(
         within(widget).getByRole("link", { name: "View" })
       ).toHaveAttribute("href", "/admin/entity-2");
+    });
+
+    it("should be deleted", async () => {
+      render(
+        <AppWrapper>
+          <ManageDashboard />
+        </AppWrapper>
+      );
+
+      const widget = await screen.findByLabelText(
+        "New Summary Card Updated Widget"
+      );
+
+      await userEvent.click(
+        within(widget).queryByRole("button", { name: "Delete Button" })
+      );
+
+      const confirmBox = await screen.findByRole("alertdialog", {
+        name: "Confirm Delete",
+      });
+
+      await userEvent.click(
+        await within(confirmBox).findByRole("button", { name: "Confirm" })
+      );
+
+      expect((await screen.findAllByRole("status"))[0]).toHaveTextContent(
+        "Widget Deleted Successfully"
+      );
+
+      expect(
+        screen.queryByLabelText("New Summary Card Updated Widget")
+      ).not.toBeInTheDocument();
     });
   });
 
@@ -197,9 +229,150 @@ describe("pages/admin/settings/dashboard", () => {
     });
   });
 
+  describe("Query Selection", () => {
+    it("should be shown only when we have entities selected", async () => {
+      const pushMock = jest.fn();
+      useRouter.mockImplementation(() => ({
+        push: pushMock,
+        query: {},
+      }));
+
+      render(
+        <AppWrapper>
+          <ManageDashboard />
+        </AppWrapper>
+      );
+
+      await userEvent.click(
+        screen.getByRole("button", { name: "New Dashboard Item" })
+      );
+
+      const dialog = screen.getByRole("dialog");
+
+      // Query selection should be hidden
+      expect(within(dialog).queryByLabelText("Query")).not.toBeInTheDocument();
+      expect(
+        within(dialog).queryByRole("button", { name: "Manage Queries" })
+      ).not.toBeInTheDocument();
+
+      // Select an entity
+      await userEvent.type(
+        within(dialog).getByLabelText("Entity"),
+        "Plural entity-1"
+      );
+      await userEvent.keyboard("{Enter}");
+
+      // Query selection should be shown
+      expect(within(dialog).getByLabelText("Query")).toBeInTheDocument();
+      await userEvent.click(
+        within(dialog).getByRole("button", { name: "Manage Queries" })
+      );
+      // `Manage Queries` should link to the correct page
+      expect(pushMock).toHaveBeenCalledWith("/admin/entity-1/config/views");
+
+      // De-select entity
+      await userEvent.type(
+        within(dialog).getByLabelText("Entity"),
+        "Select Entity"
+      );
+      await userEvent.keyboard("{Enter}");
+
+      // Query selection should be hidden
+      expect(within(dialog).queryByLabelText("Query")).not.toBeInTheDocument();
+      expect(
+        within(dialog).queryByRole("button", { name: "Manage Queries" })
+      ).not.toBeInTheDocument();
+    });
+  });
+
+  describe("Form Input", () => {
+    type FormLabels =
+      | "Title"
+      | "Entity"
+      | "Type"
+      | "Color"
+      | "Date Field"
+      | "SVG"
+      | "Query";
+    const options: Record<
+      IWidgetConfig["_type"],
+      {
+        fields: Record<FormLabels, boolean>;
+        label: string;
+      }
+    > = {
+      "summary-card": {
+        label: "Summary Card",
+        fields: {
+          Color: true,
+          "Date Field": true,
+          Entity: true,
+          Query: true,
+          SVG: true,
+          Title: true,
+          Type: true,
+        },
+      },
+      table: {
+        label: "Table",
+        fields: {
+          Color: false,
+          "Date Field": false,
+          Entity: true,
+          Query: true,
+          SVG: false,
+          Title: true,
+          Type: true,
+        },
+      },
+    };
+
+    it.each(
+      Object.entries(options).map(([widgetType, { fields, label }]) => ({
+        widgetType,
+        fields,
+        label,
+      }))
+    )(
+      "should show the correct fields for $widgetType",
+      async ({ fields, label }) => {
+        render(
+          <AppWrapper>
+            <ManageDashboard />
+          </AppWrapper>
+        );
+
+        await userEvent.click(
+          screen.getByRole("button", { name: "New Dashboard Item" })
+        );
+
+        const dialog = screen.getByRole("dialog");
+
+        await userEvent.type(within(dialog).getByLabelText("Type"), label);
+        await userEvent.keyboard("{Enter}");
+
+        await userEvent.type(
+          within(dialog).getByLabelText("Entity"),
+          "Plural entity-1"
+        );
+        await userEvent.keyboard("{Enter}");
+
+        Object.entries(fields).forEach(([field, shouldBePresent]) => {
+          if (shouldBePresent) {
+            expect(within(dialog).getByLabelText(field)).toBeInTheDocument();
+          } else {
+            expect(
+              within(dialog).queryByLabelText(field)
+            ).not.toBeInTheDocument();
+          }
+        });
+      }
+    );
+  });
+
   // Should create table widget
-  // Should delete card and table
+  // Should delete table
   // Should update table
   // Should re-arrange card and table
-  // relative
+  // relative - direction
 });

@@ -19,10 +19,10 @@ describe("pages/admin", () => {
       </AppWrapper>
     );
 
-    const firstWidget = await screen.findByLabelText("Table Widget 1 Widget");
+    const firstWidget = await screen.findByLabelText("Latest Entity 1 Widget");
 
     expect(
-      await within(firstWidget).findByText("Table Widget 1")
+      await within(firstWidget).findByText("Latest Entity 1")
     ).toBeInTheDocument();
 
     const allRoles = await within(firstWidget).findAllByRole("row");
@@ -50,17 +50,22 @@ describe("pages/admin", () => {
       </AppWrapper>
     );
 
-    const secondWidget = await screen.findByLabelText(
-      "Summary Widget 1 Widget"
-    );
+    const widget = await screen.findByLabelText("Total Entity 1 Widget");
 
     expect(
-      await within(secondWidget).findByText("Summary Widget 1")
+      await within(widget).findByText("Total Entity 1")
     ).toBeInTheDocument();
-    expect(within(secondWidget).getByText("Some SVG Here")).toBeInTheDocument();
     expect(
-      within(secondWidget).getByLabelText("Total Count")
-    ).toHaveTextContent("8");
+      within(widget).getByLabelText("Total Entity 1 Icon")
+    ).toHaveTextContent("Some SVG Here");
+    expect(
+      within(widget).getByLabelText("Total Entity 1 Icon")
+    ).toHaveAttribute("color", "#FF165D");
+    expect(within(widget).getByLabelText("Total Count")).toHaveTextContent("8");
+    expect(within(widget).getByRole("link", { name: "View" })).toHaveAttribute(
+      "href",
+      "/admin/entity-1"
+    );
   });
 
   it("should render correct buttons for table widget", async () => {
@@ -70,7 +75,7 @@ describe("pages/admin", () => {
       </AppWrapper>
     );
 
-    const widget = await screen.findByLabelText("Table Widget 1 Widget");
+    const widget = await screen.findByLabelText("Latest Entity 1 Widget");
 
     expect(within(widget).getByRole("link", { name: "View" })).toHaveAttribute(
       "href",
@@ -91,12 +96,7 @@ describe("pages/admin", () => {
       </AppWrapper>
     );
 
-    const widget = await screen.findByLabelText("Summary Widget 1 Widget");
-
-    expect(within(widget).getByRole("link", { name: "View" })).toHaveAttribute(
-      "href",
-      "/admin/entity-1"
-    );
+    const widget = await screen.findByLabelText("Total Entity 1 Widget");
 
     expect(
       within(widget).queryByRole("button", { name: "Delete Button" })

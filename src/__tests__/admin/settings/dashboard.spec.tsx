@@ -86,10 +86,94 @@ describe("pages/admin/settings/dashboard", () => {
       expect(
         await within(widget).findByText("New Summary Card")
       ).toBeInTheDocument();
-      expect(within(widget).getByText("Demo SVG")).toBeInTheDocument();
+      expect(
+        within(widget).getByLabelText("New Summary Card Icon")
+      ).toHaveTextContent("Demo SVG");
       expect(within(widget).getByLabelText("Total Count")).toHaveTextContent(
         "8"
       );
+      expect(
+        within(widget).getByLabelText("New Summary Card Icon")
+      ).toHaveAttribute("color", "#00a05a");
+      expect(
+        within(widget).getByRole("link", { name: "View" })
+      ).toHaveAttribute("href", "/admin/entity-1");
+    });
+
+    it("should update summary card widget", async () => {
+      render(
+        <AppWrapper>
+          <ManageDashboard />
+        </AppWrapper>
+      );
+
+      // const widget = await screen.findByLabelText("Summary Widget 1 Widget");
+      const widget = await screen.findByLabelText("New Summary Card Widget");
+
+      await userEvent.click(
+        within(widget).getByRole("button", { name: "Edit Widget" })
+      );
+
+      const dialog = screen.getByRole("dialog");
+
+      expect(
+        await within(dialog).findByText("Edit Dashboard Item")
+      ).toBeInTheDocument();
+
+      await userEvent.type(
+        await within(dialog).findByLabelText("Title"),
+        " Updated"
+      );
+
+      await userEvent.type(
+        within(dialog).getByLabelText("Entity"),
+        "Plural entity-2"
+      );
+      await userEvent.keyboard("{Enter}");
+
+      await userEvent.type(within(dialog).getByLabelText("Color"), "red");
+      await userEvent.keyboard("{Enter}");
+
+      await userEvent.type(
+        within(dialog).getByLabelText("SVG"),
+        "<p>Updated</p>"
+      );
+
+      await userEvent.click(
+        within(dialog).getByRole("button", { name: "Save" })
+      );
+
+      // expect((await screen.findAllByRole("status"))[0]).toHaveTextContent(
+      //   "Widget Updated Successfully"
+      // );
+    });
+
+    it("should show the updated summary card widget", async () => {
+      render(
+        <AppWrapper>
+          <ManageDashboard />
+        </AppWrapper>
+      );
+
+      const widget = await screen.findByLabelText(
+        "New Summary Card Updated Widget"
+      );
+
+      expect(
+        await within(widget).findByText("New Summary Card Updated")
+      ).toBeInTheDocument();
+      expect(
+        within(widget).getByLabelText("New Summary Card Updated Icon")
+      ).toHaveTextContent("Demo SVGUpdated");
+      expect(
+        within(widget).getByLabelText("New Summary Card Updated Icon")
+      ).toHaveAttribute("color", "#FF165D");
+      expect(within(widget).getByLabelText("Total Count")).toHaveTextContent(
+        "8"
+      );
+      expect(
+        within(widget).getByRole("link", { name: "View" })
+      ).toHaveAttribute("href", "/admin/entity-2");
     });
   });
 
@@ -115,6 +199,7 @@ describe("pages/admin/settings/dashboard", () => {
 
   // Should create table widget
   // Should delete card and table
-  // Should update card and table
+  // Should update table
   // Should re-arrange card and table
+  // relative
 });

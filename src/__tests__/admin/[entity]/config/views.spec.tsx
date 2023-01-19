@@ -27,13 +27,13 @@ describe("pages/admin/[entity]/config/views", () => {
       </AppWrapper>
     );
     expect(
-      await screen.findByRole("tab", { name: "Foo Entity View" })
+      await screen.findByRole("tab", { name: "Verified Entity View" })
     ).toBeInTheDocument();
     expect(
-      screen.getByRole("tab", { name: "Bar Entity View" })
+      screen.getByRole("tab", { name: "User Entity View" })
     ).toBeInTheDocument();
     expect(
-      screen.getByRole("tab", { name: "Baz Entity View" })
+      screen.getByRole("tab", { name: "Age Entity View" })
     ).toBeInTheDocument();
   });
 
@@ -44,24 +44,26 @@ describe("pages/admin/[entity]/config/views", () => {
       </AppWrapper>
     );
     expect(
-      await screen.findByRole("tab", { name: "Foo Entity View" })
+      await screen.findByRole("tab", { name: "Verified Entity View" })
     ).toBeInTheDocument();
 
     expect(
       within(screen.getByRole("tabpanel")).getByLabelText("Title")
-    ).toHaveValue("Foo Entity View");
+    ).toHaveValue("Verified Entity View");
 
-    await userEvent.click(screen.getByRole("tab", { name: "Bar Entity View" }));
-
-    expect(
-      await within(screen.getByRole("tabpanel")).findByLabelText("Title")
-    ).toHaveValue("Bar Entity View");
-
-    await userEvent.click(screen.getByRole("tab", { name: "Baz Entity View" }));
+    await userEvent.click(
+      screen.getByRole("tab", { name: "User Entity View" })
+    );
 
     expect(
       await within(screen.getByRole("tabpanel")).findByLabelText("Title")
-    ).toHaveValue("Baz Entity View");
+    ).toHaveValue("User Entity View");
+
+    await userEvent.click(screen.getByRole("tab", { name: "Age Entity View" }));
+
+    expect(
+      await within(screen.getByRole("tabpanel")).findByLabelText("Title")
+    ).toHaveValue("Age Entity View");
   });
 
   it("should delete tabs", async () => {
@@ -71,29 +73,29 @@ describe("pages/admin/[entity]/config/views", () => {
       </AppWrapper>
     );
     expect(
-      await screen.findByRole("tab", { name: "Foo Entity View" })
+      await screen.findByRole("tab", { name: "Verified Entity View" })
     ).toBeInTheDocument();
 
-    await userEvent.click(screen.getByRole("tab", { name: "Baz Entity View" }));
+    await userEvent.click(screen.getByRole("tab", { name: "Age Entity View" }));
 
     await userEvent.click(screen.getByRole("button", { name: "Delete Tab" }));
 
     expect(
-      screen.queryByRole("tab", { name: "Baz Entity View" })
+      screen.queryByRole("tab", { name: "Age Entity View" })
     ).not.toBeInTheDocument();
 
     expect(screen.getByRole("tab", { selected: true })).toHaveTextContent(
-      "Bar Entity View"
+      "User Entity View"
     );
 
     await userEvent.click(screen.getByRole("button", { name: "Delete Tab" }));
 
     expect(
-      screen.queryByRole("tab", { name: "Bar Entity View" })
+      screen.queryByRole("tab", { name: "User Entity View" })
     ).not.toBeInTheDocument();
 
     expect(screen.getByRole("tab", { selected: true })).toHaveTextContent(
-      "Foo Entity View"
+      "Verified Entity View"
     );
 
     await userEvent.click(screen.getByRole("button", { name: "Delete Tab" }));

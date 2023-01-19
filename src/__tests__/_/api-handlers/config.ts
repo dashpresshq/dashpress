@@ -8,16 +8,16 @@ const ENTITY_CONFIG = {};
 const ENTITY_VIEWS: ITableTab[] = [
   {
     id: "foo",
-    title: "Foo Entity View",
+    title: "Verified Entity View",
     dataState: {
       pageSize: 15,
       sortBy: [{ id: "userName", desc: true }],
       filters: [
         {
-          id: "username",
+          id: "verified",
           value: {
-            operator: FilterOperators.BETWEEN,
-            value: "me",
+            operator: FilterOperators.EQUAL_TO,
+            value: true,
           },
         },
       ],
@@ -25,16 +25,16 @@ const ENTITY_VIEWS: ITableTab[] = [
   },
   {
     id: "bar",
-    title: "Bar Entity View",
+    title: "User Entity View",
     dataState: {
       pageSize: 16,
-      sortBy: [{ id: "userName", desc: true }],
+      sortBy: [{ id: "userName", desc: false }],
       filters: [
         {
           id: "username",
           value: {
-            operator: FilterOperators.BETWEEN,
-            value: "me",
+            operator: FilterOperators.CONTAINS,
+            value: "root",
           },
         },
       ],
@@ -42,16 +42,17 @@ const ENTITY_VIEWS: ITableTab[] = [
   },
   {
     id: "baz",
-    title: "Baz Entity View",
+    title: "Age Entity View",
     dataState: {
       pageSize: 17,
-      sortBy: [{ id: "userName", desc: true }],
+      sortBy: [],
       filters: [
         {
-          id: "username",
+          id: "age",
           value: {
             operator: FilterOperators.BETWEEN,
-            value: "me",
+            value: 2,
+            value2: 4,
           },
         },
       ],

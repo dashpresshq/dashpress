@@ -6,7 +6,9 @@ export const dataApiHandlers = [
   rest.get(BASE_TEST_URL("/api/data/:entity/count"), async (req, res, ctx) => {
     return res(
       ctx.json({
-        count: reduceStringToNumber(req.params.entity as string),
+        count:
+          reduceStringToNumber(req.params.entity as string) +
+          reduceStringToNumber(req.url.searchParams.toString()),
       })
     );
   }),

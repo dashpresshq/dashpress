@@ -85,46 +85,47 @@ export function BaseActionsLayout({ children }: IProps) {
           </SectionBox>
 
           <Spacer />
-
-          <SectionBox title="File Storage">
-            <ViewStateMachine
-              loading={
-                storageIntegrationsList.isLoading ||
-                activeStorageIntegrationList.isLoading
-              }
-              error={
-                storageIntegrationsList.error ||
-                activeStorageIntegrationList.error
-              }
-              loader={<ListSkeleton count={7} />}
-            >
-              <RenderList
-                items={(storageIntegrationsList.data || []).map(
-                  ({ title, key }) => ({
-                    name: title,
-                    key,
-                  })
-                )}
-                render={(menuItem) => {
-                  const isActive = (
-                    activeStorageIntegrationList.data || []
-                  ).includes(menuItem.key);
-                  return (
-                    <SectionListItem
-                      label={menuItem.name}
-                      key={menuItem.key}
-                      IconComponent={isActive ? UploadCloud : Cloud}
-                      active={menuItem.key === currentKey}
-                      subtle={!isActive}
-                      action={NAVIGATION_LINKS.INTEGRATIONS.STORAGE(
-                        menuItem.key
-                      )}
-                    />
-                  );
-                }}
-              />
-            </ViewStateMachine>
-          </SectionBox>
+          {process.env.NEXT_PUBLIC_SHOW_UNFINISHED_FEATURES && (
+            <SectionBox title="File Storage">
+              <ViewStateMachine
+                loading={
+                  storageIntegrationsList.isLoading ||
+                  activeStorageIntegrationList.isLoading
+                }
+                error={
+                  storageIntegrationsList.error ||
+                  activeStorageIntegrationList.error
+                }
+                loader={<ListSkeleton count={7} />}
+              >
+                <RenderList
+                  items={(storageIntegrationsList.data || []).map(
+                    ({ title, key }) => ({
+                      name: title,
+                      key,
+                    })
+                  )}
+                  render={(menuItem) => {
+                    const isActive = (
+                      activeStorageIntegrationList.data || []
+                    ).includes(menuItem.key);
+                    return (
+                      <SectionListItem
+                        label={menuItem.name}
+                        key={menuItem.key}
+                        IconComponent={isActive ? UploadCloud : Cloud}
+                        active={menuItem.key === currentKey}
+                        subtle={!isActive}
+                        action={NAVIGATION_LINKS.INTEGRATIONS.STORAGE(
+                          menuItem.key
+                        )}
+                      />
+                    );
+                  }}
+                />
+              </ViewStateMachine>
+            </SectionBox>
+          )}
 
           <Spacer />
           <MenuSection

@@ -26,7 +26,7 @@ export const useSelectionViews = (): ILayoutSelectionView[] => {
       title: "Home",
       icon: Home,
       action: ROOT_LINKS_TO_CLEAR_BREADCRUMBS.HOME,
-      featureFlag: false,
+      notFinished: false,
     },
     {
       title: "Tables",
@@ -73,8 +73,8 @@ export const useSelectionViews = (): ILayoutSelectionView[] => {
         USER_PERMISSIONS.CAN_MANAGE_PERMISSIONS
       ),
     },
-  ].filter(({ isPermissionAllowed, featureFlag }) => {
-    if (featureFlag) {
+  ].filter(({ isPermissionAllowed, notFinished }) => {
+    if (notFinished) {
       return process.env.NEXT_PUBLIC_SHOW_UNFINISHED_FEATURES;
     }
     if (isPermissionAllowed === undefined) {

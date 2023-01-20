@@ -49,15 +49,12 @@ export function BaseSettingsLayout({ children }: IProps) {
     },
   ];
 
-  const featureFlagMenuItems = process.env.NEXT_PUBLIC_SHOW_UNFINISHED_FEATURES
-    ? []
-    : [];
   return (
     <AppLayout>
       <SectionRow>
         <SectionLeft>
           <MenuSection
-            menuItems={[...baseMenuItems, ...featureFlagMenuItems]}
+            menuItems={[...baseMenuItems]}
             currentMenuItem={router.asPath.split("?")[0]}
           />
         </SectionLeft>

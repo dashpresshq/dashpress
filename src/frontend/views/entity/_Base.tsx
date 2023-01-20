@@ -69,10 +69,6 @@ export function BaseEntitySettingsLayout({ children }: IProps) {
     },
   ];
 
-  const featureFlagMenuItems = process.env.NEXT_PUBLIC_SHOW_UNFINISHED_FEATURES
-    ? []
-    : [];
-
   return (
     <AppLayout>
       {canGoBack() && (
@@ -94,7 +90,6 @@ export function BaseEntitySettingsLayout({ children }: IProps) {
           <MenuSection
             menuItems={[
               ...baseMenuItems,
-              ...featureFlagMenuItems,
               // Computed Table fields
               // Computed Details fields
               // Custom Render

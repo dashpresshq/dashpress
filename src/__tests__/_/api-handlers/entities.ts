@@ -90,38 +90,38 @@ export const entitiesApiHandlers = [
     async (req, res, ctx) => {
       const fields: IEntityField[] = [
         {
-          name: `${req.params.entity}-field-1`,
+          name: `${req.params.entity}-id-field`,
           isRequired: true,
           isId: true,
           type: "number",
         },
         {
-          name: `${req.params.entity}-field-2`,
+          name: `${req.params.entity}-reference-field`,
           isReference: true,
           type: "string",
         },
 
         {
-          name: `${req.params.entity}-field-3`,
+          name: `${req.params.entity}-string-field`,
           isRequired: true,
           type: "string",
           length: 30,
         },
         {
-          name: `${req.params.entity}-field-4`,
+          name: `${req.params.entity}-number-field`,
           type: "number",
           length: 30,
         },
         {
-          name: `${req.params.entity}-field-5`,
+          name: `${req.params.entity}-boolean-field`,
           type: "boolean",
         },
         {
-          name: `${req.params.entity}-field-6`,
+          name: `${req.params.entity}-date-field`,
           type: "date",
         },
         {
-          name: `${req.params.entity}-field-7`,
+          name: `${req.params.entity}-enum-field`,
           type: "enum",
           enumeration: ["foo", "bar"],
         },

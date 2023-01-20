@@ -34,6 +34,7 @@ export const useSelectionViews = (): ILayoutSelectionView[] => {
       icon: Table,
       viewMenuItems: {
         ...activeEntities,
+        // TODO filter the ones that the user has permission for
         data: (activeEntities.data || []).map(({ label, value }) => ({
           title: label,
           searchKeywords: value,

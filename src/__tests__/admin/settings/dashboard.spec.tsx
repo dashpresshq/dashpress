@@ -5,6 +5,7 @@ import { AppWrapper } from "@hadmean/chromista";
 import userEvent from "@testing-library/user-event";
 
 import ManageDashboard from "pages/admin/settings/dashboard";
+import Dashboard from "pages/admin";
 
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 import { IWidgetConfig } from "shared/types/dashboard";
@@ -23,7 +24,7 @@ jest.mock("nanoid", () => ({
 }));
 
 describe("pages/admin/settings/dashboard", () => {
-  describe.only("Summary Card", () => {
+  describe("Summary Card", () => {
     it("should create summary card widget", async () => {
       render(
         <AppWrapper>
@@ -68,6 +69,18 @@ describe("pages/admin/settings/dashboard", () => {
       await userEvent.keyboard("{Enter}");
 
       await userEvent.type(
+        within(dialog).getByLabelText("Date Field"),
+        "entity-1-date-field"
+      );
+      await userEvent.keyboard("{Enter}");
+
+      // await userEvent.type(
+      //   within(dialog).getByLabelText("Date Field"),
+      //   "entity-1-enum-field"
+      // );
+      // await userEvent.keyboard("{Enter}");
+
+      await userEvent.type(
         within(dialog).getByLabelText("SVG"),
         "<p>Demo SVG</p>"
       );
@@ -84,7 +97,7 @@ describe("pages/admin/settings/dashboard", () => {
     it("should show the new summary card widget", async () => {
       render(
         <AppWrapper>
-          <ManageDashboard />
+          <Dashboard />
         </AppWrapper>
       );
 
@@ -99,12 +112,51 @@ describe("pages/admin/settings/dashboard", () => {
       expect(within(widget).getByLabelText("Total Count")).toHaveTextContent(
         "1.39K"
       );
+      expect(within(widget).getByLabelText("Relative Count")).toHaveTextContent(
+        "57%"
+      );
+      expect(
+        within(widget).getByLabelText("Relative Direction")
+      ).toHaveAttribute("color", "#f5325c");
+
       expect(
         within(widget).getByLabelText("New Summary Card Icon")
       ).toHaveAttribute("color", "#00a05a");
       expect(
         within(widget).getByRole("link", { name: "View" })
       ).toHaveAttribute("href", "/admin/entity-1?tab=Verified%20Entity%20View");
+    });
+
+    it("should change relative time", async () => {
+      render(
+        <AppWrapper>
+          <Dashboard />
+        </AppWrapper>
+      );
+
+      await userEvent.click(
+        screen.getAllByRole("button", {
+          name: "Toggle Dropdown",
+        })[1]
+      );
+
+      await userEvent.click(
+        screen.getByRole("button", {
+          name: "Past 3 Months",
+        })
+      );
+
+      const widget = await screen.findByLabelText("New Summary Card Widget");
+
+      expect(within(widget).getByLabelText("Total Count")).toHaveTextContent(
+        "1.39K"
+      );
+      expect(within(widget).getByLabelText("Relative Count")).toHaveTextContent(
+        "114%"
+      );
+      expect(
+        within(widget).getByLabelText("Relative Direction")
+      ).toHaveAttribute("color", "#03d87f");
     });
 
     it("should update summary card widget", async () => {
@@ -139,7 +191,13 @@ describe("pages/admin/settings/dashboard", () => {
 
       await userEvent.type(
         within(dialog).getByLabelText("Query"),
-        "Verified Entity View"
+        "User Entity View"
+      );
+      await userEvent.keyboard("{Enter}");
+
+      await userEvent.type(
+        within(dialog).getByLabelText("Date Field"),
+        "Select"
       );
       await userEvent.keyboard("{Enter}");
 
@@ -181,44 +239,100 @@ describe("pages/admin/settings/dashboard", () => {
         within(widget).getByLabelText("New Summary Card Updated Icon")
       ).toHaveAttribute("color", "#FF165D");
       expect(within(widget).getByLabelText("Total Count")).toHaveTextContent(
-        "114"
+        "1.41K"
       );
       expect(
         within(widget).getByRole("link", { name: "View" })
-      ).toHaveAttribute("href", "/admin/entity-2");
+      ).toHaveAttribute("href", "/admin/entity-2?tab=User%20Entity%20View");
+      expect(
+        within(widget).queryByLabelText("Relative Count")
+      ).not.toBeInTheDocument();
+      expect(
+        within(widget).queryByLabelText("Relative Direction")
+      ).not.toBeInTheDocument();
     });
 
-    // it("should be deleted", async () => {
-    //   render(
-    //     <AppWrapper>
-    //       <ManageDashboard />
-    //     </AppWrapper>
-    //   );
+    it("should update to queryLess summary card successfully", async () => {
+      render(
+        <AppWrapper>
+          <ManageDashboard />
+        </AppWrapper>
+      );
 
-    //   const widget = await screen.findByLabelText(
-    //     "New Summary Card Updated Widget"
-    //   );
+      const widget = await screen.findByLabelText(
+        "New Summary Card Updated Widget"
+      );
 
-    //   await userEvent.click(
-    //     within(widget).queryByRole("button", { name: "Delete Button" })
-    //   );
+      await userEvent.click(
+        within(widget).getByRole("button", { name: "Edit Widget" })
+      );
 
-    //   const confirmBox = await screen.findByRole("alertdialog", {
-    //     name: "Confirm Delete",
-    //   });
+      const dialog = screen.getByRole("dialog");
 
-    //   await userEvent.click(
-    //     await within(confirmBox).findByRole("button", { name: "Confirm" })
-    //   );
+      await userEvent.type(within(dialog).getByLabelText("Query"), "Select");
+      await userEvent.keyboard("{Enter}");
 
-    //   expect((await screen.findAllByRole("status"))[0]).toHaveTextContent(
-    //     "Widget Deleted Successfully"
-    //   );
+      await userEvent.click(
+        within(dialog).getByRole("button", { name: "Save" })
+      );
+    });
 
-    //   expect(
-    //     screen.queryByLabelText("New Summary Card Updated Widget")
-    //   ).not.toBeInTheDocument();
-    // });
+    it("should show queryLess summary card correctly", async () => {
+      render(
+        <AppWrapper>
+          <ManageDashboard />
+        </AppWrapper>
+      );
+
+      const widget = await screen.findByLabelText(
+        "New Summary Card Updated Widget"
+      );
+
+      expect(
+        within(widget).getByRole("link", { name: "View" })
+      ).toHaveAttribute("href", "/admin/entity-2");
+      expect(within(widget).getByLabelText("Total Count")).toHaveTextContent(
+        "114"
+      );
+      expect(
+        within(widget).queryByLabelText("Relative Count")
+      ).not.toBeInTheDocument();
+      expect(
+        within(widget).queryByLabelText("Relative Direction")
+      ).not.toBeInTheDocument();
+    });
+
+    it("should be deleted", async () => {
+      render(
+        <AppWrapper>
+          <ManageDashboard />
+        </AppWrapper>
+      );
+
+      const widget = await screen.findByLabelText(
+        "New Summary Card Updated Widget"
+      );
+
+      await userEvent.click(
+        within(widget).queryByRole("button", { name: "Delete Button" })
+      );
+
+      const confirmBox = await screen.findByRole("alertdialog", {
+        name: "Confirm Delete",
+      });
+
+      await userEvent.click(
+        await within(confirmBox).findByRole("button", { name: "Confirm" })
+      );
+
+      expect((await screen.findAllByRole("status"))[0]).toHaveTextContent(
+        "Widget Deleted Successfully"
+      );
+
+      expect(
+        screen.queryByLabelText("New Summary Card Updated Widget")
+      ).not.toBeInTheDocument();
+    });
   });
 
   describe("Action Button", () => {
@@ -386,5 +500,4 @@ describe("pages/admin/settings/dashboard", () => {
   // Should delete table
   // Should update table
   // Should re-arrange card and table
-  // relative - direction
 });

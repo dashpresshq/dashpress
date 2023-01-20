@@ -95,6 +95,7 @@ export function ManageDashboard() {
             >
               {(widgets.data || []).map((config) => (
                 <SortableItem key={config.id}>
+                  {/* TODO Filter out the entites that the user can see */}
                   <DashboardWidget
                     config={config}
                     setting={{
@@ -135,7 +136,7 @@ export function ManageDashboard() {
           }
         >
           <DashboardSettings
-            entities={activeEntities.data || []}
+            entities={activeEntities.data}
             onSubmit={async (config) => {
               if (currentDashboardItem === NEW_DASHBOARD_ITEM) {
                 createDashboardWidgetMutation.mutate({

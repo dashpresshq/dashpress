@@ -56,7 +56,7 @@ describe("pages/admin/[entity]/config/relations", () => {
       );
 
       expect(within(currentTab).getByRole("alert")).toHaveTextContent(
-        "'this-entity-does-not-exist' is not a valid entity field. Valid fields are 'entity-1-field-1', 'entity-1-field-2', 'entity-1-field-3', 'entity-1-field-4', 'entity-1-field-5', 'entity-1-field-6', 'entity-1-field-7'"
+        "'this-entity-does-not-exist' is not a valid entity field. Valid fields are 'entity-1-id-field', 'entity-1-reference-field', 'entity-1-string-field', 'entity-1-number-field', 'entity-1-boolean-field', 'entity-1-date-field', 'entity-1-enum-field'"
       );
     });
 
@@ -75,7 +75,7 @@ describe("pages/admin/[entity]/config/relations", () => {
 
       await userEvent.type(
         within(currentTab).getByLabelText("Display Format"),
-        "{{{{ entity-1-field-1 }} - {{{{ entity-1-field-2 }} hello"
+        "{{{{ entity-1-id-field }} - {{{{ entity-1-string-field }} hello"
       );
 
       await userEvent.click(
@@ -94,7 +94,7 @@ describe("pages/admin/[entity]/config/relations", () => {
       );
       await waitFor(() => {
         expect(screen.getByLabelText("Display Format")).toHaveValue(
-          "{{ entity-1-field-1 }} - {{ entity-1-field-2 }} hello"
+          "{{ entity-1-id-field }} - {{ entity-1-string-field }} hello"
         );
       });
     });

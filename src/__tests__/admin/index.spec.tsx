@@ -6,10 +6,16 @@ import { AppWrapper } from "@hadmean/chromista";
 import Dashboard from "pages/admin";
 
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
+import userEvent from "@testing-library/user-event";
 
 setupApiHandlers();
 
-jest.mock("next/router", () => require("next-router-mock"));
+const useRouter = jest.spyOn(require("next/router"), "useRouter");
+
+useRouter.mockImplementation(() => ({
+  query: {},
+  asPath: "/",
+}));
 
 describe("pages/admin", () => {
   it("should render table dashboard widget correctly", async () => {
@@ -35,7 +41,7 @@ describe("pages/admin", () => {
       )
     ).toMatchInlineSnapshot(`
       [
-        "Entity 1 Field 1Entity 1 Field 2Entity 1 Field 3Entity 1 Field 4Entity 1 Field 5Entity 1 Field 6Entity 1 Field 7",
+        "Entity 1 Id FieldEntity 1 Reference FieldEntity 1 String FieldEntity 1 Number FieldEntity 1 Boolean FieldEntity 1 Date FieldEntity 1 Enum Field",
         "12hello342022-05foo",
         "23there212021-05foo",
         "32today182022-02bar",
@@ -106,5 +112,28 @@ describe("pages/admin", () => {
     expect(
       within(widget).queryByRole("button", { name: "Edit Widget" })
     ).not.toBeInTheDocument();
+  });
+
+  describe("Action Button", () => {
+    it("should go to settings page on 'Manage Dashboard'", async () => {
+      const replaceMock = jest.fn();
+      useRouter.mockImplementation(() => ({
+        replace: replaceMock,
+        query: {},
+        asPath: "/",
+      }));
+
+      render(
+        <AppWrapper>
+          <Dashboard />
+        </AppWrapper>
+      );
+
+      await userEvent.click(
+        await screen.findByRole("button", { name: "Manage Dashboard" })
+      );
+
+      expect(replaceMock).toHaveBeenCalledWith("/admin/settings/dashboard");
+    });
   });
 });

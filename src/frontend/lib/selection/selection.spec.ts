@@ -1,4 +1,4 @@
-import { renderHook } from "@testing-library/react";
+import { renderHook } from "__tests__/lib/renderHook";
 import { useStringSelections } from ".";
 
 describe("useStringSelections", () => {

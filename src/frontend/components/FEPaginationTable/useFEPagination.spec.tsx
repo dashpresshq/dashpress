@@ -1,9 +1,9 @@
-import { renderHook } from "@testing-library/react-hooks";
 import fetchMock from "jest-fetch-mock";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { waitFor } from "@testing-library/react";
 import { FilterOperators } from "@hadmean/protozoa";
 import { QueryFilter } from "shared/types/data";
+import { renderHook } from "__tests__/lib/renderHook";
 import { useFEPagination } from "./useFEPagination";
 
 fetchMock.enableMocks();

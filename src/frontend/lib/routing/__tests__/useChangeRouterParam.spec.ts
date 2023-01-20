@@ -1,6 +1,7 @@
+import { act } from "@testing-library/react";
 import mockRouter from "next-router-mock";
-import { act, renderHook } from "@testing-library/react";
 import singletonRouter from "next/router";
+import { renderHook } from "__tests__/lib/renderHook";
 import {
   upsertRouterPathQueryWithValue,
   useChangeRouterParam,

@@ -1,8 +1,9 @@
+import { MutationHelpers } from "@hadmean/protozoa";
 import { rest } from "msw";
 import { IWidgetConfig } from "shared/types/dashboard";
 import { BASE_TEST_URL } from "./_utils";
 
-const DASHBOARD_WIDGETS: IWidgetConfig[] = [
+let DASHBOARD_WIDGETS: IWidgetConfig[] = [
   {
     _type: "table",
     entity: "entity-1",
@@ -33,7 +34,7 @@ export const dashboardApiHandlers = [
     BASE_TEST_URL("/api/dashboards/:dashboardId"),
     async (req, res, ctx) => {
       DASHBOARD_WIDGETS.push(await req.json());
-      return res(ctx.json(204));
+      return res(ctx.status(204));
     }
   ),
   rest.patch(
@@ -43,7 +44,17 @@ export const dashboardApiHandlers = [
         ({ id }) => id === req.params.widgetId
       );
       DASHBOARD_WIDGETS[index] = await req.json();
-      return res(ctx.json(204));
+      return res(ctx.status(204));
+    }
+  ),
+  rest.patch(
+    BASE_TEST_URL("/api/dashboards/:dashboardId"),
+    async (req, res, ctx) => {
+      DASHBOARD_WIDGETS = MutationHelpers.sortOrder(
+        DASHBOARD_WIDGETS,
+        await req.json()
+      );
+      return res(ctx.status(204));
     }
   ),
   rest.delete(
@@ -54,7 +65,7 @@ export const dashboardApiHandlers = [
         1
       );
 
-      return res(ctx.json(204));
+      return res(ctx.status(204));
     }
   ),
 ];

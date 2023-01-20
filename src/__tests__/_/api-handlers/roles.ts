@@ -44,7 +44,7 @@ export const rolesApiHandlers = [
     async (req, res, ctx) => {
       const { permission } = await req.json();
       PERMISSIONS.push(permission);
-      return res(ctx.json(204));
+      return res(ctx.status(204));
     }
   ),
   rest.delete(
@@ -54,7 +54,7 @@ export const rolesApiHandlers = [
       PERMISSIONS = PERMISSIONS.filter(
         (permission$1) => permission$1 !== permission
       );
-      return res(ctx.json(204));
+      return res(ctx.status(204));
     }
   ),
   rest.delete(BASE_TEST_URL("/api/roles/:roleId"), async (req, res, ctx) => {

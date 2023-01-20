@@ -76,7 +76,7 @@ export const accountApiHandlers = [
       ...USER,
       ...(await req.json()),
     };
-    return res(ctx.json(204));
+    return res(ctx.status(204));
   }),
 
   rest.patch(

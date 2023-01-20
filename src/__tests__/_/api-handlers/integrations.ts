@@ -57,7 +57,7 @@ const update =
     } else {
       DATA.push({ key, value });
     }
-    return res(ctx.json(204));
+    return res(ctx.status(204));
   };
 
 const delete$1 =

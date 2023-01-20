@@ -91,6 +91,7 @@ export function ManageDashboard() {
             <SortableList
               onSortEnd={onSortEnd}
               className="list"
+              aria-label="Dashboard Widgets"
               draggedItemClassName="dragged"
             >
               {(widgets.data || []).map((config) => (

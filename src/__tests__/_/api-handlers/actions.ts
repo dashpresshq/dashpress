@@ -93,7 +93,7 @@ export const actionsApiHandlers = [
   //         CONSTANTS.push({ key, value });
   //       }
 
-  //       return res(ctx.json(204));
+  //       return res(ctx.status(204));
   //     }
   //   ),
   //   rest.delete(
@@ -102,7 +102,7 @@ export const actionsApiHandlers = [
   //       const key = req.params.key as string;
 
   //       CONSTANTS = CONSTANTS.filter((permission$1) => permission$1.key !== key);
-  //       return res(ctx.json(204));
+  //       return res(ctx.status(204));
   //     }
   //   ),
 ];

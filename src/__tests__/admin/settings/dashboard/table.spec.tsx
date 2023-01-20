@@ -235,6 +235,4 @@ describe("pages/admin/settings/dashboard", () => {
       ).not.toBeInTheDocument();
     });
   });
-
-  // Should re-arrange card and table
 });

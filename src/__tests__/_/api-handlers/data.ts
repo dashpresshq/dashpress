@@ -21,37 +21,49 @@ export const dataApiHandlers = [
     );
   }),
   rest.get(BASE_TEST_URL("/api/data/:entity/table"), async (req, res, ctx) => {
+    const searchParams = req.url.searchParams.toString();
+    const { entity } = req.params;
+    let idPrefix = 0;
+
+    let stringPrefix = "";
+
+    if (searchParams) {
+      idPrefix = searchParams.length;
+
+      const page = req.url.searchParams.get("page");
+      const take = req.url.searchParams.get("take");
+      const orderBy = req.url.searchParams.get("orderBy");
+
+      stringPrefix = ` > p-${page},t=${take},o=${orderBy.at(0)} < `;
+    }
+
+    const data: [
+      number,
+      number,
+      string,
+      number,
+      boolean,
+      Date,
+      "foo" | "bar"
+    ][] = [
+      [1, 2, "hello", 34, true, new Date(2022, 4, 7), "foo"],
+      [2, 3, "there", 21, false, new Date(2021, 4, 7), "foo"],
+      [3, 2, "today", 18, true, new Date(2022, 1, 7), "bar"],
+    ];
+
     return res(
       ctx.json({
-        data: [
-          {
-            [`${req.params.entity}-id-field`]: 1,
-            [`${req.params.entity}-reference-field`]: 2,
-            [`${req.params.entity}-string-field`]: "hello",
-            [`${req.params.entity}-number-field`]: 34,
-            [`${req.params.entity}-boolean-field`]: true,
-            [`${req.params.entity}-date-field`]: new Date(2022, 4, 7),
-            [`${req.params.entity}-enum-field`]: "foo",
-          },
-          {
-            [`${req.params.entity}-id-field`]: 2,
-            [`${req.params.entity}-reference-field`]: 3,
-            [`${req.params.entity}-string-field`]: "there",
-            [`${req.params.entity}-number-field`]: 21,
-            [`${req.params.entity}-boolean-field`]: false,
-            [`${req.params.entity}-date-field`]: new Date(2021, 4, 7),
-            [`${req.params.entity}-enum-field`]: "foo",
-          },
-          {
-            [`${req.params.entity}-id-field`]: 3,
-            [`${req.params.entity}-reference-field`]: 2,
-            [`${req.params.entity}-string-field`]: "today",
-            [`${req.params.entity}-number-field`]: 18,
-            [`${req.params.entity}-boolean-field`]: true,
-            [`${req.params.entity}-date-field`]: new Date(2022, 1, 7),
-            [`${req.params.entity}-enum-field`]: "bar",
-          },
-        ],
+        data: data.map(
+          ([id, reference, string$1, number$1, bool, date, enum$1]) => ({
+            [`${entity}-id-field`]: id + idPrefix,
+            [`${entity}-reference-field`]: reference,
+            [`${entity}-string-field`]: `${string$1}${stringPrefix}`,
+            [`${entity}-number-field`]: number$1,
+            [`${entity}-boolean-field`]: bool,
+            [`${entity}-date-field`]: date,
+            [`${entity}-enum-field`]: enum$1,
+          })
+        ),
         pageIndex: 1,
         pageSize: 10,
         totalRecords: 10,

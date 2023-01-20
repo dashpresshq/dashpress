@@ -7,6 +7,7 @@ import Dashboard from "pages/admin";
 
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 import userEvent from "@testing-library/user-event";
+import { getTableRows } from "__tests__/_/utiis/getTableRows";
 
 setupApiHandlers();
 
@@ -25,26 +26,16 @@ describe("pages/admin", () => {
       </AppWrapper>
     );
 
-    const firstWidget = await screen.findByLabelText("Latest Entity 1 Widget");
+    const widget = await screen.findByLabelText("Foo Table Widget");
 
-    expect(
-      await within(firstWidget).findByText("Latest Entity 1")
-    ).toBeInTheDocument();
+    expect(await within(widget).findByText("Foo Table")).toBeInTheDocument();
 
-    const allRoles = await within(firstWidget).findAllByRole("row");
-
-    expect(
-      allRoles.map((row) =>
-        row.textContent
-          .replace("-06T23:00:00.000Z", "")
-          .replace("-07T00:00:00.000Z", "")
-      )
-    ).toMatchInlineSnapshot(`
+    expect(await getTableRows(widget)).toMatchInlineSnapshot(`
       [
         "Entity 1 Id FieldEntity 1 Reference FieldEntity 1 String FieldEntity 1 Number FieldEntity 1 Boolean FieldEntity 1 Date FieldEntity 1 Enum Field",
-        "12hello342022-05foo",
-        "23there212021-05foo",
-        "32today182022-02bar",
+        "262hello > p-1,t=5,o=a < 342022-05foo",
+        "273there > p-1,t=5,o=a < 212021-05foo",
+        "282today > p-1,t=5,o=a < 182022-02bar",
       ]
     `);
   });
@@ -56,17 +47,16 @@ describe("pages/admin", () => {
       </AppWrapper>
     );
 
-    const widget = await screen.findByLabelText("Total Entity 1 Widget");
+    const widget = await screen.findByLabelText("Bar Card Widget");
 
-    expect(
-      await within(widget).findByText("Total Entity 1")
-    ).toBeInTheDocument();
-    expect(
-      within(widget).getByLabelText("Total Entity 1 Icon")
-    ).toHaveTextContent("Some SVG Here");
-    expect(
-      within(widget).getByLabelText("Total Entity 1 Icon")
-    ).toHaveAttribute("color", "#FF165D");
+    expect(await within(widget).findByText("Bar Card")).toBeInTheDocument();
+    expect(within(widget).getByLabelText("Bar Card Icon")).toHaveTextContent(
+      "Some SVG Here"
+    );
+    expect(within(widget).getByLabelText("Bar Card Icon")).toHaveAttribute(
+      "color",
+      "#FF165D"
+    );
     expect(within(widget).getByLabelText("Total Count")).toHaveTextContent(
       "113"
     );
@@ -83,7 +73,7 @@ describe("pages/admin", () => {
       </AppWrapper>
     );
 
-    const widget = await screen.findByLabelText("Latest Entity 1 Widget");
+    const widget = await screen.findByLabelText("Foo Table Widget");
 
     expect(within(widget).getByRole("link", { name: "View" })).toHaveAttribute(
       "href",
@@ -104,7 +94,7 @@ describe("pages/admin", () => {
       </AppWrapper>
     );
 
-    const widget = await screen.findByLabelText("Total Entity 1 Widget");
+    const widget = await screen.findByLabelText("Bar Card Widget");
 
     expect(
       within(widget).queryByRole("button", { name: "Delete Button" })

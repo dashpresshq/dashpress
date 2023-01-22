@@ -62,8 +62,8 @@ export function EntityUpdate() {
         >
           <BaseEntityForm
             action="update"
-            hiddenColumns={hiddenUpdateColumns}
             onSubmit={entityDataUpdationMutation.mutateAsync}
+            hiddenColumns={hiddenUpdateColumns}
             initialValues={dataDetails.data}
             additionalDataState={dataDetails}
           />

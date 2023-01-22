@@ -99,6 +99,7 @@ const DEFAULT_ENTITY_CONFIG_VALUES: Record<
     fieldsState: "fieldsState",
     beforeSubmit: "beforeSubmit",
   }),
+  entity_columns_types: () => ({}),
   entity_relations_labels: () => ({
     "related-entity-2": "Custom Label For Entity 2",
     "related-entity-4": "Custom Label For Entity 4",

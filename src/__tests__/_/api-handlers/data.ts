@@ -2,6 +2,34 @@ import { rest } from "msw";
 import { reduceStringToNumber } from "shared/lib/templates/reduceStringToNumber";
 import { BASE_TEST_URL } from "./_utils";
 
+const allData = ({
+  entity,
+  idPrefix,
+  stringPrefix,
+}: {
+  entity: string;
+  stringPrefix: string;
+  idPrefix: number;
+}) => {
+  const data: [number, number, string, number, boolean, Date, "foo" | "bar"][] =
+    [
+      [1, 2, "hello", 34, true, new Date(2022, 4, 7), "foo"],
+      [2, 3, "there", 21, false, new Date(2021, 4, 7), "foo"],
+      [3, 2, "today", 18, true, new Date(2022, 1, 7), "bar"],
+    ];
+  return data.map(
+    ([id, reference, string$1, number$1, bool, date, enum$1]) => ({
+      [`${entity}-id-field`]: id + idPrefix,
+      [`${entity}-reference-field`]: reference,
+      [`${entity}-string-field`]: `${string$1}${stringPrefix}`,
+      [`${entity}-number-field`]: number$1,
+      [`${entity}-boolean-field`]: bool,
+      [`${entity}-date-field`]: date,
+      [`${entity}-enum-field`]: enum$1,
+    })
+  );
+};
+
 export const dataApiHandlers = [
   rest.get(BASE_TEST_URL("/api/data/:entity/count"), async (req, res, ctx) => {
     const searchParams = req.url.searchParams.toString();
@@ -37,37 +65,26 @@ export const dataApiHandlers = [
       stringPrefix = ` > p-${page},t=${take},o=${orderBy.at(0)} < `;
     }
 
-    const data: [
-      number,
-      number,
-      string,
-      number,
-      boolean,
-      Date,
-      "foo" | "bar"
-    ][] = [
-      [1, 2, "hello", 34, true, new Date(2022, 4, 7), "foo"],
-      [2, 3, "there", 21, false, new Date(2021, 4, 7), "foo"],
-      [3, 2, "today", 18, true, new Date(2022, 1, 7), "bar"],
-    ];
-
     return res(
       ctx.json({
-        data: data.map(
-          ([id, reference, string$1, number$1, bool, date, enum$1]) => ({
-            [`${entity}-id-field`]: id + idPrefix,
-            [`${entity}-reference-field`]: reference,
-            [`${entity}-string-field`]: `${string$1}${stringPrefix}`,
-            [`${entity}-number-field`]: number$1,
-            [`${entity}-boolean-field`]: bool,
-            [`${entity}-date-field`]: date,
-            [`${entity}-enum-field`]: enum$1,
-          })
-        ),
+        data: allData({ entity: entity as string, idPrefix, stringPrefix }),
         pageIndex: 1,
         pageSize: 10,
         totalRecords: 10,
       })
+    );
+  }),
+  rest.get(BASE_TEST_URL("/api/data/:entity/:id"), async (req, res, ctx) => {
+    const { entity, id } = req.params;
+
+    return res(
+      ctx.json(
+        allData({
+          entity: entity as string,
+          idPrefix: id as unknown as number,
+          stringPrefix: "",
+        })[0]
+      )
     );
   }),
 ];

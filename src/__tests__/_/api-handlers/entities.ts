@@ -100,7 +100,6 @@ export const entitiesApiHandlers = [
           isReference: true,
           type: "string",
         },
-
         {
           name: `${req.params.entity}-string-field`,
           isRequired: true,

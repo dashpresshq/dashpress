@@ -46,7 +46,7 @@ export const entitiesApiHandlers = [
 
   rest.get(
     BASE_TEST_URL("/api/entities/:entity/relations"),
-    async (_, res, ctx) => {
+    async (req, res, ctx) => {
       return res(
         ctx.json([
           {
@@ -57,7 +57,7 @@ export const entitiesApiHandlers = [
           {
             table: "related-entity-3",
             label: "Entity 3 Label",
-            field: "foo-1",
+            field: `${req.params.entity}-reference-field`,
             type: "toOne",
           },
           {

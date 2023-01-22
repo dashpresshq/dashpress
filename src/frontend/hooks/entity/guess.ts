@@ -1,4 +1,3 @@
-import noop from "lodash/noop";
 import { IEntityField } from "shared/types/db";
 import { IFieldValidationItem } from "shared/validations/types";
 import {
@@ -22,27 +21,13 @@ export const getFieldTypeBoundedValidations = (
     }));
 
 export const guessEntityValidations = ({
-  isId,
   isRequired,
   length,
-}: Pick<
-  IEntityField,
-  "isId" | "isRequired" | "length"
->): IFieldValidationItem[] => {
+}: Pick<IEntityField, "isRequired" | "length">): IFieldValidationItem[] => {
   const validationItems: IFieldValidationItem[] = [];
 
   // Handle isUnique more gracefully from relationships
   // since we can have more than 1 field in a uniqueness
-
-  noop(isId);
-  // if (isId) {
-  // const { message } = ENTITY_VALIDATION_CONFIG.unique;
-  // validationItems.push({
-  //   validationType: "unique",
-  //   errorMessage: message,
-  //   fromSchema: true,
-  // });
-  // }
 
   if (isRequired) {
     const { message } = ENTITY_VALIDATION_CONFIG.required;

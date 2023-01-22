@@ -96,7 +96,6 @@ describe("guessEntityValidations", () => {
   it("should combine all gotten validation ", () => {
     expect(
       guessEntityValidations({
-        isId: true,
         isRequired: true,
         length: 40,
       })

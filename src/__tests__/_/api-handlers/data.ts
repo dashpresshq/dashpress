@@ -74,6 +74,16 @@ export const dataApiHandlers = [
       })
     );
   }),
+  rest.get(BASE_TEST_URL("/api/data/:entity/list"), async (req, res, ctx) => {
+    // const searchParams = req.url.searchParams.toString();
+    const { entity } = req.params;
+
+    return res(
+      ctx.json(
+        allData({ entity: entity as string, idPrefix: 1, stringPrefix: "" })
+      )
+    );
+  }),
   rest.get(BASE_TEST_URL("/api/data/:entity/:id"), async (req, res, ctx) => {
     const { entity, id } = req.params;
 

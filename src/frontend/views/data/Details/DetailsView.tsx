@@ -65,7 +65,6 @@ export function EntityDetailsView({
   if (!id) {
     return null;
   }
-
   return (
     <ViewStateMachine
       loading={viewState.type === "loading"}
@@ -81,7 +80,7 @@ export function EntityDetailsView({
         </>
       }
     >
-      <>
+      <div aria-label="Details Section">
         {fitlerOutHiddenScalarColumns(
           entityFields.data,
           hiddenDetailsColumns.data
@@ -112,7 +111,7 @@ export function EntityDetailsView({
             </React.Fragment>
           );
         })}
-      </>
+      </div>
     </ViewStateMachine>
   );
 }

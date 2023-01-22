@@ -30,3 +30,18 @@ describe("pages/admin/[entity]/update", () => {
     });
   });
 });
+
+// Update
+// should submit values
+// Should show initial values
+// Should not reset after submit
+// admin user will only see security message
+// Action menu create & types
+// hidden create columns are hidden
+// only user can access entity can view the page
+// ?backlink
+
+// State machine
+// should error when entity is hidden
+// Should error when entity is crud setting is hidden
+//

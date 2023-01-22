@@ -33,9 +33,9 @@ describe("pages/admin", () => {
     expect(await getTableRows(widget)).toMatchInlineSnapshot(`
       [
         "Entity 1 Id FieldEntity 1 Reference FieldEntity 1 String FieldEntity 1 Number FieldEntity 1 Boolean FieldEntity 1 Date FieldEntity 1 Enum Field",
-        "262hello > p-1,t=5,o=a < 347th May 2022foo",
-        "273there > p-1,t=5,o=a < 217th May 2021foo",
-        "282today > p-1,t=5,o=a < 187th Feb 2022bar",
+        "26‌hello > p-1,t=5,o=a < 347th May 2022foo",
+        "27‌there > p-1,t=5,o=a < 217th May 2021foo",
+        "28‌today > p-1,t=5,o=a < 187th Feb 2022bar",
       ]
     `);
   });

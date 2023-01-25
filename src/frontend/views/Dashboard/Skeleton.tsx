@@ -1,4 +1,4 @@
-import { BaseSkeleton, TableSkeleton } from "@hadmean/chromista";
+import { BaseSkeleton, TableSkeleton, StyledCard } from "@hadmean/chromista";
 import styled from "styled-components";
 import { gridRoot, TableRoot } from "./styles";
 
@@ -8,18 +8,22 @@ const Root = styled.div`
 
 export function DashboardSkeleton() {
   return (
-    <Root>
-      <BaseSkeleton height="100px" />
-      <BaseSkeleton height="100px" />
-      <BaseSkeleton height="100px" />
-      <BaseSkeleton height="100px" />
-      <BaseSkeleton height="100px" />
-      <BaseSkeleton height="100px" />
-      <BaseSkeleton height="100px" />
-      <BaseSkeleton height="100px" />
-      <TableRoot hasSetting={false}>
-        <TableSkeleton />
-      </TableRoot>
-    </Root>
+    <StyledCard>
+      <Root style={{ padding: 10 }}>
+        <BaseSkeleton height="100px" />
+        <BaseSkeleton height="100px" />
+        <BaseSkeleton height="100px" />
+        <BaseSkeleton height="100px" />
+        <BaseSkeleton height="100px" />
+        <BaseSkeleton height="100px" />
+        <BaseSkeleton height="100px" />
+        <BaseSkeleton height="100px" />
+      </Root>
+      <Root>
+        <TableRoot hasSetting={false}>
+          <TableSkeleton />
+        </TableRoot>
+      </Root>
+    </StyledCard>
   );
 }

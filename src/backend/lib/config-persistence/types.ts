@@ -1,4 +1,7 @@
+import { PortalConfigDomain } from "./portal";
+
 export type ConfigDomain =
+  | PortalConfigDomain
   | "users"
   | "schema"
   | "credentials"

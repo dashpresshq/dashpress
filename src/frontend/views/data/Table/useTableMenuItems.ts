@@ -6,7 +6,7 @@ import {
 import { NAVIGATION_LINKS } from "frontend/lib/routing";
 import { useRouter } from "next/router";
 import { Plus } from "react-feather";
-import { usePluginTableMenuItems } from "./plugin";
+import { usePluginTableMenuItems } from "./portal";
 
 export const useTableMenuItems = (entity: string): IDropDownMenuItem[] => {
   const router = useRouter();

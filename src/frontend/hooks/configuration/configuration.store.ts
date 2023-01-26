@@ -8,10 +8,13 @@ import {
   SLUG_LOADING_VALUE,
 } from "@hadmean/protozoa";
 import { useMutation } from "react-query";
-import { CONFIGURATION_KEYS } from "../../../shared/configuration.constants";
+import {
+  CONFIGURATION_KEYS,
+  AppConfigurationKeys,
+} from "shared/configurations";
 
 export const configurationApiPath = (
-  key: keyof typeof CONFIGURATION_KEYS,
+  key: AppConfigurationKeys,
   entity?: string,
   method: "GET" | "PUT" = "GET"
 ) => {
@@ -26,14 +29,14 @@ export const configurationApiPath = (
   return `/api/config/${key}`;
 };
 
-export function useAppConfiguration<T>(key: keyof typeof CONFIGURATION_KEYS) {
+export function useAppConfiguration<T>(key: AppConfigurationKeys) {
   return useStorageApi<T>(configurationApiPath(key), {
     errorMessage: dataNotFoundMessage("App Configuration"),
   });
 }
 
 export function useEntityConfiguration<T>(
-  key: keyof typeof CONFIGURATION_KEYS,
+  key: AppConfigurationKeys,
   entity: string
 ) {
   return useStorageApi<T>(configurationApiPath(key, entity), {
@@ -47,7 +50,7 @@ interface IUpsertConfigMutationOptions {
 }
 
 export function useUpsertConfigurationMutation(
-  key: keyof typeof CONFIGURATION_KEYS,
+  key: AppConfigurationKeys,
   entity?: string,
   mutationOptions?: IUpsertConfigMutationOptions
 ) {

@@ -15,7 +15,7 @@ import { useEntityFields } from "./entity.store";
 import {
   CONFIGURATION_KEYS,
   IEntityCrudSettings,
-} from "../../../shared/configuration.constants";
+} from "../../../shared/configurations";
 import { useEntityConfiguration } from "../configuration/configuration.store";
 import { getEntitySelectionConfig } from "./logic";
 

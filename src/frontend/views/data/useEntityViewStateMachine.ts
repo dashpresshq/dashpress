@@ -4,7 +4,7 @@ import {
   useEntityCrudSettings,
   useEntitySlug,
 } from "frontend/hooks/entity/entity.config";
-import { IEntityCrudSettings } from "shared/configuration.constants";
+import { IEntityCrudSettings } from "shared/configurations";
 
 export const useEntityViewStateMachine = (
   isLoading: boolean,

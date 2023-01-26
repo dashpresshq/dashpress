@@ -1,6 +1,6 @@
-import { IEntityCrudSettings } from "../../../../../shared/configuration.constants";
-import { configurationService } from "../../../../configuration/configuration.service";
-import { ForbiddenError } from "../../../errors";
+import { IEntityCrudSettings } from "shared/configurations";
+import { ForbiddenError } from "backend/lib/errors";
+import { configurationService } from "backend/configuration/configuration.service";
 import { RequestMethod } from "../../methods";
 import { entityValidationImpl } from "./entity";
 import { ValidationImplType } from "./types";

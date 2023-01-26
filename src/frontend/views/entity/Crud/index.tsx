@@ -5,7 +5,7 @@ import {
   ENTITY_TABLE_PATH,
 } from "frontend/hooks/data/data.store";
 import { SLUG_LOADING_VALUE } from "@hadmean/protozoa";
-import { IEntityCrudSettings } from "shared/configuration.constants";
+import { IEntityCrudSettings } from "shared/configurations";
 import {
   useSetPageDetails,
   useChangeRouterParam,

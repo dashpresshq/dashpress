@@ -1,13 +1,13 @@
 import { ButtonLang, IFormProps } from "@hadmean/protozoa";
 import { SchemaForm } from "frontend/components/SchemaForm";
-import { ISystemSettings } from "shared/configuration.constants";
+import { IBaseSystemSettings } from "shared/configurations/system";
 
 export function SystemSettingsForm({
   onSubmit,
   initialValues,
-}: IFormProps<ISystemSettings>) {
+}: IFormProps<IBaseSystemSettings>) {
   return (
-    <SchemaForm<ISystemSettings>
+    <SchemaForm<IBaseSystemSettings>
       onSubmit={onSubmit}
       initialValues={initialValues}
       buttonText={`${ButtonLang.update} System Settings`}

@@ -1,37 +1,18 @@
-export const DEFAULT_SYSTEM_SETTINGS = {
-  forceIntrospection: process.env.NODE_ENV === "production",
-  tokenValidityDurationInDays: 14,
-};
+import { BaseAppConfigurationKeys } from "./base-types";
+import { PortalConfigurationKeys, PORTAL_CONFIGURATION_KEYS } from "./portal";
+import { DEFAULT_SYSTEM_SETTINGS } from "./system";
+import { IAppConfigurationBag } from "./types";
+
+export type AppConfigurationKeys =
+  | BaseAppConfigurationKeys
+  | PortalConfigurationKeys;
 
 export const CONFIGURATION_KEYS: Record<
-  | "hidden_entity_table_columns"
-  | "hidden_entity_create_columns"
-  | "hidden_entity_update_columns"
-  | "hidden_entity_details_columns"
-  | "entity_diction"
-  | "entity_columns_types"
-  | "theme_color"
-  | "entity_fields_orders"
-  | "entity_crud_settings"
-  | "entity_views"
-  | "entities_order"
-  | "default_date_format"
-  | "entity_columns_labels"
-  | "disabled_entities"
-  | "dashboard_entities"
-  | "site_settings"
-  | "entity_relation_template"
-  | "entity_selections"
-  | "entity_validations"
-  | "entity_relations_labels"
-  | "entity_form_extension"
-  | "system_settings"
-  | "hidden_entity_relations"
-  | "entity_relations_order",
-  { requireEntity?: true; defaultValue: unknown; guest?: true }
+  AppConfigurationKeys,
+  IAppConfigurationBag
 > = {
+  ...PORTAL_CONFIGURATION_KEYS,
   hidden_entity_table_columns: { requireEntity: true, defaultValue: [] },
-
   hidden_entity_create_columns: { requireEntity: true, defaultValue: [] },
   hidden_entity_update_columns: { requireEntity: true, defaultValue: [] },
   hidden_entity_details_columns: { requireEntity: true, defaultValue: [] },
@@ -112,16 +93,4 @@ export const CONFIGURATION_KEYS: Record<
       logo: "/assets/images/logo.png",
     },
   },
-};
-
-export interface IEntityCrudSettings {
-  create: boolean;
-  details: boolean;
-  update: boolean;
-  delete: boolean;
-}
-
-export type ISystemSettings = {
-  forceIntrospection: boolean;
-  tokenValidityDurationInDays: number;
 };

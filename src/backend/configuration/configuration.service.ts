@@ -8,7 +8,8 @@ import {
   CONFIGURATION_KEYS,
   DEFAULT_SYSTEM_SETTINGS,
   ISystemSettings,
-} from "../../shared/configuration.constants";
+  AppConfigurationKeys,
+} from "../../shared/configurations";
 
 export class ConfigurationService implements IApplicationService {
   constructor(
@@ -20,7 +21,7 @@ export class ConfigurationService implements IApplicationService {
   }
 
   private checkConfigKeyEntityRequirement(
-    key: keyof typeof CONFIGURATION_KEYS,
+    key: AppConfigurationKeys,
     entity?: string
   ) {
     progammingError(
@@ -29,10 +30,7 @@ export class ConfigurationService implements IApplicationService {
     );
   }
 
-  async show<T>(
-    key: keyof typeof CONFIGURATION_KEYS,
-    entity?: string
-  ): Promise<T> {
+  async show<T>(key: AppConfigurationKeys, entity?: string): Promise<T> {
     this.checkConfigKeyEntityRequirement(key, entity);
     const value =
       await this._appConfigPersistenceService.getItemWithMaybeSecondaryKey(
@@ -55,7 +53,7 @@ export class ConfigurationService implements IApplicationService {
   }
 
   async upsert(
-    key: keyof typeof CONFIGURATION_KEYS,
+    key: AppConfigurationKeys,
     value: unknown,
     entity?: string
   ): Promise<void> {

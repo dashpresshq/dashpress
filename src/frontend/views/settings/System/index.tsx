@@ -9,7 +9,7 @@ import {
   useAppConfiguration,
   useUpsertConfigurationMutation,
 } from "frontend/hooks/configuration/configuration.store";
-import { ISystemSettings } from "shared/configuration.constants";
+import { ISystemSettings } from "shared/configurations";
 import { LINK_TO_DOCS } from "frontend/views/constants";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { BaseSettingsLayout } from "../_Base";

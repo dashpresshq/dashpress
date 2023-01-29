@@ -1,4 +1,4 @@
-import { dashboardController } from "backend/dashboard/dashboard.controller";
+import { dashboardWidgetsController } from "backend/dashboard-widgets/dashboard-widgets.controller";
 import { USER_PERMISSIONS } from "shared/types/user";
 import { requestHandler } from "../../../../backend/lib/request";
 
@@ -8,7 +8,7 @@ export default requestHandler(
       const validatedRequest = await getValidatedRequest([
         { _type: "requestQuery", options: "dashboardId" },
       ]);
-      return await dashboardController.listDashboardWidgets(
+      return await dashboardWidgetsController.listDashboardWidgets(
         validatedRequest.requestQuery
       );
     },
@@ -17,7 +17,7 @@ export default requestHandler(
         { _type: "requestQuery", options: "dashboardId" },
         { _type: "requestBody", options: {} },
       ]);
-      return await dashboardController.createWidget(
+      return await dashboardWidgetsController.createWidget(
         validatedRequest.requestBody,
         validatedRequest.requestQuery
       );
@@ -27,7 +27,7 @@ export default requestHandler(
         { _type: "requestQuery", options: "dashboardId" },
         { _type: "requestBody", options: {} },
       ]);
-      return await dashboardController.updateWidgetList(
+      return await dashboardWidgetsController.updateWidgetList(
         validatedRequest.requestQuery,
         validatedRequest.requestBody
       );

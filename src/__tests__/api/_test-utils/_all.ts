@@ -19,7 +19,7 @@ export const setupAllTestData = async (
     ["roles", setupRolesTestData],
     ["app-config", setupAppConfigTestData],
     ["users", setupUsersTestData],
-    ["dashboard", setupDashboardTestData],
+    ["dashboard-widgets", setupDashboardTestData],
     ["schema", setupSchemaTestData],
     ["data", setupTestDatabaseData],
     ["activated_actions", setupActivatedActionTestData],

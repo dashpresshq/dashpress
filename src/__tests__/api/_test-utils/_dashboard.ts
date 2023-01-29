@@ -31,9 +31,11 @@ const TEST_DASHBOARDS: Array<IWidgetConfig> = [
 export const setupDashboardTestData = async (
   testDashboard: IWidgetConfig[] = TEST_DASHBOARDS
 ) => {
-  const configPersistenceService = createConfigDomainPersistenceService<
-    IWidgetConfig | string[]
-  >("dashboard");
+  const configPersistenceService =
+    createConfigDomainPersistenceService<IWidgetConfig>("dashboard-widgets");
+
+  const itemsOrderPersistenceService =
+    createConfigDomainPersistenceService<string[]>("items-order");
 
   await configPersistenceService.resetToEmpty();
 
@@ -41,7 +43,7 @@ export const setupDashboardTestData = async (
     await configPersistenceService.upsertItem(widget.id, widget);
   }
 
-  await configPersistenceService.upsertItem(
+  await itemsOrderPersistenceService.upsertItem(
     HOME_DASHBOARD_KEY,
     testDashboard
       .filter(({ id }) => id !== "not-in-dashboard")

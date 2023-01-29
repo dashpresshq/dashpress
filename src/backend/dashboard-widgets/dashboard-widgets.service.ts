@@ -15,37 +15,23 @@ import {
   configurationService,
 } from "backend/configuration/configuration.service";
 import { ROYGBIV } from "shared/constants/colors";
+import {
+  itemsOrderService,
+  ItemsOrderService,
+} from "backend/items-order/items-order.service";
 
 const DFAULT_NUMBER_OF_SUMMARY_CARDS = 8;
 
-export class DashboardService implements IApplicationService {
+export class DashboardWidgetsService implements IApplicationService {
   constructor(
-    private readonly _dashboardPersistenceService: AbstractConfigDataPersistenceService<
-      IWidgetConfig | string[]
-    >,
+    private readonly _dashboardWidgetsPersistenceService: AbstractConfigDataPersistenceService<IWidgetConfig>,
     private readonly _entitiesService: EntitiesService,
-    private readonly _configurationService: ConfigurationService
+    private readonly _configurationService: ConfigurationService,
+    private readonly _itemsOrderService: ItemsOrderService
   ) {}
 
   async bootstrap() {
-    await this._dashboardPersistenceService.setup();
-  }
-
-  private async getDashboardWidgets(dashboardId: string): Promise<string[]> {
-    return (await this._dashboardPersistenceService.getItem(
-      dashboardId
-    )) as string[];
-  }
-
-  private orderDashboardWidgets(
-    widetsOrder: string[],
-    widgets: IWidgetConfig[]
-  ): IWidgetConfig[] {
-    const dashboardItemsMap = Object.fromEntries(
-      widgets.map((item) => [item.id, item])
-    );
-
-    return widetsOrder.map((item) => dashboardItemsMap[item]);
+    await this._dashboardWidgetsPersistenceService.setup();
   }
 
   private async generateDefaultDashboardWidgets() {
@@ -102,21 +88,21 @@ export class DashboardService implements IApplicationService {
     }
 
     for (const widget of defaultWidgets) {
-      await this._dashboardPersistenceService.upsertItem(widget.id, widget);
+      await this._dashboardWidgetsPersistenceService.upsertItem(
+        widget.id,
+        widget
+      );
     }
 
     const widgetList = defaultWidgets.map(({ id }) => id);
 
-    await this._dashboardPersistenceService.upsertItem(
-      HOME_DASHBOARD_KEY,
-      widgetList
-    );
+    await this._itemsOrderService.upsertOrder(HOME_DASHBOARD_KEY, widgetList);
 
-    return this.orderDashboardWidgets(widgetList, defaultWidgets);
+    return this._itemsOrderService.sortByOrder(widgetList, defaultWidgets);
   }
 
   async listDashboardWidgets(dashboardId: string): Promise<IWidgetConfig[]> {
-    const widgetList = await this.getDashboardWidgets(dashboardId);
+    const widgetList = await this._itemsOrderService.getItemOrder(dashboardId);
     if (!widgetList || widgetList.length === 0) {
       if (dashboardId !== HOME_DASHBOARD_KEY) {
         return [];
@@ -124,55 +110,45 @@ export class DashboardService implements IApplicationService {
       return await this.generateDefaultDashboardWidgets();
     }
 
-    const widgets = (await this._dashboardPersistenceService.getAllItemsIn(
-      widgetList
-    )) as IWidgetConfig[];
+    const widgets =
+      (await this._dashboardWidgetsPersistenceService.getAllItemsIn(
+        widgetList
+      )) as IWidgetConfig[];
 
-    return this.orderDashboardWidgets(widgetList, widgets);
+    return this._itemsOrderService.sortByOrder(widgetList, widgets);
   }
 
   async createWidget(widget: IWidgetConfig, dashboardId: string) {
-    await this._dashboardPersistenceService.upsertItem(widget.id, widget);
-
-    const widgetList = await this.getDashboardWidgets(dashboardId);
-
-    await this._dashboardPersistenceService.upsertItem(dashboardId, [
-      ...widgetList,
+    await this._dashboardWidgetsPersistenceService.upsertItem(
       widget.id,
-    ]);
+      widget
+    );
+
+    await this._itemsOrderService.appendToList(dashboardId, widget.id);
   }
 
   async updateWidgetList(dashboardId: string, widgetList: string[]) {
-    await this._dashboardPersistenceService.upsertItem(dashboardId, widgetList);
+    await this._itemsOrderService.upsertOrder(dashboardId, widgetList);
   }
 
   async updateWidget(widgetId: string, widget: IWidgetConfig) {
-    await this._dashboardPersistenceService.upsertItem(widgetId, widget);
+    await this._dashboardWidgetsPersistenceService.upsertItem(widgetId, widget);
   }
 
   // TODO when disabling entities then remove the correspoding entity here
   async removeWidget(widgetId: string, dashboardId: string) {
-    await this._dashboardPersistenceService.removeItem(widgetId);
+    await this._dashboardWidgetsPersistenceService.removeItem(widgetId);
 
-    const widgetList = await this.getDashboardWidgets(dashboardId);
-
-    const newWidgetList = widgetList.filter(
-      (widgetId$1) => widgetId$1 !== widgetId
-    );
-
-    await this._dashboardPersistenceService.upsertItem(
-      dashboardId,
-      newWidgetList
-    );
+    await this._itemsOrderService.removeFromList(dashboardId, widgetId);
   }
 }
 
-const dashboardPersistenceService = createConfigDomainPersistenceService<
-  IWidgetConfig | string[]
->("dashboard");
+const dashboardWidgetsPersistenceService =
+  createConfigDomainPersistenceService<IWidgetConfig>("dashboard-widgets");
 
-export const dashboardService = new DashboardService(
-  dashboardPersistenceService,
+export const dashboardWidgetsService = new DashboardWidgetsService(
+  dashboardWidgetsPersistenceService,
   entitiesService,
-  configurationService
+  configurationService,
+  itemsOrderService
 );

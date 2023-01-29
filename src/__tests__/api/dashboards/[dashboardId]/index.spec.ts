@@ -19,7 +19,7 @@ jest.mock("nanoid", () => ({
 
 describe("/api/dashboards/[dashboardId]/index", () => {
   beforeAll(async () => {
-    await setupAllTestData(["dashboard", "schema", "app-config"]);
+    await setupAllTestData(["dashboard-widgets", "schema", "app-config"]);
   });
 
   it("should list only widgets in requested dashboard", async () => {

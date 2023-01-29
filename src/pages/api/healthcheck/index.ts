@@ -15,7 +15,9 @@ import { packagesService } from "backend/packages/packages.service";
 import { requestHandler } from "backend/lib/request";
 import { storageService } from "backend/storage/storage.service";
 import { actionsService } from "backend/actions/actions.service";
-import { dashboardService } from "backend/dashboard/dashboard.service";
+import { dashboardWidgetsService } from "backend/dashboard-widgets/dashboard-widgets.service";
+import { itemsOrderService } from "backend/items-order/items-order.service";
+import { bootstrapPortalServices } from "./portal";
 
 export default requestHandler(
   {
@@ -34,10 +36,13 @@ export default requestHandler(
         await usersService.bootstrap();
         await entitiesService.bootstrap();
         await actionsService.bootstrap();
-        await dashboardService.bootstrap();
+        await dashboardWidgetsService.bootstrap();
         await storageService.bootstrap();
+        await itemsOrderService.bootstrap();
 
         await packagesService.bootstrap();
+
+        await bootstrapPortalServices();
 
         await packagesService.installPackages();
       } catch (error) {

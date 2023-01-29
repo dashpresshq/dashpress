@@ -12,7 +12,7 @@ jest.mock("nanoid", () => ({
 
 describe("/api/dashboards/[dashboardId]/[widgetId]/index", () => {
   beforeAll(async () => {
-    await setupAllTestData(["dashboard"]);
+    await setupAllTestData(["dashboard-widgets"]);
   });
 
   it("should update dashboard widget", async () => {

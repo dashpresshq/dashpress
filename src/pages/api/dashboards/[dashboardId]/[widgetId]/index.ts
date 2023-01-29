@@ -1,4 +1,4 @@
-import { dashboardController } from "backend/dashboard/dashboard.controller";
+import { dashboardWidgetsController } from "backend/dashboard-widgets/dashboard-widgets.controller";
 import { USER_PERMISSIONS } from "shared/types/user";
 import { requestHandler } from "backend/lib/request";
 
@@ -9,7 +9,7 @@ export default requestHandler(
         { _type: "requestQuery", options: "widgetId" },
         { _type: "requestBody", options: {} },
       ]);
-      return await dashboardController.updateWidget(
+      return await dashboardWidgetsController.updateWidget(
         validatedRequest.requestQuery,
         validatedRequest.requestBody
       );
@@ -19,7 +19,7 @@ export default requestHandler(
         { _type: "requestQuery", options: "dashboardId" },
         { _type: "requestBody", options: {} },
       ]);
-      return await dashboardController.removeWidget(
+      return await dashboardWidgetsController.removeWidget(
         validatedRequest.requestBody.widgetId,
         validatedRequest.requestQuery
       );

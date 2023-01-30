@@ -9,20 +9,18 @@ import {
   useApiMutateOptions,
 } from "@hadmean/protozoa";
 import { useMutation } from "react-query";
-import { HOME_DASHBOARD_KEY, IWidgetConfig } from "shared/types/dashboard";
+import { IWidgetConfig } from "shared/types/dashboard";
 
 const DASHBOARD_ENDPOINT = (dashboardId: string) =>
   `/api/dashboards/${dashboardId}`;
 
-export const useDashboardWidgets = (dashboardId = HOME_DASHBOARD_KEY) => {
+export const useDashboardWidgets = (dashboardId: string) => {
   return useApi<IWidgetConfig[]>(DASHBOARD_ENDPOINT(dashboardId), {
     errorMessage: dataNotFoundMessage("Dashboard widgets"),
   });
 };
 
-export function useCreateDashboardWidgetMutation(
-  dashboardId = HOME_DASHBOARD_KEY
-) {
+export function useCreateDashboardWidgetMutation(dashboardId: string) {
   const apiMutateOptions = useApiMutateOptions<IWidgetConfig[], IWidgetConfig>({
     dataQueryPath: DASHBOARD_ENDPOINT(dashboardId),
     onMutate: MutationHelpers.append,
@@ -35,9 +33,7 @@ export function useCreateDashboardWidgetMutation(
   }, apiMutateOptions);
 }
 
-export function useUpdateDashboardWidgetMutation(
-  dashboardId = HOME_DASHBOARD_KEY
-) {
+export function useUpdateDashboardWidgetMutation(dashboardId: string) {
   const apiMutateOptions = useApiMutateOptions<IWidgetConfig[], IWidgetConfig>({
     dataQueryPath: DASHBOARD_ENDPOINT(dashboardId),
     onMutate: MutationHelpers.update,
@@ -53,9 +49,7 @@ export function useUpdateDashboardWidgetMutation(
   }, apiMutateOptions);
 }
 
-export function useDeleteDashboardWidgetMutation(
-  dashboardId = HOME_DASHBOARD_KEY
-) {
+export function useDeleteDashboardWidgetMutation(dashboardId: string) {
   const apiMutateOptions = useApiMutateOptions<IWidgetConfig[], string>({
     dataQueryPath: DASHBOARD_ENDPOINT(dashboardId),
     onMutate: MutationHelpers.delete,
@@ -70,9 +64,7 @@ export function useDeleteDashboardWidgetMutation(
   }, apiMutateOptions);
 }
 
-export function useArrangeDashboardWidgetMutation(
-  dashboardId = HOME_DASHBOARD_KEY
-) {
+export function useArrangeDashboardWidgetMutation(dashboardId: string) {
   const apiMutateOptions = useApiMutateOptions<IWidgetConfig[], string[]>({
     dataQueryPath: DASHBOARD_ENDPOINT(dashboardId),
     onMutate: MutationHelpers.sortOrder,

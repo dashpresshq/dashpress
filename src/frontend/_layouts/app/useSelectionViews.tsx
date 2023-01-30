@@ -32,16 +32,19 @@ export const useSelectionViews = (): IAppMenuItems[] => {
       description: "Your models",
       icon: Table,
       viewMenuItems: {
-        ...activeEntities,
-        // TODO filter the ones that the user has permission for
-        data: (activeEntities.data || []).map(({ label, value }) => ({
-          title: label,
-          searchKeywords: value,
-          secondaryAction: () => {
-            clear();
-          },
-          action: NAVIGATION_LINKS.ENTITY.TABLE(value),
-        })),
+        singular: "Entity",
+        menuItems: {
+          ...activeEntities,
+          // TODO filter the ones that the user has permission for
+          data: (activeEntities.data || []).map(({ label, value }) => ({
+            title: label,
+            searchKeywords: value,
+            secondaryAction: () => {
+              clear();
+            },
+            action: NAVIGATION_LINKS.ENTITY.TABLE(value),
+          })),
+        },
       },
       order: 20,
     },

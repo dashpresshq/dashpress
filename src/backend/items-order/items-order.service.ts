@@ -4,54 +4,59 @@ import {
 } from "backend/lib/config-persistence";
 import { IApplicationService } from "backend/types";
 
-export class ItemsOrderService implements IApplicationService {
+export class ListOrderService implements IApplicationService {
   constructor(
-    private readonly _itemsOrderPersistenceService: AbstractConfigDataPersistenceService<
+    private readonly _listOrderPersistenceService: AbstractConfigDataPersistenceService<
       string[]
     >
   ) {}
 
   async bootstrap() {
-    await this._itemsOrderPersistenceService.setup();
+    await this._listOrderPersistenceService.setup();
   }
 
-  async getItemOrder(itemId: string): Promise<string[]> {
-    return await this._itemsOrderPersistenceService.getItem(itemId);
+  async getItemOrder(listId: string): Promise<string[]> {
+    return (await this._listOrderPersistenceService.getItem(listId)) || [];
   }
 
-  async appendToList(itemId: string, newId: string): Promise<void> {
-    const itemsOrder = await this.getItemOrder(itemId);
+  async appendToList(listId: string, itemId: string): Promise<void> {
+    const listsOrder = await this.getItemOrder(listId);
 
-    await this._itemsOrderPersistenceService.upsertItem(itemId, [
-      ...itemsOrder,
-      newId,
+    await this._listOrderPersistenceService.upsertItem(listId, [
+      ...listsOrder,
+      itemId,
     ]);
   }
 
-  async upsertOrder(itemId: string, newOrder: string[]): Promise<void> {
-    await this._itemsOrderPersistenceService.upsertItem(itemId, newOrder);
+  async upsertOrder(listId: string, listOrder: string[]): Promise<void> {
+    await this._listOrderPersistenceService.upsertItem(listId, listOrder);
   }
 
-  async removeFromList(itemId: string, toRemoveId: string): Promise<void> {
-    const widgetList = await this.getItemOrder(itemId);
+  async removeFromList(listId: string, toRemoveId: string): Promise<void> {
+    const listOrder = await this.getItemOrder(listId);
 
-    const newWidgetList = widgetList.filter(
+    const newListOrder = listOrder.filter(
       (widgetId$1) => widgetId$1 !== toRemoveId
     );
 
-    await this.upsertOrder(itemId, newWidgetList);
+    await this.upsertOrder(listId, newListOrder);
   }
 
-  sortByOrder<T extends { id: string }>(order: string[], items: T[]): T[] {
-    const itemsMap = Object.fromEntries(items.map((item) => [item.id, item]));
+  sortByOrder<T extends { id: string }>(
+    order: string[],
+    itemListOrder: T[]
+  ): T[] {
+    const itemsMap = Object.fromEntries(
+      itemListOrder.map((item) => [item.id, item])
+    );
 
     return order.map((item) => itemsMap[item]);
   }
 }
 
-const itemsOrderPersistenceService =
-  createConfigDomainPersistenceService<string[]>("items-order");
+const listOrderPersistenceService =
+  createConfigDomainPersistenceService<string[]>("list-order");
 
-export const itemsOrderService = new ItemsOrderService(
-  itemsOrderPersistenceService
+export const listOrderService = new ListOrderService(
+  listOrderPersistenceService
 );

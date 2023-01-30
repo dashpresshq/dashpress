@@ -16,8 +16,8 @@ import {
 } from "backend/configuration/configuration.service";
 import { ROYGBIV } from "shared/constants/colors";
 import {
-  itemsOrderService,
-  ItemsOrderService,
+  listOrderService,
+  ListOrderService,
 } from "backend/items-order/items-order.service";
 
 const DFAULT_NUMBER_OF_SUMMARY_CARDS = 8;
@@ -27,7 +27,7 @@ export class DashboardWidgetsService implements IApplicationService {
     private readonly _dashboardWidgetsPersistenceService: AbstractConfigDataPersistenceService<IWidgetConfig>,
     private readonly _entitiesService: EntitiesService,
     private readonly _configurationService: ConfigurationService,
-    private readonly _itemsOrderService: ItemsOrderService
+    private readonly _listOrderService: ListOrderService
   ) {}
 
   async bootstrap() {
@@ -96,13 +96,13 @@ export class DashboardWidgetsService implements IApplicationService {
 
     const widgetList = defaultWidgets.map(({ id }) => id);
 
-    await this._itemsOrderService.upsertOrder(HOME_DASHBOARD_KEY, widgetList);
+    await this._listOrderService.upsertOrder(HOME_DASHBOARD_KEY, widgetList);
 
-    return this._itemsOrderService.sortByOrder(widgetList, defaultWidgets);
+    return this._listOrderService.sortByOrder(widgetList, defaultWidgets);
   }
 
   async listDashboardWidgets(dashboardId: string): Promise<IWidgetConfig[]> {
-    const widgetList = await this._itemsOrderService.getItemOrder(dashboardId);
+    const widgetList = await this._listOrderService.getItemOrder(dashboardId);
     if (!widgetList || widgetList.length === 0) {
       if (dashboardId !== HOME_DASHBOARD_KEY) {
         return [];
@@ -115,7 +115,7 @@ export class DashboardWidgetsService implements IApplicationService {
         widgetList
       )) as IWidgetConfig[];
 
-    return this._itemsOrderService.sortByOrder(widgetList, widgets);
+    return this._listOrderService.sortByOrder(widgetList, widgets);
   }
 
   async createWidget(widget: IWidgetConfig, dashboardId: string) {
@@ -124,11 +124,11 @@ export class DashboardWidgetsService implements IApplicationService {
       widget
     );
 
-    await this._itemsOrderService.appendToList(dashboardId, widget.id);
+    await this._listOrderService.appendToList(dashboardId, widget.id);
   }
 
   async updateWidgetList(dashboardId: string, widgetList: string[]) {
-    await this._itemsOrderService.upsertOrder(dashboardId, widgetList);
+    await this._listOrderService.upsertOrder(dashboardId, widgetList);
   }
 
   async updateWidget(widgetId: string, widget: IWidgetConfig) {
@@ -139,7 +139,7 @@ export class DashboardWidgetsService implements IApplicationService {
   async removeWidget(widgetId: string, dashboardId: string) {
     await this._dashboardWidgetsPersistenceService.removeItem(widgetId);
 
-    await this._itemsOrderService.removeFromList(dashboardId, widgetId);
+    await this._listOrderService.removeFromList(dashboardId, widgetId);
   }
 }
 
@@ -150,5 +150,5 @@ export const dashboardWidgetsService = new DashboardWidgetsService(
   dashboardWidgetsPersistenceService,
   entitiesService,
   configurationService,
-  itemsOrderService
+  listOrderService
 );

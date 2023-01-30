@@ -2,11 +2,13 @@ import { dashboardWidgetsController } from "backend/dashboard-widgets/dashboard-
 import { USER_PERMISSIONS } from "shared/types/user";
 import { requestHandler } from "../../../../backend/lib/request";
 
+const REQUEST_QUERY_FIELD = "dashboardId";
+
 export default requestHandler(
   {
     GET: async (getValidatedRequest) => {
       const validatedRequest = await getValidatedRequest([
-        { _type: "requestQuery", options: "dashboardId" },
+        { _type: "requestQuery", options: REQUEST_QUERY_FIELD },
       ]);
       return await dashboardWidgetsController.listDashboardWidgets(
         validatedRequest.requestQuery
@@ -14,7 +16,7 @@ export default requestHandler(
     },
     POST: async (getValidatedRequest) => {
       const validatedRequest = await getValidatedRequest([
-        { _type: "requestQuery", options: "dashboardId" },
+        { _type: "requestQuery", options: REQUEST_QUERY_FIELD },
         { _type: "requestBody", options: {} },
       ]);
       return await dashboardWidgetsController.createWidget(
@@ -24,7 +26,7 @@ export default requestHandler(
     },
     PATCH: async (getValidatedRequest) => {
       const validatedRequest = await getValidatedRequest([
-        { _type: "requestQuery", options: "dashboardId" },
+        { _type: "requestQuery", options: REQUEST_QUERY_FIELD },
         { _type: "requestBody", options: {} },
       ]);
       return await dashboardWidgetsController.updateWidgetList(

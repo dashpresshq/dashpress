@@ -10,7 +10,7 @@ export type ConfigDomain =
   | "dashboard-widgets"
   | "app-config"
   | "packages"
-  | "items-order"
+  | "list-order"
   | "action_instances"
   | "activated_actions"
   | "activated_storage"

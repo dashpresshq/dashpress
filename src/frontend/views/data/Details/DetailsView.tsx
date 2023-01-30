@@ -14,7 +14,7 @@ import {
   useEntityFields,
   useEntityToOneReferenceFields,
 } from "../../../hooks/entity/entity.store";
-import { fitlerOutHiddenScalarColumns } from "../utils";
+import { filterOutHiddenScalarColumns } from "../utils";
 import { useEntityViewStateMachine } from "../useEntityViewStateMachine";
 import { viewSpecialDataTypes } from "../viewSpecialDataTypes";
 
@@ -81,7 +81,7 @@ export function EntityDetailsView({
       }
     >
       <div aria-label="Details Section">
-        {fitlerOutHiddenScalarColumns(
+        {filterOutHiddenScalarColumns(
           entityFields.data,
           hiddenDetailsColumns.data
         ).map(({ name }) => {

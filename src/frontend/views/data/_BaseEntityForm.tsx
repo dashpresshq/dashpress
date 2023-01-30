@@ -22,7 +22,7 @@ import { useMemo } from "react";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { buildAppliedSchemaFormConfig } from "./buildAppliedSchemaFormConfig";
 import { useEntityViewStateMachine } from "./useEntityViewStateMachine";
-import { fitlerOutHiddenScalarColumns } from "./utils";
+import { filterOutHiddenScalarColumns } from "./utils";
 
 type IProps = {
   initialValues?: Record<string, unknown>;
@@ -74,7 +74,7 @@ export function BaseEntityForm({
 
   const viewState = useEntityViewStateMachine(isLoading, error, action);
 
-  const fields = fitlerOutHiddenScalarColumns(
+  const fields = filterOutHiddenScalarColumns(
     (entityFields.data || []).filter(({ isId }) => !isId),
     hiddenColumns.data
   ).map(({ name }) => name);

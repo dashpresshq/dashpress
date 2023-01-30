@@ -21,7 +21,7 @@ export const doesPermissionAllowPermission = (
     requiredPermission.startsWith(
       META_USER_PERMISSIONS.APPLIED_CAN_ACCESS_ENTITY("")
     ) &&
-    permissions.includes(USER_PERMISSIONS.CAN_ACCESS_ALL_ENTITIES)
+    permissions.includes(USER_PERMISSIONS.CAN_MANAGE_ALL_ENTITIES)
   ) {
     return true;
   }

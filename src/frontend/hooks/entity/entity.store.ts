@@ -17,7 +17,7 @@ export const useActiveEntities = () => {
     errorMessage: dataNotFoundMessage("Entities menu items"),
   });
 
-  const entitiesDictionPlurals = useEntityDictionPlurals(
+  const getEntitiesDictionPlurals = useEntityDictionPlurals(
     menuItems.data || [],
     "value"
   );
@@ -26,7 +26,7 @@ export const useActiveEntities = () => {
     ...menuItems,
     data: (menuItems.data || []).map(({ value }) => ({
       value,
-      label: entitiesDictionPlurals(value),
+      label: getEntitiesDictionPlurals(value),
     })),
   };
 };

@@ -18,7 +18,7 @@ import { useMemo } from "react";
 import { IColorableSelection } from "shared/types/ui";
 import { ENTITY_LIST_PATH } from "frontend/hooks/data/data.store";
 import { useAppConfiguration } from "frontend/hooks/configuration/configuration.store";
-import { fitlerOutHiddenScalarColumns } from "../utils";
+import { filterOutHiddenScalarColumns } from "../utils";
 import { TableActions } from "./Actions";
 import { viewSpecialDataTypes } from "../viewSpecialDataTypes";
 
@@ -84,7 +84,7 @@ export const useTableColumns = (entity: string, lean?: true) => {
   const entityFieldSelections = useEntityFieldSelections(entity);
 
   const columnsToShow = useMemo(() => {
-    return fitlerOutHiddenScalarColumns(
+    return filterOutHiddenScalarColumns(
       entityFields.data,
       hiddenTableColumns.data
     );

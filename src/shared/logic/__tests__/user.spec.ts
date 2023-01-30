@@ -83,19 +83,19 @@ describe("user role checks", () => {
         false
       );
     });
-    it("should return true for `CAN_ACCESS_ALL_ENTITIES` when permission starts with APPLIED_CAN_ACCESS_ENTITY", () => {
+    it("should return true for `CAN_MANAGE_ALL_ENTITIES` when permission starts with APPLIED_CAN_ACCESS_ENTITY", () => {
       expect(
         doesPermissionAllowPermission(
-          ["CAN_ACCESS_ENTITY:ALL_ENTITIES", "PERMISSION_2"],
+          ["CAN_MANAGE_ALL_ENTITIES", "PERMISSION_2"],
           "CAN_ACCESS_ENTITY:FOO"
         )
       ).toBe(true);
     });
 
-    it("should return false for `CAN_ACCESS_ALL_ENTITIES` when permission doesn't start with APPLIED_CAN_ACCESS_ENTITY", () => {
+    it("should return false for `CAN_MANAGE_ALL_ENTITIES` when permission doesn't start with APPLIED_CAN_ACCESS_ENTITY", () => {
       expect(
         doesPermissionAllowPermission(
-          ["CAN_ACCESS_ENTITY:ALL_ENTITIES", "PERMISSION_2"],
+          ["CAN_MANAGE_ALL_ENTITIES", "PERMISSION_2"],
           "XXX:FOO"
         )
       ).toBe(false);

@@ -50,7 +50,7 @@ export function EntitiesSettings() {
     }
   );
 
-  const entitiesDictionPlurals = useEntityDictionPlurals(
+  const getEntitiesDictionPlurals = useEntityDictionPlurals(
     entitiesList.data || [],
     "value"
   );
@@ -86,7 +86,7 @@ export function EntitiesSettings() {
                     allList={(entitiesList.data || []).map(
                       ({ label }) => label
                     )}
-                    getEntityFieldLabels={entitiesDictionPlurals}
+                    getEntityFieldLabels={getEntitiesDictionPlurals}
                     hiddenList={entitiesToHide.data || []}
                     onSubmit={async (data) => {
                       await upsertHideFromMenuMutation.mutateAsync(data);

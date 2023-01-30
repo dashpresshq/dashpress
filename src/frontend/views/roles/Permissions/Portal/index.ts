@@ -1,0 +1,1 @@
+export { usePortalExtendedPermissions } from "./main";

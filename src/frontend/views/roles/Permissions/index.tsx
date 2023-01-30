@@ -1,33 +1,28 @@
 import {
   ListSkeleton,
-  RenderList,
   SectionBox,
   SectionCenter,
-  SectionListItem,
   Spacer,
+  Tabs,
 } from "@hadmean/chromista";
 import { TitleLang } from "@hadmean/protozoa";
 import { useEntitiesList } from "frontend/hooks/entity/entity.store";
 import { useNavigationStack, useSetPageDetails } from "frontend/lib/routing";
-import { userFriendlyCase } from "frontend/lib/strings";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { LINK_TO_DOCS } from "frontend/views/constants";
-import { USER_PERMISSIONS, META_USER_PERMISSIONS } from "shared/types/user";
+import { USER_PERMISSIONS } from "shared/types/user";
+import { useMemo } from "react";
+import { ILabelValue } from "types";
+import { userFriendlyCase } from "frontend/lib/strings";
 import { AppLayout } from "../../../_layouts/app";
-import { useRoleIdFromRouteParam } from "../hooks";
-import {
-  useRolePermissionDeletionMutation,
-  useCreateRolePermissionMutation,
-  useRolePermissions,
-} from "../permissions.store";
+import { useRolePermissions } from "../permissions.store";
+import { MutatePermission } from "./MutatePermission";
+import { usePortalExtendedPermissions } from "./Portal";
 
 export function RolePermissions() {
-  const roleId = useRoleIdFromRouteParam();
-  const rolePermissions = useRolePermissions(roleId);
   const entitiesList = useEntitiesList();
-
-  const rolePermissionDeletionMutation = useRolePermissionDeletionMutation();
-  const rolePermissionCreationMutation = useCreateRolePermissionMutation();
+  const portalPermission = usePortalExtendedPermissions();
+  const rolePermissions = useRolePermissions();
 
   const { backLink } = useNavigationStack();
 
@@ -37,18 +32,17 @@ export function RolePermissions() {
     permission: USER_PERMISSIONS.CAN_MANAGE_PERMISSIONS,
   });
 
+  const adminPermissionList: ILabelValue[] = useMemo(
+    () =>
+      Object.values(USER_PERMISSIONS).map((permission) => ({
+        value: permission,
+        label: userFriendlyCase(permission),
+      })),
+    []
+  );
+
   const isLoading = rolePermissions.isLoading || entitiesList.isLoading;
-
   const error = rolePermissions.error || entitiesList.error;
-
-  const allList = [
-    ...Object.values(USER_PERMISSIONS),
-    ...(entitiesList.data || []).map((entity) =>
-      META_USER_PERMISSIONS.APPLIED_CAN_ACCESS_ENTITY(entity.value)
-    ),
-  ];
-
-  // TODO need to show the real entity label here
 
   return (
     <AppLayout>
@@ -69,40 +63,17 @@ export function RolePermissions() {
             loading={isLoading}
             loader={<ListSkeleton count={20} />}
           >
-            <>
-              <Spacer size="xxl" />
-              {allList.length > 0 && (
-                <RenderList
-                  items={allList.map((listItem) => ({ name: listItem }))}
-                  render={(menuItem) => {
-                    const isPermissionSelected = rolePermissions.data.includes(
-                      menuItem.name
-                    );
-
-                    return (
-                      <SectionListItem
-                        label={userFriendlyCase(menuItem.name)}
-                        key={menuItem.name}
-                        toggle={{
-                          selected: isPermissionSelected,
-                          onChange: () => {
-                            if (isPermissionSelected) {
-                              rolePermissionDeletionMutation.mutate(
-                                menuItem.name
-                              );
-                            } else {
-                              rolePermissionCreationMutation.mutate(
-                                menuItem.name
-                              );
-                            }
-                          },
-                        }}
-                      />
-                    );
-                  }}
-                />
-              )}
-            </>
+            <Tabs
+              contents={[
+                {
+                  label: "Admin",
+                  content: (
+                    <MutatePermission permissionList={adminPermissionList} />
+                  ),
+                },
+                ...portalPermission,
+              ]}
+            />
           </ViewStateMachine>
         </SectionBox>
         <Spacer />

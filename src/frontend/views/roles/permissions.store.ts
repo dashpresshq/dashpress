@@ -16,7 +16,9 @@ const SINGULAR = "Role Permission";
 export const ADMIN_ROLE_PERMISSION_ENDPOINT = (roleId: string) =>
   `/api/roles/${roleId}/permissions`;
 
-export function useRolePermissions(roleId: string) {
+export function useRolePermissions() {
+  const roleId = useRoleIdFromRouteParam();
+
   return useApi<string[]>(ADMIN_ROLE_PERMISSION_ENDPOINT(roleId), {
     enabled: isRouterParamEnabled(roleId),
     errorMessage: dataNotFoundMessage(SINGULAR),

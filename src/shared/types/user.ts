@@ -1,4 +1,5 @@
 import { StringUtils, SLUG_LOADING_VALUE } from "@hadmean/protozoa";
+import { PORTAL_USER_PERMISSIONS } from "./portal/user";
 
 export enum SystemRoles {
   Creator = "creator",
@@ -52,6 +53,6 @@ export const USER_PERMISSIONS = {
   CAN_MANAGE_DASHBOARD: "CAN_MANAGE_DASHBOARD",
   CAN_MANAGE_INTEGRATIONS: "CAN_MANAGE_INTEGRATIONS",
   CAN_MANAGE_PERMISSIONS: "CAN_MANAGE_PERMISSIONS",
-  CAN_ACCESS_ALL_ENTITIES:
-    META_USER_PERMISSIONS.APPLIED_CAN_ACCESS_ENTITY("ALL_ENTITIES"), // TODO hiding from view i.e merging it wuth hiding entities
+  CAN_MANAGE_ALL_ENTITIES: "CAN_MANAGE_ALL_ENTITIES", // TODO hiding from view i.e merging it wuth hiding entities
+  ...PORTAL_USER_PERMISSIONS,
 };

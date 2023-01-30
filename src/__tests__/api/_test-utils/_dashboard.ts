@@ -35,7 +35,7 @@ export const setupDashboardTestData = async (
     createConfigDomainPersistenceService<IWidgetConfig>("dashboard-widgets");
 
   const itemsOrderPersistenceService =
-    createConfigDomainPersistenceService<string[]>("items-order");
+    createConfigDomainPersistenceService<string[]>("list-order");
 
   await configPersistenceService.resetToEmpty();
 

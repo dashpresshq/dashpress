@@ -16,7 +16,7 @@ import { requestHandler } from "backend/lib/request";
 import { storageService } from "backend/storage/storage.service";
 import { actionsService } from "backend/actions/actions.service";
 import { dashboardWidgetsService } from "backend/dashboard-widgets/dashboard-widgets.service";
-import { itemsOrderService } from "backend/items-order/items-order.service";
+import { listOrderService } from "backend/list-order/list-order.service";
 import { bootstrapPortalServices } from "./portal";
 
 export default requestHandler(
@@ -38,7 +38,7 @@ export default requestHandler(
         await actionsService.bootstrap();
         await dashboardWidgetsService.bootstrap();
         await storageService.bootstrap();
-        await itemsOrderService.bootstrap();
+        await listOrderService.bootstrap();
 
         await packagesService.bootstrap();
 

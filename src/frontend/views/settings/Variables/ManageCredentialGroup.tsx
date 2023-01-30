@@ -18,9 +18,9 @@ import {
 } from "frontend/lib/routing/usePageDetails";
 import { HelpCircle, Plus } from "react-feather";
 import { SchemaForm } from "frontend/components/SchemaForm";
-import { useUserHasPermissions } from "frontend/hooks/auth/user.store";
 import { USER_PERMISSIONS } from "shared/types/user";
 import { usePasswordStore } from "frontend/views/integrations/password.store";
+import { useUserHasPermission } from "frontend/hooks/auth/user.store";
 import {
   INTEGRATIONS_GROUP_ENDPOINT,
   useIntegrationConfigurationDeletionMutation,
@@ -61,9 +61,7 @@ export function ManageCredentialGroup({
 
   const passwordStore = usePasswordStore();
 
-  const hasPermission = useUserHasPermissions([
-    USER_PERMISSIONS.CAN_MANAGE_INTEGRATIONS,
-  ]);
+  const userHasPermission = useUserHasPermission();
 
   const [currentConfigItem, setCurrentConfigItem] = useState("");
 
@@ -96,7 +94,7 @@ export function ManageCredentialGroup({
 
   const canManageAction = !(
     group === IntegrationsConfigurationGroup.Credentials &&
-    !hasPermission(USER_PERMISSIONS.CAN_MANAGE_INTEGRATIONS)
+    !userHasPermission(USER_PERMISSIONS.CAN_MANAGE_INTEGRATIONS)
   );
 
   const actionItems:
@@ -163,7 +161,7 @@ export function ManageCredentialGroup({
     <>
       <section aria-label={`${group} priviledge section`}>
         {group === IntegrationsConfigurationGroup.Credentials &&
-          hasPermission(USER_PERMISSIONS.CAN_MANAGE_INTEGRATIONS) &&
+          userHasPermission(USER_PERMISSIONS.CAN_MANAGE_INTEGRATIONS) &&
           (tableData?.data || []).length > 0 &&
           !revealedCredentials.data && (
             <Spacer>

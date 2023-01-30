@@ -33,9 +33,7 @@ export function BaseDashboard({ dashboardId, showDemo, manageLink }: IProps) {
     (store) => store.setCurrentRelativeDay
   );
 
-  const canManageDashboard = useUserHasPermission(
-    USER_PERMISSIONS.CAN_MANAGE_DASHBOARD
-  );
+  const userHasPermission = useUserHasPermission();
 
   return (
     <AppLayout
@@ -47,7 +45,7 @@ export function BaseDashboard({ dashboardId, showDemo, manageLink }: IProps) {
         IconComponent: Filter,
       }))}
       secondaryActionItems={
-        canManageDashboard === true
+        userHasPermission(USER_PERMISSIONS.CAN_MANAGE_DASHBOARD)
           ? [
               {
                 label: "Manage Dashboard",

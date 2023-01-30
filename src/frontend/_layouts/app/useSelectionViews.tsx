@@ -1,7 +1,7 @@
 import { Settings, Home, Table, Users, Shield, Zap } from "react-feather";
 import { NAVIGATION_LINKS, useNavigationStack } from "frontend/lib/routing";
 import { USER_PERMISSIONS } from "shared/types/user";
-import { useUserHasPermissions } from "frontend/hooks/auth/user.store";
+import { useUserHasPermission } from "frontend/hooks/auth/user.store";
 import { useActiveEntities } from "../../hooks/entity/entity.store";
 import { ROOT_LINKS_TO_CLEAR_BREADCRUMBS } from "./constants";
 import { IAppMenuItems } from "./types";
@@ -9,12 +9,7 @@ import { useAppendPortalMenuItems } from "./portal";
 
 export const useSelectionViews = (): IAppMenuItems[] => {
   const activeEntities = useActiveEntities();
-  const hasPermission = useUserHasPermissions([
-    USER_PERMISSIONS.CAN_CONFIGURE_APP,
-    USER_PERMISSIONS.CAN_MANAGE_USERS,
-    USER_PERMISSIONS.CAN_MANAGE_PERMISSIONS,
-    USER_PERMISSIONS.CAN_MANAGE_INTEGRATIONS,
-  ]);
+  const userHasPermission = useUserHasPermission();
 
   const { clear } = useNavigationStack();
 
@@ -52,7 +47,7 @@ export const useSelectionViews = (): IAppMenuItems[] => {
       title: "Actions",
       icon: Zap,
       action: ROOT_LINKS_TO_CLEAR_BREADCRUMBS.ACTIONS,
-      isPermissionAllowed: hasPermission(
+      isPermissionAllowed: userHasPermission(
         USER_PERMISSIONS.CAN_MANAGE_INTEGRATIONS
       ),
       order: 30,
@@ -61,21 +56,23 @@ export const useSelectionViews = (): IAppMenuItems[] => {
       title: "Settings",
       icon: Settings,
       action: ROOT_LINKS_TO_CLEAR_BREADCRUMBS.SETTINGS,
-      isPermissionAllowed: hasPermission(USER_PERMISSIONS.CAN_CONFIGURE_APP),
+      isPermissionAllowed: userHasPermission(
+        USER_PERMISSIONS.CAN_CONFIGURE_APP
+      ),
       order: 40,
     },
     {
       title: "Users",
       icon: Users,
       action: ROOT_LINKS_TO_CLEAR_BREADCRUMBS.USERS,
-      isPermissionAllowed: hasPermission(USER_PERMISSIONS.CAN_MANAGE_USERS),
+      isPermissionAllowed: userHasPermission(USER_PERMISSIONS.CAN_MANAGE_USERS),
       order: 50,
     },
     {
       title: "Roles",
       icon: Shield,
       action: ROOT_LINKS_TO_CLEAR_BREADCRUMBS.ROLES,
-      isPermissionAllowed: hasPermission(
+      isPermissionAllowed: userHasPermission(
         USER_PERMISSIONS.CAN_MANAGE_PERMISSIONS
       ),
       order: 60,

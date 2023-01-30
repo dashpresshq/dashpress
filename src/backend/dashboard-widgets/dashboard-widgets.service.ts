@@ -18,7 +18,7 @@ import { ROYGBIV } from "shared/constants/colors";
 import {
   listOrderService,
   ListOrderService,
-} from "backend/items-order/items-order.service";
+} from "backend/list-order/list-order.service";
 
 const DFAULT_NUMBER_OF_SUMMARY_CARDS = 8;
 

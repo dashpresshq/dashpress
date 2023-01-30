@@ -32,9 +32,7 @@ export function UserUpdate() {
   const userDetails = useUserDetails(username);
   const authenticatedUserBag = useAuthenticatedUserBag();
 
-  const hasResetPasswordPermission = useUserHasPermission(
-    USER_PERMISSIONS.CAN_RESET_PASSWORD
-  );
+  const userHasPermission = useUserHasPermission();
 
   useSetPageDetails({
     pageTitle: "Update User",
@@ -80,7 +78,7 @@ export function UserUpdate() {
           </ViewStateMachine>
         </SectionBox>
         <Spacer />
-        {hasResetPasswordPermission === true &&
+        {userHasPermission(USER_PERMISSIONS.CAN_RESET_PASSWORD) &&
           authenticatedUserBag.data?.username !== username && (
             <SectionBox title="Reset User Password">
               <ResetUserPasswordForm

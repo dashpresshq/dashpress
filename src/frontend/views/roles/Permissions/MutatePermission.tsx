@@ -1,4 +1,5 @@
 import { RenderList, SectionListItem } from "@hadmean/chromista";
+import { ILabelValue } from "types";
 import {
   useCreateRolePermissionMutation,
   useRolePermissionDeletionMutation,
@@ -6,7 +7,7 @@ import {
 } from "../permissions.store";
 
 interface IProps {
-  permissionList: { label: string; value: string }[];
+  permissionList: ILabelValue[];
 }
 
 export function MutatePermission({ permissionList }: IProps) {

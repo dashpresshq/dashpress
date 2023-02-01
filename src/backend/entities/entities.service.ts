@@ -1,10 +1,19 @@
+import { IValueLabel } from "@hadmean/chromista/dist/types";
+import {
+  configurationService,
+  ConfigurationService,
+} from "backend/configuration/configuration.service";
 import { IApplicationService } from "backend/types";
 import noop from "lodash/noop";
 import { IDBSchema, IEntityField } from "shared/types/db";
 import { SchemasService, schemasService } from "../schema/schema.service";
+import { sortByList } from "./utils";
 
 export class EntitiesService implements IApplicationService {
-  constructor(private _schemasService: SchemasService) {}
+  constructor(
+    private _schemasService: SchemasService,
+    private _configurationService: ConfigurationService
+  ) {}
 
   async bootstrap() {
     noop();
@@ -17,6 +26,25 @@ export class EntitiesService implements IApplicationService {
         model,
       ])
     );
+  }
+
+  async getActiveEntities(): Promise<IValueLabel[]> {
+    const [hiddenEntities, entitiesOrder, entities] = await Promise.all([
+      this._configurationService.show<string[]>("disabled_entities"),
+      this._configurationService.show<string[]>("entities_order"),
+      this.getAllEntities(),
+    ]);
+    const activeEntities = entities.filter(
+      ({ value }) => !hiddenEntities.includes(value)
+    );
+
+    sortByList(
+      activeEntities.sort((a, b) => a.value.localeCompare(b.value)),
+      entitiesOrder,
+      "value"
+    );
+
+    return activeEntities;
   }
 
   async getEntityFields(entity: string): Promise<IEntityField[]> {
@@ -48,6 +76,16 @@ export class EntitiesService implements IApplicationService {
     return (await this.getDBSchemaModels())[entity];
   }
 
+  async entityExist(entity: string): Promise<boolean> {
+    return !!(await this.getDBSchemaModels())[entity];
+  }
+
+  async isEntityDisabled(entity: string): Promise<boolean> {
+    return (
+      await this._configurationService.show<string[]>("disabled_entities")
+    ).includes(entity);
+  }
+
   async getAllEntities(): Promise<{ value: string; label: string }[]> {
     return (await this._schemasService.getDBSchema()).map(({ name }) => ({
       value: name,
@@ -56,4 +94,7 @@ export class EntitiesService implements IApplicationService {
   }
 }
 
-export const entitiesService = new EntitiesService(schemasService);
+export const entitiesService = new EntitiesService(
+  schemasService,
+  configurationService
+);

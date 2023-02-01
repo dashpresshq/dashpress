@@ -1,5 +1,7 @@
 import { IValueLabel } from "@hadmean/chromista/dist/types";
+import { rolesService, RolesService } from "backend/roles/roles.service";
 import { IEntityField, IEntityRelation } from "shared/types/db";
+import { META_USER_PERMISSIONS } from "shared/types/user";
 import {
   ConfigurationService,
   configurationService,
@@ -10,26 +12,21 @@ import { sortByList } from "./utils";
 export class EntitiesController {
   constructor(
     private _entitiesService: EntitiesService,
-    private _configurationService: ConfigurationService
+    private _configurationService: ConfigurationService,
+    private _rolesService: RolesService
   ) {}
 
   async getActiveEntities(): Promise<IValueLabel[]> {
-    const [hiddenEntities, entitiesOrder, entities] = await Promise.all([
-      this._configurationService.show<string[]>("disabled_entities"),
-      this._configurationService.show<string[]>("entities_order"),
-      this._entitiesService.getAllEntities(),
-    ]);
-    const activeEntities = entities.filter(
-      ({ value }) => !hiddenEntities.includes(value)
-    );
+    return await this._entitiesService.getActiveEntities();
+  }
 
-    sortByList(
-      activeEntities.sort((a, b) => a.value.localeCompare(b.value)),
-      entitiesOrder,
-      "value"
+  async getUserActiveEntities(userRole: string): Promise<IValueLabel[]> {
+    return await this._rolesService.filterPermittedEntities(
+      userRole,
+      await this._entitiesService.getActiveEntities(),
+      "value",
+      META_USER_PERMISSIONS.APPLIED_CAN_ACCESS_ENTITY
     );
-
-    return activeEntities;
   }
 
   async listAllEntities(): Promise<IValueLabel[]> {
@@ -50,6 +47,7 @@ export class EntitiesController {
   }
 
   async getEntityRelations(entity: string): Promise<IEntityRelation[]> {
+    // Hide permission fields
     const [
       entityRelations,
       disabledEntities,
@@ -115,5 +113,6 @@ export class EntitiesController {
 
 export const entitiesController = new EntitiesController(
   entitiesService,
-  configurationService
+  configurationService,
+  rolesService
 );

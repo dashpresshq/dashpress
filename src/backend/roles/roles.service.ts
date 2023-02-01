@@ -48,6 +48,31 @@ export class RolesService implements IApplicationService {
     );
   }
 
+  async filterPermittedEntities<T>(
+    userRole: string,
+    entities: T[],
+    entityField: keyof T,
+    applyMeta?: (input: string) => string
+  ): Promise<T[]> {
+    const entitiesCheck = await Promise.all(
+      entities.map(async (entity) => {
+        const entityValue = entity[entityField] as unknown as string;
+        const permissionCheck = applyMeta
+          ? applyMeta(entityValue)
+          : entityValue;
+
+        return {
+          entity,
+          hasAccess: await this.canRoleDoThis(userRole, permissionCheck),
+        };
+      })
+    );
+
+    return entitiesCheck
+      .filter(({ hasAccess }) => hasAccess)
+      .map(({ entity }) => entity);
+  }
+
   async createRole(input: Pick<IRole, "id">) {
     const id = makeRoleId(input.id);
     const role = await this._rolesPersistenceService.getItem(id);

@@ -1,0 +1,1 @@
+export { generatePortalDashboardWidgets } from "./main";

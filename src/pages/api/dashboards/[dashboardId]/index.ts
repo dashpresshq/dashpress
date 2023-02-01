@@ -1,5 +1,5 @@
 import { dashboardWidgetsController } from "backend/dashboard-widgets/dashboard-widgets.controller";
-import { USER_PERMISSIONS } from "shared/types/user";
+import { IAccountProfile, USER_PERMISSIONS } from "shared/types/user";
 import { requestHandler } from "../../../../backend/lib/request";
 
 const REQUEST_QUERY_FIELD = "dashboardId";
@@ -8,10 +8,13 @@ export default requestHandler(
   {
     GET: async (getValidatedRequest) => {
       const validatedRequest = await getValidatedRequest([
+        "authenticatedUser",
         { _type: "requestQuery", options: REQUEST_QUERY_FIELD },
       ]);
+
       return await dashboardWidgetsController.listDashboardWidgets(
-        validatedRequest.requestQuery
+        validatedRequest.requestQuery,
+        (validatedRequest.authenticatedUser as IAccountProfile).role
       );
     },
     POST: async (getValidatedRequest) => {

@@ -2,13 +2,13 @@ import { Settings, Home, Table, Users, Shield, Zap } from "react-feather";
 import { NAVIGATION_LINKS, useNavigationStack } from "frontend/lib/routing";
 import { USER_PERMISSIONS } from "shared/types/user";
 import { useUserHasPermission } from "frontend/hooks/auth/user.store";
-import { useActiveEntities } from "../../hooks/entity/entity.store";
+import { useUserActiveEntities } from "../../hooks/entity/entity.store";
 import { ROOT_LINKS_TO_CLEAR_BREADCRUMBS } from "./constants";
 import { IAppMenuItems } from "./types";
 import { useAppendPortalMenuItems } from "./portal";
 
 export const useSelectionViews = (): IAppMenuItems[] => {
-  const activeEntities = useActiveEntities();
+  const activeEntities = useUserActiveEntities();
   const userHasPermission = useUserHasPermission();
 
   const { clear } = useNavigationStack();
@@ -30,7 +30,6 @@ export const useSelectionViews = (): IAppMenuItems[] => {
         singular: "Entity",
         menuItems: {
           ...activeEntities,
-          // TODO filter the ones that the user has permission for
           data: (activeEntities.data || []).map(({ label, value }) => ({
             title: label,
             searchKeywords: value,

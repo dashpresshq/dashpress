@@ -7,6 +7,8 @@ import {
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { LINK_TO_DOCS } from "frontend/views/constants";
 import { USER_PERMISSIONS } from "shared/types/user";
+import { dataNotFoundMessage, useApi } from "@hadmean/protozoa";
+import { ILabelValue } from "types";
 import {
   useAppConfiguration,
   useUpsertConfigurationMutation,
@@ -14,12 +16,17 @@ import {
 import { useEntityDictionPlurals } from "../../../hooks/entity/entity.queries";
 import {
   ACTIVE_ENTITIES_ENDPOINT,
-  useEntitiesList,
+  USER_ACTIVE_ENTITIES_ENDPOINT,
   useActiveEntities,
 } from "../../../hooks/entity/entity.store";
 import { SETTINGS_VIEW_KEY } from "../constants";
 import { BaseSettingsLayout } from "../_Base";
 import { EntitiesSelection } from "./Selection";
+
+const useEntitiesList = () =>
+  useApi<ILabelValue[]>("/api/entities/list", {
+    errorMessage: dataNotFoundMessage("Entities list"),
+  });
 
 export function EntitiesSettings() {
   const entitiesList = useEntitiesList();
@@ -39,14 +46,16 @@ export function EntitiesSettings() {
   const upsertHideFromMenuMutation = useUpsertConfigurationMutation(
     "disabled_entities",
     "",
-    { otherEndpoints: [ACTIVE_ENTITIES_ENDPOINT] }
+    {
+      otherEndpoints: [ACTIVE_ENTITIES_ENDPOINT, USER_ACTIVE_ENTITIES_ENDPOINT],
+    }
   );
 
   const upsertEntitiesOrderMutation = useUpsertConfigurationMutation(
     "entities_order",
     "",
     {
-      otherEndpoints: [ACTIVE_ENTITIES_ENDPOINT],
+      otherEndpoints: [ACTIVE_ENTITIES_ENDPOINT, USER_ACTIVE_ENTITIES_ENDPOINT],
     }
   );
 

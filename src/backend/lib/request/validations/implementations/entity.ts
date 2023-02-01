@@ -2,7 +2,6 @@ import { rolesService } from "backend/roles/roles.service";
 import { META_USER_PERMISSIONS, USER_PERMISSIONS } from "shared/types/user";
 import { NotFoundError } from "../../../errors";
 import { entitiesService } from "../../../../entities/entities.service";
-import { configurationService } from "../../../../configuration/configuration.service";
 import { ValidationImplType } from "./types";
 
 const ERROR_MESSAGE = `This resource doesn't exist or is disabled or you dont have access to it`;
@@ -10,16 +9,16 @@ const ERROR_MESSAGE = `This resource doesn't exist or is disabled or you dont ha
 export const entityValidationImpl: ValidationImplType<string> = async (req) => {
   const entity = req.query.entity as string;
 
-  const [entityExists, disabledEntities] = await Promise.all([
-    entitiesService.getEntityFromSchema(entity),
-    configurationService.show<string[]>("disabled_entities"),
+  const [entityExists, isEntityDisabled] = await Promise.all([
+    entitiesService.entityExist(entity),
+    entitiesService.isEntityDisabled(entity),
   ]);
 
   if (!entityExists) {
     throw new NotFoundError(ERROR_MESSAGE);
   }
 
-  if (disabledEntities.includes(entity)) {
+  if (isEntityDisabled) {
     if (
       !(await rolesService.canRoleDoThis(
         req.user.role,

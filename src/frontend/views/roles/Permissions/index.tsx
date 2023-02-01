@@ -6,7 +6,7 @@ import {
   Tabs,
 } from "@hadmean/chromista";
 import { TitleLang } from "@hadmean/protozoa";
-import { useEntitiesList } from "frontend/hooks/entity/entity.store";
+import { useActiveEntities } from "frontend/hooks/entity/entity.store";
 import { useNavigationStack, useSetPageDetails } from "frontend/lib/routing";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { LINK_TO_DOCS } from "frontend/views/constants";
@@ -20,7 +20,7 @@ import { MutatePermission } from "./MutatePermission";
 import { usePortalExtendedPermissions } from "./Portal";
 
 export function RolePermissions() {
-  const entitiesList = useEntitiesList();
+  const activeEntities = useActiveEntities();
   const portalPermission = usePortalExtendedPermissions();
   const rolePermissions = useRolePermissions();
 
@@ -41,8 +41,8 @@ export function RolePermissions() {
     []
   );
 
-  const isLoading = rolePermissions.isLoading || entitiesList.isLoading;
-  const error = rolePermissions.error || entitiesList.error;
+  const isLoading = rolePermissions.isLoading || activeEntities.isLoading;
+  const error = rolePermissions.error || activeEntities.error;
 
   return (
     <AppLayout>

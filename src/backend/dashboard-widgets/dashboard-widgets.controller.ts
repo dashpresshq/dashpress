@@ -7,9 +7,10 @@ import {
 export class DashboardWidgetsController {
   constructor(private _dashboardWidgetsService: DashboardWidgetsService) {}
 
-  async listDashboardWidgets(dashboardId: string) {
+  async listDashboardWidgets(dashboardId: string, userRole: string) {
     return await this._dashboardWidgetsService.listDashboardWidgets(
-      dashboardId
+      dashboardId,
+      userRole
     );
   }
 

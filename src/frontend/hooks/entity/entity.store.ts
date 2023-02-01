@@ -1,4 +1,9 @@
-import { dataNotFoundMessage, useApi, useApiQueries } from "@hadmean/protozoa";
+import {
+  dataNotFoundMessage,
+  DataStateKeys,
+  useApi,
+  useApiQueries,
+} from "@hadmean/protozoa";
 import { IEntityField, IEntityRelation } from "shared/types/db";
 import { ILabelValue } from "types";
 import { isRouterParamEnabled } from "..";
@@ -11,30 +16,38 @@ export const ENTITY_RELATIONS_ENDPOINT = (entity: string) =>
   `/api/entities/${entity}/relations`;
 
 export const ACTIVE_ENTITIES_ENDPOINT = "/api/entities/active";
+export const USER_ACTIVE_ENTITIES_ENDPOINT = "/api/entities/user";
 
-export const useActiveEntities = () => {
-  const menuItems = useApi<ILabelValue[]>(ACTIVE_ENTITIES_ENDPOINT, {
-    errorMessage: dataNotFoundMessage("Entities menu items"),
-  });
-
+const useEntitiesListLabel = (entitiesList: DataStateKeys<ILabelValue[]>) => {
   const getEntitiesDictionPlurals = useEntityDictionPlurals(
-    menuItems.data || [],
+    entitiesList.data || [],
     "value"
   );
 
   return {
-    ...menuItems,
-    data: (menuItems.data || []).map(({ value }) => ({
+    ...entitiesList,
+    data: (entitiesList.data || []).map(({ value }) => ({
       value,
       label: getEntitiesDictionPlurals(value),
     })),
   };
 };
 
-export const useEntitiesList = () =>
-  useApi<ILabelValue[]>("/api/entities/list", {
-    errorMessage: dataNotFoundMessage("Entities list"),
+export const useUserActiveEntities = () => {
+  const menuItems = useApi<ILabelValue[]>(USER_ACTIVE_ENTITIES_ENDPOINT, {
+    errorMessage: dataNotFoundMessage("Active entities"),
   });
+
+  return useEntitiesListLabel(menuItems);
+};
+
+export const useActiveEntities = () => {
+  const menuItems = useApi<ILabelValue[]>(ACTIVE_ENTITIES_ENDPOINT, {
+    errorMessage: dataNotFoundMessage("Active entities"),
+  });
+
+  return useEntitiesListLabel(menuItems);
+};
 
 export const useEntityFields = (entity: string) =>
   useApi<IEntityField[]>(ENTITY_FIELDS_ENDPOINT(entity), {

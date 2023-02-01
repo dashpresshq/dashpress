@@ -7,7 +7,7 @@ import {
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
 import { useRouter } from "next/router";
 import { useMutation } from "react-query";
-import { ICreateRoleForm } from "shared/form-schemas/roles/create";
+import { IBaseRoleForm } from "shared/form-schemas/roles/base";
 import { makeRoleId } from "shared/types/user";
 
 export const ADMIN_ROLES_ENDPOINT = "/api/roles";
@@ -37,7 +37,7 @@ export function useRoleDeletionMutation() {
 
 export function useCreateRoleMutation() {
   const router = useRouter();
-  const apiMutateOptions = useWaitForResponseMutationOptions<ICreateRoleForm>({
+  const apiMutateOptions = useWaitForResponseMutationOptions<IBaseRoleForm>({
     endpoints: [ADMIN_ROLES_ENDPOINT],
     smartSuccessMessage: ({ name }) => ({
       message: MutationsLang.create("Role"),
@@ -49,7 +49,7 @@ export function useCreateRoleMutation() {
     }),
   });
 
-  return useMutation(async (data: ICreateRoleForm) => {
+  return useMutation(async (data: IBaseRoleForm) => {
     await makePostRequest(ADMIN_ROLES_ENDPOINT, data);
     return data;
   }, apiMutateOptions);

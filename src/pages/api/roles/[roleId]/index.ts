@@ -1,5 +1,5 @@
 import { rolesController } from "backend/roles/roles.controller";
-import { UPDATE_ROLE_FORM_SCHEMA } from "shared/form-schemas/roles/update";
+import { BASE_ROLE_FORM_SCHEMA } from "shared/form-schemas/roles/base";
 import { USER_PERMISSIONS } from "shared/types/user";
 import { requestHandler } from "../../../../backend/lib/request";
 
@@ -21,7 +21,7 @@ export default requestHandler(
       const validatedRequest = await getValidatedRequest([
         {
           _type: "requestBody",
-          options: UPDATE_ROLE_FORM_SCHEMA,
+          options: BASE_ROLE_FORM_SCHEMA,
         },
         {
           _type: "requestQuery",

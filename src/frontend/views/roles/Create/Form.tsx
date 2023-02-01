@@ -1,16 +1,16 @@
 import { ButtonLang, IFormProps } from "@hadmean/protozoa";
 import { SchemaForm } from "frontend/components/SchemaForm";
 import {
-  CREATE_ROLE_FORM_SCHEMA,
-  ICreateRoleForm,
-} from "shared/form-schemas/roles/create";
+  BASE_ROLE_FORM_SCHEMA,
+  IBaseRoleForm,
+} from "shared/form-schemas/roles/base";
 
-export function CreateRoleForm({ onSubmit }: IFormProps<ICreateRoleForm>) {
+export function CreateRoleForm({ onSubmit }: IFormProps<IBaseRoleForm>) {
   return (
-    <SchemaForm<ICreateRoleForm>
+    <SchemaForm<IBaseRoleForm>
       onSubmit={onSubmit}
       buttonText={`${ButtonLang.create} Role`}
-      fields={CREATE_ROLE_FORM_SCHEMA}
+      fields={BASE_ROLE_FORM_SCHEMA}
       resetForm
     />
   );

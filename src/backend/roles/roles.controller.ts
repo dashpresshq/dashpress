@@ -1,8 +1,7 @@
 import { usersService, UsersService } from "backend/users/users.service";
 import { userFriendlyCase } from "frontend/lib/strings";
-import { ICreateRoleForm } from "shared/form-schemas/roles/create";
 import { IBasePermissionForm } from "shared/form-schemas/roles/permissions/base";
-import { IUpdateRoleForm } from "shared/form-schemas/roles/update";
+import { IBaseRoleForm } from "shared/form-schemas/roles/base";
 import { makeRoleId, SystemRoles } from "shared/types/user";
 import { RolesService, rolesService } from "./roles.service";
 
@@ -27,11 +26,11 @@ export class RolesController {
     return await this._rolesService.getRolePermissions(roleId);
   }
 
-  async createRole({ name }: ICreateRoleForm) {
+  async createRole({ name }: IBaseRoleForm) {
     return await this._rolesService.createRole({ id: name });
   }
 
-  async updateRoleDetails(roleId: string, { name }: IUpdateRoleForm) {
+  async updateRoleDetails(roleId: string, { name }: IBaseRoleForm) {
     await this._rolesService.updateRoleDetails(roleId, { id: name });
 
     await this.updateUsersRole(roleId, makeRoleId(name));

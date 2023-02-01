@@ -147,21 +147,7 @@ describe("/api/dashboards/[dashboardId]/index generation", () => {
     await setupDashboardTestData([]);
   });
 
-  it("should not generate dashboard for none HOME dashboard", async () => {
-    const { req, res } = createAuthenticatedMocks({
-      method: "GET",
-      query: {
-        dashboardId: "some-existent-dashboard",
-      },
-    });
-
-    await handler(req, res);
-
-    expect(res._getStatusCode()).toBe(200);
-    expect(res._getJSONData()).toMatchInlineSnapshot(`[]`);
-  });
-
-  it("should generate dashboard for HOME dashboard", async () => {
+  it("should generate dashboard", async () => {
     const { req, res } = createAuthenticatedMocks({
       method: "GET",
       query: {

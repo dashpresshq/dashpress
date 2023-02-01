@@ -14,6 +14,32 @@ export const entitiesApiHandlers = [
           value: "entity-2",
           label: "entity-2",
         },
+        {
+          value: "entity-3",
+          label: "entity-3",
+        },
+        {
+          value: "disabled-entity-1",
+          label: "disabled-entity-1",
+        },
+        {
+          value: "disabled-entity-2",
+          label: "disabled-entity-2",
+        },
+      ])
+    );
+  }),
+  rest.get(BASE_TEST_URL("/api/entities/user"), async (_, res, ctx) => {
+    return res(
+      ctx.json([
+        {
+          value: "entity-1",
+          label: "entity-1",
+        },
+        {
+          value: "entity-2",
+          label: "entity-2",
+        },
       ])
     );
   }),
@@ -31,6 +57,10 @@ export const entitiesApiHandlers = [
         {
           value: "entity-3",
           label: "entity-3",
+        },
+        {
+          value: "entity-4",
+          label: "entity-4",
         },
         {
           value: "disabled-entity-1",

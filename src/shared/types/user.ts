@@ -30,7 +30,7 @@ export interface IAuthenticatedUserBag extends IAccountProfile {
 }
 
 export type IUserPreferences = {
-  theme: "light" | "dark";
+  theme: string;
 };
 
 const CAN_ACCESS_ENTITY = "CAN_ACCESS_ENTITY";

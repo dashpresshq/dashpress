@@ -1,9 +1,9 @@
 import { ButtonLang, IFormProps } from "@hadmean/protozoa";
 import { SchemaForm } from "frontend/components/SchemaForm";
-import { IThemeSettings } from "frontend/_layouts/useAppTheme";
+import { IThemeSettings } from "frontend/_layouts/types";
 import { UPDATE_USER_PREFERENCES_FORM_SCHEMA } from "shared/form-schemas/profile/update";
 
-type Settings = IThemeSettings & { theme: "dark" | "light" };
+type Settings = IThemeSettings & { theme: string };
 
 export function ThemeSettingsForm({
   onSubmit,

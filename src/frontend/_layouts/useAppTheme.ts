@@ -1,20 +1,24 @@
 import { useAppConfiguration } from "frontend/hooks/configuration/configuration.store";
-import { useTheme } from "@hadmean/chromista";
+import { IColorMode, useTheme } from "@hadmean/chromista";
 import { useAuthenticatedUserPreferences } from "frontend/hooks/auth/user.store";
-
-export type IThemeSettings = {
-  primary: string;
-  primaryDark: string;
-};
+import { processThemeColors } from "./portal";
+import { IThemeSettings } from "./types";
+import { getThemePrimaryColor } from "./utils";
 
 export const useAppTheme = () => {
   const themeColor = useAppConfiguration<IThemeSettings>("theme_color");
   const userPreferences = useAuthenticatedUserPreferences();
 
-  const theme = userPreferences.data?.theme || "light";
+  const theme: "light" | "dark" | IColorMode =
+    (userPreferences.data?.theme as "light" | "dark") || "light";
 
-  useTheme(
-    theme === "dark" ? themeColor.data?.primaryDark : themeColor.data?.primary,
-    theme
+  const primaryColor = getThemePrimaryColor(theme, themeColor);
+
+  const processedThemeColors = processThemeColors(
+    primaryColor,
+    theme,
+    themeColor
   );
+
+  useTheme(processedThemeColors.primaryColor, processedThemeColors.theme);
 };

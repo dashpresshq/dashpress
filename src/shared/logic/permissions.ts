@@ -11,6 +11,10 @@ import {
 //     USER_PERMISSIONS.CAN_MANAGE_INTEGRATIONS,
 //     USER_PERMISSIONS.CAN_CONFIGURE_APP,
 //   ],
+//   [
+//     USER_PERMISSIONS.CAN_CONFIGURE_APP,
+//     USER_PERMISSIONS.CAN_MANAGE_ALL_ENTITIES,
+//   ],
 // ];
 
 export const doesPermissionAllowPermission = (

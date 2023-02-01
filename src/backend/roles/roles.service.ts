@@ -6,7 +6,12 @@ import {
 import { BadRequestError } from "backend/lib/errors";
 import { IApplicationService } from "backend/types";
 import { canRoleDoThisAsync } from "shared/logic/permissions";
-import { isSystemRole, makeRoleId, SystemRoles } from "shared/types/user";
+import {
+  isSystemRole,
+  makeRoleId,
+  META_USER_PERMISSIONS,
+  SystemRoles,
+} from "shared/types/user";
 
 export interface IRole {
   id: string;
@@ -52,15 +57,12 @@ export class RolesService implements IApplicationService {
     userRole: string,
     entities: T[],
     entityField: keyof T,
-    applyMeta?: (input: string) => string
+    applyMeta = META_USER_PERMISSIONS.APPLIED_CAN_ACCESS_ENTITY
   ): Promise<T[]> {
     const entitiesCheck = await Promise.all(
       entities.map(async (entity) => {
         const entityValue = entity[entityField] as unknown as string;
-        const permissionCheck = applyMeta
-          ? applyMeta(entityValue)
-          : entityValue;
-
+        const permissionCheck = applyMeta(entityValue);
         return {
           entity,
           hasAccess: await this.canRoleDoThis(userRole, permissionCheck),

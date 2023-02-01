@@ -13,13 +13,11 @@ import {
   useEntityDataDetails,
   useEntityReferenceCount,
 } from "frontend/hooks/data/data.store";
-import {
-  useEntityFieldLabels,
-  useEntityId,
-} from "frontend/hooks/entity/entity.config";
+import { useEntityId } from "frontend/hooks/entity/entity.config";
 import { AppLayout } from "frontend/_layouts/app";
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
+import { useEntityDictionPlurals } from "frontend/hooks/entity/entity.queries";
 import {
   EntityActionTypes,
   useEntityActionMenuItems,
@@ -47,7 +45,6 @@ export function DetailsLayout({ children, entity, menuKey }: IProps) {
 
   const referenceFields = useEntityReferenceFields(entity);
 
-  const getEntityFieldLabels = useEntityFieldLabels();
   const relatedEntities = (referenceFields.data || [])
     .filter(({ type, field }) => {
       if (type === "toMany") {
@@ -62,6 +59,11 @@ export function DetailsLayout({ children, entity, menuKey }: IProps) {
       name: referenceTable,
       label,
     }));
+
+  const getEntitiesDictionPlurals = useEntityDictionPlurals(
+    relatedEntities,
+    "name"
+  );
 
   const relatedEntitiesMap = Object.fromEntries(
     (referenceFields.data || []).map((relatedEntity) => [
@@ -124,7 +126,7 @@ export function DetailsLayout({ children, entity, menuKey }: IProps) {
                   );
 
                   const label =
-                    menuItem.label || getEntityFieldLabels(menuItem.name);
+                    menuItem.label || getEntitiesDictionPlurals(menuItem.name);
 
                   return (
                     <SectionListItem

@@ -1,7 +1,6 @@
 import { IValueLabel } from "@hadmean/chromista/dist/types";
 import { rolesService, RolesService } from "backend/roles/roles.service";
 import { IEntityField, IEntityRelation } from "shared/types/db";
-import { META_USER_PERMISSIONS } from "shared/types/user";
 import {
   ConfigurationService,
   configurationService,
@@ -24,8 +23,7 @@ export class EntitiesController {
     return await this._rolesService.filterPermittedEntities(
       userRole,
       await this._entitiesService.getActiveEntities(),
-      "value",
-      META_USER_PERMISSIONS.APPLIED_CAN_ACCESS_ENTITY
+      "value"
     );
   }
 
@@ -46,8 +44,10 @@ export class EntitiesController {
     return allowedEntityRelation.map(({ table }) => table);
   }
 
-  async getEntityRelations(entity: string): Promise<IEntityRelation[]> {
-    // Hide permission fields
+  async getEntityRelations(
+    entity: string,
+    userRole: string
+  ): Promise<IEntityRelation[]> {
     const [
       entityRelations,
       disabledEntities,
@@ -71,10 +71,15 @@ export class EntitiesController {
       ),
     ]);
 
-    const allowedEntityRelation = entityRelations.filter(
-      ({ table }) =>
-        !disabledEntities.includes(table) && !hiddenEntity.includes(table)
-    );
+    const allowedEntityRelation =
+      await this._rolesService.filterPermittedEntities(
+        userRole,
+        entityRelations.filter(
+          ({ table }) =>
+            !disabledEntities.includes(table) && !hiddenEntity.includes(table)
+        ),
+        "table"
+      );
 
     sortByList(
       allowedEntityRelation as unknown[] as Record<string, unknown>[],

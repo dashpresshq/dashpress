@@ -13,7 +13,6 @@ import {
   ListOrderService,
 } from "backend/list-order/list-order.service";
 import { rolesService, RolesService } from "backend/roles/roles.service";
-import { META_USER_PERMISSIONS } from "shared/types/user";
 import { generatePortalDashboardWidgets } from "./portal";
 
 export class DashboardWidgetsService implements IApplicationService {
@@ -71,8 +70,7 @@ export class DashboardWidgetsService implements IApplicationService {
     return await this._rolesService.filterPermittedEntities(
       userRole,
       await this.listDashboardWidgetsToShow(dashboardId),
-      "entity",
-      META_USER_PERMISSIONS.APPLIED_CAN_ACCESS_ENTITY
+      "entity"
     );
   }
 

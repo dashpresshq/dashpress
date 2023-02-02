@@ -5,3 +5,5 @@ export const usePluginTableMenuItems = (): IDropDownMenuItem[] => {
 
   return menuItems;
 };
+
+export const useSyncPaginatedDataState = () => {};

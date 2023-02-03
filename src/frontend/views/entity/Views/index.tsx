@@ -14,6 +14,7 @@ import {
   useUpsertConfigurationMutation,
 } from "frontend/hooks/configuration/configuration.store";
 import { USER_PERMISSIONS } from "shared/types/user";
+import { useTableColumns } from "frontend/views/data/Table/useTableColumns";
 import { BaseEntitySettingsLayout } from "../_Base";
 import { ENTITY_CONFIGURATION_VIEW } from "../constants";
 import { EntityTableTabForm } from "./Form";
@@ -31,15 +32,20 @@ export function EntityViewsSettings() {
     entity
   );
 
+  const tableColumns = useTableColumns(entity);
+
   useSetPageDetails({
     pageTitle: "Views Settings",
     viewKey: ENTITY_CONFIGURATION_VIEW,
     permission: USER_PERMISSIONS.CAN_CONFIGURE_APP,
   });
 
-  const isLoading = entity === SLUG_LOADING_VALUE || entityViews.isLoading;
+  const isLoading =
+    tableColumns.isLoading ||
+    entity === SLUG_LOADING_VALUE ||
+    entityViews.isLoading;
 
-  const { error } = entityViews;
+  const error = entityViews.error || tableColumns.error;
 
   return (
     <BaseEntitySettingsLayout>
@@ -62,12 +68,15 @@ export function EntityViewsSettings() {
             />
           }
         >
-          <EntityTableTabForm
-            initialValues={entityViews.data || []}
-            onSubmit={async (data) => {
-              await upsertEntityViewsMutation.mutateAsync(data);
-            }}
-          />
+          {!isLoading && (
+            <EntityTableTabForm
+              initialValues={entityViews.data || []}
+              onSubmit={async (data) => {
+                await upsertEntityViewsMutation.mutateAsync(data);
+              }}
+              tableColumns={tableColumns.data || []}
+            />
+          )}
         </ViewStateMachine>
       </SectionBox>
     </BaseEntitySettingsLayout>

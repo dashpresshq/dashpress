@@ -12,56 +12,50 @@ import {
   IPaginatedDataState,
 } from "@hadmean/protozoa";
 import { useEffect, useState } from "react";
-import { QueryFilter } from "shared/types/data";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { NAVIGATION_LINKS } from "../../../lib/routing/links";
-import {
-  useEntityCrudSettings,
-  useEntityDiction,
-  useSelectedEntityColumns,
-} from "../../../hooks/entity/entity.config";
-import { useEntityFields } from "../../../hooks/entity/entity.store";
+import { useEntityDiction } from "../../../hooks/entity/entity.config";
 import { ENTITY_TABLE_PATH } from "../../../hooks/data/data.store";
 import { useTableColumns } from "./useTableColumns";
-import { useDetailsOffCanvasStore } from "./hooks/useDetailsOffCanvas.store";
-import { EntityDetailsView } from "../Details/DetailsView";
-import { useCurrentTableStateStore } from "./hooks/useCurrentTableState.store";
-import { useSyncPaginatedDataState } from "./portal";
+import {
+  useDetailsOffCanvasStore,
+  useCurrentTableStateStore,
+  useEntityPaginatedState,
+} from "./hooks";
 
-interface IProps {
-  entity: string;
-  lean?: true;
-  persitentFilters?: QueryFilter[];
-  defaultTableState?: Pick<
-    IPaginatedDataState<unknown>,
-    "pageSize" | "sortBy" | "filters"
-  >;
-}
+import { EntityDetailsView } from "../Details/DetailsView";
+import { useSyncPaginatedDataState } from "./portal";
+import { ITableViewProps } from "./types";
 
 export function EntityTableView({
   entity,
   lean,
   persitentFilters = [],
   defaultTableState,
-}: IProps) {
-  const entityFields = useEntityFields(entity);
-  const entityCrudSettings = useEntityCrudSettings(entity);
-  const hiddenTableColumns = useSelectedEntityColumns(
-    "hidden_entity_table_columns",
-    entity
-  );
+}: ITableViewProps) {
+  const columns = useTableColumns(entity, lean);
 
   const setGlobalTableState = useCurrentTableStateStore(
     (state) => state.setTableState
   );
 
-  const [paginatedDataState, setPaginatedDataState] = useState<
-    IPaginatedDataState<any>
-  >({ ...DEFAULT_TABLE_STATE, ...defaultTableState });
+  const [paginatedDataState$1, setPaginatedDataState] = useEntityPaginatedState(
+    entity,
+    defaultTableState
+  );
+
+  const [overridePaginatedDataState, setOverridePaginatedDataState] =
+    useState<IPaginatedDataState<unknown>>(DEFAULT_TABLE_STATE);
+
+  useEffect(() => {
+    if (paginatedDataState$1) {
+      setOverridePaginatedDataState(paginatedDataState$1);
+    }
+  }, [entity]);
 
   const currentState: IPaginatedDataState<any> = {
-    ...paginatedDataState,
-    filters: [...paginatedDataState.filters, ...persitentFilters],
+    ...paginatedDataState$1,
+    filters: [...paginatedDataState$1.filters, ...persitentFilters],
   };
 
   useSyncPaginatedDataState();
@@ -79,16 +73,9 @@ export function EntityTableView({
 
   const canvasEntityDiction = useEntityDiction(detailsCanvasEntity);
 
-  const columns = useTableColumns(entity, lean);
+  const { error } = columns;
 
-  const error =
-    entityCrudSettings.error || entityFields.error || hiddenTableColumns.error;
-
-  const isLoading =
-    entityCrudSettings.isLoading ||
-    entityFields.isLoading ||
-    entity === SLUG_LOADING_VALUE ||
-    hiddenTableColumns.isLoading;
+  const isLoading = entity === SLUG_LOADING_VALUE || columns.isLoading;
 
   return (
     <>
@@ -97,15 +84,17 @@ export function EntityTableView({
         loading={isLoading}
         loader={<TableSkeleton lean={lean} />}
       >
-        <Table
-          {...{
-            tableData,
-            setPaginatedDataState,
-            paginatedDataState,
-          }}
-          lean={lean}
-          columns={columns}
-        />
+        {!isLoading && (
+          <Table
+            {...{
+              tableData,
+              syncPaginatedDataStateOut: setPaginatedDataState,
+              overridePaginatedDataState,
+            }}
+            lean={lean}
+            columns={columns.data || []}
+          />
+        )}
       </ViewStateMachine>
 
       <OffCanvas

@@ -40,8 +40,8 @@ export function FEPaginationTable<T extends Record<string, unknown>>({
       <Table
         {...{
           tableData,
-          setPaginatedDataState,
-          paginatedDataState,
+          syncPaginatedDataStateOut: setPaginatedDataState,
+          overridePaginatedDataState: DEFAULT_TABLE_STATE,
         }}
         emptyMessage={emptyMessage}
         columns={columns}

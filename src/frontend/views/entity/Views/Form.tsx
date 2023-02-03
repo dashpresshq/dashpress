@@ -5,6 +5,7 @@ import {
   IFormProps,
   required,
   StringUtils,
+  IPaginatedDataState,
 } from "@hadmean/protozoa";
 import { ITableTab } from "shared/types/data";
 import { Form, Field } from "react-final-form";
@@ -14,6 +15,7 @@ import {
   DeleteButton,
   FormButton,
   FormInput,
+  ITableColumn,
   SoftButton,
   Spacer,
   Stack,
@@ -21,23 +23,19 @@ import {
   Tabs,
 } from "@hadmean/chromista";
 import React, { useState } from "react";
-import {
-  ACTIONS_ACCESSOR,
-  useTableColumns,
-} from "frontend/views/data/Table/useTableColumns";
-import { useEntitySlug } from "frontend/hooks/entity/entity.config";
+import { ACTIONS_ACCESSOR } from "frontend/views/data/Table/useTableColumns";
 
 interface IProps {
   values: ITableTab[];
+  initialValues: ITableTab[];
+  tableColumns: ITableColumn[];
 }
 
-function TabForm({ values }: IProps) {
+function TabForm({ values, tableColumns, initialValues }: IProps) {
   const { fields } = useFieldArray("tabs");
   const [currentTab, setCurrentTab] = useState("");
-  const entity = useEntitySlug();
-  const columns$1 = useTableColumns(entity);
 
-  const columns = columns$1.filter(
+  const columns = tableColumns.filter(
     ({ accessor }) => ACTIONS_ACCESSOR !== accessor
   );
 
@@ -106,8 +104,9 @@ function TabForm({ values }: IProps) {
                         totalRecords: 0,
                       },
                     },
-                    setPaginatedDataState: input.onChange,
-                    paginatedDataState: input.value,
+                    syncPaginatedDataStateOut: input.onChange,
+                    overridePaginatedDataState: initialValues[index]
+                      .dataState as IPaginatedDataState<unknown>,
                   }}
                   columns={columns}
                 />
@@ -127,7 +126,8 @@ function TabForm({ values }: IProps) {
 export function EntityTableTabForm({
   onSubmit,
   initialValues,
-}: IFormProps<ITableTab[]>) {
+  tableColumns,
+}: IFormProps<ITableTab[]> & { tableColumns: ITableColumn[] }) {
   return (
     <Form
       onSubmit={({ tabs }) => onSubmit(tabs)}
@@ -135,7 +135,13 @@ export function EntityTableTabForm({
         ...arrayMutators,
       }}
       initialValues={{ tabs: initialValues }}
-      render={({ handleSubmit, values, pristine, submitting }) => {
+      render={({
+        handleSubmit,
+        values,
+        initialValues: initialFormValues,
+        pristine,
+        submitting,
+      }) => {
         return (
           <>
             <FormButton
@@ -145,7 +151,11 @@ export function EntityTableTabForm({
               disabled={pristine}
             />
             <Spacer />
-            <TabForm values={values.tabs} />
+            <TabForm
+              values={values.tabs}
+              initialValues={initialFormValues.tabs}
+              tableColumns={tableColumns}
+            />
           </>
         );
       }}

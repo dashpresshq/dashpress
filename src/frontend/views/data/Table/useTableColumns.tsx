@@ -12,7 +12,7 @@ import {
   useEntityToOneReferenceFields,
 } from "frontend/hooks/entity/entity.store";
 import { FIELD_TYPES_CONFIG_MAP } from "shared/validations";
-import { StringUtils } from "@hadmean/protozoa";
+import { DataStateKeys, StringUtils } from "@hadmean/protozoa";
 import { ITableColumn } from "@hadmean/chromista";
 import { useMemo } from "react";
 import { IColorableSelection } from "shared/types/ui";
@@ -67,7 +67,10 @@ const buildFilterConfigFromType = (prop: {
   }
 };
 
-export const useTableColumns = (entity: string, lean?: true) => {
+export const useTableColumns = (
+  entity: string,
+  lean?: true
+): Partial<DataStateKeys<ITableColumn[]>> => {
   const getEntityFieldLabels = useEntityFieldLabels(entity);
   const entityCrudSettings = useEntityCrudSettings(entity);
   const entityFields = useEntityFields(entity);
@@ -93,12 +96,31 @@ export const useTableColumns = (entity: string, lean?: true) => {
     (hiddenTableColumns.data || []).length,
   ]);
 
-  /* 
-   A Fix for the Cell that is memoized internall and the value for this is not getting updated
-   so we need to wait for things to load before we render it
-   */
-  if (entityToOneReferenceFields.isLoading || defaultDateFormat.isLoading) {
-    return [];
+  if (
+    entityToOneReferenceFields.isLoading ||
+    defaultDateFormat.isLoading ||
+    entityFields.isLoading ||
+    idField.isLoading ||
+    hiddenTableColumns.isLoading ||
+    entityCrudSettings.isLoading
+  ) {
+    return {
+      isLoading: true,
+    };
+  }
+
+  const error =
+    entityToOneReferenceFields.error ||
+    defaultDateFormat.error ||
+    entityFields.error ||
+    idField.error ||
+    hiddenTableColumns.error ||
+    entityCrudSettings.error;
+
+  if (error) {
+    return {
+      error,
+    };
   }
 
   const columns: ITableColumn[] = columnsToShow.map(({ name, isId }) => {
@@ -173,5 +195,5 @@ export const useTableColumns = (entity: string, lean?: true) => {
       });
     }
   }
-  return columns;
+  return { data: columns };
 };

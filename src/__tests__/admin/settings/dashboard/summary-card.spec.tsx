@@ -109,10 +109,10 @@ describe("pages/admin/settings/dashboard", () => {
         within(widget).getByLabelText("New Summary Card Icon")
       ).toHaveTextContent("Demo SVG");
       expect(within(widget).getByLabelText("Total Count")).toHaveTextContent(
-        "1.39K"
+        "1.52K"
       );
       expect(within(widget).getByLabelText("Relative Count")).toHaveTextContent(
-        "57%"
+        "55%"
       );
       expect(
         within(widget).getByLabelText("Relative Direction")
@@ -148,10 +148,10 @@ describe("pages/admin/settings/dashboard", () => {
       const widget = await screen.findByLabelText("New Summary Card Widget");
 
       expect(within(widget).getByLabelText("Total Count")).toHaveTextContent(
-        "1.39K"
+        "1.52K"
       );
       expect(within(widget).getByLabelText("Relative Count")).toHaveTextContent(
-        "114%"
+        "54%"
       );
       expect(
         within(widget).getByLabelText("Relative Direction")
@@ -238,7 +238,7 @@ describe("pages/admin/settings/dashboard", () => {
         within(widget).getByLabelText("New Summary Card Updated Icon")
       ).toHaveAttribute("color", "#FF165D");
       expect(within(widget).getByLabelText("Total Count")).toHaveTextContent(
-        "1.41K"
+        "1.55K"
       );
       expect(
         within(widget).getByRole("link", { name: "View" })

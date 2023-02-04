@@ -84,9 +84,9 @@ describe("pages/admin/settings/dashboard", () => {
       expect(await getTableRows(widget)).toMatchInlineSnapshot(`
         [
           "Entity 1 Id FieldEntity 1 Reference FieldEntity 1 String FieldEntity 1 Number FieldEntity 1 Boolean FieldEntity 1 Date FieldEntity 1 Enum Field",
-          "159‌hello > p-1,t=5,o=d < 347th May 2022foo",
-          "160‌there > p-1,t=5,o=d < 217th May 2021foo",
-          "161‌today > p-1,t=5,o=d < 187th Feb 2022bar",
+          "186‌hello > p-1,t=5,o=d < 347th May 2022foo",
+          "187‌there > p-1,t=5,o=d < 217th May 2021foo",
+          "188‌today > p-1,t=5,o=d < 187th Feb 2022bar",
         ]
       `);
     });
@@ -152,9 +152,9 @@ describe("pages/admin/settings/dashboard", () => {
       expect(await getTableRows(widget)).toMatchInlineSnapshot(`
         [
           "Entity 2 Id FieldEntity 2 Reference FieldEntity 2 String FieldEntity 2 Number FieldEntity 2 Boolean FieldEntity 2 Date FieldEntity 2 Enum Field",
-          "158‌hello > p-1,t=5,o=a < 347th May 2022foo",
-          "159‌there > p-1,t=5,o=a < 217th May 2021foo",
-          "160‌today > p-1,t=5,o=a < 187th Feb 2022bar",
+          "184‌hello > p-1,t=5,o=a < 347th May 2022foo",
+          "185‌there > p-1,t=5,o=a < 217th May 2021foo",
+          "186‌today > p-1,t=5,o=a < 187th Feb 2022bar",
         ]
       `);
     });

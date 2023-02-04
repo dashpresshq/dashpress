@@ -22,9 +22,8 @@ import {
   useCurrentTableStateStore,
   useEntityPaginatedState,
 } from "./hooks";
-
 import { EntityDetailsView } from "../Details/DetailsView";
-import { useSyncPaginatedDataState } from "./portal";
+import { TableViewComponent, useSyncPaginatedDataState } from "./portal";
 import { ITableViewProps } from "./types";
 
 export function EntityTableView({
@@ -33,6 +32,7 @@ export function EntityTableView({
   persitentFilters = [],
   defaultTableState,
 }: ITableViewProps) {
+  // TODO Use Record<entity, columns> to store this, else you will be using old columns for new entity
   const columns = useTableColumns(entity, lean);
 
   const setGlobalTableState = useCurrentTableStateStore(
@@ -117,6 +117,7 @@ export function EntityTableView({
           )}
         />
       </OffCanvas>
+      <TableViewComponent />
     </>
   );
 }

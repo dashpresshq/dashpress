@@ -1,1 +1,5 @@
-export { usePluginTableMenuItems, useSyncPaginatedDataState } from "./main";
+export {
+  usePluginTableMenuItems,
+  useSyncPaginatedDataState,
+  TableViewComponent,
+} from "./main";

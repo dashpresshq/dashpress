@@ -24,7 +24,8 @@ export const requestHandler =
         (
           getRequest: <T extends ValidationKeys["_type"]>(
             key: GetValidatedRequestOptions<T>
-          ) => Promise<Record<T, any>>
+          ) => Promise<Record<T, any>>,
+          res: NextApiResponse
         ) => unknown
       >
     >,
@@ -82,8 +83,13 @@ export const requestHandler =
               })
             )
           );
-        }
+        },
+        res
       );
+
+      if (res.hasHeader("Content-Type")) {
+        return;
+      }
 
       return res.status(RequestMethodResponseCode[req.method]).json(response);
     } catch (error) {

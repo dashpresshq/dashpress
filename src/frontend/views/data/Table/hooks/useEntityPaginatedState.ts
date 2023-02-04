@@ -1,6 +1,6 @@
 import { DEFAULT_TABLE_STATE } from "@hadmean/chromista";
 import { IPaginatedDataState } from "@hadmean/protozoa";
-import { useEffect, useState } from "react";
+import { useContextState } from "frontend/hooks/state";
 import { ITableViewProps } from "../types";
 
 export const useEntityPaginatedState = (
@@ -9,25 +9,8 @@ export const useEntityPaginatedState = (
 ) => {
   const pristineState = { ...DEFAULT_TABLE_STATE, ...defaultTableState };
 
-  const [entityPaginatedDataState, setEntityPaginatedDataState] = useState<
-    Record<string, IPaginatedDataState<any>>
-  >({});
+  const [entityPaginatedDataState, setEntityPaginatedDataState] =
+    useContextState<IPaginatedDataState<any>>(entity, pristineState);
 
-  const setPaginatedDataState = (dataState: IPaginatedDataState<any>) => {
-    setEntityPaginatedDataState({
-      ...entityPaginatedDataState,
-      [entity]: dataState,
-    });
-  };
-
-  useEffect(() => {
-    if (!entityPaginatedDataState[entity]) {
-      setPaginatedDataState(pristineState);
-    }
-  }, [entity]);
-
-  return [
-    entityPaginatedDataState[entity] || pristineState,
-    setPaginatedDataState,
-  ] as const;
+  return [entityPaginatedDataState, setEntityPaginatedDataState] as const;
 };

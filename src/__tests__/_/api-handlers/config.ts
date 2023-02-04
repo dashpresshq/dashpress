@@ -5,16 +5,16 @@ import { BASE_TEST_URL } from "./_utils";
 
 const ENTITY_CONFIG = {};
 
-const ENTITY_VIEWS: ITableTab[] = [
+const ENTITY_VIEWS = (entity: string): ITableTab[] => [
   {
     id: "foo",
     title: "Verified Entity View",
     dataState: {
       pageSize: 15,
-      sortBy: [{ id: "userName", desc: true }],
+      sortBy: [{ id: `${entity}-string-field`, desc: true }],
       filters: [
         {
-          id: "verified",
+          id: `${entity}-boolean-field`,
           value: {
             operator: FilterOperators.EQUAL_TO,
             value: true,
@@ -28,10 +28,10 @@ const ENTITY_VIEWS: ITableTab[] = [
     title: "User Entity View",
     dataState: {
       pageSize: 16,
-      sortBy: [{ id: "userName", desc: false }],
+      sortBy: [{ id: `${entity}-string-field`, desc: false }],
       filters: [
         {
-          id: "username",
+          id: `${entity}-string-field`,
           value: {
             operator: FilterOperators.CONTAINS,
             value: "root",
@@ -48,7 +48,7 @@ const ENTITY_VIEWS: ITableTab[] = [
       sortBy: [],
       filters: [
         {
-          id: "age",
+          id: `${entity}-number-field`,
           value: {
             operator: FilterOperators.BETWEEN,
             value: 2,
@@ -104,7 +104,7 @@ const DEFAULT_ENTITY_CONFIG_VALUES: Record<
     "related-entity-2": "Custom Label For Entity 2",
     "related-entity-4": "Custom Label For Entity 4",
   }),
-  entity_views: () => ENTITY_VIEWS,
+  entity_views: (entity) => ENTITY_VIEWS(entity),
   hidden_entity_table_columns: () => ["hidden-field-1"],
   hidden_entity_create_columns: () => ["hidden-field-1"],
   hidden_entity_update_columns: () => ["hidden-field-1"],

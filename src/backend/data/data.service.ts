@@ -44,7 +44,7 @@ export class DataService implements IApplicationService {
     select: string[],
     queryFilter: QueryFilter[],
     dataFetchingModifiers: IPaginationFilters
-  ): Promise<string | number> {
+  ): Promise<Record<string, unknown>[]> {
     return await this.getDataAccessInstance().list(
       entity,
       select,
@@ -252,7 +252,7 @@ export class DataService implements IApplicationService {
     return await this.getDataAccessInstance().count(entity, queryFilter);
   }
 
-  private async getAllowedCrudsFieldsToShow(
+  async getAllowedCrudsFieldsToShow(
     entity: string,
     crudKey:
       | "hidden_entity_details_columns"

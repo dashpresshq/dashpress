@@ -7,3 +7,7 @@ export const usePluginTableMenuItems = (): IDropDownMenuItem[] => {
 };
 
 export const useSyncPaginatedDataState = () => {};
+
+export function TableViewComponent() {
+  return <span />;
+}

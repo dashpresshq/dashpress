@@ -51,7 +51,7 @@ describe("/api/integrations/env", () => {
     expect(res._getJSONData()).toMatchInlineSnapshot(`
       {
         "errorCode": "",
-        "message": "Your account doesn't have enough priviledge to perform this action",
+        "message": "Your account doesn't have enough priviledge to perform this action: (Can Configure App)",
         "method": "GET",
         "name": "ForbiddenError",
         "path": "",

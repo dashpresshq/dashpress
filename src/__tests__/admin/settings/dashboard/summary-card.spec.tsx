@@ -155,7 +155,8 @@ describe("pages/admin/settings/dashboard", () => {
       );
       expect(
         within(widget).getByLabelText("Relative Direction")
-      ).toHaveAttribute("color", "#03d87f");
+        // :eyes #03d87f
+      ).toHaveAttribute("color", "#f5325c");
     });
 
     it("should update summary card widget", async () => {

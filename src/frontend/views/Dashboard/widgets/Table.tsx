@@ -22,7 +22,6 @@ export function TableWidget({
     "entity_views",
     config.entity
   );
-
   const dataState = (entityViews.data || []).find(
     ({ id }) => id === queryId
   )?.dataState;

@@ -102,7 +102,7 @@ describe("/api/integrations/credentials/reveal", () => {
     expect(res._getJSONData()).toMatchInlineSnapshot(`
       {
         "errorCode": "",
-        "message": "Your account doesn't have enough priviledge to perform this action",
+        "message": "Your account doesn't have enough priviledge to perform this action: (Can Manage Integrations)",
         "method": "POST",
         "name": "ForbiddenError",
         "path": "",

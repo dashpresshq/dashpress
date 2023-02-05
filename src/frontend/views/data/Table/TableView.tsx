@@ -1,29 +1,19 @@
 import {
   OffCanvas,
   Table,
-  DEFAULT_TABLE_STATE,
   SoftButton,
   Spacer,
   TableSkeleton,
 } from "@hadmean/chromista";
-import {
-  usePaginatedData,
-  SLUG_LOADING_VALUE,
-  IPaginatedDataState,
-} from "@hadmean/protozoa";
-import { useEffect, useState } from "react";
+import { usePaginatedData, SLUG_LOADING_VALUE } from "@hadmean/protozoa";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { NAVIGATION_LINKS } from "../../../lib/routing/links";
 import { useEntityDiction } from "../../../hooks/entity/entity.config";
 import { ENTITY_TABLE_PATH } from "../../../hooks/data/data.store";
 import { useTableColumns } from "./useTableColumns";
-import {
-  useDetailsOffCanvasStore,
-  useCurrentTableStateStore,
-  useEntityPaginatedState,
-} from "./hooks";
+import { useDetailsOffCanvasStore, useTableState } from "./hooks";
 import { EntityDetailsView } from "../Details/DetailsView";
-import { TableViewComponent, useSyncPaginatedDataState } from "./portal";
+import { TableViewComponent } from "./portal";
 import { ITableViewProps } from "./types";
 
 export function EntityTableView({
@@ -35,34 +25,8 @@ export function EntityTableView({
   // TODO Use Record<entity, columns> to store this, else you will be using old columns for new entity
   const columns = useTableColumns(entity, lean);
 
-  const setGlobalTableState = useCurrentTableStateStore(
-    (state) => state.setTableState
-  );
-
-  const [paginatedDataState$1, setPaginatedDataState] = useEntityPaginatedState(
-    entity,
-    defaultTableState
-  );
-
-  const [overridePaginatedDataState, setOverridePaginatedDataState] =
-    useState<IPaginatedDataState<unknown>>(DEFAULT_TABLE_STATE);
-
-  useEffect(() => {
-    if (paginatedDataState$1) {
-      setOverridePaginatedDataState(paginatedDataState$1);
-    }
-  }, [entity]);
-
-  const currentState: IPaginatedDataState<any> = {
-    ...paginatedDataState$1,
-    filters: [...paginatedDataState$1.filters, ...persitentFilters],
-  };
-
-  useSyncPaginatedDataState();
-
-  useEffect(() => {
-    setGlobalTableState(currentState);
-  }, [JSON.stringify(currentState)]);
+  const [currentState, overridePaginatedDataState, setPaginatedDataState] =
+    useTableState(entity, persitentFilters, defaultTableState);
 
   const tableData = usePaginatedData(ENTITY_TABLE_PATH(entity), currentState, {
     enabled: entity && entity !== SLUG_LOADING_VALUE,

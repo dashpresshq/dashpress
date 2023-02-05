@@ -45,7 +45,7 @@ describe("Request Validations => canUserValidationImpl", () => {
     expect(res._getJSONData()).toMatchInlineSnapshot(`
       {
         "errorCode": "",
-        "message": "Your account doesn't have enough priviledge to perform this action",
+        "message": "Your account doesn't have enough priviledge to perform this action: (Can Manage Dashboard)",
         "method": "GET",
         "name": "ForbiddenError",
         "path": "",

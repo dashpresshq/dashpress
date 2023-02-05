@@ -100,5 +100,23 @@ describe("user role checks", () => {
         )
       ).toBe(false);
     });
+
+    it("should return true for PERMISSION_HEIRACHIES down", () => {
+      expect(
+        doesPermissionAllowPermission(
+          ["CAN_RESET_PASSWORD", "PERMISSION_2"],
+          "CAN_MANAGE_USERS"
+        )
+      ).toBe(true);
+    });
+
+    it("should return false for PERMISSION_HEIRACHIES down", () => {
+      expect(
+        doesPermissionAllowPermission(
+          ["CAN_MANAGE_USERS", "PERMISSION_2"],
+          "CAN_RESET_PASSWORD"
+        )
+      ).toBe(false);
+    });
   });
 });

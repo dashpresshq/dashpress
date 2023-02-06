@@ -33,7 +33,7 @@ describe("AppLayout", () => {
         </AppWrapper>
       );
 
-      expect(screen.queryByText("Give Us A Star")).not.toBeInTheDocument();
+      expect(screen.queryByText("Star us on Github")).not.toBeInTheDocument();
     });
 
     it("should show demo elements when NEXT_PUBLIC_IS_DEMO is true", async () => {
@@ -45,7 +45,7 @@ describe("AppLayout", () => {
       );
 
       expect(
-        await screen.findByRole("button", { name: "Give Us A Star" })
+        await screen.findByRole("button", { name: "Star us on Github" })
       ).toBeInTheDocument();
     });
   });

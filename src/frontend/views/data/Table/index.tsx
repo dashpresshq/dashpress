@@ -7,8 +7,8 @@ import { ITableTab, QueryFilter } from "shared/types/data";
 import {
   DEFAULT_TABLE_STATE,
   StyledCard,
-  TableSkeleton,
   Tabs,
+  TableSkeleton,
 } from "@hadmean/chromista";
 import { useEntityConfiguration } from "frontend/hooks/configuration/configuration.store";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";

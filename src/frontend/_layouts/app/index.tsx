@@ -131,7 +131,7 @@ export function AppLayout({
                 menuItems={[
                   {
                     IconComponent: GitHub,
-                    label: "Give Us A Star",
+                    label: "Star us on Github",
                     description: `Tell us Hadmean is a useful project by dropping us a star`,
                     onClick: () => {
                       window.open("https://github.com/hadmean/hadmean");

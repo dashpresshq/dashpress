@@ -1,8 +1,4 @@
-import {
-  FormSkeleton,
-  FormSkeletonSchema,
-  OffCanvas,
-} from "@hadmean/chromista";
+import { FormSkeleton, FormSkeletonSchema } from "@hadmean/chromista";
 import styled from "styled-components";
 import { Check, Plus } from "react-feather";
 import { useSetPageDetails } from "frontend/lib/routing";
@@ -14,6 +10,8 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import { useActiveEntities } from "frontend/hooks/entity/entity.store";
 import { nanoid } from "nanoid";
+import dynamic from "next/dynamic";
+import { IOffCanvasProps } from "@hadmean/chromista/dist/components/OffCanvas/types";
 import { AppLayout } from "../../_layouts/app";
 import { DashboardWidget } from "./widgets";
 import {
@@ -40,6 +38,14 @@ interface IProps {
   doneLink: string;
   title: string;
 }
+
+const DynamicOffCanvas = dynamic<IOffCanvasProps>(
+  () => import("@hadmean/chromista").then((mod) => mod.OffCanvas),
+  {
+    ssr: false,
+    loading: () => <p>Loading...</p>,
+  }
+);
 
 export function BaseManageDashboard({ dashboardId, doneLink, title }: IProps) {
   const router = useRouter();
@@ -123,7 +129,7 @@ export function BaseManageDashboard({ dashboardId, doneLink, title }: IProps) {
           </Root>
         </ViewStateMachine>
       </AppLayout>
-      <OffCanvas
+      <DynamicOffCanvas
         title={
           currentDashboardItem === NEW_DASHBOARD_ITEM
             ? "New Dashboard Item"
@@ -164,7 +170,7 @@ export function BaseManageDashboard({ dashboardId, doneLink, title }: IProps) {
             )}
           />
         </ViewStateMachine>
-      </OffCanvas>
+      </DynamicOffCanvas>
     </>
   );
 }

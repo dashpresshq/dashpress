@@ -69,7 +69,7 @@ export function EntityTable() {
           filters: (dataState.filters as QueryFilter[]) || [],
         }))
   );
-
+  // TODO Sync current tab to state so that we can have it back to state
   return (
     <AppLayout actionItems={menuItems} secondaryActionItems={actionItems}>
       <StyledCard>
@@ -95,6 +95,7 @@ export function EntityTable() {
                     content: (
                       <EntityTableView
                         entity={entity}
+                        contextKey={title}
                         defaultTableState={dataState}
                       />
                     ),

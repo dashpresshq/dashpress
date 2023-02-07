@@ -110,6 +110,7 @@ export function BaseActionInstances({ entity, integrationKey }: IProps) {
           emptyMessage={`No Form Integration Has Been Registered For This ${
             entity ? "Entity" : "Action"
           }`}
+          border
           dataEndpoint={dataEndpoint}
           columns={[
             integrationKey

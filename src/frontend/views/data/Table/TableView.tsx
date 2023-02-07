@@ -19,6 +19,8 @@ import { ITableViewProps } from "./types";
 export function EntityTableView({
   entity,
   lean,
+  border,
+  contextKey = "",
   persitentFilters = [],
   defaultTableState,
 }: ITableViewProps) {
@@ -26,7 +28,11 @@ export function EntityTableView({
   const columns = useTableColumns(entity, lean);
 
   const [currentState, overridePaginatedDataState, setPaginatedDataState] =
-    useTableState(entity, persitentFilters, defaultTableState);
+    useTableState(
+      `${entity}${contextKey}`,
+      persitentFilters,
+      defaultTableState
+    );
 
   const tableData = usePaginatedData(ENTITY_TABLE_PATH(entity), currentState, {
     enabled: entity && entity !== SLUG_LOADING_VALUE,
@@ -55,6 +61,7 @@ export function EntityTableView({
               syncPaginatedDataStateOut: setPaginatedDataState,
               overridePaginatedDataState,
             }}
+            border={border}
             lean={lean}
             columns={columns.data || []}
           />

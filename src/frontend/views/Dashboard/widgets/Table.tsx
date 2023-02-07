@@ -35,6 +35,7 @@ export function TableWidget({
           entity={entityViews.isLoading ? SLUG_LOADING_VALUE : entity}
           defaultTableState={{ ...dataState, pageSize: 5 }}
           lean
+          border
         />
       </StyledBox>
     </StyledCard>

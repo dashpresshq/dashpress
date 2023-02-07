@@ -4,7 +4,7 @@ import { useContextState } from "frontend/hooks/state";
 import { ITableViewProps } from "../types";
 
 export const useEntityContextState = (
-  entity: string,
+  contextKey: string,
   defaultTableState: ITableViewProps["defaultTableState"]
 ) => {
   const pristineState = { ...DEFAULT_TABLE_STATE, ...defaultTableState };
@@ -12,7 +12,7 @@ export const useEntityContextState = (
   const [entityPaginatedDataState, setEntityPaginatedDataState] =
     useContextState<IPaginatedDataState<any>>(
       "entities",
-      entity,
+      contextKey,
       pristineState
     );
 

@@ -7,7 +7,7 @@ import { useCurrentTableStateStore } from "./useCurrentTableState.store";
 import { useEntityContextState } from "./useEntityContextState";
 
 export const useTableState = (
-  entity: string,
+  contextKey: string,
   persitentFilters: ITableViewProps["persitentFilters"],
   defaultTableState?: ITableViewProps["defaultTableState"]
 ) => {
@@ -15,7 +15,7 @@ export const useTableState = (
   // For different entity views
   // So this is as good as useState but with entity context
   const [paginatedDataState, setPaginatedDataState] = useEntityContextState(
-    entity,
+    contextKey,
     defaultTableState
   );
 
@@ -43,7 +43,7 @@ export const useTableState = (
     if (paginatedDataState) {
       setOverridePaginatedDataState(paginatedDataState);
     }
-  }, [entity]);
+  }, [contextKey]);
 
   // Sync the current state to the global state
   useEffect(() => {

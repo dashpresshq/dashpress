@@ -14,12 +14,14 @@ interface IProps {
   columns: ITableColumn[];
   dataEndpoint: string;
   emptyMessage?: string;
+  border?: true;
 }
 
 export function FEPaginationTable<T extends Record<string, unknown>>({
   columns,
   dataEndpoint,
   emptyMessage,
+  border,
 }: IProps) {
   const [paginatedDataState, setPaginatedDataState] =
     useState<IPaginatedDataState<unknown>>(DEFAULT_TABLE_STATE);
@@ -43,6 +45,7 @@ export function FEPaginationTable<T extends Record<string, unknown>>({
           syncPaginatedDataStateOut: setPaginatedDataState,
           overridePaginatedDataState: DEFAULT_TABLE_STATE,
         }}
+        border={border}
         emptyMessage={emptyMessage}
         columns={columns}
       />

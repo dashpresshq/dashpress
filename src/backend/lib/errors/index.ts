@@ -1,5 +1,5 @@
 /* eslint max-classes-per-file: ["error", 5] */
-import { NextApiRequest, NextApiResponse } from "next";
+import { NextApiRequest } from "next";
 
 export class CustomError extends Error {
   code: number;
@@ -48,19 +48,7 @@ export function progammingError(errorMessage: string, throwWhen: boolean) {
   }
 }
 
-const returnError = (
-  res: NextApiResponse,
-  statusCode: number,
-  errorBody: Record<string, unknown>
-) => {
-  return res.status(statusCode).json(errorBody);
-};
-
-export const handleResponseError = (
-  req: NextApiRequest,
-  res: NextApiResponse,
-  error: any
-) => {
+export const handleResponseError = (req: NextApiRequest, error: any) => {
   const baseErrorOptions = {
     path: req.url,
     method: req.method,
@@ -70,18 +58,18 @@ export const handleResponseError = (
     console.error(error);
   }
   if (error instanceof CustomError) {
-    return returnError(res, error.code, {
+    return {
       message: error.message,
       statusCode: error.code,
       name: error.name,
       errorCode: error.errorCode,
       validations: error?.validations,
       ...baseErrorOptions,
-    });
+    };
   }
-  return returnError(res, 500, {
+  return {
     message: error.message,
     statusCode: 500,
     ...baseErrorOptions,
-  });
+  };
 };

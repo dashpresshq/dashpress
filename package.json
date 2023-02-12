@@ -30,14 +30,14 @@
   "bin": "./bin/hadmean",
   "dependencies": {
     "@hadmean/bacteria": "^0.0.7",
-    "@hadmean/chromista": "^1.0.78",
+    "@hadmean/chromista": "^1.0.80",
     "@hadmean/protozoa": "^1.0.20",
     "@types/cryptr": "^4.0.1",
     "@types/jsonwebtoken": "^8.5.8",
+    "@types/microseconds": "^0.2.0",
     "@types/multer": "^1.4.7",
     "@types/nodemailer": "^6.4.6",
     "bcrypt": "^5.0.1",
-    "chalk": "^5.0.1",
     "change-case": "^4.1.2",
     "class-validator": "^0.13.2",
     "cryptr": "^6.0.3",
@@ -47,6 +47,7 @@
     "jsonwebtoken": "^8.5.1",
     "knex": "^2.3.0",
     "lodash": "^4.17.21",
+    "microseconds": "^0.2.0",
     "multer": "^1.4.5-lts.1",
     "mustache": "^4.2.0",
     "nanoid": "^4.0.0",
@@ -63,7 +64,8 @@
     "react-use": "^17.4.0",
     "redis": "^4.4.0",
     "styled-components": "^5.3.6",
-    "terminal-link": "^3.0.0"
+    "terminal-link": "^3.0.0",
+    "winston": "^3.8.2"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.18.10",

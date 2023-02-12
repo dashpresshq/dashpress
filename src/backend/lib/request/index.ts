@@ -1,8 +1,10 @@
 import { NextApiRequest, NextApiResponse } from "next";
+import * as μs from "microseconds";
 import { handleResponseError } from "../errors";
 import { RequestMethod, RequestMethodResponseCode } from "./methods";
 import { ValidationKeys } from "./validations/types";
 import { ValidationImpl } from "./validations/implementations";
+import { logger } from "./logging";
 
 /*
  The function below chooses 
@@ -32,7 +34,8 @@ export const requestHandler =
     validations?: ValidationKeys[]
   ) =>
   async (req: NextApiRequest, res: NextApiResponse) => {
-    //
+    const before = μs.now();
+
     const validationsToRun = (validations || []).filter((validation) => {
       if (!validation.method) {
         return true;
@@ -91,10 +94,15 @@ export const requestHandler =
       if (res.hasHeader("Content-Type")) {
         return;
       }
+      const since = Math.round(μs.since(before) / 1000);
+
+      logger.http(`${req.method} ${req.url} ${since}ms`);
 
       return res.status(RequestMethodResponseCode[req.method]).json(response);
     } catch (error) {
-      return handleResponseError(req, res, error);
+      const errorResponse = handleResponseError(req, error);
+      logger.error(`${req.method} ${req.url} ${JSON.stringify(errorResponse)}`);
+
+      return res.status(errorResponse.statusCode).json(errorResponse);
     }
-    //
   };

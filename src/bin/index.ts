@@ -5,7 +5,6 @@
   const fs = require("fs-extra");
   const { StringUtils } = require("@hadmean/protozoa");
   const { default: terminalLink } = await import("terminal-link");
-  const { default: c } = await import("chalk");
   const { execa } = await import("execa");
 
   const { default: fetch } = await import("node-fetch");
@@ -75,20 +74,20 @@
 
   const endpoint = `http://localhost:${process.env.PORT || 3000}`;
 
-  console.log(`🎉 ${terminalLink("Open the application", endpoint)}
-  
-      ${c.bold("Next steps:")}
-  
-      - ${terminalLink("Read the documentation", "https://hadmean.com")}
-  
-      - ${terminalLink(
-        "Star Hadmean on GitHub",
-        "https://github.com/hadmean/hadmean"
-      )}
+  console.log(`- ${terminalLink(
+    "Show us support by dropping a ✨ on GitHub",
+    "https://github.com/hadmean/hadmean"
+  )}
 
-      - ${terminalLink("Join our community", "https://discord.gg/aV6DxwXhzN")}
+- ${terminalLink(
+    "If you have questions? Join our community",
+    "https://discord.gg/aV6DxwXhzN"
+  )}
 
-      - ${terminalLink("Follow us on Twitter", "https://twitter.com/hadmeanHQ")}
+- ${terminalLink(
+    "Follow us on Twitter to get latest updates",
+    "https://twitter.com/hadmeanHQ"
+  )}
     `);
 
   const { stdout, stderr } = execa("npm", ["run", "start:prod"], {
@@ -96,6 +95,10 @@
   });
 
   const WAIT_FOR_NEXT_TO_START = 1000;
+
+  console.log(
+    `🎉 Application started successfully at ${terminalLink(endpoint, endpoint)}`
+  );
 
   /*
   We want to ping the application to bootstrap itself from here

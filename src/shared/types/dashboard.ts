@@ -18,4 +18,4 @@ export interface ISummaryWidgetConfig extends ISharedWidgetConfig {
 
 export type IWidgetConfig = ITableWidgetConfig | ISummaryWidgetConfig;
 
-export const HOME_DASHBOARD_KEY = "__home__dasboard";
+export const HOME_DASHBOARD_KEY = "__home__dashboard";

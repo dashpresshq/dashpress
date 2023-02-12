@@ -92,6 +92,8 @@ export function ListUsers() {
             },
             {
               Header: "Action",
+              disableSortBy: true,
+              accessor: "__action__",
               Cell: MemoizedAction,
             },
           ]}

@@ -5,7 +5,7 @@ import {
   SoftButton,
   Spacer,
   Stack,
-  Text,
+  Typo,
 } from "@hadmean/chromista";
 import { IntegrationsConfigurationGroup } from "shared/types/integrations";
 import { LINK_TO_DOCS } from "frontend/views/constants";
@@ -153,6 +153,8 @@ export function ManageCredentialGroup({
   if (canManageAction) {
     tableColumns.push({
       Header: "Action",
+      disableSortBy: true,
+      accessor: "__action__",
       Cell: MemoizedAction,
     });
   }
@@ -165,10 +167,10 @@ export function ManageCredentialGroup({
           (tableData?.data || []).length > 0 &&
           !revealedCredentials.data && (
             <Spacer>
-              <Text textStyle="italic" size="5">
+              <Typo.SM textStyle="italic">
                 For security reasons, Please input your account password to be
                 able to reveal values
-              </Text>
+              </Typo.SM>
               <Spacer />
               <SchemaForm
                 fields={{
@@ -194,10 +196,10 @@ export function ManageCredentialGroup({
           )}
         {!canManageAction && (tableData?.data || []).length > 0 && (
           <Spacer>
-            <Text textStyle="italic" size="5">
+            <Typo.SM textStyle="italic">
               Your account does not have the permission to view secret values or
               manage them
-            </Text>
+            </Typo.SM>
           </Spacer>
         )}
       </section>

@@ -6,7 +6,7 @@ import {
   IDropDownMenuItem,
   Spacer,
   Stack,
-  Text,
+  Typo,
 } from "@hadmean/chromista";
 import React, { ReactNode, useEffect } from "react";
 import Head from "next/head";
@@ -115,7 +115,7 @@ export function AppLayout({
       </Head>
       <Stack justify="space-between" align="center">
         <div>
-          <Text>{pageTitle}</Text>
+          <Typo.MD>{pageTitle}</Typo.MD>
           <Breadcrumbs items={homedBreadcrumb} onCrumbClick={goToLinkIndex} />
         </div>
         <div>

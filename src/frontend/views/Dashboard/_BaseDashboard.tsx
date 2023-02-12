@@ -63,7 +63,6 @@ export function BaseDashboard({ dashboardId, showDemo, manageLink }: IProps) {
         loader={<DashboardSkeleton />}
       >
         <Root>
-          {/* TODO Filter out the entites that the user can see */}
           {(widgets.data || []).map((config) => (
             <DashboardWidget config={config} key={config.id} />
           ))}

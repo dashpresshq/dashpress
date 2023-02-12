@@ -137,15 +137,14 @@ export const useTableColumns = (
       disableSortBy: lean
         ? true
         : !FIELD_TYPES_CONFIG_MAP[entityFieldTypes[name]]?.sortable,
-      Cell: ({ value }: { value: unknown }) => {
+      Cell: ({ row }: { row: Record<string, unknown> }) => {
+        const value = row.original[name];
         if (value === undefined || value === null) {
           return null;
         }
-
         if (isId) {
           return <span>{value as string}</span>;
         }
-
         const specialDataTypeRender = viewSpecialDataTypes(
           name,
           value,
@@ -157,19 +156,15 @@ export const useTableColumns = (
             defaultDateFormat: defaultDateFormat.data,
           }
         );
-
         if (specialDataTypeRender) {
           return specialDataTypeRender;
         }
-
         if (typeof value === "string") {
           return <>{StringUtils.ellipsis(value as string, 50)}</>;
         }
-
         if (typeof value === "object") {
           return <>{JSON.stringify(value)}</>;
         }
-
         return <span>{value as string}</span>;
       },
     };

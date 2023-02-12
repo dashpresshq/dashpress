@@ -32,6 +32,7 @@ export const requestHandler =
     validations?: ValidationKeys[]
   ) =>
   async (req: NextApiRequest, res: NextApiResponse) => {
+    //
     const validationsToRun = (validations || []).filter((validation) => {
       if (!validation.method) {
         return true;
@@ -95,4 +96,5 @@ export const requestHandler =
     } catch (error) {
       return handleResponseError(req, res, error);
     }
+    //
   };

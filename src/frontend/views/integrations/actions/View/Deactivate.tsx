@@ -1,4 +1,4 @@
-import { Stack, Text, Spacer } from "@hadmean/chromista";
+import { Stack, Typo, Spacer } from "@hadmean/chromista";
 import { HTTP_INTEGRATION_KEY, IIntegrationsList } from "shared/types/actions";
 import { SchemaForm } from "frontend/components/SchemaForm";
 import { useDeactivateActionMutation } from "../actions.store";
@@ -16,19 +16,19 @@ export function Deactivate({ integrationDetail, activationId }: IProps) {
   if (integrationDetail.key === HTTP_INTEGRATION_KEY) {
     return (
       <Stack justify="center">
-        <Text textStyle="italic" size="5">
+        <Typo.SM textStyle="italic">
           The HTTP action can not be deactivated
-        </Text>
+        </Typo.SM>
       </Stack>
     );
   }
 
   return (
     <>
-      <Text textStyle="italic" size="5">
+      <Typo.SM textStyle="italic">
         Deactivating an action will irrevocabily delete its configurations and
         remove all its instances
-      </Text>
+      </Typo.SM>
       <Spacer />
       <SchemaForm
         fields={{

@@ -1,4 +1,4 @@
-import { Spacer, Stack, Text } from "@hadmean/chromista";
+import { Spacer, Stack, Typo } from "@hadmean/chromista";
 import { ToastService } from "@hadmean/protozoa";
 import { SchemaForm } from "frontend/components/SchemaForm";
 import { useEffect } from "react";
@@ -30,9 +30,9 @@ export function Configure({ activationId, integrationDetail }: IProps) {
   if (Object.keys(integrationDetail.configurationSchema).length === 0) {
     return (
       <Stack justify="center">
-        <Text textStyle="italic" size="5">
+        <Typo.SM textStyle="italic">
           This action does not have configuration
-        </Text>
+        </Typo.SM>
       </Stack>
     );
   }
@@ -44,10 +44,10 @@ export function Configure({ activationId, integrationDetail }: IProps) {
   ) {
     return (
       <>
-        <Text textStyle="italic" size="5">
+        <Typo.SM textStyle="italic">
           For security reasons, Please input your account password to reveal
           this action configuration
-        </Text>
+        </Typo.SM>
         <Spacer />
         <SchemaForm
           fields={{

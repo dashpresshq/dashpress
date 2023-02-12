@@ -1,4 +1,4 @@
-import { BaseSkeleton, Spacer, Text } from "@hadmean/chromista";
+import { BaseSkeleton, Spacer, Typo } from "@hadmean/chromista";
 import { SLUG_LOADING_VALUE } from "@hadmean/protozoa";
 import React, { Fragment } from "react";
 import { useAppConfiguration } from "frontend/hooks/configuration/configuration.store";
@@ -99,13 +99,13 @@ export function EntityDetailsView({
             }
           );
 
-          const contentToRender = specialDataTypeRender || <Text>{value}</Text>;
+          const contentToRender = specialDataTypeRender || (
+            <Typo.MD>{value}</Typo.MD>
+          );
 
           return (
             <React.Fragment key={name}>
-              <Text size="6" weight="bold">
-                {getEntityFieldLabels(name)}
-              </Text>
+              <Typo.XS weight="bold">{getEntityFieldLabels(name)}</Typo.XS>
               {contentToRender}
               <Spacer />
             </React.Fragment>

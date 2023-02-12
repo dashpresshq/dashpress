@@ -106,7 +106,6 @@ export function BaseManageDashboard({ dashboardId, doneLink, title }: IProps) {
             >
               {(widgets.data || []).map((config) => (
                 <SortableItem key={config.id}>
-                  {/* TODO Filter out the entites that the user can see */}
                   <DashboardWidget
                     config={config}
                     setting={{

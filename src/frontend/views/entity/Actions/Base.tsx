@@ -5,8 +5,8 @@ import {
   SoftButton,
   Spacer,
   Stack,
-  Text,
   TableSkeleton,
+  Typo,
 } from "@hadmean/chromista";
 import { SLUG_LOADING_VALUE, useApi } from "@hadmean/protozoa";
 import { useActiveEntities } from "frontend/hooks/entity/entity.store";
@@ -144,6 +144,8 @@ export function BaseActionInstances({ entity, integrationKey }: IProps) {
             },
             {
               Header: "Action",
+              disableSortBy: true,
+              accessor: "__action__",
               Cell: MemoizedAction,
             },
           ]}
@@ -158,19 +160,19 @@ export function BaseActionInstances({ entity, integrationKey }: IProps) {
         onClose={closeConfigItem}
         show={!!currentInstanceId}
       >
-        <Text textStyle="italic" size="5">
+        <Typo.SM textStyle="italic">
           Use your {`{{`}
           {INTEGRATIONS_GROUP_CONFIG.credentials.prefix}.ENTRY{`}}`} and {`{{`}
           {INTEGRATIONS_GROUP_CONFIG.constants.prefix}.ENTRY
           {`}}`} here.
-        </Text>
+        </Typo.SM>
         <Spacer />
-        <Text textStyle="italic" size="5">
+        <Typo.SM textStyle="italic">
           {" "}
           Access the current data with {`{{`}
           data.anyValidEntityField
           {`}}`}
-        </Text>
+        </Typo.SM>
         <Spacer />
         <ActionForm
           onSubmit={async (data) => {

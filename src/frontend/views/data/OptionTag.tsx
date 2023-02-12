@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Text } from "@hadmean/chromista";
+import { Typo } from "@hadmean/chromista";
 import { IColorableSelection } from "shared/types/ui";
 
 const DEFAULT_TAG_COLOR = "#000000";
@@ -12,16 +12,14 @@ const Root = styled.div<{ color: string }>`
   background: ${(props) => props.color || DEFAULT_TAG_COLOR}1A;
 `;
 
-const TextColor = styled(Text)<{ customColor: string }>`
+const TextColor = styled(Typo.SM)<{ customColor: string }>`
   color: ${(props) => props.customColor};
 `;
 
 export function OptionTag({ color, label }: IColorableSelection) {
   return (
     <Root color={color}>
-      <TextColor customColor={color} size="5">
-        {label}
-      </TextColor>
+      <TextColor customColor={color}>{label}</TextColor>
     </Root>
   );
 }

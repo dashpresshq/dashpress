@@ -1,5 +1,5 @@
 import { IFormProps } from "@hadmean/protozoa";
-import { Text } from "@hadmean/chromista";
+import { Typo } from "@hadmean/chromista";
 import { SchemaForm } from "frontend/components/SchemaForm";
 import {
   AUTH_SIGNIN_FORM_SCHEMA,
@@ -11,12 +11,12 @@ export function SignInForm({ onSubmit }: IFormProps<ISignInForm>) {
     <>
       {process.env.NEXT_PUBLIC_IS_DEMO && (
         <div aria-label="Demo App Credentials">
-          <Text size="6">
+          <Typo.XS>
             Username is <b>root</b>
-          </Text>
-          <Text size="6">
+          </Typo.XS>
+          <Typo.XS>
             Password is <b>password</b>
-          </Text>
+          </Typo.XS>
         </div>
       )}
       <SchemaForm<ISignInForm>

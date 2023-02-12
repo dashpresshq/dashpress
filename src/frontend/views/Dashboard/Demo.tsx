@@ -3,7 +3,7 @@ import {
   Spacer,
   Stack,
   StyledCard,
-  Text,
+  Typo,
 } from "@hadmean/chromista";
 import { useSessionStorage } from "react-use";
 import styled from "styled-components";
@@ -26,7 +26,7 @@ export function DemoVideo() {
       <StyledCard>
         <StyledBox>
           <Stack justify="space-between">
-            <Text size="4">Features Walkthrough</Text>
+            <Typo.MD>Features Walkthrough</Typo.MD>
             <Stack width="auto">
               <SoftButton
                 action={() => setValue("false")}

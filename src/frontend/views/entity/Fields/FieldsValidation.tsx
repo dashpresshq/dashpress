@@ -7,7 +7,7 @@ import {
   FormNumberInput,
   Spacer,
   Stack,
-  Text,
+  Typo,
 } from "@hadmean/chromista";
 import {
   FIELD_TYPES_CONFIG_MAP,
@@ -116,7 +116,9 @@ export function FieldValidationCanvas({
                               >
                                 {({ meta, input }) => (
                                   <Stack justify="space-between" align="center">
-                                    <Text>{userFriendlyCase(inputKey)}</Text>
+                                    <Typo.MD>
+                                      {userFriendlyCase(inputKey)}
+                                    </Typo.MD>
                                     {typeof inputValue === "string" ? (
                                       <FormInput
                                         label=""

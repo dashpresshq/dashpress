@@ -119,6 +119,7 @@ export function BaseActionInstances({ entity, integrationKey }: IProps) {
                   accessor: "entity",
                   filter: {
                     _type: "string",
+                    bag: undefined,
                   },
                 }
               : {
@@ -126,6 +127,7 @@ export function BaseActionInstances({ entity, integrationKey }: IProps) {
                   accessor: "integrationKey",
                   filter: {
                     _type: "string",
+                    bag: undefined,
                   },
                 },
             {
@@ -133,6 +135,7 @@ export function BaseActionInstances({ entity, integrationKey }: IProps) {
               accessor: "formAction",
               filter: {
                 _type: "string",
+                bag: undefined,
               },
             },
             {
@@ -140,6 +143,7 @@ export function BaseActionInstances({ entity, integrationKey }: IProps) {
               accessor: "implementationKey",
               filter: {
                 _type: "string",
+                bag: undefined,
               },
             },
             {

@@ -134,6 +134,7 @@ export function ManageCredentialGroup({
       accessor: "key",
       filter: {
         _type: "string",
+        bag: undefined,
       },
       // eslint-disable-next-line react/no-unstable-nested-components
       Cell: ({ value }: { value: unknown }) => (

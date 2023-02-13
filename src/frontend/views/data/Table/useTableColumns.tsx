@@ -40,6 +40,7 @@ const buildFilterConfigFromType = (prop: {
   if (isIdField) {
     return {
       _type: "idField",
+      bag: undefined,
     };
   }
   const filterType$1 =

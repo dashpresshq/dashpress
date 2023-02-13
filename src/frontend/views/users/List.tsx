@@ -73,6 +73,7 @@ export function ListUsers() {
               accessor: "username",
               filter: {
                 _type: "string",
+                bag: undefined,
               },
             },
             {
@@ -80,6 +81,7 @@ export function ListUsers() {
               accessor: "name",
               filter: {
                 _type: "string",
+                bag: undefined,
               },
             },
             {
@@ -88,6 +90,7 @@ export function ListUsers() {
               accessor: "role",
               filter: {
                 _type: "string",
+                bag: undefined,
               },
             },
             {

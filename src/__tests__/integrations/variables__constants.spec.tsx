@@ -33,7 +33,7 @@ describe("pages/integrations/variables => constants", () => {
 
       expect(
         await within(table).findByRole("row", {
-          name: "Key Sort By Key Filter By Search Value Sort By Value Action",
+          name: "Key Sort By Key Filter Key By Search Value Sort By Value Action",
         })
       ).toBeInTheDocument();
       expect(

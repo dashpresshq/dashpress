@@ -30,6 +30,7 @@ export const FIELD_TYPES_CONFIG_MAP: Record<
     sortable: true,
     tableFilterType: {
       _type: "string",
+      bag: undefined,
     },
     allowedValidations: [
       "required",
@@ -53,6 +54,7 @@ export const FIELD_TYPES_CONFIG_MAP: Record<
     sortable: true,
     tableFilterType: {
       _type: "string",
+      bag: undefined,
     },
     allowedValidations: [
       "alphanumeric",
@@ -69,6 +71,7 @@ export const FIELD_TYPES_CONFIG_MAP: Record<
     sortable: false,
     tableFilterType: {
       _type: "string",
+      bag: undefined,
     },
     allowedValidations: ["maxLength", "minLength", "required"],
   },
@@ -76,12 +79,14 @@ export const FIELD_TYPES_CONFIG_MAP: Record<
     sortable: false,
     tableFilterType: {
       _type: "string",
+      bag: undefined,
     },
     allowedValidations: ["maxLength", "minLength", "required"],
   },
   number: {
     tableFilterType: {
       _type: "number",
+      bag: undefined,
     },
     sortable: true,
     typeIsNotChangeAble: true,
@@ -99,6 +104,7 @@ export const FIELD_TYPES_CONFIG_MAP: Record<
     sortable: false,
     tableFilterType: {
       _type: "string",
+      bag: undefined,
     },
     allowedValidations: [
       "maxLength",
@@ -112,6 +118,7 @@ export const FIELD_TYPES_CONFIG_MAP: Record<
     sortable: false,
     tableFilterType: {
       _type: "string",
+      bag: undefined,
     },
     allowedValidations: ["required", "maxLength", "minLength"],
   },
@@ -119,6 +126,7 @@ export const FIELD_TYPES_CONFIG_MAP: Record<
     sortable: true,
     tableFilterType: {
       _type: "date",
+      bag: undefined,
     },
     typeIsNotChangeAble: true,
     allowedValidations: ["required"],

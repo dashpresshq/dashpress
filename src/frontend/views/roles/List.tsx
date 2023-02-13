@@ -71,6 +71,7 @@ export function ListRoles() {
               accessor: "label",
               filter: {
                 _type: "string",
+                bag: undefined,
               },
             },
             {

@@ -3,6 +3,7 @@ import { userFriendlyCase } from "frontend/lib/strings";
 import { IBasePermissionForm } from "shared/form-schemas/roles/permissions/base";
 import { IBaseRoleForm } from "shared/form-schemas/roles/base";
 import { makeRoleId, SystemRoles } from "shared/types/user";
+import { IRolesList } from "shared/types/roles";
 import { RolesService, rolesService } from "./roles.service";
 
 export class RolesController {
@@ -11,7 +12,7 @@ export class RolesController {
     private _rolesService: RolesService
   ) {}
 
-  async listRoles() {
+  async listRoles(): Promise<IRolesList[]> {
     const roles = await this._rolesService.listRoles();
 
     roles.push(SystemRoles.Creator, SystemRoles.Viewer);

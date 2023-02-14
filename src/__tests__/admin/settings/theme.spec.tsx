@@ -82,7 +82,7 @@ describe("pages/admin/settings/theme", () => {
       screen.queryByLabelText("Dark Color Scheme")
     ).not.toBeInTheDocument();
 
-    expect(screen.getByLabelText("Light Color Scheme")).toHaveValue("#459211");
+    expect(screen.getByLabelText("Light Color Scheme")).toHaveValue("#4b38b3");
 
     fireEvent.input(screen.getByLabelText("Light Color Scheme"), {
       target: { value: "#654321" },

@@ -73,7 +73,7 @@ const CONFIG_VALUES = {
   },
   default_date_format: "do MMM yyyy",
   theme_color: {
-    primary: `#459211`,
+    primary: `#4b38b3`,
     primaryDark: `#111111`,
   },
   disabled_entities: ["disabled-entity-1", "disabled-entity-2"],

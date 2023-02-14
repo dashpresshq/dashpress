@@ -52,6 +52,10 @@ export function useFEPagination<T>(
                   return currentValue < filterValue;
                 case FilterOperators.GREATER_THAN:
                   return currentValue > filterValue;
+                case FilterOperators.IN:
+                  return (filterValue as string[]).includes(currentValue);
+                case FilterOperators.NOT_IN:
+                  return !(filterValue as string[]).includes(currentValue);
               }
               return true;
             });

@@ -11,10 +11,14 @@ import { NAVIGATION_LINKS, useSetPageDetails } from "frontend/lib/routing";
 import { useRouter } from "next/router";
 import { IAccountProfile, USER_PERMISSIONS } from "shared/types/user";
 import { FEPaginationTable } from "frontend/components/FEPaginationTable";
+import { useApi } from "@hadmean/protozoa";
+import { IRolesList } from "shared/types/roles";
+import { ISystemStatusForDisplay } from "@hadmean/chromista/dist/types";
 import {
   ADMIN_USERS_LIST_ENDPOINT,
   useUserDeletionMutation,
 } from "./users.store";
+import { ADMIN_ROLES_ENDPOINT } from "../roles/roles.store";
 
 export function ListUsers() {
   const router = useRouter();
@@ -24,6 +28,8 @@ export function ListUsers() {
     viewKey: "USERS_LIST",
     permission: USER_PERMISSIONS.CAN_MANAGE_USERS,
   });
+
+  const roles = useApi<IRolesList>(ADMIN_ROLES_ENDPOINT);
 
   const userDeletionMutation = useUserDeletionMutation();
 
@@ -85,12 +91,13 @@ export function ListUsers() {
               },
             },
             {
-              // TODO use role list
               Header: "Role",
               accessor: "role",
               filter: {
-                _type: "string",
-                bag: undefined,
+                _type: "status",
+                bag: ((roles.data || []) as ISystemStatusForDisplay[]).map(
+                  ({ label }) => ({ label, value: label })
+                ),
               },
             },
             {

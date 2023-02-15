@@ -1,6 +1,5 @@
 import { ForbiddenError } from "backend/lib/errors";
 import { RolesService, rolesService } from "backend/roles/roles.service";
-import { userFriendlyCase } from "frontend/lib/strings";
 import { REQUEST_ERROR_CODES } from "shared/constants/auth";
 import { ISignInForm } from "shared/form-schemas/auth/signin";
 import { IChangePasswordForm } from "shared/form-schemas/profile/password";
@@ -24,10 +23,7 @@ export class UsersController {
   }
 
   async listUsers() {
-    return (await this._usersService.listUsers()).map((user) => ({
-      ...user,
-      role: userFriendlyCase(user.role),
-    }));
+    return await this._usersService.listUsers();
   }
 
   async createUser(user: IAccountUser) {

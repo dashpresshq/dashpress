@@ -14,6 +14,7 @@ import { FEPaginationTable } from "frontend/components/FEPaginationTable";
 import { useApi } from "@hadmean/protozoa";
 import { IRolesList } from "shared/types/roles";
 import { ISystemStatusForDisplay } from "@hadmean/chromista/dist/types";
+import { userFriendlyCase } from "frontend/lib/strings";
 import {
   ADMIN_USERS_LIST_ENDPOINT,
   useUserDeletionMutation,
@@ -95,10 +96,9 @@ export function ListUsers() {
               accessor: "role",
               filter: {
                 _type: "status",
-                bag: ((roles.data || []) as ISystemStatusForDisplay[]).map(
-                  ({ label }) => ({ label, value: label })
-                ),
+                bag: (roles.data || []) as ISystemStatusForDisplay[],
               },
+              Cell: ({ value }) => userFriendlyCase(value as string),
             },
             {
               Header: "Action",

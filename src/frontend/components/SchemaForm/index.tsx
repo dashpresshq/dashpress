@@ -10,7 +10,7 @@ import { RenderFormInput } from "./_RenderFormInput";
 import { userFriendlyCase } from "../../lib/strings";
 import { IFormExtension } from "./types";
 import { runFormBeforeSubmit, runFormFieldState } from "./form-run";
-import { useGlobalScriptContext } from "./useGlobalScriptContext";
+import { useSchemaFormScriptContext } from "./useSchemaFormScriptContext";
 
 interface IProps<T> {
   fields: IAppliedSchemaFormConfig<T>;
@@ -33,8 +33,7 @@ export function SchemaForm<T extends Record<string, unknown>>({
   formExtension,
   resetForm,
 }: IProps<T>) {
-  const scriptContext$1 = useGlobalScriptContext();
-  const scriptContext = { ...scriptContext$1, action };
+  const scriptContext = useSchemaFormScriptContext(action);
 
   return (
     <Form
@@ -59,9 +58,11 @@ export function SchemaForm<T extends Record<string, unknown>>({
         const fieldState: Record<
           string,
           { hidden: boolean; disabled: boolean }
-        > = runFormFieldState(formExtension?.fieldsState, scriptContext, {
-          formValues: values,
-        });
+        > = runFormFieldState(
+          formExtension?.fieldsState,
+          scriptContext,
+          values
+        );
 
         return (
           <form

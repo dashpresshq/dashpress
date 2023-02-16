@@ -1,25 +1,34 @@
 /* eslint-disable no-console */
-/* eslint-disable no-new-func */
+
+export const evalJSFormScript = (
+  javascriptString: string,
+  scriptContext: Record<string, unknown>,
+  formValues: Record<string, unknown>
+) => {
+  /* eslint-disable no-new-func */
+  return Function("$", javascriptString)({ ...scriptContext, formValues });
+};
+
 export const runJavascriptString = (
   javascriptString: string,
-  globals: Record<string, unknown>,
-  context: Record<string, unknown>
+  scriptContext: Record<string, unknown>,
+  formValues: Record<string, unknown>
 ) => {
   try {
-    return Function("$", javascriptString)({ ...globals, ...context });
+    return evalJSFormScript(javascriptString, scriptContext, formValues);
   } catch (e) {
     console.warn(
       `•Expression:'${javascriptString}'\n•JS-Error: `,
       e,
       "\n•Context: ",
-      context
+      formValues
     );
   }
 };
 
 // export const runAsyncJavascriptString = async (
 //   javascriptString: string,
-//   globals: Record<string, unknown>,
+//   scriptContext: Record<string, unknown>,
 //   context: Record<string, unknown>
 // ) => {
 //   const AsyncFunction = async function X() {}.constructor;
@@ -28,7 +37,7 @@ export const runJavascriptString = (
 //       "$",
 //       javascriptString
 //     )({
-//       ...globals,
+//       ...scriptContext,
 //       ...context,
 //     });
 //   } catch (e) {
@@ -43,13 +52,17 @@ export const runJavascriptString = (
 
 export const runFormFieldState = (
   fieldStateString: string,
-  globals: Record<string, unknown>,
-  context: Record<string, unknown>
+  scriptContext: Record<string, unknown>,
+  formValues: Record<string, unknown>
 ) => {
   if (!fieldStateString) {
     return {};
   }
-  const response = runJavascriptString(fieldStateString, globals, context);
+  const response = runJavascriptString(
+    fieldStateString,
+    scriptContext,
+    formValues
+  );
   if (typeof response !== "object") {
     return {};
   }
@@ -58,15 +71,17 @@ export const runFormFieldState = (
 
 export const runFormBeforeSubmit = (
   beforeSubmitString: string,
-  globals: Record<string, unknown>,
+  scriptContext: Record<string, unknown>,
   formValues: Record<string, unknown>
 ) => {
   if (!beforeSubmitString) {
     return formValues;
   }
-  const response = runJavascriptString(beforeSubmitString, globals, {
-    formValues,
-  });
+  const response = runJavascriptString(
+    beforeSubmitString,
+    scriptContext,
+    formValues
+  );
 
   if (!response) {
     return formValues;

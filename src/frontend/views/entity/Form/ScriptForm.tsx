@@ -1,5 +1,8 @@
 import { FormSkeleton, FormSkeletonSchema } from "@hadmean/chromista";
+import { ToastService } from "@hadmean/protozoa";
 import { SchemaForm } from "frontend/components/SchemaForm";
+import { evalJSFormScript } from "frontend/components/SchemaForm/form-run";
+import { useSchemaFormScriptContext } from "frontend/components/SchemaForm/useSchemaFormScriptContext";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 
 interface IProps {
@@ -9,7 +12,9 @@ interface IProps {
   field: string;
   error?: unknown;
 }
-// TODO error on invalid JS
+
+const BASE_SUFFIX = `script`;
+
 export function ScriptForm({
   value,
   onSubmit,
@@ -17,6 +22,8 @@ export function ScriptForm({
   error,
   isLoading,
 }: IProps) {
+  const scriptContext = useSchemaFormScriptContext("test");
+
   return (
     <ViewStateMachine
       loading={isLoading}
@@ -25,18 +32,24 @@ export function ScriptForm({
     >
       <SchemaForm
         fields={{
-          [`script${field}`]: {
+          [`${BASE_SUFFIX}${field}`]: {
             type: "json",
             label: "Script",
             validations: [],
           },
         }}
         onSubmit={async (data) => {
-          await onSubmit(data[`script${field}`] as string);
+          try {
+            const jsString = data[`${BASE_SUFFIX}${field}`] as string;
+            evalJSFormScript(jsString, scriptContext, {});
+            await onSubmit(jsString);
+          } catch (e) {
+            ToastService.error(`•Expression: \n•JS-Error: ${e}`);
+          }
         }}
         buttonText="Save"
         initialValues={{
-          [`script${field}`]: value,
+          [`${BASE_SUFFIX}${field}`]: value,
         }}
       />
     </ViewStateMachine>

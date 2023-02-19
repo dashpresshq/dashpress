@@ -1,5 +1,3 @@
-const SOME_VERY_LARGE_NUMBER = 999999999;
-
 export function sortByList<
   T extends Record<string, unknown>,
   K extends keyof T
@@ -13,7 +11,7 @@ export function sortByList<
 
   inputArray.sort(
     (a, b) =>
-      (sortMap[a[key] as string] || SOME_VERY_LARGE_NUMBER) -
-      (sortMap[b[key] as string] || SOME_VERY_LARGE_NUMBER)
+      (sortMap[a[key] as string] || Infinity) -
+      (sortMap[b[key] as string] || Infinity)
   );
 }

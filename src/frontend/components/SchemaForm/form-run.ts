@@ -1,5 +1,4 @@
 /* eslint-disable no-console */
-
 export const evalJSFormScript = (
   javascriptString: string,
   scriptContext: Record<string, unknown>,

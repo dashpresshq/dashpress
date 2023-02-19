@@ -100,7 +100,9 @@ export function EntityDetailsView({
           );
 
           const contentToRender = specialDataTypeRender || (
-            <Typo.MD>{value}</Typo.MD>
+            <Typo.MD>
+              {typeof value === "object" ? JSON.stringify(value) : value}
+            </Typo.MD>
           );
 
           return (

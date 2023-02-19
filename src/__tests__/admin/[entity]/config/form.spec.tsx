@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-escape */
 import "@testing-library/jest-dom";
 import React from "react";
 import { render, screen, within } from "@testing-library/react";
@@ -20,9 +21,19 @@ describe("pages/admin/[entity]/config/form", () => {
   }));
 
   describe.each([
-    { section: "fieldsState", label: "Fields State" },
-    { section: "beforeSubmit", label: "Before Submit" },
-  ])("$section section", ({ label, section }) => {
+    {
+      section: "fieldsState",
+      label: "Fields State",
+      validInput: `return {{name: {{hidden: true}}`,
+      valid: `return {name: {hidden: true}}`,
+    },
+    {
+      section: "beforeSubmit",
+      label: "Before Submit",
+      validInput: `return {{...$.formValues, custom: "Yes"}`,
+      valid: `return {...$.formValues, custom: "Yes"}`,
+    },
+  ])("$section section", ({ label, section, valid, validInput }) => {
     it("should show current section value", async () => {
       render(
         <AppWrapper>
@@ -37,7 +48,50 @@ describe("pages/admin/[entity]/config/form", () => {
       ).toHaveValue(section);
     });
 
-    it("should update current section value correctly", async () => {
+    it("should update when provided value correctly", async () => {
+      render(
+        <AppWrapper>
+          <EntityFormExtensionSettings />
+        </AppWrapper>
+      );
+
+      await userEvent.click(await screen.findByRole("tab", { name: label }));
+
+      const currentTab = screen.getByRole("tabpanel");
+
+      await userEvent.clear(within(currentTab).getByLabelText("Script"));
+
+      await userEvent.type(
+        within(currentTab).getByLabelText("Script"),
+        validInput
+      );
+
+      await userEvent.click(
+        within(currentTab).getByRole("button", { name: "Save" })
+      );
+
+      expect((await screen.findAllByRole("status"))[0]).toHaveTextContent(
+        "App Settings Saved Successfully"
+      );
+    });
+
+    it("should display updated value", async () => {
+      render(
+        <AppWrapper>
+          <EntityFormExtensionSettings />
+        </AppWrapper>
+      );
+
+      await userEvent.click(await screen.findByRole("tab", { name: label }));
+
+      const currentTab = screen.getByRole("tabpanel");
+
+      expect(within(currentTab).getByLabelText("Script")).toHaveValue(
+        `${valid}`
+      );
+    });
+
+    it("should not update when invalid JS is provided", async () => {
       render(
         <AppWrapper>
           <EntityFormExtensionSettings />
@@ -58,11 +112,11 @@ describe("pages/admin/[entity]/config/form", () => {
       );
 
       expect((await screen.findAllByRole("status"))[0]).toHaveTextContent(
-        "App Settings Saved Successfully"
+        "Expression: •JS-Error: SyntaxError: Unexpected identifier"
       );
     });
 
-    it("should display updated section value", async () => {
+    it("should display previous section value", async () => {
       render(
         <AppWrapper>
           <EntityFormExtensionSettings />
@@ -74,7 +128,7 @@ describe("pages/admin/[entity]/config/form", () => {
       const currentTab = screen.getByRole("tabpanel");
 
       expect(within(currentTab).getByLabelText("Script")).toHaveValue(
-        `${section}Updated`
+        `${valid}`
       );
     });
 

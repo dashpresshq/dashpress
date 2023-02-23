@@ -4,4 +4,9 @@ export interface IColorableSelection {
   value: string | boolean;
 }
 
+export type EntityTypesForSelection =
+  | "selection"
+  | "selection-enum"
+  | "boolean";
+
 export const FOR_CODE_COV = 1;

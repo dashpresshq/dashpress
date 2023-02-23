@@ -1,11 +1,7 @@
-import { userFriendlyCase } from "frontend/lib/strings";
-import { EntityTypesForSelection } from "frontend/views/entity/Fields/FieldsSelection";
-import {
-  isUseColorsFlagOn,
-  SYSTEM_COLORS,
-} from "frontend/views/entity/Fields/selection.utils";
+import { userFriendlyCase } from "shared/lib/strings";
 import uniqBy from "lodash/uniqBy";
-import { IColorableSelection } from "shared/types/ui";
+import { EntityTypesForSelection, IColorableSelection } from "shared/types/ui";
+import { isUseColorsFlagOn, SYSTEM_COLORS } from "./selection.utlis";
 
 export const getEntitySelectionConfig = (
   entityType: EntityTypesForSelection,

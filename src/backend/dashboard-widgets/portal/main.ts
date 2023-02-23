@@ -1,5 +1,5 @@
 import { IValueLabel } from "@hadmean/chromista/dist/types";
-import { userFriendlyCase } from "frontend/lib/strings";
+import { userFriendlyCase } from "shared/lib/strings";
 import { nanoid } from "nanoid";
 import { IWidgetConfig } from "shared/types/dashboard";
 import { ROYGBIV } from "shared/constants/colors";

@@ -60,17 +60,17 @@ export const viewSpecialDataTypes = (
     const availableOption = entityFieldSelections[fieldName].find(
       (option) => option.value === value
     );
-    if (!availableOption?.color) {
-      return null;
-    }
     if (availableOption) {
-      return (
-        <OptionTag
-          color={availableOption.color}
-          label={availableOption.label}
-          value={availableOption.value}
-        />
-      );
+      if (availableOption.color) {
+        return (
+          <OptionTag
+            color={availableOption.color}
+            label={availableOption.label}
+            value={availableOption.value}
+          />
+        );
+      }
+      return availableOption.label;
     }
   }
   return null;

@@ -16,7 +16,7 @@ import {
   useActionIntegrationsList,
   useActiveActionList,
 } from "frontend/views/integrations/actions/actions.store";
-import { INTEGRATIONS_GROUP_CONFIG } from "frontend/views/settings/Variables/constants";
+import { INTEGRATIONS_GROUP_CONFIG } from "shared/config-bag/integrations";
 import { useCallback, useState } from "react";
 import { IActionInstance } from "shared/types/actions";
 import { ActionForm } from "./Form";

@@ -13,7 +13,7 @@ import {
 import {
   useEntityFieldLabels,
   useEntityFieldSelections,
-  useEntityFieldTypes,
+  useProcessedEntityFieldTypes,
   useEntityFieldValidations,
   useEntitySlug,
 } from "frontend/hooks/entity/entity.config";
@@ -43,7 +43,7 @@ export function BaseEntityForm({
   const entityValidationsMap = useEntityFieldValidations();
   const entityFields = useEntityFields(entity);
   const getEntityFieldLabels = useEntityFieldLabels();
-  const entityFieldTypes = useEntityFieldTypes();
+  const entityFieldTypes = useProcessedEntityFieldTypes();
   const entityFieldSelections = useEntityFieldSelections();
   const entityFieldTypesMap = useEntityConfiguration<Record<string, string>>(
     "entity_columns_types",

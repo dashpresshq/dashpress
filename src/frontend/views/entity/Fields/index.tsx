@@ -16,7 +16,7 @@ import { USER_PERMISSIONS } from "shared/types/user";
 import {
   useEntityFieldLabels,
   useEntityFieldSelections,
-  useEntityFieldTypes,
+  useProcessedEntityFieldTypes,
   useEntityFieldValidations,
   useEntitySlug,
 } from "frontend/hooks/entity/entity.config";
@@ -66,7 +66,7 @@ export function EntityFieldsSettings() {
     entity
   );
 
-  const entityFieldTypes = useEntityFieldTypes();
+  const entityFieldTypes = useProcessedEntityFieldTypes();
   const entityFieldValidations = useEntityFieldValidations();
   const entityFieldSelections = useEntityFieldSelections();
 

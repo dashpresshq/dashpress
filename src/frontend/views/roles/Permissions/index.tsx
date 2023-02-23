@@ -13,7 +13,7 @@ import { LINK_TO_DOCS } from "frontend/views/constants";
 import { USER_PERMISSIONS } from "shared/types/user";
 import { useMemo } from "react";
 import { ILabelValue } from "types";
-import { userFriendlyCase } from "frontend/lib/strings";
+import { userFriendlyCase } from "shared/lib/strings";
 import { AppLayout } from "../../../_layouts/app";
 import { useRolePermissions } from "../permissions.store";
 import { MutatePermission } from "./MutatePermission";

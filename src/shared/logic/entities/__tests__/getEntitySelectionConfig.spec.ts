@@ -1,4 +1,4 @@
-import { getEntitySelectionConfig } from "../logic";
+import { getEntitySelectionConfig } from "../getEntitySelectionConfig";
 
 describe("getEntitySelectionConfig", () => {
   describe("boolean", () => {

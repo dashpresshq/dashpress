@@ -2,14 +2,16 @@ import { useCallback } from "react";
 import uniqBy from "lodash/uniqBy";
 import { IFieldValidationItem } from "shared/validations/types";
 import { IColorableSelection } from "shared/types/ui";
-import { EntityTypesForSelection } from "frontend/views/entity/Fields/FieldsSelection";
 import { useRouteParam } from "frontend/lib/routing";
 import {
+  getEntityFieldTypes,
+  getEntitySelections,
+} from "shared/logic/entities";
+import {
   getFieldTypeBoundedValidations,
-  guessEntityType,
   guessEntityValidations,
 } from "./guess";
-import { userFriendlyCase } from "../../lib/strings";
+import { userFriendlyCase } from "../../../shared/lib/strings";
 import { FIELD_TYPES_CONFIG_MAP } from "../../../shared/validations";
 import { useEntityFields } from "./entity.store";
 import {
@@ -17,7 +19,6 @@ import {
   IEntityCrudSettings,
 } from "../../../shared/configurations";
 import { useEntityConfiguration } from "../configuration/configuration.store";
-import { getEntitySelectionConfig } from "./logic";
 
 export function useEntitySlug(overrideValue?: string) {
   const routeParam = useRouteParam("entity");
@@ -60,7 +61,7 @@ export function useEntityFieldLabels(paramEntity?: string) {
   );
 }
 
-export function useEntityFieldTypes(
+export function useProcessedEntityFieldTypes(
   paramEntity?: string
 ): Record<string, keyof typeof FIELD_TYPES_CONFIG_MAP> {
   const entity = useEntitySlug(paramEntity);
@@ -78,13 +79,9 @@ export function useEntityFieldTypes(
   ) {
     return {};
   }
-
-  return Object.fromEntries(
-    (entityFields.data || []).map(({ name, type, isReference }) => {
-      const preSelectedType = (entityFieldTypesMap.data || {})[name];
-
-      return [name, preSelectedType ?? guessEntityType(type, isReference)];
-    })
+  return getEntityFieldTypes(
+    entityFields.data || [],
+    entityFieldTypesMap.data || {}
   );
 }
 
@@ -93,7 +90,7 @@ export function useEntityFieldValidations() {
   const entityValidationsMap = useEntityConfiguration<
     Record<string, IFieldValidationItem[]>
   >("entity_validations", entity);
-  const entityFieldTypes = useEntityFieldTypes(entity);
+  const processedEntityFieldTypes = useProcessedEntityFieldTypes(entity);
   const entityFields = useEntityFields(entity);
 
   if (
@@ -120,7 +117,7 @@ export function useEntityFieldValidations() {
         uniqBy(
           [
             ...getFieldTypeBoundedValidations(
-              entityFieldTypes[entityField.name]
+              processedEntityFieldTypes[entityField.name]
             ),
             ...guessEntityValidations(entityField),
             ...preSelectedValidation,
@@ -132,21 +129,16 @@ export function useEntityFieldValidations() {
   );
 }
 
-export function useEntityFieldSelections(paramEntity?: string) {
+export function useEntityFieldSelections(
+  paramEntity?: string
+): Record<string, IColorableSelection[]> {
   const entity = useEntitySlug(paramEntity);
 
   const entitySelections = useEntityConfiguration<
     Record<string, IColorableSelection[]>
   >("entity_selections", entity);
-  const entityFieldTypes = useEntityFieldTypes(entity);
+  const processedEntityFieldTypes = useProcessedEntityFieldTypes(entity);
   const entityFields = useEntityFields(entity);
-  const enumOptions = Object.fromEntries(
-    (entityFields.data || [])
-      .filter((field) => {
-        return field.enumeration;
-      })
-      .map((field) => [field.name, field.enumeration])
-  );
 
   if (
     entityFields.isLoading ||
@@ -157,26 +149,10 @@ export function useEntityFieldSelections(paramEntity?: string) {
     return {};
   }
 
-  return Object.fromEntries(
-    (entityFields.data || [])
-      .filter(
-        ({ name }) =>
-          FIELD_TYPES_CONFIG_MAP[entityFieldTypes[name]]?.configureSelection
-      )
-      .map(({ name }) => {
-        const preSelectedType = (entitySelections.data || {})[name];
-
-        const entityType = entityFieldTypes[name] as EntityTypesForSelection;
-
-        return [
-          name,
-          getEntitySelectionConfig(
-            entityType,
-            preSelectedType,
-            enumOptions[name]
-          ),
-        ];
-      })
+  return getEntitySelections(
+    entityFields.data || [],
+    entitySelections.data || {},
+    processedEntityFieldTypes
   );
 }
 

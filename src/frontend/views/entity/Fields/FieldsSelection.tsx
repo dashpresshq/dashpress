@@ -15,15 +15,13 @@ import { required, composeValidators, ButtonLang } from "@hadmean/protozoa";
 import React, { useState } from "react";
 import styled from "styled-components";
 import { isNotEmpty } from "class-validator";
-import { IColorableSelection } from "shared/types/ui";
+import { EntityTypesForSelection, IColorableSelection } from "shared/types/ui";
 import { Check } from "react-feather";
-import { isUseColorsFlagOn, SYSTEM_COLORS } from "./selection.utils";
+import {
+  isUseColorsFlagOn,
+  SYSTEM_COLORS,
+} from "shared/logic/entities/selection.utlis";
 import { isBlackOrWhite } from "./isBlackOrWhite";
-
-export type EntityTypesForSelection =
-  | "selection"
-  | "selection-enum"
-  | "boolean";
 
 const StyledColorBox = styled.button<{ color: string }>`
   height: 24px;

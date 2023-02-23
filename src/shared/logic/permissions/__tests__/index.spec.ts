@@ -2,7 +2,7 @@ import {
   canRoleDoThisSync,
   canRoleDoThisAsync,
   doesPermissionAllowPermission,
-} from "../permissions";
+} from "..";
 
 describe("user role checks", () => {
   describe("canRoleDoThisSync", () => {

@@ -14,8 +14,8 @@ import {
 import { BadRequestError } from "backend/lib/errors";
 import { validateSchemaRequestBody } from "backend/lib/errors/validate-schema-request-input";
 import { IApplicationService } from "backend/types";
-import { INTEGRATIONS_GROUP_CONFIG } from "frontend/views/settings/Variables/constants";
 import { nanoid } from "nanoid";
+import { INTEGRATIONS_GROUP_CONFIG } from "shared/config-bag/integrations";
 import { TemplateService } from "shared/lib/templates";
 import {
   HTTP_INTEGRATION_KEY,

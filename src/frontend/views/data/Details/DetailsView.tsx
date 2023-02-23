@@ -6,7 +6,7 @@ import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import {
   useEntityFieldLabels,
   useEntityFieldSelections,
-  useEntityFieldTypes,
+  useProcessedEntityFieldTypes,
   useSelectedEntityColumns,
 } from "../../../hooks/entity/entity.config";
 import { useEntityDataDetails } from "../../../hooks/data/data.store";
@@ -29,7 +29,7 @@ export function EntityDetailsView({
 }) {
   const dataDetails = useEntityDataDetails(entity, id);
   const entityFields = useEntityFields(entity);
-  const entityFieldTypes = useEntityFieldTypes(entity);
+  const entityFieldTypes = useProcessedEntityFieldTypes(entity);
   const hiddenDetailsColumns = useSelectedEntityColumns(
     "hidden_entity_details_columns",
     entity

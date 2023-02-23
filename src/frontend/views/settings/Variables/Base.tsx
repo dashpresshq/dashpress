@@ -1,7 +1,7 @@
 import { StyledCard, Tabs } from "@hadmean/chromista";
 import { useState } from "react";
 import { IntegrationsConfigurationGroup } from "shared/types/integrations";
-import { INTEGRATIONS_GROUP_CONFIG } from "./constants";
+import { INTEGRATIONS_GROUP_CONFIG } from "shared/config-bag/integrations";
 import { ManageCredentialGroup } from "./ManageCredentialGroup";
 
 export function BaseManageVariables() {

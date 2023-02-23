@@ -12,7 +12,7 @@ import { useEffect } from "react";
 import { useMutation, useQueryClient } from "react-query";
 import { reduceStringToNumber } from "shared/lib/templates/reduceStringToNumber";
 import { IntegrationsConfigurationGroup } from "shared/types/integrations";
-import { INTEGRATIONS_GROUP_CONFIG } from "./constants";
+import { INTEGRATIONS_GROUP_CONFIG } from "shared/config-bag/integrations";
 import { IKeyValue } from "./types";
 
 export const INTEGRATIONS_GROUP_ENDPOINT = (

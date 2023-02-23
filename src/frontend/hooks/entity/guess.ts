@@ -51,30 +51,3 @@ export const guessEntityValidations = ({
   }
   return validationItems;
 };
-
-const FIELD_TYPE_TO_ENTITY_TYPES_MAP: Record<
-  IEntityField["type"],
-  keyof typeof FIELD_TYPES_CONFIG_MAP
-> = {
-  boolean: "boolean",
-  date: "datetime-local",
-  number: "number",
-  string: "text",
-  enum: "selection-enum",
-};
-
-export const guessEntityType = (
-  type: IEntityField["type"],
-  isReference?: IEntityField["isReference"]
-): keyof typeof FIELD_TYPES_CONFIG_MAP => {
-  if (isReference) {
-    return "reference";
-  }
-
-  const entityFieldType = FIELD_TYPE_TO_ENTITY_TYPES_MAP[type];
-
-  if (entityFieldType) {
-    return entityFieldType;
-  }
-  return "text";
-};

@@ -3,7 +3,7 @@ import {
   useEntityCrudSettings,
   useEntityFieldLabels,
   useEntityFieldSelections,
-  useEntityFieldTypes,
+  useProcessedEntityFieldTypes,
   useSelectedEntityColumns,
 } from "frontend/hooks/entity/entity.config";
 import {
@@ -84,7 +84,7 @@ export const useTableColumns = (
 
   const idField = useEntityIdField(entity);
 
-  const entityFieldTypes = useEntityFieldTypes(entity);
+  const entityFieldTypes = useProcessedEntityFieldTypes(entity);
   const entityFieldSelections = useEntityFieldSelections(entity);
 
   const columnsToShow = useMemo(() => {

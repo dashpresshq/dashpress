@@ -9,13 +9,10 @@ import {
 import { useMemo, useState } from "react";
 import { getFieldTypeBoundedValidations } from "frontend/hooks/entity/guess";
 import { IFieldValidationItem } from "shared/validations/types";
-import { IColorableSelection } from "shared/types/ui";
+import { EntityTypesForSelection, IColorableSelection } from "shared/types/ui";
 import { FIELD_TYPES_CONFIG_MAP } from "shared/validations";
 import { FieldValidationCanvas } from "./FieldsValidation";
-import {
-  EntityTypesForSelection,
-  FieldSelectionCanvas,
-} from "./FieldsSelection";
+import { FieldSelectionCanvas } from "./FieldsSelection";
 
 const FIELD_TYPES_CONFIG_MAP_AS_SELECTION = Object.entries(
   FIELD_TYPES_CONFIG_MAP

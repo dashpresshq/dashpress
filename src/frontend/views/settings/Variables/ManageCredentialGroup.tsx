@@ -21,6 +21,7 @@ import { SchemaForm } from "frontend/components/SchemaForm";
 import { USER_PERMISSIONS } from "shared/types/user";
 import { usePasswordStore } from "frontend/views/integrations/password.store";
 import { useUserHasPermission } from "frontend/hooks/auth/user.store";
+import { INTEGRATIONS_GROUP_CONFIG } from "shared/config-bag/integrations";
 import {
   INTEGRATIONS_GROUP_ENDPOINT,
   useIntegrationConfigurationDeletionMutation,
@@ -29,7 +30,6 @@ import {
 } from "./configurations.store";
 import { KeyValueForm } from "./Form";
 import { IKeyValue } from "./types";
-import { INTEGRATIONS_GROUP_CONFIG } from "./constants";
 
 const NEW_CONFIG_ITEM = "__new_config_item__";
 

@@ -14,7 +14,7 @@ import { FEPaginationTable } from "frontend/components/FEPaginationTable";
 import { useApi } from "@hadmean/protozoa";
 import { IRolesList } from "shared/types/roles";
 import { ISystemStatusForDisplay } from "@hadmean/chromista/dist/types";
-import { userFriendlyCase } from "frontend/lib/strings";
+import { userFriendlyCase } from "shared/lib/strings";
 import {
   ADMIN_USERS_LIST_ENDPOINT,
   useUserDeletionMutation,

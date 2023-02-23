@@ -16,7 +16,7 @@ import {
 import { Form, Field } from "react-final-form";
 import arrayMutators from "final-form-arrays";
 import { FieldArray } from "react-final-form-arrays";
-import { userFriendlyCase } from "frontend/lib/strings";
+import { userFriendlyCase } from "shared/lib/strings";
 import {
   required,
   composeValidators,

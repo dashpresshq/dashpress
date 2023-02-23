@@ -1,5 +1,5 @@
 import { usersService, UsersService } from "backend/users/users.service";
-import { userFriendlyCase } from "frontend/lib/strings";
+import { userFriendlyCase } from "shared/lib/strings";
 import { IBasePermissionForm } from "shared/form-schemas/roles/permissions/base";
 import { IBaseRoleForm } from "shared/form-schemas/roles/base";
 import { makeRoleId, SystemRoles } from "shared/types/user";

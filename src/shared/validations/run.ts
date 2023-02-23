@@ -1,4 +1,4 @@
-import { userFriendlyCase } from "frontend/lib/strings";
+import { userFriendlyCase } from "shared/lib/strings";
 import { IAppliedSchemaFormConfig } from "shared/form-schemas/types";
 import { TemplateService } from "../lib/templates";
 import { ENTITY_VALIDATION_CONFIG } from "./validations-map";

@@ -1,5 +1,3 @@
-/* eslint-disable testing-library/no-node-access */
-/* eslint-disable testing-library/no-container */
 import "@testing-library/jest-dom";
 import React from "react";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
@@ -20,7 +18,7 @@ describe("pages/admin/settings/theme", () => {
   });
 
   it("should display theme values", async () => {
-    const { container } = render(
+    render(
       <AppWrapper>
         <ThemeSettings />
       </AppWrapper>
@@ -29,7 +27,9 @@ describe("pages/admin/settings/theme", () => {
       expect(screen.getByLabelText("Dark Color Scheme")).toHaveValue("#111111");
     });
 
-    expect(container.querySelector(`input[name="theme"]`)).toHaveValue("dark");
+    expect(screen.getByRole("option", { selected: true })).toHaveTextContent(
+      "Dark"
+    );
   });
 
   it("should update theme settings successfully", async () => {
@@ -51,7 +51,7 @@ describe("pages/admin/settings/theme", () => {
   });
 
   it("should display updated theme values", async () => {
-    const { container } = render(
+    render(
       <AppWrapper>
         <ThemeSettings />
       </AppWrapper>
@@ -59,7 +59,9 @@ describe("pages/admin/settings/theme", () => {
     await waitFor(() => {
       expect(screen.getByLabelText("Dark Color Scheme")).toHaveValue("#123456");
     });
-    expect(container.querySelector(`input[name="theme"]`)).toHaveValue("dark");
+    expect(screen.getByRole("option", { selected: true })).toHaveTextContent(
+      "Dark"
+    );
   });
 
   it("should update user preference and switch color successfully", async () => {
@@ -75,8 +77,7 @@ describe("pages/admin/settings/theme", () => {
       screen.queryByLabelText("Light Color Scheme")
     ).not.toBeInTheDocument();
 
-    await userEvent.type(screen.getByLabelText("Theme"), "Light");
-    await userEvent.keyboard("{Enter}");
+    await userEvent.click(screen.getByRole("option", { name: "Light" }));
 
     expect(
       screen.queryByLabelText("Dark Color Scheme")
@@ -100,7 +101,7 @@ describe("pages/admin/settings/theme", () => {
   });
 
   it("should display updated theme values", async () => {
-    const { container } = render(
+    render(
       <AppWrapper>
         <ThemeSettings />
       </AppWrapper>
@@ -115,7 +116,9 @@ describe("pages/admin/settings/theme", () => {
       screen.queryByLabelText("Dark Color Scheme")
     ).not.toBeInTheDocument();
 
-    expect(container.querySelector(`input[name="theme"]`)).toHaveValue("light");
+    expect(screen.getByRole("option", { selected: true })).toHaveTextContent(
+      "Light"
+    );
   });
 
   it("should display not update the other scheme color", async () => {
@@ -124,7 +127,8 @@ describe("pages/admin/settings/theme", () => {
         <ThemeSettings />
       </AppWrapper>
     );
-    await userEvent.type(screen.getByLabelText("Theme"), "Dark");
+    await userEvent.click(screen.getByRole("option", { name: "Dark" }));
+
     await userEvent.keyboard("{Enter}");
 
     expect(screen.getByLabelText("Dark Color Scheme")).toHaveValue("#123456");

@@ -8,6 +8,7 @@ import {
   useEntityId,
   useEntitySlug,
 } from "../../../hooks/entity/entity.config";
+import { DetailsCanvas } from "../Table/DetailsCanvas";
 import { EntityTableView } from "../Table/TableView";
 import { ENTITY_DETAILS_VIEW_KEY } from "./constants";
 import { DetailsLayout } from "./_Layout";
@@ -51,6 +52,7 @@ export function EntityRelationTable() {
           }
         />
       </StyledCard>
+      <DetailsCanvas />
     </DetailsLayout>
   );
 }

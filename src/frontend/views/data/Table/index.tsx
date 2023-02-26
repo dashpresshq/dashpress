@@ -26,6 +26,7 @@ import {
 } from "../../entity/constants";
 import { EntityTableView } from "./TableView";
 import { useTableMenuItems } from "./useTableMenuItems";
+import { DetailsCanvas } from "./DetailsCanvas";
 
 export function EntityTable() {
   const entity = useEntitySlug();
@@ -81,6 +82,7 @@ export function EntityTable() {
           {(entityViews.data || []).length > 1 ? (
             <Tabs
               padContent={false}
+              lazy
               currentTab={tabFromUrl}
               onChange={changeTabParam}
               contents={(entityViews.data || []).map(
@@ -95,7 +97,7 @@ export function EntityTable() {
                     content: (
                       <EntityTableView
                         entity={entity}
-                        contextKey={title}
+                        tabKey={title}
                         defaultTableState={dataState}
                       />
                     ),
@@ -113,6 +115,7 @@ export function EntityTable() {
           )}
         </ViewStateMachine>
       </StyledCard>
+      <DetailsCanvas />
     </AppLayout>
   );
 }

@@ -26,6 +26,7 @@ import {
 import { gridRoot } from "./styles";
 import { DashboardSettings } from "./settings";
 import { DashboardSkeleton } from "./Skeleton";
+import { DetailsCanvas } from "../data/Table/DetailsCanvas";
 
 const Root = styled.div`
   .list {
@@ -164,6 +165,7 @@ export function BaseManageDashboard({ dashboardId, doneLink, title }: IProps) {
           />
         </ViewStateMachine>
       </OffCanvas>
+      <DetailsCanvas />
     </>
   );
 }

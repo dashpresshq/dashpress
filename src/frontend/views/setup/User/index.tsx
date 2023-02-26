@@ -25,8 +25,8 @@ export function UserSetup() {
 
   return (
     <AuthLayout
-      title="Admin Account Setup"
-      subTitle="Create first creator account"
+      title="Account Setup"
+      subTitle="Create first super admin account"
     >
       <ViewStateMachine
         loading={isChecking}

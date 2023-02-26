@@ -50,7 +50,7 @@ describe("pages/setup/user", () => {
     await userEvent.type(screen.getByLabelText("Password"), "Some Password");
 
     await userEvent.click(
-      screen.getByRole("button", { name: "Create First User" })
+      screen.getByRole("button", { name: "Setup Account" })
     );
 
     expect(await screen.findByRole("status")).toHaveTextContent(

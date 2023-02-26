@@ -57,7 +57,7 @@ export function DetailsLayout({ children, entity, menuKey }: IProps) {
     })
     .map(({ table: referenceTable, label }) => ({
       name: referenceTable,
-      label,
+      referencelabel: label,
     }));
 
   const getEntitiesDictionPlurals = useEntityDictionPlurals(
@@ -81,6 +81,19 @@ export function DetailsLayout({ children, entity, menuKey }: IProps) {
     }
   );
 
+  const listItems = [
+    { name: DETAILS_LAYOUT_KEY, referencelabel: "Details" },
+    ...relatedEntities,
+  ];
+
+  const relatedEntitiesLabelMap = Object.fromEntries(
+    listItems.map((relatedEntity) => [
+      relatedEntity.name,
+      relatedEntity.referencelabel ||
+        getEntitiesDictionPlurals(relatedEntity.name),
+    ])
+  );
+
   const { isLoading, error } = referenceFields;
 
   const viewState = useEntityViewStateMachine(
@@ -100,16 +113,14 @@ export function DetailsLayout({ children, entity, menuKey }: IProps) {
               loader={<ListSkeleton count={5} />}
             >
               <RenderList
-                items={[
-                  { name: DETAILS_LAYOUT_KEY, label: "Details" },
-                  ...relatedEntities,
-                ]}
+                items={listItems}
+                getLabel={(name) => relatedEntitiesLabelMap[name]}
                 singular="Relation"
                 render={(menuItem) => {
                   if (menuItem.name === DETAILS_LAYOUT_KEY) {
                     return (
                       <SectionListItem
-                        label="Details"
+                        label={menuItem.label}
                         key={menuItem.name}
                         active={menuKey === DETAILS_LAYOUT_KEY}
                         action={NAVIGATION_LINKS.ENTITY.DETAILS(
@@ -125,12 +136,9 @@ export function DetailsLayout({ children, entity, menuKey }: IProps) {
                     relatedEntitiesCounts.data[menuItem.name]
                   );
 
-                  const label =
-                    menuItem.label || getEntitiesDictionPlurals(menuItem.name);
-
                   return (
                     <SectionListItem
-                      label={`${label} ${entityCount}`}
+                      label={`${menuItem.label} ${entityCount}`}
                       key={menuItem.name}
                       active={menuKey === menuItem.name}
                       action={

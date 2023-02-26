@@ -121,7 +121,7 @@ function useEntityCrudView() {
       render: (
         <SelectionTab
           columns={{
-            fields: (entityFields.data || []).filter(({ isId }) => !isId),
+            fields: entityFields.data || [],
             submit: async (data) => {
               await upsertTableColumnsMutation.mutateAsync(data);
             },
@@ -165,7 +165,7 @@ function useEntityCrudView() {
       render: (
         <SelectionTab
           columns={{
-            fields: (entityFields.data || []).filter(({ isId }) => !isId),
+            fields: entityFields.data || [],
             submit: async (data) => {
               await upsertCreateColumnsMutation.mutateAsync(data);
             },
@@ -187,7 +187,7 @@ function useEntityCrudView() {
       render: (
         <SelectionTab
           columns={{
-            fields: (entityFields.data || []).filter(({ isId }) => !isId),
+            fields: entityFields.data || [],
             submit: async (data) => {
               await upsertUpdateColumnsMutation.mutateAsync(data);
             },

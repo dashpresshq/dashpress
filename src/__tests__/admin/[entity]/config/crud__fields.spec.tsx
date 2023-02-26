@@ -151,7 +151,7 @@ describe("pages/admin/[entity]/config/crud", () => {
     });
   });
 
-  it("should show Id field for only details and table and not update and create", async () => {
+  it("should show hide id fields from selection", async () => {
     useRouter.mockImplementation(() => ({
       asPath: "/",
       query: {
@@ -166,18 +166,18 @@ describe("pages/admin/[entity]/config/crud", () => {
     );
 
     expect(
-      await screen.findByRole("checkbox", {
+      screen.queryByRole("checkbox", {
         name: "Primary",
       })
-    ).toBeInTheDocument();
+    ).not.toBeInTheDocument();
 
     await userEvent.click(screen.getByRole("tab", { name: "Details" }));
 
     expect(
-      await screen.findByRole("checkbox", {
+      screen.queryByRole("checkbox", {
         name: "Primary",
       })
-    ).toBeInTheDocument();
+    ).not.toBeInTheDocument();
 
     await userEvent.click(screen.getByRole("tab", { name: "Create" }));
 

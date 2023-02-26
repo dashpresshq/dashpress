@@ -8,7 +8,7 @@ export const isUseColorsFlagOn = (selections: IColorableSelection[]) => {
   return !!selections[0].color;
 };
 
-export const SYSTEM_COLORS = [
+export const OPTIONS_COLORS = [
   ROYGBIV.green,
   ROYGBIV.red,
   ROYGBIV.orange,

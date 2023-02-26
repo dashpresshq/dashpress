@@ -61,13 +61,16 @@ export function EntitiesSelection({
       {allList.length > 0 && (
         <>
           <RenderList
-            items={allList.map((listItem) => ({ name: listItem }))}
+            items={allList.map((listItem) => ({
+              name: listItem,
+            }))}
+            getLabel={getEntityFieldLabels}
             singular="Entity"
             render={(menuItem) => {
               const isHidden = currentPageSelection.includes(menuItem.name);
               return (
                 <SectionListItem
-                  label={getEntityFieldLabels(menuItem.name)}
+                  label={menuItem.label}
                   key={menuItem.name}
                   toggle={{
                     selected: !isHidden,

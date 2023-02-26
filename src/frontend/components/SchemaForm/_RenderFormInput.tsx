@@ -7,6 +7,7 @@ import {
   FormNumberInput,
   FormSelect,
   FormSwitch,
+  FormSelectButton,
   FormTextArea,
 } from "@hadmean/chromista";
 import { ISharedFormInput } from "@hadmean/chromista/dist/components/Form/_types";
@@ -41,6 +42,11 @@ export function RenderFormInput({
   };
 
   if (entityFieldSelections.length > 0) {
+    if (entityFieldSelections.length > 1 && entityFieldSelections.length <= 4) {
+      return (
+        <FormSelectButton {...formProps} selectData={entityFieldSelections} />
+      );
+    }
     return <FormSelect {...formProps} selectData={entityFieldSelections} />;
   }
 

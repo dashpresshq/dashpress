@@ -103,10 +103,16 @@ function useEntityCrudView() {
   }, [entityCrudSettings.data]);
 
   const toggleCrudSettings = (field: keyof IEntityCrudSettings) => {
-    const newState = {
-      ...entityCrudSettingsState,
-      [field]: !entityCrudSettingsState[field],
-    };
+    let newState = {...entityCrudSettingsState};
+
+    if(field.toLocaleLowerCase() === ENTITY_CRUD_SETTINGS_TAB_LABELS.DETAILS.toLowerCase() && entityCrudSettingsState[field]) {
+      newState[ENTITY_CRUD_SETTINGS_TAB_LABELS.UPDATE.toLowerCase()] = !entityCrudSettingsState[field];
+    } else if (field.toLocaleLowerCase() === ENTITY_CRUD_SETTINGS_TAB_LABELS.UPDATE.toLowerCase() && !entityCrudSettingsState[field]) {
+      newState[ENTITY_CRUD_SETTINGS_TAB_LABELS.DETAILS.toLowerCase()] = !entityCrudSettingsState[field];
+    }
+
+    newState[field] = !entityCrudSettingsState[field];
+
     setEntityCrudSettingsState(newState);
     upsertCrudSettingsMutation.mutateAsync(
       newState as unknown as Record<string, string>

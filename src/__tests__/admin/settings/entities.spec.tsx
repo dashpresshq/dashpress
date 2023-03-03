@@ -57,16 +57,16 @@ describe("pages/admin/settings/entities", () => {
     );
 
     await userEvent.click(
-      screen.getByRole("checkbox", { name: "Plural entity-1" })
+      screen.getByRole("button", { name: "Plural entity-1" })
     );
     await userEvent.click(
-      screen.getByRole("checkbox", { name: "Plural entity-1" })
+      screen.getByRole("button", { name: "Plural entity-1" })
     );
     await userEvent.click(
-      screen.getByRole("checkbox", { name: "Plural entity-2" })
+      screen.getByRole("button", { name: "Plural entity-2" })
     );
     await userEvent.click(
-      screen.getByRole("checkbox", { name: "Plural disabled-entity-2" })
+      screen.getByRole("button", { name: "Plural disabled-entity-2" })
     );
 
     await userEvent.click(

@@ -15,7 +15,6 @@ export function EntityTableView({
   persitentFilters = [],
   defaultTableState,
 }: ITableViewProps) {
-  // TODO Use Record<entity, columns> to store this, else you will be using old columns for new entity
   const columns = useTableColumns(entity, lean);
 
   const [currentState, overridePaginatedDataState, setPaginatedDataState] =

@@ -99,18 +99,18 @@ describe("pages/admin/[entity]/config/crud", () => {
       const currentTab = screen.getByRole("tabpanel");
 
       await userEvent.click(
-        await within(currentTab).findByRole("checkbox", { name: "Field 1" })
+        await within(currentTab).findByRole("button", { name: "Field 1" })
       );
 
       await userEvent.click(
-        within(currentTab).getByRole("checkbox", { name: "Field 2" })
+        within(currentTab).getByRole("button", { name: "Field 2" })
       );
       await userEvent.click(
-        within(currentTab).getByRole("checkbox", { name: "Field 2" })
+        within(currentTab).getByRole("button", { name: "Field 2" })
       );
 
       await userEvent.click(
-        within(currentTab).getByRole("checkbox", { name: "Hidden Field 1" })
+        within(currentTab).getByRole("button", { name: "Hidden Field 1" })
       );
 
       await userEvent.click(

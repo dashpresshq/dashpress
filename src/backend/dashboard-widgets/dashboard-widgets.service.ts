@@ -46,12 +46,12 @@ export class DashboardWidgetsService implements IApplicationService {
 
     await this._listOrderService.upsertOrder(dashboardId, widgetList);
 
-    return this._listOrderService.sortByOrder(widgetList, defaultWidgets);
+    return defaultWidgets;
   }
 
   private async listDashboardWidgetsToShow(dashboardId: string) {
     const widgetList = await this._listOrderService.getItemOrder(dashboardId);
-    if (!widgetList || widgetList.length === 0) {
+    if (widgetList.length === 0) {
       return await this.generateDefaultDashboardWidgets(dashboardId);
     }
 

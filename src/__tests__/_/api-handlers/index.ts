@@ -14,7 +14,6 @@ export const apiHandlers = [
   ...accountApiHandlers,
   ...entitiesApiHandlers,
   ...dataApiHandlers,
-  ...dataApiHandlers,
   ...integrationsApiHandlers,
   ...rolesApiHandlers,
   ...configApiHandlers,

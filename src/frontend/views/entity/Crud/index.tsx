@@ -128,7 +128,7 @@ function useEntityCrudView() {
       render: (
         <SelectionTab
           columns={{
-            fields: entityFields.data || [],
+            fields: (entityFields.data || []).filter(({ isId }) => !isId),
             submit: async (data) => {
               await upsertTableColumnsMutation.mutateAsync(data);
             },

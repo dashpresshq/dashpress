@@ -92,17 +92,20 @@ describe("pages/admin/[entity]/config/crud", () => {
 
       const currentTab = screen.getByRole("tabpanel");
 
-      if (tab !== "Delete") {
+      if (tab !== "Delete" && tab !== "Update") {
         expect(
           await within(currentTab).findByRole("checkbox", { name: "Field 1" })
         ).toBeInTheDocument();
       }
 
-      await userEvent.click(
-        await within(currentTab).findByRole("button", {
-          name: `Disable ${tab} Functionality`,
-        })
-      );
+      if(tab !== "Update") {
+        await userEvent.click(
+          await within(currentTab).findByRole("button", {
+            name: `Disable ${tab} Functionality`,
+          })
+        );
+      }
+
       if (tab !== "Delete") {
         expect(
           within(currentTab).queryByRole("checkbox", { name: "Field 1" })

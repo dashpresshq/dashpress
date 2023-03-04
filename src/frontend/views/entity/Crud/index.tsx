@@ -107,6 +107,13 @@ function useEntityCrudView() {
       ...entityCrudSettingsState,
       [field]: !entityCrudSettingsState[field],
     };
+
+    if (field === "details" && !newState.details) {
+      newState.update = false;
+    } else if (field === "update" && newState.update) {
+      newState.details = true;
+    }
+
     setEntityCrudSettingsState(newState);
     upsertCrudSettingsMutation.mutateAsync(
       newState as unknown as Record<string, string>

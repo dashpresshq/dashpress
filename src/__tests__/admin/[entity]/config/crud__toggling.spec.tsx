@@ -98,7 +98,7 @@ describe("pages/admin/[entity]/config/crud", () => {
         ).toBeInTheDocument();
       }
 
-      if(tab !== "Update") {
+      if (tab !== "Update") {
         await userEvent.click(
           await within(currentTab).findByRole("button", {
             name: `Disable ${tab} Functionality`,

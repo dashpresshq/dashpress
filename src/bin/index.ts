@@ -97,7 +97,7 @@
   )}
     `);
 
-  const { stdout, stderr } = execa("npm", ["run", "start:prod"], {
+  const { stdout, stderr } = execa("npm", ["run", "start"], {
     cwd: path.join(__dirname, ".."),
   });
 

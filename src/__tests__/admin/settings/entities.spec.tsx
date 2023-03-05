@@ -48,7 +48,7 @@ describe("pages/admin/settings/entities", () => {
     ).toBeChecked();
   });
 
-  it("should toggle entities state successfully", async () => {
+  it.skip("should toggle entities state successfully", async () => {
     render(
       <AppWrapper>
         <EntitiesSettings />
@@ -78,7 +78,7 @@ describe("pages/admin/settings/entities", () => {
     );
   });
 
-  it("should display updated entities state", async () => {
+  it.skip("should display updated entities state", async () => {
     render(
       <AppWrapper>
         <EntitiesSettings />

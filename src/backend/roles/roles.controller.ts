@@ -1,8 +1,7 @@
 import { usersService, UsersService } from "backend/users/users.service";
-import { userFriendlyCase } from "shared/lib/strings";
 import { IBasePermissionForm } from "shared/form-schemas/roles/permissions/base";
 import { IBaseRoleForm } from "shared/form-schemas/roles/base";
-import { makeRoleId, SystemRoles } from "shared/types/user";
+import { makeRoleId, roleLabel, SystemRoles } from "shared/types/user";
 import { IRolesList } from "shared/types/roles";
 import { RolesService, rolesService } from "./roles.service";
 
@@ -19,7 +18,7 @@ export class RolesController {
 
     return roles.map((value) => ({
       value,
-      label: userFriendlyCase(value),
+      label: roleLabel(value),
     }));
   }
 

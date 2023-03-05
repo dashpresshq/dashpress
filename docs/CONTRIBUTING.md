@@ -26,7 +26,7 @@ To set up a development environment, please follow these steps:
 3. Run the app
 
    ```sh
-   npm run start
+   npm run dev
    ```
 
 

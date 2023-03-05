@@ -6,7 +6,15 @@ import {
 } from "@hadmean/chromista";
 import { useRouter } from "next/router";
 import { ReactNode } from "react";
-import { Calendar, Columns, Eye, Server, Globe, Book } from "react-feather";
+import {
+  Calendar,
+  Columns,
+  Eye,
+  Server,
+  Globe,
+  Book,
+  Terminal,
+} from "react-feather";
 import { NAVIGATION_LINKS } from "../../lib/routing/links";
 import { AppLayout } from "../../_layouts/app";
 
@@ -46,6 +54,11 @@ export function BaseSettingsLayout({ children }: IProps) {
       action: NAVIGATION_LINKS.SETTINGS.VARIABLES,
       name: "Variables",
       IconComponent: Book,
+    },
+    {
+      action: NAVIGATION_LINKS.SETTINGS.VERSIONS,
+      name: "Version Info",
+      IconComponent: Terminal,
     },
   ];
 

@@ -67,7 +67,7 @@ https://demo.hadmean.com is an example admin app generated with zero programming
 ### Features Walkthrough Video
 Click on the image below to see what you get with Hadmean.
 
-[![Watch the video](https://img.youtube.com/vi/J43YtoSPFRw/mqdefault.jpg)](https://youtu.be/J43YtoSPFRw)
+[![Watch the video](https://img.youtube.com/vi/aO500EjHw1c/mqdefault.jpg)](https://youtu.be/aO500EjHw1c)
 
 
 ### Motivation

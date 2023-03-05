@@ -3,6 +3,8 @@ import {
   SectionRight,
   SectionRow,
   MenuSection,
+  SuccessAlert,
+  Spacer,
 } from "@hadmean/chromista";
 import { useRouter } from "next/router";
 import { ReactNode } from "react";
@@ -64,6 +66,27 @@ export function BaseSettingsLayout({ children }: IProps) {
 
   return (
     <AppLayout>
+      {1 < 0 && (
+        <>
+          <SuccessAlert
+            renderJsx
+            message={
+              <div style={{ textAlign: "left" }}>
+                <span>
+                  Awesome!, You have been using Hadmean for about a week now.
+                  Hope you are enjoying it so far. We have spent countless hours
+                  developing this free app for you, and we would really
+                  appreciate it if you could drop a star on github to boost our
+                  motivation. And kindly spread the word if you have any social
+                  following.
+                </span>
+              </div>
+            }
+          />
+          <Spacer />
+        </>
+      )}
+
       <SectionRow>
         <SectionLeft>
           <MenuSection

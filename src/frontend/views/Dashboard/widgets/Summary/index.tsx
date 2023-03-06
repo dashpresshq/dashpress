@@ -8,6 +8,7 @@ import { ROYGBIV } from "shared/constants/colors";
 import { IWidgetProps } from "../types";
 import { getFullAndRelativeCount } from "./getFullAndRelativeCount";
 import { useDashboardRelativeDayStore } from "../../relativeTime.store";
+import { getDashbordIcon } from "../../Icons";
 
 export function SummaryWidget({
   config,
@@ -57,13 +58,15 @@ export function SummaryWidget({
     !!dateField
   );
 
+  const fullIcon = getDashbordIcon(icon);
+
   return (
     <SummaryWidgetPresentation
       color={ROYGBIV[color]}
       setting={setting}
       link={link}
       title={config.title}
-      icon={icon}
+      icon={fullIcon}
       fullCount={fullCount$1}
       relativeCount={relativeCount$1}
       direction={direction}

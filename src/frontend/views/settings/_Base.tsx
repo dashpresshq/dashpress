@@ -3,7 +3,7 @@ import {
   SectionRight,
   SectionRow,
   MenuSection,
-  SuccessAlert,
+  ErrorAlert,
   Spacer,
 } from "@hadmean/chromista";
 import { useRouter } from "next/router";
@@ -14,6 +14,7 @@ import {
   Eye,
   Server,
   Globe,
+  // GitHub,
   Book,
   Terminal,
 } from "react-feather";
@@ -66,21 +67,30 @@ export function BaseSettingsLayout({ children }: IProps) {
 
   return (
     <AppLayout>
-      {100 < 5 && (
+      {100 > 5 && (
         <>
-          <SuccessAlert
+          <ErrorAlert
             renderJsx
+            // action={{
+            //   action: () => window.open("https://github.com/hadmean/hadmean"),
+            //   Icon: GitHub,
+            //   label: "Give us a star on Github",
+            // }}
             message={
-              <div style={{ textAlign: "left" }}>
-                <span>
-                  Awesome!, You have been using Hadmean for about a week now.
-                  Hope you are enjoying it so far. We have spent countless hours
-                  developing this free app for you, and we would really
-                  appreciate it if you could drop a star on github to boost our
-                  motivation. And kindly spread the word if you have any social
-                  following.
-                </span>
-              </div>
+              <span>
+                <p>
+                  <b> Awesome!,</b>
+                </p>
+                <p>
+                  You have been using Hadmean for about a week now. Hope you are
+                  enjoying it so far.
+                </p>
+                <p>
+                  We have spent countless hours developing this free app, and we
+                  would really appreciate it if you could drop a star on Github
+                  to boost our motivation.
+                </p>
+              </span>
             }
           />
           <Spacer />

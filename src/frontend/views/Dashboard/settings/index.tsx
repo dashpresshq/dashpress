@@ -14,6 +14,8 @@ import { IWidgetConfig } from "shared/types/dashboard";
 import { ILabelValue } from "types";
 import { ROYGBIV } from "shared/constants/colors";
 import { useEntityFields } from "frontend/hooks/entity/entity.store";
+import { userFriendlyCase } from "shared/lib/strings";
+import { DashboardIconsList } from "../Icons";
 
 const DashboardTypesOptions: {
   label: string;
@@ -137,17 +139,46 @@ export function DashboardSettings({
                     />
                   )}
                 </Field>
-                <Field name="icon" validateFields={[]}>
-                  {({ input, meta }) => (
-                    <FormTextArea
-                      rows={10}
-                      description="Pass in valid SVG in here with the prop `fill='currentColor'`"
-                      label="SVG"
-                      meta={meta}
-                      input={input}
-                    />
-                  )}
-                </Field>
+                {DashboardIconsList.includes(values.icon) ? (
+                  <Field name="icon" validateFields={[]} validate={required}>
+                    {({ input, meta }) => (
+                      <FormSelect
+                        label="Icon"
+                        required
+                        selectData={DashboardIconsList.map((icon) => ({
+                          value: icon,
+                          label: userFriendlyCase(icon),
+                        }))}
+                        meta={meta}
+                        input={input}
+                        rightActions={[
+                          {
+                            label: "Use SVG",
+                            action: () => input.onChange(""),
+                          },
+                        ]}
+                      />
+                    )}
+                  </Field>
+                ) : (
+                  <Field name="icon" validateFields={[]}>
+                    {({ input, meta }) => (
+                      <FormTextArea
+                        rows={10}
+                        description="Pass in valid SVG in here with the prop `fill='currentColor'`"
+                        label="SVG"
+                        meta={meta}
+                        input={input}
+                        rightActions={[
+                          {
+                            label: "Use Icon",
+                            action: () => input.onChange(DashboardIconsList[0]),
+                          },
+                        ]}
+                      />
+                    )}
+                  </Field>
+                )}
               </>
             )}
 

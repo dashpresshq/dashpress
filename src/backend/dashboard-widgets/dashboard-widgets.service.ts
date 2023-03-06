@@ -13,7 +13,13 @@ import {
   ListOrderService,
 } from "backend/list-order/list-order.service";
 import { rolesService, RolesService } from "backend/roles/roles.service";
-import { generatePortalDashboardWidgets } from "./portal";
+import { IValueLabel } from "@hadmean/chromista/dist/types";
+import { userFriendlyCase } from "shared/lib/strings";
+import { nanoid } from "nanoid";
+import { ROYGBIV } from "shared/constants/colors";
+import { DashboardIconsList } from "frontend/views/Dashboard/Icons";
+import { randomNumber } from "@hadmean/protozoa";
+import { mutateGeneratedDashboardWidgets } from "./portal";
 
 export class DashboardWidgetsService implements IApplicationService {
   constructor(
@@ -30,9 +36,10 @@ export class DashboardWidgetsService implements IApplicationService {
   private async generateDefaultDashboardWidgets(dashboardId: string) {
     const entitiesToShow = await this._entitiesService.getActiveEntities();
 
-    const defaultWidgets = await generatePortalDashboardWidgets(
-      entitiesToShow,
-      (entity) => this._entitiesService.getEntityFirstFieldType(entity, "date")
+    const defaultWidgets = await mutateGeneratedDashboardWidgets(
+      await this.generateDashboardWidgets(entitiesToShow, (entity) =>
+        this._entitiesService.getEntityFirstFieldType(entity, "date")
+      )
     );
 
     for (const widget of defaultWidgets) {
@@ -48,6 +55,49 @@ export class DashboardWidgetsService implements IApplicationService {
 
     return defaultWidgets;
   }
+
+  private generateDashboardWidgets = async (
+    entitiesToShow: IValueLabel[],
+    getEntityFirstDateFieldType: (entity: string) => Promise<string>
+  ) => {
+    const colorsList = Object.keys(ROYGBIV);
+
+    const DEFAULT_NUMBER_OF_SUMMARY_CARDS = 8;
+
+    const defaultWidgets: IWidgetConfig[] = await Promise.all(
+      entitiesToShow
+        .slice(0, DEFAULT_NUMBER_OF_SUMMARY_CARDS)
+        .map(async (entity, index) => {
+          const dateField = await getEntityFirstDateFieldType(entity.value);
+
+          return {
+            id: nanoid(),
+            title: userFriendlyCase(`${entity.value}`),
+            _type: "summary-card",
+            entity: entity.value,
+            queryId: "",
+            color: colorsList[index % (colorsList.length - 1)],
+            dateField,
+            icon: DashboardIconsList[
+              randomNumber(0, DashboardIconsList.length - 1)
+            ],
+          };
+        })
+    );
+
+    const firstEntity = entitiesToShow[0];
+    if (firstEntity) {
+      defaultWidgets.push({
+        id: nanoid(),
+        title: userFriendlyCase(`${firstEntity.value}`),
+        _type: "table",
+        entity: firstEntity.value,
+        queryId: "",
+      });
+    }
+
+    return defaultWidgets;
+  };
 
   private async listDashboardWidgetsToShow(dashboardId: string) {
     const widgetList = await this._listOrderService.getItemOrder(dashboardId);

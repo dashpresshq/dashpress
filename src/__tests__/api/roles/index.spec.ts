@@ -28,7 +28,7 @@ describe("/api/roles/index", () => {
           "value": "view-all-data-only",
         },
         {
-          "label": "Creator",
+          "label": "Super Admin",
           "value": "creator",
         },
         {

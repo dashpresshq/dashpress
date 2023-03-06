@@ -112,7 +112,7 @@ describe("/api/roles/[roleId]/index", () => {
           "value": "update-role",
         },
         {
-          "label": "Creator",
+          "label": "Super Admin",
           "value": "creator",
         },
         {
@@ -205,7 +205,7 @@ describe("/api/roles/[roleId]/index", () => {
           "value": "update-role",
         },
         {
-          "label": "Creator",
+          "label": "Super Admin",
           "value": "creator",
         },
         {
@@ -256,7 +256,7 @@ describe("/api/roles/[roleId]/index", () => {
           "value": "update-role",
         },
         {
-          "label": "Creator",
+          "label": "Super Admin",
           "value": "creator",
         },
         {

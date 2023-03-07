@@ -18,7 +18,6 @@ import { userFriendlyCase } from "shared/lib/strings";
 import { nanoid } from "nanoid";
 import { ROYGBIV } from "shared/constants/colors";
 import { DashboardIconsList } from "frontend/views/Dashboard/Icons";
-import { randomNumber } from "@hadmean/protozoa";
 import { mutateGeneratedDashboardWidgets } from "./portal";
 
 export class DashboardWidgetsService implements IApplicationService {
@@ -78,9 +77,7 @@ export class DashboardWidgetsService implements IApplicationService {
             queryId: "",
             color: colorsList[index % (colorsList.length - 1)],
             dateField,
-            icon: DashboardIconsList[
-              randomNumber(0, DashboardIconsList.length - 1)
-            ],
+            icon: DashboardIconsList[index % (DashboardIconsList.length - 1)],
           };
         })
     );

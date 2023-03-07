@@ -1,3 +1,4 @@
+import { MultipleMetaDataDataTransformer } from "backend/_shared/DataTransformer";
 import { IActionInstance } from "shared/types/actions";
 import { ActionsService, actionsService } from "./actions.service";
 
@@ -13,7 +14,9 @@ export class ActionsController {
   }
 
   async listActivatedActions() {
-    return await this._actionsService.listActivatedActions();
+    return MultipleMetaDataDataTransformer(
+      await this._actionsService.listActivatedActions()
+    );
   }
 
   async activateAction(
@@ -39,11 +42,15 @@ export class ActionsController {
   }
 
   async listEntityActionInstances(entity: string) {
-    return await this._actionsService.listEntityActionInstances(entity);
+    return MultipleMetaDataDataTransformer(
+      await this._actionsService.listEntityActionInstances(entity)
+    );
   }
 
   async listIntegrationActionInstances(integrationKey: string) {
-    return await this._actionsService.listIntegrationActions(integrationKey);
+    return MultipleMetaDataDataTransformer(
+      await this._actionsService.listIntegrationActions(integrationKey)
+    );
   }
 
   async deleteActionInstance(instanceId: string) {

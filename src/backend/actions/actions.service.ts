@@ -124,7 +124,7 @@ export class ActionsService implements IApplicationService {
       );
     }
 
-    await this._actionInstancesPersistenceService.upsertItem(instanceId, {
+    await this._actionInstancesPersistenceService.createItem(instanceId, {
       ...action,
       integrationKey,
       instanceId,
@@ -135,7 +135,7 @@ export class ActionsService implements IApplicationService {
     instanceId: string,
     instance: Omit<IActionInstance, "instanceId">
   ) {
-    await this._actionInstancesPersistenceService.upsertItem(instanceId, {
+    await this._actionInstancesPersistenceService.updateItem(instanceId, {
       ...instance,
       instanceId,
     });
@@ -205,7 +205,7 @@ export class ActionsService implements IApplicationService {
     const activationId = nanoid();
     const credentialsGroupKey = integrationKey.toUpperCase();
 
-    await this._activatedActionsPersistenceService.upsertItem(activationId, {
+    await this._activatedActionsPersistenceService.createItem(activationId, {
       activationId,
       integrationKey,
       credentialsGroupKey,

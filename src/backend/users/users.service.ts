@@ -44,7 +44,7 @@ export class UsersService implements IApplicationService {
     if (userExists) {
       throw new BadRequestError("Username already exists");
     }
-    await this._usersPersistenceService.upsertItem(user.username, {
+    await this._usersPersistenceService.createItem(user.username, {
       ...user,
       password: await HashService.make(user.password),
     });
@@ -138,7 +138,7 @@ export class UsersService implements IApplicationService {
     if (!user) {
       return;
     }
-    await this._usersPersistenceService.upsertItem(username, {
+    await this._usersPersistenceService.updateItem(username, {
       ...user,
       ...userDetails,
     });

@@ -1,3 +1,5 @@
+/* eslint-disable testing-library/no-node-access */
+/* eslint-disable testing-library/no-container */
 import "@testing-library/jest-dom";
 import React from "react";
 import { render, screen, within } from "@testing-library/react";
@@ -30,7 +32,7 @@ describe("pages/admin/settings/dashboard", () => {
       | "Type"
       | "Color"
       | "Date Field"
-      | "SVG"
+      | "Icon"
       | "Query";
     const options: Record<
       IWidgetConfig["_type"],
@@ -46,7 +48,7 @@ describe("pages/admin/settings/dashboard", () => {
           "Date Field": true,
           Entity: true,
           Query: true,
-          SVG: true,
+          Icon: true,
           Title: true,
           Type: true,
         },
@@ -58,7 +60,7 @@ describe("pages/admin/settings/dashboard", () => {
           "Date Field": false,
           Entity: true,
           Query: true,
-          SVG: false,
+          Icon: false,
           Title: true,
           Type: true,
         },
@@ -125,6 +127,105 @@ describe("pages/admin/settings/dashboard", () => {
       await userEvent.click(screen.getByRole("button", { name: "Done" }));
 
       expect(replaceMock).toHaveBeenCalledWith("/admin");
+    });
+  });
+
+  describe("Icon Input", () => {
+    it("should toggle Icon Input correctly", async () => {
+      render(
+        <AppWrapper>
+          <ManageDashboard />
+        </AppWrapper>
+      );
+
+      await userEvent.click(
+        screen.getByRole("button", { name: "New Dashboard Item" })
+      );
+
+      const dialog = screen.getByRole("dialog");
+
+      // Icon Toggle should be hidden
+      expect(
+        within(dialog).queryByLabelText("Use Icon")
+      ).not.toBeInTheDocument();
+
+      expect(
+        within(dialog).queryByLabelText("Use SVG")
+      ).not.toBeInTheDocument();
+
+      // Show Icon List
+
+      await userEvent.type(
+        within(dialog).getByLabelText("Type"),
+        "Summary Card"
+      );
+      await userEvent.keyboard("{Enter}");
+
+      expect(within(dialog).queryByLabelText("SVG")).not.toBeInTheDocument();
+
+      expect(within(dialog).queryByRole("Use Icon")).not.toBeInTheDocument();
+
+      expect(
+        within(dialog).getByRole("button", { name: "Use SVG" })
+      ).toBeInTheDocument();
+
+      // expect(container.querySelector(`input[name="icon"]`)).toHaveValue(
+      //   "ShoppingCart"
+      // );
+
+      await userEvent.type(within(dialog).getByLabelText("Icon"), "Download");
+
+      // expect(container.querySelector(`input[name="icon"]`)).toHaveValue(
+      //   "Download"
+      // );
+
+      // Show TextArea List
+
+      await userEvent.click(
+        within(dialog).getByRole("button", { name: "Use SVG" })
+      );
+
+      expect(within(dialog).queryByLabelText("Icon")).not.toBeInTheDocument();
+
+      expect(
+        within(dialog).queryByRole("button", { name: "Use SVG" })
+      ).not.toBeInTheDocument();
+
+      expect(
+        within(dialog).getByRole("button", { name: "Use Icon" })
+      ).toBeInTheDocument();
+
+      expect(within(dialog).getByLabelText("SVG")).toHaveValue("");
+
+      await userEvent.type(
+        within(dialog).getByLabelText("SVG"),
+        "<p>Custom Icon</p>"
+      );
+
+      expect(within(dialog).getByLabelText("SVG")).toHaveValue(
+        "<p>Custom Icon</p>"
+      );
+
+      // Toggle Back to Icon List
+
+      await userEvent.click(
+        within(dialog).getByRole("button", { name: "Use Icon" })
+      );
+      expect(within(dialog).queryByLabelText("SVG")).not.toBeInTheDocument();
+
+      expect(
+        within(dialog).queryByLabelText("Use Icon")
+      ).not.toBeInTheDocument();
+
+      // expect(container.querySelector(`input[name="icon"]`)).toHaveValue(
+      //   "ShoppingCart"
+      // );
+
+      expect(
+        within(dialog).getByRole("button", { name: "Use SVG" })
+      ).toBeInTheDocument();
+
+      await userEvent.type(within(dialog).getByLabelText("Icon"), "Mail");
     });
   });
 

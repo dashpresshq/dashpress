@@ -123,29 +123,29 @@ describe("/api/integrations/actions/[key]/index", () => {
       await activeHandler(activeReq, activeRes);
 
       expect(activeRes._getJSONData()).toMatchInlineSnapshot(`
-              [
-                {
-                  "activationId": "smtp-activation-id-1",
-                  "credentialsGroupKey": "SMTP",
-                  "integrationKey": "smtp",
-                },
-                {
-                  "activationId": "slack-activation-id-2",
-                  "credentialsGroupKey": "SLACK",
-                  "integrationKey": "slack",
-                },
-                {
-                  "activationId": "nano-id-1",
-                  "credentialsGroupKey": "SLACK",
-                  "integrationKey": "slack",
-                },
-                {
-                  "activationId": "http",
-                  "credentialsGroupKey": "none-existent",
-                  "integrationKey": "http",
-                },
-              ]
-          `);
+        [
+          {
+            "activationId": "smtp-activation-id-1",
+            "credentialsGroupKey": "SMTP",
+            "integrationKey": "smtp",
+          },
+          {
+            "activationId": "slack-activation-id-2",
+            "credentialsGroupKey": "SLACK",
+            "integrationKey": "slack",
+          },
+          {
+            "activationId": "nano-id-1",
+            "credentialsGroupKey": "SLACK",
+            "integrationKey": "slack",
+          },
+          {
+            "activationId": "http",
+            "credentialsGroupKey": "none-existent",
+            "integrationKey": "http",
+          },
+        ]
+      `);
 
       const { req: credentialsReq, res: credentialsRes } =
         createAuthenticatedMocks({

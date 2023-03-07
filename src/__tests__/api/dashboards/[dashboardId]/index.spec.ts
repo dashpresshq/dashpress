@@ -165,13 +165,7 @@ describe("/api/dashboards/[dashboardId]/index generation", () => {
           "color": "red",
           "dateField": "createdAt",
           "entity": "base-model",
-          "icon": "<svg
-                    fill="currentColor"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                    >
-                    <path fill="none" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
-                  </svg>",
+          "icon": "ShoppingCart",
           "id": "1",
           "queryId": "",
           "title": "Base Model",
@@ -180,13 +174,7 @@ describe("/api/dashboards/[dashboardId]/index generation", () => {
           "_type": "summary-card",
           "color": "orange",
           "entity": "secondary-model",
-          "icon": "<svg
-                    fill="currentColor"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                    >
-                    <path fill="none" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
-                  </svg>",
+          "icon": "Activity",
           "id": "2",
           "queryId": "",
           "title": "Secondary Model",
@@ -196,13 +184,7 @@ describe("/api/dashboards/[dashboardId]/index generation", () => {
           "color": "yellow",
           "dateField": "createdAt",
           "entity": "tests",
-          "icon": "<svg
-                    fill="currentColor"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                    >
-                    <path fill="none" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
-                  </svg>",
+          "icon": "ShoppingBag",
           "id": "3",
           "queryId": "",
           "title": "Tests",

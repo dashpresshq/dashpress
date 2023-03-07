@@ -79,10 +79,7 @@ describe("pages/admin/settings/dashboard", () => {
       // );
       // await userEvent.keyboard("{Enter}");
 
-      await userEvent.type(
-        within(dialog).getByLabelText("SVG"),
-        "<p>Demo SVG</p>"
-      );
+      await userEvent.type(within(dialog).getByLabelText("Icon"), "Download");
 
       await userEvent.click(
         within(dialog).getByRole("button", { name: "Save" })
@@ -105,9 +102,11 @@ describe("pages/admin/settings/dashboard", () => {
       expect(
         await within(widget).findByText("New Summary Card")
       ).toBeInTheDocument();
-      expect(
-        within(widget).getByLabelText("New Summary Card Icon")
-      ).toHaveTextContent("Demo SVG");
+      expect(within(widget).getByLabelText("New Summary Card Icon").innerHTML)
+        .toBe(`<svg fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path fill="none" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" d="M10 21a1 1 0 11-2 0 1 1 0 012 0zM21 21a1 1 0 11-2 0 1 1 0 012 0zM1 1h4l2.68 13.39c.188.925.995 1.61 1.962 1.61h.04-.002H19.438a2 2 0 001.959-1.597l.002-.013 1.6-8.39h-17"></path>
+            </svg>`);
+
       expect(within(widget).getByLabelText("Total Count")).toHaveTextContent(
         "1.52K"
       );
@@ -204,9 +203,13 @@ describe("pages/admin/settings/dashboard", () => {
       await userEvent.type(within(dialog).getByLabelText("Color"), "red");
       await userEvent.keyboard("{Enter}");
 
+      await userEvent.click(
+        within(dialog).getByRole("button", { name: "Use SVG" })
+      );
+
       await userEvent.type(
         within(dialog).getByLabelText("SVG"),
-        "<p>Updated</p>"
+        "<p>Custom Icon</p>"
       );
 
       await userEvent.click(
@@ -234,7 +237,7 @@ describe("pages/admin/settings/dashboard", () => {
       ).toBeInTheDocument();
       expect(
         within(widget).getByLabelText("New Summary Card Updated Icon")
-      ).toHaveTextContent("Demo SVGUpdated");
+      ).toHaveTextContent("Custom Icon");
       expect(
         within(widget).getByLabelText("New Summary Card Updated Icon")
       ).toHaveAttribute("color", "#FF165D");

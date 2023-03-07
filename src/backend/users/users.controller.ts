@@ -1,5 +1,9 @@
 import { ForbiddenError } from "backend/lib/errors";
 import { RolesService, rolesService } from "backend/roles/roles.service";
+import {
+  MultipleMetaDataDataTransformer,
+  SingleMetaDataDataTransformer,
+} from "backend/_shared/DataTransformer";
 import { REQUEST_ERROR_CODES } from "shared/constants/auth";
 import { ISignInForm } from "shared/form-schemas/auth/signin";
 import { IChangePasswordForm } from "shared/form-schemas/profile/password";
@@ -23,7 +27,9 @@ export class UsersController {
   }
 
   async listUsers() {
-    return await this._usersService.listUsers();
+    return MultipleMetaDataDataTransformer(
+      await this._usersService.listUsers()
+    );
   }
 
   async createUser(user: IAccountUser) {
@@ -35,7 +41,9 @@ export class UsersController {
   }
 
   async getUserProfile(username: string) {
-    return await this._usersService.getUser(username);
+    return SingleMetaDataDataTransformer(
+      await this._usersService.getUser(username)
+    );
   }
 
   async getAuthenticatedUserBag(
@@ -46,10 +54,10 @@ export class UsersController {
       const permissions = await this._rolesService.getRolePermissions(
         profile.role
       );
-      return {
+      return SingleMetaDataDataTransformer({
         ...profile,
         permissions,
-      };
+      });
     } catch (error) {
       /*
         Any error here should make the user redirect to login page

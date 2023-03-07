@@ -15,6 +15,10 @@ export const useSelectionViews = (): IAppMenuItems[] => {
 
   const appendPortalMenuItems = useAppendPortalMenuItems();
 
+  const activeEntituesLabelsMap = Object.fromEntries(
+    (activeEntities.data || []).map(({ value, label }) => [value, label])
+  );
+
   const menuItems: IAppMenuItems[] = [
     {
       title: "Home",
@@ -30,15 +34,15 @@ export const useSelectionViews = (): IAppMenuItems[] => {
         singular: "Entity",
         menuItems: {
           ...activeEntities,
-          data: (activeEntities.data || []).map(({ label, value }) => ({
-            title: label,
-            searchKeywords: value,
+          data: (activeEntities.data || []).map(({ value }) => ({
+            value,
             secondaryAction: () => {
               clear();
             },
             action: NAVIGATION_LINKS.ENTITY.TABLE(value),
           })),
         },
+        getLabel: (value) => activeEntituesLabelsMap[value],
       },
       order: 20,
     },

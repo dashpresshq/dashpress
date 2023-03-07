@@ -5,10 +5,15 @@ export function useContextState<T>(
   context: string,
   defaultValue: T
 ): [T, (value: T) => void] {
-  const [contextState, setContextState] = useSessionStorage<T>(
-    `${domain}-${context}-context-state`,
-    defaultValue
+  const key = `${domain}-${context}`;
+  const [contextState, setContextState] = useSessionStorage<Record<string, T>>(
+    "context-state",
+    {}
   );
 
-  return [contextState, setContextState];
+  const setValue = (value: T) => {
+    setContextState({ ...contextState, [key]: value });
+  };
+
+  return [contextState[key] || defaultValue, setValue];
 }

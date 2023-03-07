@@ -19,8 +19,8 @@ import { EntityTypesForSelection, IColorableSelection } from "shared/types/ui";
 import { Check } from "react-feather";
 import {
   isUseColorsFlagOn,
-  SYSTEM_COLORS,
-} from "shared/logic/entities/selection.utlis";
+  OPTIONS_COLORS,
+} from "shared/logic/entities/selection.utils";
 import { isBlackOrWhite } from "./isBlackOrWhite";
 
 const StyledColorBox = styled.button<{ color: string }>`
@@ -82,7 +82,7 @@ export function FieldSelectionCanvas({
                   ).selections.map((selection, index) => ({
                     ...selection,
                     color: newUseColorValue
-                      ? SYSTEM_COLORS[index % SYSTEM_COLORS.length]
+                      ? OPTIONS_COLORS[index % OPTIONS_COLORS.length]
                       : undefined,
                   }))
                 );
@@ -150,7 +150,7 @@ export function FieldSelectionCanvas({
                       >
                         {(renderProps) => (
                           <Stack>
-                            {SYSTEM_COLORS.map((systemColor) => (
+                            {OPTIONS_COLORS.map((systemColor) => (
                               <div key={systemColor}>
                                 <StyledColorBox
                                   type="button"
@@ -189,8 +189,8 @@ export function FieldSelectionCanvas({
                           label: "",
                           value: "",
                           color: useColors
-                            ? SYSTEM_COLORS[
-                                fields.length % SYSTEM_COLORS.length
+                            ? OPTIONS_COLORS[
+                                fields.length % OPTIONS_COLORS.length
                               ]
                             : undefined,
                         } as IColorableSelection);

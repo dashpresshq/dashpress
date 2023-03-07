@@ -1,7 +1,7 @@
 import { userFriendlyCase } from "shared/lib/strings";
 import uniqBy from "lodash/uniqBy";
 import { EntityTypesForSelection, IColorableSelection } from "shared/types/ui";
-import { isUseColorsFlagOn, SYSTEM_COLORS } from "./selection.utlis";
+import { isUseColorsFlagOn, OPTIONS_COLORS } from "./selection.utils";
 
 export const getEntitySelectionConfig = (
   entityType: EntityTypesForSelection,
@@ -15,12 +15,12 @@ export const getEntitySelectionConfig = (
           {
             value: true,
             label: "Yes",
-            color: SYSTEM_COLORS[0],
+            color: OPTIONS_COLORS[0],
           },
           {
             value: false,
             label: "No",
-            color: SYSTEM_COLORS[1],
+            color: OPTIONS_COLORS[1],
           },
         ]
       );
@@ -40,7 +40,7 @@ export const getEntitySelectionConfig = (
             value: enumValue,
             label: userFriendlyCase(enumValue),
             color: shouldUseColor
-              ? SYSTEM_COLORS[index % SYSTEM_COLORS.length]
+              ? OPTIONS_COLORS[index % OPTIONS_COLORS.length]
               : undefined,
           })),
         ],

@@ -66,16 +66,18 @@ export function SelectionTab({ columns, isLoading, toggling, error }: IProps) {
           <RenderList
             items={columns.fields}
             singular="Field"
+            getLabel={columns.getEntityFieldLabels}
             render={(menuItem) => {
               const isHidden = currentPageSelection.includes(menuItem.name);
 
               return (
                 <SectionListItem
-                  label={columns.getEntityFieldLabels(menuItem.name)}
+                  label={menuItem.label}
                   key={menuItem.name}
                   disabled={!toggling.enabled}
+                  subtle={menuItem.isId}
                   toggle={
-                    toggling.enabled
+                    toggling.enabled && !menuItem.isId
                       ? {
                           selected: !isHidden,
                           onChange: () => {

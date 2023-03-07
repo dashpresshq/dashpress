@@ -46,9 +46,13 @@ export class ListOrderService implements IApplicationService {
     order: string[],
     itemListOrder: T[]
   ): T[] {
+    if (order.length === 0) {
+      return itemListOrder;
+    }
     const itemsMap = Object.fromEntries(
       itemListOrder.map((item) => [item.id, item])
     );
+    // TODO add the remaing list order items at the end
 
     return order.map((item) => itemsMap[item]);
   }

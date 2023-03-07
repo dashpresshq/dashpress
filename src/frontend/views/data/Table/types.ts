@@ -5,7 +5,7 @@ export interface ITableViewProps {
   entity: string;
   lean?: true;
   border?: true;
-  contextKey?: string;
+  tabKey?: string;
   persitentFilters?: QueryFilter[];
   defaultTableState?: Pick<
     IPaginatedDataState<unknown>,

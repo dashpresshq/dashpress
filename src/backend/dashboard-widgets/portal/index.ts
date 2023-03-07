@@ -1,1 +1,1 @@
-export { generatePortalDashboardWidgets } from "./main";
+export { mutateGeneratedDashboardWidgets } from "./main";

@@ -67,22 +67,22 @@ describe("pages/admin/[entity]/config/relations", () => {
       const currentTab = screen.getByRole("tabpanel");
 
       await userEvent.click(
-        within(currentTab).getByRole("checkbox", {
+        within(currentTab).getByRole("button", {
           name: "Custom Label For Entity 4",
         })
       );
       await userEvent.click(
-        within(currentTab).getByRole("checkbox", {
+        within(currentTab).getByRole("button", {
           name: "Plural related-entity-3",
         })
       );
       await userEvent.click(
-        within(currentTab).getByRole("checkbox", {
+        within(currentTab).getByRole("button", {
           name: "Plural related-entity-3",
         })
       );
       await userEvent.click(
-        within(currentTab).getByRole("checkbox", {
+        within(currentTab).getByRole("button", {
           name: "Plural hidden-related-entity-5",
         })
       );

@@ -14,6 +14,7 @@ import { DemoVideo } from "./Demo";
 import { useDashboardRelativeDayStore } from "./relativeTime.store";
 import { DASHBOARD_RELATIVE_DAYS } from "./constants";
 import { DashboardSkeleton } from "./Skeleton";
+import { DetailsCanvas } from "../data/Table/DetailsCanvas";
 
 const Root = styled.div`
   ${gridRoot};
@@ -68,6 +69,7 @@ export function BaseDashboard({ dashboardId, showDemo, manageLink }: IProps) {
           ))}
         </Root>
       </ViewStateMachine>
+      <DetailsCanvas />
     </AppLayout>
   );
 }

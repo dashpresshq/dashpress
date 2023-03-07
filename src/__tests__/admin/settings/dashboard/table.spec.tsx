@@ -80,15 +80,6 @@ describe("pages/admin/settings/dashboard", () => {
       expect(
         within(widget).getByRole("link", { name: "View" })
       ).toHaveAttribute("href", "/admin/entity-1?tab=Verified%20Entity%20View");
-      // :eyes
-      /*
--          "186‌hello > p-1,t=5,o=d < 347th May 2022foo",
--          "187‌there > p-1,t=5,o=d < 217th May 2021foo",
--          "188‌today > p-1,t=5,o=d < 187th Feb 2022bar",
-+          "26‌hello > p-1,t=5,o=a < 347th May 2022foo",
-+          "27‌there > p-1,t=5,o=a < 217th May 2021foo",
-+          "28‌today > p-1,t=5,o=a < 187th Feb 2022bar",
-*/
 
       expect(await getTableRows(widget)).toMatchInlineSnapshot(`
         [
@@ -158,16 +149,12 @@ describe("pages/admin/settings/dashboard", () => {
         within(widget).getByRole("link", { name: "View" })
       ).toHaveAttribute("href", "/admin/entity-2?tab=User%20Entity%20View");
 
-      // "184‌hello > p-1,t=5,o=a < 347th May 2022foo",
-      // "185‌there > p-1,t=5,o=a < 217th May 2021foo",
-      // "186‌today > p-1,t=5,o=a < 187th Feb 2022bar",
-
       expect(await getTableRows(widget)).toMatchInlineSnapshot(`
         [
           "Entity 2 Id FieldEntity 2 Reference FieldEntity 2 String FieldEntity 2 Number FieldEntity 2 Boolean FieldEntity 2 Date FieldEntity 2 Enum Field",
-          "26‌hello > p-1,t=5,o=a < 347th May 2022foo",
-          "27‌there > p-1,t=5,o=a < 217th May 2021foo",
-          "28‌today > p-1,t=5,o=a < 187th Feb 2022bar",
+          "184‌hello > p-1,t=5,o=a < 347th May 2022foo",
+          "185‌there > p-1,t=5,o=a < 217th May 2021foo",
+          "186‌today > p-1,t=5,o=a < 187th Feb 2022bar",
         ]
       `);
     });
@@ -208,21 +195,12 @@ describe("pages/admin/settings/dashboard", () => {
         within(widget).getByRole("link", { name: "View" })
       ).toHaveAttribute("href", "/admin/entity-2");
 
-      /*
--          "26‌hello > p-1,t=5,o=a < 347th May 2022foo",
--          "27‌there > p-1,t=5,o=a < 217th May 2021foo",
--          "28‌today > p-1,t=5,o=a < 187th Feb 2022bar",
-+          "184‌hello > p-1,t=5,o=a < 347th May 2022foo",
-+          "185‌there > p-1,t=5,o=a < 217th May 2021foo",
-+          "186‌today > p-1,t=5,o=a < 187th Feb 2022bar",
-      */
-
       expect(await getTableRows(widget)).toMatchInlineSnapshot(`
         [
           "Entity 2 Id FieldEntity 2 Reference FieldEntity 2 String FieldEntity 2 Number FieldEntity 2 Boolean FieldEntity 2 Date FieldEntity 2 Enum Field",
-          "26‌hello > p-1,t=5,o=a < 347th May 2022foo",
-          "27‌there > p-1,t=5,o=a < 217th May 2021foo",
-          "28‌today > p-1,t=5,o=a < 187th Feb 2022bar",
+          "184‌hello > p-1,t=5,o=a < 347th May 2022foo",
+          "185‌there > p-1,t=5,o=a < 217th May 2021foo",
+          "186‌today > p-1,t=5,o=a < 187th Feb 2022bar",
         ]
       `);
     });

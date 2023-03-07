@@ -1,4 +1,5 @@
 import { StringUtils, SLUG_LOADING_VALUE } from "@hadmean/protozoa";
+import { userFriendlyCase } from "shared/lib/strings";
 import { PORTAL_USER_PERMISSIONS } from "./portal/user";
 
 export enum SystemRoles {
@@ -12,6 +13,12 @@ export const isSystemRole = (roleId: string) => {
 
 export const makeRoleId = (roleName: string) => {
   return StringUtils.sluggify(roleName);
+};
+
+export const roleLabel = (value: string) => {
+  return value === SystemRoles.Creator
+    ? "Super Admin"
+    : userFriendlyCase(value);
 };
 
 export interface IAccountUser {

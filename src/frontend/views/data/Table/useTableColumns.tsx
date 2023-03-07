@@ -63,6 +63,9 @@ const buildFilterConfigFromType = (prop: {
       filterType.bag = entityFieldSelections;
       return filterType;
     case "list":
+      if (!referenceField) {
+        return undefined;
+      }
       filterType.bag = ENTITY_LIST_PATH(referenceField);
       return filterType;
   }

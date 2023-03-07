@@ -9,12 +9,15 @@ import { AppLayout } from "frontend/_layouts/app";
 import { UserPlus } from "react-feather";
 import { NAVIGATION_LINKS, useSetPageDetails } from "frontend/lib/routing";
 import { useRouter } from "next/router";
-import { IAccountProfile, USER_PERMISSIONS } from "shared/types/user";
+import {
+  IAccountProfile,
+  roleLabel,
+  USER_PERMISSIONS,
+} from "shared/types/user";
 import { FEPaginationTable } from "frontend/components/FEPaginationTable";
 import { useApi } from "@hadmean/protozoa";
 import { IRolesList } from "shared/types/roles";
 import { ISystemStatusForDisplay } from "@hadmean/chromista/dist/types";
-import { userFriendlyCase } from "shared/lib/strings";
 import {
   ADMIN_USERS_LIST_ENDPOINT,
   useUserDeletionMutation,
@@ -98,7 +101,7 @@ export function ListUsers() {
                 _type: "status",
                 bag: (roles.data || []) as ISystemStatusForDisplay[],
               },
-              Cell: ({ value }) => userFriendlyCase(value as string),
+              Cell: ({ value }) => roleLabel(value as string),
             },
             {
               Header: "Action",

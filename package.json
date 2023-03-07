@@ -1,10 +1,10 @@
 {
   "name": "hadmean",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "license": "GPL-3.0-or-later",
   "scripts": {
-    "start": "next dev",
-    "start:prod": "next start",
+    "dev": "next dev",
+    "start": "next start",
     "build:next": "next build",
     "commit": "cz",
     "release": "standard-version",
@@ -30,8 +30,8 @@
   "bin": "./bin/hadmean",
   "dependencies": {
     "@hadmean/bacteria": "^0.0.7",
-    "@hadmean/chromista": "^1.0.81",
-    "@hadmean/protozoa": "^1.0.20",
+    "@hadmean/chromista": "^1.0.89",
+    "@hadmean/protozoa": "^1.0.21",
     "@types/cryptr": "^4.0.1",
     "@types/jsonwebtoken": "^8.5.8",
     "@types/microseconds": "^0.2.0",

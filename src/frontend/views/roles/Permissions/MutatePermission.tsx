@@ -19,7 +19,7 @@ export function MutatePermission({ permissionList }: IProps) {
   return (
     permissionList.length > 0 && (
       <RenderList
-        sortByName
+        sortByLabel
         items={permissionList.map(({ label, value }) => ({
           name: label,
           value,

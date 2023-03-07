@@ -26,6 +26,8 @@ import {
 import { gridRoot } from "./styles";
 import { DashboardSettings } from "./settings";
 import { DashboardSkeleton } from "./Skeleton";
+import { DetailsCanvas } from "../data/Table/DetailsCanvas";
+import { DashboardIconsList } from "./Icons";
 
 const Root = styled.div`
   .list {
@@ -158,12 +160,15 @@ export function BaseManageDashboard({ dashboardId, doneLink, title }: IProps) {
               }
               closeDashboardItem();
             }}
-            initialValues={(widgets.data || []).find(
-              ({ id }) => id === currentDashboardItem
-            )}
+            initialValues={
+              (widgets.data || []).find(
+                ({ id }) => id === currentDashboardItem
+              ) || { icon: DashboardIconsList[0] }
+            }
           />
         </ViewStateMachine>
       </OffCanvas>
+      <DetailsCanvas />
     </>
   );
 }

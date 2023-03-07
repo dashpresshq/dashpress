@@ -123,7 +123,7 @@ describe("pages/roles/[roleId]/index", () => {
     const currentTab = screen.getByRole("tabpanel");
 
     await userEvent.click(
-      await within(currentTab).findByRole("checkbox", {
+      await within(currentTab).findByRole("button", {
         name: "Can Reset Password",
       })
     );
@@ -132,20 +132,20 @@ describe("pages/roles/[roleId]/index", () => {
     );
 
     await userEvent.click(
-      within(currentTab).getByRole("checkbox", { name: "Can Manage Dashboard" })
+      within(currentTab).getByRole("button", { name: "Can Manage Dashboard" })
     );
     expect((await screen.findAllByRole("status"))[0]).toHaveTextContent(
       "Role Permission Created Successfully"
     );
 
     await userEvent.click(
-      within(currentTab).getByRole("checkbox", { name: "Can Manage Users" })
+      within(currentTab).getByRole("button", { name: "Can Manage Users" })
     );
     expect((await screen.findAllByRole("status"))[0]).toHaveTextContent(
       "Role Permission Deleted Successfully"
     );
     await userEvent.click(
-      within(currentTab).getByRole("checkbox", { name: "Can Manage Users" })
+      within(currentTab).getByRole("button", { name: "Can Manage Users" })
     );
     expect((await screen.findAllByRole("status"))[0]).toHaveTextContent(
       "Role Permission Created Successfully"
@@ -198,7 +198,7 @@ describe("pages/roles/[roleId]/index", () => {
     const currentTab = screen.getByRole("tabpanel");
 
     await userEvent.click(
-      await within(currentTab).findByRole("checkbox", {
+      await within(currentTab).findByRole("button", {
         name: "Plural entity-2",
       })
     );
@@ -207,14 +207,14 @@ describe("pages/roles/[roleId]/index", () => {
     );
 
     await userEvent.click(
-      within(currentTab).getByRole("checkbox", { name: "Plural entity-1" })
+      within(currentTab).getByRole("button", { name: "Plural entity-1" })
     );
     expect((await screen.findAllByRole("status"))[0]).toHaveTextContent(
       "Role Permission Created Successfully"
     );
 
     await userEvent.click(
-      within(currentTab).getByRole("checkbox", {
+      within(currentTab).getByRole("button", {
         name: "Plural disabled-entity-2",
       })
     );
@@ -222,7 +222,7 @@ describe("pages/roles/[roleId]/index", () => {
       "Role Permission Deleted Successfully"
     );
     await userEvent.click(
-      within(currentTab).getByRole("checkbox", {
+      within(currentTab).getByRole("button", {
         name: "Plural disabled-entity-2",
       })
     );

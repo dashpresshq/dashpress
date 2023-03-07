@@ -54,17 +54,29 @@
   process.stdout.write("\n");
 
   console.log(`
-  ###   ###  #####  ######     ###       #####  ###########  #####  #####    ###
-  ###   ###  ######  ###  ###   ######   ######  ##########  ######  ######   ###
-  ###   ###  ###  ###  ###   ###  ### ### ### ###  ###       ###  ###  #######  ###
-  #########  #########  ###    ### ###  #####  ###  #######  #########  ###  ### ### 
-  #########  ##########  ###    ### ###   ###   ###  ######  ##########  ###  ### ###
-  ###   ###  ###     ###  ###   ###  ###         ###  ###    ###     ###  ###   ######
-  ###   ###  ###      ###  ###  ###   ###         ###  ####  ###      ###  ###    #####
-  ###   ###  ###       ###  ######     ###         ###  ###  ###       ###  ###    #####
+  /88   /88                 /88
+  | 88  | 88                | 88
+  | 88  | 88  /888888   /8888888 /888888/8888   /888888   /888888  /8888888
+  | 88888888 |____  88 /88__  88| 88_  88_  88 /88__  88 |____  88| 88__  88
+  | 88__  88  /8888888| 88  | 88| 88 \\ 88 \\ 88| 88888888  /8888888| 88  \\ 88
+  | 88  | 88 /88__  88| 88  | 88| 88 | 88 | 88| 88_____/ /88__  88| 88  | 88
+  | 88  | 88|  8888888|  8888888| 88 | 88 | 88|  8888888|  888888$| 88  | 88
+  |__/  |__/ \\_______/ \\_______/|__/ |__/ |__/ \\_______/ \\_______/|__/  |__/
+
   `);
 
-  console.log(`✨ You're about to run Hadmean v${currentPkgJson.version}`);
+  const MINIMUM_NODE_VERSION = 16;
+
+  console.log(`🟢 You're about to run Hadmean v${currentPkgJson.version}`);
+
+  const nodeVersion = process.versions.node;
+
+  if (+nodeVersion.split(".")[0] < MINIMUM_NODE_VERSION) {
+    console.log("");
+    console.warn(
+      `🟨 Your node version ${nodeVersion} is not officially supported. Kindly upgrade to version ${MINIMUM_NODE_VERSION} before reporting any issues.`
+    );
+  }
 
   defaultEnv();
 
@@ -75,29 +87,24 @@
   const endpoint = `http://localhost:${process.env.PORT || 3000}`;
 
   console.log(`- ${terminalLink(
-    "Show us support by dropping a ✨ on GitHub",
+    "💗 Show us support by dropping a ✨ at github.com/hadmean/hadmean",
     "https://github.com/hadmean/hadmean"
   )}
 
 - ${terminalLink(
-    "If you have questions? Join our community",
+    "💬 If you have questions? Join our community",
     "https://discord.gg/aV6DxwXhzN"
-  )}
-
-- ${terminalLink(
-    "Follow us on Twitter to get latest updates",
-    "https://twitter.com/hadmeanHQ"
   )}
     `);
 
-  const { stdout, stderr } = execa("npm", ["run", "start:prod"], {
+  const { stdout, stderr } = execa("npm", ["run", "start"], {
     cwd: path.join(__dirname, ".."),
   });
 
   const WAIT_FOR_NEXT_TO_START = 1000;
 
   console.log(
-    `🎉 Application started successfully at ${terminalLink(endpoint, endpoint)}`
+    `🚀 Application started successfully at ${terminalLink(endpoint, endpoint)}`
   );
 
   /*

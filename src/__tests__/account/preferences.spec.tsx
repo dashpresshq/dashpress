@@ -1,5 +1,3 @@
-/* eslint-disable testing-library/no-node-access */
-/* eslint-disable testing-library/no-container */
 import "@testing-library/jest-dom";
 import React from "react";
 import { render, screen, waitFor } from "@testing-library/react";
@@ -20,14 +18,14 @@ describe("pages/account/preferences", () => {
   });
 
   it("should display user preferences", async () => {
-    const { container } = render(
+    render(
       <AppWrapper>
         <UserPreferences />
       </AppWrapper>
     );
     await waitFor(() => {
-      expect(container.querySelector(`input[name="theme"]`)).toHaveValue(
-        "dark"
+      expect(screen.getByRole("option", { selected: true })).toHaveTextContent(
+        "Dark"
       );
     });
   });
@@ -38,8 +36,7 @@ describe("pages/account/preferences", () => {
         <UserPreferences />
       </AppWrapper>
     );
-    await userEvent.type(screen.getByLabelText("Theme"), "Light");
-    await userEvent.keyboard("{Enter}");
+    await userEvent.click(screen.getByRole("option", { name: "Light" }));
 
     await userEvent.click(
       screen.getByRole("button", { name: "Save Preferences" })
@@ -51,14 +48,14 @@ describe("pages/account/preferences", () => {
   });
 
   it("should display updated preference", async () => {
-    const { container } = render(
+    render(
       <AppWrapper>
         <UserPreferences />
       </AppWrapper>
     );
     await waitFor(() => {
-      expect(container.querySelector(`input[name="theme"]`)).toHaveValue(
-        "light"
+      expect(screen.getByRole("option", { selected: true })).toHaveTextContent(
+        "Light"
       );
     });
   });

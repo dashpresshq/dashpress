@@ -55,30 +55,38 @@
 ---
 
 ## About
-Hadmean is an admin app generator. 
+Hadmean generates powerful admin apps from your database information 
+- With just one command
+- Under 30 seconds 
+- No tutorial
+- No learning curve
+- No drag and drop
+- No technical skills required
+- Zero maintenance 
 
-It generates powerful internal tools in seconds with just one command, no learning curve, no technical skills and finally zero maintenance.
+What you get is a fully functional admin app that is ready to be deployed.
 
-Hadmean will help you focus your engineering resources on building exciting features and not building and maintaining admin dashboards.
+Hadmean will help you focus your engineering resources on building exciting features and not building and maintaining boring and repetitive CRUD apps.
 
 ### Demo
-https://demo.hadmean.com is an example admin app generated with zero programming knowledge.
+https://demo.hadmean.com is an example admin app generated with Hadmean without writing any line of code.
 
 ### Features Walkthrough Video
-Click on the image below to see what you get with Hadmean.
+Click on the image below to see a walkthrough of the many features Hadmean provides.
 
-[![Watch the video](https://img.youtube.com/vi/J43YtoSPFRw/mqdefault.jpg)](https://youtu.be/J43YtoSPFRw)
+[![Watch the video](https://img.youtube.com/vi/aO500EjHw1c/mqdefault.jpg)](https://youtu.be/aO500EjHw1c)
 
 
 ### Motivation
-Most internal tool generators make you build from the ground up i.e you get a blank canvas, drag and drop components, and wire them together with SQL and Javascript/Python to satisfy your business requirement. This I believe has many problems.
+Most internal tool applications make you build from the ground up i.e you get a blank canvas, drag and drop components, and wire them together with SQL and Javascript/Python to satisfy your business requirement. This I believe has many problems.
 
-- They require some technical know-how. 
+- They require some technical knowledge. 
 - They require some learning curve. 
-- They require time to build and maintain. 
+- They require time to build.
 - You duplicate a lot of business logic already in your database.
+- You to maintain them. 
 
-Hadmean attempts internal tool generation with a new approach by introspecting your database and building a multi-page application based on all the info it can find like your field types, relationships, constraints etc. You literally can have your admin app done under 1 minute without any tutorial or coding.
+Hadmean attempts internal tool generation with a new approach by introspecting your database and building a multi-page application based on all the info it can find like your field types, relationships, constraints etc. You literally can have your admin app done in seconds without any tutorial or coding.
 
 ### Why you should try Hadmean
 - It is free
@@ -87,7 +95,7 @@ Hadmean attempts internal tool generation with a new approach by introspecting y
 - The little learning curve with truly less than 5% technical knowledge requirement
 - Tons of features
 - Language/framework agnostic
-- Lastly, It is open source, It doesn't get more customizable than that
+- Lastly, It is open source.
 
 ## Getting Started
 
@@ -103,7 +111,9 @@ $ cd <project_name>
 $ npx hadmean
 ```
 
-That is all, You will be able to see the application on http://localhost:3000
+That is all, You will be able to see the application on http://localhost:3000.
+
+If you prefer to use Docker, Check the `Dockerfile.example` file in the root folder of the repo.
 
 
 ## Features

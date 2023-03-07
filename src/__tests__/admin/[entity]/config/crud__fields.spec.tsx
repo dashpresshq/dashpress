@@ -99,18 +99,18 @@ describe("pages/admin/[entity]/config/crud", () => {
       const currentTab = screen.getByRole("tabpanel");
 
       await userEvent.click(
-        await within(currentTab).findByRole("checkbox", { name: "Field 1" })
+        await within(currentTab).findByRole("button", { name: "Field 1" })
       );
 
       await userEvent.click(
-        within(currentTab).getByRole("checkbox", { name: "Field 2" })
+        within(currentTab).getByRole("button", { name: "Field 2" })
       );
       await userEvent.click(
-        within(currentTab).getByRole("checkbox", { name: "Field 2" })
+        within(currentTab).getByRole("button", { name: "Field 2" })
       );
 
       await userEvent.click(
-        within(currentTab).getByRole("checkbox", { name: "Hidden Field 1" })
+        within(currentTab).getByRole("button", { name: "Hidden Field 1" })
       );
 
       await userEvent.click(
@@ -151,7 +151,7 @@ describe("pages/admin/[entity]/config/crud", () => {
     });
   });
 
-  it("should show Id field for only details and table and not update and create", async () => {
+  it("should show hide id fields from selection", async () => {
     useRouter.mockImplementation(() => ({
       asPath: "/",
       query: {
@@ -166,18 +166,18 @@ describe("pages/admin/[entity]/config/crud", () => {
     );
 
     expect(
-      await screen.findByRole("checkbox", {
+      screen.queryByRole("checkbox", {
         name: "Primary",
       })
-    ).toBeInTheDocument();
+    ).not.toBeInTheDocument();
 
     await userEvent.click(screen.getByRole("tab", { name: "Details" }));
 
     expect(
-      await screen.findByRole("checkbox", {
+      screen.queryByRole("checkbox", {
         name: "Primary",
       })
-    ).toBeInTheDocument();
+    ).not.toBeInTheDocument();
 
     await userEvent.click(screen.getByRole("tab", { name: "Create" }));
 

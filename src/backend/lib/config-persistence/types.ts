@@ -2,15 +2,15 @@ import { PortalConfigDomain } from "./portal";
 
 export type ConfigDomain =
   | PortalConfigDomain
-  | "users"
+  | "users" //
   | "schema"
   | "credentials"
   | "constants"
   | "environment-variables"
-  | "dashboard-widgets"
+  | "dashboard-widgets" //
   | "app-config"
   | "packages"
-  | "list-order"
+  | "list-order" // X
   | "action_instances"
   | "activated_actions"
   | "activated_storage"

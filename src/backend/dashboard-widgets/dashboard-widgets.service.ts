@@ -43,7 +43,7 @@ export class DashboardWidgetsService implements IApplicationService {
     );
 
     for (const widget of defaultWidgets) {
-      await this._dashboardWidgetsPersistenceService.upsertItem(
+      await this._dashboardWidgetsPersistenceService.createItem(
         widget.id,
         widget
       );
@@ -125,7 +125,7 @@ export class DashboardWidgetsService implements IApplicationService {
   }
 
   async createWidget(widget: IWidgetConfig, dashboardId: string) {
-    await this._dashboardWidgetsPersistenceService.upsertItem(
+    await this._dashboardWidgetsPersistenceService.createItem(
       widget.id,
       widget
     );
@@ -138,7 +138,7 @@ export class DashboardWidgetsService implements IApplicationService {
   }
 
   async updateWidget(widgetId: string, widget: IWidgetConfig) {
-    await this._dashboardWidgetsPersistenceService.upsertItem(widgetId, widget);
+    await this._dashboardWidgetsPersistenceService.updateItem(widgetId, widget);
   }
 
   // TODO when disabling entities then remove the correspoding entity here

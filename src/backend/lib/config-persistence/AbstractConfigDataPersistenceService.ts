@@ -46,6 +46,21 @@ export abstract class AbstractConfigDataPersistenceService<T> {
 
   public abstract upsertItem(key: string, data: T): Promise<void>;
 
+  public async createItem(key: string, data: T): Promise<void> {
+    await this.upsertItem(key, {
+      ...data,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    });
+  }
+
+  public async updateItem(key: string, data: T): Promise<void> {
+    await this.upsertItem(key, {
+      ...data,
+      updatedAt: new Date(),
+    });
+  }
+
   public async upsertItemWithMaybeSecondaryKey(
     key: string,
     value: T,

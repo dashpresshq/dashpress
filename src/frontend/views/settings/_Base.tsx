@@ -67,7 +67,7 @@ export function BaseSettingsLayout({ children }: IProps) {
 
   return (
     <AppLayout>
-      {100 > 5 && (
+      {false && (
         <>
           <ErrorAlert
             renderJsx

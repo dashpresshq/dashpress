@@ -1,4 +1,3 @@
-import { MultipleMetaDataDataTransformer } from "backend/_shared/DataTransformer";
 import { IWidgetConfig } from "shared/types/dashboard";
 import {
   DashboardWidgetsService,
@@ -9,11 +8,9 @@ export class DashboardWidgetsController {
   constructor(private _dashboardWidgetsService: DashboardWidgetsService) {}
 
   async listDashboardWidgets(dashboardId: string, userRole: string) {
-    return MultipleMetaDataDataTransformer(
-      await this._dashboardWidgetsService.listDashboardWidgets(
-        dashboardId,
-        userRole
-      )
+    return await this._dashboardWidgetsService.listDashboardWidgets(
+      dashboardId,
+      userRole
     );
   }
 

@@ -65,8 +65,8 @@ describe.each(PERSITENT_ADAPTORS)(
       await adaptor.setup();
     });
 
-    it("should get create new item when upserting", async () => {
-      await adaptor.upsertItem("foo", { age: 5, id: "foo", name: "Hello" });
+    it("should get create new item when persisting", async () => {
+      await adaptor.persistItem("foo", { age: 5, id: "foo", name: "Hello" });
     });
 
     it("should getItem", async () => {
@@ -77,8 +77,8 @@ describe.each(PERSITENT_ADAPTORS)(
       });
     });
 
-    it("should get update existing when upserting", async () => {
-      await adaptor.upsertItem("foo", {
+    it("should get update existing when persisting", async () => {
+      await adaptor.persistItem("foo", {
         age: 5,
         id: "updated",
         name: "Updated",

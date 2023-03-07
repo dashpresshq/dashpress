@@ -86,7 +86,7 @@ export class RolesService implements IApplicationService {
       throw new BadRequestError("Role already exist");
     }
 
-    await this._rolesPersistenceService.upsertItem(id, {
+    await this._rolesPersistenceService.createItem(id, {
       id,
       permissions: [],
     });
@@ -109,7 +109,7 @@ export class RolesService implements IApplicationService {
 
     await this._rolesPersistenceService.removeItem(roleId);
 
-    await this._rolesPersistenceService.upsertItem(madeRoleId, {
+    await this._rolesPersistenceService.updateItem(madeRoleId, {
       ...role,
       id: madeRoleId,
     });
@@ -123,7 +123,7 @@ export class RolesService implements IApplicationService {
   async addPermission(roleId: string, permission: string) {
     const role = await this._rolesPersistenceService.getItemOrFail(roleId);
 
-    await this._rolesPersistenceService.upsertItem(roleId, {
+    await this._rolesPersistenceService.updateItem(roleId, {
       ...role,
       permissions: [...role.permissions, permission],
     });
@@ -133,7 +133,7 @@ export class RolesService implements IApplicationService {
   async removePermission(roleId: string, permission: string) {
     const role = await this._rolesPersistenceService.getItemOrFail(roleId);
 
-    await this._rolesPersistenceService.upsertItem(roleId, {
+    await this._rolesPersistenceService.updateItem(roleId, {
       ...role,
       permissions: role.permissions.filter(
         (loopPermission) => loopPermission !== permission

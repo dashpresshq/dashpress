@@ -3,7 +3,7 @@ import {
   SectionRight,
   SectionRow,
   MenuSection,
-  ErrorAlert,
+  InfoAlert,
   Spacer,
 } from "@hadmean/chromista";
 import { useRouter } from "next/router";
@@ -14,7 +14,7 @@ import {
   Eye,
   Server,
   Globe,
-  // GitHub,
+  GitHub,
   Book,
   Terminal,
 } from "react-feather";
@@ -69,13 +69,13 @@ export function BaseSettingsLayout({ children }: IProps) {
     <AppLayout>
       {false && (
         <>
-          <ErrorAlert
+          <InfoAlert
             renderJsx
-            // action={{
-            //   action: () => window.open("https://github.com/hadmean/hadmean"),
-            //   Icon: GitHub,
-            //   label: "Give us a star on Github",
-            // }}
+            action={{
+              action: () => window.open("https://github.com/hadmean/hadmean"),
+              Icon: GitHub,
+              label: "Give us a star on Github",
+            }}
             message={
               <span>
                 <p>

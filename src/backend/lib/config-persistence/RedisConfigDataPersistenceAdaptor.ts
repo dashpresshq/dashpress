@@ -72,7 +72,7 @@ export class RedisConfigDataPersistenceAdaptor<
     );
   }
 
-  async upsertItem(key: string, data: T) {
+  async persistItem(key: string, data: T) {
     await (
       await this.getRedisInstance()
     ).hSet(this.wrapWithConfigDomain(), { [key]: JSON.stringify(data) });

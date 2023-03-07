@@ -74,7 +74,7 @@ export class JsonFileConfigDataPersistenceAdaptor<
     return undefined;
   }
 
-  async upsertItem(key: string, data: T) {
+  async persistItem(key: string, data: T) {
     const allIndexedItems = await this.getDomainData();
     allIndexedItems[key] = data;
     await this.persist(allIndexedItems);

@@ -30,7 +30,7 @@
   "bin": "./bin/hadmean",
   "dependencies": {
     "@hadmean/bacteria": "^0.0.7",
-    "@hadmean/chromista": "^1.0.89",
+    "@hadmean/chromista": "^1.0.90",
     "@hadmean/protozoa": "^1.0.21",
     "@types/cryptr": "^4.0.1",
     "@types/jsonwebtoken": "^8.5.8",
@@ -46,6 +46,7 @@
     "fs-extra": "^10.1.0",
     "jsonwebtoken": "^8.5.1",
     "knex": "^2.3.0",
+    "latest-version": "^7.0.0",
     "lodash": "^4.17.21",
     "microseconds": "^0.2.0",
     "multer": "^1.4.5-lts.1",

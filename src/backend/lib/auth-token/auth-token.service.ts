@@ -2,7 +2,6 @@ import {
   configurationService,
   ConfigurationService,
 } from "backend/configuration/configuration.service";
-import { SingleMetaDataDataTransformer } from "backend/_shared/DataTransformer";
 import jsonwebtoken from "jsonwebtoken";
 import { IAccountProfile } from "shared/types/user";
 import {
@@ -34,11 +33,7 @@ export class AuthTokenService {
         if (err) {
           return reject(err);
         }
-        return resolve(
-          SingleMetaDataDataTransformer(
-            decoded as IWithJWTMetadataAccountProfile
-          )
-        );
+        return resolve(decoded as IWithJWTMetadataAccountProfile);
       });
     });
   }

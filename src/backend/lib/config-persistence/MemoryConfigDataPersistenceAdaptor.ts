@@ -60,7 +60,7 @@ export class MemoryConfigDataPersistenceAdaptor<
     return undefined;
   }
 
-  async upsertItem(key: string, data: T) {
+  async persistItem(key: string, data: T) {
     const domainData = MemoryConfigDataPersistenceAdaptor.getDomainData(
       this.configDomain
     );

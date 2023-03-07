@@ -102,7 +102,7 @@ export class DatabaseConfigDataPersistenceAdaptor<
     return JSON.parse(queryResponse.value);
   }
 
-  async upsertItem(key: string, value: T) {
+  async persistItem(key: string, value: T) {
     const affectedRowsCount = await (
       await this.getDbInstance()
     )(CONFIG_TABLE_PREFIX(this.configDomain))

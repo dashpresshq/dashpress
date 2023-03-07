@@ -22,7 +22,7 @@ export class ListOrderService implements IApplicationService {
   async appendToList(listId: string, itemId: string): Promise<void> {
     const listsOrder = await this.getItemOrder(listId);
 
-    await this._listOrderPersistenceService.upsertItem(listId, [
+    await this._listOrderPersistenceService.updateItem(listId, [
       ...listsOrder,
       itemId,
     ]);

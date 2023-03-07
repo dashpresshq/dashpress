@@ -44,21 +44,24 @@ export abstract class AbstractConfigDataPersistenceService<T> {
 
   public abstract getAllItems(): Promise<T[]>;
 
-  public abstract upsertItem(key: string, data: T): Promise<void>;
+  public abstract persistItem(key: string, data: T): Promise<void>;
+
+  public async upsertItem(key: string, data: T): Promise<void> {
+    // TODO
+    // this.changesMetadata.persistItem(`${this.configDomain}___${key}`, {
+    //   updatedAt: new Date(),
+    //   createdAt: (await this.getItem(key)) ? undefined : new Date(),
+    // });
+
+    await this.persistItem(key, data);
+  }
 
   public async createItem(key: string, data: T): Promise<void> {
-    await this.upsertItem(key, {
-      ...data,
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    });
+    await this.persistItem(key, data);
   }
 
   public async updateItem(key: string, data: T): Promise<void> {
-    await this.upsertItem(key, {
-      ...data,
-      updatedAt: new Date(),
-    });
+    await this.persistItem(key, data);
   }
 
   public async upsertItemWithMaybeSecondaryKey(

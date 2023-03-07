@@ -48,7 +48,7 @@ export class StorageService implements IApplicationService {
       configuration
     );
 
-    await this._activatedStoragePersistenceService.upsertItem(storageKey, {
+    await this._activatedStoragePersistenceService.createItem(storageKey, {
       key: storageKey,
     });
 

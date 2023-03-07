@@ -2,18 +2,15 @@ import { Settings, Home, Table, Users, Shield, Zap } from "react-feather";
 import { NAVIGATION_LINKS, useNavigationStack } from "frontend/lib/routing";
 import { USER_PERMISSIONS } from "shared/types/user";
 import { useUserHasPermission } from "frontend/hooks/auth/user.store";
-import { useUserActiveEntities } from "../../hooks/entity/entity.store";
-import { ROOT_LINKS_TO_CLEAR_BREADCRUMBS } from "./constants";
-import { IAppMenuItems } from "./types";
-import { useAppendPortalMenuItems } from "./portal";
+import { useUserActiveEntities } from "../../../../hooks/entity/entity.store";
+import { ROOT_LINKS_TO_CLEAR_BREADCRUMBS } from "../../constants";
+import { IAppMenuItems } from "../../types";
 
 export const useSelectionViews = (): IAppMenuItems[] => {
   const activeEntities = useUserActiveEntities();
   const userHasPermission = useUserHasPermission();
 
   const { clear } = useNavigationStack();
-
-  const appendPortalMenuItems = useAppendPortalMenuItems();
 
   const activeEntituesLabelsMap = Object.fromEntries(
     (activeEntities.data || []).map(({ value, label }) => [value, label])
@@ -82,7 +79,7 @@ export const useSelectionViews = (): IAppMenuItems[] => {
     },
   ];
 
-  return appendPortalMenuItems(menuItems)
+  return menuItems
     .filter(({ isPermissionAllowed, notFinished }) => {
       if (notFinished) {
         return process.env.NEXT_PUBLIC_SHOW_UNFINISHED_FEATURES;

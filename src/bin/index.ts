@@ -1,5 +1,7 @@
 /* eslint-disable no-console */
 
+import { checkNodeVersion } from "./checkNodeVersion";
+
 (async () => {
   const path = require("path");
   const fs = require("fs-extra");
@@ -65,17 +67,11 @@
 
   `);
 
-  const MINIMUM_NODE_VERSION = 16;
-
   console.log(`🟢 You're about to run Hadmean v${currentPkgJson.version}`);
 
-  const nodeVersion = process.versions.node;
-
-  if (+nodeVersion.split(".")[0] < MINIMUM_NODE_VERSION) {
+  if (!checkNodeVersion().status) {
     console.log("");
-    console.warn(
-      `🟨 Your node version ${nodeVersion} is not officially supported. Kindly upgrade to version ${MINIMUM_NODE_VERSION} before reporting any issues.`
-    );
+    console.warn(`🟨 ${checkNodeVersion().message}`);
   }
 
   defaultEnv();

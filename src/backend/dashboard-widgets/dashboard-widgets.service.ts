@@ -17,7 +17,7 @@ import { IValueLabel } from "@hadmean/chromista/dist/types";
 import { userFriendlyCase } from "shared/lib/strings";
 import { nanoid } from "nanoid";
 import { ROYGBIV } from "shared/constants/colors";
-import { DashboardIconsList } from "frontend/views/Dashboard/Icons";
+import { SystemIconsList } from "shared/constants/Icons";
 import { mutateGeneratedDashboardWidgets } from "./portal";
 
 export class DashboardWidgetsService implements IApplicationService {
@@ -77,7 +77,7 @@ export class DashboardWidgetsService implements IApplicationService {
             queryId: "",
             color: colorsList[index % (colorsList.length - 1)],
             dateField,
-            icon: DashboardIconsList[index % (DashboardIconsList.length - 1)],
+            icon: SystemIconsList[index % (SystemIconsList.length - 1)],
           };
         })
     );

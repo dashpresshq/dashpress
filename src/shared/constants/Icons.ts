@@ -1,4 +1,4 @@
-export const DashboardIcons: Record<string, string> = {
+export const SystemIcons: Record<string, string> = {
   ShoppingCart: `<path d="M10 21a1 1 0 11-2 0 1 1 0 012 0zM21 21a1 1 0 11-2 0 1 1 0 012 0zM1 1h4l2.68 13.39c.188.925.995 1.61 1.962 1.61h.04-.002H19.438a2 2 0 001.959-1.597l.002-.013 1.6-8.39h-17" />`,
   Activity: `<path d="M22 12h-4l-3 9L9 3l-3 9H2" />`,
   ShoppingBag: `<path d="M6 2L3 6v14a2 2 0 002 2v0h14a2 2 0 002-2v0V6l-3-4zM3 6h18" /><path d="M16 10a4 4 0 01-8 0v0" />`,
@@ -41,10 +41,10 @@ export const DashboardIcons: Record<string, string> = {
   //   Wifi,
 };
 
-export const DashboardIconsList = Object.keys(DashboardIcons);
+export const SystemIconsList = Object.keys(SystemIcons);
 
-export const getDashbordIcon = (icon: string) => {
-  let iconPath = DashboardIcons[icon];
+export const systemIconToSVG = (icon: string) => {
+  let iconPath = SystemIcons[icon];
   if (!iconPath) {
     return icon;
   }
@@ -53,10 +53,10 @@ export const getDashbordIcon = (icon: string) => {
     `<path fill="none" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" `
   );
   return `<svg
-              fill="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-              >
-              ${iconPath}
-            </svg>`;
+                fill="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+                >
+                ${iconPath}
+              </svg>`;
 };

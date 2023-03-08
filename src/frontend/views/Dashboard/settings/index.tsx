@@ -1,9 +1,4 @@
-import {
-  FormButton,
-  FormInput,
-  FormSelect,
-  FormTextArea,
-} from "@hadmean/chromista";
+import { FormButton, FormInput, FormSelect } from "@hadmean/chromista";
 import { required, IFormProps } from "@hadmean/protozoa";
 import { useEntityConfiguration } from "frontend/hooks/configuration/configuration.store";
 import { NAVIGATION_LINKS } from "frontend/lib/routing";
@@ -14,8 +9,7 @@ import { IWidgetConfig } from "shared/types/dashboard";
 import { ILabelValue } from "types";
 import { ROYGBIV } from "shared/constants/colors";
 import { useEntityFields } from "frontend/hooks/entity/entity.store";
-import { userFriendlyCase } from "shared/lib/strings";
-import { DashboardIconsList } from "../Icons";
+import { IconInputField } from "frontend/components/IconInputField";
 
 const DashboardTypesOptions: {
   label: string;
@@ -31,7 +25,7 @@ const DashboardTypesOptions: {
   },
 ];
 
-export function DashboardSettings({
+export function DashboardWidgetForm({
   onSubmit,
   initialValues,
   entities,
@@ -54,6 +48,11 @@ export function DashboardSettings({
 
         return (
           <form onSubmit={handleSubmit}>
+            <Field name="title" validate={required} validateFields={[]}>
+              {({ input, meta }) => (
+                <FormInput required label="Title" meta={meta} input={input} />
+              )}
+            </Field>
             <Field name="_type" validate={required} validateFields={[]}>
               {({ input, meta }) => (
                 <FormSelect
@@ -64,11 +63,6 @@ export function DashboardSettings({
                   meta={meta}
                   input={input}
                 />
-              )}
-            </Field>
-            <Field name="title" validate={required} validateFields={[]}>
-              {({ input, meta }) => (
-                <FormInput required label="Title" meta={meta} input={input} />
               )}
             </Field>
 
@@ -129,6 +123,7 @@ export function DashboardSettings({
                     />
                   )}
                 </Field>
+                <IconInputField value={values.icon} />
                 <Field name="dateField" validateFields={[]}>
                   {({ input, meta }) => (
                     <FormSelect
@@ -139,46 +134,6 @@ export function DashboardSettings({
                     />
                   )}
                 </Field>
-                {DashboardIconsList.includes(values.icon) ? (
-                  <Field name="icon" validateFields={[]} validate={required}>
-                    {({ input, meta }) => (
-                      <FormSelect
-                        label="Icon"
-                        required
-                        selectData={DashboardIconsList.map((icon) => ({
-                          value: icon,
-                          label: userFriendlyCase(icon),
-                        }))}
-                        meta={meta}
-                        input={input}
-                        rightActions={[
-                          {
-                            label: "Use SVG",
-                            action: () => input.onChange(""),
-                          },
-                        ]}
-                      />
-                    )}
-                  </Field>
-                ) : (
-                  <Field name="icon" validateFields={[]}>
-                    {({ input, meta }) => (
-                      <FormTextArea
-                        rows={10}
-                        description="Pass in valid SVG in here with the prop `fill='currentColor'`"
-                        label="SVG"
-                        meta={meta}
-                        input={input}
-                        rightActions={[
-                          {
-                            label: "Use Icon",
-                            action: () => input.onChange(DashboardIconsList[0]),
-                          },
-                        ]}
-                      />
-                    )}
-                  </Field>
-                )}
               </>
             )}
 

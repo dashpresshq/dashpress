@@ -5,10 +5,10 @@ import { ITableTab, QueryFilter } from "shared/types/data";
 import { ISummaryWidgetConfig } from "shared/types/dashboard";
 import { DATE_FILTER_VALUE, FilterOperators } from "@hadmean/protozoa";
 import { ROYGBIV } from "shared/constants/colors";
+import { systemIconToSVG } from "shared/constants/Icons";
 import { IWidgetProps } from "../types";
 import { getFullAndRelativeCount } from "./getFullAndRelativeCount";
 import { useDashboardRelativeDayStore } from "../../relativeTime.store";
-import { getDashbordIcon } from "../../Icons";
 
 export function SummaryWidget({
   config,
@@ -58,7 +58,7 @@ export function SummaryWidget({
     !!dateField
   );
 
-  const fullIcon = getDashbordIcon(icon);
+  const fullIcon = systemIconToSVG(icon);
 
   return (
     <SummaryWidgetPresentation

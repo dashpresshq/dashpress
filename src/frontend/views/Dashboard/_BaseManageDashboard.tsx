@@ -14,6 +14,7 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import { useActiveEntities } from "frontend/hooks/entity/entity.store";
 import { nanoid } from "nanoid";
+import { SystemIconsList } from "shared/constants/Icons";
 import { AppLayout } from "../../_layouts/app";
 import { DashboardWidget } from "./widgets";
 import {
@@ -24,10 +25,9 @@ import {
   useUpdateDashboardWidgetMutation,
 } from "./dashboard.store";
 import { gridRoot } from "./styles";
-import { DashboardSettings } from "./settings";
+import { DashboardWidgetForm } from "./settings";
 import { DashboardSkeleton } from "./Skeleton";
 import { DetailsCanvas } from "../data/Table/DetailsCanvas";
-import { DashboardIconsList } from "./Icons";
 
 const Root = styled.div`
   .list {
@@ -147,7 +147,7 @@ export function BaseManageDashboard({ dashboardId, doneLink, title }: IProps) {
             />
           }
         >
-          <DashboardSettings
+          <DashboardWidgetForm
             entities={activeEntities.data}
             onSubmit={async (config) => {
               if (currentDashboardItem === NEW_DASHBOARD_ITEM) {
@@ -163,7 +163,7 @@ export function BaseManageDashboard({ dashboardId, doneLink, title }: IProps) {
             initialValues={
               (widgets.data || []).find(
                 ({ id }) => id === currentDashboardItem
-              ) || { icon: DashboardIconsList[0] }
+              ) || { icon: SystemIconsList[0] }
             }
           />
         </ViewStateMachine>

@@ -67,6 +67,7 @@ export function BaseSettingsLayout({ children }: IProps) {
 
   return (
     <AppLayout>
+      {/* TODO */}
       {false && (
         <>
           <InfoAlert

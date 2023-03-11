@@ -17,7 +17,7 @@ export default requestHandler(
       return {
         "Hadmean Version": `v${currentPkgJson.version}${versionText}`,
         "Node Version": checkNodeVersion().message,
-        // TODO "Schema Last Updated": "TODO",
+        // TODO "Schema Last Updated",
       };
     },
   },

@@ -153,7 +153,6 @@ function useEntityCrudView() {
           error={error}
           toggling={{
             onToggle: () => toggleCrudSettings("details"),
-            // TODO if you disable details then disable update
             enabled: entityCrudSettingsState.details,
             label: ENTITY_CRUD_SETTINGS_TAB_LABELS.DETAILS,
           }}
@@ -196,7 +195,6 @@ function useEntityCrudView() {
           }}
           toggling={{
             onToggle: () => toggleCrudSettings("update"),
-            // TODO If you enable update then enable details
             enabled: entityCrudSettingsState.update,
             label: ENTITY_CRUD_SETTINGS_TAB_LABELS.UPDATE,
           }}

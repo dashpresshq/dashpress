@@ -1,6 +1,5 @@
 import {
   Breadcrumbs,
-  ComponentIsLoading,
   DropDownMenu,
   IDropDownMenuItem,
   Spacer,
@@ -9,21 +8,15 @@ import {
 } from "@hadmean/chromista";
 import React, { ReactNode, useEffect } from "react";
 import Head from "next/head";
-import { AuthService, getQueryCachekey } from "@hadmean/protozoa";
 import { useRouter } from "next/router";
 import { useNavigationStack } from "frontend/lib/routing";
 import { usePageDetailsStore } from "frontend/lib/routing/usePageDetails";
-import {
-  AUTHENTICATED_ACCOUNT_URL,
-  usePageRequiresPermission,
-} from "frontend/hooks/auth/user.store";
-import { useUserAuthenticatedState } from "frontend/hooks/auth/useAuthenticateUser";
+import { usePageRequiresPermission } from "frontend/hooks/auth/user.store";
 import { GitHub, Globe, Twitter, Users } from "react-feather";
-import { useQueryClient } from "react-query";
 import { useSiteConfig } from "../../hooks/app/site.config";
-import { NAVIGATION_LINKS } from "../../lib/routing/links";
-import { useAppTheme } from "../useAppTheme";
 import { GoogleTagManager } from "../scripts/GoogleTagManager";
+
+export { LayoutCheck } from "./Check";
 
 export interface IBaseLayoutProps {
   children: ReactNode;
@@ -31,32 +24,12 @@ export interface IBaseLayoutProps {
   secondaryActionItems?: IDropDownMenuItem[];
 }
 
-const useUserAuthCheck = () => {
-  const userAuthenticatedState = useUserAuthenticatedState();
-  const router = useRouter();
-  const queryClient = useQueryClient();
-
-  useEffect(() => {
-    if (userAuthenticatedState === false) {
-      AuthService.removeAuthToken();
-      router.replace(NAVIGATION_LINKS.AUTH_SIGNIN);
-      queryClient.invalidateQueries(
-        getQueryCachekey(AUTHENTICATED_ACCOUNT_URL)
-      );
-    }
-  }, [userAuthenticatedState]);
-
-  return userAuthenticatedState;
-};
-
 export function BaseLayout({
   children,
   actionItems = [],
   secondaryActionItems = [],
 }: IBaseLayoutProps) {
-  useAppTheme();
   const siteConfig = useSiteConfig();
-  const userAuthenticatedState = useUserAuthCheck();
   const { history, pushToStack, goToLinkIndex } = useNavigationStack();
   const router = useRouter();
   const [
@@ -81,10 +54,6 @@ export function BaseLayout({
     value: historyItem.link,
     label: historyItem.title,
   }));
-
-  if (userAuthenticatedState !== true) {
-    return <ComponentIsLoading />;
-  }
 
   const actionMenuItems = [...actionItems, ...pageActionItems];
   const secondaryMenuItems = [

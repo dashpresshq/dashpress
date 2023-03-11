@@ -3,7 +3,7 @@ import React from "react";
 import { User } from "react-feather";
 import { useSiteConfig } from "frontend/hooks/app/site.config";
 import { useSelectionViews } from "./useSelectionViews";
-import { BaseLayout, IBaseLayoutProps } from "../../_Base";
+import { BaseLayout, IBaseLayoutProps, LayoutCheck } from "../../_Base";
 import { ROOT_LINKS_TO_CLEAR_BREADCRUMBS } from "../../constants";
 
 export function AppLayout({
@@ -15,23 +15,25 @@ export function AppLayout({
   const siteConfig = useSiteConfig();
 
   return (
-    <DynamicLayout
-      logo={siteConfig.logo}
-      selectionView={selectionViews}
-      secondarySelectionView={[
-        {
-          title: "Account",
-          icon: User,
-          action: ROOT_LINKS_TO_CLEAR_BREADCRUMBS.ACCOUNT,
-        },
-      ]}
-    >
-      <BaseLayout
-        actionItems={actionItems}
-        secondaryActionItems={secondaryActionItems}
+    <LayoutCheck>
+      <DynamicLayout
+        logo={siteConfig.logo}
+        selectionView={selectionViews}
+        secondarySelectionView={[
+          {
+            title: "Account",
+            icon: User,
+            action: ROOT_LINKS_TO_CLEAR_BREADCRUMBS.ACCOUNT,
+          },
+        ]}
       >
-        {children}
-      </BaseLayout>
-    </DynamicLayout>
+        <BaseLayout
+          actionItems={actionItems}
+          secondaryActionItems={secondaryActionItems}
+        >
+          {children}
+        </BaseLayout>
+      </DynamicLayout>
+    </LayoutCheck>
   );
 }

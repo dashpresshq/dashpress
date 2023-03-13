@@ -11,6 +11,7 @@ import {
   META_USER_PERMISSIONS,
 } from "shared/types/user";
 import { canRoleDoThisSync } from "shared/logic/permissions";
+import { useCallback } from "react";
 import { useIsAuthenticatedStore } from "./useAuthenticateUser";
 
 export const AUTHENTICATED_ACCOUNT_URL = "/api/account/mine";
@@ -59,12 +60,18 @@ const doPermissionCheck = (
 export function useUserHasPermission(): (permision: string) => boolean {
   const userProfile = useAuthenticatedUserBag();
 
-  return (permission: string): boolean => {
-    return (
-      doPermissionCheck(permission, userProfile.isLoading, userProfile.data) ===
-      true
-    );
-  };
+  return useCallback(
+    (permission: string): boolean => {
+      return (
+        doPermissionCheck(
+          permission,
+          userProfile.isLoading,
+          userProfile.data
+        ) === true
+      );
+    },
+    [userProfile]
+  );
 }
 
 function useUserPermission(): (permision: string) => boolean | "loading" {

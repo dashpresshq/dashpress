@@ -43,13 +43,15 @@ export type IUserPreferences = {
 const CAN_ACCESS_ENTITY = "CAN_ACCESS_ENTITY";
 const NO_PERMISSION_REQUIRED = "NO_PERMISSION_REQUIRED";
 
+export const APPLIED_CAN_ACCESS = (context: string) => (entity: string) => {
+  if (entity === SLUG_LOADING_VALUE) {
+    return NO_PERMISSION_REQUIRED;
+  }
+  return `${context}:${entity.toUpperCase()}`;
+};
+
 export const META_USER_PERMISSIONS = {
-  APPLIED_CAN_ACCESS_ENTITY: (entity: string) => {
-    if (entity === SLUG_LOADING_VALUE) {
-      return NO_PERMISSION_REQUIRED;
-    }
-    return `${CAN_ACCESS_ENTITY}:${entity.toUpperCase()}`;
-  },
+  APPLIED_CAN_ACCESS_ENTITY: APPLIED_CAN_ACCESS(CAN_ACCESS_ENTITY),
   NO_PERMISSION_REQUIRED,
 };
 

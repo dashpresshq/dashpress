@@ -1,1 +1,4 @@
-export { mutateGeneratedDashboardWidgets } from "./main";
+export {
+  mutateGeneratedDashboardWidgets,
+  PORTAL_DASHBOARD_PERMISSION,
+} from "./main";

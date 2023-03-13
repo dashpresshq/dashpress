@@ -5,6 +5,7 @@ import {
   makePostRequest,
   MutationHelpers,
   MutationsLang,
+  SLUG_LOADING_VALUE,
   useApi,
   useApiMutateOptions,
 } from "@hadmean/protozoa";
@@ -17,6 +18,7 @@ const DASHBOARD_ENDPOINT = (dashboardId: string) =>
 export const useDashboardWidgets = (dashboardId: string) => {
   return useApi<IWidgetConfig[]>(DASHBOARD_ENDPOINT(dashboardId), {
     errorMessage: dataNotFoundMessage("Dashboard widgets"),
+    enabled: !!dashboardId && dashboardId !== SLUG_LOADING_VALUE,
   });
 };
 

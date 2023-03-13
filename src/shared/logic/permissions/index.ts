@@ -3,11 +3,12 @@ import {
   SystemRoles,
   USER_PERMISSIONS,
 } from "shared/types/user";
+import { portalPermissionCheck, PORTAL_PERMISSION_HEIRACHIES } from "./portal";
 
 /*
-   IMPORTANT NOTE:
-   LESSER PERMISSION FIRST
-  */
+  IMPORTANT NOTE:
+  LESSER PERMISSION FIRST
+*/
 
 const PERMISSION_HEIRACHIES = {
   [USER_PERMISSIONS.CAN_MANAGE_USERS]: USER_PERMISSIONS.CAN_RESET_PASSWORD,
@@ -15,7 +16,19 @@ const PERMISSION_HEIRACHIES = {
     USER_PERMISSIONS.CAN_MANAGE_INTEGRATIONS,
   [USER_PERMISSIONS.CAN_MANAGE_ALL_ENTITIES]:
     USER_PERMISSIONS.CAN_CONFIGURE_APP,
+  ...PORTAL_PERMISSION_HEIRACHIES,
 };
+
+const doMetaPermissionCheck =
+  (permissions: string[], requiredPermission: string) =>
+  (metaCheck: string, allPermission: string): boolean | void => {
+    if (
+      requiredPermission.startsWith(metaCheck) &&
+      permissions.includes(allPermission)
+    ) {
+      return true;
+    }
+  };
 
 export const doesPermissionAllowPermission = (
   permissions: string[],
@@ -24,13 +37,26 @@ export const doesPermissionAllowPermission = (
   if (permissions.length === 0) {
     return false;
   }
-  if (
-    requiredPermission.startsWith(
-      META_USER_PERMISSIONS.APPLIED_CAN_ACCESS_ENTITY("")
-    ) &&
-    permissions.includes(USER_PERMISSIONS.CAN_MANAGE_ALL_ENTITIES)
-  ) {
-    return true;
+  const doMetaPermissionCheck$1 = doMetaPermissionCheck(
+    permissions,
+    requiredPermission
+  );
+
+  const portalPermissionCheckResponse = portalPermissionCheck(
+    doMetaPermissionCheck$1
+  );
+
+  if (typeof portalPermissionCheckResponse === "boolean") {
+    return portalPermissionCheckResponse;
+  }
+
+  const entitiesMetaCheck = doMetaPermissionCheck$1(
+    META_USER_PERMISSIONS.APPLIED_CAN_ACCESS_ENTITY(""),
+    USER_PERMISSIONS.CAN_MANAGE_ALL_ENTITIES
+  );
+
+  if (typeof entitiesMetaCheck === "boolean") {
+    return entitiesMetaCheck;
   }
 
   const can = permissions.includes(requiredPermission);

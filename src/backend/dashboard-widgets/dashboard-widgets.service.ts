@@ -7,7 +7,7 @@ import {
   AbstractConfigDataPersistenceService,
 } from "backend/lib/config-persistence";
 import { IApplicationService } from "backend/types";
-import { IWidgetConfig } from "shared/types/dashboard";
+import { HOME_DASHBOARD_KEY, IWidgetConfig } from "shared/types/dashboard";
 import {
   listOrderService,
   ListOrderService,
@@ -18,7 +18,11 @@ import { userFriendlyCase } from "shared/lib/strings";
 import { nanoid } from "nanoid";
 import { ROYGBIV } from "shared/constants/colors";
 import { SystemIconsList } from "shared/constants/Icons";
-import { mutateGeneratedDashboardWidgets } from "./portal";
+import { BadRequestError } from "backend/lib/errors";
+import {
+  mutateGeneratedDashboardWidgets,
+  PORTAL_DASHBOARD_PERMISSION,
+} from "./portal";
 
 export class DashboardWidgetsService implements IApplicationService {
   constructor(
@@ -114,6 +118,18 @@ export class DashboardWidgetsService implements IApplicationService {
     dashboardId: string,
     userRole: string
   ): Promise<IWidgetConfig[]> {
+    if (
+      dashboardId !== HOME_DASHBOARD_KEY &&
+      !(await this._rolesService.canRoleDoThis(
+        userRole,
+        PORTAL_DASHBOARD_PERMISSION(dashboardId)
+      ))
+    ) {
+      throw new BadRequestError(
+        "You can't view this dashboard or it doesn't exist"
+      );
+    }
+
     return await this._rolesService.filterPermittedEntities(
       userRole,
       await this.listDashboardWidgetsToShow(dashboardId),

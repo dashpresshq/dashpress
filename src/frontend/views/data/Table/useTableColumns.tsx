@@ -21,6 +21,7 @@ import { useAppConfiguration } from "frontend/hooks/configuration/configuration.
 import { filterOutHiddenScalarColumns } from "../utils";
 import { TableActions } from "./Actions";
 import { viewSpecialDataTypes } from "../viewSpecialDataTypes";
+import { usePortalTableColumns } from "./portal";
 
 export const ACTIONS_ACCESSOR = "__actions__";
 
@@ -75,6 +76,7 @@ export const useTableColumns = (
   entity: string,
   lean?: true
 ): Partial<DataStateKeys<ITableColumn[]>> => {
+  const portalTableColumns = usePortalTableColumns(entity);
   const getEntityFieldLabels = useEntityFieldLabels(entity);
   const entityCrudSettings = useEntityCrudSettings(entity);
   const entityFields = useEntityFields(entity);
@@ -194,5 +196,6 @@ export const useTableColumns = (
       });
     }
   }
-  return { data: columns };
+
+  return { data: portalTableColumns(columns) };
 };

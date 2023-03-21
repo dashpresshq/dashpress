@@ -22,12 +22,12 @@ const handler = requestHandler(
   },
   [
     {
-      _type: "canCrud",
+      _type: "crudEnabled",
     },
   ]
 );
 
-describe("Request Validations => canCrudValidationImpl", () => {
+describe("Request Validations => crudEnabledValidationImpl", () => {
   beforeAll(async () => {
     await setupAllTestData(["schema", "users", "roles", "app-config"]);
   });

@@ -1,5 +1,5 @@
 import { ValidationKeys } from "../types";
-import { canCrudValidationImpl as canCrud } from "./can-crud";
+import { crudEnabledValidationImpl as crudEnabled } from "./crud-enabled";
 import { configBodyValidationImpl as configBody } from "./config-body";
 import { configKeyFilterValidationImpl as configKey } from "./config-key";
 import { entityValidationImpl as entity } from "./entity";
@@ -23,7 +23,7 @@ export const ValidationImpl: Record<
   ValidationImplType<any>
 > = {
   isAuthenticated,
-  canCrud,
+  crudEnabled,
   requestBody,
   guest,
   anyBody,

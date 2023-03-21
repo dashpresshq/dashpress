@@ -18,17 +18,16 @@ export const useTableMenuItems = (entity: string): IDropDownMenuItem[] => {
   let menuItems: IDropDownMenuItem[] = [];
 
   if (entityCrudSettings.data?.create) {
-    menuItems = [
-      {
-        label: `Add New ${entityDiction.singular}`,
-        IconComponent: Plus,
-        onClick: () => {
-          router.push(NAVIGATION_LINKS.ENTITY.CREATE(entity));
-        },
+    menuItems.push({
+      label: `Add New ${entityDiction.singular}`,
+      IconComponent: Plus,
+      onClick: () => {
+        router.push(NAVIGATION_LINKS.ENTITY.CREATE(entity));
       },
-      ...pluginTableMenuItems,
-    ];
+    });
   }
+
+  menuItems = menuItems.concat(pluginTableMenuItems);
 
   return menuItems;
 };

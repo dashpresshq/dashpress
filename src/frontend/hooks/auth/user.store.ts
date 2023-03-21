@@ -5,11 +5,7 @@ import {
 } from "@hadmean/protozoa";
 import { NAVIGATION_LINKS } from "frontend/lib/routing";
 import { useRouter } from "next/router";
-import {
-  IAuthenticatedUserBag,
-  IUserPreferences,
-  META_USER_PERMISSIONS,
-} from "shared/types/user";
+import { IAuthenticatedUserBag, IUserPreferences } from "shared/types/user";
 import { canRoleDoThisSync } from "shared/logic/permissions";
 import { useCallback } from "react";
 import { useIsAuthenticatedStore } from "./useAuthenticateUser";
@@ -49,9 +45,7 @@ const doPermissionCheck = (
   if (isLoadingUser || !userData) {
     return "loading";
   }
-  if (requiredPermission === META_USER_PERMISSIONS.NO_PERMISSION_REQUIRED) {
-    return true;
-  }
+
   const { role, permissions } = userData;
 
   return canRoleDoThisSync(role, requiredPermission, permissions);

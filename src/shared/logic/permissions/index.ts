@@ -34,6 +34,10 @@ export const doesPermissionAllowPermission = (
   permissions: string[],
   requiredPermission: string
 ): boolean => {
+  if (requiredPermission === META_USER_PERMISSIONS.NO_PERMISSION_REQUIRED) {
+    return true;
+  }
+
   if (permissions.length === 0) {
     return false;
   }

@@ -14,7 +14,9 @@ const REQUEST_METHOD_TO_CRUD_ACTION: Partial<
   GET: "details",
 };
 
-export const canCrudValidationImpl: ValidationImplType<void> = async (req) => {
+export const crudEnabledValidationImpl: ValidationImplType<void> = async (
+  req
+) => {
   const action = REQUEST_METHOD_TO_CRUD_ACTION[req.method];
   const entity = await entityValidationImpl(req);
   if (

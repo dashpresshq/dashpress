@@ -16,7 +16,7 @@ export default requestHandler(
   },
   [
     {
-      _type: "canCrud",
+      _type: "crudEnabled",
       method: ["POST"],
     },
   ]

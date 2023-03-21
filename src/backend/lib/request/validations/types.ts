@@ -10,7 +10,7 @@ export type ValidationKeys = {
     | "paginationFilter"
     | "canUser"
     | "anyBody"
-    | "canCrud"
+    | "crudEnabled"
     | "requestBody"
     | "requestQuery"
     | "entityId"

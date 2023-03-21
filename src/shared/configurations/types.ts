@@ -10,3 +10,14 @@ export interface IEntityCrudSettings {
   update: boolean;
   delete: boolean;
 }
+
+export enum DataActionType {
+  Create = "create",
+  Details = "details",
+  Update = "update",
+  Delete = "delete",
+  List = "list",
+  Table = "table",
+  Count = "count",
+  Reference = "reference",
+}

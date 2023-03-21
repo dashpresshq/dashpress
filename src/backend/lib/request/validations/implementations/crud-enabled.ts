@@ -1,34 +1,49 @@
-import { IEntityCrudSettings } from "shared/configurations";
-import { ForbiddenError } from "backend/lib/errors";
+import { DataActionType, IEntityCrudSettings } from "shared/configurations";
+import { ForbiddenError, progammingError } from "backend/lib/errors";
 import { configurationService } from "backend/configuration/configuration.service";
-import { RequestMethod } from "../../methods";
-import { entityValidationImpl } from "./entity";
+import { getEntityFromRequest } from "./entity";
 import { ValidationImplType } from "./types";
 
-const REQUEST_METHOD_TO_CRUD_ACTION: Partial<
-  Record<RequestMethod, keyof IEntityCrudSettings>
+const EntityCrudCheck: Record<
+  DataActionType,
+  { entityCrudField?: keyof IEntityCrudSettings }
 > = {
-  DELETE: "delete",
-  POST: "create",
-  PATCH: "update",
-  GET: "details",
+  create: { entityCrudField: "create" },
+  details: { entityCrudField: "details" },
+  update: { entityCrudField: "update" },
+  delete: { entityCrudField: "delete" },
+  list: { entityCrudField: undefined },
+  table: { entityCrudField: undefined },
+  count: { entityCrudField: undefined },
+  reference: { entityCrudField: undefined },
 };
 
 export const crudEnabledValidationImpl: ValidationImplType<void> = async (
-  req
+  req,
+  action: unknown
 ) => {
-  const action = REQUEST_METHOD_TO_CRUD_ACTION[req.method];
-  const entity = await entityValidationImpl(req);
+  progammingError("Please provide the action for the CRUD check", !action);
+
+  progammingError(
+    "Invalid action for crud-enabled check",
+    !EntityCrudCheck[action as DataActionType]
+  );
+
+  const actionType = action as DataActionType;
+
+  const entity = getEntityFromRequest(req);
+
   if (
+    EntityCrudCheck[actionType].entityCrudField &&
     !(
       await configurationService.show<IEntityCrudSettings>(
         "entity_crud_settings",
         entity
       )
-    )[action]
+    )[actionType]
   ) {
     throw new ForbiddenError(
-      `Action '${action}' has been disabled for '${entity}'`
+      `Action '${actionType}' has been disabled for '${entity}'`
     );
   }
 };

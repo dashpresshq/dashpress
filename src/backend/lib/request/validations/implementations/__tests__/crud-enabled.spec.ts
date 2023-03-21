@@ -1,56 +1,63 @@
 import { requestHandler } from "backend/lib/request";
+import { DataActionType } from "shared/configurations";
 import {
   createAuthenticatedMocks,
   setupAllTestData,
   setupAppConfigTestData,
 } from "__tests__/api/_test-utils";
 
-const handler = requestHandler(
-  {
-    GET: async () => {
-      return true;
-    },
-    POST: async () => {
-      return true;
-    },
-    DELETE: async () => {
-      return true;
-    },
-    PATCH: async () => {
-      return true;
-    },
+const handler = requestHandler({
+  GET: async (getValidatedRequest) => {
+    await getValidatedRequest([
+      {
+        _type: "crudEnabled",
+        options: DataActionType.Details,
+      },
+    ]);
+
+    return true;
   },
-  [
-    {
-      _type: "crudEnabled",
-    },
-  ]
-);
+  POST: async (getValidatedRequest) => {
+    await getValidatedRequest([
+      {
+        _type: "crudEnabled",
+        options: DataActionType.Create,
+      },
+    ]);
+    return true;
+  },
+  DELETE: async (getValidatedRequest) => {
+    await getValidatedRequest([
+      {
+        _type: "crudEnabled",
+        options: DataActionType.Delete,
+      },
+    ]);
+    return true;
+  },
+  PATCH: async (getValidatedRequest) => {
+    await getValidatedRequest([
+      {
+        _type: "crudEnabled",
+        options: DataActionType.Update,
+      },
+    ]);
+    return true;
+  },
+  PUT: async (getValidatedRequest) => {
+    await getValidatedRequest([
+      {
+        _type: "crudEnabled",
+        options: DataActionType.Reference,
+      },
+    ]);
+    return true;
+  },
+});
 
 describe("Request Validations => crudEnabledValidationImpl", () => {
   beforeAll(async () => {
     await setupAllTestData(["schema", "users", "roles", "app-config"]);
-  });
-  it("should throw error on invalid entity", async () => {
-    const { req, res } = createAuthenticatedMocks({
-      method: "GET",
-      query: {
-        entity: "invalid-entity",
-      },
-    });
-
-    await handler(req, res);
-
-    expect(res._getStatusCode()).toBe(404);
-    expect(res._getJSONData()).toMatchInlineSnapshot(`
-          {
-            "message": "This resource doesn't exist or is disabled or you dont have access to it",
-            "method": "GET",
-            "name": "BadRequestError",
-            "path": "",
-            "statusCode": 404,
-          }
-        `);
   });
 
   describe("ALL PASS", () => {
@@ -111,6 +118,18 @@ describe("Request Validations => crudEnabledValidationImpl", () => {
 
       await handler(req, res);
       expect(res._getStatusCode()).toBe(200);
+    });
+
+    it("should pass for enabled PUT as 'Reference' is not in the list", async () => {
+      const { req, res } = createAuthenticatedMocks({
+        method: "PUT",
+        query: {
+          entity: "tests",
+        },
+      });
+
+      await handler(req, res);
+      expect(res._getStatusCode()).toBe(204);
     });
   });
   describe("ALL FAIL", () => {
@@ -211,6 +230,18 @@ describe("Request Validations => crudEnabledValidationImpl", () => {
           "statusCode": 401,
         }
       `);
+    });
+
+    it("should pass for enabled PUT as 'Reference' is not in the list", async () => {
+      const { req, res } = createAuthenticatedMocks({
+        method: "PUT",
+        query: {
+          entity: "tests",
+        },
+      });
+
+      await handler(req, res);
+      expect(res._getStatusCode()).toBe(204);
     });
   });
 });

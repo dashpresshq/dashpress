@@ -1,3 +1,4 @@
+import { DataActionType } from "shared/configurations";
 import { dataController } from "../../../../backend/data/data.controller";
 import { requestHandler } from "../../../../backend/lib/request";
 
@@ -7,6 +8,10 @@ export default requestHandler({
       "entity",
       "queryFilters",
       "paginationFilter",
+      {
+        _type: "crudEnabled",
+        options: DataActionType.Table,
+      },
     ]);
 
     return await dataController.tableData(

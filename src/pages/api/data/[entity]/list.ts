@@ -1,3 +1,4 @@
+import { DataActionType } from "shared/configurations";
 import { dataController } from "../../../../backend/data/data.controller";
 import { requestHandler } from "../../../../backend/lib/request";
 
@@ -8,6 +9,10 @@ export default requestHandler({
       {
         _type: "requestQuery",
         options: "search",
+      },
+      {
+        _type: "crudEnabled",
+        options: DataActionType.List,
       },
     ]);
     return await dataController.listData(

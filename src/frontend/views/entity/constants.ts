@@ -112,6 +112,7 @@ export const useEntityActionMenuItems = (actionTypes: EntityActionTypes[]) => {
   return actionTypes.map((actionType) => {
     const { link, ...actionBag } = ENTITY_ACTION_BAG[actionType];
     return {
+      id: `${slugEntity} ${actionBag.label}`,
       ...actionBag,
       onClick: () => {
         router.push(link(slugEntity));

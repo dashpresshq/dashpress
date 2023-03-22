@@ -19,7 +19,7 @@ export const useTableMenuItems = (entity: string): IDropDownMenuItem[] => {
 
   const pluginTableMenuItems = usePluginTableMenuItems();
 
-  let menuItems: IDropDownMenuItem[] = [];
+  const menuItems = pluginTableMenuItems;
 
   if (
     entityCrudSettings.data?.create &&
@@ -31,6 +31,7 @@ export const useTableMenuItems = (entity: string): IDropDownMenuItem[] => {
     )
   ) {
     menuItems.push({
+      order: 1,
       label: `Add New ${entityDiction.singular}`,
       IconComponent: Plus,
       onClick: () => {
@@ -38,8 +39,6 @@ export const useTableMenuItems = (entity: string): IDropDownMenuItem[] => {
       },
     });
   }
-
-  menuItems = menuItems.concat(pluginTableMenuItems);
 
   return menuItems;
 };

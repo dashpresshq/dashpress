@@ -1,5 +1,6 @@
 import { SectionBox } from "@hadmean/chromista";
 import { TitleLang } from "@hadmean/protozoa";
+import { useUserHasPermission } from "frontend/hooks/auth/user.store";
 import { useEntityDataDeletionMutation } from "frontend/hooks/data/data.store";
 import {
   NAVIGATION_LINKS,
@@ -22,6 +23,7 @@ export function EntityDetails() {
   const entityDiction = useEntityDiction();
   const id = useEntityId();
   const entity = useEntitySlug();
+  const userHasPermission = useUserHasPermission();
   const entityCrudSettings = useEntityCrudSettings();
   const entityDataDeletionMutation = useEntityDataDeletionMutation(
     entity,
@@ -45,7 +47,13 @@ export function EntityDetails() {
         title={TitleLang.details(entityDiction.singular)}
         backLink={backLink}
         deleteAction={
-          entityCrudSettings.data?.delete
+          entityCrudSettings.data?.delete &&
+          userHasPermission(
+            META_USER_PERMISSIONS.APPLIED_CAN_ACCESS_ENTITY(
+              entity,
+              GranularEntityPermissions.Delete
+            )
+          )
             ? {
                 action: () => entityDataDeletionMutation.mutate(id),
                 isMakingDeleteRequest: entityDataDeletionMutation.isLoading,
@@ -53,7 +61,13 @@ export function EntityDetails() {
             : undefined
         }
         iconButtons={
-          entityCrudSettings.data?.update
+          entityCrudSettings.data?.update &&
+          userHasPermission(
+            META_USER_PERMISSIONS.APPLIED_CAN_ACCESS_ENTITY(
+              entity,
+              GranularEntityPermissions.Update
+            )
+          )
             ? [
                 {
                   icon: "edit",

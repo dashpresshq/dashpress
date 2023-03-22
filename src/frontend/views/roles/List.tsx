@@ -11,7 +11,8 @@ import { NAVIGATION_LINKS, useSetPageDetails } from "frontend/lib/routing";
 import { useRouter } from "next/router";
 import { FEPaginationTable } from "frontend/components/FEPaginationTable";
 import { IValueLabel } from "@hadmean/chromista/dist/types";
-import { SystemRoles, USER_PERMISSIONS } from "shared/types/user";
+import { SystemRoles } from "shared/types/user";
+import { USER_PERMISSIONS } from "shared/constants/user";
 import { ADMIN_ROLES_ENDPOINT, useRoleDeletionMutation } from "./roles.store";
 
 export function ListRoles() {

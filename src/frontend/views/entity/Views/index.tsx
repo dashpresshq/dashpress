@@ -13,7 +13,7 @@ import {
   useEntityConfiguration,
   useUpsertConfigurationMutation,
 } from "frontend/hooks/configuration/configuration.store";
-import { USER_PERMISSIONS } from "shared/types/user";
+import { USER_PERMISSIONS } from "shared/constants/user";
 import { useTableColumns } from "frontend/views/data/Table/useTableColumns";
 import { BaseEntitySettingsLayout } from "../_Base";
 import { ENTITY_CONFIGURATION_VIEW } from "../constants";

@@ -1,8 +1,5 @@
-import {
-  META_USER_PERMISSIONS,
-  SystemRoles,
-  USER_PERMISSIONS,
-} from "shared/types/user";
+import { META_USER_PERMISSIONS, USER_PERMISSIONS } from "shared/constants/user";
+import { SystemRoles } from "shared/types/user";
 import { portalPermissionCheck, PORTAL_PERMISSION_HEIRACHIES } from "./portal";
 
 /*
@@ -55,7 +52,7 @@ export const doesPermissionAllowPermission = (
   }
 
   const entitiesMetaCheck = doMetaPermissionCheck$1(
-    META_USER_PERMISSIONS.APPLIED_CAN_ACCESS_ENTITY(""),
+    META_USER_PERMISSIONS.APPLIED_CAN_ACCESS_ENTITY("", false),
     USER_PERMISSIONS.CAN_MANAGE_ALL_ENTITIES
   );
 
@@ -89,7 +86,7 @@ const doSystemRoleCheck = (
 
   if (role === SystemRoles.Viewer) {
     return requiredPermission.startsWith(
-      META_USER_PERMISSIONS.APPLIED_CAN_ACCESS_ENTITY("")
+      META_USER_PERMISSIONS.APPLIED_CAN_ACCESS_ENTITY("", false)
     );
   }
 };

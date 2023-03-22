@@ -1,5 +1,5 @@
 import { dashboardWidgetsController } from "backend/dashboard-widgets/dashboard-widgets.controller";
-import { USER_PERMISSIONS } from "shared/types/user";
+import { USER_PERMISSIONS } from "shared/constants/user";
 import { requestHandler } from "backend/lib/request";
 
 export default requestHandler(

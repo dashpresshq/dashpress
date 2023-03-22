@@ -1,4 +1,4 @@
-import { USER_PERMISSIONS } from "shared/types/user";
+import { USER_PERMISSIONS } from "shared/constants/user";
 import { requestHandler } from "backend/lib/request";
 import { integrationsConfigurationController } from "backend/integrations-configurations/integrations-configurations.controller";
 import { IAppliedSchemaFormConfig } from "shared/form-schemas/types";

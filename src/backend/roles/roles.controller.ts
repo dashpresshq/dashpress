@@ -1,8 +1,9 @@
 import { usersService, UsersService } from "backend/users/users.service";
 import { IBasePermissionForm } from "shared/form-schemas/roles/permissions/base";
 import { IBaseRoleForm } from "shared/form-schemas/roles/base";
-import { makeRoleId, roleLabel, SystemRoles } from "shared/types/user";
+import { makeRoleId, roleLabel } from "shared/constants/user";
 import { IRolesList } from "shared/types/roles";
+import { SystemRoles } from "shared/types/user";
 import { RolesService, rolesService } from "./roles.service";
 
 export class RolesController {

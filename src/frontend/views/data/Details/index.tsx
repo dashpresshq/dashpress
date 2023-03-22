@@ -6,7 +6,8 @@ import {
   useNavigationStack,
   useSetPageDetails,
 } from "frontend/lib/routing";
-import { META_USER_PERMISSIONS } from "shared/types/user";
+import { META_USER_PERMISSIONS } from "shared/constants/user";
+import { GranularEntityPermissions } from "shared/types/user";
 import {
   useEntityCrudSettings,
   useEntityDiction,
@@ -32,7 +33,10 @@ export function EntityDetails() {
   useSetPageDetails({
     pageTitle: `${entityDiction.singular} Details`,
     viewKey: ENTITY_DETAILS_VIEW_KEY,
-    permission: META_USER_PERMISSIONS.APPLIED_CAN_ACCESS_ENTITY(entity),
+    permission: META_USER_PERMISSIONS.APPLIED_CAN_ACCESS_ENTITY(
+      entity,
+      GranularEntityPermissions.Show
+    ),
   });
 
   return (

@@ -1,5 +1,6 @@
 import { dashboardWidgetsController } from "backend/dashboard-widgets/dashboard-widgets.controller";
-import { IAccountProfile, USER_PERMISSIONS } from "shared/types/user";
+import { USER_PERMISSIONS } from "shared/constants/user";
+import { IAccountProfile } from "shared/types/user";
 import { requestHandler } from "../../../../backend/lib/request";
 
 const REQUEST_QUERY_FIELD = "dashboardId";

@@ -8,7 +8,7 @@ import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
 import { useRouter } from "next/router";
 import { useMutation } from "react-query";
 import { IBaseRoleForm } from "shared/form-schemas/roles/base";
-import { makeRoleId } from "shared/types/user";
+import { makeRoleId } from "shared/constants/user";
 
 export const ADMIN_ROLES_ENDPOINT = "/api/roles";
 

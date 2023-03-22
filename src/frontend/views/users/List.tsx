@@ -9,15 +9,12 @@ import { AppLayout } from "frontend/_layouts/app";
 import { UserPlus } from "react-feather";
 import { NAVIGATION_LINKS, useSetPageDetails } from "frontend/lib/routing";
 import { useRouter } from "next/router";
-import {
-  IAccountProfile,
-  roleLabel,
-  USER_PERMISSIONS,
-} from "shared/types/user";
+import { roleLabel, USER_PERMISSIONS } from "shared/constants/user";
 import { FEPaginationTable } from "frontend/components/FEPaginationTable";
 import { useApi } from "@hadmean/protozoa";
 import { IRolesList } from "shared/types/roles";
 import { ISystemStatusForDisplay } from "@hadmean/chromista/dist/types";
+import { IAccountProfile } from "shared/types/user";
 import {
   ADMIN_USERS_LIST_ENDPOINT,
   useUserDeletionMutation,

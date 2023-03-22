@@ -1,11 +1,11 @@
 import { rolesService } from "backend/roles/roles.service";
-import { META_USER_PERMISSIONS, USER_PERMISSIONS } from "shared/types/user";
+import { USER_PERMISSIONS } from "shared/constants/user";
 import { NextApiRequest } from "next";
 import { NotFoundError } from "../../../errors";
 import { entitiesService } from "../../../../entities/entities.service";
 import { ValidationImplType } from "./types";
 
-const ERROR_MESSAGE = `This resource doesn't exist or is disabled or you dont have access to it`;
+export const ERROR_MESSAGE = `This resource doesn't exist or is disabled or you dont have access to it`;
 
 export const getEntityFromRequest = (req: NextApiRequest) => {
   return req.query.entity as string;
@@ -32,16 +32,6 @@ export const entityValidationImpl: ValidationImplType<string> = async (req) => {
     ) {
       throw new NotFoundError(ERROR_MESSAGE);
     }
-  }
-
-  // eyes
-  if (
-    !(await rolesService.canRoleDoThis(
-      req.user.role,
-      META_USER_PERMISSIONS.APPLIED_CAN_ACCESS_ENTITY(entity)
-    ))
-  ) {
-    throw new NotFoundError(ERROR_MESSAGE);
   }
 
   return entity;

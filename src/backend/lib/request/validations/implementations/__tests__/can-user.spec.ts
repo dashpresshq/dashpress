@@ -1,5 +1,5 @@
 import { requestHandler } from "backend/lib/request";
-import { USER_PERMISSIONS } from "shared/types/user";
+import { USER_PERMISSIONS } from "shared/constants/user";
 import {
   createAuthenticatedMocks,
   createAuthenticatedViewerMocks,

@@ -10,7 +10,7 @@ import { useActiveEntities } from "frontend/hooks/entity/entity.store";
 import { useNavigationStack, useSetPageDetails } from "frontend/lib/routing";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { LINK_TO_DOCS } from "frontend/views/constants";
-import { USER_PERMISSIONS } from "shared/types/user";
+import { USER_PERMISSIONS } from "shared/constants/user";
 import { useMemo } from "react";
 import { ILabelValue } from "types";
 import { userFriendlyCase } from "shared/lib/strings";

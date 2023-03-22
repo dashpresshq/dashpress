@@ -13,7 +13,7 @@ import {
 import { useNavigationStack, useSetPageDetails } from "frontend/lib/routing";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { LINK_TO_DOCS } from "frontend/views/constants";
-import { USER_PERMISSIONS } from "shared/types/user";
+import { USER_PERMISSIONS } from "shared/constants/user";
 import { AppLayout } from "../../../_layouts/app";
 import { useUsernameFromRouteParam } from "../hooks";
 import {

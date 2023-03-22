@@ -11,7 +11,8 @@ import { BASE_TEST_URL } from "__tests__/_/api-handlers/_utils";
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 import userEvent from "@testing-library/user-event";
 import { useUserAuthenticatedState } from "frontend/hooks/auth/useAuthenticateUser";
-import { IAuthenticatedUserBag, USER_PERMISSIONS } from "shared/types/user";
+import { IAuthenticatedUserBag } from "shared/types/user";
+import { USER_PERMISSIONS } from "shared/constants/user";
 
 const server = setupApiHandlers();
 

@@ -1,7 +1,7 @@
 import { Tabs, SectionBox } from "@hadmean/chromista";
 import { SLUG_LOADING_VALUE } from "@hadmean/protozoa";
 import { useSetPageDetails } from "frontend/lib/routing";
-import { USER_PERMISSIONS } from "shared/types/user";
+import { USER_PERMISSIONS } from "shared/constants/user";
 import { IFormExtension } from "frontend/components/SchemaForm/types";
 import { LINK_TO_DOCS } from "frontend/views/constants";
 import { useEntitySlug } from "../../../hooks/entity/entity.config";

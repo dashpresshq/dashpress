@@ -1,4 +1,4 @@
-import { USER_PERMISSIONS } from "shared/types/user";
+import { USER_PERMISSIONS } from "shared/constants/user";
 import { entitiesController } from "../../../../backend/entities/entities.controller";
 import { requestHandler } from "../../../../backend/lib/request";
 

@@ -1,6 +1,7 @@
 import { usersController } from "backend/users/users.controller";
+import { USER_PERMISSIONS } from "shared/constants/user";
 import { UPDATE_USER_FORM_SCHEMA } from "shared/form-schemas/users/update";
-import { IAccountProfile, USER_PERMISSIONS } from "shared/types/user";
+import { IAccountProfile } from "shared/types/user";
 import { requestHandler } from "../../../../backend/lib/request";
 
 const REQUEST_QUERY_FIELD = "username";

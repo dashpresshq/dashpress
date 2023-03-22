@@ -2,7 +2,8 @@ import { StyledCard } from "@hadmean/chromista";
 import { FilterOperators } from "@hadmean/protozoa";
 import { useEntityReferenceFields } from "frontend/hooks/entity/entity.store";
 import { useSetPageDetails, useRouteParam } from "frontend/lib/routing";
-import { META_USER_PERMISSIONS } from "shared/types/user";
+import { META_USER_PERMISSIONS } from "shared/constants/user";
+import { GranularEntityPermissions } from "shared/types/user";
 import {
   useEntityDiction,
   useEntityId,
@@ -29,7 +30,10 @@ export function EntityRelationTable() {
   useSetPageDetails({
     pageTitle: `${childEntityDiction.singular} Table`,
     viewKey: ENTITY_DETAILS_VIEW_KEY,
-    permission: META_USER_PERMISSIONS.APPLIED_CAN_ACCESS_ENTITY(childEntity),
+    permission: META_USER_PERMISSIONS.APPLIED_CAN_ACCESS_ENTITY(
+      childEntity,
+      GranularEntityPermissions.Show
+    ),
   });
 
   return (

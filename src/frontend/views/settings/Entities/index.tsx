@@ -6,7 +6,7 @@ import {
 } from "frontend/lib/routing";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { LINK_TO_DOCS } from "frontend/views/constants";
-import { USER_PERMISSIONS } from "shared/types/user";
+import { USER_PERMISSIONS } from "shared/constants/user";
 import { dataNotFoundMessage, useApi } from "@hadmean/protozoa";
 import { ILabelValue } from "types";
 import {

@@ -1,5 +1,5 @@
 import { requestHandler } from "backend/lib/request";
-import { META_USER_PERMISSIONS, USER_PERMISSIONS } from "shared/types/user";
+import { USER_PERMISSIONS } from "shared/constants/user";
 import {
   createAuthenticatedCustomRoleMocks,
   createAuthenticatedMocks,
@@ -57,14 +57,11 @@ describe("Request Validations => entityValidationImpl", () => {
     `);
   });
 
-  it("should allow users who can `CAN_CONFIGURE_APP` and view the disabled entity view disabled entities", async () => {
+  it("should allow users who can `CAN_CONFIGURE_APP` view the disabled entity", async () => {
     await setupRolesTestData([
       {
         id: "custom-role",
-        permissions: [
-          USER_PERMISSIONS.CAN_CONFIGURE_APP,
-          META_USER_PERMISSIONS.APPLIED_CAN_ACCESS_ENTITY("DISABLED-ENTITY-1"),
-        ],
+        permissions: [USER_PERMISSIONS.CAN_CONFIGURE_APP],
       },
     ]);
     const { req, res } = createAuthenticatedCustomRoleMocks({
@@ -83,70 +80,11 @@ describe("Request Validations => entityValidationImpl", () => {
     `);
   });
 
-  it("should not allow users with only `CAN_CONFIGURE_APP` role view disabled entities", async () => {
+  it("should not allow users without `CAN_CONFIGURE_APP` view disabled entities", async () => {
     await setupRolesTestData([
       {
         id: "custom-role",
-        permissions: [USER_PERMISSIONS.CAN_CONFIGURE_APP],
-      },
-    ]);
-    const { req, res } = createAuthenticatedCustomRoleMocks({
-      method: "GET",
-      query: {
-        entity: "disabled-entity-1",
-      },
-    });
-
-    await handler(req, res);
-
-    expect(res._getStatusCode()).toBe(404);
-    expect(res._getJSONData()).toMatchInlineSnapshot(`
-      {
-        "message": "This resource doesn't exist or is disabled or you dont have access to it",
-        "method": "GET",
-        "name": "BadRequestError",
-        "path": "",
-        "statusCode": 404,
-      }
-    `);
-  });
-
-  it("should not allow users can `CAN_CONFIGURE_APP` but not view disabled entity view the entity", async () => {
-    await setupRolesTestData([
-      {
-        id: "custom-role",
-        permissions: [USER_PERMISSIONS.CAN_CONFIGURE_APP],
-      },
-    ]);
-    const { req, res } = createAuthenticatedCustomRoleMocks({
-      method: "GET",
-      query: {
-        entity: "disabled-entity-1",
-      },
-    });
-
-    await handler(req, res);
-
-    expect(res._getStatusCode()).toBe(404);
-    expect(res._getJSONData()).toMatchInlineSnapshot(`
-      {
-        "message": "This resource doesn't exist or is disabled or you dont have access to it",
-        "method": "GET",
-        "name": "BadRequestError",
-        "path": "",
-        "statusCode": 404,
-      }
-    `);
-  });
-
-  it("should not allow users who have access to the disabled entity but not `CAN_CONFIGURE_APP` view the disabled entity", async () => {
-    await setupRolesTestData([
-      {
-        id: "custom-role",
-        permissions: [
-          USER_PERMISSIONS.CAN_MANAGE_DASHBOARD,
-          META_USER_PERMISSIONS.APPLIED_CAN_ACCESS_ENTITY("DISABLED-ENTITY-1"),
-        ],
+        permissions: [USER_PERMISSIONS.CAN_MANAGE_DASHBOARD],
       },
     ]);
     const { req, res } = createAuthenticatedCustomRoleMocks({

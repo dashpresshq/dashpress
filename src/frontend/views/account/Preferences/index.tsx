@@ -6,7 +6,7 @@ import {
 import { useAuthenticatedUserPreferences } from "frontend/hooks/auth/user.store";
 import { useSetPageDetails } from "frontend/lib/routing";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
-import { META_USER_PERMISSIONS } from "shared/types/user";
+import { META_USER_PERMISSIONS } from "shared/constants/user";
 import { useUpdateUserPreferencesMutation } from "../account.store";
 import { ACCOUNT_VIEW_KEY } from "../constants";
 

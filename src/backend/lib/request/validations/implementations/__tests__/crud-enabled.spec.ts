@@ -1,9 +1,12 @@
 import { requestHandler } from "backend/lib/request";
 import { DataActionType } from "shared/configurations";
+import { META_USER_PERMISSIONS } from "shared/constants/user";
 import {
+  createAuthenticatedCustomRoleMocks,
   createAuthenticatedMocks,
   setupAllTestData,
   setupAppConfigTestData,
+  setupRolesTestData,
 } from "__tests__/api/_test-utils";
 
 const handler = requestHandler({
@@ -242,6 +245,72 @@ describe("Request Validations => crudEnabledValidationImpl", () => {
 
       await handler(req, res);
       expect(res._getStatusCode()).toBe(204);
+    });
+  });
+
+  describe("ACCESS", () => {
+    beforeAll(async () => {
+      await setupAppConfigTestData({
+        entity_crud_settings__tests: {
+          create: true,
+          details: true,
+          update: true,
+          delete: true,
+        },
+      });
+    });
+
+    it("should allow users who can access entity see the entity", async () => {
+      await setupRolesTestData([
+        {
+          id: "custom-role",
+          permissions: [
+            META_USER_PERMISSIONS.APPLIED_CAN_ACCESS_ENTITY("tests", false),
+          ],
+        },
+      ]);
+      const { req, res } = createAuthenticatedCustomRoleMocks({
+        method: "GET",
+        query: {
+          entity: "tests",
+        },
+      });
+
+      await handler(req, res);
+
+      expect(res._getStatusCode()).toBe(200);
+    });
+
+    it("should not allow users who can't access entity see the entity", async () => {
+      await setupRolesTestData([
+        {
+          id: "custom-role",
+          permissions: [
+            META_USER_PERMISSIONS.APPLIED_CAN_ACCESS_ENTITY(
+              "base-model",
+              false
+            ),
+          ],
+        },
+      ]);
+      const { req, res } = createAuthenticatedCustomRoleMocks({
+        method: "GET",
+        query: {
+          entity: "tests",
+        },
+      });
+
+      await handler(req, res);
+
+      expect(res._getJSONData()).toMatchInlineSnapshot(`
+        {
+          "message": "This resource doesn't exist or is disabled or you dont have access to it",
+          "method": "GET",
+          "name": "BadRequestError",
+          "path": "",
+          "statusCode": 404,
+        }
+      `);
     });
   });
 });

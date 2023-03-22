@@ -6,7 +6,7 @@ import {
 import styled from "styled-components";
 import { Check, Plus } from "react-feather";
 import { useSetPageDetails } from "frontend/lib/routing";
-import { USER_PERMISSIONS } from "shared/types/user";
+import { USER_PERMISSIONS } from "shared/constants/user";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import arrayMove from "array-move";
 import SortableList, { SortableItem } from "react-easy-sort";

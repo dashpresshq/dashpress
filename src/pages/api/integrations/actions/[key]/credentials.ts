@@ -1,4 +1,4 @@
-import { USER_PERMISSIONS } from "shared/types/user";
+import { USER_PERMISSIONS } from "shared/constants/user";
 import { actionsController } from "backend/actions/actions.controller";
 import { requestHandler } from "backend/lib/request";
 

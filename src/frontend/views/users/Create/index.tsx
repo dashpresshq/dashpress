@@ -1,7 +1,7 @@
 import { SectionBox, SectionCenter } from "@hadmean/chromista";
 import { TitleLang } from "@hadmean/protozoa";
 import { useNavigationStack, useSetPageDetails } from "frontend/lib/routing";
-import { USER_PERMISSIONS } from "shared/types/user";
+import { USER_PERMISSIONS } from "shared/constants/user";
 import { AppLayout } from "../../../_layouts/app";
 import { useCreateUserMutation } from "../users.store";
 import { CreateUserForm } from "./Form";

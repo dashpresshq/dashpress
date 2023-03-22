@@ -1,6 +1,6 @@
 import { BaseSkeleton, SectionBox, Spacer, Typo } from "@hadmean/chromista";
 import { useSetPageDetails } from "frontend/lib/routing";
-import { USER_PERMISSIONS } from "shared/types/user";
+import { USER_PERMISSIONS } from "shared/constants/user";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { dataNotFoundMessage, useApi } from "@hadmean/protozoa";
 import { Fragment } from "react";

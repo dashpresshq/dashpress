@@ -18,7 +18,7 @@ import {
 } from "frontend/lib/routing/usePageDetails";
 import { HelpCircle, Plus } from "react-feather";
 import { SchemaForm } from "frontend/components/SchemaForm";
-import { USER_PERMISSIONS } from "shared/types/user";
+import { USER_PERMISSIONS } from "shared/constants/user";
 import { usePasswordStore } from "frontend/views/integrations/password.store";
 import { useUserHasPermission } from "frontend/hooks/auth/user.store";
 import { INTEGRATIONS_GROUP_CONFIG } from "shared/config-bag/integrations";

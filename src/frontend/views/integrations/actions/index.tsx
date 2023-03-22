@@ -4,7 +4,7 @@ import {
   SectionBox,
 } from "@hadmean/chromista";
 import { useRouteParam, useSetPageDetails } from "frontend/lib/routing";
-import { USER_PERMISSIONS } from "shared/types/user";
+import { USER_PERMISSIONS } from "shared/constants/user";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { LINK_TO_DOCS } from "frontend/views/constants";
 import { BaseActionsLayout } from "../_Base";

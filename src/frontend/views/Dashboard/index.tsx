@@ -1,5 +1,5 @@
 import { NAVIGATION_LINKS, useSetPageDetails } from "frontend/lib/routing";
-import { META_USER_PERMISSIONS } from "shared/types/user";
+import { META_USER_PERMISSIONS } from "shared/constants/user";
 import React from "react";
 
 import { HOME_DASHBOARD_KEY } from "shared/types/dashboard";

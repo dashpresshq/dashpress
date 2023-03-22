@@ -8,7 +8,8 @@ import UserUpdate from "pages/users/[username]/index";
 
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 import { BASE_TEST_URL } from "__tests__/_/api-handlers/_utils";
-import { IAuthenticatedUserBag, USER_PERMISSIONS } from "shared/types/user";
+import { IAuthenticatedUserBag } from "shared/types/user";
+import { USER_PERMISSIONS } from "shared/constants/user";
 
 const server = setupApiHandlers();
 

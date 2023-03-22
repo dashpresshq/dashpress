@@ -10,8 +10,8 @@ import {
   isSystemRole,
   makeRoleId,
   META_USER_PERMISSIONS,
-  SystemRoles,
-} from "shared/types/user";
+} from "shared/constants/user";
+import { GranularEntityPermissions, SystemRoles } from "shared/types/user";
 
 export interface IRole {
   id: string;
@@ -62,7 +62,10 @@ export class RolesService implements IApplicationService {
     const entitiesCheck = await Promise.all(
       entities.map(async (entity) => {
         const entityValue = entity[entityField] as unknown as string;
-        const permissionCheck = applyMeta(entityValue);
+        const permissionCheck = applyMeta(
+          entityValue,
+          GranularEntityPermissions.Show
+        );
         return {
           entity,
           hasAccess: await this.canRoleDoThis(userRole, permissionCheck),

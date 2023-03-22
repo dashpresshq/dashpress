@@ -12,7 +12,7 @@ import {
   useRouteParam,
   useSetPageDetails,
 } from "frontend/lib/routing";
-import { USER_PERMISSIONS } from "shared/types/user";
+import { USER_PERMISSIONS } from "shared/constants/user";
 import {
   useEntityFieldLabels,
   useEntityFieldSelections,

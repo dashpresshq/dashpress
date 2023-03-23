@@ -54,12 +54,19 @@ export class RolesController {
     await this.updateUsersRole(roleId, SystemRoles.Viewer);
   }
 
-  async addPermission(roleId: string, { permission }: IBasePermissionForm) {
-    await this._rolesService.addPermission(roleId, permission);
+  async addPermissions(roleId: string, { permissions }: IBasePermissionForm) {
+    for (const permission of permissions) {
+      await this._rolesService.addPermission(roleId, permission);
+    }
   }
 
-  async removePermission(roleId: string, { permission }: IBasePermissionForm) {
-    await this._rolesService.removePermission(roleId, permission);
+  async removePermissions(
+    roleId: string,
+    { permissions }: IBasePermissionForm
+  ) {
+    for (const permission of permissions) {
+      await this._rolesService.removePermission(roleId, permission);
+    }
   }
 }
 

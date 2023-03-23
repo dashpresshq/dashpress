@@ -28,33 +28,33 @@ export function useRolePermissions() {
 export function useRolePermissionDeletionMutation() {
   const roleId = useRoleIdFromRouteParam();
 
-  const apiMutateOptions = useApiMutateOptions<string[], string>({
+  const apiMutateOptions = useApiMutateOptions<string[], string[]>({
     dataQueryPath: ADMIN_ROLE_PERMISSION_ENDPOINT(roleId),
-    onMutate: MutationHelpers.remove,
+    onMutate: MutationHelpers.removeMany,
     successMessage: MutationsLang.delete(SINGULAR),
   });
 
-  return useMutation(async (permission: string) => {
+  return useMutation(async (permissions: string[]) => {
     await makeDeleteRequest(ADMIN_ROLE_PERMISSION_ENDPOINT(roleId), {
-      permission,
+      permissions,
     });
-    return permission;
+    return permissions;
   }, apiMutateOptions);
 }
 
 export function useCreateRolePermissionMutation() {
   const roleId = useRoleIdFromRouteParam();
 
-  const apiMutateOptions = useApiMutateOptions<string[], string>({
+  const apiMutateOptions = useApiMutateOptions<string[], string[]>({
     dataQueryPath: ADMIN_ROLE_PERMISSION_ENDPOINT(roleId),
-    onMutate: MutationHelpers.append,
+    onMutate: MutationHelpers.mergeArray,
     successMessage: MutationsLang.create(SINGULAR),
   });
 
-  return useMutation(async (permission: string) => {
+  return useMutation(async (permissions: string[]) => {
     await makePostRequest(ADMIN_ROLE_PERMISSION_ENDPOINT(roleId), {
-      permission,
+      permissions,
     });
-    return permission;
+    return permissions;
   }, apiMutateOptions);
 }

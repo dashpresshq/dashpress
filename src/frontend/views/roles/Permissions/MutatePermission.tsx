@@ -37,9 +37,9 @@ export function MutatePermission({ permissionList }: IProps) {
                 selected: isPermissionSelected,
                 onChange: () => {
                   if (isPermissionSelected) {
-                    rolePermissionDeletionMutation.mutate(menuItem.value);
+                    rolePermissionDeletionMutation.mutate([menuItem.value]);
                   } else {
-                    rolePermissionCreationMutation.mutate(menuItem.value);
+                    rolePermissionCreationMutation.mutate([menuItem.value]);
                   }
                 },
               }}

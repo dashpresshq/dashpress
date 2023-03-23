@@ -1,5 +1,4 @@
 import { rolesController } from "backend/roles/roles.controller";
-import { BASE_PERMISSION_FORM_SCHEMA } from "shared/form-schemas/roles/permissions/base";
 import { USER_PERMISSIONS } from "shared/constants/user";
 import { requestHandler } from "../../../../backend/lib/request";
 
@@ -27,10 +26,10 @@ export default requestHandler(
         },
         {
           _type: "requestBody",
-          options: BASE_PERMISSION_FORM_SCHEMA,
+          options: {},
         },
       ]);
-      return await rolesController.removePermission(
+      return await rolesController.removePermissions(
         validatedRequest.requestQuery,
         validatedRequest.requestBody
       );
@@ -44,10 +43,10 @@ export default requestHandler(
         },
         {
           _type: "requestBody",
-          options: BASE_PERMISSION_FORM_SCHEMA,
+          options: {},
         },
       ]);
-      return await rolesController.addPermission(
+      return await rolesController.addPermissions(
         validatedRequest.requestQuery,
         validatedRequest.requestBody
       );

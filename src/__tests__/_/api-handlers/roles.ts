@@ -42,17 +42,17 @@ export const rolesApiHandlers = [
   rest.post(
     BASE_TEST_URL("/api/roles/:roleId/permissions"),
     async (req, res, ctx) => {
-      const { permission } = await req.json();
-      PERMISSIONS.push(permission);
+      const { permissions } = await req.json();
+      PERMISSIONS = PERMISSIONS.concat(permissions);
       return res(ctx.status(204));
     }
   ),
   rest.delete(
     BASE_TEST_URL("/api/roles/:roleId/permissions"),
     async (req, res, ctx) => {
-      const { permission } = await req.json();
+      const { permissions } = await req.json();
       PERMISSIONS = PERMISSIONS.filter(
-        (permission$1) => permission$1 !== permission
+        (permission$1) => permission$1 !== permissions
       );
       return res(ctx.status(204));
     }

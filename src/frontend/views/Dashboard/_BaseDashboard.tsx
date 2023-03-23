@@ -39,6 +39,7 @@ export function BaseDashboard({ dashboardId, showDemo, manageLink }: IProps) {
   return (
     <AppLayout
       actionItems={DASHBOARD_RELATIVE_DAYS.map(({ label, value }) => ({
+        id: label,
         label: `Past ${label}`,
         onClick: () => {
           setCurrentRelativeDay(value);
@@ -49,6 +50,7 @@ export function BaseDashboard({ dashboardId, showDemo, manageLink }: IProps) {
         userHasPermission(USER_PERMISSIONS.CAN_MANAGE_DASHBOARD)
           ? [
               {
+                id: "manage-dashboard",
                 label: "Manage Dashboard",
                 IconComponent: Settings,
                 onClick: () => router.replace(manageLink),

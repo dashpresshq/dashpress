@@ -107,6 +107,7 @@ export function ManageCredentialGroup({
       actionItems: canManageAction
         ? [
             {
+              id: "add",
               onClick: () => {
                 setCurrentConfigItem(NEW_CONFIG_ITEM);
               },
@@ -117,6 +118,7 @@ export function ManageCredentialGroup({
         : [],
       secondaryActionItems: [
         {
+          id: "help",
           onClick: () =>
             window.open(LINK_TO_DOCS(`integrations/variables#${group}`)),
           IconComponent: HelpCircle,

@@ -206,7 +206,7 @@ export class DataService implements IApplicationService {
     id: string,
     data: Record<string, unknown>
   ): Promise<void> {
-    // validate the updateData values
+    // validate the updateData values if present
 
     const [allowedFields, primaryField, entityValidations] = await Promise.all([
       this.getAllowedCrudsFieldsToShow(entity, "hidden_entity_update_columns"),
@@ -217,6 +217,7 @@ export class DataService implements IApplicationService {
       ),
     ]);
 
+    // validate only the fields presents in 'data'
     noop(entityValidations);
 
     // const validations = runValidationError({})(data);

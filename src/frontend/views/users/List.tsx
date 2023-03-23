@@ -63,6 +63,7 @@ export function ListUsers() {
     <AppLayout
       actionItems={[
         {
+          id: "add",
           label: "Add New User",
           IconComponent: UserPlus,
           onClick: () => {

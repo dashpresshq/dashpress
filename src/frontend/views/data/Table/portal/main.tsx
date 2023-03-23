@@ -13,7 +13,7 @@ export function TableViewComponent() {
   return <span />;
 }
 
-export const usePortalTableColumns = (entity: string) => {
-  noop(entity);
+export const usePortalTableColumns = (entity: string, lean: boolean) => {
+  noop(entity, lean);
   return (tableColumns: ITableColumn[]) => tableColumns;
 };

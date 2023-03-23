@@ -28,7 +28,7 @@ interface IProps {
 }
 
 export function SelectionTab({ columns, isLoading, toggling, error }: IProps) {
-  const { toggleSelection, currentPageSelection, selectMutiple } =
+  const { toggleSelection, allSelections, selectMutiple, isSelected } =
     useStringSelections();
 
   const [touched, setTouched] = useState(false);
@@ -68,7 +68,7 @@ export function SelectionTab({ columns, isLoading, toggling, error }: IProps) {
             singular="Field"
             getLabel={columns.getEntityFieldLabels}
             render={(menuItem) => {
-              const isHidden = currentPageSelection.includes(menuItem.name);
+              const isHidden = isSelected(menuItem.name);
 
               return (
                 <SectionListItem
@@ -96,7 +96,7 @@ export function SelectionTab({ columns, isLoading, toggling, error }: IProps) {
           <FormButton
             onClick={async () => {
               setIsMakingRequest(true);
-              await columns.submit(currentPageSelection);
+              await columns.submit(allSelections);
               setIsMakingRequest(false);
               setTouched(false);
             }}

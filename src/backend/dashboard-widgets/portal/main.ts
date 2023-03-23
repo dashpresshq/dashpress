@@ -8,7 +8,7 @@ export const mutateGeneratedDashboardWidgets = async (
   return wigdets;
 };
 
-export const PORTAL_DASHBOARD_PERMISSION = (key: string) => {
-  noop(key);
+export const PORTAL_DASHBOARD_PERMISSION = (key: string, granular: false) => {
+  noop(key, granular);
   return META_USER_PERMISSIONS.NO_PERMISSION_REQUIRED;
 };

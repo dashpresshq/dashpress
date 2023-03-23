@@ -1,41 +1,37 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 function useSelections<T>() {
-  const [selections, setSelections] = useState<Record<number, T[]>>({});
-  const [currentPage, setCurrentPage] = useState(1);
-
-  useEffect(() => {
-    // So that I dont dirty this code with things like `(selections[currentPage] || []).doSomething`
-    setSelections({
-      ...selections,
-      [currentPage]: selections[currentPage] ?? [],
-    });
-  }, [currentPage]);
+  const [selections, setSelections] = useState<Set<T>>(new Set([]));
 
   return {
-    allSelections: Object.values(selections).flatMap((x) => x),
-    currentPageSelection: selections[currentPage] || [],
-    selectMutiple: (items: T[]) => {
-      setSelections({ ...selections, [currentPage]: items });
-    },
-    clearAll: () => {
-      setSelections({ ...selections, [currentPage]: [] });
-    },
-    setCurrentPage,
     toggleSelection: (input: T) => {
-      if (selections[currentPage].includes(input)) {
-        setSelections({
-          ...selections,
-          [currentPage]: selections[currentPage].filter(
-            (selection) => selection !== input
-          ),
-        });
-        return;
+      const setClone = new Set(selections);
+
+      if (setClone.has(input)) {
+        setClone.delete(input);
+      } else {
+        setClone.add(input);
       }
-      setSelections({
-        ...selections,
-        [currentPage]: [...selections[currentPage], input],
-      });
+
+      setSelections(setClone);
+    },
+    allSelections: [...selections],
+    selectMutiple: (items: T[]) => {
+      const setClone = new Set(selections);
+
+      items.forEach((item) => setClone.add(item));
+
+      setSelections(setClone);
+    },
+    deSelectMutiple: (items: T[]) => {
+      const setClone = new Set(selections);
+
+      items.forEach((item) => setClone.delete(item));
+
+      setSelections(setClone);
+    },
+    isSelected: (item: T) => {
+      return selections.has(item);
     },
   };
 }

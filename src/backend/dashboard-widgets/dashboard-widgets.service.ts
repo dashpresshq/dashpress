@@ -122,7 +122,7 @@ export class DashboardWidgetsService implements IApplicationService {
       dashboardId !== HOME_DASHBOARD_KEY &&
       !(await this._rolesService.canRoleDoThis(
         userRole,
-        PORTAL_DASHBOARD_PERMISSION(dashboardId)
+        PORTAL_DASHBOARD_PERMISSION(dashboardId, false)
       ))
     ) {
       throw new BadRequestError(

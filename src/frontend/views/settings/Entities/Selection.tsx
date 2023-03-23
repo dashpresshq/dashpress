@@ -22,7 +22,7 @@ export function EntitiesSelection({
   onSubmit,
   hiddenList,
 }: IProps) {
-  const { toggleSelection, currentPageSelection, selectMutiple } =
+  const { toggleSelection, allSelections, selectMutiple, isSelected } =
     useStringSelections();
 
   const [touched, setTouched] = useState(false);
@@ -39,7 +39,7 @@ export function EntitiesSelection({
       <FormButton
         onClick={async () => {
           setIsMakingRequest(true);
-          await onSubmit(currentPageSelection);
+          await onSubmit(allSelections);
           setIsMakingRequest(false);
           setTouched(false);
         }}
@@ -67,7 +67,7 @@ export function EntitiesSelection({
             getLabel={getEntityFieldLabels}
             singular="Entity"
             render={(menuItem) => {
-              const isHidden = currentPageSelection.includes(menuItem.name);
+              const isHidden = isSelected(menuItem.name);
               return (
                 <SectionListItem
                   label={menuItem.label}

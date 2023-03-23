@@ -76,7 +76,7 @@ export const useTableColumns = (
   entity: string,
   lean?: true
 ): Partial<DataStateKeys<ITableColumn[]>> => {
-  const portalTableColumns = usePortalTableColumns(entity);
+  const portalTableColumns = usePortalTableColumns(entity, !!lean);
   const getEntityFieldLabels = useEntityFieldLabels(entity);
   const entityCrudSettings = useEntityCrudSettings(entity);
   const entityFields = useEntityFields(entity);

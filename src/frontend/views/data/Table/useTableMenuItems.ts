@@ -31,6 +31,7 @@ export const useTableMenuItems = (entity: string): IDropDownMenuItem[] => {
     )
   ) {
     menuItems.push({
+      id: "add",
       order: 1,
       label: `Add New ${entityDiction.singular}`,
       IconComponent: Plus,

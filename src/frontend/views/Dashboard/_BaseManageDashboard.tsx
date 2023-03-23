@@ -81,6 +81,7 @@ export function BaseManageDashboard({ dashboardId, doneLink, title }: IProps) {
       <AppLayout
         secondaryActionItems={[
           {
+            id: "done",
             label: "Done",
             IconComponent: Check,
             onClick: () => router.replace(doneLink),
@@ -88,6 +89,7 @@ export function BaseManageDashboard({ dashboardId, doneLink, title }: IProps) {
         ]}
         actionItems={[
           {
+            id: "new",
             label: "New Dashboard Item",
             IconComponent: Plus,
             onClick: () => setCurrentDashboardItem(NEW_DASHBOARD_ITEM),

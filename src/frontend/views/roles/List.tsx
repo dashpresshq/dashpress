@@ -55,6 +55,7 @@ export function ListRoles() {
     <AppLayout
       actionItems={[
         {
+          id: "add",
           label: "Add New Role",
           IconComponent: Plus,
           onClick: () => {

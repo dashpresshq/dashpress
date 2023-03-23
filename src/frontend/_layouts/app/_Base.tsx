@@ -85,6 +85,7 @@ export function BaseLayout({
               <DropDownMenu
                 menuItems={[
                   {
+                    id: "github",
                     IconComponent: GitHub,
                     label: "Star us on Github",
                     description: `Tell us Hadmean is a useful project by dropping us a star`,
@@ -93,6 +94,7 @@ export function BaseLayout({
                     },
                   },
                   {
+                    id: "twitter",
                     IconComponent: Twitter,
                     label: "Follow us on Twitter",
                     description: `Tweet at @hadmeanHQ if you know others will benefit using Hadmean`,
@@ -101,6 +103,7 @@ export function BaseLayout({
                     },
                   },
                   {
+                    id: "users",
                     IconComponent: Users,
                     label: "Join our Discord community",
                     description: `Ask your questions here`,
@@ -109,6 +112,7 @@ export function BaseLayout({
                     },
                   },
                   {
+                    id: "website",
                     IconComponent: Globe,
                     label: "Visit our website",
                     description: `For more links on documentation, roadmap, blog etc`,

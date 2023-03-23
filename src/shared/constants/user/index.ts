@@ -1,13 +1,10 @@
-import { SLUG_LOADING_VALUE, StringUtils } from "@hadmean/protozoa";
+import { StringUtils } from "@hadmean/protozoa";
 import { userFriendlyCase } from "shared/lib/strings";
-import { GranularEntityPermissions, SystemRoles } from "shared/types/user";
-import {
-  makePortalPermissionString,
-  PORTAL_USER_PERMISSIONS,
-} from "./portal/user";
+import { SystemRoles } from "shared/types/user";
+import { PORTAL_USER_PERMISSIONS } from "../portal/user";
+import { APPLIED_CAN_ACCESS, NO_PERMISSION_REQUIRED } from "./shared";
 
 const CAN_ACCESS_ENTITY = "CAN_ACCESS_ENTITY";
-const NO_PERMISSION_REQUIRED = "NO_PERMISSION_REQUIRED";
 
 export const isSystemRole = (roleId: string) => {
   return (Object.values(SystemRoles) as string[]).includes(roleId);
@@ -22,15 +19,6 @@ export const roleLabel = (value: string) => {
     ? "Super Admin"
     : userFriendlyCase(value);
 };
-
-export const APPLIED_CAN_ACCESS =
-  (context: string) =>
-  (entity: string, granular: GranularEntityPermissions | false) => {
-    if (entity === SLUG_LOADING_VALUE) {
-      return NO_PERMISSION_REQUIRED;
-    }
-    return makePortalPermissionString(context, entity, granular);
-  };
 
 export const META_USER_PERMISSIONS = {
   APPLIED_CAN_ACCESS_ENTITY: APPLIED_CAN_ACCESS(CAN_ACCESS_ENTITY),

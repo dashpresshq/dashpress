@@ -12,6 +12,7 @@ import { IEntityField } from "shared/types/db";
 import { useStringSelections } from "../../../lib/selection";
 
 interface IProps {
+  label: string;
   columns?: {
     fields: IEntityField[];
     submit?: (columnsSelection: string[]) => Promise<void>;
@@ -27,9 +28,15 @@ interface IProps {
   error: unknown;
 }
 
-export function SelectionTab({ columns, isLoading, toggling, error }: IProps) {
+export function SelectionTab({
+  columns,
+  isLoading,
+  toggling,
+  error,
+  label,
+}: IProps) {
   const { toggleSelection, allSelections, selectMutiple, isSelected } =
-    useStringSelections();
+    useStringSelections(`${label}CrudSelectionTab}`);
 
   const [touched, setTouched] = useState(false);
 

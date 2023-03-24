@@ -3,4 +3,5 @@ export {
   useSyncPaginatedDataState,
   TableViewComponent,
   usePortalTableColumns,
+  TableTopComponent,
 } from "./main";

@@ -120,6 +120,7 @@ function useEntityCrudView() {
       disabled: false,
       render: (
         <SelectionTab
+          label={ENTITY_CRUD_SETTINGS_TAB_LABELS.TABLE}
           columns={{
             fields: entityFields.data || [],
             submit: async (data) => {
@@ -141,6 +142,7 @@ function useEntityCrudView() {
       disabled: !entityCrudSettingsState.details,
       render: (
         <SelectionTab
+          label={ENTITY_CRUD_SETTINGS_TAB_LABELS.TABLE}
           columns={{
             fields: entityFields.data || [],
             submit: async (data) => {
@@ -163,6 +165,7 @@ function useEntityCrudView() {
       disabled: !entityCrudSettingsState.create,
       render: (
         <SelectionTab
+          label={ENTITY_CRUD_SETTINGS_TAB_LABELS.CREATE}
           columns={{
             fields: entityFields.data || [],
             submit: async (data) => {
@@ -185,6 +188,7 @@ function useEntityCrudView() {
       disabled: !entityCrudSettingsState.update,
       render: (
         <SelectionTab
+          label={ENTITY_CRUD_SETTINGS_TAB_LABELS.UPDATE}
           columns={{
             fields: entityFields.data || [],
             submit: async (data) => {
@@ -207,6 +211,7 @@ function useEntityCrudView() {
       disabled: !entityCrudSettingsState.delete,
       render: (
         <SelectionTab
+          label={ENTITY_CRUD_SETTINGS_TAB_LABELS.DELETE}
           isLoading={false}
           error={error}
           toggling={{

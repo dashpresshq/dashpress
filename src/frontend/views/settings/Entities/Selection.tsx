@@ -8,6 +8,7 @@ import React, { useEffect, useState } from "react";
 import { useStringSelections } from "../../../lib/selection";
 
 interface IProps {
+  selectionKey: string;
   hiddenList: string[];
   allList: string[];
   onSubmit: (columnsSelection: string[]) => Promise<void>;
@@ -17,13 +18,14 @@ interface IProps {
 const LONG_LIST_THRESHOLD = 10;
 
 export function EntitiesSelection({
+  selectionKey,
   getEntityFieldLabels,
   allList,
   onSubmit,
   hiddenList,
 }: IProps) {
   const { toggleSelection, allSelections, selectMutiple, isSelected } =
-    useStringSelections();
+    useStringSelections(`${selectionKey}--entities-selection`);
 
   const [touched, setTouched] = useState(false);
 

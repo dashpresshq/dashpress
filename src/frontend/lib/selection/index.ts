@@ -1,39 +1,49 @@
-import { useState } from "react";
+import { createStore } from "@hadmean/protozoa";
 
-function useSelections<T>() {
-  const [selections, setSelections] = useState<Set<T>>(new Set([]));
+type IStore = {
+  values: Record<string, Record<string, boolean>>;
+  set: (value: { key: string; value: Record<string, boolean> }) => void;
+};
+
+const useSelectionStore = createStore<IStore>((set) => ({
+  values: {},
+  set: ({ key, value }) =>
+    set(({ values }) => ({
+      values: { ...values, [key]: value },
+    })),
+}));
+
+export function useStringSelections(key: string) {
+  const [values, set] = useSelectionStore((store) => [store.values, store.set]);
+
+  const selections = values[key] || {};
+
+  const setSelections = (value: Record<string, boolean>) => {
+    set({ key, value });
+  };
 
   return {
-    toggleSelection: (input: T) => {
-      const setClone = new Set(selections);
-
-      if (setClone.has(input)) {
-        setClone.delete(input);
-      } else {
-        setClone.add(input);
-      }
-
-      setSelections(setClone);
+    toggleSelection: (input: string) => {
+      setSelections({ ...selections, [input]: !selections[input] });
     },
-    allSelections: [...selections],
-    selectMutiple: (items: T[]) => {
-      const setClone = new Set(selections);
-
-      items.forEach((item) => setClone.add(item));
-
-      setSelections(setClone);
+    allSelections: Object.entries(selections)
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      .filter(([_, value]) => value)
+      .map(([_]) => _),
+    selectMutiple: (items: string[]) => {
+      const update = Object.fromEntries(items.map((item) => [item, true]));
+      setSelections({ ...selections, ...update });
     },
-    deSelectMutiple: (items: T[]) => {
-      const setClone = new Set(selections);
+    deSelectMutiple: (items: string[]) => {
+      const update = Object.fromEntries(items.map((item) => [item, false]));
 
-      items.forEach((item) => setClone.delete(item));
-
-      setSelections(setClone);
+      setSelections({ ...selections, ...update });
     },
-    isSelected: (item: T) => {
-      return selections.has(item);
+    isSelected: (item: string) => {
+      return selections[item];
+    },
+    clearAll: () => {
+      setSelections({});
     },
   };
 }
-
-export const useStringSelections = () => useSelections<string>();

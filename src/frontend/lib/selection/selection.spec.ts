@@ -3,12 +3,12 @@ import { useStringSelections } from ".";
 
 describe("useStringSelections", () => {
   it("should default to empty array", async () => {
-    const { result } = renderHook(() => useStringSelections());
+    const { result } = renderHook(() => useStringSelections(""));
     expect(result.current.allSelections).toEqual([]);
   });
   describe("single page", () => {
     it("should select multiple", async () => {
-      const { result, rerender } = renderHook(() => useStringSelections());
+      const { result, rerender } = renderHook(() => useStringSelections(""));
 
       result.current.selectMutiple(["foo", "bar"]);
 
@@ -29,7 +29,7 @@ describe("useStringSelections", () => {
     });
 
     it("should deSelectMutiple multiple", async () => {
-      const { result, rerender } = renderHook(() => useStringSelections());
+      const { result, rerender } = renderHook(() => useStringSelections(""));
 
       result.current.selectMutiple(["foo", "bar", "baz", "quz"]);
 
@@ -51,7 +51,7 @@ describe("useStringSelections", () => {
     });
 
     it("should select toogle selections", async () => {
-      const { result, rerender } = renderHook(() => useStringSelections());
+      const { result, rerender } = renderHook(() => useStringSelections(""));
 
       result.current.toggleSelection("foo");
       rerender();
@@ -69,7 +69,7 @@ describe("useStringSelections", () => {
     });
 
     it("should return correct values for isSelected", async () => {
-      const { result, rerender } = renderHook(() => useStringSelections());
+      const { result, rerender } = renderHook(() => useStringSelections(""));
 
       result.current.selectMutiple(["foo", "bar"]);
       rerender();
@@ -79,6 +79,18 @@ describe("useStringSelections", () => {
 
       expect(result.current.isSelected("foo")).toEqual(true);
       expect(result.current.isSelected("baz")).toEqual(false);
+    });
+
+    it("should clear all", async () => {
+      const { result, rerender } = renderHook(() => useStringSelections(""));
+
+      result.current.selectMutiple(["foo", "bar"]);
+      rerender();
+      result.current.clearAll();
+
+      rerender();
+
+      expect(result.current.allSelections).toEqual([]);
     });
   });
 });

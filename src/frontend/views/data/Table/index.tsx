@@ -28,6 +28,7 @@ import {
 import { EntityTableView } from "./TableView";
 import { useTableMenuItems } from "./useTableMenuItems";
 import { DetailsCanvas } from "./DetailsCanvas";
+import { TableTopComponent } from "./portal";
 
 export function EntityTable() {
   const entity = useEntitySlug();
@@ -74,9 +75,10 @@ export function EntityTable() {
           filters: (dataState.filters as QueryFilter[]) || [],
         }))
   );
-  // TODO Sync current tab to state so that we can have it back to state
+
   return (
     <AppLayout actionItems={menuItems} secondaryActionItems={actionItems}>
+      <TableTopComponent entity={entity} />
       <StyledCard>
         <ViewStateMachine
           error={entityViews.error}

@@ -10,12 +10,13 @@ import {
   useEntitySlug,
 } from "../../../hooks/entity/entity.config";
 import { DetailsCanvas } from "../Table/DetailsCanvas";
+import { TableTopComponent } from "../Table/portal";
 import { EntityTableView } from "../Table/TableView";
 import { ENTITY_DETAILS_VIEW_KEY } from "./constants";
 import { DetailsLayout } from "./_Layout";
 
 export function EntityRelationTable() {
-  const entity = useEntitySlug();
+  const parentEntity = useEntitySlug();
   const entityId = useEntityId();
   const childEntity = useRouteParam("childEntity");
   const childEntityDiction = useEntityDiction(childEntity);
@@ -24,7 +25,7 @@ export function EntityRelationTable() {
 
   // :eyes Raise conditions on the table loading very fast initially then flickering to the reference search
   const referenceField = (childEntityRelations.data || []).find(
-    ({ table }) => table === entity
+    ({ table }) => table === parentEntity
   )?.field;
 
   useSetPageDetails({
@@ -37,7 +38,8 @@ export function EntityRelationTable() {
   });
 
   return (
-    <DetailsLayout entity={entity} menuKey={childEntity}>
+    <DetailsLayout entity={parentEntity} menuKey={childEntity}>
+      <TableTopComponent entity={childEntity} />
       <StyledCard>
         <EntityTableView
           entity={childEntity}

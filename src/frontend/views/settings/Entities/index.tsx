@@ -92,6 +92,7 @@ export function EntitiesSettings() {
                   loader={<ListSkeleton count={20} />}
                 >
                   <EntitiesSelection
+                    selectionKey="enabled-entities-settings"
                     allList={(entitiesList.data || []).map(
                       ({ label }) => label
                     )}

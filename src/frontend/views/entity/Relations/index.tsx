@@ -182,6 +182,7 @@ export function EntityRelationsSettings() {
                   loader={<ListSkeleton count={5} />}
                 >
                   <EntitiesSelection
+                    selectionKey={`${entity}-relations`}
                     allList={entityRelationList.data || []}
                     getEntityFieldLabels={(relation) =>
                       entityRelationsLabelsMap.data?.[relation] ||

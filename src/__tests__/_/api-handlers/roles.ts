@@ -52,7 +52,7 @@ export const rolesApiHandlers = [
     async (req, res, ctx) => {
       const { permissions } = await req.json();
       PERMISSIONS = PERMISSIONS.filter(
-        (permission$1) => permission$1 !== permissions
+        (permission$1) => !permissions.includes(permission$1)
       );
       return res(ctx.status(204));
     }

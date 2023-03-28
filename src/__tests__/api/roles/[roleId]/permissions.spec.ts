@@ -45,20 +45,20 @@ describe("/api/roles/[roleId]/permissions", () => {
     expect(res._getJSONData()).toEqual([]);
   });
 
-  it("should remove permission from role", async () => {
-    const deleteRequest = createAuthenticatedMocks({
-      method: "DELETE",
+  it("should add permissions to role", async () => {
+    const postRequest = createAuthenticatedMocks({
+      method: "POST",
       query: {
         roleId: "some-admin-permissions",
       },
       body: {
-        permission: "CAN_RESET_PASSWORD",
+        permissions: ["CAN_CONFIGURE_APP", "CAN_MANAGE_INTEGRATIONS"],
       },
     });
 
-    await handler(deleteRequest.req, deleteRequest.res);
+    await handler(postRequest.req, postRequest.res);
 
-    expect(deleteRequest.res._getStatusCode()).toBe(204);
+    expect(postRequest.res._getStatusCode()).toBe(201);
 
     const { req, res } = createAuthenticatedMocks({
       method: "GET",
@@ -70,23 +70,28 @@ describe("/api/roles/[roleId]/permissions", () => {
     await handler(req, res);
 
     expect(res._getStatusCode()).toBe(200);
-    expect(res._getJSONData()).toEqual(["CAN_MANAGE_PERMISSIONS"]);
+    expect(res._getJSONData()).toEqual([
+      "CAN_RESET_PASSWORD",
+      "CAN_MANAGE_PERMISSIONS",
+      "CAN_CONFIGURE_APP",
+      "CAN_MANAGE_INTEGRATIONS",
+    ]);
   });
 
-  it("should add permission to role", async () => {
-    const postRequest = createAuthenticatedMocks({
-      method: "POST",
+  it("should remove permissions from role", async () => {
+    const deleteRequest = createAuthenticatedMocks({
+      method: "DELETE",
       query: {
         roleId: "some-admin-permissions",
       },
       body: {
-        permission: "CAN_CONFIGURE_APP",
+        permissions: ["CAN_RESET_PASSWORD", "CAN_MANAGE_INTEGRATIONS"],
       },
     });
 
-    await handler(postRequest.req, postRequest.res);
+    await handler(deleteRequest.req, deleteRequest.res);
 
-    expect(postRequest.res._getStatusCode()).toBe(201);
+    expect(deleteRequest.res._getStatusCode()).toBe(204);
 
     const { req, res } = createAuthenticatedMocks({
       method: "GET",

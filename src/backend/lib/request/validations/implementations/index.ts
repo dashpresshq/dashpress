@@ -17,11 +17,13 @@ import { withPasswordValidationImpl as withPassword } from "./with-password";
 import { authenticatedUserValidationImpl as authenticatedUser } from "./authenticated-user";
 
 import { ValidationImplType } from "./types";
+import { PortalValidationImpl } from "./portal";
 
 export const ValidationImpl: Record<
   ValidationKeys["_type"],
   ValidationImplType<any>
 > = {
+  ...PortalValidationImpl,
   isAuthenticated,
   crudEnabled,
   requestBody,

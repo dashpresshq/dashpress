@@ -1,7 +1,9 @@
 import { RequestMethod } from "../methods";
+import { PortalValidationKeys } from "./implementations/portal";
 
 export type ValidationKeys = {
   _type:
+    | PortalValidationKeys
     | "isAuthenticated"
     | "guest"
     | "entity"
@@ -9,7 +11,6 @@ export type ValidationKeys = {
     | "configKey"
     | "paginationFilter"
     | "canUser"
-    | "anyBody"
     | "crudEnabled"
     | "requestBody"
     | "requestQuery"

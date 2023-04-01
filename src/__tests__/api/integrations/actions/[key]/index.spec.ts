@@ -350,7 +350,7 @@ describe("/api/integrations/actions/[key]/index", () => {
               {
                 "message": "nano-id-1 not found for 'activated_actions'",
                 "method": "POST",
-                "name": "BadRequestError",
+                "name": "NotFoundError",
                 "path": "",
                 "statusCode": 404,
               }

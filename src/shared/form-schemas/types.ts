@@ -4,7 +4,10 @@ import { IFieldValidationItem } from "shared/validations/types";
 
 export interface ISchemaFormConfig {
   selections?: IColorableSelection[];
-  selectionUrl?: string;
+  apiSelections?: {
+    listUrl: string;
+    referenceUrl?: (value: string) => string;
+  };
   type: keyof typeof FIELD_TYPES_CONFIG_MAP;
   label?: string;
   validations: IFieldValidationItem[];

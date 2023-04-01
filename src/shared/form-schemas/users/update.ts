@@ -18,7 +18,9 @@ export const UPDATE_USER_FORM_SCHEMA: IAppliedSchemaFormConfig<IUpdateUserForm> 
     },
     role: {
       type: "selection",
-      selectionUrl: "/api/roles",
+      apiSelections: {
+        listUrl: "/api/roles",
+      },
       validations: [
         {
           validationType: "required",

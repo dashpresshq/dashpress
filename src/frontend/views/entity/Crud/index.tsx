@@ -142,7 +142,7 @@ function useEntityCrudView() {
       disabled: !entityCrudSettingsState.details,
       render: (
         <SelectionTab
-          label={ENTITY_CRUD_SETTINGS_TAB_LABELS.TABLE}
+          label={ENTITY_CRUD_SETTINGS_TAB_LABELS.DETAILS}
           columns={{
             fields: entityFields.data || [],
             submit: async (data) => {

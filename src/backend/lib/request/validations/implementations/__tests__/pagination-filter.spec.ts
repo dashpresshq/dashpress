@@ -78,7 +78,7 @@ describe("Request Validations => paginationFilterValidationImpl", () => {
         {
           "message": "This resource doesn't exist or is disabled or you dont have access to it",
           "method": "GET",
-          "name": "BadRequestError",
+          "name": "NotFoundError",
           "path": "",
           "statusCode": 404,
         }

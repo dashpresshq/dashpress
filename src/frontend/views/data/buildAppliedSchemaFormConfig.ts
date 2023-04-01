@@ -2,7 +2,10 @@ import {
   IAppliedSchemaFormConfig,
   ISchemaFormConfig,
 } from "shared/form-schemas/types";
-import { ENTITY_LIST_PATH } from "frontend/hooks/data/data.store";
+import {
+  ENTITY_LIST_PATH,
+  ENTITY_REFERENCE_PATH,
+} from "frontend/hooks/data/data.store";
 
 import { IColorableSelection } from "shared/types/ui";
 import { FIELD_TYPES_CONFIG_MAP } from "shared/validations";
@@ -28,19 +31,24 @@ export const buildAppliedSchemaFormConfig = ({
 }: IEntitySchemaFormConfigProps): IAppliedSchemaFormConfig<any> => {
   return Object.fromEntries(
     fields.map((field) => {
-      return [
-        field,
-        {
-          selections: entityFieldSelections[field] || [],
-          selectionUrl:
-            entityFieldTypes[field] === "reference"
-              ? ENTITY_LIST_PATH(entityToOneReferenceFields[field])
-              : undefined,
-          type: entityFieldTypes[field] || {},
-          label: getEntityFieldLabels(field) || userFriendlyCase(field),
-          validations: entityValidationsMap[field] || [],
-        } as ISchemaFormConfig,
-      ];
+      const formConfig: ISchemaFormConfig = {
+        selections: entityFieldSelections[field] || [],
+        apiSelections:
+          entityFieldTypes[field] === "reference"
+            ? {
+                listUrl: ENTITY_LIST_PATH(entityToOneReferenceFields[field]),
+                referenceUrl: (value: string) =>
+                  ENTITY_REFERENCE_PATH(
+                    entityToOneReferenceFields[field],
+                    value
+                  ),
+              }
+            : undefined,
+        type: entityFieldTypes[field],
+        label: getEntityFieldLabels(field) || userFriendlyCase(field),
+        validations: entityValidationsMap[field] || [],
+      };
+      return [field, formConfig];
     })
   );
 };

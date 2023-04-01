@@ -59,7 +59,7 @@ describe("/api/error/handling", () => {
       {
         "message": "User not found",
         "method": "GET",
-        "name": "BadRequestError",
+        "name": "NotFoundError",
         "path": "",
         "statusCode": 404,
       }

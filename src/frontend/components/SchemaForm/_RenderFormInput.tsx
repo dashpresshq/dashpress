@@ -12,13 +12,14 @@ import {
 } from "@hadmean/chromista";
 import { ISharedFormInput } from "@hadmean/chromista/dist/components/Form/_types";
 import { StringUtils } from "@hadmean/protozoa";
+import { ISchemaFormConfig } from "shared/form-schemas/types";
 import { IColorableSelection } from "shared/types/ui";
 import { FIELD_TYPES_CONFIG_MAP } from "shared/validations";
 
 interface IProps {
   type: keyof typeof FIELD_TYPES_CONFIG_MAP;
   renderProps: ISharedFormInput;
-  selectionUrl?: string;
+  apiSelections?: ISchemaFormConfig["apiSelections"];
   entityFieldSelections?: IColorableSelection[];
   required: boolean;
   disabled: boolean;
@@ -30,7 +31,7 @@ export function RenderFormInput({
   label,
   type,
   entityFieldSelections = [],
-  selectionUrl,
+  apiSelections,
   required,
   disabled,
 }: IProps) {
@@ -50,8 +51,14 @@ export function RenderFormInput({
     return <FormSelect {...formProps} selectData={entityFieldSelections} />;
   }
 
-  if (selectionUrl) {
-    return <AsyncFormSelect {...formProps} url={selectionUrl} />;
+  if (apiSelections) {
+    return (
+      <AsyncFormSelect
+        {...formProps}
+        url={apiSelections.listUrl}
+        referenceUrl={apiSelections.referenceUrl}
+      />
+    );
   }
 
   switch (type) {
@@ -71,7 +78,13 @@ export function RenderFormInput({
       return <FormSelect {...formProps} selectData={entityFieldSelections} />;
 
     case "reference":
-      return <AsyncFormSelect {...formProps} url={selectionUrl} />;
+      return (
+        <AsyncFormSelect
+          {...formProps}
+          url={apiSelections?.listUrl}
+          referenceUrl={apiSelections?.referenceUrl}
+        />
+      );
 
     case "boolean":
       return (

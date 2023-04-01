@@ -25,7 +25,7 @@ export class CustomError extends Error {
 
 export class NotFoundError extends CustomError {
   constructor(message = "Resource not found") {
-    super(404, "BadRequestError", message);
+    super(404, "NotFoundError", message);
   }
 }
 

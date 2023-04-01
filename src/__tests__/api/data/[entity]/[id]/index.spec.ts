@@ -303,7 +303,7 @@ describe("/api/data/[entity]/[id]/index", () => {
               {
                 "message": "Entity 'tests' with id '1' is not found",
                 "method": "GET",
-                "name": "BadRequestError",
+                "name": "NotFoundError",
                 "path": "",
                 "statusCode": 404,
               }

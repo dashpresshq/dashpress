@@ -1,6 +1,6 @@
 import {
-  credentialsService,
-  CredentialsService,
+  credentialsApiService,
+  CredentialsApiService,
 } from "backend/integrations-configurations";
 import {
   createConfigDomainPersistenceService,
@@ -12,10 +12,10 @@ import { IIntegrationsList } from "shared/types/actions";
 import { IActivatedStorage } from "shared/types/storage";
 import { STORAGE_INTEGRATIONS } from "./integrations";
 
-export class StorageService implements IApplicationService {
+export class StorageApiService implements IApplicationService {
   constructor(
     private readonly _activatedStoragePersistenceService: AbstractConfigDataPersistenceService<IActivatedStorage>,
-    private readonly _credentialsService: CredentialsService
+    private readonly _credentialsApiService: CredentialsApiService
   ) {}
 
   async bootstrap() {
@@ -52,7 +52,7 @@ export class StorageService implements IApplicationService {
       key: storageKey,
     });
 
-    await this._credentialsService.upsertGroup(
+    await this._credentialsApiService.upsertGroup(
       {
         key: STORAGE_INTEGRATIONS[storageKey].credentialsGroupKey,
         fields: Object.keys(
@@ -66,7 +66,7 @@ export class StorageService implements IApplicationService {
   async showStorageConfig(
     storageKey: string
   ): Promise<Record<string, unknown>> {
-    return await this._credentialsService.useGroupValue({
+    return await this._credentialsApiService.useGroupValue({
       key: STORAGE_INTEGRATIONS[storageKey].credentialsGroupKey,
       fields: Object.keys(
         STORAGE_INTEGRATIONS[storageKey].integrationConfigurationSchema
@@ -83,7 +83,7 @@ export class StorageService implements IApplicationService {
       configuration
     );
 
-    await this._credentialsService.upsertGroup(
+    await this._credentialsApiService.upsertGroup(
       {
         key: STORAGE_INTEGRATIONS[storageKey].credentialsGroupKey,
         fields: Object.keys(
@@ -95,7 +95,7 @@ export class StorageService implements IApplicationService {
   }
 
   async deactivateStorage(storageKey: string): Promise<void> {
-    await this._credentialsService.deleteGroup({
+    await this._credentialsApiService.deleteGroup({
       key: STORAGE_INTEGRATIONS[storageKey].credentialsGroupKey,
       fields: Object.keys(
         STORAGE_INTEGRATIONS[storageKey].integrationConfigurationSchema
@@ -109,7 +109,7 @@ export class StorageService implements IApplicationService {
 const activatedStoragePersistenceService =
   createConfigDomainPersistenceService<IActivatedStorage>("activated_storage");
 
-export const storageService = new StorageService(
+export const storageApiService = new StorageApiService(
   activatedStoragePersistenceService,
-  credentialsService
+  credentialsApiService
 );

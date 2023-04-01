@@ -16,7 +16,7 @@ export interface IPackage {
   Install all the DB packages on init and then the current ones on subsequent installation for the project
 */
 
-export class PackagesService implements IApplicationService {
+export class PackagesApiService implements IApplicationService {
   constructor(
     private readonly _packagesPersistenceService: AbstractConfigDataPersistenceService<IPackage>
   ) {}
@@ -58,4 +58,6 @@ export class PackagesService implements IApplicationService {
 const packagesPersistenceService =
   createConfigDomainPersistenceService<IPackage>("packages");
 
-export const packagesService = new PackagesService(packagesPersistenceService);
+export const packagesApiService = new PackagesApiService(
+  packagesPersistenceService
+);

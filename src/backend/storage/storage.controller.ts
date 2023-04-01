@@ -1,37 +1,40 @@
-import { StorageService, storageService } from "./storage.service";
+import { StorageApiService, storageApiService } from "./storage.service";
 
-export class StorageController {
-  constructor(private _storageService: StorageService) {}
+export class StorageApiController {
+  constructor(private _storageApiService: StorageApiService) {}
 
   listIntegrations() {
-    return this._storageService.listStorageIntegrations();
+    return this._storageApiService.listStorageIntegrations();
   }
 
   async listActivatedStorage() {
-    return await this._storageService.listActivatedStorage();
+    return await this._storageApiService.listActivatedStorage();
   }
 
   async activateStorage(
     storageKey: string,
     configuration: Record<string, string>
   ) {
-    await this._storageService.activateStorage(storageKey, configuration);
+    await this._storageApiService.activateStorage(storageKey, configuration);
   }
 
   async showStorageConfig(storageKey: string) {
-    return await this._storageService.showStorageConfig(storageKey);
+    return await this._storageApiService.showStorageConfig(storageKey);
   }
 
   async updateStorageConfig(
     storageKey: string,
     configuration: Record<string, string>
   ) {
-    await this._storageService.updateStorageConfig(storageKey, configuration);
+    await this._storageApiService.updateStorageConfig(
+      storageKey,
+      configuration
+    );
   }
 
   async deactivateStorage(storageKey: string) {
-    await this._storageService.deactivateStorage(storageKey);
+    await this._storageApiService.deactivateStorage(storageKey);
   }
 }
 
-export const storageController = new StorageController(storageService);
+export const storageApiController = new StorageApiController(storageApiService);

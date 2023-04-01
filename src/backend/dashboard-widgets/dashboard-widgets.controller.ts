@@ -1,39 +1,41 @@
 import { IWidgetConfig } from "shared/types/dashboard";
 import {
-  DashboardWidgetsService,
-  dashboardWidgetsService,
+  DashboardWidgetsApiService,
+  dashboardWidgetsApiService,
 } from "./dashboard-widgets.service";
 
-export class DashboardWidgetsController {
-  constructor(private _dashboardWidgetsService: DashboardWidgetsService) {}
+export class DashboardWidgetsApiController {
+  constructor(
+    private _dashboardWidgetsApiService: DashboardWidgetsApiService
+  ) {}
 
   async listDashboardWidgets(dashboardId: string, userRole: string) {
-    return await this._dashboardWidgetsService.listDashboardWidgets(
+    return await this._dashboardWidgetsApiService.listDashboardWidgets(
       dashboardId,
       userRole
     );
   }
 
   async createWidget(widget: IWidgetConfig, dashboardId: string) {
-    await this._dashboardWidgetsService.createWidget(widget, dashboardId);
+    await this._dashboardWidgetsApiService.createWidget(widget, dashboardId);
   }
 
   async updateWidgetList(dashboardId: string, widgetList: string[]) {
-    await this._dashboardWidgetsService.updateWidgetList(
+    await this._dashboardWidgetsApiService.updateWidgetList(
       dashboardId,
       widgetList
     );
   }
 
   async updateWidget(widgetId: string, widget: IWidgetConfig) {
-    await this._dashboardWidgetsService.updateWidget(widgetId, widget);
+    await this._dashboardWidgetsApiService.updateWidget(widgetId, widget);
   }
 
   async removeWidget(widgetId: string, dashboardId: string) {
-    await this._dashboardWidgetsService.removeWidget(widgetId, dashboardId);
+    await this._dashboardWidgetsApiService.removeWidget(widgetId, dashboardId);
   }
 }
 
-export const dashboardWidgetsController = new DashboardWidgetsController(
-  dashboardWidgetsService
+export const dashboardWidgetsApiController = new DashboardWidgetsApiController(
+  dashboardWidgetsApiService
 );

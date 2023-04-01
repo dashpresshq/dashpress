@@ -1,5 +1,5 @@
 import { AUTH_SIGNIN_FORM_SCHEMA } from "shared/form-schemas/auth/signin";
-import { usersController } from "../../../backend/users/users.controller";
+import { usersApiController } from "../../../backend/users/users.controller";
 import { requestHandler } from "../../../backend/lib/request";
 
 export default requestHandler(
@@ -11,7 +11,7 @@ export default requestHandler(
           options: AUTH_SIGNIN_FORM_SCHEMA,
         },
       ]);
-      return await usersController.login(validatedRequest.requestBody);
+      return await usersApiController.login(validatedRequest.requestBody);
     },
   },
   [

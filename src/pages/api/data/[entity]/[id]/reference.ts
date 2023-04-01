@@ -1,5 +1,5 @@
 import { DataActionType } from "shared/configurations";
-import { dataController } from "../../../../../backend/data/data.controller";
+import { dataApiController } from "../../../../../backend/data/data.controller";
 import { requestHandler } from "../../../../../backend/lib/request";
 
 export default requestHandler({
@@ -13,7 +13,7 @@ export default requestHandler({
       },
     ]);
 
-    return await dataController.referenceData(
+    return await dataApiController.referenceData(
       validatedRequest.entity,
       validatedRequest.entityId
     );

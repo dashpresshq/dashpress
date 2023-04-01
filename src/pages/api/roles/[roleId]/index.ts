@@ -1,4 +1,4 @@
-import { rolesController } from "backend/roles/roles.controller";
+import { rolesApiController } from "backend/roles/roles.controller";
 import { BASE_ROLE_FORM_SCHEMA } from "shared/form-schemas/roles/base";
 import { USER_PERMISSIONS } from "shared/constants/user";
 import { requestHandler } from "../../../../backend/lib/request";
@@ -14,7 +14,7 @@ export default requestHandler(
           options: REQUEST_QUERY_FIELD,
         },
       ]);
-      return await rolesController.removeRole(validatedRequest.requestQuery);
+      return await rolesApiController.removeRole(validatedRequest.requestQuery);
     },
 
     PATCH: async (getValidatedRequest) => {
@@ -28,7 +28,7 @@ export default requestHandler(
           options: REQUEST_QUERY_FIELD,
         },
       ]);
-      return await rolesController.updateRoleDetails(
+      return await rolesApiController.updateRoleDetails(
         validatedRequest.requestQuery,
         validatedRequest.requestBody
       );

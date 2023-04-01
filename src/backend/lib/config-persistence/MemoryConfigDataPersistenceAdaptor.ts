@@ -1,5 +1,5 @@
 import noop from "lodash/noop";
-import { ConfigService } from "../config/config.service";
+import { ConfigApiService } from "../config/config.service";
 import { AbstractConfigDataPersistenceService } from "./AbstractConfigDataPersistenceService";
 import { ConfigDomain } from "./types";
 
@@ -8,8 +8,8 @@ export class MemoryConfigDataPersistenceAdaptor<
 > extends AbstractConfigDataPersistenceService<T> {
   private static data: Record<string, Record<string, any>> = {};
 
-  constructor(configDomain: ConfigDomain, configService: ConfigService) {
-    super(configDomain, configService);
+  constructor(configDomain: ConfigDomain, configApiService: ConfigApiService) {
+    super(configDomain, configApiService);
   }
 
   async setup() {
@@ -27,15 +27,15 @@ export class MemoryConfigDataPersistenceAdaptor<
   }
 
   async resetToEmpty() {
-    MemoryConfigDataPersistenceAdaptor.data[this.configDomain] = {};
+    MemoryConfigDataPersistenceAdaptor.data[this._configDomain] = {};
   }
 
   private persistDomainData(data: Record<string, T>) {
-    MemoryConfigDataPersistenceAdaptor.data[this.configDomain] = data;
+    MemoryConfigDataPersistenceAdaptor.data[this._configDomain] = data;
   }
 
   async getAllAsKeyValuePair() {
-    return MemoryConfigDataPersistenceAdaptor.getDomainData(this.configDomain);
+    return MemoryConfigDataPersistenceAdaptor.getDomainData(this._configDomain);
   }
 
   async getAllItems() {
@@ -44,7 +44,7 @@ export class MemoryConfigDataPersistenceAdaptor<
 
   async getAllItemsIn(itemIds: string[]) {
     const allItems = MemoryConfigDataPersistenceAdaptor.getDomainData(
-      this.configDomain
+      this._configDomain
     );
 
     return itemIds.map((itemId) => allItems[itemId]);
@@ -52,7 +52,7 @@ export class MemoryConfigDataPersistenceAdaptor<
 
   async getItem(key: string) {
     const currentItem = MemoryConfigDataPersistenceAdaptor.getDomainData(
-      this.configDomain
+      this._configDomain
     )[key];
     if (currentItem) {
       return currentItem;
@@ -62,7 +62,7 @@ export class MemoryConfigDataPersistenceAdaptor<
 
   async persistItem(key: string, data: T) {
     const domainData = MemoryConfigDataPersistenceAdaptor.getDomainData(
-      this.configDomain
+      this._configDomain
     );
     domainData[key] = data;
     this.persistDomainData(domainData);
@@ -70,7 +70,7 @@ export class MemoryConfigDataPersistenceAdaptor<
 
   public async removeItem(key: string): Promise<void> {
     const domainData = MemoryConfigDataPersistenceAdaptor.getDomainData(
-      this.configDomain
+      this._configDomain
     );
 
     delete domainData[key];

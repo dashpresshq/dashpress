@@ -1,10 +1,10 @@
 import {
-  appConstantsService,
-  credentialsService,
-  CredentialsService,
+  appConstantsApiService,
+  credentialsApiService,
+  CredentialsApiService,
 } from "backend/integrations-configurations";
 import {
-  IntegrationsConfigurationService,
+  IntegrationsConfigurationApiService,
   INTEGRATION_CONFIG_GROUP_DEMILITER,
 } from "backend/integrations-configurations/services/_base";
 import {
@@ -27,12 +27,12 @@ import {
 } from "shared/types/actions";
 import { ACTION_INTEGRATIONS } from "./integrations";
 
-export class ActionsService implements IApplicationService {
+export class ActionsApiService implements IApplicationService {
   constructor(
     private readonly _activatedActionsPersistenceService: AbstractConfigDataPersistenceService<IActivatedAction>,
     private readonly _actionInstancesPersistenceService: AbstractConfigDataPersistenceService<IActionInstance>,
-    private readonly _credentialsService: CredentialsService,
-    private readonly _appConstantsService: IntegrationsConfigurationService
+    private readonly _credentialsApiService: CredentialsApiService,
+    private readonly _appConstantsApiService: IntegrationsConfigurationApiService
   ) {}
 
   async bootstrap() {
@@ -73,7 +73,7 @@ export class ActionsService implements IApplicationService {
       );
 
       const appConstants = Object.fromEntries(
-        (await this._appConstantsService.list()).map(({ key, value }) => [
+        (await this._appConstantsApiService.list()).map(({ key, value }) => [
           key,
           value,
         ])
@@ -81,13 +81,13 @@ export class ActionsService implements IApplicationService {
 
       const credentials = Object.fromEntries(
         await Promise.all(
-          (await this._credentialsService.list())
+          (await this._credentialsApiService.list())
             .filter(
               ({ key }) => !key.includes(INTEGRATION_CONFIG_GROUP_DEMILITER)
             )
             .map(async ({ key, value }) => [
               key,
-              await this._credentialsService.processDataAfterFetch(value),
+              await this._credentialsApiService.processDataAfterFetch(value),
             ])
         )
       );
@@ -211,7 +211,7 @@ export class ActionsService implements IApplicationService {
       credentialsGroupKey,
     });
 
-    await this._credentialsService.upsertGroup(
+    await this._credentialsApiService.upsertGroup(
       {
         key: credentialsGroupKey,
         fields: Object.keys(
@@ -246,7 +246,7 @@ export class ActionsService implements IApplicationService {
         activationId
       );
 
-    return await this._credentialsService.useGroupValue({
+    return await this._credentialsApiService.useGroupValue({
       key: credentialsGroupKey,
       fields: Object.keys(
         ACTION_INTEGRATIONS[integrationKey].configurationSchema
@@ -269,7 +269,7 @@ export class ActionsService implements IApplicationService {
       configuration
     );
 
-    await this._credentialsService.upsertGroup(
+    await this._credentialsApiService.upsertGroup(
       {
         key: credentialsGroupKey,
         fields: Object.keys(
@@ -285,7 +285,7 @@ export class ActionsService implements IApplicationService {
       activationId
     );
 
-    await this._credentialsService.deleteGroup({
+    await this._credentialsApiService.deleteGroup({
       key: action.credentialsGroupKey,
       fields: Object.keys(
         ACTION_INTEGRATIONS[action.integrationKey].configurationSchema
@@ -313,9 +313,9 @@ const activatedActionsPersistenceService =
 const actionInstancesPersistenceService =
   createConfigDomainPersistenceService<IActionInstance>("action_instances");
 
-export const actionsService = new ActionsService(
+export const actionsApiService = new ActionsApiService(
   activatedActionsPersistenceService,
   actionInstancesPersistenceService,
-  credentialsService,
-  appConstantsService
+  credentialsApiService,
+  appConstantsApiService
 );

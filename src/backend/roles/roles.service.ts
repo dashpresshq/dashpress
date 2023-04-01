@@ -18,7 +18,7 @@ export interface IRole {
   permissions: string[];
 }
 
-export class RolesService implements IApplicationService {
+export class RolesApiService implements IApplicationService {
   constructor(
     private readonly _rolesPersistenceService: AbstractConfigDataPersistenceService<IRole>,
     private readonly _cacheService: AbstractCacheService
@@ -151,7 +151,7 @@ const rolesPersistenceService =
 
 const cacheService = createCacheService("permission");
 
-export const rolesService = new RolesService(
+export const rolesApiService = new RolesApiService(
   rolesPersistenceService,
   cacheService
 );

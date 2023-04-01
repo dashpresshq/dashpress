@@ -1,14 +1,14 @@
 import { isNotEmpty } from "class-validator";
-import { ConfigService } from "../config/config.service";
+import { ConfigApiService } from "../config/config.service";
 
 export abstract class AbstractCacheService {
   protected readonly prefix!: string;
 
-  protected readonly configService!: ConfigService;
+  protected readonly _configApiService!: ConfigApiService;
 
-  constructor(prefix: string, configService: ConfigService) {
+  constructor(prefix: string, configApiService: ConfigApiService) {
     this.prefix = prefix;
-    this.configService = configService;
+    this._configApiService = configApiService;
   }
 
   public abstract setup(): Promise<void>;

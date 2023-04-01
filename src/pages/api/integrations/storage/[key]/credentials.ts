@@ -1,5 +1,5 @@
 import { USER_PERMISSIONS } from "shared/constants/user";
-import { storageController } from "backend/storage/storage.controller";
+import { storageApiController } from "backend/storage/storage.controller";
 import { requestHandler } from "backend/lib/request";
 
 const REQUEST_KEY_FIELD = "key";
@@ -14,7 +14,7 @@ export default requestHandler(
         },
       ]);
 
-      return await storageController.showStorageConfig(
+      return await storageApiController.showStorageConfig(
         validatedRequest.requestQuery
       );
     },

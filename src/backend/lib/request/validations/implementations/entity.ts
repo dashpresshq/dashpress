@@ -1,8 +1,8 @@
-import { rolesService } from "backend/roles/roles.service";
+import { rolesApiService } from "backend/roles/roles.service";
 import { USER_PERMISSIONS } from "shared/constants/user";
 import { NextApiRequest } from "next";
 import { NotFoundError } from "../../../errors";
-import { entitiesService } from "../../../../entities/entities.service";
+import { entitiesApiService } from "../../../../entities/entities.service";
 import { ValidationImplType } from "./types";
 
 export const ERROR_MESSAGE = `This resource doesn't exist or is disabled or you dont have access to it`;
@@ -15,8 +15,8 @@ export const entityValidationImpl: ValidationImplType<string> = async (req) => {
   const entity = getEntityFromRequest(req);
 
   const [entityExists, isEntityDisabled] = await Promise.all([
-    entitiesService.entityExist(entity),
-    entitiesService.isEntityDisabled(entity),
+    entitiesApiService.entityExist(entity),
+    entitiesApiService.isEntityDisabled(entity),
   ]);
 
   if (!entityExists) {
@@ -25,7 +25,7 @@ export const entityValidationImpl: ValidationImplType<string> = async (req) => {
 
   if (isEntityDisabled) {
     if (
-      !(await rolesService.canRoleDoThis(
+      !(await rolesApiService.canRoleDoThis(
         req.user.role,
         USER_PERMISSIONS.CAN_CONFIGURE_APP
       ))

@@ -1,11 +1,11 @@
 import { introspect, Entity } from "@hadmean/bacteria";
 import {
-  ConfigurationService,
-  configurationService,
+  ConfigurationApiService,
+  configurationApiService,
 } from "backend/configuration/configuration.service";
 import {
-  CredentialsService,
-  credentialsService,
+  CredentialsApiService,
+  credentialsApiService,
 } from "backend/integrations-configurations";
 import { IApplicationService } from "backend/types";
 import { IDBSchema, IEntityField } from "shared/types/db";
@@ -16,13 +16,13 @@ import {
   AbstractConfigDataPersistenceService,
 } from "../lib/config-persistence";
 
-export class SchemasService implements IApplicationService {
+export class SchemasApiService implements IApplicationService {
   private dbSchema: IDBSchema[];
 
   constructor(
     private _schemaConfigDataPersistenceService: AbstractConfigDataPersistenceService<IDBSchema>,
-    private _credentialsService: CredentialsService,
-    private _configurationService: ConfigurationService
+    private _credentialsService: CredentialsApiService,
+    private _configurationService: ConfigurationApiService
   ) {}
 
   async bootstrap() {
@@ -116,8 +116,8 @@ export class SchemasService implements IApplicationService {
 const schemaPersistenceService =
   createConfigDomainPersistenceService<IDBSchema>("schema");
 
-export const schemasService = new SchemasService(
+export const schemasApiService = new SchemasApiService(
   schemaPersistenceService,
-  credentialsService,
-  configurationService
+  credentialsApiService,
+  configurationApiService
 );

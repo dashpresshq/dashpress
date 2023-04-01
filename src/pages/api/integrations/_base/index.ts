@@ -1,5 +1,5 @@
 import { requestHandler } from "backend/lib/request";
-import { integrationsConfigurationController } from "backend/integrations-configurations/integrations-configurations.controller";
+import { integrationsConfigurationApiController } from "backend/integrations-configurations/integrations-configurations.controller";
 import { IntegrationsConfigurationGroup } from "shared/types/integrations";
 import { USER_PERMISSIONS } from "shared/constants/user";
 
@@ -9,7 +9,7 @@ export const integrationsConfigurationListRequestHandler = (
   return requestHandler(
     {
       GET: async () => {
-        return await integrationsConfigurationController.list(group);
+        return await integrationsConfigurationApiController.list(group);
       },
     },
     [

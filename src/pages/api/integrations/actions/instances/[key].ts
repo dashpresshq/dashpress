@@ -1,5 +1,5 @@
 import { USER_PERMISSIONS } from "shared/constants/user";
-import { actionsController } from "backend/actions/actions.controller";
+import { actionsApiController } from "backend/actions/actions.controller";
 import { requestHandler } from "backend/lib/request";
 
 const REQUEST_KEY_FIELD = "key";
@@ -14,7 +14,7 @@ export default requestHandler(
         },
       ]);
 
-      return await actionsController.listEntityActionInstances(
+      return await actionsApiController.listEntityActionInstances(
         validatedRequest.requestQuery
       );
     },
@@ -30,7 +30,7 @@ export default requestHandler(
         },
       ]);
 
-      return await actionsController.updateActionInstance(
+      return await actionsApiController.updateActionInstance(
         validatedRequest.requestQuery,
         validatedRequest.requestBody
       );
@@ -43,7 +43,7 @@ export default requestHandler(
         },
       ]);
 
-      return await actionsController.deleteActionInstance(
+      return await actionsApiController.deleteActionInstance(
         validatedRequest.requestQuery
       );
     },

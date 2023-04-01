@@ -2,14 +2,14 @@ import { Knex } from "knex";
 import get from "lodash/get";
 import { getDbConnection } from "backend/lib/connection/db";
 import { QueryFilter } from "shared/types/data";
-import { credentialsService } from "backend/integrations-configurations";
+import { credentialsApiService } from "backend/integrations-configurations";
 import { IDataSourceCredentials } from "shared/types/data-sources";
 import { BaseDataAccessService } from "./_Base";
 import { DATABASE_CREDENTIAL_GROUP } from "../fields";
 import { IPaginationFilters } from "../types";
 import { QueryOperationImplementation, QueryOperators } from "./types";
 
-export class RDBMSDataService extends BaseDataAccessService<Knex.QueryBuilder> {
+export class RDBMSDataApiService extends BaseDataAccessService<Knex.QueryBuilder> {
   queryOperationImplementation: QueryOperationImplementation<Knex.QueryBuilder> =
     {
       [QueryOperators.EQUAL_TO]: (query, column, value) =>
@@ -38,7 +38,7 @@ export class RDBMSDataService extends BaseDataAccessService<Knex.QueryBuilder> {
     }
 
     const dbCredentials =
-      await credentialsService.useGroupValue<IDataSourceCredentials>(
+      await credentialsApiService.useGroupValue<IDataSourceCredentials>(
         DATABASE_CREDENTIAL_GROUP
       );
 
@@ -50,7 +50,7 @@ export class RDBMSDataService extends BaseDataAccessService<Knex.QueryBuilder> {
   }
 
   async bootstrap() {
-    await RDBMSDataService.getInstance();
+    await RDBMSDataApiService.getInstance();
   }
 
   private transformQueryFiltersQueryBuilder = (
@@ -65,7 +65,7 @@ export class RDBMSDataService extends BaseDataAccessService<Knex.QueryBuilder> {
   };
 
   async count(entity: string, queryFilter: QueryFilter[]): Promise<number> {
-    let query = (await RDBMSDataService.getInstance()).from(entity);
+    let query = (await RDBMSDataApiService.getInstance()).from(entity);
 
     query = this.transformQueryFiltersQueryBuilder(query, queryFilter);
 
@@ -79,7 +79,7 @@ export class RDBMSDataService extends BaseDataAccessService<Knex.QueryBuilder> {
     dataFetchingModifiers: IPaginationFilters
   ) {
     let query = this.transformQueryFiltersQueryBuilder(
-      (await RDBMSDataService.getInstance()).select(select).from(entity),
+      (await RDBMSDataApiService.getInstance()).select(select).from(entity),
       queryFilter
     );
 
@@ -107,7 +107,7 @@ export class RDBMSDataService extends BaseDataAccessService<Knex.QueryBuilder> {
     select: string[],
     query: Record<string, unknown>
   ): Promise<T> {
-    return await (await RDBMSDataService.getInstance())
+    return await (await RDBMSDataApiService.getInstance())
       .table(entity)
       .select(select)
       .where(query)
@@ -120,7 +120,7 @@ export class RDBMSDataService extends BaseDataAccessService<Knex.QueryBuilder> {
     primaryField: string
   ): Promise<string | number> {
     const result = await (
-      await RDBMSDataService.getInstance()
+      await RDBMSDataApiService.getInstance()
     )(entity).insert(data, primaryField);
     return result[0][primaryField];
   }
@@ -130,14 +130,14 @@ export class RDBMSDataService extends BaseDataAccessService<Knex.QueryBuilder> {
     query: Record<string, unknown>,
     data: Record<string, unknown>
   ): Promise<void> {
-    await (await RDBMSDataService.getInstance())(entity)
+    await (await RDBMSDataApiService.getInstance())(entity)
       .where(query)
       .update(data);
   }
 
   async delete(entity: string, query: Record<string, unknown>): Promise<void> {
-    await (await RDBMSDataService.getInstance())(entity).where(query).del();
+    await (await RDBMSDataApiService.getInstance())(entity).where(query).del();
   }
 }
 
-export const rDBMSDataService = new RDBMSDataService();
+export const rDBMSDataApiService = new RDBMSDataApiService();

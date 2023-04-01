@@ -1,5 +1,5 @@
 import { ForbiddenError } from "backend/lib/errors";
-import { RolesService, rolesService } from "backend/roles/roles.service";
+import { RolesApiService, rolesApiService } from "backend/roles/roles.service";
 import { REQUEST_ERROR_CODES } from "shared/constants/auth";
 import { ISignInForm } from "shared/form-schemas/auth/signin";
 import { IChangePasswordForm } from "shared/form-schemas/profile/password";
@@ -10,12 +10,12 @@ import {
   IAuthenticatedUserBag,
   IUserPreferences,
 } from "shared/types/user";
-import { UsersService, usersService } from "./users.service";
+import { UsersApiService, usersApiService } from "./users.service";
 
-export class UsersController {
+export class UsersApiController {
   constructor(
-    private _usersService: UsersService,
-    private _rolesService: RolesService
+    private _usersService: UsersApiService,
+    private _rolesService: RolesApiService
   ) {}
 
   async login(authCredentials: ISignInForm) {
@@ -92,4 +92,7 @@ export class UsersController {
   }
 }
 
-export const usersController = new UsersController(usersService, rolesService);
+export const usersApiController = new UsersApiController(
+  usersApiService,
+  rolesApiService
+);

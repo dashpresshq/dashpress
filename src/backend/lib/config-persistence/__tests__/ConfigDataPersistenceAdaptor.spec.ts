@@ -1,4 +1,4 @@
-import { ConfigService } from "backend/lib/config/config.service";
+import { ConfigApiService } from "backend/lib/config/config.service";
 import { AbstractConfigDataPersistenceService } from "../AbstractConfigDataPersistenceService";
 import { DatabaseConfigDataPersistenceAdaptor } from "../DatabaseConfigDataPersistenceAdaptor";
 import { JsonFileConfigDataPersistenceAdaptor } from "../JsonFileConfigDataPersistenceAdaptor";
@@ -22,7 +22,7 @@ const PERSITENT_ADAPTORS: {
     title: "JSON File",
     adaptor: new JsonFileConfigDataPersistenceAdaptor<ITestData>(
       TEST_DOMAIN,
-      new ConfigService({
+      new ConfigApiService({
         DO_NOT_BOOSTRAP_CONFIG: true,
       })
     ),
@@ -31,7 +31,7 @@ const PERSITENT_ADAPTORS: {
     title: "Memory",
     adaptor: new MemoryConfigDataPersistenceAdaptor<ITestData>(
       TEST_DOMAIN,
-      new ConfigService({
+      new ConfigApiService({
         DO_NOT_BOOSTRAP_CONFIG: true,
       })
     ),
@@ -40,7 +40,7 @@ const PERSITENT_ADAPTORS: {
     title: "Database",
     adaptor: new DatabaseConfigDataPersistenceAdaptor<ITestData>(
       TEST_DOMAIN,
-      new ConfigService({
+      new ConfigApiService({
         DO_NOT_BOOSTRAP_CONFIG: true,
         CONFIG_ADAPTOR_CONNECTION_STRING: "sqlite3:./test-adaptor.sqlite",
       })
@@ -50,7 +50,7 @@ const PERSITENT_ADAPTORS: {
     title: "Redis",
     adaptor: new RedisConfigDataPersistenceAdaptor<ITestData>(
       TEST_DOMAIN,
-      new ConfigService({
+      new ConfigApiService({
         DO_NOT_BOOSTRAP_CONFIG: true,
         CONFIG_ADAPTOR_CONNECTION_STRING: "redis://localhost",
       })

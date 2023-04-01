@@ -1,5 +1,5 @@
 import { AbstractConfigDataPersistenceService } from "backend/lib/config-persistence";
-import { EncryptionService } from "backend/lib/encryption/encryption.service";
+import { EncryptionApiService } from "backend/lib/encryption/encryption.service";
 import { BadRequestError, progammingError } from "backend/lib/errors";
 import { IApplicationService } from "backend/types";
 import noop from "lodash/noop";
@@ -7,12 +7,12 @@ import { IGroupCredential } from "../types";
 
 export const INTEGRATION_CONFIG_GROUP_DEMILITER = "___";
 
-export abstract class IntegrationsConfigurationService
+export abstract class IntegrationsConfigurationApiService
   implements IApplicationService
 {
   constructor(
     protected _persistenceService: AbstractConfigDataPersistenceService<string>,
-    protected _encryptionService: EncryptionService
+    protected _encryptionApiService: EncryptionApiService
   ) {}
 
   static GROUP_DEMILITER = INTEGRATION_CONFIG_GROUP_DEMILITER;
@@ -75,7 +75,7 @@ export abstract class IntegrationsConfigurationService
 
     return Object.fromEntries(
       filteredValues.map(([key, value]) => [
-        key.split(IntegrationsConfigurationService.GROUP_DEMILITER)[1],
+        key.split(IntegrationsConfigurationApiService.GROUP_DEMILITER)[1],
         value,
       ])
     ) as T;
@@ -134,7 +134,7 @@ export abstract class IntegrationsConfigurationService
 
   private generateGroupKeyPrefix = (groupKey: string, groupField: string) => {
     return `${groupKey.toUpperCase()}${
-      IntegrationsConfigurationService.GROUP_DEMILITER
+      IntegrationsConfigurationApiService.GROUP_DEMILITER
     }${groupField}`;
   };
 }

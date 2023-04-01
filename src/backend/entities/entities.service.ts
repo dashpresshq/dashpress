@@ -1,20 +1,20 @@
 import { IValueLabel } from "@hadmean/chromista/dist/types";
 import {
-  configurationService,
-  ConfigurationService,
+  configurationApiService,
+  ConfigurationApiService,
 } from "backend/configuration/configuration.service";
-import { rolesService, RolesService } from "backend/roles/roles.service";
+import { rolesApiService, RolesApiService } from "backend/roles/roles.service";
 import { IApplicationService } from "backend/types";
 import noop from "lodash/noop";
 import { IDBSchema, IEntityField, IEntityRelation } from "shared/types/db";
-import { SchemasService, schemasService } from "../schema/schema.service";
+import { SchemasApiService, schemasApiService } from "../schema/schema.service";
 import { sortByList } from "./utils";
 
-export class EntitiesService implements IApplicationService {
+export class EntitiesApiService implements IApplicationService {
   constructor(
-    private _schemasService: SchemasService,
-    private _configurationService: ConfigurationService,
-    private _rolesService: RolesService
+    private _schemasApiService: SchemasApiService,
+    private _configurationApiService: ConfigurationApiService,
+    private _rolesApiService: RolesApiService
   ) {}
 
   async bootstrap() {
@@ -23,7 +23,7 @@ export class EntitiesService implements IApplicationService {
 
   private async getDBSchemaModels(): Promise<Record<string, IDBSchema>> {
     return Object.fromEntries(
-      (await this._schemasService.getDBSchema()).map((model) => [
+      (await this._schemasApiService.getDBSchema()).map((model) => [
         model.name,
         model,
       ])
@@ -32,8 +32,8 @@ export class EntitiesService implements IApplicationService {
 
   async getActiveEntities(): Promise<IValueLabel[]> {
     const [hiddenEntities, entitiesOrder, entities] = await Promise.all([
-      this._configurationService.show<string[]>("disabled_entities"),
-      this._configurationService.show<string[]>("entities_order"),
+      this._configurationApiService.show<string[]>("disabled_entities"),
+      this._configurationApiService.show<string[]>("entities_order"),
       this.getAllEntities(),
     ]);
     const activeEntities = entities.filter(
@@ -56,7 +56,10 @@ export class EntitiesService implements IApplicationService {
   async getOrderedEntityFields(entity: string) {
     const [entityFields, entityFieldsOrder] = await Promise.all([
       this.getEntityFields(entity),
-      this._configurationService.show<string[]>("entity_fields_orders", entity),
+      this._configurationApiService.show<string[]>(
+        "entity_fields_orders",
+        entity
+      ),
     ]);
 
     sortByList(
@@ -99,12 +102,12 @@ export class EntitiesService implements IApplicationService {
 
   async isEntityDisabled(entity: string): Promise<boolean> {
     return (
-      await this._configurationService.show<string[]>("disabled_entities")
+      await this._configurationApiService.show<string[]>("disabled_entities")
     ).includes(entity);
   }
 
   async getAllEntities(): Promise<{ value: string; label: string }[]> {
-    return (await this._schemasService.getDBSchema()).map(({ name }) => ({
+    return (await this._schemasApiService.getDBSchema()).map(({ name }) => ({
       value: name,
       label: name,
     }));
@@ -122,23 +125,23 @@ export class EntitiesService implements IApplicationService {
       hiddenEntity,
     ] = await Promise.all([
       this.getEntityRelations(entity),
-      this._configurationService.show<string[]>("disabled_entities"),
-      this._configurationService.show<Record<string, string>>(
+      this._configurationApiService.show<string[]>("disabled_entities"),
+      this._configurationApiService.show<Record<string, string>>(
         "entity_relations_labels",
         entity
       ),
-      this._configurationService.show<string[]>(
+      this._configurationApiService.show<string[]>(
         "entity_relations_order",
         entity
       ),
-      this._configurationService.show<string[]>(
+      this._configurationApiService.show<string[]>(
         "hidden_entity_relations",
         entity
       ),
     ]);
 
     const allowedEntityRelation =
-      await this._rolesService.filterPermittedEntities(
+      await this._rolesApiService.filterPermittedEntities(
         userRole,
         entityRelations.filter(
           ({ table }) =>
@@ -167,8 +170,8 @@ export class EntitiesService implements IApplicationService {
   }
 }
 
-export const entitiesService = new EntitiesService(
-  schemasService,
-  configurationService,
-  rolesService
+export const entitiesApiService = new EntitiesApiService(
+  schemasApiService,
+  configurationApiService,
+  rolesApiService
 );

@@ -1,4 +1,4 @@
-import { dashboardWidgetsController } from "backend/dashboard-widgets/dashboard-widgets.controller";
+import { dashboardWidgetsApiController } from "backend/dashboard-widgets/dashboard-widgets.controller";
 import { USER_PERMISSIONS } from "shared/constants/user";
 import { IAccountProfile } from "shared/types/user";
 import { requestHandler } from "../../../../backend/lib/request";
@@ -13,7 +13,7 @@ export default requestHandler(
         { _type: "requestQuery", options: REQUEST_QUERY_FIELD },
       ]);
 
-      return await dashboardWidgetsController.listDashboardWidgets(
+      return await dashboardWidgetsApiController.listDashboardWidgets(
         validatedRequest.requestQuery,
         (validatedRequest.authenticatedUser as IAccountProfile).role
       );
@@ -23,7 +23,7 @@ export default requestHandler(
         { _type: "requestQuery", options: REQUEST_QUERY_FIELD },
         { _type: "requestBody", options: {} },
       ]);
-      return await dashboardWidgetsController.createWidget(
+      return await dashboardWidgetsApiController.createWidget(
         validatedRequest.requestBody,
         validatedRequest.requestQuery
       );
@@ -33,7 +33,7 @@ export default requestHandler(
         { _type: "requestQuery", options: REQUEST_QUERY_FIELD },
         { _type: "requestBody", options: {} },
       ]);
-      return await dashboardWidgetsController.updateWidgetList(
+      return await dashboardWidgetsApiController.updateWidgetList(
         validatedRequest.requestQuery,
         validatedRequest.requestBody
       );

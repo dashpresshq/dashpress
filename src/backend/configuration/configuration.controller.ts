@@ -4,12 +4,12 @@ import {
   AppConfigurationKeys,
 } from "shared/configurations";
 import {
-  configurationService,
-  ConfigurationService,
+  configurationApiService,
+  ConfigurationApiService,
 } from "./configuration.service";
 
-export class ConfigurationController {
-  constructor(private _configurationService: ConfigurationService) {}
+export class ConfigurationApiController {
+  constructor(private _configurationService: ConfigurationApiService) {}
 
   async showConfig(key: AppConfigurationKeys, entity?: string) {
     return await this._configurationService.show(key, entity);
@@ -31,6 +31,6 @@ export class ConfigurationController {
   }
 }
 
-export const configurationController = new ConfigurationController(
-  configurationService
+export const configurationApiController = new ConfigurationApiController(
+  configurationApiService
 );

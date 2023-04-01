@@ -1,17 +1,17 @@
-import { ConfigService } from "../config/config.service";
+import { ConfigApiService } from "../config/config.service";
 import { NotFoundError } from "../errors";
 import { ConfigDomain } from "./types";
 
 export abstract class AbstractConfigDataPersistenceService<T> {
-  protected readonly configDomain!: ConfigDomain;
+  protected readonly _configDomain!: ConfigDomain;
 
-  protected readonly configService!: ConfigService;
+  protected readonly _configApiService!: ConfigApiService;
 
   public abstract setup(): Promise<void>;
 
-  constructor(configDomain: ConfigDomain, configService: ConfigService) {
-    this.configDomain = configDomain;
-    this.configService = configService;
+  constructor(configDomain: ConfigDomain, configApiService: ConfigApiService) {
+    this._configDomain = configDomain;
+    this._configApiService = configApiService;
   }
 
   private mergeKeyWithSecondaryKey(key: string, secondaryKey: string) {
@@ -25,7 +25,7 @@ export abstract class AbstractConfigDataPersistenceService<T> {
     if (data) {
       return data;
     }
-    throw new NotFoundError(`${key} not found for '${this.configDomain}'`);
+    throw new NotFoundError(`${key} not found for '${this._configDomain}'`);
   }
 
   public async getItemWithMaybeSecondaryKey(

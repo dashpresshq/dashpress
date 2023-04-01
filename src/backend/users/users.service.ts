@@ -1,6 +1,6 @@
 import {
-  AuthTokenService,
-  authTokenService,
+  AuthTokenApiService,
+  authTokenApiService,
 } from "backend/lib/auth-token/auth-token.service";
 import {
   createConfigDomainPersistenceService,
@@ -14,10 +14,10 @@ import { ISuccessfullAuthenticationResponse } from "shared/types/auth";
 
 const INVALID_LOGIN_MESSAGE = "Invalid Login";
 
-export class UsersService implements IApplicationService {
+export class UsersApiService implements IApplicationService {
   constructor(
     private readonly _usersPersistenceService: AbstractConfigDataPersistenceService<IAccountUser>,
-    private readonly _authTokenService: AuthTokenService
+    private readonly _authTokenApiService: AuthTokenApiService
   ) {}
 
   async tryAuthenticate(authCredentials: {
@@ -27,7 +27,7 @@ export class UsersService implements IApplicationService {
     try {
       const user = await this.checkUserPassword(authCredentials);
       delete user.password;
-      return { token: await this._authTokenService.sign(user) };
+      return { token: await this._authTokenApiService.sign(user) };
     } catch (error) {
       throw new ForbiddenError(INVALID_LOGIN_MESSAGE);
     }
@@ -148,7 +148,7 @@ export class UsersService implements IApplicationService {
 const usersPersistenceService =
   createConfigDomainPersistenceService<IAccountUser>("users");
 
-export const usersService = new UsersService(
+export const usersApiService = new UsersApiService(
   usersPersistenceService,
-  authTokenService
+  authTokenApiService
 );

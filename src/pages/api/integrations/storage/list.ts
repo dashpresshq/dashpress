@@ -1,8 +1,8 @@
-import { storageController } from "backend/storage/storage.controller";
+import { storageApiController } from "backend/storage/storage.controller";
 import { requestHandler } from "backend/lib/request";
 
 export default requestHandler({
   GET: () => {
-    return storageController.listIntegrations();
+    return storageApiController.listIntegrations();
   },
 });

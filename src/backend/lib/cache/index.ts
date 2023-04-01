@@ -1,4 +1,4 @@
-import { ConfigKeys, configService } from "../config/config.service";
+import { ConfigKeys, configApiService } from "../config/config.service";
 import { AbstractCacheService } from "./AbstractCacheService";
 import { MemoryCacheAdaptor } from "./MemoryCacheAdaptor";
 import { RedisCacheAdaptor } from "./RedisCacheAdaptor";
@@ -8,11 +8,14 @@ export { AbstractCacheService };
 
 export function createCacheService(prefix: "permission"): AbstractCacheService {
   const configBag: Record<CacheAdaptorTypes, AbstractCacheService> = {
-    [CacheAdaptorTypes.Memory]: new MemoryCacheAdaptor(prefix, configService),
-    [CacheAdaptorTypes.Redis]: new RedisCacheAdaptor(prefix, configService),
+    [CacheAdaptorTypes.Memory]: new MemoryCacheAdaptor(
+      prefix,
+      configApiService
+    ),
+    [CacheAdaptorTypes.Redis]: new RedisCacheAdaptor(prefix, configApiService),
   };
 
   return configBag[
-    configService.getConfigValue<CacheAdaptorTypes>(ConfigKeys.CACHE_ADAPTOR)
+    configApiService.getConfigValue<CacheAdaptorTypes>(ConfigKeys.CACHE_ADAPTOR)
   ];
 }

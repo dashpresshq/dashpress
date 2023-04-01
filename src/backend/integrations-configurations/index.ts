@@ -1,9 +1,9 @@
 export {
-  appConstantsService,
-  environmentVariablesService,
+  appConstantsApiService,
+  environmentVariablesApiService,
 } from "./services/env-variable.service";
 
 export {
-  credentialsService,
-  CredentialsService,
+  credentialsApiService,
+  CredentialsApiService,
 } from "./services/credentials.service";

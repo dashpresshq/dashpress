@@ -3,29 +3,29 @@ import {
   createConfigDomainPersistenceService,
 } from "backend/lib/config-persistence";
 import {
-  encryptionService,
-  EncryptionService,
+  encryptionApiService,
+  EncryptionApiService,
 } from "backend/lib/encryption/encryption.service";
-import { IntegrationsConfigurationService } from "./_base";
+import { IntegrationsConfigurationApiService } from "./_base";
 
-export class CredentialsService extends IntegrationsConfigurationService {
+export class CredentialsApiService extends IntegrationsConfigurationApiService {
   constructor(
     _credentialsPersistenceService: AbstractConfigDataPersistenceService<string>,
-    _encryptionService: EncryptionService
+    _encryptionApiService: EncryptionApiService
   ) {
-    super(_credentialsPersistenceService, _encryptionService);
+    super(_credentialsPersistenceService, _encryptionApiService);
   }
 
   async processDataToSave(data: string) {
-    return await this._encryptionService.encrypt(JSON.stringify(data));
+    return await this._encryptionApiService.encrypt(JSON.stringify(data));
   }
 
   async processDataAfterFetch(data: string) {
-    return JSON.parse(await this._encryptionService.decrypt(data));
+    return JSON.parse(await this._encryptionApiService.decrypt(data));
   }
 }
 
-export const credentialsService = new CredentialsService(
+export const credentialsApiService = new CredentialsApiService(
   createConfigDomainPersistenceService<string>("credentials"),
-  encryptionService
+  encryptionApiService
 );

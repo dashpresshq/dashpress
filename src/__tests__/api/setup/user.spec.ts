@@ -1,5 +1,5 @@
 import handler from "pages/api/setup/user";
-import { authTokenService } from "backend/lib/auth-token/auth-token.service";
+import { authTokenApiService } from "backend/lib/auth-token/auth-token.service";
 import { setupUsersTestData } from "__tests__/api/_test-utils";
 import { createUnAuthenticatedMocks } from "../_test-utils/_authenticatedMock";
 
@@ -23,7 +23,7 @@ describe("/api/setup/user", () => {
     expect(postRequest.res._getStatusCode()).toBe(201);
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { exp, iat, ...decodedToken } = await authTokenService.verify(
+    const { exp, iat, ...decodedToken } = await authTokenApiService.verify(
       postRequest.res._getJSONData().token
     );
 

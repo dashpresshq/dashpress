@@ -2,8 +2,8 @@ import { IApplicationService } from "backend/types";
 import { NotFoundError, progammingError } from "backend/lib/errors";
 import { QueryFilter } from "shared/types/data";
 import {
-  actionsService,
-  ActionsService,
+  actionsApiService,
+  ActionsApiService,
 } from "backend/actions/actions.service";
 import { BaseAction } from "shared/types/actions";
 import { IFieldValidationItem } from "shared/validations/types";
@@ -11,24 +11,27 @@ import noop from "lodash/noop";
 import { IEntityField } from "shared/types/db";
 import { TemplateService } from "shared/lib/templates";
 import { FilterOperators } from "@hadmean/protozoa";
-import { rDBMSDataService, RDBMSDataService } from "./data-access/RDBMS";
+import { rDBMSDataApiService, RDBMSDataApiService } from "./data-access/RDBMS";
 import { IPaginationFilters } from "./types";
 import {
-  ConfigurationService,
-  configurationService,
+  ConfigurationApiService,
+  configurationApiService,
 } from "../configuration/configuration.service";
-import { EntitiesService, entitiesService } from "../entities/entities.service";
+import {
+  EntitiesApiService,
+  entitiesApiService,
+} from "../entities/entities.service";
 
 const DEFAULT_LIST_LIMIT = 50;
 
 const GOOD_FIELD_TYPES_FOR_LIST: IEntityField["type"][] = ["enum", "string"];
 
-export class DataService implements IApplicationService {
+export class DataApiService implements IApplicationService {
   constructor(
-    private _rDBMSDataService: RDBMSDataService,
-    private _entitiesService: EntitiesService,
-    private _configurationService: ConfigurationService,
-    private _actionsService: ActionsService
+    private _rDBMSDataService: RDBMSDataApiService,
+    private _entitiesApiService: EntitiesApiService,
+    private _configurationApiService: ConfigurationApiService,
+    private _actionsApiService: ActionsApiService
   ) {}
 
   async bootstrap() {
@@ -68,7 +71,7 @@ export class DataService implements IApplicationService {
   async referenceData(entity: string, id: string): Promise<string> {
     const [relationshipSettings, primaryField] = await Promise.all([
       this.getRelationshipSettings(entity),
-      this._entitiesService.getEntityPrimaryField(entity),
+      this._entitiesApiService.getEntityPrimaryField(entity),
     ]);
 
     const data = await this.show<Record<string, unknown>>(
@@ -89,7 +92,7 @@ export class DataService implements IApplicationService {
   ): Promise<Record<string, unknown>> {
     const [fieldsToShow, primaryField] = await Promise.all([
       this.getAllowedCrudsFieldsToShow(entity, "hidden_entity_details_columns"),
-      this._entitiesService.getEntityPrimaryField(entity),
+      this._entitiesApiService.getEntityPrimaryField(entity),
     ]);
     const data = await this.show<Record<string, unknown>>(
       entity,
@@ -122,11 +125,10 @@ export class DataService implements IApplicationService {
     // TODO validate the createData values
     const [allowedFields, primaryField, entityValidations] = await Promise.all([
       this.getAllowedCrudsFieldsToShow(entity, "hidden_entity_create_columns"),
-      this._entitiesService.getEntityPrimaryField(entity),
-      this._configurationService.show<Record<string, IFieldValidationItem[]>>(
-        "entity_validations",
-        entity
-      ),
+      this._entitiesApiService.getEntityPrimaryField(entity),
+      this._configurationApiService.show<
+        Record<string, IFieldValidationItem[]>
+      >("entity_validations", entity),
     ]);
 
     noop(entityValidations);
@@ -137,7 +139,7 @@ export class DataService implements IApplicationService {
       primaryField
     );
 
-    await this._actionsService.runAction(
+    await this._actionsApiService.runAction(
       entity,
       BaseAction.Create,
       async () => await this.showData(entity, id)
@@ -152,7 +154,7 @@ export class DataService implements IApplicationService {
   ): Promise<{ value: string; label: string }[]> {
     const [relationshipSettings, primaryField] = await Promise.all([
       this.getRelationshipSettings(entity),
-      this._entitiesService.getEntityPrimaryField(entity),
+      this._entitiesApiService.getEntityPrimaryField(entity),
     ]);
 
     const data = await this.getDataAccessInstance().list(
@@ -210,11 +212,10 @@ export class DataService implements IApplicationService {
 
     const [allowedFields, primaryField, entityValidations] = await Promise.all([
       this.getAllowedCrudsFieldsToShow(entity, "hidden_entity_update_columns"),
-      this._entitiesService.getEntityPrimaryField(entity),
-      this._configurationService.show<Record<string, IFieldValidationItem[]>>(
-        "entity_validations",
-        entity
-      ),
+      this._entitiesApiService.getEntityPrimaryField(entity),
+      this._configurationApiService.show<
+        Record<string, IFieldValidationItem[]>
+      >("entity_validations", entity),
     ]);
 
     // validate only the fields presents in 'data'
@@ -230,7 +231,7 @@ export class DataService implements IApplicationService {
       this.returnOnlyDataThatAreAllowed(data, allowedFields)
     );
 
-    await this._actionsService.runAction(
+    await this._actionsApiService.runAction(
       entity,
       BaseAction.Update,
       async () => await this.showData(entity, id)
@@ -238,14 +239,14 @@ export class DataService implements IApplicationService {
   }
 
   async delete(entity: string, id: string): Promise<void> {
-    await this._actionsService.runAction(
+    await this._actionsApiService.runAction(
       entity,
       BaseAction.Delete,
       async () => await this.showData(entity, id)
     );
 
     return await this.getDataAccessInstance().delete(entity, {
-      [await this._entitiesService.getEntityPrimaryField(entity)]: id,
+      [await this._entitiesApiService.getEntityPrimaryField(entity)]: id,
     });
   }
 
@@ -262,8 +263,8 @@ export class DataService implements IApplicationService {
       | "hidden_entity_update_columns"
   ): Promise<string[]> {
     const [hiddenFields, entityFields] = await Promise.all([
-      this._configurationService.show<string[]>(crudKey, entity),
-      this._entitiesService.getEntityFields(entity),
+      this._configurationApiService.show<string[]>(crudKey, entity),
+      this._entitiesApiService.getEntityFields(entity),
     ]);
 
     if (hiddenFields.length === 0) {
@@ -283,7 +284,7 @@ export class DataService implements IApplicationService {
     format: string;
     fields: string[];
   }> {
-    const relationshipSettings = await this._configurationService.show<{
+    const relationshipSettings = await this._configurationApiService.show<{
       format: string;
       fields: string[];
     }>("entity_relation_template", entity);
@@ -292,12 +293,12 @@ export class DataService implements IApplicationService {
       return relationshipSettings;
     }
     const [hiddenColumns, primaryField, entityFields] = await Promise.all([
-      this._configurationService.show<string[]>(
+      this._configurationApiService.show<string[]>(
         "hidden_entity_table_columns",
         entity
       ),
-      this._entitiesService.getEntityPrimaryField(entity),
-      this._entitiesService.getEntityFields(entity),
+      this._entitiesApiService.getEntityPrimaryField(entity),
+      this._entitiesApiService.getEntityFields(entity),
     ]);
     const displayField =
       entityFields.filter((field) => {
@@ -313,7 +314,7 @@ export class DataService implements IApplicationService {
       format: `{{ ${displayField} }}`,
     };
 
-    await this._configurationService.upsert(
+    await this._configurationApiService.upsert(
       "entity_relation_template",
       configuration,
       entity
@@ -322,9 +323,9 @@ export class DataService implements IApplicationService {
   }
 }
 
-export const dataService = new DataService(
-  rDBMSDataService,
-  entitiesService,
-  configurationService,
-  actionsService
+export const dataApiService = new DataApiService(
+  rDBMSDataApiService,
+  entitiesApiService,
+  configurationApiService,
+  actionsApiService
 );

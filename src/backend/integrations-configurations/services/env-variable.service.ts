@@ -3,26 +3,26 @@ import {
   createConfigDomainPersistenceService,
 } from "backend/lib/config-persistence";
 import {
-  encryptionService,
-  EncryptionService,
+  encryptionApiService,
+  EncryptionApiService,
 } from "backend/lib/encryption/encryption.service";
-import { IntegrationsConfigurationService } from "./_base";
+import { IntegrationsConfigurationApiService } from "./_base";
 
-class PlainConfigurationService extends IntegrationsConfigurationService {
+class PlainConfigurationService extends IntegrationsConfigurationApiService {
   constructor(
     _credentialsPersistenceService: AbstractConfigDataPersistenceService<string>,
-    _encryptionService: EncryptionService
+    _encryptionService: EncryptionApiService
   ) {
     super(_credentialsPersistenceService, _encryptionService);
   }
 }
 
-export const environmentVariablesService = new PlainConfigurationService(
+export const environmentVariablesApiService = new PlainConfigurationService(
   createConfigDomainPersistenceService<string>("environment-variables"),
-  encryptionService
+  encryptionApiService
 );
 
-export const appConstantsService = new PlainConfigurationService(
+export const appConstantsApiService = new PlainConfigurationService(
   createConfigDomainPersistenceService<string>("constants"),
-  encryptionService
+  encryptionApiService
 );

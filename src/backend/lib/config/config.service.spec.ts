@@ -1,7 +1,7 @@
 /* eslint-disable no-new */
 import fs from "fs-extra";
 import path from "path";
-import { ConfigKeys, ConfigService } from "./config.service";
+import { ConfigKeys, ConfigApiService } from "./config.service";
 
 const VALID_CONFIG: Record<ConfigKeys, string> = {
   CONFIG_ADAPTOR: "json-file",
@@ -19,7 +19,7 @@ const VALID_CONFIG: Record<ConfigKeys, string> = {
 };
 
 const bootstrapConfig = (changes: Record<string, unknown>) => {
-  new ConfigService({
+  new ConfigApiService({
     ...VALID_CONFIG,
     ...changes,
   });
@@ -29,7 +29,7 @@ const ENV_LOCAL_FILE = ".env.unit.local";
 
 describe("Config Service", () => {
   beforeEach(() => {
-    ConfigService.isInitialized = false;
+    ConfigApiService.isInitialized = false;
   });
   describe("validation", () => {
     it("should validate `CACHE_ADAPTOR_CONNECTION_STRING`", async () => {
@@ -93,10 +93,10 @@ describe("Config Service", () => {
     });
 
     it("should throw error on prod for empty env", async () => {
-      ConfigService.isInitialized = false;
+      ConfigApiService.isInitialized = false;
 
       expect(() =>
-        new ConfigService({
+        new ConfigApiService({
           ENV_LOCAL_FILE,
           NODE_ENV: "production",
         }).bootstrap()
@@ -104,7 +104,7 @@ describe("Config Service", () => {
     });
 
     it("should create new valid config file when empty", async () => {
-      new ConfigService({ ENV_LOCAL_FILE }).bootstrap();
+      new ConfigApiService({ ENV_LOCAL_FILE }).bootstrap();
 
       const content = fs.readFileSync(fullPath).toString();
 
@@ -116,13 +116,13 @@ describe("Config Service", () => {
           .map((value) => value.split("="))
       );
 
-      expect(() => new ConfigService(newEnv)).not.toThrowError();
+      expect(() => new ConfigApiService(newEnv)).not.toThrowError();
 
-      ConfigService.isInitialized = false;
+      ConfigApiService.isInitialized = false;
 
       newEnv.CONFIG_ADAPTOR = "hello";
 
-      expect(() => new ConfigService(newEnv)).toThrowError(
+      expect(() => new ConfigApiService(newEnv)).toThrowError(
         "Invalid Config Adaptor name provided 'hello'. Valid values are json-file,database,memory,redis"
       );
     });
@@ -142,7 +142,7 @@ describe("Config Service", () => {
           .join("\n")
       );
 
-      new ConfigService({
+      new ConfigApiService({
         ...oldEnv,
         ENV_LOCAL_FILE,
       }).bootstrap();
@@ -157,7 +157,7 @@ describe("Config Service", () => {
           .map((value) => value.split("="))
       );
 
-      expect(() => new ConfigService(newEnv)).not.toThrowError();
+      expect(() => new ConfigApiService(newEnv)).not.toThrowError();
 
       expect(newEnv.CONFIG_ADAPTOR_CONNECTION_STRING).toBe("test");
       expect(newEnv.CACHE_ADAPTOR).toBe("redis");

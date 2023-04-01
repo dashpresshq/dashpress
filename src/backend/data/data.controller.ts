@@ -1,17 +1,17 @@
 import { QueryFilter } from "shared/types/data";
 import { ILabelValue } from "types";
-import { DataService, dataService } from "./data.service";
+import { DataApiService, dataApiService } from "./data.service";
 import { IPaginationFilters } from "./types";
 
-export class DataController {
-  constructor(private _dataService: DataService) {}
+export class DataApiController {
+  constructor(private _dataApiService: DataApiService) {}
 
   async tableData(
     entity: string,
     queryFilters: QueryFilter[],
     paginationFilters: IPaginationFilters
   ) {
-    const [data, totalRecords] = await this._dataService.paginateData(
+    const [data, totalRecords] = await this._dataApiService.paginateData(
       entity,
       queryFilters,
       paginationFilters
@@ -26,14 +26,14 @@ export class DataController {
   }
 
   async listData(entity: string, searchValue?: string): Promise<ILabelValue[]> {
-    return await this._dataService.listData(entity, searchValue);
+    return await this._dataApiService.listData(entity, searchValue);
   }
 
   async showData(
     entity: string,
     id: string | number
   ): Promise<Record<string, unknown>> {
-    return await this._dataService.showData(entity, id);
+    return await this._dataApiService.showData(entity, id);
   }
 
   async countData(
@@ -41,19 +41,19 @@ export class DataController {
     queryFilters: QueryFilter[]
   ): Promise<{ count: number }> {
     return {
-      count: await this._dataService.count(entity, queryFilters),
+      count: await this._dataApiService.count(entity, queryFilters),
     };
   }
 
   async referenceData(entity: string, id: string): Promise<string> {
-    return await this._dataService.referenceData(entity, id);
+    return await this._dataApiService.referenceData(entity, id);
   }
 
   async createData(
     entity: string,
     data: Record<string, unknown>
   ): Promise<{ id: string | number }> {
-    return { id: await this._dataService.create(entity, data) };
+    return { id: await this._dataApiService.create(entity, data) };
   }
 
   async updateData(
@@ -61,12 +61,12 @@ export class DataController {
     id: string,
     data: Record<string, unknown>
   ): Promise<void> {
-    return await this._dataService.update(entity, id, data);
+    return await this._dataApiService.update(entity, id, data);
   }
 
   async deleteData(entity: string, id: string): Promise<void> {
-    await this._dataService.delete(entity, id);
+    await this._dataApiService.delete(entity, id);
   }
 }
 
-export const dataController = new DataController(dataService);
+export const dataApiController = new DataApiController(dataApiService);

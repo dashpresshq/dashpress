@@ -1,11 +1,13 @@
-import { PackagesService, packagesService } from "./packages.service";
+import { PackagesApiService, packagesApiService } from "./packages.service";
 
-export class PackagesController {
-  constructor(private _packagesService: PackagesService) {}
+export class PackagesApiController {
+  constructor(private _packagesApiService: PackagesApiService) {}
 
   async installPackages() {
-    await this._packagesService.installPackages();
+    await this._packagesApiService.installPackages();
   }
 }
 
-export const packagesController = new PackagesController(packagesService);
+export const packagesApiController = new PackagesApiController(
+  packagesApiService
+);

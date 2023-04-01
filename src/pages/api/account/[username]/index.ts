@@ -1,4 +1,4 @@
-import { usersController } from "backend/users/users.controller";
+import { usersApiController } from "backend/users/users.controller";
 import { USER_PERMISSIONS } from "shared/constants/user";
 import { UPDATE_USER_FORM_SCHEMA } from "shared/form-schemas/users/update";
 import { IAccountProfile } from "shared/types/user";
@@ -15,7 +15,7 @@ export default requestHandler(
           options: REQUEST_QUERY_FIELD,
         },
       ]);
-      return await usersController.getUserProfile(
+      return await usersApiController.getUserProfile(
         validatedRequest.requestQuery
       );
     },
@@ -28,7 +28,7 @@ export default requestHandler(
           options: REQUEST_QUERY_FIELD,
         },
       ]);
-      return await usersController.removeUser(
+      return await usersApiController.removeUser(
         validatedRequest.requestQuery,
         (validatedRequest.authenticatedUser as IAccountProfile).username
       );
@@ -44,7 +44,7 @@ export default requestHandler(
           options: REQUEST_QUERY_FIELD,
         },
       ]);
-      return await usersController.updateProfile(
+      return await usersApiController.updateProfile(
         validatedRequest.requestQuery,
         validatedRequest.requestBody
       );

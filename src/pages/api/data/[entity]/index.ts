@@ -1,5 +1,5 @@
 import { DataActionType } from "shared/configurations";
-import { dataController } from "../../../../backend/data/data.controller";
+import { dataApiController } from "../../../../backend/data/data.controller";
 import { requestHandler } from "../../../../backend/lib/request";
 
 export default requestHandler({
@@ -12,7 +12,7 @@ export default requestHandler({
         options: DataActionType.Create,
       },
     ]);
-    return await dataController.createData(
+    return await dataApiController.createData(
       validatedRequest.entity,
       validatedRequest.entityRequestBody
     );

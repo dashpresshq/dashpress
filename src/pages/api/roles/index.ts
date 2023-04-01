@@ -1,4 +1,4 @@
-import { rolesController } from "backend/roles/roles.controller";
+import { rolesApiController } from "backend/roles/roles.controller";
 import { BASE_ROLE_FORM_SCHEMA } from "shared/form-schemas/roles/base";
 import { USER_PERMISSIONS } from "shared/constants/user";
 import { requestHandler } from "../../../backend/lib/request";
@@ -6,7 +6,7 @@ import { requestHandler } from "../../../backend/lib/request";
 export default requestHandler(
   {
     GET: async () => {
-      return await rolesController.listRoles();
+      return await rolesApiController.listRoles();
     },
 
     POST: async (getValidatedRequest) => {
@@ -16,7 +16,7 @@ export default requestHandler(
           options: BASE_ROLE_FORM_SCHEMA,
         },
       ]);
-      return await rolesController.createRole(validatedRequest.requestBody);
+      return await rolesApiController.createRole(validatedRequest.requestBody);
     },
   },
   [

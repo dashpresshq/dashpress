@@ -1,4 +1,4 @@
-import { usersController } from "backend/users/users.controller";
+import { usersApiController } from "backend/users/users.controller";
 import { UPDATE_USER_PREFERENCES_FORM_SCHEMA } from "shared/form-schemas/profile/update";
 import { IAccountProfile } from "shared/types/user";
 import { requestHandler } from "backend/lib/request";
@@ -12,7 +12,7 @@ export default requestHandler({
         options: UPDATE_USER_PREFERENCES_FORM_SCHEMA,
       },
     ]);
-    return await usersController.updateUserPreferences(
+    return await usersApiController.updateUserPreferences(
       (validatedRequest.authenticatedUser as IAccountProfile).username,
       validatedRequest.requestBody
     );

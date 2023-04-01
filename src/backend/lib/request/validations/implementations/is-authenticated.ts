@@ -1,4 +1,4 @@
-import { authTokenService } from "backend/lib/auth-token/auth-token.service";
+import { authTokenApiService } from "backend/lib/auth-token/auth-token.service";
 import { ForbiddenError } from "backend/lib/errors";
 import { REQUEST_ERROR_CODES } from "shared/constants/auth";
 import { ValidationImplType } from "./types";
@@ -26,7 +26,7 @@ export const isAuthenticatedValidationImpl: ValidationImplType<void> = async (
       );
     }
     try {
-      req.user = await authTokenService.verify(authToken);
+      req.user = await authTokenApiService.verify(authToken);
     } catch (error) {
       throw new ForbiddenError("Invalid Token", NO_AUTH_ERROR_CODE);
     }

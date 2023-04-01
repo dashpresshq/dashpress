@@ -1,5 +1,5 @@
 import { USER_PERMISSIONS } from "shared/constants/user";
-import { storageController } from "backend/storage/storage.controller";
+import { storageApiController } from "backend/storage/storage.controller";
 import { requestHandler } from "backend/lib/request";
 
 const REQUEST_KEY_FIELD = "key";
@@ -18,7 +18,7 @@ export default requestHandler(
         },
       ]);
 
-      return await storageController.activateStorage(
+      return await storageApiController.activateStorage(
         validatedRequest.requestQuery,
         validatedRequest.requestBody
       );
@@ -35,7 +35,7 @@ export default requestHandler(
         },
       ]);
 
-      return await storageController.updateStorageConfig(
+      return await storageApiController.updateStorageConfig(
         validatedRequest.requestQuery,
         validatedRequest.requestBody
       );
@@ -48,7 +48,7 @@ export default requestHandler(
         },
       ]);
 
-      return await storageController.deactivateStorage(
+      return await storageApiController.deactivateStorage(
         validatedRequest.requestQuery
       );
     },

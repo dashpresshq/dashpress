@@ -1,5 +1,5 @@
 import { USER_PERMISSIONS } from "shared/constants/user";
-import { configurationController } from "../../../../backend/configuration/configuration.controller";
+import { configurationApiController } from "../../../../backend/configuration/configuration.controller";
 import { requestHandler } from "../../../../backend/lib/request";
 
 export default requestHandler(
@@ -9,7 +9,7 @@ export default requestHandler(
         "configKey",
         "entity",
       ]);
-      return await configurationController.showConfig(
+      return await configurationApiController.showConfig(
         validatedRequest.configKey,
         validatedRequest.entity
       );
@@ -20,7 +20,7 @@ export default requestHandler(
         "entity",
         "configBody",
       ]);
-      return await configurationController.upsertConfig(
+      return await configurationApiController.upsertConfig(
         validatedRequest.configKey,
         validatedRequest.configBody,
         validatedRequest.entity

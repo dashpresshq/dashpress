@@ -1,5 +1,5 @@
 import { DataActionType } from "shared/configurations";
-import { dataController } from "../../../../backend/data/data.controller";
+import { dataApiController } from "../../../../backend/data/data.controller";
 import { requestHandler } from "../../../../backend/lib/request";
 
 export default requestHandler({
@@ -14,7 +14,7 @@ export default requestHandler({
       },
     ]);
 
-    return await dataController.tableData(
+    return await dataApiController.tableData(
       validatedRequest.entity,
       validatedRequest.queryFilters,
       validatedRequest.paginationFilter

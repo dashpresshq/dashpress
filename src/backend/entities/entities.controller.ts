@@ -1,39 +1,39 @@
 import { IValueLabel } from "@hadmean/chromista/dist/types";
-import { rolesService, RolesService } from "backend/roles/roles.service";
+import { rolesApiService, RolesApiService } from "backend/roles/roles.service";
 import { IEntityField, IEntityRelation } from "shared/types/db";
 import {
-  ConfigurationService,
-  configurationService,
+  ConfigurationApiService,
+  configurationApiService,
 } from "../configuration/configuration.service";
-import { entitiesService, EntitiesService } from "./entities.service";
+import { entitiesApiService, EntitiesApiService } from "./entities.service";
 
-export class EntitiesController {
+export class EntitiesApiController {
   constructor(
-    private _entitiesService: EntitiesService,
-    private _configurationService: ConfigurationService,
-    private _rolesService: RolesService
+    private _entitiesApiService: EntitiesApiService,
+    private _configurationApiService: ConfigurationApiService,
+    private _rolesApiService: RolesApiService
   ) {}
 
   async getActiveEntities(): Promise<IValueLabel[]> {
-    return await this._entitiesService.getActiveEntities();
+    return await this._entitiesApiService.getActiveEntities();
   }
 
   async getUserActiveEntities(userRole: string): Promise<IValueLabel[]> {
-    return await this._rolesService.filterPermittedEntities(
+    return await this._rolesApiService.filterPermittedEntities(
       userRole,
-      await this._entitiesService.getActiveEntities(),
+      await this._entitiesApiService.getActiveEntities(),
       "value"
     );
   }
 
   async listAllEntities(): Promise<IValueLabel[]> {
-    return await this._entitiesService.getAllEntities();
+    return await this._entitiesApiService.getAllEntities();
   }
 
   async listAllEntityRelations(entity: string): Promise<string[]> {
     const [entityRelations, disabledEntities] = await Promise.all([
-      this._entitiesService.getEntityRelations(entity),
-      this._configurationService.show<string[]>("disabled_entities"),
+      this._entitiesApiService.getEntityRelations(entity),
+      this._configurationApiService.show<string[]>("disabled_entities"),
     ]);
 
     const allowedEntityRelation = entityRelations.filter(
@@ -47,19 +47,19 @@ export class EntitiesController {
     entity: string,
     userRole: string
   ): Promise<IEntityRelation[]> {
-    return await this._entitiesService.getEntityRelationsForUserRole(
+    return await this._entitiesApiService.getEntityRelationsForUserRole(
       entity,
       userRole
     );
   }
 
   async getEntityFields(entity: string): Promise<IEntityField[]> {
-    return await this._entitiesService.getOrderedEntityFields(entity);
+    return await this._entitiesApiService.getOrderedEntityFields(entity);
   }
 }
 
-export const entitiesController = new EntitiesController(
-  entitiesService,
-  configurationService,
-  rolesService
+export const entitiesApiController = new EntitiesApiController(
+  entitiesApiService,
+  configurationApiService,
+  rolesApiService
 );

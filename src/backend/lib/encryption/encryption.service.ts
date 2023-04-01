@@ -1,16 +1,18 @@
 import Cryptr from "cryptr";
 import {
   ConfigKeys,
-  configService,
-  ConfigService,
+  configApiService,
+  ConfigApiService,
 } from "../config/config.service";
 
-export class EncryptionService {
+export class EncryptionApiService {
   private encyptionInstance: Cryptr;
 
-  constructor(private readonly _configService: ConfigService) {
+  constructor(private readonly _configApiService: ConfigApiService) {
     this.encyptionInstance = new Cryptr(
-      this._configService.getConfigValue(ConfigKeys.CREDENTIALS_ENCRYPTION_KEY)
+      this._configApiService.getConfigValue(
+        ConfigKeys.CREDENTIALS_ENCRYPTION_KEY
+      )
     );
   }
 
@@ -23,4 +25,4 @@ export class EncryptionService {
   }
 }
 
-export const encryptionService = new EncryptionService(configService);
+export const encryptionApiService = new EncryptionApiService(configApiService);

@@ -1,62 +1,67 @@
 import { IActionInstance } from "shared/types/actions";
-import { ActionsService, actionsService } from "./actions.service";
+import { ActionsApiService, actionsApiService } from "./actions.service";
 
-export class ActionsController {
-  constructor(private _actionsService: ActionsService) {}
+export class ActionsApiController {
+  constructor(private _actionsApiService: ActionsApiService) {}
 
   listIntegrations() {
-    return this._actionsService.listActionIntegrations();
+    return this._actionsApiService.listActionIntegrations();
   }
 
   listIntegrationImplementations(integrationKey: string) {
-    return this._actionsService.listIntegrationImplementations(integrationKey);
+    return this._actionsApiService.listIntegrationImplementations(
+      integrationKey
+    );
   }
 
   async listActivatedActions() {
-    return await this._actionsService.listActivatedActions();
+    return await this._actionsApiService.listActivatedActions();
   }
 
   async activateAction(
     integrationKey: string,
     configuration: Record<string, string>
   ) {
-    await this._actionsService.activateAction(integrationKey, configuration);
+    await this._actionsApiService.activateAction(integrationKey, configuration);
   }
 
   async showActionConfig(activationId: string) {
-    return await this._actionsService.showActionConfig(activationId);
+    return await this._actionsApiService.showActionConfig(activationId);
   }
 
   async updateActionConfig(
     activationId: string,
     configuration: Record<string, string>
   ) {
-    await this._actionsService.updateActionConfig(activationId, configuration);
+    await this._actionsApiService.updateActionConfig(
+      activationId,
+      configuration
+    );
   }
 
   async deactivateAction(activationId: string) {
-    await this._actionsService.deactivateAction(activationId);
+    await this._actionsApiService.deactivateAction(activationId);
   }
 
   async listEntityActionInstances(entity: string) {
-    return await this._actionsService.listEntityActionInstances(entity);
+    return await this._actionsApiService.listEntityActionInstances(entity);
   }
 
   async listIntegrationActionInstances(integrationKey: string) {
-    return await this._actionsService.listIntegrationActions(integrationKey);
+    return await this._actionsApiService.listIntegrationActions(integrationKey);
   }
 
   async deleteActionInstance(instanceId: string) {
-    await this._actionsService.deleteActionInstance(instanceId);
+    await this._actionsApiService.deleteActionInstance(instanceId);
   }
 
   async updateActionInstance(instanceId: string, action: IActionInstance) {
-    await this._actionsService.updateActionInstance(instanceId, action);
+    await this._actionsApiService.updateActionInstance(instanceId, action);
   }
 
   async instantiateAction(action: Omit<IActionInstance, "instanceId">) {
-    await this._actionsService.instantiateAction(action);
+    await this._actionsApiService.instantiateAction(action);
   }
 }
 
-export const actionsController = new ActionsController(actionsService);
+export const actionsApiController = new ActionsApiController(actionsApiService);

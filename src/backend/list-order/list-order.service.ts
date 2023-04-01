@@ -4,7 +4,7 @@ import {
 } from "backend/lib/config-persistence";
 import { IApplicationService } from "backend/types";
 
-export class ListOrderService implements IApplicationService {
+export class ListOrderApiService implements IApplicationService {
   constructor(
     private readonly _listOrderPersistenceService: AbstractConfigDataPersistenceService<
       string[]
@@ -61,6 +61,6 @@ export class ListOrderService implements IApplicationService {
 const listOrderPersistenceService =
   createConfigDomainPersistenceService<string[]>("list-order");
 
-export const listOrderService = new ListOrderService(
+export const listOrderApiService = new ListOrderApiService(
   listOrderPersistenceService
 );

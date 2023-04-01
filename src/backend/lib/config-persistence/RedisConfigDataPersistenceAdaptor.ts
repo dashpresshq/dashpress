@@ -1,5 +1,5 @@
 import { RedisClientType } from "redis";
-import { ConfigKeys, ConfigService } from "../config/config.service";
+import { ConfigKeys, ConfigApiService } from "../config/config.service";
 import { getRedisConnection } from "../connection/redis";
 import { AbstractConfigDataPersistenceService } from "./AbstractConfigDataPersistenceService";
 import { ConfigDomain } from "./types";
@@ -10,19 +10,21 @@ export class RedisConfigDataPersistenceAdaptor<
   static _redisConnection: Record<string, RedisClientType | null> = {};
 
   async getRedisInstance(): Promise<RedisClientType> {
-    if (RedisConfigDataPersistenceAdaptor._redisConnection[this.configDomain]) {
+    if (
+      RedisConfigDataPersistenceAdaptor._redisConnection[this._configDomain]
+    ) {
       return RedisConfigDataPersistenceAdaptor._redisConnection[
-        this.configDomain
+        this._configDomain
       ];
     }
-    RedisConfigDataPersistenceAdaptor._redisConnection[this.configDomain] =
+    RedisConfigDataPersistenceAdaptor._redisConnection[this._configDomain] =
       await getRedisConnection(
-        this.configService.getConfigValue(
+        this._configApiService.getConfigValue(
           ConfigKeys.CONFIG_ADAPTOR_CONNECTION_STRING
         )
       );
     return RedisConfigDataPersistenceAdaptor._redisConnection[
-      this.configDomain
+      this._configDomain
     ];
   }
 
@@ -30,8 +32,8 @@ export class RedisConfigDataPersistenceAdaptor<
     await this.getRedisInstance();
   }
 
-  constructor(configDomain: ConfigDomain, _configService: ConfigService) {
-    super(configDomain, _configService);
+  constructor(configDomain: ConfigDomain, _configApiService: ConfigApiService) {
+    super(configDomain, _configApiService);
   }
 
   async resetToEmpty() {
@@ -39,7 +41,7 @@ export class RedisConfigDataPersistenceAdaptor<
   }
 
   private wrapWithConfigDomain() {
-    return `__app_config__${this.configDomain}`;
+    return `__app_config__${this._configDomain}`;
   }
 
   async getAllAsKeyValuePair() {

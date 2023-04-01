@@ -1,12 +1,12 @@
 import noop from "lodash/noop";
-import { ConfigService } from "../config/config.service";
+import { ConfigApiService } from "../config/config.service";
 import { AbstractCacheService } from "./AbstractCacheService";
 
 export class MemoryCacheAdaptor extends AbstractCacheService {
   static data: Record<string, Record<string, unknown>> = {};
 
-  constructor(prefix: string, configService: ConfigService) {
-    super(prefix, configService);
+  constructor(prefix: string, configApiService: ConfigApiService) {
+    super(prefix, configApiService);
     MemoryCacheAdaptor.data[this.prefix] = {};
   }
 

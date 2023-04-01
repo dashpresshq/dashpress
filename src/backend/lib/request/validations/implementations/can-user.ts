@@ -1,5 +1,5 @@
 import { ForbiddenError, progammingError } from "backend/lib/errors";
-import { rolesService } from "backend/roles/roles.service";
+import { rolesApiService } from "backend/roles/roles.service";
 import { userFriendlyCase } from "shared/lib/strings";
 import { USER_PERMISSIONS } from "shared/constants/user";
 import { ValidationImplType } from "./types";
@@ -21,7 +21,9 @@ export const canUserValidationImpl: ValidationImplType<void> = async (
     !Object.values(USER_PERMISSIONS).includes(requiredPermission)
   );
 
-  if (!(await rolesService.canRoleDoThis(req.user.role, requiredPermission))) {
+  if (
+    !(await rolesApiService.canRoleDoThis(req.user.role, requiredPermission))
+  ) {
     throw new ForbiddenError(
       `${ERROR_MESSAGE}: (${userFriendlyCase(requiredPermission)})`
     );

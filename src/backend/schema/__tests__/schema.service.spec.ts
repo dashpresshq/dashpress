@@ -1,13 +1,13 @@
-import { credentialsService } from "backend/integrations-configurations";
+import { credentialsApiService } from "backend/integrations-configurations";
 import { createConfigDomainPersistenceService } from "backend/lib/config-persistence";
 import { IDBSchema } from "shared/types/db";
-import { configurationService } from "backend/configuration/configuration.service";
+import { configurationApiService } from "backend/configuration/configuration.service";
 import {
   setupAppConfigTestData,
   setupCredentialsTestData,
 } from "__tests__/api/_test-utils";
 import { getDbConnection } from "backend/lib/connection/db";
-import { SchemasService } from "../schema.service";
+import { SchemasApiService } from "../schema.service";
 
 const setupTestDatabaseData = async (modified: boolean) => {
   const connection = await getDbConnection(
@@ -67,10 +67,10 @@ describe("SchemaService", () => {
   });
 
   it("should introspect database correctly when there is no schema data", async () => {
-    const schemasService = new SchemasService(
+    const schemasService = new SchemasApiService(
       schemaPersistenceService,
-      credentialsService,
-      configurationService
+      credentialsApiService,
+      configurationApiService
     );
 
     expect(JSON.parse(JSON.stringify(await schemasService.getDBSchema())))
@@ -164,10 +164,10 @@ describe("SchemaService", () => {
   });
 
   it("should not introspect database when schema data already exists when `forceIntrospection` is `false`", async () => {
-    const schemasService = new SchemasService(
+    const schemasService = new SchemasApiService(
       schemaPersistenceService,
-      credentialsService,
-      configurationService
+      credentialsApiService,
+      configurationApiService
     );
 
     await setupTestDatabaseData(true);
@@ -176,10 +176,10 @@ describe("SchemaService", () => {
   });
 
   it("should introspect database when schema data already exists when `forceIntrospection` is `true`", async () => {
-    const schemasService = new SchemasService(
+    const schemasService = new SchemasApiService(
       schemaPersistenceService,
-      credentialsService,
-      configurationService
+      credentialsApiService,
+      configurationApiService
     );
 
     await setupAppConfigTestData({

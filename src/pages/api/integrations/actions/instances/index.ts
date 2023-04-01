@@ -1,5 +1,5 @@
 import { USER_PERMISSIONS } from "shared/constants/user";
-import { actionsController } from "backend/actions/actions.controller";
+import { actionsApiController } from "backend/actions/actions.controller";
 import { requestHandler } from "backend/lib/request";
 
 export default requestHandler(
@@ -12,7 +12,7 @@ export default requestHandler(
         },
       ]);
 
-      return await actionsController.instantiateAction(
+      return await actionsApiController.instantiateAction(
         validatedRequest.requestBody
       );
     },

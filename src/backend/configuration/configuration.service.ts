@@ -11,7 +11,7 @@ import {
   AppConfigurationKeys,
 } from "../../shared/configurations";
 
-export class ConfigurationService implements IApplicationService {
+export class ConfigurationApiService implements IApplicationService {
   constructor(
     private _appConfigPersistenceService: AbstractConfigDataPersistenceService<unknown>
   ) {}
@@ -69,6 +69,6 @@ export class ConfigurationService implements IApplicationService {
 const appConfigPersistenceService =
   createConfigDomainPersistenceService("app-config");
 
-export const configurationService = new ConfigurationService(
+export const configurationApiService = new ConfigurationApiService(
   appConfigPersistenceService
 );

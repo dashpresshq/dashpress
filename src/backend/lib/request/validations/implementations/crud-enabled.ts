@@ -4,8 +4,8 @@ import {
   NotFoundError,
   progammingError,
 } from "backend/lib/errors";
-import { configurationService } from "backend/configuration/configuration.service";
-import { rolesService } from "backend/roles/roles.service";
+import { configurationApiService } from "backend/configuration/configuration.service";
+import { rolesApiService } from "backend/roles/roles.service";
 import { META_USER_PERMISSIONS } from "shared/constants/user";
 import { GranularEntityPermissions } from "shared/types/user";
 import { getEntityFromRequest, ERROR_MESSAGE } from "./entity";
@@ -70,7 +70,7 @@ export const crudEnabledValidationImpl: ValidationImplType<void> = async (
   if (
     EntityCrudCheck[actionType].entityCrudField &&
     !(
-      await configurationService.show<IEntityCrudSettings>(
+      await configurationApiService.show<IEntityCrudSettings>(
         "entity_crud_settings",
         entity
       )
@@ -82,7 +82,7 @@ export const crudEnabledValidationImpl: ValidationImplType<void> = async (
   }
 
   if (
-    !(await rolesService.canRoleDoThis(
+    !(await rolesApiService.canRoleDoThis(
       req.user.role,
       META_USER_PERMISSIONS.APPLIED_CAN_ACCESS_ENTITY(
         entity,

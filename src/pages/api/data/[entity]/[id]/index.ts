@@ -1,5 +1,5 @@
 import { DataActionType } from "shared/configurations";
-import { dataController } from "../../../../../backend/data/data.controller";
+import { dataApiController } from "../../../../../backend/data/data.controller";
 import { requestHandler } from "../../../../../backend/lib/request";
 
 export default requestHandler({
@@ -13,7 +13,7 @@ export default requestHandler({
       },
     ]);
 
-    return await dataController.showData(
+    return await dataApiController.showData(
       validatedRequest.entity,
       validatedRequest.entityId
     );
@@ -28,7 +28,7 @@ export default requestHandler({
         options: DataActionType.Update,
       },
     ]);
-    return await dataController.updateData(
+    return await dataApiController.updateData(
       validatedRequest.entity,
       validatedRequest.entityId,
       validatedRequest.entityRequestBody
@@ -43,7 +43,7 @@ export default requestHandler({
         options: DataActionType.Delete,
       },
     ]);
-    return await dataController.deleteData(
+    return await dataApiController.deleteData(
       validatedRequest.entity,
       validatedRequest.entityId
     );

@@ -1,4 +1,4 @@
-import { rolesController } from "backend/roles/roles.controller";
+import { rolesApiController } from "backend/roles/roles.controller";
 import { USER_PERMISSIONS } from "shared/constants/user";
 import { requestHandler } from "../../../../backend/lib/request";
 
@@ -13,7 +13,7 @@ export default requestHandler(
           options: REQUEST_QUERY_FIELD,
         },
       ]);
-      return await rolesController.getRolePermissions(
+      return await rolesApiController.getRolePermissions(
         validatedRequest.requestQuery
       );
     },
@@ -29,7 +29,7 @@ export default requestHandler(
           options: {},
         },
       ]);
-      return await rolesController.removePermissions(
+      return await rolesApiController.removePermissions(
         validatedRequest.requestQuery,
         validatedRequest.requestBody
       );
@@ -46,7 +46,7 @@ export default requestHandler(
           options: {},
         },
       ]);
-      return await rolesController.addPermissions(
+      return await rolesApiController.addPermissions(
         validatedRequest.requestQuery,
         validatedRequest.requestBody
       );

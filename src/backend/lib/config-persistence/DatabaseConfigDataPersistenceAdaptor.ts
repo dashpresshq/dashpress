@@ -1,5 +1,5 @@
 import { Knex } from "knex";
-import { ConfigKeys, ConfigService } from "../config/config.service";
+import { ConfigKeys, ConfigApiService } from "../config/config.service";
 import { getDbConnection } from "../connection/db";
 import { AbstractConfigDataPersistenceService } from "./AbstractConfigDataPersistenceService";
 import { ConfigDomain } from "./types";
@@ -11,29 +11,33 @@ export class DatabaseConfigDataPersistenceAdaptor<
 > extends AbstractConfigDataPersistenceService<T> {
   static _dbInstance: Record<string, Knex | null> = {};
 
+  constructor(configDomain: ConfigDomain, _configApiService: ConfigApiService) {
+    super(configDomain, _configApiService);
+  }
+
   async getDbInstance(): Promise<Knex> {
-    if (DatabaseConfigDataPersistenceAdaptor._dbInstance[this.configDomain]) {
+    if (DatabaseConfigDataPersistenceAdaptor._dbInstance[this._configDomain]) {
       return DatabaseConfigDataPersistenceAdaptor._dbInstance[
-        this.configDomain
+        this._configDomain
       ];
     }
 
-    DatabaseConfigDataPersistenceAdaptor._dbInstance[this.configDomain] =
+    DatabaseConfigDataPersistenceAdaptor._dbInstance[this._configDomain] =
       await getDbConnection(
-        this.configService.getConfigValue(
+        this._configApiService.getConfigValue(
           ConfigKeys.CONFIG_ADAPTOR_CONNECTION_STRING
         )
       );
 
     if (
       !(await DatabaseConfigDataPersistenceAdaptor._dbInstance[
-        this.configDomain
-      ].schema.hasTable(CONFIG_TABLE_PREFIX(this.configDomain)))
+        this._configDomain
+      ].schema.hasTable(CONFIG_TABLE_PREFIX(this._configDomain)))
     ) {
       await DatabaseConfigDataPersistenceAdaptor._dbInstance[
-        this.configDomain
+        this._configDomain
       ].schema.createTableIfNotExists(
-        CONFIG_TABLE_PREFIX(this.configDomain),
+        CONFIG_TABLE_PREFIX(this._configDomain),
         (table) => {
           table.increments("id");
           table.string("key").notNullable().unique();
@@ -42,11 +46,7 @@ export class DatabaseConfigDataPersistenceAdaptor<
       );
     }
 
-    return DatabaseConfigDataPersistenceAdaptor._dbInstance[this.configDomain];
-  }
-
-  constructor(configDomain: ConfigDomain, _configService: ConfigService) {
-    super(configDomain, _configService);
+    return DatabaseConfigDataPersistenceAdaptor._dbInstance[this._configDomain];
   }
 
   async setup() {
@@ -57,13 +57,13 @@ export class DatabaseConfigDataPersistenceAdaptor<
     // TODO get those keys and delete only those key
     await (
       await this.getDbInstance()
-    )(CONFIG_TABLE_PREFIX(this.configDomain)).del();
+    )(CONFIG_TABLE_PREFIX(this._configDomain)).del();
   }
 
   async getAllAsKeyValuePair(): Promise<Record<string, T>> {
     const query = (await this.getDbInstance())
       .select(["value", "key"])
-      .from(CONFIG_TABLE_PREFIX(this.configDomain));
+      .from(CONFIG_TABLE_PREFIX(this._configDomain));
 
     const items = await query;
 
@@ -80,7 +80,7 @@ export class DatabaseConfigDataPersistenceAdaptor<
     const query = (await this.getDbInstance())
       .select(["value", "key"])
       .whereIn("key", itemIds)
-      .from(CONFIG_TABLE_PREFIX(this.configDomain));
+      .from(CONFIG_TABLE_PREFIX(this._configDomain));
 
     const items = await query;
 
@@ -90,7 +90,7 @@ export class DatabaseConfigDataPersistenceAdaptor<
   async getItem(key: string) {
     const connection = await this.getDbInstance();
     const queryResponse = await connection
-      .table(CONFIG_TABLE_PREFIX(this.configDomain))
+      .table(CONFIG_TABLE_PREFIX(this._configDomain))
       .select(["value"])
       .where({ key })
       .first();
@@ -105,7 +105,7 @@ export class DatabaseConfigDataPersistenceAdaptor<
   async persistItem(key: string, value: T) {
     const affectedRowsCount = await (
       await this.getDbInstance()
-    )(CONFIG_TABLE_PREFIX(this.configDomain))
+    )(CONFIG_TABLE_PREFIX(this._configDomain))
       .where({ key })
       .update({
         value: JSON.stringify(value),
@@ -113,7 +113,7 @@ export class DatabaseConfigDataPersistenceAdaptor<
     if (affectedRowsCount === 0) {
       await (
         await this.getDbInstance()
-      )(CONFIG_TABLE_PREFIX(this.configDomain)).insert({
+      )(CONFIG_TABLE_PREFIX(this._configDomain)).insert({
         key,
         value: JSON.stringify(value),
       });
@@ -121,7 +121,7 @@ export class DatabaseConfigDataPersistenceAdaptor<
   }
 
   async removeItem(key: string): Promise<void> {
-    await (await this.getDbInstance())(CONFIG_TABLE_PREFIX(this.configDomain))
+    await (await this.getDbInstance())(CONFIG_TABLE_PREFIX(this._configDomain))
       .where({ key })
       .del();
   }
@@ -129,7 +129,7 @@ export class DatabaseConfigDataPersistenceAdaptor<
   async saveAllItems(keyField: keyof T, values: T[]) {
     await (
       await this.getDbInstance()
-    )(CONFIG_TABLE_PREFIX(this.configDomain)).insert(
+    )(CONFIG_TABLE_PREFIX(this._configDomain)).insert(
       values.map((value) => ({
         key: value[keyField],
         value: JSON.stringify(value),

@@ -1,6 +1,6 @@
 import {
-  entitiesService,
-  EntitiesService,
+  entitiesApiService,
+  EntitiesApiService,
 } from "backend/entities/entities.service";
 import {
   createConfigDomainPersistenceService,
@@ -9,10 +9,10 @@ import {
 import { IApplicationService } from "backend/types";
 import { HOME_DASHBOARD_KEY, IWidgetConfig } from "shared/types/dashboard";
 import {
-  listOrderService,
-  ListOrderService,
+  listOrderApiService,
+  ListOrderApiService,
 } from "backend/list-order/list-order.service";
-import { rolesService, RolesService } from "backend/roles/roles.service";
+import { rolesApiService, RolesApiService } from "backend/roles/roles.service";
 import { IValueLabel } from "@hadmean/chromista/dist/types";
 import { userFriendlyCase } from "shared/lib/strings";
 import { nanoid } from "nanoid";
@@ -24,12 +24,12 @@ import {
   PORTAL_DASHBOARD_PERMISSION,
 } from "./portal";
 
-export class DashboardWidgetsService implements IApplicationService {
+export class DashboardWidgetsApiService implements IApplicationService {
   constructor(
     private readonly _dashboardWidgetsPersistenceService: AbstractConfigDataPersistenceService<IWidgetConfig>,
-    private readonly _entitiesService: EntitiesService,
-    private readonly _listOrderService: ListOrderService,
-    private readonly _rolesService: RolesService
+    private readonly _entitiesApiService: EntitiesApiService,
+    private readonly _listOrderApiService: ListOrderApiService,
+    private readonly _rolesApiService: RolesApiService
   ) {}
 
   async bootstrap() {
@@ -37,11 +37,11 @@ export class DashboardWidgetsService implements IApplicationService {
   }
 
   private async generateDefaultDashboardWidgets(dashboardId: string) {
-    const entitiesToShow = await this._entitiesService.getActiveEntities();
+    const entitiesToShow = await this._entitiesApiService.getActiveEntities();
 
     const defaultWidgets = await mutateGeneratedDashboardWidgets(
       await this.generateDashboardWidgets(entitiesToShow, (entity) =>
-        this._entitiesService.getEntityFirstFieldType(entity, "date")
+        this._entitiesApiService.getEntityFirstFieldType(entity, "date")
       )
     );
 
@@ -54,7 +54,7 @@ export class DashboardWidgetsService implements IApplicationService {
 
     const widgetList = defaultWidgets.map(({ id }) => id);
 
-    await this._listOrderService.upsertOrder(dashboardId, widgetList);
+    await this._listOrderApiService.upsertOrder(dashboardId, widgetList);
 
     return defaultWidgets;
   }
@@ -101,7 +101,9 @@ export class DashboardWidgetsService implements IApplicationService {
   };
 
   private async listDashboardWidgetsToShow(dashboardId: string) {
-    const widgetList = await this._listOrderService.getItemOrder(dashboardId);
+    const widgetList = await this._listOrderApiService.getItemOrder(
+      dashboardId
+    );
     if (widgetList.length === 0) {
       return await this.generateDefaultDashboardWidgets(dashboardId);
     }
@@ -111,7 +113,7 @@ export class DashboardWidgetsService implements IApplicationService {
         widgetList
       )) as IWidgetConfig[];
 
-    return this._listOrderService.sortByOrder(widgetList, widgets);
+    return this._listOrderApiService.sortByOrder(widgetList, widgets);
   }
 
   async listDashboardWidgets(
@@ -120,7 +122,7 @@ export class DashboardWidgetsService implements IApplicationService {
   ): Promise<IWidgetConfig[]> {
     if (
       dashboardId !== HOME_DASHBOARD_KEY &&
-      !(await this._rolesService.canRoleDoThis(
+      !(await this._rolesApiService.canRoleDoThis(
         userRole,
         PORTAL_DASHBOARD_PERMISSION(dashboardId, false)
       ))
@@ -130,7 +132,7 @@ export class DashboardWidgetsService implements IApplicationService {
       );
     }
 
-    return await this._rolesService.filterPermittedEntities(
+    return await this._rolesApiService.filterPermittedEntities(
       userRole,
       await this.listDashboardWidgetsToShow(dashboardId),
       "entity"
@@ -143,11 +145,11 @@ export class DashboardWidgetsService implements IApplicationService {
       widget
     );
 
-    await this._listOrderService.appendToList(dashboardId, widget.id);
+    await this._listOrderApiService.appendToList(dashboardId, widget.id);
   }
 
   async updateWidgetList(dashboardId: string, widgetList: string[]) {
-    await this._listOrderService.upsertOrder(dashboardId, widgetList);
+    await this._listOrderApiService.upsertOrder(dashboardId, widgetList);
   }
 
   async updateWidget(widgetId: string, widget: IWidgetConfig) {
@@ -158,16 +160,16 @@ export class DashboardWidgetsService implements IApplicationService {
   async removeWidget(widgetId: string, dashboardId: string) {
     await this._dashboardWidgetsPersistenceService.removeItem(widgetId);
 
-    await this._listOrderService.removeFromList(dashboardId, widgetId);
+    await this._listOrderApiService.removeFromList(dashboardId, widgetId);
   }
 }
 
 const dashboardWidgetsPersistenceService =
   createConfigDomainPersistenceService<IWidgetConfig>("dashboard-widgets");
 
-export const dashboardWidgetsService = new DashboardWidgetsService(
+export const dashboardWidgetsApiService = new DashboardWidgetsApiService(
   dashboardWidgetsPersistenceService,
-  entitiesService,
-  listOrderService,
-  rolesService
+  entitiesApiService,
+  listOrderApiService,
+  rolesApiService
 );

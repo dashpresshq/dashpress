@@ -1,20 +1,20 @@
 import { BadRequestError } from "backend/lib/errors";
 import { IntegrationsConfigurationGroup } from "shared/types/integrations";
-import { credentialsService } from "./services/credentials.service";
+import { credentialsApiService } from "./services/credentials.service";
 import {
-  appConstantsService,
-  environmentVariablesService,
+  appConstantsApiService,
+  environmentVariablesApiService,
 } from "./services/env-variable.service";
 import {
-  IntegrationsConfigurationService,
+  IntegrationsConfigurationApiService,
   INTEGRATION_CONFIG_GROUP_DEMILITER,
 } from "./services/_base";
 
-export class IntegrationsConfigurationController {
+export class IntegrationsConfigurationApiController {
   constructor(
-    private _appConstantsService: IntegrationsConfigurationService,
-    private _environmentVariablesService: IntegrationsConfigurationService,
-    private _credentialsService: IntegrationsConfigurationService
+    private _appConstantsApiService: IntegrationsConfigurationApiService,
+    private _environmentVariablesApiService: IntegrationsConfigurationApiService,
+    private _credentialsApiService: IntegrationsConfigurationApiService
   ) {}
 
   async upsert(
@@ -64,31 +64,32 @@ export class IntegrationsConfigurationController {
     return await Promise.all(
       items.map(async ({ key, value }) => ({
         key,
-        value: await this._credentialsService.processDataAfterFetch(value),
+        value: await this._credentialsApiService.processDataAfterFetch(value),
       }))
     );
   }
 
   private isKeyAGroupKey(key: string) {
-    return key.includes(IntegrationsConfigurationService.GROUP_DEMILITER);
+    return key.includes(IntegrationsConfigurationApiService.GROUP_DEMILITER);
   }
 
   private getService(group: IntegrationsConfigurationGroup) {
     const groupImplementation: Record<
       IntegrationsConfigurationGroup,
-      IntegrationsConfigurationService
+      IntegrationsConfigurationApiService
     > = {
-      [IntegrationsConfigurationGroup.Constants]: this._appConstantsService,
-      [IntegrationsConfigurationGroup.Env]: this._environmentVariablesService,
-      [IntegrationsConfigurationGroup.Credentials]: this._credentialsService,
+      [IntegrationsConfigurationGroup.Constants]: this._appConstantsApiService,
+      [IntegrationsConfigurationGroup.Env]:
+        this._environmentVariablesApiService,
+      [IntegrationsConfigurationGroup.Credentials]: this._credentialsApiService,
     };
     return groupImplementation[group];
   }
 }
 
-export const integrationsConfigurationController =
-  new IntegrationsConfigurationController(
-    appConstantsService,
-    environmentVariablesService,
-    credentialsService
+export const integrationsConfigurationApiController =
+  new IntegrationsConfigurationApiController(
+    appConstantsApiService,
+    environmentVariablesApiService,
+    credentialsApiService
   );

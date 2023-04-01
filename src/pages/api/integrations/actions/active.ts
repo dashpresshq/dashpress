@@ -1,11 +1,11 @@
 import { USER_PERMISSIONS } from "shared/constants/user";
-import { actionsController } from "backend/actions/actions.controller";
+import { actionsApiController } from "backend/actions/actions.controller";
 import { requestHandler } from "backend/lib/request";
 
 export default requestHandler(
   {
     GET: async () => {
-      return await actionsController.listActivatedActions();
+      return await actionsApiController.listActivatedActions();
     },
   },
   [

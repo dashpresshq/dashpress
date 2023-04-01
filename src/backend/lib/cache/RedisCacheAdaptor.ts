@@ -1,13 +1,13 @@
 import { RedisClientType } from "redis";
-import { ConfigKeys, ConfigService } from "../config/config.service";
+import { ConfigKeys, ConfigApiService } from "../config/config.service";
 import { getRedisConnection } from "../connection/redis";
 import { AbstractCacheService } from "./AbstractCacheService";
 
 export class RedisCacheAdaptor extends AbstractCacheService {
   private redisConnection: RedisClientType;
 
-  constructor(prefix: string, configService: ConfigService) {
-    super(prefix, configService);
+  constructor(prefix: string, _configApiService: ConfigApiService) {
+    super(prefix, _configApiService);
   }
 
   async getRedisInstance() {
@@ -15,7 +15,7 @@ export class RedisCacheAdaptor extends AbstractCacheService {
       return this.redisConnection;
     }
     this.redisConnection = await getRedisConnection(
-      this.configService.getConfigValue(
+      this._configApiService.getConfigValue(
         ConfigKeys.CACHE_ADAPTOR_CONNECTION_STRING
       )
     );

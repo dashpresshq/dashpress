@@ -1,10 +1,10 @@
 import {
-  credentialsService,
-  CredentialsService,
+  credentialsApiService,
+  CredentialsApiService,
 } from "backend/integrations-configurations";
 import { getDbConnection } from "backend/lib/connection/db";
 import { BadRequestError } from "backend/lib/errors";
-import { usersService, UsersService } from "backend/users/users.service";
+import { usersApiService, UsersApiService } from "backend/users/users.service";
 import { ISetupCheck } from "shared/types/auth";
 import { IAccountUser, SystemRoles } from "shared/types/user";
 import { IDataSourceCredentials } from "shared/types/data-sources";
@@ -15,16 +15,16 @@ export type IAccountUserSetupFields = Pick<
   "name" | "username" | "password"
 >;
 
-export class SetupController {
+export class SetupApiController {
   constructor(
-    private _usersService: UsersService,
-    private _credentialsService: CredentialsService
+    private _usersApiService: UsersApiService,
+    private _credentialsApiService: CredentialsApiService
   ) {}
 
   async check(): Promise<ISetupCheck> {
     const [hasDbCredentials, hasUsers] = await Promise.all([
-      this._credentialsService.hasGroupKey(DATABASE_CREDENTIAL_GROUP),
-      this._usersService.hasUsers(),
+      this._credentialsApiService.hasGroupKey(DATABASE_CREDENTIAL_GROUP),
+      this._usersApiService.hasUsers(),
     ]);
 
     return {
@@ -34,20 +34,22 @@ export class SetupController {
   }
 
   async setUpFirstUser(user: IAccountUserSetupFields) {
-    if (await this._usersService.hasUsers()) {
+    if (await this._usersApiService.hasUsers()) {
       throw new BadRequestError("Primary user already setup");
     }
 
-    await this._usersService.registerUser({
+    await this._usersApiService.registerUser({
       ...user,
       role: SystemRoles.Creator,
     });
 
-    return await this._usersService.tryAuthenticate(user);
+    return await this._usersApiService.tryAuthenticate(user);
   }
 
   async setUpDBCredentials(dbCredentials: IDataSourceCredentials) {
-    if (await this._credentialsService.hasGroupKey(DATABASE_CREDENTIAL_GROUP)) {
+    if (
+      await this._credentialsApiService.hasGroupKey(DATABASE_CREDENTIAL_GROUP)
+    ) {
       throw new BadRequestError(
         "Primary database credentials already configured"
       );
@@ -61,14 +63,14 @@ export class SetupController {
       );
     }
 
-    await this._credentialsService.upsertGroup(
+    await this._credentialsApiService.upsertGroup(
       DATABASE_CREDENTIAL_GROUP,
       dbCredentials as unknown as Record<string, string>
     );
   }
 }
 
-export const setupController = new SetupController(
-  usersService,
-  credentialsService
+export const setupApiController = new SetupApiController(
+  usersApiService,
+  credentialsApiService
 );

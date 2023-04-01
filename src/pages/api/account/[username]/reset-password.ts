@@ -1,4 +1,4 @@
-import { usersController } from "backend/users/users.controller";
+import { usersApiController } from "backend/users/users.controller";
 import { RESET_PASSWORD_FORM_SCHEMA } from "shared/form-schemas/users/reset-password";
 import { USER_PERMISSIONS } from "shared/constants/user";
 import { requestHandler } from "../../../../backend/lib/request";
@@ -16,7 +16,7 @@ export default requestHandler(
           options: "username",
         },
       ]);
-      return await usersController.resetPassword(
+      return await usersApiController.resetPassword(
         validatedRequest.requestQuery,
         validatedRequest.requestBody
       );

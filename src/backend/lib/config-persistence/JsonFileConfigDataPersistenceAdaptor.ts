@@ -1,7 +1,7 @@
 import fs from "fs-extra";
 import noop from "lodash/noop";
 import path from "path";
-import { ConfigService } from "../config/config.service";
+import { ConfigApiService } from "../config/config.service";
 
 import { AbstractConfigDataPersistenceService } from "./AbstractConfigDataPersistenceService";
 import { ConfigDomain } from "./types";
@@ -9,8 +9,8 @@ import { ConfigDomain } from "./types";
 export class JsonFileConfigDataPersistenceAdaptor<
   T
 > extends AbstractConfigDataPersistenceService<T> {
-  constructor(configDomain: ConfigDomain, configService: ConfigService) {
-    super(configDomain, configService);
+  constructor(configDomain: ConfigDomain, configApiService: ConfigApiService) {
+    super(configDomain, configApiService);
   }
 
   async setup() {
@@ -19,7 +19,7 @@ export class JsonFileConfigDataPersistenceAdaptor<
 
   private pathToConfigDomain = (type: ConfigDomain) => {
     const file =
-      this.configService.getNodeEnvironment() === "test"
+      this._configApiService.getNodeEnvironment() === "test"
         ? `${type}.test.json`
         : `${type}.json`;
     return path.resolve(
@@ -30,13 +30,13 @@ export class JsonFileConfigDataPersistenceAdaptor<
   };
 
   async resetToEmpty() {
-    fs.removeSync(this.pathToConfigDomain(this.configDomain));
+    fs.removeSync(this.pathToConfigDomain(this._configDomain));
   }
 
   private async getDomainData(): Promise<Record<string, T>> {
     try {
       return (
-        (await fs.readJson(this.pathToConfigDomain(this.configDomain), {
+        (await fs.readJson(this.pathToConfigDomain(this._configDomain), {
           throws: false,
         })) || {}
       );
@@ -46,7 +46,7 @@ export class JsonFileConfigDataPersistenceAdaptor<
   }
 
   private async persist(data: Record<string, T>) {
-    await fs.outputJSON(this.pathToConfigDomain(this.configDomain), data, {
+    await fs.outputJSON(this.pathToConfigDomain(this._configDomain), data, {
       spaces: 2,
     });
   }

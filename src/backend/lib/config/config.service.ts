@@ -5,7 +5,7 @@ import { ConfigKeys } from "./types";
 
 export { ConfigKeys };
 
-export class ConfigService {
+export class ConfigApiService {
   static isInitialized = false;
 
   // eslint-disable-next-line no-undef
@@ -29,10 +29,10 @@ export class ConfigService {
   }
 
   assertConfiguration() {
-    if (ConfigService.isInitialized) {
+    if (ConfigApiService.isInitialized) {
       return;
     }
-    ConfigService.isInitialized = true;
+    ConfigApiService.isInitialized = true;
     const newEnvEntries: { key: ConfigKeys; value: string }[] = [];
 
     Object.entries(ConfigBag).forEach(([key, configBag]) => {
@@ -74,4 +74,4 @@ export class ConfigService {
   }
 }
 
-export const configService = new ConfigService(process.env);
+export const configApiService = new ConfigApiService(process.env);

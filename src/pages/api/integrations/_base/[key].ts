@@ -1,6 +1,6 @@
 import { USER_PERMISSIONS } from "shared/constants/user";
 import { requestHandler } from "backend/lib/request";
-import { integrationsConfigurationController } from "backend/integrations-configurations/integrations-configurations.controller";
+import { integrationsConfigurationApiController } from "backend/integrations-configurations/integrations-configurations.controller";
 import { IAppliedSchemaFormConfig } from "shared/form-schemas/types";
 import { IntegrationsConfigurationGroup } from "shared/types/integrations";
 
@@ -38,7 +38,7 @@ export const integrationsConfigurationDetailsRequestHandler = (
             options: UPSERT_INTEGRATION_VALUE_FORM_SCHEMA,
           },
         ]);
-        return await integrationsConfigurationController.upsert(
+        return await integrationsConfigurationApiController.upsert(
           group,
           validatedRequest.requestQuery,
           validatedRequest.requestBody
@@ -51,7 +51,7 @@ export const integrationsConfigurationDetailsRequestHandler = (
             options: REQUEST_KEY_FIELD,
           },
         ]);
-        return await integrationsConfigurationController.delete(
+        return await integrationsConfigurationApiController.delete(
           group,
           validatedRequest.requestQuery
         );

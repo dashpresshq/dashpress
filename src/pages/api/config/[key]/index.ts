@@ -1,5 +1,5 @@
 import { USER_PERMISSIONS } from "shared/constants/user";
-import { configurationController } from "backend/configuration/configuration.controller";
+import { configurationApiController } from "backend/configuration/configuration.controller";
 import { requestHandler } from "backend/lib/request";
 
 export default requestHandler(
@@ -7,7 +7,7 @@ export default requestHandler(
     GET: async (getValidatedRequest) => {
       const validatedRequest = await getValidatedRequest(["configKey"]);
 
-      return await configurationController.showConfig(
+      return await configurationApiController.showConfig(
         validatedRequest.configKey
       );
     },
@@ -17,7 +17,7 @@ export default requestHandler(
         "configBody",
       ]);
 
-      return await configurationController.upsertConfig(
+      return await configurationApiController.upsertConfig(
         validatedRequest.configKey,
         validatedRequest.configBody
       );

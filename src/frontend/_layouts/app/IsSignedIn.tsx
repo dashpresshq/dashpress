@@ -26,7 +26,7 @@ const useUserAuthCheck = () => {
   return userAuthenticatedState;
 };
 
-export function LayoutCheck({ children }: { children: ReactNode }) {
+export function IsSignedIn({ children }: { children: ReactNode }) {
   useAppTheme();
   const userAuthenticatedState = useUserAuthCheck();
 

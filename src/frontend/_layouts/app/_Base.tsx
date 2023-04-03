@@ -1,5 +1,6 @@
 import {
   Breadcrumbs,
+  ComponentIsLoading,
   DropDownMenu,
   IDropDownMenuItem,
   Spacer,
@@ -16,7 +17,7 @@ import { GitHub, Globe, Twitter, Users } from "react-feather";
 import { useSiteConfig } from "../../hooks/app/site.config";
 import { GoogleTagManager } from "../scripts/GoogleTagManager";
 
-export { LayoutCheck } from "./Check";
+export { IsSignedIn } from "./IsSignedIn";
 
 export interface IBaseLayoutProps {
   children: ReactNode;
@@ -44,7 +45,7 @@ export function BaseLayout({
     store.secondaryActionItems,
   ]);
 
-  usePageRequiresPermission(permission);
+  const isLoading = usePageRequiresPermission(permission);
 
   useEffect(() => {
     pushToStack();
@@ -60,6 +61,10 @@ export function BaseLayout({
     ...secondaryActionItems,
     ...pageSecondaryActionItems,
   ];
+
+  if (isLoading) {
+    return <ComponentIsLoading />;
+  }
 
   return (
     <>

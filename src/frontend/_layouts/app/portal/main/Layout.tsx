@@ -3,7 +3,7 @@ import React from "react";
 import { User } from "react-feather";
 import { useSiteConfig } from "frontend/hooks/app/site.config";
 import { useSelectionViews } from "./useSelectionViews";
-import { BaseLayout, IBaseLayoutProps, LayoutCheck } from "../../_Base";
+import { BaseLayout, IBaseLayoutProps, IsSignedIn } from "../../_Base";
 import { ROOT_LINKS_TO_CLEAR_BREADCRUMBS } from "../../constants";
 
 export function AppLayout({
@@ -15,7 +15,7 @@ export function AppLayout({
   const siteConfig = useSiteConfig();
 
   return (
-    <LayoutCheck>
+    <IsSignedIn>
       <DynamicLayout
         logo={siteConfig.logo}
         selectionView={selectionViews}
@@ -34,6 +34,6 @@ export function AppLayout({
           {children}
         </BaseLayout>
       </DynamicLayout>
-    </LayoutCheck>
+    </IsSignedIn>
   );
 }

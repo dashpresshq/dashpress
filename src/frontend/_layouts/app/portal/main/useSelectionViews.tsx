@@ -5,6 +5,7 @@ import { useUserHasPermission } from "frontend/hooks/auth/user.store";
 import { useUserActiveEntities } from "../../../../hooks/entity/entity.store";
 import { ROOT_LINKS_TO_CLEAR_BREADCRUMBS } from "../../constants";
 import { IAppMenuItems } from "../../types";
+import { useAppendPortalMenuItems } from "../../appendPortalMenuItems/portal";
 
 export const useSelectionViews = (): IAppMenuItems[] => {
   const activeEntities = useUserActiveEntities();
@@ -15,6 +16,8 @@ export const useSelectionViews = (): IAppMenuItems[] => {
   const activeEntituesLabelsMap = Object.fromEntries(
     (activeEntities.data || []).map(({ value, label }) => [value, label])
   );
+
+  const appendPortalMenuItems = useAppendPortalMenuItems();
 
   const menuItems: IAppMenuItems[] = [
     {
@@ -79,7 +82,7 @@ export const useSelectionViews = (): IAppMenuItems[] => {
     },
   ];
 
-  return menuItems
+  return appendPortalMenuItems(menuItems)
     .filter(({ isPermissionAllowed, notFinished }) => {
       if (notFinished) {
         return process.env.NEXT_PUBLIC_SHOW_UNFINISHED_FEATURES;

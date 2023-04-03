@@ -71,13 +71,16 @@ export function useUserHasPermission(): (permision: string) => boolean {
 function useUserPermission(): (permision: string) => boolean | "loading" {
   const userProfile = useAuthenticatedUserBag();
 
-  return (permission: string): boolean | "loading" => {
-    return doPermissionCheck(
-      permission,
-      userProfile.isLoading,
-      userProfile.data
-    );
-  };
+  return useCallback(
+    (permission: string): boolean | "loading" => {
+      return doPermissionCheck(
+        permission,
+        userProfile.isLoading,
+        userProfile.data
+      );
+    },
+    [userProfile.isLoading, userProfile.data]
+  );
 }
 
 export function usePageRequiresPermission(

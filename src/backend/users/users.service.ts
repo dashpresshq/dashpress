@@ -10,7 +10,8 @@ import { BadRequestError, ForbiddenError } from "backend/lib/errors";
 import { HashService } from "backend/lib/hash/hash.service";
 import { IApplicationService } from "backend/types";
 import { IAccountUser, IAccountProfile } from "shared/types/user";
-import { ISuccessfullAuthenticationResponse } from "shared/types/auth";
+import { ISuccessfullAuthenticationResponse } from "shared/types/auth/portal";
+import { getPortalAuthenticationResponse } from "./portal";
 
 const INVALID_LOGIN_MESSAGE = "Invalid Login";
 
@@ -25,12 +26,24 @@ export class UsersApiService implements IApplicationService {
     password: string;
   }): Promise<ISuccessfullAuthenticationResponse> {
     try {
-      const user = await this.checkUserPassword(authCredentials);
-      delete user.password;
-      return { token: await this._authTokenApiService.sign(user) };
+      await this.checkUserPassword(authCredentials);
+      return await getPortalAuthenticationResponse(
+        authCredentials.username,
+        this.generateAuthTokenForUsername
+      );
     } catch (error) {
       throw new ForbiddenError(INVALID_LOGIN_MESSAGE);
     }
+  }
+
+  async generateAuthTokenForUsername(
+    username: string
+  ): Promise<ISuccessfullAuthenticationResponse> {
+    const user = await this._usersPersistenceService.getItemOrFail(username);
+
+    delete user.password;
+
+    return { token: await this._authTokenApiService.sign(user) };
   }
 
   async bootstrap() {

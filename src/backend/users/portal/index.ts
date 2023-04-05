@@ -1,0 +1,1 @@
+export { getPortalAuthenticationResponse } from "./main";

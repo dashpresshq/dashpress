@@ -7,7 +7,7 @@ import { useAuthenticateUser } from "frontend/hooks/auth/useAuthenticateUser";
 import { SETUP_CHECK_URL } from "frontend/hooks/setup/setup.store";
 import { useMutation } from "react-query";
 import { ISetupUserForm } from "shared/form-schemas/setup/user";
-import { ISuccessfullAuthenticationResponse } from "shared/types/auth";
+import { ISuccessfullAuthenticationResponse } from "shared/types/auth/portal";
 import { IDataSourceCredentials } from "shared/types/data-sources";
 
 export function useSetupCredentialsMutation() {

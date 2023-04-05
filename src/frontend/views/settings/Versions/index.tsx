@@ -9,7 +9,7 @@ import { SETTINGS_VIEW_KEY } from "../constants";
 
 export function VersionInfo() {
   useSetPageDetails({
-    pageTitle: "Version Information",
+    pageTitle: "System Information",
     viewKey: SETTINGS_VIEW_KEY,
     permission: USER_PERMISSIONS.CAN_CONFIGURE_APP,
   });
@@ -20,13 +20,13 @@ export function VersionInfo() {
 
   return (
     <BaseSettingsLayout>
-      <SectionBox title="Version Information">
+      <SectionBox title="System Information">
         <ViewStateMachine
           loading={systemVersions.isLoading}
           error={systemVersions.error}
           loader={
             <>
-              {Array.from({ length: 2 }, (_, k) => k).map((key) => (
+              {Array.from({ length: 4 }, (_, k) => k).map((key) => (
                 <Fragment key={key}>
                   <BaseSkeleton height="18px" width="100px" bottom={8} />
                   <BaseSkeleton height="20px" bottom={16} />

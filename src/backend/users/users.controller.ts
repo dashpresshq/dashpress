@@ -4,6 +4,7 @@ import { REQUEST_ERROR_CODES } from "shared/constants/auth";
 import { ISignInForm } from "shared/form-schemas/auth/signin";
 import { IChangePasswordForm } from "shared/form-schemas/profile/password";
 import { IResetPasswordForm } from "shared/form-schemas/users/reset-password";
+import { ISuccessfullAuthenticationResponse } from "shared/types/auth/portal";
 import {
   IAccountProfile,
   IAccountUser,
@@ -18,7 +19,9 @@ export class UsersApiController {
     private _rolesService: RolesApiService
   ) {}
 
-  async login(authCredentials: ISignInForm) {
+  async login(
+    authCredentials: ISignInForm
+  ): Promise<ISuccessfullAuthenticationResponse> {
     return await this._usersService.tryAuthenticate(authCredentials);
   }
 

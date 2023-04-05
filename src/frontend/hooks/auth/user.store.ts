@@ -16,6 +16,7 @@ export function useAuthenticatedUserBag() {
   const isAuthenticated = useIsAuthenticatedStore(
     (store) => store.isAuthenticated
   );
+
   return useStorageApi<IAuthenticatedUserBag>(AUTHENTICATED_ACCOUNT_URL, {
     errorMessage: dataNotFoundMessage("Your account details"),
     enabled: isAuthenticated === true,

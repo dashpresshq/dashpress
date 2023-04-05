@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { makePostRequest, ToastService } from "@hadmean/protozoa";
 import { useMutation } from "react-query";
 import { AuthLayout } from "frontend/_layouts/guest";
-import { ISuccessfullAuthenticationResponse } from "shared/types/auth";
+import { ISuccessfullAuthenticationResponse } from "shared/types/auth/portal";
 import { useRouter } from "next/router";
 import { NAVIGATION_LINKS } from "frontend/lib/routing";
 import { useSetupCheck } from "frontend/hooks/setup/setup.store";
@@ -13,15 +13,21 @@ import {
   useUserAuthenticatedState,
 } from "frontend/hooks/auth/useAuthenticateUser";
 import { SignInForm } from "./Form";
+import { useHandleNoTokenAuthResponse } from "./portal";
 
 function useSignInMutation() {
   const authenticateUser = useAuthenticateUser();
+  const handleNoTokenAuthResponse = useHandleNoTokenAuthResponse();
   return useMutation(
     async (values: ISignInForm) =>
       await makePostRequest(`/api/auth/signin`, values),
     {
       onSuccess: (data: ISuccessfullAuthenticationResponse, formData) => {
-        authenticateUser(data.token, formData.rememberMe);
+        if (data.token) {
+          authenticateUser(data.token, formData.rememberMe);
+          return;
+        }
+        handleNoTokenAuthResponse(data, formData);
       },
       onError: (error: { message: string }) => {
         ToastService.error(error.message);

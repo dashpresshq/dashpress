@@ -60,7 +60,7 @@ export function BaseSettingsLayout({ children }: IProps) {
     },
     {
       action: NAVIGATION_LINKS.SETTINGS.VERSIONS,
-      name: "Version Info",
+      name: "System Info",
       IconComponent: Terminal,
     },
   ];

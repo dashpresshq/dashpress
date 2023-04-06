@@ -2,11 +2,11 @@ import { ConfigKeys, configApiService } from "../config/config.service";
 import { AbstractCacheService } from "./AbstractCacheService";
 import { MemoryCacheAdaptor } from "./MemoryCacheAdaptor";
 import { RedisCacheAdaptor } from "./RedisCacheAdaptor";
-import { CacheAdaptorTypes } from "./types";
+import { CacheAdaptorTypes, CacheDomain } from "./types";
 
 export { AbstractCacheService };
 
-export function createCacheService(prefix: "permission"): AbstractCacheService {
+export function createCacheService(prefix: CacheDomain): AbstractCacheService {
   const configBag: Record<CacheAdaptorTypes, AbstractCacheService> = {
     [CacheAdaptorTypes.Memory]: new MemoryCacheAdaptor(
       prefix,

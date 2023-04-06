@@ -10,7 +10,7 @@ import {
   useUpsertConfigurationMutation,
 } from "frontend/hooks/configuration/configuration.store";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
-import { ISiteSettings } from "frontend/hooks/app/site.config";
+import { ISiteSettings } from "shared/types/config";
 import { BaseSettingsLayout } from "../_Base";
 import { SiteSettingsForm } from "./Form";
 import { SETTINGS_VIEW_KEY } from "../constants";

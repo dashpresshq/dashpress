@@ -17,9 +17,9 @@ export abstract class AbstractCacheService {
     return `${this.prefix}:${key}`;
   }
 
-  protected abstract pullItem<T>(key: string): Promise<T | undefined>;
+  abstract pullItem<T>(key: string): Promise<T | undefined>;
 
-  protected abstract persistData(key: string, data: unknown): Promise<void>;
+  abstract persistData(key: string, data: unknown): Promise<void>;
 
   abstract clearItem(key: string): Promise<void>;
 

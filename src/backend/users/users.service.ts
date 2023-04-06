@@ -29,7 +29,7 @@ export class UsersApiService implements IApplicationService {
       await this.checkUserPassword(authCredentials);
       return await getPortalAuthenticationResponse(
         authCredentials.username,
-        this.generateAuthTokenForUsername
+        () => this.generateAuthTokenForUsername(authCredentials.username)
       );
     } catch (error) {
       throw new ForbiddenError(INVALID_LOGIN_MESSAGE);

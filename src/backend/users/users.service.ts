@@ -1,24 +1,18 @@
-import {
-  AuthTokenApiService,
-  authTokenApiService,
-} from "backend/lib/auth-token/auth-token.service";
-import {
-  createConfigDomainPersistenceService,
-  AbstractConfigDataPersistenceService,
-} from "backend/lib/config-persistence";
+import { AbstractConfigDataPersistenceService } from "backend/lib/config-persistence";
 import { BadRequestError, ForbiddenError } from "backend/lib/errors";
 import { HashService } from "backend/lib/hash/hash.service";
 import { IApplicationService } from "backend/types";
 import { IAccountUser, IAccountProfile } from "shared/types/user";
 import { ISuccessfullAuthenticationResponse } from "shared/types/auth/portal";
 import { getPortalAuthenticationResponse } from "./portal";
+import { generateAuthTokenForUsername } from "./utils";
+import { usersPersistenceService } from "./shared";
 
 const INVALID_LOGIN_MESSAGE = "Invalid Login";
 
 export class UsersApiService implements IApplicationService {
   constructor(
-    private readonly _usersPersistenceService: AbstractConfigDataPersistenceService<IAccountUser>,
-    private readonly _authTokenApiService: AuthTokenApiService
+    private readonly _usersPersistenceService: AbstractConfigDataPersistenceService<IAccountUser>
   ) {}
 
   async tryAuthenticate(authCredentials: {
@@ -29,21 +23,11 @@ export class UsersApiService implements IApplicationService {
       await this.checkUserPassword(authCredentials);
       return await getPortalAuthenticationResponse(
         authCredentials.username,
-        () => this.generateAuthTokenForUsername(authCredentials.username)
+        () => generateAuthTokenForUsername(authCredentials.username)
       );
     } catch (error) {
       throw new ForbiddenError(INVALID_LOGIN_MESSAGE);
     }
-  }
-
-  async generateAuthTokenForUsername(
-    username: string
-  ): Promise<ISuccessfullAuthenticationResponse> {
-    const user = await this._usersPersistenceService.getItemOrFail(username);
-
-    delete user.password;
-
-    return { token: await this._authTokenApiService.sign(user) };
   }
 
   async bootstrap() {
@@ -158,10 +142,4 @@ export class UsersApiService implements IApplicationService {
   }
 }
 
-const usersPersistenceService =
-  createConfigDomainPersistenceService<IAccountUser>("users");
-
-export const usersApiService = new UsersApiService(
-  usersPersistenceService,
-  authTokenApiService
-);
+export const usersApiService = new UsersApiService(usersPersistenceService);

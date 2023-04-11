@@ -5,16 +5,21 @@ import { NAVIGATION_LINKS } from "frontend/lib/routing";
 import { useRouter } from "next/router";
 import { Field, Form } from "react-final-form";
 import { ITableTab } from "shared/types/data";
-import { IWidgetConfig } from "shared/types/dashboard";
+import { IWidgetConfig, WidgetSizes } from "shared/types/dashboard";
 import { ILabelValue } from "types";
 import { ROYGBIV } from "shared/constants/colors";
 import { useEntityFields } from "frontend/hooks/entity/entity.store";
 import { IconInputField } from "frontend/components/IconInputField";
+import {
+  PORTAL_WIDGET_SIZES,
+  PortalDashboardTypesOptions,
+} from "../widgets/portal";
 
 const DashboardTypesOptions: {
   label: string;
   value: IWidgetConfig["_type"];
 }[] = [
+  ...PortalDashboardTypesOptions,
   {
     label: "Summary Card",
     value: "summary-card",
@@ -24,6 +29,26 @@ const DashboardTypesOptions: {
     value: "table",
   },
 ];
+
+const SIZES: { value: WidgetSizes; label: string }[] = [
+  {
+    label: "Large",
+    value: "4",
+  },
+  {
+    label: "Medium",
+    value: "2",
+  },
+  {
+    label: "Small",
+    value: "1",
+  },
+];
+
+const HEIGHTS = [150, 250, 350, 450].map((value) => ({
+  value: `${value}`,
+  label: `${value}`,
+}));
 
 export function DashboardWidgetForm({
   onSubmit,
@@ -45,6 +70,8 @@ export function DashboardWidgetForm({
         const dateFields = (entityFields.data || [])
           .filter(({ type }) => type === "date")
           .map(({ name }) => ({ value: name, label: name }));
+
+        const defaultWidgetSizes = PORTAL_WIDGET_SIZES[values._type];
 
         return (
           <form onSubmit={handleSubmit}>
@@ -135,6 +162,32 @@ export function DashboardWidgetForm({
                   )}
                 </Field>
               </>
+            )}
+
+            {defaultWidgetSizes?.size && (
+              <Field name="size" validateFields={[]}>
+                {({ input, meta }) => (
+                  <FormSelect
+                    label="Size"
+                    selectData={SIZES}
+                    meta={meta}
+                    input={input}
+                  />
+                )}
+              </Field>
+            )}
+
+            {defaultWidgetSizes?.height && (
+              <Field name="height" validateFields={[]}>
+                {({ input, meta }) => (
+                  <FormSelect
+                    label="Height"
+                    selectData={HEIGHTS}
+                    meta={meta}
+                    input={input}
+                  />
+                )}
+              </Field>
             )}
 
             <FormButton

@@ -3,45 +3,47 @@ import { forwardRef } from "react";
 import { IWidgetSettingProps } from "@hadmean/chromista";
 import { SummaryWidget } from "./Summary";
 import { TableWidget } from "./Table";
-import { useWidgetNavigationLink } from "./useWidgetNavigationLink";
-import { TableRoot, Root } from "../styles";
+import { WidgetRoot } from "../styles";
+import { PortalDashboardWidget } from "./portal";
+import { WidgetFrame } from "./_components/WidgetFrame";
 
 interface IProps {
   config: IWidgetConfig;
   setting?: IWidgetSettingProps;
 }
 
-export const DashboardWidget = forwardRef<HTMLInputElement, IProps>(
+export const DashboardWidget = forwardRef<HTMLDivElement, IProps>(
   ({ config, setting }, ref) => {
-    const rootProps = {
-      ref,
-      hasSetting: !!setting,
-      "aria-label": `${config.title} Widget`,
-    };
-
-    const navigationLink = useWidgetNavigationLink(
-      config.entity,
-      config.queryId
-    );
-
-    const sharedWidgetProps = {
-      setting,
-      link: navigationLink,
-    };
-
     switch (config._type) {
       case "summary-card":
         return (
-          <Root {...rootProps}>
-            <SummaryWidget {...sharedWidgetProps} config={config} />
-          </Root>
+          <WidgetRoot
+            size="1"
+            {...{
+              ref,
+              hasSetting: !!setting,
+              "aria-label": `${config.title} Widget`,
+            }}
+          >
+            <SummaryWidget setting={setting} config={config} />
+          </WidgetRoot>
         );
 
       case "table":
         return (
-          <TableRoot {...rootProps}>
-            <TableWidget {...sharedWidgetProps} config={config} />
-          </TableRoot>
+          <WidgetFrame
+            config={config}
+            ref={ref}
+            type={config._type}
+            setting={setting}
+          >
+            <TableWidget config={config} />
+          </WidgetFrame>
+        );
+
+      default:
+        return (
+          <PortalDashboardWidget config={config} setting={setting} ref={ref} />
         );
     }
   }

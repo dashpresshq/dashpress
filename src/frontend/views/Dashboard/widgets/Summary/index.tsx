@@ -9,13 +9,15 @@ import { systemIconToSVG } from "shared/constants/Icons";
 import { IWidgetProps } from "../types";
 import { getFullAndRelativeCount } from "./getFullAndRelativeCount";
 import { useDashboardRelativeDayStore } from "../../relativeTime.store";
+import { useWidgetNavigationLink } from "../useWidgetNavigationLink";
 
 export function SummaryWidget({
   config,
   setting,
-  link,
 }: IWidgetProps<ISummaryWidgetConfig>) {
   const { queryId, entity, color, dateField, icon } = config;
+
+  const navigationLink = useWidgetNavigationLink(entity, queryId);
 
   const entityViews = useEntityConfiguration<ITableTab[]>(
     "entity_views",
@@ -64,7 +66,7 @@ export function SummaryWidget({
     <SummaryWidgetPresentation
       color={ROYGBIV[color]}
       setting={setting}
-      link={link}
+      link={navigationLink}
       title={config.title}
       icon={fullIcon}
       fullCount={fullCount$1}

@@ -1,6 +1,6 @@
 import { BaseSkeleton, TableSkeleton, StyledCard } from "@hadmean/chromista";
 import styled from "styled-components";
-import { gridRoot, TableRoot } from "./styles";
+import { gridRoot, WidgetRoot } from "./styles";
 
 const Root = styled.div`
   ${gridRoot};
@@ -20,9 +20,9 @@ export function DashboardSkeleton() {
         <BaseSkeleton height="100px" />
       </Root>
       <Root>
-        <TableRoot hasSetting={false}>
+        <WidgetRoot size="4" hasSetting={false}>
           <TableSkeleton />
-        </TableRoot>
+        </WidgetRoot>
       </Root>
     </StyledCard>
   );

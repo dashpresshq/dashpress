@@ -34,12 +34,14 @@ describe("pages/admin/settings/dashboard", () => {
       | "Date Field"
       | "Icon"
       | "Query";
-    const options: Record<
-      IWidgetConfig["_type"],
-      {
-        fields: Record<FormLabels, boolean>;
-        label: string;
-      }
+    const options: Partial<
+      Record<
+        IWidgetConfig["_type"],
+        {
+          fields: Record<FormLabels, boolean>;
+          label: string;
+        }
+      >
     > = {
       "summary-card": {
         label: "Summary Card",

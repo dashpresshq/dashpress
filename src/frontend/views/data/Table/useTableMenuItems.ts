@@ -19,8 +19,6 @@ export const useTableMenuItems = (entity: string): IDropDownMenuItem[] => {
 
   const pluginTableMenuItems = usePluginTableMenuItems();
 
-  const menuItems = pluginTableMenuItems;
-
   if (
     entityCrudSettings.data?.create &&
     userHasPermission(
@@ -30,7 +28,7 @@ export const useTableMenuItems = (entity: string): IDropDownMenuItem[] => {
       )
     )
   ) {
-    menuItems.push({
+    pluginTableMenuItems.push({
       id: "add",
       order: 1,
       label: `Add New ${entityDiction.singular}`,
@@ -41,5 +39,5 @@ export const useTableMenuItems = (entity: string): IDropDownMenuItem[] => {
     });
   }
 
-  return menuItems;
+  return pluginTableMenuItems;
 };

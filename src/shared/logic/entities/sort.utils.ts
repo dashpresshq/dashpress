@@ -3,7 +3,7 @@ export function sortByList<
   K extends keyof T
 >(inputArray: T[], sortList: string[], key: K) {
   if (sortList.length === 0) {
-    return;
+    return inputArray;
   }
   const sortMap = Object.fromEntries(
     sortList.map((item, index) => [item, index + 1])
@@ -14,4 +14,6 @@ export function sortByList<
       (sortMap[a[key] as string] || Infinity) -
       (sortMap[b[key] as string] || Infinity)
   );
+
+  return inputArray;
 }

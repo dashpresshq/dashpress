@@ -7,8 +7,8 @@ import { rolesApiService, RolesApiService } from "backend/roles/roles.service";
 import { IApplicationService } from "backend/types";
 import noop from "lodash/noop";
 import { IDBSchema, IEntityField, IEntityRelation } from "shared/types/db";
+import { sortByList } from "shared/logic/entities/sort.utils";
 import { SchemasApiService, schemasApiService } from "../schema/schema.service";
-import { sortByList } from "./utils";
 
 export class EntitiesApiService implements IApplicationService {
   constructor(

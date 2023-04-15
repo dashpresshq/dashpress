@@ -1,4 +1,4 @@
-import { sortByList } from "../utils";
+import { sortByList } from "../sort.utils";
 
 describe("Sort By List", () => {
   it("should sort list by provided key", () => {

@@ -3,6 +3,7 @@ import { ISharedWidgetConfig } from "./base";
 
 export interface ITableWidgetConfig extends ISharedWidgetConfig {
   _type: "table";
+  limit?: number;
 }
 
 export interface ISummaryWidgetConfig extends ISharedWidgetConfig {

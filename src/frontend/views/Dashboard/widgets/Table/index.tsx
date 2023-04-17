@@ -19,7 +19,7 @@ export function TableWidget({ config }: IWidgetProps<ITableWidgetConfig>) {
   return (
     <EntityTableView
       entity={entityViews.isLoading ? SLUG_LOADING_VALUE : entity}
-      defaultTableState={{ ...dataState, pageSize: 5 }}
+      defaultTableState={{ ...dataState, pageSize: config.limit || 5 }}
       lean
       border
     />

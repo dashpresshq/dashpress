@@ -1,19 +1,24 @@
-import { FormButton, FormInput, FormSelect } from "@hadmean/chromista";
+import {
+  FormButton,
+  FormInput,
+  FormNumberInput,
+  FormSelect,
+} from "@hadmean/chromista";
 import { required, IFormProps } from "@hadmean/protozoa";
 import { useEntityConfiguration } from "frontend/hooks/configuration/configuration.store";
 import { NAVIGATION_LINKS } from "frontend/lib/routing";
 import { useRouter } from "next/router";
 import { Field, Form } from "react-final-form";
 import { ITableTab } from "shared/types/data";
-import { IWidgetConfig, WidgetSizes } from "shared/types/dashboard";
+import { ISummaryWidgetConfig, IWidgetConfig } from "shared/types/dashboard";
 import { ILabelValue } from "types";
 import { ROYGBIV } from "shared/constants/colors";
 import { useEntityFields } from "frontend/hooks/entity/entity.store";
 import { IconInputField } from "frontend/components/IconInputField";
-import {
-  PORTAL_WIDGET_SIZES,
-  PortalDashboardTypesOptions,
-} from "../widgets/portal";
+import { PortalDashboardTypesOptions } from "../widgets/portal";
+import { DASHBOARD_WIDGET_HEIGHTS, DASHBOARD_WIDGET_SIZES } from "./constants";
+import { WidgetFormField } from "./types";
+import { PortalFormFields, PortalFormSchema } from "./portal";
 
 const DashboardTypesOptions: {
   label: string;
@@ -30,25 +35,11 @@ const DashboardTypesOptions: {
   },
 ];
 
-const SIZES: { value: WidgetSizes; label: string }[] = [
-  {
-    label: "Large",
-    value: "4",
-  },
-  {
-    label: "Medium",
-    value: "2",
-  },
-  {
-    label: "Small",
-    value: "1",
-  },
-];
-
-const HEIGHTS = [150, 250, 350, 450].map((value) => ({
-  value: `${value}`,
-  label: `${value}`,
-}));
+const FormSchema: Partial<Record<IWidgetConfig["_type"], WidgetFormField[]>> = {
+  "summary-card": ["entity", "queryId", "color", "icon", "dateField"],
+  table: ["entity", "queryId", "height", "size", "limit"],
+  ...PortalFormSchema,
+};
 
 export function DashboardWidgetForm({
   onSubmit,
@@ -71,7 +62,7 @@ export function DashboardWidgetForm({
           .filter(({ type }) => type === "date")
           .map(({ name }) => ({ value: name, label: name }));
 
-        const defaultWidgetSizes = PORTAL_WIDGET_SIZES[values._type];
+        const formFields = FormSchema[values._type] || [];
 
         return (
           <form onSubmit={handleSubmit}>
@@ -80,6 +71,7 @@ export function DashboardWidgetForm({
                 <FormInput required label="Title" meta={meta} input={input} />
               )}
             </Field>
+
             <Field name="_type" validate={required} validateFields={[]}>
               {({ input, meta }) => (
                 <FormSelect
@@ -92,21 +84,21 @@ export function DashboardWidgetForm({
                 />
               )}
             </Field>
-
-            <Field name="entity" validate={required} validateFields={[]}>
-              {({ input, meta }) => (
-                <FormSelect
-                  required
-                  label="Entity"
-                  disabledOptions={[]}
-                  selectData={entities}
-                  meta={meta}
-                  input={input}
-                />
-              )}
-            </Field>
-
-            {values.entity && (
+            {formFields.includes("entity") && (
+              <Field name="entity" validate={required} validateFields={[]}>
+                {({ input, meta }) => (
+                  <FormSelect
+                    required
+                    label="Entity"
+                    disabledOptions={[]}
+                    selectData={entities}
+                    meta={meta}
+                    input={input}
+                  />
+                )}
+              </Field>
+            )}
+            {formFields.includes("queryId") && values.entity && (
               <Field name="queryId" validateFields={[]}>
                 {({ input, meta }) => (
                   <FormSelect
@@ -134,62 +126,74 @@ export function DashboardWidgetForm({
               </Field>
             )}
 
-            {values._type === "summary-card" && (
-              <>
-                <Field name="color" validate={required} validateFields={[]}>
-                  {({ input, meta }) => (
-                    <FormSelect
-                      label="Color"
-                      required
-                      selectData={Object.keys(ROYGBIV).map((value) => ({
-                        value,
-                        label: value,
-                      }))}
-                      meta={meta}
-                      input={input}
-                    />
-                  )}
-                </Field>
-                <IconInputField value={values.icon} />
-                <Field name="dateField" validateFields={[]}>
-                  {({ input, meta }) => (
-                    <FormSelect
-                      label="Date Field"
-                      selectData={dateFields}
-                      meta={meta}
-                      input={input}
-                    />
-                  )}
-                </Field>
-              </>
+            {formFields.includes("limit") && (
+              <Field name="limit" validateFields={[]}>
+                {({ input, meta }) => (
+                  <FormNumberInput
+                    required
+                    label="Limit"
+                    meta={meta}
+                    input={input}
+                  />
+                )}
+              </Field>
             )}
-
-            {defaultWidgetSizes?.size && (
+            <PortalFormFields formFields={formFields} />
+            {formFields.includes("color") && (
+              <Field name="color" validate={required} validateFields={[]}>
+                {({ input, meta }) => (
+                  <FormSelect
+                    label="Color"
+                    required
+                    selectData={Object.keys(ROYGBIV).map((value) => ({
+                      value,
+                      label: value,
+                    }))}
+                    meta={meta}
+                    input={input}
+                  />
+                )}
+              </Field>
+            )}
+            {formFields.includes("icon") && (
+              <IconInputField value={(values as ISummaryWidgetConfig)?.icon} />
+            )}
+            {formFields.includes("dateField") && (
+              <Field name="dateField" validateFields={[]}>
+                {({ input, meta }) => (
+                  <FormSelect
+                    label="Date Field"
+                    selectData={dateFields}
+                    meta={meta}
+                    input={input}
+                  />
+                )}
+              </Field>
+            )}
+            {formFields.includes("size") && (
               <Field name="size" validateFields={[]}>
                 {({ input, meta }) => (
                   <FormSelect
                     label="Size"
-                    selectData={SIZES}
+                    selectData={DASHBOARD_WIDGET_SIZES}
                     meta={meta}
                     input={input}
                   />
                 )}
               </Field>
             )}
-
-            {defaultWidgetSizes?.height && (
+            {formFields.includes("height") && (
               <Field name="height" validateFields={[]}>
                 {({ input, meta }) => (
                   <FormSelect
                     label="Height"
-                    selectData={HEIGHTS}
+                    selectData={DASHBOARD_WIDGET_HEIGHTS}
                     meta={meta}
                     input={input}
                   />
                 )}
               </Field>
             )}
-
             <FormButton
               text="Save"
               isMakingRequest={false}

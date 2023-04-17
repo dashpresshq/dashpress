@@ -8,7 +8,7 @@ import {
 import { WidgetRoot } from "frontend/views/Dashboard/styles";
 import { ReactNode, forwardRef } from "react";
 import { ISharedWidgetConfig } from "shared/types/dashboard/base";
-import { IWidgetConfig } from "shared/types/dashboard";
+import { IWidgetConfig, WidgetSizes } from "shared/types/dashboard";
 import { useWidgetNavigationLink } from "../../useWidgetNavigationLink";
 import { PORTAL_WIDGET_SIZES } from "../../portal";
 
@@ -23,6 +23,15 @@ interface IProps {
   type: IWidgetConfig["_type"];
 }
 
+const WIDGET_SIZES: Partial<
+  Record<IWidgetConfig["_type"], { size: WidgetSizes; height: number }>
+> = {
+  table: {
+    height: 250,
+    size: "4",
+  },
+};
+
 export const WidgetFrame = forwardRef<HTMLDivElement, IProps>(
   ({ children, setting, config, type }, ref) => {
     const navigationLink = useWidgetNavigationLink(
@@ -30,7 +39,9 @@ export const WidgetFrame = forwardRef<HTMLDivElement, IProps>(
       config.queryId
     );
 
-    const defaultWidgetSizes = PORTAL_WIDGET_SIZES[type];
+    const defaultWidgetSizes = { ...PORTAL_WIDGET_SIZES, ...WIDGET_SIZES }[
+      type
+    ];
 
     const height = config.height || defaultWidgetSizes.height;
 

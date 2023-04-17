@@ -50,6 +50,7 @@ export const WidgetFrame = forwardRef<HTMLDivElement, IProps>(
     return (
       <WidgetRoot
         ref={ref}
+        aria-label={`${config.title} Widget`}
         size={config.size || defaultWidgetSizes.size}
         hasSetting={!!setting}
       >

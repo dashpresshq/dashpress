@@ -18,7 +18,11 @@ export function EntityTableView({
   const columns = useTableColumns(entity, lean);
 
   const [currentState, overridePaginatedDataState, setPaginatedDataState] =
-    useTableState(`${entity}${tabKey}`, persitentFilters, defaultTableState);
+    useTableState(
+      `${entity}${tabKey}${lean ? "--lean" : ""}`,
+      persitentFilters,
+      defaultTableState
+    );
 
   const tableData = usePaginatedData(ENTITY_TABLE_PATH(entity), currentState, {
     enabled: entity && entity !== SLUG_LOADING_VALUE,

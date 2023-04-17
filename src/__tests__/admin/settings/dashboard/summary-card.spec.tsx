@@ -47,14 +47,14 @@ describe("pages/admin/settings/dashboard", () => {
       );
 
       await userEvent.type(
-        within(dialog).getByLabelText("Entity"),
-        "Plural entity-1"
+        within(dialog).getByLabelText("Type"),
+        "Summary Card"
       );
       await userEvent.keyboard("{Enter}");
 
       await userEvent.type(
-        within(dialog).getByLabelText("Type"),
-        "Summary Card"
+        within(dialog).getByLabelText("Entity"),
+        "Plural entity-1"
       );
       await userEvent.keyboard("{Enter}");
 

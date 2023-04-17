@@ -43,13 +43,13 @@ describe("pages/admin/settings/dashboard", () => {
         "New Table"
       );
 
+      await userEvent.type(within(dialog).getByLabelText("Type"), "Table");
+      await userEvent.keyboard("{Enter}");
+
       await userEvent.type(
         within(dialog).getByLabelText("Entity"),
         "Plural entity-1"
       );
-      await userEvent.keyboard("{Enter}");
-
-      await userEvent.type(within(dialog).getByLabelText("Type"), "Table");
       await userEvent.keyboard("{Enter}");
 
       await userEvent.type(

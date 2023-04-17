@@ -95,7 +95,7 @@ describe("pages/admin/settings/dashboard", () => {
       );
     });
 
-    it("should not order in the admin page", async () => {
+    it("should not be orderable in the admin page", async () => {
       render(
         <AppWrapper>
           <Dashboard />

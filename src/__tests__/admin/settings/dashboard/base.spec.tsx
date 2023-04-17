@@ -257,6 +257,9 @@ describe("pages/admin/settings/dashboard", () => {
         within(dialog).queryByRole("button", { name: "Manage Queries" })
       ).not.toBeInTheDocument();
 
+      await userEvent.type(within(dialog).getByLabelText("Type"), "Table");
+      await userEvent.keyboard("{Enter}");
+
       // Select an entity
       await userEvent.type(
         within(dialog).getByLabelText("Entity"),

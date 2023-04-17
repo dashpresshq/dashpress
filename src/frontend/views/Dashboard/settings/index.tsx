@@ -129,12 +129,7 @@ export function DashboardWidgetForm({
             {formFields.includes("limit") && (
               <Field name="limit" validateFields={[]}>
                 {({ input, meta }) => (
-                  <FormNumberInput
-                    required
-                    label="Limit"
-                    meta={meta}
-                    input={input}
-                  />
+                  <FormNumberInput label="Limit" meta={meta} input={input} />
                 )}
               </Field>
             )}

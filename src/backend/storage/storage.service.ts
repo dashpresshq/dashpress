@@ -107,7 +107,7 @@ export class StorageApiService implements IApplicationService {
 }
 
 const activatedStoragePersistenceService =
-  createConfigDomainPersistenceService<IActivatedStorage>("activated_storage");
+  createConfigDomainPersistenceService<IActivatedStorage>("activated-storage");
 
 export const storageApiService = new StorageApiService(
   activatedStoragePersistenceService,

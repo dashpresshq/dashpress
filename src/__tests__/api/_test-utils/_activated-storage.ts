@@ -15,7 +15,7 @@ export const setupActivatedStorageTestData = async (
 ) => {
   const configPersistenceService =
     createConfigDomainPersistenceService<IActivatedStorage>(
-      "activated_storage"
+      "activated-storage"
     );
 
   await configPersistenceService.resetState("key", testActivatedStorage);

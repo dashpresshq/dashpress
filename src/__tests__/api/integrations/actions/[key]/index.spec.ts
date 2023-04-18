@@ -16,7 +16,7 @@ jest.mock("nanoid", () => ({
 
 describe("/api/integrations/actions/[key]/index", () => {
   beforeAll(async () => {
-    await setupAllTestData(["activated_actions", "users"]);
+    await setupAllTestData(["activated-actions", "users"]);
 
     await setupActionInstanceTestData([
       {
@@ -348,7 +348,7 @@ describe("/api/integrations/actions/[key]/index", () => {
       expect(credentialsRes._getStatusCode()).toBe(404);
       expect(credentialsRes._getJSONData()).toMatchInlineSnapshot(`
               {
-                "message": "nano-id-1 not found for 'activated_actions'",
+                "message": "nano-id-1 not found for 'activated-actions'",
                 "method": "POST",
                 "name": "NotFoundError",
                 "path": "",

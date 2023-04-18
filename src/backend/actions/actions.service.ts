@@ -308,10 +308,10 @@ export class ActionsApiService implements IApplicationService {
 }
 
 const activatedActionsPersistenceService =
-  createConfigDomainPersistenceService<IActivatedAction>("activated_actions");
+  createConfigDomainPersistenceService<IActivatedAction>("activated-actions");
 
 const actionInstancesPersistenceService =
-  createConfigDomainPersistenceService<IActionInstance>("action_instances");
+  createConfigDomainPersistenceService<IActionInstance>("action-instances");
 
 export const actionsApiService = new ActionsApiService(
   activatedActionsPersistenceService,

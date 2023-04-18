@@ -18,7 +18,7 @@ export const setupActivatedActionTestData = async (
   testActivatedActions: IActivatedAction[] = TEST_ACTIVATED_ACTIONS
 ) => {
   const configPersistenceService =
-    createConfigDomainPersistenceService<IActivatedAction>("activated_actions");
+    createConfigDomainPersistenceService<IActivatedAction>("activated-actions");
 
   await configPersistenceService.resetState(
     "activationId",

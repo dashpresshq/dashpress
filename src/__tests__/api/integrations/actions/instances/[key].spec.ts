@@ -59,7 +59,7 @@ const TEST_ACTION_INSTANCES: IActionInstance[] = [
 
 describe("/api/integrations/actions/instances/[key]", () => {
   beforeAll(async () => {
-    await setupAllTestData(["activated_actions"]);
+    await setupAllTestData(["activated-actions"]);
     await setupActionInstanceTestData(TEST_ACTION_INSTANCES);
   });
 

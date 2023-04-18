@@ -6,7 +6,7 @@ import {
 
 describe("/api/integrations/storage/active", () => {
   beforeAll(async () => {
-    await setupAllTestData(["activated_storage"]);
+    await setupAllTestData(["activated-storage"]);
   });
 
   it("should show all activated storage", async () => {

@@ -7,7 +7,7 @@ import {
 
 describe("/api/integrations/storage/[key]/credentials", () => {
   beforeAll(async () => {
-    await setupAllTestData(["activated_storage", "users"]);
+    await setupAllTestData(["activated-storage", "users"]);
     await setupCredentialsTestData({
       RANDOM___accessKeyId:
         "aad0f7e776963ae66b7459222d54871433f8e119ab9a9712d4e82e8cbb77246e47a750a773c0ea316c110a1d3f2ee16c2509906fb89f1c4b039d09f139b1d7eacc26908c25137c46f269cfb13f63221da2f1631bf4f59cbe14cc18cbfb8993098bd7e2d865f20717",

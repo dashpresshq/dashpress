@@ -12,9 +12,9 @@ export type ConfigDomain =
   | "packages"
   | "list-order"
   | "temp-storage"
-  | "action_instances"
-  | "activated_actions"
-  | "activated_storage"
+  | "action-instances"
+  | "activated-actions"
+  | "activated-storage"
   | "roles";
 
 export enum ConfigAdaptorTypes {

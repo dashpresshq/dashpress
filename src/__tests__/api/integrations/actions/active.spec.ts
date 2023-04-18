@@ -6,7 +6,7 @@ import {
 
 describe("/api/integrations/actions/active", () => {
   beforeAll(async () => {
-    await setupAllTestData(["activated_actions"]);
+    await setupAllTestData(["activated-actions"]);
   });
 
   it("should show all activated actions in addition with HTTP", async () => {

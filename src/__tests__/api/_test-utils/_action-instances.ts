@@ -32,7 +32,7 @@ export const setupActionInstanceTestData = async (
   testActionInstances: IActionInstance[] = TEST_ACTION_INSTANCES
 ) => {
   const configPersistenceService =
-    createConfigDomainPersistenceService<IActionInstance>("action_instances");
+    createConfigDomainPersistenceService<IActionInstance>("action-instances");
 
   await configPersistenceService.resetState("instanceId", testActionInstances);
 };

@@ -21,6 +21,7 @@ import {
   EntitiesApiService,
   entitiesApiService,
 } from "../entities/entities.service";
+import { PortalDataHooksService } from "./portal";
 
 const DEFAULT_LIST_LIMIT = 50;
 
@@ -133,11 +134,24 @@ export class DataApiService implements IApplicationService {
 
     noop(entityValidations);
 
+    await PortalDataHooksService.beforeCreate({
+      dataAccessSevice: this.getDataAccessInstance(),
+      entity,
+      data,
+    });
+
     const id = await this.getDataAccessInstance().create(
       entity,
       this.returnOnlyDataThatAreAllowed(data, allowedFields),
       primaryField
     );
+
+    await PortalDataHooksService.afterCreate({
+      dataAccessSevice: this.getDataAccessInstance(),
+      entity,
+      data,
+      insertId: id,
+    });
 
     await this._actionsApiService.runAction(
       entity,
@@ -223,6 +237,13 @@ export class DataApiService implements IApplicationService {
 
     // const validations = runValidationError({})(data);
 
+    const beforeData = await PortalDataHooksService.beforeUpdate({
+      dataAccessSevice: this.getDataAccessInstance(),
+      entity,
+      data,
+      dataId: id,
+    });
+
     await this.getDataAccessInstance().update(
       entity,
       {
@@ -230,6 +251,14 @@ export class DataApiService implements IApplicationService {
       },
       this.returnOnlyDataThatAreAllowed(data, allowedFields)
     );
+
+    await PortalDataHooksService.afterUpdate({
+      dataAccessSevice: this.getDataAccessInstance(),
+      entity,
+      beforeData,
+      data,
+      dataId: id,
+    });
 
     await this._actionsApiService.runAction(
       entity,
@@ -245,8 +274,20 @@ export class DataApiService implements IApplicationService {
       async () => await this.showData(entity, id)
     );
 
-    return await this.getDataAccessInstance().delete(entity, {
+    await PortalDataHooksService.beforeDelete({
+      dataAccessSevice: this.getDataAccessInstance(),
+      entity,
+      dataId: id,
+    });
+
+    await this.getDataAccessInstance().delete(entity, {
       [await this._entitiesApiService.getEntityPrimaryField(entity)]: id,
+    });
+
+    await PortalDataHooksService.afterDelete({
+      dataAccessSevice: this.getDataAccessInstance(),
+      entity,
+      dataId: id,
     });
   }
 

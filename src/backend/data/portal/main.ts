@@ -1,85 +1,87 @@
-import { BaseDataAccessService } from "backend/data/data-access/_Base";
 import noop from "lodash/noop";
+import { IDataApiService } from "../types";
 
 export class PortalDataHooksService {
   static async beforeCreate({
     data,
-    dataAccessSevice,
+    dataApiService,
     entity,
   }: {
-    dataAccessSevice: BaseDataAccessService<unknown>;
+    dataApiService: IDataApiService;
     entity: string;
     data: Record<string, unknown>;
   }) {
-    noop(dataAccessSevice, entity, data);
+    noop(dataApiService, entity, data);
   }
 
   static async afterCreate({
     data,
-    dataAccessSevice,
+    dataApiService,
     entity,
     insertId,
   }: {
-    dataAccessSevice: BaseDataAccessService<unknown>;
+    dataApiService: IDataApiService;
     entity: string;
     data: Record<string, unknown>;
     insertId: string | number;
   }) {
-    noop(dataAccessSevice, entity, data, insertId);
+    noop(dataApiService, entity, data, insertId);
   }
 
   static async beforeUpdate({
     data,
-    dataAccessSevice,
+    dataApiService,
     dataId,
     entity,
   }: {
-    dataAccessSevice: BaseDataAccessService<unknown>;
+    dataApiService: IDataApiService;
     entity: string;
     data: Record<string, unknown>;
     dataId: string;
   }): Promise<Record<string, unknown>> {
-    noop(dataAccessSevice, entity, data, dataId);
+    noop(dataApiService, entity, data, dataId);
     return {};
   }
 
   static async afterUpdate({
     beforeData,
     data,
-    dataAccessSevice,
+    dataApiService,
     dataId,
     entity,
   }: {
-    dataAccessSevice: BaseDataAccessService<unknown>;
+    dataApiService: IDataApiService;
     entity: string;
     beforeData: Record<string, unknown>;
     data: Record<string, unknown>;
     dataId: string;
   }) {
-    noop(dataAccessSevice, entity, data, dataId, beforeData);
+    noop(dataApiService, entity, data, dataId, beforeData);
   }
 
   static async beforeDelete({
-    dataAccessSevice,
+    dataApiService,
     entity,
     dataId,
   }: {
-    dataAccessSevice: BaseDataAccessService<unknown>;
+    dataApiService: IDataApiService;
     entity: string;
     dataId: string;
   }) {
-    noop(dataAccessSevice, entity, dataId);
+    noop(dataApiService, entity, dataId);
   }
 
   static async afterDelete({
-    dataAccessSevice,
+    beforeData,
+    dataApiService,
     entity,
     dataId,
   }: {
-    dataAccessSevice: BaseDataAccessService<unknown>;
+    beforeData: void;
+    dataApiService: IDataApiService;
     entity: string;
     dataId: string;
   }) {
-    noop(dataAccessSevice, entity, dataId);
+    noop(dataApiService, entity, dataId, beforeData);
   }
 }

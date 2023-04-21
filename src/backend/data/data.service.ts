@@ -1,4 +1,3 @@
-import { IApplicationService } from "backend/types";
 import { NotFoundError, progammingError } from "backend/lib/errors";
 import { QueryFilter } from "shared/types/data";
 import {
@@ -12,7 +11,7 @@ import { IEntityField } from "shared/types/db";
 import { TemplateService } from "shared/lib/templates";
 import { FilterOperators } from "@hadmean/protozoa";
 import { rDBMSDataApiService, RDBMSDataApiService } from "./data-access/RDBMS";
-import { IPaginationFilters } from "./types";
+import { IDataApiService, IPaginationFilters } from "./types";
 import {
   ConfigurationApiService,
   configurationApiService,
@@ -27,7 +26,7 @@ const DEFAULT_LIST_LIMIT = 50;
 
 const GOOD_FIELD_TYPES_FOR_LIST: IEntityField["type"][] = ["enum", "string"];
 
-export class DataApiService implements IApplicationService {
+export class DataApiService implements IDataApiService {
   constructor(
     private _rDBMSDataService: RDBMSDataApiService,
     private _entitiesApiService: EntitiesApiService,
@@ -57,7 +56,7 @@ export class DataApiService implements IApplicationService {
     );
   }
 
-  private async show<T>(
+  async read<T>(
     entity: string,
     select: string[],
     query: Record<string, unknown>
@@ -75,7 +74,7 @@ export class DataApiService implements IApplicationService {
       this._entitiesApiService.getEntityPrimaryField(entity),
     ]);
 
-    const data = await this.show<Record<string, unknown>>(
+    const data = await this.read<Record<string, unknown>>(
       entity,
       relationshipSettings.fields,
       {
@@ -95,7 +94,7 @@ export class DataApiService implements IApplicationService {
       this.getAllowedCrudsFieldsToShow(entity, "hidden_entity_details_columns"),
       this._entitiesApiService.getEntityPrimaryField(entity),
     ]);
-    const data = await this.show<Record<string, unknown>>(
+    const data = await this.read<Record<string, unknown>>(
       entity,
       fieldsToShow,
       {
@@ -135,7 +134,7 @@ export class DataApiService implements IApplicationService {
     noop(entityValidations);
 
     await PortalDataHooksService.beforeCreate({
-      dataAccessSevice: this.getDataAccessInstance(),
+      dataApiService: this,
       entity,
       data,
     });
@@ -147,7 +146,7 @@ export class DataApiService implements IApplicationService {
     );
 
     await PortalDataHooksService.afterCreate({
-      dataAccessSevice: this.getDataAccessInstance(),
+      dataApiService: this,
       entity,
       data,
       insertId: id,
@@ -238,7 +237,7 @@ export class DataApiService implements IApplicationService {
     // const validations = runValidationError({})(data);
 
     const beforeData = await PortalDataHooksService.beforeUpdate({
-      dataAccessSevice: this.getDataAccessInstance(),
+      dataApiService: this,
       entity,
       data,
       dataId: id,
@@ -253,7 +252,7 @@ export class DataApiService implements IApplicationService {
     );
 
     await PortalDataHooksService.afterUpdate({
-      dataAccessSevice: this.getDataAccessInstance(),
+      dataApiService: this,
       entity,
       beforeData,
       data,
@@ -274,8 +273,8 @@ export class DataApiService implements IApplicationService {
       async () => await this.showData(entity, id)
     );
 
-    await PortalDataHooksService.beforeDelete({
-      dataAccessSevice: this.getDataAccessInstance(),
+    const beforeData = await PortalDataHooksService.beforeDelete({
+      dataApiService: this,
       entity,
       dataId: id,
     });
@@ -285,7 +284,8 @@ export class DataApiService implements IApplicationService {
     });
 
     await PortalDataHooksService.afterDelete({
-      dataAccessSevice: this.getDataAccessInstance(),
+      beforeData,
+      dataApiService: this,
       entity,
       dataId: id,
     });

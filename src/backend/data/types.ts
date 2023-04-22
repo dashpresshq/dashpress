@@ -1,3 +1,4 @@
+import { PaginatedData } from "@hadmean/protozoa";
 import { IApplicationService } from "backend/types";
 import { QueryFilter } from "shared/types/data";
 
@@ -39,9 +40,9 @@ export interface IDataApiService extends IApplicationService {
 
   referenceData(entity: string, id: string): Promise<string>;
 
-  paginateData(
+  tableData(
     entity: string,
     queryFilters: QueryFilter[],
     paginationFilters: IPaginationFilters
-  ): Promise<[unknown, number]>;
+  ): Promise<PaginatedData<unknown>>;
 }

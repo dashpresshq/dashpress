@@ -42,9 +42,7 @@ export class RDBMSDataApiService extends BaseDataAccessService<Knex.QueryBuilder
         DATABASE_CREDENTIAL_GROUP
       );
 
-    this._dbInstance = (await getDbConnection(
-      dbCredentials
-    )) as unknown as Knex;
+    this._dbInstance = await getDbConnection(dbCredentials);
 
     return this._dbInstance;
   }

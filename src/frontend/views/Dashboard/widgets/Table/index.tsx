@@ -1,6 +1,6 @@
 import { SLUG_LOADING_VALUE } from "@hadmean/protozoa";
 import { useEntityConfiguration } from "frontend/hooks/configuration/configuration.store";
-import { EntityTableView } from "frontend/views/data/Table/TableView";
+import { EntityDataTable } from "frontend/views/data/Table/DataTable/EntityDataTable";
 import { ITableTab } from "shared/types/data";
 import { ITableWidgetConfig } from "shared/types/dashboard";
 import { IWidgetProps } from "../types";
@@ -17,7 +17,7 @@ export function TableWidget({ config }: IWidgetProps<ITableWidgetConfig>) {
   )?.dataState;
 
   return (
-    <EntityTableView
+    <EntityDataTable
       entity={entityViews.isLoading ? SLUG_LOADING_VALUE : entity}
       defaultTableState={{ ...dataState, pageSize: config.limit || 5 }}
       lean

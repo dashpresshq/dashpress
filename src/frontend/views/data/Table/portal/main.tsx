@@ -1,9 +1,11 @@
 import { IDropDownMenuItem, ITableColumn } from "@hadmean/chromista";
 import noop from "lodash/noop";
 
-export const usePluginTableMenuItems = (): IDropDownMenuItem[] => {
+export const usePluginTableMenuItems = (
+  entity: string
+): IDropDownMenuItem[] => {
   const menuItems: IDropDownMenuItem[] = [];
-
+  noop(entity);
   return menuItems;
 };
 

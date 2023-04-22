@@ -11,7 +11,7 @@ import {
 } from "../../../hooks/entity/entity.config";
 import { DetailsCanvas } from "../Table/DetailsCanvas";
 import { TableTopComponent } from "../Table/portal";
-import { EntityTableView } from "../Table/TableView";
+import { EntityDataTable } from "../Table/DataTable/EntityDataTable";
 import { ENTITY_DETAILS_VIEW_KEY } from "./constants";
 import { DetailsLayout } from "./_Layout";
 
@@ -41,7 +41,7 @@ export function EntityRelationTable() {
     <DetailsLayout entity={parentEntity} menuKey={childEntity}>
       <TableTopComponent entity={childEntity} />
       <StyledCard>
-        <EntityTableView
+        <EntityDataTable
           entity={childEntity}
           persitentFilters={
             referenceField
@@ -63,4 +63,4 @@ export function EntityRelationTable() {
   );
 }
 
-// TODO const menuItems = useTableMenuItems(entity); and add default value link
+// TODO const menuItems = useTableMenuItems(childEntity); and add default value link

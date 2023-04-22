@@ -11,18 +11,11 @@ export class DataApiController {
     queryFilters: QueryFilter[],
     paginationFilters: IPaginationFilters
   ) {
-    const [data, totalRecords] = await this._dataApiService.paginateData(
+    return await this._dataApiService.tableData(
       entity,
       queryFilters,
       paginationFilters
     );
-
-    return {
-      data,
-      pageIndex: paginationFilters.page,
-      pageSize: paginationFilters.take,
-      totalRecords,
-    };
   }
 
   async listData(entity: string, searchValue?: string): Promise<ILabelValue[]> {

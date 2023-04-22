@@ -17,7 +17,7 @@ export const useTableMenuItems = (entity: string): IDropDownMenuItem[] => {
   const entityCrudSettings = useEntityCrudSettings(entity);
   const userHasPermission = useUserHasPermission();
 
-  const pluginTableMenuItems = usePluginTableMenuItems();
+  const pluginTableMenuItems = usePluginTableMenuItems(entity);
 
   if (
     entityCrudSettings.data?.create &&

@@ -14,6 +14,11 @@ export const getEntityFromRequest = (req: NextApiRequest) => {
 export const entityValidationImpl: ValidationImplType<string> = async (req) => {
   const entity = getEntityFromRequest(req);
 
+  // If no entity is provided, we assume that the request is for the app itself
+  if (!entity) {
+    return "";
+  }
+
   const [entityExists, isEntityDisabled] = await Promise.all([
     entitiesApiService.entityExist(entity),
     entitiesApiService.isEntityDisabled(entity),

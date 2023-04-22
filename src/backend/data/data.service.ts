@@ -9,7 +9,7 @@ import { IFieldValidationItem } from "shared/validations/types";
 import noop from "lodash/noop";
 import { IEntityField } from "shared/types/db";
 import { TemplateService } from "shared/lib/templates";
-import { FilterOperators } from "@hadmean/protozoa";
+import { FilterOperators, PaginatedData } from "@hadmean/protozoa";
 import { rDBMSDataApiService, RDBMSDataApiService } from "./data-access/RDBMS";
 import { IDataApiService, IPaginationFilters } from "./types";
 import {
@@ -21,6 +21,7 @@ import {
   entitiesApiService,
 } from "../entities/entities.service";
 import { PortalDataHooksService } from "./portal";
+import { makeTableData } from "./utils";
 
 const DEFAULT_LIST_LIMIT = 50;
 
@@ -195,25 +196,26 @@ export class DataApiService implements IDataApiService {
     });
   }
 
-  async paginateData(
+  async tableData(
     entity: string,
     queryFilters: QueryFilter[],
     paginationFilters: IPaginationFilters
-  ): Promise<[unknown, number]> {
-    const [data, totalRecords] = await Promise.all([
-      this.getDataAccessInstance().list(
-        entity,
-        await this.getAllowedCrudsFieldsToShow(
+  ): Promise<PaginatedData<unknown>> {
+    return makeTableData(
+      await Promise.all([
+        this.getDataAccessInstance().list(
           entity,
-          "hidden_entity_table_columns"
+          await this.getAllowedCrudsFieldsToShow(
+            entity,
+            "hidden_entity_table_columns"
+          ),
+          queryFilters,
+          paginationFilters
         ),
-        queryFilters,
-        paginationFilters
-      ),
-      this.getDataAccessInstance().count(entity, queryFilters),
-    ]);
-
-    return [data, totalRecords];
+        this.getDataAccessInstance().count(entity, queryFilters),
+      ]),
+      paginationFilters
+    );
   }
 
   async update(

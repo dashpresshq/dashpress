@@ -25,7 +25,7 @@ import {
   EntityActionTypes,
   useEntityActionMenuItems,
 } from "../../entity/constants";
-import { EntityTableView } from "./TableView";
+import { EntityDataTable } from "./DataTable/EntityDataTable";
 import { useTableMenuItems } from "./useTableMenuItems";
 import { DetailsCanvas } from "./DetailsCanvas";
 import { TableTopComponent } from "./portal";
@@ -101,7 +101,7 @@ export function EntityTable() {
 
                   return {
                     content: (
-                      <EntityTableView
+                      <EntityDataTable
                         entity={entity}
                         tabKey={title}
                         defaultTableState={dataState}
@@ -114,7 +114,7 @@ export function EntityTable() {
               )}
             />
           ) : (
-            <EntityTableView
+            <EntityDataTable
               entity={entity}
               defaultTableState={firstTabView.dataState}
             />

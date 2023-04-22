@@ -5,6 +5,11 @@ export const validateEntityFields = async (
   entity: string,
   fields: string[]
 ) => {
+  // If no entity is provided, we assume that the request is for the app itself
+  if (!entity) {
+    return;
+  }
+
   const entityFields = await entitiesApiService.getEntityFields(entity);
   fields.forEach((field) => {
     if (!entityFields.find(({ name }) => name === field)) {

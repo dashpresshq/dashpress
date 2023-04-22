@@ -2,14 +2,14 @@ import { DEFAULT_TABLE_STATE } from "@hadmean/chromista";
 import { IPaginatedDataState } from "@hadmean/protozoa";
 import { useEffect, useState } from "react";
 import { useSyncPaginatedDataState } from "../portal";
-import { ITableViewProps } from "../types";
+import { IDataTableProps } from "../types";
 import { useCurrentTableStateStore } from "./useCurrentTableState.store";
 import { useEntityContextState } from "./useEntityContextState";
 
 export const useTableState = (
   contextKey: string,
-  persitentFilters: ITableViewProps["persitentFilters"],
-  defaultTableState?: ITableViewProps["defaultTableState"]
+  persitentFilters: IDataTableProps["persitentFilters"],
+  defaultTableState?: IDataTableProps["defaultTableState"]
 ) => {
   // We want to key the entity state based on the entity since NextJS reuses the same component
   // For different entity views

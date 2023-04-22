@@ -1,11 +1,12 @@
 import { FormButton } from "@hadmean/chromista";
-import { resetFormValues, ToastService } from "@hadmean/protozoa";
+import { ToastService } from "@hadmean/protozoa";
 import { Field, Form } from "react-final-form";
 import {
   IAppliedSchemaFormConfig,
   ISchemaFormConfig,
 } from "shared/form-schemas/types";
 import { runValidationError } from "shared/validations/run";
+import { FormApi } from "final-form";
 import { RenderFormInput } from "./_RenderFormInput";
 import { userFriendlyCase } from "../../../shared/lib/strings";
 import { IFormExtension } from "./types";
@@ -21,6 +22,25 @@ interface IProps<T> {
   onChange?: (data: T) => void;
   resetForm?: true;
   formExtension?: Partial<IFormExtension>;
+}
+
+export function resetFormValues<T extends Record<string, unknown>>(
+  resetForm: boolean,
+  values: T,
+  form: FormApi<T, Partial<T>>,
+  initialValues: Partial<T> = {}
+) {
+  form.batch(() => {
+    if (resetForm && values) {
+      Object.keys(values).forEach((field: string) => {
+        if (field === "id") {
+          return;
+        }
+        form.change(field, initialValues[field]);
+        form.resetFieldState(field);
+      });
+    }
+  });
 }
 
 export function SchemaForm<T extends Record<string, unknown>>({
@@ -70,10 +90,11 @@ export function SchemaForm<T extends Record<string, unknown>>({
             onSubmit={(e) => {
               e.preventDefault();
               handleSubmit(e)?.then(() => {
-                resetFormValues(
+                resetFormValues<Record<string, unknown>>(
                   resetForm,
-                  values as Record<string, string>,
-                  form as any
+                  values,
+                  form as any,
+                  initialValues
                 );
               });
             }}

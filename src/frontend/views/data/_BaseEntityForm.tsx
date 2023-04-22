@@ -84,12 +84,19 @@ export function BaseEntityForm({
       return initialValues;
     }
     return Object.fromEntries(
-      fields.map((field) => [field, initialValues[field]])
+      fields.map((field) => {
+        let value = initialValues[field];
+
+        if (typeof value === "object" && value !== null) {
+          value = JSON.stringify(value);
+        }
+
+        return [field, value];
+      })
     );
   }, [initialValues, hiddenColumns]);
 
   const formSchemaConfig = {
-    // This is weird bug with react, It is not suppose to render this until rendered but React does :shrug
     entityToOneReferenceFields: entityToOneReferenceFields.data || {},
     getEntityFieldLabels,
     entityFieldTypes,

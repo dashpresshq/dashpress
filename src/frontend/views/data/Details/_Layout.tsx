@@ -6,6 +6,7 @@ import {
   SectionListItem,
   SectionRow,
   ListSkeleton,
+  IDropDownMenuItem,
 } from "@hadmean/chromista";
 import { ReactNode } from "react";
 import { useEntityReferenceFields } from "frontend/hooks/entity/entity.store";
@@ -30,10 +31,16 @@ export const DETAILS_LAYOUT_KEY = "___DETAILS_KEY__";
 interface IProps {
   children: ReactNode;
   entity: string;
+  menuItems?: IDropDownMenuItem[];
   menuKey: string;
 }
 
-export function DetailsLayout({ children, entity, menuKey }: IProps) {
+export function DetailsLayout({
+  children,
+  entity,
+  menuKey,
+  menuItems = [],
+}: IProps) {
   const actionItems = useEntityActionMenuItems([
     EntityActionTypes.Details,
     EntityActionTypes.Types,
@@ -103,7 +110,7 @@ export function DetailsLayout({ children, entity, menuKey }: IProps) {
   );
 
   return (
-    <AppLayout actionItems={actionItems}>
+    <AppLayout actionItems={menuItems} secondaryActionItems={actionItems}>
       <SectionRow>
         <SectionLeft>
           <SectionBox headLess title="">

@@ -3,6 +3,7 @@ import { TitleLang } from "@hadmean/protozoa";
 import { useNavigationStack, useSetPageDetails } from "frontend/lib/routing";
 import { META_USER_PERMISSIONS } from "shared/constants/user";
 import { GranularEntityPermissions } from "shared/types/user";
+import { useRouter } from "next/router";
 import { AppLayout } from "../../../_layouts/app";
 import {
   useEntityDiction,
@@ -16,7 +17,20 @@ import {
 } from "../../entity/constants";
 import { BaseEntityForm } from "../_BaseEntityForm";
 
+export function useRouteParams() {
+  const router = useRouter();
+
+  if (typeof window === "undefined") return {};
+
+  const value = router.query;
+
+  if (Array.isArray(value))
+    throw new Error("Unexpected handle given by Next.js");
+  return value;
+}
+
 export function EntityCreate() {
+  const routeParams = useRouteParams();
   const entity = useEntitySlug();
   const entityDiction = useEntityDiction();
 
@@ -51,6 +65,7 @@ export function EntityCreate() {
         >
           <BaseEntityForm
             action="create"
+            initialValues={routeParams}
             onSubmit={entityDataCreationMutation.mutateAsync}
             hiddenColumns={hiddenCreateColumns}
           />

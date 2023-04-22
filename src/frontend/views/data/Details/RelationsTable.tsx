@@ -14,6 +14,7 @@ import { TableTopComponent } from "../Table/portal";
 import { EntityDataTable } from "../Table/DataTable/EntityDataTable";
 import { ENTITY_DETAILS_VIEW_KEY } from "./constants";
 import { DetailsLayout } from "./_Layout";
+import { useTableMenuItems } from "../Table/useTableMenuItems";
 
 export function EntityRelationTable() {
   const parentEntity = useEntitySlug();
@@ -28,6 +29,11 @@ export function EntityRelationTable() {
     ({ table }) => table === parentEntity
   )?.field;
 
+  const menuItems = useTableMenuItems(childEntity, {
+    referenceField,
+    entityId,
+  });
+
   useSetPageDetails({
     pageTitle: `${childEntityDiction.singular} Table`,
     viewKey: ENTITY_DETAILS_VIEW_KEY,
@@ -38,7 +44,11 @@ export function EntityRelationTable() {
   });
 
   return (
-    <DetailsLayout entity={parentEntity} menuKey={childEntity}>
+    <DetailsLayout
+      entity={parentEntity}
+      menuKey={childEntity}
+      menuItems={menuItems}
+    >
       <TableTopComponent entity={childEntity} />
       <StyledCard>
         <EntityDataTable
@@ -62,5 +72,3 @@ export function EntityRelationTable() {
     </DetailsLayout>
   );
 }
-
-// TODO const menuItems = useTableMenuItems(childEntity); and add default value link

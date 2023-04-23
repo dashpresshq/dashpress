@@ -151,17 +151,17 @@ export const useTableColumns = (
         if (isId) {
           return <span>{value as string}</span>;
         }
-        const specialDataTypeRender = viewSpecialDataTypes(
-          name,
+        const specialDataTypeRender = viewSpecialDataTypes({
+          fieldName: name,
           value,
-          entityToOneReferenceFields.data || {},
+          entityToOneReferenceFields: entityToOneReferenceFields.data || {},
           entityFieldSelections,
           entityFieldTypes,
-          {
+          options: {
             displayFrom: "table",
             defaultDateFormat: defaultDateFormat.data,
-          }
-        );
+          },
+        });
         if (specialDataTypeRender) {
           return specialDataTypeRender;
         }

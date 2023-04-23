@@ -24,7 +24,7 @@ export const useTableMenuItems = (
   const entityCrudSettings = useEntityCrudSettings(entity);
   const userHasPermission = useUserHasPermission();
 
-  const pluginTableMenuItems = usePluginTableMenuItems(entity);
+  const pluginTableMenuItems = usePluginTableMenuItems(entity, reference);
 
   if (entity === SLUG_LOADING_VALUE) {
     return [];

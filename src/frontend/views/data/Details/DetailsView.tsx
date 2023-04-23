@@ -87,17 +87,17 @@ export function EntityDetailsView({
         ).map(({ name }) => {
           const value = dataDetails?.data?.[name];
 
-          const specialDataTypeRender = viewSpecialDataTypes(
-            name,
+          const specialDataTypeRender = viewSpecialDataTypes({
+            fieldName: name,
             value,
-            entityToOneReferenceFields.data || {},
+            entityToOneReferenceFields: entityToOneReferenceFields.data || {},
             entityFieldSelections,
             entityFieldTypes,
-            {
+            options: {
               displayFrom,
               defaultDateFormat: defaultDateFormat.data,
-            }
-          );
+            },
+          });
 
           const contentToRender = specialDataTypeRender || (
             <Typo.MD>

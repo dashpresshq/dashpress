@@ -8,19 +8,29 @@ import {
 } from "./ReferenceComponent";
 import { OptionTag } from "./OptionTag";
 
-export const viewSpecialDataTypes = (
-  fieldName: string,
-  value: unknown,
-  entityToOneReferenceFields: Record<string, string>,
-  entityFieldSelections: {
-    [k: string]: IColorableSelection[];
+export const viewSpecialDataTypes = ({
+  fieldName,
+  value,
+  entityToOneReferenceFields = {},
+  entityFieldSelections = {},
+  entityFieldTypes = {},
+  options = {
+    defaultDateFormat: "do MMM yyyy",
+    displayFrom: "table",
   },
-  entityFieldTypes: Record<string, keyof typeof FIELD_TYPES_CONFIG_MAP>,
-  options: {
+}: {
+  fieldName: string;
+  value: unknown;
+  entityToOneReferenceFields?: Record<string, string>;
+  entityFieldSelections?: {
+    [k: string]: IColorableSelection[];
+  };
+  entityFieldTypes?: Record<string, keyof typeof FIELD_TYPES_CONFIG_MAP>;
+  options?: {
     displayFrom: ReferenceDisplayFromTypes;
     defaultDateFormat: string;
-  }
-) => {
+  };
+}) => {
   if (
     entityFieldTypes[fieldName] === "datetime-local" &&
     !Number.isNaN(Date.parse(value as string))

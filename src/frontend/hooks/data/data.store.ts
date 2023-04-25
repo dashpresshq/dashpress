@@ -40,7 +40,7 @@ export const useEntityDataDetails = (entity: string, id: string) => {
     enabled: !!id && !!entity && id !== SLUG_LOADING_VALUE,
   });
 };
-// TODO count not updating
+
 const buildFilterCountQueryString = (
   entity: string,
   queryFilter: QueryFilter[]

@@ -7,7 +7,7 @@ import {
   MutationsLang,
   SLUG_LOADING_VALUE,
   useApi,
-  useApiMutateOptions,
+  useApiMutateOptitmisticOptions,
 } from "@hadmean/protozoa";
 import { useMutation } from "react-query";
 import { IWidgetConfig } from "shared/types/dashboard";
@@ -23,7 +23,10 @@ export const useDashboardWidgets = (dashboardId: string) => {
 };
 
 export function useCreateDashboardWidgetMutation(dashboardId: string) {
-  const apiMutateOptions = useApiMutateOptions<IWidgetConfig[], IWidgetConfig>({
+  const apiMutateOptions = useApiMutateOptitmisticOptions<
+    IWidgetConfig[],
+    IWidgetConfig
+  >({
     dataQueryPath: DASHBOARD_ENDPOINT(dashboardId),
     onMutate: MutationHelpers.append,
     successMessage: MutationsLang.create("Widget"),
@@ -36,7 +39,10 @@ export function useCreateDashboardWidgetMutation(dashboardId: string) {
 }
 
 export function useUpdateDashboardWidgetMutation(dashboardId: string) {
-  const apiMutateOptions = useApiMutateOptions<IWidgetConfig[], IWidgetConfig>({
+  const apiMutateOptions = useApiMutateOptitmisticOptions<
+    IWidgetConfig[],
+    IWidgetConfig
+  >({
     dataQueryPath: DASHBOARD_ENDPOINT(dashboardId),
     onMutate: MutationHelpers.update,
     successMessage: MutationsLang.edit("Widget"),
@@ -52,7 +58,10 @@ export function useUpdateDashboardWidgetMutation(dashboardId: string) {
 }
 
 export function useDeleteDashboardWidgetMutation(dashboardId: string) {
-  const apiMutateOptions = useApiMutateOptions<IWidgetConfig[], string>({
+  const apiMutateOptions = useApiMutateOptitmisticOptions<
+    IWidgetConfig[],
+    string
+  >({
     dataQueryPath: DASHBOARD_ENDPOINT(dashboardId),
     onMutate: MutationHelpers.delete,
     successMessage: MutationsLang.delete("Widget"),
@@ -67,7 +76,10 @@ export function useDeleteDashboardWidgetMutation(dashboardId: string) {
 }
 
 export function useArrangeDashboardWidgetMutation(dashboardId: string) {
-  const apiMutateOptions = useApiMutateOptions<IWidgetConfig[], string[]>({
+  const apiMutateOptions = useApiMutateOptitmisticOptions<
+    IWidgetConfig[],
+    string[]
+  >({
     dataQueryPath: DASHBOARD_ENDPOINT(dashboardId),
     onMutate: MutationHelpers.sortOrder,
     successMessage: MutationsLang.saved("Widget Order"),

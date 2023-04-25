@@ -5,7 +5,7 @@ import {
   MutationHelpers,
   MutationsLang,
   useApi,
-  useApiMutateOptions,
+  useApiMutateOptitmisticOptions,
 } from "@hadmean/protozoa";
 import { isRouterParamEnabled } from "frontend/hooks";
 import { useMutation } from "react-query";
@@ -28,7 +28,7 @@ export function useRolePermissions() {
 export function useRolePermissionDeletionMutation() {
   const roleId = useRoleIdFromRouteParam();
 
-  const apiMutateOptions = useApiMutateOptions<string[], string[]>({
+  const apiMutateOptions = useApiMutateOptitmisticOptions<string[], string[]>({
     dataQueryPath: ADMIN_ROLE_PERMISSION_ENDPOINT(roleId),
     onMutate: MutationHelpers.removeMany,
     successMessage: MutationsLang.delete(SINGULAR),
@@ -45,7 +45,7 @@ export function useRolePermissionDeletionMutation() {
 export function useCreateRolePermissionMutation() {
   const roleId = useRoleIdFromRouteParam();
 
-  const apiMutateOptions = useApiMutateOptions<string[], string[]>({
+  const apiMutateOptions = useApiMutateOptitmisticOptions<string[], string[]>({
     dataQueryPath: ADMIN_ROLE_PERMISSION_ENDPOINT(roleId),
     onMutate: MutationHelpers.mergeArray,
     successMessage: MutationsLang.create(SINGULAR),

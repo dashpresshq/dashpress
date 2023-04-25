@@ -6,7 +6,7 @@ export default requestHandler({
   GET: async (getValidatedRequest) => {
     const validatedRequest = await getValidatedRequest(["authenticatedUser"]);
 
-    return await entitiesApiController.getUserActiveEntities(
+    return await entitiesApiController.getUserMenuEntities(
       (validatedRequest.authenticatedUser as IAccountProfile).role
     );
   },

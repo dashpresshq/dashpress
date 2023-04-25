@@ -2,19 +2,19 @@ import { Settings, Home, Table, Users, Shield, Zap } from "react-feather";
 import { NAVIGATION_LINKS, useNavigationStack } from "frontend/lib/routing";
 import { USER_PERMISSIONS } from "shared/constants/user";
 import { useUserHasPermission } from "frontend/hooks/auth/user.store";
-import { useUserActiveEntities } from "../../../../hooks/entity/entity.store";
+import { useUserMenuEntities } from "../../../../hooks/entity/entity.store";
 import { ROOT_LINKS_TO_CLEAR_BREADCRUMBS } from "../../constants";
 import { IAppMenuItems } from "../../types";
 import { useAppendPortalMenuItems } from "../../appendPortalMenuItems/portal";
 
 export const useSelectionViews = (): IAppMenuItems[] => {
-  const activeEntities = useUserActiveEntities();
+  const userMenuEntities = useUserMenuEntities();
   const userHasPermission = useUserHasPermission();
 
   const { clear } = useNavigationStack();
 
   const activeEntituesLabelsMap = Object.fromEntries(
-    (activeEntities.data || []).map(({ value, label }) => [value, label])
+    (userMenuEntities.data || []).map(({ value, label }) => [value, label])
   );
 
   const appendPortalMenuItems = useAppendPortalMenuItems();
@@ -33,8 +33,8 @@ export const useSelectionViews = (): IAppMenuItems[] => {
       viewMenuItems: {
         singular: "Entity",
         menuItems: {
-          ...activeEntities,
-          data: (activeEntities.data || []).map(({ value }) => ({
+          ...userMenuEntities,
+          data: (userMenuEntities.data || []).map(({ value }) => ({
             value,
             secondaryAction: () => {
               clear();

@@ -31,14 +31,24 @@ export class EntitiesApiService implements IApplicationService {
   }
 
   async getActiveEntities(): Promise<IValueLabel[]> {
-    const [hiddenEntities, entitiesOrder, entities] = await Promise.all([
+    const [hiddenEntities, entities] = await Promise.all([
       this._configurationApiService.show<string[]>("disabled_entities"),
-      this._configurationApiService.show<string[]>("entities_order"),
       this.getAllEntities(),
     ]);
-    const activeEntities = entities.filter(
-      ({ value }) => !hiddenEntities.includes(value)
-    );
+    return entities.filter(({ value }) => !hiddenEntities.includes(value));
+  }
+
+  async getUserMenuEntities(userRole: string): Promise<IValueLabel[]> {
+    const [hiddenEntities, hiddenMenuEntities, entitiesOrder, entities] =
+      await Promise.all([
+        this._configurationApiService.show<string[]>("disabled_entities"),
+        this._configurationApiService.show<string[]>("disabled_menu_entities"),
+        this._configurationApiService.show<string[]>("entities_order"),
+        this.getAllEntities(),
+      ]);
+    const activeEntities = entities
+      .filter(({ value }) => !hiddenMenuEntities.includes(value))
+      .filter(({ value }) => !hiddenEntities.includes(value));
 
     sortByList(
       activeEntities.sort((a, b) => a.value.localeCompare(b.value)),
@@ -46,7 +56,11 @@ export class EntitiesApiService implements IApplicationService {
       "value"
     );
 
-    return activeEntities;
+    return await this._rolesApiService.filterPermittedEntities(
+      userRole,
+      activeEntities,
+      "value"
+    );
   }
 
   async getEntityFields(entity: string): Promise<IEntityField[]> {

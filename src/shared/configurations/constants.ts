@@ -69,6 +69,7 @@ export const CONFIGURATION_KEYS: Record<
   },
   entity_relations_labels: { requireEntity: true, defaultValue: {} },
   disabled_entities: { defaultValue: [] },
+  disabled_menu_entities: { defaultValue: [] },
   dashboard_entities: { defaultValue: [] },
   entities_order: { defaultValue: [] },
   default_date_format: {

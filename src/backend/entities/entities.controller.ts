@@ -1,5 +1,4 @@
 import { IValueLabel } from "@hadmean/chromista/dist/types";
-import { rolesApiService, RolesApiService } from "backend/roles/roles.service";
 import { IEntityField, IEntityRelation } from "shared/types/db";
 import {
   ConfigurationApiService,
@@ -10,20 +9,15 @@ import { entitiesApiService, EntitiesApiService } from "./entities.service";
 export class EntitiesApiController {
   constructor(
     private _entitiesApiService: EntitiesApiService,
-    private _configurationApiService: ConfigurationApiService,
-    private _rolesApiService: RolesApiService
+    private _configurationApiService: ConfigurationApiService
   ) {}
 
   async getActiveEntities(): Promise<IValueLabel[]> {
     return await this._entitiesApiService.getActiveEntities();
   }
 
-  async getUserActiveEntities(userRole: string): Promise<IValueLabel[]> {
-    return await this._rolesApiService.filterPermittedEntities(
-      userRole,
-      await this._entitiesApiService.getActiveEntities(),
-      "value"
-    );
+  async getUserMenuEntities(userRole: string): Promise<IValueLabel[]> {
+    return await this._entitiesApiService.getUserMenuEntities(userRole);
   }
 
   async listAllEntities(): Promise<IValueLabel[]> {
@@ -60,6 +54,5 @@ export class EntitiesApiController {
 
 export const entitiesApiController = new EntitiesApiController(
   entitiesApiService,
-  configurationApiService,
-  rolesApiService
+  configurationApiService
 );

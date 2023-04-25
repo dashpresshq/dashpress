@@ -20,51 +20,58 @@ import {
 } from "react-feather";
 import { NAVIGATION_LINKS } from "../../lib/routing/links";
 import { AppLayout } from "../../_layouts/app";
+import { useMutateBaseSettingsMenu } from "./portal";
 
 interface IProps {
   children: ReactNode;
 }
 
+const baseMenuItems = [
+  {
+    action: NAVIGATION_LINKS.SETTINGS.ENTITIES,
+    name: "Entities",
+    IconComponent: Columns,
+  },
+  {
+    action: NAVIGATION_LINKS.SETTINGS.MENU_ENTITIES,
+    name: "Menu",
+    IconComponent: Columns,
+  },
+  {
+    action: NAVIGATION_LINKS.SETTINGS.DATE,
+    name: "Date Format",
+    IconComponent: Calendar,
+  },
+  {
+    action: NAVIGATION_LINKS.SETTINGS.SYSTEM,
+    name: "System",
+    IconComponent: Server,
+  },
+  {
+    action: NAVIGATION_LINKS.SETTINGS.THEME,
+    name: "Theme",
+    IconComponent: Eye,
+  },
+  {
+    action: NAVIGATION_LINKS.SETTINGS.SITE,
+    name: "Site",
+    IconComponent: Globe,
+  },
+  {
+    action: NAVIGATION_LINKS.SETTINGS.VARIABLES,
+    name: "Variables",
+    IconComponent: Book,
+  },
+  {
+    action: NAVIGATION_LINKS.SETTINGS.VERSIONS,
+    name: "System Info",
+    IconComponent: Terminal,
+  },
+];
+
 export function BaseSettingsLayout({ children }: IProps) {
   const router = useRouter();
-  const baseMenuItems = [
-    {
-      action: NAVIGATION_LINKS.SETTINGS.ENTITIES,
-      name: "Entities",
-      IconComponent: Columns,
-    },
-    {
-      action: NAVIGATION_LINKS.SETTINGS.DATE,
-      name: "Date Format",
-      IconComponent: Calendar,
-    },
-    {
-      action: NAVIGATION_LINKS.SETTINGS.SYSTEM,
-      name: "System",
-      IconComponent: Server,
-    },
-    {
-      action: NAVIGATION_LINKS.SETTINGS.THEME,
-      name: "Theme",
-      IconComponent: Eye,
-    },
-    {
-      action: NAVIGATION_LINKS.SETTINGS.SITE,
-      name: "Site",
-      IconComponent: Globe,
-    },
-    {
-      action: NAVIGATION_LINKS.SETTINGS.VARIABLES,
-      name: "Variables",
-      IconComponent: Book,
-    },
-    {
-      action: NAVIGATION_LINKS.SETTINGS.VERSIONS,
-      name: "System Info",
-      IconComponent: Terminal,
-    },
-  ];
-
+  const menuItems = useMutateBaseSettingsMenu(baseMenuItems);
   return (
     <AppLayout>
       {/* TODO */}
@@ -101,7 +108,7 @@ export function BaseSettingsLayout({ children }: IProps) {
       <SectionRow>
         <SectionLeft>
           <MenuSection
-            menuItems={[...baseMenuItems]}
+            menuItems={[...menuItems]}
             currentMenuItem={router.asPath.split("?")[0]}
           />
         </SectionLeft>

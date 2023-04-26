@@ -77,6 +77,7 @@ const CONFIG_VALUES = {
     primaryDark: `#111111`,
   },
   disabled_entities: ["disabled-entity-1", "disabled-entity-2"],
+  disabled_menu_entities: ["entity-3"],
 };
 
 const DEFAULT_ENTITY_CONFIG_VALUES: Record<

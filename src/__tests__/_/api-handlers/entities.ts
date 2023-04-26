@@ -29,7 +29,7 @@ export const entitiesApiHandlers = [
       ])
     );
   }),
-  rest.get(BASE_TEST_URL("/api/entities/user"), async (_, res, ctx) => {
+  rest.get(BASE_TEST_URL("/api/entities/user-menu"), async (_, res, ctx) => {
     return res(
       ctx.json([
         {

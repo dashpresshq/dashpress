@@ -17,6 +17,7 @@ import {
   GitHub,
   Book,
   Terminal,
+  Table,
 } from "react-feather";
 import { NAVIGATION_LINKS } from "../../lib/routing/links";
 import { AppLayout } from "../../_layouts/app";
@@ -35,7 +36,7 @@ const baseMenuItems = [
   {
     action: NAVIGATION_LINKS.SETTINGS.MENU_ENTITIES,
     name: "Menu",
-    IconComponent: Columns,
+    IconComponent: Table,
   },
   {
     action: NAVIGATION_LINKS.SETTINGS.DATE,

@@ -71,7 +71,7 @@ export const CONFIGURATION_KEYS: Record<
   disabled_entities: { defaultValue: [] },
   disabled_menu_entities: { defaultValue: [] },
   dashboard_entities: { defaultValue: [] },
-  entities_order: { defaultValue: [] },
+  menu_entities_order: { defaultValue: [] },
   default_date_format: {
     defaultValue: "do MMM yyyy, h:MM aa",
   },

@@ -68,9 +68,9 @@ describe("pages/admin/[entity]/config/crud", () => {
   });
 
   describe.each([
+    { tab: "Update" },
     { tab: "Details" },
     { tab: "Create" },
-    { tab: "Update" },
     { tab: "Delete" },
   ])("$tab feature", ({ tab }) => {
     beforeAll(() => {

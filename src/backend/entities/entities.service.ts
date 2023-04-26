@@ -43,7 +43,7 @@ export class EntitiesApiService implements IApplicationService {
       await Promise.all([
         this._configurationApiService.show<string[]>("disabled_entities"),
         this._configurationApiService.show<string[]>("disabled_menu_entities"),
-        this._configurationApiService.show<string[]>("entities_order"),
+        this._configurationApiService.show<string[]>("menu_entities_order"),
         this.getAllEntities(),
       ]);
     const activeEntities = entities

@@ -54,7 +54,7 @@ export function MenuEntitiesSettings() {
   );
 
   const upsertEntitiesOrderMutation = useUpsertConfigurationMutation(
-    "entities_order",
+    "menu_entities_order",
     "",
     {
       otherEndpoints: [ACTIVE_ENTITIES_ENDPOINT, USER_MENU_ENTITIES_ENDPOINT],

@@ -3,13 +3,13 @@ import React from "react";
 import { render, screen, waitFor } from "@testing-library/react";
 import { AppWrapper } from "@hadmean/chromista";
 import userEvent from "@testing-library/user-event";
-import EntitiesSettings from "pages/admin/settings/entities";
+import MenuEntitiesSettings from "pages/admin/settings/menu-entities";
 
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 
 setupApiHandlers();
 
-describe("pages/admin/settings/entities", () => {
+describe("pages/admin/settings/menu-entities", () => {
   beforeAll(() => {
     const useRouter = jest.spyOn(require("next/router"), "useRouter");
     useRouter.mockImplementation(() => ({
@@ -18,24 +18,20 @@ describe("pages/admin/settings/entities", () => {
     }));
   });
 
-  it("should display all entities with correct state", async () => {
+  it("should display only active entities with correct state", async () => {
     render(
       <AppWrapper>
-        <EntitiesSettings />
+        <MenuEntitiesSettings />
       </AppWrapper>
     );
 
     await waitFor(async () => {
       expect(
         await screen.findByRole("checkbox", {
-          name: "Plural disabled-entity-1",
+          name: "Plural entity-3",
         })
       ).not.toBeChecked();
     });
-
-    expect(
-      screen.getByRole("checkbox", { name: "Plural disabled-entity-2" })
-    ).not.toBeChecked();
 
     expect(
       screen.getByRole("checkbox", { name: "Plural entity-1" })
@@ -43,24 +39,21 @@ describe("pages/admin/settings/entities", () => {
     expect(
       screen.getByRole("checkbox", { name: "Plural entity-2" })
     ).toBeChecked();
-    expect(
-      screen.getByRole("checkbox", { name: "Plural entity-3" })
-    ).toBeChecked();
 
     expect(
-      screen.getByRole("checkbox", { name: "Plural entity-4" })
-    ).toBeInTheDocument();
+      screen.queryByRole("checkbox", { name: "Plural entity-4" })
+    ).not.toBeInTheDocument();
   });
 
-  it("should toggle entities state successfully", async () => {
+  it("should toggle menu state successfully", async () => {
     render(
       <AppWrapper>
-        <EntitiesSettings />
+        <MenuEntitiesSettings />
       </AppWrapper>
     );
 
     await userEvent.click(
-      screen.getByRole("button", { name: "Plural entity-1" })
+      screen.getByRole("button", { name: "Plural entity-3" })
     );
 
     await userEvent.click(
@@ -72,7 +65,7 @@ describe("pages/admin/settings/entities", () => {
     );
 
     await userEvent.click(
-      screen.getByRole("button", { name: "Plural disabled-entity-2" })
+      screen.getByRole("button", { name: "Plural entity-2" })
     );
 
     await userEvent.click(screen.getByRole("button", { name: "Save Changes" }));
@@ -85,29 +78,25 @@ describe("pages/admin/settings/entities", () => {
   it("should display updated entities state", async () => {
     render(
       <AppWrapper>
-        <EntitiesSettings />
+        <MenuEntitiesSettings />
       </AppWrapper>
     );
 
-    expect(
-      screen.getByRole("checkbox", { name: "Plural entity-1" })
-    ).toBeChecked();
-
-    await waitFor(() => {
+    await waitFor(async () => {
       expect(
-        screen.getByRole("checkbox", { name: "Plural entity-2" })
+        await screen.findByRole("checkbox", {
+          name: "Plural entity-1",
+        })
       ).not.toBeChecked();
     });
 
     expect(
       screen.getByRole("checkbox", { name: "Plural entity-3" })
     ).toBeChecked();
-
     expect(
-      screen.getByRole("checkbox", { name: "Plural disabled-entity-1" })
-    ).not.toBeChecked();
-    expect(
-      screen.getByRole("checkbox", { name: "Plural disabled-entity-2" })
+      screen.getByRole("checkbox", { name: "Plural entity-2" })
     ).toBeChecked();
   });
 });
+
+// TODO test sorting

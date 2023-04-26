@@ -9,7 +9,7 @@ export type BaseAppConfigurationKeys =
   | "entity_fields_orders"
   | "entity_crud_settings"
   | "entity_views"
-  | "entities_order"
+  | "menu_entities_order"
   | "disabled_menu_entities"
   | "default_date_format"
   | "entity_columns_labels"

@@ -30,7 +30,7 @@ describe("/api/config/[key]/index", () => {
     const { req, res } = createAuthenticatedMocks({
       method: "GET",
       query: {
-        key: "entities_order",
+        key: "menu_entities_order",
       },
     });
 
@@ -94,7 +94,7 @@ describe("/api/config/[key]/index", () => {
     const putReq = createAuthenticatedMocks({
       method: "PUT",
       query: {
-        key: "entities_order",
+        key: "menu_entities_order",
       },
       body: {
         data: ["order-1", "order-2"],
@@ -108,7 +108,7 @@ describe("/api/config/[key]/index", () => {
     const getReq = createAuthenticatedMocks({
       method: "GET",
       query: {
-        key: "entities_order",
+        key: "menu_entities_order",
       },
     });
 

@@ -6,7 +6,7 @@ export function ManageDashboard() {
   return (
     <BaseManageDashboard
       dashboardId={HOME_DASHBOARD_KEY}
-      doneLink={NAVIGATION_LINKS.DASHBOARD}
+      doneLink={NAVIGATION_LINKS.DASHBOARD.HOME}
       title="Dashboard"
     />
   );

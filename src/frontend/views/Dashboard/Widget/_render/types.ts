@@ -1,6 +1,6 @@
 import { IWidgetSettingProps } from "@hadmean/chromista";
 
-export interface IWidgetProps<T> {
+export interface IRenderWidgetProps<T> {
   config: T;
   setting?: IWidgetSettingProps;
   link?: string;

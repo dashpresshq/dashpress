@@ -15,10 +15,10 @@ import { ILabelValue } from "types";
 import { ROYGBIV } from "shared/constants/colors";
 import { useEntityFields } from "frontend/hooks/entity/entity.store";
 import { IconInputField } from "frontend/components/IconInputField";
-import { PortalDashboardTypesOptions } from "../widgets/portal";
 import { DASHBOARD_WIDGET_HEIGHTS, DASHBOARD_WIDGET_SIZES } from "./constants";
 import { WidgetFormField } from "./types";
 import { PortalFormFields, PortalFormSchema } from "./portal";
+import { PortalDashboardTypesOptions } from "../portal";
 
 const DashboardTypesOptions: {
   label: string;

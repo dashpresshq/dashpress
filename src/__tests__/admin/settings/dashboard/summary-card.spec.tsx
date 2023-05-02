@@ -4,8 +4,8 @@ import { render, screen, within } from "@testing-library/react";
 import { AppWrapper } from "@hadmean/chromista";
 import userEvent from "@testing-library/user-event";
 
-import ManageDashboard from "pages/admin/settings/dashboard";
-import Dashboard from "pages/admin";
+import ManageDashboard from "pages/dashboard/manage";
+import Dashboard from "pages";
 
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 

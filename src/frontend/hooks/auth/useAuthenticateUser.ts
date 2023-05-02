@@ -46,7 +46,7 @@ export function useAuthenticateUser() {
     setIsAuthenticated(true);
     router.push(
       nextRoute === SLUG_LOADING_VALUE || !nextRoute
-        ? NAVIGATION_LINKS.DASHBOARD
+        ? NAVIGATION_LINKS.DASHBOARD.HOME
         : nextRoute
     );
   };

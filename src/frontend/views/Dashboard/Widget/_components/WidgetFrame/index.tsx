@@ -9,7 +9,7 @@ import { WidgetRoot } from "frontend/views/Dashboard/styles";
 import { ReactNode, forwardRef } from "react";
 import { ISharedWidgetConfig } from "shared/types/dashboard/base";
 import { IWidgetConfig, WidgetSizes } from "shared/types/dashboard";
-import { useWidgetNavigationLink } from "../../useWidgetNavigationLink";
+import { useWidgetNavigationLink } from "../../../Widget/useWidgetNavigationLink";
 import { PORTAL_WIDGET_SIZES } from "../../portal";
 
 const StyledBox = styled.div`

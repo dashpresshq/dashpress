@@ -132,11 +132,7 @@ export class DashboardWidgetsApiService implements IApplicationService {
       );
     }
 
-    return await this._rolesApiService.filterPermittedEntities(
-      userRole,
-      await this.listDashboardWidgetsToShow(dashboardId),
-      "entity"
-    );
+    return await this.listDashboardWidgetsToShow(dashboardId);
   }
 
   async createWidget(widget: IWidgetConfig, dashboardId: string) {

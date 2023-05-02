@@ -1,8 +1,7 @@
 import { IWidgetConfig } from "shared/types/dashboard";
 import { forwardRef } from "react";
 import { IWidgetSettingProps } from "@hadmean/chromista";
-import { SummaryWidget } from "./Summary";
-import { TableWidget } from "./Table";
+import { TableWidget, SummaryWidget } from "./_render";
 import { WidgetRoot } from "../styles";
 import { PortalDashboardWidget } from "./portal";
 import { WidgetFrame } from "./_components/WidgetFrame";

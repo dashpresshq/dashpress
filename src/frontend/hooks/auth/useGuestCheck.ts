@@ -8,7 +8,7 @@ export const useGuestCheck = () => {
   const router = useRouter();
   useEffect(() => {
     if (userAuthenticatedState === true) {
-      router.replace(NAVIGATION_LINKS.DASHBOARD);
+      router.replace(NAVIGATION_LINKS.DASHBOARD.HOME);
     }
   }, [typeof window, userAuthenticatedState]);
 

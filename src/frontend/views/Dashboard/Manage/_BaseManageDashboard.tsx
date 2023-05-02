@@ -15,19 +15,19 @@ import { useRouter } from "next/router";
 import { useActiveEntities } from "frontend/hooks/entity/entity.store";
 import { nanoid } from "nanoid";
 import { SystemIconsList } from "shared/constants/Icons";
-import { AppLayout } from "../../_layouts/app";
-import { DashboardWidget } from "./widgets";
+import { AppLayout } from "../../../_layouts/app";
 import {
   useArrangeDashboardWidgetMutation,
   useCreateDashboardWidgetMutation,
   useDashboardWidgets,
   useDeleteDashboardWidgetMutation,
   useUpdateDashboardWidgetMutation,
-} from "./dashboard.store";
-import { gridRoot } from "./styles";
-import { DashboardWidgetForm } from "./settings";
-import { DashboardSkeleton } from "./Skeleton";
-import { DetailsCanvas } from "../data/Table/DetailsCanvas";
+} from "../dashboard.store";
+import { gridRoot } from "../styles";
+import { DashboardSkeleton } from "../Skeleton";
+import { DetailsCanvas } from "../../data/Table/DetailsCanvas";
+import { DashboardWidget } from "../Widget";
+import { DashboardWidgetForm } from "../Widget/_manage/Form";
 
 const Root = styled.div`
   .list {

@@ -5,13 +5,13 @@ import {
   MutationsLang,
   useStorageApi,
   useWaitForResponseMutationOptions,
-  SLUG_LOADING_VALUE,
 } from "@hadmean/protozoa";
 import { useMutation } from "react-query";
 import {
   CONFIGURATION_KEYS,
   AppConfigurationKeys,
 } from "shared/configurations";
+import { isRouterParamEnabled } from "..";
 
 export const configurationApiPath = (
   key: AppConfigurationKeys,
@@ -40,7 +40,7 @@ export function useEntityConfiguration<T>(
   entity: string
 ) {
   return useStorageApi<T>(configurationApiPath(key, entity), {
-    enabled: entity !== SLUG_LOADING_VALUE,
+    enabled: isRouterParamEnabled(entity),
     errorMessage: dataNotFoundMessage("Entity Configuration"),
   });
 }

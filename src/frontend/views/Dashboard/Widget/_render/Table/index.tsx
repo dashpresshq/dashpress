@@ -3,9 +3,11 @@ import { useEntityConfiguration } from "frontend/hooks/configuration/configurati
 import { EntityDataTable } from "frontend/views/data/Table/DataTable/EntityDataTable";
 import { ITableTab } from "shared/types/data";
 import { ITableWidgetConfig } from "shared/types/dashboard";
-import { IWidgetProps } from "../types";
+import { IRenderWidgetProps } from "../types";
 
-export function TableWidget({ config }: IWidgetProps<ITableWidgetConfig>) {
+export function TableWidget({
+  config,
+}: IRenderWidgetProps<ITableWidgetConfig>) {
   const { queryId, entity } = config;
 
   const entityViews = useEntityConfiguration<ITableTab[]>(

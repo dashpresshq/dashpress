@@ -6,15 +6,15 @@ import { useUserHasPermission } from "frontend/hooks/auth/user.store";
 import styled from "styled-components";
 import { useRouter } from "next/router";
 
-import { AppLayout } from "../../_layouts/app";
-import { useDashboardWidgets } from "./dashboard.store";
-import { gridRoot } from "./styles";
-import { DashboardWidget } from "./widgets";
+import { AppLayout } from "../../../_layouts/app";
+import { useDashboardWidgets } from "../dashboard.store";
+import { gridRoot } from "../styles";
 import { DemoVideo } from "./Demo";
 import { useDashboardRelativeDayStore } from "./relativeTime.store";
 import { DASHBOARD_RELATIVE_DAYS } from "./constants";
-import { DashboardSkeleton } from "./Skeleton";
-import { DetailsCanvas } from "../data/Table/DetailsCanvas";
+import { DashboardSkeleton } from "../Skeleton";
+import { DetailsCanvas } from "../../data/Table/DetailsCanvas";
+import { DashboardWidget } from "../Widget";
 
 const Root = styled.div`
   ${gridRoot};

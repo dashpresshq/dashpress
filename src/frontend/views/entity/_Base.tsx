@@ -90,6 +90,7 @@ export function BaseEntitySettingsLayout({ children }: IProps) {
           <MenuSection
             menuItems={[
               ...baseMenuItems,
+              // TODO
               // Computed Table fields
               // Computed Details fields
               // Custom Render

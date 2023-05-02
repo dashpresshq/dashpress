@@ -6,15 +6,15 @@ import { ISummaryWidgetConfig } from "shared/types/dashboard";
 import { DATE_FILTER_VALUE, FilterOperators } from "@hadmean/protozoa";
 import { ROYGBIV } from "shared/constants/colors";
 import { systemIconToSVG } from "shared/constants/Icons";
-import { IWidgetProps } from "../types";
 import { getFullAndRelativeCount } from "./getFullAndRelativeCount";
-import { useDashboardRelativeDayStore } from "../../relativeTime.store";
-import { useWidgetNavigationLink } from "../useWidgetNavigationLink";
+import { useDashboardRelativeDayStore } from "../../../List/relativeTime.store";
+import { useWidgetNavigationLink } from "../../useWidgetNavigationLink";
+import { IRenderWidgetProps } from "../types";
 
 export function SummaryWidget({
   config,
   setting,
-}: IWidgetProps<ISummaryWidgetConfig>) {
+}: IRenderWidgetProps<ISummaryWidgetConfig>) {
   const { queryId, entity, color, dateField, icon } = config;
 
   const navigationLink = useWidgetNavigationLink(entity, queryId);

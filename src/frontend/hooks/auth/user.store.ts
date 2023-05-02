@@ -94,6 +94,6 @@ export function usePageRequiresPermission(
   }
   if (!canUser(permission)) {
     ToastService.error("You dont have the permission to view this page");
-    router.replace(NAVIGATION_LINKS.DASHBOARD);
+    router.replace(NAVIGATION_LINKS.DASHBOARD.HOME);
   }
 }

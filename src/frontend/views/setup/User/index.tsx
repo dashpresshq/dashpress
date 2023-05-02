@@ -19,7 +19,7 @@ export function UserSetup() {
     {
       key: "hasUsers",
       value: true,
-      url: NAVIGATION_LINKS.DASHBOARD,
+      url: NAVIGATION_LINKS.DASHBOARD.HOME,
     },
   ]);
 

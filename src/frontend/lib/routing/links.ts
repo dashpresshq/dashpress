@@ -1,7 +1,16 @@
 import { queryObjectToQueryString } from "./queryObjectToQueryString";
 
 export const NAVIGATION_LINKS = {
-  DASHBOARD: "/admin",
+  DASHBOARD: {
+    HOME: "/",
+    MANAGE: "/dashboard/manage",
+    WIDGET: {
+      CREATE: (dashboardId: string) =>
+        `/dashboard/${dashboardId}/widget/create`,
+      UPDATE: (dashboardId: string, widgetId: string) =>
+        `/dashboard/${dashboardId}/widget/${widgetId}`,
+    },
+  },
   AUTH_SIGNIN: "/auth",
   ACCOUNT: {
     PROFILE: "/account/profile",
@@ -29,7 +38,6 @@ export const NAVIGATION_LINKS = {
   },
   SETTINGS: {
     DEFAULT: "/admin/settings/entities",
-    DASHBOARD: "/admin/settings/dashboard",
     ENTITIES: "/admin/settings/entities",
     MENU_ENTITIES: "/admin/settings/menu-entities",
     SYSTEM: "/admin/settings/system",

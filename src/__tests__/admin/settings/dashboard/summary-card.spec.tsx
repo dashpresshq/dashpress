@@ -32,14 +32,12 @@ describe("pages/admin/settings/dashboard", () => {
       );
 
       await userEvent.click(
-        screen.getByRole("button", { name: "New Dashboard Item" })
+        screen.getByRole("button", { name: "Add New Widget" })
       );
 
       const dialog = screen.getByRole("dialog");
 
-      expect(
-        within(dialog).getByText("New Dashboard Item")
-      ).toBeInTheDocument();
+      expect(within(dialog).getByText("Add New Widget")).toBeInTheDocument();
 
       await userEvent.type(
         await within(dialog).findByLabelText("Title"),
@@ -174,7 +172,7 @@ describe("pages/admin/settings/dashboard", () => {
       const dialog = screen.getByRole("dialog");
 
       expect(
-        await within(dialog).findByText("Edit Dashboard Item")
+        await within(dialog).findByText("Edit Dashboard Widget")
       ).toBeInTheDocument();
 
       await userEvent.type(

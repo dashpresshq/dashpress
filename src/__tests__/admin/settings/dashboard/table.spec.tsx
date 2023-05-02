@@ -33,7 +33,7 @@ describe("pages/admin/settings/dashboard", () => {
       );
 
       await userEvent.click(
-        screen.getByRole("button", { name: "New Dashboard Item" })
+        screen.getByRole("button", { name: "Add New Widget" })
       );
 
       const dialog = screen.getByRole("dialog");

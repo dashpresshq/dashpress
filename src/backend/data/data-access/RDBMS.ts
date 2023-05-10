@@ -3,7 +3,10 @@ import get from "lodash/get";
 import { getDbConnection } from "backend/lib/connection/db";
 import { QueryFilter } from "shared/types/data";
 import { credentialsApiService } from "backend/integrations-configurations";
-import { IDataSourceCredentials } from "shared/types/data-sources";
+import {
+  DATA_SOURCES_CONFIG,
+  IDataSourceCredentials,
+} from "shared/types/data-sources";
 import { BaseDataAccessService } from "./_Base";
 import { DATABASE_CREDENTIAL_GROUP } from "../fields";
 import { IPaginationFilters } from "../types";
@@ -32,6 +35,8 @@ export class RDBMSDataApiService extends BaseDataAccessService<Knex.QueryBuilder
 
   static _dbInstance: Knex | null = null;
 
+  static _dbCredentials: IDataSourceCredentials | null = null;
+
   static async getInstance() {
     if (this._dbInstance) {
       return this._dbInstance;
@@ -42,9 +47,18 @@ export class RDBMSDataApiService extends BaseDataAccessService<Knex.QueryBuilder
         DATABASE_CREDENTIAL_GROUP
       );
 
+    this._dbCredentials = dbCredentials;
+
     this._dbInstance = await getDbConnection(dbCredentials);
 
     return this._dbInstance;
+  }
+
+  static async getDbCredentials() {
+    if (!this._dbCredentials) {
+      await this.getInstance();
+    }
+    return this._dbCredentials;
   }
 
   async bootstrap() {
@@ -135,6 +149,18 @@ export class RDBMSDataApiService extends BaseDataAccessService<Knex.QueryBuilder
 
   async delete(entity: string, query: Record<string, unknown>): Promise<void> {
     await (await RDBMSDataApiService.getInstance())(entity).where(query).del();
+  }
+
+  async runQuery(sql: string) {
+    const driverResponse = await (
+      await RDBMSDataApiService.getInstance()
+    ).raw(sql);
+
+    const dbCredentials = await RDBMSDataApiService.getDbCredentials();
+
+    return DATA_SOURCES_CONFIG[dbCredentials.dataSourceType].getQueryData(
+      driverResponse
+    );
   }
 }
 

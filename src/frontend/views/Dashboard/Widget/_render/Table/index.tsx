@@ -1,29 +1,37 @@
-import { SLUG_LOADING_VALUE } from "@hadmean/protozoa";
-import { useEntityConfiguration } from "frontend/hooks/configuration/configuration.store";
-import { EntityDataTable } from "frontend/views/data/Table/DataTable/EntityDataTable";
-import { ITableTab } from "shared/types/data";
-import { ITableWidgetConfig } from "shared/types/dashboard";
-import { IRenderWidgetProps } from "../types";
+import { ITableColumn, Table } from "@hadmean/chromista";
+import { TableWidgetSchema } from "./types";
 
-export function TableWidget({
-  config,
-}: IRenderWidgetProps<ITableWidgetConfig>) {
-  const { queryId, entity } = config;
+interface IProps {
+  data: unknown;
+}
+export function TableWidget({ data }: IProps) {
+  const tableChartData = TableWidgetSchema.parse(data);
 
-  const entityViews = useEntityConfiguration<ITableTab[]>(
-    "entity_views",
-    config.entity
+  const columns: ITableColumn[] = Object.keys(tableChartData[0]).map(
+    (column) => ({
+      Header: column,
+      accessor: column,
+      disableSortBy: true,
+    })
   );
-  const dataState = (entityViews.data || []).find(
-    ({ id }) => id === queryId
-  )?.dataState;
 
   return (
-    <EntityDataTable
-      entity={entityViews.isLoading ? SLUG_LOADING_VALUE : entity}
-      defaultTableState={{ ...dataState, pageSize: config.limit || 5 }}
-      lean
+    <Table
+      tableData={{
+        data: {
+          data: tableChartData,
+          pageIndex: 0,
+          pageSize: 5,
+          totalRecords: tableChartData.length,
+        },
+        error: "",
+        isLoading: false,
+        isPreviousData: false,
+      }}
+      syncPaginatedDataStateOut={() => {}}
       border
+      lean
+      columns={columns}
     />
   );
 }

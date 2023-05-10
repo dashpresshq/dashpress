@@ -15,10 +15,20 @@ import { IWidgetConfig } from "shared/types/dashboard";
 const DASHBOARD_ENDPOINT = (dashboardId: string) =>
   `/api/dashboards/${dashboardId}`;
 
+const DASHBOARD_WIDGET_SCRIPT_ENDPOINT = (widgetId: string) =>
+  `/api/dashboards/script?widgetId=${widgetId}`;
+
 export const useDashboardWidgets = (dashboardId: string) => {
   return useApi<IWidgetConfig[]>(DASHBOARD_ENDPOINT(dashboardId), {
     errorMessage: dataNotFoundMessage("Dashboard widgets"),
     enabled: !!dashboardId && dashboardId !== SLUG_LOADING_VALUE,
+  });
+};
+
+export const useDasboardWidgetScriptData = (widgetId: string) => {
+  return useApi<unknown>(DASHBOARD_WIDGET_SCRIPT_ENDPOINT(widgetId), {
+    errorMessage: dataNotFoundMessage("Dashboard widget script"),
+    enabled: !!widgetId,
   });
 };
 
@@ -38,12 +48,16 @@ export function useCreateDashboardWidgetMutation(dashboardId: string) {
   }, apiMutateOptions);
 }
 
-export function useUpdateDashboardWidgetMutation(dashboardId: string) {
+export function useUpdateDashboardWidgetMutation(
+  dashboardId: string,
+  widgetId: string
+) {
   const apiMutateOptions = useApiMutateOptitmisticOptions<
     IWidgetConfig[],
     IWidgetConfig
   >({
     dataQueryPath: DASHBOARD_ENDPOINT(dashboardId),
+    otherEndpoints: [DASHBOARD_WIDGET_SCRIPT_ENDPOINT(widgetId)],
     onMutate: MutationHelpers.update,
     successMessage: MutationsLang.edit("Widget"),
   });

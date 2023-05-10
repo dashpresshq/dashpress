@@ -1,10 +1,13 @@
 import noop from "lodash/noop";
 import { IWidgetConfig } from "shared/types/dashboard";
 import { META_USER_PERMISSIONS } from "shared/constants/user";
+import { IValueLabel } from "@hadmean/chromista/dist/types";
 
 export const mutateGeneratedDashboardWidgets = async (
-  wigdets: IWidgetConfig[]
+  wigdets: IWidgetConfig[],
+  _entities: IValueLabel[]
 ): Promise<IWidgetConfig[]> => {
+  noop(_entities);
   return wigdets;
 };
 

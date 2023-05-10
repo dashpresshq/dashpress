@@ -1,5 +1,2 @@
+export { PORTAL_WIDGET_CONFIG } from "./main/constants";
 export { PortalDashboardWidget } from "./main/DashboardWidget";
-export {
-  PORTAL_WIDGET_SIZES,
-  PortalDashboardTypesOptions,
-} from "./main/constants";

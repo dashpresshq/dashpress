@@ -20,20 +20,62 @@ import { ROYGBIV } from "shared/constants/colors";
 import { SystemIconsList } from "shared/constants/Icons";
 import { BadRequestError } from "backend/lib/errors";
 import {
+  rDBMSDataApiService,
+  RDBMSDataApiService,
+} from "backend/data/data-access/RDBMS";
+import { IAccountProfile } from "shared/types/user";
+import {
   mutateGeneratedDashboardWidgets,
   PORTAL_DASHBOARD_PERMISSION,
 } from "./portal";
+
+const runAsyncJavascriptString = async (
+  javascriptString: string,
+  context: Record<string, unknown>
+) => {
+  const AsyncFunction = async function X() {}.constructor;
+  try {
+    return await AsyncFunction("$", javascriptString)(context);
+  } catch (error) {
+    return {
+      message: error.message,
+      error,
+      context,
+      expression: javascriptString,
+    };
+  }
+};
 
 export class DashboardWidgetsApiService implements IApplicationService {
   constructor(
     private readonly _dashboardWidgetsPersistenceService: AbstractConfigDataPersistenceService<IWidgetConfig>,
     private readonly _entitiesApiService: EntitiesApiService,
     private readonly _listOrderApiService: ListOrderApiService,
-    private readonly _rolesApiService: RolesApiService
+    private readonly _rolesApiService: RolesApiService,
+    private readonly _rDBMSApiDataService: RDBMSDataApiService
   ) {}
 
   async bootstrap() {
     await this._dashboardWidgetsPersistenceService.setup();
+  }
+
+  private getDataAccessInstance() {
+    return this._rDBMSApiDataService;
+  }
+
+  async runScript(script: string, currentUser: IAccountProfile) {
+    return await runAsyncJavascriptString(script, {
+      currentUser,
+      query: async (sql: string) =>
+        await this.getDataAccessInstance().runQuery(sql),
+    });
+  }
+
+  async runWidgetScript(widgetId: string, currentUser: IAccountProfile) {
+    const widget = await this._dashboardWidgetsPersistenceService.getItemOrFail(
+      widgetId
+    );
+    return await this.runScript(widget.script, currentUser);
   }
 
   private async generateDefaultDashboardWidgets(dashboardId: string) {
@@ -42,7 +84,8 @@ export class DashboardWidgetsApiService implements IApplicationService {
     const defaultWidgets = await mutateGeneratedDashboardWidgets(
       await this.generateDashboardWidgets(entitiesToShow, (entity) =>
         this._entitiesApiService.getEntityFirstFieldType(entity, "date")
-      )
+      ),
+      entitiesToShow
     );
 
     for (const widget of defaultWidgets) {
@@ -78,10 +121,10 @@ export class DashboardWidgetsApiService implements IApplicationService {
             title: userFriendlyCase(`${entity.value}`),
             _type: "summary-card",
             entity: entity.value,
-            queryId: "",
             color: colorsList[index % (colorsList.length - 1)],
             dateField,
             icon: SystemIconsList[index % (SystemIconsList.length - 1)],
+            script: `return await $.query('SELECT count(*) FROM ${entity.value}')`,
           };
         })
     );
@@ -93,7 +136,7 @@ export class DashboardWidgetsApiService implements IApplicationService {
         title: userFriendlyCase(`${firstEntity.value}`),
         _type: "table",
         entity: firstEntity.value,
-        queryId: "",
+        script: `return await $.query('SELECT * FROM ${firstEntity.value} LIMIT 5')`,
       });
     }
 
@@ -167,5 +210,6 @@ export const dashboardWidgetsApiService = new DashboardWidgetsApiService(
   dashboardWidgetsPersistenceService,
   entitiesApiService,
   listOrderApiService,
-  rolesApiService
+  rolesApiService,
+  rDBMSDataApiService
 );

@@ -5,8 +5,6 @@ export type WidgetFormField =
   | "entity"
   | "queryId"
   | "color"
-  | "limit"
   | "icon"
   | "size"
-  | "dateField"
   | "height";

@@ -9,6 +9,7 @@ let DASHBOARD_WIDGETS: IWidgetConfig[] = [
     entity: "entity-1",
     id: "table_id_1",
     queryId: "",
+    script: "return 1",
     title: "Foo Table",
   },
   {
@@ -17,8 +18,8 @@ let DASHBOARD_WIDGETS: IWidgetConfig[] = [
     color: "red",
     icon: "<p>Some SVG Here</p>",
     queryId: "",
+    script: "return 1",
     title: "Bar Card",
-    dateField: "",
     id: "summary_card_id_1",
   },
 ];

@@ -29,7 +29,7 @@ const GOOD_FIELD_TYPES_FOR_LIST: IEntityField["type"][] = ["enum", "string"];
 
 export class DataApiService implements IDataApiService {
   constructor(
-    private _rDBMSDataService: RDBMSDataApiService,
+    private _rDBMSApiDataService: RDBMSDataApiService,
     private _entitiesApiService: EntitiesApiService,
     private _configurationApiService: ConfigurationApiService,
     private _actionsApiService: ActionsApiService
@@ -40,7 +40,7 @@ export class DataApiService implements IDataApiService {
   }
 
   private getDataAccessInstance() {
-    return this._rDBMSDataService;
+    return this._rDBMSApiDataService;
   }
 
   async list(

@@ -6,9 +6,12 @@ import { BaseManageDashboardWidget } from "./_manage";
 
 export function UpdateDashboardWidget() {
   const dashboardId = useRouteParam("dashboardId");
+  const widgetId = useRouteParam("widgetId");
 
-  const updateDashboardWidgetMutation =
-    useUpdateDashboardWidgetMutation(dashboardId);
+  const updateDashboardWidgetMutation = useUpdateDashboardWidgetMutation(
+    dashboardId,
+    widgetId
+  );
 
   useSetPageDetails({
     pageTitle: "Update Dashboard Widget",

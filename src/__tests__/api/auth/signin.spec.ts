@@ -21,12 +21,8 @@ describe("/api/auth/signin", () => {
 
     expect(res._getStatusCode()).toBe(201);
 
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { exp, iat, ...decodedToken } = await authTokenApiService.verify(
-      res._getJSONData().token
-    );
-
-    expect(decodedToken).toMatchInlineSnapshot(`
+    expect(await authTokenApiService.verify(res._getJSONData().token))
+      .toMatchInlineSnapshot(`
       {
         "name": "Root User",
         "role": "creator",

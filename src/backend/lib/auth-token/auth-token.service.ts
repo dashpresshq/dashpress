@@ -4,6 +4,7 @@ import {
 } from "backend/configuration/configuration.service";
 import jsonwebtoken from "jsonwebtoken";
 import { IAccountProfile } from "shared/types/user";
+import noop from "lodash/noop";
 import {
   ConfigKeys,
   configApiService,
@@ -27,14 +28,21 @@ export class AuthTokenApiService {
     );
   }
 
-  async verify(token: string): Promise<IWithJWTMetadataAccountProfile> {
+  async verify(token: string): Promise<IAccountProfile> {
     return new Promise((resolve, reject) => {
-      jsonwebtoken.verify(token, this.authToken, (err, decoded) => {
-        if (err) {
-          return reject(err);
+      jsonwebtoken.verify(
+        token,
+        this.authToken,
+        (err, decoded: IWithJWTMetadataAccountProfile) => {
+          if (err) {
+            return reject(err);
+          }
+
+          const { exp, iat, ...decodedToken } = decoded;
+          noop(exp, iat);
+          return resolve(decodedToken);
         }
-        return resolve(decoded as IWithJWTMetadataAccountProfile);
-      });
+      );
     });
   }
 

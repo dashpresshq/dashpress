@@ -1,4 +1,5 @@
 import { IWidgetConfig } from "shared/types/dashboard";
+import { IAccountProfile } from "shared/types/user";
 import {
   DashboardWidgetsApiService,
   dashboardWidgetsApiService,
@@ -13,6 +14,20 @@ export class DashboardWidgetsApiController {
     return await this._dashboardWidgetsApiService.listDashboardWidgets(
       dashboardId,
       userRole
+    );
+  }
+
+  async runWidgetScript(widgetId: string, currentUser: IAccountProfile) {
+    return await this._dashboardWidgetsApiService.runWidgetScript(
+      widgetId,
+      currentUser
+    );
+  }
+
+  async runScript(script: string, currentUser: IAccountProfile) {
+    return await this._dashboardWidgetsApiService.runScript(
+      script,
+      currentUser
     );
   }
 

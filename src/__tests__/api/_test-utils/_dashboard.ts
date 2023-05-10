@@ -9,6 +9,7 @@ const TEST_DASHBOARDS: Array<IWidgetConfig> = [
     entity: "base-model",
     queryId: "",
     _type: "table",
+    script: "return 1",
   },
   {
     id: "widget-2",
@@ -18,6 +19,7 @@ const TEST_DASHBOARDS: Array<IWidgetConfig> = [
     queryId: "",
     color: ROYGBIV.blue,
     icon: "home",
+    script: "return 1",
   },
   {
     id: "not-in-dashboard",
@@ -25,6 +27,7 @@ const TEST_DASHBOARDS: Array<IWidgetConfig> = [
     entity: "base-model",
     queryId: "",
     _type: "table",
+    script: "return 1",
   },
 ];
 

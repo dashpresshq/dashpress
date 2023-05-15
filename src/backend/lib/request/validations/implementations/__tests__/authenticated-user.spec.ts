@@ -25,8 +25,6 @@ describe("Request Validations => authenticatedUserValidationImpl", () => {
 
     expect(res._getJSONData()).toMatchInlineSnapshot(`
       {
-        "exp": 86401660733959,
-        "iat": 1660820359,
         "name": "Root User",
         "role": "creator",
         "username": "root",

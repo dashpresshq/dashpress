@@ -19,7 +19,7 @@ export function CreateDashboardWidget() {
 
   return (
     <BaseManageDashboardWidget
-      title="Create"
+      action="create"
       onSave={async (data) =>
         await createDashboardWidgetMutation.mutateAsync({
           ...data,

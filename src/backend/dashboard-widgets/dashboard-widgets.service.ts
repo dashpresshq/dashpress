@@ -82,9 +82,7 @@ export class DashboardWidgetsApiService implements IApplicationService {
     const entitiesToShow = await this._entitiesApiService.getActiveEntities();
 
     const defaultWidgets = await mutateGeneratedDashboardWidgets(
-      await this.generateDashboardWidgets(entitiesToShow, (entity) =>
-        this._entitiesApiService.getEntityFirstFieldType(entity, "date")
-      ),
+      await this.generateDashboardWidgets(entitiesToShow),
       entitiesToShow
     );
 
@@ -102,10 +100,7 @@ export class DashboardWidgetsApiService implements IApplicationService {
     return defaultWidgets;
   }
 
-  private generateDashboardWidgets = async (
-    entitiesToShow: IValueLabel[],
-    getEntityFirstDateFieldType: (entity: string) => Promise<string>
-  ) => {
+  private generateDashboardWidgets = async (entitiesToShow: IValueLabel[]) => {
     const colorsList = Object.keys(ROYGBIV);
 
     const DEFAULT_NUMBER_OF_SUMMARY_CARDS = 8;
@@ -114,15 +109,12 @@ export class DashboardWidgetsApiService implements IApplicationService {
       entitiesToShow
         .slice(0, DEFAULT_NUMBER_OF_SUMMARY_CARDS)
         .map(async (entity, index) => {
-          const dateField = await getEntityFirstDateFieldType(entity.value);
-
           return {
             id: nanoid(),
             title: userFriendlyCase(`${entity.value}`),
             _type: "summary-card",
             entity: entity.value,
             color: colorsList[index % (colorsList.length - 1)],
-            dateField,
             icon: SystemIconsList[index % (SystemIconsList.length - 1)],
             script: `return await $.query('SELECT count(*) FROM ${entity.value}')`,
           };

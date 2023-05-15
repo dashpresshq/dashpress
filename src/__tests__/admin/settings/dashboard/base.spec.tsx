@@ -128,7 +128,7 @@ describe("pages/admin/settings/dashboard", () => {
 
       await userEvent.click(screen.getByRole("button", { name: "Done" }));
 
-      expect(replaceMock).toHaveBeenCalledWith("/admin");
+      expect(replaceMock).toHaveBeenCalledWith("/");
     });
   });
 

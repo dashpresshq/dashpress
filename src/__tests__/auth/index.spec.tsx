@@ -29,7 +29,7 @@ describe("pages/auth", () => {
     );
 
     await waitFor(() => {
-      expect(replaceMock).toHaveBeenCalledWith("/admin");
+      expect(replaceMock).toHaveBeenCalledWith("/");
     });
   });
 
@@ -92,7 +92,7 @@ describe("pages/auth", () => {
 
     expect(localStorage.getItem("__auth-token__")).toBe("some valid jwt token");
 
-    expect(pushMock).toHaveBeenCalledWith("/admin");
+    expect(pushMock).toHaveBeenCalledWith("/");
   });
 
   describe("Demo Credentials", () => {

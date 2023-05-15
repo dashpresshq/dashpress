@@ -39,7 +39,7 @@ describe("pages/setup/user", () => {
       </AppWrapper>
     );
     await waitFor(() => {
-      expect(replaceMock).toHaveBeenCalledWith("/admin");
+      expect(replaceMock).toHaveBeenCalledWith("/");
     });
   });
 });

@@ -85,16 +85,6 @@ export class EntitiesApiService implements IApplicationService {
     return entityFields;
   }
 
-  async getEntityFirstFieldType(
-    entity: string,
-    fieldType: IEntityField["type"]
-  ): Promise<string | undefined> {
-    const allFields = await this.getEntityFields(entity);
-    return allFields.find(({ type }) => {
-      return type === fieldType;
-    })?.name;
-  }
-
   async getEntityRelations(entity: string): Promise<IDBSchema["relations"]> {
     return (await this.getEntityFromSchema(entity)).relations;
   }

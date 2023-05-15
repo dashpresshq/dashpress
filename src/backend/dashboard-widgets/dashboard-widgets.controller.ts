@@ -25,6 +25,10 @@ export class DashboardWidgetsApiController {
   }
 
   async runScript(script: string, currentUser: IAccountProfile) {
+    if (process.env.NEXT_PUBLIC_IS_DEMO) {
+      return;
+    }
+
     return await this._dashboardWidgetsApiService.runScript(
       script,
       currentUser
@@ -32,7 +36,27 @@ export class DashboardWidgetsApiController {
   }
 
   async createWidget(widget: IWidgetConfig, dashboardId: string) {
+    if (process.env.NEXT_PUBLIC_IS_DEMO) {
+      throw new Error("Cannot create widget in demo mode");
+    }
+
     await this._dashboardWidgetsApiService.createWidget(widget, dashboardId);
+  }
+
+  async updateWidget(widgetId: string, widget: IWidgetConfig) {
+    if (process.env.NEXT_PUBLIC_IS_DEMO) {
+      throw new Error("Cannot update widget in demo mode");
+    }
+
+    await this._dashboardWidgetsApiService.updateWidget(widgetId, widget);
+  }
+
+  async removeWidget(widgetId: string, dashboardId: string) {
+    if (process.env.NEXT_PUBLIC_IS_DEMO) {
+      throw new Error("Cannot remove widget in demo mode");
+    }
+
+    await this._dashboardWidgetsApiService.removeWidget(widgetId, dashboardId);
   }
 
   async updateWidgetList(dashboardId: string, widgetList: string[]) {
@@ -40,14 +64,6 @@ export class DashboardWidgetsApiController {
       dashboardId,
       widgetList
     );
-  }
-
-  async updateWidget(widgetId: string, widget: IWidgetConfig) {
-    await this._dashboardWidgetsApiService.updateWidget(widgetId, widget);
-  }
-
-  async removeWidget(widgetId: string, dashboardId: string) {
-    await this._dashboardWidgetsApiService.removeWidget(widgetId, dashboardId);
   }
 }
 

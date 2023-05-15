@@ -5,6 +5,7 @@ import {
   WidgetHeader,
   EmptyWrapper,
   Stack,
+  RenderCode,
 } from "@hadmean/chromista";
 import { WidgetRoot } from "frontend/views/Dashboard/styles";
 import { ReactElement, forwardRef } from "react";
@@ -12,7 +13,6 @@ import { ISharedWidgetConfig } from "shared/types/dashboard/base";
 import { IWidgetConfig } from "shared/types/dashboard";
 import { DataStateKeys } from "@hadmean/protozoa";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
-import { RenderCode } from "frontend/components/RenderCode";
 import { useWidgetNavigationLink } from "../../../Widget/useWidgetNavigationLink";
 import { WIDGET_CONFIG } from "../../constants";
 import { IWidgetSettingProps } from "../WidgetHeader/types";

@@ -1,4 +1,9 @@
-import { RDMSSources } from "@hadmean/bacteria";
+enum RDMSSources {
+  Postgres = "postgres",
+  MySql = "mysql",
+  MsSql = "mssql",
+  Sqlite = "sqlite",
+}
 
 type IRDMSConnectionOptions = {
   dataSourceType: RDMSSources;

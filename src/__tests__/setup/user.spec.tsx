@@ -57,6 +57,6 @@ describe("pages/setup/user", () => {
       "User Created Successfully"
     );
 
-    expect(pushMock).toHaveBeenCalledWith("/admin");
+    expect(pushMock).toHaveBeenCalledWith("/");
   });
 });

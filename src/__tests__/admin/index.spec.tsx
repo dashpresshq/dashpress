@@ -123,7 +123,7 @@ describe("pages/admin", () => {
         await screen.findByRole("button", { name: "Manage Dashboard" })
       );
 
-      expect(replaceMock).toHaveBeenCalledWith("/admin/settings/dashboard");
+      expect(replaceMock).toHaveBeenCalledWith("/dashboard/manage");
     });
   });
 });

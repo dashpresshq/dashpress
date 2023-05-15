@@ -21,7 +21,7 @@ export function UpdateDashboardWidget() {
 
   return (
     <BaseManageDashboardWidget
-      title="Edit"
+      action="edit"
       onSave={async (data) =>
         await updateDashboardWidgetMutation.mutateAsync(data)
       }

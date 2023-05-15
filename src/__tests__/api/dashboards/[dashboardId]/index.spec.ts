@@ -40,6 +40,7 @@ describe("/api/dashboards/[dashboardId]/index", () => {
           "entity": "base-model",
           "id": "widget-1",
           "queryId": "",
+          "script": "return 1",
           "title": "Widget 1",
         },
         {
@@ -49,6 +50,7 @@ describe("/api/dashboards/[dashboardId]/index", () => {
           "icon": "home",
           "id": "widget-2",
           "queryId": "",
+          "script": "return 1",
           "title": "Widget 2",
         },
       ]
@@ -87,6 +89,7 @@ describe("/api/dashboards/[dashboardId]/index", () => {
           "icon": "home",
           "id": "widget-2",
           "queryId": "",
+          "script": "return 1",
           "title": "Widget 2",
         },
         {
@@ -94,6 +97,7 @@ describe("/api/dashboards/[dashboardId]/index", () => {
           "entity": "base-model",
           "id": "widget-1",
           "queryId": "",
+          "script": "return 1",
           "title": "Widget 1",
         },
       ]
@@ -163,11 +167,10 @@ describe("/api/dashboards/[dashboardId]/index generation", () => {
         {
           "_type": "summary-card",
           "color": "red",
-          "dateField": "createdAt",
           "entity": "base-model",
           "icon": "ShoppingCart",
           "id": "1",
-          "queryId": "",
+          "script": "return await $.query('SELECT count(*) FROM base-model')",
           "title": "Base Model",
         },
         {
@@ -176,24 +179,23 @@ describe("/api/dashboards/[dashboardId]/index generation", () => {
           "entity": "secondary-model",
           "icon": "Activity",
           "id": "2",
-          "queryId": "",
+          "script": "return await $.query('SELECT count(*) FROM secondary-model')",
           "title": "Secondary Model",
         },
         {
           "_type": "summary-card",
           "color": "yellow",
-          "dateField": "createdAt",
           "entity": "tests",
           "icon": "ShoppingBag",
           "id": "3",
-          "queryId": "",
+          "script": "return await $.query('SELECT count(*) FROM tests')",
           "title": "Tests",
         },
         {
           "_type": "table",
           "entity": "base-model",
           "id": "4",
-          "queryId": "",
+          "script": "return await $.query('SELECT * FROM base-model LIMIT 5')",
           "title": "Base Model",
         },
       ]

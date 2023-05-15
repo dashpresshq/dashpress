@@ -7,7 +7,7 @@ import {
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { IWidgetConfig } from "shared/types/dashboard";
 import { useActiveEntities } from "frontend/hooks/entity/entity.store";
-import { useRouteParam } from "@hadmean/protozoa";
+import { StringUtils, useRouteParam } from "@hadmean/protozoa";
 import { SystemIconsList } from "shared/constants/Icons";
 import { useNavigationStack } from "frontend/lib/routing";
 import { AppLayout } from "frontend/_layouts/app";
@@ -16,10 +16,10 @@ import { useDashboardWidgets } from "../../dashboard.store";
 
 interface IProps {
   onSave: (data: IWidgetConfig) => Promise<IWidgetConfig>;
-  title: string;
+  action: "create" | "edit";
 }
 
-export function BaseManageDashboardWidget({ onSave, title }: IProps) {
+export function BaseManageDashboardWidget({ onSave, action }: IProps) {
   const dashboardId = useRouteParam("dashboardId");
   const widgetId = useRouteParam("widgetId");
   const activeEntities = useActiveEntities();
@@ -30,7 +30,10 @@ export function BaseManageDashboardWidget({ onSave, title }: IProps) {
   return (
     <AppLayout>
       <SectionCenter>
-        <SectionBox title={`${title} Dashboard Widget`} backLink={backLink}>
+        <SectionBox
+          title={StringUtils.upperCaseFirstLetter(`${action} Dashboard Widget`)}
+          backLink={backLink}
+        >
           <ViewStateMachine
             loading={activeEntities.isLoading}
             error={activeEntities.error}

@@ -8,6 +8,7 @@ import {
   Spacer,
   Stack,
   Tabs,
+  RenderCode,
 } from "@hadmean/chromista";
 import { required, IFormProps, makePostRequest } from "@hadmean/protozoa";
 import { useEntityConfiguration } from "frontend/hooks/configuration/configuration.store";
@@ -22,7 +23,6 @@ import { IconInputField } from "frontend/components/IconInputField";
 import { useMutation } from "react-query";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { useEffect, useState } from "react";
-import { RenderCode } from "frontend/components/RenderCode";
 import { DASHBOARD_WIDGET_HEIGHTS, DASHBOARD_WIDGET_SIZES } from "./constants";
 import { WidgetFormField } from "./types";
 import { PortalFormFields, PortalFormSchema } from "./portal";
@@ -54,7 +54,9 @@ export function DashboardWidgetForm({
   onSubmit,
   initialValues,
   entities,
-}: IFormProps<IWidgetConfig> & { entities: ILabelValue[] }) {
+}: IFormProps<IWidgetConfig> & {
+  entities: ILabelValue[];
+}) {
   const router = useRouter();
   const [currentTab, setCurrentTab] = useState("");
 
@@ -186,6 +188,7 @@ export function DashboardWidgetForm({
             )}
             {values._type && (
               <>
+                {/* TODO documumentation on scripts */}
                 <Field name="script" validate={required} validateFields={[]}>
                   {({ input, meta }) => (
                     <FormCodeEditor
@@ -235,7 +238,7 @@ export function DashboardWidgetForm({
             )}
             <Spacer />
             <Stack justify="end" width="auto">
-              {values._type && (
+              {values._type && !process.env.NEXT_PUBLIC_IS_DEMO && (
                 <SoftButton
                   action={() => {
                     runWidgetScript.mutate(values.script);

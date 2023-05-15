@@ -28,6 +28,10 @@ export class RedisConfigDataPersistenceAdaptor<
     ];
   }
 
+  getItemLastUpdated() {
+    return null;
+  }
+
   async setup() {
     await this.getRedisInstance();
   }

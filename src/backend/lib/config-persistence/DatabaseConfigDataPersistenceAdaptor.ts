@@ -111,6 +111,24 @@ export class DatabaseConfigDataPersistenceAdaptor<
     return JSON.parse(queryResponse.value);
   }
 
+  async getItemLastUpdated(key: string) {
+    try {
+      const queryResponse = await (await this.getDbInstance())
+        .table(CONFIG_TABLE_PREFIX(this._configDomain))
+        .select(["updated_at"])
+        .where({ key })
+        .first();
+
+      if (!queryResponse) {
+        return queryResponse;
+      }
+
+      return new Date(queryResponse.updated_at);
+    } catch (error) {
+      return null;
+    }
+  }
+
   async persistItem(key: string, value: T) {
     const affectedRowsCount = await (
       await this.getDbInstance()

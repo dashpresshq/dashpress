@@ -5,6 +5,7 @@ import {
 } from "backend/lib/config/config.service";
 import { checkNodeVersion } from "bin/checkNodeVersion";
 import latestVersion from "latest-version";
+import { schemasApiService } from "backend/schema/schema.service";
 import { requestHandler } from "../../backend/lib/request";
 
 const currentPkgJson = require("../../../package.json");
@@ -28,7 +29,9 @@ export default requestHandler(
         "Cache Adapter": configApiService.getConfigValue<ConfigAdaptorTypes>(
           ConfigKeys.CACHE_ADAPTOR
         ),
-        // TODO "Schema Last Updated",
+        "Schema Last Updated": (
+          await schemasApiService.getLastUpdatedDate()
+        )?.toUTCString(),
       };
     },
   },

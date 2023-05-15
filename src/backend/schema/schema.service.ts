@@ -30,6 +30,14 @@ export class SchemasApiService implements IApplicationService {
     await this.loadDbSchema();
   }
 
+  async getLastUpdatedDate() {
+    const dbSchema = await this.getDBSchema();
+
+    return await this._schemaConfigDataPersistenceService.getItemLastUpdated(
+      dbSchema[0].name
+    );
+  }
+
   private async loadDbSchema(): Promise<IDBSchema[]> {
     if (this.dbSchema) {
       return this.dbSchema;

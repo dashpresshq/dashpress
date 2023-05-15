@@ -20,6 +20,8 @@ export abstract class AbstractConfigDataPersistenceService<T> {
 
   public abstract getItem(key: string): Promise<T | undefined>;
 
+  public abstract getItemLastUpdated(key: string): Promise<Date>;
+
   public async getItemOrFail(key: string): Promise<T> {
     const data = await this.getItem(key);
     if (data) {

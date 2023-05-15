@@ -16,6 +16,10 @@ export class MemoryConfigDataPersistenceAdaptor<
     noop();
   }
 
+  getItemLastUpdated() {
+    return null;
+  }
+
   static getDomainData(configDomain: ConfigDomain) {
     if (!MemoryConfigDataPersistenceAdaptor.data[configDomain]) {
       MemoryConfigDataPersistenceAdaptor.data = {

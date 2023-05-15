@@ -33,6 +33,10 @@ export class JsonFileConfigDataPersistenceAdaptor<
     fs.removeSync(this.pathToConfigDomain(this._configDomain));
   }
 
+  getItemLastUpdated() {
+    return null;
+  }
+
   private async getDomainData(): Promise<Record<string, T>> {
     try {
       return (

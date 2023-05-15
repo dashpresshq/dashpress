@@ -4,6 +4,8 @@ import {
 } from "backend/lib/config-persistence";
 import { IApplicationService } from "backend/types";
 
+export { sortByListOrder } from "./utils";
+
 export class ListOrderApiService implements IApplicationService {
   constructor(
     private readonly _listOrderPersistenceService: AbstractConfigDataPersistenceService<
@@ -40,21 +42,6 @@ export class ListOrderApiService implements IApplicationService {
     );
 
     await this.upsertOrder(listId, newListOrder);
-  }
-
-  sortByOrder<T extends { id: string }>(
-    order: string[],
-    itemListOrder: T[]
-  ): T[] {
-    if (order.length === 0) {
-      return itemListOrder;
-    }
-    const itemsMap = Object.fromEntries(
-      itemListOrder.map((item) => [item.id, item])
-    );
-    // TODO add the remaing list order items at the end
-
-    return order.map((item) => itemsMap[item]);
   }
 }
 

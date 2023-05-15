@@ -39,9 +39,19 @@ export class DatabaseConfigDataPersistenceAdaptor<
       ].schema.createTableIfNotExists(
         CONFIG_TABLE_PREFIX(this._configDomain),
         (table) => {
+          const connection =
+            DatabaseConfigDataPersistenceAdaptor._dbInstance[
+              this._configDomain
+            ];
           table.increments("id");
           table.string("key").notNullable().unique();
           table.text("value");
+          table
+            .timestamp("created_at")
+            .defaultTo(connection.raw("CURRENT_TIMESTAMP"));
+          table
+            .timestamp("updated_at")
+            .defaultTo(connection.raw("CURRENT_TIMESTAMP"));
         }
       );
     }
@@ -54,7 +64,6 @@ export class DatabaseConfigDataPersistenceAdaptor<
   }
 
   async resetToEmpty() {
-    // TODO get those keys and delete only those key
     await (
       await this.getDbInstance()
     )(CONFIG_TABLE_PREFIX(this._configDomain)).del();
@@ -109,6 +118,7 @@ export class DatabaseConfigDataPersistenceAdaptor<
       .where({ key })
       .update({
         value: JSON.stringify(value),
+        updated_at: new Date(),
       });
     if (affectedRowsCount === 0) {
       await (
@@ -116,6 +126,8 @@ export class DatabaseConfigDataPersistenceAdaptor<
       )(CONFIG_TABLE_PREFIX(this._configDomain)).insert({
         key,
         value: JSON.stringify(value),
+        created_at: new Date(),
+        updated_at: new Date(),
       });
     }
   }

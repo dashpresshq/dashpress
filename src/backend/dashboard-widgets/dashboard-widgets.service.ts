@@ -11,6 +11,7 @@ import { HOME_DASHBOARD_KEY, IWidgetConfig } from "shared/types/dashboard";
 import {
   listOrderApiService,
   ListOrderApiService,
+  sortByListOrder,
 } from "backend/list-order/list-order.service";
 import { rolesApiService, RolesApiService } from "backend/roles/roles.service";
 import { IValueLabel } from "@hadmean/chromista/dist/types";
@@ -148,7 +149,7 @@ export class DashboardWidgetsApiService implements IApplicationService {
         widgetList
       )) as IWidgetConfig[];
 
-    return this._listOrderApiService.sortByOrder(widgetList, widgets);
+    return sortByListOrder(widgetList, widgets);
   }
 
   async listDashboardWidgets(

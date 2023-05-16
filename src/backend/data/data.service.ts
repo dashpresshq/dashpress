@@ -10,6 +10,7 @@ import noop from "lodash/noop";
 import { IEntityField } from "shared/types/db";
 import { TemplateService } from "shared/lib/templates";
 import { FilterOperators, PaginatedData } from "@hadmean/protozoa";
+import { IAccountProfile } from "shared/types/user";
 import { rDBMSDataApiService, RDBMSDataApiService } from "./data-access/RDBMS";
 import { IDataApiService, IPaginationFilters } from "./types";
 import {
@@ -121,7 +122,8 @@ export class DataApiService implements IDataApiService {
 
   async create(
     entity: string,
-    data: Record<string, unknown>
+    data: Record<string, unknown>,
+    accountProfile: IAccountProfile
   ): Promise<string | number> {
     // TODO validate the createData values
     const [allowedFields, primaryField, entityValidations] = await Promise.all([
@@ -156,7 +158,8 @@ export class DataApiService implements IDataApiService {
     await this._actionsApiService.runAction(
       entity,
       BaseAction.Create,
-      async () => await this.showData(entity, id)
+      async () => await this.showData(entity, id),
+      accountProfile
     );
 
     return id;
@@ -221,10 +224,9 @@ export class DataApiService implements IDataApiService {
   async update(
     entity: string,
     id: string,
-    data: Record<string, unknown>
+    data: Record<string, unknown>,
+    accountProfile: IAccountProfile
   ): Promise<void> {
-    // validate the updateData values if present
-
     const [allowedFields, primaryField, entityValidations] = await Promise.all([
       this.getAllowedCrudsFieldsToShow(entity, "hidden_entity_update_columns"),
       this._entitiesApiService.getEntityPrimaryField(entity),
@@ -264,15 +266,21 @@ export class DataApiService implements IDataApiService {
     await this._actionsApiService.runAction(
       entity,
       BaseAction.Update,
-      async () => await this.showData(entity, id)
+      async () => await this.showData(entity, id),
+      accountProfile
     );
   }
 
-  async delete(entity: string, id: string): Promise<void> {
+  async delete(
+    entity: string,
+    id: string,
+    accountProfile: IAccountProfile
+  ): Promise<void> {
     await this._actionsApiService.runAction(
       entity,
       BaseAction.Delete,
-      async () => await this.showData(entity, id)
+      async () => await this.showData(entity, id),
+      accountProfile
     );
 
     const beforeData = await PortalDataHooksService.beforeDelete({

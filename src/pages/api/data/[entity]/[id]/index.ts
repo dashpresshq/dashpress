@@ -1,4 +1,5 @@
 import { DataActionType } from "shared/configurations";
+import { IAccountProfile } from "shared/types/user";
 import { dataApiController } from "../../../../../backend/data/data.controller";
 import { requestHandler } from "../../../../../backend/lib/request";
 
@@ -22,6 +23,7 @@ export default requestHandler({
     const validatedRequest = await getValidatedRequest([
       "entity",
       "entityId",
+      "authenticatedUser",
       "entityRequestBody",
       {
         _type: "crudEnabled",
@@ -31,12 +33,14 @@ export default requestHandler({
     return await dataApiController.updateData(
       validatedRequest.entity,
       validatedRequest.entityId,
-      validatedRequest.entityRequestBody
+      validatedRequest.entityRequestBody,
+      validatedRequest.authenticatedUser as IAccountProfile
     );
   },
   DELETE: async (getValidatedRequest) => {
     const validatedRequest = await getValidatedRequest([
       "entity",
+      "authenticatedUser",
       "entityId",
       {
         _type: "crudEnabled",
@@ -45,7 +49,8 @@ export default requestHandler({
     ]);
     return await dataApiController.deleteData(
       validatedRequest.entity,
-      validatedRequest.entityId
+      validatedRequest.entityId,
+      validatedRequest.authenticatedUser as IAccountProfile
     );
   },
 });

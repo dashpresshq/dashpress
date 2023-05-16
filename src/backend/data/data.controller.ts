@@ -1,5 +1,6 @@
 import { QueryFilter } from "shared/types/data";
 import { ILabelValue } from "types";
+import { IAccountProfile } from "shared/types/user";
 import { DataApiService, dataApiService } from "./data.service";
 import { IPaginationFilters } from "./types";
 
@@ -44,21 +45,29 @@ export class DataApiController {
 
   async createData(
     entity: string,
-    data: Record<string, unknown>
+    data: Record<string, unknown>,
+    accountProfile: IAccountProfile
   ): Promise<{ id: string | number }> {
-    return { id: await this._dataApiService.create(entity, data) };
+    return {
+      id: await this._dataApiService.create(entity, data, accountProfile),
+    };
   }
 
   async updateData(
     entity: string,
     id: string,
-    data: Record<string, unknown>
+    data: Record<string, unknown>,
+    accountProfile: IAccountProfile
   ): Promise<void> {
-    return await this._dataApiService.update(entity, id, data);
+    return await this._dataApiService.update(entity, id, data, accountProfile);
   }
 
-  async deleteData(entity: string, id: string): Promise<void> {
-    await this._dataApiService.delete(entity, id);
+  async deleteData(
+    entity: string,
+    id: string,
+    accountProfile: IAccountProfile
+  ): Promise<void> {
+    await this._dataApiService.delete(entity, id, accountProfile);
   }
 }
 

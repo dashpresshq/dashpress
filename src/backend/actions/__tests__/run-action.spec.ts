@@ -73,9 +73,9 @@ describe("Run Action", () => {
           subject: "CREATE TEST",
           body: "{{data.name}} has the age of {{ data.age }}",
           overrideSenderName:
-            "Constants are correctly compiled {{ CONSTANT.SITE_NAME }}",
+            "Constants are correctly compiled {{ CONSTANT.SITE_NAME }} && auth role is correctly compiled as {{ auth.role }}",
           overrideSenderEmail:
-            "Secrets are correctly compiled {{ SECRET.CREDENTIAL_KEY_1 }}",
+            "Secrets are correctly compiled {{ SECRET.CREDENTIAL_KEY_1 }} && auth name is correctly compiled as {{ auth.name }}",
         },
       },
       {
@@ -92,7 +92,7 @@ describe("Run Action", () => {
             "some_credential": "{{ SECRET.CREDENTIAL_KEY_1 }}",
             "some_constant": "{{ CONSTANT.SITE_NAME }}"
           }`,
-          body: `{"data": "{{data.name}} has the age of {{ data.age }}"}`,
+          body: `{"data": "{{data.name}} has the age of {{ data.age }}", "authUsername": "{{ auth.username }}", "authSystemProfile": "{{ auth.systemProfile }}"}`,
         },
       },
       {
@@ -106,7 +106,7 @@ describe("Run Action", () => {
         configuration: {
           channel: "UPDATE TEST",
           message:
-            "{{data.name}} has the age of {{ data.age }} \n Secrets are correctly compiled {{ SECRET.CREDENTIAL_KEY_1 }} \n Constants are correctly compiled {{ CONSTANT.SITE_NAME }}",
+            "{{data.name}} has the age of {{ data.age }} \n Secrets are correctly compiled {{ SECRET.CREDENTIAL_KEY_1 }} \n Constants are correctly compiled {{ CONSTANT.SITE_NAME }} \n auth username is {{ auth.username }} ",
         },
       },
       {
@@ -120,7 +120,7 @@ describe("Run Action", () => {
         configuration: {
           channel: "UPDATE TEST",
           message:
-            "{{data.name}} has the age of {{ data.age }} \n Secrets are correctly compiled {{ SECRET.CREDENTIAL_KEY_1 }} \n Constants are correctly compiled {{ CONSTANT.SITE_NAME }}",
+            "{{data.name}} has the age of {{ data.age }} \n Secrets are correctly compiled {{ SECRET.CREDENTIAL_KEY_1 }} \n Constants are correctly compiled {{ CONSTANT.SITE_NAME }} auth username is {{ auth.username }}",
         },
       },
       {
@@ -137,7 +137,8 @@ describe("Run Action", () => {
             "some_credential": "{{ SECRET.CREDENTIAL_KEY_1 }}",
             "some_constant": "{{ CONSTANT.SITE_NAME }}",
             "none-existent_constant": "{{ CONSTANT.NO_EXISTENT }}",
-            "empty-because-is-group-credential": "{{ SECRET.DATABASE___connectionString }}"
+            "empty-because-is-group-credential": "{{ SECRET.DATABASE___connectionString }}",
+            "username": "{{ auth.username }}"
           }`,
           body: `{"data": "{{data.name}} has the age of {{ data.age }}"}`,
         },
@@ -186,14 +187,14 @@ describe("Run Action", () => {
       });
 
       expect(sendMail).toHaveBeenCalledWith({
-        from: "Constants are correctly compiled John Snow <Secrets are correctly compiled CREDENTIAL_VALUE_1>",
+        from: "Constants are correctly compiled John Snow && auth role is correctly compiled as creator <Secrets are correctly compiled CREDENTIAL_VALUE_1 && auth name is correctly compiled as Root User>",
         html: "Newly Created has the age of 100",
         subject: "CREATE TEST",
         to: "44@hadmean.com",
       });
 
       expect(fetch).toHaveBeenCalledWith("http://CREATE.TEST", {
-        body: '{"data": "Newly Created has the age of 100"}',
+        body: '{"data": "Newly Created has the age of 100", "authUsername": "root", "authSystemProfile": ""}',
         headers: {
           some_constant: "John Snow",
           some_credential: "CREDENTIAL_VALUE_1",
@@ -230,7 +231,7 @@ describe("Run Action", () => {
       expect(fetch).toHaveBeenCalledWith(
         "https://slack.com/api/chat.postMessage",
         {
-          body: '{"channel":"UPDATE TEST","text":"John Doe Updated has the age of 6 \\n Secrets are correctly compiled CREDENTIAL_VALUE_1 \\n Constants are correctly compiled John Snow"}',
+          body: '{"channel":"UPDATE TEST","text":"John Doe Updated has the age of 6 \\n Secrets are correctly compiled CREDENTIAL_VALUE_1 \\n Constants are correctly compiled John Snow \\n auth username is root "}',
           headers: {
             Authorization: "Bearer sqlite",
             "Content-Type": "application/json",
@@ -262,6 +263,7 @@ describe("Run Action", () => {
           "none-existent_constant": "",
           some_constant: "John Snow",
           some_credential: "CREDENTIAL_VALUE_1",
+          username: "root",
         },
         method: "POST",
       });

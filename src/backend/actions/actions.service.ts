@@ -25,6 +25,7 @@ import {
   IIntegrationImplementationList,
   HTTP_ACTIVATION_ID,
 } from "shared/types/actions";
+import { IAccountProfile } from "shared/types/user";
 import { ACTION_INTEGRATIONS } from "./integrations";
 
 export class ActionsApiService implements IApplicationService {
@@ -43,7 +44,8 @@ export class ActionsApiService implements IApplicationService {
   async runAction(
     entity: string,
     formAction: string,
-    getData: () => Promise<Record<string, unknown>>
+    getData: () => Promise<Record<string, unknown>>,
+    accountProfile: IAccountProfile
   ) {
     const instances = await this.listEntityActionInstances(entity);
     const actionsToRun = instances.filter(
@@ -99,7 +101,7 @@ export class ActionsApiService implements IApplicationService {
             data,
             [INTEGRATIONS_GROUP_CONFIG.constants.prefix]: appConstants,
             [INTEGRATIONS_GROUP_CONFIG.credentials.prefix]: credentials,
-            auth: "TODO",
+            auth: accountProfile,
           }),
         ])
       );

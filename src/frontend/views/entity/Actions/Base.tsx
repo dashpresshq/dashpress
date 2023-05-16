@@ -165,19 +165,26 @@ export function BaseActionInstances({ entity, integrationKey }: IProps) {
         show={!!currentInstanceId}
       >
         <Typo.SM textStyle="italic">
-          Use your {`{{`}
-          {INTEGRATIONS_GROUP_CONFIG.credentials.prefix}.ENTRY{`}}`} and {`{{`}
-          {INTEGRATIONS_GROUP_CONFIG.constants.prefix}.ENTRY
+          Use your {`{{`} {INTEGRATIONS_GROUP_CONFIG.credentials.prefix}.ENTRY{" "}
+          {`}}`} and {`{{`} {INTEGRATIONS_GROUP_CONFIG.constants.prefix}.ENTRY{" "}
           {`}}`} here.
         </Typo.SM>
         <Spacer />
         <Typo.SM textStyle="italic">
           {" "}
-          Access the current data with {`{{`}
-          data.anyValidEntityField
-          {`}}`}
+          Access the current data with {`{{`} data.anyValidEntityField {`}}`}
         </Typo.SM>
         <Spacer />
+
+        <Typo.SM textStyle="italic">
+          {" "}
+          Access the current user properties with any of {`{{`} auth.role {`}}`}
+          , {`{{`} auth.name {`}}`}, {`{{`} auth.username {`}}`} and {`{{`}{" "}
+          auth.systemProfile {`}}`}
+        </Typo.SM>
+
+        <Spacer />
+
         <ActionForm
           onSubmit={async (data) => {
             if (currentInstanceId === NEW_ACTION_ITEM) {

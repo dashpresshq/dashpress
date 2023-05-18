@@ -188,7 +188,6 @@ export class DashboardWidgetsApiService implements IApplicationService {
     await this._dashboardWidgetsPersistenceService.updateItem(widgetId, widget);
   }
 
-  // TODO when disabling entities then remove the correspoding entity here
   async removeWidget(widgetId: string, dashboardId: string) {
     await this._dashboardWidgetsPersistenceService.removeItem(widgetId);
 

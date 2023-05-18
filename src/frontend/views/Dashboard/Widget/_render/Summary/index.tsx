@@ -2,7 +2,7 @@ import { ISummaryWidgetConfig } from "shared/types/dashboard";
 import { ROYGBIV } from "shared/constants/colors";
 import { systemIconToSVG } from "shared/constants/Icons";
 // import { getFullAndRelativeCount } from "./getFullAndRelativeCount";
-import { SummaryWidgetPresentation } from "./Presentation";
+import { SummaryWidget as SummaryWidgetPresentation } from "@hadmean/chromista";
 import { SummaryCardWidgetSchema } from "./types";
 
 interface IProps {
@@ -20,8 +20,6 @@ export function SummaryWidget({ config, data }: IProps) {
   //   (store) => store.currentRelativeDay
   // );
 
-  // const relativeCount = useEntityFilterCount(
-  //   entity,
   //   entityViews.isLoading || !dateField
   //     ? "loading"
   //     : [

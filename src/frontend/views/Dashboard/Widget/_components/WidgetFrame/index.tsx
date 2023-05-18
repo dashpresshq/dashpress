@@ -2,7 +2,6 @@ import styled from "styled-components";
 import {
   Spacer,
   StyledCard,
-  WidgetHeader,
   EmptyWrapper,
   Stack,
   RenderCode,
@@ -16,6 +15,7 @@ import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { useWidgetNavigationLink } from "../../../Widget/useWidgetNavigationLink";
 import { WIDGET_CONFIG } from "../../constants";
 import { IWidgetSettingProps } from "../WidgetHeader/types";
+import { WidgetHeader } from "../WidgetHeader";
 
 const StyledBox = styled.div`
   padding: 24px;

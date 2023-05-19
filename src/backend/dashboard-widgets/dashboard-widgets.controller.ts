@@ -17,10 +17,15 @@ export class DashboardWidgetsApiController {
     );
   }
 
-  async runWidgetScript(widgetId: string, currentUser: IAccountProfile) {
+  async runWidgetScript(
+    widgetId: string,
+    currentUser: IAccountProfile,
+    relativeDate: string
+  ) {
     return await this._dashboardWidgetsApiService.runWidgetScript(
       widgetId,
-      currentUser
+      currentUser,
+      relativeDate
     );
   }
 

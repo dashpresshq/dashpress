@@ -15,8 +15,10 @@ import { IWidgetConfig } from "shared/types/dashboard";
 const DASHBOARD_ENDPOINT = (dashboardId: string) =>
   `/api/dashboards/${dashboardId}`;
 
-const DASHBOARD_WIDGET_SCRIPT_ENDPOINT = (widgetId: string) =>
-  `/api/dashboards/script?widgetId=${widgetId}`;
+const DASHBOARD_WIDGET_SCRIPT_ENDPOINT = (
+  widgetId: string,
+  relativeDate: string
+) => `/api/dashboards/script?widgetId=${widgetId}&relativeDate=${relativeDate}`;
 
 export const useDashboardWidgets = (dashboardId: string) => {
   return useApi<IWidgetConfig[]>(DASHBOARD_ENDPOINT(dashboardId), {
@@ -25,11 +27,17 @@ export const useDashboardWidgets = (dashboardId: string) => {
   });
 };
 
-export const useDasboardWidgetScriptData = (widgetId: string) => {
-  return useApi<unknown>(DASHBOARD_WIDGET_SCRIPT_ENDPOINT(widgetId), {
-    errorMessage: dataNotFoundMessage("Dashboard widget script"),
-    enabled: !!widgetId,
-  });
+export const useDasboardWidgetScriptData = (
+  widgetId: string,
+  relativeDate: string
+) => {
+  return useApi<unknown>(
+    DASHBOARD_WIDGET_SCRIPT_ENDPOINT(widgetId, relativeDate),
+    {
+      errorMessage: dataNotFoundMessage("Dashboard widget script"),
+      enabled: !!widgetId && !!relativeDate,
+    }
+  );
 };
 
 export function useCreateDashboardWidgetMutation(dashboardId: string) {
@@ -57,7 +65,7 @@ export function useUpdateDashboardWidgetMutation(
     IWidgetConfig
   >({
     dataQueryPath: DASHBOARD_ENDPOINT(dashboardId),
-    otherEndpoints: [DASHBOARD_WIDGET_SCRIPT_ENDPOINT(widgetId)],
+    otherEndpoints: [DASHBOARD_WIDGET_SCRIPT_ENDPOINT(widgetId, "")],
     onMutate: MutationHelpers.update,
     successMessage: MutationsLang.edit("Widget"),
   });

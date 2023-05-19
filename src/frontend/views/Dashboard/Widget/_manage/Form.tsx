@@ -238,18 +238,18 @@ export function DashboardWidgetForm({
             )}
             <Spacer />
             <Stack justify="end" width="auto">
-              {/* {values._type && !process.env.NEXT_PUBLIC_IS_DEMO && ( */}
-              <SoftButton
-                action={() => {
-                  runWidgetScript.mutate(values.script);
-                }}
-                type="button"
-                isMakingActionRequest={runWidgetScript.isLoading}
-                icon="eye"
-                size={null}
-                label="Preview Widget"
-              />
-              {/* )} */}
+              {values._type && !process.env.NEXT_PUBLIC_IS_DEMO && (
+                <SoftButton
+                  action={() => {
+                    runWidgetScript.mutate(values.script);
+                  }}
+                  type="button"
+                  isMakingActionRequest={runWidgetScript.isLoading}
+                  icon="eye"
+                  size={null}
+                  label="Preview Widget"
+                />
+              )}
 
               <FormButton
                 text="Save"

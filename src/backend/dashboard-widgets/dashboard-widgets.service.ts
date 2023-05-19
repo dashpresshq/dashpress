@@ -25,6 +25,7 @@ import {
   RDBMSDataApiService,
 } from "backend/data/data-access/RDBMS";
 import { IAccountProfile } from "shared/types/user";
+import { noop } from "lodash";
 import {
   mutateGeneratedDashboardWidgets,
   PORTAL_DASHBOARD_PERMISSION,
@@ -64,7 +65,12 @@ export class DashboardWidgetsApiService implements IApplicationService {
     return this._rDBMSApiDataService;
   }
 
-  async runScript(script: string, currentUser: IAccountProfile) {
+  async runScript(
+    script: string,
+    currentUser: IAccountProfile,
+    relativeDate?: string
+  ) {
+    noop(relativeDate);
     return await runAsyncJavascriptString(script, {
       currentUser,
       query: async (sql: string) =>
@@ -72,11 +78,15 @@ export class DashboardWidgetsApiService implements IApplicationService {
     });
   }
 
-  async runWidgetScript(widgetId: string, currentUser: IAccountProfile) {
+  async runWidgetScript(
+    widgetId: string,
+    currentUser: IAccountProfile,
+    relativeDate: string
+  ) {
     const widget = await this._dashboardWidgetsPersistenceService.getItemOrFail(
       widgetId
     );
-    return await this.runScript(widget.script, currentUser);
+    return await this.runScript(widget.script, currentUser, relativeDate);
   }
 
   private async generateDefaultDashboardWidgets(dashboardId: string) {

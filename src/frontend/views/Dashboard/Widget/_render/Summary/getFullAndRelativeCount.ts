@@ -1,15 +1,11 @@
 import { abbreviateNumber } from "@hadmean/protozoa";
 
 export const getFullAndRelativeCount = (
-  fullCount: "loading" | number,
-  relativeCount: "loading" | number,
-  hasDateField: boolean
+  fullCount: number,
+  relativeCount?: number
 ): [string, string, "up" | "down" | "side"] => {
-  if (fullCount === "loading" || relativeCount === "loading") {
-    return ["Counting", "Counting", "side"];
-  }
   const fullCountReturn = abbreviateNumber(fullCount);
-  if (!hasDateField) {
+  if (!relativeCount) {
     return [fullCountReturn, "", "side"];
   }
   if (relativeCount === 0) {

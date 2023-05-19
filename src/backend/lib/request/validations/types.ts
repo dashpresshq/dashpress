@@ -14,6 +14,7 @@ export type ValidationKeys = {
     | "crudEnabled"
     | "requestBody"
     | "requestQuery"
+    | "requestQueries"
     | "entityId"
     | "entityRequestBody"
     | "queryFilters"

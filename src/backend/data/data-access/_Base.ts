@@ -4,9 +4,9 @@ import {
   IColumnFilterBag,
 } from "@hadmean/protozoa";
 import { QueryFilter } from "shared/types/data";
-import { CONSTANT_TIME_MAP, RELATIVE_TIME_MAP } from "./time.constants";
 import { IPaginationFilters } from "../types";
 import { QueryOperationImplementation, QueryOperators } from "./types";
+import { relativeDateNotationToActualDate } from "./time.constants";
 
 export abstract class BaseDataAccessService<T> {
   abstract queryOperationImplementation: QueryOperationImplementation<T>;
@@ -112,10 +112,10 @@ export abstract class BaseDataAccessService<T> {
         );
 
       case FilterOperators.DATE: {
-        const firstTime = BaseDataAccessService.dateFilterToTime(
+        const firstTime = relativeDateNotationToActualDate(
           (value as string) || DATE_FILTER_VALUE.BEGINNING_OF_TIME_VALUE
         );
-        const secondTime = BaseDataAccessService.dateFilterToTime(
+        const secondTime = relativeDateNotationToActualDate(
           (value2 as string) || DATE_FILTER_VALUE.NOW
         );
         const timeBetween: [Date, Date] =
@@ -129,28 +129,5 @@ export abstract class BaseDataAccessService<T> {
         );
       }
     }
-  }
-
-  static dateFilterToTime(value: string): Date {
-    if (value && new Date(value).toString() !== "Invalid Date") {
-      return new Date(value);
-    }
-
-    const constantTimeImplementation = CONSTANT_TIME_MAP[value];
-
-    if (constantTimeImplementation) {
-      return constantTimeImplementation();
-    }
-
-    const [countString, field] = value.split(":");
-    const count = +countString;
-
-    const relativeTimeImplementation = RELATIVE_TIME_MAP[field];
-
-    if (relativeTimeImplementation) {
-      return relativeTimeImplementation(count);
-    }
-
-    return new Date();
   }
 }

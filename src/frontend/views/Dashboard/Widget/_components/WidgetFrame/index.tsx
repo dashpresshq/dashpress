@@ -83,6 +83,7 @@ export const WidgetFrame = forwardRef<HTMLDivElement, IProps>(
             <WidgetHeader
               setting={setting}
               title={config.title}
+              widgetId={config.id}
               link={navigationLink}
             />
             <Spacer />

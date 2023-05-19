@@ -18,11 +18,12 @@ export default requestHandler(
     GET: async (getValidatedRequest) => {
       const validatedRequest = await getValidatedRequest([
         "authenticatedUser",
-        { _type: "requestQuery", options: "widgetId" },
+        { _type: "requestQueries", options: ["widgetId", "relativeDate"] },
       ]);
       return await dashboardWidgetsApiController.runWidgetScript(
-        validatedRequest.requestQuery,
-        validatedRequest.authenticatedUser as IAccountProfile
+        validatedRequest.requestQueries.widgetId,
+        validatedRequest.authenticatedUser as IAccountProfile,
+        validatedRequest.requestQueries.relativeDate
       );
     },
   },

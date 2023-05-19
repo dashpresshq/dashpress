@@ -1,4 +1,4 @@
-import { Filter, Settings } from "react-feather";
+import { Settings } from "react-feather";
 import { USER_PERMISSIONS } from "shared/constants/user";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import React from "react";
@@ -10,8 +10,6 @@ import { AppLayout } from "../../../_layouts/app";
 import { useDashboardWidgets } from "../dashboard.store";
 import { gridRoot } from "../styles";
 import { DemoVideo } from "./Demo";
-import { useDashboardRelativeDayStore } from "./relativeTime.store";
-import { DASHBOARD_RELATIVE_DAYS } from "./constants";
 import { DashboardSkeleton } from "../Skeleton";
 import { DetailsCanvas } from "../../data/Table/DetailsCanvas";
 import { DashboardWidget } from "../Widget";
@@ -30,23 +28,11 @@ export function BaseDashboard({ dashboardId, showDemo, manageLink }: IProps) {
   const widgets = useDashboardWidgets(dashboardId);
   const router = useRouter();
 
-  const setCurrentRelativeDay = useDashboardRelativeDayStore(
-    (store) => store.setCurrentRelativeDay
-  );
-
   const userHasPermission = useUserHasPermission();
 
   return (
     <AppLayout
-      actionItems={DASHBOARD_RELATIVE_DAYS.map(({ label, value }) => ({
-        id: label,
-        label: `Past ${label}`,
-        onClick: () => {
-          setCurrentRelativeDay(value);
-        },
-        IconComponent: Filter,
-      }))}
-      secondaryActionItems={
+      actionItems={
         userHasPermission(USER_PERMISSIONS.CAN_MANAGE_DASHBOARD)
           ? [
               {

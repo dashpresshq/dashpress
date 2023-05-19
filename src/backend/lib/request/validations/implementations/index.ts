@@ -15,6 +15,7 @@ import { requestQueryValidationImpl as requestQuery } from "./request-query";
 import { canUserValidationImpl as canUser } from "./can-user";
 import { withPasswordValidationImpl as withPassword } from "./with-password";
 import { authenticatedUserValidationImpl as authenticatedUser } from "./authenticated-user";
+import { requestQueriesValidationImpl as requestQueries } from "./request-queries";
 
 import { ValidationImplType } from "./types";
 import { PortalValidationImpl } from "./portal";
@@ -31,6 +32,7 @@ export const ValidationImpl: Record<
   anyBody,
   requestQuery,
   canUser,
+  requestQueries,
   authenticatedUser,
   configBody,
   entityRequestBody,

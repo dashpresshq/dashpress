@@ -10,16 +10,18 @@ export interface IDashboardWidgetPresentationProps {
   config: IWidgetConfig;
   setting?: IWidgetSettingProps;
   data: DataStateKeys<unknown>;
+  isPreview?: true;
 }
 
 export const DashboardWidgetPresentation = forwardRef<
   HTMLDivElement,
   IDashboardWidgetPresentationProps
->(({ config, setting, data }, ref) => {
+>(({ config, setting, data, isPreview }, ref) => {
   const frameProps = {
     config,
     setting,
     ref,
+    isPreview,
     type: config._type,
     data,
   };

@@ -31,7 +31,7 @@ export function BaseManageDashboardWidget({ onSave, action }: IProps) {
     <AppLayout>
       <SectionCenter>
         <SectionBox
-          title={StringUtils.upperCaseFirstLetter(`${action} Dashboard Widget`)}
+          title={`${StringUtils.upperCaseFirstLetter(action)} Dashboard Widget`}
           backLink={backLink}
         >
           <ViewStateMachine

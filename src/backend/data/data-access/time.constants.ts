@@ -29,6 +29,10 @@ const CONSTANT_TIME_MAP: Partial<Record<DATE_FILTER_VALUE, () => Date>> = {
 export const relativeDateNotationToActualDate = (
   relativeDateNotation: string
 ): Date => {
+  if (!relativeDateNotation) {
+    return new Date();
+  }
+
   if (
     relativeDateNotation &&
     new Date(relativeDateNotation).toString() !== "Invalid Date"

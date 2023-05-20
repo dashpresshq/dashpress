@@ -3,11 +3,15 @@ import { useEntityConfiguration } from "frontend/hooks/configuration/configurati
 import { NAVIGATION_LINKS } from "frontend/lib/routing";
 import { ITableTab } from "shared/types/data";
 
-export const useWidgetNavigationLink = (entity: string, queryId?: string) => {
+export const useWidgetNavigationLink = (entity?: string, queryId?: string) => {
   const entityViews = useEntityConfiguration<ITableTab[]>(
     "entity_views",
     queryId ? entity : SLUG_LOADING_VALUE
   );
+
+  if (!entity) {
+    return undefined;
+  }
 
   const tabTitle = (entityViews.data || []).find(
     ({ id }) => id === queryId

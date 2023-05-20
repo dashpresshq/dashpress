@@ -7,7 +7,11 @@ import {
   AbstractConfigDataPersistenceService,
 } from "backend/lib/config-persistence";
 import { IApplicationService } from "backend/types";
-import { HOME_DASHBOARD_KEY, IWidgetConfig } from "shared/types/dashboard";
+import {
+  HOME_DASHBOARD_KEY,
+  IWidgetConfig,
+  WIDGET_SCRIPT_RELATIVE_TIME_MARKER,
+} from "shared/types/dashboard";
 import {
   listOrderApiService,
   ListOrderApiService,
@@ -25,7 +29,7 @@ import {
   RDBMSDataApiService,
 } from "backend/data/data-access/RDBMS";
 import { IAccountProfile } from "shared/types/user";
-import { noop } from "lodash";
+import { relativeDateNotationToActualDate } from "backend/data/data-access/time.constants";
 import {
   mutateGeneratedDashboardWidgets,
   PORTAL_DASHBOARD_PERMISSION,
@@ -66,16 +70,26 @@ export class DashboardWidgetsApiService implements IApplicationService {
   }
 
   async runScript(
-    script: string,
+    script$1: string,
     currentUser: IAccountProfile,
     relativeDate?: string
   ) {
-    noop(relativeDate);
-    return await runAsyncJavascriptString(script, {
-      currentUser,
-      query: async (sql: string) =>
-        await this.getDataAccessInstance().runQuery(sql),
-    });
+    if (!script$1) {
+      return "{}";
+    }
+
+    const script = script$1.replaceAll(
+      `$.${WIDGET_SCRIPT_RELATIVE_TIME_MARKER}`,
+      relativeDateNotationToActualDate(relativeDate).toISOString()
+    );
+
+    return (
+      (await runAsyncJavascriptString(script, {
+        currentUser,
+        query: async (sql: string) =>
+          await this.getDataAccessInstance().runQuery(sql),
+      })) || "{}"
+    );
   }
 
   async runWidgetScript(
@@ -120,6 +134,11 @@ export class DashboardWidgetsApiService implements IApplicationService {
       entitiesToShow
         .slice(0, DEFAULT_NUMBER_OF_SUMMARY_CARDS)
         .map(async (entity, index) => {
+          const dateField =
+            await this._entitiesApiService.getEntityFirstFieldType(
+              entity.value,
+              "date"
+            );
           return {
             id: nanoid(),
             title: userFriendlyCase(`${entity.value}`),
@@ -127,7 +146,13 @@ export class DashboardWidgetsApiService implements IApplicationService {
             entity: entity.value,
             color: colorsList[index % (colorsList.length - 1)],
             icon: SystemIconsList[index % (SystemIconsList.length - 1)],
-            script: `return await $.query('SELECT count(*) FROM ${entity.value}')`,
+            script: dateField
+              ? `const actual = await $.query(\`SELECT count(*) FROM "${entity.value}"\`);
+const relative = await $.query(\`SELECT count(*) FROM "${entity.value}" WHERE "${dateField}" < '$.${WIDGET_SCRIPT_RELATIVE_TIME_MARKER}'\`);
+
+return [...actual, ...relative];
+            `
+              : `return await $.query('SELECT count(*) FROM "${entity.value}"')`,
           };
         })
     );

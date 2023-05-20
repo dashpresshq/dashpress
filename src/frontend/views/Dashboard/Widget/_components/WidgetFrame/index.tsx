@@ -9,7 +9,10 @@ import {
 import { WidgetRoot } from "frontend/views/Dashboard/styles";
 import { ReactElement, forwardRef } from "react";
 import { ISharedWidgetConfig } from "shared/types/dashboard/base";
-import { IWidgetConfig } from "shared/types/dashboard";
+import {
+  IWidgetConfig,
+  WIDGET_SCRIPT_RELATIVE_TIME_MARKER,
+} from "shared/types/dashboard";
 import { DataStateKeys } from "@hadmean/protozoa";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { useWidgetNavigationLink } from "../../../Widget/useWidgetNavigationLink";
@@ -25,6 +28,7 @@ interface IProps {
   config: ISharedWidgetConfig;
   setting?: IWidgetSettingProps;
   type: IWidgetConfig["_type"];
+  isPreview?: boolean;
   data: DataStateKeys<unknown>;
   Component: ({
     data,
@@ -36,7 +40,7 @@ interface IProps {
 }
 
 export const WidgetFrame = forwardRef<HTMLDivElement, IProps>(
-  ({ setting, config, type, data, Component }, ref) => {
+  ({ setting, config, type, data, isPreview, Component }, ref) => {
     const navigationLink = useWidgetNavigationLink(
       config.entity,
       config.queryId
@@ -71,6 +75,10 @@ export const WidgetFrame = forwardRef<HTMLDivElement, IProps>(
       }
     }
 
+    const hasRelativeDate = config.script?.includes(
+      `$.${WIDGET_SCRIPT_RELATIVE_TIME_MARKER}`
+    );
+
     return (
       <WidgetRoot
         ref={ref}
@@ -85,6 +93,8 @@ export const WidgetFrame = forwardRef<HTMLDivElement, IProps>(
               title={config.title}
               widgetId={config.id}
               link={navigationLink}
+              isPreview={isPreview}
+              hasRelativeDate={hasRelativeDate}
             />
             <Spacer />
             <div

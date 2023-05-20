@@ -1,14 +1,20 @@
 import { abbreviateNumber } from "@hadmean/protozoa";
+import { isEmpty } from "class-validator";
 
 export const getFullAndRelativeCount = (
-  fullCount: number,
-  relativeCount?: number
+  fullCount$1: number | string,
+  relativeCount$1?: number | string
 ): [string, string, "up" | "down" | "side"] => {
+  const fullCount = Number(fullCount$1);
+
   const fullCountReturn = abbreviateNumber(fullCount);
-  if (!relativeCount) {
+  if (isEmpty(relativeCount$1)) {
     return [fullCountReturn, "", "side"];
   }
-  if (relativeCount === 0) {
+
+  const relativeCount = Number(relativeCount$1);
+
+  if (Number(relativeCount) === 0) {
     return [fullCountReturn, "N/A", "side"];
   }
 

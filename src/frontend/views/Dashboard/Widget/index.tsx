@@ -13,7 +13,9 @@ interface IProps {
 
 export const DashboardWidget = forwardRef<HTMLDivElement, IProps>(
   ({ config, setting }, ref) => {
-    const { widgetRelativeDate } = useDashboardWidgetRelativeDateStore();
+    const widgetRelativeDate = useDashboardWidgetRelativeDateStore(
+      (store) => store.widgetRelativeDate
+    );
 
     const data = useDasboardWidgetScriptData(
       config.id,

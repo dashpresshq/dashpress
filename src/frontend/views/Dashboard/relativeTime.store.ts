@@ -11,10 +11,15 @@ type IStore = {
 export const useDashboardWidgetRelativeDateStore = createStore<IStore>(
   (set) => ({
     widgetRelativeDate: {},
-    setWidgetRelativeDate: ({ currentRelativeDay, widgetId }) =>
-      set(({ widgetRelativeDate }) => ({
-        ...widgetRelativeDate,
-        [widgetId]: currentRelativeDay,
-      })),
+    setWidgetRelativeDate: ({ currentRelativeDay, widgetId }) => {
+      set((store) => {
+        return {
+          widgetRelativeDate: {
+            ...store.widgetRelativeDate,
+            [widgetId]: currentRelativeDay,
+          },
+        };
+      });
+    },
   })
 );

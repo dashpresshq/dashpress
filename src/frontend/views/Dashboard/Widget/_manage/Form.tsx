@@ -9,6 +9,7 @@ import {
   Stack,
   Tabs,
   RenderCode,
+  Typo,
 } from "@hadmean/chromista";
 import { required, IFormProps, makePostRequest } from "@hadmean/protozoa";
 import { useEntityConfiguration } from "frontend/hooks/configuration/configuration.store";
@@ -101,11 +102,10 @@ export function DashboardWidgetForm({
               )}
             </Field>
             {formFields.includes("entity") && (
-              <Field name="entity" validate={required} validateFields={[]}>
+              <Field name="entity" validateFields={[]}>
                 {({ input, meta }) => (
                   <FormSelect
-                    required
-                    label="Entity"
+                    label="Link Entity"
                     disabledOptions={[]}
                     selectData={entities}
                     meta={meta}
@@ -118,7 +118,7 @@ export function DashboardWidgetForm({
               <Field name="queryId" validateFields={[]}>
                 {({ input, meta }) => (
                   <FormSelect
-                    label="Query"
+                    label="Link Tab"
                     disabledOptions={[]}
                     selectData={(entityViews.data || []).map(
                       ({ id, title }) => ({
@@ -217,6 +217,7 @@ export function DashboardWidgetForm({
                           content: (
                             <DashboardWidgetPresentation
                               config={values}
+                              isPreview
                               data={{
                                 data: runWidgetScript.data,
                                 error: false,
@@ -237,26 +238,35 @@ export function DashboardWidgetForm({
               </>
             )}
             <Spacer />
-            <Stack justify="end" width="auto">
-              {values._type && !process.env.NEXT_PUBLIC_IS_DEMO && (
-                <SoftButton
-                  action={() => {
-                    runWidgetScript.mutate(values.script);
-                  }}
-                  type="button"
-                  isMakingActionRequest={runWidgetScript.isLoading}
-                  icon="eye"
-                  size={null}
-                  label="Preview Widget"
-                />
-              )}
+            {process.env.NEXT_PUBLIC_IS_DEMO ? (
+              <Stack justify="center">
+                <Typo.MD>
+                  You will be able to save this form on your own installation
+                </Typo.MD>
+              </Stack>
+            ) : (
+              <Stack justify="end" width="auto">
+                {values._type && (
+                  <SoftButton
+                    action={() => {
+                      runWidgetScript.mutate(values.script);
+                    }}
+                    disabled={!values.script}
+                    type="button"
+                    isMakingActionRequest={runWidgetScript.isLoading}
+                    icon="eye"
+                    size={null}
+                    label="Test Widget Script"
+                  />
+                )}
 
-              <FormButton
-                text="Save"
-                isMakingRequest={false}
-                disabled={pristine}
-              />
-            </Stack>
+                <FormButton
+                  text="Save"
+                  isMakingRequest={false}
+                  disabled={pristine}
+                />
+              </Stack>
+            )}
           </form>
         );
       }}

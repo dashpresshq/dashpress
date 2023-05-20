@@ -15,16 +15,27 @@ interface IProps {
   title: string;
   widgetId: string;
   link?: string;
+  isPreview?: boolean;
+  hasRelativeDate: boolean;
 }
 
-export function WidgetHeader({ title, setting, link, widgetId }: IProps) {
-  const { setWidgetRelativeDate } = useDashboardWidgetRelativeDateStore();
+export function WidgetHeader({
+  title,
+  setting,
+  link,
+  widgetId,
+  isPreview,
+  hasRelativeDate,
+}: IProps) {
+  const [setWidgetRelativeDate] = useDashboardWidgetRelativeDateStore(
+    (store) => [store.setWidgetRelativeDate]
+  );
 
   return (
     <Stack justify="space-between" align="flex-start">
       <Typo.MD ellipsis>{title}</Typo.MD>
       <Stack width="auto">
-        {setting && (
+        {setting ? (
           <>
             <SoftButton
               action={() => setting.setId()}
@@ -38,23 +49,33 @@ export function WidgetHeader({ title, setting, link, widgetId }: IProps) {
               shouldConfirmAlert
             />
           </>
+        ) : (
+          <>
+            {hasRelativeDate && !isPreview && (
+              <DropDownMenu
+                menuItems={DASHBOARD_RELATIVE_DAYS.map(({ label, value }) => ({
+                  id: label,
+                  label: `${label}`,
+                  onClick: () => {
+                    setWidgetRelativeDate({
+                      widgetId,
+                      currentRelativeDay: value,
+                    });
+                  },
+                }))}
+              />
+            )}
+            {link && (
+              <SoftButton
+                action={link}
+                label="View"
+                icon="right"
+                disabled={isPreview}
+                justIcon
+              />
+            )}
+          </>
         )}
-        <DropDownMenu
-          menuItems={DASHBOARD_RELATIVE_DAYS.map(({ label, value }) => ({
-            id: label,
-            label: `${label}`,
-            onClick: () => {
-              setWidgetRelativeDate({
-                widgetId,
-                currentRelativeDay: value,
-              });
-            },
-          }))}
-          disabled={!!setting}
-        />
-        {link ? (
-          <SoftButton action={link} label="View" icon="right" justIcon />
-        ) : null}
       </Stack>
     </Stack>
   );

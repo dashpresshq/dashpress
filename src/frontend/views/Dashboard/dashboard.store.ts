@@ -18,8 +18,15 @@ const DASHBOARD_ENDPOINT = (dashboardId: string) =>
 const DASHBOARD_WIDGET_SCRIPT_ENDPOINT = (
   widgetId: string,
   relativeDate: string
-) => `/api/dashboards/script?widgetId=${widgetId}&relativeDate=${relativeDate}`;
+) => {
+  const base = `/api/dashboards/script?widgetId=${widgetId}`;
 
+  if (!relativeDate) {
+    return base;
+  }
+
+  return `${base}&relativeDate=${relativeDate}`;
+};
 export const useDashboardWidgets = (dashboardId: string) => {
   return useApi<IWidgetConfig[]>(DASHBOARD_ENDPOINT(dashboardId), {
     errorMessage: dataNotFoundMessage("Dashboard widgets"),

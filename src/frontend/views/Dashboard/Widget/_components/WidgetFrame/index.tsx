@@ -49,6 +49,8 @@ export const WidgetFrame = forwardRef<HTMLDivElement, IProps>(
     const {
       height: configHeight,
       size: configSize,
+      overrideHeight,
+      overrideSize,
       LoadingComponent,
       requiredInterface,
       schema,
@@ -56,7 +58,7 @@ export const WidgetFrame = forwardRef<HTMLDivElement, IProps>(
       isDataEmpty,
     } = WIDGET_CONFIG[type];
 
-    const height = config.height || configHeight;
+    const height = overrideHeight || config.height || configHeight;
 
     const styleHeight = height ? `${height}px` : undefined;
 
@@ -83,7 +85,7 @@ export const WidgetFrame = forwardRef<HTMLDivElement, IProps>(
       <WidgetRoot
         ref={ref}
         aria-label={`${config.title} Widget`}
-        size={config.size || configSize}
+        size={overrideSize || config.size || configSize}
         hasSetting={!!setting}
       >
         <StyledCard>

@@ -13,8 +13,6 @@ import {
 } from "@hadmean/chromista";
 import { required, IFormProps, makePostRequest } from "@hadmean/protozoa";
 import { useEntityConfiguration } from "frontend/hooks/configuration/configuration.store";
-import { NAVIGATION_LINKS } from "frontend/lib/routing";
-import { useRouter } from "next/router";
 import { Field, Form } from "react-final-form";
 import { ITableTab } from "shared/types/data";
 import { ISummaryWidgetConfig, IWidgetConfig } from "shared/types/dashboard";
@@ -58,7 +56,6 @@ export function DashboardWidgetForm({
 }: IFormProps<IWidgetConfig> & {
   entities: ILabelValue[];
 }) {
-  const router = useRouter();
   const [currentTab, setCurrentTab] = useState("");
 
   const runWidgetScript = useRunWidgetScript();
@@ -106,6 +103,7 @@ export function DashboardWidgetForm({
                 {({ input, meta }) => (
                   <FormSelect
                     label="Link Entity"
+                    description="Select the entity the user should be directed to when clicking on the widget"
                     disabledOptions={[]}
                     selectData={entities}
                     meta={meta}
@@ -114,33 +112,27 @@ export function DashboardWidgetForm({
                 )}
               </Field>
             )}
-            {formFields.includes("queryId") && values.entity && (
-              <Field name="queryId" validateFields={[]}>
-                {({ input, meta }) => (
-                  <FormSelect
-                    label="Link Tab"
-                    disabledOptions={[]}
-                    selectData={(entityViews.data || []).map(
-                      ({ id, title }) => ({
-                        label: title,
-                        value: id,
-                      })
-                    )}
-                    rightActions={[
-                      {
-                        label: "Manage Queries",
-                        action: () =>
-                          router.push(
-                            NAVIGATION_LINKS.ENTITY.CONFIG.VIEWS(values.entity)
-                          ),
-                      },
-                    ]}
-                    meta={meta}
-                    input={input}
-                  />
-                )}
-              </Field>
-            )}
+            {formFields.includes("queryId") &&
+              values.entity &&
+              (entityViews.data || []).length > 0 && (
+                <Field name="queryId" validateFields={[]}>
+                  {({ input, meta }) => (
+                    <FormSelect
+                      label="Entity Tab"
+                      description="Select the most appropriate tab of the entity above that the user should be direct to"
+                      disabledOptions={[]}
+                      selectData={(entityViews.data || []).map(
+                        ({ id, title }) => ({
+                          label: title,
+                          value: id,
+                        })
+                      )}
+                      meta={meta}
+                      input={input}
+                    />
+                  )}
+                </Field>
+              )}
 
             <PortalFormFields formFields={formFields} />
             {formFields.includes("color") && (

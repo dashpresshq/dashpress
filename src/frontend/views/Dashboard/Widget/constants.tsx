@@ -25,8 +25,10 @@ const BASE_WIDGET_CONFIG: Partial<
   },
   "summary-card": {
     height: 40,
-    label: "Summary Card",
     size: "1",
+    overrideHeight: 40,
+    overrideSize: "1",
+    label: "Summary Card",
     exampleValidData: [{ count: 30 }],
     requiredInterface: `[{count: number}]`,
     schema: SummaryCardWidgetSchema,

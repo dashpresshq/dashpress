@@ -11,13 +11,14 @@ import {
 } from "@hadmean/protozoa";
 import { useMutation } from "react-query";
 import { IWidgetConfig } from "shared/types/dashboard";
+import { DASHBOARD_RELATIVE_DAYS } from "./Widget/_components/WidgetHeader/constants";
 
 const DASHBOARD_ENDPOINT = (dashboardId: string) =>
   `/api/dashboards/${dashboardId}`;
 
 const DASHBOARD_WIDGET_SCRIPT_ENDPOINT = (
   widgetId: string,
-  relativeDate: string
+  relativeDate = DASHBOARD_RELATIVE_DAYS[0].value
 ) => {
   const base = `/api/dashboards/script?widgetId=${widgetId}`;
 
@@ -42,7 +43,7 @@ export const useDasboardWidgetScriptData = (
     DASHBOARD_WIDGET_SCRIPT_ENDPOINT(widgetId, relativeDate),
     {
       errorMessage: dataNotFoundMessage("Dashboard widget script"),
-      enabled: !!widgetId && !!relativeDate,
+      enabled: !!widgetId,
     }
   );
 };
@@ -72,7 +73,7 @@ export function useUpdateDashboardWidgetMutation(
     IWidgetConfig
   >({
     dataQueryPath: DASHBOARD_ENDPOINT(dashboardId),
-    otherEndpoints: [DASHBOARD_WIDGET_SCRIPT_ENDPOINT(widgetId, "")],
+    otherEndpoints: [DASHBOARD_WIDGET_SCRIPT_ENDPOINT(widgetId)],
     onMutate: MutationHelpers.update,
     successMessage: MutationsLang.edit("Widget"),
   });

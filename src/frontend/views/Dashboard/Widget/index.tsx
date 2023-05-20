@@ -4,7 +4,6 @@ import { DashboardWidgetPresentation } from "./Presentation";
 import { useDasboardWidgetScriptData } from "../dashboard.store";
 import { IWidgetSettingProps } from "./_components/WidgetHeader/types";
 import { useDashboardWidgetRelativeDateStore } from "../relativeTime.store";
-import { DASHBOARD_RELATIVE_DAYS } from "./_components/WidgetHeader/constants";
 
 interface IProps {
   config: IWidgetConfig;
@@ -19,7 +18,7 @@ export const DashboardWidget = forwardRef<HTMLDivElement, IProps>(
 
     const data = useDasboardWidgetScriptData(
       config.id,
-      widgetRelativeDate[config.id] || DASHBOARD_RELATIVE_DAYS[0].value
+      widgetRelativeDate[config.id]
     );
 
     return (

@@ -24,3 +24,5 @@ export type BaseAppConfigurationKeys =
   | "system_settings"
   | "hidden_entity_relations"
   | "entity_relations_order";
+
+export const FOR_CODE_COV = 1;

@@ -7,6 +7,7 @@ import { rolesApiHandlers } from "./roles";
 import { configApiHandlers } from "./config";
 import { dashboardApiHandlers } from "./dashboard";
 import { integrationsApiHandlers } from "./integrations";
+import { versionApiHandlers } from "./versions";
 
 export const apiHandlers = [
   ...setupApiHandlers,
@@ -18,4 +19,5 @@ export const apiHandlers = [
   ...rolesApiHandlers,
   ...configApiHandlers,
   ...dashboardApiHandlers,
+  ...versionApiHandlers,
 ];

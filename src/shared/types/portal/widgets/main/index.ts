@@ -5,3 +5,5 @@ export interface INeverWidgetConfig extends ISharedWidgetConfig {
 }
 
 export type IPortalWidgetConfig = INeverWidgetConfig;
+
+export const FOR_CODE_COV = 1;

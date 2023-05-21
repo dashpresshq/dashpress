@@ -102,6 +102,20 @@ describe("/api/dashboards/script", () => {
     `);
   });
 
+  it("should return empty object", async () => {
+    const { req, res } = createAuthenticatedMocks({
+      method: "POST",
+      body: {
+        script: ``,
+      },
+    });
+
+    await handler(req, res);
+
+    expect(res._getStatusCode()).toBe(201);
+    expect(res._getJSONData()).toMatchInlineSnapshot(`"{}"`);
+  });
+
   it("should not run query on demo account", async () => {
     process.env.NEXT_PUBLIC_IS_DEMO = "true";
 

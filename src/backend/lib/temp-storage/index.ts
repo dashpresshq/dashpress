@@ -1,11 +1,11 @@
-import { addHours, isBefore } from "date-fns";
+import { addSeconds, isBefore } from "date-fns";
 import {
   AbstractConfigDataPersistenceService,
   createConfigDomainPersistenceService,
 } from "../config-persistence";
 
 interface ITempStorage {
-  data: unknown;
+  data: string;
   expiryDate: Date;
 }
 
@@ -22,10 +22,10 @@ export class TempStorageApiService {
     await this._tempStoragePersistenceService.removeItem(key);
   }
 
-  async persistItem(key: string, data: unknown, numberOfHours: number) {
+  async persistItem(key: string, data: unknown, numberOfSeconds: number) {
     await this._tempStoragePersistenceService.persistItem(key, {
-      data,
-      expiryDate: addHours(new Date(), numberOfHours),
+      data: JSON.stringify(data),
+      expiryDate: addSeconds(new Date(), numberOfSeconds),
     });
   }
 
@@ -38,7 +38,7 @@ export class TempStorageApiService {
       this.clearItem(key);
       return null;
     }
-    return data.data as T;
+    return JSON.parse(data.data) as T;
   }
 }
 

@@ -39,6 +39,7 @@ export const DashboardWidgetPresentation = forwardRef<
           config={config}
           setting={setting}
           ref={ref}
+          isPreview={isPreview}
           data={data}
         />
       );

@@ -14,3 +14,5 @@ export interface IWidgetConfigBag {
   LoadingComponent: (prop: { height: string }) => ReactElement;
   isDataEmpty: (data: unknown) => boolean;
 }
+
+export const FOR_CODE_COV = 1;

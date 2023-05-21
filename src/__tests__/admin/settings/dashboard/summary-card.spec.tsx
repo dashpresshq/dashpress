@@ -71,12 +71,6 @@ describe("pages/admin/settings/dashboard", () => {
       );
       await userEvent.keyboard("{Enter}");
 
-      // await userEvent.type(
-      //   within(dialog).getByLabelText("Date Field"),
-      //   "entity-1-enum-field"
-      // );
-      // await userEvent.keyboard("{Enter}");
-
       await userEvent.type(within(dialog).getByLabelText("Icon"), "Download");
 
       await userEvent.click(

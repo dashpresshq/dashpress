@@ -7,12 +7,13 @@ import { IWidgetSettingProps } from "../../_components/WidgetHeader/types";
 interface IProps {
   config: IPortalWidgetConfig;
   setting?: IWidgetSettingProps;
+  isPreview: boolean;
   data: DataStateKeys<unknown>;
 }
 
 export const PortalDashboardWidget = forwardRef<HTMLDivElement, IProps>(
-  ({ config, setting, data }, ref) => {
-    noop(config, setting, ref, data);
+  ({ config, setting, data, isPreview }, ref) => {
+    noop(config, setting, ref, data, isPreview);
     return null;
   }
 );

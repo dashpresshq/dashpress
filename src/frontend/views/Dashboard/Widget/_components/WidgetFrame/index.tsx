@@ -28,7 +28,7 @@ interface IProps {
   config: ISharedWidgetConfig;
   setting?: IWidgetSettingProps;
   type: IWidgetConfig["_type"];
-  isPreview?: boolean;
+  isPreview: boolean;
   data: DataStateKeys<unknown>;
   Component: ({
     data,

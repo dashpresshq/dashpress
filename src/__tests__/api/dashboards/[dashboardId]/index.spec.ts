@@ -170,7 +170,11 @@ describe("/api/dashboards/[dashboardId]/index generation", () => {
           "entity": "base-model",
           "icon": "ShoppingCart",
           "id": "1",
-          "script": "return await $.query('SELECT count(*) FROM base-model')",
+          "script": "const actual = await $.query(\`SELECT count(*) FROM "base-model"\`);
+      const relative = await $.query(\`SELECT count(*) FROM "base-model" WHERE "createdAt" < '$.RELATIVE_TIME'\`);
+
+      return [...actual, ...relative];
+                  ",
           "title": "Base Model",
         },
         {
@@ -179,7 +183,7 @@ describe("/api/dashboards/[dashboardId]/index generation", () => {
           "entity": "secondary-model",
           "icon": "Activity",
           "id": "2",
-          "script": "return await $.query('SELECT count(*) FROM secondary-model')",
+          "script": "return await $.query('SELECT count(*) FROM "secondary-model"')",
           "title": "Secondary Model",
         },
         {
@@ -188,7 +192,11 @@ describe("/api/dashboards/[dashboardId]/index generation", () => {
           "entity": "tests",
           "icon": "ShoppingBag",
           "id": "3",
-          "script": "return await $.query('SELECT count(*) FROM tests')",
+          "script": "const actual = await $.query(\`SELECT count(*) FROM "tests"\`);
+      const relative = await $.query(\`SELECT count(*) FROM "tests" WHERE "createdAt" < '$.RELATIVE_TIME'\`);
+
+      return [...actual, ...relative];
+                  ",
           "title": "Tests",
         },
         {

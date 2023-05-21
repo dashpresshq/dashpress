@@ -60,7 +60,7 @@ const PERSITENT_ADAPTORS: {
 
 describe.each(PERSITENT_ADAPTORS)(
   "$title persistence adaptor",
-  ({ adaptor }) => {
+  ({ adaptor, title }) => {
     beforeAll(async () => {
       await adaptor.setup();
     });
@@ -75,6 +75,15 @@ describe.each(PERSITENT_ADAPTORS)(
         id: "foo",
         name: "Hello",
       });
+    });
+
+    it("should getItemLastUpdated", async () => {
+      if (title === "Database") {
+        expect(await adaptor.getItemLastUpdated("foo")).toBeInstanceOf(Date);
+        expect(await adaptor.getItemLastUpdated("non-existent")).toBeNull();
+      } else {
+        expect(await adaptor.getItemLastUpdated("foo")).toBeNull();
+      }
     });
 
     it("should get update existing when persisting", async () => {

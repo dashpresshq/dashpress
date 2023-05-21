@@ -120,7 +120,7 @@ export class DatabaseConfigDataPersistenceAdaptor<
         .first();
 
       if (!queryResponse) {
-        return queryResponse;
+        return null;
       }
 
       return new Date(queryResponse.updated_at);

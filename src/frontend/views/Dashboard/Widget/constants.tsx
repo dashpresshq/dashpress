@@ -33,9 +33,12 @@ const BASE_WIDGET_CONFIG: Partial<
     requiredInterface: `[{count: number}]`,
     schema: SummaryCardWidgetSchema,
     LoadingComponent: () => (
-      <Stack>
-        <BaseSkeleton height="40px" width="40px" circle />
-        <BaseSkeleton height="40px" width="50%" />
+      <Stack justify="space-between">
+        <Stack align="center">
+          <BaseSkeleton height="40px" width="40px" circle />
+          <BaseSkeleton height="30px" width="100px" />
+        </Stack>
+        <BaseSkeleton height="30px" width="50px" />
       </Stack>
     ),
     isDataEmpty: () => {

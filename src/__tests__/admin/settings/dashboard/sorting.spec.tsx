@@ -47,7 +47,7 @@ jest.mock("react-easy-sort", () => ({
 
 describe("pages/admin/settings/dashboard", () => {
   describe("Sorting", () => {
-    it("should table widget", async () => {
+    it("should order widget", async () => {
       render(
         <AppWrapper>
           <ManageDashboard />

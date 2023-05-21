@@ -9,7 +9,7 @@ const TEST_DASHBOARDS: Array<IWidgetConfig> = [
     entity: "base-model",
     queryId: "",
     _type: "table",
-    script: "return 1",
+    script: `return await $.query("SELECT * FROM tests WHERE status = 'opened'")`,
   },
   {
     id: "widget-2",
@@ -19,7 +19,7 @@ const TEST_DASHBOARDS: Array<IWidgetConfig> = [
     queryId: "",
     color: ROYGBIV.blue,
     icon: "home",
-    script: "return 1",
+    script: `return await $.query("SELECT count(*) FROM tests")`,
   },
   {
     id: "not-in-dashboard",

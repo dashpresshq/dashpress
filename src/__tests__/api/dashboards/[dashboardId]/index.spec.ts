@@ -18,6 +18,17 @@ jest.mock("nanoid", () => ({
 }));
 
 describe("/api/dashboards/[dashboardId]/index", () => {
+  const OLD_ENV = process.env;
+
+  beforeEach(() => {
+    jest.resetModules();
+    process.env = { ...OLD_ENV };
+  });
+
+  afterAll(() => {
+    process.env = OLD_ENV;
+  });
+
   beforeAll(async () => {
     await setupAllTestData(["dashboard-widgets", "schema", "app-config"]);
   });
@@ -40,7 +51,7 @@ describe("/api/dashboards/[dashboardId]/index", () => {
           "entity": "base-model",
           "id": "widget-1",
           "queryId": "",
-          "script": "return 1",
+          "script": "return await $.query("SELECT * FROM tests WHERE status = 'opened'")",
           "title": "Widget 1",
         },
         {
@@ -50,7 +61,7 @@ describe("/api/dashboards/[dashboardId]/index", () => {
           "icon": "home",
           "id": "widget-2",
           "queryId": "",
-          "script": "return 1",
+          "script": "return await $.query("SELECT count(*) FROM tests")",
           "title": "Widget 2",
         },
       ]
@@ -89,7 +100,7 @@ describe("/api/dashboards/[dashboardId]/index", () => {
           "icon": "home",
           "id": "widget-2",
           "queryId": "",
-          "script": "return 1",
+          "script": "return await $.query("SELECT count(*) FROM tests")",
           "title": "Widget 2",
         },
         {
@@ -97,7 +108,7 @@ describe("/api/dashboards/[dashboardId]/index", () => {
           "entity": "base-model",
           "id": "widget-1",
           "queryId": "",
-          "script": "return 1",
+          "script": "return await $.query("SELECT * FROM tests WHERE status = 'opened'")",
           "title": "Widget 1",
         },
       ]
@@ -142,6 +153,37 @@ describe("/api/dashboards/[dashboardId]/index", () => {
         "title": "Widget 3",
       }
     `);
+  });
+
+  it("should not create new dashboard widget on demo account", async () => {
+    process.env.NEXT_PUBLIC_IS_DEMO = "true";
+
+    const postRequest = createAuthenticatedMocks({
+      method: "POST",
+      query: {
+        dashboardId: HOME_DASHBOARD_KEY,
+      },
+      body: {
+        _type: "table",
+        entity: "base-model",
+        id: "widget-3",
+        queryId: "some-test-query-id",
+        title: "Widget 3",
+      },
+    });
+
+    await handler(postRequest.req, postRequest.res);
+
+    expect(postRequest.res._getStatusCode()).toBe(400);
+    expect(postRequest.res._getJSONData()).toMatchInlineSnapshot(`
+    {
+      "message": "Cannot create widget in demo mode",
+      "method": "POST",
+      "name": "BadRequestError",
+      "path": "",
+      "statusCode": 400,
+    }
+  `);
   });
 });
 

@@ -1,3 +1,5 @@
+import { versions } from "process";
+
 const MINIMUM_NODE_VERSION = 16;
 
 type VersionResponse =
@@ -5,7 +7,7 @@ type VersionResponse =
   | { status: false; message: string };
 
 export const checkNodeVersion = (): VersionResponse => {
-  const nodeVersion = process.versions.node;
+  const nodeVersion = versions.node;
 
   if (+nodeVersion.split(".")[0] < MINIMUM_NODE_VERSION) {
     return {

@@ -1,5 +1,6 @@
 import { IWidgetConfig } from "shared/types/dashboard";
 import { IAccountProfile } from "shared/types/user";
+import { BadRequestError } from "backend/lib/errors";
 import {
   DashboardWidgetsApiService,
   dashboardWidgetsApiService,
@@ -31,7 +32,7 @@ export class DashboardWidgetsApiController {
 
   async runScript(script: string, currentUser: IAccountProfile) {
     if (process.env.NEXT_PUBLIC_IS_DEMO) {
-      return;
+      throw new BadRequestError("Cannot run script in demo mode");
     }
 
     return await this._dashboardWidgetsApiService.runScript(
@@ -42,7 +43,7 @@ export class DashboardWidgetsApiController {
 
   async createWidget(widget: IWidgetConfig, dashboardId: string) {
     if (process.env.NEXT_PUBLIC_IS_DEMO) {
-      throw new Error("Cannot create widget in demo mode");
+      throw new BadRequestError("Cannot create widget in demo mode");
     }
 
     await this._dashboardWidgetsApiService.createWidget(widget, dashboardId);
@@ -50,7 +51,7 @@ export class DashboardWidgetsApiController {
 
   async updateWidget(widgetId: string, widget: IWidgetConfig) {
     if (process.env.NEXT_PUBLIC_IS_DEMO) {
-      throw new Error("Cannot update widget in demo mode");
+      throw new BadRequestError("Cannot update widget in demo mode");
     }
 
     await this._dashboardWidgetsApiService.updateWidget(widgetId, widget);
@@ -58,7 +59,7 @@ export class DashboardWidgetsApiController {
 
   async removeWidget(widgetId: string, dashboardId: string) {
     if (process.env.NEXT_PUBLIC_IS_DEMO) {
-      throw new Error("Cannot remove widget in demo mode");
+      throw new BadRequestError("Cannot remove widget in demo mode");
     }
 
     await this._dashboardWidgetsApiService.removeWidget(widgetId, dashboardId);

@@ -8,7 +8,7 @@ import latestVersion from "latest-version";
 import { schemasApiService } from "backend/schema/schema.service";
 import { requestHandler } from "../../backend/lib/request";
 
-const currentPkgJson = require("../../../package.json");
+const { version } = require("../../../package.json");
 
 export default requestHandler(
   {
@@ -16,12 +16,12 @@ export default requestHandler(
       const latestVersion$1 = await latestVersion("hadmean");
 
       const versionText =
-        latestVersion$1 === currentPkgJson.version
+        latestVersion$1 === version
           ? `(Latest Version)`
           : `. Version v${latestVersion$1} is now available.`;
 
       return {
-        "Hadmean Version": `v${currentPkgJson.version}${versionText}`,
+        "Hadmean Version": `v${version}${versionText}`,
         "Node Version": checkNodeVersion().message,
         "Config Adapter": configApiService.getConfigValue<ConfigAdaptorTypes>(
           ConfigKeys.CONFIG_ADAPTOR

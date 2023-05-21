@@ -11,8 +11,19 @@ jest.mock("nanoid", () => ({
 }));
 
 describe("/api/dashboards/[dashboardId]/[widgetId]/index", () => {
+  const OLD_ENV = process.env;
+
   beforeAll(async () => {
     await setupAllTestData(["dashboard-widgets"]);
+  });
+
+  beforeEach(() => {
+    jest.resetModules();
+    process.env = { ...OLD_ENV };
+  });
+
+  afterAll(() => {
+    process.env = OLD_ENV;
   });
 
   it("should update dashboard widget", async () => {
@@ -82,5 +93,64 @@ describe("/api/dashboards/[dashboardId]/[widgetId]/index", () => {
 
     expect(res._getStatusCode()).toBe(200);
     expect(res._getJSONData()).toHaveLength(1);
+  });
+
+  it("should not update dashboard widget when on demo account", async () => {
+    process.env.NEXT_PUBLIC_IS_DEMO = "true";
+
+    const postRequest = createAuthenticatedMocks({
+      method: "PATCH",
+      query: {
+        dashboardId: HOME_DASHBOARD_KEY,
+        widgetId: "widget-1",
+      },
+      body: {
+        id: "widget-1",
+        _type: "table",
+        entity: "base-model",
+        queryId: "updated-query",
+        title: "Updated Title",
+      },
+    });
+
+    await handler(postRequest.req, postRequest.res);
+
+    expect(postRequest.res._getStatusCode()).toBe(400);
+    expect(postRequest.res._getJSONData()).toMatchInlineSnapshot(`
+      {
+        "message": "Cannot update widget in demo mode",
+        "method": "PATCH",
+        "name": "BadRequestError",
+        "path": "",
+        "statusCode": 400,
+      }
+    `);
+  });
+
+  it("should not delete dashboard widget when on demo account", async () => {
+    process.env.NEXT_PUBLIC_IS_DEMO = "true";
+
+    const deleteRequest = createAuthenticatedMocks({
+      method: "DELETE",
+      query: {
+        dashboardId: HOME_DASHBOARD_KEY,
+      },
+      body: {
+        widgetId: "widget-2",
+      },
+    });
+
+    await handler(deleteRequest.req, deleteRequest.res);
+
+    expect(deleteRequest.res._getStatusCode()).toBe(400);
+    expect(deleteRequest.res._getJSONData()).toMatchInlineSnapshot(`
+      {
+        "message": "Cannot remove widget in demo mode",
+        "method": "DELETE",
+        "name": "BadRequestError",
+        "path": "",
+        "statusCode": 400,
+      }
+    `);
   });
 });

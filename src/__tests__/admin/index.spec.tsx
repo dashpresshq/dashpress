@@ -18,6 +18,39 @@ useRouter.mockImplementation(() => ({
   asPath: "/",
 }));
 
+// it("should change relative time", async () => {
+//   render(
+//     <AppWrapper>
+//       <Dashboard />
+//     </AppWrapper>
+//   );
+
+//   await userEvent.click(
+//     screen.getAllByRole("button", {
+//       name: "Toggle Dropdown",
+//     })[1]
+//   );
+
+//   await userEvent.click(
+//     screen.getByRole("button", {
+//       name: "Past 3 Months",
+//     })
+//   );
+
+//   const widget = await screen.findByLabelText("New Summary Card Widget");
+
+//   expect(within(widget).getByLabelText("Total Count")).toHaveTextContent(
+//     "1.52K"
+//   );
+//   expect(within(widget).getByLabelText("Relative Count")).toHaveTextContent(
+//     "54%"
+//   );
+//   expect(
+//     within(widget).getByLabelText("Relative Direction")
+//     // :eyes #03d87f
+//   ).toHaveAttribute("color", "#f5325c");
+// });
+
 describe("pages/admin", () => {
   it("should render table dashboard widget correctly", async () => {
     render(
@@ -30,12 +63,16 @@ describe("pages/admin", () => {
 
     expect(await within(widget).findByText("Foo Table")).toBeInTheDocument();
 
+    expect(within(widget).getByRole("link", { name: "View" })).toHaveAttribute(
+      "href",
+      "/admin/entity-1"
+    );
+
     expect(await getTableRows(widget)).toMatchInlineSnapshot(`
       [
-        "Entity 1 Id FieldEntity 1 Reference FieldEntity 1 String FieldEntity 1 Number FieldEntity 1 Boolean FieldEntity 1 Date FieldEntity 1 Enum Field",
-        "26‌hello > p-1,t=5,o=a < 347th May 2022foo",
-        "27‌there > p-1,t=5,o=a < 217th May 2021foo",
-        "28‌today > p-1,t=5,o=a < 187th Feb 2022bar",
+        "nameage",
+        "John6",
+        "Jane5",
       ]
     `);
   });
@@ -53,13 +90,34 @@ describe("pages/admin", () => {
     expect(within(widget).getByLabelText("Bar Card Icon")).toHaveTextContent(
       "Some SVG Here"
     );
+
+    //   expect(within(widget).getByLabelText("New Summary Card Icon").innerHTML)
+    // .toBe(`<svg fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    //               <path fill="none" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" d="M10 21a1 1 0 11-2 0 1 1 0 012 0zM21 21a1 1 0 11-2 0 1 1 0 012 0zM1 1h4l2.68 13.39c.188.925.995 1.61 1.962 1.61h.04-.002H19.438a2 2 0 001.959-1.597l.002-.013 1.6-8.39h-17"></path>
+    //             </svg>`);
+
     expect(within(widget).getByLabelText("Bar Card Icon")).toHaveAttribute(
       "color",
       "#FF165D"
     );
     expect(within(widget).getByLabelText("Total Count")).toHaveTextContent(
-      "113"
+      "10"
     );
+
+    expect(within(widget).getByLabelText("Relative Count")).toHaveTextContent(
+      "100%"
+    );
+
+    expect(within(widget).getByLabelText("Relative Direction")).toHaveAttribute(
+      "color",
+      "#03d87f"
+    );
+
+    expect(within(widget).getByLabelText("Bar Card Icon")).toHaveAttribute(
+      "color",
+      "#FF165D"
+    );
+
     expect(within(widget).getByRole("link", { name: "View" })).toHaveAttribute(
       "href",
       "/admin/entity-1"

@@ -16,7 +16,7 @@ export function SummaryWidget({ config, data }: IProps) {
   const { color, icon } = config;
 
   const [fullCount$1, relativeCount$1, direction] = getFullAndRelativeCount(
-    summaryData[0].count || 0,
+    summaryData[0].count,
     summaryData[1]?.count
   );
 

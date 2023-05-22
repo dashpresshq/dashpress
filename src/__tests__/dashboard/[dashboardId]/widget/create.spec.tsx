@@ -65,7 +65,9 @@ describe("pages/dashboard/[dashboardId]/widget/create", () => {
     expect(screen.queryByLabelText("Size")).not.toBeInTheDocument();
     expect(screen.queryByLabelText("Height")).not.toBeInTheDocument();
 
-    await userEvent.click(screen.getByRole("button", { name: "Save" }));
+    await userEvent.click(
+      screen.getByRole("button", { name: "Create Widget" })
+    );
 
     expect((await screen.findAllByRole("status"))[0]).toHaveTextContent(
       "Widget Created Successfully"
@@ -106,12 +108,12 @@ describe("pages/dashboard/[dashboardId]/widget/create", () => {
     expect(screen.queryByLabelText("Color")).not.toBeInTheDocument();
     expect(screen.queryByLabelText("Icon")).not.toBeInTheDocument();
 
-    await userEvent.click(screen.getByRole("button", { name: "Save" }));
+    await userEvent.click(
+      screen.getByRole("button", { name: "Create Widget" })
+    );
 
     expect(await screen.findByRole("status")).toHaveTextContent(
       "Widget Created Successfully"
     );
   });
 });
-
-// TODO preview the widget

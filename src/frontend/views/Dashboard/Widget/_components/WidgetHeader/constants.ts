@@ -51,10 +51,6 @@ const makeDateFilterOption = (
     return { value: filterValue, label: "Start of year" };
   }
 
-  if (filterValue === DATE_FILTER_VALUE.BEGINNING_OF_TIME_VALUE) {
-    return { value: filterValue, label: "Genesis" };
-  }
-
   return {
     label: `${value} ${
       value === 1

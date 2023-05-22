@@ -36,6 +36,7 @@ import { FOR_CODE_COV as $33 } from "frontend/views/Dashboard/Widget/_components
 import { FOR_CODE_COV as $34 } from "shared/types/config";
 import { FOR_CODE_COV as $35 } from "shared/types/roles";
 import { FOR_CODE_COV as $36 } from "shared/types/storage";
+import { FOR_CODE_COV as $37 } from "frontend/views/Dashboard/Widget/_manage/types";
 
 noop(
   $1,
@@ -73,7 +74,8 @@ noop(
   $33,
   $34,
   $35,
-  $36
+  $36,
+  $37
 );
 
 describe("Code coverage ignores plain types file", () => {

@@ -9,8 +9,13 @@ let DASHBOARD_WIDGETS: IWidgetConfig[] = [
     entity: "entity-1",
     id: "table_id_1",
     queryId: "",
-    script: "return 1",
+    script: JSON.stringify([
+      { name: "John", age: 6 },
+      { name: "Jane", age: 5 },
+    ]),
     title: "Foo Table",
+    size: "2",
+    height: 250,
   },
   {
     _type: "summary-card",
@@ -18,13 +23,21 @@ let DASHBOARD_WIDGETS: IWidgetConfig[] = [
     color: "red",
     icon: "<p>Some SVG Here</p>",
     queryId: "",
-    script: "return 1",
+    script: JSON.stringify([{ count: 10 }, { count: 5 }]),
     title: "Bar Card",
     id: "summary_card_id_1",
   },
 ];
 
 export const dashboardApiHandlers = [
+  rest.get(BASE_TEST_URL("/api/dashboards/script"), async (req, res, ctx) => {
+    const widgetId = req.url.searchParams.get("widgetId");
+    return res(
+      ctx.json(
+        JSON.parse(DASHBOARD_WIDGETS.find(({ id }) => id === widgetId).script)
+      )
+    );
+  }),
   rest.get(
     BASE_TEST_URL("/api/dashboards/:dashboardId"),
     async (_, res, ctx) => {
@@ -51,11 +64,21 @@ export const dashboardApiHandlers = [
   rest.patch(
     BASE_TEST_URL("/api/dashboards/:dashboardId/:widgetId"),
     async (req, res, ctx) => {
-      const index = DASHBOARD_WIDGETS.findIndex(
-        ({ id }) => id === req.params.widgetId
-      );
-      DASHBOARD_WIDGETS[index] = await req.json();
-      return res(ctx.status(204));
+      const requestBody = await req.json();
+      if (
+        req.params.dashboardId === "test-dashboard-id" &&
+        [
+          `{"_type":"summary-card","entity":"entity-2","color":"red","icon":"<p>Some SVG Here</p><p>Custom Icon</p>","queryId":"bar","script":"[{\\"count\\":10},{\\"count\\":5}]return 1","title":"Bar CardUpdated","id":"summary_card_id_1"}`,
+          `{"_type":"table","entity":"entity-2","id":"table_id_1","queryId":"foo","script":"[{\\"name\\":\\"John\\",\\"age\\":6},{\\"name\\":\\"Jane\\",\\"age\\":5}]return 1","title":"Foo TableUpdated","size":"1","height":"350"}`,
+        ].includes(JSON.stringify(requestBody))
+      ) {
+        const index = DASHBOARD_WIDGETS.findIndex(
+          ({ id }) => id === req.params.widgetId
+        );
+        DASHBOARD_WIDGETS[index] = requestBody;
+        return res(ctx.status(204));
+      }
+      return res(ctx.status(500));
     }
   ),
   rest.patch(

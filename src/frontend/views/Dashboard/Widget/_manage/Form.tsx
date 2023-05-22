@@ -11,7 +11,12 @@ import {
   RenderCode,
   Typo,
 } from "@hadmean/chromista";
-import { required, IFormProps, makePostRequest } from "@hadmean/protozoa";
+import {
+  required,
+  IFormProps,
+  makePostRequest,
+  ButtonLang,
+} from "@hadmean/protozoa";
 import { useEntityConfiguration } from "frontend/hooks/configuration/configuration.store";
 import { Field, Form } from "react-final-form";
 import { ITableTab } from "shared/types/data";
@@ -53,8 +58,10 @@ export function DashboardWidgetForm({
   onSubmit,
   initialValues,
   entities,
+  action,
 }: IFormProps<IWidgetConfig> & {
   entities: ILabelValue[];
+  action: "create" | "edit";
 }) {
   const [currentTab, setCurrentTab] = useState("");
 
@@ -249,7 +256,9 @@ export function DashboardWidgetForm({
                 )}
 
                 <FormButton
-                  text="Save"
+                  text={`${ButtonLang.createOrUpdate(
+                    action === "edit"
+                  )} Widget`}
                   isMakingRequest={false}
                   disabled={pristine}
                 />

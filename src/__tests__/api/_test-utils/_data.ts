@@ -36,7 +36,7 @@ const DEFAULT_TEST_DATA: ITestDataSchema[] = [
 export const setupTestDatabaseData = async (
   data: ITestDataSchema[] = DEFAULT_TEST_DATA
 ) => {
-  const connection = await getDbConnection(`sqlite:./test.sqlite`);
+  const connection = await getDbConnection(`sqlite:./test-ss.sqlite`);
 
   if (!(await connection.schema.hasTable(testTable))) {
     await connection.schema.createTable(testTable, (table) => {

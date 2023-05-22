@@ -36,7 +36,7 @@ export function BaseManageDashboardWidget({ onSave, action }: IProps) {
   if (action === "edit" && !widgets.isLoading) {
     widgetValue = (widgets.data || []).find(({ id }) => id === widgetId);
     if (!widgetValue) {
-      widgetError = `Widget with id ${widgetId} not found`;
+      widgetError = `Widget with id '${widgetId}' not found`;
     }
   }
 
@@ -69,6 +69,7 @@ export function BaseManageDashboardWidget({ onSave, action }: IProps) {
                   goBack();
                 }
               }}
+              action={action}
               initialValues={widgetValue}
             />
           </ViewStateMachine>

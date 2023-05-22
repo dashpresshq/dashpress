@@ -17,7 +17,7 @@ describe("/api/dashboards/script", () => {
   });
 
   beforeAll(async () => {
-    await setupAllTestData(["dashboard-widgets", "data"]);
+    await setupAllTestData(["dashboard-widgets", "data", "credentials"]);
   });
 
   it("should return data from posted script", async () => {

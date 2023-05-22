@@ -30,14 +30,19 @@ export class DashboardWidgetsApiController {
     );
   }
 
-  async runScript(script: string, currentUser: IAccountProfile) {
+  async runScript(
+    script: string,
+    currentUser: IAccountProfile,
+    relativeDate: string
+  ) {
     if (process.env.NEXT_PUBLIC_IS_DEMO) {
       throw new BadRequestError("Cannot run script in demo mode");
     }
 
     return await this._dashboardWidgetsApiService.runScript(
       script,
-      currentUser
+      currentUser,
+      relativeDate
     );
   }
 

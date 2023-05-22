@@ -63,7 +63,7 @@ describe("pages/admin/settings/dashboard", () => {
       );
     });
 
-    it("should order the elements", async () => {
+    it("should change the order of the widgets", async () => {
       render(
         <AppWrapper>
           <ManageDashboard />

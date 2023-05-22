@@ -37,8 +37,8 @@ const DashboardTypesOptions: {
 }));
 
 const FormSchema: Partial<Record<IWidgetConfig["_type"], WidgetFormField[]>> = {
-  "summary-card": ["entity", "queryId", "color", "icon"],
-  table: ["entity", "queryId", "height", "size"],
+  "summary-card": ["color", "icon"],
+  table: ["height", "size"],
   ...PortalFormSchema,
 };
 
@@ -98,41 +98,37 @@ export function DashboardWidgetForm({
                 />
               )}
             </Field>
-            {formFields.includes("entity") && (
-              <Field name="entity" validateFields={[]}>
+            <Field name="entity" validateFields={[]}>
+              {({ input, meta }) => (
+                <FormSelect
+                  label="Link Entity"
+                  description="Select the entity the user should be directed to when clicking on the widget"
+                  disabledOptions={[]}
+                  selectData={entities}
+                  meta={meta}
+                  input={input}
+                />
+              )}
+            </Field>
+            {values.entity && (entityViews.data || []).length > 0 && (
+              <Field name="queryId" validateFields={[]}>
                 {({ input, meta }) => (
                   <FormSelect
-                    label="Link Entity"
-                    description="Select the entity the user should be directed to when clicking on the widget"
+                    label="Entity Tab"
+                    description="Select the most appropriate tab of the entity above that the user should be direct to"
                     disabledOptions={[]}
-                    selectData={entities}
+                    selectData={(entityViews.data || []).map(
+                      ({ id, title }) => ({
+                        label: title,
+                        value: id,
+                      })
+                    )}
                     meta={meta}
                     input={input}
                   />
                 )}
               </Field>
             )}
-            {formFields.includes("queryId") &&
-              values.entity &&
-              (entityViews.data || []).length > 0 && (
-                <Field name="queryId" validateFields={[]}>
-                  {({ input, meta }) => (
-                    <FormSelect
-                      label="Entity Tab"
-                      description="Select the most appropriate tab of the entity above that the user should be direct to"
-                      disabledOptions={[]}
-                      selectData={(entityViews.data || []).map(
-                        ({ id, title }) => ({
-                          label: title,
-                          value: id,
-                        })
-                      )}
-                      meta={meta}
-                      input={input}
-                    />
-                  )}
-                </Field>
-              )}
 
             <PortalFormFields formFields={formFields} />
             {formFields.includes("color") && (

@@ -102,7 +102,7 @@ describe("/api/dashboards/script", () => {
     `);
   });
 
-  it("should return empty object", async () => {
+  it("should return empty object when empty script is passed", async () => {
     const { req, res } = createAuthenticatedMocks({
       method: "POST",
       body: {
@@ -114,6 +114,31 @@ describe("/api/dashboards/script", () => {
 
     expect(res._getStatusCode()).toBe(201);
     expect(res._getJSONData()).toMatchInlineSnapshot(`"{}"`);
+  });
+
+  it("should render script params correctly", async () => {
+    jest.useFakeTimers().setSystemTime(new Date("2022-02-02"));
+
+    const { req, res } = createAuthenticatedMocks({
+      method: "POST",
+      body: {
+        script: `return {"currentUser": $.currentUser, "now": "$.RELATIVE_TIME"}`,
+        relativeDate: "1:m",
+      },
+    });
+
+    await handler(req, res);
+
+    expect(res._getJSONData()).toMatchInlineSnapshot(`
+      {
+        "currentUser": {
+          "name": "Root User",
+          "role": "creator",
+          "username": "root",
+        },
+        "now": "2022-01-02T00:00:00.000Z",
+      }
+    `);
   });
 
   it("should not run query on demo account", async () => {

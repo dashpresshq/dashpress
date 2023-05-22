@@ -27,6 +27,19 @@ export function BaseManageDashboardWidget({ onSave, action }: IProps) {
 
   const { canGoBack, goBack, backLink } = useNavigationStack();
 
+  let widgetValue: Partial<IWidgetConfig> = {
+    icon: SystemIconsList[0],
+  };
+
+  let widgetError = "";
+
+  if (action === "edit" && !widgets.isLoading) {
+    widgetValue = (widgets.data || []).find(({ id }) => id === widgetId);
+    if (!widgetValue) {
+      widgetError = `Widget with id ${widgetId} not found`;
+    }
+  }
+
   return (
     <AppLayout>
       <SectionCenter>
@@ -36,7 +49,7 @@ export function BaseManageDashboardWidget({ onSave, action }: IProps) {
         >
           <ViewStateMachine
             loading={activeEntities.isLoading}
-            error={activeEntities.error}
+            error={activeEntities.error || widgetError}
             loader={
               <FormSkeleton
                 schema={[
@@ -52,15 +65,11 @@ export function BaseManageDashboardWidget({ onSave, action }: IProps) {
               entities={activeEntities.data}
               onSubmit={async (config) => {
                 await onSave(config);
-                if (canGoBack) {
+                if (canGoBack()) {
                   goBack();
                 }
               }}
-              initialValues={
-                (widgets.data || []).find(({ id }) => id === widgetId) || {
-                  icon: SystemIconsList[0],
-                }
-              }
+              initialValues={widgetValue}
             />
           </ViewStateMachine>
         </SectionBox>

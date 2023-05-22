@@ -9,7 +9,6 @@ import userEvent from "@testing-library/user-event";
 import ManageDashboard from "pages/dashboard/manage";
 
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
-import { IWidgetConfig } from "shared/types/dashboard";
 
 setupApiHandlers();
 
@@ -25,93 +24,6 @@ jest.mock("nanoid", () => ({
 }));
 
 describe("pages/admin/settings/dashboard", () => {
-  describe("Form Input", () => {
-    type FormLabels =
-      | "Title"
-      | "Entity"
-      | "Type"
-      | "Color"
-      | "Date Field"
-      | "Icon"
-      | "Query";
-    const options: Partial<
-      Record<
-        IWidgetConfig["_type"],
-        {
-          fields: Record<FormLabels, boolean>;
-          label: string;
-        }
-      >
-    > = {
-      "summary-card": {
-        label: "Summary Card",
-        fields: {
-          Color: true,
-          "Date Field": true,
-          Entity: true,
-          Query: true,
-          Icon: true,
-          Title: true,
-          Type: true,
-        },
-      },
-      table: {
-        label: "Table",
-        fields: {
-          Color: false,
-          "Date Field": false,
-          Entity: true,
-          Query: true,
-          Icon: false,
-          Title: true,
-          Type: true,
-        },
-      },
-    };
-
-    it.each(
-      Object.entries(options).map(([widgetType, { fields, label }]) => ({
-        widgetType,
-        fields,
-        label,
-      }))
-    )(
-      "should show the correct fields for $widgetType",
-      async ({ fields, label }) => {
-        render(
-          <AppWrapper>
-            <ManageDashboard />
-          </AppWrapper>
-        );
-
-        await userEvent.click(
-          screen.getByRole("button", { name: "Add New Widget" })
-        );
-
-        const dialog = screen.getByRole("dialog");
-
-        await userEvent.type(within(dialog).getByLabelText("Type"), label);
-        await userEvent.keyboard("{Enter}");
-
-        await userEvent.type(
-          within(dialog).getByLabelText("Entity"),
-          "Plural entity-1"
-        );
-        await userEvent.keyboard("{Enter}");
-
-        Object.entries(fields).forEach(([field, shouldBePresent]) => {
-          if (shouldBePresent) {
-            expect(within(dialog).getByLabelText(field)).toBeInTheDocument();
-          } else {
-            expect(
-              within(dialog).queryByLabelText(field)
-            ).not.toBeInTheDocument();
-          }
-        });
-      }
-    );
-  });
-
   describe("Action Button", () => {
     it("should go to home page on 'Done'", async () => {
       const replaceMock = jest.fn();
@@ -129,6 +41,68 @@ describe("pages/admin/settings/dashboard", () => {
       await userEvent.click(screen.getByRole("button", { name: "Done" }));
 
       expect(replaceMock).toHaveBeenCalledWith("/");
+    });
+
+    it("should delete summary widget", async () => {
+      render(
+        <AppWrapper>
+          <ManageDashboard />
+        </AppWrapper>
+      );
+
+      const widget = await screen.findByLabelText(
+        "New Summary Card Updated Widget"
+      );
+
+      await userEvent.click(
+        within(widget).queryByRole("button", { name: "Delete Button" })
+      );
+
+      const confirmBox = await screen.findByRole("alertdialog", {
+        name: "Confirm Delete",
+      });
+
+      await userEvent.click(
+        await within(confirmBox).findByRole("button", { name: "Confirm" })
+      );
+
+      expect((await screen.findAllByRole("status"))[0]).toHaveTextContent(
+        "Widget Deleted Successfully"
+      );
+
+      expect(
+        screen.queryByLabelText("New Summary Card Updated Widget")
+      ).not.toBeInTheDocument();
+    });
+
+    it("should delete table widget", async () => {
+      render(
+        <AppWrapper>
+          <ManageDashboard />
+        </AppWrapper>
+      );
+
+      const widget = await screen.findByLabelText("New Table Updated Widget");
+
+      await userEvent.click(
+        within(widget).queryByRole("button", { name: "Delete Button" })
+      );
+
+      const confirmBox = await screen.findByRole("alertdialog", {
+        name: "Confirm Delete",
+      });
+
+      await userEvent.click(
+        await within(confirmBox).findByRole("button", { name: "Confirm" })
+      );
+
+      expect((await screen.findAllByRole("status"))[0]).toHaveTextContent(
+        "Widget Deleted Successfully"
+      );
+
+      expect(
+        screen.queryByLabelText("New Table Updated Widget")
+      ).not.toBeInTheDocument();
     });
   });
 

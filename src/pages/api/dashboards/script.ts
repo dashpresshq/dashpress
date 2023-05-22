@@ -12,7 +12,8 @@ export default requestHandler(
       ]);
       return await dashboardWidgetsApiController.runScript(
         validatedRequest.requestBody.script,
-        validatedRequest.authenticatedUser as IAccountProfile
+        validatedRequest.authenticatedUser as IAccountProfile,
+        validatedRequest.requestBody.relativeDate
       );
     },
     GET: async (getValidatedRequest) => {

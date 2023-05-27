@@ -5,7 +5,6 @@ import {
   SectionCenter,
   Spacer,
 } from "@hadmean/chromista";
-import { TitleLang } from "@hadmean/protozoa";
 import {
   useAuthenticatedUserBag,
   useUserHasPermission,
@@ -20,6 +19,7 @@ import {
   useUpdateUserMutation,
   useResetUserPasswordMutation,
   useUserDetails,
+  ADMIN_USERS_CRUD_CONFIG,
 } from "../users.store";
 import { ResetUserPasswordForm } from "./ResetPassword.form";
 import { UpdateUserForm } from "./Update.Form";
@@ -35,8 +35,8 @@ export function UserUpdate() {
   const userHasPermission = useUserHasPermission();
 
   useSetPageDetails({
-    pageTitle: "Update User",
-    viewKey: "UPDATE_USER",
+    pageTitle: ADMIN_USERS_CRUD_CONFIG.TEXT_LANG.EDIT,
+    viewKey: ADMIN_USERS_CRUD_CONFIG.TEXT_LANG.EDIT,
     permission: USER_PERMISSIONS.CAN_MANAGE_USERS,
   });
 
@@ -48,7 +48,7 @@ export function UserUpdate() {
     <AppLayout>
       <SectionCenter>
         <SectionBox
-          title={TitleLang.edit("User Profile")}
+          title={ADMIN_USERS_CRUD_CONFIG.TEXT_LANG.EDIT}
           iconButtons={[
             {
               action: LINK_TO_DOCS("accounts/system-profile"),

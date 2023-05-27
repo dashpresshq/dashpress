@@ -1,8 +1,6 @@
 import { NextApiRequest, NextApiResponse, PageConfig } from "next";
 import nc from "next-connect";
 
-// TODO auth validation
-
 const multer = require("multer");
 
 const upload = multer({
@@ -58,3 +56,4 @@ export const config: PageConfig = {
 // disable file upload in DEMO
 // Max Size
 // file type
+// auth validation

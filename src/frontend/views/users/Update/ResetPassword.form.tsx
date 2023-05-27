@@ -10,7 +10,10 @@ export function ResetUserPasswordForm({
 }: IFormProps<IResetPasswordForm>) {
   return (
     <SchemaForm<IResetPasswordForm>
-      buttonText="Reset Password"
+      buttonText={(submitting) =>
+        submitting ? "Resetting Password" : "Reset Password"
+      }
+      icon="no-icon"
       fields={RESET_PASSWORD_FORM_SCHEMA}
       onSubmit={onSubmit}
       resetForm

@@ -1,9 +1,10 @@
-import { ButtonLang, IFormProps } from "@hadmean/protozoa";
+import { IFormProps } from "@hadmean/protozoa";
 import { SchemaForm } from "frontend/components/SchemaForm";
 import {
   UPDATE_USER_FORM_SCHEMA,
   IUpdateUserForm,
 } from "shared/form-schemas/users/update";
+import { ADMIN_USERS_CRUD_CONFIG } from "../users.store";
 
 export function UpdateUserForm({
   onSubmit,
@@ -11,9 +12,10 @@ export function UpdateUserForm({
 }: IFormProps<IUpdateUserForm>) {
   return (
     <SchemaForm
-      buttonText={`${ButtonLang.update} User Profile`}
+      buttonText={ADMIN_USERS_CRUD_CONFIG.FORM_LANG.UPDATE}
       onSubmit={onSubmit}
       initialValues={initialValues}
+      icon="save"
       fields={UPDATE_USER_FORM_SCHEMA}
       formExtension={{
         fieldsState: `return {

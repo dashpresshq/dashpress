@@ -1,5 +1,4 @@
-import { useState } from "react";
-
+import { useState, ReactNode } from "react";
 import {
   Table,
   DEFAULT_TABLE_STATE,
@@ -7,11 +6,27 @@ import {
   ITableColumn,
 } from "@hadmean/chromista";
 import { IPaginatedDataState } from "@hadmean/protozoa";
+import { TableFilterType } from "@hadmean/chromista/dist/components/Table/filters/types";
 import { ViewStateMachine } from "../ViewStateMachine";
 import { useFEPagination } from "./useFEPagination";
 
-interface IProps {
-  columns: ITableColumn[];
+export interface IFETableCell<T> {
+  row: {
+    original: T;
+  };
+  value: unknown;
+}
+
+export interface IFETableColumn<T extends Record<string, unknown>> {
+  Header: string;
+  accessor: keyof T | "__action__";
+  disableSortBy?: boolean;
+  filter?: TableFilterType;
+  Cell?: ({ row, value }: IFETableCell<T>) => ReactNode;
+}
+
+interface IProps<T extends Record<string, unknown>> {
+  columns: IFETableColumn<T>[];
   dataEndpoint: string;
   emptyMessage?: string;
   border?: true;
@@ -22,7 +37,7 @@ export function FEPaginationTable<T extends Record<string, unknown>>({
   dataEndpoint,
   emptyMessage,
   border,
-}: IProps) {
+}: IProps<T>) {
   const [paginatedDataState, setPaginatedDataState] =
     useState<IPaginatedDataState<unknown>>(DEFAULT_TABLE_STATE);
 
@@ -47,7 +62,7 @@ export function FEPaginationTable<T extends Record<string, unknown>>({
         }}
         border={border}
         emptyMessage={emptyMessage}
-        columns={columns}
+        columns={columns as ITableColumn[]}
       />
     </ViewStateMachine>
   );

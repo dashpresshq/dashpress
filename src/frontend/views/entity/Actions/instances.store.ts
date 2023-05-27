@@ -7,6 +7,7 @@ import {
   useApi,
   useWaitForResponseMutationOptions,
 } from "@hadmean/protozoa";
+import { MAKE_API_CRUD_ENDPOINTS } from "frontend/lib/routing/makeCrudRoutes";
 import { useMutation } from "react-query";
 import {
   IActionInstance,
@@ -30,9 +31,13 @@ export const LIST_ACTION_INSTANCES = ({
   return `${BASE_ACTIONS_ENDPOINT}/${integrationKey}`;
 };
 
+export const ADMIN_ACTION_INSTANCES_API_ENDPOINTS = MAKE_API_CRUD_ENDPOINTS(
+  `${BASE_ACTIONS_ENDPOINT}/instances`
+);
+
 export const useIntegrationImplementationsList = (integrationKey: string) =>
   useApi<IIntegrationImplementationList[]>(
-    `/api/integrations/actions/${integrationKey}/implementations`,
+    `${BASE_ACTIONS_ENDPOINT}/${integrationKey}/implementations`,
     {
       errorMessage: dataNotFoundMessage("Integration Implementations"),
       enabled: !!integrationKey,
@@ -50,7 +55,7 @@ export function useDeleteActionInstanceMutation() {
   return useMutation(
     async (instanceId: string) =>
       await makeDeleteRequest(
-        `/api/integrations/actions/instances/${instanceId}`
+        ADMIN_ACTION_INSTANCES_API_ENDPOINTS.DELETE(instanceId)
       ),
     apiMutateOptions
   );
@@ -67,7 +72,7 @@ export function useCreateActionInstanceMutation() {
   return useMutation(
     async (configuration: IActionInstance) =>
       await makePostRequest(
-        `/api/integrations/actions/instances`,
+        ADMIN_ACTION_INSTANCES_API_ENDPOINTS.CREATE,
         configuration
       ),
     apiMutateOptions
@@ -85,7 +90,7 @@ export function useUpdateActionInstanceMutation() {
   return useMutation(
     async (configuration: IActionInstance) =>
       await makePatchRequest(
-        `/api/integrations/actions/instances/${configuration.instanceId}`,
+        ADMIN_ACTION_INSTANCES_API_ENDPOINTS.UPDATE(configuration.instanceId),
         configuration
       ),
     apiMutateOptions

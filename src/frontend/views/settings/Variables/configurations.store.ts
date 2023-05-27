@@ -45,7 +45,7 @@ export function useIntegrationConfigurationUpdationMutation(
     apiMutateOptions
   );
 }
-
+// TODO convert to opptimisic
 export function useIntegrationConfigurationDeletionMutation(
   group: IntegrationsConfigurationGroup
 ) {

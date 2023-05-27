@@ -22,7 +22,10 @@ export function SignInForm({ onSubmit }: IFormProps<ISignInForm>) {
       <SchemaForm<ISignInForm>
         onSubmit={onSubmit}
         initialValues={{ rememberMe: true }}
-        buttonText="Sign In"
+        buttonText={(isSubmitting) =>
+          isSubmitting ? "Just A Sec..." : "Sign In"
+        }
+        icon="no-icon"
         fields={AUTH_SIGNIN_FORM_SCHEMA}
       />
     </>

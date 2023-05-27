@@ -1,9 +1,8 @@
 import { SectionBox, SectionCenter } from "@hadmean/chromista";
-import { TitleLang } from "@hadmean/protozoa";
 import { useNavigationStack, useSetPageDetails } from "frontend/lib/routing";
 import { USER_PERMISSIONS } from "shared/constants/user";
 import { AppLayout } from "../../../_layouts/app";
-import { useCreateUserMutation } from "../users.store";
+import { ADMIN_USERS_CRUD_CONFIG, useCreateUserMutation } from "../users.store";
 import { CreateUserForm } from "./Form";
 
 export function UserCreate() {
@@ -11,15 +10,18 @@ export function UserCreate() {
   const { backLink } = useNavigationStack();
 
   useSetPageDetails({
-    pageTitle: "Create User",
-    viewKey: "CREATE_USER",
+    pageTitle: ADMIN_USERS_CRUD_CONFIG.TEXT_LANG.CREATE,
+    viewKey: ADMIN_USERS_CRUD_CONFIG.TEXT_LANG.CREATE,
     permission: USER_PERMISSIONS.CAN_MANAGE_USERS,
   });
 
   return (
     <AppLayout>
       <SectionCenter>
-        <SectionBox title={TitleLang.create("User")} backLink={backLink}>
+        <SectionBox
+          title={ADMIN_USERS_CRUD_CONFIG.TEXT_LANG.CREATE}
+          backLink={backLink}
+        >
           <CreateUserForm
             onSubmit={async (user) => {
               await userCreationMutation.mutateAsync(user);

@@ -1,6 +1,5 @@
 import {
   DeleteButton,
-  ITableColumn,
   OffCanvas,
   SoftButton,
   Spacer,
@@ -10,7 +9,11 @@ import {
 import { IntegrationsConfigurationGroup } from "shared/types/integrations";
 import { LINK_TO_DOCS } from "frontend/views/constants";
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { FEPaginationTable } from "frontend/components/FEPaginationTable";
+import {
+  FEPaginationTable,
+  IFETableCell,
+  IFETableColumn,
+} from "frontend/components/FEPaginationTable";
 import { ToastService, useApi } from "@hadmean/protozoa";
 import {
   IPageDetails,
@@ -70,21 +73,19 @@ export function ManageCredentialGroup({
   };
 
   const MemoizedAction = useCallback(
-    ({ row }: any) => (
+    ({ row }: IFETableCell<IKeyValue>) => (
       <Stack spacing={4} align="center">
         <SoftButton
-          action={() => setCurrentConfigItem((row.original as IKeyValue).key)}
+          action={() => setCurrentConfigItem(row.original.key)}
           label="Edit"
           justIcon
           icon="edit"
         />
         <DeleteButton
           onDelete={() =>
-            deleteConfigurationMutation.mutateAsync(
-              (row.original as IKeyValue).key
-            )
+            deleteConfigurationMutation.mutateAsync(row.original.key)
           }
-          isMakingDeleteRequest={deleteConfigurationMutation.isLoading}
+          isMakingDeleteRequest={false}
           shouldConfirmAlert
         />
       </Stack>
@@ -130,7 +131,7 @@ export function ManageCredentialGroup({
 
   useSetCurrentActionItems(actionItems);
 
-  const tableColumns: ITableColumn[] = [
+  const tableColumns: IFETableColumn<IKeyValue>[] = [
     {
       Header: "Key",
       accessor: "key",
@@ -207,7 +208,7 @@ export function ManageCredentialGroup({
         )}
       </section>
 
-      <FEPaginationTable<IKeyValue>
+      <FEPaginationTable
         dataEndpoint={dataEndpoint}
         emptyMessage={`No ${INTEGRATIONS_GROUP_CONFIG[group].label} Has Been Added Yet`}
         columns={tableColumns}

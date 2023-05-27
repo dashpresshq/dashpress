@@ -10,7 +10,11 @@ import {
 } from "@hadmean/chromista";
 import { SLUG_LOADING_VALUE, useApi } from "@hadmean/protozoa";
 import { useActiveEntities } from "frontend/hooks/entity/entity.store";
-import { FEPaginationTable } from "frontend/components/FEPaginationTable";
+import {
+  FEPaginationTable,
+  IFETableCell,
+  IFETableColumn,
+} from "frontend/components/FEPaginationTable";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import {
   useActionIntegrationsList,
@@ -54,29 +58,67 @@ export function BaseActionInstances({ entity, integrationKey }: IProps) {
   };
 
   const MemoizedAction = useCallback(
-    ({ row }: any) => (
+    ({ row }: IFETableCell<IActionInstance>) => (
       <Stack spacing={4} align="center">
         <SoftButton
-          action={() =>
-            setCurrentInstanceItem((row.original as IActionInstance).instanceId)
-          }
+          action={() => setCurrentInstanceItem(row.original.instanceId)}
           label="Edit"
           justIcon
           icon="edit"
         />
         <DeleteButton
           onDelete={() =>
-            deleteActionInstanceMutation.mutateAsync(
-              (row.original as IActionInstance).instanceId
-            )
+            deleteActionInstanceMutation.mutateAsync(row.original.instanceId)
           }
-          isMakingDeleteRequest={deleteActionInstanceMutation.isLoading}
+          isMakingDeleteRequest={false}
           shouldConfirmAlert
         />
       </Stack>
     ),
     [deleteActionInstanceMutation.isLoading]
   );
+
+  const columns: IFETableColumn<IActionInstance>[] = [
+    integrationKey
+      ? {
+          Header: "Entity",
+          accessor: "entity",
+          filter: {
+            _type: "string",
+            bag: undefined,
+          },
+        }
+      : {
+          Header: "Integration",
+          accessor: "integrationKey",
+          filter: {
+            _type: "string",
+            bag: undefined,
+          },
+        },
+    {
+      Header: "Trigger",
+      accessor: "formAction",
+      filter: {
+        _type: "string",
+        bag: undefined,
+      },
+    },
+    {
+      Header: "Action",
+      accessor: "implementationKey",
+      filter: {
+        _type: "string",
+        bag: undefined,
+      },
+    },
+    {
+      Header: "Action",
+      disableSortBy: true,
+      accessor: "__action__",
+      Cell: MemoizedAction,
+    },
+  ];
 
   if (!entity && !integrationKey) {
     return <ErrorAlert message="Pass in either of entity or the integration" />;
@@ -112,47 +154,7 @@ export function BaseActionInstances({ entity, integrationKey }: IProps) {
           }`}
           border
           dataEndpoint={dataEndpoint}
-          columns={[
-            integrationKey
-              ? {
-                  Header: "Entity",
-                  accessor: "entity",
-                  filter: {
-                    _type: "string",
-                    bag: undefined,
-                  },
-                }
-              : {
-                  Header: "Integration",
-                  accessor: "integrationKey",
-                  filter: {
-                    _type: "string",
-                    bag: undefined,
-                  },
-                },
-            {
-              Header: "Trigger",
-              accessor: "formAction",
-              filter: {
-                _type: "string",
-                bag: undefined,
-              },
-            },
-            {
-              Header: "Action",
-              accessor: "implementationKey",
-              filter: {
-                _type: "string",
-                bag: undefined,
-              },
-            },
-            {
-              Header: "Action",
-              disableSortBy: true,
-              accessor: "__action__",
-              Cell: MemoizedAction,
-            },
-          ]}
+          columns={columns}
         />
       </ViewStateMachine>
       <OffCanvas

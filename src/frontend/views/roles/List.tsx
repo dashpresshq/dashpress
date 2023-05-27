@@ -9,17 +9,24 @@ import { AppLayout } from "frontend/_layouts/app";
 import { Plus } from "react-feather";
 import { NAVIGATION_LINKS, useSetPageDetails } from "frontend/lib/routing";
 import { useRouter } from "next/router";
-import { FEPaginationTable } from "frontend/components/FEPaginationTable";
-import { IValueLabel } from "@hadmean/chromista/dist/types";
+import {
+  FEPaginationTable,
+  IFETableCell,
+  IFETableColumn,
+} from "frontend/components/FEPaginationTable";
 import { SystemRoles } from "shared/types/user";
 import { USER_PERMISSIONS } from "shared/constants/user";
-import { ADMIN_ROLES_ENDPOINT, useRoleDeletionMutation } from "./roles.store";
+import { IRolesList } from "shared/types/roles";
+import {
+  ADMIN_ROLES_CRUD_CONFIG,
+  useRoleDeletionMutation,
+} from "./roles.store";
 
 export function ListRoles() {
   const router = useRouter();
 
   useSetPageDetails({
-    pageTitle: "Roles",
+    pageTitle: ADMIN_ROLES_CRUD_CONFIG.DICTION.PLURAL,
     viewKey: "ROLES_LIST",
     permission: USER_PERMISSIONS.CAN_MANAGE_PERMISSIONS,
   });
@@ -27,8 +34,8 @@ export function ListRoles() {
   const roleDeletionMutation = useRoleDeletionMutation();
 
   const MemoizedAction = useCallback(
-    ({ row }: any) => {
-      const roleId = (row.original as unknown as IValueLabel).value;
+    ({ row }: IFETableCell<IRolesList>) => {
+      const roleId = row.original.value;
       if ((Object.values(SystemRoles) as string[]).includes(roleId)) {
         return null;
       }
@@ -42,7 +49,7 @@ export function ListRoles() {
           />
           <DeleteButton
             onDelete={() => roleDeletionMutation.mutateAsync(roleId)}
-            isMakingDeleteRequest={roleDeletionMutation.isLoading}
+            isMakingDeleteRequest={false}
             shouldConfirmAlert
           />
         </Stack>
@@ -50,6 +57,22 @@ export function ListRoles() {
     },
     [roleDeletionMutation.isLoading]
   );
+  const columns: IFETableColumn<IRolesList>[] = [
+    {
+      Header: "Role",
+      accessor: "label",
+      filter: {
+        _type: "string",
+        bag: undefined,
+      },
+    },
+    {
+      Header: "Action",
+      disableSortBy: true,
+      accessor: "__action__",
+      Cell: MemoizedAction,
+    },
+  ];
 
   return (
     <AppLayout
@@ -66,23 +89,8 @@ export function ListRoles() {
     >
       <StyledCard>
         <FEPaginationTable
-          dataEndpoint={ADMIN_ROLES_ENDPOINT}
-          columns={[
-            {
-              Header: "Role",
-              accessor: "label",
-              filter: {
-                _type: "string",
-                bag: undefined,
-              },
-            },
-            {
-              Header: "Action",
-              disableSortBy: true,
-              accessor: "__action__",
-              Cell: MemoizedAction,
-            },
-          ]}
+          dataEndpoint={ADMIN_ROLES_CRUD_CONFIG.ENDPOINTS.LIST}
+          columns={columns}
         />
       </StyledCard>
     </AppLayout>

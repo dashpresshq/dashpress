@@ -98,5 +98,3 @@ describe("pages/admin/settings/menu-entities", () => {
     ).toBeChecked();
   });
 });
-
-// TODO test sorting

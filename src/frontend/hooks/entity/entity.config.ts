@@ -7,6 +7,7 @@ import {
   getEntityFieldTypes,
   getEntitySelections,
 } from "shared/logic/entities";
+import { ENTITY_DICTION_SETTINGS_CRUD_CONFIG } from "frontend/views/entity/Diction/constant";
 import {
   getFieldTypeBoundedValidations,
   guessEntityValidations,
@@ -34,7 +35,7 @@ export function useEntityDiction(paramEntity?: string) {
   const entityDiction = useEntityConfiguration<{
     plural: string;
     singular: string;
-  }>("entity_diction", entity);
+  }>("entity_diction", entity, ENTITY_DICTION_SETTINGS_CRUD_CONFIG);
   return {
     singular: entityDiction.data?.singular || userFriendlyCase(entity),
     plural: entityDiction.data?.plural || userFriendlyCase(entity),

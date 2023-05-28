@@ -1,6 +1,7 @@
-import { ButtonLang, IFormProps } from "@hadmean/protozoa";
+import { IFormProps } from "@hadmean/protozoa";
 import { SchemaForm } from "frontend/components/SchemaForm";
 import { ISiteSettings } from "shared/types/config";
+import { SITE_SETTINGS_CRUD_CONFIG } from "./constants";
 
 export function SiteSettingsForm({
   onSubmit,
@@ -10,7 +11,8 @@ export function SiteSettingsForm({
     <SchemaForm<ISiteSettings>
       onSubmit={onSubmit}
       initialValues={initialValues}
-      buttonText={`${ButtonLang.update} Site Settings`}
+      icon="save"
+      buttonText={SITE_SETTINGS_CRUD_CONFIG.FORM_LANG.UPSERT}
       fields={{
         name: {
           type: "text",

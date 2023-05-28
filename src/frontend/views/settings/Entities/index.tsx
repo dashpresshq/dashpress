@@ -2,8 +2,9 @@ import { ListSkeleton, SectionBox, Typo } from "@hadmean/chromista";
 import { useSetPageDetails } from "frontend/lib/routing";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { USER_PERMISSIONS } from "shared/constants/user";
-import { dataNotFoundMessage, useApi } from "@hadmean/protozoa";
+import { useApi } from "@hadmean/protozoa";
 import { ILabelValue } from "types";
+import { MAKE_CRUD_CONFIG } from "frontend/lib/makeCrudConfig";
 import {
   useAppConfiguration,
   useUpsertConfigurationMutation,
@@ -17,24 +18,34 @@ import { SETTINGS_VIEW_KEY } from "../constants";
 import { BaseSettingsLayout } from "../_Base";
 import { EntitiesSelection } from "./Selection";
 
+export const ENABLED_ENTITIES_SETTINGS_CRUD_CONFIG = MAKE_CRUD_CONFIG({
+  path: "N/A",
+  plural: "Enabled Entities Settings",
+  singular: "Enabled Entities Settings",
+});
+
 const useEntitiesList = () =>
   useApi<ILabelValue[]>("/api/entities/list", {
-    errorMessage: dataNotFoundMessage("Entities list"),
+    errorMessage: ENABLED_ENTITIES_SETTINGS_CRUD_CONFIG.TEXT_LANG.NOT_FOUND,
   });
 
 export function EntitiesSettings() {
   const entitiesList = useEntitiesList();
 
   useSetPageDetails({
-    pageTitle: "Entities Settings",
+    pageTitle: ENABLED_ENTITIES_SETTINGS_CRUD_CONFIG.TEXT_LANG.TITLE,
     viewKey: SETTINGS_VIEW_KEY,
     permission: USER_PERMISSIONS.CAN_CONFIGURE_APP,
   });
 
-  const entitiesToHide = useAppConfiguration<string[]>("disabled_entities");
+  const entitiesToHide = useAppConfiguration<string[]>(
+    "disabled_entities",
+    ENABLED_ENTITIES_SETTINGS_CRUD_CONFIG
+  );
 
   const upsertHideFromAppMutation = useUpsertConfigurationMutation(
     "disabled_entities",
+    ENABLED_ENTITIES_SETTINGS_CRUD_CONFIG,
     "",
     {
       otherEndpoints: [ACTIVE_ENTITIES_ENDPOINT, USER_MENU_ENTITIES_ENDPOINT],
@@ -52,7 +63,7 @@ export function EntitiesSettings() {
 
   return (
     <BaseSettingsLayout>
-      <SectionBox title="Entities Settings">
+      <SectionBox title={ENABLED_ENTITIES_SETTINGS_CRUD_CONFIG.TEXT_LANG.TITLE}>
         <Typo.SM textStyle="italic">
           Disabling an entity here means it will not show anywhere on this
           application and any request made to it will result in a 404 response.
@@ -65,6 +76,7 @@ export function EntitiesSettings() {
           loader={<ListSkeleton count={20} />}
         >
           <EntitiesSelection
+            crudConfig={ENABLED_ENTITIES_SETTINGS_CRUD_CONFIG}
             selectionKey="enabled-entities-settings"
             allList={(entitiesList.data || []).map(({ value }) => value)}
             getEntityFieldLabels={getEntitiesDictionPlurals}

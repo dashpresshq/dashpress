@@ -30,12 +30,12 @@ interface IProps {
 const baseMenuItems = [
   {
     action: NAVIGATION_LINKS.SETTINGS.ENTITIES,
-    name: "Entities",
+    name: "Enabled Entities",
     IconComponent: Columns,
   },
   {
     action: NAVIGATION_LINKS.SETTINGS.MENU_ENTITIES,
-    name: "Menu",
+    name: "Menu Entities",
     IconComponent: Table,
   },
   {

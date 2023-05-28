@@ -1,7 +1,8 @@
-import { ButtonLang, IFormProps } from "@hadmean/protozoa";
+import { IFormProps } from "@hadmean/protozoa";
 import { SchemaForm } from "frontend/components/SchemaForm";
 import { IThemeSettings } from "frontend/_layouts/types";
 import { UPDATE_USER_PREFERENCES_FORM_SCHEMA } from "shared/form-schemas/profile/update";
+import { THEME_SETTINGS_CRUD_CONFIG } from "./constants";
 
 type Settings = IThemeSettings & { theme: string };
 
@@ -13,7 +14,8 @@ export function ThemeSettingsForm({
     <SchemaForm<Settings>
       onSubmit={onSubmit}
       initialValues={initialValues}
-      buttonText={`${ButtonLang.update} Theme`}
+      icon="save"
+      buttonText={THEME_SETTINGS_CRUD_CONFIG.FORM_LANG.UPSERT}
       formExtension={{
         fieldsState: `
         return {

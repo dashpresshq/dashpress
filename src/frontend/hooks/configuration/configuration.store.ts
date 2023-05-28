@@ -1,8 +1,6 @@
 import {
   AppStorage,
-  dataNotFoundMessage,
   makePutRequest,
-  MutationsLang,
   useStorageApi,
   useWaitForResponseMutationOptions,
 } from "@hadmean/protozoa";
@@ -11,6 +9,7 @@ import {
   CONFIGURATION_KEYS,
   AppConfigurationKeys,
 } from "shared/configurations";
+import { ICrudConfig } from "frontend/lib/makeCrudConfig";
 import { isRouterParamEnabled } from "..";
 
 export const configurationApiPath = (
@@ -29,19 +28,23 @@ export const configurationApiPath = (
   return `/api/config/${key}`;
 };
 
-export function useAppConfiguration<T>(key: AppConfigurationKeys) {
+export function useAppConfiguration<T>(
+  key: AppConfigurationKeys,
+  crudConfig: ICrudConfig
+) {
   return useStorageApi<T>(configurationApiPath(key), {
-    errorMessage: dataNotFoundMessage("App Configuration"),
+    errorMessage: crudConfig.TEXT_LANG.NOT_FOUND,
   });
 }
 
 export function useEntityConfiguration<T>(
   key: AppConfigurationKeys,
-  entity: string
+  entity: string,
+  crudConfig: ICrudConfig
 ) {
   return useStorageApi<T>(configurationApiPath(key, entity), {
     enabled: isRouterParamEnabled(entity),
-    errorMessage: dataNotFoundMessage("Entity Configuration"),
+    errorMessage: crudConfig.TEXT_LANG.NOT_FOUND,
   });
 }
 
@@ -51,6 +54,7 @@ interface IUpsertConfigMutationOptions {
 
 export function useUpsertConfigurationMutation(
   key: AppConfigurationKeys,
+  crudConfig: ICrudConfig,
   entity?: string,
   mutationOptions?: IUpsertConfigMutationOptions
 ) {
@@ -64,7 +68,7 @@ export function useUpsertConfigurationMutation(
     onSuccessActionWithFormData: (data) => {
       AppStorage.set(configurationApiPath(key, entity), data);
     },
-    successMessage: MutationsLang.saved("App Settings"),
+    successMessage: crudConfig.MUTATION_LANG.SAVED,
   });
 
   return useMutation(async (values: unknown) => {

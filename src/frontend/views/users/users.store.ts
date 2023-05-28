@@ -30,7 +30,7 @@ export function useUserDetails(username: string) {
     {
       enabled: isRouterParamEnabled(username),
       errorMessage: dataNotFoundMessage(
-        ADMIN_USERS_CRUD_CONFIG.DICTION.SINGULAR
+        ADMIN_USERS_CRUD_CONFIG.TEXT_LANG.NOT_FOUND
       ),
     }
   );
@@ -50,10 +50,13 @@ export function useUserDeletionMutation() {
     successMessage: ADMIN_USERS_CRUD_CONFIG.MUTATION_LANG.DELETE,
   });
 
-  return useMutation(async (username: string) => {
-    await makeDeleteRequest(ADMIN_USERS_CRUD_CONFIG.ENDPOINTS.DELETE(username));
-    return username;
-  }, apiMutateOptions);
+  return useMutation(
+    async (username: string) =>
+      await makeDeleteRequest(
+        ADMIN_USERS_CRUD_CONFIG.ENDPOINTS.DELETE(username)
+      ),
+    apiMutateOptions
+  );
 }
 
 export function useUpdateUserMutation() {

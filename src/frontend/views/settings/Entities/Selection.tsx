@@ -5,12 +5,14 @@ import {
   Spacer,
 } from "@hadmean/chromista";
 import React, { useEffect, useState } from "react";
+import { ICrudConfig } from "frontend/lib/makeCrudConfig";
 import { useStringSelections } from "../../../lib/selection";
 
 interface IProps {
   selectionKey: string;
   hiddenList: string[];
   allList: string[];
+  crudConfig: ICrudConfig;
   onSubmit: (columnsSelection: string[]) => Promise<void>;
   getEntityFieldLabels: (fieldName: string) => string;
 }
@@ -23,6 +25,7 @@ export function EntitiesSelection({
   allList,
   onSubmit,
   hiddenList,
+  crudConfig,
 }: IProps) {
   const { toggleSelection, allSelections, selectMutiple, isSelected } =
     useStringSelections(`${selectionKey}--entities-selection`);
@@ -45,7 +48,8 @@ export function EntitiesSelection({
           setIsMakingRequest(false);
           setTouched(false);
         }}
-        text="Save Changes"
+        icon="save"
+        text={crudConfig.FORM_LANG.UPSERT(isMakingRequest)}
         disabled={!touched}
         isMakingRequest={isMakingRequest}
       />

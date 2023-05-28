@@ -1,7 +1,6 @@
 import {
   makeDeleteRequest,
   makePostRequest,
-  MutationsLang,
   useApiMutateOptitmisticOptions,
   useWaitForResponseMutationOptions,
 } from "@hadmean/protozoa";
@@ -25,11 +24,9 @@ export function useCreateRoleMutation() {
   const apiMutateOptions = useWaitForResponseMutationOptions<IBaseRoleForm>({
     endpoints: [ADMIN_ROLES_CRUD_CONFIG.ENDPOINTS.LIST],
     smartSuccessMessage: ({ name }) => ({
-      message: MutationsLang.create(ADMIN_ROLES_CRUD_CONFIG.DICTION.SINGULAR),
+      message: ADMIN_ROLES_CRUD_CONFIG.MUTATION_LANG.CREATE,
       action: {
-        label: MutationsLang.viewDetails(
-          ADMIN_ROLES_CRUD_CONFIG.DICTION.SINGULAR
-        ),
+        label: ADMIN_ROLES_CRUD_CONFIG.MUTATION_LANG.VIEW_DETAILS,
         action: () =>
           router.push(NAVIGATION_LINKS.ROLES.DETAILS(makeRoleId(name))),
       },
@@ -51,14 +48,13 @@ export function useRoleDeletionMutation() {
         router.replace(NAVIGATION_LINKS.ROLES.LIST);
       },
       onMutate: deleteByKey("value"),
-      successMessage: MutationsLang.delete(
-        ADMIN_ROLES_CRUD_CONFIG.DICTION.SINGULAR
-      ),
+      successMessage: ADMIN_ROLES_CRUD_CONFIG.MUTATION_LANG.DELETE,
     }
   );
 
-  return useMutation(async (roleId: string) => {
-    await makeDeleteRequest(ADMIN_ROLES_CRUD_CONFIG.ENDPOINTS.DELETE(roleId));
-    return roleId;
-  }, apiMutateOptions);
+  return useMutation(
+    async (roleId: string) =>
+      await makeDeleteRequest(ADMIN_ROLES_CRUD_CONFIG.ENDPOINTS.DELETE(roleId)),
+    apiMutateOptions
+  );
 }

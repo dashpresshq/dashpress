@@ -16,26 +16,32 @@ import { IThemeSettings } from "frontend/_layouts/types";
 import { BaseSettingsLayout } from "../_Base";
 import { ThemeSettingsForm } from "./Form";
 import { SETTINGS_VIEW_KEY } from "../constants";
+import { THEME_SETTINGS_CRUD_CONFIG } from "./constants";
 
 export function ThemeSettings() {
-  const themeColor = useAppConfiguration<IThemeSettings>("theme_color");
+  const themeColor = useAppConfiguration<IThemeSettings>(
+    "theme_color",
+    THEME_SETTINGS_CRUD_CONFIG
+  );
 
   const userPreferences = useAuthenticatedUserPreferences();
 
-  const upsertConfigurationMutation =
-    useUpsertConfigurationMutation("theme_color");
+  const upsertConfigurationMutation = useUpsertConfigurationMutation(
+    "theme_color",
+    THEME_SETTINGS_CRUD_CONFIG
+  );
 
   const updateUserPreferencesMutation = useUpdateUserPreferencesMutation();
 
   useSetPageDetails({
-    pageTitle: "Theme Settings",
+    pageTitle: THEME_SETTINGS_CRUD_CONFIG.TEXT_LANG.TITLE,
     viewKey: SETTINGS_VIEW_KEY,
     permission: USER_PERMISSIONS.CAN_CONFIGURE_APP,
   });
 
   return (
     <BaseSettingsLayout>
-      <SectionBox title="Theme Settings">
+      <SectionBox title={THEME_SETTINGS_CRUD_CONFIG.TEXT_LANG.TITLE}>
         <ViewStateMachine
           loading={themeColor.isLoading || userPreferences.isLoading}
           error={themeColor.error || userPreferences.error}

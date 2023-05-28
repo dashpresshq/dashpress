@@ -1,5 +1,6 @@
-import { IValueLabel } from "@hadmean/chromista/dist/types";
-
-export type IRolesList = IValueLabel;
+export type IRolesList = {
+  label: string;
+  value: string;
+};
 
 export const FOR_CODE_COV = 1;

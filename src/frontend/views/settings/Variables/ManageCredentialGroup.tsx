@@ -190,10 +190,9 @@ export function ManageCredentialGroup({
                 onSubmit={async ({ password }: { password: string }) => {
                   passwordStore.setPassword(password);
                 }}
-                buttonText={
-                  revealedCredentials.isLoading
-                    ? "Just a sec..."
-                    : "Reveal Secrets"
+                icon="eye"
+                buttonText={(isSubmitting) =>
+                  isSubmitting ? "Just a sec..." : "Reveal Secrets"
                 }
               />
             </Spacer>

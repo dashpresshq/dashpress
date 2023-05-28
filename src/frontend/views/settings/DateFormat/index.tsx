@@ -15,16 +15,21 @@ import { ToastService } from "@hadmean/protozoa";
 import { BaseSettingsLayout } from "../_Base";
 import { DateFormatSettingsForm } from "./Form";
 import { SETTINGS_VIEW_KEY } from "../constants";
+import { DATE_FORMAT_SETTINGS_CRUD_CONFIG } from "./constants";
 
 export function DateFormatSettings() {
-  const defaultDateFormat = useAppConfiguration<string>("default_date_format");
+  const defaultDateFormat = useAppConfiguration<string>(
+    "default_date_format",
+    DATE_FORMAT_SETTINGS_CRUD_CONFIG
+  );
 
   const upsertConfigurationMutation = useUpsertConfigurationMutation(
-    "default_date_format"
+    "default_date_format",
+    DATE_FORMAT_SETTINGS_CRUD_CONFIG
   );
 
   useSetPageDetails({
-    pageTitle: "Date Format Settings",
+    pageTitle: DATE_FORMAT_SETTINGS_CRUD_CONFIG.TEXT_LANG.TITLE,
     viewKey: SETTINGS_VIEW_KEY,
     permission: USER_PERMISSIONS.CAN_CONFIGURE_APP,
   });
@@ -32,7 +37,7 @@ export function DateFormatSettings() {
   return (
     <BaseSettingsLayout>
       <SectionBox
-        title="Date Format Settings"
+        title={DATE_FORMAT_SETTINGS_CRUD_CONFIG.TEXT_LANG.TITLE}
         description="Using format from https://date-fns.org/docs/format"
         iconButtons={[
           {

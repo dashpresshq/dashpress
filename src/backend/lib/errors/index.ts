@@ -48,7 +48,7 @@ export function progammingError(errorMessage: string, throwWhen: boolean) {
   }
 }
 
-export const handleResponseError = (req: NextApiRequest, error: any) => {
+export const handleResponseError = (req: NextApiRequest, error: Error) => {
   const baseErrorOptions = {
     path: req.url,
     method: req.method,

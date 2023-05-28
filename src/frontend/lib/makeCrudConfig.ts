@@ -16,10 +16,6 @@ export const MAKE_CRUD_CONFIG = ({
       UPDATE: (id: string) => `${path}/${id}`,
       CUSTOM: (id: string, customPath: string) => `${path}/${id}/${customPath}`,
     },
-    DICTION: {
-      SINGULAR: singular,
-      PLURAL: plural,
-    },
     MUTATION_LANG: {
       CREATE: `${singular} Created Successfully`,
       EDIT: `${singular} Updated Successfully`,
@@ -40,9 +36,13 @@ export const MAKE_CRUD_CONFIG = ({
       EDIT: `Edit ${singular}`,
       DETAILS: `${singular} Details`,
       NOT_FOUND: `${singular} could not be retrieved`,
+      TITLE: `${plural}`,
     },
   };
 };
+
+export type ICrudConfig = ReturnType<typeof MAKE_CRUD_CONFIG>;
+
 // TO NUKE
 // MutationsLang
 // ButtonLang

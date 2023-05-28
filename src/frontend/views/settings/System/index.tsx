@@ -15,16 +15,21 @@ import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { BaseSettingsLayout } from "../_Base";
 import { SystemSettingsForm } from "./Form";
 import { SETTINGS_VIEW_KEY } from "../constants";
+import { SYSTEM_SETTINGS_CRUD_CONFIG } from "./constants";
 
 export function SystemSettings() {
-  const systemSettings =
-    useAppConfiguration<ISystemSettings>("system_settings");
+  const systemSettings = useAppConfiguration<ISystemSettings>(
+    "system_settings",
+    SYSTEM_SETTINGS_CRUD_CONFIG
+  );
 
-  const upsertConfigurationMutation =
-    useUpsertConfigurationMutation("system_settings");
+  const upsertConfigurationMutation = useUpsertConfigurationMutation(
+    "system_settings",
+    SYSTEM_SETTINGS_CRUD_CONFIG
+  );
 
   useSetPageDetails({
-    pageTitle: "System Settings",
+    pageTitle: SYSTEM_SETTINGS_CRUD_CONFIG.TEXT_LANG.TITLE,
     viewKey: SETTINGS_VIEW_KEY,
     permission: USER_PERMISSIONS.CAN_CONFIGURE_APP,
   });
@@ -32,7 +37,7 @@ export function SystemSettings() {
   return (
     <BaseSettingsLayout>
       <SectionBox
-        title="System Settings"
+        title={SYSTEM_SETTINGS_CRUD_CONFIG.TEXT_LANG.TITLE}
         iconButtons={[
           {
             action: LINK_TO_DOCS("app-configuration/system"),

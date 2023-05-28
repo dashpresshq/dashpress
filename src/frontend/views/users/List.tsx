@@ -28,8 +28,8 @@ export function ListUsers() {
   const router = useRouter();
 
   useSetPageDetails({
-    pageTitle: ADMIN_USERS_CRUD_CONFIG.DICTION.PLURAL,
-    viewKey: "USERS_LIST",
+    pageTitle: ADMIN_USERS_CRUD_CONFIG.TEXT_LANG.TITLE,
+    viewKey: ADMIN_USERS_CRUD_CONFIG.TEXT_LANG.TITLE,
     permission: USER_PERMISSIONS.CAN_MANAGE_USERS,
   });
 

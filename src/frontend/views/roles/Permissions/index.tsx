@@ -5,7 +5,6 @@ import {
   Spacer,
   Tabs,
 } from "@hadmean/chromista";
-import { TitleLang } from "@hadmean/protozoa";
 import { useActiveEntities } from "frontend/hooks/entity/entity.store";
 import { useNavigationStack, useSetPageDetails } from "frontend/lib/routing";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
@@ -15,7 +14,10 @@ import { useMemo } from "react";
 import { ILabelValue } from "types";
 import { userFriendlyCase } from "shared/lib/strings";
 import { AppLayout } from "../../../_layouts/app";
-import { useRolePermissions } from "../permissions.store";
+import {
+  ADMIN_PERMISSIONS_CRUD_CONFIG,
+  useRolePermissions,
+} from "../permissions.store";
 import { MutatePermission } from "./MutatePermission";
 import { usePortalExtendedPermissions } from "./Portal";
 
@@ -27,8 +29,8 @@ export function RolePermissions() {
   const { backLink } = useNavigationStack();
 
   useSetPageDetails({
-    pageTitle: "Role Permissions",
-    viewKey: "ROLE_PERMISSION",
+    pageTitle: ADMIN_PERMISSIONS_CRUD_CONFIG.TEXT_LANG.TITLE,
+    viewKey: ADMIN_PERMISSIONS_CRUD_CONFIG.TEXT_LANG.TITLE,
     permission: USER_PERMISSIONS.CAN_MANAGE_PERMISSIONS,
   });
 
@@ -48,7 +50,7 @@ export function RolePermissions() {
     <AppLayout>
       <SectionCenter>
         <SectionBox
-          title={TitleLang.edit("Role Permission")}
+          title={ADMIN_PERMISSIONS_CRUD_CONFIG.TEXT_LANG.EDIT}
           backLink={backLink}
           iconButtons={[
             {
@@ -66,7 +68,7 @@ export function RolePermissions() {
             <Tabs
               contents={[
                 {
-                  label: "Admin",
+                  label: "App",
                   content: (
                     <MutatePermission permissionList={adminPermissionList} />
                   ),

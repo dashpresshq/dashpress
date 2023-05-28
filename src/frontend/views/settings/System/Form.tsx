@@ -1,6 +1,7 @@
-import { ButtonLang, IFormProps } from "@hadmean/protozoa";
+import { IFormProps } from "@hadmean/protozoa";
 import { SchemaForm } from "frontend/components/SchemaForm";
 import { IBaseSystemSettings } from "shared/configurations/system";
+import { SYSTEM_SETTINGS_CRUD_CONFIG } from "./constants";
 
 export function SystemSettingsForm({
   onSubmit,
@@ -10,7 +11,8 @@ export function SystemSettingsForm({
     <SchemaForm<IBaseSystemSettings>
       onSubmit={onSubmit}
       initialValues={initialValues}
-      buttonText={`${ButtonLang.update} System Settings`}
+      icon="save"
+      buttonText={SYSTEM_SETTINGS_CRUD_CONFIG.FORM_LANG.UPSERT}
       fields={{
         tokenValidityDurationInDays: {
           type: "number",

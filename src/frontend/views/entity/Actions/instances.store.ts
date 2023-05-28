@@ -7,7 +7,7 @@ import {
   useApi,
   useWaitForResponseMutationOptions,
 } from "@hadmean/protozoa";
-import { MAKE_API_CRUD_ENDPOINTS } from "frontend/lib/routing/makeCrudRoutes";
+import { MAKE_API_CRUD_ENDPOINTS } from "frontend/lib/makeCrudConfig";
 import { useMutation } from "react-query";
 import {
   IActionInstance,

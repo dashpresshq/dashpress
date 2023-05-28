@@ -26,8 +26,8 @@ export function ListRoles() {
   const router = useRouter();
 
   useSetPageDetails({
-    pageTitle: ADMIN_ROLES_CRUD_CONFIG.DICTION.PLURAL,
-    viewKey: "ROLES_LIST",
+    pageTitle: ADMIN_ROLES_CRUD_CONFIG.TEXT_LANG.TITLE,
+    viewKey: ADMIN_ROLES_CRUD_CONFIG.TEXT_LANG.TITLE,
     permission: USER_PERMISSIONS.CAN_MANAGE_PERMISSIONS,
   });
 
@@ -79,7 +79,7 @@ export function ListRoles() {
       actionItems={[
         {
           id: "add",
-          label: "Add New Role",
+          label: ADMIN_ROLES_CRUD_CONFIG.TEXT_LANG.CREATE,
           IconComponent: Plus,
           onClick: () => {
             router.push(NAVIGATION_LINKS.ROLES.CREATE);

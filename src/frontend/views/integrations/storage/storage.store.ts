@@ -1,20 +1,21 @@
 import {
-  dataNotFoundMessage,
   makeDeleteRequest,
   makePatchRequest,
   makePostRequest,
-  MutationsLang,
   useApi,
   useWaitForResponseMutationOptions,
 } from "@hadmean/protozoa";
 import { useMutation } from "react-query";
 import { reduceStringToNumber } from "shared/lib/templates/reduceStringToNumber";
 import { IIntegrationsList } from "shared/types/actions";
+import { CRUD_CONFIG_NOT_FOUND } from "frontend/lib/makeCrudConfig";
 import { usePasswordStore } from "../password.store";
+import { STORAGE_INTEGRATIONS_CRUD_CONFIG } from "./constants";
 
 export const useStorageIntegrationsList = () =>
   useApi<IIntegrationsList[]>("/api/integrations/storage/list", {
-    errorMessage: dataNotFoundMessage("Storage Integrations"),
+    errorMessage: STORAGE_INTEGRATIONS_CRUD_CONFIG.TEXT_LANG.NOT_FOUND,
+    defaultData: [],
   });
 
 const ACTIVE_STORAGE_INTEGRATIONS_ENDPOINT = "/api/integrations/storage/active";
@@ -25,7 +26,8 @@ const ACTIVATION_CONFIG = (storageKey: string) => {
 
 export const useActiveStorageIntegrationList = () =>
   useApi<string[]>(ACTIVE_STORAGE_INTEGRATIONS_ENDPOINT, {
-    errorMessage: dataNotFoundMessage("Active Storage"),
+    errorMessage: CRUD_CONFIG_NOT_FOUND("Active Storage Integrations"),
+    defaultData: [],
   });
 
 export const useStorageIntegrationConfiguration = (storageKey: string) => {
@@ -39,8 +41,9 @@ export const useStorageIntegrationConfiguration = (storageKey: string) => {
         },
         method: "POST",
       },
-      errorMessage: dataNotFoundMessage("Storage Credentials"),
+      errorMessage: CRUD_CONFIG_NOT_FOUND("Storage Credentials"),
       enabled: !!storageKey && !!rootPassword,
+      defaultData: {},
     }
   );
 };
@@ -50,7 +53,7 @@ export function useDeactivateStorageMutation() {
     Record<string, string>
   >({
     endpoints: [ACTIVE_STORAGE_INTEGRATIONS_ENDPOINT],
-    successMessage: "Storage Integration Deactivated Successfully",
+    successMessage: STORAGE_INTEGRATIONS_CRUD_CONFIG.MUTATION_LANG.DE_ACTIVATED,
   });
 
   return useMutation(
@@ -65,7 +68,7 @@ export function useActivateStorageMutation(integrationKey: string) {
     Record<string, string>
   >({
     endpoints: [ACTIVE_STORAGE_INTEGRATIONS_ENDPOINT],
-    successMessage: "Storage Integration Activated Successfully",
+    successMessage: STORAGE_INTEGRATIONS_CRUD_CONFIG.MUTATION_LANG.ACTIVATED,
   });
 
   return useMutation(
@@ -83,7 +86,7 @@ export function useUpdateActivatedStorageMutation(storageKey: string) {
     Record<string, string>
   >({
     endpoints: [ACTIVE_STORAGE_INTEGRATIONS_ENDPOINT],
-    successMessage: MutationsLang.saved("Storage Integration"),
+    successMessage: STORAGE_INTEGRATIONS_CRUD_CONFIG.MUTATION_LANG.EDIT,
   });
 
   return useMutation(

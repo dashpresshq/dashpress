@@ -15,9 +15,12 @@ import {
 } from "frontend/hooks/configuration/configuration.store";
 import { USER_PERMISSIONS } from "shared/constants/user";
 import { useTableColumns } from "frontend/views/data/Table/useTableColumns";
+import { MAKE_APP_CONFIGURATION_CRUD_CONFIG } from "frontend/hooks/configuration/configuration.constant";
 import { BaseEntitySettingsLayout } from "../_Base";
 import { ENTITY_CONFIGURATION_VIEW } from "../constants";
 import { EntityTableTabForm } from "./Form";
+
+const CRUD_CONFIG = MAKE_APP_CONFIGURATION_CRUD_CONFIG("entity_views");
 
 export function EntityViewsSettings() {
   const entity = useEntitySlug();
@@ -35,7 +38,7 @@ export function EntityViewsSettings() {
   const tableColumns = useTableColumns(entity);
 
   useSetPageDetails({
-    pageTitle: "Views Settings",
+    pageTitle: CRUD_CONFIG.TEXT_LANG.TITLE,
     viewKey: ENTITY_CONFIGURATION_VIEW,
     permission: USER_PERMISSIONS.CAN_CONFIGURE_APP,
   });
@@ -50,7 +53,7 @@ export function EntityViewsSettings() {
   return (
     <BaseEntitySettingsLayout>
       <SectionBox
-        title="Views Settings"
+        title={CRUD_CONFIG.TEXT_LANG.TITLE}
         iconButtons={[
           {
             action: LINK_TO_DOCS("app-configuration/views"),
@@ -70,7 +73,7 @@ export function EntityViewsSettings() {
         >
           {!isLoading && (
             <EntityTableTabForm
-              initialValues={entityViews.data || []}
+              initialValues={entityViews.data}
               onSubmit={async (data) => {
                 await upsertEntityViewsMutation.mutateAsync(data);
               }}

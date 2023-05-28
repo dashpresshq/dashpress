@@ -1,5 +1,4 @@
 import { SectionBox } from "@hadmean/chromista";
-import { TitleLang } from "@hadmean/protozoa";
 import {
   NAVIGATION_LINKS,
   useNavigationStack,
@@ -9,8 +8,8 @@ import {
 import { META_USER_PERMISSIONS } from "shared/constants/user";
 import { GranularEntityPermissions } from "shared/types/user";
 import {
+  useEntityCrudConfig,
   useEntityCrudSettings,
-  useEntityDiction,
   useEntitySlug,
 } from "../../../hooks/entity/entity.config";
 import { ENTITY_DETAILS_VIEW_KEY } from "./constants";
@@ -19,7 +18,7 @@ import { DetailsLayout } from "./_Layout";
 
 export function EntityRelationDetails() {
   const childEntity = useRouteParam("childEntity");
-  const childEntityDiction = useEntityDiction(childEntity);
+  const childEntityCrudConfig = useEntityCrudConfig(childEntity);
 
   const childId = useRouteParam("childId");
   const entity = useEntitySlug();
@@ -28,7 +27,7 @@ export function EntityRelationDetails() {
   const { backLink } = useNavigationStack();
 
   useSetPageDetails({
-    pageTitle: `${childEntityDiction.singular} Details`,
+    pageTitle: childEntityCrudConfig.TEXT_LANG.DETAILS,
     viewKey: ENTITY_DETAILS_VIEW_KEY,
     permission: META_USER_PERMISSIONS.APPLIED_CAN_ACCESS_ENTITY(
       childEntity,
@@ -54,7 +53,7 @@ export function EntityRelationDetails() {
   return (
     <DetailsLayout entity={entity} menuKey={childEntity}>
       <SectionBox
-        title={TitleLang.details(childEntityDiction.singular)}
+        title={childEntityCrudConfig.TEXT_LANG.DETAILS}
         backLink={backLink}
         iconButtons={actions.filter(({ crudSetting }) => crudSetting)}
       >

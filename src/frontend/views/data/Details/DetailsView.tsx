@@ -90,7 +90,7 @@ export function EntityDetailsView({
           const specialDataTypeRender = viewSpecialDataTypes({
             fieldName: name,
             value,
-            entityToOneReferenceFields: entityToOneReferenceFields.data || {},
+            entityToOneReferenceFields: entityToOneReferenceFields.data,
             entityFieldSelections,
             entityFieldTypes,
             options: {

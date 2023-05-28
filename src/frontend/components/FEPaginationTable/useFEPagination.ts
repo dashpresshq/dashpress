@@ -4,7 +4,6 @@ import {
   FilterOperators,
   makeGetRequest,
   getQueryCachekey,
-  IUseApiOptions,
   PaginatedData,
   IPaginatedDataState,
 } from "@hadmean/protozoa";
@@ -18,8 +17,7 @@ const compareString = (value1: string, value2: string) =>
 
 export function useFEPagination<T>(
   endPoint: string,
-  dataState: IPaginatedDataState<T>,
-  options: IUseApiOptions<T[]> = {}
+  dataState: IPaginatedDataState<T>
 ): UseQueryResult<PaginatedData<T>> {
   return useQuery<PaginatedData<T>>(
     getQueryCachekey(endPoint),
@@ -27,7 +25,6 @@ export function useFEPagination<T>(
       return await makeGetRequest(endPoint, "Data could not be retrieved");
     },
     {
-      enabled: options.enabled,
       select: (data: any) => {
         let returnData: T[] = data as unknown as T[];
         if (dataState.filters) {

@@ -8,6 +8,7 @@ import {
   useUpdateActivatedActionMutation,
 } from "../actions.store";
 import { usePasswordStore } from "../../password.store";
+import { ACTION_INTEGRATIONS_CRUD_CONFIG } from "../constants";
 
 interface IProps {
   integrationDetail: IIntegrationsList;
@@ -78,7 +79,8 @@ export function Configure({ activationId, integrationDetail }: IProps) {
       fields={integrationDetail.configurationSchema}
       onSubmit={updateActivatedActionMutation.mutateAsync}
       initialValues={activationConfiguration.data || {}}
-      buttonText="Update Configuration"
+      buttonText={ACTION_INTEGRATIONS_CRUD_CONFIG.FORM_LANG.UPDATE}
+      icon="save"
     />
   );
 }

@@ -1,11 +1,7 @@
-import {
-  dataNotFoundMessage,
-  DataStateKeys,
-  useApi,
-  useApiQueries,
-} from "@hadmean/protozoa";
+import { DataStateKeys, useApi, useApiQueries } from "@hadmean/protozoa";
 import { IEntityField, IEntityRelation } from "shared/types/db";
 import { ILabelValue } from "types";
+import { CRUD_CONFIG_NOT_FOUND } from "frontend/lib/makeCrudConfig";
 import { isRouterParamEnabled } from "..";
 import { useEntityDictionPlurals } from "./entity.queries";
 
@@ -20,13 +16,13 @@ export const USER_MENU_ENTITIES_ENDPOINT = "/api/entities/user-menu";
 
 const useEntitiesListLabel = (entitiesList: DataStateKeys<ILabelValue[]>) => {
   const getEntitiesDictionPlurals = useEntityDictionPlurals(
-    entitiesList.data || [],
+    entitiesList.data,
     "value"
   );
 
   return {
     ...entitiesList,
-    data: (entitiesList.data || []).map(({ value }) => ({
+    data: entitiesList.data.map(({ value }) => ({
       value,
       label: getEntitiesDictionPlurals(value),
     })),
@@ -35,7 +31,8 @@ const useEntitiesListLabel = (entitiesList: DataStateKeys<ILabelValue[]>) => {
 
 export const useUserMenuEntities = () => {
   const menuItems = useApi<ILabelValue[]>(USER_MENU_ENTITIES_ENDPOINT, {
-    errorMessage: dataNotFoundMessage("Menu entities"),
+    errorMessage: CRUD_CONFIG_NOT_FOUND("Menu entities"),
+    defaultData: [],
   });
 
   return useEntitiesListLabel(menuItems);
@@ -43,7 +40,8 @@ export const useUserMenuEntities = () => {
 
 export const useActiveEntities = () => {
   const menuItems = useApi<ILabelValue[]>(ACTIVE_ENTITIES_ENDPOINT, {
-    errorMessage: dataNotFoundMessage("Active entities"),
+    errorMessage: CRUD_CONFIG_NOT_FOUND("Active entities"),
+    defaultData: [],
   });
 
   return useEntitiesListLabel(menuItems);
@@ -51,27 +49,31 @@ export const useActiveEntities = () => {
 
 export const useEntityFields = (entity: string) =>
   useApi<IEntityField[]>(ENTITY_FIELDS_ENDPOINT(entity), {
-    errorMessage: dataNotFoundMessage("Entity Fields"),
+    errorMessage: CRUD_CONFIG_NOT_FOUND("Entity Fields"),
     enabled: isRouterParamEnabled(entity),
+    defaultData: [],
   });
 
 export const useEntityRelationsList = (entity: string) =>
   useApi<string[]>(`/api/entities/${entity}/relation-list`, {
-    errorMessage: dataNotFoundMessage("Entity Relations List"),
+    errorMessage: CRUD_CONFIG_NOT_FOUND("Entity Relations List"),
     enabled: isRouterParamEnabled(entity),
+    defaultData: [],
   });
 
 export const useEntityFieldLists = (entity: string) =>
   useApi<string[]>(ENTITY_FIELDS_ENDPOINT(entity), {
-    errorMessage: dataNotFoundMessage("Entity Fields List"),
+    errorMessage: CRUD_CONFIG_NOT_FOUND("Entity Fields List"),
     enabled: isRouterParamEnabled(entity),
     selector: (data: IEntityField[]) => data.map(({ name }) => name),
+    defaultData: [],
   });
 
 export const useEntityReferenceFields = (entity: string) =>
   useApi<IEntityRelation[]>(ENTITY_RELATIONS_ENDPOINT(entity), {
-    errorMessage: dataNotFoundMessage("Entity Reference Fields"),
+    errorMessage: CRUD_CONFIG_NOT_FOUND("Entity Reference Fields"),
     enabled: isRouterParamEnabled(entity),
+    defaultData: [],
   });
 
 export const useMultipleEntityReferenceFields = (entities: string[]) => {
@@ -84,7 +86,7 @@ export const useMultipleEntityReferenceFields = (entities: string[]) => {
 
 export const useEntityToOneReferenceFields = (entity: string) =>
   useApi<Record<string, string>>(ENTITY_RELATIONS_ENDPOINT(entity), {
-    errorMessage: dataNotFoundMessage("Entity Reference Fields"),
+    errorMessage: CRUD_CONFIG_NOT_FOUND("Entity Reference Fields"),
     enabled: isRouterParamEnabled(entity),
     selector: (input: IEntityRelation[]) => {
       return Object.fromEntries(
@@ -93,11 +95,13 @@ export const useEntityToOneReferenceFields = (entity: string) =>
           .map(({ field, table }) => [field, table])
       );
     },
+    defaultData: {},
   });
 
 export const useEntityIdField = (entity: string) =>
   useApi<string>(ENTITY_FIELDS_ENDPOINT(entity), {
-    errorMessage: dataNotFoundMessage("Entity Id Field"),
+    defaultData: "",
+    errorMessage: CRUD_CONFIG_NOT_FOUND("Entity Id Field"),
     enabled: isRouterParamEnabled(entity),
     selector: (data: IEntityField[]) =>
       data.find(({ isId }) => isId)?.name || "id",

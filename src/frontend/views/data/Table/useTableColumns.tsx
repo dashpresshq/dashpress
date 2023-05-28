@@ -97,10 +97,7 @@ export const useTableColumns = (
       entityFields.data,
       hiddenTableColumns.data
     );
-  }, [
-    (entityFields?.data || []).length,
-    (hiddenTableColumns.data || []).length,
-  ]);
+  }, [entityFields.data.length, hiddenTableColumns.data.length]);
 
   if (
     entityToOneReferenceFields.isLoading ||
@@ -154,7 +151,7 @@ export const useTableColumns = (
         const specialDataTypeRender = viewSpecialDataTypes({
           fieldName: name,
           value,
-          entityToOneReferenceFields: entityToOneReferenceFields.data || {},
+          entityToOneReferenceFields: entityToOneReferenceFields.data,
           entityFieldSelections,
           entityFieldTypes,
           options: {

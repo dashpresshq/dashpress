@@ -67,13 +67,17 @@ export function MenuEntitiesSettings() {
   );
 
   const getEntitiesDictionPlurals = useEntityDictionPlurals(
-    activeEntities.data || [],
+    activeEntities.data,
     "value"
   );
 
-  const error = menuEntitiesToHide.error || userMenuEntities.error;
+  const error =
+    menuEntitiesToHide.error || userMenuEntities.error || activeEntities.error;
 
-  const isLoading = userMenuEntities.isLoading || menuEntitiesToHide.isLoading;
+  const isLoading =
+    userMenuEntities.isLoading ||
+    menuEntitiesToHide.isLoading ||
+    activeEntities.isLoading;
 
   return (
     <BaseSettingsLayout>
@@ -98,11 +102,9 @@ export function MenuEntitiesSettings() {
                   <EntitiesSelection
                     crudConfig={CRUD_CONFIG}
                     selectionKey="enabled-menu-entities-settings"
-                    allList={(activeEntities.data || []).map(
-                      ({ value }) => value
-                    )}
+                    allList={activeEntities.data.map(({ value }) => value)}
                     getEntityFieldLabels={getEntitiesDictionPlurals}
-                    hiddenList={menuEntitiesToHide.data || []}
+                    hiddenList={menuEntitiesToHide.data}
                     onSubmit={async (data) => {
                       await upsertHideFromMenuMutation.mutateAsync(data);
                     }}

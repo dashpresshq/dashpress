@@ -31,6 +31,7 @@ export const configurationApiPath = (
 export function useAppConfiguration<T>(key: AppConfigurationKeys) {
   return useStorageApi<T>(configurationApiPath(key), {
     errorMessage: MAKE_APP_CONFIGURATION_CRUD_CONFIG(key).TEXT_LANG.NOT_FOUND,
+    defaultData: CONFIGURATION_KEYS[key].defaultValue as T,
   });
 }
 
@@ -41,6 +42,7 @@ export function useEntityConfiguration<T>(
   return useStorageApi<T>(configurationApiPath(key, entity), {
     enabled: isRouterParamEnabled(entity),
     errorMessage: MAKE_APP_CONFIGURATION_CRUD_CONFIG(key).TEXT_LANG.NOT_FOUND,
+    defaultData: CONFIGURATION_KEYS[key].defaultValue as T,
   });
 }
 

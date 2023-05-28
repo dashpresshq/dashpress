@@ -13,54 +13,53 @@ export const CONFIGURATION_KEYS: Record<
 > = {
   ...PORTAL_CONFIGURATION_KEYS,
   hidden_entity_table_columns: {
-    crudConfigLabel: "Entity Table Columns Settings",
+    crudConfigLabel: "Table Columns Settings",
     requireEntity: true,
     defaultValue: [],
   },
   hidden_entity_create_columns: {
-    crudConfigLabel: "Create Entity Columns Settings",
+    crudConfigLabel: "Create Columns Settings",
 
     requireEntity: true,
     defaultValue: [],
   },
   hidden_entity_update_columns: {
-    crudConfigLabel: "Update Entity Columns Settings",
-
+    crudConfigLabel: "Update Columns Settings",
     requireEntity: true,
     defaultValue: [],
   },
   hidden_entity_details_columns: {
-    crudConfigLabel: "Entity Details Columns Settings",
+    crudConfigLabel: "Details Columns Settings",
     requireEntity: true,
     defaultValue: [],
   },
   entity_columns_labels: {
-    crudConfigLabel: "Entity Column Labels Settings",
+    crudConfigLabel: "Column Labels Settings",
     requireEntity: true,
     defaultValue: {},
   },
   entity_columns_types: {
-    crudConfigLabel: "Entity Column Types Settings",
+    crudConfigLabel: "Column Types Settings",
     requireEntity: true,
     defaultValue: {},
   },
   entity_validations: {
-    crudConfigLabel: "Entity Validations",
+    crudConfigLabel: "Validations",
     requireEntity: true,
     defaultValue: {},
   },
   entity_selections: {
-    crudConfigLabel: "Entity Selections Settings",
+    crudConfigLabel: "Selections Settings",
     requireEntity: true,
     defaultValue: {},
   },
   entity_diction: {
-    crudConfigLabel: "Entity Diction Settings",
+    crudConfigLabel: "Diction Settings",
     requireEntity: true,
     defaultValue: { singular: "", plural: "" },
   },
   entity_form_extension: {
-    crudConfigLabel: "Entity Form Extension",
+    crudConfigLabel: "Form Scripts",
     requireEntity: true,
     defaultValue: {
       fieldsState: "",
@@ -68,12 +67,12 @@ export const CONFIGURATION_KEYS: Record<
     },
   },
   entity_fields_orders: {
-    crudConfigLabel: "Entity Fields Order",
+    crudConfigLabel: "Fields Order",
     requireEntity: true,
     defaultValue: [],
   },
   entity_crud_settings: {
-    crudConfigLabel: "Entity CRUD Settings",
+    crudConfigLabel: "CRUD Settings",
     requireEntity: true,
     defaultValue: {
       create: true,
@@ -84,12 +83,12 @@ export const CONFIGURATION_KEYS: Record<
     },
   },
   entity_views: {
-    crudConfigLabel: "Entity Views Settings",
+    crudConfigLabel: "Views Settings",
     requireEntity: true,
     defaultValue: [],
   },
   entity_relations_order: {
-    crudConfigLabel: "Entity Relations Order",
+    crudConfigLabel: "Relations Order",
     requireEntity: true,
     defaultValue: [],
   },

@@ -15,6 +15,7 @@ import {
 import { gridRoot } from "../styles";
 import { DashboardSkeleton } from "../Skeleton";
 import { DashboardWidget } from "../Widget";
+import { DASHBOARD_WIDGETS_CRUD_CONFIG } from "../constants";
 
 const Root = styled.div`
   .list {
@@ -62,7 +63,7 @@ export function BaseManageDashboard({ dashboardId, doneLink, title }: IProps) {
       actionItems={[
         {
           id: "new",
-          label: "Add New Widget",
+          label: DASHBOARD_WIDGETS_CRUD_CONFIG.TEXT_LANG.CREATE,
           IconComponent: Plus,
           onClick: () =>
             router.push(NAVIGATION_LINKS.DASHBOARD.WIDGET.CREATE(dashboardId)),
@@ -78,7 +79,7 @@ export function BaseManageDashboard({ dashboardId, doneLink, title }: IProps) {
           <SortableList
             onSortEnd={onSortEnd}
             className="list"
-            aria-label="Dashboard Widgets"
+            aria-label={DASHBOARD_WIDGETS_CRUD_CONFIG.TEXT_LANG.TITLE}
             draggedItemClassName="dragged"
           >
             {(widgets.data || []).map((config) => (

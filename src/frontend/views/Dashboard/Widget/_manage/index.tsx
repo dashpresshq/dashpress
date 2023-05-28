@@ -15,7 +15,7 @@ import { DashboardWidgetForm } from "./Form";
 import { useDashboardWidgets } from "../../dashboard.store";
 
 interface IProps {
-  onSave: (data: IWidgetConfig) => Promise<IWidgetConfig>;
+  onSave: (data: IWidgetConfig) => Promise<void>;
   action: "create" | "edit";
 }
 

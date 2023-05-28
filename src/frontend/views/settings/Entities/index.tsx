@@ -23,6 +23,7 @@ const CRUD_CONFIG = MAKE_APP_CONFIGURATION_CRUD_CONFIG("disabled_entities");
 const useEntitiesList = () =>
   useApi<ILabelValue[]>("/api/entities/list", {
     errorMessage: CRUD_CONFIG.TEXT_LANG.NOT_FOUND,
+    defaultData: [],
   });
 
 export function EntitiesSettings() {
@@ -45,7 +46,7 @@ export function EntitiesSettings() {
   );
 
   const getEntitiesDictionPlurals = useEntityDictionPlurals(
-    entitiesList.data || [],
+    entitiesList.data,
     "value"
   );
 
@@ -70,9 +71,9 @@ export function EntitiesSettings() {
           <EntitiesSelection
             crudConfig={CRUD_CONFIG}
             selectionKey="enabled-entities-settings"
-            allList={(entitiesList.data || []).map(({ value }) => value)}
+            allList={entitiesList.data.map(({ value }) => value)}
             getEntityFieldLabels={getEntitiesDictionPlurals}
-            hiddenList={entitiesToHide.data || []}
+            hiddenList={entitiesToHide.data}
             onSubmit={async (data) => {
               await upsertHideFromAppMutation.mutateAsync(data);
             }}

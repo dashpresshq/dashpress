@@ -14,7 +14,7 @@ export const useSelectionViews = (): IAppMenuItems[] => {
   const { clear } = useNavigationStack();
 
   const activeEntituesLabelsMap = Object.fromEntries(
-    (userMenuEntities.data || []).map(({ value, label }) => [value, label])
+    userMenuEntities.data.map(({ value, label }) => [value, label])
   );
 
   const appendPortalMenuItems = useAppendPortalMenuItems();
@@ -34,7 +34,7 @@ export const useSelectionViews = (): IAppMenuItems[] => {
         singular: "Entity",
         menuItems: {
           ...userMenuEntities,
-          data: (userMenuEntities.data || []).map(({ value }) => ({
+          data: userMenuEntities.data.map(({ value }) => ({
             value,
             secondaryAction: () => {
               clear();

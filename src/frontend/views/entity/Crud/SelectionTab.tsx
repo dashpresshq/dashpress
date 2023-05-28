@@ -60,6 +60,8 @@ export function SelectionTab({
         {toggling && toggling.onToggle && (
           <FormButton
             isMakingRequest={false}
+            icon={enableDisableLabel ? "check" : "ban"}
+            loadingText={enableDisableLabel}
             size="sm"
             isInverse={toggling.enabled}
             text={enableDisableLabel}
@@ -107,7 +109,9 @@ export function SelectionTab({
               setIsMakingRequest(false);
               setTouched(false);
             }}
-            text="Save Changes"
+            text={`Save ${label} Selections`}
+            loadingText={`Saving ${label} Selections`}
+            icon="save"
             disabled={!touched}
             isMakingRequest={isMakingRequest}
           />

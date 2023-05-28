@@ -142,7 +142,7 @@ export function EntityFieldsSettings() {
                 >
                   <FieldsLabelForm
                     initialValues={entityFieldLabelsMap.data}
-                    fields={entityFieldLists.data || []}
+                    fields={entityFieldLists.data}
                     onSubmit={async (data) => {
                       await upsertEntityFieldsMapMutation.mutateAsync(
                         data as Record<string, string>
@@ -178,7 +178,7 @@ export function EntityFieldsSettings() {
                       selectionsChanged: false,
                       typesChanged: false,
                     }}
-                    fields={entityFieldLists.data || []}
+                    fields={entityFieldLists.data}
                     onSubmit={async (data) => {
                       if (data.typesChanged) {
                         await upsertEntityTypesMapMutation.mutateAsync(
@@ -212,7 +212,7 @@ export function EntityFieldsSettings() {
                   <SortList
                     data={{
                       ...entityFieldLists,
-                      data: (entityFieldLists.data || []).map((name) => ({
+                      data: entityFieldLists.data.map((name) => ({
                         value: name,
                         label: getEntityFieldLabels(name),
                       })),

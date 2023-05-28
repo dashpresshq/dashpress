@@ -23,6 +23,8 @@ function TestComponent({
 
             <FormButton
               text="Save"
+              loadingText="Save"
+              icon="add"
               isMakingRequest={false}
               disabled={pristine}
             />

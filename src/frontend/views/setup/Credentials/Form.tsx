@@ -149,7 +149,9 @@ export function CredentialsSetupForm({
             )}
 
             <FormButton
+              loadingText="Setting Up Credentials"
               text="Setup Credentials"
+              icon="no-icon"
               isMakingRequest={submitting}
               disabled={pristine}
               block

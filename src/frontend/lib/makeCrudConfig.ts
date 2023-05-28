@@ -1,3 +1,6 @@
+export const CRUD_CONFIG_NOT_FOUND = (singular: string) =>
+  `${singular} could not be retrieved`;
+
 export const MAKE_CRUD_CONFIG = ({
   path,
   singular,
@@ -21,6 +24,8 @@ export const MAKE_CRUD_CONFIG = ({
       EDIT: `${singular} Updated Successfully`,
       DELETE: `${singular} Deleted Successfully`,
       SAVED: `${singular} Saved Successfully`,
+      ACTIVATED: `${singular} Activated Successfully`,
+      DE_ACTIVATED: `${singular} Deactivated Successfully`,
       VIEW_DETAILS: `Click here to view ${singular.toLowerCase()}`,
     },
     FORM_LANG: {
@@ -33,9 +38,10 @@ export const MAKE_CRUD_CONFIG = ({
     },
     TEXT_LANG: {
       CREATE: `Add New ${singular}`,
+      MANAGE: `Manage ${plural}`,
       EDIT: `Edit ${singular}`,
       DETAILS: `${singular} Details`,
-      NOT_FOUND: `${singular} could not be retrieved`,
+      NOT_FOUND: CRUD_CONFIG_NOT_FOUND(singular),
       TITLE: `${plural}`,
       EMPTY_LIST: `No ${singular} Has Been Added Yet`,
     },
@@ -45,7 +51,5 @@ export const MAKE_CRUD_CONFIG = ({
 export type ICrudConfig = ReturnType<typeof MAKE_CRUD_CONFIG>;
 
 // TO NUKE
-// MutationsLang
 // ButtonLang
-// dataNotFoundMessage
-// TitleLang
+// || []

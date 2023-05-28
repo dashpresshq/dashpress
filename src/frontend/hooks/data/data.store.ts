@@ -1,5 +1,4 @@
 import {
-  dataNotFoundMessage,
   makeDeleteRequest,
   makePatchRequest,
   makePostRequest,
@@ -13,8 +12,9 @@ import qs from "qs";
 import { useRouter } from "next/router";
 import { useMutation } from "react-query";
 import { QueryFilter } from "shared/types/data";
+import { CRUD_CONFIG_NOT_FOUND } from "frontend/lib/makeCrudConfig";
 import { NAVIGATION_LINKS } from "../../lib/routing/links";
-import { useEntityCrudConfig, useEntityDiction } from "../entity/entity.config";
+import { useEntityCrudConfig } from "../entity/entity.config";
 import { useMultipleEntityReferenceFields } from "../entity/entity.store";
 
 export const ENTITY_TABLE_PATH = (entity: string) =>
@@ -32,11 +32,12 @@ export const ENTITY_REFERENCE_PATH = (entity: string, id: string) =>
 export const ENTITY_LIST_PATH = (entity: string) => `/api/data/${entity}/list`;
 
 export const useEntityDataDetails = (entity: string, id: string) => {
-  const entityDiction = useEntityDiction(entity);
+  const entityCrudConfig = useEntityCrudConfig(entity);
 
   return useApi<Record<string, string>>(ENTITY_DETAILS_PATH(entity, id), {
-    errorMessage: dataNotFoundMessage(entityDiction.singular),
+    errorMessage: entityCrudConfig.TEXT_LANG.NOT_FOUND,
     enabled: !!id && !!entity && id !== SLUG_LOADING_VALUE,
+    defaultData: {},
   });
 };
 
@@ -55,8 +56,9 @@ export const useEntityFilterCount = (
   return useApi<{ count: number }>(
     buildFilterCountQueryString(entity, filters === "loading" ? [] : filters),
     {
-      errorMessage: dataNotFoundMessage(`${entity} count`),
+      errorMessage: CRUD_CONFIG_NOT_FOUND(`${entity} count`),
       enabled: filters !== "loading",
+      defaultData: { count: 0 },
     }
   );
 };
@@ -120,8 +122,9 @@ export const useEntityReferenceCount = (
 
 export const useEntityDataReference = (entity: string, id: string) =>
   useApi<string>(ENTITY_REFERENCE_PATH(entity, id), {
-    errorMessage: dataNotFoundMessage("Reference data"),
+    errorMessage: CRUD_CONFIG_NOT_FOUND("Reference data"),
     enabled: !!(id && entity),
+    defaultData: "",
   });
 
 export function useEntityDataCreationMutation(entity: string) {

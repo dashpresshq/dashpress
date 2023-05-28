@@ -11,12 +11,7 @@ import {
   RenderCode,
   Typo,
 } from "@hadmean/chromista";
-import {
-  required,
-  IFormProps,
-  makePostRequest,
-  ButtonLang,
-} from "@hadmean/protozoa";
+import { required, IFormProps, makePostRequest } from "@hadmean/protozoa";
 import { useEntityConfiguration } from "frontend/hooks/configuration/configuration.store";
 import { Field, Form } from "react-final-form";
 import { ITableTab } from "shared/types/data";
@@ -32,6 +27,7 @@ import { WidgetFormField } from "./types";
 import { PortalFormFields, PortalFormSchema } from "./portal";
 import { WIDGET_CONFIG } from "../constants";
 import { DashboardWidgetPresentation } from "../Presentation";
+import { DASHBOARD_WIDGETS_CRUD_CONFIG } from "../../constants";
 
 const DashboardTypesOptions: {
   label: string;
@@ -77,7 +73,7 @@ export function DashboardWidgetForm({
     <Form
       onSubmit={onSubmit}
       initialValues={initialValues}
-      render={({ handleSubmit, pristine, values }) => {
+      render={({ handleSubmit, pristine, values, submitting }) => {
         const entityViews = useEntityConfiguration<ITableTab[]>(
           "entity_views",
           values.entity
@@ -256,10 +252,18 @@ export function DashboardWidgetForm({
                 )}
 
                 <FormButton
-                  text={`${ButtonLang.createOrUpdate(
-                    action === "edit"
-                  )} Widget`}
-                  isMakingRequest={false}
+                  text={
+                    action === "create"
+                      ? DASHBOARD_WIDGETS_CRUD_CONFIG.FORM_LANG.CREATE(false)
+                      : DASHBOARD_WIDGETS_CRUD_CONFIG.FORM_LANG.UPDATE(false)
+                  }
+                  loadingText={
+                    action === "create"
+                      ? DASHBOARD_WIDGETS_CRUD_CONFIG.FORM_LANG.CREATE(true)
+                      : DASHBOARD_WIDGETS_CRUD_CONFIG.FORM_LANG.UPDATE(true)
+                  }
+                  icon={action === "create" ? "add" : "save"}
+                  isMakingRequest={submitting}
                   disabled={pristine}
                 />
               </Stack>

@@ -4,6 +4,7 @@ import { useSetPageDetails } from "frontend/lib/routing";
 import { USER_PERMISSIONS } from "shared/constants/user";
 import { IFormExtension } from "frontend/components/SchemaForm/types";
 import { LINK_TO_DOCS } from "frontend/views/constants";
+import { MAKE_APP_CONFIGURATION_CRUD_CONFIG } from "frontend/hooks/configuration/configuration.constant";
 import { useEntitySlug } from "../../../hooks/entity/entity.config";
 import { BaseEntitySettingsLayout } from "../_Base";
 import {
@@ -65,17 +66,19 @@ function useEntityFormView() {
   };
 }
 
+const CRUD_CONFIG = MAKE_APP_CONFIGURATION_CRUD_CONFIG("entity_form_extension");
+
 export function EntityFormExtensionSettings() {
   const entityFormView = useEntityFormView();
   useSetPageDetails({
-    pageTitle: "Form Settings",
+    pageTitle: CRUD_CONFIG.TEXT_LANG.TITLE,
     viewKey: ENTITY_CONFIGURATION_VIEW,
     permission: USER_PERMISSIONS.CAN_CONFIGURE_APP,
   });
   return (
     <BaseEntitySettingsLayout>
       <SectionBox
-        title="Form Scripts"
+        title={CRUD_CONFIG.TEXT_LANG.TITLE}
         iconButtons={[
           {
             action: LINK_TO_DOCS("app-configuration/form"),

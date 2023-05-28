@@ -45,7 +45,9 @@ export function BaseActionInstances({ entity, integrationKey }: IProps) {
 
   const dataEndpoint = LIST_ACTION_INSTANCES({ entity, integrationKey });
 
-  const tableData = useApi<IActionInstance[]>(dataEndpoint);
+  const tableData = useApi<IActionInstance[]>(dataEndpoint, {
+    defaultData: [],
+  });
 
   const deleteActionInstanceMutation = useDeleteActionInstanceMutation();
   const updateActionInstanceMutation = useUpdateActionInstanceMutation();
@@ -197,15 +199,15 @@ export function BaseActionInstances({ entity, integrationKey }: IProps) {
             closeConfigItem();
           }}
           currentView={{ entity, integrationKey }}
-          initialValues={(tableData?.data || []).find(
+          initialValues={tableData.data.find(
             ({ instanceId }) => instanceId === currentInstanceId
           )}
           formAction={
             currentInstanceId === NEW_ACTION_ITEM ? "create" : "update"
           }
-          integrationsList={integrationsList.data || []}
-          activatedActions={activeActionList.data || []}
-          entities={activeEntities.data || []}
+          integrationsList={integrationsList.data}
+          activatedActions={activeActionList.data}
+          entities={activeEntities.data}
         />
       </OffCanvas>
     </>

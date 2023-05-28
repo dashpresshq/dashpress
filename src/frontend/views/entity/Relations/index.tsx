@@ -62,7 +62,7 @@ export function EntityRelationsSettings() {
   );
 
   const getEntitiesDictionPlurals = useEntityDictionPlurals(
-    (entityRelationList.data || []).map((value) => ({ value })),
+    entityRelationList.data.map((value) => ({ value })),
     "value"
   );
 
@@ -143,9 +143,7 @@ export function EntityRelationsSettings() {
                         values as unknown as Record<string, string>
                       );
                     }}
-                    entityFields={(entityFields.data || []).map(
-                      ({ name }) => name
-                    )}
+                    entityFields={entityFields.data.map(({ name }) => name)}
                     initialValues={entityRelationTemplate.data}
                   />
                 </ViewStateMachine>
@@ -162,9 +160,7 @@ export function EntityRelationsSettings() {
                   <Spacer />
                   <FieldsLabelForm
                     initialValues={entityRelationsLabelsMap.data}
-                    fields={(referenceFields.data || []).map(
-                      ({ table }) => table
-                    )}
+                    fields={referenceFields.data.map(({ table }) => table)}
                     onSubmit={async (data) => {
                       await upsertEntityRelationsLabelsMutation.mutateAsync(
                         data as Record<string, string>
@@ -184,7 +180,7 @@ export function EntityRelationsSettings() {
                 >
                   <EntitiesSelection
                     selectionKey={`${entity}-relations`}
-                    allList={entityRelationList.data || []}
+                    allList={entityRelationList.data}
                     getEntityFieldLabels={(relation) =>
                       entityRelationsLabelsMap.data?.[relation] ||
                       getEntitiesDictionPlurals(relation)
@@ -192,7 +188,7 @@ export function EntityRelationsSettings() {
                     crudConfig={MAKE_APP_CONFIGURATION_CRUD_CONFIG(
                       "hidden_entity_relations"
                     )}
-                    hiddenList={hiddenEntityRelations.data || []}
+                    hiddenList={hiddenEntityRelations.data}
                     onSubmit={async (data) => {
                       await upsertHideEntityRelationMutation.mutateAsync(data);
                     }}
@@ -211,12 +207,10 @@ export function EntityRelationsSettings() {
                   <SortList
                     data={{
                       ...referenceFields,
-                      data: (referenceFields.data || []).map(
-                        ({ table, label }) => ({
-                          value: table,
-                          label: label || getEntitiesDictionPlurals(table),
-                        })
-                      ),
+                      data: referenceFields.data.map(({ table, label }) => ({
+                        value: table,
+                        label: label || getEntitiesDictionPlurals(table),
+                      })),
                     }}
                     onSave={
                       upsertEntityRelationsOrderMutation.mutateAsync as (

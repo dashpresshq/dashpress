@@ -7,8 +7,9 @@ import { useAuthenticatedUserBag } from "frontend/hooks/auth/user.store";
 import { useSetPageDetails } from "frontend/lib/routing";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { META_USER_PERMISSIONS } from "shared/constants/user";
+import { ACCOUNT_PROFILE_CRUD_CONFIG } from "frontend/hooks/auth/constants";
 import { useUpdateProfileMutation } from "../account.store";
-import { ACCOUNT_VIEW_KEY, ACCOUNT_PROFILE_CRUD_CONFIG } from "../constants";
+import { ACCOUNT_VIEW_KEY } from "../constants";
 import { BaseAccountLayout } from "../_Base";
 import { UpdateProfileForm } from "./Form";
 

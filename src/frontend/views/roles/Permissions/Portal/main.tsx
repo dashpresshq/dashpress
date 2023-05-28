@@ -8,12 +8,12 @@ export const usePortalExtendedPermissions = () => {
   const activeEntities = useActiveEntities();
 
   const getEntitiesDictionPlurals = useEntityDictionPlurals(
-    activeEntities.data || [],
+    activeEntities.data,
     "value"
   );
 
   const entitiesAsPermissionList = [
-    ...(activeEntities.data || []).map((entity) => ({
+    ...activeEntities.data.map((entity) => ({
       value: META_USER_PERMISSIONS.APPLIED_CAN_ACCESS_ENTITY(
         entity.value,
         GranularEntityPermissions.Show

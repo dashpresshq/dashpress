@@ -18,6 +18,9 @@ import { BaseEntitySettingsLayout } from "../_Base";
 import { EntityDictionForm } from "./Form";
 import { ENTITY_CONFIGURATION_VIEW } from "../constants";
 
+const ENTITY_DICTION_SETTINGS_CRUD_CONFIG =
+  MAKE_APP_CONFIGURATION_CRUD_CONFIG("entity_diction");
+
 export function EntityDictionSettings() {
   const entity = useEntitySlug();
   const entityDiction = useEntityDiction();
@@ -25,9 +28,6 @@ export function EntityDictionSettings() {
     "entity_diction",
     entity
   );
-
-  const ENTITY_DICTION_SETTINGS_CRUD_CONFIG =
-    MAKE_APP_CONFIGURATION_CRUD_CONFIG("entity_diction");
 
   useSetPageDetails({
     pageTitle: ENTITY_DICTION_SETTINGS_CRUD_CONFIG.TEXT_LANG.TITLE,

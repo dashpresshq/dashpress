@@ -129,11 +129,11 @@ function useEntityCrudView() {
         <SelectionTab
           label={ENTITY_CRUD_SETTINGS_TAB_LABELS.TABLE}
           columns={{
-            fields: entityFields.data || [],
+            fields: entityFields.data,
             submit: async (data) => {
               await upsertTableColumnsMutation.mutateAsync(data);
             },
-            hidden: hiddenTableColumns.data || [],
+            hidden: hiddenTableColumns.data,
             getEntityFieldLabels,
           }}
           isLoading={sharedLoading || hiddenTableColumns.isLoading}
@@ -151,11 +151,11 @@ function useEntityCrudView() {
         <SelectionTab
           label={ENTITY_CRUD_SETTINGS_TAB_LABELS.DETAILS}
           columns={{
-            fields: entityFields.data || [],
+            fields: entityFields.data,
             submit: async (data) => {
               await upsertDetailsColumnsMutation.mutateAsync(data);
             },
-            hidden: hiddenDetailsColumns.data || [],
+            hidden: hiddenDetailsColumns.data,
             getEntityFieldLabels,
           }}
           isLoading={sharedLoading || hiddenDetailsColumns.isLoading}
@@ -174,11 +174,11 @@ function useEntityCrudView() {
         <SelectionTab
           label={ENTITY_CRUD_SETTINGS_TAB_LABELS.CREATE}
           columns={{
-            fields: entityFields.data || [],
+            fields: entityFields.data,
             submit: async (data) => {
               await upsertCreateColumnsMutation.mutateAsync(data);
             },
-            hidden: hiddenCreateColumns.data || [],
+            hidden: hiddenCreateColumns.data,
             getEntityFieldLabels,
           }}
           isLoading={sharedLoading || hiddenCreateColumns.isLoading}
@@ -197,11 +197,11 @@ function useEntityCrudView() {
         <SelectionTab
           label={ENTITY_CRUD_SETTINGS_TAB_LABELS.UPDATE}
           columns={{
-            fields: entityFields.data || [],
+            fields: entityFields.data,
             submit: async (data) => {
               await upsertUpdateColumnsMutation.mutateAsync(data);
             },
-            hidden: hiddenUpdateColumns.data || [],
+            hidden: hiddenUpdateColumns.data,
             getEntityFieldLabels,
           }}
           toggling={{

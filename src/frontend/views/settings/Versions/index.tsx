@@ -23,6 +23,7 @@ export function VersionInfo() {
 
   const systemVersions = useApi<Record<string, string>>("/api/versions", {
     errorMessage: SYSTEM_INFORMATION_CRUD_CONFIG.TEXT_LANG.NOT_FOUND,
+    defaultData: {},
   });
 
   return (
@@ -42,7 +43,7 @@ export function VersionInfo() {
             </>
           }
         >
-          {Object.entries(systemVersions.data || {}).map(([label, value]) => (
+          {Object.entries(systemVersions.data).map(([label, value]) => (
             <Fragment key={label}>
               <Typo.XS weight="bold">{label}</Typo.XS>
               <Typo.MD>{value}</Typo.MD>

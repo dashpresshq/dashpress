@@ -1,5 +1,5 @@
 import { ITableColumn, Table } from "@hadmean/chromista";
-import { usePaginatedData } from "@hadmean/protozoa";
+import { DEFAULT_PAGINATED_DATA, usePaginatedData } from "@hadmean/protozoa";
 import { useTableState } from "../hooks";
 import { IDataTableProps } from "../types";
 
@@ -25,6 +25,7 @@ export function BaseDataTable({
 
   const tableData = usePaginatedData(dataEndpoint, currentState, {
     enabled,
+    defaultData: DEFAULT_PAGINATED_DATA,
   });
 
   return (

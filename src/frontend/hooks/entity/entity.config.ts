@@ -90,10 +90,7 @@ export function useProcessedEntityFieldTypes(
   ) {
     return {};
   }
-  return getEntityFieldTypes(
-    entityFields.data || [],
-    entityFieldTypesMap.data || {}
-  );
+  return getEntityFieldTypes(entityFields.data, entityFieldTypesMap.data);
 }
 
 export function useEntityFieldValidations() {
@@ -114,10 +111,10 @@ export function useEntityFieldValidations() {
   }
 
   return Object.fromEntries(
-    (entityFields.data || []).map((entityField) => {
+    entityFields.data.map((entityField) => {
       // The validation from the DB should override that of the config
       const preSelectedValidation =
-        (entityValidationsMap.data || {})[entityField.name] || [];
+        entityValidationsMap.data[entityField.name] || [];
 
       const uniqKey: keyof IFieldValidationItem = "validationType";
       // Prefering the add new effect over remove old effect
@@ -161,8 +158,8 @@ export function useEntityFieldSelections(
   }
 
   return getEntitySelections(
-    entityFields.data || [],
-    entitySelections.data || {},
+    entityFields.data,
+    entitySelections.data,
     processedEntityFieldTypes
   );
 }

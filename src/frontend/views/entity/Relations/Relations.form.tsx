@@ -1,18 +1,18 @@
 import { FormButton, FormInput } from "@hadmean/chromista";
 import { Form, Field } from "react-final-form";
-import {
-  ButtonLang,
-  IFormProps,
-  composeValidators,
-  required,
-} from "@hadmean/protozoa";
+import { IFormProps, composeValidators, required } from "@hadmean/protozoa";
 
+import { MAKE_APP_CONFIGURATION_CRUD_CONFIG } from "frontend/hooks/configuration/configuration.constant";
 import { getFieldsOffFormat } from "./utils";
 
 interface IRelationsSettings {
   format: string;
   fields: string[];
 }
+
+const CRUD_CONFIG = MAKE_APP_CONFIGURATION_CRUD_CONFIG(
+  "entity_relation_template"
+);
 
 export function EntityRelationsForm({
   onSubmit,
@@ -58,8 +58,10 @@ export function EntityRelationsForm({
               )}
             </Field>
             <FormButton
-              text={`${ButtonLang.update} Format`}
+              text={CRUD_CONFIG.FORM_LANG.UPSERT(false)}
+              loadingText={CRUD_CONFIG.FORM_LANG.UPSERT(true)}
               isMakingRequest={submitting}
+              icon="save"
               disabled={pristine}
             />
           </form>

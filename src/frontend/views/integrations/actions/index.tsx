@@ -21,11 +21,11 @@ export function ActionsIntegrations() {
   const integrationsList = useActionIntegrationsList();
   const activeActionsList = useActiveActionList();
 
-  const integrationDetail = (integrationsList.data || []).find(
+  const integrationDetail = integrationsList.data.find(
     ({ key }) => key === currentKey
   );
 
-  const activeAction = (activeActionsList.data || []).find(
+  const activeAction = activeActionsList.data.find(
     ({ integrationKey }) => integrationKey === currentKey
   );
 

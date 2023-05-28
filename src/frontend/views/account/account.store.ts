@@ -7,9 +7,9 @@ import { useMutation } from "react-query";
 import { IChangePasswordForm } from "shared/form-schemas/profile/password";
 import { IUpdateUserForm } from "shared/form-schemas/profile/update";
 import { IUserPreferences } from "shared/types/user";
+import { ACCOUNT_PROFILE_CRUD_CONFIG } from "frontend/hooks/auth/constants";
 import {
   ACCOUNT_PREFERENCES_CRUD_CONFIG,
-  ACCOUNT_PROFILE_CRUD_CONFIG,
   PASSWORD_CRUD_CONFIG,
 } from "./constants";
 

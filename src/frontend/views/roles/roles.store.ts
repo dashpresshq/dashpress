@@ -1,7 +1,8 @@
 import {
+  MutationHelpers,
   makeDeleteRequest,
   makePostRequest,
-  useApiMutateOptitmisticOptions,
+  useApiMutateOptimisticOptions,
   useWaitForResponseMutationOptions,
 } from "@hadmean/protozoa";
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
@@ -9,7 +10,6 @@ import { useRouter } from "next/router";
 import { useMutation } from "react-query";
 import { IBaseRoleForm } from "shared/form-schemas/roles/base";
 import { makeRoleId } from "shared/constants/user";
-import { deleteByKey } from "frontend/lib/mutation/helpers";
 import { IRolesList } from "shared/types/roles";
 import { MAKE_CRUD_CONFIG } from "frontend/lib/makeCrudConfig";
 
@@ -41,16 +41,14 @@ export function useCreateRoleMutation() {
 
 export function useRoleDeletionMutation() {
   const router = useRouter();
-  const apiMutateOptions = useApiMutateOptitmisticOptions<IRolesList[], string>(
-    {
-      dataQueryPath: ADMIN_ROLES_CRUD_CONFIG.ENDPOINTS.LIST,
-      onSuccessActionWithFormData: () => {
-        router.replace(NAVIGATION_LINKS.ROLES.LIST);
-      },
-      onMutate: deleteByKey("value"),
-      successMessage: ADMIN_ROLES_CRUD_CONFIG.MUTATION_LANG.DELETE,
-    }
-  );
+  const apiMutateOptions = useApiMutateOptimisticOptions<IRolesList[], string>({
+    dataQueryPath: ADMIN_ROLES_CRUD_CONFIG.ENDPOINTS.LIST,
+    onSuccessActionWithFormData: () => {
+      router.replace(NAVIGATION_LINKS.ROLES.LIST);
+    },
+    onMutate: MutationHelpers.deleteByKey("value"),
+    successMessage: ADMIN_ROLES_CRUD_CONFIG.MUTATION_LANG.DELETE,
+  });
 
   return useMutation(
     async (roleId: string) =>

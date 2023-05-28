@@ -49,7 +49,7 @@ export function ManageCredentialGroup({
   const deleteConfigurationMutation =
     useIntegrationConfigurationDeletionMutation(group);
 
-  const tableData = useApi<IKeyValue[]>(dataEndpoint);
+  const tableData = useApi<IKeyValue[]>(dataEndpoint, { defaultData: [] });
 
   const revealedCredentials = useRevealedCredentialsList(group);
 
@@ -169,7 +169,7 @@ export function ManageCredentialGroup({
       <section aria-label={`${group} priviledge section`}>
         {group === IntegrationsConfigurationGroup.Credentials &&
           userHasPermission(USER_PERMISSIONS.CAN_MANAGE_INTEGRATIONS) &&
-          (tableData?.data || []).length > 0 &&
+          tableData.data.length > 0 &&
           !revealedCredentials.data && (
             <Spacer>
               <Typo.SM textStyle="italic">
@@ -198,7 +198,7 @@ export function ManageCredentialGroup({
               />
             </Spacer>
           )}
-        {!canManageAction && (tableData?.data || []).length > 0 && (
+        {!canManageAction && tableData.data.length > 0 && (
           <Spacer>
             <Typo.SM textStyle="italic">
               Your account does not have the permission to view secret values or
@@ -227,7 +227,7 @@ export function ManageCredentialGroup({
       >
         <KeyValueForm
           group={group}
-          initialValues={(tableData?.data || []).find(
+          initialValues={tableData.data.find(
             ({ key }) => key === currentConfigItem
           )}
           onSubmit={async (values: { key: string; value: string }) => {

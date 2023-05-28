@@ -11,7 +11,7 @@ import {
 import { Form, Field } from "react-final-form";
 import arrayMutators from "final-form-arrays";
 import { FieldArray } from "react-final-form-arrays";
-import { required, composeValidators, ButtonLang } from "@hadmean/protozoa";
+import { required, composeValidators } from "@hadmean/protozoa";
 import React, { useState } from "react";
 import styled from "styled-components";
 import { isNotEmpty } from "class-validator";
@@ -21,6 +21,7 @@ import {
   isUseColorsFlagOn,
   OPTIONS_COLORS,
 } from "shared/logic/entities/selection.utils";
+import { MAKE_APP_CONFIGURATION_CRUD_CONFIG } from "frontend/hooks/configuration/configuration.constant";
 import { isBlackOrWhite } from "./isBlackOrWhite";
 
 const StyledColorBox = styled.button<{ color: string }>`
@@ -36,6 +37,8 @@ const StyledColorBox = styled.button<{ color: string }>`
 `;
 
 // Reference is a special case basically only use color
+
+const CRUD_CONFIG = MAKE_APP_CONFIGURATION_CRUD_CONFIG("entity_selections");
 
 const ManagableEntities = ["selection"];
 
@@ -203,8 +206,10 @@ export function FieldSelectionCanvas({
           </FieldArray>
           <Spacer />
           <FormButton
+            icon="save"
             isMakingRequest={false}
-            text={ButtonLang.upsert}
+            text={CRUD_CONFIG.FORM_LANG.UPSERT(false)}
+            loadingText={CRUD_CONFIG.FORM_LANG.UPSERT(true)}
             disabled={pristine}
           />
         </form>

@@ -1,15 +1,15 @@
 import {
-  dataNotFoundMessage,
   makeDeleteRequest,
   makePatchRequest,
   makePostRequest,
   MutationHelpers,
   SLUG_LOADING_VALUE,
   useApi,
-  useApiMutateOptitmisticOptions,
+  useApiMutateOptimisticOptions,
 } from "@hadmean/protozoa";
 import { useMutation } from "react-query";
 import { IWidgetConfig } from "shared/types/dashboard";
+import { CRUD_CONFIG_NOT_FOUND } from "frontend/lib/makeCrudConfig";
 import { DASHBOARD_RELATIVE_DAYS } from "./Widget/_components/WidgetHeader/constants";
 import { DASHBOARD_WIDGETS_CRUD_CONFIG } from "./constants";
 
@@ -32,6 +32,7 @@ export const useDashboardWidgets = (dashboardId: string) => {
   return useApi<IWidgetConfig[]>(DASHBOARD_ENDPOINT(dashboardId), {
     errorMessage: DASHBOARD_WIDGETS_CRUD_CONFIG.TEXT_LANG.NOT_FOUND,
     enabled: !!dashboardId && dashboardId !== SLUG_LOADING_VALUE,
+    defaultData: [],
   });
 };
 
@@ -42,14 +43,15 @@ export const useDasboardWidgetScriptData = (
   return useApi<unknown>(
     DASHBOARD_WIDGET_SCRIPT_ENDPOINT(widgetId, relativeDate),
     {
-      errorMessage: dataNotFoundMessage("Dashboard widget script"),
+      errorMessage: CRUD_CONFIG_NOT_FOUND("Script"),
       enabled: !!widgetId,
+      defaultData: undefined,
     }
   );
 };
 
 export function useCreateDashboardWidgetMutation(dashboardId: string) {
-  const apiMutateOptions = useApiMutateOptitmisticOptions<
+  const apiMutateOptions = useApiMutateOptimisticOptions<
     IWidgetConfig[],
     IWidgetConfig
   >({
@@ -60,7 +62,6 @@ export function useCreateDashboardWidgetMutation(dashboardId: string) {
 
   return useMutation(async (widget: IWidgetConfig) => {
     await makePostRequest(DASHBOARD_ENDPOINT(dashboardId), widget);
-    return widget;
   }, apiMutateOptions);
 }
 
@@ -68,7 +69,7 @@ export function useUpdateDashboardWidgetMutation(
   dashboardId: string,
   widgetId: string
 ) {
-  const apiMutateOptions = useApiMutateOptitmisticOptions<
+  const apiMutateOptions = useApiMutateOptimisticOptions<
     IWidgetConfig[],
     IWidgetConfig
   >({
@@ -83,12 +84,11 @@ export function useUpdateDashboardWidgetMutation(
       `${DASHBOARD_ENDPOINT(dashboardId)}/${widget.id}`,
       widget
     );
-    return widget;
   }, apiMutateOptions);
 }
 
 export function useDeleteDashboardWidgetMutation(dashboardId: string) {
-  const apiMutateOptions = useApiMutateOptitmisticOptions<
+  const apiMutateOptions = useApiMutateOptimisticOptions<
     IWidgetConfig[],
     string
   >({
@@ -101,12 +101,11 @@ export function useDeleteDashboardWidgetMutation(dashboardId: string) {
     await makeDeleteRequest(`${DASHBOARD_ENDPOINT(dashboardId)}/${widgetId}`, {
       widgetId,
     });
-    return widgetId;
   }, apiMutateOptions);
 }
 
 export function useArrangeDashboardWidgetMutation(dashboardId: string) {
-  const apiMutateOptions = useApiMutateOptitmisticOptions<
+  const apiMutateOptions = useApiMutateOptimisticOptions<
     IWidgetConfig[],
     string[]
   >({
@@ -116,6 +115,5 @@ export function useArrangeDashboardWidgetMutation(dashboardId: string) {
 
   return useMutation(async (widgetList: string[]) => {
     await makePatchRequest(DASHBOARD_ENDPOINT(dashboardId), widgetList);
-    return widgetList;
   }, apiMutateOptions);
 }

@@ -33,7 +33,9 @@ export function ListUsers() {
     permission: USER_PERMISSIONS.CAN_MANAGE_USERS,
   });
 
-  const roles = useApi<IRolesList[]>(ADMIN_ROLES_CRUD_CONFIG.ENDPOINTS.LIST);
+  const roles = useApi<IRolesList[]>(ADMIN_ROLES_CRUD_CONFIG.ENDPOINTS.LIST, {
+    defaultData: [],
+  });
 
   const userDeletionMutation = useUserDeletionMutation();
 

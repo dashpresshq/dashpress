@@ -5,18 +5,16 @@ import {
   FormSkeletonSchema,
 } from "@hadmean/chromista";
 import { Form, Field } from "react-final-form";
-import {
-  ButtonLang,
-  composeValidators,
-  maxLength,
-  minLength,
-} from "@hadmean/protozoa";
+import { composeValidators, maxLength, minLength } from "@hadmean/protozoa";
+import { MAKE_APP_CONFIGURATION_CRUD_CONFIG } from "frontend/hooks/configuration/configuration.constant";
 
 interface IProps {
   fields: string[];
   initialValues?: Record<string, unknown>;
   onSubmit: (data: Record<string, unknown>) => void;
 }
+
+const CRUD_CONFIG = MAKE_APP_CONFIGURATION_CRUD_CONFIG("entity_columns_labels");
 
 export const loadingFieldsLabelForm = (
   <FormSkeleton
@@ -49,9 +47,11 @@ export function FieldsLabelForm({ onSubmit, initialValues, fields }: IProps) {
             </Field>
           ))}
           <FormButton
-            text={`${ButtonLang.upsert} Labels`}
+            text={CRUD_CONFIG.FORM_LANG.UPSERT(false)}
+            loadingText={CRUD_CONFIG.FORM_LANG.UPSERT(true)}
             isMakingRequest={submitting}
             disabled={pristine}
+            icon="save"
           />
         </form>
       )}

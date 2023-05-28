@@ -1,9 +1,7 @@
 import {
-  dataNotFoundMessage,
   makeDeleteRequest,
   makePatchRequest,
   makePostRequest,
-  MutationsLang,
   useApi,
   useWaitForResponseMutationOptions,
 } from "@hadmean/protozoa";
@@ -14,7 +12,9 @@ import {
   IIntegrationsList,
   IActivatedAction,
 } from "shared/types/actions";
+import { CRUD_CONFIG_NOT_FOUND } from "frontend/lib/makeCrudConfig";
 import { usePasswordStore } from "../password.store";
+import { ACTION_INTEGRATIONS_CRUD_CONFIG } from "./constants";
 
 const ACTIVE_ACTIONS_INTEGRATIONS_ENDPOINT = "/api/integrations/actions/active";
 
@@ -24,12 +24,14 @@ const ACTIVATION_CONFIG = (activationId: string) => {
 
 export const useActionIntegrationsList = () =>
   useApi<IIntegrationsList[]>("/api/integrations/actions/list", {
-    errorMessage: dataNotFoundMessage("Actions Integrations"),
+    errorMessage: ACTION_INTEGRATIONS_CRUD_CONFIG.TEXT_LANG.NOT_FOUND,
+    defaultData: [],
   });
 
 export const useActiveActionList = () =>
   useApi<IActivatedAction[]>(ACTIVE_ACTIONS_INTEGRATIONS_ENDPOINT, {
-    errorMessage: dataNotFoundMessage("Active Actions"),
+    errorMessage: CRUD_CONFIG_NOT_FOUND("Active Actions"),
+    defaultData: [],
   });
 
 export const useActivationConfiguration = (activationId: string) => {
@@ -43,11 +45,12 @@ export const useActivationConfiguration = (activationId: string) => {
         },
         method: "POST",
       },
-      errorMessage: dataNotFoundMessage("Action Credentials"),
+      errorMessage: CRUD_CONFIG_NOT_FOUND("Action Credentials"),
       enabled:
         !!activationId &&
         !!rootPassword &&
         activationId !== HTTP_INTEGRATION_KEY,
+      defaultData: {},
     }
   );
 };
@@ -57,7 +60,7 @@ export function useDeactivateActionMutation() {
     Record<string, string>
   >({
     endpoints: [ACTIVE_ACTIONS_INTEGRATIONS_ENDPOINT],
-    successMessage: "Action Integration Deactivated Successfully",
+    successMessage: ACTION_INTEGRATIONS_CRUD_CONFIG.MUTATION_LANG.DE_ACTIVATED,
   });
 
   return useMutation(
@@ -72,7 +75,7 @@ export function useActivateActionMutation(integrationKey: string) {
     Record<string, string>
   >({
     endpoints: [ACTIVE_ACTIONS_INTEGRATIONS_ENDPOINT],
-    successMessage: "Action Integration Activated Successfully",
+    successMessage: ACTION_INTEGRATIONS_CRUD_CONFIG.MUTATION_LANG.ACTIVATED,
   });
 
   return useMutation(
@@ -90,7 +93,7 @@ export function useUpdateActivatedActionMutation(activationId: string) {
     Record<string, string>
   >({
     endpoints: [ACTIVE_ACTIONS_INTEGRATIONS_ENDPOINT],
-    successMessage: MutationsLang.saved("Action Integration"),
+    successMessage: ACTION_INTEGRATIONS_CRUD_CONFIG.MUTATION_LANG.EDIT,
   });
 
   return useMutation(

@@ -41,9 +41,7 @@ export function BaseActionsLayout({ children }: IProps) {
   const router = useRouter();
 
   const activeList = [
-    ...(activeActionList.data || []).map(
-      ({ integrationKey }) => integrationKey
-    ),
+    ...activeActionList.data.map(({ integrationKey }) => integrationKey),
   ];
 
   return (
@@ -59,12 +57,10 @@ export function BaseActionsLayout({ children }: IProps) {
               loader={<ListSkeleton count={7} />}
             >
               <RenderList
-                items={(actionIntegrationsList.data || []).map(
-                  ({ title, key }) => ({
-                    name: title,
-                    key,
-                  })
-                )}
+                items={actionIntegrationsList.data.map(({ title, key }) => ({
+                  name: title,
+                  key,
+                }))}
                 render={(menuItem) => {
                   const isActive = activeList.includes(menuItem.key);
                   return (
@@ -99,16 +95,14 @@ export function BaseActionsLayout({ children }: IProps) {
                 loader={<ListSkeleton count={7} />}
               >
                 <RenderList
-                  items={(storageIntegrationsList.data || []).map(
-                    ({ title, key }) => ({
-                      name: title,
-                      key,
-                    })
-                  )}
+                  items={storageIntegrationsList.data.map(({ title, key }) => ({
+                    name: title,
+                    key,
+                  }))}
                   render={(menuItem) => {
-                    const isActive = (
-                      activeStorageIntegrationList.data || []
-                    ).includes(menuItem.key);
+                    const isActive = activeStorageIntegrationList.data.includes(
+                      menuItem.key
+                    );
                     return (
                       <SectionListItem
                         label={menuItem.name}

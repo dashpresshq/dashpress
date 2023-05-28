@@ -3,7 +3,7 @@ import {
   makePostRequest,
   MutationHelpers,
   useApi,
-  useApiMutateOptitmisticOptions,
+  useApiMutateOptimisticOptions,
 } from "@hadmean/protozoa";
 import { isRouterParamEnabled } from "frontend/hooks";
 import { useMutation } from "react-query";
@@ -26,13 +26,14 @@ export function useRolePermissions() {
   return useApi<string[]>(ADMIN_ROLE_PERMISSION_ENDPOINT(roleId), {
     enabled: isRouterParamEnabled(roleId),
     errorMessage: ADMIN_PERMISSIONS_CRUD_CONFIG.TEXT_LANG.NOT_FOUND,
+    defaultData: [],
   });
 }
 
 export function useRolePermissionDeletionMutation() {
   const roleId = useRoleIdFromRouteParam();
 
-  const apiMutateOptions = useApiMutateOptitmisticOptions<string[], string[]>({
+  const apiMutateOptions = useApiMutateOptimisticOptions<string[], string[]>({
     dataQueryPath: ADMIN_ROLE_PERMISSION_ENDPOINT(roleId),
     onMutate: MutationHelpers.removeMany,
     successMessage: ADMIN_PERMISSIONS_CRUD_CONFIG.MUTATION_LANG.DELETE,
@@ -42,14 +43,13 @@ export function useRolePermissionDeletionMutation() {
     await makeDeleteRequest(ADMIN_ROLE_PERMISSION_ENDPOINT(roleId), {
       permissions,
     });
-    return permissions;
   }, apiMutateOptions);
 }
 
 export function useCreateRolePermissionMutation() {
   const roleId = useRoleIdFromRouteParam();
 
-  const apiMutateOptions = useApiMutateOptitmisticOptions<string[], string[]>({
+  const apiMutateOptions = useApiMutateOptimisticOptions<string[], string[]>({
     dataQueryPath: ADMIN_ROLE_PERMISSION_ENDPOINT(roleId),
     onMutate: MutationHelpers.mergeArray,
     successMessage: ADMIN_PERMISSIONS_CRUD_CONFIG.MUTATION_LANG.CREATE,

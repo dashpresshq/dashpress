@@ -1,16 +1,17 @@
-import {
-  dataNotFoundMessage,
-  ToastService,
-  useStorageApi,
-} from "@hadmean/protozoa";
+import { ToastService, useStorageApi } from "@hadmean/protozoa";
 import { NAVIGATION_LINKS } from "frontend/lib/routing";
 import { useRouter } from "next/router";
 import { IAuthenticatedUserBag, IUserPreferences } from "shared/types/user";
 import { canRoleDoThisSync } from "shared/logic/permissions";
 import { useCallback } from "react";
 import { useIsAuthenticatedStore } from "./useAuthenticateUser";
+import { ACCOUNT_PROFILE_CRUD_CONFIG } from "./constants";
 
 export const AUTHENTICATED_ACCOUNT_URL = "/api/account/mine";
+
+const DEFAULT_USER_PREFERENCE: IUserPreferences = {
+  theme: "light",
+};
 
 export function useAuthenticatedUserBag() {
   const isAuthenticated = useIsAuthenticatedStore(
@@ -18,8 +19,15 @@ export function useAuthenticatedUserBag() {
   );
 
   return useStorageApi<IAuthenticatedUserBag>(AUTHENTICATED_ACCOUNT_URL, {
-    errorMessage: dataNotFoundMessage("Your account details"),
+    errorMessage: ACCOUNT_PROFILE_CRUD_CONFIG.TEXT_LANG.NOT_FOUND,
     enabled: isAuthenticated === true,
+    defaultData: {
+      name: "",
+      permissions: [],
+      role: "",
+      username: "",
+      preferences: JSON.stringify(DEFAULT_USER_PREFERENCE),
+    },
   });
 }
 
@@ -29,11 +37,12 @@ export function useAuthenticatedUserPreferences() {
   );
   return useStorageApi<IUserPreferences>(AUTHENTICATED_ACCOUNT_URL, {
     returnUndefinedOnError: true,
+    defaultData: DEFAULT_USER_PREFERENCE,
     enabled: isAuthenticated === true,
     selector: (data: IAuthenticatedUserBag) => {
       return data.preferences
         ? JSON.parse(data.preferences)
-        : { theme: "light" };
+        : DEFAULT_USER_PREFERENCE;
     },
   });
 }

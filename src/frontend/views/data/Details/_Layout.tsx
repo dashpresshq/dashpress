@@ -52,7 +52,7 @@ export function DetailsLayout({
 
   const referenceFields = useEntityReferenceFields(entity);
 
-  const relatedEntities = (referenceFields.data || [])
+  const relatedEntities = referenceFields.data
     .filter(({ type, field }) => {
       if (type === "toMany") {
         return true;
@@ -73,7 +73,7 @@ export function DetailsLayout({
   );
 
   const relatedEntitiesMap = Object.fromEntries(
-    (referenceFields.data || []).map((relatedEntity) => [
+    referenceFields.data.map((relatedEntity) => [
       relatedEntity.table,
       relatedEntity,
     ])

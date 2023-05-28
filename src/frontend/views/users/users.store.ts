@@ -1,10 +1,10 @@
 import {
-  dataNotFoundMessage,
+  MutationHelpers,
   makeDeleteRequest,
   makePatchRequest,
   makePostRequest,
   useApi,
-  useApiMutateOptitmisticOptions,
+  useApiMutateOptimisticOptions,
   useWaitForResponseMutationOptions,
 } from "@hadmean/protozoa";
 import { isRouterParamEnabled } from "frontend/hooks";
@@ -14,7 +14,6 @@ import { useMutation } from "react-query";
 import { ICreateUserForm } from "shared/form-schemas/users/create";
 import { IResetPasswordForm } from "shared/form-schemas/users/reset-password";
 import { IAccountProfile } from "shared/types/user";
-import { deleteByKey } from "frontend/lib/mutation/helpers";
 import { MAKE_CRUD_CONFIG } from "frontend/lib/makeCrudConfig";
 import { useUsernameFromRouteParam } from "./hooks";
 
@@ -28,17 +27,20 @@ export function useUserDetails(username: string) {
   return useApi<IAccountProfile>(
     ADMIN_USERS_CRUD_CONFIG.ENDPOINTS.DETAILS(username),
     {
+      defaultData: {
+        name: "",
+        role: "",
+        username: "",
+      },
       enabled: isRouterParamEnabled(username),
-      errorMessage: dataNotFoundMessage(
-        ADMIN_USERS_CRUD_CONFIG.TEXT_LANG.NOT_FOUND
-      ),
+      errorMessage: ADMIN_USERS_CRUD_CONFIG.TEXT_LANG.NOT_FOUND,
     }
   );
 }
 
 export function useUserDeletionMutation() {
   const router = useRouter();
-  const apiMutateOptions = useApiMutateOptitmisticOptions<
+  const apiMutateOptions = useApiMutateOptimisticOptions<
     IAccountProfile[],
     string
   >({
@@ -46,7 +48,7 @@ export function useUserDeletionMutation() {
     onSuccessActionWithFormData: () => {
       router.replace(NAVIGATION_LINKS.USERS.LIST);
     },
-    onMutate: deleteByKey("username"),
+    onMutate: MutationHelpers.deleteByKey("username"),
     successMessage: ADMIN_USERS_CRUD_CONFIG.MUTATION_LANG.DELETE,
   });
 

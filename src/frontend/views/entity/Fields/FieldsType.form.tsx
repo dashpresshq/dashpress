@@ -1,18 +1,16 @@
 import { FormButton, FormSelect, OffCanvas } from "@hadmean/chromista";
 import { Form, Field } from "react-final-form";
-import {
-  ButtonLang,
-  composeValidators,
-  maxLength,
-  minLength,
-} from "@hadmean/protozoa";
+import { composeValidators, maxLength, minLength } from "@hadmean/protozoa";
 import { useMemo, useState } from "react";
 import { getFieldTypeBoundedValidations } from "frontend/hooks/entity/guess";
 import { IFieldValidationItem } from "shared/validations/types";
 import { EntityTypesForSelection, IColorableSelection } from "shared/types/ui";
 import { FIELD_TYPES_CONFIG_MAP } from "shared/validations";
+import { MAKE_APP_CONFIGURATION_CRUD_CONFIG } from "frontend/hooks/configuration/configuration.constant";
 import { FieldValidationCanvas } from "./FieldsValidation";
 import { FieldSelectionCanvas } from "./FieldsSelection";
+
+const CRUD_CONFIG = MAKE_APP_CONFIGURATION_CRUD_CONFIG("entity_columns_types");
 
 const FIELD_TYPES_CONFIG_MAP_AS_SELECTION = Object.entries(
   FIELD_TYPES_CONFIG_MAP
@@ -142,7 +140,9 @@ export function FieldsTypeForm({
               </Field>
             ))}
             <FormButton
-              text={ButtonLang.upsert}
+              text={CRUD_CONFIG.FORM_LANG.UPSERT(false)}
+              loadingText={CRUD_CONFIG.FORM_LANG.UPSERT(false)}
+              icon="save"
               isMakingRequest={submitting}
               disabled={
                 !(

@@ -73,7 +73,7 @@ export function BaseEntityForm({
   const viewState = useEntityViewStateMachine(isLoading, error, action);
 
   const fields = filterOutHiddenScalarColumns(
-    (entityFields.data || []).filter(({ isId }) => !isId),
+    entityFields.data.filter(({ isId }) => !isId),
     hiddenColumns.data
   ).map(({ name }) => name);
 
@@ -95,7 +95,7 @@ export function BaseEntityForm({
   }, [initialValues, hiddenColumns]);
 
   const formSchemaConfig = {
-    entityToOneReferenceFields: entityToOneReferenceFields.data || {},
+    entityToOneReferenceFields: entityToOneReferenceFields.data,
     getEntityFieldLabels,
     entityFieldTypes,
     entityFieldSelections,

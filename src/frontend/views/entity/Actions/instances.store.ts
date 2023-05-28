@@ -3,10 +3,12 @@ import {
   makePatchRequest,
   makePostRequest,
   useApi,
-  dataNotFoundMessage,
   useWaitForResponseMutationOptions,
 } from "@hadmean/protozoa";
-import { MAKE_CRUD_CONFIG } from "frontend/lib/makeCrudConfig";
+import {
+  CRUD_CONFIG_NOT_FOUND,
+  MAKE_CRUD_CONFIG,
+} from "frontend/lib/makeCrudConfig";
 import { useMutation } from "react-query";
 import {
   IActionInstance,
@@ -38,8 +40,9 @@ export const useIntegrationImplementationsList = (integrationKey: string) =>
   useApi<IIntegrationImplementationList[]>(
     `${BASE_ACTIONS_ENDPOINT}/${integrationKey}/implementations`,
     {
-      errorMessage: dataNotFoundMessage("Integration Implementations"),
+      errorMessage: CRUD_CONFIG_NOT_FOUND("Integration Implementations"),
       enabled: !!integrationKey,
+      defaultData: [],
     }
   );
 

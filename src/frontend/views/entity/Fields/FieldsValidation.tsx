@@ -17,17 +17,13 @@ import { Form, Field } from "react-final-form";
 import arrayMutators from "final-form-arrays";
 import { FieldArray } from "react-final-form-arrays";
 import { userFriendlyCase } from "shared/lib/strings";
-import {
-  required,
-  composeValidators,
-  maxLength,
-  ButtonLang,
-} from "@hadmean/protozoa";
+import { required, composeValidators, maxLength } from "@hadmean/protozoa";
 import React from "react";
 import {
   IFieldValidationItem,
   ValidationTypes,
 } from "shared/validations/types";
+import { MAKE_APP_CONFIGURATION_CRUD_CONFIG } from "frontend/hooks/configuration/configuration.constant";
 
 interface IProps {
   field: string;
@@ -35,6 +31,8 @@ interface IProps {
   entityType: keyof typeof FIELD_TYPES_CONFIG_MAP;
   onSubmit: (values: IFieldValidationItem[]) => void;
 }
+
+const CRUD_CONFIG = MAKE_APP_CONFIGURATION_CRUD_CONFIG("entity_validations");
 
 const ERROR_MESSAGE_LENGTH = 128;
 
@@ -172,7 +170,9 @@ export function FieldValidationCanvas({
           <Spacer />
           <FormButton
             isMakingRequest={false}
-            text={ButtonLang.upsert}
+            text={CRUD_CONFIG.FORM_LANG.UPSERT(false)}
+            loadingText={CRUD_CONFIG.FORM_LANG.UPSERT(true)}
+            icon="save"
             disabled={pristine}
           />
         </form>

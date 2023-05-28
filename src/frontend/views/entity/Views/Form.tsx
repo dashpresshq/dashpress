@@ -1,5 +1,4 @@
 import {
-  ButtonLang,
   composeValidators,
   maxLength,
   IFormProps,
@@ -24,6 +23,7 @@ import {
 } from "@hadmean/chromista";
 import React, { useState } from "react";
 import { ACTIONS_ACCESSOR } from "frontend/views/data/Table/useTableColumns";
+import { MAKE_APP_CONFIGURATION_CRUD_CONFIG } from "frontend/hooks/configuration/configuration.constant";
 
 interface IProps {
   values: ITableTab[];
@@ -158,8 +158,14 @@ export function EntityTableTabForm({
             <FormButton
               isMakingRequest={submitting}
               onClick={handleSubmit}
-              text={`${ButtonLang.upsert} Changes`}
+              text={MAKE_APP_CONFIGURATION_CRUD_CONFIG(
+                "entity_views"
+              ).FORM_LANG.UPSERT(false)}
+              loadingText={MAKE_APP_CONFIGURATION_CRUD_CONFIG(
+                "entity_views"
+              ).FORM_LANG.UPSERT(false)}
               disabled={pristine}
+              icon="save"
             />
             <Spacer />
             <TabForm

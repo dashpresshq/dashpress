@@ -25,7 +25,7 @@ export function MutatePermission({ permissionList }: IProps) {
           value,
         }))}
         render={(menuItem) => {
-          const isPermissionSelected = (rolePermissions.data || []).includes(
+          const isPermissionSelected = rolePermissions.data.includes(
             menuItem.value
           );
 

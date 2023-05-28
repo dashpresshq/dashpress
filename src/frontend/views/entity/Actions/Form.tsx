@@ -9,6 +9,7 @@ import {
   IActivatedAction,
   BaseAction,
 } from "shared/types/actions";
+import { ACTION_INTEGRATIONS_CRUD_CONFIG } from "frontend/views/integrations/actions/constants";
 import { useIntegrationImplementationsList } from "./instances.store";
 
 interface IProps {
@@ -67,7 +68,7 @@ export function ActionForm({
 
   const selectedImplementation = Object.fromEntries(
     Object.entries(
-      (implementations.data || []).find(
+      implementations.data.find(
         ({ key }) => key === formValues.implementationKey
       )?.configurationSchema || {}
     ).map(([key, value]) => [
@@ -115,7 +116,7 @@ export function ActionForm({
       label: "Action",
       type: "selection",
       validations: [{ validationType: "required" }],
-      selections: (implementations.data || []).map(({ key, label }) => ({
+      selections: implementations.data.map(({ key, label }) => ({
         label,
         value: key,
       })),
@@ -147,9 +148,14 @@ export function ActionForm({
 
   return (
     <SchemaForm<IActionInstance>
-      buttonText="Save"
+      buttonText={
+        formAction === "create"
+          ? ACTION_INTEGRATIONS_CRUD_CONFIG.FORM_LANG.CREATE
+          : ACTION_INTEGRATIONS_CRUD_CONFIG.FORM_LANG.UPDATE
+      }
       initialValues={initialValues$1}
       fields={fields}
+      icon={formAction === "create" ? "add" : "save"}
       onChange={setFormValues}
       action={formAction}
       onSubmit={async (instance) => {

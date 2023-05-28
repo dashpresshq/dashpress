@@ -1,5 +1,4 @@
 import {
-  dataNotFoundMessage,
   getQueryCachekey,
   makeDeleteRequest,
   makePutRequest,
@@ -12,6 +11,7 @@ import { useMutation, useQueryClient } from "react-query";
 import { reduceStringToNumber } from "shared/lib/templates/reduceStringToNumber";
 import { IntegrationsConfigurationGroup } from "shared/types/integrations";
 import { INTEGRATIONS_GROUP_CONFIG } from "shared/config-bag/integrations";
+import { CRUD_CONFIG_NOT_FOUND } from "frontend/lib/makeCrudConfig";
 import { IKeyValue } from "./types";
 
 export const INTEGRATIONS_GROUP_ENDPOINT = (
@@ -81,9 +81,10 @@ export const useRevealedCredentialsList = (
         },
         method: "POST",
       },
-      errorMessage: dataNotFoundMessage("Revealed Credentials"),
+      errorMessage: CRUD_CONFIG_NOT_FOUND("Revealed Credentials"),
       enabled:
         group === IntegrationsConfigurationGroup.Credentials && !!rootPassword,
+      defaultData: [],
     }
   );
 

@@ -1,6 +1,6 @@
 import { IFormProps, VALIDATION_LENGTH } from "@hadmean/protozoa";
 import { SchemaForm } from "frontend/components/SchemaForm";
-import { ENTITY_DICTION_SETTINGS_CRUD_CONFIG } from "./constant";
+import { MAKE_APP_CONFIGURATION_CRUD_CONFIG } from "frontend/hooks/configuration/configuration.constant";
 
 type IDictionSettings = {
   plural: string;
@@ -16,7 +16,9 @@ export function EntityDictionForm({
       onSubmit={onSubmit}
       initialValues={initialValues}
       icon="save"
-      buttonText={ENTITY_DICTION_SETTINGS_CRUD_CONFIG.FORM_LANG.UPSERT}
+      buttonText={
+        MAKE_APP_CONFIGURATION_CRUD_CONFIG("entity_diction").FORM_LANG.UPSERT
+      }
       fields={{
         plural: {
           type: "text",

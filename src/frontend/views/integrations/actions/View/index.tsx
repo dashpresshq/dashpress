@@ -35,7 +35,12 @@ export function ActionSettingsView({
           fields={integrationDetail.configurationSchema}
           onSubmit={activateActionMutation.mutateAsync}
           initialValues={{}}
-          buttonText={`Activate ${integrationDetail.title}`}
+          icon="no-icon"
+          buttonText={(isSubmitting) =>
+            isSubmitting
+              ? `Activating ${integrationDetail.title}`
+              : `Activate ${integrationDetail.title}`
+          }
         />
       </>
     );

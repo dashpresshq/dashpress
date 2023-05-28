@@ -2,6 +2,7 @@ export interface IAppConfigurationBag {
   requireEntity?: true;
   defaultValue: unknown;
   guest?: true;
+  crudConfigLabel: string;
 }
 
 export interface IEntityCrudSettings {

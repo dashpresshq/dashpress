@@ -110,6 +110,7 @@ export function ListUsers() {
         <FEPaginationTable
           dataEndpoint={ADMIN_USERS_CRUD_CONFIG.ENDPOINTS.LIST}
           columns={columns}
+          emptyMessage={ADMIN_USERS_CRUD_CONFIG.TEXT_LANG.EMPTY_LIST}
         />
       </StyledCard>
     </AppLayout>

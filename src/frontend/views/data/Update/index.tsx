@@ -1,12 +1,11 @@
 import { SectionBox, SectionCenter } from "@hadmean/chromista";
-import { TitleLang } from "@hadmean/protozoa";
 import { useNavigationStack, useSetPageDetails } from "frontend/lib/routing";
 import { META_USER_PERMISSIONS, USER_PERMISSIONS } from "shared/constants/user";
 import { useUserHasPermission } from "frontend/hooks/auth/user.store";
 import { GranularEntityPermissions } from "shared/types/user";
 import { AppLayout } from "../../../_layouts/app";
 import {
-  useEntityDiction,
+  useEntityCrudConfig,
   useEntityId,
   useEntitySlug,
   useSelectedEntityColumns,
@@ -24,7 +23,7 @@ import { BaseEntityForm } from "../_BaseEntityForm";
 export function EntityUpdate() {
   const id = useEntityId();
   const entity = useEntitySlug();
-  const entityDiction = useEntityDiction();
+  const entityCrudConfig = useEntityCrudConfig();
 
   const entityDataUpdationMutation = useEntityDataUpdationMutation(entity, id);
 
@@ -34,7 +33,7 @@ export function EntityUpdate() {
   ]);
 
   useSetPageDetails({
-    pageTitle: `Update ${entityDiction.plural}`,
+    pageTitle: entityCrudConfig.TEXT_LANG.EDIT,
     viewKey: "UPDATE_ENTITY",
     permission: META_USER_PERMISSIONS.APPLIED_CAN_ACCESS_ENTITY(
       entity,
@@ -56,7 +55,7 @@ export function EntityUpdate() {
     <AppLayout actionItems={actionItems}>
       <SectionCenter>
         <SectionBox
-          title={TitleLang.edit(entityDiction.singular)}
+          title={entityCrudConfig.TEXT_LANG.EDIT}
           description={
             userHasPermission(USER_PERMISSIONS.CAN_CONFIGURE_APP)
               ? "For security reasons, Any data that is hidden in details view will not show up here, So rememeber to toggle on all fields there if you want to update them here"

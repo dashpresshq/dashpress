@@ -4,6 +4,7 @@ import { SchemaForm } from "frontend/components/SchemaForm";
 import { evalJSFormScript } from "frontend/components/SchemaForm/form-run";
 import { useSchemaFormScriptContext } from "frontend/components/SchemaForm/useSchemaFormScriptContext";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
+import { MAKE_APP_CONFIGURATION_CRUD_CONFIG } from "frontend/hooks/configuration/configuration.constant";
 
 interface IProps {
   value: string;
@@ -47,7 +48,11 @@ export function ScriptForm({
             ToastService.error(`•Expression: \n•JS-Error: ${e}`);
           }
         }}
-        buttonText="Save"
+        icon="save"
+        buttonText={
+          MAKE_APP_CONFIGURATION_CRUD_CONFIG("entity_form_extension").FORM_LANG
+            .UPSERT
+        }
         initialValues={{
           [`${BASE_SUFFIX}${field}`]: value,
         }}

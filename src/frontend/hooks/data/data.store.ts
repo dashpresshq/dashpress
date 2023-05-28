@@ -3,7 +3,6 @@ import {
   makeDeleteRequest,
   makePatchRequest,
   makePostRequest,
-  MutationsLang,
   useApi,
   useApiQueries,
   SLUG_LOADING_VALUE,
@@ -15,7 +14,7 @@ import { useRouter } from "next/router";
 import { useMutation } from "react-query";
 import { QueryFilter } from "shared/types/data";
 import { NAVIGATION_LINKS } from "../../lib/routing/links";
-import { useEntityDiction } from "../entity/entity.config";
+import { useEntityCrudConfig, useEntityDiction } from "../entity/entity.config";
 import { useMultipleEntityReferenceFields } from "../entity/entity.store";
 
 export const ENTITY_TABLE_PATH = (entity: string) =>
@@ -121,12 +120,12 @@ export const useEntityReferenceCount = (
 
 export const useEntityDataReference = (entity: string, id: string) =>
   useApi<string>(ENTITY_REFERENCE_PATH(entity, id), {
-    errorMessage: dataNotFoundMessage("Reference data not found"),
+    errorMessage: dataNotFoundMessage("Reference data"),
     enabled: !!(id && entity),
   });
 
 export function useEntityDataCreationMutation(entity: string) {
-  const entityDiction = useEntityDiction();
+  const entityCrudConfig = useEntityCrudConfig();
   const router = useRouter();
   const apiMutateOptions = useWaitForResponseMutationOptions<
     Record<string, string>
@@ -137,9 +136,9 @@ export function useEntityDataCreationMutation(entity: string) {
       ENTITY_LIST_PATH(entity),
     ],
     smartSuccessMessage: ({ id }) => ({
-      message: MutationsLang.create(entityDiction.singular),
+      message: entityCrudConfig.MUTATION_LANG.CREATE,
       action: {
-        label: MutationsLang.viewDetails(entityDiction.singular),
+        label: entityCrudConfig.MUTATION_LANG.VIEW_DETAILS,
         action: () => router.push(NAVIGATION_LINKS.ENTITY.DETAILS(entity, id)),
       },
     }),
@@ -153,7 +152,7 @@ export function useEntityDataCreationMutation(entity: string) {
 }
 
 export function useEntityDataUpdationMutation(entity: string, id: string) {
-  const entityDiction = useEntityDiction();
+  const entityCrudConfig = useEntityCrudConfig();
   const apiMutateOptions = useWaitForResponseMutationOptions<
     Record<string, string>
   >({
@@ -162,7 +161,7 @@ export function useEntityDataUpdationMutation(entity: string, id: string) {
       ENTITY_DETAILS_PATH(entity, id),
       ENTITY_LIST_PATH(entity),
     ],
-    successMessage: MutationsLang.edit(entityDiction.singular),
+    successMessage: entityCrudConfig.MUTATION_LANG.EDIT,
   });
 
   return useMutation(
@@ -177,7 +176,7 @@ export function useEntityDataDeletionMutation(
   redirectTo?: string
 ) {
   const router = useRouter();
-  const entityDiction = useEntityDiction();
+  const entityCrudConfig = useEntityCrudConfig();
   const apiMutateOptions = useWaitForResponseMutationOptions<
     Record<string, string>
   >({
@@ -191,7 +190,7 @@ export function useEntityDataDeletionMutation(
         router.replace(redirectTo);
       }
     },
-    successMessage: MutationsLang.delete(entityDiction.singular),
+    successMessage: entityCrudConfig.MUTATION_LANG.DELETE,
   });
 
   return useMutation(

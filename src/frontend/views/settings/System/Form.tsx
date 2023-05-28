@@ -1,7 +1,9 @@
 import { IFormProps } from "@hadmean/protozoa";
 import { SchemaForm } from "frontend/components/SchemaForm";
 import { IBaseSystemSettings } from "shared/configurations/system";
-import { SYSTEM_SETTINGS_CRUD_CONFIG } from "./constants";
+import { MAKE_APP_CONFIGURATION_CRUD_CONFIG } from "frontend/hooks/configuration/configuration.constant";
+
+const CRUD_CONFIG = MAKE_APP_CONFIGURATION_CRUD_CONFIG("system_settings");
 
 export function SystemSettingsForm({
   onSubmit,
@@ -12,7 +14,7 @@ export function SystemSettingsForm({
       onSubmit={onSubmit}
       initialValues={initialValues}
       icon="save"
-      buttonText={SYSTEM_SETTINGS_CRUD_CONFIG.FORM_LANG.UPSERT}
+      buttonText={CRUD_CONFIG.FORM_LANG.UPSERT}
       fields={{
         tokenValidityDurationInDays: {
           type: "number",

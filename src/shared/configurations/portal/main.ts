@@ -11,6 +11,7 @@ export const PORTAL_CONFIGURATION_KEYS: Record<
   IAppConfigurationBag
 > = {
   "": {
+    crudConfigLabel: "",
     defaultValue: "",
   },
 };

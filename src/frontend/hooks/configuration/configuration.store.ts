@@ -9,8 +9,8 @@ import {
   CONFIGURATION_KEYS,
   AppConfigurationKeys,
 } from "shared/configurations";
-import { ICrudConfig } from "frontend/lib/makeCrudConfig";
 import { isRouterParamEnabled } from "..";
+import { MAKE_APP_CONFIGURATION_CRUD_CONFIG } from "./configuration.constant";
 
 export const configurationApiPath = (
   key: AppConfigurationKeys,
@@ -28,23 +28,19 @@ export const configurationApiPath = (
   return `/api/config/${key}`;
 };
 
-export function useAppConfiguration<T>(
-  key: AppConfigurationKeys,
-  crudConfig: ICrudConfig
-) {
+export function useAppConfiguration<T>(key: AppConfigurationKeys) {
   return useStorageApi<T>(configurationApiPath(key), {
-    errorMessage: crudConfig.TEXT_LANG.NOT_FOUND,
+    errorMessage: MAKE_APP_CONFIGURATION_CRUD_CONFIG(key).TEXT_LANG.NOT_FOUND,
   });
 }
 
 export function useEntityConfiguration<T>(
   key: AppConfigurationKeys,
-  entity: string,
-  crudConfig: ICrudConfig
+  entity: string
 ) {
   return useStorageApi<T>(configurationApiPath(key, entity), {
     enabled: isRouterParamEnabled(entity),
-    errorMessage: crudConfig.TEXT_LANG.NOT_FOUND,
+    errorMessage: MAKE_APP_CONFIGURATION_CRUD_CONFIG(key).TEXT_LANG.NOT_FOUND,
   });
 }
 
@@ -54,7 +50,6 @@ interface IUpsertConfigMutationOptions {
 
 export function useUpsertConfigurationMutation(
   key: AppConfigurationKeys,
-  crudConfig: ICrudConfig,
   entity?: string,
   mutationOptions?: IUpsertConfigMutationOptions
 ) {
@@ -68,7 +63,7 @@ export function useUpsertConfigurationMutation(
     onSuccessActionWithFormData: (data) => {
       AppStorage.set(configurationApiPath(key, entity), data);
     },
-    successMessage: crudConfig.MUTATION_LANG.SAVED,
+    successMessage: MAKE_APP_CONFIGURATION_CRUD_CONFIG(key).MUTATION_LANG.SAVED,
   });
 
   return useMutation(async (values: unknown) => {

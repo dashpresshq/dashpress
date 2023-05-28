@@ -29,6 +29,7 @@ import {
 } from "frontend/hooks/configuration/configuration.store";
 import { LINK_TO_DOCS } from "frontend/views/constants";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
+import { MAKE_APP_CONFIGURATION_CRUD_CONFIG } from "frontend/hooks/configuration/configuration.constant";
 import { BaseEntitySettingsLayout } from "../_Base";
 import { EntityRelationsForm } from "./Relations.form";
 import { ENTITY_CONFIGURATION_VIEW } from "../constants";
@@ -188,6 +189,9 @@ export function EntityRelationsSettings() {
                       entityRelationsLabelsMap.data?.[relation] ||
                       getEntitiesDictionPlurals(relation)
                     }
+                    crudConfig={MAKE_APP_CONFIGURATION_CRUD_CONFIG(
+                      "hidden_entity_relations"
+                    )}
                     hiddenList={hiddenEntityRelations.data || []}
                     onSubmit={async (data) => {
                       await upsertHideEntityRelationMutation.mutateAsync(data);

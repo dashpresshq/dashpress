@@ -51,7 +51,12 @@ export function Deactivate({ integrationDetail, activationId }: IProps) {
           },
         }}
         onSubmit={() => deactivateActionMutation.mutateAsync(activationId)}
-        buttonText={`Deactivate ${integrationDetail.title}`}
+        buttonText={(isSubmitting) =>
+          isSubmitting
+            ? `Deactivating ${integrationDetail.title}`
+            : `Deactivate ${integrationDetail.title}`
+        }
+        icon="no-icon"
       />
     </>
   );

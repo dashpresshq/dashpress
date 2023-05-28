@@ -28,7 +28,7 @@ export interface IFETableColumn<T extends Record<string, unknown>> {
 interface IProps<T extends Record<string, unknown>> {
   columns: IFETableColumn<T>[];
   dataEndpoint: string;
-  emptyMessage?: string;
+  emptyMessage: string;
   border?: true;
 }
 

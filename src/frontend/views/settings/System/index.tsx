@@ -12,24 +12,22 @@ import {
 import { ISystemSettings } from "shared/configurations";
 import { LINK_TO_DOCS } from "frontend/views/constants";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
+import { MAKE_APP_CONFIGURATION_CRUD_CONFIG } from "frontend/hooks/configuration/configuration.constant";
 import { BaseSettingsLayout } from "../_Base";
 import { SystemSettingsForm } from "./Form";
 import { SETTINGS_VIEW_KEY } from "../constants";
-import { SYSTEM_SETTINGS_CRUD_CONFIG } from "./constants";
+
+const CRUD_CONFIG = MAKE_APP_CONFIGURATION_CRUD_CONFIG("system_settings");
 
 export function SystemSettings() {
-  const systemSettings = useAppConfiguration<ISystemSettings>(
-    "system_settings",
-    SYSTEM_SETTINGS_CRUD_CONFIG
-  );
+  const systemSettings =
+    useAppConfiguration<ISystemSettings>("system_settings");
 
-  const upsertConfigurationMutation = useUpsertConfigurationMutation(
-    "system_settings",
-    SYSTEM_SETTINGS_CRUD_CONFIG
-  );
+  const upsertConfigurationMutation =
+    useUpsertConfigurationMutation("system_settings");
 
   useSetPageDetails({
-    pageTitle: SYSTEM_SETTINGS_CRUD_CONFIG.TEXT_LANG.TITLE,
+    pageTitle: CRUD_CONFIG.TEXT_LANG.TITLE,
     viewKey: SETTINGS_VIEW_KEY,
     permission: USER_PERMISSIONS.CAN_CONFIGURE_APP,
   });
@@ -37,7 +35,7 @@ export function SystemSettings() {
   return (
     <BaseSettingsLayout>
       <SectionBox
-        title={SYSTEM_SETTINGS_CRUD_CONFIG.TEXT_LANG.TITLE}
+        title={CRUD_CONFIG.TEXT_LANG.TITLE}
         iconButtons={[
           {
             action: LINK_TO_DOCS("app-configuration/system"),

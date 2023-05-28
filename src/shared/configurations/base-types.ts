@@ -14,7 +14,6 @@ export type BaseAppConfigurationKeys =
   | "default_date_format"
   | "entity_columns_labels"
   | "disabled_entities"
-  | "dashboard_entities"
   | "site_settings"
   | "entity_relation_template"
   | "entity_selections"

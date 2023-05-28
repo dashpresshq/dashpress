@@ -13,23 +13,18 @@ import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { useUpdateUserPreferencesMutation } from "frontend/views/account/account.store";
 import { useAuthenticatedUserPreferences } from "frontend/hooks/auth/user.store";
 import { IThemeSettings } from "frontend/_layouts/types";
+import { THEME_SETTINGS_CRUD_CONFIG } from "frontend/_layouts/useAppTheme";
 import { BaseSettingsLayout } from "../_Base";
 import { ThemeSettingsForm } from "./Form";
 import { SETTINGS_VIEW_KEY } from "../constants";
-import { THEME_SETTINGS_CRUD_CONFIG } from "./constants";
 
 export function ThemeSettings() {
-  const themeColor = useAppConfiguration<IThemeSettings>(
-    "theme_color",
-    THEME_SETTINGS_CRUD_CONFIG
-  );
+  const themeColor = useAppConfiguration<IThemeSettings>("theme_color");
 
   const userPreferences = useAuthenticatedUserPreferences();
 
-  const upsertConfigurationMutation = useUpsertConfigurationMutation(
-    "theme_color",
-    THEME_SETTINGS_CRUD_CONFIG
-  );
+  const upsertConfigurationMutation =
+    useUpsertConfigurationMutation("theme_color");
 
   const updateUserPreferencesMutation = useUpdateUserPreferencesMutation();
 

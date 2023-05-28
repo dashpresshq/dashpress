@@ -13,19 +13,21 @@ import {
 } from "frontend/hooks/entity/entity.config";
 import { useUpsertConfigurationMutation } from "frontend/hooks/configuration/configuration.store";
 import { LINK_TO_DOCS } from "frontend/views/constants";
+import { MAKE_APP_CONFIGURATION_CRUD_CONFIG } from "frontend/hooks/configuration/configuration.constant";
 import { BaseEntitySettingsLayout } from "../_Base";
 import { EntityDictionForm } from "./Form";
 import { ENTITY_CONFIGURATION_VIEW } from "../constants";
-import { ENTITY_DICTION_SETTINGS_CRUD_CONFIG } from "./constant";
 
 export function EntityDictionSettings() {
   const entity = useEntitySlug();
   const entityDiction = useEntityDiction();
   const upsertConfigurationMutation = useUpsertConfigurationMutation(
     "entity_diction",
-    ENTITY_DICTION_SETTINGS_CRUD_CONFIG,
     entity
   );
+
+  const ENTITY_DICTION_SETTINGS_CRUD_CONFIG =
+    MAKE_APP_CONFIGURATION_CRUD_CONFIG("entity_diction");
 
   useSetPageDetails({
     pageTitle: ENTITY_DICTION_SETTINGS_CRUD_CONFIG.TEXT_LANG.TITLE,

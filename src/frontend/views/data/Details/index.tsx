@@ -1,5 +1,4 @@
 import { SectionBox } from "@hadmean/chromista";
-import { TitleLang } from "@hadmean/protozoa";
 import { useUserHasPermission } from "frontend/hooks/auth/user.store";
 import { useEntityDataDeletionMutation } from "frontend/hooks/data/data.store";
 import {
@@ -10,8 +9,8 @@ import {
 import { META_USER_PERMISSIONS } from "shared/constants/user";
 import { GranularEntityPermissions } from "shared/types/user";
 import {
+  useEntityCrudConfig,
   useEntityCrudSettings,
-  useEntityDiction,
   useEntityId,
   useEntitySlug,
 } from "../../../hooks/entity/entity.config";
@@ -20,7 +19,7 @@ import { EntityDetailsView } from "./DetailsView";
 import { DetailsLayout, DETAILS_LAYOUT_KEY } from "./_Layout";
 
 export function EntityDetails() {
-  const entityDiction = useEntityDiction();
+  const entityCrudConfig = useEntityCrudConfig();
   const id = useEntityId();
   const entity = useEntitySlug();
   const userHasPermission = useUserHasPermission();
@@ -33,7 +32,7 @@ export function EntityDetails() {
   const { backLink } = useNavigationStack();
 
   useSetPageDetails({
-    pageTitle: `${entityDiction.singular} Details`,
+    pageTitle: entityCrudConfig.TEXT_LANG.DETAILS,
     viewKey: ENTITY_DETAILS_VIEW_KEY,
     permission: META_USER_PERMISSIONS.APPLIED_CAN_ACCESS_ENTITY(
       entity,
@@ -44,7 +43,7 @@ export function EntityDetails() {
   return (
     <DetailsLayout entity={entity} menuKey={DETAILS_LAYOUT_KEY}>
       <SectionBox
-        title={TitleLang.details(entityDiction.singular)}
+        title={entityCrudConfig.TEXT_LANG.DETAILS}
         backLink={backLink}
         deleteAction={
           entityCrudSettings.data?.delete &&

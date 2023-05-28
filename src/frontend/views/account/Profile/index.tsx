@@ -8,7 +8,7 @@ import { useSetPageDetails } from "frontend/lib/routing";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { META_USER_PERMISSIONS } from "shared/constants/user";
 import { useUpdateProfileMutation } from "../account.store";
-import { ACCOUNT_VIEW_KEY } from "../constants";
+import { ACCOUNT_VIEW_KEY, ACCOUNT_PROFILE_CRUD_CONFIG } from "../constants";
 import { BaseAccountLayout } from "../_Base";
 import { UpdateProfileForm } from "./Form";
 
@@ -17,14 +17,14 @@ export function AccountProfile() {
   const updateProfileMutation = useUpdateProfileMutation();
 
   useSetPageDetails({
-    pageTitle: "Update Profile",
+    pageTitle: ACCOUNT_PROFILE_CRUD_CONFIG.TEXT_LANG.EDIT,
     viewKey: ACCOUNT_VIEW_KEY,
     permission: META_USER_PERMISSIONS.NO_PERMISSION_REQUIRED,
   });
 
   return (
     <BaseAccountLayout>
-      <SectionBox title="Account Profile">
+      <SectionBox title={ACCOUNT_PROFILE_CRUD_CONFIG.TEXT_LANG.EDIT}>
         <ViewStateMachine
           loading={authenticatedUserBag.isLoading}
           error={authenticatedUserBag.error}

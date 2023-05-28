@@ -4,7 +4,6 @@ import {
   makePatchRequest,
   makePostRequest,
   MutationHelpers,
-  MutationsLang,
   SLUG_LOADING_VALUE,
   useApi,
   useApiMutateOptitmisticOptions,
@@ -12,6 +11,7 @@ import {
 import { useMutation } from "react-query";
 import { IWidgetConfig } from "shared/types/dashboard";
 import { DASHBOARD_RELATIVE_DAYS } from "./Widget/_components/WidgetHeader/constants";
+import { DASHBOARD_WIDGETS_CRUD_CONFIG } from "./constants";
 
 const DASHBOARD_ENDPOINT = (dashboardId: string) =>
   `/api/dashboards/${dashboardId}`;
@@ -30,7 +30,7 @@ const DASHBOARD_WIDGET_SCRIPT_ENDPOINT = (
 };
 export const useDashboardWidgets = (dashboardId: string) => {
   return useApi<IWidgetConfig[]>(DASHBOARD_ENDPOINT(dashboardId), {
-    errorMessage: dataNotFoundMessage("Dashboard widgets"),
+    errorMessage: DASHBOARD_WIDGETS_CRUD_CONFIG.TEXT_LANG.NOT_FOUND,
     enabled: !!dashboardId && dashboardId !== SLUG_LOADING_VALUE,
   });
 };
@@ -55,7 +55,7 @@ export function useCreateDashboardWidgetMutation(dashboardId: string) {
   >({
     dataQueryPath: DASHBOARD_ENDPOINT(dashboardId),
     onMutate: MutationHelpers.append,
-    successMessage: MutationsLang.create("Widget"),
+    successMessage: DASHBOARD_WIDGETS_CRUD_CONFIG.MUTATION_LANG.CREATE,
   });
 
   return useMutation(async (widget: IWidgetConfig) => {
@@ -75,7 +75,7 @@ export function useUpdateDashboardWidgetMutation(
     dataQueryPath: DASHBOARD_ENDPOINT(dashboardId),
     otherEndpoints: [DASHBOARD_WIDGET_SCRIPT_ENDPOINT(widgetId)],
     onMutate: MutationHelpers.update,
-    successMessage: MutationsLang.edit("Widget"),
+    successMessage: DASHBOARD_WIDGETS_CRUD_CONFIG.MUTATION_LANG.EDIT,
   });
 
   return useMutation(async (widget: IWidgetConfig) => {
@@ -94,7 +94,7 @@ export function useDeleteDashboardWidgetMutation(dashboardId: string) {
   >({
     dataQueryPath: DASHBOARD_ENDPOINT(dashboardId),
     onMutate: MutationHelpers.delete,
-    successMessage: MutationsLang.delete("Widget"),
+    successMessage: DASHBOARD_WIDGETS_CRUD_CONFIG.MUTATION_LANG.DELETE,
   });
 
   return useMutation(async (widgetId: string) => {
@@ -112,7 +112,6 @@ export function useArrangeDashboardWidgetMutation(dashboardId: string) {
   >({
     dataQueryPath: DASHBOARD_ENDPOINT(dashboardId),
     onMutate: MutationHelpers.sortOrder,
-    successMessage: MutationsLang.saved("Widget Order"),
   });
 
   return useMutation(async (widgetList: string[]) => {

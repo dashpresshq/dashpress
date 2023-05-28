@@ -63,11 +63,12 @@ export function Configure({ activationId, integrationDetail }: IProps) {
           onSubmit={async ({ password }: { password: string }) => {
             passwordStore.setPassword(password);
           }}
-          buttonText={
-            activationConfiguration.isLoading
+          icon="eye"
+          buttonText={() => {
+            return activationConfiguration.isLoading
               ? "Just a sec..."
-              : `Reveal ${integrationDetail.title}'s Configuration`
-          }
+              : `Reveal ${integrationDetail.title}'s Configuration`;
+          }}
         />
       </>
     );

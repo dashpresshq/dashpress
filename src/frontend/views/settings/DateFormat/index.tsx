@@ -12,24 +12,22 @@ import {
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { format as dateFnsFormat } from "date-fns";
 import { ToastService } from "@hadmean/protozoa";
+import { MAKE_APP_CONFIGURATION_CRUD_CONFIG } from "frontend/hooks/configuration/configuration.constant";
 import { BaseSettingsLayout } from "../_Base";
 import { DateFormatSettingsForm } from "./Form";
 import { SETTINGS_VIEW_KEY } from "../constants";
-import { DATE_FORMAT_SETTINGS_CRUD_CONFIG } from "./constants";
+
+const CRUD_CONFIG = MAKE_APP_CONFIGURATION_CRUD_CONFIG("default_date_format");
 
 export function DateFormatSettings() {
-  const defaultDateFormat = useAppConfiguration<string>(
-    "default_date_format",
-    DATE_FORMAT_SETTINGS_CRUD_CONFIG
-  );
+  const defaultDateFormat = useAppConfiguration<string>("default_date_format");
 
   const upsertConfigurationMutation = useUpsertConfigurationMutation(
-    "default_date_format",
-    DATE_FORMAT_SETTINGS_CRUD_CONFIG
+    "default_date_format"
   );
 
   useSetPageDetails({
-    pageTitle: DATE_FORMAT_SETTINGS_CRUD_CONFIG.TEXT_LANG.TITLE,
+    pageTitle: CRUD_CONFIG.TEXT_LANG.TITLE,
     viewKey: SETTINGS_VIEW_KEY,
     permission: USER_PERMISSIONS.CAN_CONFIGURE_APP,
   });
@@ -37,7 +35,7 @@ export function DateFormatSettings() {
   return (
     <BaseSettingsLayout>
       <SectionBox
-        title={DATE_FORMAT_SETTINGS_CRUD_CONFIG.TEXT_LANG.TITLE}
+        title={CRUD_CONFIG.TEXT_LANG.TITLE}
         description="Using format from https://date-fns.org/docs/format"
         iconButtons={[
           {

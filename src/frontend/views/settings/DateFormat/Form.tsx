@@ -1,6 +1,8 @@
 import { IFormProps } from "@hadmean/protozoa";
 import { SchemaForm } from "frontend/components/SchemaForm";
-import { DATE_FORMAT_SETTINGS_CRUD_CONFIG } from "./constants";
+import { MAKE_APP_CONFIGURATION_CRUD_CONFIG } from "frontend/hooks/configuration/configuration.constant";
+
+const CRUD_CONFIG = MAKE_APP_CONFIGURATION_CRUD_CONFIG("default_date_format");
 
 type IDateFormatSettings = {
   format: string;
@@ -14,7 +16,7 @@ export function DateFormatSettingsForm({
     <SchemaForm<IDateFormatSettings>
       onSubmit={onSubmit}
       initialValues={initialValues}
-      buttonText={DATE_FORMAT_SETTINGS_CRUD_CONFIG.FORM_LANG.UPSERT}
+      buttonText={CRUD_CONFIG.FORM_LANG.UPSERT}
       icon="save"
       fields={{
         format: {

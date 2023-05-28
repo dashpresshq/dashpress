@@ -1,6 +1,8 @@
 import { IFormProps } from "@hadmean/protozoa";
 import { SchemaForm } from "frontend/components/SchemaForm";
 import { IAppliedSchemaFormConfig } from "shared/form-schemas/types";
+import { IntegrationsConfigurationGroup } from "shared/types/integrations";
+import { INTEGRATIONS_GROUP_CONFIG } from "shared/config-bag/integrations";
 import { IKeyValue } from "./types";
 
 export const CAPITAL_AND_UNDERSCORE_REGEX = `^[A-Z_]+$`;
@@ -32,15 +34,22 @@ export const FORM_SCHEMA: IAppliedSchemaFormConfig<IKeyValue> = {
 };
 
 export function KeyValueForm({
+  group,
   onSubmit,
   initialValues,
-}: IFormProps<IKeyValue>) {
+}: IFormProps<IKeyValue> & { group: IntegrationsConfigurationGroup }) {
+  const isCreate = !initialValues;
   return (
     <SchemaForm<IKeyValue>
       onSubmit={onSubmit}
       initialValues={initialValues}
-      buttonText="Save"
-      action={initialValues ? "update" : "create"}
+      icon={isCreate ? "add" : "save"}
+      buttonText={
+        isCreate
+          ? INTEGRATIONS_GROUP_CONFIG[group].crudConfig.FORM_LANG.CREATE
+          : INTEGRATIONS_GROUP_CONFIG[group].crudConfig.FORM_LANG.UPDATE
+      }
+      action={isCreate ? "create" : "update"}
       formExtension={{
         fieldsState: `
           return {

@@ -1,12 +1,11 @@
 import { SectionBox, SectionCenter } from "@hadmean/chromista";
-import { TitleLang } from "@hadmean/protozoa";
 import { useNavigationStack, useSetPageDetails } from "frontend/lib/routing";
 import { META_USER_PERMISSIONS } from "shared/constants/user";
 import { GranularEntityPermissions } from "shared/types/user";
 import { useRouter } from "next/router";
 import { AppLayout } from "../../../_layouts/app";
 import {
-  useEntityDiction,
+  useEntityCrudConfig,
   useEntitySlug,
   useSelectedEntityColumns,
 } from "../../../hooks/entity/entity.config";
@@ -32,7 +31,7 @@ export function useRouteParams() {
 export function EntityCreate() {
   const routeParams = useRouteParams();
   const entity = useEntitySlug();
-  const entityDiction = useEntityDiction();
+  const entityCrudConfig = useEntityCrudConfig();
 
   const entityDataCreationMutation = useEntityDataCreationMutation(entity);
 
@@ -42,7 +41,7 @@ export function EntityCreate() {
   ]);
 
   useSetPageDetails({
-    pageTitle: `Create ${entityDiction.plural}`,
+    pageTitle: entityCrudConfig.TEXT_LANG.CREATE,
     viewKey: "CREATE_ENTITY",
     permission: META_USER_PERMISSIONS.APPLIED_CAN_ACCESS_ENTITY(
       entity,
@@ -60,7 +59,7 @@ export function EntityCreate() {
     <AppLayout actionItems={actionItems}>
       <SectionCenter>
         <SectionBox
-          title={TitleLang.create(entityDiction.singular)}
+          title={entityCrudConfig.TEXT_LANG.CREATE}
           backLink={backLink}
         >
           <BaseEntityForm

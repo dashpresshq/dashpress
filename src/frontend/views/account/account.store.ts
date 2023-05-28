@@ -1,6 +1,5 @@
 import {
   makePatchRequest,
-  MutationsLang,
   useWaitForResponseMutationOptions,
 } from "@hadmean/protozoa";
 import { AUTHENTICATED_ACCOUNT_URL } from "frontend/hooks/auth/user.store";
@@ -8,11 +7,16 @@ import { useMutation } from "react-query";
 import { IChangePasswordForm } from "shared/form-schemas/profile/password";
 import { IUpdateUserForm } from "shared/form-schemas/profile/update";
 import { IUserPreferences } from "shared/types/user";
+import {
+  ACCOUNT_PREFERENCES_CRUD_CONFIG,
+  ACCOUNT_PROFILE_CRUD_CONFIG,
+  PASSWORD_CRUD_CONFIG,
+} from "./constants";
 
 export function useUpdateProfileMutation() {
   const apiMutateOptions = useWaitForResponseMutationOptions<void>({
     endpoints: [AUTHENTICATED_ACCOUNT_URL],
-    successMessage: MutationsLang.edit("Profile"),
+    successMessage: ACCOUNT_PROFILE_CRUD_CONFIG.MUTATION_LANG.SAVED,
   });
 
   return useMutation(
@@ -25,7 +29,7 @@ export function useUpdateProfileMutation() {
 export function useUpdateUserPreferencesMutation() {
   const apiMutateOptions = useWaitForResponseMutationOptions<void>({
     endpoints: [AUTHENTICATED_ACCOUNT_URL],
-    successMessage: MutationsLang.edit("Preferences"),
+    successMessage: ACCOUNT_PREFERENCES_CRUD_CONFIG.MUTATION_LANG.SAVED,
   });
 
   return useMutation(
@@ -40,7 +44,7 @@ export function useChangePasswordMutation() {
     endpoints: [],
     successMessage: process.env.NEXT_PUBLIC_IS_DEMO
       ? "Password will not be changed on demo account"
-      : MutationsLang.edit("Password"),
+      : PASSWORD_CRUD_CONFIG.MUTATION_LANG.EDIT,
   });
 
   return useMutation(async (data: IChangePasswordForm) => {

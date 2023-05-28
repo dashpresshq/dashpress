@@ -1,8 +1,4 @@
-import {
-  ButtonLang,
-  DataStateKeys,
-  SLUG_LOADING_VALUE,
-} from "@hadmean/protozoa";
+import { DataStateKeys, SLUG_LOADING_VALUE } from "@hadmean/protozoa";
 import { FormSkeleton, FormSkeletonSchema } from "@hadmean/chromista";
 import { SchemaForm } from "frontend/components/SchemaForm";
 import { useEntityConfiguration } from "frontend/hooks/configuration/configuration.store";
@@ -16,6 +12,7 @@ import {
   useProcessedEntityFieldTypes,
   useEntityFieldValidations,
   useEntitySlug,
+  useEntityCrudConfig,
 } from "frontend/hooks/entity/entity.config";
 import { IFormExtension } from "frontend/components/SchemaForm/types";
 import { useMemo } from "react";
@@ -40,6 +37,7 @@ export function BaseEntityForm({
   onSubmit,
 }: IProps) {
   const entity = useEntitySlug();
+  const entityCrudConfig = useEntityCrudConfig();
   const entityValidationsMap = useEntityFieldValidations();
   const entityFields = useEntityFields(entity);
   const getEntityFieldLabels = useEntityFieldLabels();
@@ -121,10 +119,15 @@ export function BaseEntityForm({
       }
     >
       <SchemaForm
-        buttonText={action === "update" ? ButtonLang.update : ButtonLang.create}
+        buttonText={
+          action === "create"
+            ? entityCrudConfig.FORM_LANG.CREATE
+            : entityCrudConfig.FORM_LANG.UPDATE
+        }
         resetForm={action === "create" ? true : undefined}
         onSubmit={onSubmit}
         action={action}
+        icon={action === "create" ? "add" : "save"}
         initialValues={fieldsInitialValues}
         fields={buildAppliedSchemaFormConfig(formSchemaConfig)}
         formExtension={entityFormExtension.data}

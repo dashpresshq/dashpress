@@ -37,6 +37,7 @@ export const MAKE_CRUD_CONFIG = ({
       DETAILS: `${singular} Details`,
       NOT_FOUND: `${singular} could not be retrieved`,
       TITLE: `${plural}`,
+      EMPTY_LIST: `No ${singular} Has Been Added Yet`,
     },
   };
 };

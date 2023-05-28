@@ -1,6 +1,5 @@
 import {
   makePostRequest,
-  MutationsLang,
   useWaitForResponseMutationOptions,
 } from "@hadmean/protozoa";
 import { useAuthenticateUser } from "frontend/hooks/auth/useAuthenticateUser";
@@ -15,7 +14,7 @@ export function useSetupCredentialsMutation() {
     Record<string, string>
   >({
     endpoints: [SETUP_CHECK_URL],
-    successMessage: MutationsLang.create("Setup Credentials"),
+    successMessage: "Credentials Setup Was Successfull",
   });
 
   return useMutation(
@@ -31,7 +30,7 @@ export function useSetupUserMutation() {
   const apiMutateOptions =
     useWaitForResponseMutationOptions<ISuccessfullAuthenticationResponse>({
       endpoints: [SETUP_CHECK_URL],
-      successMessage: MutationsLang.create("User"),
+      successMessage: "Account Setup Was Successfull",
       onSuccessActionWithFormData: (response) => {
         authenticateUser(response.token, true);
       },

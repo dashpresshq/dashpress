@@ -13,7 +13,7 @@ import {
 } from "frontend/lib/routing";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { USER_PERMISSIONS } from "shared/constants/user";
-import { MAKE_CRUD_CONFIG } from "frontend/lib/makeCrudConfig";
+import { MAKE_APP_CONFIGURATION_CRUD_CONFIG } from "frontend/hooks/configuration/configuration.constant";
 import {
   useAppConfiguration,
   useUpsertConfigurationMutation,
@@ -29,17 +29,15 @@ import { SETTINGS_VIEW_KEY } from "../constants";
 import { BaseSettingsLayout } from "../_Base";
 import { EntitiesSelection } from "./Selection";
 
-export const MENU_ENTITIES_SETTINGS_CRUD_CONFIG = MAKE_CRUD_CONFIG({
-  path: "N/A",
-  plural: "Menu Entities Settings",
-  singular: "Menu Entities Settings",
-});
+const CRUD_CONFIG = MAKE_APP_CONFIGURATION_CRUD_CONFIG(
+  "disabled_menu_entities"
+);
 
 export function MenuEntitiesSettings() {
   const tabFromUrl = useRouteParam("tab");
 
   useSetPageDetails({
-    pageTitle: MENU_ENTITIES_SETTINGS_CRUD_CONFIG.TEXT_LANG.TITLE,
+    pageTitle: CRUD_CONFIG.TEXT_LANG.TITLE,
     viewKey: SETTINGS_VIEW_KEY,
     permission: USER_PERMISSIONS.CAN_CONFIGURE_APP,
   });
@@ -47,15 +45,13 @@ export function MenuEntitiesSettings() {
   const changeTabParam = useChangeRouterParam("tab");
 
   const menuEntitiesToHide = useAppConfiguration<string[]>(
-    "disabled_menu_entities",
-    MENU_ENTITIES_SETTINGS_CRUD_CONFIG
+    "disabled_menu_entities"
   );
   const activeEntities = useActiveEntities();
   const userMenuEntities = useUserMenuEntities();
 
   const upsertHideFromMenuMutation = useUpsertConfigurationMutation(
     "disabled_menu_entities",
-    MENU_ENTITIES_SETTINGS_CRUD_CONFIG,
     "",
     {
       otherEndpoints: [ACTIVE_ENTITIES_ENDPOINT, USER_MENU_ENTITIES_ENDPOINT],
@@ -64,7 +60,6 @@ export function MenuEntitiesSettings() {
 
   const upsertEntitiesOrderMutation = useUpsertConfigurationMutation(
     "menu_entities_order",
-    MENU_ENTITIES_SETTINGS_CRUD_CONFIG,
     "",
     {
       otherEndpoints: [ACTIVE_ENTITIES_ENDPOINT, USER_MENU_ENTITIES_ENDPOINT],
@@ -82,7 +77,7 @@ export function MenuEntitiesSettings() {
 
   return (
     <BaseSettingsLayout>
-      <SectionBox title={MENU_ENTITIES_SETTINGS_CRUD_CONFIG.TEXT_LANG.TITLE}>
+      <SectionBox title={CRUD_CONFIG.TEXT_LANG.TITLE}>
         <Typo.SM textStyle="italic">
           Toggle and order your entities as you will like to see them in the
           menu.
@@ -101,7 +96,7 @@ export function MenuEntitiesSettings() {
                   loader={<ListSkeleton count={20} />}
                 >
                   <EntitiesSelection
-                    crudConfig={MENU_ENTITIES_SETTINGS_CRUD_CONFIG}
+                    crudConfig={CRUD_CONFIG}
                     selectionKey="enabled-menu-entities-settings"
                     allList={(activeEntities.data || []).map(
                       ({ value }) => value

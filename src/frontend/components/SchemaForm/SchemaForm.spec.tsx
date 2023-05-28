@@ -11,6 +11,9 @@ type IAccount = {
 
 jest.mock("next/router", () => require("next-router-mock"));
 
+const buttonText = (isSubmitting: boolean) =>
+  isSubmitting ? "Submitting Form" : "Submit Form";
+
 const BASE_FIELDS = {
   name: {
     type: "text" as const,
@@ -60,7 +63,8 @@ describe("<SchemaForm />", () => {
       <AppWrapper>
         <SchemaForm<IAccount>
           onSubmit={mockOnSubmit}
-          buttonText="Submit Form"
+          buttonText={buttonText}
+          icon="save"
           fields={BASE_FIELDS}
         />
       </AppWrapper>
@@ -85,7 +89,8 @@ describe("<SchemaForm />", () => {
       <AppWrapper>
         <SchemaForm<IAccount>
           onSubmit={mockOnSubmit}
-          buttonText="Submit Form"
+          buttonText={buttonText}
+          icon="save"
           fields={BASE_FIELDS}
           resetForm
         />
@@ -108,7 +113,8 @@ describe("<SchemaForm />", () => {
       <AppWrapper>
         <SchemaForm<IAccount>
           onSubmit={mockOnSubmit}
-          buttonText="Submit Form"
+          buttonText={buttonText}
+          icon="save"
           fields={BASE_FIELDS}
           formExtension={{
             beforeSubmit: "",
@@ -133,7 +139,8 @@ describe("<SchemaForm />", () => {
       <AppWrapper>
         <SchemaForm<IAccount>
           onSubmit={mockOnSubmit}
-          buttonText="Submit Form"
+          buttonText={buttonText}
+          icon="save"
           fields={BASE_FIELDS}
           action="custom-action"
           formExtension={{
@@ -161,7 +168,8 @@ describe("<SchemaForm />", () => {
       <AppWrapper>
         <SchemaForm<IAccount>
           onSubmit={mockOnSubmit}
-          buttonText="Submit Form"
+          buttonText={buttonText}
+          icon="save"
           fields={BASE_FIELDS}
           formExtension={{
             beforeSubmit: "sm ks ks dsldm sl dm",
@@ -186,7 +194,8 @@ describe("<SchemaForm />", () => {
       <AppWrapper>
         <SchemaForm<IAccount>
           onSubmit={mockOnSubmit}
-          buttonText="Submit Form"
+          buttonText={buttonText}
+          icon="save"
           fields={BASE_FIELDS}
           action="custom-action"
           formExtension={{
@@ -213,7 +222,8 @@ describe("<SchemaForm />", () => {
       <AppWrapper>
         <SchemaForm<IAccount>
           onSubmit={mockOnSubmit}
-          buttonText="Submit Form"
+          buttonText={buttonText}
+          icon="save"
           fields={BASE_FIELDS}
           action="edit"
           initialValues={{
@@ -248,7 +258,8 @@ describe("<SchemaForm />", () => {
       <AppWrapper>
         <SchemaForm<IAccount>
           onSubmit={mockOnSubmit}
-          buttonText="Submit Form"
+          buttonText={buttonText}
+          icon="save"
           fields={{
             ...BASE_FIELDS,
           }}
@@ -278,7 +289,8 @@ describe("<SchemaForm />", () => {
       <AppWrapper>
         <SchemaForm<IAccount>
           onSubmit={mockOnSubmit}
-          buttonText="Submit Form"
+          buttonText={buttonText}
+          icon="save"
           fields={{
             ...BASE_FIELDS,
           }}
@@ -308,7 +320,8 @@ describe("<SchemaForm />", () => {
       <AppWrapper>
         <SchemaForm<IAccount>
           onSubmit={mockOnSubmit}
-          buttonText="Submit Form"
+          buttonText={buttonText}
+          icon="save"
           fields={{
             ...BASE_FIELDS,
           }}
@@ -339,7 +352,8 @@ describe("<SchemaForm />", () => {
       <AppWrapper>
         <SchemaForm<IAccount>
           onSubmit={mockOnSubmit}
-          buttonText="Submit Form"
+          buttonText={buttonText}
+          icon="save"
           fields={{
             ...BASE_FIELDS,
           }}
@@ -380,7 +394,8 @@ describe("<SchemaForm />", () => {
       <AppWrapper>
         <SchemaForm<{ name: string }>
           onSubmit={mockOnSubmit}
-          buttonText="Submit Form"
+          buttonText={buttonText}
+          icon="save"
           fields={{
             name: {
               type: "text",
@@ -408,7 +423,8 @@ describe("<SchemaForm />", () => {
       <AppWrapper>
         <SchemaForm<{ hello: string }>
           onSubmit={mockOnSubmit}
-          buttonText="Submit Form"
+          buttonText={buttonText}
+          icon="save"
           fields={{
             ...BASE_FIELDS,
             hello: {
@@ -430,7 +446,8 @@ describe("<SchemaForm />", () => {
       <AppWrapper>
         <SchemaForm<{ name: string }>
           onSubmit={mockOnSubmit}
-          buttonText="Submit Form"
+          buttonText={buttonText}
+          icon="save"
           fields={{
             name: {
               type: "text",
@@ -455,7 +472,8 @@ describe("<SchemaForm />", () => {
         <SchemaForm<IAccount>
           onSubmit={jest.fn()}
           onChange={onChangeMock}
-          buttonText="Submit Form"
+          buttonText={buttonText}
+          icon="save"
           fields={{
             ...BASE_FIELDS,
           }}

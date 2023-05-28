@@ -1,22 +1,32 @@
+import { ICrudConfig, MAKE_CRUD_CONFIG } from "frontend/lib/makeCrudConfig";
 import { IntegrationsConfigurationGroup } from "shared/types/integrations";
 
 export const INTEGRATIONS_GROUP_CONFIG: Record<
   IntegrationsConfigurationGroup,
-  { label: string; singular: string; prefix: string }
+  { crudConfig: ICrudConfig; prefix: string }
 > = {
   constants: {
-    label: "Constants",
-    singular: "Constant",
+    crudConfig: MAKE_CRUD_CONFIG({
+      path: "N/A",
+      plural: "Constants",
+      singular: "Constant",
+    }),
     prefix: "CONSTANT",
   },
   env: {
-    label: "Environment Variables",
-    singular: "Environment Variable",
+    crudConfig: MAKE_CRUD_CONFIG({
+      path: "N/A",
+      plural: "Environment Variables",
+      singular: "Environment Variable",
+    }),
     prefix: "ENV",
   },
   credentials: {
-    label: "Secrets",
-    singular: "Secret",
+    crudConfig: MAKE_CRUD_CONFIG({
+      path: "N/A",
+      plural: "Secrets",
+      singular: "Secret",
+    }),
     prefix: "SECRET",
   },
 };

@@ -28,7 +28,7 @@ import { INTEGRATIONS_GROUP_CONFIG } from "shared/config-bag/integrations";
 import {
   INTEGRATIONS_GROUP_ENDPOINT,
   useIntegrationConfigurationDeletionMutation,
-  useIntegrationConfigurationUpdationMutation,
+  useIntegrationConfigurationUpsertationMutation,
   useRevealedCredentialsList,
 } from "./configurations.store";
 import { KeyValueForm } from "./Form";
@@ -45,7 +45,7 @@ export function ManageCredentialGroup({
 }) {
   const dataEndpoint = INTEGRATIONS_GROUP_ENDPOINT(group);
   const upsertConfigurationMutation =
-    useIntegrationConfigurationUpdationMutation(group);
+    useIntegrationConfigurationUpsertationMutation(group);
   const deleteConfigurationMutation =
     useIntegrationConfigurationDeletionMutation(group);
 
@@ -113,7 +113,8 @@ export function ManageCredentialGroup({
                 setCurrentConfigItem(NEW_CONFIG_ITEM);
               },
               IconComponent: Plus,
-              label: `Add New ${INTEGRATIONS_GROUP_CONFIG[group].singular}`,
+              label:
+                INTEGRATIONS_GROUP_CONFIG[group].crudConfig.TEXT_LANG.CREATE,
             },
           ]
         : [],
@@ -123,7 +124,7 @@ export function ManageCredentialGroup({
           onClick: () =>
             window.open(LINK_TO_DOCS(`integrations/variables#${group}`)),
           IconComponent: HelpCircle,
-          label: `What are ${INTEGRATIONS_GROUP_CONFIG[group].label}`,
+          label: `What are ${INTEGRATIONS_GROUP_CONFIG[group].crudConfig.TEXT_LANG.TITLE}`,
         },
       ],
     };
@@ -192,7 +193,7 @@ export function ManageCredentialGroup({
                 }}
                 icon="eye"
                 buttonText={(isSubmitting) =>
-                  isSubmitting ? "Just a sec..." : "Reveal Secrets"
+                  isSubmitting ? "Revealing Secrets" : "Reveal Secrets"
                 }
               />
             </Spacer>
@@ -209,20 +210,23 @@ export function ManageCredentialGroup({
 
       <FEPaginationTable
         dataEndpoint={dataEndpoint}
-        emptyMessage={`No ${INTEGRATIONS_GROUP_CONFIG[group].label} Has Been Added Yet`}
+        emptyMessage={
+          INTEGRATIONS_GROUP_CONFIG[group].crudConfig.TEXT_LANG.EMPTY_LIST
+        }
         columns={tableColumns}
       />
 
       <OffCanvas
         title={
           currentConfigItem === NEW_CONFIG_ITEM
-            ? `Create ${INTEGRATIONS_GROUP_CONFIG[group].singular}`
-            : `Update ${INTEGRATIONS_GROUP_CONFIG[group].singular}`
+            ? INTEGRATIONS_GROUP_CONFIG[group].crudConfig.TEXT_LANG.CREATE
+            : INTEGRATIONS_GROUP_CONFIG[group].crudConfig.TEXT_LANG.EDIT
         }
         onClose={closeConfigItem}
         show={!!currentConfigItem}
       >
         <KeyValueForm
+          group={group}
           initialValues={(tableData?.data || []).find(
             ({ key }) => key === currentConfigItem
           )}

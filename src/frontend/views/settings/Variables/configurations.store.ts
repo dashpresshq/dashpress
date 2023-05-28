@@ -3,7 +3,6 @@ import {
   getQueryCachekey,
   makeDeleteRequest,
   makePutRequest,
-  MutationsLang,
   useApi,
   useWaitForResponseMutationOptions,
 } from "@hadmean/protozoa";
@@ -21,7 +20,7 @@ export const INTEGRATIONS_GROUP_ENDPOINT = (
 
 const REVEAL_CREDENTIALS_ENDPOINT = `/api/integrations/credentials/reveal`;
 
-export function useIntegrationConfigurationUpdationMutation(
+export function useIntegrationConfigurationUpsertationMutation(
   group: IntegrationsConfigurationGroup
 ) {
   const rootPassword = usePasswordStore((state) => state.password);
@@ -32,9 +31,8 @@ export function useIntegrationConfigurationUpdationMutation(
     endpoints: rootPassword
       ? [REVEAL_CREDENTIALS_ENDPOINT, INTEGRATIONS_GROUP_ENDPOINT(group)]
       : [INTEGRATIONS_GROUP_ENDPOINT(group)],
-    successMessage: MutationsLang.saved(
-      INTEGRATIONS_GROUP_CONFIG[group].singular
-    ),
+    successMessage:
+      INTEGRATIONS_GROUP_CONFIG[group].crudConfig.MUTATION_LANG.SAVED,
   });
 
   return useMutation(
@@ -57,9 +55,8 @@ export function useIntegrationConfigurationDeletionMutation(
     endpoints: rootPassword
       ? [REVEAL_CREDENTIALS_ENDPOINT, INTEGRATIONS_GROUP_ENDPOINT(group)]
       : [INTEGRATIONS_GROUP_ENDPOINT(group)],
-    successMessage: MutationsLang.delete(
-      INTEGRATIONS_GROUP_CONFIG[group].singular
-    ),
+    successMessage:
+      INTEGRATIONS_GROUP_CONFIG[group].crudConfig.MUTATION_LANG.DELETE,
   });
 
   return useMutation(

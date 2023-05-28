@@ -18,7 +18,8 @@ export function BaseManageVariables() {
         }
         contents={[
           {
-            overrideLabel: INTEGRATIONS_GROUP_CONFIG.constants.label,
+            overrideLabel:
+              INTEGRATIONS_GROUP_CONFIG.constants.crudConfig.TEXT_LANG.TITLE,
             label: IntegrationsConfigurationGroup.Constants,
             content: (
               <ManageCredentialGroup
@@ -28,7 +29,8 @@ export function BaseManageVariables() {
             ),
           },
           {
-            overrideLabel: INTEGRATIONS_GROUP_CONFIG.credentials.label,
+            overrideLabel:
+              INTEGRATIONS_GROUP_CONFIG.credentials.crudConfig.TEXT_LANG.TITLE,
             label: IntegrationsConfigurationGroup.Credentials,
             content: (
               <ManageCredentialGroup

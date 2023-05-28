@@ -8,8 +8,11 @@ import { SchemaForm } from "frontend/components/SchemaForm";
 export function UserSetupForm({ onSubmit }: IFormProps<ISetupUserForm>) {
   return (
     <SchemaForm<ISetupUserForm>
-      buttonText="Setup Account"
+      buttonText={(isSubmitting) =>
+        isSubmitting ? "Setting Up Account" : "Setup Account"
+      }
       onSubmit={onSubmit}
+      icon="no-icon"
       fields={SETUP_USER_FORM_SCHEMA}
     />
   );

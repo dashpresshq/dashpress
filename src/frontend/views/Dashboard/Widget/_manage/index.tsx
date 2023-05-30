@@ -7,12 +7,13 @@ import {
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { IWidgetConfig } from "shared/types/dashboard";
 import { useActiveEntities } from "frontend/hooks/entity/entity.store";
-import { StringUtils, useRouteParam } from "@hadmean/protozoa";
+import { useRouteParam } from "@hadmean/protozoa";
 import { SystemIconsList } from "shared/constants/Icons";
 import { useNavigationStack } from "frontend/lib/routing";
 import { AppLayout } from "frontend/_layouts/app";
 import { DashboardWidgetForm } from "./Form";
 import { useDashboardWidgets } from "../../dashboard.store";
+import { DASHBOARD_WIDGETS_CRUD_CONFIG } from "../../constants";
 
 interface IProps {
   onSave: (data: IWidgetConfig) => Promise<void>;
@@ -34,7 +35,7 @@ export function BaseManageDashboardWidget({ onSave, action }: IProps) {
   let widgetError = "";
 
   if (action === "edit" && !widgets.isLoading) {
-    widgetValue = (widgets.data || []).find(({ id }) => id === widgetId);
+    widgetValue = widgets.data.find(({ id }) => id === widgetId);
     if (!widgetValue) {
       widgetError = `Widget with id '${widgetId}' not found`;
     }
@@ -44,7 +45,11 @@ export function BaseManageDashboardWidget({ onSave, action }: IProps) {
     <AppLayout>
       <SectionCenter>
         <SectionBox
-          title={`${StringUtils.upperCaseFirstLetter(action)} Dashboard Widget`}
+          title={
+            action === "create"
+              ? DASHBOARD_WIDGETS_CRUD_CONFIG.TEXT_LANG.CREATE
+              : DASHBOARD_WIDGETS_CRUD_CONFIG.TEXT_LANG.EDIT
+          }
           backLink={backLink}
         >
           <ViewStateMachine

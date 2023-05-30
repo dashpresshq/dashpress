@@ -52,7 +52,7 @@ export function BaseDashboard({ dashboardId, showDemo, manageLink }: IProps) {
         loader={<DashboardSkeleton />}
       >
         <Root>
-          {(widgets.data || []).map((config) => (
+          {widgets.data.map((config) => (
             <DashboardWidget config={config} key={config.id} />
           ))}
         </Root>

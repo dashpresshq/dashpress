@@ -40,7 +40,7 @@ export function BaseManageDashboard({ dashboardId, doneLink, title }: IProps) {
     useArrangeDashboardWidgetMutation(dashboardId);
 
   const onSortEnd = (oldIndex: number, newIndex: number) => {
-    const newOrder = arrayMove(widgets.data || [], oldIndex, newIndex);
+    const newOrder = arrayMove(widgets.data, oldIndex, newIndex);
     arrangeDashboardWidgetMutation.mutate(newOrder.map(({ id }) => id));
   };
 
@@ -82,7 +82,7 @@ export function BaseManageDashboard({ dashboardId, doneLink, title }: IProps) {
             aria-label={DASHBOARD_WIDGETS_CRUD_CONFIG.TEXT_LANG.TITLE}
             draggedItemClassName="dragged"
           >
-            {(widgets.data || []).map((config) => (
+            {widgets.data.map((config) => (
               <SortableItem key={config.id}>
                 <DashboardWidget
                   config={config}

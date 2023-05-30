@@ -3,6 +3,7 @@ import { useSetPageDetails } from "frontend/lib/routing";
 import { USER_PERMISSIONS } from "shared/constants/user";
 import { useUpdateDashboardWidgetMutation } from "../dashboard.store";
 import { BaseManageDashboardWidget } from "./_manage";
+import { DASHBOARD_WIDGETS_CRUD_CONFIG } from "../constants";
 
 export function UpdateDashboardWidget() {
   const dashboardId = useRouteParam("dashboardId");
@@ -14,9 +15,9 @@ export function UpdateDashboardWidget() {
   );
 
   useSetPageDetails({
-    pageTitle: "Update Dashboard Widget",
+    pageTitle: DASHBOARD_WIDGETS_CRUD_CONFIG.TEXT_LANG.EDIT,
+    viewKey: DASHBOARD_WIDGETS_CRUD_CONFIG.TEXT_LANG.EDIT,
     permission: USER_PERMISSIONS.CAN_MANAGE_DASHBOARD,
-    viewKey: "UPDATE_DASHBOARD_WIDGET",
   });
 
   return (

@@ -18,7 +18,7 @@ interface IProps<T> {
   initialValues?: Partial<T>;
   buttonText: (submitting: boolean) => string;
   action?: string;
-  icon: "add" | "save" | "eye" | "no-icon";
+  icon: "add" | "save" | "eye" | "no-icon" | "check" | "logIn";
   onChange?: (data: T) => void;
   resetForm?: true;
   formExtension?: Partial<IFormExtension>;

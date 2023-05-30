@@ -4,6 +4,7 @@ import { useSetPageDetails } from "frontend/lib/routing";
 import { USER_PERMISSIONS } from "shared/constants/user";
 import { useCreateDashboardWidgetMutation } from "../dashboard.store";
 import { BaseManageDashboardWidget } from "./_manage";
+import { DASHBOARD_WIDGETS_CRUD_CONFIG } from "../constants";
 
 export function CreateDashboardWidget() {
   const dashboardId = useRouteParam("dashboardId");
@@ -12,9 +13,9 @@ export function CreateDashboardWidget() {
     useCreateDashboardWidgetMutation(dashboardId);
 
   useSetPageDetails({
-    pageTitle: "Create Dashboard Widget",
+    pageTitle: DASHBOARD_WIDGETS_CRUD_CONFIG.TEXT_LANG.CREATE,
+    viewKey: DASHBOARD_WIDGETS_CRUD_CONFIG.TEXT_LANG.CREATE,
     permission: USER_PERMISSIONS.CAN_MANAGE_DASHBOARD,
-    viewKey: "CREATE_DASHBOARD_WIDGET",
   });
 
   return (

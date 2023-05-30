@@ -60,7 +60,7 @@ export function SelectionTab({
         {toggling && toggling.onToggle && (
           <FormButton
             isMakingRequest={false}
-            icon={enableDisableLabel ? "check" : "ban"}
+            icon={toggling?.enabled ? "check" : "ban"}
             loadingText={enableDisableLabel}
             size="sm"
             isInverse={toggling.enabled}

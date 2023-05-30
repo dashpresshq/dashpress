@@ -1,6 +1,7 @@
 import { TableSkeleton } from "@hadmean/chromista";
 import { SLUG_LOADING_VALUE } from "@hadmean/protozoa";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
+import { useEntityCrudConfig } from "frontend/hooks/entity/entity.config";
 import { ENTITY_TABLE_PATH } from "../../../../hooks/data/data.store";
 import { useTableColumns } from "../useTableColumns";
 import { TableViewComponent } from "../portal";
@@ -20,6 +21,8 @@ export function EntityDataTable({
 }: IProps) {
   const columns = useTableColumns(entity, lean);
 
+  const entityCrudConfig = useEntityCrudConfig(entity);
+
   const { error } = columns;
 
   const isLoading = entity === SLUG_LOADING_VALUE || columns.isLoading;
@@ -38,6 +41,7 @@ export function EntityDataTable({
             enabled={entity && entity !== SLUG_LOADING_VALUE}
             stateStorageKey={`${entity}${tabKey}${lean ? "--lean" : ""}`}
             lean={lean}
+            crudConfig={entityCrudConfig}
             {...props}
           />
         )}

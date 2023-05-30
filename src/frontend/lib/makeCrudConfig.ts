@@ -49,7 +49,3 @@ export const MAKE_CRUD_CONFIG = ({
 };
 
 export type ICrudConfig = ReturnType<typeof MAKE_CRUD_CONFIG>;
-
-// TO NUKE
-// ButtonLang
-// || []

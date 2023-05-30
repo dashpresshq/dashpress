@@ -58,7 +58,10 @@ export function TableActions({ crudSettings, row, entity }: IProps) {
           <div>
             <DeleteButton
               onDelete={() => entityDataDeletionMutation.mutate(idValue)}
-              isMakingDeleteRequest={entityDataDeletionMutation.isLoading}
+              isMakingDeleteRequest={
+                entityDataDeletionMutation.isLoading &&
+                entityDataDeletionMutation.variables === idValue
+              }
               shouldConfirmAlert
             />
           </div>

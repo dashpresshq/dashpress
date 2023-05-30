@@ -170,7 +170,7 @@ export function ManageCredentialGroup({
         {group === IntegrationsConfigurationGroup.Credentials &&
           userHasPermission(USER_PERMISSIONS.CAN_MANAGE_INTEGRATIONS) &&
           tableData.data.length > 0 &&
-          !revealedCredentials.data && (
+          revealedCredentials.data.length === 0 && (
             <Spacer>
               <Typo.SM textStyle="italic">
                 For security reasons, Please input your account password to be

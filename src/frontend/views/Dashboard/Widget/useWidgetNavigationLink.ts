@@ -13,9 +13,7 @@ export const useWidgetNavigationLink = (entity?: string, queryId?: string) => {
     return undefined;
   }
 
-  const tabTitle = (entityViews.data || []).find(
-    ({ id }) => id === queryId
-  )?.title;
+  const tabTitle = entityViews.data.find(({ id }) => id === queryId)?.title;
 
   const tabLink = queryId ? `?tab=${tabTitle}` : "";
 

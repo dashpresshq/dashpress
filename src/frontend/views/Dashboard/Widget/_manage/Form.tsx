@@ -83,6 +83,19 @@ export function DashboardWidgetForm({
 
         return (
           <form onSubmit={handleSubmit}>
+            {/* 
+            // TODO
+            // onSubmit={(e) => {
+            //   e.preventDefault();
+            // handleSubmit(e)?.then(() => {
+            //   resetFormValues<Record<string, unknown>>(
+            //     action === "create",
+            //     values as unknown as Record<string, unknown>,
+            //     form as any,
+            //     initialValues
+            //   );
+            // });
+            // }} */}
             <Field name="title" validate={required} validateFields={[]}>
               {({ input, meta }) => (
                 <FormInput required label="Title" meta={meta} input={input} />

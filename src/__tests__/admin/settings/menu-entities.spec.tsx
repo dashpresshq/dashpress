@@ -68,10 +68,12 @@ describe("pages/admin/settings/menu-entities", () => {
       screen.getByRole("button", { name: "Plural entity-2" })
     );
 
-    await userEvent.click(screen.getByRole("button", { name: "Save Changes" }));
+    await userEvent.click(
+      screen.getByRole("button", { name: "Save Menu Entities Settings" })
+    );
 
     expect(await screen.findByRole("status")).toHaveTextContent(
-      "App Settings Saved Successfully"
+      "Menu Entities Settings Saved Successfully"
     );
   });
 

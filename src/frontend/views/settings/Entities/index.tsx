@@ -1,4 +1,4 @@
-import { ListSkeleton, SectionBox, Typo } from "@hadmean/chromista";
+import { ListSkeleton, SectionBox, Typo, Spacer } from "@hadmean/chromista";
 import { useSetPageDetails } from "frontend/lib/routing";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { USER_PERMISSIONS } from "shared/constants/user";
@@ -63,6 +63,7 @@ export function EntitiesSettings() {
           This is a good place to toogle off entities related migrations, logs,
           or any other entities not related to your admin application.
         </Typo.SM>
+        <Spacer />
         <ViewStateMachine
           error={error}
           loading={isLoading}

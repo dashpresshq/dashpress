@@ -86,11 +86,11 @@ describe("pages/users/[username]/index", () => {
       );
 
       await userEvent.click(
-        screen.getByRole("button", { name: "Update User Profile" })
+        screen.getByRole("button", { name: "Update User" })
       );
 
       expect(await screen.findByRole("status")).toHaveTextContent(
-        "User Profile Updated Successfully"
+        "User Updated Successfully"
       );
     });
 
@@ -162,7 +162,7 @@ describe("pages/users/[username]/index", () => {
       );
 
       expect(
-        await screen.findByText("Password Updated Successfully")
+        await screen.findByText("Password Reset Successfully")
       ).toBeInTheDocument();
     });
   });

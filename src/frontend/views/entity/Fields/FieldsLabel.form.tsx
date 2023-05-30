@@ -6,15 +6,14 @@ import {
 } from "@hadmean/chromista";
 import { Form, Field } from "react-final-form";
 import { composeValidators, maxLength, minLength } from "@hadmean/protozoa";
-import { MAKE_APP_CONFIGURATION_CRUD_CONFIG } from "frontend/hooks/configuration/configuration.constant";
+import { ICrudConfig } from "frontend/lib/makeCrudConfig";
 
 interface IProps {
   fields: string[];
   initialValues?: Record<string, unknown>;
+  crudConfig: ICrudConfig;
   onSubmit: (data: Record<string, unknown>) => void;
 }
-
-const CRUD_CONFIG = MAKE_APP_CONFIGURATION_CRUD_CONFIG("entity_columns_labels");
 
 export const loadingFieldsLabelForm = (
   <FormSkeleton
@@ -27,7 +26,12 @@ export const loadingFieldsLabelForm = (
   />
 );
 
-export function FieldsLabelForm({ onSubmit, initialValues, fields }: IProps) {
+export function FieldsLabelForm({
+  onSubmit,
+  initialValues,
+  fields,
+  crudConfig,
+}: IProps) {
   return (
     <Form
       onSubmit={onSubmit}
@@ -47,8 +51,8 @@ export function FieldsLabelForm({ onSubmit, initialValues, fields }: IProps) {
             </Field>
           ))}
           <FormButton
-            text={CRUD_CONFIG.FORM_LANG.UPSERT(false)}
-            loadingText={CRUD_CONFIG.FORM_LANG.UPSERT(true)}
+            text={crudConfig.FORM_LANG.UPSERT(false)}
+            loadingText={crudConfig.FORM_LANG.UPSERT(true)}
             isMakingRequest={submitting}
             disabled={pristine}
             icon="save"

@@ -73,7 +73,7 @@ describe("pages/integrations/variables => constants", () => {
       await userEvent.type(within(dialog).getByLabelText("Value"), "new value");
 
       await userEvent.click(
-        within(dialog).getByRole("button", { name: "Save" })
+        within(dialog).getByRole("button", { name: "Create Constant" })
       );
 
       expect(await screen.findByRole("status")).toHaveTextContent(
@@ -127,7 +127,7 @@ describe("pages/integrations/variables => constants", () => {
       await userEvent.type(within(dialog).getByLabelText("Value"), "/updated");
 
       await userEvent.click(
-        within(dialog).getByRole("button", { name: "Save" })
+        within(dialog).getByRole("button", { name: "Update Constant" })
       );
 
       expect((await screen.findAllByRole("status"))[0]).toHaveTextContent(

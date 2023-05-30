@@ -52,7 +52,9 @@ describe("pages/admin/[entity]/config/relations", () => {
       );
 
       await userEvent.click(
-        within(currentTab).getByRole("button", { name: "Update Format" })
+        within(currentTab).getByRole("button", {
+          name: "Save Relation Template",
+        })
       );
 
       expect(within(currentTab).getByRole("alert")).toHaveTextContent(
@@ -79,10 +81,12 @@ describe("pages/admin/[entity]/config/relations", () => {
       );
 
       await userEvent.click(
-        within(currentTab).getByRole("button", { name: "Update Format" })
+        within(currentTab).getByRole("button", {
+          name: "Save Relation Template",
+        })
       );
       expect(await screen.findByRole("status")).toHaveTextContent(
-        "App Settings Saved Successfully"
+        "Relation Template Saved Successfully"
       );
     });
 

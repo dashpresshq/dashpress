@@ -75,10 +75,12 @@ describe("pages/admin/settings/entities", () => {
       screen.getByRole("button", { name: "Plural disabled-entity-2" })
     );
 
-    await userEvent.click(screen.getByRole("button", { name: "Save Changes" }));
+    await userEvent.click(
+      screen.getByRole("button", { name: "Save Enabled Entities Settings" })
+    );
 
     expect(await screen.findByRole("status")).toHaveTextContent(
-      "App Settings Saved Successfully"
+      "Enabled Entities Settings Saved Successfully"
     );
   });
 

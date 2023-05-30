@@ -114,11 +114,13 @@ describe("pages/admin/[entity]/config/crud", () => {
       );
 
       await userEvent.click(
-        within(currentTab).getByRole("button", { name: "Save Changes" })
+        within(currentTab).getByRole("button", {
+          name: `Save ${tab} Selections`,
+        })
       );
 
       expect((await screen.findAllByRole("status"))[0]).toHaveTextContent(
-        "App Settings Saved Successfully"
+        `${tab} Columns Settings Saved Successfully`
       );
     });
 

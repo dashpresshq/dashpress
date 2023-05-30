@@ -38,7 +38,7 @@ function useEntityFormView() {
 
   const onScriptSubmit =
     (key: keyof IFormExtension) => async (value: string) => {
-      upsertEntityFormExtensionSettingsMutation.mutateAsync({
+      await upsertEntityFormExtensionSettingsMutation.mutateAsync({
         ...entityFormExtensionSettings.data,
         [key]: value,
       });

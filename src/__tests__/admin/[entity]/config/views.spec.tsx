@@ -109,10 +109,12 @@ describe("pages/admin/[entity]/config/views", () => {
     expect(screen.queryByRole("table")).not.toBeInTheDocument();
     expect(screen.queryByLabelText("Title")).not.toBeInTheDocument();
 
-    await userEvent.click(screen.getByRole("button", { name: "Save Changes" }));
+    await userEvent.click(
+      screen.getByRole("button", { name: "Save Views Settings" })
+    );
 
     expect(await screen.findByRole("status")).toHaveTextContent(
-      "App Settings Saved Successfully"
+      "Views Settings Saved Successfully"
     );
   });
 
@@ -154,10 +156,12 @@ describe("pages/admin/[entity]/config/views", () => {
       "Tab 2"
     );
 
-    await userEvent.click(screen.getByRole("button", { name: "Save Changes" }));
+    await userEvent.click(
+      screen.getByRole("button", { name: "Save Views Settings" })
+    );
 
     expect((await screen.findAllByRole("status"))[0]).toHaveTextContent(
-      "App Settings Saved Successfully"
+      "Views Settings Saved Successfully"
     );
   });
 
@@ -182,10 +186,12 @@ describe("pages/admin/[entity]/config/views", () => {
 
     expect(screen.getByRole("tab", { name: "Tab 2" })).toBeInTheDocument();
 
-    await userEvent.click(screen.getByRole("button", { name: "Save Changes" }));
+    await userEvent.click(
+      screen.getByRole("button", { name: "Save Views Settings" })
+    );
 
     expect((await screen.findAllByRole("status"))[0]).toHaveTextContent(
-      "App Settings Saved Successfully"
+      "Views Settings Saved Successfully"
     );
   });
 

@@ -55,7 +55,7 @@ describe("pages/admin/settings/dashboard", () => {
       );
 
       await userEvent.click(
-        screen.getByRole("button", { name: "Add New Widget" })
+        screen.getByRole("button", { name: "Add New Dashboard Widget" })
       );
 
       expect(pushMock).toHaveBeenCalledWith(

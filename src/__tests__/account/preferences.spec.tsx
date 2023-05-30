@@ -39,11 +39,11 @@ describe("pages/account/preferences", () => {
     await userEvent.click(screen.getByRole("option", { name: "Light" }));
 
     await userEvent.click(
-      screen.getByRole("button", { name: "Save Preferences" })
+      screen.getByRole("button", { name: "Save Account Preferences" })
     );
 
     expect(await screen.findByRole("status")).toHaveTextContent(
-      "Preferences Updated Successfully"
+      "Account Preferences Saved Successfully"
     );
   });
 

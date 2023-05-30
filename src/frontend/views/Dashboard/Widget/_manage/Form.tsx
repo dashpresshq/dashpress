@@ -11,7 +11,12 @@ import {
   RenderCode,
   Typo,
 } from "@hadmean/chromista";
-import { required, IFormProps, makePostRequest } from "@hadmean/protozoa";
+import {
+  required,
+  IFormProps,
+  makePostRequest,
+  resetFormValues,
+} from "@hadmean/protozoa";
 import { useEntityConfiguration } from "frontend/hooks/configuration/configuration.store";
 import { Field, Form } from "react-final-form";
 import { ITableTab } from "shared/types/data";
@@ -73,7 +78,7 @@ export function DashboardWidgetForm({
     <Form
       onSubmit={onSubmit}
       initialValues={initialValues}
-      render={({ handleSubmit, pristine, values, submitting }) => {
+      render={({ handleSubmit, form, pristine, values, submitting }) => {
         const entityViews = useEntityConfiguration<ITableTab[]>(
           "entity_views",
           values.entity
@@ -82,20 +87,23 @@ export function DashboardWidgetForm({
         const formFields = FormSchema[values._type] || [];
 
         return (
-          <form onSubmit={handleSubmit}>
-            {/* 
-            // TODO
-            // onSubmit={(e) => {
-            //   e.preventDefault();
-            // handleSubmit(e)?.then(() => {
-            //   resetFormValues<Record<string, unknown>>(
-            //     action === "create",
-            //     values as unknown as Record<string, unknown>,
-            //     form as any,
-            //     initialValues
-            //   );
-            // });
-            // }} */}
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              handleSubmit(e)?.then(() => {
+                try {
+                  resetFormValues<Record<string, unknown>>(
+                    action === "create",
+                    values as unknown as Record<string, unknown>,
+                    form as any,
+                    initialValues
+                  );
+                } catch (error) {
+                  // Do nothing
+                }
+              });
+            }}
+          >
             <Field name="title" validate={required} validateFields={[]}>
               {({ input, meta }) => (
                 <FormInput required label="Title" meta={meta} input={input} />

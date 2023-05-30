@@ -53,11 +53,11 @@ describe("pages/dashboard/[dashboardId]/widget/[widgetId]/index", () => {
     await userEvent.type(screen.getByLabelText("Script"), "return 1");
 
     await userEvent.click(
-      screen.getByRole("button", { name: "Update Widget" })
+      screen.getByRole("button", { name: "Update Dashboard Widget" })
     );
 
     expect((await screen.findAllByRole("status"))[0]).toHaveTextContent(
-      "Widget Updated Successfully"
+      "Dashboard Widget Updated Successfully"
     );
   });
 
@@ -102,11 +102,11 @@ describe("pages/dashboard/[dashboardId]/widget/[widgetId]/index", () => {
     await userEvent.type(screen.getByLabelText("Script"), "return 1");
 
     await userEvent.click(
-      screen.getByRole("button", { name: "Update Widget" })
+      screen.getByRole("button", { name: "Update Dashboard Widget" })
     );
 
     expect(await screen.findByRole("status")).toHaveTextContent(
-      "Widget Updated Successfully"
+      "Dashboard Widget Updated Successfully"
     );
   });
 

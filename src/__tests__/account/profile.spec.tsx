@@ -35,11 +35,11 @@ describe("pages/account/profile", () => {
     await userEvent.type(screen.getByLabelText("Name"), "Updated Name");
 
     await userEvent.click(
-      screen.getByRole("button", { name: "Update Profile" })
+      screen.getByRole("button", { name: "Save Account Profile" })
     );
 
     expect(await screen.findByRole("status")).toHaveTextContent(
-      "Profile Updated Successfully"
+      "Account Profile Saved Successfully"
     );
   });
 

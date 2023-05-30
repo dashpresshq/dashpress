@@ -93,7 +93,7 @@ export const CONFIGURATION_KEYS: Record<
     defaultValue: [],
   },
   hidden_entity_relations: {
-    crudConfigLabel: "Enables Relation Settings",
+    crudConfigLabel: "Enabled Relations",
     requireEntity: true,
     defaultValue: [],
   },

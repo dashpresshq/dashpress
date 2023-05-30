@@ -43,10 +43,12 @@ describe("pages/admin/settings/theme", () => {
       target: { value: "#123456" },
     });
 
-    await userEvent.click(screen.getByRole("button", { name: "Update Theme" }));
+    await userEvent.click(
+      screen.getByRole("button", { name: "Save Theme Settings" })
+    );
 
     expect((await screen.findAllByRole("status"))[1]).toHaveTextContent(
-      "App Settings Saved Successfully"
+      "Theme Settings Saved Successfully"
     );
   });
 
@@ -89,14 +91,16 @@ describe("pages/admin/settings/theme", () => {
       target: { value: "#654321" },
     });
 
-    await userEvent.click(screen.getByRole("button", { name: "Update Theme" }));
+    await userEvent.click(
+      screen.getByRole("button", { name: "Save Theme Settings" })
+    );
 
     expect((await screen.findAllByRole("status"))[2]).toHaveTextContent(
-      "Preferences Updated Successfully"
+      "Account Preferences Saved Successfully"
     );
 
     expect((await screen.findAllByRole("status"))[3]).toHaveTextContent(
-      "App Settings Saved Successfully"
+      "Theme Settings Saved Successfully"
     );
   });
 

@@ -163,7 +163,7 @@ export function EntityTableTabForm({
               ).FORM_LANG.UPSERT(false)}
               loadingText={MAKE_APP_CONFIGURATION_CRUD_CONFIG(
                 "entity_views"
-              ).FORM_LANG.UPSERT(false)}
+              ).FORM_LANG.UPSERT(true)}
               disabled={pristine}
               icon="save"
             />

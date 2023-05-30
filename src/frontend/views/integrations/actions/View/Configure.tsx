@@ -67,7 +67,7 @@ export function Configure({ activationId, integrationDetail }: IProps) {
           icon="eye"
           buttonText={() => {
             return activationConfiguration.isLoading
-              ? "Just a sec..."
+              ? `Revealing ${integrationDetail.title}'s Configuration`
               : `Reveal ${integrationDetail.title}'s Configuration`;
           }}
         />

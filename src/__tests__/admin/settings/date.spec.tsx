@@ -40,11 +40,11 @@ describe("pages/admin/settings/date", () => {
     await userEvent.type(screen.getByLabelText("Format"), "yyyy MMM do");
 
     await userEvent.click(
-      screen.getByRole("button", { name: "Update Date Format" })
+      screen.getByRole("button", { name: "Save Date Format" })
     );
 
     expect(await screen.findByRole("status")).toHaveTextContent(
-      "App Settings Saved Successfully"
+      "Date Format Saved Successfully"
     );
   });
 
@@ -72,7 +72,7 @@ describe("pages/admin/settings/date", () => {
       await userEvent.type(screen.getByLabelText("Format"), "yyYXXYY");
 
       await userEvent.click(
-        screen.getByRole("button", { name: "Update Date Format" })
+        screen.getByRole("button", { name: "Save Date Format" })
       );
 
       expect((await screen.findAllByRole("status"))[0]).toHaveTextContent(

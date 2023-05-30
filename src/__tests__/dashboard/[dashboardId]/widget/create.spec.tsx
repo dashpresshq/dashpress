@@ -66,11 +66,11 @@ describe("pages/dashboard/[dashboardId]/widget/create", () => {
     expect(screen.queryByLabelText("Height")).not.toBeInTheDocument();
 
     await userEvent.click(
-      screen.getByRole("button", { name: "Create Widget" })
+      screen.getByRole("button", { name: "Create Dashboard Widget" })
     );
 
     expect((await screen.findAllByRole("status"))[0]).toHaveTextContent(
-      "Widget Created Successfully"
+      "Dashboard Widget Created Successfully"
     );
   });
 
@@ -109,11 +109,11 @@ describe("pages/dashboard/[dashboardId]/widget/create", () => {
     expect(screen.queryByLabelText("Icon")).not.toBeInTheDocument();
 
     await userEvent.click(
-      screen.getByRole("button", { name: "Create Widget" })
+      screen.getByRole("button", { name: "Create Dashboard Widget" })
     );
 
     expect(await screen.findByRole("status")).toHaveTextContent(
-      "Widget Created Successfully"
+      "Dashboard Widget Created Successfully"
     );
   });
 });

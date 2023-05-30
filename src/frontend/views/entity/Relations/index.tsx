@@ -160,6 +160,9 @@ export function EntityRelationsSettings() {
                   <Spacer />
                   <FieldsLabelForm
                     initialValues={entityRelationsLabelsMap.data}
+                    crudConfig={MAKE_APP_CONFIGURATION_CRUD_CONFIG(
+                      "entity_relations_labels"
+                    )}
                     fields={referenceFields.data.map(({ table }) => table)}
                     onSubmit={async (data) => {
                       await upsertEntityRelationsLabelsMutation.mutateAsync(

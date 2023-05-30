@@ -110,7 +110,7 @@ describe("pages/admin/[entity]/config/crud", () => {
       }
 
       expect((await screen.findAllByRole("status"))[0]).toHaveTextContent(
-        "App Settings Saved Successfully"
+        "CRUD Settings Saved Successfully"
       );
 
       expect(
@@ -140,7 +140,7 @@ describe("pages/admin/[entity]/config/crud", () => {
         ).toBeInTheDocument();
       }
       expect((await screen.findAllByRole("status"))[0]).toHaveTextContent(
-        "App Settings Saved Successfully"
+        "CRUD Settings Saved Successfully"
       );
 
       expect(

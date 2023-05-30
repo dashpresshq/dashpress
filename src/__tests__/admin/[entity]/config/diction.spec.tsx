@@ -43,11 +43,11 @@ describe("pages/admin/[entity]/config/diction", () => {
     await userEvent.type(screen.getByLabelText("Singular"), "Updated");
 
     await userEvent.click(
-      screen.getByRole("button", { name: "Update Diction" })
+      screen.getByRole("button", { name: "Save Diction Settings" })
     );
 
     expect(await screen.findByRole("status")).toHaveTextContent(
-      "App Settings Saved Successfully"
+      "Diction Settings Saved Successfully"
     );
   });
 

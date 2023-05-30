@@ -46,11 +46,11 @@ describe("pages/admin/settings/system", () => {
     userEvent.click(screen.getByLabelText("Force Introspection"));
 
     await userEvent.click(
-      screen.getByRole("button", { name: "Update System Settings" })
+      screen.getByRole("button", { name: "Save System Settings" })
     );
 
     expect(await screen.findByRole("status")).toHaveTextContent(
-      "App Settings Saved Successfully"
+      "System Settings Saved Successfully"
     );
   });
 

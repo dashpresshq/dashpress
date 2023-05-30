@@ -285,7 +285,7 @@ describe("pages/integrations/variables => credentials", () => {
       );
 
       await userEvent.click(
-        within(dialog).getByRole("button", { name: "Save" })
+        within(dialog).getByRole("button", { name: "Create Secret" })
       );
 
       expect((await screen.findAllByRole("status"))[0]).toHaveTextContent(
@@ -350,7 +350,7 @@ describe("pages/integrations/variables => credentials", () => {
       await userEvent.type(within(dialog).getByLabelText("Value"), "__updated");
 
       await userEvent.click(
-        within(dialog).getByRole("button", { name: "Save" })
+        within(dialog).getByRole("button", { name: "Update Secret" })
       );
 
       expect((await screen.findAllByRole("status"))[0]).toHaveTextContent(

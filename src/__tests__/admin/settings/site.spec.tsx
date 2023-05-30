@@ -48,11 +48,11 @@ describe("pages/admin/settings/site", () => {
     await userEvent.type(screen.getByLabelText("Full Length Logo"), "Updated");
 
     await userEvent.click(
-      screen.getByRole("button", { name: "Update Site Settings" })
+      screen.getByRole("button", { name: "Save Site Settings" })
     );
 
     expect(await screen.findByRole("status")).toHaveTextContent(
-      "App Settings Saved Successfully"
+      "Site Settings Saved Successfully"
     );
   });
 

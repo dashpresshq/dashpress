@@ -37,7 +37,7 @@ describe("pages/account/password", () => {
     );
 
     await userEvent.click(
-      screen.getByRole("button", { name: "Change Password" })
+      screen.getByRole("button", { name: "Update Password" })
     );
 
     expect(await screen.findByRole("status")).toHaveTextContent(
@@ -62,7 +62,7 @@ describe("pages/account/password", () => {
     );
 
     await userEvent.click(
-      screen.getByRole("button", { name: "Change Password" })
+      screen.getByRole("button", { name: "Update Password" })
     );
 
     expect((await screen.findAllByRole("status"))[0]).toHaveTextContent(

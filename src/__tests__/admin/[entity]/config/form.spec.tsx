@@ -67,11 +67,11 @@ describe("pages/admin/[entity]/config/form", () => {
       );
 
       await userEvent.click(
-        within(currentTab).getByRole("button", { name: "Save" })
+        within(currentTab).getByRole("button", { name: "Save Form Scripts" })
       );
 
       expect((await screen.findAllByRole("status"))[0]).toHaveTextContent(
-        "App Settings Saved Successfully"
+        "Form Scripts Saved Successfully"
       );
     });
 
@@ -108,7 +108,7 @@ describe("pages/admin/[entity]/config/form", () => {
       );
 
       await userEvent.click(
-        within(currentTab).getByRole("button", { name: "Save" })
+        within(currentTab).getByRole("button", { name: "Save Form Scripts" })
       );
 
       expect((await screen.findAllByRole("status"))[0]).toHaveTextContent(
@@ -146,11 +146,11 @@ describe("pages/admin/[entity]/config/form", () => {
       await userEvent.clear(within(currentTab).getByLabelText("Script"));
 
       await userEvent.click(
-        within(currentTab).getByRole("button", { name: "Save" })
+        within(currentTab).getByRole("button", { name: "Save Form Scripts" })
       );
 
       expect((await screen.findAllByRole("status"))[0]).toHaveTextContent(
-        "App Settings Saved Successfully"
+        "Form Scripts Saved Successfully"
       );
     });
 

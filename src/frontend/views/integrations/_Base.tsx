@@ -24,6 +24,7 @@ import {
   useActiveStorageIntegrationList,
   useStorageIntegrationsList,
 } from "./storage/storage.store";
+import { ACTION_INTEGRATIONS_CRUD_CONFIG } from "./actions/constants";
 
 interface IProps {
   children: ReactNode;
@@ -48,7 +49,7 @@ export function BaseActionsLayout({ children }: IProps) {
     <AppLayout>
       <SectionRow>
         <SectionLeft>
-          <SectionBox title="Actions">
+          <SectionBox title={ACTION_INTEGRATIONS_CRUD_CONFIG.TEXT_LANG.TITLE}>
             <ViewStateMachine
               loading={
                 actionIntegrationsList.isLoading || activeActionList.isLoading

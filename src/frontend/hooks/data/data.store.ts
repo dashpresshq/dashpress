@@ -195,7 +195,7 @@ export function useEntityDataDeletionMutation(
     },
     successMessage: entityCrudConfig.MUTATION_LANG.DELETE,
   });
-
+  // eyes on optimstic delete here
   return useMutation(
     async (id: string) => await makeDeleteRequest(`/api/data/${entity}/${id}`),
     apiMutateOptions

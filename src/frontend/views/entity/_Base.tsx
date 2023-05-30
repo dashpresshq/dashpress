@@ -17,6 +17,7 @@ import {
   ENTITY_CRUD_SETTINGS_TAB_LABELS,
   ENTITY_FIELD_SETTINGS_TAB_LABELS,
 } from "./constants";
+import { ADMIN_ACTION_INSTANCES_CRUD_CONFIG } from "./Actions/constants";
 
 interface IProps {
   children: ReactNode;
@@ -64,7 +65,7 @@ export function BaseEntitySettingsLayout({ children }: IProps) {
     },
     {
       action: NAVIGATION_LINKS.ENTITY.CONFIG.FORM_INTEGRATIONS(entity),
-      name: "Form Integrations",
+      name: ADMIN_ACTION_INSTANCES_CRUD_CONFIG.TEXT_LANG.TITLE,
       IconComponent: Zap,
     },
   ];

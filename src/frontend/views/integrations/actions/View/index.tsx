@@ -52,7 +52,10 @@ export function ActionSettingsView({
         {
           label: "Instances",
           content: (
-            <BaseActionInstances integrationKey={activeAction.integrationKey} />
+            <BaseActionInstances
+              type="integrationKey"
+              id={activeAction.integrationKey}
+            />
           ),
         },
         {

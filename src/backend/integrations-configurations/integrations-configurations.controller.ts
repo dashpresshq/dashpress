@@ -1,5 +1,6 @@
 import { BadRequestError } from "backend/lib/errors";
 import { IntegrationsConfigurationGroup } from "shared/types/integrations";
+import { IKeyValue } from "frontend/views/settings/Variables/types";
 import { credentialsApiService } from "./services/credentials.service";
 import {
   appConstantsApiService,
@@ -41,15 +42,13 @@ export class IntegrationsConfigurationApiController {
 
   private async listUnGrouped(
     group: IntegrationsConfigurationGroup
-  ): Promise<{ key: string; value: string }[]> {
+  ): Promise<IKeyValue[]> {
     return (await this.getService(group).list()).filter(
       ({ key }) => !key.includes(INTEGRATION_CONFIG_GROUP_DEMILITER)
     );
   }
 
-  async list(
-    group: IntegrationsConfigurationGroup
-  ): Promise<{ key: string; value: string }[]> {
+  async list(group: IntegrationsConfigurationGroup): Promise<IKeyValue[]> {
     const items = await this.listUnGrouped(group);
     if (group === IntegrationsConfigurationGroup.Credentials) {
       return items.map(({ key }) => ({ key, value: "***********" }));
@@ -57,7 +56,7 @@ export class IntegrationsConfigurationApiController {
     return items;
   }
 
-  async listWithRevealedValues(): Promise<{ key: string; value: string }[]> {
+  async listWithRevealedValues(): Promise<IKeyValue[]> {
     const items = await this.listUnGrouped(
       IntegrationsConfigurationGroup.Credentials
     );

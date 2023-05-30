@@ -9,8 +9,9 @@ import {
   IActivatedAction,
   BaseAction,
 } from "shared/types/actions";
-import { ACTION_INTEGRATIONS_CRUD_CONFIG } from "frontend/views/integrations/actions/constants";
 import { useIntegrationImplementationsList } from "./instances.store";
+import { ADMIN_ACTION_INSTANCES_CRUD_CONFIG } from "./constants";
+import { ActionInstanceView } from "./types";
 
 interface IProps {
   onSubmit: (instance: IActionInstance) => Promise<void>;
@@ -19,10 +20,7 @@ interface IProps {
   formAction: "create" | "update";
   integrationsList: IIntegrationsList[];
   activatedActions: IActivatedAction[];
-  currentView: {
-    entity?: string;
-    integrationKey?: string;
-  };
+  currentView: ActionInstanceView;
 }
 
 const CONFIGURATION_FORM_PREFIX = "configuration__";
@@ -41,10 +39,10 @@ export function ActionForm({
   );
   const activatedOptions = activatedActions
     .filter(({ integrationKey }) => {
-      if (!currentView.integrationKey) {
+      if (currentView.type !== "integrationKey") {
         return true;
       }
-      return currentView.integrationKey === integrationKey;
+      return currentView.id === integrationKey;
     })
     .map(({ activationId, integrationKey }) => ({
       label: integrationsListMap[integrationKey].title,
@@ -128,11 +126,11 @@ export function ActionForm({
     //   validations: [],
     // },
   };
-  if (currentView.entity) {
+  if (currentView.type === "entity") {
     delete fields.entity;
-    initialValues = { ...initialValues, entity: currentView.entity };
+    initialValues = { ...initialValues, entity: currentView.id };
   }
-  if (currentView.integrationKey && activatedOptions.length === 1) {
+  if (currentView.type === "integrationKey" && activatedOptions.length === 1) {
     delete fields.activatedActionId;
     initialValues = {
       ...initialValues,
@@ -150,8 +148,8 @@ export function ActionForm({
     <SchemaForm<IActionInstance>
       buttonText={
         formAction === "create"
-          ? ACTION_INTEGRATIONS_CRUD_CONFIG.FORM_LANG.CREATE
-          : ACTION_INTEGRATIONS_CRUD_CONFIG.FORM_LANG.UPDATE
+          ? ADMIN_ACTION_INSTANCES_CRUD_CONFIG.FORM_LANG.CREATE
+          : ADMIN_ACTION_INSTANCES_CRUD_CONFIG.FORM_LANG.UPDATE
       }
       initialValues={initialValues$1}
       fields={fields}

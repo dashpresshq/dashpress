@@ -1,6 +1,5 @@
 import {
   DeleteButton,
-  ErrorAlert,
   OffCanvas,
   SoftButton,
   Spacer,
@@ -30,30 +29,31 @@ import {
   useDeleteActionInstanceMutation,
   useUpdateActionInstanceMutation,
 } from "./instances.store";
-
-interface IProps {
-  entity?: string;
-  integrationKey?: string;
-}
+import { ADMIN_ACTION_INSTANCES_CRUD_CONFIG } from "./constants";
+import { ActionInstanceView } from "./types";
 
 const NEW_ACTION_ITEM = "__new_action_item__";
 
-export function BaseActionInstances({ entity, integrationKey }: IProps) {
+export function BaseActionInstances(actionInstanceView: ActionInstanceView) {
   const activeActionList = useActiveActionList();
   const integrationsList = useActionIntegrationsList();
   const activeEntities = useActiveEntities();
 
-  const dataEndpoint = LIST_ACTION_INSTANCES({ entity, integrationKey });
+  const dataEndpoint = LIST_ACTION_INSTANCES(actionInstanceView);
 
   const tableData = useApi<IActionInstance[]>(dataEndpoint, {
     defaultData: [],
   });
 
-  const deleteActionInstanceMutation = useDeleteActionInstanceMutation();
+  const deleteActionInstanceMutation =
+    useDeleteActionInstanceMutation(actionInstanceView);
   const updateActionInstanceMutation = useUpdateActionInstanceMutation();
   const createActionInstanceMutation = useCreateActionInstanceMutation();
 
   const [currentInstanceId, setCurrentInstanceItem] = useState("");
+
+  const { id: actionInstanceViewId, type: actionInstanceViewType } =
+    actionInstanceView;
 
   const closeConfigItem = () => {
     setCurrentInstanceItem("");
@@ -81,7 +81,7 @@ export function BaseActionInstances({ entity, integrationKey }: IProps) {
   );
 
   const columns: IFETableColumn<IActionInstance>[] = [
-    integrationKey
+    actionInstanceViewType === "integrationKey"
       ? {
           Header: "Entity",
           accessor: "entity",
@@ -122,15 +122,11 @@ export function BaseActionInstances({ entity, integrationKey }: IProps) {
     },
   ];
 
-  if (!entity && !integrationKey) {
-    return <ErrorAlert message="Pass in either of entity or the integration" />;
-  }
-
   return (
     <>
       <ViewStateMachine
         loading={
-          entity === SLUG_LOADING_VALUE ||
+          actionInstanceViewId === SLUG_LOADING_VALUE ||
           activeActionList.isLoading ||
           activeEntities.isLoading ||
           integrationsList.isLoading
@@ -146,14 +142,12 @@ export function BaseActionInstances({ entity, integrationKey }: IProps) {
           <SoftButton
             action={() => setCurrentInstanceItem(NEW_ACTION_ITEM)}
             icon="add"
-            label="Add New Form Integration"
+            label={ADMIN_ACTION_INSTANCES_CRUD_CONFIG.TEXT_LANG.CREATE}
           />
         </Stack>
         <Spacer />
         <FEPaginationTable
-          emptyMessage={`No Form Integration Has Been Registered For This ${
-            entity ? "Entity" : "Action"
-          }`}
+          emptyMessage={ADMIN_ACTION_INSTANCES_CRUD_CONFIG.TEXT_LANG.EMPTY_LIST}
           border
           dataEndpoint={dataEndpoint}
           columns={columns}
@@ -162,8 +156,8 @@ export function BaseActionInstances({ entity, integrationKey }: IProps) {
       <OffCanvas
         title={
           currentInstanceId === NEW_ACTION_ITEM
-            ? `New Form Action`
-            : `Edit Form Action`
+            ? ADMIN_ACTION_INSTANCES_CRUD_CONFIG.TEXT_LANG.CREATE
+            : ADMIN_ACTION_INSTANCES_CRUD_CONFIG.TEXT_LANG.EDIT
         }
         onClose={closeConfigItem}
         show={!!currentInstanceId}
@@ -198,7 +192,7 @@ export function BaseActionInstances({ entity, integrationKey }: IProps) {
             }
             closeConfigItem();
           }}
-          currentView={{ entity, integrationKey }}
+          currentView={actionInstanceView}
           initialValues={tableData.data.find(
             ({ instanceId }) => instanceId === currentInstanceId
           )}

@@ -1,40 +1,30 @@
 import {
+  MutationHelpers,
   makeDeleteRequest,
   makePatchRequest,
   makePostRequest,
   useApi,
+  useApiMutateOptimisticOptions,
   useWaitForResponseMutationOptions,
 } from "@hadmean/protozoa";
-import {
-  CRUD_CONFIG_NOT_FOUND,
-  MAKE_CRUD_CONFIG,
-} from "frontend/lib/makeCrudConfig";
+import { CRUD_CONFIG_NOT_FOUND } from "frontend/lib/makeCrudConfig";
 import { useMutation } from "react-query";
 import {
   IActionInstance,
   IIntegrationImplementationList,
 } from "shared/types/actions";
+import {
+  ADMIN_ACTION_INSTANCES_CRUD_CONFIG,
+  BASE_ACTIONS_ENDPOINT,
+} from "./constants";
+import { ActionInstanceView } from "./types";
 
-const BASE_ACTIONS_ENDPOINT = `/api/integrations/actions`;
-
-export const LIST_ACTION_INSTANCES = ({
-  entity,
-  integrationKey,
-}: {
-  entity?: string;
-  integrationKey?: string;
-}) => {
-  if (entity) {
-    return `${BASE_ACTIONS_ENDPOINT}/instances/${entity}`;
+export const LIST_ACTION_INSTANCES = ({ type, id }: ActionInstanceView) => {
+  if (type === "entity") {
+    return `${BASE_ACTIONS_ENDPOINT}/instances/${id}`;
   }
-  return `${BASE_ACTIONS_ENDPOINT}/${integrationKey}`;
+  return `${BASE_ACTIONS_ENDPOINT}/${id}`;
 };
-
-export const ADMIN_ACTION_INSTANCES_CRUD_CONFIG = MAKE_CRUD_CONFIG({
-  path: `${BASE_ACTIONS_ENDPOINT}/instances`,
-  plural: "Form Integrations",
-  singular: "Form Integration",
-});
 
 export const useIntegrationImplementationsList = (integrationKey: string) =>
   useApi<IIntegrationImplementationList[]>(
@@ -46,12 +36,20 @@ export const useIntegrationImplementationsList = (integrationKey: string) =>
     }
   );
 
-export function useDeleteActionInstanceMutation() {
-  const apiMutateOptions = useWaitForResponseMutationOptions<
-    Record<string, string>
+export function useDeleteActionInstanceMutation(
+  actionInstanceView: ActionInstanceView
+) {
+  const apiMutateOptions = useApiMutateOptimisticOptions<
+    IActionInstance[],
+    string
   >({
-    endpoints: [BASE_ACTIONS_ENDPOINT],
+    dataQueryPath: LIST_ACTION_INSTANCES(actionInstanceView),
+    otherEndpoints: [BASE_ACTIONS_ENDPOINT],
     successMessage: ADMIN_ACTION_INSTANCES_CRUD_CONFIG.MUTATION_LANG.DELETE,
+    onMutate: MutationHelpers.deleteByKey("instanceId") as unknown as (
+      oldData: IActionInstance[],
+      form: string
+    ) => IActionInstance[],
   });
 
   return useMutation(

@@ -1,8 +1,10 @@
 import {
+  MutationHelpers,
   getQueryCachekey,
   makeDeleteRequest,
   makePutRequest,
   useApi,
+  useApiMutateOptimisticOptions,
   useWaitForResponseMutationOptions,
 } from "@hadmean/protozoa";
 import { usePasswordStore } from "frontend/views/integrations/password.store";
@@ -43,20 +45,18 @@ export function useIntegrationConfigurationUpsertationMutation(
     apiMutateOptions
   );
 }
-// TODO convert to opptimisic
+
 export function useIntegrationConfigurationDeletionMutation(
   group: IntegrationsConfigurationGroup
 ) {
   const rootPassword = usePasswordStore((state) => state.password);
 
-  const apiMutateOptions = useWaitForResponseMutationOptions<
-    Record<string, string>
-  >({
-    endpoints: rootPassword
-      ? [REVEAL_CREDENTIALS_ENDPOINT, INTEGRATIONS_GROUP_ENDPOINT(group)]
-      : [INTEGRATIONS_GROUP_ENDPOINT(group)],
+  const apiMutateOptions = useApiMutateOptimisticOptions<IKeyValue[], string>({
+    dataQueryPath: INTEGRATIONS_GROUP_ENDPOINT(group),
+    otherEndpoints: rootPassword ? [REVEAL_CREDENTIALS_ENDPOINT] : [],
     successMessage:
       INTEGRATIONS_GROUP_CONFIG[group].crudConfig.MUTATION_LANG.DELETE,
+    onMutate: MutationHelpers.deleteByKey("key"),
   });
 
   return useMutation(

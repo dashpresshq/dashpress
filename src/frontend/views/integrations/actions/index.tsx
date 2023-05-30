@@ -14,6 +14,7 @@ import {
 } from "./actions.store";
 import { ACTIONS_VIEW_KEY } from "../constants";
 import { ActionSettingsView } from "./View";
+import { ACTION_INTEGRATIONS_CRUD_CONFIG } from "./constants";
 
 export function ActionsIntegrations() {
   const currentKey = useRouteParam("key");
@@ -30,7 +31,7 @@ export function ActionsIntegrations() {
   );
 
   useSetPageDetails({
-    pageTitle: "Manage Integrations",
+    pageTitle: ACTION_INTEGRATIONS_CRUD_CONFIG.TEXT_LANG.TITLE,
     viewKey: ACTIONS_VIEW_KEY,
     permission: USER_PERMISSIONS.CAN_MANAGE_INTEGRATIONS,
   });
@@ -45,7 +46,7 @@ export function ActionsIntegrations() {
           {
             action: LINK_TO_DOCS(`integrations/form`),
             icon: "help",
-            label: "Form Integrations Documentation",
+            label: `${ACTION_INTEGRATIONS_CRUD_CONFIG.TEXT_LANG.TITLE} Documentation`,
           },
         ]}
       >

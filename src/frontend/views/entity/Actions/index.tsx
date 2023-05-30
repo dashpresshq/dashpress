@@ -6,19 +6,20 @@ import { LINK_TO_DOCS } from "frontend/views/constants";
 import { BaseEntitySettingsLayout } from "../_Base";
 import { ENTITY_CONFIGURATION_VIEW } from "../constants";
 import { BaseActionInstances } from "./Base";
+import { ADMIN_ACTION_INSTANCES_CRUD_CONFIG } from "./constants";
 
 export function EntityFormActionsSettings() {
   const entity = useEntitySlug();
 
   useSetPageDetails({
-    pageTitle: "Form Integrations",
+    pageTitle: ADMIN_ACTION_INSTANCES_CRUD_CONFIG.TEXT_LANG.TITLE,
     viewKey: ENTITY_CONFIGURATION_VIEW,
     permission: USER_PERMISSIONS.CAN_CONFIGURE_APP,
   });
   return (
     <BaseEntitySettingsLayout>
       <SectionBox
-        title="Form Integrations"
+        title={ADMIN_ACTION_INSTANCES_CRUD_CONFIG.TEXT_LANG.TITLE}
         iconButtons={[
           {
             action: NAVIGATION_LINKS.SETTINGS.VARIABLES,
@@ -28,11 +29,11 @@ export function EntityFormActionsSettings() {
           {
             action: LINK_TO_DOCS(`integrations/form`),
             icon: "help",
-            label: "Form Integrations Documentation",
+            label: `${ADMIN_ACTION_INSTANCES_CRUD_CONFIG.TEXT_LANG.TITLE} Documentation`,
           },
         ]}
       >
-        <BaseActionInstances entity={entity} />
+        <BaseActionInstances id={entity} type="entity" />
       </SectionBox>
     </BaseEntitySettingsLayout>
   );

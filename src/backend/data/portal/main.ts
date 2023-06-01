@@ -1,5 +1,6 @@
+/* eslint-disable max-classes-per-file */
 import noop from "lodash/noop";
-import { IDataApiService } from "../types";
+import { DataCrudKeys, IDataApiService } from "../types";
 
 export class PortalDataHooksService {
   static async beforeCreate({
@@ -83,5 +84,15 @@ export class PortalDataHooksService {
     dataId: string;
   }) {
     noop(dataApiService, entity, dataId, beforeData);
+  }
+}
+
+export class PortalFieldsFilterService {
+  static async getFieldsToHide(
+    entity: string,
+    crudKey: DataCrudKeys
+  ): Promise<string[]> {
+    noop(entity, crudKey);
+    return [];
   }
 }

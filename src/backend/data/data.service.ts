@@ -11,8 +11,9 @@ import { IEntityField } from "shared/types/db";
 import { TemplateService } from "shared/lib/templates";
 import { FilterOperators, PaginatedData } from "@hadmean/protozoa";
 import { IAccountProfile } from "shared/types/user";
+import { AppConfigurationKeys } from "shared/configurations";
 import { rDBMSDataApiService, RDBMSDataApiService } from "./data-access/RDBMS";
-import { IDataApiService, IPaginationFilters } from "./types";
+import { DataCrudKeys, IDataApiService, IPaginationFilters } from "./types";
 import {
   ConfigurationApiService,
   configurationApiService,
@@ -21,12 +22,19 @@ import {
   EntitiesApiService,
   entitiesApiService,
 } from "../entities/entities.service";
-import { PortalDataHooksService } from "./portal";
+import { PortalDataHooksService, PortalFieldsFilterService } from "./portal";
 import { makeTableData } from "./utils";
 
 const DEFAULT_LIST_LIMIT = 50;
 
 const GOOD_FIELD_TYPES_FOR_LIST: IEntityField["type"][] = ["enum", "string"];
+
+const CRUD_KEY_CONFIG: Record<DataCrudKeys, AppConfigurationKeys> = {
+  create: "hidden_entity_create_columns",
+  update: "hidden_entity_update_columns",
+  details: "hidden_entity_details_columns",
+  table: "hidden_entity_table_columns",
+};
 
 export class DataApiService implements IDataApiService {
   constructor(
@@ -93,7 +101,7 @@ export class DataApiService implements IDataApiService {
     id: string | number
   ): Promise<Record<string, unknown>> {
     const [fieldsToShow, primaryField] = await Promise.all([
-      this.getAllowedCrudsFieldsToShow(entity, "hidden_entity_details_columns"),
+      this.getAllowedCrudsFieldsToShow(entity, "details"),
       this._entitiesApiService.getEntityPrimaryField(entity),
     ]);
     const data = await this.read<Record<string, unknown>>(
@@ -127,7 +135,7 @@ export class DataApiService implements IDataApiService {
   ): Promise<string | number> {
     // TODO validate the createData values
     const [allowedFields, primaryField, entityValidations] = await Promise.all([
-      this.getAllowedCrudsFieldsToShow(entity, "hidden_entity_create_columns"),
+      this.getAllowedCrudsFieldsToShow(entity, "create"),
       this._entitiesApiService.getEntityPrimaryField(entity),
       this._configurationApiService.show<
         Record<string, IFieldValidationItem[]>
@@ -178,7 +186,7 @@ export class DataApiService implements IDataApiService {
       entity,
       [...relationshipSettings.fields, primaryField],
       [relationshipSettings.fields[0]].map((field) => ({
-        // TODO relationshipSettings.fields.map((field) => ({
+        // TODO  Or Clause relationshipSettings.fields.map((field) => ({
         id: field,
         value: {
           operator: FilterOperators.CONTAINS,
@@ -208,10 +216,7 @@ export class DataApiService implements IDataApiService {
       await Promise.all([
         this.getDataAccessInstance().list(
           entity,
-          await this.getAllowedCrudsFieldsToShow(
-            entity,
-            "hidden_entity_table_columns"
-          ),
+          await this.getAllowedCrudsFieldsToShow(entity, "table"),
           queryFilters,
           paginationFilters
         ),
@@ -228,7 +233,7 @@ export class DataApiService implements IDataApiService {
     accountProfile: IAccountProfile
   ): Promise<void> {
     const [allowedFields, primaryField, entityValidations] = await Promise.all([
-      this.getAllowedCrudsFieldsToShow(entity, "hidden_entity_update_columns"),
+      this.getAllowedCrudsFieldsToShow(entity, "update"),
       this._entitiesApiService.getEntityPrimaryField(entity),
       this._configurationApiService.show<
         Record<string, IFieldValidationItem[]>
@@ -307,16 +312,22 @@ export class DataApiService implements IDataApiService {
 
   async getAllowedCrudsFieldsToShow(
     entity: string,
-    crudKey:
-      | "hidden_entity_details_columns"
-      | "hidden_entity_create_columns"
-      | "hidden_entity_table_columns"
-      | "hidden_entity_update_columns"
+    crudKey: DataCrudKeys
   ): Promise<string[]> {
-    const [hiddenFields, entityFields] = await Promise.all([
-      this._configurationApiService.show<string[]>(crudKey, entity),
+    const [configHiddenFields, entityFields] = await Promise.all([
+      this._configurationApiService.show<string[]>(
+        CRUD_KEY_CONFIG[crudKey],
+        entity
+      ),
       this._entitiesApiService.getEntityFields(entity),
     ]);
+
+    const portalHiddenFields = await PortalFieldsFilterService.getFieldsToHide(
+      entity,
+      crudKey
+    );
+
+    const hiddenFields = [...configHiddenFields, ...portalHiddenFields];
 
     if (hiddenFields.length === 0) {
       return entityFields.map(({ name }) => name);

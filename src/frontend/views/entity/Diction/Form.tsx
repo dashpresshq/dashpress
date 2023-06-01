@@ -1,4 +1,4 @@
-import { IFormProps, VALIDATION_LENGTH } from "@hadmean/protozoa";
+import { IFormProps } from "@hadmean/protozoa";
 import { SchemaForm } from "frontend/components/SchemaForm";
 import { MAKE_APP_CONFIGURATION_CRUD_CONFIG } from "frontend/hooks/configuration/configuration.constant";
 
@@ -29,7 +29,7 @@ export function EntityDictionForm({
             {
               validationType: "maxLength",
               constraint: {
-                length: VALIDATION_LENGTH.NAMES,
+                length: 32,
               },
             },
           ],
@@ -43,7 +43,7 @@ export function EntityDictionForm({
             {
               validationType: "maxLength",
               constraint: {
-                length: VALIDATION_LENGTH.NAMES,
+                length: 32,
               },
             },
           ],

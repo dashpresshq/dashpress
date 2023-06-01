@@ -11,17 +11,21 @@ export const useTableState = (
   persitentFilters: IDataTableProps["persitentFilters"],
   defaultTableState?: IDataTableProps["defaultTableState"]
 ) => {
-  // We want to key the entity state based on the entity since NextJS reuses the same component
-  // For different entity views
-  // So this is as good as useState but with entity context
+  /*
+   We want to key the entity state based on the entity since NextJS reuses the same component
+   For different entity views
+   So this is as good as useState but with entity context
+   */
   const [paginatedDataState, setPaginatedDataState] = useEntityContextState(
     contextKey,
     defaultTableState
   );
 
-  // We dont want the state from the <Table /> to be passed back to the <Table />
-  // As this will cause some infinite loop
-  // So we only set this when we want to override the Table state
+  /*
+   We dont want the state from the <Table /> to be passed back to the <Table />
+   As this will cause some infinite loop
+   So we only set this when we want to override the Table state
+  */
   const [overridePaginatedDataState, setOverridePaginatedDataState] =
     useState<IPaginatedDataState<unknown>>(DEFAULT_TABLE_STATE);
 

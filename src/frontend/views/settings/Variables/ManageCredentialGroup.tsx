@@ -171,6 +171,8 @@ export function ManageCredentialGroup({
           userHasPermission(USER_PERMISSIONS.CAN_MANAGE_INTEGRATIONS) &&
           tableData.data.length > 0 &&
           revealedCredentials.data.length === 0 && (
+            // TOOD Revealing password saving message
+            // If not reveal password, dont show `*******` on edit
             <Spacer>
               <Typo.SM textStyle="italic">
                 For security reasons, Please input your account password to be

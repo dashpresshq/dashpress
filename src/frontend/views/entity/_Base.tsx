@@ -92,8 +92,8 @@ export function BaseEntitySettingsLayout({ children }: IProps) {
             menuItems={[
               ...baseMenuItems,
               // TODO
-              // Computed Details fields
-              // Custom Render
+              // Computed Details/Table Renders
+              // Custom fields like form one.one
             ]}
             currentMenuItem={router.asPath.split("?")[0]}
           />

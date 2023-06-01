@@ -1,1 +1,1 @@
-export { PortalDataHooksService } from "./main";
+export { PortalDataHooksService, PortalFieldsFilterService } from "./main";

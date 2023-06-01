@@ -133,7 +133,7 @@ export function FieldSelectionCanvas({
                     </Field>
                     <Field
                       name={`${name}.label`}
-                      validate={composeValidators(required)}
+                      validate={required}
                       validateFields={[]}
                     >
                       {({ meta, input }) => (
@@ -148,7 +148,7 @@ export function FieldSelectionCanvas({
                     {useColors && (
                       <Field
                         name={`${name}.color`}
-                        validate={composeValidators(required)}
+                        validate={required}
                         validateFields={[]}
                       >
                         {(renderProps) => (

@@ -1,10 +1,10 @@
-import { packagesApiController } from "backend/packages/packages.controller";
+import { npmPackagesApiController } from "backend/npm-packages/npm-packages.controller";
 import { requestHandler } from "../../../backend/lib/request";
 
 export default requestHandler(
   {
     POST: async () => {
-      return await packagesApiController.installPackages();
+      return await npmPackagesApiController.installPackages();
     },
   },
   [

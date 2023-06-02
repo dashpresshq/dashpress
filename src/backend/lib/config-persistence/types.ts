@@ -9,7 +9,7 @@ export type ConfigDomain =
   | "environment-variables"
   | "dashboard-widgets"
   | "app-config"
-  | "packages"
+  | "npm-packages"
   | "list-order"
   | "temp-storage"
   | "action-instances"

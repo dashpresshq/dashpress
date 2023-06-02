@@ -93,6 +93,8 @@ import { checkNodeVersion } from "./checkNodeVersion";
   )}
     `);
 
+  // TODO Doing the npm package thing here
+
   const { stdout, stderr } = execa("npm", ["run", "start"], {
     cwd: path.join(__dirname, ".."),
   });

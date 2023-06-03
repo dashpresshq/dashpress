@@ -6,7 +6,6 @@ import {
 import { checkNodeVersion } from "bin/checkNodeVersion";
 import latestVersion from "latest-version";
 import { schemasApiService } from "backend/schema/schema.service";
-import * as appRoot from "app-root-path";
 import { requestHandler } from "../../backend/lib/request";
 
 const { version } = require("../../../package.json");
@@ -22,7 +21,6 @@ export default requestHandler(
           : `. Version v${latestVersion$1} is now available.`;
 
       return {
-        Foo: `${appRoot}`,
         "Hadmean Version": `v${version}${versionText}`,
         "Node Version": checkNodeVersion().message,
         "Config Adapter": configApiService.getConfigValue<ConfigAdaptorTypes>(

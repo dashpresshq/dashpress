@@ -206,7 +206,8 @@ export class ActionsApiService implements IApplicationService {
     );
 
     const activationId = nanoid();
-    const credentialsGroupKey = integrationKey.toUpperCase();
+    const credentialsGroupKey =
+      ACTION_INTEGRATIONS[integrationKey].credentialsKey;
 
     await this._activatedActionsPersistenceService.createItem(activationId, {
       activationId,

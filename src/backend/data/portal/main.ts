@@ -90,9 +90,10 @@ export class PortalDataHooksService {
 export class PortalFieldsFilterService {
   static async getFieldsToHide(
     entity: string,
-    crudKey: DataCrudKeys
+    crudKey: DataCrudKeys,
+    entityFieldList: string[]
   ): Promise<string[]> {
-    noop(entity, crudKey);
+    noop(entity, crudKey, entityFieldList);
     return [];
   }
 }

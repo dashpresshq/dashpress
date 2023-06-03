@@ -24,6 +24,7 @@ const CONFIGURATION_SCHEMA: IAppliedSchemaFormConfig<IActionConfig> = {
 
 export const SEND_GRID_ACTION_INTEGRATION: IActionIntegrationsImplemention = {
   title: "SendGrid",
+  credentialsKey: "SENDGRID",
   description: "Send emails through SendGrid",
   configurationSchema: CONFIGURATION_SCHEMA,
   connect: async (config: IActionConfig) => config,

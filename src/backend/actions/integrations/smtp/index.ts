@@ -49,6 +49,7 @@ const CONFIGURATION_SCHEMA: IAppliedSchemaFormConfig<IActionConfig> = {
 
 export const SMTP_ACTION_INTEGRATION: IActionIntegrationsImplemention = {
   title: "SMTP",
+  credentialsKey: "SMTP",
   description: "Send emails through SMTP",
   configurationSchema: CONFIGURATION_SCHEMA,
   connect: async (config: IActionConfig) => {

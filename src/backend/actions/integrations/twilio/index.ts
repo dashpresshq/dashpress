@@ -25,6 +25,7 @@ const CONFIGURATION_SCHEMA: IAppliedSchemaFormConfig<IActionConfig> = {
 
 export const TWILIO_ACTION_INTEGRATION: IActionIntegrationsImplemention = {
   title: "Twilio",
+  credentialsKey: "TWILIO",
   description: "Send SMS through Twilio",
   configurationSchema: CONFIGURATION_SCHEMA,
   connect: async (config: IActionConfig) => config,

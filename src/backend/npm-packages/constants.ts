@@ -1,3 +1,8 @@
+import {
+  ConfigKeys,
+  configApiService,
+} from "backend/lib/config/config.service";
+import { CacheAdaptorTypes } from "backend/lib/cache/types";
 import { PORTAL_NPM_PACKAGES_CONFIG, PortalNpmPackageDomain } from "./portal";
 import { INpmPackagesConfig } from "./types";
 
@@ -52,7 +57,13 @@ const BASE_NPM_PACKAGES_CONFIG: Record<
         version: "^4.4.0",
       },
     ],
-    shouldInstall: async () => true,
+    shouldInstall: async () => {
+      return (
+        configApiService.getConfigValue<CacheAdaptorTypes>(
+          ConfigKeys.CACHE_ADAPTOR
+        ) === CacheAdaptorTypes.Redis
+      );
+    },
   },
   [BaseNpmPackageDomain.Postgres]: {
     packages: [

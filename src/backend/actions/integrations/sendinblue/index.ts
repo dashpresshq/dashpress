@@ -24,6 +24,7 @@ const CONFIGURATION_SCHEMA: IAppliedSchemaFormConfig<IActionConfig> = {
 
 export const SENDINBLUE_ACTION_INTEGRATION: IActionIntegrationsImplemention = {
   title: "SendInBlue",
+  credentialsKey: "SENDINBLUE",
   description: "Send emails through SendInBlue",
   configurationSchema: CONFIGURATION_SCHEMA,
   connect: async (config: IActionConfig) => config,

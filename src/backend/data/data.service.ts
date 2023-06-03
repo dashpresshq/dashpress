@@ -324,7 +324,8 @@ export class DataApiService implements IDataApiService {
 
     const portalHiddenFields = await PortalFieldsFilterService.getFieldsToHide(
       entity,
-      crudKey
+      crudKey,
+      entityFields.map(({ name }) => name)
     );
 
     const hiddenFields = [...configHiddenFields, ...portalHiddenFields];

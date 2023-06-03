@@ -32,6 +32,7 @@ const CONFIGURATION_SCHEMA: IAppliedSchemaFormConfig<IActionConfig> = {
 
 export const MAIL_GUN_ACTION_INTEGRATION: IActionIntegrationsImplemention = {
   title: "Mail Gun",
+  credentialsKey: "MAILGUN",
   description: "Send emails through Mailgun",
   configurationSchema: CONFIGURATION_SCHEMA,
   connect: async (config: IActionConfig) => config,

@@ -36,6 +36,7 @@ const ACTION_CONFIGURATION_SCHEMA: IAppliedSchemaFormConfig<IAction> = {
 
 export const HTTP_ACTION_INTEGRATION: IActionIntegrationsImplemention = {
   title: "HTTP",
+  credentialsKey: "HTTP",
   description: "Performs HTTP request",
   configurationSchema: {},
   connect: async () => {},

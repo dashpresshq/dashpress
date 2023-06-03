@@ -15,7 +15,6 @@ export function Dashboard() {
   return (
     <BaseDashboard
       dashboardId={HOME_DASHBOARD_KEY}
-      showDemo
       manageLink={NAVIGATION_LINKS.DASHBOARD.MANAGE}
     />
   );

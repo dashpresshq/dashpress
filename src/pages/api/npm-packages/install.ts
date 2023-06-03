@@ -3,7 +3,7 @@ import { requestHandler } from "../../../backend/lib/request";
 
 export default requestHandler(
   {
-    POST: async () => {
+    GET: async () => {
       return await npmPackagesApiController.installPackages();
     },
   },

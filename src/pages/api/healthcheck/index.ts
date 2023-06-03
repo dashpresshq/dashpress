@@ -45,7 +45,7 @@ export default requestHandler(
 
         await bootstrapPortalServices();
 
-        await npmPackagesApiService.installPackages();
+        // await npmPackagesApiService.installPackages();
 
         await tempStorageApiService.bootstrap();
       } catch (error) {

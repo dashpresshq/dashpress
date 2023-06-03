@@ -9,7 +9,6 @@ import { useRouter } from "next/router";
 import { AppLayout } from "../../../_layouts/app";
 import { useDashboardWidgets } from "../dashboard.store";
 import { gridRoot } from "../styles";
-import { DemoVideo } from "./Demo";
 import { DashboardSkeleton } from "../Skeleton";
 import { DetailsCanvas } from "../../data/Table/DetailsCanvas";
 import { DashboardWidget } from "../Widget";
@@ -20,11 +19,10 @@ const Root = styled.div`
 
 interface IProps {
   dashboardId: string;
-  showDemo?: true;
   manageLink: string;
 }
 
-export function BaseDashboard({ dashboardId, showDemo, manageLink }: IProps) {
+export function BaseDashboard({ dashboardId, manageLink }: IProps) {
   const widgets = useDashboardWidgets(dashboardId);
   const router = useRouter();
 
@@ -45,7 +43,6 @@ export function BaseDashboard({ dashboardId, showDemo, manageLink }: IProps) {
           : []
       }
     >
-      {showDemo && <DemoVideo />}
       <ViewStateMachine
         loading={widgets.isLoading}
         error={widgets.error}

@@ -51,8 +51,7 @@ export function FieldsLabelForm({
             </Field>
           ))}
           <FormButton
-            text={crudConfig.FORM_LANG.UPSERT(false)}
-            loadingText={crudConfig.FORM_LANG.UPSERT(true)}
+            text={crudConfig.FORM_LANG.UPSERT}
             isMakingRequest={submitting}
             disabled={pristine}
             icon="save"

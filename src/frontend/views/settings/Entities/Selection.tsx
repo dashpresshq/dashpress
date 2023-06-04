@@ -49,8 +49,7 @@ export function EntitiesSelection({
           setTouched(false);
         }}
         icon="save"
-        text={crudConfig.FORM_LANG.UPSERT(false)}
-        loadingText={crudConfig.FORM_LANG.UPSERT(true)}
+        text={crudConfig.FORM_LANG.UPSERT}
         disabled={!touched}
         isMakingRequest={isMakingRequest}
       />

@@ -10,7 +10,6 @@ import { useNavigationStack, useSetPageDetails } from "frontend/lib/routing";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { LINK_TO_DOCS } from "frontend/views/constants";
 import { USER_PERMISSIONS } from "shared/constants/user";
-import { useMemo } from "react";
 import { ILabelValue } from "types";
 import { userFriendlyCase } from "shared/lib/strings";
 import { AppLayout } from "../../../_layouts/app";
@@ -20,6 +19,13 @@ import {
 } from "../permissions.store";
 import { MutatePermission } from "./MutatePermission";
 import { usePortalExtendedPermissions } from "./Portal";
+
+const adminPermissionList: ILabelValue[] = Object.values(USER_PERMISSIONS).map(
+  (permission) => ({
+    value: permission,
+    label: userFriendlyCase(permission),
+  })
+);
 
 export function RolePermissions() {
   const activeEntities = useActiveEntities();
@@ -33,15 +39,6 @@ export function RolePermissions() {
     viewKey: ADMIN_PERMISSIONS_CRUD_CONFIG.TEXT_LANG.TITLE,
     permission: USER_PERMISSIONS.CAN_MANAGE_PERMISSIONS,
   });
-
-  const adminPermissionList: ILabelValue[] = useMemo(
-    () =>
-      Object.values(USER_PERMISSIONS).map((permission) => ({
-        value: permission,
-        label: userFriendlyCase(permission),
-      })),
-    []
-  );
 
   const isLoading = rolePermissions.isLoading || activeEntities.isLoading;
   const error = rolePermissions.error || activeEntities.error;

@@ -47,29 +47,21 @@ export const useSelectionViews = (): IAppMenuItems[] => {
       order: 20,
     },
     {
-      title: "Actions",
-      icon: Zap,
-      action: ROOT_LINKS_TO_CLEAR_BREADCRUMBS.ACTIONS,
-      isPermissionAllowed: userHasPermission(
-        USER_PERMISSIONS.CAN_MANAGE_INTEGRATIONS
-      ),
-      order: 30,
-    },
-    {
       title: "Settings",
       icon: Settings,
       action: ROOT_LINKS_TO_CLEAR_BREADCRUMBS.SETTINGS,
       isPermissionAllowed: userHasPermission(
         USER_PERMISSIONS.CAN_CONFIGURE_APP
       ),
-      order: 40,
+      order: 30,
     },
+
     {
       title: "Users",
       icon: Users,
       action: ROOT_LINKS_TO_CLEAR_BREADCRUMBS.USERS,
       isPermissionAllowed: userHasPermission(USER_PERMISSIONS.CAN_MANAGE_USERS),
-      order: 50,
+      order: 40,
     },
     {
       title: "Roles",
@@ -77,6 +69,15 @@ export const useSelectionViews = (): IAppMenuItems[] => {
       action: ROOT_LINKS_TO_CLEAR_BREADCRUMBS.ROLES,
       isPermissionAllowed: userHasPermission(
         USER_PERMISSIONS.CAN_MANAGE_PERMISSIONS
+      ),
+      order: 50,
+    },
+    {
+      title: "Actions",
+      icon: Zap,
+      action: ROOT_LINKS_TO_CLEAR_BREADCRUMBS.ACTIONS,
+      isPermissionAllowed: userHasPermission(
+        USER_PERMISSIONS.CAN_MANAGE_INTEGRATIONS
       ),
       order: 60,
     },

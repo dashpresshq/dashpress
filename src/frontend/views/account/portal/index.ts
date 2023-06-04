@@ -1,1 +1,1 @@
-export { PORTAL_ACCOUNT_MENU } from "./main";
+export { usePortalAccountMenu } from "./main";

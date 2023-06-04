@@ -140,8 +140,7 @@ export function FieldsTypeForm({
               </Field>
             ))}
             <FormButton
-              text={CRUD_CONFIG.FORM_LANG.UPSERT(false)}
-              loadingText={CRUD_CONFIG.FORM_LANG.UPSERT(false)}
+              text={CRUD_CONFIG.FORM_LANG.UPSERT}
               icon="save"
               isMakingRequest={submitting}
               disabled={

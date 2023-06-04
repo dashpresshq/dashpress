@@ -105,8 +105,7 @@ export function SchemaForm<T extends Record<string, unknown>>({
                 </Field>
               ))}
             <FormButton
-              text={buttonText(false)}
-              loadingText={buttonText(true)}
+              text={buttonText}
               isMakingRequest={submitting}
               disabled={pristine}
               icon={icon === "no-icon" ? undefined : icon}

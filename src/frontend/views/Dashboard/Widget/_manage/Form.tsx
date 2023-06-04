@@ -275,13 +275,8 @@ export function DashboardWidgetForm({
                 <FormButton
                   text={
                     action === "create"
-                      ? DASHBOARD_WIDGETS_CRUD_CONFIG.FORM_LANG.CREATE(false)
-                      : DASHBOARD_WIDGETS_CRUD_CONFIG.FORM_LANG.UPDATE(false)
-                  }
-                  loadingText={
-                    action === "create"
-                      ? DASHBOARD_WIDGETS_CRUD_CONFIG.FORM_LANG.CREATE(true)
-                      : DASHBOARD_WIDGETS_CRUD_CONFIG.FORM_LANG.UPDATE(true)
+                      ? DASHBOARD_WIDGETS_CRUD_CONFIG.FORM_LANG.CREATE
+                      : DASHBOARD_WIDGETS_CRUD_CONFIG.FORM_LANG.UPDATE
                   }
                   icon={action === "create" ? "add" : "save"}
                   isMakingRequest={submitting}

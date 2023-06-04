@@ -1,1 +1,3 @@
-export const PORTAL_ACCOUNT_MENU = [];
+export const usePortalAccountMenu = () => {
+  return [];
+};

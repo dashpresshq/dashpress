@@ -158,12 +158,10 @@ export function EntityTableTabForm({
             <FormButton
               isMakingRequest={submitting}
               onClick={handleSubmit}
-              text={MAKE_APP_CONFIGURATION_CRUD_CONFIG(
-                "entity_views"
-              ).FORM_LANG.UPSERT(false)}
-              loadingText={MAKE_APP_CONFIGURATION_CRUD_CONFIG(
-                "entity_views"
-              ).FORM_LANG.UPSERT(true)}
+              text={
+                MAKE_APP_CONFIGURATION_CRUD_CONFIG("entity_views").FORM_LANG
+                  .UPSERT
+              }
               disabled={pristine}
               icon="save"
             />

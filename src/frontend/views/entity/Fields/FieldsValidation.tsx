@@ -170,8 +170,7 @@ export function FieldValidationCanvas({
           <Spacer />
           <FormButton
             isMakingRequest={false}
-            text={CRUD_CONFIG.FORM_LANG.UPSERT(false)}
-            loadingText={CRUD_CONFIG.FORM_LANG.UPSERT(true)}
+            text={CRUD_CONFIG.FORM_LANG.UPSERT}
             icon="save"
             disabled={pristine}
           />

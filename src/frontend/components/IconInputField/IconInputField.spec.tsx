@@ -22,8 +22,7 @@ function TestComponent({
             <IconInputField value={values?.icon} />
 
             <FormButton
-              text="Save"
-              loadingText="Save"
+              text={() => "Save"}
               icon="add"
               isMakingRequest={false}
               disabled={pristine}

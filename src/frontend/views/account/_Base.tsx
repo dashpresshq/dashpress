@@ -10,7 +10,7 @@ import { ReactNode } from "react";
 import { Lock, LogOut, User, Settings } from "react-feather";
 import { NAVIGATION_LINKS } from "../../lib/routing/links";
 import { AppLayout } from "../../_layouts/app";
-import { PORTAL_ACCOUNT_MENU } from "./portal";
+import { usePortalAccountMenu } from "./portal";
 
 interface IProps {
   children: ReactNode;
@@ -18,6 +18,7 @@ interface IProps {
 
 export function BaseAccountLayout({ children }: IProps) {
   const router = useRouter();
+  const portalAccountMenu = usePortalAccountMenu();
   const setIsAuthenticated = useIsAuthenticatedStore(
     (store) => store.setIsAuthenticated
   );
@@ -28,7 +29,7 @@ export function BaseAccountLayout({ children }: IProps) {
         <SectionLeft>
           <MenuSection
             menuItems={[
-              ...PORTAL_ACCOUNT_MENU,
+              ...portalAccountMenu,
               {
                 action: NAVIGATION_LINKS.ACCOUNT.PROFILE,
                 name: "Profile",

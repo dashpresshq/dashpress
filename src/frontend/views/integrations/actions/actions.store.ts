@@ -8,9 +8,9 @@ import {
 import { useMutation } from "react-query";
 import { reduceStringToNumber } from "shared/lib/templates/reduceStringToNumber";
 import {
-  HTTP_INTEGRATION_KEY,
   IIntegrationsList,
   IActivatedAction,
+  ActionIntegrationKeys,
 } from "shared/types/actions";
 import { CRUD_CONFIG_NOT_FOUND } from "frontend/lib/makeCrudConfig";
 import { usePasswordStore } from "../password.store";
@@ -49,7 +49,7 @@ export const useActivationConfiguration = (activationId: string) => {
       enabled:
         !!activationId &&
         !!rootPassword &&
-        activationId !== HTTP_INTEGRATION_KEY,
+        activationId !== ActionIntegrationKeys.HTTP,
       defaultData: {},
     }
   );

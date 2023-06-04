@@ -1,8 +1,19 @@
 import { IAppliedSchemaFormConfig } from "shared/form-schemas/types";
 
+export enum ActionIntegrationKeys {
+  HTTP = "http",
+  SMTP = "smtp",
+  SLACK = "slack",
+  TWILIO = "twilio",
+  SENDGRID = "sendgrid",
+  POSTMARK = "postmark",
+  MAILGUN = "mailgun",
+  SEND_IN_BLUE = "sendInBlue",
+}
+
 export interface IActivatedAction {
   activationId: string;
-  integrationKey: string;
+  integrationKey: ActionIntegrationKeys;
   credentialsGroupKey: string;
 }
 
@@ -48,5 +59,4 @@ export type IIntegrationImplementationList = { key: string } & Pick<
   "label" | "configurationSchema"
 >;
 
-export const HTTP_INTEGRATION_KEY = "http";
 export const HTTP_ACTIVATION_ID = "http";

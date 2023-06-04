@@ -18,12 +18,12 @@ import { nanoid } from "nanoid";
 import { INTEGRATIONS_GROUP_CONFIG } from "shared/config-bag/integrations";
 import { TemplateService } from "shared/lib/templates";
 import {
-  HTTP_INTEGRATION_KEY,
   IIntegrationsList,
   IActionInstance,
   IActivatedAction,
   IIntegrationImplementationList,
   HTTP_ACTIVATION_ID,
+  ActionIntegrationKeys,
 } from "shared/types/actions";
 import { IAccountProfile } from "shared/types/user";
 import { ACTION_INTEGRATIONS } from "./integrations";
@@ -172,7 +172,7 @@ export class ActionsApiService implements IApplicationService {
   }
 
   listIntegrationImplementations(
-    integrationKey: string
+    integrationKey: ActionIntegrationKeys
   ): IIntegrationImplementationList[] {
     return Object.entries(
       ACTION_INTEGRATIONS[integrationKey].performsImplementation
@@ -191,13 +191,13 @@ export class ActionsApiService implements IApplicationService {
       {
         activationId: HTTP_ACTIVATION_ID,
         credentialsGroupKey: "none-existent",
-        integrationKey: HTTP_INTEGRATION_KEY,
+        integrationKey: ActionIntegrationKeys.HTTP,
       },
     ];
   }
 
   async activateAction(
-    integrationKey: string,
+    integrationKey: ActionIntegrationKeys,
     configuration: Record<string, string>
   ): Promise<void> {
     validateSchemaRequestBody(
@@ -230,7 +230,7 @@ export class ActionsApiService implements IApplicationService {
     activatedActionId: string
   ): Promise<string> {
     if (activatedActionId === HTTP_ACTIVATION_ID) {
-      return HTTP_INTEGRATION_KEY;
+      return ActionIntegrationKeys.HTTP;
     }
     const activatedAction =
       await this._activatedActionsPersistenceService.getItemOrFail(

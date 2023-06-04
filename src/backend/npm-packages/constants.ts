@@ -3,14 +3,19 @@ import {
   configApiService,
 } from "backend/lib/config/config.service";
 import { CacheAdaptorTypes } from "backend/lib/cache/types";
+import { credentialsApiService } from "backend/integrations-configurations";
+import { DATABASE_CREDENTIAL_GROUP } from "backend/data/fields";
+import { IDataSourceCredentials } from "shared/types/data-sources";
+import { RDMSSources } from "@hadmean/bacteria";
+import { ACTION_INTEGRATIONS } from "backend/actions/integrations";
+import { ActionIntegrationKeys } from "shared/types/actions";
 import { PORTAL_NPM_PACKAGES_CONFIG, PortalNpmPackageDomain } from "./portal";
 import { INpmPackagesConfig } from "./types";
 
-export enum BaseNpmPackageDomain {
+enum BaseNpmPackageDomain {
   FileUpload = "file-upload", // after any file upload is activated
-  Mail = "mail", // after mail is activate
-  Redis = "redis", // if redis is configured
-  // After the credentials setup
+  Mail = "mail",
+  Redis = "redis",
   Postgres = "postgres",
   SQlite = "sqlite",
   MySQl = "mysql",
@@ -27,6 +32,25 @@ export const DatabaseNpmPackageDomains = [
 ];
 
 export type NpmPackageDomain = BaseNpmPackageDomain | PortalNpmPackageDomain;
+
+const shouldDatabaseNpmPackageBeInstalled = async (
+  rdbmsSource: RDMSSources
+) => {
+  const hasDbCredentials = await credentialsApiService.hasGroupKey(
+    DATABASE_CREDENTIAL_GROUP
+  );
+
+  if (!hasDbCredentials) {
+    return true;
+  }
+
+  const dbCredentials =
+    await credentialsApiService.useGroupValue<IDataSourceCredentials>(
+      DATABASE_CREDENTIAL_GROUP
+    );
+
+  return dbCredentials.dataSourceType === rdbmsSource;
+};
 
 const BASE_NPM_PACKAGES_CONFIG: Record<
   BaseNpmPackageDomain,
@@ -48,7 +72,13 @@ const BASE_NPM_PACKAGES_CONFIG: Record<
         version: "^6.8.0",
       },
     ],
-    shouldInstall: async () => true,
+    shouldInstall: async () =>
+      await credentialsApiService.hasGroupKey({
+        key: ACTION_INTEGRATIONS[ActionIntegrationKeys.SMTP].credentialsKey,
+        fields: Object.keys(
+          ACTION_INTEGRATIONS[ActionIntegrationKeys.SMTP].configurationSchema
+        ),
+      }),
   },
   [BaseNpmPackageDomain.Redis]: {
     packages: [
@@ -72,7 +102,8 @@ const BASE_NPM_PACKAGES_CONFIG: Record<
         version: "^8.7.3",
       },
     ],
-    shouldInstall: async () => true,
+    shouldInstall: async () =>
+      await shouldDatabaseNpmPackageBeInstalled(RDMSSources.Postgres),
   },
   [BaseNpmPackageDomain.SQlite]: {
     packages: [
@@ -81,7 +112,8 @@ const BASE_NPM_PACKAGES_CONFIG: Record<
         version: "^5.0.8",
       },
     ],
-    shouldInstall: async () => true,
+    shouldInstall: async () =>
+      await shouldDatabaseNpmPackageBeInstalled(RDMSSources.Sqlite),
   },
   [BaseNpmPackageDomain.MySQl]: {
     packages: [
@@ -90,7 +122,8 @@ const BASE_NPM_PACKAGES_CONFIG: Record<
         version: "^2.3.3",
       },
     ],
-    shouldInstall: async () => true,
+    shouldInstall: async () =>
+      await shouldDatabaseNpmPackageBeInstalled(RDMSSources.MySql),
   },
   [BaseNpmPackageDomain.MsSQL]: {
     packages: [
@@ -99,7 +132,8 @@ const BASE_NPM_PACKAGES_CONFIG: Record<
         version: "^8.1.2",
       },
     ],
-    shouldInstall: async () => true,
+    shouldInstall: async () =>
+      await shouldDatabaseNpmPackageBeInstalled(RDMSSources.MsSql),
   },
   [BaseNpmPackageDomain.Oracle]: {
     packages: [
@@ -108,7 +142,7 @@ const BASE_NPM_PACKAGES_CONFIG: Record<
         version: "^5.4.0",
       },
     ],
-    shouldInstall: async () => true,
+    shouldInstall: async () => false,
   },
 };
 

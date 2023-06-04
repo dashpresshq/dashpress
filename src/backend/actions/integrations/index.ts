@@ -1,5 +1,5 @@
 import {
-  HTTP_INTEGRATION_KEY,
+  ActionIntegrationKeys,
   IActionIntegrationsImplemention,
 } from "shared/types/actions";
 import { HTTP_ACTION_INTEGRATION } from "./http";
@@ -12,17 +12,17 @@ import { SMTP_ACTION_INTEGRATION } from "./smtp";
 import { TWILIO_ACTION_INTEGRATION } from "./twilio";
 
 export const ACTION_INTEGRATIONS: Record<
-  string,
+  ActionIntegrationKeys,
   IActionIntegrationsImplemention
 > = {
-  [HTTP_INTEGRATION_KEY]: HTTP_ACTION_INTEGRATION,
-  smtp: SMTP_ACTION_INTEGRATION,
-  slack: SLACK_ACTION_INTEGRATION,
-  sendgrid: SEND_GRID_ACTION_INTEGRATION,
-  mailgun: MAIL_GUN_ACTION_INTEGRATION,
-  twilio: TWILIO_ACTION_INTEGRATION,
-  postmark: POST_MARK_ACTION_INTEGRATION,
-  sendInBlue: SENDINBLUE_ACTION_INTEGRATION,
+  [ActionIntegrationKeys.HTTP]: HTTP_ACTION_INTEGRATION,
+  [ActionIntegrationKeys.SMTP]: SMTP_ACTION_INTEGRATION,
+  [ActionIntegrationKeys.SLACK]: SLACK_ACTION_INTEGRATION,
+  [ActionIntegrationKeys.SENDGRID]: SEND_GRID_ACTION_INTEGRATION,
+  [ActionIntegrationKeys.MAILGUN]: MAIL_GUN_ACTION_INTEGRATION,
+  [ActionIntegrationKeys.TWILIO]: TWILIO_ACTION_INTEGRATION,
+  [ActionIntegrationKeys.POSTMARK]: POST_MARK_ACTION_INTEGRATION,
+  [ActionIntegrationKeys.SEND_IN_BLUE]: SENDINBLUE_ACTION_INTEGRATION,
   // zapier: SLACK_ACTION_INTEGRATION,
   // stripe: SLACK_ACTION_INTEGRATION,
 };

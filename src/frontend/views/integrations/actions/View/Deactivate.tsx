@@ -1,5 +1,5 @@
 import { Stack, Typo, Spacer } from "@hadmean/chromista";
-import { HTTP_INTEGRATION_KEY, IIntegrationsList } from "shared/types/actions";
+import { ActionIntegrationKeys, IIntegrationsList } from "shared/types/actions";
 import { SchemaForm } from "frontend/components/SchemaForm";
 import { useDeactivateActionMutation } from "../actions.store";
 
@@ -13,7 +13,7 @@ export function Deactivate({ integrationDetail, activationId }: IProps) {
 
   const deactivationKey = `DEACTIVATE_${integrationDetail.key}`.toUpperCase();
 
-  if (integrationDetail.key === HTTP_INTEGRATION_KEY) {
+  if (integrationDetail.key === ActionIntegrationKeys.HTTP) {
     return (
       <Stack justify="center">
         <Typo.SM textStyle="italic">

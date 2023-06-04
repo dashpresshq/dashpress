@@ -43,7 +43,7 @@ export function BaseActionsLayout({ children }: IProps) {
 
   const activeList = [
     ...activeActionList.data.map(({ integrationKey }) => integrationKey),
-  ];
+  ] as string[];
 
   return (
     <AppLayout>

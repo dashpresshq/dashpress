@@ -1,15 +1,15 @@
 import { createConfigDomainPersistenceService } from "backend/lib/config-persistence";
-import { IActivatedAction } from "shared/types/actions";
+import { ActionIntegrationKeys, IActivatedAction } from "shared/types/actions";
 
 const TEST_ACTIVATED_ACTIONS: IActivatedAction[] = [
   {
     activationId: "smtp-activation-id-1",
-    integrationKey: "smtp",
+    integrationKey: ActionIntegrationKeys.SMTP,
     credentialsGroupKey: "SMTP",
   },
   {
     activationId: "slack-activation-id-2",
-    integrationKey: "slack",
+    integrationKey: ActionIntegrationKeys.SLACK,
     credentialsGroupKey: "SLACK",
   },
 ];

@@ -1,4 +1,4 @@
-import { IActionInstance } from "shared/types/actions";
+import { ActionIntegrationKeys, IActionInstance } from "shared/types/actions";
 import { ActionsApiService, actionsApiService } from "./actions.service";
 
 export class ActionsApiController {
@@ -8,7 +8,7 @@ export class ActionsApiController {
     return this._actionsApiService.listActionIntegrations();
   }
 
-  listIntegrationImplementations(integrationKey: string) {
+  listIntegrationImplementations(integrationKey: ActionIntegrationKeys) {
     return this._actionsApiService.listIntegrationImplementations(
       integrationKey
     );
@@ -19,7 +19,7 @@ export class ActionsApiController {
   }
 
   async activateAction(
-    integrationKey: string,
+    integrationKey: ActionIntegrationKeys,
     configuration: Record<string, string>
   ) {
     await this._actionsApiService.activateAction(integrationKey, configuration);

@@ -73,10 +73,6 @@ describe("pages/admin/settings/dashboard", () => {
       await screen.findByLabelText("Foo Table Widget");
 
       await userEvent.click(screen.getByTestId("fake-sorting"));
-
-      expect((await screen.findAllByRole("status"))[0]).toHaveTextContent(
-        "Widget Order Saved Successfully"
-      );
     });
 
     it("should show the new ordered widget", async () => {

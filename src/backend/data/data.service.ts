@@ -1,5 +1,5 @@
 import { NotFoundError, progammingError } from "backend/lib/errors";
-import { QueryFilter } from "shared/types/data";
+import { DataCrudKeys, QueryFilter } from "shared/types/data";
 import {
   actionsApiService,
   ActionsApiService,
@@ -11,9 +11,9 @@ import { IEntityField } from "shared/types/db";
 import { TemplateService } from "shared/lib/templates";
 import { FilterOperators, PaginatedData } from "@hadmean/protozoa";
 import { IAccountProfile } from "shared/types/user";
-import { AppConfigurationKeys } from "shared/configurations";
+import { CRUD_KEY_CONFIG } from "shared/configurations/permissions";
 import { rDBMSDataApiService, RDBMSDataApiService } from "./data-access/RDBMS";
-import { DataCrudKeys, IDataApiService, IPaginationFilters } from "./types";
+import { IDataApiService, IPaginationFilters } from "./types";
 import {
   ConfigurationApiService,
   configurationApiService,
@@ -28,13 +28,6 @@ import { makeTableData } from "./utils";
 const DEFAULT_LIST_LIMIT = 50;
 
 const GOOD_FIELD_TYPES_FOR_LIST: IEntityField["type"][] = ["enum", "string"];
-
-const CRUD_KEY_CONFIG: Record<DataCrudKeys, AppConfigurationKeys> = {
-  create: "hidden_entity_create_columns",
-  update: "hidden_entity_update_columns",
-  details: "hidden_entity_details_columns",
-  table: "hidden_entity_table_columns",
-};
 
 export class DataApiService implements IDataApiService {
   constructor(

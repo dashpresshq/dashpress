@@ -1,0 +1,1 @@
+export { usePortalHiddenEntityColumns } from "./main";

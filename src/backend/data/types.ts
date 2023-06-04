@@ -10,8 +10,6 @@ export interface IPaginationFilters {
   sortBy?: string;
 }
 
-export type DataCrudKeys = "create" | "update" | "table" | "details";
-
 export const FOR_CODE_COV = 1;
 
 export interface IDataApiService extends IApplicationService {

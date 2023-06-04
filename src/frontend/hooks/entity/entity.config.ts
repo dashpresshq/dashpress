@@ -8,6 +8,9 @@ import {
   getEntitySelections,
 } from "shared/logic/entities";
 import { MAKE_CRUD_CONFIG } from "frontend/lib/makeCrudConfig";
+import { DataStateKeys } from "@hadmean/protozoa";
+import { DataCrudKeys } from "shared/types/data";
+import { CRUD_KEY_CONFIG } from "shared/configurations/permissions";
 import {
   getFieldTypeBoundedValidations,
   guessEntityValidations,
@@ -15,11 +18,9 @@ import {
 import { userFriendlyCase } from "../../../shared/lib/strings";
 import { FIELD_TYPES_CONFIG_MAP } from "../../../shared/validations";
 import { useEntityFields } from "./entity.store";
-import {
-  CONFIGURATION_KEYS,
-  IEntityCrudSettings,
-} from "../../../shared/configurations";
+import { IEntityCrudSettings } from "../../../shared/configurations";
 import { useEntityConfiguration } from "../configuration/configuration.store";
+import { usePortalHiddenEntityColumns } from "./portal";
 
 export function useEntitySlug(overrideValue?: string) {
   const routeParam = useRouteParam("entity");
@@ -173,16 +174,22 @@ export function useEntityCrudSettings(paramEntity?: string) {
   );
 }
 
-export function useSelectedEntityColumns(
-  key: keyof Pick<
-    typeof CONFIGURATION_KEYS,
-    | "hidden_entity_table_columns"
-    | "hidden_entity_create_columns"
-    | "hidden_entity_update_columns"
-    | "hidden_entity_details_columns"
-  >,
+export function useHiddenEntityColumns(
+  crudKey: DataCrudKeys,
   overrideEntity?: string
-) {
+): DataStateKeys<string[]> {
   const entity = useEntitySlug();
-  return useEntityConfiguration<string[]>(key, overrideEntity || entity);
+  const entityConfig = useEntityConfiguration<string[]>(
+    CRUD_KEY_CONFIG[crudKey],
+    overrideEntity || entity
+  );
+
+  const portalHiddenEntities = usePortalHiddenEntityColumns(entity, crudKey);
+
+  return {
+    data: [...portalHiddenEntities.data, ...entityConfig.data],
+    error: portalHiddenEntities.error || entityConfig.error,
+    isLoading: portalHiddenEntities.isLoading || entityConfig.isLoading,
+    isRefetching: false,
+  };
 }

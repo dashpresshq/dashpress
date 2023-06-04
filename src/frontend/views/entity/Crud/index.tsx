@@ -17,10 +17,12 @@ import {
   useEntityCrudSettings,
   useEntityFieldLabels,
   useEntitySlug,
-  useSelectedEntityColumns,
 } from "../../../hooks/entity/entity.config";
 import { BaseEntitySettingsLayout } from "../_Base";
-import { useUpsertConfigurationMutation } from "../../../hooks/configuration/configuration.store";
+import {
+  useEntityConfiguration,
+  useUpsertConfigurationMutation,
+} from "../../../hooks/configuration/configuration.store";
 import { useEntityFields } from "../../../hooks/entity/entity.store";
 import { SelectionTab } from "./SelectionTab";
 
@@ -37,17 +39,21 @@ function useEntityCrudView() {
 
   const getEntityFieldLabels = useEntityFieldLabels();
 
-  const hiddenTableColumns = useSelectedEntityColumns(
-    "hidden_entity_table_columns"
+  const hiddenTableColumns = useEntityConfiguration<string[]>(
+    "hidden_entity_table_columns",
+    entity
   );
-  const hiddenCreateColumns = useSelectedEntityColumns(
-    "hidden_entity_create_columns"
+  const hiddenCreateColumns = useEntityConfiguration<string[]>(
+    "hidden_entity_create_columns",
+    entity
   );
-  const hiddenUpdateColumns = useSelectedEntityColumns(
-    "hidden_entity_update_columns"
+  const hiddenUpdateColumns = useEntityConfiguration<string[]>(
+    "hidden_entity_update_columns",
+    entity
   );
-  const hiddenDetailsColumns = useSelectedEntityColumns(
-    "hidden_entity_details_columns"
+  const hiddenDetailsColumns = useEntityConfiguration<string[]>(
+    "hidden_entity_details_columns",
+    entity
   );
 
   const upsertTableColumnsMutation = useUpsertConfigurationMutation(

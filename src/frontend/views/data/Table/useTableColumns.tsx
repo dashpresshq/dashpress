@@ -4,7 +4,7 @@ import {
   useEntityFieldLabels,
   useEntityFieldSelections,
   useProcessedEntityFieldTypes,
-  useSelectedEntityColumns,
+  useHiddenEntityColumns,
 } from "frontend/hooks/entity/entity.config";
 import {
   useEntityIdField,
@@ -81,10 +81,7 @@ export const useTableColumns = (
   const entityCrudSettings = useEntityCrudSettings(entity);
   const entityFields = useEntityFields(entity);
   const entityToOneReferenceFields = useEntityToOneReferenceFields(entity);
-  const hiddenTableColumns = useSelectedEntityColumns(
-    "hidden_entity_table_columns",
-    entity
-  );
+  const hiddenTableColumns = useHiddenEntityColumns("table", entity);
   const defaultDateFormat = useAppConfiguration<string>("default_date_format");
 
   const idField = useEntityIdField(entity);

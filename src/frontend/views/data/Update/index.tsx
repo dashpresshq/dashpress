@@ -8,7 +8,7 @@ import {
   useEntityCrudConfig,
   useEntityId,
   useEntitySlug,
-  useSelectedEntityColumns,
+  useHiddenEntityColumns,
 } from "../../../hooks/entity/entity.config";
 import {
   useEntityDataDetails,
@@ -43,9 +43,7 @@ export function EntityUpdate() {
 
   const userHasPermission = useUserHasPermission();
 
-  const hiddenUpdateColumns = useSelectedEntityColumns(
-    "hidden_entity_update_columns"
-  );
+  const hiddenUpdateColumns = useHiddenEntityColumns("update");
 
   const dataDetails = useEntityDataDetails(entity, id);
 

@@ -2,8 +2,8 @@ import {
   makeDeleteRequest,
   makePostRequest,
   MutationHelpers,
-  useApi,
   useApiMutateOptimisticOptions,
+  useStorageApi,
 } from "@hadmean/protozoa";
 import { isRouterParamEnabled } from "frontend/hooks";
 import { useMutation } from "react-query";
@@ -23,7 +23,7 @@ export const ADMIN_ROLE_PERMISSION_ENDPOINT = (roleId: string) =>
 export function useRolePermissions() {
   const roleId = useRoleIdFromRouteParam();
 
-  return useApi<string[]>(ADMIN_ROLE_PERMISSION_ENDPOINT(roleId), {
+  return useStorageApi<string[]>(ADMIN_ROLE_PERMISSION_ENDPOINT(roleId), {
     enabled: isRouterParamEnabled(roleId),
     errorMessage: ADMIN_PERMISSIONS_CRUD_CONFIG.TEXT_LANG.NOT_FOUND,
     defaultData: [],

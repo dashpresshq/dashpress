@@ -7,7 +7,7 @@ import { AppLayout } from "../../../_layouts/app";
 import {
   useEntityCrudConfig,
   useEntitySlug,
-  useSelectedEntityColumns,
+  useHiddenEntityColumns,
 } from "../../../hooks/entity/entity.config";
 import { useEntityDataCreationMutation } from "../../../hooks/data/data.store";
 import {
@@ -49,9 +49,7 @@ export function EntityCreate() {
     ),
   });
 
-  const hiddenCreateColumns = useSelectedEntityColumns(
-    "hidden_entity_create_columns"
-  );
+  const hiddenCreateColumns = useHiddenEntityColumns("create");
 
   const { backLink } = useNavigationStack();
 

@@ -7,7 +7,7 @@ import {
   useEntityFieldLabels,
   useEntityFieldSelections,
   useProcessedEntityFieldTypes,
-  useSelectedEntityColumns,
+  useHiddenEntityColumns,
 } from "../../../hooks/entity/entity.config";
 import { useEntityDataDetails } from "../../../hooks/data/data.store";
 import {
@@ -30,10 +30,7 @@ export function EntityDetailsView({
   const dataDetails = useEntityDataDetails(entity, id);
   const entityFields = useEntityFields(entity);
   const entityFieldTypes = useProcessedEntityFieldTypes(entity);
-  const hiddenDetailsColumns = useSelectedEntityColumns(
-    "hidden_entity_details_columns",
-    entity
-  );
+  const hiddenDetailsColumns = useHiddenEntityColumns("details", entity);
   const defaultDateFormat = useAppConfiguration<string>("default_date_format");
   const getEntityFieldLabels = useEntityFieldLabels(entity);
   const entityToOneReferenceFields = useEntityToOneReferenceFields(entity);

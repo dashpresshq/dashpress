@@ -1,6 +1,7 @@
 /* eslint-disable max-classes-per-file */
 import noop from "lodash/noop";
-import { DataCrudKeys, IDataApiService } from "../types";
+import { DataCrudKeys } from "shared/types/data";
+import { IDataApiService } from "../types";
 
 export class PortalDataHooksService {
   static async beforeCreate({

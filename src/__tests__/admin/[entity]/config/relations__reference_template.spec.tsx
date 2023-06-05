@@ -40,7 +40,7 @@ describe("pages/admin/[entity]/config/relations", () => {
         </AppWrapper>
       );
 
-      const currentTab = screen.getByRole("tabpanel");
+      const currentTab = await screen.findByRole("tabpanel");
 
       await userEvent.clear(
         await within(currentTab).findByLabelText("Display Format")
@@ -69,7 +69,7 @@ describe("pages/admin/[entity]/config/relations", () => {
         </AppWrapper>
       );
 
-      const currentTab = screen.getByRole("tabpanel");
+      const currentTab = await screen.findByRole("tabpanel");
 
       await userEvent.clear(
         await within(currentTab).findByLabelText("Display Format")

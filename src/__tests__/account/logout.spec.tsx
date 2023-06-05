@@ -27,7 +27,9 @@ describe("pages/account/logout", () => {
       </AppWrapper>
     );
 
-    await userEvent.click(screen.getByRole("button", { name: "Log Out" }));
+    await userEvent.click(
+      await screen.findByRole("button", { name: "Log Out" })
+    );
 
     await waitFor(() => {
       expect(replaceMock).toHaveBeenCalledWith("/auth");

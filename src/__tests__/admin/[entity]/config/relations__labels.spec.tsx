@@ -28,7 +28,7 @@ describe("pages/admin/[entity]/config/relations", () => {
         </AppWrapper>
       );
 
-      const currentTab = screen.getByRole("tabpanel");
+      const currentTab = await screen.findByRole("tabpanel");
 
       await waitFor(() => {
         expect(
@@ -55,7 +55,7 @@ describe("pages/admin/[entity]/config/relations", () => {
         </AppWrapper>
       );
 
-      const currentTab = screen.getByRole("tabpanel");
+      const currentTab = await screen.findByRole("tabpanel");
 
       await userEvent.clear(
         await within(currentTab).findByLabelText("related-entity-2")
@@ -88,7 +88,7 @@ describe("pages/admin/[entity]/config/relations", () => {
         </AppWrapper>
       );
 
-      const currentTab = screen.getByRole("tabpanel");
+      const currentTab = await screen.findByRole("tabpanel");
 
       await waitFor(() => {
         expect(

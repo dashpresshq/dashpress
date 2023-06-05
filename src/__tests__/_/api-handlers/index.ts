@@ -8,6 +8,7 @@ import { configApiHandlers } from "./config";
 import { dashboardApiHandlers } from "./dashboard";
 import { integrationsApiHandlers } from "./integrations";
 import { versionApiHandlers } from "./versions";
+import { portalApiHandlers } from "./portal";
 
 export const apiHandlers = [
   ...setupApiHandlers,
@@ -20,4 +21,5 @@ export const apiHandlers = [
   ...configApiHandlers,
   ...dashboardApiHandlers,
   ...versionApiHandlers,
+  ...portalApiHandlers,
 ];

@@ -1,0 +1,1 @@
+export { portalApiHandlers } from "./main";

@@ -38,7 +38,7 @@ describe("pages/integrations/variables => credentials", () => {
         </AuthenticatedAppWrapper>
       );
 
-      const priviledgeSection = screen.getByLabelText(
+      const priviledgeSection = await screen.findByLabelText(
         "constants priviledge section"
       );
 
@@ -73,7 +73,7 @@ describe("pages/integrations/variables => credentials", () => {
           <ManageVariables />
         </AuthenticatedAppWrapper>
       );
-      const priviledgeSection = screen.getByLabelText(
+      const priviledgeSection = await screen.findByLabelText(
         "credentials priviledge section"
       );
 
@@ -112,7 +112,9 @@ describe("pages/integrations/variables => credentials", () => {
         </AuthenticatedAppWrapper>
       );
 
-      await userEvent.click(screen.getByRole("tab", { name: "Secrets" }));
+      await userEvent.click(
+        await screen.findByRole("tab", { name: "Secrets" })
+      );
 
       const table = screen.getByRole("table");
 
@@ -151,7 +153,9 @@ describe("pages/integrations/variables => credentials", () => {
         "credentials priviledge section"
       );
 
-      await userEvent.click(screen.getByRole("tab", { name: "Secrets" }));
+      await userEvent.click(
+        await screen.findByRole("tab", { name: "Secrets" })
+      );
 
       await userEvent.type(
         within(priviledgeSection).getByLabelText("Password"),
@@ -192,7 +196,9 @@ describe("pages/integrations/variables => credentials", () => {
         "credentials priviledge section"
       );
 
-      await userEvent.click(screen.getByRole("tab", { name: "Secrets" }));
+      await userEvent.click(
+        await screen.findByRole("tab", { name: "Secrets" })
+      );
 
       await userEvent.type(
         within(priviledgeSection).getByLabelText("Password"),
@@ -264,7 +270,9 @@ describe("pages/integrations/variables => credentials", () => {
         </AuthenticatedAppWrapper>
       );
 
-      await userEvent.click(screen.getByRole("tab", { name: "Secrets" }));
+      await userEvent.click(
+        await screen.findByRole("tab", { name: "Secrets" })
+      );
 
       await userEvent.click(
         await screen.findByRole(
@@ -315,7 +323,9 @@ describe("pages/integrations/variables => credentials", () => {
         </AuthenticatedAppWrapper>
       );
 
-      await userEvent.click(screen.getByRole("tab", { name: "Secrets" }));
+      await userEvent.click(
+        await screen.findByRole("tab", { name: "Secrets" })
+      );
 
       const table = screen.getByRole("table");
 
@@ -373,7 +383,9 @@ describe("pages/integrations/variables => credentials", () => {
         </AuthenticatedAppWrapper>
       );
 
-      await userEvent.click(screen.getByRole("tab", { name: "Secrets" }));
+      await userEvent.click(
+        await screen.findByRole("tab", { name: "Secrets" })
+      );
 
       const tableRows = await screen.findAllByRole("row");
 

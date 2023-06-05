@@ -29,7 +29,10 @@ describe("pages/account/password", () => {
         <AccountPassword />
       </AppWrapper>
     );
-    await userEvent.type(screen.getByLabelText("Old Password"), "Old Password");
+    await userEvent.type(
+      await screen.findByLabelText("Old Password"),
+      "Old Password"
+    );
     await userEvent.type(screen.getByLabelText("New Password"), "New Password");
     await userEvent.type(
       screen.getByLabelText("New Password Again"),
@@ -54,7 +57,10 @@ describe("pages/account/password", () => {
       </AppWrapper>
     );
 
-    await userEvent.type(screen.getByLabelText("Old Password"), "Old Password");
+    await userEvent.type(
+      await screen.findByLabelText("Old Password"),
+      "Old Password"
+    );
     await userEvent.type(screen.getByLabelText("New Password"), "New Password");
     await userEvent.type(
       screen.getByLabelText("New Password Again"),

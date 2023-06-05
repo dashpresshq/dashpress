@@ -11,6 +11,7 @@ interface IProps {
 }
 
 // TODO Card Widgets: targets
+// TODO allow number | [number, number]
 
 export function SummaryWidget({ config, data }: IProps) {
   const summaryData = SummaryCardWidgetSchema.parse(data);

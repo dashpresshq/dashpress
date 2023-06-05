@@ -25,7 +25,7 @@ describe("pages/roles/create", () => {
       </AppWrapper>
     );
 
-    await userEvent.type(screen.getByLabelText("Name"), "Some New Role");
+    await userEvent.type(await screen.findByLabelText("Name"), "Some New Role");
 
     await userEvent.click(screen.getByRole("button", { name: "Create Role" }));
 

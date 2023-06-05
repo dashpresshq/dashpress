@@ -36,7 +36,9 @@ describe("pages/admin/settings/dashboard", () => {
         </AppWrapper>
       );
 
-      await userEvent.click(screen.getByRole("button", { name: "Done" }));
+      await userEvent.click(
+        await screen.findByRole("button", { name: "Done" })
+      );
 
       expect(replaceMock).toHaveBeenCalledWith("/");
     });
@@ -55,7 +57,7 @@ describe("pages/admin/settings/dashboard", () => {
       );
 
       await userEvent.click(
-        screen.getByRole("button", { name: "Add New Dashboard Widget" })
+        await screen.findByRole("button", { name: "Add New Dashboard Widget" })
       );
 
       expect(pushMock).toHaveBeenCalledWith(

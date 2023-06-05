@@ -68,7 +68,7 @@ describe("pages/admin/[entity]/config/crud", () => {
         </AppWrapper>
       );
 
-      const currentTab = screen.getByRole("tabpanel");
+      const currentTab = await screen.findByRole("tabpanel");
 
       await waitFor(() => {
         expect(
@@ -212,9 +212,9 @@ describe("pages/admin/[entity]/config/crud", () => {
       </AppWrapper>
     );
 
-    expect(screen.getByRole("tab", { selected: true })).toHaveTextContent(
-      "Delete"
-    );
+    expect(
+      await screen.findByRole("tab", { selected: true })
+    ).toHaveTextContent("Delete");
 
     expect(
       screen.queryByRole("checkbox", {

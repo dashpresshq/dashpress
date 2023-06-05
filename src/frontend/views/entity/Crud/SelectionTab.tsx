@@ -46,10 +46,6 @@ export function SelectionTab({
     selectMutiple(columns?.hidden || []);
   }, [columns?.hidden]);
 
-  const enableDisableLabel = toggling?.enabled
-    ? `Disable ${toggling.label} Functionality`
-    : `Enable ${toggling?.label} Functionality`;
-
   return (
     <ViewStateMachine
       error={error}
@@ -60,10 +56,10 @@ export function SelectionTab({
         {toggling && toggling.onToggle && (
           <FormButton
             isMakingRequest={false}
-            icon={toggling?.enabled ? "check" : "ban"}
+            icon={toggling?.enabled ? "check" : "square"}
             size="sm"
             isInverse={toggling.enabled}
-            text={() => enableDisableLabel}
+            text={() => `Enable ${toggling?.label} Functionality`}
             onClick={() => toggling.onToggle()}
           />
         )}

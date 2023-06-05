@@ -23,22 +23,40 @@ export const ENTITY_TABLE_PATH = (entity: string) =>
 export const ENTITY_COUNT_PATH = (entity: string) =>
   `/api/data/${entity}/count`;
 
-export const ENTITY_DETAILS_PATH = (entity: string, id: string) =>
-  `/api/data/${entity}/${id}`;
+export const ENTITY_DETAILS_PATH = (
+  entity: string,
+  id: string,
+  column?: string
+) => {
+  const baseLink = `/api/data/${entity}/${id}`;
+
+  if (column) {
+    return `${baseLink}?column=${column}`;
+  }
+  return baseLink;
+};
 
 export const ENTITY_REFERENCE_PATH = (entity: string, id: string) =>
   `/api/data/${entity}/${id}/reference`;
 
 export const ENTITY_LIST_PATH = (entity: string) => `/api/data/${entity}/list`;
 
-export const useEntityDataDetails = (entity: string, id: string) => {
+export const useEntityDataDetails = (
+  entity: string,
+  id: string,
+  column?: string
+) => {
   const entityCrudConfig = useEntityCrudConfig(entity);
 
-  return useApi<Record<string, string>>(ENTITY_DETAILS_PATH(entity, id), {
-    errorMessage: entityCrudConfig.TEXT_LANG.NOT_FOUND,
-    enabled: !!id && !!entity && id !== SLUG_LOADING_VALUE,
-    defaultData: {},
-  });
+  return useApi<Record<string, string>>(
+    ENTITY_DETAILS_PATH(entity, id, column),
+    {
+      errorMessage: entityCrudConfig.TEXT_LANG.NOT_FOUND,
+      enabled: !!id && !!entity && id !== SLUG_LOADING_VALUE,
+      defaultData: {},
+      returnUndefinedOnError: true, // TODO remove automatic 404
+    }
+  );
 };
 
 const buildFilterCountQueryString = (

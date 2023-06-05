@@ -115,7 +115,7 @@ describe("Request Validations => queryFilterValidationImpl", () => {
     expect(res._getStatusCode()).toBe(400);
     expect(res._getJSONData()).toMatchInlineSnapshot(`
       {
-        "message": "Invalid field 'some-invalid-field' for tests",
+        "message": "Invalid field 'some-invalid-field' for 'tests'",
         "method": "GET",
         "name": "BadRequestError",
         "path": "",

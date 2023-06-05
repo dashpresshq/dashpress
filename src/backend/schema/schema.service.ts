@@ -100,10 +100,34 @@ export class SchemasApiService implements IApplicationService {
             return column$;
           }),
           relations: entity.relations.map((relation) => {
+            // eslint-disable-next-line prefer-destructuring
+            let joinColumnOptions: IDBSchema["relations"][0]["joinColumnOptions"] =
+              relation.joinColumnOptions;
+
+            if (relation.relationType === "OneToOne" && !joinColumnOptions) {
+              const joinTable = relation.relatedTable;
+
+              const joinTableDetails = rawEntity.find(
+                (eachRawEntity) => eachRawEntity.name === joinTable
+              );
+
+              const otherRelation = joinTableDetails.relations.find(
+                (relationEntity) => relationEntity.relatedTable === entity.name
+              );
+
+              joinColumnOptions = [
+                {
+                  name: otherRelation.joinColumnOptions[0].referencedColumnName,
+                  referencedColumnName: otherRelation.joinColumnOptions[0].name,
+                  tag: "inverse",
+                },
+              ];
+            }
+
             const relation$: IDBSchema["relations"][0] = {
               table: relation.relatedTable,
               relationType: relation.relationType,
-              joinColumnOptions: relation.joinColumnOptions,
+              joinColumnOptions,
             };
             return relation$;
           }),

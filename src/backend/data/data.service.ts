@@ -91,22 +91,23 @@ export class DataApiService implements IDataApiService {
 
   async showData(
     entity: string,
-    id: string | number
+    id: string | number,
+    column?: string
   ): Promise<Record<string, unknown>> {
-    const [fieldsToShow, primaryField] = await Promise.all([
+    const [fieldsToShow, columnField] = await Promise.all([
       this.getAllowedCrudsFieldsToShow(entity, "details"),
-      this._entitiesApiService.getEntityPrimaryField(entity),
+      column || this._entitiesApiService.getEntityPrimaryField(entity),
     ]);
     const data = await this.read<Record<string, unknown>>(
       entity,
       fieldsToShow,
       {
-        [primaryField]: id,
+        [columnField]: id,
       }
     );
     if (!data) {
       throw new NotFoundError(
-        `Entity '${entity}' with id '${id}' is not found`
+        `Entity '${entity}' with '${columnField}' '${id}' is not found`
       );
     }
     return data;

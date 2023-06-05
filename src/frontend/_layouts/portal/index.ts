@@ -1,1 +1,1 @@
-export { processThemeColors, PRO_THEMES } from "./main";
+export { processThemeColors, usePortalThemes } from "./main";

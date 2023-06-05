@@ -164,7 +164,7 @@ return [...actual, ...relative];
         title: userFriendlyCase(`${firstEntity.value}`),
         _type: "table",
         entity: firstEntity.value,
-        script: `return await $.query('SELECT * FROM ${firstEntity.value} LIMIT 5')`,
+        script: `return await $.query('SELECT * FROM "${firstEntity.value}" LIMIT 5')`,
       });
     }
 

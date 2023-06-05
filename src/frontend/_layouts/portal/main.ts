@@ -10,4 +10,4 @@ export const processThemeColors = (
   return { primaryColor, theme };
 };
 
-export const PRO_THEMES = [];
+export const usePortalThemes = () => ({});

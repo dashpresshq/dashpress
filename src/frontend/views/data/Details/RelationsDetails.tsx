@@ -49,7 +49,7 @@ export function EntityRelationDetails() {
       crudSetting: childEntityCrudSettings.data?.update,
     },
   ];
-
+  // TODO if details === undefined, then show a create field and redirect back here
   return (
     <DetailsLayout entity={entity} menuKey={childEntity}>
       <SectionBox

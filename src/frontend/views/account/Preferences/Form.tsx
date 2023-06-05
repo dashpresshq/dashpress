@@ -5,18 +5,20 @@ import { IUserPreferences } from "shared/types/user";
 import { userFriendlyCase } from "shared/lib/strings";
 import uniqBy from "lodash/uniqBy";
 import { useEffect } from "react";
-import { PRO_THEMES } from "frontend/_layouts/portal";
+import { usePortalThemes } from "frontend/_layouts/portal";
 import { ACCOUNT_PREFERENCES_CRUD_CONFIG } from "../constants";
 
 export function UserPreferencesForm({
   onSubmit,
   initialValues,
 }: IFormProps<IUserPreferences>) {
+  const portalThemes = usePortalThemes();
+
   useEffect(() => {
     UPDATE_USER_PREFERENCES_FORM_SCHEMA.theme.selections = uniqBy(
       [
         ...UPDATE_USER_PREFERENCES_FORM_SCHEMA.theme.selections,
-        ...Object.keys(PRO_THEMES).map((theme) => ({
+        ...Object.keys(portalThemes).map((theme) => ({
           value: theme,
           label: userFriendlyCase(theme),
         })),

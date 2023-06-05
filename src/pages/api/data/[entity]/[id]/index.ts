@@ -1,5 +1,6 @@
 import { DataActionType } from "shared/configurations";
 import { IAccountProfile } from "shared/types/user";
+import { validateEntityFields } from "backend/lib/request/validations/implementations/_validateEntityField";
 import { dataApiController } from "../../../../../backend/data/data.controller";
 import { requestHandler } from "../../../../../backend/lib/request";
 
@@ -9,14 +10,25 @@ export default requestHandler({
       "entity",
       "entityId",
       {
+        _type: "requestQuery",
+        options: "column",
+      },
+      {
         _type: "crudEnabled",
         options: DataActionType.Details,
       },
     ]);
 
+    const field = validatedRequest.requestQuery;
+
+    if (field) {
+      await validateEntityFields(validatedRequest.entity, [field]);
+    }
+
     return await dataApiController.showData(
       validatedRequest.entity,
-      validatedRequest.entityId
+      validatedRequest.entityId,
+      validatedRequest.requestQuery
     );
   },
   PATCH: async (getValidatedRequest) => {

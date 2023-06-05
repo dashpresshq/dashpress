@@ -25,9 +25,10 @@ export class DataApiController {
 
   async showData(
     entity: string,
-    id: string | number
+    id: string | number,
+    column?: string
   ): Promise<Record<string, unknown>> {
-    return await this._dataApiService.showData(entity, id);
+    return await this._dataApiService.showData(entity, id, column);
   }
 
   async countData(

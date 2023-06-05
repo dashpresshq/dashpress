@@ -54,7 +54,3 @@ export default requestHandler(
     },
   ]
 );
-
-// TODO
-// For Production use cases please use database config adaptor
-// Any bugs reported with the json-file adaptor will be automatically closed

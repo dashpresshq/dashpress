@@ -4,6 +4,7 @@ interface IDBSchemaRelation {
   joinColumnOptions?: {
     name: string;
     referencedColumnName: string;
+    tag?: "inverse";
   }[];
 }
 
@@ -12,6 +13,7 @@ export interface IEntityRelation {
   label: string;
   field?: string;
   type: "toOne" | "toMany";
+  tag?: "inverse";
 }
 
 export interface IEntityField {

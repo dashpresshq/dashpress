@@ -13,7 +13,7 @@ export const validateEntityFields = async (
   const entityFields = await entitiesApiService.getEntityFields(entity);
   fields.forEach((field) => {
     if (!entityFields.find(({ name }) => name === field)) {
-      throw new BadRequestError(`Invalid field '${field}' for ${entity}`);
+      throw new BadRequestError(`Invalid field '${field}' for '${entity}'`);
     }
     return field as string;
   });

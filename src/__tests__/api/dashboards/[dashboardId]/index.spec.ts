@@ -245,7 +245,7 @@ describe("/api/dashboards/[dashboardId]/index generation", () => {
           "_type": "table",
           "entity": "base-model",
           "id": "4",
-          "script": "return await $.query('SELECT * FROM base-model LIMIT 5')",
+          "script": "return await $.query('SELECT * FROM "base-model" LIMIT 5')",
           "title": "Base Model",
         },
       ]

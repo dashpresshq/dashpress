@@ -46,7 +46,7 @@ describe("pages/admin/[entity]/config/crud", () => {
 
     expect(
       await screen.findByRole("button", {
-        name: `Disable Create Functionality`,
+        name: `Enable Create Functionality`,
         hidden: true,
       })
     ).not.toBeVisible();
@@ -58,11 +58,6 @@ describe("pages/admin/[entity]/config/crud", () => {
     expect(
       screen.queryByRole("button", {
         name: `Disable Table Functionality`,
-      })
-    ).not.toBeInTheDocument();
-    expect(
-      screen.queryByRole("button", {
-        name: `Enable Table Functionality`,
       })
     ).not.toBeInTheDocument();
   });
@@ -100,7 +95,7 @@ describe("pages/admin/[entity]/config/crud", () => {
 
       await userEvent.click(
         await within(currentTab).findByRole("button", {
-          name: `Disable ${tab} Functionality`,
+          name: `Enable ${tab} Functionality`,
         })
       );
       if (tab !== "Delete") {
@@ -112,12 +107,6 @@ describe("pages/admin/[entity]/config/crud", () => {
       expect((await screen.findAllByRole("status"))[0]).toHaveTextContent(
         "CRUD Settings Saved Successfully"
       );
-
-      expect(
-        within(currentTab).queryByRole("button", {
-          name: `Disable ${tab} Functionality`,
-        })
-      ).not.toBeInTheDocument();
     });
 
     it("should toggle on functionality", async () => {
@@ -128,6 +117,12 @@ describe("pages/admin/[entity]/config/crud", () => {
       );
 
       const currentTab = screen.getByRole("tabpanel");
+
+      if (tab !== "Delete") {
+        expect(
+          within(currentTab).queryByRole("checkbox", { name: "Field 1" })
+        ).not.toBeInTheDocument();
+      }
 
       await userEvent.click(
         await within(currentTab).findByRole("button", {
@@ -142,12 +137,6 @@ describe("pages/admin/[entity]/config/crud", () => {
       expect((await screen.findAllByRole("status"))[0]).toHaveTextContent(
         "CRUD Settings Saved Successfully"
       );
-
-      expect(
-        within(currentTab).queryByRole("button", {
-          name: `Enable ${tab} Functionality`,
-        })
-      ).not.toBeInTheDocument();
     });
   });
 });

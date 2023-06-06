@@ -65,7 +65,7 @@ describe("pages/admin/[entity]/config/crud", () => {
     );
     expect(
       await screen.findByRole("button", {
-        name: `Disable ${tab} Functionality`,
+        name: `Enable ${tab} Functionality`,
         hidden: true,
       })
     ).not.toBeVisible();
@@ -76,7 +76,7 @@ describe("pages/admin/[entity]/config/crud", () => {
 
     expect(
       await screen.findByRole("button", {
-        name: `Disable ${tab} Functionality`,
+        name: `Enable ${tab} Functionality`,
       })
     ).toBeVisible();
 
@@ -102,7 +102,7 @@ describe("pages/admin/[entity]/config/crud", () => {
 
     expect(
       await screen.findByRole("button", {
-        name: "Disable Delete Functionality",
+        name: "Enable Delete Functionality",
       })
     ).toBeVisible();
 
@@ -120,7 +120,7 @@ describe("pages/admin/[entity]/config/crud", () => {
 
     expect(
       screen.queryByRole("button", {
-        name: "Disable Delete Functionality",
+        name: "Enable Delete Functionality",
         hidden: true,
       })
     ).not.toBeVisible();

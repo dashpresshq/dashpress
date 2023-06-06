@@ -8,10 +8,7 @@ import {
 import { setupActionInstanceTestData } from "__tests__/api/_test-utils/_action-instances";
 
 jest.mock("nanoid", () => ({
-  nanoid: jest
-    .fn()
-    .mockReturnValueOnce("nano-id-1")
-    .mockReturnValueOnce("nano-id-2"),
+  nanoid: jest.fn().mockReturnValue("nano-id-1"),
 }));
 
 describe("/api/integrations/actions/[key]/index", () => {

@@ -301,7 +301,7 @@ describe("/api/data/[entity]/[id]/index", () => {
       expect(getRes._getStatusCode()).toBe(404);
       expect(getRes._getJSONData()).toMatchInlineSnapshot(`
               {
-                "message": "Entity 'tests' with id '1' is not found",
+                "message": "Entity 'tests' with 'id' '1' is not found",
                 "method": "GET",
                 "name": "NotFoundError",
                 "path": "",

@@ -67,6 +67,7 @@ export const NAVIGATION_LINKS = {
         `/admin/${entity}/config/fields${queryObjectToQueryString(query)}`,
       DICTION: (entity: string) => `/admin/${entity}/config/diction`,
       FORM: (entity: string) => `/admin/${entity}/config/form`,
+      PRESENTATION: (entity: string) => `/admin/${entity}/config/presentation`,
       VIEWS: (entity: string) => `/admin/${entity}/config/views`,
       RELATIONS: (entity: string) => `/admin/${entity}/config/relations`,
       FORM_INTEGRATIONS: (entity: string) => `/admin/${entity}/config/actions`,

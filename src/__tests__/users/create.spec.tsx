@@ -25,7 +25,10 @@ describe("pages/users/create", () => {
       </AppWrapper>
     );
 
-    await userEvent.type(screen.getByLabelText("Username"), "someusername");
+    await userEvent.type(
+      await screen.findByLabelText("Username"),
+      "someusername"
+    );
     await userEvent.type(screen.getByLabelText("Name"), "Some Name");
 
     await userEvent.type(await screen.findByLabelText("Role"), "Viewer");

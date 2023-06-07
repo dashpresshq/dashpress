@@ -118,9 +118,6 @@ export function useEntityFieldValidations() {
         entityValidationsMap.data[entityField.name] || [];
 
       const uniqKey: keyof IFieldValidationItem = "validationType";
-      // Prefering the add new effect over remove old effect
-      // Would be nice to reflect accurately
-      // TODO if the maxLenghth/max changes then update that too :sweat
       return [
         entityField.name,
         uniqBy(

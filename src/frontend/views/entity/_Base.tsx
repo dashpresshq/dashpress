@@ -64,6 +64,11 @@ export function BaseEntitySettingsLayout({ children }: IProps) {
       IconComponent: Code,
     },
     {
+      action: NAVIGATION_LINKS.ENTITY.CONFIG.PRESENTATION(entity),
+      name: "Presentation Scripts",
+      IconComponent: Code,
+    },
+    {
       action: NAVIGATION_LINKS.ENTITY.CONFIG.FORM_INTEGRATIONS(entity),
       name: ADMIN_ACTION_INSTANCES_CRUD_CONFIG.TEXT_LANG.TITLE,
       IconComponent: Zap,
@@ -91,9 +96,7 @@ export function BaseEntitySettingsLayout({ children }: IProps) {
           <MenuSection
             menuItems={[
               ...baseMenuItems,
-              // TODO
-              // Computed Details/Table Renders
-              // Custom fields like form one.one
+              // TODO Custom fields like form one.one
             ]}
             currentMenuItem={router.asPath.split("?")[0]}
           />

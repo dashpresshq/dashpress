@@ -24,7 +24,6 @@ export function EntityRelationTable() {
 
   const childEntityRelations = useEntityReferenceFields(childEntity);
 
-  // :eyes Raise conditions on the table loading very fast initially then flickering to the reference search
   const referenceField = childEntityRelations.data.find(
     ({ table }) => table === parentEntity
   )?.field;

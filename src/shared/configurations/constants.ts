@@ -19,7 +19,6 @@ export const CONFIGURATION_KEYS: Record<
   },
   hidden_entity_create_columns: {
     crudConfigLabel: "Create Columns Settings",
-
     requireEntity: true,
     defaultValue: [],
   },
@@ -64,6 +63,13 @@ export const CONFIGURATION_KEYS: Record<
     defaultValue: {
       fieldsState: "",
       beforeSubmit: "",
+    },
+  },
+  entity_presentation_script: {
+    crudConfigLabel: "Presentation Scripts",
+    requireEntity: true,
+    defaultValue: {
+      script: "",
     },
   },
   entity_fields_orders: {

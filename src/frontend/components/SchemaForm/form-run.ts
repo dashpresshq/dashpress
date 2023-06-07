@@ -1,53 +1,8 @@
-/* eslint-disable no-console */
-export const evalJSFormScript = (
-  javascriptString: string,
-  scriptContext: Record<string, unknown>,
-  formValues: Record<string, unknown>
-) => {
-  /* eslint-disable no-new-func */
-  return Function("$", javascriptString)({ ...scriptContext, formValues });
-};
+import { evalJavascriptStringSafely } from "frontend/lib/script-runner";
 
-export const runJavascriptString = (
-  javascriptString: string,
-  scriptContext: Record<string, unknown>,
-  formValues: Record<string, unknown>
-) => {
-  try {
-    return evalJSFormScript(javascriptString, scriptContext, formValues);
-  } catch (e) {
-    console.warn(
-      `•Expression:'${javascriptString}'\n•JS-Error: `,
-      e,
-      "\n•Context: ",
-      formValues
-    );
-  }
+export type ISchemaFormScriptParams = Record<string, unknown> & {
+  formValues: Record<string, unknown>;
 };
-
-// export const runAsyncJavascriptString = async (
-//   javascriptString: string,
-//   scriptContext: Record<string, unknown>,
-//   context: Record<string, unknown>
-// ) => {
-//   const AsyncFunction = async function X() {}.constructor;
-//   try {
-//     return await AsyncFunction(
-//       "$",
-//       javascriptString
-//     )({
-//       ...scriptContext,
-//       ...context,
-//     });
-//   } catch (e) {
-//     console.warn(
-//       `•Expression:'${javascriptString}'\n•JS-Error: `,
-//       e,
-//       "\n•Context: ",
-//       context
-//     );
-//   }
-// };
 
 export const runFormFieldState = (
   fieldStateString: string,
@@ -57,11 +12,15 @@ export const runFormFieldState = (
   if (!fieldStateString) {
     return {};
   }
-  const response = runJavascriptString(
+
+  const response = evalJavascriptStringSafely<ISchemaFormScriptParams>(
     fieldStateString,
-    scriptContext,
-    formValues
+    {
+      ...scriptContext,
+      formValues,
+    }
   );
+
   if (typeof response !== "object") {
     return {};
   }
@@ -76,10 +35,12 @@ export const runFormBeforeSubmit = (
   if (!beforeSubmitString) {
     return formValues;
   }
-  const response = runJavascriptString(
+  const response = evalJavascriptStringSafely<ISchemaFormScriptParams>(
     beforeSubmitString,
-    scriptContext,
-    formValues
+    {
+      ...scriptContext,
+      formValues,
+    }
   );
 
   if (!response) {

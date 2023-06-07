@@ -5,21 +5,18 @@ import { USER_PERMISSIONS } from "shared/constants/user";
 import { IFormExtension } from "frontend/components/SchemaForm/types";
 import { LINK_TO_DOCS } from "frontend/views/constants";
 import { MAKE_APP_CONFIGURATION_CRUD_CONFIG } from "frontend/hooks/configuration/configuration.constant";
-import { useEntitySlug } from "../../../hooks/entity/entity.config";
-import { BaseEntitySettingsLayout } from "../_Base";
 import {
   useEntityConfiguration,
   useUpsertConfigurationMutation,
-} from "../../../hooks/configuration/configuration.store";
-import { useEntityFields } from "../../../hooks/entity/entity.store";
+} from "frontend/hooks/configuration/configuration.store";
+import { useEntitySlug } from "../../../hooks/entity/entity.config";
+import { BaseEntitySettingsLayout } from "../_Base";
 
 import { ENTITY_CONFIGURATION_VIEW } from "../constants";
 import { ScriptForm } from "./ScriptForm";
 
 function useEntityFormView() {
   const entity = useEntitySlug();
-
-  const entityFields = useEntityFields(entity);
 
   const entityFormExtensionSettings = useEntityConfiguration<IFormExtension>(
     "entity_form_extension",
@@ -30,11 +27,9 @@ function useEntityFormView() {
     useUpsertConfigurationMutation("entity_form_extension", entity);
 
   const isLoading =
-    entityFields.isLoading ||
-    entityFormExtensionSettings.isLoading ||
-    entity === SLUG_LOADING_VALUE;
+    entityFormExtensionSettings.isLoading || entity === SLUG_LOADING_VALUE;
 
-  const error = entityFields.error || entityFormExtensionSettings.error;
+  const { error } = entityFormExtensionSettings;
 
   const onScriptSubmit =
     (key: keyof IFormExtension) => async (value: string) => {

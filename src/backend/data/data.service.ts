@@ -81,7 +81,6 @@ export class DataApiService implements IDataApiService {
       entity,
       relationshipSettings.fields,
       {
-        // :eyes we are assuming that all reference fields goes to the primaryField
         [primaryField]: id,
       }
     );

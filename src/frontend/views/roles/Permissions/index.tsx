@@ -9,9 +9,10 @@ import { useActiveEntities } from "frontend/hooks/entity/entity.store";
 import { useNavigationStack, useSetPageDetails } from "frontend/lib/routing";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { LINK_TO_DOCS } from "frontend/views/constants";
-import { USER_PERMISSIONS } from "shared/constants/user";
+import { BASE_USER_PERMISSIONS, USER_PERMISSIONS } from "shared/constants/user";
 import { ILabelValue } from "types";
 import { userFriendlyCase } from "shared/lib/strings";
+import { usePortalUserPermissions } from "shared/constants/portal/user";
 import { AppLayout } from "../../../_layouts/app";
 import {
   ADMIN_PERMISSIONS_CRUD_CONFIG,
@@ -20,19 +21,27 @@ import {
 import { MutatePermission } from "./MutatePermission";
 import { usePortalExtendedPermissions } from "./Portal";
 
-const adminPermissionList: ILabelValue[] = Object.values(USER_PERMISSIONS).map(
-  (permission) => ({
+const mapPermissionStringToLabelValue = (permissionStringList: string[]) => {
+  return permissionStringList.map((permission) => ({
     value: permission,
     label: userFriendlyCase(permission),
-  })
+  }));
+};
+
+const adminPermissionList: ILabelValue[] = mapPermissionStringToLabelValue(
+  Object.values(BASE_USER_PERMISSIONS)
 );
 
 export function RolePermissions() {
   const activeEntities = useActiveEntities();
   const portalPermission = usePortalExtendedPermissions();
   const rolePermissions = useRolePermissions();
-
+  const portalUserPermissions = usePortalUserPermissions();
   const { backLink } = useNavigationStack();
+
+  const portalUserPermissionsList = mapPermissionStringToLabelValue(
+    portalUserPermissions
+  );
 
   useSetPageDetails({
     pageTitle: ADMIN_PERMISSIONS_CRUD_CONFIG.TEXT_LANG.TITLE,
@@ -67,7 +76,12 @@ export function RolePermissions() {
                 {
                   label: "App",
                   content: (
-                    <MutatePermission permissionList={adminPermissionList} />
+                    <MutatePermission
+                      permissionList={[
+                        ...adminPermissionList,
+                        ...portalUserPermissionsList,
+                      ]}
+                    />
                   ),
                 },
                 ...portalPermission,

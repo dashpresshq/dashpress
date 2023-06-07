@@ -1,7 +1,10 @@
 import { BaseSkeleton, Spacer, Typo } from "@hadmean/chromista";
 import { SLUG_LOADING_VALUE } from "@hadmean/protozoa";
 import React, { Fragment } from "react";
-import { useAppConfiguration } from "frontend/hooks/configuration/configuration.store";
+import {
+  useAppConfiguration,
+  useEntityConfiguration,
+} from "frontend/hooks/configuration/configuration.store";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import {
   useEntityFieldLabels,
@@ -17,6 +20,8 @@ import {
 import { filterOutHiddenScalarColumns } from "../utils";
 import { useEntityViewStateMachine } from "../useEntityViewStateMachine";
 import { viewSpecialDataTypes } from "../viewSpecialDataTypes";
+import { IEntityPresentationScript } from "../types";
+import { evalutePresentationScript } from "../evaluatePresentationScript";
 
 export function EntityDetailsView({
   id,
@@ -35,6 +40,11 @@ export function EntityDetailsView({
   const getEntityFieldLabels = useEntityFieldLabels(entity);
   const entityToOneReferenceFields = useEntityToOneReferenceFields(entity);
   const entityFieldSelections = useEntityFieldSelections(entity);
+  const entityPresentationScript =
+    useEntityConfiguration<IEntityPresentationScript>(
+      "entity_presentation_script",
+      entity
+    );
 
   const error =
     dataDetails.error ||
@@ -42,6 +52,7 @@ export function EntityDetailsView({
     entityFieldTypes.error ||
     defaultDateFormat.error ||
     entityFields.error ||
+    entityPresentationScript.error ||
     entityToOneReferenceFields.error;
 
   const isLoading =
@@ -50,6 +61,7 @@ export function EntityDetailsView({
     entityToOneReferenceFields.isLoading ||
     entity === SLUG_LOADING_VALUE ||
     entityFields.isLoading ||
+    entityPresentationScript.isLoading ||
     hiddenDetailsColumns.isLoading;
 
   const viewState = useEntityViewStateMachine(
@@ -82,7 +94,17 @@ export function EntityDetailsView({
           entityFields.data,
           hiddenDetailsColumns.data
         ).map(({ name }) => {
-          const value = dataDetails?.data?.[name];
+          const value$1 = dataDetails?.data?.[name];
+
+          const value = evalutePresentationScript(
+            entityPresentationScript.data.script,
+            {
+              field: name,
+              from: "details",
+              row: dataDetails?.data,
+              value: value$1,
+            }
+          );
 
           const specialDataTypeRender = viewSpecialDataTypes({
             fieldName: name,

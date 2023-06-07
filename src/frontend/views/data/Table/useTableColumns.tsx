@@ -17,11 +17,16 @@ import { ITableColumn } from "@hadmean/chromista";
 import { useMemo } from "react";
 import { IColorableSelection } from "shared/types/ui";
 import { ENTITY_LIST_PATH } from "frontend/hooks/data/data.store";
-import { useAppConfiguration } from "frontend/hooks/configuration/configuration.store";
+import {
+  useAppConfiguration,
+  useEntityConfiguration,
+} from "frontend/hooks/configuration/configuration.store";
 import { filterOutHiddenScalarColumns } from "../utils";
 import { TableActions } from "./Actions";
 import { viewSpecialDataTypes } from "../viewSpecialDataTypes";
 import { usePortalTableColumns } from "./portal";
+import { evalutePresentationScript } from "../evaluatePresentationScript";
+import { IEntityPresentationScript } from "../types";
 
 export const ACTIONS_ACCESSOR = "__actions__";
 
@@ -83,6 +88,11 @@ export const useTableColumns = (
   const entityToOneReferenceFields = useEntityToOneReferenceFields(entity);
   const hiddenTableColumns = useHiddenEntityColumns("table", entity);
   const defaultDateFormat = useAppConfiguration<string>("default_date_format");
+  const entityPresentationScript =
+    useEntityConfiguration<IEntityPresentationScript>(
+      "entity_presentation_script",
+      entity
+    );
 
   const idField = useEntityIdField(entity);
 
@@ -137,14 +147,25 @@ export const useTableColumns = (
       disableSortBy: lean
         ? true
         : !FIELD_TYPES_CONFIG_MAP[entityFieldTypes[name]]?.sortable,
-      Cell: ({ row }: { row: Record<string, unknown> }) => {
-        const value = row.original[name];
-        if (value === undefined || value === null) {
+      Cell: ({ row }: { row: { original: Record<string, unknown> } }) => {
+        const value$1 = row.original[name];
+        if (value$1 === undefined || value$1 === null) {
           return null;
         }
         if (isId) {
-          return <span>{value as string}</span>;
+          return <span>{value$1 as string}</span>;
         }
+
+        const value = evalutePresentationScript(
+          entityPresentationScript.data.script,
+          {
+            field: name,
+            from: "details",
+            row: row.original,
+            value: value$1,
+          }
+        );
+
         const specialDataTypeRender = viewSpecialDataTypes({
           fieldName: name,
           value,

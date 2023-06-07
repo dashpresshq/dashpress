@@ -1,10 +1,11 @@
 import { FormSkeleton, FormSkeletonSchema } from "@hadmean/chromista";
 import { ToastService } from "@hadmean/protozoa";
 import { SchemaForm } from "frontend/components/SchemaForm";
-import { evalJSFormScript } from "frontend/components/SchemaForm/form-run";
+import { ISchemaFormScriptParams } from "frontend/components/SchemaForm/form-run";
 import { useSchemaFormScriptContext } from "frontend/components/SchemaForm/useSchemaFormScriptContext";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { MAKE_APP_CONFIGURATION_CRUD_CONFIG } from "frontend/hooks/configuration/configuration.constant";
+import { evalJavascriptString } from "frontend/lib/script-runner";
 
 interface IProps {
   value: string;
@@ -42,7 +43,10 @@ export function ScriptForm({
         onSubmit={async (data) => {
           try {
             const jsString = data[`${BASE_SUFFIX}${field}`] as string;
-            evalJSFormScript(jsString, scriptContext, {});
+            evalJavascriptString<ISchemaFormScriptParams>(jsString, {
+              ...scriptContext,
+              formValues: {},
+            });
             await onSubmit(jsString);
           } catch (e) {
             ToastService.error(`•Expression: \n•JS-Error: ${e}`);

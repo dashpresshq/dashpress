@@ -11,3 +11,7 @@ export const makePortalPermissionString = (
   noop(granular);
   return `${context}:${entity.toUpperCase()}`;
 };
+
+export const usePortalUserPermissions = () => {
+  return [];
+};

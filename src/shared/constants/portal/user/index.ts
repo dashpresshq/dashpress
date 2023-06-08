@@ -1,5 +1,1 @@
-export {
-  PORTAL_USER_PERMISSIONS,
-  makePortalPermissionString,
-  usePortalUserPermissions,
-} from "./main";
+export { PORTAL_USER_PERMISSIONS, usePortalUserPermissions } from "./main";

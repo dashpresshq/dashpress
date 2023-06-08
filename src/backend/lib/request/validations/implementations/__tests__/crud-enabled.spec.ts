@@ -8,6 +8,7 @@ import {
   setupAppConfigTestData,
   setupRolesTestData,
 } from "__tests__/api/_test-utils";
+import { GranularEntityPermissions } from "shared/types/user";
 
 const handler = requestHandler({
   GET: async (getValidatedRequest) => {
@@ -265,7 +266,10 @@ describe("Request Validations => crudEnabledValidationImpl", () => {
         {
           id: "custom-role",
           permissions: [
-            META_USER_PERMISSIONS.APPLIED_CAN_ACCESS_ENTITY("tests", false),
+            META_USER_PERMISSIONS.APPLIED_CAN_ACCESS_ENTITY(
+              "tests",
+              GranularEntityPermissions.Show
+            ),
           ],
         },
       ]);
@@ -288,7 +292,7 @@ describe("Request Validations => crudEnabledValidationImpl", () => {
           permissions: [
             META_USER_PERMISSIONS.APPLIED_CAN_ACCESS_ENTITY(
               "base-model",
-              false
+              GranularEntityPermissions.Show
             ),
           ],
         },

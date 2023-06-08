@@ -11,6 +11,7 @@ import { setupActivatedActionTestData } from "./_activated-actions";
 import { setupActionInstanceTestData } from "./_action-instances";
 import { setupActivatedStorageTestData } from "./_activated-storage";
 import { setupTestDatabaseData } from "./_data";
+import { portalTestData } from "./portal";
 
 export const setupAllTestData = async (
   domains: Array<ConfigDomain | "data">
@@ -28,6 +29,7 @@ export const setupAllTestData = async (
     ["constants", setupIntegrationsConstantsTestData],
     ["environment-variables", setupIntegrationsEnvTestData],
     ["credentials", setupCredentialsTestData],
+    ...portalTestData,
   ];
 
   await Promise.all(

@@ -53,8 +53,10 @@ export function EntityPresentationScriptSettings() {
         ]}
       >
         <ViewStateMachine
-          loading={entity === SLUG_LOADING_VALUE}
-          error={false}
+          loading={
+            entity === SLUG_LOADING_VALUE || entityPresentationScript.isLoading
+          }
+          error={entityPresentationScript.error}
           loader={<FormSkeleton schema={[FormSkeletonSchema.RichTextArea]} />}
         >
           <PresentationScriptForm

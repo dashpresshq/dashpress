@@ -1,6 +1,14 @@
-import { META_USER_PERMISSIONS, USER_PERMISSIONS } from "shared/constants/user";
-import { SystemRoles } from "shared/types/user";
-import { portalPermissionCheck, PORTAL_PERMISSION_HEIRACHIES } from "./portal";
+import {
+  CAN_ACCESS_ENTITY,
+  META_USER_PERMISSIONS,
+  USER_PERMISSIONS,
+} from "shared/constants/user";
+import { GranularEntityPermissions, SystemRoles } from "shared/types/user";
+import { replaceGranular } from "shared/constants/user/shared";
+import {
+  portalMetaPermissionCheck,
+  PORTAL_PERMISSION_HEIRACHIES,
+} from "./portal";
 
 /*
   IMPORTANT NOTE:
@@ -29,7 +37,8 @@ const doMetaPermissionCheck =
 
 export const doesPermissionAllowPermission = (
   permissions: string[],
-  requiredPermission: string
+  requiredPermission: string,
+  isCheckGranular = false
 ): boolean => {
   if (requiredPermission === META_USER_PERMISSIONS.NO_PERMISSION_REQUIRED) {
     return true;
@@ -43,21 +52,29 @@ export const doesPermissionAllowPermission = (
     requiredPermission
   );
 
-  const portalPermissionCheckResponse = portalPermissionCheck(
+  const portalMetaPermissionCheckResponse = portalMetaPermissionCheck(
     doMetaPermissionCheck$1
   );
 
-  if (typeof portalPermissionCheckResponse === "boolean") {
-    return portalPermissionCheckResponse;
+  if (typeof portalMetaPermissionCheckResponse === "boolean") {
+    return portalMetaPermissionCheckResponse;
   }
 
   const entitiesMetaCheck = doMetaPermissionCheck$1(
-    META_USER_PERMISSIONS.APPLIED_CAN_ACCESS_ENTITY("", false),
+    CAN_ACCESS_ENTITY,
     USER_PERMISSIONS.CAN_MANAGE_ALL_ENTITIES
   );
 
   if (typeof entitiesMetaCheck === "boolean") {
     return entitiesMetaCheck;
+  }
+
+  if (requiredPermission.startsWith(CAN_ACCESS_ENTITY) && !isCheckGranular) {
+    // eslint-disable-next-line no-param-reassign
+    requiredPermission = replaceGranular(
+      requiredPermission,
+      GranularEntityPermissions.Show
+    );
   }
 
   const can = permissions.includes(requiredPermission);
@@ -72,7 +89,8 @@ export const doesPermissionAllowPermission = (
 
   return doesPermissionAllowPermission(
     permissions,
-    PERMISSION_HEIRACHIES[requiredPermission]
+    PERMISSION_HEIRACHIES[requiredPermission],
+    isCheckGranular
   );
 };
 
@@ -85,9 +103,7 @@ const doSystemRoleCheck = (
   }
 
   if (role === SystemRoles.Viewer) {
-    return requiredPermission.startsWith(
-      META_USER_PERMISSIONS.APPLIED_CAN_ACCESS_ENTITY("", false)
-    );
+    return requiredPermission.startsWith(CAN_ACCESS_ENTITY);
   }
 };
 

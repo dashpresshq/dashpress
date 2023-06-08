@@ -4,7 +4,7 @@ import { SystemRoles } from "shared/types/user";
 import { PORTAL_USER_PERMISSIONS } from "../portal/user";
 import { APPLIED_CAN_ACCESS, NO_PERMISSION_REQUIRED } from "./shared";
 
-const CAN_ACCESS_ENTITY = "CAN_ACCESS_ENTITY";
+export const CAN_ACCESS_ENTITY = "CAN_ACCESS_ENTITY";
 
 export const isSystemRole = (roleId: string) => {
   return (Object.values(SystemRoles) as string[]).includes(roleId);

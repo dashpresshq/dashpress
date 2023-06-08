@@ -28,7 +28,7 @@ import {
   rDBMSDataApiService,
   RDBMSDataApiService,
 } from "backend/data/data-access/RDBMS";
-import { IAccountProfile } from "shared/types/user";
+import { GranularEntityPermissions, IAccountProfile } from "shared/types/user";
 import { relativeDateNotationToActualDate } from "backend/data/data-access/time.constants";
 import {
   mutateGeneratedDashboardWidgets,
@@ -195,7 +195,7 @@ return [...actual, ...relative];
       dashboardId !== HOME_DASHBOARD_KEY &&
       !(await this._rolesApiService.canRoleDoThis(
         userRole,
-        PORTAL_DASHBOARD_PERMISSION(dashboardId, false)
+        PORTAL_DASHBOARD_PERMISSION(dashboardId, GranularEntityPermissions.Show)
       ))
     ) {
       throw new BadRequestError(

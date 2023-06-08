@@ -1,6 +1,6 @@
 import noop from "lodash/noop";
 
-export const portalPermissionCheck = (
+export const portalMetaPermissionCheck = (
   key: (metaCheck: string, allPermission: string) => boolean | void
 ) => {
   noop(key);

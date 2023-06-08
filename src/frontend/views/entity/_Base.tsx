@@ -12,7 +12,16 @@ import { ReactNode } from "react";
 import { useEntitySlug } from "frontend/hooks/entity/entity.config";
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
 import { AppLayout } from "frontend/_layouts/app";
-import { Code, Link2, Type, Filter, Sliders, File, Zap } from "react-feather";
+import {
+  Code,
+  Link2,
+  Type,
+  Filter,
+  Sliders,
+  File,
+  Zap,
+  Codepen,
+} from "react-feather";
 import {
   ENTITY_CRUD_SETTINGS_TAB_LABELS,
   ENTITY_FIELD_SETTINGS_TAB_LABELS,
@@ -66,7 +75,7 @@ export function BaseEntitySettingsLayout({ children }: IProps) {
     {
       action: NAVIGATION_LINKS.ENTITY.CONFIG.PRESENTATION(entity),
       name: "Presentation Scripts",
-      IconComponent: Code,
+      IconComponent: Codepen,
     },
     {
       action: NAVIGATION_LINKS.ENTITY.CONFIG.FORM_INTEGRATIONS(entity),

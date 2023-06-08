@@ -87,7 +87,7 @@ describe("user role checks", () => {
       expect(
         doesPermissionAllowPermission(
           ["CAN_MANAGE_ALL_ENTITIES", "PERMISSION_2"],
-          "CAN_ACCESS_ENTITY:FOO"
+          "CAN_ACCESS_ENTITY:FOO--show"
         )
       ).toBe(true);
     });

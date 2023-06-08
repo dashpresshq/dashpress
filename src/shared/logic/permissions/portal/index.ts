@@ -1,1 +1,4 @@
-export { portalPermissionCheck, PORTAL_PERMISSION_HEIRACHIES } from "./main";
+export {
+  portalMetaPermissionCheck,
+  PORTAL_PERMISSION_HEIRACHIES,
+} from "./main";

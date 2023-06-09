@@ -6,6 +6,7 @@ import { canRoleDoThisSync } from "shared/logic/permissions";
 import { useCallback } from "react";
 import { useIsAuthenticatedStore } from "./useAuthenticateUser";
 import { ACCOUNT_PROFILE_CRUD_CONFIG } from "./constants";
+import { useIsGranularCheck } from "./portal";
 
 export const AUTHENTICATED_ACCOUNT_URL = "/api/account/mine";
 
@@ -50,7 +51,8 @@ export function useAuthenticatedUserPreferences() {
 const doPermissionCheck = (
   requiredPermission: string,
   isLoadingUser: boolean,
-  userData: IAuthenticatedUserBag
+  userData: IAuthenticatedUserBag,
+  isGranularCheck: boolean
 ) => {
   if (isLoadingUser || !userData) {
     return "loading";
@@ -58,19 +60,25 @@ const doPermissionCheck = (
 
   const { role, permissions } = userData;
 
-  return canRoleDoThisSync(role, requiredPermission, permissions);
+  return canRoleDoThisSync(
+    role,
+    requiredPermission,
+    isGranularCheck,
+    permissions
+  );
 };
 
 export function useUserHasPermission(): (permision: string) => boolean {
   const userProfile = useAuthenticatedUserBag();
-
+  const isGranularCheck = useIsGranularCheck();
   return useCallback(
     (permission: string): boolean => {
       return (
         doPermissionCheck(
           permission,
           userProfile.isLoading,
-          userProfile.data
+          userProfile.data,
+          isGranularCheck
         ) === true
       );
     },
@@ -80,13 +88,15 @@ export function useUserHasPermission(): (permision: string) => boolean {
 
 function useUserPermission(): (permision: string) => boolean | "loading" {
   const userProfile = useAuthenticatedUserBag();
+  const isGranularCheck = useIsGranularCheck();
 
   return useCallback(
     (permission: string): boolean | "loading" => {
       return doPermissionCheck(
         permission,
         userProfile.isLoading,
-        userProfile.data
+        userProfile.data,
+        isGranularCheck
       );
     },
     [userProfile.isLoading, userProfile.data]

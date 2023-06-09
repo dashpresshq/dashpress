@@ -12,6 +12,7 @@ import {
   META_USER_PERMISSIONS,
 } from "shared/constants/user";
 import { GranularEntityPermissions, SystemRoles } from "shared/types/user";
+import { isGranularCheck } from "./portal";
 
 export interface IRole {
   id: string;
@@ -48,8 +49,11 @@ export class RolesApiService implements IApplicationService {
   }
 
   async canRoleDoThis(roleId: string, permission: string) {
-    return await canRoleDoThisAsync(roleId, permission, (roleId$1: string) =>
-      this.getRolePermissions(roleId$1)
+    return await canRoleDoThisAsync(
+      roleId,
+      permission,
+      await isGranularCheck(),
+      (roleId$1: string) => this.getRolePermissions(roleId$1)
     );
   }
 

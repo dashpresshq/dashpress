@@ -1,0 +1,1 @@
+export { isGranularCheck } from "./main";

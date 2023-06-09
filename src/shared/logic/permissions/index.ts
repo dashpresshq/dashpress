@@ -38,7 +38,7 @@ const doMetaPermissionCheck =
 export const doesPermissionAllowPermission = (
   permissions: string[],
   requiredPermission: string,
-  isCheckGranular = false
+  checkGranular: boolean
 ): boolean => {
   if (requiredPermission === META_USER_PERMISSIONS.NO_PERMISSION_REQUIRED) {
     return true;
@@ -69,7 +69,7 @@ export const doesPermissionAllowPermission = (
     return entitiesMetaCheck;
   }
 
-  if (requiredPermission.startsWith(CAN_ACCESS_ENTITY) && !isCheckGranular) {
+  if (requiredPermission.startsWith(CAN_ACCESS_ENTITY) && !checkGranular) {
     // eslint-disable-next-line no-param-reassign
     requiredPermission = replaceGranular(
       requiredPermission,
@@ -90,7 +90,7 @@ export const doesPermissionAllowPermission = (
   return doesPermissionAllowPermission(
     permissions,
     PERMISSION_HEIRACHIES[requiredPermission],
-    isCheckGranular
+    checkGranular
   );
 };
 
@@ -110,6 +110,7 @@ const doSystemRoleCheck = (
 export const canRoleDoThisAsync = async (
   userRole: string,
   permission: string,
+  checkGranular: boolean,
   getRolePermission: (role: string) => Promise<string[]>
 ): Promise<boolean> => {
   const systemRoleCheck = doSystemRoleCheck(userRole, permission);
@@ -120,12 +121,17 @@ export const canRoleDoThisAsync = async (
 
   const rolePermissions = await getRolePermission(userRole);
 
-  return doesPermissionAllowPermission(rolePermissions, permission);
+  return doesPermissionAllowPermission(
+    rolePermissions,
+    permission,
+    checkGranular
+  );
 };
 
 export const canRoleDoThisSync = (
   userRole: string,
   permission: string,
+  checkGranular: boolean,
   rolePermissions: string[]
 ): boolean => {
   const systemRoleCheck = doSystemRoleCheck(userRole, permission);
@@ -134,5 +140,9 @@ export const canRoleDoThisSync = (
     return systemRoleCheck;
   }
 
-  return doesPermissionAllowPermission(rolePermissions, permission);
+  return doesPermissionAllowPermission(
+    rolePermissions,
+    permission,
+    checkGranular
+  );
 };

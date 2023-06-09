@@ -103,10 +103,7 @@ export function BaseEntitySettingsLayout({ children }: IProps) {
       <SectionRow>
         <SectionLeft>
           <MenuSection
-            menuItems={[
-              ...baseMenuItems,
-              // TODO Custom fields like form one.one
-            ]}
+            menuItems={baseMenuItems}
             currentMenuItem={router.asPath.split("?")[0]}
           />
         </SectionLeft>

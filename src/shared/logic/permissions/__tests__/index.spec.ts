@@ -75,6 +75,11 @@ describe("user role checks", () => {
 
   describe("doesPermissionAllowPermission", () => {
     describe("Basic", () => {
+      it("should return true when permission is 'NO_PERMISSION_REQUIRED'", () => {
+        expect(
+          doesPermissionAllowPermission([], "NO_PERMISSION_REQUIRED", true)
+        ).toBe(true);
+      });
       it("should return true when permission is contained", () => {
         expect(
           doesPermissionAllowPermission(

@@ -58,7 +58,7 @@ export function SelectionTab({
             isMakingRequest={false}
             icon={toggling?.enabled ? "check" : "square"}
             size="sm"
-            isInverse={toggling.enabled}
+            isInverse
             text={() => `Enable ${toggling?.label} Functionality`}
             onClick={() => toggling.onToggle()}
           />
@@ -74,22 +74,24 @@ export function SelectionTab({
             render={(menuItem) => {
               const isHidden = isSelected(menuItem.name);
 
+              const disabled = menuItem.isId || !toggling.enabled;
+
               return (
                 <SectionListItem
                   label={menuItem.label}
                   key={menuItem.name}
-                  disabled={!toggling.enabled}
-                  subtle={menuItem.isId}
+                  disabled={disabled}
+                  subtle={disabled}
                   toggle={
-                    toggling.enabled && !menuItem.isId
-                      ? {
+                    disabled
+                      ? undefined
+                      : {
                           selected: !isHidden,
                           onChange: () => {
                             setTouched(true);
                             toggleSelection(menuItem.name);
                           },
                         }
-                      : undefined
                   }
                 />
               );

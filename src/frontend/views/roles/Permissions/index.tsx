@@ -77,6 +77,7 @@ export function RolePermissions() {
                   label: "App",
                   content: (
                     <MutatePermission
+                      singular="Invalid"
                       permissionList={[
                         ...adminPermissionList,
                         ...portalUserPermissionsList,

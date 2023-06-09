@@ -1,5 +1,12 @@
-import { RenderList, SectionListItem } from "@hadmean/chromista";
+import {
+  FormButton,
+  RenderList,
+  SectionListItem,
+  Spacer,
+  Stack,
+} from "@hadmean/chromista";
 import { ILabelValue } from "types";
+import { userFriendlyCase } from "shared/lib/strings";
 import {
   useCreateRolePermissionMutation,
   useRolePermissionDeletionMutation,
@@ -8,22 +15,54 @@ import {
 
 interface IProps {
   permissionList: ILabelValue[];
+  overAchingPermission?: string;
+  singular: string;
 }
 
-export function MutatePermission({ permissionList }: IProps) {
+export function MutatePermission({
+  permissionList,
+  singular,
+  overAchingPermission,
+}: IProps) {
   const rolePermissions = useRolePermissions();
 
   const rolePermissionDeletionMutation = useRolePermissionDeletionMutation();
   const rolePermissionCreationMutation = useCreateRolePermissionMutation();
 
+  const isOverAchingPermissionSelected =
+    overAchingPermission && rolePermissions.data.includes(overAchingPermission);
+
   return (
-    permissionList.length > 0 && (
+    <>
+      {overAchingPermission && (
+        <>
+          <Stack justify="space-between" align="flex-start">
+            <FormButton
+              isMakingRequest={false}
+              icon={isOverAchingPermissionSelected ? "check" : "square"}
+              size="sm"
+              isInverse
+              text={() => userFriendlyCase(overAchingPermission)}
+              onClick={() => {
+                if (isOverAchingPermissionSelected) {
+                  rolePermissionDeletionMutation.mutate([overAchingPermission]);
+                } else {
+                  rolePermissionCreationMutation.mutate([overAchingPermission]);
+                }
+              }}
+            />
+          </Stack>
+
+          <Spacer size="xxl" />
+        </>
+      )}
       <RenderList
         sortByLabel
         items={permissionList.map(({ label, value }) => ({
           name: label,
           value,
         }))}
+        singular={singular}
         render={(menuItem) => {
           const isPermissionSelected = rolePermissions.data.includes(
             menuItem.value
@@ -33,20 +72,30 @@ export function MutatePermission({ permissionList }: IProps) {
             <SectionListItem
               label={menuItem.name}
               key={menuItem.value}
-              toggle={{
-                selected: isPermissionSelected,
-                onChange: () => {
-                  if (isPermissionSelected) {
-                    rolePermissionDeletionMutation.mutate([menuItem.value]);
-                  } else {
-                    rolePermissionCreationMutation.mutate([menuItem.value]);
-                  }
-                },
-              }}
+              disabled={isOverAchingPermissionSelected}
+              subtle={isOverAchingPermissionSelected}
+              toggle={
+                isOverAchingPermissionSelected
+                  ? undefined
+                  : {
+                      selected: isPermissionSelected,
+                      onChange: () => {
+                        if (isPermissionSelected) {
+                          rolePermissionDeletionMutation.mutate([
+                            menuItem.value,
+                          ]);
+                        } else {
+                          rolePermissionCreationMutation.mutate([
+                            menuItem.value,
+                          ]);
+                        }
+                      },
+                    }
+              }
             />
           );
         }}
       />
-    )
+    </>
   );
 }

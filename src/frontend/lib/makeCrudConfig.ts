@@ -44,6 +44,7 @@ export const MAKE_CRUD_CONFIG = ({
       NOT_FOUND: CRUD_CONFIG_NOT_FOUND(singular),
       TITLE: `${plural}`,
       EMPTY_LIST: `No ${singular} Has Been Added Yet`,
+      SINGULAR: singular,
     },
   };
 };

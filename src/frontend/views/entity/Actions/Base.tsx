@@ -5,7 +5,6 @@ import {
   Spacer,
   Stack,
   TableSkeleton,
-  Typo,
 } from "@hadmean/chromista";
 import { SLUG_LOADING_VALUE, useApi } from "@hadmean/protozoa";
 import { useActiveEntities } from "frontend/hooks/entity/entity.store";
@@ -19,7 +18,6 @@ import {
   useActionIntegrationsList,
   useActiveActionList,
 } from "frontend/views/integrations/actions/actions.store";
-import { INTEGRATIONS_GROUP_CONFIG } from "shared/config-bag/integrations";
 import { useCallback, useState } from "react";
 import { IActionInstance } from "shared/types/actions";
 import { ActionForm } from "./Form";
@@ -162,27 +160,6 @@ export function BaseActionInstances(actionInstanceView: ActionInstanceView) {
         onClose={closeConfigItem}
         show={!!currentInstanceId}
       >
-        <Typo.SM textStyle="italic">
-          Use your {`{{`} {INTEGRATIONS_GROUP_CONFIG.credentials.prefix}.ENTRY{" "}
-          {`}}`} and {`{{`} {INTEGRATIONS_GROUP_CONFIG.constants.prefix}.ENTRY{" "}
-          {`}}`} here.
-        </Typo.SM>
-        <Spacer />
-        <Typo.SM textStyle="italic">
-          {" "}
-          Access the current data with {`{{`} data.anyValidEntityField {`}}`}
-        </Typo.SM>
-        <Spacer />
-
-        <Typo.SM textStyle="italic">
-          {" "}
-          Access the current user properties with any of {`{{`} auth.role {`}}`}
-          , {`{{`} auth.name {`}}`}, {`{{`} auth.username {`}}`} and {`{{`}{" "}
-          auth.systemProfile {`}}`}
-        </Typo.SM>
-
-        <Spacer />
-
         <ActionForm
           onSubmit={async (data) => {
             if (currentInstanceId === NEW_ACTION_ITEM) {

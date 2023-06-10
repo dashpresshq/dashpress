@@ -1,9 +1,14 @@
 import { z } from "zod";
 
-export const SummaryCardWidgetSchema = z.array(
-  z.object({
-    count: z.coerce.number(),
-  })
-);
-
+export const SummaryCardWidgetSchema = z.union([
+  z.array(
+    z.union([
+      z.object({
+        count: z.coerce.number(),
+      }),
+      z.coerce.number(),
+    ])
+  ),
+  z.coerce.number(),
+]);
 export type ISummaryCardWidgetData = z.infer<typeof SummaryCardWidgetSchema>;

@@ -1,4 +1,7 @@
-import { getFullAndRelativeCount } from "../getFullAndRelativeCount";
+import {
+  getFullAndRelativeCount,
+  splitSummaryCardWidgetDataToRelativeCount,
+} from "../getFullAndRelativeCount";
 
 describe("getFullAndRelativeCount", () => {
   it("should return empty when relative count is empty", () => {
@@ -24,5 +27,42 @@ describe("getFullAndRelativeCount", () => {
 
   it("should return abbreviated full count", () => {
     expect(getFullAndRelativeCount(2333, 0)).toEqual(["2.33K", "N/A", "side"]);
+  });
+});
+
+describe("splitSummaryCardWidgetDataToRelativeCount", () => {
+  it("should split plain number correctly", () => {
+    expect(splitSummaryCardWidgetDataToRelativeCount(5)).toEqual([
+      5,
+      undefined,
+    ]);
+  });
+
+  it("should split single data arrays correctly", () => {
+    expect(splitSummaryCardWidgetDataToRelativeCount([5])).toEqual([
+      5,
+      undefined,
+    ]);
+
+    expect(splitSummaryCardWidgetDataToRelativeCount([{ count: 5 }])).toEqual([
+      5,
+      undefined,
+    ]);
+  });
+
+  it("should split double data arrays correctly", () => {
+    expect(
+      splitSummaryCardWidgetDataToRelativeCount([{ count: 5 }, 8])
+    ).toEqual([5, 8]);
+
+    expect(
+      splitSummaryCardWidgetDataToRelativeCount([5, { count: 8 }])
+    ).toEqual([5, 8]);
+
+    expect(
+      splitSummaryCardWidgetDataToRelativeCount([{ count: 5 }, { count: 8 }])
+    ).toEqual([5, 8]);
+
+    expect(splitSummaryCardWidgetDataToRelativeCount([5, 8])).toEqual([5, 8]);
   });
 });

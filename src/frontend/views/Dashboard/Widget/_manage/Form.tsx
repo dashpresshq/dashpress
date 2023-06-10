@@ -28,7 +28,7 @@ import { useMutation } from "react-query";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { useEffect, useState } from "react";
 import { DOCUMENTATION_LABEL } from "frontend/docs";
-import { WidgetScriptDocumentation } from "frontend/docs/widget-scripts";
+import { WidgetScriptDocumentation } from "frontend/docs/scripts/widget-scripts";
 import { DASHBOARD_WIDGET_HEIGHTS, DASHBOARD_WIDGET_SIZES } from "./constants";
 import { WidgetFormField } from "./types";
 import { PortalFormFields, PortalFormSchema } from "./portal";

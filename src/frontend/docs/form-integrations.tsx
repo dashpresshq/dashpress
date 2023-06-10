@@ -28,12 +28,16 @@ export function FormIntegrationsDocumentation(props: IDocumentationRootProps) {
         <li>The action selected creates the fields needed to run the action</li>
       </ol>
       <p>
+        {`
         In the form integrations, you will have access to all your secrets,
-        `&lbrace;&lbrace; SECRETS.PRIVATE &rbrace;&rbrace;` and constants
-        `&lbrace;&lbrace; CONSTANTS.EXAMPLE &rbrace;&rbrace;` and also the
-        current data like this `&lbrace;&lbrace; data.myEntityField
-        &rbrace;&rbrace;`. All these are handlebars that you can use anywhere in
+        "{{SECRETS.PRIVATE }}" and constants
+        "{{CONSTANTS.EXAMPLE }}" and also the
+        current data like this "{{data.myEntityField
+        }}".
+        You can also access the current user properties with any of {{ auth.role }}, {{ auth.name }}, {{ auth.username }} and {{ auth.systemProfile }}
+        All these are handlebars that you can use anywhere in
         the form.
+        `}
       </p>
       <p>
         You can always deactivate an action by clicking on the Deactivate tab
@@ -43,3 +47,6 @@ export function FormIntegrationsDocumentation(props: IDocumentationRootProps) {
     </DocumentationRoot>
   );
 }
+// import { INTEGRATIONS_GROUP_CONFIG } from "shared/config-bag/integrations";
+// {`{{`} {INTEGRATIONS_GROUP_CONFIG.credentials.prefix}.ENTRY{" "}
+//           {`}}`}

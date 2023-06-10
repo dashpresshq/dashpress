@@ -8,7 +8,7 @@ import {
   useEntityConfiguration,
   useUpsertConfigurationMutation,
 } from "frontend/hooks/configuration/configuration.store";
-import { FormScriptDocumentation } from "frontend/docs/form-scripts";
+import { FormScriptDocumentation } from "frontend/docs/scripts/form-scripts";
 import { useState } from "react";
 import { DOCUMENTATION_LABEL } from "frontend/docs";
 import { useEntitySlug } from "../../../hooks/entity/entity.config";

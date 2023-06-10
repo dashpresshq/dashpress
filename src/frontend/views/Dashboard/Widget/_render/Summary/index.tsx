@@ -3,7 +3,10 @@ import { ROYGBIV } from "shared/constants/colors";
 import { systemIconToSVG } from "shared/constants/Icons";
 import { SummaryWidget as SummaryWidgetPresentation } from "@hadmean/chromista";
 import { SummaryCardWidgetSchema } from "./types";
-import { getFullAndRelativeCount } from "./getFullAndRelativeCount";
+import {
+  getFullAndRelativeCount,
+  splitSummaryCardWidgetDataToRelativeCount,
+} from "./getFullAndRelativeCount";
 
 interface IProps {
   config: ISummaryWidgetConfig;
@@ -11,16 +14,17 @@ interface IProps {
 }
 
 // TODO Card Widgets: targets
-// TODO allow number | [number, number]
 
 export function SummaryWidget({ config, data }: IProps) {
   const summaryData = SummaryCardWidgetSchema.parse(data);
 
   const { color, icon } = config;
 
+  const relativeData = splitSummaryCardWidgetDataToRelativeCount(summaryData);
+
   const [fullCount$1, relativeCount$1, direction] = getFullAndRelativeCount(
-    summaryData[0].count,
-    summaryData[1]?.count
+    relativeData[0],
+    relativeData[1]
   );
 
   const fullIcon = systemIconToSVG(icon);

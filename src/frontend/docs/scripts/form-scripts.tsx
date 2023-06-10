@@ -1,5 +1,5 @@
 import { InfoAlert, WarningAlert } from "@hadmean/chromista";
-import { DocumentationRoot, IDocumentationRootProps } from "./_base";
+import { DocumentationRoot, IDocumentationRootProps } from "../_base";
 
 export function FormScriptDocumentation(props: IDocumentationRootProps) {
   return (

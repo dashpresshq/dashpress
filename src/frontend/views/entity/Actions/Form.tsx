@@ -177,18 +177,18 @@ export function ActionForm({
 
         await onSubmit({ ...cleanedConfigurationForm, integrationKey });
       }}
-      // TODO test this
+      // TODO unit test this
       formExtension={{
         fieldsState: `
             return {
                 entity: {
-                    hidden: $.action === "update" || !$.formValues.formAction
+                    disabled: $.action === "update" || !$.formValues.formAction
                 },
                 activatedActionId: {
-                    hidden: $.action === "update" || !$.formValues.formAction
+                   disabled: $.action === "update" || !$.formValues.formAction
                 },
                 implementationKey: {
-                    hidden: !$.formValues.formAction
+                    disabled: !$.formValues.formAction
                 }
             }
         `,

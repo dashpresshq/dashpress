@@ -1,5 +1,6 @@
 import { abbreviateNumber } from "@hadmean/protozoa";
 import { isEmpty } from "class-validator";
+import { ISummaryCardWidgetData } from "./types";
 
 export const getFullAndRelativeCount = (
   fullCount$1: number | string,
@@ -30,4 +31,26 @@ export const getFullAndRelativeCount = (
     // eslint-disable-next-line no-nested-ternary
     difference === 0 ? "side" : difference >= 0 ? "up" : "down",
   ];
+};
+
+const extractNumber = (data: number | { count?: number }): number => {
+  if (!data) {
+    return undefined;
+  }
+  if (typeof data === "number") {
+    return data;
+  }
+  return data.count;
+};
+
+export const splitSummaryCardWidgetDataToRelativeCount = (
+  summaryCardWidgetData: ISummaryCardWidgetData
+): [number, number] => {
+  if (typeof summaryCardWidgetData === "number") {
+    return [summaryCardWidgetData, undefined];
+  }
+  const firstValue = extractNumber(summaryCardWidgetData[0]);
+  const secondValue = extractNumber(summaryCardWidgetData[1]);
+
+  return [firstValue, secondValue];
 };

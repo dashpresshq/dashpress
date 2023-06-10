@@ -30,7 +30,7 @@ const BASE_WIDGET_CONFIG: Partial<
     overrideSize: "1",
     label: "Summary Card",
     exampleValidData: [{ count: 30 }],
-    requiredInterface: `[{count: number}]`,
+    requiredInterface: `[{count: number} | number] | number`,
     schema: SummaryCardWidgetSchema,
     LoadingComponent: () => (
       <Stack justify="space-between">

@@ -1,4 +1,4 @@
-import { DocumentationRoot, IDocumentationRootProps } from "./_base";
+import { DocumentationRoot, IDocumentationRootProps } from "../_base";
 
 export function PresentationScriptDocumentation(
   props: IDocumentationRootProps

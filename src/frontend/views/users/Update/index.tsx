@@ -11,8 +11,10 @@ import {
 } from "frontend/hooks/auth/user.store";
 import { useNavigationStack, useSetPageDetails } from "frontend/lib/routing";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
-import { LINK_TO_DOCS } from "frontend/views/constants";
 import { USER_PERMISSIONS } from "shared/constants/user";
+import { DOCUMENTATION_LABEL } from "frontend/docs";
+import { useState } from "react";
+import { SystemProfileDocumentation } from "frontend/docs/system-profile";
 import { AppLayout } from "../../../_layouts/app";
 import { useUsernameFromRouteParam } from "../hooks";
 import {
@@ -24,6 +26,8 @@ import {
 import { ResetUserPasswordForm } from "./ResetPassword.form";
 import { UpdateUserForm } from "./Update.Form";
 
+const DOCS_TITLE = "System Profile";
+
 export function UserUpdate() {
   const updateUserMutation = useUpdateUserMutation();
   const resetPasswordMutation = useResetUserPasswordMutation();
@@ -33,6 +37,7 @@ export function UserUpdate() {
   const authenticatedUserBag = useAuthenticatedUserBag();
 
   const userHasPermission = useUserHasPermission();
+  const [isDocOpen, setIsDocOpen] = useState(false);
 
   useSetPageDetails({
     pageTitle: ADMIN_USERS_CRUD_CONFIG.TEXT_LANG.EDIT,
@@ -51,9 +56,9 @@ export function UserUpdate() {
           title={ADMIN_USERS_CRUD_CONFIG.TEXT_LANG.EDIT}
           iconButtons={[
             {
-              action: LINK_TO_DOCS("accounts/system-profile"),
+              action: () => setIsDocOpen(true),
               icon: "help",
-              label: "System Profile Documentation",
+              label: DOCUMENTATION_LABEL.CONCEPT(DOCS_TITLE),
             },
           ]}
           backLink={backLink}
@@ -87,6 +92,11 @@ export function UserUpdate() {
             </SectionBox>
           )}
       </SectionCenter>
+      <SystemProfileDocumentation
+        title={DOCS_TITLE}
+        close={setIsDocOpen}
+        isOpen={isDocOpen}
+      />
     </AppLayout>
   );
 }

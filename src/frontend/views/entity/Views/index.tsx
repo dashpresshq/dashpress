@@ -8,7 +8,6 @@ import { useSetPageDetails } from "frontend/lib/routing";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { ITableTab } from "shared/types/data";
 import { useEntitySlug } from "frontend/hooks/entity/entity.config";
-import { LINK_TO_DOCS } from "frontend/views/constants";
 import {
   useEntityConfiguration,
   useUpsertConfigurationMutation,
@@ -16,14 +15,20 @@ import {
 import { USER_PERMISSIONS } from "shared/constants/user";
 import { useTableColumns } from "frontend/views/data/Table/useTableColumns";
 import { MAKE_APP_CONFIGURATION_CRUD_CONFIG } from "frontend/hooks/configuration/configuration.constant";
+import { useState } from "react";
+import { DOCUMENTATION_LABEL } from "frontend/docs";
+import { ViewsDocumentation } from "frontend/docs/views";
 import { BaseEntitySettingsLayout } from "../_Base";
 import { ENTITY_CONFIGURATION_VIEW } from "../constants";
 import { EntityTableTabForm } from "./Form";
 
 const CRUD_CONFIG = MAKE_APP_CONFIGURATION_CRUD_CONFIG("entity_views");
 
+const DOCS_TITLE = "Views";
+
 export function EntityViewsSettings() {
   const entity = useEntitySlug();
+  const [isDocOpen, setIsDocOpen] = useState(false);
 
   const upsertEntityViewsMutation = useUpsertConfigurationMutation(
     "entity_views",
@@ -56,9 +61,9 @@ export function EntityViewsSettings() {
         title={CRUD_CONFIG.TEXT_LANG.TITLE}
         iconButtons={[
           {
-            action: LINK_TO_DOCS("app-configuration/views"),
+            action: () => setIsDocOpen(true),
             icon: "help",
-            label: "Views Documentation",
+            label: DOCUMENTATION_LABEL.CONCEPT(DOCS_TITLE),
           },
         ]}
       >
@@ -82,6 +87,11 @@ export function EntityViewsSettings() {
           )}
         </ViewStateMachine>
       </SectionBox>
+      <ViewsDocumentation
+        title={DOCS_TITLE}
+        close={setIsDocOpen}
+        isOpen={isDocOpen}
+      />
     </BaseEntitySettingsLayout>
   );
 }

@@ -3,12 +3,14 @@ import { SLUG_LOADING_VALUE } from "@hadmean/protozoa";
 import { useSetPageDetails } from "frontend/lib/routing";
 import { USER_PERMISSIONS } from "shared/constants/user";
 import { IFormExtension } from "frontend/components/SchemaForm/types";
-import { LINK_TO_DOCS } from "frontend/views/constants";
 import { MAKE_APP_CONFIGURATION_CRUD_CONFIG } from "frontend/hooks/configuration/configuration.constant";
 import {
   useEntityConfiguration,
   useUpsertConfigurationMutation,
 } from "frontend/hooks/configuration/configuration.store";
+import { FormScriptDocumentation } from "frontend/docs/form-scripts";
+import { useState } from "react";
+import { DOCUMENTATION_LABEL } from "frontend/docs";
 import { useEntitySlug } from "../../../hooks/entity/entity.config";
 import { BaseEntitySettingsLayout } from "../_Base";
 
@@ -61,10 +63,13 @@ function useEntityFormView() {
   };
 }
 
+const DOCS_TITLE = "Form Scripts";
+
 const CRUD_CONFIG = MAKE_APP_CONFIGURATION_CRUD_CONFIG("entity_form_extension");
 
 export function EntityFormExtensionSettings() {
   const entityFormView = useEntityFormView();
+  const [isDocOpen, setIsDocOpen] = useState(false);
   useSetPageDetails({
     pageTitle: CRUD_CONFIG.TEXT_LANG.TITLE,
     viewKey: ENTITY_CONFIGURATION_VIEW,
@@ -76,9 +81,9 @@ export function EntityFormExtensionSettings() {
         title={CRUD_CONFIG.TEXT_LANG.TITLE}
         iconButtons={[
           {
-            action: LINK_TO_DOCS("app-configuration/form"),
+            action: () => setIsDocOpen(true),
             icon: "help",
-            label: "Form Scripts Documentation",
+            label: DOCUMENTATION_LABEL.CONCEPT(DOCS_TITLE),
           },
         ]}
       >
@@ -89,6 +94,11 @@ export function EntityFormExtensionSettings() {
           }))}
         />
       </SectionBox>
+      <FormScriptDocumentation
+        title={DOCS_TITLE}
+        close={setIsDocOpen}
+        isOpen={isDocOpen}
+      />
     </BaseEntitySettingsLayout>
   );
 }

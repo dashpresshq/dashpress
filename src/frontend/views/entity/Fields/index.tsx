@@ -28,9 +28,11 @@ import {
   useEntityConfiguration,
   useUpsertConfigurationMutation,
 } from "frontend/hooks/configuration/configuration.store";
-import { LINK_TO_DOCS } from "frontend/views/constants";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { MAKE_APP_CONFIGURATION_CRUD_CONFIG } from "frontend/hooks/configuration/configuration.constant";
+import { FieldsSettingsDocumentation } from "frontend/docs/fields";
+import { useState } from "react";
+import { DOCUMENTATION_LABEL } from "frontend/docs";
 import { BaseEntitySettingsLayout } from "../_Base";
 import { FieldsLabelForm, loadingFieldsLabelForm } from "./FieldsLabel.form";
 import { FieldsTypeForm } from "./FieldsType.form";
@@ -39,9 +41,12 @@ import {
   ENTITY_FIELD_SETTINGS_TAB_LABELS,
 } from "../constants";
 
+const DOCS_TITLE = "Fields Settings";
+
 export function EntityFieldsSettings() {
   const tabFromUrl = useRouteParam("tab");
   const changeTabParam = useChangeRouterParam("tab");
+  const [isDocOpen, setIsDocOpen] = useState(false);
 
   const entity = useEntitySlug();
   const entityFieldLists = useEntityFieldLists(entity);
@@ -124,9 +129,9 @@ export function EntityFieldsSettings() {
         title="Fields Settings"
         iconButtons={[
           {
-            action: LINK_TO_DOCS("app-configuration/fields"),
+            action: () => setIsDocOpen(true),
             icon: "help",
-            label: "Fields Settings Documentation",
+            label: DOCUMENTATION_LABEL.CONCEPT(DOCS_TITLE),
           },
         ]}
       >
@@ -234,6 +239,11 @@ export function EntityFieldsSettings() {
           ]}
         />
       </SectionBox>
+      <FieldsSettingsDocumentation
+        title={DOCS_TITLE}
+        close={setIsDocOpen}
+        isOpen={isDocOpen}
+      />
     </BaseEntitySettingsLayout>
   );
 }

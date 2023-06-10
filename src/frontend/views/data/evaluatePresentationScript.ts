@@ -7,7 +7,6 @@ export type IPresentationScriptParams = {
   from: "details" | "table";
 };
 
-// TODO: notify that an error will fail silently as the original value will be used
 export const evalutePresentationScript = (
   script: string,
   { field, from, row, value }: IPresentationScriptParams

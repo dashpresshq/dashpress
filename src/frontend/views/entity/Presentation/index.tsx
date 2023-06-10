@@ -12,9 +12,11 @@ import {
   useEntityConfiguration,
   useUpsertConfigurationMutation,
 } from "frontend/hooks/configuration/configuration.store";
-import { LINK_TO_DOCS } from "frontend/views/constants";
 import { MAKE_APP_CONFIGURATION_CRUD_CONFIG } from "frontend/hooks/configuration/configuration.constant";
 import { IEntityPresentationScript } from "frontend/views/data/types";
+import { useState } from "react";
+import { DOCUMENTATION_LABEL } from "frontend/docs";
+import { PresentationScriptDocumentation } from "frontend/docs/presentations-scripts";
 import { BaseEntitySettingsLayout } from "../_Base";
 import { PresentationScriptForm } from "./Form";
 import { ENTITY_CONFIGURATION_VIEW } from "../constants";
@@ -22,6 +24,8 @@ import { ENTITY_CONFIGURATION_VIEW } from "../constants";
 const PRESENTATION_SCRIPT_CRUD_CONFIG = MAKE_APP_CONFIGURATION_CRUD_CONFIG(
   "entity_presentation_script"
 );
+
+const DOCS_TITLE = "Presentation Script";
 
 export function EntityPresentationScriptSettings() {
   const entity = useEntitySlug();
@@ -34,6 +38,7 @@ export function EntityPresentationScriptSettings() {
     "entity_presentation_script",
     entity
   );
+  const [isDocOpen, setIsDocOpen] = useState(false);
 
   useSetPageDetails({
     pageTitle: PRESENTATION_SCRIPT_CRUD_CONFIG.TEXT_LANG.TITLE,
@@ -46,9 +51,9 @@ export function EntityPresentationScriptSettings() {
         title={PRESENTATION_SCRIPT_CRUD_CONFIG.TEXT_LANG.TITLE}
         iconButtons={[
           {
-            action: LINK_TO_DOCS("app-configuration/presentation"),
+            action: () => setIsDocOpen(true),
             icon: "help",
-            label: "Documentation",
+            label: DOCUMENTATION_LABEL.CONCEPT(DOCS_TITLE),
           },
         ]}
       >
@@ -69,6 +74,11 @@ export function EntityPresentationScriptSettings() {
           />
         </ViewStateMachine>
       </SectionBox>
+      <PresentationScriptDocumentation
+        title={DOCS_TITLE}
+        close={setIsDocOpen}
+        isOpen={isDocOpen}
+      />
     </BaseEntitySettingsLayout>
   );
 }

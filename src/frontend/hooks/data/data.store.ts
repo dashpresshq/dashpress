@@ -54,7 +54,6 @@ export const useEntityDataDetails = (
       errorMessage: entityCrudConfig.TEXT_LANG.NOT_FOUND,
       enabled: !!id && !!entity && id !== SLUG_LOADING_VALUE,
       defaultData: {},
-      returnUndefinedOnError: true, // TODO remove automatic 404
     }
   );
 };

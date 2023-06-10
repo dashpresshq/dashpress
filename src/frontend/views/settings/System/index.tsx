@@ -10,14 +10,18 @@ import {
   useUpsertConfigurationMutation,
 } from "frontend/hooks/configuration/configuration.store";
 import { ISystemSettings } from "shared/configurations";
-import { LINK_TO_DOCS } from "frontend/views/constants";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { MAKE_APP_CONFIGURATION_CRUD_CONFIG } from "frontend/hooks/configuration/configuration.constant";
+import { SystemSettingsDocumentation } from "frontend/docs/system-settings";
+import { DOCUMENTATION_LABEL } from "frontend/docs";
+import { useState } from "react";
 import { BaseSettingsLayout } from "../_Base";
 import { SystemSettingsForm } from "./Form";
 import { SETTINGS_VIEW_KEY } from "../constants";
 
 const CRUD_CONFIG = MAKE_APP_CONFIGURATION_CRUD_CONFIG("system_settings");
+
+const DOCS_TITLE = "System Settings";
 
 export function SystemSettings() {
   const systemSettings =
@@ -25,6 +29,8 @@ export function SystemSettings() {
 
   const upsertConfigurationMutation =
     useUpsertConfigurationMutation("system_settings");
+
+  const [isDocOpen, setIsDocOpen] = useState(false);
 
   useSetPageDetails({
     pageTitle: CRUD_CONFIG.TEXT_LANG.TITLE,
@@ -38,9 +44,9 @@ export function SystemSettings() {
         title={CRUD_CONFIG.TEXT_LANG.TITLE}
         iconButtons={[
           {
-            action: LINK_TO_DOCS("app-configuration/system"),
+            action: () => setIsDocOpen(true),
             icon: "help",
-            label: "System Settings Documentation",
+            label: DOCUMENTATION_LABEL.CONCEPT(DOCS_TITLE),
           },
         ]}
       >
@@ -61,6 +67,11 @@ export function SystemSettings() {
           />
         </ViewStateMachine>
       </SectionBox>
+      <SystemSettingsDocumentation
+        title={DOCS_TITLE}
+        close={setIsDocOpen}
+        isOpen={isDocOpen}
+      />
     </BaseSettingsLayout>
   );
 }

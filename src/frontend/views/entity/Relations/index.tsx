@@ -27,9 +27,11 @@ import {
   useEntityConfiguration,
   useUpsertConfigurationMutation,
 } from "frontend/hooks/configuration/configuration.store";
-import { LINK_TO_DOCS } from "frontend/views/constants";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { MAKE_APP_CONFIGURATION_CRUD_CONFIG } from "frontend/hooks/configuration/configuration.constant";
+import { useState } from "react";
+import { DOCUMENTATION_LABEL } from "frontend/docs";
+import { RelationsSettingsDocumentation } from "frontend/docs/relations";
 import { BaseEntitySettingsLayout } from "../_Base";
 import { EntityRelationsForm } from "./Relations.form";
 import { ENTITY_CONFIGURATION_VIEW } from "../constants";
@@ -38,6 +40,8 @@ import {
   loadingFieldsLabelForm,
 } from "../Fields/FieldsLabel.form";
 
+const DOCS_TITLE = "Relationship Settings";
+
 export function EntityRelationsSettings() {
   const entity = useEntitySlug();
   const tabFromUrl = useRouteParam("tab");
@@ -45,6 +49,7 @@ export function EntityRelationsSettings() {
   const entityFields = useEntityFields(entity);
   const entityRelationList = useEntityRelationsList(entity);
   const referenceFields = useEntityReferenceFields(entity);
+  const [isDocOpen, setIsDocOpen] = useState(false);
 
   useSetPageDetails({
     pageTitle: "Relationship Settings",
@@ -120,9 +125,9 @@ export function EntityRelationsSettings() {
         title="Relationship Settings"
         iconButtons={[
           {
-            action: LINK_TO_DOCS("app-configuration/relations"),
+            action: () => setIsDocOpen(true),
             icon: "help",
-            label: "Relationship Settings Documentation",
+            label: DOCUMENTATION_LABEL.CONCEPT(DOCS_TITLE),
           },
         ]}
       >
@@ -228,6 +233,11 @@ export function EntityRelationsSettings() {
           ]}
         />
       </SectionBox>
+      <RelationsSettingsDocumentation
+        title={DOCS_TITLE}
+        close={setIsDocOpen}
+        isOpen={isDocOpen}
+      />
     </BaseEntitySettingsLayout>
   );
 }

@@ -7,7 +7,6 @@ import {
   Typo,
 } from "@hadmean/chromista";
 import { IntegrationsConfigurationGroup } from "shared/types/integrations";
-import { LINK_TO_DOCS } from "frontend/views/constants";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import {
   FEPaginationTable,
@@ -25,6 +24,8 @@ import { USER_PERMISSIONS } from "shared/constants/user";
 import { usePasswordStore } from "frontend/views/integrations/password.store";
 import { useUserHasPermission } from "frontend/hooks/auth/user.store";
 import { INTEGRATIONS_GROUP_CONFIG } from "shared/config-bag/integrations";
+import { VariablesDocumentation } from "frontend/docs/variables";
+import { DOCUMENTATION_LABEL } from "frontend/docs";
 import {
   INTEGRATIONS_GROUP_ENDPOINT,
   useIntegrationConfigurationDeletionMutation,
@@ -50,6 +51,7 @@ export function ManageCredentialGroup({
     useIntegrationConfigurationDeletionMutation(group);
 
   const tableData = useApi<IKeyValue[]>(dataEndpoint, { defaultData: [] });
+  const [isDocOpen, setIsDocOpen] = useState(false);
 
   const revealedCredentials = useRevealedCredentialsList(group);
 
@@ -121,10 +123,11 @@ export function ManageCredentialGroup({
       secondaryActionItems: [
         {
           id: "help",
-          onClick: () =>
-            window.open(LINK_TO_DOCS(`integrations/variables#${group}`)),
+          onClick: () => setIsDocOpen(true),
           IconComponent: HelpCircle,
-          label: `What are ${INTEGRATIONS_GROUP_CONFIG[group].crudConfig.TEXT_LANG.TITLE}`,
+          label: DOCUMENTATION_LABEL.CONCEPT(
+            INTEGRATIONS_GROUP_CONFIG[group].crudConfig.TEXT_LANG.TITLE
+          ),
         },
       ],
     };
@@ -238,6 +241,11 @@ export function ManageCredentialGroup({
           }}
         />
       </OffCanvas>
+      <VariablesDocumentation
+        title={INTEGRATIONS_GROUP_CONFIG[group].crudConfig.TEXT_LANG.TITLE}
+        close={setIsDocOpen}
+        isOpen={isDocOpen}
+      />
     </>
   );
 }

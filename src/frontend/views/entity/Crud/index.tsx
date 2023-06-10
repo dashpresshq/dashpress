@@ -12,7 +12,8 @@ import {
   useRouteParam,
 } from "frontend/lib/routing";
 import { USER_PERMISSIONS } from "shared/constants/user";
-import { LINK_TO_DOCS } from "frontend/views/constants";
+import { DOCUMENTATION_LABEL } from "frontend/docs";
+import { CRUDDocumentation } from "frontend/docs/crud";
 import {
   useEntityCrudSettings,
   useEntityFieldLabels,
@@ -30,6 +31,8 @@ import {
   ENTITY_CONFIGURATION_VIEW,
   ENTITY_CRUD_SETTINGS_TAB_LABELS,
 } from "../constants";
+
+const DOCS_TITLE = "CRUD Settings";
 
 function useEntityCrudView() {
   const entity = useEntitySlug();
@@ -243,6 +246,7 @@ export function EntityCrudSettings() {
   const tabFromUrl = useRouteParam("tab");
   const changeTabParam = useChangeRouterParam("tab");
   const entityCrudView = useEntityCrudView();
+  const [isDocOpen, setIsDocOpen] = useState(false);
 
   useSetPageDetails({
     pageTitle: "CRUD Settings",
@@ -255,9 +259,9 @@ export function EntityCrudSettings() {
         title="CRUD Settings"
         iconButtons={[
           {
-            action: LINK_TO_DOCS("app-configuration/crud"),
+            action: () => setIsDocOpen(true),
             icon: "help",
-            label: "CRUD Settings Documentation",
+            label: DOCUMENTATION_LABEL.CONCEPT(DOCS_TITLE),
           },
         ]}
       >
@@ -273,6 +277,11 @@ export function EntityCrudSettings() {
           )}
         />
       </SectionBox>
+      <CRUDDocumentation
+        title={DOCS_TITLE}
+        close={setIsDocOpen}
+        isOpen={isDocOpen}
+      />
     </BaseEntitySettingsLayout>
   );
 }

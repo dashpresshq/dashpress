@@ -8,11 +8,13 @@ import {
 import { useActiveEntities } from "frontend/hooks/entity/entity.store";
 import { useNavigationStack, useSetPageDetails } from "frontend/lib/routing";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
-import { LINK_TO_DOCS } from "frontend/views/constants";
 import { BASE_USER_PERMISSIONS, USER_PERMISSIONS } from "shared/constants/user";
 import { ILabelValue } from "types";
 import { userFriendlyCase } from "shared/lib/strings";
 import { usePortalUserPermissions } from "shared/constants/portal/user";
+import { DOCUMENTATION_LABEL } from "frontend/docs";
+import { useState } from "react";
+import { RolesDocumentation } from "frontend/docs/roles";
 import { AppLayout } from "../../../_layouts/app";
 import {
   ADMIN_PERMISSIONS_CRUD_CONFIG,
@@ -32,12 +34,15 @@ const adminPermissionList: ILabelValue[] = mapPermissionStringToLabelValue(
   Object.values(BASE_USER_PERMISSIONS)
 );
 
+const DOCS_TITLE = "Roles and Permissions";
+
 export function RolePermissions() {
   const activeEntities = useActiveEntities();
   const portalPermission = usePortalExtendedPermissions();
   const rolePermissions = useRolePermissions();
   const portalUserPermissions = usePortalUserPermissions();
   const { backLink } = useNavigationStack();
+  const [isDocOpen, setIsDocOpen] = useState(false);
 
   const portalUserPermissionsList = mapPermissionStringToLabelValue(
     portalUserPermissions
@@ -60,9 +65,9 @@ export function RolePermissions() {
           backLink={backLink}
           iconButtons={[
             {
-              action: LINK_TO_DOCS("accounts/roles"),
+              action: () => setIsDocOpen(true),
               icon: "help",
-              label: "Permissions Documentation",
+              label: DOCUMENTATION_LABEL.CONCEPT(DOCS_TITLE),
             },
           ]}
         >
@@ -92,6 +97,11 @@ export function RolePermissions() {
         </SectionBox>
         <Spacer />
       </SectionCenter>
+      <RolesDocumentation
+        title={DOCS_TITLE}
+        close={setIsDocOpen}
+        isOpen={isDocOpen}
+      />
     </AppLayout>
   );
 }

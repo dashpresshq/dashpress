@@ -6,7 +6,9 @@ import {
 import { useRouteParam, useSetPageDetails } from "frontend/lib/routing";
 import { USER_PERMISSIONS } from "shared/constants/user";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
-import { LINK_TO_DOCS } from "frontend/views/constants";
+import { useState } from "react";
+import { DOCUMENTATION_LABEL } from "frontend/docs";
+import { FormIntegrationsDocumentation } from "frontend/docs/form-integrations";
 import { BaseActionsLayout } from "../_Base";
 import {
   useActionIntegrationsList,
@@ -16,8 +18,11 @@ import { ACTIONS_VIEW_KEY } from "../constants";
 import { ActionSettingsView } from "./View";
 import { ACTION_INTEGRATIONS_CRUD_CONFIG } from "./constants";
 
+const DOCS_TITLE = ACTION_INTEGRATIONS_CRUD_CONFIG.TEXT_LANG.TITLE;
+
 export function ActionsIntegrations() {
   const currentKey = useRouteParam("key");
+  const [isDocOpen, setIsDocOpen] = useState(false);
 
   const integrationsList = useActionIntegrationsList();
   const activeActionsList = useActiveActionList();
@@ -44,9 +49,9 @@ export function ActionsIntegrations() {
         description={integrationDetail ? integrationDetail.description : ""}
         iconButtons={[
           {
-            action: LINK_TO_DOCS(`integrations/form`),
+            action: () => setIsDocOpen(true),
             icon: "help",
-            label: `${ACTION_INTEGRATIONS_CRUD_CONFIG.TEXT_LANG.TITLE} Documentation`,
+            label: DOCUMENTATION_LABEL.CONCEPT(DOCS_TITLE),
           },
         ]}
       >
@@ -70,6 +75,11 @@ export function ActionsIntegrations() {
           />
         </ViewStateMachine>
       </SectionBox>
+      <FormIntegrationsDocumentation
+        title={DOCS_TITLE}
+        close={setIsDocOpen}
+        isOpen={isDocOpen}
+      />
     </BaseActionsLayout>
   );
 }

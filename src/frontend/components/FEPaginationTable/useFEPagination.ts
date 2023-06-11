@@ -7,7 +7,7 @@ import {
   PaginatedData,
   IPaginatedDataState,
 } from "@hadmean/protozoa";
-import { QueryFilter } from "shared/types/data";
+import { FieldQueryFilter } from "shared/types/data";
 
 const DEFAULT_PAGE_SIZE = 10;
 
@@ -30,7 +30,7 @@ export function useFEPagination<T>(
         if (dataState.filters) {
           returnData = returnData.filter((datum) => {
             return dataState.filters.every(($filter) => {
-              const filter = $filter as unknown as QueryFilter;
+              const filter = $filter as unknown as FieldQueryFilter;
               const filterValue = filter.value.value;
               const currentValue = get(datum, filter.id);
               if (!filterValue) {

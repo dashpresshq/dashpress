@@ -20,7 +20,7 @@ export function DashboardSkeleton() {
         <BaseSkeleton height="100px" />
       </Root>
       <Root>
-        <WidgetRoot size="4" hasSetting={false}>
+        <WidgetRoot $size="4" $height="3" hasSetting={false}>
           <TableSkeleton />
         </WidgetRoot>
       </Root>

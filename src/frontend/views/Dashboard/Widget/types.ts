@@ -1,12 +1,10 @@
 import { ReactElement } from "react";
-import { WidgetSizes } from "shared/types/dashboard";
+import { WidgetHeightUnits, WidgetSizes } from "shared/types/dashboard/types";
 import { z } from "zod";
 
 export interface IWidgetConfigBag {
   size: WidgetSizes;
-  height: number;
-  overrideSize?: WidgetSizes;
-  overrideHeight?: number;
+  height: WidgetHeightUnits;
   label: string;
   schema: z.ZodTypeAny;
   requiredInterface: string;

@@ -15,7 +15,7 @@ let DASHBOARD_WIDGETS: IWidgetConfig[] = [
     ]),
     title: "Foo Table",
     size: "2",
-    height: 250,
+    height: "2",
   },
   {
     _type: "summary-card",

@@ -1,4 +1,4 @@
-import { QueryFilter } from "shared/types/data";
+import { QueryFilterSchema } from "shared/types/data";
 import { ILabelValue } from "types";
 import { IAccountProfile } from "shared/types/user";
 import { DataApiService, dataApiService } from "./data.service";
@@ -9,7 +9,7 @@ export class DataApiController {
 
   async tableData(
     entity: string,
-    queryFilters: QueryFilter[],
+    queryFilters: QueryFilterSchema,
     paginationFilters: IPaginationFilters
   ) {
     return await this._dataApiService.tableData(
@@ -33,7 +33,7 @@ export class DataApiController {
 
   async countData(
     entity: string,
-    queryFilters: QueryFilter[]
+    queryFilters: QueryFilterSchema
   ): Promise<{ count: number }> {
     return {
       count: await this._dataApiService.count(entity, queryFilters),

@@ -19,5 +19,3 @@ export type IWidgetConfig =
 export const HOME_DASHBOARD_KEY = "__home__widgets";
 
 export const WIDGET_SCRIPT_RELATIVE_TIME_MARKER = "RELATIVE_TIME";
-
-export type WidgetSizes = "1" | "2" | "4";

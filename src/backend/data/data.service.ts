@@ -1,5 +1,5 @@
 import { NotFoundError, progammingError } from "backend/lib/errors";
-import { DataCrudKeys, QueryFilter } from "shared/types/data";
+import { DataCrudKeys, QueryFilterSchema } from "shared/types/data";
 import {
   actionsApiService,
   ActionsApiService,
@@ -48,7 +48,7 @@ export class DataApiService implements IDataApiService {
   async list(
     entity: string,
     select: string[],
-    queryFilter: QueryFilter[],
+    queryFilter: QueryFilterSchema,
     dataFetchingModifiers: IPaginationFilters
   ): Promise<Record<string, unknown>[]> {
     return await this.getDataAccessInstance().list(
@@ -178,14 +178,16 @@ export class DataApiService implements IDataApiService {
     const data = await this.getDataAccessInstance().list(
       entity,
       [...relationshipSettings.fields, primaryField],
-      [relationshipSettings.fields[0]].map((field) => ({
-        // TODO  Or Clause relationshipSettings.fields.map((field) => ({
-        id: field,
-        value: {
-          operator: FilterOperators.CONTAINS,
-          value: searchValue,
-        },
-      })),
+      {
+        operator: "or",
+        children: relationshipSettings.fields.map((field) => ({
+          id: field,
+          value: {
+            operator: FilterOperators.CONTAINS,
+            value: searchValue,
+          },
+        })),
+      },
       {
         take: DEFAULT_LIST_LIMIT,
         page: 1,
@@ -202,7 +204,7 @@ export class DataApiService implements IDataApiService {
 
   async tableData(
     entity: string,
-    queryFilters: QueryFilter[],
+    queryFilters: QueryFilterSchema,
     paginationFilters: IPaginationFilters
   ): Promise<PaginatedData<unknown>> {
     return makeTableData(
@@ -299,7 +301,7 @@ export class DataApiService implements IDataApiService {
     });
   }
 
-  async count(entity: string, queryFilter: QueryFilter[]): Promise<number> {
+  async count(entity: string, queryFilter: QueryFilterSchema): Promise<number> {
     return await this.getDataAccessInstance().count(entity, queryFilter);
   }
 

@@ -3,7 +3,7 @@ import {
   FilterOperators,
   IColumnFilterBag,
 } from "@hadmean/protozoa";
-import { QueryFilter } from "shared/types/data";
+import { QueryFilterSchema } from "shared/types/data";
 import { IPaginationFilters } from "../types";
 import { QueryOperationImplementation, QueryOperators } from "./types";
 import { relativeDateNotationToActualDate } from "./time.constants";
@@ -11,12 +11,15 @@ import { relativeDateNotationToActualDate } from "./time.constants";
 export abstract class BaseDataAccessService<T> {
   abstract queryOperationImplementation: QueryOperationImplementation<T>;
 
-  abstract count(entity: string, queryFilter: QueryFilter[]): Promise<number>;
+  abstract count(
+    entity: string,
+    queryFilter: QueryFilterSchema
+  ): Promise<number>;
 
   abstract list(
     entity: string,
     select: string[],
-    queryFilter: QueryFilter[],
+    queryFilter: QueryFilterSchema,
     dataFetchingModifiers: IPaginationFilters
   ): Promise<unknown[]>;
 
@@ -46,70 +49,53 @@ export abstract class BaseDataAccessService<T> {
   filterOperatorToQuery(
     query: T,
     column: string,
-    { operator, value, value2 }: IColumnFilterBag<unknown>
+    { operator, value, value2 }: IColumnFilterBag<unknown>,
+    groupOperator: "and" | "or"
   ): T {
     if (!operator || !value || !column) {
       return query;
     }
+
+    const operatorConfig = this.queryOperationImplementation[groupOperator];
+
     switch (operator) {
       case FilterOperators.EQUAL_TO:
-        return this.queryOperationImplementation[QueryOperators.EQUAL_TO](
-          query,
-          column,
-          value
-        );
+        return operatorConfig[QueryOperators.EQUAL_TO](query, column, value);
 
       case FilterOperators.LESS_THAN:
-        return this.queryOperationImplementation[QueryOperators.LESS_THAN](
-          query,
-          column,
-          value
-        );
+        return operatorConfig[QueryOperators.LESS_THAN](query, column, value);
 
       case FilterOperators.GREATER_THAN:
-        return this.queryOperationImplementation[QueryOperators.GREATER_THAN](
+        return operatorConfig[QueryOperators.GREATER_THAN](
           query,
           column,
           value
         );
 
       case FilterOperators.CONTAINS:
-        return this.queryOperationImplementation[QueryOperators.CONTAINS](
-          query,
-          column,
-          value
-        );
+        return operatorConfig[QueryOperators.CONTAINS](query, column, value);
 
       case FilterOperators.IN:
-        return this.queryOperationImplementation[QueryOperators.IN](
-          query,
-          column,
-          value
-        );
+        return operatorConfig[QueryOperators.IN](query, column, value);
 
       case FilterOperators.NOT_IN:
-        return this.queryOperationImplementation[QueryOperators.NOT_IN](
+        return operatorConfig[QueryOperators.NOT_IN](
           query,
           column,
           value as string[]
         );
 
       case FilterOperators.NOT_EQUAL:
-        return this.queryOperationImplementation[QueryOperators.NOT_EQUAL](
-          query,
-          column,
-          value
-        );
+        return operatorConfig[QueryOperators.NOT_EQUAL](query, column, value);
 
       case FilterOperators.BETWEEN:
         if (!value2) {
           return query;
         }
-        return this.queryOperationImplementation[QueryOperators.BETWEEN](
-          query,
-          column,
-          [value, value2]
-        );
+        return operatorConfig[QueryOperators.BETWEEN](query, column, [
+          value,
+          value2,
+        ]);
 
       case FilterOperators.DATE: {
         const firstTime = relativeDateNotationToActualDate(
@@ -122,7 +108,7 @@ export abstract class BaseDataAccessService<T> {
           firstTime.getTime() < secondTime.getTime()
             ? [firstTime, secondTime]
             : [secondTime, firstTime];
-        return this.queryOperationImplementation[QueryOperators.BETWEEN](
+        return operatorConfig[QueryOperators.BETWEEN](
           query,
           column,
           timeBetween

@@ -3,7 +3,7 @@ import {
   useRouteParam,
   useSetPageDetails,
 } from "frontend/lib/routing";
-import { ITableTab, QueryFilter } from "shared/types/data";
+import { ITableTab, FieldQueryFilter } from "shared/types/data";
 import {
   DEFAULT_TABLE_STATE,
   StyledCard,
@@ -72,7 +72,7 @@ export function EntityTable() {
       : entityViews.data.map(({ id, dataState }) => ({
           entity,
           id,
-          filters: dataState.filters as QueryFilter[],
+          filters: dataState.filters as FieldQueryFilter[],
         }))
   );
 

@@ -1,14 +1,15 @@
 import { BREAKPOINTS } from "@hadmean/chromista";
-import { WidgetSizes } from "shared/types/dashboard";
+import { WidgetSizes } from "shared/types/dashboard/types";
 import styled, { css } from "styled-components";
 
 export const gridRoot = css`
   user-select: none;
   display: grid;
   grid-gap: 16px;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: minmax(130px, auto);
   @media (max-width: ${BREAKPOINTS.lg}) {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, 1fr);
   }
   @media (max-width: ${BREAKPOINTS.sm}) {
     grid-template-columns: 1fr;
@@ -38,7 +39,8 @@ const WIDGET_SIZE_CONFIG: Record<
 
 export const WidgetRoot = styled.div<{
   hasSetting: boolean;
-  size: WidgetSizes;
+  $size: WidgetSizes;
+  $height: string;
 }>`
   ${(props) =>
     props.hasSetting &&
@@ -46,12 +48,13 @@ export const WidgetRoot = styled.div<{
       cursor: grab;
       user-select: none;
     `}
-  grid-column-start: span ${(props) => WIDGET_SIZE_CONFIG[props.size].xl};
+  grid-column-start: span ${(props) => WIDGET_SIZE_CONFIG[props.$size].xl};
+  grid-row-start: span ${(props) => props.$height};
 
   @media (max-width: ${BREAKPOINTS.lg}) {
-    grid-column-start: span ${(props) => WIDGET_SIZE_CONFIG[props.size].lg};
+    grid-column-start: span ${(props) => WIDGET_SIZE_CONFIG[props.$size].lg};
   }
   @media (max-width: ${BREAKPOINTS.sm}) {
-    grid-column-start: span ${(props) => WIDGET_SIZE_CONFIG[props.size].sm};
+    grid-column-start: span ${(props) => WIDGET_SIZE_CONFIG[props.$size].sm};
   }
 `;

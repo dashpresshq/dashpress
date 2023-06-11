@@ -1,17 +1,17 @@
 import qs from "qs";
-import { QueryFilter } from "shared/types/data";
+import { FieldQueryFilter, QueryFilterSchema } from "shared/types/data";
 import { ValidationImplType } from "./types";
 import { entityValidationImpl } from "./entity";
 import { validateEntityFields } from "./_validateEntityField";
 
 export const queryFilterValidationImpl: ValidationImplType<
-  QueryFilter[]
+  QueryFilterSchema
 > = async (req) => {
   const filters = (qs.parse(
     Object.entries(req.query)
       .map(([key, value]) => `${key}=${value}`)
       .join("&")
-  )?.filters || []) as unknown as QueryFilter[];
+  )?.filters || []) as unknown as FieldQueryFilter[];
 
   const entity = await entityValidationImpl(req);
 
@@ -19,5 +19,6 @@ export const queryFilterValidationImpl: ValidationImplType<
     entity,
     filters.map(({ id }) => id)
   );
-  return filters;
+
+  return { operator: "and", children: filters };
 };

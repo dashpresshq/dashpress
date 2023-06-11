@@ -26,7 +26,6 @@ import { FOR_CODE_COV as $23 } from "backend/lib/config-persistence/portal/main/
 import { FOR_CODE_COV as $24 } from "frontend/views/Dashboard/Widget/types";
 import { FOR_CODE_COV as $25 } from "shared/types/auth/portal/index";
 import { FOR_CODE_COV as $26 } from "shared/types/auth/portal/main";
-import { FOR_CODE_COV as $27 } from "shared/types/dashboard/base";
 import { FOR_CODE_COV as $28 } from "shared/types/portal/widgets/main";
 import { FOR_CODE_COV as $29 } from "shared/types/portal/widgets";
 import { FOR_CODE_COV as $30 } from "backend/lib/cache/portal";
@@ -65,7 +64,6 @@ noop(
   $24,
   $25,
   $26,
-  $27,
   $28,
   $29,
   $30,

@@ -1,8 +1,8 @@
-import { WidgetSizes } from "shared/types/dashboard";
+import { WidgetSizes } from "shared/types/dashboard/types";
 
 export const DASHBOARD_WIDGET_SIZES: { value: WidgetSizes; label: string }[] = [
   {
-    label: "Quarter",
+    label: "Full",
     value: "4",
   },
   {
@@ -10,26 +10,14 @@ export const DASHBOARD_WIDGET_SIZES: { value: WidgetSizes; label: string }[] = [
     value: "2",
   },
   {
-    label: "Full",
+    label: "Quarter",
     value: "1",
   },
 ];
 
-export const DASHBOARD_WIDGET_HEIGHTS = [
-  {
-    value: "150",
-    label: "Small",
-  },
-  {
-    value: "250",
-    label: "Medium",
-  },
-  {
-    value: "350",
-    label: "Large",
-  },
-  {
-    value: "450",
-    label: "Xtra Large",
-  },
-];
+export const DASHBOARD_WIDGET_HEIGHTS = [1, 2, 3, 4, 5, 6, 7, 8].map(
+  (value) => ({
+    label: value === 1 ? `1 Unit` : `${value} Units`,
+    value: `${value}`,
+  })
+);

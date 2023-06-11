@@ -8,13 +8,13 @@ import {
 } from "@hadmean/chromista";
 import { WidgetRoot } from "frontend/views/Dashboard/styles";
 import { ReactElement, forwardRef } from "react";
-import { ISharedWidgetConfig } from "shared/types/dashboard/base";
 import {
   IWidgetConfig,
   WIDGET_SCRIPT_RELATIVE_TIME_MARKER,
 } from "shared/types/dashboard";
 import { DataStateKeys } from "@hadmean/protozoa";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
+import { ISharedWidgetConfig } from "shared/types/dashboard/base";
 import { useWidgetNavigationLink } from "../../../Widget/useWidgetNavigationLink";
 import { WIDGET_CONFIG } from "../../constants";
 import { IWidgetSettingProps } from "../WidgetHeader/types";
@@ -49,8 +49,6 @@ export const WidgetFrame = forwardRef<HTMLDivElement, IProps>(
     const {
       height: configHeight,
       size: configSize,
-      overrideHeight,
-      overrideSize,
       LoadingComponent,
       requiredInterface,
       schema,
@@ -58,9 +56,7 @@ export const WidgetFrame = forwardRef<HTMLDivElement, IProps>(
       isDataEmpty,
     } = WIDGET_CONFIG[type];
 
-    const height = overrideHeight || config.height || configHeight;
-
-    const styleHeight = height ? `${height}px` : undefined;
+    const height = config.height || configHeight;
 
     let schemaError: object | null = null;
 
@@ -85,10 +81,11 @@ export const WidgetFrame = forwardRef<HTMLDivElement, IProps>(
       <WidgetRoot
         ref={ref}
         aria-label={`${config.title} Widget`}
-        size={overrideSize || config.size || configSize}
+        $size={config.size || configSize}
+        $height={height}
         hasSetting={!!setting}
       >
-        <StyledCard>
+        <StyledCard style={{ height: "100%" }}>
           <StyledBox>
             <WidgetHeader
               setting={setting}
@@ -104,7 +101,7 @@ export const WidgetFrame = forwardRef<HTMLDivElement, IProps>(
                 schemaError
                   ? {}
                   : {
-                      height: styleHeight,
+                      height: "100%",
                       overflowY: "auto",
                     }
               }
@@ -112,7 +109,7 @@ export const WidgetFrame = forwardRef<HTMLDivElement, IProps>(
               <ViewStateMachine
                 error={data.error}
                 loading={data.isLoading}
-                loader={<LoadingComponent height={styleHeight} />}
+                loader={<LoadingComponent height="100%" />}
               >
                 {/* eslint-disable-next-line no-nested-ternary */}
                 {schemaError ? (

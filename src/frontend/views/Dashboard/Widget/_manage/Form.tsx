@@ -48,7 +48,7 @@ const DashboardTypesOptions: {
 
 const FormSchema: Partial<Record<IWidgetConfig["_type"], WidgetFormField[]>> = {
   "summary-card": ["color", "icon"],
-  table: ["height", "size"],
+  table: [],
   ...PortalFormSchema,
 };
 
@@ -181,30 +181,26 @@ export function DashboardWidgetForm({
                   value={(values as ISummaryWidgetConfig)?.icon}
                 />
               )}
-              {formFields.includes("size") && (
-                <Field name="size" validateFields={[]}>
-                  {({ input, meta }) => (
-                    <FormSelect
-                      label="Size"
-                      selectData={DASHBOARD_WIDGET_SIZES}
-                      meta={meta}
-                      input={input}
-                    />
-                  )}
-                </Field>
-              )}
-              {formFields.includes("height") && (
-                <Field name="height" validateFields={[]}>
-                  {({ input, meta }) => (
-                    <FormSelect
-                      label="Height"
-                      selectData={DASHBOARD_WIDGET_HEIGHTS}
-                      meta={meta}
-                      input={input}
-                    />
-                  )}
-                </Field>
-              )}
+              <Field name="size" validateFields={[]}>
+                {({ input, meta }) => (
+                  <FormSelect
+                    label="Size"
+                    selectData={DASHBOARD_WIDGET_SIZES}
+                    meta={meta}
+                    input={input}
+                  />
+                )}
+              </Field>
+              <Field name="height" validateFields={[]}>
+                {({ input, meta }) => (
+                  <FormSelect
+                    label="Height"
+                    selectData={DASHBOARD_WIDGET_HEIGHTS}
+                    meta={meta}
+                    input={input}
+                  />
+                )}
+              </Field>
               {values._type && (
                 <>
                   <Field name="script" validate={required} validateFields={[]}>

@@ -1,6 +1,11 @@
 import { IPaginatedDataState, IColumnFilterBag } from "@hadmean/protozoa";
 
-export type QueryFilter = { id: string; value: IColumnFilterBag<unknown> };
+export type FieldQueryFilter = { id: string; value: IColumnFilterBag<unknown> };
+
+export type QueryFilterSchema = {
+  operator: "and" | "or";
+  children: Array<FieldQueryFilter | QueryFilterSchema>;
+};
 
 export type ITableTab = {
   id: string;

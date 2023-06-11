@@ -2,7 +2,7 @@ import fetchMock from "jest-fetch-mock";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { waitFor } from "@testing-library/react";
 import { FilterOperators } from "@hadmean/protozoa";
-import { QueryFilter } from "shared/types/data";
+import { FieldQueryFilter } from "shared/types/data";
 import { renderHook } from "__tests__/_/lib/renderHook";
 import { useFEPagination } from "./useFEPagination";
 
@@ -556,7 +556,7 @@ describe("useFEPagination => ", () => {
                 id: "age",
                 value: { operator: FilterOperators.LESS_THAN, value: "24" },
               },
-            ] as QueryFilter[],
+            ] as FieldQueryFilter[],
           }),
         { wrapper }
       );
@@ -629,7 +629,7 @@ describe("useFEPagination => ", () => {
                   value: "200004",
                 },
               },
-            ] as QueryFilter[],
+            ] as FieldQueryFilter[],
           }),
         { wrapper }
       );

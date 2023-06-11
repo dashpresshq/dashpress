@@ -1,8 +1,8 @@
 import { IPaginatedDataState } from "@hadmean/protozoa";
-import { QueryFilter } from "shared/types/data";
+import { FieldQueryFilter } from "shared/types/data";
 
 export interface IDataTableProps {
-  persitentFilters?: QueryFilter[];
+  persitentFilters?: FieldQueryFilter[];
   defaultTableState?: Pick<
     IPaginatedDataState<unknown>,
     "pageSize" | "sortBy" | "filters"

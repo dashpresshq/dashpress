@@ -1,6 +1,6 @@
 import { PaginatedData } from "@hadmean/protozoa";
 import { IApplicationService } from "backend/types";
-import { QueryFilter } from "shared/types/data";
+import { QueryFilterSchema } from "shared/types/data";
 import { IAccountProfile } from "shared/types/user";
 
 export interface IPaginationFilters {
@@ -16,7 +16,7 @@ export interface IDataApiService extends IApplicationService {
   list(
     entity: string,
     select: string[],
-    queryFilter: QueryFilter[],
+    queryFilter: QueryFilterSchema,
     dataFetchingModifiers: IPaginationFilters
   ): Promise<Record<string, unknown>[]>;
 
@@ -26,7 +26,7 @@ export interface IDataApiService extends IApplicationService {
     query: Record<string, unknown>
   ): Promise<Record<string, unknown>>;
 
-  count(entity: string, queryFilter: QueryFilter[]): Promise<number>;
+  count(entity: string, queryFilter: QueryFilterSchema): Promise<number>;
 
   create(
     entity: string,
@@ -51,7 +51,7 @@ export interface IDataApiService extends IApplicationService {
 
   tableData(
     entity: string,
-    queryFilters: QueryFilter[],
+    queryFilters: QueryFilterSchema,
     paginationFilters: IPaginationFilters
   ): Promise<PaginatedData<unknown>>;
 }

@@ -10,6 +10,6 @@ export enum QueryOperators {
 }
 
 export type QueryOperationImplementation<T> = Record<
-  QueryOperators,
-  (query: T, column: string, value: unknown) => T
+  "or" | "and",
+  Record<QueryOperators, (query: T, column: string, value: unknown) => T>
 >;

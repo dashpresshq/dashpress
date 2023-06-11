@@ -11,7 +11,7 @@ import {
 import qs from "qs";
 import { useRouter } from "next/router";
 import { useMutation } from "react-query";
-import { QueryFilter } from "shared/types/data";
+import { FieldQueryFilter } from "shared/types/data";
 import { CRUD_CONFIG_NOT_FOUND } from "frontend/lib/makeCrudConfig";
 import { NAVIGATION_LINKS } from "../../lib/routing/links";
 import { useEntityCrudConfig } from "../entity/entity.config";
@@ -60,7 +60,7 @@ export const useEntityDataDetails = (
 
 const buildFilterCountQueryString = (
   entity: string,
-  queryFilter: QueryFilter[]
+  queryFilter: FieldQueryFilter[]
 ) =>
   `${ENTITY_COUNT_PATH(entity)}?${qs.stringify({
     filters: queryFilter,
@@ -68,7 +68,7 @@ const buildFilterCountQueryString = (
 
 export const useEntityFilterCount = (
   entity: string,
-  filters: QueryFilter[] | "loading"
+  filters: FieldQueryFilter[] | "loading"
 ) => {
   return useApi<{ count: number }>(
     buildFilterCountQueryString(entity, filters === "loading" ? [] : filters),
@@ -81,7 +81,7 @@ export const useEntityFilterCount = (
 };
 
 export const useEntitiesFilterCount = (
-  entityFilters: { entity: string; filters: QueryFilter[]; id: string }[]
+  entityFilters: { entity: string; filters: FieldQueryFilter[]; id: string }[]
 ) => {
   const filterHashMap = Object.fromEntries(
     entityFilters.map(({ id, ...rest }) => [id, rest])
@@ -123,7 +123,7 @@ export const useEntityReferenceCount = (
     input: entitiesReferences,
     accessor: "entity",
     pathFn: (entity) => {
-      const queryFilter: QueryFilter = {
+      const queryFilter: FieldQueryFilter = {
         id: entitiesReferences.find(
           (entityReference) => entity === entityReference.entity
         ).referenceField,

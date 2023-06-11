@@ -9,7 +9,7 @@ const BASE_WIDGET_CONFIG: Partial<
   Record<IWidgetConfig["_type"], IWidgetConfigBag>
 > = {
   table: {
-    height: 250,
+    height: "3",
     size: "4",
     label: "Table",
     exampleValidData: [
@@ -24,10 +24,8 @@ const BASE_WIDGET_CONFIG: Partial<
     },
   },
   "summary-card": {
-    height: 40,
+    height: "1",
     size: "1",
-    overrideHeight: 40,
-    overrideSize: "1",
     label: "Summary Card",
     exampleValidData: [{ count: 30 }],
     requiredInterface: `[{count: number} | number] | number`,

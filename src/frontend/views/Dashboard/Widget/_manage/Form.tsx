@@ -37,6 +37,7 @@ import { PortalFormFields, PortalFormSchema } from "./portal";
 import { WIDGET_CONFIG } from "../constants";
 import { DashboardWidgetPresentation } from "../Presentation";
 import { DASHBOARD_WIDGETS_CRUD_CONFIG } from "../../constants";
+import { GridSpan } from "./Form.style";
 
 const DOCS_TITLE = "Widget Script";
 
@@ -47,10 +48,6 @@ const Root = styled.div`
   @media (max-width: ${BREAKPOINTS.lg}) {
     grid-template-columns: repeat(1, 1fr);
   }
-`;
-
-const Full = styled.div`
-  grid-column-start: span 2;
 `;
 
 const DashboardTypesOptions: {
@@ -125,7 +122,7 @@ export function DashboardWidgetForm({
               }}
             >
               <Root>
-                <Full>
+                <GridSpan>
                   <Field name="title" validate={required} validateFields={[]}>
                     {({ input, meta }) => (
                       <FormInput
@@ -136,8 +133,8 @@ export function DashboardWidgetForm({
                       />
                     )}
                   </Field>
-                </Full>
-                <Full>
+                </GridSpan>
+                <GridSpan>
                   <Field name="_type" validate={required} validateFields={[]}>
                     {({ input, meta }) => (
                       <FormSelect
@@ -150,8 +147,8 @@ export function DashboardWidgetForm({
                       />
                     )}
                   </Field>
-                </Full>
-                <Full>
+                </GridSpan>
+                <GridSpan>
                   <Field name="entity" validateFields={[]}>
                     {({ input, meta }) => (
                       <FormSelect
@@ -164,9 +161,9 @@ export function DashboardWidgetForm({
                       />
                     )}
                   </Field>
-                </Full>
+                </GridSpan>
                 {values.entity && (entityViews.data || []).length > 0 && (
-                  <Full>
+                  <GridSpan>
                     <Field name="queryId" validateFields={[]}>
                       {({ input, meta }) => (
                         <FormSelect
@@ -184,11 +181,11 @@ export function DashboardWidgetForm({
                         />
                       )}
                     </Field>
-                  </Full>
+                  </GridSpan>
                 )}
 
                 <PortalFormFields formFields={formFields} />
-                <Full>
+                <GridSpan>
                   {formFields.includes("color") && (
                     <Field name="color" validate={required} validateFields={[]}>
                       {({ input, meta }) => (
@@ -205,36 +202,40 @@ export function DashboardWidgetForm({
                       )}
                     </Field>
                   )}
-                </Full>
-                <Full>
+                </GridSpan>
+                <GridSpan>
                   {formFields.includes("icon") && (
                     <IconInputField
                       value={(values as ISummaryWidgetConfig)?.icon}
                     />
                   )}
-                </Full>
-                <Field name="size" validateFields={[]}>
-                  {({ input, meta }) => (
-                    <FormSelect
-                      label="Width"
-                      selectData={DASHBOARD_WIDGET_SIZES}
-                      meta={meta}
-                      input={input}
-                    />
-                  )}
-                </Field>
-                <Field name="height" validateFields={[]}>
-                  {({ input, meta }) => (
-                    <FormSelect
-                      label="Height"
-                      selectData={DASHBOARD_WIDGET_HEIGHTS}
-                      meta={meta}
-                      input={input}
-                    />
-                  )}
-                </Field>
+                </GridSpan>
+                <GridSpan $span={1}>
+                  <Field name="size" validateFields={[]}>
+                    {({ input, meta }) => (
+                      <FormSelect
+                        label="Width"
+                        selectData={DASHBOARD_WIDGET_SIZES}
+                        meta={meta}
+                        input={input}
+                      />
+                    )}
+                  </Field>
+                </GridSpan>
+                <GridSpan $span={1}>
+                  <Field name="height" validateFields={[]}>
+                    {({ input, meta }) => (
+                      <FormSelect
+                        label="Height"
+                        selectData={DASHBOARD_WIDGET_HEIGHTS}
+                        meta={meta}
+                        input={input}
+                      />
+                    )}
+                  </Field>
+                </GridSpan>
                 {values._type && (
-                  <Full>
+                  <GridSpan>
                     <Field
                       name="script"
                       validate={required}
@@ -297,10 +298,10 @@ export function DashboardWidgetForm({
                         />
                       )}
                     </ViewStateMachine>
-                  </Full>
+                  </GridSpan>
                 )}
                 <Spacer />
-                <Full>
+                <GridSpan>
                   {process.env.NEXT_PUBLIC_IS_DEMO ? (
                     <Stack justify="center">
                       <Typo.MD>
@@ -336,7 +337,7 @@ export function DashboardWidgetForm({
                       />
                     </Stack>
                   )}
-                </Full>
+                </GridSpan>
               </Root>
             </form>
           );

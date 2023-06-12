@@ -6,7 +6,7 @@ import { validateEntityFields } from "./_validateEntityField";
 
 export const queryFilterValidationImpl: ValidationImplType<
   QueryFilterSchema
-> = async (req) => {
+> = async (req, ignoreFieldsValidation) => {
   const filters = (qs.parse(
     Object.entries(req.query)
       .map(([key, value]) => `${key}=${value}`)
@@ -15,10 +15,12 @@ export const queryFilterValidationImpl: ValidationImplType<
 
   const entity = await entityValidationImpl(req);
 
-  await validateEntityFields(
-    entity,
-    filters.map(({ id }) => id)
-  );
+  if (!ignoreFieldsValidation) {
+    await validateEntityFields(
+      entity,
+      filters.map(({ id }) => id)
+    );
+  }
 
   return { operator: "and", children: filters };
 };

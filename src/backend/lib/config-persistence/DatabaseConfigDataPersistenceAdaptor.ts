@@ -3,8 +3,7 @@ import { ConfigKeys, ConfigApiService } from "../config/config.service";
 import { getDbConnection } from "../connection/db";
 import { AbstractConfigDataPersistenceService } from "./AbstractConfigDataPersistenceService";
 import { ConfigDomain } from "./types";
-
-const CONFIG_TABLE_PREFIX = (domain: string) => `hadmean__${domain}`;
+import { CONFIG_TABLE_PREFIX } from "./constants";
 
 export class DatabaseConfigDataPersistenceAdaptor<
   T

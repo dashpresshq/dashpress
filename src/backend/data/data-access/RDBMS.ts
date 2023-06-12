@@ -17,6 +17,7 @@ export class RDBMSDataApiService extends BaseDataAccessService<Knex.QueryBuilder
   queryOperationImplementation: QueryOperationImplementation<Knex.QueryBuilder> =
     {
       and: {
+        [QueryOperators.IS_NULL]: (query, column) => query.whereNull(column),
         [QueryOperators.EQUAL_TO]: (query, column, value) =>
           query.where(column, "=", value),
         [QueryOperators.LESS_THAN]: (query, column, value) =>
@@ -35,6 +36,7 @@ export class RDBMSDataApiService extends BaseDataAccessService<Knex.QueryBuilder
           query.whereBetween(column, value as [string, string]),
       },
       or: {
+        [QueryOperators.IS_NULL]: (query, column) => query.orWhereNull(column),
         [QueryOperators.EQUAL_TO]: (query, column, value) =>
           query.orWhere(column, "=", value),
         [QueryOperators.LESS_THAN]: (query, column, value) =>

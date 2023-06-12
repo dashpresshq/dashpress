@@ -8,7 +8,10 @@ import { IApplicationService } from "backend/types";
 import noop from "lodash/noop";
 import { IDBSchema, IEntityField, IEntityRelation } from "shared/types/db";
 import { sortByList } from "shared/logic/entities/sort.utils";
+import { DataCrudKeys } from "shared/types/data";
+import { CRUD_KEY_CONFIG } from "shared/configurations/permissions";
 import { SchemasApiService, schemasApiService } from "../schema/schema.service";
+import { PortalFieldsFilterService } from "./portal";
 
 export class EntitiesApiService implements IApplicationService {
   constructor(
@@ -108,6 +111,39 @@ export class EntitiesApiService implements IApplicationService {
 
   async getEntityFromSchema(entity: string): Promise<IDBSchema> {
     return (await this.getDBSchemaModels())[entity];
+  }
+
+  async getAllowedCrudsFieldsToShow(
+    entity: string,
+    crudKey: DataCrudKeys
+  ): Promise<string[]> {
+    const [configHiddenFields, entityFields] = await Promise.all([
+      this._configurationApiService.show<string[]>(
+        CRUD_KEY_CONFIG[crudKey],
+        entity
+      ),
+      this.getEntityFields(entity),
+    ]);
+
+    const portalHiddenFields = await PortalFieldsFilterService.getFieldsToHide(
+      entity,
+      crudKey,
+      entityFields.map(({ name }) => name)
+    );
+
+    const hiddenFields = [...configHiddenFields, ...portalHiddenFields];
+
+    if (hiddenFields.length === 0) {
+      return entityFields.map(({ name }) => name);
+    }
+
+    const hiddenFieldsMap = Object.fromEntries(
+      hiddenFields.map((field) => [field, 1])
+    );
+
+    return entityFields
+      .filter((entityField) => !hiddenFieldsMap[entityField.name])
+      .map(({ name }) => name);
   }
 
   async entityExist(entity: string): Promise<boolean> {

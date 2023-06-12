@@ -6,7 +6,7 @@ import { IAccountProfile } from "shared/types/user";
 export interface IPaginationFilters {
   take: number;
   page: number;
-  orderBy?: string;
+  orderBy?: "asc" | "desc";
   sortBy?: string;
 }
 

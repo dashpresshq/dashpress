@@ -7,6 +7,7 @@ export enum QueryOperators {
   NOT_EQUAL = "NOT_EQUAL",
   NOT_IN = "NOT_IN",
   BETWEEN = "BETWEEN",
+  IS_NULL = "IS_NULL",
 }
 
 export type QueryOperationImplementation<T> = Record<

@@ -52,13 +52,20 @@ export abstract class BaseDataAccessService<T> {
     { operator, value, value2 }: IColumnFilterBag<unknown>,
     groupOperator: "and" | "or"
   ): T {
-    if (!operator || !value || !column) {
+    if (!operator || !column) {
+      return query;
+    }
+
+    if (operator !== FilterOperators.IS_NULL && !value) {
       return query;
     }
 
     const operatorConfig = this.queryOperationImplementation[groupOperator];
 
     switch (operator) {
+      case FilterOperators.IS_NULL:
+        return operatorConfig[QueryOperators.IS_NULL](query, column, value);
+
       case FilterOperators.EQUAL_TO:
         return operatorConfig[QueryOperators.EQUAL_TO](query, column, value);
 

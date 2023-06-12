@@ -5,7 +5,7 @@ import { validateEntityFields } from "./_validateEntityField";
 
 export const paginationFilterValidationImpl: ValidationImplType<
   IPaginationFilters
-> = async (req) => {
+> = async (req, ignoreFieldsValidation) => {
   const take = Number(req.query.take) || 10;
   const page = Number(req.query.page) || 1;
 
@@ -15,8 +15,10 @@ export const paginationFilterValidationImpl: ValidationImplType<
 
   const sortBy = req.query.sortBy as string;
 
-  if (sortBy) {
-    await validateEntityFields(entity, [sortBy]);
+  if (!ignoreFieldsValidation) {
+    if (sortBy) {
+      await validateEntityFields(entity, [sortBy]);
+    }
   }
 
   return {

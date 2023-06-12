@@ -109,7 +109,7 @@ export const WidgetFrame = forwardRef<HTMLDivElement, IProps>(
               <ViewStateMachine
                 error={data.error}
                 loading={data.isLoading}
-                loader={<LoadingComponent height="100%" />}
+                loader={<LoadingComponent height={height} />}
               >
                 {/* eslint-disable-next-line no-nested-ternary */}
                 {schemaError ? (

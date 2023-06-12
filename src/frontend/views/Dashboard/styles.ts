@@ -30,6 +30,11 @@ const WIDGET_SIZE_CONFIG: Record<
     lg: 2,
     xl: 2,
   },
+  "3": {
+    sm: 1,
+    lg: 2,
+    xl: 3,
+  },
   "4": {
     sm: 1,
     lg: 2,

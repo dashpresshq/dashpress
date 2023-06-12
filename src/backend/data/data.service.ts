@@ -1,5 +1,5 @@
 import { NotFoundError, progammingError } from "backend/lib/errors";
-import { DataCrudKeys, QueryFilterSchema } from "shared/types/data";
+import { QueryFilterSchema } from "shared/types/data";
 import {
   actionsApiService,
   ActionsApiService,
@@ -11,7 +11,6 @@ import { IEntityField } from "shared/types/db";
 import { TemplateService } from "shared/lib/templates";
 import { FilterOperators, PaginatedData } from "@hadmean/protozoa";
 import { IAccountProfile } from "shared/types/user";
-import { CRUD_KEY_CONFIG } from "shared/configurations/permissions";
 import { rDBMSDataApiService, RDBMSDataApiService } from "./data-access/RDBMS";
 import { IDataApiService, IPaginationFilters } from "./types";
 import {
@@ -22,7 +21,7 @@ import {
   EntitiesApiService,
   entitiesApiService,
 } from "../entities/entities.service";
-import { PortalDataHooksService, PortalFieldsFilterService } from "./portal";
+import { PortalDataHooksService } from "./portal";
 import { makeTableData } from "./utils";
 
 const DEFAULT_LIST_LIMIT = 50;
@@ -94,7 +93,7 @@ export class DataApiService implements IDataApiService {
     column?: string
   ): Promise<Record<string, unknown>> {
     const [fieldsToShow, columnField] = await Promise.all([
-      this.getAllowedCrudsFieldsToShow(entity, "details"),
+      this._entitiesApiService.getAllowedCrudsFieldsToShow(entity, "details"),
       column || this._entitiesApiService.getEntityPrimaryField(entity),
     ]);
     const data = await this.read<Record<string, unknown>>(
@@ -128,7 +127,7 @@ export class DataApiService implements IDataApiService {
   ): Promise<string | number> {
     // TODO validate the createData values
     const [allowedFields, primaryField, entityValidations] = await Promise.all([
-      this.getAllowedCrudsFieldsToShow(entity, "create"),
+      this._entitiesApiService.getAllowedCrudsFieldsToShow(entity, "create"),
       this._entitiesApiService.getEntityPrimaryField(entity),
       this._configurationApiService.show<
         Record<string, IFieldValidationItem[]>
@@ -211,7 +210,10 @@ export class DataApiService implements IDataApiService {
       await Promise.all([
         this.getDataAccessInstance().list(
           entity,
-          await this.getAllowedCrudsFieldsToShow(entity, "table"),
+          await this._entitiesApiService.getAllowedCrudsFieldsToShow(
+            entity,
+            "table"
+          ),
           queryFilters,
           paginationFilters
         ),
@@ -228,7 +230,7 @@ export class DataApiService implements IDataApiService {
     accountProfile: IAccountProfile
   ): Promise<void> {
     const [allowedFields, primaryField, entityValidations] = await Promise.all([
-      this.getAllowedCrudsFieldsToShow(entity, "update"),
+      this._entitiesApiService.getAllowedCrudsFieldsToShow(entity, "update"),
       this._entitiesApiService.getEntityPrimaryField(entity),
       this._configurationApiService.show<
         Record<string, IFieldValidationItem[]>
@@ -303,39 +305,6 @@ export class DataApiService implements IDataApiService {
 
   async count(entity: string, queryFilter: QueryFilterSchema): Promise<number> {
     return await this.getDataAccessInstance().count(entity, queryFilter);
-  }
-
-  async getAllowedCrudsFieldsToShow(
-    entity: string,
-    crudKey: DataCrudKeys
-  ): Promise<string[]> {
-    const [configHiddenFields, entityFields] = await Promise.all([
-      this._configurationApiService.show<string[]>(
-        CRUD_KEY_CONFIG[crudKey],
-        entity
-      ),
-      this._entitiesApiService.getEntityFields(entity),
-    ]);
-
-    const portalHiddenFields = await PortalFieldsFilterService.getFieldsToHide(
-      entity,
-      crudKey,
-      entityFields.map(({ name }) => name)
-    );
-
-    const hiddenFields = [...configHiddenFields, ...portalHiddenFields];
-
-    if (hiddenFields.length === 0) {
-      return entityFields.map(({ name }) => name);
-    }
-
-    const hiddenFieldsMap = Object.fromEntries(
-      hiddenFields.map((field) => [field, 1])
-    );
-
-    return entityFields
-      .filter((entityField) => !hiddenFieldsMap[entityField.name])
-      .map(({ name }) => name);
   }
 
   private async getRelationshipSettings(entity: string): Promise<{

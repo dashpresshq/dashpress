@@ -167,7 +167,13 @@ export function useEntityCrudSettings(paramEntity?: string) {
 
   return useEntityConfiguration<IEntityCrudSettings>(
     "entity_crud_settings",
-    entity
+    entity,
+    {
+      create: false,
+      details: false,
+      delete: false,
+      update: false,
+    }
   );
 }
 

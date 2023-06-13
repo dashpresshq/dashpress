@@ -100,7 +100,9 @@ export const requestHandler =
 
         logger.http(`${req.method} ${req.url} ${since}ms`);
 
-        return res.status(RequestMethodResponseCode[req.method]).json(response);
+        return res
+          .status(response ? 200 : RequestMethodResponseCode[req.method])
+          .json(response);
       } catch (error) {
         const errorResponse = handleResponseError(req, error);
         logger.error(

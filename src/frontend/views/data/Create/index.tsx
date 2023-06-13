@@ -1,7 +1,6 @@
 import { SectionBox, SectionCenter } from "@hadmean/chromista";
 import { useNavigationStack, useSetPageDetails } from "frontend/lib/routing";
 import { META_USER_PERMISSIONS } from "shared/constants/user";
-import { GranularEntityPermissions } from "shared/types/user";
 import { useRouter } from "next/router";
 import { AppLayout } from "../../../_layouts/app";
 import {
@@ -43,10 +42,8 @@ export function EntityCreate() {
   useSetPageDetails({
     pageTitle: entityCrudConfig.TEXT_LANG.CREATE,
     viewKey: "CREATE_ENTITY",
-    permission: META_USER_PERMISSIONS.APPLIED_CAN_ACCESS_ENTITY(
-      entity,
-      GranularEntityPermissions.Create
-    ),
+    /* This is handled more approprately at useEntityViewStateMachine */
+    permission: META_USER_PERMISSIONS.NO_PERMISSION_REQUIRED,
   });
 
   const hiddenCreateColumns = useHiddenEntityColumns("create");

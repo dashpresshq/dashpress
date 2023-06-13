@@ -1,13 +1,16 @@
 import { USER_PERMISSIONS } from "shared/constants/user";
 import { configurationApiController } from "../../../../backend/configuration/configuration.controller";
 import { requestHandler } from "../../../../backend/lib/request";
-
+// TODO unit test this
 export default requestHandler(
   {
     GET: async (getValidatedRequest) => {
       const validatedRequest = await getValidatedRequest([
         "configKey",
-        "entity",
+        {
+          _type: "entity",
+          options: true,
+        },
       ]);
       return await configurationApiController.showConfig(
         validatedRequest.configKey,
@@ -17,7 +20,10 @@ export default requestHandler(
     PUT: async (getValidatedRequest) => {
       const validatedRequest = await getValidatedRequest([
         "configKey",
-        "entity",
+        {
+          _type: "entity",
+          options: true,
+        },
         "configBody",
       ]);
       return await configurationApiController.upsertConfig(

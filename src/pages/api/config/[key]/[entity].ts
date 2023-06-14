@@ -1,7 +1,7 @@
 import { USER_PERMISSIONS } from "shared/constants/user";
 import { configurationApiController } from "../../../../backend/configuration/configuration.controller";
 import { requestHandler } from "../../../../backend/lib/request";
-// TODO unit test this
+
 export default requestHandler(
   {
     GET: async (getValidatedRequest) => {

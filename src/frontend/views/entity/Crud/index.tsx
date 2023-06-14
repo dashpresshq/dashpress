@@ -239,6 +239,7 @@ function useEntityCrudView() {
       ),
     },
   };
+
   return schema;
 }
 

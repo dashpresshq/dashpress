@@ -50,6 +50,12 @@ describe("pages/dashboard/[dashboardId]/widget/[widgetId]/index", () => {
 
     await userEvent.type(screen.getByLabelText("SVG"), "<p>Custom Icon</p>");
 
+    await userEvent.type(screen.getByLabelText("Width"), "3 Units");
+    await userEvent.keyboard("{Enter}");
+
+    await userEvent.type(screen.getByLabelText("Height"), "4 Units");
+    await userEvent.keyboard("{Enter}");
+
     await userEvent.type(screen.getByLabelText("Script"), "return 1");
 
     await userEvent.click(
@@ -93,10 +99,10 @@ describe("pages/dashboard/[dashboardId]/widget/[widgetId]/index", () => {
     );
     await userEvent.keyboard("{Enter}");
 
-    await userEvent.type(screen.getByLabelText("Size"), "Full");
+    await userEvent.type(screen.getByLabelText("Width"), "1 Unit");
     await userEvent.keyboard("{Enter}");
 
-    await userEvent.type(screen.getByLabelText("Height"), "Large");
+    await userEvent.type(screen.getByLabelText("Height"), "2 Units");
     await userEvent.keyboard("{Enter}");
 
     await userEvent.type(screen.getByLabelText("Script"), "return 1");

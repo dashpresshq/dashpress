@@ -37,7 +37,6 @@ const handler = requestHandler({
         options: DataActionType.Delete,
       },
     ]);
-    return true;
   },
   PATCH: async (getValidatedRequest) => {
     await getValidatedRequest([

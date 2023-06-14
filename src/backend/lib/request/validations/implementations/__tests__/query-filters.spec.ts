@@ -34,22 +34,25 @@ describe("Request Validations => queryFilterValidationImpl", () => {
 
     expect(res._getJSONData()).toMatchInlineSnapshot(`
       {
-        "data": [
-          {
-            "id": "id",
-            "value": {
-              "operator": "e",
-              "value": "1",
+        "data": {
+          "children": [
+            {
+              "id": "id",
+              "value": {
+                "operator": "e",
+                "value": "1",
+              },
             },
-          },
-          {
-            "id": "name",
-            "value": {
-              "operator": "l",
-              "value": "5",
+            {
+              "id": "name",
+              "value": {
+                "operator": "l",
+                "value": "5",
+              },
             },
-          },
-        ],
+          ],
+          "operator": "and",
+        },
       }
     `);
   });
@@ -66,7 +69,10 @@ describe("Request Validations => queryFilterValidationImpl", () => {
 
     expect(res._getJSONData()).toMatchInlineSnapshot(`
       {
-        "data": [],
+        "data": {
+          "children": [],
+          "operator": "and",
+        },
       }
     `);
   });

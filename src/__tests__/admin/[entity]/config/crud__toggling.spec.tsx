@@ -11,7 +11,7 @@ import { BASE_TEST_URL } from "__tests__/_/api-handlers/_utils";
 
 const server = setupApiHandlers();
 
-describe.skip("pages/admin/[entity]/config/crud", () => {
+describe("pages/admin/[entity]/config/crud", () => {
   server.use(
     rest.get(
       BASE_TEST_URL("/api/entities/:entity/fields"),

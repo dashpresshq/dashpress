@@ -64,6 +64,7 @@
     "react-query": "^3.39.2",
     "react-use": "^17.4.0",
     "redis": "^4.4.0",
+    "sqlite3": "^5.1.6",
     "styled-components": "^5.3.6",
     "terminal-link": "^3.0.0",
     "winston": "^3.8.2",

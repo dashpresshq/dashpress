@@ -109,7 +109,7 @@ function useEntityCrudView() {
     if (entityCrudSettings.data) {
       setEntityCrudSettingsState(entityCrudSettings.data);
     }
-  }, [entityCrudSettings.data]);
+  }, [JSON.stringify(entityCrudSettings.data)]);
 
   const toggleCrudSettings = (field: keyof IEntityCrudSettings) => {
     const newState = {

@@ -14,6 +14,18 @@ const handler = requestHandler({
   },
 });
 
+const handlerWithOptionsTrue = requestHandler({
+  GET: async (getValidatedRequest) => {
+    const validatedRequest = await getValidatedRequest([
+      {
+        _type: "entity",
+        options: true,
+      },
+    ]);
+    return { data: validatedRequest.entity };
+  },
+});
+
 describe("Request Validations => entityValidationImpl", () => {
   beforeAll(async () => {
     await setupAllTestData(["schema", "users", "app-config"]);
@@ -57,13 +69,7 @@ describe("Request Validations => entityValidationImpl", () => {
     `);
   });
 
-  it("should allow users who can `CAN_CONFIGURE_APP` view the disabled entity", async () => {
-    await setupRolesTestData([
-      {
-        id: "custom-role",
-        permissions: [USER_PERMISSIONS.CAN_CONFIGURE_APP],
-      },
-    ]);
+  it("should allow users access the disabled entity when options is true", async () => {
     const { req, res } = createAuthenticatedCustomRoleMocks({
       method: "GET",
       query: {
@@ -71,7 +77,7 @@ describe("Request Validations => entityValidationImpl", () => {
       },
     });
 
-    await handler(req, res);
+    await handlerWithOptionsTrue(req, res);
 
     expect(res._getJSONData()).toMatchInlineSnapshot(`
       {
@@ -80,7 +86,7 @@ describe("Request Validations => entityValidationImpl", () => {
     `);
   });
 
-  it("should not allow users without `CAN_CONFIGURE_APP` view disabled entities", async () => {
+  it("should not allow users access the disabled entity when options is not true", async () => {
     await setupRolesTestData([
       {
         id: "custom-role",

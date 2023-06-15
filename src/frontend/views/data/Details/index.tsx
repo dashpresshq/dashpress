@@ -1,5 +1,4 @@
 import { SectionBox } from "@hadmean/chromista";
-import { useUserHasPermission } from "frontend/hooks/auth/user.store";
 import { useEntityDataDeletionMutation } from "frontend/hooks/data/data.store";
 import {
   NAVIGATION_LINKS,
@@ -7,23 +6,21 @@ import {
   useSetPageDetails,
 } from "frontend/lib/routing";
 import { META_USER_PERMISSIONS } from "shared/constants/user";
-import { GranularEntityPermissions } from "shared/types/user";
 import {
   useEntityCrudConfig,
-  useEntityCrudSettings,
   useEntityId,
   useEntitySlug,
 } from "../../../hooks/entity/entity.config";
 import { ENTITY_DETAILS_VIEW_KEY } from "./constants";
 import { EntityDetailsView } from "./DetailsView";
 import { DetailsLayout, DETAILS_LAYOUT_KEY } from "./_Layout";
+import { useCanUserPerformCrudAction } from "../useCanUserPerformCrudAction";
 
 export function EntityDetails() {
   const entityCrudConfig = useEntityCrudConfig();
   const id = useEntityId();
   const entity = useEntitySlug();
-  const userHasPermission = useUserHasPermission();
-  const entityCrudSettings = useEntityCrudSettings();
+  const canUserPerformCrudAction = useCanUserPerformCrudAction(entity);
   const entityDataDeletionMutation = useEntityDataDeletionMutation(
     entity,
     NAVIGATION_LINKS.ENTITY.TABLE(entity)
@@ -34,10 +31,8 @@ export function EntityDetails() {
   useSetPageDetails({
     pageTitle: entityCrudConfig.TEXT_LANG.DETAILS,
     viewKey: ENTITY_DETAILS_VIEW_KEY,
-    permission: META_USER_PERMISSIONS.APPLIED_CAN_ACCESS_ENTITY(
-      entity,
-      GranularEntityPermissions.Show
-    ),
+    /* This is handled more approprately at useEntityViewStateMachine */
+    permission: META_USER_PERMISSIONS.NO_PERMISSION_REQUIRED,
   });
 
   return (
@@ -46,13 +41,7 @@ export function EntityDetails() {
         title={entityCrudConfig.TEXT_LANG.DETAILS}
         backLink={backLink}
         deleteAction={
-          entityCrudSettings.data?.delete &&
-          userHasPermission(
-            META_USER_PERMISSIONS.APPLIED_CAN_ACCESS_ENTITY(
-              entity,
-              GranularEntityPermissions.Delete
-            )
-          )
+          canUserPerformCrudAction("delete")
             ? {
                 action: () => entityDataDeletionMutation.mutate(id),
                 isMakingDeleteRequest: entityDataDeletionMutation.isLoading,
@@ -60,13 +49,7 @@ export function EntityDetails() {
             : undefined
         }
         iconButtons={
-          entityCrudSettings.data?.update &&
-          userHasPermission(
-            META_USER_PERMISSIONS.APPLIED_CAN_ACCESS_ENTITY(
-              entity,
-              GranularEntityPermissions.Update
-            )
-          )
+          canUserPerformCrudAction("update")
             ? [
                 {
                   icon: "edit",

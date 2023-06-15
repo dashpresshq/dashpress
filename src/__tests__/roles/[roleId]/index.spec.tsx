@@ -68,6 +68,42 @@ describe("pages/roles/[roleId]/index", () => {
     ).toBeChecked();
   });
 
+  it("should show entities checkbox only when 'Can Manage All Entities' is checked", async () => {
+    render(
+      <AppWrapper>
+        <RolePermissions />
+      </AppWrapper>
+    );
+
+    await userEvent.click(await screen.findByRole("tab", { name: "Entities" }));
+
+    const currentTab = screen.getByRole("tabpanel");
+
+    expect(within(currentTab).queryByRole("checkbox")).not.toBeInTheDocument();
+
+    await userEvent.click(
+      within(currentTab).queryByRole("button", {
+        name: "Can Manage All Entities",
+      })
+    );
+
+    expect(await within(currentTab).findAllByRole("checkbox")).toHaveLength(5);
+
+    await userEvent.click(
+      within(currentTab).queryByRole("button", {
+        name: "Can Manage All Entities",
+      })
+    );
+
+    expect(within(currentTab).queryByRole("checkbox")).not.toBeInTheDocument();
+
+    await userEvent.click(
+      within(currentTab).queryByRole("button", {
+        name: "Can Manage All Entities",
+      })
+    );
+  });
+
   it("should select all entities permissions", async () => {
     render(
       <AppWrapper>

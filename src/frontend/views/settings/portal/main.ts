@@ -1,11 +1,5 @@
-import { Icon } from "react-feather";
+import { IMenuSectionItem } from "@hadmean/chromista";
 
-export const useMutateBaseSettingsMenu = (
-  menu: {
-    action: string;
-    name: string;
-    IconComponent: Icon;
-  }[]
-) => {
+export const useMutateBaseSettingsMenu = (menu: IMenuSectionItem[]) => {
   return menu;
 };

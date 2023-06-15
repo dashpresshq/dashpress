@@ -29,27 +29,35 @@ export const useTableState = (
   const [overridePaginatedDataState, setOverridePaginatedDataState] =
     useState<IPaginatedDataState<unknown>>(DEFAULT_TABLE_STATE);
 
-  // We want to have a copy of the current state so that we can use it in other functionalities
-  // Like export and share state
+  /*
+    We want to have a copy of the current state so that we can use it in other functionalities
+    Like export and share state
+  */
   const setGlobalTableState = useCurrentTableStateStore(
     (state) => state.setTableState
   );
 
-  // The current state is actually the table filters + some other persistent filters
+  /*
+   The current state is actually the table filters + some other persistent filters
+   */
   const currentState: IPaginatedDataState<any> = {
     ...paginatedDataState,
     filters: [...paginatedDataState.filters, ...persitentFilters],
   };
 
-  // When the entity changes we want to reset the current state to the table override state
-  // So that the table can reset to the current entity state
+  /*
+   When the entity changes we want to reset the current state to the table override state
+   So that the table can reset to the current entity state
+  */
   useEffect(() => {
     if (paginatedDataState) {
       setOverridePaginatedDataState(paginatedDataState);
     }
   }, [contextKey]);
 
-  // Sync the current state to the global state
+  /*
+   Sync the current state to the global state
+   */
   useEffect(() => {
     setGlobalTableState(currentState);
   }, [JSON.stringify(currentState)]);

@@ -62,8 +62,11 @@ describe("pages/dashboard/[dashboardId]/widget/create", () => {
 
     await userEvent.type(screen.getByLabelText("Script"), "return 1");
 
-    expect(screen.queryByLabelText("Size")).not.toBeInTheDocument();
-    expect(screen.queryByLabelText("Height")).not.toBeInTheDocument();
+    await userEvent.type(screen.getByLabelText("Width"), "3 Units");
+    await userEvent.keyboard("{Enter}");
+
+    await userEvent.type(screen.getByLabelText("Height"), "4 Units");
+    await userEvent.keyboard("{Enter}");
 
     await userEvent.click(
       screen.getByRole("button", { name: "Create Dashboard Widget" })
@@ -97,10 +100,10 @@ describe("pages/dashboard/[dashboardId]/widget/create", () => {
       "Verified Entity View"
     );
 
-    await userEvent.type(screen.getByLabelText("Size"), "Half");
+    await userEvent.type(screen.getByLabelText("Width"), "2 Units");
     await userEvent.keyboard("{Enter}");
 
-    await userEvent.type(screen.getByLabelText("Height"), "Medium");
+    await userEvent.type(screen.getByLabelText("Height"), "3 Units");
     await userEvent.keyboard("{Enter}");
 
     await userEvent.type(screen.getByLabelText("Script"), "return 1");

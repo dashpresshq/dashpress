@@ -1,16 +1,11 @@
 import { IDropDownMenuItem } from "@hadmean/chromista";
-import { useUserHasPermission } from "frontend/hooks/auth/user.store";
-import {
-  useEntityCrudSettings,
-  useEntityDiction,
-} from "frontend/hooks/entity/entity.config";
+import { useEntityDiction } from "frontend/hooks/entity/entity.config";
 import { NAVIGATION_LINKS } from "frontend/lib/routing";
 import { useRouter } from "next/router";
 import { Plus } from "react-feather";
-import { META_USER_PERMISSIONS } from "shared/constants/user";
-import { GranularEntityPermissions } from "shared/types/user";
 import { SLUG_LOADING_VALUE } from "@hadmean/protozoa";
 import { usePluginTableMenuItems } from "./portal";
+import { useCanUserPerformCrudAction } from "../useCanUserPerformCrudAction";
 
 export const useTableMenuItems = (
   entity: string,
@@ -21,8 +16,7 @@ export const useTableMenuItems = (
 ): IDropDownMenuItem[] => {
   const router = useRouter();
   const entityDiction = useEntityDiction(entity);
-  const entityCrudSettings = useEntityCrudSettings(entity);
-  const userHasPermission = useUserHasPermission();
+  const canUserPerformCrudAction = useCanUserPerformCrudAction(entity);
 
   const pluginTableMenuItems = usePluginTableMenuItems(entity, reference);
 
@@ -34,15 +28,7 @@ export const useTableMenuItems = (
     return [];
   }
 
-  if (
-    entityCrudSettings.data?.create &&
-    userHasPermission(
-      META_USER_PERMISSIONS.APPLIED_CAN_ACCESS_ENTITY(
-        entity,
-        GranularEntityPermissions.Create
-      )
-    )
-  ) {
+  if (canUserPerformCrudAction("create")) {
     pluginTableMenuItems.push({
       id: "add",
       order: 1,

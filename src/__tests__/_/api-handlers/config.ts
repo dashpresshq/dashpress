@@ -112,6 +112,7 @@ const DEFAULT_ENTITY_CONFIG_VALUES: Record<
   hidden_entity_details_columns: () => ["hidden-field-1"],
   hidden_entity_relations: () => ["hidden-related-entity-5"],
   entity_columns_labels: () => ({}),
+  entity_presentation_script: () => "",
   entity_relation_template: (entity) => ({
     format: `${entity} - {{ name }}`,
     fields: ["name"],

@@ -1,6 +1,5 @@
 import { TableFilterType } from "@hadmean/chromista/dist/components/Table/filters/types";
 import {
-  useEntityCrudSettings,
   useEntityFieldLabels,
   useEntityFieldSelections,
   useProcessedEntityFieldTypes,
@@ -27,6 +26,7 @@ import { viewSpecialDataTypes } from "../viewSpecialDataTypes";
 import { usePortalTableColumns } from "./portal";
 import { evalutePresentationScript } from "../evaluatePresentationScript";
 import { IEntityPresentationScript } from "../types";
+import { useCanUserPerformCrudAction } from "../useCanUserPerformCrudAction";
 
 export const ACTIONS_ACCESSOR = "__actions__";
 
@@ -83,7 +83,7 @@ export const useTableColumns = (
 ): Partial<DataStateKeys<ITableColumn[]>> => {
   const portalTableColumns = usePortalTableColumns(entity, !!lean);
   const getEntityFieldLabels = useEntityFieldLabels(entity);
-  const entityCrudSettings = useEntityCrudSettings(entity);
+  const canUserPerformCrudAction = useCanUserPerformCrudAction(entity);
   const entityFields = useEntityFields(entity);
   const entityToOneReferenceFields = useEntityToOneReferenceFields(entity);
   const hiddenTableColumns = useHiddenEntityColumns("table", entity);
@@ -111,8 +111,7 @@ export const useTableColumns = (
     defaultDateFormat.isLoading ||
     entityFields.isLoading ||
     idField.isLoading ||
-    hiddenTableColumns.isLoading ||
-    entityCrudSettings.isLoading
+    hiddenTableColumns.isLoading
   ) {
     return {
       isLoading: true,
@@ -124,8 +123,7 @@ export const useTableColumns = (
     defaultDateFormat.error ||
     entityFields.error ||
     idField.error ||
-    hiddenTableColumns.error ||
-    entityCrudSettings.error;
+    hiddenTableColumns.error;
 
   if (error) {
     return {
@@ -192,9 +190,9 @@ export const useTableColumns = (
     return tableColumn;
   });
   if (
-    entityCrudSettings.data?.details ||
-    entityCrudSettings.data?.delete ||
-    entityCrudSettings.data?.update
+    canUserPerformCrudAction("details") ||
+    canUserPerformCrudAction("delete") ||
+    canUserPerformCrudAction("update")
   ) {
     if (!lean) {
       columns.push({
@@ -202,11 +200,7 @@ export const useTableColumns = (
         accessor: ACTIONS_ACCESSOR,
         disableSortBy: true,
         Cell: ({ row }: { row: { original: Record<string, unknown> } }) => (
-          <TableActions
-            row={row}
-            crudSettings={entityCrudSettings.data}
-            entity={entity}
-          />
+          <TableActions row={row} entity={entity} />
         ),
       });
     }

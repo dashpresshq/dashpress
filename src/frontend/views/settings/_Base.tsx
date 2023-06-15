@@ -5,6 +5,7 @@ import {
   MenuSection,
   InfoAlert,
   Spacer,
+  IMenuSectionItem,
 } from "@hadmean/chromista";
 import { useRouter } from "next/router";
 import { ReactNode } from "react";
@@ -27,46 +28,54 @@ interface IProps {
   children: ReactNode;
 }
 
-const baseMenuItems = [
+const baseMenuItems: IMenuSectionItem[] = [
   {
     action: NAVIGATION_LINKS.SETTINGS.ENTITIES,
     name: "Enabled Entities",
     IconComponent: Columns,
+    order: 10,
   },
   {
     action: NAVIGATION_LINKS.SETTINGS.MENU_ENTITIES,
     name: "Menu Entities",
     IconComponent: Table,
-  },
-  {
-    action: NAVIGATION_LINKS.SETTINGS.DATE,
-    name: "Date Format",
-    IconComponent: Calendar,
-  },
-  {
-    action: NAVIGATION_LINKS.SETTINGS.SYSTEM,
-    name: "System",
-    IconComponent: Server,
+    order: 20,
   },
   {
     action: NAVIGATION_LINKS.SETTINGS.THEME,
     name: "Theme",
     IconComponent: Eye,
+    order: 30,
   },
   {
     action: NAVIGATION_LINKS.SETTINGS.SITE,
     name: "Site",
     IconComponent: Globe,
+    order: 40,
+  },
+  {
+    action: NAVIGATION_LINKS.SETTINGS.DATE,
+    name: "Date Format",
+    IconComponent: Calendar,
+    order: 50,
   },
   {
     action: NAVIGATION_LINKS.SETTINGS.VARIABLES,
     name: "Variables",
     IconComponent: Book,
+    order: 60,
+  },
+  {
+    action: NAVIGATION_LINKS.SETTINGS.SYSTEM,
+    name: "System",
+    IconComponent: Server,
+    order: 70,
   },
   {
     action: NAVIGATION_LINKS.SETTINGS.VERSIONS,
     name: "System Info",
     IconComponent: Terminal,
+    order: 80,
   },
 ];
 

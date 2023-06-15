@@ -37,12 +37,14 @@ export function useAppConfiguration<T>(key: AppConfigurationKeys) {
 
 export function useEntityConfiguration<T>(
   key: AppConfigurationKeys,
-  entity: string
+  entity: string,
+  forceDefaultValue?: T
 ) {
   return useStorageApi<T>(configurationApiPath(key, entity), {
     enabled: isRouterParamEnabled(entity),
     errorMessage: MAKE_APP_CONFIGURATION_CRUD_CONFIG(key).TEXT_LANG.NOT_FOUND,
-    defaultData: CONFIGURATION_KEYS[key].defaultValue as T,
+    defaultData:
+      forceDefaultValue || (CONFIGURATION_KEYS[key].defaultValue as T),
   });
 }
 

@@ -2,7 +2,6 @@ import { SectionBox, SectionCenter } from "@hadmean/chromista";
 import { useNavigationStack, useSetPageDetails } from "frontend/lib/routing";
 import { META_USER_PERMISSIONS, USER_PERMISSIONS } from "shared/constants/user";
 import { useUserHasPermission } from "frontend/hooks/auth/user.store";
-import { GranularEntityPermissions } from "shared/types/user";
 import { AppLayout } from "../../../_layouts/app";
 import {
   useEntityCrudConfig,
@@ -35,10 +34,8 @@ export function EntityUpdate() {
   useSetPageDetails({
     pageTitle: entityCrudConfig.TEXT_LANG.EDIT,
     viewKey: "UPDATE_ENTITY",
-    permission: META_USER_PERMISSIONS.APPLIED_CAN_ACCESS_ENTITY(
-      entity,
-      GranularEntityPermissions.Update
-    ),
+    /* This is handled more approprately at useEntityViewStateMachine */
+    permission: META_USER_PERMISSIONS.NO_PERMISSION_REQUIRED,
   });
 
   const userHasPermission = useUserHasPermission();

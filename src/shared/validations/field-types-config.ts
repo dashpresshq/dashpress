@@ -194,5 +194,3 @@ export const FIELD_TYPES_CONFIG_MAP: Record<
 
 //   | 'range'
 //   | 'time'
-//   | 'month'
-//   | 'week'

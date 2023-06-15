@@ -1,4 +1,4 @@
-import { InfoAlert } from "@hadmean/chromista";
+import { RenderCode } from "@hadmean/chromista";
 import { DocumentationRoot, IDocumentationRootProps } from "./_base";
 
 export function RelationsSettingsDocumentation(
@@ -6,43 +6,40 @@ export function RelationsSettingsDocumentation(
 ) {
   return (
     <DocumentationRoot {...props} title="System Profile Documentation">
+      <p>
+        This setting helps you manage how this entity will be presented on other tables when referenced
+        and also how you can organise the related entities on the details view.
+      </p>
       <h4> Reference Template</h4>
       <p>
-        Reference Template is how you define how this entity will be displayed
-        where it is being referenced
-      </p>
-      <p>
-        Say you have `users` table in your application with the fields
-        `first_name`, `last_name` and `title`. Reference Template is how you
-        define how it will be rendered
+        When entities are referenced, the app tries to show the best two fields it thinks are the
+        best to present and sometimes it doesn't get it quite right or maybe it needs improvement.
+        </p>
+        <p>
+          For example when a table references the <code>Users</code> table, the app might select
+          the <code>Username</code> and <code>Firstname</code> as the reference template.
+          So if you want it to be the combination of the <code>Firstname</code> and <code>Lastname</code>
+          instead you can set that in this form with
+
+          <RenderCode input={`{{ first_name }} {{ last_name }}`} />
+and the users will start showing in this forma.
       </p>
 
       <p>
-        {"`{{ title }} {{ first_name }} {{ last_name }}`"} will be templated as
-        `Mr John Doe`
-      </p>
+        This form uses Mustache so any of valid Mustache format will work. Below are some valid templates
+        <RenderCode input={
+`{{ title }} {{ first_name }} {{ last_name }}
+/* "Mr John Doe" */
 
-      <p>
-        `{"{{ last_name }} {{ first_name }}`"} will be templated as `Doe John`
-      </p>
-
-      <p>
-        {"`{{ first_name }} / {{ last_name }}`"} will be templated as `John /
-        Doe`
-      </p>
-
-      <p>
-        It uses mustache under the hood, so bring in all your mustache knowledge
-        here
-      </p>
-
+{{ first_name }} / {{ last_name }}
+/* "John - Doe" */ `
+          } />
+</p>
       <p>
         When editing reference templates, The fields will be validated so as to
         eliminate typos for example {"`{{ ffirst_namee }}`"} will give an error
         until corrected likewise fields that don&apos;t exist
       </p>
-
-      <InfoAlert message="The default value for the reference template are the two first text fields of the entity" />
 
       <h4> Labels</h4>
       <p>

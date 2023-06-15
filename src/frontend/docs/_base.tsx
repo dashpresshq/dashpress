@@ -23,6 +23,11 @@ const Root = styled.div`
   code {
     font-style: italic;
   }
+
+  ul, ol{
+    margin-top: 0px;
+    padding-left: 16px;
+  }
 `;
 
 export function DocumentationRoot({

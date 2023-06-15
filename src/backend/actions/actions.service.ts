@@ -258,7 +258,7 @@ export class ActionsApiService implements IApplicationService {
     });
   }
 
-  // TODO require password to update action config
+  // TODO require password to update action config (for contributors)
   async updateActionConfig(
     activationId: string,
     configuration: Record<string, string>

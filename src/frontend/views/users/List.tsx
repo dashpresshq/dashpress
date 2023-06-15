@@ -23,6 +23,7 @@ import {
   useUserDeletionMutation,
 } from "./users.store";
 import { ADMIN_ROLES_CRUD_CONFIG } from "../roles/roles.store";
+import { userFriendlyCase } from "shared/lib/strings";
 
 export function ListUsers() {
   const router = useRouter();
@@ -36,6 +37,12 @@ export function ListUsers() {
   const roles = useApi<IRolesList[]>(ADMIN_ROLES_CRUD_CONFIG.ENDPOINTS.LIST, {
     defaultData: [],
   });
+
+  const users = useApi<IAccountProfile[]>(ADMIN_USERS_CRUD_CONFIG.ENDPOINTS.LIST, {
+    defaultData: [],
+  });
+
+  const rootProfileKeys = Object.keys(JSON.parse(users.data[0]?.systemProfile || '{}'));
 
   const userDeletionMutation = useUserDeletionMutation();
 
@@ -60,6 +67,14 @@ export function ListUsers() {
     },
     [userDeletionMutation.isLoading]
   );
+
+  const extendedProfileColumns: IFETableColumn<IAccountProfile>[] = rootProfileKeys.map(profileKey => ({
+      Header: userFriendlyCase(profileKey),
+      accessor: profileKey as keyof IAccountProfile,
+      filter: undefined,
+      disableSortBy: true,
+      Cell: ({ row }) =>JSON.parse(row.original.systemProfile || '{}')[profileKey],
+    }))
 
   const columns: IFETableColumn<IAccountProfile>[] = [
     {
@@ -87,6 +102,7 @@ export function ListUsers() {
       },
       Cell: ({ value }) => roleLabel(value as string),
     },
+...extendedProfileColumns,
     {
       Header: "Action",
       disableSortBy: true,

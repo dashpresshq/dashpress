@@ -57,7 +57,6 @@ export class UsersApiService implements IApplicationService {
     return users.map((user) => {
       const userCopy = { ...user };
       delete userCopy.password;
-      delete userCopy.systemProfile;
       delete userCopy.preferences;
 
       return userCopy;

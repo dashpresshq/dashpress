@@ -5,6 +5,7 @@ export type ICreateUserForm = {
   username: string;
   role: string;
   password: string;
+  systemProfile: string;
 };
 
 export const CREATE_USER_FORM_SCHEMA: IAppliedSchemaFormConfig<ICreateUserForm> =
@@ -44,6 +45,14 @@ export const CREATE_USER_FORM_SCHEMA: IAppliedSchemaFormConfig<ICreateUserForm> 
       validations: [
         {
           validationType: "required",
+        },
+      ],
+    },
+    systemProfile: {
+      type: "json",
+      validations: [
+        {
+          validationType: "isJson",
         },
       ],
     },

@@ -13,7 +13,7 @@ interface IProps {
   data: unknown;
 }
 
-// TODO Card Widgets: targets
+// TODO Card Widgets: targets (for contributors)
 
 export function SummaryWidget({ config, data }: IProps) {
   const summaryData = SummaryCardWidgetSchema.parse(data);

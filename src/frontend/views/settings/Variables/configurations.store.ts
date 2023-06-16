@@ -72,10 +72,7 @@ export function useIntegrationConfigurationDeletionMutation(
 export const useRevealedCredentialsList = (
   group: IntegrationsConfigurationGroup
 ) => {
-  const [rootPassword, setIsPasswordValid] = usePasswordStore((state) => [
-    state.password,
-    state.setIsPasswordValid,
-  ]);
+  const rootPassword = usePasswordStore((state) => state.password);
   const queryClient = useQueryClient();
 
   const response = useApi<IKeyValue[]>(
@@ -90,12 +87,11 @@ export const useRevealedCredentialsList = (
       errorMessage: CRUD_CONFIG_NOT_FOUND("Revealed Credentials"),
       enabled:
         group === IntegrationsConfigurationGroup.Credentials && !!rootPassword,
-      defaultData: [],
+      defaultData: undefined,
     }
   );
 
   useEffect(() => {
-    setIsPasswordValid();
     if (response.data && response.data.length) {
       queryClient.setQueryData(
         getQueryCachekey(

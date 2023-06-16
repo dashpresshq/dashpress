@@ -60,7 +60,7 @@ export function VariablesDocumentation(props: IDocumentationRootProps) {
         copied.
       </p>
       <p>
-        This doesn't mean everything should be stored as a secret as secrets
+        This doesn&pos;t mean everything should be stored as a secret as secrets
         requires some computation to use which consumes some server resource,
         constants are perfect to store public values like company name, company
         logo link etc.

@@ -93,7 +93,7 @@ export function FormIntegrationsDocumentation(props: IDocumentationRootProps) {
             </code>
           </li>
         </ol>
-        {/* <RenderCode input={``}/> */}
+        <RenderCode input="" />
       </p>
       <p>
         You can always deactivate an integration by clicking on the Deactivate

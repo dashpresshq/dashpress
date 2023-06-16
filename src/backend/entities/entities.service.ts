@@ -215,7 +215,9 @@ export class EntitiesApiService implements IApplicationService {
         type,
         tag: relation?.joinColumnOptions?.[0].tag,
         field:
-          type === "toOne" ? relation?.joinColumnOptions?.[0].name : undefined,
+          type === "toOne"
+            ? relation?.joinColumnOptions?.[0].referencedColumnName
+            : undefined,
       };
     });
   }

@@ -15,8 +15,8 @@ export function RelationsSettingsDocumentation(
       <h4> Reference Template</h4>
       <p>
         When entities are referenced, the app tries to show the best two fields
-        it thinks are the best to present and sometimes it doesn't get it quite
-        right or maybe it needs improvement.
+        it thinks are the best to present and sometimes it doesn&apos;t get it
+        quite right or maybe it needs improvement.
       </p>
       <p>
         For example when a table references the <code>Users</code> table, the

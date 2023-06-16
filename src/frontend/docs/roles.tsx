@@ -98,9 +98,10 @@ export function RolesDocumentation(props: IDocumentationRootProps) {
       <p>
         Enabling some permission will automatically grant some other permission.
         Like for example Giving someone the permission to reset password without
-        giving them the permission to manage users doesn't make sense as they
-        need to be able to access users first to get to where they will be able
-        to reset the password. This is what we call permissions dependencies.
+        giving them the permission to manage users doesn&pos;t make sense as
+        they need to be able to access users first to get to where they will be
+        able to reset the password. This is what we call permissions
+        dependencies.
       </p>
       <p>
         These are the permission dependencies.

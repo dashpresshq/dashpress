@@ -100,8 +100,8 @@ export const integrationsApiHandlers = [
   rest.post(
     BASE_TEST_URL("/api/integrations/credentials/reveal"),
     async (req, res, ctx) => {
-      const { password } = await req.json();
-      if (password === "password") {
+      const { _password } = await req.json();
+      if (_password === "password") {
         return res(ctx.json(CREDENTIALS));
       }
       return res(ctx.status(400), ctx.json({ message: "Invalid Password" }));

@@ -45,7 +45,7 @@ export default requestHandler(
           _type: "requestBody",
           options: {},
         },
-        "withPassword"
+        "withPassword",
       ]);
 
       return await actionsApiController.updateActionConfig(

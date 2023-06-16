@@ -8,34 +8,37 @@ export function RelationsSettingsDocumentation(
   return (
     <DocumentationRoot {...props} title="System Profile Documentation">
       <p>
-        This setting helps you manage how this entity will be presented on other tables when referenced
-        and also how you can organise the related entities on the details view.
+        This setting helps you manage how this entity will be presented on other
+        tables when referenced and also how you can organise the related
+        entities on the details view.
       </p>
       <h4> Reference Template</h4>
       <p>
-        When entities are referenced, the app tries to show the best two fields it thinks are the
-        best to present and sometimes it doesn't get it quite right or maybe it needs improvement.
-        </p>
-        <p>
-          For example when a table references the <code>Users</code> table, the app might select
-          the <code>Username</code> and <code>Firstname</code> as the reference template.
-          So if you want it to be the combination of the <code>Firstname</code> and <code>Lastname</code>
-          instead you can set that in this form with
-
-          <RenderCode input={`{{ first_name }} {{ last_name }}`} />
-and the users will start showing in this forma.
+        When entities are referenced, the app tries to show the best two fields
+        it thinks are the best to present and sometimes it doesn't get it quite
+        right or maybe it needs improvement.
+      </p>
+      <p>
+        For example when a table references the <code>Users</code> table, the
+        app might select the <code>Username</code> and <code>Firstname</code> as
+        the reference template. So if you want it to be the combination of the{" "}
+        <code>Firstname</code> and <code>Lastname</code>
+        instead you can set that in this form with
+        <RenderCode input="{{ first_name }} {{ last_name }}" />
+        and the users will start showing in this forma.
       </p>
 
       <p>
-        This form uses Mustache so any of valid Mustache format will work. Below are some valid templates
-        <RenderCode input={
-`{{ title }} {{ first_name }} {{ last_name }}
+        This form uses Mustache so any of valid Mustache format will work. Below
+        are some valid templates
+        <RenderCode
+          input={`{{ title }} {{ first_name }} {{ last_name }}
 /* "Mr John Doe" */
 
 {{ first_name }} / {{ last_name }}
-/* "John - Doe" */ `
-          } />
-</p>
+/* "John - Doe" */ `}
+        />
+      </p>
       <p>
         When editing reference templates, The fields will be validated so as to
         eliminate typos for example {"`{{ ffirst_namee }}`"} will give an error

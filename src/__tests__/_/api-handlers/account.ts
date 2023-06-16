@@ -15,19 +15,24 @@ let USERS = [
   {
     name: "User 1",
     username: "user-1",
-    systemProfile: "user-1-system-profile",
+    systemProfile: JSON.stringify({
+      email: "user-1@here.com",
+      station: "station - 1",
+    }),
     role: "role-1",
   },
   {
     name: "User 2",
     username: "user-2",
-    systemProfile: "user-2-system-profile",
+    systemProfile: JSON.stringify({
+      email: "user-1@here.com",
+      nonExistent: "nonExistent",
+    }),
     role: "role-2",
   },
   {
     name: "User 3",
     username: "user-3",
-    systemProfile: "user-3-system-profile",
     role: "role-3",
   },
 ];

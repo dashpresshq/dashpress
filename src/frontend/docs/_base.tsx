@@ -24,7 +24,8 @@ const Root = styled.div`
     font-style: italic;
   }
 
-  ul, ol{
+  ul,
+  ol {
     margin-top: 0px;
     padding-left: 16px;
   }

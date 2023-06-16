@@ -6,6 +6,8 @@ import {
   useRouteParam,
 } from "frontend/lib/routing";
 import { META_USER_PERMISSIONS } from "shared/constants/user";
+import { useEntityReferenceFields } from "frontend/hooks/entity/entity.store";
+import { SLUG_LOADING_VALUE } from "@hadmean/protozoa";
 import {
   useEntityCrudConfig,
   useEntitySlug,
@@ -14,8 +16,6 @@ import { ENTITY_DETAILS_VIEW_KEY } from "./constants";
 import { EntityDetailsView } from "./DetailsView";
 import { DetailsLayout } from "./_Layout";
 import { useCanUserPerformCrudAction } from "../useCanUserPerformCrudAction";
-import { useEntityReferenceFields } from "frontend/hooks/entity/entity.store";
-import { SLUG_LOADING_VALUE } from "@hadmean/protozoa";
 
 export function EntityRelationDetails() {
   const childEntity = useRouteParam("childEntity");
@@ -25,7 +25,9 @@ export function EntityRelationDetails() {
   const entityReferenceFields = useEntityReferenceFields(entity);
   const canUserPerformCrudAction = useCanUserPerformCrudAction(childEntity);
 
-  const column = entityReferenceFields.data.find(({table, tag}) => table === childEntity && tag === "inverse")?.field;
+  const column = entityReferenceFields.data.find(
+    ({ table, tag }) => table === childEntity && tag === "inverse"
+  )?.field;
 
   const { backLink } = useNavigationStack();
 

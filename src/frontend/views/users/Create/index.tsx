@@ -1,12 +1,12 @@
 import { SectionBox, SectionCenter } from "@hadmean/chromista";
 import { useNavigationStack, useSetPageDetails } from "frontend/lib/routing";
 import { USER_PERMISSIONS } from "shared/constants/user";
-import { AppLayout } from "../../../_layouts/app";
-import { ADMIN_USERS_CRUD_CONFIG, useCreateUserMutation } from "../users.store";
-import { CreateUserForm } from "./Form";
 import { useState } from "react";
 import { DOCUMENTATION_LABEL } from "frontend/docs";
 import { SystemProfileDocumentation } from "frontend/docs/system-profile";
+import { AppLayout } from "../../../_layouts/app";
+import { ADMIN_USERS_CRUD_CONFIG, useCreateUserMutation } from "../users.store";
+import { CreateUserForm } from "./Form";
 
 const DOCS_TITLE = "System Profile";
 

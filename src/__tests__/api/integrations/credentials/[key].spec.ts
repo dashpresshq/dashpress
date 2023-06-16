@@ -6,13 +6,14 @@ import {
   createAuthenticatedViewerMocks,
   setupRolesTestData,
   createAuthenticatedCustomRoleMocks,
+  setupUsersTestData,
 } from "__tests__/api/_test-utils";
 
 const currentState = async () => {
   const { req, res } = createAuthenticatedMocks({
     method: "POST",
     body: {
-      password: "password",
+      _password: "password",
     },
   });
 
@@ -26,7 +27,60 @@ describe("/api/integrations/credentials/[key]", () => {
     await setupAllTestData(["credentials", "users"]);
   });
 
-  describe("Plain keys", () => {
+  describe("Plain keys => Invalid Password", () => {
+    it("should not create new entry", async () => {
+      const { req, res } = createAuthenticatedMocks({
+        method: "PUT",
+        query: {
+          key: "NEW_CREDENTIAL_KEY",
+        },
+        body: {
+          value: "NEW_CREDENTIAL_VALUE",
+          _password: "invalid_password",
+        },
+      });
+
+      await handler(req, res);
+
+      expect(res._getStatusCode()).toBe(400);
+      expect(res._getJSONData()).toMatchInlineSnapshot(`
+        {
+          "message": "Invalid Password",
+          "method": "PUT",
+          "name": "BadRequestError",
+          "path": "",
+          "statusCode": 400,
+        }
+      `);
+    });
+
+    it("should not delete key", async () => {
+      const { req, res } = createAuthenticatedMocks({
+        method: "DELETE",
+        query: {
+          key: "CREDENTIAL_KEY_1",
+        },
+        body: {
+          _password: "invalid_password",
+        },
+      });
+
+      await handler(req, res);
+
+      expect(res._getStatusCode()).toBe(400);
+      expect(res._getJSONData()).toMatchInlineSnapshot(`
+        {
+          "message": "Invalid Password",
+          "method": "DELETE",
+          "name": "BadRequestError",
+          "path": "",
+          "statusCode": 400,
+        }
+      `);
+    });
+  });
+
+  describe("Plain keys => Correct Password", () => {
     it("should create new entry for non-existing key", async () => {
       const { req, res } = createAuthenticatedMocks({
         method: "PUT",
@@ -35,6 +89,7 @@ describe("/api/integrations/credentials/[key]", () => {
         },
         body: {
           value: "NEW_CREDENTIAL_VALUE",
+          _password: "password",
         },
       });
 
@@ -67,6 +122,7 @@ describe("/api/integrations/credentials/[key]", () => {
         },
         body: {
           value: "UPDATED_CREDENTIAL_VALUE_2",
+          _password: "password",
         },
       });
 
@@ -97,6 +153,9 @@ describe("/api/integrations/credentials/[key]", () => {
         query: {
           key: "CREDENTIAL_KEY_1",
         },
+        body: {
+          _password: "password",
+        },
       });
 
       await handler(req, res);
@@ -126,6 +185,7 @@ describe("/api/integrations/credentials/[key]", () => {
         },
         body: {
           value: "NEW_CREDENTIL_VALUE",
+          _password: "password",
         },
       });
 
@@ -164,6 +224,7 @@ describe("/api/integrations/credentials/[key]", () => {
         },
         body: {
           value: "UPDATED_CONSTANT_KEY_3",
+          _password: "password",
         },
       });
 
@@ -199,6 +260,9 @@ describe("/api/integrations/credentials/[key]", () => {
         method: "DELETE",
         query: {
           key: "DATABASE___dataSourceType",
+        },
+        body: {
+          _password: "password",
         },
       });
 
@@ -245,6 +309,7 @@ describe("/api/integrations/credentials/[key]", () => {
         },
         body: {
           value: "NEW_CREDENTIAL_VALUE",
+          _password: "password",
         },
       });
 
@@ -253,11 +318,23 @@ describe("/api/integrations/credentials/[key]", () => {
       expect(res._getStatusCode()).toBe(401);
     });
     it("should work when user has correct permission", async () => {
-      await setupRolesTestData([
-        {
-          id: "custom-role",
-          permissions: ["CAN_MANAGE_INTEGRATIONS"],
-        },
+      await Promise.all([
+        setupRolesTestData([
+          {
+            id: "custom-role",
+            permissions: ["CAN_MANAGE_INTEGRATIONS"],
+          },
+        ]),
+        setupUsersTestData([
+          {
+            username: "custom-role",
+            password:
+              "$2b$10$/9tw363jvQrylf4eLisJt.afEUphLLaDSfhkweYPhC0ayTJp7Zo0a",
+            name: "Custom Role",
+            role: "custom-role",
+            systemProfile: "",
+          },
+        ]),
       ]);
 
       const { req, res } = createAuthenticatedCustomRoleMocks({
@@ -267,6 +344,7 @@ describe("/api/integrations/credentials/[key]", () => {
         },
         body: {
           value: "NEW_CREDENTIAL_VALUE",
+          _password: "password",
         },
       });
 

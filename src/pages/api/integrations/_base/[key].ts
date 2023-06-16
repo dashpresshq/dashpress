@@ -12,16 +12,16 @@ type IUpdateIntegrationValueForm = {
 };
 
 export const UPSERT_INTEGRATION_VALUE_FORM_SCHEMA: IAppliedSchemaFormConfig<IUpdateIntegrationValueForm> =
-{
-  value: {
-    type: "text",
-    validations: [
-      {
-        validationType: "required",
-      },
-    ],
-  },
-};
+  {
+    value: {
+      type: "text",
+      validations: [
+        {
+          validationType: "required",
+        },
+      ],
+    },
+  };
 
 const checks = (group: IntegrationsConfigurationGroup): ValidationKeys[] => {
   const baseChecks: ValidationKeys[] = [
@@ -32,16 +32,16 @@ const checks = (group: IntegrationsConfigurationGroup): ValidationKeys[] => {
           ? USER_PERMISSIONS.CAN_MANAGE_INTEGRATIONS
           : USER_PERMISSIONS.CAN_CONFIGURE_APP,
     },
-  ]
+  ];
 
   if (group === IntegrationsConfigurationGroup.Credentials) {
     baseChecks.push({
       _type: "withPassword",
-    })
+    });
   }
 
   return baseChecks;
-}
+};
 
 export const integrationsConfigurationDetailsRequestHandler = (
   group: IntegrationsConfigurationGroup
@@ -82,4 +82,3 @@ export const integrationsConfigurationDetailsRequestHandler = (
     checks(group)
   );
 };
-

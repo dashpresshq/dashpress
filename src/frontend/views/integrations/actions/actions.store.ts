@@ -100,10 +100,10 @@ export function useUpdateActivatedActionMutation(activationId: string) {
 
   return useMutation(
     async (configuration: Record<string, string>) =>
-      await makePatchRequest(
-        `/api/integrations/actions/${activationId}`,
-        { ...configuration, _password: rootPassword }
-      ),
+      await makePatchRequest(`/api/integrations/actions/${activationId}`, {
+        ...configuration,
+        _password: rootPassword,
+      }),
     apiMutateOptions
   );
 }

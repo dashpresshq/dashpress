@@ -53,7 +53,11 @@ export const useEntityDataDetails = (
     {
       returnUndefinedOnError: column ? true : undefined,
       errorMessage: entityCrudConfig.TEXT_LANG.NOT_FOUND,
-      enabled: !!id && !!entity && id !== SLUG_LOADING_VALUE && column !== SLUG_LOADING_VALUE,
+      enabled:
+        !!id &&
+        !!entity &&
+        id !== SLUG_LOADING_VALUE &&
+        column !== SLUG_LOADING_VALUE,
       defaultData: {},
     }
   );

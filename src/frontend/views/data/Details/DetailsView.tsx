@@ -27,12 +27,12 @@ export function EntityDetailsView({
   id,
   entity,
   displayFrom,
-  column
+  column,
 }: {
   id: string;
   entity: string;
   displayFrom: "details" | "canvas";
-  column?: string
+  column?: string;
 }) {
   const dataDetails = useEntityDataDetails(entity, id, column);
   const entityFields = useEntityFields(entity);

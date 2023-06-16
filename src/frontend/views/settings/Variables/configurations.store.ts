@@ -72,7 +72,10 @@ export function useIntegrationConfigurationDeletionMutation(
 export const useRevealedCredentialsList = (
   group: IntegrationsConfigurationGroup
 ) => {
-  const rootPassword = usePasswordStore((state) => state.password);
+  const [rootPassword, setIsPasswordValid] = usePasswordStore((state) => [
+    state.password,
+    state.setIsPasswordValid,
+  ]);
   const queryClient = useQueryClient();
 
   const response = useApi<IKeyValue[]>(
@@ -92,6 +95,7 @@ export const useRevealedCredentialsList = (
   );
 
   useEffect(() => {
+    setIsPasswordValid();
     if (response.data && response.data.length) {
       queryClient.setQueryData(
         getQueryCachekey(

@@ -53,7 +53,7 @@ describe("/api/integrations/storage/[key]/credentials", () => {
         key: "s3",
       },
       body: {
-        password: "password",
+        _password: "password",
       },
     });
     await handler(req, res);

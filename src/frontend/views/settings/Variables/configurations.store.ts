@@ -41,6 +41,7 @@ export function useIntegrationConfigurationUpsertationMutation(
     async (data: { key: string; value: string }) =>
       await makePutRequest(`/api/integrations/${group}/${data.key}`, {
         value: data.value,
+        _password: rootPassword,
       }),
     apiMutateOptions
   );
@@ -61,7 +62,9 @@ export function useIntegrationConfigurationDeletionMutation(
 
   return useMutation(
     async (key: string) =>
-      await makeDeleteRequest(`/api/integrations/${group}/${key}`),
+      await makeDeleteRequest(`/api/integrations/${group}/${key}`, {
+        _password: rootPassword,
+      }),
     apiMutateOptions
   );
 }
@@ -77,7 +80,7 @@ export const useRevealedCredentialsList = (
     {
       request: {
         body: {
-          password: rootPassword,
+          _password: rootPassword,
         },
         method: "POST",
       },

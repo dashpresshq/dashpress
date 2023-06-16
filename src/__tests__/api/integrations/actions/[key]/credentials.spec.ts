@@ -30,7 +30,7 @@ describe("/api/integrations/actions/[key]/credentials", () => {
         key: "http",
       },
       body: {
-        password: "invalid password",
+        _password: "invalid password",
       },
     });
     await handler(req, res);
@@ -54,7 +54,7 @@ describe("/api/integrations/actions/[key]/credentials", () => {
         key: "smtp-activation-id-1",
       },
       body: {
-        password: "password",
+        _password: "password",
       },
     });
     await handler(req, res);
@@ -76,7 +76,7 @@ describe("/api/integrations/actions/[key]/credentials", () => {
         key: HTTP_ACTIVATION_ID,
       },
       body: {
-        password: "password",
+        _password: "password",
       },
     });
     await handler(req, res);

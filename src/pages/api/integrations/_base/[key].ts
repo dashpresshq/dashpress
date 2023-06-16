@@ -3,6 +3,7 @@ import { requestHandler } from "backend/lib/request";
 import { integrationsConfigurationApiController } from "backend/integrations-configurations/integrations-configurations.controller";
 import { IAppliedSchemaFormConfig } from "shared/form-schemas/types";
 import { IntegrationsConfigurationGroup } from "shared/types/integrations";
+import { ValidationKeys } from "backend/lib/request/validations/types";
 
 const REQUEST_KEY_FIELD = "key";
 
@@ -11,16 +12,36 @@ type IUpdateIntegrationValueForm = {
 };
 
 export const UPSERT_INTEGRATION_VALUE_FORM_SCHEMA: IAppliedSchemaFormConfig<IUpdateIntegrationValueForm> =
-  {
-    value: {
-      type: "text",
-      validations: [
-        {
-          validationType: "required",
-        },
-      ],
+{
+  value: {
+    type: "text",
+    validations: [
+      {
+        validationType: "required",
+      },
+    ],
+  },
+};
+
+const checks = (group: IntegrationsConfigurationGroup): ValidationKeys[] => {
+  const baseChecks: ValidationKeys[] = [
+    {
+      _type: "canUser",
+      body:
+        group === IntegrationsConfigurationGroup.Credentials
+          ? USER_PERMISSIONS.CAN_MANAGE_INTEGRATIONS
+          : USER_PERMISSIONS.CAN_CONFIGURE_APP,
     },
-  };
+  ]
+
+  if (group === IntegrationsConfigurationGroup.Credentials) {
+    baseChecks.push({
+      _type: "withPassword",
+    })
+  }
+
+  return baseChecks;
+}
 
 export const integrationsConfigurationDetailsRequestHandler = (
   group: IntegrationsConfigurationGroup
@@ -58,14 +79,7 @@ export const integrationsConfigurationDetailsRequestHandler = (
       },
     },
 
-    [
-      {
-        _type: "canUser",
-        body:
-          group === IntegrationsConfigurationGroup.Credentials
-            ? USER_PERMISSIONS.CAN_MANAGE_INTEGRATIONS
-            : USER_PERMISSIONS.CAN_CONFIGURE_APP,
-      },
-    ]
+    checks(group)
   );
 };
+

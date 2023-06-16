@@ -27,12 +27,14 @@ export function EntityDetailsView({
   id,
   entity,
   displayFrom,
+  column
 }: {
   id: string;
   entity: string;
   displayFrom: "details" | "canvas";
+  column?: string
 }) {
-  const dataDetails = useEntityDataDetails(entity, id);
+  const dataDetails = useEntityDataDetails(entity, id, column);
   const entityFields = useEntityFields(entity);
   const entityFieldTypes = useProcessedEntityFieldTypes(entity);
   const hiddenDetailsColumns = useHiddenEntityColumns("details", entity);

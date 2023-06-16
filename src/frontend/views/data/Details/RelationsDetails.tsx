@@ -14,14 +14,18 @@ import { ENTITY_DETAILS_VIEW_KEY } from "./constants";
 import { EntityDetailsView } from "./DetailsView";
 import { DetailsLayout } from "./_Layout";
 import { useCanUserPerformCrudAction } from "../useCanUserPerformCrudAction";
+import { useEntityReferenceFields } from "frontend/hooks/entity/entity.store";
+import { SLUG_LOADING_VALUE } from "@hadmean/protozoa";
 
 export function EntityRelationDetails() {
   const childEntity = useRouteParam("childEntity");
   const childEntityCrudConfig = useEntityCrudConfig(childEntity);
-
   const childId = useRouteParam("childId");
   const entity = useEntitySlug();
+  const entityReferenceFields = useEntityReferenceFields(entity);
   const canUserPerformCrudAction = useCanUserPerformCrudAction(childEntity);
+
+  const column = entityReferenceFields.data.find(({table, tag}) => table === childEntity && tag === "inverse")?.field;
 
   const { backLink } = useNavigationStack();
 
@@ -58,6 +62,7 @@ export function EntityRelationDetails() {
           displayFrom="details"
           id={childId}
           entity={childEntity}
+          column={entityReferenceFields.isLoading ? SLUG_LOADING_VALUE : column}
         />
       </SectionBox>
     </DetailsLayout>

@@ -26,7 +26,7 @@ describe("Request Validations => withPasswordValidationImpl", () => {
     const { req, res } = createAuthenticatedMocks({
       method: "POST",
       body: {
-        password: "password",
+        _password: "password",
       },
     });
 

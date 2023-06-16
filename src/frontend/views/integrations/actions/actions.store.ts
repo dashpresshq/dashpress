@@ -41,7 +41,7 @@ export const useActivationConfiguration = (activationId: string) => {
     {
       request: {
         body: {
-          password: rootPassword,
+          _password: rootPassword,
         },
         method: "POST",
       },
@@ -96,11 +96,13 @@ export function useUpdateActivatedActionMutation(activationId: string) {
     successMessage: ACTION_INTEGRATIONS_CRUD_CONFIG.MUTATION_LANG.EDIT,
   });
 
+  const rootPassword = usePasswordStore((state) => state.password);
+
   return useMutation(
     async (configuration: Record<string, string>) =>
       await makePatchRequest(
         `/api/integrations/actions/${activationId}`,
-        configuration
+        { ...configuration, _password: rootPassword }
       ),
     apiMutateOptions
   );

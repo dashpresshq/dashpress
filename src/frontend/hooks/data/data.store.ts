@@ -51,8 +51,9 @@ export const useEntityDataDetails = (
   return useApi<Record<string, string>>(
     ENTITY_DETAILS_PATH(entity, id, column),
     {
+      returnUndefinedOnError: column ? true : undefined,
       errorMessage: entityCrudConfig.TEXT_LANG.NOT_FOUND,
-      enabled: !!id && !!entity && id !== SLUG_LOADING_VALUE,
+      enabled: !!id && !!entity && id !== SLUG_LOADING_VALUE && column !== SLUG_LOADING_VALUE,
       defaultData: {},
     }
   );

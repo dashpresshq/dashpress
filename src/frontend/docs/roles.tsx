@@ -1,5 +1,7 @@
 import { InfoAlert, Spacer } from "@hadmean/chromista";
 import { DocumentationRoot, IDocumentationRootProps } from "./_base";
+import { USER_PERMISSIONS } from "shared/constants/user";
+import { userFriendlyCase } from "shared/lib/strings";
 // done
 export function RolesDocumentation(props: IDocumentationRootProps) {
   return (
@@ -32,37 +34,37 @@ export function RolesDocumentation(props: IDocumentationRootProps) {
 
       <h4>Permissions Breakdown </h4>
       <p>
-        <b><code>Can Configure App</code></b>: 
+        <b><code>{userFriendlyCase(USER_PERMISSIONS.CAN_CONFIGURE_APP)}</code></b>: 
         enables users to configure the app i.e setting the configurations, look and feel of the application. This is the role you will want to assign to the most technical people on the team
       </p>
 
       <p>
-        <b><code>Can Manage All Entities</code></b>: 
+        <b><code>{userFriendlyCase(USER_PERMISSIONS.CAN_MANAGE_ALL_ENTITIES)}</code></b>: 
         enables users access to all entities.
       </p>
 
       <p>
-        <b><code>Can Manage Dashboard</code></b>: 
+        <b><code>{userFriendlyCase(USER_PERMISSIONS.CAN_MANAGE_DASHBOARD)}</code></b>: 
         enables users to build and manage the dashboard.
       </p>
       
       <p>
-        <b><code>Can Manage Integrations</code></b>: 
+        <b><code>{userFriendlyCase(USER_PERMISSIONS.CAN_MANAGE_INTEGRATIONS)}</code></b>: 
         enables users to setup and manage the integrations with supported third party APIs like Slack, Email, HTTP etc.
       </p>
 
       <p>
-        <b><code>Can Manage Permissions</code></b>: 
+        <b><code>{userFriendlyCase(USER_PERMISSIONS.CAN_MANAGE_PERMISSIONS)}</code></b>: 
         enables users to manage roles and permissions.
       </p>
 
       <p>
-        <b><code>Can Manage Users</code></b>: 
+        <b><code>{userFriendlyCase(USER_PERMISSIONS.CAN_MANAGE_USERS)}</code></b>: 
         enables users to list, create, update and delete  users.
       </p>
 
       <p>
-       <b><code>Can Reset Password</code></b>:
+       <b><code>{userFriendlyCase(USER_PERMISSIONS.CAN_RESET_PASSWORD)}</code></b>:
         enables users to reset passwords.
       </p>
 
@@ -76,9 +78,9 @@ export function RolesDocumentation(props: IDocumentationRootProps) {
       <p>
       These are the permission dependencies.
       <ul>
-      <li><code>Can Reset Password</code> - <code>Can Manage Users</code></li>
-      <li><code>Can Manage Integrations</code> - <code>Can Configure App</code></li>
-        <li><code>Can Configure App</code> - <code>Can Manage All Entities</code></li>
+      <li><code>{userFriendlyCase(USER_PERMISSIONS.CAN_RESET_PASSWORD)}</code> - <code>{userFriendlyCase(USER_PERMISSIONS.CAN_MANAGE_USERS)}</code></li>
+      <li><code>{userFriendlyCase(USER_PERMISSIONS.CAN_MANAGE_INTEGRATIONS)}</code> - <code>{userFriendlyCase(USER_PERMISSIONS.CAN_CONFIGURE_APP)}</code></li>
+        <li><code>{userFriendlyCase(USER_PERMISSIONS.CAN_CONFIGURE_APP)}</code> - <code>{userFriendlyCase(USER_PERMISSIONS.CAN_MANAGE_ALL_ENTITIES)}</code></li>
       </ul>
 
      </p>

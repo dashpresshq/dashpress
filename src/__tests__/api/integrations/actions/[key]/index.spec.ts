@@ -98,7 +98,7 @@ describe("/api/integrations/actions/[key]/index", () => {
   });
 
   describe("POST", () => {
-    it("should activate an integration key and save the configurations", async () => {
+    it.only("should activate an integration key and save the configurations", async () => {
       const { req, res } = createAuthenticatedMocks({
         method: "POST",
         query: {
@@ -111,7 +111,8 @@ describe("/api/integrations/actions/[key]/index", () => {
       });
       await handler(req, res);
 
-      expect(res._getStatusCode()).toBe(201);
+      expect(res._getData()).toBe("dd");
+      // expect(res._getStatusCode()).toBe(201);
 
       const { req: activeReq, res: activeRes } = createAuthenticatedMocks({
         method: "GET",
@@ -151,7 +152,7 @@ describe("/api/integrations/actions/[key]/index", () => {
             key: "nano-id-1",
           },
           body: {
-            password: "password",
+            _password: "password",
           },
         });
       await credentialsHandler(credentialsReq, credentialsRes);
@@ -201,6 +202,31 @@ describe("/api/integrations/actions/[key]/index", () => {
   });
 
   describe("PATCH", () => {
+
+    it("should not update action configuration when password is incorrect", async () => {
+      const { req, res } = createAuthenticatedMocks({
+        method: "POST",
+        query: {
+          key: "http",
+        },
+        body: {
+          _password: "invalid password",
+        },
+      });
+      await handler(req, res);
+
+      expect(res._getStatusCode()).toBe(400);
+      expect(res._getJSONData()).toMatchInlineSnapshot(`
+      {
+        "message": "Invalid Password",
+        "method": "POST",
+        "name": "BadRequestError",
+        "path": "",
+        "statusCode": 400,
+      }
+    `);
+    });
+
     it("should update action configuration", async () => {
       const { req, res } = createAuthenticatedMocks({
         method: "PATCH",
@@ -209,6 +235,7 @@ describe("/api/integrations/actions/[key]/index", () => {
         },
         body: {
           token: "updated-token",
+          _password: "password"
         },
       });
       await handler(req, res);

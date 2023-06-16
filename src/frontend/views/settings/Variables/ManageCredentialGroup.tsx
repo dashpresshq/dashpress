@@ -103,12 +103,12 @@ export function ManageCredentialGroup({
   const actionItems:
     | Pick<IPageDetails, "actionItems" | "secondaryActionItems">
     | undefined = useMemo(() => {
-    if (group !== currentTab) {
-      return undefined;
-    }
-    return {
-      actionItems: canManageAction
-        ? [
+      if (group !== currentTab) {
+        return undefined;
+      }
+      return {
+        actionItems: canManageAction
+          ? [
             {
               id: "add",
               onClick: () => {
@@ -119,19 +119,19 @@ export function ManageCredentialGroup({
                 INTEGRATIONS_GROUP_CONFIG[group].crudConfig.TEXT_LANG.CREATE,
             },
           ]
-        : [],
-      secondaryActionItems: [
-        {
-          id: "help",
-          onClick: () => setIsDocOpen(true),
-          IconComponent: HelpCircle,
-          label: DOCUMENTATION_LABEL.CONCEPT(
-            INTEGRATIONS_GROUP_CONFIG[group].crudConfig.TEXT_LANG.TITLE
-          ),
-        },
-      ],
-    };
-  }, [group, currentTab, canManageAction]);
+          : [],
+        secondaryActionItems: [
+          {
+            id: "help",
+            onClick: () => setIsDocOpen(true),
+            IconComponent: HelpCircle,
+            label: DOCUMENTATION_LABEL.CONCEPT(
+              INTEGRATIONS_GROUP_CONFIG[group].crudConfig.TEXT_LANG.TITLE
+            ),
+          },
+        ],
+      };
+    }, [group, currentTab, canManageAction]);
 
   useSetCurrentActionItems(actionItems);
 
@@ -157,14 +157,24 @@ export function ManageCredentialGroup({
       accessor: "value",
     },
   ];
-
   if (canManageAction) {
-    tableColumns.push({
-      Header: "Action",
-      disableSortBy: true,
-      accessor: "__action__",
-      Cell: MemoizedAction,
-    });
+    if (group === IntegrationsConfigurationGroup.Credentials) {
+      if (revealedCredentials.data.length > 0) {
+        tableColumns.push({
+          Header: "Action",
+          disableSortBy: true,
+          accessor: "__action__",
+          Cell: MemoizedAction,
+        });
+      }
+    } else {
+      tableColumns.push({
+        Header: "Action",
+        disableSortBy: true,
+        accessor: "__action__",
+        Cell: MemoizedAction,
+      });
+    }
   }
 
   return (
@@ -174,8 +184,6 @@ export function ManageCredentialGroup({
           userHasPermission(USER_PERMISSIONS.CAN_MANAGE_INTEGRATIONS) &&
           tableData.data.length > 0 &&
           revealedCredentials.data.length === 0 && (
-            // TOOD Revealing password saving message
-            // If not reveal password, dont show `*******` on edit
             <Spacer>
               <Typo.SM textStyle="italic">
                 For security reasons, Please input your account password to be

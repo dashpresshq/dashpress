@@ -31,22 +31,23 @@ export function SystemProfileDocumentation(
       />
 
       <p>
-        You can extend the user's table by providing the system profile for the
-        first user. In pratical steps, if you copy the JSON snippet above and
-        paste it on the{" "}
+        You can extend the user&apos;s table by providing the system profile for
+        the first user. In pratical steps, if you copy the JSON snippet above
+        and paste it on the{" "}
         <b>
           <code>FIRST(Very Important) </code>
         </b>
-        user's <code>System Profile</code> textarea then go back to the users
-        table then you will see the new columns <code>Email</code>,{" "}
+        user&apos;s <code>System Profile</code> textarea then go back to the
+        users table then you will see the new columns <code>Email</code>,{" "}
         <code>Slack Id</code>, <code>Phone Number</code>, <code>Manager</code>,
         <code>Department</code> and <code>Verified</code> on the table and any
-        other user's system profile matching those keys will also be displayed.
+        other user&apos;s system profile matching those keys will also be
+        displayed.
       </p>
       <p>
-        If you remove any field on the first user's system profile, it will not
-        show on the table even if other users have it likewise if you add a new
-        field to the system profile and the other users dont have it then it
+        If you remove any field on the first user&apos;s system profile, it will
+        not show on the table even if other users have it likewise if you add a
+        new field to the system profile and the other users dont have it then it
         will just be blank.
       </p>
 
@@ -55,7 +56,7 @@ export function SystemProfileDocumentation(
         <ul>
           <li>
             Getting the email of the user submitting a form and sending them a
-            mail or using their email as the "From" for emails
+            mail or using their email as the <code>From</code> for emails
           </li>
           <li>
             Saving their database userId along with forms they initiated in

@@ -18,8 +18,8 @@ describe("/api/versions/index", () => {
     expect(res._getStatusCode()).toBe(200);
     expect(res._getJSONData()).toMatchInlineSnapshot(`
       {
-        "Cache Adapter": "memory (When running multiple instances, kindly use 'redis' for a better experience)",
-        "Config Adapter": "json-file (Kindly use 'database' for a better experience. Any bug reported with this adaptor will be automatically closed)",
+        "Cache Adapter": "memory (Kindly use 'redis' when running multiple instances)",
+        "Config Adapter": "json-file (Kindly use 'database' when you have more than two users on this application)",
         "Hadmean Version": "v9.9.9(Latest Version)",
         "Node Version": "16.9.9",
       }

@@ -66,7 +66,7 @@ describe("/api/integrations/actions/[key]/index", () => {
               key: "s3",
             },
             body: {
-              password: "password",
+              _password: "password",
             },
           });
         await credentialsHandler(credentialsReq, credentialsRes);
@@ -127,7 +127,7 @@ describe("/api/integrations/actions/[key]/index", () => {
               key: "s3",
             },
             body: {
-              password: "password",
+              _password: "password",
             },
           });
         await credentialsHandler(credentialsReq, credentialsRes);
@@ -171,7 +171,7 @@ describe("/api/integrations/actions/[key]/index", () => {
             key: "s3",
           },
           body: {
-            password: "password",
+            _password: "password",
           },
         });
       await credentialsHandler(credentialsReq, credentialsRes);
@@ -222,7 +222,7 @@ describe("/api/integrations/actions/[key]/index", () => {
             key: "s3",
           },
           body: {
-            password: "password",
+            _password: "password",
           },
         });
       await credentialsHandler(credentialsReq, credentialsRes);
@@ -274,7 +274,7 @@ describe("/api/integrations/actions/[key]/index", () => {
             key: "s3",
           },
           body: {
-            password: "password",
+            _password: "password",
           },
         });
       await credentialsHandler(credentialsReq, credentialsRes);

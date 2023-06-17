@@ -24,8 +24,7 @@ export default requestHandler(
       )}`;
 
       if (cacheAdaptor !== CacheAdaptorTypes.Redis) {
-        cacheAdaptor +=
-          " (When running multiple instances, kindly use 'redis' for a better experience)";
+        cacheAdaptor += " (Kindly use 'redis' when running multiple instances)";
       }
 
       let configAdaptor = `${configApiService.getConfigValue<ConfigAdaptorTypes>(
@@ -34,7 +33,7 @@ export default requestHandler(
 
       if (configAdaptor !== ConfigAdaptorTypes.Database) {
         configAdaptor +=
-          " (Kindly use 'database' for a better experience. Any bug reported with this adaptor will be automatically closed)";
+          " (Kindly use 'database' when you have more than two users on this application)";
       }
 
       return {

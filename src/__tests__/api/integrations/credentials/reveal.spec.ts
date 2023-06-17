@@ -61,7 +61,7 @@ describe("/api/integrations/credentials/reveal", () => {
     const { req, res } = createAuthenticatedCustomRoleMocks({
       method: "POST",
       body: {
-        password: "password",
+        _password: "password",
       },
     });
 
@@ -93,7 +93,7 @@ describe("/api/integrations/credentials/reveal", () => {
     const { req, res } = createAuthenticatedCustomRoleMocks({
       method: "POST",
       body: {
-        password: "password",
+        _password: "password",
       },
     });
     await handler(req, res);

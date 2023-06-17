@@ -72,9 +72,9 @@ describe("Run Action", () => {
           to: "{{ data.id }}@hadmean.com",
           subject: "CREATE TEST",
           body: "{{data.name}} has the age of {{ data.age }}",
-          overrideSenderName:
+          senderName:
             "Constants are correctly compiled {{ CONSTANT.SITE_NAME }} && auth role is correctly compiled as {{ auth.role }}",
-          overrideSenderEmail:
+          senderEmail:
             "Secrets are correctly compiled {{ SECRET.CREDENTIAL_KEY_1 }} && auth name is correctly compiled as {{ auth.name }}",
         },
       },

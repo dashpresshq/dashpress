@@ -146,11 +146,15 @@ describe("/api/integrations/actions/[key]/implementations", () => {
                 },
               ],
             },
-            "overrideSenderEmail": {
+            "senderEmail": {
               "type": "text",
-              "validations": [],
+              "validations": [
+                {
+                  "validationType": "required",
+                },
+              ],
             },
-            "overrideSenderName": {
+            "senderName": {
               "type": "text",
               "validations": [],
             },

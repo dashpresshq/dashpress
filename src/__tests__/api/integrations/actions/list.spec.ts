@@ -35,14 +35,6 @@ describe("/api/integrations/actions/list", () => {
                 },
               ],
             },
-            "defaultSenderEmail": {
-              "type": "text",
-              "validations": [],
-            },
-            "defaultSenderName": {
-              "type": "text",
-              "validations": [],
-            },
             "host": {
               "type": "text",
               "validations": [
@@ -89,14 +81,6 @@ describe("/api/integrations/actions/list", () => {
                 },
               ],
             },
-            "defaultSenderEmail": {
-              "type": "text",
-              "validations": [],
-            },
-            "defaultSenderName": {
-              "type": "text",
-              "validations": [],
-            },
           },
           "description": "Send emails through SendGrid",
           "key": "sendgrid",
@@ -111,14 +95,6 @@ describe("/api/integrations/actions/list", () => {
                   "validationType": "required",
                 },
               ],
-            },
-            "defaultSenderEmail": {
-              "type": "text",
-              "validations": [],
-            },
-            "defaultSenderName": {
-              "type": "text",
-              "validations": [],
             },
             "domain": {
               "type": "text",
@@ -159,10 +135,6 @@ describe("/api/integrations/actions/list", () => {
         },
         {
           "configurationSchema": {
-            "defaultSenderEmail": {
-              "type": "text",
-              "validations": [],
-            },
             "serverToken": {
               "type": "text",
               "validations": [
@@ -185,14 +157,6 @@ describe("/api/integrations/actions/list", () => {
                   "validationType": "required",
                 },
               ],
-            },
-            "defaultSenderEmail": {
-              "type": "text",
-              "validations": [],
-            },
-            "defaultSenderName": {
-              "type": "text",
-              "validations": [],
             },
           },
           "description": "Send emails through SendInBlue",

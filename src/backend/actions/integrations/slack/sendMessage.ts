@@ -17,7 +17,7 @@ const CONFIG_SCHEMA: IAppliedSchemaFormConfig<IConfig> = {
     ],
   },
   message: {
-    type: "richtext", // :eyes
+    type: "richtext",
     validations: [
       {
         validationType: "required",

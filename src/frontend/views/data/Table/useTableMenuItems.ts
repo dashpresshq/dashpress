@@ -1,5 +1,5 @@
 import { IDropDownMenuItem } from "@hadmean/chromista";
-import { useEntityDiction } from "frontend/hooks/entity/entity.config";
+import { useEntityCrudConfig } from "frontend/hooks/entity/entity.config";
 import { NAVIGATION_LINKS } from "frontend/lib/routing";
 import { useRouter } from "next/router";
 import { Plus } from "react-feather";
@@ -15,7 +15,7 @@ export const useTableMenuItems = (
   }
 ): IDropDownMenuItem[] => {
   const router = useRouter();
-  const entityDiction = useEntityDiction(entity);
+  const entityCrudConfig = useEntityCrudConfig(entity);
   const canUserPerformCrudAction = useCanUserPerformCrudAction(entity);
 
   const pluginTableMenuItems = usePluginTableMenuItems(entity, reference);
@@ -32,7 +32,7 @@ export const useTableMenuItems = (
     pluginTableMenuItems.push({
       id: "add",
       order: 1,
-      label: `Add New ${entityDiction.singular}`,
+      label: entityCrudConfig.TEXT_LANG.CREATE,
       IconComponent: Plus,
       onClick: () => {
         if (reference) {

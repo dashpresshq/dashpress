@@ -6,8 +6,8 @@ interface IConfig {
   to: string;
   subject: string;
   body: string;
-  overrideSenderEmail?: string;
-  overrideSenderName?: string;
+  senderEmail: string;
+  senderName?: string;
 }
 
 const CONFIG_SCHEMA: IAppliedSchemaFormConfig<IConfig> = {
@@ -35,11 +35,15 @@ const CONFIG_SCHEMA: IAppliedSchemaFormConfig<IConfig> = {
       },
     ],
   },
-  overrideSenderEmail: {
+  senderEmail: {
     type: "text",
-    validations: [],
+    validations: [
+      {
+        validationType: "required",
+      },
+    ],
   },
-  overrideSenderName: {
+  senderName: {
     type: "text",
     validations: [],
   },
@@ -53,8 +57,8 @@ export const SEND_MAIL = {
       url: `https://api.sendinblue.com/v3/smtp/email`,
       body: JSON.stringify({
         sender: {
-          name: messageConfig.overrideSenderName || config.defaultSenderName,
-          email: messageConfig.overrideSenderEmail || config.defaultSenderEmail,
+          name: messageConfig.senderName,
+          email: messageConfig.senderEmail,
         },
         to: [
           {

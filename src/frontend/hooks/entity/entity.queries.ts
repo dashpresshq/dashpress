@@ -21,9 +21,16 @@ export function useEntityDictionPlurals<T, P extends keyof T>(
   );
 
   return useCallback(
-    (fieldName: string): string =>
-      entityDictions.data[fieldName]?.data?.plural ||
-      userFriendlyCase(fieldName),
+    (fieldName: string, singular?: boolean): string => {
+      const data = entityDictions.data[fieldName]?.data;
+      if (!data) {
+        return userFriendlyCase(fieldName);
+      }
+      if (singular) {
+        return data.singular || userFriendlyCase(fieldName);
+      }
+      return data.plural || userFriendlyCase(fieldName);
+    },
     [entityDictions.data]
   );
 }

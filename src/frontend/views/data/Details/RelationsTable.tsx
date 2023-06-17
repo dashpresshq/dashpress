@@ -4,8 +4,9 @@ import { useEntityReferenceFields } from "frontend/hooks/entity/entity.store";
 import { useSetPageDetails, useRouteParam } from "frontend/lib/routing";
 import { META_USER_PERMISSIONS } from "shared/constants/user";
 import { GranularEntityPermissions } from "shared/types/user";
+import { useEntityDataReference } from "frontend/hooks/data/data.store";
 import {
-  useEntityDiction,
+  useEntityCrudConfig,
   useEntityId,
   useEntitySlug,
 } from "../../../hooks/entity/entity.config";
@@ -20,7 +21,8 @@ export function EntityRelationTable() {
   const parentEntity = useEntitySlug();
   const entityId = useEntityId();
   const childEntity = useRouteParam("childEntity");
-  const childEntityDiction = useEntityDiction(childEntity);
+  const childEntityCrudConfig = useEntityCrudConfig(childEntity);
+  const entityDataReference = useEntityDataReference(parentEntity, entityId);
 
   const childEntityRelations = useEntityReferenceFields(childEntity);
 
@@ -33,8 +35,12 @@ export function EntityRelationTable() {
     entityId,
   });
 
+  const title = entityDataReference.isLoading
+    ? childEntityCrudConfig.TEXT_LANG.SINGULAR
+    : `${entityDataReference.data} - ${childEntityCrudConfig.TEXT_LANG.TITLE}`;
+
   useSetPageDetails({
-    pageTitle: `${childEntityDiction.singular} Table`,
+    pageTitle: title,
     viewKey: ENTITY_DETAILS_VIEW_KEY,
     permission: META_USER_PERMISSIONS.APPLIED_CAN_ACCESS_ENTITY(
       childEntity,

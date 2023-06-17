@@ -31,7 +31,7 @@
   "dependencies": {
     "@hadmean/bacteria": "^0.0.8",
     "@hadmean/chromista": "^1.0.101",
-    "@hadmean/protozoa": "^1.0.24",
+    "@hadmean/protozoa": "^1.0.25",
     "@types/cryptr": "^4.0.1",
     "@types/jsonwebtoken": "^8.5.8",
     "@types/microseconds": "^0.2.0",
@@ -64,7 +64,6 @@
     "react-query": "^3.39.2",
     "react-use": "^17.4.0",
     "redis": "^4.4.0",
-    "sqlite3": "^5.1.6",
     "styled-components": "^5.3.6",
     "terminal-link": "^3.0.0",
     "winston": "^3.8.2",

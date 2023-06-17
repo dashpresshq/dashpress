@@ -3,9 +3,9 @@ import { ConfigKeys, ConfigApiService } from "../config/config.service";
 import { getDbConnection } from "../connection/db";
 import { AbstractConfigDataPersistenceService } from "./AbstractConfigDataPersistenceService";
 import { ConfigDomain } from "./types";
-// import { CONFIG_TABLE_PREFIX } from "./constants";
+import { CONFIG_TABLE_PREFIX } from "./constants";
 
-const CONFIG_TABLE_NAME = "hadmean_config"; // CONFIG_TABLE_PREFIX("config");
+const CONFIG_TABLE_NAME = CONFIG_TABLE_PREFIX("config");
 
 export class DatabaseConfigDataPersistenceAdaptor<
   T

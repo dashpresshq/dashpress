@@ -6,8 +6,7 @@ interface IConfig {
   to: string;
   subject: string;
   body: string;
-  overrideSenderName?: string;
-  overrideSenderEmail?: string;
+  senderEmail: string;
 }
 
 const CONFIG_SCHEMA: IAppliedSchemaFormConfig<IConfig> = {
@@ -35,13 +34,13 @@ const CONFIG_SCHEMA: IAppliedSchemaFormConfig<IConfig> = {
       },
     ],
   },
-  overrideSenderName: {
+  senderEmail: {
     type: "text",
-    validations: [],
-  },
-  overrideSenderEmail: {
-    type: "text",
-    validations: [],
+    validations: [
+      {
+        validationType: "required",
+      },
+    ],
   },
 };
 
@@ -50,10 +49,7 @@ export const SEND_MAIL = {
   configurationSchema: CONFIG_SCHEMA,
   do: async (config: IActionConfig, messageConfig: IConfig) => {
     const form = new FormData();
-    form.append(
-      "from",
-      messageConfig.overrideSenderEmail || config.defaultSenderEmail
-    );
+    form.append("from", messageConfig.senderEmail);
     form.append("to", messageConfig.to);
     form.append("subject", messageConfig.subject);
     form.append("text", messageConfig.body);

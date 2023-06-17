@@ -13,30 +13,12 @@ describe("MAIL_GUN => SEND_MAIL", () => {
       {
         apiKey: "some-api-key",
         domain: "some-domain",
-        defaultSenderEmail: "default-sender-email",
       },
       {
         to: "some-to",
         subject: "some-subject",
         body: "<p>some-body</p>",
-      }
-    );
-
-    expect(fetch).toHaveBeenCalled();
-  });
-
-  it("should override the default sender when provided", async () => {
-    await SEND_MAIL.do(
-      {
-        apiKey: "some-api-key",
-        domain: "some-domain",
-        defaultSenderEmail: "default-sender-email",
-      },
-      {
-        to: "some-to",
-        subject: "some-subject",
-        body: "<p>some-body</p>",
-        overrideSenderEmail: "override-sender-email",
+        senderEmail: "sender-email",
       }
     );
 

@@ -104,7 +104,7 @@ export function ManageCredentialGroup({
     canManageAction &&
     (group !== IntegrationsConfigurationGroup.Credentials ||
       (group === IntegrationsConfigurationGroup.Credentials &&
-        revealedCredentials.data.length > 0));
+        revealedCredentials.data !== undefined));
 
   const actionItems:
     | Pick<IPageDetails, "actionItems" | "secondaryActionItems">
@@ -116,7 +116,7 @@ export function ManageCredentialGroup({
       actionItems: showManageAction
         ? [
             {
-              id: "add",
+              id: `add-${showManageAction ? "true" : "false"}`,
               onClick: () => {
                 setCurrentConfigItem(NEW_CONFIG_ITEM);
               },
@@ -137,7 +137,7 @@ export function ManageCredentialGroup({
         },
       ],
     };
-  }, [group, currentTab, canManageAction]);
+  }, [group, currentTab, canManageAction, showManageAction]);
 
   useSetCurrentActionItems(actionItems);
 
@@ -177,8 +177,7 @@ export function ManageCredentialGroup({
       <section aria-label={`${group} priviledge section`}>
         {group === IntegrationsConfigurationGroup.Credentials &&
           userHasPermission(USER_PERMISSIONS.CAN_MANAGE_INTEGRATIONS) &&
-          tableData.data.length > 0 &&
-          revealedCredentials.data.length === 0 && (
+          revealedCredentials.data === undefined && (
             <Spacer>
               <Typo.SM textStyle="italic">
                 Please input your account password to be able to see secret

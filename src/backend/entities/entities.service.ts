@@ -213,9 +213,10 @@ export class EntitiesApiService implements IApplicationService {
         table: relation.table,
         label: entityLabels[relation.table],
         type,
-        tag: relation?.joinColumnOptions?.[0].tag,
         field:
-          type === "toOne"
+          type === "toOne" ? relation?.joinColumnOptions?.[0].name : undefined,
+        inverseToOneField:
+          relation?.joinColumnOptions?.[0].tag === "inverse"
             ? relation?.joinColumnOptions?.[0].referencedColumnName
             : undefined,
       };

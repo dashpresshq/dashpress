@@ -12,8 +12,8 @@ export interface IEntityRelation {
   table: string;
   label: string;
   field?: string;
+  inverseToOneField?: string;
   type: "toOne" | "toMany";
-  tag?: "inverse";
 }
 
 export interface IEntityField {

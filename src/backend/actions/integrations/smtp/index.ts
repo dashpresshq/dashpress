@@ -37,14 +37,6 @@ const CONFIGURATION_SCHEMA: IAppliedSchemaFormConfig<IActionConfig> = {
       },
     ],
   },
-  defaultSenderName: {
-    type: "text",
-    validations: [],
-  },
-  defaultSenderEmail: {
-    type: "text",
-    validations: [],
-  },
 };
 
 export const SMTP_ACTION_INTEGRATION: IActionIntegrationsImplemention = {

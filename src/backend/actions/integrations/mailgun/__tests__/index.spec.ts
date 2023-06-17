@@ -6,12 +6,10 @@ describe("MAIL_GUN_ACTION_INTEGRATION", () => {
       await MAIL_GUN_ACTION_INTEGRATION.connect({
         apiKey: "some-apikey",
         domain: "some-domain",
-        defaultSenderName: "some-default-sender-name",
       })
     ).toMatchInlineSnapshot(`
       {
         "apiKey": "some-apikey",
-        "defaultSenderName": "some-default-sender-name",
         "domain": "some-domain",
       }
     `);

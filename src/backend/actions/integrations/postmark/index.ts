@@ -12,10 +12,6 @@ const CONFIGURATION_SCHEMA: IAppliedSchemaFormConfig<IActionConfig> = {
       },
     ],
   },
-  defaultSenderEmail: {
-    type: "text",
-    validations: [],
-  },
 };
 
 export const POST_MARK_ACTION_INTEGRATION: IActionIntegrationsImplemention = {

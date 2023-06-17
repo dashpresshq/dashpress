@@ -6,8 +6,8 @@ interface IConfig {
   to: string;
   subject: string;
   body: string;
-  overrideSenderName?: string;
-  overrideSenderEmail?: string;
+  senderEmail: string;
+  senderName?: string;
 }
 
 const CONFIG_SCHEMA: IAppliedSchemaFormConfig<IConfig> = {
@@ -35,11 +35,15 @@ const CONFIG_SCHEMA: IAppliedSchemaFormConfig<IConfig> = {
       },
     ],
   },
-  overrideSenderName: {
+  senderEmail: {
     type: "text",
-    validations: [],
+    validations: [
+      {
+        validationType: "required",
+      },
+    ],
   },
-  overrideSenderEmail: {
+  senderName: {
     type: "text",
     validations: [],
   },
@@ -72,8 +76,8 @@ export const SEND_MAIL = {
           },
         ],
         from: {
-          email: messageConfig.overrideSenderEmail || config.defaultSenderEmail,
-          name: messageConfig.overrideSenderName || config.defaultSenderName,
+          email: messageConfig.senderEmail,
+          name: messageConfig.senderName,
         },
         subject: messageConfig.subject,
         content: [

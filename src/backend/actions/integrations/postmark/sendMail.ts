@@ -6,7 +6,7 @@ interface IConfig {
   to: string;
   subject: string;
   body: string;
-  overrideSenderEmail?: string;
+  senderEmail?: string;
 }
 
 const CONFIG_SCHEMA: IAppliedSchemaFormConfig<IConfig> = {
@@ -34,9 +34,13 @@ const CONFIG_SCHEMA: IAppliedSchemaFormConfig<IConfig> = {
       },
     ],
   },
-  overrideSenderEmail: {
+  senderEmail: {
     type: "text",
-    validations: [],
+    validations: [
+      {
+        validationType: "required",
+      },
+    ],
   },
 };
 
@@ -47,7 +51,7 @@ export const SEND_MAIL = {
     await makeIntegrationRequest("POST", {
       url: `https://api.postmarkapp.com/email`,
       body: JSON.stringify({
-        From: messageConfig.overrideSenderEmail || config.defaultSenderEmail,
+        From: messageConfig.senderEmail,
         To: messageConfig.to,
         subject: messageConfig.subject,
         HtmlBody: messageConfig.body,

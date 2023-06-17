@@ -48,7 +48,7 @@ export function DetailsLayout({
   ]);
   const entityId = useEntityId();
 
-  const dataDetails = useEntityDataDetails(entity, entityId); // :eyes on getting all the fields so that errors dont show up if the required field is disabled
+  const dataDetails = useEntityDataDetails(entity, entityId);
 
   const referenceFields = useEntityReferenceFields(entity);
 
@@ -97,7 +97,10 @@ export function DetailsLayout({
     listItems.map((relatedEntity) => [
       relatedEntity.name,
       relatedEntity.referencelabel ||
-        getEntitiesDictionPlurals(relatedEntity.name),
+        getEntitiesDictionPlurals(
+          relatedEntity.name,
+          relatedEntitiesMap[relatedEntity.name].type === "toOne"
+        ),
     ])
   );
 
@@ -148,22 +151,12 @@ export function DetailsLayout({
                       label={`${menuItem.label} ${entityCount}`}
                       key={menuItem.name}
                       active={menuKey === menuItem.name}
-                      action={
-                        entityType === "toOne"
-                          ? NAVIGATION_LINKS.ENTITY.RELATION_DETAILS(
-                              entity,
-                              entityId,
-                              menuItem.name,
-                              dataDetails.data[
-                                relatedEntitiesMap[menuItem.name].field
-                              ]
-                            )
-                          : NAVIGATION_LINKS.ENTITY.RELATION_TABLE(
-                              entity,
-                              entityId,
-                              menuItem.name
-                            )
-                      }
+                      action={NAVIGATION_LINKS.ENTITY.RELATION_TABLE(
+                        entity,
+                        entityId,
+                        menuItem.name,
+                        entityType === "toOne" ? "one" : "many"
+                      )}
                     />
                   );
                 }}

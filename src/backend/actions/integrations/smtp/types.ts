@@ -3,8 +3,6 @@ export type IActionConfig = {
   port: number;
   authUser: string;
   authPassword: string;
-  defaultSenderName: string;
-  defaultSenderEmail: string;
 };
 
 export const FOR_CODE_COV = 1;

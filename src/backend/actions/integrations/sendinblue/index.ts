@@ -12,14 +12,6 @@ const CONFIGURATION_SCHEMA: IAppliedSchemaFormConfig<IActionConfig> = {
       },
     ],
   },
-  defaultSenderName: {
-    type: "text",
-    validations: [],
-  },
-  defaultSenderEmail: {
-    type: "text",
-    validations: [],
-  },
 };
 
 export const SENDINBLUE_ACTION_INTEGRATION: IActionIntegrationsImplemention = {

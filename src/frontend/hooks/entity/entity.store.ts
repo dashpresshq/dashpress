@@ -91,7 +91,10 @@ export const useEntityToOneReferenceFields = (entity: string) =>
     selector: (input: IEntityRelation[]) => {
       return Object.fromEntries(
         input
-          .filter(({ type, tag }) => type === "toOne" && tag !== "inverse")
+          .filter(
+            ({ type, inverseToOneField }) =>
+              type === "toOne" && !inverseToOneField
+          )
           .map(({ field, table }) => [field, table])
       );
     },

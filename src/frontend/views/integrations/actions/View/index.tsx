@@ -50,7 +50,7 @@ export function ActionSettingsView({
     <Tabs
       contents={[
         {
-          label: "Instances",
+          label: "Actions",
           content: (
             <BaseActionInstances
               type="integrationKey"

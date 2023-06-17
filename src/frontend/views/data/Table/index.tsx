@@ -18,7 +18,7 @@ import { abbreviateNumber } from "@hadmean/protozoa";
 import { GranularEntityPermissions } from "shared/types/user";
 import { AppLayout } from "../../../_layouts/app";
 import {
-  useEntityDiction,
+  useEntityCrudConfig,
   useEntitySlug,
 } from "../../../hooks/entity/entity.config";
 import {
@@ -32,7 +32,7 @@ import { TableTopComponent } from "./portal";
 
 export function EntityTable() {
   const entity = useEntitySlug();
-  const entityDiction = useEntityDiction(entity);
+  const entityCrudConfig = useEntityCrudConfig(entity);
 
   const actionItems = useEntityActionMenuItems([
     EntityActionTypes.Table,
@@ -42,7 +42,7 @@ export function EntityTable() {
   ]);
 
   useSetPageDetails({
-    pageTitle: entityDiction.plural,
+    pageTitle: entityCrudConfig.TEXT_LANG.TITLE,
     viewKey: "ENTITY_TABLE",
     permission: META_USER_PERMISSIONS.APPLIED_CAN_ACCESS_ENTITY(
       entity,

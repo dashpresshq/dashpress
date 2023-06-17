@@ -24,7 +24,6 @@ export const ACTION_INTEGRATIONS: Record<
   [ActionIntegrationKeys.POSTMARK]: POST_MARK_ACTION_INTEGRATION,
   [ActionIntegrationKeys.SEND_IN_BLUE]: SENDINBLUE_ACTION_INTEGRATION,
   // zapier: SLACK_ACTION_INTEGRATION,
-  // stripe: SLACK_ACTION_INTEGRATION,
 };
 
 // https://github.com/novuhq/novu/tree/next/providers

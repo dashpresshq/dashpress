@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useRouter } from "next/router";
 import { EntityDetailsView } from "../Details/DetailsView";
 import { NAVIGATION_LINKS } from "../../../lib/routing/links";
-import { useEntityDiction } from "../../../hooks/entity/entity.config";
+import { useEntityCrudConfig } from "../../../hooks/entity/entity.config";
 import { useDetailsOffCanvasStore } from "./hooks";
 
 export function DetailsCanvas() {
@@ -11,7 +11,7 @@ export function DetailsCanvas() {
   const [closeDetailsCanvas, detailsCanvasEntity, detailsCanvasId] =
     useDetailsOffCanvasStore((state) => [state.close, state.entity, state.id]);
 
-  const canvasEntityDiction = useEntityDiction(detailsCanvasEntity);
+  const entityCrudConfig = useEntityCrudConfig(detailsCanvasEntity);
 
   useEffect(() => {
     closeDetailsCanvas();
@@ -19,7 +19,7 @@ export function DetailsCanvas() {
 
   return (
     <OffCanvas
-      title={`${canvasEntityDiction.singular} Details`}
+      title={entityCrudConfig.TEXT_LANG.DETAILS}
       onClose={closeDetailsCanvas}
       show={!!detailsCanvasEntity}
     >

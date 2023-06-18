@@ -11,7 +11,8 @@ export interface IDocumentationRootProps {
 const Root = styled.div`
   margin-top: -8px;
 
-  h4, h5 {
+  h4,
+  h5 {
     margin-bottom: -8px !important;
   }
 

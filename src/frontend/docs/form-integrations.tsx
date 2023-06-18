@@ -94,10 +94,11 @@ export function FormIntegrationsDocumentation(props: IDocumentationRootProps) {
           </li>
         </ol>
         <p>
-        Since the generated fields take in handlebars template you are powered to do anything.
-        Below are examples of how you can fill them in 
+          Since the generated fields take in handlebars template you are powered
+          to do anything. Below are examples of how you can fill them in
         </p>
-        <RenderCode input={`// For a URL input, These are valid inputs
+        <RenderCode
+          input={`// For a URL input, These are valid inputs
 {{ ${INTEGRATIONS_GROUP_CONFIG.constants.prefix}.CUSTOM_INTEGRATION_ENDPOINT }}
 {{ ${INTEGRATIONS_GROUP_CONFIG.constants.prefix}.SOME_BASE_URL }}/some-endpoint?username={{ auth.username }}
 
@@ -119,13 +120,13 @@ the loan of amount {{ data.amount }}.
 
 Kind Regards!
 {{ auth.systemProfile.fullName }}`}
-
-/>
+        />
       </p>
       <p>
-       As you can see, since it is handlebars, You can basically mix and match the four prefixes any how you see fit.
+        As you can see, since it is handlebars, You can basically mix and match
+        the four prefixes any how you see fit.
       </p>
-      
+
       <ErrorAlert message="Deactivating an integration will delete its credentials and remove all its actions." />
     </DocumentationRoot>
   );

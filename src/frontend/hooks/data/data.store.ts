@@ -4,9 +4,9 @@ import {
   makePostRequest,
   useApi,
   useApiQueries,
-  SLUG_LOADING_VALUE,
   useWaitForResponseMutationOptions,
   FilterOperators,
+  SLUG_LOADING_VALUE,
 } from "@hadmean/protozoa";
 import qs from "qs";
 import { useRouter } from "next/router";
@@ -16,6 +16,7 @@ import { CRUD_CONFIG_NOT_FOUND } from "frontend/lib/makeCrudConfig";
 import { NAVIGATION_LINKS } from "../../lib/routing/links";
 import { useEntityCrudConfig } from "../entity/entity.config";
 import { useMultipleEntityReferenceFields } from "../entity/entity.store";
+import { isRouterParamEnabled } from "..";
 
 export const ENTITY_TABLE_PATH = (entity: string) =>
   `/api/data/${entity}/table`;
@@ -53,9 +54,8 @@ export const useEntityDataDetails = (
     {
       errorMessage: entityCrudConfig.TEXT_LANG.NOT_FOUND,
       enabled:
-        !!id &&
-        !!entity &&
-        id !== SLUG_LOADING_VALUE &&
+        isRouterParamEnabled(entity) &&
+        isRouterParamEnabled(id) &&
         column !== SLUG_LOADING_VALUE,
       defaultData: {},
     }
@@ -141,13 +141,13 @@ export const useEntityReferenceCount = (
   });
 };
 
-export const useEntityDataReference = (entity: string, id: string) =>
-  useApi<string>(ENTITY_REFERENCE_PATH(entity, id), {
+export const useEntityDataReference = (entity: string, id: string) => {
+  return useApi<string>(ENTITY_REFERENCE_PATH(entity, id), {
     errorMessage: CRUD_CONFIG_NOT_FOUND("Reference data"),
-    enabled: !!(id && entity),
+    enabled: isRouterParamEnabled(id) && isRouterParamEnabled(entity),
     defaultData: "",
   });
-
+};
 export function useEntityDataCreationMutation(entity: string) {
   const entityCrudConfig = useEntityCrudConfig();
   const router = useRouter();

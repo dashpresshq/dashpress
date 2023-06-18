@@ -24,7 +24,7 @@ export class JsonFileConfigDataPersistenceAdaptor<
         : `${type}.json`;
     return path.resolve(
       process.env.CURRENT_WORKING_DIRECTORY || process.cwd(),
-      ".config-data",
+      ".config-data/mdstores",
       file
     );
   };

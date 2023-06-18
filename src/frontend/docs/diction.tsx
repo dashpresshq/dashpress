@@ -1,5 +1,5 @@
 import { DocumentationRoot, IDocumentationRootProps } from "./_base";
-// done
+
 export function DictionDocumentation(props: IDocumentationRootProps) {
   return (
     <DocumentationRoot {...props}>

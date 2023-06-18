@@ -150,7 +150,7 @@ export class DashboardWidgetsApiService implements IApplicationService {
               ? `const actual = await $.query(\`SELECT count(*) FROM "${entity.value}"\`);
 const relative = await $.query(\`SELECT count(*) FROM "${entity.value}" WHERE "${dateField}" < '$.${WIDGET_SCRIPT_RELATIVE_TIME_MARKER}'\`);
 
-return [...actual, ...relative];
+return [actual[0], relative[0]];
             `
               : `return await $.query('SELECT count(*) FROM "${entity.value}"')`,
           };

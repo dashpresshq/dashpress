@@ -1,6 +1,6 @@
 import { InfoAlert, Spacer } from "@hadmean/chromista";
 import { DocumentationRoot, IDocumentationRootProps } from "./_base";
-// done
+
 export function CRUDDocumentation(props: IDocumentationRootProps) {
   return (
     <DocumentationRoot {...props}>

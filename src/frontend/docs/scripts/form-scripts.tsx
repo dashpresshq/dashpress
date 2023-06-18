@@ -1,49 +1,81 @@
-import { InfoAlert, RenderCode, WarningAlert } from "@hadmean/chromista";
+import {
+  InfoAlert,
+  RenderCode,
+  Spacer,
+  WarningAlert,
+} from "@hadmean/chromista";
 import { DocumentationRoot, IDocumentationRootProps } from "../_base";
+// not done
+/* <RenderCode
+input={`{
+// 
 
+// The user authenticated profile
+auth: {
+// The Hadmean profile name
+name: string;
+// The Hadmean username name
+username: string;
+// The system profile for the user
+// More info on this at /docs/accounts/system-profile 
+systemProfile?: string;
+// The Hadmean role name
+role: string;
+}
+}`}
+/> */
 export function FormScriptDocumentation(props: IDocumentationRootProps) {
   return (
     <DocumentationRoot {...props}>
       <p>
-        Forms complexities always grow in parallel with business requirements
-        and we believe giving you coding access to your manage your forms will
-        help you when the requirements get complex as opposed to making things
-        visual which will block you when your requirement gets too complex.
+        Forms scripts enables you to implement the complex form logic your
+        business requirements requires that the UI cannot achieve.
       </p>
       <p>
-        As you will expect you will need some Javascript knowledge to proceed in
-        this section
+        In the <code>Form Scripts</code>, you will have access to the following
+        variables
+        <ul>
+          <li>
+            <b>
+              <code>$.formValues</code>
+            </b>
+            : This gives you current value in the form
+          </li>
+          <li>
+            <b>
+              <code>$.action</code>
+            </b>
+            : The values are either of{" "}
+            <code>&quot;update&quot; | &quot;create&quot;</code> which allows
+            you condition the script for the create or update form
+          </li>
+          <li>
+            <b>
+              <code>$.auth</code>
+            </b>
+            : The current user object with the following fields
+            <ol>
+              <li>
+                <code>$.auth.role</code>
+              </li>
+              <li>
+                <code>$.auth.name</code>
+              </li>
+              <li>
+                <code>$.auth.username</code>
+              </li>
+              <li>
+                <code>$.auth.systemProfile</code>
+              </li>
+            </ol>
+          </li>
+        </ul>
       </p>
-      <p>There are three forms that we use to achieve this</p>
-      <h4>API</h4>
-      <p>First, let talk about the API, The objects available to you are</p>
-      <RenderCode
-        input={`{
-    // The current/submit values in the form
-    formValues: Record<string, string>,
-    // All the route params
-    routeParams: Record<string, string>,
-    // Whether the action is for create or for update
-    action: "update" | "create" , 
-    // The user authenticated profile
-    auth: {
-        // The Hadmean profile name
-        name: string;
-        // The Hadmean username name
-        username: string;
-        // The system profile for the user
-        // More info on this at /docs/accounts/system-profile 
-        systemProfile?: string;
-        // The Hadmean role name
-        role: string;
-    }
-  }`}
-      />
-      <p>They are accessed through the dollar sign `$.`.</p>
       <p>
         You will find full examples below which give you a better understanding
       </p>
       <InfoAlert message="The initial `formValues` for the update form contains the fields that you expose in the details view." />
+      <Spacer />
       <WarningAlert message="All the code written here will be run on the client, So please be careful to not paste any private configuration keys here" />
       <p>See the content of the three forms as the body of a function,</p>
       <p>We have plenty examples below</p>
@@ -70,7 +102,7 @@ when the value of "age" is less than 18
 */
 return {
   canRegister: {
-          disabled: $.formValues.age < 18
+    disabled: $.formValues.age < 18
   },
 }
 
@@ -79,37 +111,37 @@ Will hide the "reasons" field
 when the value of "rating" is less than 3
 */
 return {
-     reasons: {
-          hidden: $.formValues.rating < 3
-     }
+  reasons: {
+    hidden: $.formValues.rating < 3
+  }
 }
 
 /* 
-  You can do cool stuffs like 
-  hiding the "canUpdateBalance" field 
-  if the current user is updating his account  
+You can do cool stuffs like 
+hiding the "canUpdateBalance" field 
+if the current user is updating his account  
 */
 return {
-     canUpdateBalance: {
-          hidden: $.auth.username === $.routeParams.username
-     }
+  canUpdateBalance: {
+    hidden: $.auth.username === $.routeParams.username
+  }
 }
 
 /* 
-   Since this is all javascript object 
-   there is no limit to the composition 
+Since this is all javascript object 
+there is no limit to the composition 
 */
 return {
-     field1: {
-          hidden: someLogic == true
-     },
-      field2: {
-          disabled: someLogic == false,
-          hidden: someLogic == true,
-     },
-      field3: {
-          hidden: someLogic != true
-     }
+  field1: {
+    hidden: someLogic == true
+  },
+  field2: {
+    disabled: someLogic == false,
+    hidden: someLogic == true,
+  },
+  field3: {
+    hidden: someLogic != true
+  }
 }
 `}
       />
@@ -132,32 +164,26 @@ return {
         only use this when your requirement get out of hand
       </p>
       <RenderCode
-        input={` 
-        Will not let the user proceed with the form
-        and will toast message with error to the user
-      */
-     return "You shall not pass"
-`}
+        input={`/*
+Will not let the user proceed with the form
+and will toast message with error to the user
+*/
+return "You shall not pass"
+
+// As long as it valid JS, You can throw in what ever you want
+if($.formValues.age > 23 && ($.formValues.country != "Belgium" || $.formValues.height == 124 )){
+  return "This is weird requirement and Hadmean can handle it"
+}
+
+const customFunctionToReturnFalse = () => false
+
+if(customFunctionToReturnFalse()){
+    return "Custom function returned false"
+}
+
+// if the code gets here then the form will be submitted`}
       />
-      <RenderCode
-        input={`
-     /* 
-        As long as it valid JS, You can throw in what ever you want
-     */
-
-     if($.formValues.age > 23 && ($.formValues.country != "Belgium" || $.formValues.height == 124 )){
-        return "This is weird requirement and Hadmean can handle it"
-     }
-
-     const customFunctionToReturnFalse = () => false
-
-     if(customFunctionToReturnFalse()){
-          return "Custom function returned false"
-     }
-     
-     // if the code gets here then the form will be submitted
-     `}
-      />
+      <Spacer />
       <h5>2. Modify form</h5>
       <p>
         If you return an object, then that will be submitted for our endpoint,
@@ -166,32 +192,29 @@ return {
         just send what you return
       </p>
       <RenderCode
-        input={`
-   /*
-     Will add "createdById" to the form values that is to be submitted
-   */
-     return {
-          ...$.formValues,
-          createdById: JSON.parse($.auth.systemProfile).userId
-     }
-  `}
+        input={`/*
+Will add "createdById" to the form values that is to be submitted
+*/
+return {
+  ...$.formValues,
+  createdById: JSON.parse($.auth.systemProfile).userId
+}`}
       />
+      <Spacer />
       And as you might have guessed you can combine it all
       <RenderCode
-        input={`
-/**
+        input={`/**
  * Will validate the form and will throw the error when it returns a string
  * And will add "createdById" when the form is submitted
  */
-    if($.formValues.age > 23 && ($.formValues.country != "Belgium" || $.formValues.height == 124 )){
-        return "This is weird requirement and Hadmean can handle it"
-     }
+if($.formValues.age > 23 && ($.formValues.country != "Belgium" || $.formValues.height == 124 )){
+  return "This is weird requirement and Hadmean can handle it"
+}
 
-     return {
-          ...$.formValues,
-          createdById: JSON.parse($.auth.systemProfile).userId
-     }
-  `}
+return {
+  ...$.formValues,
+  createdById: JSON.parse($.auth.systemProfile).userId
+}`}
       />
     </DocumentationRoot>
   );

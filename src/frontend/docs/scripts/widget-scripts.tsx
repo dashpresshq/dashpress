@@ -19,6 +19,11 @@ export function WidgetScriptDocumentation(props: IDocumentationRootProps) {
           You will have access to only this method <code>$.query</code> which is
           the gateway to query your data.
         </li>
+        <li>
+          You will have access to this magic variable{" "}
+          <code>$.RELATIVE_TIME</code> which we will discuss later on in this
+          documentation
+        </li>
         <li>Only valid Javascript is allowed here.</li>
         <li>Make sure you return the data you want the widget to render.</li>
         <li>
@@ -54,7 +59,6 @@ export function WidgetScriptDocumentation(props: IDocumentationRootProps) {
         generate the header for the table.
       </p>
       <p>Below are valid examples script for the table widget</p>
-
       <RenderCode
         input={`// As seen the generated examples
 return await $.query('SELECT * FROM "[MY_TABLE]" LIMIT 5')
@@ -80,10 +84,9 @@ return cleanData;`}
       />
       <Spacer />
       <h4>Summary Card</h4>
-      <p>
-        The requirement for the returned data for Summary Cards are
-        <RenderCode
-          input={`// 1. numbers or strings that can be parsed to numbers
+      <p>Below are valid data for Summary Cards </p>
+      <RenderCode
+        input={`// 1. numbers or strings that can be parsed to numbers
 return 123;
 // or
 return "123";
@@ -94,9 +97,76 @@ return [{count: 123}]
 return [{count: "123"}]
 
 // 3. Result from a count query
-return await $.query("SELECT count(*) FROM [MY_TABLE]");
-  `}
-        />
+return await $.query("SELECT count(*) FROM [MY_TABLE]");`}
+      />
+      <p>
+        The above examples will just show the numeric value with is mostly fine.
+        But if you need to show progress on the card, like how your number has
+        increased over a certain period, then you can do it by returning an
+        array with the first value been the real value and the second value
+        being the base value. Check the examples below
+      </p>
+      <RenderCode
+        input={`/* Will render 120 has the value and 20% as the progress
+because (120 - 100) / 100 = 20 */
+return [120, 100];
+
+/* We also show negative progress in red as the example 
+below mean the value has decreased 
+from 100 to 80 also by 20 percent */
+return [80, 100];
+
+/* This also works */
+const actual = await $.query(\`SELECT count(*) FROM "users"\`);
+const relative = await $.query(\`SELECT count(*) FROM "users" WHERE "createdAt" < '$.RELATIVE_TIME'\`);
+
+return [actual[0], relative[0]];`}
+      />
+      <Spacer size="xxl" />
+      <h4>$.RELATIVE_TIME</h4>
+      <p>
+        Create a new table widget and paste this
+        <RenderCode input={`return [{test: "$.RELATIVE_TIME"}]`} />
+        Then exit the dashboard management view by clicking on the{" "}
+        <code>Done</code> button on the top right corner.
+      </p>
+      <p>
+        You will now see that there is a dropdown of relative times for you to
+        select. If you select any of them, you will see that the value of the
+        table changes. This is because the value of the relative time is
+        computed and and substituted over <code>$.RELATIVE_TIME</code>
+      </p>
+      <p>
+        Basically using the <code>$.RELATIVE_TIME</code> in the script will show
+        up the relative time dropdown on the widget and the value is substituted
+        over the computed relative time. This is very useful to allow users
+        selectively see how their data has changed over period of time.
+      </p>
+      <p>
+        The code below shows how you can allow users see how much the users
+        count has increased over selected period
+      </p>
+      <RenderCode
+        input={`// This line gets the total amount of users in the database
+const actual = await $.query(\`
+  SELECT count(*) FROM "users"
+\`);
+
+/* Here we are using the \`$.RELATIVE_TIME\` to placehold 
+the relative time the user selects which we use to filter
+with \`createdAt\` to get the number of users in the
+database at a particular time */
+const relative = await $.query(\`
+  SELECT count(*) FROM "users" WHERE "createdAt" < '$.RELATIVE_TIME'
+\`);
+
+// Here we merge the two arrays
+return [actual[0], relative[0]];`}
+      />
+      <p>
+        This also works on tables script too, You can use the{" "}
+        <code>$.RELATIVE_TIME </code>
+        to allow users view the highest selling product within a relative time.
       </p>
     </DocumentationRoot>
   );

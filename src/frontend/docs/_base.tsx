@@ -16,6 +16,10 @@ const Root = styled.div`
     margin-bottom: -8px !important;
   }
 
+  h5 {
+    font-size: 15px;
+  }
+
   p {
     margin: 12px 0;
     font-size: 16px !important;

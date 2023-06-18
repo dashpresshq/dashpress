@@ -2,7 +2,7 @@ import { ErrorAlert, InfoAlert, RenderCode } from "@hadmean/chromista";
 import { INTEGRATIONS_GROUP_CONFIG } from "shared/config-bag/integrations";
 import { ADMIN_ACTION_INSTANCES_CRUD_CONFIG } from "frontend/views/entity/Actions/constants";
 import { DocumentationRoot, IDocumentationRootProps } from "./_base";
-// done
+
 export function FormIntegrationsDocumentation(props: IDocumentationRootProps) {
   return (
     <DocumentationRoot {...props}>

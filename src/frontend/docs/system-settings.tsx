@@ -1,9 +1,10 @@
-import { InfoAlert } from "@hadmean/chromista";
+import { InfoAlert, Spacer } from "@hadmean/chromista";
 import { DocumentationRoot, IDocumentationRootProps } from "./_base";
-// done
+
 export function SystemSettingsDocumentation(props: IDocumentationRootProps) {
   return (
     <DocumentationRoot {...props}>
+      <Spacer />
       <h4>Token Validity Duration</h4>
       <p>
         By default Hadmean invalidates the users token after 14 days i.e it logs

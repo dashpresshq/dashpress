@@ -1,11 +1,4 @@
-import {
-  ListSkeleton,
-  SectionBox,
-  SortList,
-  Spacer,
-  Tabs,
-  Typo,
-} from "@hadmean/chromista";
+import { ListSkeleton, SectionBox, SortList, Tabs } from "@hadmean/chromista";
 import {
   useRouteParam,
   useChangeRouterParam,
@@ -14,6 +7,9 @@ import {
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { USER_PERMISSIONS } from "shared/constants/user";
 import { MAKE_APP_CONFIGURATION_CRUD_CONFIG } from "frontend/hooks/configuration/configuration.constant";
+import { DOCUMENTATION_LABEL } from "frontend/docs";
+import { useState } from "react";
+import { MenuEntitiesDocumentation } from "frontend/docs/menu-entities";
 import {
   useAppConfiguration,
   useUpsertConfigurationMutation,
@@ -33,6 +29,8 @@ const CRUD_CONFIG = MAKE_APP_CONFIGURATION_CRUD_CONFIG(
   "disabled_menu_entities"
 );
 
+const DOCS_TITLE = "Menu Entities";
+
 export function MenuEntitiesSettings() {
   const tabFromUrl = useRouteParam("tab");
 
@@ -41,6 +39,8 @@ export function MenuEntitiesSettings() {
     viewKey: SETTINGS_VIEW_KEY,
     permission: USER_PERMISSIONS.CAN_CONFIGURE_APP,
   });
+
+  const [isDocOpen, setIsDocOpen] = useState(false);
 
   const changeTabParam = useChangeRouterParam("tab");
 
@@ -81,12 +81,16 @@ export function MenuEntitiesSettings() {
 
   return (
     <BaseSettingsLayout>
-      <SectionBox title={CRUD_CONFIG.TEXT_LANG.TITLE}>
-        <Typo.SM textStyle="italic">
-          Toggle and order your entities as you will like to see them in the
-          menu.
-        </Typo.SM>
-        <Spacer />
+      <SectionBox
+        title={CRUD_CONFIG.TEXT_LANG.TITLE}
+        iconButtons={[
+          {
+            action: () => setIsDocOpen(true),
+            icon: "help",
+            label: DOCUMENTATION_LABEL.CONCEPT(DOCS_TITLE),
+          },
+        ]}
+      >
         <Tabs
           currentTab={tabFromUrl}
           onChange={changeTabParam}
@@ -134,6 +138,11 @@ export function MenuEntitiesSettings() {
           ]}
         />
       </SectionBox>
+      <MenuEntitiesDocumentation
+        title={DOCS_TITLE}
+        close={setIsDocOpen}
+        isOpen={isDocOpen}
+      />
     </BaseSettingsLayout>
   );
 }

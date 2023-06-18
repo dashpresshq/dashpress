@@ -1,6 +1,6 @@
 import { RenderCode } from "@hadmean/chromista";
 import { DocumentationRoot, IDocumentationRootProps } from "./_base";
-// done
+
 export function SystemProfileDocumentation(
   props: Omit<IDocumentationRootProps, "children">
 ) {
@@ -40,7 +40,7 @@ export function SystemProfileDocumentation(
         user&apos;s <code>System Profile</code> textarea then go back to the
         users table then you will see the new columns <code>Email</code>,{" "}
         <code>Slack Id</code>, <code>Phone Number</code>, <code>Manager</code>,
-        <code>Department</code> and <code>Verified</code> on the table and any
+        <code> Department</code> and <code>Verified</code> on the table and any
         other user&apos;s system profile matching those keys will also be
         displayed.
       </p>

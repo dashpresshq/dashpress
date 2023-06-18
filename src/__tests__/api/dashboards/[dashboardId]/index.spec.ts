@@ -215,7 +215,7 @@ describe("/api/dashboards/[dashboardId]/index generation", () => {
           "script": "const actual = await $.query(\`SELECT count(*) FROM "base-model"\`);
       const relative = await $.query(\`SELECT count(*) FROM "base-model" WHERE "createdAt" < '$.RELATIVE_TIME'\`);
 
-      return [...actual, ...relative];
+      return [actual[0], relative[0]];
                   ",
           "title": "Base Model",
         },
@@ -237,7 +237,7 @@ describe("/api/dashboards/[dashboardId]/index generation", () => {
           "script": "const actual = await $.query(\`SELECT count(*) FROM "tests"\`);
       const relative = await $.query(\`SELECT count(*) FROM "tests" WHERE "createdAt" < '$.RELATIVE_TIME'\`);
 
-      return [...actual, ...relative];
+      return [actual[0], relative[0]];
                   ",
           "title": "Tests",
         },

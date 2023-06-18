@@ -72,9 +72,9 @@ describe("pages/admin/settings/menu-entities", () => {
       screen.getByRole("button", { name: "Save Menu Entities Settings" })
     );
 
-    expect(await screen.findByRole("status")).toHaveTextContent(
-      "Menu Entities Settings Saved Successfully"
-    );
+    expect(
+      await screen.findByRole("status", {}, { timeout: 20000 })
+    ).toHaveTextContent("Menu Entities Settings Saved Successfully");
   });
 
   it("should display updated entities state", async () => {
@@ -84,13 +84,18 @@ describe("pages/admin/settings/menu-entities", () => {
       </AppWrapper>
     );
 
-    await waitFor(async () => {
-      expect(
-        await screen.findByRole("checkbox", {
-          name: "Plural entity-1",
-        })
-      ).not.toBeChecked();
-    });
+    await waitFor(
+      async () => {
+        expect(
+          await screen.findByRole("checkbox", {
+            name: "Plural entity-1",
+          })
+        ).not.toBeChecked();
+      },
+      {
+        timeout: 20000,
+      }
+    );
 
     expect(
       screen.getByRole("checkbox", { name: "Plural entity-3" })

@@ -1,0 +1,18 @@
+import { DocumentationRoot, IDocumentationRootProps } from "./_base";
+
+export function EnabledEntitiesDocumentation(props: IDocumentationRootProps) {
+  return (
+    <DocumentationRoot {...props}>
+      <p>
+        Disabling an entity here means it will not be a part of this
+        application. It will be like it doesn&apos;t exist. Disabled entities
+        will not show anywhere on the application and any request made to it
+        will result in a 404 response.
+      </p>
+      <p>
+        This is a good place to toggle off entities in the dabatase that
+        don&apos;t have much business value like migrations, logs etc.
+      </p>
+    </DocumentationRoot>
+  );
+}

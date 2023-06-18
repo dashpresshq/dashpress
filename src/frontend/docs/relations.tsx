@@ -1,7 +1,6 @@
 import { RenderCode } from "@hadmean/chromista";
 import { DocumentationRoot, IDocumentationRootProps } from "./_base";
 
-// done
 export function RelationsSettingsDocumentation(
   props: Omit<IDocumentationRootProps, "children">
 ) {
@@ -33,10 +32,10 @@ export function RelationsSettingsDocumentation(
         are some valid templates
         <RenderCode
           input={`{{ title }} {{ first_name }} {{ last_name }}
-/* "Mr John Doe" */
+/* Will render "Mr John Doe" */
 
-{{ first_name }} / {{ last_name }}
-/* "John - Doe" */`}
+{{ first_name }} - {{ last_name }}
+/* Will render "John - Doe" */`}
         />
       </p>
       <p>

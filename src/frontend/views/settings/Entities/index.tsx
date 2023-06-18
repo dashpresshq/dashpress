@@ -1,10 +1,13 @@
-import { ListSkeleton, SectionBox, Typo, Spacer } from "@hadmean/chromista";
+import { ListSkeleton, SectionBox } from "@hadmean/chromista";
 import { useSetPageDetails } from "frontend/lib/routing";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { USER_PERMISSIONS } from "shared/constants/user";
 import { useApi } from "@hadmean/protozoa";
 import { ILabelValue } from "types";
 import { MAKE_APP_CONFIGURATION_CRUD_CONFIG } from "frontend/hooks/configuration/configuration.constant";
+import { useState } from "react";
+import { DOCUMENTATION_LABEL } from "frontend/docs";
+import { EnabledEntitiesDocumentation } from "frontend/docs/enabled-entities";
 import {
   useAppConfiguration,
   useUpsertConfigurationMutation,
@@ -20,6 +23,8 @@ import { EntitiesSelection } from "./Selection";
 
 const CRUD_CONFIG = MAKE_APP_CONFIGURATION_CRUD_CONFIG("disabled_entities");
 
+const DOCS_TITLE = "Enabled Entities";
+
 const useEntitiesList = () =>
   useApi<ILabelValue[]>("/api/entities/list", {
     errorMessage: CRUD_CONFIG.TEXT_LANG.NOT_FOUND,
@@ -34,6 +39,8 @@ export function EntitiesSettings() {
     viewKey: SETTINGS_VIEW_KEY,
     permission: USER_PERMISSIONS.CAN_CONFIGURE_APP,
   });
+
+  const [isDocOpen, setIsDocOpen] = useState(false);
 
   const entitiesToHide = useAppConfiguration<string[]>("disabled_entities");
 
@@ -56,14 +63,16 @@ export function EntitiesSettings() {
 
   return (
     <BaseSettingsLayout>
-      <SectionBox title={CRUD_CONFIG.TEXT_LANG.TITLE}>
-        <Typo.SM textStyle="italic">
-          Disabling an entity here means it will not show anywhere on this
-          application and any request made to it will result in a 404 response.
-          This is a good place to toogle off entities related migrations, logs,
-          or any other entities not related to your admin application.
-        </Typo.SM>
-        <Spacer />
+      <SectionBox
+        title={CRUD_CONFIG.TEXT_LANG.TITLE}
+        iconButtons={[
+          {
+            action: () => setIsDocOpen(true),
+            icon: "help",
+            label: DOCUMENTATION_LABEL.CONCEPT(DOCS_TITLE),
+          },
+        ]}
+      >
         <ViewStateMachine
           error={error}
           loading={isLoading}
@@ -81,6 +90,11 @@ export function EntitiesSettings() {
           />
         </ViewStateMachine>
       </SectionBox>
+      <EnabledEntitiesDocumentation
+        title={DOCS_TITLE}
+        close={setIsDocOpen}
+        isOpen={isDocOpen}
+      />
     </BaseSettingsLayout>
   );
 }

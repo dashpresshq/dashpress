@@ -1,7 +1,7 @@
 import { userFriendlyCase } from "shared/lib/strings";
 import { USER_PERMISSIONS } from "shared/constants/user";
 import { DocumentationRoot, IDocumentationRootProps } from "./_base";
-// done
+
 export function VariablesDocumentation(props: IDocumentationRootProps) {
   return (
     <DocumentationRoot {...props}>

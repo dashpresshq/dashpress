@@ -2,7 +2,7 @@ import { InfoAlert, Spacer } from "@hadmean/chromista";
 import { USER_PERMISSIONS } from "shared/constants/user";
 import { userFriendlyCase } from "shared/lib/strings";
 import { DocumentationRoot, IDocumentationRootProps } from "./_base";
-// done
+
 export function RolesDocumentation(props: IDocumentationRootProps) {
   return (
     <DocumentationRoot {...props}>

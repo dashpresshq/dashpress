@@ -244,7 +244,6 @@ export function DashboardWidgetForm({
                       {({ input, meta }) => (
                         <FormCodeEditor
                           required
-                          description="You can write any valid Javascript here but make sure return the data that satisfies the chart schema which you will see when you click on the 'Preview' button below"
                           language="javascript"
                           label="Script"
                           meta={meta}

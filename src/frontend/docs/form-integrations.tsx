@@ -2,7 +2,7 @@ import { ErrorAlert, InfoAlert, RenderCode } from "@hadmean/chromista";
 import { INTEGRATIONS_GROUP_CONFIG } from "shared/config-bag/integrations";
 import { ADMIN_ACTION_INSTANCES_CRUD_CONFIG } from "frontend/views/entity/Actions/constants";
 import { DocumentationRoot, IDocumentationRootProps } from "./_base";
-// not done
+// done
 export function FormIntegrationsDocumentation(props: IDocumentationRootProps) {
   return (
     <DocumentationRoot {...props}>
@@ -93,13 +93,40 @@ export function FormIntegrationsDocumentation(props: IDocumentationRootProps) {
             </code>
           </li>
         </ol>
-        <RenderCode input="" />
+        <p>
+        Since the generated fields take in handlebars template you are powered to do anything.
+        Below are examples of how you can fill them in 
+        </p>
+        <RenderCode input={`// For a URL input, These are valid inputs
+{{ ${INTEGRATIONS_GROUP_CONFIG.constants.prefix}.CUSTOM_INTEGRATION_ENDPOINT }}
+{{ ${INTEGRATIONS_GROUP_CONFIG.constants.prefix}.SOME_BASE_URL }}/some-endpoint?username={{ auth.username }}
+
+// For a message title, you can mix and match to your satisfaction
+Hi {{ data.username }}!
+Your Request Has Been {{ data.status }}
+Update From {{ ${INTEGRATIONS_GROUP_CONFIG.constants.prefix}.DEFAULT_SUPPORT_NAME }}
+
+// For HTTP headers, you can do
+{
+  "X-AccessID": "{{ ${INTEGRATIONS_GROUP_CONFIG.constants.prefix}.SOME_INTEGRATION_ID }}",
+  "Authorisation": "Bearer {{ ${INTEGRATIONS_GROUP_CONFIG.credentials.prefix}.SOME_INTEGRATION_ACCESS_TOKEN }}"
+}
+
+// For text body, you can do
+Hi!
+{{ ${INTEGRATIONS_GROUP_CONFIG.constants.prefix}.COMPANY_NAME }} has approved your request for
+the loan of amount {{ data.amount }}.
+
+Kind Regards!
+{{ auth.systemProfile.fullName }}`}
+
+/>
       </p>
       <p>
-        You can always deactivate an integration by clicking on the Deactivate
-        tab
-        <ErrorAlert message="Deactivating an integration will delete its credentials and remove all its actions." />
+       As you can see, since it is handlebars, You can basically mix and match the four prefixes any how you see fit.
       </p>
+      
+      <ErrorAlert message="Deactivating an integration will delete its credentials and remove all its actions." />
     </DocumentationRoot>
   );
 }

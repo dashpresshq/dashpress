@@ -5,7 +5,7 @@ export function SystemProfileDocumentation(
   props: Omit<IDocumentationRootProps, "children">
 ) {
   return (
-    <DocumentationRoot {...props} title="System Profile Documentation">
+    <DocumentationRoot {...props}>
       <p>
         Since users are created with only three fields
         <code> Username</code>, <code>Name</code> and the <code>Role</code>, you

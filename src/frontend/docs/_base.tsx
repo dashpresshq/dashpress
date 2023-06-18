@@ -11,7 +11,7 @@ export interface IDocumentationRootProps {
 const Root = styled.div`
   margin-top: -8px;
 
-  h4 {
+  h4, h5 {
     margin-bottom: -8px !important;
   }
 
@@ -24,10 +24,14 @@ const Root = styled.div`
     font-style: italic;
   }
 
+  pre {
+    min-height: initial;
+  }
+
   ul,
   ol {
     margin-top: 0px;
-    padding-left: 16px;
+    padding-left: 24px;
   }
 `;
 

@@ -1,77 +1,80 @@
-import { InfoAlert, WarningAlert } from "@hadmean/chromista";
 import { DocumentationRoot, IDocumentationRootProps } from "./_base";
-// not done
+// done
 export function FieldsSettingsDocumentation(props: IDocumentationRootProps) {
   return (
     <DocumentationRoot {...props}>
       <p>
-        This view allows you to make field-level customizations. All
-        customization will be reflected on the tables, details view, create form
-        and edit form
+        You will be to make field-level customizations on the tables, details, create form
+        and edit form. We have three tabs here so lets start with the first.
       </p>
       <h4> Labels</h4>
       <p>
         This tab enables you to rename the label of the field. Say you want to
-        <code>name</code> to be called <code>Full Name</code> or{" "}
+        <code> name</code> to be called <code>Full Name</code> or{" "}
         <code>updatedAt</code> to be called <code>Last Updated</code> then you
-        simple input the desired name under the field and submit and the column
-        will be renamed everywhere
+        simplly input the desired name under the field and submit and the column
+        will be renamed everywhere.
       </p>
       <h4> Types</h4>
-      <WarningAlert message="It is un-evitable that this tab will be edited but we strongly advise that you structure your schema to minimize you touching this section" />
-      <p>There are three things you can do in this section</p>
-      <h5> Specific Type</h5>
-      <InfoAlert message="No action taken here will reflect on your database, If you are looking for that then you will need to look for a database client and we will not be supporting this." />
       <p>
-        Databases have limits on the types of data you want to save, so we
-        usually end up using <code>text</code> to represent <code>email</code>,{" "}
-        <code>url</code>, <code>color</code>
-        <code>image</code>. With the section, you can have a more specific type
-        for your data and Hadmean will use this information to build the most
-        appropriate view/form field for your data
+        Two quick notes as we head in to this section
+        <ol>
+          <li>
+            Hadmean is not a database client meaning any action taken here will not reflect on your database.
+          </li>
+          <li>
+            We strongly advise that you edit your schema to minimize you touching this section.
+          </li>
+        </ol>
+      </p>
+      <p>Having said that, there are three things you can do in this section</p>
+      <h5>1. Choosing More Specific Data Type</h5>
+      <p>
+        Here you can be more specific about the type of your field, You can choose
+        more appropriate field type like <code>email</code>,{" "}
+        <code> url</code>, <code> color,</code>
+        <code>image</code> over the plain <code>text</code> field type.
       </p>
       <p>
-        You will notice that some selections are disabled and these are for
+        You will see that some field types are disabled and these are for
         fields like <code>boolean</code>, <code>date</code>, <code>enum</code>{" "}
         etc. which really don&apos;t have sister types so there is nothing you
         can update it to
       </p>
       <p>
         You will also see that the selections are narrowed as you will not see a
-        <code>email</code> selection for a numerical field nor will you see{" "}
+        <code> email</code> selection for a numerical field nor will you see{" "}
         <code>number</code> for
-        <code>text</code> field, This is to reduce the chances of bad selection
+        <code> text</code> field. This is to eliminate the possibility an invalid selection.
       </p>
-      <h5> Validations</h5>
+      <h5>2. Managing Validations</h5>
       <p>
-        Hadmean, will try to pick all the database validations that it can, Like
-        <code>non-nullable</code> means <code>required</code>. As such all
-        fields with <code>non-nullable</code>
-        will be required in the form and this is not editable, If you need to
-        change this, then you database has to be change and we will pick it up
-        the next time you spin the application.
-      </p>
-      <p>
-        We also add default validations for <code>maxLength</code>,{" "}
-        <code>isDate</code>, <code>unique</code>,<code>isBoolean</code> etc. As
-        said earlier these validations can&apos;t be edited so you will need to
-        update your database to make these changes.
+        Hadmean, will try to pick all the database validations that it can, so it knows the
+        <code> non-nullable</code> constraint means the field is <code>required</code> and so on.
+
+        We also translate other constraints to validations like <code>maxLength</code>,{" "}
+        <code>isDate</code>, <code>unique</code>,<code> isBoolean</code> etc.
       </p>
       <p>
-        But databases don&apos;t contain all the validations, So we provide the
-        <code>Configure Validation</code> to let you add more validations like{" "}
-        <code>minLength</code>,<code>regex</code>, <code>alphanumeric</code>,{" "}
+        Note that validations picked from database can&apos;t be removed on the app.
+        The only way to remove them is to remove them from database and restart your app.
+      </p>
+      <p>
+        The <code> Configure Validation</code> button allows you to add more validations that we can&apos;t possibly
+        get from the database like{" "}
+        <code>minLength</code>,<code> regex</code>, <code>alphanumeric</code>,{" "}
         <code>matchOtherField</code> etc.
+        We also provide a text input for you to customize the validation message.
       </p>
-      <InfoAlert message=" All validations picked from the database can't be removed but added validations can be" />
+      <h5> 3. Configure Selection</h5>
       <p>
-        We also provide a text input for you to customize the validation message
+        When the field is an enum field or you select <code>selection</code> as the type. You will
+        see a <code>Configure Selections</code> button which will allow you select
+        colors for enum field types and manage the selections for the <code>selection</code> type.
       </p>
-      <h5> Selection</h5>
-      <p>TODO</p>
       <h4> Order</h4>
       <p>
-        This allows you to order the fields around and the order will also be
+        Here you will be able to order the fields around and the order will also be
         reflected on tables, details view and forms
       </p>
     </DocumentationRoot>

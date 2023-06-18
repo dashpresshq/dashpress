@@ -73,12 +73,9 @@ export function EntityDetailsView({
     entity
   );
 
-  if (!id) {
-    return null;
-  }
   return (
     <ViewStateMachine
-      loading={viewState.type === "loading"}
+      loading={viewState.type === "loading" || !id}
       error={viewState.type === "error" ? viewState.message : undefined}
       loader={
         <>
@@ -121,14 +118,14 @@ export function EntityDetailsView({
           });
 
           const contentToRender = specialDataTypeRender || (
-            <Typo.MD>
+            <Typo.SM>
               {typeof value === "object" ? JSON.stringify(value) : value}
-            </Typo.MD>
+            </Typo.SM>
           );
 
           return (
             <React.Fragment key={name}>
-              <Typo.XS weight="bold">{getEntityFieldLabels(name)}</Typo.XS>
+              <Typo.XXS weight="bold">{getEntityFieldLabels(name)}</Typo.XXS>
               {contentToRender}
               <Spacer />
             </React.Fragment>

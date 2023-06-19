@@ -15,7 +15,8 @@ export const usePluginTableMenuItems = (
 
 export const useSyncPaginatedDataState = () => {};
 
-export function TableViewComponent() {
+export function TableViewComponent({ entity }: { entity: string }) {
+  noop(entity);
   return <span />;
 }
 

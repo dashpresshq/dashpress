@@ -46,7 +46,7 @@ export function EntityDataTable({
           />
         )}
       </ViewStateMachine>
-      <TableViewComponent />
+      <TableViewComponent entity={entity} />
     </>
   );
 }

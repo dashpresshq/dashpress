@@ -14,6 +14,7 @@ interface IProps {
 }
 
 // TODO Card Widgets: targets (for contributors)
+// card percentage inverse
 
 export function SummaryWidget({ config, data }: IProps) {
   const summaryData = SummaryCardWidgetSchema.parse(data);

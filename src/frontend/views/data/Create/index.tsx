@@ -58,6 +58,7 @@ export function EntityCreate() {
           backLink={backLink}
         >
           <BaseEntityForm
+            entity={entity}
             action="create"
             initialValues={routeParams}
             onSubmit={entityDataCreationMutation.mutateAsync}

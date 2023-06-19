@@ -11,7 +11,6 @@ import {
   useEntityFieldSelections,
   useProcessedEntityFieldTypes,
   useEntityFieldValidations,
-  useEntitySlug,
   useEntityCrudConfig,
 } from "frontend/hooks/entity/entity.config";
 import { IFormExtension } from "frontend/components/SchemaForm/types";
@@ -22,27 +21,30 @@ import { useEntityViewStateMachine } from "./useEntityViewStateMachine";
 import { filterOutHiddenScalarColumns } from "./utils";
 
 type IProps = {
+  entity: string;
   initialValues?: Record<string, unknown>;
   action: "create" | "update";
   hiddenColumns: DataStateKeys<string[]>;
   additionalDataState?: DataStateKeys<unknown>;
-  onSubmit: (data: Record<string, unknown>) => Promise<void>;
+  allOptional?: boolean;
+  onSubmit: (data: Record<string, string>) => Promise<void>;
 };
 
 export function BaseEntityForm({
+  entity,
   initialValues,
   action,
+  allOptional,
   additionalDataState,
   hiddenColumns,
   onSubmit,
 }: IProps) {
-  const entity = useEntitySlug();
-  const entityCrudConfig = useEntityCrudConfig();
-  const entityValidationsMap = useEntityFieldValidations();
+  const entityCrudConfig = useEntityCrudConfig(entity);
+  const entityValidationsMap = useEntityFieldValidations(entity);
   const entityFields = useEntityFields(entity);
-  const getEntityFieldLabels = useEntityFieldLabels();
-  const entityFieldTypes = useProcessedEntityFieldTypes();
-  const entityFieldSelections = useEntityFieldSelections();
+  const getEntityFieldLabels = useEntityFieldLabels(entity);
+  const entityFieldTypes = useProcessedEntityFieldTypes(entity);
+  const entityFieldSelections = useEntityFieldSelections(entity);
   const entityFieldTypesMap = useEntityConfiguration<Record<string, string>>(
     "entity_columns_types",
     entity
@@ -129,7 +131,7 @@ export function BaseEntityForm({
         action={action}
         icon={action === "create" ? "add" : "save"}
         initialValues={fieldsInitialValues}
-        fields={buildAppliedSchemaFormConfig(formSchemaConfig)}
+        fields={buildAppliedSchemaFormConfig(formSchemaConfig, allOptional)}
         formExtension={entityFormExtension.data}
       />
     </ViewStateMachine>

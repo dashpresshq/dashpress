@@ -23,6 +23,11 @@ export const ADMIN_USERS_CRUD_CONFIG = MAKE_CRUD_CONFIG({
   singular: "User",
 });
 
+export function useAllUsers() {
+  return useApi<IAccountProfile[]>(ADMIN_USERS_CRUD_CONFIG.ENDPOINTS.LIST, {
+    defaultData: [],
+  });
+}
 export function useUserDetails(username: string) {
   return useApi<IAccountProfile>(
     ADMIN_USERS_CRUD_CONFIG.ENDPOINTS.DETAILS(username),

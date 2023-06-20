@@ -1,10 +1,10 @@
 import { OffCanvas, SoftButton, Spacer } from "@hadmean/chromista";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
-import { EntityDetailsView } from "../Details/DetailsView";
-import { NAVIGATION_LINKS } from "../../../lib/routing/links";
-import { useEntityCrudConfig } from "../../../hooks/entity/entity.config";
-import { useDetailsOffCanvasStore } from "./hooks";
+import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
+import { useEntityCrudConfig } from "frontend/hooks/entity/entity.config";
+import { EntityDetailsView } from "../../Details/DetailsView";
+import { useDetailsOffCanvasStore } from "../hooks";
 
 export function DetailsCanvas() {
   const router = useRouter();

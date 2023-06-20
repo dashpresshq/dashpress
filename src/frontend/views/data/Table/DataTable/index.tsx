@@ -1,5 +1,9 @@
 import { ITableColumn, Table } from "@hadmean/chromista";
-import { DEFAULT_PAGINATED_DATA, usePaginatedData } from "@hadmean/protozoa";
+import {
+  DEFAULT_PAGINATED_DATA,
+  StringUtils,
+  usePaginatedData,
+} from "@hadmean/protozoa";
 import { ICrudConfig } from "frontend/lib/makeCrudConfig";
 import { useTableState } from "../hooks";
 import { IDataTableProps } from "../types";
@@ -17,7 +21,6 @@ export function BaseDataTable({
   enabled,
   stateStorageKey,
   dataEndpoint,
-  lean,
   crudConfig,
   border,
   persitentFilters = [],
@@ -39,8 +42,16 @@ export function BaseDataTable({
         overridePaginatedDataState,
       }}
       border={border}
-      emptyMessage={crudConfig.TEXT_LANG.EMPTY_LIST}
-      lean={lean}
+      emptyMessage={
+        currentState.filters.length > 0
+          ? // TODO for contributors: transform this to user readable message
+            `No result for the current ${StringUtils.pluralize(
+              "filter",
+              currentState.filters.length,
+              true
+            )} applied.`
+          : crudConfig.TEXT_LANG.EMPTY_LIST
+      }
       columns={columns}
     />
   );

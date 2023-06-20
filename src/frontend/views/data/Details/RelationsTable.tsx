@@ -1,21 +1,18 @@
-import { StyledCard } from "@hadmean/chromista";
-import { FilterOperators } from "@hadmean/protozoa";
 import { useEntityReferenceFields } from "frontend/hooks/entity/entity.store";
 import { useSetPageDetails, useRouteParam } from "frontend/lib/routing";
 import { META_USER_PERMISSIONS } from "shared/constants/user";
 import { GranularEntityPermissions } from "shared/types/user";
 import { useEntityDataReference } from "frontend/hooks/data/data.store";
+import { FilterOperators } from "@hadmean/protozoa";
 import {
   useEntityCrudConfig,
   useEntityId,
   useEntitySlug,
 } from "../../../hooks/entity/entity.config";
-import { DetailsCanvas } from "../Table/DetailsCanvas";
-import { TableTopComponent } from "../Table/portal";
-import { EntityDataTable } from "../Table/DataTable/EntityDataTable";
 import { ENTITY_DETAILS_VIEW_KEY } from "./constants";
 import { DetailsLayout } from "./_Layout";
 import { useTableMenuItems } from "../Table/useTableMenuItems";
+import { WholeEntityTable } from "../Table/_WholeEntityTable";
 
 export function EntityRelationTable() {
   const parentEntity = useEntitySlug();
@@ -54,26 +51,22 @@ export function EntityRelationTable() {
       menuKey={childEntity}
       menuItems={menuItems}
     >
-      <TableTopComponent entity={childEntity} />
-      <StyledCard>
-        <EntityDataTable
-          entity={childEntity}
-          persitentFilters={
-            referenceField
-              ? [
-                  {
-                    id: referenceField,
-                    value: {
-                      operator: FilterOperators.EQUAL_TO,
-                      value: entityId,
-                    },
+      <WholeEntityTable
+        entity={childEntity}
+        persistFilters={
+          referenceField
+            ? [
+                {
+                  id: referenceField,
+                  value: {
+                    operator: FilterOperators.EQUAL_TO,
+                    value: entityId,
                   },
-                ]
-              : []
-          }
-        />
-      </StyledCard>
-      <DetailsCanvas />
+                },
+              ]
+            : []
+        }
+      />
     </DetailsLayout>
   );
 }

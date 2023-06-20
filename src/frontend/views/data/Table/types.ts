@@ -7,6 +7,5 @@ export interface IDataTableProps {
     IPaginatedDataState<unknown>,
     "pageSize" | "sortBy" | "filters"
   >;
-  lean?: true;
   border?: true;
 }

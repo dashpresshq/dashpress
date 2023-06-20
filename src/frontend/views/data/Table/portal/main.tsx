@@ -1,5 +1,7 @@
 import { IDropDownMenuItem, ITableColumn } from "@hadmean/chromista";
+import { DataStateKeys } from "@hadmean/protozoa";
 import noop from "lodash/noop";
+import { ITableTab } from "shared/types/data";
 
 export const usePluginTableMenuItems = (
   entity: string,
@@ -28,4 +30,16 @@ export function TableTopComponent({ entity }: { entity: string }) {
 export const usePortalTableColumns = (entity: string, lean: boolean) => {
   noop(entity, lean);
   return (tableColumns: ITableColumn[]) => tableColumns;
+};
+
+export const usePortalTableTabs = (
+  entity: string
+): DataStateKeys<ITableTab[]> => {
+  noop(entity);
+  return {
+    data: [],
+    error: null,
+    isLoading: false,
+    isRefetching: false,
+  };
 };

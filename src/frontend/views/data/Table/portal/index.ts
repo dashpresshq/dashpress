@@ -4,4 +4,5 @@ export {
   TableViewComponent,
   usePortalTableColumns,
   TableTopComponent,
+  usePortalTableTabs,
 } from "./main";

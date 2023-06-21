@@ -36,12 +36,11 @@ export function DateFormatSettings() {
     <BaseSettingsLayout>
       <SectionBox
         title={CRUD_CONFIG.TEXT_LANG.TITLE}
-        description="Using format from https://date-fns.org/docs/format"
         iconButtons={[
           {
             action: "https://date-fns.org/docs/format",
             icon: "help",
-            label: "Go to https://date-fns.org/docs/format",
+            label: "Using https://date-fns.org/docs/format",
           },
         ]}
       >

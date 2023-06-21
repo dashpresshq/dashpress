@@ -54,7 +54,7 @@ describe("pages/setup/user", () => {
     );
 
     expect(await screen.findByRole("status")).toHaveTextContent(
-      "Account Setup Was Successfull"
+      "Account Was Successfully Setup"
     );
 
     expect(pushMock).toHaveBeenCalledWith("/");

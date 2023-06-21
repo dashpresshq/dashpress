@@ -14,7 +14,7 @@ export function useSetupCredentialsMutation() {
     Record<string, string>
   >({
     endpoints: [SETUP_CHECK_URL],
-    successMessage: "Credentials Setup Was Successfull",
+    successMessage: "Credentials Was Successfully Setup",
   });
 
   return useMutation(
@@ -30,7 +30,7 @@ export function useSetupUserMutation() {
   const apiMutateOptions =
     useWaitForResponseMutationOptions<ISuccessfullAuthenticationResponse>({
       endpoints: [SETUP_CHECK_URL],
-      successMessage: "Account Setup Was Successfull",
+      successMessage: "Account Was Successfully Setup",
       onSuccessActionWithFormData: (response) => {
         authenticateUser(response.token, true);
       },

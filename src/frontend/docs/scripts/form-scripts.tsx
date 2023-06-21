@@ -214,7 +214,9 @@ You can compute fields to save
 */
 return {
   ...$.formValues,
-  isExpired: $.formValues.expiryDate > new Date(),
+  slug: $.formValues.title
+    .replaceAll(" ", "-")
+    .toLowerCase()
 }`}
       />
       <Spacer />

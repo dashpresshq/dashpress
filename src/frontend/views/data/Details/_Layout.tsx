@@ -33,19 +33,24 @@ interface IProps {
   entity: string;
   menuItems?: IDropDownMenuItem[];
   menuKey: string;
+  childEntity?: string;
 }
 
 export function DetailsLayout({
   children,
   entity,
+  childEntity,
   menuKey,
   menuItems = [],
 }: IProps) {
-  const actionItems = useEntityActionMenuItems([
-    EntityActionTypes.Details,
-    EntityActionTypes.Types,
-    EntityActionTypes.Labels,
-  ]);
+  const actionItems = useEntityActionMenuItems(
+    [
+      EntityActionTypes.Details,
+      EntityActionTypes.Types,
+      EntityActionTypes.Labels,
+    ],
+    childEntity
+  );
   const entityId = useEntityId();
 
   const dataDetails = useEntityDataDetails(entity, entityId);

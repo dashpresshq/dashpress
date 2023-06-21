@@ -48,6 +48,7 @@ export function EntityRelationTable() {
   return (
     <DetailsLayout
       entity={parentEntity}
+      childEntity={childEntity}
       menuKey={childEntity}
       menuItems={menuItems}
     >

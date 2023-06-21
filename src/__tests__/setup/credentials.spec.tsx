@@ -173,7 +173,7 @@ describe("pages/setup/credentials", () => {
       );
 
       expect(await screen.findByRole("status")).toHaveTextContent(
-        "Credentials Setup Was Successfull"
+        "Credentials Was Successfully Setup"
       );
 
       expect(replaceMock).toHaveBeenCalledWith("/setup/user");

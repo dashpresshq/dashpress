@@ -11,8 +11,9 @@ export const isUseColorsFlagOn = (selections: IColorableSelection[]) => {
 export const OPTIONS_COLORS = [
   ROYGBIV.green,
   ROYGBIV.red,
-  ROYGBIV.orange,
-  ROYGBIV.yellow,
-  ROYGBIV.indigo,
+  ROYGBIV.blue,
   ROYGBIV.violet,
+  ROYGBIV.orange,
+  ROYGBIV.indigo,
+  ROYGBIV.brown,
 ];

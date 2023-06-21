@@ -1,13 +1,10 @@
 import {
-  DeleteButton,
-  Divider,
   FormButton,
   FormInput,
   FormNoValueSelect,
   FormNumberInput,
+  SectionBox,
   Spacer,
-  Stack,
-  Typo,
 } from "@hadmean/chromista";
 import {
   FIELD_TYPES_CONFIG_MAP,
@@ -36,6 +33,8 @@ const CRUD_CONFIG = MAKE_APP_CONFIGURATION_CRUD_CONFIG("entity_validations");
 
 const ERROR_MESSAGE_LENGTH = 128;
 
+// TODO for contributors: Show the actuall error message not the template message
+
 export function FieldValidationCanvas({
   field,
   onSubmit,
@@ -59,9 +58,10 @@ export function FieldValidationCanvas({
       initialValues={{ validations }}
       render={({ handleSubmit, values, pristine }) => (
         <form onSubmit={handleSubmit}>
+          <Spacer size="sm" />
           <FieldArray name="validations">
             {({ fields }) => (
-              <div>
+              <>
                 {fields.map((name, index) => {
                   const { validationType, fromSchema }: IFieldValidationItem =
                     values.validations[index];
@@ -71,76 +71,68 @@ export function FieldValidationCanvas({
 
                   return (
                     <React.Fragment key={name}>
-                      <Stack justify="space-between">
-                        <b>{userFriendlyCase(validationType)}</b>
-                        {!isBoundToType && !fromSchema && (
-                          <DeleteButton
-                            onDelete={() => {
-                              fields.remove(index);
-                            }}
-                            shouldConfirmAlert={false}
-                            text="Validation"
-                            size="xs"
-                          />
-                        )}
-                      </Stack>
-                      <Spacer />
-                      <Field
-                        name={`${name}.errorMessage`}
-                        validate={composeValidators(
-                          required,
-                          maxLength(ERROR_MESSAGE_LENGTH)
-                        )}
-                        validateFields={[]}
+                      <SectionBox
+                        title={userFriendlyCase(validationType)}
+                        deleteAction={
+                          !isBoundToType && !fromSchema
+                            ? {
+                                shouldConfirmAlert: false,
+                                action: () => fields.remove(index),
+                                isMakingDeleteRequest: false,
+                              }
+                            : undefined
+                        }
                       >
-                        {({ meta, input }) => (
-                          <FormInput
-                            label=""
-                            required
-                            meta={meta}
-                            input={input}
-                          />
-                        )}
-                      </Field>
-                      {validationInput && (
-                        <>
-                          {Object.entries(validationInput).map(
-                            ([inputKey, inputValue]) => (
-                              <Field
-                                key={inputKey}
-                                name={`${name}.constraint.${inputKey}`}
-                                validate={composeValidators(required)}
-                                validateFields={[]}
-                              >
-                                {({ meta, input }) => (
-                                  <Stack justify="space-between" align="center">
-                                    <Typo.MD>
-                                      {userFriendlyCase(inputKey)}
-                                    </Typo.MD>
-                                    {typeof inputValue === "string" ? (
+                        {validationInput && (
+                          <>
+                            {Object.entries(validationInput).map(
+                              ([inputKey, inputValue]) => (
+                                <Field
+                                  key={inputKey}
+                                  name={`${name}.constraint.${inputKey}`}
+                                  validate={composeValidators(required)}
+                                  validateFields={[]}
+                                >
+                                  {({ meta, input }) =>
+                                    typeof inputValue === "string" ? (
                                       <FormInput
-                                        label=""
                                         required
+                                        label={userFriendlyCase(inputKey)}
                                         meta={meta}
                                         input={input}
                                       />
                                     ) : (
                                       <FormNumberInput
-                                        label=""
                                         required
+                                        label={userFriendlyCase(inputKey)}
                                         meta={meta}
                                         input={input}
                                       />
-                                    )}
-                                  </Stack>
-                                )}
-                              </Field>
-                            )
+                                    )
+                                  }
+                                </Field>
+                              )
+                            )}
+                          </>
+                        )}
+                        <Field
+                          name={`${name}.errorMessage`}
+                          validate={composeValidators(
+                            required,
+                            maxLength(ERROR_MESSAGE_LENGTH)
                           )}
-                        </>
-                      )}
-                      <Spacer />
-                      <Divider />
+                          validateFields={[]}
+                        >
+                          {({ meta, input }) => (
+                            <FormInput
+                              label="Error message"
+                              required
+                              meta={meta}
+                              input={input}
+                            />
+                          )}
+                        </Field>
+                      </SectionBox>
                       <Spacer />
                     </React.Fragment>
                   );
@@ -164,7 +156,7 @@ export function FieldValidationCanvas({
                     value: validation,
                   }))}
                 />
-              </div>
+              </>
             )}
           </FieldArray>
           <Spacer />

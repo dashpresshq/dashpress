@@ -5,12 +5,12 @@ import {
   FormInput,
   FormSelect,
   SoftButton,
-  Spacer,
   Stack,
   Tabs,
   RenderCode,
   Typo,
   BREAKPOINTS,
+  Spacer,
 } from "@hadmean/chromista";
 import {
   required,
@@ -299,42 +299,44 @@ export function DashboardWidgetForm({
                     </ViewStateMachine>
                   </GridSpan>
                 )}
-                <Spacer />
                 <GridSpan>
                   {process.env.NEXT_PUBLIC_IS_DEMO ? (
                     <Stack justify="center">
-                      <Typo.MD>
+                      <Typo.SM>
                         You will be able to save this form on your own
                         installation
-                      </Typo.MD>
+                      </Typo.SM>
                     </Stack>
                   ) : (
-                    <Stack justify="end" width="auto">
-                      {values._type && (
-                        <SoftButton
-                          action={() => {
-                            runWidgetScript.mutate(values.script);
-                          }}
-                          disabled={!values.script}
-                          type="button"
-                          isMakingActionRequest={runWidgetScript.isLoading}
-                          icon="eye"
-                          size={null}
-                          label="Test Widget Script"
-                        />
-                      )}
+                    <>
+                      <Spacer />
+                      <Stack justify="end" width="auto">
+                        {values._type && (
+                          <SoftButton
+                            action={() => {
+                              runWidgetScript.mutate(values.script);
+                            }}
+                            disabled={!values.script}
+                            type="button"
+                            isMakingActionRequest={runWidgetScript.isLoading}
+                            icon="eye"
+                            size={null}
+                            label="Test Widget Script"
+                          />
+                        )}
 
-                      <FormButton
-                        text={
-                          action === "create"
-                            ? DASHBOARD_WIDGETS_CRUD_CONFIG.FORM_LANG.CREATE
-                            : DASHBOARD_WIDGETS_CRUD_CONFIG.FORM_LANG.UPDATE
-                        }
-                        icon={action === "create" ? "add" : "save"}
-                        isMakingRequest={submitting}
-                        disabled={pristine}
-                      />
-                    </Stack>
+                        <FormButton
+                          text={
+                            action === "create"
+                              ? DASHBOARD_WIDGETS_CRUD_CONFIG.FORM_LANG.CREATE
+                              : DASHBOARD_WIDGETS_CRUD_CONFIG.FORM_LANG.UPDATE
+                          }
+                          icon={action === "create" ? "add" : "save"}
+                          isMakingRequest={submitting}
+                          disabled={pristine}
+                        />
+                      </Stack>
+                    </>
                   )}
                 </GridSpan>
               </Root>

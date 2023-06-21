@@ -33,7 +33,7 @@ export default requestHandler(
 
       if (configAdaptor !== ConfigAdaptorTypes.Database) {
         configAdaptor +=
-          " (Kindly use 'database' when you have more than two users on this application)";
+          " (Kindly use 'database' when you have more than two users on the application)";
       }
 
       return {

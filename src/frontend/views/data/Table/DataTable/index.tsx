@@ -45,11 +45,11 @@ export function BaseDataTable({
       emptyMessage={
         currentState.filters.length > 0
           ? // TODO for contributors: transform this to user readable message
-            `No result for the current ${StringUtils.pluralize(
-              "filter",
-              currentState.filters.length,
-              true
-            )} applied.`
+            `No result for the current ${StringUtils.pluralize({
+              singular: "filter",
+              count: currentState.filters.length,
+              inclusive: true,
+            })} applied.`
           : crudConfig.TEXT_LANG.EMPTY_LIST
       }
       columns={columns}

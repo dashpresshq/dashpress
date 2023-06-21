@@ -24,14 +24,14 @@ export const useCanUserPerformCrudAction = (entity: string) => {
     }
 
     if (
-      userHasPermission(
+      !userHasPermission(
         META_USER_PERMISSIONS.APPLIED_CAN_ACCESS_ENTITY(
           entity,
           ACTION_CONFIG_MAP[action]
         )
       )
     ) {
-      return true;
+      return false;
     }
 
     if (action === "table") {

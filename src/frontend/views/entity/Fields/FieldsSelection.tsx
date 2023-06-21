@@ -1,12 +1,13 @@
 import {
   DeleteButton,
-  Divider,
   FormButton,
   FormInput,
   FormSwitch,
   SoftButton,
   Spacer,
   Stack,
+  StyledCard,
+  StyledCardBody,
 } from "@hadmean/chromista";
 import { Form, Field } from "react-final-form";
 import arrayMutators from "final-form-arrays";
@@ -30,6 +31,7 @@ const StyledColorBox = styled.button<{ color: string }>`
   border-radius: 5px;
   width: 100%;
   margin-bottom: 0;
+  cursor: pointer;
   padding-bottom: 0px;
   outline: none;
   border: 0;
@@ -75,6 +77,7 @@ export function FieldSelectionCanvas({
             <FormSwitch
               label="Use Colors"
               name="use-colors"
+              size="sm"
               value={useColors}
               onChange={(newUseColorValue) => {
                 setUseColors(newUseColorValue);
@@ -94,99 +97,103 @@ export function FieldSelectionCanvas({
           )}
           <FieldArray name="selections">
             {({ fields }) => (
-              <div>
+              <>
                 {fields.map((name, index) => (
                   <React.Fragment key={name}>
-                    {ManagableEntities.includes(entityType) && (
-                      <>
-                        <Spacer />
-                        <Stack justify="end">
-                          <DeleteButton
-                            onDelete={() => {
-                              fields.remove(index);
-                            }}
-                            shouldConfirmAlert={false}
-                            text="Option"
-                            size="xs"
-                          />
+                    <StyledCard>
+                      <StyledCardBody>
+                        <Field
+                          name={`${name}.value`}
+                          validate={composeValidators((value) =>
+                            isNotEmpty(value) ? undefined : "Required"
+                          )}
+                          validateFields={[]}
+                        >
+                          {({ meta, input }) => (
+                            <FormInput
+                              disabled={!ManagableEntities.includes(entityType)}
+                              label="Value"
+                              required={ManagableEntities.includes(entityType)}
+                              input={input}
+                              meta={meta}
+                            />
+                          )}
+                        </Field>
+                        <Field
+                          name={`${name}.label`}
+                          validate={required}
+                          validateFields={[]}
+                        >
+                          {({ meta, input }) => (
+                            <FormInput
+                              label="Label"
+                              required
+                              input={input}
+                              meta={meta}
+                            />
+                          )}
+                        </Field>
+                        <Stack justify="space-between">
+                          {useColors ? (
+                            <Field
+                              name={`${name}.color`}
+                              validate={required}
+                              validateFields={[]}
+                            >
+                              {(renderProps) => (
+                                <Stack>
+                                  {OPTIONS_COLORS.map((systemColor) => (
+                                    <div key={systemColor}>
+                                      <StyledColorBox
+                                        type="button"
+                                        color={systemColor}
+                                        onClick={() =>
+                                          renderProps.input.onChange(
+                                            systemColor
+                                          )
+                                        }
+                                      >
+                                        <Check
+                                          color={
+                                            systemColor ===
+                                            renderProps.input.value
+                                              ? isBlackOrWhite(systemColor)
+                                              : systemColor
+                                          }
+                                          size="18"
+                                        />
+                                      </StyledColorBox>
+                                    </div>
+                                  ))}
+                                </Stack>
+                              )}
+                            </Field>
+                          ) : (
+                            <div />
+                          )}
+                          {ManagableEntities.includes(entityType) && (
+                            <DeleteButton
+                              onDelete={() => {
+                                fields.remove(index);
+                              }}
+                              shouldConfirmAlert={false}
+                              size="xs"
+                            />
+                          )}
                         </Stack>
-                      </>
-                    )}
-
+                      </StyledCardBody>
+                    </StyledCard>
                     <Spacer />
-                    <Field
-                      name={`${name}.value`}
-                      validate={composeValidators((value) =>
-                        isNotEmpty(value) ? undefined : "Required"
-                      )}
-                      validateFields={[]}
-                    >
-                      {({ meta, input }) => (
-                        <FormInput
-                          disabled={!ManagableEntities.includes(entityType)}
-                          label="value"
-                          required={ManagableEntities.includes(entityType)}
-                          input={input}
-                          meta={meta}
-                        />
-                      )}
-                    </Field>
-                    <Field
-                      name={`${name}.label`}
-                      validate={required}
-                      validateFields={[]}
-                    >
-                      {({ meta, input }) => (
-                        <FormInput
-                          label="label"
-                          required
-                          input={input}
-                          meta={meta}
-                        />
-                      )}
-                    </Field>
-                    {useColors && (
-                      <Field
-                        name={`${name}.color`}
-                        validate={required}
-                        validateFields={[]}
-                      >
-                        {(renderProps) => (
-                          <Stack>
-                            {OPTIONS_COLORS.map((systemColor) => (
-                              <div key={systemColor}>
-                                <StyledColorBox
-                                  type="button"
-                                  color={systemColor}
-                                  onClick={() =>
-                                    renderProps.input.onChange(systemColor)
-                                  }
-                                >
-                                  <Check
-                                    color={
-                                      systemColor === renderProps.input.value
-                                        ? isBlackOrWhite(systemColor)
-                                        : systemColor
-                                    }
-                                    size="18"
-                                  />
-                                </StyledColorBox>
-                              </div>
-                            ))}
-                          </Stack>
-                        )}
-                      </Field>
-                    )}
-                    <Spacer />
-                    <Divider />
                   </React.Fragment>
                 ))}
-                {ManagableEntities.includes(entityType) && (
-                  <>
-                    <Spacer />
+
+                <Spacer />
+                <Stack justify="space-between">
+                  {ManagableEntities.includes(entityType) && (
                     <SoftButton
                       icon="add"
                       label="Add new option"
+                      size={null}
                       action={() => {
                         fields.push({
                           label: "",
@@ -199,18 +206,18 @@ export function FieldSelectionCanvas({
                         } as IColorableSelection);
                       }}
                     />
-                  </>
-                )}
-              </div>
+                  )}
+
+                  <FormButton
+                    icon="save"
+                    isMakingRequest={false}
+                    text={CRUD_CONFIG.FORM_LANG.UPSERT}
+                    disabled={pristine}
+                  />
+                </Stack>
+              </>
             )}
           </FieldArray>
-          <Spacer />
-          <FormButton
-            icon="save"
-            isMakingRequest={false}
-            text={CRUD_CONFIG.FORM_LANG.UPSERT}
-            disabled={pristine}
-          />
         </form>
       )}
     />

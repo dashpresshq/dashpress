@@ -29,19 +29,19 @@ export const CREATE_USER_FORM_SCHEMA: IAppliedSchemaFormConfig<ICreateUserForm> 
         },
       ],
     },
-    role: {
-      type: "selection",
-      apiSelections: {
-        listUrl: "/api/roles",
-      },
+    password: {
+      type: "password",
       validations: [
         {
           validationType: "required",
         },
       ],
     },
-    password: {
-      type: "password",
+    role: {
+      type: "selection",
+      apiSelections: {
+        listUrl: "/api/roles",
+      },
       validations: [
         {
           validationType: "required",

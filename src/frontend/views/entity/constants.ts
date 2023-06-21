@@ -95,8 +95,11 @@ const ENTITY_ACTION_BAG: Record<
   },
 };
 
-export const useEntityActionMenuItems = (actionTypes: EntityActionTypes[]) => {
-  const slugEntity = useEntitySlug();
+export const useEntityActionMenuItems = (
+  actionTypes: EntityActionTypes[],
+  paramEntity?: string
+) => {
+  const slugEntity = useEntitySlug(paramEntity);
   const router = useRouter();
 
   const userHasPermission = useUserHasPermission();

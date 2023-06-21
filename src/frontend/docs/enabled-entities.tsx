@@ -10,8 +10,8 @@ export function EnabledEntitiesDocumentation(props: IDocumentationRootProps) {
         will result in a 404 response.
       </p>
       <p>
-        This is a good place to toggle off entities in the dabatase that
-        don&apos;t have much business value, for example migrations, logs etc.
+        This is a good place to toggle off entities in the database that
+        don&apos;t have much business value, for example, migrations, logs, etc.
       </p>
     </DocumentationRoot>
   );

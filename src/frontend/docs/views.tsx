@@ -5,7 +5,7 @@ export function ViewsDocumentation(props: IDocumentationRootProps) {
   return (
     <DocumentationRoot {...props}>
       <p>
-        Views enables you to implement query tabs. Say you have an{" "}
+        Views enable you to implement query tabs. Say you have an{" "}
         <code>Orders </code> table and you want to show different queries on the
         table like
         <ul>
@@ -39,7 +39,7 @@ export function ViewsDocumentation(props: IDocumentationRootProps) {
             below as you would on the main table.
           </li>
           <li>
-            Add a new tab, give it a label and apply different filters and some
+            Add a new tab, give it a label, and apply different filters and some
             sorting as you did previously.
           </li>
           <li>

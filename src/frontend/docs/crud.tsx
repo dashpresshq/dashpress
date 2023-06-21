@@ -6,7 +6,7 @@ export function CRUDDocumentation(props: IDocumentationRootProps) {
     <DocumentationRoot {...props}>
       <p>
         This setting generally allows you to disable CRUD functionalities and
-        CRUD field
+        some of the CRUD field
       </p>
       <h4>Table</h4>
       <p>
@@ -29,29 +29,29 @@ export function CRUDDocumentation(props: IDocumentationRootProps) {
       <Spacer size="xl" />
       <h4>Details</h4>
       <p>
-        Same behaviour for the fields selection as with tables, hide a field and
-        we will not show it on the details view and disabled fields are not
+        The same behavior for the fields selection as with tables, hide a field
+        and we will not show it on the details view, and disabled fields are not
         queried for in the backend.
       </p>
       <p>
         But we have an extra button <code>Enable Details Functionality</code>.
         This button allows you to remove the <code>Details</code> action for
-        that entity. Meaning, the <code>eye</code> icon on the table view will be
-        hidden and if you try to access the details view through the URL, you
+        that entity. Meaning, the <code>eye</code> icon on the table view will
+        be hidden and if you try to access the details view through the URL, you
         will get an error or if you try to access the details API, you will also
         get an error.
       </p>
       <h4> Create/Update </h4>
       <p>
-        Here disabling a field removes it from the respective forms, which allows
-        you to remove the fields that are not needed on the forms. As with the
-        table and the details, when you disable a field the backend will ignore
-        the field even if a value is provided.
+        Here disabling a field removes it from the respective forms, which
+        allows you to remove the fields that are not needed on the forms. As
+        with the table and the details, when you disable a field the backend
+        will ignore the field even if a value is provided.
       </p>
       <p>
         The <code>Enable Create/Update Functionality</code> will hide/show the
         create/update forms respectively and all these are checked in the
-        backend also. If you make a create request to a create disabled entity,
+        backend also. If you make a create request to a disabled create entity,
         you will get an error; likewise with the update view.
       </p>
 

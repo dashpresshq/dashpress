@@ -5,8 +5,8 @@ export function MenuEntitiesDocumentation(props: IDocumentationRootProps) {
     <DocumentationRoot {...props}>
       <p>
         Here you will be able to select the entities that will be shown on the
-        sidebar. You can also reorder them on the <code>Order</code> tab and
-        that order will be used to present.
+        entities menu sidebar. You can also reorder them on the{" "}
+        <code>Order</code> to control how they appear on the sidebar.
       </p>
     </DocumentationRoot>
   );

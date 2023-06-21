@@ -17,24 +17,24 @@ export function VariablesDocumentation(props: IDocumentationRootProps) {
       <p>
         You can store your
         <ul>
-          <li>Company details like, name, address, logo link, website etc.</li>
+          <li>Company details like name, address, logo link, website, etc.</li>
           <li>Slack channel IDs.</li>
-          <li>Sender address for automated mails.</li>
+          <li>Sender address for automated emails.</li>
           <li>Base URL for an HTTP endpoint.</li>
         </ul>
       </p>
       <p>
-        Basically, when you find your self copying and pasting a value a lot
+        Basically, when you find yourself copying and pasting a value a lot
         during integrations then it is probably a good idea to store it as a
         variable.
       </p>
 
       <p>
         Another good reason to use constants is to have a central place to
-        manage them. For example if you paste your company address everywhere
+        manage them. For example, if you paste your company address everywhere
         and later the address changes, then you will have to manually go to all
-        those places and update them compared to just updating once and
-        having it reflected everywhere.
+        those places and update them compared to just updating once and having
+        it reflected everywhere.
       </p>
 
       <p>
@@ -48,22 +48,23 @@ export function VariablesDocumentation(props: IDocumentationRootProps) {
 
       <h4>2. Secrets</h4>
       <p>
-        Secrets are sensitive values you don&apos;t want exposed in the case of
-        a breach. Things like passwords, access tokens, private keys etc. are secrets.
+        Secrets are sensitive values you don&apos;t want to be exposed in the
+        case of a breach. Things like passwords, access tokens, private keys,
+        etc. are secrets.
       </p>
       <p>
         The primary difference between secrets and variables is that secrets are
         encrypted at rest using
         <code> aes-256-gcm</code> and variables are not. Meaning anybody that
         gets access to the secrets will not be able to use them elsewhere as
-        they will be gibberish whereas constants are stored in plaintext and can be
-        copied.
+        they will be gibberish whereas constants are stored in plaintext and can
+        be copied.
       </p>
       <p>
-        This doesn't mean everything should be stored as a secret as secrets
-        require some computation to use which consumes some server resource. Whereas,
-        constants are perfect to store public values like company name, company
-        logo link etc.
+        This doesn&apos;t mean everything should be stored as a secret as
+        secrets require some computation to use which consumes significant
+        server resources. Whereas, constants are perfect to store public values
+        like company name, company logo link, etc.
       </p>
       <p>
         Secrets can be viewed by users that have the{" "}

@@ -8,15 +8,15 @@ export function SystemProfileDocumentation(
     <DocumentationRoot {...props}>
       <p>
         Since users are created with only three fields
-        <code> Username</code>, <code>Name</code> and the <code>Role</code>, you
+        <code> Username</code>, <code>Name</code>, and <code>Role</code>, you
         will almost definitely want to extend the user details with other info
         like <code>Phone Number</code>, <code>Email</code>,{" "}
-        <code>Date of Birth</code> or even external systems ID like{" "}
+        <code>Date of Birth</code>, or even external systems ID like{" "}
         <code>Slack Id.</code>
       </p>
       <p>
         <code>System Profile</code> allows you to embed such information in the
-        system. The field takes in only valid JSON object which contains the
+        system. The field takes in only a valid JSON object which contains the
         information you want to associate with the user. A good example will be:
       </p>
       <RenderCode
@@ -32,27 +32,27 @@ export function SystemProfileDocumentation(
 
       <p>
         You can extend the user&apos;s table by providing the system profile for
-        the first user. In pratical steps, if you copy the JSON snippet above
+        the first user. In practical steps, if you copy the JSON snippet above
         and paste it on the{" "}
         <b>
           <code>FIRST(Very Important) </code>
         </b>
         user&apos;s <code>System Profile</code> text area then go back to the
-        users table then you will see the new columns <code>Email</code>,{" "}
+        user&apos;s table then you will see the new columns <code>Email</code>,{" "}
         <code>Slack Id</code>, <code>Phone Number</code>, <code>Manager</code>,
         <code> Department</code> and <code>Verified</code> on the table and any
         other user&apos;s system profile matching those keys will also be
         displayed.
       </p>
       <p>
-        If you remove any field on the first users system profile, it will
-        not show on the table even if other users have it. Likewise, if you add a
-        new field to the system profile and the other users do nOt have it then it
-        will just be blank.
+        If you remove any field on the first user&apos;s system profile, it will
+        not show on the table even if other users have it. Likewise, if you add
+        a new field to the system profile and the other users do not have it
+        then it will just be blank.
       </p>
 
       <p>
-        The main use for System Profile is for scripting to acheive things like
+        The main use for System Profile is for scripting to achieve things like
         <ul>
           <li>
             Getting the email of the user submitting a form, and sending them a

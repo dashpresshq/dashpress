@@ -1,15 +1,11 @@
-import {
-  RenderCode,
-  Spacer,
-} from "@hadmean/chromista";
+import { RenderCode, Spacer } from "@hadmean/chromista";
 import { DocumentationRoot, IDocumentationRootProps } from "../_base";
-// not done
 
 export function FormScriptDocumentation(props: IDocumentationRootProps) {
   return (
     <DocumentationRoot {...props}>
       <p>
-        Forms scripts enables you to implement the complex form logic your
+        Forms scripts enable you to implement the complex form logic your
         business requirements require that the UI cannot achieve.
       </p>
       <p>
@@ -26,9 +22,9 @@ export function FormScriptDocumentation(props: IDocumentationRootProps) {
             <b>
               <code>$.action</code>
             </b>
-            : The values are either of{" "}
+            : The values are either{" "}
             <code>&quot;update&quot; | &quot;create&quot;</code> which allows
-            you condition the script for the create or update form.
+            you to condition the script for the creation or update form.
           </li>
           <li>
             <b>
@@ -52,10 +48,19 @@ export function FormScriptDocumentation(props: IDocumentationRootProps) {
           </li>
         </ul>
       </p>
-      <p>Form scripts are run on the client and they are not async so you can&apos; make Promises or make network calls. </p>
-      <p>We have two tabs where which do different things so lets start with the first</p>
+      <p>
+        Form scripts are run on the client and they are not async so you
+        can&apos;t make Promises or make network calls.{" "}
+      </p>
+      <p>
+        We have two tabs where which do different things so let&apos;s start
+        with the first
+      </p>
       <h4>1. Field State</h4>
-      <p>This allows you to hide or disable your form fields. Lets dive straight into examples</p>
+      <p>
+        This allows you to hide or disable your form fields. Let&apos;s dive
+        straight into examples
+      </p>
       <RenderCode
         input={`// This script will disable the "accountBalance" field.
 return {
@@ -118,21 +123,27 @@ return {
 }
 `}
       />
-      <p>We use the field name not the field label. For example if you want to target the <code>accountBalance</code>, using <code>Account Balance </code>
-      will not work or any label that is shown in the form. What is used is the database field name which is <code>accountBalance</code> any other label will not work. </p>
+      <p>
+        We use the field name, not the field label. For example, if you want to
+        target the <code>accountBalance</code>, using{" "}
+        <code>Account Balance </code>
+        will not work or any label that is shown in the form. What is used is
+        the database field name which is <code>accountBalance</code> any other
+        label will not work.{" "}
+      </p>
       <h4>2. Before Submit</h4>
       <p>This tab enables you to do two different things.</p>
       <h5>1. Run custom validation</h5>
       <p>
-        Data validation can easily become complex and with this tab you should be able to tame
-        the complexity of your validation requirements.
+        Data validation can easily become complex and with this tab, you should
+        be able to tame the complexity of your validation requirements.
       </p>
       <p>
-        This is how it works, When a string is returned from this tab, then 
-        the value is seen as an error which will be shown to the user
-        and the form will not be submitted.
+        This is how it works, When a string is returned from this tab, then the
+        value is seen as an error which will be shown to the user and the form
+        will not be submitted.
       </p>
-     
+
       <RenderCode
         input={`/*
 This script will not allow users submit the form
@@ -165,19 +176,21 @@ if(customFunctionToReturnFalse()){
 // then it will be submitted`}
       />
 
-<p>
-  The validations parsed from you database and the ones you added from the <code>Fields</code> tab
-  will run first before the ones on this script. 
+      <p>
+        The validations parsed from your database and the ones you added from
+        the <code>Fields</code> tab will run first before the ones on this
+        script.
       </p>
 
       <Spacer />
-      <h5>2. Modify form</h5>
+      <h5>2. Modify the form values</h5>
       <p>
         The second use for this tab to is modify the data you are submitting.
-        </p>
-        <p>
-        This is how it works, If you return an <code>object</code>, then that object will be what will be submitted.
-        This allows you append and remove fields to the original submitted data.
+      </p>
+      <p>
+        This is how it works, If you return an <code>object</code>, then that
+        object will be what will be submitted. This allows you to append and
+        remove fields to the original submitted data.
       </p>
       <RenderCode
         input={`/*
@@ -203,10 +216,13 @@ return {
   ...$.formValues,
   isExpired: $.formValues.expiryDate > new Date(),
 }`}
-/>
+      />
       <Spacer />
-      <p>Needless to say, you can combine both <code>Before Submit</code> usages to both validate data before submitting 
-      and transform the data when submitting in the same script.</p>
+      <p>
+        Needless to say, you can combine both <code>Before Submit</code> usages
+        to both validate data before submitting and transform the data when
+        submitting in the same script.
+      </p>
       <RenderCode
         input={`/**
  * Will validate the form and will throw the error when it returns a string

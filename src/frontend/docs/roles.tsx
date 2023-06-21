@@ -14,7 +14,7 @@ export function RolesDocumentation(props: IDocumentationRootProps) {
       <h4> Creator</h4>
       <p>
         This is the can-do-all things role, which is the role the users
-        installing the application gets assigned. We basically skip any
+        installing the application get assigned. We basically skip any
         permission checks when a user has this role.
       </p>
 
@@ -23,7 +23,7 @@ export function RolesDocumentation(props: IDocumentationRootProps) {
         This role has only <code>Can Manage All Entities</code> which means the
         user can only view and manage all enabled data but can&apos;t perform
         other app actions like configuring the app, managing users, managing
-        roles, reset passwords etc.
+        roles, resetting passwords, etc.
       </p>
 
       <h4>Custom roles</h4>
@@ -40,7 +40,7 @@ export function RolesDocumentation(props: IDocumentationRootProps) {
         <b>
           <code>{userFriendlyCase(USER_PERMISSIONS.CAN_CONFIGURE_APP)}</code>
         </b>
-        : enables users to configure the app i.e setting the configurations,
+        : enables users to configure the app i.e. setting the configurations,
         look and feel of the application. This is the role you will want to
         assign to the most technical people on the team.
       </p>
@@ -67,8 +67,8 @@ export function RolesDocumentation(props: IDocumentationRootProps) {
             {userFriendlyCase(USER_PERMISSIONS.CAN_MANAGE_INTEGRATIONS)}
           </code>
         </b>
-        : enables users to setup and manage the integrations with supported
-        third party APIs like Slack, Email, HTTP etc.
+        : enables users to set up and manage the integrations with supported
+        third-party APIs like Slack, Email, HTTP, etc.
       </p>
 
       <p>
@@ -84,7 +84,7 @@ export function RolesDocumentation(props: IDocumentationRootProps) {
         <b>
           <code>{userFriendlyCase(USER_PERMISSIONS.CAN_MANAGE_USERS)}</code>
         </b>
-        : enables users to list, create, update and delete users.
+        : enables users to list, create, update, and delete users.
       </p>
 
       <p>
@@ -96,12 +96,12 @@ export function RolesDocumentation(props: IDocumentationRootProps) {
 
       <h4>Permissions Dependencies </h4>
       <p>
-        Enabling some permissions will automatically grant some other permission.
-        For example, giving someone the permission to reset password without
-        giving them the permission to manage users doesn&apos;t make sense as
-        they need to be able to access users first to get to where they will be
-        able to reset the password. This is what we call permissions
-        dependencies.
+        Enabling some permissions will automatically grant some other
+        permission. For example, giving someone permission to reset a user&apos;
+        password without giving them permission to manage users doesn&apos;t
+        make sense as they need to be able to access users first to get to where
+        they will be able to reset the password. This is what we call
+        permissions dependencies.
       </p>
       <p>
         These are the permission dependencies.

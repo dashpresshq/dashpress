@@ -1,13 +1,13 @@
 import { RenderCode, Spacer, WarningAlert } from "@hadmean/chromista";
 import { DocumentationRoot, IDocumentationRootProps } from "../_base";
-// done
+
 export function PresentationScriptDocumentation(
   props: IDocumentationRootProps
 ) {
   return (
     <DocumentationRoot {...props}>
       <p>
-        For a quick showoff, copy and paste the script below, save the form and
+        For a quick showoff, copy and paste the script below, save the form, and
         go back to the table.
       </p>
       <RenderCode input={`return "Hannah Frederick";`} />
@@ -38,7 +38,7 @@ export function PresentationScriptDocumentation(
         </li>
       </ul>
       <p>
-        Time for some practical examples; Lets say you are rendering a{" "}
+        For practical examples, Let&apos;s say you are rendering a{" "}
         <code>Posts</code> table with the following fields <code>title</code>,{" "}
         <code>description</code>, <code>commentsCount</code>, <code>image</code>
         , <code>status</code>
@@ -81,7 +81,7 @@ return "Hannah Frederick";
         can&apos;t make network calls within this script.
       </p>
       <Spacer />
-      <WarningAlert message="Note that this script runs only on the browser so don't do any sensitive thing here" />
+      <WarningAlert message="Note that this script runs only on the browser so don't do any sensitive processing here" />
       <Spacer />
       <WarningAlert
         message="Any error on this script will fail silently so the original value will be

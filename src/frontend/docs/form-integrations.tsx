@@ -7,22 +7,22 @@ export function FormIntegrationsDocumentation(props: IDocumentationRootProps) {
   return (
     <DocumentationRoot {...props}>
       <p>
-        With integrations you can send notifications through email, Slack or SMS
-        or even make request to an HTTP endpoint after creating, updating or
-        deleting data.
+        With integrations, after creating, updating, or deleting data you can
+        trigger notifications through email, Slack, or SMS or send data to
+        another server for further processing through HTTP.
       </p>
       <p>
-        The first step is the activation of the integration i.e Slack, Twilio,
-        SMTP etc., except for HTTP which is always activated. Activating an
+        The first step is the activation of the integration i.e. Slack, Twilio,
+        SMTP, etc, except for HTTP which is always activated. Activating an
         integration is just you providing the credentials needed to run the
         integration.
       </p>
       <InfoAlert message="All the activation credentials are encrypted at rest." />
 
       <p>
-        The next step is create a <code>Form Action</code> which is basically
-        you binding an integration to a data event like create, update or
-        delete.
+        The next step is to create a <code>Form Action</code> which is basically
+        you trigger an integration&apos;s action to an event like create, update
+        or delete.
       </p>
       <p>These are the steps to create a form action;</p>
       <ol>
@@ -35,7 +35,7 @@ export function FormIntegrationsDocumentation(props: IDocumentationRootProps) {
           button.
         </li>
         <li>
-          Select the <code>Trigger</code> i.e the event on the data you want to
+          Select the <code>Trigger</code> i.e. the event on the data you want to
           start this action.
         </li>
         <li>
@@ -45,17 +45,17 @@ export function FormIntegrationsDocumentation(props: IDocumentationRootProps) {
         </li>
         <li>
           Select the <code>Action</code> you want to take; The selections on
-          this dropdown is a list of the possible things you can do with the
+          this dropdown are a list of the possible things you can do with the
           selected integration.
         </li>
         <li>
           Depending on the action selected above, You will see new fields which
-          collects the needed information needed to run the action. Kindly fill
+          collect the needed information needed to run the action. Kindly fill
           these fields appropriately.
         </li>
       </ol>
       <p>
-        In these generated fields you will be able to use handlebars and access
+        In these generated fields you will be able to use Handlebars and access
         the following
         <ol>
           <li>
@@ -94,8 +94,8 @@ export function FormIntegrationsDocumentation(props: IDocumentationRootProps) {
           </li>
         </ol>
         <p>
-          Since the generated fields take in handlebars template, you are powered
-          to do anything. Below are examples of how you can fill them in
+          Since the generated fields take in Handlebars template, you are
+          powered to do anything. Below are examples of how you can fill them in
         </p>
         <RenderCode
           input={`// For a URL input, These are valid inputs
@@ -123,8 +123,8 @@ Kind Regards!
         />
       </p>
       <p>
-        As you can see, since it is handlebars, You can basically mix and match
-        the four prefixes any how you see fit.
+        As you can see, since it is Handlebars, You can basically mix and match
+        the four prefixes anyhow you see fit.
       </p>
 
       <ErrorAlert message="Deactivating an integration will delete its credentials and remove all its actions." />

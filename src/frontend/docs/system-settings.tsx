@@ -17,7 +17,7 @@ export function SystemSettingsDocumentation(props: IDocumentationRootProps) {
         We introspect your database every time the application runs and save the
         schema. This behavior is good for 99% production use cases as you want
         the schema to be up to date whenever you run the application so that
-        Hadmean shows you the latest database changes. Incase you dont want your
+        Hadmean shows you the latest database changes. Incase you do not want your
         schema up to date for any reason then you can always toggle this off
         here.
       </p>

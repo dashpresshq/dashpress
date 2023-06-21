@@ -13,7 +13,7 @@ export function FormIntegrationsDocumentation(props: IDocumentationRootProps) {
       </p>
       <p>
         The first step is the activation of the integration i.e Slack, Twilio,
-        SMTP etc. except for HTTP which is always activated. Activating an
+        SMTP etc., except for HTTP which is always activated. Activating an
         integration is just you providing the credentials needed to run the
         integration.
       </p>
@@ -24,7 +24,7 @@ export function FormIntegrationsDocumentation(props: IDocumentationRootProps) {
         you binding an integration to a data event like create, update or
         delete.
       </p>
-      <p>These are the steps to create a form action</p>
+      <p>These are the steps to create a form action;</p>
       <ol>
         <li>
           {" "}
@@ -32,26 +32,26 @@ export function FormIntegrationsDocumentation(props: IDocumentationRootProps) {
           <code>
             {ADMIN_ACTION_INSTANCES_CRUD_CONFIG.TEXT_LANG.CREATE}
           </code>{" "}
-          button
+          button.
         </li>
         <li>
           Select the <code>Trigger</code> i.e the event on the data you want to
-          start this action
+          start this action.
         </li>
         <li>
           Select the <code>Entity</code> or <code>Integration</code> (It is one
-          of the other which depends on where you are triggering this form from)
+          or the other and depends on where you are triggering this form from)
           you want to bind to this action.
         </li>
         <li>
-          Select the <code>Action</code> you want to take, The selections on
+          Select the <code>Action</code> you want to take; The selections on
           this dropdown is a list of the possible things you can do with the
           selected integration.
         </li>
         <li>
           Depending on the action selected above, You will see new fields which
           collects the needed information needed to run the action. Kindly fill
-          these fields appropriately
+          these fields appropriately.
         </li>
       </ol>
       <p>
@@ -94,7 +94,7 @@ export function FormIntegrationsDocumentation(props: IDocumentationRootProps) {
           </li>
         </ol>
         <p>
-          Since the generated fields take in handlebars template you are powered
+          Since the generated fields take in handlebars template, you are powered
           to do anything. Below are examples of how you can fill them in
         </p>
         <RenderCode

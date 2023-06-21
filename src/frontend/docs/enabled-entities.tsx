@@ -11,7 +11,7 @@ export function EnabledEntitiesDocumentation(props: IDocumentationRootProps) {
       </p>
       <p>
         This is a good place to toggle off entities in the dabatase that
-        don&apos;t have much business value like migrations, logs etc.
+        don&apos;t have much business value, for example migrations, logs etc.
       </p>
     </DocumentationRoot>
   );

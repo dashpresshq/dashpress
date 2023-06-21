@@ -22,13 +22,13 @@ export function WidgetScriptDocumentation(props: IDocumentationRootProps) {
         <li>
           You will have access to this magic variable{" "}
           <code>$.RELATIVE_TIME</code> which we will discuss later on in this
-          documentation
+          documentation.
         </li>
         <li>Only valid Javascript is allowed here.</li>
         <li>Make sure you return the data you want the widget to render.</li>
         <li>
           The data to be rendered will be validated so if you return some plain
-          string for a table widget that expects an array of object, you get see
+          string for a table widget that expects an array of object, you will get
           some error message on the widget showing you
           <ol>
             <li>
@@ -49,7 +49,7 @@ export function WidgetScriptDocumentation(props: IDocumentationRootProps) {
         </li>
         <li>
           The <code>Test Widget Script</code> allows you to preview the script
-          before submitting
+          before submitting.
         </li>
       </ul>
       <h4>Table</h4>
@@ -107,12 +107,12 @@ return await $.query("SELECT count(*) FROM [MY_TABLE]");`}
         being the base value. Check the examples below
       </p>
       <RenderCode
-        input={`/* Will render 120 has the value and 20% as the progress
+        input={`/* Will render 120 as the value and 20% as the progress
 because (120 - 100) / 100 = 20 */
 return [120, 100];
 
 /* We also show negative progress in red as the example 
-below mean the value has decreased 
+below means the value has decreased 
 from 100 to 80 also by 20 percent */
 return [80, 100];
 
@@ -138,13 +138,13 @@ return [actual[0], relative[0]];`}
       </p>
       <p>
         Basically using the <code>$.RELATIVE_TIME</code> in the script will show
-        up the relative time dropdown on the widget and the value is substituted
+       the relative time dropdown on the widget and the value is substituted
         over the computed relative time. This is very useful to allow users
         selectively see how their data has changed over period of time.
       </p>
       <p>
         The code below shows how you can allow users see how much the users
-        count has increased over selected period
+        count has increased over selected period.
       </p>
       <RenderCode
         input={`// This line gets the total amount of users in the database
@@ -164,7 +164,7 @@ const relative = await $.query(\`
 return [actual[0], relative[0]];`}
       />
       <p>
-        This also works on tables script too, You can use the{" "}
+        This also works on tables script too. You can use the{" "}
         <code>$.RELATIVE_TIME </code>
         to allow users view the highest selling product within a relative time.
       </p>

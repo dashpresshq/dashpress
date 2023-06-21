@@ -16,8 +16,8 @@ export function CRUDDocumentation(props: IDocumentationRootProps) {
         table.
       </p>
       <p>
-        You can&apos;t disable a <code>Table</code>, You can only disable an
-        entity which you can do at the <code>Entities Settings</code>
+        You can&apos;t disable a <code>Table</code>; you can only disable an
+        entity which can be done at the <code>Entities Settings</code>
       </p>
       <InfoAlert
         message={`Note that this filtering is done in the backend so any 
@@ -36,14 +36,14 @@ export function CRUDDocumentation(props: IDocumentationRootProps) {
       <p>
         But we have an extra button <code>Enable Details Functionality</code>.
         This button allows you to remove the <code>Details</code> action for
-        that entity meaning the <code>eye</code> icon on the table view will be
+        that entity. Meaning, the <code>eye</code> icon on the table view will be
         hidden and if you try to access the details view through the URL, you
         will get an error or if you try to access the details API, you will also
         get an error.
       </p>
       <h4> Create/Update </h4>
       <p>
-        Here disabling a field removes it from the respective forms which allows
+        Here disabling a field removes it from the respective forms, which allows
         you to remove the fields that are not needed on the forms. As with the
         table and the details, when you disable a field the backend will ignore
         the field even if a value is provided.
@@ -52,7 +52,7 @@ export function CRUDDocumentation(props: IDocumentationRootProps) {
         The <code>Enable Create/Update Functionality</code> will hide/show the
         create/update forms respectively and all these are checked in the
         backend also. If you make a create request to a create disabled entity,
-        you will get an error likewise with the update view.
+        you will get an error; likewise with the update view.
       </p>
 
       <h4> Delete </h4>

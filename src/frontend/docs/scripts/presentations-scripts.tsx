@@ -16,7 +16,7 @@ export function PresentationScriptDocumentation(
         <code>Hannah Frederick</code>. For more practical use, you can use this
         script to transform how data is presented to the user.
       </p>
-      <p>You have 4 variables available to you here</p>
+      <p>You have 4 variables available to you here;</p>
       <ul>
         <li>
           {" "}
@@ -34,11 +34,11 @@ export function PresentationScriptDocumentation(
         <li>
           {" "}
           <code>$.from</code> - This value is either of <code>details</code> |{" "}
-          <code>table</code> depending where this is rendered
+          <code>table</code> depending on where it is rendered.
         </li>
       </ul>
       <p>
-        Time for some practical examples, Lets say you are rendering a{" "}
+        Time for some practical examples; Lets say you are rendering a{" "}
         <code>Posts</code> table with the following fields <code>title</code>,{" "}
         <code>description</code>, <code>commentsCount</code>, <code>image</code>
         , <code>status</code>
@@ -73,7 +73,7 @@ return "Hannah Frederick";
       />
       <p>
         As you can see, this is all pure Javascript, you can even create a
-        function here and call it. Just make sure you return the value you want
+        function here and name it. Just make sure you return the value you want
         to present and we will do the rest.
       </p>
       <p>
@@ -85,7 +85,7 @@ return "Hannah Frederick";
       <Spacer />
       <WarningAlert
         message="Any error on this script will fail silently so the original value will be
-      used, so be careful to make sure your scripts are valid when making changes"
+      used; be careful to make sure your scripts are valid when making changes."
       />
     </DocumentationRoot>
   );

@@ -94,8 +94,8 @@ export function useProcessedEntityFieldTypes(
   return getEntityFieldTypes(entityFields.data, entityFieldTypesMap.data);
 }
 
-export function useEntityFieldValidations() {
-  const entity = useEntitySlug();
+export function useEntityFieldValidations(paramEntity?: string) {
+  const entity = useEntitySlug(paramEntity);
   const entityValidationsMap = useEntityConfiguration<
     Record<string, IFieldValidationItem[]>
   >("entity_validations", entity);

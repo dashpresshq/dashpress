@@ -59,6 +59,7 @@ export function EntityUpdate() {
           backLink={backLink}
         >
           <BaseEntityForm
+            entity={entity}
             action="update"
             onSubmit={entityDataUpdationMutation.mutateAsync}
             hiddenColumns={hiddenUpdateColumns}

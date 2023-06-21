@@ -6,20 +6,15 @@ import { ENTITY_TABLE_PATH } from "../../../../hooks/data/data.store";
 import { useTableColumns } from "../useTableColumns";
 import { TableViewComponent } from "../portal";
 import { IDataTableProps } from "../types";
-import { BaseDataTable } from ".";
+import { BaseDataTable } from "../DataTable";
 
 interface IProps extends IDataTableProps {
   entity: string;
   tabKey?: string;
 }
 
-export function EntityDataTable({
-  entity,
-  lean,
-  tabKey = "",
-  ...props
-}: IProps) {
-  const columns = useTableColumns(entity, lean);
+export function EntityDataTable({ entity, tabKey = "", ...props }: IProps) {
+  const columns = useTableColumns(entity);
 
   const entityCrudConfig = useEntityCrudConfig(entity);
 
@@ -32,21 +27,20 @@ export function EntityDataTable({
       <ViewStateMachine
         error={error}
         loading={isLoading}
-        loader={<TableSkeleton lean={lean} />}
+        loader={<TableSkeleton />}
       >
         {!isLoading && (
           <BaseDataTable
             dataEndpoint={ENTITY_TABLE_PATH(entity)}
             columns={columns.data || []}
             enabled={entity && entity !== SLUG_LOADING_VALUE}
-            stateStorageKey={`${entity}${tabKey}${lean ? "--lean" : ""}`}
-            lean={lean}
+            stateStorageKey={`${entity}${tabKey}`}
             crudConfig={entityCrudConfig}
             {...props}
           />
         )}
       </ViewStateMachine>
-      <TableViewComponent />
+      <TableViewComponent entity={entity} />
     </>
   );
 }

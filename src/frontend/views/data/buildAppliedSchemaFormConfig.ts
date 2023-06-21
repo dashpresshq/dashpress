@@ -21,14 +21,17 @@ interface IEntitySchemaFormConfigProps {
   entityValidationsMap: Record<string, IFieldValidationItem[]>;
 }
 
-export const buildAppliedSchemaFormConfig = ({
-  fields,
-  entityFieldTypes,
-  entityToOneReferenceFields,
-  entityFieldSelections,
-  getEntityFieldLabels,
-  entityValidationsMap,
-}: IEntitySchemaFormConfigProps): IAppliedSchemaFormConfig<any> => {
+export const buildAppliedSchemaFormConfig = (
+  {
+    fields,
+    entityFieldTypes,
+    entityToOneReferenceFields,
+    entityFieldSelections,
+    getEntityFieldLabels,
+    entityValidationsMap,
+  }: IEntitySchemaFormConfigProps,
+  allOptional?: boolean
+): IAppliedSchemaFormConfig<any> => {
   return Object.fromEntries(
     fields.map((field) => {
       const formConfig: ISchemaFormConfig = {
@@ -46,7 +49,14 @@ export const buildAppliedSchemaFormConfig = ({
             : undefined,
         type: entityFieldTypes[field],
         label: getEntityFieldLabels(field) || userFriendlyCase(field),
-        validations: entityValidationsMap[field] || [],
+        validations: (entityValidationsMap[field] || []).filter(
+          ({ validationType }) => {
+            if (allOptional) {
+              return validationType !== "required";
+            }
+            return true;
+          }
+        ),
       };
       return [field, formConfig];
     })

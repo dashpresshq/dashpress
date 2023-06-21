@@ -10,7 +10,6 @@ import { AppLayout } from "../../../_layouts/app";
 import { useDashboardWidgets } from "../dashboard.store";
 import { gridRoot } from "../styles";
 import { DashboardSkeleton } from "../Skeleton";
-import { DetailsCanvas } from "../../data/Table/DetailsCanvas";
 import { DashboardWidget } from "../Widget";
 
 const Root = styled.div`
@@ -54,7 +53,6 @@ export function BaseDashboard({ dashboardId, manageLink }: IProps) {
           ))}
         </Root>
       </ViewStateMachine>
-      <DetailsCanvas />
     </AppLayout>
   );
 }

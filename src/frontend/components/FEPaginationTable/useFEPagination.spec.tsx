@@ -20,7 +20,6 @@ const TEST_DATA = [
 const TEST_TABLE_STATE = {
   pageIndex: 1,
   pageSize: 1,
-  hiddenColumns: [],
   filters: [],
   sortBy: [],
 };

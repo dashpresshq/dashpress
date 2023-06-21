@@ -21,6 +21,7 @@ import { IAccountProfile } from "shared/types/user";
 import { userFriendlyCase } from "shared/lib/strings";
 import {
   ADMIN_USERS_CRUD_CONFIG,
+  useAllUsers,
   useUserDeletionMutation,
 } from "./users.store";
 import { ADMIN_ROLES_CRUD_CONFIG } from "../roles/roles.store";
@@ -38,15 +39,10 @@ export function ListUsers() {
     defaultData: [],
   });
 
-  const users = useApi<IAccountProfile[]>(
-    ADMIN_USERS_CRUD_CONFIG.ENDPOINTS.LIST,
-    {
-      defaultData: [],
-    }
-  );
+  const allUsers = useAllUsers();
 
   const rootProfileKeys = Object.keys(
-    JSON.parse(users.data[0]?.systemProfile || "{}")
+    JSON.parse(allUsers.data[0]?.systemProfile || "{}")
   );
 
   const userDeletionMutation = useUserDeletionMutation();

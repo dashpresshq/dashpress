@@ -1,4 +1,4 @@
-import { SectionBox, SectionCenter } from "@hadmean/chromista";
+import { SectionBox, ContentLayout } from "@hadmean/chromista";
 import { useNavigationStack, useSetPageDetails } from "frontend/lib/routing";
 import { USER_PERMISSIONS } from "shared/constants/user";
 import { AppLayout } from "../../../_layouts/app";
@@ -17,7 +17,7 @@ export function RoleCreate() {
 
   return (
     <AppLayout>
-      <SectionCenter>
+      <ContentLayout.Center>
         <SectionBox
           title={ADMIN_ROLES_CRUD_CONFIG.TEXT_LANG.CREATE}
           backLink={backLink}
@@ -28,7 +28,7 @@ export function RoleCreate() {
             }}
           />
         </SectionBox>
-      </SectionCenter>
+      </ContentLayout.Center>
     </AppLayout>
   );
 }

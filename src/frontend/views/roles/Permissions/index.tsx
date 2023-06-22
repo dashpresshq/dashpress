@@ -1,7 +1,7 @@
 import {
   ListSkeleton,
   SectionBox,
-  SectionCenter,
+  ContentLayout,
   Spacer,
   Tabs,
 } from "@hadmean/chromista";
@@ -59,7 +59,7 @@ export function RolePermissions() {
 
   return (
     <AppLayout>
-      <SectionCenter>
+      <ContentLayout.Center>
         <SectionBox
           title={ADMIN_PERMISSIONS_CRUD_CONFIG.TEXT_LANG.EDIT}
           backLink={backLink}
@@ -96,7 +96,7 @@ export function RolePermissions() {
           </ViewStateMachine>
         </SectionBox>
         <Spacer />
-      </SectionCenter>
+      </ContentLayout.Center>
       <RolesDocumentation
         title={DOCS_TITLE}
         close={setIsDocOpen}

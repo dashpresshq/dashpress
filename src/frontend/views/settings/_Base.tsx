@@ -1,7 +1,5 @@
 import {
-  SectionLeft,
-  SectionRight,
-  SectionRow,
+  ContentLayout,
   MenuSection,
   InfoAlert,
   Spacer,
@@ -115,15 +113,15 @@ export function BaseSettingsLayout({ children }: IProps) {
         </>
       )}
 
-      <SectionRow>
-        <SectionLeft>
+      <ContentLayout>
+        <ContentLayout.Left>
           <MenuSection
             menuItems={[...menuItems]}
             currentMenuItem={router.asPath.split("?")[0]}
           />
-        </SectionLeft>
-        <SectionRight>{children}</SectionRight>
-      </SectionRow>
+        </ContentLayout.Left>
+        <ContentLayout.Right>{children}</ContentLayout.Right>
+      </ContentLayout>
     </AppLayout>
   );
 }

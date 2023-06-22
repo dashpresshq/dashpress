@@ -26,9 +26,6 @@ export const guessEntityValidations = ({
 }: Pick<IEntityField, "isRequired" | "length">): IFieldValidationItem[] => {
   const validationItems: IFieldValidationItem[] = [];
 
-  // Handle isUnique more gracefully from relationships
-  // since we can have more than 1 field in a uniqueness
-
   if (isRequired) {
     const { message } = ENTITY_VALIDATION_CONFIG.required;
     validationItems.push({
@@ -39,7 +36,7 @@ export const guessEntityValidations = ({
   }
 
   if (length) {
-    const { message } = ENTITY_VALIDATION_CONFIG.required;
+    const { message } = ENTITY_VALIDATION_CONFIG.maxLength;
     validationItems.push({
       validationType: "maxLength",
       constraint: {

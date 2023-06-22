@@ -1,7 +1,5 @@
 import {
-  SectionLeft,
-  SectionRight,
-  SectionRow,
+  ContentLayout,
   MenuSection,
   SoftButton,
   Spacer,
@@ -100,15 +98,15 @@ export function BaseEntitySettingsLayout({ children }: IProps) {
         </>
       )}
 
-      <SectionRow>
-        <SectionLeft>
+      <ContentLayout>
+        <ContentLayout.Left>
           <MenuSection
             menuItems={baseMenuItems}
             currentMenuItem={router.asPath.split("?")[0]}
           />
-        </SectionLeft>
-        <SectionRight>{children}</SectionRight>
-      </SectionRow>
+        </ContentLayout.Left>
+        <ContentLayout.Right>{children}</ContentLayout.Right>
+      </ContentLayout>
     </AppLayout>
   );
 }

@@ -11,6 +11,7 @@ import { IApplicationService } from "backend/types";
 import { IDBSchema, IEntityField } from "shared/types/db";
 import { IDataSourceCredentials } from "shared/types/data-sources";
 import { DATABASE_CREDENTIAL_GROUP } from "backend/data/fields";
+import { Column } from "@hadmean/bacteria/dist/models/Column";
 import {
   createConfigDomainPersistenceService,
   AbstractConfigDataPersistenceService,
@@ -79,6 +80,16 @@ export class SchemasApiService implements IApplicationService {
     return dbSchema;
   }
 
+  private getEntityType(column: Column): IEntityField["type"] {
+    if (column.options.enum) {
+      return "enum";
+    }
+    if (column.type === "date") {
+      return "date";
+    }
+    return column.tscType.toLocaleLowerCase() as IEntityField["type"];
+  }
+
   private formatIntrospectData(rawEntity: Entity[]): IDBSchema[] {
     const dbSchema = rawEntity
       .filter(({ name }) => !name.startsWith("hadmean"))
@@ -92,9 +103,7 @@ export class SchemasApiService implements IApplicationService {
               length: column.options.length,
               isId: column.primary ? true : undefined,
               isReference: column.isUsedInRelationAsOwner ? true : undefined,
-              type: column.options.enum
-                ? "enum"
-                : (column.tscType.toLocaleLowerCase() as IEntityField["type"]),
+              type: this.getEntityType(column),
               enumeration: column.options.enum,
             };
             return column$;

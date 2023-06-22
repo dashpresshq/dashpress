@@ -2,7 +2,7 @@ import {
   FormSkeleton,
   FormSkeletonSchema,
   SectionBox,
-  SectionCenter,
+  ContentLayout,
   Spacer,
 } from "@hadmean/chromista";
 import {
@@ -51,7 +51,7 @@ export function UserUpdate() {
 
   return (
     <AppLayout>
-      <SectionCenter>
+      <ContentLayout.Center>
         <SectionBox
           title={ADMIN_USERS_CRUD_CONFIG.TEXT_LANG.EDIT}
           iconButtons={[
@@ -91,7 +91,7 @@ export function UserUpdate() {
               />
             </SectionBox>
           )}
-      </SectionCenter>
+      </ContentLayout.Center>
       <SystemProfileDocumentation
         title={DOCS_TITLE}
         close={setIsDocOpen}

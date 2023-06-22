@@ -1,4 +1,4 @@
-import { SectionBox, SectionCenter } from "@hadmean/chromista";
+import { SectionBox, ContentLayout } from "@hadmean/chromista";
 import { useNavigationStack, useSetPageDetails } from "frontend/lib/routing";
 import { META_USER_PERMISSIONS, USER_PERMISSIONS } from "shared/constants/user";
 import { useUserHasPermission } from "frontend/hooks/auth/user.store";
@@ -48,7 +48,7 @@ export function EntityUpdate() {
 
   return (
     <AppLayout actionItems={actionItems}>
-      <SectionCenter>
+      <ContentLayout.Center>
         <SectionBox
           title={entityCrudConfig.TEXT_LANG.EDIT}
           description={
@@ -67,7 +67,7 @@ export function EntityUpdate() {
             additionalDataState={dataDetails}
           />
         </SectionBox>
-      </SectionCenter>
+      </ContentLayout.Center>
     </AppLayout>
   );
 }

@@ -147,9 +147,6 @@ export const useTableColumns = (
         : !FIELD_TYPES_CONFIG_MAP[entityFieldTypes[name]]?.sortable,
       Cell: ({ row }: { row: { original: Record<string, unknown> } }) => {
         const value$1 = row.original[name];
-        if (value$1 === undefined || value$1 === null) {
-          return null;
-        }
         if (isId) {
           return <span>{value$1 as string}</span>;
         }

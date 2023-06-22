@@ -1,4 +1,4 @@
-import { SectionBox, SectionCenter } from "@hadmean/chromista";
+import { SectionBox, ContentLayout } from "@hadmean/chromista";
 import { useNavigationStack, useSetPageDetails } from "frontend/lib/routing";
 import { USER_PERMISSIONS } from "shared/constants/user";
 import { useState } from "react";
@@ -23,7 +23,7 @@ export function UserCreate() {
 
   return (
     <AppLayout>
-      <SectionCenter>
+      <ContentLayout.Center>
         <SectionBox
           title={ADMIN_USERS_CRUD_CONFIG.TEXT_LANG.CREATE}
           backLink={backLink}
@@ -41,7 +41,7 @@ export function UserCreate() {
             }}
           />
         </SectionBox>
-      </SectionCenter>
+      </ContentLayout.Center>
       <SystemProfileDocumentation
         title={DOCS_TITLE}
         close={setIsDocOpen}

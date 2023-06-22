@@ -1,9 +1,4 @@
-import {
-  SectionLeft,
-  SectionRight,
-  SectionRow,
-  MenuSection,
-} from "@hadmean/chromista";
+import { ContentLayout, MenuSection } from "@hadmean/chromista";
 import { useIsAuthenticatedStore } from "frontend/hooks/auth/useAuthenticateUser";
 import { useRouter } from "next/router";
 import { ReactNode } from "react";
@@ -25,8 +20,8 @@ export function BaseAccountLayout({ children }: IProps) {
 
   return (
     <AppLayout>
-      <SectionRow>
-        <SectionLeft>
+      <ContentLayout>
+        <ContentLayout.Left>
           <MenuSection
             menuItems={[
               ...portalAccountMenu,
@@ -59,9 +54,9 @@ export function BaseAccountLayout({ children }: IProps) {
             ]}
             currentMenuItem={router.asPath.split("?")[0]}
           />
-        </SectionLeft>
-        <SectionRight>{children}</SectionRight>
-      </SectionRow>
+        </ContentLayout.Left>
+        <ContentLayout.Right>{children}</ContentLayout.Right>
+      </ContentLayout>
     </AppLayout>
   );
 }

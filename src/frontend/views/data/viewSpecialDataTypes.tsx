@@ -26,11 +26,15 @@ export const viewSpecialDataTypes = ({
     [k: string]: IColorableSelection[];
   };
   entityFieldTypes?: Record<string, keyof typeof FIELD_TYPES_CONFIG_MAP>;
-  options?: {
+  options: {
     displayFrom: ReferenceDisplayFromTypes;
     defaultDateFormat: string;
   };
 }) => {
+  if (value === null || value === undefined) {
+    return <span>-</span>;
+  }
+
   if (
     entityFieldTypes[fieldName] === "datetime-local" &&
     !Number.isNaN(Date.parse(value as string))

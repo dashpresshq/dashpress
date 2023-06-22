@@ -1,10 +1,8 @@
 import {
   RenderList,
   SectionBox,
-  SectionLeft,
-  SectionRight,
+  ContentLayout,
   SectionListItem,
-  SectionRow,
   ListSkeleton,
   IDropDownMenuItem,
 } from "@hadmean/chromista";
@@ -119,8 +117,8 @@ export function DetailsLayout({
 
   return (
     <AppLayout actionItems={menuItems} secondaryActionItems={actionItems}>
-      <SectionRow>
-        <SectionLeft>
+      <ContentLayout>
+        <ContentLayout.Left>
           <SectionBox headLess title="">
             <ViewStateMachine
               loading={viewState.type === "loading"}
@@ -168,9 +166,9 @@ export function DetailsLayout({
               />
             </ViewStateMachine>
           </SectionBox>
-        </SectionLeft>
-        <SectionRight>{children}</SectionRight>
-      </SectionRow>
+        </ContentLayout.Left>
+        <ContentLayout.Right>{children}</ContentLayout.Right>
+      </ContentLayout>
     </AppLayout>
   );
 }

@@ -1,4 +1,4 @@
-import { SectionBox, SectionCenter } from "@hadmean/chromista";
+import { SectionBox, ContentLayout } from "@hadmean/chromista";
 import { useNavigationStack, useSetPageDetails } from "frontend/lib/routing";
 import { META_USER_PERMISSIONS } from "shared/constants/user";
 import { useRouter } from "next/router";
@@ -52,7 +52,7 @@ export function EntityCreate() {
 
   return (
     <AppLayout actionItems={actionItems}>
-      <SectionCenter>
+      <ContentLayout.Center>
         <SectionBox
           title={entityCrudConfig.TEXT_LANG.CREATE}
           backLink={backLink}
@@ -65,7 +65,7 @@ export function EntityCreate() {
             hiddenColumns={hiddenCreateColumns}
           />
         </SectionBox>
-      </SectionCenter>
+      </ContentLayout.Center>
     </AppLayout>
   );
 }

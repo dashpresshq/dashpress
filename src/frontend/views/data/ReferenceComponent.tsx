@@ -35,8 +35,7 @@ export function ReferenceComponent({ entity, id, displayFrom }: IProps) {
   return (
     <TextButton
       onClick={() => {
-        if (displayFrom === "table") {
-          // if (displayFrom === "table" || displayFrom === "details") {
+        if (displayFrom === "table" || displayFrom === "details") {
           openDetailsCanvas({ entity, id });
         } else {
           router.push(NAVIGATION_LINKS.ENTITY.DETAILS(entity, id));

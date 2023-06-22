@@ -38,7 +38,7 @@ export function EntityRelationTable() {
 
   useSetPageDetails({
     pageTitle: title,
-    viewKey: ENTITY_DETAILS_VIEW_KEY,
+    viewKey: ENTITY_DETAILS_VIEW_KEY(parentEntity),
     permission: META_USER_PERMISSIONS.APPLIED_CAN_ACCESS_ENTITY(
       childEntity,
       GranularEntityPermissions.Show

@@ -1,7 +1,5 @@
 import {
-  SectionLeft,
-  SectionRight,
-  SectionRow,
+  ContentLayout,
   SectionListItem,
   SectionBox,
   ListSkeleton,
@@ -47,8 +45,8 @@ export function BaseActionsLayout({ children }: IProps) {
 
   return (
     <AppLayout>
-      <SectionRow>
-        <SectionLeft>
+      <ContentLayout>
+        <ContentLayout.Left>
           <SectionBox title={ACTION_INTEGRATIONS_CRUD_CONFIG.TEXT_LANG.TITLE}>
             <ViewStateMachine
               loading={
@@ -135,9 +133,9 @@ export function BaseActionsLayout({ children }: IProps) {
           />
 
           <Spacer />
-        </SectionLeft>
-        <SectionRight>{children}</SectionRight>
-      </SectionRow>
+        </ContentLayout.Left>
+        <ContentLayout.Right>{children}</ContentLayout.Right>
+      </ContentLayout>
     </AppLayout>
   );
 }

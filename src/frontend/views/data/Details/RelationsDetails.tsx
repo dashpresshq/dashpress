@@ -25,6 +25,7 @@ import { ENTITY_DETAILS_VIEW_KEY } from "./constants";
 import { EntityDetailsView } from "./DetailsView";
 import { DetailsLayout } from "./_Layout";
 import { useCanUserPerformCrudAction } from "../useCanUserPerformCrudAction";
+import { DetailsCanvas } from "../Table/_WholeEntityTable/DetailsCanvas";
 
 export function EntityRelationDetails() {
   const childEntity = useRouteParam("childEntity");
@@ -49,7 +50,7 @@ export function EntityRelationDetails() {
 
   useSetPageDetails({
     pageTitle: title,
-    viewKey: ENTITY_DETAILS_VIEW_KEY,
+    viewKey: ENTITY_DETAILS_VIEW_KEY(parentEntity),
     /* This is handled more approprately at useEntityViewStateMachine */
     permission: META_USER_PERMISSIONS.NO_PERMISSION_REQUIRED,
   });
@@ -142,6 +143,7 @@ export function EntityRelationDetails() {
           />
         </SectionBox>
       )}
+      <DetailsCanvas />
     </DetailsLayout>
   );
 }

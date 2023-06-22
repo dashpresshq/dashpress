@@ -2,7 +2,7 @@ import {
   FormSkeleton,
   FormSkeletonSchema,
   SectionBox,
-  SectionCenter,
+  ContentLayout,
 } from "@hadmean/chromista";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { IWidgetConfig } from "shared/types/dashboard";
@@ -43,7 +43,7 @@ export function BaseManageDashboardWidget({ onSave, action }: IProps) {
 
   return (
     <AppLayout>
-      <SectionCenter>
+      <ContentLayout.Center>
         <SectionBox
           title={
             action === "create"
@@ -79,7 +79,7 @@ export function BaseManageDashboardWidget({ onSave, action }: IProps) {
             />
           </ViewStateMachine>
         </SectionBox>
-      </SectionCenter>
+      </ContentLayout.Center>
     </AppLayout>
   );
 }

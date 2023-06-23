@@ -40,22 +40,6 @@ describe("getFieldTypeBoundedValidations", () => {
 });
 
 describe("guessEntityValidations", () => {
-  // it("should guess `unique` validation when is ID only", () => {
-  //   expect(
-  //     guessEntityValidations({
-  //       isId: true,
-  //     })
-  //   ).toMatchInlineSnapshot(`
-  //     [
-  //       {
-  //         "errorMessage": "{{ name }} already exists",
-  //         "fromSchema": true,
-  //         "validationType": "unique",
-  //       },
-  //     ]
-  //   `);
-  // });
-
   it("should guess `isRequired` validation when is required", () => {
     expect(
       guessEntityValidations({
@@ -83,7 +67,7 @@ describe("guessEntityValidations", () => {
           "constraint": {
             "length": 50,
           },
-          "errorMessage": "{{ name }} is required",
+          "errorMessage": "{{ name }} should be less than {{ length }} characters",
           "fromSchema": true,
           "validationType": "maxLength",
         },
@@ -108,7 +92,7 @@ describe("guessEntityValidations", () => {
           "constraint": {
             "length": 40,
           },
-          "errorMessage": "{{ name }} is required",
+          "errorMessage": "{{ name }} should be less than {{ length }} characters",
           "fromSchema": true,
           "validationType": "maxLength",
         },

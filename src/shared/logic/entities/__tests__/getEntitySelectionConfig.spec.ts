@@ -5,19 +5,19 @@ describe("getEntitySelectionConfig", () => {
     it("should return correct default options", () => {
       expect(getEntitySelectionConfig("boolean", null, []))
         .toMatchInlineSnapshot(`
-              [
-                {
-                  "color": "#00a05a",
-                  "label": "Yes",
-                  "value": true,
-                },
-                {
-                  "color": "#FF165D",
-                  "label": "No",
-                  "value": false,
-                },
-              ]
-          `);
+        [
+          {
+            "color": "#2ECC40",
+            "label": "Yes",
+            "value": true,
+          },
+          {
+            "color": "#FF165D",
+            "label": "No",
+            "value": false,
+          },
+        ]
+      `);
     });
 
     it("should return correct presselected options when present", () => {
@@ -84,7 +84,7 @@ describe("getEntitySelectionConfig", () => {
       ).toMatchInlineSnapshot(`
         [
           {
-            "color": "#00a05a",
+            "color": "#2ECC40",
             "label": "Pending",
             "value": "pending",
           },
@@ -94,7 +94,7 @@ describe("getEntitySelectionConfig", () => {
             "value": "approved",
           },
           {
-            "color": "#FF7F00",
+            "color": "#0074D9",
             "label": "Rejected",
             "value": "rejected",
           },
@@ -169,7 +169,7 @@ describe("getEntitySelectionConfig", () => {
             "value": "custom-status-2",
           },
           {
-            "color": "#00a05a",
+            "color": "#2ECC40",
             "label": "Pending",
             "value": "pending",
           },
@@ -179,7 +179,7 @@ describe("getEntitySelectionConfig", () => {
             "value": "approved",
           },
           {
-            "color": "#FF7F00",
+            "color": "#0074D9",
             "label": "Rejected",
             "value": "rejected",
           },
@@ -220,12 +220,12 @@ describe("getEntitySelectionConfig", () => {
             "value": "approved",
           },
           {
-            "color": "#00a05a",
+            "color": "#2ECC40",
             "label": "Pending",
             "value": "pending",
           },
           {
-            "color": "#FF7F00",
+            "color": "#0074D9",
             "label": "Rejected",
             "value": "rejected",
           },

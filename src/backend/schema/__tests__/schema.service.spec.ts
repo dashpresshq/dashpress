@@ -147,7 +147,7 @@ describe("SchemaService", () => {
             },
             {
               "name": "createdAt",
-              "type": "string",
+              "type": "date",
             },
           ],
           "name": "users",

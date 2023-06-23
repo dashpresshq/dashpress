@@ -27,8 +27,7 @@ export const useSelectionViews = (): IAppMenuItems[] => {
       order: 10,
     },
     {
-      title: "Tables",
-      description: "Your models",
+      title: "Entities",
       icon: Table,
       viewMenuItems: {
         singular: "Entity",

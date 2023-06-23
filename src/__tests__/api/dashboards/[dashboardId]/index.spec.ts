@@ -56,7 +56,7 @@ describe("/api/dashboards/[dashboardId]/index", () => {
         },
         {
           "_type": "summary-card",
-          "color": "#0000FF",
+          "color": "#0074D9",
           "entity": "base-model",
           "icon": "home",
           "id": "widget-2",
@@ -95,7 +95,7 @@ describe("/api/dashboards/[dashboardId]/index", () => {
       [
         {
           "_type": "summary-card",
-          "color": "#0000FF",
+          "color": "#0074D9",
           "entity": "base-model",
           "icon": "home",
           "id": "widget-2",
@@ -176,14 +176,14 @@ describe("/api/dashboards/[dashboardId]/index", () => {
 
     expect(postRequest.res._getStatusCode()).toBe(400);
     expect(postRequest.res._getJSONData()).toMatchInlineSnapshot(`
-    {
-      "message": "Cannot create widget in demo mode",
-      "method": "POST",
-      "name": "BadRequestError",
-      "path": "",
-      "statusCode": 400,
-    }
-  `);
+          {
+            "message": "Cannot create widget in demo mode",
+            "method": "POST",
+            "name": "BadRequestError",
+            "path": "",
+            "statusCode": 400,
+          }
+      `);
   });
 });
 
@@ -230,7 +230,7 @@ describe("/api/dashboards/[dashboardId]/index generation", () => {
         },
         {
           "_type": "summary-card",
-          "color": "yellow",
+          "color": "green",
           "entity": "tests",
           "icon": "ShoppingBag",
           "id": "3",

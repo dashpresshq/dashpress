@@ -9,3 +9,5 @@ export interface ISharedWidgetConfig {
   size?: WidgetSizes;
   height?: WidgetHeightUnits;
 }
+
+export const FOR_CODE_COV = 1;

@@ -1,5 +1,5 @@
 import { IEntityField } from "shared/types/db";
-import { guessEntityType } from "../getEntitySelections";
+import { guessEntityType, getEntitySelections } from "../getEntitySelections";
 
 describe("guessEntityType", () => {
   it("should guess `reference` types", () => {
@@ -12,5 +12,189 @@ describe("guessEntityType", () => {
     expect(guessEntityType("an unknown type" as IEntityField["type"])).toBe(
       "text"
     );
+  });
+});
+
+describe("getEntitySelections", () => {
+  it("should return the entity selections for the selectable types with override selections", () => {
+    expect(
+      getEntitySelections(
+        [
+          {
+            name: "status",
+            type: "enum",
+            enumeration: ["approved", "in-progress", "rejected"],
+          },
+
+          {
+            name: "isVerified",
+            type: "boolean",
+          },
+
+          {
+            name: "customSelect",
+            type: "string",
+          },
+
+          {
+            name: "plain-text",
+            type: "string",
+          },
+        ],
+        {
+          status: [
+            {
+              label: "Approved (Custom)",
+              value: "approved",
+            },
+
+            {
+              label: "In Progress (Custom)",
+              value: "in-progress",
+            },
+          ],
+          isVerified: [
+            {
+              label: "Yes (Custom)",
+              value: true,
+            },
+
+            {
+              label: "No (Custom)",
+              value: true,
+            },
+          ],
+          customSelect: [
+            {
+              color: "#111",
+              label: "Custom Select Option 1",
+              value: "custom-select-option-1",
+            },
+
+            {
+              color: "#222",
+              label: "Custom Select Option 2",
+              value: "custom-select-option-2",
+            },
+          ],
+        },
+
+        {
+          status: "selection-enum",
+          isVerified: "boolean",
+          "plain-text": "text",
+          customSelect: "selection",
+        }
+      )
+    ).toMatchInlineSnapshot(`
+      {
+        "customSelect": [
+          {
+            "color": "#111",
+            "label": "Custom Select Option 1",
+            "value": "custom-select-option-1",
+          },
+          {
+            "color": "#222",
+            "label": "Custom Select Option 2",
+            "value": "custom-select-option-2",
+          },
+        ],
+        "isVerified": [
+          {
+            "label": "Yes (Custom)",
+            "value": true,
+          },
+          {
+            "label": "No (Custom)",
+            "value": true,
+          },
+        ],
+        "status": [
+          {
+            "label": "Approved (Custom)",
+            "value": "approved",
+          },
+          {
+            "label": "In Progress (Custom)",
+            "value": "in-progress",
+          },
+          {
+            "color": undefined,
+            "label": "Rejected",
+            "value": "rejected",
+          },
+        ],
+      }
+    `);
+  });
+
+  it("should return the entity selections for the selectable types with no override selections", () => {
+    expect(
+      getEntitySelections(
+        [
+          {
+            name: "status",
+            type: "enum",
+            enumeration: ["approved", "in-progress", "rejected"],
+          },
+
+          {
+            name: "isVerified",
+            type: "boolean",
+          },
+
+          {
+            name: "customSelect",
+            type: "string",
+          },
+
+          {
+            name: "plain-text",
+            type: "string",
+          },
+        ],
+        undefined,
+        {
+          status: "selection-enum",
+          isVerified: "boolean",
+          "plain-text": "text",
+          customSelect: "selection",
+        }
+      )
+    ).toMatchInlineSnapshot(`
+      {
+        "customSelect": [],
+        "isVerified": [
+          {
+            "color": "#2ECC40",
+            "label": "Yes",
+            "value": true,
+          },
+          {
+            "color": "#FF165D",
+            "label": "No",
+            "value": false,
+          },
+        ],
+        "status": [
+          {
+            "color": "#2ECC40",
+            "label": "Approved",
+            "value": "approved",
+          },
+          {
+            "color": "#FF165D",
+            "label": "In Progress",
+            "value": "in-progress",
+          },
+          {
+            "color": "#0074D9",
+            "label": "Rejected",
+            "value": "rejected",
+          },
+        ],
+      }
+    `);
   });
 });

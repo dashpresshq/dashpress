@@ -6,7 +6,7 @@ const pathWithBaseUrl = (path: string) => {
   if (path.startsWith("http")) {
     return path;
   }
-  return path;
+  return (process.env.NEXT_PUBLIC_BASE_URL || "") + path;
 };
 
 const getRequestHeaders = () => {

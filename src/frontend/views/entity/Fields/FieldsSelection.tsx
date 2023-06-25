@@ -12,7 +12,7 @@ import {
 import { Form, Field } from "react-final-form";
 import arrayMutators from "final-form-arrays";
 import { FieldArray } from "react-final-form-arrays";
-import { required, composeValidators } from "@hadmean/protozoa";
+import { composeValidators, required } from "frontend/lib/validations";
 import React, { useState } from "react";
 import styled from "styled-components";
 import { isNotEmpty } from "class-validator";

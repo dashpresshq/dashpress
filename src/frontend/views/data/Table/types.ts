@@ -1,5 +1,4 @@
-import { IPaginatedDataState } from "@hadmean/protozoa";
-import { FieldQueryFilter } from "shared/types/data";
+import { FieldQueryFilter, IPaginatedDataState } from "shared/types/data";
 
 export interface IDataTableProps {
   persitentFilters?: FieldQueryFilter[];

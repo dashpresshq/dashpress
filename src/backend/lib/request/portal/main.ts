@@ -1,4 +1,4 @@
-import noop from "lodash/noop";
+import { noop } from "shared/lib/noop";
 import { NextApiRequest, NextApiResponse } from "next";
 
 export const requestHook = async (

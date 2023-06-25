@@ -1,11 +1,12 @@
 import styled from "styled-components";
 import { Check, Plus } from "react-feather";
-import { NAVIGATION_LINKS, useSetPageDetails } from "frontend/lib/routing";
 import { USER_PERMISSIONS } from "shared/constants/user";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import arrayMove from "array-move";
 import SortableList, { SortableItem } from "react-easy-sort";
 import { useRouter } from "next/router";
+import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
+import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
 import { AppLayout } from "../../../_layouts/app";
 import {
   useArrangeDashboardWidgetMutation,

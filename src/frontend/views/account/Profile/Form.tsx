@@ -1,4 +1,4 @@
-import { IFormProps } from "@hadmean/protozoa";
+import { IFormProps } from "frontend/lib/form/types";
 import { SchemaForm } from "frontend/components/SchemaForm";
 import { ACCOUNT_PROFILE_CRUD_CONFIG } from "frontend/hooks/auth/constants";
 import {

@@ -1,12 +1,16 @@
 import { FormButton, FormSelect, OffCanvas } from "@hadmean/chromista";
 import { Form, Field } from "react-final-form";
-import { composeValidators, maxLength, minLength } from "@hadmean/protozoa";
 import { useMemo, useState } from "react";
 import { getFieldTypeBoundedValidations } from "frontend/hooks/entity/guess";
 import { IFieldValidationItem } from "shared/validations/types";
 import { EntityTypesForSelection, IColorableSelection } from "shared/types/ui";
 import { FIELD_TYPES_CONFIG_MAP } from "shared/validations";
 import { MAKE_APP_CONFIGURATION_CRUD_CONFIG } from "frontend/hooks/configuration/configuration.constant";
+import {
+  minLength,
+  composeValidators,
+  maxLength,
+} from "frontend/lib/validations";
 import { FieldValidationCanvas } from "./FieldsValidation";
 import { FieldSelectionCanvas } from "./FieldsSelection";
 

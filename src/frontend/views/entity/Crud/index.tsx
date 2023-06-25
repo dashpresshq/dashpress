@@ -4,16 +4,14 @@ import {
   ENTITY_LIST_PATH,
   ENTITY_TABLE_PATH,
 } from "frontend/hooks/data/data.store";
-import { SLUG_LOADING_VALUE } from "@hadmean/protozoa";
+import { SLUG_LOADING_VALUE } from "frontend/lib/routing/constants";
 import { IEntityCrudSettings } from "shared/configurations";
-import {
-  useSetPageDetails,
-  useChangeRouterParam,
-  useRouteParam,
-} from "frontend/lib/routing";
 import { USER_PERMISSIONS } from "shared/constants/user";
 import { DOCUMENTATION_LABEL } from "frontend/docs";
 import { CRUDDocumentation } from "frontend/docs/crud";
+import { useRouteParam } from "frontend/lib/routing/useRouteParam";
+import { useChangeRouterParam } from "frontend/lib/routing/useChangeRouterParam";
+import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
 import {
   useEntityCrudSettings,
   useEntityFieldLabels,

@@ -3,7 +3,7 @@ import { Icon, Save, Settings } from "react-feather";
 import { useEntitySlug } from "frontend/hooks/entity/entity.config";
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
 import { useUserHasPermission } from "frontend/hooks/auth/user.store";
-import { SLUG_LOADING_VALUE } from "@hadmean/protozoa";
+import { SLUG_LOADING_VALUE } from "frontend/lib/routing/constants";
 import { USER_PERMISSIONS } from "shared/constants/user";
 
 export const ENTITY_CONFIGURATION_VIEW = "ENTITY_CONFIGURATION_VIEW";

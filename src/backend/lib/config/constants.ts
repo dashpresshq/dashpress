@@ -1,4 +1,4 @@
-import { StringUtils } from "@hadmean/protozoa";
+import { generateRandomString } from "shared/lib/strings/random";
 import { CacheAdaptorTypes } from "../cache/types";
 import { ConfigAdaptorTypes } from "../config-persistence/types";
 import { ConfigKeys } from "./types";
@@ -75,7 +75,7 @@ export const ConfigBag: Record<ConfigKeys, IConfigBag> = {
   },
   CREDENTIALS_ENCRYPTION_KEY: {
     defaultValue: () => {
-      return StringUtils.generateRandomString(128);
+      return generateRandomString(128);
     },
     validate: (value) => {
       tokenValidations(value, "Credentials Encryption Key");
@@ -83,7 +83,7 @@ export const ConfigBag: Record<ConfigKeys, IConfigBag> = {
   },
   AUTH_TOKEN_KEY: {
     defaultValue: () => {
-      return StringUtils.generateRandomString(128);
+      return generateRandomString(128);
     },
     validate: (value) => {
       tokenValidations(value, "Auth token Key");

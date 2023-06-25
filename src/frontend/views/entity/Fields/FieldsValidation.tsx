@@ -13,14 +13,18 @@ import {
 import { Form, Field } from "react-final-form";
 import arrayMutators from "final-form-arrays";
 import { FieldArray } from "react-final-form-arrays";
-import { userFriendlyCase } from "shared/lib/strings";
-import { required, composeValidators, maxLength } from "@hadmean/protozoa";
+import { userFriendlyCase } from "shared/lib/strings/friendly-case";
 import React from "react";
 import {
   IFieldValidationItem,
   ValidationTypes,
 } from "shared/validations/types";
 import { MAKE_APP_CONFIGURATION_CRUD_CONFIG } from "frontend/hooks/configuration/configuration.constant";
+import {
+  composeValidators,
+  maxLength,
+  required,
+} from "frontend/lib/validations";
 
 interface IProps {
   field: string;

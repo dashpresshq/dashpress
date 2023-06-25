@@ -1,11 +1,10 @@
-import {
-  AuthService,
-  createStore,
-  SLUG_LOADING_VALUE,
-} from "@hadmean/protozoa";
-import { NAVIGATION_LINKS, useRouteParam } from "frontend/lib/routing";
+import { useRouteParam } from "frontend/lib/routing/useRouteParam";
+import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
+import { createStore } from "frontend/lib/store";
+import { SLUG_LOADING_VALUE } from "frontend/lib/routing/constants";
+import * as AuthStore from "./auth.store";
 
 type IStore = {
   isAuthenticated: "loading" | boolean;
@@ -27,7 +26,7 @@ export const useUserAuthenticatedState = () => {
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      setIsAuthenticated(AuthService.isAuthenticated());
+      setIsAuthenticated(AuthStore.isAuthenticated());
     }
   }, [typeof window]);
 
@@ -42,7 +41,7 @@ export function useAuthenticateUser() {
   );
 
   return (authToken: string, rememberMe: boolean) => {
-    AuthService.setAuthToken(authToken, rememberMe);
+    AuthStore.setAuthToken(authToken, rememberMe);
     setIsAuthenticated(true);
     router.push(
       nextRoute === SLUG_LOADING_VALUE || !nextRoute

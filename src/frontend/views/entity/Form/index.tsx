@@ -1,6 +1,6 @@
 import { Tabs, SectionBox } from "@hadmean/chromista";
-import { SLUG_LOADING_VALUE } from "@hadmean/protozoa";
-import { useSetPageDetails } from "frontend/lib/routing";
+import { SLUG_LOADING_VALUE } from "frontend/lib/routing/constants";
+import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
 import { USER_PERMISSIONS } from "shared/constants/user";
 import { IFormExtension } from "frontend/components/SchemaForm/types";
 import { MAKE_APP_CONFIGURATION_CRUD_CONFIG } from "frontend/hooks/configuration/configuration.constant";

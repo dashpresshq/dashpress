@@ -1,4 +1,4 @@
-import { reduceStringToNumber } from ".";
+import { reduceStringToNumber } from "..";
 
 describe("reduceStringToNumber", () => {
   it("should return determinitic values", () => {

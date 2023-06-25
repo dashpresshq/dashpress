@@ -7,7 +7,8 @@ import {
 import { useCallback } from "react";
 import { AppLayout } from "frontend/_layouts/app";
 import { Plus } from "react-feather";
-import { NAVIGATION_LINKS, useSetPageDetails } from "frontend/lib/routing";
+import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
+import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
 import { useRouter } from "next/router";
 import {
   FEPaginationTable,

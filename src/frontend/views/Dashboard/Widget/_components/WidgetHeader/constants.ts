@@ -1,5 +1,5 @@
-import { DATE_FILTER_VALUE } from "@hadmean/protozoa";
 import { IValueLabel } from "@hadmean/chromista/dist/types";
+import { DATE_FILTER_VALUE } from "shared/types/data";
 
 const DATE_FILTER_VALUE_CONFIG: Record<
   DATE_FILTER_VALUE,

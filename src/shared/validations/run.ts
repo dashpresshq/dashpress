@@ -1,6 +1,6 @@
-import { userFriendlyCase } from "shared/lib/strings";
 import { IAppliedSchemaFormConfig } from "shared/form-schemas/types";
-import { TemplateService } from "../lib/templates";
+import { userFriendlyCase } from "shared/lib/strings/friendly-case";
+import { compileTemplateString } from "shared/lib/strings/templates";
 import { ENTITY_VALIDATION_CONFIG } from "./validations-map";
 
 export const runValidationError =
@@ -23,7 +23,7 @@ export const runValidationError =
         return [
           field,
           firstFailedValidation
-            ? TemplateService.compile(
+            ? compileTemplateString(
                 firstFailedValidation.errorMessage ||
                   ENTITY_VALIDATION_CONFIG[firstFailedValidation.validationType]
                     .message,

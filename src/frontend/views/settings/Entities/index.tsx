@@ -1,13 +1,13 @@
 import { ListSkeleton, SectionBox } from "@hadmean/chromista";
-import { useSetPageDetails } from "frontend/lib/routing";
+import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { USER_PERMISSIONS } from "shared/constants/user";
-import { useApi } from "@hadmean/protozoa";
-import { ILabelValue } from "types";
+import { ILabelValue } from "shared/types/options";
 import { MAKE_APP_CONFIGURATION_CRUD_CONFIG } from "frontend/hooks/configuration/configuration.constant";
 import { useState } from "react";
 import { DOCUMENTATION_LABEL } from "frontend/docs";
 import { EnabledEntitiesDocumentation } from "frontend/docs/enabled-entities";
+import { useApi } from "frontend/lib/data/useApi";
 import {
   useAppConfiguration,
   useUpsertConfigurationMutation,

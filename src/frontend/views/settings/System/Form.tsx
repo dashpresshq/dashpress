@@ -1,4 +1,4 @@
-import { IFormProps } from "@hadmean/protozoa";
+import { IFormProps } from "frontend/lib/form/types";
 import { SchemaForm } from "frontend/components/SchemaForm";
 import { IBaseSystemSettings } from "shared/configurations/system";
 import { MAKE_APP_CONFIGURATION_CRUD_CONFIG } from "frontend/hooks/configuration/configuration.constant";

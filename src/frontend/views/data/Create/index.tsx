@@ -1,5 +1,6 @@
 import { SectionBox, ContentLayout } from "@hadmean/chromista";
-import { useNavigationStack, useSetPageDetails } from "frontend/lib/routing";
+import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
+import { useNavigationStack } from "frontend/lib/routing/useNavigationStack";
 import { META_USER_PERMISSIONS } from "shared/constants/user";
 import { useRouter } from "next/router";
 import { AppLayout } from "../../../_layouts/app";

@@ -1,4 +1,4 @@
-import { useSetPageDetails } from "frontend/lib/routing";
+import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
 import { USER_PERMISSIONS } from "shared/constants/user";
 import {
   BaseManageVariables,

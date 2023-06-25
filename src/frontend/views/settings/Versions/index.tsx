@@ -1,10 +1,10 @@
 import { BaseSkeleton, SectionBox, Spacer, Typo } from "@hadmean/chromista";
-import { useSetPageDetails } from "frontend/lib/routing";
 import { USER_PERMISSIONS } from "shared/constants/user";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
-import { useApi } from "@hadmean/protozoa";
 import { Fragment } from "react";
-import { MAKE_CRUD_CONFIG } from "frontend/lib/makeCrudConfig";
+import { MAKE_CRUD_CONFIG } from "frontend/lib/crud-config";
+import { useApi } from "frontend/lib/data/useApi";
+import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
 import { BaseSettingsLayout } from "../_Base";
 import { SETTINGS_VIEW_KEY } from "../constants";
 

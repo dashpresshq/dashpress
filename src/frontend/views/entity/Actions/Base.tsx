@@ -6,7 +6,6 @@ import {
   Stack,
   TableSkeleton,
 } from "@hadmean/chromista";
-import { SLUG_LOADING_VALUE, useApi } from "@hadmean/protozoa";
 import { useActiveEntities } from "frontend/hooks/entity/entity.store";
 import {
   FEPaginationTable,
@@ -20,6 +19,8 @@ import {
 } from "frontend/views/integrations/actions/actions.store";
 import { useCallback, useState } from "react";
 import { IActionInstance } from "shared/types/actions";
+import { useApi } from "frontend/lib/data/useApi";
+import { SLUG_LOADING_VALUE } from "frontend/lib/routing/constants";
 import { ActionForm } from "./Form";
 import {
   LIST_ACTION_INSTANCES,

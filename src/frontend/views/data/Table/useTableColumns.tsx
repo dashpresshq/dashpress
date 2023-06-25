@@ -11,7 +11,6 @@ import {
   useEntityToOneReferenceFields,
 } from "frontend/hooks/entity/entity.store";
 import { FIELD_TYPES_CONFIG_MAP } from "shared/validations";
-import { DataStateKeys, StringUtils } from "@hadmean/protozoa";
 import { ITableColumn } from "@hadmean/chromista";
 import { useMemo } from "react";
 import { IColorableSelection } from "shared/types/ui";
@@ -20,6 +19,8 @@ import {
   useAppConfiguration,
   useEntityConfiguration,
 } from "frontend/hooks/configuration/configuration.store";
+import { DataStateKeys } from "frontend/lib/data/types";
+import { ellipsis } from "shared/lib/strings";
 import { filterOutHiddenScalarColumns } from "../utils";
 import { TableActions } from "./Actions";
 import { viewSpecialDataTypes } from "../viewSpecialDataTypes";
@@ -176,7 +177,7 @@ export const useTableColumns = (
           return specialDataTypeRender;
         }
         if (typeof value === "string") {
-          return <>{StringUtils.ellipsis(value as string, 50)}</>;
+          return <>{ellipsis(value as string, 50)}</>;
         }
         if (typeof value === "object") {
           return <>{JSON.stringify(value)}</>;

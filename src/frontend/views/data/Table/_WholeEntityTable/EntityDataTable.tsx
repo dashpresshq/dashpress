@@ -1,5 +1,5 @@
 import { TableSkeleton } from "@hadmean/chromista";
-import { SLUG_LOADING_VALUE } from "@hadmean/protozoa";
+import { SLUG_LOADING_VALUE } from "frontend/lib/routing/constants";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { useEntityCrudConfig } from "frontend/hooks/entity/entity.config";
 import { ENTITY_TABLE_PATH } from "../../../../hooks/data/data.store";

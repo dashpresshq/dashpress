@@ -4,7 +4,7 @@ import {
   SectionBox,
 } from "@hadmean/chromista";
 import { useAuthenticatedUserPreferences } from "frontend/hooks/auth/user.store";
-import { useSetPageDetails } from "frontend/lib/routing";
+import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { META_USER_PERMISSIONS } from "shared/constants/user";
 import { useUpdateUserPreferencesMutation } from "../account.store";

@@ -1,4 +1,3 @@
-import { DataStateKeys, SLUG_LOADING_VALUE } from "@hadmean/protozoa";
 import { FormSkeleton, FormSkeletonSchema } from "@hadmean/chromista";
 import { SchemaForm } from "frontend/components/SchemaForm";
 import { useEntityConfiguration } from "frontend/hooks/configuration/configuration.store";
@@ -16,6 +15,8 @@ import {
 import { IFormExtension } from "frontend/components/SchemaForm/types";
 import { useMemo } from "react";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
+import { DataStateKeys } from "frontend/lib/data/types";
+import { SLUG_LOADING_VALUE } from "frontend/lib/routing/constants";
 import { buildAppliedSchemaFormConfig } from "./buildAppliedSchemaFormConfig";
 import { useEntityViewStateMachine } from "./useEntityViewStateMachine";
 import { filterOutHiddenScalarColumns } from "./utils";

@@ -1,8 +1,8 @@
 import { Spacer, Stack, Typo } from "@hadmean/chromista";
-import { ToastService } from "@hadmean/protozoa";
 import { SchemaForm } from "frontend/components/SchemaForm";
 import { useEffect } from "react";
 import { IIntegrationsList } from "shared/types/actions";
+import { ToastService } from "frontend/lib/toast";
 import {
   useActivationConfiguration,
   useUpdateActivatedActionMutation,

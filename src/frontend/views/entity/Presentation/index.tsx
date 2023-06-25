@@ -3,8 +3,8 @@ import {
   FormSkeletonSchema,
   SectionBox,
 } from "@hadmean/chromista";
-import { SLUG_LOADING_VALUE } from "@hadmean/protozoa";
-import { useSetPageDetails } from "frontend/lib/routing";
+import { SLUG_LOADING_VALUE } from "frontend/lib/routing/constants";
+import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { USER_PERMISSIONS } from "shared/constants/user";
 import { useEntitySlug } from "frontend/hooks/entity/entity.config";

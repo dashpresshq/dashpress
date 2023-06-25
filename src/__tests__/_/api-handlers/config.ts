@@ -1,6 +1,5 @@
-import { FilterOperators } from "@hadmean/protozoa";
 import { rest } from "msw";
-import { ITableTab } from "shared/types/data";
+import { FilterOperators, ITableTab } from "shared/types/data";
 import { BASE_TEST_URL } from "./_utils";
 
 const ENTITY_CONFIG = {};

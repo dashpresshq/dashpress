@@ -1,13 +1,13 @@
 import { useQuery, UseQueryResult } from "react-query";
 import get from "lodash/get";
 import {
+  FieldQueryFilter,
   FilterOperators,
-  makeGetRequest,
-  getQueryCachekey,
-  PaginatedData,
   IPaginatedDataState,
-} from "@hadmean/protozoa";
-import { FieldQueryFilter } from "shared/types/data";
+  PaginatedData,
+} from "shared/types/data";
+import { makeGetRequest } from "frontend/lib/data/makeRequest";
+import { getQueryCachekey } from "frontend/lib/data/constants/getQueryCacheKey";
 
 const DEFAULT_PAGE_SIZE = 10;
 

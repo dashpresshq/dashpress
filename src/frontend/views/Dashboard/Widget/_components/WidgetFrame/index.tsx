@@ -12,9 +12,9 @@ import {
   IWidgetConfig,
   WIDGET_SCRIPT_RELATIVE_TIME_MARKER,
 } from "shared/types/dashboard";
-import { DataStateKeys } from "@hadmean/protozoa";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { ISharedWidgetConfig } from "shared/types/dashboard/base";
+import { DataStateKeys } from "frontend/lib/data/types";
 import { useWidgetNavigationLink } from "../../../Widget/useWidgetNavigationLink";
 import { WIDGET_CONFIG } from "../../constants";
 import { IWidgetSettingProps } from "../WidgetHeader/types";

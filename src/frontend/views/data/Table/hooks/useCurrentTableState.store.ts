@@ -1,5 +1,6 @@
 import { DEFAULT_TABLE_STATE } from "@hadmean/chromista";
-import { createStore, IPaginatedDataState } from "@hadmean/protozoa";
+import { createStore } from "frontend/lib/store";
+import { IPaginatedDataState } from "shared/types/data";
 
 type IStore = {
   tableState: IPaginatedDataState<any>;

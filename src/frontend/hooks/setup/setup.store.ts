@@ -1,5 +1,5 @@
-import { useStorageApi } from "@hadmean/protozoa";
-import { CRUD_CONFIG_NOT_FOUND } from "frontend/lib/makeCrudConfig";
+import { CRUD_CONFIG_NOT_FOUND } from "frontend/lib/crud-config";
+import { useStorageApi } from "frontend/lib/data/useApi";
 import { useRouter } from "next/router";
 import { ISetupCheck } from "shared/types/auth";
 

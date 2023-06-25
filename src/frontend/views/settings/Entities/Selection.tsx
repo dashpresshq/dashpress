@@ -5,7 +5,7 @@ import {
   Spacer,
 } from "@hadmean/chromista";
 import React, { useEffect, useState } from "react";
-import { ICrudConfig } from "frontend/lib/makeCrudConfig";
+import { ICrudConfig } from "frontend/lib/crud-config";
 import { useStringSelections } from "../../../lib/selection";
 
 interface IProps {

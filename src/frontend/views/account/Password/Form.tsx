@@ -1,4 +1,4 @@
-import { IFormProps } from "@hadmean/protozoa";
+import { IFormProps } from "frontend/lib/form/types";
 import {
   CHANGE_PASSWORD_FORM_SCHEMA,
   IChangePasswordForm,

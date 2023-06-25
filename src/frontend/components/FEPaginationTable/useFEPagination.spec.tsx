@@ -1,8 +1,7 @@
 import fetchMock from "jest-fetch-mock";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { waitFor } from "@testing-library/react";
-import { FilterOperators } from "@hadmean/protozoa";
-import { FieldQueryFilter } from "shared/types/data";
+import { FieldQueryFilter, FilterOperators } from "shared/types/data";
 import { renderHook } from "__tests__/_/lib/renderHook";
 import { useFEPagination } from "./useFEPagination";
 

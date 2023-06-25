@@ -1,5 +1,5 @@
 import { IColorMode } from "@hadmean/chromista";
-import noop from "lodash/noop";
+import { noop } from "shared/lib/noop";
 
 export const processThemeColors = (
   primaryColor: string,

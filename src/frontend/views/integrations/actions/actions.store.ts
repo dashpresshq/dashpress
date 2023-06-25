@@ -1,18 +1,14 @@
-import {
-  makeDeleteRequest,
-  makePatchRequest,
-  makePostRequest,
-  useApi,
-  useWaitForResponseMutationOptions,
-} from "@hadmean/protozoa";
 import { useMutation } from "react-query";
-import { reduceStringToNumber } from "shared/lib/templates/reduceStringToNumber";
 import {
   IIntegrationsList,
   IActivatedAction,
   ActionIntegrationKeys,
 } from "shared/types/actions";
-import { CRUD_CONFIG_NOT_FOUND } from "frontend/lib/makeCrudConfig";
+import { CRUD_CONFIG_NOT_FOUND } from "frontend/lib/crud-config";
+import { reduceStringToNumber } from "shared/lib/strings";
+import { makeActionRequest } from "frontend/lib/data/makeRequest";
+import { useApi } from "frontend/lib/data/useApi";
+import { useWaitForResponseMutationOptions } from "frontend/lib/data/useMutate/useWaitForResponseMutationOptions";
 import { usePasswordStore } from "../password.store";
 import { ACTION_INTEGRATIONS_CRUD_CONFIG } from "./constants";
 
@@ -65,7 +61,10 @@ export function useDeactivateActionMutation() {
 
   return useMutation(
     async (activationId: string) =>
-      await makeDeleteRequest(`/api/integrations/actions/${activationId}`),
+      await makeActionRequest(
+        "DELETE",
+        `/api/integrations/actions/${activationId}`
+      ),
     apiMutateOptions
   );
 }
@@ -80,7 +79,8 @@ export function useActivateActionMutation(integrationKey: string) {
 
   return useMutation(
     async (configuration: Record<string, string>) =>
-      await makePostRequest(
+      await makeActionRequest(
+        "POST",
         `/api/integrations/actions/${integrationKey}`,
         configuration
       ),
@@ -100,10 +100,14 @@ export function useUpdateActivatedActionMutation(activationId: string) {
 
   return useMutation(
     async (configuration: Record<string, string>) =>
-      await makePatchRequest(`/api/integrations/actions/${activationId}`, {
-        ...configuration,
-        _password: rootPassword,
-      }),
+      await makeActionRequest(
+        "PATCH",
+        `/api/integrations/actions/${activationId}`,
+        {
+          ...configuration,
+          _password: rootPassword,
+        }
+      ),
     apiMutateOptions
   );
 }

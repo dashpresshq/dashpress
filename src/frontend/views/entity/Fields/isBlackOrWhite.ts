@@ -1,4 +1,4 @@
-import noop from "lodash/noop";
+import { noop } from "shared/lib/noop";
 
 const hexToRgb = (_hex: string): [string, string, string] => {
   const shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;

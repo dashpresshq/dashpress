@@ -1,8 +1,8 @@
-import { IFormProps } from "@hadmean/protozoa";
+import { IFormProps } from "frontend/lib/form/types";
 import { SchemaForm } from "frontend/components/SchemaForm";
 import { UPDATE_USER_PREFERENCES_FORM_SCHEMA } from "shared/form-schemas/profile/update";
 import { IUserPreferences } from "shared/types/user";
-import { userFriendlyCase } from "shared/lib/strings";
+import { userFriendlyCase } from "shared/lib/strings/friendly-case";
 import uniqBy from "lodash/uniqBy";
 import { useEffect } from "react";
 import { usePortalThemes } from "frontend/_layouts/portal";

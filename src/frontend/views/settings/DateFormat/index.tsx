@@ -3,7 +3,7 @@ import {
   FormSkeletonSchema,
   SectionBox,
 } from "@hadmean/chromista";
-import { useSetPageDetails } from "frontend/lib/routing";
+import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
 import { USER_PERMISSIONS } from "shared/constants/user";
 import {
   useAppConfiguration,
@@ -11,8 +11,8 @@ import {
 } from "frontend/hooks/configuration/configuration.store";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { format as dateFnsFormat } from "date-fns";
-import { ToastService } from "@hadmean/protozoa";
 import { MAKE_APP_CONFIGURATION_CRUD_CONFIG } from "frontend/hooks/configuration/configuration.constant";
+import { ToastService } from "frontend/lib/toast";
 import { BaseSettingsLayout } from "../_Base";
 import { DateFormatSettingsForm } from "./Form";
 import { SETTINGS_VIEW_KEY } from "../constants";

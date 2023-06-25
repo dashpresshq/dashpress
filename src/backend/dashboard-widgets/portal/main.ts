@@ -1,4 +1,4 @@
-import noop from "lodash/noop";
+import { noop } from "shared/lib/noop";
 import { IWidgetConfig } from "shared/types/dashboard";
 import { META_USER_PERMISSIONS } from "shared/constants/user";
 import { IValueLabel } from "@hadmean/chromista/dist/types";

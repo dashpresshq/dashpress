@@ -5,8 +5,12 @@ import {
   FormSkeletonSchema,
 } from "@hadmean/chromista";
 import { Form, Field } from "react-final-form";
-import { composeValidators, maxLength, minLength } from "@hadmean/protozoa";
-import { ICrudConfig } from "frontend/lib/makeCrudConfig";
+import {
+  minLength,
+  composeValidators,
+  maxLength,
+} from "frontend/lib/validations";
+import { ICrudConfig } from "frontend/lib/crud-config";
 
 interface IProps {
   fields: string[];

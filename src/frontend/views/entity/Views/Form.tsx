@@ -1,12 +1,4 @@
-import {
-  composeValidators,
-  maxLength,
-  IFormProps,
-  required,
-  StringUtils,
-  IPaginatedDataState,
-} from "@hadmean/protozoa";
-import { ITableTab } from "shared/types/data";
+import { IPaginatedDataState, ITableTab } from "shared/types/data";
 import { Form, Field } from "react-final-form";
 import arrayMutators from "final-form-arrays";
 import { useFieldArray } from "react-final-form-arrays";
@@ -24,6 +16,13 @@ import {
 import React, { useState } from "react";
 import { ACTIONS_ACCESSOR } from "frontend/views/data/Table/useTableColumns";
 import { MAKE_APP_CONFIGURATION_CRUD_CONFIG } from "frontend/hooks/configuration/configuration.constant";
+import { generateRandomString } from "shared/lib/strings/random";
+import {
+  composeValidators,
+  maxLength,
+  required,
+} from "frontend/lib/validations";
+import { IFormProps } from "frontend/lib/form/types";
 
 interface IProps {
   values: ITableTab[];
@@ -45,7 +44,7 @@ function TabForm({ values, tableColumns, initialValues }: IProps) {
       label="Add New Tab"
       action={() => {
         const newTab: ITableTab = {
-          id: StringUtils.generateRandomString(12),
+          id: generateRandomString(12),
           title: `Tab ${fields.length + 1}`,
           dataState: {
             filters: [],

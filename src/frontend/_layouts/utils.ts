@@ -1,4 +1,4 @@
-import { DataStateKeys } from "@hadmean/protozoa";
+import { DataStateKeys } from "frontend/lib/data/types";
 import { IThemeSettings } from "./types";
 
 export const getThemePrimaryColor = (

@@ -1,4 +1,4 @@
-import { IFormProps } from "@hadmean/protozoa";
+import { IFormProps } from "frontend/lib/form/types";
 import { SchemaForm } from "frontend/components/SchemaForm";
 import { IThemeSettings } from "frontend/_layouts/types";
 import { UPDATE_USER_PREFERENCES_FORM_SCHEMA } from "shared/form-schemas/profile/update";

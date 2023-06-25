@@ -1,5 +1,5 @@
 import { QueryFilterSchema } from "shared/types/data";
-import { ILabelValue } from "types";
+import { ILabelValue } from "shared/types/options";
 import { IAccountProfile } from "shared/types/user";
 import { DataApiService, dataApiService } from "./data.service";
 import { IPaginationFilters } from "./types";

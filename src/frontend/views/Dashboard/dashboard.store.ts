@@ -1,15 +1,11 @@
-import {
-  makeDeleteRequest,
-  makePatchRequest,
-  makePostRequest,
-  MutationHelpers,
-  SLUG_LOADING_VALUE,
-  useApi,
-  useApiMutateOptimisticOptions,
-} from "@hadmean/protozoa";
 import { useMutation } from "react-query";
 import { IWidgetConfig } from "shared/types/dashboard";
-import { CRUD_CONFIG_NOT_FOUND } from "frontend/lib/makeCrudConfig";
+import { CRUD_CONFIG_NOT_FOUND } from "frontend/lib/crud-config";
+import { makeActionRequest } from "frontend/lib/data/makeRequest";
+import { MutationHelpers } from "frontend/lib/data/useMutate/mutation-helpers";
+import { useApiMutateOptimisticOptions } from "frontend/lib/data/useMutate/useApiMutateOptimisticOptions";
+import { useApi } from "frontend/lib/data/useApi";
+import { SLUG_LOADING_VALUE } from "frontend/lib/routing/constants";
 import { DASHBOARD_RELATIVE_DAYS } from "./Widget/_components/WidgetHeader/constants";
 import { DASHBOARD_WIDGETS_CRUD_CONFIG } from "./constants";
 
@@ -61,7 +57,7 @@ export function useCreateDashboardWidgetMutation(dashboardId: string) {
   });
 
   return useMutation(async (widget: IWidgetConfig) => {
-    await makePostRequest(DASHBOARD_ENDPOINT(dashboardId), widget);
+    await makeActionRequest("POST", DASHBOARD_ENDPOINT(dashboardId), widget);
   }, apiMutateOptions);
 }
 
@@ -80,7 +76,8 @@ export function useUpdateDashboardWidgetMutation(
   });
 
   return useMutation(async (widget: IWidgetConfig) => {
-    await makePatchRequest(
+    await makeActionRequest(
+      "PATCH",
       `${DASHBOARD_ENDPOINT(dashboardId)}/${widget.id}`,
       widget
     );
@@ -98,9 +95,13 @@ export function useDeleteDashboardWidgetMutation(dashboardId: string) {
   });
 
   return useMutation(async (widgetId: string) => {
-    await makeDeleteRequest(`${DASHBOARD_ENDPOINT(dashboardId)}/${widgetId}`, {
-      widgetId,
-    });
+    await makeActionRequest(
+      "DELETE",
+      `${DASHBOARD_ENDPOINT(dashboardId)}/${widgetId}`,
+      {
+        widgetId,
+      }
+    );
   }, apiMutateOptions);
 }
 
@@ -114,6 +115,10 @@ export function useArrangeDashboardWidgetMutation(dashboardId: string) {
   });
 
   return useMutation(async (widgetList: string[]) => {
-    await makePatchRequest(DASHBOARD_ENDPOINT(dashboardId), widgetList);
+    await makeActionRequest(
+      "PATCH",
+      DASHBOARD_ENDPOINT(dashboardId),
+      widgetList
+    );
   }, apiMutateOptions);
 }

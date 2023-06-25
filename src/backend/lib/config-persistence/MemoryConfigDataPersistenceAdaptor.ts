@@ -1,4 +1,4 @@
-import noop from "lodash/noop";
+import { noop } from "shared/lib/noop";
 import { ConfigApiService } from "../config/config.service";
 import { AbstractConfigDataPersistenceService } from "./AbstractConfigDataPersistenceService";
 import { ConfigDomain } from "./types";

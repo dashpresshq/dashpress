@@ -2,7 +2,7 @@ import { AbstractConfigDataPersistenceService } from "backend/lib/config-persist
 import { EncryptionApiService } from "backend/lib/encryption/encryption.service";
 import { BadRequestError, progammingError } from "backend/lib/errors";
 import { IApplicationService } from "backend/types";
-import noop from "lodash/noop";
+import { noop } from "shared/lib/noop";
 import { IGroupCredential } from "../types";
 
 export const INTEGRATION_CONFIG_GROUP_DEMILITER = "___";

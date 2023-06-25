@@ -1,6 +1,6 @@
 import { IWidgetConfig } from "shared/types/dashboard";
 import { forwardRef } from "react";
-import { DataStateKeys } from "@hadmean/protozoa";
+import { DataStateKeys } from "frontend/lib/data/types";
 import { SummaryWidget, TableWidget } from "./_render";
 import { PortalDashboardWidget } from "./portal";
 import { WidgetFrame } from "./_components/WidgetFrame";

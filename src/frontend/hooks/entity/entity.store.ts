@@ -1,7 +1,9 @@
-import { DataStateKeys, useApi, useApiQueries } from "@hadmean/protozoa";
 import { IEntityField, IEntityRelation } from "shared/types/db";
-import { ILabelValue } from "types";
-import { CRUD_CONFIG_NOT_FOUND } from "frontend/lib/makeCrudConfig";
+import { ILabelValue } from "shared/types/options";
+import { CRUD_CONFIG_NOT_FOUND } from "frontend/lib/crud-config";
+import { DataStateKeys } from "frontend/lib/data/types";
+import { useApi } from "frontend/lib/data/useApi";
+import { useApiQueries } from "frontend/lib/data/useApi/useApiQueries";
 import { isRouterParamEnabled } from "..";
 import { useEntityDictionPlurals } from "./entity.queries";
 

@@ -7,7 +7,6 @@ import {
 import React from "react";
 import { AppLayout } from "frontend/_layouts/app";
 import { UserPlus } from "react-feather";
-import { NAVIGATION_LINKS, useSetPageDetails } from "frontend/lib/routing";
 import { useRouter } from "next/router";
 import { roleLabel, USER_PERMISSIONS } from "shared/constants/user";
 import {
@@ -15,10 +14,12 @@ import {
   IFETableColumn,
   IFETableCell,
 } from "frontend/components/FEPaginationTable";
-import { useApi } from "@hadmean/protozoa";
 import { IRolesList } from "shared/types/roles";
 import { IAccountProfile } from "shared/types/user";
-import { userFriendlyCase } from "shared/lib/strings";
+import { useApi } from "frontend/lib/data/useApi";
+import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
+import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
+import { userFriendlyCase } from "shared/lib/strings/friendly-case";
 import {
   ADMIN_USERS_CRUD_CONFIG,
   useAllUsers,

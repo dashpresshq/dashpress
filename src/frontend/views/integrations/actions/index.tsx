@@ -3,12 +3,13 @@ import {
   FormSkeletonSchema,
   SectionBox,
 } from "@hadmean/chromista";
-import { useRouteParam, useSetPageDetails } from "frontend/lib/routing";
 import { USER_PERMISSIONS } from "shared/constants/user";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { useState } from "react";
 import { DOCUMENTATION_LABEL } from "frontend/docs";
 import { FormIntegrationsDocumentation } from "frontend/docs/form-integrations";
+import { useRouteParam } from "frontend/lib/routing/useRouteParam";
+import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
 import { BaseActionsLayout } from "../_Base";
 import {
   useActionIntegrationsList,

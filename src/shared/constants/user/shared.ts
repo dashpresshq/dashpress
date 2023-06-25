@@ -1,4 +1,4 @@
-import { SLUG_LOADING_VALUE } from "@hadmean/protozoa";
+import { SLUG_LOADING_VALUE } from "frontend/lib/routing/constants";
 import { GranularEntityPermissions } from "shared/types/user";
 
 export const NO_PERMISSION_REQUIRED = "NO_PERMISSION_REQUIRED";

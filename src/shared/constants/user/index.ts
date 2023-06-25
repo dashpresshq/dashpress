@@ -1,6 +1,6 @@
-import { StringUtils } from "@hadmean/protozoa";
-import { userFriendlyCase } from "shared/lib/strings";
 import { SystemRoles } from "shared/types/user";
+import { userFriendlyCase } from "shared/lib/strings/friendly-case";
+import { sluggify } from "shared/lib/strings";
 import { PORTAL_USER_PERMISSIONS } from "../portal/user";
 import { APPLIED_CAN_ACCESS, NO_PERMISSION_REQUIRED } from "./shared";
 
@@ -11,7 +11,7 @@ export const isSystemRole = (roleId: string) => {
 };
 
 export const makeRoleId = (roleName: string) => {
-  return StringUtils.sluggify(roleName);
+  return sluggify(roleName);
 };
 
 export const roleLabel = (value: string) => {

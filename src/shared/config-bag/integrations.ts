@@ -1,4 +1,4 @@
-import { ICrudConfig, MAKE_CRUD_CONFIG } from "frontend/lib/makeCrudConfig";
+import { ICrudConfig, MAKE_CRUD_CONFIG } from "frontend/lib/crud-config";
 import { IntegrationsConfigurationGroup } from "shared/types/integrations";
 
 export const INTEGRATIONS_GROUP_CONFIG: Record<

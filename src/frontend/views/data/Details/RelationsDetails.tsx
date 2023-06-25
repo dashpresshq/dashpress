@@ -1,21 +1,19 @@
 import { SectionBox, SoftButton, Spacer, Typo } from "@hadmean/chromista";
-import {
-  NAVIGATION_LINKS,
-  useNavigationStack,
-  useSetPageDetails,
-  useRouteParam,
-} from "frontend/lib/routing";
 import { META_USER_PERMISSIONS } from "shared/constants/user";
 import {
   useEntityIdField,
   useEntityReferenceFields,
 } from "frontend/hooks/entity/entity.store";
-import { SLUG_LOADING_VALUE } from "@hadmean/protozoa";
+import { SLUG_LOADING_VALUE } from "frontend/lib/routing/constants";
 import {
   useEntityDataDetails,
   useEntityDataReference,
 } from "frontend/hooks/data/data.store";
 import { useRouter } from "next/router";
+import { useRouteParam } from "frontend/lib/routing/useRouteParam";
+import { useNavigationStack } from "frontend/lib/routing/useNavigationStack";
+import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
+import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
 import {
   useEntityCrudConfig,
   useEntityId,

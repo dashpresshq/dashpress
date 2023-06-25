@@ -1,15 +1,13 @@
 import { ListSkeleton, SectionBox, SortList, Tabs } from "@hadmean/chromista";
-import {
-  useRouteParam,
-  useChangeRouterParam,
-  useSetPageDetails,
-} from "frontend/lib/routing";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { USER_PERMISSIONS } from "shared/constants/user";
 import { MAKE_APP_CONFIGURATION_CRUD_CONFIG } from "frontend/hooks/configuration/configuration.constant";
 import { DOCUMENTATION_LABEL } from "frontend/docs";
 import { useState } from "react";
 import { MenuEntitiesDocumentation } from "frontend/docs/menu-entities";
+import { useRouteParam } from "frontend/lib/routing/useRouteParam";
+import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
+import { useChangeRouterParam } from "frontend/lib/routing/useChangeRouterParam";
 import {
   useAppConfiguration,
   useUpsertConfigurationMutation,

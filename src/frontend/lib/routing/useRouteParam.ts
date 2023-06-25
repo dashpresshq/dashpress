@@ -1,5 +1,5 @@
-import { SLUG_LOADING_VALUE } from "@hadmean/protozoa";
 import { useRouter } from "next/router";
+import { SLUG_LOADING_VALUE } from "./constants";
 
 export function useRouteParam(name: string) {
   const router = useRouter();

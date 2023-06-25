@@ -2,8 +2,8 @@ import {
   DATE_FILTER_VALUE,
   FilterOperators,
   IColumnFilterBag,
-} from "@hadmean/protozoa";
-import { QueryFilterSchema } from "shared/types/data";
+  QueryFilterSchema,
+} from "shared/types/data";
 import { IPaginationFilters } from "../types";
 import { QueryOperationImplementation, QueryOperators } from "./types";
 import { relativeDateNotationToActualDate } from "./time.constants";

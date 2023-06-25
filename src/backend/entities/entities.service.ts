@@ -5,7 +5,7 @@ import {
 } from "backend/configuration/configuration.service";
 import { rolesApiService, RolesApiService } from "backend/roles/roles.service";
 import { IApplicationService } from "backend/types";
-import noop from "lodash/noop";
+import { noop } from "shared/lib/noop";
 import { IDBSchema, IEntityField, IEntityRelation } from "shared/types/db";
 import { sortByList } from "shared/logic/entities/sort.utils";
 import { DataCrudKeys } from "shared/types/data";

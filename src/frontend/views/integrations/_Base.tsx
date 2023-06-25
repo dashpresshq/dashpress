@@ -7,7 +7,7 @@ import {
   Spacer,
   MenuSection,
 } from "@hadmean/chromista";
-import { useRouteParam } from "@hadmean/protozoa";
+import { useRouteParam } from "frontend/lib/routing/useRouteParam";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { useRouter } from "next/router";
 import { ReactNode } from "react";

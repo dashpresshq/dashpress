@@ -1,5 +1,5 @@
-import { abbreviateNumber } from "@hadmean/protozoa";
 import { isEmpty } from "class-validator";
+import { abbreviateNumber } from "frontend/lib/numbers";
 import { ISummaryCardWidgetData } from "./types";
 
 export const getFullAndRelativeCount = (

@@ -1,5 +1,6 @@
 import { SectionBox, ContentLayout } from "@hadmean/chromista";
-import { useNavigationStack, useSetPageDetails } from "frontend/lib/routing";
+import { useNavigationStack } from "frontend/lib/routing/useNavigationStack";
+import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
 import { USER_PERMISSIONS } from "shared/constants/user";
 import { useState } from "react";
 import { DOCUMENTATION_LABEL } from "frontend/docs";

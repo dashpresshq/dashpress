@@ -1,10 +1,8 @@
-import noop from "lodash/noop";
-
 import { FOR_CODE_COV as $1 } from "backend/lib/request/validations/types";
 import { FOR_CODE_COV as $2 } from "backend/types";
 import { FOR_CODE_COV as $3 } from "shared/form-schemas/types";
 import { FOR_CODE_COV as $4 } from "shared/validations/types";
-import { FOR_CODE_COV as $5 } from "types";
+import { FOR_CODE_COV as $5 } from "shared/types/options";
 import { FOR_CODE_COV as $6 } from "shared/types/auth";
 import { FOR_CODE_COV as $7 } from "shared/types/data";
 import { FOR_CODE_COV as $8 } from "shared/types/db";
@@ -38,6 +36,7 @@ import { FOR_CODE_COV as $36 } from "shared/types/storage";
 import { FOR_CODE_COV as $37 } from "frontend/views/Dashboard/Widget/_manage/types";
 import { FOR_CODE_COV as $38 } from "shared/types/dashboard/types";
 import { FOR_CODE_COV as $39 } from "shared/types/dashboard/base";
+import { noop } from "shared/lib/noop";
 
 noop(
   $1,

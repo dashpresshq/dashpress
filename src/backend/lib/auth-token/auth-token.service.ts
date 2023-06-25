@@ -4,7 +4,7 @@ import {
 } from "backend/configuration/configuration.service";
 import jsonwebtoken from "jsonwebtoken";
 import { IAccountProfile } from "shared/types/user";
-import noop from "lodash/noop";
+import { noop } from "shared/lib/noop";
 import {
   ConfigKeys,
   configApiService,

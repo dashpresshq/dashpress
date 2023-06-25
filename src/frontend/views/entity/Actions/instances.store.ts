@@ -1,23 +1,19 @@
-import {
-  MutationHelpers,
-  makeDeleteRequest,
-  makePatchRequest,
-  makePostRequest,
-  useApi,
-  useApiMutateOptimisticOptions,
-  useWaitForResponseMutationOptions,
-} from "@hadmean/protozoa";
-import { CRUD_CONFIG_NOT_FOUND } from "frontend/lib/makeCrudConfig";
+import { CRUD_CONFIG_NOT_FOUND } from "frontend/lib/crud-config";
 import { useMutation } from "react-query";
 import {
   IActionInstance,
   IIntegrationImplementationList,
 } from "shared/types/actions";
+import { useApiMutateOptimisticOptions } from "frontend/lib/data/useMutate/useApiMutateOptimisticOptions";
+import { MutationHelpers } from "frontend/lib/data/useMutate/mutation-helpers";
+import { makeActionRequest } from "frontend/lib/data/makeRequest";
+import { useWaitForResponseMutationOptions } from "frontend/lib/data/useMutate/useWaitForResponseMutationOptions";
+import { useApi } from "frontend/lib/data/useApi";
+import { ActionInstanceView } from "./types";
 import {
   ADMIN_ACTION_INSTANCES_CRUD_CONFIG,
   BASE_ACTIONS_ENDPOINT,
 } from "./constants";
-import { ActionInstanceView } from "./types";
 
 export const LIST_ACTION_INSTANCES = ({ type, id }: ActionInstanceView) => {
   if (type === "entity") {
@@ -54,7 +50,8 @@ export function useDeleteActionInstanceMutation(
 
   return useMutation(
     async (instanceId: string) =>
-      await makeDeleteRequest(
+      await makeActionRequest(
+        "DELETE",
         ADMIN_ACTION_INSTANCES_CRUD_CONFIG.ENDPOINTS.DELETE(instanceId)
       ),
     apiMutateOptions
@@ -71,7 +68,8 @@ export function useCreateActionInstanceMutation() {
 
   return useMutation(
     async (configuration: IActionInstance) =>
-      await makePostRequest(
+      await makeActionRequest(
+        "POST",
         ADMIN_ACTION_INSTANCES_CRUD_CONFIG.ENDPOINTS.CREATE,
         configuration
       ),
@@ -89,7 +87,8 @@ export function useUpdateActionInstanceMutation() {
 
   return useMutation(
     async (configuration: IActionInstance) =>
-      await makePatchRequest(
+      await makeActionRequest(
+        "PATCH",
         ADMIN_ACTION_INSTANCES_CRUD_CONFIG.ENDPOINTS.UPDATE(
           configuration.instanceId
         ),

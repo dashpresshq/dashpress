@@ -1,9 +1,10 @@
-import { ToastService, useStorageApi } from "@hadmean/protozoa";
-import { NAVIGATION_LINKS } from "frontend/lib/routing";
+import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
 import { useRouter } from "next/router";
 import { IAuthenticatedUserBag, IUserPreferences } from "shared/types/user";
 import { canRoleDoThisSync } from "shared/logic/permissions";
 import { useCallback } from "react";
+import { useStorageApi } from "frontend/lib/data/useApi";
+import { ToastService } from "frontend/lib/toast";
 import { useIsAuthenticatedStore } from "./useAuthenticateUser";
 import { ACCOUNT_PROFILE_CRUD_CONFIG } from "./constants";
 import { useIsGranularCheck } from "./portal";

@@ -1,14 +1,12 @@
-import {
-  AppStorage,
-  makePutRequest,
-  useStorageApi,
-  useWaitForResponseMutationOptions,
-} from "@hadmean/protozoa";
 import { useMutation } from "react-query";
 import {
   CONFIGURATION_KEYS,
   AppConfigurationKeys,
 } from "shared/configurations";
+import { makeActionRequest } from "frontend/lib/data/makeRequest";
+import { useStorageApi } from "frontend/lib/data/useApi";
+import { useWaitForResponseMutationOptions } from "frontend/lib/data/useMutate/useWaitForResponseMutationOptions";
+import { AppStorage } from "frontend/lib/storage/app";
 import { isRouterParamEnabled } from "..";
 import { MAKE_APP_CONFIGURATION_CRUD_CONFIG } from "./configuration.constant";
 
@@ -71,7 +69,7 @@ export function useUpsertConfigurationMutation(
   });
 
   return useMutation(async (values: unknown) => {
-    await makePutRequest(configurationApiPath(key, entity, "PUT"), {
+    await makeActionRequest("PUT", configurationApiPath(key, entity, "PUT"), {
       data: values,
     });
     return values;

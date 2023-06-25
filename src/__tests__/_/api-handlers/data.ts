@@ -1,5 +1,5 @@
 import { rest } from "msw";
-import { reduceStringToNumber } from "shared/lib/templates/reduceStringToNumber";
+import { reduceStringToNumber } from "shared/lib/strings";
 import { BASE_TEST_URL } from "./_utils";
 
 const allData = ({

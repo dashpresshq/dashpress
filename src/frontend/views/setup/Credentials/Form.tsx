@@ -6,12 +6,14 @@ import {
   FormSelect,
 } from "@hadmean/chromista";
 import { Form, Field } from "react-final-form";
-import { required, StringUtils, IFormProps } from "@hadmean/protozoa";
 import {
   IDataSourceCredentials,
   DATA_SOURCES_CONFIG,
 } from "shared/types/data-sources";
 import { useState } from "react";
+import { upperCaseFirstLetter } from "shared/lib/strings";
+import { required } from "frontend/lib/validations";
+import { IFormProps } from "frontend/lib/form/types";
 
 export function CredentialsSetupForm({
   onSubmit,
@@ -40,7 +42,7 @@ export function CredentialsSetupForm({
                   label="Database Type"
                   selectData={Object.keys(DATA_SOURCES_CONFIG).map(
                     (dataSourceType) => ({
-                      label: StringUtils.upperCaseFirstLetter(dataSourceType),
+                      label: upperCaseFirstLetter(dataSourceType),
                       value: dataSourceType,
                     })
                   )}

@@ -19,7 +19,7 @@ import {
 } from "backend/list-order/list-order.service";
 import { rolesApiService, RolesApiService } from "backend/roles/roles.service";
 import { IValueLabel } from "@hadmean/chromista/dist/types";
-import { userFriendlyCase } from "shared/lib/strings";
+import { userFriendlyCase } from "shared/lib/strings/friendly-case";
 import { nanoid } from "nanoid";
 import { ROYGBIV } from "shared/constants/colors";
 import { SystemIconsList } from "shared/constants/Icons";

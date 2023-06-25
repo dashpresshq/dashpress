@@ -1,4 +1,4 @@
-import { IFormProps } from "@hadmean/protozoa";
+import { IFormProps } from "frontend/lib/form/types";
 import { Typo } from "@hadmean/chromista";
 import { SchemaForm } from "frontend/components/SchemaForm";
 import {

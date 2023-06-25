@@ -1,7 +1,8 @@
-import { IFormProps, ToastService } from "@hadmean/protozoa";
 import { SchemaForm } from "frontend/components/SchemaForm";
 import { MAKE_APP_CONFIGURATION_CRUD_CONFIG } from "frontend/hooks/configuration/configuration.constant";
+import { IFormProps } from "frontend/lib/form/types";
 import { evalJavascriptString } from "frontend/lib/script-runner";
+import { ToastService } from "frontend/lib/toast";
 import { IPresentationScriptParams } from "frontend/views/data/evaluatePresentationScript";
 import { IEntityPresentationScript } from "frontend/views/data/types";
 

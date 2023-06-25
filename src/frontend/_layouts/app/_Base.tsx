@@ -9,7 +9,7 @@ import {
 import React, { ReactNode, useEffect } from "react";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { useNavigationStack } from "frontend/lib/routing";
+import { useNavigationStack } from "frontend/lib/routing/useNavigationStack";
 import { usePageDetailsStore } from "frontend/lib/routing/usePageDetails";
 import { usePageRequiresPermission } from "frontend/hooks/auth/user.store";
 import { GitHub, Globe, Twitter, Users } from "react-feather";

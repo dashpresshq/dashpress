@@ -1,4 +1,4 @@
-import noop from "lodash/noop";
+import { noop } from "shared/lib/noop";
 import { ISignInForm } from "shared/form-schemas/auth/signin";
 import { ISuccessfullAuthenticationResponse } from "shared/types/auth/portal";
 

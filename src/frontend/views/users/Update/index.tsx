@@ -9,12 +9,13 @@ import {
   useAuthenticatedUserBag,
   useUserHasPermission,
 } from "frontend/hooks/auth/user.store";
-import { useNavigationStack, useSetPageDetails } from "frontend/lib/routing";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { USER_PERMISSIONS } from "shared/constants/user";
 import { DOCUMENTATION_LABEL } from "frontend/docs";
 import { useState } from "react";
 import { SystemProfileDocumentation } from "frontend/docs/system-profile";
+import { useNavigationStack } from "frontend/lib/routing/useNavigationStack";
+import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
 import { AppLayout } from "../../../_layouts/app";
 import { useUsernameFromRouteParam } from "../hooks";
 import {

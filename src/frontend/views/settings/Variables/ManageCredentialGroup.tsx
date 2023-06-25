@@ -13,7 +13,6 @@ import {
   IFETableCell,
   IFETableColumn,
 } from "frontend/components/FEPaginationTable";
-import { ToastService, useApi } from "@hadmean/protozoa";
 import {
   IPageDetails,
   useSetCurrentActionItems,
@@ -26,6 +25,8 @@ import { useUserHasPermission } from "frontend/hooks/auth/user.store";
 import { INTEGRATIONS_GROUP_CONFIG } from "shared/config-bag/integrations";
 import { VariablesDocumentation } from "frontend/docs/variables";
 import { DOCUMENTATION_LABEL } from "frontend/docs";
+import { ToastService } from "frontend/lib/toast";
+import { useApi } from "frontend/lib/data/useApi";
 import {
   INTEGRATIONS_GROUP_ENDPOINT,
   useIntegrationConfigurationDeletionMutation,

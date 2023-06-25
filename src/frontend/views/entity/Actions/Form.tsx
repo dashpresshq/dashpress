@@ -9,7 +9,7 @@ import {
   IActivatedAction,
   BaseAction,
 } from "shared/types/actions";
-import { userFriendlyCase } from "shared/lib/strings";
+import { userFriendlyCase } from "shared/lib/strings/friendly-case";
 import { useIntegrationImplementationsList } from "./instances.store";
 import { ADMIN_ACTION_INSTANCES_CRUD_CONFIG } from "./constants";
 import { ActionInstanceView } from "./types";

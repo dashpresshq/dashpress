@@ -1,8 +1,8 @@
-import { userFriendlyCase } from "shared/lib/strings";
 import { FormTextArea, FormSelect } from "@hadmean/chromista";
 import { Field } from "react-final-form";
-import { required } from "@hadmean/protozoa";
 import { SystemIconsList } from "shared/constants/Icons";
+import { required } from "frontend/lib/validations";
+import { userFriendlyCase } from "shared/lib/strings/friendly-case";
 
 export function IconInputField({ value }: { value: string }) {
   return (

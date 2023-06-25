@@ -1,4 +1,4 @@
-import { MAKE_CRUD_CONFIG } from "frontend/lib/makeCrudConfig";
+import { MAKE_CRUD_CONFIG } from "frontend/lib/crud-config";
 
 export const BASE_ACTIONS_ENDPOINT = `/api/integrations/actions`;
 

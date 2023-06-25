@@ -1,13 +1,14 @@
 import { FormButton } from "@hadmean/chromista";
-import { ToastService, resetFormValues } from "@hadmean/protozoa";
 import { Field, Form } from "react-final-form";
 import {
   IAppliedSchemaFormConfig,
   ISchemaFormConfig,
 } from "shared/form-schemas/types";
 import { runValidationError } from "shared/validations/run";
+import { ToastService } from "frontend/lib/toast";
+import { resetFormValues } from "frontend/lib/form/utils";
 import { RenderFormInput } from "./_RenderFormInput";
-import { userFriendlyCase } from "../../../shared/lib/strings";
+import { userFriendlyCase } from "../../../shared/lib/strings/friendly-case";
 import { IFormExtension } from "./types";
 import { runFormBeforeSubmit, runFormFieldState } from "./form-run";
 import { useSchemaFormScriptContext } from "./useSchemaFormScriptContext";

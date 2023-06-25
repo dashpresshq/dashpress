@@ -1,10 +1,11 @@
 import { useEntitiesFilterCount } from "frontend/hooks/data/data.store";
-import { abbreviateNumber } from "@hadmean/protozoa";
 import { ITableTab, FieldQueryFilter } from "shared/types/data";
-import { useChangeRouterParam, useRouteParam } from "frontend/lib/routing";
 import { StyledCard, Tabs, TableSkeleton } from "@hadmean/chromista";
 import { useEntityConfiguration } from "frontend/hooks/configuration/configuration.store";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
+import { useChangeRouterParam } from "frontend/lib/routing/useChangeRouterParam";
+import { useRouteParam } from "frontend/lib/routing/useRouteParam";
+import { abbreviateNumber } from "frontend/lib/numbers";
 import { DetailsCanvas } from "./DetailsCanvas";
 import { TableTopComponent, usePortalTableTabs } from "../portal";
 import { EntityDataTable } from "./EntityDataTable";

@@ -1,5 +1,5 @@
 import fs from "fs-extra";
-import noop from "lodash/noop";
+import { noop } from "shared/lib/noop";
 import path from "path";
 import { ConfigApiService } from "../config/config.service";
 

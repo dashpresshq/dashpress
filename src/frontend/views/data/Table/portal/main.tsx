@@ -1,6 +1,6 @@
 import { IDropDownMenuItem, ITableColumn } from "@hadmean/chromista";
-import { DataStateKeys } from "@hadmean/protozoa";
-import noop from "lodash/noop";
+import { DataStateKeys } from "frontend/lib/data/types";
+import { noop } from "shared/lib/noop";
 import { ITableTab } from "shared/types/data";
 
 export const usePluginTableMenuItems = (

@@ -5,8 +5,8 @@ import {
   Spacer,
   Stack,
 } from "@hadmean/chromista";
-import { ILabelValue } from "types";
-import { userFriendlyCase } from "shared/lib/strings";
+import { ILabelValue } from "shared/types/options";
+import { userFriendlyCase } from "shared/lib/strings/friendly-case";
 import {
   useCreateRolePermissionMutation,
   useRolePermissionDeletionMutation,

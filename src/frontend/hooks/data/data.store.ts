@@ -1,18 +1,13 @@
-import {
-  makeDeleteRequest,
-  makePatchRequest,
-  makePostRequest,
-  useApi,
-  useApiQueries,
-  useWaitForResponseMutationOptions,
-  FilterOperators,
-  SLUG_LOADING_VALUE,
-} from "@hadmean/protozoa";
 import qs from "qs";
 import { useRouter } from "next/router";
 import { useMutation } from "react-query";
-import { FieldQueryFilter } from "shared/types/data";
-import { CRUD_CONFIG_NOT_FOUND } from "frontend/lib/makeCrudConfig";
+import { FieldQueryFilter, FilterOperators } from "shared/types/data";
+import { CRUD_CONFIG_NOT_FOUND } from "frontend/lib/crud-config";
+import { makeActionRequest } from "frontend/lib/data/makeRequest";
+import { useApi } from "frontend/lib/data/useApi";
+import { useWaitForResponseMutationOptions } from "frontend/lib/data/useMutate/useWaitForResponseMutationOptions";
+import { SLUG_LOADING_VALUE } from "frontend/lib/routing/constants";
+import { useApiQueries } from "frontend/lib/data/useApi/useApiQueries";
 import { NAVIGATION_LINKS } from "../../lib/routing/links";
 import { useEntityCrudConfig } from "../entity/entity.config";
 import { useMultipleEntityReferenceFields } from "../entity/entity.store";
@@ -170,7 +165,7 @@ export function useEntityDataCreationMutation(entity: string) {
 
   return useMutation(
     async (data: Record<string, string>) =>
-      await makePostRequest(`/api/data/${entity}`, { data }),
+      await makeActionRequest("POST", `/api/data/${entity}`, { data }),
     apiMutateOptions
   );
 }
@@ -190,7 +185,7 @@ export function useEntityDataUpdationMutation(entity: string, id: string) {
 
   return useMutation(
     async (data: Record<string, string>) =>
-      await makePatchRequest(`/api/data/${entity}/${id}`, { data }),
+      await makeActionRequest("PATCH", `/api/data/${entity}/${id}`, { data }),
     apiMutateOptions
   );
 }
@@ -218,7 +213,8 @@ export function useEntityDataDeletionMutation(
   });
   // eyes on optimstic delete here
   return useMutation(
-    async (id: string) => await makeDeleteRequest(`/api/data/${entity}/${id}`),
+    async (id: string) =>
+      await makeActionRequest("DELETE", `/api/data/${entity}/${id}`),
     apiMutateOptions
   );
 }

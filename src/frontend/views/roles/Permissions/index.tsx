@@ -6,11 +6,12 @@ import {
   Tabs,
 } from "@hadmean/chromista";
 import { useActiveEntities } from "frontend/hooks/entity/entity.store";
-import { useNavigationStack, useSetPageDetails } from "frontend/lib/routing";
+import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
+import { useNavigationStack } from "frontend/lib/routing/useNavigationStack";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { BASE_USER_PERMISSIONS, USER_PERMISSIONS } from "shared/constants/user";
-import { ILabelValue } from "types";
-import { userFriendlyCase } from "shared/lib/strings";
+import { ILabelValue } from "shared/types/options";
+import { userFriendlyCase } from "shared/lib/strings/friendly-case";
 import { usePortalUserPermissions } from "shared/constants/portal/user";
 import { DOCUMENTATION_LABEL } from "frontend/docs";
 import { useState } from "react";

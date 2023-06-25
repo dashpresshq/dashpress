@@ -11,7 +11,7 @@ import {
   FormTextArea,
 } from "@hadmean/chromista";
 import { ISharedFormInput } from "@hadmean/chromista/dist/components/Form/_types";
-import { StringUtils } from "@hadmean/protozoa";
+import { sluggify } from "shared/lib/strings";
 import { ISchemaFormConfig } from "shared/form-schemas/types";
 import { IColorableSelection } from "shared/types/ui";
 import { FIELD_TYPES_CONFIG_MAP } from "shared/validations";
@@ -89,7 +89,7 @@ export function RenderFormInput({
     case "boolean":
       return (
         <FormSwitch
-          name={StringUtils.sluggify(label)}
+          name={sluggify(label)}
           value={formProps.input.value}
           onChange={formProps.input.onChange}
           {...formProps}

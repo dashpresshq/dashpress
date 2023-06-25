@@ -1,4 +1,4 @@
-import { PaginatedData } from "@hadmean/protozoa";
+import { PaginatedData } from "shared/types/data";
 import { IPaginationFilters } from "./types";
 
 export const makeTableData = (

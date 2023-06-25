@@ -1,6 +1,6 @@
-import { SLUG_LOADING_VALUE } from "@hadmean/protozoa";
+import { SLUG_LOADING_VALUE } from "frontend/lib/routing/constants";
 import { useEntityConfiguration } from "frontend/hooks/configuration/configuration.store";
-import { NAVIGATION_LINKS } from "frontend/lib/routing";
+import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
 import { useCanUserPerformCrudAction } from "frontend/views/data/useCanUserPerformCrudAction";
 import { ITableTab } from "shared/types/data";
 

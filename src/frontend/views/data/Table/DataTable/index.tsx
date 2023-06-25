@@ -1,10 +1,8 @@
 import { ITableColumn, Table } from "@hadmean/chromista";
-import {
-  DEFAULT_PAGINATED_DATA,
-  StringUtils,
-  usePaginatedData,
-} from "@hadmean/protozoa";
-import { ICrudConfig } from "frontend/lib/makeCrudConfig";
+import { ICrudConfig } from "frontend/lib/crud-config";
+import { usePaginatedData } from "frontend/lib/data/useApi/usePaginatedData";
+import { DEFAULT_PAGINATED_DATA } from "frontend/lib/data/constants/defaults";
+import { pluralize } from "shared/lib/strings";
 import { useTableState } from "../hooks";
 import { IDataTableProps } from "../types";
 
@@ -45,7 +43,7 @@ export function BaseDataTable({
       emptyMessage={
         currentState.filters.length > 0
           ? // TODO for contributors: transform this to user readable message
-            `No result for the current ${StringUtils.pluralize({
+            `No result for the current ${pluralize({
               singular: "filter",
               count: currentState.filters.length,
               inclusive: true,

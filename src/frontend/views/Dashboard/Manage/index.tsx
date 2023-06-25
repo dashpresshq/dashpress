@@ -1,4 +1,4 @@
-import { NAVIGATION_LINKS } from "frontend/lib/routing";
+import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
 import { HOME_DASHBOARD_KEY } from "shared/types/dashboard";
 import { BaseManageDashboard } from "./_BaseManageDashboard";
 

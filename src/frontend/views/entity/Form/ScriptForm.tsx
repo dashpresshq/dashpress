@@ -1,9 +1,9 @@
 import { FormSkeleton, FormSkeletonSchema } from "@hadmean/chromista";
-import { ToastService } from "@hadmean/protozoa";
 import { SchemaForm } from "frontend/components/SchemaForm";
 import { ISchemaFormScriptParams } from "frontend/components/SchemaForm/form-run";
 import { useSchemaFormScriptContext } from "frontend/components/SchemaForm/useSchemaFormScriptContext";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
+import { ToastService } from "frontend/lib/toast";
 import { MAKE_APP_CONFIGURATION_CRUD_CONFIG } from "frontend/hooks/configuration/configuration.constant";
 import { evalJavascriptString } from "frontend/lib/script-runner";
 

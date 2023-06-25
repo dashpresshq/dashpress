@@ -1,8 +1,8 @@
 import { IDropDownMenuItem } from "@hadmean/chromista";
-import { createStore } from "@hadmean/protozoa";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { META_USER_PERMISSIONS } from "shared/constants/user";
+import { createStore } from "../store";
 
 export type IPageDetails = {
   pageTitle: string;

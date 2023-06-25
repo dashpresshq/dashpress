@@ -1,9 +1,10 @@
 import { useEntityReferenceFields } from "frontend/hooks/entity/entity.store";
-import { useSetPageDetails, useRouteParam } from "frontend/lib/routing";
 import { META_USER_PERMISSIONS } from "shared/constants/user";
 import { GranularEntityPermissions } from "shared/types/user";
 import { useEntityDataReference } from "frontend/hooks/data/data.store";
-import { FilterOperators } from "@hadmean/protozoa";
+import { useRouteParam } from "frontend/lib/routing/useRouteParam";
+import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
+import { FilterOperators } from "shared/types/data";
 import {
   useEntityCrudConfig,
   useEntityId,

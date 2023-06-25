@@ -1,4 +1,4 @@
-import { MAKE_CRUD_CONFIG } from "frontend/lib/makeCrudConfig";
+import { MAKE_CRUD_CONFIG } from "frontend/lib/crud-config";
 import {
   AppConfigurationKeys,
   CONFIGURATION_KEYS,

@@ -1,7 +1,7 @@
-import { useRouteParam } from "@hadmean/protozoa";
+import { useRouteParam } from "frontend/lib/routing/useRouteParam";
 import { nanoid } from "nanoid";
-import { useSetPageDetails } from "frontend/lib/routing";
 import { USER_PERMISSIONS } from "shared/constants/user";
+import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
 import { useCreateDashboardWidgetMutation } from "../dashboard.store";
 import { BaseManageDashboardWidget } from "./_manage";
 import { DASHBOARD_WIDGETS_CRUD_CONFIG } from "../constants";

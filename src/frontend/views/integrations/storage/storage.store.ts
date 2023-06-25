@@ -1,14 +1,10 @@
-import {
-  makeDeleteRequest,
-  makePatchRequest,
-  makePostRequest,
-  useApi,
-  useWaitForResponseMutationOptions,
-} from "@hadmean/protozoa";
 import { useMutation } from "react-query";
-import { reduceStringToNumber } from "shared/lib/templates/reduceStringToNumber";
 import { IIntegrationsList } from "shared/types/actions";
-import { CRUD_CONFIG_NOT_FOUND } from "frontend/lib/makeCrudConfig";
+import { CRUD_CONFIG_NOT_FOUND } from "frontend/lib/crud-config";
+import { reduceStringToNumber } from "shared/lib/strings";
+import { useApi } from "frontend/lib/data/useApi";
+import { useWaitForResponseMutationOptions } from "frontend/lib/data/useMutate/useWaitForResponseMutationOptions";
+import { makeActionRequest } from "frontend/lib/data/makeRequest";
 import { usePasswordStore } from "../password.store";
 import { STORAGE_INTEGRATIONS_CRUD_CONFIG } from "./constants";
 
@@ -58,7 +54,10 @@ export function useDeactivateStorageMutation() {
 
   return useMutation(
     async (storageKey: string) =>
-      await makeDeleteRequest(`/api/integrations/storage/${storageKey}`),
+      await makeActionRequest(
+        "DELETE",
+        `/api/integrations/storage/${storageKey}`
+      ),
     apiMutateOptions
   );
 }
@@ -73,7 +72,8 @@ export function useActivateStorageMutation(integrationKey: string) {
 
   return useMutation(
     async (configuration: Record<string, string>) =>
-      await makePostRequest(
+      await makeActionRequest(
+        "POST",
         `/api/integrations/storage/${integrationKey}`,
         configuration
       ),
@@ -91,7 +91,8 @@ export function useUpdateActivatedStorageMutation(storageKey: string) {
 
   return useMutation(
     async (configuration: Record<string, string>) =>
-      await makePatchRequest(
+      await makeActionRequest(
+        "PATCH",
         `/api/integrations/storage/${storageKey}`,
         configuration
       ),

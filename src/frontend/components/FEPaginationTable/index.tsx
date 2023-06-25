@@ -5,8 +5,8 @@ import {
   TableSkeleton,
   ITableColumn,
 } from "@hadmean/chromista";
-import { IPaginatedDataState } from "@hadmean/protozoa";
 import { TableFilterType } from "@hadmean/chromista/dist/components/Table/filters/types";
+import { IPaginatedDataState } from "shared/types/data";
 import { ViewStateMachine } from "../ViewStateMachine";
 import { useFEPagination } from "./useFEPagination";
 

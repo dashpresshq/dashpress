@@ -1,19 +1,16 @@
-import {
-  MutationHelpers,
-  getQueryCachekey,
-  makeDeleteRequest,
-  makePutRequest,
-  useApi,
-  useApiMutateOptimisticOptions,
-  useWaitForResponseMutationOptions,
-} from "@hadmean/protozoa";
 import { usePasswordStore } from "frontend/views/integrations/password.store";
 import { useEffect } from "react";
 import { useMutation, useQueryClient } from "react-query";
-import { reduceStringToNumber } from "shared/lib/templates/reduceStringToNumber";
 import { IntegrationsConfigurationGroup } from "shared/types/integrations";
 import { INTEGRATIONS_GROUP_CONFIG } from "shared/config-bag/integrations";
-import { CRUD_CONFIG_NOT_FOUND } from "frontend/lib/makeCrudConfig";
+import { CRUD_CONFIG_NOT_FOUND } from "frontend/lib/crud-config";
+import { makeActionRequest } from "frontend/lib/data/makeRequest";
+import { reduceStringToNumber } from "shared/lib/strings";
+import { useWaitForResponseMutationOptions } from "frontend/lib/data/useMutate/useWaitForResponseMutationOptions";
+import { MutationHelpers } from "frontend/lib/data/useMutate/mutation-helpers";
+import { useApiMutateOptimisticOptions } from "frontend/lib/data/useMutate/useApiMutateOptimisticOptions";
+import { useApi } from "frontend/lib/data/useApi";
+import { getQueryCachekey } from "frontend/lib/data/constants/getQueryCacheKey";
 import { IKeyValue } from "./types";
 
 export const INTEGRATIONS_GROUP_ENDPOINT = (
@@ -39,7 +36,7 @@ export function useIntegrationConfigurationUpsertationMutation(
 
   return useMutation(
     async (data: { key: string; value: string }) =>
-      await makePutRequest(`/api/integrations/${group}/${data.key}`, {
+      await makeActionRequest("PUT", `/api/integrations/${group}/${data.key}`, {
         value: data.value,
         _password: rootPassword,
       }),
@@ -62,7 +59,7 @@ export function useIntegrationConfigurationDeletionMutation(
 
   return useMutation(
     async (key: string) =>
-      await makeDeleteRequest(`/api/integrations/${group}/${key}`, {
+      await makeActionRequest("DELETE", `/api/integrations/${group}/${key}`, {
         _password: rootPassword,
       }),
     apiMutateOptions

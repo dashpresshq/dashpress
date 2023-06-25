@@ -2,7 +2,7 @@ import React from "react";
 import { AuthLayout } from "frontend/_layouts/guest";
 import { useSetupCheck } from "frontend/hooks/setup/setup.store";
 import { FormSkeleton, FormSkeletonSchema } from "@hadmean/chromista";
-import { NAVIGATION_LINKS } from "frontend/lib/routing";
+import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { UserSetupForm } from "./Form";
 import { useSetupUserMutation } from "../setup.store";

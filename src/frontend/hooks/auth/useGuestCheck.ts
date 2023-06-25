@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import { useEffect } from "react";
-import { NAVIGATION_LINKS } from "frontend/lib/routing";
+import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
 import { useUserAuthenticatedState } from "./useAuthenticateUser";
 
 export const useGuestCheck = () => {

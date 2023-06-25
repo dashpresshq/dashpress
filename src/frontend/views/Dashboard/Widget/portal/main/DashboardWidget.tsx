@@ -1,7 +1,7 @@
 import { IPortalWidgetConfig } from "shared/types/portal/widgets/main";
-import { noop } from "lodash";
 import { forwardRef } from "react";
-import { DataStateKeys } from "@hadmean/protozoa";
+import { DataStateKeys } from "frontend/lib/data/types";
+import { noop } from "shared/lib/noop";
 import { IWidgetSettingProps } from "../../_components/WidgetHeader/types";
 
 interface IProps {

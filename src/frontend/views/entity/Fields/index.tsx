@@ -6,12 +6,6 @@ import {
   SortList,
   Tabs,
 } from "@hadmean/chromista";
-import { SLUG_LOADING_VALUE } from "@hadmean/protozoa";
-import {
-  useChangeRouterParam,
-  useRouteParam,
-  useSetPageDetails,
-} from "frontend/lib/routing";
 import { USER_PERMISSIONS } from "shared/constants/user";
 import {
   useEntityFieldLabels,
@@ -20,6 +14,7 @@ import {
   useEntityFieldValidations,
   useEntitySlug,
 } from "frontend/hooks/entity/entity.config";
+import { SLUG_LOADING_VALUE } from "frontend/lib/routing/constants";
 import {
   ENTITY_FIELDS_ENDPOINT,
   useEntityFieldLists,
@@ -33,6 +28,9 @@ import { MAKE_APP_CONFIGURATION_CRUD_CONFIG } from "frontend/hooks/configuration
 import { FieldsSettingsDocumentation } from "frontend/docs/fields";
 import { useState } from "react";
 import { DOCUMENTATION_LABEL } from "frontend/docs";
+import { useRouteParam } from "frontend/lib/routing/useRouteParam";
+import { useChangeRouterParam } from "frontend/lib/routing/useChangeRouterParam";
+import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
 import { BaseEntitySettingsLayout } from "../_Base";
 import { FieldsLabelForm, loadingFieldsLabelForm } from "./FieldsLabel.form";
 import { FieldsTypeForm } from "./FieldsType.form";

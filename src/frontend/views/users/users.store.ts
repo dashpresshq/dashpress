@@ -1,12 +1,3 @@
-import {
-  MutationHelpers,
-  makeDeleteRequest,
-  makePatchRequest,
-  makePostRequest,
-  useApi,
-  useApiMutateOptimisticOptions,
-  useWaitForResponseMutationOptions,
-} from "@hadmean/protozoa";
 import { isRouterParamEnabled } from "frontend/hooks";
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
 import { useRouter } from "next/router";
@@ -14,7 +5,12 @@ import { useMutation } from "react-query";
 import { ICreateUserForm } from "shared/form-schemas/users/create";
 import { IResetPasswordForm } from "shared/form-schemas/users/reset-password";
 import { IAccountProfile } from "shared/types/user";
-import { MAKE_CRUD_CONFIG } from "frontend/lib/makeCrudConfig";
+import { MAKE_CRUD_CONFIG } from "frontend/lib/crud-config";
+import { useApi } from "frontend/lib/data/useApi";
+import { useApiMutateOptimisticOptions } from "frontend/lib/data/useMutate/useApiMutateOptimisticOptions";
+import { makeActionRequest } from "frontend/lib/data/makeRequest";
+import { MutationHelpers } from "frontend/lib/data/useMutate/mutation-helpers";
+import { useWaitForResponseMutationOptions } from "frontend/lib/data/useMutate/useWaitForResponseMutationOptions";
 import { useUsernameFromRouteParam } from "./hooks";
 
 export const ADMIN_USERS_CRUD_CONFIG = MAKE_CRUD_CONFIG({
@@ -59,7 +55,8 @@ export function useUserDeletionMutation() {
 
   return useMutation(
     async (username: string) =>
-      await makeDeleteRequest(
+      await makeActionRequest(
+        "DELETE",
         ADMIN_USERS_CRUD_CONFIG.ENDPOINTS.DELETE(username)
       ),
     apiMutateOptions
@@ -78,7 +75,8 @@ export function useUpdateUserMutation() {
 
   return useMutation(
     async (data: Partial<IAccountProfile>) =>
-      await makePatchRequest(
+      await makeActionRequest(
+        "PATCH",
         ADMIN_USERS_CRUD_CONFIG.ENDPOINTS.UPDATE(username),
         data
       ),
@@ -95,7 +93,8 @@ export function useResetUserPasswordMutation() {
 
   return useMutation(
     async (data: IResetPasswordForm) =>
-      await makePatchRequest(
+      await makeActionRequest(
+        "PATCH",
         ADMIN_USERS_CRUD_CONFIG.ENDPOINTS.CUSTOM(username, "reset-password"),
         data
       ),
@@ -117,7 +116,11 @@ export function useCreateUserMutation() {
   });
 
   return useMutation(async (data: ICreateUserForm) => {
-    await makePostRequest(ADMIN_USERS_CRUD_CONFIG.ENDPOINTS.CREATE, data);
+    await makeActionRequest(
+      "POST",
+      ADMIN_USERS_CRUD_CONFIG.ENDPOINTS.CREATE,
+      data
+    );
     return data;
   }, apiMutateOptions);
 }

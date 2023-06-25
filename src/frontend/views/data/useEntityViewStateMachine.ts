@@ -2,7 +2,7 @@ import { isRouterParamEnabled } from "frontend/hooks";
 import { useAppConfiguration } from "frontend/hooks/configuration/configuration.store";
 import { useEntitySlug } from "frontend/hooks/entity/entity.config";
 import { IEntityCrudSettings } from "shared/configurations";
-import { userFriendlyCase } from "shared/lib/strings";
+import { userFriendlyCase } from "shared/lib/strings/friendly-case";
 import { useCanUserPerformCrudAction } from "./useCanUserPerformCrudAction";
 
 export const useEntityViewStateMachine = (

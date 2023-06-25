@@ -1,16 +1,9 @@
-import { createStore } from "@hadmean/protozoa";
+import { createStore } from "frontend/lib/store";
 import { ROOT_LINKS_TO_CLEAR_BREADCRUMBS } from "frontend/_layouts/app/constants";
 import { useRouter } from "next/router";
 import { useEffect, useMemo } from "react";
+import { TemporayStorageService } from "frontend/lib/storage";
 import { usePageDetailsStore } from "./usePageDetails";
-
-export const TemporayStorageService = {
-  getString: (path: string): string | null =>
-    typeof window !== "undefined" && window.sessionStorage.getItem(path),
-  setString: (path: string, value: string): void =>
-    window.sessionStorage.setItem(path, value),
-  removeString: (path: string): void => window.sessionStorage.removeItem(path),
-};
 
 const key = "__go_back_context__";
 

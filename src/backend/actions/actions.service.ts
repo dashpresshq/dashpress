@@ -16,7 +16,6 @@ import { validateSchemaRequestBody } from "backend/lib/errors/validate-schema-re
 import { IApplicationService } from "backend/types";
 import { nanoid } from "nanoid";
 import { INTEGRATIONS_GROUP_CONFIG } from "shared/config-bag/integrations";
-import { TemplateService } from "shared/lib/templates";
 import {
   IIntegrationsList,
   IActionInstance,
@@ -26,6 +25,7 @@ import {
   ActionIntegrationKeys,
 } from "shared/types/actions";
 import { IAccountProfile } from "shared/types/user";
+import { compileTemplateString } from "shared/lib/strings/templates";
 import { ACTION_INTEGRATIONS } from "./integrations";
 
 export class ActionsApiService implements IApplicationService {
@@ -98,7 +98,7 @@ export class ActionsApiService implements IApplicationService {
       const compiledConfiguration = Object.fromEntries(
         Object.entries(configuration || {}).map(([key, value]) => [
           key,
-          TemplateService.compile(value, {
+          compileTemplateString(value, {
             data,
             [INTEGRATIONS_GROUP_CONFIG.constants.prefix]: appConstants,
             [INTEGRATIONS_GROUP_CONFIG.credentials.prefix]: credentials,

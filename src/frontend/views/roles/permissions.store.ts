@@ -1,13 +1,10 @@
-import {
-  makeDeleteRequest,
-  makePostRequest,
-  MutationHelpers,
-  useApiMutateOptimisticOptions,
-  useStorageApi,
-} from "@hadmean/protozoa";
 import { isRouterParamEnabled } from "frontend/hooks";
 import { useMutation } from "react-query";
-import { MAKE_CRUD_CONFIG } from "frontend/lib/makeCrudConfig";
+import { MAKE_CRUD_CONFIG } from "frontend/lib/crud-config";
+import { useStorageApi } from "frontend/lib/data/useApi";
+import { useApiMutateOptimisticOptions } from "frontend/lib/data/useMutate/useApiMutateOptimisticOptions";
+import { MutationHelpers } from "frontend/lib/data/useMutate/mutation-helpers";
+import { makeActionRequest } from "frontend/lib/data/makeRequest";
 import { useRoleIdFromRouteParam } from "./hooks";
 import { ADMIN_ROLES_CRUD_CONFIG } from "./roles.store";
 
@@ -40,7 +37,7 @@ export function useRolePermissionDeletionMutation() {
   });
 
   return useMutation(async (permissions: string[]) => {
-    await makeDeleteRequest(ADMIN_ROLE_PERMISSION_ENDPOINT(roleId), {
+    await makeActionRequest("DELETE", ADMIN_ROLE_PERMISSION_ENDPOINT(roleId), {
       permissions,
     });
   }, apiMutateOptions);
@@ -57,7 +54,7 @@ export function useCreateRolePermissionMutation() {
 
   return useMutation(
     async (permissions: string[]) =>
-      await makePostRequest(ADMIN_ROLE_PERMISSION_ENDPOINT(roleId), {
+      await makeActionRequest("POST", ADMIN_ROLE_PERMISSION_ENDPOINT(roleId), {
         permissions,
       }),
     apiMutateOptions

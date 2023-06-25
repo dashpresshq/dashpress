@@ -1,6 +1,7 @@
-import { AppStorage, useApiQueries } from "@hadmean/protozoa";
 import { useCallback } from "react";
-import { userFriendlyCase } from "shared/lib/strings";
+import { userFriendlyCase } from "shared/lib/strings/friendly-case";
+import { useApiQueries } from "frontend/lib/data/useApi/useApiQueries";
+import { AppStorage } from "frontend/lib/storage/app";
 import { configurationApiPath } from "../configuration/configuration.store";
 
 export function useEntityDictionPlurals<T, P extends keyof T>(

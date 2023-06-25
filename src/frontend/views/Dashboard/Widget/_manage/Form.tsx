@@ -12,17 +12,11 @@ import {
   BREAKPOINTS,
   Spacer,
 } from "@hadmean/chromista";
-import {
-  required,
-  IFormProps,
-  makePostRequest,
-  resetFormValues,
-} from "@hadmean/protozoa";
+
 import { useEntityConfiguration } from "frontend/hooks/configuration/configuration.store";
 import { Field, Form } from "react-final-form";
 import { ITableTab } from "shared/types/data";
 import { ISummaryWidgetConfig, IWidgetConfig } from "shared/types/dashboard";
-import { ILabelValue } from "types";
 import { ROYGBIV } from "shared/constants/colors";
 import { IconInputField } from "frontend/components/IconInputField";
 import { useMutation } from "react-query";
@@ -31,6 +25,11 @@ import { useEffect, useState } from "react";
 import { DOCUMENTATION_LABEL } from "frontend/docs";
 import { WidgetScriptDocumentation } from "frontend/docs/scripts/widget-scripts";
 import styled from "styled-components";
+import { required } from "frontend/lib/validations";
+import { resetFormValues } from "frontend/lib/form/utils";
+import { makeActionRequest } from "frontend/lib/data/makeRequest";
+import { IFormProps } from "frontend/lib/form/types";
+import { ILabelValue } from "shared/types/options";
 import { DASHBOARD_WIDGET_HEIGHTS, DASHBOARD_WIDGET_SIZES } from "./constants";
 import { WidgetFormField } from "./types";
 import { PortalFormFields, PortalFormSchema } from "./portal";
@@ -67,7 +66,7 @@ const FormSchema: Partial<Record<IWidgetConfig["_type"], WidgetFormField[]>> = {
 export function useRunWidgetScript() {
   return useMutation(
     async (script: string) =>
-      await makePostRequest(`/api/dashboards/script`, { script })
+      await makeActionRequest("POST", `/api/dashboards/script`, { script })
   );
 }
 

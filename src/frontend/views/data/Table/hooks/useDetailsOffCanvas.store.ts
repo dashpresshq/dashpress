@@ -1,4 +1,4 @@
-import { createStore } from "@hadmean/protozoa";
+import { createStore } from "frontend/lib/store";
 
 type IStore = {
   entity: string;

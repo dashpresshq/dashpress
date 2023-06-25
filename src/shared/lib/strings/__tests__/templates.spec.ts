@@ -1,15 +1,15 @@
-import { TemplateService } from ".";
+import { compileTemplateString } from "../templates";
 
 describe("Template service", () => {
   it("should compiles templates successfully", async () => {
     expect(
-      TemplateService.compile("{{ name }} is {{ age }}", {
+      compileTemplateString("{{ name }} is {{ age }}", {
         name: "John",
         age: 23,
       })
     ).toEqual("John is 23");
     expect(
-      TemplateService.compile("{ name } is {{ age }}", {
+      compileTemplateString("{ name } is {{ age }}", {
         name: "John",
         age: 23,
       })
@@ -18,7 +18,7 @@ describe("Template service", () => {
 
   it("should returns empty string for undefined template", async () => {
     expect(
-      TemplateService.compile("{ name } is {{ age }}", {
+      compileTemplateString("{ name } is {{ age }}", {
         name: "John",
       })
     ).toEqual("{ name } is ");
@@ -26,7 +26,7 @@ describe("Template service", () => {
 
   it("should compile objects", async () => {
     expect(
-      TemplateService.compile("{{ person.name }}", {
+      compileTemplateString("{{ person.name }}", {
         person: { name: "John" },
       })
     ).toEqual("John");
@@ -34,7 +34,7 @@ describe("Template service", () => {
 
   it("should return error message", async () => {
     expect(
-      TemplateService.compile(undefined, {
+      compileTemplateString(undefined, {
         person: { name: "John" },
       })
     ).toBe(

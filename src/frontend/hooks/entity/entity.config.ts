@@ -2,20 +2,20 @@ import { useCallback } from "react";
 import uniqBy from "lodash/uniqBy";
 import { IFieldValidationItem } from "shared/validations/types";
 import { IColorableSelection } from "shared/types/ui";
-import { useRouteParam } from "frontend/lib/routing";
 import {
   getEntityFieldTypes,
   getEntitySelections,
 } from "shared/logic/entities";
-import { MAKE_CRUD_CONFIG } from "frontend/lib/makeCrudConfig";
-import { DataStateKeys } from "@hadmean/protozoa";
 import { DataCrudKeys } from "shared/types/data";
 import { CRUD_KEY_CONFIG } from "shared/configurations/permissions";
+import { DataStateKeys } from "frontend/lib/data/types";
+import { useRouteParam } from "frontend/lib/routing/useRouteParam";
+import { MAKE_CRUD_CONFIG } from "frontend/lib/crud-config";
 import {
   getFieldTypeBoundedValidations,
   guessEntityValidations,
 } from "./guess";
-import { userFriendlyCase } from "../../../shared/lib/strings";
+import { userFriendlyCase } from "../../../shared/lib/strings/friendly-case";
 import { FIELD_TYPES_CONFIG_MAP } from "../../../shared/validations";
 import { useEntityFields } from "./entity.store";
 import { IEntityCrudSettings } from "../../../shared/configurations";

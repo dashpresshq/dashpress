@@ -1,6 +1,5 @@
-import { PaginatedData } from "@hadmean/protozoa";
 import { IApplicationService } from "backend/types";
-import { QueryFilterSchema } from "shared/types/data";
+import { PaginatedData, QueryFilterSchema } from "shared/types/data";
 import { IAccountProfile } from "shared/types/user";
 
 export interface IPaginationFilters {

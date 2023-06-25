@@ -1,4 +1,4 @@
-import { userFriendlyCase } from "shared/lib/strings";
+import { userFriendlyCase } from "shared/lib/strings/friendly-case";
 import { USER_PERMISSIONS } from "shared/constants/user";
 import { DocumentationRoot, IDocumentationRootProps } from "./_base";
 

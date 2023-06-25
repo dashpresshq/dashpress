@@ -4,7 +4,7 @@ import {
   SoftButton,
   Spacer,
 } from "@hadmean/chromista";
-import { useNavigationStack } from "frontend/lib/routing";
+import { useNavigationStack } from "frontend/lib/routing/useNavigationStack";
 import { useRouter } from "next/router";
 import { ReactNode } from "react";
 import { useEntitySlug } from "frontend/hooks/entity/entity.config";

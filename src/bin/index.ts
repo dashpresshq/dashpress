@@ -1,22 +1,25 @@
 /* eslint-disable no-console */
-
+import * as randomstring from "randomstring";
 import { checkNodeVersion } from "./checkNodeVersion";
-
+// TODO test this compiles well
 (async () => {
   const path = require("path");
   const fs = require("fs-extra");
-  const { StringUtils } = require("@hadmean/protozoa");
   const { default: terminalLink } = await import("terminal-link");
   const { execa } = await import("execa");
 
   const { default: fetch } = await import("node-fetch");
+
+  const generateRandomString = (length = 12): string => {
+    return randomstring.generate(length);
+  };
 
   const replaceRandomCharaters = (envContent: string) => {
     return ["CREDENTIALS_ENCRYPTION_KEY", "AUTH_TOKEN_KEY"].reduce(
       (reducedEnvContent, currentKey) => {
         return reducedEnvContent.replace(
           `${currentKey}=RANDOM_CHARACTERS`,
-          `${currentKey}=${StringUtils.generateRandomString(128)}`
+          `${currentKey}=${generateRandomString(128)}`
         );
       },
       envContent

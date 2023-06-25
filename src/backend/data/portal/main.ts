@@ -1,5 +1,5 @@
 /* eslint-disable max-classes-per-file */
-import noop from "lodash/noop";
+import { noop } from "shared/lib/noop";
 import { IDataApiService } from "../types";
 
 export class PortalDataHooksService {

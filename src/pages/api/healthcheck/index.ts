@@ -1,4 +1,4 @@
-import noop from "lodash/noop";
+import { noop } from "shared/lib/noop";
 import { requestHandler } from "backend/lib/request";
 import { configurationApiService } from "backend/configuration/configuration.service";
 import {

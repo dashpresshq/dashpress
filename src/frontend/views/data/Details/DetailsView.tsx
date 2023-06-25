@@ -1,5 +1,5 @@
 import { BaseSkeleton, Spacer, Typo } from "@hadmean/chromista";
-import { SLUG_LOADING_VALUE } from "@hadmean/protozoa";
+import { SLUG_LOADING_VALUE } from "frontend/lib/routing/constants";
 import React, { Fragment } from "react";
 import {
   useAppConfiguration,

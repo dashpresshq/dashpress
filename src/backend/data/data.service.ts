@@ -1,16 +1,19 @@
 import { NotFoundError, progammingError } from "backend/lib/errors";
-import { QueryFilterSchema } from "shared/types/data";
+import {
+  FilterOperators,
+  PaginatedData,
+  QueryFilterSchema,
+} from "shared/types/data";
 import {
   actionsApiService,
   ActionsApiService,
 } from "backend/actions/actions.service";
 import { BaseAction } from "shared/types/actions";
 import { IFieldValidationItem } from "shared/validations/types";
-import noop from "lodash/noop";
 import { IEntityField } from "shared/types/db";
-import { TemplateService } from "shared/lib/templates";
-import { FilterOperators, PaginatedData } from "@hadmean/protozoa";
 import { IAccountProfile } from "shared/types/user";
+import { noop } from "shared/lib/noop";
+import { compileTemplateString } from "shared/lib/strings/templates";
 import { rDBMSDataApiService, RDBMSDataApiService } from "./data-access/RDBMS";
 import { IDataApiService, IPaginationFilters } from "./types";
 import {
@@ -84,7 +87,7 @@ export class DataApiService implements IDataApiService {
       }
     );
 
-    return TemplateService.compile(relationshipSettings.format, data);
+    return compileTemplateString(relationshipSettings.format, data);
   }
 
   async showData(
@@ -196,7 +199,7 @@ export class DataApiService implements IDataApiService {
     return data.map((datum: Record<string, unknown>) => {
       return {
         value: datum[primaryField],
-        label: TemplateService.compile(relationshipSettings.format, datum),
+        label: compileTemplateString(relationshipSettings.format, datum),
       };
     });
   }

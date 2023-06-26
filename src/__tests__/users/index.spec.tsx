@@ -1,7 +1,7 @@
 import "@testing-library/jest-dom";
 import React from "react";
 import { render, screen, within, waitFor } from "@testing-library/react";
-import { AppWrapper } from "@hadmean/chromista";
+import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 
 import ListUsers from "pages/users";
 
@@ -18,9 +18,9 @@ describe("pages/users", () => {
       asPath: "/",
     }));
     render(
-      <AppWrapper>
+      <ApplicationRoot>
         <ListUsers />
-      </AppWrapper>
+      </ApplicationRoot>
     );
 
     expect(
@@ -52,9 +52,9 @@ describe("pages/users", () => {
     }));
 
     render(
-      <AppWrapper>
+      <ApplicationRoot>
         <ListUsers />
-      </AppWrapper>
+      </ApplicationRoot>
     );
     await userEvent.click(screen.getByRole("button", { name: "Add New User" }));
     await waitFor(() => {
@@ -71,9 +71,9 @@ describe("pages/users", () => {
     }));
 
     render(
-      <AppWrapper>
+      <ApplicationRoot>
         <ListUsers />
-      </AppWrapper>
+      </ApplicationRoot>
     );
 
     const tableRows = await screen.findAllByRole("link", { name: "Edit" });
@@ -94,9 +94,9 @@ describe("pages/users", () => {
     }));
 
     render(
-      <AppWrapper>
+      <ApplicationRoot>
         <ListUsers />
-      </AppWrapper>
+      </ApplicationRoot>
     );
 
     const tableRows = await screen.findAllByRole("row");

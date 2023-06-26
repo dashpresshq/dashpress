@@ -18,7 +18,6 @@ import {
   sortByListOrder,
 } from "backend/list-order/list-order.service";
 import { rolesApiService, RolesApiService } from "backend/roles/roles.service";
-import { IValueLabel } from "@hadmean/chromista/dist/types";
 import { userFriendlyCase } from "shared/lib/strings/friendly-case";
 import { nanoid } from "nanoid";
 import { ROYGBIV } from "shared/constants/colors";
@@ -30,6 +29,7 @@ import {
 } from "backend/data/data-access/RDBMS";
 import { GranularEntityPermissions, IAccountProfile } from "shared/types/user";
 import { relativeDateNotationToActualDate } from "backend/data/data-access/time.constants";
+import { ILabelValue } from "shared/types/options";
 import {
   mutateGeneratedDashboardWidgets,
   PORTAL_DASHBOARD_PERMISSION,
@@ -125,7 +125,7 @@ export class DashboardWidgetsApiService implements IApplicationService {
     return defaultWidgets;
   }
 
-  private generateDashboardWidgets = async (entitiesToShow: IValueLabel[]) => {
+  private generateDashboardWidgets = async (entitiesToShow: ILabelValue[]) => {
     const colorsList = Object.keys(ROYGBIV);
 
     const DEFAULT_NUMBER_OF_SUMMARY_CARDS = 8;

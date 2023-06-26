@@ -2,7 +2,7 @@
 import "@testing-library/jest-dom";
 import React from "react";
 import { render, screen, waitFor } from "@testing-library/react";
-import { AppWrapper } from "@hadmean/chromista";
+import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 import userEvent from "@testing-library/user-event";
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 
@@ -22,9 +22,9 @@ describe("pages/admin/[entity]/config/presentation", () => {
 
   it("should show current section value", async () => {
     render(
-      <AppWrapper>
+      <ApplicationRoot>
         <EntityPresentationScriptSettings />
-      </AppWrapper>
+      </ApplicationRoot>
     );
 
     await waitFor(() => {
@@ -34,9 +34,9 @@ describe("pages/admin/[entity]/config/presentation", () => {
 
   it("should update when provided value correctly", async () => {
     render(
-      <AppWrapper>
+      <ApplicationRoot>
         <EntityPresentationScriptSettings />
-      </AppWrapper>
+      </ApplicationRoot>
     );
 
     await userEvent.type(
@@ -57,9 +57,9 @@ describe("pages/admin/[entity]/config/presentation", () => {
 
   it("should display updated value", async () => {
     render(
-      <AppWrapper>
+      <ApplicationRoot>
         <EntityPresentationScriptSettings />
-      </AppWrapper>
+      </ApplicationRoot>
     );
 
     await waitFor(() => {
@@ -71,9 +71,9 @@ describe("pages/admin/[entity]/config/presentation", () => {
 
   it("should not update when invalid JS is provided", async () => {
     render(
-      <AppWrapper>
+      <ApplicationRoot>
         <EntityPresentationScriptSettings />
-      </AppWrapper>
+      </ApplicationRoot>
     );
 
     await userEvent.type(screen.getByLabelText("Script"), "invalid");
@@ -90,9 +90,9 @@ describe("pages/admin/[entity]/config/presentation", () => {
 
   it("should display previous section value", async () => {
     render(
-      <AppWrapper>
+      <ApplicationRoot>
         <EntityPresentationScriptSettings />
-      </AppWrapper>
+      </ApplicationRoot>
     );
 
     await waitFor(() => {
@@ -104,9 +104,9 @@ describe("pages/admin/[entity]/config/presentation", () => {
 
   it("should be able to be cleared", async () => {
     render(
-      <AppWrapper>
+      <ApplicationRoot>
         <EntityPresentationScriptSettings />
-      </AppWrapper>
+      </ApplicationRoot>
     );
 
     await userEvent.clear(screen.getByLabelText("Script"));
@@ -123,9 +123,9 @@ describe("pages/admin/[entity]/config/presentation", () => {
 
   it("should display cleared value correctly", async () => {
     render(
-      <AppWrapper>
+      <ApplicationRoot>
         <EntityPresentationScriptSettings />
-      </AppWrapper>
+      </ApplicationRoot>
     );
 
     await waitFor(() => {
@@ -135,9 +135,9 @@ describe("pages/admin/[entity]/config/presentation", () => {
 
   //   it("should show the documentation panel", async () => {
   //     render(
-  //       <AppWrapper>
+  //       <ApplicationRoot>
   //         <EntityPresentationScriptSettings />
-  //       </AppWrapper>
+  //       </ApplicationRoot>
   //     );
 
   //     await userEvent.click(

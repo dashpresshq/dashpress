@@ -1,8 +1,8 @@
+import { SectionBox } from "frontend/design-system/components/Section/SectionBox";
 import {
   FormSkeleton,
   FormSkeletonSchema,
-  SectionBox,
-} from "@hadmean/chromista";
+} from "frontend/design-system/components/Skeleton/Form";
 import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
 import { USER_PERMISSIONS } from "shared/constants/user";
 import {

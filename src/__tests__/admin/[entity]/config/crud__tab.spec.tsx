@@ -1,7 +1,7 @@
 import "@testing-library/jest-dom";
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import { AppWrapper } from "@hadmean/chromista";
+import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 import userEvent from "@testing-library/user-event";
 import EntityCrudSettings from "pages/admin/[entity]/config/crud";
 import { rest } from "msw";
@@ -42,9 +42,9 @@ describe("pages/admin/[entity]/config/crud", () => {
 
   it("should defaults to table", async () => {
     render(
-      <AppWrapper>
+      <ApplicationRoot>
         <EntityCrudSettings />
-      </AppWrapper>
+      </ApplicationRoot>
     );
 
     expect(
@@ -59,9 +59,9 @@ describe("pages/admin/[entity]/config/crud", () => {
     { tab: "Delete" },
   ])("should be tab-able to $tab", async ({ tab }) => {
     render(
-      <AppWrapper>
+      <ApplicationRoot>
         <EntityCrudSettings />
-      </AppWrapper>
+      </ApplicationRoot>
     );
     expect(
       await screen.findByRole("button", {
@@ -95,9 +95,9 @@ describe("pages/admin/[entity]/config/crud", () => {
       },
     }));
     render(
-      <AppWrapper>
+      <ApplicationRoot>
         <EntityCrudSettings />
-      </AppWrapper>
+      </ApplicationRoot>
     );
 
     expect(

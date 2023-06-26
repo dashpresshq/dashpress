@@ -1,7 +1,7 @@
 import "@testing-library/jest-dom";
 import React from "react";
 import { render, screen, waitFor } from "@testing-library/react";
-import { AppWrapper } from "@hadmean/chromista";
+import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 import userEvent from "@testing-library/user-event";
 import EntitiesSettings from "pages/admin/settings/entities";
 
@@ -20,9 +20,9 @@ describe("pages/admin/settings/entities", () => {
 
   it("should display all entities with correct state", async () => {
     render(
-      <AppWrapper>
+      <ApplicationRoot>
         <EntitiesSettings />
-      </AppWrapper>
+      </ApplicationRoot>
     );
 
     await waitFor(async () => {
@@ -54,9 +54,9 @@ describe("pages/admin/settings/entities", () => {
 
   it("should toggle entities state successfully", async () => {
     render(
-      <AppWrapper>
+      <ApplicationRoot>
         <EntitiesSettings />
-      </AppWrapper>
+      </ApplicationRoot>
     );
 
     await userEvent.click(
@@ -86,9 +86,9 @@ describe("pages/admin/settings/entities", () => {
 
   it("should display updated entities state", async () => {
     render(
-      <AppWrapper>
+      <ApplicationRoot>
         <EntitiesSettings />
-      </AppWrapper>
+      </ApplicationRoot>
     );
 
     expect(

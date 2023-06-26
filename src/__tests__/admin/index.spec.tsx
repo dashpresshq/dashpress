@@ -1,7 +1,7 @@
 import "@testing-library/jest-dom";
 import React from "react";
 import { render, screen, within } from "@testing-library/react";
-import { AppWrapper } from "@hadmean/chromista";
+import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 
 import Dashboard from "pages";
 
@@ -20,9 +20,9 @@ useRouter.mockImplementation(() => ({
 
 // it("should change relative time", async () => {
 //   render(
-//     <AppWrapper>
+//     <ApplicationRoot>
 //       <Dashboard />
-//     </AppWrapper>
+//     </ApplicationRoot>
 //   );
 
 //   await userEvent.click(
@@ -54,9 +54,9 @@ useRouter.mockImplementation(() => ({
 describe("pages/admin", () => {
   it("should render table dashboard widget correctly", async () => {
     render(
-      <AppWrapper>
+      <ApplicationRoot>
         <Dashboard />
-      </AppWrapper>
+      </ApplicationRoot>
     );
 
     const widget = await screen.findByLabelText("Foo Table Widget");
@@ -79,9 +79,9 @@ describe("pages/admin", () => {
 
   it("should render summary card widget correctly", async () => {
     render(
-      <AppWrapper>
+      <ApplicationRoot>
         <Dashboard />
-      </AppWrapper>
+      </ApplicationRoot>
     );
 
     const widget = await screen.findByLabelText("Bar Card Widget");
@@ -126,9 +126,9 @@ describe("pages/admin", () => {
 
   it("should render correct buttons for table widget", async () => {
     render(
-      <AppWrapper>
+      <ApplicationRoot>
         <Dashboard />
-      </AppWrapper>
+      </ApplicationRoot>
     );
 
     const widget = await screen.findByLabelText("Foo Table Widget");
@@ -147,9 +147,9 @@ describe("pages/admin", () => {
 
   it("should render correct buttons for summary card widget", async () => {
     render(
-      <AppWrapper>
+      <ApplicationRoot>
         <Dashboard />
-      </AppWrapper>
+      </ApplicationRoot>
     );
 
     const widget = await screen.findByLabelText("Bar Card Widget");
@@ -172,9 +172,9 @@ describe("pages/admin", () => {
       }));
 
       render(
-        <AppWrapper>
+        <ApplicationRoot>
           <Dashboard />
-        </AppWrapper>
+        </ApplicationRoot>
       );
 
       await userEvent.click(

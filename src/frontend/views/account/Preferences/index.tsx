@@ -1,12 +1,12 @@
-import {
-  FormSkeleton,
-  FormSkeletonSchema,
-  SectionBox,
-} from "@hadmean/chromista";
 import { useAuthenticatedUserPreferences } from "frontend/hooks/auth/user.store";
 import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { META_USER_PERMISSIONS } from "shared/constants/user";
+import { SectionBox } from "frontend/design-system/components/Section/SectionBox";
+import {
+  FormSkeleton,
+  FormSkeletonSchema,
+} from "frontend/design-system/components/Skeleton/Form";
 import { useUpdateUserPreferencesMutation } from "../account.store";
 import {
   ACCOUNT_PREFERENCES_CRUD_CONFIG,

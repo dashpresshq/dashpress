@@ -1,4 +1,7 @@
-import { FormSkeleton, FormSkeletonSchema } from "@hadmean/chromista";
+import {
+  FormSkeleton,
+  FormSkeletonSchema,
+} from "frontend/design-system/components/Skeleton/Form";
 import { SchemaForm } from "frontend/components/SchemaForm";
 import { useEntityConfiguration } from "frontend/hooks/configuration/configuration.store";
 import {

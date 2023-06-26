@@ -1,7 +1,7 @@
 import "@testing-library/jest-dom";
 import React from "react";
 import { render, screen, waitFor } from "@testing-library/react";
-import { AppWrapper } from "@hadmean/chromista";
+import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 import userEvent from "@testing-library/user-event";
 import AccountPassword from "pages/account/password";
 
@@ -22,9 +22,9 @@ describe("pages/account/logout", () => {
 
   it("should log user out", async () => {
     render(
-      <AppWrapper>
+      <ApplicationRoot>
         <AccountPassword />
-      </AppWrapper>
+      </ApplicationRoot>
     );
 
     await userEvent.click(

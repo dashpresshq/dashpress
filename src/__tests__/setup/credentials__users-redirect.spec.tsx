@@ -1,6 +1,6 @@
 import * as React from "react";
 import { render, waitFor } from "@testing-library/react";
-import { AppWrapper } from "@hadmean/chromista";
+import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 import { rest } from "msw";
 import { BASE_TEST_URL } from "__tests__/_/api-handlers/_utils";
@@ -41,9 +41,9 @@ describe("pages/setup/credentials", () => {
     );
 
     render(
-      <AppWrapper>
+      <ApplicationRoot>
         <CredentialsSetup />
-      </AppWrapper>
+      </ApplicationRoot>
     );
     await waitFor(() => {
       expect(replaceMock).toHaveBeenCalledWith("/setup/user");

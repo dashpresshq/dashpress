@@ -1,7 +1,7 @@
 import "@testing-library/jest-dom";
 import React from "react";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
-import { AppWrapper } from "@hadmean/chromista";
+import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 import userEvent from "@testing-library/user-event";
 import ThemeSettings from "pages/admin/settings/theme";
 
@@ -19,9 +19,9 @@ describe("pages/admin/settings/theme", () => {
 
   it("should display theme values", async () => {
     render(
-      <AppWrapper>
+      <ApplicationRoot>
         <ThemeSettings />
-      </AppWrapper>
+      </ApplicationRoot>
     );
     await waitFor(() => {
       expect(screen.getByLabelText("Dark Color Scheme")).toHaveValue("#111111");
@@ -34,9 +34,9 @@ describe("pages/admin/settings/theme", () => {
 
   it("should update theme settings successfully", async () => {
     render(
-      <AppWrapper>
+      <ApplicationRoot>
         <ThemeSettings />
-      </AppWrapper>
+      </ApplicationRoot>
     );
 
     fireEvent.input(screen.getByLabelText("Dark Color Scheme"), {
@@ -54,9 +54,9 @@ describe("pages/admin/settings/theme", () => {
 
   it("should display updated theme values", async () => {
     render(
-      <AppWrapper>
+      <ApplicationRoot>
         <ThemeSettings />
-      </AppWrapper>
+      </ApplicationRoot>
     );
     await waitFor(() => {
       expect(screen.getByLabelText("Dark Color Scheme")).toHaveValue("#123456");
@@ -68,9 +68,9 @@ describe("pages/admin/settings/theme", () => {
 
   it("should update user preference and switch color successfully", async () => {
     render(
-      <AppWrapper>
+      <ApplicationRoot>
         <ThemeSettings />
-      </AppWrapper>
+      </ApplicationRoot>
     );
 
     expect(screen.getByLabelText("Dark Color Scheme")).toBeInTheDocument();
@@ -106,9 +106,9 @@ describe("pages/admin/settings/theme", () => {
 
   it("should display updated theme values", async () => {
     render(
-      <AppWrapper>
+      <ApplicationRoot>
         <ThemeSettings />
-      </AppWrapper>
+      </ApplicationRoot>
     );
     await waitFor(() => {
       expect(screen.getByLabelText("Light Color Scheme")).toHaveValue(
@@ -127,9 +127,9 @@ describe("pages/admin/settings/theme", () => {
 
   it("should display not update the other scheme color", async () => {
     render(
-      <AppWrapper>
+      <ApplicationRoot>
         <ThemeSettings />
-      </AppWrapper>
+      </ApplicationRoot>
     );
     await userEvent.click(screen.getByRole("option", { name: "Dark" }));
 

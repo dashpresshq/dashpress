@@ -1,5 +1,8 @@
 import React from "react";
-import { FormSkeleton, FormSkeletonSchema } from "@hadmean/chromista";
+import {
+  FormSkeleton,
+  FormSkeletonSchema,
+} from "frontend/design-system/components/Skeleton/Form";
 import { useSetupCheck } from "frontend/hooks/setup/setup.store";
 import { AuthLayout } from "frontend/_layouts/guest";
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";

@@ -1,7 +1,7 @@
 import "@testing-library/jest-dom";
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import { AppWrapper } from "@hadmean/chromista";
+import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 import EntityDetails from "pages/admin/[entity]/[id]/index";
 
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
@@ -22,9 +22,9 @@ describe("pages/admin/[entity]/[id]/index", () => {
 
   it("should show details", async () => {
     render(
-      <AppWrapper>
+      <ApplicationRoot>
         <EntityDetails />
-      </AppWrapper>
+      </ApplicationRoot>
     );
 
     expect(await screen.findByLabelText("Details Section")).toHaveTextContent(

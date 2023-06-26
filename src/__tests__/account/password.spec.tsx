@@ -1,7 +1,7 @@
 import "@testing-library/jest-dom";
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import { AppWrapper } from "@hadmean/chromista";
+import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 import userEvent from "@testing-library/user-event";
 import AccountPassword from "pages/account/password";
 
@@ -25,9 +25,9 @@ describe("pages/account/password", () => {
 
   it("should update password", async () => {
     render(
-      <AppWrapper>
+      <ApplicationRoot>
         <AccountPassword />
-      </AppWrapper>
+      </ApplicationRoot>
     );
     await userEvent.type(
       await screen.findByLabelText("Old Password"),
@@ -52,9 +52,9 @@ describe("pages/account/password", () => {
     process.env.NEXT_PUBLIC_IS_DEMO = "true";
 
     render(
-      <AppWrapper>
+      <ApplicationRoot>
         <AccountPassword />
-      </AppWrapper>
+      </ApplicationRoot>
     );
 
     await userEvent.type(

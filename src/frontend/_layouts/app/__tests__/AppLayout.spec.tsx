@@ -1,4 +1,4 @@
-import { AppWrapper } from "@hadmean/chromista";
+import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 import { render, screen } from "@testing-library/react";
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 
@@ -28,9 +28,9 @@ describe("AppLayout", () => {
 
     it("should hide demo elements when NEXT_PUBLIC_IS_DEMO is false", async () => {
       render(
-        <AppWrapper>
+        <ApplicationRoot>
           <AppLayout>Foo</AppLayout>
-        </AppWrapper>
+        </ApplicationRoot>
       );
 
       expect(screen.queryByText("Star us on Github")).not.toBeInTheDocument();
@@ -39,9 +39,9 @@ describe("AppLayout", () => {
     it("should show demo elements when NEXT_PUBLIC_IS_DEMO is true", async () => {
       process.env.NEXT_PUBLIC_IS_DEMO = "true";
       render(
-        <AppWrapper>
+        <ApplicationRoot>
           <AppLayout>Foo</AppLayout>
-        </AppWrapper>
+        </ApplicationRoot>
       );
 
       expect(

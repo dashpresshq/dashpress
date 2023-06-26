@@ -3,13 +3,13 @@ import { useMutation } from "react-query";
 import { AuthLayout } from "frontend/_layouts/guest";
 import { ISuccessfullAuthenticationResponse } from "shared/types/auth/portal";
 import { useSetupCheck } from "frontend/hooks/setup/setup.store";
-import { ComponentIsLoading } from "@hadmean/chromista";
 import { ISignInForm } from "shared/form-schemas/auth/signin";
 import { useAuthenticateUser } from "frontend/hooks/auth/useAuthenticateUser";
 import { useGuestCheck } from "frontend/hooks/auth/useGuestCheck";
 import { makeActionRequest } from "frontend/lib/data/makeRequest";
 import { ToastService } from "frontend/lib/toast";
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
+import { ComponentIsLoading } from "frontend/design-system/components/ComponentIsLoading";
 import { SignInForm } from "./Form";
 import { useHandleNoTokenAuthResponse } from "./portal";
 

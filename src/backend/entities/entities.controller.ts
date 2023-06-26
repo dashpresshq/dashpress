@@ -1,4 +1,4 @@
-import { IValueLabel } from "@hadmean/chromista/dist/types";
+import { ILabelValue } from "shared/types/options";
 import { IEntityField, IEntityRelation } from "shared/types/db";
 import {
   ConfigurationApiService,
@@ -12,15 +12,15 @@ export class EntitiesApiController {
     private _configurationApiService: ConfigurationApiService
   ) {}
 
-  async getActiveEntities(): Promise<IValueLabel[]> {
+  async getActiveEntities(): Promise<ILabelValue[]> {
     return await this._entitiesApiService.getActiveEntities();
   }
 
-  async getUserMenuEntities(userRole: string): Promise<IValueLabel[]> {
+  async getUserMenuEntities(userRole: string): Promise<ILabelValue[]> {
     return await this._entitiesApiService.getUserMenuEntities(userRole);
   }
 
-  async listAllEntities(): Promise<IValueLabel[]> {
+  async listAllEntities(): Promise<ILabelValue[]> {
     return await this._entitiesApiService.getAllEntities();
   }
 

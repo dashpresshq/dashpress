@@ -1,7 +1,7 @@
 import "@testing-library/jest-dom";
 import React from "react";
 import { render, screen, within } from "@testing-library/react";
-import { AppWrapper } from "@hadmean/chromista";
+import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 import userEvent from "@testing-library/user-event";
 import EntityCrudSettings from "pages/admin/[entity]/config/crud";
 import { rest } from "msw";
@@ -39,9 +39,9 @@ describe("pages/admin/[entity]/config/crud", () => {
       },
     }));
     render(
-      <AppWrapper>
+      <ApplicationRoot>
         <EntityCrudSettings />
-      </AppWrapper>
+      </ApplicationRoot>
     );
 
     expect(
@@ -80,9 +80,9 @@ describe("pages/admin/[entity]/config/crud", () => {
 
     it("should toggle off functionality", async () => {
       render(
-        <AppWrapper>
+        <ApplicationRoot>
           <EntityCrudSettings />
-        </AppWrapper>
+        </ApplicationRoot>
       );
 
       const currentTab = screen.getByRole("tabpanel");
@@ -111,9 +111,9 @@ describe("pages/admin/[entity]/config/crud", () => {
 
     it("should toggle on functionality", async () => {
       render(
-        <AppWrapper>
+        <ApplicationRoot>
           <EntityCrudSettings />
-        </AppWrapper>
+        </ApplicationRoot>
       );
 
       const currentTab = screen.getByRole("tabpanel");

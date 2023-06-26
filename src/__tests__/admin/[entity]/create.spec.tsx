@@ -1,7 +1,7 @@
 import "@testing-library/jest-dom";
 import React from "react";
 import { render, screen, waitFor } from "@testing-library/react";
-import { AppWrapper } from "@hadmean/chromista";
+import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 import EntityCreate from "pages/admin/[entity]/create";
 
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
@@ -21,9 +21,9 @@ describe("pages/admin/[entity]/create", () => {
 
   it("should create data", async () => {
     render(
-      <AppWrapper>
+      <ApplicationRoot>
         <EntityCreate />
-      </AppWrapper>
+      </ApplicationRoot>
     );
     await waitFor(() => {
       expect(screen.getByText("Create Singular entity-1")).toBeInTheDocument();

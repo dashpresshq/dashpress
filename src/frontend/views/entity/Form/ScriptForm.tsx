@@ -1,4 +1,7 @@
-import { FormSkeleton, FormSkeletonSchema } from "@hadmean/chromista";
+import {
+  FormSkeleton,
+  FormSkeletonSchema,
+} from "frontend/design-system/components/Skeleton/Form";
 import { SchemaForm } from "frontend/components/SchemaForm";
 import { ISchemaFormScriptParams } from "frontend/components/SchemaForm/form-run";
 import { useSchemaFormScriptContext } from "frontend/components/SchemaForm/useSchemaFormScriptContext";

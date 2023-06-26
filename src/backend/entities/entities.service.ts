@@ -1,4 +1,4 @@
-import { IValueLabel } from "@hadmean/chromista/dist/types";
+import { ILabelValue } from "shared/types/options";
 import {
   configurationApiService,
   ConfigurationApiService,
@@ -33,7 +33,7 @@ export class EntitiesApiService implements IApplicationService {
     );
   }
 
-  async getActiveEntities(): Promise<IValueLabel[]> {
+  async getActiveEntities(): Promise<ILabelValue[]> {
     const [hiddenEntities, entities] = await Promise.all([
       this._configurationApiService.show<string[]>("disabled_entities"),
       this.getAllEntities(),
@@ -41,7 +41,7 @@ export class EntitiesApiService implements IApplicationService {
     return entities.filter(({ value }) => !hiddenEntities.includes(value));
   }
 
-  async getUserMenuEntities(userRole: string): Promise<IValueLabel[]> {
+  async getUserMenuEntities(userRole: string): Promise<ILabelValue[]> {
     const [hiddenEntities, hiddenMenuEntities, entitiesOrder, entities] =
       await Promise.all([
         this._configurationApiService.show<string[]>("disabled_entities"),

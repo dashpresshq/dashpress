@@ -2,7 +2,7 @@
 import "@testing-library/jest-dom";
 import React, { ReactNode } from "react";
 import { render, screen, within } from "@testing-library/react";
-import { AppWrapper } from "@hadmean/chromista";
+import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 import { rest } from "msw";
 
 import ManageVariables from "pages/admin/settings/variables";
@@ -16,10 +16,10 @@ import { USER_PERMISSIONS } from "shared/constants/user";
 
 const server = setupApiHandlers();
 
-function AuthenticatedAppWrapper({ children }: { children: ReactNode }) {
+function AuthenticatedApplicationRoot({ children }: { children: ReactNode }) {
   useUserAuthenticatedState();
 
-  return <AppWrapper>{children}</AppWrapper>;
+  return <ApplicationRoot>{children}</ApplicationRoot>;
 }
 
 describe("pages/integrations/variables => credentials -- non admin", () => {
@@ -50,9 +50,9 @@ describe("pages/integrations/variables => credentials -- non admin", () => {
   describe("priviledge", () => {
     it("should show correct password text for `CAN_CONFIGURE_APP_USERS`", async () => {
       render(
-        <AuthenticatedAppWrapper>
+        <AuthenticatedApplicationRoot>
           <ManageVariables />
-        </AuthenticatedAppWrapper>
+        </AuthenticatedApplicationRoot>
       );
       const priviledgeSection = screen.getByLabelText(
         "credentials priviledge section"
@@ -89,9 +89,9 @@ describe("pages/integrations/variables => credentials -- non admin", () => {
 
     it("should not show any password text on constants tab", async () => {
       render(
-        <AuthenticatedAppWrapper>
+        <AuthenticatedApplicationRoot>
           <ManageVariables />
-        </AuthenticatedAppWrapper>
+        </AuthenticatedApplicationRoot>
       );
 
       const priviledgeSection = await screen.findByLabelText(
@@ -127,9 +127,9 @@ describe("pages/integrations/variables => credentials -- non admin", () => {
   describe("list", () => {
     it("should list credentials", async () => {
       render(
-        <AuthenticatedAppWrapper>
+        <AuthenticatedApplicationRoot>
           <ManageVariables />
-        </AuthenticatedAppWrapper>
+        </AuthenticatedApplicationRoot>
       );
 
       await userEvent.click(

@@ -1,7 +1,7 @@
 import "@testing-library/jest-dom";
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import { AppWrapper } from "@hadmean/chromista";
+import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 
 import CreateDashboardWidget from "pages/dashboard/[dashboardId]/widget/create";
 
@@ -30,9 +30,9 @@ describe("pages/dashboard/[dashboardId]/widget/create", () => {
 
   it("should create summary widget", async () => {
     render(
-      <AppWrapper>
+      <ApplicationRoot>
         <CreateDashboardWidget />
-      </AppWrapper>
+      </ApplicationRoot>
     );
 
     await userEvent.type(
@@ -79,9 +79,9 @@ describe("pages/dashboard/[dashboardId]/widget/create", () => {
 
   it("should create table widget", async () => {
     render(
-      <AppWrapper>
+      <ApplicationRoot>
         <CreateDashboardWidget />
-      </AppWrapper>
+      </ApplicationRoot>
     );
 
     await userEvent.type(await screen.findByLabelText("Title"), "New Table");

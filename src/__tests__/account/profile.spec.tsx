@@ -1,7 +1,7 @@
 import "@testing-library/jest-dom";
 import React from "react";
 import { render, screen, waitFor } from "@testing-library/react";
-import { AppWrapper } from "@hadmean/chromista";
+import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 import userEvent from "@testing-library/user-event";
 import AccountProfile from "pages/account/profile";
 
@@ -14,9 +14,9 @@ jest.mock("next/router", () => require("next-router-mock"));
 describe("pages/account/profile", () => {
   it("should display profile details", async () => {
     render(
-      <AppWrapper>
+      <ApplicationRoot>
         <AccountProfile />
-      </AppWrapper>
+      </ApplicationRoot>
     );
     await waitFor(() => {
       expect(screen.getByLabelText("Name")).toHaveValue("Root User");
@@ -25,9 +25,9 @@ describe("pages/account/profile", () => {
 
   it("should update profile successfully", async () => {
     render(
-      <AppWrapper>
+      <ApplicationRoot>
         <AccountProfile />
-      </AppWrapper>
+      </ApplicationRoot>
     );
 
     await userEvent.clear(screen.getByLabelText("Name"));
@@ -45,9 +45,9 @@ describe("pages/account/profile", () => {
 
   it("should display updated profile details", async () => {
     render(
-      <AppWrapper>
+      <ApplicationRoot>
         <AccountProfile />
-      </AppWrapper>
+      </ApplicationRoot>
     );
     await waitFor(() => {
       expect(screen.getByLabelText("Name")).toHaveValue("Updated Name");

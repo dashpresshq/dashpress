@@ -1,6 +1,7 @@
-import { InfoAlert, Spacer } from "@hadmean/chromista";
 import { USER_PERMISSIONS } from "shared/constants/user";
 import { userFriendlyCase } from "shared/lib/strings/friendly-case";
+import { InfoAlert } from "frontend/design-system/components/Alert";
+import { Spacer } from "frontend/design-system/primitives/Spacer";
 import { DocumentationRoot, IDocumentationRootProps } from "./_base";
 
 export function RolesDocumentation(props: IDocumentationRootProps) {

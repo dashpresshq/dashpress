@@ -1,7 +1,7 @@
 import "@testing-library/jest-dom";
 import React from "react";
 import { render, screen, within } from "@testing-library/react";
-import { AppWrapper } from "@hadmean/chromista";
+import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 import userEvent from "@testing-library/user-event";
 
 import ManageDashboard from "pages/dashboard/manage";
@@ -31,9 +31,9 @@ describe("pages/admin/settings/dashboard", () => {
       }));
 
       render(
-        <AppWrapper>
+        <ApplicationRoot>
           <ManageDashboard />
-        </AppWrapper>
+        </ApplicationRoot>
       );
 
       await userEvent.click(
@@ -51,9 +51,9 @@ describe("pages/admin/settings/dashboard", () => {
       }));
 
       render(
-        <AppWrapper>
+        <ApplicationRoot>
           <ManageDashboard />
-        </AppWrapper>
+        </ApplicationRoot>
       );
 
       await userEvent.click(
@@ -67,9 +67,9 @@ describe("pages/admin/settings/dashboard", () => {
 
     it("should delete table widget", async () => {
       render(
-        <AppWrapper>
+        <ApplicationRoot>
           <ManageDashboard />
-        </AppWrapper>
+        </ApplicationRoot>
       );
 
       const widget = await screen.findByLabelText("Foo Table Widget");
@@ -103,9 +103,9 @@ describe("pages/admin/settings/dashboard", () => {
       }));
 
       render(
-        <AppWrapper>
+        <ApplicationRoot>
           <ManageDashboard />
-        </AppWrapper>
+        </ApplicationRoot>
       );
 
       const widget = await screen.findByLabelText("Bar Card Widget");

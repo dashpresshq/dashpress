@@ -1,9 +1,9 @@
-import { SectionBox } from "@hadmean/chromista";
 import { useEntityDataDeletionMutation } from "frontend/hooks/data/data.store";
 import { META_USER_PERMISSIONS } from "shared/constants/user";
 import { useNavigationStack } from "frontend/lib/routing/useNavigationStack";
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
 import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
+import { SectionBox } from "frontend/design-system/components/Section/SectionBox";
 import {
   useEntityCrudConfig,
   useEntityId,

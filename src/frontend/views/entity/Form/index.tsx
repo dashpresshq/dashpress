@@ -1,4 +1,3 @@
-import { Tabs, SectionBox } from "@hadmean/chromista";
 import { SLUG_LOADING_VALUE } from "frontend/lib/routing/constants";
 import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
 import { USER_PERMISSIONS } from "shared/constants/user";
@@ -11,6 +10,8 @@ import {
 import { FormScriptDocumentation } from "frontend/docs/scripts/form-scripts";
 import { useState } from "react";
 import { DOCUMENTATION_LABEL } from "frontend/docs";
+import { SectionBox } from "frontend/design-system/components/Section/SectionBox";
+import { Tabs } from "frontend/design-system/components/Tabs";
 import { useEntitySlug } from "../../../hooks/entity/entity.config";
 import { BaseEntitySettingsLayout } from "../_Base";
 

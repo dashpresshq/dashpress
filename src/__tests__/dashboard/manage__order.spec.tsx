@@ -2,7 +2,7 @@
 import "@testing-library/jest-dom";
 import React, { ReactNode } from "react";
 import { render, screen } from "@testing-library/react";
-import { AppWrapper } from "@hadmean/chromista";
+import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 import userEvent from "@testing-library/user-event";
 
 import ManageDashboard from "pages/dashboard/manage";
@@ -49,9 +49,9 @@ describe("pages/admin/settings/dashboard", () => {
   describe("Sorting", () => {
     it("should order widget", async () => {
       render(
-        <AppWrapper>
+        <ApplicationRoot>
           <ManageDashboard />
-        </AppWrapper>
+        </ApplicationRoot>
       );
 
       const widgets = await screen.findByLabelText("Dashboard Widgets");
@@ -65,9 +65,9 @@ describe("pages/admin/settings/dashboard", () => {
 
     it("should change the order of the widgets", async () => {
       render(
-        <AppWrapper>
+        <ApplicationRoot>
           <ManageDashboard />
-        </AppWrapper>
+        </ApplicationRoot>
       );
 
       await screen.findByLabelText("Foo Table Widget");
@@ -77,9 +77,9 @@ describe("pages/admin/settings/dashboard", () => {
 
     it("should show the new ordered widget", async () => {
       render(
-        <AppWrapper>
+        <ApplicationRoot>
           <ManageDashboard />
-        </AppWrapper>
+        </ApplicationRoot>
       );
 
       const widgets = await screen.findByLabelText("Dashboard Widgets");
@@ -93,9 +93,9 @@ describe("pages/admin/settings/dashboard", () => {
 
     it("should not be orderable in the admin page", async () => {
       render(
-        <AppWrapper>
+        <ApplicationRoot>
           <Dashboard />
-        </AppWrapper>
+        </ApplicationRoot>
       );
 
       await screen.findByLabelText("Foo Table Widget");

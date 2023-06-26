@@ -1,4 +1,4 @@
-import { Spacer } from "@hadmean/chromista";
+import { Spacer } from "frontend/design-system/primitives/Spacer";
 import { DocumentationRoot, IDocumentationRootProps } from "./_base";
 
 export function ViewsDocumentation(props: IDocumentationRootProps) {

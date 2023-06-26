@@ -1,4 +1,6 @@
-import { RenderCode, Spacer, WarningAlert } from "@hadmean/chromista";
+import { RenderCode } from "frontend/design-system/components/RenderCode";
+import { WarningAlert } from "frontend/design-system/components/Alert";
+import { Spacer } from "frontend/design-system/primitives/Spacer";
 import { DocumentationRoot, IDocumentationRootProps } from "../_base";
 
 export function PresentationScriptDocumentation(

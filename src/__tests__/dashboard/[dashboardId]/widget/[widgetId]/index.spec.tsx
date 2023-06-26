@@ -1,7 +1,7 @@
 import "@testing-library/jest-dom";
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import { AppWrapper } from "@hadmean/chromista";
+import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 
 import UpdateDashboardWidget from "pages/dashboard/[dashboardId]/widget/[widgetId]/index";
 
@@ -23,9 +23,9 @@ describe("pages/dashboard/[dashboardId]/widget/[widgetId]/index", () => {
     }));
 
     render(
-      <AppWrapper>
+      <ApplicationRoot>
         <UpdateDashboardWidget />
-      </AppWrapper>
+      </ApplicationRoot>
     );
 
     await userEvent.type(await screen.findByLabelText("Title"), "Updated");
@@ -77,9 +77,9 @@ describe("pages/dashboard/[dashboardId]/widget/[widgetId]/index", () => {
     }));
 
     render(
-      <AppWrapper>
+      <ApplicationRoot>
         <UpdateDashboardWidget />
-      </AppWrapper>
+      </ApplicationRoot>
     );
 
     await userEvent.type(await screen.findByLabelText("Title"), "Updated");
@@ -126,9 +126,9 @@ describe("pages/dashboard/[dashboardId]/widget/[widgetId]/index", () => {
     }));
 
     render(
-      <AppWrapper>
+      <ApplicationRoot>
         <UpdateDashboardWidget />
-      </AppWrapper>
+      </ApplicationRoot>
     );
 
     expect(await screen.findByRole("alert")).toHaveTextContent(

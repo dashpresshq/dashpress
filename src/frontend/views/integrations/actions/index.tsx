@@ -1,8 +1,3 @@
-import {
-  FormSkeleton,
-  FormSkeletonSchema,
-  SectionBox,
-} from "@hadmean/chromista";
 import { USER_PERMISSIONS } from "shared/constants/user";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { useState } from "react";
@@ -10,6 +5,11 @@ import { DOCUMENTATION_LABEL } from "frontend/docs";
 import { FormIntegrationsDocumentation } from "frontend/docs/form-integrations";
 import { useRouteParam } from "frontend/lib/routing/useRouteParam";
 import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
+import {
+  FormSkeleton,
+  FormSkeletonSchema,
+} from "frontend/design-system/components/Skeleton/Form";
+import { SectionBox } from "frontend/design-system/components/Section/SectionBox";
 import { BaseActionsLayout } from "../_Base";
 import {
   useActionIntegrationsList,

@@ -1,9 +1,10 @@
 import * as React from "react";
 import { render, screen } from "@testing-library/react";
-import { AppWrapper, FormButton } from "@hadmean/chromista";
 import { Form } from "react-final-form";
 import userEvent from "@testing-library/user-event";
+import { FormButton } from "frontend/design-system/components/Button/FormButton";
 import { IconInputField } from ".";
+import { ApplicationRoot } from "../ApplicationRoot";
 
 function TestComponent({
   onSubmit,
@@ -38,9 +39,9 @@ describe("<IconInputField />", () => {
   it("should render text input only by default", async () => {
     const onSubmit = jest.fn();
     render(
-      <AppWrapper>
+      <ApplicationRoot>
         <TestComponent onSubmit={onSubmit} initialValues={{}} />
-      </AppWrapper>
+      </ApplicationRoot>
     );
 
     expect(screen.queryByLabelText("Icon")).not.toBeInTheDocument();
@@ -59,12 +60,12 @@ describe("<IconInputField />", () => {
   it("should render icon input only when valid icon is passed", async () => {
     const onSubmit = jest.fn();
     render(
-      <AppWrapper>
+      <ApplicationRoot>
         <TestComponent
           onSubmit={onSubmit}
           initialValues={{ icon: "PieChart" }}
         />
-      </AppWrapper>
+      </ApplicationRoot>
     );
 
     expect(screen.queryByLabelText("SVG")).not.toBeInTheDocument();
@@ -84,12 +85,12 @@ describe("<IconInputField />", () => {
   it("should render text input when invalid icon is passed", async () => {
     const onSubmit = jest.fn();
     render(
-      <AppWrapper>
+      <ApplicationRoot>
         <TestComponent
           onSubmit={onSubmit}
           initialValues={{ icon: "Some invalid icon" }}
         />
-      </AppWrapper>
+      </ApplicationRoot>
     );
 
     expect(screen.queryByLabelText("Icon")).not.toBeInTheDocument();
@@ -108,12 +109,12 @@ describe("<IconInputField />", () => {
   it("should be able to switch to icon input from text input", async () => {
     const onSubmit = jest.fn();
     render(
-      <AppWrapper>
+      <ApplicationRoot>
         <TestComponent
           onSubmit={onSubmit}
           initialValues={{ icon: "Some invalid icon" }}
         />
-      </AppWrapper>
+      </ApplicationRoot>
     );
 
     expect(screen.queryByLabelText("Icon")).not.toBeInTheDocument();
@@ -138,12 +139,12 @@ describe("<IconInputField />", () => {
   it("should be able to switch to text input from icon input", async () => {
     const onSubmit = jest.fn();
     render(
-      <AppWrapper>
+      <ApplicationRoot>
         <TestComponent
           onSubmit={onSubmit}
           initialValues={{ icon: "CreditCard" }}
         />
-      </AppWrapper>
+      </ApplicationRoot>
     );
 
     expect(screen.queryByLabelText("SVG")).not.toBeInTheDocument();

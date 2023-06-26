@@ -1,4 +1,5 @@
-import { RenderCode, Spacer } from "@hadmean/chromista";
+import { RenderCode } from "frontend/design-system/components/RenderCode";
+import { Spacer } from "frontend/design-system/primitives/Spacer";
 import { DocumentationRoot, IDocumentationRootProps } from "../_base";
 
 export function WidgetScriptDocumentation(props: IDocumentationRootProps) {

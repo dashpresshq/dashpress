@@ -2,7 +2,7 @@
 /* eslint-disable testing-library/no-container */
 import * as React from "react";
 import { render, screen, waitFor } from "@testing-library/react";
-import { AppWrapper } from "@hadmean/chromista";
+import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 import { rest } from "msw";
 import { BASE_TEST_URL } from "__tests__/_/api-handlers/_utils";
@@ -57,9 +57,9 @@ describe("pages/setup/credentials", () => {
     }));
 
     const { container } = render(
-      <AppWrapper>
+      <ApplicationRoot>
         <CredentialsSetup />
-      </AppWrapper>
+      </ApplicationRoot>
     );
 
     expect(
@@ -81,9 +81,9 @@ describe("pages/setup/credentials", () => {
     }));
 
     const { container } = render(
-      <AppWrapper>
+      <ApplicationRoot>
         <CredentialsSetup />
-      </AppWrapper>
+      </ApplicationRoot>
     );
 
     expect(
@@ -145,9 +145,9 @@ describe("pages/setup/credentials", () => {
       }));
 
       const { container } = render(
-        <AppWrapper>
+        <ApplicationRoot>
           <CredentialsSetup />
-        </AppWrapper>
+        </ApplicationRoot>
       );
 
       await userEvent.type(
@@ -188,9 +188,9 @@ describe("pages/setup/credentials", () => {
       }));
 
       const { container } = render(
-        <AppWrapper>
+        <ApplicationRoot>
           <CredentialsSetup />
-        </AppWrapper>
+        </ApplicationRoot>
       );
 
       await userEvent.type(
@@ -227,9 +227,9 @@ describe("pages/setup/credentials", () => {
       }));
 
       const { container } = render(
-        <AppWrapper>
+        <ApplicationRoot>
           <CredentialsSetup />
-        </AppWrapper>
+        </ApplicationRoot>
       );
 
       await userEvent.type(

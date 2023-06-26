@@ -1,5 +1,5 @@
+import { OffCanvas } from "frontend/design-system/components/OffCanvas";
 import { ReactNode } from "react";
-import { OffCanvas } from "@hadmean/chromista";
 import styled from "styled-components";
 
 export interface IDocumentationRootProps {

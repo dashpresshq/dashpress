@@ -1,5 +1,5 @@
 /* eslint-disable no-param-reassign */
-import { IValueLabel } from "@hadmean/chromista/dist/types";
+import { ILabelValue } from "shared/types/options";
 import { SchemaForm } from "frontend/components/SchemaForm";
 import { useState } from "react";
 import { IAppliedSchemaFormConfig } from "shared/form-schemas/types";
@@ -17,7 +17,7 @@ import { ActionInstanceView } from "./types";
 interface IProps {
   onSubmit: (instance: IActionInstance) => Promise<void>;
   initialValues?: Partial<IActionInstance>;
-  entities: IValueLabel[];
+  entities: ILabelValue[];
   formAction: "create" | "update";
   integrationsList: IIntegrationsList[];
   activatedActions: IActivatedAction[];

@@ -1,7 +1,7 @@
 import "@testing-library/jest-dom";
 import React from "react";
 import { render, screen, waitFor } from "@testing-library/react";
-import { AppWrapper } from "@hadmean/chromista";
+import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 import userEvent from "@testing-library/user-event";
 import EntityDictionSettings from "pages/admin/[entity]/config/diction";
 
@@ -22,9 +22,9 @@ describe("pages/admin/[entity]/config/diction", () => {
 
   it("should display diction values", async () => {
     render(
-      <AppWrapper>
+      <ApplicationRoot>
         <EntityDictionSettings />
-      </AppWrapper>
+      </ApplicationRoot>
     );
     await waitFor(() => {
       expect(screen.getByLabelText("Plural")).toHaveValue("Plural entity-1");
@@ -34,9 +34,9 @@ describe("pages/admin/[entity]/config/diction", () => {
 
   it("should update diction successfully", async () => {
     render(
-      <AppWrapper>
+      <ApplicationRoot>
         <EntityDictionSettings />
-      </AppWrapper>
+      </ApplicationRoot>
     );
 
     await userEvent.type(screen.getByLabelText("Plural"), "Updated");
@@ -53,9 +53,9 @@ describe("pages/admin/[entity]/config/diction", () => {
 
   it("should display updated diction values", async () => {
     render(
-      <AppWrapper>
+      <ApplicationRoot>
         <EntityDictionSettings />
-      </AppWrapper>
+      </ApplicationRoot>
     );
     await waitFor(() => {
       expect(screen.getByLabelText("Plural")).toHaveValue(

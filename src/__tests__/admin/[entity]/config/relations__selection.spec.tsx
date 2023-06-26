@@ -1,7 +1,7 @@
 import "@testing-library/jest-dom";
 import React from "react";
 import { render, screen, waitFor, within } from "@testing-library/react";
-import { AppWrapper } from "@hadmean/chromista";
+import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 import userEvent from "@testing-library/user-event";
 import EntityRelationsSettings from "pages/admin/[entity]/config/relations";
 
@@ -23,9 +23,9 @@ describe("pages/admin/[entity]/config/relations", () => {
   describe("Selection", () => {
     it("should display all related entities in correct state", async () => {
       render(
-        <AppWrapper>
+        <ApplicationRoot>
           <EntityRelationsSettings />
-        </AppWrapper>
+        </ApplicationRoot>
       );
 
       const currentTab = await screen.findByRole("tabpanel");
@@ -59,9 +59,9 @@ describe("pages/admin/[entity]/config/relations", () => {
 
     it("should save toggled state successfully", async () => {
       render(
-        <AppWrapper>
+        <ApplicationRoot>
           <EntityRelationsSettings />
-        </AppWrapper>
+        </ApplicationRoot>
       );
 
       const currentTab = await screen.findByRole("tabpanel");
@@ -100,9 +100,9 @@ describe("pages/admin/[entity]/config/relations", () => {
 
     it("should display updated selection state", async () => {
       render(
-        <AppWrapper>
+        <ApplicationRoot>
           <EntityRelationsSettings />
-        </AppWrapper>
+        </ApplicationRoot>
       );
 
       const currentTab = await screen.findByRole("tabpanel");

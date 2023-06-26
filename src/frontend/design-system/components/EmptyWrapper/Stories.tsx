@@ -1,0 +1,36 @@
+/* eslint-disable react/function-component-definition */
+import React from "react";
+import { Story } from "@storybook/react";
+import { EmptyWrapper, IProps } from ".";
+import { ApplicationRoot } from "../../ApplicationRoot";
+
+export default {
+  title: "Components/EmptyWrapper",
+  component: EmptyWrapper,
+  args: {
+    text: "Some empty message for you",
+  },
+};
+
+const Template: Story<IProps> = (args) => (
+  <ApplicationRoot>
+    <EmptyWrapper {...args} />
+  </ApplicationRoot>
+);
+
+export const Default = Template.bind({});
+Default.args = {};
+
+export const NoIcon = Template.bind({});
+NoIcon.args = {
+  hideIcon: true,
+};
+
+export const WithChildren = Template.bind({});
+WithChildren.args = {
+  children: (
+    <>
+      <b>This is bold</b> This is not
+    </>
+  ),
+};

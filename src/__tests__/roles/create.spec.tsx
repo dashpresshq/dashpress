@@ -1,7 +1,7 @@
 import "@testing-library/jest-dom";
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import { AppWrapper } from "@hadmean/chromista";
+import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 import userEvent from "@testing-library/user-event";
 
 import RoleCreate from "pages/roles/create";
@@ -20,9 +20,9 @@ describe("pages/roles/create", () => {
       push: pushMock,
     }));
     render(
-      <AppWrapper>
+      <ApplicationRoot>
         <RoleCreate />
-      </AppWrapper>
+      </ApplicationRoot>
     );
 
     await userEvent.type(await screen.findByLabelText("Name"), "Some New Role");

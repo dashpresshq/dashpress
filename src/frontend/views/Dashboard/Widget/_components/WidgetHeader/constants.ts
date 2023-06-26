@@ -1,4 +1,4 @@
-import { IValueLabel } from "@hadmean/chromista/dist/types";
+import { ILabelValue } from "shared/types/options";
 import { DATE_FILTER_VALUE } from "shared/types/data";
 
 const DATE_FILTER_VALUE_CONFIG: Record<
@@ -46,7 +46,7 @@ const DATE_FILTER_VALUE_CONFIG: Record<
 const makeDateFilterOption = (
   filterValue: DATE_FILTER_VALUE,
   value: number
-): IValueLabel => {
+): ILabelValue => {
   if (filterValue === DATE_FILTER_VALUE.BEGINNING_OF_YEAR) {
     return { value: filterValue, label: "Start of year" };
   }
@@ -61,7 +61,7 @@ const makeDateFilterOption = (
   };
 };
 
-export const DASHBOARD_RELATIVE_DAYS: IValueLabel[] = [
+export const DASHBOARD_RELATIVE_DAYS: ILabelValue[] = [
   makeDateFilterOption(DATE_FILTER_VALUE.DAY, 1),
   makeDateFilterOption(DATE_FILTER_VALUE.DAY, 3),
   makeDateFilterOption(DATE_FILTER_VALUE.WEEK, 1),

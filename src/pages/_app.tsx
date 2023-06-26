@@ -1,12 +1,11 @@
 /* eslint-disable react/prop-types */
-import { AppWrapper } from "@hadmean/chromista";
-import "../static/fonts/font-face.css";
+import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 
 function MyApp({ Component, pageProps }) {
   return (
-    <AppWrapper>
+    <ApplicationRoot>
       <Component {...pageProps} />
-    </AppWrapper>
+    </ApplicationRoot>
   );
 }
 

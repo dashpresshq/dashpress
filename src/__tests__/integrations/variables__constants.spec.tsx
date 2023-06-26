@@ -1,7 +1,7 @@
 import "@testing-library/jest-dom";
 import React from "react";
 import { render, screen, within } from "@testing-library/react";
-import { AppWrapper } from "@hadmean/chromista";
+import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 
 import ManageVariables from "pages/integrations/variables";
 
@@ -24,9 +24,9 @@ describe("pages/integrations/variables => constants", () => {
   describe("list", () => {
     it("should list constants", async () => {
       render(
-        <AppWrapper>
+        <ApplicationRoot>
           <ManageVariables />
-        </AppWrapper>
+        </ApplicationRoot>
       );
 
       const table = await screen.findByRole("table");
@@ -57,9 +57,9 @@ describe("pages/integrations/variables => constants", () => {
   describe("create", () => {
     it("should create new constant", async () => {
       render(
-        <AppWrapper>
+        <ApplicationRoot>
           <ManageVariables />
-        </AppWrapper>
+        </ApplicationRoot>
       );
       await userEvent.click(
         await screen.findByRole("button", { name: "Add New Constant" })
@@ -83,9 +83,9 @@ describe("pages/integrations/variables => constants", () => {
 
     it("should show created constant", async () => {
       render(
-        <AppWrapper>
+        <ApplicationRoot>
           <ManageVariables />
-        </AppWrapper>
+        </ApplicationRoot>
       );
 
       const table = screen.getByRole("table");
@@ -103,9 +103,9 @@ describe("pages/integrations/variables => constants", () => {
   describe("update", () => {
     it("should update constant", async () => {
       render(
-        <AppWrapper>
+        <ApplicationRoot>
           <ManageVariables />
-        </AppWrapper>
+        </ApplicationRoot>
       );
 
       const table = screen.getByRole("table");
@@ -137,9 +137,9 @@ describe("pages/integrations/variables => constants", () => {
 
     it("should show updated constant", async () => {
       render(
-        <AppWrapper>
+        <ApplicationRoot>
           <ManageVariables />
-        </AppWrapper>
+        </ApplicationRoot>
       );
 
       const table = screen.getByRole("table");
@@ -155,9 +155,9 @@ describe("pages/integrations/variables => constants", () => {
   describe("delete", () => {
     it("should delete constants", async () => {
       render(
-        <AppWrapper>
+        <ApplicationRoot>
           <ManageVariables />
-        </AppWrapper>
+        </ApplicationRoot>
       );
 
       const table = screen.getByRole("table");

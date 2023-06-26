@@ -1,6 +1,8 @@
-import { Stack, Typo, Spacer } from "@hadmean/chromista";
 import { ActionIntegrationKeys, IIntegrationsList } from "shared/types/actions";
 import { SchemaForm } from "frontend/components/SchemaForm";
+import { Stack } from "frontend/design-system/primitives/Stack";
+import { Spacer } from "frontend/design-system/primitives/Spacer";
+import { Typo } from "frontend/design-system/primitives/Text";
 import { useDeactivateActionMutation } from "../actions.store";
 
 interface IProps {

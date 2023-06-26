@@ -1,7 +1,7 @@
 import "@testing-library/jest-dom";
 import React from "react";
 import { render, screen, waitFor, within } from "@testing-library/react";
-import { AppWrapper } from "@hadmean/chromista";
+import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 import userEvent from "@testing-library/user-event";
 import EntityCrudSettings from "pages/admin/[entity]/config/crud";
 import { rest } from "msw";
@@ -63,9 +63,9 @@ describe("pages/admin/[entity]/config/crud", () => {
 
     it("should show current state correctly", async () => {
       render(
-        <AppWrapper>
+        <ApplicationRoot>
           <EntityCrudSettings />
-        </AppWrapper>
+        </ApplicationRoot>
       );
 
       const currentTab = await screen.findByRole("tabpanel");
@@ -91,9 +91,9 @@ describe("pages/admin/[entity]/config/crud", () => {
 
     it("should change state correctly", async () => {
       render(
-        <AppWrapper>
+        <ApplicationRoot>
           <EntityCrudSettings />
-        </AppWrapper>
+        </ApplicationRoot>
       );
 
       const currentTab = screen.getByRole("tabpanel");
@@ -126,9 +126,9 @@ describe("pages/admin/[entity]/config/crud", () => {
 
     it("should show updated state correctly", async () => {
       render(
-        <AppWrapper>
+        <ApplicationRoot>
           <EntityCrudSettings />
-        </AppWrapper>
+        </ApplicationRoot>
       );
 
       const currentTab = screen.getByRole("tabpanel");
@@ -162,9 +162,9 @@ describe("pages/admin/[entity]/config/crud", () => {
       replace: jest.fn(),
     }));
     render(
-      <AppWrapper>
+      <ApplicationRoot>
         <EntityCrudSettings />
-      </AppWrapper>
+      </ApplicationRoot>
     );
 
     expect(
@@ -207,9 +207,9 @@ describe("pages/admin/[entity]/config/crud", () => {
       },
     }));
     render(
-      <AppWrapper>
+      <ApplicationRoot>
         <EntityCrudSettings />
-      </AppWrapper>
+      </ApplicationRoot>
     );
 
     expect(

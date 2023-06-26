@@ -1,7 +1,7 @@
 import "@testing-library/jest-dom";
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import { AppWrapper } from "@hadmean/chromista";
+import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 import EntityTable from "pages/admin/[entity]/index";
 
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
@@ -22,9 +22,9 @@ describe("pages/admin/[entity]/index", () => {
 
   it("should show data", async () => {
     render(
-      <AppWrapper>
+      <ApplicationRoot>
         <EntityTable />
-      </AppWrapper>
+      </ApplicationRoot>
     );
 
     expect(await screen.findByRole("table")).toBeInTheDocument();

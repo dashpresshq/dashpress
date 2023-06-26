@@ -3,7 +3,7 @@
 import "@testing-library/jest-dom";
 import React from "react";
 import { render, screen, waitFor } from "@testing-library/react";
-import { AppWrapper } from "@hadmean/chromista";
+import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 import userEvent from "@testing-library/user-event";
 
 import UserUpdate from "pages/users/[username]/index";
@@ -23,9 +23,9 @@ describe("pages/users/[username]/index", () => {
         },
       }));
       render(
-        <AppWrapper>
+        <ApplicationRoot>
           <UserUpdate />
-        </AppWrapper>
+        </ApplicationRoot>
       );
       await waitFor(() => {
         expect(screen.getByLabelText("Role")).toBeDisabled();
@@ -43,9 +43,9 @@ describe("pages/users/[username]/index", () => {
         },
       }));
       const { container } = render(
-        <AppWrapper>
+        <ApplicationRoot>
           <UserUpdate />
-        </AppWrapper>
+        </ApplicationRoot>
       );
 
       await waitFor(() => {
@@ -68,9 +68,9 @@ describe("pages/users/[username]/index", () => {
         },
       }));
       render(
-        <AppWrapper>
+        <ApplicationRoot>
           <UserUpdate />
-        </AppWrapper>
+        </ApplicationRoot>
       );
 
       await userEvent.clear(await screen.findByLabelText("Name"));
@@ -102,9 +102,9 @@ describe("pages/users/[username]/index", () => {
         },
       }));
       const { container } = render(
-        <AppWrapper>
+        <ApplicationRoot>
           <UserUpdate />
-        </AppWrapper>
+        </ApplicationRoot>
       );
 
       await waitFor(() => {
@@ -129,9 +129,9 @@ describe("pages/users/[username]/index", () => {
         },
       }));
       render(
-        <AppWrapper>
+        <ApplicationRoot>
           <UserUpdate />
-        </AppWrapper>
+        </ApplicationRoot>
       );
 
       await waitFor(() => {
@@ -150,9 +150,9 @@ describe("pages/users/[username]/index", () => {
         },
       }));
       render(
-        <AppWrapper>
+        <ApplicationRoot>
           <UserUpdate />
-        </AppWrapper>
+        </ApplicationRoot>
       );
 
       await userEvent.type(screen.getByLabelText("Password"), "password");

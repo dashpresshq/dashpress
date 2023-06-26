@@ -1,6 +1,6 @@
 import * as React from "react";
 import { render, screen, waitFor } from "@testing-library/react";
-import { AppWrapper } from "@hadmean/chromista";
+import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 import SignIn from "pages/auth";
 import userEvent from "@testing-library/user-event";
@@ -23,9 +23,9 @@ describe("pages/auth", () => {
     }));
 
     render(
-      <AppWrapper>
+      <ApplicationRoot>
         <SignIn />
-      </AppWrapper>
+      </ApplicationRoot>
     );
 
     await waitFor(() => {
@@ -44,9 +44,9 @@ describe("pages/auth", () => {
     }));
 
     render(
-      <AppWrapper>
+      <ApplicationRoot>
         <SignIn />
-      </AppWrapper>
+      </ApplicationRoot>
     );
 
     await userEvent.type(
@@ -80,9 +80,9 @@ describe("pages/auth", () => {
     }));
 
     render(
-      <AppWrapper>
+      <ApplicationRoot>
         <SignIn />
-      </AppWrapper>
+      </ApplicationRoot>
     );
 
     await userEvent.type(await screen.findByLabelText("Username"), "user");
@@ -113,9 +113,9 @@ describe("pages/auth", () => {
 
     it("should be hidden when NEXT_PUBLIC_IS_DEMO is false", async () => {
       render(
-        <AppWrapper>
+        <ApplicationRoot>
           <SignIn />
-        </AppWrapper>
+        </ApplicationRoot>
       );
 
       expect(
@@ -126,9 +126,9 @@ describe("pages/auth", () => {
     it("should be shown when NEXT_PUBLIC_IS_DEMO is true", async () => {
       process.env.NEXT_PUBLIC_IS_DEMO = "true";
       render(
-        <AppWrapper>
+        <ApplicationRoot>
           <SignIn />
-        </AppWrapper>
+        </ApplicationRoot>
       );
 
       expect(screen.getByLabelText("Demo App Credentials")).toHaveTextContent(

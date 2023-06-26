@@ -1,7 +1,7 @@
 import "@testing-library/jest-dom";
 import React from "react";
 import { render, screen, waitFor } from "@testing-library/react";
-import { AppWrapper } from "@hadmean/chromista";
+import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 import userEvent from "@testing-library/user-event";
 import MenuEntitiesSettings from "pages/admin/settings/menu-entities";
 
@@ -21,9 +21,9 @@ describe.skip("pages/admin/settings/menu-entities", () => {
 
   it("should display only active entities with correct state", async () => {
     render(
-      <AppWrapper>
+      <ApplicationRoot>
         <MenuEntitiesSettings />
-      </AppWrapper>
+      </ApplicationRoot>
     );
 
     await waitFor(async () => {
@@ -48,9 +48,9 @@ describe.skip("pages/admin/settings/menu-entities", () => {
 
   it("should toggle menu state successfully", async () => {
     render(
-      <AppWrapper>
+      <ApplicationRoot>
         <MenuEntitiesSettings />
-      </AppWrapper>
+      </ApplicationRoot>
     );
 
     await userEvent.click(
@@ -80,9 +80,9 @@ describe.skip("pages/admin/settings/menu-entities", () => {
 
   it("should display updated entities state", async () => {
     render(
-      <AppWrapper>
+      <ApplicationRoot>
         <MenuEntitiesSettings />
-      </AppWrapper>
+      </ApplicationRoot>
     );
 
     await waitFor(

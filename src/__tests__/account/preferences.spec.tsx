@@ -1,7 +1,7 @@
 import "@testing-library/jest-dom";
 import React from "react";
 import { render, screen, waitFor } from "@testing-library/react";
-import { AppWrapper } from "@hadmean/chromista";
+import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 import userEvent from "@testing-library/user-event";
 import UserPreferences from "pages/account/preferences";
 
@@ -19,9 +19,9 @@ describe("pages/account/preferences", () => {
 
   it("should display user preferences", async () => {
     render(
-      <AppWrapper>
+      <ApplicationRoot>
         <UserPreferences />
-      </AppWrapper>
+      </ApplicationRoot>
     );
     await waitFor(() => {
       expect(screen.getByRole("option", { selected: true })).toHaveTextContent(
@@ -32,9 +32,9 @@ describe("pages/account/preferences", () => {
 
   it("should update user preference", async () => {
     render(
-      <AppWrapper>
+      <ApplicationRoot>
         <UserPreferences />
-      </AppWrapper>
+      </ApplicationRoot>
     );
     await userEvent.click(screen.getByRole("option", { name: "Light" }));
 
@@ -49,9 +49,9 @@ describe("pages/account/preferences", () => {
 
   it("should display updated preference", async () => {
     render(
-      <AppWrapper>
+      <ApplicationRoot>
         <UserPreferences />
-      </AppWrapper>
+      </ApplicationRoot>
     );
     await waitFor(() => {
       expect(screen.getByRole("option", { selected: true })).toHaveTextContent(

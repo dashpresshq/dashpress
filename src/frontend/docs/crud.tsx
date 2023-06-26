@@ -1,4 +1,5 @@
-import { InfoAlert, Spacer } from "@hadmean/chromista";
+import { InfoAlert } from "frontend/design-system/components/Alert";
+import { Spacer } from "frontend/design-system/primitives/Spacer";
 import { DocumentationRoot, IDocumentationRootProps } from "./_base";
 
 export function CRUDDocumentation(props: IDocumentationRootProps) {

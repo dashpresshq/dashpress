@@ -1,7 +1,7 @@
 import "@testing-library/jest-dom";
 import React from "react";
 import { render, screen, within } from "@testing-library/react";
-import { AppWrapper } from "@hadmean/chromista";
+import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 import EntityViewsSettings from "pages/admin/[entity]/config/views";
 
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
@@ -22,9 +22,9 @@ describe("pages/admin/[entity]/config/views", () => {
 
   it("should display views settings", async () => {
     render(
-      <AppWrapper>
+      <ApplicationRoot>
         <EntityViewsSettings />
-      </AppWrapper>
+      </ApplicationRoot>
     );
     expect(
       await screen.findByRole("tab", { name: "Verified Entity View" })
@@ -39,9 +39,9 @@ describe("pages/admin/[entity]/config/views", () => {
 
   it("should tab through views", async () => {
     render(
-      <AppWrapper>
+      <ApplicationRoot>
         <EntityViewsSettings />
-      </AppWrapper>
+      </ApplicationRoot>
     );
     expect(
       await screen.findByRole("tab", { name: "Verified Entity View" })
@@ -68,9 +68,9 @@ describe("pages/admin/[entity]/config/views", () => {
 
   it("should delete tabs", async () => {
     render(
-      <AppWrapper>
+      <ApplicationRoot>
         <EntityViewsSettings />
-      </AppWrapper>
+      </ApplicationRoot>
     );
     expect(
       await screen.findByRole("tab", { name: "Verified Entity View" })
@@ -120,9 +120,9 @@ describe("pages/admin/[entity]/config/views", () => {
 
   it("should display delete changes", () => {
     render(
-      <AppWrapper>
+      <ApplicationRoot>
         <EntityViewsSettings />
-      </AppWrapper>
+      </ApplicationRoot>
     );
     expect(screen.queryAllByRole("tab")).toHaveLength(0);
     expect(screen.queryByRole("table")).not.toBeInTheDocument();
@@ -131,9 +131,9 @@ describe("pages/admin/[entity]/config/views", () => {
 
   it("should add new tab", async () => {
     render(
-      <AppWrapper>
+      <ApplicationRoot>
         <EntityViewsSettings />
-      </AppWrapper>
+      </ApplicationRoot>
     );
 
     await userEvent.click(screen.getByRole("button", { name: "Add New Tab" }));
@@ -167,9 +167,9 @@ describe("pages/admin/[entity]/config/views", () => {
 
   it("should edit existing tabs", async () => {
     render(
-      <AppWrapper>
+      <ApplicationRoot>
         <EntityViewsSettings />
-      </AppWrapper>
+      </ApplicationRoot>
     );
     expect(
       await screen.findByRole("tab", { name: "Tab 1" })
@@ -197,9 +197,9 @@ describe("pages/admin/[entity]/config/views", () => {
 
   it("should save edit changes", async () => {
     render(
-      <AppWrapper>
+      <ApplicationRoot>
         <EntityViewsSettings />
-      </AppWrapper>
+      </ApplicationRoot>
     );
     expect(
       await screen.findByRole("tab", { name: "Tab 1Updated" })

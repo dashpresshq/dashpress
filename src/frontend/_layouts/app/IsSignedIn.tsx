@@ -1,4 +1,3 @@
-import { ComponentIsLoading } from "@hadmean/chromista";
 import React, { ReactNode, useEffect } from "react";
 import { useRouter } from "next/router";
 import { AUTHENTICATED_ACCOUNT_URL } from "frontend/hooks/auth/user.store";
@@ -6,6 +5,7 @@ import { useUserAuthenticatedState } from "frontend/hooks/auth/useAuthenticateUs
 import { useQueryClient } from "react-query";
 import { removeAuthToken } from "frontend/hooks/auth/auth.store";
 import { getQueryCachekey } from "frontend/lib/data/constants/getQueryCacheKey";
+import { ComponentIsLoading } from "frontend/design-system/components/ComponentIsLoading";
 import { NAVIGATION_LINKS } from "../../lib/routing/links";
 import { useAppTheme } from "../useAppTheme";
 

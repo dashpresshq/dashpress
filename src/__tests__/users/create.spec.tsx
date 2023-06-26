@@ -1,7 +1,7 @@
 import "@testing-library/jest-dom";
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import { AppWrapper } from "@hadmean/chromista";
+import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 import userEvent from "@testing-library/user-event";
 
 import UserCreate from "pages/users/create";
@@ -20,9 +20,9 @@ describe("pages/users/create", () => {
       push: pushMock,
     }));
     render(
-      <AppWrapper>
+      <ApplicationRoot>
         <UserCreate />
-      </AppWrapper>
+      </ApplicationRoot>
     );
 
     await userEvent.type(

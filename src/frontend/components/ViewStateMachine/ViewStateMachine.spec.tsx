@@ -1,16 +1,16 @@
 import * as React from "react";
 import { render, screen } from "@testing-library/react";
-import { AppWrapper } from "@hadmean/chromista";
+import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 import { ViewStateMachine } from ".";
 
 describe("<ViewStateMachine />", () => {
   it("should render only loader when loading", async () => {
     render(
-      <AppWrapper>
+      <ApplicationRoot>
         <ViewStateMachine error={null} loading loader={<p>Loading</p>}>
           <p>Content</p>
         </ViewStateMachine>
-      </AppWrapper>
+      </ApplicationRoot>
     );
 
     expect(screen.getByText("Loading")).toBeInTheDocument();
@@ -19,11 +19,11 @@ describe("<ViewStateMachine />", () => {
 
   it("should render only content when not loading", async () => {
     render(
-      <AppWrapper>
+      <ApplicationRoot>
         <ViewStateMachine error={null} loading={false} loader={<p>Loading</p>}>
           <p>Content</p>
         </ViewStateMachine>
-      </AppWrapper>
+      </ApplicationRoot>
     );
 
     expect(screen.queryByText("Loading")).not.toBeInTheDocument();
@@ -32,7 +32,7 @@ describe("<ViewStateMachine />", () => {
 
   it("should render error message when present", async () => {
     render(
-      <AppWrapper>
+      <ApplicationRoot>
         <ViewStateMachine
           error="Some error message"
           loading={false}
@@ -40,7 +40,7 @@ describe("<ViewStateMachine />", () => {
         >
           <p>Content</p>
         </ViewStateMachine>
-      </AppWrapper>
+      </ApplicationRoot>
     );
 
     expect(screen.queryByText("Loading")).not.toBeInTheDocument();

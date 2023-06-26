@@ -1,7 +1,7 @@
 import "@testing-library/jest-dom";
 import React from "react";
 import { render, screen, waitFor } from "@testing-library/react";
-import { AppWrapper } from "@hadmean/chromista";
+import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 import userEvent from "@testing-library/user-event";
 import DateFormatSettings from "pages/admin/settings/date";
 
@@ -19,9 +19,9 @@ describe("pages/admin/settings/date", () => {
 
   it("should display date values", async () => {
     render(
-      <AppWrapper>
+      <ApplicationRoot>
         <DateFormatSettings />
-      </AppWrapper>
+      </ApplicationRoot>
     );
     await waitFor(() => {
       expect(screen.getByLabelText("Format")).toHaveValue("do MMM yyyy");
@@ -30,9 +30,9 @@ describe("pages/admin/settings/date", () => {
 
   it("should update date successfully", async () => {
     render(
-      <AppWrapper>
+      <ApplicationRoot>
         <DateFormatSettings />
-      </AppWrapper>
+      </ApplicationRoot>
     );
 
     await userEvent.clear(screen.getByLabelText("Format"));
@@ -50,9 +50,9 @@ describe("pages/admin/settings/date", () => {
 
   it("should display updated date values", async () => {
     render(
-      <AppWrapper>
+      <ApplicationRoot>
         <DateFormatSettings />
-      </AppWrapper>
+      </ApplicationRoot>
     );
     await waitFor(() => {
       expect(screen.getByLabelText("Format")).toHaveValue("yyyy MMM do");
@@ -62,9 +62,9 @@ describe("pages/admin/settings/date", () => {
   describe("invalid date formats", () => {
     it("should not be updated", async () => {
       render(
-        <AppWrapper>
+        <ApplicationRoot>
           <DateFormatSettings />
-        </AppWrapper>
+        </ApplicationRoot>
       );
 
       await userEvent.clear(screen.getByLabelText("Format"));
@@ -82,9 +82,9 @@ describe("pages/admin/settings/date", () => {
 
     it("should should show date format", async () => {
       render(
-        <AppWrapper>
+        <ApplicationRoot>
           <DateFormatSettings />
-        </AppWrapper>
+        </ApplicationRoot>
       );
       await waitFor(() => {
         expect(screen.getByLabelText("Format")).toHaveValue("yyyy MMM do");

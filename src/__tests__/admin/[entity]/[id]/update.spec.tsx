@@ -1,7 +1,7 @@
 import "@testing-library/jest-dom";
 import React from "react";
 import { render, screen, waitFor } from "@testing-library/react";
-import { AppWrapper } from "@hadmean/chromista";
+import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 import EntityUpdate from "pages/admin/[entity]/[id]/update";
 
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
@@ -21,9 +21,9 @@ describe("pages/admin/[entity]/update", () => {
 
   it("should update data", async () => {
     render(
-      <AppWrapper>
+      <ApplicationRoot>
         <EntityUpdate />
-      </AppWrapper>
+      </ApplicationRoot>
     );
     await waitFor(() => {
       expect(screen.getByText("Edit Singular entity-1")).toBeInTheDocument();

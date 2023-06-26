@@ -1,7 +1,7 @@
 import "@testing-library/jest-dom";
 import React from "react";
 import { render, screen, waitFor } from "@testing-library/react";
-import { AppWrapper } from "@hadmean/chromista";
+import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 import userEvent from "@testing-library/user-event";
 import SiteSettings from "pages/admin/settings/site";
 
@@ -19,9 +19,9 @@ describe("pages/admin/settings/site", () => {
 
   it("should display site values", async () => {
     render(
-      <AppWrapper>
+      <ApplicationRoot>
         <SiteSettings />
-      </AppWrapper>
+      </ApplicationRoot>
     );
     await waitFor(() => {
       expect(screen.getByLabelText("Name")).toHaveValue("Hadmean");
@@ -37,9 +37,9 @@ describe("pages/admin/settings/site", () => {
 
   it("should update site values successfully", async () => {
     render(
-      <AppWrapper>
+      <ApplicationRoot>
         <SiteSettings />
-      </AppWrapper>
+      </ApplicationRoot>
     );
 
     await userEvent.type(screen.getByLabelText("Name"), "Updated");
@@ -58,9 +58,9 @@ describe("pages/admin/settings/site", () => {
 
   it("should display site values", async () => {
     render(
-      <AppWrapper>
+      <ApplicationRoot>
         <SiteSettings />
-      </AppWrapper>
+      </ApplicationRoot>
     );
     await waitFor(() => {
       expect(screen.getByLabelText("Name")).toHaveValue("HadmeanUpdated");

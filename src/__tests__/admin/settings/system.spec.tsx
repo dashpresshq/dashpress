@@ -1,7 +1,7 @@
 import "@testing-library/jest-dom";
 import React from "react";
 import { render, screen, waitFor } from "@testing-library/react";
-import { AppWrapper } from "@hadmean/chromista";
+import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 import userEvent from "@testing-library/user-event";
 import SystemSettings from "pages/admin/settings/system";
 
@@ -19,9 +19,9 @@ describe("pages/admin/settings/system", () => {
 
   it("should display system values", async () => {
     render(
-      <AppWrapper>
+      <ApplicationRoot>
         <SystemSettings />
-      </AppWrapper>
+      </ApplicationRoot>
     );
     await waitFor(() => {
       expect(
@@ -33,9 +33,9 @@ describe("pages/admin/settings/system", () => {
 
   it("should update system settings successfully", async () => {
     render(
-      <AppWrapper>
+      <ApplicationRoot>
         <SystemSettings />
-      </AppWrapper>
+      </ApplicationRoot>
     );
 
     await userEvent.type(
@@ -56,9 +56,9 @@ describe("pages/admin/settings/system", () => {
 
   it("should display updated system values", async () => {
     render(
-      <AppWrapper>
+      <ApplicationRoot>
         <SystemSettings />
-      </AppWrapper>
+      </ApplicationRoot>
     );
     await waitFor(() => {
       expect(

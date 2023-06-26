@@ -1,7 +1,7 @@
 import "@testing-library/jest-dom";
 import React from "react";
 import { render, screen, waitFor, within } from "@testing-library/react";
-import { AppWrapper } from "@hadmean/chromista";
+import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 import userEvent from "@testing-library/user-event";
 
 import RolePermissions from "pages/roles/[roleId]/index";
@@ -20,9 +20,9 @@ describe("pages/roles/[roleId]/index", () => {
   }));
   it("should select all admin permissions", async () => {
     render(
-      <AppWrapper>
+      <ApplicationRoot>
         <RolePermissions />
-      </AppWrapper>
+      </ApplicationRoot>
     );
 
     const currentTab = await screen.findByRole("tabpanel");
@@ -70,9 +70,9 @@ describe("pages/roles/[roleId]/index", () => {
 
   it("should show entities checkbox only when 'Can Manage All Entities' is checked", async () => {
     render(
-      <AppWrapper>
+      <ApplicationRoot>
         <RolePermissions />
-      </AppWrapper>
+      </ApplicationRoot>
     );
 
     await userEvent.click(await screen.findByRole("tab", { name: "Entities" }));
@@ -106,9 +106,9 @@ describe("pages/roles/[roleId]/index", () => {
 
   it("should select all entities permissions", async () => {
     render(
-      <AppWrapper>
+      <ApplicationRoot>
         <RolePermissions />
-      </AppWrapper>
+      </ApplicationRoot>
     );
     await userEvent.click(await screen.findByRole("tab", { name: "Entities" }));
 
@@ -151,9 +151,9 @@ describe("pages/roles/[roleId]/index", () => {
 
   it("should update admin permissions", async () => {
     render(
-      <AppWrapper>
+      <ApplicationRoot>
         <RolePermissions />
-      </AppWrapper>
+      </ApplicationRoot>
     );
 
     const currentTab = screen.getByRole("tabpanel");
@@ -190,9 +190,9 @@ describe("pages/roles/[roleId]/index", () => {
 
   it("should show updated admin permissions", async () => {
     render(
-      <AppWrapper>
+      <ApplicationRoot>
         <RolePermissions />
-      </AppWrapper>
+      </ApplicationRoot>
     );
 
     const currentTab = screen.getByRole("tabpanel");
@@ -224,9 +224,9 @@ describe("pages/roles/[roleId]/index", () => {
 
   it("should update entity permissions", async () => {
     render(
-      <AppWrapper>
+      <ApplicationRoot>
         <RolePermissions />
-      </AppWrapper>
+      </ApplicationRoot>
     );
 
     await userEvent.click(await screen.findByRole("tab", { name: "Entities" }));
@@ -269,9 +269,9 @@ describe("pages/roles/[roleId]/index", () => {
 
   it("should show updated entity permissions", async () => {
     render(
-      <AppWrapper>
+      <ApplicationRoot>
         <RolePermissions />
-      </AppWrapper>
+      </ApplicationRoot>
     );
 
     await userEvent.click(await screen.findByRole("tab", { name: "Entities" }));

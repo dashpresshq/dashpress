@@ -14,7 +14,7 @@ import { useNavigationStack } from "frontend/lib/routing/useNavigationStack";
 import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
 import { SectionBox } from "frontend/design-system/components/Section/SectionBox";
-import { Typo } from "frontend/design-system/primitives/Text";
+import { Typo } from "frontend/design-system/primitives/Typo";
 import { Spacer } from "frontend/design-system/primitives/Spacer";
 import { SoftButton } from "frontend/design-system/components/Button/SoftButton";
 import {

@@ -4,7 +4,7 @@ import { ChevronsDown, Icon, ChevronsUp } from "react-feather";
 import { SYSTEM_COLORS } from "frontend/design-system/theme/system";
 import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
 import { Stack } from "frontend/design-system/primitives/Stack";
-import { Typo } from "frontend/design-system/primitives/Text";
+import { Typo } from "frontend/design-system/primitives/Typo";
 import { Spacer } from "frontend/design-system/primitives/Spacer";
 
 const DirectionImplementation: Record<

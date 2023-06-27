@@ -3,7 +3,7 @@ import { flexRender, Table } from "@tanstack/react-table";
 import styled from "styled-components";
 import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
 import { useThemeColorShade } from "frontend/design-system/theme/useTheme";
-import { Typo } from "frontend/design-system/primitives/Text";
+import { Typo } from "frontend/design-system/primitives/Typo";
 import { EmptyWrapper } from "../EmptyWrapper";
 
 const StyledTd = styled.td`

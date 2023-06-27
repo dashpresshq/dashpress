@@ -6,7 +6,7 @@ describe("generateRootColors", () => {
   it("should generate correct root colors", () => {
     expect(colorModeToRootColors(DEFAULT_PRIMARY_COLOR, LIGHT_MODE))
       .toMatchInlineSnapshot(`
-      Object {
+      {
         "base-color": "#ffffff",
         "border-color": "#e3ebf6",
         "foundation-color": "#f3f6f9",

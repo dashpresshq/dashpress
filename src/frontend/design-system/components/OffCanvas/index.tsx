@@ -2,7 +2,7 @@ import Offcanvas from "react-bootstrap/Offcanvas";
 import React, { ReactNode } from "react";
 import styled from "styled-components";
 import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
-import { Typo } from "frontend/design-system/primitives/Text";
+import { Typo } from "frontend/design-system/primitives/Typo";
 import { Stack } from "frontend/design-system/primitives/Stack";
 import { Divider } from "frontend/design-system/primitives/Divider";
 import { NextPortal } from "../_/NextPortal";

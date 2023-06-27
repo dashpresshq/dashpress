@@ -11,7 +11,7 @@ import {
 } from "frontend/design-system/components/DropdownMenu";
 import { Stack } from "frontend/design-system/primitives/Stack";
 import { Breadcrumbs } from "frontend/design-system/components/Breadcrumbs";
-import { Typo } from "frontend/design-system/primitives/Text";
+import { Typo } from "frontend/design-system/primitives/Typo";
 import { Spacer } from "frontend/design-system/primitives/Spacer";
 import { useSiteConfig } from "frontend/hooks/app/site.config";
 import { GoogleTagManager } from "../scripts/GoogleTagManager";

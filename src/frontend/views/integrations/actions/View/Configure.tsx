@@ -2,7 +2,7 @@ import { SchemaForm } from "frontend/components/SchemaForm";
 import { useEffect } from "react";
 import { IIntegrationsList } from "shared/types/actions";
 import { ToastService } from "frontend/lib/toast";
-import { Typo } from "frontend/design-system/primitives/Text";
+import { Typo } from "frontend/design-system/primitives/Typo";
 import { Stack } from "frontend/design-system/primitives/Stack";
 import { Spacer } from "frontend/design-system/primitives/Spacer";
 import {

@@ -23,7 +23,7 @@ import { SoftButton } from "frontend/design-system/components/Button/SoftButton"
 import { Stack } from "frontend/design-system/primitives/Stack";
 import { DeleteButton } from "frontend/design-system/components/Button/DeleteButton";
 import { Spacer } from "frontend/design-system/primitives/Spacer";
-import { Typo } from "frontend/design-system/primitives/Text";
+import { Typo } from "frontend/design-system/primitives/Typo";
 import { OffCanvas } from "frontend/design-system/components/OffCanvas";
 import {
   INTEGRATIONS_GROUP_ENDPOINT,

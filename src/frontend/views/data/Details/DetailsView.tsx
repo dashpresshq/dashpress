@@ -6,7 +6,7 @@ import {
 } from "frontend/hooks/configuration/configuration.store";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { BaseSkeleton } from "frontend/design-system/components/Skeleton/Base";
-import { Typo } from "frontend/design-system/primitives/Text";
+import { Typo } from "frontend/design-system/primitives/Typo";
 import { Spacer } from "frontend/design-system/primitives/Spacer";
 import { useEntityDataDetails } from "frontend/hooks/data/data.store";
 import {

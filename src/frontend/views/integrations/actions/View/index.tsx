@@ -1,7 +1,7 @@
 import { SchemaForm } from "frontend/components/SchemaForm";
 import { IIntegrationsList, IActivatedAction } from "shared/types/actions";
 import { BaseActionInstances } from "frontend/views/entity/Actions/Base";
-import { Typo } from "frontend/design-system/primitives/Text";
+import { Typo } from "frontend/design-system/primitives/Typo";
 import { Spacer } from "frontend/design-system/primitives/Spacer";
 import { Tabs } from "frontend/design-system/components/Tabs";
 import { useActivateActionMutation } from "../actions.store";

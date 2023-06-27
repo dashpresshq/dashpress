@@ -2,7 +2,7 @@ import React from "react";
 import { DeleteButton } from "frontend/design-system/components/Button/DeleteButton";
 import { SoftButton } from "frontend/design-system/components/Button/SoftButton";
 import { Stack } from "frontend/design-system/primitives/Stack";
-import { Typo } from "frontend/design-system/primitives/Text";
+import { Typo } from "frontend/design-system/primitives/Typo";
 import { DropDownMenu } from "frontend/design-system/components/DropdownMenu";
 import { DASHBOARD_RELATIVE_DAYS } from "./constants";
 import { IWidgetSettingProps } from "./types";

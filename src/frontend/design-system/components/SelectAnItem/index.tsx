@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Typo } from "frontend/design-system/primitives/Text";
+import { Typo } from "frontend/design-system/primitives/Typo";
 import { StyledCard } from "../Card";
 
 const StyledWrapper = styled.div`

@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
 import { Stack } from "frontend/design-system/primitives/Stack";
-import { Typo } from "frontend/design-system/primitives/Text";
+import { Typo } from "frontend/design-system/primitives/Typo";
 import { StyledCardBody } from "frontend/design-system/components/Card";
 
 const Root = styled(StyledCardBody)`

@@ -2,7 +2,7 @@ import React, { ReactNode } from "react";
 import styled from "styled-components";
 import { Frown as Droplet } from "react-feather";
 import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
-import { Typo } from "frontend/design-system/primitives/Text";
+import { Typo } from "frontend/design-system/primitives/Typo";
 
 export interface IProps {
   text: string;

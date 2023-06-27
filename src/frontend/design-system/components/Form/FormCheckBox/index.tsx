@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
-import { Typo } from "frontend/design-system/primitives/Text";
+import { Typo } from "frontend/design-system/primitives/Typo";
 import { Stack } from "frontend/design-system/primitives/Stack";
 import { ISharedFormInput } from "../_types";
 import { StyledFormFeedback, StyledFormGroup } from "../Styles";

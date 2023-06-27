@@ -6,7 +6,7 @@ import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
 import { DataStateKeys } from "frontend/lib/data/types";
 import { Stack } from "frontend/design-system/primitives/Stack";
 import { pluralize } from "shared/lib/strings";
-import { Typo } from "frontend/design-system/primitives/Text";
+import { Typo } from "frontend/design-system/primitives/Typo";
 import { Spacer } from "frontend/design-system/primitives/Spacer";
 import { ErrorAlert } from "../Alert";
 import { EmptyWrapper } from "../EmptyWrapper";

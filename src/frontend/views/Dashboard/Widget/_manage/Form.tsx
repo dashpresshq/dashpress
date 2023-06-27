@@ -23,7 +23,7 @@ import { Tabs } from "frontend/design-system/components/Tabs";
 import { RenderCode } from "frontend/design-system/components/RenderCode";
 import { Spacer } from "frontend/design-system/primitives/Spacer";
 import { SoftButton } from "frontend/design-system/components/Button/SoftButton";
-import { Typo } from "frontend/design-system/primitives/Text";
+import { Typo } from "frontend/design-system/primitives/Typo";
 import { Stack } from "frontend/design-system/primitives/Stack";
 import { FormButton } from "frontend/design-system/components/Button/FormButton";
 import { FormCodeEditor } from "frontend/design-system/components/Form/FormCodeEditor";

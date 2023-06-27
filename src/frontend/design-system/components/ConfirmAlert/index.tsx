@@ -2,7 +2,7 @@ import React from "react";
 import { confirmAlert } from "react-confirm-alert";
 import styled, { keyframes } from "styled-components";
 import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
-import { Typo } from "frontend/design-system/primitives/Text";
+import { Typo } from "frontend/design-system/primitives/Typo";
 import { Spacer } from "frontend/design-system/primitives/Spacer";
 import { Stack } from "frontend/design-system/primitives/Stack";
 import { Z_INDEXES } from "../../constants/zIndex";

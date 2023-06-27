@@ -8,7 +8,7 @@ import {
   X,
 } from "react-feather";
 import { SYSTEM_COLORS } from "frontend/design-system/theme/system";
-import { Typo } from "frontend/design-system/primitives/Text";
+import { Typo } from "frontend/design-system/primitives/Typo";
 import { getBestErrorMessage } from "frontend/lib/toast/utils";
 import { Stack } from "frontend/design-system/primitives/Stack";
 import { Spacer } from "frontend/design-system/primitives/Spacer";

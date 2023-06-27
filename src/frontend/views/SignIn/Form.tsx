@@ -4,7 +4,7 @@ import {
   AUTH_SIGNIN_FORM_SCHEMA,
   ISignInForm,
 } from "shared/form-schemas/auth/signin";
-import { Typo } from "frontend/design-system/primitives/Text";
+import { Typo } from "frontend/design-system/primitives/Typo";
 
 export function SignInForm({ onSubmit }: IFormProps<ISignInForm>) {
   return (

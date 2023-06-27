@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Typo } from "frontend/design-system/primitives/Text";
+import { Typo } from "frontend/design-system/primitives/Typo";
 import { IColorableSelection } from "shared/types/ui";
 
 const DEFAULT_TAG_COLOR = "#000000";

@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { HelpCircle } from "react-feather";
 import { ISelectData } from "shared/types/options";
 import { Stack } from "frontend/design-system/primitives/Stack";
-import { Typo } from "frontend/design-system/primitives/Text";
+import { Typo } from "frontend/design-system/primitives/Typo";
 import { Spacer } from "frontend/design-system/primitives/Spacer";
 import { DeleteButton } from "../../Button/DeleteButton";
 import { SoftButton } from "../../Button/SoftButton";

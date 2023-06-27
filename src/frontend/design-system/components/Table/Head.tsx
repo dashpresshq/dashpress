@@ -3,7 +3,7 @@ import * as React from "react";
 import { ArrowUp } from "react-feather";
 import styled, { css } from "styled-components";
 import { Stack } from "frontend/design-system/primitives/Stack";
-import { Typo } from "frontend/design-system/primitives/Text";
+import { Typo } from "frontend/design-system/primitives/Typo";
 import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
 import { TableFilter } from "./filters";
 import { TableFilterType } from "./filters/types";

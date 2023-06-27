@@ -6,7 +6,7 @@ import { DropzoneState } from "react-dropzone";
 import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
 import { SYSTEM_COLORS } from "frontend/design-system/theme/system";
 import { Spacer } from "frontend/design-system/primitives/Spacer";
-import { Typo } from "frontend/design-system/primitives/Text";
+import { Typo } from "frontend/design-system/primitives/Typo";
 import { ProgressBar } from "frontend/design-system/components/ProgressBar";
 import { DeleteButton } from "frontend/design-system/components/Button/DeleteButton";
 

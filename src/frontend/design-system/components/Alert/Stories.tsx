@@ -3,8 +3,8 @@ import React from "react";
 import { Story } from "@storybook/react";
 import { GitHub } from "react-feather";
 import { action } from "@storybook/addon-actions";
+import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 import { Alert, IProps, AlertType } from ".";
-import { ApplicationRoot } from "../../ApplicationRoot";
 
 export default {
   title: "Components/Alert",

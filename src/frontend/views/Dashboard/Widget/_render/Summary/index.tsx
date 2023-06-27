@@ -1,7 +1,7 @@
 import { ISummaryWidgetConfig } from "shared/types/dashboard";
 import { ROYGBIV } from "shared/constants/colors";
 import { systemIconToSVG } from "shared/constants/Icons";
-import { SummaryWidget as SummaryWidgetPresentation } from "@hadmean/chromista";
+import { SummaryWidget as SummaryWidgetPresentation } from "frontend/design-system/components/Widgets/Summary";
 import { SummaryCardWidgetSchema } from "./types";
 import {
   getFullAndRelativeCount,

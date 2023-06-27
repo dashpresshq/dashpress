@@ -1,7 +1,7 @@
 import { usersApiController } from "backend/users/users.controller";
 import { RESET_PASSWORD_FORM_SCHEMA } from "shared/form-schemas/users/reset-password";
 import { USER_PERMISSIONS } from "shared/constants/user";
-import { requestHandler } from "../../../../backend/lib/request";
+import { requestHandler } from "backend/lib/request";
 
 export default requestHandler(
   {

@@ -1,9 +1,9 @@
-import { IDropDownMenuItem } from "@hadmean/chromista";
 import { useEntityCrudConfig } from "frontend/hooks/entity/entity.config";
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
 import { useRouter } from "next/router";
 import { Plus } from "react-feather";
 import { SLUG_LOADING_VALUE } from "frontend/lib/routing/constants";
+import { IDropDownMenuItem } from "frontend/design-system/components/DropdownMenu";
 import { usePluginTableMenuItems } from "./portal";
 import { useCanUserPerformCrudAction } from "../useCanUserPerformCrudAction";
 

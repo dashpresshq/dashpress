@@ -1,5 +1,5 @@
 import React from "react";
-import { IColumnFilterBag } from "@hadmean/protozoa";
+import { IColumnFilterBag } from "shared/types/data";
 import { IFilterProps } from "./types";
 
 import { AsyncFormMultiSelect } from "../../Form/FormSelect/Async";

@@ -1,4 +1,3 @@
-import { SectionBox } from "@hadmean/chromista";
 import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
 import { USER_PERMISSIONS } from "shared/constants/user";
@@ -6,6 +5,7 @@ import { useEntitySlug } from "frontend/hooks/entity/entity.config";
 import { FormIntegrationsDocumentation } from "frontend/docs/form-integrations";
 import { DOCUMENTATION_LABEL } from "frontend/docs";
 import { useState } from "react";
+import { SectionBox } from "frontend/design-system/components/Section/SectionBox";
 import { BaseEntitySettingsLayout } from "../_Base";
 import { ENTITY_CONFIGURATION_VIEW } from "../constants";
 import { BaseActionInstances } from "./Base";

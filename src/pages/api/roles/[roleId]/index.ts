@@ -1,7 +1,7 @@
 import { rolesApiController } from "backend/roles/roles.controller";
 import { BASE_ROLE_FORM_SCHEMA } from "shared/form-schemas/roles/base";
 import { USER_PERMISSIONS } from "shared/constants/user";
-import { requestHandler } from "../../../../backend/lib/request";
+import { requestHandler } from "backend/lib/request";
 
 const REQUEST_QUERY_FIELD = "roleId";
 

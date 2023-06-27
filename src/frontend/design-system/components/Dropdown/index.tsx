@@ -4,8 +4,8 @@ import React, { ReactNode, useEffect, useRef, useState } from "react";
 import useClickAway from "react-use/lib/useClickAway";
 import useKey from "react-use/lib/useKey";
 import styled from "styled-components";
+import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
 import { Z_INDEXES } from "../../constants/zIndex";
-import { USE_ROOT_COLOR } from "../../theme/root";
 
 const Root = styled.div`
   position: relative;

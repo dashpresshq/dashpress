@@ -1,7 +1,7 @@
 import React, { ReactNode } from "react";
 import Head from "next/head";
 import { GuestLayout } from "frontend/design-system/layouts/GuestLayout";
-import { useSiteConfig } from "../../hooks/app/site.config";
+import { useSiteConfig } from "frontend/hooks/app/site.config";
 import { useAppTheme } from "../useAppTheme";
 import { GoogleTagManager } from "../scripts/GoogleTagManager";
 

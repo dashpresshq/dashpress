@@ -1,7 +1,7 @@
 import React, { ReactNode } from "react";
 import styled from "styled-components";
-import { Stack } from "../../../../ui-blocks";
-import { USE_ROOT_COLOR } from "../../../../theme";
+import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
+import { Stack } from "frontend/design-system/primitives/Stack";
 
 const Root = styled.div`
   width: 100%;

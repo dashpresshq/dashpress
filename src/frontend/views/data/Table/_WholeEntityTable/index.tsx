@@ -1,11 +1,13 @@
 import { useEntitiesFilterCount } from "frontend/hooks/data/data.store";
 import { ITableTab, FieldQueryFilter } from "shared/types/data";
-import { StyledCard, Tabs, TableSkeleton } from "@hadmean/chromista";
 import { useEntityConfiguration } from "frontend/hooks/configuration/configuration.store";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { useChangeRouterParam } from "frontend/lib/routing/useChangeRouterParam";
 import { useRouteParam } from "frontend/lib/routing/useRouteParam";
 import { abbreviateNumber } from "frontend/lib/numbers";
+import { TableSkeleton } from "frontend/design-system/components/Skeleton/Table";
+import { StyledCard } from "frontend/design-system/components/Card";
+import { Tabs } from "frontend/design-system/components/Tabs";
 import { DetailsCanvas } from "./DetailsCanvas";
 import { TableTopComponent, usePortalTableTabs } from "../portal";
 import { EntityDataTable } from "./EntityDataTable";

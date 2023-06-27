@@ -2,7 +2,7 @@
 import React from "react";
 import { Story } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
-import { ApplicationRoot } from "../../ApplicationRoot";
+import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 import { SoftButton, IProps } from "./SoftButton";
 
 export default {

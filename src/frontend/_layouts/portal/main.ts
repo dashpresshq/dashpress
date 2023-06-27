@@ -1,4 +1,4 @@
-import { IColorMode } from "@hadmean/chromista";
+import { IColorMode } from "frontend/design-system/theme/types";
 import { noop } from "shared/lib/noop";
 
 export const processThemeColors = (

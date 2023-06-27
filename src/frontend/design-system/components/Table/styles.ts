@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import { USE_ROOT_COLOR } from "../../theme/root";
+import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
 
 export const StyledTh = styled.th<{ $isSortable?: boolean }>`
   padding: 8px;

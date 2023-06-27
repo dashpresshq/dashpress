@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { SYSTEM_COLORS } from "../../theme";
+import { SYSTEM_COLORS } from "frontend/design-system/theme/system";
 
 export const StyledBadge = styled.span<{ color: keyof typeof SYSTEM_COLORS }>`
   display: inline-block;

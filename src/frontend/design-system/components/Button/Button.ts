@@ -1,5 +1,6 @@
+import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
+import { SYSTEM_COLORS } from "frontend/design-system/theme/system";
 import styled, { css } from "styled-components";
-import { SYSTEM_COLORS, USE_ROOT_COLOR } from "../../theme";
 
 export interface IStyledBaseButton {
   block?: boolean;

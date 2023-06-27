@@ -1,9 +1,3 @@
-import {
-  DeleteButton,
-  SoftButton,
-  Stack,
-  StyledCard,
-} from "@hadmean/chromista";
 import { useCallback } from "react";
 import { AppLayout } from "frontend/_layouts/app";
 import { Plus } from "react-feather";
@@ -18,6 +12,10 @@ import {
 import { SystemRoles } from "shared/types/user";
 import { USER_PERMISSIONS } from "shared/constants/user";
 import { IRolesList } from "shared/types/roles";
+import { SoftButton } from "frontend/design-system/components/Button/SoftButton";
+import { Stack } from "frontend/design-system/primitives/Stack";
+import { DeleteButton } from "frontend/design-system/components/Button/DeleteButton";
+import { StyledCard } from "frontend/design-system/components/Card";
 import {
   ADMIN_ROLES_CRUD_CONFIG,
   useRoleDeletionMutation,

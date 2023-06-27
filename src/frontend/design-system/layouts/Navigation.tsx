@@ -1,8 +1,8 @@
 import React from "react";
 import styled, { css } from "styled-components";
 import Link from "next/link";
+import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
 import { ISelectionView } from "./types";
-import { USE_ROOT_COLOR } from "../theme";
 import { PlainButton } from "../components/Button/TextButton";
 
 interface IRenderNavigation {

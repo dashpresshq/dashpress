@@ -3,8 +3,9 @@ import React from "react";
 import { Story } from "@storybook/react";
 import { Field, Form } from "react-final-form";
 import { action } from "@storybook/addon-actions";
-import { required } from "@hadmean/protozoa";
-import { ApplicationRoot } from "../../ApplicationRoot";
+import { required } from "frontend/lib/validations";
+import { ApplicationRoot } from "frontend/components/ApplicationRoot";
+import { Stack } from "frontend/design-system/primitives/Stack";
 import { FormCheckBox } from "./FormCheckBox";
 import { FormInput } from "./FormInput";
 import { FormNumberInput } from "./FormNumberInput";
@@ -16,10 +17,9 @@ import { FormMultiSelect, FormSelect } from "./FormSelect";
 import { FormCodeEditor } from "./FormCodeEditor";
 import { AsyncFormSelect } from "./FormSelect/Async";
 import { FormSwitch } from "./FormSwitch";
-import { DeleteButton } from "../Button";
+import { DeleteButton } from "../Button/DeleteButton";
 import { FormSearch } from "./FormSearch";
 import { FormFileInput } from "./FormFileInput";
-import { Stack } from "../../primitives";
 import { FormSelectButton } from "./FormSelectButton";
 
 function DemoForm() {

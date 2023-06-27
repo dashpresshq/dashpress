@@ -1,11 +1,9 @@
-import {
-  FormButton,
-  RenderList,
-  SectionListItem,
-  Spacer,
-} from "@hadmean/chromista";
 import React, { useEffect, useState } from "react";
 import { ICrudConfig } from "frontend/lib/crud-config";
+import { FormButton } from "frontend/design-system/components/Button/FormButton";
+import { Spacer } from "frontend/design-system/primitives/Spacer";
+import { RenderList } from "frontend/design-system/components/RenderList";
+import { SectionListItem } from "frontend/design-system/components/Section/SectionList";
 import { useStringSelections } from "../../../lib/selection";
 
 interface IProps {

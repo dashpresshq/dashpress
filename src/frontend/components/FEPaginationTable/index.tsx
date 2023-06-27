@@ -1,14 +1,12 @@
 import { useState, ReactNode } from "react";
-import {
-  Table,
-  DEFAULT_TABLE_STATE,
-  TableSkeleton,
-  ITableColumn,
-} from "@hadmean/chromista";
-import { TableFilterType } from "@hadmean/chromista/dist/components/Table/filters/types";
 import { IPaginatedDataState } from "shared/types/data";
-import { ViewStateMachine } from "../ViewStateMachine";
+import { DEFAULT_TABLE_STATE } from "frontend/design-system/components/Table/constants";
+import { TableSkeleton } from "frontend/design-system/components/Skeleton/Table";
+import { Table } from "frontend/design-system/components/Table";
+import { ITableColumn } from "frontend/design-system/components/Table/types";
+import { TableFilterType } from "frontend/design-system/components/Table/filters/types";
 import { useFEPagination } from "./useFEPagination";
+import { ViewStateMachine } from "../ViewStateMachine";
 
 export interface IFETableCell<T> {
   row: {

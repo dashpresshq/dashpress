@@ -3,9 +3,10 @@ import noop from "lodash/noop";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import styled from "styled-components";
+import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
+import { SYSTEM_COLORS } from "frontend/design-system/theme/system";
 import { ISharedFormInput } from "../_types";
 import { generateClassNames, wrapLabelAndError } from "../_wrapForm";
-import { SYSTEM_COLORS, USE_ROOT_COLOR } from "../../../theme";
 
 const Root = styled.div`
   .ql-editor {

@@ -1,4 +1,3 @@
-import { SectionBox, SoftButton, Spacer, Typo } from "@hadmean/chromista";
 import { META_USER_PERMISSIONS } from "shared/constants/user";
 import {
   useEntityIdField,
@@ -14,11 +13,15 @@ import { useRouteParam } from "frontend/lib/routing/useRouteParam";
 import { useNavigationStack } from "frontend/lib/routing/useNavigationStack";
 import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
+import { SectionBox } from "frontend/design-system/components/Section/SectionBox";
+import { Typo } from "frontend/design-system/primitives/Text";
+import { Spacer } from "frontend/design-system/primitives/Spacer";
+import { SoftButton } from "frontend/design-system/components/Button/SoftButton";
 import {
   useEntityCrudConfig,
   useEntityId,
   useEntitySlug,
-} from "../../../hooks/entity/entity.config";
+} from "frontend/hooks/entity/entity.config";
 import { ENTITY_DETAILS_VIEW_KEY } from "./constants";
 import { EntityDetailsView } from "./DetailsView";
 import { DetailsLayout } from "./_Layout";

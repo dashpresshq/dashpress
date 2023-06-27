@@ -2,9 +2,10 @@
 import React, { useState } from "react";
 import { Story } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
-import { IPaginatedDataState } from "@hadmean/protozoa";
-import { ApplicationRoot } from "../../ApplicationRoot";
-import { Table, IProps, DEFAULT_TABLE_STATE } from ".";
+import { IPaginatedDataState } from "shared/types/data";
+import { ApplicationRoot } from "frontend/components/ApplicationRoot";
+import { Table, DEFAULT_TABLE_STATE } from ".";
+import { IProps } from "./types";
 import { TABLE_COLUMNS, TABLE_DATA } from "./data";
 
 export default {

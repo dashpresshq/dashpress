@@ -1,14 +1,12 @@
 import React from "react";
-import {
-  DeleteButton,
-  DropDownMenu,
-  SoftButton,
-  Stack,
-  Typo,
-} from "@hadmean/chromista";
-import { useDashboardWidgetRelativeDateStore } from "../../../relativeTime.store";
-import { IWidgetSettingProps } from "./types";
+import { DeleteButton } from "frontend/design-system/components/Button/DeleteButton";
+import { SoftButton } from "frontend/design-system/components/Button/SoftButton";
+import { Stack } from "frontend/design-system/primitives/Stack";
+import { Typo } from "frontend/design-system/primitives/Text";
+import { DropDownMenu } from "frontend/design-system/components/DropdownMenu";
 import { DASHBOARD_RELATIVE_DAYS } from "./constants";
+import { IWidgetSettingProps } from "./types";
+import { useDashboardWidgetRelativeDateStore } from "../../../relativeTime.store";
 
 interface IProps {
   setting?: IWidgetSettingProps;

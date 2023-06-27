@@ -1,11 +1,3 @@
-import {
-  FormSkeleton,
-  FormSkeletonSchema,
-  ListSkeleton,
-  SectionBox,
-  SortList,
-  Tabs,
-} from "@hadmean/chromista";
 import { USER_PERMISSIONS } from "shared/constants/user";
 import {
   useEntityFieldLabels,
@@ -31,13 +23,21 @@ import { DOCUMENTATION_LABEL } from "frontend/docs";
 import { useRouteParam } from "frontend/lib/routing/useRouteParam";
 import { useChangeRouterParam } from "frontend/lib/routing/useChangeRouterParam";
 import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
-import { BaseEntitySettingsLayout } from "../_Base";
-import { FieldsLabelForm, loadingFieldsLabelForm } from "./FieldsLabel.form";
-import { FieldsTypeForm } from "./FieldsType.form";
+import {
+  FormSkeleton,
+  FormSkeletonSchema,
+} from "frontend/design-system/components/Skeleton/Form";
+import { ListSkeleton } from "frontend/design-system/components/Skeleton/List";
+import { SortList } from "frontend/design-system/components/SortList";
+import { SectionBox } from "frontend/design-system/components/Section/SectionBox";
+import { Tabs } from "frontend/design-system/components/Tabs";
 import {
   ENTITY_CONFIGURATION_VIEW,
   ENTITY_FIELD_SETTINGS_TAB_LABELS,
 } from "../constants";
+import { FieldsTypeForm } from "./FieldsType.form";
+import { FieldsLabelForm, loadingFieldsLabelForm } from "./FieldsLabel.form";
+import { BaseEntitySettingsLayout } from "../_Base";
 
 const DOCS_TITLE = "Fields Settings";
 

@@ -1,11 +1,17 @@
 import React from "react";
 import shallow from "zustand/shallow";
 import styled from "styled-components";
+import {
+  SHADOW_CSS,
+  StyledCardBody,
+} from "frontend/design-system/components/Card";
+import { SoftButton } from "frontend/design-system/components/Button/SoftButton";
+import { Stack } from "frontend/design-system/primitives/Stack";
+import { Divider } from "frontend/design-system/primitives/Divider";
+import { Typo } from "frontend/design-system/primitives/Text";
 import { useSideBarStore } from "../sidebar.store";
 import { ISelectionView } from "../types";
 import { ViewMenuItems } from "./ViewMenuItems";
-import { SHADOW_CSS, SoftButton, StyledCardBody } from "../../components";
-import { Divider, Stack, Typo } from "../../ui-blocks";
 
 interface IProps {
   selectionView: ISelectionView[];

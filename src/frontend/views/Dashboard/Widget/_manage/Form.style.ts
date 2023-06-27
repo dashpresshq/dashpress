@@ -1,4 +1,4 @@
-import { BREAKPOINTS } from "@hadmean/chromista";
+import { BREAKPOINTS } from "frontend/design-system/constants";
 import styled from "styled-components";
 
 export const GridSpan = styled.div<{ $span?: number }>`

@@ -1,4 +1,3 @@
-import { Tabs, SectionBox } from "@hadmean/chromista";
 import { ReactNode, useEffect, useState } from "react";
 import {
   ENTITY_LIST_PATH,
@@ -12,17 +11,19 @@ import { CRUDDocumentation } from "frontend/docs/crud";
 import { useRouteParam } from "frontend/lib/routing/useRouteParam";
 import { useChangeRouterParam } from "frontend/lib/routing/useChangeRouterParam";
 import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
+import { SectionBox } from "frontend/design-system/components/Section/SectionBox";
+import { Tabs } from "frontend/design-system/components/Tabs";
 import {
   useEntityCrudSettings,
   useEntityFieldLabels,
   useEntitySlug,
-} from "../../../hooks/entity/entity.config";
-import { BaseEntitySettingsLayout } from "../_Base";
+} from "frontend/hooks/entity/entity.config";
 import {
   useEntityConfiguration,
   useUpsertConfigurationMutation,
-} from "../../../hooks/configuration/configuration.store";
-import { useEntityFields } from "../../../hooks/entity/entity.store";
+} from "frontend/hooks/configuration/configuration.store";
+import { useEntityFields } from "frontend/hooks/entity/entity.store";
+import { BaseEntitySettingsLayout } from "../_Base";
 import { SelectionTab } from "./SelectionTab";
 
 import {

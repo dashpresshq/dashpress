@@ -2,6 +2,7 @@ import React from "react";
 import classnames from "classnames";
 import { FieldMetaState } from "react-final-form";
 import { HelpCircle } from "react-feather";
+import { Stack } from "frontend/design-system/primitives/Stack";
 import { ISharedFormInput } from "./_types";
 import { Tooltip } from "../Tooltip";
 import {
@@ -10,8 +11,7 @@ import {
   StyledFormFeedback,
   StyledRequiredAsterick,
 } from "./Styles";
-import { Stack } from "../../primitives";
-import { SoftButton } from "../Button";
+import { SoftButton } from "../Button/SoftButton";
 
 export const isFormMetaWithError = (meta: FieldMetaState<any>) =>
   meta && meta.touched && meta.invalid && meta.error;

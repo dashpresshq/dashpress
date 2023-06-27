@@ -8,7 +8,7 @@ import {
   useEntityCrudConfig,
   useEntityId,
   useEntitySlug,
-} from "../../../hooks/entity/entity.config";
+} from "frontend/hooks/entity/entity.config";
 import { ENTITY_DETAILS_VIEW_KEY } from "./constants";
 import { EntityDetailsView } from "./DetailsView";
 import { DetailsLayout, DETAILS_LAYOUT_KEY } from "./_Layout";

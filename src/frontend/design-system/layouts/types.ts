@@ -1,6 +1,6 @@
-import { DataStateKeys } from "@hadmean/protozoa";
 import { ReactNode } from "react";
 import { Icon } from "react-feather";
+import { DataStateKeys } from "frontend/lib/data/types";
 import { ButtonIconTypes } from "../components/Button/constants";
 
 export interface IViewMenuItem {

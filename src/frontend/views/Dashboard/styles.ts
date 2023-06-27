@@ -1,4 +1,4 @@
-import { BREAKPOINTS } from "@hadmean/chromista";
+import { BREAKPOINTS } from "frontend/design-system/constants";
 import { WidgetSizes } from "shared/types/dashboard/types";
 import styled, { css } from "styled-components";
 

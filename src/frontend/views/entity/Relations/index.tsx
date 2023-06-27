@@ -1,13 +1,4 @@
 import {
-  FormSkeleton,
-  FormSkeletonSchema,
-  ListSkeleton,
-  SectionBox,
-  SortList,
-  Spacer,
-  Tabs,
-} from "@hadmean/chromista";
-import {
   ENTITY_RELATIONS_ENDPOINT,
   useEntityFields,
   useEntityReferenceFields,
@@ -30,13 +21,22 @@ import { SLUG_LOADING_VALUE } from "frontend/lib/routing/constants";
 import { useChangeRouterParam } from "frontend/lib/routing/useChangeRouterParam";
 import { useRouteParam } from "frontend/lib/routing/useRouteParam";
 import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
-import { BaseEntitySettingsLayout } from "../_Base";
-import { EntityRelationsForm } from "./Relations.form";
-import { ENTITY_CONFIGURATION_VIEW } from "../constants";
+import { SectionBox } from "frontend/design-system/components/Section/SectionBox";
+import { Tabs } from "frontend/design-system/components/Tabs";
+import {
+  FormSkeleton,
+  FormSkeletonSchema,
+} from "frontend/design-system/components/Skeleton/Form";
+import { Spacer } from "frontend/design-system/primitives/Spacer";
+import { ListSkeleton } from "frontend/design-system/components/Skeleton/List";
+import { SortList } from "frontend/design-system/components/SortList";
 import {
   FieldsLabelForm,
   loadingFieldsLabelForm,
 } from "../Fields/FieldsLabel.form";
+import { ENTITY_CONFIGURATION_VIEW } from "../constants";
+import { EntityRelationsForm } from "./Relations.form";
+import { BaseEntitySettingsLayout } from "../_Base";
 
 const DOCS_TITLE = "Relationship Settings";
 

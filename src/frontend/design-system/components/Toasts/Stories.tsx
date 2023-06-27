@@ -2,8 +2,8 @@
 import React from "react";
 import { Story } from "@storybook/react";
 import { action as storyAction } from "@storybook/addon-actions";
-import { ToastService } from "@hadmean/protozoa";
-import { ApplicationRoot } from "../../ApplicationRoot";
+import { ToastService } from "frontend/lib/toast";
+import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 
 interface IProps {
   label: string;

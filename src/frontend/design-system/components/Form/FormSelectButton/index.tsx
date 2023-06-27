@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import { StringUtils } from "@hadmean/protozoa";
+import { sluggify } from "shared/lib/strings";
+import { ISelectData } from "shared/types/options";
 import { StyledOutlineButton } from "../../Button/Button";
-import { ISelectData } from "../../../types";
 import { IBaseFormSelect } from "../FormSelect/types";
 import { generateFormArias, wrapLabelAndError } from "../_wrapForm";
 
@@ -62,7 +62,7 @@ function BaseFormSelectButton({
           >
             <StyledInput
               type="radio"
-              name={`${name}__${StringUtils.sluggify(
+              name={`${name}__${sluggify(
                 // eslint-disable-next-line no-nested-ternary
                 typeof value === "boolean" ? (value ? "true" : "false") : value
               )}`}

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { USE_ROOT_COLOR } from "../../theme";
+import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
 
 export const PlainButton = styled.button`
   &:focus {

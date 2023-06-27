@@ -1,12 +1,12 @@
 import React from "react";
 import Select from "react-select";
 import styled from "styled-components";
+import { ISelectData } from "shared/types/options";
 import {
   generateClassNames,
   wrapLabelAndError,
   generateFormArias,
 } from "../_wrapForm";
-import { ISelectData } from "../../../types";
 import { SelectStyles, SharedSelectProps } from "./styles";
 import { IBaseFormSelect } from "./types";
 

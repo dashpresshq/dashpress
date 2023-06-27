@@ -2,8 +2,8 @@
 import React from "react";
 import { Story } from "@storybook/react";
 import { useState } from "@storybook/addons";
+import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 import { OffCanvas, IProps } from ".";
-import { ApplicationRoot } from "../../ApplicationRoot";
 
 export default {
   title: "Components/OffCanvas",

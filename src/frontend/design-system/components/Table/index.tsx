@@ -5,20 +5,18 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import styled, { css } from "styled-components";
-import { USE_ROOT_COLOR } from "../../theme";
+import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
 import { DEFAULT_TABLE_STATE } from "./constants";
-import { IProps, ITableColumn } from "./types";
+import { IProps } from "./types";
 import { getPageCount } from "./utils";
 import { TablePagination } from "./_Pagination";
 import { ErrorAlert } from "../Alert";
 import { TableSkeleton } from "../Skeleton/Table";
-import { BaseSkeleton } from "../Skeleton";
 import { TableHead } from "./Head";
 import { TableBody } from "./Body";
 import { TableFoot } from "./Foot";
 import { useInternalColumns, useSyncTableState } from "./hooks";
-
-export { ITableColumn, IProps };
+import { BaseSkeleton } from "../Skeleton/Base";
 
 export { DEFAULT_TABLE_STATE };
 

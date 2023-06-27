@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
+import { Typo } from "frontend/design-system/primitives/Text";
 import { StyledCard } from "../Card";
-import { Typo } from "../../primitives/Text";
 
 const StyledWrapper = styled.div`
   text-align: center;

@@ -1,5 +1,7 @@
 import { IWidgetConfig } from "shared/types/dashboard";
-import { BaseSkeleton, Stack, TableSkeleton } from "@hadmean/chromista";
+import { Stack } from "frontend/design-system/primitives/Stack";
+import { BaseSkeleton } from "frontend/design-system/components/Skeleton/Base";
+import { TableSkeleton } from "frontend/design-system/components/Skeleton/Table";
 import { PORTAL_WIDGET_CONFIG } from "./portal";
 import { IWidgetConfigBag } from "./types";
 import { TableWidgetSchema } from "./_render/Table/types";

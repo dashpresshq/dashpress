@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import debounce from "lodash/debounce";
 import AsyncSelect from "react-select/async";
-import { makeGetRequest, useApi } from "@hadmean/protozoa";
 import styled from "styled-components";
 import { useAsync, useSessionStorage } from "react-use";
-import { ISelectData } from "../../../../types";
+import { ISelectData } from "shared/types/options";
+import { useApi } from "frontend/lib/data/useApi";
+import { makeGetRequest } from "frontend/lib/data/makeRequest";
 import { FormSelect } from "..";
 import {
   generateClassNames,

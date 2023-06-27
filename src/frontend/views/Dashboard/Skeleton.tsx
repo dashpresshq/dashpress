@@ -1,5 +1,7 @@
-import { BaseSkeleton, TableSkeleton, StyledCard } from "@hadmean/chromista";
 import styled from "styled-components";
+import { BaseSkeleton } from "frontend/design-system/components/Skeleton/Base";
+import { TableSkeleton } from "frontend/design-system/components/Skeleton/Table";
+import { StyledCard } from "frontend/design-system/components/Card";
 import { gridRoot, WidgetRoot } from "./styles";
 
 const Root = styled.div`

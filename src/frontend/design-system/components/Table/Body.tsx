@@ -1,10 +1,10 @@
 import React from "react";
 import { flexRender, Table } from "@tanstack/react-table";
 import styled from "styled-components";
-import { USE_ROOT_COLOR } from "../../theme/root";
+import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
+import { useThemeColorShade } from "frontend/design-system/theme/useTheme";
+import { Typo } from "frontend/design-system/primitives/Text";
 import { EmptyWrapper } from "../EmptyWrapper";
-import { Typo } from "../../primitives/Text";
-import { useThemeColorShade } from "../../theme/useTheme";
 
 const StyledTd = styled.td`
   padding: 0.45rem;

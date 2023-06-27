@@ -1,11 +1,11 @@
 import React, { ReactNode, useState } from "react";
+import { Spacer } from "frontend/design-system/primitives/Spacer";
 import { ErrorAlert } from "../Alert";
 import { EmptyWrapper } from "../EmptyWrapper";
 import { ListSkeleton } from "../Skeleton/List";
 import { SectionList } from "../Section/SectionList";
 import { FormSearch } from "../Form/FormSearch";
 import { SoftButton } from "../Button/SoftButton";
-import { Spacer } from "../../primitives";
 
 export interface IProps<T> {
   isLoading?: false | number;

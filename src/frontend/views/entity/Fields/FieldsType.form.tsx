@@ -1,4 +1,3 @@
-import { FormButton, FormSelect, OffCanvas } from "@hadmean/chromista";
 import { Form, Field } from "react-final-form";
 import { useMemo, useState } from "react";
 import { getFieldTypeBoundedValidations } from "frontend/hooks/entity/guess";
@@ -11,8 +10,11 @@ import {
   composeValidators,
   maxLength,
 } from "frontend/lib/validations";
-import { FieldValidationCanvas } from "./FieldsValidation";
+import { FormSelect } from "frontend/design-system/components/Form/FormSelect";
+import { FormButton } from "frontend/design-system/components/Button/FormButton";
+import { OffCanvas } from "frontend/design-system/components/OffCanvas";
 import { FieldSelectionCanvas } from "./FieldsSelection";
+import { FieldValidationCanvas } from "./FieldsValidation";
 
 const CRUD_CONFIG = MAKE_APP_CONFIGURATION_CRUD_CONFIG("entity_columns_types");
 

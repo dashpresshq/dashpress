@@ -1,4 +1,3 @@
-import { BaseSkeleton, Spacer, Typo } from "@hadmean/chromista";
 import { SLUG_LOADING_VALUE } from "frontend/lib/routing/constants";
 import React, { Fragment } from "react";
 import {
@@ -6,17 +5,20 @@ import {
   useEntityConfiguration,
 } from "frontend/hooks/configuration/configuration.store";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
+import { BaseSkeleton } from "frontend/design-system/components/Skeleton/Base";
+import { Typo } from "frontend/design-system/primitives/Text";
+import { Spacer } from "frontend/design-system/primitives/Spacer";
+import { useEntityDataDetails } from "frontend/hooks/data/data.store";
 import {
   useEntityFieldLabels,
   useEntityFieldSelections,
   useProcessedEntityFieldTypes,
   useHiddenEntityColumns,
-} from "../../../hooks/entity/entity.config";
-import { useEntityDataDetails } from "../../../hooks/data/data.store";
+} from "frontend/hooks/entity/entity.config";
 import {
   useEntityFields,
   useEntityToOneReferenceFields,
-} from "../../../hooks/entity/entity.store";
+} from "frontend/hooks/entity/entity.store";
 import { filterOutHiddenScalarColumns } from "../utils";
 import { useEntityViewStateMachine } from "../useEntityViewStateMachine";
 import { viewSpecialDataTypes } from "../viewSpecialDataTypes";

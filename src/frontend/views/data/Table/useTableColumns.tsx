@@ -1,4 +1,3 @@
-import { TableFilterType } from "@hadmean/chromista/dist/components/Table/filters/types";
 import {
   useEntityFieldLabels,
   useEntityFieldSelections,
@@ -11,7 +10,6 @@ import {
   useEntityToOneReferenceFields,
 } from "frontend/hooks/entity/entity.store";
 import { FIELD_TYPES_CONFIG_MAP } from "shared/validations";
-import { ITableColumn } from "@hadmean/chromista";
 import { useMemo } from "react";
 import { IColorableSelection } from "shared/types/ui";
 import { ENTITY_LIST_PATH } from "frontend/hooks/data/data.store";
@@ -21,6 +19,8 @@ import {
 } from "frontend/hooks/configuration/configuration.store";
 import { DataStateKeys } from "frontend/lib/data/types";
 import { ellipsis } from "shared/lib/strings";
+import { TableFilterType } from "frontend/design-system/components/Table/filters/types";
+import { ITableColumn } from "frontend/design-system/components/Table/types";
 import { filterOutHiddenScalarColumns } from "../utils";
 import { TableActions } from "./Actions";
 import { viewSpecialDataTypes } from "../viewSpecialDataTypes";

@@ -3,7 +3,7 @@ import { USER_PERMISSIONS } from "shared/constants/user";
 import { useUserHasPermission } from "frontend/hooks/auth/user.store";
 import { useNavigationStack } from "frontend/lib/routing/useNavigationStack";
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
-import { useUserMenuEntities } from "../../../../hooks/entity/entity.store";
+import { useUserMenuEntities } from "frontend/hooks/entity/entity.store";
 import { ROOT_LINKS_TO_CLEAR_BREADCRUMBS } from "../../constants";
 import { IAppMenuItems } from "../../types";
 import { useAppendPortalMenuItems } from "../../appendPortalMenuItems/portal";

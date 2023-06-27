@@ -1,10 +1,11 @@
 import React from "react";
 import styled from "styled-components";
+import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
+import { Typo } from "frontend/design-system/primitives/Text";
+import { Stack } from "frontend/design-system/primitives/Stack";
 import { ISharedFormInput } from "../_types";
-import { Stack, Typo } from "../../../primitives";
 import { StyledFormFeedback, StyledFormGroup } from "../Styles";
 import { isFormMetaWithError } from "../_wrapForm";
-import { USE_ROOT_COLOR } from "../../../theme";
 
 const StyledCheckBoxInput = styled.input`
   border-radius: 0.25em;

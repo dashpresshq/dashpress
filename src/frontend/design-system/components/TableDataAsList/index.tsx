@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
 import { Edit } from "react-feather";
 import React from "react";
-import { USE_ROOT_COLOR } from "../../theme";
+import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
 
 export interface IProps {
   onSelect: () => void;

@@ -3,11 +3,12 @@ import styled from "styled-components";
 import noop from "lodash/noop";
 import Editor from "react-simple-code-editor";
 import { highlight, languages } from "prismjs/components/prism-core";
+import { SYSTEM_COLORS } from "frontend/design-system/theme/system";
+import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
 import { ISharedFormInput } from "../_types";
 import { generateClassNames, wrapLabelAndError } from "../_wrapForm";
 import "prismjs/components/prism-clike";
 import "prismjs/components/prism-javascript";
-import { SYSTEM_COLORS, USE_ROOT_COLOR } from "../../../theme";
 import { PrismTokenStyles } from "../../RenderCode/styles";
 
 interface IFormCodeEditor extends ISharedFormInput {

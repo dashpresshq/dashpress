@@ -1,6 +1,6 @@
 import { Column } from "@tanstack/react-table";
 import React, { useEffect, useState } from "react";
-import { IColumnFilterBag } from "@hadmean/protozoa";
+import { IColumnFilterBag } from "shared/types/data";
 import { useDebounce } from "react-use";
 import { TableFilterType } from "./types";
 import { FilterWrapper } from "./_FilterWrapper";

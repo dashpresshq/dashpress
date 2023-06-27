@@ -1,9 +1,9 @@
-import { SLUG_LOADING_VALUE } from "@hadmean/protozoa";
 import React, { useState, useEffect, ReactNode } from "react";
 import styled, { css } from "styled-components";
 import RBTab from "react-bootstrap/Tab";
 import RBTabs from "react-bootstrap/Tabs";
-import { USE_ROOT_COLOR } from "../../theme";
+import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
+import { SLUG_LOADING_VALUE } from "frontend/lib/routing/constants";
 
 const Root = styled.div<{ $padContent: boolean }>`
   .nav {

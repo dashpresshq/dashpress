@@ -1,12 +1,4 @@
 import {
-  FormButton,
-  FormInput,
-  FormNoValueSelect,
-  FormNumberInput,
-  SectionBox,
-  Spacer,
-} from "@hadmean/chromista";
-import {
   FIELD_TYPES_CONFIG_MAP,
   ENTITY_VALIDATION_CONFIG,
 } from "shared/validations";
@@ -25,6 +17,12 @@ import {
   maxLength,
   required,
 } from "frontend/lib/validations";
+import { Spacer } from "frontend/design-system/primitives/Spacer";
+import { SectionBox } from "frontend/design-system/components/Section/SectionBox";
+import { FormInput } from "frontend/design-system/components/Form/FormInput";
+import { FormNumberInput } from "frontend/design-system/components/Form/FormNumberInput";
+import { FormNoValueSelect } from "frontend/design-system/components/Form/FormSelect";
+import { FormButton } from "frontend/design-system/components/Button/FormButton";
 
 interface IProps {
   field: string;

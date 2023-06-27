@@ -1,9 +1,9 @@
-import { FormButton, FormInput } from "@hadmean/chromista";
 import { Form, Field } from "react-final-form";
-
 import { MAKE_APP_CONFIGURATION_CRUD_CONFIG } from "frontend/hooks/configuration/configuration.constant";
 import { IFormProps } from "frontend/lib/form/types";
 import { composeValidators, required } from "frontend/lib/validations";
+import { FormInput } from "frontend/design-system/components/Form/FormInput";
+import { FormButton } from "frontend/design-system/components/Button/FormButton";
 import { getFieldsOffFormat } from "./utils";
 
 interface IRelationsSettings {

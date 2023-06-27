@@ -1,6 +1,8 @@
 import React from "react";
-import { RenderList, SectionListItem, SoftButton } from "../../components";
-import { Spacer } from "../../ui-blocks";
+import { Spacer } from "frontend/design-system/primitives/Spacer";
+import { SoftButton } from "frontend/design-system/components/Button/SoftButton";
+import { RenderList } from "frontend/design-system/components/RenderList";
+import { SectionListItem } from "frontend/design-system/components/Section/SectionList";
 import { IViewMenuItems } from "../types";
 
 interface Props {

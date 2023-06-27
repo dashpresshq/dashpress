@@ -1,7 +1,7 @@
 /* eslint-disable react/function-component-definition */
 import React, { useState } from "react";
 import { Story } from "@storybook/react";
-import { ApplicationRoot } from "../../../ApplicationRoot";
+import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 import { FormSwitch, IProps } from ".";
 
 function Demo(args: IProps) {

@@ -3,10 +3,12 @@ import classnames from "classnames";
 import styled, { keyframes } from "styled-components";
 import { Upload } from "react-feather";
 import { DropzoneState } from "react-dropzone";
-import { ProgressBar } from "../../ProgressBar";
-import { SYSTEM_COLORS, USE_ROOT_COLOR } from "../../../theme";
-import { DeleteButton } from "../../Button";
-import { Spacer, Typo } from "../../../primitives";
+import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
+import { SYSTEM_COLORS } from "frontend/design-system/theme/system";
+import { Spacer } from "frontend/design-system/primitives/Spacer";
+import { Typo } from "frontend/design-system/primitives/Text";
+import { ProgressBar } from "frontend/design-system/components/ProgressBar";
+import { DeleteButton } from "frontend/design-system/components/Button/DeleteButton";
 
 const StyledFileInput = styled.input`
   position: absolute;

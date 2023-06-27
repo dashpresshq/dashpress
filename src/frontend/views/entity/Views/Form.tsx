@@ -2,17 +2,6 @@ import { IPaginatedDataState, ITableTab } from "shared/types/data";
 import { Form, Field } from "react-final-form";
 import arrayMutators from "final-form-arrays";
 import { useFieldArray } from "react-final-form-arrays";
-import {
-  DeleteButton,
-  FormButton,
-  FormInput,
-  ITableColumn,
-  SoftButton,
-  Spacer,
-  Stack,
-  Table,
-  Tabs,
-} from "@hadmean/chromista";
 import React, { useState } from "react";
 import { ACTIONS_ACCESSOR } from "frontend/views/data/Table/useTableColumns";
 import { MAKE_APP_CONFIGURATION_CRUD_CONFIG } from "frontend/hooks/configuration/configuration.constant";
@@ -23,6 +12,15 @@ import {
   required,
 } from "frontend/lib/validations";
 import { IFormProps } from "frontend/lib/form/types";
+import { ITableColumn } from "frontend/design-system/components/Table/types";
+import { SoftButton } from "frontend/design-system/components/Button/SoftButton";
+import { DeleteButton } from "frontend/design-system/components/Button/DeleteButton";
+import { Stack } from "frontend/design-system/primitives/Stack";
+import { FormInput } from "frontend/design-system/components/Form/FormInput";
+import { Spacer } from "frontend/design-system/primitives/Spacer";
+import { Table } from "frontend/design-system/components/Table";
+import { FormButton } from "frontend/design-system/components/Button/FormButton";
+import { Tabs } from "frontend/design-system/components/Tabs";
 
 interface IProps {
   values: ITableTab[];

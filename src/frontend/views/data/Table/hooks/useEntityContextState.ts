@@ -1,6 +1,6 @@
-import { DEFAULT_TABLE_STATE } from "@hadmean/chromista";
 import { useContextState } from "frontend/hooks/state";
 import { IPaginatedDataState } from "shared/types/data";
+import { DEFAULT_TABLE_STATE } from "frontend/design-system/components/Table/constants";
 import { IDataTableProps } from "../types";
 
 export const useEntityContextState = (

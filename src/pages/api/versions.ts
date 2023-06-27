@@ -5,7 +5,7 @@ import { checkNodeVersion } from "bin/checkNodeVersion";
 import latestVersion from "latest-version";
 import { schemasApiService } from "backend/schema/schema.service";
 import { CacheAdaptorTypes } from "backend/lib/cache/types";
-import { requestHandler } from "../../backend/lib/request";
+import { requestHandler } from "backend/lib/request";
 
 const { version } = require("../../../package.json");
 
@@ -26,7 +26,6 @@ export default requestHandler(
       if (cacheAdaptor !== CacheAdaptorTypes.Redis) {
         cacheAdaptor += " (Kindly use 'redis' when running multiple instances)";
       }
-
       let configAdaptor = `${configApiService.getConfigValue<ConfigAdaptorTypes>(
         ConfigKeys.CONFIG_ADAPTOR
       )}`;

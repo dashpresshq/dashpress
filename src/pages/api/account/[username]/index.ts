@@ -2,7 +2,7 @@ import { usersApiController } from "backend/users/users.controller";
 import { USER_PERMISSIONS } from "shared/constants/user";
 import { UPDATE_USER_FORM_SCHEMA } from "shared/form-schemas/users/update";
 import { IAccountProfile } from "shared/types/user";
-import { requestHandler } from "../../../../backend/lib/request";
+import { requestHandler } from "backend/lib/request";
 
 const REQUEST_QUERY_FIELD = "username";
 

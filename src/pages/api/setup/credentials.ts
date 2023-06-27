@@ -4,7 +4,7 @@ import {
   DATA_SOURCES_CONFIG,
   IDataSourceCredentials,
 } from "shared/types/data-sources";
-import { requestHandler } from "../../../backend/lib/request";
+import { requestHandler } from "backend/lib/request";
 
 const credentialRequestSchema: IAppliedSchemaFormConfig<IDataSourceCredentials> =
   {

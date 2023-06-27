@@ -1,5 +1,5 @@
 import { ReactElement } from "react";
-import { FilterOperators, IColumnFilterBag } from "@hadmean/protozoa";
+import { FilterOperators, IColumnFilterBag } from "shared/types/data";
 import { IFilterProps, TableFilterType } from "./types";
 import { FilterTableByListSelection } from "./List";
 import { FilterTableByStatus } from "./Status";

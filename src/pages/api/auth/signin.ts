@@ -1,6 +1,6 @@
 import { AUTH_SIGNIN_FORM_SCHEMA } from "shared/form-schemas/auth/signin";
-import { usersApiController } from "../../../backend/users/users.controller";
-import { requestHandler } from "../../../backend/lib/request";
+import { requestHandler } from "backend/lib/request";
+import { usersApiController } from "backend/users/users.controller";
 
 export default requestHandler(
   {

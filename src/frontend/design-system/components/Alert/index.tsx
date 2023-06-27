@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { getBestErrorMessage } from "@hadmean/protozoa";
 import {
   AlertTriangle,
   ThumbsUp,
@@ -8,8 +7,11 @@ import {
   Info as InfoIcon,
   X,
 } from "react-feather";
-import { SYSTEM_COLORS } from "../../theme";
-import { Spacer, Stack, Typo } from "../../primitives";
+import { SYSTEM_COLORS } from "frontend/design-system/theme/system";
+import { Typo } from "frontend/design-system/primitives/Text";
+import { getBestErrorMessage } from "frontend/lib/toast/utils";
+import { Stack } from "frontend/design-system/primitives/Stack";
+import { Spacer } from "frontend/design-system/primitives/Spacer";
 import { StyledSoftButton } from "../Button/Button";
 
 export enum AlertType {

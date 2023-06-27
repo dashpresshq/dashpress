@@ -1,5 +1,6 @@
 import { css } from "styled-components";
-import { USE_ROOT_COLOR, SYSTEM_COLORS } from "../../../theme";
+import { SYSTEM_COLORS } from "frontend/design-system/theme/system";
+import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
 import { FORM_INPUT_SHADOW_CSS } from "../Styles";
 
 export const SelectStyles = css`

@@ -2,10 +2,10 @@ import React, { ReactNode, useId } from "react";
 import { ChevronRight, Icon } from "react-feather";
 import Link from "next/link";
 import styled, { css } from "styled-components";
+import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
+import { Stack } from "frontend/design-system/primitives/Stack";
 import { FormButton } from "../../Button/FormButton";
-import { Stack } from "../../../primitives";
 import { FormSwitch } from "../../Form/FormSwitch";
-import { USE_ROOT_COLOR } from "../../../theme";
 import { ButtonIconTypes } from "../../Button/constants";
 
 const StyledChevronRight = styled(ChevronRight)<{ $active?: boolean }>`

@@ -1,11 +1,3 @@
-import {
-  DeleteButton,
-  OffCanvas,
-  SoftButton,
-  Spacer,
-  Stack,
-  TableSkeleton,
-} from "@hadmean/chromista";
 import { useActiveEntities } from "frontend/hooks/entity/entity.store";
 import {
   FEPaginationTable,
@@ -21,15 +13,21 @@ import { useCallback, useState } from "react";
 import { IActionInstance } from "shared/types/actions";
 import { useApi } from "frontend/lib/data/useApi";
 import { SLUG_LOADING_VALUE } from "frontend/lib/routing/constants";
-import { ActionForm } from "./Form";
+import { SoftButton } from "frontend/design-system/components/Button/SoftButton";
+import { DeleteButton } from "frontend/design-system/components/Button/DeleteButton";
+import { Stack } from "frontend/design-system/primitives/Stack";
+import { TableSkeleton } from "frontend/design-system/components/Skeleton/Table";
+import { Spacer } from "frontend/design-system/primitives/Spacer";
+import { OffCanvas } from "frontend/design-system/components/OffCanvas";
+import { ActionInstanceView } from "./types";
+import { ADMIN_ACTION_INSTANCES_CRUD_CONFIG } from "./constants";
 import {
   LIST_ACTION_INSTANCES,
   useCreateActionInstanceMutation,
   useDeleteActionInstanceMutation,
   useUpdateActionInstanceMutation,
 } from "./instances.store";
-import { ADMIN_ACTION_INSTANCES_CRUD_CONFIG } from "./constants";
-import { ActionInstanceView } from "./types";
+import { ActionForm } from "./Form";
 
 const NEW_ACTION_ITEM = "__new_action_item__";
 

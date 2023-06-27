@@ -3,12 +3,12 @@ import React from "react";
 import { Story } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
 import { Home, Settings, Shield, Table, User, Users, Zap } from "react-feather";
-import { DataStateKeys } from "@hadmean/protozoa";
+import { DataStateKeys } from "frontend/lib/data/types";
+import { ApplicationRoot } from "frontend/components/ApplicationRoot";
+import { TextButton } from "frontend/design-system/components/Button/TextButton";
+import { Table as TableCmp } from "frontend/design-system/components/Table";
 import { DynamicLayout, IProps } from ".";
-import { ApplicationRoot } from "../../ApplicationRoot";
 import { IViewMenuItem } from "../types";
-import { Table as TableCmp } from "../../components/Table";
-import { TextButton } from "../../components";
 
 export default {
   title: "Layouts/DynamicLayout",

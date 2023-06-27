@@ -1,6 +1,7 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import { Table, IProps } from ".";
+import { Table } from ".";
+import { IProps } from "./types";
 import { TABLE_COLUMNS, TABLE_DATA } from "./data";
 
 import "@testing-library/jest-dom/extend-expect";

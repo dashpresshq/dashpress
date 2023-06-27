@@ -1,9 +1,3 @@
-import {
-  ContentLayout,
-  MenuSection,
-  SoftButton,
-  Spacer,
-} from "@hadmean/chromista";
 import { useNavigationStack } from "frontend/lib/routing/useNavigationStack";
 import { useRouter } from "next/router";
 import { ReactNode } from "react";
@@ -20,11 +14,15 @@ import {
   Zap,
   Codepen,
 } from "react-feather";
+import { SoftButton } from "frontend/design-system/components/Button/SoftButton";
+import { MenuSection } from "frontend/design-system/components/Section/MenuSection";
+import { ContentLayout } from "frontend/design-system/components/Section/SectionDivider";
+import { Spacer } from "frontend/design-system/primitives/Spacer";
+import { ADMIN_ACTION_INSTANCES_CRUD_CONFIG } from "./Actions/constants";
 import {
   ENTITY_CRUD_SETTINGS_TAB_LABELS,
   ENTITY_FIELD_SETTINGS_TAB_LABELS,
 } from "./constants";
-import { ADMIN_ACTION_INSTANCES_CRUD_CONFIG } from "./Actions/constants";
 
 interface IProps {
   children: ReactNode;

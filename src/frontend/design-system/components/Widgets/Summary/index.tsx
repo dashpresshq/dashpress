@@ -1,8 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 import { ChevronsDown, Icon, ChevronsUp } from "react-feather";
-import { Spacer, Stack, Typo } from "../../../primitives";
-import { SYSTEM_COLORS, USE_ROOT_COLOR } from "../../../theme";
+import { SYSTEM_COLORS } from "frontend/design-system/theme/system";
+import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
+import { Stack } from "frontend/design-system/primitives/Stack";
+import { Typo } from "frontend/design-system/primitives/Text";
+import { Spacer } from "frontend/design-system/primitives/Spacer";
 
 const DirectionImplementation: Record<
   "up" | "down" | "side",

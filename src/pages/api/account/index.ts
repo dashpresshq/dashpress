@@ -1,7 +1,7 @@
 import { usersApiController } from "backend/users/users.controller";
 import { CREATE_USER_FORM_SCHEMA } from "shared/form-schemas/users/create";
 import { USER_PERMISSIONS } from "shared/constants/user";
-import { requestHandler } from "../../../backend/lib/request";
+import { requestHandler } from "backend/lib/request";
 
 export default requestHandler({
   GET: async () => {

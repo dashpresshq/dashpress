@@ -1,11 +1,3 @@
-import {
-  RenderList,
-  SectionBox,
-  ContentLayout,
-  SectionListItem,
-  ListSkeleton,
-  IDropDownMenuItem,
-} from "@hadmean/chromista";
 import { ReactNode } from "react";
 import { useEntityReferenceFields } from "frontend/hooks/entity/entity.store";
 import {
@@ -17,12 +9,18 @@ import { AppLayout } from "frontend/_layouts/app";
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { useEntityDictionPlurals } from "frontend/hooks/entity/entity.queries";
+import { ContentLayout } from "frontend/design-system/components/Section/SectionDivider";
+import { SectionBox } from "frontend/design-system/components/Section/SectionBox";
+import { RenderList } from "frontend/design-system/components/RenderList";
+import { ListSkeleton } from "frontend/design-system/components/Skeleton/List";
+import { SectionListItem } from "frontend/design-system/components/Section/SectionList";
+import { IDropDownMenuItem } from "frontend/design-system/components/DropdownMenu";
+import { useEntityViewStateMachine } from "../useEntityViewStateMachine";
+import { getEntitiesRelationsCount } from "./utils";
 import {
   EntityActionTypes,
   useEntityActionMenuItems,
 } from "../../entity/constants";
-import { getEntitiesRelationsCount } from "./utils";
-import { useEntityViewStateMachine } from "../useEntityViewStateMachine";
 
 export const DETAILS_LAYOUT_KEY = "___DETAILS_KEY__";
 

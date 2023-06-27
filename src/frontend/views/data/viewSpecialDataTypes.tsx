@@ -1,7 +1,7 @@
 import { format } from "date-fns";
 import { IColorableSelection } from "shared/types/ui";
 import { FIELD_TYPES_CONFIG_MAP } from "shared/validations";
-import { SoftButton } from "@hadmean/chromista";
+import { SoftButton } from "frontend/design-system/components/Button/SoftButton";
 import {
   ReferenceComponent,
   ReferenceDisplayFromTypes,

@@ -1,4 +1,4 @@
-import { ISystemStatusForDisplay } from "../../../types";
+import { ISystemStatusForDisplay } from "shared/types/options";
 
 export type TableFilterType =
   | { _type: "boolean"; bag: ISystemStatusForDisplay[] }

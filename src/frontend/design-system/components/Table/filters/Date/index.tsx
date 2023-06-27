@@ -1,11 +1,8 @@
 import React, { useState } from "react";
-import {
-  IColumnFilterBag,
-  DATE_FILTER_OPTIONS,
-  DATE_FILTER_VALUE,
-} from "@hadmean/protozoa";
+import { Spacer } from "frontend/design-system/primitives/Spacer";
+import { DATE_FILTER_VALUE, IColumnFilterBag } from "shared/types/data";
+import { DATE_FILTER_OPTIONS } from "frontend/design-system/filters/constants";
 import { IFilterProps } from "../types";
-import { Spacer } from "../../../../primitives";
 import { DateSelection } from "./_Selection";
 import { FormSwitch } from "../../../Form/FormSwitch";
 import { ControlledFormDateInput } from "../../../Form/FormDateInput";

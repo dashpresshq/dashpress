@@ -1,11 +1,4 @@
 import {
-  FormSkeleton,
-  FormSkeletonSchema,
-  SectionBox,
-  ContentLayout,
-  Spacer,
-} from "@hadmean/chromista";
-import {
   useAuthenticatedUserBag,
   useUserHasPermission,
 } from "frontend/hooks/auth/user.store";
@@ -16,7 +9,14 @@ import { useState } from "react";
 import { SystemProfileDocumentation } from "frontend/docs/system-profile";
 import { useNavigationStack } from "frontend/lib/routing/useNavigationStack";
 import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
-import { AppLayout } from "../../../_layouts/app";
+import { SectionBox } from "frontend/design-system/components/Section/SectionBox";
+import { Spacer } from "frontend/design-system/primitives/Spacer";
+import {
+  FormSkeleton,
+  FormSkeletonSchema,
+} from "frontend/design-system/components/Skeleton/Form";
+import { ContentLayout } from "frontend/design-system/components/Section/SectionDivider";
+import { AppLayout } from "frontend/_layouts/app";
 import { useUsernameFromRouteParam } from "../hooks";
 import {
   useUpdateUserMutation,

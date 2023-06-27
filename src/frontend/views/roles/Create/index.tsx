@@ -1,8 +1,9 @@
-import { SectionBox, ContentLayout } from "@hadmean/chromista";
+import { ContentLayout } from "frontend/design-system/components/Section/SectionDivider";
+import { SectionBox } from "frontend/design-system/components/Section/SectionBox";
 import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
 import { useNavigationStack } from "frontend/lib/routing/useNavigationStack";
 import { USER_PERMISSIONS } from "shared/constants/user";
-import { AppLayout } from "../../../_layouts/app";
+import { AppLayout } from "frontend/_layouts/app";
 import { ADMIN_ROLES_CRUD_CONFIG, useCreateRoleMutation } from "../roles.store";
 import { CreateRoleForm } from "./Form";
 

@@ -1,4 +1,3 @@
-import { ListSkeleton, SectionBox } from "@hadmean/chromista";
 import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { USER_PERMISSIONS } from "shared/constants/user";
@@ -8,15 +7,17 @@ import { useState } from "react";
 import { DOCUMENTATION_LABEL } from "frontend/docs";
 import { EnabledEntitiesDocumentation } from "frontend/docs/enabled-entities";
 import { useApi } from "frontend/lib/data/useApi";
+import { ListSkeleton } from "frontend/design-system/components/Skeleton/List";
+import { SectionBox } from "frontend/design-system/components/Section/SectionBox";
 import {
   useAppConfiguration,
   useUpsertConfigurationMutation,
-} from "../../../hooks/configuration/configuration.store";
-import { useEntityDictionPlurals } from "../../../hooks/entity/entity.queries";
+} from "frontend/hooks/configuration/configuration.store";
+import { useEntityDictionPlurals } from "frontend/hooks/entity/entity.queries";
 import {
   ACTIVE_ENTITIES_ENDPOINT,
   USER_MENU_ENTITIES_ENDPOINT,
-} from "../../../hooks/entity/entity.store";
+} from "frontend/hooks/entity/entity.store";
 import { SETTINGS_VIEW_KEY } from "../constants";
 import { BaseSettingsLayout } from "../_Base";
 import { EntitiesSelection } from "./Selection";

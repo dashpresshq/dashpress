@@ -1,4 +1,4 @@
-import { TableFilterType } from "@hadmean/chromista/dist/components/Table/filters/types";
+import { TableFilterType } from "frontend/design-system/components/Table/filters/types";
 import { SelectableAbleValidations } from "./types";
 
 export const FIELD_TYPES_CONFIG_MAP: Record<

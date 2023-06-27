@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-no-useless-fragment */
-import { ErrorAlert } from "@hadmean/chromista";
+import { ErrorAlert } from "frontend/design-system/components/Alert";
 import { ReactNode } from "react";
 
 type Props = {

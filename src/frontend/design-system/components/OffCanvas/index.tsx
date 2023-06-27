@@ -1,10 +1,12 @@
 import Offcanvas from "react-bootstrap/Offcanvas";
 import React, { ReactNode } from "react";
 import styled from "styled-components";
-import { Divider, Stack, Typo } from "../../primitives";
-import { SoftButton } from "../Button";
-import { USE_ROOT_COLOR } from "../../theme";
+import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
+import { Typo } from "frontend/design-system/primitives/Text";
+import { Stack } from "frontend/design-system/primitives/Stack";
+import { Divider } from "frontend/design-system/primitives/Divider";
 import { NextPortal } from "../_/NextPortal";
+import { SoftButton } from "../Button/SoftButton";
 
 export interface IProps {
   show: boolean;

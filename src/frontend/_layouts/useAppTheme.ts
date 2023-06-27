@@ -1,7 +1,8 @@
 import { useAppConfiguration } from "frontend/hooks/configuration/configuration.store";
-import { IColorMode, useTheme } from "@hadmean/chromista";
 import { useAuthenticatedUserPreferences } from "frontend/hooks/auth/user.store";
 import { MAKE_CRUD_CONFIG } from "frontend/lib/crud-config";
+import { IColorMode } from "frontend/design-system/theme/types";
+import { useTheme } from "frontend/design-system/theme/useTheme";
 import { processThemeColors } from "./portal";
 import { IThemeSettings } from "./types";
 import { getThemePrimaryColor } from "./utils";

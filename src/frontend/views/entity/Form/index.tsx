@@ -12,7 +12,7 @@ import { useState } from "react";
 import { DOCUMENTATION_LABEL } from "frontend/docs";
 import { SectionBox } from "frontend/design-system/components/Section/SectionBox";
 import { Tabs } from "frontend/design-system/components/Tabs";
-import { useEntitySlug } from "../../../hooks/entity/entity.config";
+import { useEntitySlug } from "frontend/hooks/entity/entity.config";
 import { BaseEntitySettingsLayout } from "../_Base";
 
 import { ENTITY_CONFIGURATION_VIEW } from "../constants";

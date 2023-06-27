@@ -1,5 +1,5 @@
+import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
 import styled, { css } from "styled-components";
-import { USE_ROOT_COLOR } from "../../theme";
 
 export const SHADOW_CSS = css`
   border: 1px solid ${USE_ROOT_COLOR("border-color")};
@@ -9,6 +9,7 @@ export const SHADOW_CSS = css`
     0 1px 2px -1px ${USE_ROOT_COLOR("border-color")};
 `;
 
+// TODO rename to card
 export const StyledCard = styled.div`
   background-color: ${USE_ROOT_COLOR("base-color")};
   position: relative;

@@ -1,8 +1,9 @@
 import ReactPaginate from "react-paginate";
 import React from "react";
 import styled from "styled-components";
-import { Stack, Typo } from "../../primitives";
-import { USE_ROOT_COLOR } from "../../theme";
+import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
+import { Stack } from "frontend/design-system/primitives/Stack";
+import { Typo } from "frontend/design-system/primitives/Text";
 import { SimpleSelect } from "../Form/FormSelect/Simple";
 
 const StyledPagination = styled.div`

@@ -1,10 +1,3 @@
-import {
-  ContentLayout,
-  MenuSection,
-  InfoAlert,
-  Spacer,
-  IMenuSectionItem,
-} from "@hadmean/chromista";
 import { useRouter } from "next/router";
 import { ReactNode } from "react";
 import {
@@ -18,8 +11,15 @@ import {
   Terminal,
   Table,
 } from "react-feather";
+import {
+  IMenuSectionItem,
+  MenuSection,
+} from "frontend/design-system/components/Section/MenuSection";
+import { InfoAlert } from "frontend/design-system/components/Alert";
+import { ContentLayout } from "frontend/design-system/components/Section/SectionDivider";
+import { Spacer } from "frontend/design-system/primitives/Spacer";
+import { AppLayout } from "frontend/_layouts/app";
 import { NAVIGATION_LINKS } from "../../lib/routing/links";
-import { AppLayout } from "../../_layouts/app";
 import { useMutateBaseSettingsMenu } from "./portal";
 
 interface IProps {

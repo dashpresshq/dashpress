@@ -1,9 +1,11 @@
 import React from "react";
 import { confirmAlert } from "react-confirm-alert";
 import styled, { keyframes } from "styled-components";
-import { USE_ROOT_COLOR } from "../../theme";
+import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
+import { Typo } from "frontend/design-system/primitives/Text";
+import { Spacer } from "frontend/design-system/primitives/Spacer";
+import { Stack } from "frontend/design-system/primitives/Stack";
 import { Z_INDEXES } from "../../constants/zIndex";
-import { Spacer, Stack, Typo } from "../../primitives";
 import { SoftButton } from "../Button/SoftButton";
 import { StyledDeleteButton } from "../Button/Button";
 import { SHADOW_CSS } from "../Card";

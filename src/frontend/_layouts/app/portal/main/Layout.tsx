@@ -1,7 +1,7 @@
-import { DynamicLayout } from "@hadmean/chromista";
 import React from "react";
 import { User } from "react-feather";
 import { useSiteConfig } from "frontend/hooks/app/site.config";
+import { DynamicLayout } from "frontend/design-system/layouts/DynamicLayout";
 import { useSelectionViews } from "./useSelectionViews";
 import { BaseLayout, IBaseLayoutProps, IsSignedIn } from "../../_Base";
 import { ROOT_LINKS_TO_CLEAR_BREADCRUMBS } from "../../constants";

@@ -1,6 +1,6 @@
 import { css } from "styled-components";
-import { SHADOW_CSS } from "../../components";
-import { USE_ROOT_COLOR } from "../../theme/root";
+import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
+import { SHADOW_CSS } from "../components/Card";
 
 export const GLOBAL_TOOLTIP_CSS = css`
   .styles-module_tooltip__mnnfp {

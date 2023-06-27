@@ -1,10 +1,3 @@
-import {
-  ListSkeleton,
-  SectionBox,
-  ContentLayout,
-  Spacer,
-  Tabs,
-} from "@hadmean/chromista";
 import { useActiveEntities } from "frontend/hooks/entity/entity.store";
 import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
 import { useNavigationStack } from "frontend/lib/routing/useNavigationStack";
@@ -16,7 +9,12 @@ import { usePortalUserPermissions } from "shared/constants/portal/user";
 import { DOCUMENTATION_LABEL } from "frontend/docs";
 import { useState } from "react";
 import { RolesDocumentation } from "frontend/docs/roles";
-import { AppLayout } from "../../../_layouts/app";
+import { SectionBox } from "frontend/design-system/components/Section/SectionBox";
+import { ContentLayout } from "frontend/design-system/components/Section/SectionDivider";
+import { ListSkeleton } from "frontend/design-system/components/Skeleton/List";
+import { Tabs } from "frontend/design-system/components/Tabs";
+import { Spacer } from "frontend/design-system/primitives/Spacer";
+import { AppLayout } from "frontend/_layouts/app";
 import {
   ADMIN_PERMISSIONS_CRUD_CONFIG,
   useRolePermissions,

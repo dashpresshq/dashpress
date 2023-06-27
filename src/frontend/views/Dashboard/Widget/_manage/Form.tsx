@@ -1,18 +1,3 @@
-import {
-  BaseSkeleton,
-  FormButton,
-  FormCodeEditor,
-  FormInput,
-  FormSelect,
-  SoftButton,
-  Stack,
-  Tabs,
-  RenderCode,
-  Typo,
-  BREAKPOINTS,
-  Spacer,
-} from "@hadmean/chromista";
-
 import { useEntityConfiguration } from "frontend/hooks/configuration/configuration.store";
 import { Field, Form } from "react-final-form";
 import { ITableTab } from "shared/types/data";
@@ -30,13 +15,25 @@ import { resetFormValues } from "frontend/lib/form/utils";
 import { makeActionRequest } from "frontend/lib/data/makeRequest";
 import { IFormProps } from "frontend/lib/form/types";
 import { ILabelValue } from "shared/types/options";
-import { DASHBOARD_WIDGET_HEIGHTS, DASHBOARD_WIDGET_SIZES } from "./constants";
-import { WidgetFormField } from "./types";
-import { PortalFormFields, PortalFormSchema } from "./portal";
-import { WIDGET_CONFIG } from "../constants";
-import { DashboardWidgetPresentation } from "../Presentation";
-import { DASHBOARD_WIDGETS_CRUD_CONFIG } from "../../constants";
+import { BREAKPOINTS } from "frontend/design-system/constants";
+import { FormInput } from "frontend/design-system/components/Form/FormInput";
+import { FormSelect } from "frontend/design-system/components/Form/FormSelect";
+import { BaseSkeleton } from "frontend/design-system/components/Skeleton/Base";
+import { Tabs } from "frontend/design-system/components/Tabs";
+import { RenderCode } from "frontend/design-system/components/RenderCode";
+import { Spacer } from "frontend/design-system/primitives/Spacer";
+import { SoftButton } from "frontend/design-system/components/Button/SoftButton";
+import { Typo } from "frontend/design-system/primitives/Text";
+import { Stack } from "frontend/design-system/primitives/Stack";
+import { FormButton } from "frontend/design-system/components/Button/FormButton";
+import { FormCodeEditor } from "frontend/design-system/components/Form/FormCodeEditor";
 import { GridSpan } from "./Form.style";
+import { DASHBOARD_WIDGETS_CRUD_CONFIG } from "../../constants";
+import { DashboardWidgetPresentation } from "../Presentation";
+import { WIDGET_CONFIG } from "../constants";
+import { PortalFormFields, PortalFormSchema } from "./portal";
+import { WidgetFormField } from "./types";
+import { DASHBOARD_WIDGET_HEIGHTS, DASHBOARD_WIDGET_SIZES } from "./constants";
 
 const DOCS_TITLE = "Widget Script";
 

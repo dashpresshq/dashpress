@@ -1,7 +1,7 @@
-import { IDropDownMenuItem } from "@hadmean/chromista";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { META_USER_PERMISSIONS } from "shared/constants/user";
+import { IDropDownMenuItem } from "frontend/design-system/components/DropdownMenu";
 import { createStore } from "../store";
 
 export type IPageDetails = {

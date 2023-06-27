@@ -1,20 +1,18 @@
-import {
-  AsyncFormSelect,
-  FormCodeEditor,
-  FormDateInput,
-  FormFileInput,
-  FormInput,
-  FormNumberInput,
-  FormSelect,
-  FormSwitch,
-  FormSelectButton,
-  FormTextArea,
-} from "@hadmean/chromista";
-import { ISharedFormInput } from "@hadmean/chromista/dist/components/Form/_types";
 import { sluggify } from "shared/lib/strings";
 import { ISchemaFormConfig } from "shared/form-schemas/types";
 import { IColorableSelection } from "shared/types/ui";
 import { FIELD_TYPES_CONFIG_MAP } from "shared/validations";
+import { ISharedFormInput } from "frontend/design-system/components/Form/_types";
+import { FormInput } from "frontend/design-system/components/Form/FormInput";
+import { FormNumberInput } from "frontend/design-system/components/Form/FormNumberInput";
+import { FormSelect } from "frontend/design-system/components/Form/FormSelect";
+import { FormDateInput } from "frontend/design-system/components/Form/FormDateInput";
+import { AsyncFormSelect } from "frontend/design-system/components/Form/FormSelect/Async";
+import { FormSwitch } from "frontend/design-system/components/Form/FormSwitch";
+import { FormCodeEditor } from "frontend/design-system/components/Form/FormCodeEditor";
+import { FormTextArea } from "frontend/design-system/components/Form/FormTextArea";
+import { FormFileInput } from "frontend/design-system/components/Form/FormFileInput";
+import { FormSelectButton } from "frontend/design-system/components/Form/FormSelectButton";
 
 interface IProps {
   type: keyof typeof FIELD_TYPES_CONFIG_MAP;

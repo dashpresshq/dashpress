@@ -1,4 +1,3 @@
-import { ListSkeleton, SectionBox, SortList, Tabs } from "@hadmean/chromista";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { USER_PERMISSIONS } from "shared/constants/user";
 import { MAKE_APP_CONFIGURATION_CRUD_CONFIG } from "frontend/hooks/configuration/configuration.constant";
@@ -8,17 +7,21 @@ import { MenuEntitiesDocumentation } from "frontend/docs/menu-entities";
 import { useRouteParam } from "frontend/lib/routing/useRouteParam";
 import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
 import { useChangeRouterParam } from "frontend/lib/routing/useChangeRouterParam";
+import { ListSkeleton } from "frontend/design-system/components/Skeleton/List";
+import { Tabs } from "frontend/design-system/components/Tabs";
+import { SectionBox } from "frontend/design-system/components/Section/SectionBox";
+import { SortList } from "frontend/design-system/components/SortList";
 import {
   useAppConfiguration,
   useUpsertConfigurationMutation,
-} from "../../../hooks/configuration/configuration.store";
-import { useEntityDictionPlurals } from "../../../hooks/entity/entity.queries";
+} from "frontend/hooks/configuration/configuration.store";
+import { useEntityDictionPlurals } from "frontend/hooks/entity/entity.queries";
 import {
   ACTIVE_ENTITIES_ENDPOINT,
   USER_MENU_ENTITIES_ENDPOINT,
   useActiveEntities,
   useUserMenuEntities,
-} from "../../../hooks/entity/entity.store";
+} from "frontend/hooks/entity/entity.store";
 import { SETTINGS_VIEW_KEY } from "../constants";
 import { BaseSettingsLayout } from "../_Base";
 import { EntitiesSelection } from "./Selection";

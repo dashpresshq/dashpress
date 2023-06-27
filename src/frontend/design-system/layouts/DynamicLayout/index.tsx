@@ -1,7 +1,7 @@
 import React, { ReactNode } from "react";
 import styled from "styled-components";
 import shallow from "zustand/shallow";
-import { USE_ROOT_COLOR } from "../../theme";
+import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
 import { useSideBarStore } from "../sidebar.store";
 import { ISelectionView } from "../types";
 import { PrimaryLeftSideNav } from "./PrimaryLeftSideNav";

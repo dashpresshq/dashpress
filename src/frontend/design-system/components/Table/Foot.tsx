@@ -1,8 +1,9 @@
 import { flexRender, Table } from "@tanstack/react-table";
 import React from "react";
 import styled from "styled-components";
-import { USE_ROOT_COLOR } from "../../theme/root";
-import { Stack, Typo } from "../../primitives";
+import { Stack } from "frontend/design-system/primitives/Stack";
+import { Typo } from "frontend/design-system/primitives/Text";
+import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
 import { StyledTh } from "./styles";
 
 const SHOW_FOOTER_THRESHOLD = 20;

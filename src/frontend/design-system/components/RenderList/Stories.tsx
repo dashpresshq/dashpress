@@ -2,8 +2,8 @@
 import React from "react";
 import { Story } from "@storybook/react";
 import { actions } from "@storybook/addon-actions";
+import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 import { RenderList, IProps } from ".";
-import { ApplicationRoot } from "../../ApplicationRoot";
 import { SectionListItem } from "../Section/SectionList";
 
 interface IDemoType {

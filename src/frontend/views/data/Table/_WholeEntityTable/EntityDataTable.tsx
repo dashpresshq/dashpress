@@ -1,8 +1,8 @@
-import { TableSkeleton } from "@hadmean/chromista";
 import { SLUG_LOADING_VALUE } from "frontend/lib/routing/constants";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { useEntityCrudConfig } from "frontend/hooks/entity/entity.config";
-import { ENTITY_TABLE_PATH } from "../../../../hooks/data/data.store";
+import { TableSkeleton } from "frontend/design-system/components/Skeleton/Table";
+import { ENTITY_TABLE_PATH } from "frontend/hooks/data/data.store";
 import { useTableColumns } from "../useTableColumns";
 import { TableViewComponent } from "../portal";
 import { IDataTableProps } from "../types";

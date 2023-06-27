@@ -1,14 +1,3 @@
-import {
-  DeleteButton,
-  FormButton,
-  FormInput,
-  FormSwitch,
-  SoftButton,
-  Spacer,
-  Stack,
-  StyledCard,
-  StyledCardBody,
-} from "@hadmean/chromista";
 import { Form, Field } from "react-final-form";
 import arrayMutators from "final-form-arrays";
 import { FieldArray } from "react-final-form-arrays";
@@ -23,6 +12,17 @@ import {
   OPTIONS_COLORS,
 } from "shared/logic/entities/selection.utils";
 import { MAKE_APP_CONFIGURATION_CRUD_CONFIG } from "frontend/hooks/configuration/configuration.constant";
+import { FormInput } from "frontend/design-system/components/Form/FormInput";
+import { Stack } from "frontend/design-system/primitives/Stack";
+import { DeleteButton } from "frontend/design-system/components/Button/DeleteButton";
+import {
+  StyledCard,
+  StyledCardBody,
+} from "frontend/design-system/components/Card";
+import { Spacer } from "frontend/design-system/primitives/Spacer";
+import { SoftButton } from "frontend/design-system/components/Button/SoftButton";
+import { FormButton } from "frontend/design-system/components/Button/FormButton";
+import { FormSwitch } from "frontend/design-system/components/Form/FormSwitch";
 import { isBlackOrWhite } from "./isBlackOrWhite";
 
 const StyledColorBox = styled.button<{ color: string }>`

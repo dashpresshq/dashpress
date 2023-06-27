@@ -1,19 +1,17 @@
-import {
-  ContentLayout,
-  SectionListItem,
-  SectionBox,
-  ListSkeleton,
-  RenderList,
-  Spacer,
-  MenuSection,
-} from "@hadmean/chromista";
 import { useRouteParam } from "frontend/lib/routing/useRouteParam";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { useRouter } from "next/router";
 import { ReactNode } from "react";
 import { Book, Cloud, UploadCloud, Zap, ZapOff } from "react-feather";
+import { ContentLayout } from "frontend/design-system/components/Section/SectionDivider";
+import { SectionBox } from "frontend/design-system/components/Section/SectionBox";
+import { ListSkeleton } from "frontend/design-system/components/Skeleton/List";
+import { RenderList } from "frontend/design-system/components/RenderList";
+import { SectionListItem } from "frontend/design-system/components/Section/SectionList";
+import { Spacer } from "frontend/design-system/primitives/Spacer";
+import { MenuSection } from "frontend/design-system/components/Section/MenuSection";
+import { AppLayout } from "frontend/_layouts/app";
 import { NAVIGATION_LINKS } from "../../lib/routing/links";
-import { AppLayout } from "../../_layouts/app";
 import {
   useActionIntegrationsList,
   useActiveActionList,

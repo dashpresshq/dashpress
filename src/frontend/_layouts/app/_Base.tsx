@@ -1,11 +1,3 @@
-import {
-  Breadcrumbs,
-  DropDownMenu,
-  IDropDownMenuItem,
-  Spacer,
-  Stack,
-  Typo,
-} from "@hadmean/chromista";
 import React, { ReactNode, useEffect } from "react";
 import Head from "next/head";
 import { useRouter } from "next/router";
@@ -13,7 +5,15 @@ import { useNavigationStack } from "frontend/lib/routing/useNavigationStack";
 import { usePageDetailsStore } from "frontend/lib/routing/usePageDetails";
 import { usePageRequiresPermission } from "frontend/hooks/auth/user.store";
 import { GitHub, Globe, Twitter, Users } from "react-feather";
-import { useSiteConfig } from "../../hooks/app/site.config";
+import {
+  DropDownMenu,
+  IDropDownMenuItem,
+} from "frontend/design-system/components/DropdownMenu";
+import { Stack } from "frontend/design-system/primitives/Stack";
+import { Breadcrumbs } from "frontend/design-system/components/Breadcrumbs";
+import { Typo } from "frontend/design-system/primitives/Text";
+import { Spacer } from "frontend/design-system/primitives/Spacer";
+import { useSiteConfig } from "frontend/hooks/app/site.config";
 import { GoogleTagManager } from "../scripts/GoogleTagManager";
 
 export { IsSignedIn } from "./IsSignedIn";

@@ -1,11 +1,8 @@
-import {
-  DATE_FILTER_OPTIONS,
-  IColumnFilterBag,
-  IDateFilterOption,
-} from "@hadmean/protozoa";
 import React from "react";
+import { DATE_FILTER_OPTIONS } from "frontend/design-system/filters/constants";
+import { IColumnFilterBag, IDateFilterOption } from "shared/types/data";
+import { Stack } from "frontend/design-system/primitives/Stack";
 import { SimpleSelect } from "../../../Form/FormSelect/Simple";
-import { Stack } from "../../../../primitives";
 
 const getOptionValue = (value: string) => {
   const dateOption = DATE_FILTER_OPTIONS.find(

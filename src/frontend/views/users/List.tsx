@@ -1,9 +1,3 @@
-import {
-  DeleteButton,
-  SoftButton,
-  Stack,
-  StyledCard,
-} from "@hadmean/chromista";
 import React from "react";
 import { AppLayout } from "frontend/_layouts/app";
 import { UserPlus } from "react-feather";
@@ -20,12 +14,16 @@ import { useApi } from "frontend/lib/data/useApi";
 import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
 import { userFriendlyCase } from "shared/lib/strings/friendly-case";
+import { SoftButton } from "frontend/design-system/components/Button/SoftButton";
+import { Stack } from "frontend/design-system/primitives/Stack";
+import { DeleteButton } from "frontend/design-system/components/Button/DeleteButton";
+import { StyledCard } from "frontend/design-system/components/Card";
+import { ADMIN_ROLES_CRUD_CONFIG } from "../roles/roles.store";
 import {
   ADMIN_USERS_CRUD_CONFIG,
   useAllUsers,
   useUserDeletionMutation,
 } from "./users.store";
-import { ADMIN_ROLES_CRUD_CONFIG } from "../roles/roles.store";
 
 export function ListUsers() {
   const router = useRouter();

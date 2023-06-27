@@ -1,19 +1,20 @@
-import { SectionBox, ContentLayout } from "@hadmean/chromista";
+import { ContentLayout } from "frontend/design-system/components/Section/SectionDivider";
+import { SectionBox } from "frontend/design-system/components/Section/SectionBox";
 import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
 import { useNavigationStack } from "frontend/lib/routing/useNavigationStack";
 import { META_USER_PERMISSIONS, USER_PERMISSIONS } from "shared/constants/user";
 import { useUserHasPermission } from "frontend/hooks/auth/user.store";
-import { AppLayout } from "../../../_layouts/app";
+import { AppLayout } from "frontend/_layouts/app";
 import {
   useEntityCrudConfig,
   useEntityId,
   useEntitySlug,
   useHiddenEntityColumns,
-} from "../../../hooks/entity/entity.config";
+} from "frontend/hooks/entity/entity.config";
 import {
   useEntityDataDetails,
   useEntityDataUpdationMutation,
-} from "../../../hooks/data/data.store";
+} from "frontend/hooks/data/data.store";
 import {
   EntityActionTypes,
   useEntityActionMenuItems,

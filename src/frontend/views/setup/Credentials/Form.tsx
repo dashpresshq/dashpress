@@ -1,10 +1,3 @@
-import {
-  FormCheckBox,
-  FormInput,
-  FormButton,
-  FormNumberInput,
-  FormSelect,
-} from "@hadmean/chromista";
 import { Form, Field } from "react-final-form";
 import {
   IDataSourceCredentials,
@@ -14,6 +7,11 @@ import { useState } from "react";
 import { upperCaseFirstLetter } from "shared/lib/strings";
 import { required } from "frontend/lib/validations";
 import { IFormProps } from "frontend/lib/form/types";
+import { FormInput } from "frontend/design-system/components/Form/FormInput";
+import { FormNumberInput } from "frontend/design-system/components/Form/FormNumberInput";
+import { FormCheckBox } from "frontend/design-system/components/Form/FormCheckBox";
+import { FormButton } from "frontend/design-system/components/Button/FormButton";
+import { FormSelect } from "frontend/design-system/components/Form/FormSelect";
 
 export function CredentialsSetupForm({
   onSubmit,

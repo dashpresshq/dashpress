@@ -7,7 +7,7 @@ import SortableList, { SortableItem } from "react-easy-sort";
 import { useRouter } from "next/router";
 import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
-import { AppLayout } from "../../../_layouts/app";
+import { AppLayout } from "frontend/_layouts/app";
 import {
   useArrangeDashboardWidgetMutation,
   useDashboardWidgets,

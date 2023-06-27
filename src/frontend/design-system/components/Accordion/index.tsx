@@ -1,7 +1,7 @@
 import React, { ReactNode, useState } from "react";
 import styled, { css } from "styled-components";
 import { ChevronDown, ChevronUp, Icon } from "react-feather";
-import { USE_ROOT_COLOR } from "../../theme";
+import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
 
 const ARROW_SIZE = 16;
 

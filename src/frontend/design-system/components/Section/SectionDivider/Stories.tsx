@@ -1,8 +1,8 @@
 /* eslint-disable react/function-component-definition */
 import React from "react";
 import { Story } from "@storybook/react";
+import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 import { ContentLayout } from ".";
-import { ApplicationRoot } from "../../../ApplicationRoot";
 
 export default {
   title: "Components/ContentLayout",

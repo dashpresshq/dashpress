@@ -1,6 +1,7 @@
 import React, { ReactNode } from "react";
 import styled from "styled-components";
-import { SYSTEM_COLORS, USE_ROOT_COLOR } from "../theme";
+import { USE_ROOT_COLOR } from "../theme/root";
+import { SYSTEM_COLORS } from "../theme/system";
 
 const TEXT_COLORS = {
   main: USE_ROOT_COLOR("main-text"),
@@ -60,14 +61,14 @@ const Text = styled.p.attrs((props: TextProps) => ({
   })
 );
 
-type EscapeTypoProps = Partial<TextProps>;
-type TypoProps = Omit<EscapeTypoProps, "size">;
+type RawTypoProps = Partial<TextProps>;
+type TypoProps = Omit<RawTypoProps, "size">;
 
 export function Typo(props: Partial<TypoProps>) {
   return <Text {...props} />;
 }
 
-Typo.Escape = function Escape(props: TypoProps & { size: TextProps["size"] }) {
+Typo.Raw = function Raw(props: TypoProps & { size: TextProps["size"] }) {
   return <Text {...props} />;
 };
 

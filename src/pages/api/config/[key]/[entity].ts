@@ -1,6 +1,6 @@
 import { USER_PERMISSIONS } from "shared/constants/user";
-import { configurationApiController } from "../../../../backend/configuration/configuration.controller";
-import { requestHandler } from "../../../../backend/lib/request";
+import { configurationApiController } from "backend/configuration/configuration.controller";
+import { requestHandler } from "backend/lib/request";
 
 export default requestHandler(
   {

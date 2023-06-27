@@ -1,4 +1,4 @@
-import { RenderCode } from "@hadmean/chromista";
+import { RenderCode } from "frontend/design-system/components/RenderCode";
 import { DocumentationRoot, IDocumentationRootProps } from "./_base";
 
 export function SystemProfileDocumentation(

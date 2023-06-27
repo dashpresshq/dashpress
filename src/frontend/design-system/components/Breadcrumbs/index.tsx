@@ -1,8 +1,8 @@
 import React from "react";
 import Link from "next/link";
 import styled, { css } from "styled-components";
-import { ILabelValue } from "../../types";
-import { USE_ROOT_COLOR } from "../../theme";
+import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
+import { ILabelValue } from "shared/types/options";
 
 const StyledBreadcrumb = styled.ol`
   display: flex;

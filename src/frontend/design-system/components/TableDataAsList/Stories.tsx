@@ -2,8 +2,8 @@
 import React from "react";
 import { Story } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
+import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 import { TableDataAsList, IProps } from ".";
-import { ApplicationRoot } from "../../ApplicationRoot";
 
 export default {
   title: "Components/TableDataAsList",

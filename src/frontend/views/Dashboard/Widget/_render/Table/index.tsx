@@ -1,4 +1,5 @@
-import { ITableColumn, Table } from "@hadmean/chromista";
+import { ITableColumn } from "frontend/design-system/components/Table/types";
+import { Table } from "frontend/design-system/components/Table";
 import { TableWidgetSchema } from "./types";
 
 interface IProps {

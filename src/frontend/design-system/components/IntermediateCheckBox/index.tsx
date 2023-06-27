@@ -6,7 +6,7 @@ import {
   MinusSquare,
   Square,
 } from "react-feather";
-import { USE_ROOT_COLOR } from "../../theme";
+import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
 
 const IconWrapper = styled.span<{ $disabled?: boolean }>`
   align-self: center;

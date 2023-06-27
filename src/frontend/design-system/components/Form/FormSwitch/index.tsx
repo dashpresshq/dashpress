@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
-import { USE_ROOT_COLOR } from "../../../theme";
-import { Typo, Stack } from "../../../primitives";
+import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
+import { Stack } from "frontend/design-system/primitives/Stack";
+import { Typo } from "frontend/design-system/primitives/Text";
 
 type Sizes = "sm" | "md";
 
@@ -138,12 +139,12 @@ export function FormSwitch(props: IProps) {
         <Slider size={size} />
         {label ? (
           <div style={{ cursor: "pointer" }}>
-            <Typo.Escape
+            <Typo.Raw
               color={disabled ? "muted" : undefined}
               size={SIZES_CONFIG[size].fontSize}
             >
               {label}
-            </Typo.Escape>
+            </Typo.Raw>
           </div>
         ) : (
           // Some weird flex issues here so this is needed

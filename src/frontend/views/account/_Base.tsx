@@ -1,10 +1,11 @@
-import { ContentLayout, MenuSection } from "@hadmean/chromista";
 import { useIsAuthenticatedStore } from "frontend/hooks/auth/useAuthenticateUser";
 import { useRouter } from "next/router";
 import { ReactNode } from "react";
 import { Lock, LogOut, User, Settings } from "react-feather";
+import { ContentLayout } from "frontend/design-system/components/Section/SectionDivider";
+import { MenuSection } from "frontend/design-system/components/Section/MenuSection";
+import { AppLayout } from "frontend/_layouts/app";
 import { NAVIGATION_LINKS } from "../../lib/routing/links";
-import { AppLayout } from "../../_layouts/app";
 import { usePortalAccountMenu } from "./portal";
 
 interface IProps {

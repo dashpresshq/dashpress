@@ -1,11 +1,3 @@
-import {
-  DeleteButton,
-  OffCanvas,
-  SoftButton,
-  Spacer,
-  Stack,
-  Typo,
-} from "@hadmean/chromista";
 import { IntegrationsConfigurationGroup } from "shared/types/integrations";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import {
@@ -27,6 +19,12 @@ import { VariablesDocumentation } from "frontend/docs/variables";
 import { DOCUMENTATION_LABEL } from "frontend/docs";
 import { ToastService } from "frontend/lib/toast";
 import { useApi } from "frontend/lib/data/useApi";
+import { SoftButton } from "frontend/design-system/components/Button/SoftButton";
+import { Stack } from "frontend/design-system/primitives/Stack";
+import { DeleteButton } from "frontend/design-system/components/Button/DeleteButton";
+import { Spacer } from "frontend/design-system/primitives/Spacer";
+import { Typo } from "frontend/design-system/primitives/Text";
+import { OffCanvas } from "frontend/design-system/components/OffCanvas";
 import {
   INTEGRATIONS_GROUP_ENDPOINT,
   useIntegrationConfigurationDeletionMutation,

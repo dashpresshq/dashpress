@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 import { Search } from "react-feather";
+import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
 import { StyledInput } from "../Styles";
 import { StyledBaseButton } from "../../Button/Button";
-import { USE_ROOT_COLOR } from "../../../theme";
 
 const StyledInputGroup = styled.div`
   position: relative;

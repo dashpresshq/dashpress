@@ -1,8 +1,7 @@
 import React from "react";
 import { render, fireEvent, screen } from "@testing-library/react";
-import { SLUG_LOADING_VALUE } from "@hadmean/protozoa";
+import { SLUG_LOADING_VALUE } from "frontend/lib/routing/constants";
 import { Tabs } from ".";
-
 import "@testing-library/jest-dom/extend-expect";
 
 describe("Tabs", () => {

@@ -1,8 +1,9 @@
 import React from "react";
 import styled from "styled-components";
-import { USE_ROOT_COLOR } from "../../../../theme";
-import { StyledCardBody } from "../../../../components/Card";
-import { Spacer, Typo } from "../../../../ui-blocks";
+import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
+import { StyledCardBody } from "frontend/design-system/components/Card";
+import { Spacer } from "frontend/design-system/primitives/Spacer";
+import { Typo } from "frontend/design-system/primitives/Text";
 
 const Root = styled(StyledCardBody)`
   background-color: ${USE_ROOT_COLOR("primary-color")};

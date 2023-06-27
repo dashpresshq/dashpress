@@ -1,7 +1,9 @@
-import { DeleteButton, SoftButton, Stack } from "@hadmean/chromista";
 import { useEntityDataDeletionMutation } from "frontend/hooks/data/data.store";
 import { useEntityIdField } from "frontend/hooks/entity/entity.store";
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
+import { SoftButton } from "frontend/design-system/components/Button/SoftButton";
+import { Stack } from "frontend/design-system/primitives/Stack";
+import { DeleteButton } from "frontend/design-system/components/Button/DeleteButton";
 import { useCanUserPerformCrudAction } from "../useCanUserPerformCrudAction";
 
 interface IProps {

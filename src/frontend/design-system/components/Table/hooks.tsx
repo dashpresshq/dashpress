@@ -1,4 +1,4 @@
-import { IPaginatedDataState } from "@hadmean/protozoa";
+import { IPaginatedDataState } from "shared/types/data";
 import {
   ColumnFiltersState,
   createColumnHelper,

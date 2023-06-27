@@ -1,9 +1,3 @@
-import {
-  FormButton,
-  FormInput,
-  FormSkeleton,
-  FormSkeletonSchema,
-} from "@hadmean/chromista";
 import { Form, Field } from "react-final-form";
 import {
   minLength,
@@ -11,6 +5,12 @@ import {
   maxLength,
 } from "frontend/lib/validations";
 import { ICrudConfig } from "frontend/lib/crud-config";
+import {
+  FormSkeleton,
+  FormSkeletonSchema,
+} from "frontend/design-system/components/Skeleton/Form";
+import { FormInput } from "frontend/design-system/components/Form/FormInput";
+import { FormButton } from "frontend/design-system/components/Button/FormButton";
 
 interface IProps {
   fields: string[];

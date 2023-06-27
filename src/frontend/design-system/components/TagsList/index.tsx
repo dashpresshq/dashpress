@@ -1,10 +1,10 @@
 import React from "react";
-import { randomNumber } from "@hadmean/protozoa";
 import styled from "styled-components";
 import { Loader, X } from "react-feather";
+import { randomNumber } from "frontend/lib/numbers";
 import { EmptyWrapper } from "../EmptyWrapper";
 import { StyledOutlineButton } from "../Button/Button";
-import { BaseSkeleton } from "../Skeleton";
+import { BaseSkeleton } from "../Skeleton/Base";
 import { Spin } from "../_/Spin";
 
 export interface ITagItem {

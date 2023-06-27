@@ -1,8 +1,9 @@
-import { FormTextArea, FormSelect } from "@hadmean/chromista";
 import { Field } from "react-final-form";
 import { SystemIconsList } from "shared/constants/Icons";
 import { required } from "frontend/lib/validations";
 import { userFriendlyCase } from "shared/lib/strings/friendly-case";
+import { FormSelect } from "frontend/design-system/components/Form/FormSelect";
+import { FormTextArea } from "frontend/design-system/components/Form/FormTextArea";
 
 export function IconInputField({ value }: { value: string }) {
   return (

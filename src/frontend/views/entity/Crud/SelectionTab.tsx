@@ -1,15 +1,13 @@
-import {
-  FormButton,
-  RenderList,
-  SectionListItem,
-  Stack,
-  Spacer,
-  ListSkeleton,
-} from "@hadmean/chromista";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { useEffect, useState } from "react";
 import { IEntityField } from "shared/types/db";
-import { useStringSelections } from "../../../lib/selection";
+import { FormButton } from "frontend/design-system/components/Button/FormButton";
+import { ListSkeleton } from "frontend/design-system/components/Skeleton/List";
+import { RenderList } from "frontend/design-system/components/RenderList";
+import { Spacer } from "frontend/design-system/primitives/Spacer";
+import { SectionListItem } from "frontend/design-system/components/Section/SectionList";
+import { Stack } from "frontend/design-system/primitives/Stack";
+import { useStringSelections } from "frontend/lib/selection";
 
 interface IProps {
   label: string;

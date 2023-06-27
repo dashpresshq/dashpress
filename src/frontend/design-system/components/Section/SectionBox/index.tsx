@@ -6,12 +6,12 @@ import { Stack } from "frontend/design-system/primitives/Stack";
 import { Typo } from "frontend/design-system/primitives/Text";
 import { Spacer } from "frontend/design-system/primitives/Spacer";
 import { DeleteButton } from "../../Button/DeleteButton";
-import { SimpleSelect } from "../../Form";
 import { SoftButton } from "../../Button/SoftButton";
 import { StyledCard, StyledCardBody, StyledCardHeader } from "../../Card";
 import { Tooltip } from "../../Tooltip";
 import { ButtonIconTypes } from "../../Button/constants";
 import { BaseSkeleton } from "../../Skeleton/Base";
+import { SimpleSelect } from "../../Form/FormSelect/Simple";
 
 export interface IProps {
   title: string;

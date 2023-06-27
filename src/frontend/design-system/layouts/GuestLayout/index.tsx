@@ -1,7 +1,10 @@
 import React, { ReactNode } from "react";
 import styled from "styled-components";
+import {
+  SHADOW_CSS,
+  StyledCardBody,
+} from "frontend/design-system/components/Card";
 import { GuestFooter, GuestHeader, GuestContainer } from "./_partials";
-import { SHADOW_CSS, StyledCardBody } from "../../components/Card";
 
 export interface IProps {
   children: ReactNode;

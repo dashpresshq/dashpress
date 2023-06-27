@@ -1,7 +1,8 @@
 import { useEntityDataReference } from "frontend/hooks/data/data.store";
-import { BaseSkeleton, TextButton } from "@hadmean/chromista";
 import { useRouter } from "next/router";
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
+import { BaseSkeleton } from "frontend/design-system/components/Skeleton/Base";
+import { TextButton } from "frontend/design-system/components/Button/TextButton";
 import { useDetailsOffCanvasStore } from "./Table/hooks/useDetailsOffCanvas.store";
 
 export type ReferenceDisplayFromTypes = "table" | "details" | "canvas";

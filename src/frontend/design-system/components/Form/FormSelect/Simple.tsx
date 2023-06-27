@@ -1,8 +1,8 @@
 import styled, { css } from "styled-components";
 import React from "react";
+import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
+import { ISelectData } from "shared/types/options";
 import { StyledInput } from "../Styles";
-import { ISelectData } from "../../../types";
-import { USE_ROOT_COLOR } from "../../../theme";
 
 interface ISimpleSelect {
   options: ISelectData[];

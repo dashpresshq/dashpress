@@ -1,8 +1,8 @@
 import React from "react";
-import { IColumnFilterBag } from "@hadmean/protozoa";
+import { IColumnFilterBag } from "shared/types/data";
+import { ISelectData } from "shared/types/options";
 import { FormMultiSelect } from "../../Form/FormSelect";
 import { IFilterProps } from "./types";
-import { ISelectData } from "../../../types";
 
 export function FilterTableByStatus({
   column: { filterValue, setFilter },

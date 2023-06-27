@@ -1,12 +1,10 @@
-import {
-  FormButton,
-  RenderList,
-  SectionListItem,
-  Spacer,
-  Stack,
-} from "@hadmean/chromista";
 import { ILabelValue } from "shared/types/options";
 import { userFriendlyCase } from "shared/lib/strings/friendly-case";
+import { Stack } from "frontend/design-system/primitives/Stack";
+import { FormButton } from "frontend/design-system/components/Button/FormButton";
+import { Spacer } from "frontend/design-system/primitives/Spacer";
+import { RenderList } from "frontend/design-system/components/RenderList";
+import { SectionListItem } from "frontend/design-system/components/Section/SectionList";
 import {
   useCreateRolePermissionMutation,
   useRolePermissionDeletionMutation,

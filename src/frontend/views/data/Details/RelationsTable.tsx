@@ -9,7 +9,7 @@ import {
   useEntityCrudConfig,
   useEntityId,
   useEntitySlug,
-} from "../../../hooks/entity/entity.config";
+} from "frontend/hooks/entity/entity.config";
 import { ENTITY_DETAILS_VIEW_KEY } from "./constants";
 import { DetailsLayout } from "./_Layout";
 import { useTableMenuItems } from "../Table/useTableMenuItems";

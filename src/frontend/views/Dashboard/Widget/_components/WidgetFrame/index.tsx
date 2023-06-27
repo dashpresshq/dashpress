@@ -1,11 +1,4 @@
 import styled from "styled-components";
-import {
-  Spacer,
-  StyledCard,
-  EmptyWrapper,
-  Stack,
-  RenderCode,
-} from "@hadmean/chromista";
 import { WidgetRoot } from "frontend/views/Dashboard/styles";
 import { ReactElement, forwardRef } from "react";
 import {
@@ -15,10 +8,15 @@ import {
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { ISharedWidgetConfig } from "shared/types/dashboard/base";
 import { DataStateKeys } from "frontend/lib/data/types";
-import { useWidgetNavigationLink } from "../../../Widget/useWidgetNavigationLink";
-import { WIDGET_CONFIG } from "../../constants";
-import { IWidgetSettingProps } from "../WidgetHeader/types";
+import { StyledCard } from "frontend/design-system/components/Card";
+import { Spacer } from "frontend/design-system/primitives/Spacer";
+import { RenderCode } from "frontend/design-system/components/RenderCode";
+import { Stack } from "frontend/design-system/primitives/Stack";
+import { EmptyWrapper } from "frontend/design-system/components/EmptyWrapper";
 import { WidgetHeader } from "../WidgetHeader";
+import { IWidgetSettingProps } from "../WidgetHeader/types";
+import { WIDGET_CONFIG } from "../../constants";
+import { useWidgetNavigationLink } from "../../../Widget/useWidgetNavigationLink";
 
 const StyledBox = styled.div`
   padding: 24px;

@@ -1,11 +1,11 @@
 import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
 import { META_USER_PERMISSIONS } from "shared/constants/user";
 import { GranularEntityPermissions } from "shared/types/user";
-import { AppLayout } from "../../../_layouts/app";
 import {
   useEntityCrudConfig,
   useEntitySlug,
-} from "../../../hooks/entity/entity.config";
+} from "frontend/hooks/entity/entity.config";
+import { AppLayout } from "frontend/_layouts/app";
 import {
   EntityActionTypes,
   useEntityActionMenuItems,

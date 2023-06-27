@@ -1,5 +1,5 @@
 import React, { useCallback, useMemo } from "react";
-import { Stack } from "../../ui-blocks";
+import { Stack } from "frontend/design-system/primitives/Stack";
 import { BaseLeftSideNav } from "../BaseLeftSideNav";
 import { RenderNavigation } from "../Navigation";
 import { useSideBarStore } from "../sidebar.store";

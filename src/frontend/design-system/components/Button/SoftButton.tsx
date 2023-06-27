@@ -1,11 +1,11 @@
 import React from "react";
 import Link from "next/link";
 import { Loader } from "react-feather";
+import { SYSTEM_COLORS } from "frontend/design-system/theme/system";
+import { Stack } from "frontend/design-system/primitives/Stack";
 import { StyledSoftButton } from "./Button";
 import { ButtonIconTypes, ICON_MAP } from "./constants";
-import { SYSTEM_COLORS } from "../../theme";
 import { Spin } from "../_/Spin";
-import { Stack } from "../../primitives";
 
 export interface IProps {
   label?: string;

@@ -1,6 +1,6 @@
 import React from "react";
-import { FilterOperators, IColumnFilterBag } from "@hadmean/protozoa";
-import { ISelectData } from "../../../types";
+import { FilterOperators, IColumnFilterBag } from "shared/types/data";
+import { ISelectData } from "shared/types/options";
 import { SimpleSelect } from "../../Form/FormSelect/Simple";
 import { IFilterProps } from "./types";
 

@@ -2,8 +2,8 @@
 import React from "react";
 import { Story } from "@storybook/react";
 import { Minus, Plus, Save } from "react-feather";
+import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 import { DropDownMenu, IProps } from ".";
-import { ApplicationRoot } from "../../ApplicationRoot";
 
 export default {
   title: "Components/DropdownMenu",

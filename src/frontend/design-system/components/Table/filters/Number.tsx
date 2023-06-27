@@ -1,5 +1,5 @@
 import React from "react";
-import { FilterOperators, IColumnFilterBag } from "@hadmean/protozoa";
+import { FilterOperators, IColumnFilterBag } from "shared/types/data";
 import { StyledInput } from "../../Form/Styles";
 import { IFilterProps } from "./types";
 import { Spacer } from "../../../primitives/Spacer";

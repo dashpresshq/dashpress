@@ -1,6 +1,6 @@
 import React from "react";
 import styled, { css } from "styled-components";
-import { SYSTEM_COLORS } from "../../theme";
+import { SYSTEM_COLORS } from "frontend/design-system/theme/system";
 import { StyledBadge } from "./Base";
 
 const StyledBadgePill = styled(StyledBadge)<{

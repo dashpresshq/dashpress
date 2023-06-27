@@ -1,8 +1,9 @@
-import { ITableColumn, Table } from "@hadmean/chromista";
 import { ICrudConfig } from "frontend/lib/crud-config";
 import { usePaginatedData } from "frontend/lib/data/useApi/usePaginatedData";
 import { DEFAULT_PAGINATED_DATA } from "frontend/lib/data/constants/defaults";
 import { pluralize } from "shared/lib/strings";
+import { ITableColumn } from "frontend/design-system/components/Table/types";
+import { Table } from "frontend/design-system/components/Table";
 import { useTableState } from "../hooks";
 import { IDataTableProps } from "../types";
 

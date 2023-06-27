@@ -2,6 +2,8 @@ import React from "react";
 import { Icon, Loader } from "react-feather";
 import styled from "styled-components";
 import { Stack } from "frontend/design-system/primitives/Stack";
+import { useThemeColorShade } from "frontend/design-system/theme/useTheme";
+import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
 import {
   StyledOutlineButton,
   IStyledBaseButton,
@@ -9,8 +11,6 @@ import {
 } from "../Button";
 import { Spin } from "../../_/Spin";
 import { ICON_MAP, ButtonIconTypes } from "../constants";
-import { useThemeColorShade } from "../../../theme/useTheme";
-import { USE_ROOT_COLOR } from "../../../theme/root";
 
 interface IFormButton extends IStyledBaseButton {
   text: (isMakingRequest: boolean) => string;

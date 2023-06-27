@@ -1,5 +1,5 @@
 import { setupApiController } from "backend/setup/setup.controller";
-import { requestHandler } from "../../../backend/lib/request";
+import { requestHandler } from "backend/lib/request";
 
 export default requestHandler(
   {

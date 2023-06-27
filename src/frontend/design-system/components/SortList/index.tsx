@@ -1,15 +1,18 @@
 import React, { useState, useEffect } from "react";
 import SortableList, { SortableItem } from "react-easy-sort";
-import { DataStateKeys, StringUtils } from "@hadmean/protozoa";
 import { Move } from "react-feather";
 import styled from "styled-components";
+import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
+import { DataStateKeys } from "frontend/lib/data/types";
+import { Stack } from "frontend/design-system/primitives/Stack";
+import { pluralize } from "shared/lib/strings";
+import { Typo } from "frontend/design-system/primitives/Text";
+import { Spacer } from "frontend/design-system/primitives/Spacer";
 import { ErrorAlert } from "../Alert";
-import { ListSkeleton } from "../Skeleton";
 import { EmptyWrapper } from "../EmptyWrapper";
-import { Spacer, Stack, Typo } from "../../primitives";
-import { FormButton } from "../Button";
+import { FormButton } from "../Button/FormButton";
 import { defaultToEmptyArray } from "./utils";
-import { USE_ROOT_COLOR } from "../../theme";
+import { ListSkeleton } from "../Skeleton/List";
 
 function arrayMoveMutable<T>(array: T[], fromIndex: number, toIndex: number) {
   const startIndex = fromIndex < 0 ? array.length + fromIndex : fromIndex;
@@ -78,7 +81,7 @@ export function SortList<T extends { value: string; label?: string }>({
   if (itemsLength <= 1) {
     return (
       <EmptyWrapper
-        text={`Cant sort ${StringUtils.pluralize({
+        text={`Cant sort ${pluralize({
           singular: "item",
           count: itemsLength,
           inclusive: true,

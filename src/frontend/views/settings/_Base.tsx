@@ -19,7 +19,7 @@ import { InfoAlert } from "frontend/design-system/components/Alert";
 import { ContentLayout } from "frontend/design-system/components/Section/SectionDivider";
 import { Spacer } from "frontend/design-system/primitives/Spacer";
 import { AppLayout } from "frontend/_layouts/app";
-import { NAVIGATION_LINKS } from "../../lib/routing/links";
+import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
 import { useMutateBaseSettingsMenu } from "./portal";
 
 interface IProps {

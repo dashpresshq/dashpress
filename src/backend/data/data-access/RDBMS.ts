@@ -1,6 +1,5 @@
 /* eslint-disable no-param-reassign */
 import { Knex } from "knex";
-import get from "lodash/get";
 import { getDbConnection } from "backend/lib/connection/db";
 import { FieldQueryFilter, QueryFilterSchema } from "shared/types/data";
 import { credentialsApiService } from "backend/integrations-configurations";
@@ -131,7 +130,7 @@ export class RDBMSDataApiService extends BaseDataAccessService<Knex.QueryBuilder
 
     query = this.transformQueryFilterSchema(query, queryFilter);
 
-    return +get(await query.count({ count: "*" }), [0, "count"], 0);
+    return +(await query.count({ count: "*" }))[0].count || 0;
   }
 
   async list(

@@ -11,7 +11,7 @@ import { SectionListItem } from "frontend/design-system/components/Section/Secti
 import { Spacer } from "frontend/design-system/primitives/Spacer";
 import { MenuSection } from "frontend/design-system/components/Section/MenuSection";
 import { AppLayout } from "frontend/_layouts/app";
-import { NAVIGATION_LINKS } from "../../lib/routing/links";
+import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
 import {
   useActionIntegrationsList,
   useActiveActionList,

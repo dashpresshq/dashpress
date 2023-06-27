@@ -5,7 +5,7 @@ import { Lock, LogOut, User, Settings } from "react-feather";
 import { ContentLayout } from "frontend/design-system/components/Section/SectionDivider";
 import { MenuSection } from "frontend/design-system/components/Section/MenuSection";
 import { AppLayout } from "frontend/_layouts/app";
-import { NAVIGATION_LINKS } from "../../lib/routing/links";
+import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
 import { usePortalAccountMenu } from "./portal";
 
 interface IProps {

@@ -2,7 +2,7 @@ import {
   CONFIGURATION_KEYS,
   AppConfigurationKeys,
 } from "shared/configurations";
-import { BadRequestError } from "../../../errors";
+import { BadRequestError } from "backend/lib/errors";
 import { ValidationImplType } from "./types";
 
 export const configKeyFilterValidationImpl: ValidationImplType<

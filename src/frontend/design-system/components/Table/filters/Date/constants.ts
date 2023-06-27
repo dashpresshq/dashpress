@@ -1,5 +1,5 @@
 import { DATE_FILTER_VALUE, IDateFilterOption } from "shared/types/data";
-// TODO move to date filter component
+
 const DATE_FILTER_OPTIONS$1: Record<
   DATE_FILTER_VALUE,
   Omit<IDateFilterOption, "value">

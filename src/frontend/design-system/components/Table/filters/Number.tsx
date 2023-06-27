@@ -1,8 +1,8 @@
 import React from "react";
 import { FilterOperators, IColumnFilterBag } from "shared/types/data";
+import { Spacer } from "frontend/design-system/primitives/Spacer";
 import { StyledInput } from "../../Form/Styles";
 import { IFilterProps } from "./types";
-import { Spacer } from "../../../primitives/Spacer";
 
 export function FilterTableByNumbers({
   column: { filterValue, setFilter },

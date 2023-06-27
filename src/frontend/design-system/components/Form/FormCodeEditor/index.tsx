@@ -1,10 +1,10 @@
 import React from "react";
 import styled from "styled-components";
-import noop from "lodash/noop";
 import Editor from "react-simple-code-editor";
 import { highlight, languages } from "prismjs/components/prism-core";
 import { SYSTEM_COLORS } from "frontend/design-system/theme/system";
 import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
+import { noop } from "shared/lib/noop";
 import { ISharedFormInput } from "../_types";
 import { generateClassNames, wrapLabelAndError } from "../_wrapForm";
 import "prismjs/components/prism-clike";

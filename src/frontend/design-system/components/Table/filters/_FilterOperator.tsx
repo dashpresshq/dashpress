@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { FilterOperators, IColumnFilterBag } from "shared/types/data";
-import { Spacer } from "../../../primitives/Spacer";
+import { Spacer } from "frontend/design-system/primitives/Spacer";
 import { SimpleSelect } from "../../Form/FormSelect/Simple";
 
 const FILTER_OPERATOR_LABELS: Record<FilterOperators, string> = {

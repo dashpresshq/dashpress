@@ -1,7 +1,7 @@
 import React from "react";
-import { DATE_FILTER_OPTIONS } from "frontend/design-system/filters/constants";
 import { IColumnFilterBag, IDateFilterOption } from "shared/types/data";
 import { Stack } from "frontend/design-system/primitives/Stack";
+import { DATE_FILTER_OPTIONS } from "./constants";
 import { SimpleSelect } from "../../../Form/FormSelect/Simple";
 
 const getOptionValue = (value: string) => {

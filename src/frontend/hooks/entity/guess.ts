@@ -4,7 +4,7 @@ import {
   FIELD_TYPES_CONFIG_MAP,
   ENTITY_VALIDATION_CONFIG,
   ValidationsBoundToType,
-} from "../../../shared/validations";
+} from "shared/validations";
 
 export const getFieldTypeBoundedValidations = (
   fieldType: keyof typeof FIELD_TYPES_CONFIG_MAP

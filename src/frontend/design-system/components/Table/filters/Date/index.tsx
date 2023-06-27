@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Spacer } from "frontend/design-system/primitives/Spacer";
 import { DATE_FILTER_VALUE, IColumnFilterBag } from "shared/types/data";
-import { DATE_FILTER_OPTIONS } from "frontend/design-system/filters/constants";
+import { DATE_FILTER_OPTIONS } from "./constants";
 import { IFilterProps } from "../types";
 import { DateSelection } from "./_Selection";
 import { FormSwitch } from "../../../Form/FormSwitch";

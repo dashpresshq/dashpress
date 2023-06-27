@@ -1,6 +1,6 @@
 import { userFriendlyCase } from "shared/lib/strings/friendly-case";
-import uniqBy from "lodash/uniqBy";
 import { EntityTypesForSelection, IColorableSelection } from "shared/types/ui";
+import { uniqBy } from "shared/lib/array/uniq-by";
 import { isUseColorsFlagOn, OPTIONS_COLORS } from "./selection.utils";
 
 export const getEntitySelectionConfig = (

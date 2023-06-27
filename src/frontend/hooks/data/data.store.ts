@@ -8,7 +8,7 @@ import { useApi } from "frontend/lib/data/useApi";
 import { useWaitForResponseMutationOptions } from "frontend/lib/data/useMutate/useWaitForResponseMutationOptions";
 import { SLUG_LOADING_VALUE } from "frontend/lib/routing/constants";
 import { useApiQueries } from "frontend/lib/data/useApi/useApiQueries";
-import { NAVIGATION_LINKS } from "../../lib/routing/links";
+import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
 import { useEntityCrudConfig } from "../entity/entity.config";
 import { useMultipleEntityReferenceFields } from "../entity/entity.store";
 import { isRouterParamEnabled } from "..";

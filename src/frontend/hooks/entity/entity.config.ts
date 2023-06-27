@@ -1,5 +1,4 @@
 import { useCallback } from "react";
-import uniqBy from "lodash/uniqBy";
 import { IFieldValidationItem } from "shared/validations/types";
 import { IColorableSelection } from "shared/types/ui";
 import {
@@ -11,14 +10,15 @@ import { CRUD_KEY_CONFIG } from "shared/configurations/permissions";
 import { DataStateKeys } from "frontend/lib/data/types";
 import { useRouteParam } from "frontend/lib/routing/useRouteParam";
 import { MAKE_CRUD_CONFIG } from "frontend/lib/crud-config";
+import { uniqBy } from "shared/lib/array/uniq-by";
+import { userFriendlyCase } from "shared/lib/strings/friendly-case";
+import { FIELD_TYPES_CONFIG_MAP } from "shared/validations";
+import { IEntityCrudSettings } from "shared/configurations";
+import { useEntityFields } from "./entity.store";
 import {
   getFieldTypeBoundedValidations,
   guessEntityValidations,
 } from "./guess";
-import { userFriendlyCase } from "../../../shared/lib/strings/friendly-case";
-import { FIELD_TYPES_CONFIG_MAP } from "../../../shared/validations";
-import { useEntityFields } from "./entity.store";
-import { IEntityCrudSettings } from "../../../shared/configurations";
 import { useEntityConfiguration } from "../configuration/configuration.store";
 import { usePortalHiddenEntityColumns } from "./portal";
 

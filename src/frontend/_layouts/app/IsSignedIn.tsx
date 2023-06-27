@@ -6,7 +6,7 @@ import { useQueryClient } from "react-query";
 import { removeAuthToken } from "frontend/hooks/auth/auth.store";
 import { getQueryCachekey } from "frontend/lib/data/constants/getQueryCacheKey";
 import { ComponentIsLoading } from "frontend/design-system/components/ComponentIsLoading";
-import { NAVIGATION_LINKS } from "../../lib/routing/links";
+import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
 import { useAppTheme } from "../useAppTheme";
 
 const useUserAuthCheck = () => {

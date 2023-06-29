@@ -30,3 +30,5 @@ export interface ISelectionView {
   description?: string;
   iconButtons?: { action: () => void; icon: ButtonIconTypes }[];
 }
+
+export const FOR_CODE_COV = 1;

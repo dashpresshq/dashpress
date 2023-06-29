@@ -27,6 +27,7 @@ import { Typo } from "frontend/design-system/primitives/Typo";
 import { Stack } from "frontend/design-system/primitives/Stack";
 import { FormButton } from "frontend/design-system/components/Button/FormButton";
 import { FormCodeEditor } from "frontend/design-system/components/Form/FormCodeEditor";
+import { loadedDataState } from "frontend/lib/data/constants/loadedDataState";
 import { GridSpan } from "./Form.style";
 import { DASHBOARD_WIDGETS_CRUD_CONFIG } from "../../constants";
 import { DashboardWidgetPresentation } from "../Presentation";
@@ -274,12 +275,7 @@ export function DashboardWidgetForm({
                                 <DashboardWidgetPresentation
                                   config={values}
                                   isPreview
-                                  data={{
-                                    data: runWidgetScript.data,
-                                    error: false,
-                                    isLoading: false,
-                                    isRefetching: false,
-                                  }}
+                                  data={loadedDataState(runWidgetScript.data)}
                                 />
                               ),
                             },

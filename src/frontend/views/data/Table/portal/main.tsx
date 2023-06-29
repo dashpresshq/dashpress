@@ -1,5 +1,6 @@
 import { IDropDownMenuItem } from "frontend/design-system/components/DropdownMenu";
 import { ITableColumn } from "frontend/design-system/components/Table/types";
+import { loadedDataState } from "frontend/lib/data/constants/loadedDataState";
 import { DataStateKeys } from "frontend/lib/data/types";
 import { noop } from "shared/lib/noop";
 import { ITableTab } from "shared/types/data";
@@ -37,10 +38,5 @@ export const usePortalTableTabs = (
   entity: string
 ): DataStateKeys<ITableTab[]> => {
   noop(entity);
-  return {
-    data: [],
-    error: null,
-    isLoading: false,
-    isRefetching: false,
-  };
+  return loadedDataState<ITableTab[]>([]);
 };

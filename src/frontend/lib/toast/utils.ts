@@ -1,10 +1,10 @@
-import get from "lodash/get";
-
 const DEFAULT_ERROR_MESSAGE =
   "Oops! Something Went Wrong. Please Check Your Network And Try Again";
 
 export const getBestErrorMessage = (
-  errorResponse: Record<string, unknown> | string | unknown,
+  errorResponse:
+    | string
+    | { message?: string; response?: { data?: { message?: string } } },
   defaultErrorMessage?: string
 ): string => {
   if (typeof errorResponse === "string") {
@@ -13,12 +13,12 @@ export const getBestErrorMessage = (
 
   let bestErrorMessage = defaultErrorMessage || DEFAULT_ERROR_MESSAGE;
 
-  if (get(errorResponse, ["message"], false)) {
-    bestErrorMessage = get(errorResponse, ["message"], "");
+  if (errorResponse?.message) {
+    bestErrorMessage = errorResponse.message;
   }
 
-  if (get(errorResponse, ["response", "data", "message"], false)) {
-    bestErrorMessage = get(errorResponse, ["response", "data", "message"], "");
+  if (errorResponse?.response?.data?.message) {
+    bestErrorMessage = errorResponse.response.data.message;
   }
 
   if (bestErrorMessage === "Internal server error") {

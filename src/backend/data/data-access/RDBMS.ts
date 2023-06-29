@@ -87,7 +87,7 @@ export class RDBMSDataApiService extends BaseDataAccessService<Knex.QueryBuilder
     await RDBMSDataApiService.getInstance();
   }
 
-  private transformQueryFilterSchema = (
+  transformQueryFilterSchema = (
     query: Knex.QueryBuilder,
     queryFilter: QueryFilterSchema
   ): Knex.QueryBuilder => {

@@ -9,8 +9,7 @@ import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 
 setupApiHandlers();
 
-// Always failing on CI
-describe.skip("pages/admin/settings/menu-entities", () => {
+describe("pages/admin/settings/menu-entities", () => {
   beforeAll(() => {
     const useRouter = jest.spyOn(require("next/router"), "useRouter");
     useRouter.mockImplementation(() => ({

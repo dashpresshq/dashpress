@@ -1,5 +1,4 @@
 import { useQuery, UseQueryResult } from "react-query";
-import get from "lodash/get";
 import {
   FieldQueryFilter,
   FilterOperators,
@@ -32,7 +31,7 @@ export function useFEPagination<T>(
             return dataState.filters.every(($filter) => {
               const filter = $filter as unknown as FieldQueryFilter;
               const filterValue = filter.value.value;
-              const currentValue = get(datum, filter.id);
+              const currentValue = datum[filter.id];
               if (!filterValue) {
                 return true;
               }
@@ -61,9 +60,10 @@ export function useFEPagination<T>(
 
         if (dataState.sortBy && dataState.sortBy.length > 0) {
           const { id, desc } = dataState.sortBy[0];
+
           returnData = returnData.sort((a, b) => {
-            const value1 = get(desc ? b : a, id);
-            const value2 = get(desc ? a : b, id);
+            const value1 = (desc ? b : a)[id];
+            const value2 = (desc ? a : b)[id];
             if (typeof value1 === "number") {
               return compareNumbers(value1, value2);
             }

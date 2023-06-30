@@ -2,8 +2,6 @@ import * as React from "react";
 import styled, { keyframes } from "styled-components";
 import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
 
-const DELAY_MS = 500;
-
 const ldsRippleAnimation = keyframes`
 0% {
   top: 36px;
@@ -49,18 +47,4 @@ export function ComponentIsLoading() {
       </StyledLdsWrapper>
     </div>
   );
-}
-
-export function DelayedComponentIsLoading() {
-  const [show, setShow] = React.useState(false);
-  React.useEffect(() => {
-    const timeout = setTimeout(() => setShow(true), DELAY_MS);
-    return () => {
-      clearTimeout(timeout);
-    };
-  }, []);
-  if (!show) {
-    return null;
-  }
-  return <ComponentIsLoading />;
 }

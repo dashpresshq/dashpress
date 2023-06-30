@@ -26,6 +26,7 @@ export const StyledSelect = styled(AsyncSelect)`
   ${SelectStyles}
 `;
 
+// TODO move to useDebounce
 const debouncedSearch = debounce(
   async (
     inputValue: string,

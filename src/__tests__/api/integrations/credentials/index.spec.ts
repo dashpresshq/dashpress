@@ -47,7 +47,7 @@ describe("/api/integrations/credentials", () => {
 
     await handler(req, res);
 
-    expect(res._getStatusCode()).toBe(401);
+    expect(res._getStatusCode()).toBe(403);
     expect(res._getJSONData()).toMatchInlineSnapshot(`
       {
         "errorCode": "",
@@ -55,7 +55,7 @@ describe("/api/integrations/credentials", () => {
         "method": "GET",
         "name": "ForbiddenError",
         "path": "",
-        "statusCode": 401,
+        "statusCode": 403,
       }
     `);
   });

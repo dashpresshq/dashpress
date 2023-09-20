@@ -1,5 +1,5 @@
 import { AbstractConfigDataPersistenceService } from "backend/lib/config-persistence";
-import { BadRequestError, ForbiddenError } from "backend/lib/errors";
+import { BadRequestError, UnauthorizedError } from "backend/lib/errors";
 import { HashService } from "backend/lib/hash/hash.service";
 import { IApplicationService } from "backend/types";
 import { IAccountUser, IAccountProfile } from "shared/types/user";
@@ -26,7 +26,7 @@ export class UsersApiService implements IApplicationService {
         () => generateAuthTokenForUsername(authCredentials.username)
       );
     } catch (error) {
-      throw new ForbiddenError(INVALID_LOGIN_MESSAGE);
+      throw new UnauthorizedError(INVALID_LOGIN_MESSAGE);
     }
   }
 

@@ -1,6 +1,11 @@
 import { createUnAuthenticatedMocks } from "__tests__/api/_test-utils/_authenticatedMock";
 import { requestHandler } from "../request";
-import { BadRequestError, ForbiddenError, NotFoundError } from ".";
+import {
+  BadRequestError,
+  ForbiddenError,
+  NotFoundError,
+  UnauthorizedError,
+} from ".";
 
 describe("/api/error/handling", () => {
   it("should transform BadRequestError correctly", async () => {
@@ -66,6 +71,36 @@ describe("/api/error/handling", () => {
     `);
   });
 
+  it("should transform UnauthorizedError correctly", async () => {
+    const { req, res } = createUnAuthenticatedMocks({
+      method: "GET",
+    });
+
+    await requestHandler(
+      {
+        GET: async () => {
+          throw new UnauthorizedError("Invalid Login");
+        },
+      },
+      [
+        {
+          _type: "guest",
+        },
+      ]
+    )(req, res);
+
+    expect(res._getStatusCode()).toBe(401);
+    expect(res._getJSONData()).toMatchInlineSnapshot(`
+      {
+        "message": "Invalid Login",
+        "method": "GET",
+        "name": "UnauthorizedError",
+        "path": "",
+        "statusCode": 401,
+      }
+    `);
+  });
+
   it("should transform ForbiddenError correctly", async () => {
     const { req, res } = createUnAuthenticatedMocks({
       method: "GET",
@@ -87,7 +122,7 @@ describe("/api/error/handling", () => {
       ]
     )(req, res);
 
-    expect(res._getStatusCode()).toBe(401);
+    expect(res._getStatusCode()).toBe(403);
     expect(res._getJSONData()).toMatchInlineSnapshot(`
       {
         "errorCode": "DEMO_ERROR_CODE",
@@ -95,7 +130,7 @@ describe("/api/error/handling", () => {
         "method": "GET",
         "name": "ForbiddenError",
         "path": "",
-        "statusCode": 401,
+        "statusCode": 403,
       }
     `);
   });

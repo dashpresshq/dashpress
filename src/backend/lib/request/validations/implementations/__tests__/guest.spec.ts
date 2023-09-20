@@ -44,7 +44,7 @@ describe("Request Validations => guestValidationImpl", () => {
                   "errorCode": "ALREADY_AUTHENTICATED",
                   "message": "You are already authenticated, Please logout to continue with request",
                   "method": "GET",
-                  "name": "ForbiddenError",
+                  "name": "UnauthorizedError",
                   "path": "",
                   "statusCode": 401,
                 }

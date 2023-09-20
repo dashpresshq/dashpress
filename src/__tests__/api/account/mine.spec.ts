@@ -75,7 +75,7 @@ describe("/api/account/mine", () => {
         "errorCode": "NOT_AUTHENTICATED",
         "message": "root not found for 'users'",
         "method": "GET",
-        "name": "ForbiddenError",
+        "name": "UnauthorizedError",
         "path": "",
         "statusCode": 401,
       }
@@ -100,7 +100,7 @@ describe("/api/account/mine", () => {
 
     await handler(req, res);
 
-    expect(res._getStatusCode()).toBe(401);
+    expect(res._getStatusCode()).toBe(403);
 
     expect(res._getJSONData()).toMatchInlineSnapshot(`
       {
@@ -109,7 +109,7 @@ describe("/api/account/mine", () => {
         "method": "GET",
         "name": "ForbiddenError",
         "path": "",
-        "statusCode": 401,
+        "statusCode": 403,
       }
     `);
   });

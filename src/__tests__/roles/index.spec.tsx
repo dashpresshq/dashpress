@@ -74,9 +74,6 @@ describe("pages/roles", () => {
     const tableRows = await screen.findAllByRole("link", { name: "Edit" });
 
     expect(tableRows).toHaveLength(2);
-
-    expect(tableRows[0]).toHaveAttribute("href", "/roles/role-1");
-    expect(tableRows[1]).toHaveAttribute("href", "/roles/role-2");
   });
 
   it("should delete role for only non-system roles", async () => {

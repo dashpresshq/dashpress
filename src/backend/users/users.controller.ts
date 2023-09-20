@@ -1,4 +1,4 @@
-import { ForbiddenError } from "backend/lib/errors";
+import { UnauthorizedError } from "backend/lib/errors";
 import { RolesApiService, rolesApiService } from "backend/roles/roles.service";
 import { REQUEST_ERROR_CODES } from "shared/constants/auth";
 import { ISignInForm } from "shared/form-schemas/auth/signin";
@@ -57,7 +57,7 @@ export class UsersApiController {
       /*
         Any error here should make the user redirect to login page
       */
-      throw new ForbiddenError(
+      throw new UnauthorizedError(
         error.message,
         REQUEST_ERROR_CODES.NOT_AUTHENTICATED
       );

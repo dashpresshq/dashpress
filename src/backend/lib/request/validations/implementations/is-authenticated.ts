@@ -1,5 +1,5 @@
 import { authTokenApiService } from "backend/lib/auth-token/auth-token.service";
-import { ForbiddenError } from "backend/lib/errors";
+import { UnauthorizedError } from "backend/lib/errors";
 import { REQUEST_ERROR_CODES } from "shared/constants/auth";
 import { ValidationImplType } from "./types";
 
@@ -12,14 +12,14 @@ export const isAuthenticatedValidationImpl: ValidationImplType<void> = async (
   try {
     const reqHeaders = req.headers.authorization;
     if (!reqHeaders) {
-      throw new ForbiddenError(
+      throw new UnauthorizedError(
         "No authorization token provided",
         NO_AUTH_ERROR_CODE
       );
     }
     const authToken = reqHeaders.slice(7);
     if (!authToken) {
-      throw new ForbiddenError(
+      throw new UnauthorizedError(
         "The authorization token provided is empty",
         NO_AUTH_ERROR_CODE
       );
@@ -27,7 +27,7 @@ export const isAuthenticatedValidationImpl: ValidationImplType<void> = async (
     try {
       req.user = await authTokenApiService.verify(authToken);
     } catch (error) {
-      throw new ForbiddenError("Invalid Token", NO_AUTH_ERROR_CODE);
+      throw new UnauthorizedError("Invalid Token", NO_AUTH_ERROR_CODE);
     }
   } catch (error) {
     if (protectedRoute) {
@@ -35,7 +35,7 @@ export const isAuthenticatedValidationImpl: ValidationImplType<void> = async (
     }
   }
   if (req.user && !protectedRoute) {
-    throw new ForbiddenError(
+    throw new UnauthorizedError(
       "You are already authenticated, Please logout to continue with request",
       REQUEST_ERROR_CODES.ALREADY_AUTHENTICATED
     );

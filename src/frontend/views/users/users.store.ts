@@ -24,6 +24,7 @@ export function useAllUsers() {
     defaultData: [],
   });
 }
+
 export function useUserDetails(username: string) {
   return useApi<IAccountProfile>(
     ADMIN_USERS_CRUD_CONFIG.ENDPOINTS.DETAILS(username),

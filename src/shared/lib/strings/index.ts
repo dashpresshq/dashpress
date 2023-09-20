@@ -1,22 +1,3 @@
-export function formatCount(count: number | string | undefined) {
-  if (!count) {
-    return "0";
-  }
-  const count$1 = Number(count);
-  return `${count$1.toFixed(0).replace(/\d(?=(\d{3})+$)/g, "$&,")}`;
-}
-
-export function formatMoney(
-  money: number | string | undefined,
-  suffix = "&#8358;"
-): string {
-  if (!money) {
-    return `${suffix}0.00`;
-  }
-
-  return `${suffix}${formatCount(money)}`;
-}
-
 export function upperCaseFirstLetter(word: string): string {
   return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
 }
@@ -35,10 +16,6 @@ export function pluralize({
   const computed = count === 1 ? singular : plural || `${singular}s`;
 
   return inclusive ? `${count} ${computed}` : computed;
-}
-
-export function limitTo(word: string, length: number): string {
-  return word.slice(0, length);
 }
 
 export function ellipsis(word: string, length: number): string {

@@ -1,9 +1,9 @@
-import { useRouteParam } from "frontend/lib/routing/useRouteParam";
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
+import { TemporayStorageService } from "frontend/lib/storage";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { createStore } from "frontend/lib/store";
-import { SLUG_LOADING_VALUE } from "frontend/lib/routing/constants";
+import { STORAGE_CONSTANTS } from "frontend/lib/storage/constants";
 import * as AuthStore from "./auth.store";
 
 type IStore = {
@@ -34,7 +34,6 @@ export const useUserAuthenticatedState = () => {
 };
 
 export function useAuthenticateUser() {
-  const nextRoute = useRouteParam("next");
   const router = useRouter();
   const setIsAuthenticated = useIsAuthenticatedStore(
     (store) => store.setIsAuthenticated
@@ -42,11 +41,11 @@ export function useAuthenticateUser() {
 
   return (authToken: string, rememberMe: boolean) => {
     AuthStore.setAuthToken(authToken, rememberMe);
+
     setIsAuthenticated(true);
     router.push(
-      nextRoute === SLUG_LOADING_VALUE || !nextRoute
-        ? NAVIGATION_LINKS.DASHBOARD.HOME
-        : nextRoute
+      TemporayStorageService.getString(STORAGE_CONSTANTS.PREVIOUS_AUTH_URL) ||
+        NAVIGATION_LINKS.DASHBOARD.HOME
     );
   };
 }

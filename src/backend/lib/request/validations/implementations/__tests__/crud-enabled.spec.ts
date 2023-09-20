@@ -156,7 +156,7 @@ describe("Request Validations => crudEnabledValidationImpl", () => {
       });
 
       await handler(req, res);
-      expect(res._getStatusCode()).toBe(401);
+      expect(res._getStatusCode()).toBe(403);
       expect(res._getJSONData()).toMatchInlineSnapshot(`
         {
           "errorCode": "",
@@ -164,7 +164,7 @@ describe("Request Validations => crudEnabledValidationImpl", () => {
           "method": "POST",
           "name": "ForbiddenError",
           "path": "",
-          "statusCode": 401,
+          "statusCode": 403,
         }
       `);
     });
@@ -178,7 +178,7 @@ describe("Request Validations => crudEnabledValidationImpl", () => {
       });
 
       await handler(req, res);
-      expect(res._getStatusCode()).toBe(401);
+      expect(res._getStatusCode()).toBe(403);
       expect(res._getJSONData()).toMatchInlineSnapshot(`
         {
           "errorCode": "",
@@ -186,7 +186,7 @@ describe("Request Validations => crudEnabledValidationImpl", () => {
           "method": "GET",
           "name": "ForbiddenError",
           "path": "",
-          "statusCode": 401,
+          "statusCode": 403,
         }
       `);
     });
@@ -200,7 +200,7 @@ describe("Request Validations => crudEnabledValidationImpl", () => {
       });
 
       await handler(req, res);
-      expect(res._getStatusCode()).toBe(401);
+      expect(res._getStatusCode()).toBe(403);
       expect(res._getJSONData()).toMatchInlineSnapshot(`
         {
           "errorCode": "",
@@ -208,7 +208,7 @@ describe("Request Validations => crudEnabledValidationImpl", () => {
           "method": "DELETE",
           "name": "ForbiddenError",
           "path": "",
-          "statusCode": 401,
+          "statusCode": 403,
         }
       `);
     });
@@ -222,7 +222,7 @@ describe("Request Validations => crudEnabledValidationImpl", () => {
       });
 
       await handler(req, res);
-      expect(res._getStatusCode()).toBe(401);
+      expect(res._getStatusCode()).toBe(403);
       expect(res._getJSONData()).toMatchInlineSnapshot(`
         {
           "errorCode": "",
@@ -230,7 +230,7 @@ describe("Request Validations => crudEnabledValidationImpl", () => {
           "method": "PATCH",
           "name": "ForbiddenError",
           "path": "",
-          "statusCode": 401,
+          "statusCode": 403,
         }
       `);
     });

@@ -22,7 +22,7 @@ describe("Request Validations => isAuthenticatedValidationImpl", () => {
                   "errorCode": "NOT_AUTHENTICATED",
                   "message": "No authorization token provided",
                   "method": "GET",
-                  "name": "ForbiddenError",
+                  "name": "UnauthorizedError",
                   "path": "",
                   "statusCode": 401,
                 }
@@ -45,7 +45,7 @@ describe("Request Validations => isAuthenticatedValidationImpl", () => {
                   "errorCode": "NOT_AUTHENTICATED",
                   "message": "The authorization token provided is empty",
                   "method": "GET",
-                  "name": "ForbiddenError",
+                  "name": "UnauthorizedError",
                   "path": "",
                   "statusCode": 401,
                 }
@@ -68,7 +68,7 @@ describe("Request Validations => isAuthenticatedValidationImpl", () => {
                   "errorCode": "NOT_AUTHENTICATED",
                   "message": "Invalid Token",
                   "method": "GET",
-                  "name": "ForbiddenError",
+                  "name": "UnauthorizedError",
                   "path": "",
                   "statusCode": 401,
                 }

@@ -29,9 +29,15 @@ export class NotFoundError extends CustomError {
   }
 }
 
+export class UnauthorizedError extends CustomError {
+  constructor(message = "Unauthorized", errorCode = "") {
+    super(401, "UnauthorizedError", message, errorCode);
+  }
+}
+
 export class ForbiddenError extends CustomError {
   constructor(message = "Access to resource is denied", errorCode = "") {
-    super(401, "ForbiddenError", message, errorCode);
+    super(403, "ForbiddenError", message, errorCode);
   }
 }
 

@@ -1,5 +1,7 @@
 import { getAuthToken, removeAuthToken } from "frontend/hooks/auth/auth.store";
 import { REQUEST_ERROR_CODES } from "shared/constants/auth";
+import { TemporayStorageService } from "frontend/lib/storage";
+import { STORAGE_CONSTANTS } from "frontend/lib/storage/constants";
 import { ApiRequestError } from "./_errors";
 
 const pathWithBaseUrl = (path: string) => {
@@ -29,6 +31,10 @@ const handleRequestError = async (response: Response, errorMessage: string) => {
   if ([401, 400].includes(response.status)) {
     if (error.errorCode === REQUEST_ERROR_CODES.NOT_AUTHENTICATED) {
       removeAuthToken();
+      TemporayStorageService.setString(
+        STORAGE_CONSTANTS.PREVIOUS_AUTH_URL,
+        window.location.href
+      );
       window.location.replace("/auth");
     }
   }

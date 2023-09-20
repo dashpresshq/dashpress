@@ -50,7 +50,7 @@ describe("/api/auth/signin", () => {
         "errorCode": "",
         "message": "Invalid Login",
         "method": "POST",
-        "name": "ForbiddenError",
+        "name": "UnauthorizedError",
         "path": "",
         "statusCode": 401,
       }
@@ -75,7 +75,7 @@ describe("/api/auth/signin", () => {
         "errorCode": "",
         "message": "Invalid Login",
         "method": "POST",
-        "name": "ForbiddenError",
+        "name": "UnauthorizedError",
         "path": "",
         "statusCode": 401,
       }

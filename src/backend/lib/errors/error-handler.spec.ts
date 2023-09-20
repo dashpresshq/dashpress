@@ -92,6 +92,7 @@ describe("/api/error/handling", () => {
     expect(res._getStatusCode()).toBe(401);
     expect(res._getJSONData()).toMatchInlineSnapshot(`
       {
+        "errorCode": "",
         "message": "Invalid Login",
         "method": "GET",
         "name": "UnauthorizedError",

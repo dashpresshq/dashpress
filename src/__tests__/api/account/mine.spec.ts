@@ -100,16 +100,16 @@ describe("/api/account/mine", () => {
 
     await handler(req, res);
 
-    expect(res._getStatusCode()).toBe(403);
+    expect(res._getStatusCode()).toBe(401);
 
     expect(res._getJSONData()).toMatchInlineSnapshot(`
       {
         "errorCode": "NOT_AUTHENTICATED",
         "message": "role-doesn't-exist not found for 'roles'",
         "method": "GET",
-        "name": "ForbiddenError",
+        "name": "UnauthorizedError",
         "path": "",
-        "statusCode": 403,
+        "statusCode": 401,
       }
     `);
   });

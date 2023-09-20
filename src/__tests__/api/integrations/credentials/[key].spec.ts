@@ -295,7 +295,7 @@ describe("/api/integrations/credentials/[key]", () => {
   });
 
   describe("permission", () => {
-    it("should return 401 when user has incorrect permission", async () => {
+    it("should return 403 when user has incorrect permission", async () => {
       await setupRolesTestData([
         {
           id: "custom-role",
@@ -315,7 +315,7 @@ describe("/api/integrations/credentials/[key]", () => {
 
       await handler(req, res);
 
-      expect(res._getStatusCode()).toBe(401);
+      expect(res._getStatusCode()).toBe(403);
     });
     it("should work when user has correct permission", async () => {
       await Promise.all([

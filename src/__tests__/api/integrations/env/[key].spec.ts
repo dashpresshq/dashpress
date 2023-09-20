@@ -228,7 +228,7 @@ describe("/api/integrations/env/[key]", () => {
   });
 
   describe("permission", () => {
-    it("should return 401 when user has no permission", async () => {
+    it("should return 403 when user has no permission", async () => {
       const { req, res } = createAuthenticatedViewerMocks({
         method: "PUT",
         query: {
@@ -241,7 +241,7 @@ describe("/api/integrations/env/[key]", () => {
 
       await handler(req, res);
 
-      expect(res._getStatusCode()).toBe(401);
+      expect(res._getStatusCode()).toBe(403);
     });
     it("should work when user has correct permission", async () => {
       await setupRolesTestData([

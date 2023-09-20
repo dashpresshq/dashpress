@@ -41,7 +41,7 @@ describe("Request Validations => canUserValidationImpl", () => {
 
     await handler(req, res);
 
-    expect(res._getStatusCode()).toBe(401);
+    expect(res._getStatusCode()).toBe(403);
     expect(res._getJSONData()).toMatchInlineSnapshot(`
       {
         "errorCode": "",
@@ -49,7 +49,7 @@ describe("Request Validations => canUserValidationImpl", () => {
         "method": "GET",
         "name": "ForbiddenError",
         "path": "",
-        "statusCode": 401,
+        "statusCode": 403,
       }
     `);
   });

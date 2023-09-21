@@ -1,2 +1,6 @@
-export { AppLayout } from "./Layout";
-export { PORTAL_ROOT_LINKS_TO_CLEAR_BREADCRUMBS } from "./constants";
+import { ReactNode } from "react";
+
+export function PortalProvider({ children }: { children: ReactNode }) {
+  // eslint-disable-next-line react/jsx-no-useless-fragment
+  return <>{children}</>;
+}

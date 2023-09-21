@@ -16,8 +16,6 @@ import { Spacer } from "frontend/design-system/primitives/Spacer";
 import { useSiteConfig } from "frontend/hooks/app/site.config";
 import { GoogleTagManager } from "../scripts/GoogleTagManager";
 
-export { IsSignedIn } from "./IsSignedIn";
-
 export interface IBaseLayoutProps {
   children: ReactNode;
   actionItems?: IDropDownMenuItem[];

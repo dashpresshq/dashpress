@@ -16,10 +16,6 @@ export class EntitiesApiController {
     return await this._entitiesApiService.getActiveEntities();
   }
 
-  async getUserMenuEntities(userRole: string): Promise<ILabelValue[]> {
-    return await this._entitiesApiService.getUserMenuEntities(userRole);
-  }
-
   async listAllEntities(): Promise<ILabelValue[]> {
     return await this._entitiesApiService.getAllEntities();
   }

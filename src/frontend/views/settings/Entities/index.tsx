@@ -14,10 +14,8 @@ import {
   useUpsertConfigurationMutation,
 } from "frontend/hooks/configuration/configuration.store";
 import { useEntityDictionPlurals } from "frontend/hooks/entity/entity.queries";
-import {
-  ACTIVE_ENTITIES_ENDPOINT,
-  USER_MENU_ENTITIES_ENDPOINT,
-} from "frontend/hooks/entity/entity.store";
+import { ACTIVE_ENTITIES_ENDPOINT } from "frontend/hooks/entity/entity.store";
+import { NAVIGATION_MENU_ENDPOINT } from "frontend/_layouts/app/LayoutImpl/constants";
 import { SETTINGS_VIEW_KEY } from "../constants";
 import { BaseSettingsLayout } from "../_Base";
 import { EntitiesSelection } from "./Selection";
@@ -49,7 +47,7 @@ export function EntitiesSettings() {
     "disabled_entities",
     "",
     {
-      otherEndpoints: [ACTIVE_ENTITIES_ENDPOINT, USER_MENU_ENTITIES_ENDPOINT],
+      otherEndpoints: [ACTIVE_ENTITIES_ENDPOINT, NAVIGATION_MENU_ENDPOINT],
     }
   );
 

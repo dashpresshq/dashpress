@@ -41,31 +41,6 @@ export class EntitiesApiService implements IApplicationService {
     return entities.filter(({ value }) => !hiddenEntities.includes(value));
   }
 
-  async getUserMenuEntities(userRole: string): Promise<ILabelValue[]> {
-    const [hiddenEntities, hiddenMenuEntities, entitiesOrder, entities] =
-      await Promise.all([
-        this._configurationApiService.show<string[]>("disabled_entities"),
-        this._configurationApiService.show<string[]>("disabled_menu_entities"),
-        this._configurationApiService.show<string[]>("menu_entities_order"),
-        this.getAllEntities(),
-      ]);
-    const activeEntities = entities
-      .filter(({ value }) => !hiddenMenuEntities.includes(value))
-      .filter(({ value }) => !hiddenEntities.includes(value));
-
-    sortByList(
-      activeEntities.sort((a, b) => a.value.localeCompare(b.value)),
-      entitiesOrder,
-      "value"
-    );
-
-    return await this._rolesApiService.filterPermittedEntities(
-      userRole,
-      activeEntities,
-      "value"
-    );
-  }
-
   async getEntityFields(entity: string): Promise<IEntityField[]> {
     return (await this.getEntityFromSchema(entity)).fields;
   }

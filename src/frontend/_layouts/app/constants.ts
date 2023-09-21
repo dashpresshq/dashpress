@@ -1,6 +1,5 @@
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
 import { ActionIntegrationKeys } from "shared/types/actions";
-// import { PORTAL_ROOT_LINKS_TO_CLEAR_BREADCRUMBS } from "./portal";
 
 export const ROOT_LINKS_TO_CLEAR_BREADCRUMBS = {
   HOME: NAVIGATION_LINKS.DASHBOARD.HOME,
@@ -9,5 +8,4 @@ export const ROOT_LINKS_TO_CLEAR_BREADCRUMBS = {
   ACCOUNT: NAVIGATION_LINKS.ACCOUNT.PROFILE,
   ROLES: NAVIGATION_LINKS.ROLES.LIST,
   ACTIONS: NAVIGATION_LINKS.INTEGRATIONS.ACTIONS(ActionIntegrationKeys.HTTP),
-  // ...PORTAL_ROOT_LINKS_TO_CLEAR_BREADCRUMBS,
 };

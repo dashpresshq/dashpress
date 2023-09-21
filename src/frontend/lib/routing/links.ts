@@ -10,6 +10,13 @@ export const NAVIGATION_LINKS = {
       UPDATE: (dashboardId: string, widgetId: string) =>
         `/dashboard/${dashboardId}/widget/${widgetId}`,
     },
+    CUSTOM: {
+      VIEW: (id: string) => `/custom-dashboards/${id}`,
+      EDIT: (id: string) => `/custom-dashboards/${id}/update`,
+      MANAGE: (id: string) => `/custom-dashboards/${id}/manage`,
+      LIST: `/custom-dashboards`,
+      CREATE: `/custom-dashboards/create`,
+    },
   },
   AUTH_SIGNIN: "/auth",
   ACCOUNT: {

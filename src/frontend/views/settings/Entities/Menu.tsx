@@ -18,10 +18,11 @@ import {
 import { useEntityDictionPlurals } from "frontend/hooks/entity/entity.queries";
 import {
   ACTIVE_ENTITIES_ENDPOINT,
-  USER_MENU_ENTITIES_ENDPOINT,
   useActiveEntities,
-  useUserMenuEntities,
 } from "frontend/hooks/entity/entity.store";
+import { loadedDataState } from "frontend/lib/data/constants/loadedDataState";
+import { NAVIGATION_MENU_ENDPOINT } from "frontend/_layouts/app/LayoutImpl/constants";
+import { sortByList } from "shared/logic/entities/sort.utils";
 import { SETTINGS_VIEW_KEY } from "../constants";
 import { BaseSettingsLayout } from "../_Base";
 import { EntitiesSelection } from "./Selection";
@@ -48,14 +49,24 @@ export function MenuEntitiesSettings() {
   const menuEntitiesToHide = useAppConfiguration<string[]>(
     "disabled_menu_entities"
   );
+
+  const menuEntitiesOrder = useAppConfiguration<string[]>(
+    "menu_entities_order"
+  );
+
   const activeEntities = useActiveEntities();
-  const userMenuEntities = useUserMenuEntities();
+
+  const menuEntities: { label: string; value: string }[] = activeEntities.data
+    .filter(({ value }) => !menuEntitiesToHide.data.includes(value))
+    .sort((a, b) => a.value.localeCompare(b.value));
+
+  sortByList(menuEntities, menuEntitiesOrder.data, "value");
 
   const upsertHideFromMenuMutation = useUpsertConfigurationMutation(
     "disabled_menu_entities",
     "",
     {
-      otherEndpoints: [ACTIVE_ENTITIES_ENDPOINT, USER_MENU_ENTITIES_ENDPOINT],
+      otherEndpoints: [ACTIVE_ENTITIES_ENDPOINT, NAVIGATION_MENU_ENDPOINT],
     }
   );
 
@@ -63,7 +74,7 @@ export function MenuEntitiesSettings() {
     "menu_entities_order",
     "",
     {
-      otherEndpoints: [ACTIVE_ENTITIES_ENDPOINT, USER_MENU_ENTITIES_ENDPOINT],
+      otherEndpoints: [ACTIVE_ENTITIES_ENDPOINT, NAVIGATION_MENU_ENDPOINT],
     }
   );
 
@@ -73,12 +84,12 @@ export function MenuEntitiesSettings() {
   );
 
   const error =
-    menuEntitiesToHide.error || userMenuEntities.error || activeEntities.error;
+    menuEntitiesToHide.error || activeEntities.error || menuEntitiesOrder.error;
 
   const isLoading =
-    userMenuEntities.isLoading ||
     menuEntitiesToHide.isLoading ||
-    activeEntities.isLoading;
+    activeEntities.isLoading ||
+    menuEntitiesOrder.isLoading;
 
   return (
     <BaseSettingsLayout>
@@ -126,7 +137,8 @@ export function MenuEntitiesSettings() {
                   loader={<ListSkeleton count={20} />}
                 >
                   <SortList
-                    data={userMenuEntities}
+                    data={loadedDataState([])}
+                    // TODO change to orders
                     onSave={
                       upsertEntitiesOrderMutation.mutateAsync as (
                         data: string[]

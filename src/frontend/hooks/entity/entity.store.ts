@@ -14,7 +14,6 @@ export const ENTITY_RELATIONS_ENDPOINT = (entity: string) =>
   `/api/entities/${entity}/relations`;
 
 export const ACTIVE_ENTITIES_ENDPOINT = "/api/entities/active";
-export const USER_MENU_ENTITIES_ENDPOINT = "/api/entities/user-menu";
 
 const useEntitiesListLabel = (entitiesList: DataStateKeys<ILabelValue[]>) => {
   const getEntitiesDictionPlurals = useEntityDictionPlurals(
@@ -29,15 +28,6 @@ const useEntitiesListLabel = (entitiesList: DataStateKeys<ILabelValue[]>) => {
       label: getEntitiesDictionPlurals(value),
     })),
   };
-};
-
-export const useUserMenuEntities = () => {
-  const menuItems = useApi<ILabelValue[]>(USER_MENU_ENTITIES_ENDPOINT, {
-    errorMessage: CRUD_CONFIG_NOT_FOUND("Menu entities"),
-    defaultData: [],
-  });
-
-  return useEntitiesListLabel(menuItems);
 };
 
 export const useActiveEntities = () => {

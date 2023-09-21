@@ -8,7 +8,6 @@ import {
 } from "shared/types/menu";
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
 import { systemIconToSVG } from "shared/constants/Icons";
-import { ROOT_LINKS_TO_CLEAR_BREADCRUMBS } from "frontend/_layouts/app/constants";
 import { useSessionStorage } from "react-use";
 import { ChevronRight } from "react-feather";
 import { SYSTEM_COLORS } from "frontend/design-system/theme/system";
@@ -16,6 +15,8 @@ import { Typo } from "frontend/design-system/primitives/Typo";
 import { PlainButton } from "frontend/design-system/components/Button/TextButton";
 import { Stack } from "frontend/design-system/primitives/Stack";
 import { useThemeColorShade } from "frontend/design-system/theme/useTheme";
+import { useNavigationStack } from "frontend/lib/routing/useNavigationStack";
+import { ActionIntegrationKeys } from "shared/types/actions";
 
 const StyledLeftSideNavMenuList = styled.li<{}>`
   list-style: none;
@@ -111,11 +112,13 @@ interface IProp {
 }
 
 const SYSTEM_LINK_MAP: Record<SystemLinks, string> = {
-  [SystemLinks.Settings]: ROOT_LINKS_TO_CLEAR_BREADCRUMBS.SETTINGS,
-  [SystemLinks.Home]: ROOT_LINKS_TO_CLEAR_BREADCRUMBS.HOME,
-  [SystemLinks.Roles]: ROOT_LINKS_TO_CLEAR_BREADCRUMBS.ROLES,
-  [SystemLinks.Users]: ROOT_LINKS_TO_CLEAR_BREADCRUMBS.USERS,
-  [SystemLinks.Actions]: ROOT_LINKS_TO_CLEAR_BREADCRUMBS.ACTIONS,
+  [SystemLinks.Settings]: NAVIGATION_LINKS.SETTINGS.DEFAULT,
+  [SystemLinks.Home]: NAVIGATION_LINKS.DASHBOARD.HOME,
+  [SystemLinks.Roles]: NAVIGATION_LINKS.ROLES.LIST,
+  [SystemLinks.Users]: NAVIGATION_LINKS.USERS.LIST,
+  [SystemLinks.Actions]: NAVIGATION_LINKS.INTEGRATIONS.ACTIONS(
+    ActionIntegrationKeys.HTTP
+  ),
   [SystemLinks.AllDashboards]: NAVIGATION_LINKS.DASHBOARD.CUSTOM.LIST,
 };
 
@@ -149,7 +152,7 @@ export function RenderNavigation({
     ""
   );
 
-  // const { clear } = useNavigationStack(); clear the screen on click
+  const { clear: clearBreadCrumbStack } = useNavigationStack();
 
   const getBackgroundColor = useThemeColorShade();
 
@@ -170,6 +173,7 @@ export function RenderNavigation({
                   $depth={depth}
                   hoverColor={getBackgroundColor("primary-color", 45)}
                   onClick={() => {
+                    clearBreadCrumbStack();
                     setIsFullWidth(true);
                     setActiveItem(isActive ? "" : id);
                   }}
@@ -209,6 +213,7 @@ export function RenderNavigation({
                   $isActive={isActive}
                   $depth={depth}
                   onClick={() => {
+                    clearBreadCrumbStack();
                     setActiveItem(id);
                   }}
                   target={

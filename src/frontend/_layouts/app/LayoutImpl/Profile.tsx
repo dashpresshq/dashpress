@@ -60,6 +60,10 @@ export function ProfileOnNavigation({ isFullWidth }: IProps) {
       label: "My Account",
       value: NAVIGATION_LINKS.ACCOUNT.PROFILE,
     },
+    {
+      label: "Menu Settings",
+      value: NAVIGATION_LINKS.SETTINGS.MENU,
+    },
   ];
 
   return (

@@ -21,7 +21,7 @@ import {
 import { sortByList } from "shared/logic/entities/sort.utils";
 import { RolesApiService, rolesApiService } from "backend/roles/roles.service";
 import { ILabelValue } from "shared/types/options";
-import { portalCheckIfIsMenuAllowed } from "./portal";
+import { portalCheckIfIsMenuAllowed, getPortalMenuItems } from "./portal";
 
 const SYSTEM_LINKS_PERMISSION_MAP: Record<SystemLinks, string> = {
   [SystemLinks.Settings]: USER_PERMISSIONS.CAN_CONFIGURE_APP,
@@ -44,6 +44,12 @@ export class NavigationMenuApiService implements IApplicationService {
   }
 
   async getMenuItems(userRole: string) {
+    const portalMenuItems = await getPortalMenuItems(userRole);
+
+    if (portalMenuItems !== null) {
+      return portalMenuItems;
+    }
+
     const navItems = await this.generateMenuItems();
 
     return this.filterOutUserMenuItems(userRole, navItems);

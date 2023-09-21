@@ -118,11 +118,11 @@ export const CONFIGURATION_KEYS: Record<
     defaultValue: [],
   },
   disabled_menu_entities: {
-    crudConfigLabel: "Menu Entities Settings",
+    crudConfigLabel: "Menu Settings",
     defaultValue: [],
   },
   menu_entities_order: {
-    crudConfigLabel: "Menu Entities Settings",
+    crudConfigLabel: "Menu Settings",
     defaultValue: [],
   },
   default_date_format: {

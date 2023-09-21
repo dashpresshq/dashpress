@@ -1,5 +1,4 @@
 import { createStore } from "frontend/lib/store";
-import { ROOT_LINKS_TO_CLEAR_BREADCRUMBS } from "frontend/_layouts/app/constants";
 import { useRouter } from "next/router";
 import { useEffect, useMemo } from "react";
 import { TemporayStorageService } from "frontend/lib/storage";
@@ -18,10 +17,6 @@ const handleHistoryMutation = (
   newEntry: INavigationItem
 ): INavigationItem[] => {
   if (oldHistory.length === 0) {
-    return [newEntry];
-  }
-
-  if (Object.values(ROOT_LINKS_TO_CLEAR_BREADCRUMBS).includes(newEntry.link)) {
     return [newEntry];
   }
 

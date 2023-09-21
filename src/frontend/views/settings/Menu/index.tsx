@@ -1,9 +1,6 @@
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { USER_PERMISSIONS } from "shared/constants/user";
 import { MAKE_APP_CONFIGURATION_CRUD_CONFIG } from "frontend/hooks/configuration/configuration.constant";
-import { DOCUMENTATION_LABEL } from "frontend/docs";
-import { useState } from "react";
-import { MenuEntitiesDocumentation } from "frontend/docs/menu-entities";
 import { useRouteParam } from "frontend/lib/routing/useRouteParam";
 import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
 import { useChangeRouterParam } from "frontend/lib/routing/useChangeRouterParam";
@@ -23,17 +20,15 @@ import {
 import { loadedDataState } from "frontend/lib/data/constants/loadedDataState";
 import { NAVIGATION_MENU_ENDPOINT } from "frontend/_layouts/app/LayoutImpl/constants";
 import { sortByList } from "shared/logic/entities/sort.utils";
+import { AppLayout } from "frontend/_layouts/app";
 import { SETTINGS_VIEW_KEY } from "../constants";
-import { BaseSettingsLayout } from "../_Base";
-import { EntitiesSelection } from "./Selection";
+import { EntitiesSelection } from "../Entities/Selection";
 
 const CRUD_CONFIG = MAKE_APP_CONFIGURATION_CRUD_CONFIG(
   "disabled_menu_entities"
 );
 
-const DOCS_TITLE = "Menu Entities";
-
-export function MenuEntitiesSettings() {
+export function MenuSettings() {
   const tabFromUrl = useRouteParam("tab");
 
   useSetPageDetails({
@@ -41,8 +36,6 @@ export function MenuEntitiesSettings() {
     viewKey: SETTINGS_VIEW_KEY,
     permission: USER_PERMISSIONS.CAN_CONFIGURE_APP,
   });
-
-  const [isDocOpen, setIsDocOpen] = useState(false);
 
   const changeTabParam = useChangeRouterParam("tab");
 
@@ -92,17 +85,8 @@ export function MenuEntitiesSettings() {
     menuEntitiesOrder.isLoading;
 
   return (
-    <BaseSettingsLayout>
-      <SectionBox
-        title={CRUD_CONFIG.TEXT_LANG.TITLE}
-        iconButtons={[
-          {
-            action: () => setIsDocOpen(true),
-            icon: "help",
-            label: DOCUMENTATION_LABEL.CONCEPT(DOCS_TITLE),
-          },
-        ]}
-      >
+    <AppLayout>
+      <SectionBox title="" headLess>
         <Tabs
           currentTab={tabFromUrl}
           onChange={changeTabParam}
@@ -137,8 +121,7 @@ export function MenuEntitiesSettings() {
                   loader={<ListSkeleton count={20} />}
                 >
                   <SortList
-                    data={loadedDataState([])}
-                    // TODO change to orders
+                    data={loadedDataState(menuEntities)}
                     onSave={
                       upsertEntitiesOrderMutation.mutateAsync as (
                         data: string[]
@@ -151,11 +134,6 @@ export function MenuEntitiesSettings() {
           ]}
         />
       </SectionBox>
-      <MenuEntitiesDocumentation
-        title={DOCS_TITLE}
-        close={setIsDocOpen}
-        isOpen={isDocOpen}
-      />
-    </BaseSettingsLayout>
+    </AppLayout>
   );
 }

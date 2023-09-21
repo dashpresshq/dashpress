@@ -9,7 +9,6 @@ import {
   GitHub,
   Book,
   Terminal,
-  Table,
 } from "react-feather";
 import {
   IMenuSectionItem,
@@ -32,12 +31,6 @@ const baseMenuItems: IMenuSectionItem[] = [
     name: "Enabled Entities",
     IconComponent: Columns,
     order: 10,
-  },
-  {
-    action: NAVIGATION_LINKS.SETTINGS.MENU_ENTITIES,
-    name: "Menu Entities",
-    IconComponent: Table,
-    order: 20,
   },
   {
     action: NAVIGATION_LINKS.SETTINGS.THEME,

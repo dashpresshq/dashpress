@@ -5,9 +5,9 @@ export const portalCheckIfIsMenuAllowed = async (
   menuItem: INavigationMenuItem,
   userRole: string,
   userPermissions: string[]
-) => {
+): Promise<boolean | undefined> => {
   noop(menuItem, userRole, userPermissions);
-  return false;
+  return undefined;
 };
 
 export const getPortalMenuItems = (

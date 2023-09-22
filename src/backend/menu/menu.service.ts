@@ -66,14 +66,6 @@ export class NavigationMenuApiService implements IApplicationService {
         type: NavigationMenuItemType.System,
         link: SystemLinks.Home,
       },
-      // {
-      //   id: nanoid(),
-      //   title: "Dashboards",
-      //   icon: "PieChart",
-      //   type: NavigationMenuItemType.System,
-      //   link: SystemLinks.AllDashboards,
-      //   children: [],
-      // },
     ]);
 
     const entitiesToShow = await this.getUserMenuEntities();
@@ -90,7 +82,7 @@ export class NavigationMenuApiService implements IApplicationService {
     entitiesToShow.forEach((entity) => {
       navItems.push({
         id: nanoid(),
-        title: userFriendlyCase(entity.label), // get the current label
+        title: userFriendlyCase(entity.label), // TODO get the current label
         icon: "File",
         type: NavigationMenuItemType.Entities,
         link: entity.value,
@@ -208,8 +200,8 @@ export class NavigationMenuApiService implements IApplicationService {
       userPermissions
     );
 
-    if (isMenuAllowed) {
-      return true;
+    if (typeof isMenuAllowed === "boolean") {
+      return isMenuAllowed;
     }
 
     switch (menuItem.type) {

@@ -22,6 +22,7 @@ import { sortByList } from "shared/logic/entities/sort.utils";
 import { RolesApiService, rolesApiService } from "backend/roles/roles.service";
 import { ILabelValue } from "shared/types/options";
 import { portalCheckIfIsMenuAllowed, getPortalMenuItems } from "./portal";
+import { IBaseNavigationMenuApiService } from "./types";
 
 const SYSTEM_LINKS_PERMISSION_MAP: Record<SystemLinks, string> = {
   [SystemLinks.Settings]: USER_PERMISSIONS.CAN_CONFIGURE_APP,
@@ -32,7 +33,9 @@ const SYSTEM_LINKS_PERMISSION_MAP: Record<SystemLinks, string> = {
   [SystemLinks.AllDashboards]: META_USER_PERMISSIONS.NO_PERMISSION_REQUIRED,
 };
 
-export class NavigationMenuApiService implements IApplicationService {
+export class NavigationMenuApiService
+  implements IApplicationService, IBaseNavigationMenuApiService
+{
   constructor(
     private readonly _entitiesApiService: EntitiesApiService,
     private readonly _configurationApiService: ConfigurationApiService,
@@ -44,7 +47,7 @@ export class NavigationMenuApiService implements IApplicationService {
   }
 
   async getMenuItems(userRole: string) {
-    const portalMenuItems = await getPortalMenuItems(userRole);
+    const portalMenuItems = await getPortalMenuItems(userRole, this);
 
     if (portalMenuItems !== null) {
       return portalMenuItems;
@@ -52,7 +55,7 @@ export class NavigationMenuApiService implements IApplicationService {
 
     const navItems = await this.generateMenuItems();
 
-    return this.filterOutUserMenuItems(userRole, navItems);
+    return await this.filterOutUserMenuItems(userRole, navItems);
   }
 
   async generateMenuItems(): Promise<INavigationMenuItem[]> {

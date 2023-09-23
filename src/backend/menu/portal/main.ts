@@ -1,5 +1,6 @@
 import { noop } from "shared/lib/noop";
 import { INavigationMenuItem } from "shared/types/menu";
+import { IBaseNavigationMenuApiService } from "../types";
 
 export const portalCheckIfIsMenuAllowed = async (
   menuItem: INavigationMenuItem,
@@ -11,8 +12,9 @@ export const portalCheckIfIsMenuAllowed = async (
 };
 
 export const getPortalMenuItems = (
-  userRole: string
+  userRole: string,
+  navigationMenuApiService: IBaseNavigationMenuApiService
 ): Promise<INavigationMenuItem[] | null> => {
-  noop(userRole);
+  noop(userRole, navigationMenuApiService);
   return null;
 };

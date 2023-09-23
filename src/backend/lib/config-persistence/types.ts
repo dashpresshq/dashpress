@@ -11,6 +11,7 @@ export type ConfigDomain =
   | "app-config"
   | "list-order"
   | "temp-storage"
+  | "key-value"
   | "action-instances"
   | "activated-actions"
   | "activated-storage"

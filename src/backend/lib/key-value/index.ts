@@ -2,32 +2,34 @@ import {
   AbstractConfigDataPersistenceService,
   createConfigDomainPersistenceService,
 } from "../config-persistence";
+import { KeyValueDomain } from "./types";
 
-interface IStorge {
+interface IStorage {
   data: string;
 }
 
-export class KeyValueStoreApiService {
+export class KeyValueStoreApiService<T> {
   constructor(
-    private readonly _keyValueStorePersistenceService: AbstractConfigDataPersistenceService<IStorge>
+    private readonly key: KeyValueDomain,
+    private readonly _keyValueStorePersistenceService: AbstractConfigDataPersistenceService<IStorage>
   ) {}
 
   async bootstrap() {
     await this._keyValueStorePersistenceService.setup();
   }
 
-  async clearItem(key: string) {
-    await this._keyValueStorePersistenceService.removeItem(key);
+  async clearItem() {
+    await this._keyValueStorePersistenceService.removeItem(this.key);
   }
 
-  async persistItem(key: string, data: unknown) {
-    await this._keyValueStorePersistenceService.persistItem(key, {
+  async persistItem(data: T) {
+    await this._keyValueStorePersistenceService.persistItem(this.key, {
       data: JSON.stringify(data),
     });
   }
 
-  async getItem<T>(key: string): Promise<T | null> {
-    const data = await this._keyValueStorePersistenceService.getItem(key);
+  async getItem(): Promise<T | null> {
+    const data = await this._keyValueStorePersistenceService.getItem(this.key);
     if (!data) {
       return null;
     }
@@ -36,8 +38,13 @@ export class KeyValueStoreApiService {
 }
 
 const keyValueStorePersistenceService =
-  createConfigDomainPersistenceService<IStorge>("key-value");
+  createConfigDomainPersistenceService<IStorage>("key-value");
 
-export const keyValueStoreApiService = new KeyValueStoreApiService(
-  keyValueStorePersistenceService
-);
+export function createKeyValueDomainPersistenceService<T>(
+  keyValueDomain: KeyValueDomain
+) {
+  return new KeyValueStoreApiService<T>(
+    keyValueDomain,
+    keyValueStorePersistenceService
+  );
+}

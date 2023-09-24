@@ -1,4 +1,5 @@
 import { ConfigDomain } from "backend/lib/config-persistence/types";
+import { KeyValueDomain } from "backend/lib/key-value/types";
 import { setupAppConfigTestData } from "./_app-config";
 import { setupIntegrationsConstantsTestData } from "./_integrations-constants";
 import { setupCredentialsTestData } from "./_credentials";
@@ -13,10 +14,10 @@ import { setupActivatedStorageTestData } from "./_activated-storage";
 import { setupTestDatabaseData } from "./_data";
 import { portalTestData } from "./portal";
 
-export const setupAllTestData = async (
-  domains: Array<ConfigDomain | "data">
-) => {
-  const allTestData: [ConfigDomain | "data", () => Promise<void>][] = [
+type DomainTypes = ConfigDomain | KeyValueDomain | "data";
+
+export const setupAllTestData = async (domains: DomainTypes[]) => {
+  const allTestData: [DomainTypes, () => Promise<void>][] = [
     ["roles", setupRolesTestData],
     ["app-config", setupAppConfigTestData],
     ["users", setupUsersTestData],

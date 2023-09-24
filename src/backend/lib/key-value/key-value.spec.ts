@@ -1,26 +1,45 @@
-import { keyValueStoreApiService } from ".";
+import { createKeyValueDomainPersistenceService } from ".";
+import { KeyValueDomain } from "./types";
+
+const keyValueStoreApiService = createKeyValueDomainPersistenceService<
+  Record<string, unknown>
+>("test-me" as KeyValueDomain);
+
+const unTouchedkeyValueStoreApiService = createKeyValueDomainPersistenceService<
+  Record<string, unknown>
+>("un-touched" as KeyValueDomain);
 
 describe("KeyValueStoreApiService", () => {
-  it("should return empty for none saved items", async () => {
-    expect(await keyValueStoreApiService.getItem("non-existent")).toBeNull();
-  });
+  it("should upsert data", async () => {
+    await keyValueStoreApiService.persistItem({ bar: "bar" });
+    await unTouchedkeyValueStoreApiService.persistItem({ bar: "bar" });
+    expect(await keyValueStoreApiService.getItem()).toEqual({
+      bar: "bar",
+    });
 
-  it("should persist items", async () => {
-    await keyValueStoreApiService.persistItem("persist", { bar: "baz" });
-    expect(await keyValueStoreApiService.getItem("persist")).toEqual({
-      bar: "baz",
+    expect(await unTouchedkeyValueStoreApiService.getItem()).toEqual({
+      bar: "bar",
+    });
+
+    await keyValueStoreApiService.persistItem({ foo: "foo" });
+    expect(await keyValueStoreApiService.getItem()).toEqual({
+      foo: "foo",
+    });
+
+    expect(await unTouchedkeyValueStoreApiService.getItem()).toEqual({
+      bar: "bar",
     });
   });
 
   it("should clear items", async () => {
-    await keyValueStoreApiService.persistItem("clear1", { bar1: "baz1" });
-    await keyValueStoreApiService.persistItem("clear2", { bar2: "baz2" });
+    await keyValueStoreApiService.persistItem({ bar2: "baz2" });
 
-    await keyValueStoreApiService.clearItem("clear1");
+    await keyValueStoreApiService.clearItem();
 
-    expect(await keyValueStoreApiService.getItem("clear1")).toBeNull();
-    expect(await keyValueStoreApiService.getItem("clear2")).toEqual({
-      bar2: "baz2",
+    expect(await keyValueStoreApiService.getItem()).toBeNull();
+
+    expect(await unTouchedkeyValueStoreApiService.getItem()).toEqual({
+      bar: "bar",
     });
   });
 });

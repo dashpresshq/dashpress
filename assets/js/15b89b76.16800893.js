@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunk_hadmean_archaea=self.webpackChunk_hadmean_archaea||[]).push([[392],{9610:a=>{a.exports=JSON.parse('{"label":"testing","permalink":"/blog/tags/testing","allTagsPath":"/blog/tags","count":1}')}}]);

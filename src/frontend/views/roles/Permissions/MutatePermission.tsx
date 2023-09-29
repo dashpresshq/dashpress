@@ -10,12 +10,23 @@ import {
   useRolePermissionDeletionMutation,
   useRolePermissions,
 } from "../permissions.store";
+import { USER_PERMISSIONS } from "shared/constants/user";
+import { PORTAL_PERMISSION_HEIRACHIES } from "shared/logic/permissions/portal";
 
 interface IProps {
   permissionList: ILabelValue[];
   overAchingPermission?: string;
   singular: string;
 }
+
+const PERMISSION_HEIRACHIES = {
+  [USER_PERMISSIONS.CAN_MANAGE_USERS]: USER_PERMISSIONS.CAN_RESET_PASSWORD,
+  [USER_PERMISSIONS.CAN_CONFIGURE_APP]:
+    USER_PERMISSIONS.CAN_MANAGE_INTEGRATIONS,
+  [USER_PERMISSIONS.CAN_MANAGE_ALL_ENTITIES]:
+    USER_PERMISSIONS.CAN_CONFIGURE_APP,
+  ...PORTAL_PERMISSION_HEIRACHIES,
+};
 
 export function MutatePermission({
   permissionList,
@@ -79,13 +90,31 @@ export function MutatePermission({
                       selected: isPermissionSelected,
                       onChange: () => {
                         if (isPermissionSelected) {
-                          rolePermissionDeletionMutation.mutate([
-                            menuItem.value,
-                          ]);
+                          const permissionsToSend = [menuItem.value];
+                          const permissionHeirachy = Object.entries<string>(
+                            PERMISSION_HEIRACHIES
+                          ).find(([index, _]) => index === menuItem.value);
+
+                          if (permissionHeirachy) {
+                            permissionsToSend.push(permissionHeirachy[1]);
+                          }
+                          rolePermissionDeletionMutation.mutate(
+                            permissionsToSend
+                          );
                         } else {
-                          rolePermissionCreationMutation.mutate([
-                            menuItem.value,
-                          ]);
+                          const permissionsToSend = [menuItem.value];
+
+                          const permissionHeirachy = Object.entries(
+                            PERMISSION_HEIRACHIES
+                          ).find(([_, value]) => value === menuItem.value);
+
+                          if (permissionHeirachy) {
+                            permissionsToSend.push(permissionHeirachy[0]);
+                          }
+
+                          rolePermissionCreationMutation.mutate(
+                            permissionsToSend
+                          );
                         }
                       },
                     }

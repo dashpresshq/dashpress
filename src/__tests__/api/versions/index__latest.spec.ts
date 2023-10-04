@@ -20,7 +20,7 @@ describe("/api/versions/index", () => {
       {
         "Cache Adapter": "memory (Kindly use 'redis' when running multiple instances)",
         "Config Adapter": "json-file (Kindly use 'database' when you have more than two users on the application)",
-        "Hadmean Version": "v9.9.9(Latest Version)",
+        "DashPress Version": "v9.9.9(Latest Version)",
         "Node Version": "16.9.9",
       }
     `);

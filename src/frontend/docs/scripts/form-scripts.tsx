@@ -232,7 +232,7 @@ return {
  * And will add "createdById" when the form is submitted
  */
 if($.formValues.age > 23 && ($.formValues.country != "Belgium" || $.formValues.height == 124 )){
-  return "This is a weird requirement and Hadmean can handle it"
+  return "This is a weird requirement and DashPress can handle it"
 }
 
 return {

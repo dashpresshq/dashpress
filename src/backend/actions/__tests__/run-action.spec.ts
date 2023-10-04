@@ -30,7 +30,7 @@ describe("Run Action", () => {
     ]);
 
     await setupIntegrationsConstantsTestData({
-      SITE_EMAIL: "hello@hadmean.com",
+      SITE_EMAIL: "hello@dashpress.io",
       SITE_NAME: "John Snow",
     });
 
@@ -69,7 +69,7 @@ describe("Run Action", () => {
         triggerLogic: "",
         formAction: "create",
         configuration: {
-          to: "{{ data.id }}@hadmean.com",
+          to: "{{ data.id }}@dashpress.io",
           subject: "CREATE TEST",
           body: "{{data.name}} has the age of {{ data.age }}",
           senderName:
@@ -190,7 +190,7 @@ describe("Run Action", () => {
         from: "Constants are correctly compiled John Snow && auth role is correctly compiled as creator <Secrets are correctly compiled CREDENTIAL_VALUE_1 && auth name is correctly compiled as Root User>",
         html: "Newly Created has the age of 100",
         subject: "CREATE TEST",
-        to: "44@hadmean.com",
+        to: "44@dashpress.com",
       });
 
       expect(fetch).toHaveBeenCalledWith("http://CREATE.TEST", {

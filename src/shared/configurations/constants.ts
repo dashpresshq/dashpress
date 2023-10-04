@@ -145,9 +145,9 @@ export const CONFIGURATION_KEYS: Record<
     crudConfigLabel: "Site Settings",
     guest: true,
     defaultValue: {
-      name: "Hadmean",
+      name: "DashPress",
       fullLogo: "/assets/images/full-logo.png",
-      homeLink: "https://hadmean.com",
+      homeLink: "https://dashpress.io",
       logo: "/assets/images/logo.png",
     },
   },

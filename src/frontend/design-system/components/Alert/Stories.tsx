@@ -64,8 +64,8 @@ JSX.args = {
         <b> Awesome!,</b>
       </p>
       <p>
-        You have been using Hadmean for about a week now. Hope you are enjoying
-        it so far.
+        You have been using DashPress for about a week now. Hope you are
+        enjoying it so far.
       </p>
       <p>
         We have spent countless hours developing this free app, and we would

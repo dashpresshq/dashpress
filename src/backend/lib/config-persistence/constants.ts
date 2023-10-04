@@ -1,1 +1,1 @@
-export const CONFIG_TABLE_PREFIX = (domain: string) => `hadmean__${domain}`;
+export const CONFIG_TABLE_PREFIX = (domain: string) => `dashpress__${domain}`;

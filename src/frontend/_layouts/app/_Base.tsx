@@ -91,18 +91,18 @@ export function BaseLayout({
                     id: "github",
                     IconComponent: GitHub,
                     label: "Star us on Github",
-                    description: `Tell us Hadmean is a useful project by dropping us a star`,
+                    description: `Tell us DashPress is a useful project by dropping us a star`,
                     onClick: () => {
-                      window.open("https://github.com/hadmean/hadmean");
+                      window.open("https://github.com/dashpresshq/dashpress");
                     },
                   },
                   {
                     id: "twitter",
                     IconComponent: Twitter,
                     label: "Follow us on Twitter",
-                    description: `Tweet at @hadmeanHQ if you know others will benefit using Hadmean`,
+                    description: `Tweet at @dashpressHQ if you know others will benefit using DashPress`,
                     onClick: () => {
-                      window.open("https://twitter.com/hadmeanHQ");
+                      window.open("https://twitter.com/dashpressHQ");
                     },
                   },
                   {
@@ -120,7 +120,7 @@ export function BaseLayout({
                     label: "Visit our website",
                     description: `For more links on documentation, roadmap, blog etc`,
                     onClick: () => {
-                      window.open("https://hadmean.com");
+                      window.open("https://dashpress.io");
                     },
                   },
                 ]}

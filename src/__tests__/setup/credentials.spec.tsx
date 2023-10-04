@@ -207,7 +207,7 @@ describe("pages/setup/credentials", () => {
       await userEvent.type(screen.getByLabelText("Host"), "127.0.0.1");
       await userEvent.type(screen.getByLabelText("User"), "root");
       await userEvent.type(screen.getByLabelText("Password"), "password");
-      await userEvent.type(screen.getByLabelText("Database"), "hadmean");
+      await userEvent.type(screen.getByLabelText("Database"), "dashpress");
 
       await userEvent.clear(screen.getByLabelText("Port"));
 

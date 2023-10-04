@@ -81,7 +81,8 @@ export function BaseSettingsLayout({ children }: IProps) {
           <InfoAlert
             renderJsx
             action={{
-              action: () => window.open("https://github.com/hadmean/hadmean"),
+              action: () =>
+                window.open("https://github.com/dashpresshq/dashpress"),
               Icon: GitHub,
               label: "Give us a star on Github",
             }}
@@ -91,8 +92,8 @@ export function BaseSettingsLayout({ children }: IProps) {
                   <b> Awesome!,</b>
                 </p>
                 <p>
-                  You have been using Hadmean for about a week now. Hope you are
-                  enjoying it so far.
+                  You have been using DashPress for about a week now. Hope you
+                  are enjoying it so far.
                 </p>
                 <p>
                   We have spent countless hours developing this free app, and we

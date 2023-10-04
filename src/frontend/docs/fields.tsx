@@ -21,8 +21,8 @@ export function FieldsSettingsDocumentation(props: IDocumentationRootProps) {
         Two quick notes as we head into this section
         <ol>
           <li>
-            Hadmean is not a database client, meaning any action taken here will
-            not reflect on your database.
+            DashPress is not a database client, meaning any action taken here
+            will not reflect on your database.
           </li>
           <li>
             We strongly advise that you edit your schema to minimize your
@@ -54,8 +54,8 @@ export function FieldsSettingsDocumentation(props: IDocumentationRootProps) {
       </p>
       <h5>2. Managing Validations</h5>
       <p>
-        Hadmean will try to pick all the database validations that it can, so it
-        knows the
+        DashPress will try to pick all the database validations that it can, so
+        it knows the
         <code> non-nullable</code> constraint means the field is{" "}
         <code>required</code> and so on. We also translate other constraints to
         validations like <code>maxLength</code>, <code>isDate</code>,{" "}

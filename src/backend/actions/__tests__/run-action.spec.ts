@@ -190,7 +190,7 @@ describe("Run Action", () => {
         from: "Constants are correctly compiled John Snow && auth role is correctly compiled as creator <Secrets are correctly compiled CREDENTIAL_VALUE_1 && auth name is correctly compiled as Root User>",
         html: "Newly Created has the age of 100",
         subject: "CREATE TEST",
-        to: "44@dashpress.com",
+        to: "44@dashpress.io",
       });
 
       expect(fetch).toHaveBeenCalledWith("http://CREATE.TEST", {

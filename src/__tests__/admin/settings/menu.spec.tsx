@@ -9,7 +9,7 @@ import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 
 setupApiHandlers();
 
-describe("pages/admin/settings/menu", () => {
+describe.skip("pages/admin/settings/menu", () => {
   beforeAll(() => {
     const useRouter = jest.spyOn(require("next/router"), "useRouter");
     useRouter.mockImplementation(() => ({

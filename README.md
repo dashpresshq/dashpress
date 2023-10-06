@@ -1,6 +1,6 @@
 <h1 align="center">
   <a href="https://github.com/dashpresshq/dashpress">
-    <img src="https://dashpress.io/assets/images/logo.png" alt="Logo" height="100">
+    <img src="https://dashpress.io/assets/logos/full-logo-white.png" alt="Logo" height="100">
   </a>
 </h1>
 

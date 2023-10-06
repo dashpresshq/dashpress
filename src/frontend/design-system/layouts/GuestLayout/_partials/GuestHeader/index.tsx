@@ -23,16 +23,12 @@ interface IProps {
   homeLink?: string;
 }
 
-export function GuestHeader({
-  title,
-  subTitle,
-  logo = "/assets/images/logo.png",
-  homeLink = "/",
-}: IProps) {
+export function GuestHeader({ title, subTitle, logo, homeLink = "/" }: IProps) {
   return (
     <Root>
       <a href={homeLink}>
-        <img src={logo} height="50" alt="logo" />
+        <Spacer />
+        {logo && <img src={logo} height="40" alt="logo" />}
         <Spacer />
         <Typo.MD color="inverse">{title}</Typo.MD>
         <Spacer size="xs" />

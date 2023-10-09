@@ -1,6 +1,6 @@
 {
   "name": "dashpress",
-  "version": "0.1.7",
+  "version": "1.0.1",
   "license": "GPL-3.0-or-later",
   "scripts": {
     "dev": "next dev",

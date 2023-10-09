@@ -75,8 +75,7 @@ export function BaseSettingsLayout({ children }: IProps) {
   const menuItems = useMutateBaseSettingsMenu(baseMenuItems);
   return (
     <AppLayout>
-      {/* TODO */}
-      {false && (
+      {false && ( // TODO log the user who click on the button to not disturb again
         <>
           <InfoAlert
             renderJsx

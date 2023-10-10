@@ -5,4 +5,6 @@ export type ISiteSettings = {
   fullLogo: string;
 };
 
+export type ISingularPlural = { singular: string; plural: string };
+
 export const FOR_CODE_COV = 1;

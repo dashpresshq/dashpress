@@ -30,13 +30,37 @@ export class ConfigurationApiService implements IApplicationService {
     );
   }
 
+  async showMultipleConfigForEntities<T>(
+    key: AppConfigurationKeys,
+    entities: string[]
+  ): Promise<Record<string, T>> {
+    const allKeys = entities.map((entity) =>
+      this._appConfigPersistenceService.mergeKeyWithSecondaryKey(key, entity)
+    );
+
+    const values = await this._appConfigPersistenceService.getAllItemsIn(
+      allKeys
+    );
+
+    return Object.fromEntries(
+      entities.map((entity) => [
+        entity,
+        (values[
+          this._appConfigPersistenceService.mergeKeyWithSecondaryKey(
+            key,
+            entity
+          )
+        ] as T) || (CONFIGURATION_KEYS[key].defaultValue as T),
+      ])
+    );
+  }
+
   async show<T>(key: AppConfigurationKeys, entity?: string): Promise<T> {
     this.checkConfigKeyEntityRequirement(key, entity);
-    const value =
-      await this._appConfigPersistenceService.getItemWithMaybeSecondaryKey(
-        key,
-        entity
-      );
+
+    const value = await this._appConfigPersistenceService.getItem(
+      this._appConfigPersistenceService.mergeKeyWithSecondaryKey(key, entity)
+    );
 
     if (value) {
       return value as T;
@@ -58,10 +82,10 @@ export class ConfigurationApiService implements IApplicationService {
     entity?: string
   ): Promise<void> {
     this.checkConfigKeyEntityRequirement(key, entity);
-    await this._appConfigPersistenceService.upsertItemWithMaybeSecondaryKey(
-      key,
-      value,
-      entity
+
+    return await this._appConfigPersistenceService.upsertItem(
+      this._appConfigPersistenceService.mergeKeyWithSecondaryKey(key, entity),
+      value
     );
   }
 }

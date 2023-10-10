@@ -21,6 +21,7 @@ import {
 import { sortByList } from "shared/logic/entities/sort.utils";
 import { RolesApiService, rolesApiService } from "backend/roles/roles.service";
 import { ILabelValue } from "shared/types/options";
+import { ISingularPlural } from "shared/types/config";
 import { portalCheckIfIsMenuAllowed, getPortalMenuItems } from "./portal";
 import { IBaseNavigationMenuApiService } from "./types";
 
@@ -71,33 +72,33 @@ export class NavigationMenuApiService
       },
     ]);
 
-    const entitiesToShow = await this.getUserMenuEntities();
+    const entitiesToShow = await this.getUserEntities();
+
+    const dictionMap =
+      await this._configurationApiService.showMultipleConfigForEntities<ISingularPlural>(
+        "entity_diction",
+        entitiesToShow.map((value) => value.value)
+      );
 
     navItems = navItems.concat([
       {
         id: nanoid(),
         title: "Entities",
-        type: NavigationMenuItemType.Header,
-        children: [],
+        icon: "File",
+        type: NavigationMenuItemType.System,
+        link: SystemLinks.Home,
+        children: entitiesToShow.map((entity) => ({
+          id: nanoid(),
+          title:
+            dictionMap[entity.value].plural || userFriendlyCase(entity.label),
+          icon: "File",
+          type: NavigationMenuItemType.Entities,
+          link: entity.value,
+        })),
       },
     ]);
 
-    entitiesToShow.forEach((entity) => {
-      navItems.push({
-        id: nanoid(),
-        title: userFriendlyCase(entity.label), // TODO get the current label
-        icon: "File",
-        type: NavigationMenuItemType.Entities,
-        link: entity.value,
-      });
-    });
-
     navItems = navItems.concat([
-      {
-        id: nanoid(),
-        title: "Application Menu",
-        type: NavigationMenuItemType.Header,
-      },
       {
         id: nanoid(),
         title: "Actions",
@@ -113,37 +114,29 @@ export class NavigationMenuApiService
         link: SystemLinks.Settings,
         children: [],
       },
+
       {
         id: nanoid(),
-        title: "Accounts",
+        title: "Users",
         icon: "Users",
         type: NavigationMenuItemType.System,
         link: SystemLinks.Users,
-        children: [
-          {
-            id: nanoid(),
-            title: "Users",
-            icon: "Users",
-            type: NavigationMenuItemType.System,
-            link: SystemLinks.Users,
-            children: [],
-          },
-          {
-            id: nanoid(),
-            title: "Roles",
-            icon: "Shield",
-            type: NavigationMenuItemType.System,
-            link: SystemLinks.Roles,
-            children: [],
-          },
-        ],
+        children: [],
+      },
+      {
+        id: nanoid(),
+        title: "Roles",
+        icon: "Shield",
+        type: NavigationMenuItemType.System,
+        link: SystemLinks.Roles,
+        children: [],
       },
     ]);
 
     return navItems;
   }
 
-  private async getUserMenuEntities(): Promise<ILabelValue[]> {
+  private async getUserEntities(): Promise<ILabelValue[]> {
     const [hiddenMenuEntities, entitiesOrder, activeEntities] =
       await Promise.all([
         this._configurationApiService.show<string[]>("disabled_menu_entities"),

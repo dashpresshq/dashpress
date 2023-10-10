@@ -89,7 +89,9 @@ export class DatabaseConfigDataPersistenceAdaptor<
       .where("domain", "=", this._configDomain)
       .from(CONFIG_TABLE_NAME);
 
-    return items.map(({ value }) => JSON.parse(value));
+    return Object.fromEntries(
+      items.map(({ key, value }) => [key, JSON.parse(value)])
+    );
   }
 
   async getItem(key: string) {

@@ -148,10 +148,10 @@ describe.each(PERSITENT_ADAPTORS)(
     });
 
     it("should getAllItemsIn", async () => {
-      expect(await adaptor.getAllItemsIn(["id-2", "id-3"])).toEqual([
-        { age: 2, id: "id-2", name: "Second Item" },
-        { age: 3, id: "id-3", name: "Third Item" },
-      ]);
+      expect(await adaptor.getAllItemsIn(["id-2", "id-3"])).toEqual({
+        "id-2": { age: 2, id: "id-2", name: "Second Item" },
+        "id-3": { age: 3, id: "id-3", name: "Third Item" },
+      });
     });
   }
 );

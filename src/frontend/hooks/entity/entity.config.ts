@@ -14,6 +14,7 @@ import { uniqBy } from "shared/lib/array/uniq-by";
 import { userFriendlyCase } from "shared/lib/strings/friendly-case";
 import { FIELD_TYPES_CONFIG_MAP } from "shared/validations";
 import { IEntityCrudSettings } from "shared/configurations";
+import { ISingularPlural } from "shared/types/config";
 import { useEntityFields } from "./entity.store";
 import {
   getFieldTypeBoundedValidations,
@@ -33,10 +34,10 @@ export function useEntityId() {
 
 export function useEntityDiction(paramEntity?: string) {
   const entity = useEntitySlug(paramEntity);
-  const entityDiction = useEntityConfiguration<{
-    plural: string;
-    singular: string;
-  }>("entity_diction", entity);
+  const entityDiction = useEntityConfiguration<ISingularPlural>(
+    "entity_diction",
+    entity
+  );
   return {
     singular: entityDiction.data?.singular || userFriendlyCase(entity),
     plural: entityDiction.data?.plural || userFriendlyCase(entity),

@@ -16,6 +16,7 @@ import { MAKE_APP_CONFIGURATION_CRUD_CONFIG } from "frontend/hooks/configuration
 import { useState } from "react";
 import { DictionDocumentation } from "frontend/docs/diction";
 import { DOCUMENTATION_LABEL } from "frontend/docs";
+import { NAVIGATION_MENU_ENDPOINT } from "frontend/_layouts/app/LayoutImpl/constants";
 import { BaseEntitySettingsLayout } from "../_Base";
 import { EntityDictionForm } from "./Form";
 import { ENTITY_CONFIGURATION_VIEW } from "../constants";
@@ -30,7 +31,10 @@ export function EntityDictionSettings() {
   const entityDiction = useEntityDiction();
   const upsertConfigurationMutation = useUpsertConfigurationMutation(
     "entity_diction",
-    entity
+    entity,
+    {
+      otherEndpoints: [NAVIGATION_MENU_ENDPOINT],
+    }
   );
 
   const [isDocOpen, setIsDocOpen] = useState(false);

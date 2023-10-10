@@ -67,7 +67,9 @@ export class RedisConfigDataPersistenceAdaptor<
       await this.getRedisInstance()
     ).hmGet(this.wrapWithConfigDomain(), itemIds);
 
-    return Object.values(allData).map((value) => JSON.parse(value));
+    return Object.fromEntries(
+      allData.map((value, index) => [itemIds[index], JSON.parse(value)])
+    );
   }
 
   async getItem(key: string) {

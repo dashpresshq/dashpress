@@ -3,8 +3,8 @@ import { createConfigDomainPersistenceService } from "backend/lib/config-persist
 const TEST_APP_CONFIG: Partial<Record<string, unknown>> = {
   disabled_entities: ["disabled-entity-1", "disabled-entity-2"],
   "entity_diction__base-model": {
-    singular: "Base Model",
-    plural: "Base Models",
+    singular: "Base Model Singular",
+    plural: "Base Model Plural",
   },
   system_settings: {
     forceIntrospection: false,

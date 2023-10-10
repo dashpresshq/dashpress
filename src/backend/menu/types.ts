@@ -7,3 +7,5 @@ export interface IBaseNavigationMenuApiService {
     navItems: INavigationMenuItem[]
   ): Promise<INavigationMenuItem[]>;
 }
+
+export const FOR_CODE_COV = 1;

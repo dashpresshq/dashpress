@@ -8,7 +8,7 @@ export function RolesDocumentation(props: IDocumentationRootProps) {
   return (
     <DocumentationRoot {...props}>
       <p>
-        Hadmean has two default roles which are not editable or deletable and
+        DashPress has two default roles which are not editable or deletable and
         they are <code>Creator</code> and <code>Viewer</code>.
       </p>
 

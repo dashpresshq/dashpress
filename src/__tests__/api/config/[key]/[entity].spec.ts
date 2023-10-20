@@ -22,8 +22,8 @@ describe("/api/config/[key]/[entity]", () => {
 
     expect(res._getStatusCode()).toBe(200);
     expect(res._getJSONData()).toEqual({
-      singular: "Base Model",
-      plural: "Base Models",
+      singular: "Base Model Singular",
+      plural: "Base Model Plural",
     });
   });
 

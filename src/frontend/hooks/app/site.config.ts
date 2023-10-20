@@ -2,7 +2,7 @@ import { ISiteSettings } from "shared/types/config";
 import { useAppConfiguration } from "../configuration/configuration.store";
 
 const DEFAULT_SITE_CONFIG: ISiteSettings = {
-  name: "Hadmean",
+  name: "DashPress",
   homeLink: "/",
   logo: "/assets/images/logo.png",
   fullLogo: "/assets/images/full-logo.png",

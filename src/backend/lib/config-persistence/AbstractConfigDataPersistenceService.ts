@@ -14,7 +14,10 @@ export abstract class AbstractConfigDataPersistenceService<T> {
     this._configApiService = configApiService;
   }
 
-  private mergeKeyWithSecondaryKey(key: string, secondaryKey: string) {
+  public mergeKeyWithSecondaryKey(key: string, secondaryKey: string) {
+    if (!secondaryKey) {
+      return key;
+    }
     return `${key}__${secondaryKey}`;
   }
 
@@ -30,17 +33,7 @@ export abstract class AbstractConfigDataPersistenceService<T> {
     throw new NotFoundError(`${key} not found for '${this._configDomain}'`);
   }
 
-  public async getItemWithMaybeSecondaryKey(
-    key: string,
-    secondaryKey?: string
-  ): Promise<T | undefined> {
-    if (!secondaryKey) {
-      return await this.getItem(key);
-    }
-    return await this.getItem(this.mergeKeyWithSecondaryKey(key, secondaryKey));
-  }
-
-  public abstract getAllItemsIn(itemIds: string[]): Promise<T[]>;
+  public abstract getAllItemsIn(itemIds: string[]): Promise<Record<string, T>>;
 
   public abstract getAllAsKeyValuePair(): Promise<Record<string, T>>;
 
@@ -58,20 +51,6 @@ export abstract class AbstractConfigDataPersistenceService<T> {
 
   public async updateItem(key: string, data: T): Promise<void> {
     await this.persistItem(key, data);
-  }
-
-  public async upsertItemWithMaybeSecondaryKey(
-    key: string,
-    value: T,
-    secondaryKey?: string
-  ): Promise<void> {
-    if (!secondaryKey) {
-      return await this.upsertItem(key, value);
-    }
-    return await this.upsertItem(
-      this.mergeKeyWithSecondaryKey(key, secondaryKey),
-      value
-    );
   }
 
   public abstract removeItem(key: string): Promise<void>;

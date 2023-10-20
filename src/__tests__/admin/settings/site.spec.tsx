@@ -24,7 +24,7 @@ describe("pages/admin/settings/site", () => {
       </ApplicationRoot>
     );
     await waitFor(() => {
-      expect(screen.getByLabelText("Name")).toHaveValue("Hadmean");
+      expect(screen.getByLabelText("Name")).toHaveValue("DashPress");
     });
     expect(screen.getByLabelText("Home Link")).toHaveValue("/");
     expect(screen.getByLabelText("Square Logo")).toHaveValue(
@@ -63,7 +63,7 @@ describe("pages/admin/settings/site", () => {
       </ApplicationRoot>
     );
     await waitFor(() => {
-      expect(screen.getByLabelText("Name")).toHaveValue("HadmeanUpdated");
+      expect(screen.getByLabelText("Name")).toHaveValue("DashPressUpdated");
     });
     expect(screen.getByLabelText("Home Link")).toHaveValue("/Updated");
     expect(screen.getByLabelText("Square Logo")).toHaveValue(

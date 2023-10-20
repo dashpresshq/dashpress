@@ -66,7 +66,9 @@ export class JsonFileConfigDataPersistenceAdaptor<
   async getAllItemsIn(itemIds: string[]) {
     const allIndexedItems = await this.getDomainData();
 
-    return itemIds.map((itemId) => allIndexedItems[itemId]);
+    return Object.fromEntries(
+      itemIds.map((itemId) => [itemId, allIndexedItems[itemId]])
+    );
   }
 
   async getItem(key: string) {

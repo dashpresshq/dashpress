@@ -12,7 +12,7 @@ const { version } = require("../../../package.json");
 export default requestHandler(
   {
     GET: async (): Promise<Record<string, string>> => {
-      const latestVersion$1 = await latestVersion("hadmean");
+      const latestVersion$1 = await latestVersion("dashpress");
 
       const versionText =
         latestVersion$1 === version
@@ -36,7 +36,7 @@ export default requestHandler(
       }
 
       return {
-        "Hadmean Version": `v${version}${versionText}`,
+        "DashPress Version": `v${version}${versionText}`,
         "Node Version": checkNodeVersion().message,
         "Config Adapter": configAdaptor,
         "Cache Adapter": cacheAdaptor,

@@ -65,7 +65,7 @@ const CONFIG_VALUES = {
     tokenValidityDurationInDays: 5,
   },
   site_settings: {
-    name: "Hadmean",
+    name: "DashPress",
     homeLink: "/",
     logo: "/assets/images/logo.png",
     fullLogo: "/assets/images/full-logo.png",

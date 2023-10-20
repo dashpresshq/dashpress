@@ -6,7 +6,7 @@ import { CacheAdaptorTypes } from "backend/lib/cache/types";
 import { credentialsApiService } from "backend/integrations-configurations";
 import { DATABASE_CREDENTIAL_GROUP } from "backend/data/fields";
 import { IDataSourceCredentials } from "shared/types/data-sources";
-import { RDMSSources } from "@hadmean/bacteria";
+import { RDMSSources } from "@dashpress/bacteria";
 import { ACTION_INTEGRATIONS } from "backend/actions/integrations";
 import { ActionIntegrationKeys } from "shared/types/actions";
 import { PORTAL_NPM_PACKAGES_CONFIG, PortalNpmPackageDomain } from "./portal";

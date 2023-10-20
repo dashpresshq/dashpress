@@ -20,16 +20,16 @@ import { RenderNavigation } from "./RenderNavigation";
 
 const StyledLogoSm = styled.img`
   width: 28px;
-  margin-top: 16px;
 `;
 
 const StyledLogoFull = styled.img`
-  margin-top: 16px;
   width: 120px;
 `;
 
 const StyledBrand = styled.div`
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   height: 70px;
 `;
 

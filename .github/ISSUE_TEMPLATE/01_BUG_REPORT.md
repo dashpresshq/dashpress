@@ -1,6 +1,6 @@
 ---
 name: Bug Report
-about: Create a report to help Hadmean to improve
+about: Create a report to help DashPress to improve
 title: "bug: "
 labels: "bug"
 assignees: ""
@@ -8,7 +8,7 @@ assignees: ""
 
 # Bug Report
 
-**Hadmean version:**
+**DashPress version:**
 
 <!-- Please specify commit or tag version. -->
 

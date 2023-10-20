@@ -131,7 +131,7 @@ export class EntitiesApiService implements IApplicationService {
     ).includes(entity);
   }
 
-  async getAllEntities(): Promise<{ value: string; label: string }[]> {
+  async getAllEntities(): Promise<ILabelValue[]> {
     return (await this._schemasApiService.getDBSchema()).map(({ name }) => ({
       value: name,
       label: name,

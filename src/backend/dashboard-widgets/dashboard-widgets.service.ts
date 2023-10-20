@@ -179,10 +179,9 @@ return [actual[0], relative[0]];
       return await this.generateDefaultDashboardWidgets(dashboardId);
     }
 
-    const widgets =
-      (await this._dashboardWidgetsPersistenceService.getAllItemsIn(
-        widgetList
-      )) as IWidgetConfig[];
+    const widgets = Object.values(
+      await this._dashboardWidgetsPersistenceService.getAllItemsIn(widgetList)
+    );
 
     return sortByListOrder(widgetList, widgets);
   }

@@ -1,18 +1,14 @@
 import { IFormProps } from "frontend/lib/form/types";
 import { SchemaForm } from "frontend/components/SchemaForm";
 import { MAKE_APP_CONFIGURATION_CRUD_CONFIG } from "frontend/hooks/configuration/configuration.constant";
-
-type IDictionSettings = {
-  plural: string;
-  singular: string;
-};
+import { ISingularPlural } from "shared/types/config";
 
 export function EntityDictionForm({
   onSubmit,
   initialValues,
-}: IFormProps<IDictionSettings>) {
+}: IFormProps<ISingularPlural>) {
   return (
-    <SchemaForm<IDictionSettings>
+    <SchemaForm<ISingularPlural>
       onSubmit={onSubmit}
       initialValues={initialValues}
       icon="save"

@@ -5,12 +5,12 @@ import {
   setupAppConfigTestData,
 } from "__tests__/api/_test-utils";
 
-describe.skip("/api/menu", () => {
+describe("/api/menu", () => {
   beforeAll(async () => {
     await setupAllTestData(["schema", "app-config"]);
   });
 
-  it("should list all entities not disabled", async () => {
+  it("should render the menu with non disabled menus", async () => {
     const { req, res } = createAuthenticatedMocks({
       method: "GET",
     });
@@ -20,16 +20,63 @@ describe.skip("/api/menu", () => {
     expect(res._getJSONData()).toMatchInlineSnapshot(`
       [
         {
-          "label": "base-model",
-          "value": "base-model",
+          "icon": "Home",
+          "link": "home",
+          "title": "Home",
+          "type": "system",
         },
         {
-          "label": "secondary-model",
-          "value": "secondary-model",
+          "children": [
+            {
+              "icon": "File",
+              "link": "base-model",
+              "title": "Base Model Plural",
+              "type": "entities",
+            },
+            {
+              "icon": "File",
+              "link": "secondary-model",
+              "title": "Secondary Model",
+              "type": "entities",
+            },
+            {
+              "icon": "File",
+              "link": "tests",
+              "title": "Tests",
+              "type": "entities",
+            },
+          ],
+          "icon": "File",
+          "link": "home",
+          "title": "Entities",
+          "type": "system",
         },
         {
-          "label": "tests",
-          "value": "tests",
+          "icon": "Zap",
+          "link": "actions",
+          "title": "Actions",
+          "type": "system",
+        },
+        {
+          "children": [],
+          "icon": "Settings",
+          "link": "settings",
+          "title": "Settings",
+          "type": "system",
+        },
+        {
+          "children": [],
+          "icon": "Users",
+          "link": "users",
+          "title": "Users",
+          "type": "system",
+        },
+        {
+          "children": [],
+          "icon": "Shield",
+          "link": "roles",
+          "title": "Roles",
+          "type": "system",
         },
       ]
     `);
@@ -51,16 +98,61 @@ describe.skip("/api/menu", () => {
     expect(res._getJSONData()).toMatchInlineSnapshot(`
       [
         {
-          "label": "secondary-model",
-          "value": "secondary-model",
+          "icon": "Home",
+          "link": "home",
+          "title": "Home",
+          "type": "system",
         },
         {
-          "label": "base-model",
-          "value": "base-model",
+          "children": [
+            {
+              "icon": "File",
+              "link": "secondary-model",
+              "title": "Secondary Model",
+              "type": "entities",
+            },
+            {
+              "icon": "File",
+              "link": "base-model",
+              "title": "Base Model Plural",
+              "type": "entities",
+            },
+          ],
+          "icon": "File",
+          "link": "home",
+          "title": "Entities",
+          "type": "system",
+        },
+        {
+          "icon": "Zap",
+          "link": "actions",
+          "title": "Actions",
+          "type": "system",
+        },
+        {
+          "children": [],
+          "icon": "Settings",
+          "link": "settings",
+          "title": "Settings",
+          "type": "system",
+        },
+        {
+          "children": [],
+          "icon": "Users",
+          "link": "users",
+          "title": "Users",
+          "type": "system",
+        },
+        {
+          "children": [],
+          "icon": "Shield",
+          "link": "roles",
+          "title": "Roles",
+          "type": "system",
         },
       ]
     `);
   });
 });
 
-// :test piService.filterPermitte
+// TODO test isMenuItemAllowed

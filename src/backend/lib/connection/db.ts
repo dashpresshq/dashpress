@@ -1,5 +1,5 @@
 import { Knex } from "knex";
-import { makeDbConnection } from "@hadmean/bacteria";
+import { makeDbConnection } from "@dashpress/bacteria";
 import { IDataSourceCredentials } from "shared/types/data-sources";
 import { connectionManager } from "./_manager";
 

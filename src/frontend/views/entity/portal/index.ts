@@ -1,0 +1,1 @@
+export { useMutateBaseEntitySettingsMenu } from "./main";

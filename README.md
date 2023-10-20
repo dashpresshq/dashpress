@@ -1,31 +1,29 @@
 <h1 align="center">
-  <a href="https://github.com/hadmean/hadmean">
-    <img src="https://hadmean.com/img/logo.png" alt="Logo" height="100">
+  <a href="https://github.com/dashpresshq/dashpress">
+    <img src="https://dashpress.io/assets/logos/full-logo-white.png" alt="Logo" height="100">
   </a>
 </h1>
 
 <div align="center">
 
-[![Project license](https://img.shields.io/github/license/hadmean/hadmean.svg)](LICENSE)
-[![Pull Requests welcome](https://img.shields.io/badge/PRs-welcome-23bc42.svg)](https://github.com/hadmean/hadmean/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22)
-<img src="https://img.shields.io/npm/v/hadmean" />
-<img src="https://img.shields.io/github/languages/top/hadmean/hadmean" />
+[![Project license](https://img.shields.io/github/license/dashpresshq/dashpress.svg)](LICENSE)
+[![Pull Requests welcome](https://img.shields.io/badge/PRs-welcome-23bc42.svg)](https://github.com/dashpresshq/dashpress/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22)
+<img src="https://img.shields.io/npm/v/dashpress" />
+<img src="https://img.shields.io/github/languages/top/dashpresshq/dashpress" />
 
 
-[![Maintainability](https://api.codeclimate.com/v1/badges/23516bfbcca7557d80a5/maintainability)](https://codeclimate.com/github/hadmean/hadmean/maintainability)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/23516bfbcca7557d80a5/test_coverage)](https://codeclimate.com/github/hadmean/hadmean/test_coverage)
-<img src="https://img.shields.io/codeclimate/tech-debt/hadmean/hadmean" />
-![GitHub CI](https://github.com/hadmean/hadmean/actions/workflows/release.yml/badge.svg)
+[![Maintainability](https://api.codeclimate.com/v1/badges/23516bfbcca7557d80a5/maintainability)](https://codeclimate.com/github/dashpresshq/dashpress/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/23516bfbcca7557d80a5/test_coverage)](https://codeclimate.com/github/dashpresshq/dashpress/test_coverage)
+<img src="https://img.shields.io/codeclimate/tech-debt/dashpresshq/dashpress" />
+![GitHub CI](https://github.com/dashpresshq/dashpress/actions/workflows/release.yml/badge.svg)
 
 
 </div>
 
 <div align="center">
-  <a href="https://demo.hadmean.com" target="_blank">Live Demo</a>
+  <a href="https://demo.dashpress.io" target="_blank">Live Demo</a>
   ·
   <a href="https://discord.gg/aV6DxwXhzN" target="_blank">Join Community</a>
-    ·
-  <a href="https://hadmean.com" target="_blank">Documentation</a>
 </div>
 
 
@@ -36,7 +34,7 @@
   - [Demo](#demo)
   - [Features Walkthrough Video](#features-walkthrough-video)
   - [Motivation](#motivation)
-  - [Why you should try Hadmean](#why-you-should-try-hadmean)
+  - [Why you should try DashPress](#why-you-should-try-dashpress)
 - [Getting Started](#getting-started)
   - [Prerequisites](#prerequisites)
   - [Installation](#installation)
@@ -55,7 +53,7 @@
 ---
 
 ## About
-Hadmean generates powerful admin apps from your database information 
+DashPress generates powerful admin apps from your database information 
 - With just one command
 - Under 30 seconds 
 - No tutorial
@@ -66,13 +64,13 @@ Hadmean generates powerful admin apps from your database information
 
 What you get is a fully functional admin app that is ready to be deployed.
 
-Hadmean will help you focus your engineering resources on building exciting features and not building and maintaining boring and repetitive CRUD apps.
+DashPress will help you focus your engineering resources on building exciting features and not building and maintaining boring and repetitive CRUD apps.
 
 ### Demo
-https://demo.hadmean.com is an example admin app generated with Hadmean without writing any line of code.
+https://demo.dashpress.io is an example admin app generated with DashPress without writing any line of code.
 
 ### Features Walkthrough Video
-Click on the image below to see a walkthrough of the many features Hadmean provides.
+Click on the image below to see a walkthrough of the many features DashPress provides.
 
 [![Watch the video](https://img.youtube.com/vi/aO500EjHw1c/mqdefault.jpg)](https://youtu.be/aO500EjHw1c)
 
@@ -86,9 +84,9 @@ Most internal tool applications make you build from the ground up i.e you get a 
 - You duplicate a lot of business logic already in your database.
 - You to maintain them. 
 
-Hadmean attempts internal tool generation with a new approach by introspecting your database and building a multi-page application based on all the info it can find like your field types, relationships, constraints etc. You literally can have your admin app done in seconds without any tutorial or coding.
+DashPress attempts internal tool generation with a new approach by introspecting your database and building a multi-page application based on all the info it can find like your field types, relationships, constraints etc. You literally can have your admin app done in seconds without any tutorial or coding.
 
-### Why you should try Hadmean
+### Why you should try DashPress
 - It is free
 - Easiest installation, Just one command to install and run
 - You will always be running the latest version
@@ -108,7 +106,7 @@ Hadmean attempts internal tool generation with a new approach by introspecting y
 ```bash
 $ cd <project_name>
 
-$ npx hadmean
+$ npx dashpress
 ```
 
 That is all, You will be able to see the application on http://localhost:3000.
@@ -144,29 +142,29 @@ If you prefer to use Docker, Check the `Dockerfile.example` file in the root fol
 
 ## Roadmap
 
-See the [open issues](https://github.com/hadmean/hadmean/issues) for a list of proposed features (and known issues).
+See the [open issues](https://github.com/dashpresshq/dashpress/issues) for a list of proposed features (and known issues).
 
-- [Top Feature Requests](https://github.com/hadmean/hadmean/issues?q=label%3Aenhancement+is%3Aopen+sort%3Areactions-%2B1-desc) (Add your votes using the 👍 reaction)
-- [Top Bugs](https://github.com/hadmean/hadmean/issues?q=is%3Aissue+is%3Aopen+label%3Abug+sort%3Areactions-%2B1-desc) (Add your votes using the 👍 reaction)
-- [Newest Bugs](https://github.com/hadmean/hadmean/issues?q=is%3Aopen+is%3Aissue+label%3Abug)
+- [Top Feature Requests](https://github.com/dashpresshq/dashpress/issues?q=label%3Aenhancement+is%3Aopen+sort%3Areactions-%2B1-desc) (Add your votes using the 👍 reaction)
+- [Top Bugs](https://github.com/dashpresshq/dashpress/issues?q=is%3Aissue+is%3Aopen+label%3Abug+sort%3Areactions-%2B1-desc) (Add your votes using the 👍 reaction)
+- [Newest Bugs](https://github.com/dashpresshq/dashpress/issues?q=is%3Aopen+is%3Aissue+label%3Abug)
 
 ## Support
 
 Join the community at one of the following places:
 - [Discord](https://discord.gg/aV6DxwXhzN)
-- [Twitter](https://twitter.com/hadmeanHQ)
-- [GitHub Discussions](https://github.com/hadmean/hadmean/discussions)
+- [Twitter](https://twitter.com/dashpressHQ)
+- [GitHub Discussions](https://github.com/dashpresshq/dashpress/discussions)
 
 
 ## Project assistance
 
-If you want to say **thank you** or/and support the active development of Hadmean:
+If you want to say **thank you** or/and support the active development of DashPress:
 
-- Add a [GitHub Star](https://github.com/hadmean/hadmean) to the project.
-- Tweet about Hadmean.
-- Write interesting articles about Hadmean on [Dev.to](https://dev.to/), [Medium](https://medium.com/) or your blog.
+- Add a [GitHub Star](https://github.com/dashpresshq/dashpress) to the project.
+- Tweet about DashPress.
+- Write interesting articles about DashPress on [Dev.to](https://dev.to/), [Medium](https://medium.com/) or your blog.
 
-Together, we can make Hadmean **better**!
+Together, we can make DashPress **better**!
 
 ## Contributing
 
@@ -179,12 +177,12 @@ Please read [our contribution guidelines](docs/CONTRIBUTING.md), and thank you f
 
 The original setup of this repository is by [Ayobami Akingbade](https://github.com/thrownullexception).
 
-For a full list of all authors and contributors, see [the contributors page](https://github.com/hadmean/hadmean/contributors).
+For a full list of all authors and contributors, see [the contributors page](https://github.com/dashpresshq/dashpress/contributors).
 
 ## Security
 
-Hadmean takes security at heart and follows all known good practices of security, but 100% security cannot be assured.
-Hadmean is provided **"as is"** without any **warranty**.
+DashPress takes security at heart and follows all known good practices of security, but 100% security cannot be assured.
+DashPress is provided **"as is"** without any **warranty**.
 
 _For more information and to report security issues, please refer to our [security documentation](docs/SECURITY.md)._
 

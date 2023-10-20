@@ -1,3 +1,4 @@
+import { ISingularPlural } from "shared/types/config";
 import { BaseAppConfigurationKeys } from "./base-types";
 import { PortalConfigurationKeys, PORTAL_CONFIGURATION_KEYS } from "./portal";
 import { DEFAULT_SYSTEM_SETTINGS } from "./system";
@@ -55,7 +56,7 @@ export const CONFIGURATION_KEYS: Record<
   entity_diction: {
     crudConfigLabel: "Diction Settings",
     requireEntity: true,
-    defaultValue: { singular: "", plural: "" },
+    defaultValue: { singular: "", plural: "" } as ISingularPlural,
   },
   entity_form_extension: {
     crudConfigLabel: "Form Scripts",
@@ -145,9 +146,9 @@ export const CONFIGURATION_KEYS: Record<
     crudConfigLabel: "Site Settings",
     guest: true,
     defaultValue: {
-      name: "Hadmean",
+      name: "DashPress",
       fullLogo: "/assets/images/full-logo.png",
-      homeLink: "https://hadmean.com",
+      homeLink: "https://dashpress.io",
       logo: "/assets/images/logo.png",
     },
   },

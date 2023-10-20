@@ -44,27 +44,23 @@ interface IProps {
   isFullWidth: boolean;
 }
 
+const constantNavigation: ILabelValue[] = [
+  {
+    label: "My Account",
+    value: NAVIGATION_LINKS.ACCOUNT.PROFILE,
+  },
+];
+
 export function ProfileOnNavigation({ isFullWidth }: IProps) {
   const currentUser = useAuthenticatedUserBag();
 
   const router = useRouter();
 
+  const constantNavigationMenuItems = useConstantNavigationMenuItems();
+
   if (!isFullWidth) {
     return null;
   }
-
-  const constantNavigationMenuItems = useConstantNavigationMenuItems();
-
-  const constantNavigation: ILabelValue[] = [
-    {
-      label: "My Account",
-      value: NAVIGATION_LINKS.ACCOUNT.PROFILE,
-    },
-    {
-      label: "Menu Settings",
-      value: NAVIGATION_LINKS.SETTINGS.MENU,
-    },
-  ];
 
   return (
     <ProfileRoot justify="space-between" align="center">

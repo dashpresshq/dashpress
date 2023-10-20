@@ -51,7 +51,9 @@ export class MemoryConfigDataPersistenceAdaptor<
       this._configDomain
     );
 
-    return itemIds.map((itemId) => allItems[itemId]);
+    return Object.fromEntries(
+      itemIds.map((itemId) => [itemId, allItems[itemId]])
+    );
   }
 
   async getItem(key: string) {

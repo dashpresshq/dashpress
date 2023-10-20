@@ -1,4 +1,4 @@
-import { introspect, Entity } from "@hadmean/bacteria";
+import { introspect, Entity } from "@dashpress/bacteria";
 import {
   ConfigurationApiService,
   configurationApiService,
@@ -11,7 +11,7 @@ import { IApplicationService } from "backend/types";
 import { IDBSchema, IEntityField } from "shared/types/db";
 import { IDataSourceCredentials } from "shared/types/data-sources";
 import { DATABASE_CREDENTIAL_GROUP } from "backend/data/fields";
-import { Column } from "@hadmean/bacteria/dist/models/Column";
+import { Column } from "@dashpress/bacteria/dist/models/Column";
 import {
   createConfigDomainPersistenceService,
   AbstractConfigDataPersistenceService,
@@ -92,7 +92,7 @@ export class SchemasApiService implements IApplicationService {
 
   private formatIntrospectData(rawEntity: Entity[]): IDBSchema[] {
     const dbSchema = rawEntity
-      .filter(({ name }) => !name.startsWith("hadmean"))
+      .filter(({ name }) => !name.startsWith("dashpress"))
       .map((entity) => {
         return {
           name: entity.name,

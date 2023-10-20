@@ -29,6 +29,7 @@ const mapPermissionStringToLabelValue = (permissionStringList: string[]) => {
   }));
 };
 
+// TODO sort by heirachy
 const adminPermissionList: ILabelValue[] = mapPermissionStringToLabelValue(
   Object.values(BASE_USER_PERMISSIONS)
 );

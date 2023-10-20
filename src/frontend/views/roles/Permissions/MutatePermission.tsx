@@ -19,6 +19,10 @@ interface IProps {
   singular: string;
 }
 
+/*
+  IMPORTANT NOTE:
+  LESSER PERMISSION FIRST
+*/
 const PERMISSION_HEIRACHIES = {
   [USER_PERMISSIONS.CAN_MANAGE_USERS]: USER_PERMISSIONS.CAN_RESET_PASSWORD,
   [USER_PERMISSIONS.CAN_CONFIGURE_APP]:
@@ -26,6 +30,28 @@ const PERMISSION_HEIRACHIES = {
   [USER_PERMISSIONS.CAN_MANAGE_ALL_ENTITIES]:
     USER_PERMISSIONS.CAN_CONFIGURE_APP,
   ...PORTAL_PERMISSION_HEIRACHIES,
+};
+
+export const getPermissionChildren = (
+  permission: string,
+  mainKey: 1 | 0,
+  permissions: string[] = []
+): string[] => {
+  permissions.push(permission);
+
+  const permissionHeirachy = Object.entries<string>(PERMISSION_HEIRACHIES).find(
+    (value) => value[mainKey === 1 ? 0 : 1] === permission
+  );
+
+  if (!permissionHeirachy) {
+    return permissions;
+  }
+
+  return getPermissionChildren(
+    permissionHeirachy[mainKey],
+    mainKey,
+    permissions
+  );
 };
 
 export function MutatePermission({
@@ -90,30 +116,12 @@ export function MutatePermission({
                       selected: isPermissionSelected,
                       onChange: () => {
                         if (isPermissionSelected) {
-                          const permissionsToSend = [menuItem.value];
-                          const permissionHeirachy = Object.entries<string>(
-                            PERMISSION_HEIRACHIES
-                          ).find(([index, _]) => index === menuItem.value);
-
-                          if (permissionHeirachy) {
-                            permissionsToSend.push(permissionHeirachy[1]);
-                          }
                           rolePermissionDeletionMutation.mutate(
-                            permissionsToSend
+                            getPermissionChildren(menuItem.value, 1)
                           );
                         } else {
-                          const permissionsToSend = [menuItem.value];
-
-                          const permissionHeirachy = Object.entries(
-                            PERMISSION_HEIRACHIES
-                          ).find(([_, value]) => value === menuItem.value);
-
-                          if (permissionHeirachy) {
-                            permissionsToSend.push(permissionHeirachy[0]);
-                          }
-
                           rolePermissionCreationMutation.mutate(
-                            permissionsToSend
+                            getPermissionChildren(menuItem.value, 0)
                           );
                         }
                       },

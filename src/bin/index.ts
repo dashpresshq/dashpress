@@ -10,16 +10,12 @@ import { checkNodeVersion } from "./checkNodeVersion";
 
   const { default: fetch } = await import("node-fetch");
 
-  const generateRandomString = (length = 12): string => {
-    return randomstring.generate(length);
-  };
-
   const replaceRandomCharaters = (envContent: string) => {
     return ["CREDENTIALS_ENCRYPTION_KEY", "AUTH_TOKEN_KEY"].reduce(
       (reducedEnvContent, currentKey) => {
         return reducedEnvContent.replace(
           `${currentKey}=RANDOM_CHARACTERS`,
-          `${currentKey}=${generateRandomString(128)}`
+          `${currentKey}=${randomstring.generate(128)}`
         );
       },
       envContent
@@ -61,11 +57,11 @@ import { checkNodeVersion } from "./checkNodeVersion";
   console.log(`
        /$$                     /$$                                                       
       | $$                    | $$                                                       
-  /$$$$$$$  /$$$$$$   /$$$$$$$| $$$$$$$   /$$$$$$   /$$$$$$   / $$$$$$   /$$$$$$$ /$$$$$$$
+  /$$$$$$$  /$$$$$$   /$$$$$$$| $$$$$$$   /$$$$$$   /$$$$$$   / $$$$$$$$ /$$$$$$$ /$$$$$$$
  /$$__  $$ |____  $$ /$$_____/| $$__  $$ / $$__  $$/ $$__  $$ / $$__  $$ /$$_____//$$_____/
 | $$  | $$  /$$$$$$$|  $$$$$$ | $$ \\ $$ | $$ \\ $$| $$  \\__/| $$$$$$$$|  $$$$$$|  $$$$$$ 
-| $$  | $$ /$$__  $$ \\____$$ | $$  | $$ | $$  | $$| $$       | $$_____/\\____ $$\\____ $$
-|  $$$$$$$|  $$$$$$$ /$$$$$$$/| $$  | $$ | $$$$$$$/| $$       | $$$$$$$ /$$$$$$$//$$$$$$$/
+| $$  | $$ / $$__ $$ \\____$$ | $$  | $$ | $$  | $$| $$       | $$_____/\\____ $$\\____ $$
+|  $$$$$$$ | $$$$$$$ /$$$$$$$/| $$  | $$ | $$$$$$$/| $$       | $$$$$$$ /$$$$$$$//$$$$$$$/
 \\_______/ \\_______/|_______/ |__/  |__/| $$____/ |__/       \\_______/|_______/|_______/ 
                                          | $$                                             
                                          | $$                                             
@@ -105,11 +101,11 @@ import { checkNodeVersion } from "./checkNodeVersion";
     cwd: path.join(__dirname, ".."),
   });
 
-  const WAIT_FOR_NEXT_TO_START = 1000;
-
   console.log(
     `🚀 Application started successfully at ${terminalLink(endpoint, endpoint)}`
   );
+
+  const WAIT_FOR_NEXT_TO_START = 1000;
 
   /*
   We want to ping the application to bootstrap itself from here

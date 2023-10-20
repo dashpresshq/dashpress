@@ -10,12 +10,49 @@ import {
   useRolePermissionDeletionMutation,
   useRolePermissions,
 } from "../permissions.store";
+import { USER_PERMISSIONS } from "shared/constants/user";
+import { PORTAL_PERMISSION_HEIRACHIES } from "shared/logic/permissions/portal";
 
 interface IProps {
   permissionList: ILabelValue[];
   overAchingPermission?: string;
   singular: string;
 }
+
+/*
+  IMPORTANT NOTE:
+  LESSER PERMISSION FIRST
+*/
+const PERMISSION_HEIRACHIES = {
+  [USER_PERMISSIONS.CAN_MANAGE_USERS]: USER_PERMISSIONS.CAN_RESET_PASSWORD,
+  [USER_PERMISSIONS.CAN_CONFIGURE_APP]:
+    USER_PERMISSIONS.CAN_MANAGE_INTEGRATIONS,
+  [USER_PERMISSIONS.CAN_MANAGE_ALL_ENTITIES]:
+    USER_PERMISSIONS.CAN_CONFIGURE_APP,
+  ...PORTAL_PERMISSION_HEIRACHIES,
+};
+
+export const getPermissionChildren = (
+  permission: string,
+  mainKey: 1 | 0,
+  permissions: string[] = []
+): string[] => {
+  permissions.push(permission);
+
+  const permissionHeirachy = Object.entries<string>(PERMISSION_HEIRACHIES).find(
+    (value) => value[mainKey === 1 ? 0 : 1] === permission
+  );
+
+  if (!permissionHeirachy) {
+    return permissions;
+  }
+
+  return getPermissionChildren(
+    permissionHeirachy[mainKey],
+    mainKey,
+    permissions
+  );
+};
 
 export function MutatePermission({
   permissionList,
@@ -79,13 +116,13 @@ export function MutatePermission({
                       selected: isPermissionSelected,
                       onChange: () => {
                         if (isPermissionSelected) {
-                          rolePermissionDeletionMutation.mutate([
-                            menuItem.value,
-                          ]);
+                          rolePermissionDeletionMutation.mutate(
+                            getPermissionChildren(menuItem.value, 1)
+                          );
                         } else {
-                          rolePermissionCreationMutation.mutate([
-                            menuItem.value,
-                          ]);
+                          rolePermissionCreationMutation.mutate(
+                            getPermissionChildren(menuItem.value, 0)
+                          );
                         }
                       },
                     }

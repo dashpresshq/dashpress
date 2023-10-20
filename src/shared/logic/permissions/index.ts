@@ -5,24 +5,7 @@ import {
 } from "shared/constants/user";
 import { GranularEntityPermissions, SystemRoles } from "shared/types/user";
 import { replaceGranular } from "shared/constants/user/shared";
-import {
-  portalMetaPermissionCheck,
-  PORTAL_PERMISSION_HEIRACHIES,
-} from "./portal";
-
-/*
-  IMPORTANT NOTE:
-  LESSER PERMISSION FIRST
-*/
-// TODO move this logic to the FE for more visibility (For contributors)
-const PERMISSION_HEIRACHIES = {
-  [USER_PERMISSIONS.CAN_MANAGE_USERS]: USER_PERMISSIONS.CAN_RESET_PASSWORD,
-  [USER_PERMISSIONS.CAN_CONFIGURE_APP]:
-    USER_PERMISSIONS.CAN_MANAGE_INTEGRATIONS,
-  [USER_PERMISSIONS.CAN_MANAGE_ALL_ENTITIES]:
-    USER_PERMISSIONS.CAN_CONFIGURE_APP,
-  ...PORTAL_PERMISSION_HEIRACHIES,
-};
+import { portalMetaPermissionCheck } from "./portal";
 
 const doMetaPermissionCheck =
   (permissions: string[], requiredPermission: string) =>
@@ -77,21 +60,7 @@ export const doesPermissionAllowPermission = (
     );
   }
 
-  const can = permissions.includes(requiredPermission);
-
-  if (can) {
-    return true;
-  }
-
-  if (!PERMISSION_HEIRACHIES[requiredPermission]) {
-    return false;
-  }
-
-  return doesPermissionAllowPermission(
-    permissions,
-    PERMISSION_HEIRACHIES[requiredPermission],
-    checkGranular
-  );
+  return permissions.includes(requiredPermission);
 };
 
 const doSystemRoleCheck = (

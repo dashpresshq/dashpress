@@ -122,27 +122,7 @@ describe("user role checks", () => {
         ).toBe(false);
       });
     });
-    describe("Heirachy", () => {
-      it("should return true for PERMISSION_HEIRACHIES down", () => {
-        expect(
-          doesPermissionAllowPermission(
-            ["CAN_RESET_PASSWORD", "PERMISSION_2"],
-            "CAN_MANAGE_USERS",
-            false
-          )
-        ).toBe(true);
-      });
-      it("should return false for PERMISSION_HEIRACHIES down", () => {
-        expect(
-          doesPermissionAllowPermission(
-            ["CAN_MANAGE_USERS", "PERMISSION_2"],
-            "CAN_RESET_PASSWORD",
-            false
-          )
-        ).toBe(false);
-      });
-    });
-    describe.only("Check Granular", () => {
+    describe("Check Granular", () => {
       it("should pass check granular when granular is true", () => {
         expect(
           doesPermissionAllowPermission(

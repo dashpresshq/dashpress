@@ -118,10 +118,13 @@ function useEntityCrudView() {
 
     if (field === "details" && !newState.details) {
       newState.update = false;
+      newState.delete = false;
     } else if (field === "update" && newState.update) {
       newState.details = true;
+    } else if (field === "delete" && newState.delete) {
+      newState.details = true;
     }
-
+    
     setEntityCrudSettingsState(newState);
     upsertCrudSettingsMutation.mutateAsync(
       newState as unknown as Record<string, string>

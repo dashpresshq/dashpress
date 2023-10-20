@@ -94,39 +94,6 @@ export function RolesDocumentation(props: IDocumentationRootProps) {
         </b>
         : enables users to reset passwords.
       </p>
-
-      <h4>Permissions Dependencies </h4>
-      <p>
-        Enabling some permissions will automatically grant some other
-        permission. For example, giving someone permission to reset a user&apos;
-        password without giving them permission to manage users doesn&apos;t
-        make sense as they need to be able to access users first to get to where
-        they will be able to reset the password. This is what we call
-        permissions dependencies.
-      </p>
-      <p>
-        These are the permission dependencies.
-        <ul>
-          <li>
-            <code>{userFriendlyCase(USER_PERMISSIONS.CAN_RESET_PASSWORD)}</code>{" "}
-            - <code>{userFriendlyCase(USER_PERMISSIONS.CAN_MANAGE_USERS)}</code>
-          </li>
-          <li>
-            <code>
-              {userFriendlyCase(USER_PERMISSIONS.CAN_MANAGE_INTEGRATIONS)}
-            </code>{" "}
-            -{" "}
-            <code>{userFriendlyCase(USER_PERMISSIONS.CAN_CONFIGURE_APP)}</code>
-          </li>
-          <li>
-            <code>{userFriendlyCase(USER_PERMISSIONS.CAN_CONFIGURE_APP)}</code>{" "}
-            -{" "}
-            <code>
-              {userFriendlyCase(USER_PERMISSIONS.CAN_MANAGE_ALL_ENTITIES)}
-            </code>
-          </li>
-        </ul>
-      </p>
     </DocumentationRoot>
   );
 }

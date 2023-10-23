@@ -119,6 +119,7 @@ export function FieldsTypeForm({
                       )} [${values.validations[name]
                         .map(({ validationType }) => validationType)
                         .join(",")}]`}
+                      defaultLabel={`Select ${getEntityFieldLabels(name)} Type`}
                       selectData={FIELD_TYPES_CONFIG_MAP_AS_SELECTION}
                       rightActions={rightActions}
                       disabledOptions={listOfEntitiesThatCantBeChanged}

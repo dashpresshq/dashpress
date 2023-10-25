@@ -5,13 +5,13 @@ import { FormButton } from "frontend/design-system/components/Button/FormButton"
 import { Spacer } from "frontend/design-system/primitives/Spacer";
 import { RenderList } from "frontend/design-system/components/RenderList";
 import { SectionListItem } from "frontend/design-system/components/Section/SectionList";
+import { USER_PERMISSIONS } from "shared/constants/user";
+import { PORTAL_PERMISSION_HEIRACHIES } from "shared/logic/permissions/portal";
 import {
   useCreateRolePermissionMutation,
   useRolePermissionDeletionMutation,
   useRolePermissions,
 } from "../permissions.store";
-import { USER_PERMISSIONS } from "shared/constants/user";
-import { PORTAL_PERMISSION_HEIRACHIES } from "shared/logic/permissions/portal";
 
 interface IProps {
   permissionList: ILabelValue[];

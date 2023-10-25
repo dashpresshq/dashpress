@@ -124,7 +124,7 @@ function useEntityCrudView() {
     } else if (field === "delete" && newState.delete) {
       newState.details = true;
     }
-    
+
     setEntityCrudSettingsState(newState);
     upsertCrudSettingsMutation.mutateAsync(
       newState as unknown as Record<string, string>

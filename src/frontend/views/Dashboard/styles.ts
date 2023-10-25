@@ -6,13 +6,13 @@ export const gridRoot = css`
   user-select: none;
   display: grid;
   grid-gap: 16px;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, 25%);
   grid-auto-rows: minmax(130px, auto);
   @media (max-width: ${BREAKPOINTS.lg}) {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, 50%);
   }
   @media (max-width: ${BREAKPOINTS.sm}) {
-    grid-template-columns: 1fr;
+    grid-template-columns: 100%;
   }
 `;
 

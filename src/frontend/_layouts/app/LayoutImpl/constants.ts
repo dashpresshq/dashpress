@@ -1,5 +1,5 @@
 export const SIDE_BAR_WIDTH_VARIATIONS = {
-  full: 285,
+  full: 205,
   collapsed: 55,
 };
 

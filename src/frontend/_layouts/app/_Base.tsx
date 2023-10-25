@@ -70,6 +70,7 @@ export function BaseLayout({
         <title>
           {pageTitle} - {siteConfig.name}
         </title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
       <Stack justify="space-between" align="center">
         <div>

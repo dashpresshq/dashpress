@@ -3,6 +3,7 @@ import { WidgetSizes } from "shared/types/dashboard/types";
 import styled, { css } from "styled-components";
 
 export const gridRoot = css`
+  width: 97%;
   user-select: none;
   display: grid;
   grid-gap: 16px;

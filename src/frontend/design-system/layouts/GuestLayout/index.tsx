@@ -4,7 +4,7 @@ import {
   SHADOW_CSS,
   StyledCardBody,
 } from "frontend/design-system/components/Card";
-import { GuestFooter, GuestHeader, GuestContainer } from "./_partials";
+import { GuestHeader, GuestContainer } from "./_partials";
 
 export interface IProps {
   children: ReactNode;
@@ -38,8 +38,7 @@ export function GuestLayout({
     <GuestContainer>
       <Root>
         <GuestHeader title={title} subTitle={subTitle} {...appDetails} />
-        <StyledCardBody radiusLess>{children}</StyledCardBody>
-        <GuestFooter name={appDetails.name} />
+        <StyledCardBody>{children}</StyledCardBody>
       </Root>
     </GuestContainer>
   );

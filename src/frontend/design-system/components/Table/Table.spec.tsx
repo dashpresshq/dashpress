@@ -4,8 +4,6 @@ import { Table } from ".";
 import { IProps } from "./types";
 import { TABLE_COLUMNS, TABLE_DATA } from "./data";
 
-import "@testing-library/jest-dom/extend-expect";
-
 const DEFAULT_TABLE_PROPS: IProps<unknown> = {
   overridePaginatedDataState: {
     pageSize: 10,

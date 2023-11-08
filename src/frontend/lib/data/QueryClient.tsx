@@ -1,7 +1,7 @@
 import React, { ReactNode } from "react";
 import { QueryClientProvider, QueryClient } from "react-query";
 
-export const queryClient = new QueryClient({
+const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       staleTime: Infinity,

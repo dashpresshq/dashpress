@@ -2,8 +2,6 @@ import React from "react";
 import { fireEvent, render, screen } from "@testing-library/react";
 import { RenderList } from ".";
 
-import "@testing-library/jest-dom/extend-expect";
-
 describe("RenderList", () => {
   it("should render list items", () => {
     render(

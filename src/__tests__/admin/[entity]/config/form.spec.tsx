@@ -1,5 +1,4 @@
 /* eslint-disable no-useless-escape */
-import "@testing-library/jest-dom";
 import React from "react";
 import { render, screen, within } from "@testing-library/react";
 import { ApplicationRoot } from "frontend/components/ApplicationRoot";

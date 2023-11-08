@@ -3,8 +3,6 @@ import React, { ReactNode } from "react";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { SortList } from ".";
 
-import "@testing-library/jest-dom/extend-expect";
-
 jest.mock("react-easy-sort", () => ({
   __esModule: true,
   default: ({

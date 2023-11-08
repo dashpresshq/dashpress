@@ -1,6 +1,5 @@
 /* eslint-disable testing-library/no-node-access */
 /* eslint-disable testing-library/no-container */
-import "@testing-library/jest-dom";
 import React from "react";
 import { render, screen, waitFor } from "@testing-library/react";
 import { ApplicationRoot } from "frontend/components/ApplicationRoot";

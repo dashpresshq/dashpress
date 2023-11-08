@@ -78,7 +78,7 @@ export const StyledBaseButton = styled.button<IStyledBaseButton>`
   }
 `;
 
-export const StyledSoftButton = styled(StyledBaseButton)`
+export const SoftButtonStyled = styled(StyledBaseButton)`
   background-color: ${USE_ROOT_COLOR("primary-shade-color")};
   color: ${USE_ROOT_COLOR("text-on-shade")};
   border-width: 0;
@@ -94,7 +94,7 @@ export const StyledSoftButton = styled(StyledBaseButton)`
   }
 `;
 
-export const StyledOutlineButton = styled(StyledBaseButton)`
+export const OutlineButton = styled(StyledBaseButton)`
   color: ${USE_ROOT_COLOR("primary-color")};
   border-color: ${USE_ROOT_COLOR("primary-color")};
 
@@ -127,7 +127,7 @@ export const StyledOutlineButton = styled(StyledBaseButton)`
   }
 `;
 
-export const StyledDeleteButton = styled(StyledSoftButton)`
+export const DeleteButtonStyled = styled(SoftButtonStyled)`
   background-color: ${SYSTEM_COLORS.danger}1A;
   color: ${SYSTEM_COLORS.danger};
   border-color: ${SYSTEM_COLORS.danger};

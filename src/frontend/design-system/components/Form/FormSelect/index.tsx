@@ -14,7 +14,7 @@ interface IFormSelect extends IBaseFormSelect {
   selectData: ISelectData[];
 }
 
-export const StyledSelect = styled(Select)`
+export const SelectStyled = styled(Select)`
   ${SelectStyles}
 `;
 
@@ -30,7 +30,7 @@ export function FormMultiSelect({
   onChange,
 }: IFormMultiSelect) {
   return (
-    <StyledSelect
+    <SelectStyled
       classNamePrefix={SharedSelectProps.classNamePrefix}
       closeMenuOnSelect={false}
       defaultValue={[]}
@@ -65,7 +65,7 @@ export const FormSelect: React.FC<IFormSelect> = (props) => {
     ...selectData,
   ] as ISelectData[];
   return wrapLabelAndError(
-    <StyledSelect
+    <SelectStyled
       {...input}
       {...generateFormArias(meta)}
       classNamePrefix={SharedSelectProps.classNamePrefix}
@@ -109,7 +109,7 @@ export function FormNoValueSelect({
   onChange,
 }: IFormNoValueSelect) {
   return (
-    <StyledSelect
+    <SelectStyled
       classNamePrefix={SharedSelectProps.classNamePrefix}
       value={{ value: "", label: defaultLabel || "" }}
       onChange={({ value, label }: any) => {

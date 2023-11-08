@@ -1,5 +1,5 @@
 import React from "react";
-import { StyledInput } from "./Styles";
+import { Input } from "./Styles";
 import { ISharedFormInput } from "./_types";
 import { wrapLabelAndError, generateFormArias } from "./_wrapForm";
 
@@ -26,7 +26,7 @@ export const FormNumberInput: React.FC<IFormNumberInput> = (formInput) => {
   const moreProps = { min: allowNegative ? Number.NEGATIVE_INFINITY : 0 };
 
   return wrapLabelAndError(
-    <StyledInput
+    <Input
       {...input}
       {...generateFormArias(meta)}
       {...moreProps}

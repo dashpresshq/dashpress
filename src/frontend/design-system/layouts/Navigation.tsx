@@ -10,7 +10,7 @@ interface IRenderNavigation {
   currentTitle: string;
 }
 
-const StyledLeftSideNavMenuList = styled.li<{ $isActive: boolean }>`
+const LeftSideNavMenuList = styled.li<{ $isActive: boolean }>`
   list-style: none;
   display: block;
   width: 100%;
@@ -24,7 +24,7 @@ const StyledLeftSideNavMenuList = styled.li<{ $isActive: boolean }>`
     `}
 `;
 
-const StyledLeftSideNavMenuListAnchor = styled.a`
+const LeftSideNavMenuListAnchor = styled.a`
   display: flex;
   align-items: center;
   width: 100%;
@@ -43,7 +43,7 @@ const StyledLeftSideNavMenuListAnchor = styled.a`
   }
 `;
 
-const StyleMenuIcon = styled.span<{
+const MenuIcon = styled.span<{
   $isActive?: boolean;
 }>`
   color: ${USE_ROOT_COLOR("text-on-primary")};
@@ -55,7 +55,7 @@ const StyleMenuIcon = styled.span<{
   display: inline-block;
 `;
 
-const StyledLeftSideNavMenu = styled.ul`
+const LeftSideNavMenu = styled.ul`
   padding-left: 0;
   margin-bottom: 0;
 
@@ -69,30 +69,30 @@ export function RenderNavigation({
   currentTitle,
 }: IRenderNavigation) {
   return (
-    <StyledLeftSideNavMenu>
+    <LeftSideNavMenu>
       {navigation.map(
         ({ title, icon, action, sideBarAction, secondaryAction }) => {
           const isActive = currentTitle === title;
-          const content = <StyleMenuIcon as={icon} $isActive={isActive} />;
+          const content = <MenuIcon as={icon} $isActive={isActive} />;
           return (
-            <StyledLeftSideNavMenuList
+            <LeftSideNavMenuList
               key={title}
               $isActive={isActive}
               className="brand-tooltip"
             >
               {typeof action === "string" ? (
                 <Link href={action || ""} passHref>
-                  <StyledLeftSideNavMenuListAnchor
+                  <LeftSideNavMenuListAnchor
                     onClick={() => {
                       sideBarAction();
                       secondaryAction?.();
                     }}
                   >
                     {content}
-                  </StyledLeftSideNavMenuListAnchor>
+                  </LeftSideNavMenuListAnchor>
                 </Link>
               ) : (
-                <StyledLeftSideNavMenuListAnchor
+                <LeftSideNavMenuListAnchor
                   as={PlainButton}
                   onClick={() => {
                     action?.();
@@ -101,12 +101,12 @@ export function RenderNavigation({
                   }}
                 >
                   {content}
-                </StyledLeftSideNavMenuListAnchor>
+                </LeftSideNavMenuListAnchor>
               )}
-            </StyledLeftSideNavMenuList>
+            </LeftSideNavMenuList>
           );
         }
       )}
-    </StyledLeftSideNavMenu>
+    </LeftSideNavMenu>
   );
 }

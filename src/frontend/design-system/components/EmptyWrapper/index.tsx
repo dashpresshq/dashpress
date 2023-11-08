@@ -10,7 +10,7 @@ export interface IProps {
   children?: ReactNode;
 }
 
-const StyledWrapper = styled.div`
+const Root = styled.div`
   text-align: center;
   padding: 30px;
   padding-bottom: 20px;
@@ -20,7 +20,7 @@ const StyledWrapper = styled.div`
 
 export function EmptyWrapper({ text, hideIcon, children }: IProps) {
   return (
-    <StyledWrapper>
+    <Root>
       {hideIcon ? null : (
         <Droplet size={50} color={USE_ROOT_COLOR("muted-text")} />
       )}
@@ -28,6 +28,6 @@ export function EmptyWrapper({ text, hideIcon, children }: IProps) {
       <br />
       <Typo.MD color="muted"> {text} </Typo.MD>
       {children}
-    </StyledWrapper>
+    </Root>
   );
 }

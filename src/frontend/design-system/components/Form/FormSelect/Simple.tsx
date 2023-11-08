@@ -2,7 +2,7 @@ import styled, { css } from "styled-components";
 import React from "react";
 import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
 import { ISelectData } from "shared/types/options";
-import { StyledInput } from "../Styles";
+import { Input } from "../Styles";
 
 interface ISimpleSelect {
   options: ISelectData[];
@@ -12,7 +12,7 @@ interface ISimpleSelect {
   sm?: true;
 }
 
-const StyledSimpleSelect = styled(StyledInput)<{ fullWidth?: boolean }>`
+const SimpleSelectStyled = styled(Input)<{ fullWidth?: boolean }>`
   display: inline-block;
   width: 50px;
   vertical-align: middle;
@@ -35,7 +35,7 @@ export function SimpleSelect({
   sm,
 }: ISimpleSelect) {
   return (
-    <StyledSimpleSelect
+    <SimpleSelectStyled
       as="select"
       value={value}
       sm={sm}
@@ -49,6 +49,6 @@ export function SimpleSelect({
           {label}
         </option>
       ))}
-    </StyledSimpleSelect>
+    </SimpleSelectStyled>
   );
 }

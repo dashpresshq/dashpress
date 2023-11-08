@@ -7,7 +7,7 @@ import { Spacer } from "frontend/design-system/primitives/Spacer";
 import { Stack } from "frontend/design-system/primitives/Stack";
 import { Z_INDEXES } from "../../constants/zIndex";
 import { SoftButton } from "../Button/SoftButton";
-import { StyledDeleteButton } from "../Button/Button";
+import { DeleteButtonStyled } from "../Button/Button";
 import { SHADOW_CSS } from "../Card";
 
 interface IProps {
@@ -16,7 +16,7 @@ interface IProps {
   message: string;
 }
 
-const StyledBody = styled.div`
+const Body = styled.div`
   width: 300px;
   padding: 30px;
   text-align: center;
@@ -37,7 +37,7 @@ from {
   }
 `;
 
-const StyledOverlay = styled(Stack).attrs({
+const Overlay = styled(Stack).attrs({
   direction: "column",
   align: "center",
   justify: "center",
@@ -64,14 +64,14 @@ export function Presentation({
   title,
 }: IPresentationProps) {
   return (
-    <StyledOverlay
+    <Overlay
       role="alertdialog"
       aria-modal="true"
       aria-labelledby="confirm_delete_label"
       aria-describedby="confirm_delete_desc"
       tabIndex={-1}
     >
-      <StyledBody>
+      <Body>
         <Typo.MD weight="bold">
           <span id="confirm_delete_label"> {title} </span>
         </Typo.MD>
@@ -82,7 +82,7 @@ export function Presentation({
         <Spacer size="xxl" />
         <Stack justify="center" spacing={8}>
           <SoftButton action={onClose} label="Cancel" />
-          <StyledDeleteButton
+          <DeleteButtonStyled
             type="button"
             size="sm"
             onClick={() => {
@@ -91,10 +91,10 @@ export function Presentation({
             }}
           >
             Confirm
-          </StyledDeleteButton>
+          </DeleteButtonStyled>
         </Stack>
-      </StyledBody>
-    </StyledOverlay>
+      </Body>
+    </Overlay>
   );
 }
 

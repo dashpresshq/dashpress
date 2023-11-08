@@ -10,7 +10,7 @@ import { Typo } from "frontend/design-system/primitives/Typo";
 import { ProgressBar } from "frontend/design-system/components/ProgressBar";
 import { DeleteButton } from "frontend/design-system/components/Button/DeleteButton";
 
-const StyledFileInput = styled.input`
+const FileInput = styled.input`
   position: absolute;
   top: 0;
   right: 0;
@@ -144,7 +144,7 @@ export function Presentation({
           </Typo.MD>
         )}
       </div>
-      <StyledFileInput type="file" {...dropZoneProps.getInputProps()} />
+      <FileInput type="file" {...dropZoneProps.getInputProps()} />
     </Root>
   );
 }

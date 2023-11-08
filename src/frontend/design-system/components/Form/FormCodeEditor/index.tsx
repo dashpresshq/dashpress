@@ -15,7 +15,7 @@ interface IFormCodeEditor extends ISharedFormInput {
   language?: "javascript";
 }
 
-const StyledWrapper = styled.div`
+const Wrapper = styled.div`
   border: 1px solid ${USE_ROOT_COLOR("border-color")};
 
   &.invalid {
@@ -47,7 +47,7 @@ export const FormCodeEditor: React.FC<IFormCodeEditor> = (formInput) => {
   } = formInput;
   noop(onFocus, onBlur);
   return wrapLabelAndError(
-    <StyledWrapper className={`${generateClassNames(meta)} line-numbers`}>
+    <Wrapper className={`${generateClassNames(meta)} line-numbers`}>
       <Editor
         {...inputProps}
         onValueChange={inputProps.onChange}
@@ -62,7 +62,7 @@ export const FormCodeEditor: React.FC<IFormCodeEditor> = (formInput) => {
           fontFamily: '"Fira code", "Fira Mono", monospace',
         }}
       />
-    </StyledWrapper>,
+    </Wrapper>,
     formInput
   );
 };

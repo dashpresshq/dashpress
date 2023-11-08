@@ -6,7 +6,7 @@ import { useChangeRouterParam } from "frontend/lib/routing/useChangeRouterParam"
 import { useRouteParam } from "frontend/lib/routing/useRouteParam";
 import { abbreviateNumber } from "frontend/lib/numbers";
 import { TableSkeleton } from "frontend/design-system/components/Skeleton/Table";
-import { StyledCard } from "frontend/design-system/components/Card";
+import { Card } from "frontend/design-system/components/Card";
 import { Tabs } from "frontend/design-system/components/Tabs";
 import { DetailsCanvas } from "./DetailsCanvas";
 import { TableTopComponent, usePortalTableTabs } from "../portal";
@@ -44,7 +44,7 @@ export function WholeEntityTable({ entity, persistFilters = [] }: IProps) {
   return (
     <>
       <TableTopComponent entity={entity} />
-      <StyledCard>
+      <Card>
         <ViewStateMachine
           error={entityViews.error || portalTableTabs.error}
           loading={entityViews.isLoading || portalTableTabs.isLoading}
@@ -84,7 +84,7 @@ export function WholeEntityTable({ entity, persistFilters = [] }: IProps) {
             />
           )}
         </ViewStateMachine>
-      </StyledCard>
+      </Card>
       <DetailsCanvas />
     </>
   );

@@ -4,11 +4,7 @@ import styled from "styled-components";
 import { Stack } from "frontend/design-system/primitives/Stack";
 import { useThemeColorShade } from "frontend/design-system/theme/useTheme";
 import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
-import {
-  StyledOutlineButton,
-  IStyledBaseButton,
-  StyledBaseButton,
-} from "../Button";
+import { OutlineButton, IStyledBaseButton, StyledBaseButton } from "../Button";
 import { Spin } from "../../_/Spin";
 import { ICON_MAP, ButtonIconTypes } from "../constants";
 
@@ -85,7 +81,7 @@ export function FormButton({
   return (
     <Stack justify="end">
       {isInverse ? (
-        <StyledOutlineButton {...options}>{toRender}</StyledOutlineButton>
+        <OutlineButton {...options}>{toRender}</OutlineButton>
       ) : (
         <StyledButton
           {...options}

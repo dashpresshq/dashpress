@@ -32,7 +32,7 @@ const DirectionImplementation: Record<
   },
 };
 
-const StyledIconRoot = styled.div<{ color: string }>`
+const IconRoot = styled.div<{ color: string }>`
   background: ${(props) => props.color}2A;
   color: ${(props) => props.color};
   border: 1px solid ${(props) => props.color};
@@ -45,12 +45,12 @@ const StyledIconRoot = styled.div<{ color: string }>`
   align-items: center;
 `;
 
-const StyledRelativeCount = styled(Typo.XS)<{ directionColor: string }>`
+const RelativeCount = styled(Typo.XS)<{ directionColor: string }>`
   lineheight: 20.5px;
   color: ${(props) => props.directionColor};
 `;
 
-const StyledDirectionRoot = styled(Stack)<{ color: string }>`
+const DirectionRoot = styled(Stack)<{ color: string }>`
   border: 1px solid transparent;
   width: auto;
   border-radius: 8px;
@@ -85,7 +85,7 @@ export function SummaryWidget({
 
   return (
     <Stack spacing={18} align="center">
-      <StyledIconRoot
+      <IconRoot
         color={color}
         aria-label={`${title} Icon`}
         dangerouslySetInnerHTML={{ __html: icon }}
@@ -97,7 +97,7 @@ export function SummaryWidget({
             {fullCount}
           </Typo.L>
           {relativeCount ? (
-            <StyledDirectionRoot
+            <DirectionRoot
               color={directionColor}
               spacing={2}
               align="center"
@@ -109,14 +109,14 @@ export function SummaryWidget({
                   style={{ color: directionColor, verticalAlign: "sub" }}
                 />
               </span>
-              <StyledRelativeCount
+              <RelativeCount
                 weight="bold"
                 aria-label="Relative Count"
                 directionColor={directionColor}
               >
                 {relativeCount}
-              </StyledRelativeCount>
-            </StyledDirectionRoot>
+              </RelativeCount>
+            </DirectionRoot>
           ) : null}
         </Stack>
       </div>

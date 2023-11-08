@@ -1,9 +1,6 @@
 import React, { ReactNode } from "react";
 import styled from "styled-components";
-import {
-  SHADOW_CSS,
-  StyledCardBody,
-} from "frontend/design-system/components/Card";
+import { SHADOW_CSS, CardBody } from "frontend/design-system/components/Card";
 import { GuestHeader, GuestContainer } from "./_partials";
 
 export interface IProps {
@@ -38,7 +35,7 @@ export function GuestLayout({
     <GuestContainer>
       <Root>
         <GuestHeader title={title} subTitle={subTitle} {...appDetails} />
-        <StyledCardBody>{children}</StyledCardBody>
+        <CardBody>{children}</CardBody>
       </Root>
     </GuestContainer>
   );

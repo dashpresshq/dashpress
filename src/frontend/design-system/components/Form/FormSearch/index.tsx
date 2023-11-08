@@ -2,10 +2,10 @@ import React from "react";
 import styled from "styled-components";
 import { Search } from "react-feather";
 import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
-import { StyledInput } from "../Styles";
+import { Input } from "../Styles";
 import { StyledBaseButton } from "../../Button/Button";
 
-const StyledInputGroup = styled.div`
+const InputGroup = styled.div`
   position: relative;
   display: flex;
   flex-wrap: wrap;
@@ -20,12 +20,12 @@ const StyledInputGroup = styled.div`
   }
 `;
 
-const StyledInputGroupPrepend = styled.span`
+const InputGroupPrepend = styled.span`
   margin-right: -1px;
   display: flex;
 `;
 
-const StyledButtonSearch = styled(StyledBaseButton)`
+const ButtonSearch = styled(StyledBaseButton)`
   border-bottom: 1px solid ${USE_ROOT_COLOR("border-color")};
   border-radius: 0;
   color: ${USE_ROOT_COLOR("primary-color")};
@@ -34,7 +34,7 @@ const StyledButtonSearch = styled(StyledBaseButton)`
   }
 `;
 
-const StyledFormSearch = styled(StyledInput)`
+const FormSearchStyled = styled(Input)`
   border-radius: 0;
   border-top: 0;
   border-left: 0;
@@ -54,17 +54,17 @@ interface IProps {
 
 export function FormSearch({ onChange }: IProps) {
   return (
-    <StyledInputGroup>
-      <StyledFormSearch
+    <InputGroup>
+      <FormSearchStyled
         type="search"
         onChange={(e) => onChange(e.target.value.toLowerCase())}
         placeholder="Search"
       />
-      <StyledInputGroupPrepend>
-        <StyledButtonSearch type="button">
+      <InputGroupPrepend>
+        <ButtonSearch type="button">
           <Search size={18} />
-        </StyledButtonSearch>
-      </StyledInputGroupPrepend>
-    </StyledInputGroup>
+        </ButtonSearch>
+      </InputGroupPrepend>
+    </InputGroup>
   );
 }

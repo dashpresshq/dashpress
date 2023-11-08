@@ -4,7 +4,7 @@ import styled, { css } from "styled-components";
 import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
 import { ILabelValue } from "shared/types/options";
 
-const StyledBreadcrumb = styled.ol`
+const Breadcrumb = styled.ol`
   display: flex;
   flex-wrap: wrap;
   margin: 0;
@@ -17,7 +17,7 @@ const StyledBreadcrumb = styled.ol`
   background-color: transparent;
 `;
 
-const StyledBreadcrumbItem = styled.li`
+const BreadcrumbItem = styled.li`
   display: flex;
   color: ${USE_ROOT_COLOR("muted-text")};
 
@@ -39,7 +39,7 @@ const StyledBreadcrumbItem = styled.li`
   }
 `;
 
-const StyledBreadcrumbItemLink = styled.button<{ active: boolean }>`
+const BreadcrumbItemLink = styled.button<{ active: boolean }>`
   font-weight: 400;
   border: none;
   padding: 0;
@@ -62,31 +62,31 @@ export interface IProps {
 export function Breadcrumbs({ items, onCrumbClick }: IProps) {
   const itemsLength = items.length;
   return (
-    <StyledBreadcrumb>
+    <Breadcrumb>
       {items.map(({ label, value }, index) => {
         const isLastElement = index === itemsLength - 1;
         return (
-          <StyledBreadcrumbItem key={value}>
+          <BreadcrumbItem key={value}>
             {/* eslint-disable-next-line no-nested-ternary */}
             {isLastElement ? (
               label
             ) : onCrumbClick ? (
-              <StyledBreadcrumbItemLink
+              <BreadcrumbItemLink
                 active={isLastElement}
                 onClick={() => onCrumbClick(index)}
               >
                 {label}
-              </StyledBreadcrumbItemLink>
+              </BreadcrumbItemLink>
             ) : (
               <Link href={value} passHref>
-                <StyledBreadcrumbItemLink active={isLastElement}>
+                <BreadcrumbItemLink active={isLastElement}>
                   {label}
-                </StyledBreadcrumbItemLink>
+                </BreadcrumbItemLink>
               </Link>
             )}
-          </StyledBreadcrumbItem>
+          </BreadcrumbItem>
         );
       })}
-    </StyledBreadcrumb>
+    </Breadcrumb>
   );
 }

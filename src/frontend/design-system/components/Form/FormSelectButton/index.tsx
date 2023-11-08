@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { sluggify } from "shared/lib/strings";
 import { ISelectData } from "shared/types/options";
-import { StyledOutlineButton } from "../../Button/Button";
+import { OutlineButton } from "../../Button/Button";
 import { IBaseFormSelect } from "../FormSelect/types";
 import { generateFormArias, wrapLabelAndError } from "../_wrapForm";
 
@@ -14,7 +14,7 @@ interface IProps {
   onChange: (value: string | boolean) => void;
 }
 
-const StyledInput = styled.input`
+const Input = styled.input`
   position: absolute;
   clip: rect(0, 0, 0, 0);
   pointer-events: none;
@@ -51,7 +51,7 @@ function BaseFormSelectButton({
           (index === 0 && selectedValue === undefined);
 
         return (
-          <StyledOutlineButton
+          <OutlineButton
             type="button"
             role="option"
             aria-selected={isChecked}
@@ -60,7 +60,7 @@ function BaseFormSelectButton({
             className={isChecked ? "active" : ""}
             onClick={() => onChange(value)}
           >
-            <StyledInput
+            <Input
               type="radio"
               name={`${name}__${sluggify(
                 // eslint-disable-next-line no-nested-ternary
@@ -70,7 +70,7 @@ function BaseFormSelectButton({
               checked={isChecked}
             />
             {label}
-          </StyledOutlineButton>
+          </OutlineButton>
         );
       })}
     </Root>

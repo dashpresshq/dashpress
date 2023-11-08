@@ -7,7 +7,7 @@ import { Typo } from "frontend/design-system/primitives/Typo";
 import { Spacer } from "frontend/design-system/primitives/Spacer";
 import { DeleteButton } from "../../Button/DeleteButton";
 import { SoftButton } from "../../Button/SoftButton";
-import { StyledCard, StyledCardBody, StyledCardHeader } from "../../Card";
+import { Card, CardBody, CardHeader } from "../../Card";
 import { Tooltip } from "../../Tooltip";
 import { ButtonIconTypes } from "../../Button/constants";
 import { BaseSkeleton } from "../../Skeleton/Base";
@@ -35,7 +35,7 @@ export interface IProps {
   sideText?: string;
 }
 
-const StyledDeleteButton = styled(DeleteButton)`
+const DeleteButtonStyle = styled(DeleteButton)`
   margin-left: 0.25rem;
 `;
 
@@ -67,9 +67,9 @@ export function SectionBox({
           <Spacer />
         </>
       )}
-      <StyledCard>
+      <Card>
         {!headLess ? (
-          <StyledCardHeader>
+          <CardHeader>
             <Stack justify="space-between" align="center">
               <Stack>
                 {isLoading ? (
@@ -118,7 +118,7 @@ export function SectionBox({
                     <SoftButton action={newItemLink} icon="add" />
                   ) : null}
                   {deleteAction && !isLoading ? (
-                    <StyledDeleteButton
+                    <DeleteButtonStyle
                       onDelete={deleteAction.action}
                       shouldConfirmAlert={deleteAction.shouldConfirmAlert}
                       isMakingDeleteRequest={deleteAction.isMakingDeleteRequest}
@@ -127,10 +127,10 @@ export function SectionBox({
                 </Stack>
               ) : null}
             </Stack>
-          </StyledCardHeader>
+          </CardHeader>
         ) : null}
-        {children ? <StyledCardBody>{children}</StyledCardBody> : null}
-      </StyledCard>
+        {children ? <CardBody>{children}</CardBody> : null}
+      </Card>
     </>
   );
 }

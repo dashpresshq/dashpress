@@ -3,7 +3,7 @@ import styled, { css } from "styled-components";
 import { SYSTEM_COLORS } from "frontend/design-system/theme/system";
 import { StyledBadge } from "./Base";
 
-const StyledBadgePill = styled(StyledBadge)<{
+const BadgePillStyled = styled(StyledBadge)<{
   isIconBadge?: true;
   color: string;
 }>`
@@ -38,8 +38,8 @@ export function BadgePill({ value, color, isIconBadge }: IProps) {
     return null;
   }
   return (
-    <StyledBadgePill color={color} isIconBadge={isIconBadge}>
+    <BadgePillStyled color={color} isIconBadge={isIconBadge}>
       {value}
-    </StyledBadgePill>
+    </BadgePillStyled>
   );
 }

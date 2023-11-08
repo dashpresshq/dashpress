@@ -15,7 +15,7 @@ const Root = styled.div`
   flex-direction: row;
 `;
 
-const StyledPage = styled.div<{ $isFullWidth: boolean }>`
+const Page = styled.div<{ $isFullWidth: boolean }>`
   padding: 16px;
   min-height: 100vh;
   display: block;
@@ -43,7 +43,7 @@ export function LayoutImplementation({ children }: IProps) {
   return (
     <Root>
       <SideBar isFullWidth={isFullWidth} setIsFullWidth={setIsFullWidth} />
-      <StyledPage $isFullWidth={isFullWidth}>{children}</StyledPage>
+      <Page $isFullWidth={isFullWidth}>{children}</Page>
     </Root>
   );
 }

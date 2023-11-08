@@ -22,7 +22,7 @@ interface IProps extends IBaseFormSelect {
   limit?: number;
 }
 
-export const StyledSelect = styled(AsyncSelect)`
+export const Select = styled(AsyncSelect)`
   ${SelectStyles}
 `;
 
@@ -96,7 +96,7 @@ export function AsyncFormSelect(props: IProps) {
 
   if (data.length >= limit) {
     return wrapLabelAndError(
-      <StyledSelect
+      <Select
         cacheOptions
         defaultOptions
         {...input}
@@ -140,7 +140,7 @@ export function AsyncFormMultiSelect({
     values.map((value) => ({ value, label: value }))
   );
   return (
-    <StyledSelect
+    <Select
       cacheOptions
       defaultOptions
       classNamePrefix={SharedSelectProps.classNamePrefix}

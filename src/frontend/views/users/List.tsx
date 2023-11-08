@@ -17,7 +17,7 @@ import { userFriendlyCase } from "shared/lib/strings/friendly-case";
 import { SoftButton } from "frontend/design-system/components/Button/SoftButton";
 import { Stack } from "frontend/design-system/primitives/Stack";
 import { DeleteButton } from "frontend/design-system/components/Button/DeleteButton";
-import { StyledCard } from "frontend/design-system/components/Card";
+import { Card } from "frontend/design-system/components/Card";
 import { ADMIN_ROLES_CRUD_CONFIG } from "../roles/roles.store";
 import {
   ADMIN_USERS_CRUD_CONFIG,
@@ -126,13 +126,13 @@ export function ListUsers() {
         },
       ]}
     >
-      <StyledCard>
+      <Card>
         <FEPaginationTable
           dataEndpoint={ADMIN_USERS_CRUD_CONFIG.ENDPOINTS.LIST}
           columns={columns}
           emptyMessage={ADMIN_USERS_CRUD_CONFIG.TEXT_LANG.EMPTY_LIST}
         />
-      </StyledCard>
+      </Card>
     </AppLayout>
   );
 }

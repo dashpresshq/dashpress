@@ -5,12 +5,7 @@ import { HelpCircle } from "react-feather";
 import { Stack } from "frontend/design-system/primitives/Stack";
 import { ISharedFormInput } from "./_types";
 import { Tooltip } from "../Tooltip";
-import {
-  StyledFormGroup,
-  StyledFormLabel,
-  StyledFormFeedback,
-  StyledRequiredAsterick,
-} from "./Styles";
+import { FormGroup, FormLabel, FormFeedback, RequiredAsterick } from "./Styles";
 import { SoftButton } from "../Button/SoftButton";
 
 export const isFormMetaWithError = (meta: FieldMetaState<any>) =>
@@ -31,18 +26,16 @@ export const wrapLabelAndError = (
     rightActions = [],
   }: ISharedFormInput
 ) => (
-  <StyledFormGroup>
+  <FormGroup>
     <>
       <Stack justify="space-between" align="baseline">
         <div>
           {label && (
             <>
-              <StyledFormLabel sm={sm} htmlFor={input.name}>
+              <FormLabel sm={sm} htmlFor={input.name}>
                 {label}
-              </StyledFormLabel>
-              {required ? (
-                <StyledRequiredAsterick> *</StyledRequiredAsterick>
-              ) : null}
+              </FormLabel>
+              {required ? <RequiredAsterick> *</RequiredAsterick> : null}
             </>
           )}
           {description ? (
@@ -65,15 +58,15 @@ export const wrapLabelAndError = (
         </Stack>
       </Stack>
       {formComponent}
-      <StyledFormFeedback
+      <FormFeedback
         role={isFormMetaWithError(meta) ? "alert" : undefined}
         sm={sm}
       >
         {isFormMetaWithError(meta)}
         &nbsp;
-      </StyledFormFeedback>
+      </FormFeedback>
     </>
-  </StyledFormGroup>
+  </FormGroup>
 );
 
 export const generateClassNames = (meta: FieldMetaState<any>): string =>

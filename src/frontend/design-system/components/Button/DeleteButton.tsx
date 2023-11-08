@@ -3,7 +3,7 @@ import { Loader, Trash2 } from "react-feather";
 import { Stack } from "../../primitives/Stack";
 import { ConfirmAlert } from "../ConfirmAlert";
 import { Spin } from "../_/Spin";
-import { StyledDeleteButton } from "./Button";
+import { DeleteButtonStyled } from "./Button";
 
 interface IProps {
   onDelete: () => void;
@@ -21,7 +21,7 @@ export function DeleteButton({
   shouldConfirmAlert = true,
 }: IProps) {
   return (
-    <StyledDeleteButton
+    <DeleteButtonStyled
       size={size}
       type="button"
       justIcon={!text}
@@ -50,6 +50,6 @@ export function DeleteButton({
           {text ? ` Delete ${text}` : null}
         </>
       </Stack>
-    </StyledDeleteButton>
+    </DeleteButtonStyled>
   );
 }

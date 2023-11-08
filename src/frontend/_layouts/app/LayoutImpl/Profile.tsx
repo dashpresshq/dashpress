@@ -25,7 +25,7 @@ const Name = styled(Typo.XS)`
   color: ${SYSTEM_COLORS.white};
 `;
 
-const StyledDropDownItem = styled.button`
+const DropDownItem = styled.button`
   display: block;
   width: 100%;
   padding: 6px 12px;
@@ -76,12 +76,9 @@ export function ProfileOnNavigation({ isFullWidth }: IProps) {
         <DownRoot direction="column">
           {[...constantNavigation, ...constantNavigationMenuItems].map(
             ({ label, value }) => (
-              <StyledDropDownItem
-                key={label}
-                onClick={() => router.push(value)}
-              >
+              <DropDownItem key={label} onClick={() => router.push(value)}>
                 {label}
-              </StyledDropDownItem>
+              </DropDownItem>
             )
           )}
         </DownRoot>

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { IntegrationsConfigurationGroup } from "shared/types/integrations";
 import { INTEGRATIONS_GROUP_CONFIG } from "shared/config-bag/integrations";
-import { StyledCard } from "frontend/design-system/components/Card";
+import { Card } from "frontend/design-system/components/Card";
 import { Tabs } from "frontend/design-system/components/Tabs";
 import { ManageCredentialGroup } from "./ManageCredentialGroup";
 
@@ -10,7 +10,7 @@ export function BaseManageVariables() {
     IntegrationsConfigurationGroup.Constants
   );
   return (
-    <StyledCard>
+    <Card>
       <Tabs
         padContent={false}
         currentTab={currentTab}
@@ -42,7 +42,7 @@ export function BaseManageVariables() {
           },
         ]}
       />
-    </StyledCard>
+    </Card>
   );
 }
 

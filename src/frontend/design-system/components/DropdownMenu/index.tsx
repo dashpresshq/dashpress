@@ -5,7 +5,7 @@ import { Icon, Loader } from "react-feather";
 import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
 import { Stack } from "frontend/design-system/primitives/Stack";
 import { Typo } from "frontend/design-system/primitives/Typo";
-import { StyledSoftButton } from "../Button/Button";
+import { SoftButtonStyled } from "../Button/Button";
 import { BREAKPOINTS } from "../../constants";
 import { Spin } from "../_/Spin";
 import { SHADOW_CSS } from "../Card";
@@ -28,12 +28,13 @@ export interface IProps {
 }
 
 const Label = styled.span`
+  text-wrap: nowrap;
   @media (max-width: ${BREAKPOINTS.sm}) {
     display: none;
   }
 `;
 
-const StyledDropDownItem = styled.button`
+const DropDownItem = styled.button`
   display: block;
   width: 100%;
   padding: 6px 12px;
@@ -52,7 +53,7 @@ const StyledDropDownItem = styled.button`
   }
 `;
 
-const StyledDropDownMenu = styled(Dropdown.Menu)`
+const DropDownMenuStyled = styled(Dropdown.Menu)`
   ${SHADOW_CSS}
   margin: 0;
 
@@ -81,7 +82,7 @@ const StyledDropDownMenu = styled(Dropdown.Menu)`
   }
 `;
 
-const StyledSROnly = styled.span`
+const SROnly = styled.span`
   border: 0;
   clip: rect(0, 0, 0, 0);
   height: 1px;
@@ -92,7 +93,7 @@ const StyledSROnly = styled.span`
   width: 1px;
 `;
 
-const StyledDropDownToggle = styled(StyledSoftButton)`
+const DropDownToggle = styled(SoftButtonStyled)`
   display: inline-block;
   margin-left: -1px;
   border-top-left-radius: 0;
@@ -112,7 +113,7 @@ const StyledDropDownToggle = styled(StyledSoftButton)`
   }
 `;
 
-const StyledCurrentButton = styled(StyledSoftButton)`
+const CurrentButton = styled(SoftButtonStyled)`
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
 `;
@@ -171,13 +172,13 @@ export function DropDownMenu({
 
   if (menuItems.length === 1) {
     return (
-      <StyledSoftButton
+      <SoftButtonStyled
         size="sm"
         disabled={isMakingActionRequest || disabled}
         onClick={() => onClick()}
       >
         {currentItem}
-      </StyledSoftButton>
+      </SoftButtonStyled>
     );
   }
 
@@ -190,22 +191,19 @@ export function DropDownMenu({
       align="end"
       onToggle={toggleDropDown}
     >
-      <StyledCurrentButton
+      <CurrentButton
         size="sm"
         disabled={isMakingActionRequest || disabled}
         onClick={() => onClick()}
       >
         {currentItem}
-      </StyledCurrentButton>
-      <StyledDropDownToggle split as={Dropdown.Toggle} size="sm">
-        <StyledSROnly>Toggle Dropdown</StyledSROnly>
-      </StyledDropDownToggle>
-      <StyledDropDownMenu>
+      </CurrentButton>
+      <DropDownToggle split as={Dropdown.Toggle} size="sm">
+        <SROnly>Toggle Dropdown</SROnly>
+      </DropDownToggle>
+      <DropDownMenuStyled>
         {menuItems.map(({ label: label$1, description }, index) => (
-          <StyledDropDownItem
-            key={label$1}
-            onClick={() => onMenuItemClick(index)}
-          >
+          <DropDownItem key={label$1} onClick={() => onMenuItemClick(index)}>
             <Typo.XS as="span">{label$1}</Typo.XS>
             <br />
             {description ? (
@@ -213,9 +211,9 @@ export function DropDownMenu({
                 {description}
               </Typo.XS>
             ) : null}
-          </StyledDropDownItem>
+          </DropDownItem>
         ))}
-      </StyledDropDownMenu>
+      </DropDownMenuStyled>
     </Dropdown>
   );
 }

@@ -15,7 +15,7 @@ import { IRolesList } from "shared/types/roles";
 import { SoftButton } from "frontend/design-system/components/Button/SoftButton";
 import { Stack } from "frontend/design-system/primitives/Stack";
 import { DeleteButton } from "frontend/design-system/components/Button/DeleteButton";
-import { StyledCard } from "frontend/design-system/components/Card";
+import { Card } from "frontend/design-system/components/Card";
 import {
   ADMIN_ROLES_CRUD_CONFIG,
   useRoleDeletionMutation,
@@ -86,13 +86,13 @@ export function ListRoles() {
         },
       ]}
     >
-      <StyledCard>
+      <Card>
         <FEPaginationTable
           dataEndpoint={ADMIN_ROLES_CRUD_CONFIG.ENDPOINTS.LIST}
           emptyMessage={ADMIN_ROLES_CRUD_CONFIG.TEXT_LANG.EMPTY_LIST}
           columns={columns}
         />
-      </StyledCard>
+      </Card>
     </AppLayout>
   );
 }

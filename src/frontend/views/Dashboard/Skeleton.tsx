@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { BaseSkeleton } from "frontend/design-system/components/Skeleton/Base";
 import { TableSkeleton } from "frontend/design-system/components/Skeleton/Table";
-import { StyledCard } from "frontend/design-system/components/Card";
+import { Card } from "frontend/design-system/components/Card";
 import { gridRoot, WidgetRoot } from "./styles";
 
 const Root = styled.div`
@@ -10,7 +10,7 @@ const Root = styled.div`
 
 export function DashboardSkeleton() {
   return (
-    <StyledCard>
+    <Card>
       <Root style={{ padding: 10 }}>
         <BaseSkeleton height="100px" />
         <BaseSkeleton height="100px" />
@@ -26,6 +26,6 @@ export function DashboardSkeleton() {
           <TableSkeleton />
         </WidgetRoot>
       </Root>
-    </StyledCard>
+    </Card>
   );
 }

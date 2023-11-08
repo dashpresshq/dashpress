@@ -1,5 +1,8 @@
 import React, { ReactNode, useId } from "react";
-import { ChevronRight, Icon } from "react-feather";
+import {
+  ChevronRight as ChevronRightIcon,
+  Icon as IconType,
+} from "react-feather";
 import Link from "next/link";
 import styled, { css } from "styled-components";
 import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
@@ -8,7 +11,7 @@ import { FormButton } from "../../Button/FormButton";
 import { FormSwitch } from "../../Form/FormSwitch";
 import { ButtonIconTypes } from "../../Button/constants";
 
-const StyledChevronRight = styled(ChevronRight)<{ $active?: boolean }>`
+const ChevronRight = styled(ChevronRightIcon)<{ $active?: boolean }>`
   width: 14px;
   color: ${(props) =>
     props.$active
@@ -31,7 +34,7 @@ export function SectionList({ children }: { children: ReactNode }) {
   return <Root>{children}</Root>;
 }
 
-const StyledListItem = styled.button<{
+const ListItem = styled.button<{
   active: boolean;
   disabled: boolean;
   size?: "xs";
@@ -106,7 +109,7 @@ const StyledListItem = styled.button<{
   }
 `;
 
-const StyledSublabel = styled.p<{ $active?: boolean }>`
+const SubLabel = styled.p<{ $active?: boolean }>`
   color: ${(props) =>
     props.$active
       ? USE_ROOT_COLOR("text-on-primary")
@@ -117,7 +120,7 @@ const StyledSublabel = styled.p<{ $active?: boolean }>`
   line-height: 0.6;
 `;
 
-const StyledIcon = styled.span<{ $active?: boolean; $subtle?: boolean }>`
+const Icon = styled.span<{ $active?: boolean; $subtle?: boolean }>`
   color: ${(props) =>
     // eslint-disable-next-line no-nested-ternary
     props.$active
@@ -127,7 +130,7 @@ const StyledIcon = styled.span<{ $active?: boolean; $subtle?: boolean }>`
       : USE_ROOT_COLOR("main-text")};
 `;
 
-const Styledlabel = styled.label<{ $active?: boolean; $subtle?: boolean }>`
+const Label = styled.label<{ $active?: boolean; $subtle?: boolean }>`
   cursor: pointer;
   color: ${(props) =>
     // eslint-disable-next-line no-nested-ternary
@@ -144,7 +147,7 @@ export interface IProps {
   secondaryAction?: () => void;
   size?: "xs";
   subLabel?: string;
-  IconComponent?: Icon;
+  IconComponent?: IconType;
   disabled?: boolean;
   subtle?: boolean;
   active?: boolean;
@@ -180,7 +183,7 @@ export function SectionListItem({
     <Stack>
       <Stack align="center">
         {IconComponent ? (
-          <StyledIcon
+          <Icon
             as={IconComponent}
             $active={active}
             $subtle={subtle}
@@ -188,12 +191,10 @@ export function SectionListItem({
           />
         ) : null}{" "}
         <div>
-          <Styledlabel htmlFor={id} $active={active} $subtle={subtle}>
+          <Label htmlFor={id} $active={active} $subtle={subtle}>
             {label}
-          </Styledlabel>
-          {subLabel ? (
-            <StyledSublabel $active={active}>{subLabel}</StyledSublabel>
-          ) : null}
+          </Label>
+          {subLabel ? <SubLabel $active={active}>{subLabel}</SubLabel> : null}
         </div>
       </Stack>
       <Stack justify="end" width="initial">
@@ -225,7 +226,7 @@ export function SectionListItem({
           )}
           {!(disabled || typeof action !== "string") ? (
             <div>
-              <StyledChevronRight $active={active} />
+              <ChevronRight $active={active} />
             </div>
           ) : null}
           {toggle && (
@@ -251,7 +252,7 @@ export function SectionListItem({
   if (typeof action === "string") {
     return (
       <Link href={action} passHref>
-        <StyledListItem
+        <ListItem
           as="a"
           {...buttonProps}
           onClick={() => {
@@ -259,13 +260,13 @@ export function SectionListItem({
           }}
         >
           {content}
-        </StyledListItem>
+        </ListItem>
       </Link>
     );
   }
 
   return (
-    <StyledListItem
+    <ListItem
       onClick={(e: { stopPropagation: () => void }) => {
         e.stopPropagation();
         action?.();
@@ -275,6 +276,6 @@ export function SectionListItem({
       {...buttonProps}
     >
       {content}
-    </StyledListItem>
+    </ListItem>
   );
 }

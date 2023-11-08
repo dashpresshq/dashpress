@@ -14,16 +14,16 @@ const Root = styled.div`
   background-size: 15px 15px;
 `;
 
-const StyledWrapperRow = styled(Stack)`
+const WrapperRow = styled(Stack)`
   height: 100vh;
 `;
 
 export function GuestContainer({ children }: { children: ReactNode }) {
   return (
     <Root>
-      <StyledWrapperRow justify="center" align="center">
+      <WrapperRow justify="center" align="center">
         {children}
-      </StyledWrapperRow>
+      </WrapperRow>
     </Root>
   );
 }

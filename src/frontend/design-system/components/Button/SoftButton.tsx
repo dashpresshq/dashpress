@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Loader } from "react-feather";
 import { SYSTEM_COLORS } from "frontend/design-system/theme/system";
 import { Stack } from "frontend/design-system/primitives/Stack";
-import { StyledSoftButton } from "./Button";
+import { SoftButtonStyled } from "./Button";
 import { ButtonIconTypes, ICON_MAP } from "./constants";
 import { Spin } from "../_/Spin";
 
@@ -72,7 +72,7 @@ export function SoftButton({
   if (typeof action === "string") {
     return (
       <Link href={action} passHref>
-        <StyledSoftButton
+        <SoftButtonStyled
           {...buttonProps}
           as="a"
           target={action.startsWith("http") ? "_blank" : undefined}
@@ -84,13 +84,13 @@ export function SoftButton({
           ) : (
             content
           )}
-        </StyledSoftButton>
+        </SoftButtonStyled>
       </Link>
     );
   }
 
   return (
-    <StyledSoftButton
+    <SoftButtonStyled
       {...buttonProps}
       type={type}
       onClick={(e: { stopPropagation: () => void }) => {
@@ -99,6 +99,6 @@ export function SoftButton({
       }}
     >
       {content}
-    </StyledSoftButton>
+    </SoftButtonStyled>
   );
 }

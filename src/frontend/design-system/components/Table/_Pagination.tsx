@@ -6,7 +6,7 @@ import { Stack } from "frontend/design-system/primitives/Stack";
 import { Typo } from "frontend/design-system/primitives/Typo";
 import { SimpleSelect } from "../Form/FormSelect/Simple";
 
-const StyledPagination = styled.div`
+const Pagination = styled.div`
   .pagination {
     display: flex;
     padding-left: 0;
@@ -85,7 +85,7 @@ export function TablePagination({
           entries of <b>{Intl.NumberFormat("en-US").format(totalRecords)}</b>{" "}
           results
         </Typo.MD>
-        <StyledPagination>
+        <Pagination>
           <ReactPaginate
             previousLabel="prev"
             nextLabel="next"
@@ -109,7 +109,7 @@ export function TablePagination({
               gotoPage(selected);
             }}
           />
-        </StyledPagination>
+        </Pagination>
       </Stack>
     </Root>
   );

@@ -73,16 +73,16 @@ export const InputStyles = css<IInput>`
   }
 `;
 
-export const StyledInput = styled.input<IInput>`
+export const Input = styled.input<IInput>`
   ${InputStyles}
 `;
 
-export const StyledFormGroup = styled.div`
+export const FormGroup = styled.div`
   margin-bottom: 0px;
   margin-top: 0px;
 `;
 
-export const StyledFormLabel = styled.label<{ sm?: true }>`
+export const FormLabel = styled.label<{ sm?: true }>`
   padding-bottom: 1px;
   margin-bottom: 0;
   font-size: inherit;
@@ -98,7 +98,7 @@ export const StyledFormLabel = styled.label<{ sm?: true }>`
   color: ${USE_ROOT_COLOR("main-text")};
 `;
 
-export const StyledFormFeedback = styled.p<{ sm?: true }>`
+export const FormFeedback = styled.p<{ sm?: true }>`
   color: ${SYSTEM_COLORS.danger};
   font-size: 12px;
   padding-bottom: 0px;
@@ -110,7 +110,7 @@ export const StyledFormFeedback = styled.p<{ sm?: true }>`
     `}
 `;
 
-export const StyledRequiredAsterick = styled.span`
+export const RequiredAsterick = styled.span`
   color: ${SYSTEM_COLORS.danger};
   font-weight: bolder;
 `;

@@ -18,15 +18,15 @@ import { NavigationSkeleton } from "./NavigationSkeleton";
 import { ProfileOnNavigation } from "./Profile";
 import { RenderNavigation } from "./RenderNavigation";
 
-const StyledLogoSm = styled.img`
+const LogoSm = styled.img`
   width: 28px;
 `;
 
-const StyledLogoFull = styled.img`
+const LogoFull = styled.img`
   width: 120px;
 `;
 
-const StyledBrand = styled.div`
+const Brand = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -56,7 +56,7 @@ const Root = styled.div<{ $isFullWidth: boolean }>`
       : SIDE_BAR_WIDTH_VARIATIONS.collapsed}px;
 `;
 
-const StyledIconRoot = styled.span<{ $isFullWidth: boolean }>`
+const IconRoot = styled.span<{ $isFullWidth: boolean }>`
   color: ${SYSTEM_COLORS.white};
   width: 32px;
   height: 32px;
@@ -65,7 +65,7 @@ const StyledIconRoot = styled.span<{ $isFullWidth: boolean }>`
   ${(props) => props.$isFullWidth && "transform: rotate(180deg);"}
 `;
 
-export const StyledPlainButton = styled.button`
+export const PlainButton = styled.button`
   &:focus {
     outline: 0;
   }
@@ -105,19 +105,19 @@ export function SideBar({ isFullWidth, setIsFullWidth }: IProps) {
 
   return (
     <Root $isFullWidth={isFullWidth}>
-      <StyledBrand
+      <Brand
         style={{
           backgroundColor: getThemeColorShade("primary-color", 35),
         }}
       >
         <Link href="/">
           {isFullWidth ? (
-            <StyledLogoFull src={siteConfig.fullLogo} alt="full logo" />
+            <LogoFull src={siteConfig.fullLogo} alt="full logo" />
           ) : (
-            <StyledLogoSm src={siteConfig.logo} alt="small logo" />
+            <LogoSm src={siteConfig.logo} alt="small logo" />
           )}
         </Link>
-      </StyledBrand>
+      </Brand>
       <Stack
         justify="space-between"
         direction="column"
@@ -143,14 +143,14 @@ export function SideBar({ isFullWidth, setIsFullWidth }: IProps) {
           </ViewStateMachine>
         </Scroll>
 
-        <StyledPlainButton
+        <PlainButton
           style={{
             backgroundColor: getThemeColorShade("primary-color", 30),
           }}
           onClick={() => setIsFullWidth(!isFullWidth)}
         >
-          <StyledIconRoot as={ChevronRight} $isFullWidth={isFullWidth} />
-        </StyledPlainButton>
+          <IconRoot as={ChevronRight} $isFullWidth={isFullWidth} />
+        </PlainButton>
       </Stack>
     </Root>
   );

@@ -20,20 +20,20 @@ import { BaseSkeleton } from "../Skeleton/Base";
 
 export { DEFAULT_TABLE_STATE };
 
-const StyledTableResponsive = styled.div`
+const TableResponsive = styled.div`
   display: block;
   width: 100%;
   -webkit-overflow-scrolling: touch;
 `;
 
-const StyledTableRoot = styled.div<{ $enforceHeight?: boolean }>`
+const TableRoot = styled.div<{ $enforceHeight?: boolean }>`
   position: relative;
   overflow-x: auto;
   background: ${USE_ROOT_COLOR("base-color")};
   ${(props) => props.$enforceHeight && `min-height: 500px;`}
 `;
 
-const StyledTable = styled.table<{ $border?: boolean }>`
+const TableStyles = styled.table<{ $border?: boolean }>`
   width: 100%;
   color: ${USE_ROOT_COLOR("main-text")};
   border-collapse: collapse;
@@ -130,10 +130,10 @@ export function Table<T extends unknown>({
   );
 
   return (
-    <StyledTableResponsive>
-      <StyledTableRoot $enforceHeight={dataLength > 0 && !lean}>
+    <TableResponsive>
+      <TableRoot $enforceHeight={dataLength > 0 && !lean}>
         {previousDataRender}
-        <StyledTable $border={border}>
+        <TableStyles $border={border}>
           <TableHead table={table} />
           <TableBody
             table={table}
@@ -142,9 +142,9 @@ export function Table<T extends unknown>({
             isLoading={isLoading}
           />
           <TableFoot table={table} dataLength={dataLength} />
-        </StyledTable>
+        </TableStyles>
         {previousDataRender}
-      </StyledTableRoot>
+      </TableRoot>
       {!lean && (
         <TablePagination
           {...{
@@ -157,6 +157,6 @@ export function Table<T extends unknown>({
           }}
         />
       )}
-    </StyledTableResponsive>
+    </TableResponsive>
   );
 }

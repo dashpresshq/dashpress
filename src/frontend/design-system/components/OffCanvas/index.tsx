@@ -16,21 +16,21 @@ export interface IProps {
   width?: number;
 }
 
-const StyledHeader = styled.div`
+const Header = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 1rem;
 `;
 
-const StyledBody = styled.div`
+const Body = styled.div`
   flex-grow: 1;
   padding: 1rem;
   padding-top: 0.5rem;
   overflow-y: auto;
 `;
 
-const StyledRoot = styled.div<{ width: number }>`
+const Root = styled.div<{ width: number }>`
   position: fixed;
   bottom: 0;
   z-index: 1045;
@@ -65,7 +65,7 @@ export function OffCanvas({
 }: IProps) {
   return (
     <NextPortal>
-      <StyledRoot
+      <Root
         as={Offcanvas}
         show={show}
         onHide={onClose}
@@ -74,7 +74,7 @@ export function OffCanvas({
       >
         {show && (
           <>
-            <StyledHeader>
+            <Header>
               <Stack justify="space-between" align="center">
                 <Typo.MD weight="bold">{title}</Typo.MD>
                 <div>
@@ -86,12 +86,12 @@ export function OffCanvas({
                   />
                 </div>
               </Stack>
-            </StyledHeader>
+            </Header>
             <Divider />
-            <StyledBody>{children}</StyledBody>
+            <Body>{children}</Body>
           </>
         )}
-      </StyledRoot>
+      </Root>
     </NextPortal>
   );
 }

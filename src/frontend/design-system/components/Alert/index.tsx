@@ -12,7 +12,7 @@ import { Typo } from "frontend/design-system/primitives/Typo";
 import { getBestErrorMessage } from "frontend/lib/toast/utils";
 import { Stack } from "frontend/design-system/primitives/Stack";
 import { Spacer } from "frontend/design-system/primitives/Spacer";
-import { StyledSoftButton } from "../Button/Button";
+import { SoftButtonStyled } from "../Button/Button";
 
 export enum AlertType {
   Success = "success",
@@ -52,7 +52,7 @@ const Root = styled.div<{
   border-color: ${(props) => props.color}11;
 `;
 
-const StyledAlertButton = styled.button<{ color: string }>`
+const AlertButton = styled.button<{ color: string }>`
   color: ${(props) => props.color}AA;
   padding: 0;
   align-self: flex-start;
@@ -88,11 +88,11 @@ const Content = styled.div`
   align-self: center;
 `;
 
-const StyledText = styled(Typo.XS)<{ $color: string }>`
+const Text = styled(Typo.XS)<{ $color: string }>`
   color: ${(props) => props.$color};
 `;
 
-const ActionButton = styled(StyledSoftButton)<{ $color: string }>`
+const ActionButton = styled(SoftButtonStyled)<{ $color: string }>`
   background-color: ${(props) => props.$color}1A;
   color: ${(props) => props.$color};
   border-color: ${(props) => props.$color};
@@ -119,9 +119,9 @@ export function Alert({ type, message, renderJsx, action }: IProps) {
         <IconCmp size={20} />
       </IconRoot>
       <Content>
-        <StyledText $color={color}>
+        <Text $color={color}>
           {(renderJsx ? message : getBestErrorMessage(message)) as string}
-        </StyledText>
+        </Text>
         {action && (
           <>
             <Spacer />
@@ -134,7 +134,7 @@ export function Alert({ type, message, renderJsx, action }: IProps) {
           </>
         )}
       </Content>
-      <StyledAlertButton
+      <AlertButton
         type="button"
         onClick={() => {
           setShouldRender(false);
@@ -143,7 +143,7 @@ export function Alert({ type, message, renderJsx, action }: IProps) {
         aria-label="Close"
       >
         <X size={16} />
-      </StyledAlertButton>
+      </AlertButton>
     </Root>
   );
 }

@@ -6,7 +6,7 @@ import { useThemeColorShade } from "frontend/design-system/theme/useTheme";
 import { Typo } from "frontend/design-system/primitives/Typo";
 import { EmptyWrapper } from "../EmptyWrapper";
 
-const StyledTd = styled.td`
+const Td = styled.td`
   padding: 0.45rem;
   vertical-align: middle;
   font-weight: 400;
@@ -16,7 +16,7 @@ const StyledTd = styled.td`
   }
 `;
 
-const StyledBodyTR = styled.tr<{ $hoverColor: string }>`
+const BodyTR = styled.tr<{ $hoverColor: string }>`
   padding: 4px;
   border-bottom: 1px solid ${USE_ROOT_COLOR("border-color")};
   page-break-inside: avoid;
@@ -42,26 +42,26 @@ export function TableBody({
   return (
     <tbody>
       {table.getRowModel().rows.map((row) => (
-        <StyledBodyTR key={row.id} $hoverColor={colorShade("base-color", 2)}>
+        <BodyTR key={row.id} $hoverColor={colorShade("base-color", 2)}>
           {row.getVisibleCells().map((cell) => (
-            <StyledTd key={cell.id}>
+            <Td key={cell.id}>
               <Typo.SM as="span">
                 {flexRender(cell.column.columnDef.cell, cell.getContext())}
               </Typo.SM>
-            </StyledTd>
+            </Td>
           ))}
-        </StyledBodyTR>
+        </BodyTR>
       ))}
       {dataLength === 0 ? (
-        <StyledBodyTR $hoverColor={colorShade("base-color", 2)}>
-          <StyledTd colSpan={10000}>
+        <BodyTR $hoverColor={colorShade("base-color", 2)}>
+          <Td colSpan={10000}>
             {isLoading ? (
               <div style={{ height: "204px" }} />
             ) : (
               <EmptyWrapper text={emptyMessage || "No Data"} />
             )}
-          </StyledTd>
-        </StyledBodyTR>
+          </Td>
+        </BodyTR>
       ) : null}
     </tbody>
   );

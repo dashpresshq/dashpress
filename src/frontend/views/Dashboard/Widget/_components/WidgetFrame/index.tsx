@@ -8,7 +8,7 @@ import {
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { ISharedWidgetConfig } from "shared/types/dashboard/base";
 import { DataStateKeys } from "frontend/lib/data/types";
-import { StyledCard } from "frontend/design-system/components/Card";
+import { Card } from "frontend/design-system/components/Card";
 import { Spacer } from "frontend/design-system/primitives/Spacer";
 import { RenderCode } from "frontend/design-system/components/RenderCode";
 import { Stack } from "frontend/design-system/primitives/Stack";
@@ -18,7 +18,7 @@ import { IWidgetSettingProps } from "../WidgetHeader/types";
 import { WIDGET_CONFIG } from "../../constants";
 import { useWidgetNavigationLink } from "../../../Widget/useWidgetNavigationLink";
 
-const StyledBox = styled.div`
+const Box = styled.div`
   padding: 24px;
 `;
 
@@ -83,8 +83,8 @@ export const WidgetFrame = forwardRef<HTMLDivElement, IProps>(
         $height={height}
         hasSetting={!!setting}
       >
-        <StyledCard style={{ height: "100%" }}>
-          <StyledBox>
+        <Card style={{ height: "100%" }}>
+          <Box>
             <WidgetHeader
               setting={setting}
               title={config.title}
@@ -125,8 +125,8 @@ export const WidgetFrame = forwardRef<HTMLDivElement, IProps>(
                 )}
               </ViewStateMachine>
             </div>
-          </StyledBox>
-        </StyledCard>
+          </Box>
+        </Card>
       </WidgetRoot>
     );
   }

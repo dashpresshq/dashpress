@@ -7,9 +7,9 @@ import { Typo } from "frontend/design-system/primitives/Typo";
 import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
 import { TableFilter } from "./filters";
 import { TableFilterType } from "./filters/types";
-import { StyledTh } from "./styles";
+import { Th } from "./styles";
 
-const StyledTHead = styled.thead`
+const THead = styled.thead`
   background-color: ${USE_ROOT_COLOR("soft-color")};
 `;
 
@@ -17,7 +17,7 @@ interface IColumnMeta {
   filter?: TableFilterType;
 }
 
-const StyledSorting = styled(ArrowUp)<{ $isSorted: boolean; $isDesc: boolean }>`
+const Sorting = styled(ArrowUp)<{ $isSorted: boolean; $isDesc: boolean }>`
   color: ${USE_ROOT_COLOR("muted-text")};
   opacity: 0.7;
   cursor: pointer;
@@ -39,7 +39,7 @@ interface IProps {
 
 export function TableHead({ table }: IProps) {
   return (
-    <StyledTHead>
+    <THead>
       {table.getHeaderGroups().map((headerGroup) => (
         <tr key={headerGroup.id}>
           {headerGroup.headers.map((header) => {
@@ -50,7 +50,7 @@ export function TableHead({ table }: IProps) {
             const { filter } = header.column.columnDef.meta as IColumnMeta;
             const isSorted = header.column.getIsSorted();
             return (
-              <StyledTh
+              <Th
                 key={header.id}
                 $isSortable={header.column.getCanSort()}
                 onClick={header.column.getToggleSortingHandler()}
@@ -61,7 +61,7 @@ export function TableHead({ table }: IProps) {
                   </Typo.SM>
                   <Stack justify="end" width="auto" align="center" spacing={0}>
                     {header.column.getCanSort() && (
-                      <StyledSorting
+                      <Sorting
                         size={18}
                         aria-label={`Sort By ${view} ${
                           // eslint-disable-next-line no-nested-ternary
@@ -80,11 +80,11 @@ export function TableHead({ table }: IProps) {
                     ) : null}
                   </Stack>
                 </Stack>
-              </StyledTh>
+              </Th>
             );
           })}
         </tr>
       ))}
-    </StyledTHead>
+    </THead>
   );
 }

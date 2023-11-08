@@ -1,7 +1,7 @@
 import React from "react";
 import { Icon } from "react-feather";
 import styled from "styled-components";
-import { SHADOW_CSS, StyledCardBody } from "../../Card";
+import { SHADOW_CSS, CardBody } from "../../Card";
 import { RenderList } from "../../RenderList";
 import { SectionListItem } from "../SectionList";
 
@@ -18,7 +18,7 @@ export interface IProps {
   currentMenuItem?: string;
 }
 
-const Root = styled(StyledCardBody)`
+const Root = styled(CardBody)`
   ${SHADOW_CSS}
 `;
 

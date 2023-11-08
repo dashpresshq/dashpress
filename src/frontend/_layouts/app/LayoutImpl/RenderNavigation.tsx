@@ -18,13 +18,13 @@ import { useThemeColorShade } from "frontend/design-system/theme/useTheme";
 import { useNavigationStack } from "frontend/lib/routing/useNavigationStack";
 import { ActionIntegrationKeys } from "shared/types/actions";
 
-const StyledLeftSideNavMenuList = styled.li<{}>`
+const LeftSideNavMenuList = styled.li<{}>`
   list-style: none;
   display: block;
   transition: all 0.3s;
 `;
 
-const StyledLeftSideNavMenuListAnchor = styled.a<{
+const LeftSideNavMenuListAnchor = styled.a<{
   hoverColor: string;
   $isActive: boolean;
   $depth: number;
@@ -48,7 +48,7 @@ const StyledLeftSideNavMenuListAnchor = styled.a<{
   }
 `;
 
-const StyledIconRoot = styled.span<{ $isFullWidth: boolean }>`
+const IconRoot = styled.span<{ $isFullWidth: boolean }>`
   color: ${SYSTEM_COLORS.white};
   width: 20px;
   height: 20px;
@@ -58,7 +58,7 @@ const StyledIconRoot = styled.span<{ $isFullWidth: boolean }>`
   }
 `;
 
-const StyledLeftSideNavMenu = styled.ul<{}>`
+const LeftSideNavMenu = styled.ul<{}>`
   padding: 0;
   margin-bottom: 0;
 `;
@@ -157,17 +157,17 @@ export function RenderNavigation({
   const getBackgroundColor = useThemeColorShade();
 
   return (
-    <StyledLeftSideNavMenu>
+    <LeftSideNavMenu>
       {navigation.map(({ title, icon, type, link, id, children }) => {
         const isActive = activeItem === id;
         return (
-          <StyledLeftSideNavMenuList key={id}>
+          <LeftSideNavMenuList key={id}>
             {/* eslint-disable-next-line no-nested-ternary */}
             {type === NavigationMenuItemType.Header ? (
               <NavHeader $isFullWidth={isFullWidth}>{title}</NavHeader>
             ) : children && children.length > 0 ? (
               <>
-                <StyledLeftSideNavMenuListAnchor
+                <LeftSideNavMenuListAnchor
                   as={PlainButton}
                   $isActive={isActive}
                   $depth={depth}
@@ -178,7 +178,7 @@ export function RenderNavigation({
                     setActiveItem(isActive ? "" : id);
                   }}
                 >
-                  <StyledIconRoot
+                  <IconRoot
                     aria-label={`${title} Icon`}
                     $isFullWidth={isFullWidth}
                     dangerouslySetInnerHTML={{
@@ -197,7 +197,7 @@ export function RenderNavigation({
                       />
                     </Stack>
                   )}
-                </StyledLeftSideNavMenuListAnchor>
+                </LeftSideNavMenuListAnchor>
                 {isActive && isFullWidth && (
                   <RenderNavigation
                     setIsFullWidth={setIsFullWidth}
@@ -209,7 +209,7 @@ export function RenderNavigation({
               </>
             ) : (
               <Link href={getNavigationTypeLink(type, link)} passHref>
-                <StyledLeftSideNavMenuListAnchor
+                <LeftSideNavMenuListAnchor
                   $isActive={isActive}
                   $depth={depth}
                   onClick={() => {
@@ -224,7 +224,7 @@ export function RenderNavigation({
                   hoverColor={getBackgroundColor("primary-color", 45)}
                 >
                   {icon && (
-                    <StyledIconRoot
+                    <IconRoot
                       aria-label={`${title} Icon`}
                       $isFullWidth={isFullWidth}
                       dangerouslySetInnerHTML={{
@@ -235,12 +235,12 @@ export function RenderNavigation({
                   <NavLabel ellipsis $isFullWidth={isFullWidth}>
                     {title}
                   </NavLabel>
-                </StyledLeftSideNavMenuListAnchor>
+                </LeftSideNavMenuListAnchor>
               </Link>
             )}
-          </StyledLeftSideNavMenuList>
+          </LeftSideNavMenuList>
         );
       })}
-    </StyledLeftSideNavMenu>
+    </LeftSideNavMenu>
   );
 }

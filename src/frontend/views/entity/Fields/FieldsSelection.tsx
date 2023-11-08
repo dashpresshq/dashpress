@@ -15,17 +15,14 @@ import { MAKE_APP_CONFIGURATION_CRUD_CONFIG } from "frontend/hooks/configuration
 import { FormInput } from "frontend/design-system/components/Form/FormInput";
 import { Stack } from "frontend/design-system/primitives/Stack";
 import { DeleteButton } from "frontend/design-system/components/Button/DeleteButton";
-import {
-  StyledCard,
-  StyledCardBody,
-} from "frontend/design-system/components/Card";
+import { Card, CardBody } from "frontend/design-system/components/Card";
 import { Spacer } from "frontend/design-system/primitives/Spacer";
 import { SoftButton } from "frontend/design-system/components/Button/SoftButton";
 import { FormButton } from "frontend/design-system/components/Button/FormButton";
 import { FormSwitch } from "frontend/design-system/components/Form/FormSwitch";
 import { isBlackOrWhite } from "./isBlackOrWhite";
 
-const StyledColorBox = styled.button<{ color: string }>`
+const ColorBox = styled.button<{ color: string }>`
   height: 24px;
   wifth: 24px;
   border-radius: 5px;
@@ -100,8 +97,8 @@ export function FieldSelectionCanvas({
               <>
                 {fields.map((name, index) => (
                   <React.Fragment key={name}>
-                    <StyledCard>
-                      <StyledCardBody>
+                    <Card>
+                      <CardBody>
                         <Field
                           name={`${name}.value`}
                           validate={composeValidators((value) =>
@@ -144,7 +141,7 @@ export function FieldSelectionCanvas({
                                 <Stack>
                                   {OPTIONS_COLORS.map((systemColor) => (
                                     <div key={systemColor}>
-                                      <StyledColorBox
+                                      <ColorBox
                                         type="button"
                                         color={systemColor}
                                         onClick={() =>
@@ -162,7 +159,7 @@ export function FieldSelectionCanvas({
                                           }
                                           size="18"
                                         />
-                                      </StyledColorBox>
+                                      </ColorBox>
                                     </div>
                                   ))}
                                 </Stack>
@@ -181,8 +178,8 @@ export function FieldSelectionCanvas({
                             />
                           )}
                         </Stack>
-                      </StyledCardBody>
-                    </StyledCard>
+                      </CardBody>
+                    </Card>
                     <Spacer />
                   </React.Fragment>
                 ))}

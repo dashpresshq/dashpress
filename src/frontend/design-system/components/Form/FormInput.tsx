@@ -1,5 +1,5 @@
 import React from "react";
-import { StyledInput } from "./Styles";
+import { Input } from "./Styles";
 import { ISharedFormInput } from "./_types";
 import { wrapLabelAndError, generateFormArias } from "./_wrapForm";
 
@@ -11,7 +11,7 @@ export const FormInput: React.FC<IFormInput> = (formInput) => {
   const { input, type, label, disabled, meta, ...rest } = formInput;
 
   return wrapLabelAndError(
-    <StyledInput
+    <Input
       {...input}
       {...rest}
       {...generateFormArias(meta)}

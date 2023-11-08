@@ -4,10 +4,10 @@ import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
 import { Typo } from "frontend/design-system/primitives/Typo";
 import { Stack } from "frontend/design-system/primitives/Stack";
 import { ISharedFormInput } from "../_types";
-import { StyledFormFeedback, StyledFormGroup } from "../Styles";
+import { FormFeedback, FormGroup } from "../Styles";
 import { isFormMetaWithError } from "../_wrapForm";
 
-const StyledCheckBoxInput = styled.input`
+const CheckBoxInput = styled.input`
   border-radius: 0.25em;
   width: 1em;
   height: 1em;
@@ -35,9 +35,9 @@ export function FormCheckBox({
   disabled,
 }: ISharedFormInput) {
   return (
-    <StyledFormGroup>
+    <FormGroup>
       <Stack>
-        <StyledCheckBoxInput
+        <CheckBoxInput
           {...input}
           type="checkbox"
           disabled={disabled}
@@ -47,10 +47,10 @@ export function FormCheckBox({
           <Typo.MD color={disabled ? "muted" : undefined}>{label}</Typo.MD>
         </label>
       </Stack>
-      <StyledFormFeedback>
+      <FormFeedback>
         {isFormMetaWithError(meta)}
         &nbsp;
-      </StyledFormFeedback>
-    </StyledFormGroup>
+      </FormFeedback>
+    </FormGroup>
   );
 }

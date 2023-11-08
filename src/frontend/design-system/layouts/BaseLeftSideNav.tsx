@@ -3,21 +3,21 @@ import React, { ReactNode } from "react";
 import styled from "styled-components";
 import { useThemeColorShade } from "../theme/useTheme";
 
-const StyledLogo = styled(Link)`
+const Logo = styled(Link)`
   line-height: 52px;
 `;
 
-const StyledLogoSm = styled.img`
+const LogoSm = styled.img`
   width: 28px;
   margin-top: 16px;
 `;
 
-const StyledMenuContent = styled.div`
+const MenuContent = styled.div`
   height: 100%;
   padding-bottom: 30px;
 `;
 
-const StyledBrand = styled.div`
+const Brand = styled.div`
   text-align: center;
   height: 52px;
   margin-top: 8px;
@@ -40,14 +40,14 @@ export function BaseLeftSideNav({ children, logo }: IProps) {
   const colorShade = useThemeColorShade();
   return (
     <Root style={{ background: colorShade("primary-color", 30) }}>
-      <StyledBrand>
-        <StyledLogo href="/">
+      <Brand>
+        <Logo href="/">
           <span>
-            <StyledLogoSm src={logo} alt="small logo" />
+            <LogoSm src={logo} alt="small logo" />
           </span>
-        </StyledLogo>
-      </StyledBrand>
-      <StyledMenuContent>{children}</StyledMenuContent>
+        </Logo>
+      </Brand>
+      <MenuContent>{children}</MenuContent>
     </Root>
   );
 }

@@ -15,6 +15,7 @@ import { RenderList } from "frontend/design-system/components/RenderList";
 import { ListSkeleton } from "frontend/design-system/components/Skeleton/List";
 import { SectionListItem } from "frontend/design-system/components/Section/SectionList";
 import { IDropDownMenuItem } from "frontend/design-system/components/DropdownMenu";
+import { DataStates } from "frontend/lib/data/types";
 import { useEntityViewStateMachine } from "../useEntityViewStateMachine";
 import { getEntitiesRelationsCount } from "./utils";
 import {
@@ -119,8 +120,12 @@ export function DetailsLayout({
         <ContentLayout.Left>
           <SectionBox headLess title="">
             <ViewStateMachine
-              loading={viewState.type === "loading"}
-              error={viewState.type === "error" ? viewState.message : undefined}
+              loading={viewState.type === DataStates.Loading}
+              error={
+                viewState.type === DataStates.Error
+                  ? viewState.message
+                  : undefined
+              }
               loader={<ListSkeleton count={5} />}
             >
               <RenderList

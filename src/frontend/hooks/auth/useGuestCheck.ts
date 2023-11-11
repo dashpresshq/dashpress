@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
 import { TemporayStorageService } from "frontend/lib/storage";
 import { STORAGE_CONSTANTS } from "frontend/lib/storage/constants";
+import { DataStates } from "frontend/lib/data/types";
 import { useUserAuthenticatedState } from "./useAuthenticateUser";
 
 export const useGuestCheck = () => {
@@ -17,5 +18,5 @@ export const useGuestCheck = () => {
     }
   }, [typeof window, userAuthenticatedState]);
 
-  return userAuthenticatedState === "loading";
+  return userAuthenticatedState === DataStates.Loading;
 };

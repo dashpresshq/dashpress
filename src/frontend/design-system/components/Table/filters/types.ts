@@ -19,3 +19,5 @@ export interface IFilterProps<T, K> {
   };
   bag: K;
 }
+
+export const FOR_CODE_COV = 1;

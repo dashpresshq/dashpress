@@ -124,7 +124,7 @@ describe("pages/admin/settings/theme", () => {
     );
   });
 
-  it("should display not update the other scheme color", async () => {
+  it("should not display the other scheme color", async () => {
     render(
       <ApplicationRoot>
         <ThemeSettings />

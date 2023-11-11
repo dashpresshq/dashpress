@@ -13,6 +13,7 @@ export function FilterTableByStatus({
       <FormMultiSelect
         selectData={bag}
         values={filterValue?.value || []}
+        ariaLabel="Select Status"
         onChange={(value) => {
           setFilter({
             ...filterValue,

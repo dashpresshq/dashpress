@@ -4,15 +4,16 @@ import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { createStore } from "frontend/lib/store";
 import { STORAGE_CONSTANTS } from "frontend/lib/storage/constants";
+import { DataStates } from "frontend/lib/data/types";
 import * as AuthStore from "./auth.store";
 
 type IStore = {
-  isAuthenticated: "loading" | boolean;
+  isAuthenticated: DataStates.Loading | boolean;
   setIsAuthenticated: (state: boolean) => void;
 };
 
 export const useIsAuthenticatedStore = createStore<IStore>((set) => ({
-  isAuthenticated: "loading",
+  isAuthenticated: DataStates.Loading,
   setIsAuthenticated: (state: boolean) =>
     set(() => ({
       isAuthenticated: state,

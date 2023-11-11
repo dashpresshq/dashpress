@@ -44,11 +44,12 @@ export function RenderFilterOperator<T>({
             label: FILTER_OPERATOR_LABELS[operator],
           })),
         ]}
+        ariaLabel="Select Filter Operator"
         fullWidth
         onChange={(value) => {
           setFilter({
             ...filterValue,
-            operator: (value as FilterOperators) || undefined,
+            operator: value as FilterOperators,
           });
         }}
         value={filterValue?.operator || ""}

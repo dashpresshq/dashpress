@@ -1,29 +1,28 @@
 import { ITableColumn } from "frontend/design-system/components/Table/types";
 import { Table } from "frontend/design-system/components/Table";
+import { userFriendlyCase } from "shared/lib/strings/friendly-case";
 import { TableWidgetSchema } from "./types";
 
 interface IProps {
   data: unknown;
 }
 export function TableWidget({ data }: IProps) {
-  const tableChartData = TableWidgetSchema.parse(data);
+  const tableData = TableWidgetSchema.parse(data);
 
-  const columns: ITableColumn[] = Object.keys(tableChartData[0]).map(
-    (column) => ({
-      Header: column,
-      accessor: column,
-      disableSortBy: true,
-    })
-  );
+  const columns: ITableColumn[] = Object.keys(tableData[0]).map((column) => ({
+    Header: userFriendlyCase(column),
+    accessor: column,
+    disableSortBy: true,
+  }));
 
   return (
     <Table
       tableData={{
         data: {
-          data: tableChartData,
+          data: tableData,
           pageIndex: 0,
           pageSize: 5,
-          totalRecords: tableChartData.length,
+          totalRecords: tableData.length,
         },
         error: "",
         isLoading: false,

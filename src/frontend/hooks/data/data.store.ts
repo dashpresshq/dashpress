@@ -9,6 +9,7 @@ import { useWaitForResponseMutationOptions } from "frontend/lib/data/useMutate/u
 import { SLUG_LOADING_VALUE } from "frontend/lib/routing/constants";
 import { useApiQueries } from "frontend/lib/data/useApi/useApiQueries";
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
+import { DataStates } from "frontend/lib/data/types";
 import { useEntityCrudConfig } from "../entity/entity.config";
 import { useMultipleEntityReferenceFields } from "../entity/entity.store";
 import { isRouterParamEnabled } from "..";
@@ -67,13 +68,16 @@ const buildFilterCountQueryString = (
 
 export const useEntityFilterCount = (
   entity: string,
-  filters: FieldQueryFilter[] | "loading"
+  filters: FieldQueryFilter[] | DataStates.Loading
 ) => {
   return useApi<{ count: number }>(
-    buildFilterCountQueryString(entity, filters === "loading" ? [] : filters),
+    buildFilterCountQueryString(
+      entity,
+      filters === DataStates.Loading ? [] : filters
+    ),
     {
       errorMessage: CRUD_CONFIG_NOT_FOUND(`${entity} count`),
-      enabled: filters !== "loading",
+      enabled: filters !== DataStates.Loading,
       defaultData: { count: 0 },
     }
   );

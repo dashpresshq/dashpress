@@ -5,6 +5,7 @@ import { canRoleDoThisSync } from "shared/logic/permissions";
 import { useCallback } from "react";
 import { useStorageApi } from "frontend/lib/data/useApi";
 import { ToastService } from "frontend/lib/toast";
+import { DataStates } from "frontend/lib/data/types";
 import { useIsAuthenticatedStore } from "./useAuthenticateUser";
 import { ACCOUNT_PROFILE_CRUD_CONFIG } from "./constants";
 import { useIsGranularCheck } from "./portal";
@@ -56,7 +57,7 @@ const doPermissionCheck = (
   isGranularCheck: boolean
 ) => {
   if (isLoadingUser || !userData) {
-    return "loading";
+    return DataStates.Loading;
   }
 
   const { role, permissions } = userData;
@@ -87,12 +88,14 @@ export function useUserHasPermission(): (permision: string) => boolean {
   );
 }
 
-function useUserPermission(): (permision: string) => boolean | "loading" {
+function useUserPermission(): (
+  permision: string
+) => boolean | DataStates.Loading {
   const userProfile = useAuthenticatedUserBag();
   const isGranularCheck = useIsGranularCheck();
 
   return useCallback(
-    (permission: string): boolean | "loading" => {
+    (permission: string): boolean | DataStates.Loading => {
       return doPermissionCheck(
         permission,
         userProfile.isLoading,
@@ -106,11 +109,11 @@ function useUserPermission(): (permision: string) => boolean | "loading" {
 
 export function usePageRequiresPermission(
   permission: string
-): "loading" | void {
+): DataStates.Loading | void {
   const router = useRouter();
   const canUser = useUserPermission();
-  if (canUser(permission) === "loading") {
-    return "loading";
+  if (canUser(permission) === DataStates.Loading) {
+    return DataStates.Loading;
   }
   if (!canUser(permission)) {
     ToastService.error("You dont have the permission to view this page");

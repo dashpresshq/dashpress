@@ -10,6 +10,7 @@ interface ISimpleSelect {
   value: number | string;
   fullWidth?: boolean;
   sm?: true;
+  ariaLabel?: string;
 }
 
 const SimpleSelectStyled = styled(Input)<{ fullWidth?: boolean }>`
@@ -33,10 +34,12 @@ export function SimpleSelect({
   value,
   fullWidth,
   sm,
+  ariaLabel,
 }: ISimpleSelect) {
   return (
     <SimpleSelectStyled
       as="select"
+      aria-label={ariaLabel}
       value={value}
       sm={sm}
       fullWidth={fullWidth}

@@ -42,9 +42,6 @@ export function useApiMutateOptimisticOptions<T, K, V = void>(
       );
     },
     onSettled: () => {
-      if (options.isOnMockingMode) {
-        return;
-      }
       apiMutate.invalidate();
     },
   };

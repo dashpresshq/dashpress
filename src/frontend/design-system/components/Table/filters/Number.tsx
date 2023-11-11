@@ -16,9 +16,10 @@ export function FilterTableByNumbers({
         onChange={(e) =>
           setFilter({
             ...filterValue,
-            value: +e.target.value || undefined,
+            value: +e.target.value,
           })
         }
+        aria-label="Value 1"
       />
       {filterValue?.operator === FilterOperators.BETWEEN && (
         <>
@@ -30,9 +31,10 @@ export function FilterTableByNumbers({
             onChange={(e) =>
               setFilter({
                 ...filterValue,
-                value2: +e.target.value || undefined,
+                value2: +e.target.value,
               })
             }
+            aria-label="Value 2"
           />
         </>
       )}

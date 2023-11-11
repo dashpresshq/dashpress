@@ -1,5 +1,11 @@
 import { UseQueryResult } from "react-query";
 
+export enum DataStates {
+  Loading = "loading",
+  Error = "error",
+  Loaded = "loaded",
+}
+
 export type DataStateKeys<T> = Pick<
   UseQueryResult<T>,
   "data" | "isLoading" | "isRefetching" | "error"

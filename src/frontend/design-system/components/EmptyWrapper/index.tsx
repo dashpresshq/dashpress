@@ -6,7 +6,6 @@ import { Typo } from "frontend/design-system/primitives/Typo";
 
 export interface IProps {
   text: string;
-  hideIcon?: true;
   children?: ReactNode;
 }
 
@@ -18,12 +17,10 @@ const Root = styled.div`
   background: ${USE_ROOT_COLOR("base-color")};
 `;
 
-export function EmptyWrapper({ text, hideIcon, children }: IProps) {
+export function EmptyWrapper({ text, children }: IProps) {
   return (
     <Root>
-      {hideIcon ? null : (
-        <Droplet size={50} color={USE_ROOT_COLOR("muted-text")} />
-      )}
+      <Droplet size={50} color={USE_ROOT_COLOR("muted-text")} />
       <br />
       <br />
       <Typo.MD color="muted"> {text} </Typo.MD>

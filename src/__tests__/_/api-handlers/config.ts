@@ -76,6 +76,7 @@ const CONFIG_VALUES = {
     primaryDark: `#111111`,
   },
   disabled_entities: ["disabled-entity-1", "disabled-entity-2"],
+  menu_entities_order: [],
   disabled_menu_entities: ["entity-3"],
 };
 

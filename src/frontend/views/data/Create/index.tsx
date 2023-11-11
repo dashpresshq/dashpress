@@ -3,7 +3,6 @@ import { SectionBox } from "frontend/design-system/components/Section/SectionBox
 import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
 import { useNavigationStack } from "frontend/lib/routing/useNavigationStack";
 import { META_USER_PERMISSIONS } from "shared/constants/user";
-import { useRouter } from "next/router";
 import { AppLayout } from "frontend/_layouts/app";
 import {
   useEntityCrudConfig,
@@ -11,23 +10,12 @@ import {
   useHiddenEntityColumns,
 } from "frontend/hooks/entity/entity.config";
 import { useEntityDataCreationMutation } from "frontend/hooks/data/data.store";
+import { useRouteParams } from "frontend/lib/routing/useRouteParam";
 import {
   EntityActionTypes,
   useEntityActionMenuItems,
 } from "../../entity/constants";
 import { BaseEntityForm } from "../_BaseEntityForm";
-
-export function useRouteParams() {
-  const router = useRouter();
-
-  if (typeof window === "undefined") return {};
-
-  const value = router.query;
-
-  if (Array.isArray(value))
-    throw new Error("Unexpected handle given by Next.js");
-  return value;
-}
 
 export function EntityCreate() {
   const routeParams = useRouteParams();

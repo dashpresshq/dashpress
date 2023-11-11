@@ -11,15 +11,36 @@ const FILTER_DEBOUNCE_WAIT = 500;
 
 interface IProps {
   type: TableFilterType;
-  column: Column<Record<string, unknown>, unknown>;
-  view?: React.ReactNode;
+  column: Pick<
+    Column<Record<string, unknown>, unknown>,
+    "setFilterValue" | "getFilterValue"
+  >;
+  view?: React.ReactNode | string;
+  debounce?: number;
 }
 
-export function TableFilter({ type, column, view }: IProps) {
+export function TableFilter({
+  type,
+  column,
+  view,
+  debounce = FILTER_DEBOUNCE_WAIT,
+}: IProps) {
   const filterValue = column.getFilterValue() as IColumnFilterBag<any>;
 
   const setFilter = (value?: IColumnFilterBag<unknown>) => {
-    return column.setFilterValue(value);
+    if (value === undefined) {
+      column.setFilterValue(undefined);
+      return;
+    }
+
+    return column.setFilterValue(
+      Object.fromEntries(
+        Object.entries(value).filter(
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars
+          ([_, value$1]) => value$1 || typeof value$1 === "boolean"
+        )
+      )
+    );
   };
 
   const { filterHasValueImpl, operators, FilterComponent } =
@@ -37,7 +58,7 @@ export function TableFilter({ type, column, view }: IProps) {
     () => {
       setFilter(localValue);
     },
-    FILTER_DEBOUNCE_WAIT,
+    debounce,
     [localValue]
   );
 

@@ -18,7 +18,7 @@ import {
 import { IFormExtension } from "frontend/components/SchemaForm/types";
 import { useMemo } from "react";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
-import { DataStateKeys } from "frontend/lib/data/types";
+import { DataStateKeys, DataStates } from "frontend/lib/data/types";
 import { SLUG_LOADING_VALUE } from "frontend/lib/routing/constants";
 import { buildAppliedSchemaFormConfig } from "./buildAppliedSchemaFormConfig";
 import { useEntityViewStateMachine } from "./useEntityViewStateMachine";
@@ -111,8 +111,10 @@ export function BaseEntityForm({
 
   return (
     <ViewStateMachine
-      loading={viewState.type === "loading"}
-      error={viewState.type === "error" ? viewState.message : undefined}
+      loading={viewState.type === DataStates.Loading}
+      error={
+        viewState.type === DataStates.Error ? viewState.message : undefined
+      }
       loader={
         <FormSkeleton
           schema={[

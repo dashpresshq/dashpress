@@ -12,7 +12,7 @@ export function FilterTableByIdField({
       onChange={(e: React.BaseSyntheticEvent) => {
         setFilter({
           ...filterValue,
-          value: e.target.value || undefined,
+          value: e.target.value,
         });
       }}
       placeholder="Enter value"

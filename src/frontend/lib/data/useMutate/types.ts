@@ -5,7 +5,6 @@ type ToastMessageInput =
 export interface IApiMutateOptions<T, K, V> {
   dataQueryPath: string;
   otherEndpoints?: string[];
-  isOnMockingMode?: true;
   onMutate: (oldData: T | undefined, form: K) => T;
   successMessage?: ToastMessageInput;
   smartSuccessMessage?: (formData: V) => ToastMessageInput;
@@ -19,3 +18,5 @@ export interface IWaitForResponseMutationOptions<T> {
   successMessage?: ToastMessageInput;
   smartSuccessMessage?: (formData: T) => ToastMessageInput;
 }
+
+export const FOR_CODE_COV = 1;

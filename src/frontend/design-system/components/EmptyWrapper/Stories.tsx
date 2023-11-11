@@ -21,11 +21,6 @@ const Template: Story<IProps> = (args) => (
 export const Default = Template.bind({});
 Default.args = {};
 
-export const NoIcon = Template.bind({});
-NoIcon.args = {
-  hideIcon: true,
-};
-
 export const WithChildren = Template.bind({});
 WithChildren.args = {
   children: (

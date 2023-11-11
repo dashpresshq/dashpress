@@ -19,6 +19,7 @@ import {
   useEntityFields,
   useEntityToOneReferenceFields,
 } from "frontend/hooks/entity/entity.store";
+import { DataStates } from "frontend/lib/data/types";
 import { filterOutHiddenScalarColumns } from "../utils";
 import { useEntityViewStateMachine } from "../useEntityViewStateMachine";
 import { viewSpecialDataTypes } from "../viewSpecialDataTypes";
@@ -77,8 +78,10 @@ export function EntityDetailsView({
 
   return (
     <ViewStateMachine
-      loading={viewState.type === "loading" || !id}
-      error={viewState.type === "error" ? viewState.message : undefined}
+      loading={viewState.type === DataStates.Loading || !id}
+      error={
+        viewState.type === DataStates.Error ? viewState.message : undefined
+      }
       loader={
         <>
           {Array.from({ length: 7 }, (_, k) => k).map((key) => (

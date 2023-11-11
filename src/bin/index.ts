@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import * as randomstring from "randomstring";
 import { checkNodeVersion } from "./checkNodeVersion";
-// TODO test this compiles well
+
 (async () => {
   const path = require("path");
   const fs = require("fs-extra");

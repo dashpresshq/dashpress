@@ -22,12 +22,14 @@ interface IFormMultiSelect {
   selectData: ISelectData[];
   values: string[];
   onChange: (values: string[]) => void;
+  ariaLabel?: string;
 }
 
 export function FormMultiSelect({
   selectData,
   values = [],
   onChange,
+  ariaLabel,
 }: IFormMultiSelect) {
   return (
     <SelectStyled
@@ -41,6 +43,7 @@ export function FormMultiSelect({
       onChange={(newValues: any) => {
         onChange(newValues.map(({ value }: ISelectData) => value));
       }}
+      aria-label={ariaLabel}
       options={selectData}
     />
   );

@@ -8,7 +8,7 @@ import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 
 setupApiHandlers();
 
-describe.skip("pages/admin/settings/menu", () => {
+describe("pages/admin/settings/menu", () => {
   beforeAll(() => {
     const useRouter = jest.spyOn(require("next/router"), "useRouter");
     useRouter.mockImplementation(() => ({
@@ -68,12 +68,12 @@ describe.skip("pages/admin/settings/menu", () => {
     );
 
     await userEvent.click(
-      screen.getByRole("button", { name: "Save Menu Entities Settings" })
+      screen.getByRole("button", { name: "Save Menu Settings" })
     );
 
     expect(
       await screen.findByRole("status", {}, { timeout: 20000 })
-    ).toHaveTextContent("Menu Entities Settings Saved Successfully");
+    ).toHaveTextContent("Menu Settings Saved Successfully");
   });
 
   it("should display updated entities state", async () => {

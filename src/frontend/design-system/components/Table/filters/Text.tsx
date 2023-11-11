@@ -12,7 +12,7 @@ export function FilterTableByText({
       onChange={(e: React.BaseSyntheticEvent) => {
         setFilter({
           ...filterValue,
-          value: e.target.value || undefined,
+          value: e.target.value,
         });
       }}
       placeholder="Search"

@@ -11,7 +11,7 @@ import { Spacer } from "frontend/design-system/primitives/Spacer";
 import { SETTINGS_VIEW_KEY } from "../constants";
 import { BaseSettingsLayout } from "../_Base";
 
-export const SYSTEM_INFORMATION_CRUD_CONFIG = MAKE_CRUD_CONFIG({
+const SYSTEM_INFORMATION_CRUD_CONFIG = MAKE_CRUD_CONFIG({
   path: "N/A",
   plural: "System Information",
   singular: "System Information",

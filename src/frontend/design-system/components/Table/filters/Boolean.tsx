@@ -17,6 +17,7 @@ export function FilterTableByBooleans({
           value: value === "" ? undefined : value === "true",
         });
       }}
+      ariaLabel="Select Boolean"
       fullWidth
       value={
         // eslint-disable-next-line no-nested-ternary

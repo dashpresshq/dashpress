@@ -69,7 +69,7 @@ describe("pages/admin", () => {
 
     expect(await getTableRows(widget)).toMatchInlineSnapshot(`
       [
-        "nameage",
+        "NameAge",
         "John6",
         "Jane5",
       ]

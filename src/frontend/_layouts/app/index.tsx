@@ -1,24 +1,24 @@
 import React from "react";
 import { LayoutImplementation } from "./LayoutImpl";
 import { IsSignedIn } from "./IsSignedIn";
-import { BaseLayout, IBaseLayoutProps } from "./_Base";
+import { MainContent, IMainContentProps } from "./_MainContent";
 import { PortalProvider } from "./portal";
 
 export function AppLayout({
   children,
   actionItems = [],
   secondaryActionItems = [],
-}: IBaseLayoutProps) {
+}: IMainContentProps) {
   return (
     <IsSignedIn>
       <PortalProvider>
         <LayoutImplementation>
-          <BaseLayout
+          <MainContent
             actionItems={actionItems}
             secondaryActionItems={secondaryActionItems}
           >
             {children}
-          </BaseLayout>
+          </MainContent>
         </LayoutImplementation>
       </PortalProvider>
     </IsSignedIn>

@@ -1,6 +1,6 @@
 import { StorageService, TemporayStorageService } from "frontend/lib/storage";
 
-const JWT_TOKEN_STORAGE_KEY = "__auth-token__";
+export const JWT_TOKEN_STORAGE_KEY = "__auth-token__";
 
 export const getAuthToken = (): string | null =>
   TemporayStorageService.getString(JWT_TOKEN_STORAGE_KEY) ||

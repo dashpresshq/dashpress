@@ -10,6 +10,7 @@ import { useThemeColorShade } from "frontend/design-system/theme/useTheme";
 import { Stack } from "frontend/design-system/primitives/Stack";
 import { useStorageApi } from "frontend/lib/data/useApi";
 import { INavigationMenuItem } from "shared/types/menu";
+import { PlainButton } from "frontend/design-system/components/Button/TextButton";
 import {
   NAVIGATION_MENU_ENDPOINT,
   SIDE_BAR_WIDTH_VARIATIONS,
@@ -65,15 +66,9 @@ const IconRoot = styled.span<{ $isFullWidth: boolean }>`
   ${(props) => props.$isFullWidth && "transform: rotate(180deg);"}
 `;
 
-export const PlainButton = styled.button`
-  &:focus {
-    outline: 0;
-  }
+const ToggleSideBarButton = styled(PlainButton)`
   height: 36px;
   background: ${USE_ROOT_COLOR("primary-color")};
-  border: 0;
-  cursor: pointer;
-  padding: 0;
 `;
 
 const Scroll = styled.div`
@@ -91,7 +86,7 @@ interface IProps {
   setIsFullWidth: (value: boolean) => void;
 }
 
-export const useNavigationMenuItems = () => {
+const useNavigationMenuItems = () => {
   return useStorageApi<INavigationMenuItem[]>(NAVIGATION_MENU_ENDPOINT, {
     errorMessage: "Could not load navigation menu",
     defaultData: [],
@@ -143,14 +138,18 @@ export function SideBar({ isFullWidth, setIsFullWidth }: IProps) {
           </ViewStateMachine>
         </Scroll>
 
-        <PlainButton
+        <ToggleSideBarButton
           style={{
             backgroundColor: getThemeColorShade("primary-color", 30),
           }}
           onClick={() => setIsFullWidth(!isFullWidth)}
         >
-          <IconRoot as={ChevronRight} $isFullWidth={isFullWidth} />
-        </PlainButton>
+          <IconRoot
+            aria-label="Toggle Side Bar"
+            as={ChevronRight}
+            $isFullWidth={isFullWidth}
+          />
+        </ToggleSideBarButton>
       </Stack>
     </Root>
   );

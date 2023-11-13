@@ -8,6 +8,7 @@ import ManageVariables from "pages/admin/settings/variables";
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 import userEvent from "@testing-library/user-event";
 import { useUserAuthenticatedState } from "frontend/hooks/auth/useAuthenticateUser";
+import { JWT_TOKEN_STORAGE_KEY } from "frontend/hooks/auth/auth.store";
 
 setupApiHandlers();
 
@@ -20,7 +21,7 @@ function AuthenticatedApplicationRoot({ children }: { children: ReactNode }) {
 describe("pages/integrations/variables => credentials", () => {
   const useRouter = jest.spyOn(require("next/router"), "useRouter");
   beforeAll(() => {
-    localStorage.setItem("__auth-token__", "foo");
+    localStorage.setItem(JWT_TOKEN_STORAGE_KEY, "foo");
     useRouter.mockImplementation(() => ({
       asPath: "/",
       query: {

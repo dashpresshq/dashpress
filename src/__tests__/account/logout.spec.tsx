@@ -5,6 +5,7 @@ import userEvent from "@testing-library/user-event";
 import AccountPassword from "pages/account/password";
 
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
+import { JWT_TOKEN_STORAGE_KEY } from "frontend/hooks/auth/auth.store";
 
 setupApiHandlers();
 
@@ -33,6 +34,6 @@ describe("pages/account/logout", () => {
     await waitFor(() => {
       expect(replaceMock).toHaveBeenCalledWith("/auth");
     });
-    expect(localStorage.getItem("__auth-token__")).toBeNull();
+    expect(localStorage.getItem(JWT_TOKEN_STORAGE_KEY)).toBeNull();
   });
 });

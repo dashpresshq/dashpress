@@ -19,16 +19,21 @@ const Root = styled(CardBody)`
 interface IProps {
   title: string;
   subTitle?: string;
-  logo?: string;
+  fullLogo?: string;
   homeLink?: string;
 }
 
-export function GuestHeader({ title, subTitle, logo, homeLink = "/" }: IProps) {
+export function GuestHeader({
+  title,
+  subTitle,
+  fullLogo,
+  homeLink = "/",
+}: IProps) {
   return (
     <Root>
       <a href={homeLink}>
         <Spacer />
-        {logo && <img src={logo} height="40" alt="logo" />}
+        {fullLogo && <img src={fullLogo} height="40" alt="logo" />}
         <Spacer />
         <Typo.MD color="inverse">{title}</Typo.MD>
         <Spacer size="xs" />

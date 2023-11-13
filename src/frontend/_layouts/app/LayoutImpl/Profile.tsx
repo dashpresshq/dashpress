@@ -65,11 +65,12 @@ export function ProfileOnNavigation({ isFullWidth }: IProps) {
   return (
     <ProfileRoot justify="space-between" align="center">
       <Name weight="bold">
-        Hi, {currentUser.isLoading ? "User" : currentUser.data?.name}
+        Hi, {currentUser.isLoading ? "There" : currentUser.data?.name}
       </Name>
       <Dropdown
         width={250}
         preserveVisibiltyOnClick
+        ariaLabel="Toggle Profile Menu"
         align="right"
         target={<MoreVertical size={16} style={{ cursor: "pointer" }} />}
       >

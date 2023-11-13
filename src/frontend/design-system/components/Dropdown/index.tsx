@@ -41,12 +41,14 @@ export interface IProps {
   onDropDownActiveChange?: (isActive: boolean) => void;
   align?: Align;
   width: number;
+  ariaLabel?: string;
 }
 
 export function Dropdown({
   align = "right",
   target,
   width,
+  ariaLabel,
   children,
   preserveVisibiltyOnClick,
   onDropDownActiveChange,
@@ -72,6 +74,7 @@ export function Dropdown({
   return (
     <Root ref={rootRef}>
       <span
+        aria-label={ariaLabel}
         onClick={(e) => {
           setMenuVisible(!menuVisible);
           e.stopPropagation();

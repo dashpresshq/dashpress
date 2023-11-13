@@ -4,7 +4,6 @@ import { useRouter } from "next/router";
 import { useNavigationStack } from "frontend/lib/routing/useNavigationStack";
 import { usePageDetailsStore } from "frontend/lib/routing/usePageDetails";
 import { usePageRequiresPermission } from "frontend/hooks/auth/user.store";
-import { GitHub, Globe, Twitter, Users } from "react-feather";
 import {
   DropDownMenu,
   IDropDownMenuItem,
@@ -15,18 +14,19 @@ import { Typo } from "frontend/design-system/primitives/Typo";
 import { Spacer } from "frontend/design-system/primitives/Spacer";
 import { useSiteConfig } from "frontend/hooks/app/site.config";
 import { GoogleTagManager } from "../scripts/GoogleTagManager";
+import { DEMO_LINKS } from "./constant";
 
-export interface IBaseLayoutProps {
+export interface IMainContentProps {
   children: ReactNode;
   actionItems?: IDropDownMenuItem[];
   secondaryActionItems?: IDropDownMenuItem[];
 }
 
-export function BaseLayout({
+export function MainContent({
   children,
   actionItems = [],
   secondaryActionItems = [],
-}: IBaseLayoutProps) {
+}: IMainContentProps) {
   const siteConfig = useSiteConfig();
   const { history, pushToStack, goToLinkIndex } = useNavigationStack();
   const router = useRouter();
@@ -59,11 +59,6 @@ export function BaseLayout({
     ...pageSecondaryActionItems,
   ];
 
-  // Interfering with the tests
-  // if (isLoading) {
-  //   return <ComponentIsLoading />;
-  // }
-
   return (
     <>
       <Head>
@@ -87,44 +82,10 @@ export function BaseLayout({
             ) : null}
             {process.env.NEXT_PUBLIC_IS_DEMO && (
               <DropDownMenu
-                menuItems={[
-                  {
-                    id: "github",
-                    IconComponent: GitHub,
-                    label: "Star us on Github",
-                    description: `Tell us DashPress is a useful project by dropping us a star`,
-                    onClick: () => {
-                      window.open("https://github.com/dashpresshq/dashpress");
-                    },
-                  },
-                  {
-                    id: "twitter",
-                    IconComponent: Twitter,
-                    label: "Follow us on Twitter",
-                    description: `Tweet at @dashpressHQ if you know others will benefit using DashPress`,
-                    onClick: () => {
-                      window.open("https://twitter.com/dashpressHQ");
-                    },
-                  },
-                  {
-                    id: "users",
-                    IconComponent: Users,
-                    label: "Join our Discord community",
-                    description: `Ask your questions here`,
-                    onClick: () => {
-                      window.open("https://discord.gg/aV6DxwXhzN");
-                    },
-                  },
-                  {
-                    id: "website",
-                    IconComponent: Globe,
-                    label: "Visit our website",
-                    description: `For more links on documentation, roadmap, blog etc`,
-                    onClick: () => {
-                      window.open("https://dashpress.io");
-                    },
-                  },
-                ]}
+                menuItems={DEMO_LINKS.map((link) => ({
+                  ...link,
+                  onClick: () => window.open(link.link),
+                }))}
               />
             )}
           </Stack>

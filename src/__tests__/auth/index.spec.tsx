@@ -4,6 +4,7 @@ import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 import SignIn from "pages/auth";
 import userEvent from "@testing-library/user-event";
+import { JWT_TOKEN_STORAGE_KEY } from "frontend/hooks/auth/auth.store";
 
 setupApiHandlers();
 
@@ -13,7 +14,7 @@ describe("pages/auth", () => {
   });
 
   it("should redirect to dashboard when user is authenticated", async () => {
-    localStorage.setItem("__auth-token__", "foo");
+    localStorage.setItem(JWT_TOKEN_STORAGE_KEY, "foo");
     const useRouter = jest.spyOn(require("next/router"), "useRouter");
 
     const replaceMock = jest.fn();
@@ -64,7 +65,7 @@ describe("pages/auth", () => {
       "Invalid Login"
     );
 
-    expect(localStorage.getItem("__auth-token__")).toBeNull();
+    expect(localStorage.getItem(JWT_TOKEN_STORAGE_KEY)).toBeNull();
 
     expect(pushMock).not.toHaveBeenCalled();
   });
@@ -90,7 +91,9 @@ describe("pages/auth", () => {
 
     await userEvent.click(screen.getByRole("button", { name: "Sign In" }));
 
-    expect(localStorage.getItem("__auth-token__")).toBe("some valid jwt token");
+    expect(localStorage.getItem(JWT_TOKEN_STORAGE_KEY)).toBe(
+      "some valid jwt token"
+    );
 
     expect(pushMock).toHaveBeenCalledWith("/");
   });

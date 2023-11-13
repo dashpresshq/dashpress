@@ -4,7 +4,7 @@ import { useEffect, useMemo } from "react";
 import { TemporayStorageService } from "frontend/lib/storage";
 import { usePageDetailsStore } from "./usePageDetails";
 
-const key = "__go_back_context__";
+const key = "__navigation_stack__";
 
 interface INavigationItem {
   link: string;

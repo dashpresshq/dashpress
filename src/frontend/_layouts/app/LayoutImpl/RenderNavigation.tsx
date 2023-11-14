@@ -179,7 +179,6 @@ export function RenderNavigation({
                   }}
                 >
                   <IconRoot
-                    aria-label={`${title} Icon`}
                     $isFullWidth={isFullWidth}
                     dangerouslySetInnerHTML={{
                       __html: systemIconToSVG(icon, isActive ? 2 : 1),
@@ -225,7 +224,6 @@ export function RenderNavigation({
                 >
                   {icon && (
                     <IconRoot
-                      aria-label={`${title} Icon`}
                       $isFullWidth={isFullWidth}
                       dangerouslySetInnerHTML={{
                         __html: systemIconToSVG(icon, isActive ? 2 : 1),

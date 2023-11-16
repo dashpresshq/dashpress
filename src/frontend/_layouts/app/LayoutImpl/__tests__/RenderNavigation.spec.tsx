@@ -54,6 +54,8 @@ describe("<RenderNavigation />", () => {
         isFullWidth
         setIsFullWidth={jest.fn()}
         navigation={navigationItems}
+        activeItem={{}}
+        setActiveItem={jest.fn()}
       />
     );
 
@@ -76,6 +78,8 @@ describe("<RenderNavigation />", () => {
         isFullWidth={false}
         setIsFullWidth={jest.fn()}
         navigation={navigationItems}
+        activeItem={{}}
+        setActiveItem={jest.fn()}
       />
     );
 
@@ -96,6 +100,8 @@ describe("<RenderNavigation />", () => {
         isFullWidth
         setIsFullWidth={jest.fn()}
         navigation={navigationItems}
+        activeItem={{}}
+        setActiveItem={jest.fn()}
       />
     );
 

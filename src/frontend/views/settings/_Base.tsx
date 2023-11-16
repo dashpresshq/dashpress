@@ -36,37 +36,37 @@ const baseMenuItems: IMenuSectionItem[] = [
     action: NAVIGATION_LINKS.SETTINGS.THEME,
     name: "Theme",
     IconComponent: Eye,
-    order: 30,
+    order: 20,
   },
   {
     action: NAVIGATION_LINKS.SETTINGS.SITE,
     name: "Site",
     IconComponent: Globe,
-    order: 40,
+    order: 30,
   },
   {
     action: NAVIGATION_LINKS.SETTINGS.DATE,
     name: "Date Format",
     IconComponent: Calendar,
-    order: 50,
+    order: 40,
   },
   {
     action: NAVIGATION_LINKS.SETTINGS.VARIABLES,
     name: "Variables",
     IconComponent: Book,
-    order: 60,
+    order: 50,
   },
   {
     action: NAVIGATION_LINKS.SETTINGS.SYSTEM,
     name: "System",
     IconComponent: Server,
-    order: 70,
+    order: 60,
   },
   {
     action: NAVIGATION_LINKS.SETTINGS.VERSIONS,
     name: "System Info",
     IconComponent: Terminal,
-    order: 80,
+    order: 70,
   },
 ];
 

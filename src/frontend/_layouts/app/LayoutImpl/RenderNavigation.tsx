@@ -8,7 +8,6 @@ import {
 } from "shared/types/menu";
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
 import { systemIconToSVG } from "shared/constants/Icons";
-import { useSessionStorage } from "react-use";
 import { ChevronRight } from "react-feather";
 import { SYSTEM_COLORS } from "frontend/design-system/theme/system";
 import { Typo } from "frontend/design-system/primitives/Typo";
@@ -109,6 +108,8 @@ interface IProp {
   isFullWidth: boolean;
   setIsFullWidth: (value: boolean) => void;
   depth?: number;
+  activeItem: Record<string, string>;
+  setActiveItem: (depth: number, value: string) => void;
 }
 
 const SYSTEM_LINK_MAP: Record<SystemLinks, string> = {
@@ -145,13 +146,9 @@ export function RenderNavigation({
   isFullWidth,
   setIsFullWidth,
   depth = 1,
+  setActiveItem,
+  activeItem,
 }: IProp) {
-  // TODO clear the parent activeitems
-  const [activeItem, setActiveItem] = useSessionStorage(
-    `navigation-item-${depth}`,
-    ""
-  );
-
   const { clear: clearBreadCrumbStack } = useNavigationStack();
 
   const getBackgroundColor = useThemeColorShade();
@@ -159,7 +156,17 @@ export function RenderNavigation({
   return (
     <LeftSideNavMenu>
       {navigation.map(({ title, icon, type, link, id, children }) => {
-        const isActive = activeItem === id;
+        const isActive = activeItem[depth] === id;
+
+        const iconComponent = (
+          <IconRoot
+            $isFullWidth={isFullWidth}
+            dangerouslySetInnerHTML={{
+              __html: systemIconToSVG(icon, isActive ? 2 : 1),
+            }}
+          />
+        );
+
         return (
           <LeftSideNavMenuList key={id}>
             {/* eslint-disable-next-line no-nested-ternary */}
@@ -169,21 +176,16 @@ export function RenderNavigation({
               <>
                 <LeftSideNavMenuListAnchor
                   as={PlainButton}
-                  $isActive={isActive}
+                  $isActive={false}
                   $depth={depth}
                   hoverColor={getBackgroundColor("primary-color", 45)}
                   onClick={() => {
                     clearBreadCrumbStack();
                     setIsFullWidth(true);
-                    setActiveItem(isActive ? "" : id);
+                    setActiveItem(depth, isActive ? "" : id);
                   }}
                 >
-                  <IconRoot
-                    $isFullWidth={isFullWidth}
-                    dangerouslySetInnerHTML={{
-                      __html: systemIconToSVG(icon, isActive ? 2 : 1),
-                    }}
-                  />
+                  {iconComponent}
                   {isFullWidth && (
                     <Stack justify="space-between" spacing={0} align="center">
                       <NavLabel ellipsis $isFullWidth={isFullWidth}>
@@ -203,6 +205,8 @@ export function RenderNavigation({
                     navigation={children}
                     isFullWidth={isFullWidth}
                     depth={depth + 1}
+                    activeItem={activeItem}
+                    setActiveItem={setActiveItem}
                   />
                 )}
               </>
@@ -213,7 +217,7 @@ export function RenderNavigation({
                   $depth={depth}
                   onClick={() => {
                     clearBreadCrumbStack();
-                    setActiveItem(id);
+                    setActiveItem(depth, id);
                   }}
                   target={
                     type === NavigationMenuItemType.ExternalLink
@@ -222,14 +226,7 @@ export function RenderNavigation({
                   }
                   hoverColor={getBackgroundColor("primary-color", 45)}
                 >
-                  {icon && (
-                    <IconRoot
-                      $isFullWidth={isFullWidth}
-                      dangerouslySetInnerHTML={{
-                        __html: systemIconToSVG(icon, isActive ? 2 : 1),
-                      }}
-                    />
-                  )}
+                  {icon && iconComponent}
                   <NavLabel ellipsis $isFullWidth={isFullWidth}>
                     {title}
                   </NavLabel>

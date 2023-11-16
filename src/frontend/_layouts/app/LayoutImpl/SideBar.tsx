@@ -10,6 +10,7 @@ import { useThemeColorShade } from "frontend/design-system/theme/useTheme";
 import { Stack } from "frontend/design-system/primitives/Stack";
 import { useStorageApi } from "frontend/lib/data/useApi";
 import { INavigationMenuItem } from "shared/types/menu";
+import { useSessionStorage } from "react-use";
 import { PlainButton } from "frontend/design-system/components/Button/TextButton";
 import {
   NAVIGATION_MENU_ENDPOINT,
@@ -98,6 +99,20 @@ export function SideBar({ isFullWidth, setIsFullWidth }: IProps) {
   const navigationMenuItems = useNavigationMenuItems();
   const getThemeColorShade = useThemeColorShade();
 
+  const [activeItem, setActiveItem$1] = useSessionStorage<
+    Record<string, string>
+  >(`navigation-current-item`, {});
+
+  const setActiveItem = (depth: number, value: string) => {
+    const newValue = { ...activeItem, [depth]: value };
+
+    const newValueFiltered = Object.fromEntries(
+      Object.entries(newValue).filter(([key]) => +key <= depth)
+    ) as Record<string, string>;
+
+    setActiveItem$1(newValueFiltered);
+  };
+
   return (
     <Root $isFullWidth={isFullWidth}>
       <Brand
@@ -134,6 +149,8 @@ export function SideBar({ isFullWidth, setIsFullWidth }: IProps) {
               navigation={navigationMenuItems.data}
               isFullWidth={isFullWidth}
               setIsFullWidth={setIsFullWidth}
+              activeItem={activeItem}
+              setActiveItem={setActiveItem}
             />
           </ViewStateMachine>
         </Scroll>

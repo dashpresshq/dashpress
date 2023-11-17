@@ -186,18 +186,6 @@ DashPress is provided **"as is"** without any **warranty**.
 
 _For more information and to report security issues, please refer to our [security documentation](docs/SECURITY.md)._
 
-## Built With
-- [KnexJS](https://github.com/knex/knex)
-- [React](https://github.com/facebook/react)
-- [NextJS](https://github.com/vercel/next.js)
-- [Typescript](https://github.com/microsoft/TypeScript)
-- [React Query](https://github.com/TanStack/query)
-- [React Table](https://github.com/TanStack/table)
-- [React Final Form](https://github.com/final-form/react-final-form)
-- [Styled-components](https://github.com/styled-components/styled-components)
-- [Class Validator](https://github.com/typestack/class-validator)
-- [Zustand](https://github.com/pmndrs/zustand) 
-
 ## License
 
 This project is licensed under the **GNU Affero General Public License v3.0**.

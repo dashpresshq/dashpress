@@ -30,7 +30,7 @@ export class NpmPackagesApiService implements IApplicationService {
     await this.installPackages();
   }
 
-  async installPackages(): Promise<void> {
+  private async installPackages(): Promise<void> {
     const dir = "npm-temp";
 
     if (!fs.existsSync(dir)) {

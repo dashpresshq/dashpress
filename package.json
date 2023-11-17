@@ -46,7 +46,6 @@
     "@types/react": "^18.0.11",
     "@types/react-datepicker": "^4.4.1",
     "@types/styled-components": "^5.1.25",
-    "@types/uuid": "^8.3.4",
     "axios": "^1.2.1",
     "bcrypt": "^5.0.1",
     "change-case": "^4.1.2",
@@ -97,7 +96,6 @@
     "styled-components": "^5.3.6",
     "terminal-link": "^3.0.0",
     "tiny-skeleton-loader-react": "^1.2.1",
-    "uuid": "^8.3.2",
     "winston": "^3.8.2",
     "zod": "^3.21.4",
     "zustand": "3.4.2"

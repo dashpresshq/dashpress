@@ -1,6 +1,19 @@
 /* eslint-disable no-console */
 import * as randomstring from "randomstring";
+import { npmPackagesApiService } from "backend/npm-packages/npm-packages.service";
 import { checkNodeVersion } from "./checkNodeVersion";
+
+const replaceRandomCharaters = (envContent: string) => {
+  return ["CREDENTIALS_ENCRYPTION_KEY", "AUTH_TOKEN_KEY"].reduce(
+    (reducedEnvContent, currentKey) => {
+      return reducedEnvContent.replace(
+        `${currentKey}=RANDOM_CHARACTERS`,
+        `${currentKey}=${randomstring.generate(128)}`
+      );
+    },
+    envContent
+  );
+};
 
 (async () => {
   const path = require("path");
@@ -9,18 +22,6 @@ import { checkNodeVersion } from "./checkNodeVersion";
   const { execa } = await import("execa");
 
   const { default: fetch } = await import("node-fetch");
-
-  const replaceRandomCharaters = (envContent: string) => {
-    return ["CREDENTIALS_ENCRYPTION_KEY", "AUTH_TOKEN_KEY"].reduce(
-      (reducedEnvContent, currentKey) => {
-        return reducedEnvContent.replace(
-          `${currentKey}=RANDOM_CHARACTERS`,
-          `${currentKey}=${randomstring.generate(128)}`
-        );
-      },
-      envContent
-    );
-  };
 
   const defaultEnv = () => {
     if (fs.existsSync(path.join(process.cwd(), "./.env.local"))) {
@@ -95,7 +96,7 @@ import { checkNodeVersion } from "./checkNodeVersion";
   )}
     `);
 
-  // TODO Doing the npm package thing here
+  await npmPackagesApiService.bootstrap();
 
   const { stdout, stderr } = execa("npm", ["run", "start"], {
     cwd: path.join(__dirname, ".."),

@@ -12,7 +12,6 @@ import { configApiService } from "backend/lib/config/config.service";
 import { rolesApiService } from "backend/roles/roles.service";
 import { schemasApiService } from "backend/schema/schema.service";
 import { usersApiService } from "backend/users/users.service";
-// import { npmPackagesApiService } from "backend/npm-packages/npm-packages.service";
 import { storageApiService } from "backend/storage/storage.service";
 import { actionsApiService } from "backend/actions/actions.service";
 import { dashboardWidgetsApiService } from "backend/dashboard-widgets/dashboard-widgets.service";
@@ -41,11 +40,7 @@ export default requestHandler(
         await storageApiService.bootstrap();
         await listOrderApiService.bootstrap();
 
-        // await npmPackagesApiService.bootstrap();
-
         await bootstrapPortalServices();
-
-        // await npmPackagesApiService.installPackages();
 
         await tempStorageApiService.bootstrap();
       } catch (error) {

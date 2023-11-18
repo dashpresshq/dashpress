@@ -1,6 +1,5 @@
 /* eslint-disable no-console */
 import * as randomstring from "randomstring";
-import { npmPackagesApiService } from "backend/npm-packages/npm-packages.service";
 import { checkNodeVersion } from "./checkNodeVersion";
 
 const replaceRandomCharaters = (envContent: string) => {
@@ -95,8 +94,6 @@ const replaceRandomCharaters = (envContent: string) => {
     "https://discord.gg/aV6DxwXhzN"
   )}
     `);
-
-  await npmPackagesApiService.bootstrap();
 
   const { stdout, stderr } = execa("npm", ["run", "start"], {
     cwd: path.join(__dirname, ".."),

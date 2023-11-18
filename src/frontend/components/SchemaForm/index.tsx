@@ -25,7 +25,7 @@ interface IProps<T> {
   formExtension?: Partial<IFormExtension>;
 }
 
-// TODO dependent options for schema forms
+// TODO: dependent options for schema forms
 
 export function SchemaForm<T extends Record<string, unknown>>({
   onSubmit,

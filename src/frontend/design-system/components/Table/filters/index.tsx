@@ -16,14 +16,14 @@ interface IProps {
     "setFilterValue" | "getFilterValue"
   >;
   view?: React.ReactNode | string;
-  debounce?: number;
+  debounceWait?: number;
 }
 
 export function TableFilter({
   type,
   column,
   view,
-  debounce = FILTER_DEBOUNCE_WAIT,
+  debounceWait = FILTER_DEBOUNCE_WAIT,
 }: IProps) {
   const filterValue = column.getFilterValue() as IColumnFilterBag<any>;
 
@@ -58,7 +58,7 @@ export function TableFilter({
     () => {
       setFilter(localValue);
     },
-    debounce,
+    debounceWait,
     [localValue]
   );
 

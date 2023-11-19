@@ -43,7 +43,7 @@ export function BaseDataTable({
       border={border}
       emptyMessage={
         currentState.filters.length > 0
-          ? // TODO for contributors: transform this to user readable message
+          ? // TODO: for contributors: transform this to user readable message
             `No result for the current ${pluralize({
               singular: "filter",
               count: currentState.filters.length,

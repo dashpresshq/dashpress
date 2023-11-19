@@ -35,7 +35,7 @@ const CRUD_CONFIG = MAKE_APP_CONFIGURATION_CRUD_CONFIG("entity_validations");
 
 const ERROR_MESSAGE_LENGTH = 128;
 
-// TODO for contributors: Show the actuall error message not the template message
+// TODO: for contributors: Show the actuall error message not the template message
 
 export function FieldValidationCanvas({
   field,

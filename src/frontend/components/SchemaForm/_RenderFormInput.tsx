@@ -13,6 +13,7 @@ import { FormCodeEditor } from "frontend/design-system/components/Form/FormCodeE
 import { FormTextArea } from "frontend/design-system/components/Form/FormTextArea";
 import { FormFileInput } from "frontend/design-system/components/Form/FormFileInput";
 import { FormSelectButton } from "frontend/design-system/components/Form/FormSelectButton";
+import { FormRichTextArea } from "frontend/design-system/components/Form/FormRichTextArea";
 
 interface IProps {
   type: keyof typeof FIELD_TYPES_CONFIG_MAP;
@@ -101,7 +102,7 @@ export function RenderFormInput({
       return <FormTextArea {...formProps} />;
 
     case "richtext":
-      return <FormTextArea {...formProps} />;
+      return <FormRichTextArea {...formProps} />;
 
     case "image":
     case "file":
@@ -111,4 +112,4 @@ export function RenderFormInput({
       return <FormInput {...formProps} />;
   }
 }
-// TODO Rating Input (for contributors)
+// TODO: Rating Input (for contributors)

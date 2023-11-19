@@ -45,4 +45,4 @@ export const setupAllTestData = async (domains: DomainTypes[]) => {
   );
 };
 
-// TODO test all custom script logic
+// TODO: test all custom script logic

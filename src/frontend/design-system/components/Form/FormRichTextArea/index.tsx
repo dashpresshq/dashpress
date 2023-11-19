@@ -1,12 +1,19 @@
 import React from "react";
-import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import styled from "styled-components";
 import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
+import dynamic from "next/dynamic";
 import { SYSTEM_COLORS } from "frontend/design-system/theme/system";
 import { noop } from "shared/lib/noop";
 import { ISharedFormInput } from "../_types";
 import { generateClassNames, wrapLabelAndError } from "../_wrapForm";
+
+const ReactQuill = dynamic<any>(
+  () => {
+    return import("react-quill");
+  },
+  { ssr: false }
+);
 
 const Root = styled.div`
   .ql-editor {
@@ -90,7 +97,7 @@ const modules = {
       { indent: "-1" },
       { indent: "+1" },
     ],
-    ["link"], // 'image', 'video'
+    ["link"],
     ["clean"],
   ],
   clipboard: {

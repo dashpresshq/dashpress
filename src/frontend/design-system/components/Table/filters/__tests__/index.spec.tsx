@@ -26,7 +26,7 @@ function TestComponent({
         getFilterValue: () => state,
       }}
       view="Test Column"
-      debounce={100}
+      debounceWait={100}
     />
   );
 }

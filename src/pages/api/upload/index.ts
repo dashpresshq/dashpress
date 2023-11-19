@@ -52,7 +52,7 @@ export const config: PageConfig = {
   },
 };
 
-// TODO
+// TODO:
 // disable file upload in DEMO
 // Max Size
 // file type

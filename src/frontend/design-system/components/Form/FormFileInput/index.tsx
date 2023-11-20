@@ -1,6 +1,7 @@
 import React, { useCallback, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import axios, { AxiosProgressEvent } from "axios";
+import { getRequestHeaders } from "frontend/lib/data/makeRequest";
 import { ISharedFormInput } from "../_types";
 import { generateClassNames, wrapLabelAndError } from "../_wrapForm";
 import { Presentation } from "./Presentation";
@@ -9,7 +10,6 @@ interface IFormFileInput extends ISharedFormInput {
   uploadUrl: string;
   metadata?: Record<string, unknown>;
   maxSize?: number;
-  requestHeaders?: Record<string, unknown>;
 }
 
 function FileInput({
@@ -19,7 +19,6 @@ function FileInput({
   uploadUrl,
   metadata,
   maxSize,
-  requestHeaders,
 }: IFormFileInput) {
   const [progress, setProgress] = useState<number>(0);
   const [error, setError] = useState<string>("");
@@ -43,7 +42,7 @@ function FileInput({
           const { fileUrl } = (
             await axios.post(uploadUrl, formData, {
               headers: {
-                ...requestHeaders,
+                ...getRequestHeaders(),
                 "Content-Type": "multipart/form-data",
               },
               onUploadProgress: (progressEvent: AxiosProgressEvent) => {
@@ -55,8 +54,11 @@ function FileInput({
             })
           ).data;
           input.onChange(fileUrl);
+          setError(null);
         } catch (e) {
-          setError("Ooops, something wrong happened.");
+          setError(
+            e.response.data.message || "Ooops, something wrong happened."
+          );
         }
         setProgress(0);
       });

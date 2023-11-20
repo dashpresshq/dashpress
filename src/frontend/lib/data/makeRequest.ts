@@ -11,7 +11,7 @@ const pathWithBaseUrl = (path: string) => {
   return (process.env.NEXT_PUBLIC_BASE_URL || "") + path;
 };
 
-const getRequestHeaders = () => {
+export const getRequestHeaders = () => {
   const authToken = getAuthToken();
   const headers: Record<string, string> = {
     "Content-Type": "application/json",

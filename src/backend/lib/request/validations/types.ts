@@ -9,6 +9,7 @@ export type ValidationKeys = {
     | "entity"
     | "authenticatedUser"
     | "configKey"
+    | "rawRequest"
     | "paginationFilter"
     | "canUser"
     | "crudEnabled"

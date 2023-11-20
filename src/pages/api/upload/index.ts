@@ -1,59 +1,41 @@
-import { NextApiRequest, NextApiResponse, PageConfig } from "next";
-import nc from "next-connect";
+import { PageConfig } from "next";
+import { requestHandler } from "backend/lib/request";
+import { BadRequestError } from "backend/lib/errors";
+import { FORMIDABLE_ERRORS } from "backend/uploads/constants";
+import { parseForm } from "backend/uploads/parse";
 
-const multer = require("multer");
+export default requestHandler({
+  POST: async (getValidatedRequest): Promise<Record<string, string>> => {
+    try {
+      if (process.env.NEXT_PUBLIC_IS_DEMO) {
+        throw new Error("File uploads will not work on demo site");
+      }
 
-const upload = multer({
-  dest: "uploads/",
-  filename: (_, file, callback) => {
-    // originalname is the uploaded file's name with extn
-    callback(null, file.originalname);
+      const { rawRequest: req } = await getValidatedRequest(["rawRequest"]);
+
+      const { files } = await parseForm(req);
+
+      if (files.file.length === 0) {
+        throw new BadRequestError("An invalid file was submitted");
+      }
+
+      const fileUrl = files.file[0].filepath;
+
+      return {
+        fileUrl,
+      };
+    } catch (error) {
+      if ([FORMIDABLE_ERRORS.biggerThanTotalMaxFileSize].includes(error.code)) {
+        throw new BadRequestError(error.message);
+      }
+
+      throw error;
+    }
   },
 });
-
-const handler = nc<NextApiRequest, NextApiResponse>({
-  onError: (_1, _2, res) => {
-    res.status(500).end("Something broke!");
-  },
-  onNoMatch: (_, res) => {
-    res.status(404).end("Page is not found");
-  },
-})
-  .use((req, res, next) => {
-    res.setHeader("Access-Control-Allow-Origin", "*");
-    res.setHeader(
-      "Access-Control-Allow-Headers",
-      "Origin, X-Requested-With, Content-Type, Accept, Authorization"
-    );
-    if (req.method === "OPTIONS") {
-      res.setHeader(
-        "Access-Control-Allow-Methods",
-        "PUT, POST, PATCH, DELETE, GET"
-      );
-      return res.status(200).json({});
-    }
-
-    next();
-  })
-  .use(upload.single("file"))
-  .options((_, res) => {
-    res.json({});
-  })
-  .post((req, res) => {
-    // Move the file
-    res.json({ hello: "world", fileUrl: (req as any).file.path });
-  });
-
-export default handler;
 
 export const config: PageConfig = {
   api: {
     bodyParser: false,
   },
 };
-
-// TODO:
-// disable file upload in DEMO
-// Max Size
-// file type
-// auth validation

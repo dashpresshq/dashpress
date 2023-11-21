@@ -7,6 +7,7 @@ import { Tabs } from "frontend/design-system/components/Tabs";
 import { useActivateActionMutation } from "../actions.store";
 import { Deactivate } from "./Deactivate";
 import { Configure } from "./Configure";
+import { PasswordMessage } from "../../Password";
 
 interface IProps {
   integrationDetail?: IIntegrationsList;
@@ -28,10 +29,7 @@ export function ActionSettingsView({
   if (!activeAction) {
     return (
       <>
-        <Typo.SM textStyle="italic">
-          All the values provided from this form will encrypted using
-          `aes-256-gcm` before been saved.
-        </Typo.SM>
+        <PasswordMessage />
         <Spacer />
         <SchemaForm
           fields={integrationDetail.configurationSchema}

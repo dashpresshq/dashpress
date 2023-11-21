@@ -1,4 +1,5 @@
 import { ISingularPlural } from "shared/types/config";
+import { IFileUploadSettings } from "shared/types/file";
 import { BaseAppConfigurationKeys } from "./base-types";
 import { PortalConfigurationKeys, PORTAL_CONFIGURATION_KEYS } from "./portal";
 import { DEFAULT_SYSTEM_SETTINGS } from "./system";
@@ -23,6 +24,7 @@ export const CONFIGURATION_KEYS: Record<
     requireEntity: true,
     defaultValue: [],
   },
+
   hidden_entity_update_columns: {
     crudConfigLabel: "Update Columns Settings",
     requireEntity: true,
@@ -65,6 +67,14 @@ export const CONFIGURATION_KEYS: Record<
       fieldsState: "",
       beforeSubmit: "",
     },
+  },
+  file_upload_settings: {
+    crudConfigLabel: "File Uploads Settings",
+    defaultValue: {
+      defaultMaxFileSizeInMB: 5,
+      fileNameFormat: "",
+      filePathFormat: "",
+    } as IFileUploadSettings,
   },
   entity_presentation_script: {
     crudConfigLabel: "Presentation Scripts",

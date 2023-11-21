@@ -14,7 +14,6 @@ export type ConfigDomain =
   | "key-value"
   | "action-instances"
   | "activated-actions"
-  | "activated-storage"
   | "roles";
 
 export enum ConfigAdaptorTypes {

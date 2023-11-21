@@ -23,6 +23,7 @@ export type BaseAppConfigurationKeys =
   | "entity_form_extension"
   | "system_settings"
   | "hidden_entity_relations"
+  | "file_upload_settings"
   | "entity_relations_order";
 
 export const FOR_CODE_COV = 1;

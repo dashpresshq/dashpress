@@ -7,33 +7,24 @@ export class StorageApiController {
     return this._storageApiService.listStorageIntegrations();
   }
 
-  async listActivatedStorage() {
-    return await this._storageApiService.listActivatedStorage();
-  }
-
-  async activateStorage(
-    storageKey: string,
-    configuration: Record<string, string>
-  ) {
+  async activateStorage({
+    storageKey,
+    configuration,
+  }: {
+    storageKey: string;
+    configuration: Record<string, string>;
+  }) {
     await this._storageApiService.activateStorage(storageKey, configuration);
   }
 
-  async showStorageConfig(storageKey: string) {
-    return await this._storageApiService.showStorageConfig(storageKey);
+  async getCurrentActivatedStorage() {
+    return {
+      data: await this._storageApiService.getCurrentActivatedStorage(),
+    };
   }
 
-  async updateStorageConfig(
-    storageKey: string,
-    configuration: Record<string, string>
-  ) {
-    await this._storageApiService.updateStorageConfig(
-      storageKey,
-      configuration
-    );
-  }
-
-  async deactivateStorage(storageKey: string) {
-    await this._storageApiService.deactivateStorage(storageKey);
+  async showStorageCredentials() {
+    return await this._storageApiService.showStorageCredentials();
   }
 }
 

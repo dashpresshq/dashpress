@@ -26,6 +26,7 @@ import {
 } from "shared/types/actions";
 import { IAccountProfile } from "shared/types/user";
 import { compileTemplateString } from "shared/lib/strings/templates";
+import { sluggify } from "shared/lib/strings";
 import { ACTION_INTEGRATIONS } from "./integrations";
 
 export class ActionsApiService implements IApplicationService {
@@ -206,8 +207,8 @@ export class ActionsApiService implements IApplicationService {
     );
 
     const activationId = nanoid();
-    const credentialsGroupKey =
-      ACTION_INTEGRATIONS[integrationKey].credentialsKey;
+
+    const credentialsGroupKey = this.makeCredentialsGroupKey(integrationKey);
 
     await this._activatedActionsPersistenceService.createItem(activationId, {
       activationId,
@@ -224,6 +225,10 @@ export class ActionsApiService implements IApplicationService {
       },
       configuration
     );
+  }
+
+  private makeCredentialsGroupKey(integrationKey: ActionIntegrationKeys) {
+    return sluggify(`ACTION__${integrationKey}`).toUpperCase();
   }
 
   private async getIntegrationKeyFromActivatedActionId(

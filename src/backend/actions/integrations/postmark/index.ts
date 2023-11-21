@@ -16,7 +16,6 @@ const CONFIGURATION_SCHEMA: IAppliedSchemaFormConfig<IActionConfig> = {
 
 export const POST_MARK_ACTION_INTEGRATION: IActionIntegrationsImplemention = {
   title: "Postmark",
-  credentialsKey: "POSTMARK",
   description: "Send emails through Postmark",
   configurationSchema: CONFIGURATION_SCHEMA,
   connect: async (config: IActionConfig) => config,

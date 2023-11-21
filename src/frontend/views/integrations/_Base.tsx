@@ -2,7 +2,7 @@ import { useRouteParam } from "frontend/lib/routing/useRouteParam";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { useRouter } from "next/router";
 import { ReactNode } from "react";
-import { Book, Cloud, UploadCloud, Zap, ZapOff } from "react-feather";
+import { Book, UploadCloud, Zap, ZapOff } from "react-feather";
 import { ContentLayout } from "frontend/design-system/components/Section/SectionDivider";
 import { SectionBox } from "frontend/design-system/components/Section/SectionBox";
 import { ListSkeleton } from "frontend/design-system/components/Skeleton/List";
@@ -16,10 +16,6 @@ import {
   useActionIntegrationsList,
   useActiveActionList,
 } from "./actions/actions.store";
-import {
-  useActiveStorageIntegrationList,
-  useStorageIntegrationsList,
-} from "./storage/storage.store";
 import { ACTION_INTEGRATIONS_CRUD_CONFIG } from "./actions/constants";
 
 interface IProps {
@@ -31,9 +27,6 @@ export function BaseActionsLayout({ children }: IProps) {
 
   const actionIntegrationsList = useActionIntegrationsList();
   const activeActionList = useActiveActionList();
-
-  const storageIntegrationsList = useStorageIntegrationsList();
-  const activeStorageIntegrationList = useActiveStorageIntegrationList();
 
   const router = useRouter();
 
@@ -76,48 +69,17 @@ export function BaseActionsLayout({ children }: IProps) {
               />
             </ViewStateMachine>
           </SectionBox>
-
           <Spacer />
-          {process.env.NEXT_PUBLIC_SHOW_UNFINISHED_FEATURES && (
-            <SectionBox title="File Storage">
-              <ViewStateMachine
-                loading={
-                  storageIntegrationsList.isLoading ||
-                  activeStorageIntegrationList.isLoading
-                }
-                error={
-                  storageIntegrationsList.error ||
-                  activeStorageIntegrationList.error
-                }
-                loader={<ListSkeleton count={7} />}
-              >
-                <RenderList
-                  items={storageIntegrationsList.data.map(({ title, key }) => ({
-                    name: title,
-                    key,
-                  }))}
-                  render={(menuItem) => {
-                    const isActive = activeStorageIntegrationList.data.includes(
-                      menuItem.key
-                    );
-                    return (
-                      <SectionListItem
-                        label={menuItem.name}
-                        key={menuItem.key}
-                        IconComponent={isActive ? UploadCloud : Cloud}
-                        active={menuItem.key === currentKey}
-                        subtle={!isActive}
-                        action={NAVIGATION_LINKS.INTEGRATIONS.STORAGE(
-                          menuItem.key
-                        )}
-                      />
-                    );
-                  }}
-                />
-              </ViewStateMachine>
-            </SectionBox>
-          )}
-
+          <MenuSection
+            menuItems={[
+              {
+                action: NAVIGATION_LINKS.INTEGRATIONS.STORAGE,
+                name: "File Storage",
+                IconComponent: UploadCloud,
+              },
+            ]}
+            currentMenuItem={router.asPath.split("?")[0]}
+          />
           <Spacer />
           <MenuSection
             menuItems={[

@@ -2,21 +2,10 @@ import { USER_PERMISSIONS } from "shared/constants/user";
 import { storageApiController } from "backend/storage/storage.controller";
 import { requestHandler } from "backend/lib/request";
 
-const REQUEST_KEY_FIELD = "key";
-
 export default requestHandler(
   {
-    POST: async (getValidatedRequest) => {
-      const validatedRequest = await getValidatedRequest([
-        {
-          _type: "requestQuery",
-          options: REQUEST_KEY_FIELD,
-        },
-      ]);
-
-      return await storageApiController.showStorageConfig(
-        validatedRequest.requestQuery
-      );
+    POST: async () => {
+      return await storageApiController.showStorageCredentials();
     },
   },
   [

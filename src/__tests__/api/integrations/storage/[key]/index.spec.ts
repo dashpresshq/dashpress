@@ -1,16 +1,14 @@
 import handler from "pages/api/integrations/storage/[key]/index";
 import activeHandler from "pages/api/integrations/storage/active";
-import credentialsHandler from "pages/api/integrations/storage/[key]/credentials";
+import credentialsHandler from "pages/api/integrations/storage/credentials";
 import {
   createAuthenticatedMocks,
   setupAllTestData,
 } from "__tests__/api/_test-utils";
-import { setupActivatedStorageTestData } from "__tests__/api/_test-utils/_activated-storage";
 
 describe("/api/integrations/actions/[key]/index", () => {
   beforeAll(async () => {
     await setupAllTestData(["users"]);
-    await setupActivatedStorageTestData([{ key: "google" }, { key: "minio" }]);
   });
 
   describe("POST", () => {
@@ -41,21 +39,6 @@ describe("/api/integrations/actions/[key]/index", () => {
             },
           }
         `);
-      });
-
-      it("should not show the activated storage in list", async () => {
-        const { req: activeReq, res: activeRes } = createAuthenticatedMocks({
-          method: "GET",
-        });
-
-        await activeHandler(activeReq, activeRes);
-
-        expect(activeRes._getJSONData()).toMatchInlineSnapshot(`
-            [
-              "google",
-              "minio",
-            ]
-          `);
       });
 
       it("should not save the credentials", async () => {
@@ -235,60 +218,6 @@ describe("/api/integrations/actions/[key]/index", () => {
                 "secretAccessKey": "updated some-secret-access-key",
               }
           `);
-    });
-  });
-
-  describe("DELETE", () => {
-    it("should deactivate activated storage", async () => {
-      const { req, res } = createAuthenticatedMocks({
-        method: "DELETE",
-        query: {
-          key: "s3",
-        },
-      });
-      await handler(req, res);
-
-      expect(res._getStatusCode()).toBe(204);
-    });
-
-    it("should remove activated action", async () => {
-      const { req: activeReq, res: activeRes } = createAuthenticatedMocks({
-        method: "GET",
-      });
-
-      await activeHandler(activeReq, activeRes);
-
-      expect(activeRes._getJSONData()).toMatchInlineSnapshot(`
-        [
-          "google",
-          "minio",
-        ]
-      `);
-    });
-
-    it("should remove access to credentials", async () => {
-      const { req: credentialsReq, res: credentialsRes } =
-        createAuthenticatedMocks({
-          method: "POST",
-          query: {
-            key: "s3",
-          },
-          body: {
-            _password: "password",
-          },
-        });
-      await credentialsHandler(credentialsReq, credentialsRes);
-
-      expect(credentialsRes._getStatusCode()).toBe(400);
-      expect(credentialsRes._getJSONData()).toMatchInlineSnapshot(`
-        {
-          "message": "No credentials available for AWS_S3",
-          "method": "POST",
-          "name": "BadRequestError",
-          "path": "",
-          "statusCode": 400,
-        }
-      `);
     });
   });
 });

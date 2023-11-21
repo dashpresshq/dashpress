@@ -16,7 +16,6 @@ const CONFIGURATION_SCHEMA: IAppliedSchemaFormConfig<IActionConfig> = {
 
 export const SLACK_ACTION_INTEGRATION: IActionIntegrationsImplemention = {
   title: "Slack",
-  credentialsKey: "SLACK",
   description: "Send messages to your Slack channels",
   configurationSchema: CONFIGURATION_SCHEMA,
   connect: async (config: IActionConfig) => config,

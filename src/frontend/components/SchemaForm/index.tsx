@@ -17,7 +17,7 @@ interface IProps<T> {
   fields: IAppliedSchemaFormConfig<T>;
   onSubmit: (data: T) => Promise<void>;
   initialValues?: Partial<T>;
-  buttonText: (submitting: boolean) => string;
+  buttonText?: (submitting: boolean) => string;
   action?: string;
   icon: "add" | "save" | "eye" | "no-icon" | "check" | "logIn";
   onChange?: (data: T) => void;
@@ -105,12 +105,14 @@ export function SchemaForm<T extends Record<string, unknown>>({
                   )}
                 </Field>
               ))}
-            <FormButton
-              text={buttonText}
-              isMakingRequest={submitting}
-              disabled={pristine}
-              icon={icon === "no-icon" ? undefined : icon}
-            />
+            {buttonText && (
+              <FormButton
+                text={buttonText}
+                isMakingRequest={submitting}
+                disabled={pristine}
+                icon={icon === "no-icon" ? undefined : icon}
+              />
+            )}
           </form>
         );
       }}

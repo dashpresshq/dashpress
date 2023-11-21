@@ -27,7 +27,7 @@ export const NAVIGATION_LINKS = {
   INTEGRATIONS: {
     VARIABLES: "/integrations/variables",
     ACTIONS: (actionId: string) => `/integrations/actions/${actionId}`,
-    STORAGE: (storageId: string) => `/integrations/storage/${storageId}`,
+    STORAGE: "/integrations/storage",
   },
   USERS: {
     LIST: "/users",

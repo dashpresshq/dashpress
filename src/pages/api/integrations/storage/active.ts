@@ -5,7 +5,19 @@ import { requestHandler } from "backend/lib/request";
 export default requestHandler(
   {
     GET: async () => {
-      return await storageApiController.listActivatedStorage();
+      return await storageApiController.getCurrentActivatedStorage();
+    },
+    POST: async (getValidatedRequest) => {
+      const validatedRequest = await getValidatedRequest([
+        {
+          _type: "requestBody",
+          options: {},
+        },
+      ]);
+
+      return await storageApiController.activateStorage(
+        validatedRequest.requestBody
+      );
     },
   },
   [

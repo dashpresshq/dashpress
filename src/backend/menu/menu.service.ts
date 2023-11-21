@@ -101,7 +101,7 @@ export class NavigationMenuApiService
     navItems = navItems.concat([
       {
         id: nanoid(),
-        title: "Actions",
+        title: "Integrations",
         icon: "Zap",
         type: NavigationMenuItemType.System,
         link: SystemLinks.Actions,

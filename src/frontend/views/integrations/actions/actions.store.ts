@@ -46,7 +46,7 @@ export const useActivationConfiguration = (activationId: string) => {
         !!activationId &&
         !!rootPassword &&
         activationId !== ActionIntegrationKeys.HTTP,
-      defaultData: {},
+      defaultData: undefined,
     }
   );
 };

@@ -10,7 +10,6 @@ import {
   useSetCurrentActionItems,
 } from "frontend/lib/routing/usePageDetails";
 import { HelpCircle, Plus } from "react-feather";
-import { SchemaForm } from "frontend/components/SchemaForm";
 import { USER_PERMISSIONS } from "shared/constants/user";
 import { usePasswordStore } from "frontend/views/integrations/password.store";
 import { useUserHasPermission } from "frontend/hooks/auth/user.store";
@@ -25,6 +24,10 @@ import { DeleteButton } from "frontend/design-system/components/Button/DeleteBut
 import { Spacer } from "frontend/design-system/primitives/Spacer";
 import { Typo } from "frontend/design-system/primitives/Typo";
 import { OffCanvas } from "frontend/design-system/components/OffCanvas";
+import {
+  PasswordMessage,
+  PasswordToReveal,
+} from "frontend/views/integrations/Password";
 import {
   INTEGRATIONS_GROUP_ENDPOINT,
   useIntegrationConfigurationDeletionMutation,
@@ -178,29 +181,9 @@ export function ManageCredentialGroup({
           userHasPermission(USER_PERMISSIONS.CAN_MANAGE_INTEGRATIONS) &&
           revealedCredentials.data === undefined && (
             <Spacer>
-              <Typo.SM textStyle="italic">
-                Please input your account password to be able to see secret
-                values and manage them
-              </Typo.SM>
-              <Spacer />
-              <SchemaForm
-                fields={{
-                  password: {
-                    type: "password",
-                    validations: [
-                      {
-                        validationType: "required",
-                      },
-                    ],
-                  },
-                }}
-                onSubmit={async ({ password }: { password: string }) => {
-                  passwordStore.setPassword(password);
-                }}
-                icon="eye"
-                buttonText={(isSubmitting) =>
-                  isSubmitting ? "Revealing Secrets" : "Reveal Secrets"
-                }
+              <PasswordToReveal
+                label="Secrets"
+                isLoading={revealedCredentials.isLoading}
               />
             </Spacer>
           )}
@@ -231,6 +214,12 @@ export function ManageCredentialGroup({
         onClose={closeConfigItem}
         show={!!currentConfigItem}
       >
+        {group === IntegrationsConfigurationGroup.Credentials && (
+          <>
+            <PasswordMessage />
+            <Spacer />
+          </>
+        )}
         <KeyValueForm
           group={group}
           initialValues={tableData.data.find(

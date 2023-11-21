@@ -46,4 +46,4 @@ export function BaseManageVariables() {
   );
 }
 
-export const MangeVariablesPageTitle = "Manage Variables";
+export const ManageVariablesPageTitle = "Manage Variables";

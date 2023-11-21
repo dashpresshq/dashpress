@@ -9,7 +9,6 @@ import { Presentation } from "./Presentation";
 interface IFormFileInput extends ISharedFormInput {
   uploadUrl: string;
   metadata?: Record<string, unknown>;
-  maxSize?: number;
 }
 
 function FileInput({
@@ -18,12 +17,11 @@ function FileInput({
   disabled,
   uploadUrl,
   metadata,
-  maxSize,
 }: IFormFileInput) {
   const [progress, setProgress] = useState<number>(0);
   const [error, setError] = useState<string>("");
   const { value, onChange } = input;
-
+  // Get the fiel settings
   const onDrop = useCallback(
     (acceptedFiles: File[]) => {
       input.onChange(null);
@@ -68,9 +66,9 @@ function FileInput({
   const dropZoneProps = useDropzone({
     onDrop,
     multiple: false,
-    accept: { image: ["jpeg, png"] },
+    // accept: { image: ["jpeg, png"] },
+    // maxSize,
     disabled,
-    maxSize,
   });
 
   return (

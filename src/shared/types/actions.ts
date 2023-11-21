@@ -43,7 +43,6 @@ export interface IPerformsImplementation {
 export interface IActionIntegrationsImplemention {
   title: string;
   description: string;
-  credentialsKey: string;
   configurationSchema: IAppliedSchemaFormConfig<any>;
   connect: (config: Record<string, unknown>) => Promise<unknown>;
   performsImplementation: Record<string, IPerformsImplementation>;

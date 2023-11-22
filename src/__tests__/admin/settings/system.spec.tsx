@@ -27,7 +27,6 @@ describe("pages/admin/settings/system", () => {
         screen.getByLabelText("Token Validity Duration In Days")
       ).toHaveValue(5);
     });
-    expect(screen.getByLabelText("Force Introspection")).toBeChecked();
   });
 
   it("should update system settings successfully", async () => {
@@ -41,8 +40,6 @@ describe("pages/admin/settings/system", () => {
       screen.getByLabelText("Token Validity Duration In Days"),
       "9"
     );
-
-    userEvent.click(screen.getByLabelText("Force Introspection"));
 
     await userEvent.click(
       screen.getByRole("button", { name: "Save System Settings" })
@@ -64,6 +61,5 @@ describe("pages/admin/settings/system", () => {
         screen.getByLabelText("Token Validity Duration In Days")
       ).toHaveValue(59);
     });
-    expect(screen.getByLabelText("Force Introspection")).not.toBeChecked();
   });
 });

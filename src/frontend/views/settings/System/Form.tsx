@@ -24,10 +24,6 @@ export function SystemSettingsForm({
             },
           ],
         },
-        forceIntrospection: {
-          type: "boolean",
-          validations: [],
-        },
       }}
     />
   );

@@ -1,9 +1,5 @@
 import { introspect, Entity } from "@dashpress/bacteria";
 import {
-  ConfigurationApiService,
-  configurationApiService,
-} from "backend/configuration/configuration.service";
-import {
   CredentialsApiService,
   credentialsApiService,
 } from "backend/integrations-configurations";
@@ -22,8 +18,7 @@ export class SchemasApiService implements IApplicationService {
 
   constructor(
     private _schemaConfigDataPersistenceService: AbstractConfigDataPersistenceService<IDBSchema>,
-    private _credentialsService: CredentialsApiService,
-    private _configurationService: ConfigurationApiService
+    private _credentialsService: CredentialsApiService
   ) {}
 
   async bootstrap() {
@@ -50,9 +45,7 @@ export class SchemasApiService implements IApplicationService {
   }
 
   private async initDBSchema() {
-    if (
-      await this._configurationService.getSystemSettings("forceIntrospection")
-    ) {
+    if (process.env.NODE_ENV === "production") {
       return await this.doIntrospection();
     }
 
@@ -159,6 +152,5 @@ const schemaPersistenceService =
 
 export const schemasApiService = new SchemasApiService(
   schemaPersistenceService,
-  credentialsApiService,
-  configurationApiService
+  credentialsApiService
 );

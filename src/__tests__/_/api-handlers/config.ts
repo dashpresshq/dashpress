@@ -61,7 +61,6 @@ const ENTITY_VIEWS = (entity: string): ITableTab[] => [
 
 const CONFIG_VALUES = {
   system_settings: {
-    forceIntrospection: true,
     tokenValidityDurationInDays: 5,
   },
   site_settings: {

@@ -7,7 +7,6 @@ const TEST_APP_CONFIG: Partial<Record<string, unknown>> = {
     plural: "Base Model Plural",
   },
   system_settings: {
-    forceIntrospection: false,
     tokenValidityDurationInDays: 1,
   },
 };

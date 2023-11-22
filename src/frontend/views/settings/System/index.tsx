@@ -53,11 +53,7 @@ export function SystemSettings() {
         <ViewStateMachine
           loading={systemSettings.isLoading}
           error={systemSettings.error}
-          loader={
-            <FormSkeleton
-              schema={[FormSkeletonSchema.Input, FormSkeletonSchema.Input]}
-            />
-          }
+          loader={<FormSkeleton schema={[FormSkeletonSchema.Input]} />}
         >
           <SystemSettingsForm
             onSubmit={async (values) => {

@@ -71,7 +71,7 @@ describe("pages/dashboard/[dashboardId]/widget/create", () => {
       screen.getByRole("button", { name: "Create Dashboard Widget" })
     );
 
-    expect((await screen.findAllByRole("status"))[0]).toHaveTextContent(
+    expect(await screen.findByRole("status")).toHaveTextContent(
       "Dashboard Widget Created Successfully"
     );
   });
@@ -114,8 +114,6 @@ describe("pages/dashboard/[dashboardId]/widget/create", () => {
       screen.getByRole("button", { name: "Create Dashboard Widget" })
     );
 
-    expect(await screen.findByRole("status")).toHaveTextContent(
-      "Dashboard Widget Created Successfully"
-    );
+    expect(await screen.findAllByRole("status")).toHaveLength(2);
   });
 });

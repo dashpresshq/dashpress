@@ -3,6 +3,7 @@ import {
   FilterOperators,
   QueryFilterSchema,
 } from "shared/types/data";
+import { setupAllTestData } from "__tests__/api/_test-utils";
 import { RDBMSDataApiService, rDBMSDataApiService } from "../RDBMS";
 
 const filterSchema: FieldQueryFilter[] = [
@@ -72,6 +73,10 @@ const filterSchema: FieldQueryFilter[] = [
 ];
 
 describe("query-generation", () => {
+  beforeAll(() => {
+    setupAllTestData(["credentials"]);
+  });
+
   it("should generate correct queries", async () => {
     const query = (await RDBMSDataApiService.getInstance()).from("tests");
 

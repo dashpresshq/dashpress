@@ -53,8 +53,8 @@ describe("/api/menu", () => {
         },
         {
           "icon": "Zap",
-          "link": "actions",
-          "title": "Actions",
+          "link": "integrations",
+          "title": "Integrations",
           "type": "system",
         },
         {
@@ -125,8 +125,8 @@ describe("/api/menu", () => {
         },
         {
           "icon": "Zap",
-          "link": "actions",
-          "title": "Actions",
+          "link": "integrations",
+          "title": "Integrations",
           "type": "system",
         },
         {

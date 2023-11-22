@@ -114,6 +114,7 @@ export function ManageCredentialGroup({
     if (group !== currentTab) {
       return undefined;
     }
+
     return {
       actionItems: showManageAction
         ? [

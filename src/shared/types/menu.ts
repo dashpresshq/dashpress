@@ -13,7 +13,7 @@ export enum SystemLinks {
   Home = "home",
   Roles = "roles",
   Users = "users",
-  Actions = "actions",
+  Integrations = "integrations",
   AllDashboards = "all-dashboard",
 }
 

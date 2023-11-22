@@ -133,7 +133,7 @@ describe("/api/integrations/actions/[key]/index", () => {
           },
           {
             "activationId": "nano-id-1",
-            "credentialsGroupKey": "SLACK",
+            "credentialsGroupKey": "ACTION__SLACK",
             "integrationKey": "slack",
           },
           {

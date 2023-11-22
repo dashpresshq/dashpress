@@ -24,13 +24,11 @@ export default requestHandler(
     GET: async () => {
       try {
         configApiService.bootstrap();
-
         await credentialsApiService.bootstrap();
         await configurationApiService.bootstrap();
         await environmentVariablesApiService.bootstrap();
         await appConstantsApiService.bootstrap();
         await rolesApiService.bootstrap();
-
         await dataApiService.bootstrap();
         await schemasApiService.bootstrap();
         await usersApiService.bootstrap();
@@ -39,9 +37,7 @@ export default requestHandler(
         await dashboardWidgetsApiService.bootstrap();
         await storageApiService.bootstrap();
         await listOrderApiService.bootstrap();
-
         await bootstrapPortalServices();
-
         await tempStorageApiService.bootstrap();
       } catch (error) {
         noop();

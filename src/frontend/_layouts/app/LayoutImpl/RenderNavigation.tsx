@@ -117,7 +117,7 @@ const SYSTEM_LINK_MAP: Record<SystemLinks, string> = {
   [SystemLinks.Home]: NAVIGATION_LINKS.DASHBOARD.HOME,
   [SystemLinks.Roles]: NAVIGATION_LINKS.ROLES.LIST,
   [SystemLinks.Users]: NAVIGATION_LINKS.USERS.LIST,
-  [SystemLinks.Actions]: NAVIGATION_LINKS.INTEGRATIONS.ACTIONS(
+  [SystemLinks.Integrations]: NAVIGATION_LINKS.INTEGRATIONS.ACTIONS(
     ActionIntegrationKeys.HTTP
   ),
   [SystemLinks.AllDashboards]: NAVIGATION_LINKS.DASHBOARD.CUSTOM.LIST,

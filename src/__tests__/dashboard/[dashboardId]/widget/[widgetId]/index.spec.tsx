@@ -61,7 +61,7 @@ describe("pages/dashboard/[dashboardId]/widget/[widgetId]/index", () => {
       screen.getByRole("button", { name: "Update Dashboard Widget" })
     );
 
-    expect((await screen.findAllByRole("status"))[0]).toHaveTextContent(
+    expect(await screen.findByRole("status")).toHaveTextContent(
       "Dashboard Widget Updated Successfully"
     );
   });
@@ -110,9 +110,7 @@ describe("pages/dashboard/[dashboardId]/widget/[widgetId]/index", () => {
       screen.getByRole("button", { name: "Update Dashboard Widget" })
     );
 
-    expect(await screen.findByRole("status")).toHaveTextContent(
-      "Dashboard Widget Updated Successfully"
-    );
+    expect(await screen.findAllByRole("status")).toHaveLength(2);
   });
 
   it("should render error when widget is not present", async () => {

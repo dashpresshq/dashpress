@@ -5,7 +5,13 @@ import {
   SystemLinks,
 } from "shared/types/menu";
 import userEvent from "@testing-library/user-event";
-import { RenderNavigation } from "../RenderNavigation";
+import { ApplicationRoot } from "frontend/components/ApplicationRoot";
+import { rest } from "msw";
+import { BASE_TEST_URL } from "__tests__/_/api-handlers/_utils";
+import { setupApiHandlers } from "__tests__/_/setupApihandlers";
+import { SideBar } from "../SideBar";
+
+const server = setupApiHandlers();
 
 const navigationItems: INavigationMenuItem[] = [
   {
@@ -48,18 +54,20 @@ const navigationItems: INavigationMenuItem[] = [
 ];
 
 describe("<RenderNavigation />", () => {
-  it("should render all first level items", () => {
+  server.use(
+    rest.get(BASE_TEST_URL("/api/menu"), async (_, res, ctx) => {
+      return res(ctx.json(navigationItems));
+    })
+  );
+
+  it("should render all first level items", async () => {
     render(
-      <RenderNavigation
-        isFullWidth
-        setIsFullWidth={jest.fn()}
-        navigation={navigationItems}
-        activeItem={{}}
-        setActiveItem={jest.fn()}
-      />
+      <ApplicationRoot>
+        <SideBar isFullWidth setIsFullWidth={jest.fn()} />
+      </ApplicationRoot>
     );
 
-    expect(screen.getByText("Header")).toBeInTheDocument();
+    expect(await screen.findByText("Header")).toBeInTheDocument();
 
     expect(screen.getByRole("link", { name: "Settings" })).toHaveAttribute(
       "href",
@@ -72,18 +80,14 @@ describe("<RenderNavigation />", () => {
     );
   });
 
-  it("should hide the menu items when is not full width", () => {
+  it("should hide the menu items when is not full width", async () => {
     render(
-      <RenderNavigation
-        isFullWidth={false}
-        setIsFullWidth={jest.fn()}
-        navigation={navigationItems}
-        activeItem={{}}
-        setActiveItem={jest.fn()}
-      />
+      <ApplicationRoot>
+        <SideBar isFullWidth={false} setIsFullWidth={jest.fn()} />
+      </ApplicationRoot>
     );
 
-    expect(screen.getByText("Header")).not.toBeVisible();
+    expect(screen.queryByText("Header")).not.toBeVisible();
 
     expect(
       screen.queryByRole("link", { name: "Settings" })
@@ -96,14 +100,12 @@ describe("<RenderNavigation />", () => {
 
   it("should render second level items when pressed", async () => {
     render(
-      <RenderNavigation
-        isFullWidth
-        setIsFullWidth={jest.fn()}
-        navigation={navigationItems}
-        activeItem={{}}
-        setActiveItem={jest.fn()}
-      />
+      <ApplicationRoot>
+        <SideBar isFullWidth setIsFullWidth={jest.fn()} />
+      </ApplicationRoot>
     );
+
+    expect(screen.getByText("Header")).toBeInTheDocument();
 
     expect(
       screen.queryByRole("link", { name: "Entity Table" })

@@ -32,7 +32,6 @@ import { FOR_CODE_COV as $32 } from "shared/configurations/base-types";
 import { FOR_CODE_COV as $33 } from "frontend/views/Dashboard/Widget/_components/WidgetHeader/types";
 import { FOR_CODE_COV as $34 } from "shared/types/config";
 import { FOR_CODE_COV as $35 } from "shared/types/roles";
-import { FOR_CODE_COV as $36 } from "shared/types/storage";
 import { FOR_CODE_COV as $37 } from "frontend/views/Dashboard/Widget/_manage/types";
 import { FOR_CODE_COV as $38 } from "shared/types/dashboard/types";
 import { FOR_CODE_COV as $39 } from "shared/types/dashboard/base";
@@ -79,7 +78,6 @@ noop(
   $33,
   $34,
   $35,
-  $36,
   $37,
   $38,
   $39,

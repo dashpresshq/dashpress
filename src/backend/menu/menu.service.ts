@@ -30,7 +30,7 @@ const SYSTEM_LINKS_PERMISSION_MAP: Record<SystemLinks, string> = {
   [SystemLinks.Home]: META_USER_PERMISSIONS.NO_PERMISSION_REQUIRED,
   [SystemLinks.Roles]: USER_PERMISSIONS.CAN_MANAGE_PERMISSIONS,
   [SystemLinks.Users]: USER_PERMISSIONS.CAN_MANAGE_USERS,
-  [SystemLinks.Actions]: USER_PERMISSIONS.CAN_MANAGE_INTEGRATIONS,
+  [SystemLinks.Integrations]: USER_PERMISSIONS.CAN_MANAGE_INTEGRATIONS,
   [SystemLinks.AllDashboards]: META_USER_PERMISSIONS.NO_PERMISSION_REQUIRED,
 };
 
@@ -104,7 +104,7 @@ export class NavigationMenuApiService
         title: "Integrations",
         icon: "Zap",
         type: NavigationMenuItemType.System,
-        link: SystemLinks.Actions,
+        link: SystemLinks.Integrations,
       },
       {
         id: nanoid(),

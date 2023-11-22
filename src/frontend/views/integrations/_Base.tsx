@@ -17,6 +17,7 @@ import {
   useActiveActionList,
 } from "./actions/actions.store";
 import { ACTION_INTEGRATIONS_CRUD_CONFIG } from "./actions/constants";
+import { STORAGE_INTEGRATIONS_CRUD_CONFIG } from "./storage/constants";
 
 interface IProps {
   children: ReactNode;
@@ -74,7 +75,7 @@ export function BaseActionsLayout({ children }: IProps) {
             menuItems={[
               {
                 action: NAVIGATION_LINKS.INTEGRATIONS.STORAGE,
-                name: "File Storage",
+                name: STORAGE_INTEGRATIONS_CRUD_CONFIG.TEXT_LANG.TITLE,
                 IconComponent: UploadCloud,
               },
             ]}

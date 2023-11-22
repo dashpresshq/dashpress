@@ -34,7 +34,9 @@ export function GeneralStorageSettings() {
         />
       }
     >
+      {/* TODO: document */}
       <SchemaForm<IFileUploadSettings>
+        initialValues={fileUploadSettings.data}
         fields={{
           filePathFormat: {
             type: "text",

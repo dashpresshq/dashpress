@@ -87,7 +87,7 @@ interface IProps {
   setIsFullWidth: (value: boolean) => void;
 }
 
-const useNavigationMenuItems = () => {
+export const useNavigationMenuItems = () => {
   return useStorageApi<INavigationMenuItem[]>(NAVIGATION_MENU_ENDPOINT, {
     errorMessage: "Could not load navigation menu",
     defaultData: [],

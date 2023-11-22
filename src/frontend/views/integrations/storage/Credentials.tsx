@@ -99,7 +99,7 @@ export function StorageCredentialsSettings() {
           onSubmit={async ({ storageKey, ...data }) =>
             await activateStorageMutation.mutateAsync({
               storageKey,
-              configuration: data,
+              configuration: data as Record<string, string>,
             })
           }
           initialValues={{

@@ -44,7 +44,7 @@ describe("pages/integrations/variables => credentials", () => {
 
       expect(
         within(priviledgeSection).queryByText(
-          `Please input your account password to be able to see secret values and manage them`
+          `For security reasons, Please input your account password to be able to reveal Secrets`
         )
       ).not.toBeInTheDocument();
       expect(
@@ -75,7 +75,7 @@ describe("pages/integrations/variables => credentials", () => {
       await userEvent.click(screen.getByRole("tab", { name: "Secrets" }));
       expect(
         within(priviledgeSection).getByText(
-          `Please input your account password to be able to see secret values and manage them`
+          `For security reasons, Please input your account password to be able to reveal Secrets`
         )
       ).toBeInTheDocument();
       expect(
@@ -272,7 +272,7 @@ describe("pages/integrations/variables => credentials", () => {
 
       expect(
         within(priviledgeSection).queryByText(
-          `Please input your account password to be able to see secret values and manage them`
+          `For security reasons, Please input your account password to be able to reveal Secrets`
         )
       ).not.toBeInTheDocument();
       expect(
@@ -312,59 +312,6 @@ describe("pages/integrations/variables => credentials", () => {
           "button",
           { name: "Add New Secret" },
           { timeout: 2000 }
-        )
-      ).toBeInTheDocument();
-    });
-  });
-
-  describe("create", () => {
-    it("should create new secret", async () => {
-      render(
-        <AuthenticatedApplicationRoot>
-          <ManageVariables />
-        </AuthenticatedApplicationRoot>
-      );
-
-      await userEvent.click(
-        await screen.findByRole("tab", { name: "Secrets" })
-      );
-
-      await userEvent.click(
-        await screen.findByRole(
-          "button",
-          { name: "Add New Secret" },
-          { timeout: 2000 }
-        )
-      );
-
-      const dialog = screen.getByRole("dialog");
-
-      expect(within(dialog).getByText("Create Secret")).toBeInTheDocument();
-
-      await userEvent.type(within(dialog).getByLabelText("Key"), "NEW_SECRET");
-      await userEvent.type(
-        within(dialog).getByLabelText("Value"),
-        "new secret"
-      );
-
-      await userEvent.click(
-        within(dialog).getByRole("button", { name: "Create Secret" })
-      );
-
-      expect((await screen.findAllByRole("status"))[0]).toHaveTextContent(
-        "Secret Saved Successfully"
-      );
-
-      expect(
-        await screen.findByRole(
-          "row",
-          {
-            name: "{{ SECRET.NEW_SECRET }} new secret",
-          },
-          {
-            timeout: 2000,
-            interval: 100,
-          }
         )
       ).toBeInTheDocument();
     });
@@ -426,6 +373,59 @@ describe("pages/integrations/variables => credentials", () => {
         await within(table).findByRole("row", {
           name: "{{ SECRET.PAYMENT_API_KEY }} super-secret__updated",
         })
+      ).toBeInTheDocument();
+    });
+  });
+
+  describe("create", () => {
+    it("should create new secret", async () => {
+      render(
+        <AuthenticatedApplicationRoot>
+          <ManageVariables />
+        </AuthenticatedApplicationRoot>
+      );
+
+      await userEvent.click(
+        await screen.findByRole("tab", { name: "Secrets" })
+      );
+
+      await userEvent.click(
+        await screen.findByRole(
+          "button",
+          { name: "Add New Secret" },
+          { timeout: 2000 }
+        )
+      );
+
+      const dialog = await screen.findByRole("dialog");
+
+      expect(within(dialog).getByText("Create Secret")).toBeInTheDocument();
+
+      await userEvent.type(within(dialog).getByLabelText("Key"), "NEW_SECRET");
+      await userEvent.type(
+        within(dialog).getByLabelText("Value"),
+        "new secret"
+      );
+
+      await userEvent.click(
+        within(dialog).getByRole("button", { name: "Create Secret" })
+      );
+
+      expect((await screen.findAllByRole("status"))[0]).toHaveTextContent(
+        "Secret Saved Successfully"
+      );
+
+      expect(
+        await screen.findByRole(
+          "row",
+          {
+            name: "{{ SECRET.NEW_SECRET }} new secret",
+          },
+          {
+            timeout: 2000,
+            interval: 100,
+          }
+        )
       ).toBeInTheDocument();
     });
   });

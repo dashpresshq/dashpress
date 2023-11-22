@@ -1,7 +1,11 @@
 import handler from "pages/api/healthcheck";
 import { createUnAuthenticatedMocks } from "../_test-utils/_authenticatedMock";
+import { setupAllTestData } from "../_test-utils";
 
 describe("/api/healthcheck", () => {
+  beforeAll(() => {
+    setupAllTestData(["credentials"]);
+  });
   it("should set up app successfuly", async () => {
     const { req, res } = createUnAuthenticatedMocks({
       method: "GET",

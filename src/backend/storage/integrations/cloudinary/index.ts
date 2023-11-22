@@ -4,7 +4,7 @@ export const CLOUDINARY_STORAGE_INTEGRATION: IStorageIntegrationsImplemention<{}
   {
     title: "Cloudinary",
     integrationConfigurationSchema: {
-      accessKeyId: {
+      apiKey: {
         type: "text",
         validations: [
           {
@@ -12,7 +12,7 @@ export const CLOUDINARY_STORAGE_INTEGRATION: IStorageIntegrationsImplemention<{}
           },
         ],
       },
-      secretAccessKey: {
+      apiSecret: {
         type: "text",
         validations: [
           {
@@ -20,7 +20,7 @@ export const CLOUDINARY_STORAGE_INTEGRATION: IStorageIntegrationsImplemention<{}
           },
         ],
       },
-      region: {
+      cloudName: {
         type: "text",
         validations: [
           {

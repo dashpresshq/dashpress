@@ -25,7 +25,7 @@ export class StorageApiService implements IApplicationService {
       ([key, { title, integrationConfigurationSchema }]) => ({
         title,
         key,
-        description: `Store uploaded files to ${title}`,
+        description: ``,
         configurationSchema: integrationConfigurationSchema,
       })
     );

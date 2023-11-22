@@ -12,10 +12,66 @@ describe("/api/integrations/storage/list", () => {
     expect(res._getJSONData()).toMatchInlineSnapshot(`
       [
         {
-          "configurationSchema": {},
-          "description": "Store uploaded files to Local Storage",
-          "key": "file",
-          "title": "Local Storage",
+          "configurationSchema": {
+            "accessKeyId": {
+              "type": "text",
+              "validations": [
+                {
+                  "validationType": "required",
+                },
+              ],
+            },
+            "region": {
+              "type": "text",
+              "validations": [
+                {
+                  "validationType": "required",
+                },
+              ],
+            },
+            "secretAccessKey": {
+              "type": "text",
+              "validations": [
+                {
+                  "validationType": "required",
+                },
+              ],
+            },
+          },
+          "description": "",
+          "key": "s3",
+          "title": "AWS S3",
+        },
+        {
+          "configurationSchema": {
+            "apiKey": {
+              "type": "text",
+              "validations": [
+                {
+                  "validationType": "required",
+                },
+              ],
+            },
+            "apiSecret": {
+              "type": "text",
+              "validations": [
+                {
+                  "validationType": "required",
+                },
+              ],
+            },
+            "cloudName": {
+              "type": "text",
+              "validations": [
+                {
+                  "validationType": "required",
+                },
+              ],
+            },
+          },
+          "description": "",
+          "key": "cloudinary",
+          "title": "Cloudinary",
         },
         {
           "configurationSchema": {
@@ -44,31 +100,7 @@ describe("/api/integrations/storage/list", () => {
               ],
             },
           },
-          "description": "Store uploaded files to AWS S3",
-          "key": "s3",
-          "title": "AWS S3",
-        },
-        {
-          "configurationSchema": {},
-          "description": "Store uploaded files to Firebase Storage",
-          "key": "firebase",
-          "title": "Firebase Storage",
-        },
-        {
-          "configurationSchema": {},
-          "description": "Store uploaded files to Minio",
-          "key": "minio",
-          "title": "Minio",
-        },
-        {
-          "configurationSchema": {},
-          "description": "Store uploaded files to Cloudinary",
-          "key": "cloudinary",
-          "title": "Cloudinary",
-        },
-        {
-          "configurationSchema": {},
-          "description": "Store uploaded files to Google Cloud Storage",
+          "description": "",
           "key": "google",
           "title": "Google Cloud Storage",
         },

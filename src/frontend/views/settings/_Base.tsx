@@ -6,7 +6,6 @@ import {
   Eye,
   Server,
   Globe,
-  GitHub,
   Book,
   Terminal,
 } from "react-feather";
@@ -14,9 +13,7 @@ import {
   IMenuSectionItem,
   MenuSection,
 } from "frontend/design-system/components/Section/MenuSection";
-import { InfoAlert } from "frontend/design-system/components/Alert";
 import { ContentLayout } from "frontend/design-system/components/Section/SectionDivider";
-import { Spacer } from "frontend/design-system/primitives/Spacer";
 import { AppLayout } from "frontend/_layouts/app";
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
 import { useMutateBaseSettingsMenu } from "./portal";
@@ -75,7 +72,7 @@ export function BaseSettingsLayout({ children }: IProps) {
   const menuItems = useMutateBaseSettingsMenu(baseMenuItems);
   return (
     <AppLayout>
-      {false && ( // TODO log the user who click on the button to not disturb again
+      {/* {false && ( // TODO log the user who click on the button to not disturb again
         <>
           <InfoAlert
             renderJsx
@@ -96,16 +93,15 @@ export function BaseSettingsLayout({ children }: IProps) {
                 </p>
                 <p>
                   We have spent countless hours developing this free app, and we
-                  would really appreciate it if you could drop a star on Github
-                  to boost our motivation.
+                  would really appreciate it if you could drop a star on Github, 
+                  It would mean a lot to us
                 </p>
               </span>
             }
           />
           <Spacer />
         </>
-      )}
-
+      )} */}
       <ContentLayout>
         <ContentLayout.Left>
           <MenuSection

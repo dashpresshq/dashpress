@@ -3,8 +3,8 @@ import { createUnAuthenticatedMocks } from "../_test-utils/_authenticatedMock";
 import { setupAllTestData } from "../_test-utils";
 
 describe("/api/healthcheck", () => {
-  beforeAll(() => {
-    setupAllTestData(["credentials"]);
+  beforeAll(async () => {
+    await setupAllTestData(["credentials"]);
   });
   it("should set up app successfuly", async () => {
     const { req, res } = createUnAuthenticatedMocks({

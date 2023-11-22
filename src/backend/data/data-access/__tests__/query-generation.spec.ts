@@ -73,8 +73,8 @@ const filterSchema: FieldQueryFilter[] = [
 ];
 
 describe("query-generation", () => {
-  beforeAll(() => {
-    setupAllTestData(["credentials"]);
+  beforeAll(async () => {
+    await setupAllTestData(["credentials"]);
   });
 
   it("should generate correct queries", async () => {

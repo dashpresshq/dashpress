@@ -32,13 +32,7 @@ export const FIELD_TYPES_CONFIG_MAP: Record<
       _type: "string",
       bag: undefined,
     },
-    allowedValidations: [
-      "required",
-      // "unique",
-      "maxLength",
-      "minLength",
-      "regex",
-    ],
+    allowedValidations: ["required", "maxLength", "minLength", "regex"],
   },
   password: {
     sortable: false,

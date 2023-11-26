@@ -5,21 +5,30 @@ import { sluggify } from "shared/lib/strings";
 import { format } from "date-fns";
 import { NextApiRequest } from "next";
 import { nanoid } from "nanoid";
+import { compileTemplateString } from "shared/lib/strings/templates";
+import { configurationApiService } from "backend/configuration/configuration.service";
+import { IFileUploadSettings } from "shared/types/file";
 
 export async function parseForm(
   req: NextApiRequest
 ): Promise<{ fields: formidable.Fields; files: formidable.Files }> {
+  const fileUploadSettings =
+    await configurationApiService.show<IFileUploadSettings>(
+      "file_upload_settings"
+    );
   const UPLOAD_CONFIG = {
     entity: sluggify("posts"),
-    maxFileSize: 1024 * 1024 * 5,
+    maxFileSize: 1024 * 1024 * fileUploadSettings.defaultMaxFileSizeInMB,
     fileType: "image",
     rootDir: process.cwd(),
   };
 
-  const uploadDir = join(
-    UPLOAD_CONFIG.rootDir || process.cwd(),
-    `/uploads/${UPLOAD_CONFIG.entity}/${format(Date.now(), "dd-MM-Y")}`
-  );
+  const filePath = compileTemplateString(fileUploadSettings.filePathFormat, {
+    entity: UPLOAD_CONFIG.entity,
+    current_date: format(Date.now(), "dd-MM-Y"),
+  });
+
+  const uploadDir = join(UPLOAD_CONFIG.rootDir || process.cwd(), filePath);
 
   try {
     await stat(uploadDir);
@@ -36,7 +45,18 @@ export async function parseForm(
     maxFileSize: UPLOAD_CONFIG.maxFileSize,
     uploadDir,
     filename: (_name, _ext, part) => {
-      return `${nanoid()}.${part.originalFilename.split(".").pop()}`;
+      const fileNameSplitted = part.originalFilename.split(".");
+      const fileExtension = fileNameSplitted.pop();
+
+      const fileName = compileTemplateString(
+        fileUploadSettings.fileNameFormat,
+        {
+          random_letters: nanoid(),
+          file_name: fileNameSplitted.join("."),
+          file_extension: fileExtension,
+        }
+      );
+      return fileName;
     },
     filter: (part) => {
       return (

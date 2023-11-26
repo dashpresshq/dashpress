@@ -11,7 +11,6 @@ export type ValidationsBoundToType =
 
 export type SelectableAbleValidations =
   | "required"
-  // | "unique"
   | "min"
   | "max"
   | "maxLength"

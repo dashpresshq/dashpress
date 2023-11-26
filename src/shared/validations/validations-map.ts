@@ -58,7 +58,14 @@ export const ENTITY_VALIDATION_CONFIG: Record<
     implementation: handleValidation(isJSON),
   },
   isString: {
-    isBoundToType: ["password", "text", "textarea", "richtext", "image"],
+    isBoundToType: [
+      "password",
+      "text",
+      "textarea",
+      "richtext",
+      "image",
+      "file",
+    ],
     message: "{{ name }} is not a text",
     implementation: handleValidation(isString),
   },

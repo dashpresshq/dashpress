@@ -91,14 +91,6 @@ export abstract class IntegrationsConfigurationApiService
     return await this.processDataAfterFetch(data);
   }
 
-  // async useValue(key: string): Promise<string> {
-  //   const value = this.getValue(key);
-  //   if (value === undefined) {
-  //     throw new BadRequestError(`No credentials available for ${key}`);
-  //   }
-  //   return value;
-  // }
-
   async upsertGroup(
     group: IGroupCredential,
     groupValue: Record<string, string>

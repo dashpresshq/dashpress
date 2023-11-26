@@ -72,8 +72,8 @@ export const CONFIGURATION_KEYS: Record<
     crudConfigLabel: "File Uploads Settings",
     defaultValue: {
       defaultMaxFileSizeInMB: 5,
-      fileNameFormat: "",
-      filePathFormat: "",
+      fileNameFormat: "{{random_letters}}-{{file_name}}-{{file_extension}}",
+      filePathFormat: "/uploads/{{entity}}/{{current_date}}",
     } as IFileUploadSettings,
   },
   entity_presentation_script: {

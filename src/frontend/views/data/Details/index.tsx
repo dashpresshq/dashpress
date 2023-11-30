@@ -14,6 +14,7 @@ import { EntityDetailsView } from "./DetailsView";
 import { DetailsLayout, DETAILS_LAYOUT_KEY } from "./_Layout";
 import { useCanUserPerformCrudAction } from "../useCanUserPerformCrudAction";
 import { DetailsCanvas } from "../Table/_WholeEntityTable/DetailsCanvas";
+import { useDetailsViewMenuItems } from "./portal";
 
 export function EntityDetails() {
   const entityCrudConfig = useEntityCrudConfig();
@@ -34,8 +35,17 @@ export function EntityDetails() {
     permission: META_USER_PERMISSIONS.NO_PERMISSION_REQUIRED,
   });
 
+  const menuItems = useDetailsViewMenuItems({
+    entity,
+    entityId: id,
+  });
+
   return (
-    <DetailsLayout entity={entity} menuKey={DETAILS_LAYOUT_KEY}>
+    <DetailsLayout
+      entity={entity}
+      menuKey={DETAILS_LAYOUT_KEY}
+      menuItems={menuItems}
+    >
       <SectionBox
         title={entityCrudConfig.TEXT_LANG.DETAILS}
         backLink={backLink}

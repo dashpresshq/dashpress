@@ -1,3 +1,5 @@
+import { Knex } from "knex";
+
 export enum FilterOperators {
   GREATER_THAN = "g",
   LESS_THAN = "l",
@@ -63,6 +65,7 @@ export type IPaginatedDataState<T> = {
 export type QueryFilterSchema = {
   operator: "and" | "or";
   children: Array<FieldQueryFilter | QueryFilterSchema>;
+  modifyQuery?: (queryBuilder: Knex.QueryBuilder) => Knex.QueryBuilder;
 };
 
 export type ITableTab = {

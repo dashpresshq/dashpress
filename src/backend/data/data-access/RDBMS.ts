@@ -107,6 +107,10 @@ export class RDBMSDataApiService extends BaseDataAccessService<Knex.QueryBuilder
           queryFilter.operator === "and"
             ? query.where(builderQuery)
             : query.orWhere(builderQuery);
+
+        if (queryFilter.modifyQuery) {
+          query = queryFilter.modifyQuery(query);
+        }
       }
     });
     return query;

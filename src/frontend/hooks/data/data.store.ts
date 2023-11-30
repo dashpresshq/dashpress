@@ -13,6 +13,7 @@ import { DataStates } from "frontend/lib/data/types";
 import { useEntityCrudConfig } from "../entity/entity.config";
 import { useMultipleEntityReferenceFields } from "../entity/entity.store";
 import { isRouterParamEnabled } from "..";
+import { DATA_MUTATION_QUERY_ENDPOINTS } from "./portal";
 
 export const ENTITY_TABLE_PATH = (entity: string) =>
   `/api/data/${entity}/table`;
@@ -157,6 +158,7 @@ export function useEntityDataCreationMutation(entity: string) {
       ENTITY_TABLE_PATH(entity),
       ENTITY_COUNT_PATH(entity),
       ENTITY_LIST_PATH(entity),
+      ...DATA_MUTATION_QUERY_ENDPOINTS(entity),
     ],
     smartSuccessMessage: ({ id }) => ({
       message: entityCrudConfig.MUTATION_LANG.CREATE,
@@ -183,6 +185,7 @@ export function useEntityDataUpdationMutation(entity: string, id: string) {
       ENTITY_TABLE_PATH(entity),
       ENTITY_DETAILS_PATH(entity, id),
       ENTITY_LIST_PATH(entity),
+      ...DATA_MUTATION_QUERY_ENDPOINTS(entity),
     ],
     successMessage: entityCrudConfig.MUTATION_LANG.EDIT,
   });
@@ -207,6 +210,7 @@ export function useEntityDataDeletionMutation(
       ENTITY_TABLE_PATH(entity),
       ENTITY_COUNT_PATH(entity),
       ENTITY_LIST_PATH(entity),
+      ...DATA_MUTATION_QUERY_ENDPOINTS(entity),
     ],
     onSuccessActionWithFormData: () => {
       if (redirectTo) {

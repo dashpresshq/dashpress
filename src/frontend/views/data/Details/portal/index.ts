@@ -1,0 +1,1 @@
+export { useDetailsViewMenuItems } from "./main";

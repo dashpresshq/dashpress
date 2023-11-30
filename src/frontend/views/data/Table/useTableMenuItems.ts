@@ -18,7 +18,7 @@ export const useTableMenuItems = (
   const entityCrudConfig = useEntityCrudConfig(entity);
   const canUserPerformCrudAction = useCanUserPerformCrudAction(entity);
 
-  const pluginTableMenuItems = usePluginTableMenuItems(entity, reference);
+  const pluginTableMenuItems = usePluginTableMenuItems(entity);
 
   if (entity === SLUG_LOADING_VALUE) {
     return [];

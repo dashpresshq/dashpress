@@ -64,7 +64,6 @@ export class UsersApiController {
     }
   }
 
-  // TODO: if mail is activated then send reset form
   async resetPassword(username: string, input: IResetPasswordForm) {
     await this._usersService.resetPassword(username, input.password);
   }

@@ -155,4 +155,4 @@ describe("/api/menu", () => {
   });
 });
 
-// TODO: test isMenuItemAllowed
+// TEST: test isMenuItemAllowed

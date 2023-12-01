@@ -34,7 +34,7 @@ export function GeneralStorageSettings() {
         />
       }
     >
-      {/* TODO: document */}
+      {/* TODO: documentation */}
       <SchemaForm<IFileUploadSettings>
         initialValues={fileUploadSettings.data}
         fields={{

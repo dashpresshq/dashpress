@@ -13,7 +13,7 @@ const FILTER_OPERATOR_LABELS: Record<FilterOperators, string> = {
   [FilterOperators.BETWEEN]: "Between",
   [FilterOperators.CONTAINS]: "Contains",
   [FilterOperators.NOT_EQUAL]: "Not Equal To",
-  [FilterOperators.IS_NULL]: "Is Null", // TODO:
+  [FilterOperators.IS_NULL]: "Is Null",
 };
 
 interface IProps<T> {

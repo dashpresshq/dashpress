@@ -18,7 +18,7 @@ export const useTableMenuItems = (
   const entityCrudConfig = useEntityCrudConfig(entity);
   const canUserPerformCrudAction = useCanUserPerformCrudAction(entity);
 
-  const pluginTableMenuItems = usePluginTableMenuItems(entity);
+  const pluginTableMenuItems = usePluginTableMenuItems(entity, reference);
 
   if (entity === SLUG_LOADING_VALUE) {
     return [];
@@ -35,15 +35,11 @@ export const useTableMenuItems = (
       label: entityCrudConfig.TEXT_LANG.CREATE,
       IconComponent: Plus,
       onClick: () => {
+        let baseUrl = NAVIGATION_LINKS.ENTITY.CREATE(entity);
         if (reference) {
-          router.push(
-            `${NAVIGATION_LINKS.ENTITY.CREATE(entity)}?${
-              reference.referenceField
-            }=${reference.entityId}`
-          );
-          return;
+          baseUrl = `${baseUrl}?${reference.referenceField}=${reference.entityId}`;
         }
-        router.push(NAVIGATION_LINKS.ENTITY.CREATE(entity));
+        router.push(baseUrl);
       },
     });
   }

@@ -5,7 +5,7 @@ import {
   AbstractConfigDataPersistenceService,
 } from "../lib/config-persistence";
 import {
-  CONFIGURATION_KEYS,
+  APP_CONFIGURATION_CONFIG,
   DEFAULT_SYSTEM_SETTINGS,
   ISystemSettings,
   AppConfigurationKeys,
@@ -26,7 +26,7 @@ export class ConfigurationApiService implements IApplicationService {
   ) {
     progammingError(
       `Configuration '${key}' requires an entity to be passed in`,
-      CONFIGURATION_KEYS[key].requireEntity && !entity
+      APP_CONFIGURATION_CONFIG[key].requireEntity && !entity
     );
   }
 
@@ -50,7 +50,7 @@ export class ConfigurationApiService implements IApplicationService {
             key,
             entity
           )
-        ] as T) || (CONFIGURATION_KEYS[key].defaultValue as T),
+        ] as T) || (APP_CONFIGURATION_CONFIG[key].defaultValue as T),
       ])
     );
   }
@@ -66,7 +66,7 @@ export class ConfigurationApiService implements IApplicationService {
       return value as T;
     }
 
-    return CONFIGURATION_KEYS[key].defaultValue as T;
+    return APP_CONFIGURATION_CONFIG[key].defaultValue as T;
   }
 
   async getSystemSettings<T extends keyof ISystemSettings>(

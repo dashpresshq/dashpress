@@ -17,6 +17,7 @@ import { actionsApiService } from "backend/actions/actions.service";
 import { dashboardWidgetsApiService } from "backend/dashboard-widgets/dashboard-widgets.service";
 import { listOrderApiService } from "backend/list-order/list-order.service";
 import { tempStorageApiService } from "backend/lib/temp-storage";
+import { userPreferencesApiService } from "backend/user-preferences/user-preferences.service";
 import { bootstrapPortalServices } from "./portal";
 
 export default requestHandler(
@@ -37,6 +38,7 @@ export default requestHandler(
         await dashboardWidgetsApiService.bootstrap();
         await storageApiService.bootstrap();
         await listOrderApiService.bootstrap();
+        await userPreferencesApiService.bootstrap();
         await bootstrapPortalServices();
         await tempStorageApiService.bootstrap();
       } catch (error) {

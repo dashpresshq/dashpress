@@ -1,6 +1,6 @@
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
 import { useRouter } from "next/router";
-import { IAuthenticatedUserBag, IUserPreferences } from "shared/types/user";
+import { IAuthenticatedUserBag } from "shared/types/user";
 import { canRoleDoThisSync } from "shared/logic/permissions";
 import { useCallback } from "react";
 import { useStorageApi } from "frontend/lib/data/useApi";
@@ -11,10 +11,6 @@ import { ACCOUNT_PROFILE_CRUD_CONFIG } from "./constants";
 import { useIsGranularCheck } from "./portal";
 
 export const AUTHENTICATED_ACCOUNT_URL = "/api/account/mine";
-
-const DEFAULT_USER_PREFERENCE: IUserPreferences = {
-  theme: "light",
-};
 
 export function useAuthenticatedUserBag() {
   const isAuthenticated = useIsAuthenticatedStore(
@@ -29,7 +25,6 @@ export function useAuthenticatedUserBag() {
       permissions: [],
       role: "",
       username: "",
-      preferences: JSON.stringify(DEFAULT_USER_PREFERENCE),
     },
   });
 }

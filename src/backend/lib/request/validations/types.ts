@@ -8,7 +8,7 @@ export type ValidationKeys = {
     | "guest"
     | "entity"
     | "authenticatedUser"
-    | "configKey"
+    | "configKey" // TODO remove this
     | "rawRequest"
     | "paginationFilter"
     | "canUser"

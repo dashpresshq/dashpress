@@ -9,6 +9,7 @@ export type ConfigDomain =
   | "environment-variables"
   | "dashboard-widgets"
   | "app-config"
+  | "users-preferences"
   | "list-order"
   | "temp-storage"
   | "key-value"

@@ -115,30 +115,39 @@ If you prefer to use Docker, Check the `Dockerfile.example` file in the root fol
 
 
 ## Features
- - One line installation 
- - Authentication
- - Role and Permissions
- - Users management
- - Dashboard builder 
+ - Unlimited Users
+ - Unlimited Roles
+ - One Command Installation
+ - Actions Integrations
+ - Dashboard Builder
  - CRUD
- - Form validation
- - Powerful form manipulation (hiding fields, disabling fields, editing values before submitting)
- - Relationships
- - Powerful Filters
+ - Self Hosted
+ - Form Validations
+ - Form Logic
+ - Breadcrumbs
+ - Rich Text Editor
+ - Tab Views
  - DB Introspection
- - Color Customization
- - Rich text editor
- - Deep navigation
- - Reusable Queries
- - Views
- - Data Count
- - Synced DB Validation
- - Fields selection/ordering
- - Cache
+ - Fields Customisation
+ - Secure Authentication
+ - Synced DB Validations
  - Secure Credentials Storage
- - Forms fields customization
- - Selection Colors
-
+ - Light And Dark Mode
+ - Intelligent Filters
+ - Brand Colors
+ - Intelligent Data Relationships
+ - Menu Builder
+ - Themes
+ - Personalized Table
+ - Bookmarks
+ - 2FA
+ - Multiple Dashboards
+ - Data Export
+ - Charts
+ - Bulk Actions
+ - Fine-Grained Crud Permissions
+ - Change History
+ - Sensitive Fields
 
 ## Roadmap
 

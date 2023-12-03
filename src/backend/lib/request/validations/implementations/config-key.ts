@@ -1,5 +1,5 @@
 import {
-  CONFIGURATION_KEYS,
+  APP_CONFIGURATION_CONFIG,
   AppConfigurationKeys,
 } from "shared/configurations";
 import { BadRequestError } from "backend/lib/errors";
@@ -9,7 +9,7 @@ export const configKeyFilterValidationImpl: ValidationImplType<
   AppConfigurationKeys
 > = async (req) => {
   const key = req.query.key as string;
-  const configBag = CONFIGURATION_KEYS[key];
+  const configBag = APP_CONFIGURATION_CONFIG[key];
   if (!configBag) {
     throw new BadRequestError(`Configuration key '${key}' doesn't exist`);
   }

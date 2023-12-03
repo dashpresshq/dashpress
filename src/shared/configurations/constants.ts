@@ -1,67 +1,70 @@
 import { ISingularPlural } from "shared/types/config";
 import { IFileUploadSettings } from "shared/types/file";
 import { BaseAppConfigurationKeys } from "./base-types";
-import { PortalConfigurationKeys, PORTAL_CONFIGURATION_KEYS } from "./portal";
+import {
+  PortalAppConfigurationKeys,
+  PORTAL_APP_CONFIGURATION_CONFIG,
+} from "./portal";
 import { DEFAULT_SYSTEM_SETTINGS } from "./system";
 import { IAppConfigurationBag } from "./types";
 
 export type AppConfigurationKeys =
   | BaseAppConfigurationKeys
-  | PortalConfigurationKeys;
+  | PortalAppConfigurationKeys;
 
-export const CONFIGURATION_KEYS: Record<
+export const APP_CONFIGURATION_CONFIG: Record<
   AppConfigurationKeys,
   IAppConfigurationBag
 > = {
-  ...PORTAL_CONFIGURATION_KEYS,
+  ...PORTAL_APP_CONFIGURATION_CONFIG,
   hidden_entity_table_columns: {
-    crudConfigLabel: "Table Columns Settings",
+    label: "Table Columns Settings",
     requireEntity: true,
     defaultValue: [],
   },
   hidden_entity_create_columns: {
-    crudConfigLabel: "Create Columns Settings",
+    label: "Create Columns Settings",
     requireEntity: true,
     defaultValue: [],
   },
 
   hidden_entity_update_columns: {
-    crudConfigLabel: "Update Columns Settings",
+    label: "Update Columns Settings",
     requireEntity: true,
     defaultValue: [],
   },
   hidden_entity_details_columns: {
-    crudConfigLabel: "Details Columns Settings",
+    label: "Details Columns Settings",
     requireEntity: true,
     defaultValue: [],
   },
   entity_columns_labels: {
-    crudConfigLabel: "Column Labels Settings",
+    label: "Column Labels Settings",
     requireEntity: true,
     defaultValue: {},
   },
   entity_columns_types: {
-    crudConfigLabel: "Column Types Settings",
+    label: "Column Types Settings",
     requireEntity: true,
     defaultValue: {},
   },
   entity_validations: {
-    crudConfigLabel: "Validations",
+    label: "Validations",
     requireEntity: true,
     defaultValue: {},
   },
   entity_selections: {
-    crudConfigLabel: "Selections Settings",
+    label: "Selections Settings",
     requireEntity: true,
     defaultValue: {},
   },
   entity_diction: {
-    crudConfigLabel: "Diction Settings",
+    label: "Diction Settings",
     requireEntity: true,
     defaultValue: { singular: "", plural: "" } as ISingularPlural,
   },
   entity_form_extension: {
-    crudConfigLabel: "Form Scripts",
+    label: "Form Scripts",
     requireEntity: true,
     defaultValue: {
       fieldsState: "",
@@ -69,7 +72,7 @@ export const CONFIGURATION_KEYS: Record<
     },
   },
   file_upload_settings: {
-    crudConfigLabel: "File Uploads Settings",
+    label: "File Uploads Settings",
     defaultValue: {
       defaultMaxFileSizeInMB: 5,
       fileNameFormat: "{{random_letters}}-{{file_name}}-{{file_extension}}",
@@ -77,19 +80,19 @@ export const CONFIGURATION_KEYS: Record<
     } as IFileUploadSettings,
   },
   entity_presentation_script: {
-    crudConfigLabel: "Presentation Scripts",
+    label: "Presentation Scripts",
     requireEntity: true,
     defaultValue: {
       script: "",
     },
   },
   entity_fields_orders: {
-    crudConfigLabel: "Fields Order",
+    label: "Fields Order",
     requireEntity: true,
     defaultValue: [],
   },
   entity_crud_settings: {
-    crudConfigLabel: "CRUD Settings",
+    label: "CRUD Settings",
     requireEntity: true,
     defaultValue: {
       create: true,
@@ -100,52 +103,52 @@ export const CONFIGURATION_KEYS: Record<
     },
   },
   entity_views: {
-    crudConfigLabel: "Views Settings",
+    label: "Views Settings",
     requireEntity: true,
     defaultValue: [],
   },
   entity_relations_order: {
-    crudConfigLabel: "Relations Order",
+    label: "Relations Order",
     requireEntity: true,
     defaultValue: [],
   },
   hidden_entity_relations: {
-    crudConfigLabel: "Enabled Relations",
+    label: "Enabled Relations",
     requireEntity: true,
     defaultValue: [],
   },
   entity_relation_template: {
-    crudConfigLabel: "Relation Template",
+    label: "Relation Template",
     requireEntity: true,
     defaultValue: { format: "", fields: [] },
   },
   entity_relations_labels: {
-    crudConfigLabel: "Relation Labels",
+    label: "Relation Labels",
     requireEntity: true,
     defaultValue: {},
   },
   disabled_entities: {
-    crudConfigLabel: "Enabled Entities Settings",
+    label: "Enabled Entities Settings",
     defaultValue: [],
   },
   disabled_menu_entities: {
-    crudConfigLabel: "Menu Settings",
+    label: "Menu Settings",
     defaultValue: [],
   },
   menu_entities_order: {
-    crudConfigLabel: "Menu Settings",
+    label: "Menu Settings",
     defaultValue: [],
   },
   default_date_format: {
-    crudConfigLabel: "Date Format",
+    label: "Date Format",
     defaultValue: "do MMM yyyy, h:MM aa",
   },
   system_settings: {
-    crudConfigLabel: "System Settings",
+    label: "System Settings",
     defaultValue: DEFAULT_SYSTEM_SETTINGS,
   },
   theme_color: {
-    crudConfigLabel: "Theme Settings",
+    label: "Theme Settings",
     guest: true,
     defaultValue: {
       primary: "#4b38b3",
@@ -153,7 +156,7 @@ export const CONFIGURATION_KEYS: Record<
     },
   },
   site_settings: {
-    crudConfigLabel: "Site Settings",
+    label: "Site Settings",
     guest: true,
     defaultValue: {
       name: "DashPress",

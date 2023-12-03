@@ -1,6 +1,6 @@
 import { useMutation } from "react-query";
 import {
-  CONFIGURATION_KEYS,
+  APP_CONFIGURATION_CONFIG,
   AppConfigurationKeys,
 } from "shared/configurations";
 import { makeActionRequest } from "frontend/lib/data/makeRequest";
@@ -19,7 +19,7 @@ export const configurationApiPath = (
     return `/api/config/${key}/${entity}`;
   }
 
-  if (CONFIGURATION_KEYS[key].guest && method === "GET") {
+  if (APP_CONFIGURATION_CONFIG[key].guest && method === "GET") {
     return `/api/config/${key}/__guest`;
   }
 
@@ -29,7 +29,7 @@ export const configurationApiPath = (
 export function useAppConfiguration<T>(key: AppConfigurationKeys) {
   return useStorageApi<T>(configurationApiPath(key), {
     errorMessage: MAKE_APP_CONFIGURATION_CRUD_CONFIG(key).TEXT_LANG.NOT_FOUND,
-    defaultData: CONFIGURATION_KEYS[key].defaultValue as T,
+    defaultData: APP_CONFIGURATION_CONFIG[key].defaultValue as T,
   });
 }
 
@@ -42,7 +42,7 @@ export function useEntityConfiguration<T>(
     enabled: isRouterParamEnabled(entity),
     errorMessage: MAKE_APP_CONFIGURATION_CRUD_CONFIG(key).TEXT_LANG.NOT_FOUND,
     defaultData:
-      forceDefaultValue || (CONFIGURATION_KEYS[key].defaultValue as T),
+      forceDefaultValue || (APP_CONFIGURATION_CONFIG[key].defaultValue as T),
   });
 }
 

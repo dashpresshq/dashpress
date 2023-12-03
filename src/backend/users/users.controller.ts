@@ -9,7 +9,6 @@ import {
   IAccountProfile,
   IAccountUser,
   IAuthenticatedUserBag,
-  IUserPreferences,
 } from "shared/types/user";
 import { UsersApiService, usersApiService } from "./users.service";
 
@@ -74,24 +73,6 @@ export class UsersApiController {
 
   async updateProfile(username: string, userDetails: IAccountProfile) {
     await this._usersService.updateUser(username, userDetails);
-  }
-
-  async updateUserPreferences(
-    authenticatedUsername: string,
-    userPreferences: Partial<IUserPreferences>
-  ) {
-    const profile = await this._usersService.getUser(authenticatedUsername);
-
-    const previousPreferences: Partial<IUserPreferences> = profile.preferences
-      ? JSON.parse(profile.preferences)
-      : {};
-
-    await this._usersService.updateUser(authenticatedUsername, {
-      preferences: JSON.stringify({
-        ...previousPreferences,
-        ...userPreferences,
-      }),
-    });
   }
 }
 

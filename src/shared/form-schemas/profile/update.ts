@@ -1,4 +1,3 @@
-import { IUserPreferences } from "shared/types/user";
 import { IAppliedSchemaFormConfig } from "../types";
 
 export type IUpdateUserForm = {

@@ -20,11 +20,16 @@ import {
   useEntityToOneReferenceFields,
 } from "frontend/hooks/entity/entity.store";
 import { DataStates } from "frontend/lib/data/types";
+import styled from "styled-components";
 import { filterOutHiddenScalarColumns } from "../utils";
 import { useEntityViewStateMachine } from "../useEntityViewStateMachine";
 import { viewSpecialDataTypes } from "../viewSpecialDataTypes";
 import { IEntityPresentationScript } from "../types";
 import { evalutePresentationScript } from "../evaluatePresentationScript";
+
+const ContentText = styled(Typo.SM)`
+  overflow-wrap: anywhere;
+`;
 
 export function EntityDetailsView({
   id,
@@ -123,9 +128,9 @@ export function EntityDetailsView({
           });
 
           const contentToRender = specialDataTypeRender || (
-            <Typo.SM>
+            <ContentText>
               {typeof value === "object" ? JSON.stringify(value) : value}
-            </Typo.SM>
+            </ContentText>
           );
 
           return (

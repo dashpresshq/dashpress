@@ -1,6 +1,6 @@
 import { BadRequestError } from "backend/lib/errors";
 import {
-  CONFIGURATION_KEYS,
+  APP_CONFIGURATION_CONFIG,
   AppConfigurationKeys,
 } from "shared/configurations";
 import {
@@ -16,7 +16,7 @@ export class ConfigurationApiController {
   }
 
   async showGuestConfig(key: AppConfigurationKeys) {
-    if (!CONFIGURATION_KEYS[key].guest) {
+    if (!APP_CONFIGURATION_CONFIG[key].guest) {
       throw new BadRequestError(`Invalid guest config key ${key}`);
     }
     return await this.showConfig(key);

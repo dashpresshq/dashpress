@@ -29,22 +29,6 @@ export function useAuthenticatedUserBag() {
   });
 }
 
-export function useAuthenticatedUserPreferences() {
-  const isAuthenticated = useIsAuthenticatedStore(
-    (store) => store.isAuthenticated
-  );
-  return useStorageApi<IUserPreferences>(AUTHENTICATED_ACCOUNT_URL, {
-    returnUndefinedOnError: true,
-    defaultData: DEFAULT_USER_PREFERENCE,
-    enabled: isAuthenticated === true,
-    selector: (data: IAuthenticatedUserBag) => {
-      return data.preferences
-        ? JSON.parse(data.preferences)
-        : DEFAULT_USER_PREFERENCE;
-    },
-  });
-}
-
 const doPermissionCheck = (
   requiredPermission: string,
   isLoadingUser: boolean,

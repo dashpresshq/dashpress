@@ -1,12 +1,14 @@
 import { IFormProps } from "frontend/lib/form/types";
 import { SchemaForm } from "frontend/components/SchemaForm";
-import { UPDATE_USER_PREFERENCES_FORM_SCHEMA } from "shared/form-schemas/profile/update";
-import { IUserPreferences } from "shared/types/user";
 import { userFriendlyCase } from "shared/lib/strings/friendly-case";
 import { useEffect } from "react";
 import { usePortalThemes } from "frontend/_layouts/portal";
 import { uniqBy } from "shared/lib/array/uniq-by";
-import { ACCOUNT_PREFERENCES_CRUD_CONFIG } from "../constants";
+import {
+  ACCOUNT_PREFERENCES_CRUD_CONFIG,
+  UPDATE_USER_PREFERENCES_FORM_SCHEMA,
+} from "./constants";
+import { IUserPreferences } from "./types";
 
 export function UserPreferencesForm({
   onSubmit,

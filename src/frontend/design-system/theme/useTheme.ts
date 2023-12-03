@@ -1,5 +1,6 @@
 import { useCallback, useContext, useEffect } from "react";
 import { darken } from "polished";
+import { ColorSchemes } from "shared/types/ui";
 import { DEFAULT_PRIMARY_COLOR } from "./constants";
 import { ThemeContext } from "./Context";
 import { colorModeToRootColors } from "./generate";
@@ -8,7 +9,7 @@ import { IColorMode, IRootColors } from "./types";
 import { prefixVarNameSpace } from "./root";
 
 const getColorModeImplementation = (
-  colorMode?: "light" | "dark" | IColorMode
+  colorMode?: ColorSchemes | IColorMode
 ): IColorMode => {
   if (!colorMode) {
     return window.matchMedia("(prefers-color-scheme: dark)").matches
@@ -23,7 +24,7 @@ const getColorModeImplementation = (
 
 export const useTheme = (
   themeColor?: string,
-  colorMode?: "light" | "dark" | IColorMode
+  colorMode?: ColorSchemes | IColorMode
 ) => {
   const themeContext = useContext(ThemeContext);
 

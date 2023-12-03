@@ -8,7 +8,6 @@ export type ValidationKeys = {
     | "guest"
     | "entity"
     | "authenticatedUser"
-    | "configKey" // TODO remove this
     | "rawRequest"
     | "paginationFilter"
     | "canUser"
@@ -17,10 +16,8 @@ export type ValidationKeys = {
     | "requestQuery"
     | "requestQueries"
     | "entityId"
-    | "entityRequestBody"
     | "queryFilters"
-    | "withPassword"
-    | "configBody";
+    | "withPassword";
   method?: RequestMethod[];
   body?: unknown;
 };

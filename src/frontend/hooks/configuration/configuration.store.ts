@@ -10,6 +10,7 @@ import { AppStorage } from "frontend/lib/storage/app";
 import { isRouterParamEnabled } from "..";
 import { MAKE_APP_CONFIGURATION_CRUD_CONFIG } from "./configuration.constant";
 
+// :eyes
 export const configurationApiPath = (
   key: AppConfigurationKeys,
   entity?: string,
@@ -19,7 +20,11 @@ export const configurationApiPath = (
     return `/api/config/${key}/${entity}`;
   }
 
-  if (APP_CONFIGURATION_CONFIG[key].guest && method === "GET") {
+  if (method === "PUT") {
+    return `/api/config/${key}`;
+  }
+
+  if (APP_CONFIGURATION_CONFIG[key].guest) {
     return `/api/config/${key}/__guest`;
   }
 

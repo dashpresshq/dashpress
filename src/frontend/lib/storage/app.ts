@@ -8,7 +8,7 @@ const makeKey = (key: string): string => {
 };
 
 export const AppStorage = {
-  set: (key: string, value: Record<string, unknown> | unknown[]) => {
+  set: (key: string, value: unknown) => {
     StorageService.setString(makeKey(key), JSON.stringify(value));
   },
   get: (key: string) => {

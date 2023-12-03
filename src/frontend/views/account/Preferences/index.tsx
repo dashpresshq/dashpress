@@ -1,4 +1,3 @@
-import { useAuthenticatedUserPreferences } from "frontend/hooks/auth/user.store";
 import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { META_USER_PERMISSIONS } from "shared/constants/user";
@@ -7,18 +6,20 @@ import {
   FormSkeleton,
   FormSkeletonSchema,
 } from "frontend/design-system/components/Skeleton/Form";
-import { useUpdateUserPreferencesMutation } from "../account.store";
 import {
-  ACCOUNT_PREFERENCES_CRUD_CONFIG,
-  ACCOUNT_VIEW_KEY,
-} from "../constants";
+  useUpsertUserPreferenceMutation,
+  useUserPreference,
+} from "frontend/hooks/auth/preferences.store";
+import { ColorSchemes } from "shared/types/ui";
+import { ACCOUNT_VIEW_KEY } from "../constants";
 
 import { BaseAccountLayout } from "../_Base";
 import { UserPreferencesForm } from "./Form";
+import { ACCOUNT_PREFERENCES_CRUD_CONFIG } from "./constants";
 
 export function UserPreferences() {
-  const userPreferences = useAuthenticatedUserPreferences();
-  const updateProfilePreferencesMutation = useUpdateUserPreferencesMutation();
+  const userPreferences = useUserPreference<ColorSchemes>("theme");
+  const upsertUserPreferenceMutation = useUpsertUserPreferenceMutation("theme");
 
   useSetPageDetails({
     pageTitle: ACCOUNT_PREFERENCES_CRUD_CONFIG.TEXT_LANG.EDIT,
@@ -35,8 +36,10 @@ export function UserPreferences() {
           loader={<FormSkeleton schema={[FormSkeletonSchema.Input]} />}
         >
           <UserPreferencesForm
-            onSubmit={updateProfilePreferencesMutation.mutateAsync}
-            initialValues={userPreferences.data}
+            onSubmit={async (data) => {
+              await upsertUserPreferenceMutation.mutateAsync(data.theme);
+            }}
+            initialValues={{ theme: userPreferences.data }}
           />
         </ViewStateMachine>
       </SectionBox>

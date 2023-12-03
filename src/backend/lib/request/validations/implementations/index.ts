@@ -1,13 +1,10 @@
 import { ValidationKeys } from "../types";
 import { crudEnabledValidationImpl as crudEnabled } from "./crud-enabled";
-import { configBodyValidationImpl as configBody } from "./config-body";
-import { configKeyFilterValidationImpl as configKey } from "./config-key";
 import { entityValidationImpl as entity } from "./entity";
 import { entityIdFilterValidationImpl as entityId } from "./entity-id";
 import { isAuthenticatedValidationImpl as isAuthenticated } from "./is-authenticated";
 import { paginationFilterValidationImpl as paginationFilter } from "./pagination-filter";
 import { queryFilterValidationImpl as queryFilters } from "./query-filters";
-import { entityRequestBodyValidationImpl as entityRequestBody } from "./entity-request-body";
 import { requestBodyValidationImpl as requestBody } from "./request-body";
 import { guestValidationImpl as guest } from "./guest";
 import { anyBodyValidationImpl as anyBody } from "./any-body";
@@ -36,12 +33,9 @@ export const ValidationImpl: Record<
   rawRequest,
   requestQueries,
   authenticatedUser,
-  configBody,
-  entityRequestBody,
   entity,
   paginationFilter,
   queryFilters,
   entityId,
   withPassword,
-  configKey,
 };

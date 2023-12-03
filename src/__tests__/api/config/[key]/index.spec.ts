@@ -117,4 +117,70 @@ describe("/api/config/[key]/index", () => {
     expect(getReq.res._getStatusCode()).toBe(200);
     expect(getReq.res._getJSONData()).toEqual(["order-1", "order-2"]);
   });
+
+  describe("App config key validation", () => {
+    it("should return error for invalid config key", async () => {
+      const { req, res } = createAuthenticatedMocks({
+        method: "GET",
+        query: {
+          key: "some-invalid-key",
+        },
+      });
+
+      await handler(req, res);
+
+      expect(res._getStatusCode()).toBe(400);
+      expect(res._getJSONData()).toMatchInlineSnapshot(`
+      {
+        "message": "Configuration key 'some-invalid-key' doesn't exist",
+        "method": "GET",
+        "name": "BadRequestError",
+        "path": "",
+        "statusCode": 400,
+      }
+    `);
+    });
+
+    it("should return error for no config key", async () => {
+      const { req, res } = createAuthenticatedMocks({
+        method: "GET",
+        query: {},
+      });
+
+      await handler(req, res);
+
+      expect(res._getStatusCode()).toBe(400);
+      expect(res._getJSONData()).toMatchInlineSnapshot(`
+      {
+        "message": "Configuration key 'undefined' doesn't exist",
+        "method": "GET",
+        "name": "BadRequestError",
+        "path": "",
+        "statusCode": 400,
+      }
+    `);
+    });
+
+    it("should return error for entity config keys when the entity is not passed", async () => {
+      const { req, res } = createAuthenticatedMocks({
+        method: "GET",
+        query: {
+          key: "entity_views",
+        },
+      });
+
+      await handler(req, res);
+
+      expect(res._getStatusCode()).toBe(400);
+      expect(res._getJSONData()).toMatchInlineSnapshot(`
+      {
+        "message": "Configuration of key 'entity_views' requires entity",
+        "method": "GET",
+        "name": "BadRequestError",
+        "path": "",
+        "statusCode": 400,
+      }
+    `);
+    });
+  });
 });

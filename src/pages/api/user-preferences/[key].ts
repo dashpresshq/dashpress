@@ -33,7 +33,7 @@ export default requestHandler({
     return await userPreferenceApiController.upsert(
       (validatedRequest.authenticatedUser as IAccountProfile).username,
       validatedRequest.requestQuery,
-      validatedRequest.requestBody
+      validatedRequest.requestBody.data
     );
   },
 });

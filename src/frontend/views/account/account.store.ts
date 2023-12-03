@@ -5,10 +5,7 @@ import { IUpdateUserForm } from "shared/form-schemas/profile/update";
 import { ACCOUNT_PROFILE_CRUD_CONFIG } from "frontend/hooks/auth/constants";
 import { useWaitForResponseMutationOptions } from "frontend/lib/data/useMutate/useWaitForResponseMutationOptions";
 import { makeActionRequest } from "frontend/lib/data/makeRequest";
-import {
-  ACCOUNT_PREFERENCES_CRUD_CONFIG,
-  PASSWORD_CRUD_CONFIG,
-} from "./constants";
+import { PASSWORD_CRUD_CONFIG } from "./constants";
 
 export function useUpdateProfileMutation() {
   const apiMutateOptions = useWaitForResponseMutationOptions<void>({
@@ -19,19 +16,6 @@ export function useUpdateProfileMutation() {
   return useMutation(
     async (data: IUpdateUserForm) =>
       await makeActionRequest("PATCH", AUTHENTICATED_ACCOUNT_URL, data),
-    apiMutateOptions
-  );
-}
-
-export function useUpdateUserPreferencesMutation() {
-  const apiMutateOptions = useWaitForResponseMutationOptions<void>({
-    endpoints: [AUTHENTICATED_ACCOUNT_URL],
-    successMessage: ACCOUNT_PREFERENCES_CRUD_CONFIG.MUTATION_LANG.SAVED,
-  });
-
-  return useMutation(
-    async (data: IUserPreferences) =>
-      await makeActionRequest("PATCH", "/api/account/preferences", data),
     apiMutateOptions
   );
 }

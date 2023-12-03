@@ -10,3 +10,5 @@ export type EntityTypesForSelection =
   | "boolean";
 
 export const FOR_CODE_COV = 1;
+
+export type ColorSchemes = "light" | "dark";

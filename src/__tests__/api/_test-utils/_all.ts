@@ -12,6 +12,7 @@ import { setupActivatedActionTestData } from "./_activated-actions";
 import { setupActionInstanceTestData } from "./_action-instances";
 import { setupTestDatabaseData } from "./_data";
 import { portalTestData } from "./portal";
+import { setupUserPreferencesTestData } from "./_user-preferences";
 
 type DomainTypes = ConfigDomain | KeyValueDomain | "data";
 
@@ -28,6 +29,7 @@ export const setupAllTestData = async (domains: DomainTypes[]) => {
     ["constants", setupIntegrationsConstantsTestData],
     ["environment-variables", setupIntegrationsEnvTestData],
     ["credentials", setupCredentialsTestData],
+    ["users-preferences", setupUserPreferencesTestData],
     ...portalTestData,
   ];
 

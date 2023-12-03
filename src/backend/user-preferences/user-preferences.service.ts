@@ -8,8 +8,6 @@ import {
   AbstractConfigDataPersistenceService,
 } from "../lib/config-persistence";
 
-// TODO hidden_entity_table_columns
-
 export class UserPreferencesApiService implements IApplicationService {
   constructor(
     private _userPreferencesPersistenceService: AbstractConfigDataPersistenceService<unknown>

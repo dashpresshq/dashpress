@@ -86,7 +86,7 @@ export function MenuSettings() {
 
   return (
     <AppLayout>
-      <SectionBox title="" headLess>
+      <SectionBox title="Menu Settings">
         <Tabs
           currentTab={tabFromUrl}
           onChange={changeTabParam}

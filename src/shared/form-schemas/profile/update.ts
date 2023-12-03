@@ -15,25 +15,3 @@ export const UPDATE_PROFILE_FORM_SCHEMA: IAppliedSchemaFormConfig<IUpdateUserFor
       ],
     },
   };
-
-export const UPDATE_USER_PREFERENCES_FORM_SCHEMA: IAppliedSchemaFormConfig<IUserPreferences> =
-  {
-    theme: {
-      type: "selection",
-      validations: [
-        {
-          validationType: "required",
-        },
-      ],
-      selections: [
-        {
-          label: "Light",
-          value: "light",
-        },
-        {
-          label: "Dark",
-          value: "dark",
-        },
-      ],
-    },
-  };

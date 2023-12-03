@@ -10,10 +10,13 @@ import {
   useUpsertConfigurationMutation,
 } from "frontend/hooks/configuration/configuration.store";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
-import { useUpdateUserPreferencesMutation } from "frontend/views/account/account.store";
-import { useAuthenticatedUserPreferences } from "frontend/hooks/auth/user.store";
 import { IThemeSettings } from "frontend/_layouts/types";
 import { THEME_SETTINGS_CRUD_CONFIG } from "frontend/_layouts/useAppTheme";
+import {
+  useUpsertUserPreferenceMutation,
+  useUserPreference,
+} from "frontend/hooks/auth/preferences.store";
+import { ColorSchemes } from "shared/types/ui";
 import { BaseSettingsLayout } from "../_Base";
 import { ThemeSettingsForm } from "./Form";
 import { SETTINGS_VIEW_KEY } from "../constants";
@@ -21,12 +24,13 @@ import { SETTINGS_VIEW_KEY } from "../constants";
 export function ThemeSettings() {
   const themeColor = useAppConfiguration<IThemeSettings>("theme_color");
 
-  const userPreferences = useAuthenticatedUserPreferences();
+  const userPreference = useUserPreference<ColorSchemes>("theme");
 
   const upsertConfigurationMutation =
     useUpsertConfigurationMutation("theme_color");
 
-  const updateUserPreferencesMutation = useUpdateUserPreferencesMutation();
+  const upsertUserPreferenceMutation =
+    useUpsertUserPreferenceMutation<ColorSchemes>("theme");
 
   useSetPageDetails({
     pageTitle: THEME_SETTINGS_CRUD_CONFIG.TEXT_LANG.TITLE,
@@ -38,21 +42,21 @@ export function ThemeSettings() {
     <BaseSettingsLayout>
       <SectionBox title={THEME_SETTINGS_CRUD_CONFIG.TEXT_LANG.TITLE}>
         <ViewStateMachine
-          loading={themeColor.isLoading || userPreferences.isLoading}
-          error={themeColor.error || userPreferences.error}
+          loading={themeColor.isLoading || userPreference.isLoading}
+          error={themeColor.error || userPreference.error}
           loader={<FormSkeleton schema={[FormSkeletonSchema.Input]} />}
         >
           <ThemeSettingsForm
             onSubmit={async ({ primary, primaryDark, theme }) => {
               await Promise.all([
-                updateUserPreferencesMutation.mutateAsync({ theme }),
+                upsertUserPreferenceMutation.mutateAsync(theme),
                 upsertConfigurationMutation.mutateAsync({
                   primary,
                   primaryDark,
                 }),
               ]);
             }}
-            initialValues={{ ...themeColor.data, ...userPreferences.data }}
+            initialValues={{ ...themeColor.data, theme: userPreference.data }}
           />
         </ViewStateMachine>
       </SectionBox>

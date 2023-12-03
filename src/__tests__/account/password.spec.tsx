@@ -56,6 +56,8 @@ describe("pages/account/password", () => {
       </ApplicationRoot>
     );
 
+    await userEvent.click(screen.getByRole("button", { name: "Close Toast" }));
+
     await userEvent.type(
       await screen.findByLabelText("Old Password"),
       "Old Password"
@@ -70,7 +72,7 @@ describe("pages/account/password", () => {
       screen.getByRole("button", { name: "Update Password" })
     );
 
-    expect((await screen.findAllByRole("status"))[0]).toHaveTextContent(
+    expect(await screen.findByRole("status")).toHaveTextContent(
       "Password will not be changed on demo account"
     );
   });

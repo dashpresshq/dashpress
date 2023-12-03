@@ -42,7 +42,7 @@ describe("pages/account/preferences", () => {
     );
 
     expect(await screen.findByRole("status")).toHaveTextContent(
-      "Account Preferences Saved Successfully"
+      "Theme Preference Saved Successfully"
     );
   });
 

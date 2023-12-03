@@ -75,6 +75,8 @@ describe("pages/admin/[entity]/config/presentation", () => {
       </ApplicationRoot>
     );
 
+    await userEvent.click(screen.getByRole("button", { name: "Close Toast" }));
+
     await userEvent.type(screen.getByLabelText("Script"), "invalid");
 
     await userEvent.click(
@@ -82,7 +84,7 @@ describe("pages/admin/[entity]/config/presentation", () => {
         name: "Save Presentation Scripts",
       })
     );
-    expect((await screen.findAllByRole("status"))[0]).toHaveTextContent(
+    expect(await screen.findByRole("status")).toHaveTextContent(
       "Expression: •JS-Error: SyntaxError: Unexpected identifier"
     );
   });
@@ -108,6 +110,8 @@ describe("pages/admin/[entity]/config/presentation", () => {
       </ApplicationRoot>
     );
 
+    await userEvent.click(screen.getByRole("button", { name: "Close Toast" }));
+
     await userEvent.clear(screen.getByLabelText("Script"));
 
     await userEvent.click(
@@ -115,7 +119,7 @@ describe("pages/admin/[entity]/config/presentation", () => {
         name: "Save Presentation Scripts",
       })
     );
-    expect((await screen.findAllByRole("status"))[0]).toHaveTextContent(
+    expect(await screen.findByRole("status")).toHaveTextContent(
       "Presentation Scripts Saved Successfully"
     );
   });

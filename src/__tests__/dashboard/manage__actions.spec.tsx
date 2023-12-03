@@ -85,7 +85,7 @@ describe("pages/admin/settings/dashboard", () => {
         await within(confirmBox).findByRole("button", { name: "Confirm" })
       );
 
-      expect((await screen.findAllByRole("status"))[0]).toHaveTextContent(
+      expect(await screen.findByRole("status")).toHaveTextContent(
         "Widget Deleted Successfully"
       );
 

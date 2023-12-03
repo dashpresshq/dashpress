@@ -107,6 +107,10 @@ describe("pages/integrations/variables => constants", () => {
         </ApplicationRoot>
       );
 
+      await userEvent.click(
+        screen.getByRole("button", { name: "Close Toast" })
+      );
+
       const table = screen.getByRole("table");
 
       const tableRows = await within(table).findAllByRole("row");
@@ -129,7 +133,7 @@ describe("pages/integrations/variables => constants", () => {
         within(dialog).getByRole("button", { name: "Update Constant" })
       );
 
-      expect((await screen.findAllByRole("status"))[0]).toHaveTextContent(
+      expect(await screen.findByRole("status")).toHaveTextContent(
         "Constant Saved Successfully"
       );
     });
@@ -159,6 +163,10 @@ describe("pages/integrations/variables => constants", () => {
         </ApplicationRoot>
       );
 
+      await userEvent.click(
+        screen.getByRole("button", { name: "Close Toast" })
+      );
+
       const table = screen.getByRole("table");
 
       const tableRows = await within(table).findAllByRole("row");
@@ -181,7 +189,7 @@ describe("pages/integrations/variables => constants", () => {
 
       expect(await within(table).findAllByRole("row")).toHaveLength(4);
 
-      expect((await screen.findAllByRole("status"))[0]).toHaveTextContent(
+      expect(await screen.findByRole("status")).toHaveTextContent(
         "Constant Deleted Successfully"
       );
     });

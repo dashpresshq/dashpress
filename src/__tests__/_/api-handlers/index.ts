@@ -10,6 +10,7 @@ import { integrationsApiHandlers } from "./integrations";
 import { versionApiHandlers } from "./versions";
 import { portalApiHandlers } from "./portal";
 import { menuApiHandlers } from "./menu";
+import { userPreferencesApiHandlers } from "./user-preferences";
 
 export const apiHandlers = [
   ...setupApiHandlers,
@@ -24,4 +25,5 @@ export const apiHandlers = [
   ...versionApiHandlers,
   ...portalApiHandlers,
   ...menuApiHandlers,
+  ...userPreferencesApiHandlers,
 ];

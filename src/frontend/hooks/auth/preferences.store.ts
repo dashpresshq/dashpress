@@ -17,8 +17,8 @@ const userPrefrencesApiPath = (key: UserPreferencesKeys) => {
 export const MAKE_USER_PREFERENCE_CRUD_CONFIG = (key: UserPreferencesKeys) => {
   return MAKE_CRUD_CONFIG({
     path: "N/A",
-    plural: USER_PREFERENCES_CONFIG[key].label,
-    singular: USER_PREFERENCES_CONFIG[key].label,
+    plural: `${USER_PREFERENCES_CONFIG[key].label} Preference `,
+    singular: `${USER_PREFERENCES_CONFIG[key].label} Preference `,
   });
 };
 

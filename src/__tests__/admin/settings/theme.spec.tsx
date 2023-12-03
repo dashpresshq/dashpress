@@ -47,7 +47,7 @@ describe("pages/admin/settings/theme", () => {
     );
 
     expect((await screen.findAllByRole("status"))[1]).toHaveTextContent(
-      "Theme Settings Saved Successfully"
+      "Theme Preference Saved Successfully"
     );
   });
 
@@ -95,11 +95,11 @@ describe("pages/admin/settings/theme", () => {
     );
 
     expect((await screen.findAllByRole("status"))[2]).toHaveTextContent(
-      "Account Preferences Saved Successfully"
+      "Theme Settings Saved Successfully"
     );
 
     expect((await screen.findAllByRole("status"))[3]).toHaveTextContent(
-      "Theme Settings Saved Successfully"
+      "Theme Preference Saved Successfully"
     );
   });
 

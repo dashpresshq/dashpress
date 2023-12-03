@@ -10,7 +10,6 @@ import { AppStorage } from "frontend/lib/storage/app";
 import { isRouterParamEnabled } from "..";
 import { MAKE_APP_CONFIGURATION_CRUD_CONFIG } from "./configuration.constant";
 
-// :eyes
 export const configurationApiPath = (
   key: AppConfigurationKeys,
   entity?: string,

@@ -1,6 +1,6 @@
 import React from "react";
-import toast from "react-hot-toast";
-
+import toast, { Toast } from "react-hot-toast";
+import { X } from "react-feather";
 import { getBestErrorMessage } from "./utils";
 
 const COLORS = {
@@ -14,6 +14,31 @@ const toastStyle = (color: keyof typeof COLORS) => ({
   maxWidth: "550px",
 });
 
+function ToastMessage({ message, toastT }: { message: string; toastT: Toast }) {
+  return (
+    <span
+      style={{
+        display: "flex",
+        alignItems: "center",
+      }}
+    >
+      <span>{message}</span>
+      <X
+        size="18"
+        role="button"
+        style={{
+          cursor: "pointer",
+          marginLeft: "12px",
+        }}
+        aria-label="Close Toast"
+        onClick={() => {
+          toast.dismiss(toastT.id);
+        }}
+      />
+    </span>
+  );
+}
+
 export const ToastService = {
   success: (
     message:
@@ -21,8 +46,9 @@ export const ToastService = {
       | { message: string; action: { label: string; action: () => void } }
   ) => {
     if (typeof message === "string") {
-      toast.success(message as string, {
+      toast.success((t) => <ToastMessage message={message} toastT={t} />, {
         style: toastStyle("success"),
+        duration: 7000,
       });
       return;
     }
@@ -30,13 +56,11 @@ export const ToastService = {
     toast.success(
       (t) => (
         <div>
-          <span>{message.message}</span>
-          <br />
+          <ToastMessage message={message.message} toastT={t} />
           <div
             style={{
               display: "flex",
-              justifyContent: "end",
-              flexDirection: "row",
+              justifyContent: "center",
             }}
           >
             <button
@@ -46,13 +70,14 @@ export const ToastService = {
                 toast.dismiss(t.id);
               }}
               style={{
+                cursor: "pointer",
                 border: 0,
                 display: "inline-block",
                 background: "inherit",
                 padding: 0,
                 color: COLORS.success,
-                fontSize: 14,
-                marginTop: 4,
+                fontSize: 15,
+                marginTop: 8,
               }}
             >
               {message.action.label}
@@ -68,7 +93,11 @@ export const ToastService = {
   },
 
   error: (message: unknown) =>
-    toast.error(getBestErrorMessage(message), {
-      style: toastStyle("danger"),
-    }),
+    toast.error(
+      (t) => <ToastMessage message={getBestErrorMessage(message)} toastT={t} />,
+      {
+        style: toastStyle("danger"),
+        duration: 7000,
+      }
+    ),
 };

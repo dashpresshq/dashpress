@@ -56,7 +56,6 @@ export abstract class BaseDataAccessService<T> {
       return query;
     }
 
-    // :eyes
     if (operator !== FilterOperators.IS_NULL && !value) {
       return query;
     }

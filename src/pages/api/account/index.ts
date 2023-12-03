@@ -8,7 +8,6 @@ export default requestHandler({
     return await usersApiController.listUsers();
   },
 
-  // :eyes
   POST: async (getValidatedRequest) => {
     const validatedRequest = await getValidatedRequest([
       {

@@ -39,7 +39,7 @@ export function AuthLayout({ children, title, subTitle }: IProps) {
       </Head>
       <GuestContainer>
         <Root>
-          <GuestHeader title={title} subTitle={subTitle} {...siteConfig} />
+          <GuestHeader title={title} subTitle={subTitle} {...siteConfig.data} />
           <CardBody>{children}</CardBody>
         </Root>
       </GuestContainer>

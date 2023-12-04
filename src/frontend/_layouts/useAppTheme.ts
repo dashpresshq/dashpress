@@ -15,7 +15,7 @@ export const THEME_SETTINGS_CRUD_CONFIG = MAKE_CRUD_CONFIG({
 
 export const useUserThemePreference = () => {
   const themeColor = useAppConfiguration("theme_color");
-  const userPreferences = useUserPreference<ColorSchemes>("theme");
+  const userPreferences = useUserPreference("theme");
 
   const theme: ColorSchemes | IColorMode = userPreferences.data;
 

@@ -6,6 +6,7 @@ import { AppStorage } from "frontend/lib/storage/app";
 import {
   USER_PREFERENCES_CONFIG,
   UserPreferencesKeys,
+  UserPreferencesValueType,
 } from "shared/user-preferences/constants";
 import { MAKE_CRUD_CONFIG } from "frontend/lib/crud-config";
 import { useIsAuthenticatedStore } from "./useAuthenticateUser";
@@ -22,29 +23,34 @@ export const MAKE_USER_PREFERENCE_CRUD_CONFIG = (key: UserPreferencesKeys) => {
   });
 };
 
-export function useUserPreference<T>(key: UserPreferencesKeys) {
+export function useUserPreference<T extends UserPreferencesKeys>(key: T) {
   const isAuthenticated = useIsAuthenticatedStore(
     (store) => store.isAuthenticated
   );
 
-  return useStorageApi<T>(userPrefrencesApiPath(key), {
-    enabled: isAuthenticated === true,
-    returnUndefinedOnError: true,
-    errorMessage: MAKE_USER_PREFERENCE_CRUD_CONFIG(key).TEXT_LANG.NOT_FOUND,
-    defaultData: USER_PREFERENCES_CONFIG[key].defaultValue as T,
-    selector: (data) => data.data,
-  });
+  return useStorageApi<UserPreferencesValueType<T>>(
+    userPrefrencesApiPath(key),
+    {
+      enabled: isAuthenticated === true,
+      returnUndefinedOnError: true,
+      errorMessage: MAKE_USER_PREFERENCE_CRUD_CONFIG(key).TEXT_LANG.NOT_FOUND,
+      defaultData: USER_PREFERENCES_CONFIG[key].defaultValue as T,
+      selector: (data) => data.data,
+    }
+  );
 }
 
 interface IUpsertConfigMutationOptions {
   otherEndpoints: string[];
 }
 
-export function useUpsertUserPreferenceMutation<T>(
-  key: UserPreferencesKeys,
+export function useUpsertUserPreferenceMutation<T extends UserPreferencesKeys>(
+  key: T,
   mutationOptions?: IUpsertConfigMutationOptions
 ) {
-  const apiMutateOptions = useWaitForResponseMutationOptions<T>({
+  const apiMutateOptions = useWaitForResponseMutationOptions<
+    UserPreferencesValueType<T>
+  >({
     endpoints: [
       userPrefrencesApiPath(key),
       ...(mutationOptions?.otherEndpoints || []),
@@ -55,7 +61,7 @@ export function useUpsertUserPreferenceMutation<T>(
     successMessage: MAKE_USER_PREFERENCE_CRUD_CONFIG(key).MUTATION_LANG.SAVED,
   });
 
-  return useMutation(async (values: T) => {
+  return useMutation(async (values: UserPreferencesValueType<T>) => {
     await makeActionRequest("PUT", userPrefrencesApiPath(key), {
       data: values,
     });

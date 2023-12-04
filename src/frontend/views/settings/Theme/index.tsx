@@ -15,7 +15,6 @@ import {
   useUpsertUserPreferenceMutation,
   useUserPreference,
 } from "frontend/hooks/auth/preferences.store";
-import { ColorSchemes } from "shared/types/ui";
 import { BaseSettingsLayout } from "../_Base";
 import { ThemeSettingsForm } from "./Form";
 import { SETTINGS_VIEW_KEY } from "../constants";
@@ -23,13 +22,12 @@ import { SETTINGS_VIEW_KEY } from "../constants";
 export function ThemeSettings() {
   const themeColor = useAppConfiguration("theme_color");
 
-  const userPreference = useUserPreference<ColorSchemes>("theme");
+  const userPreference = useUserPreference("theme");
 
   const upsertConfigurationMutation =
     useUpsertConfigurationMutation("theme_color");
 
-  const upsertUserPreferenceMutation =
-    useUpsertUserPreferenceMutation<ColorSchemes>("theme");
+  const upsertUserPreferenceMutation = useUpsertUserPreferenceMutation("theme");
 
   useSetPageDetails({
     pageTitle: THEME_SETTINGS_CRUD_CONFIG.TEXT_LANG.TITLE,

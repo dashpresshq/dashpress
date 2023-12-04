@@ -2,6 +2,7 @@ import { IApplicationService } from "backend/types";
 import {
   USER_PREFERENCES_CONFIG,
   UserPreferencesKeys,
+  UserPreferencesValueType,
 } from "shared/user-preferences/constants";
 import {
   createConfigDomainPersistenceService,
@@ -30,7 +31,10 @@ export class UserPreferencesApiService implements IApplicationService {
     );
   }
 
-  async show<T>(username: string, key: UserPreferencesKeys): Promise<T> {
+  async show<T extends UserPreferencesKeys>(
+    username: string,
+    key: T
+  ): Promise<UserPreferencesValueType<T>> {
     const value = await this._userPreferencesPersistenceService.getItem(
       this.makeId({
         key,
@@ -45,10 +49,10 @@ export class UserPreferencesApiService implements IApplicationService {
     return USER_PREFERENCES_CONFIG[key].defaultValue as T;
   }
 
-  async upsert(
+  async upsert<T extends UserPreferencesKeys>(
     username: string,
-    key: UserPreferencesKeys,
-    value: unknown
+    key: T,
+    value: UserPreferencesValueType<T>
   ): Promise<void> {
     return await this._userPreferencesPersistenceService.upsertItem(
       this.makeId({

@@ -10,7 +10,6 @@ import {
   useUpsertUserPreferenceMutation,
   useUserPreference,
 } from "frontend/hooks/auth/preferences.store";
-import { ColorSchemes } from "shared/types/ui";
 import { ACCOUNT_VIEW_KEY } from "../constants";
 
 import { BaseAccountLayout } from "../_Base";
@@ -18,7 +17,7 @@ import { UserPreferencesForm } from "./Form";
 import { ACCOUNT_PREFERENCES_CRUD_CONFIG } from "./constants";
 
 export function UserPreferences() {
-  const userPreferences = useUserPreference<ColorSchemes>("theme");
+  const userPreferences = useUserPreference("theme");
   const upsertUserPreferenceMutation = useUpsertUserPreferenceMutation("theme");
 
   useSetPageDetails({

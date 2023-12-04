@@ -70,9 +70,9 @@ export class ConfigurationApiService implements IApplicationService {
     return { ...DEFAULT_SYSTEM_SETTINGS, ...systemSettings }[key];
   }
 
-  async upsert(
-    key: AppConfigurationKeys,
-    value: unknown,
+  async upsert<T extends AppConfigurationKeys>(
+    key: T,
+    value: AppConfigurationValueType<T>,
     entity?: string
   ): Promise<void> {
     this.checkConfigKeyEntityRequirement(key, entity);

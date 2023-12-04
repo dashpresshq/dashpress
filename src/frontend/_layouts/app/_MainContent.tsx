@@ -12,7 +12,7 @@ import { Stack } from "frontend/design-system/primitives/Stack";
 import { Breadcrumbs } from "frontend/design-system/components/Breadcrumbs";
 import { Typo } from "frontend/design-system/primitives/Typo";
 import { Spacer } from "frontend/design-system/primitives/Spacer";
-import { useSiteConfig } from "frontend/hooks/app/site.config";
+import { useAppConfiguration } from "frontend/hooks/configuration/configuration.store";
 import { GoogleTagManager } from "../scripts/GoogleTagManager";
 import { DEMO_LINKS } from "./constant";
 
@@ -27,7 +27,7 @@ export function MainContent({
   actionItems = [],
   secondaryActionItems = [],
 }: IMainContentProps) {
-  const siteConfig = useSiteConfig();
+  const siteConfig = useAppConfiguration("site_settings");
   const { history, pushToStack, goToLinkIndex } = useNavigationStack();
   const router = useRouter();
   const [
@@ -63,7 +63,7 @@ export function MainContent({
     <>
       <Head>
         <title>
-          {pageTitle} - {siteConfig.name}
+          {pageTitle} - {siteConfig.data.name}
         </title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>

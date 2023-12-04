@@ -13,7 +13,6 @@ import {
   useUpsertConfigurationMutation,
 } from "frontend/hooks/configuration/configuration.store";
 import { MAKE_APP_CONFIGURATION_CRUD_CONFIG } from "frontend/hooks/configuration/configuration.constant";
-import { IEntityPresentationScript } from "frontend/views/data/types";
 import { useState } from "react";
 import { DOCUMENTATION_LABEL } from "frontend/docs";
 import { PresentationScriptDocumentation } from "frontend/docs/scripts/presentations-scripts";
@@ -29,11 +28,10 @@ const DOCS_TITLE = "Presentation Script";
 
 export function EntityPresentationScriptSettings() {
   const entity = useEntitySlug();
-  const entityPresentationScript =
-    useEntityConfiguration<IEntityPresentationScript>(
-      "entity_presentation_script",
-      entity
-    );
+  const entityPresentationScript = useEntityConfiguration(
+    "entity_presentation_script",
+    entity
+  );
   const upsertConfigurationMutation = useUpsertConfigurationMutation(
     "entity_presentation_script",
     entity
@@ -65,11 +63,7 @@ export function EntityPresentationScriptSettings() {
           loader={<FormSkeleton schema={[FormSkeletonSchema.RichTextArea]} />}
         >
           <PresentationScriptForm
-            onSubmit={async (values) => {
-              await upsertConfigurationMutation.mutateAsync(
-                values as unknown as Record<string, string>
-              );
-            }}
+            onSubmit={upsertConfigurationMutation.mutateAsync}
             initialValues={entityPresentationScript.data}
           />
         </ViewStateMachine>

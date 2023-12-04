@@ -1,5 +1,4 @@
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
-import { useSiteConfig } from "frontend/hooks/app/site.config";
 import Link from "next/link";
 import React from "react";
 import { ChevronRight } from "react-feather";
@@ -12,6 +11,7 @@ import { useStorageApi } from "frontend/lib/data/useApi";
 import { INavigationMenuItem } from "shared/types/menu";
 import { useSessionStorage } from "react-use";
 import { PlainButton } from "frontend/design-system/components/Button/TextButton";
+import { useAppConfiguration } from "frontend/hooks/configuration/configuration.store";
 import {
   NAVIGATION_MENU_ENDPOINT,
   SIDE_BAR_WIDTH_VARIATIONS,
@@ -95,7 +95,7 @@ export const useNavigationMenuItems = () => {
 };
 
 export function SideBar({ isFullWidth, setIsFullWidth }: IProps) {
-  const siteConfig = useSiteConfig();
+  const siteConfig = useAppConfiguration("site_settings");
   const navigationMenuItems = useNavigationMenuItems();
   const getThemeColorShade = useThemeColorShade();
 
@@ -122,9 +122,9 @@ export function SideBar({ isFullWidth, setIsFullWidth }: IProps) {
       >
         <Link href="/">
           {isFullWidth ? (
-            <LogoFull src={siteConfig.fullLogo} alt="full logo" />
+            <LogoFull src={siteConfig.data.fullLogo} alt="full logo" />
           ) : (
-            <LogoSm src={siteConfig.logo} alt="small logo" />
+            <LogoSm src={siteConfig.data.logo} alt="small logo" />
           )}
         </Link>
       </Brand>

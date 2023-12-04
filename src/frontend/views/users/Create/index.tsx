@@ -37,11 +37,7 @@ export function UserCreate() {
             },
           ]}
         >
-          <CreateUserForm
-            onSubmit={async (user) => {
-              await userCreationMutation.mutateAsync(user);
-            }}
-          />
+          <CreateUserForm onSubmit={userCreationMutation.mutateAsync} />
         </SectionBox>
       </ContentLayout.Center>
       <SystemProfileDocumentation

@@ -22,9 +22,9 @@ describe("pages/admin/settings/system", () => {
         <SystemSettings />
       </ApplicationRoot>
     );
-    await waitFor(() => {
+    await waitFor(async () => {
       expect(
-        screen.getByLabelText("Token Validity Duration In Days")
+        await screen.findByLabelText("Token Validity Duration In Days")
       ).toHaveValue(5);
     });
   });

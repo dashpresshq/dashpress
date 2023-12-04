@@ -23,7 +23,7 @@ export class EntitiesApiController {
   async listAllEntityRelations(entity: string): Promise<string[]> {
     const [entityRelations, disabledEntities] = await Promise.all([
       this._entitiesApiService.getEntityRelations(entity),
-      this._configurationApiService.show<string[]>("disabled_entities"),
+      this._configurationApiService.show("disabled_entities"),
     ]);
 
     const allowedEntityRelation = entityRelations.filter(

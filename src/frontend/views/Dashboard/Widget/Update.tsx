@@ -23,9 +23,7 @@ export function UpdateDashboardWidget() {
   return (
     <BaseManageDashboardWidget
       action="edit"
-      onSave={async (data) =>
-        await updateDashboardWidgetMutation.mutateAsync(data)
-      }
+      onSave={updateDashboardWidgetMutation.mutateAsync}
     />
   );
 }

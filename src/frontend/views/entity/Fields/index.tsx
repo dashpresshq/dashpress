@@ -48,7 +48,7 @@ export function EntityFieldsSettings() {
 
   const entity = useEntitySlug();
   const entityFieldLists = useEntityFieldLists(entity);
-  const entityFieldLabelsMap = useEntityConfiguration<Record<string, string>>(
+  const entityFieldLabelsMap = useEntityConfiguration(
     "entity_columns_labels",
     entity
   );
@@ -57,18 +57,12 @@ export function EntityFieldsSettings() {
   const {
     isLoading: entityFieldTypesMapIsLoading,
     error: entityFieldTypesMapError,
-  } = useEntityConfiguration<Record<string, string>>(
-    "entity_columns_types",
-    entity
-  );
+  } = useEntityConfiguration("entity_columns_types", entity);
 
   const {
     isLoading: entityValidationsMapIsLoading,
     error: entityValidationsMapError,
-  } = useEntityConfiguration<Record<string, string>>(
-    "entity_validations",
-    entity
-  );
+  } = useEntityConfiguration("entity_validations", entity);
 
   const entityFieldTypes = useProcessedEntityFieldTypes();
   const entityFieldValidations = useEntityFieldValidations();
@@ -150,11 +144,7 @@ export function EntityFieldsSettings() {
                     crudConfig={MAKE_APP_CONFIGURATION_CRUD_CONFIG(
                       "entity_columns_labels"
                     )}
-                    onSubmit={async (data) => {
-                      await upsertEntityFieldsMapMutation.mutateAsync(
-                        data as Record<string, string>
-                      );
-                    }}
+                    onSubmit={upsertEntityFieldsMapMutation.mutateAsync}
                   />
                 </ViewStateMachine>
               ),
@@ -224,11 +214,7 @@ export function EntityFieldsSettings() {
                         label: getEntityFieldLabels(name),
                       })),
                     }}
-                    onSave={
-                      upsertEntityColumnsOrderMutation.mutateAsync as (
-                        data: string[]
-                      ) => Promise<void>
-                    }
+                    onSave={upsertEntityColumnsOrderMutation.mutateAsync}
                   />
                 </ViewStateMachine>
               ),

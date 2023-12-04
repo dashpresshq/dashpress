@@ -11,7 +11,7 @@ interface IProps {
   hiddenList: string[];
   allList: string[];
   crudConfig: ICrudConfig;
-  onSubmit: (columnsSelection: string[]) => Promise<void>;
+  onSubmit: (columnsSelection: string[]) => Promise<void | string[]>;
   getEntityFieldLabels: (fieldName: string) => string;
 }
 

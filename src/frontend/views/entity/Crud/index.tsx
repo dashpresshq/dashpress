@@ -41,19 +41,19 @@ function useEntityCrudView() {
 
   const getEntityFieldLabels = useEntityFieldLabels();
 
-  const hiddenTableColumns = useEntityConfiguration<string[]>(
+  const hiddenTableColumns = useEntityConfiguration(
     "hidden_entity_table_columns",
     entity
   );
-  const hiddenCreateColumns = useEntityConfiguration<string[]>(
+  const hiddenCreateColumns = useEntityConfiguration(
     "hidden_entity_create_columns",
     entity
   );
-  const hiddenUpdateColumns = useEntityConfiguration<string[]>(
+  const hiddenUpdateColumns = useEntityConfiguration(
     "hidden_entity_update_columns",
     entity
   );
-  const hiddenDetailsColumns = useEntityConfiguration<string[]>(
+  const hiddenDetailsColumns = useEntityConfiguration(
     "hidden_entity_details_columns",
     entity
   );
@@ -126,9 +126,7 @@ function useEntityCrudView() {
     }
 
     setEntityCrudSettingsState(newState);
-    upsertCrudSettingsMutation.mutateAsync(
-      newState as unknown as Record<string, string>
-    );
+    upsertCrudSettingsMutation.mutateAsync(newState);
   };
 
   const error = entityFields.error || entityCrudSettings.error;
@@ -141,9 +139,7 @@ function useEntityCrudView() {
           label={ENTITY_CRUD_SETTINGS_TAB_LABELS.TABLE}
           columns={{
             fields: entityFields.data,
-            submit: async (data) => {
-              await upsertTableColumnsMutation.mutateAsync(data);
-            },
+            submit: upsertTableColumnsMutation.mutateAsync,
             hidden: hiddenTableColumns.data,
             getEntityFieldLabels,
           }}
@@ -163,9 +159,7 @@ function useEntityCrudView() {
           label={ENTITY_CRUD_SETTINGS_TAB_LABELS.DETAILS}
           columns={{
             fields: entityFields.data,
-            submit: async (data) => {
-              await upsertDetailsColumnsMutation.mutateAsync(data);
-            },
+            submit: upsertDetailsColumnsMutation.mutateAsync,
             hidden: hiddenDetailsColumns.data,
             getEntityFieldLabels,
           }}
@@ -186,9 +180,7 @@ function useEntityCrudView() {
           label={ENTITY_CRUD_SETTINGS_TAB_LABELS.CREATE}
           columns={{
             fields: entityFields.data,
-            submit: async (data) => {
-              await upsertCreateColumnsMutation.mutateAsync(data);
-            },
+            submit: upsertCreateColumnsMutation.mutateAsync,
             hidden: hiddenCreateColumns.data,
             getEntityFieldLabels,
           }}
@@ -209,9 +201,7 @@ function useEntityCrudView() {
           label={ENTITY_CRUD_SETTINGS_TAB_LABELS.UPDATE}
           columns={{
             fields: entityFields.data,
-            submit: async (data) => {
-              await upsertUpdateColumnsMutation.mutateAsync(data);
-            },
+            submit: upsertUpdateColumnsMutation.mutateAsync,
             hidden: hiddenUpdateColumns.data,
             getEntityFieldLabels,
           }}

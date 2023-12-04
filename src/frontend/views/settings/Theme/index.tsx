@@ -10,7 +10,6 @@ import {
   useUpsertConfigurationMutation,
 } from "frontend/hooks/configuration/configuration.store";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
-import { IThemeSettings } from "frontend/_layouts/types";
 import { THEME_SETTINGS_CRUD_CONFIG } from "frontend/_layouts/useAppTheme";
 import {
   useUpsertUserPreferenceMutation,
@@ -22,7 +21,7 @@ import { ThemeSettingsForm } from "./Form";
 import { SETTINGS_VIEW_KEY } from "../constants";
 
 export function ThemeSettings() {
-  const themeColor = useAppConfiguration<IThemeSettings>("theme_color");
+  const themeColor = useAppConfiguration("theme_color");
 
   const userPreference = useUserPreference<ColorSchemes>("theme");
 

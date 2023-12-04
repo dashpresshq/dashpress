@@ -15,6 +15,6 @@ jobs:
       - name: ⤵️ Check out code from GitHub
         uses: actions/checkout@v2
       - name: 🏗 Initialize CodeQL
-        uses: github/codeql-action/init@v1
+        uses: github/codeql-action/init@v2
       - name: 🚀 Perform CodeQL Analysis
-        uses: github/codeql-action/analyze@v1
+        uses: github/codeql-action/analyze@v2

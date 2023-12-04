@@ -7,15 +7,13 @@ import { NextApiRequest } from "next";
 import { nanoid } from "nanoid";
 import { compileTemplateString } from "shared/lib/strings/templates";
 import { configurationApiService } from "backend/configuration/configuration.service";
-import { IFileUploadSettings } from "shared/types/file";
 
 export async function parseForm(
   req: NextApiRequest
 ): Promise<{ fields: formidable.Fields; files: formidable.Files }> {
-  const fileUploadSettings =
-    await configurationApiService.show<IFileUploadSettings>(
-      "file_upload_settings"
-    );
+  const fileUploadSettings = await configurationApiService.show(
+    "file_upload_settings"
+  );
   const UPLOAD_CONFIG = {
     entity: sluggify("posts"),
     maxFileSize: 1024 * 1024 * fileUploadSettings.defaultMaxFileSizeInMB,

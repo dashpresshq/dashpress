@@ -12,9 +12,7 @@ import {
 import { MAKE_APP_CONFIGURATION_CRUD_CONFIG } from "frontend/hooks/configuration/configuration.constant";
 
 export function GeneralStorageSettings() {
-  const fileUploadSettings = useAppConfiguration<IFileUploadSettings>(
-    "file_upload_settings"
-  );
+  const fileUploadSettings = useAppConfiguration("file_upload_settings");
 
   const upsertFileUploadSettingsMutation = useUpsertConfigurationMutation(
     "file_upload_settings"
@@ -69,9 +67,7 @@ export function GeneralStorageSettings() {
             ],
           },
         }}
-        onSubmit={async (data) => {
-          await upsertFileUploadSettingsMutation.mutateAsync(data);
-        }}
+        onSubmit={upsertFileUploadSettingsMutation.mutateAsync}
         buttonText={
           MAKE_APP_CONFIGURATION_CRUD_CONFIG("file_upload_settings").FORM_LANG
             .UPSERT

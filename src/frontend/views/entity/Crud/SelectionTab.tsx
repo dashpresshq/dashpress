@@ -13,7 +13,7 @@ interface IProps {
   label: string;
   columns?: {
     fields: IEntityField[];
-    submit?: (columnsSelection: string[]) => Promise<void>;
+    submit?: (columnsSelection: string[]) => Promise<string[]>;
     hidden: string[];
     getEntityFieldLabels?: (fieldName: string) => string;
   };

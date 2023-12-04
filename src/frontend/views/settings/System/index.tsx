@@ -9,7 +9,6 @@ import {
   useAppConfiguration,
   useUpsertConfigurationMutation,
 } from "frontend/hooks/configuration/configuration.store";
-import { ISystemSettings } from "shared/configurations";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { MAKE_APP_CONFIGURATION_CRUD_CONFIG } from "frontend/hooks/configuration/configuration.constant";
 import { SystemSettingsDocumentation } from "frontend/docs/system-settings";
@@ -24,8 +23,7 @@ const CRUD_CONFIG = MAKE_APP_CONFIGURATION_CRUD_CONFIG("system_settings");
 const DOCS_TITLE = "System Settings";
 
 export function SystemSettings() {
-  const systemSettings =
-    useAppConfiguration<ISystemSettings>("system_settings");
+  const systemSettings = useAppConfiguration("system_settings");
 
   const upsertConfigurationMutation =
     useUpsertConfigurationMutation("system_settings");
@@ -56,9 +54,7 @@ export function SystemSettings() {
           loader={<FormSkeleton schema={[FormSkeletonSchema.Input]} />}
         >
           <SystemSettingsForm
-            onSubmit={async (values) => {
-              await upsertConfigurationMutation.mutateAsync(values);
-            }}
+            onSubmit={upsertConfigurationMutation.mutateAsync}
             initialValues={systemSettings.data}
           />
         </ViewStateMachine>

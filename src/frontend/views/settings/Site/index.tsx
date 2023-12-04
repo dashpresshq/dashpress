@@ -10,7 +10,6 @@ import {
   useUpsertConfigurationMutation,
 } from "frontend/hooks/configuration/configuration.store";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
-import { ISiteSettings } from "shared/types/config";
 import { MAKE_APP_CONFIGURATION_CRUD_CONFIG } from "frontend/hooks/configuration/configuration.constant";
 import { BaseSettingsLayout } from "../_Base";
 import { SiteSettingsForm } from "./Form";
@@ -19,7 +18,7 @@ import { SETTINGS_VIEW_KEY } from "../constants";
 const CRUD_CONFIG = MAKE_APP_CONFIGURATION_CRUD_CONFIG("site_settings");
 
 export function SiteSettings() {
-  const siteSettings = useAppConfiguration<ISiteSettings>("site_settings");
+  const siteSettings = useAppConfiguration("site_settings");
 
   const upsertConfigurationMutation =
     useUpsertConfigurationMutation("site_settings");
@@ -48,9 +47,7 @@ export function SiteSettings() {
           }
         >
           <SiteSettingsForm
-            onSubmit={async (values) => {
-              await upsertConfigurationMutation.mutateAsync(values);
-            }}
+            onSubmit={upsertConfigurationMutation.mutateAsync}
             initialValues={siteSettings.data}
           />
         </ViewStateMachine>

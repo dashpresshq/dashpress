@@ -2,11 +2,10 @@ import { SLUG_LOADING_VALUE } from "frontend/lib/routing/constants";
 import { useEntityConfiguration } from "frontend/hooks/configuration/configuration.store";
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
 import { useCanUserPerformCrudAction } from "frontend/views/data/useCanUserPerformCrudAction";
-import { ITableTab } from "shared/types/data";
 
 export const useWidgetNavigationLink = (entity?: string, queryId?: string) => {
   const canUserPerformCrudAction = useCanUserPerformCrudAction(entity);
-  const entityViews = useEntityConfiguration<ITableTab[]>(
+  const entityViews = useEntityConfiguration(
     "entity_views",
     queryId ? entity : SLUG_LOADING_VALUE
   );

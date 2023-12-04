@@ -1,6 +1,5 @@
 import { useEntityConfiguration } from "frontend/hooks/configuration/configuration.store";
 import { Field, Form } from "react-final-form";
-import { ITableTab } from "shared/types/data";
 import { ISummaryWidgetConfig, IWidgetConfig } from "shared/types/dashboard";
 import { ROYGBIV } from "shared/constants/colors";
 import { IconInputField } from "frontend/components/IconInputField";
@@ -93,7 +92,7 @@ export function DashboardWidgetForm({
         onSubmit={onSubmit}
         initialValues={initialValues}
         render={({ handleSubmit, form, pristine, values, submitting }) => {
-          const entityViews = useEntityConfiguration<ITableTab[]>(
+          const entityViews = useEntityConfiguration(
             "entity_views",
             values.entity
           );

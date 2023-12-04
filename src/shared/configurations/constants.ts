@@ -1,62 +1,62 @@
-import { ISingularPlural } from "shared/types/config";
+import { ISingularPlural, ISiteSettings } from "shared/types/config";
 import { IFileUploadSettings } from "shared/types/file";
+import { IFieldValidationItem } from "shared/validations/types";
+import { IColorableSelection, IThemeSettings } from "shared/types/ui";
+import { FIELD_TYPES_CONFIG_MAP } from "shared/validations";
+import { ITableTab } from "shared/types/data";
 import { BaseAppConfigurationKeys } from "./base-types";
 import {
   PortalAppConfigurationKeys,
   PORTAL_APP_CONFIGURATION_CONFIG,
 } from "./portal";
 import { DEFAULT_SYSTEM_SETTINGS } from "./system";
-import { IAppConfigurationBag } from "./types";
+import { IEntityCrudSettings } from "./types";
 
 export type AppConfigurationKeys =
   | BaseAppConfigurationKeys
   | PortalAppConfigurationKeys;
 
-export const APP_CONFIGURATION_CONFIG: Record<
-  AppConfigurationKeys,
-  IAppConfigurationBag
-> = {
+export const APP_CONFIGURATION_CONFIG = {
   ...PORTAL_APP_CONFIGURATION_CONFIG,
   hidden_entity_table_columns: {
     label: "Table Columns Settings",
     requireEntity: true,
-    defaultValue: [],
+    defaultValue: [] as string[],
   },
   hidden_entity_create_columns: {
     label: "Create Columns Settings",
     requireEntity: true,
-    defaultValue: [],
+    defaultValue: [] as string[],
   },
-
   hidden_entity_update_columns: {
     label: "Update Columns Settings",
     requireEntity: true,
-    defaultValue: [],
+    defaultValue: [] as string[],
   },
   hidden_entity_details_columns: {
     label: "Details Columns Settings",
     requireEntity: true,
-    defaultValue: [],
+    defaultValue: [] as string[],
   },
   entity_columns_labels: {
     label: "Column Labels Settings",
     requireEntity: true,
-    defaultValue: {},
+    defaultValue: {} as Record<string, string>,
   },
   entity_columns_types: {
     label: "Column Types Settings",
     requireEntity: true,
-    defaultValue: {},
+    defaultValue: {} as Record<string, keyof typeof FIELD_TYPES_CONFIG_MAP>,
   },
   entity_validations: {
     label: "Validations",
     requireEntity: true,
-    defaultValue: {},
+    defaultValue: {} as Record<string, IFieldValidationItem[]>,
   },
   entity_selections: {
     label: "Selections Settings",
     requireEntity: true,
-    defaultValue: {},
+    defaultValue: {} as Record<string, IColorableSelection[]>,
   },
   entity_diction: {
     label: "Diction Settings",
@@ -89,7 +89,7 @@ export const APP_CONFIGURATION_CONFIG: Record<
   entity_fields_orders: {
     label: "Fields Order",
     requireEntity: true,
-    defaultValue: [],
+    defaultValue: [] as string[],
   },
   entity_crud_settings: {
     label: "CRUD Settings",
@@ -100,44 +100,47 @@ export const APP_CONFIGURATION_CONFIG: Record<
       table: true,
       update: true,
       delete: true,
-    },
+    } as IEntityCrudSettings,
   },
   entity_views: {
     label: "Views Settings",
     requireEntity: true,
-    defaultValue: [],
+    defaultValue: [] as ITableTab[],
   },
   entity_relations_order: {
     label: "Relations Order",
     requireEntity: true,
-    defaultValue: [],
+    defaultValue: [] as string[],
   },
   hidden_entity_relations: {
     label: "Enabled Relations",
     requireEntity: true,
-    defaultValue: [],
+    defaultValue: [] as string[],
   },
   entity_relation_template: {
     label: "Relation Template",
     requireEntity: true,
-    defaultValue: { format: "", fields: [] },
+    defaultValue: { format: "", fields: [] } as {
+      format: string;
+      fields: string[];
+    },
   },
   entity_relations_labels: {
     label: "Relation Labels",
     requireEntity: true,
-    defaultValue: {},
+    defaultValue: {} as Record<string, string>,
   },
   disabled_entities: {
     label: "Enabled Entities Settings",
-    defaultValue: [],
+    defaultValue: [] as string[],
   },
   disabled_menu_entities: {
     label: "Menu Settings",
-    defaultValue: [],
+    defaultValue: [] as string[],
   },
   menu_entities_order: {
     label: "Menu Settings",
-    defaultValue: [],
+    defaultValue: [] as string[],
   },
   default_date_format: {
     label: "Date Format",
@@ -153,7 +156,7 @@ export const APP_CONFIGURATION_CONFIG: Record<
     defaultValue: {
       primary: "#4b38b3",
       primaryDark: "#8c68cd",
-    },
+    } as IThemeSettings,
   },
   site_settings: {
     label: "Site Settings",
@@ -163,6 +166,9 @@ export const APP_CONFIGURATION_CONFIG: Record<
       fullLogo: "/assets/images/full-logo.png",
       homeLink: "https://dashpress.io",
       logo: "/assets/images/logo.png",
-    },
+    } as ISiteSettings,
   },
 };
+
+export type AppConfigurationValueType<T extends AppConfigurationKeys> =
+  typeof APP_CONFIGURATION_CONFIG[T]["defaultValue"];

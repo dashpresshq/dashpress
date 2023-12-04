@@ -39,13 +39,9 @@ export function MenuSettings() {
 
   const changeTabParam = useChangeRouterParam("tab");
 
-  const menuEntitiesToHide = useAppConfiguration<string[]>(
-    "disabled_menu_entities"
-  );
+  const menuEntitiesToHide = useAppConfiguration("disabled_menu_entities");
 
-  const menuEntitiesOrder = useAppConfiguration<string[]>(
-    "menu_entities_order"
-  );
+  const menuEntitiesOrder = useAppConfiguration("menu_entities_order");
 
   const activeEntities = useActiveEntities();
 
@@ -105,9 +101,7 @@ export function MenuSettings() {
                     allList={activeEntities.data.map(({ value }) => value)}
                     getEntityFieldLabels={getEntitiesDictionPlurals}
                     hiddenList={menuEntitiesToHide.data}
-                    onSubmit={async (data) => {
-                      await upsertHideFromMenuMutation.mutateAsync(data);
-                    }}
+                    onSubmit={upsertHideFromMenuMutation.mutateAsync}
                   />
                 </ViewStateMachine>
               ),
@@ -122,11 +116,7 @@ export function MenuSettings() {
                 >
                   <SortList
                     data={loadedDataState(menuEntities)}
-                    onSave={
-                      upsertEntitiesOrderMutation.mutateAsync as (
-                        data: string[]
-                      ) => Promise<void>
-                    }
+                    onSave={upsertEntitiesOrderMutation.mutateAsync}
                   />
                 </ViewStateMachine>
               ),

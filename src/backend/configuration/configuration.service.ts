@@ -1,5 +1,6 @@
 import { IApplicationService } from "backend/types";
 import { progammingError } from "backend/lib/errors";
+import { AppConfigurationValueType } from "shared/configurations/constants";
 import {
   createConfigDomainPersistenceService,
   AbstractConfigDataPersistenceService,
@@ -18,16 +19,6 @@ export class ConfigurationApiService implements IApplicationService {
 
   async bootstrap() {
     await this._appConfigPersistenceService.setup();
-  }
-
-  private checkConfigKeyEntityRequirement(
-    key: AppConfigurationKeys,
-    entity?: string
-  ) {
-    progammingError(
-      `Configuration '${key}' requires an entity to be passed in`,
-      APP_CONFIGURATION_CONFIG[key].requireEntity && !entity
-    );
   }
 
   async showMultipleConfigForEntities<T>(
@@ -55,7 +46,10 @@ export class ConfigurationApiService implements IApplicationService {
     );
   }
 
-  async show<T>(key: AppConfigurationKeys, entity?: string): Promise<T> {
+  async show<T extends AppConfigurationKeys>(
+    key: T,
+    entity?: string
+  ): Promise<AppConfigurationValueType<T>> {
     this.checkConfigKeyEntityRequirement(key, entity);
 
     const value = await this._appConfigPersistenceService.getItem(
@@ -72,7 +66,7 @@ export class ConfigurationApiService implements IApplicationService {
   async getSystemSettings<T extends keyof ISystemSettings>(
     key: T
   ): Promise<ISystemSettings[T]> {
-    const systemSettings = await this.show<ISystemSettings>("system_settings");
+    const systemSettings = await this.show("system_settings");
     return { ...DEFAULT_SYSTEM_SETTINGS, ...systemSettings }[key];
   }
 
@@ -87,6 +81,19 @@ export class ConfigurationApiService implements IApplicationService {
       this._appConfigPersistenceService.mergeKeyWithSecondaryKey(key, entity),
       value
     );
+  }
+
+  private checkConfigKeyEntityRequirement(
+    key: AppConfigurationKeys,
+    entity?: string
+  ) {
+    const config = APP_CONFIGURATION_CONFIG[key];
+    if ("requireEntity" in config) {
+      progammingError(
+        `Configuration '${key}' requires an entity to be passed in`,
+        config.requireEntity && !entity
+      );
+    }
   }
 }
 

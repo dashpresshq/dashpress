@@ -66,11 +66,7 @@ export function EntityDictionSettings() {
           }
         >
           <EntityDictionForm
-            onSubmit={async (values) => {
-              await upsertConfigurationMutation.mutateAsync(
-                values as unknown as Record<string, string>
-              );
-            }}
+            onSubmit={upsertConfigurationMutation.mutateAsync}
             initialValues={entityDiction}
           />
         </ViewStateMachine>

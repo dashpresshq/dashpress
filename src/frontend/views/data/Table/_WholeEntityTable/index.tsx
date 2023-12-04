@@ -1,5 +1,5 @@
 import { useEntitiesFilterCount } from "frontend/hooks/data/data.store";
-import { ITableTab, FieldQueryFilter } from "shared/types/data";
+import { FieldQueryFilter } from "shared/types/data";
 import { useEntityConfiguration } from "frontend/hooks/configuration/configuration.store";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { useChangeRouterParam } from "frontend/lib/routing/useChangeRouterParam";
@@ -21,10 +21,7 @@ export function WholeEntityTable({ entity, persistFilters = [] }: IProps) {
   const tabFromUrl = useRouteParam("tab");
   const changeTabParam = useChangeRouterParam("tab");
   const portalTableTabs = usePortalTableTabs(entity);
-  const entityViews = useEntityConfiguration<ITableTab[]>(
-    "entity_views",
-    entity
-  );
+  const entityViews = useEntityConfiguration("entity_views", entity);
 
   const tableTabs = [...entityViews.data, ...portalTableTabs.data];
 

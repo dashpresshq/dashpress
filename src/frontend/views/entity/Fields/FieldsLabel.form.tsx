@@ -14,9 +14,9 @@ import { FormButton } from "frontend/design-system/components/Button/FormButton"
 
 interface IProps {
   fields: string[];
-  initialValues?: Record<string, unknown>;
+  initialValues?: Record<string, string>;
   crudConfig: ICrudConfig;
-  onSubmit: (data: Record<string, unknown>) => void;
+  onSubmit: (data: Record<string, string>) => void;
 }
 
 export const loadingFieldsLabelForm = (

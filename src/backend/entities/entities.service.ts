@@ -35,7 +35,7 @@ export class EntitiesApiService implements IApplicationService {
 
   async getActiveEntities(): Promise<ILabelValue[]> {
     const [hiddenEntities, entities] = await Promise.all([
-      this._configurationApiService.show<string[]>("disabled_entities"),
+      this._configurationApiService.show("disabled_entities"),
       this.getAllEntities(),
     ]);
     return entities.filter(({ value }) => !hiddenEntities.includes(value));
@@ -48,10 +48,7 @@ export class EntitiesApiService implements IApplicationService {
   async getOrderedEntityFields(entity: string) {
     const [entityFields, entityFieldsOrder] = await Promise.all([
       this.getEntityFields(entity),
-      this._configurationApiService.show<string[]>(
-        "entity_fields_orders",
-        entity
-      ),
+      this._configurationApiService.show("entity_fields_orders", entity),
     ]);
 
     sortByList(
@@ -93,10 +90,7 @@ export class EntitiesApiService implements IApplicationService {
     crudKey: DataCrudKeys
   ): Promise<string[]> {
     const [configHiddenFields, entityFields] = await Promise.all([
-      this._configurationApiService.show<string[]>(
-        CRUD_KEY_CONFIG[crudKey],
-        entity
-      ),
+      this._configurationApiService.show(CRUD_KEY_CONFIG[crudKey], entity),
       this.getEntityFields(entity),
     ]);
 
@@ -127,7 +121,7 @@ export class EntitiesApiService implements IApplicationService {
 
   async isEntityDisabled(entity: string): Promise<boolean> {
     return (
-      await this._configurationApiService.show<string[]>("disabled_entities")
+      await this._configurationApiService.show("disabled_entities")
     ).includes(entity);
   }
 
@@ -150,19 +144,10 @@ export class EntitiesApiService implements IApplicationService {
       hiddenEntity,
     ] = await Promise.all([
       this.getEntityRelations(entity),
-      this._configurationApiService.show<string[]>("disabled_entities"),
-      this._configurationApiService.show<Record<string, string>>(
-        "entity_relations_labels",
-        entity
-      ),
-      this._configurationApiService.show<string[]>(
-        "entity_relations_order",
-        entity
-      ),
-      this._configurationApiService.show<string[]>(
-        "hidden_entity_relations",
-        entity
-      ),
+      this._configurationApiService.show("disabled_entities"),
+      this._configurationApiService.show("entity_relations_labels", entity),
+      this._configurationApiService.show("entity_relations_order", entity),
+      this._configurationApiService.show("hidden_entity_relations", entity),
     ]);
 
     const allowedEntityRelation =

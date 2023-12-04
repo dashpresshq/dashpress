@@ -20,7 +20,7 @@ import { SETTINGS_VIEW_KEY } from "../constants";
 const CRUD_CONFIG = MAKE_APP_CONFIGURATION_CRUD_CONFIG("default_date_format");
 
 export function DateFormatSettings() {
-  const defaultDateFormat = useAppConfiguration<string>("default_date_format");
+  const defaultDateFormat = useAppConfiguration("default_date_format");
 
   const upsertConfigurationMutation = useUpsertConfigurationMutation(
     "default_date_format"

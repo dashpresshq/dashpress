@@ -139,8 +139,8 @@ export class NavigationMenuApiService
   private async getUserEntities(): Promise<ILabelValue[]> {
     const [hiddenMenuEntities, entitiesOrder, activeEntities] =
       await Promise.all([
-        this._configurationApiService.show<string[]>("disabled_menu_entities"),
-        this._configurationApiService.show<string[]>("menu_entities_order"),
+        this._configurationApiService.show("disabled_menu_entities"),
+        this._configurationApiService.show("menu_entities_order"),
         this._entitiesApiService.getActiveEntities(),
       ]);
 

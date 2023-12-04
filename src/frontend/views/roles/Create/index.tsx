@@ -24,11 +24,7 @@ export function RoleCreate() {
           title={ADMIN_ROLES_CRUD_CONFIG.TEXT_LANG.CREATE}
           backLink={backLink}
         >
-          <CreateRoleForm
-            onSubmit={async (role) => {
-              await roleCreationMutation.mutateAsync(role);
-            }}
-          />
+          <CreateRoleForm onSubmit={roleCreationMutation.mutateAsync} />
         </SectionBox>
       </ContentLayout.Center>
     </AppLayout>

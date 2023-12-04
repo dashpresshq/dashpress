@@ -55,11 +55,12 @@ export function EntityRelationsSettings() {
     permission: USER_PERMISSIONS.CAN_CONFIGURE_APP,
   });
 
-  const entityRelationTemplate = useEntityConfiguration<{
-    format: string;
-  }>("entity_relation_template", entity);
+  const entityRelationTemplate = useEntityConfiguration(
+    "entity_relation_template",
+    entity
+  );
 
-  const hiddenEntityRelations = useEntityConfiguration<string[]>(
+  const hiddenEntityRelations = useEntityConfiguration(
     "hidden_entity_relations",
     entity
   );
@@ -69,9 +70,10 @@ export function EntityRelationsSettings() {
     "value"
   );
 
-  const entityRelationsLabelsMap = useEntityConfiguration<
-    Record<string, string>
-  >("entity_relations_labels", entity);
+  const entityRelationsLabelsMap = useEntityConfiguration(
+    "entity_relations_labels",
+    entity
+  );
 
   const upsertEntityRelationTemplateMutation = useUpsertConfigurationMutation(
     "entity_relation_template",
@@ -141,11 +143,7 @@ export function EntityRelationsSettings() {
                   loader={<FormSkeleton schema={[FormSkeletonSchema.Input]} />}
                 >
                   <EntityRelationsForm
-                    onSubmit={async (values) => {
-                      await upsertEntityRelationTemplateMutation.mutateAsync(
-                        values as unknown as Record<string, string>
-                      );
-                    }}
+                    onSubmit={upsertEntityRelationTemplateMutation.mutateAsync}
                     entityFields={entityFields.data.map(({ name }) => name)}
                     initialValues={entityRelationTemplate.data}
                   />
@@ -167,11 +165,7 @@ export function EntityRelationsSettings() {
                       "entity_relations_labels"
                     )}
                     fields={referenceFields.data.map(({ table }) => table)}
-                    onSubmit={async (data) => {
-                      await upsertEntityRelationsLabelsMutation.mutateAsync(
-                        data as Record<string, string>
-                      );
-                    }}
+                    onSubmit={upsertEntityRelationsLabelsMutation.mutateAsync}
                   />
                 </ViewStateMachine>
               ),
@@ -195,9 +189,7 @@ export function EntityRelationsSettings() {
                       "hidden_entity_relations"
                     )}
                     hiddenList={hiddenEntityRelations.data}
-                    onSubmit={async (data) => {
-                      await upsertHideEntityRelationMutation.mutateAsync(data);
-                    }}
+                    onSubmit={upsertHideEntityRelationMutation.mutateAsync}
                   />
                 </ViewStateMachine>
               ),
@@ -218,11 +210,7 @@ export function EntityRelationsSettings() {
                         label: label || getEntitiesDictionPlurals(table),
                       })),
                     }}
-                    onSave={
-                      upsertEntityRelationsOrderMutation.mutateAsync as (
-                        data: string[]
-                      ) => Promise<void>
-                    }
+                    onSave={upsertEntityRelationsOrderMutation.mutateAsync}
                   />
                 </ViewStateMachine>
               ),

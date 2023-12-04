@@ -33,7 +33,7 @@ function arrayMoveImmutable<T>(array: T[], fromIndex: number, toIndex: number) {
 
 export interface IProps<T> {
   data: DataStateKeys<T[]>;
-  onSave: (data: string[]) => Promise<void>;
+  onSave: (data: string[]) => Promise<void | string[]>;
 }
 
 const THRESHOLD_FOR_LONG_ITEMS_TO_SHOW_SAVE_CHANGES_AT_TOP = 10;

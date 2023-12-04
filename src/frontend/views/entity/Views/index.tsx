@@ -6,7 +6,6 @@ import {
 import { SLUG_LOADING_VALUE } from "frontend/lib/routing/constants";
 import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
-import { ITableTab } from "shared/types/data";
 import { useEntitySlug } from "frontend/hooks/entity/entity.config";
 import {
   useEntityConfiguration,
@@ -35,10 +34,7 @@ export function EntityViewsSettings() {
     entity
   );
 
-  const entityViews = useEntityConfiguration<ITableTab[]>(
-    "entity_views",
-    entity
-  );
+  const entityViews = useEntityConfiguration("entity_views", entity);
 
   const tableColumns = useTableColumns(entity);
 
@@ -79,9 +75,7 @@ export function EntityViewsSettings() {
           {!isLoading && (
             <EntityTableTabForm
               initialValues={entityViews.data}
-              onSubmit={async (data) => {
-                await upsertEntityViewsMutation.mutateAsync(data);
-              }}
+              onSubmit={upsertEntityViewsMutation.mutateAsync}
               tableColumns={tableColumns.data || []}
             />
           )}

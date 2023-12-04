@@ -5,7 +5,6 @@ import { useTheme } from "frontend/design-system/theme/useTheme";
 import { useUserPreference } from "frontend/hooks/auth/preferences.store";
 import { ColorSchemes } from "shared/types/ui";
 import { processThemeColors } from "./portal";
-import { IThemeSettings } from "./types";
 import { getThemePrimaryColor } from "./utils";
 
 export const THEME_SETTINGS_CRUD_CONFIG = MAKE_CRUD_CONFIG({
@@ -15,7 +14,7 @@ export const THEME_SETTINGS_CRUD_CONFIG = MAKE_CRUD_CONFIG({
 });
 
 export const useUserThemePreference = () => {
-  const themeColor = useAppConfiguration<IThemeSettings>("theme_color");
+  const themeColor = useAppConfiguration("theme_color");
   const userPreferences = useUserPreference<ColorSchemes>("theme");
 
   const theme: ColorSchemes | IColorMode = userPreferences.data;

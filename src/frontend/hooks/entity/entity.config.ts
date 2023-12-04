@@ -13,8 +13,6 @@ import { MAKE_CRUD_CONFIG } from "frontend/lib/crud-config";
 import { uniqBy } from "shared/lib/array/uniq-by";
 import { userFriendlyCase } from "shared/lib/strings/friendly-case";
 import { FIELD_TYPES_CONFIG_MAP } from "shared/validations";
-import { IEntityCrudSettings } from "shared/configurations";
-import { ISingularPlural } from "shared/types/config";
 import { useEntityFields } from "./entity.store";
 import {
   getFieldTypeBoundedValidations,
@@ -34,10 +32,7 @@ export function useEntityId() {
 
 export function useEntityDiction(paramEntity?: string) {
   const entity = useEntitySlug(paramEntity);
-  const entityDiction = useEntityConfiguration<ISingularPlural>(
-    "entity_diction",
-    entity
-  );
+  const entityDiction = useEntityConfiguration("entity_diction", entity);
   return {
     singular: entityDiction.data?.singular || userFriendlyCase(entity),
     plural: entityDiction.data?.plural || userFriendlyCase(entity),
@@ -56,7 +51,7 @@ export function useEntityCrudConfig(paramEntity?: string) {
 
 export function useEntityFieldLabels(paramEntity?: string) {
   const entity = useEntitySlug(paramEntity);
-  const entityFieldLabelsMap = useEntityConfiguration<Record<string, string>>(
+  const entityFieldLabelsMap = useEntityConfiguration(
     "entity_columns_labels",
     entity
   );
@@ -78,9 +73,10 @@ export function useProcessedEntityFieldTypes(
   paramEntity?: string
 ): Record<string, keyof typeof FIELD_TYPES_CONFIG_MAP> {
   const entity = useEntitySlug(paramEntity);
-  const entityFieldTypesMap = useEntityConfiguration<
-    Record<string, keyof typeof FIELD_TYPES_CONFIG_MAP>
-  >("entity_columns_types", entity);
+  const entityFieldTypesMap = useEntityConfiguration(
+    "entity_columns_types",
+    entity
+  );
 
   const entityFields = useEntityFields(entity);
 
@@ -97,9 +93,10 @@ export function useProcessedEntityFieldTypes(
 
 export function useEntityFieldValidations(paramEntity?: string) {
   const entity = useEntitySlug(paramEntity);
-  const entityValidationsMap = useEntityConfiguration<
-    Record<string, IFieldValidationItem[]>
-  >("entity_validations", entity);
+  const entityValidationsMap = useEntityConfiguration(
+    "entity_validations",
+    entity
+  );
   const processedEntityFieldTypes = useProcessedEntityFieldTypes(entity);
   const entityFields = useEntityFields(entity);
 
@@ -141,9 +138,7 @@ export function useEntityFieldSelections(
 ): Record<string, IColorableSelection[]> {
   const entity = useEntitySlug(paramEntity);
 
-  const entitySelections = useEntityConfiguration<
-    Record<string, IColorableSelection[]>
-  >("entity_selections", entity);
+  const entitySelections = useEntityConfiguration("entity_selections", entity);
   const processedEntityFieldTypes = useProcessedEntityFieldTypes(entity);
   const entityFields = useEntityFields(entity);
 
@@ -166,16 +161,12 @@ export function useEntityFieldSelections(
 export function useEntityCrudSettings(paramEntity?: string) {
   const entity = useEntitySlug(paramEntity);
 
-  return useEntityConfiguration<IEntityCrudSettings>(
-    "entity_crud_settings",
-    entity,
-    {
-      create: false,
-      details: false,
-      delete: false,
-      update: false,
-    }
-  );
+  return useEntityConfiguration("entity_crud_settings", entity, {
+    create: false,
+    details: false,
+    delete: false,
+    update: false,
+  });
 }
 
 export function useHiddenEntityColumns(
@@ -183,7 +174,7 @@ export function useHiddenEntityColumns(
   overrideEntity?: string
 ): DataStateKeys<string[]> {
   const entity = useEntitySlug();
-  const entityConfig = useEntityConfiguration<string[]>(
+  const entityConfig = useEntityConfiguration(
     CRUD_KEY_CONFIG[crudKey],
     overrideEntity || entity
   );

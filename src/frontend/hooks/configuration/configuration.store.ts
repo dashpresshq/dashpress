@@ -7,6 +7,7 @@ import { makeActionRequest } from "frontend/lib/data/makeRequest";
 import { useStorageApi } from "frontend/lib/data/useApi";
 import { useWaitForResponseMutationOptions } from "frontend/lib/data/useMutate/useWaitForResponseMutationOptions";
 import { AppStorage } from "frontend/lib/storage/app";
+import { AppConfigurationValueType } from "shared/configurations/constants";
 import { isRouterParamEnabled } from "..";
 import { MAKE_APP_CONFIGURATION_CRUD_CONFIG } from "./configuration.constant";
 
@@ -23,44 +24,52 @@ export const configurationApiPath = (
     return `/api/config/${key}`;
   }
 
-  if (APP_CONFIGURATION_CONFIG[key].guest) {
+  const config = APP_CONFIGURATION_CONFIG[key];
+
+  if ("guest" in config && config.guest) {
     return `/api/config/${key}/__guest`;
   }
 
   return `/api/config/${key}`;
 };
 
-export function useAppConfiguration<T>(key: AppConfigurationKeys) {
-  return useStorageApi<T>(configurationApiPath(key), {
-    errorMessage: MAKE_APP_CONFIGURATION_CRUD_CONFIG(key).TEXT_LANG.NOT_FOUND,
-    defaultData: APP_CONFIGURATION_CONFIG[key].defaultValue as T,
-  });
+export function useAppConfiguration<T extends AppConfigurationKeys>(key: T) {
+  return useStorageApi<AppConfigurationValueType<T>>(
+    configurationApiPath(key),
+    {
+      errorMessage: MAKE_APP_CONFIGURATION_CRUD_CONFIG(key).TEXT_LANG.NOT_FOUND,
+      defaultData: APP_CONFIGURATION_CONFIG[key].defaultValue,
+    }
+  );
 }
 
-export function useEntityConfiguration<T>(
-  key: AppConfigurationKeys,
+export function useEntityConfiguration<T extends AppConfigurationKeys>(
+  key: T,
   entity: string,
-  forceDefaultValue?: T
+  forceDefaultValue?: AppConfigurationValueType<T>
 ) {
-  return useStorageApi<T>(configurationApiPath(key, entity), {
-    enabled: isRouterParamEnabled(entity),
-    errorMessage: MAKE_APP_CONFIGURATION_CRUD_CONFIG(key).TEXT_LANG.NOT_FOUND,
-    defaultData:
-      forceDefaultValue || (APP_CONFIGURATION_CONFIG[key].defaultValue as T),
-  });
+  return useStorageApi<AppConfigurationValueType<T>>(
+    configurationApiPath(key, entity),
+    {
+      enabled: isRouterParamEnabled(entity),
+      errorMessage: MAKE_APP_CONFIGURATION_CRUD_CONFIG(key).TEXT_LANG.NOT_FOUND,
+      defaultData:
+        forceDefaultValue || (APP_CONFIGURATION_CONFIG[key].defaultValue as T),
+    }
+  );
 }
 
 interface IUpsertConfigMutationOptions {
   otherEndpoints?: string[];
 }
 
-export function useUpsertConfigurationMutation(
-  key: AppConfigurationKeys,
+export function useUpsertConfigurationMutation<T extends AppConfigurationKeys>(
+  key: T,
   entity?: string,
   mutationOptions?: IUpsertConfigMutationOptions
 ) {
   const apiMutateOptions = useWaitForResponseMutationOptions<
-    Record<string, unknown> | unknown[]
+    AppConfigurationValueType<T>
   >({
     endpoints: [
       configurationApiPath(key, entity),
@@ -72,7 +81,7 @@ export function useUpsertConfigurationMutation(
     successMessage: MAKE_APP_CONFIGURATION_CRUD_CONFIG(key).MUTATION_LANG.SAVED,
   });
 
-  return useMutation(async (values: unknown) => {
+  return useMutation(async (values: AppConfigurationValueType<T>) => {
     await makeActionRequest("PUT", configurationApiPath(key, entity, "PUT"), {
       data: values,
     });

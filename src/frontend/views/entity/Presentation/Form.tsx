@@ -4,7 +4,10 @@ import { IFormProps } from "frontend/lib/form/types";
 import { evalJavascriptString } from "frontend/lib/script-runner";
 import { ToastService } from "frontend/lib/toast";
 import { IPresentationScriptParams } from "frontend/views/data/evaluatePresentationScript";
-import { IEntityPresentationScript } from "frontend/views/data/types";
+
+type IEntityPresentationScript = {
+  script: string;
+};
 
 export function PresentationScriptForm({
   initialValues,

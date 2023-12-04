@@ -15,7 +15,7 @@ import { useSchemaFormScriptContext } from "./useSchemaFormScriptContext";
 
 interface IProps<T> {
   fields: IAppliedSchemaFormConfig<T>;
-  onSubmit: (data: T) => Promise<void>;
+  onSubmit: (data: T) => Promise<void | T>;
   initialValues?: Partial<T>;
   buttonText?: (submitting: boolean) => string;
   action?: string;

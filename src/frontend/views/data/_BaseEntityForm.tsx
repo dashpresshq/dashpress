@@ -15,7 +15,6 @@ import {
   useEntityFieldValidations,
   useEntityCrudConfig,
 } from "frontend/hooks/entity/entity.config";
-import { IFormExtension } from "frontend/components/SchemaForm/types";
 import { useMemo } from "react";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { DataStateKeys, DataStates } from "frontend/lib/data/types";
@@ -49,11 +48,11 @@ export function BaseEntityForm({
   const getEntityFieldLabels = useEntityFieldLabels(entity);
   const entityFieldTypes = useProcessedEntityFieldTypes(entity);
   const entityFieldSelections = useEntityFieldSelections(entity);
-  const entityFieldTypesMap = useEntityConfiguration<Record<string, string>>(
+  const entityFieldTypesMap = useEntityConfiguration(
     "entity_columns_types",
     entity
   );
-  const entityFormExtension = useEntityConfiguration<IFormExtension>(
+  const entityFormExtension = useEntityConfiguration(
     "entity_form_extension",
     entity
   );

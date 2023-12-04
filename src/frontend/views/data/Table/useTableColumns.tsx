@@ -26,7 +26,6 @@ import { TableActions } from "./Actions";
 import { viewSpecialDataTypes } from "../viewSpecialDataTypes";
 import { usePortalTableColumns } from "./portal";
 import { evalutePresentationScript } from "../evaluatePresentationScript";
-import { IEntityPresentationScript } from "../types";
 import { useCanUserPerformCrudAction } from "../useCanUserPerformCrudAction";
 
 export const ACTIONS_ACCESSOR = "__actions__";
@@ -88,12 +87,11 @@ export const useTableColumns = (
   const entityFields = useEntityFields(entity);
   const entityToOneReferenceFields = useEntityToOneReferenceFields(entity);
   const hiddenTableColumns = useHiddenEntityColumns("table", entity);
-  const defaultDateFormat = useAppConfiguration<string>("default_date_format");
-  const entityPresentationScript =
-    useEntityConfiguration<IEntityPresentationScript>(
-      "entity_presentation_script",
-      entity
-    );
+  const defaultDateFormat = useAppConfiguration("default_date_format");
+  const entityPresentationScript = useEntityConfiguration(
+    "entity_presentation_script",
+    entity
+  );
 
   const idField = useEntityIdField(entity);
 

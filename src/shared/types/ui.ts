@@ -12,3 +12,8 @@ export type EntityTypesForSelection =
 export const FOR_CODE_COV = 1;
 
 export type ColorSchemes = "light" | "dark";
+
+export type IThemeSettings = {
+  primary: string;
+  primaryDark: string;
+};

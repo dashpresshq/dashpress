@@ -21,7 +21,7 @@ import { ScriptForm } from "./ScriptForm";
 function useEntityFormView() {
   const entity = useEntitySlug();
 
-  const entityFormExtensionSettings = useEntityConfiguration<IFormExtension>(
+  const entityFormExtensionSettings = useEntityConfiguration(
     "entity_form_extension",
     entity
   );

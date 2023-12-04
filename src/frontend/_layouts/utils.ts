@@ -1,6 +1,5 @@
 import { DataStateKeys } from "frontend/lib/data/types";
-import { ColorSchemes } from "shared/types/ui";
-import { IThemeSettings } from "./types";
+import { ColorSchemes, IThemeSettings } from "shared/types/ui";
 
 export const getThemePrimaryColor = (
   theme: ColorSchemes,

@@ -15,7 +15,7 @@ export const useEntityViewStateMachine = (
   | { type: DataStates.Loading }
   | { type: DataStates.Loaded }
   | { type: DataStates.Error; message: unknown } => {
-  const entitiesToHide = useAppConfiguration<string[]>("disabled_entities");
+  const entitiesToHide = useAppConfiguration("disabled_entities");
   const entity = useEntitySlug(entityOverride);
   const canUserPerformCrudAction = useCanUserPerformCrudAction(entity);
 

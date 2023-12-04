@@ -9,7 +9,6 @@ import {
   ActionsApiService,
 } from "backend/actions/actions.service";
 import { BaseAction } from "shared/types/actions";
-import { IFieldValidationItem } from "shared/validations/types";
 import { IEntityField } from "shared/types/db";
 import { IAccountProfile } from "shared/types/user";
 import { noop } from "shared/lib/noop";
@@ -40,7 +39,7 @@ export class DataApiService implements IDataApiService {
   ) {}
 
   async bootstrap() {
-    this.getDataAccessInstance().bootstrap();
+    await this.getDataAccessInstance().bootstrap();
   }
 
   private getDataAccessInstance() {
@@ -132,9 +131,7 @@ export class DataApiService implements IDataApiService {
     const [allowedFields, primaryField, entityValidations] = await Promise.all([
       this._entitiesApiService.getAllowedCrudsFieldsToShow(entity, "create"),
       this._entitiesApiService.getEntityPrimaryField(entity),
-      this._configurationApiService.show<
-        Record<string, IFieldValidationItem[]>
-      >("entity_validations", entity),
+      this._configurationApiService.show("entity_validations", entity),
     ]);
 
     noop(entityValidations);
@@ -235,9 +232,7 @@ export class DataApiService implements IDataApiService {
     const [allowedFields, primaryField, entityValidations] = await Promise.all([
       this._entitiesApiService.getAllowedCrudsFieldsToShow(entity, "update"),
       this._entitiesApiService.getEntityPrimaryField(entity),
-      this._configurationApiService.show<
-        Record<string, IFieldValidationItem[]>
-      >("entity_validations", entity),
+      this._configurationApiService.show("entity_validations", entity),
     ]);
 
     // validate only the fields presents in 'data'
@@ -314,19 +309,16 @@ export class DataApiService implements IDataApiService {
     format: string;
     fields: string[];
   }> {
-    const relationshipSettings = await this._configurationApiService.show<{
-      format: string;
-      fields: string[];
-    }>("entity_relation_template", entity);
+    const relationshipSettings = await this._configurationApiService.show(
+      "entity_relation_template",
+      entity
+    );
 
     if (relationshipSettings.fields.length > 0) {
       return relationshipSettings;
     }
     const [hiddenColumns, primaryField, entityFields] = await Promise.all([
-      this._configurationApiService.show<string[]>(
-        "hidden_entity_table_columns",
-        entity
-      ),
+      this._configurationApiService.show("hidden_entity_table_columns", entity),
       this._entitiesApiService.getEntityPrimaryField(entity),
       this._entitiesApiService.getEntityFields(entity),
     ]);

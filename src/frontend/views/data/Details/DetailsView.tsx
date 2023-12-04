@@ -24,7 +24,6 @@ import styled from "styled-components";
 import { filterOutHiddenScalarColumns } from "../utils";
 import { useEntityViewStateMachine } from "../useEntityViewStateMachine";
 import { viewSpecialDataTypes } from "../viewSpecialDataTypes";
-import { IEntityPresentationScript } from "../types";
 import { evalutePresentationScript } from "../evaluatePresentationScript";
 
 const ContentText = styled(Typo.SM)`
@@ -46,15 +45,14 @@ export function EntityDetailsView({
   const entityFields = useEntityFields(entity);
   const entityFieldTypes = useProcessedEntityFieldTypes(entity);
   const hiddenDetailsColumns = useHiddenEntityColumns("details", entity);
-  const defaultDateFormat = useAppConfiguration<string>("default_date_format");
+  const defaultDateFormat = useAppConfiguration("default_date_format");
   const getEntityFieldLabels = useEntityFieldLabels(entity);
   const entityToOneReferenceFields = useEntityToOneReferenceFields(entity);
   const entityFieldSelections = useEntityFieldSelections(entity);
-  const entityPresentationScript =
-    useEntityConfiguration<IEntityPresentationScript>(
-      "entity_presentation_script",
-      entity
-    );
+  const entityPresentationScript = useEntityConfiguration(
+    "entity_presentation_script",
+    entity
+  );
 
   const error =
     dataDetails.error ||

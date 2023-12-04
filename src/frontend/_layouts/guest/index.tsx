@@ -1,8 +1,8 @@
 import React, { ReactNode } from "react";
 import Head from "next/head";
-import { useSiteConfig } from "frontend/hooks/app/site.config";
 import styled from "styled-components";
 import { SHADOW_CSS, CardBody } from "frontend/design-system/components/Card";
+import { useAppConfiguration } from "frontend/hooks/configuration/configuration.store";
 import { useAppTheme } from "../useAppTheme";
 import { GoogleTagManager } from "../scripts/GoogleTagManager";
 import { PortalProvider } from "../app/portal";
@@ -27,14 +27,14 @@ const Root = styled.div`
 `;
 
 export function AuthLayout({ children, title, subTitle }: IProps) {
-  const siteConfig = useSiteConfig();
+  const siteConfig = useAppConfiguration("site_settings");
   useAppTheme();
 
   return (
     <PortalProvider>
       <Head>
         <title>
-          {title} - {siteConfig.name}
+          {title} - {siteConfig.data.name}
         </title>
       </Head>
       <GuestContainer>

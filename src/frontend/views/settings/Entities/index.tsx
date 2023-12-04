@@ -41,7 +41,7 @@ export function EntitiesSettings() {
 
   const [isDocOpen, setIsDocOpen] = useState(false);
 
-  const entitiesToHide = useAppConfiguration<string[]>("disabled_entities");
+  const entitiesToHide = useAppConfiguration("disabled_entities");
 
   const upsertHideFromAppMutation = useUpsertConfigurationMutation(
     "disabled_entities",
@@ -83,9 +83,7 @@ export function EntitiesSettings() {
             allList={entitiesList.data.map(({ value }) => value)}
             getEntityFieldLabels={getEntitiesDictionPlurals}
             hiddenList={entitiesToHide.data}
-            onSubmit={async (data) => {
-              await upsertHideFromAppMutation.mutateAsync(data);
-            }}
+            onSubmit={upsertHideFromAppMutation.mutateAsync}
           />
         </ViewStateMachine>
       </SectionBox>

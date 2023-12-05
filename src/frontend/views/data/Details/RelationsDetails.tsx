@@ -60,17 +60,20 @@ export function EntityRelationDetails() {
     ? SLUG_LOADING_VALUE
     : referenceColumn?.inverseToOneField;
 
-  const currentEntityData = useEntityDataDetails(parentEntity, entityId);
+  const currentEntityData = useEntityDataDetails({
+    entity: parentEntity,
+    entityId,
+  });
 
   const viewEntityId = referenceColumn?.inverseToOneField
     ? entityId
     : currentEntityData.data[referenceColumn?.field];
 
-  const dataDetails = useEntityDataDetails(
-    childEntity,
-    viewEntityId,
-    detailsColumn
-  );
+  const dataDetails = useEntityDataDetails({
+    entity: childEntity,
+    entityId: viewEntityId,
+    column: detailsColumn,
+  });
 
   const childEntityIdField = useEntityIdField(childEntity);
 

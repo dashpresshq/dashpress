@@ -50,7 +50,8 @@ export function useActivateStorageMutation() {
       ACTIVE_STORAGE_INTEGRATIONS_ENDPOINT,
       STORAGE_CREDENTIALS_CONFIG,
     ],
-    successMessage: STORAGE_INTEGRATIONS_CRUD_CONFIG.MUTATION_LANG.ACTIVATED,
+    successMessage:
+      STORAGE_INTEGRATIONS_CRUD_CONFIG.MUTATION_LANG.CUSTOM("Activated"),
   });
 
   return useMutation(

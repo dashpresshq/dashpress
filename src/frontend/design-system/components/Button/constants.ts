@@ -12,6 +12,7 @@ import {
   X,
   LogIn,
   Square,
+  Copy,
 } from "react-feather";
 
 export const ICON_MAP = {
@@ -28,6 +29,7 @@ export const ICON_MAP = {
   right: ArrowRight,
   help: HelpCircle,
   back: ChevronsLeft,
+  copy: Copy,
 };
 
 export type ButtonIconTypes = keyof typeof ICON_MAP;

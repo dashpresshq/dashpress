@@ -1,4 +1,5 @@
 import { IDropDownMenuItem } from "frontend/design-system/components/DropdownMenu";
+import { ISectionBoxIconButton } from "frontend/design-system/components/Section/SectionBox/types";
 import { noop } from "shared/lib/noop";
 
 export const useDetailsViewMenuItems = ({
@@ -8,7 +9,17 @@ export const useDetailsViewMenuItems = ({
   entity: string;
   entityId: string;
 }): IDropDownMenuItem[] => {
-  const menuItems: IDropDownMenuItem[] = [];
   noop(entity, entityId);
-  return menuItems;
+  return [];
+};
+
+export const useSectionBoxIconButtons = ({
+  entity,
+  entityId,
+}: {
+  entity: string;
+  entityId: string;
+}): ISectionBoxIconButton[] => {
+  noop(entity, entityId);
+  return [];
 };

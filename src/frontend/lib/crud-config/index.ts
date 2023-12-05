@@ -24,8 +24,7 @@ export const MAKE_CRUD_CONFIG = ({
       EDIT: `${singular} Updated Successfully`,
       DELETE: `${singular} Deleted Successfully`,
       SAVED: `${singular} Saved Successfully`,
-      ACTIVATED: `${singular} Activated Successfully`,
-      DE_ACTIVATED: `${singular} Deactivated Successfully`,
+      CUSTOM: (action: string) => `${singular} ${action} Successfully`,
       VIEW_DETAILS: `Click here to view ${singular.toLowerCase()}`,
     },
     FORM_LANG: {

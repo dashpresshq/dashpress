@@ -2,7 +2,7 @@ import { ReactNode, useEffect, useState } from "react";
 import {
   ENTITY_LIST_PATH,
   ENTITY_TABLE_PATH,
-} from "frontend/hooks/data/data.store";
+} from "frontend/hooks/data/constants";
 import { SLUG_LOADING_VALUE } from "frontend/lib/routing/constants";
 import { IEntityCrudSettings } from "shared/configurations";
 import { USER_PERMISSIONS } from "shared/constants/user";
@@ -24,7 +24,7 @@ import {
 } from "frontend/hooks/configuration/configuration.store";
 import { useEntityFields } from "frontend/hooks/entity/entity.store";
 import { BaseEntitySettingsLayout } from "../_Base";
-import { SelectionTab } from "./SelectionTab";
+import { EntityFieldsSelectionSettings } from "./EntityFieldsSelectionSettings";
 
 import {
   ENTITY_CONFIGURATION_VIEW,
@@ -135,7 +135,7 @@ function useEntityCrudView() {
     [ENTITY_CRUD_SETTINGS_TAB_LABELS.TABLE]: {
       disabled: false,
       render: (
-        <SelectionTab
+        <EntityFieldsSelectionSettings
           label={ENTITY_CRUD_SETTINGS_TAB_LABELS.TABLE}
           columns={{
             fields: entityFields.data,
@@ -155,7 +155,7 @@ function useEntityCrudView() {
     [ENTITY_CRUD_SETTINGS_TAB_LABELS.DETAILS]: {
       disabled: !entityCrudSettingsState.details,
       render: (
-        <SelectionTab
+        <EntityFieldsSelectionSettings
           label={ENTITY_CRUD_SETTINGS_TAB_LABELS.DETAILS}
           columns={{
             fields: entityFields.data,
@@ -176,7 +176,7 @@ function useEntityCrudView() {
     [ENTITY_CRUD_SETTINGS_TAB_LABELS.CREATE]: {
       disabled: !entityCrudSettingsState.create,
       render: (
-        <SelectionTab
+        <EntityFieldsSelectionSettings
           label={ENTITY_CRUD_SETTINGS_TAB_LABELS.CREATE}
           columns={{
             fields: entityFields.data,
@@ -197,7 +197,7 @@ function useEntityCrudView() {
     [ENTITY_CRUD_SETTINGS_TAB_LABELS.UPDATE]: {
       disabled: !entityCrudSettingsState.update,
       render: (
-        <SelectionTab
+        <EntityFieldsSelectionSettings
           label={ENTITY_CRUD_SETTINGS_TAB_LABELS.UPDATE}
           columns={{
             fields: entityFields.data,
@@ -218,7 +218,7 @@ function useEntityCrudView() {
     [ENTITY_CRUD_SETTINGS_TAB_LABELS.DELETE]: {
       disabled: !entityCrudSettingsState.delete,
       render: (
-        <SelectionTab
+        <EntityFieldsSelectionSettings
           label={ENTITY_CRUD_SETTINGS_TAB_LABELS.DELETE}
           isLoading={false}
           error={error}

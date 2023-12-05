@@ -13,12 +13,12 @@ import {
   useEntityFieldSelections,
   useProcessedEntityFieldTypes,
   useEntityFieldValidations,
-  useEntityCrudConfig,
 } from "frontend/hooks/entity/entity.config";
 import { useMemo } from "react";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { DataStateKeys, DataStates } from "frontend/lib/data/types";
 import { SLUG_LOADING_VALUE } from "frontend/lib/routing/constants";
+import { ButtonIconTypes } from "frontend/design-system/components/Button/constants";
 import { buildAppliedSchemaFormConfig } from "./buildAppliedSchemaFormConfig";
 import { useEntityViewStateMachine } from "./useEntityViewStateMachine";
 import { filterOutHiddenScalarColumns } from "./utils";
@@ -26,23 +26,28 @@ import { filterOutHiddenScalarColumns } from "./utils";
 type IProps = {
   entity: string;
   initialValues?: Record<string, unknown>;
-  action: "create" | "update";
+  crudAction: "create" | "update";
   hiddenColumns: DataStateKeys<string[]>;
   additionalDataState?: DataStateKeys<unknown>;
   allOptional?: boolean;
   onSubmit: (data: Record<string, string>) => Promise<void>;
+  resetForm?: true;
+  buttonText: (submitting: boolean) => string;
+  icon: ButtonIconTypes;
 };
 
 export function BaseEntityForm({
   entity,
   initialValues,
-  action,
+  crudAction,
   allOptional,
+  icon,
+  resetForm,
+  buttonText,
   additionalDataState,
   hiddenColumns,
   onSubmit,
 }: IProps) {
-  const entityCrudConfig = useEntityCrudConfig(entity);
   const entityValidationsMap = useEntityFieldValidations(entity);
   const entityFields = useEntityFields(entity);
   const getEntityFieldLabels = useEntityFieldLabels(entity);
@@ -75,7 +80,7 @@ export function BaseEntityForm({
     entityFieldTypesMap.isLoading ||
     additionalDataState?.isLoading;
 
-  const viewState = useEntityViewStateMachine(isLoading, error, action);
+  const viewState = useEntityViewStateMachine(isLoading, error, crudAction);
 
   const fields = filterOutHiddenScalarColumns(
     entityFields.data.filter(({ isId }) => !isId),
@@ -126,15 +131,11 @@ export function BaseEntityForm({
       }
     >
       <SchemaForm
-        buttonText={
-          action === "create"
-            ? entityCrudConfig.FORM_LANG.CREATE
-            : entityCrudConfig.FORM_LANG.UPDATE
-        }
-        resetForm={action === "create" ? true : undefined}
+        buttonText={buttonText}
+        resetForm={resetForm}
         onSubmit={onSubmit}
-        action={action}
-        icon={action === "create" ? "add" : "save"}
+        action={crudAction}
+        icon={icon}
         initialValues={fieldsInitialValues}
         fields={buildAppliedSchemaFormConfig(formSchemaConfig, allOptional)}
         formExtension={entityFormExtension.data}

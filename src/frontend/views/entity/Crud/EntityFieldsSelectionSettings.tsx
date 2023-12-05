@@ -26,7 +26,7 @@ interface IProps {
   error: unknown;
 }
 
-export function SelectionTab({
+export function EntityFieldsSelectionSettings({
   columns,
   isLoading,
   toggling,
@@ -34,7 +34,7 @@ export function SelectionTab({
   label,
 }: IProps) {
   const { toggleSelection, allSelections, selectMutiple, isSelected } =
-    useStringSelections(`${label}CrudSelectionTab}`);
+    useStringSelections(`${label}CrudEntityFieldsSelectionSettings}`);
 
   const [touched, setTouched] = useState(false);
 

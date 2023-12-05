@@ -56,7 +56,8 @@ export function useDeactivateActionMutation() {
     Record<string, string>
   >({
     endpoints: [ACTIVE_ACTIONS_INTEGRATIONS_ENDPOINT],
-    successMessage: ACTION_INTEGRATIONS_CRUD_CONFIG.MUTATION_LANG.DE_ACTIVATED,
+    successMessage:
+      ACTION_INTEGRATIONS_CRUD_CONFIG.MUTATION_LANG.CUSTOM("Deactivated"),
   });
 
   return useMutation(
@@ -74,7 +75,8 @@ export function useActivateActionMutation(integrationKey: string) {
     Record<string, string>
   >({
     endpoints: [ACTIVE_ACTIONS_INTEGRATIONS_ENDPOINT],
-    successMessage: ACTION_INTEGRATIONS_CRUD_CONFIG.MUTATION_LANG.ACTIVATED,
+    successMessage:
+      ACTION_INTEGRATIONS_CRUD_CONFIG.MUTATION_LANG.CUSTOM("Activated"),
   });
 
   return useMutation(

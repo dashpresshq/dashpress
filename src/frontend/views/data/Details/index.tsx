@@ -9,12 +9,13 @@ import {
   useEntityId,
   useEntitySlug,
 } from "frontend/hooks/entity/entity.config";
+import { ISectionBoxIconButton } from "frontend/design-system/components/Section/SectionBox/types";
 import { ENTITY_DETAILS_VIEW_KEY } from "./constants";
 import { EntityDetailsView } from "./DetailsView";
 import { DetailsLayout, DETAILS_LAYOUT_KEY } from "./_Layout";
 import { useCanUserPerformCrudAction } from "../useCanUserPerformCrudAction";
 import { DetailsCanvas } from "../Table/_WholeEntityTable/DetailsCanvas";
-import { useDetailsViewMenuItems } from "./portal";
+import { useDetailsViewMenuItems, useSectionBoxIconButtons } from "./portal";
 
 export function EntityDetails() {
   const entityCrudConfig = useEntityCrudConfig();
@@ -40,6 +41,21 @@ export function EntityDetails() {
     entityId: id,
   });
 
+  const portalSectionBoxIconButtons = useSectionBoxIconButtons({
+    entity,
+    entityId: id,
+  });
+
+  const baseIconButtons: ISectionBoxIconButton[] = [];
+  if (canUserPerformCrudAction("update")) {
+    baseIconButtons.push({
+      icon: "edit",
+      action: NAVIGATION_LINKS.ENTITY.UPDATE(entity, id),
+      label: "Edit",
+      order: 10,
+    });
+  }
+
   return (
     <DetailsLayout
       entity={entity}
@@ -57,17 +73,7 @@ export function EntityDetails() {
               }
             : undefined
         }
-        iconButtons={
-          canUserPerformCrudAction("update")
-            ? [
-                {
-                  icon: "edit",
-                  action: NAVIGATION_LINKS.ENTITY.UPDATE(entity, id),
-                  label: "Edit",
-                },
-              ]
-            : []
-        }
+        iconButtons={[...baseIconButtons, ...portalSectionBoxIconButtons]}
       >
         <EntityDetailsView displayFrom="details" id={id} entity={entity} />
       </SectionBox>

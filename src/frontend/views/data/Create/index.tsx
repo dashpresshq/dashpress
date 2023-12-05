@@ -49,7 +49,10 @@ export function EntityCreate() {
         >
           <BaseEntityForm
             entity={entity}
-            action="create"
+            icon="add"
+            crudAction="create"
+            resetForm
+            buttonText={entityCrudConfig.FORM_LANG.CREATE}
             initialValues={routeParams}
             onSubmit={entityDataCreationMutation.mutateAsync}
             hiddenColumns={hiddenCreateColumns}

@@ -1,4 +1,4 @@
-type ToastMessageInput =
+export type ToastMessageInput =
   | { message: string; action: { label: string; action: () => void } }
   | string;
 
@@ -9,14 +9,6 @@ export interface IApiMutateOptions<T, K, V> {
   successMessage?: ToastMessageInput;
   smartSuccessMessage?: (formData: V) => ToastMessageInput;
   onSuccessActionWithFormData?: (formData: V) => void;
-}
-
-export interface IWaitForResponseMutationOptions<T> {
-  endpoints: string[];
-  redirect?: string;
-  onSuccessActionWithFormData?: (formData: T) => void;
-  successMessage?: ToastMessageInput;
-  smartSuccessMessage?: (formData: T) => ToastMessageInput;
 }
 
 export const FOR_CODE_COV = 1;

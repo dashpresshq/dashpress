@@ -12,7 +12,7 @@ import {
 import { FIELD_TYPES_CONFIG_MAP } from "shared/validations";
 import { useMemo } from "react";
 import { IColorableSelection } from "shared/types/ui";
-import { ENTITY_LIST_PATH } from "frontend/hooks/data/data.store";
+import { ENTITY_LIST_PATH } from "frontend/hooks/data/constants";
 import {
   useAppConfiguration,
   useEntityConfiguration,

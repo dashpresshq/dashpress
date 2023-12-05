@@ -2,7 +2,7 @@ import { SLUG_LOADING_VALUE } from "frontend/lib/routing/constants";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { useEntityCrudConfig } from "frontend/hooks/entity/entity.config";
 import { TableSkeleton } from "frontend/design-system/components/Skeleton/Table";
-import { ENTITY_TABLE_PATH } from "frontend/hooks/data/data.store";
+import { ENTITY_TABLE_PATH } from "frontend/hooks/data/constants";
 import { useTableColumns } from "../useTableColumns";
 import { TableViewComponent } from "../portal";
 import { IDataTableProps } from "../types";

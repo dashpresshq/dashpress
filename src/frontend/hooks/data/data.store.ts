@@ -14,45 +14,33 @@ import { useEntityCrudConfig } from "../entity/entity.config";
 import { useMultipleEntityReferenceFields } from "../entity/entity.store";
 import { isRouterParamEnabled } from "..";
 import { DATA_MUTATION_QUERY_ENDPOINTS } from "./portal";
+import {
+  CREATE_DATA_ENDPOINT_TO_CLEAR,
+  ENTITY_COUNT_PATH,
+  ENTITY_DETAILS_PATH,
+  ENTITY_LIST_PATH,
+  ENTITY_REFERENCE_PATH,
+  ENTITY_TABLE_PATH,
+} from "./constants";
 
-export const ENTITY_TABLE_PATH = (entity: string) =>
-  `/api/data/${entity}/table`;
-
-export const ENTITY_COUNT_PATH = (entity: string) =>
-  `/api/data/${entity}/count`;
-
-export const ENTITY_DETAILS_PATH = (
-  entity: string,
-  id: string,
-  column?: string
-) => {
-  const baseLink = `/api/data/${entity}/${id}`;
-
-  if (column) {
-    return `${baseLink}?column=${column}`;
-  }
-  return baseLink;
-};
-
-export const ENTITY_REFERENCE_PATH = (entity: string, id: string) =>
-  `/api/data/${entity}/${id}/reference`;
-
-export const ENTITY_LIST_PATH = (entity: string) => `/api/data/${entity}/list`;
-
-export const useEntityDataDetails = (
-  entity: string,
-  id: string,
-  column?: string
-) => {
+export const useEntityDataDetails = ({
+  entity,
+  entityId,
+  column,
+}: {
+  entity: string;
+  entityId: string;
+  column?: string;
+}) => {
   const entityCrudConfig = useEntityCrudConfig(entity);
 
   return useApi<Record<string, string>>(
-    ENTITY_DETAILS_PATH(entity, id, column),
+    ENTITY_DETAILS_PATH(entity, entityId, column),
     {
       errorMessage: entityCrudConfig.TEXT_LANG.NOT_FOUND,
       enabled:
         isRouterParamEnabled(entity) &&
-        isRouterParamEnabled(id) &&
+        isRouterParamEnabled(entityId) &&
         column !== SLUG_LOADING_VALUE,
       defaultData: {},
     }
@@ -154,12 +142,7 @@ export function useEntityDataCreationMutation(entity: string) {
   const apiMutateOptions = useWaitForResponseMutationOptions<
     Record<string, string>
   >({
-    endpoints: [
-      ENTITY_TABLE_PATH(entity),
-      ENTITY_COUNT_PATH(entity),
-      ENTITY_LIST_PATH(entity),
-      ...DATA_MUTATION_QUERY_ENDPOINTS(entity),
-    ],
+    endpoints: CREATE_DATA_ENDPOINT_TO_CLEAR(entity),
     smartSuccessMessage: ({ id }) => ({
       message: entityCrudConfig.MUTATION_LANG.CREATE,
       action: {

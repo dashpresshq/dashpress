@@ -5,7 +5,7 @@ import {
 import {
   ENTITY_LIST_PATH,
   ENTITY_REFERENCE_PATH,
-} from "frontend/hooks/data/data.store";
+} from "frontend/hooks/data/constants";
 
 import { IColorableSelection } from "shared/types/ui";
 import { FIELD_TYPES_CONFIG_MAP } from "shared/validations";

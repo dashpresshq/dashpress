@@ -9,7 +9,7 @@ import { useCanUserPerformCrudAction } from "./useCanUserPerformCrudAction";
 export const useEntityViewStateMachine = (
   isLoading: boolean,
   error: unknown,
-  actionKey: keyof IEntityCrudSettings,
+  crudAction: keyof IEntityCrudSettings,
   entityOverride?: string
 ):
   | { type: DataStates.Loading }
@@ -23,13 +23,13 @@ export const useEntityViewStateMachine = (
     return { type: DataStates.Loading };
   }
   if (
-    (actionKey && !canUserPerformCrudAction(actionKey)) ||
+    (crudAction && !canUserPerformCrudAction(crudAction)) ||
     entitiesToHide.data?.includes(entity)
   ) {
     return {
       type: DataStates.Error,
       message: `The '${userFriendlyCase(
-        actionKey
+        crudAction
       )}' Action For This Resource Is Not Available`,
     };
   }

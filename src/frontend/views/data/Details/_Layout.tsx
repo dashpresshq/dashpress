@@ -50,7 +50,7 @@ export function DetailsLayout({
   );
   const entityId = useEntityId();
 
-  const dataDetails = useEntityDataDetails(entity, entityId);
+  const dataDetails = useEntityDataDetails({ entity, entityId });
 
   const referenceFields = useEntityReferenceFields(entity);
 

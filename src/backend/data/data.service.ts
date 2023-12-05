@@ -205,7 +205,7 @@ export class DataApiService implements IDataApiService {
     entity: string,
     queryFilters: QueryFilterSchema,
     paginationFilters: IPaginationFilters
-  ): Promise<PaginatedData<unknown>> {
+  ): Promise<PaginatedData<Record<string, unknown>>> {
     return makeTableData(
       await Promise.all([
         this.getDataAccessInstance().list(

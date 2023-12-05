@@ -8,6 +8,7 @@ import { ToastService } from "frontend/lib/toast";
 import { resetFormValues } from "frontend/lib/form/utils";
 import { FormButton } from "frontend/design-system/components/Button/FormButton";
 import { userFriendlyCase } from "shared/lib/strings/friendly-case";
+import { ButtonIconTypes } from "frontend/design-system/components/Button/constants";
 import { RenderFormInput } from "./_RenderFormInput";
 import { IFormExtension } from "./types";
 import { runFormBeforeSubmit, runFormFieldState } from "./form-run";
@@ -19,7 +20,7 @@ interface IProps<T> {
   initialValues?: Partial<T>;
   buttonText?: (submitting: boolean) => string;
   action?: string;
-  icon: "add" | "save" | "eye" | "no-icon" | "check" | "logIn";
+  icon: ButtonIconTypes | "no-icon";
   onChange?: (data: T) => void;
   resetForm?: true;
   formExtension?: Partial<IFormExtension>;

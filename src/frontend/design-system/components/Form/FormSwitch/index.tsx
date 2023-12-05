@@ -54,7 +54,7 @@ const SIZES_CONFIG: Record<Sizes, ISizeConfig> = {
 
 const Root = styled.label<{ size: Sizes }>`
   position: relative;
-  display: inline-block;
+  display: block;
   margin-bottom: ${(props) => SIZES_CONFIG[props.size].marginBottom}px;
 `;
 

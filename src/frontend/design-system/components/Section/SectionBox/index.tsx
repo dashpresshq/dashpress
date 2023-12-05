@@ -9,20 +9,16 @@ import { DeleteButton } from "../../Button/DeleteButton";
 import { SoftButton } from "../../Button/SoftButton";
 import { Card, CardBody, CardHeader } from "../../Card";
 import { Tooltip } from "../../Tooltip";
-import { ButtonIconTypes } from "../../Button/constants";
 import { BaseSkeleton } from "../../Skeleton/Base";
 import { SimpleSelect } from "../../Form/FormSelect/Simple";
+import { ISectionBoxIconButton } from "./types";
 
 export interface IProps {
   title: string;
   children: ReactNode;
   description?: string;
   newItemLink?: string;
-  iconButtons?: {
-    action: string | (() => void);
-    label?: string;
-    icon?: ButtonIconTypes;
-  }[];
+  iconButtons?: ISectionBoxIconButton[];
   selection?: { options: ISelectData[]; onChange: (value: string) => void };
   deleteAction?: {
     action: () => void;
@@ -105,14 +101,16 @@ export function SectionBox({
                     </Typo.SM>
                   ) : null}
                   {iconButtons
-                    ? iconButtons.map(({ action, label, icon }) => (
-                        <SoftButton
-                          key={icon || label}
-                          action={action}
-                          label={label}
-                          icon={icon}
-                        />
-                      ))
+                    ? iconButtons
+                        .sort((a, b) => a.order - b.order)
+                        .map(({ action, label, icon }) => (
+                          <SoftButton
+                            key={icon || label}
+                            action={action}
+                            label={label}
+                            icon={icon}
+                          />
+                        ))
                     : null}
                   {newItemLink ? (
                     <SoftButton action={newItemLink} icon="add" />

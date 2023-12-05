@@ -1,7 +1,15 @@
 import { useQueryClient } from "react-query";
 import { ToastService } from "frontend/lib/toast";
 import { getQueryCachekey } from "../constants/getQueryCacheKey";
-import { IWaitForResponseMutationOptions } from "./types";
+import { ToastMessageInput } from "./types";
+
+export interface IWaitForResponseMutationOptions<T> {
+  endpoints: string[];
+  redirect?: string;
+  onSuccessActionWithFormData?: (formData: T) => void;
+  successMessage?: ToastMessageInput;
+  smartSuccessMessage?: (formData: T) => ToastMessageInput;
+}
 
 const PASS_DATA_FROM_HANDLER_ERROR_MESSAGE =
   "Please return in the mutation what data you want to pass to the success handlers";

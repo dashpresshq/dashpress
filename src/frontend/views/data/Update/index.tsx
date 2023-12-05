@@ -22,11 +22,14 @@ import {
 import { BaseEntityForm } from "../_BaseEntityForm";
 
 export function EntityUpdate() {
-  const id = useEntityId();
+  const entityId = useEntityId();
   const entity = useEntitySlug();
   const entityCrudConfig = useEntityCrudConfig();
 
-  const entityDataUpdationMutation = useEntityDataUpdationMutation(entity, id);
+  const entityDataUpdationMutation = useEntityDataUpdationMutation(
+    entity,
+    entityId
+  );
 
   const actionItems = useEntityActionMenuItems([
     EntityActionTypes.Update,
@@ -44,7 +47,7 @@ export function EntityUpdate() {
 
   const hiddenUpdateColumns = useHiddenEntityColumns("update");
 
-  const dataDetails = useEntityDataDetails(entity, id);
+  const dataDetails = useEntityDataDetails({ entity, entityId });
 
   const { backLink } = useNavigationStack();
 
@@ -62,7 +65,9 @@ export function EntityUpdate() {
         >
           <BaseEntityForm
             entity={entity}
-            action="update"
+            crudAction="update"
+            icon="save"
+            buttonText={entityCrudConfig.FORM_LANG.UPDATE}
             onSubmit={entityDataUpdationMutation.mutateAsync}
             hiddenColumns={hiddenUpdateColumns}
             initialValues={dataDetails.data}

@@ -98,6 +98,8 @@ export function SchemaForm<T extends Record<string, unknown>>({
                       required={bag.validations.some(
                         (validation) => validation.validationType === "required"
                       )}
+                      placeholder={bag.placeholder}
+                      description={bag.description}
                       apiSelections={bag.apiSelections}
                       label={bag.label || userFriendlyCase(field)}
                       entityFieldSelections={bag.selections}

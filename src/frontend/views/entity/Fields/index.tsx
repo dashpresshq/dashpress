@@ -197,7 +197,7 @@ export function EntityFieldsSettings() {
                   />
                 </ViewStateMachine>
               ),
-              label: ENTITY_FIELD_SETTINGS_TAB_LABELS.TYPES,
+              label: ENTITY_FIELD_SETTINGS_TAB_LABELS.FORM,
             },
             {
               content: (

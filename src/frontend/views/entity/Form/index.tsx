@@ -1,7 +1,6 @@
 import { SLUG_LOADING_VALUE } from "frontend/lib/routing/constants";
 import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
 import { USER_PERMISSIONS } from "shared/constants/user";
-import { IFormExtension } from "frontend/components/SchemaForm/types";
 import { MAKE_APP_CONFIGURATION_CRUD_CONFIG } from "frontend/hooks/configuration/configuration.constant";
 import {
   useEntityConfiguration,
@@ -13,10 +12,12 @@ import { DOCUMENTATION_LABEL } from "frontend/docs";
 import { SectionBox } from "frontend/design-system/components/Section/SectionBox";
 import { Tabs } from "frontend/design-system/components/Tabs";
 import { useEntitySlug } from "frontend/hooks/entity/entity.config";
+import { Typo } from "frontend/design-system/primitives/Typo";
+import { Spacer } from "frontend/design-system/primitives/Spacer";
 import { BaseEntitySettingsLayout } from "../_Base";
-
 import { ENTITY_CONFIGURATION_VIEW } from "../constants";
 import { ScriptForm } from "./ScriptForm";
+import { IEntityFormExtension } from "./types";
 
 function useEntityFormView() {
   const entity = useEntitySlug();
@@ -35,7 +36,7 @@ function useEntityFormView() {
   const { error } = entityFormExtensionSettings;
 
   const onScriptSubmit =
-    (key: keyof IFormExtension) => async (value: string) => {
+    (key: keyof IEntityFormExtension) => async (value: string) => {
       await upsertEntityFormExtensionSettingsMutation.mutateAsync({
         ...entityFormExtensionSettings.data,
         [key]: value,
@@ -50,6 +51,19 @@ function useEntityFormView() {
         onSubmit={onScriptSubmit("fieldsState")}
         field="fieldsState"
         error={error}
+        placeholder={`return {
+  canRegister: {
+    disabled: $.formValues.age < 18
+  },
+  accountBalance: {
+    hidden: JSON.parse($.auth.systemProfile).userId === $.routeParams.entityId
+  },
+  someField: {
+    disabled: someDisabledLogic,
+    hidden: someHiddenLogic,
+  },
+}
+        `}
       />
     ),
     "Before Submit": (
@@ -59,6 +73,32 @@ function useEntityFormView() {
         field="beforeSubmit"
         onSubmit={onScriptSubmit("beforeSubmit")}
         error={error}
+        placeholder={`if($.formValues.planet != "Earth") {
+  return "Only Aliens can submit this form"
+}
+
+return {
+  ...$.formValues,
+  slug: $.formValues.title.replaceAll(" ", "-").toLowerCase(),
+  createdById: JSON.parse($.auth.systemProfile).userId,
+  createdAt: new Date(),
+}
+      `}
+      />
+    ),
+    "Initial Values": (
+      <ScriptForm
+        value={entityFormExtensionSettings.data?.initialValues}
+        isLoading={isLoading}
+        field="initialValues"
+        onSubmit={onScriptSubmit("initialValues")}
+        error={error}
+        placeholder={`return {
+  price: 1000,
+  status: "new",
+  country: "US",
+  isApproved: true
+}`}
       />
     ),
   };
@@ -91,7 +131,16 @@ export function EntityFormExtensionSettings() {
         <Tabs
           contents={Object.entries(entityFormView).map(([key, value]) => ({
             label: key,
-            content: value,
+            content: (
+              <>
+                <Typo.SM textStyle="italic">
+                  Click the &apos;Explain Form Scripts&apos; at the top right
+                  corner for more info on how this works
+                </Typo.SM>
+                <Spacer />
+                {value}
+              </>
+            ),
           }))}
         />
       </SectionBox>

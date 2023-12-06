@@ -34,6 +34,10 @@ export function useStringSelections(key: string) {
       const update = Object.fromEntries(items.map((item) => [item, true]));
       setSelections({ ...selections, ...update });
     },
+    setMultiple: (items: string[]) => {
+      const update = Object.fromEntries(items.map((item) => [item, true]));
+      setSelections(update);
+    },
     deSelectMutiple: (items: string[]) => {
       const update = Object.fromEntries(items.map((item) => [item, false]));
 

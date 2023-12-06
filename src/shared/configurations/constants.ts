@@ -69,6 +69,7 @@ export const APP_CONFIGURATION_CONFIG = {
     defaultValue: {
       fieldsState: "",
       beforeSubmit: "",
+      initialValues: "",
     },
   },
   file_upload_settings: {

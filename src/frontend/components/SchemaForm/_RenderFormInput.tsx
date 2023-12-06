@@ -2,7 +2,6 @@ import { sluggify } from "shared/lib/strings";
 import { ISchemaFormConfig } from "shared/form-schemas/types";
 import { IColorableSelection } from "shared/types/ui";
 import { FIELD_TYPES_CONFIG_MAP } from "shared/validations";
-import { ISharedFormInput } from "frontend/design-system/components/Form/_types";
 import { FormInput } from "frontend/design-system/components/Form/FormInput";
 import { FormNumberInput } from "frontend/design-system/components/Form/FormNumberInput";
 import { FormSelect } from "frontend/design-system/components/Form/FormSelect";
@@ -14,15 +13,21 @@ import { FormTextArea } from "frontend/design-system/components/Form/FormTextAre
 import { FormFileInput } from "frontend/design-system/components/Form/FormFileInput";
 import { FormSelectButton } from "frontend/design-system/components/Form/FormSelectButton";
 import { FormRichTextArea } from "frontend/design-system/components/Form/FormRichTextArea";
+import { FieldInputProps, FieldMetaState } from "react-final-form";
 
 interface IProps {
   type: keyof typeof FIELD_TYPES_CONFIG_MAP;
-  renderProps: ISharedFormInput;
+  renderProps: {
+    input: FieldInputProps<any, HTMLElement>;
+    meta: FieldMetaState<any>;
+  };
   apiSelections?: ISchemaFormConfig["apiSelections"];
   entityFieldSelections?: IColorableSelection[];
   required: boolean;
   disabled: boolean;
   label: string;
+  placeholder?: string;
+  description?: string;
 }
 
 export function RenderFormInput({
@@ -33,11 +38,15 @@ export function RenderFormInput({
   apiSelections,
   required,
   disabled,
+  description,
+  placeholder,
 }: IProps) {
   const formProps = {
     label,
     required,
     disabled,
+    placeholder,
+    description,
     ...renderProps,
   };
 

@@ -132,31 +132,37 @@ export class EntitiesApiService implements IApplicationService {
     }));
   }
 
+  async getEntityValidRelations(
+    entity: string
+  ): Promise<IDBSchema["relations"]> {
+    const [entityRelations, disabledEntities, hiddenEntity] = await Promise.all(
+      [
+        this.getEntityRelations(entity),
+        this._configurationApiService.show("disabled_entities"),
+        this._configurationApiService.show("hidden_entity_relations", entity),
+      ]
+    );
+
+    return entityRelations.filter(
+      ({ table }) =>
+        !disabledEntities.includes(table) && !hiddenEntity.includes(table)
+    );
+  }
+
   async getEntityRelationsForUserRole(
     entity: string,
     userRole: string
   ): Promise<IEntityRelation[]> {
-    const [
-      entityRelations,
-      disabledEntities,
-      entityLabels,
-      entityOrders,
-      hiddenEntity,
-    ] = await Promise.all([
-      this.getEntityRelations(entity),
-      this._configurationApiService.show("disabled_entities"),
+    const [validRelations, entityLabels, entityOrders] = await Promise.all([
+      this.getEntityValidRelations(entity),
       this._configurationApiService.show("entity_relations_labels", entity),
       this._configurationApiService.show("entity_relations_order", entity),
-      this._configurationApiService.show("hidden_entity_relations", entity),
     ]);
 
     const allowedEntityRelation =
       await this._rolesApiService.filterPermittedEntities(
         userRole,
-        entityRelations.filter(
-          ({ table }) =>
-            !disabledEntities.includes(table) && !hiddenEntity.includes(table)
-        ),
+        validRelations,
         "table"
       );
 
@@ -173,8 +179,7 @@ export class EntitiesApiService implements IApplicationService {
         table: relation.table,
         label: entityLabels[relation.table],
         type,
-        field:
-          type === "toOne" ? relation?.joinColumnOptions?.[0].name : undefined,
+        field: relation?.joinColumnOptions?.[0].name,
         inverseToOneField:
           relation?.joinColumnOptions?.[0].tag === "inverse"
             ? relation?.joinColumnOptions?.[0].referencedColumnName

@@ -43,7 +43,7 @@ export function DetailsLayout({
   const actionItems = useEntityActionMenuItems(
     [
       EntityActionTypes.Details,
-      EntityActionTypes.Types,
+      EntityActionTypes.Form,
       EntityActionTypes.Labels,
     ],
     childEntity

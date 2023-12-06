@@ -121,11 +121,6 @@ export function ActionForm({
       })),
     },
     ...selectedImplementation,
-    // TODO: Actions script i.e return false or return a loop to do many users
-    // triggerLogic: {
-    //   type: "json",
-    //   validations: [],
-    // },
   };
   if (currentView.type === "entity") {
     delete fields.entity;

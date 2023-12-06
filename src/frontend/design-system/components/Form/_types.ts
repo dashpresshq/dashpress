@@ -5,6 +5,7 @@ export interface ISharedFormInput {
   meta: FieldMetaState<any>;
   label?: string;
   description?: string;
+  placeholder?: string;
   required?: boolean;
   disabled?: boolean;
   sm?: true;

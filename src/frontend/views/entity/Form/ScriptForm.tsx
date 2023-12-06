@@ -14,6 +14,7 @@ interface IProps {
   value: string;
   onSubmit: (value: string) => Promise<void>;
   isLoading: boolean;
+  placeholder: string;
   field: string;
   error?: unknown;
 }
@@ -25,6 +26,7 @@ export function ScriptForm({
   onSubmit,
   field,
   error,
+  placeholder,
   isLoading,
 }: IProps) {
   const scriptContext = useSchemaFormScriptContext("test");
@@ -41,6 +43,7 @@ export function ScriptForm({
             type: "json",
             label: "Script",
             validations: [],
+            placeholder,
           },
         }}
         onSubmit={async (data) => {

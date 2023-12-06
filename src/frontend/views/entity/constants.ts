@@ -10,7 +10,7 @@ export const ENTITY_CONFIGURATION_VIEW = "ENTITY_CONFIGURATION_VIEW";
 
 export const ENTITY_FIELD_SETTINGS_TAB_LABELS = {
   LABELS: "Labels",
-  TYPES: "Types",
+  FORM: "Form",
   ORDER: "Order",
 };
 
@@ -27,7 +27,7 @@ export enum EntityActionTypes {
   Create,
   Table,
   Details,
-  Types,
+  Form,
   Diction,
   Labels,
 }
@@ -48,12 +48,12 @@ const ENTITY_ACTION_BAG: Record<
         tab: ENTITY_FIELD_SETTINGS_TAB_LABELS.LABELS,
       }),
   },
-  [EntityActionTypes.Types]: {
-    label: "Types Settings",
+  [EntityActionTypes.Form]: {
+    label: "Form Settings",
     IconComponent: Settings,
     link: (entity) =>
       NAVIGATION_LINKS.ENTITY.CONFIG.FIELDS(entity, {
-        tab: ENTITY_FIELD_SETTINGS_TAB_LABELS.TYPES,
+        tab: ENTITY_FIELD_SETTINGS_TAB_LABELS.FORM,
       }),
   },
   [EntityActionTypes.Update]: {

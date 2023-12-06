@@ -33,7 +33,7 @@ export function EntityUpdate() {
 
   const actionItems = useEntityActionMenuItems([
     EntityActionTypes.Update,
-    EntityActionTypes.Types,
+    EntityActionTypes.Form,
   ]);
 
   useSetPageDetails({
@@ -58,7 +58,7 @@ export function EntityUpdate() {
           title={entityCrudConfig.TEXT_LANG.EDIT}
           description={
             userHasPermission(USER_PERMISSIONS.CAN_CONFIGURE_APP)
-              ? "For security reasons, Any data that is hidden in details view will not show up here, So rememeber to toggle on all fields there if you want to update them here"
+              ? `For security reasons, Any data that is hidden in details view will not show up here, So rememeber to toggle on all fields there if you want to update them here`
               : undefined
           }
           backLink={backLink}

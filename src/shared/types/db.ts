@@ -1,6 +1,6 @@
 interface IDBSchemaRelation {
   table: string;
-  relationType: string;
+  relationType: "ManyToOne" | "OneToMany" | "OneToOne" | "ManyToMany";
   joinColumnOptions?: {
     name: string;
     referencedColumnName: string;

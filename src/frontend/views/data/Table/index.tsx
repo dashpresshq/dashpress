@@ -21,7 +21,7 @@ export function EntityTable() {
     EntityActionTypes.Table,
     EntityActionTypes.Diction,
     EntityActionTypes.Labels,
-    EntityActionTypes.Types,
+    EntityActionTypes.Form,
   ]);
 
   useSetPageDetails({

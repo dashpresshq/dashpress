@@ -10,6 +10,8 @@ export interface ISchemaFormConfig {
   };
   type: keyof typeof FIELD_TYPES_CONFIG_MAP;
   label?: string;
+  placeholder?: string;
+  description?: string;
   validations: IFieldValidationItem[];
 }
 

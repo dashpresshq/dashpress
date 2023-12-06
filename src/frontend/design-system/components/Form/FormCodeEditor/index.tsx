@@ -55,6 +55,7 @@ export const FormCodeEditor: React.FC<IFormCodeEditor> = (formInput) => {
           highlight(code, languages[formInput.language || "javascript"])
         }
         disabled={formInput.disabled}
+        placeholder={formInput.placeholder}
         textareaId={formInput.input.name}
         padding={4}
         style={{

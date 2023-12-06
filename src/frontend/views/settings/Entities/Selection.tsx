@@ -25,7 +25,7 @@ export function EntitiesSelection({
   hiddenList,
   crudConfig,
 }: IProps) {
-  const { toggleSelection, allSelections, selectMutiple, isSelected } =
+  const { toggleSelection, allSelections, setMultiple, isSelected } =
     useStringSelections(`${selectionKey}--entities-selection`);
 
   const [touched, setTouched] = useState(false);
@@ -33,7 +33,7 @@ export function EntitiesSelection({
   const [isMakingRequest, setIsMakingRequest] = useState(false);
 
   useEffect(() => {
-    selectMutiple(hiddenList);
+    setMultiple(hiddenList);
   }, [hiddenList]);
 
   const formButton = (

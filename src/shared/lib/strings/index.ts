@@ -2,6 +2,11 @@ export function upperCaseFirstLetter(word: string): string {
   return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
 }
 
+export const arrayToComaSeparatedString = (list: string[]): string =>
+  [list.slice(0, -1).join(", "), list.slice(-1)[0]].join(
+    list.length < 2 ? "" : " and "
+  );
+
 export function pluralize({
   count,
   singular,

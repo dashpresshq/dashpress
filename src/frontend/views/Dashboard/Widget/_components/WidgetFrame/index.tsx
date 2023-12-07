@@ -46,7 +46,7 @@ export const WidgetFrame = forwardRef<HTMLDivElement, IProps>(
 
     const {
       height: configHeight,
-      size: configSize,
+      span: configSpan,
       LoadingComponent,
       requiredInterface,
       schema,
@@ -79,7 +79,7 @@ export const WidgetFrame = forwardRef<HTMLDivElement, IProps>(
       <WidgetRoot
         ref={ref}
         aria-label={`${config.title} Widget`}
-        $size={config.size || configSize}
+        $span={config.span || configSpan}
         $height={height}
         hasSetting={!!setting}
       >

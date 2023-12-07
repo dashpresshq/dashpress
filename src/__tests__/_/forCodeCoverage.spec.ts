@@ -33,7 +33,6 @@ import { FOR_CODE_COV as $33 } from "frontend/views/Dashboard/Widget/_components
 import { FOR_CODE_COV as $34 } from "shared/types/config";
 import { FOR_CODE_COV as $35 } from "shared/types/roles";
 import { FOR_CODE_COV as $37 } from "frontend/views/Dashboard/Widget/_manage/types";
-import { FOR_CODE_COV as $38 } from "shared/types/dashboard/types";
 import { FOR_CODE_COV as $39 } from "shared/types/dashboard/base";
 import { FOR_CODE_COV as $40 } from "frontend/lib/data/useMutate/types";
 import { FOR_CODE_COV as $41 } from "frontend/design-system/components/Form/_types";
@@ -79,7 +78,6 @@ noop(
   $34,
   $35,
   $37,
-  $38,
   $39,
   $40,
   $41,

@@ -9,6 +9,12 @@ import { resetFormValues } from "frontend/lib/form/utils";
 import { FormButton } from "frontend/design-system/components/Button/FormButton";
 import { userFriendlyCase } from "shared/lib/strings/friendly-case";
 import { ButtonIconTypes } from "frontend/design-system/components/Button/constants";
+import styled from "styled-components";
+import {
+  GridSpanSizes,
+  gridItem,
+  gridRoot,
+} from "frontend/design-system/constants/grid";
 import { RenderFormInput } from "./_RenderFormInput";
 import { IFormExtension } from "./types";
 import { runFormBeforeSubmit, runFormFieldState } from "./form-run";
@@ -25,6 +31,17 @@ interface IProps<T> {
   resetForm?: true;
   formExtension?: Partial<IFormExtension>;
 }
+
+export const GridRoot = styled.div`
+  ${gridRoot}
+  grid-auto-rows: auto;
+`;
+
+export const GridItem = styled.div<{
+  $span: GridSpanSizes;
+}>`
+  ${gridItem}
+`;
 
 // TODO: dependent options for schema forms
 
@@ -85,29 +102,34 @@ export function SchemaForm<T extends Record<string, unknown>>({
               });
             }}
           >
-            {Object.entries(fields)
-              .filter(([field]) => {
-                return !fieldState[field]?.hidden;
-              })
-              .map(([field, bag]: [string, ISchemaFormConfig]) => (
-                <Field key={field} name={field} validateFields={[]}>
-                  {(renderProps) => (
-                    <RenderFormInput
-                      type={bag.type}
-                      disabled={fieldState[field]?.disabled}
-                      required={bag.validations.some(
-                        (validation) => validation.validationType === "required"
-                      )}
-                      placeholder={bag.placeholder}
-                      description={bag.description}
-                      apiSelections={bag.apiSelections}
-                      label={bag.label || userFriendlyCase(field)}
-                      entityFieldSelections={bag.selections}
-                      renderProps={renderProps}
-                    />
-                  )}
-                </Field>
-              ))}
+            <GridRoot>
+              {Object.entries(fields)
+                .filter(([field]) => {
+                  return !fieldState[field]?.hidden;
+                })
+                .map(([field, bag]: [string, ISchemaFormConfig]) => (
+                  <Field key={field} name={field} validateFields={[]}>
+                    {(renderProps) => (
+                      <GridItem $span={bag.span || "4"}>
+                        <RenderFormInput
+                          type={bag.type}
+                          disabled={fieldState[field]?.disabled}
+                          required={bag.validations.some(
+                            (validation) =>
+                              validation.validationType === "required"
+                          )}
+                          placeholder={bag.placeholder}
+                          description={bag.description}
+                          apiSelections={bag.apiSelections}
+                          label={bag.label || userFriendlyCase(field)}
+                          entityFieldSelections={bag.selections}
+                          renderProps={renderProps}
+                        />
+                      </GridItem>
+                    )}
+                  </Field>
+                ))}
+            </GridRoot>
             {buttonText && (
               <FormButton
                 text={buttonText}

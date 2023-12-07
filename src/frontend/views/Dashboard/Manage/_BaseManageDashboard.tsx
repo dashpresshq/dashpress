@@ -13,14 +13,14 @@ import {
   useDashboardWidgets,
   useDeleteDashboardWidgetMutation,
 } from "../dashboard.store";
-import { gridRoot } from "../styles";
+import { dashboardGridRoot } from "../styles";
 import { DashboardSkeleton } from "../Skeleton";
 import { DashboardWidget } from "../Widget";
 import { DASHBOARD_WIDGETS_CRUD_CONFIG } from "../constants";
 
 const Root = styled.div`
   .list {
-    ${gridRoot};
+    ${dashboardGridRoot};
   }
 `;
 

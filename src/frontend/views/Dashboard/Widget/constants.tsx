@@ -12,7 +12,7 @@ const BASE_WIDGET_CONFIG: Partial<
 > = {
   table: {
     height: "3",
-    size: "4",
+    span: "4",
     label: "Table",
     exampleValidData: [
       { age: 30, name: "John Doe", country: "Egypt" },
@@ -27,7 +27,7 @@ const BASE_WIDGET_CONFIG: Partial<
   },
   "summary-card": {
     height: "1",
-    size: "1",
+    span: "1",
     label: "Summary Card",
     exampleValidData: [{ count: 30 }],
     requiredInterface: `[{count: number} | number] | number`,

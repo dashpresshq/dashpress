@@ -51,6 +51,7 @@ function useEntityFormView() {
         onSubmit={onScriptSubmit("fieldsState")}
         field="fieldsState"
         error={error}
+        configurationKey="entity_form_extension"
         placeholder={`return {
   canRegister: {
     disabled: $.formValues.age < 18
@@ -73,6 +74,7 @@ function useEntityFormView() {
         field="beforeSubmit"
         onSubmit={onScriptSubmit("beforeSubmit")}
         error={error}
+        configurationKey="entity_form_extension"
         placeholder={`if($.formValues.planet != "Earth") {
   return "Only Aliens can submit this form"
 }
@@ -91,6 +93,7 @@ return {
         value={entityFormExtensionSettings.data?.initialValues}
         isLoading={isLoading}
         field="initialValues"
+        configurationKey="entity_form_extension"
         onSubmit={onScriptSubmit("initialValues")}
         error={error}
         placeholder={`return {

@@ -1,3 +1,4 @@
+import { GridSpanSizes } from "frontend/design-system/constants/grid";
 import { IColorableSelection } from "shared/types/ui";
 import { FIELD_TYPES_CONFIG_MAP } from "shared/validations";
 import { IFieldValidationItem } from "shared/validations/types";
@@ -12,6 +13,7 @@ export interface ISchemaFormConfig {
   label?: string;
   placeholder?: string;
   description?: string;
+  span?: GridSpanSizes;
   validations: IFieldValidationItem[];
 }
 

@@ -33,7 +33,7 @@ import { DashboardWidgetPresentation } from "../Presentation";
 import { WIDGET_CONFIG } from "../constants";
 import { PortalFormFields, PortalFormSchema } from "./portal";
 import { WidgetFormField } from "./types";
-import { DASHBOARD_WIDGET_HEIGHTS, DASHBOARD_WIDGET_SIZES } from "./constants";
+import { DASHBOARD_WIDGET_HEIGHTS, DASHBOARD_WIDGET_SPANS } from "./constants";
 
 const DOCS_TITLE = "Widget Script";
 
@@ -207,11 +207,11 @@ export function DashboardWidgetForm({
                   )}
                 </GridSpan>
                 <GridSpan $span={1}>
-                  <Field name="size" validateFields={[]}>
+                  <Field name="span" validateFields={[]}>
                     {({ input, meta }) => (
                       <FormSelect
                         label="Width"
-                        selectData={DASHBOARD_WIDGET_SIZES}
+                        selectData={DASHBOARD_WIDGET_SPANS}
                         meta={meta}
                         input={input}
                       />

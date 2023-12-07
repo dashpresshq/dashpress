@@ -72,7 +72,7 @@ export class ConfigurationApiService implements IApplicationService {
 
   async upsert<T extends AppConfigurationKeys>(
     key: T,
-    value: AppConfigurationValueType<T>,
+    value: unknown,
     entity?: string
   ): Promise<void> {
     this.checkConfigKeyEntityRequirement(key, entity);

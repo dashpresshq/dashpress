@@ -9,6 +9,7 @@ import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { ToastService } from "frontend/lib/toast";
 import { MAKE_APP_CONFIGURATION_CRUD_CONFIG } from "frontend/hooks/configuration/configuration.constant";
 import { evalJavascriptString } from "frontend/lib/script-runner";
+import { AppConfigurationKeys } from "shared/configurations";
 
 interface IProps {
   value: string;
@@ -16,6 +17,7 @@ interface IProps {
   isLoading: boolean;
   placeholder: string;
   field: string;
+  configurationKey: AppConfigurationKeys;
   error?: unknown;
 }
 
@@ -28,6 +30,7 @@ export function ScriptForm({
   error,
   placeholder,
   isLoading,
+  configurationKey,
 }: IProps) {
   const scriptContext = useSchemaFormScriptContext("test");
 
@@ -60,8 +63,7 @@ export function ScriptForm({
         }}
         icon="save"
         buttonText={
-          MAKE_APP_CONFIGURATION_CRUD_CONFIG("entity_form_extension").FORM_LANG
-            .UPSERT
+          MAKE_APP_CONFIGURATION_CRUD_CONFIG(configurationKey).FORM_LANG.UPSERT
         }
         initialValues={{
           [`${BASE_SUFFIX}${field}`]: value,

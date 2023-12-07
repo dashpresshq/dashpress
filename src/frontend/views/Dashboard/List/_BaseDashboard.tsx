@@ -5,15 +5,14 @@ import React from "react";
 import { useUserHasPermission } from "frontend/hooks/auth/user.store";
 import styled from "styled-components";
 import { useRouter } from "next/router";
-
 import { AppLayout } from "frontend/_layouts/app";
 import { useDashboardWidgets } from "../dashboard.store";
-import { gridRoot } from "../styles";
+import { dashboardGridRoot } from "../styles";
 import { DashboardSkeleton } from "../Skeleton";
 import { DashboardWidget } from "../Widget";
 
 const Root = styled.div`
-  ${gridRoot};
+  ${dashboardGridRoot};
 `;
 
 interface IProps {

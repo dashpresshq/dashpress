@@ -1,10 +1,13 @@
+import {
+  GridSpanSizes,
+  GridHeightSizes,
+} from "frontend/design-system/constants/grid";
 import { ReactElement } from "react";
-import { WidgetHeightUnits, WidgetSizes } from "shared/types/dashboard/types";
 import { z } from "zod";
 
 export interface IWidgetConfigBag {
-  size: WidgetSizes;
-  height: WidgetHeightUnits;
+  span: GridSpanSizes;
+  height: GridHeightSizes;
   label: string;
   schema: z.ZodTypeAny;
   requiredInterface: string;

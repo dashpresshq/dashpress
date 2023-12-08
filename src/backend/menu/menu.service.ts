@@ -18,10 +18,10 @@ import {
   ConfigurationApiService,
   configurationApiService,
 } from "backend/configuration/configuration.service";
-import { sortByList } from "shared/logic/entities/sort.utils";
 import { RolesApiService, rolesApiService } from "backend/roles/roles.service";
 import { ILabelValue } from "shared/types/options";
 import { ISingularPlural } from "shared/types/config";
+import { sortListByOrder } from "shared/lib/array/sort";
 import { portalCheckIfIsMenuAllowed, getPortalMenuItems } from "./portal";
 import { IBaseNavigationMenuApiService } from "./types";
 
@@ -148,7 +148,7 @@ export class NavigationMenuApiService
       .filter(({ value }) => !hiddenMenuEntities.includes(value))
       .sort((a, b) => a.value.localeCompare(b.value));
 
-    sortByList(menuEntities, entitiesOrder, "value");
+    sortListByOrder(entitiesOrder, menuEntities, "value");
 
     return menuEntities;
   }

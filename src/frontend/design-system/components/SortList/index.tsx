@@ -7,29 +7,13 @@ import { Stack } from "frontend/design-system/primitives/Stack";
 import { pluralize } from "shared/lib/strings";
 import { Typo } from "frontend/design-system/primitives/Typo";
 import { Spacer } from "frontend/design-system/primitives/Spacer";
+import { arrayMoveImmutable } from "shared/lib/array/move";
 import { ErrorAlert } from "../Alert";
 import { EmptyWrapper } from "../EmptyWrapper";
 import { FormButton } from "../Button/FormButton";
 import { defaultToEmptyArray } from "./utils";
 import { ListSkeleton } from "../Skeleton/List";
 import { SHADOW_CSS } from "../Card";
-
-function arrayMoveMutable<T>(array: T[], fromIndex: number, toIndex: number) {
-  const startIndex = fromIndex < 0 ? array.length + fromIndex : fromIndex;
-
-  if (startIndex >= 0 && startIndex < array.length) {
-    const endIndex = toIndex < 0 ? array.length + toIndex : toIndex;
-
-    const [item] = array.splice(fromIndex, 1);
-    array.splice(endIndex, 0, item);
-  }
-}
-
-function arrayMoveImmutable<T>(array: T[], fromIndex: number, toIndex: number) {
-  const newArray = [...array];
-  arrayMoveMutable(newArray, fromIndex, toIndex);
-  return newArray;
-}
 
 export interface IProps<T> {
   data: DataStateKeys<T[]>;

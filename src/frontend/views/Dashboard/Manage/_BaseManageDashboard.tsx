@@ -2,12 +2,12 @@ import styled from "styled-components";
 import { Check, Plus } from "react-feather";
 import { USER_PERMISSIONS } from "shared/constants/user";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
-import arrayMove from "array-move";
 import SortableList, { SortableItem } from "react-easy-sort";
 import { useRouter } from "next/router";
 import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
 import { AppLayout } from "frontend/_layouts/app";
+import { arrayMoveImmutable } from "shared/lib/array/move";
 import {
   useArrangeDashboardWidgetMutation,
   useDashboardWidgets,
@@ -41,7 +41,7 @@ export function BaseManageDashboard({ dashboardId, doneLink, title }: IProps) {
     useArrangeDashboardWidgetMutation(dashboardId);
 
   const onSortEnd = (oldIndex: number, newIndex: number) => {
-    const newOrder = arrayMove(widgets.data, oldIndex, newIndex);
+    const newOrder = arrayMoveImmutable(widgets.data, oldIndex, newIndex);
     arrangeDashboardWidgetMutation.mutate(newOrder.map(({ id }) => id));
   };
 

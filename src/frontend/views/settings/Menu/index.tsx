@@ -19,8 +19,8 @@ import {
 } from "frontend/hooks/entity/entity.store";
 import { loadedDataState } from "frontend/lib/data/constants/loadedDataState";
 import { NAVIGATION_MENU_ENDPOINT } from "frontend/_layouts/app/LayoutImpl/constants";
-import { sortByList } from "shared/logic/entities/sort.utils";
 import { AppLayout } from "frontend/_layouts/app";
+import { sortListByOrder } from "shared/lib/array/sort";
 import { SETTINGS_VIEW_KEY } from "../constants";
 import { EntitiesSelection } from "../Entities/Selection";
 
@@ -49,7 +49,7 @@ export function MenuSettings() {
     .filter(({ value }) => !menuEntitiesToHide.data.includes(value))
     .sort((a, b) => a.value.localeCompare(b.value));
 
-  sortByList(menuEntities, menuEntitiesOrder.data, "value");
+  sortListByOrder(menuEntitiesOrder.data, menuEntities, "value");
 
   const upsertHideFromMenuMutation = useUpsertConfigurationMutation(
     "disabled_menu_entities",

@@ -15,7 +15,6 @@ import {
 import {
   listOrderApiService,
   ListOrderApiService,
-  sortListByOrder,
 } from "backend/list-order/list-order.service";
 import { rolesApiService, RolesApiService } from "backend/roles/roles.service";
 import { userFriendlyCase } from "shared/lib/strings/friendly-case";
@@ -30,6 +29,7 @@ import {
 import { GranularEntityPermissions, IAccountProfile } from "shared/types/user";
 import { relativeDateNotationToActualDate } from "backend/data/data-access/time.constants";
 import { ILabelValue } from "shared/types/options";
+import { sortListByOrder } from "shared/lib/array/sort";
 import {
   mutateGeneratedDashboardWidgets,
   PORTAL_DASHBOARD_PERMISSION,
@@ -183,7 +183,7 @@ return [actual[0], relative[0]];
       await this._dashboardWidgetsPersistenceService.getAllItemsIn(widgetList)
     );
 
-    return sortListByOrder(widgetList, widgets);
+    return sortListByOrder(widgetList, widgets, "id");
   }
 
   async listDashboardWidgets(

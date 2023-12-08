@@ -7,9 +7,9 @@ import { rolesApiService, RolesApiService } from "backend/roles/roles.service";
 import { IApplicationService } from "backend/types";
 import { noop } from "shared/lib/noop";
 import { IDBSchema, IEntityField, IEntityRelation } from "shared/types/db";
-import { sortByList } from "shared/logic/entities/sort.utils";
 import { DataCrudKeys } from "shared/types/data";
 import { CRUD_KEY_CONFIG } from "shared/configurations/permissions";
+import { sortListByOrder } from "shared/lib/array/sort";
 import { SchemasApiService, schemasApiService } from "../schema/schema.service";
 import { PortalFieldsFilterService } from "./portal";
 
@@ -51,9 +51,9 @@ export class EntitiesApiService implements IApplicationService {
       this._configurationApiService.show("entity_fields_orders", entity),
     ]);
 
-    sortByList(
-      entityFields as unknown as Record<string, unknown>[],
+    sortListByOrder(
       entityFieldsOrder,
+      entityFields as unknown as Record<string, unknown>[],
       "name" as keyof IEntityField
     );
 
@@ -166,9 +166,9 @@ export class EntitiesApiService implements IApplicationService {
         "table"
       );
 
-    sortByList(
-      allowedEntityRelation as unknown[] as Record<string, unknown>[],
+    sortListByOrder(
       entityOrders,
+      allowedEntityRelation as unknown[] as Record<string, unknown>[],
       "table"
     );
 

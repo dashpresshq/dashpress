@@ -1,0 +1,1 @@
+export { usePortalExtendEntityFormConfig } from "./main";

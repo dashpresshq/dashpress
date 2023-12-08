@@ -22,6 +22,7 @@ import { ButtonIconTypes } from "frontend/design-system/components/Button/consta
 import { buildAppliedSchemaFormConfig } from "./buildAppliedSchemaFormConfig";
 import { useEntityViewStateMachine } from "./useEntityViewStateMachine";
 import { filterOutHiddenScalarColumns } from "./utils";
+import { usePortalExtendEntityFormConfig } from "./portal";
 
 type IProps = {
   entity: string;
@@ -57,6 +58,9 @@ export function BaseEntityForm({
     "entity_columns_types",
     entity
   );
+
+  const extendEntityFormConfig = usePortalExtendEntityFormConfig(crudAction);
+
   const entityFormExtension = useEntityConfiguration(
     "entity_form_extension",
     entity
@@ -78,6 +82,7 @@ export function BaseEntityForm({
     entityFormExtension.isLoading ||
     entity === SLUG_LOADING_VALUE ||
     entityFieldTypesMap.isLoading ||
+    extendEntityFormConfig === "loading" ||
     additionalDataState?.isLoading;
 
   const viewState = useEntityViewStateMachine(isLoading, error, crudAction);
@@ -113,6 +118,11 @@ export function BaseEntityForm({
     fields,
   };
 
+  const formConfig = buildAppliedSchemaFormConfig(
+    formSchemaConfig,
+    allOptional
+  );
+
   return (
     <ViewStateMachine
       loading={viewState.type === DataStates.Loading}
@@ -137,7 +147,11 @@ export function BaseEntityForm({
         action={crudAction}
         icon={icon}
         initialValues={fieldsInitialValues}
-        fields={buildAppliedSchemaFormConfig(formSchemaConfig, allOptional)}
+        fields={
+          typeof extendEntityFormConfig === "string"
+            ? formConfig
+            : extendEntityFormConfig(formConfig)
+        }
         formExtension={entityFormExtension.data}
       />
     </ViewStateMachine>

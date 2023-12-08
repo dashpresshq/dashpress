@@ -4,8 +4,6 @@ import {
 } from "backend/lib/config-persistence";
 import { IApplicationService } from "backend/types";
 
-export { sortListByOrder } from "./utils";
-
 export class ListOrderApiService implements IApplicationService {
   constructor(
     private readonly _listOrderPersistenceService: AbstractConfigDataPersistenceService<

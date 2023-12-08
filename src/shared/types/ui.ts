@@ -17,3 +17,7 @@ export type IThemeSettings = {
   primary: string;
   primaryDark: string;
 };
+
+export type GridSpanSizes = "1" | "2" | "3" | "4";
+
+export type GridHeightSizes = "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8";

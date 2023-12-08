@@ -23,7 +23,7 @@ import { ContentLayout } from "frontend/design-system/components/Section/Section
 import { Spacer } from "frontend/design-system/primitives/Spacer";
 import { ADMIN_ACTION_INSTANCES_CRUD_CONFIG } from "./Actions/constants";
 import {
-  ENTITY_CRUD_SETTINGS_TAB_LABELS,
+  ENTITY_CRUD_LABELS,
   ENTITY_FIELD_SETTINGS_TAB_LABELS,
 } from "./constants";
 import { useMutateBaseEntitySettingsMenu } from "./portal";
@@ -31,7 +31,7 @@ import { useMutateBaseEntitySettingsMenu } from "./portal";
 const baseMenuItems = (entity: string): IMenuSectionItem[] => [
   {
     action: NAVIGATION_LINKS.ENTITY.CONFIG.CRUD(entity, {
-      tab: ENTITY_CRUD_SETTINGS_TAB_LABELS.CREATE,
+      tab: ENTITY_CRUD_LABELS.create,
     }),
     IconComponent: Sliders,
     name: "CRUD",

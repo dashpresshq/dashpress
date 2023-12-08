@@ -1,8 +1,5 @@
-import {
-  GridSpanSizes,
-  gridItem,
-  gridRoot,
-} from "frontend/design-system/constants/grid";
+import { gridItem, gridRoot } from "frontend/design-system/constants/grid";
+import { GridSpanSizes } from "shared/types/ui";
 import styled, { css } from "styled-components";
 
 export const dashboardGridRoot = css`
@@ -20,7 +17,7 @@ export const WidgetRoot = styled.div<{
   ${(props) =>
     props.hasSetting &&
     css`
-      cursor: grab;
+      cursor: move;
       user-select: none;
     `}
 

@@ -1,23 +1,23 @@
-export function sortByListOrder<T extends { id: string }>(
+export function sortListByOrder<T extends { id: string }>(
   order: string[],
-  itemListOrder: T[]
+  itemsToOrder: T[]
 ): T[] {
   if (order.length === 0) {
-    return itemListOrder;
+    return itemsToOrder;
   }
   const itemsMap = Object.fromEntries(
-    itemListOrder.map((item) => [item.id, item])
+    itemsToOrder.map((item) => [item.id, item])
   );
 
   const orderedItems = order.map((item) => itemsMap[item]);
 
-  if (order.length === itemListOrder.length) {
+  if (order.length === itemsToOrder.length) {
     return orderedItems;
   }
 
-  const remainingItems = itemListOrder.filter(
+  const remainingItems = itemsToOrder.filter(
     (item) => !order.includes(item.id)
   );
 
-  return [...orderedItems, ...remainingItems];
+  return [...orderedItems, ...remainingItems].filter(Boolean);
 }

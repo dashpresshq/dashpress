@@ -1,5 +1,4 @@
-import { GridSpanSizes } from "frontend/design-system/constants/grid";
-import { IColorableSelection } from "shared/types/ui";
+import { GridSpanSizes, IColorableSelection } from "shared/types/ui";
 import { FIELD_TYPES_CONFIG_MAP } from "shared/validations";
 import { IFieldValidationItem } from "shared/validations/types";
 

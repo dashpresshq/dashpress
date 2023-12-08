@@ -15,7 +15,7 @@ import {
 import {
   listOrderApiService,
   ListOrderApiService,
-  sortByListOrder,
+  sortListByOrder,
 } from "backend/list-order/list-order.service";
 import { rolesApiService, RolesApiService } from "backend/roles/roles.service";
 import { userFriendlyCase } from "shared/lib/strings/friendly-case";
@@ -183,7 +183,7 @@ return [actual[0], relative[0]];
       await this._dashboardWidgetsPersistenceService.getAllItemsIn(widgetList)
     );
 
-    return sortByListOrder(widgetList, widgets);
+    return sortListByOrder(widgetList, widgets);
   }
 
   async listDashboardWidgets(

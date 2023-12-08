@@ -1,6 +1,5 @@
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { useEffect, useState } from "react";
-import { IEntityField } from "shared/types/db";
 import { FormButton } from "frontend/design-system/components/Button/FormButton";
 import { ListSkeleton } from "frontend/design-system/components/Skeleton/List";
 import { RenderList } from "frontend/design-system/components/RenderList";
@@ -8,22 +7,27 @@ import { Spacer } from "frontend/design-system/primitives/Spacer";
 import { SectionListItem } from "frontend/design-system/components/Section/SectionList";
 import { Stack } from "frontend/design-system/primitives/Stack";
 import { useStringSelections } from "frontend/lib/selection";
+import { useEntityFields } from "frontend/hooks/entity/entity.store";
+import {
+  useEntityFieldLabels,
+  useEntitySlug,
+} from "frontend/hooks/entity/entity.config";
+import { IEntityCrudSettings } from "shared/configurations";
+import { ENTITY_CRUD_LABELS } from "../constants";
+import { makeEntityFieldsSelectionKey } from "./constants";
 
 interface IProps {
-  label: string;
   columns?: {
-    fields: IEntityField[];
     submit?: (columnsSelection: string[]) => Promise<string[]>;
     hidden: string[];
-    getEntityFieldLabels?: (fieldName: string) => string;
   };
   toggling: {
     onToggle?: () => void;
     enabled: boolean;
-    label: string;
   };
   isLoading: boolean;
   error: unknown;
+  crudKey: keyof IEntityCrudSettings | "table";
 }
 
 export function EntityFieldsSelectionSettings({
@@ -31,10 +35,16 @@ export function EntityFieldsSelectionSettings({
   isLoading,
   toggling,
   error,
-  label,
+  crudKey,
 }: IProps) {
+  const entity = useEntitySlug();
+
+  const entityFields = useEntityFields(entity);
+
+  const getEntityFieldLabels = useEntityFieldLabels();
+
   const { toggleSelection, allSelections, selectMutiple, isSelected } =
-    useStringSelections(`${label}CrudEntityFieldsSelectionSettings}`);
+    useStringSelections(makeEntityFieldsSelectionKey(entity, crudKey));
 
   const [touched, setTouched] = useState(false);
 
@@ -54,10 +64,10 @@ export function EntityFieldsSelectionSettings({
         {toggling && toggling.onToggle && (
           <FormButton
             isMakingRequest={false}
-            icon={toggling?.enabled ? "check" : "square"}
+            icon={toggling.enabled ? "check" : "square"}
             size="sm"
             isInverse
-            text={() => `Enable ${toggling?.label} Functionality`}
+            text={() => `Enable ${ENTITY_CRUD_LABELS[crudKey]} Functionality`}
             onClick={() => toggling.onToggle()}
           />
         )}
@@ -66,9 +76,9 @@ export function EntityFieldsSelectionSettings({
       {columns && (
         <>
           <RenderList
-            items={columns.fields}
+            items={entityFields.data}
             singular="Field"
-            getLabel={columns.getEntityFieldLabels}
+            getLabel={getEntityFieldLabels}
             render={(menuItem) => {
               const isHidden = isSelected(menuItem.name);
 
@@ -106,8 +116,8 @@ export function EntityFieldsSelectionSettings({
             }}
             text={(isSubmitting) =>
               isSubmitting
-                ? `Saving ${label} Selections`
-                : `Save ${label} Selections`
+                ? `Saving ${ENTITY_CRUD_LABELS[crudKey]} Selections`
+                : `Save ${ENTITY_CRUD_LABELS[crudKey]} Selections`
             }
             icon="save"
             disabled={!touched}

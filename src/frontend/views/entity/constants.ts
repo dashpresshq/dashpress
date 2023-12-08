@@ -5,6 +5,7 @@ import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
 import { useUserHasPermission } from "frontend/hooks/auth/user.store";
 import { SLUG_LOADING_VALUE } from "frontend/lib/routing/constants";
 import { USER_PERMISSIONS } from "shared/constants/user";
+import { IEntityCrudSettings } from "shared/configurations";
 
 export const ENTITY_CONFIGURATION_VIEW = "ENTITY_CONFIGURATION_VIEW";
 
@@ -14,12 +15,15 @@ export const ENTITY_FIELD_SETTINGS_TAB_LABELS = {
   ORDER: "Order",
 };
 
-export const ENTITY_CRUD_SETTINGS_TAB_LABELS = {
-  CREATE: "Create",
-  UPDATE: "Update",
-  DETAILS: "Details",
-  TABLE: "Table",
-  DELETE: "Delete",
+export const ENTITY_CRUD_LABELS: Record<
+  keyof IEntityCrudSettings | "table",
+  string
+> = {
+  create: "Create",
+  update: "Update",
+  details: "Details",
+  table: "Table",
+  delete: "Delete",
 };
 
 export enum EntityActionTypes {
@@ -61,7 +65,7 @@ const ENTITY_ACTION_BAG: Record<
     IconComponent: Settings,
     link: (entity) =>
       NAVIGATION_LINKS.ENTITY.CONFIG.CRUD(entity, {
-        tab: ENTITY_CRUD_SETTINGS_TAB_LABELS.UPDATE,
+        tab: ENTITY_CRUD_LABELS.update,
       }),
   },
   [EntityActionTypes.Create]: {
@@ -69,7 +73,7 @@ const ENTITY_ACTION_BAG: Record<
     IconComponent: Settings,
     link: (entity) =>
       NAVIGATION_LINKS.ENTITY.CONFIG.CRUD(entity, {
-        tab: ENTITY_CRUD_SETTINGS_TAB_LABELS.CREATE,
+        tab: ENTITY_CRUD_LABELS.create,
       }),
   },
   [EntityActionTypes.Table]: {
@@ -77,7 +81,7 @@ const ENTITY_ACTION_BAG: Record<
     IconComponent: Settings,
     link: (entity) =>
       NAVIGATION_LINKS.ENTITY.CONFIG.CRUD(entity, {
-        tab: ENTITY_CRUD_SETTINGS_TAB_LABELS.TABLE,
+        tab: ENTITY_CRUD_LABELS.table,
       }),
   },
   [EntityActionTypes.Details]: {
@@ -85,7 +89,7 @@ const ENTITY_ACTION_BAG: Record<
     IconComponent: Settings,
     link: (entity) =>
       NAVIGATION_LINKS.ENTITY.CONFIG.CRUD(entity, {
-        tab: ENTITY_CRUD_SETTINGS_TAB_LABELS.DETAILS,
+        tab: ENTITY_CRUD_LABELS.details,
       }),
   },
   [EntityActionTypes.Diction]: {

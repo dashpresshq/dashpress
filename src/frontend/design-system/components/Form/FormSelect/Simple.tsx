@@ -10,12 +10,16 @@ interface ISimpleSelect {
   value: number | string;
   fullWidth?: boolean;
   sm?: true;
+  width: number;
   ariaLabel?: string;
 }
 
-const SimpleSelectStyled = styled(Input)<{ fullWidth?: boolean }>`
+const SimpleSelectStyled = styled(Input)<{
+  fullWidth?: boolean;
+  width: number;
+}>`
   display: inline-block;
-  width: 50px;
+  width: ${(props) => props.width}px;
   vertical-align: middle;
   background: ${USE_ROOT_COLOR("base-color")}
     url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3e%3cpath fill='%232c3652' d='M2 0L0 2h4zm0 5L0 3h4z'/%3e%3c/svg%3e")
@@ -34,6 +38,7 @@ export function SimpleSelect({
   value,
   fullWidth,
   sm,
+  width,
   ariaLabel,
 }: ISimpleSelect) {
   return (
@@ -42,6 +47,7 @@ export function SimpleSelect({
       aria-label={ariaLabel}
       value={value}
       sm={sm}
+      width={width}
       fullWidth={fullWidth}
       onChange={(e: { target: { value: string } }) => {
         onChange(e.target.value);

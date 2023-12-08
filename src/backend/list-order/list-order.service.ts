@@ -4,7 +4,7 @@ import {
 } from "backend/lib/config-persistence";
 import { IApplicationService } from "backend/types";
 
-export { sortByListOrder } from "./utils";
+export { sortListByOrder } from "./utils";
 
 export class ListOrderApiService implements IApplicationService {
   constructor(

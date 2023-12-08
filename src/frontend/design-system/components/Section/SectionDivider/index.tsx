@@ -11,7 +11,7 @@ interface IProps {
 export const GridRoot = styled.div`
   display: grid;
   grid-gap: 16px;
-  grid-template-columns: 2fr 9fr;
+  grid-template-columns: 2fr 8fr;
   @media (max-width: ${BREAKPOINTS.md}) {
     grid-template-columns: 1fr;
   }
@@ -38,7 +38,7 @@ ContentLayout.Left = function SectionLeft({ children }: IProps) {
 };
 
 ContentLayout.Right = function SectionRight({ children }: IProps) {
-  return <div style={{ overflow: "scroll" }}>{children}</div>;
+  return <div style={{ overflowX: "scroll" }}>{children}</div>;
 };
 
 ContentLayout.Center = function SectionCenter({ children }: IProps) {

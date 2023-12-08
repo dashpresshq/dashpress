@@ -92,6 +92,7 @@ export function SectionBox({
                         setSelectionValue(newSelectionValue);
                         selection.onChange(newSelectionValue);
                       }}
+                      width={50}
                       value={selectionValue}
                     />
                   ) : null}

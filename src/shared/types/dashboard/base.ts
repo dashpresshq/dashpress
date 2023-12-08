@@ -1,7 +1,4 @@
-import {
-  GridSpanSizes,
-  GridHeightSizes,
-} from "frontend/design-system/constants/grid";
+import { GridHeightSizes, GridSpanSizes } from "../ui";
 
 export interface ISharedWidgetConfig {
   id: string;

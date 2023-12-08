@@ -17,6 +17,7 @@ export function FilterTableByBooleans({
           value: value === "" ? undefined : value === "true",
         });
       }}
+      width={0}
       ariaLabel="Select Boolean"
       fullWidth
       value={

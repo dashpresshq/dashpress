@@ -1,9 +1,6 @@
 import { css } from "styled-components";
+import { GridHeightSizes, GridSpanSizes } from "shared/types/ui";
 import { BREAKPOINTS } from "./breakpoints";
-
-export type GridSpanSizes = "1" | "2" | "3" | "4";
-
-export type GridHeightSizes = "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8";
 
 export const gridHeightToPx = (unit: GridHeightSizes) => +unit * 100;
 

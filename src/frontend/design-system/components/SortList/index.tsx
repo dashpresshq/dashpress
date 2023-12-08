@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import SortableList, { SortableItem } from "react-easy-sort";
 import { Move } from "react-feather";
 import styled from "styled-components";
-import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
 import { DataStateKeys } from "frontend/lib/data/types";
 import { Stack } from "frontend/design-system/primitives/Stack";
 import { pluralize } from "shared/lib/strings";
@@ -13,6 +12,7 @@ import { EmptyWrapper } from "../EmptyWrapper";
 import { FormButton } from "../Button/FormButton";
 import { defaultToEmptyArray } from "./utils";
 import { ListSkeleton } from "../Skeleton/List";
+import { SHADOW_CSS } from "../Card";
 
 function arrayMoveMutable<T>(array: T[], fromIndex: number, toIndex: number) {
   const startIndex = fromIndex < 0 ? array.length + fromIndex : fromIndex;
@@ -39,8 +39,8 @@ export interface IProps<T> {
 const THRESHOLD_FOR_LONG_ITEMS_TO_SHOW_SAVE_CHANGES_AT_TOP = 10;
 
 const SortItem = styled(Stack)`
-  border: 1px solid ${USE_ROOT_COLOR("border-color")};
-  margin: 4px 0px;
+  ${SHADOW_CSS}
+  margin: 12px 0px;
   padding: 8px;
   user-select: none;
   border-radius: 4px;

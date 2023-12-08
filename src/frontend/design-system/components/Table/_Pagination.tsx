@@ -75,6 +75,7 @@ export function TablePagination({
         <Typo.MD>
           Showing{" "}
           <SimpleSelect
+            width={55}
             options={PAGE_SIZES.map((option) => ({
               value: `${option}`,
               label: `${option}`,

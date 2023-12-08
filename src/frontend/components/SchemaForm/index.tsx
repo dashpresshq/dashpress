@@ -10,11 +10,8 @@ import { FormButton } from "frontend/design-system/components/Button/FormButton"
 import { userFriendlyCase } from "shared/lib/strings/friendly-case";
 import { ButtonIconTypes } from "frontend/design-system/components/Button/constants";
 import styled from "styled-components";
-import {
-  GridSpanSizes,
-  gridItem,
-  gridRoot,
-} from "frontend/design-system/constants/grid";
+import { gridItem, gridRoot } from "frontend/design-system/constants/grid";
+import { GridSpanSizes } from "shared/types/ui";
 import { RenderFormInput } from "./_RenderFormInput";
 import { IFormExtension } from "./types";
 import { runFormBeforeSubmit, runFormFieldState } from "./form-run";

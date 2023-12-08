@@ -67,12 +67,14 @@ export function DateSelection({
               [field]: setCountValue(value, currentFilterValue),
             });
           }}
+          width={50}
           value={getCountValue(currentFilterValue) || "1"}
         />
       )}
       <SimpleSelect
         options={dateOptions.map(({ value, label }) => ({ label, value }))}
         fullWidth
+        width={0}
         onChange={(value) => {
           setFilter({
             ...filterValue,

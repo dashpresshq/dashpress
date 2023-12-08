@@ -1,7 +1,4 @@
-import {
-  GridSpanSizes,
-  GridHeightSizes,
-} from "frontend/design-system/constants/grid";
+import { GridSpanSizes, GridHeightSizes } from "shared/types/ui";
 import { ReactElement } from "react";
 import { z } from "zod";
 

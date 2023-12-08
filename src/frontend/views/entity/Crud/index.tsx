@@ -15,7 +15,6 @@ import { SectionBox } from "frontend/design-system/components/Section/SectionBox
 import { Tabs } from "frontend/design-system/components/Tabs";
 import {
   useEntityCrudSettings,
-  useEntityFieldLabels,
   useEntitySlug,
 } from "frontend/hooks/entity/entity.config";
 import {
@@ -25,11 +24,13 @@ import {
 import { useEntityFields } from "frontend/hooks/entity/entity.store";
 import { BaseEntitySettingsLayout } from "../_Base";
 import { EntityFieldsSelectionSettings } from "./EntityFieldsSelectionSettings";
-
+import { ENTITY_CONFIGURATION_VIEW, ENTITY_CRUD_LABELS } from "../constants";
 import {
-  ENTITY_CONFIGURATION_VIEW,
-  ENTITY_CRUD_SETTINGS_TAB_LABELS,
-} from "../constants";
+  PortalEntityTableSettings,
+  PortalEntityCreateSettings,
+  PortalEntityDetailsSettings,
+  PortalEntityUpdateSettings,
+} from "./portal";
 
 const DOCS_TITLE = "CRUD Settings";
 
@@ -38,8 +39,6 @@ function useEntityCrudView() {
 
   const entityCrudSettings = useEntityCrudSettings();
   const entityFields = useEntityFields(entity);
-
-  const getEntityFieldLabels = useEntityFieldLabels();
 
   const hiddenTableColumns = useEntityConfiguration(
     "hidden_entity_table_columns",
@@ -132,100 +131,99 @@ function useEntityCrudView() {
   const error = entityFields.error || entityCrudSettings.error;
 
   const schema: Record<string, { disabled: boolean; render: ReactNode }> = {
-    [ENTITY_CRUD_SETTINGS_TAB_LABELS.TABLE]: {
+    [ENTITY_CRUD_LABELS.table]: {
       disabled: false,
       render: (
-        <EntityFieldsSelectionSettings
-          label={ENTITY_CRUD_SETTINGS_TAB_LABELS.TABLE}
-          columns={{
-            fields: entityFields.data,
-            submit: upsertTableColumnsMutation.mutateAsync,
-            hidden: hiddenTableColumns.data,
-            getEntityFieldLabels,
-          }}
-          isLoading={sharedLoading || hiddenTableColumns.isLoading}
-          toggling={{
-            enabled: true,
-            label: ENTITY_CRUD_SETTINGS_TAB_LABELS.TABLE,
-          }}
-          error={error}
-        />
+        <>
+          <EntityFieldsSelectionSettings
+            crudKey="table"
+            columns={{
+              submit: upsertTableColumnsMutation.mutateAsync,
+              hidden: hiddenTableColumns.data,
+            }}
+            isLoading={sharedLoading || hiddenTableColumns.isLoading}
+            toggling={{
+              enabled: true,
+            }}
+            error={error}
+          />
+          <PortalEntityTableSettings />
+        </>
       ),
     },
-    [ENTITY_CRUD_SETTINGS_TAB_LABELS.DETAILS]: {
+    [ENTITY_CRUD_LABELS.details]: {
       disabled: !entityCrudSettingsState.details,
       render: (
-        <EntityFieldsSelectionSettings
-          label={ENTITY_CRUD_SETTINGS_TAB_LABELS.DETAILS}
-          columns={{
-            fields: entityFields.data,
-            submit: upsertDetailsColumnsMutation.mutateAsync,
-            hidden: hiddenDetailsColumns.data,
-            getEntityFieldLabels,
-          }}
-          isLoading={sharedLoading || hiddenDetailsColumns.isLoading}
-          error={error}
-          toggling={{
-            onToggle: () => toggleCrudSettings("details"),
-            enabled: entityCrudSettingsState.details,
-            label: ENTITY_CRUD_SETTINGS_TAB_LABELS.DETAILS,
-          }}
-        />
+        <>
+          <EntityFieldsSelectionSettings
+            crudKey="details"
+            columns={{
+              submit: upsertDetailsColumnsMutation.mutateAsync,
+              hidden: hiddenDetailsColumns.data,
+            }}
+            isLoading={sharedLoading || hiddenDetailsColumns.isLoading}
+            error={error}
+            toggling={{
+              onToggle: () => toggleCrudSettings("details"),
+              enabled: entityCrudSettingsState.details,
+            }}
+          />
+          <PortalEntityDetailsSettings />
+        </>
       ),
     },
-    [ENTITY_CRUD_SETTINGS_TAB_LABELS.CREATE]: {
+    [ENTITY_CRUD_LABELS.create]: {
       disabled: !entityCrudSettingsState.create,
       render: (
-        <EntityFieldsSelectionSettings
-          label={ENTITY_CRUD_SETTINGS_TAB_LABELS.CREATE}
-          columns={{
-            fields: entityFields.data,
-            submit: upsertCreateColumnsMutation.mutateAsync,
-            hidden: hiddenCreateColumns.data,
-            getEntityFieldLabels,
-          }}
-          isLoading={sharedLoading || hiddenCreateColumns.isLoading}
-          error={error}
-          toggling={{
-            onToggle: () => toggleCrudSettings("create"),
-            enabled: entityCrudSettingsState.create,
-            label: ENTITY_CRUD_SETTINGS_TAB_LABELS.CREATE,
-          }}
-        />
+        <>
+          <EntityFieldsSelectionSettings
+            crudKey="create"
+            columns={{
+              submit: upsertCreateColumnsMutation.mutateAsync,
+              hidden: hiddenCreateColumns.data,
+            }}
+            isLoading={sharedLoading || hiddenCreateColumns.isLoading}
+            error={error}
+            toggling={{
+              onToggle: () => toggleCrudSettings("create"),
+              enabled: entityCrudSettingsState.create,
+            }}
+          />
+          <PortalEntityCreateSettings />
+        </>
       ),
     },
-    [ENTITY_CRUD_SETTINGS_TAB_LABELS.UPDATE]: {
+    [ENTITY_CRUD_LABELS.update]: {
       disabled: !entityCrudSettingsState.update,
       render: (
-        <EntityFieldsSelectionSettings
-          label={ENTITY_CRUD_SETTINGS_TAB_LABELS.UPDATE}
-          columns={{
-            fields: entityFields.data,
-            submit: upsertUpdateColumnsMutation.mutateAsync,
-            hidden: hiddenUpdateColumns.data,
-            getEntityFieldLabels,
-          }}
-          toggling={{
-            onToggle: () => toggleCrudSettings("update"),
-            enabled: entityCrudSettingsState.update,
-            label: ENTITY_CRUD_SETTINGS_TAB_LABELS.UPDATE,
-          }}
-          isLoading={sharedLoading || hiddenUpdateColumns.isLoading}
-          error={error}
-        />
+        <>
+          <EntityFieldsSelectionSettings
+            crudKey="update"
+            columns={{
+              submit: upsertUpdateColumnsMutation.mutateAsync,
+              hidden: hiddenUpdateColumns.data,
+            }}
+            toggling={{
+              onToggle: () => toggleCrudSettings("update"),
+              enabled: entityCrudSettingsState.update,
+            }}
+            isLoading={sharedLoading || hiddenUpdateColumns.isLoading}
+            error={error}
+          />
+          <PortalEntityUpdateSettings />
+        </>
       ),
     },
-    [ENTITY_CRUD_SETTINGS_TAB_LABELS.DELETE]: {
+    [ENTITY_CRUD_LABELS.delete]: {
       disabled: !entityCrudSettingsState.delete,
       render: (
         <EntityFieldsSelectionSettings
-          label={ENTITY_CRUD_SETTINGS_TAB_LABELS.DELETE}
+          crudKey="delete"
           isLoading={false}
           error={error}
           toggling={{
             onToggle: () => toggleCrudSettings("delete"),
             enabled: entityCrudSettingsState.delete,
-            label: ENTITY_CRUD_SETTINGS_TAB_LABELS.DELETE,
           }}
         />
       ),

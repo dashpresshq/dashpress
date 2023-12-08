@@ -46,6 +46,7 @@ export function RenderFilterOperator<T>({
         ]}
         ariaLabel="Select Filter Operator"
         fullWidth
+        width={0}
         onChange={(value) => {
           setFilter({
             ...filterValue,

@@ -10,6 +10,10 @@ export interface IProps {
 
 export function Tooltip({ children, text, place = "right", offset }: IProps) {
   const id = useId();
+  if (!text) {
+    // eslint-disable-next-line react/jsx-no-useless-fragment
+    return <>{children}</>;
+  }
   return (
     <>
       <span id={id}> {children} </span>

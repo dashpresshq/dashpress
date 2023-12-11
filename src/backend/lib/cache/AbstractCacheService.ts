@@ -2,19 +2,16 @@ import { isNotEmpty } from "class-validator";
 import { ConfigApiService } from "../config/config.service";
 
 export abstract class AbstractCacheService {
-  protected readonly prefix!: string;
-
   protected readonly _configApiService!: ConfigApiService;
 
-  constructor(prefix: string, configApiService: ConfigApiService) {
-    this.prefix = prefix;
+  constructor(configApiService: ConfigApiService) {
     this._configApiService = configApiService;
   }
 
   public abstract setup(): Promise<void>;
 
   protected prefixKey(key: string) {
-    return `${this.prefix}:${key}`;
+    return `__dashpress__:${key}`;
   }
 
   abstract pullItem<T>(key: string): Promise<T | undefined>;

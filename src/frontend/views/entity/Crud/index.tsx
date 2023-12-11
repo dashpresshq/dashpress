@@ -248,8 +248,9 @@ export function EntityCrudSettings() {
     <BaseEntitySettingsLayout>
       <SectionBox
         title="CRUD Settings"
-        iconButtons={[
+        actionButtons={[
           {
+            _type: "normal",
             action: () => setIsDocOpen(true),
             icon: "help",
             label: DOCUMENTATION_LABEL.CONCEPT(DOCS_TITLE),

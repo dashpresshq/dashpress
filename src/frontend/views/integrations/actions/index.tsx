@@ -48,8 +48,9 @@ export function ActionsIntegrations() {
         isLoading={!integrationDetail}
         title={integrationDetail?.title}
         description={integrationDetail ? integrationDetail.description : ""}
-        iconButtons={[
+        actionButtons={[
           {
+            _type: "normal",
             action: () => setIsDocOpen(true),
             icon: "help",
             label: DOCUMENTATION_LABEL.CONCEPT(DOCS_TITLE),

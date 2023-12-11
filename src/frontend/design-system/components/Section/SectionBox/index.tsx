@@ -1,52 +1,37 @@
 import React, { useState, ReactNode } from "react";
-import styled from "styled-components";
 import { HelpCircle } from "react-feather";
 import { ISelectData } from "shared/types/options";
 import { Stack } from "frontend/design-system/primitives/Stack";
 import { Typo } from "frontend/design-system/primitives/Typo";
 import { Spacer } from "frontend/design-system/primitives/Spacer";
-import { DeleteButton } from "../../Button/DeleteButton";
 import { SoftButton } from "../../Button/SoftButton";
 import { Card, CardBody, CardHeader } from "../../Card";
 import { Tooltip } from "../../Tooltip";
 import { BaseSkeleton } from "../../Skeleton/Base";
 import { SimpleSelect } from "../../Form/FormSelect/Simple";
-import { ISectionBoxIconButton } from "./types";
+import { IActionButton } from "../../Button/ActionButtons/types";
+import { ActionButtons } from "../../Button/ActionButtons";
 
 export interface IProps {
   title: string;
   children: ReactNode;
   description?: string;
-  newItemLink?: string;
-  iconButtons?: ISectionBoxIconButton[];
+  actionButtons?: IActionButton[];
   selection?: { options: ISelectData[]; onChange: (value: string) => void };
-  deleteAction?: {
-    action: () => void;
-    isMakingDeleteRequest: boolean;
-    shouldConfirmAlert?: boolean;
-  };
   backLink?: { label?: string; action: string | (() => void) };
   isLoading?: boolean;
   headLess?: boolean;
-  sideText?: string;
 }
-
-const DeleteButtonStyle = styled(DeleteButton)`
-  margin-left: 0.25rem;
-`;
 
 export function SectionBox({
   children,
   title,
   isLoading,
   description,
-  newItemLink,
-  iconButtons,
+  actionButtons,
   selection,
   backLink,
-  deleteAction,
   headLess,
-  sideText,
 }: IProps) {
   const [selectionValue, setSelectionValue] = useState("");
 
@@ -79,52 +64,23 @@ export function SectionBox({
                   </Tooltip>
                 ) : null}
               </Stack>
-              {newItemLink ||
-              deleteAction ||
-              iconButtons ||
-              selection ||
-              sideText ? (
-                <Stack align="center" width="auto">
-                  {selection ? (
-                    <SimpleSelect
-                      options={selection.options}
-                      onChange={(newSelectionValue: string) => {
-                        setSelectionValue(newSelectionValue);
-                        selection.onChange(newSelectionValue);
-                      }}
-                      width={50}
-                      value={selectionValue}
-                    />
-                  ) : null}
-                  {sideText ? (
-                    <Typo.SM color="muted" as="span" textStyle="italic">
-                      {sideText}
-                    </Typo.SM>
-                  ) : null}
-                  {iconButtons
-                    ? iconButtons
-                        .sort((a, b) => a.order - b.order)
-                        .map(({ action, label, icon }) => (
-                          <SoftButton
-                            key={icon || label}
-                            action={action}
-                            label={label}
-                            icon={icon}
-                          />
-                        ))
-                    : null}
-                  {newItemLink ? (
-                    <SoftButton action={newItemLink} icon="add" />
-                  ) : null}
-                  {deleteAction && !isLoading ? (
-                    <DeleteButtonStyle
-                      onDelete={deleteAction.action}
-                      shouldConfirmAlert={deleteAction.shouldConfirmAlert}
-                      isMakingDeleteRequest={deleteAction.isMakingDeleteRequest}
-                    />
-                  ) : null}
-                </Stack>
-              ) : null}
+              {!isLoading &&
+                (actionButtons || selection ? (
+                  <Stack align="center" width="auto">
+                    {selection ? (
+                      <SimpleSelect
+                        options={selection.options}
+                        onChange={(newSelectionValue: string) => {
+                          setSelectionValue(newSelectionValue);
+                          selection.onChange(newSelectionValue);
+                        }}
+                        width={50}
+                        value={selectionValue}
+                      />
+                    ) : null}
+                    <ActionButtons actionButtons={actionButtons} />
+                  </Stack>
+                ) : null)}
             </Stack>
           </CardHeader>
         ) : null}

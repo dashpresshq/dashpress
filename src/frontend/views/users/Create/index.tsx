@@ -29,8 +29,9 @@ export function UserCreate() {
         <SectionBox
           title={ADMIN_USERS_CRUD_CONFIG.TEXT_LANG.CREATE}
           backLink={backLink}
-          iconButtons={[
+          actionButtons={[
             {
+              _type: "normal",
               action: () => setIsDocOpen(true),
               icon: "help",
               label: DOCUMENTATION_LABEL.CONCEPT(DOCS_TITLE),

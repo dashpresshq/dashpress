@@ -1,4 +1,3 @@
-import { AbstractCacheService, createCacheService } from "backend/lib/cache";
 import {
   createConfigDomainPersistenceService,
   AbstractConfigDataPersistenceService,
@@ -21,13 +20,11 @@ export interface IRole {
 
 export class RolesApiService implements IApplicationService {
   constructor(
-    private readonly _rolesPersistenceService: AbstractConfigDataPersistenceService<IRole>,
-    private readonly _cacheService: AbstractCacheService
+    private readonly _rolesPersistenceService: AbstractConfigDataPersistenceService<IRole>
   ) {}
 
   async bootstrap() {
     await this._rolesPersistenceService.setup();
-    await this._cacheService.setup();
   }
 
   async listRoles(): Promise<string[]> {
@@ -40,12 +37,10 @@ export class RolesApiService implements IApplicationService {
     if (isSystemRole(roleId)) {
       return [];
     }
-    return await this._cacheService.getItem<string[]>(roleId, async () => {
-      const { permissions } = await this._rolesPersistenceService.getItemOrFail(
-        roleId
-      );
-      return permissions;
-    });
+    const { permissions } = await this._rolesPersistenceService.getItemOrFail(
+      roleId
+    );
+    return permissions;
   }
 
   async canRoleDoThis(roleId: string, permission: string) {
@@ -116,7 +111,7 @@ export class RolesApiService implements IApplicationService {
 
     await this._rolesPersistenceService.removeItem(roleId);
 
-    await this._rolesPersistenceService.updateItem(madeRoleId, {
+    await this._rolesPersistenceService.upsertItem(madeRoleId, {
       ...role,
       id: madeRoleId,
     });
@@ -124,38 +119,30 @@ export class RolesApiService implements IApplicationService {
 
   async removeRole(roleId: string) {
     await this._rolesPersistenceService.removeItem(roleId);
-    await this._cacheService.clearItem(roleId);
   }
 
   async addPermission(roleId: string, permission: string) {
     const role = await this._rolesPersistenceService.getItemOrFail(roleId);
 
-    await this._rolesPersistenceService.updateItem(roleId, {
+    await this._rolesPersistenceService.upsertItem(roleId, {
       ...role,
       permissions: [...role.permissions, permission],
     });
-    await this._cacheService.clearItem(roleId);
   }
 
   async removePermission(roleId: string, permission: string) {
     const role = await this._rolesPersistenceService.getItemOrFail(roleId);
 
-    await this._rolesPersistenceService.updateItem(roleId, {
+    await this._rolesPersistenceService.upsertItem(roleId, {
       ...role,
       permissions: role.permissions.filter(
         (loopPermission) => loopPermission !== permission
       ),
     });
-    await this._cacheService.clearItem(roleId);
   }
 }
 
 const rolesPersistenceService =
   createConfigDomainPersistenceService<IRole>("roles");
 
-const cacheService = createCacheService("permission");
-
-export const rolesApiService = new RolesApiService(
-  rolesPersistenceService,
-  cacheService
-);
+export const rolesApiService = new RolesApiService(rolesPersistenceService);

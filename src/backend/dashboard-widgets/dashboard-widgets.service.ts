@@ -219,7 +219,7 @@ return [actual[0], relative[0]];
   }
 
   async updateWidget(widgetId: string, widget: IWidgetConfig) {
-    await this._dashboardWidgetsPersistenceService.updateItem(widgetId, widget);
+    await this._dashboardWidgetsPersistenceService.upsertItem(widgetId, widget);
   }
 
   async removeWidget(widgetId: string, dashboardId: string) {

@@ -3,8 +3,6 @@ import { AbstractCacheService } from "../AbstractCacheService";
 import { MemoryCacheAdaptor } from "../MemoryCacheAdaptor";
 import { RedisCacheAdaptor } from "../RedisCacheAdaptor";
 
-const prefix = "__test-cache-adaptor__";
-
 const CACHE_ADAPTORS: {
   title: string;
   adaptor: AbstractCacheService;
@@ -12,14 +10,12 @@ const CACHE_ADAPTORS: {
   {
     title: "Memory",
     adaptor: new MemoryCacheAdaptor(
-      prefix,
       new ConfigApiService({ DO_NOT_BOOSTRAP_CONFIG: false })
     ),
   },
   {
     title: "Redis",
     adaptor: new RedisCacheAdaptor(
-      prefix,
       new ConfigApiService({
         DO_NOT_BOOSTRAP_CONFIG: false,
         CACHE_ADAPTOR_CONNECTION_STRING: "redis://localhost",

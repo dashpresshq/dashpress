@@ -21,21 +21,53 @@ import { DataStateKeys } from "frontend/lib/data/types";
 import { ellipsis } from "shared/lib/strings";
 import { TableFilterType } from "frontend/design-system/components/Table/filters/types";
 import { ITableColumn } from "frontend/design-system/components/Table/types";
+import { ActionButtons } from "frontend/design-system/components/Button/ActionButtons";
 import { filterOutHiddenScalarColumns } from "../utils";
-import { TableActions } from "./Actions";
 import { viewSpecialDataTypes } from "../viewSpecialDataTypes";
 import { usePortalTableColumns } from "./portal";
 import { evalutePresentationScript } from "../evaluatePresentationScript";
-import { useCanUserPerformCrudAction } from "../useCanUserPerformCrudAction";
+import { useEntityActionButtons } from "../useEntityActionButtons";
+import { usePortalActionButtons } from "../Details/portal";
 
 export const ACTIONS_ACCESSOR = "__actions__";
+
+function TableActionButtons({
+  row,
+  entity,
+}: {
+  entity: string;
+  row: {
+    original: Record<string, unknown>;
+  };
+}) {
+  const idField = useEntityIdField(entity);
+
+  const idValue = row.original[idField.data || "id"] as string;
+
+  const actionButtons = useEntityActionButtons({
+    entity,
+    id: idValue,
+  });
+
+  const portalActionButtons = usePortalActionButtons({
+    entity,
+    entityId: idValue,
+  });
+
+  return (
+    <ActionButtons
+      actionButtons={[...actionButtons, ...portalActionButtons]}
+      justIcons
+    />
+  );
+}
 
 const buildFilterConfigFromType = (prop: {
   entityType: keyof typeof FIELD_TYPES_CONFIG_MAP;
   entityFieldSelections: IColorableSelection[];
   isIdField: boolean;
   referenceField?: string;
-  lean?: true;
+  lean?: true; // TODO is it in use?
 }): TableFilterType | undefined => {
   const { entityType, entityFieldSelections, isIdField, referenceField, lean } =
     prop;
@@ -78,12 +110,10 @@ const buildFilterConfigFromType = (prop: {
 };
 
 export const useTableColumns = (
-  entity: string,
-  lean?: true
+  entity: string
 ): Partial<DataStateKeys<ITableColumn[]>> => {
-  const portalTableColumns = usePortalTableColumns(entity, !!lean);
+  const portalTableColumns = usePortalTableColumns(entity);
   const getEntityFieldLabels = useEntityFieldLabels(entity);
-  const canUserPerformCrudAction = useCanUserPerformCrudAction(entity);
   const entityFields = useEntityFields(entity);
   const entityToOneReferenceFields = useEntityToOneReferenceFields(entity);
   const hiddenTableColumns = useHiddenEntityColumns("table", entity);
@@ -97,6 +127,11 @@ export const useTableColumns = (
 
   const entityFieldTypes = useProcessedEntityFieldTypes(entity);
   const entityFieldSelections = useEntityFieldSelections(entity);
+
+  const actionButtons = useEntityActionButtons({
+    entity,
+    id: "doesnt-matter-any-value-will-do-here",
+  });
 
   const columnsToShow = useMemo(() => {
     return filterOutHiddenScalarColumns(
@@ -139,11 +174,8 @@ export const useTableColumns = (
         entityFieldSelections: entityFieldSelections[name],
         isIdField: idField.data === name,
         referenceField: entityToOneReferenceFields.data[name],
-        lean,
       }),
-      disableSortBy: lean
-        ? true
-        : !FIELD_TYPES_CONFIG_MAP[entityFieldTypes[name]]?.sortable,
+      disableSortBy: !FIELD_TYPES_CONFIG_MAP[entityFieldTypes[name]]?.sortable,
       Cell: ({ row }: { row: { original: Record<string, unknown> } }) => {
         const value$1 = row.original[name];
         if (isId) {
@@ -185,21 +217,16 @@ export const useTableColumns = (
     };
     return tableColumn;
   });
-  if (
-    canUserPerformCrudAction("details") ||
-    canUserPerformCrudAction("delete") ||
-    canUserPerformCrudAction("update")
-  ) {
-    if (!lean) {
-      columns.push({
-        Header: "Actions",
-        accessor: ACTIONS_ACCESSOR,
-        disableSortBy: true,
-        Cell: ({ row }: { row: { original: Record<string, unknown> } }) => (
-          <TableActions row={row} entity={entity} />
-        ),
-      });
-    }
+
+  if (actionButtons.length > 0) {
+    columns.push({
+      Header: "Actions",
+      accessor: ACTIONS_ACCESSOR,
+      disableSortBy: true,
+      Cell: ({ row }: { row: { original: Record<string, unknown> } }) => (
+        <TableActionButtons row={row} entity={entity} />
+      ),
+    });
   }
 
   return { data: portalTableColumns(columns) };

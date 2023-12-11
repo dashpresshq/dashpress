@@ -50,13 +50,13 @@ export class DataApiService implements IDataApiService {
     entity: string,
     select: string[],
     queryFilter: QueryFilterSchema,
-    dataFetchingModifiers: IPaginationFilters
+    paginationFilters: IPaginationFilters
   ): Promise<Record<string, unknown>[]> {
     return await this.getDataAccessInstance().list(
       entity,
       select,
-      queryFilter,
-      dataFetchingModifiers
+      queryFilter, //
+      paginationFilters
     );
   }
 
@@ -103,6 +103,7 @@ export class DataApiService implements IDataApiService {
       fieldsToShow,
       {
         [columnField]: id,
+        //
       }
     );
     if (!data) {
@@ -111,15 +112,6 @@ export class DataApiService implements IDataApiService {
       );
     }
     return data;
-  }
-
-  private returnOnlyDataThatAreAllowed(
-    data: Record<string, unknown>,
-    allowedFields: string[]
-  ) {
-    return Object.fromEntries(
-      allowedFields.map((field) => [field, data[field]])
-    );
   }
 
   async create(
@@ -187,6 +179,7 @@ export class DataApiService implements IDataApiService {
           },
         })),
       },
+      //
       {
         take: DEFAULT_LIST_LIMIT,
         page: 1,
@@ -214,7 +207,7 @@ export class DataApiService implements IDataApiService {
             entity,
             "table"
           ),
-          queryFilters,
+          queryFilters, //
           paginationFilters
         ),
         this.getDataAccessInstance().count(entity, queryFilters),
@@ -291,7 +284,7 @@ export class DataApiService implements IDataApiService {
 
     await this.getDataAccessInstance().delete(entity, {
       [await this._entitiesApiService.getEntityPrimaryField(entity)]: id,
-    });
+    }); //
 
     await PortalDataHooksService.afterDelete({
       beforeData,
@@ -302,7 +295,7 @@ export class DataApiService implements IDataApiService {
   }
 
   async count(entity: string, queryFilter: QueryFilterSchema): Promise<number> {
-    return await this.getDataAccessInstance().count(entity, queryFilter);
+    return await this.getDataAccessInstance().count(entity, queryFilter); //
   }
 
   private async getRelationshipSettings(entity: string): Promise<{
@@ -342,6 +335,15 @@ export class DataApiService implements IDataApiService {
       entity
     );
     return configuration;
+  }
+
+  private returnOnlyDataThatAreAllowed(
+    data: Record<string, unknown>,
+    allowedFields: string[]
+  ) {
+    return Object.fromEntries(
+      allowedFields.map((field) => [field, data[field]])
+    );
   }
 }
 

@@ -25,8 +25,8 @@ import {
 import { ENTITY_DETAILS_VIEW_KEY } from "./constants";
 import { EntityDetailsView } from "./DetailsView";
 import { DetailsLayout } from "./_Layout";
-import { useCanUserPerformCrudAction } from "../useCanUserPerformCrudAction";
 import { DetailsCanvas } from "../Table/_WholeEntityTable/DetailsCanvas";
+import { useEntityActionButtons } from "../useEntityActionButtons";
 
 export function EntityRelationDetails() {
   const childEntity = useRouteParam("childEntity");
@@ -34,7 +34,6 @@ export function EntityRelationDetails() {
   const entityId = useEntityId();
   const parentEntity = useEntitySlug();
   const entityReferenceFields = useEntityReferenceFields(parentEntity);
-  const canUserPerformCrudAction = useCanUserPerformCrudAction(childEntity);
   const entityDataReference = useEntityDataReference(parentEntity, entityId);
   const router = useRouter();
 
@@ -79,23 +78,11 @@ export function EntityRelationDetails() {
 
   const idData = dataDetails.data[childEntityIdField.data];
 
-  const actions =
-    childEntityIdField.isLoading || dataDetails.isLoading
-      ? []
-      : [
-          {
-            icon: "eye" as const,
-            action: NAVIGATION_LINKS.ENTITY.DETAILS(childEntity, idData),
-            label: "Details",
-            crudSetting: canUserPerformCrudAction("details"),
-          },
-          {
-            icon: "edit" as const,
-            action: NAVIGATION_LINKS.ENTITY.UPDATE(childEntity, idData),
-            label: "Edit",
-            crudSetting: canUserPerformCrudAction("update"),
-          },
-        ];
+  const actionButtons = useEntityActionButtons({
+    entity: childEntity,
+    id: idData,
+    exclude: ["delete"],
+  });
 
   return (
     <DetailsLayout
@@ -107,7 +94,10 @@ export function EntityRelationDetails() {
         <SectionBox
           title={title}
           isLoading={
-            entityDataReference.isLoading || entityDataReference.isIdle
+            entityDataReference.isLoading ||
+            entityDataReference.isIdle ||
+            childEntityIdField.isLoading ||
+            dataDetails.isLoading
           }
           backLink={backLink}
         >
@@ -137,7 +127,7 @@ export function EntityRelationDetails() {
             entityDataReference.isLoading || entityDataReference.isIdle
           }
           backLink={backLink}
-          iconButtons={actions.filter(({ crudSetting }) => crudSetting)}
+          actionButtons={actionButtons}
         >
           <EntityDetailsView
             displayFrom="details"

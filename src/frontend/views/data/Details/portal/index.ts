@@ -1,1 +1,1 @@
-export { useDetailsViewMenuItems, useSectionBoxIconButtons } from "./main";
+export { useDetailsViewMenuItems, usePortalActionButtons } from "./main";

@@ -26,13 +26,15 @@ export function EntityFormActionsSettings() {
     <BaseEntitySettingsLayout>
       <SectionBox
         title={ADMIN_ACTION_INSTANCES_CRUD_CONFIG.TEXT_LANG.TITLE}
-        iconButtons={[
+        actionButtons={[
           {
+            _type: "normal",
             action: NAVIGATION_LINKS.SETTINGS.VARIABLES,
             icon: "settings",
             label: "Manage Variables",
           },
           {
+            _type: "normal",
             action: () => setIsDocOpen(true),
             icon: "help",
             label: DOCUMENTATION_LABEL.CONCEPT(DOCS_TITLE),

@@ -5,12 +5,10 @@ import { EmptyWrapper } from "../EmptyWrapper";
 import { ListSkeleton } from "../Skeleton/List";
 import { SectionList } from "../Section/SectionList";
 import { FormSearch } from "../Form/FormSearch";
-import { SoftButton } from "../Button/SoftButton";
 
 export interface IProps<T> {
   isLoading?: false | number;
   items: T[];
-  newItemLink?: string;
   singular?: string;
   error?: unknown;
   notSearchable?: boolean;
@@ -38,7 +36,6 @@ export function RenderList<T extends { name: string }>({
   isLoading,
   items: items$1,
   getLabel,
-  newItemLink,
   error,
   sortByLabel,
   notSearchable,
@@ -58,13 +55,6 @@ export function RenderList<T extends { name: string }>({
     return (
       <EmptyWrapper text={`No ${singular} Has Been Added Yet`}>
         <Spacer size="sm" />
-        {newItemLink && (
-          <SoftButton
-            action={newItemLink}
-            label={`Add New ${singular}`}
-            icon="add"
-          />
-        )}
       </EmptyWrapper>
     );
   }

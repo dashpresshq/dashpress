@@ -1,16 +1,16 @@
 import { IFormProps } from "frontend/lib/form/types";
 import { SchemaForm } from "frontend/components/SchemaForm";
 import { MAKE_APP_CONFIGURATION_CRUD_CONFIG } from "frontend/hooks/configuration/configuration.constant";
-import { ISiteSettings } from "shared/types/config";
+import { AppConfigurationValueType } from "shared/configurations/constants";
 
 const CRUD_CONFIG = MAKE_APP_CONFIGURATION_CRUD_CONFIG("site_settings");
 
 export function SiteSettingsForm({
   onSubmit,
   initialValues,
-}: IFormProps<ISiteSettings>) {
+}: IFormProps<AppConfigurationValueType<"site_settings">>) {
   return (
-    <SchemaForm<ISiteSettings>
+    <SchemaForm<AppConfigurationValueType<"site_settings">>
       onSubmit={onSubmit}
       initialValues={initialValues}
       icon="save"

@@ -20,7 +20,6 @@ import {
 } from "backend/configuration/configuration.service";
 import { RolesApiService, rolesApiService } from "backend/roles/roles.service";
 import { ILabelValue } from "shared/types/options";
-import { ISingularPlural } from "shared/types/config";
 import { sortListByOrder } from "shared/lib/array/sort";
 import { portalCheckIfIsMenuAllowed, getPortalMenuItems } from "./portal";
 import { IBaseNavigationMenuApiService } from "./types";
@@ -74,11 +73,17 @@ export class NavigationMenuApiService
 
     const entitiesToShow = await this.getUserEntities();
 
-    const dictionMap =
-      await this._configurationApiService.showMultipleConfigForEntities<ISingularPlural>(
-        "entity_diction",
-        entitiesToShow.map((value) => value.value)
-      );
+    const dictionMap = Object.fromEntries(
+      await Promise.all(
+        entitiesToShow.map(async (value) => [
+          value.value,
+          await this._configurationApiService.show(
+            "entity_diction",
+            value.value
+          ),
+        ])
+      )
+    );
 
     navItems = navItems.concat([
       {

@@ -133,7 +133,7 @@ export class UsersApiService implements IApplicationService {
     if (!user) {
       return;
     }
-    await this._usersPersistenceService.updateItem(username, {
+    await this._usersPersistenceService.upsertItem(username, {
       ...user,
       ...userDetails,
     });

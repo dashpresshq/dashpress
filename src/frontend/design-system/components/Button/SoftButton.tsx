@@ -6,6 +6,7 @@ import { Stack } from "frontend/design-system/primitives/Stack";
 import { SoftButtonStyled } from "./Button";
 import { ButtonIconTypes, ICON_MAP } from "./constants";
 import { Spin } from "../_/Spin";
+import { Tooltip } from "../Tooltip";
 
 export interface IProps {
   label?: string;
@@ -69,36 +70,45 @@ export function SoftButton({
     "aria-label": justIcon ? label : undefined,
   };
 
+  const toolTipProps = {
+    place: "top",
+    text: justIcon && label,
+  } as const;
+
   if (typeof action === "string") {
     return (
-      <Link href={action} passHref>
-        <SoftButtonStyled
-          {...buttonProps}
-          as="a"
-          target={action.startsWith("http") ? "_blank" : undefined}
-        >
-          {secondaryAction ? (
-            <span onClick={secondaryAction} aria-hidden="true">
-              {content}
-            </span>
-          ) : (
-            content
-          )}
-        </SoftButtonStyled>
-      </Link>
+      <Tooltip {...toolTipProps}>
+        <Link href={action} passHref>
+          <SoftButtonStyled
+            {...buttonProps}
+            as="a"
+            target={action.startsWith("http") ? "_blank" : undefined}
+          >
+            {secondaryAction ? (
+              <span onClick={secondaryAction} aria-hidden="true">
+                {content}
+              </span>
+            ) : (
+              content
+            )}
+          </SoftButtonStyled>
+        </Link>
+      </Tooltip>
     );
   }
 
   return (
-    <SoftButtonStyled
-      {...buttonProps}
-      type={type}
-      onClick={(e: { stopPropagation: () => void }) => {
-        e.stopPropagation();
-        action();
-      }}
-    >
-      {content}
-    </SoftButtonStyled>
+    <Tooltip {...toolTipProps}>
+      <SoftButtonStyled
+        {...buttonProps}
+        type={type}
+        onClick={(e: { stopPropagation: () => void }) => {
+          e.stopPropagation();
+          action();
+        }}
+      >
+        {content}
+      </SoftButtonStyled>
+    </Tooltip>
   );
 }

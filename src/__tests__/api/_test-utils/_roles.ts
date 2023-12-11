@@ -1,4 +1,3 @@
-import { createCacheService } from "backend/lib/cache";
 import { createConfigDomainPersistenceService } from "backend/lib/config-persistence";
 import { IRole } from "backend/roles/roles.service";
 
@@ -14,10 +13,6 @@ const TEST_ROLES: IRole[] = [
 ];
 
 export const setupRolesTestData = async (testRoles: IRole[] = TEST_ROLES) => {
-  const cacheService = createCacheService("permission");
-
-  await cacheService.purge();
-
   const configPersistenceService =
     createConfigDomainPersistenceService<IRole>("roles");
 

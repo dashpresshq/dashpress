@@ -123,8 +123,9 @@ export function EntityRelationsSettings() {
     <BaseEntitySettingsLayout>
       <SectionBox
         title="Relationship Settings"
-        iconButtons={[
+        actionButtons={[
           {
+            _type: "normal",
             action: () => setIsDocOpen(true),
             icon: "help",
             label: DOCUMENTATION_LABEL.CONCEPT(DOCS_TITLE),

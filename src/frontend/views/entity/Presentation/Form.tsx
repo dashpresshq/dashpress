@@ -20,6 +20,18 @@ export function PresentationScriptForm({
           type: "json",
           label: "Script",
           validations: [],
+          placeholder: `if($.field === "image"){
+  return "https://cdn.mycompany.com/" + $.value + "?size=320x640";
+}
+
+if($.field === "description" && $.from === "table"){
+  return $.value.substr(0, 120)
+}
+
+if($.field === "commentsCount"){
+  return ($.value / 1000) + "K"
+}
+          `,
         },
       }}
       onSubmit={async (data) => {

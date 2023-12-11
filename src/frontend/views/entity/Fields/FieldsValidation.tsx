@@ -75,14 +75,17 @@ export function FieldValidationCanvas({
                     <React.Fragment key={name}>
                       <SectionBox
                         title={userFriendlyCase(validationType)}
-                        deleteAction={
+                        actionButtons={
                           !isBoundToType && !fromSchema
-                            ? {
-                                shouldConfirmAlert: false,
-                                action: () => fields.remove(index),
-                                isMakingDeleteRequest: false,
-                              }
-                            : undefined
+                            ? [
+                                {
+                                  _type: "delete",
+                                  shouldConfirmAlert: false,
+                                  action: () => fields.remove(index),
+                                  isMakingDeleteRequest: false,
+                                },
+                              ]
+                            : []
                         }
                       >
                         {validationInput && (

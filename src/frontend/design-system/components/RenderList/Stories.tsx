@@ -51,12 +51,6 @@ Loading.args = {
   isLoading: 5,
 };
 
-export const NewItemLink = Template.bind({});
-NewItemLink.args = {
-  items: [],
-  newItemLink: "/path/to/new/item",
-};
-
 export const Empty = Template.bind({});
 Empty.args = {
   items: [],

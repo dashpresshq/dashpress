@@ -2,14 +2,17 @@ import { useCallback } from "react";
 import { userFriendlyCase } from "shared/lib/strings/friendly-case";
 import { useApiQueries } from "frontend/lib/data/useApi/useApiQueries";
 import { AppStorage } from "frontend/lib/storage/app";
-import { ISingularPlural } from "shared/types/config";
+import { AppConfigurationValueType } from "shared/configurations/constants";
 import { configurationApiPath } from "../configuration/configuration.store";
 
 export function useEntityDictionPlurals<T, P extends keyof T>(
   input: T[],
   field: P
 ) {
-  const entityDictions = useApiQueries<T, ISingularPlural>({
+  const entityDictions = useApiQueries<
+    T,
+    AppConfigurationValueType<"entity_diction">
+  >({
     input,
     accessor: field,
     pathFn: (entity) =>

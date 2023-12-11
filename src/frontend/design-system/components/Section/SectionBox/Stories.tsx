@@ -28,14 +28,9 @@ WithDescription.args = {
   description: "Some help text for you",
 };
 
-export const WithNewItemLink = Template.bind({});
-WithNewItemLink.args = {
-  newItemLink: "/go-somewhere",
-};
-
-export const WithIconButtons = Template.bind({});
-WithIconButtons.args = {
-  iconButtons: [
+export const WithActionButtons = Template.bind({});
+WithActionButtons.args = {
+  actionButtons: [
     {
       action: "/foo",
       label: "Add Me",
@@ -86,13 +81,13 @@ WithDeleteActionInProgress.args = {
   },
 };
 
-export const WithDeleteActionAndIconButtons = Template.bind({});
-WithDeleteActionAndIconButtons.args = {
+export const WithDeleteActionAndActionButtons = Template.bind({});
+WithDeleteActionAndActionButtons.args = {
   deleteAction: {
     action: action("delete"),
     isMakingDeleteRequest: false,
   },
-  iconButtons: [
+  actionButtons: [
     {
       action: "/foo",
       label: "Foo",
@@ -124,17 +119,10 @@ HeadLess.args = {
   headLess: true,
 };
 
-export const SideText = Template.bind({});
-SideText.args = {
-  sideText: "Updated Yesterday",
-};
-
 export const EveryThing = Template.bind({});
 EveryThing.args = {
-  sideText: "Updated Yesterday",
   description: "Some help text for you",
-  newItemLink: "/go-somewhere",
-  iconButtons: [
+  actionButtons: [
     {
       action: "/foo",
       label: "Foo",

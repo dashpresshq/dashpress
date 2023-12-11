@@ -26,11 +26,8 @@ import { FOR_CODE_COV as $25 } from "shared/types/auth/portal/index";
 import { FOR_CODE_COV as $26 } from "shared/types/auth/portal/main";
 import { FOR_CODE_COV as $28 } from "shared/types/portal/widgets/main";
 import { FOR_CODE_COV as $29 } from "shared/types/portal/widgets";
-import { FOR_CODE_COV as $30 } from "backend/lib/cache/portal";
-import { FOR_CODE_COV as $31 } from "backend/lib/cache/portal/main";
 import { FOR_CODE_COV as $32 } from "shared/configurations/base-types";
 import { FOR_CODE_COV as $33 } from "frontend/views/Dashboard/Widget/_components/WidgetHeader/types";
-import { FOR_CODE_COV as $34 } from "shared/types/config";
 import { FOR_CODE_COV as $35 } from "shared/types/roles";
 import { FOR_CODE_COV as $37 } from "frontend/views/Dashboard/Widget/_manage/types";
 import { FOR_CODE_COV as $39 } from "shared/types/dashboard/base";
@@ -71,11 +68,8 @@ noop(
   $26,
   $28,
   $29,
-  $30,
-  $31,
   $32,
   $33,
-  $34,
   $35,
   $37,
   $39,

@@ -35,7 +35,6 @@ export function MenuSection({ menuItems, currentMenuItem }: IProps) {
       <RenderList
         items={orderedMenuItems}
         notSearchable
-        newItemLink=""
         singular=""
         render={(menuItem) => (
           <SectionListItem

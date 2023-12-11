@@ -1,4 +1,3 @@
-import { ISingularPlural, ISiteSettings } from "shared/types/config";
 import { IFileUploadSettings } from "shared/types/file";
 import { IFieldValidationItem } from "shared/validations/types";
 import { IColorableSelection, IThemeSettings } from "shared/types/ui";
@@ -61,7 +60,7 @@ export const APP_CONFIGURATION_CONFIG = {
   entity_diction: {
     label: "Diction Settings",
     requireEntity: true,
-    defaultValue: { singular: "", plural: "" } as ISingularPlural,
+    defaultValue: { singular: "", plural: "" },
   },
   entity_form_extension: {
     label: "Form Scripts",
@@ -167,7 +166,7 @@ export const APP_CONFIGURATION_CONFIG = {
       fullLogo: "/assets/images/full-logo.png",
       homeLink: "https://dashpress.io",
       logo: "/assets/images/logo.png",
-    } as ISiteSettings,
+    },
   },
 };
 

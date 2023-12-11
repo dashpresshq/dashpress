@@ -23,14 +23,18 @@ interface IProps {
   IMPORTANT NOTE:
   LESSER PERMISSION FIRST
 */
-const PERMISSION_HEIRACHIES = {
-  [USER_PERMISSIONS.CAN_MANAGE_USERS]: USER_PERMISSIONS.CAN_RESET_PASSWORD,
-  [USER_PERMISSIONS.CAN_CONFIGURE_APP]:
-    USER_PERMISSIONS.CAN_MANAGE_INTEGRATIONS,
-  [USER_PERMISSIONS.CAN_MANAGE_ALL_ENTITIES]:
+const PERMISSION_HEIRACHIES: [string, string][] = [
+  [USER_PERMISSIONS.CAN_MANAGE_USERS, USER_PERMISSIONS.CAN_RESET_PASSWORD],
+  [
     USER_PERMISSIONS.CAN_CONFIGURE_APP,
+    USER_PERMISSIONS.CAN_MANAGE_INTEGRATIONS,
+  ],
+  [
+    USER_PERMISSIONS.CAN_MANAGE_ALL_ENTITIES,
+    USER_PERMISSIONS.CAN_CONFIGURE_APP,
+  ],
   ...PORTAL_PERMISSION_HEIRACHIES,
-};
+];
 
 export const getPermissionChildren = (
   permission: string,
@@ -39,7 +43,7 @@ export const getPermissionChildren = (
 ): string[] => {
   permissions.push(permission);
 
-  const permissionHeirachy = Object.entries<string>(PERMISSION_HEIRACHIES).find(
+  const permissionHeirachy = PERMISSION_HEIRACHIES.find(
     (value) => value[mainKey === 1 ? 0 : 1] === permission
   );
 

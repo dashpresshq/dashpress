@@ -36,8 +36,9 @@ export function DateFormatSettings() {
     <BaseSettingsLayout>
       <SectionBox
         title={CRUD_CONFIG.TEXT_LANG.TITLE}
-        iconButtons={[
+        actionButtons={[
           {
+            _type: "normal",
             action: "https://date-fns.org/docs/format",
             icon: "help",
             label: "Using https://date-fns.org/docs/format",

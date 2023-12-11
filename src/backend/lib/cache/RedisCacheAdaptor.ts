@@ -6,8 +6,8 @@ import { AbstractCacheService } from "./AbstractCacheService";
 export class RedisCacheAdaptor extends AbstractCacheService {
   private redisConnection: RedisClientType;
 
-  constructor(prefix: string, _configApiService: ConfigApiService) {
-    super(prefix, _configApiService);
+  constructor(_configApiService: ConfigApiService) {
+    super(_configApiService);
   }
 
   async getRedisInstance() {

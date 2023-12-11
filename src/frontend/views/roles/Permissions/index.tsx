@@ -63,8 +63,9 @@ export function RolePermissions() {
         <SectionBox
           title={ADMIN_PERMISSIONS_CRUD_CONFIG.TEXT_LANG.EDIT}
           backLink={backLink}
-          iconButtons={[
+          actionButtons={[
             {
+              _type: "normal",
               action: () => setIsDocOpen(true),
               icon: "help",
               label: DOCUMENTATION_LABEL.CONCEPT(DOCS_TITLE),

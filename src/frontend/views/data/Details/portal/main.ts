@@ -1,5 +1,5 @@
+import { IActionButton } from "frontend/design-system/components/Button/ActionButtons/types";
 import { IDropDownMenuItem } from "frontend/design-system/components/DropdownMenu";
-import { ISectionBoxIconButton } from "frontend/design-system/components/Section/SectionBox/types";
 import { noop } from "shared/lib/noop";
 
 export const useDetailsViewMenuItems = ({
@@ -13,13 +13,13 @@ export const useDetailsViewMenuItems = ({
   return [];
 };
 
-export const useSectionBoxIconButtons = ({
+export const usePortalActionButtons = ({
   entity,
   entityId,
 }: {
   entity: string;
   entityId: string;
-}): ISectionBoxIconButton[] => {
+}): IActionButton[] => {
   noop(entity, entityId);
   return [];
 };

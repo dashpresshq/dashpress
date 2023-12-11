@@ -21,31 +21,6 @@ export class ConfigurationApiService implements IApplicationService {
     await this._appConfigPersistenceService.setup();
   }
 
-  async showMultipleConfigForEntities<T>(
-    key: AppConfigurationKeys,
-    entities: string[]
-  ): Promise<Record<string, T>> {
-    const allKeys = entities.map((entity) =>
-      this._appConfigPersistenceService.mergeKeyWithSecondaryKey(key, entity)
-    );
-
-    const values = await this._appConfigPersistenceService.getAllItemsIn(
-      allKeys
-    );
-
-    return Object.fromEntries(
-      entities.map((entity) => [
-        entity,
-        (values[
-          this._appConfigPersistenceService.mergeKeyWithSecondaryKey(
-            key,
-            entity
-          )
-        ] as T) || (APP_CONFIGURATION_CONFIG[key].defaultValue as T),
-      ])
-    );
-  }
-
   async show<T extends AppConfigurationKeys>(
     key: T,
     entity?: string

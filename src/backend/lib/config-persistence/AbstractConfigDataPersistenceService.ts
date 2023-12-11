@@ -49,11 +49,7 @@ export abstract class AbstractConfigDataPersistenceService<T> {
     await this.persistItem(key, data);
   }
 
-  public async updateItem(key: string, data: T): Promise<void> {
-    await this.persistItem(key, data);
-  }
-
-  public abstract removeItem(key: string): Promise<void>;
+  public abstract removeItem(key: string): Promise<void>; //
 
   public async resetState(keyField: keyof T, data: T[]) {
     await this.resetToEmpty();

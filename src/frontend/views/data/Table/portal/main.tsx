@@ -29,8 +29,8 @@ export function TableTopComponent({ entity }: { entity: string }) {
   return <span />;
 }
 
-export const usePortalTableColumns = (entity: string, lean: boolean) => {
-  noop(entity, lean);
+export const usePortalTableColumns = (entity: string) => {
+  noop(entity);
   return (tableColumns: ITableColumn[]) => tableColumns;
 };
 

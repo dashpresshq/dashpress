@@ -4,7 +4,7 @@ import { IEntityCrudSettings } from "shared/configurations";
 import { META_USER_PERMISSIONS } from "shared/constants/user";
 import { GranularEntityPermissions } from "shared/types/user";
 
-type CrudActionData = keyof IEntityCrudSettings | "table";
+export type CrudActionData = keyof IEntityCrudSettings | "table";
 
 const ACTION_CONFIG_MAP: Record<CrudActionData, GranularEntityPermissions> = {
   create: GranularEntityPermissions.Create,

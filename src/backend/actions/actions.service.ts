@@ -139,7 +139,7 @@ export class ActionsApiService implements IApplicationService {
     instanceId: string,
     instance: Omit<IActionInstance, "instanceId">
   ) {
-    await this._actionInstancesPersistenceService.updateItem(instanceId, {
+    await this._actionInstancesPersistenceService.upsertItem(instanceId, {
       ...instance,
       instanceId,
     });

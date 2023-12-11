@@ -67,14 +67,9 @@ const buildFilterConfigFromType = (prop: {
   entityFieldSelections: IColorableSelection[];
   isIdField: boolean;
   referenceField?: string;
-  lean?: true; // TODO is it in use?
 }): TableFilterType | undefined => {
-  const { entityType, entityFieldSelections, isIdField, referenceField, lean } =
-    prop;
+  const { entityType, entityFieldSelections, isIdField, referenceField } = prop;
 
-  if (lean) {
-    return undefined;
-  }
   if (isIdField) {
     return {
       _type: "idField",

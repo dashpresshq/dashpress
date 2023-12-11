@@ -38,7 +38,7 @@ export function EntityDetails() {
     entity,
     id,
     redirectAfterDelete: NAVIGATION_LINKS.ENTITY.TABLE(entity),
-    exclude: ["table"],
+    exclude: ["details"],
   });
 
   const portalActionButtons = usePortalActionButtons({

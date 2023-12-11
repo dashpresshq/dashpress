@@ -1,4 +1,3 @@
-import { isNotEmpty } from "class-validator";
 import { ConfigApiService } from "../config/config.service";
 
 export abstract class AbstractCacheService {
@@ -10,8 +9,8 @@ export abstract class AbstractCacheService {
 
   public abstract setup(): Promise<void>;
 
-  protected prefixKey(key: string) {
-    return `__dashpress__:${key}`;
+  private prefixKey(key: string) {
+    return `__dp__:${key}`;
   }
 
   abstract pullItem<T>(key: string): Promise<T | undefined>;
@@ -27,13 +26,13 @@ export abstract class AbstractCacheService {
 
     const data = await this.pullItem<T>(key);
 
-    if (isNotEmpty(data)) {
+    if (data !== undefined) {
       return data;
     }
 
     const fetchedData = await fetcher();
 
-    await this.persistData(key, fetchedData);
+    await this.persistData(key, fetchedData || null);
 
     return fetchedData;
   }

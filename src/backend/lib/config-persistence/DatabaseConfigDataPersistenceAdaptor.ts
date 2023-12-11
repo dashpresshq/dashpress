@@ -94,7 +94,7 @@ export class DatabaseConfigDataPersistenceAdaptor<
     );
   }
 
-  async getItem(key: string) {
+  async _getItem(key: string) {
     const connection = await this.getDbInstance();
     const queryResponse = await connection
       .table(CONFIG_TABLE_NAME)
@@ -129,7 +129,7 @@ export class DatabaseConfigDataPersistenceAdaptor<
     }
   }
 
-  async persistItem(key: string, value: T) {
+  async _persistItem(key: string, value: T) {
     const affectedRowsCount = await (
       await this.getDbInstance()
     )(CONFIG_TABLE_NAME)
@@ -152,7 +152,7 @@ export class DatabaseConfigDataPersistenceAdaptor<
     }
   }
 
-  async removeItem(key: string): Promise<void> {
+  async _removeItem(key: string): Promise<void> {
     await (
       await this.getDbInstance()
     )(CONFIG_TABLE_NAME)

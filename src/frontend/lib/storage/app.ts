@@ -1,7 +1,7 @@
 import { sluggify } from "shared/lib/strings";
 import { StorageService } from ".";
 
-const PREFIX = "_app_config__";
+const PREFIX = "__dp__";
 
 const makeKey = (key: string): string => {
   return sluggify(`${PREFIX}${key}`, "_");

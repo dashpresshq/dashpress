@@ -1,6 +1,9 @@
+import { createCacheService } from "../cache";
 import { ConfigApiService } from "../config/config.service";
 import { NotFoundError } from "../errors";
 import { ConfigDomain } from "./types";
+
+const cacheService = createCacheService();
 
 export abstract class AbstractConfigDataPersistenceService<T> {
   protected readonly _configDomain!: ConfigDomain;
@@ -21,7 +24,27 @@ export abstract class AbstractConfigDataPersistenceService<T> {
     return `${key}__${secondaryKey}`;
   }
 
-  public abstract getItem(key: string): Promise<T | undefined>;
+  public abstract _getItem(key: string): Promise<T | undefined>; //
+
+  public abstract _persistItem(key: string, data: T): Promise<void>; //
+
+  public abstract _removeItem(key: string): Promise<void>; //
+
+  public async getItem(key: string) {
+    return await cacheService.getItem(key, async () => {
+      return this._getItem(key);
+    });
+  }
+
+  public async persistItem(key: string, data: T) {
+    await cacheService.clearItem(key);
+    await this._persistItem(key, data);
+  }
+
+  public async removeItem(key: string) {
+    await cacheService.clearItem(key);
+    await this._removeItem(key);
+  }
 
   public abstract getItemLastUpdated(key: string): Promise<Date>;
 
@@ -39,8 +62,6 @@ export abstract class AbstractConfigDataPersistenceService<T> {
 
   public abstract getAllItems(): Promise<T[]>;
 
-  public abstract persistItem(key: string, data: T): Promise<void>;
-
   public async upsertItem(key: string, data: T): Promise<void> {
     await this.persistItem(key, data);
   }
@@ -48,8 +69,6 @@ export abstract class AbstractConfigDataPersistenceService<T> {
   public async createItem(key: string, data: T): Promise<void> {
     await this.persistItem(key, data);
   }
-
-  public abstract removeItem(key: string): Promise<void>; //
 
   public async resetState(keyField: keyof T, data: T[]) {
     await this.resetToEmpty();

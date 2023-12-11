@@ -71,7 +71,7 @@ export class JsonFileConfigDataPersistenceAdaptor<
     );
   }
 
-  async getItem(key: string) {
+  async _getItem(key: string) {
     const allIndexedItems = await this.getDomainData();
     const currentItem = allIndexedItems[key];
     if (currentItem) {
@@ -80,13 +80,13 @@ export class JsonFileConfigDataPersistenceAdaptor<
     return undefined;
   }
 
-  async persistItem(key: string, data: T) {
+  async _persistItem(key: string, data: T) {
     const allIndexedItems = await this.getDomainData();
     allIndexedItems[key] = data;
     await this.persist(allIndexedItems);
   }
 
-  async removeItem(key: string): Promise<void> {
+  async _removeItem(key: string): Promise<void> {
     const allIndexedItems = await this.getDomainData();
     delete allIndexedItems[key];
     await this.persist(allIndexedItems);

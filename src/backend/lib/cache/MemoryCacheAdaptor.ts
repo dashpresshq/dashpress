@@ -27,7 +27,7 @@ export class MemoryCacheAdaptor extends AbstractCacheService {
   }
 
   async clearItem(key: string) {
-    delete this.getData()[this.prefixKey(key)];
+    delete this.getData()[key];
   }
 
   async purge() {

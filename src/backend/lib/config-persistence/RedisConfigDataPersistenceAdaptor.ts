@@ -72,7 +72,7 @@ export class RedisConfigDataPersistenceAdaptor<
     );
   }
 
-  async getItem(key: string) {
+  async _getItem(key: string) {
     return JSON.parse(
       await (
         await this.getRedisInstance()
@@ -80,13 +80,13 @@ export class RedisConfigDataPersistenceAdaptor<
     );
   }
 
-  async persistItem(key: string, data: T) {
+  async _persistItem(key: string, data: T) {
     await (
       await this.getRedisInstance()
     ).hSet(this.wrapWithConfigDomain(), { [key]: JSON.stringify(data) });
   }
 
-  public async removeItem(key: string): Promise<void> {
+  async _removeItem(key: string): Promise<void> {
     await (
       await this.getRedisInstance()
     ).hDel(this.wrapWithConfigDomain(), key);

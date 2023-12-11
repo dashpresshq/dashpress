@@ -124,7 +124,9 @@ export function EntityRelationDetails() {
         <SectionBox
           title={title}
           isLoading={
-            entityDataReference.isLoading || entityDataReference.isIdle
+            entityDataReference.isLoading ||
+            entityDataReference.isIdle ||
+            dataDetails.isLoading
           }
           backLink={backLink}
           actionButtons={actionButtons}

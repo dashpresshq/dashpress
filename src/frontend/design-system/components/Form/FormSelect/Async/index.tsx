@@ -54,6 +54,7 @@ export function AsyncFormSelect(props: IProps) {
     label: formLabel,
     disabledOptions = [],
     nullable,
+    placeholder,
     defaultLabel,
   } = props;
 
@@ -108,6 +109,7 @@ export function AsyncFormSelect(props: IProps) {
         classNamePrefix={SharedSelectProps.classNamePrefix}
         isDisabled={disabled}
         isLoading={isLoading}
+        placeholder={placeholder}
         className={generateClassNames(meta)}
         value={{ value: input.value, label: valueLabelToUse.value }}
         loadOptions={(inputValue) =>

@@ -1,6 +1,6 @@
 import { IFileUploadSettings } from "shared/types/file";
 import { IFieldValidationItem } from "shared/validations/types";
-import { IColorableSelection, IThemeSettings } from "shared/types/ui";
+import { IColorableSelection } from "shared/types/ui";
 import { FIELD_TYPES_CONFIG_MAP } from "shared/validations";
 import { ITableTab } from "shared/types/data";
 import { BaseAppConfigurationKeys } from "./base-types";
@@ -156,7 +156,7 @@ export const APP_CONFIGURATION_CONFIG = {
     defaultValue: {
       primary: "#4b38b3",
       primaryDark: "#8c68cd",
-    } as IThemeSettings,
+    },
   },
   site_settings: {
     label: "Site Settings",

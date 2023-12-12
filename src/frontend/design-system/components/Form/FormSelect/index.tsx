@@ -59,6 +59,7 @@ export const FormSelect: React.FC<IFormSelect> = (props) => {
     disabledOptions,
     nullable,
     defaultLabel,
+    placeholder,
   } = props;
   const selectDataWithDefault = [
     {
@@ -78,6 +79,7 @@ export const FormSelect: React.FC<IFormSelect> = (props) => {
           label: "",
         }
       }
+      placeholder={placeholder}
       inputId={input.name}
       onChange={({ value }: any) => {
         input.onChange(nullable && !value ? null : value);

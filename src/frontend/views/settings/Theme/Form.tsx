@@ -2,9 +2,12 @@ import { IFormProps } from "frontend/lib/form/types";
 import { SchemaForm } from "frontend/components/SchemaForm";
 import { MAKE_APP_CONFIGURATION_CRUD_CONFIG } from "frontend/hooks/configuration/configuration.constant";
 import { UPDATE_USER_PREFERENCES_FORM_SCHEMA } from "frontend/views/account/Preferences/constants";
-import { ColorSchemes, IThemeSettings } from "shared/types/ui";
+import { ColorSchemes } from "shared/types/ui";
+import { AppConfigurationValueType } from "shared/configurations/constants";
 
-type Settings = IThemeSettings & { theme: ColorSchemes };
+type Settings = AppConfigurationValueType<"theme_color"> & {
+  theme: ColorSchemes;
+};
 
 const CRUD_CONFIG = MAKE_APP_CONFIGURATION_CRUD_CONFIG("theme_color");
 

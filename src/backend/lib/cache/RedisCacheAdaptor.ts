@@ -35,7 +35,9 @@ export class RedisCacheAdaptor extends AbstractCacheService {
   }
 
   async persistData(key: string, data: unknown): Promise<void> {
-    await (await this.getRedisInstance()).set(key, JSON.stringify(data));
+    await (
+      await this.getRedisInstance()
+    ).set(key, JSON.stringify(data), { EX: 60 * 60 }); // I hour
   }
 
   async clearItem(key: string) {

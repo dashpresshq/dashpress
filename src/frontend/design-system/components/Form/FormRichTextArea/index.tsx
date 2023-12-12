@@ -83,10 +83,6 @@ const Root = styled.div`
   }
 `;
 
-interface IFormRichText extends ISharedFormInput {
-  nothingForNow?: string;
-}
-
 const modules = {
   toolbar: [
     [{ size: [] }, { font: [] }],
@@ -105,11 +101,12 @@ const modules = {
   },
 };
 
-export const FormRichTextArea: React.FC<IFormRichText> = (formInput) => {
+export const FormRichTextArea: React.FC<ISharedFormInput> = (formInput) => {
   const {
     input: { onFocus, onBlur, ...inputProps },
     disabled,
     meta,
+    placeholder,
   } = formInput;
   noop(onBlur, onFocus);
   return wrapLabelAndError(
@@ -120,7 +117,7 @@ export const FormRichTextArea: React.FC<IFormRichText> = (formInput) => {
         readOnly={disabled}
         modules={modules}
         id={formInput.input.name}
-        placeholder="Write something..."
+        placeholder={placeholder}
         theme="snow"
       />
     </Root>,

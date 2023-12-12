@@ -71,6 +71,7 @@ export abstract class AbstractConfigDataPersistenceService<T> {
   }
 
   public async resetState(keyField: keyof T, data: T[]) {
+    await cacheService.purge();
     await this.resetToEmpty();
     await this.saveAllItems(keyField, data);
   }

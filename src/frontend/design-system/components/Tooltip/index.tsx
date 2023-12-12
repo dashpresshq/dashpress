@@ -17,7 +17,7 @@ export function Tooltip({ children, text, place = "right", offset }: IProps) {
   return (
     <>
       <span id={id}> {children} </span>
-      <BaseTooltip anchorId={id} content={text} place={place} offset={offset} />
+      <BaseTooltip anchorId={id} html={text} place={place} offset={offset} />
     </>
   );
 }

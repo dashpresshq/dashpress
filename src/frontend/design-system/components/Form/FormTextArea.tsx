@@ -15,7 +15,7 @@ interface IFormTextArea extends ISharedFormInput {
 }
 
 export const FormTextArea: React.FC<IFormTextArea> = (formInput) => {
-  const { input, rows = 3, label, disabled, meta } = formInput;
+  const { input, rows = 3, placeholder, disabled, meta } = formInput;
   return wrapLabelAndError(
     <TextArea
       {...generateFormArias(meta)}
@@ -27,7 +27,7 @@ export const FormTextArea: React.FC<IFormTextArea> = (formInput) => {
       onFocus={input.onFocus}
       onBlur={input.onBlur}
       rows={rows}
-      placeholder={label}
+      placeholder={placeholder}
       disabled={disabled}
     >
       {input.value}

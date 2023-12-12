@@ -45,7 +45,7 @@ export function RenderFormInput({
     label,
     required,
     disabled,
-    placeholder,
+    placeholder: placeholder || label,
     description,
     ...renderProps,
   };

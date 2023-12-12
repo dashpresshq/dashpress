@@ -18,7 +18,7 @@ const getNumberValue = (value: string | number | null, required: boolean) => {
 };
 
 export const FormNumberInput: React.FC<IFormNumberInput> = (formInput) => {
-  const { input, label, disabled, meta, allowNegative, required, sm } =
+  const { input, placeholder, disabled, meta, allowNegative, required, sm } =
     formInput;
   if (typeof input.value === "string") {
     input.onChange(getNumberValue(input.value, !!required));
@@ -35,7 +35,7 @@ export const FormNumberInput: React.FC<IFormNumberInput> = (formInput) => {
       onChange={(e) => {
         input.onChange(getNumberValue(e.target.value, !!required));
       }}
-      placeholder={label}
+      placeholder={placeholder}
       type="number"
       disabled={disabled}
     />,

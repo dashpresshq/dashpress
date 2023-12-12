@@ -1,5 +1,6 @@
 import { ConfigDomain } from "backend/lib/config-persistence/types";
 import { KeyValueDomain } from "backend/lib/key-value/types";
+import { createCacheService } from "backend/lib/cache";
 import { setupAppConfigTestData } from "./_app-config";
 import { setupIntegrationsConstantsTestData } from "./_integrations-constants";
 import { setupCredentialsTestData } from "./_credentials";
@@ -32,6 +33,8 @@ export const setupAllTestData = async (domains: DomainTypes[]) => {
     ["users-preferences", setupUserPreferencesTestData],
     ...portalTestData,
   ];
+
+  createCacheService().purge();
 
   await Promise.all(
     allTestData

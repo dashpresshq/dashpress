@@ -4,8 +4,12 @@ import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
 import { useNavigationStack } from "frontend/lib/routing/useNavigationStack";
 import { USER_PERMISSIONS } from "shared/constants/user";
 import { AppLayout } from "frontend/_layouts/app";
+import {
+  BASE_ROLE_FORM_SCHEMA,
+  IBaseRoleForm,
+} from "shared/form-schemas/roles/base";
+import { SchemaForm } from "frontend/components/SchemaForm";
 import { ADMIN_ROLES_CRUD_CONFIG, useCreateRoleMutation } from "../roles.store";
-import { CreateRoleForm } from "./Form";
 
 export function RoleCreate() {
   const roleCreationMutation = useCreateRoleMutation();
@@ -24,7 +28,13 @@ export function RoleCreate() {
           title={ADMIN_ROLES_CRUD_CONFIG.TEXT_LANG.CREATE}
           backLink={backLink}
         >
-          <CreateRoleForm onSubmit={roleCreationMutation.mutateAsync} />
+          <SchemaForm<IBaseRoleForm>
+            onSubmit={roleCreationMutation.mutateAsync}
+            buttonText={ADMIN_ROLES_CRUD_CONFIG.FORM_LANG.CREATE}
+            fields={BASE_ROLE_FORM_SCHEMA}
+            icon="add"
+            resetForm
+          />
         </SectionBox>
       </ContentLayout.Center>
     </AppLayout>

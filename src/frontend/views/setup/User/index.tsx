@@ -7,7 +7,11 @@ import {
   FormSkeleton,
   FormSkeletonSchema,
 } from "frontend/design-system/components/Skeleton/Form";
-import { UserSetupForm } from "./Form";
+import { SchemaForm } from "frontend/components/SchemaForm";
+import {
+  ISetupUserForm,
+  SETUP_USER_FORM_SCHEMA,
+} from "shared/form-schemas/setup/user";
 import { useSetupUserMutation } from "../setup.store";
 
 export function UserSetup() {
@@ -44,7 +48,14 @@ export function UserSetup() {
           />
         }
       >
-        <UserSetupForm onSubmit={setupUserMutation.mutateAsync} />
+        <SchemaForm<ISetupUserForm>
+          buttonText={(isSubmitting) =>
+            isSubmitting ? "Setting Up Account" : "Setup Account"
+          }
+          onSubmit={setupUserMutation.mutateAsync}
+          icon="no-icon"
+          fields={SETUP_USER_FORM_SCHEMA}
+        />
       </ViewStateMachine>
     </AuthLayout>
   );

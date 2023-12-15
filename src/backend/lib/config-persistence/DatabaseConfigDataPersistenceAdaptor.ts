@@ -43,9 +43,11 @@ export class DatabaseConfigDataPersistenceAdaptor<
           table
             .timestamp("created_at")
             .defaultTo(connection.raw("CURRENT_TIMESTAMP"));
+          table.string("created_by");
           table
             .timestamp("updated_at")
             .defaultTo(connection.raw("CURRENT_TIMESTAMP"));
+          table.string("updated_by");
 
           table.unique(["domain", "key"]);
         }
@@ -138,6 +140,7 @@ export class DatabaseConfigDataPersistenceAdaptor<
       .update({
         value: JSON.stringify(value),
         updated_at: new Date(),
+        // TODO updated_by
       });
     if (affectedRowsCount === 0) {
       await (
@@ -148,6 +151,8 @@ export class DatabaseConfigDataPersistenceAdaptor<
         value: JSON.stringify(value),
         created_at: new Date(),
         updated_at: new Date(),
+        // TODO updated_by
+        // TODO created_by
       });
     }
   }

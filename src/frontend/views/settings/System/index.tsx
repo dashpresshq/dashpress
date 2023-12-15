@@ -14,8 +14,9 @@ import { MAKE_APP_CONFIGURATION_CRUD_CONFIG } from "frontend/hooks/configuration
 import { SystemSettingsDocumentation } from "frontend/docs/system-settings";
 import { DOCUMENTATION_LABEL } from "frontend/docs";
 import { useState } from "react";
+import { SchemaForm } from "frontend/components/SchemaForm";
+import { IBaseSystemSettings } from "shared/configurations/system";
 import { BaseSettingsLayout } from "../_Base";
-import { SystemSettingsForm } from "./Form";
 import { SETTINGS_VIEW_KEY } from "../constants";
 
 const CRUD_CONFIG = MAKE_APP_CONFIGURATION_CRUD_CONFIG("system_settings");
@@ -54,9 +55,21 @@ export function SystemSettings() {
           error={systemSettings.error}
           loader={<FormSkeleton schema={[FormSkeletonSchema.Input]} />}
         >
-          <SystemSettingsForm
+          <SchemaForm<IBaseSystemSettings>
             onSubmit={upsertConfigurationMutation.mutateAsync}
             initialValues={systemSettings.data}
+            icon="save"
+            buttonText={CRUD_CONFIG.FORM_LANG.UPSERT}
+            fields={{
+              tokenValidityDurationInDays: {
+                type: "number",
+                validations: [
+                  {
+                    validationType: "required",
+                  },
+                ],
+              },
+            }}
           />
         </ViewStateMachine>
       </SectionBox>

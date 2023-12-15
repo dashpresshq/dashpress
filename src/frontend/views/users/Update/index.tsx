@@ -17,6 +17,13 @@ import {
 } from "frontend/design-system/components/Skeleton/Form";
 import { ContentLayout } from "frontend/design-system/components/Section/SectionDivider";
 import { AppLayout } from "frontend/_layouts/app";
+import { SchemaForm } from "frontend/components/SchemaForm";
+import { UPDATE_USER_FORM_SCHEMA } from "shared/form-schemas/users/update";
+import {
+  IResetPasswordForm,
+  RESET_PASSWORD_FORM_SCHEMA,
+} from "shared/form-schemas/users/reset-password";
+import { IUpdateUserForm } from "shared/form-schemas/profile/update";
 import { useUsernameFromRouteParam } from "../hooks";
 import {
   useUpdateUserMutation,
@@ -24,8 +31,6 @@ import {
   useUserDetails,
   ADMIN_USERS_CRUD_CONFIG,
 } from "../users.store";
-import { ResetUserPasswordForm } from "./ResetPassword.form";
-import { UpdateUserForm } from "./Update.Form";
 
 const DOCS_TITLE = "System Profile";
 
@@ -78,9 +83,19 @@ export function UserUpdate() {
               />
             }
           >
-            <UpdateUserForm
+            <SchemaForm<IUpdateUserForm>
+              buttonText={ADMIN_USERS_CRUD_CONFIG.FORM_LANG.UPDATE}
               onSubmit={updateUserMutation.mutateAsync}
               initialValues={userDetails.data}
+              icon="save"
+              fields={UPDATE_USER_FORM_SCHEMA}
+              formExtension={{
+                fieldsState: `return {
+          role: {
+              disabled: $.auth.username === $.routeParams.username 
+          }
+        }`,
+              }}
             />
           </ViewStateMachine>
         </SectionBox>
@@ -88,8 +103,14 @@ export function UserUpdate() {
         {userHasPermission(USER_PERMISSIONS.CAN_RESET_PASSWORD) &&
           authenticatedUserBag.data?.username !== username && (
             <SectionBox title="Reset User Password">
-              <ResetUserPasswordForm
+              <SchemaForm<IResetPasswordForm>
+                buttonText={(submitting) =>
+                  submitting ? "Resetting Password" : "Reset Password"
+                }
+                icon="no-icon"
+                fields={RESET_PASSWORD_FORM_SCHEMA}
                 onSubmit={resetPasswordMutation.mutateAsync}
+                resetForm
               />
             </SectionBox>
           )}

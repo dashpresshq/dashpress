@@ -130,9 +130,7 @@ export class UsersApiService implements IApplicationService {
 
   async updateUser(username: string, userDetails: Partial<IAccountUser>) {
     const user = await this._usersPersistenceService.getItemOrFail(username);
-    if (!user) {
-      return;
-    }
+
     await this._usersPersistenceService.upsertItem(username, {
       ...user,
       ...userDetails,

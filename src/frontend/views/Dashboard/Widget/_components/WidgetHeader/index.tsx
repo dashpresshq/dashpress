@@ -51,6 +51,7 @@ export function WidgetHeader({
           <>
             {hasRelativeDate && !isPreview && (
               <DropDownMenu
+                ariaLabel={`Toggle ${title} Menu`}
                 menuItems={DASHBOARD_RELATIVE_DAYS.map(({ label, value }) => ({
                   id: label,
                   label: `${label}`,

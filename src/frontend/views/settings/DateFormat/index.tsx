@@ -13,9 +13,13 @@ import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { format as dateFnsFormat } from "date-fns";
 import { MAKE_APP_CONFIGURATION_CRUD_CONFIG } from "frontend/hooks/configuration/configuration.constant";
 import { ToastService } from "frontend/lib/toast";
+import { SchemaForm } from "frontend/components/SchemaForm";
 import { BaseSettingsLayout } from "../_Base";
-import { DateFormatSettingsForm } from "./Form";
 import { SETTINGS_VIEW_KEY } from "../constants";
+
+type IDateFormatSettings = {
+  format: string;
+};
 
 const CRUD_CONFIG = MAKE_APP_CONFIGURATION_CRUD_CONFIG("default_date_format");
 
@@ -50,7 +54,7 @@ export function DateFormatSettings() {
           error={defaultDateFormat.error}
           loader={<FormSkeleton schema={[FormSkeletonSchema.Input]} />}
         >
-          <DateFormatSettingsForm
+          <SchemaForm<IDateFormatSettings>
             onSubmit={async ({ format }) => {
               try {
                 dateFnsFormat(new Date(), format);
@@ -62,6 +66,18 @@ export function DateFormatSettings() {
               }
             }}
             initialValues={{ format: defaultDateFormat.data }}
+            buttonText={CRUD_CONFIG.FORM_LANG.UPSERT}
+            icon="save"
+            fields={{
+              format: {
+                type: "text",
+                validations: [
+                  {
+                    validationType: "required",
+                  },
+                ],
+              },
+            }}
           />
         </ViewStateMachine>
       </SectionBox>

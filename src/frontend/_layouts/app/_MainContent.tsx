@@ -75,13 +75,20 @@ export function MainContent({
         <div>
           <Stack>
             {actionMenuItems.length > 0 ? (
-              <DropDownMenu menuItems={actionMenuItems} />
+              <DropDownMenu
+                ariaLabel="Toggle Action Menu"
+                menuItems={actionMenuItems}
+              />
             ) : null}
             {secondaryMenuItems.length > 0 ? (
-              <DropDownMenu menuItems={secondaryMenuItems} />
+              <DropDownMenu
+                ariaLabel="Toggle Secondary  Menu"
+                menuItems={secondaryMenuItems}
+              />
             ) : null}
             {process.env.NEXT_PUBLIC_IS_DEMO && (
               <DropDownMenu
+                ariaLabel="Toggle Demo Menu"
                 menuItems={DEMO_LINKS.map((link) => ({
                   ...link,
                   onClick: () => window.open(link.link),

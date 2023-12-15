@@ -1,7 +1,7 @@
 import Dropdown from "react-bootstrap/Dropdown";
 import styled from "styled-components";
 import React, { useState, useEffect, useMemo } from "react";
-import { Icon, Loader } from "react-feather";
+import { Icon, Loader, MoreVertical } from "react-feather";
 import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
 import { Stack } from "frontend/design-system/primitives/Stack";
 import { Typo } from "frontend/design-system/primitives/Typo";
@@ -24,7 +24,9 @@ export interface IDropDownMenuItem {
 export interface IProps {
   menuItems: IDropDownMenuItem[];
   isMakingActionRequest?: boolean;
+  ariaLabel: string;
   disabled?: boolean;
+  ellipsis?: true;
 }
 
 const Label = styled.span`
@@ -93,6 +95,10 @@ const SROnly = styled.span`
   width: 1px;
 `;
 
+const EllipsisDropDownToggle = styled(SoftButtonStyled)`
+  padding: 2px 4px;
+`;
+
 const DropDownToggle = styled(SoftButtonStyled)`
   display: inline-block;
   margin-left: -1px;
@@ -122,6 +128,8 @@ export function DropDownMenu({
   menuItems: menuItems$1,
   isMakingActionRequest,
   disabled,
+  ellipsis,
+  ariaLabel,
 }: IProps) {
   const [isDropDownOpen, setDropDownOpen] = useState(false);
 
@@ -191,16 +199,28 @@ export function DropDownMenu({
       align="end"
       onToggle={toggleDropDown}
     >
-      <CurrentButton
-        size="sm"
-        disabled={isMakingActionRequest || disabled}
-        onClick={() => onClick()}
-      >
-        {currentItem}
-      </CurrentButton>
-      <DropDownToggle split as={Dropdown.Toggle} size="sm">
-        <SROnly>Toggle Dropdown</SROnly>
-      </DropDownToggle>
+      {ellipsis ? (
+        <EllipsisDropDownToggle split as={Dropdown.Toggle} size="sm">
+          <MoreVertical
+            size={16}
+            style={{ cursor: "pointer" }}
+            aria-label={ariaLabel}
+          />
+        </EllipsisDropDownToggle>
+      ) : (
+        <>
+          <CurrentButton
+            size="sm"
+            disabled={isMakingActionRequest || disabled}
+            onClick={() => onClick()}
+          >
+            {currentItem}
+          </CurrentButton>
+          <DropDownToggle split as={Dropdown.Toggle} size="sm">
+            <SROnly>Toggle Dropdown</SROnly>
+          </DropDownToggle>
+        </>
+      )}
       <DropDownMenuStyled>
         {menuItems.map(({ label: label$1, description }, index) => (
           <DropDownItem key={label$1} onClick={() => onMenuItemClick(index)}>

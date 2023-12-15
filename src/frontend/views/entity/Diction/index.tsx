@@ -17,8 +17,9 @@ import { useState } from "react";
 import { DictionDocumentation } from "frontend/docs/diction";
 import { DOCUMENTATION_LABEL } from "frontend/docs";
 import { NAVIGATION_MENU_ENDPOINT } from "frontend/_layouts/app/LayoutImpl/constants";
+import { SchemaForm } from "frontend/components/SchemaForm";
+import { AppConfigurationValueType } from "shared/configurations/constants";
 import { BaseEntitySettingsLayout } from "../_Base";
-import { EntityDictionForm } from "./Form";
 import { ENTITY_CONFIGURATION_VIEW } from "../constants";
 
 const ENTITY_DICTION_SETTINGS_CRUD_CONFIG =
@@ -66,9 +67,44 @@ export function EntityDictionSettings() {
             />
           }
         >
-          <EntityDictionForm
+          <SchemaForm<AppConfigurationValueType<"entity_diction">>
             onSubmit={upsertConfigurationMutation.mutateAsync}
             initialValues={entityDiction}
+            icon="save"
+            buttonText={
+              MAKE_APP_CONFIGURATION_CRUD_CONFIG("entity_diction").FORM_LANG
+                .UPSERT
+            }
+            fields={{
+              plural: {
+                type: "text",
+                validations: [
+                  {
+                    validationType: "required",
+                  },
+                  {
+                    validationType: "maxLength",
+                    constraint: {
+                      length: 32,
+                    },
+                  },
+                ],
+              },
+              singular: {
+                type: "text",
+                validations: [
+                  {
+                    validationType: "required",
+                  },
+                  {
+                    validationType: "maxLength",
+                    constraint: {
+                      length: 32,
+                    },
+                  },
+                ],
+              },
+            }}
           />
         </ViewStateMachine>
       </SectionBox>

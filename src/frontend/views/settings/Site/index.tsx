@@ -11,8 +11,9 @@ import {
 } from "frontend/hooks/configuration/configuration.store";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { MAKE_APP_CONFIGURATION_CRUD_CONFIG } from "frontend/hooks/configuration/configuration.constant";
+import { SchemaForm } from "frontend/components/SchemaForm";
+import { AppConfigurationValueType } from "shared/configurations/constants";
 import { BaseSettingsLayout } from "../_Base";
-import { SiteSettingsForm } from "./Form";
 import { SETTINGS_VIEW_KEY } from "../constants";
 
 const CRUD_CONFIG = MAKE_APP_CONFIGURATION_CRUD_CONFIG("site_settings");
@@ -46,9 +47,47 @@ export function SiteSettings() {
             />
           }
         >
-          <SiteSettingsForm
+          <SchemaForm<AppConfigurationValueType<"site_settings">>
             onSubmit={upsertConfigurationMutation.mutateAsync}
             initialValues={siteSettings.data}
+            icon="save"
+            buttonText={CRUD_CONFIG.FORM_LANG.UPSERT}
+            fields={{
+              name: {
+                type: "text",
+                validations: [
+                  {
+                    validationType: "required",
+                  },
+                ],
+              },
+              homeLink: {
+                type: "text",
+                validations: [
+                  {
+                    validationType: "required",
+                  },
+                ],
+              },
+              logo: {
+                label: "Square Logo",
+                type: "text",
+                validations: [
+                  {
+                    validationType: "required",
+                  },
+                ],
+              },
+              fullLogo: {
+                label: "Full Length Logo",
+                type: "text",
+                validations: [
+                  {
+                    validationType: "required",
+                  },
+                ],
+              },
+            }}
           />
         </ViewStateMachine>
       </SectionBox>

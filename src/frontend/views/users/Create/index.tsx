@@ -7,8 +7,12 @@ import { SystemProfileDocumentation } from "frontend/docs/system-profile";
 import { ContentLayout } from "frontend/design-system/components/Section/SectionDivider";
 import { SectionBox } from "frontend/design-system/components/Section/SectionBox";
 import { AppLayout } from "frontend/_layouts/app";
+import { SchemaForm } from "frontend/components/SchemaForm";
+import {
+  CREATE_USER_FORM_SCHEMA,
+  ICreateUserForm,
+} from "shared/form-schemas/users/create";
 import { ADMIN_USERS_CRUD_CONFIG, useCreateUserMutation } from "../users.store";
-import { CreateUserForm } from "./Form";
 
 const DOCS_TITLE = "System Profile";
 
@@ -38,7 +42,13 @@ export function UserCreate() {
             },
           ]}
         >
-          <CreateUserForm onSubmit={userCreationMutation.mutateAsync} />
+          <SchemaForm<ICreateUserForm>
+            onSubmit={userCreationMutation.mutateAsync}
+            buttonText={ADMIN_USERS_CRUD_CONFIG.FORM_LANG.CREATE}
+            fields={CREATE_USER_FORM_SCHEMA}
+            icon="add"
+            resetForm
+          />
         </SectionBox>
       </ContentLayout.Center>
       <SystemProfileDocumentation

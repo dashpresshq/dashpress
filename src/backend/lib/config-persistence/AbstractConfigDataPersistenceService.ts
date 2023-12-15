@@ -24,11 +24,11 @@ export abstract class AbstractConfigDataPersistenceService<T> {
     return `${key}__${secondaryKey}`;
   }
 
-  public abstract _getItem(key: string): Promise<T | undefined>; //
+  public abstract _getItem(key: string): Promise<T | undefined>;
 
-  public abstract _persistItem(key: string, data: T): Promise<void>; //
+  public abstract _persistItem(key: string, data: T): Promise<void>;
 
-  public abstract _removeItem(key: string): Promise<void>; //
+  public abstract _removeItem(key: string): Promise<void>;
 
   public async getItem(key: string) {
     return await cacheService.getItem(key, async () => {

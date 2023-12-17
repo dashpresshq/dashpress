@@ -16,10 +16,23 @@ export const useDetailsViewMenuItems = ({
 export const usePortalActionButtons = ({
   entity,
   entityId,
+  baseActionButtons,
 }: {
   entity: string;
   entityId: string;
+  baseActionButtons: IActionButton[];
 }): IActionButton[] => {
   noop(entity, entityId);
-  return [];
+  return baseActionButtons;
 };
+
+export function PreDataDetails({
+  entity,
+  entityId,
+}: {
+  entity: string;
+  entityId: string;
+}) {
+  noop(entity, entityId);
+  return null;
+}

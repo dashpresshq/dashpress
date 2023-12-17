@@ -25,6 +25,7 @@ import { filterOutHiddenScalarColumns } from "../utils";
 import { useEntityViewStateMachine } from "../useEntityViewStateMachine";
 import { viewSpecialDataTypes } from "../viewSpecialDataTypes";
 import { evalutePresentationScript } from "../evaluatePresentationScript";
+import { PreDataDetails } from "./portal";
 
 const ContentText = styled(Typo.SM)`
   overflow-wrap: anywhere;
@@ -34,14 +35,12 @@ export function EntityDetailsView({
   id,
   entity,
   displayFrom,
-  column,
 }: {
   id: string;
   entity: string;
   displayFrom: "details" | "canvas";
-  column?: string;
 }) {
-  const dataDetails = useEntityDataDetails({ entity, entityId: id, column });
+  const dataDetails = useEntityDataDetails({ entity, entityId: id });
   const entityFields = useEntityFields(entity);
   const entityFieldTypes = useProcessedEntityFieldTypes(entity);
   const hiddenDetailsColumns = useHiddenEntityColumns("details", entity);
@@ -96,6 +95,7 @@ export function EntityDetailsView({
         </>
       }
     >
+      <PreDataDetails entity={entity} entityId={id} />
       <div aria-label="Details Section">
         {filterOutHiddenScalarColumns(
           entityFields.data,

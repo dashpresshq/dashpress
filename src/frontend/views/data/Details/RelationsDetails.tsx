@@ -133,9 +133,8 @@ export function EntityRelationDetails() {
         >
           <EntityDetailsView
             displayFrom="details"
-            id={viewEntityId}
+            id={idData}
             entity={childEntity}
-            column={detailsColumn}
           />
         </SectionBox>
       )}

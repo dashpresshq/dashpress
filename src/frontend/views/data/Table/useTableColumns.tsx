@@ -52,14 +52,10 @@ function TableActionButtons({
   const portalActionButtons = usePortalActionButtons({
     entity,
     entityId: idValue,
+    baseActionButtons: actionButtons,
   });
 
-  return (
-    <ActionButtons
-      actionButtons={[...actionButtons, ...portalActionButtons]}
-      justIcons
-    />
-  );
+  return <ActionButtons actionButtons={portalActionButtons} justIcons />;
 }
 
 const buildFilterConfigFromType = (prop: {

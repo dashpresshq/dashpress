@@ -23,7 +23,7 @@ import {
   EntitiesApiService,
   entitiesApiService,
 } from "../entities/entities.service";
-import { PortalDataHooksService } from "./portal";
+import { PortalDataHooksService, PortalQueryImplementation } from "./portal";
 import { makeTableData } from "./utils";
 
 const DEFAULT_LIST_LIMIT = 50;
@@ -46,7 +46,7 @@ export class DataApiService implements IDataApiService {
     return this._rDBMSApiDataService;
   }
 
-  async list(
+  async fetchData(
     entity: string,
     select: string[],
     queryFilter: QueryFilterSchema,
@@ -55,12 +55,22 @@ export class DataApiService implements IDataApiService {
     return await this.getDataAccessInstance().list(
       entity,
       select,
-      queryFilter, //
+      await PortalQueryImplementation.query(queryFilter, entity),
       paginationFilters
     );
   }
 
-  async read<T>(
+  async countData(
+    entity: string,
+    queryFilter: QueryFilterSchema
+  ): Promise<number> {
+    return await this.getDataAccessInstance().count(
+      entity,
+      await PortalQueryImplementation.query(queryFilter, entity)
+    );
+  }
+
+  async readData<T>(
     entity: string,
     select: string[],
     query: Record<string, unknown>
@@ -78,7 +88,7 @@ export class DataApiService implements IDataApiService {
       this._entitiesApiService.getEntityPrimaryField(entity),
     ]);
 
-    const data = await this.read<Record<string, unknown>>(
+    const data = await this.readData<Record<string, unknown>>(
       entity,
       relationshipSettings.fields,
       {
@@ -98,12 +108,11 @@ export class DataApiService implements IDataApiService {
       this._entitiesApiService.getAllowedCrudsFieldsToShow(entity, "details"),
       column || this._entitiesApiService.getEntityPrimaryField(entity),
     ]);
-    const data = await this.read<Record<string, unknown>>(
+    const data = await this.readData<Record<string, unknown>>(
       entity,
       fieldsToShow,
       {
         [columnField]: id,
-        //
       }
     );
     if (!data) {
@@ -166,7 +175,7 @@ export class DataApiService implements IDataApiService {
       this._entitiesApiService.getEntityPrimaryField(entity),
     ]);
 
-    const data = await this.getDataAccessInstance().list(
+    const data = await this.fetchData(
       entity,
       [...relationshipSettings.fields, primaryField],
       {
@@ -179,7 +188,6 @@ export class DataApiService implements IDataApiService {
           },
         })),
       },
-      //
       {
         take: DEFAULT_LIST_LIMIT,
         page: 1,
@@ -188,7 +196,7 @@ export class DataApiService implements IDataApiService {
 
     return data.map((datum: Record<string, unknown>) => {
       return {
-        value: datum[primaryField],
+        value: datum[primaryField] as string,
         label: compileTemplateString(relationshipSettings.format, datum),
       };
     });
@@ -201,16 +209,16 @@ export class DataApiService implements IDataApiService {
   ): Promise<PaginatedData<Record<string, unknown>>> {
     return makeTableData(
       await Promise.all([
-        this.getDataAccessInstance().list(
+        this.fetchData(
           entity,
           await this._entitiesApiService.getAllowedCrudsFieldsToShow(
             entity,
             "table"
           ),
-          queryFilters, //
+          queryFilters,
           paginationFilters
         ),
-        this.getDataAccessInstance().count(entity, queryFilters),
+        this.countData(entity, queryFilters),
       ]),
       paginationFilters
     );
@@ -282,9 +290,15 @@ export class DataApiService implements IDataApiService {
       dataId: id,
     });
 
-    await this.getDataAccessInstance().delete(entity, {
-      [await this._entitiesApiService.getEntityPrimaryField(entity)]: id,
-    }); //
+    await PortalQueryImplementation.delete({
+      entity,
+      id,
+      implementation: async () => {
+        await this.getDataAccessInstance().delete(entity, {
+          [await this._entitiesApiService.getEntityPrimaryField(entity)]: id,
+        });
+      },
+    });
 
     await PortalDataHooksService.afterDelete({
       beforeData,
@@ -292,10 +306,6 @@ export class DataApiService implements IDataApiService {
       entity,
       dataId: id,
     });
-  }
-
-  async count(entity: string, queryFilter: QueryFilterSchema): Promise<number> {
-    return await this.getDataAccessInstance().count(entity, queryFilter); //
   }
 
   private async getRelationshipSettings(entity: string): Promise<{

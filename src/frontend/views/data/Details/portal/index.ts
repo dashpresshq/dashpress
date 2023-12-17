@@ -1,1 +1,5 @@
-export { useDetailsViewMenuItems, usePortalActionButtons } from "./main";
+export {
+  useDetailsViewMenuItems,
+  usePortalActionButtons,
+  PreDataDetails,
+} from "./main";

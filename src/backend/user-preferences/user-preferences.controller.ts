@@ -1,6 +1,7 @@
 import {
   USER_PREFERENCES_CONFIG,
   UserPreferencesKeys,
+  UserPreferencesValueType,
 } from "shared/user-preferences/constants";
 import { BadRequestError } from "backend/lib/errors";
 import {
@@ -20,7 +21,11 @@ export class UserPreferenceApiController {
     };
   }
 
-  async upsert(username: string, key: string, value: unknown) {
+  async upsert<T extends UserPreferencesKeys>(
+    username: string,
+    key: T,
+    value: UserPreferencesValueType<T>
+  ) {
     await this._userPreferencesApiService.upsert(
       username,
       this.validateUserPreferencesKeys(key),

@@ -5,6 +5,7 @@ export type IActionButton =
       _type: "normal";
       action: string | (() => void);
       label: string;
+      isMakingActionRequest?: boolean;
       icon: ButtonIconTypes;
       order?: number;
     }

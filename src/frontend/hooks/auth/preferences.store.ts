@@ -34,7 +34,7 @@ export function useUserPreference<T extends UserPreferencesKeys>(key: T) {
       enabled: isAuthenticated === true,
       returnUndefinedOnError: true,
       errorMessage: MAKE_USER_PREFERENCE_CRUD_CONFIG(key).TEXT_LANG.NOT_FOUND,
-      defaultData: USER_PREFERENCES_CONFIG[key].defaultValue as T,
+      defaultData: USER_PREFERENCES_CONFIG[key].defaultValue,
       selector: (data) => data.data,
     }
   );

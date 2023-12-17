@@ -24,6 +24,7 @@ export function ActionButtons({
               action={actionButton.action}
               label={actionButton.label}
               justIcon={justIcons}
+              isMakingActionRequest={actionButton.isMakingActionRequest}
               icon={actionButton.icon}
             />
           ) : (

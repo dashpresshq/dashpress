@@ -24,7 +24,7 @@ export const ENTITY_REFERENCE_PATH = (entity: string, id: string) =>
 
 export const ENTITY_LIST_PATH = (entity: string) => `/api/data/${entity}/list`;
 
-export const CREATE_DATA_ENDPOINT_TO_CLEAR = (entity: string) => [
+export const DATA_MUTATION_ENDPOINTS_TO_CLEAR = (entity: string) => [
   ENTITY_TABLE_PATH(entity),
   ENTITY_COUNT_PATH(entity),
   ENTITY_LIST_PATH(entity),

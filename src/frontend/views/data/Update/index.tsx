@@ -20,10 +20,14 @@ import {
   useEntityActionMenuItems,
 } from "../../entity/constants";
 import { BaseEntityForm } from "../_BaseEntityForm";
+import { useDataUpdateActions } from "./portal";
 
 export function EntityUpdate() {
   const entityId = useEntityId();
   const entity = useEntitySlug();
+
+  useDataUpdateActions({ entity, entityId });
+
   const entityCrudConfig = useEntityCrudConfig();
 
   const entityDataUpdationMutation = useEntityDataUpdationMutation(

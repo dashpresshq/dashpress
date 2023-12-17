@@ -44,6 +44,7 @@ export function EntityDetails() {
   const portalActionButtons = usePortalActionButtons({
     entity,
     entityId: id,
+    baseActionButtons: actionButtons,
   });
 
   return (
@@ -55,7 +56,7 @@ export function EntityDetails() {
       <SectionBox
         title={entityCrudConfig.TEXT_LANG.DETAILS}
         backLink={backLink}
-        actionButtons={[...actionButtons, ...portalActionButtons]}
+        actionButtons={portalActionButtons}
       >
         <EntityDetailsView displayFrom="details" id={id} entity={entity} />
       </SectionBox>

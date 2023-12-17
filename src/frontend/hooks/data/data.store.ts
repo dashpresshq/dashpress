@@ -13,14 +13,11 @@ import { DataStates } from "frontend/lib/data/types";
 import { useEntityCrudConfig } from "../entity/entity.config";
 import { useMultipleEntityReferenceFields } from "../entity/entity.store";
 import { isRouterParamEnabled } from "..";
-import { DATA_MUTATION_QUERY_ENDPOINTS } from "./portal";
 import {
-  CREATE_DATA_ENDPOINT_TO_CLEAR,
+  DATA_MUTATION_ENDPOINTS_TO_CLEAR,
   ENTITY_COUNT_PATH,
   ENTITY_DETAILS_PATH,
-  ENTITY_LIST_PATH,
   ENTITY_REFERENCE_PATH,
-  ENTITY_TABLE_PATH,
 } from "./constants";
 
 export const useEntityDataDetails = ({
@@ -142,7 +139,7 @@ export function useEntityDataCreationMutation(entity: string) {
   const apiMutateOptions = useWaitForResponseMutationOptions<
     Record<string, string>
   >({
-    endpoints: CREATE_DATA_ENDPOINT_TO_CLEAR(entity),
+    endpoints: DATA_MUTATION_ENDPOINTS_TO_CLEAR(entity),
     smartSuccessMessage: ({ id }) => ({
       message: entityCrudConfig.MUTATION_LANG.CREATE,
       action: {
@@ -165,10 +162,8 @@ export function useEntityDataUpdationMutation(entity: string, id: string) {
     Record<string, string>
   >({
     endpoints: [
-      ENTITY_TABLE_PATH(entity),
       ENTITY_DETAILS_PATH(entity, id),
-      ENTITY_LIST_PATH(entity),
-      ...DATA_MUTATION_QUERY_ENDPOINTS(entity),
+      ...DATA_MUTATION_ENDPOINTS_TO_CLEAR(entity),
     ],
     successMessage: entityCrudConfig.MUTATION_LANG.EDIT,
   });
@@ -189,12 +184,7 @@ export function useEntityDataDeletionMutation(
   const apiMutateOptions = useWaitForResponseMutationOptions<
     Record<string, string>
   >({
-    endpoints: [
-      ENTITY_TABLE_PATH(entity),
-      ENTITY_COUNT_PATH(entity),
-      ENTITY_LIST_PATH(entity),
-      ...DATA_MUTATION_QUERY_ENDPOINTS(entity),
-    ],
+    endpoints: DATA_MUTATION_ENDPOINTS_TO_CLEAR(entity),
     onSuccessActionWithFormData: () => {
       if (redirectTo) {
         router.replace(redirectTo);

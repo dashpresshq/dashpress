@@ -43,10 +43,10 @@ export class UserPreferencesApiService implements IApplicationService {
     );
 
     if (value) {
-      return value as T;
+      return value as UserPreferencesValueType<T>;
     }
 
-    return USER_PREFERENCES_CONFIG[key].defaultValue as T;
+    return USER_PREFERENCES_CONFIG[key].defaultValue;
   }
 
   async upsert<T extends UserPreferencesKeys>(

@@ -23,6 +23,7 @@ import {
   UPDATE_USER_PREFERENCES_FORM_SCHEMA,
 } from "./constants";
 import { IUserPreferences } from "./types";
+import { PortalUserPreferences } from "./portal";
 
 export function UserPreferences() {
   const userPreferences = useUserPreference("theme");
@@ -68,6 +69,7 @@ export function UserPreferences() {
           />
         </ViewStateMachine>
       </SectionBox>
+      <PortalUserPreferences />
     </BaseAccountLayout>
   );
 }

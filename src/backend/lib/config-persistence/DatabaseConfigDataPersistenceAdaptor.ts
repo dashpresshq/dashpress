@@ -4,9 +4,9 @@ import { getDbConnection } from "../connection/db";
 import { AbstractConfigDataPersistenceService } from "./AbstractConfigDataPersistenceService";
 import { ConfigDomain } from "./types";
 import { CONFIG_TABLE_PREFIX } from "./constants";
+import { createMetaData, updateMetaData } from "./portal";
 
 const CONFIG_TABLE_NAME = CONFIG_TABLE_PREFIX("config");
-
 export class DatabaseConfigDataPersistenceAdaptor<
   T
 > extends AbstractConfigDataPersistenceService<T> {
@@ -140,7 +140,7 @@ export class DatabaseConfigDataPersistenceAdaptor<
       .update({
         value: JSON.stringify(value),
         updated_at: new Date(),
-        // TODO updated_by
+        ...updateMetaData(),
       });
     if (affectedRowsCount === 0) {
       await (
@@ -151,8 +151,7 @@ export class DatabaseConfigDataPersistenceAdaptor<
         value: JSON.stringify(value),
         created_at: new Date(),
         updated_at: new Date(),
-        // TODO updated_by
-        // TODO created_by
+        ...createMetaData(),
       });
     }
   }

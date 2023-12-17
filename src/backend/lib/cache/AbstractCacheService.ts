@@ -13,11 +13,15 @@ export abstract class AbstractCacheService {
     return `__dp__:${key}`;
   }
 
-  abstract pullItem<T>(key: string): Promise<T | undefined>;
+  protected abstract pullItem<T>(key: string): Promise<T | undefined>;
 
-  abstract persistData(key: string, data: unknown): Promise<void>;
+  protected abstract persistData(key: string, data: unknown): Promise<void>;
 
-  abstract clearItem(key: string): Promise<void>;
+  protected abstract _clearItem(key: string): Promise<void>;
+
+  async clearItem(rawKey: string) {
+    await this._clearItem(this.prefixKey(rawKey));
+  }
 
   abstract purge(): Promise<void>;
 

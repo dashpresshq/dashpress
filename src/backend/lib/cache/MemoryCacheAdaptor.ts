@@ -10,24 +10,20 @@ export class MemoryCacheAdaptor extends AbstractCacheService {
     MemoryCacheAdaptor.data = {};
   }
 
-  private getData(): Record<string, unknown> {
-    return MemoryCacheAdaptor.data;
-  }
-
   async setup() {
     noop();
   }
 
   async pullItem<T>(key: string): Promise<T | undefined> {
-    return this.getData()[key] as T;
+    return MemoryCacheAdaptor.data[key] as T;
   }
 
   async persistData(key: string, data: unknown): Promise<void> {
     MemoryCacheAdaptor.data[key] = data;
   }
 
-  async clearItem(key: string) {
-    delete this.getData()[key];
+  async _clearItem(key: string) {
+    delete MemoryCacheAdaptor.data[key];
   }
 
   async purge() {

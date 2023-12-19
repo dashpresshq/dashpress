@@ -42,8 +42,8 @@ const baseMenuItems: IMenuSectionItem[] = [
     order: 30,
   },
   {
-    action: NAVIGATION_LINKS.SETTINGS.DATE,
-    name: "Date Format",
+    action: NAVIGATION_LINKS.SETTINGS.DATA,
+    name: "General Data Settings",
     IconComponent: Calendar,
     order: 40,
   },

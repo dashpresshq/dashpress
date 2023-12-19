@@ -24,6 +24,7 @@ export type BaseAppConfigurationKeys =
   | "system_settings"
   | "hidden_entity_relations"
   | "file_upload_settings"
+  | "metadata_columns"
   | "entity_relations_order";
 
 export const FOR_CODE_COV = 1;

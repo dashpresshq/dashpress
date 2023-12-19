@@ -230,11 +230,13 @@ export class DataApiService implements IDataApiService {
     data: Record<string, unknown>,
     accountProfile: IAccountProfile
   ): Promise<void> {
-    const [allowedFields, primaryField, entityValidations] = await Promise.all([
-      this._entitiesApiService.getAllowedCrudsFieldsToShow(entity, "update"),
-      this._entitiesApiService.getEntityPrimaryField(entity),
-      this._configurationApiService.show("entity_validations", entity),
-    ]);
+    const [allowedFields, primaryField, entityValidations, metadataColumns] =
+      await Promise.all([
+        this._entitiesApiService.getAllowedCrudsFieldsToShow(entity, "update"),
+        this._entitiesApiService.getEntityPrimaryField(entity),
+        this._configurationApiService.show("entity_validations", entity),
+        this._configurationApiService.show("metadata_columns"),
+      ]);
 
     // validate only the fields presents in 'data'
     noop(entityValidations);
@@ -248,12 +250,21 @@ export class DataApiService implements IDataApiService {
       dataId: id,
     });
 
+    const valueToUpdate = this.returnOnlyDataThatAreAllowed(
+      data,
+      allowedFields
+    );
+
+    if (allowedFields.includes(metadataColumns.updatedAt)) {
+      valueToUpdate[metadataColumns.updatedAt] = new Date();
+    }
+
     await this.getDataAccessInstance().update(
       entity,
       {
         [primaryField]: id,
       },
-      this.returnOnlyDataThatAreAllowed(data, allowedFields)
+      valueToUpdate
     );
 
     await PortalDataHooksService.afterUpdate({

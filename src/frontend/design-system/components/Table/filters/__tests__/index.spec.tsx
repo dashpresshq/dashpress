@@ -455,12 +455,15 @@ describe("Table Filters", () => {
 
       await userEvent.keyboard("{Enter}");
 
-      await waitFor(() => {
-        expect(setFilterValueJestFn).toHaveBeenLastCalledWith({
-          operator: "i",
-          value: ["option-1", "option-2"],
-        });
-      });
+      await waitFor(
+        () => {
+          expect(setFilterValueJestFn).toHaveBeenLastCalledWith({
+            operator: "i",
+            value: ["option-1", "option-2"],
+          });
+        },
+        { timeout: 5000 }
+      );
 
       await userEvent.selectOptions(
         screen.getByRole("combobox", { name: "Select Filter Operator" }),

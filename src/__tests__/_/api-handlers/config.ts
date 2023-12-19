@@ -74,6 +74,10 @@ const CONFIG_VALUES = {
     primary: `#4b38b3`,
     primaryDark: `#111111`,
   },
+  metadata_columns: {
+    createdAt: `created_at`,
+    updatedAt: `updated_at`,
+  },
   disabled_entities: ["disabled-entity-1", "disabled-entity-2"],
   menu_entities_order: [],
   disabled_menu_entities: ["entity-3"],

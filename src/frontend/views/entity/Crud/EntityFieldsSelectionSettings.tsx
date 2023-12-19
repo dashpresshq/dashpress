@@ -13,6 +13,7 @@ import {
   useEntitySlug,
 } from "frontend/hooks/entity/entity.config";
 import { IEntityCrudSettings } from "shared/configurations";
+import { useAppConfiguration } from "frontend/hooks/configuration/configuration.store";
 import { ENTITY_CRUD_LABELS } from "../constants";
 import { makeEntityFieldsSelectionKey } from "./constants";
 
@@ -42,6 +43,8 @@ export function EntityFieldsSelectionSettings({
   const entityFields = useEntityFields(entity);
 
   const getEntityFieldLabels = useEntityFieldLabels();
+
+  const metaDataColumns = useAppConfiguration("metadata_columns");
 
   const { toggleSelection, allSelections, selectMutiple, isSelected } =
     useStringSelections(makeEntityFieldsSelectionKey(entity, crudKey));
@@ -82,7 +85,14 @@ export function EntityFieldsSelectionSettings({
             render={(menuItem) => {
               const isHidden = isSelected(menuItem.name);
 
-              const disabled = menuItem.isId || !toggling.enabled;
+              const disabled =
+                menuItem.isId ||
+                !toggling.enabled ||
+                ((crudKey === "create" || crudKey === "update") &&
+                  [
+                    metaDataColumns.data.createdAt,
+                    metaDataColumns.data.updatedAt,
+                  ].includes(menuItem.name));
 
               return (
                 <SectionListItem

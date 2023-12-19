@@ -3,7 +3,10 @@ import {
   FormSkeletonSchema,
 } from "frontend/design-system/components/Skeleton/Form";
 import { SchemaForm } from "frontend/components/SchemaForm";
-import { useEntityConfiguration } from "frontend/hooks/configuration/configuration.store";
+import {
+  useAppConfiguration,
+  useEntityConfiguration,
+} from "frontend/hooks/configuration/configuration.store";
 import {
   useEntityFields,
   useEntityToOneReferenceFields,
@@ -67,6 +70,8 @@ export function BaseEntityForm({
   );
   const entityToOneReferenceFields = useEntityToOneReferenceFields(entity);
 
+  const metaDataColumns = useAppConfiguration("metadata_columns");
+
   const error =
     entityFieldTypesMap.error ||
     hiddenColumns.error ||
@@ -88,7 +93,15 @@ export function BaseEntityForm({
   const viewState = useEntityViewStateMachine(isLoading, error, crudAction);
 
   const fields = filterOutHiddenScalarColumns(
-    entityFields.data.filter(({ isId }) => !isId),
+    entityFields.data
+      .filter(({ isId }) => !isId)
+      .filter(
+        ({ name }) =>
+          ![
+            metaDataColumns.data.createdAt,
+            metaDataColumns.data.updatedAt,
+          ].includes(name)
+      ),
     hiddenColumns.data
   ).map(({ name }) => name);
 

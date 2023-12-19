@@ -117,6 +117,13 @@ export const APP_CONFIGURATION_CONFIG = {
     requireEntity: true,
     defaultValue: [] as string[],
   },
+  metadata_columns: {
+    label: "Metadata Columns",
+    defaultValue: {
+      createdAt: "created_at",
+      updatedAt: "updated_at",
+    },
+  },
   entity_relation_template: {
     label: "Relation Template",
     requireEntity: true,

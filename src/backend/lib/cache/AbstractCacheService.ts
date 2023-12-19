@@ -1,3 +1,4 @@
+import { ConfigDomain } from "../config-persistence/types";
 import { ConfigApiService } from "../config/config.service";
 
 export abstract class AbstractCacheService {
@@ -9,8 +10,8 @@ export abstract class AbstractCacheService {
 
   public abstract setup(): Promise<void>;
 
-  private prefixKey(key: string) {
-    return `__dp__:${key}`;
+  private prefixKey(key: string, domain: ConfigDomain) {
+    return `__dp__:${domain}:${key}`;
   }
 
   protected abstract pullItem<T>(key: string): Promise<T | undefined>;
@@ -19,14 +20,18 @@ export abstract class AbstractCacheService {
 
   protected abstract _clearItem(key: string): Promise<void>;
 
-  async clearItem(rawKey: string) {
-    await this._clearItem(this.prefixKey(rawKey));
+  async clearItem(rawKey: string, domain: ConfigDomain) {
+    await this._clearItem(this.prefixKey(rawKey, domain));
   }
 
   abstract purge(): Promise<void>;
 
-  async getItem<T>(rawKey: string, fetcher: () => Promise<T>) {
-    const key = this.prefixKey(rawKey);
+  async getItem<T>(
+    rawKey: string,
+    domain: ConfigDomain,
+    fetcher: () => Promise<T>
+  ) {
+    const key = this.prefixKey(rawKey, domain);
 
     const data = await this.pullItem<T>(key);
 

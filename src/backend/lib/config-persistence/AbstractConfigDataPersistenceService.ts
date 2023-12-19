@@ -24,25 +24,25 @@ export abstract class AbstractConfigDataPersistenceService<T> {
     return `${key}__${secondaryKey}`;
   }
 
-  public abstract _getItem(key: string): Promise<T | undefined>;
+  protected abstract _getItem(key: string): Promise<T | undefined>;
 
-  public abstract _persistItem(key: string, data: T): Promise<void>;
+  protected abstract _persistItem(key: string, data: T): Promise<void>;
 
-  public abstract _removeItem(key: string): Promise<void>;
+  protected abstract _removeItem(key: string): Promise<void>;
 
   public async getItem(key: string) {
-    return await cacheService.getItem(key, async () => {
-      return this._getItem(key);
+    return await cacheService.getItem(key, this._configDomain, async () => {
+      return await this._getItem(key);
     });
   }
 
   public async persistItem(key: string, data: T) {
-    await cacheService.clearItem(key);
+    await cacheService.clearItem(key, this._configDomain);
     await this._persistItem(key, data);
   }
 
   public async removeItem(key: string) {
-    await cacheService.clearItem(key);
+    await cacheService.clearItem(key, this._configDomain);
     await this._removeItem(key);
   }
 
@@ -71,12 +71,16 @@ export abstract class AbstractConfigDataPersistenceService<T> {
   }
 
   public async resetState(keyField: keyof T, data: T[]) {
-    await cacheService.purge();
     await this.resetToEmpty();
     await this.saveAllItems(keyField, data);
   }
 
   protected abstract saveAllItems(keyField: keyof T, data: T[]): Promise<void>;
 
-  public abstract resetToEmpty(): Promise<void>;
+  public async resetToEmpty() {
+    await cacheService.purge();
+    await this._resetToEmpty();
+  }
+
+  protected abstract _resetToEmpty(): Promise<void>;
 }

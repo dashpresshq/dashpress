@@ -27,13 +27,13 @@ const CACHE_ADAPTORS: {
 describe.each(CACHE_ADAPTORS)("$title cache adaptor", ({ adaptor }) => {
   beforeAll(async () => {
     await adaptor.setup();
-    await adaptor.clearItem("foo");
+    await adaptor.clearItem("foo", "temp-storage");
   });
 
   it("should call fetcher the first time", async () => {
     const implementationMock = jest.fn();
 
-    const data = await adaptor.getItem("foo", async () => {
+    const data = await adaptor.getItem("foo", "temp-storage", async () => {
       implementationMock();
       return { foo: "bar" };
     });
@@ -45,7 +45,7 @@ describe.each(CACHE_ADAPTORS)("$title cache adaptor", ({ adaptor }) => {
   it("should not call fetcher the next time", async () => {
     const implementationMock = jest.fn();
 
-    const data = await adaptor.getItem("foo", async () => {
+    const data = await adaptor.getItem("foo", "temp-storage", async () => {
       implementationMock();
       return { foo: "wrong-value" };
     });
@@ -57,9 +57,9 @@ describe.each(CACHE_ADAPTORS)("$title cache adaptor", ({ adaptor }) => {
   it("should call fetcher after clearing key", async () => {
     const implementationMock = jest.fn();
 
-    await adaptor.clearItem("foo");
+    await adaptor.clearItem("foo", "temp-storage");
 
-    const data = await adaptor.getItem("foo", async () => {
+    const data = await adaptor.getItem("foo", "temp-storage", async () => {
       implementationMock();
       return { foo: "new-value" };
     });
@@ -73,7 +73,7 @@ describe.each(CACHE_ADAPTORS)("$title cache adaptor", ({ adaptor }) => {
 
     await adaptor.purge();
 
-    const data = await adaptor.getItem("foo", async () => {
+    const data = await adaptor.getItem("foo", "temp-storage", async () => {
       implementationMock();
       return { foo: "new-value" };
     });

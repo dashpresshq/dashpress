@@ -30,7 +30,7 @@ export class MemoryConfigDataPersistenceAdaptor<
     return MemoryConfigDataPersistenceAdaptor.data[configDomain];
   }
 
-  async resetToEmpty() {
+  async _resetToEmpty() {
     MemoryConfigDataPersistenceAdaptor.data[this._configDomain] = {};
   }
 

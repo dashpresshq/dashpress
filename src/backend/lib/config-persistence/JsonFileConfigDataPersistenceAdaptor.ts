@@ -29,7 +29,7 @@ export class JsonFileConfigDataPersistenceAdaptor<
     );
   };
 
-  async resetToEmpty() {
+  async _resetToEmpty() {
     fs.removeSync(this.pathToConfigDomain(this._configDomain));
   }
 

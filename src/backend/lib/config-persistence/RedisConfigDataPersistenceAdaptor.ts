@@ -40,7 +40,7 @@ export class RedisConfigDataPersistenceAdaptor<
     super(configDomain, _configApiService);
   }
 
-  async resetToEmpty() {
+  async _resetToEmpty() {
     await (await this.getRedisInstance()).del(this.wrapWithConfigDomain());
   }
 

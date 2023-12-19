@@ -4,6 +4,7 @@ import { HashService } from "backend/lib/hash/hash.service";
 import { IApplicationService } from "backend/types";
 import { IAccountUser, IAccountProfile } from "shared/types/user";
 import { ISuccessfullAuthenticationResponse } from "shared/types/auth/portal";
+import { noop } from "shared/lib/noop";
 import { getPortalAuthenticationResponse } from "./portal";
 import { generateAuthTokenForUsername } from "./utils";
 import { usersPersistenceService } from "./shared";
@@ -54,10 +55,8 @@ export class UsersApiService implements IApplicationService {
   async listUsers() {
     const users = await this._usersPersistenceService.getAllItems();
 
-    return users.map((user) => {
-      const userCopy = { ...user };
-      delete userCopy.password;
-
+    return users.map(({ password, ...userCopy }) => {
+      noop(password);
       return userCopy;
     });
   }
@@ -73,8 +72,9 @@ export class UsersApiService implements IApplicationService {
   }
 
   async getUser(username: string): Promise<IAccountProfile> {
-    const user = await this._usersPersistenceService.getItemOrFail(username);
-    delete user.password;
+    const { password, ...user } =
+      await this._usersPersistenceService.getItemOrFail(username);
+    noop(password);
     return user;
   }
 

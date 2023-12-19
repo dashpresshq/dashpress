@@ -81,7 +81,7 @@ function useEntityFormView() {
 
 return {
   ...$.formValues,
-  slug: $.formValues.title.replaceAll(" ", "-").toLowerCase(),
+  slug: $.formValues.title?.replaceAll(" ", "-").toLowerCase(),
   createdById: JSON.parse($.auth.systemProfile).userId,
   createdAt: new Date(),
 }

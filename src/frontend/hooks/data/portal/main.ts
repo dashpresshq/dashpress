@@ -4,3 +4,11 @@ export const DATA_MUTATION_QUERY_ENDPOINTS = (entity: string) => {
   noop(entity);
   return [];
 };
+
+export const SINGLE_DATA_MUTATION_QUERY_ENDPOINTS = (params: {
+  entity: string;
+  entityId: string;
+}) => {
+  noop(params);
+  return [];
+};

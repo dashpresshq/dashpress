@@ -46,7 +46,7 @@ function TableActionButtons({
 
   const actionButtons = useEntityActionButtons({
     entity,
-    id: idValue,
+    entityId: idValue,
   });
 
   const portalActionButtons = usePortalActionButtons({
@@ -121,7 +121,7 @@ export const useTableColumns = (
 
   const actionButtons = useEntityActionButtons({
     entity,
-    id: "doesnt-matter-any-value-will-do-here",
+    entityId: "doesnt-matter-any-value-will-do-here",
   });
 
   const columnsToShow = useMemo(() => {

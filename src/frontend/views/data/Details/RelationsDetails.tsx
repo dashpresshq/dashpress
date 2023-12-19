@@ -27,6 +27,7 @@ import { EntityDetailsView } from "./DetailsView";
 import { DetailsLayout } from "./_Layout";
 import { DetailsCanvas } from "../Table/_WholeEntityTable/DetailsCanvas";
 import { useEntityActionButtons } from "../useEntityActionButtons";
+import { usePortalActionButtons } from "./portal";
 
 export function EntityRelationDetails() {
   const childEntity = useRouteParam("childEntity");
@@ -80,8 +81,14 @@ export function EntityRelationDetails() {
 
   const actionButtons = useEntityActionButtons({
     entity: childEntity,
-    id: idData,
+    entityId: idData,
     exclude: ["delete"],
+  });
+
+  const portalActionButtons = usePortalActionButtons({
+    entity: childEntity,
+    entityId: idData,
+    baseActionButtons: actionButtons,
   });
 
   return (
@@ -129,7 +136,7 @@ export function EntityRelationDetails() {
             dataDetails.isLoading
           }
           backLink={backLink}
-          actionButtons={actionButtons}
+          actionButtons={portalActionButtons}
         >
           <EntityDetailsView
             displayFrom="details"

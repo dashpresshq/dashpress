@@ -18,6 +18,7 @@ import {
   ENTITY_COUNT_PATH,
   ENTITY_DETAILS_PATH,
   ENTITY_REFERENCE_PATH,
+  SINGLE_DATA_MUTATION_ENDPOINTS_TO_CLEAR,
 } from "./constants";
 
 export const useEntityDataDetails = ({
@@ -32,7 +33,7 @@ export const useEntityDataDetails = ({
   const entityCrudConfig = useEntityCrudConfig(entity);
 
   return useApi<Record<string, string>>(
-    ENTITY_DETAILS_PATH(entity, entityId, column),
+    ENTITY_DETAILS_PATH({ entity, entityId, column }),
     {
       errorMessage: entityCrudConfig.TEXT_LANG.NOT_FOUND,
       enabled:
@@ -126,10 +127,10 @@ export const useEntityReferenceCount = (
   });
 };
 
-export const useEntityDataReference = (entity: string, id: string) => {
-  return useApi<string>(ENTITY_REFERENCE_PATH(entity, id), {
+export const useEntityDataReference = (entity: string, entityId: string) => {
+  return useApi<string>(ENTITY_REFERENCE_PATH({ entity, entityId }), {
     errorMessage: CRUD_CONFIG_NOT_FOUND("Reference data"),
-    enabled: isRouterParamEnabled(id) && isRouterParamEnabled(entity),
+    enabled: isRouterParamEnabled(entityId) && isRouterParamEnabled(entity),
     defaultData: "",
   });
 };
@@ -156,13 +157,16 @@ export function useEntityDataCreationMutation(entity: string) {
   );
 }
 
-export function useEntityDataUpdationMutation(entity: string, id: string) {
+export function useEntityDataUpdationMutation(
+  entity: string,
+  entityId: string
+) {
   const entityCrudConfig = useEntityCrudConfig();
   const apiMutateOptions = useWaitForResponseMutationOptions<
     Record<string, string>
   >({
     endpoints: [
-      ENTITY_DETAILS_PATH(entity, id),
+      ...SINGLE_DATA_MUTATION_ENDPOINTS_TO_CLEAR({ entity, entityId }),
       ...DATA_MUTATION_ENDPOINTS_TO_CLEAR(entity),
     ],
     successMessage: entityCrudConfig.MUTATION_LANG.EDIT,
@@ -170,13 +174,21 @@ export function useEntityDataUpdationMutation(entity: string, id: string) {
 
   return useMutation(
     async (data: Record<string, string>) =>
-      await makeActionRequest("PATCH", `/api/data/${entity}/${id}`, { data }),
+      await makeActionRequest("PATCH", `/api/data/${entity}/${entityId}`, {
+        data,
+      }),
     apiMutateOptions
   );
 }
 
 export function useEntityDataDeletionMutation(
-  entity: string,
+  {
+    entity,
+    entityId,
+  }: {
+    entityId: string;
+    entity: string;
+  },
   redirectTo?: string
 ) {
   const router = useRouter();
@@ -184,7 +196,10 @@ export function useEntityDataDeletionMutation(
   const apiMutateOptions = useWaitForResponseMutationOptions<
     Record<string, string>
   >({
-    endpoints: DATA_MUTATION_ENDPOINTS_TO_CLEAR(entity),
+    endpoints: [
+      ...SINGLE_DATA_MUTATION_ENDPOINTS_TO_CLEAR({ entity, entityId }),
+      ...DATA_MUTATION_ENDPOINTS_TO_CLEAR(entity),
+    ],
     onSuccessActionWithFormData: () => {
       if (redirectTo) {
         router.replace(redirectTo);

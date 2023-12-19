@@ -215,9 +215,7 @@ You can compute fields to save
 */
 return {
   ...$.formValues,
-  slug: $.formValues.title
-    .replaceAll(" ", "-")
-    .toLowerCase()
+  slug: $.formValues.title?.replaceAll(" ", "-").toLowerCase()
 }`}
       />
       <Spacer />

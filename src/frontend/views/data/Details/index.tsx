@@ -17,7 +17,7 @@ import { useEntityActionButtons } from "../useEntityActionButtons";
 
 export function EntityDetails() {
   const entityCrudConfig = useEntityCrudConfig();
-  const id = useEntityId();
+  const entityId = useEntityId();
   const entity = useEntitySlug();
 
   const { backLink } = useNavigationStack();
@@ -31,19 +31,19 @@ export function EntityDetails() {
 
   const menuItems = useDetailsViewMenuItems({
     entity,
-    entityId: id,
+    entityId,
   });
 
   const actionButtons = useEntityActionButtons({
     entity,
-    id,
+    entityId,
     redirectAfterDelete: NAVIGATION_LINKS.ENTITY.TABLE(entity),
     exclude: ["details"],
   });
 
   const portalActionButtons = usePortalActionButtons({
     entity,
-    entityId: id,
+    entityId,
     baseActionButtons: actionButtons,
   });
 
@@ -58,7 +58,11 @@ export function EntityDetails() {
         backLink={backLink}
         actionButtons={portalActionButtons}
       >
-        <EntityDetailsView displayFrom="details" id={id} entity={entity} />
+        <EntityDetailsView
+          displayFrom="details"
+          id={entityId}
+          entity={entity}
+        />
       </SectionBox>
       <DetailsCanvas />
     </DetailsLayout>

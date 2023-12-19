@@ -49,6 +49,7 @@ export const ToastService = {
       toast.success((t) => <ToastMessage message={message} toastT={t} />, {
         style: toastStyle("success"),
         duration: 7000,
+        id: message,
       });
       return;
     }
@@ -88,16 +89,17 @@ export const ToastService = {
       {
         style: toastStyle("success"),
         duration: 7000,
+        id: message.message,
       }
     );
   },
 
-  error: (message: unknown) =>
-    toast.error(
-      (t) => <ToastMessage message={getBestErrorMessage(message)} toastT={t} />,
-      {
-        style: toastStyle("danger"),
-        duration: 7000,
-      }
-    ),
+  error: (message: unknown) => {
+    const errorMessage = getBestErrorMessage(message);
+    toast.error((t) => <ToastMessage message={errorMessage} toastT={t} />, {
+      style: toastStyle("danger"),
+      duration: 7000,
+      id: errorMessage,
+    });
+  },
 };

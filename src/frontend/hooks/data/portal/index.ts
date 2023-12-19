@@ -1,1 +1,4 @@
-export { DATA_MUTATION_QUERY_ENDPOINTS } from "./main";
+export {
+  DATA_MUTATION_QUERY_ENDPOINTS,
+  SINGLE_DATA_MUTATION_QUERY_ENDPOINTS,
+} from "./main";

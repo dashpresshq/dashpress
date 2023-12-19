@@ -94,7 +94,7 @@ export class PortalQueryImplementation {
     entity: string;
     implementation: () => Promise<void>;
   }) {
-    noop(params);
+    await params.implementation();
   }
 
   static async query(

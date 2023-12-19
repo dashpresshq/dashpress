@@ -91,14 +91,21 @@ describe("pages/admin/settings/theme", () => {
     });
 
     await userEvent.click(
+      screen.getAllByRole("button", { name: "Close Toast" })[0]
+    );
+    await userEvent.click(
+      screen.getAllByRole("button", { name: "Close Toast" })[1]
+    );
+
+    await userEvent.click(
       screen.getByRole("button", { name: "Save Theme Settings" })
     );
 
-    expect((await screen.findAllByRole("status"))[2]).toHaveTextContent(
+    expect((await screen.findAllByRole("status"))[0]).toHaveTextContent(
       "Theme Settings Saved Successfully"
     );
 
-    expect((await screen.findAllByRole("status"))[3]).toHaveTextContent(
+    expect((await screen.findAllByRole("status"))[1]).toHaveTextContent(
       "Theme Preference Saved Successfully"
     );
   });

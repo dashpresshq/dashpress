@@ -107,10 +107,6 @@ describe("pages/integrations/variables => constants", () => {
         </ApplicationRoot>
       );
 
-      await userEvent.click(
-        screen.getByRole("button", { name: "Close Toast" })
-      );
-
       const table = screen.getByRole("table");
 
       const tableRows = await within(table).findAllByRole("row");
@@ -163,15 +159,15 @@ describe("pages/integrations/variables => constants", () => {
         </ApplicationRoot>
       );
 
-      await userEvent.click(
-        screen.getByRole("button", { name: "Close Toast" })
-      );
-
       const table = screen.getByRole("table");
 
       const tableRows = await within(table).findAllByRole("row");
 
       expect(tableRows).toHaveLength(5);
+
+      await userEvent.click(
+        screen.getByRole("button", { name: "Close Toast" })
+      );
 
       await userEvent.click(
         within(tableRows[2]).getByRole("button", {

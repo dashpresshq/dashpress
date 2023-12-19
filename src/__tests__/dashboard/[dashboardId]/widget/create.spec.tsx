@@ -1,5 +1,5 @@
 import React from "react";
-import { render, screen, waitFor } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 
 import CreateDashboardWidget from "pages/dashboard/[dashboardId]/widget/create";
@@ -110,12 +110,14 @@ describe("pages/dashboard/[dashboardId]/widget/create", () => {
     expect(screen.queryByLabelText("Color")).not.toBeInTheDocument();
     expect(screen.queryByLabelText("Icon")).not.toBeInTheDocument();
 
+    await userEvent.click(screen.getByRole("button", { name: "Close Toast" }));
+
     await userEvent.click(
       screen.getByRole("button", { name: "Create Dashboard Widget" })
     );
 
-    await waitFor(async () => {
-      expect(await screen.findAllByRole("status")).toHaveLength(2);
-    });
+    expect(await screen.findByRole("status")).toHaveTextContent(
+      "Dashboard Widget Created Successfully"
+    );
   });
 });

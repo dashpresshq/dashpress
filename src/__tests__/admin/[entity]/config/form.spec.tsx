@@ -69,7 +69,7 @@ describe("pages/admin/[entity]/config/form", () => {
         within(currentTab).getByRole("button", { name: "Save Form Scripts" })
       );
 
-      expect((await screen.findAllByRole("status"))[0]).toHaveTextContent(
+      expect(await screen.findByRole("status")).toHaveTextContent(
         "Form Scripts Saved Successfully"
       );
     });
@@ -107,10 +107,14 @@ describe("pages/admin/[entity]/config/form", () => {
       );
 
       await userEvent.click(
+        screen.getByRole("button", { name: "Close Toast" })
+      );
+
+      await userEvent.click(
         within(currentTab).getByRole("button", { name: "Save Form Scripts" })
       );
 
-      expect((await screen.findAllByRole("status"))[0]).toHaveTextContent(
+      expect(await screen.findByRole("status")).toHaveTextContent(
         "Expression: •JS-Error: SyntaxError: Unexpected identifier"
       );
     });
@@ -145,10 +149,14 @@ describe("pages/admin/[entity]/config/form", () => {
       await userEvent.clear(within(currentTab).getByLabelText("Script"));
 
       await userEvent.click(
+        screen.getByRole("button", { name: "Close Toast" })
+      );
+
+      await userEvent.click(
         within(currentTab).getByRole("button", { name: "Save Form Scripts" })
       );
 
-      expect((await screen.findAllByRole("status"))[0]).toHaveTextContent(
+      expect(await screen.findByRole("status")).toHaveTextContent(
         "Form Scripts Saved Successfully"
       );
     });

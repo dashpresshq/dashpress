@@ -1,5 +1,5 @@
 import React from "react";
-import { render, screen, waitFor } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 
 import UpdateDashboardWidget from "pages/dashboard/[dashboardId]/widget/[widgetId]/index";
@@ -110,9 +110,11 @@ describe("pages/dashboard/[dashboardId]/widget/[widgetId]/index", () => {
       screen.getByRole("button", { name: "Update Dashboard Widget" })
     );
 
-    await waitFor(async () => {
-      expect(await screen.findAllByRole("status")).toHaveLength(2);
-    });
+    await userEvent.click(screen.getByRole("button", { name: "Close Toast" }));
+
+    expect(await screen.findByRole("status")).toHaveTextContent(
+      "Dashboard Widget Updated Successfully"
+    );
   });
 
   it("should render error when widget is not present", async () => {

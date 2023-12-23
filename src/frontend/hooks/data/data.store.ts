@@ -20,6 +20,7 @@ import {
   ENTITY_REFERENCE_PATH,
   SINGLE_DATA_MUTATION_ENDPOINTS_TO_CLEAR,
 } from "./constants";
+import { useEntityMetadataDetails } from "./portal";
 
 export const useEntityDataDetails = ({
   entity,
@@ -31,6 +32,8 @@ export const useEntityDataDetails = ({
   column?: string;
 }) => {
   const entityCrudConfig = useEntityCrudConfig(entity);
+
+  useEntityMetadataDetails({ entity, entityId, column });
 
   return useApi<Record<string, string>>(
     ENTITY_DETAILS_PATH({ entity, entityId, column }),
@@ -172,10 +175,12 @@ export function useEntityDataUpdationMutation(
     successMessage: entityCrudConfig.MUTATION_LANG.EDIT,
   });
 
+  const metadata = useEntityMetadataDetails({ entity, entityId });
+
   return useMutation(
     async (data: Record<string, string>) =>
       await makeActionRequest("PATCH", `/api/data/${entity}/${entityId}`, {
-        data,
+        data: { ...data, ...metadata },
       }),
     apiMutateOptions
   );

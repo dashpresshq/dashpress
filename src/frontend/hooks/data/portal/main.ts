@@ -12,3 +12,13 @@ export const SINGLE_DATA_MUTATION_QUERY_ENDPOINTS = (params: {
   noop(params);
   return [];
 };
+
+export const useEntityMetadataDetails = (params: {
+  entity: string;
+  entityId: string;
+  column?: string;
+}) => {
+  noop(params);
+
+  return {};
+};

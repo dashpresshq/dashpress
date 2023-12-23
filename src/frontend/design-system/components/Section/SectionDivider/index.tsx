@@ -38,7 +38,7 @@ ContentLayout.Left = function SectionLeft({ children }: IProps) {
 };
 
 ContentLayout.Right = function SectionRight({ children }: IProps) {
-  return <div style={{ overflowX: "scroll" }}>{children}</div>;
+  return <div style={{ overflowX: "hidden" }}>{children}</div>;
 };
 
 ContentLayout.Center = function SectionCenter({ children }: IProps) {

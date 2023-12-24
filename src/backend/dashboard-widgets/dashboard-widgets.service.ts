@@ -65,10 +65,6 @@ export class DashboardWidgetsApiService implements IApplicationService {
     await this._dashboardWidgetsPersistenceService.setup();
   }
 
-  private getDataAccessInstance() {
-    return this._rDBMSApiDataService;
-  }
-
   async runScript(
     script$1: string,
     currentUser: IAccountProfile,
@@ -86,8 +82,10 @@ export class DashboardWidgetsApiService implements IApplicationService {
     return (
       (await runAsyncJavascriptString(script, {
         currentUser,
-        query: async (sql: string) =>
-          await this.getDataAccessInstance().runQuery(sql),
+        query: async (sql: string) => {
+          await RDBMSDataApiService.getInstance();
+          return await this._rDBMSApiDataService.runQuery(sql);
+        },
       })) || "{}"
     );
   }

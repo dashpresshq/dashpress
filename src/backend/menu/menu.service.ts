@@ -1,6 +1,5 @@
 import { IApplicationService } from "backend/types";
 import { nanoid } from "nanoid";
-import { canRoleDoThisSync } from "shared/logic/permissions";
 import {
   INavigationMenuItem,
   NavigationMenuItemType,
@@ -152,46 +151,30 @@ export class NavigationMenuApiService
 
   async filterOutUserMenuItems(
     userRole: string,
-    navItems: INavigationMenuItem[]
-  ) {
-    return this.filterMenuItemsBasedOnPermissions(
-      userRole,
-      navItems,
-      await this._rolesApiService.getRolePermissions(userRole)
-    );
-  }
-
-  private filterMenuItemsBasedOnPermissions(
-    userRole: string,
-    menuItems: INavigationMenuItem[],
-    userPermissions: string[]
-  ): INavigationMenuItem[] {
-    return menuItems.reduce((allowedMenuItems, menuItem) => {
+    menuItems: INavigationMenuItem[]
+  ): Promise<INavigationMenuItem[]> {
+    const allowedMenuItems: INavigationMenuItem[] = [];
+    for (const menuItem of menuItems) {
       if (menuItem.children) {
         // eslint-disable-next-line no-param-reassign
-        menuItem.children = this.filterMenuItemsBasedOnPermissions(
+        menuItem.children = await this.filterOutUserMenuItems(
           userRole,
-          menuItem.children,
-          userPermissions
+          menuItem.children
         );
       }
-      if (this.isMenuItemAllowed(menuItem, userRole, userPermissions)) {
-        return [...allowedMenuItems, menuItem];
+
+      if (await this.isMenuItemAllowed(menuItem, userRole)) {
+        allowedMenuItems.push(menuItem);
       }
-      return allowedMenuItems;
-    }, []);
+    }
+    return allowedMenuItems;
   }
 
   private async isMenuItemAllowed(
     menuItem: INavigationMenuItem,
-    userRole: string,
-    userPermissions: string[]
+    userRole: string
   ): Promise<boolean> {
-    const isMenuAllowed = await portalCheckIfIsMenuAllowed(
-      menuItem,
-      userRole,
-      userPermissions
-    );
+    const isMenuAllowed = await portalCheckIfIsMenuAllowed(menuItem, userRole);
 
     if (typeof isMenuAllowed === "boolean") {
       return isMenuAllowed;
@@ -201,20 +184,18 @@ export class NavigationMenuApiService
       case NavigationMenuItemType.Header:
         return true;
       case NavigationMenuItemType.System:
-        return canRoleDoThisSync(
+        return await this._rolesApiService.canRoleDoThis(
           userRole,
-          SYSTEM_LINKS_CONFIG_MAP[menuItem.link as SystemLinks].permission,
-          userPermissions
+          SYSTEM_LINKS_CONFIG_MAP[menuItem.link as SystemLinks].permission
         );
 
       case NavigationMenuItemType.Entities:
-        return canRoleDoThisSync(
+        return await this._rolesApiService.canRoleDoThis(
           userRole,
           META_USER_PERMISSIONS.APPLIED_CAN_ACCESS_ENTITY(
             menuItem.link,
             GranularEntityPermissions.Show
-          ),
-          userPermissions
+          )
         );
       default:
         return false;

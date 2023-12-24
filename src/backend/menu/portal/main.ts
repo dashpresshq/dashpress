@@ -4,10 +4,9 @@ import { IBaseNavigationMenuApiService } from "../types";
 
 export const portalCheckIfIsMenuAllowed = async (
   menuItem: INavigationMenuItem,
-  userRole: string,
-  userPermissions: string[]
+  userRole: string
 ): Promise<boolean | undefined> => {
-  noop(menuItem, userRole, userPermissions);
+  noop(menuItem, userRole);
   return undefined;
 };
 

@@ -43,19 +43,15 @@ export const getPermissionChildren = (
 ): string[] => {
   permissions.push(permission);
 
-  const permissionHeirachy = PERMISSION_HEIRACHIES.find(
+  const permissionHeirachies = PERMISSION_HEIRACHIES.filter(
     (value) => value[mainKey === 1 ? 0 : 1] === permission
   );
 
-  if (!permissionHeirachy) {
-    return permissions;
-  }
+  permissionHeirachies.forEach((permissionHeirachy) => {
+    getPermissionChildren(permissionHeirachy[mainKey], mainKey, permissions);
+  });
 
-  return getPermissionChildren(
-    permissionHeirachy[mainKey],
-    mainKey,
-    permissions
-  );
+  return permissions;
 };
 
 export function MutatePermission({

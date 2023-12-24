@@ -1,13 +1,13 @@
 import { ActionIntegrationKeys } from "shared/types/actions";
 import { SystemLinks } from "shared/types/menu";
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
-import { USER_PERMISSIONS } from "./user";
+import { META_USER_PERMISSIONS, USER_PERMISSIONS } from "./user";
 
 export const SYSTEM_LINKS_CONFIG_MAP: Record<
   SystemLinks,
   {
     link: string;
-    permission?: string;
+    permission: string;
   }
 > = {
   [SystemLinks.Settings]: {
@@ -16,6 +16,7 @@ export const SYSTEM_LINKS_CONFIG_MAP: Record<
   },
   [SystemLinks.Home]: {
     link: NAVIGATION_LINKS.DASHBOARD.HOME,
+    permission: META_USER_PERMISSIONS.NO_PERMISSION_REQUIRED,
   },
   [SystemLinks.Roles]: {
     link: NAVIGATION_LINKS.ROLES.LIST,

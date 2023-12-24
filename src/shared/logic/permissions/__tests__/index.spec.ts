@@ -7,25 +7,23 @@ import {
 describe("user role checks", () => {
   describe("canRoleDoThisSync", () => {
     it("should return true for any check for creator", () => {
-      expect(canRoleDoThisSync("creator", "ANY_PERMISSSION", false, [])).toBe(
-        true
-      );
+      expect(canRoleDoThisSync("creator", "ANY_PERMISSSION", [])).toBe(true);
     });
 
     it("should return true for only check starting with 'CAN_ACCESS_ENTITY' for viewer", () => {
-      expect(
-        canRoleDoThisSync("viewer", "CAN_ACCESS_ENTITY:HELLO", false, [])
-      ).toBe(true);
-      expect(canRoleDoThisSync("viewer", "ANY_OTHER", false, [])).toBe(false);
+      expect(canRoleDoThisSync("viewer", "CAN_ACCESS_ENTITY:HELLO", [])).toBe(
+        true
+      );
+      expect(canRoleDoThisSync("viewer", "ANY_OTHER", [])).toBe(false);
     });
 
     it("should return true for custom permission when permission is present", () => {
       expect(
-        canRoleDoThisSync("custom", "PRESENT_ENTITY", false, ["PRESENT_ENTITY"])
+        canRoleDoThisSync("custom", "PRESENT_ENTITY", ["PRESENT_ENTITY"])
       ).toBe(true);
-      expect(
-        canRoleDoThisSync("custom", "ANY_OTHER", false, ["PRESENT_ENTITY"])
-      ).toBe(false);
+      expect(canRoleDoThisSync("custom", "ANY_OTHER", ["PRESENT_ENTITY"])).toBe(
+        false
+      );
     });
   });
 

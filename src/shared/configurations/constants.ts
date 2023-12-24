@@ -1,4 +1,3 @@
-import { IFileUploadSettings } from "shared/types/file";
 import { IFieldValidationItem } from "shared/validations/types";
 import { IColorableSelection } from "shared/types/ui";
 import { FIELD_TYPES_CONFIG_MAP } from "shared/validations";
@@ -77,7 +76,7 @@ export const APP_CONFIGURATION_CONFIG = {
       defaultMaxFileSizeInMB: 5,
       fileNameFormat: "{{random_letters}}-{{file_name}}-{{file_extension}}",
       filePathFormat: "/uploads/{{entity}}/{{current_date}}",
-    } as IFileUploadSettings,
+    },
   },
   entity_presentation_script: {
     label: "Presentation Scripts",

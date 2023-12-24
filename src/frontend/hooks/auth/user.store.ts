@@ -44,8 +44,8 @@ const doPermissionCheck = (
   return canRoleDoThisSync(
     role,
     requiredPermission,
-    isGranularCheck,
-    permissions
+    permissions,
+    isGranularCheck
   );
 };
 

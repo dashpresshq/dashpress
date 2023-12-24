@@ -7,7 +7,7 @@ import {
   SystemLinks,
 } from "shared/types/menu";
 import { userFriendlyCase } from "shared/lib/strings/friendly-case";
-import { META_USER_PERMISSIONS, USER_PERMISSIONS } from "shared/constants/user";
+import { META_USER_PERMISSIONS } from "shared/constants/user";
 import { GranularEntityPermissions } from "shared/types/user";
 import {
   EntitiesApiService,
@@ -21,17 +21,9 @@ import {
 import { RolesApiService, rolesApiService } from "backend/roles/roles.service";
 import { ILabelValue } from "shared/types/options";
 import { sortListByOrder } from "shared/lib/array/sort";
+import { SYSTEM_LINKS_CONFIG_MAP } from "shared/constants/menu";
 import { portalCheckIfIsMenuAllowed, getPortalMenuItems } from "./portal";
 import { IBaseNavigationMenuApiService } from "./types";
-
-const SYSTEM_LINKS_PERMISSION_MAP: Record<SystemLinks, string> = {
-  [SystemLinks.Settings]: USER_PERMISSIONS.CAN_CONFIGURE_APP,
-  [SystemLinks.Home]: META_USER_PERMISSIONS.NO_PERMISSION_REQUIRED,
-  [SystemLinks.Roles]: USER_PERMISSIONS.CAN_MANAGE_PERMISSIONS,
-  [SystemLinks.Users]: USER_PERMISSIONS.CAN_MANAGE_USERS,
-  [SystemLinks.Integrations]: USER_PERMISSIONS.CAN_MANAGE_INTEGRATIONS,
-  [SystemLinks.AllDashboards]: META_USER_PERMISSIONS.NO_PERMISSION_REQUIRED,
-};
 
 export class NavigationMenuApiService
   implements IApplicationService, IBaseNavigationMenuApiService
@@ -211,8 +203,7 @@ export class NavigationMenuApiService
       case NavigationMenuItemType.System:
         return canRoleDoThisSync(
           userRole,
-          SYSTEM_LINKS_PERMISSION_MAP[menuItem.link],
-          false,
+          SYSTEM_LINKS_CONFIG_MAP[menuItem.link as SystemLinks].permission,
           userPermissions
         );
 
@@ -223,7 +214,6 @@ export class NavigationMenuApiService
             menuItem.link,
             GranularEntityPermissions.Show
           ),
-          false,
           userPermissions
         );
       default:

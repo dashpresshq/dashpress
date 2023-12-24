@@ -100,8 +100,8 @@ export const canRoleDoThisAsync = async (
 export const canRoleDoThisSync = (
   userRole: string,
   permission: string,
-  checkGranular: boolean,
-  rolePermissions: string[]
+  rolePermissions: string[],
+  checkGranular = false
 ): boolean => {
   const systemRoleCheck = doSystemRoleCheck(userRole, permission);
 

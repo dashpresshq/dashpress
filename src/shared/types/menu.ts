@@ -14,7 +14,6 @@ export enum SystemLinks {
   Roles = "roles",
   Users = "users",
   Integrations = "integrations",
-  AllDashboards = "all-dashboard",
 }
 
 export interface INavigationMenuItem {

@@ -4,12 +4,12 @@ import {
   useAppConfiguration,
   useUpsertConfigurationMutation,
 } from "frontend/hooks/configuration/configuration.store";
-import { IFileUploadSettings } from "shared/types/file";
 import {
   FormSkeleton,
   FormSkeletonSchema,
 } from "frontend/design-system/components/Skeleton/Form";
 import { MAKE_APP_CONFIGURATION_CRUD_CONFIG } from "frontend/hooks/configuration/configuration.constant";
+import { AppConfigurationValueType } from "shared/configurations/constants";
 
 export function GeneralStorageSettings() {
   const fileUploadSettings = useAppConfiguration("file_upload_settings");
@@ -33,7 +33,7 @@ export function GeneralStorageSettings() {
       }
     >
       {/* TODO: documentation */}
-      <SchemaForm<IFileUploadSettings>
+      <SchemaForm<AppConfigurationValueType<"file_upload_settings">>
         initialValues={fileUploadSettings.data}
         fields={{
           filePathFormat: {

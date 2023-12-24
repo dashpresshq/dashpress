@@ -71,12 +71,12 @@ export function EntityDetailsView({
     entityPresentationScript.isLoading ||
     hiddenDetailsColumns.isLoading;
 
-  const viewState = useEntityViewStateMachine(
+  const viewState = useEntityViewStateMachine({
     isLoading,
     error,
-    "details",
-    entity
-  );
+    crudAction: "details",
+    entity,
+  });
 
   return (
     <ViewStateMachine

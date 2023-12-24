@@ -62,7 +62,10 @@ export function BaseEntityForm({
     entity
   );
 
-  const extendEntityFormConfig = usePortalExtendEntityFormConfig(crudAction);
+  const extendEntityFormConfig = usePortalExtendEntityFormConfig(
+    entity,
+    crudAction
+  );
 
   const entityFormExtension = useEntityConfiguration(
     "entity_form_extension",
@@ -90,7 +93,12 @@ export function BaseEntityForm({
     extendEntityFormConfig === "loading" ||
     additionalDataState?.isLoading;
 
-  const viewState = useEntityViewStateMachine(isLoading, error, crudAction);
+  const viewState = useEntityViewStateMachine({
+    isLoading,
+    error,
+    crudAction,
+    entity,
+  });
 
   const fields = filterOutHiddenScalarColumns(
     entityFields.data

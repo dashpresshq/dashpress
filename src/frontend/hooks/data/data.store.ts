@@ -138,7 +138,7 @@ export const useEntityDataReference = (entity: string, entityId: string) => {
   });
 };
 export function useEntityDataCreationMutation(entity: string) {
-  const entityCrudConfig = useEntityCrudConfig();
+  const entityCrudConfig = useEntityCrudConfig(entity);
   const router = useRouter();
   const apiMutateOptions = useWaitForResponseMutationOptions<
     Record<string, string>
@@ -164,7 +164,7 @@ export function useEntityDataUpdationMutation(
   entity: string,
   entityId: string
 ) {
-  const entityCrudConfig = useEntityCrudConfig();
+  const entityCrudConfig = useEntityCrudConfig(entity);
   const apiMutateOptions = useWaitForResponseMutationOptions<
     Record<string, string>
   >({
@@ -197,7 +197,7 @@ export function useEntityDataDeletionMutation(
   redirectTo?: string
 ) {
   const router = useRouter();
-  const entityCrudConfig = useEntityCrudConfig();
+  const entityCrudConfig = useEntityCrudConfig(entity);
   const apiMutateOptions = useWaitForResponseMutationOptions<
     Record<string, string>
   >({

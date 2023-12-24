@@ -42,7 +42,7 @@ export function EntityFieldsSelectionSettings({
 
   const entityFields = useEntityFields(entity);
 
-  const getEntityFieldLabels = useEntityFieldLabels();
+  const getEntityFieldLabels = useEntityFieldLabels(entity);
 
   const metaDataColumns = useAppConfiguration("metadata_columns");
 

@@ -34,10 +34,8 @@ import {
 
 const DOCS_TITLE = "CRUD Settings";
 
-function useEntityCrudView() {
-  const entity = useEntitySlug();
-
-  const entityCrudSettings = useEntityCrudSettings();
+function useEntityCrudView(entity: string) {
+  const entityCrudSettings = useEntityCrudSettings(entity);
   const entityFields = useEntityFields(entity);
 
   const hiddenTableColumns = useEntityConfiguration(
@@ -236,7 +234,9 @@ function useEntityCrudView() {
 export function EntityCrudSettings() {
   const tabFromUrl = useRouteParam("tab");
   const changeTabParam = useChangeRouterParam("tab");
-  const entityCrudView = useEntityCrudView();
+  const entity = useEntitySlug();
+
+  const entityCrudView = useEntityCrudView(entity);
   const [isDocOpen, setIsDocOpen] = useState(false);
 
   useSetPageDetails({

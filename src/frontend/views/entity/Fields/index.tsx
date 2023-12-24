@@ -53,7 +53,7 @@ export function EntityFieldsSettings() {
     entity
   );
 
-  const getEntityFieldLabels = useEntityFieldLabels();
+  const getEntityFieldLabels = useEntityFieldLabels(entity);
   const {
     isLoading: entityFieldTypesMapIsLoading,
     error: entityFieldTypesMapError,
@@ -64,9 +64,9 @@ export function EntityFieldsSettings() {
     error: entityValidationsMapError,
   } = useEntityConfiguration("entity_validations", entity);
 
-  const entityFieldTypes = useProcessedEntityFieldTypes();
-  const entityFieldValidations = useEntityFieldValidations();
-  const entityFieldSelections = useEntityFieldSelections();
+  const entityFieldTypes = useProcessedEntityFieldTypes(entity);
+  const entityFieldValidations = useEntityFieldValidations(entity);
+  const entityFieldSelections = useEntityFieldSelections(entity);
 
   const upsertEntityFieldsMapMutation = useUpsertConfigurationMutation(
     "entity_columns_labels",

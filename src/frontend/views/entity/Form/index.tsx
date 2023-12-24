@@ -19,9 +19,7 @@ import { ENTITY_CONFIGURATION_VIEW } from "../constants";
 import { ScriptForm } from "./ScriptForm";
 import { IEntityFormExtension } from "./types";
 
-function useEntityFormView() {
-  const entity = useEntitySlug();
-
+function useEntityFormView(entity: string) {
   const entityFormExtensionSettings = useEntityConfiguration(
     "entity_form_extension",
     entity
@@ -112,7 +110,9 @@ const DOCS_TITLE = "Form Scripts";
 const CRUD_CONFIG = MAKE_APP_CONFIGURATION_CRUD_CONFIG("entity_form_extension");
 
 export function EntityFormExtensionSettings() {
-  const entityFormView = useEntityFormView();
+  const entity = useEntitySlug();
+
+  const entityFormView = useEntityFormView(entity);
   const [isDocOpen, setIsDocOpen] = useState(false);
   useSetPageDetails({
     pageTitle: CRUD_CONFIG.TEXT_LANG.TITLE,

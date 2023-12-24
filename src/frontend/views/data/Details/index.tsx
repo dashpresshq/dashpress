@@ -16,9 +16,9 @@ import { useDetailsViewMenuItems, usePortalActionButtons } from "./portal";
 import { useEntityActionButtons } from "../useEntityActionButtons";
 
 export function EntityDetails() {
-  const entityCrudConfig = useEntityCrudConfig();
   const entityId = useEntityId();
   const entity = useEntitySlug();
+  const entityCrudConfig = useEntityCrudConfig(entity);
 
   const { backLink } = useNavigationStack();
 

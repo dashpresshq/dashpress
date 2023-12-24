@@ -21,17 +21,15 @@ import {
 import { useEntityConfiguration } from "../configuration/configuration.store";
 import { usePortalHiddenEntityColumns } from "./portal";
 
-export function useEntitySlug(overrideValue?: string) {
-  const routeParam = useRouteParam("entity");
-  return overrideValue || routeParam;
+export function useEntitySlug() {
+  return useRouteParam("entity");
 }
 
 export function useEntityId() {
   return useRouteParam("id");
 }
 
-export function useEntityDiction(paramEntity?: string) {
-  const entity = useEntitySlug(paramEntity);
+export function useEntityDiction(entity: string) {
   const entityDiction = useEntityConfiguration("entity_diction", entity);
   return {
     singular: entityDiction.data?.singular || userFriendlyCase(entity),
@@ -39,8 +37,8 @@ export function useEntityDiction(paramEntity?: string) {
   };
 }
 
-export function useEntityCrudConfig(paramEntity?: string) {
-  const { singular, plural } = useEntityDiction(paramEntity);
+export function useEntityCrudConfig(entity: string) {
+  const { singular, plural } = useEntityDiction(entity);
 
   return MAKE_CRUD_CONFIG({
     path: "N/A",
@@ -49,8 +47,7 @@ export function useEntityCrudConfig(paramEntity?: string) {
   });
 }
 
-export function useEntityFieldLabels(paramEntity?: string) {
-  const entity = useEntitySlug(paramEntity);
+export function useEntityFieldLabels(entity: string) {
   const entityFieldLabelsMap = useEntityConfiguration(
     "entity_columns_labels",
     entity
@@ -70,9 +67,8 @@ export function useEntityFieldLabels(paramEntity?: string) {
 }
 
 export function useProcessedEntityFieldTypes(
-  paramEntity?: string
+  entity: string
 ): Record<string, keyof typeof FIELD_TYPES_CONFIG_MAP> {
-  const entity = useEntitySlug(paramEntity);
   const entityFieldTypesMap = useEntityConfiguration(
     "entity_columns_types",
     entity
@@ -91,8 +87,7 @@ export function useProcessedEntityFieldTypes(
   return getEntityFieldTypes(entityFields.data, entityFieldTypesMap.data);
 }
 
-export function useEntityFieldValidations(paramEntity?: string) {
-  const entity = useEntitySlug(paramEntity);
+export function useEntityFieldValidations(entity: string) {
   const entityValidationsMap = useEntityConfiguration(
     "entity_validations",
     entity
@@ -134,10 +129,8 @@ export function useEntityFieldValidations(paramEntity?: string) {
 }
 
 export function useEntityFieldSelections(
-  paramEntity?: string
+  entity: string
 ): Record<string, IColorableSelection[]> {
-  const entity = useEntitySlug(paramEntity);
-
   const entitySelections = useEntityConfiguration("entity_selections", entity);
   const processedEntityFieldTypes = useProcessedEntityFieldTypes(entity);
   const entityFields = useEntityFields(entity);
@@ -158,9 +151,7 @@ export function useEntityFieldSelections(
   );
 }
 
-export function useEntityCrudSettings(paramEntity?: string) {
-  const entity = useEntitySlug(paramEntity);
-
+export function useEntityCrudSettings(entity: string) {
   return useEntityConfiguration("entity_crud_settings", entity, {
     create: false,
     details: false,
@@ -171,13 +162,9 @@ export function useEntityCrudSettings(paramEntity?: string) {
 
 export function useHiddenEntityColumns(
   crudKey: DataCrudKeys,
-  overrideEntity?: string
+  entity: string
 ): DataStateKeys<string[]> {
-  const entity = useEntitySlug();
-  const entityConfig = useEntityConfiguration(
-    CRUD_KEY_CONFIG[crudKey],
-    overrideEntity || entity
-  );
+  const entityConfig = useEntityConfiguration(CRUD_KEY_CONFIG[crudKey], entity);
 
   const portalHiddenEntities = usePortalHiddenEntityColumns(entity, crudKey);
 

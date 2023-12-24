@@ -17,12 +17,15 @@ export function EntityTable() {
   const entity = useEntitySlug();
   const entityCrudConfig = useEntityCrudConfig(entity);
 
-  const actionItems = useEntityActionMenuItems([
-    EntityActionTypes.Table,
-    EntityActionTypes.Diction,
-    EntityActionTypes.Labels,
-    EntityActionTypes.Form,
-  ]);
+  const actionItems = useEntityActionMenuItems(
+    [
+      EntityActionTypes.Table,
+      EntityActionTypes.Diction,
+      EntityActionTypes.Labels,
+      EntityActionTypes.Form,
+    ],
+    entity
+  );
 
   useSetPageDetails({
     pageTitle: entityCrudConfig.TEXT_LANG.TITLE,

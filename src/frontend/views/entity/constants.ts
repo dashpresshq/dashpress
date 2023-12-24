@@ -1,6 +1,5 @@
 import { useRouter } from "next/router";
 import { Icon, Save, Settings } from "react-feather";
-import { useEntitySlug } from "frontend/hooks/entity/entity.config";
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
 import { useUserHasPermission } from "frontend/hooks/auth/user.store";
 import { SLUG_LOADING_VALUE } from "frontend/lib/routing/constants";
@@ -101,9 +100,8 @@ const ENTITY_ACTION_BAG: Record<
 
 export const useEntityActionMenuItems = (
   actionTypes: EntityActionTypes[],
-  paramEntity?: string
+  slugEntity: string
 ) => {
-  const slugEntity = useEntitySlug(paramEntity);
   const router = useRouter();
 
   const userHasPermission = useUserHasPermission();

@@ -37,14 +37,14 @@ const runInitialValuesScript = (
 export function EntityCreate() {
   const routeParams = useRouteParams();
   const entity = useEntitySlug();
-  const entityCrudConfig = useEntityCrudConfig();
+  const entityCrudConfig = useEntityCrudConfig(entity);
 
   const entityDataCreationMutation = useEntityDataCreationMutation(entity);
 
-  const actionItems = useEntityActionMenuItems([
-    EntityActionTypes.Create,
-    EntityActionTypes.Form,
-  ]);
+  const actionItems = useEntityActionMenuItems(
+    [EntityActionTypes.Create, EntityActionTypes.Form],
+    entity
+  );
 
   useSetPageDetails({
     pageTitle: entityCrudConfig.TEXT_LANG.CREATE,
@@ -53,7 +53,7 @@ export function EntityCreate() {
     permission: META_USER_PERMISSIONS.NO_PERMISSION_REQUIRED,
   });
 
-  const hiddenCreateColumns = useHiddenEntityColumns("create");
+  const hiddenCreateColumns = useHiddenEntityColumns("create", entity);
 
   const { backLink } = useNavigationStack();
 

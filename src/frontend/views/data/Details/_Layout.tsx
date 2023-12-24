@@ -108,11 +108,12 @@ export function DetailsLayout({
 
   const { isLoading, error } = referenceFields;
 
-  const viewState = useEntityViewStateMachine(
-    isLoading || dataDetails.isLoading,
-    error || dataDetails.error,
-    "details"
-  );
+  const viewState = useEntityViewStateMachine({
+    isLoading: isLoading || dataDetails.isLoading,
+    error: error || dataDetails.error,
+    crudAction: "details",
+    entity,
+  });
 
   return (
     <AppLayout actionItems={menuItems} secondaryActionItems={actionItems}>

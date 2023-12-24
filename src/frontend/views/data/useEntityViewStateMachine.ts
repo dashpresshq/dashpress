@@ -1,22 +1,25 @@
 import { isRouterParamEnabled } from "frontend/hooks";
 import { useAppConfiguration } from "frontend/hooks/configuration/configuration.store";
-import { useEntitySlug } from "frontend/hooks/entity/entity.config";
 import { IEntityCrudSettings } from "shared/configurations";
 import { userFriendlyCase } from "shared/lib/strings/friendly-case";
 import { DataStates } from "frontend/lib/data/types";
 import { useCanUserPerformCrudAction } from "./useCanUserPerformCrudAction";
 
-export const useEntityViewStateMachine = (
-  isLoading: boolean,
-  error: unknown,
-  crudAction: keyof IEntityCrudSettings,
-  entityOverride?: string
-):
+export const useEntityViewStateMachine = ({
+  crudAction,
+  entity,
+  error,
+  isLoading,
+}: {
+  isLoading: boolean;
+  error: unknown;
+  crudAction: keyof IEntityCrudSettings;
+  entity: string;
+}):
   | { type: DataStates.Loading }
   | { type: DataStates.Loaded }
   | { type: DataStates.Error; message: unknown } => {
   const entitiesToHide = useAppConfiguration("disabled_entities");
-  const entity = useEntitySlug(entityOverride);
   const canUserPerformCrudAction = useCanUserPerformCrudAction(entity);
 
   if (isLoading || entitiesToHide.isLoading || !isRouterParamEnabled(entity)) {

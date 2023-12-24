@@ -29,7 +29,7 @@ const DOCS_TITLE = "Diction Settings";
 
 export function EntityDictionSettings() {
   const entity = useEntitySlug();
-  const entityDiction = useEntityDiction();
+  const entityDiction = useEntityDiction(entity);
   const upsertConfigurationMutation = useUpsertConfigurationMutation(
     "entity_diction",
     entity,

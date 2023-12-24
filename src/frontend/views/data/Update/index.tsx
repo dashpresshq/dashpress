@@ -28,17 +28,17 @@ export function EntityUpdate() {
 
   useDataUpdateActions({ entity, entityId });
 
-  const entityCrudConfig = useEntityCrudConfig();
+  const entityCrudConfig = useEntityCrudConfig(entity);
 
   const entityDataUpdationMutation = useEntityDataUpdationMutation(
     entity,
     entityId
   );
 
-  const actionItems = useEntityActionMenuItems([
-    EntityActionTypes.Update,
-    EntityActionTypes.Form,
-  ]);
+  const actionItems = useEntityActionMenuItems(
+    [EntityActionTypes.Update, EntityActionTypes.Form],
+    entity
+  );
 
   useSetPageDetails({
     pageTitle: entityCrudConfig.TEXT_LANG.EDIT,
@@ -49,7 +49,7 @@ export function EntityUpdate() {
 
   const userHasPermission = useUserHasPermission();
 
-  const hiddenUpdateColumns = useHiddenEntityColumns("update");
+  const hiddenUpdateColumns = useHiddenEntityColumns("update", entity);
 
   const dataDetails = useEntityDataDetails({ entity, entityId });
 

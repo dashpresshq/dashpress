@@ -9,7 +9,6 @@ import {
   useEntityCrudConfig,
   useEntityId,
   useEntitySlug,
-  useHiddenEntityColumns,
 } from "frontend/hooks/entity/entity.config";
 import {
   useEntityDataDetails,
@@ -21,6 +20,7 @@ import {
 } from "../../entity/constants";
 import { BaseEntityForm } from "../_BaseEntityForm";
 import { useDataUpdateActions } from "./portal";
+import { PortalEntityFormComponent } from "../portal";
 
 export function EntityUpdate() {
   const entityId = useEntityId();
@@ -49,8 +49,6 @@ export function EntityUpdate() {
 
   const userHasPermission = useUserHasPermission();
 
-  const hiddenUpdateColumns = useHiddenEntityColumns("update", entity);
-
   const dataDetails = useEntityDataDetails({ entity, entityId });
 
   const { backLink } = useNavigationStack();
@@ -73,12 +71,11 @@ export function EntityUpdate() {
             icon="save"
             buttonText={entityCrudConfig.FORM_LANG.UPDATE}
             onSubmit={entityDataUpdationMutation.mutateAsync}
-            hiddenColumns={hiddenUpdateColumns}
-            initialValues={dataDetails.data}
-            additionalDataState={dataDetails}
+            initialValuesData={dataDetails}
           />
         </SectionBox>
       </ContentLayout.Center>
+      <PortalEntityFormComponent />
     </AppLayout>
   );
 }

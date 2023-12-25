@@ -40,6 +40,7 @@ export const buildAppliedSchemaFormConfig = (
           entityFieldTypes[field] === "reference"
             ? {
                 listUrl: ENTITY_LIST_PATH(entityToOneReferenceFields[field]),
+                entity: entityToOneReferenceFields[field],
                 referenceUrl: (value: string) =>
                   ENTITY_REFERENCE_PATH({
                     entity: entityToOneReferenceFields[field],

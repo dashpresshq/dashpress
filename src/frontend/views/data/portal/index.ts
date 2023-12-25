@@ -1,1 +1,4 @@
-export { usePortalExtendEntityFormConfig } from "./main";
+export {
+  usePortalExtendEntityFormConfig,
+  PortalEntityFormComponent,
+} from "./main";

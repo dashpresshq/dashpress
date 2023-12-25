@@ -16,6 +16,7 @@ import {
   useEntityFieldSelections,
   useProcessedEntityFieldTypes,
   useEntityFieldValidations,
+  useHiddenEntityColumns,
 } from "frontend/hooks/entity/entity.config";
 import { useMemo } from "react";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
@@ -29,10 +30,8 @@ import { usePortalExtendEntityFormConfig } from "./portal";
 
 type IProps = {
   entity: string;
-  initialValues?: Record<string, unknown>;
+  initialValuesData?: DataStateKeys<Record<string, unknown>>;
   crudAction: "create" | "update";
-  hiddenColumns: DataStateKeys<string[]>;
-  additionalDataState?: DataStateKeys<unknown>;
   allOptional?: boolean;
   onSubmit: (data: Record<string, string>) => Promise<void>;
   resetForm?: true;
@@ -42,14 +41,12 @@ type IProps = {
 
 export function BaseEntityForm({
   entity,
-  initialValues,
+  initialValuesData,
   crudAction,
   allOptional,
   icon,
   resetForm,
   buttonText,
-  additionalDataState,
-  hiddenColumns,
   onSubmit,
 }: IProps) {
   const entityValidationsMap = useEntityFieldValidations(entity);
@@ -61,6 +58,7 @@ export function BaseEntityForm({
     "entity_columns_types",
     entity
   );
+  const hiddenColumns = useHiddenEntityColumns(crudAction, entity);
 
   const extendEntityFormConfig = usePortalExtendEntityFormConfig(
     entity,
@@ -78,7 +76,7 @@ export function BaseEntityForm({
   const error =
     entityFieldTypesMap.error ||
     hiddenColumns.error ||
-    additionalDataState?.error ||
+    initialValuesData?.error ||
     entityFormExtension.error ||
     entityToOneReferenceFields.error ||
     entityFields.error;
@@ -91,7 +89,7 @@ export function BaseEntityForm({
     entity === SLUG_LOADING_VALUE ||
     entityFieldTypesMap.isLoading ||
     extendEntityFormConfig === "loading" ||
-    additionalDataState?.isLoading;
+    initialValuesData?.isLoading;
 
   const viewState = useEntityViewStateMachine({
     isLoading,
@@ -114,6 +112,7 @@ export function BaseEntityForm({
   ).map(({ name }) => name);
 
   const fieldsInitialValues = useMemo(() => {
+    const initialValues = initialValuesData?.data;
     if (!initialValues) {
       return initialValues;
     }
@@ -128,7 +127,7 @@ export function BaseEntityForm({
         return [field, value];
       })
     );
-  }, [initialValues, hiddenColumns]);
+  }, [initialValuesData, hiddenColumns]);
 
   const formSchemaConfig = {
     entityToOneReferenceFields: entityToOneReferenceFields.data,
@@ -169,7 +168,7 @@ export function BaseEntityForm({
         icon={icon}
         initialValues={fieldsInitialValues}
         fields={
-          typeof extendEntityFormConfig === "string"
+          extendEntityFormConfig === "loading"
             ? formConfig
             : extendEntityFormConfig(formConfig)
         }

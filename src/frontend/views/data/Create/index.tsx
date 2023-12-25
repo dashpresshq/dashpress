@@ -7,32 +7,17 @@ import { AppLayout } from "frontend/_layouts/app";
 import {
   useEntityCrudConfig,
   useEntitySlug,
-  useHiddenEntityColumns,
 } from "frontend/hooks/entity/entity.config";
 import { useEntityDataCreationMutation } from "frontend/hooks/data/data.store";
 import { useRouteParams } from "frontend/lib/routing/useRouteParam";
 import { useEntityConfiguration } from "frontend/hooks/configuration/configuration.store";
-import { evalJavascriptStringSafely } from "frontend/lib/script-runner";
 import {
   EntityActionTypes,
   useEntityActionMenuItems,
 } from "../../entity/constants";
 import { BaseEntityForm } from "../_BaseEntityForm";
-
-const runInitialValuesScript = (
-  initialValuesScript: string
-): Record<string, unknown> => {
-  if (!initialValuesScript) {
-    return {};
-  }
-
-  const response = evalJavascriptStringSafely<{}>(initialValuesScript, {});
-
-  if (typeof response !== "object") {
-    return {};
-  }
-  return response;
-};
+import { runInitialValuesScript } from "./run-initial-scripts";
+import { PortalEntityFormComponent } from "../portal";
 
 export function EntityCreate() {
   const routeParams = useRouteParams();
@@ -52,8 +37,6 @@ export function EntityCreate() {
     /* This is handled more approprately at useEntityViewStateMachine */
     permission: META_USER_PERMISSIONS.NO_PERMISSION_REQUIRED,
   });
-
-  const hiddenCreateColumns = useHiddenEntityColumns("create", entity);
 
   const { backLink } = useNavigationStack();
 
@@ -79,12 +62,17 @@ export function EntityCreate() {
             crudAction="create"
             resetForm
             buttonText={entityCrudConfig.FORM_LANG.CREATE}
-            initialValues={{ ...scriptInitialValues, ...routeParams }}
+            initialValuesData={{
+              data: { ...scriptInitialValues, ...routeParams },
+              error: entityFormExtension.error,
+              isLoading: entityFormExtension.isLoading,
+              isRefetching: false,
+            }}
             onSubmit={entityDataCreationMutation.mutateAsync}
-            hiddenColumns={hiddenCreateColumns}
           />
         </SectionBox>
       </ContentLayout.Center>
+      <PortalEntityFormComponent />
     </AppLayout>
   );
 }

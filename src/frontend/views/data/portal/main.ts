@@ -16,3 +16,7 @@ export const usePortalExtendEntityFormConfig = (
     return formConfig;
   };
 };
+
+export function PortalEntityFormComponent() {
+  return null;
+}

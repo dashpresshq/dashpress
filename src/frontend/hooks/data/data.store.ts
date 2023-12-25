@@ -137,20 +137,32 @@ export const useEntityDataReference = (entity: string, entityId: string) => {
     defaultData: "",
   });
 };
-export function useEntityDataCreationMutation(entity: string) {
+export function useEntityDataCreationMutation(
+  entity: string,
+  option?: {
+    hideSuccessMessage?: boolean;
+    onSuccessActionWithFormData?: (id: string) => void;
+  }
+) {
   const entityCrudConfig = useEntityCrudConfig(entity);
   const router = useRouter();
   const apiMutateOptions = useWaitForResponseMutationOptions<
     Record<string, string>
   >({
     endpoints: DATA_MUTATION_ENDPOINTS_TO_CLEAR(entity),
-    smartSuccessMessage: ({ id }) => ({
-      message: entityCrudConfig.MUTATION_LANG.CREATE,
-      action: {
-        label: entityCrudConfig.MUTATION_LANG.VIEW_DETAILS,
-        action: () => router.push(NAVIGATION_LINKS.ENTITY.DETAILS(entity, id)),
-      },
-    }),
+    onSuccessActionWithFormData: ({ id }) => {
+      option?.onSuccessActionWithFormData(id);
+    },
+    smartSuccessMessage: option?.hideSuccessMessage
+      ? undefined
+      : ({ id }) => ({
+          message: entityCrudConfig.MUTATION_LANG.CREATE,
+          action: {
+            label: entityCrudConfig.MUTATION_LANG.VIEW_DETAILS,
+            action: () =>
+              router.push(NAVIGATION_LINKS.ENTITY.DETAILS(entity, id)),
+          },
+        }),
   });
 
   return useMutation(

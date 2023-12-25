@@ -14,6 +14,7 @@ import { FormFileInput } from "frontend/design-system/components/Form/FormFileIn
 import { FormSelectButton } from "frontend/design-system/components/Form/FormSelectButton";
 import { FormRichTextArea } from "frontend/design-system/components/Form/FormRichTextArea";
 import { FieldInputProps, FieldMetaState } from "react-final-form";
+import { ISharedFormInput } from "frontend/design-system/components/Form/_types";
 
 interface IProps {
   type: keyof typeof FIELD_TYPES_CONFIG_MAP;
@@ -28,6 +29,7 @@ interface IProps {
   label: string;
   placeholder?: string;
   description?: string;
+  rightActions?: ISharedFormInput["rightActions"];
 }
 
 export function RenderFormInput({
@@ -40,6 +42,7 @@ export function RenderFormInput({
   disabled,
   description,
   placeholder,
+  rightActions,
 }: IProps) {
   const formProps = {
     label,
@@ -47,6 +50,7 @@ export function RenderFormInput({
     disabled,
     placeholder: placeholder || label,
     description,
+    rightActions,
     ...renderProps,
   };
 

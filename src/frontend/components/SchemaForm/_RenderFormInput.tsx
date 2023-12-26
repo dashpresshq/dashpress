@@ -1,7 +1,4 @@
 import { sluggify } from "shared/lib/strings";
-import { ISchemaFormConfig } from "shared/form-schemas/types";
-import { IColorableSelection } from "shared/types/ui";
-import { FIELD_TYPES_CONFIG_MAP } from "shared/validations";
 import { FormInput } from "frontend/design-system/components/Form/FormInput";
 import { FormNumberInput } from "frontend/design-system/components/Form/FormNumberInput";
 import { FormSelect } from "frontend/design-system/components/Form/FormSelect";
@@ -13,37 +10,23 @@ import { FormTextArea } from "frontend/design-system/components/Form/FormTextAre
 import { FormFileInput } from "frontend/design-system/components/Form/FormFileInput";
 import { FormSelectButton } from "frontend/design-system/components/Form/FormSelectButton";
 import { FormRichTextArea } from "frontend/design-system/components/Form/FormRichTextArea";
-import { FieldInputProps, FieldMetaState } from "react-final-form";
-import { ISharedFormInput } from "frontend/design-system/components/Form/_types";
+import { useExtendRenderFormInputProps } from "frontend/views/data/portal";
+import { IRenderFormInputProps } from "./types";
 
-interface IProps {
-  type: keyof typeof FIELD_TYPES_CONFIG_MAP;
-  renderProps: {
-    input: FieldInputProps<any, HTMLElement>;
-    meta: FieldMetaState<any>;
-  };
-  apiSelections?: ISchemaFormConfig["apiSelections"];
-  entityFieldSelections?: IColorableSelection[];
-  required: boolean;
-  disabled: boolean;
-  label: string;
-  placeholder?: string;
-  description?: string;
-  rightActions?: ISharedFormInput["rightActions"];
-}
+export function RenderFormInput(props: IRenderFormInputProps) {
+  const {
+    renderProps,
+    label,
+    type,
+    entityFieldSelections = [],
+    apiSelections,
+    required,
+    disabled,
+    description,
+    placeholder,
+    rightActions,
+  } = useExtendRenderFormInputProps(props);
 
-export function RenderFormInput({
-  renderProps,
-  label,
-  type,
-  entityFieldSelections = [],
-  apiSelections,
-  required,
-  disabled,
-  description,
-  placeholder,
-  rightActions,
-}: IProps) {
   const formProps = {
     label,
     required,

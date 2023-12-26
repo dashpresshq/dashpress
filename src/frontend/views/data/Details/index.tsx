@@ -13,7 +13,7 @@ import { EntityDetailsView } from "./DetailsView";
 import { DetailsLayout, DETAILS_LAYOUT_KEY } from "./_Layout";
 import { DetailsCanvas } from "../Table/_WholeEntityTable/DetailsCanvas";
 import { useDetailsViewMenuItems, usePortalActionButtons } from "./portal";
-import { useEntityActionButtons } from "../useEntityActionButtons";
+import { useEntityActionButtons } from "../hooks/useEntityActionButtons";
 
 export function EntityDetails() {
   const entityId = useEntityId();

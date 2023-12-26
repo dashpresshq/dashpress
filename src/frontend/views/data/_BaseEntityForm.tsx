@@ -3,10 +3,7 @@ import {
   FormSkeletonSchema,
 } from "frontend/design-system/components/Skeleton/Form";
 import { SchemaForm } from "frontend/components/SchemaForm";
-import {
-  useAppConfiguration,
-  useEntityConfiguration,
-} from "frontend/hooks/configuration/configuration.store";
+import { useEntityConfiguration } from "frontend/hooks/configuration/configuration.store";
 import {
   useEntityFields,
   useEntityToOneReferenceFields,
@@ -24,9 +21,10 @@ import { DataStateKeys, DataStates } from "frontend/lib/data/types";
 import { SLUG_LOADING_VALUE } from "frontend/lib/routing/constants";
 import { ButtonIconTypes } from "frontend/design-system/components/Button/constants";
 import { buildAppliedSchemaFormConfig } from "./buildAppliedSchemaFormConfig";
-import { useEntityViewStateMachine } from "./useEntityViewStateMachine";
+import { useEntityViewStateMachine } from "./hooks/useEntityViewStateMachine";
 import { filterOutHiddenScalarColumns } from "./utils";
 import { usePortalExtendEntityFormConfig } from "./portal";
+import { useIsEntityFieldMutatable } from "./hooks/useIsEntityFieldMutatable";
 
 type IProps = {
   entity: string;
@@ -65,13 +63,13 @@ export function BaseEntityForm({
     crudAction
   );
 
+  const isEntityFieldMutatable = useIsEntityFieldMutatable(crudAction);
+
   const entityFormExtension = useEntityConfiguration(
     "entity_form_extension",
     entity
   );
   const entityToOneReferenceFields = useEntityToOneReferenceFields(entity);
-
-  const metaDataColumns = useAppConfiguration("metadata_columns");
 
   const error =
     entityFieldTypesMap.error ||
@@ -99,15 +97,7 @@ export function BaseEntityForm({
   });
 
   const fields = filterOutHiddenScalarColumns(
-    entityFields.data
-      .filter(({ isId }) => !isId)
-      .filter(
-        ({ name }) =>
-          ![
-            metaDataColumns.data.createdAt,
-            metaDataColumns.data.updatedAt,
-          ].includes(name)
-      ),
+    entityFields.data.filter(isEntityFieldMutatable),
     hiddenColumns.data
   ).map(({ name }) => name);
 

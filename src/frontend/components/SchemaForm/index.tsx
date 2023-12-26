@@ -115,7 +115,8 @@ export function SchemaForm<T extends Record<string, unknown>>({
                             (validation) =>
                               validation.validationType === "required"
                           )}
-                          rightActions={bag?.rightActions?.(form)}
+                          form={form}
+                          rightActions={bag?.rightActions}
                           placeholder={bag.placeholder}
                           description={bag.description}
                           apiSelections={bag.apiSelections}

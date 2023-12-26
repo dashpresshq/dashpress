@@ -26,7 +26,7 @@ import { ENTITY_DETAILS_VIEW_KEY } from "./constants";
 import { EntityDetailsView } from "./DetailsView";
 import { DetailsLayout } from "./_Layout";
 import { DetailsCanvas } from "../Table/_WholeEntityTable/DetailsCanvas";
-import { useEntityActionButtons } from "../useEntityActionButtons";
+import { useEntityActionButtons } from "../hooks/useEntityActionButtons";
 import { usePortalActionButtons } from "./portal";
 
 export function EntityRelationDetails() {

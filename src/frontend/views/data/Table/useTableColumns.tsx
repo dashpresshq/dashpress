@@ -26,7 +26,7 @@ import { filterOutHiddenScalarColumns } from "../utils";
 import { viewSpecialDataTypes } from "../viewSpecialDataTypes";
 import { usePortalTableColumns } from "./portal";
 import { evalutePresentationScript } from "../evaluatePresentationScript";
-import { useEntityActionButtons } from "../useEntityActionButtons";
+import { useEntityActionButtons } from "../hooks/useEntityActionButtons";
 import { usePortalActionButtons } from "../Details/portal";
 
 export const ACTIONS_ACCESSOR = "__actions__";

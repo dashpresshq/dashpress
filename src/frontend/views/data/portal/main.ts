@@ -1,3 +1,4 @@
+import { IRenderFormInputProps } from "frontend/components/SchemaForm/types";
 import { IAppliedSchemaFormConfig } from "shared/form-schemas/types";
 import { noop } from "shared/lib/noop";
 
@@ -20,3 +21,7 @@ export const usePortalExtendEntityFormConfig = (
 export function PortalEntityFormComponent() {
   return null;
 }
+
+export const useExtendRenderFormInputProps = (props: IRenderFormInputProps) => {
+  return props;
+};

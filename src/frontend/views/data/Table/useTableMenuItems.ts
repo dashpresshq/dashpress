@@ -5,7 +5,7 @@ import { Plus } from "react-feather";
 import { SLUG_LOADING_VALUE } from "frontend/lib/routing/constants";
 import { IDropDownMenuItem } from "frontend/design-system/components/DropdownMenu";
 import { usePluginTableMenuItems } from "./portal";
-import { useCanUserPerformCrudAction } from "../useCanUserPerformCrudAction";
+import { useCanUserPerformCrudAction } from "../hooks/useCanUserPerformCrudAction";
 
 export const useTableMenuItems = (
   entity: string,

@@ -22,7 +22,7 @@ import {
 import { DataStates } from "frontend/lib/data/types";
 import styled from "styled-components";
 import { filterOutHiddenScalarColumns } from "../utils";
-import { useEntityViewStateMachine } from "../useEntityViewStateMachine";
+import { useEntityViewStateMachine } from "../hooks/useEntityViewStateMachine";
 import { viewSpecialDataTypes } from "../viewSpecialDataTypes";
 import { evalutePresentationScript } from "../evaluatePresentationScript";
 import { PreDataDetails } from "./portal";

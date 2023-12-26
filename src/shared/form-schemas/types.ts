@@ -1,4 +1,3 @@
-import { FormApi } from "final-form";
 import { ISharedFormInput } from "frontend/design-system/components/Form/_types";
 import { GridSpanSizes, IColorableSelection } from "shared/types/ui";
 import { FIELD_TYPES_CONFIG_MAP } from "shared/validations";
@@ -16,7 +15,7 @@ export interface ISchemaFormConfig {
   placeholder?: string;
   description?: string;
   span?: GridSpanSizes;
-  rightActions?: (form: FormApi) => ISharedFormInput["rightActions"];
+  rightActions?: ISharedFormInput["rightActions"];
   validations: IFieldValidationItem[];
 }
 

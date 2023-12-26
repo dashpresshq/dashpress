@@ -16,7 +16,7 @@ import { ListSkeleton } from "frontend/design-system/components/Skeleton/List";
 import { SectionListItem } from "frontend/design-system/components/Section/SectionList";
 import { IDropDownMenuItem } from "frontend/design-system/components/DropdownMenu";
 import { DataStates } from "frontend/lib/data/types";
-import { useEntityViewStateMachine } from "../useEntityViewStateMachine";
+import { useEntityViewStateMachine } from "../hooks/useEntityViewStateMachine";
 import { getEntitiesRelationsCount } from "./utils";
 import {
   EntityActionTypes,

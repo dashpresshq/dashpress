@@ -54,6 +54,11 @@ const navigationItems: INavigationMenuItem[] = [
 ];
 
 describe("<RenderNavigation />", () => {
+  const useRouter = jest.spyOn(require("next/router"), "useRouter");
+  useRouter.mockImplementation(() => ({
+    isReady: true,
+  }));
+
   server.use(
     rest.get(BASE_TEST_URL("/api/menu"), async (_, res, ctx) => {
       return res(ctx.json(navigationItems));

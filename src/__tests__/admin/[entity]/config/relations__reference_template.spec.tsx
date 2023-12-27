@@ -16,6 +16,7 @@ describe("pages/admin/[entity]/config/relations", () => {
       query: {
         entity: "entity-1",
       },
+      isReady: true,
     }));
   });
   describe("Reference Template", () => {

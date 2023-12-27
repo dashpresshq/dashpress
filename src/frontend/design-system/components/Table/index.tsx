@@ -7,7 +7,7 @@ import {
 import styled, { css } from "styled-components";
 import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
 import { DEFAULT_TABLE_STATE } from "./constants";
-import { IProps } from "./types";
+import { ITableProps } from "./types";
 import { getPageCount } from "./utils";
 import { TablePagination } from "./_Pagination";
 import { ErrorAlert } from "../Alert";
@@ -57,7 +57,7 @@ export function Table<T extends unknown>({
   lean,
   border,
   emptyMessage,
-}: IProps<T>) {
+}: ITableProps<T>) {
   const {
     data = {
       data: [],

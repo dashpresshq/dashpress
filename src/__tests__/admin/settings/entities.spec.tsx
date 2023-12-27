@@ -14,6 +14,7 @@ describe("pages/admin/settings/entities", () => {
     useRouter.mockImplementation(() => ({
       asPath: "/",
       query: {},
+      isReady: true,
     }));
   });
 

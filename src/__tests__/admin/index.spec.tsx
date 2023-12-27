@@ -15,6 +15,7 @@ const useRouter = jest.spyOn(require("next/router"), "useRouter");
 useRouter.mockImplementation(() => ({
   query: {},
   asPath: "/",
+  isReady: true,
 }));
 
 // it("should change relative time", async () => {
@@ -168,6 +169,7 @@ describe("pages/admin", () => {
         replace: replaceMock,
         query: {},
         asPath: "/",
+        isReady: true,
       }));
 
       render(

@@ -16,6 +16,7 @@ const useRouter = jest.spyOn(require("next/router"), "useRouter");
 useRouter.mockImplementation(() => ({
   asPath: "/",
   query: {},
+  isReady: true,
 }));
 
 jest.mock("react-easy-sort", () => ({

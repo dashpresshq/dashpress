@@ -17,6 +17,7 @@ describe("pages/admin/[entity]/config/presentation", () => {
     query: {
       entity: "entity-1",
     },
+    isReady: true,
   }));
 
   it("should show current section value", async () => {

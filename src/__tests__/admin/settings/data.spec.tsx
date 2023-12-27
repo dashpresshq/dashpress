@@ -13,6 +13,7 @@ describe("pages/admin/settings/data", () => {
     const useRouter = jest.spyOn(require("next/router"), "useRouter");
     useRouter.mockImplementation(() => ({
       asPath: "/",
+      isReady: true,
     }));
   });
 

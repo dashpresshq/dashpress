@@ -17,6 +17,7 @@ describe("pages/admin/[entity]/config/form", () => {
     query: {
       entity: "entity-1",
     },
+    isReady: true,
   }));
 
   describe.each([

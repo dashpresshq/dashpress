@@ -17,6 +17,7 @@ describe("pages/users/create", () => {
     useRouter.mockImplementation(() => ({
       asPath: "/",
       push: pushMock,
+      isReady: true,
     }));
     render(
       <ApplicationRoot>

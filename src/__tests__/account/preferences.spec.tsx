@@ -13,6 +13,7 @@ describe("pages/account/preferences", () => {
     const useRouter = jest.spyOn(require("next/router"), "useRouter");
     useRouter.mockImplementation(() => ({
       asPath: "/",
+      isReady: true,
     }));
   });
 

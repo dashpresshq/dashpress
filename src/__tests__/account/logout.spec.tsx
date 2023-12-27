@@ -18,6 +18,7 @@ describe("pages/account/logout", () => {
   useRouter.mockImplementation(() => ({
     replace: replaceMock,
     asPath: "/",
+    isReady: true,
   }));
 
   it("should log user out", async () => {

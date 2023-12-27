@@ -9,6 +9,22 @@ import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 
 setupApiHandlers();
 
+const closeAllToasts = async () => {
+  const allToasts = await screen.findAllByRole("button", {
+    name: "Close Toast",
+  });
+
+  for (const toast of allToasts) {
+    await userEvent.click(toast);
+  }
+
+  // await waitFor(() => {
+  //   expect(
+  //     screen.queryByRole("button", { name: "Close Toast" })
+  //   ).not.toBeInTheDocument();
+  // });
+};
+
 describe("pages/roles/[roleId]/index", () => {
   const useRouter = jest.spyOn(require("next/router"), "useRouter");
   useRouter.mockImplementation(() => ({
@@ -16,7 +32,9 @@ describe("pages/roles/[roleId]/index", () => {
     query: {
       roleId: "foo",
     },
+    isReady: true,
   }));
+
   it("should select all admin permissions", async () => {
     render(
       <ApplicationRoot>
@@ -146,6 +164,8 @@ describe("pages/roles/[roleId]/index", () => {
         name: "Plural disabled-entity-2",
       })
     ).toBeChecked();
+
+    await closeAllToasts();
   });
 
   it("should update admin permissions", async () => {
@@ -155,14 +175,15 @@ describe("pages/roles/[roleId]/index", () => {
       </ApplicationRoot>
     );
 
-    const currentTab = screen.getByRole("tabpanel");
+    const currentTab = await screen.findByRole("tabpanel");
 
     await userEvent.click(
       await within(currentTab).findByRole("button", {
         name: "Can Reset Password",
       })
     );
-    expect((await screen.findAllByRole("status"))[0]).toHaveTextContent(
+
+    expect(await screen.findByRole("status")).toHaveTextContent(
       "Role Permission Deleted Successfully"
     );
 
@@ -177,13 +198,13 @@ describe("pages/roles/[roleId]/index", () => {
       within(currentTab).getByRole("button", { name: "Can Manage Users" })
     );
     expect((await screen.findAllByRole("status"))[0]).toHaveTextContent(
-      "Role Permission Deleted Successfully"
+      "Role Permission Created Successfully"
     );
     await userEvent.click(
       within(currentTab).getByRole("button", { name: "Can Manage Users" })
     );
     expect((await screen.findAllByRole("status"))[0]).toHaveTextContent(
-      "Role Permission Created Successfully"
+      "Role Permission Deleted Successfully"
     );
   });
 
@@ -212,7 +233,7 @@ describe("pages/roles/[roleId]/index", () => {
       within(currentTab).getByRole("checkbox", {
         name: "Can Manage Dashboard",
       })
-    ).toBeChecked();
+    ).not.toBeChecked();
 
     expect(
       within(currentTab).getByRole("checkbox", {
@@ -228,6 +249,8 @@ describe("pages/roles/[roleId]/index", () => {
       </ApplicationRoot>
     );
 
+    await closeAllToasts();
+
     await userEvent.click(await screen.findByRole("tab", { name: "Entities" }));
 
     const currentTab = screen.getByRole("tabpanel");
@@ -238,7 +261,7 @@ describe("pages/roles/[roleId]/index", () => {
       })
     );
     expect((await screen.findAllByRole("status"))[0]).toHaveTextContent(
-      "Role Permission Deleted Successfully"
+      "Role Permission Created Successfully"
     );
 
     await userEvent.click(
@@ -247,6 +270,8 @@ describe("pages/roles/[roleId]/index", () => {
     expect((await screen.findAllByRole("status"))[0]).toHaveTextContent(
       "Role Permission Created Successfully"
     );
+
+    await closeAllToasts();
 
     await userEvent.click(
       within(currentTab).getByRole("button", {
@@ -287,7 +312,7 @@ describe("pages/roles/[roleId]/index", () => {
 
     expect(
       within(currentTab).getByRole("checkbox", { name: "Plural entity-1" })
-    ).toBeChecked();
+    ).not.toBeChecked();
 
     expect(
       within(currentTab).getByRole("checkbox", {

@@ -24,6 +24,7 @@ describe("pages/dashboard/[dashboardId]/widget/create", () => {
       query: {
         dashboardId: "test-dashboard-id",
       },
+      isReady: true,
     }));
   });
 

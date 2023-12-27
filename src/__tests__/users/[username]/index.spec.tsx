@@ -20,6 +20,7 @@ describe("pages/users/[username]/index", () => {
         query: {
           username: "root",
         },
+        isReady: true,
       }));
       render(
         <ApplicationRoot>
@@ -40,6 +41,7 @@ describe("pages/users/[username]/index", () => {
         query: {
           username: "foo",
         },
+        isReady: true,
       }));
       const { container } = render(
         <ApplicationRoot>
@@ -65,6 +67,7 @@ describe("pages/users/[username]/index", () => {
         query: {
           username: "foo",
         },
+        isReady: true,
       }));
       render(
         <ApplicationRoot>
@@ -99,6 +102,7 @@ describe("pages/users/[username]/index", () => {
         query: {
           username: "foo",
         },
+        isReady: true,
       }));
       const { container } = render(
         <ApplicationRoot>
@@ -126,6 +130,7 @@ describe("pages/users/[username]/index", () => {
         query: {
           username: "root",
         },
+        isReady: true,
       }));
       render(
         <ApplicationRoot>
@@ -147,6 +152,7 @@ describe("pages/users/[username]/index", () => {
         query: {
           username: "foo",
         },
+        isReady: true,
       }));
       render(
         <ApplicationRoot>

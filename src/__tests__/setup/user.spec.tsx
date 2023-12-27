@@ -23,6 +23,7 @@ describe("pages/setup/user", () => {
     useRouter.mockImplementation(() => ({
       query: {},
       push: pushMock,
+      isReady: true,
     }));
 
     server.use(

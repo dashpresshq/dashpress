@@ -17,6 +17,7 @@ describe("pages/admin/[entity]/config/relations", () => {
         entity: "entity-1",
         tab: "Selection",
       },
+      isReady: true,
     }));
   });
   describe("Selection", () => {

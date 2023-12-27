@@ -36,6 +36,7 @@ describe("pages/admin/[entity]/config/crud", () => {
       query: {
         entity: "entity-1",
       },
+      isReady: true,
     }));
     render(
       <ApplicationRoot>
@@ -74,6 +75,7 @@ describe("pages/admin/[entity]/config/crud", () => {
           entity: "entity-1",
           tab,
         },
+        isReady: true,
       }));
     });
 

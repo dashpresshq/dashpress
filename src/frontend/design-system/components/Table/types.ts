@@ -19,7 +19,7 @@ export interface ITableColumn {
   }) => ReactNode;
 }
 
-export interface IProps<T> {
+export interface ITableProps<T> {
   columns: ITableColumn[];
   tableData: Pick<
     UseQueryResult<PaginatedData<Record<string, unknown>>, unknown>,

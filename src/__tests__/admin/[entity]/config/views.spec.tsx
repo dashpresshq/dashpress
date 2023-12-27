@@ -16,6 +16,7 @@ describe("pages/admin/[entity]/config/views", () => {
       query: {
         entity: "entity-1",
       },
+      isReady: true,
     }));
   });
 

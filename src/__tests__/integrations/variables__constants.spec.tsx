@@ -17,6 +17,7 @@ describe("pages/integrations/variables => constants", () => {
       query: {
         key: "foo",
       },
+      isReady: true,
     }));
   });
 

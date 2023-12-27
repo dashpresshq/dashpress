@@ -16,6 +16,7 @@ describe("pages/admin/[entity]/[id]/index", () => {
         entity: "entity-1",
         id: "2",
       },
+      isReady: true,
     }));
   });
 

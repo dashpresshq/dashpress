@@ -13,6 +13,7 @@ describe("pages/users", () => {
   it("should render components", async () => {
     useRouter.mockImplementation(() => ({
       asPath: "/",
+      isReady: true,
     }));
     // eslint-disable-next-line react/jsx-no-bind
     render(<MyApp Component={Foo} pageProps={{ title: "Hello" }} />);

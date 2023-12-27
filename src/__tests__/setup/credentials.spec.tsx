@@ -54,6 +54,7 @@ describe("pages/setup/credentials", () => {
     const replaceMock = jest.fn();
     useRouter.mockImplementation(() => ({
       replace: replaceMock,
+      isReady: true,
     }));
 
     const { container } = render(
@@ -78,6 +79,7 @@ describe("pages/setup/credentials", () => {
     const replaceMock = jest.fn();
     useRouter.mockImplementation(() => ({
       replace: replaceMock,
+      isReady: true,
     }));
 
     const { container } = render(
@@ -142,6 +144,7 @@ describe("pages/setup/credentials", () => {
       const replaceMock = jest.fn();
       useRouter.mockImplementation(() => ({
         replace: replaceMock,
+        isReady: true,
       }));
 
       const { container } = render(
@@ -185,6 +188,7 @@ describe("pages/setup/credentials", () => {
       const replaceMock = jest.fn();
       useRouter.mockImplementation(() => ({
         replace: replaceMock,
+        isReady: true,
       }));
 
       const { container } = render(
@@ -224,6 +228,7 @@ describe("pages/setup/credentials", () => {
       const replaceMock = jest.fn();
       useRouter.mockImplementation(() => ({
         replace: replaceMock,
+        isReady: true,
       }));
 
       const { container } = render(

@@ -15,6 +15,7 @@ describe("pages/admin/[entity]/update", () => {
       query: {
         entity: "entity-1",
       },
+      isReady: true,
     }));
   });
 

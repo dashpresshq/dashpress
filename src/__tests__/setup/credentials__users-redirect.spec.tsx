@@ -27,6 +27,7 @@ describe("pages/setup/credentials", () => {
     const replaceMock = jest.fn();
     useRouter.mockImplementation(() => ({
       replace: replaceMock,
+      isReady: true,
     }));
 
     server.use(

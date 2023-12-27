@@ -14,6 +14,7 @@ describe("pages/admin/settings/menu", () => {
     useRouter.mockImplementation(() => ({
       asPath: "/",
       query: {},
+      isReady: true,
     }));
   });
 

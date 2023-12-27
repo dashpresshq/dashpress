@@ -27,6 +27,7 @@ describe("pages/integrations/variables => credentials", () => {
       query: {
         key: "foo",
       },
+      isReady: true,
     }));
   });
 

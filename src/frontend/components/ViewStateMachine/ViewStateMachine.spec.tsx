@@ -4,6 +4,11 @@ import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 import { ViewStateMachine } from ".";
 
 describe("<ViewStateMachine />", () => {
+  const useRouter = jest.spyOn(require("next/router"), "useRouter");
+  useRouter.mockImplementation(() => ({
+    isReady: true,
+  }));
+
   it("should render only loader when loading", async () => {
     render(
       <ApplicationRoot>

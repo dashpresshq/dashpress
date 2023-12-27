@@ -31,6 +31,7 @@ describe("pages/integrations/variables => credentials -- non admin", () => {
       query: {
         key: "foo",
       },
+      isReady: true,
     }));
 
     const CUSTOM_ROLE_USER: IAuthenticatedUserBag = {

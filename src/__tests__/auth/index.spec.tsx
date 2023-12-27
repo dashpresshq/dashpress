@@ -21,6 +21,7 @@ describe("pages/auth", () => {
     useRouter.mockImplementation(() => ({
       replace: replaceMock,
       query: {},
+      isReady: true,
     }));
 
     render(
@@ -42,6 +43,7 @@ describe("pages/auth", () => {
     useRouter.mockImplementation(() => ({
       push: pushMock,
       query: {},
+      isReady: true,
     }));
 
     render(
@@ -78,6 +80,7 @@ describe("pages/auth", () => {
       replace: () => {},
       push: pushMock,
       query: {},
+      isReady: true,
     }));
 
     render(

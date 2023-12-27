@@ -15,6 +15,7 @@ describe("pages/users", () => {
   it("should list users with system profile", async () => {
     useRouter.mockImplementation(() => ({
       asPath: "/",
+      isReady: true,
     }));
     render(
       <ApplicationRoot>
@@ -48,6 +49,7 @@ describe("pages/users", () => {
     useRouter.mockImplementation(() => ({
       asPath: "/",
       push: pushMock,
+      isReady: true,
     }));
 
     render(
@@ -67,6 +69,7 @@ describe("pages/users", () => {
     useRouter.mockImplementation(() => ({
       asPath: "/",
       push: pushMock,
+      isReady: true,
     }));
 
     render(
@@ -90,6 +93,7 @@ describe("pages/users", () => {
       asPath: "/",
       push: pushMock,
       replace: replaceMock,
+      isReady: true,
     }));
 
     render(

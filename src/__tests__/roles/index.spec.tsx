@@ -15,6 +15,7 @@ describe("pages/roles", () => {
   it("should list roles", async () => {
     useRouter.mockImplementation(() => ({
       asPath: "/",
+      isReady: true,
     }));
     render(
       <ApplicationRoot>
@@ -43,6 +44,7 @@ describe("pages/roles", () => {
     useRouter.mockImplementation(() => ({
       asPath: "/",
       push: pushMock,
+      isReady: true,
     }));
 
     render(
@@ -62,6 +64,7 @@ describe("pages/roles", () => {
     useRouter.mockImplementation(() => ({
       asPath: "/",
       push: pushMock,
+      isReady: true,
     }));
 
     render(
@@ -83,6 +86,7 @@ describe("pages/roles", () => {
       asPath: "/",
       push: pushMock,
       replace: replaceMock,
+      isReady: true,
     }));
 
     render(

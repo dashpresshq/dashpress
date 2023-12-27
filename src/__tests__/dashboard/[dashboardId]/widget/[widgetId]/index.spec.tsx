@@ -19,6 +19,7 @@ describe("pages/dashboard/[dashboardId]/widget/[widgetId]/index", () => {
         dashboardId: "test-dashboard-id",
         widgetId: "summary_card_id_1",
       },
+      isReady: true,
     }));
 
     render(
@@ -73,6 +74,7 @@ describe("pages/dashboard/[dashboardId]/widget/[widgetId]/index", () => {
         dashboardId: "test-dashboard-id",
         widgetId: "table_id_1",
       },
+      isReady: true,
     }));
 
     render(
@@ -124,6 +126,7 @@ describe("pages/dashboard/[dashboardId]/widget/[widgetId]/index", () => {
         dashboardId: "test-dashboard-id",
         widgetId: "invalid-widget-id",
       },
+      isReady: true,
     }));
 
     render(

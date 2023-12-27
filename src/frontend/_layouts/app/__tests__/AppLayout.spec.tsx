@@ -19,6 +19,7 @@ describe("AppLayout", () => {
       replace: replaceMock,
       push: pushMock,
       asPath: "/",
+      isReady: true,
     }));
   });
 

@@ -1,4 +1,3 @@
-import { isRouterParamEnabled } from "frontend/hooks";
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
 import { useRouter } from "next/router";
 import { useMutation } from "react-query";
@@ -34,7 +33,6 @@ export function useUserDetails(username: string) {
         role: "",
         username: "",
       },
-      enabled: isRouterParamEnabled(username),
       errorMessage: ADMIN_USERS_CRUD_CONFIG.TEXT_LANG.NOT_FOUND,
     }
   );

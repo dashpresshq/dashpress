@@ -15,9 +15,14 @@ import { EntityDataTable } from "./EntityDataTable";
 interface IProps {
   entity: string;
   persistFilters?: FieldQueryFilter[];
+  skipColumns?: string[];
 }
 
-export function WholeEntityTable({ entity, persistFilters = [] }: IProps) {
+export function WholeEntityTable({
+  entity,
+  persistFilters = [],
+  skipColumns,
+}: IProps) {
   const tabFromUrl = useRouteParam("tab");
   const changeTabParam = useChangeRouterParam("tab");
   const portalTableTabs = usePortalTableTabs(entity);
@@ -67,6 +72,7 @@ export function WholeEntityTable({ entity, persistFilters = [] }: IProps) {
                       tabKey={title}
                       persitentFilters={persistFilters}
                       defaultTableState={dataState}
+                      skipColumns={skipColumns}
                     />
                   ),
                   label: title.trim(),
@@ -78,6 +84,7 @@ export function WholeEntityTable({ entity, persistFilters = [] }: IProps) {
             <EntityDataTable
               entity={entity}
               persitentFilters={persistFilters}
+              skipColumns={skipColumns}
             />
           )}
         </ViewStateMachine>

@@ -2,7 +2,6 @@ import { useEntityCrudConfig } from "frontend/hooks/entity/entity.config";
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
 import { useRouter } from "next/router";
 import { Plus } from "react-feather";
-import { SLUG_LOADING_VALUE } from "frontend/lib/routing/constants";
 import { IDropDownMenuItem } from "frontend/design-system/components/DropdownMenu";
 import { usePluginTableMenuItems } from "./portal";
 import { useCanUserPerformCrudAction } from "../hooks/useCanUserPerformCrudAction";
@@ -20,7 +19,7 @@ export const useTableMenuItems = (
 
   const pluginTableMenuItems = usePluginTableMenuItems(entity, reference);
 
-  if (entity === SLUG_LOADING_VALUE) {
+  if (!router.isReady) {
     return [];
   }
 

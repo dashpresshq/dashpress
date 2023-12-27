@@ -3,7 +3,6 @@ import styled, { css } from "styled-components";
 import RBTab from "react-bootstrap/Tab";
 import RBTabs from "react-bootstrap/Tabs";
 import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
-import { SLUG_LOADING_VALUE } from "frontend/lib/routing/constants";
 
 const Root = styled.div<{ $padContent: boolean }>`
   .nav {
@@ -82,7 +81,7 @@ export function Tabs({
   );
 
   useEffect(() => {
-    if (currentTab && currentTab !== SLUG_LOADING_VALUE) {
+    if (currentTab) {
       setActiveTab(currentTab);
     } else {
       setActiveTab(contents[0].label);

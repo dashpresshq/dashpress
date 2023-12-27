@@ -1,4 +1,5 @@
 import { useQueries, UseQueryResult } from "react-query";
+import { useRouter } from "next/router";
 import { makeGetRequest } from "../makeRequest";
 import { getQueryCachekey } from "../constants/getQueryCacheKey";
 
@@ -20,11 +21,14 @@ export function useApiQueries<T, P>({
   UseQueryResult<Record<string, UseQueryResult<P, unknown>>, unknown>,
   "data" | "error" | "isLoading"
 > {
+  const router = useRouter();
+
   const queryResults = useQueries(
     input.map((inputItem) => ({
       placeholderData: placeholderDataFn
         ? placeholderDataFn(inputItem[accessor])
         : undefined,
+      enabled: router.isReady,
       queryKey: getQueryCachekey(pathFn(inputItem[accessor])),
       queryFn: async () =>
         dataTransformer(

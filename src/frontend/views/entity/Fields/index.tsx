@@ -6,7 +6,6 @@ import {
   useEntityFieldValidations,
   useEntitySlug,
 } from "frontend/hooks/entity/entity.config";
-import { SLUG_LOADING_VALUE } from "frontend/lib/routing/constants";
 import {
   ENTITY_FIELDS_ENDPOINT,
   useEntityFieldLists,
@@ -104,7 +103,6 @@ export function EntityFieldsSettings() {
 
   const sharedLoadingState =
     entityFieldLists.isLoading ||
-    entity === SLUG_LOADING_VALUE ||
     entityFieldLabelsMap.isLoading ||
     entityValidationsMapIsLoading ||
     entityFieldTypesMapIsLoading;

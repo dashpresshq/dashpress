@@ -9,7 +9,6 @@ import { IDataTableProps } from "../types";
 
 interface IProps extends IDataTableProps {
   columns: ITableColumn[];
-  enabled: boolean;
   dataEndpoint: string;
   stateStorageKey: string;
   crudConfig: ICrudConfig;
@@ -17,10 +16,10 @@ interface IProps extends IDataTableProps {
 
 export function BaseDataTable({
   columns,
-  enabled,
   stateStorageKey,
   dataEndpoint,
   crudConfig,
+  skipColumns = [],
   border,
   persitentFilters = [],
   defaultTableState,
@@ -29,7 +28,6 @@ export function BaseDataTable({
     useTableState(stateStorageKey, persitentFilters, defaultTableState);
 
   const tableData = usePaginatedData(dataEndpoint, currentState, {
-    enabled,
     defaultData: DEFAULT_PAGINATED_DATA,
   });
 
@@ -51,7 +49,9 @@ export function BaseDataTable({
             })} applied.`
           : crudConfig.TEXT_LANG.EMPTY_LIST
       }
-      columns={columns}
+      columns={columns.filter(
+        (column) => !skipColumns.includes(column.accessor)
+      )}
     />
   );
 }

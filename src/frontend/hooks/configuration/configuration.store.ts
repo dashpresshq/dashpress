@@ -8,7 +8,6 @@ import { useStorageApi } from "frontend/lib/data/useApi";
 import { useWaitForResponseMutationOptions } from "frontend/lib/data/useMutate/useWaitForResponseMutationOptions";
 import { AppStorage } from "frontend/lib/storage/app";
 import { AppConfigurationValueType } from "shared/configurations/constants";
-import { isRouterParamEnabled } from "..";
 import { MAKE_APP_CONFIGURATION_CRUD_CONFIG } from "./configuration.constant";
 
 export const configurationApiPath = (
@@ -51,7 +50,8 @@ export function useEntityConfiguration<T extends AppConfigurationKeys>(
   return useStorageApi<AppConfigurationValueType<T>>(
     configurationApiPath(key, entity),
     {
-      enabled: isRouterParamEnabled(entity),
+      enabled:
+        !!entity /* It is possible to not have the entity at the point of call */,
       errorMessage: MAKE_APP_CONFIGURATION_CRUD_CONFIG(key).TEXT_LANG.NOT_FOUND,
       defaultData:
         forceDefaultValue || (APP_CONFIGURATION_CONFIG[key].defaultValue as T),

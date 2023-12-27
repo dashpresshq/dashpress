@@ -3,7 +3,7 @@ import {
   useEntityIdField,
   useEntityReferenceFields,
 } from "frontend/hooks/entity/entity.store";
-import { SLUG_LOADING_VALUE } from "frontend/lib/routing/constants";
+import { SYSTEM_LOADING_VALUE } from "frontend/lib/routing/constants";
 import {
   useEntityDataDetails,
   useEntityDataReference,
@@ -57,7 +57,7 @@ export function EntityRelationDetails() {
   });
 
   const detailsColumn = entityReferenceFields.isLoading
-    ? SLUG_LOADING_VALUE
+    ? SYSTEM_LOADING_VALUE
     : referenceColumn?.inverseToOneField;
 
   const currentEntityData = useEntityDataDetails({

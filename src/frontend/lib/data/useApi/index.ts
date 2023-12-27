@@ -1,11 +1,14 @@
 import { useQuery } from "react-query";
 import { AppStorage } from "frontend/lib/storage/app";
+import { useRouter } from "next/router";
 import { IUseApiOptions } from "../types";
 import { makeActionRequest, makeGetRequest } from "../makeRequest";
 import { buildApiOptions } from "../_buildOptions";
 import { getQueryCachekey } from "../constants/getQueryCacheKey";
 
 export function useApi<T>(endPoint: string, options: IUseApiOptions<T>) {
+  const builtOptions = buildApiOptions(options);
+  const router = useRouter();
   const { data = options.defaultData, ...rest } = useQuery<T>(
     getQueryCachekey(endPoint),
     async () => {
@@ -26,7 +29,7 @@ export function useApi<T>(endPoint: string, options: IUseApiOptions<T>) {
         throw error;
       }
     },
-    buildApiOptions(options)
+    { ...builtOptions, enabled: router.isReady && builtOptions.enabled }
   );
   return { data, ...rest };
 }

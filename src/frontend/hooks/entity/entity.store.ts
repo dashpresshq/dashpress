@@ -4,7 +4,6 @@ import { CRUD_CONFIG_NOT_FOUND } from "frontend/lib/crud-config";
 import { DataStateKeys } from "frontend/lib/data/types";
 import { useApi } from "frontend/lib/data/useApi";
 import { useApiQueries } from "frontend/lib/data/useApi/useApiQueries";
-import { isRouterParamEnabled } from "..";
 import { useEntityDictionPlurals } from "./entity.queries";
 
 export const ENTITY_FIELDS_ENDPOINT = (entity: string) =>
@@ -42,21 +41,18 @@ export const useActiveEntities = () => {
 export const useEntityFields = (entity: string) =>
   useApi<IEntityField[]>(ENTITY_FIELDS_ENDPOINT(entity), {
     errorMessage: CRUD_CONFIG_NOT_FOUND("Entity Fields"),
-    enabled: isRouterParamEnabled(entity),
     defaultData: [],
   });
 
 export const useEntityRelationsList = (entity: string) =>
   useApi<string[]>(`/api/entities/${entity}/relation-list`, {
     errorMessage: CRUD_CONFIG_NOT_FOUND("Entity Relations List"),
-    enabled: isRouterParamEnabled(entity),
     defaultData: [],
   });
 
 export const useEntityFieldLists = (entity: string) =>
   useApi<string[]>(ENTITY_FIELDS_ENDPOINT(entity), {
     errorMessage: CRUD_CONFIG_NOT_FOUND("Entity Fields List"),
-    enabled: isRouterParamEnabled(entity),
     selector: (data: IEntityField[]) => data.map(({ name }) => name),
     defaultData: [],
   });
@@ -64,7 +60,6 @@ export const useEntityFieldLists = (entity: string) =>
 export const useEntityReferenceFields = (entity: string) =>
   useApi<IEntityRelation[]>(ENTITY_RELATIONS_ENDPOINT(entity), {
     errorMessage: CRUD_CONFIG_NOT_FOUND("Entity Reference Fields"),
-    enabled: isRouterParamEnabled(entity),
     defaultData: [],
   });
 
@@ -79,7 +74,6 @@ export const useMultipleEntityReferenceFields = (entities: string[]) => {
 export const useEntityToOneReferenceFields = (entity: string) =>
   useApi<Record<string, string>>(ENTITY_RELATIONS_ENDPOINT(entity), {
     errorMessage: CRUD_CONFIG_NOT_FOUND("Entity Reference Fields"),
-    enabled: isRouterParamEnabled(entity),
     selector: (input: IEntityRelation[]) => {
       return Object.fromEntries(
         input
@@ -97,7 +91,6 @@ export const useEntityIdField = (entity: string) =>
   useApi<string>(ENTITY_FIELDS_ENDPOINT(entity), {
     defaultData: "",
     errorMessage: CRUD_CONFIG_NOT_FOUND("Entity Id Field"),
-    enabled: isRouterParamEnabled(entity),
     selector: (data: IEntityField[]) =>
       data.find(({ isId }) => isId)?.name || "id",
   });

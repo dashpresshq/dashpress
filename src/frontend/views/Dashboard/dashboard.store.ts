@@ -5,7 +5,6 @@ import { makeActionRequest } from "frontend/lib/data/makeRequest";
 import { MutationHelpers } from "frontend/lib/data/useMutate/mutation-helpers";
 import { useApiMutateOptimisticOptions } from "frontend/lib/data/useMutate/useApiMutateOptimisticOptions";
 import { useApi } from "frontend/lib/data/useApi";
-import { SLUG_LOADING_VALUE } from "frontend/lib/routing/constants";
 import { DASHBOARD_RELATIVE_DAYS } from "./Widget/_components/WidgetHeader/constants";
 import { DASHBOARD_WIDGETS_CRUD_CONFIG } from "./constants";
 
@@ -27,7 +26,6 @@ const DASHBOARD_WIDGET_SCRIPT_ENDPOINT = (
 export const useDashboardWidgets = (dashboardId: string) => {
   return useApi<IWidgetConfig[]>(DASHBOARD_ENDPOINT(dashboardId), {
     errorMessage: DASHBOARD_WIDGETS_CRUD_CONFIG.TEXT_LANG.NOT_FOUND,
-    enabled: !!dashboardId && dashboardId !== SLUG_LOADING_VALUE,
     defaultData: [],
   });
 };
@@ -40,7 +38,6 @@ export const useDasboardWidgetScriptData = (
     DASHBOARD_WIDGET_SCRIPT_ENDPOINT(widgetId, relativeDate),
     {
       errorMessage: CRUD_CONFIG_NOT_FOUND("Script"),
-      enabled: !!widgetId,
       defaultData: undefined,
     }
   );

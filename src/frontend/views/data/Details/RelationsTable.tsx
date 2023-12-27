@@ -55,6 +55,7 @@ export function EntityRelationTable() {
     >
       <WholeEntityTable
         entity={childEntity}
+        skipColumns={referenceField ? [referenceField] : []}
         persistFilters={
           referenceField
             ? [

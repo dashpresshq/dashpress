@@ -3,7 +3,6 @@ import {
   ENTITY_LIST_PATH,
   ENTITY_TABLE_PATH,
 } from "frontend/hooks/data/constants";
-import { SLUG_LOADING_VALUE } from "frontend/lib/routing/constants";
 import { IEntityCrudSettings } from "shared/configurations";
 import { USER_PERMISSIONS } from "shared/constants/user";
 import { DOCUMENTATION_LABEL } from "frontend/docs";
@@ -96,10 +95,7 @@ function useEntityCrudView(entity: string) {
       update: true,
     });
 
-  const sharedLoading =
-    entityFields.isLoading ||
-    entityCrudSettings.isLoading ||
-    entity === SLUG_LOADING_VALUE;
+  const sharedLoading = entityFields.isLoading || entityCrudSettings.isLoading;
 
   useEffect(() => {
     if (entityCrudSettings.data) {

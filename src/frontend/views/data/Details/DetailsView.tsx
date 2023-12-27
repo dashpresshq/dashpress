@@ -1,4 +1,3 @@
-import { SLUG_LOADING_VALUE } from "frontend/lib/routing/constants";
 import React, { Fragment } from "react";
 import {
   useAppConfiguration,
@@ -66,7 +65,6 @@ export function EntityDetailsView({
     dataDetails.isLoading ||
     defaultDateFormat.isLoading ||
     entityToOneReferenceFields.isLoading ||
-    entity === SLUG_LOADING_VALUE ||
     entityFields.isLoading ||
     entityPresentationScript.isLoading ||
     hiddenDetailsColumns.isLoading;

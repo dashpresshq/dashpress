@@ -18,7 +18,6 @@ import {
 import { useMemo } from "react";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { DataStateKeys, DataStates } from "frontend/lib/data/types";
-import { SLUG_LOADING_VALUE } from "frontend/lib/routing/constants";
 import { ButtonIconTypes } from "frontend/design-system/components/Button/constants";
 import { buildAppliedSchemaFormConfig } from "./buildAppliedSchemaFormConfig";
 import { useEntityViewStateMachine } from "./hooks/useEntityViewStateMachine";
@@ -84,7 +83,6 @@ export function BaseEntityForm({
     hiddenColumns.isLoading ||
     entityToOneReferenceFields.isLoading ||
     entityFormExtension.isLoading ||
-    entity === SLUG_LOADING_VALUE ||
     entityFieldTypesMap.isLoading ||
     extendEntityFormConfig === "loading" ||
     initialValuesData?.isLoading;

@@ -1,4 +1,3 @@
-import { SLUG_LOADING_VALUE } from "frontend/lib/routing/constants";
 import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
 import { USER_PERMISSIONS } from "shared/constants/user";
 import { MAKE_APP_CONFIGURATION_CRUD_CONFIG } from "frontend/hooks/configuration/configuration.constant";
@@ -28,8 +27,7 @@ function useEntityFormView(entity: string) {
   const upsertEntityFormExtensionSettingsMutation =
     useUpsertConfigurationMutation("entity_form_extension", entity);
 
-  const isLoading =
-    entityFormExtensionSettings.isLoading || entity === SLUG_LOADING_VALUE;
+  const { isLoading } = entityFormExtensionSettings;
 
   const { error } = entityFormExtensionSettings;
 

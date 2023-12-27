@@ -1,4 +1,3 @@
-import { isRouterParamEnabled } from "frontend/hooks";
 import { useMutation } from "react-query";
 import { MAKE_CRUD_CONFIG } from "frontend/lib/crud-config";
 import { useStorageApi } from "frontend/lib/data/useApi";
@@ -21,7 +20,6 @@ export function useRolePermissions() {
   const roleId = useRoleIdFromRouteParam();
 
   return useStorageApi<string[]>(ADMIN_ROLE_PERMISSION_ENDPOINT(roleId), {
-    enabled: isRouterParamEnabled(roleId),
     errorMessage: ADMIN_PERMISSIONS_CRUD_CONFIG.TEXT_LANG.NOT_FOUND,
     defaultData: [],
   });

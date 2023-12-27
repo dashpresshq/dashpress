@@ -1,5 +1,6 @@
 import { useQuery, UseQueryResult } from "react-query";
 import { IPaginatedDataState, PaginatedData } from "shared/types/data";
+import { useRouter } from "next/router";
 import { makeGetRequest } from "../makeRequest";
 import { buildApiOptions } from "../_buildOptions";
 import { IUseApiOptions } from "../types";
@@ -11,6 +12,9 @@ export function usePaginatedData<T extends Record<string, unknown>>(
   dataState: IPaginatedDataState<T>,
   options: IUseApiOptions<PaginatedData<T>>
 ): UseQueryResult<PaginatedData<T>> {
+  const builtOptions = buildApiOptions(options);
+  const router = useRouter();
+
   return useQuery<PaginatedData<T>>(
     getPaginatedDataCachekey(endPoint, dataState),
     async () => {
@@ -19,6 +23,10 @@ export function usePaginatedData<T extends Record<string, unknown>>(
         "Data could not be retrieved"
       );
     },
-    { ...buildApiOptions(options), keepPreviousData: true }
+    {
+      ...builtOptions,
+      enabled: router.isReady && builtOptions.enabled,
+      keepPreviousData: true,
+    }
   );
 }

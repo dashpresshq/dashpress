@@ -6,13 +6,12 @@ import { CRUD_CONFIG_NOT_FOUND } from "frontend/lib/crud-config";
 import { makeActionRequest } from "frontend/lib/data/makeRequest";
 import { useApi } from "frontend/lib/data/useApi";
 import { useWaitForResponseMutationOptions } from "frontend/lib/data/useMutate/useWaitForResponseMutationOptions";
-import { SLUG_LOADING_VALUE } from "frontend/lib/routing/constants";
 import { useApiQueries } from "frontend/lib/data/useApi/useApiQueries";
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
 import { DataStates } from "frontend/lib/data/types";
+import { SYSTEM_LOADING_VALUE } from "frontend/lib/routing/constants";
 import { useEntityCrudConfig } from "../entity/entity.config";
 import { useMultipleEntityReferenceFields } from "../entity/entity.store";
-import { isRouterParamEnabled } from "..";
 import {
   DATA_MUTATION_ENDPOINTS_TO_CLEAR,
   ENTITY_COUNT_PATH,
@@ -39,10 +38,7 @@ export const useEntityDataDetails = ({
     ENTITY_DETAILS_PATH({ entity, entityId, column }),
     {
       errorMessage: entityCrudConfig.TEXT_LANG.NOT_FOUND,
-      enabled:
-        isRouterParamEnabled(entity) &&
-        isRouterParamEnabled(entityId) &&
-        column !== SLUG_LOADING_VALUE,
+      enabled: column !== SYSTEM_LOADING_VALUE,
       defaultData: {},
     }
   );
@@ -133,7 +129,6 @@ export const useEntityReferenceCount = (
 export const useEntityDataReference = (entity: string, entityId: string) => {
   return useApi<string>(ENTITY_REFERENCE_PATH({ entity, entityId }), {
     errorMessage: CRUD_CONFIG_NOT_FOUND("Reference data"),
-    enabled: isRouterParamEnabled(entityId) && isRouterParamEnabled(entity),
     defaultData: "",
   });
 };

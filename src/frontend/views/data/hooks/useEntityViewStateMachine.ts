@@ -1,4 +1,3 @@
-import { isRouterParamEnabled } from "frontend/hooks";
 import { useAppConfiguration } from "frontend/hooks/configuration/configuration.store";
 import { IEntityCrudSettings } from "shared/configurations";
 import { userFriendlyCase } from "shared/lib/strings/friendly-case";
@@ -22,7 +21,7 @@ export const useEntityViewStateMachine = ({
   const entitiesToHide = useAppConfiguration("disabled_entities");
   const canUserPerformCrudAction = useCanUserPerformCrudAction(entity);
 
-  if (isLoading || entitiesToHide.isLoading || !isRouterParamEnabled(entity)) {
+  if (isLoading || entitiesToHide.isLoading) {
     return { type: DataStates.Loading };
   }
   if (

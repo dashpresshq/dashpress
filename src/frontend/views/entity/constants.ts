@@ -2,7 +2,6 @@ import { useRouter } from "next/router";
 import { Icon, Save, Settings } from "react-feather";
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
 import { useUserHasPermission } from "frontend/hooks/auth/user.store";
-import { SLUG_LOADING_VALUE } from "frontend/lib/routing/constants";
 import { USER_PERMISSIONS } from "shared/constants/user";
 import { IEntityCrudSettings } from "shared/configurations";
 
@@ -110,7 +109,7 @@ export const useEntityActionMenuItems = (
     return [];
   }
 
-  if (slugEntity === SLUG_LOADING_VALUE) {
+  if (!router.isReady) {
     return [];
   }
 

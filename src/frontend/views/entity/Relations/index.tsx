@@ -17,7 +17,6 @@ import { MAKE_APP_CONFIGURATION_CRUD_CONFIG } from "frontend/hooks/configuration
 import { useState } from "react";
 import { DOCUMENTATION_LABEL } from "frontend/docs";
 import { RelationsSettingsDocumentation } from "frontend/docs/relations";
-import { SLUG_LOADING_VALUE } from "frontend/lib/routing/constants";
 import { useChangeRouterParam } from "frontend/lib/routing/useChangeRouterParam";
 import { useRouteParam } from "frontend/lib/routing/useRouteParam";
 import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
@@ -116,8 +115,7 @@ export function EntityRelationsSettings() {
     entityRelationList.isLoading ||
     entityRelationTemplate.isLoading ||
     hiddenEntityRelations.isLoading ||
-    referenceFields.isLoading ||
-    entity === SLUG_LOADING_VALUE;
+    referenceFields.isLoading;
 
   return (
     <BaseEntitySettingsLayout>

@@ -12,7 +12,6 @@ import {
 import { useCallback, useState } from "react";
 import { IActionInstance } from "shared/types/actions";
 import { useApi } from "frontend/lib/data/useApi";
-import { SLUG_LOADING_VALUE } from "frontend/lib/routing/constants";
 import { SoftButton } from "frontend/design-system/components/Button/SoftButton";
 import { DeleteButton } from "frontend/design-system/components/Button/DeleteButton";
 import { Stack } from "frontend/design-system/primitives/Stack";
@@ -49,8 +48,7 @@ export function BaseActionInstances(actionInstanceView: ActionInstanceView) {
 
   const [currentInstanceId, setCurrentInstanceItem] = useState("");
 
-  const { id: actionInstanceViewId, type: actionInstanceViewType } =
-    actionInstanceView;
+  const { type: actionInstanceViewType } = actionInstanceView;
 
   const closeConfigItem = () => {
     setCurrentInstanceItem("");
@@ -123,7 +121,6 @@ export function BaseActionInstances(actionInstanceView: ActionInstanceView) {
     <>
       <ViewStateMachine
         loading={
-          actionInstanceViewId === SLUG_LOADING_VALUE ||
           activeActionList.isLoading ||
           activeEntities.isLoading ||
           integrationsList.isLoading

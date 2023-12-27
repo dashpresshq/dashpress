@@ -1,5 +1,6 @@
 /* eslint-disable react/jsx-no-useless-fragment */
 import { ErrorAlert } from "frontend/design-system/components/Alert";
+import { useRouter } from "next/router";
 import { ReactNode } from "react";
 
 type Props = {
@@ -10,7 +11,8 @@ type Props = {
 };
 
 export function ViewStateMachine({ loading, error, children, loader }: Props) {
-  if (loading) {
+  const router = useRouter();
+  if (loading || !router.isReady) {
     return <>{loader}</>;
   }
 

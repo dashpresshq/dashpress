@@ -3,7 +3,6 @@ import {
   FormSkeleton,
   FormSkeletonSchema,
 } from "frontend/design-system/components/Skeleton/Form";
-import { SLUG_LOADING_VALUE } from "frontend/lib/routing/constants";
 import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { useEntitySlug } from "frontend/hooks/entity/entity.config";
@@ -44,10 +43,7 @@ export function EntityViewsSettings() {
     permission: USER_PERMISSIONS.CAN_CONFIGURE_APP,
   });
 
-  const isLoading =
-    tableColumns.isLoading ||
-    entity === SLUG_LOADING_VALUE ||
-    entityViews.isLoading;
+  const isLoading = tableColumns.isLoading || entityViews.isLoading;
 
   const error = entityViews.error || tableColumns.error;
 

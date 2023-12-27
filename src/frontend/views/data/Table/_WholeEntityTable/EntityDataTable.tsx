@@ -1,4 +1,3 @@
-import { SLUG_LOADING_VALUE } from "frontend/lib/routing/constants";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { useEntityCrudConfig } from "frontend/hooks/entity/entity.config";
 import { TableSkeleton } from "frontend/design-system/components/Skeleton/Table";
@@ -20,7 +19,7 @@ export function EntityDataTable({ entity, tabKey = "", ...props }: IProps) {
 
   const { error } = columns;
 
-  const isLoading = entity === SLUG_LOADING_VALUE || columns.isLoading;
+  const { isLoading } = columns;
 
   return (
     <>
@@ -33,7 +32,6 @@ export function EntityDataTable({ entity, tabKey = "", ...props }: IProps) {
           <BaseDataTable
             dataEndpoint={ENTITY_TABLE_PATH(entity)}
             columns={columns.data || []}
-            enabled={entity && entity !== SLUG_LOADING_VALUE}
             stateStorageKey={`${entity}${tabKey}`}
             crudConfig={entityCrudConfig}
             {...props}

@@ -3,7 +3,6 @@ import {
   FormSkeleton,
   FormSkeletonSchema,
 } from "frontend/design-system/components/Skeleton/Form";
-import { SLUG_LOADING_VALUE } from "frontend/lib/routing/constants";
 import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { USER_PERMISSIONS } from "shared/constants/user";
@@ -64,9 +63,7 @@ export function EntityPresentationScriptSettings() {
         ]}
       >
         <ViewStateMachine
-          loading={
-            entity === SLUG_LOADING_VALUE || entityPresentationScript.isLoading
-          }
+          loading={entityPresentationScript.isLoading}
           error={entityPresentationScript.error}
           loader={<FormSkeleton schema={[FormSkeletonSchema.RichTextArea]} />}
         >

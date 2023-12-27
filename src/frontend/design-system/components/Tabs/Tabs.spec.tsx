@@ -1,6 +1,5 @@
 import React from "react";
 import { render, fireEvent, screen } from "@testing-library/react";
-import { SLUG_LOADING_VALUE } from "frontend/lib/routing/constants";
 import { Tabs } from ".";
 
 describe("Tabs", () => {
@@ -32,7 +31,7 @@ describe("Tabs", () => {
   it("should render first tab when current tab is loading", () => {
     render(
       <Tabs
-        currentTab={SLUG_LOADING_VALUE}
+        currentTab={undefined}
         contents={[
           {
             label: "Foo Label",

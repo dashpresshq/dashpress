@@ -92,11 +92,7 @@ export function EntityRelationDetails() {
   });
 
   return (
-    <DetailsLayout
-      entity={parentEntity}
-      menuKey={childEntity}
-      childEntity={childEntity}
-    >
+    <DetailsLayout entity={parentEntity} menuKey={childEntity}>
       {dataDetails.error ? (
         <SectionBox
           title={title}

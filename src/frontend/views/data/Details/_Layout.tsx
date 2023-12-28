@@ -30,13 +30,11 @@ interface IProps {
   entity: string;
   menuItems?: IDropDownMenuItem[];
   menuKey: string;
-  childEntity?: string;
 }
 
 export function DetailsLayout({
   children,
   entity,
-  childEntity,
   menuKey,
   menuItems = [],
 }: IProps) {
@@ -46,7 +44,7 @@ export function DetailsLayout({
       EntityActionTypes.Form,
       EntityActionTypes.Labels,
     ],
-    childEntity
+    entity
   );
   const entityId = useEntityId();
 

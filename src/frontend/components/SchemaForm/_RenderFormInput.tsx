@@ -38,7 +38,11 @@ export function RenderFormInput(props: IRenderFormInputProps) {
   };
 
   if (entityFieldSelections.length > 0) {
-    if (entityFieldSelections.length > 1 && entityFieldSelections.length <= 4) {
+    if (
+      entityFieldSelections.reduce((acc, selection) => {
+        return acc + selection.label.length;
+      }, 0) < 15
+    ) {
       return (
         <FormSelectButton {...formProps} selectData={entityFieldSelections} />
       );

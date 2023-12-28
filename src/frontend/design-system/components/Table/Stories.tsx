@@ -5,7 +5,7 @@ import { action } from "@storybook/addon-actions";
 import { IPaginatedDataState } from "shared/types/data";
 import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 import { Table, DEFAULT_TABLE_STATE } from ".";
-import { IProps } from "./types";
+import { ITableProps } from "./types";
 import { TABLE_COLUMNS, TABLE_DATA } from "./data";
 
 export default {
@@ -29,10 +29,10 @@ export default {
     syncPaginatedDataStateOut: action("setPaginatedDataState"),
     columns: TABLE_COLUMNS,
     tableData: TABLE_DATA,
-  } as IProps<unknown>,
+  } as ITableProps<unknown>,
 };
 
-const Template: Story<IProps<unknown>> = (args) => {
+const Template: Story<ITableProps<unknown>> = (args) => {
   const [paginatedDataState, setPaginatedDataState] = useState<
     IPaginatedDataState<any>
   >({ ...DEFAULT_TABLE_STATE });

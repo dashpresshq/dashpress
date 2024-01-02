@@ -89,8 +89,14 @@ export function ListRoles() {
       <Card>
         <FEPaginationTable
           dataEndpoint={ADMIN_ROLES_CRUD_CONFIG.ENDPOINTS.LIST}
-          emptyMessage={ADMIN_ROLES_CRUD_CONFIG.TEXT_LANG.EMPTY_LIST}
           columns={columns}
+          empty={{
+            text: ADMIN_ROLES_CRUD_CONFIG.TEXT_LANG.EMPTY_LIST,
+            createNew: {
+              label: ADMIN_ROLES_CRUD_CONFIG.TEXT_LANG.CREATE,
+              action: NAVIGATION_LINKS.ROLES.CREATE,
+            },
+          }}
         />
       </Card>
     </AppLayout>

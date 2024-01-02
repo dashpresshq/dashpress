@@ -10,7 +10,7 @@ import {
   EntityActionTypes,
   useEntityActionMenuItems,
 } from "../../entity/constants";
-import { useTableMenuItems } from "./useTableMenuItems";
+import { getEntityCreateLink, useTableMenuItems } from "./useTableMenuItems";
 import { WholeEntityTable } from "./_WholeEntityTable";
 
 export function EntityTable() {
@@ -40,7 +40,10 @@ export function EntityTable() {
 
   return (
     <AppLayout actionItems={menuItems} secondaryActionItems={actionItems}>
-      <WholeEntityTable entity={entity} />
+      <WholeEntityTable
+        entity={entity}
+        createNewLink={getEntityCreateLink(entity)}
+      />
     </AppLayout>
   );
 }

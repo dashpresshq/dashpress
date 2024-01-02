@@ -2,7 +2,9 @@
 import React from "react";
 import { Story } from "@storybook/react";
 import { ApplicationRoot } from "frontend/components/ApplicationRoot";
-import { EmptyWrapper, IProps } from ".";
+import { noop } from "shared/lib/noop";
+import { EmptyWrapper } from ".";
+import { IEmptyWrapperProps } from "./types";
 
 export default {
   title: "Components/EmptyWrapper",
@@ -12,7 +14,7 @@ export default {
   },
 };
 
-const Template: Story<IProps> = (args) => (
+const Template: Story<IEmptyWrapperProps> = (args) => (
   <ApplicationRoot>
     <EmptyWrapper {...args} />
   </ApplicationRoot>
@@ -21,11 +23,10 @@ const Template: Story<IProps> = (args) => (
 export const Default = Template.bind({});
 Default.args = {};
 
-export const WithChildren = Template.bind({});
-WithChildren.args = {
-  children: (
-    <>
-      <b>This is bold</b> This is not
-    </>
-  ),
+export const WithCreateNew = Template.bind({});
+WithCreateNew.args = {
+  createNew: {
+    label: "Add New Item",
+    action: () => noop(),
+  },
 };

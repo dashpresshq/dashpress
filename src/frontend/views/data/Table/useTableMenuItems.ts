@@ -6,6 +6,21 @@ import { IDropDownMenuItem } from "frontend/design-system/components/DropdownMen
 import { usePluginTableMenuItems } from "./portal";
 import { useCanUserPerformCrudAction } from "../hooks/useCanUserPerformCrudAction";
 
+export const getEntityCreateLink = (
+  entity: string,
+  reference?: {
+    referenceField: string;
+    entityId: string;
+  }
+) => {
+  let baseUrl = NAVIGATION_LINKS.ENTITY.CREATE(entity);
+  if (reference) {
+    baseUrl = `${baseUrl}?${reference.referenceField}=${reference.entityId}`;
+  }
+
+  return baseUrl;
+};
+
 export const useTableMenuItems = (
   entity: string,
   reference?: {
@@ -34,11 +49,7 @@ export const useTableMenuItems = (
       label: entityCrudConfig.TEXT_LANG.CREATE,
       IconComponent: Plus,
       onClick: () => {
-        let baseUrl = NAVIGATION_LINKS.ENTITY.CREATE(entity);
-        if (reference) {
-          baseUrl = `${baseUrl}?${reference.referenceField}=${reference.entityId}`;
-        }
-        router.push(baseUrl);
+        router.push(getEntityCreateLink(entity, reference));
       },
     });
   }

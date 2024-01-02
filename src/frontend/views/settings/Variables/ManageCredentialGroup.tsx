@@ -76,6 +76,8 @@ export function ManageCredentialGroup({
     setCurrentConfigItem("");
   };
 
+  const CRUD_CONFIG = INTEGRATIONS_GROUP_CONFIG[group].crudConfig;
+
   const MemoizedAction = useCallback(
     ({ row }: IFETableCell<IKeyValue>) => (
       <Stack spacing={4} align="center">
@@ -124,8 +126,7 @@ export function ManageCredentialGroup({
                 setCurrentConfigItem(NEW_CONFIG_ITEM);
               },
               IconComponent: Plus,
-              label:
-                INTEGRATIONS_GROUP_CONFIG[group].crudConfig.TEXT_LANG.CREATE,
+              label: CRUD_CONFIG.TEXT_LANG.CREATE,
             },
           ]
         : [],
@@ -134,9 +135,7 @@ export function ManageCredentialGroup({
           id: "help",
           onClick: () => setIsDocOpen(true),
           IconComponent: HelpCircle,
-          label: DOCUMENTATION_LABEL.CONCEPT(
-            INTEGRATIONS_GROUP_CONFIG[group].crudConfig.TEXT_LANG.TITLE
-          ),
+          label: DOCUMENTATION_LABEL.CONCEPT(CRUD_CONFIG.TEXT_LANG.TITLE),
         },
       ],
     };
@@ -200,17 +199,23 @@ export function ManageCredentialGroup({
 
       <FEPaginationTable
         dataEndpoint={dataEndpoint}
-        emptyMessage={
-          INTEGRATIONS_GROUP_CONFIG[group].crudConfig.TEXT_LANG.EMPTY_LIST
-        }
+        empty={{
+          text: CRUD_CONFIG.TEXT_LANG.EMPTY_LIST,
+          createNew: showManageAction
+            ? {
+                label: CRUD_CONFIG.TEXT_LANG.CREATE,
+                action: () => setCurrentConfigItem(NEW_CONFIG_ITEM),
+              }
+            : undefined,
+        }}
         columns={tableColumns}
       />
 
       <OffCanvas
         title={
           currentConfigItem === NEW_CONFIG_ITEM
-            ? INTEGRATIONS_GROUP_CONFIG[group].crudConfig.TEXT_LANG.CREATE
-            : INTEGRATIONS_GROUP_CONFIG[group].crudConfig.TEXT_LANG.EDIT
+            ? CRUD_CONFIG.TEXT_LANG.CREATE
+            : CRUD_CONFIG.TEXT_LANG.EDIT
         }
         onClose={closeConfigItem}
         show={!!currentConfigItem}
@@ -233,7 +238,7 @@ export function ManageCredentialGroup({
         />
       </OffCanvas>
       <VariablesDocumentation
-        title={INTEGRATIONS_GROUP_CONFIG[group].crudConfig.TEXT_LANG.TITLE}
+        title={CRUD_CONFIG.TEXT_LANG.TITLE}
         close={setIsDocOpen}
         isOpen={isDocOpen}
       />

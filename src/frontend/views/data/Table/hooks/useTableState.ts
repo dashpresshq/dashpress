@@ -8,7 +8,7 @@ import { useEntityContextState } from "./useEntityContextState";
 
 export const useTableState = (
   contextKey: string,
-  persitentFilters: IDataTableProps["persitentFilters"],
+  persistentFilters: IDataTableProps["persistentFilters"],
   defaultTableState?: IDataTableProps["defaultTableState"]
 ) => {
   /*
@@ -42,7 +42,7 @@ export const useTableState = (
    */
   const currentState: IPaginatedDataState<any> = {
     ...paginatedDataState,
-    filters: [...paginatedDataState.filters, ...persitentFilters],
+    filters: [...paginatedDataState.filters, ...persistentFilters],
   };
 
   /*

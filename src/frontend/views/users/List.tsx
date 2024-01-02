@@ -130,7 +130,13 @@ export function ListUsers() {
         <FEPaginationTable
           dataEndpoint={ADMIN_USERS_CRUD_CONFIG.ENDPOINTS.LIST}
           columns={columns}
-          emptyMessage={ADMIN_USERS_CRUD_CONFIG.TEXT_LANG.EMPTY_LIST}
+          empty={{
+            text: ADMIN_USERS_CRUD_CONFIG.TEXT_LANG.EMPTY_LIST,
+            createNew: {
+              label: ADMIN_USERS_CRUD_CONFIG.TEXT_LANG.CREATE,
+              action: NAVIGATION_LINKS.USERS.CREATE,
+            },
+          }}
         />
       </Card>
     </AppLayout>

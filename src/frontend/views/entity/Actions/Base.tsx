@@ -141,10 +141,16 @@ export function BaseActionInstances(actionInstanceView: ActionInstanceView) {
         </Stack>
         <Spacer />
         <FEPaginationTable
-          emptyMessage={ADMIN_ACTION_INSTANCES_CRUD_CONFIG.TEXT_LANG.EMPTY_LIST}
           border
           dataEndpoint={dataEndpoint}
           columns={columns}
+          empty={{
+            text: ADMIN_ACTION_INSTANCES_CRUD_CONFIG.TEXT_LANG.EMPTY_LIST,
+            createNew: {
+              label: ADMIN_ACTION_INSTANCES_CRUD_CONFIG.TEXT_LANG.CREATE,
+              action: () => setCurrentInstanceItem(NEW_ACTION_ITEM),
+            },
+          }}
         />
       </ViewStateMachine>
       <OffCanvas

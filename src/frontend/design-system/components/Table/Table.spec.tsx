@@ -12,6 +12,9 @@ const DEFAULT_TABLE_PROPS: ITableProps<unknown> = {
   },
   syncPaginatedDataStateOut: jest.fn(),
   columns: TABLE_COLUMNS,
+  empty: {
+    text: "Empty Table",
+  },
   tableData: TABLE_DATA,
 };
 

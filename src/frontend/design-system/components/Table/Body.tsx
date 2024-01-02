@@ -5,6 +5,7 @@ import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
 import { useThemeColorShade } from "frontend/design-system/theme/useTheme";
 import { Typo } from "frontend/design-system/primitives/Typo";
 import { EmptyWrapper } from "../EmptyWrapper";
+import { IEmptyWrapperProps } from "../EmptyWrapper/types";
 
 const Td = styled.td`
   padding: 0.45rem;
@@ -29,15 +30,10 @@ interface IProps {
   table: Table<Record<string, unknown>>;
   dataLength: number;
   isLoading: boolean;
-  emptyMessage?: string;
+  empty: IEmptyWrapperProps;
 }
 
-export function TableBody({
-  table,
-  dataLength,
-  emptyMessage,
-  isLoading,
-}: IProps) {
+export function TableBody({ table, dataLength, empty, isLoading }: IProps) {
   const colorShade = useThemeColorShade();
   return (
     <tbody>
@@ -58,7 +54,7 @@ export function TableBody({
             {isLoading ? (
               <div style={{ height: "204px" }} />
             ) : (
-              <EmptyWrapper text={emptyMessage || "No Data"} />
+              <EmptyWrapper {...{ ...empty }} />
             )}
           </Td>
         </BodyTR>

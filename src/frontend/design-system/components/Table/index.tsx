@@ -56,7 +56,7 @@ export function Table<T extends unknown>({
   columns,
   lean,
   border,
-  emptyMessage,
+  empty,
 }: ITableProps<T>) {
   const {
     data = {
@@ -138,7 +138,7 @@ export function Table<T extends unknown>({
           <TableBody
             table={table}
             dataLength={dataLength}
-            emptyMessage={emptyMessage}
+            empty={empty}
             isLoading={isLoading}
           />
           <TableFoot table={table} dataLength={dataLength} />

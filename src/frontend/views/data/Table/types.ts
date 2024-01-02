@@ -1,7 +1,7 @@
 import { FieldQueryFilter, IPaginatedDataState } from "shared/types/data";
 
 export interface IDataTableProps {
-  persitentFilters?: FieldQueryFilter[];
+  persistentFilters?: FieldQueryFilter[];
   skipColumns?: string[];
   defaultTableState?: Pick<
     IPaginatedDataState<unknown>,

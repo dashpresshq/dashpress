@@ -30,6 +30,7 @@ export function TableWidget({ data }: IProps) {
       }}
       syncPaginatedDataStateOut={() => {}}
       border
+      empty={{ text: "No Data" }}
       lean
       columns={columns}
     />

@@ -115,6 +115,7 @@ function TabForm({ values, tableColumns, initialValues }: IProps) {
                         pageIndex: 0,
                       },
                     }}
+                    empty={{ text: "No Data" }}
                     columns={columns}
                   />
                 )}

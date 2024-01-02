@@ -28,6 +28,9 @@ export default {
     },
     syncPaginatedDataStateOut: action("setPaginatedDataState"),
     columns: TABLE_COLUMNS,
+    empty: {
+      text: "Empty Table",
+    },
     tableData: TABLE_DATA,
   } as ITableProps<unknown>,
 };

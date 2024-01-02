@@ -1,9 +1,9 @@
-import { ICrudConfig } from "frontend/lib/crud-config";
 import { usePaginatedData } from "frontend/lib/data/useApi/usePaginatedData";
 import { DEFAULT_PAGINATED_DATA } from "frontend/lib/data/constants/defaults";
 import { pluralize } from "shared/lib/strings";
 import { ITableColumn } from "frontend/design-system/components/Table/types";
 import { Table } from "frontend/design-system/components/Table";
+import { IEmptyWrapperProps } from "frontend/design-system/components/EmptyWrapper/types";
 import { useTableState } from "../hooks";
 import { IDataTableProps } from "../types";
 
@@ -11,21 +11,21 @@ interface IProps extends IDataTableProps {
   columns: ITableColumn[];
   dataEndpoint: string;
   stateStorageKey: string;
-  crudConfig: ICrudConfig;
+  empty: IEmptyWrapperProps;
 }
 
 export function BaseDataTable({
   columns,
   stateStorageKey,
   dataEndpoint,
-  crudConfig,
+  empty,
   skipColumns = [],
   border,
-  persitentFilters = [],
+  persistentFilters = [],
   defaultTableState,
 }: IProps) {
   const [currentState, overridePaginatedDataState, setPaginatedDataState] =
-    useTableState(stateStorageKey, persitentFilters, defaultTableState);
+    useTableState(stateStorageKey, persistentFilters, defaultTableState);
 
   const tableData = usePaginatedData(dataEndpoint, currentState, {
     defaultData: DEFAULT_PAGINATED_DATA,
@@ -39,15 +39,18 @@ export function BaseDataTable({
         overridePaginatedDataState,
       }}
       border={border}
-      emptyMessage={
-        currentState.filters.length > 0
+      empty={
+        currentState.filters.length > 0 &&
+        persistentFilters.length !== currentState.filters.length
           ? // TODO: for contributors: transform this to user readable message
-            `No result for the current ${pluralize({
-              singular: "filter",
-              count: currentState.filters.length,
-              inclusive: true,
-            })} applied.`
-          : crudConfig.TEXT_LANG.EMPTY_LIST
+            {
+              text: `No result for the current ${pluralize({
+                singular: "filter",
+                count: currentState.filters.length,
+                inclusive: true,
+              })} applied.`,
+            }
+          : empty
       }
       columns={columns.filter(
         (column) => !skipColumns.includes(column.accessor)

@@ -6,14 +6,22 @@ import { useTableColumns } from "../useTableColumns";
 import { TableViewComponent } from "../portal";
 import { IDataTableProps } from "../types";
 import { BaseDataTable } from "../DataTable";
+import { useCanUserPerformCrudAction } from "../../hooks/useCanUserPerformCrudAction";
 
 interface IProps extends IDataTableProps {
   entity: string;
+  createNewLink: string;
   tabKey?: string;
 }
 
-export function EntityDataTable({ entity, tabKey = "", ...props }: IProps) {
+export function EntityDataTable({
+  entity,
+  createNewLink,
+  tabKey = "",
+  ...props
+}: IProps) {
   const columns = useTableColumns(entity);
+  const canUserPerformCrudAction = useCanUserPerformCrudAction(entity);
 
   const entityCrudConfig = useEntityCrudConfig(entity);
 
@@ -33,7 +41,15 @@ export function EntityDataTable({ entity, tabKey = "", ...props }: IProps) {
             dataEndpoint={ENTITY_TABLE_PATH(entity)}
             columns={columns.data || []}
             stateStorageKey={`${entity}${tabKey}`}
-            crudConfig={entityCrudConfig}
+            empty={{
+              text: entityCrudConfig.TEXT_LANG.EMPTY_LIST,
+              createNew: canUserPerformCrudAction("create")
+                ? {
+                    label: entityCrudConfig.TEXT_LANG.CREATE,
+                    action: createNewLink,
+                  }
+                : undefined,
+            }}
             {...props}
           />
         )}

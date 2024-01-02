@@ -3,6 +3,7 @@ import { ReactNode } from "react";
 import { UseQueryResult } from "react-query";
 import { IPaginatedDataState, PaginatedData } from "shared/types/data";
 import { TableFilterType } from "./filters/types";
+import { IEmptyWrapperProps } from "../EmptyWrapper/types";
 
 export interface ITableColumn {
   Header:
@@ -29,5 +30,5 @@ export interface ITableProps<T> {
   border?: boolean;
   overridePaginatedDataState?: IPaginatedDataState<T>;
   syncPaginatedDataStateOut: (params: IPaginatedDataState<T>) => void;
-  emptyMessage?: string;
+  empty: IEmptyWrapperProps;
 }

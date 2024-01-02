@@ -12,7 +12,10 @@ import {
 } from "frontend/hooks/entity/entity.config";
 import { ENTITY_DETAILS_VIEW_KEY } from "./constants";
 import { DetailsLayout } from "./_Layout";
-import { useTableMenuItems } from "../Table/useTableMenuItems";
+import {
+  getEntityCreateLink,
+  useTableMenuItems,
+} from "../Table/useTableMenuItems";
 import { WholeEntityTable } from "../Table/_WholeEntityTable";
 
 export function EntityRelationTable() {
@@ -55,7 +58,11 @@ export function EntityRelationTable() {
       <WholeEntityTable
         entity={childEntity}
         skipColumns={referenceField ? [referenceField] : []}
-        persistFilters={
+        createNewLink={getEntityCreateLink(childEntity, {
+          referenceField,
+          entityId,
+        })}
+        persistentFilters={
           referenceField
             ? [
                 {

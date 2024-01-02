@@ -1,13 +1,12 @@
 import React, { ReactNode, useState } from "react";
-import { Spacer } from "frontend/design-system/primitives/Spacer";
 import styled from "styled-components";
 import { DataStateKeys } from "frontend/lib/data/types";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { EmptyWrapper } from "../EmptyWrapper";
 import { FormSearch } from "../Form/FormSearch";
-import { SoftButton } from "../Button/SoftButton";
 import { defaultSearchFunction } from "./utils";
 import { ListSkeleton } from "../Skeleton/List";
+import { IEmptyWrapperProps } from "../EmptyWrapper/types";
 
 export { ListManagerItem } from "./ListManagerItem";
 
@@ -31,10 +30,7 @@ export interface IProps<T, K extends StringProps<T>> {
   items: DataStateKeys<T[]>;
   listLengthGuess: number;
   labelField: K;
-  empty?: {
-    text: string;
-    createNew?: { action: string | (() => void); label: string };
-  };
+  empty?: IEmptyWrapperProps;
   getLabel?: (name: string) => string;
   render: (item: T & { label: string }, index: number) => ReactNode;
 }
@@ -71,16 +67,7 @@ export function ListManager<T, K extends StringProps<T>>({
       loader={<ListSkeleton count={listLengthGuess} />}
     >
       {itemsLength === 0 ? (
-        <EmptyWrapper text={empty?.text}>
-          <Spacer size="sm" />
-          {empty?.createNew && (
-            <SoftButton
-              action={empty.createNew.action}
-              icon="add"
-              label={empty.createNew.label}
-            />
-          )}
-        </EmptyWrapper>
+        <EmptyWrapper {...{ ...empty }} />
       ) : (
         <Root>
           {itemsLength > SEARCH_THRESHOLD ? (

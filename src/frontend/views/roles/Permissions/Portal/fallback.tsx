@@ -25,7 +25,6 @@ export function BaseMutateEntitiesPermissions() {
   return (
     <MutatePermission
       permissionList={entitiesAsPermissionList}
-      singular="Entity"
       overAchingPermission={USER_PERMISSIONS.CAN_MANAGE_ALL_ENTITIES}
     />
   );

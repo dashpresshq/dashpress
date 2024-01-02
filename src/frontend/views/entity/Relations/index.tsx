@@ -155,29 +155,10 @@ export function EntityRelationsSettings() {
                 <ViewStateMachine
                   error={error}
                   loading={isLoading}
-                  loader={loadingFieldsLabelForm}
-                >
-                  <Spacer />
-                  <FieldsLabelForm
-                    initialValues={entityRelationsLabelsMap.data}
-                    crudConfig={MAKE_APP_CONFIGURATION_CRUD_CONFIG(
-                      "entity_relations_labels"
-                    )}
-                    fields={referenceFields.data.map(({ table }) => table)}
-                    onSubmit={upsertEntityRelationsLabelsMutation.mutateAsync}
-                  />
-                </ViewStateMachine>
-              ),
-              label: "Labels",
-            },
-            {
-              content: (
-                <ViewStateMachine
-                  error={error}
-                  loading={isLoading}
                   loader={<ListSkeleton count={5} />}
                 >
                   <EntitiesSelection
+                    type="relations"
                     selectionKey={`${entity}-relations`}
                     allList={entityRelationList.data}
                     getEntityFieldLabels={(relation) =>
@@ -194,6 +175,27 @@ export function EntityRelationsSettings() {
               ),
               label: "Selection",
             },
+            {
+              content: (
+                <ViewStateMachine
+                  error={error}
+                  loading={isLoading}
+                  loader={loadingFieldsLabelForm}
+                >
+                  <Spacer />
+                  <FieldsLabelForm
+                    initialValues={entityRelationsLabelsMap.data}
+                    crudConfig={MAKE_APP_CONFIGURATION_CRUD_CONFIG(
+                      "entity_relations_labels"
+                    )}
+                    fields={referenceFields.data.map(({ table }) => table)}
+                    onSubmit={upsertEntityRelationsLabelsMutation.mutateAsync}
+                  />
+                </ViewStateMachine>
+              ),
+              label: "Labels",
+            },
+
             {
               content: (
                 <ViewStateMachine

@@ -1,4 +1,4 @@
-import React, { ReactNode, useId } from "react";
+import React, { useId } from "react";
 import {
   ChevronRight as ChevronRightIcon,
   Icon as IconType,
@@ -19,20 +19,6 @@ const ChevronRight = styled(ChevronRightIcon)<{ $active?: boolean }>`
       : USE_ROOT_COLOR("primary-color")};
   margin-left: 0.25rem;
 `;
-
-const Root = styled.ul`
-  display: flex;
-  flex-direction: column;
-  padding-left: 0;
-  margin-bottom: 0;
-  border-radius: 0.25rem;
-  margin: -16px;
-  border-radius: 0px;
-`;
-
-export function SectionList({ children }: { children: ReactNode }) {
-  return <Root>{children}</Root>;
-}
 
 const ListItem = styled.button<{
   active: boolean;
@@ -165,7 +151,7 @@ export interface IProps {
   }[];
 }
 
-export function SectionListItem({
+export function ListManagerItem({
   label,
   IconComponent,
   disabled,

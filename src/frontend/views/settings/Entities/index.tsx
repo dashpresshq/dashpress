@@ -79,6 +79,7 @@ export function EntitiesSettings() {
           loader={<ListSkeleton count={20} />}
         >
           <EntitiesSelection
+            type="active"
             crudConfig={CRUD_CONFIG}
             selectionKey="enabled-entities-settings"
             allList={entitiesList.data.map(({ value }) => value)}

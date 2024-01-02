@@ -21,6 +21,8 @@ import {
   useUpsertConfigurationMutation,
 } from "frontend/hooks/configuration/configuration.store";
 import { useEntityFields } from "frontend/hooks/entity/entity.store";
+import { WarningAlert } from "frontend/design-system/components/Alert";
+import { Spacer } from "frontend/design-system/primitives/Spacer";
 import { BaseEntitySettingsLayout } from "../_Base";
 import { EntityFieldsSelectionSettings } from "./EntityFieldsSelectionSettings";
 import { ENTITY_CONFIGURATION_VIEW, ENTITY_CRUD_LABELS } from "../constants";
@@ -231,6 +233,7 @@ export function EntityCrudSettings() {
   const tabFromUrl = useRouteParam("tab");
   const changeTabParam = useChangeRouterParam("tab");
   const entity = useEntitySlug();
+  const entityFields = useEntityFields(entity);
 
   const entityCrudView = useEntityCrudView(entity);
   const [isDocOpen, setIsDocOpen] = useState(false);
@@ -242,6 +245,13 @@ export function EntityCrudSettings() {
   });
   return (
     <BaseEntitySettingsLayout>
+      {entityFields.data.length > 1 &&
+        entityFields.data.findIndex((field) => field.isId) === -1 && (
+          <>
+            <WarningAlert message="This entity doesn't have a primary key. Kindly add one to this entity and restart the application so as not to run into errors when managing its data" />
+            <Spacer />
+          </>
+        )}
       <SectionBox
         title="CRUD Settings"
         actionButtons={[

@@ -21,6 +21,7 @@ import {
 } from "frontend/design-system/components/Section/MenuSection";
 import { ContentLayout } from "frontend/design-system/components/Section/SectionDivider";
 import { Spacer } from "frontend/design-system/primitives/Spacer";
+import { IDropDownMenuItem } from "frontend/design-system/components/DropdownMenu";
 import { ADMIN_ACTION_INSTANCES_CRUD_CONFIG } from "./Actions/constants";
 import {
   ENTITY_CRUD_LABELS,
@@ -85,9 +86,10 @@ const baseMenuItems = (entity: string): IMenuSectionItem[] => [
 
 interface IProps {
   children: ReactNode;
+  actionItems?: IDropDownMenuItem[];
 }
 
-export function BaseEntitySettingsLayout({ children }: IProps) {
+export function BaseEntitySettingsLayout({ children, actionItems }: IProps) {
   const entity = useEntitySlug();
   const { canGoBack, goBack } = useNavigationStack();
   const router = useRouter();
@@ -98,7 +100,7 @@ export function BaseEntitySettingsLayout({ children }: IProps) {
   );
 
   return (
-    <AppLayout>
+    <AppLayout actionItems={actionItems}>
       {canGoBack() && (
         <>
           <SoftButton

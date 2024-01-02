@@ -40,7 +40,6 @@ Loading.args = {
     isLoading: true,
     data: [],
     error: "",
-    isRefetching: false,
   },
 };
 
@@ -50,7 +49,6 @@ Error.args = {
     isLoading: false,
     data: [],
     error: "Some Error",
-    isRefetching: false,
   },
 };
 
@@ -60,7 +58,6 @@ Empty.args = {
     isLoading: false,
     data: [],
     error: "",
-    isRefetching: false,
   },
 };
 
@@ -70,6 +67,5 @@ SingleItem.args = {
     isLoading: false,
     data: [{ value: "Foo" }],
     error: "",
-    isRefetching: false,
   },
 };

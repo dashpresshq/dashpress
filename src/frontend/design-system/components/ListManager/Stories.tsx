@@ -3,27 +3,28 @@ import React from "react";
 import { Story } from "@storybook/react";
 import { actions } from "@storybook/addon-actions";
 import { ApplicationRoot } from "frontend/components/ApplicationRoot";
-import { RenderList, IProps } from ".";
-import { SectionListItem } from "../Section/SectionList";
+import { loadedDataState } from "frontend/lib/data/constants/loadedDataState";
+import { ListManager, IProps, ListManagerItem } from ".";
 
 interface IDemoType {
   name: string;
 }
 
 export default {
-  title: "Components/RenderList",
-  component: RenderList,
+  title: "Components/ListManager",
+  component: ListManager,
   args: {
-    items: [
+    items: loadedDataState([
       { name: "Planck", age: 27 },
       { name: "Faraday", age: 27 },
       { name: "Newton", age: 27 },
       { name: "Einstein", age: 27 },
       { name: "Bohr", age: 27 },
       { name: "Curie", age: 27 },
-    ],
+    ]),
+    labelField: "name",
     render: ({ name }: IDemoType) => (
-      <SectionListItem
+      <ListManagerItem
         label={name}
         key={name}
         action={() => actions(`Clicking on ${name}`)}
@@ -32,9 +33,9 @@ export default {
   },
 };
 
-const Template: Story<IProps<IDemoType>> = (args) => (
+const Template: Story<IProps<IDemoType, "name">> = (args) => (
   <ApplicationRoot>
-    <RenderList {...args} />
+    <ListManager {...args} />
   </ApplicationRoot>
 );
 
@@ -56,17 +57,7 @@ Empty.args = {
   items: [],
 };
 
-export const NotSearchAble = Template.bind({});
-NotSearchAble.args = {
-  notSearchable: true,
-};
-
 export const Error = Template.bind({});
 Error.args = {
   error: "An Error Occurred",
-};
-
-export const Sorted = Template.bind({});
-Sorted.args = {
-  sortByLabel: true,
 };

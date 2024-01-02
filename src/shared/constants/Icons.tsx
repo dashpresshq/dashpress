@@ -1,3 +1,6 @@
+import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
+import styled from "styled-components";
+
 export const SystemIcons = {
   ShoppingCart: `<path d="M10 21a1 1 0 11-2 0 1 1 0 012 0zM21 21a1 1 0 11-2 0 1 1 0 012 0zM1 1h4l2.68 13.39c.188.925.995 1.61 1.962 1.61h.04-.002H19.438a2 2 0 001.959-1.597l.002-.013 1.6-8.39h-17" />`,
   Activity: `<path d="M22 12h-4l-3 9L9 3l-3 9H2" />`,
@@ -77,3 +80,25 @@ export const systemIconToSVG = (icon: string, strokeWidth = 2) => {
                 ${iconPath}
               </svg>`;
 };
+
+const GrabRoot = styled.svg`
+  cursor: grab;
+  fill: ${USE_ROOT_COLOR("main-text")};
+  touch-action: none;
+`;
+
+export function GrabIcon({
+  width,
+  className,
+}: {
+  width?: number;
+  className?: string;
+}) {
+  // :eyes document.body.style.setProperty("cursor", "grabbing");
+
+  return (
+    <GrabRoot viewBox="0 0 20 20" width={width || 12} className={className}>
+      <path d="M7 2a2 2 0 1 0 .001 4.001A2 2 0 0 0 7 2zm0 6a2 2 0 1 0 .001 4.001A2 2 0 0 0 7 8zm0 6a2 2 0 1 0 .001 4.001A2 2 0 0 0 7 14zm6-8a2 2 0 1 0-.001-4.001A2 2 0 0 0 13 6zm0 2a2 2 0 1 0 .001 4.001A2 2 0 0 0 13 8zm0 6a2 2 0 1 0 .001 4.001A2 2 0 0 0 13 14z" />
+    </GrabRoot>
+  );
+}

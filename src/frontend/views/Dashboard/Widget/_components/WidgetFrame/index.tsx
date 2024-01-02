@@ -19,7 +19,7 @@ import { WIDGET_CONFIG } from "../../constants";
 import { useWidgetNavigationLink } from "../../../Widget/useWidgetNavigationLink";
 
 const Box = styled.div`
-  padding: 24px;
+  padding: 16px;
 `;
 
 interface IProps {
@@ -81,7 +81,6 @@ export const WidgetFrame = forwardRef<HTMLDivElement, IProps>(
         aria-label={`${config.title} Widget`}
         $span={config.span || configSpan}
         $height={height}
-        hasSetting={!!setting}
       >
         <Card style={{ height: "100%" }}>
           <Box>

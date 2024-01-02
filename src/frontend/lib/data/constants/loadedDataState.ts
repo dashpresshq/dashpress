@@ -5,6 +5,5 @@ export function loadedDataState<T>(input: T): DataStateKeys<T> {
     data: input,
     error: null,
     isLoading: false,
-    isRefetching: false,
   };
 }

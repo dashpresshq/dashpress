@@ -2,9 +2,11 @@ import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { useEffect, useState } from "react";
 import { FormButton } from "frontend/design-system/components/Button/FormButton";
 import { ListSkeleton } from "frontend/design-system/components/Skeleton/List";
-import { RenderList } from "frontend/design-system/components/RenderList";
+import {
+  ListManager,
+  ListManagerItem,
+} from "frontend/design-system/components/ListManager";
 import { Spacer } from "frontend/design-system/primitives/Spacer";
-import { SectionListItem } from "frontend/design-system/components/Section/SectionList";
 import { Stack } from "frontend/design-system/primitives/Stack";
 import { useStringSelections } from "frontend/lib/selection";
 import { useEntityFields } from "frontend/hooks/entity/entity.store";
@@ -78,18 +80,22 @@ export function EntityFieldsSelectionSettings({
       <Spacer size="xxl" />
       {columns && (
         <>
-          <RenderList
-            items={entityFields.data}
-            singular="Field"
+          <ListManager
+            items={entityFields}
+            listLengthGuess={10}
+            labelField="name"
+            empty={{
+              text: "This entity has no fields. Kindly add fields from your prefer database tool to manage them here",
+            }}
             getLabel={getEntityFieldLabels}
             render={(menuItem) => {
-              const isHidden = isSelected(menuItem.name);
+              const isHidden = isSelected(menuItem.label);
 
               const disabled =
                 !isEntityFieldMutatable(menuItem) || !toggling.enabled;
 
               return (
-                <SectionListItem
+                <ListManagerItem
                   label={menuItem.label}
                   key={menuItem.name}
                   disabled={disabled}

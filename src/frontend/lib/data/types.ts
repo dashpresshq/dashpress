@@ -8,7 +8,7 @@ export enum DataStates {
 
 export type DataStateKeys<T> = Pick<
   UseQueryResult<T>,
-  "data" | "isLoading" | "isRefetching" | "error"
+  "data" | "isLoading" | "error"
 >;
 
 export interface IUseApiOptions<T> {

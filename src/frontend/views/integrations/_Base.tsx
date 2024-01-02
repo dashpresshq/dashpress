@@ -1,13 +1,13 @@
 import { useRouteParam } from "frontend/lib/routing/useRouteParam";
-import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { useRouter } from "next/router";
 import { ReactNode } from "react";
 import { Book, UploadCloud, Zap, ZapOff } from "react-feather";
 import { ContentLayout } from "frontend/design-system/components/Section/SectionDivider";
 import { SectionBox } from "frontend/design-system/components/Section/SectionBox";
-import { ListSkeleton } from "frontend/design-system/components/Skeleton/List";
-import { RenderList } from "frontend/design-system/components/RenderList";
-import { SectionListItem } from "frontend/design-system/components/Section/SectionList";
+import {
+  ListManager,
+  ListManagerItem,
+} from "frontend/design-system/components/ListManager";
 import { Spacer } from "frontend/design-system/primitives/Spacer";
 import { MenuSection } from "frontend/design-system/components/Section/MenuSection";
 import { AppLayout } from "frontend/_layouts/app";
@@ -40,35 +40,24 @@ export function BaseActionsLayout({ children }: IProps) {
       <ContentLayout>
         <ContentLayout.Left>
           <SectionBox title={ACTION_INTEGRATIONS_CRUD_CONFIG.TEXT_LANG.TITLE}>
-            <ViewStateMachine
-              loading={
-                actionIntegrationsList.isLoading || activeActionList.isLoading
-              }
-              error={actionIntegrationsList.error || activeActionList.error}
-              loader={<ListSkeleton count={7} />}
-            >
-              <RenderList
-                items={actionIntegrationsList.data.map(({ title, key }) => ({
-                  name: title,
-                  key,
-                }))}
-                render={(menuItem) => {
-                  const isActive = activeList.includes(menuItem.key);
-                  return (
-                    <SectionListItem
-                      label={menuItem.name}
-                      key={menuItem.key}
-                      IconComponent={isActive ? Zap : ZapOff}
-                      active={menuItem.key === currentKey}
-                      subtle={!isActive}
-                      action={NAVIGATION_LINKS.INTEGRATIONS.ACTIONS(
-                        menuItem.key
-                      )}
-                    />
-                  );
-                }}
-              />
-            </ViewStateMachine>
+            <ListManager
+              items={actionIntegrationsList}
+              listLengthGuess={7}
+              labelField="title"
+              render={(menuItem) => {
+                const isActive = activeList.includes(menuItem.key);
+                return (
+                  <ListManagerItem
+                    label={menuItem.title}
+                    key={menuItem.key}
+                    IconComponent={isActive ? Zap : ZapOff}
+                    active={menuItem.key === currentKey}
+                    subtle={!isActive}
+                    action={NAVIGATION_LINKS.INTEGRATIONS.ACTIONS(menuItem.key)}
+                  />
+                );
+              }}
+            />
           </SectionBox>
           <Spacer />
           <MenuSection

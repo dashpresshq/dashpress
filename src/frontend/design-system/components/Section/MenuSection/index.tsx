@@ -1,9 +1,9 @@
 import React from "react";
 import { Icon } from "react-feather";
 import styled from "styled-components";
+import { loadedDataState } from "frontend/lib/data/constants/loadedDataState";
 import { SHADOW_CSS, CardBody } from "../../Card";
-import { RenderList } from "../../RenderList";
-import { SectionListItem } from "../SectionList";
+import { ListManager, ListManagerItem } from "../../ListManager";
 
 export interface IMenuSectionItem {
   name: string;
@@ -32,12 +32,12 @@ export function MenuSection({ menuItems, currentMenuItem }: IProps) {
 
   return (
     <Root>
-      <RenderList
-        items={orderedMenuItems}
-        notSearchable
-        singular=""
+      <ListManager
+        items={loadedDataState(orderedMenuItems)}
+        listLengthGuess={10}
+        labelField="name"
         render={(menuItem) => (
-          <SectionListItem
+          <ListManagerItem
             label={menuItem.name}
             action={menuItem.action}
             active={(typeof menuItem.action === "string"

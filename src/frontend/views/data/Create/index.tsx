@@ -66,7 +66,6 @@ export function EntityCreate() {
               data: { ...scriptInitialValues, ...routeParams },
               error: entityFormExtension.error,
               isLoading: entityFormExtension.isLoading,
-              isRefetching: false,
             }}
             onSubmit={entityDataCreationMutation.mutateAsync}
           />

@@ -53,7 +53,7 @@ const RelativeCount = styled(Typo.XS)<{ directionColor: string }>`
 const DirectionRoot = styled(Stack)<{ color: string }>`
   border: 1px solid transparent;
   width: auto;
-  border-radius: 8px;
+  border-radius: 6px;
   padding: 0 4px;
   color: ${(props) => props.color};
   background-color: ${(props) => props.color}0A;

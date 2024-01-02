@@ -75,10 +75,17 @@ export class EntitiesApiService implements IApplicationService {
   }
 
   async getEntityPrimaryField(entity: string): Promise<string> {
-    return (
-      (await this.getEntityFields(entity)).find(({ isId }) => isId)?.name ||
-      "id"
-    );
+    const primaryField = (await this.getEntityFields(entity)).find(
+      ({ isId }) => isId
+    )?.name;
+
+    if (!primaryField) {
+      throw new Error(
+        "This entity doesn't have a primary key. Kindly ask your administrator to add one then restart the application and this error will go away."
+      );
+    }
+
+    return primaryField;
   }
 
   async getEntityFromSchema(entity: string): Promise<IDBSchema> {

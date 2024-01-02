@@ -17,7 +17,7 @@ export const GridRoot = styled.div`
   }
 `;
 
-export type TContentLayout = ((params: IProps) => ReactElement) & {
+type TContentLayout = ((params: IProps) => ReactElement) & {
   Left: (params: IProps) => ReactElement;
   Right: (params: IProps) => ReactElement;
   Center: (params: IProps) => ReactElement;

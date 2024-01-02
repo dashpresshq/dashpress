@@ -172,6 +172,5 @@ export function useHiddenEntityColumns(
     data: [...portalHiddenEntities.data, ...entityConfig.data],
     error: portalHiddenEntities.error || entityConfig.error,
     isLoading: portalHiddenEntities.isLoading || entityConfig.isLoading,
-    isRefetching: false,
   };
 }

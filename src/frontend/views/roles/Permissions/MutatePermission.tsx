@@ -3,10 +3,13 @@ import { userFriendlyCase } from "shared/lib/strings/friendly-case";
 import { Stack } from "frontend/design-system/primitives/Stack";
 import { FormButton } from "frontend/design-system/components/Button/FormButton";
 import { Spacer } from "frontend/design-system/primitives/Spacer";
-import { RenderList } from "frontend/design-system/components/RenderList";
-import { SectionListItem } from "frontend/design-system/components/Section/SectionList";
+import {
+  ListManager,
+  ListManagerItem,
+} from "frontend/design-system/components/ListManager";
 import { USER_PERMISSIONS } from "shared/constants/user";
 import { PORTAL_PERMISSION_HEIRACHIES } from "shared/logic/permissions/portal";
+import { loadedDataState } from "frontend/lib/data/constants/loadedDataState";
 import {
   useCreateRolePermissionMutation,
   useRolePermissionDeletionMutation,
@@ -16,7 +19,6 @@ import {
 interface IProps {
   permissionList: ILabelValue[];
   overAchingPermission?: string;
-  singular: string;
 }
 
 /*
@@ -56,7 +58,6 @@ export const getPermissionChildren = (
 
 export function MutatePermission({
   permissionList,
-  singular,
   overAchingPermission,
 }: IProps) {
   const rolePermissions = useRolePermissions();
@@ -91,21 +92,21 @@ export function MutatePermission({
           <Spacer size="xxl" />
         </>
       )}
-      <RenderList
-        sortByLabel
-        items={permissionList.map(({ label, value }) => ({
-          name: label,
-          value,
-        }))}
-        singular={singular}
+      <ListManager
+        items={loadedDataState(permissionList)}
+        listLengthGuess={10}
+        labelField="label"
+        empty={{
+          text: "No available permission for this section",
+        }}
         render={(menuItem) => {
           const isPermissionSelected = rolePermissions.data.includes(
             menuItem.value
           );
 
           return (
-            <SectionListItem
-              label={menuItem.name}
+            <ListManagerItem
+              label={menuItem.label}
               key={menuItem.value}
               disabled={isOverAchingPermissionSelected}
               subtle={isOverAchingPermissionSelected}

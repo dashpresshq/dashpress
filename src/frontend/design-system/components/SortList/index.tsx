@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-import SortableList, { SortableItem } from "react-easy-sort";
-import { Move } from "react-feather";
+import SortableList, { SortableItem, SortableKnob } from "react-easy-sort";
 import styled from "styled-components";
 import { DataStateKeys } from "frontend/lib/data/types";
 import { Stack } from "frontend/design-system/primitives/Stack";
@@ -8,6 +7,8 @@ import { pluralize } from "shared/lib/strings";
 import { Typo } from "frontend/design-system/primitives/Typo";
 import { Spacer } from "frontend/design-system/primitives/Spacer";
 import { arrayMoveImmutable } from "shared/lib/array/move";
+import { GrabIcon } from "shared/constants/Icons";
+import { Z_INDEXES } from "frontend/design-system/constants/zIndex";
 import { ErrorAlert } from "../Alert";
 import { EmptyWrapper } from "../EmptyWrapper";
 import { FormButton } from "../Button/FormButton";
@@ -20,15 +21,13 @@ export interface IProps<T> {
   onSave: (data: string[]) => Promise<void | string[]>;
 }
 
-const THRESHOLD_FOR_LONG_ITEMS_TO_SHOW_SAVE_CHANGES_AT_TOP = 10;
-
-const SortItem = styled(Stack)`
+const SortRoot = styled(Stack)`
   ${SHADOW_CSS}
   margin: 12px 0px;
   padding: 8px;
   user-select: none;
   border-radius: 4px;
-  cursor: move;
+  z-index: ${Z_INDEXES.dragAndDrop};
 `;
 
 const Root = styled.div`
@@ -99,8 +98,6 @@ export function SortList<T extends { value: string; label?: string }>({
 
   return (
     <Root>
-      {sortedData.length >
-        THRESHOLD_FOR_LONG_ITEMS_TO_SHOW_SAVE_CHANGES_AT_TOP && saveChanges}
       <SortableList
         onSortEnd={onSortEnd}
         className="list"
@@ -108,12 +105,12 @@ export function SortList<T extends { value: string; label?: string }>({
       >
         {sortedData.map((item) => (
           <SortableItem key={item.value}>
-            <div className="item">
-              <SortItem align="center">
-                <Move />
-                <Typo.SM>{item.label || item.value}</Typo.SM>
-              </SortItem>
-            </div>
+            <SortRoot align="center" className="item">
+              <SortableKnob>
+                <GrabIcon />
+              </SortableKnob>
+              <Typo.SM>{item.label || item.value}</Typo.SM>
+            </SortRoot>
           </SortableItem>
         ))}
       </SortableList>

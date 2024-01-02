@@ -4,11 +4,11 @@ import { Story } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
 import { Plus } from "react-feather";
 import { ApplicationRoot } from "frontend/components/ApplicationRoot";
-import { SectionListItem, IProps } from ".";
+import { ListManagerItem, IProps } from ".";
 
 export default {
-  title: "Components/SectionListItem",
-  component: SectionListItem,
+  title: "Components/ListManagerItem",
+  component: ListManagerItem,
   args: {
     label: "Section List Item",
     action: "/go-there",
@@ -17,10 +17,10 @@ export default {
 
 const Template: Story<IProps> = (args) => (
   <ApplicationRoot>
-    <SectionListItem {...args} />
-    <SectionListItem {...args} />
-    <SectionListItem {...args} />
-    <SectionListItem {...args} />
+    <ListManagerItem {...args} />
+    <ListManagerItem {...args} />
+    <ListManagerItem {...args} />
+    <ListManagerItem {...args} />
   </ApplicationRoot>
 );
 

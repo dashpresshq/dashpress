@@ -15,6 +15,8 @@ import { ListSkeleton } from "frontend/design-system/components/Skeleton/List";
 import { Tabs } from "frontend/design-system/components/Tabs";
 import { Spacer } from "frontend/design-system/primitives/Spacer";
 import { AppLayout } from "frontend/_layouts/app";
+import { useRouteParam } from "frontend/lib/routing/useRouteParam";
+import { useChangeRouterParam } from "frontend/lib/routing/useChangeRouterParam";
 import {
   ADMIN_PERMISSIONS_CRUD_CONFIG,
   useRolePermissions,
@@ -43,6 +45,8 @@ export function RolePermissions() {
   const portalUserPermissions = usePortalUserPermissions();
   const { backLink } = useNavigationStack();
   const [isDocOpen, setIsDocOpen] = useState(false);
+  const tabFromUrl = useRouteParam("tab");
+  const changeTabParam = useChangeRouterParam("tab");
 
   const portalUserPermissionsList = mapPermissionStringToLabelValue(
     portalUserPermissions
@@ -78,12 +82,13 @@ export function RolePermissions() {
             loader={<ListSkeleton count={20} />}
           >
             <Tabs
+              currentTab={tabFromUrl}
+              onChange={changeTabParam}
               contents={[
                 {
                   label: "App",
                   content: (
                     <MutatePermission
-                      singular="Invalid"
                       permissionList={[
                         ...adminPermissionList,
                         ...portalUserPermissionsList,

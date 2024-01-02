@@ -4,6 +4,8 @@ import { SoftButton } from "frontend/design-system/components/Button/SoftButton"
 import { Stack } from "frontend/design-system/primitives/Stack";
 import { Typo } from "frontend/design-system/primitives/Typo";
 import { DropDownMenu } from "frontend/design-system/components/DropdownMenu";
+import { GrabIcon } from "shared/constants/Icons";
+import { SortableKnob } from "react-easy-sort";
 import { DASHBOARD_RELATIVE_DAYS } from "./constants";
 import { IWidgetSettingProps } from "./types";
 import { useDashboardWidgetRelativeDateStore } from "../../../relativeTime.store";
@@ -31,7 +33,14 @@ export function WidgetHeader({
 
   return (
     <Stack justify="space-between" align="flex-start">
-      <Typo.MD ellipsis>{title}</Typo.MD>
+      <Stack>
+        {setting && (
+          <SortableKnob>
+            <GrabIcon width={18} />
+          </SortableKnob>
+        )}
+        <Typo.MD ellipsis>{title}</Typo.MD>
+      </Stack>
       <Stack width="auto">
         {setting ? (
           <>

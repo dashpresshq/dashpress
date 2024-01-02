@@ -6,21 +6,13 @@ export const dashboardGridRoot = css`
   ${gridRoot}
   user-select: none;
   row-gap: 16px;
-  grid-auto-rows: minmax(130px, auto);
+  grid-auto-rows: minmax(110px, auto);
 `;
 
 export const WidgetRoot = styled.div<{
-  hasSetting: boolean;
   $span: GridSpanSizes;
   $height: string;
 }>`
-  ${(props) =>
-    props.hasSetting &&
-    css`
-      cursor: move;
-      user-select: none;
-    `}
-
   ${gridItem};
 
   grid-row-start: span ${(props) => props.$height};

@@ -5,6 +5,7 @@ import { Icon, Loader, MoreVertical } from "react-feather";
 import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
 import { Stack } from "frontend/design-system/primitives/Stack";
 import { Typo } from "frontend/design-system/primitives/Typo";
+import { Z_INDEXES } from "frontend/design-system/constants/zIndex";
 import { SoftButtonStyled } from "../Button/Button";
 import { BREAKPOINTS } from "../../constants";
 import { Spin } from "../_/Spin";
@@ -62,7 +63,7 @@ const DropDownMenuStyled = styled(Dropdown.Menu)`
   position: absolute;
   top: 100%;
   left: 0;
-  z-index: 1000;
+  z-index: ${Z_INDEXES.dropDown};
   display: none;
   float: left;
   min-width: 10rem;

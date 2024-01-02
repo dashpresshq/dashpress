@@ -1,10 +1,10 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import { Table } from ".";
-import { IProps } from "./types";
+import { ITableProps } from "./types";
 import { TABLE_COLUMNS, TABLE_DATA } from "./data";
 
-const DEFAULT_TABLE_PROPS: IProps<unknown> = {
+const DEFAULT_TABLE_PROPS: ITableProps<unknown> = {
   overridePaginatedDataState: {
     pageSize: 10,
     pageIndex: 1,

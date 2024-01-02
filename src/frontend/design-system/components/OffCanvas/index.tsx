@@ -5,6 +5,7 @@ import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
 import { Typo } from "frontend/design-system/primitives/Typo";
 import { Stack } from "frontend/design-system/primitives/Stack";
 import { Divider } from "frontend/design-system/primitives/Divider";
+import { Z_INDEXES } from "frontend/design-system/constants/zIndex";
 import { NextPortal } from "../_/NextPortal";
 import { SoftButton } from "../Button/SoftButton";
 
@@ -33,7 +34,7 @@ const Body = styled.div`
 const Root = styled.div<{ width: number }>`
   position: fixed;
   bottom: 0;
-  z-index: 1045;
+  z-index: ${Z_INDEXES.offCanvas};
   display: flex;
   flex-direction: column;
   max-width: 100%;

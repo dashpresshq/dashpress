@@ -96,6 +96,7 @@ export function MenuSettings() {
                   loader={<ListSkeleton count={20} />}
                 >
                   <EntitiesSelection
+                    type="active"
                     crudConfig={CRUD_CONFIG}
                     selectionKey="enabled-menu-entities-settings"
                     allList={activeEntities.data.map(({ value }) => value)}

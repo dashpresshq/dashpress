@@ -45,7 +45,6 @@ describe("SortList", () => {
           ],
           error: null,
           isLoading: false,
-          isRefetching: false,
         }}
         onSave={jest.fn()}
       />
@@ -67,7 +66,6 @@ describe("SortList", () => {
           ],
           error: null,
           isLoading: false,
-          isRefetching: false,
         }}
         onSave={jest.fn()}
       />
@@ -84,7 +82,6 @@ describe("SortList", () => {
           data: [],
           error: null,
           isLoading: false,
-          isRefetching: false,
         }}
         onSave={jest.fn()}
       />
@@ -107,7 +104,6 @@ describe("SortList", () => {
           ],
           error: null,
           isLoading: true,
-          isRefetching: false,
         }}
         onSave={jest.fn()}
       />
@@ -131,7 +127,6 @@ describe("SortList", () => {
           ],
           error: "Some nasty error",
           isLoading: false,
-          isRefetching: false,
         }}
         onSave={jest.fn()}
       />
@@ -147,7 +142,6 @@ describe("SortList", () => {
           data: Array.from({ length: 11 }, (_, i) => ({ value: `foo${i}` })),
           error: null,
           isLoading: false,
-          isRefetching: false,
         }}
         onSave={jest.fn()}
       />
@@ -164,7 +158,6 @@ describe("SortList", () => {
           data: Array.from({ length: 2 }, (_, i) => ({ value: `foo${i}` })),
           error: null,
           isLoading: false,
-          isRefetching: false,
         }}
         onSave={jest.fn()}
       />
@@ -192,7 +185,6 @@ describe("SortList", () => {
           ],
           error: null,
           isLoading: false,
-          isRefetching: false,
         }}
         onSave={onSave}
       />

@@ -163,7 +163,7 @@ describe("pages/admin", () => {
   });
 
   describe("Action Button", () => {
-    it("should go to settings page on 'Manage Dashboard'", async () => {
+    it("should go to settings page on 'Edit Dashboard'", async () => {
       const replaceMock = jest.fn();
       useRouter.mockImplementation(() => ({
         replace: replaceMock,
@@ -179,7 +179,7 @@ describe("pages/admin", () => {
       );
 
       await userEvent.click(
-        await screen.findByRole("button", { name: "Manage Dashboard" })
+        await screen.findByRole("button", { name: "Edit Dashboard" })
       );
 
       expect(replaceMock).toHaveBeenCalledWith("/dashboard/manage");

@@ -118,7 +118,7 @@ export function DashboardWidgetForm({
               }}
             >
               <Root>
-                <GridSpan>
+                <GridSpan $span={1}>
                   <Field name="title" validate={required} validateFields={[]}>
                     {({ input, meta }) => (
                       <FormInput
@@ -130,7 +130,7 @@ export function DashboardWidgetForm({
                     )}
                   </Field>
                 </GridSpan>
-                <GridSpan>
+                <GridSpan $span={1}>
                   <Field name="_type" validate={required} validateFields={[]}>
                     {({ input, meta }) => (
                       <FormSelect

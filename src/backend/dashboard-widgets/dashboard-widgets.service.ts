@@ -74,6 +74,8 @@ export class DashboardWidgetsApiService implements IApplicationService {
       return "{}";
     }
 
+    await RDBMSDataApiService.getInstance();
+
     const script = script$1.replaceAll(
       `$.${WIDGET_SCRIPT_RELATIVE_TIME_MARKER}`,
       relativeDateNotationToActualDate(relativeDate).toISOString()
@@ -83,7 +85,6 @@ export class DashboardWidgetsApiService implements IApplicationService {
       (await runAsyncJavascriptString(script, {
         currentUser,
         query: async (sql: string) => {
-          await RDBMSDataApiService.getInstance();
           return await this._rDBMSApiDataService.runQuery(sql);
         },
       })) || "{}"
@@ -137,6 +138,18 @@ export class DashboardWidgetsApiService implements IApplicationService {
               entity.value,
               "date"
             );
+
+          const plainCountQuery = (await RDBMSDataApiService.getInstance())
+            .from(entity.value)
+            .count({ count: "*" })
+            .toQuery();
+
+          const dateCountQuery = (await RDBMSDataApiService.getInstance())
+            .from(entity.value)
+            .where(dateField, "<", `$.${WIDGET_SCRIPT_RELATIVE_TIME_MARKER}`)
+            .count({ count: "*" })
+            .toQuery();
+
           return {
             id: nanoid(),
             title: userFriendlyCase(`${entity.value}`),
@@ -145,24 +158,30 @@ export class DashboardWidgetsApiService implements IApplicationService {
             color: colorsList[index % (colorsList.length - 1)],
             icon: SystemIconsList[index % (SystemIconsList.length - 1)],
             script: dateField
-              ? `const actual = await $.query(\`SELECT count(*) FROM "${entity.value}"\`);
-const relative = await $.query(\`SELECT count(*) FROM "${entity.value}" WHERE "${dateField}" < '$.${WIDGET_SCRIPT_RELATIVE_TIME_MARKER}'\`);
+              ? `const actual = await $.query(\`${plainCountQuery}\`);
+const relative = await $.query(\`${dateCountQuery}\`);
 
 return [actual[0], relative[0]];
             `
-              : `return await $.query('SELECT count(*) FROM "${entity.value}"')`,
+              : `return await $.query(\`${plainCountQuery}\`)`,
           };
         })
     );
 
     const firstEntity = entitiesToShow[0];
+
     if (firstEntity) {
+      const firstQuery = (await RDBMSDataApiService.getInstance())
+        .from(firstEntity.value)
+        .limit(5)
+        .toQuery();
+
       defaultWidgets.push({
         id: nanoid(),
         title: userFriendlyCase(`${firstEntity.value}`),
         _type: "table",
         entity: firstEntity.value,
-        script: `return await $.query('SELECT * FROM "${firstEntity.value}" LIMIT 5')`,
+        script: `return await $.query(\`${firstQuery}\`)`,
       });
     }
 

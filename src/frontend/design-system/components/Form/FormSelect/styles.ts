@@ -27,6 +27,11 @@ export const SelectStyles = css`
     }
   }
 
+  .react-select__input-container {
+    color: ${USE_ROOT_COLOR("main-text")};
+    font-size: 0.8125rem;
+  }
+
   .react-select__control--is-disabled {
     background-color: ${USE_ROOT_COLOR("soft-color")};
     opacity: 1;

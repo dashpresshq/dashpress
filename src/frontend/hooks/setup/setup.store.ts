@@ -1,6 +1,7 @@
 import { CRUD_CONFIG_NOT_FOUND } from "frontend/lib/crud-config";
 import { useStorageApi } from "frontend/lib/data/useApi";
 import { useRouter } from "next/router";
+import { useEffect } from "react";
 import { ISetupCheck } from "shared/types/auth";
 
 export const SETUP_CHECK_URL = "/api/setup/check";
@@ -21,15 +22,17 @@ export function useSetupCheck(config: ISetupCheckConfig[]) {
     },
   });
 
+  useEffect(() => {
+    config.forEach((configItem) => {
+      if (data[configItem.key] === configItem.value) {
+        router.replace(configItem.url);
+      }
+    });
+  }, [data]);
+
   if (isLoading || !data) {
     return isLoading;
   }
-
-  config.forEach((configItem) => {
-    if (data[configItem.key] === configItem.value) {
-      router.replace(configItem.url);
-    }
-  });
 
   return false;
 }

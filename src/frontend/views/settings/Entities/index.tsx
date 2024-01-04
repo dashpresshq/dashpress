@@ -80,7 +80,6 @@ export function EntitiesSettings() {
         >
           <EntitiesSelection
             type="active"
-            crudConfig={CRUD_CONFIG}
             selectionKey="enabled-entities-settings"
             allList={entitiesList.data.map(({ value }) => value)}
             getEntityFieldLabels={getEntitiesDictionPlurals}

@@ -11,7 +11,7 @@ export function sortListByOrder<T, K extends keyof T>(
     return index;
   };
 
-  return itemsToOrder.sort((a, b) => {
+  return [...itemsToOrder].sort((a, b) => {
     return indexOf(a) - indexOf(b);
   });
 }

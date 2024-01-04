@@ -21,7 +21,7 @@ describe("ListManager", () => {
     render(
       <ListManager
         {...{ ...defaultProps }}
-        render={(item) => <div>{item.name}</div>}
+        render={(item) => ({ label: item.name })}
       />
     );
 
@@ -34,7 +34,7 @@ describe("ListManager", () => {
       <ListManager
         {...{ ...defaultProps }}
         getLabel={(name) => `${name} + Label`}
-        render={(item) => <div>{item.label}</div>}
+        render={(item) => ({ label: item.label })}
       />
     );
 
@@ -46,7 +46,7 @@ describe("ListManager", () => {
     render(
       <ListManager
         {...{ ...defaultProps }}
-        render={(item) => <div>{item.name}</div>}
+        render={(item) => ({ label: item.name })}
       />
     );
 
@@ -60,7 +60,7 @@ describe("ListManager", () => {
         items={loadedDataState(
           Array.from({ length: 11 }, (_, i) => ({ name: `foo${i}` }))
         )}
-        render={(item) => <div>{item.name}</div>}
+        render={(item) => ({ label: item.name })}
       />
     );
 
@@ -75,7 +75,7 @@ describe("ListManager", () => {
           Array.from({ length: 11 }, (_, i) => ({ name: `foo${i}` }))
         )}
         getLabel={(name) => `1-${name}`}
-        render={(item) => <div>{item.label}</div>}
+        render={(item) => ({ label: item.label })}
       />
     );
 
@@ -108,7 +108,7 @@ describe("ListManager", () => {
     render(
       <ListManager
         items={loadedDataState([])}
-        render={() => <div>foo</div>}
+        render={(item) => ({ label: item.label })}
         {...{ ...defaultProps }}
       />
     );
@@ -116,3 +116,75 @@ describe("ListManager", () => {
     expect(screen.getByText("No Item Has Been Added Yet")).toBeInTheDocument();
   });
 });
+
+/*
+
+import React, { ReactNode } from "react";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { SortList } from ".";
+
+jest.mock("react-easy-sort", () => ({
+  __esModule: true,
+  default: ({
+    onSortEnd,
+    children,
+  }: {
+    onSortEnd: (newValue: number, oldValue: number) => void;
+    children: ReactNode;
+  }) => (
+    // eslint-disable-next-line jsx-a11y/click-events-have-key-events
+    <div
+      onClick={() => {
+        onSortEnd(1, 2);
+        onSortEnd(-1, 0);
+        onSortEnd(2, -1);
+      }}
+      data-testid="fake-sorting"
+    >
+      {children}
+    </div>
+  ),
+  SortableItem: ({ children }: { children: ReactNode }) => (
+    <div>{children}</div>
+  ),
+}));
+
+describe("SortList", () => {
+  it("should sort items", async () => {
+    const onSave = jest.fn();
+    render(
+      <SortList
+        data={{
+          data: [
+            {
+              value: "foo-value",
+            },
+            {
+              value: "bar-value",
+            },
+            {
+              value: "baz-value",
+            },
+          ],
+          error: null,
+          isLoading: false,
+        }}
+        onSave={onSave}
+      />
+    );
+
+    fireEvent.click(screen.getByTestId("fake-sorting"));
+
+    fireEvent.click(screen.getByRole("button", { name: "Save Order" }));
+
+    await waitFor(() => {
+      expect(onSave).toHaveBeenCalledWith([
+        "bar-value",
+        "foo-value",
+        "baz-value",
+      ]);
+    });
+  });
+});
+
+*/

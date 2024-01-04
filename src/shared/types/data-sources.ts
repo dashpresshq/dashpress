@@ -54,7 +54,7 @@ export const DATA_SOURCES_CONFIG: Record<
     fields: DATABASE_FIELDS,
     port: 3306,
     useConnectionString: true,
-    getQueryData: (data) => data,
+    getQueryData: (data) => data[0],
   },
   [RDMSSources.Sqlite]: {
     fields: ["filename"],

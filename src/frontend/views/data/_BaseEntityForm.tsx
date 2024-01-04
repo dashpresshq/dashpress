@@ -4,16 +4,13 @@ import {
 } from "frontend/design-system/components/Skeleton/Form";
 import { SchemaForm } from "frontend/components/SchemaForm";
 import { useEntityConfiguration } from "frontend/hooks/configuration/configuration.store";
-import {
-  useEntityFields,
-  useEntityToOneReferenceFields,
-} from "frontend/hooks/entity/entity.store";
+import { useEntityToOneReferenceFields } from "frontend/hooks/entity/entity.store";
 import {
   useEntityFieldLabels,
   useEntityFieldSelections,
   useProcessedEntityFieldTypes,
   useEntityFieldValidations,
-  useHiddenEntityColumns,
+  useEntityCrudFields,
 } from "frontend/hooks/entity/entity.config";
 import { useMemo } from "react";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
@@ -21,7 +18,6 @@ import { DataStateKeys, DataStates } from "frontend/lib/data/types";
 import { ButtonIconTypes } from "frontend/design-system/components/Button/constants";
 import { buildAppliedSchemaFormConfig } from "./buildAppliedSchemaFormConfig";
 import { useEntityViewStateMachine } from "./hooks/useEntityViewStateMachine";
-import { filterOutHiddenScalarColumns } from "./utils";
 import { usePortalExtendEntityFormConfig } from "./portal";
 import { useIsEntityFieldMutatable } from "./hooks/useIsEntityFieldMutatable";
 
@@ -47,7 +43,6 @@ export function BaseEntityForm({
   onSubmit,
 }: IProps) {
   const entityValidationsMap = useEntityFieldValidations(entity);
-  const entityFields = useEntityFields(entity);
   const getEntityFieldLabels = useEntityFieldLabels(entity);
   const entityFieldTypes = useProcessedEntityFieldTypes(entity);
   const entityFieldSelections = useEntityFieldSelections(entity);
@@ -55,7 +50,7 @@ export function BaseEntityForm({
     "entity_columns_types",
     entity
   );
-  const hiddenColumns = useHiddenEntityColumns(crudAction, entity);
+  const entityCrudFields = useEntityCrudFields(entity, crudAction);
 
   const extendEntityFormConfig = usePortalExtendEntityFormConfig(
     entity,
@@ -72,15 +67,13 @@ export function BaseEntityForm({
 
   const error =
     entityFieldTypesMap.error ||
-    hiddenColumns.error ||
+    entityCrudFields.error ||
     initialValuesData?.error ||
     entityFormExtension.error ||
-    entityToOneReferenceFields.error ||
-    entityFields.error;
+    entityToOneReferenceFields.error;
 
   const isLoading =
-    entityFields.isLoading ||
-    hiddenColumns.isLoading ||
+    entityCrudFields.isLoading ||
     entityToOneReferenceFields.isLoading ||
     entityFormExtension.isLoading ||
     entityFieldTypesMap.isLoading ||
@@ -94,10 +87,9 @@ export function BaseEntityForm({
     entity,
   });
 
-  const fields = filterOutHiddenScalarColumns(
-    entityFields.data.filter(isEntityFieldMutatable),
-    hiddenColumns.data
-  ).map(({ name }) => name);
+  const fields = entityCrudFields.data
+    .filter(isEntityFieldMutatable)
+    .map(({ name }) => name);
 
   const fieldsInitialValues = useMemo(() => {
     const initialValues = initialValuesData?.data;
@@ -115,7 +107,7 @@ export function BaseEntityForm({
         return [field, value];
       })
     );
-  }, [initialValuesData, hiddenColumns]);
+  }, [initialValuesData, entityCrudFields.data]);
 
   const formSchemaConfig = {
     entityToOneReferenceFields: entityToOneReferenceFields.data,

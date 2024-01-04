@@ -7,6 +7,8 @@ import Link from "next/link";
 import styled, { css } from "styled-components";
 import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
 import { Stack } from "frontend/design-system/primitives/Stack";
+import { GrabIcon } from "shared/constants/Icons";
+import { SortableKnob } from "react-easy-sort";
 import { FormButton } from "../../Button/FormButton";
 import { FormSwitch } from "../../Form/FormSwitch";
 import { ButtonIconTypes } from "../../Button/constants";
@@ -127,7 +129,7 @@ const Label = styled.label<{ $active?: boolean; $subtle?: boolean }>`
       : USE_ROOT_COLOR("main-text")};
 `;
 
-export interface IProps {
+export interface IListMangerItemProps {
   label: string;
   action?: string | (() => void);
   secondaryAction?: () => void;
@@ -135,6 +137,7 @@ export interface IProps {
   subLabel?: string;
   IconComponent?: IconType;
   disabled?: boolean;
+  sortable?: boolean;
   subtle?: boolean;
   active?: boolean;
   toggle?: {
@@ -159,15 +162,21 @@ export function ListManagerItem({
   active,
   toggle,
   action,
+  sortable,
   secondaryAction,
   subtle,
   size,
   actionButtons = [],
-}: IProps) {
+}: IListMangerItemProps) {
   const id = useId();
   const content = (
     <Stack>
       <Stack align="center">
+        <div style={{ display: sortable && !subtle ? "block" : "none" }}>
+          <SortableKnob>
+            <GrabIcon />
+          </SortableKnob>
+        </div>
         {IconComponent ? (
           <Icon
             as={IconComponent}

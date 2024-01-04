@@ -3,7 +3,8 @@ import { Icon } from "react-feather";
 import styled from "styled-components";
 import { loadedDataState } from "frontend/lib/data/constants/loadedDataState";
 import { SHADOW_CSS, CardBody } from "../../Card";
-import { ListManager, ListManagerItem } from "../../ListManager";
+import { ListManager } from "../../ListManager";
+import { IListMangerItemProps } from "../../ListManager/ListManagerItem";
 
 export interface IMenuSectionItem {
   name: string;
@@ -36,19 +37,19 @@ export function MenuSection({ menuItems, currentMenuItem }: IProps) {
         items={loadedDataState(orderedMenuItems)}
         listLengthGuess={10}
         labelField="name"
-        render={(menuItem) => (
-          <ListManagerItem
-            label={menuItem.name}
-            action={menuItem.action}
-            active={(typeof menuItem.action === "string"
+        render={(menuItem) => {
+          const props: IListMangerItemProps = {
+            label: menuItem.name,
+            action: menuItem.action,
+            active: (typeof menuItem.action === "string"
               ? menuItem.action
               : ""
-            ).includes(`${currentMenuItem}`)}
-            disabled={!!menuItem.disabled}
-            key={menuItem.name}
-            IconComponent={menuItem.IconComponent}
-          />
-        )}
+            ).includes(`${currentMenuItem}`),
+            disabled: !!menuItem.disabled,
+            IconComponent: menuItem.IconComponent,
+          };
+          return props;
+        }}
       />
     </Root>
   );

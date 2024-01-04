@@ -113,6 +113,12 @@ const DEFAULT_ENTITY_CONFIG_VALUES: Record<
   hidden_entity_create_columns: () => ["hidden-field-1"],
   hidden_entity_update_columns: () => ["hidden-field-1"],
   hidden_entity_details_columns: () => ["hidden-field-1"],
+
+  entity_fields_orders_table: () => [],
+  entity_fields_orders_create: () => [],
+  entity_fields_orders_details: () => [],
+  entity_fields_orders_update: () => [],
+
   hidden_entity_relations: () => ["hidden-related-entity-5"],
   entity_columns_labels: () => ({}),
   entity_presentation_script: () => "",

@@ -12,6 +12,8 @@ export interface IEntityCrudSettings {
   delete: boolean;
 }
 
+export type CrudViewsKeys = keyof IEntityCrudSettings | "table";
+
 export enum DataActionType {
   Create = "create",
   Details = "details",

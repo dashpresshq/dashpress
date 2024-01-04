@@ -1,16 +1,14 @@
 import {
+  useEntityCrudFields,
   useEntityFieldLabels,
   useEntityFieldSelections,
   useProcessedEntityFieldTypes,
-  useHiddenEntityColumns,
 } from "frontend/hooks/entity/entity.config";
 import {
   useEntityIdField,
-  useEntityFields,
   useEntityToOneReferenceFields,
 } from "frontend/hooks/entity/entity.store";
 import { FIELD_TYPES_CONFIG_MAP } from "shared/validations";
-import { useMemo } from "react";
 import { IColorableSelection } from "shared/types/ui";
 import { ENTITY_LIST_PATH } from "frontend/hooks/data/constants";
 import {
@@ -22,7 +20,6 @@ import { ellipsis } from "shared/lib/strings";
 import { TableFilterType } from "frontend/design-system/components/Table/filters/types";
 import { ITableColumn } from "frontend/design-system/components/Table/types";
 import { ActionButtons } from "frontend/design-system/components/Button/ActionButtons";
-import { filterOutHiddenScalarColumns } from "../utils";
 import { viewSpecialDataTypes } from "../viewSpecialDataTypes";
 import { usePortalTableColumns } from "./portal";
 import { evalutePresentationScript } from "../evaluatePresentationScript";
@@ -105,9 +102,8 @@ export const useTableColumns = (
 ): Partial<DataStateKeys<ITableColumn[]>> => {
   const portalTableColumns = usePortalTableColumns(entity);
   const getEntityFieldLabels = useEntityFieldLabels(entity);
-  const entityFields = useEntityFields(entity);
   const entityToOneReferenceFields = useEntityToOneReferenceFields(entity);
-  const hiddenTableColumns = useHiddenEntityColumns("table", entity);
+  const entityCrudFields = useEntityCrudFields(entity, "table");
   const defaultDateFormat = useAppConfiguration("default_date_format");
   const entityPresentationScript = useEntityConfiguration(
     "entity_presentation_script",
@@ -124,19 +120,11 @@ export const useTableColumns = (
     entityId: "doesnt-matter-any-value-will-do-here",
   });
 
-  const columnsToShow = useMemo(() => {
-    return filterOutHiddenScalarColumns(
-      entityFields.data,
-      hiddenTableColumns.data
-    );
-  }, [entityFields.data.length, hiddenTableColumns.data.length]);
-
   if (
     entityToOneReferenceFields.isLoading ||
     defaultDateFormat.isLoading ||
-    entityFields.isLoading ||
-    idField.isLoading ||
-    hiddenTableColumns.isLoading
+    entityCrudFields.isLoading ||
+    idField.isLoading
   ) {
     return {
       isLoading: true,
@@ -146,9 +134,8 @@ export const useTableColumns = (
   const error =
     entityToOneReferenceFields.error ||
     defaultDateFormat.error ||
-    entityFields.error ||
-    idField.error ||
-    hiddenTableColumns.error;
+    entityCrudFields.error ||
+    idField.error;
 
   if (error) {
     return {
@@ -156,58 +143,61 @@ export const useTableColumns = (
     };
   }
 
-  const columns: ITableColumn[] = columnsToShow.map(({ name, isId }) => {
-    const tableColumn: ITableColumn = {
-      Header: getEntityFieldLabels(name),
-      accessor: name,
-      filter: buildFilterConfigFromType({
-        entityType: entityFieldTypes[name],
-        entityFieldSelections: entityFieldSelections[name],
-        isIdField: idField.data === name,
-        referenceField: entityToOneReferenceFields.data[name],
-      }),
-      disableSortBy: !FIELD_TYPES_CONFIG_MAP[entityFieldTypes[name]]?.sortable,
-      Cell: ({ row }: { row: { original: Record<string, unknown> } }) => {
-        const value$1 = row.original[name];
-        if (isId) {
-          return <span>{value$1 as string}</span>;
-        }
-
-        const value = evalutePresentationScript(
-          entityPresentationScript.data.script,
-          {
-            field: name,
-            from: "details",
-            row: row.original,
-            value: value$1,
+  const columns: ITableColumn[] = entityCrudFields.data.map(
+    ({ name, isId }) => {
+      const tableColumn: ITableColumn = {
+        Header: getEntityFieldLabels(name),
+        accessor: name,
+        filter: buildFilterConfigFromType({
+          entityType: entityFieldTypes[name],
+          entityFieldSelections: entityFieldSelections[name],
+          isIdField: idField.data === name,
+          referenceField: entityToOneReferenceFields.data[name],
+        }),
+        disableSortBy:
+          !FIELD_TYPES_CONFIG_MAP[entityFieldTypes[name]]?.sortable,
+        Cell: ({ row }: { row: { original: Record<string, unknown> } }) => {
+          const value$1 = row.original[name];
+          if (isId) {
+            return <span>{value$1 as string}</span>;
           }
-        );
 
-        const specialDataTypeRender = viewSpecialDataTypes({
-          fieldName: name,
-          value,
-          entityToOneReferenceFields: entityToOneReferenceFields.data,
-          entityFieldSelections,
-          entityFieldTypes,
-          options: {
-            displayFrom: "table",
-            defaultDateFormat: defaultDateFormat.data,
-          },
-        });
-        if (specialDataTypeRender) {
-          return specialDataTypeRender;
-        }
-        if (typeof value === "string") {
-          return <>{ellipsis(value as string, 50)}</>;
-        }
-        if (typeof value === "object") {
-          return <>{JSON.stringify(value)}</>;
-        }
-        return <span>{value as string}</span>;
-      },
-    };
-    return tableColumn;
-  });
+          const value = evalutePresentationScript(
+            entityPresentationScript.data.script,
+            {
+              field: name,
+              from: "details",
+              row: row.original,
+              value: value$1,
+            }
+          );
+
+          const specialDataTypeRender = viewSpecialDataTypes({
+            fieldName: name,
+            value,
+            entityToOneReferenceFields: entityToOneReferenceFields.data,
+            entityFieldSelections,
+            entityFieldTypes,
+            options: {
+              displayFrom: "table",
+              defaultDateFormat: defaultDateFormat.data,
+            },
+          });
+          if (specialDataTypeRender) {
+            return specialDataTypeRender;
+          }
+          if (typeof value === "string") {
+            return <>{ellipsis(value as string, 50)}</>;
+          }
+          if (typeof value === "object") {
+            return <>{JSON.stringify(value)}</>;
+          }
+          return <span>{value as string}</span>;
+        },
+      };
+      return tableColumn;
+    }
+  );
 
   if (actionButtons.length > 0) {
     columns.push({

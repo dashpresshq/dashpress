@@ -1,5 +1,5 @@
 import { ILabelValue } from "shared/types/options";
-import { IEntityField, IEntityRelation } from "shared/types/db";
+import { IEntityRelation } from "shared/types/db";
 import {
   ConfigurationApiService,
   configurationApiService,
@@ -41,10 +41,6 @@ export class EntitiesApiController {
       entity,
       userRole
     );
-  }
-
-  async getEntityFields(entity: string): Promise<IEntityField[]> {
-    return await this._entitiesApiService.getOrderedEntityFields(entity);
   }
 }
 

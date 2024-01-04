@@ -12,15 +12,11 @@ import {
   useEntityFieldLabels,
   useEntityFieldSelections,
   useProcessedEntityFieldTypes,
-  useHiddenEntityColumns,
+  useEntityCrudFields,
 } from "frontend/hooks/entity/entity.config";
-import {
-  useEntityFields,
-  useEntityToOneReferenceFields,
-} from "frontend/hooks/entity/entity.store";
+import { useEntityToOneReferenceFields } from "frontend/hooks/entity/entity.store";
 import { DataStates } from "frontend/lib/data/types";
 import styled from "styled-components";
-import { filterOutHiddenScalarColumns } from "../utils";
 import { useEntityViewStateMachine } from "../hooks/useEntityViewStateMachine";
 import { viewSpecialDataTypes } from "../viewSpecialDataTypes";
 import { evalutePresentationScript } from "../evaluatePresentationScript";
@@ -40,9 +36,8 @@ export function EntityDetailsView({
   displayFrom: "details" | "canvas";
 }) {
   const dataDetails = useEntityDataDetails({ entity, entityId: id });
-  const entityFields = useEntityFields(entity);
   const entityFieldTypes = useProcessedEntityFieldTypes(entity);
-  const hiddenDetailsColumns = useHiddenEntityColumns("details", entity);
+  const entityCrudFields = useEntityCrudFields(entity, "details");
   const defaultDateFormat = useAppConfiguration("default_date_format");
   const getEntityFieldLabels = useEntityFieldLabels(entity);
   const entityToOneReferenceFields = useEntityToOneReferenceFields(entity);
@@ -54,10 +49,9 @@ export function EntityDetailsView({
 
   const error =
     dataDetails.error ||
-    hiddenDetailsColumns.error ||
+    entityCrudFields.error ||
     entityFieldTypes.error ||
     defaultDateFormat.error ||
-    entityFields.error ||
     entityPresentationScript.error ||
     entityToOneReferenceFields.error;
 
@@ -65,9 +59,8 @@ export function EntityDetailsView({
     dataDetails.isLoading ||
     defaultDateFormat.isLoading ||
     entityToOneReferenceFields.isLoading ||
-    entityFields.isLoading ||
     entityPresentationScript.isLoading ||
-    hiddenDetailsColumns.isLoading;
+    entityCrudFields.isLoading;
 
   const viewState = useEntityViewStateMachine({
     isLoading,
@@ -95,10 +88,7 @@ export function EntityDetailsView({
     >
       <PreDataDetails entity={entity} entityId={id} />
       <div aria-label="Details Section">
-        {filterOutHiddenScalarColumns(
-          entityFields.data,
-          hiddenDetailsColumns.data
-        ).map(({ name }) => {
+        {entityCrudFields.data.map(({ name }) => {
           const value$1 = dataDetails?.data?.[name];
 
           const value = evalutePresentationScript(

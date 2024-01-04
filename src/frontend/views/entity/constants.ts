@@ -3,7 +3,7 @@ import { Icon, Save, Settings } from "react-feather";
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
 import { useUserHasPermission } from "frontend/hooks/auth/user.store";
 import { USER_PERMISSIONS } from "shared/constants/user";
-import { IEntityCrudSettings } from "shared/configurations";
+import { CrudViewsKeys } from "shared/configurations";
 
 export const ENTITY_CONFIGURATION_VIEW = "ENTITY_CONFIGURATION_VIEW";
 
@@ -13,10 +13,7 @@ export const ENTITY_FIELD_SETTINGS_TAB_LABELS = {
   ORDER: "Order",
 };
 
-export const ENTITY_CRUD_LABELS: Record<
-  keyof IEntityCrudSettings | "table",
-  string
-> = {
+export const ENTITY_CRUD_LABELS: Record<CrudViewsKeys, string> = {
   create: "Create",
   update: "Update",
   details: "Details",

@@ -28,7 +28,6 @@ import {
 } from "frontend/design-system/components/Skeleton/Form";
 import { Spacer } from "frontend/design-system/primitives/Spacer";
 import { ListSkeleton } from "frontend/design-system/components/Skeleton/List";
-import { SortList } from "frontend/design-system/components/SortList";
 import {
   FieldsLabelForm,
   loadingFieldsLabelForm,
@@ -95,6 +94,11 @@ export function EntityRelationsSettings() {
     }
   );
 
+  const entityRelationsOrder = useEntityConfiguration(
+    "entity_relations_order",
+    entity
+  );
+
   const upsertHideEntityRelationMutation = useUpsertConfigurationMutation(
     "hidden_entity_relations",
     entity,
@@ -107,12 +111,14 @@ export function EntityRelationsSettings() {
     entityRelationTemplate.error ||
     entityFields.error ||
     referenceFields.error ||
+    entityRelationsOrder.error ||
     entityRelationList.error ||
     hiddenEntityRelations.error;
 
   const isLoading =
     entityFields.isLoading ||
     entityRelationList.isLoading ||
+    entityRelationsOrder.isLoading ||
     entityRelationTemplate.isLoading ||
     hiddenEntityRelations.isLoading ||
     referenceFields.isLoading;
@@ -165,9 +171,10 @@ export function EntityRelationsSettings() {
                       entityRelationsLabelsMap.data?.[relation] ||
                       getEntitiesDictionPlurals(relation)
                     }
-                    crudConfig={MAKE_APP_CONFIGURATION_CRUD_CONFIG(
-                      "hidden_entity_relations"
-                    )}
+                    sort={{
+                      order: entityRelationsOrder.data,
+                      save: upsertEntityRelationsOrderMutation.mutateAsync,
+                    }}
                     hiddenList={hiddenEntityRelations.data}
                     onSubmit={upsertHideEntityRelationMutation.mutateAsync}
                   />
@@ -194,28 +201,6 @@ export function EntityRelationsSettings() {
                 </ViewStateMachine>
               ),
               label: "Labels",
-            },
-
-            {
-              content: (
-                <ViewStateMachine
-                  error={error}
-                  loading={isLoading}
-                  loader={<ListSkeleton count={5} />}
-                >
-                  <SortList
-                    data={{
-                      ...referenceFields,
-                      data: referenceFields.data.map(({ table, label }) => ({
-                        value: table,
-                        label: label || getEntitiesDictionPlurals(table),
-                      })),
-                    }}
-                    onSave={upsertEntityRelationsOrderMutation.mutateAsync}
-                  />
-                </ViewStateMachine>
-              ),
-              label: "Order",
             },
           ]}
         />

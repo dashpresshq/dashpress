@@ -13,6 +13,15 @@ const useSelectionStore = createStore<IStore>((set) => ({
     })),
 }));
 
+const getAllSelections = (selections: Record<string, boolean>) => {
+  return (
+    Object.entries(selections)
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      .filter(([_, value]) => value)
+      .map(([_]) => _)
+  );
+};
+
 export function useStringSelections(key: string) {
   const [values, set] = useSelectionStore((store) => [store.values, store.set]);
 
@@ -23,13 +32,15 @@ export function useStringSelections(key: string) {
   };
 
   return {
-    toggleSelection: (input: string) => {
-      setSelections({ ...selections, [input]: !selections[input] });
+    toggleSelection: (
+      input: string,
+      withNewSelections?: (newAllSelections: string[]) => void
+    ) => {
+      const newSelections = { ...selections, [input]: !selections[input] };
+      setSelections(newSelections);
+      withNewSelections?.(getAllSelections(newSelections));
     },
-    allSelections: Object.entries(selections)
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      .filter(([_, value]) => value)
-      .map(([_]) => _),
+    allSelections: getAllSelections(selections),
     selectMutiple: (items: string[]) => {
       const update = Object.fromEntries(items.map((item) => [item, true]));
       setSelections({ ...selections, ...update });

@@ -6,13 +6,18 @@ import {
   getEntitySelections,
 } from "shared/logic/entities";
 import { DataCrudKeys } from "shared/types/data";
-import { CRUD_KEY_CONFIG } from "shared/configurations/permissions";
+import {
+  CRUD_HIDDEN_KEY_CONFIG,
+  ORDER_FIELD_CONFIG,
+} from "shared/configurations/permissions";
 import { DataStateKeys } from "frontend/lib/data/types";
 import { useRouteParam } from "frontend/lib/routing/useRouteParam";
 import { MAKE_CRUD_CONFIG } from "frontend/lib/crud-config";
 import { uniqBy } from "shared/lib/array/uniq-by";
 import { userFriendlyCase } from "shared/lib/strings/friendly-case";
 import { FIELD_TYPES_CONFIG_MAP } from "shared/validations";
+import { IEntityField } from "shared/types/db";
+import { sortListByOrder } from "shared/lib/array/sort";
 import { useEntityFields } from "./entity.store";
 import {
   getFieldTypeBoundedValidations,
@@ -160,17 +165,43 @@ export function useEntityCrudSettings(entity: string) {
   });
 }
 
-export function useHiddenEntityColumns(
-  crudKey: DataCrudKeys,
-  entity: string
-): DataStateKeys<string[]> {
-  const entityConfig = useEntityConfiguration(CRUD_KEY_CONFIG[crudKey], entity);
+const filterOutHiddenScalarColumns = (
+  scalarFields: IEntityField[],
+  hiddenColumns: string[]
+) => scalarFields.filter(({ name }) => !hiddenColumns.includes(name));
+
+export const useEntityCrudFields = (
+  entity: string,
+  crudKey: DataCrudKeys
+): DataStateKeys<IEntityField[]> => {
+  const entityFields = useEntityFields(entity);
+
+  const entityHiddenList = useEntityConfiguration(
+    CRUD_HIDDEN_KEY_CONFIG[crudKey],
+    entity
+  );
+
+  const entityOrderList = useEntityConfiguration(
+    ORDER_FIELD_CONFIG[crudKey],
+    entity
+  );
 
   const portalHiddenEntities = usePortalHiddenEntityColumns(entity, crudKey);
 
+  const columnsToShow = filterOutHiddenScalarColumns(entityFields.data, [
+    ...portalHiddenEntities.data,
+    ...entityHiddenList.data,
+  ]);
+
   return {
-    data: [...portalHiddenEntities.data, ...entityConfig.data],
-    error: portalHiddenEntities.error || entityConfig.error,
-    isLoading: portalHiddenEntities.isLoading || entityConfig.isLoading,
+    data: sortListByOrder(entityOrderList.data, columnsToShow, "name"),
+    error:
+      portalHiddenEntities.error ||
+      entityHiddenList.error ||
+      entityOrderList.error,
+    isLoading:
+      portalHiddenEntities.isLoading ||
+      entityHiddenList.isLoading ||
+      entityOrderList.isLoading,
   };
-}
+};

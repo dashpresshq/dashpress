@@ -3,13 +3,11 @@ import { userFriendlyCase } from "shared/lib/strings/friendly-case";
 import { Stack } from "frontend/design-system/primitives/Stack";
 import { FormButton } from "frontend/design-system/components/Button/FormButton";
 import { Spacer } from "frontend/design-system/primitives/Spacer";
-import {
-  ListManager,
-  ListManagerItem,
-} from "frontend/design-system/components/ListManager";
+import { ListManager } from "frontend/design-system/components/ListManager";
 import { USER_PERMISSIONS } from "shared/constants/user";
 import { PORTAL_PERMISSION_HEIRACHIES } from "shared/logic/permissions/portal";
 import { loadedDataState } from "frontend/lib/data/constants/loadedDataState";
+import { IListMangerItemProps } from "frontend/design-system/components/ListManager/ListManagerItem";
 import {
   useCreateRolePermissionMutation,
   useRolePermissionDeletionMutation,
@@ -104,32 +102,29 @@ export function MutatePermission({
             menuItem.value
           );
 
-          return (
-            <ListManagerItem
-              label={menuItem.label}
-              key={menuItem.value}
-              disabled={isOverAchingPermissionSelected}
-              subtle={isOverAchingPermissionSelected}
-              toggle={
-                isOverAchingPermissionSelected
-                  ? undefined
-                  : {
-                      selected: isPermissionSelected,
-                      onChange: () => {
-                        if (isPermissionSelected) {
-                          rolePermissionDeletionMutation.mutate(
-                            getPermissionChildren(menuItem.value, 1)
-                          );
-                        } else {
-                          rolePermissionCreationMutation.mutate(
-                            getPermissionChildren(menuItem.value, 0)
-                          );
-                        }
-                      },
+          const props: IListMangerItemProps = {
+            label: menuItem.label,
+            disabled: isOverAchingPermissionSelected,
+            subtle: isOverAchingPermissionSelected,
+            toggle: isOverAchingPermissionSelected
+              ? undefined
+              : {
+                  selected: isPermissionSelected,
+                  onChange: () => {
+                    if (isPermissionSelected) {
+                      rolePermissionDeletionMutation.mutate(
+                        getPermissionChildren(menuItem.value, 1)
+                      );
+                    } else {
+                      rolePermissionCreationMutation.mutate(
+                        getPermissionChildren(menuItem.value, 0)
+                      );
                     }
-              }
-            />
-          );
+                  },
+                },
+          };
+
+          return props;
         }}
       />
     </>

@@ -144,9 +144,7 @@ export class NavigationMenuApiService
       .filter(({ value }) => !hiddenMenuEntities.includes(value))
       .sort((a, b) => a.value.localeCompare(b.value));
 
-    sortListByOrder(entitiesOrder, menuEntities, "value");
-
-    return menuEntities;
+    return sortListByOrder(entitiesOrder, menuEntities, "value");
   }
 
   async filterOutUserMenuItems(

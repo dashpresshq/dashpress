@@ -1,10 +1,8 @@
 import { useEntityDataDeletionMutation } from "frontend/hooks/data/data.store";
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
 import { IActionButton } from "frontend/design-system/components/Button/ActionButtons/types";
-import {
-  CrudActionData,
-  useCanUserPerformCrudAction,
-} from "./useCanUserPerformCrudAction";
+import { CrudViewsKeys } from "shared/configurations";
+import { useCanUserPerformCrudAction } from "./useCanUserPerformCrudAction";
 
 export const useEntityActionButtons = ({
   entity,
@@ -12,7 +10,7 @@ export const useEntityActionButtons = ({
   redirectAfterDelete,
   exclude = [],
 }: {
-  exclude?: CrudActionData[];
+  exclude?: CrudViewsKeys[];
   entity: string;
   entityId: string;
   redirectAfterDelete?: string;

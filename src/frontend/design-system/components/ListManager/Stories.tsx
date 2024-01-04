@@ -4,7 +4,7 @@ import { Story } from "@storybook/react";
 import { actions } from "@storybook/addon-actions";
 import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 import { loadedDataState } from "frontend/lib/data/constants/loadedDataState";
-import { ListManager, IProps, ListManagerItem } from ".";
+import { ListManager, IProps } from ".";
 
 interface IDemoType {
   name: string;
@@ -23,13 +23,11 @@ export default {
       { name: "Curie", age: 27 },
     ]),
     labelField: "name",
-    render: ({ name }: IDemoType) => (
-      <ListManagerItem
-        label={name}
-        key={name}
-        action={() => actions(`Clicking on ${name}`)}
-      />
-    ),
+    render: ({ name }: IDemoType) => ({
+      label: name,
+      key: name,
+      action: () => actions(`Clicking on ${name}`),
+    }),
   },
 };
 

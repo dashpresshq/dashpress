@@ -4,7 +4,7 @@ import { Story } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
 import { Plus } from "react-feather";
 import { ApplicationRoot } from "frontend/components/ApplicationRoot";
-import { ListManagerItem, IProps } from ".";
+import { ListManagerItem, IListMangerItemProps } from ".";
 
 export default {
   title: "Components/ListManagerItem",
@@ -15,7 +15,7 @@ export default {
   },
 };
 
-const Template: Story<IProps> = (args) => (
+const Template: Story<IListMangerItemProps> = (args) => (
   <ApplicationRoot>
     <ListManagerItem {...args} />
     <ListManagerItem {...args} />

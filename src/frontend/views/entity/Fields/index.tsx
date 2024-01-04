@@ -6,10 +6,7 @@ import {
   useEntityFieldValidations,
   useEntitySlug,
 } from "frontend/hooks/entity/entity.config";
-import {
-  ENTITY_FIELDS_ENDPOINT,
-  useEntityFieldLists,
-} from "frontend/hooks/entity/entity.store";
+import { useEntityFieldLists } from "frontend/hooks/entity/entity.store";
 import {
   useEntityConfiguration,
   useUpsertConfigurationMutation,
@@ -26,8 +23,6 @@ import {
   FormSkeleton,
   FormSkeletonSchema,
 } from "frontend/design-system/components/Skeleton/Form";
-import { ListSkeleton } from "frontend/design-system/components/Skeleton/List";
-import { SortList } from "frontend/design-system/components/SortList";
 import { SectionBox } from "frontend/design-system/components/Section/SectionBox";
 import { Tabs } from "frontend/design-system/components/Tabs";
 import {
@@ -85,14 +80,6 @@ export function EntityFieldsSettings() {
   const upsertEntitySelectionsMutation = useUpsertConfigurationMutation(
     "entity_selections",
     entity
-  );
-
-  const upsertEntityColumnsOrderMutation = useUpsertConfigurationMutation(
-    "entity_fields_orders",
-    entity,
-    {
-      otherEndpoints: [ENTITY_FIELDS_ENDPOINT(entity)],
-    }
   );
 
   useSetPageDetails({
@@ -197,27 +184,6 @@ export function EntityFieldsSettings() {
                 </ViewStateMachine>
               ),
               label: ENTITY_FIELD_SETTINGS_TAB_LABELS.FORM,
-            },
-            {
-              content: (
-                <ViewStateMachine
-                  loader={<ListSkeleton count={10} />}
-                  loading={sharedLoadingState}
-                  error={error}
-                >
-                  <SortList
-                    data={{
-                      ...entityFieldLists,
-                      data: entityFieldLists.data.map((name) => ({
-                        value: name,
-                        label: getEntityFieldLabels(name),
-                      })),
-                    }}
-                    onSave={upsertEntityColumnsOrderMutation.mutateAsync}
-                  />
-                </ViewStateMachine>
-              ),
-              label: ENTITY_FIELD_SETTINGS_TAB_LABELS.ORDER,
             },
           ]}
         />

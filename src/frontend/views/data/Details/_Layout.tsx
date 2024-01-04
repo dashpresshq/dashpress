@@ -10,12 +10,10 @@ import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
 import { useEntityDictionPlurals } from "frontend/hooks/entity/entity.queries";
 import { ContentLayout } from "frontend/design-system/components/Section/SectionDivider";
 import { SectionBox } from "frontend/design-system/components/Section/SectionBox";
-import {
-  ListManager,
-  ListManagerItem,
-} from "frontend/design-system/components/ListManager";
+import { ListManager } from "frontend/design-system/components/ListManager";
 import { IDropDownMenuItem } from "frontend/design-system/components/DropdownMenu";
 import { DataStates } from "frontend/lib/data/types";
+import { IListMangerItemProps } from "frontend/design-system/components/ListManager/ListManagerItem";
 import { useEntityViewStateMachine } from "../hooks/useEntityViewStateMachine";
 import { getEntitiesRelationsCount } from "./utils";
 import {
@@ -132,14 +130,12 @@ export function DetailsLayout({
               getLabel={(name) => relatedEntitiesLabelMap[name]}
               render={(menuItem) => {
                 if (menuItem.name === DETAILS_LAYOUT_KEY) {
-                  return (
-                    <ListManagerItem
-                      label={menuItem.label}
-                      key={menuItem.name}
-                      active={menuKey === DETAILS_LAYOUT_KEY}
-                      action={NAVIGATION_LINKS.ENTITY.DETAILS(entity, entityId)}
-                    />
-                  );
+                  const props: IListMangerItemProps = {
+                    label: menuItem.label,
+                    active: menuKey === DETAILS_LAYOUT_KEY,
+                    action: NAVIGATION_LINKS.ENTITY.DETAILS(entity, entityId),
+                  };
+                  return props;
                 }
                 const entityType = relatedEntitiesMap[menuItem.name].type;
                 const entityCount = getEntitiesRelationsCount(
@@ -147,19 +143,18 @@ export function DetailsLayout({
                   relatedEntitiesCounts.data[menuItem.name]
                 );
 
-                return (
-                  <ListManagerItem
-                    label={`${menuItem.label} ${entityCount}`}
-                    key={menuItem.name}
-                    active={menuKey === menuItem.name}
-                    action={NAVIGATION_LINKS.ENTITY.RELATION_TABLE(
-                      entity,
-                      entityId,
-                      menuItem.name,
-                      entityType === "toOne" ? "one" : "many"
-                    )}
-                  />
-                );
+                const props: IListMangerItemProps = {
+                  label: `${menuItem.label} ${entityCount}`,
+                  active: menuKey === menuItem.name,
+                  action: NAVIGATION_LINKS.ENTITY.RELATION_TABLE(
+                    entity,
+                    entityId,
+                    menuItem.name,
+                    entityType === "toOne" ? "one" : "many"
+                  ),
+                };
+
+                return props;
               }}
             />
           </SectionBox>

@@ -36,6 +36,26 @@ export const APP_CONFIGURATION_CONFIG = {
     requireEntity: true,
     defaultValue: [] as string[],
   },
+  entity_fields_orders_table: {
+    label: "Table Fields Order",
+    requireEntity: true,
+    defaultValue: [] as string[],
+  },
+  entity_fields_orders_create: {
+    label: "Create Fields Order",
+    requireEntity: true,
+    defaultValue: [] as string[],
+  },
+  entity_fields_orders_update: {
+    label: "Update Fields Order",
+    requireEntity: true,
+    defaultValue: [] as string[],
+  },
+  entity_fields_orders_details: {
+    label: "Details Fields Order",
+    requireEntity: true,
+    defaultValue: [] as string[],
+  },
   entity_columns_labels: {
     label: "Column Labels Settings",
     requireEntity: true,
@@ -84,11 +104,6 @@ export const APP_CONFIGURATION_CONFIG = {
     defaultValue: {
       script: "",
     },
-  },
-  entity_fields_orders: {
-    label: "Fields Order",
-    requireEntity: true,
-    defaultValue: [] as string[],
   },
   entity_crud_settings: {
     label: "CRUD Settings",

@@ -1,8 +1,8 @@
-import { IEntityCrudSettings } from "shared/configurations";
+import { CrudViewsKeys } from "shared/configurations";
 
 export const makeEntityFieldsSelectionKey = (
   entity: string,
-  crudKey: keyof IEntityCrudSettings | "table"
+  crudKey: CrudViewsKeys
 ) => {
   return `${crudKey}-${entity}CrudEntityFieldsSelectionSettings}`;
 };

@@ -1,10 +1,8 @@
 import { useAppConfiguration } from "frontend/hooks/configuration/configuration.store";
-import { IEntityCrudSettings } from "shared/configurations";
+import { CrudViewsKeys } from "shared/configurations";
 import { IEntityField } from "shared/types/db";
 
-export const useIsEntityFieldMutatable = (
-  crudKey: keyof IEntityCrudSettings | "table"
-) => {
+export const useIsEntityFieldMutatable = (crudKey: CrudViewsKeys) => {
   const metaDataColumns = useAppConfiguration("metadata_columns");
 
   return (entityField: IEntityField) => {

@@ -8,7 +8,7 @@ import { IApplicationService } from "backend/types";
 import { noop } from "shared/lib/noop";
 import { IDBSchema, IEntityField, IEntityRelation } from "shared/types/db";
 import { DataCrudKeys } from "shared/types/data";
-import { CRUD_KEY_CONFIG } from "shared/configurations/permissions";
+import { CRUD_HIDDEN_KEY_CONFIG } from "shared/configurations/permissions";
 import { sortListByOrder } from "shared/lib/array/sort";
 import { SchemasApiService, schemasApiService } from "../schema/schema.service";
 import { PortalFieldsFilterService } from "./portal";
@@ -43,21 +43,6 @@ export class EntitiesApiService implements IApplicationService {
 
   async getEntityFields(entity: string): Promise<IEntityField[]> {
     return (await this.getEntityFromSchema(entity)).fields;
-  }
-
-  async getOrderedEntityFields(entity: string) {
-    const [entityFields, entityFieldsOrder] = await Promise.all([
-      this.getEntityFields(entity),
-      this._configurationApiService.show("entity_fields_orders", entity),
-    ]);
-
-    sortListByOrder(
-      entityFieldsOrder,
-      entityFields as unknown as Record<string, unknown>[],
-      "name" as keyof IEntityField
-    );
-
-    return entityFields;
   }
 
   async getEntityFirstFieldType(
@@ -97,7 +82,10 @@ export class EntitiesApiService implements IApplicationService {
     crudKey: DataCrudKeys
   ): Promise<string[]> {
     const [configHiddenFields, entityFields] = await Promise.all([
-      this._configurationApiService.show(CRUD_KEY_CONFIG[crudKey], entity),
+      this._configurationApiService.show(
+        CRUD_HIDDEN_KEY_CONFIG[crudKey],
+        entity
+      ),
       this.getEntityFields(entity),
     ]);
 
@@ -166,16 +154,16 @@ export class EntitiesApiService implements IApplicationService {
       this._configurationApiService.show("entity_relations_order", entity),
     ]);
 
-    const allowedEntityRelation =
+    const allowedEntityRelation$1 =
       await this._rolesApiService.filterPermittedEntities(
         userRole,
         validRelations,
         "table"
       );
 
-    sortListByOrder(
+    const allowedEntityRelation = sortListByOrder(
       entityOrders,
-      allowedEntityRelation as unknown[] as Record<string, unknown>[],
+      allowedEntityRelation$1,
       "table"
     );
 

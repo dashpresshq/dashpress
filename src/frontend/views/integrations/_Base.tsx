@@ -4,14 +4,12 @@ import { ReactNode } from "react";
 import { Book, UploadCloud, Zap, ZapOff } from "react-feather";
 import { ContentLayout } from "frontend/design-system/components/Section/SectionDivider";
 import { SectionBox } from "frontend/design-system/components/Section/SectionBox";
-import {
-  ListManager,
-  ListManagerItem,
-} from "frontend/design-system/components/ListManager";
+import { ListManager } from "frontend/design-system/components/ListManager";
 import { Spacer } from "frontend/design-system/primitives/Spacer";
 import { MenuSection } from "frontend/design-system/components/Section/MenuSection";
 import { AppLayout } from "frontend/_layouts/app";
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
+import { IListMangerItemProps } from "frontend/design-system/components/ListManager/ListManagerItem";
 import {
   useActionIntegrationsList,
   useActiveActionList,
@@ -46,16 +44,15 @@ export function BaseActionsLayout({ children }: IProps) {
               labelField="title"
               render={(menuItem) => {
                 const isActive = activeList.includes(menuItem.key);
-                return (
-                  <ListManagerItem
-                    label={menuItem.title}
-                    key={menuItem.key}
-                    IconComponent={isActive ? Zap : ZapOff}
-                    active={menuItem.key === currentKey}
-                    subtle={!isActive}
-                    action={NAVIGATION_LINKS.INTEGRATIONS.ACTIONS(menuItem.key)}
-                  />
-                );
+                const props: IListMangerItemProps = {
+                  label: menuItem.title,
+                  IconComponent: isActive ? Zap : ZapOff,
+                  active: menuItem.key === currentKey,
+                  subtle: !isActive,
+                  action: NAVIGATION_LINKS.INTEGRATIONS.ACTIONS(menuItem.key),
+                };
+
+                return props;
               }}
             />
           </SectionBox>

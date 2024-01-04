@@ -1,8 +1,4 @@
 import { ReactNode, useEffect, useState } from "react";
-import {
-  ENTITY_LIST_PATH,
-  ENTITY_TABLE_PATH,
-} from "frontend/hooks/data/constants";
 import { IEntityCrudSettings } from "shared/configurations";
 import { USER_PERMISSIONS } from "shared/constants/user";
 import { DOCUMENTATION_LABEL } from "frontend/docs";
@@ -16,15 +12,15 @@ import {
   useEntityCrudSettings,
   useEntitySlug,
 } from "frontend/hooks/entity/entity.config";
-import {
-  useEntityConfiguration,
-  useUpsertConfigurationMutation,
-} from "frontend/hooks/configuration/configuration.store";
+import { useUpsertConfigurationMutation } from "frontend/hooks/configuration/configuration.store";
 import { useEntityFields } from "frontend/hooks/entity/entity.store";
 import { WarningAlert } from "frontend/design-system/components/Alert";
 import { Spacer } from "frontend/design-system/primitives/Spacer";
 import { BaseEntitySettingsLayout } from "../_Base";
-import { EntityFieldsSelectionSettings } from "./EntityFieldsSelectionSettings";
+import {
+  EntityFieldsSelectionSettings,
+  ToggleCrudState,
+} from "./EntityFieldsSelectionSettings";
 import { ENTITY_CONFIGURATION_VIEW, ENTITY_CRUD_LABELS } from "../constants";
 import {
   PortalEntityTableSettings,
@@ -38,51 +34,6 @@ const DOCS_TITLE = "CRUD Settings";
 function useEntityCrudView(entity: string) {
   const entityCrudSettings = useEntityCrudSettings(entity);
   const entityFields = useEntityFields(entity);
-
-  const hiddenTableColumns = useEntityConfiguration(
-    "hidden_entity_table_columns",
-    entity
-  );
-  const hiddenCreateColumns = useEntityConfiguration(
-    "hidden_entity_create_columns",
-    entity
-  );
-  const hiddenUpdateColumns = useEntityConfiguration(
-    "hidden_entity_update_columns",
-    entity
-  );
-  const hiddenDetailsColumns = useEntityConfiguration(
-    "hidden_entity_details_columns",
-    entity
-  );
-
-  const upsertTableColumnsMutation = useUpsertConfigurationMutation(
-    "hidden_entity_table_columns",
-    entity,
-    {
-      otherEndpoints: [ENTITY_TABLE_PATH(entity)],
-    }
-  );
-
-  const upsertCreateColumnsMutation = useUpsertConfigurationMutation(
-    "hidden_entity_create_columns",
-    entity
-  );
-
-  const upsertUpdateColumnsMutation = useUpsertConfigurationMutation(
-    "hidden_entity_update_columns",
-    entity
-  );
-
-  const upsertDetailsColumnsMutation = useUpsertConfigurationMutation(
-    "hidden_entity_details_columns",
-    entity,
-    {
-      /* This is an hack for  ENTITY_DETAILS_PATH(entity, id) to clear all details 
-      and it quite necessary for the detail page */
-      otherEndpoints: [ENTITY_LIST_PATH(entity)],
-    }
-  );
 
   const upsertCrudSettingsMutation = useUpsertConfigurationMutation(
     "entity_crud_settings",
@@ -133,11 +84,7 @@ function useEntityCrudView(entity: string) {
         <>
           <EntityFieldsSelectionSettings
             crudKey="table"
-            columns={{
-              submit: upsertTableColumnsMutation.mutateAsync,
-              hidden: hiddenTableColumns.data,
-            }}
-            isLoading={sharedLoading || hiddenTableColumns.isLoading}
+            isLoading={sharedLoading}
             toggling={{
               enabled: true,
             }}
@@ -153,11 +100,7 @@ function useEntityCrudView(entity: string) {
         <>
           <EntityFieldsSelectionSettings
             crudKey="details"
-            columns={{
-              submit: upsertDetailsColumnsMutation.mutateAsync,
-              hidden: hiddenDetailsColumns.data,
-            }}
-            isLoading={sharedLoading || hiddenDetailsColumns.isLoading}
+            isLoading={sharedLoading}
             error={error}
             toggling={{
               onToggle: () => toggleCrudSettings("details"),
@@ -174,11 +117,7 @@ function useEntityCrudView(entity: string) {
         <>
           <EntityFieldsSelectionSettings
             crudKey="create"
-            columns={{
-              submit: upsertCreateColumnsMutation.mutateAsync,
-              hidden: hiddenCreateColumns.data,
-            }}
-            isLoading={sharedLoading || hiddenCreateColumns.isLoading}
+            isLoading={sharedLoading}
             error={error}
             toggling={{
               onToggle: () => toggleCrudSettings("create"),
@@ -195,15 +134,11 @@ function useEntityCrudView(entity: string) {
         <>
           <EntityFieldsSelectionSettings
             crudKey="update"
-            columns={{
-              submit: upsertUpdateColumnsMutation.mutateAsync,
-              hidden: hiddenUpdateColumns.data,
-            }}
             toggling={{
               onToggle: () => toggleCrudSettings("update"),
               enabled: entityCrudSettingsState.update,
             }}
-            isLoading={sharedLoading || hiddenUpdateColumns.isLoading}
+            isLoading={sharedLoading}
             error={error}
           />
           <PortalEntityUpdateSettings />
@@ -213,10 +148,8 @@ function useEntityCrudView(entity: string) {
     [ENTITY_CRUD_LABELS.delete]: {
       disabled: !entityCrudSettingsState.delete,
       render: (
-        <EntityFieldsSelectionSettings
+        <ToggleCrudState
           crudKey="delete"
-          isLoading={false}
-          error={error}
           toggling={{
             onToggle: () => toggleCrudSettings("delete"),
             enabled: entityCrudSettingsState.delete,

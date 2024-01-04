@@ -10,3 +10,7 @@ export function defaultSearchFunction<
       value.label.toLowerCase().includes(searchString)
   );
 }
+
+export function defaultToEmptyArray<T>(input: T[] | undefined): T[] {
+  return input || [];
+}

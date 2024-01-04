@@ -1,11 +1,8 @@
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { FormButton } from "frontend/design-system/components/Button/FormButton";
 import { ListSkeleton } from "frontend/design-system/components/Skeleton/List";
-import {
-  ListManager,
-  ListManagerItem,
-} from "frontend/design-system/components/ListManager";
+import { ListManager } from "frontend/design-system/components/ListManager";
 import { Spacer } from "frontend/design-system/primitives/Spacer";
 import { Stack } from "frontend/design-system/primitives/Stack";
 import { useStringSelections } from "frontend/lib/selection";
@@ -14,27 +11,62 @@ import {
   useEntityFieldLabels,
   useEntitySlug,
 } from "frontend/hooks/entity/entity.config";
-import { IEntityCrudSettings } from "shared/configurations";
+import { CrudViewsKeys } from "shared/configurations";
 import { useIsEntityFieldMutatable } from "frontend/views/data/hooks/useIsEntityFieldMutatable";
+import { IListMangerItemProps } from "frontend/design-system/components/ListManager/ListManagerItem";
+import {
+  useEntityConfiguration,
+  useUpsertConfigurationMutation,
+} from "frontend/hooks/configuration/configuration.store";
+import {
+  CRUD_HIDDEN_KEY_CONFIG,
+  ORDER_FIELD_CONFIG,
+} from "shared/configurations/permissions";
+import {
+  ENTITY_LIST_PATH,
+  ENTITY_TABLE_PATH,
+} from "frontend/hooks/data/constants";
+import { DataCrudKeys } from "shared/types/data";
 import { ENTITY_CRUD_LABELS } from "../constants";
 import { makeEntityFieldsSelectionKey } from "./constants";
 
 interface IProps {
-  columns?: {
-    submit?: (columnsSelection: string[]) => Promise<string[]>;
-    hidden: string[];
-  };
   toggling: {
     onToggle?: () => void;
     enabled: boolean;
   };
   isLoading: boolean;
   error: unknown;
-  crudKey: keyof IEntityCrudSettings | "table";
+  crudKey: DataCrudKeys;
+}
+
+export function ToggleCrudState({
+  crudKey,
+  toggling,
+}: {
+  crudKey: CrudViewsKeys;
+  toggling: {
+    onToggle?: () => void;
+    enabled: boolean;
+  };
+}) {
+  return (
+    <Stack justify="space-between" align="flex-start">
+      {toggling && toggling.onToggle && (
+        <FormButton
+          isMakingRequest={false}
+          icon={toggling.enabled ? "check" : "square"}
+          size="sm"
+          isInverse
+          text={() => `Enable ${ENTITY_CRUD_LABELS[crudKey]} Functionality`}
+          onClick={() => toggling.onToggle()}
+        />
+      )}
+    </Stack>
+  );
 }
 
 export function EntityFieldsSelectionSettings({
-  columns,
   isLoading,
   toggling,
   error,
@@ -48,93 +80,91 @@ export function EntityFieldsSelectionSettings({
 
   const isEntityFieldMutatable = useIsEntityFieldMutatable(crudKey);
 
-  const { toggleSelection, allSelections, selectMutiple, isSelected } =
-    useStringSelections(makeEntityFieldsSelectionKey(entity, crudKey));
+  const otherEndpoints = [ENTITY_TABLE_PATH(entity), ENTITY_LIST_PATH(entity)];
 
-  const [touched, setTouched] = useState(false);
+  const entityHiddenList = useEntityConfiguration(
+    CRUD_HIDDEN_KEY_CONFIG[crudKey],
+    entity
+  );
 
-  const [isMakingRequest, setIsMakingRequest] = useState(false);
+  const entityOrderList = useEntityConfiguration(
+    ORDER_FIELD_CONFIG[crudKey],
+    entity
+  );
+
+  const upsertHiddenColumnsMutation = useUpsertConfigurationMutation(
+    CRUD_HIDDEN_KEY_CONFIG[crudKey],
+    entity,
+    {
+      otherEndpoints,
+    }
+  );
+
+  const upsertColumnsOrderMutation = useUpsertConfigurationMutation(
+    ORDER_FIELD_CONFIG[crudKey],
+    entity,
+    {
+      otherEndpoints,
+    }
+  );
+
+  const { toggleSelection, selectMutiple, isSelected } = useStringSelections(
+    makeEntityFieldsSelectionKey(entity, crudKey)
+  );
 
   useEffect(() => {
-    selectMutiple(columns?.hidden || []);
-  }, [columns?.hidden]);
+    selectMutiple(entityHiddenList.data || []);
+  }, [entityHiddenList.data]);
 
   return (
     <ViewStateMachine
-      error={error}
-      loading={isLoading}
+      error={error || entityHiddenList.error || entityOrderList.error}
+      loading={
+        isLoading || entityOrderList.isLoading || entityHiddenList.isLoading
+      }
       loader={<ListSkeleton count={10} />}
     >
-      <Stack justify="space-between" align="flex-start">
-        {toggling && toggling.onToggle && (
-          <FormButton
-            isMakingRequest={false}
-            icon={toggling.enabled ? "check" : "square"}
-            size="sm"
-            isInverse
-            text={() => `Enable ${ENTITY_CRUD_LABELS[crudKey]} Functionality`}
-            onClick={() => toggling.onToggle()}
-          />
-        )}
-      </Stack>
+      <ToggleCrudState crudKey={crudKey} toggling={toggling} />
       <Spacer size="xxl" />
-      {columns && (
-        <>
-          <ListManager
-            items={entityFields}
-            listLengthGuess={10}
-            labelField="name"
-            empty={{
-              text: "This entity has no fields. Kindly add fields from your prefer database tool to manage them here",
-            }}
-            getLabel={getEntityFieldLabels}
-            render={(menuItem) => {
-              const isHidden = isSelected(menuItem.label);
+      <ListManager
+        items={entityFields}
+        listLengthGuess={10}
+        labelField="name"
+        empty={{
+          text: "This entity has no fields. Kindly add fields from your prefer database tool to manage them here",
+        }}
+        getLabel={getEntityFieldLabels}
+        sort={{
+          orderList: entityOrderList.data,
+          key: "name",
+          on: upsertColumnsOrderMutation.mutate,
+        }}
+        render={(menuItem) => {
+          const isHidden = isSelected(menuItem.name);
 
-              const disabled =
-                !isEntityFieldMutatable(menuItem) || !toggling.enabled;
+          const disabled =
+            !isEntityFieldMutatable(menuItem) || !toggling.enabled;
 
-              return (
-                <ListManagerItem
-                  label={menuItem.label}
-                  key={menuItem.name}
-                  disabled={disabled}
-                  subtle={disabled}
-                  toggle={
-                    disabled
-                      ? undefined
-                      : {
-                          selected: !isHidden,
-                          onChange: () => {
-                            setTouched(true);
-                            toggleSelection(menuItem.name);
-                          },
-                        }
-                  }
-                />
-              );
-            }}
-          />
+          const props: IListMangerItemProps = {
+            label: menuItem.label,
+            disabled,
+            subtle: disabled,
+            toggle: disabled
+              ? undefined
+              : {
+                  selected: !isHidden,
+                  onChange: () => {
+                    toggleSelection(
+                      menuItem.name,
+                      upsertHiddenColumnsMutation.mutate
+                    );
+                  },
+                },
+          };
 
-          <Spacer size="xxl" />
-          <FormButton
-            onClick={async () => {
-              setIsMakingRequest(true);
-              await columns.submit(allSelections);
-              setIsMakingRequest(false);
-              setTouched(false);
-            }}
-            text={(isSubmitting) =>
-              isSubmitting
-                ? `Saving ${ENTITY_CRUD_LABELS[crudKey]} Selections`
-                : `Save ${ENTITY_CRUD_LABELS[crudKey]} Selections`
-            }
-            icon="save"
-            disabled={!touched}
-            isMakingRequest={isMakingRequest}
-          />
-        </>
-      )}
+          return props;
+        }}
+      />
     </ViewStateMachine>
   );
 }

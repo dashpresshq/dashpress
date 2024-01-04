@@ -113,12 +113,6 @@ describe("pages/admin/[entity]/config/crud", () => {
         within(currentTab).getByRole("button", { name: "Hidden Field 1" })
       );
 
-      await userEvent.click(
-        within(currentTab).getByRole("button", {
-          name: `Save ${tab} Selections`,
-        })
-      );
-
       expect((await screen.findAllByRole("status"))[0]).toHaveTextContent(
         `${tab} Columns Settings Saved Successfully`
       );

@@ -32,6 +32,7 @@ describe("pages/roles/[roleId]/index", () => {
     query: {
       roleId: "foo",
     },
+    replace: jest.fn(),
     isReady: true,
   }));
 

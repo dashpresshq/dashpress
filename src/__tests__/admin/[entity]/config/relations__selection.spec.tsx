@@ -87,12 +87,6 @@ describe("pages/admin/[entity]/config/relations", () => {
         })
       );
 
-      await userEvent.click(
-        within(currentTab).getAllByRole("button", {
-          name: "Save Enabled Relations",
-        })[0]
-      );
-
       expect(await screen.findByRole("status")).toHaveTextContent(
         "Enabled Relations Saved Successfully"
       );

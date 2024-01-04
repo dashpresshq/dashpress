@@ -156,7 +156,7 @@ describe("/api/dashboards/script", () => {
     expect(res._getStatusCode()).toBe(400);
     expect(res._getJSONData()).toMatchInlineSnapshot(`
           {
-            "message": "Cannot run script in demo mode",
+            "message": "This service is not available on the demo site",
             "method": "POST",
             "name": "BadRequestError",
             "path": "",

@@ -24,6 +24,7 @@ describe("pages/setup/user", () => {
       query: {},
       push: pushMock,
       isReady: true,
+      replace: jest.fn(),
     }));
 
     server.use(

@@ -119,6 +119,8 @@ const DEFAULT_ENTITY_CONFIG_VALUES: Record<
   entity_fields_orders_details: () => [],
   entity_fields_orders_update: () => [],
 
+  entity_relations_order: () => [],
+
   hidden_entity_relations: () => ["hidden-related-entity-5"],
   entity_columns_labels: () => ({}),
   entity_presentation_script: () => "",

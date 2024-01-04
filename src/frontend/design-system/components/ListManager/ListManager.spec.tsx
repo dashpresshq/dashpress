@@ -17,6 +17,12 @@ const defaultProps = {
 } as const;
 
 describe("ListManager", () => {
+  const useRouter = jest.spyOn(require("next/router"), "useRouter");
+  useRouter.mockImplementation(() => ({
+    asPath: "/",
+    isReady: true,
+  }));
+
   it("should render list items", () => {
     render(
       <ListManager
@@ -107,9 +113,12 @@ describe("ListManager", () => {
   it("should render Empty view when empty", () => {
     render(
       <ListManager
-        items={loadedDataState([])}
-        render={(item) => ({ label: item.label })}
         {...{ ...defaultProps }}
+        items={loadedDataState([])}
+        empty={{
+          text: "No Item Has Been Added Yet",
+        }}
+        render={(item) => ({ label: item.label })}
       />
     );
 

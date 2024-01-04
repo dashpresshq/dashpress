@@ -68,10 +68,6 @@ describe("pages/admin/settings/menu", () => {
       screen.getByRole("button", { name: "Plural entity-2" })
     );
 
-    await userEvent.click(
-      screen.getByRole("button", { name: "Save Menu Settings" })
-    );
-
     expect(
       await screen.findByRole("status", {}, { timeout: 20000 })
     ).toHaveTextContent("Menu Settings Saved Successfully");

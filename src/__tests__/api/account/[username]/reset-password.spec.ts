@@ -37,7 +37,7 @@ describe("/api/account/[username]/reset-password", () => {
 
     await handler(req, res);
 
-    expect(res._getStatusCode()).toBe(200);
+    expect(res._getStatusCode()).toBe(400);
 
     const signInRequest = createUnAuthenticatedMocks({
       method: "POST",

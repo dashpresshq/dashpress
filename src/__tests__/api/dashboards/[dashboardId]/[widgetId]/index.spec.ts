@@ -118,7 +118,7 @@ describe("/api/dashboards/[dashboardId]/[widgetId]/index", () => {
     expect(postRequest.res._getStatusCode()).toBe(400);
     expect(postRequest.res._getJSONData()).toMatchInlineSnapshot(`
       {
-        "message": "Cannot update widget in demo mode",
+        "message": "This service is not available on the demo site",
         "method": "PATCH",
         "name": "BadRequestError",
         "path": "",
@@ -145,7 +145,7 @@ describe("/api/dashboards/[dashboardId]/[widgetId]/index", () => {
     expect(deleteRequest.res._getStatusCode()).toBe(400);
     expect(deleteRequest.res._getJSONData()).toMatchInlineSnapshot(`
       {
-        "message": "Cannot remove widget in demo mode",
+        "message": "This service is not available on the demo site",
         "method": "DELETE",
         "name": "BadRequestError",
         "path": "",

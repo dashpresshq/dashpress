@@ -1,5 +1,3 @@
-import { ILabelValue } from "shared/types/options";
-import { IEntityRelation } from "shared/types/db";
 import {
   ConfigurationApiService,
   configurationApiService,
@@ -12,14 +10,6 @@ export class EntitiesApiController {
     private _configurationApiService: ConfigurationApiService
   ) {}
 
-  async getActiveEntities(): Promise<ILabelValue[]> {
-    return await this._entitiesApiService.getActiveEntities();
-  }
-
-  async listAllEntities(): Promise<ILabelValue[]> {
-    return await this._entitiesApiService.getAllEntities();
-  }
-
   async listAllEntityRelations(entity: string): Promise<string[]> {
     const [entityRelations, disabledEntities] = await Promise.all([
       this._entitiesApiService.getEntityRelations(entity),
@@ -31,16 +21,6 @@ export class EntitiesApiController {
     );
 
     return allowedEntityRelation.map(({ table }) => table);
-  }
-
-  async getEntityRelations(
-    entity: string,
-    userRole: string
-  ): Promise<IEntityRelation[]> {
-    return await this._entitiesApiService.getEntityRelationsForUserRole(
-      entity,
-      userRole
-    );
   }
 }
 

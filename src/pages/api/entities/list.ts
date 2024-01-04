@@ -1,8 +1,8 @@
 import { requestHandler } from "backend/lib/request";
-import { entitiesApiController } from "backend/entities/entities.controller";
+import { entitiesApiService } from "backend/entities/entities.service";
 
 export default requestHandler({
   GET: async () => {
-    return await entitiesApiController.listAllEntities();
+    return await entitiesApiService.getAllEntities();
   },
 });

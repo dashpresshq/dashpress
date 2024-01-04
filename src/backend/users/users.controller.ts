@@ -2,14 +2,8 @@ import { UnauthorizedError } from "backend/lib/errors";
 import { RolesApiService, rolesApiService } from "backend/roles/roles.service";
 import { REQUEST_ERROR_CODES } from "shared/constants/auth";
 import { ISignInForm } from "shared/form-schemas/auth/signin";
-import { IChangePasswordForm } from "shared/form-schemas/profile/password";
-import { IResetPasswordForm } from "shared/form-schemas/users/reset-password";
 import { ISuccessfullAuthenticationResponse } from "shared/types/auth/portal";
-import {
-  IAccountProfile,
-  IAccountUser,
-  IAuthenticatedUserBag,
-} from "shared/types/user";
+import { IAuthenticatedUserBag } from "shared/types/user";
 import { UsersApiService, usersApiService } from "./users.service";
 
 export class UsersApiController {
@@ -22,22 +16,6 @@ export class UsersApiController {
     authCredentials: ISignInForm
   ): Promise<ISuccessfullAuthenticationResponse> {
     return await this._usersService.tryAuthenticate(authCredentials);
-  }
-
-  async listUsers() {
-    return await this._usersService.listUsers();
-  }
-
-  async createUser(user: IAccountUser) {
-    await this._usersService.registerUser(user);
-  }
-
-  async removeUser(username: string, myUsername: string) {
-    await this._usersService.removeUser(username, myUsername);
-  }
-
-  async getUserProfile(username: string) {
-    return await this._usersService.getUser(username);
   }
 
   async getAuthenticatedUserBag(
@@ -61,18 +39,6 @@ export class UsersApiController {
         REQUEST_ERROR_CODES.NOT_AUTHENTICATED
       );
     }
-  }
-
-  async resetPassword(username: string, input: IResetPasswordForm) {
-    await this._usersService.resetPassword(username, input.password);
-  }
-
-  async updatePassword(username: string, input: IChangePasswordForm) {
-    await this._usersService.changePassword(username, input);
-  }
-
-  async updateProfile(username: string, userDetails: IAccountProfile) {
-    await this._usersService.updateUser(username, userDetails);
   }
 }
 

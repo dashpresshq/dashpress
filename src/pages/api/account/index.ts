@@ -1,11 +1,11 @@
-import { usersApiController } from "backend/users/users.controller";
 import { CREATE_USER_FORM_SCHEMA } from "shared/form-schemas/users/create";
 import { USER_PERMISSIONS } from "shared/constants/user";
 import { requestHandler } from "backend/lib/request";
+import { usersApiService } from "backend/users/users.service";
 
 export default requestHandler({
   GET: async () => {
-    return await usersApiController.listUsers();
+    return await usersApiService.listUsers();
   },
 
   POST: async (getValidatedRequest) => {
@@ -19,6 +19,6 @@ export default requestHandler({
         options: CREATE_USER_FORM_SCHEMA,
       },
     ]);
-    return await usersApiController.createUser(validatedRequest.requestBody);
+    return await usersApiService.registerUser(validatedRequest.requestBody);
   },
 });

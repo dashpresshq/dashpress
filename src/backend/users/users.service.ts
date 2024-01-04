@@ -5,6 +5,7 @@ import { IApplicationService } from "backend/types";
 import { IAccountUser, IAccountProfile } from "shared/types/user";
 import { ISuccessfullAuthenticationResponse } from "shared/types/auth/portal";
 import { noop } from "shared/lib/noop";
+import { IResetPasswordForm } from "shared/form-schemas/users/reset-password";
 import { getPortalAuthenticationResponse } from "./portal";
 import { generateAuthTokenForUsername } from "./utils";
 import { usersPersistenceService } from "./shared";
@@ -101,10 +102,6 @@ export class UsersApiService implements IApplicationService {
       newPassword: string;
     }
   ) {
-    if (process.env.NEXT_PUBLIC_IS_DEMO) {
-      return;
-    }
-
     try {
       await this.checkUserPassword({
         username,
@@ -119,12 +116,9 @@ export class UsersApiService implements IApplicationService {
     });
   }
 
-  async resetPassword(username: string, newPassword: string) {
-    if (process.env.NEXT_PUBLIC_IS_DEMO) {
-      return;
-    }
+  async resetPassword(username: string, newPassword: IResetPasswordForm) {
     await this.updateUser(username, {
-      password: await HashService.make(newPassword),
+      password: await HashService.make(newPassword.password),
     });
   }
 

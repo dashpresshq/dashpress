@@ -64,7 +64,7 @@ export function ListManager<T, K extends StringProps<T>>({
   const onSortEnd = (oldOrder: number, newOrder: number) => {
     const newOrderItems = arrayMoveImmutable(itemsData, oldOrder, newOrder);
     setItemsData(newOrderItems);
-    sort?.on(newOrderItems.map((item) => item[sort.key] as string));
+    sort?.on(newOrderItems.map((item) => item[sort.key] as unknown as string));
   };
 
   useEffect(() => {

@@ -11,6 +11,7 @@ export type ValidationKeys = {
     | "rawRequest"
     | "paginationFilter"
     | "canUser"
+    | "notAllowedOnDemo"
     | "crudEnabled"
     | "requestBody"
     | "requestQuery"

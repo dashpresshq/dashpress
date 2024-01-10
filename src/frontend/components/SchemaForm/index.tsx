@@ -40,8 +40,6 @@ export const GridItem = styled.div<{
   ${gridItem}
 `;
 
-// TODO: dependent options for schema forms
-
 export function SchemaForm<T extends Record<string, unknown>>({
   onSubmit,
   fields,
@@ -60,8 +58,7 @@ export function SchemaForm<T extends Record<string, unknown>>({
       onSubmit={async (formValues) => {
         const modifiedFormValues = runFormBeforeSubmit(
           formExtension?.beforeSubmit,
-          scriptContext,
-          formValues
+          { ...scriptContext, formValues }
         );
 
         if (typeof modifiedFormValues !== "object") {
@@ -74,15 +71,15 @@ export function SchemaForm<T extends Record<string, unknown>>({
       initialValues={initialValues}
       validate={runValidationError(fields)}
       render={({ handleSubmit, submitting, values, form, pristine }) => {
+        const scriptProps = {
+          ...scriptContext,
+          formValues: values as T,
+        };
         onChange?.(values as T);
         const fieldState: Record<
           string,
           { hidden: boolean; disabled: boolean }
-        > = runFormFieldState(
-          formExtension?.fieldsState,
-          scriptContext,
-          values
-        );
+        > = runFormFieldState(formExtension?.fieldsState, scriptProps);
 
         return (
           <form
@@ -101,16 +98,23 @@ export function SchemaForm<T extends Record<string, unknown>>({
           >
             <GridRoot>
               {Object.entries(fields)
-                .filter(([field]) => {
-                  return !fieldState[field]?.hidden;
+                .filter(([field, bag]) => {
+                  const isHidden = fieldState[field]?.hidden;
+                  if (isHidden) {
+                    return false;
+                  }
+                  return !bag?.formState?.(scriptProps).hidden;
                 })
-                .map(([field, bag]: [string, ISchemaFormConfig]) => (
+                .map(([field, bag]: [string, ISchemaFormConfig<T>]) => (
                   <Field key={field} name={field} validateFields={[]}>
                     {(renderProps) => (
                       <GridItem $span={bag.span || "4"}>
                         <RenderFormInput
                           type={bag.type}
-                          disabled={fieldState[field]?.disabled}
+                          disabled={
+                            fieldState[field]?.disabled ||
+                            bag?.formState?.(scriptProps).disabled
+                          }
                           required={bag.validations.some(
                             (validation) =>
                               validation.validationType === "required"

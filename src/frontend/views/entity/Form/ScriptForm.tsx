@@ -3,7 +3,6 @@ import {
   FormSkeletonSchema,
 } from "frontend/design-system/components/Skeleton/Form";
 import { SchemaForm } from "frontend/components/SchemaForm";
-import { ISchemaFormScriptParams } from "frontend/components/SchemaForm/form-run";
 import { useSchemaFormScriptContext } from "frontend/components/SchemaForm/useSchemaFormScriptContext";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { ToastService } from "frontend/lib/toast";
@@ -52,7 +51,7 @@ export function ScriptForm({
         onSubmit={async (data) => {
           try {
             const jsString = data[`${BASE_SUFFIX}${field}`] as string;
-            evalJavascriptString<ISchemaFormScriptParams>(jsString, {
+            evalJavascriptString(jsString, {
               ...scriptContext,
               formValues: {},
             });

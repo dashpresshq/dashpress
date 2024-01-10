@@ -40,7 +40,7 @@ export function StorageCredentialsSettings() {
     }
   }, [storageCredentialsConfiguration.error]);
 
-  const storageFormConfig: ISchemaFormConfig = {
+  const storageFormConfig: ISchemaFormConfig<{}> = {
     type: "text",
     selections: storageList.data.map((datum) => ({
       label: datum.title,

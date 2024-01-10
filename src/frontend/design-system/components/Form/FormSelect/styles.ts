@@ -59,6 +59,11 @@ export const SelectStyles = css`
     background: ${USE_ROOT_COLOR("primary-color")};
   }
 
+  .react-select__option--is-disabled {
+    color: ${USE_ROOT_COLOR("muted-text")};
+    cursor: not-allowed;
+  }
+
   .react-select__multi-value {
     background: ${USE_ROOT_COLOR("primary-shade-color")};
   }

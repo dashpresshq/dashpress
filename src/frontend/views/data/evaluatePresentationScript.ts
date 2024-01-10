@@ -15,15 +15,12 @@ export const evalutePresentationScript = (
     return value;
   }
 
-  const response = evalJavascriptStringSafely<IPresentationScriptParams>(
-    script,
-    {
-      field,
-      from,
-      row,
-      value,
-    }
-  );
+  const response = evalJavascriptStringSafely(script, {
+    field,
+    from,
+    row,
+    value,
+  });
 
   if (!response) {
     return value;

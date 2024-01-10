@@ -34,7 +34,7 @@ export const buildAppliedSchemaFormConfig = (
 ): IAppliedSchemaFormConfig<any> => {
   return Object.fromEntries(
     fields.map((field) => {
-      const formConfig: ISchemaFormConfig = {
+      const formConfig: ISchemaFormConfig<any> = {
         selections: entityFieldSelections[field] || [],
         apiSelections:
           entityFieldTypes[field] === "reference"

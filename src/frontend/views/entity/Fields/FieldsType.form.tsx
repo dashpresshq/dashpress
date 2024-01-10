@@ -100,7 +100,7 @@ export function FieldsTypeForm({
                     FIELD_TYPES_CONFIG_MAP[
                       renderProps.input
                         .value as keyof typeof FIELD_TYPES_CONFIG_MAP
-                    ].configureSelection
+                    ]?.configureSelection
                   ) {
                     rightActions = [
                       {

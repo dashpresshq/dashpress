@@ -7,7 +7,7 @@ export const runInitialValuesScript = (
     return {};
   }
 
-  const response = evalJavascriptStringSafely<{}>(initialValuesScript, {});
+  const response = evalJavascriptStringSafely(initialValuesScript, {});
 
   if (typeof response !== "object") {
     return {};

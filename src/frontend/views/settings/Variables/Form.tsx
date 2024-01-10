@@ -22,6 +22,9 @@ export const FORM_SCHEMA: IAppliedSchemaFormConfig<IKeyValue> = {
         errorMessage: "Only capital letters and underscores are allowed",
       },
     ],
+    formState: ($) => ({
+      disabled: $.action === "update",
+    }),
   },
   value: {
     type: "text",
@@ -50,15 +53,6 @@ export function KeyValueForm({
           : INTEGRATIONS_GROUP_CONFIG[group].crudConfig.FORM_LANG.UPDATE
       }
       action={isCreate ? "create" : "update"}
-      formExtension={{
-        fieldsState: `
-          return {
-            key: {
-              disabled: $.action === "update"
-            }
-          }
-        `,
-      }}
       fields={FORM_SCHEMA}
     />
   );

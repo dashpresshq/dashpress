@@ -89,13 +89,6 @@ export function UserUpdate() {
               initialValues={userDetails.data}
               icon="save"
               fields={UPDATE_USER_FORM_SCHEMA}
-              formExtension={{
-                fieldsState: `return {
-          role: {
-              disabled: $.auth.username === $.routeParams.username 
-          }
-        }`,
-              }}
             />
           </ViewStateMachine>
         </SectionBox>

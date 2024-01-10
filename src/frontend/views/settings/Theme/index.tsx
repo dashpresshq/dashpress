@@ -66,17 +66,6 @@ export function ThemeSettings() {
             initialValues={{ ...themeColor.data, theme: userPreference.data }}
             icon="save"
             buttonText={CRUD_CONFIG.FORM_LANG.UPSERT}
-            formExtension={{
-              fieldsState: `
-        return {
-          primaryDark: {
-            hidden: $.formValues.theme === "light" || !$.formValues.theme
-          },
-          primary: {
-            hidden: $.formValues.theme === "dark" || !$.formValues.theme
-          }
-        }`,
-            }}
             fields={{
               primary: {
                 label: "Light Color Scheme",
@@ -86,6 +75,9 @@ export function ThemeSettings() {
                     validationType: "required",
                   },
                 ],
+                formState: ($) => ({
+                  hidden: $.formValues.theme === "dark" || !$.formValues.theme,
+                }),
               },
               primaryDark: {
                 label: "Dark Color Scheme",
@@ -95,6 +87,9 @@ export function ThemeSettings() {
                     validationType: "required",
                   },
                 ],
+                formState: ($) => ({
+                  hidden: $.formValues.theme === "light" || !$.formValues.theme,
+                }),
               },
               theme: UPDATE_USER_PREFERENCES_FORM_SCHEMA.theme,
             }}

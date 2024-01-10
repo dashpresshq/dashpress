@@ -4,6 +4,7 @@ import { CRUD_CONFIG_NOT_FOUND } from "frontend/lib/crud-config";
 import { DataStateKeys } from "frontend/lib/data/types";
 import { useApi } from "frontend/lib/data/useApi";
 import { useApiQueries } from "frontend/lib/data/useApi/useApiQueries";
+import { ACTIVE_ENTITIES_ENDPOINT } from "shared/constants/entities";
 import { useEntityDictionPlurals } from "./entity.queries";
 
 export const ENTITY_FIELDS_ENDPOINT = (entity: string) =>
@@ -11,8 +12,6 @@ export const ENTITY_FIELDS_ENDPOINT = (entity: string) =>
 
 export const ENTITY_RELATIONS_ENDPOINT = (entity: string) =>
   `/api/entities/${entity}/relations`;
-
-export const ACTIVE_ENTITIES_ENDPOINT = "/api/entities/active";
 
 const useEntitiesListLabel = (entitiesList: DataStateKeys<ILabelValue[]>) => {
   const getEntitiesDictionPlurals = useEntityDictionPlurals(

@@ -1,12 +1,15 @@
 /* eslint-disable no-console */
-export function evalJavascriptString<T>(javascriptString: string, context: T) {
+export function evalJavascriptString(
+  javascriptString: string,
+  context: Record<string, unknown>
+) {
   /* eslint-disable no-new-func */
   return Function("$", javascriptString)(context);
 }
 
-export function evalJavascriptStringSafely<T>(
+export function evalJavascriptStringSafely(
   javascriptString: string,
-  context: T
+  context: Record<string, unknown>
 ) {
   try {
     return evalJavascriptString(javascriptString, context);

@@ -18,7 +18,6 @@ import { PresentationScriptDocumentation } from "frontend/docs/scripts/presentat
 import { ToastService } from "frontend/lib/toast";
 import { evalJavascriptString } from "frontend/lib/script-runner";
 import { SchemaForm } from "frontend/components/SchemaForm";
-import { IPresentationScriptParams } from "frontend/views/data/evaluatePresentationScript";
 import { BaseEntitySettingsLayout } from "../_Base";
 import { ENTITY_CONFIGURATION_VIEW } from "../constants";
 
@@ -89,7 +88,7 @@ if($.field === "commentsCount"){
             }}
             onSubmit={async (data) => {
               try {
-                evalJavascriptString<IPresentationScriptParams>(data.script, {
+                evalJavascriptString(data.script, {
                   field: "test",
                   from: "details",
                   row: {},

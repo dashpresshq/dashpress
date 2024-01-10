@@ -1,11 +1,14 @@
 import { useRouter } from "next/router";
 import { useAuthenticatedUserBag } from "frontend/hooks/auth/user.store";
+import { ISchemaFormScriptContext } from "./types";
 
-export const useSchemaFormScriptContext = (action: string) => {
+export const useSchemaFormScriptContext = (
+  action: string
+): ISchemaFormScriptContext => {
   const router = useRouter();
   const authUser = useAuthenticatedUserBag();
   return {
-    routeParams: router.query,
+    routeParams: router.query as Record<string, string>,
     auth: authUser.data,
     action,
   };

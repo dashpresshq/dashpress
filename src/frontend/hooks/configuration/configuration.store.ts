@@ -8,6 +8,7 @@ import { useStorageApi } from "frontend/lib/data/useApi";
 import { useWaitForResponseMutationOptions } from "frontend/lib/data/useMutate/useWaitForResponseMutationOptions";
 import { AppStorage } from "frontend/lib/storage/app";
 import { AppConfigurationValueType } from "shared/configurations/constants";
+import { useApiQueries } from "frontend/lib/data/useApi/useApiQueries";
 import { MAKE_APP_CONFIGURATION_CRUD_CONFIG } from "./configuration.constant";
 
 export const configurationApiPath = (
@@ -58,6 +59,19 @@ export function useEntityConfiguration<T extends AppConfigurationKeys>(
     }
   );
 }
+
+export const useMultipleEntityConfiguration = <T extends AppConfigurationKeys>(
+  entities: string[],
+  key: T
+) => {
+  return useApiQueries<{ entity: string }, AppConfigurationValueType<T>>({
+    input: entities.map((entity) => ({ entity })),
+    accessor: "entity",
+    pathFn: (entity) => configurationApiPath(key, entity),
+    placeholderDataFn: (entity) =>
+      AppStorage.get(configurationApiPath(key, entity as unknown as string)),
+  });
+};
 
 interface IUpsertConfigMutationOptions {
   otherEndpoints?: string[];

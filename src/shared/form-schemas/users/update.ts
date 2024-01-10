@@ -26,6 +26,9 @@ export const UPDATE_USER_FORM_SCHEMA: IAppliedSchemaFormConfig<IUpdateUserForm> 
           validationType: "required",
         },
       ],
+      formState: ($) => ({
+        disabled: $.auth.username === $.routeParams.username,
+      }),
     },
     systemProfile: {
       type: "json",

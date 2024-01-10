@@ -104,12 +104,18 @@ export function ActionForm({
       type: "selection",
       validations: [{ validationType: "required" }],
       selections: entities,
+      formState: ($) => ({
+        disabled: $.action === "update" || !$.formValues.formAction,
+      }),
     },
     activatedActionId: {
       label: "Integration",
       selections: activatedOptions,
       type: "selection",
       validations: [{ validationType: "required" }],
+      formState: ($) => ({
+        disabled: $.action === "update" || !$.formValues.formAction,
+      }),
     },
     implementationKey: {
       label: "Action",
@@ -119,6 +125,9 @@ export function ActionForm({
         label,
         value: key,
       })),
+      formState: ($) => ({
+        disabled: !$.formValues.formAction,
+      }),
     },
     ...selectedImplementation,
   };
@@ -172,22 +181,6 @@ export function ActionForm({
         ) as IActionInstance;
 
         await onSubmit({ ...cleanedConfigurationForm, integrationKey });
-      }}
-      // TEST: unit test this
-      formExtension={{
-        fieldsState: `
-            return {
-                entity: {
-                    disabled: $.action === "update" || !$.formValues.formAction
-                },
-                activatedActionId: {
-                   disabled: $.action === "update" || !$.formValues.formAction
-                },
-                implementationKey: {
-                    disabled: !$.formValues.formAction
-                }
-            }
-        `,
       }}
     />
   );

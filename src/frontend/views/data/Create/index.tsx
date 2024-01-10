@@ -16,7 +16,7 @@ import {
   useEntityActionMenuItems,
 } from "../../entity/constants";
 import { BaseEntityForm } from "../_BaseEntityForm";
-import { runInitialValuesScript } from "./run-initial-scripts";
+import { runInitialValuesScript } from "./run-initial-values-scripts";
 import { PortalEntityFormComponent } from "../portal";
 
 export function EntityCreate() {

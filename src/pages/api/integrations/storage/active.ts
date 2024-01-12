@@ -1,11 +1,11 @@
 import { USER_PERMISSIONS } from "shared/constants/user";
-import { storageApiController } from "backend/storage/storage.controller";
 import { requestHandler } from "backend/lib/request";
+import { storageApiService } from "backend/storage/storage.service";
 
 export default requestHandler(
   {
     GET: async () => {
-      return await storageApiController.getCurrentActivatedStorage();
+      return { data: await storageApiService.getCurrentActivatedStorage() };
     },
     POST: async (getValidatedRequest) => {
       const validatedRequest = await getValidatedRequest([
@@ -15,7 +15,7 @@ export default requestHandler(
         },
       ]);
 
-      return await storageApiController.activateStorage(
+      return await storageApiService.activateStorage(
         validatedRequest.requestBody
       );
     },
@@ -23,7 +23,7 @@ export default requestHandler(
   [
     {
       _type: "canUser",
-      body: USER_PERMISSIONS.CAN_MANAGE_INTEGRATIONS,
+      body: USER_PERMISSIONS.CAN_MANAGE_APP_CREDENTIALS,
     },
   ]
 );

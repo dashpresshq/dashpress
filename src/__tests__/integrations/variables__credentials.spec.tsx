@@ -45,7 +45,7 @@ describe("pages/integrations/variables => credentials", () => {
 
       expect(
         within(priviledgeSection).queryByText(
-          `For security reasons, Please input your account password to be able to reveal Secrets`
+          `For security reasons, Please input your account password to be able to manage Secrets`
         )
       ).not.toBeInTheDocument();
       expect(
@@ -76,7 +76,7 @@ describe("pages/integrations/variables => credentials", () => {
       await userEvent.click(screen.getByRole("tab", { name: "Secrets" }));
       expect(
         within(priviledgeSection).getByText(
-          `For security reasons, Please input your account password to be able to reveal Secrets`
+          `For security reasons, Please input your account password to be able to manage Secrets`
         )
       ).toBeInTheDocument();
       expect(
@@ -273,7 +273,7 @@ describe("pages/integrations/variables => credentials", () => {
 
       expect(
         within(priviledgeSection).queryByText(
-          `For security reasons, Please input your account password to be able to reveal Secrets`
+          `For security reasons, Please input your account password to be able to manage Secrets`
         )
       ).not.toBeInTheDocument();
       expect(

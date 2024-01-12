@@ -11,7 +11,7 @@ export default requestHandler(
   [
     {
       _type: "canUser",
-      body: USER_PERMISSIONS.CAN_MANAGE_INTEGRATIONS,
+      body: USER_PERMISSIONS.CAN_MANAGE_APP_CREDENTIALS,
     },
     {
       _type: "withPassword",

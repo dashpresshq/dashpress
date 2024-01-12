@@ -101,7 +101,7 @@ export function ManageCredentialGroup({
 
   const canManageAction = !(
     group === IntegrationsConfigurationGroup.Credentials &&
-    !userHasPermission(USER_PERMISSIONS.CAN_MANAGE_INTEGRATIONS)
+    !userHasPermission(USER_PERMISSIONS.CAN_MANAGE_APP_CREDENTIALS)
   );
 
   const showManageAction =
@@ -178,7 +178,7 @@ export function ManageCredentialGroup({
     <>
       <section aria-label={`${group} priviledge section`}>
         {group === IntegrationsConfigurationGroup.Credentials &&
-          userHasPermission(USER_PERMISSIONS.CAN_MANAGE_INTEGRATIONS) &&
+          userHasPermission(USER_PERMISSIONS.CAN_MANAGE_APP_CREDENTIALS) &&
           revealedCredentials.data === undefined && (
             <Spacer>
               <PasswordToReveal

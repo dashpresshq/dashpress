@@ -29,7 +29,7 @@ const checks = (group: IntegrationsConfigurationGroup): ValidationKeys[] => {
       _type: "canUser",
       body:
         group === IntegrationsConfigurationGroup.Credentials
-          ? USER_PERMISSIONS.CAN_MANAGE_INTEGRATIONS
+          ? USER_PERMISSIONS.CAN_MANAGE_APP_CREDENTIALS
           : USER_PERMISSIONS.CAN_CONFIGURE_APP,
     },
   ];

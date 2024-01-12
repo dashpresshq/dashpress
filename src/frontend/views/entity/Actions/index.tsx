@@ -41,7 +41,7 @@ export function EntityFormActionsSettings() {
           },
         ]}
       >
-        <BaseActionInstances id={entity} type="entity" />
+        <BaseActionInstances entity={entity} />
       </SectionBox>
       <FormIntegrationsDocumentation
         title={DOCS_TITLE}

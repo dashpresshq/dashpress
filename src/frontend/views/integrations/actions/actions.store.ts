@@ -1,9 +1,5 @@
 import { useMutation } from "react-query";
-import {
-  IIntegrationsList,
-  IActivatedAction,
-  ActionIntegrationKeys,
-} from "shared/types/actions";
+import { IIntegrationsList, ActionIntegrationKeys } from "shared/types/actions";
 import { CRUD_CONFIG_NOT_FOUND } from "frontend/lib/crud-config";
 import { reduceStringToNumber } from "shared/lib/strings";
 import { makeActionRequest } from "frontend/lib/data/makeRequest";
@@ -25,8 +21,8 @@ export const useActionIntegrationsList = () =>
   });
 
 export const useActiveActionList = () =>
-  useApi<IActivatedAction[]>(ACTIVE_ACTIONS_INTEGRATIONS_ENDPOINT, {
-    errorMessage: CRUD_CONFIG_NOT_FOUND("Active Actions"),
+  useApi<ActionIntegrationKeys[]>(ACTIVE_ACTIONS_INTEGRATIONS_ENDPOINT, {
+    errorMessage: CRUD_CONFIG_NOT_FOUND("Activated Integrations"),
     defaultData: [],
   });
 

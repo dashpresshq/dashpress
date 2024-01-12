@@ -294,6 +294,7 @@ export function DashboardWidgetForm({
                   {process.env.NEXT_PUBLIC_IS_DEMO ? (
                     <Stack justify="center">
                       <Typo.SM>
+                        <Spacer />
                         You will be able to save this form on your own
                         installation
                       </Typo.SM>

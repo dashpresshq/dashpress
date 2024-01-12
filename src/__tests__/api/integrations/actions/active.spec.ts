@@ -6,7 +6,7 @@ import {
 
 describe("/api/integrations/actions/active", () => {
   beforeAll(async () => {
-    await setupAllTestData(["activated-actions"]);
+    await setupAllTestData(["activated-integrations"]);
   });
 
   it("should show all activated actions in addition with HTTP", async () => {
@@ -18,21 +18,9 @@ describe("/api/integrations/actions/active", () => {
 
     expect(res._getJSONData()).toMatchInlineSnapshot(`
       [
-        {
-          "activationId": "smtp-activation-id-1",
-          "credentialsGroupKey": "SMTP",
-          "integrationKey": "smtp",
-        },
-        {
-          "activationId": "slack-activation-id-2",
-          "credentialsGroupKey": "SLACK",
-          "integrationKey": "slack",
-        },
-        {
-          "activationId": "http",
-          "credentialsGroupKey": "none-existent",
-          "integrationKey": "http",
-        },
+        "smtp",
+        "slack",
+        "http",
       ]
     `);
   });

@@ -9,17 +9,13 @@ import { MutationHelpers } from "frontend/lib/data/useMutate/mutation-helpers";
 import { makeActionRequest } from "frontend/lib/data/makeRequest";
 import { useWaitForResponseMutationOptions } from "frontend/lib/data/useMutate/useWaitForResponseMutationOptions";
 import { useApi } from "frontend/lib/data/useApi";
-import { ActionInstanceView } from "./types";
 import {
   ADMIN_ACTION_INSTANCES_CRUD_CONFIG,
   BASE_ACTIONS_ENDPOINT,
 } from "./constants";
 
-export const LIST_ACTION_INSTANCES = ({ type, id }: ActionInstanceView) => {
-  if (type === "entity") {
-    return `${BASE_ACTIONS_ENDPOINT}/instances/${id}`;
-  }
-  return `${BASE_ACTIONS_ENDPOINT}/${id}`;
+export const LIST_ACTION_INSTANCES = (entity: string) => {
+  return `${BASE_ACTIONS_ENDPOINT}/instances/${entity}`;
 };
 
 export const useIntegrationImplementationsList = (integrationKey: string) =>
@@ -32,14 +28,12 @@ export const useIntegrationImplementationsList = (integrationKey: string) =>
     }
   );
 
-export function useDeleteActionInstanceMutation(
-  actionInstanceView: ActionInstanceView
-) {
+export function useDeleteActionInstanceMutation(entity: string) {
   const apiMutateOptions = useApiMutateOptimisticOptions<
     IActionInstance[],
     string
   >({
-    dataQueryPath: LIST_ACTION_INSTANCES(actionInstanceView),
+    dataQueryPath: LIST_ACTION_INSTANCES(entity),
     otherEndpoints: [BASE_ACTIONS_ENDPOINT],
     successMessage: ADMIN_ACTION_INSTANCES_CRUD_CONFIG.MUTATION_LANG.DELETE,
     onMutate: MutationHelpers.deleteByKey("instanceId") as unknown as (

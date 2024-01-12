@@ -33,13 +33,13 @@ export function ActionsIntegrations() {
   );
 
   const activeAction = activeActionsList.data.find(
-    ({ integrationKey }) => integrationKey === currentKey
+    (integrationKey) => integrationKey === currentKey
   );
 
   useSetPageDetails({
     pageTitle: ACTION_INTEGRATIONS_CRUD_CONFIG.TEXT_LANG.TITLE,
     viewKey: ACTIONS_VIEW_KEY,
-    permission: USER_PERMISSIONS.CAN_MANAGE_INTEGRATIONS,
+    permission: USER_PERMISSIONS.CAN_MANAGE_APP_CREDENTIALS,
   });
 
   return (

@@ -8,9 +8,10 @@ import {
   KeyValueStoreApiService,
 } from "backend/lib/key-value";
 import { IApplicationService } from "backend/types";
-import { IIntegrationsList } from "shared/types/actions";
 import { sluggify } from "shared/lib/strings";
+import { IStorageIntegration } from "shared/types/actions";
 import { STORAGE_INTEGRATIONS } from "./integrations";
+import { StorageIntegrationKeys } from "./integrations/types";
 
 export class StorageApiService implements IApplicationService {
   constructor(
@@ -20,21 +21,23 @@ export class StorageApiService implements IApplicationService {
 
   async bootstrap() {}
 
-  listStorageIntegrations(): IIntegrationsList[] {
+  listStorageIntegrations(): IStorageIntegration[] {
     return Object.entries(STORAGE_INTEGRATIONS).map(
       ([key, { title, integrationConfigurationSchema }]) => ({
         title,
-        key,
-        description: ``,
+        key: key as StorageIntegrationKeys,
         configurationSchema: integrationConfigurationSchema,
       })
     );
   }
 
-  async activateStorage(
-    storageKey: string,
-    configuration: Record<string, string>
-  ): Promise<void> {
+  async activateStorage({
+    configuration,
+    storageKey,
+  }: {
+    storageKey: string;
+    configuration: Record<string, string>;
+  }): Promise<void> {
     validateSchemaRequestBody(
       STORAGE_INTEGRATIONS[storageKey].integrationConfigurationSchema,
       configuration

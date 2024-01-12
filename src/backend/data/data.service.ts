@@ -1,5 +1,6 @@
 import { NotFoundError, progammingError } from "backend/lib/errors";
 import {
+  DataEventActions,
   FilterOperators,
   PaginatedData,
   QueryFilterSchema,
@@ -8,10 +9,8 @@ import {
   actionsApiService,
   ActionsApiService,
 } from "backend/actions/actions.service";
-import { BaseAction } from "shared/types/actions";
 import { IEntityField } from "shared/types/db";
 import { IAccountProfile } from "shared/types/user";
-import { noop } from "shared/lib/noop";
 import { compileTemplateString } from "shared/lib/strings/templates";
 import { rDBMSDataApiService, RDBMSDataApiService } from "./data-access/RDBMS";
 import { IDataApiService, IPaginationFilters } from "./types";
@@ -128,14 +127,10 @@ export class DataApiService implements IDataApiService {
     data: Record<string, unknown>,
     accountProfile: IAccountProfile
   ): Promise<string | number> {
-    // TODO: validate the createData values
-    const [allowedFields, primaryField, entityValidations] = await Promise.all([
+    const [allowedFields, primaryField] = await Promise.all([
       this._entitiesApiService.getAllowedCrudsFieldsToShow(entity, "create"),
       this._entitiesApiService.getEntityPrimaryField(entity),
-      this._configurationApiService.show("entity_validations", entity),
     ]);
-
-    noop(entityValidations);
 
     await PortalDataHooksService.beforeCreate({
       dataApiService: this,
@@ -158,7 +153,7 @@ export class DataApiService implements IDataApiService {
 
     await this._actionsApiService.runAction(
       entity,
-      BaseAction.Create,
+      DataEventActions.Create,
       async () => await this.showData(entity, id),
       accountProfile
     );
@@ -228,20 +223,16 @@ export class DataApiService implements IDataApiService {
     entity: string,
     id: string,
     data: Record<string, unknown>,
-    accountProfile: IAccountProfile
+    accountProfile: IAccountProfile,
+    options: {
+      skipDataEvents?: boolean;
+    } = {}
   ): Promise<void> {
-    const [allowedFields, primaryField, entityValidations, metadataColumns] =
-      await Promise.all([
-        this._entitiesApiService.getAllowedCrudsFieldsToShow(entity, "update"),
-        this._entitiesApiService.getEntityPrimaryField(entity),
-        this._configurationApiService.show("entity_validations", entity),
-        this._configurationApiService.show("metadata_columns"),
-      ]);
-
-    // validate only the fields presents in 'data'
-    noop(entityValidations);
-
-    // const validations = runValidationError({})(data);
+    const [allowedFields, primaryField, metadataColumns] = await Promise.all([
+      this._entitiesApiService.getAllowedCrudsFieldsToShow(entity, "update"),
+      this._entitiesApiService.getEntityPrimaryField(entity),
+      this._configurationApiService.show("metadata_columns"),
+    ]);
 
     const beforeData = await PortalDataHooksService.beforeUpdate({
       dataApiService: this,
@@ -273,11 +264,12 @@ export class DataApiService implements IDataApiService {
       beforeData,
       data,
       dataId: id,
+      options,
     });
 
     await this._actionsApiService.runAction(
       entity,
-      BaseAction.Update,
+      DataEventActions.Update,
       async () => await this.showData(entity, id),
       accountProfile
     );
@@ -290,7 +282,7 @@ export class DataApiService implements IDataApiService {
   ): Promise<void> {
     await this._actionsApiService.runAction(
       entity,
-      BaseAction.Delete,
+      DataEventActions.Delete,
       async () => await this.showData(entity, id),
       accountProfile
     );

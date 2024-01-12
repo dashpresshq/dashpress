@@ -1,6 +1,5 @@
 import handler from "pages/api/integrations/actions/instances/index";
 import getHandler from "pages/api/integrations/actions/instances/[key]";
-import { HTTP_ACTIVATION_ID } from "shared/types/actions";
 import {
   createAuthenticatedMocks,
   setupAllTestData,
@@ -15,17 +14,16 @@ jest.mock("nanoid", () => ({
 
 describe("/api/integrations/actions/instances/index", () => {
   beforeAll(async () => {
-    await setupAllTestData(["action-instances", "activated-actions"]);
+    await setupAllTestData(["action-instances", "activated-integrations"]);
   });
 
   it("should instantiate actions", async () => {
     const { req, res } = createAuthenticatedMocks({
       method: "POST",
       body: {
-        activatedActionId: "smtp-activation-id-1",
         entity: "test-entity",
+        integrationKey: "smtp",
         implementationKey: "SEND_MESSAGE",
-        triggerLogic: "some trigger logic",
         formAction: "update",
         configuration: {
           to: "me",
@@ -44,10 +42,9 @@ describe("/api/integrations/actions/instances/index", () => {
     const { req, res } = createAuthenticatedMocks({
       method: "POST",
       body: {
-        activatedActionId: HTTP_ACTIVATION_ID,
         entity: "test-entity",
+        integrationKey: "http",
         implementationKey: "PUT",
-        triggerLogic: "some trigger logic",
         formAction: "create",
         configuration: {
           url: "/some-where",
@@ -62,14 +59,13 @@ describe("/api/integrations/actions/instances/index", () => {
     expect(res._getStatusCode()).toBe(201);
   });
 
-  it("should not instantiate action for unknown activationId", async () => {
+  it("should not instantiate action for un-activated integration", async () => {
     const { req, res } = createAuthenticatedMocks({
       method: "POST",
       body: {
-        activatedActionId: "THIS_ACTIVATION_ID_DOES_NOT_EXIST",
+        integrationKey: "postmark",
         entity: "test-entity-2",
         implementationKey: "GET",
-        triggerLogic: "some trigger logic",
         formAction: "update",
         configuration: {
           bad: '{"request": "hello"}',
@@ -82,7 +78,7 @@ describe("/api/integrations/actions/instances/index", () => {
     expect(res._getStatusCode()).toBe(400);
     expect(res._getJSONData()).toMatchInlineSnapshot(`
       {
-        "message": "Integration Key not found for activatedActionId 'THIS_ACTIVATION_ID_DOES_NOT_EXIST'",
+        "message": "The integration for 'postmark' has not yet been activated",
         "method": "POST",
         "name": "BadRequestError",
         "path": "",
@@ -104,7 +100,6 @@ describe("/api/integrations/actions/instances/index", () => {
     expect(res._getJSONData()).toMatchInlineSnapshot(`
       [
         {
-          "activatedActionId": "smtp-activation-id-1",
           "configuration": {
             "body": "You are awesome",
             "subject": "something important",
@@ -115,10 +110,8 @@ describe("/api/integrations/actions/instances/index", () => {
           "implementationKey": "SEND_MESSAGE",
           "instanceId": "nano-id-1",
           "integrationKey": "smtp",
-          "triggerLogic": "some trigger logic",
         },
         {
-          "activatedActionId": "http",
           "configuration": {
             "body": "{"me": "you"}",
             "headers": "{"me": "you"}",
@@ -129,7 +122,6 @@ describe("/api/integrations/actions/instances/index", () => {
           "implementationKey": "PUT",
           "instanceId": "nano-id-2",
           "integrationKey": "http",
-          "triggerLogic": "some trigger logic",
         },
       ]
     `);

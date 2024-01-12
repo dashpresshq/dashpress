@@ -1,56 +1,49 @@
 import handler from "pages/api/integrations/actions/instances/[key]";
-import { HTTP_ACTIVATION_ID, IActionInstance } from "shared/types/actions";
+import { ActionIntegrationKeys, IActionInstance } from "shared/types/actions";
 import {
   createAuthenticatedMocks,
   setupAllTestData,
 } from "__tests__/api/_test-utils";
 import { setupActionInstanceTestData } from "__tests__/api/_test-utils/_action-instances";
+import { DataEventActions } from "shared/types/data";
 
 const TEST_ACTION_INSTANCES: IActionInstance[] = [
   {
     instanceId: "instance-id-1",
-    activatedActionId: "activation-id-1",
-    integrationKey: "smtp",
+    integrationKey: ActionIntegrationKeys.SMTP,
     entity: "base-model",
     implementationKey: "SEND_MESSAGE",
-    triggerLogic: "some-test-trigger-logic",
-    formAction: "create",
+    formAction: DataEventActions.Create,
     configuration: {
       foo: "bar",
     },
   },
   {
     instanceId: "instance-id-2",
-    activatedActionId: "activation-id-1",
-    integrationKey: "smtp",
+    integrationKey: ActionIntegrationKeys.SMTP,
     entity: "base-model",
     implementationKey: "SEND_MESSAGE",
-    triggerLogic: "some-test-trigger-logic-2",
-    formAction: "delete",
+    formAction: DataEventActions.Delete,
     configuration: {
       foo1: "bar1",
     },
   },
   {
     instanceId: "instance-id-3",
-    activatedActionId: "activation-id-1",
-    integrationKey: "smtp",
+    integrationKey: ActionIntegrationKeys.SMTP,
     entity: "base-model",
     implementationKey: "SEND_MESSAGE",
-    triggerLogic: "some-test-trigger-logic-3",
-    formAction: "update",
+    formAction: DataEventActions.Update,
     configuration: {
       foo2: "bar2",
     },
   },
   {
     instanceId: "instance-id-4",
-    activatedActionId: HTTP_ACTIVATION_ID,
-    integrationKey: "http",
+    integrationKey: ActionIntegrationKeys.HTTP,
     entity: "secondary-model",
     implementationKey: "POST",
-    triggerLogic: "another-trigger-logic",
-    formAction: "delete",
+    formAction: DataEventActions.Delete,
     configuration: {
       bar: "foo",
     },
@@ -59,7 +52,7 @@ const TEST_ACTION_INSTANCES: IActionInstance[] = [
 
 describe("/api/integrations/actions/instances/[key]", () => {
   beforeAll(async () => {
-    await setupAllTestData(["activated-actions"]);
+    await setupAllTestData(["activated-integrations"]);
     await setupActionInstanceTestData(TEST_ACTION_INSTANCES);
   });
 
@@ -76,7 +69,6 @@ describe("/api/integrations/actions/instances/[key]", () => {
     expect(res._getJSONData()).toMatchInlineSnapshot(`
       [
         {
-          "activatedActionId": "activation-id-1",
           "configuration": {
             "foo": "bar",
           },
@@ -85,10 +77,8 @@ describe("/api/integrations/actions/instances/[key]", () => {
           "implementationKey": "SEND_MESSAGE",
           "instanceId": "instance-id-1",
           "integrationKey": "smtp",
-          "triggerLogic": "some-test-trigger-logic",
         },
         {
-          "activatedActionId": "activation-id-1",
           "configuration": {
             "foo1": "bar1",
           },
@@ -97,10 +87,8 @@ describe("/api/integrations/actions/instances/[key]", () => {
           "implementationKey": "SEND_MESSAGE",
           "instanceId": "instance-id-2",
           "integrationKey": "smtp",
-          "triggerLogic": "some-test-trigger-logic-2",
         },
         {
-          "activatedActionId": "activation-id-1",
           "configuration": {
             "foo2": "bar2",
           },
@@ -109,7 +97,6 @@ describe("/api/integrations/actions/instances/[key]", () => {
           "implementationKey": "SEND_MESSAGE",
           "instanceId": "instance-id-3",
           "integrationKey": "smtp",
-          "triggerLogic": "some-test-trigger-logic-3",
         },
       ]
     `);
@@ -145,11 +132,9 @@ describe("/api/integrations/actions/instances/[key]", () => {
         key: "instance-id-2",
       },
       body: {
-        activatedActionId: "activation-id-2-updated",
         integrationKey: "slack",
         entity: "base-model",
         implementationKey: "SEND_MESSAGE_UPDATED",
-        triggerLogic: "updated-trigger-logic",
         formAction: "update",
         configuration: {
           you: "are",
@@ -173,7 +158,6 @@ describe("/api/integrations/actions/instances/[key]", () => {
     expect(getRes._getJSONData()).toMatchInlineSnapshot(`
       [
         {
-          "activatedActionId": "activation-id-1",
           "configuration": {
             "foo": "bar",
           },
@@ -182,10 +166,8 @@ describe("/api/integrations/actions/instances/[key]", () => {
           "implementationKey": "SEND_MESSAGE",
           "instanceId": "instance-id-1",
           "integrationKey": "smtp",
-          "triggerLogic": "some-test-trigger-logic",
         },
         {
-          "activatedActionId": "activation-id-2-updated",
           "configuration": {
             "awe": "some",
             "you": "are",
@@ -195,7 +177,6 @@ describe("/api/integrations/actions/instances/[key]", () => {
           "implementationKey": "SEND_MESSAGE_UPDATED",
           "instanceId": "instance-id-2",
           "integrationKey": "slack",
-          "triggerLogic": "updated-trigger-logic",
         },
       ]
     `);

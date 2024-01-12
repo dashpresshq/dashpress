@@ -1,4 +1,4 @@
-import { actionsApiController } from "backend/actions/actions.controller";
+import { actionsApiService } from "backend/actions/actions.service";
 import { requestHandler } from "backend/lib/request";
 
 const REQUEST_KEY_FIELD = "key";
@@ -12,7 +12,7 @@ export default requestHandler({
       },
     ]);
 
-    return actionsApiController.listIntegrationImplementations(
+    return actionsApiService.listIntegrationImplementations(
       validatedRequest.requestQuery
     );
   },

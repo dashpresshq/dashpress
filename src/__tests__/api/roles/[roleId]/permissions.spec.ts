@@ -52,7 +52,7 @@ describe("/api/roles/[roleId]/permissions", () => {
         roleId: "some-admin-permissions",
       },
       body: {
-        permissions: ["CAN_CONFIGURE_APP", "CAN_MANAGE_INTEGRATIONS"],
+        permissions: ["CAN_CONFIGURE_APP", "CAN_MANAGE_APP_CREDENTIALS"],
       },
     });
 
@@ -74,7 +74,7 @@ describe("/api/roles/[roleId]/permissions", () => {
       "CAN_RESET_PASSWORD",
       "CAN_MANAGE_PERMISSIONS",
       "CAN_CONFIGURE_APP",
-      "CAN_MANAGE_INTEGRATIONS",
+      "CAN_MANAGE_APP_CREDENTIALS",
     ]);
   });
 
@@ -85,7 +85,7 @@ describe("/api/roles/[roleId]/permissions", () => {
         roleId: "some-admin-permissions",
       },
       body: {
-        permissions: ["CAN_RESET_PASSWORD", "CAN_MANAGE_INTEGRATIONS"],
+        permissions: ["CAN_RESET_PASSWORD", "CAN_MANAGE_APP_CREDENTIALS"],
       },
     });
 

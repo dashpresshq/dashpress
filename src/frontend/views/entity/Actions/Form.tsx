@@ -1,27 +1,24 @@
 /* eslint-disable no-param-reassign */
-import { ILabelValue } from "shared/types/options";
 import { SchemaForm } from "frontend/components/SchemaForm";
 import { useState } from "react";
 import { IAppliedSchemaFormConfig } from "shared/form-schemas/types";
 import {
+  ActionIntegrationKeys,
   IActionInstance,
   IIntegrationsList,
-  IActivatedAction,
-  BaseAction,
 } from "shared/types/actions";
 import { userFriendlyCase } from "shared/lib/strings/friendly-case";
+import { DataEventActions } from "shared/types/data";
 import { useIntegrationImplementationsList } from "./instances.store";
 import { ADMIN_ACTION_INSTANCES_CRUD_CONFIG } from "./constants";
-import { ActionInstanceView } from "./types";
 
 interface IProps {
   onSubmit: (instance: IActionInstance) => Promise<void>;
   initialValues?: Partial<IActionInstance>;
-  entities: ILabelValue[];
   formAction: "create" | "update";
   integrationsList: IIntegrationsList[];
-  activatedActions: IActivatedAction[];
-  currentView: ActionInstanceView;
+  activatedIntegrations: ActionIntegrationKeys[];
+  entity: string;
 }
 
 const CONFIGURATION_FORM_PREFIX = "configuration__";
@@ -29,41 +26,27 @@ const CONFIGURATION_FORM_PREFIX = "configuration__";
 export function ActionForm({
   onSubmit,
   initialValues = {},
-  entities,
   formAction,
   integrationsList,
-  activatedActions,
-  currentView,
+  activatedIntegrations,
+  entity,
 }: IProps) {
   const integrationsListMap = Object.fromEntries(
     integrationsList.map((action) => [action.key, action])
   );
-  const activatedOptions = activatedActions
-    .filter(({ integrationKey }) => {
-      if (currentView.type !== "integrationKey") {
-        return true;
-      }
-      return currentView.id === integrationKey;
-    })
-    .map(({ activationId, integrationKey }) => ({
-      label: integrationsListMap[integrationKey].title,
-      value: activationId,
-    }));
+  const activatedOptions = activatedIntegrations.map((integrationKey) => ({
+    label: integrationsListMap[integrationKey].title,
+    value: integrationKey,
+  }));
 
   const [formValues, setFormValues] = useState<Partial<IActionInstance>>({});
 
   const implementations = useIntegrationImplementationsList(
-    activatedActions.find(
-      ({ activationId }) => formValues.activatedActionId === activationId
-    )?.integrationKey
+    formValues.integrationKey
   );
 
   const currentActionTitle =
-    integrationsListMap[
-      activatedActions.find(
-        ({ activationId }) => formValues.activatedActionId === activationId
-      )?.integrationKey
-    ]?.title;
+    integrationsListMap[formValues.integrationKey]?.title;
 
   const selectedImplementation = Object.fromEntries(
     Object.entries(
@@ -83,15 +66,15 @@ export function ActionForm({
       selections: [
         {
           label: "On Create",
-          value: BaseAction.Create,
+          value: DataEventActions.Create,
         },
         {
           label: "On Update",
-          value: BaseAction.Update,
+          value: DataEventActions.Update,
         },
         {
           label: "On Delete",
-          value: BaseAction.Delete,
+          value: DataEventActions.Delete,
         },
       ],
       validations: [
@@ -100,15 +83,7 @@ export function ActionForm({
         },
       ],
     },
-    entity: {
-      type: "selection",
-      validations: [{ validationType: "required" }],
-      selections: entities,
-      formState: ($) => ({
-        disabled: $.action === "update" || !$.formValues.formAction,
-      }),
-    },
-    activatedActionId: {
+    integrationKey: {
       label: "Integration",
       selections: activatedOptions,
       type: "selection",
@@ -131,17 +106,7 @@ export function ActionForm({
     },
     ...selectedImplementation,
   };
-  if (currentView.type === "entity") {
-    delete fields.entity;
-    initialValues = { ...initialValues, entity: currentView.id };
-  }
-  if (currentView.type === "integrationKey" && activatedOptions.length === 1) {
-    delete fields.activatedActionId;
-    initialValues = {
-      ...initialValues,
-      activatedActionId: activatedOptions[0].value,
-    };
-  }
+  initialValues = { ...initialValues, entity };
 
   const initialValues$1 = Object.entries(
     initialValues.configuration || {}
@@ -162,10 +127,6 @@ export function ActionForm({
       onChange={setFormValues}
       action={formAction}
       onSubmit={async (instance) => {
-        const integrationKey = activatedActions.find(
-          ({ activationId }) => instance.activatedActionId === activationId
-        )?.integrationKey;
-
         const cleanedConfigurationForm = Object.entries(instance).reduce(
           (cleanForm, [formKey, formValue]) => {
             if (formKey.startsWith(CONFIGURATION_FORM_PREFIX)) {
@@ -180,7 +141,7 @@ export function ActionForm({
           { configuration: {} }
         ) as IActionInstance;
 
-        await onSubmit({ ...cleanedConfigurationForm, integrationKey });
+        await onSubmit(cleanedConfigurationForm);
       }}
     />
   );

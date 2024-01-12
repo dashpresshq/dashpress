@@ -28,6 +28,6 @@ export const SYSTEM_LINKS_CONFIG_MAP: Record<
   },
   [SystemLinks.Integrations]: {
     link: NAVIGATION_LINKS.INTEGRATIONS.ACTIONS(ActionIntegrationKeys.HTTP),
-    permission: USER_PERMISSIONS.CAN_MANAGE_INTEGRATIONS,
+    permission: USER_PERMISSIONS.CAN_MANAGE_APP_CREDENTIALS,
   },
 };

@@ -5,7 +5,7 @@ import { GOOGLE_STORAGE_INTEGRATION } from "./google";
 import { StorageIntegrationKeys } from "./types";
 
 export const STORAGE_INTEGRATIONS: Record<
-  string,
+  StorageIntegrationKeys,
   IStorageIntegrationsImplemention<any>
 > = {
   [StorageIntegrationKeys.S3]: AWS_STORAGE_INTEGRATION,

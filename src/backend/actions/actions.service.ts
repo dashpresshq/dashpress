@@ -19,39 +19,42 @@ import { INTEGRATIONS_GROUP_CONFIG } from "shared/config-bag/integrations";
 import {
   IIntegrationsList,
   IActionInstance,
-  IActivatedAction,
   IIntegrationImplementationList,
-  HTTP_ACTIVATION_ID,
   ActionIntegrationKeys,
 } from "shared/types/actions";
 import { IAccountProfile } from "shared/types/user";
 import { compileTemplateString } from "shared/lib/strings/templates";
 import { sluggify } from "shared/lib/strings";
+import { DataEventActions } from "shared/types/data";
+import {
+  createKeyValueDomainPersistenceService,
+  KeyValueStoreApiService,
+} from "backend/lib/key-value";
 import { ACTION_INTEGRATIONS } from "./integrations";
 
 export class ActionsApiService implements IApplicationService {
   constructor(
-    private readonly _activatedActionsPersistenceService: AbstractConfigDataPersistenceService<IActivatedAction>,
+    private readonly _activatedIntegrationsPersistenceService: KeyValueStoreApiService<
+      ActionIntegrationKeys[]
+    >,
     private readonly _actionInstancesPersistenceService: AbstractConfigDataPersistenceService<IActionInstance>,
     private readonly _credentialsApiService: CredentialsApiService,
     private readonly _appConstantsApiService: IntegrationsConfigurationApiService
   ) {}
 
   async bootstrap() {
-    await this._activatedActionsPersistenceService.setup();
     await this._actionInstancesPersistenceService.setup();
   }
 
-  // TODO: job queue https://github.com/bee-queue/bee-queue
   async runAction(
     entity: string,
-    formAction: string,
+    dataEvent: DataEventActions,
     getData: () => Promise<Record<string, unknown>>,
     accountProfile: IAccountProfile
   ) {
     const instances = await this.listEntityActionInstances(entity);
     const actionsToRun = instances.filter(
-      (action) => action.formAction === formAction
+      (action) => action.formAction === dataEvent
     );
 
     if (actionsToRun.length === 0) {
@@ -61,15 +64,10 @@ export class ActionsApiService implements IApplicationService {
     const data = await getData();
 
     for (const action of actionsToRun) {
-      const { configuration, implementationKey, activatedActionId } = action;
-      // run triggerLogic
+      const { configuration, implementationKey, integrationKey } = action;
 
-      const integrationKey = await this.getIntegrationKeyFromActivatedActionId(
-        activatedActionId
-      );
-
-      const actionConfiguration = await this.showActionConfig(
-        activatedActionId
+      const actionConfiguration = await this.getIntegrationCredentials(
+        integrationKey
       );
 
       const connection = await ACTION_INTEGRATIONS[integrationKey].connect(
@@ -119,12 +117,13 @@ export class ActionsApiService implements IApplicationService {
     const activatedActions = await this.listActivatedActions();
 
     const integrationKey = activatedActions.find(
-      ({ activationId }) => action.activatedActionId === activationId
-    )?.integrationKey;
+      (activateIntegrationKey) =>
+        activateIntegrationKey === action.integrationKey
+    );
 
     if (!integrationKey) {
       throw new BadRequestError(
-        `Integration Key not found for activatedActionId '${action.activatedActionId}'`
+        `The integration for '${action.integrationKey}' has not yet been activated`
       );
     }
 
@@ -155,18 +154,12 @@ export class ActionsApiService implements IApplicationService {
     );
   }
 
-  async listIntegrationActions(integrationKey$1: string) {
-    return (await this._actionInstancesPersistenceService.getAllItems()).filter(
-      ({ integrationKey }) => integrationKey === integrationKey$1
-    );
-  }
-
   listActionIntegrations(): IIntegrationsList[] {
     return Object.entries(ACTION_INTEGRATIONS).map(
       ([key, { title, description, configurationSchema }]) => ({
         description,
         title,
-        key,
+        key: key as ActionIntegrationKeys,
         configurationSchema,
       })
     );
@@ -184,17 +177,11 @@ export class ActionsApiService implements IApplicationService {
     }));
   }
 
-  async listActivatedActions(): Promise<IActivatedAction[]> {
-    const activatedActions =
-      await this._activatedActionsPersistenceService.getAllItems();
-    return [
-      ...activatedActions,
-      {
-        activationId: HTTP_ACTIVATION_ID,
-        credentialsGroupKey: "none-existent",
-        integrationKey: ActionIntegrationKeys.HTTP,
-      },
-    ];
+  async listActivatedActions(): Promise<ActionIntegrationKeys[]> {
+    const activatedIntegrations =
+      (await this._activatedIntegrationsPersistenceService.getItem()) || [];
+
+    return [...activatedIntegrations, ActionIntegrationKeys.HTTP];
   }
 
   async activateAction(
@@ -206,15 +193,15 @@ export class ActionsApiService implements IApplicationService {
       configuration
     );
 
-    const activationId = nanoid();
-
     const credentialsGroupKey = this.makeCredentialsGroupKey(integrationKey);
 
-    await this._activatedActionsPersistenceService.createItem(activationId, {
-      activationId,
+    const activatedIntegrations =
+      (await this._activatedIntegrationsPersistenceService.getItem()) || [];
+
+    await this._activatedIntegrationsPersistenceService.persistItem([
+      ...activatedIntegrations,
       integrationKey,
-      credentialsGroupKey,
-    });
+    ]);
 
     await this._credentialsApiService.upsertGroup(
       {
@@ -231,47 +218,25 @@ export class ActionsApiService implements IApplicationService {
     return sluggify(`ACTION__${integrationKey}`).toUpperCase();
   }
 
-  private async getIntegrationKeyFromActivatedActionId(
-    activatedActionId: string
-  ): Promise<string> {
-    if (activatedActionId === HTTP_ACTIVATION_ID) {
-      return ActionIntegrationKeys.HTTP;
-    }
-    const activatedAction =
-      await this._activatedActionsPersistenceService.getItemOrFail(
-        activatedActionId
-      );
-    return activatedAction.integrationKey;
-  }
-
-  async showActionConfig(
-    activationId: string
+  async getIntegrationCredentials(
+    integrationKey: ActionIntegrationKeys
   ): Promise<Record<string, unknown>> {
-    if (activationId === HTTP_ACTIVATION_ID) {
+    if (integrationKey === ActionIntegrationKeys.HTTP) {
       return {};
     }
-    const { credentialsGroupKey, integrationKey } =
-      await this._activatedActionsPersistenceService.getItemOrFail(
-        activationId
-      );
 
     return await this._credentialsApiService.useGroupValue({
-      key: credentialsGroupKey,
+      key: this.makeCredentialsGroupKey(integrationKey),
       fields: Object.keys(
         ACTION_INTEGRATIONS[integrationKey].configurationSchema
       ),
     });
   }
 
-  async updateActionConfig(
-    activationId: string,
+  async updateIntegrationConfig(
+    integrationKey: ActionIntegrationKeys,
     configuration: Record<string, string>
   ): Promise<void> {
-    const { integrationKey, credentialsGroupKey } =
-      await this._activatedActionsPersistenceService.getItemOrFail(
-        activationId
-      );
-
     validateSchemaRequestBody(
       ACTION_INTEGRATIONS[integrationKey].configurationSchema,
       configuration
@@ -279,7 +244,7 @@ export class ActionsApiService implements IApplicationService {
 
     await this._credentialsApiService.upsertGroup(
       {
-        key: credentialsGroupKey,
+        key: this.makeCredentialsGroupKey(integrationKey),
         fields: Object.keys(
           ACTION_INTEGRATIONS[integrationKey].configurationSchema
         ),
@@ -288,25 +253,30 @@ export class ActionsApiService implements IApplicationService {
     );
   }
 
-  async deactivateAction(activationId: string): Promise<void> {
-    const action = await this._activatedActionsPersistenceService.getItemOrFail(
-      activationId
-    );
-
+  async deactivateIntegration(
+    integrationKey: ActionIntegrationKeys
+  ): Promise<void> {
     await this._credentialsApiService.deleteGroup({
-      key: action.credentialsGroupKey,
+      key: this.makeCredentialsGroupKey(integrationKey),
       fields: Object.keys(
-        ACTION_INTEGRATIONS[action.integrationKey].configurationSchema
+        ACTION_INTEGRATIONS[integrationKey].configurationSchema
       ),
     });
 
-    await this._activatedActionsPersistenceService.removeItem(activationId);
+    const activatedIntegrations =
+      (await this._activatedIntegrationsPersistenceService.getItem()) || [];
+
+    await this._activatedIntegrationsPersistenceService.persistItem(
+      activatedIntegrations.filter(
+        (activatedIntegrationKey) => activatedIntegrationKey !== integrationKey
+      )
+    );
 
     const instances =
       await this._actionInstancesPersistenceService.getAllItems();
 
     for (const instance of instances) {
-      if (instance.activatedActionId === activationId) {
+      if (instance.integrationKey === integrationKey) {
         await this._actionInstancesPersistenceService.removeItem(
           instance.instanceId
         );
@@ -315,14 +285,16 @@ export class ActionsApiService implements IApplicationService {
   }
 }
 
-const activatedActionsPersistenceService =
-  createConfigDomainPersistenceService<IActivatedAction>("activated-actions");
+const activatedIntegrationsPersistenceService =
+  createKeyValueDomainPersistenceService<ActionIntegrationKeys[]>(
+    "activated-integrations"
+  );
 
 const actionInstancesPersistenceService =
   createConfigDomainPersistenceService<IActionInstance>("action-instances");
 
 export const actionsApiService = new ActionsApiService(
-  activatedActionsPersistenceService,
+  activatedIntegrationsPersistenceService,
   actionInstancesPersistenceService,
   credentialsApiService,
   appConstantsApiService

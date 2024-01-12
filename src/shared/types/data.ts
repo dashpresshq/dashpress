@@ -15,6 +15,12 @@ export enum FilterOperators {
   IS_NULL = "s",
 }
 
+export enum DataEventActions {
+  Create = "create",
+  Update = "update",
+  Delete = "delete",
+}
+
 export interface IColumnFilterBag<T> {
   operator?: FilterOperators;
   value?: T;

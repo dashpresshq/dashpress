@@ -65,7 +65,7 @@ describe("pages/integrations/variables => credentials -- non admin", () => {
 
       expect(
         within(priviledgeSection).queryByText(
-          `For security reasons, Please input your account password to be able to reveal values`
+          `For security reasons, Please input your account password to be able to manage values`
         )
       ).not.toBeInTheDocument();
       expect(
@@ -101,7 +101,7 @@ describe("pages/integrations/variables => credentials -- non admin", () => {
 
       expect(
         within(priviledgeSection).queryByText(
-          `For security reasons, Please input your account password to be able to reveal values`
+          `For security reasons, Please input your account password to be able to manage values`
         )
       ).not.toBeInTheDocument();
       expect(

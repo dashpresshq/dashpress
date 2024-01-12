@@ -25,7 +25,7 @@ export function PasswordToReveal({
     <>
       <Typo.SM textStyle="italic">
         For security reasons, Please input your account password to be able to
-        reveal {label}
+        manage {label}
       </Typo.SM>
       <Spacer />
       <SchemaForm

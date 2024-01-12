@@ -1,4 +1,3 @@
-import { useActiveEntities } from "frontend/hooks/entity/entity.store";
 import {
   FEPaginationTable,
   IFETableCell,
@@ -18,7 +17,7 @@ import { Stack } from "frontend/design-system/primitives/Stack";
 import { TableSkeleton } from "frontend/design-system/components/Skeleton/Table";
 import { Spacer } from "frontend/design-system/primitives/Spacer";
 import { OffCanvas } from "frontend/design-system/components/OffCanvas";
-import { ActionInstanceView } from "./types";
+import { userFriendlyCase } from "shared/lib/strings/friendly-case";
 import { ADMIN_ACTION_INSTANCES_CRUD_CONFIG } from "./constants";
 import {
   LIST_ACTION_INSTANCES,
@@ -30,25 +29,21 @@ import { ActionForm } from "./Form";
 
 const NEW_ACTION_ITEM = "__new_action_item__";
 
-export function BaseActionInstances(actionInstanceView: ActionInstanceView) {
+export function BaseActionInstances({ entity }: { entity: string }) {
   const activeActionList = useActiveActionList();
   const integrationsList = useActionIntegrationsList();
-  const activeEntities = useActiveEntities();
 
-  const dataEndpoint = LIST_ACTION_INSTANCES(actionInstanceView);
+  const dataEndpoint = LIST_ACTION_INSTANCES(entity);
 
   const tableData = useApi<IActionInstance[]>(dataEndpoint, {
     defaultData: [],
   });
 
-  const deleteActionInstanceMutation =
-    useDeleteActionInstanceMutation(actionInstanceView);
+  const deleteActionInstanceMutation = useDeleteActionInstanceMutation(entity);
   const updateActionInstanceMutation = useUpdateActionInstanceMutation();
   const createActionInstanceMutation = useCreateActionInstanceMutation();
 
   const [currentInstanceId, setCurrentInstanceItem] = useState("");
-
-  const { type: actionInstanceViewType } = actionInstanceView;
 
   const closeConfigItem = () => {
     setCurrentInstanceItem("");
@@ -76,29 +71,28 @@ export function BaseActionInstances(actionInstanceView: ActionInstanceView) {
   );
 
   const columns: IFETableColumn<IActionInstance>[] = [
-    actionInstanceViewType === "integrationKey"
-      ? {
-          Header: "Entity",
-          accessor: "entity",
-          filter: {
-            _type: "string",
-            bag: undefined,
-          },
-        }
-      : {
-          Header: "Integration",
-          accessor: "integrationKey",
-          filter: {
-            _type: "string",
-            bag: undefined,
-          },
-        },
+    {
+      Header: "Integration",
+      accessor: "integrationKey",
+      filter: {
+        _type: "string",
+        bag: undefined,
+      },
+      // eslint-disable-next-line react/no-unstable-nested-components
+      Cell: ({ value }: IFETableCell<IActionInstance>) => {
+        return <>{userFriendlyCase(value as string)}</>;
+      },
+    },
     {
       Header: "Trigger",
       accessor: "formAction",
       filter: {
         _type: "string",
         bag: undefined,
+      },
+      // eslint-disable-next-line react/no-unstable-nested-components
+      Cell: ({ value }: IFETableCell<IActionInstance>) => {
+        return <>{userFriendlyCase(value as string)}</>;
       },
     },
     {
@@ -107,6 +101,10 @@ export function BaseActionInstances(actionInstanceView: ActionInstanceView) {
       filter: {
         _type: "string",
         bag: undefined,
+      },
+      // eslint-disable-next-line react/no-unstable-nested-components
+      Cell: ({ value }: IFETableCell<IActionInstance>) => {
+        return <>{userFriendlyCase(value as string)}</>;
       },
     },
     {
@@ -120,16 +118,8 @@ export function BaseActionInstances(actionInstanceView: ActionInstanceView) {
   return (
     <>
       <ViewStateMachine
-        loading={
-          activeActionList.isLoading ||
-          activeEntities.isLoading ||
-          integrationsList.isLoading
-        }
-        error={
-          activeActionList.error ||
-          activeEntities.error ||
-          integrationsList.error
-        }
+        loading={activeActionList.isLoading || integrationsList.isLoading}
+        error={activeActionList.error || integrationsList.error}
         loader={<TableSkeleton />}
       >
         <Stack justify="end">
@@ -171,7 +161,7 @@ export function BaseActionInstances(actionInstanceView: ActionInstanceView) {
             }
             closeConfigItem();
           }}
-          currentView={actionInstanceView}
+          entity={entity}
           initialValues={tableData.data.find(
             ({ instanceId }) => instanceId === currentInstanceId
           )}
@@ -179,8 +169,7 @@ export function BaseActionInstances(actionInstanceView: ActionInstanceView) {
             currentInstanceId === NEW_ACTION_ITEM ? "create" : "update"
           }
           integrationsList={integrationsList.data}
-          activatedActions={activeActionList.data}
-          entities={activeEntities.data}
+          activatedIntegrations={activeActionList.data}
         />
       </OffCanvas>
     </>

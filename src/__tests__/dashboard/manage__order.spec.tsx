@@ -43,6 +43,9 @@ jest.mock("react-easy-sort", () => ({
   SortableItem: ({ children }: { children: ReactNode }) => (
     <div>{children}</div>
   ),
+  SortableKnob: ({ children }: { children: ReactNode }) => (
+    <div>{children}</div>
+  ),
 }));
 
 describe("pages/admin/settings/dashboard", () => {

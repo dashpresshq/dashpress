@@ -1,4 +1,5 @@
 import { IAppliedSchemaFormConfig } from "shared/form-schemas/types";
+import { DataEventActions } from "./data";
 
 export enum ActionIntegrationKeys {
   HTTP = "http",
@@ -11,26 +12,12 @@ export enum ActionIntegrationKeys {
   SEND_IN_BLUE = "sendInBlue",
 }
 
-export interface IActivatedAction {
-  activationId: string;
-  integrationKey: ActionIntegrationKeys;
-  credentialsGroupKey: string;
-}
-
-export enum BaseAction {
-  Create = "create",
-  Update = "update",
-  Delete = "delete",
-}
-
 export type IActionInstance = {
   instanceId: string;
-  activatedActionId: string;
-  integrationKey: string;
+  integrationKey: ActionIntegrationKeys;
   entity: string;
   implementationKey: string;
-  triggerLogic: string;
-  formAction: BaseAction | string;
+  formAction: DataEventActions;
   configuration: Record<string, string>;
 };
 
@@ -48,7 +35,13 @@ export interface IActionIntegrationsImplemention {
   performsImplementation: Record<string, IPerformsImplementation>;
 }
 
-export type IIntegrationsList = { key: string } & Pick<
+export interface IStorageIntegration {
+  title: string;
+  key: string;
+  configurationSchema: IAppliedSchemaFormConfig<any>;
+}
+
+export type IIntegrationsList = { key: ActionIntegrationKeys } & Pick<
   IActionIntegrationsImplemention,
   "title" | "description" | "configurationSchema"
 >;
@@ -57,5 +50,3 @@ export type IIntegrationImplementationList = { key: string } & Pick<
   IPerformsImplementation,
   "label" | "configurationSchema"
 >;
-
-export const HTTP_ACTIVATION_ID = "http";

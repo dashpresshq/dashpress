@@ -322,7 +322,7 @@ describe("/api/integrations/credentials/[key]", () => {
         setupRolesTestData([
           {
             id: "custom-role",
-            permissions: ["CAN_MANAGE_INTEGRATIONS"],
+            permissions: ["CAN_MANAGE_APP_CREDENTIALS"],
           },
         ]),
         setupUsersTestData([

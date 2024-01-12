@@ -71,12 +71,12 @@ export function VariablesDocumentation(props: IDocumentationRootProps) {
         <code> {userFriendlyCase(USER_PERMISSIONS.CAN_CONFIGURE_APP)}</code> or
         <code>
           {" "}
-          {userFriendlyCase(USER_PERMISSIONS.CAN_MANAGE_INTEGRATIONS)}{" "}
+          {userFriendlyCase(USER_PERMISSIONS.CAN_MANAGE_APP_CREDENTIALS)}{" "}
         </code>{" "}
         permission but can only be managed by users with the
         <code>
           {" "}
-          {userFriendlyCase(USER_PERMISSIONS.CAN_MANAGE_INTEGRATIONS)}
+          {userFriendlyCase(USER_PERMISSIONS.CAN_MANAGE_APP_CREDENTIALS)}
         </code>{" "}
         permission.
       </p>

@@ -29,10 +29,6 @@ export function BaseActionsLayout({ children }: IProps) {
 
   const router = useRouter();
 
-  const activeList = [
-    ...activeActionList.data.map(({ integrationKey }) => integrationKey),
-  ] as string[];
-
   return (
     <AppLayout>
       <ContentLayout>
@@ -43,7 +39,7 @@ export function BaseActionsLayout({ children }: IProps) {
               listLengthGuess={7}
               labelField="title"
               render={(menuItem) => {
-                const isActive = activeList.includes(menuItem.key);
+                const isActive = activeActionList.data.includes(menuItem.key);
                 const props: IListMangerItemProps = {
                   label: menuItem.title,
                   IconComponent: isActive ? Zap : ZapOff,

@@ -11,7 +11,7 @@ export function ManageVariables() {
   useSetPageDetails({
     pageTitle: ManageVariablesPageTitle,
     viewKey: ACTIONS_VIEW_KEY,
-    permission: USER_PERMISSIONS.CAN_MANAGE_INTEGRATIONS,
+    permission: USER_PERMISSIONS.CAN_MANAGE_APP_CREDENTIALS,
   });
 
   return (

@@ -1,11 +1,15 @@
 import handler from "pages/api/integrations/actions/[key]/index";
 import activeHandler from "pages/api/integrations/actions/active";
+import getHandler from "pages/api/integrations/actions/instances/[key]";
+
 import credentialsHandler from "pages/api/integrations/actions/[key]/credentials";
 import {
   createAuthenticatedMocks,
   setupAllTestData,
 } from "__tests__/api/_test-utils";
 import { setupActionInstanceTestData } from "__tests__/api/_test-utils/_action-instances";
+import { ActionIntegrationKeys } from "shared/types/actions";
+import { DataEventActions } from "shared/types/data";
 
 jest.mock("nanoid", () => ({
   nanoid: jest.fn().mockReturnValue("nano-id-1"),
@@ -13,88 +17,30 @@ jest.mock("nanoid", () => ({
 
 describe("/api/integrations/actions/[key]/index", () => {
   beforeAll(async () => {
-    await setupAllTestData(["activated-actions", "users"]);
+    await setupAllTestData(["activated-integrations", "users"]);
 
     await setupActionInstanceTestData([
       {
         instanceId: "instance-id-1",
-        activatedActionId: "nano-id-1",
-        integrationKey: "http",
+        integrationKey: ActionIntegrationKeys.HTTP,
         entity: "base-model",
         implementationKey: "SEND_MESSAGE",
-        triggerLogic: "some-test-trigger-logic",
-        formAction: "create",
+        formAction: DataEventActions.Create,
         configuration: {
           foo: "bar",
         },
       },
       {
         instanceId: "instance-id-2",
-        activatedActionId: "nano-id-1",
-        integrationKey: "slack",
+        integrationKey: ActionIntegrationKeys.SLACK,
         entity: "secondary-model",
         implementationKey: "POST",
-        triggerLogic: "another-trigger-logic",
-        formAction: "delete",
-        configuration: {
-          bar: "foo",
-        },
-      },
-      {
-        instanceId: "instance-id-3",
-        activatedActionId: "some-other-activation-id",
-        integrationKey: "http",
-        entity: "secondary-model",
-        implementationKey: "POST",
-        triggerLogic: "another-trigger-logic",
-        formAction: "delete",
+        formAction: DataEventActions.Delete,
         configuration: {
           bar: "foo",
         },
       },
     ]);
-  });
-
-  describe("GET", () => {
-    it("should show integrationKey action instances", async () => {
-      const { req, res } = createAuthenticatedMocks({
-        method: "GET",
-        query: {
-          key: "http",
-        },
-      });
-      await handler(req, res);
-
-      expect(res._getStatusCode()).toBe(200);
-      expect(res._getJSONData()).toMatchInlineSnapshot(`
-              [
-                {
-                  "activatedActionId": "nano-id-1",
-                  "configuration": {
-                    "foo": "bar",
-                  },
-                  "entity": "base-model",
-                  "formAction": "create",
-                  "implementationKey": "SEND_MESSAGE",
-                  "instanceId": "instance-id-1",
-                  "integrationKey": "http",
-                  "triggerLogic": "some-test-trigger-logic",
-                },
-                {
-                  "activatedActionId": "some-other-activation-id",
-                  "configuration": {
-                    "bar": "foo",
-                  },
-                  "entity": "secondary-model",
-                  "formAction": "delete",
-                  "implementationKey": "POST",
-                  "instanceId": "instance-id-3",
-                  "integrationKey": "http",
-                  "triggerLogic": "another-trigger-logic",
-                },
-              ]
-          `);
-    });
   });
 
   describe("POST", () => {
@@ -121,26 +67,10 @@ describe("/api/integrations/actions/[key]/index", () => {
 
       expect(activeRes._getJSONData()).toMatchInlineSnapshot(`
         [
-          {
-            "activationId": "smtp-activation-id-1",
-            "credentialsGroupKey": "SMTP",
-            "integrationKey": "smtp",
-          },
-          {
-            "activationId": "slack-activation-id-2",
-            "credentialsGroupKey": "SLACK",
-            "integrationKey": "slack",
-          },
-          {
-            "activationId": "nano-id-1",
-            "credentialsGroupKey": "ACTION__SLACK",
-            "integrationKey": "slack",
-          },
-          {
-            "activationId": "http",
-            "credentialsGroupKey": "none-existent",
-            "integrationKey": "http",
-          },
+          "smtp",
+          "slack",
+          "slack",
+          "http",
         ]
       `);
 
@@ -148,7 +78,7 @@ describe("/api/integrations/actions/[key]/index", () => {
         createAuthenticatedMocks({
           method: "POST",
           query: {
-            key: "nano-id-1",
+            key: "slack",
           },
           body: {
             _password: "password",
@@ -216,21 +146,21 @@ describe("/api/integrations/actions/[key]/index", () => {
 
       expect(res._getStatusCode()).toBe(400);
       expect(res._getJSONData()).toMatchInlineSnapshot(`
-      {
-        "message": "Invalid Password",
-        "method": "PATCH",
-        "name": "BadRequestError",
-        "path": "",
-        "statusCode": 400,
-      }
-    `);
+              {
+                "message": "Invalid Password",
+                "method": "PATCH",
+                "name": "BadRequestError",
+                "path": "",
+                "statusCode": 400,
+              }
+          `);
     });
 
     it("should update action configuration", async () => {
       const { req, res } = createAuthenticatedMocks({
         method: "PATCH",
         query: {
-          key: "nano-id-1",
+          key: "slack",
         },
         body: {
           token: "updated-token",
@@ -251,7 +181,7 @@ describe("/api/integrations/actions/[key]/index", () => {
         createAuthenticatedMocks({
           method: "POST",
           query: {
-            key: "nano-id-1",
+            key: "slack",
           },
           body: {
             _password: "password",
@@ -271,7 +201,7 @@ describe("/api/integrations/actions/[key]/index", () => {
       const { req, res } = createAuthenticatedMocks({
         method: "PATCH",
         query: {
-          key: "nano-id-1",
+          key: "slack",
         },
         body: {
           hello: "there",
@@ -298,7 +228,7 @@ describe("/api/integrations/actions/[key]/index", () => {
         createAuthenticatedMocks({
           method: "POST",
           query: {
-            key: "nano-id-1",
+            key: "slack",
           },
           body: {
             _password: "password",
@@ -316,11 +246,24 @@ describe("/api/integrations/actions/[key]/index", () => {
   });
 
   describe("DELETE", () => {
+    it("should list integration instances", async () => {
+      const { req: getReq, res: resReq } = createAuthenticatedMocks({
+        method: "GET",
+        query: {
+          key: "secondary-model",
+        },
+      });
+      await getHandler(getReq, resReq);
+
+      expect(resReq._getStatusCode()).toBe(200);
+
+      expect(resReq._getJSONData()).toHaveLength(1);
+    });
     it("should deactivate activated actions", async () => {
       const { req, res } = createAuthenticatedMocks({
         method: "DELETE",
         query: {
-          key: "nano-id-1",
+          key: "slack",
         },
       });
       await handler(req, res);
@@ -336,24 +279,11 @@ describe("/api/integrations/actions/[key]/index", () => {
       await activeHandler(activeReq, activeRes);
 
       expect(activeRes._getJSONData()).toMatchInlineSnapshot(`
-              [
-                {
-                  "activationId": "smtp-activation-id-1",
-                  "credentialsGroupKey": "SMTP",
-                  "integrationKey": "smtp",
-                },
-                {
-                  "activationId": "slack-activation-id-2",
-                  "credentialsGroupKey": "SLACK",
-                  "integrationKey": "slack",
-                },
-                {
-                  "activationId": "http",
-                  "credentialsGroupKey": "none-existent",
-                  "integrationKey": "http",
-                },
-              ]
-          `);
+        [
+          "smtp",
+          "http",
+        ]
+      `);
     });
 
     it("should remove access to credentials", async () => {
@@ -361,7 +291,7 @@ describe("/api/integrations/actions/[key]/index", () => {
         createAuthenticatedMocks({
           method: "POST",
           query: {
-            key: "nano-id-1",
+            key: "slack",
           },
           body: {
             _password: "password",
@@ -369,29 +299,28 @@ describe("/api/integrations/actions/[key]/index", () => {
         });
       await credentialsHandler(credentialsReq, credentialsRes);
 
-      expect(credentialsRes._getStatusCode()).toBe(404);
+      expect(credentialsRes._getStatusCode()).toBe(400);
       expect(credentialsRes._getJSONData()).toMatchInlineSnapshot(`
-              {
-                "message": "nano-id-1 not found for 'activated-actions'",
-                "method": "POST",
-                "name": "NotFoundError",
-                "path": "",
-                "statusCode": 404,
-              }
-          `);
+        {
+          "message": "No credentials available for ACTION__SLACK",
+          "method": "POST",
+          "name": "BadRequestError",
+          "path": "",
+          "statusCode": 400,
+        }
+      `);
     });
 
     it("should delete all instances", async () => {
       const { req: getReq, res: resReq } = createAuthenticatedMocks({
         method: "GET",
         query: {
-          key: "http",
+          key: "secondary-model",
         },
       });
-      await handler(getReq, resReq);
+      await getHandler(getReq, resReq);
 
-      expect(resReq._getStatusCode()).toBe(200);
-      expect(resReq._getJSONData()).toHaveLength(1);
+      expect(resReq._getJSONData()).toHaveLength(0);
     });
   });
 });

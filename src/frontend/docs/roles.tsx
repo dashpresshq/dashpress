@@ -65,7 +65,7 @@ export function RolesDocumentation(props: IDocumentationRootProps) {
       <p>
         <b>
           <code>
-            {userFriendlyCase(USER_PERMISSIONS.CAN_MANAGE_INTEGRATIONS)}
+            {userFriendlyCase(USER_PERMISSIONS.CAN_MANAGE_APP_CREDENTIALS)}
           </code>
         </b>
         : enables users to set up and manage the integrations with supported

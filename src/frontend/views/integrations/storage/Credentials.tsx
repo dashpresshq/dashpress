@@ -8,7 +8,7 @@ import {
 } from "frontend/design-system/components/Skeleton/Form";
 import { ISchemaFormConfig } from "shared/form-schemas/types";
 import { noop } from "shared/lib/noop";
-import { IIntegrationsList } from "shared/types/actions";
+import { IStorageIntegration } from "shared/types/actions";
 import { STORAGE_INTEGRATIONS_CRUD_CONFIG } from "./constants";
 import {
   useActivateStorageMutation,
@@ -27,7 +27,7 @@ export function StorageCredentialsSettings() {
 
   const [currentStorage, setCurrentStorage] = useState("");
 
-  const currentStorageDetails: IIntegrationsList | undefined =
+  const currentStorageDetails: IStorageIntegration | undefined =
     storageList.data.find((datum) => datum.key === currentStorage);
 
   useEffect(() => {

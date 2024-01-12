@@ -51,14 +51,18 @@ export class PortalDataHooksService {
     dataApiService,
     dataId,
     entity,
+    options,
   }: {
     dataApiService: IDataApiService;
     entity: string;
     beforeData: Record<string, unknown>;
     data: Record<string, unknown>;
     dataId: string;
+    options?: {
+      skipDataEvents?: boolean;
+    };
   }) {
-    noop(dataApiService, entity, data, dataId, beforeData);
+    noop(dataApiService, entity, data, dataId, beforeData, options);
   }
 
   static async beforeDelete({

@@ -58,6 +58,7 @@ export const FormCodeEditor: React.FC<IFormCodeEditor> = (formInput) => {
         placeholder={formInput.placeholder}
         textareaId={formInput.input.name}
         padding={4}
+        className="form-code-editor"
         style={{
           minHeight: "275px",
           fontFamily: '"Fira code", "Fira Mono", monospace',

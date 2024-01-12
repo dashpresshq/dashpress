@@ -1,6 +1,5 @@
 import { SchemaForm } from "frontend/components/SchemaForm";
-import { IIntegrationsList, IActivatedAction } from "shared/types/actions";
-import { BaseActionInstances } from "frontend/views/entity/Actions/Base";
+import { ActionIntegrationKeys, IIntegrationsList } from "shared/types/actions";
 import { Typo } from "frontend/design-system/primitives/Typo";
 import { Spacer } from "frontend/design-system/primitives/Spacer";
 import { Tabs } from "frontend/design-system/components/Tabs";
@@ -11,7 +10,7 @@ import { PasswordMessage } from "../../Password";
 
 interface IProps {
   integrationDetail?: IIntegrationsList;
-  activeAction?: IActivatedAction;
+  activeAction?: ActionIntegrationKeys;
 }
 
 export function ActionSettingsView({
@@ -50,19 +49,10 @@ export function ActionSettingsView({
     <Tabs
       contents={[
         {
-          label: "Actions",
-          content: (
-            <BaseActionInstances
-              type="integrationKey"
-              id={activeAction.integrationKey}
-            />
-          ),
-        },
-        {
           label: "Configure",
           content: (
             <Configure
-              activationId={activeAction.activationId}
+              activationId={activeAction}
               integrationDetail={integrationDetail}
             />
           ),
@@ -71,7 +61,7 @@ export function ActionSettingsView({
           label: "Deactivate",
           content: (
             <Deactivate
-              activationId={activeAction.activationId}
+              activationId={activeAction}
               integrationDetail={integrationDetail}
             />
           ),

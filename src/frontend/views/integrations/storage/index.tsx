@@ -13,7 +13,7 @@ export function StorageIntegrations() {
   useSetPageDetails({
     pageTitle: STORAGE_INTEGRATIONS_CRUD_CONFIG.TEXT_LANG.TITLE,
     viewKey: ACTIONS_VIEW_KEY,
-    permission: USER_PERMISSIONS.CAN_MANAGE_INTEGRATIONS,
+    permission: USER_PERMISSIONS.CAN_MANAGE_APP_CREDENTIALS,
   });
 
   return (

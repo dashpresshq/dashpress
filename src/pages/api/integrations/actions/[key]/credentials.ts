@@ -1,6 +1,6 @@
 import { USER_PERMISSIONS } from "shared/constants/user";
-import { actionsApiController } from "backend/actions/actions.controller";
 import { requestHandler } from "backend/lib/request";
+import { actionsApiService } from "backend/actions/actions.service";
 
 const REQUEST_KEY_FIELD = "key";
 
@@ -14,7 +14,7 @@ export default requestHandler(
         },
       ]);
 
-      return await actionsApiController.showActionConfig(
+      return await actionsApiService.getIntegrationCredentials(
         validatedRequest.requestQuery
       );
     },
@@ -22,7 +22,7 @@ export default requestHandler(
   [
     {
       _type: "canUser",
-      body: USER_PERMISSIONS.CAN_MANAGE_INTEGRATIONS,
+      body: USER_PERMISSIONS.CAN_MANAGE_APP_CREDENTIALS,
     },
     {
       _type: "withPassword",

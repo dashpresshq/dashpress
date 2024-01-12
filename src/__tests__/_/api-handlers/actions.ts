@@ -1,5 +1,4 @@
 import { rest } from "msw";
-import { HTTP_ACTIVATION_ID } from "shared/types/actions";
 import { BASE_TEST_URL } from "./_utils";
 
 export const actionsApiHandlers = [
@@ -63,20 +62,7 @@ export const actionsApiHandlers = [
   rest.get(
     BASE_TEST_URL("/api/integrations/actions/active"),
     async (_, res, ctx) => {
-      return res(
-        ctx.json([
-          {
-            activationId: HTTP_ACTIVATION_ID,
-            integrationKey: "http",
-            credentialsGroupKey: "HTTP",
-          },
-          {
-            activationId: "slack-activation-id",
-            integrationKey: "slack",
-            credentialsGroupKey: "SLACK",
-          },
-        ])
-      );
+      return res(ctx.json(["http", "slack"]));
     }
   ),
   //   rest.put(

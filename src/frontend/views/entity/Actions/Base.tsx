@@ -5,8 +5,8 @@ import {
 } from "frontend/components/FEPaginationTable";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import {
-  useActionIntegrationsList,
-  useActiveActionList,
+  useIntegrationsList,
+  useActiveIntegrations,
 } from "frontend/views/integrations/actions/actions.store";
 import { useCallback, useState } from "react";
 import { IActionInstance } from "shared/types/actions";
@@ -30,8 +30,8 @@ import { ActionForm } from "./Form";
 const NEW_ACTION_ITEM = "__new_action_item__";
 
 export function BaseActionInstances({ entity }: { entity: string }) {
-  const activeActionList = useActiveActionList();
-  const integrationsList = useActionIntegrationsList();
+  const activeIntegration = useActiveIntegrations();
+  const integrationsList = useIntegrationsList();
 
   const dataEndpoint = LIST_ACTION_INSTANCES(entity);
 
@@ -73,7 +73,7 @@ export function BaseActionInstances({ entity }: { entity: string }) {
   const columns: IFETableColumn<IActionInstance>[] = [
     {
       Header: "Integration",
-      accessor: "integrationKey",
+      accessor: "integration",
       filter: {
         _type: "string",
         bag: undefined,
@@ -85,7 +85,7 @@ export function BaseActionInstances({ entity }: { entity: string }) {
     },
     {
       Header: "Trigger",
-      accessor: "formAction",
+      accessor: "trigger",
       filter: {
         _type: "string",
         bag: undefined,
@@ -97,7 +97,7 @@ export function BaseActionInstances({ entity }: { entity: string }) {
     },
     {
       Header: "Action",
-      accessor: "implementationKey",
+      accessor: "action",
       filter: {
         _type: "string",
         bag: undefined,
@@ -118,8 +118,8 @@ export function BaseActionInstances({ entity }: { entity: string }) {
   return (
     <>
       <ViewStateMachine
-        loading={activeActionList.isLoading || integrationsList.isLoading}
-        error={activeActionList.error || integrationsList.error}
+        loading={activeIntegration.isLoading || integrationsList.isLoading}
+        error={activeIntegration.error || integrationsList.error}
         loader={<TableSkeleton />}
       >
         <Stack justify="end">
@@ -169,7 +169,7 @@ export function BaseActionInstances({ entity }: { entity: string }) {
             currentInstanceId === NEW_ACTION_ITEM ? "create" : "update"
           }
           integrationsList={integrationsList.data}
-          activatedIntegrations={activeActionList.data}
+          activatedIntegrations={activeIntegration.data}
         />
       </OffCanvas>
     </>

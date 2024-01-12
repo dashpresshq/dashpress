@@ -11,7 +11,7 @@ import { IApplicationService } from "backend/types";
 import { sluggify } from "shared/lib/strings";
 import { IStorageIntegration } from "shared/types/actions";
 import { STORAGE_INTEGRATIONS } from "./integrations";
-import { StorageIntegrationKeys } from "./integrations/types";
+import { StorageIntegrations } from "./integrations/types";
 
 export class StorageApiService implements IApplicationService {
   constructor(
@@ -25,7 +25,7 @@ export class StorageApiService implements IApplicationService {
     return Object.entries(STORAGE_INTEGRATIONS).map(
       ([key, { title, integrationConfigurationSchema }]) => ({
         title,
-        key: key as StorageIntegrationKeys,
+        key: key as StorageIntegrations,
         configurationSchema: integrationConfigurationSchema,
       })
     );

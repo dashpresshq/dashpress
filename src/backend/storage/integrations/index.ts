@@ -2,13 +2,13 @@ import { IStorageIntegrationsImplemention } from "../types";
 import { AWS_STORAGE_INTEGRATION } from "./aws";
 import { CLOUDINARY_STORAGE_INTEGRATION } from "./cloudinary";
 import { GOOGLE_STORAGE_INTEGRATION } from "./google";
-import { StorageIntegrationKeys } from "./types";
+import { StorageIntegrations } from "./types";
 
 export const STORAGE_INTEGRATIONS: Record<
-  StorageIntegrationKeys,
+  StorageIntegrations,
   IStorageIntegrationsImplemention<any>
 > = {
-  [StorageIntegrationKeys.S3]: AWS_STORAGE_INTEGRATION,
-  [StorageIntegrationKeys.CLOUDINARY]: CLOUDINARY_STORAGE_INTEGRATION,
-  [StorageIntegrationKeys.GOOGLE]: GOOGLE_STORAGE_INTEGRATION,
+  [StorageIntegrations.S3]: AWS_STORAGE_INTEGRATION,
+  [StorageIntegrations.CLOUDINARY]: CLOUDINARY_STORAGE_INTEGRATION,
+  [StorageIntegrations.GOOGLE]: GOOGLE_STORAGE_INTEGRATION,
 };

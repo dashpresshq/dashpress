@@ -11,8 +11,8 @@ import { AppLayout } from "frontend/_layouts/app";
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
 import { IListMangerItemProps } from "frontend/design-system/components/ListManager/ListManagerItem";
 import {
-  useActionIntegrationsList,
-  useActiveActionList,
+  useIntegrationsList,
+  useActiveIntegrations,
 } from "./actions/actions.store";
 import { ACTION_INTEGRATIONS_CRUD_CONFIG } from "./actions/constants";
 import { STORAGE_INTEGRATIONS_CRUD_CONFIG } from "./storage/constants";
@@ -24,8 +24,8 @@ interface IProps {
 export function BaseActionsLayout({ children }: IProps) {
   const currentKey = useRouteParam("key");
 
-  const actionIntegrationsList = useActionIntegrationsList();
-  const activeActionList = useActiveActionList();
+  const integrationsList = useIntegrationsList();
+  const activeIntegrations = useActiveIntegrations();
 
   const router = useRouter();
 
@@ -35,11 +35,11 @@ export function BaseActionsLayout({ children }: IProps) {
         <ContentLayout.Left>
           <SectionBox title={ACTION_INTEGRATIONS_CRUD_CONFIG.TEXT_LANG.TITLE}>
             <ListManager
-              items={actionIntegrationsList}
+              items={integrationsList}
               listLengthGuess={7}
               labelField="title"
               render={(menuItem) => {
-                const isActive = activeActionList.data.includes(menuItem.key);
+                const isActive = activeIntegrations.data.includes(menuItem.key);
                 const props: IListMangerItemProps = {
                   label: menuItem.title,
                   IconComponent: isActive ? Zap : ZapOff,

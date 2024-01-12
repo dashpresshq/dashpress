@@ -1,4 +1,4 @@
-import { ActionIntegrationKeys } from "shared/types/actions";
+import { ActionIntegrations } from "shared/types/actions";
 import { SystemLinks } from "shared/types/menu";
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
 import { META_USER_PERMISSIONS, USER_PERMISSIONS } from "./user";
@@ -27,7 +27,7 @@ export const SYSTEM_LINKS_CONFIG_MAP: Record<
     permission: USER_PERMISSIONS.CAN_MANAGE_USERS,
   },
   [SystemLinks.Integrations]: {
-    link: NAVIGATION_LINKS.INTEGRATIONS.ACTIONS(ActionIntegrationKeys.HTTP),
+    link: NAVIGATION_LINKS.INTEGRATIONS.ACTIONS(ActionIntegrations.HTTP),
     permission: USER_PERMISSIONS.CAN_MANAGE_APP_CREDENTIALS,
   },
 };

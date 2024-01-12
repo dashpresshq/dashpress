@@ -1,5 +1,5 @@
 import {
-  ActionIntegrationKeys,
+  ActionIntegrations,
   IActionIntegrationsImplemention,
 } from "shared/types/actions";
 import { HTTP_ACTION_INTEGRATION } from "./http";
@@ -12,15 +12,15 @@ import { SMTP_ACTION_INTEGRATION } from "./smtp";
 import { TWILIO_ACTION_INTEGRATION } from "./twilio";
 
 export const ACTION_INTEGRATIONS: Record<
-  ActionIntegrationKeys,
+  ActionIntegrations,
   IActionIntegrationsImplemention
 > = {
-  [ActionIntegrationKeys.HTTP]: HTTP_ACTION_INTEGRATION,
-  [ActionIntegrationKeys.SMTP]: SMTP_ACTION_INTEGRATION,
-  [ActionIntegrationKeys.SLACK]: SLACK_ACTION_INTEGRATION,
-  [ActionIntegrationKeys.SENDGRID]: SEND_GRID_ACTION_INTEGRATION,
-  [ActionIntegrationKeys.MAILGUN]: MAIL_GUN_ACTION_INTEGRATION,
-  [ActionIntegrationKeys.TWILIO]: TWILIO_ACTION_INTEGRATION,
-  [ActionIntegrationKeys.POSTMARK]: POST_MARK_ACTION_INTEGRATION,
-  [ActionIntegrationKeys.SEND_IN_BLUE]: SENDINBLUE_ACTION_INTEGRATION,
+  [ActionIntegrations.HTTP]: HTTP_ACTION_INTEGRATION,
+  [ActionIntegrations.SMTP]: SMTP_ACTION_INTEGRATION,
+  [ActionIntegrations.SLACK]: SLACK_ACTION_INTEGRATION,
+  [ActionIntegrations.SENDGRID]: SEND_GRID_ACTION_INTEGRATION,
+  [ActionIntegrations.MAILGUN]: MAIL_GUN_ACTION_INTEGRATION,
+  [ActionIntegrations.TWILIO]: TWILIO_ACTION_INTEGRATION,
+  [ActionIntegrations.POSTMARK]: POST_MARK_ACTION_INTEGRATION,
+  [ActionIntegrations.SEND_IN_BLUE]: SENDINBLUE_ACTION_INTEGRATION,
 };

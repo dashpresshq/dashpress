@@ -1,20 +1,20 @@
 import { createKeyValueDomainPersistenceService } from "backend/lib/key-value";
-import { ActionIntegrationKeys } from "shared/types/actions";
+import { ActionIntegrations } from "shared/types/actions";
 
-const TEST_ACTIVATED_ACTIONS: ActionIntegrationKeys[] = [
-  ActionIntegrationKeys.SMTP,
-  ActionIntegrationKeys.SLACK,
+const TEST_ACTIVATED_ACTIONS: ActionIntegrations[] = [
+  ActionIntegrations.SMTP,
+  ActionIntegrations.SLACK,
 ];
 
 export const setupActivatedIntegrationsTestData = async (
-  testActivatedActions: ActionIntegrationKeys[] = TEST_ACTIVATED_ACTIONS
+  testActivatedIntegrations: ActionIntegrations[] = TEST_ACTIVATED_ACTIONS
 ) => {
   const activatedIntegrationsPersistenceService =
-    createKeyValueDomainPersistenceService<ActionIntegrationKeys[]>(
+    createKeyValueDomainPersistenceService<ActionIntegrations[]>(
       "activated-integrations"
     );
 
   await activatedIntegrationsPersistenceService.persistItem(
-    testActivatedActions
+    testActivatedIntegrations
   );
 };

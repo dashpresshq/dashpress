@@ -18,12 +18,12 @@ export const LIST_ACTION_INSTANCES = (entity: string) => {
   return `${BASE_ACTIONS_ENDPOINT}/instances/${entity}`;
 };
 
-export const useIntegrationImplementationsList = (integrationKey: string) =>
+export const useIntegrationImplementationsList = (integration: string) =>
   useApi<IIntegrationImplementationList[]>(
-    `${BASE_ACTIONS_ENDPOINT}/${integrationKey}/implementations`,
+    `${BASE_ACTIONS_ENDPOINT}/${integration}/implementations`,
     {
       errorMessage: CRUD_CONFIG_NOT_FOUND("Integration Implementations"),
-      enabled: !!integrationKey,
+      enabled: !!integration,
       defaultData: [],
     }
   );

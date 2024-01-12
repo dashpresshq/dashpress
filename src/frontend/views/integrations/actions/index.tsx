@@ -11,10 +11,7 @@ import {
 } from "frontend/design-system/components/Skeleton/Form";
 import { SectionBox } from "frontend/design-system/components/Section/SectionBox";
 import { BaseActionsLayout } from "../_Base";
-import {
-  useActionIntegrationsList,
-  useActiveActionList,
-} from "./actions.store";
+import { useIntegrationsList, useActiveIntegrations } from "./actions.store";
 import { ACTIONS_VIEW_KEY } from "../constants";
 import { ActionSettingsView } from "./View";
 import { ACTION_INTEGRATIONS_CRUD_CONFIG } from "./constants";
@@ -25,15 +22,15 @@ export function ActionsIntegrations() {
   const currentKey = useRouteParam("key");
   const [isDocOpen, setIsDocOpen] = useState(false);
 
-  const integrationsList = useActionIntegrationsList();
-  const activeActionsList = useActiveActionList();
+  const integrationsList = useIntegrationsList();
+  const activeActionsList = useActiveIntegrations();
 
   const integrationDetail = integrationsList.data.find(
     ({ key }) => key === currentKey
   );
 
   const activeAction = activeActionsList.data.find(
-    (integrationKey) => integrationKey === currentKey
+    (integration) => integration === currentKey
   );
 
   useSetPageDetails({

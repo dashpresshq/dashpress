@@ -211,7 +211,7 @@ describe("/api/dashboards/[dashboardId]/index generation", () => {
           "color": "red",
           "entity": "base-model",
           "icon": "ShoppingCart",
-          "id": "2",
+          "id": "1",
           "script": "const actual = await $.query(\`select count(*) as \`count\` from \`base-model\`\`);
       const relative = await $.query(\`select count(*) as \`count\` from \`base-model\` where \`createdAt\` < '$.RELATIVE_TIME'\`);
 
@@ -224,7 +224,7 @@ describe("/api/dashboards/[dashboardId]/index generation", () => {
           "color": "orange",
           "entity": "secondary-model",
           "icon": "Activity",
-          "id": "1",
+          "id": "2",
           "script": "return await $.query(\`select count(*) as \`count\` from \`secondary-model\`\`)",
           "title": "Secondary Model",
         },

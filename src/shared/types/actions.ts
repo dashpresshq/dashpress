@@ -1,7 +1,7 @@
 import { IAppliedSchemaFormConfig } from "shared/form-schemas/types";
 import { DataEventActions } from "./data";
 
-export enum ActionIntegrationKeys {
+export enum ActionIntegrations {
   HTTP = "http",
   SMTP = "smtp",
   SLACK = "slack",
@@ -14,10 +14,10 @@ export enum ActionIntegrationKeys {
 
 export type IActionInstance = {
   instanceId: string;
-  integrationKey: ActionIntegrationKeys;
+  integration: ActionIntegrations;
   entity: string;
-  implementationKey: string;
-  formAction: DataEventActions;
+  action: string;
+  trigger: DataEventActions;
   configuration: Record<string, string>;
 };
 
@@ -41,7 +41,7 @@ export interface IStorageIntegration {
   configurationSchema: IAppliedSchemaFormConfig<any>;
 }
 
-export type IIntegrationsList = { key: ActionIntegrationKeys } & Pick<
+export type IIntegrationsList = { key: ActionIntegrations } & Pick<
   IActionIntegrationsImplemention,
   "title" | "description" | "configurationSchema"
 >;

@@ -3,7 +3,7 @@ import { SchemaForm } from "frontend/components/SchemaForm";
 import { useState } from "react";
 import { IAppliedSchemaFormConfig } from "shared/form-schemas/types";
 import {
-  ActionIntegrationKeys,
+  ActionIntegrations,
   IActionInstance,
   IIntegrationsList,
 } from "shared/types/actions";
@@ -17,7 +17,7 @@ interface IProps {
   initialValues?: Partial<IActionInstance>;
   formAction: "create" | "update";
   integrationsList: IIntegrationsList[];
-  activatedIntegrations: ActionIntegrationKeys[];
+  activatedIntegrations: ActionIntegrations[];
   entity: string;
 }
 
@@ -34,25 +34,23 @@ export function ActionForm({
   const integrationsListMap = Object.fromEntries(
     integrationsList.map((action) => [action.key, action])
   );
-  const activatedOptions = activatedIntegrations.map((integrationKey) => ({
-    label: integrationsListMap[integrationKey].title,
-    value: integrationKey,
+  const activatedOptions = activatedIntegrations.map((integration) => ({
+    label: integrationsListMap[integration].title,
+    value: integration,
   }));
 
   const [formValues, setFormValues] = useState<Partial<IActionInstance>>({});
 
   const implementations = useIntegrationImplementationsList(
-    formValues.integrationKey
+    formValues.integration
   );
 
-  const currentActionTitle =
-    integrationsListMap[formValues.integrationKey]?.title;
+  const currentActionTitle = integrationsListMap[formValues.integration]?.title;
 
   const selectedImplementation = Object.fromEntries(
     Object.entries(
-      implementations.data.find(
-        ({ key }) => key === formValues.implementationKey
-      )?.configurationSchema || {}
+      implementations.data.find(({ key }) => key === formValues.action)
+        ?.configurationSchema || {}
     ).map(([key, value]) => [
       `${CONFIGURATION_FORM_PREFIX}${key}`,
       { ...value, label: `${currentActionTitle}: ${userFriendlyCase(key)}` },
@@ -60,7 +58,7 @@ export function ActionForm({
   );
 
   const fields: IAppliedSchemaFormConfig<any> = {
-    formAction: {
+    trigger: {
       label: "Trigger",
       type: "selection",
       selections: [
@@ -83,16 +81,16 @@ export function ActionForm({
         },
       ],
     },
-    integrationKey: {
+    integration: {
       label: "Integration",
       selections: activatedOptions,
       type: "selection",
       validations: [{ validationType: "required" }],
       formState: ($) => ({
-        disabled: $.action === "update" || !$.formValues.formAction,
+        disabled: $.action === "update" || !$.formValues.trigger,
       }),
     },
-    implementationKey: {
+    action: {
       label: "Action",
       type: "selection",
       validations: [{ validationType: "required" }],
@@ -101,7 +99,7 @@ export function ActionForm({
         value: key,
       })),
       formState: ($) => ({
-        disabled: !$.formValues.formAction,
+        disabled: !$.formValues.trigger,
       }),
     },
     ...selectedImplementation,

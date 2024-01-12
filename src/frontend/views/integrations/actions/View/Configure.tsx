@@ -7,7 +7,7 @@ import { Stack } from "frontend/design-system/primitives/Stack";
 import { Spacer } from "frontend/design-system/primitives/Spacer";
 import {
   useActivationConfiguration,
-  useUpdateActivatedActionMutation,
+  useUpdateActivatedIntegrationMutation,
 } from "../actions.store";
 import { ACTION_INTEGRATIONS_CRUD_CONFIG } from "../constants";
 import { PasswordMessage, PasswordToReveal } from "../../Password";
@@ -18,8 +18,8 @@ interface IProps {
 }
 
 export function Configure({ activationId, integrationDetail }: IProps) {
-  const updateActivatedActionMutation =
-    useUpdateActivatedActionMutation(activationId);
+  const updateActivatedIntegrationMutation =
+    useUpdateActivatedIntegrationMutation(activationId);
   const activationConfiguration = useActivationConfiguration(activationId);
 
   useEffect(() => {
@@ -52,7 +52,7 @@ export function Configure({ activationId, integrationDetail }: IProps) {
       <Spacer />
       <SchemaForm
         fields={integrationDetail.configurationSchema}
-        onSubmit={updateActivatedActionMutation.mutateAsync}
+        onSubmit={updateActivatedIntegrationMutation.mutateAsync}
         initialValues={activationConfiguration.data || {}}
         buttonText={ACTION_INTEGRATIONS_CRUD_CONFIG.FORM_LANG.UPDATE}
         icon="save"

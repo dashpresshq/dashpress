@@ -11,7 +11,7 @@ import { setupActionInstanceTestData } from "__tests__/api/_test-utils/_action-i
 import { setupIntegrationsConstantsTestData } from "__tests__/api/_test-utils/_integrations-constants";
 import { createTransport } from "nodemailer";
 import { DataEventActions } from "shared/types/data";
-import { ActionIntegrationKeys } from "shared/types/actions";
+import { ActionIntegrations } from "shared/types/actions";
 
 jest.mock("nodemailer", () => ({
   createTransport: jest.fn(),
@@ -63,10 +63,10 @@ describe("Run Action", () => {
     await setupActionInstanceTestData([
       {
         instanceId: "instance-id-1",
-        integrationKey: ActionIntegrationKeys.SMTP,
+        integration: ActionIntegrations.SMTP,
         entity: "tests",
-        implementationKey: "SEND_MAIL",
-        formAction: DataEventActions.Create,
+        action: "SEND_MAIL",
+        trigger: DataEventActions.Create,
         configuration: {
           to: "{{ data.id }}@dashpress.io",
           subject: "CREATE TEST",
@@ -79,10 +79,10 @@ describe("Run Action", () => {
       },
       {
         instanceId: "instance-id-5",
-        integrationKey: ActionIntegrationKeys.HTTP,
+        integration: ActionIntegrations.HTTP,
         entity: "tests",
-        implementationKey: "POST",
-        formAction: DataEventActions.Create,
+        action: "POST",
+        trigger: DataEventActions.Create,
         configuration: {
           url: "http://CREATE.TEST",
           headers: `{
@@ -94,10 +94,10 @@ describe("Run Action", () => {
       },
       {
         instanceId: "instance-id-2",
-        integrationKey: ActionIntegrationKeys.SLACK,
+        integration: ActionIntegrations.SLACK,
         entity: "tests",
-        implementationKey: "SEND_MESSAGE",
-        formAction: DataEventActions.Update,
+        action: "SEND_MESSAGE",
+        trigger: DataEventActions.Update,
         configuration: {
           channel: "UPDATE TEST",
           message:
@@ -106,10 +106,10 @@ describe("Run Action", () => {
       },
       {
         instanceId: "instance-id-3",
-        integrationKey: ActionIntegrationKeys.SLACK,
+        integration: ActionIntegrations.SLACK,
         entity: "DO_NOT_CALL_ME_CAUSE_INVALID_ENTITY",
-        implementationKey: "SEND_MESSAGE",
-        formAction: DataEventActions.Update,
+        action: "SEND_MESSAGE",
+        trigger: DataEventActions.Update,
         configuration: {
           channel: "UPDATE TEST",
           message:
@@ -118,10 +118,10 @@ describe("Run Action", () => {
       },
       {
         instanceId: "instance-id-4",
-        integrationKey: ActionIntegrationKeys.HTTP,
+        integration: ActionIntegrations.HTTP,
         entity: "tests",
-        implementationKey: "POST",
-        formAction: DataEventActions.Delete,
+        action: "POST",
+        trigger: DataEventActions.Delete,
         configuration: {
           url: "http://DELETE.TEST",
           headers: `{

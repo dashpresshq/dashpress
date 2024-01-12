@@ -4,7 +4,7 @@ import {
   setupAllTestData,
   setupCredentialsTestData,
 } from "__tests__/api/_test-utils";
-import { ActionIntegrationKeys } from "shared/types/actions";
+import { ActionIntegrations } from "shared/types/actions";
 
 describe("/api/integrations/actions/[key]/credentials", () => {
   beforeAll(async () => {
@@ -27,7 +27,7 @@ describe("/api/integrations/actions/[key]/credentials", () => {
     const { req, res } = createAuthenticatedMocks({
       method: "POST",
       query: {
-        key: ActionIntegrationKeys.SMTP,
+        key: ActionIntegrations.SMTP,
       },
       body: {
         _password: "invalid password",
@@ -51,7 +51,7 @@ describe("/api/integrations/actions/[key]/credentials", () => {
     const { req, res } = createAuthenticatedMocks({
       method: "POST",
       query: {
-        key: ActionIntegrationKeys.SMTP,
+        key: ActionIntegrations.SMTP,
       },
       body: {
         _password: "password",
@@ -73,7 +73,7 @@ describe("/api/integrations/actions/[key]/credentials", () => {
     const { req, res } = createAuthenticatedMocks({
       method: "POST",
       query: {
-        key: ActionIntegrationKeys.HTTP,
+        key: ActionIntegrations.HTTP,
       },
       body: {
         _password: "password",

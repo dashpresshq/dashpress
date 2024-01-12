@@ -22,9 +22,9 @@ describe("/api/integrations/actions/instances/index", () => {
       method: "POST",
       body: {
         entity: "test-entity",
-        integrationKey: "smtp",
-        implementationKey: "SEND_MESSAGE",
-        formAction: "update",
+        integration: "smtp",
+        action: "SEND_MESSAGE",
+        trigger: "update",
         configuration: {
           to: "me",
           subject: "something important",
@@ -43,9 +43,9 @@ describe("/api/integrations/actions/instances/index", () => {
       method: "POST",
       body: {
         entity: "test-entity",
-        integrationKey: "http",
-        implementationKey: "PUT",
-        formAction: "create",
+        integration: "http",
+        action: "PUT",
+        trigger: "create",
         configuration: {
           url: "/some-where",
           body: '{"me": "you"}',
@@ -63,10 +63,10 @@ describe("/api/integrations/actions/instances/index", () => {
     const { req, res } = createAuthenticatedMocks({
       method: "POST",
       body: {
-        integrationKey: "postmark",
+        integration: "postmark",
         entity: "test-entity-2",
-        implementationKey: "GET",
-        formAction: "update",
+        action: "GET",
+        trigger: "update",
         configuration: {
           bad: '{"request": "hello"}',
         },
@@ -100,28 +100,28 @@ describe("/api/integrations/actions/instances/index", () => {
     expect(res._getJSONData()).toMatchInlineSnapshot(`
       [
         {
+          "action": "SEND_MESSAGE",
           "configuration": {
             "body": "You are awesome",
             "subject": "something important",
             "to": "me",
           },
           "entity": "test-entity",
-          "formAction": "update",
-          "implementationKey": "SEND_MESSAGE",
           "instanceId": "nano-id-1",
-          "integrationKey": "smtp",
+          "integration": "smtp",
+          "trigger": "update",
         },
         {
+          "action": "PUT",
           "configuration": {
             "body": "{"me": "you"}",
             "headers": "{"me": "you"}",
             "url": "/some-where",
           },
           "entity": "test-entity",
-          "formAction": "create",
-          "implementationKey": "PUT",
           "instanceId": "nano-id-2",
-          "integrationKey": "http",
+          "integration": "http",
+          "trigger": "create",
         },
       ]
     `);

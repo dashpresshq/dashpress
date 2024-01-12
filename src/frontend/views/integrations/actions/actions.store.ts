@@ -1,5 +1,5 @@
 import { useMutation } from "react-query";
-import { IIntegrationsList, ActionIntegrationKeys } from "shared/types/actions";
+import { IIntegrationsList, ActionIntegrations } from "shared/types/actions";
 import { CRUD_CONFIG_NOT_FOUND } from "frontend/lib/crud-config";
 import { reduceStringToNumber } from "shared/lib/strings";
 import { makeActionRequest } from "frontend/lib/data/makeRequest";
@@ -14,14 +14,14 @@ const ACTIVATION_CONFIG = (activationId: string) => {
   return `/api/integrations/actions/${activationId}/credentials`;
 };
 
-export const useActionIntegrationsList = () =>
+export const useIntegrationsList = () =>
   useApi<IIntegrationsList[]>("/api/integrations/actions/list", {
     errorMessage: ACTION_INTEGRATIONS_CRUD_CONFIG.TEXT_LANG.NOT_FOUND,
     defaultData: [],
   });
 
-export const useActiveActionList = () =>
-  useApi<ActionIntegrationKeys[]>(ACTIVE_ACTIONS_INTEGRATIONS_ENDPOINT, {
+export const useActiveIntegrations = () =>
+  useApi<ActionIntegrations[]>(ACTIVE_ACTIONS_INTEGRATIONS_ENDPOINT, {
     errorMessage: CRUD_CONFIG_NOT_FOUND("Activated Integrations"),
     defaultData: [],
   });
@@ -41,13 +41,13 @@ export const useActivationConfiguration = (activationId: string) => {
       enabled:
         !!activationId &&
         !!rootPassword &&
-        activationId !== ActionIntegrationKeys.HTTP,
+        activationId !== ActionIntegrations.HTTP,
       defaultData: undefined,
     }
   );
 };
 
-export function useDeactivateActionMutation() {
+export function useDeactivateIntegrationMutation() {
   const apiMutateOptions = useWaitForResponseMutationOptions<
     Record<string, string>
   >({
@@ -66,7 +66,7 @@ export function useDeactivateActionMutation() {
   );
 }
 
-export function useActivateActionMutation(integrationKey: string) {
+export function useActivateIntegrationMutation(integration: string) {
   const apiMutateOptions = useWaitForResponseMutationOptions<
     Record<string, string>
   >({
@@ -79,14 +79,14 @@ export function useActivateActionMutation(integrationKey: string) {
     async (configuration: Record<string, string>) =>
       await makeActionRequest(
         "POST",
-        `/api/integrations/actions/${integrationKey}`,
+        `/api/integrations/actions/${integration}`,
         configuration
       ),
     apiMutateOptions
   );
 }
 
-export function useUpdateActivatedActionMutation(activationId: string) {
+export function useUpdateActivatedIntegrationMutation(activationId: string) {
   const apiMutateOptions = useWaitForResponseMutationOptions<
     Record<string, string>
   >({

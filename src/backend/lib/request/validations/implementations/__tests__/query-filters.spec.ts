@@ -12,8 +12,8 @@ const handler = requestHandler({
 });
 
 describe("Request Validations => queryFilterValidationImpl", () => {
-  beforeAll(() => {
-    setupAllTestData(["schema"]);
+  beforeAll(async () => {
+    await setupAllTestData(["credentials", "schema"]);
   });
 
   it("should return correct filters", async () => {

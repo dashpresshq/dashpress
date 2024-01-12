@@ -1,5 +1,5 @@
 import handler from "pages/api/integrations/actions/instances/[key]";
-import { ActionIntegrationKeys, IActionInstance } from "shared/types/actions";
+import { ActionIntegrations, IActionInstance } from "shared/types/actions";
 import {
   createAuthenticatedMocks,
   setupAllTestData,
@@ -10,40 +10,40 @@ import { DataEventActions } from "shared/types/data";
 const TEST_ACTION_INSTANCES: IActionInstance[] = [
   {
     instanceId: "instance-id-1",
-    integrationKey: ActionIntegrationKeys.SMTP,
+    integration: ActionIntegrations.SMTP,
     entity: "base-model",
-    implementationKey: "SEND_MESSAGE",
-    formAction: DataEventActions.Create,
+    action: "SEND_MESSAGE",
+    trigger: DataEventActions.Create,
     configuration: {
       foo: "bar",
     },
   },
   {
     instanceId: "instance-id-2",
-    integrationKey: ActionIntegrationKeys.SMTP,
+    integration: ActionIntegrations.SMTP,
     entity: "base-model",
-    implementationKey: "SEND_MESSAGE",
-    formAction: DataEventActions.Delete,
+    action: "SEND_MESSAGE",
+    trigger: DataEventActions.Delete,
     configuration: {
       foo1: "bar1",
     },
   },
   {
     instanceId: "instance-id-3",
-    integrationKey: ActionIntegrationKeys.SMTP,
+    integration: ActionIntegrations.SMTP,
     entity: "base-model",
-    implementationKey: "SEND_MESSAGE",
-    formAction: DataEventActions.Update,
+    action: "SEND_MESSAGE",
+    trigger: DataEventActions.Update,
     configuration: {
       foo2: "bar2",
     },
   },
   {
     instanceId: "instance-id-4",
-    integrationKey: ActionIntegrationKeys.HTTP,
+    integration: ActionIntegrations.HTTP,
     entity: "secondary-model",
-    implementationKey: "POST",
-    formAction: DataEventActions.Delete,
+    action: "POST",
+    trigger: DataEventActions.Delete,
     configuration: {
       bar: "foo",
     },
@@ -69,34 +69,34 @@ describe("/api/integrations/actions/instances/[key]", () => {
     expect(res._getJSONData()).toMatchInlineSnapshot(`
       [
         {
+          "action": "SEND_MESSAGE",
           "configuration": {
             "foo": "bar",
           },
           "entity": "base-model",
-          "formAction": "create",
-          "implementationKey": "SEND_MESSAGE",
           "instanceId": "instance-id-1",
-          "integrationKey": "smtp",
+          "integration": "smtp",
+          "trigger": "create",
         },
         {
+          "action": "SEND_MESSAGE",
           "configuration": {
             "foo1": "bar1",
           },
           "entity": "base-model",
-          "formAction": "delete",
-          "implementationKey": "SEND_MESSAGE",
           "instanceId": "instance-id-2",
-          "integrationKey": "smtp",
+          "integration": "smtp",
+          "trigger": "delete",
         },
         {
+          "action": "SEND_MESSAGE",
           "configuration": {
             "foo2": "bar2",
           },
           "entity": "base-model",
-          "formAction": "update",
-          "implementationKey": "SEND_MESSAGE",
           "instanceId": "instance-id-3",
-          "integrationKey": "smtp",
+          "integration": "smtp",
+          "trigger": "update",
         },
       ]
     `);
@@ -132,10 +132,10 @@ describe("/api/integrations/actions/instances/[key]", () => {
         key: "instance-id-2",
       },
       body: {
-        integrationKey: "slack",
+        integration: "slack",
         entity: "base-model",
-        implementationKey: "SEND_MESSAGE_UPDATED",
-        formAction: "update",
+        action: "SEND_MESSAGE_UPDATED",
+        trigger: "update",
         configuration: {
           you: "are",
           awe: "some",
@@ -158,25 +158,25 @@ describe("/api/integrations/actions/instances/[key]", () => {
     expect(getRes._getJSONData()).toMatchInlineSnapshot(`
       [
         {
+          "action": "SEND_MESSAGE",
           "configuration": {
             "foo": "bar",
           },
           "entity": "base-model",
-          "formAction": "create",
-          "implementationKey": "SEND_MESSAGE",
           "instanceId": "instance-id-1",
-          "integrationKey": "smtp",
+          "integration": "smtp",
+          "trigger": "create",
         },
         {
+          "action": "SEND_MESSAGE_UPDATED",
           "configuration": {
             "awe": "some",
             "you": "are",
           },
           "entity": "base-model",
-          "formAction": "update",
-          "implementationKey": "SEND_MESSAGE_UPDATED",
           "instanceId": "instance-id-2",
-          "integrationKey": "slack",
+          "integration": "slack",
+          "trigger": "update",
         },
       ]
     `);

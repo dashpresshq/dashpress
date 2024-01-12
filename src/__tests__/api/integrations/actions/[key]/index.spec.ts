@@ -8,7 +8,7 @@ import {
   setupAllTestData,
 } from "__tests__/api/_test-utils";
 import { setupActionInstanceTestData } from "__tests__/api/_test-utils/_action-instances";
-import { ActionIntegrationKeys } from "shared/types/actions";
+import { ActionIntegrations } from "shared/types/actions";
 import { DataEventActions } from "shared/types/data";
 
 jest.mock("nanoid", () => ({
@@ -22,20 +22,20 @@ describe("/api/integrations/actions/[key]/index", () => {
     await setupActionInstanceTestData([
       {
         instanceId: "instance-id-1",
-        integrationKey: ActionIntegrationKeys.HTTP,
+        integration: ActionIntegrations.HTTP,
         entity: "base-model",
-        implementationKey: "SEND_MESSAGE",
-        formAction: DataEventActions.Create,
+        action: "SEND_MESSAGE",
+        trigger: DataEventActions.Create,
         configuration: {
           foo: "bar",
         },
       },
       {
         instanceId: "instance-id-2",
-        integrationKey: ActionIntegrationKeys.SLACK,
+        integration: ActionIntegrations.SLACK,
         entity: "secondary-model",
-        implementationKey: "POST",
-        formAction: DataEventActions.Delete,
+        action: "POST",
+        trigger: DataEventActions.Delete,
         configuration: {
           bar: "foo",
         },

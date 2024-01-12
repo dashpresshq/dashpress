@@ -1,9 +1,9 @@
-import { ActionIntegrationKeys, IIntegrationsList } from "shared/types/actions";
+import { ActionIntegrations, IIntegrationsList } from "shared/types/actions";
 import { SchemaForm } from "frontend/components/SchemaForm";
 import { Stack } from "frontend/design-system/primitives/Stack";
 import { Spacer } from "frontend/design-system/primitives/Spacer";
 import { Typo } from "frontend/design-system/primitives/Typo";
-import { useDeactivateActionMutation } from "../actions.store";
+import { useDeactivateIntegrationMutation } from "../actions.store";
 
 interface IProps {
   integrationDetail: IIntegrationsList;
@@ -11,11 +11,11 @@ interface IProps {
 }
 
 export function Deactivate({ integrationDetail, activationId }: IProps) {
-  const deactivateActionMutation = useDeactivateActionMutation();
+  const deactivateIntegrationMutation = useDeactivateIntegrationMutation();
 
   const deactivationKey = `DEACTIVATE_${integrationDetail.key}`.toUpperCase();
 
-  if (integrationDetail.key === ActionIntegrationKeys.HTTP) {
+  if (integrationDetail.key === ActionIntegrations.HTTP) {
     return (
       <Stack justify="center">
         <Typo.SM textStyle="italic">
@@ -52,7 +52,7 @@ export function Deactivate({ integrationDetail, activationId }: IProps) {
             ],
           },
         }}
-        onSubmit={() => deactivateActionMutation.mutateAsync(activationId)}
+        onSubmit={() => deactivateIntegrationMutation.mutateAsync(activationId)}
         buttonText={(isSubmitting) =>
           isSubmitting
             ? `Deactivating ${integrationDetail.title}`

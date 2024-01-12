@@ -1,24 +1,24 @@
 import { createConfigDomainPersistenceService } from "backend/lib/config-persistence";
-import { ActionIntegrationKeys, IActionInstance } from "shared/types/actions";
+import { ActionIntegrations, IActionInstance } from "shared/types/actions";
 import { DataEventActions } from "shared/types/data";
 
 const TEST_ACTION_INSTANCES: IActionInstance[] = [
   {
     instanceId: "instance-id-1",
-    integrationKey: ActionIntegrationKeys.SMTP,
+    integration: ActionIntegrations.SMTP,
     entity: "base-model",
-    implementationKey: "SEND_MESSAGE",
-    formAction: DataEventActions.Create,
+    action: "SEND_MESSAGE",
+    trigger: DataEventActions.Create,
     configuration: {
       foo: "bar",
     },
   },
   {
     instanceId: "instance-id-2",
-    integrationKey: ActionIntegrationKeys.HTTP,
+    integration: ActionIntegrations.HTTP,
     entity: "secondary-model",
-    implementationKey: "POST",
-    formAction: DataEventActions.Delete,
+    action: "POST",
+    trigger: DataEventActions.Delete,
     configuration: {
       bar: "foo",
     },

@@ -3,6 +3,6 @@ import { actionsApiService } from "backend/actions/actions.service";
 
 export default requestHandler({
   GET: async () => {
-    return await actionsApiService.listActivatedActions();
+    return await actionsApiService.listActivatedIntegrations();
   },
 });

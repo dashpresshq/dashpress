@@ -54,23 +54,21 @@ export const StyledBaseButton = styled.button<IStyledBaseButton>`
     ${(props) =>
       props.size === "xs" &&
       css`
-      padding: .25rem .5rem;
-      font-size: .71rem;
-      line-height: 1.2;
-      border-radius: 4px;
-  }
+        padding: 0.25rem 0.5rem;
+        font-size: 0.71rem;
+        line-height: 1.2;
+        border-radius: 4px;
       `}
 
       ${(props) =>
         props.justIcon &&
         css`
-    padding: 8px;
-    font-size: 10px;
-    line-height: initial;
-    border-radius: 50%;
-    width: 29px;
-      }
-          `}
+          padding: 8px;
+          font-size: 10px;
+          line-height: initial;
+          border-radius: 50%;
+          width: 29px;
+        `}
 
 
   &:disabled {

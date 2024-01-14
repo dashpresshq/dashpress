@@ -74,8 +74,6 @@ export class DashboardWidgetsApiService implements IApplicationService {
       return "{}";
     }
 
-    await RDBMSDataApiService.getInstance();
-
     const script = script$1.replaceAll(
       `$.${WIDGET_SCRIPT_RELATIVE_TIME_MARKER}`,
       relativeDateNotationToActualDate(relativeDate).toISOString()

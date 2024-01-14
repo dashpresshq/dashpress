@@ -13,7 +13,6 @@ import { SHADOW_CSS } from "../Card";
 interface IProps {
   action: () => void;
   title: string;
-  message: string;
 }
 
 const Body = styled.div`
@@ -57,12 +56,7 @@ export interface IPresentationProps extends IProps {
   onClose: () => void;
 }
 
-export function Presentation({
-  action,
-  message,
-  onClose,
-  title,
-}: IPresentationProps) {
+export function Presentation({ action, title, onClose }: IPresentationProps) {
   return (
     <Overlay
       role="alertdialog"
@@ -77,7 +71,7 @@ export function Presentation({
         </Typo.MD>
         <Spacer size="xl" />
         <Typo.XS>
-          <span id="confirm_delete_desc"> {message} </span>{" "}
+          <span id="confirm_delete_desc">Are you sure you want to do this</span>
         </Typo.XS>
         <Spacer size="xxl" />
         <Stack justify="center" spacing={8}>

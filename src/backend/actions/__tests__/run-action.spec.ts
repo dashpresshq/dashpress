@@ -163,7 +163,6 @@ describe("Run Action", () => {
 
       await indexHandler(req, res);
 
-      // expect(res._getStatusCode()).toBe(201);
       expect(res._getJSONData()).toMatchInlineSnapshot(`
         {
           "id": 44,

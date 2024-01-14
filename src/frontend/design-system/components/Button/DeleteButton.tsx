@@ -31,7 +31,6 @@ export function DeleteButton({
         if (shouldConfirmAlert) {
           return ConfirmAlert({
             title: "Confirm Delete",
-            message: "Are you sure you want to do this.",
             action: onDelete,
           });
         }

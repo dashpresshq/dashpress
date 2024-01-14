@@ -1,8 +1,5 @@
 import { USER_PERMISSIONS } from "shared/constants/user";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
-import { useState } from "react";
-import { DOCUMENTATION_LABEL } from "frontend/docs";
-import { FormIntegrationsDocumentation } from "frontend/docs/form-integrations";
 import { useRouteParam } from "frontend/lib/routing/useRouteParam";
 import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
 import {
@@ -16,11 +13,8 @@ import { ACTIONS_VIEW_KEY } from "../constants";
 import { ActionSettingsView } from "./View";
 import { ACTION_INTEGRATIONS_CRUD_CONFIG } from "./constants";
 
-const DOCS_TITLE = ACTION_INTEGRATIONS_CRUD_CONFIG.TEXT_LANG.TITLE;
-
 export function ActionsIntegrations() {
   const currentKey = useRouteParam("key");
-  const [isDocOpen, setIsDocOpen] = useState(false);
 
   const integrationsList = useIntegrationsList();
   const activeActionsList = useActiveIntegrations();
@@ -45,14 +39,6 @@ export function ActionsIntegrations() {
         isLoading={!integrationDetail}
         title={integrationDetail?.title}
         description={integrationDetail ? integrationDetail.description : ""}
-        actionButtons={[
-          {
-            _type: "normal",
-            action: () => setIsDocOpen(true),
-            icon: "help",
-            label: DOCUMENTATION_LABEL.CONCEPT(DOCS_TITLE),
-          },
-        ]}
       >
         <ViewStateMachine
           loading={integrationsList.isLoading || activeActionsList.isLoading}
@@ -74,11 +60,6 @@ export function ActionsIntegrations() {
           />
         </ViewStateMachine>
       </SectionBox>
-      <FormIntegrationsDocumentation
-        title={DOCS_TITLE}
-        close={setIsDocOpen}
-        isOpen={isDocOpen}
-      />
     </BaseActionsLayout>
   );
 }

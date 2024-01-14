@@ -179,7 +179,7 @@ export function DropDownMenu({
     </Stack>
   );
 
-  if (menuItems.length === 1) {
+  if (menuItems.length === 1 && !ellipsis) {
     return (
       <SoftButtonStyled
         size="sm"

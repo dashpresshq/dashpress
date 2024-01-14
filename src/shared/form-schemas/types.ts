@@ -1,8 +1,22 @@
-import { ISchemaFormScriptProps } from "frontend/components/SchemaForm/types";
-import { ISharedFormInput } from "frontend/design-system/components/Form/_types";
 import { GridSpanSizes, IColorableSelection } from "shared/types/ui";
+import { IAuthenticatedUserBag } from "shared/types/user";
 import { FIELD_TYPES_CONFIG_MAP } from "shared/validations";
 import { IFieldValidationItem } from "shared/validations/types";
+
+export interface ISchemaFormScriptContext {
+  routeParams: Record<string, string>;
+  auth: IAuthenticatedUserBag;
+  action: string;
+}
+
+export interface ISchemaFormScriptProps<T> extends ISchemaFormScriptContext {
+  formValues: T;
+}
+
+export interface IFormInputRightAction {
+  label: string;
+  action: () => void;
+}
 
 export type ISchemaFormConfig<T> = {
   selections?: IColorableSelection[];
@@ -20,7 +34,7 @@ export type ISchemaFormConfig<T> = {
     disabled?: boolean;
   };
   span?: GridSpanSizes;
-  rightActions?: ISharedFormInput["rightActions"];
+  rightActions?: IFormInputRightAction[];
   validations: IFieldValidationItem[];
 };
 

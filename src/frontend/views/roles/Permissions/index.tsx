@@ -5,7 +5,6 @@ import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { BASE_USER_PERMISSIONS, USER_PERMISSIONS } from "shared/constants/user";
 import { ILabelValue } from "shared/types/options";
 import { userFriendlyCase } from "shared/lib/strings/friendly-case";
-import { usePortalUserPermissions } from "shared/constants/portal/user";
 import { DOCUMENTATION_LABEL } from "frontend/docs";
 import { useState } from "react";
 import { RolesDocumentation } from "frontend/docs/roles";
@@ -22,7 +21,10 @@ import {
   useRolePermissions,
 } from "../permissions.store";
 import { MutatePermission } from "./MutatePermission";
-import { usePortalExtendedPermissions } from "./Portal";
+import {
+  usePortalExtendedPermissions,
+  usePortalUserPermissions,
+} from "./Portal";
 
 const mapPermissionStringToLabelValue = (permissionStringList: string[]) => {
   return permissionStringList.map((permission) => ({

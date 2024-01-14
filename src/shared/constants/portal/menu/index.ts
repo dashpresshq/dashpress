@@ -1,1 +1,1 @@
-export { PortalSystemLinks, PORTAL_SYSTEM_LINK_CONFIG } from "./main";
+export { PortalSystemLinks } from "./main";

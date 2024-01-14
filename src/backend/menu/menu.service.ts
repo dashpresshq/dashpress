@@ -6,7 +6,7 @@ import {
   SystemLinks,
 } from "shared/types/menu";
 import { userFriendlyCase } from "shared/lib/strings/friendly-case";
-import { META_USER_PERMISSIONS } from "shared/constants/user";
+import { META_USER_PERMISSIONS, USER_PERMISSIONS } from "shared/constants/user";
 import { GranularEntityPermissions } from "shared/types/user";
 import {
   EntitiesApiService,
@@ -20,9 +20,31 @@ import {
 import { RolesApiService, rolesApiService } from "backend/roles/roles.service";
 import { ILabelValue } from "shared/types/options";
 import { sortListByOrder } from "shared/lib/array/sort";
-import { SYSTEM_LINKS_CONFIG_MAP } from "shared/constants/menu";
 import { portalCheckIfIsMenuAllowed, getPortalMenuItems } from "./portal";
 import { IBaseNavigationMenuApiService } from "./types";
+
+const SYSTEM_LINKS_CONFIG_MAP: Record<
+  SystemLinks,
+  {
+    permission: string;
+  }
+> = {
+  [SystemLinks.Settings]: {
+    permission: USER_PERMISSIONS.CAN_CONFIGURE_APP,
+  },
+  [SystemLinks.Home]: {
+    permission: META_USER_PERMISSIONS.NO_PERMISSION_REQUIRED,
+  },
+  [SystemLinks.Roles]: {
+    permission: USER_PERMISSIONS.CAN_MANAGE_PERMISSIONS,
+  },
+  [SystemLinks.Users]: {
+    permission: USER_PERMISSIONS.CAN_MANAGE_USERS,
+  },
+  [SystemLinks.Integrations]: {
+    permission: USER_PERMISSIONS.CAN_MANAGE_APP_CREDENTIALS,
+  },
+};
 
 export class NavigationMenuApiService
   implements IApplicationService, IBaseNavigationMenuApiService

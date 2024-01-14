@@ -1,8 +1,11 @@
 import { HeaderContext } from "@tanstack/react-table";
 import { ReactNode } from "react";
 import { UseQueryResult } from "react-query";
-import { IPaginatedDataState, PaginatedData } from "shared/types/data";
-import { TableFilterType } from "./filters/types";
+import {
+  IPaginatedDataState,
+  PaginatedData,
+  TableFilterType,
+} from "shared/types/data";
 import { IEmptyWrapperProps } from "../EmptyWrapper/types";
 
 export interface ITableColumn {

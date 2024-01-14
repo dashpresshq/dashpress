@@ -1,4 +1,4 @@
-import { evalJavascriptStringSafely } from "frontend/lib/script-runner";
+import { evalJavascriptStringSafely } from "shared/lib/script-runner";
 
 export type IPresentationScriptParams = {
   row: Record<string, unknown>;

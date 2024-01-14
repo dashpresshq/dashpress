@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { IntegrationsConfigurationGroup } from "shared/types/integrations";
-import { INTEGRATIONS_GROUP_CONFIG } from "shared/config-bag/integrations";
 import { Card } from "frontend/design-system/components/Card";
 import { Tabs } from "frontend/design-system/components/Tabs";
 import { ManageCredentialGroup } from "./ManageCredentialGroup";
+import { INTEGRATIONS_GROUP_CRUD_CONFIG } from "./constants";
 
 export function BaseManageVariables() {
   const [currentTab, setCurrentTab] = useState<IntegrationsConfigurationGroup>(
@@ -20,7 +20,8 @@ export function BaseManageVariables() {
         contents={[
           {
             overrideLabel:
-              INTEGRATIONS_GROUP_CONFIG.constants.crudConfig.TEXT_LANG.TITLE,
+              INTEGRATIONS_GROUP_CRUD_CONFIG.constants.crudConfig.TEXT_LANG
+                .TITLE,
             label: IntegrationsConfigurationGroup.Constants,
             content: (
               <ManageCredentialGroup
@@ -31,7 +32,8 @@ export function BaseManageVariables() {
           },
           {
             overrideLabel:
-              INTEGRATIONS_GROUP_CONFIG.credentials.crudConfig.TEXT_LANG.TITLE,
+              INTEGRATIONS_GROUP_CRUD_CONFIG.credentials.crudConfig.TEXT_LANG
+                .TITLE,
             label: IntegrationsConfigurationGroup.Credentials,
             content: (
               <ManageCredentialGroup

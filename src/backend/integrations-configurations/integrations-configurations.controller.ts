@@ -1,6 +1,6 @@
 import { BadRequestError } from "backend/lib/errors";
 import { IntegrationsConfigurationGroup } from "shared/types/integrations";
-import { IKeyValue } from "frontend/views/settings/Variables/types";
+import { IKeyValue } from "shared/types/options";
 import { credentialsApiService } from "./services/credentials.service";
 import {
   appConstantsApiService,

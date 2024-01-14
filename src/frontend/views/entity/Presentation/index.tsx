@@ -16,7 +16,7 @@ import { useState } from "react";
 import { DOCUMENTATION_LABEL } from "frontend/docs";
 import { PresentationScriptDocumentation } from "frontend/docs/scripts/presentations-scripts";
 import { ToastService } from "frontend/lib/toast";
-import { evalJavascriptString } from "frontend/lib/script-runner";
+import { evalJavascriptString } from "shared/lib/script-runner";
 import { SchemaForm } from "frontend/components/SchemaForm";
 import { BaseEntitySettingsLayout } from "../_Base";
 import { ENTITY_CONFIGURATION_VIEW } from "../constants";

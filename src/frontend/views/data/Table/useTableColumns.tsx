@@ -17,9 +17,9 @@ import {
 } from "frontend/hooks/configuration/configuration.store";
 import { DataStateKeys } from "frontend/lib/data/types";
 import { ellipsis } from "shared/lib/strings";
-import { TableFilterType } from "frontend/design-system/components/Table/filters/types";
 import { ITableColumn } from "frontend/design-system/components/Table/types";
 import { ActionButtons } from "frontend/design-system/components/Button/ActionButtons";
+import { TableFilterType } from "shared/types/data";
 import { viewSpecialDataTypes } from "../viewSpecialDataTypes";
 import { usePortalTableColumns } from "./portal";
 import { evalutePresentationScript } from "../evaluatePresentationScript";

@@ -4,8 +4,8 @@ import { SoftButton } from "frontend/design-system/components/Button/SoftButton"
 import { Stack } from "frontend/design-system/primitives/Stack";
 import { Typo } from "frontend/design-system/primitives/Typo";
 import { DropDownMenu } from "frontend/design-system/components/DropdownMenu";
-import { GrabIcon } from "shared/constants/Icons";
 import { SortableKnob } from "react-easy-sort";
+import { GrabIcon } from "frontend/design-system/Icons/Grab";
 import { DASHBOARD_RELATIVE_DAYS } from "./constants";
 import { IWidgetSettingProps } from "./types";
 import { useDashboardWidgetRelativeDateStore } from "../../../relativeTime.store";

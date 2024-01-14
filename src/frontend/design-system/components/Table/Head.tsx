@@ -5,8 +5,8 @@ import styled, { css } from "styled-components";
 import { Stack } from "frontend/design-system/primitives/Stack";
 import { Typo } from "frontend/design-system/primitives/Typo";
 import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
+import { TableFilterType } from "shared/types/data";
 import { TableFilter } from "./filters";
-import { TableFilterType } from "./filters/types";
 import { Th } from "./styles";
 
 const THead = styled.thead`

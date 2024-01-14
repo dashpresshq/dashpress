@@ -1,1 +1,1 @@
-export { usePortalExtendedPermissions } from "./main";
+export { usePortalExtendedPermissions, usePortalUserPermissions } from "./main";

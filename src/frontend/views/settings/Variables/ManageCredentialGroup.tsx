@@ -28,6 +28,7 @@ import {
   PasswordMessage,
   PasswordToReveal,
 } from "frontend/views/integrations/Password";
+import { IKeyValue } from "shared/types/options";
 import {
   INTEGRATIONS_GROUP_ENDPOINT,
   useIntegrationConfigurationDeletionMutation,
@@ -35,7 +36,7 @@ import {
   useRevealedCredentialsList,
 } from "./configurations.store";
 import { KeyValueForm } from "./Form";
-import { IKeyValue } from "./types";
+import { INTEGRATIONS_GROUP_CRUD_CONFIG } from "./constants";
 
 const NEW_CONFIG_ITEM = "__new_config_item__";
 
@@ -76,7 +77,7 @@ export function ManageCredentialGroup({
     setCurrentConfigItem("");
   };
 
-  const CRUD_CONFIG = INTEGRATIONS_GROUP_CONFIG[group].crudConfig;
+  const CRUD_CONFIG = INTEGRATIONS_GROUP_CRUD_CONFIG[group].crudConfig;
 
   const MemoizedAction = useCallback(
     ({ row }: IFETableCell<IKeyValue>) => (

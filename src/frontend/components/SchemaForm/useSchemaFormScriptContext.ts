@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import { useAuthenticatedUserBag } from "frontend/hooks/auth/user.store";
-import { ISchemaFormScriptContext } from "./types";
+import { ISchemaFormScriptContext } from "shared/form-schemas/types";
 
 export const useSchemaFormScriptContext = (
   action: string

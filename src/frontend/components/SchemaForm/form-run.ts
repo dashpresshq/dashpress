@@ -1,5 +1,5 @@
-import { evalJavascriptStringSafely } from "frontend/lib/script-runner";
-import { ISchemaFormScriptProps } from "./types";
+import { ISchemaFormScriptProps } from "shared/form-schemas/types";
+import { evalJavascriptStringSafely } from "shared/lib/script-runner";
 
 export const runFormFieldState = <T>(
   fieldStateString: string,

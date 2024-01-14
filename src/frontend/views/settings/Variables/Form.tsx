@@ -2,8 +2,8 @@ import { IFormProps } from "frontend/lib/form/types";
 import { SchemaForm } from "frontend/components/SchemaForm";
 import { IAppliedSchemaFormConfig } from "shared/form-schemas/types";
 import { IntegrationsConfigurationGroup } from "shared/types/integrations";
-import { INTEGRATIONS_GROUP_CONFIG } from "shared/config-bag/integrations";
-import { IKeyValue } from "./types";
+import { IKeyValue } from "shared/types/options";
+import { INTEGRATIONS_GROUP_CRUD_CONFIG } from "./constants";
 
 export const CAPITAL_AND_UNDERSCORE_REGEX = `^[A-Z_]+$`;
 
@@ -49,8 +49,8 @@ export function KeyValueForm({
       icon={isCreate ? "add" : "save"}
       buttonText={
         isCreate
-          ? INTEGRATIONS_GROUP_CONFIG[group].crudConfig.FORM_LANG.CREATE
-          : INTEGRATIONS_GROUP_CONFIG[group].crudConfig.FORM_LANG.UPDATE
+          ? INTEGRATIONS_GROUP_CRUD_CONFIG[group].crudConfig.FORM_LANG.CREATE
+          : INTEGRATIONS_GROUP_CRUD_CONFIG[group].crudConfig.FORM_LANG.UPDATE
       }
       action={isCreate ? "create" : "update"}
       fields={FORM_SCHEMA}

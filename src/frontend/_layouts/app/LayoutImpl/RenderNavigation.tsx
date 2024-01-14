@@ -15,8 +15,31 @@ import { PlainButton } from "frontend/design-system/components/Button/TextButton
 import { Stack } from "frontend/design-system/primitives/Stack";
 import { useThemeColorShade } from "frontend/design-system/theme/useTheme";
 import { useNavigationStack } from "frontend/lib/routing/useNavigationStack";
-import { SYSTEM_LINKS_CONFIG_MAP } from "shared/constants/menu";
-import { PORTAL_SYSTEM_LINK_CONFIG } from "shared/constants/portal/menu";
+import { ActionIntegrations } from "shared/types/actions";
+import { PORTAL_SYSTEM_LINK_CONFIG_LINKS } from "./portal";
+
+const SYSTEM_LINKS_CONFIG_MAP: Record<
+  SystemLinks,
+  {
+    link: string;
+  }
+> = {
+  [SystemLinks.Settings]: {
+    link: NAVIGATION_LINKS.SETTINGS.DEFAULT,
+  },
+  [SystemLinks.Home]: {
+    link: NAVIGATION_LINKS.DASHBOARD.HOME,
+  },
+  [SystemLinks.Roles]: {
+    link: NAVIGATION_LINKS.ROLES.LIST,
+  },
+  [SystemLinks.Users]: {
+    link: NAVIGATION_LINKS.USERS.LIST,
+  },
+  [SystemLinks.Integrations]: {
+    link: NAVIGATION_LINKS.INTEGRATIONS.ACTIONS(ActionIntegrations.HTTP),
+  },
+};
 
 const LeftSideNavMenuList = styled.li<{}>`
   list-style: none;
@@ -127,7 +150,7 @@ const getNavigationTypeLink = (
     case NavigationMenuItemType.Entities:
       return NAVIGATION_LINKS.ENTITY.TABLE(link);
     case NavigationMenuItemType.System:
-      return { ...SYSTEM_LINKS_CONFIG_MAP, ...PORTAL_SYSTEM_LINK_CONFIG }[
+      return { ...SYSTEM_LINKS_CONFIG_MAP, ...PORTAL_SYSTEM_LINK_CONFIG_LINKS }[
         link as SystemLinks
       ].link;
   }

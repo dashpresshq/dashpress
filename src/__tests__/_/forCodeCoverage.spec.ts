@@ -17,7 +17,6 @@ import { FOR_CODE_COV as $16 } from "backend/actions/integrations/slack/types";
 import { FOR_CODE_COV as $17 } from "backend/actions/integrations/smtp/types";
 import { FOR_CODE_COV as $18 } from "backend/actions/integrations/twilio/types";
 import { FOR_CODE_COV as $19 } from "backend/storage/types";
-import { FOR_CODE_COV as $20 } from "frontend/views/settings/Variables/types";
 import { FOR_CODE_COV as $21 } from "shared/form-schemas/roles/permissions/base";
 import { FOR_CODE_COV as $22 } from "backend/lib/config-persistence/portal/index";
 import { FOR_CODE_COV as $23 } from "backend/lib/config-persistence/portal/main/types";
@@ -59,7 +58,6 @@ noop(
   $17,
   $18,
   $19,
-  $20,
   $21,
   $22,
   $23,

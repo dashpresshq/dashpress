@@ -1,4 +1,4 @@
-import { evalJavascriptStringSafely } from "frontend/lib/script-runner";
+import { evalJavascriptStringSafely } from "shared/lib/script-runner";
 
 export const runInitialValuesScript = (
   initialValuesScript: string

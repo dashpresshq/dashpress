@@ -1,4 +1,5 @@
 import { FieldInputProps, FieldMetaState } from "react-final-form";
+import { IFormInputRightAction } from "shared/form-schemas/types";
 
 export interface ISharedFormInput {
   input: FieldInputProps<any, HTMLElement>;
@@ -9,10 +10,7 @@ export interface ISharedFormInput {
   required?: boolean;
   disabled?: boolean;
   sm?: true;
-  rightActions?: {
-    label: string;
-    action: () => void;
-  }[];
+  rightActions?: IFormInputRightAction[];
 }
 
 export const FOR_CODE_COV = 1;

@@ -7,8 +7,8 @@ import { useSchemaFormScriptContext } from "frontend/components/SchemaForm/useSc
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { ToastService } from "frontend/lib/toast";
 import { MAKE_APP_CONFIGURATION_CRUD_CONFIG } from "frontend/hooks/configuration/configuration.constant";
-import { evalJavascriptString } from "frontend/lib/script-runner";
 import { AppConfigurationKeys } from "shared/configurations";
+import { evalJavascriptString } from "shared/lib/script-runner";
 
 interface IProps {
   value: string;

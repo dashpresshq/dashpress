@@ -3,6 +3,11 @@ export interface ILabelValue {
   label: string;
 }
 
+export type IKeyValue = {
+  key: string;
+  value: string;
+};
+
 export const FOR_CODE_COV = 1;
 
 export interface ISystemStatusForDisplay {

@@ -1,10 +1,9 @@
 import { useState, ReactNode } from "react";
-import { IPaginatedDataState } from "shared/types/data";
+import { IPaginatedDataState, TableFilterType } from "shared/types/data";
 import { DEFAULT_TABLE_STATE } from "frontend/design-system/components/Table/constants";
 import { TableSkeleton } from "frontend/design-system/components/Skeleton/Table";
 import { Table } from "frontend/design-system/components/Table";
 import { ITableColumn } from "frontend/design-system/components/Table/types";
-import { TableFilterType } from "frontend/design-system/components/Table/filters/types";
 import { IEmptyWrapperProps } from "frontend/design-system/components/EmptyWrapper/types";
 import { useFEPagination } from "./useFEPagination";
 import { ViewStateMachine } from "../ViewStateMachine";

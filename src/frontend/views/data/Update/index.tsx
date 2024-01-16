@@ -68,7 +68,7 @@ export function EntityUpdate() {
           <BaseEntityForm
             entity={entity}
             crudAction="update"
-            icon="save"
+            systemIcon="Save"
             buttonText={entityCrudConfig.FORM_LANG.UPDATE}
             onSubmit={entityDataUpdationMutation.mutateAsync}
             initialValuesData={dataDetails}

@@ -64,7 +64,7 @@ export function UserUpdate() {
             {
               _type: "normal",
               action: () => setIsDocOpen(true),
-              icon: "help",
+              systemIcon: "Help",
               label: DOCUMENTATION_LABEL.CONCEPT(DOCS_TITLE),
             },
           ]}
@@ -87,7 +87,7 @@ export function UserUpdate() {
               buttonText={ADMIN_USERS_CRUD_CONFIG.FORM_LANG.UPDATE}
               onSubmit={updateUserMutation.mutateAsync}
               initialValues={userDetails.data}
-              icon="save"
+              systemIcon="Save"
               fields={UPDATE_USER_FORM_SCHEMA}
             />
           </ViewStateMachine>
@@ -100,7 +100,7 @@ export function UserUpdate() {
                 buttonText={(submitting) =>
                   submitting ? "Resetting Password" : "Reset Password"
                 }
-                icon="no-icon"
+                systemIcon="Unlock"
                 fields={RESET_PASSWORD_FORM_SCHEMA}
                 onSubmit={resetPasswordMutation.mutateAsync}
                 resetForm

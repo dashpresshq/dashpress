@@ -50,6 +50,7 @@ function TableActionButtons({
     entity,
     entityId: idValue,
     baseActionButtons: actionButtons,
+    from: "table-inline",
   });
 
   return <ActionButtons actionButtons={portalActionButtons} justIcons />;

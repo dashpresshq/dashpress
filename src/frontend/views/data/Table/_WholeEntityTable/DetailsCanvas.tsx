@@ -33,7 +33,7 @@ export function DetailsCanvas() {
       <Spacer />
       <SoftButton
         label="View Full Details"
-        icon="eye"
+        systemIcon="Eye"
         block
         action={NAVIGATION_LINKS.ENTITY.DETAILS(
           detailsCanvasEntity,

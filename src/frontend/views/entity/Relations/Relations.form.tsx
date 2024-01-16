@@ -61,7 +61,7 @@ export function EntityRelationsForm({
             <FormButton
               text={CRUD_CONFIG.FORM_LANG.UPSERT}
               isMakingRequest={submitting}
-              icon="save"
+              systemIcon="Save"
               disabled={pristine}
             />
           </form>

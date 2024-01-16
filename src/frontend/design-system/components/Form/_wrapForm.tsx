@@ -1,8 +1,8 @@
 import React from "react";
 import classnames from "classnames";
 import { FieldMetaState } from "react-final-form";
-import { HelpCircle } from "react-feather";
 import { Stack } from "frontend/design-system/primitives/Stack";
+import { SystemIcon } from "frontend/design-system/Icons/System";
 import { ISharedFormInput } from "./_types";
 import { Tooltip } from "../Tooltip";
 import { FormGroup, FormLabel, FormFeedback, RequiredAsterick } from "./Styles";
@@ -40,7 +40,7 @@ export const wrapLabelAndError = (
           )}
           {description ? (
             <Tooltip text={description} place="right">
-              <HelpCircle size="15" />
+              <SystemIcon icon="Help" size={15} />
             </Tooltip>
           ) : null}
         </div>
@@ -51,7 +51,7 @@ export const wrapLabelAndError = (
               action={rightAction.action}
               size="xs"
               type="button"
-              icon="settings"
+              systemIcon={rightAction.systemIcon}
               label={rightAction.label}
             />
           ))}

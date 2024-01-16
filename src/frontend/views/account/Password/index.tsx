@@ -24,7 +24,7 @@ export function AccountPassword() {
       <SectionBox title={PASSWORD_CRUD_CONFIG.TEXT_LANG.EDIT}>
         <SchemaForm<IChangePasswordForm>
           onSubmit={changePasswordMutation.mutateAsync}
-          icon="no-icon"
+          systemIcon="Save"
           buttonText={PASSWORD_CRUD_CONFIG.FORM_LANG.UPDATE}
           fields={CHANGE_PASSWORD_FORM_SCHEMA}
           resetForm

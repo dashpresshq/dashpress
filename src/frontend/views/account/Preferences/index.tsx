@@ -65,7 +65,7 @@ export function UserPreferences() {
             initialValues={{ theme: userPreferences.data }}
             buttonText={ACCOUNT_PREFERENCES_CRUD_CONFIG.FORM_LANG.UPSERT}
             fields={UPDATE_USER_PREFERENCES_FORM_SCHEMA}
-            icon="save"
+            systemIcon="Save"
           />
         </ViewStateMachine>
       </SectionBox>

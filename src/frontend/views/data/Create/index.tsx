@@ -58,7 +58,7 @@ export function EntityCreate() {
         >
           <BaseEntityForm
             entity={entity}
-            icon="add"
+            systemIcon="Plus"
             crudAction="create"
             resetForm
             buttonText={entityCrudConfig.FORM_LANG.CREATE}

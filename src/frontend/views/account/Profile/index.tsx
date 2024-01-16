@@ -40,7 +40,7 @@ export function AccountProfile() {
             initialValues={authenticatedUserBag.data}
             buttonText={ACCOUNT_PROFILE_CRUD_CONFIG.FORM_LANG.UPSERT}
             fields={UPDATE_PROFILE_FORM_SCHEMA}
-            icon="save"
+            systemIcon="Save"
           />
         </ViewStateMachine>
       </SectionBox>

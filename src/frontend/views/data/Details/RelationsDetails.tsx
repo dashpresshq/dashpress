@@ -89,6 +89,7 @@ export function EntityRelationDetails() {
     entity: childEntity,
     entityId: idData,
     baseActionButtons: actionButtons,
+    from: "details",
   });
 
   return (
@@ -111,7 +112,7 @@ export function EntityRelationDetails() {
             </Typo.SM>
             <Spacer />
             <SoftButton
-              icon="add"
+              systemIcon="Plus"
               label="Create It"
               action={() => {
                 router.push(

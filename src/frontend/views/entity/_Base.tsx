@@ -4,16 +4,6 @@ import { ReactNode } from "react";
 import { useEntitySlug } from "frontend/hooks/entity/entity.config";
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
 import { AppLayout } from "frontend/_layouts/app";
-import {
-  Code,
-  Link2,
-  Type,
-  Filter,
-  Sliders,
-  File,
-  Zap,
-  Codepen,
-} from "react-feather";
 import { SoftButton } from "frontend/design-system/components/Button/SoftButton";
 import {
   IMenuSectionItem,
@@ -34,14 +24,14 @@ const baseMenuItems = (entity: string): IMenuSectionItem[] => [
     action: NAVIGATION_LINKS.ENTITY.CONFIG.CRUD(entity, {
       tab: ENTITY_CRUD_LABELS.create,
     }),
-    IconComponent: Sliders,
+    systemIcon: "Sliders",
     name: "CRUD",
     order: 10,
   },
   {
     action: NAVIGATION_LINKS.ENTITY.CONFIG.DICTION(entity),
     name: "Diction",
-    IconComponent: Type,
+    systemIcon: "Type",
     order: 20,
   },
   {
@@ -49,37 +39,37 @@ const baseMenuItems = (entity: string): IMenuSectionItem[] => [
       tab: ENTITY_FIELD_SETTINGS_TAB_LABELS.LABELS,
     }),
     name: "Fields",
-    IconComponent: File,
+    systemIcon: "File",
     order: 30,
   },
   {
     action: NAVIGATION_LINKS.ENTITY.CONFIG.RELATIONS(entity),
     name: "Relations",
-    IconComponent: Link2,
+    systemIcon: "LinkAlt",
     order: 40,
   },
   {
     action: NAVIGATION_LINKS.ENTITY.CONFIG.VIEWS(entity),
     name: "Views",
-    IconComponent: Filter,
+    systemIcon: "Filter",
     order: 50,
   },
   {
     action: NAVIGATION_LINKS.ENTITY.CONFIG.FORM(entity),
     name: "Form Scripts",
-    IconComponent: Code,
+    systemIcon: "Code",
     order: 60,
   },
   {
     action: NAVIGATION_LINKS.ENTITY.CONFIG.PRESENTATION(entity),
     name: "Presentation Scripts",
-    IconComponent: Codepen,
+    systemIcon: "CodeAlt",
     order: 70,
   },
   {
     action: NAVIGATION_LINKS.ENTITY.CONFIG.FORM_INTEGRATIONS(entity),
     name: ADMIN_ACTION_INSTANCES_CRUD_CONFIG.TEXT_LANG.TITLE,
-    IconComponent: Zap,
+    systemIcon: "Zap",
     order: 80,
   },
 ];
@@ -104,7 +94,7 @@ export function BaseEntitySettingsLayout({ children, actionItems }: IProps) {
       {canGoBack() && (
         <>
           <SoftButton
-            icon="back"
+            systemIcon="Left"
             size="xs"
             label="Go Back"
             action={() => {

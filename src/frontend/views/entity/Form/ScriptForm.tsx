@@ -60,7 +60,7 @@ export function ScriptForm({
             ToastService.error(`•Expression: \n•JS-Error: ${e}`);
           }
         }}
-        icon="save"
+        systemIcon="Save"
         buttonText={
           MAKE_APP_CONFIGURATION_CRUD_CONFIG(configurationKey).FORM_LANG.UPSERT
         }

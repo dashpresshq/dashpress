@@ -50,7 +50,7 @@ export function SiteSettings() {
           <SchemaForm<AppConfigurationValueType<"site_settings">>
             onSubmit={upsertConfigurationMutation.mutateAsync}
             initialValues={siteSettings.data}
-            icon="save"
+            systemIcon="Save"
             buttonText={CRUD_CONFIG.FORM_LANG.UPSERT}
             fields={{
               name: {

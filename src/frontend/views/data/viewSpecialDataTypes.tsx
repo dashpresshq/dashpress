@@ -57,7 +57,13 @@ export const viewSpecialDataTypes = ({
   }
 
   if (entityFieldTypes[fieldName] === "file") {
-    return <SoftButton action={value as string} icon="save" label="Download" />;
+    return (
+      <SoftButton
+        action={value as string}
+        systemIcon="Download"
+        label="Download"
+      />
+    );
   }
 
   if (entityToOneReferenceFields?.[fieldName]) {

@@ -1,4 +1,3 @@
-import { Edit } from "react-feather";
 import { USER_PERMISSIONS } from "shared/constants/user";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import React from "react";
@@ -34,7 +33,7 @@ export function BaseDashboard({ dashboardId, manageLink }: IProps) {
               {
                 id: "manage-dashboard",
                 label: "Edit Dashboard",
-                IconComponent: Edit,
+                systemIcon: "Edit" as const,
                 onClick: () => router.replace(manageLink),
               },
             ]

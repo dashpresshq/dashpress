@@ -1,11 +1,13 @@
 import Dropdown from "react-bootstrap/Dropdown";
 import styled from "styled-components";
 import React, { useState, useEffect, useMemo } from "react";
-import { Icon, Loader, MoreVertical } from "react-feather";
+import { Loader, MoreVertical } from "react-feather";
 import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
 import { Stack } from "frontend/design-system/primitives/Stack";
 import { Typo } from "frontend/design-system/primitives/Typo";
 import { Z_INDEXES } from "frontend/design-system/constants/zIndex";
+import { SystemIconsKeys } from "shared/constants/Icons";
+import { SystemIcon } from "frontend/design-system/Icons/System";
 import { SoftButtonStyled } from "../Button/Button";
 import { BREAKPOINTS } from "../../constants";
 import { Spin } from "../_/Spin";
@@ -16,8 +18,9 @@ const togglePreviousState = (prev: boolean) => !prev;
 export interface IDropDownMenuItem {
   id: string;
   label: string;
+  systemIcon: SystemIconsKeys;
   description?: string;
-  IconComponent?: Icon;
+  disabled?: boolean;
   onClick: () => void;
   order?: number;
 }
@@ -165,15 +168,15 @@ export function DropDownMenu({
     setCurrentMenuItem(menuItem);
   };
 
-  const { IconComponent, onClick, label } = currentMenuItem;
+  const { systemIcon, onClick, label } = currentMenuItem;
 
   const currentItem = (
     <Stack spacing={4} align="center">
       {/* eslint-disable-next-line no-nested-ternary */}
       {isMakingActionRequest ? (
         <Spin as={Loader} size={14} />
-      ) : IconComponent ? (
-        <IconComponent size="14" />
+      ) : systemIcon ? (
+        <SystemIcon icon={systemIcon} size={14} />
       ) : null}
       <Label>{label}</Label>
     </Stack>
@@ -223,13 +226,28 @@ export function DropDownMenu({
         </>
       )}
       <DropDownMenuStyled>
-        {menuItems.map(({ label: label$1, description }, index) => (
-          <DropDownItem key={label$1} onClick={() => onMenuItemClick(index)}>
-            <Typo.XS as="span">{label$1}</Typo.XS>
-            <br />
-            {description ? (
+        {menuItems.map((menuItem, index) => (
+          <DropDownItem
+            key={menuItem.label}
+            onClick={() => onMenuItemClick(index)}
+            disabled={menuItem.disabled}
+          >
+            <Stack>
+              <SystemIcon
+                icon={menuItem.systemIcon}
+                size={14}
+                color={menuItem.disabled ? "muted-text" : "main-text"}
+              />
+              <Typo.XS
+                as="span"
+                color={menuItem.disabled ? "muted" : undefined}
+              >
+                {menuItem.label}
+              </Typo.XS>
+            </Stack>
+            {menuItem.description ? (
               <Typo.XS color="muted" as="span">
-                {description}
+                {menuItem.description}
               </Typo.XS>
             ) : null}
           </DropDownItem>

@@ -37,7 +37,7 @@ export function UserCreate() {
             {
               _type: "normal",
               action: () => setIsDocOpen(true),
-              icon: "help",
+              systemIcon: "Help",
               label: DOCUMENTATION_LABEL.CONCEPT(DOCS_TITLE),
             },
           ]}
@@ -46,7 +46,7 @@ export function UserCreate() {
             onSubmit={userCreationMutation.mutateAsync}
             buttonText={ADMIN_USERS_CRUD_CONFIG.FORM_LANG.CREATE}
             fields={CREATE_USER_FORM_SCHEMA}
-            icon="add"
+            systemIcon="Plus"
             resetForm
           />
         </SectionBox>

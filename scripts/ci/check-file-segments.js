@@ -40,9 +40,7 @@ for (const fileName of files) {
 if (errors.length > 0) {
   console.error(`${errors.length} files not placed in the correct folders`);
 
-  errors.forEach((error) => {
-    console.error(error);
-  });
+  console.error(errors.join(","));
 
   process.exit(1);
 }

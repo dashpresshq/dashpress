@@ -1,7 +1,6 @@
 import { useEntityCrudConfig } from "frontend/hooks/entity/entity.config";
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
 import { useRouter } from "next/router";
-import { Plus } from "react-feather";
 import { IDropDownMenuItem } from "frontend/design-system/components/DropdownMenu";
 import { usePluginTableMenuItems } from "./portal";
 import { useCanUserPerformCrudAction } from "../hooks/useCanUserPerformCrudAction";
@@ -47,7 +46,7 @@ export const useTableMenuItems = (
       id: "add",
       order: 1,
       label: entityCrudConfig.TEXT_LANG.CREATE,
-      IconComponent: Plus,
+      systemIcon: "Plus",
       onClick: () => {
         router.push(getEntityCreateLink(entity, reference));
       },

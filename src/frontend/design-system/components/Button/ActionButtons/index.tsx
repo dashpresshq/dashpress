@@ -27,12 +27,12 @@ export function ActionButtons({
       {buttonsToShow.map((actionButton) =>
         actionButton._type === "normal" ? (
           <SoftButton
-            key={actionButton.icon}
+            key={actionButton.systemIcon}
             action={actionButton.action}
             label={actionButton.label}
             justIcon={justIcons}
             isMakingActionRequest={actionButton.isMakingActionRequest}
-            icon={actionButton.icon}
+            systemIcon={actionButton.systemIcon}
           />
         ) : (
           <DeleteButton
@@ -51,6 +51,8 @@ export function ActionButtons({
             id: button._type === "delete" ? "Delete" : button.label,
             label: button._type === "delete" ? "Delete" : button.label,
             onClick: typeof button.action === "function" && button.action,
+            systemIcon:
+              button._type === "normal" ? button.systemIcon : "Thrash",
           }))}
         />
       )}

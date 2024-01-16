@@ -121,7 +121,7 @@ export function ActionForm({
       }
       initialValues={initialValues$1}
       fields={fields}
-      icon={formAction === "create" ? "add" : "save"}
+      systemIcon={formAction === "create" ? "Plus" : "Save"}
       onChange={setFormValues}
       action={formAction}
       onSubmit={async (instance) => {

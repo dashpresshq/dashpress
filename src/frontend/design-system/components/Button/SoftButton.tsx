@@ -3,14 +3,15 @@ import Link from "next/link";
 import { Loader } from "react-feather";
 import { SYSTEM_COLORS } from "frontend/design-system/theme/system";
 import { Stack } from "frontend/design-system/primitives/Stack";
+import { SystemIconsKeys } from "shared/constants/Icons";
+import { SystemIcon } from "frontend/design-system/Icons/System";
 import { SoftButtonStyled } from "./Button";
-import { ButtonIconTypes, ICON_MAP } from "./constants";
 import { Spin } from "../_/Spin";
 import { Tooltip } from "../Tooltip";
 
 export interface IProps {
   label?: string;
-  icon?: ButtonIconTypes;
+  systemIcon?: SystemIconsKeys;
   size?: "sm" | "xs";
   block?: true;
   disabled?: boolean;
@@ -28,7 +29,7 @@ export function SoftButton({
   block,
   color,
   size = "sm",
-  icon,
+  systemIcon,
   justIcon,
   type,
   disabled,
@@ -37,7 +38,6 @@ export function SoftButton({
   secondaryAction,
   className,
 }: IProps) {
-  const Icon = icon ? ICON_MAP[icon] : null;
   const iconProps = {
     size: 14,
   };
@@ -52,7 +52,7 @@ export function SoftButton({
       justify={block ? "center" : undefined}
     >
       <>
-        {Icon ? <Icon {...iconProps} /> : null}
+        <SystemIcon icon={systemIcon} {...iconProps} />
         <span style={{ whiteSpace: "nowrap" }}>
           {label && !justIcon ? label : null}
         </span>

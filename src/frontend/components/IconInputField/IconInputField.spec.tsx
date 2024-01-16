@@ -24,7 +24,7 @@ function TestComponent({
 
             <FormButton
               text={() => "Save"}
-              icon="add"
+              systemIcon="Plus"
               isMakingRequest={false}
               disabled={pristine}
             />

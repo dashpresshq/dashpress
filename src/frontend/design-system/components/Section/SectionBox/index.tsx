@@ -1,9 +1,9 @@
 import React, { useState, ReactNode } from "react";
-import { HelpCircle } from "react-feather";
 import { ISelectData } from "shared/types/options";
 import { Stack } from "frontend/design-system/primitives/Stack";
 import { Typo } from "frontend/design-system/primitives/Typo";
 import { Spacer } from "frontend/design-system/primitives/Spacer";
+import { SystemIcon } from "frontend/design-system/Icons/System";
 import { SoftButton } from "../../Button/SoftButton";
 import { Card, CardBody, CardHeader } from "../../Card";
 import { Tooltip } from "../../Tooltip";
@@ -42,7 +42,7 @@ export function SectionBox({
           <SoftButton
             action={backLink.action}
             size="xs"
-            icon="back"
+            systemIcon="Left"
             label={backLink.label}
           />
           <Spacer />
@@ -60,7 +60,7 @@ export function SectionBox({
                 )}
                 {description ? (
                   <Tooltip text={description}>
-                    <HelpCircle size="15" />
+                    <SystemIcon icon="Help" size={15} />
                   </Tooltip>
                 ) : null}
               </Stack>

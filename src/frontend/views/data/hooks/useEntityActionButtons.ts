@@ -28,7 +28,7 @@ export const useEntityActionButtons = ({
   if (canUserPerformCrudAction("details") && !exclude.includes("details")) {
     actionButtons.push({
       _type: "normal",
-      icon: "eye",
+      systemIcon: "Eye",
       action: NAVIGATION_LINKS.ENTITY.DETAILS(entity, entityId),
       label: "Details",
       order: 10,
@@ -38,7 +38,7 @@ export const useEntityActionButtons = ({
   if (canUserPerformCrudAction("update") && !exclude.includes("update")) {
     actionButtons.push({
       _type: "normal",
-      icon: "edit",
+      systemIcon: "Edit",
       action: NAVIGATION_LINKS.ENTITY.UPDATE(entity, entityId),
       label: "Edit",
       order: 20,
@@ -47,6 +47,7 @@ export const useEntityActionButtons = ({
 
   if (canUserPerformCrudAction("delete") && !exclude.includes("delete")) {
     actionButtons.push({
+      // TODO delete on the dropdown
       _type: "delete",
       action: () => entityDataDeletionMutation.mutate(entityId),
       isMakingDeleteRequest:

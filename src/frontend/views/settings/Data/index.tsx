@@ -50,7 +50,7 @@ function MetaDataSettings() {
           onSubmit={upsertConfigurationMutation.mutateAsync}
           initialValues={metaDataColumns.data}
           buttonText={META_DATA_CRUD_CONFIG.FORM_LANG.UPSERT}
-          icon="save"
+          systemIcon="Save"
           fields={{
             createdAt: {
               type: "text",
@@ -84,7 +84,7 @@ function DateSettings() {
         {
           _type: "normal",
           action: "https://date-fns.org/docs/format",
-          icon: "help",
+          systemIcon: "Help",
           label: "Using https://date-fns.org/docs/format",
         },
       ]}
@@ -107,7 +107,7 @@ function DateSettings() {
           }}
           initialValues={{ format: defaultDateFormat.data }}
           buttonText={DATE_FORMAT_CRUD_CONFIG.FORM_LANG.UPSERT}
-          icon="save"
+          systemIcon="Save"
           fields={{
             format: {
               type: "text",

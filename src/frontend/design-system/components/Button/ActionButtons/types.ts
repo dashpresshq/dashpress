@@ -1,4 +1,4 @@
-import { ButtonIconTypes } from "../../Button/constants";
+import { SystemIconsKeys } from "shared/constants/Icons";
 
 export type IActionButton =
   | {
@@ -6,7 +6,7 @@ export type IActionButton =
       action: string | (() => void);
       label: string;
       isMakingActionRequest?: boolean;
-      icon: ButtonIconTypes;
+      systemIcon: SystemIconsKeys;
       order?: number;
     }
   | {

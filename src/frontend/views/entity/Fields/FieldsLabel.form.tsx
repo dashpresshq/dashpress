@@ -58,7 +58,7 @@ export function FieldsLabelForm({
             text={crudConfig.FORM_LANG.UPSERT}
             isMakingRequest={submitting}
             disabled={pristine}
-            icon="save"
+            systemIcon="Save"
           />
         </form>
       )}

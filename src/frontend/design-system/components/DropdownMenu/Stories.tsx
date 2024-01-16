@@ -1,7 +1,6 @@
 /* eslint-disable react/function-component-definition */
 import React from "react";
 import { Story } from "@storybook/react";
-import { Minus, Plus, Save } from "react-feather";
 import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 import { DropDownMenu, IProps } from ".";
 
@@ -13,21 +12,21 @@ export default {
       {
         id: "menu-item-1",
         label: "Menu Item 1",
-        IconComponent: Save,
+        systemIcon: "Save",
         onClick: () => {},
       },
       {
         id: "menu-item-2",
         label: "Menu Item 2",
         description: "Hello There, Lorem Ipsum, Dolor Amet",
-        IconComponent: Plus,
+        systemIcon: "Plus",
         onClick: () => {},
       },
       {
         id: "menu-item-3",
         label: "Menu Item 3",
         description: "Hello There, Lorem Ipsum, Dolor Amet",
-        IconComponent: Minus,
+        systemIcon: "Minus",
         onClick: () => {},
       },
     ],
@@ -61,7 +60,7 @@ SingleAction.args = {
     {
       id: "menu-item-1",
       label: "Menu Item 1",
-      IconComponent: Save,
+      systemIcon: "Save",
       onClick: () => {},
     },
   ],
@@ -73,21 +72,21 @@ OrderItems.args = {
     {
       id: "menu-item-2",
       label: "Menu Item 2",
-      IconComponent: Save,
+      systemIcon: "Save",
       onClick: () => {},
       order: 2,
     },
     {
       id: "menu-item-1",
       label: "Menu Item 1",
-      IconComponent: Save,
+      systemIcon: "Save",
       onClick: () => {},
       order: 1,
     },
     {
       id: "menu-item-3",
       label: "Menu Item 3",
-      IconComponent: Save,
+      systemIcon: "Save",
       onClick: () => {},
       order: 3,
     },

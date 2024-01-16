@@ -45,7 +45,7 @@ export function SystemSettings() {
           {
             _type: "normal",
             action: () => setIsDocOpen(true),
-            icon: "help",
+            systemIcon: "Help",
             label: DOCUMENTATION_LABEL.CONCEPT(DOCS_TITLE),
           },
         ]}
@@ -58,7 +58,7 @@ export function SystemSettings() {
           <SchemaForm<IBaseSystemSettings>
             onSubmit={upsertConfigurationMutation.mutateAsync}
             initialValues={systemSettings.data}
-            icon="save"
+            systemIcon="Save"
             buttonText={CRUD_CONFIG.FORM_LANG.UPSERT}
             fields={{
               tokenValidityDurationInDays: {

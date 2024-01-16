@@ -55,7 +55,7 @@ export function ToggleCrudState({
       {toggling && toggling.onToggle && (
         <FormButton
           isMakingRequest={false}
-          icon={toggling.enabled ? "check" : "square"}
+          systemIcon={toggling.enabled ? "Check" : "Square"}
           size="sm"
           isInverse
           text={() => `Enable ${ENTITY_CRUD_LABELS[crudKey]} Functionality`}

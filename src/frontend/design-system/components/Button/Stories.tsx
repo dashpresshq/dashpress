@@ -31,7 +31,7 @@ Edit.args = {
 
 export const Add = Template.bind({});
 Add.args = {
-  icon: "add",
+  systemIcon: "Plus",
   label: "Add",
   action: () => action("On Click"),
 };
@@ -66,7 +66,7 @@ Eye.args = {
 
 export const Help = Template.bind({});
 Help.args = {
-  icon: "help",
+  systemIcon: "Help",
   label: "Help",
   action: () => action("On Click"),
 };

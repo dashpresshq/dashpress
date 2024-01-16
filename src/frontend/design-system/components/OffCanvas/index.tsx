@@ -81,7 +81,7 @@ export function OffCanvas({
                 <div>
                   <SoftButton
                     justIcon
-                    icon="close"
+                    systemIcon="Close"
                     action={onClose}
                     size="sm"
                   />

@@ -52,7 +52,7 @@ export function EntityDictionSettings() {
           {
             _type: "normal",
             action: () => setIsDocOpen(true),
-            icon: "help",
+            systemIcon: "Help",
             label: DOCUMENTATION_LABEL.CONCEPT(DOCS_TITLE),
           },
         ]}
@@ -69,7 +69,7 @@ export function EntityDictionSettings() {
           <SchemaForm<AppConfigurationValueType<"entity_diction">>
             onSubmit={upsertConfigurationMutation.mutateAsync}
             initialValues={entityDiction}
-            icon="save"
+            systemIcon="Save"
             buttonText={
               MAKE_APP_CONFIGURATION_CRUD_CONFIG("entity_diction").FORM_LANG
                 .UPSERT

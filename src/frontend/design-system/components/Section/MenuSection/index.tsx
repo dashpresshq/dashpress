@@ -1,7 +1,7 @@
 import React from "react";
-import { Icon } from "react-feather";
 import styled from "styled-components";
 import { loadedDataState } from "frontend/lib/data/constants/loadedDataState";
+import { SystemIconsKeys } from "shared/constants/Icons";
 import { SHADOW_CSS, CardBody } from "../../Card";
 import { ListManager } from "../../ListManager";
 import { IListMangerItemProps } from "../../ListManager/ListManagerItem";
@@ -10,7 +10,7 @@ export interface IMenuSectionItem {
   name: string;
   order?: number;
   action: string | (() => void);
-  IconComponent?: Icon;
+  systemIcon?: SystemIconsKeys;
   disabled?: boolean;
 }
 
@@ -46,7 +46,7 @@ export function MenuSection({ menuItems, currentMenuItem }: IProps) {
               : ""
             ).includes(`${currentMenuItem}`),
             disabled: !!menuItem.disabled,
-            IconComponent: menuItem.IconComponent,
+            systemIcon: menuItem.systemIcon,
           };
           return props;
         }}

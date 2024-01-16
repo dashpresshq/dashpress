@@ -1,7 +1,6 @@
 import { useRouteParam } from "frontend/lib/routing/useRouteParam";
 import { useRouter } from "next/router";
 import { ReactNode } from "react";
-import { Book, UploadCloud, Zap, ZapOff } from "react-feather";
 import { ContentLayout } from "frontend/design-system/components/Section/SectionDivider";
 import { SectionBox } from "frontend/design-system/components/Section/SectionBox";
 import { ListManager } from "frontend/design-system/components/ListManager";
@@ -42,7 +41,7 @@ export function BaseActionsLayout({ children }: IProps) {
                 const isActive = activeIntegrations.data.includes(menuItem.key);
                 const props: IListMangerItemProps = {
                   label: menuItem.title,
-                  IconComponent: isActive ? Zap : ZapOff,
+                  systemIcon: isActive ? "Zap" : "ZapOff",
                   active: menuItem.key === currentKey,
                   subtle: !isActive,
                   action: NAVIGATION_LINKS.INTEGRATIONS.ACTIONS(menuItem.key),
@@ -58,7 +57,7 @@ export function BaseActionsLayout({ children }: IProps) {
               {
                 action: NAVIGATION_LINKS.INTEGRATIONS.STORAGE,
                 name: STORAGE_INTEGRATIONS_CRUD_CONFIG.TEXT_LANG.TITLE,
-                IconComponent: UploadCloud,
+                systemIcon: "Upload",
               },
             ]}
             currentMenuItem={router.asPath.split("?")[0]}
@@ -69,7 +68,7 @@ export function BaseActionsLayout({ children }: IProps) {
               {
                 action: NAVIGATION_LINKS.INTEGRATIONS.VARIABLES,
                 name: "Variables",
-                IconComponent: Book,
+                systemIcon: "Book",
               },
             ]}
             currentMenuItem={router.asPath.split("?")[0]}

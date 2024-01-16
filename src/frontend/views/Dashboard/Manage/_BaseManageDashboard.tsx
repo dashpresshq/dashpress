@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { Check, Plus } from "react-feather";
 import { USER_PERMISSIONS } from "shared/constants/user";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import SortableList, { SortableItem } from "react-easy-sort";
@@ -57,7 +56,7 @@ export function BaseManageDashboard({ dashboardId, doneLink, title }: IProps) {
         {
           id: "done",
           label: "Done",
-          IconComponent: Check,
+          systemIcon: "Check",
           onClick: () => router.replace(doneLink),
         },
       ]}
@@ -65,7 +64,7 @@ export function BaseManageDashboard({ dashboardId, doneLink, title }: IProps) {
         {
           id: "new",
           label: DASHBOARD_WIDGETS_CRUD_CONFIG.TEXT_LANG.CREATE,
-          IconComponent: Plus,
+          systemIcon: "Plus",
           onClick: () =>
             router.push(NAVIGATION_LINKS.DASHBOARD.WIDGET.CREATE(dashboardId)),
         },

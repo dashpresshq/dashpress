@@ -34,7 +34,7 @@ export function ActionSettingsView({
           fields={integrationDetail.configurationSchema}
           onSubmit={activateIntegrationMutation.mutateAsync}
           initialValues={{}}
-          icon="no-icon"
+          systemIcon="Unlock"
           buttonText={(isSubmitting) =>
             isSubmitting
               ? `Activating ${integrationDetail.title}`

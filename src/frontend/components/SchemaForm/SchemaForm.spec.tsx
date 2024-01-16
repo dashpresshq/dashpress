@@ -64,7 +64,7 @@ describe("<SchemaForm />", () => {
         <SchemaForm<IAccount>
           onSubmit={mockOnSubmit}
           buttonText={buttonText}
-          icon="save"
+          systemIcon="Save"
           fields={BASE_FIELDS}
         />
       </ApplicationRoot>
@@ -90,7 +90,7 @@ describe("<SchemaForm />", () => {
         <SchemaForm<IAccount>
           onSubmit={mockOnSubmit}
           buttonText={buttonText}
-          icon="save"
+          systemIcon="Save"
           fields={BASE_FIELDS}
           resetForm
         />
@@ -114,7 +114,7 @@ describe("<SchemaForm />", () => {
         <SchemaForm<IAccount>
           onSubmit={mockOnSubmit}
           buttonText={buttonText}
-          icon="save"
+          systemIcon="Save"
           fields={BASE_FIELDS}
           formExtension={{
             beforeSubmit: "",
@@ -140,7 +140,7 @@ describe("<SchemaForm />", () => {
         <SchemaForm<IAccount>
           onSubmit={mockOnSubmit}
           buttonText={buttonText}
-          icon="save"
+          systemIcon="Save"
           fields={BASE_FIELDS}
           action="custom-action"
           formExtension={{
@@ -169,7 +169,7 @@ describe("<SchemaForm />", () => {
         <SchemaForm<IAccount>
           onSubmit={mockOnSubmit}
           buttonText={buttonText}
-          icon="save"
+          systemIcon="Save"
           fields={BASE_FIELDS}
           formExtension={{
             beforeSubmit: "sm ks ks dsldm sl dm",
@@ -195,7 +195,7 @@ describe("<SchemaForm />", () => {
         <SchemaForm<IAccount>
           onSubmit={mockOnSubmit}
           buttonText={buttonText}
-          icon="save"
+          systemIcon="Save"
           fields={BASE_FIELDS}
           action="custom-action"
           formExtension={{
@@ -223,7 +223,7 @@ describe("<SchemaForm />", () => {
         <SchemaForm<IAccount>
           onSubmit={mockOnSubmit}
           buttonText={buttonText}
-          icon="save"
+          systemIcon="Save"
           fields={BASE_FIELDS}
           action="edit"
           initialValues={{
@@ -259,7 +259,7 @@ describe("<SchemaForm />", () => {
         <SchemaForm<IAccount>
           onSubmit={mockOnSubmit}
           buttonText={buttonText}
-          icon="save"
+          systemIcon="Save"
           fields={{
             ...BASE_FIELDS,
           }}
@@ -290,7 +290,7 @@ describe("<SchemaForm />", () => {
         <SchemaForm<IAccount>
           onSubmit={mockOnSubmit}
           buttonText={buttonText}
-          icon="save"
+          systemIcon="Save"
           fields={{
             ...BASE_FIELDS,
           }}
@@ -321,7 +321,7 @@ describe("<SchemaForm />", () => {
         <SchemaForm<IAccount>
           onSubmit={mockOnSubmit}
           buttonText={buttonText}
-          icon="save"
+          systemIcon="Save"
           fields={{
             ...BASE_FIELDS,
           }}
@@ -353,7 +353,7 @@ describe("<SchemaForm />", () => {
         <SchemaForm<IAccount>
           onSubmit={mockOnSubmit}
           buttonText={buttonText}
-          icon="save"
+          systemIcon="Save"
           fields={{
             ...BASE_FIELDS,
           }}
@@ -395,7 +395,7 @@ describe("<SchemaForm />", () => {
         <SchemaForm<{ name: string }>
           onSubmit={mockOnSubmit}
           buttonText={buttonText}
-          icon="save"
+          systemIcon="Save"
           fields={{
             name: {
               type: "text",
@@ -424,7 +424,7 @@ describe("<SchemaForm />", () => {
         <SchemaForm<{ hello: string }>
           onSubmit={mockOnSubmit}
           buttonText={buttonText}
-          icon="save"
+          systemIcon="Save"
           fields={{
             ...BASE_FIELDS,
             hello: {
@@ -447,7 +447,7 @@ describe("<SchemaForm />", () => {
         <SchemaForm<{ name: string }>
           onSubmit={mockOnSubmit}
           buttonText={buttonText}
-          icon="save"
+          systemIcon="Save"
           fields={{
             name: {
               type: "text",
@@ -473,7 +473,7 @@ describe("<SchemaForm />", () => {
           onSubmit={jest.fn()}
           onChange={onChangeMock}
           buttonText={buttonText}
-          icon="save"
+          systemIcon="Save"
           fields={{
             ...BASE_FIELDS,
           }}

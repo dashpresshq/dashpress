@@ -72,7 +72,7 @@ export function GeneralStorageSettings() {
           MAKE_APP_CONFIGURATION_CRUD_CONFIG("file_upload_settings").FORM_LANG
             .UPSERT
         }
-        icon="save"
+        systemIcon="Save"
       />
     </ViewStateMachine>
   );

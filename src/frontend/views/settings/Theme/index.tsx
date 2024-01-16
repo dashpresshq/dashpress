@@ -64,7 +64,7 @@ export function ThemeSettings() {
               ]);
             }}
             initialValues={{ ...themeColor.data, theme: userPreference.data }}
-            icon="save"
+            systemIcon="Save"
             buttonText={CRUD_CONFIG.FORM_LANG.UPSERT}
             fields={{
               primary: {

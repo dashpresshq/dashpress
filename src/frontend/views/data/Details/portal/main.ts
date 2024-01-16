@@ -17,12 +17,14 @@ export const usePortalActionButtons = ({
   entity,
   entityId,
   baseActionButtons,
+  from,
 }: {
   entity: string;
   entityId: string;
   baseActionButtons: IActionButton[];
+  from: "details" | "table-inline";
 }): IActionButton[] => {
-  noop(entity, entityId);
+  noop(entity, entityId, from);
   return baseActionButtons;
 };
 

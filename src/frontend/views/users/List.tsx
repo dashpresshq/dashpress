@@ -1,6 +1,5 @@
 import React from "react";
 import { AppLayout } from "frontend/_layouts/app";
-import { UserPlus } from "react-feather";
 import { useRouter } from "next/router";
 import { roleLabel, USER_PERMISSIONS } from "shared/constants/user";
 import {
@@ -55,7 +54,7 @@ export function ListUsers() {
             action={NAVIGATION_LINKS.USERS.DETAILS(username)}
             label="Edit"
             justIcon
-            icon="edit"
+            systemIcon="Edit"
           />
           <DeleteButton
             onDelete={() => userDeletionMutation.mutateAsync(username)}
@@ -118,8 +117,8 @@ export function ListUsers() {
       actionItems={[
         {
           id: "add",
+          systemIcon: "UserPlus",
           label: ADMIN_USERS_CRUD_CONFIG.TEXT_LANG.CREATE,
-          IconComponent: UserPlus,
           onClick: () => {
             router.push(NAVIGATION_LINKS.USERS.CREATE);
           },

@@ -15,7 +15,7 @@ import {
 import { useMemo } from "react";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { DataStateKeys, DataStates } from "frontend/lib/data/types";
-import { ButtonIconTypes } from "frontend/design-system/components/Button/constants";
+import { SystemIconsKeys } from "shared/constants/Icons";
 import { buildAppliedSchemaFormConfig } from "./buildAppliedSchemaFormConfig";
 import { useEntityViewStateMachine } from "./hooks/useEntityViewStateMachine";
 import { usePortalExtendEntityFormConfig } from "./portal";
@@ -29,7 +29,7 @@ type IProps = {
   onSubmit: (data: Record<string, string>) => Promise<void>;
   resetForm?: true;
   buttonText: (submitting: boolean) => string;
-  icon: ButtonIconTypes;
+  systemIcon: SystemIconsKeys;
 };
 
 export function BaseEntityForm({
@@ -37,7 +37,7 @@ export function BaseEntityForm({
   initialValuesData,
   crudAction,
   allOptional,
-  icon,
+  systemIcon,
   resetForm,
   buttonText,
   onSubmit,
@@ -145,7 +145,7 @@ export function BaseEntityForm({
         resetForm={resetForm}
         onSubmit={onSubmit}
         action={crudAction}
-        icon={icon}
+        systemIcon={systemIcon}
         initialValues={fieldsInitialValues}
         fields={
           extendEntityFormConfig === "loading"

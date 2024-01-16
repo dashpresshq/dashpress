@@ -1,17 +1,15 @@
 import React, { useId } from "react";
-import {
-  ChevronRight as ChevronRightIcon,
-  Icon as IconType,
-} from "react-feather";
+import { ChevronRight as ChevronRightIcon } from "react-feather";
 import Link from "next/link";
 import styled, { css } from "styled-components";
 import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
 import { Stack } from "frontend/design-system/primitives/Stack";
 import { SortableKnob } from "react-easy-sort";
 import { GrabIcon } from "frontend/design-system/Icons/Grab";
+import { SystemIconsKeys } from "shared/constants/Icons";
+import { SystemIcon } from "frontend/design-system/Icons/System";
 import { FormButton } from "../../Button/FormButton";
 import { FormSwitch } from "../../Form/FormSwitch";
-import { ButtonIconTypes } from "../../Button/constants";
 
 const ChevronRight = styled(ChevronRightIcon)<{ $active?: boolean }>`
   width: 14px;
@@ -108,16 +106,6 @@ const SubLabel = styled.p<{ $active?: boolean }>`
   line-height: 0.6;
 `;
 
-const Icon = styled.span<{ $active?: boolean; $subtle?: boolean }>`
-  color: ${(props) =>
-    // eslint-disable-next-line no-nested-ternary
-    props.$active
-      ? USE_ROOT_COLOR("text-on-primary")
-      : props.$subtle
-      ? USE_ROOT_COLOR("muted-text")
-      : USE_ROOT_COLOR("main-text")};
-`;
-
 const Label = styled.label<{ $active?: boolean; $subtle?: boolean }>`
   cursor: pointer;
   color: ${(props) =>
@@ -135,7 +123,7 @@ export interface IListMangerItemProps {
   secondaryAction?: () => void;
   size?: "xs";
   subLabel?: string;
-  IconComponent?: IconType;
+  systemIcon?: SystemIconsKeys;
   disabled?: boolean;
   sortable?: boolean;
   subtle?: boolean;
@@ -147,7 +135,7 @@ export interface IListMangerItemProps {
   actionButtons?: {
     isInverse: boolean;
     label: string;
-    icon?: ButtonIconTypes;
+    systemIcon: SystemIconsKeys;
     onClick: () => void;
     isMakingRequest?: boolean;
     disabled?: boolean;
@@ -156,7 +144,7 @@ export interface IListMangerItemProps {
 
 export function ListManagerItem({
   label,
-  IconComponent,
+  systemIcon,
   disabled,
   subLabel,
   active,
@@ -177,12 +165,14 @@ export function ListManagerItem({
             <GrabIcon />
           </SortableKnob>
         </div>
-        {IconComponent ? (
-          <Icon
-            as={IconComponent}
-            $active={active}
-            $subtle={subtle}
-            size="16"
+        {systemIcon ? (
+          <SystemIcon
+            size={16}
+            icon={systemIcon}
+            color={
+              // eslint-disable-next-line no-nested-ternary
+              active ? "text-on-primary" : subtle ? "muted-text" : "main-text"
+            }
           />
         ) : null}{" "}
         <div>
@@ -200,15 +190,15 @@ export function ListManagerItem({
               isInverse,
               onClick: onClick$1,
               isMakingRequest,
-              icon,
               disabled: disabled$1,
+              systemIcon: systemIcon$1,
             }) => (
               <FormButton
                 key={buttonLabel}
                 text={() => buttonLabel}
                 size="xs"
+                systemIcon={systemIcon$1}
                 disabled={disabled$1}
-                icon={icon || "no-icon"}
                 isMakingRequest={!!isMakingRequest}
                 isInverse={isInverse}
                 onClick={(event) => {

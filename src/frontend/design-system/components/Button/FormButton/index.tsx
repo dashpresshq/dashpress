@@ -1,16 +1,17 @@
 import React from "react";
-import { Icon, Loader } from "react-feather";
+import { Loader } from "react-feather";
 import styled from "styled-components";
 import { Stack } from "frontend/design-system/primitives/Stack";
 import { useThemeColorShade } from "frontend/design-system/theme/useTheme";
 import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
+import { SystemIconsKeys } from "shared/constants/Icons";
+import { SystemIcon } from "frontend/design-system/Icons/System";
 import { OutlineButton, IStyledBaseButton, StyledBaseButton } from "../Button";
 import { Spin } from "../../_/Spin";
-import { ICON_MAP, ButtonIconTypes } from "../constants";
 
 interface IFormButton extends IStyledBaseButton {
   text: (isMakingRequest: boolean) => string;
-  icon: ButtonIconTypes | "no-icon";
+  systemIcon: SystemIconsKeys;
   isMakingRequest: boolean;
   onClick?: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
   disabled?: boolean;
@@ -20,24 +21,25 @@ interface IFormButton extends IStyledBaseButton {
 export const actionButtonIsMakingRequest = (
   isMakingRequest: boolean,
   text: (isMakingRequest: boolean) => string,
-  IconCmp: Icon | null
+  systemIcon: SystemIconsKeys
 ) => {
   const iconProps = {
-    size: 14,
-    style: {
-      marginRight: "4px",
-    },
+    size: 16,
   };
   return isMakingRequest ? (
-    <>
+    <Stack align="center">
       <Spin as={Loader} {...iconProps} />
       <span>{text(true)}</span>
-    </>
+    </Stack>
   ) : (
-    <>
-      {IconCmp ? <IconCmp {...iconProps} /> : null}
+    <Stack align="center">
+      <SystemIcon
+        icon={systemIcon}
+        {...iconProps}
+        style={{ verticalAlign: "top" }}
+      />
       <span>{text(false)}</span>
-    </>
+    </Stack>
   );
 };
 
@@ -60,7 +62,7 @@ export function FormButton({
   onClick,
   isInverse,
   size,
-  icon,
+  systemIcon,
   ...rest
 }: IFormButton) {
   const colorShade = useThemeColorShade();
@@ -74,9 +76,11 @@ export function FormButton({
     size,
   };
 
-  const IconCmp = icon === "no-icon" ? null : ICON_MAP[icon];
-
-  const toRender = actionButtonIsMakingRequest(isMakingRequest, text, IconCmp);
+  const toRender = actionButtonIsMakingRequest(
+    isMakingRequest,
+    text,
+    systemIcon
+  );
 
   return (
     <Stack justify="end">

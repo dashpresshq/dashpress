@@ -45,6 +45,7 @@ export function EntityDetails() {
     entity,
     entityId,
     baseActionButtons: actionButtons,
+    from: "details",
   });
 
   return (

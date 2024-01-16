@@ -42,7 +42,7 @@ export function PasswordToReveal({
         onSubmit={async ({ password }: { password: string }) => {
           passwordStore.setPassword(password);
         }}
-        icon="eye"
+        systemIcon="Unlock"
         buttonText={() =>
           isLoading ? `Revealing ${label}` : `Reveal ${label}`
         }

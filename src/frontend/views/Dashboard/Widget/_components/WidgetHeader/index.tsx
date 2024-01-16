@@ -46,7 +46,7 @@ export function WidgetHeader({
           <>
             <SoftButton
               action={() => setting.setId()}
-              icon="edit"
+              systemIcon="Edit"
               label="Edit Widget"
               justIcon
             />
@@ -64,6 +64,7 @@ export function WidgetHeader({
                 menuItems={DASHBOARD_RELATIVE_DAYS.map(({ label, value }) => ({
                   id: label,
                   label: `${label}`,
+                  systemIcon: null,
                   onClick: () => {
                     setWidgetRelativeDate({
                       widgetId,
@@ -77,7 +78,7 @@ export function WidgetHeader({
               <SoftButton
                 action={link}
                 label="View"
-                icon="right"
+                systemIcon="Right"
                 disabled={isPreview}
                 justIcon
               />

@@ -56,7 +56,7 @@ export function EntityPresentationScriptSettings() {
           {
             _type: "normal",
             action: () => setIsDocOpen(true),
-            icon: "help",
+            systemIcon: "Help",
             label: DOCUMENTATION_LABEL.CONCEPT(DOCS_TITLE),
           },
         ]}
@@ -101,7 +101,7 @@ if($.field === "commentsCount"){
               }
             }}
             initialValues={entityPresentationScript.data}
-            icon="save"
+            systemIcon="Save"
             buttonText={
               MAKE_APP_CONFIGURATION_CRUD_CONFIG("entity_presentation_script")
                 .FORM_LANG.UPSERT

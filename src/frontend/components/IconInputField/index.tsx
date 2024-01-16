@@ -21,6 +21,7 @@ export function IconInputField({ value }: { value: string }) {
             input={input}
             rightActions={[
               {
+                systemIcon: "ToggleLeft",
                 label: "Use SVG",
                 action: () => input.onChange(""),
               },
@@ -36,6 +37,7 @@ export function IconInputField({ value }: { value: string }) {
             input={input}
             rightActions={[
               {
+                systemIcon: "ToggleRight",
                 label: "Use Icon",
                 action: () => input.onChange(SystemIconsList[0]),
               },

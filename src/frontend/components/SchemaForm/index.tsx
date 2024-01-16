@@ -8,10 +8,10 @@ import { ToastService } from "frontend/lib/toast";
 import { resetFormValues } from "frontend/lib/form/utils";
 import { FormButton } from "frontend/design-system/components/Button/FormButton";
 import { userFriendlyCase } from "shared/lib/strings/friendly-case";
-import { ButtonIconTypes } from "frontend/design-system/components/Button/constants";
 import styled from "styled-components";
 import { gridItem, gridRoot } from "frontend/design-system/constants/grid";
 import { GridSpanSizes } from "shared/types/ui";
+import { SystemIconsKeys } from "shared/constants/Icons";
 import { RenderFormInput } from "./_RenderFormInput";
 import { IFormExtension } from "./types";
 import { runFormBeforeSubmit, runFormFieldState } from "./form-run";
@@ -23,7 +23,7 @@ interface IProps<T> {
   initialValues?: Partial<T>;
   buttonText?: (submitting: boolean) => string;
   action?: string;
-  icon: ButtonIconTypes | "no-icon";
+  systemIcon: SystemIconsKeys;
   onChange?: (data: T) => void;
   resetForm?: true;
   formExtension?: Partial<IFormExtension>;
@@ -46,7 +46,7 @@ export function SchemaForm<T extends Record<string, unknown>>({
   onChange,
   buttonText,
   initialValues,
-  icon,
+  systemIcon,
   action,
   formExtension,
   resetForm,
@@ -138,7 +138,7 @@ export function SchemaForm<T extends Record<string, unknown>>({
                 text={buttonText}
                 isMakingRequest={submitting}
                 disabled={pristine}
-                icon={icon === "no-icon" ? undefined : icon}
+                systemIcon={systemIcon}
               />
             )}
           </form>

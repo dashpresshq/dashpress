@@ -55,7 +55,7 @@ export function Configure({ activationId, integrationDetail }: IProps) {
         onSubmit={updateActivatedIntegrationMutation.mutateAsync}
         initialValues={activationConfiguration.data || {}}
         buttonText={ACTION_INTEGRATIONS_CRUD_CONFIG.FORM_LANG.UPDATE}
-        icon="save"
+        systemIcon="Save"
       />
     </>
   );

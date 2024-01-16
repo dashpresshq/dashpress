@@ -73,7 +73,7 @@ export function MutatePermission({
           <Stack justify="space-between" align="flex-start">
             <FormButton
               isMakingRequest={false}
-              icon={isOverAchingPermissionSelected ? "check" : "square"}
+              systemIcon={isOverAchingPermissionSelected ? "Check" : "Square"}
               size="sm"
               isInverse
               text={() => userFriendlyCase(overAchingPermission)}

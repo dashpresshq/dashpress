@@ -6,6 +6,8 @@ import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
 import { Stack } from "frontend/design-system/primitives/Stack";
 import { Typo } from "frontend/design-system/primitives/Typo";
 import { Spacer } from "frontend/design-system/primitives/Spacer";
+import { SystemIconsKeys } from "shared/constants/Icons";
+import { SystemIcon } from "frontend/design-system/Icons/System";
 
 const DirectionImplementation: Record<
   "up" | "down" | "side",
@@ -32,11 +34,10 @@ const DirectionImplementation: Record<
   },
 };
 
-const IconRoot = styled.div<{ color: string }>`
-  background: ${(props) => props.color}2A;
-  color: ${(props) => props.color};
-  border: 1px solid ${(props) => props.color};
-  width: 40px;
+const IconRoot = styled(SystemIcon)<{ $color: string }>`
+  background: ${(props) => props.$color}2A;
+  color: ${(props) => props.$color};
+  border: 1px solid ${(props) => props.$color};
   min-width: 40px;
   border-radius: 40px;
   padding: 8px;
@@ -86,9 +87,10 @@ export function SummaryWidget({
   return (
     <Stack spacing={18} align="center">
       <IconRoot
-        color={color}
-        aria-label={`${title} Icon`}
-        dangerouslySetInnerHTML={{ __html: icon }}
+        $color={color}
+        icon={icon as SystemIconsKeys}
+        size={40}
+        label={`${title} Icon`}
       />
       <div style={{ width: "100%" }}>
         <Spacer size="xs" />

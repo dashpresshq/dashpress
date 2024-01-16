@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Frown as Droplet } from "react-feather";
+import { Frown } from "react-feather";
 import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
 import { Typo } from "frontend/design-system/primitives/Typo";
 import { Spacer } from "frontend/design-system/primitives/Spacer";
@@ -18,7 +18,7 @@ const Root = styled.div`
 export function EmptyWrapper({ text, createNew }: IEmptyWrapperProps) {
   return (
     <Root>
-      <Droplet size={50} color={USE_ROOT_COLOR("muted-text")} />
+      <Frown size={50} color={USE_ROOT_COLOR("muted-text")} />
       <Spacer size="xxl" />
       <Typo.MD color="muted"> {text} </Typo.MD>
       {createNew && (
@@ -26,7 +26,7 @@ export function EmptyWrapper({ text, createNew }: IEmptyWrapperProps) {
           <Spacer size="xxl" />
           <SoftButton
             action={createNew.action}
-            icon="add"
+            systemIcon="Plus"
             label={createNew.label}
           />
         </>

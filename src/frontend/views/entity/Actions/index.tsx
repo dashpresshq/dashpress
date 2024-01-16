@@ -30,13 +30,13 @@ export function EntityFormActionsSettings() {
           {
             _type: "normal",
             action: NAVIGATION_LINKS.SETTINGS.VARIABLES,
-            icon: "settings",
+            systemIcon: "Help",
             label: "Manage Variables",
           },
           {
             _type: "normal",
             action: () => setIsDocOpen(true),
-            icon: "help",
+            systemIcon: "Help",
             label: DOCUMENTATION_LABEL.CONCEPT(DOCS_TITLE),
           },
         ]}

@@ -188,7 +188,7 @@ export function FieldSelectionCanvas({
                 <Stack justify="space-between">
                   {ManagableEntities.includes(entityType) && (
                     <SoftButton
-                      icon="add"
+                      systemIcon="Plus"
                       label="Add new option"
                       size={null}
                       action={() => {
@@ -206,7 +206,7 @@ export function FieldSelectionCanvas({
                   )}
 
                   <FormButton
-                    icon="save"
+                    systemIcon="Save"
                     isMakingRequest={false}
                     text={CRUD_CONFIG.FORM_LANG.UPSERT}
                     disabled={pristine}

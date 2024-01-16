@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import { Search } from "react-feather";
 import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
+import { SystemIcon } from "frontend/design-system/Icons/System";
 import { Input } from "../Styles";
 import { StyledBaseButton } from "../../Button/Button";
 
@@ -62,7 +62,7 @@ export function FormSearch({ onChange }: IProps) {
       />
       <InputGroupPrepend>
         <ButtonSearch type="button">
-          <Search size={18} />
+          <SystemIcon icon="Search" size={18} />
         </ButtonSearch>
       </InputGroupPrepend>
     </InputGroup>

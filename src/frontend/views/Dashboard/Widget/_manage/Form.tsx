@@ -246,6 +246,7 @@ export function DashboardWidgetForm({
                           input={input}
                           rightActions={[
                             {
+                              systemIcon: "Help",
                               action: () => {
                                 setIsDocOpen(true);
                               },
@@ -311,7 +312,7 @@ export function DashboardWidgetForm({
                             disabled={!values.script}
                             type="button"
                             isMakingActionRequest={runWidgetScript.isLoading}
-                            icon="eye"
+                            systemIcon="Eye"
                             size={null}
                             label="Test Widget Script"
                           />
@@ -323,7 +324,7 @@ export function DashboardWidgetForm({
                               ? DASHBOARD_WIDGETS_CRUD_CONFIG.FORM_LANG.CREATE
                               : DASHBOARD_WIDGETS_CRUD_CONFIG.FORM_LANG.UPDATE
                           }
-                          icon={action === "create" ? "add" : "save"}
+                          systemIcon={action === "create" ? "Plus" : "Save"}
                           isMakingRequest={submitting}
                           disabled={pristine}
                         />

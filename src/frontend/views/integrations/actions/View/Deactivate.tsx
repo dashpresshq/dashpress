@@ -58,7 +58,7 @@ export function Deactivate({ integrationDetail, activationId }: IProps) {
             ? `Deactivating ${integrationDetail.title}`
             : `Deactivate ${integrationDetail.title}`
         }
-        icon="no-icon"
+        systemIcon="Ban"
       />
     </>
   );

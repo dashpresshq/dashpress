@@ -56,7 +56,7 @@ export function BaseActionInstances({ entity }: { entity: string }) {
           action={() => setCurrentInstanceItem(row.original.instanceId)}
           label="Edit"
           justIcon
-          icon="edit"
+          systemIcon="Edit"
         />
         <DeleteButton
           onDelete={() =>
@@ -125,7 +125,7 @@ export function BaseActionInstances({ entity }: { entity: string }) {
         <Stack justify="end">
           <SoftButton
             action={() => setCurrentInstanceItem(NEW_ACTION_ITEM)}
-            icon="add"
+            systemIcon="Plus"
             label={ADMIN_ACTION_INSTANCES_CRUD_CONFIG.TEXT_LANG.CREATE}
           />
         </Stack>

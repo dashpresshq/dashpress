@@ -7,7 +7,6 @@ import {
   SystemLinks,
 } from "shared/types/menu";
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
-import { systemIconToSVG } from "shared/constants/Icons";
 import { ChevronRight } from "react-feather";
 import { SYSTEM_COLORS } from "frontend/design-system/theme/system";
 import { Typo } from "frontend/design-system/primitives/Typo";
@@ -16,6 +15,7 @@ import { Stack } from "frontend/design-system/primitives/Stack";
 import { useThemeColorShade } from "frontend/design-system/theme/useTheme";
 import { useNavigationStack } from "frontend/lib/routing/useNavigationStack";
 import { ActionIntegrations } from "shared/types/actions";
+import { SystemIcon } from "frontend/design-system/Icons/System";
 import { PORTAL_SYSTEM_LINK_CONFIG_LINKS } from "./portal";
 
 const SYSTEM_LINKS_CONFIG_MAP: Record<
@@ -71,16 +71,6 @@ const LeftSideNavMenuListAnchor = styled.a<{
   }
 `;
 
-const IconRoot = styled.span<{ $isFullWidth: boolean }>`
-  color: ${SYSTEM_COLORS.white};
-  width: 20px;
-  height: 20px;
-  display: inline-block;
-  svg {
-    vertical-align: initial;
-  }
-`;
-
 const LeftSideNavMenu = styled.ul<{}>`
   padding: 0;
   margin-bottom: 0;
@@ -88,7 +78,7 @@ const LeftSideNavMenu = styled.ul<{}>`
 
 const NavLabel = styled(Typo.XS)<{ $isFullWidth: boolean }>`
   color: ${SYSTEM_COLORS.white};
-  margin-left: 20px;
+  margin-left: 8px;
   transition: all 0.3s;
   ${(props) =>
     !props.$isFullWidth &&
@@ -173,13 +163,8 @@ export function RenderNavigation({
       {navigation.map(({ title, icon, type, link, id, children }) => {
         const isActive = activeItem[depth] === id;
 
-        const iconComponent = (
-          <IconRoot
-            $isFullWidth={isFullWidth}
-            dangerouslySetInnerHTML={{
-              __html: systemIconToSVG(icon, isActive ? 2 : 1),
-            }}
-          />
+        const menuIcon = depth === 1 && (
+          <SystemIcon strokeWidth={isActive ? 2 : 1} icon={icon} size={20} />
         );
 
         return (
@@ -200,7 +185,7 @@ export function RenderNavigation({
                     setActiveItem(depth, isActive ? "" : id);
                   }}
                 >
-                  {iconComponent}
+                  {menuIcon}
                   {isFullWidth && (
                     <Stack justify="space-between" spacing={0} align="center">
                       <NavLabel ellipsis $isFullWidth={isFullWidth}>
@@ -241,7 +226,7 @@ export function RenderNavigation({
                   }
                   hoverColor={getBackgroundColor("primary-color", 45)}
                 >
-                  {icon && iconComponent}
+                  {icon && menuIcon}
                   <NavLabel ellipsis $isFullWidth={isFullWidth}>
                     {title}
                   </NavLabel>

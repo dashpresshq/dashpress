@@ -9,7 +9,6 @@ import {
   IPageDetails,
   useSetCurrentActionItems,
 } from "frontend/lib/routing/usePageDetails";
-import { HelpCircle, Plus } from "react-feather";
 import { USER_PERMISSIONS } from "shared/constants/user";
 import { usePasswordStore } from "frontend/views/integrations/password.store";
 import { useUserHasPermission } from "frontend/hooks/auth/user.store";
@@ -86,7 +85,7 @@ export function ManageCredentialGroup({
           action={() => setCurrentConfigItem(row.original.key)}
           label="Edit"
           justIcon
-          icon="edit"
+          systemIcon="Edit"
         />
         <DeleteButton
           onDelete={() =>
@@ -126,7 +125,7 @@ export function ManageCredentialGroup({
               onClick: () => {
                 setCurrentConfigItem(NEW_CONFIG_ITEM);
               },
-              IconComponent: Plus,
+              systemIcon: "Plus",
               label: CRUD_CONFIG.TEXT_LANG.CREATE,
             },
           ]
@@ -135,7 +134,7 @@ export function ManageCredentialGroup({
         {
           id: "help",
           onClick: () => setIsDocOpen(true),
-          IconComponent: HelpCircle,
+          systemIcon: "Help",
           label: DOCUMENTATION_LABEL.CONCEPT(CRUD_CONFIG.TEXT_LANG.TITLE),
         },
       ],

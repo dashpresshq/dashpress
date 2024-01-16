@@ -34,11 +34,11 @@ WithActionButtons.args = {
     {
       action: "/foo",
       label: "Add Me",
-      icon: "add",
+      systemIcon: "Plus",
     },
     {
       action: "/baz",
-      icon: "help",
+      systemIcon: "Help",
       label: "Link to help",
     },
     {
@@ -91,7 +91,7 @@ WithDeleteActionAndActionButtons.args = {
     {
       action: "/foo",
       label: "Foo",
-      icon: "add",
+      systemIcon: "Plus",
     },
     {
       action: "/bar",
@@ -126,7 +126,7 @@ EveryThing.args = {
     {
       action: "/foo",
       label: "Foo",
-      icon: "add",
+      systemIcon: "Plus",
     },
     {
       action: "/foo",

@@ -48,6 +48,7 @@ export function CredentialsSetupForm({
                     dataSourceConfig.useConnectionString
                       ? [
                           {
+                            systemIcon: "ToggleLeft",
                             action: () => {
                               setUseConnectionString(!useConnectionString);
                             },
@@ -152,7 +153,7 @@ export function CredentialsSetupForm({
               text={(isSubmitting) =>
                 isSubmitting ? "Setting Up Credentials" : "Setup Credentials"
               }
-              icon="no-icon"
+              systemIcon="LogIn"
               isMakingRequest={submitting}
               disabled={pristine}
               block

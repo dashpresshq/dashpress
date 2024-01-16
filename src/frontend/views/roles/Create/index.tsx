@@ -32,7 +32,7 @@ export function RoleCreate() {
             onSubmit={roleCreationMutation.mutateAsync}
             buttonText={ADMIN_ROLES_CRUD_CONFIG.FORM_LANG.CREATE}
             fields={BASE_ROLE_FORM_SCHEMA}
-            icon="add"
+            systemIcon="Plus"
             resetForm
           />
         </SectionBox>

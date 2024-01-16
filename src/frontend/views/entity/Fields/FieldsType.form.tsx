@@ -13,6 +13,7 @@ import {
 import { FormSelect } from "frontend/design-system/components/Form/FormSelect";
 import { FormButton } from "frontend/design-system/components/Button/FormButton";
 import { OffCanvas } from "frontend/design-system/components/OffCanvas";
+import { IFormInputRightAction } from "shared/form-schemas/types";
 import { FieldSelectionCanvas } from "./FieldsSelection";
 import { FieldValidationCanvas } from "./FieldsValidation";
 
@@ -87,8 +88,9 @@ export function FieldsTypeForm({
                 validateFields={[]}
               >
                 {(renderProps) => {
-                  let rightActions = [
+                  let rightActions: IFormInputRightAction[] = [
                     {
+                      systemIcon: "Settings",
                       label: "Configure Validation",
                       action: () => {
                         setShowFieldValidations(name);
@@ -104,6 +106,7 @@ export function FieldsTypeForm({
                   ) {
                     rightActions = [
                       {
+                        systemIcon: "Settings",
                         label: "Configure Selections",
                         action: () => {
                           setShowFieldSelection(name);
@@ -148,7 +151,7 @@ export function FieldsTypeForm({
             ))}
             <FormButton
               text={CRUD_CONFIG.FORM_LANG.UPSERT}
-              icon="save"
+              systemIcon="Save"
               isMakingRequest={submitting}
               disabled={
                 !(

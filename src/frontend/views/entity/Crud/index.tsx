@@ -191,7 +191,7 @@ export function EntityCrudSettings() {
           {
             _type: "normal",
             action: () => setIsDocOpen(true),
-            icon: "help",
+            systemIcon: "Help",
             label: DOCUMENTATION_LABEL.CONCEPT(DOCS_TITLE),
           },
         ]}

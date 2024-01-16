@@ -114,6 +114,7 @@ function DemoForm() {
               <FormInput
                 rightActions={[
                   {
+                    systemIcon: "ToggleLeft",
                     label: "Please click me",
                     action: action("right click actions"),
                   },
@@ -133,10 +134,12 @@ function DemoForm() {
               <FormInput
                 rightActions={[
                   {
+                    systemIcon: "ToggleLeft",
                     label: "Please click me",
                     action: action("right click actions"),
                   },
                   {
+                    systemIcon: "ToggleLeft",
                     label: "Please click me 2",
                     action: action("right click actions"),
                   },
@@ -332,7 +335,7 @@ function DemoForm() {
               text={(isSubmitting) =>
                 isSubmitting ? "Making Progress" : "Make Progress"
               }
-              icon="save"
+              systemIcon="Save"
               isMakingRequest
             />
             <FormButton
@@ -340,7 +343,7 @@ function DemoForm() {
                 isSubmitting ? "Doing Something" : "Do Something"
               }
               isMakingRequest={false}
-              icon="save"
+              systemIcon="Save"
             />
           </Stack>
         </form>

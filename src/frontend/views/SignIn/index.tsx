@@ -74,7 +74,7 @@ export function SignIn() {
         onSubmit={signInMutation.mutateAsync}
         initialValues={{ rememberMe: true }}
         buttonText={(isSubmitting) => (isSubmitting ? "Signing In" : "Sign In")}
-        icon="logIn"
+        systemIcon="LogIn"
         fields={AUTH_SIGNIN_FORM_SCHEMA}
       />
     </AuthLayout>

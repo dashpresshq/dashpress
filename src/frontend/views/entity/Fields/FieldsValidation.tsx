@@ -168,7 +168,7 @@ export function FieldValidationCanvas({
           <FormButton
             isMakingRequest={false}
             text={CRUD_CONFIG.FORM_LANG.UPSERT}
-            icon="save"
+            systemIcon="Save"
             disabled={pristine}
           />
         </form>

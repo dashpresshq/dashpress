@@ -1,6 +1,5 @@
 import { useCallback } from "react";
 import { AppLayout } from "frontend/_layouts/app";
-import { Plus } from "react-feather";
 import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
 import { useRouter } from "next/router";
@@ -43,8 +42,8 @@ export function ListRoles() {
           <SoftButton
             action={NAVIGATION_LINKS.ROLES.DETAILS(roleId)}
             label="Edit"
+            systemIcon="Edit"
             justIcon
-            icon="edit"
           />
           <DeleteButton
             onDelete={() => roleDeletionMutation.mutateAsync(roleId)}
@@ -79,7 +78,7 @@ export function ListRoles() {
         {
           id: "add",
           label: ADMIN_ROLES_CRUD_CONFIG.TEXT_LANG.CREATE,
-          IconComponent: Plus,
+          systemIcon: "Plus",
           onClick: () => {
             router.push(NAVIGATION_LINKS.ROLES.CREATE);
           },

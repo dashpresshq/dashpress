@@ -80,7 +80,7 @@ export function StorageCredentialsSettings() {
               storageKey: currentStorage,
             }}
             buttonText={null}
-            icon="save"
+            systemIcon="Save"
           />
           <PasswordToReveal
             label={`${STORAGE_INTEGRATIONS_CRUD_CONFIG.TEXT_LANG.TITLE} Configuration`}
@@ -107,7 +107,7 @@ export function StorageCredentialsSettings() {
             storageKey: currentStorage,
           }}
           buttonText={STORAGE_INTEGRATIONS_CRUD_CONFIG.FORM_LANG.UPSERT}
-          icon="save"
+          systemIcon="Save"
         />
       )}
     </ViewStateMachine>

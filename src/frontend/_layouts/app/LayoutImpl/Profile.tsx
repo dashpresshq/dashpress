@@ -7,6 +7,7 @@ import { SYSTEM_COLORS } from "frontend/design-system/theme/system";
 import { Typo } from "frontend/design-system/primitives/Typo";
 import { ILabelValue } from "shared/types/options";
 import { DropDownMenu } from "frontend/design-system/components/DropdownMenu";
+import { SystemIconsKeys } from "shared/constants/Icons";
 import { useConstantNavigationMenuItems } from "./portal";
 
 const ProfileRoot = styled(Stack)`
@@ -25,12 +26,14 @@ interface IProps {
   isFullWidth: boolean;
 }
 
-const constantNavigation: ILabelValue[] = [
-  {
-    label: "My Account",
-    value: NAVIGATION_LINKS.ACCOUNT.PROFILE,
-  },
-];
+const constantNavigation: Array<ILabelValue & { systemIcon: SystemIconsKeys }> =
+  [
+    {
+      label: "My Account",
+      systemIcon: "User",
+      value: NAVIGATION_LINKS.ACCOUNT.PROFILE,
+    },
+  ];
 
 export function ProfileOnNavigation({ isFullWidth }: IProps) {
   const currentUser = useAuthenticatedUserBag();
@@ -53,9 +56,10 @@ export function ProfileOnNavigation({ isFullWidth }: IProps) {
         ellipsis
         ariaLabel="Toggle Profile Menu"
         menuItems={[...constantNavigation, ...constantNavigationMenuItems].map(
-          ({ label, value }) => ({
+          ({ label, value, systemIcon }) => ({
             id: label,
             label,
+            systemIcon,
             onClick: () => router.push(value),
           })
         )}

@@ -38,7 +38,7 @@ function TabForm({ values, tableColumns, initialValues }: IProps) {
 
   const newTabButton = (
     <SoftButton
-      icon="add"
+      systemIcon="Plus"
       label="Add New Tab"
       action={() => {
         const newTab: ITableTab = {
@@ -161,7 +161,7 @@ export function EntityTableTabForm({
                   .UPSERT
               }
               disabled={pristine}
-              icon="save"
+              systemIcon="Save"
             />
             <Spacer />
             <TabForm

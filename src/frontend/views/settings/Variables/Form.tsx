@@ -46,7 +46,7 @@ export function KeyValueForm({
     <SchemaForm<IKeyValue>
       onSubmit={onSubmit}
       initialValues={initialValues}
-      icon={isCreate ? "add" : "save"}
+      systemIcon={isCreate ? "Plus" : "Save"}
       buttonText={
         isCreate
           ? INTEGRATIONS_GROUP_CRUD_CONFIG[group].crudConfig.FORM_LANG.CREATE

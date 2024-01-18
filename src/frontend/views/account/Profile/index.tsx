@@ -9,7 +9,7 @@ import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { META_USER_PERMISSIONS } from "shared/constants/user";
 import { ACCOUNT_PROFILE_CRUD_CONFIG } from "frontend/hooks/auth/constants";
 import {
-  IUpdateUserForm,
+  IUpdateProfileForm,
   UPDATE_PROFILE_FORM_SCHEMA,
 } from "shared/form-schemas/profile/update";
 import { SchemaForm } from "frontend/components/SchemaForm";
@@ -35,7 +35,7 @@ export function AccountProfile() {
           error={authenticatedUserBag.error}
           loader={<FormSkeleton schema={[FormSkeletonSchema.Input]} />}
         >
-          <SchemaForm<IUpdateUserForm>
+          <SchemaForm<IUpdateProfileForm>
             onSubmit={updateProfileMutation.mutateAsync}
             initialValues={authenticatedUserBag.data}
             buttonText={ACCOUNT_PROFILE_CRUD_CONFIG.FORM_LANG.UPSERT}

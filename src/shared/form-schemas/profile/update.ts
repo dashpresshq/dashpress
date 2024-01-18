@@ -1,10 +1,10 @@
 import { IAppliedSchemaFormConfig } from "../types";
 
-export type IUpdateUserForm = {
+export type IUpdateProfileForm = {
   name: string;
 };
 
-export const UPDATE_PROFILE_FORM_SCHEMA: IAppliedSchemaFormConfig<IUpdateUserForm> =
+export const UPDATE_PROFILE_FORM_SCHEMA: IAppliedSchemaFormConfig<IUpdateProfileForm> =
   {
     name: {
       type: "text",

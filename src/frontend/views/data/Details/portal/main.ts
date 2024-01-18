@@ -1,4 +1,4 @@
-import { IActionButton } from "frontend/design-system/components/Button/types";
+import { IGroupActionButton } from "frontend/design-system/components/Button/types";
 import { IDropDownMenuItem } from "frontend/design-system/components/DropdownMenu";
 import { noop } from "shared/lib/noop";
 
@@ -18,13 +18,15 @@ export const usePortalActionButtons = ({
   entityId,
   baseActionButtons,
   from,
+  row,
 }: {
   entity: string;
   entityId: string;
-  baseActionButtons: IActionButton[];
+  baseActionButtons: IGroupActionButton[];
   from: "details" | "table-inline";
-}): IActionButton[] => {
-  noop(entity, entityId, from);
+  row: Record<string, unknown>;
+}): IGroupActionButton[] => {
+  noop(entity, entityId, from, row);
   return baseActionButtons;
 };
 

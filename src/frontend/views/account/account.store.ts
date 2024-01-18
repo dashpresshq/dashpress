@@ -1,7 +1,7 @@
 import { AUTHENTICATED_ACCOUNT_URL } from "frontend/hooks/auth/user.store";
 import { useMutation } from "react-query";
 import { IChangePasswordForm } from "shared/form-schemas/profile/password";
-import { IUpdateUserForm } from "shared/form-schemas/profile/update";
+import { IUpdateProfileForm } from "shared/form-schemas/profile/update";
 import { ACCOUNT_PROFILE_CRUD_CONFIG } from "frontend/hooks/auth/constants";
 import { useWaitForResponseMutationOptions } from "frontend/lib/data/useMutate/useWaitForResponseMutationOptions";
 import { makeActionRequest } from "frontend/lib/data/makeRequest";
@@ -14,7 +14,7 @@ export function useUpdateProfileMutation() {
   });
 
   return useMutation(
-    async (data: IUpdateUserForm) =>
+    async (data: IUpdateProfileForm) =>
       await makeActionRequest("PATCH", AUTHENTICATED_ACCOUNT_URL, data),
     apiMutateOptions
   );

@@ -16,7 +16,7 @@ export interface ISchemaFormScriptProps<T> extends ISchemaFormScriptContext {
 
 export interface IFormInputRightAction {
   label: string;
-  action: () => void;
+  action: string | (() => void);
   systemIcon: SystemIconsKeys;
 }
 

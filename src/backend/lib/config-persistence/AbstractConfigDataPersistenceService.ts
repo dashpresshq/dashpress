@@ -30,10 +30,16 @@ export abstract class AbstractConfigDataPersistenceService<T> {
 
   protected abstract _removeItem(key: string): Promise<void>;
 
-  public async getItem(key: string) {
+  public async getItem(key: string, defaultValue: T) {
     return await cacheService.getItem(key, this._configDomain, async () => {
-      return await this._getItem(key);
+      return (await this._getItem(key)) || defaultValue;
     });
+  }
+
+  public async hasItem(key: string): Promise<boolean> {
+    return !!(await cacheService.getItem(key, this._configDomain, async () => {
+      return await this._getItem(key);
+    }));
   }
 
   public async persistItem(key: string, data: T) {
@@ -49,7 +55,7 @@ export abstract class AbstractConfigDataPersistenceService<T> {
   public abstract getItemLastUpdated(key: string): Promise<Date>;
 
   public async getItemOrFail(key: string): Promise<T> {
-    const data = await this.getItem(key);
+    const data = await this.getItem(key, undefined);
     if (data) {
       return data;
     }

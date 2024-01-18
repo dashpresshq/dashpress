@@ -5,7 +5,6 @@ import styled, { css } from "styled-components";
 export interface IStyledBaseButton {
   block?: boolean;
   size?: "sm" | "xs";
-  color?: keyof typeof SYSTEM_COLORS;
   justIcon?: boolean;
   cursor?: "progress";
 }
@@ -76,7 +75,9 @@ export const StyledBaseButton = styled.button<IStyledBaseButton>`
   }
 `;
 
-export const SoftButtonStyled = styled(StyledBaseButton)`
+export const SoftButtonStyled = styled(StyledBaseButton)<{
+  $color?: keyof typeof SYSTEM_COLORS;
+}>`
   background-color: ${USE_ROOT_COLOR("primary-shade-color")};
   color: ${USE_ROOT_COLOR("text-on-shade")};
   border-width: 0;
@@ -90,6 +91,18 @@ export const SoftButtonStyled = styled(StyledBaseButton)`
     background-color: ${USE_ROOT_COLOR("primary-color")};
     color: ${USE_ROOT_COLOR("text-on-primary")};
   }
+  ${(props) =>
+    props.$color &&
+    css`
+      background-color: ${SYSTEM_COLORS[props.$color]}1A;
+      color: ${SYSTEM_COLORS[props.$color]};
+      border-color: ${SYSTEM_COLORS[props.$color]};
+
+      &:hover,
+      &:focus {
+        background-color: ${SYSTEM_COLORS[props.$color]};
+      }
+    `}
 `;
 
 export const OutlineButton = styled(StyledBaseButton)`
@@ -122,16 +135,5 @@ export const OutlineButton = styled(StyledBaseButton)`
   &:not(:disabled):not(.disabled):active:focus,
   &:not(:disabled):not(.disabled).active:focus {
     box-shadow: 0 0 0 0.2rem ${USE_ROOT_COLOR("primary-shade-color")};
-  }
-`;
-
-export const DeleteButtonStyled = styled(SoftButtonStyled)`
-  background-color: ${SYSTEM_COLORS.danger}1A;
-  color: ${SYSTEM_COLORS.danger};
-  border-color: ${SYSTEM_COLORS.danger};
-
-  &:hover,
-  &:focus {
-    background-color: ${SYSTEM_COLORS.danger};
   }
 `;

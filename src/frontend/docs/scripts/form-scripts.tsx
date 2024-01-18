@@ -1,10 +1,10 @@
 import { RenderCode } from "frontend/design-system/components/RenderCode";
 import { Spacer } from "frontend/design-system/primitives/Spacer";
-import { DocumentationRoot, IDocumentationRootProps } from "../_base";
+import { DocumentationRoot } from "../_base";
 
-export function FormScriptDocumentation(props: IDocumentationRootProps) {
+export function FormScriptDocumentation() {
   return (
-    <DocumentationRoot {...props}>
+    <DocumentationRoot>
       <p>
         Forms scripts enable you to implement the complex form logic your
         business requirements require that the UI cannot achieve.

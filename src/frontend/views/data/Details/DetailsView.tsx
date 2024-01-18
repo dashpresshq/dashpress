@@ -27,15 +27,15 @@ const ContentText = styled(Typo.SM)`
 `;
 
 export function EntityDetailsView({
-  id,
+  entityId,
   entity,
   displayFrom,
 }: {
-  id: string;
+  entityId: string;
   entity: string;
   displayFrom: "details" | "canvas";
 }) {
-  const dataDetails = useEntityDataDetails({ entity, entityId: id });
+  const dataDetails = useEntityDataDetails({ entity, entityId });
   const entityFieldTypes = useProcessedEntityFieldTypes(entity);
   const entityCrudFields = useEntityCrudFields(entity, "details");
   const defaultDateFormat = useAppConfiguration("default_date_format");
@@ -71,7 +71,7 @@ export function EntityDetailsView({
 
   return (
     <ViewStateMachine
-      loading={viewState.type === DataStates.Loading || !id}
+      loading={viewState.type === DataStates.Loading || !entityId}
       error={
         viewState.type === DataStates.Error ? viewState.message : undefined
       }
@@ -86,7 +86,7 @@ export function EntityDetailsView({
         </>
       }
     >
-      <PreDataDetails entity={entity} entityId={id} />
+      <PreDataDetails entity={entity} entityId={entityId} />
       <div aria-label="Details Section">
         {entityCrudFields.data.map(({ name }) => {
           const value$1 = dataDetails?.data?.[name];

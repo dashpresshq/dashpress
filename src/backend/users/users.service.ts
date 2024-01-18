@@ -37,10 +37,7 @@ export class UsersApiService implements IApplicationService {
   }
 
   async registerUser(user: IAccountUser) {
-    const userExists = await this._usersPersistenceService.getItem(
-      user.username
-    );
-    if (userExists) {
+    if (await this._usersPersistenceService.hasItem(user.username)) {
       throw new BadRequestError("Username already exists");
     }
     await this._usersPersistenceService.createItem(user.username, {

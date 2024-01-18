@@ -51,6 +51,7 @@ function TableActionButtons({
     entityId: idValue,
     baseActionButtons: actionButtons,
     from: "table-inline",
+    row: row.original,
   });
 
   return <ActionButtons actionButtons={portalActionButtons} justIcons />;

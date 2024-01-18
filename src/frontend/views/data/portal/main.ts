@@ -22,6 +22,10 @@ export function PortalEntityFormComponent() {
   return null;
 }
 
+export function PortalDataComponent() {
+  return null;
+}
+
 export const useExtendRenderFormInputProps = (props: IRenderFormInputProps) => {
   return props;
 };

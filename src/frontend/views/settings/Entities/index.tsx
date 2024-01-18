@@ -3,8 +3,6 @@ import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { USER_PERMISSIONS } from "shared/constants/user";
 import { ILabelValue } from "shared/types/options";
 import { MAKE_APP_CONFIGURATION_CRUD_CONFIG } from "frontend/hooks/configuration/configuration.constant";
-import { useState } from "react";
-import { DOCUMENTATION_LABEL } from "frontend/docs";
 import { EnabledEntitiesDocumentation } from "frontend/docs/enabled-entities";
 import { useApi } from "frontend/lib/data/useApi";
 import { ListSkeleton } from "frontend/design-system/components/Skeleton/List";
@@ -16,13 +14,12 @@ import {
 import { useEntityDictionPlurals } from "frontend/hooks/entity/entity.queries";
 import { NAVIGATION_MENU_ENDPOINT } from "frontend/_layouts/app/LayoutImpl/constants";
 import { ACTIVE_ENTITIES_ENDPOINT } from "shared/constants/entities";
+import { useDocumentationActionButton } from "frontend/docs/constants";
 import { SETTINGS_VIEW_KEY } from "../constants";
 import { BaseSettingsLayout } from "../_Base";
 import { EntitiesSelection } from "./Selection";
 
 const CRUD_CONFIG = MAKE_APP_CONFIGURATION_CRUD_CONFIG("disabled_entities");
-
-const DOCS_TITLE = "Enabled Entities";
 
 const useEntitiesList = () =>
   useApi<ILabelValue[]>("/api/entities/list", {
@@ -39,8 +36,6 @@ export function EntitiesSettings() {
     permission: USER_PERMISSIONS.CAN_CONFIGURE_APP,
   });
 
-  const [isDocOpen, setIsDocOpen] = useState(false);
-
   const entitiesToHide = useAppConfiguration("disabled_entities");
 
   const upsertHideFromAppMutation = useUpsertConfigurationMutation(
@@ -56,6 +51,9 @@ export function EntitiesSettings() {
     "value"
   );
 
+  const documentationActionButton =
+    useDocumentationActionButton("Enabled Entities");
+
   const error = entitiesList.error || entitiesToHide.error;
 
   const isLoading = entitiesList.isLoading || entitiesToHide.isLoading;
@@ -64,14 +62,7 @@ export function EntitiesSettings() {
     <BaseSettingsLayout>
       <SectionBox
         title={CRUD_CONFIG.TEXT_LANG.TITLE}
-        actionButtons={[
-          {
-            _type: "normal",
-            action: () => setIsDocOpen(true),
-            systemIcon: "Help",
-            label: DOCUMENTATION_LABEL.CONCEPT(DOCS_TITLE),
-          },
-        ]}
+        actionButtons={[documentationActionButton]}
       >
         <ViewStateMachine
           error={error}
@@ -88,11 +79,7 @@ export function EntitiesSettings() {
           />
         </ViewStateMachine>
       </SectionBox>
-      <EnabledEntitiesDocumentation
-        title={DOCS_TITLE}
-        close={setIsDocOpen}
-        isOpen={isDocOpen}
-      />
+      <EnabledEntitiesDocumentation />
     </BaseSettingsLayout>
   );
 }

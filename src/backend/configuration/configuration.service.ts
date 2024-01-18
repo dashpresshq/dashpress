@@ -27,15 +27,10 @@ export class ConfigurationApiService implements IApplicationService {
   ): Promise<AppConfigurationValueType<T>> {
     this.checkConfigKeyEntityRequirement(key, entity);
 
-    const value = await this._appConfigPersistenceService.getItem(
-      this._appConfigPersistenceService.mergeKeyWithSecondaryKey(key, entity)
-    );
-
-    if (value) {
-      return value as T;
-    }
-
-    return APP_CONFIGURATION_CONFIG[key].defaultValue as T;
+    return (await this._appConfigPersistenceService.getItem(
+      this._appConfigPersistenceService.mergeKeyWithSecondaryKey(key, entity),
+      APP_CONFIGURATION_CONFIG[key].defaultValue
+    )) as AppConfigurationValueType<T>;
   }
 
   async getSystemSettings<T extends keyof ISystemSettings>(

@@ -37,7 +37,7 @@ export type IProps = {
 
 const Root = styled.div<{
   type: AlertType;
-  color: string;
+  $color: string;
 }>`
   display: flex;
   justify: space-between;
@@ -47,13 +47,13 @@ const Root = styled.div<{
   margin-bottom: 0;
   border: 1px solid transparent;
   border-radius: 4px;
-  color: ${(props) => props.color};
-  background-color: ${(props) => props.color}05;
-  border-color: ${(props) => props.color}11;
+  color: ${(props) => props.$color};
+  background-color: ${(props) => props.$color}05;
+  border-color: ${(props) => props.$color}11;
 `;
 
-const AlertButton = styled.button<{ color: string }>`
-  color: ${(props) => props.color}AA;
+const AlertButton = styled.button<{ $color: string }>`
+  color: ${(props) => props.$color}AA;
   padding: 0;
   align-self: flex-start;
   cursor: pointer;
@@ -63,11 +63,11 @@ const AlertButton = styled.button<{ color: string }>`
   margin-top: 8px;
 `;
 
-const IconRoot = styled.div<{ color: string }>`
+const IconRoot = styled.div<{ $color: string }>`
   display: flex;
   align-items: center;
-  background-color: ${(props) => props.color}1A;
-  color: ${(props) => props.color};
+  background-color: ${(props) => props.$color}1A;
+  color: ${(props) => props.$color};
   padding: 8px;
   border-top-left-radius: 4px;
   border-bottom-left-radius: 4px;
@@ -75,11 +75,14 @@ const IconRoot = styled.div<{ color: string }>`
   vertical-align: middle;
 `;
 
-const AlertMap: Record<AlertType, { Icon: Icon; color: string }> = {
-  [AlertType.Info]: { Icon: InfoIcon, color: SYSTEM_COLORS.info },
-  [AlertType.Error]: { Icon: AlertTriangle, color: SYSTEM_COLORS.danger },
-  [AlertType.Warning]: { Icon: AlertTriangle, color: SYSTEM_COLORS.warning },
-  [AlertType.Success]: { Icon: ThumbsUp, color: SYSTEM_COLORS.success },
+const AlertMap: Record<
+  AlertType,
+  { Icon: Icon; color: keyof typeof SYSTEM_COLORS }
+> = {
+  [AlertType.Info]: { Icon: InfoIcon, color: "info" },
+  [AlertType.Error]: { Icon: AlertTriangle, color: "danger" },
+  [AlertType.Warning]: { Icon: AlertTriangle, color: "warning" },
+  [AlertType.Success]: { Icon: ThumbsUp, color: "success" },
 };
 
 const Content = styled.div`
@@ -92,17 +95,6 @@ const Text = styled(Typo.XS)<{ $color: string }>`
   color: ${(props) => props.$color};
 `;
 
-const ActionButton = styled(SoftButtonStyled)<{ $color: string }>`
-  background-color: ${(props) => props.$color}1A;
-  color: ${(props) => props.$color};
-  border-color: ${(props) => props.$color};
-
-  &:hover,
-  &:focus {
-    background-color: ${(props) => props.$color};
-  }
-`;
-
 export function Alert({ type, message, renderJsx, action }: IProps) {
   const [shouldRender, setShouldRender] = useState(true);
   const { Icon: IconCmp, color } = AlertMap[type];
@@ -113,24 +105,27 @@ export function Alert({ type, message, renderJsx, action }: IProps) {
   if (!shouldRender || !message) {
     return null;
   }
+
+  const hexColor = SYSTEM_COLORS[color];
+
   return (
-    <Root type={type} color={color} role="alert">
-      <IconRoot color={color}>
+    <Root type={type} $color={hexColor} role="alert">
+      <IconRoot $color={hexColor}>
         <IconCmp size={20} />
       </IconRoot>
       <Content>
-        <Text $color={color}>
+        <Text $color={hexColor}>
           {(renderJsx ? message : getBestErrorMessage(message)) as string}
         </Text>
         {action && (
           <>
             <Spacer />
-            <ActionButton onClick={action.action} $color={color} size="xs">
+            <SoftButtonStyled onClick={action.action} $color={color} size="xs">
               <Stack>
                 <action.Icon size="14" />
                 {action.label}
               </Stack>
-            </ActionButton>
+            </SoftButtonStyled>
           </>
         )}
       </Content>
@@ -139,7 +134,7 @@ export function Alert({ type, message, renderJsx, action }: IProps) {
         onClick={() => {
           setShouldRender(false);
         }}
-        color={color}
+        $color={hexColor}
         aria-label="Close"
       >
         <X size={16} />

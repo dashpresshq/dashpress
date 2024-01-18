@@ -82,7 +82,7 @@ function DateSettings() {
       title={DATE_FORMAT_CRUD_CONFIG.TEXT_LANG.TITLE}
       actionButtons={[
         {
-          _type: "normal",
+          id: "help",
           action: "https://date-fns.org/docs/format",
           systemIcon: "Help",
           label: "Using https://date-fns.org/docs/format",

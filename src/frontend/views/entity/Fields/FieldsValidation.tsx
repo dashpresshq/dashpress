@@ -23,6 +23,7 @@ import { FormInput } from "frontend/design-system/components/Form/FormInput";
 import { FormNumberInput } from "frontend/design-system/components/Form/FormNumberInput";
 import { FormNoValueSelect } from "frontend/design-system/components/Form/FormSelect";
 import { FormButton } from "frontend/design-system/components/Button/FormButton";
+import { DELETE_BUTTON_PROPS } from "frontend/design-system/components/Button/constants";
 
 interface IProps {
   field: string;
@@ -78,12 +79,11 @@ export function FieldValidationCanvas({
                         actionButtons={
                           !isBoundToType && !fromSchema
                             ? [
-                                {
-                                  _type: "delete",
-                                  shouldConfirmAlert: false,
+                                DELETE_BUTTON_PROPS({
+                                  label: "Remove",
                                   action: () => fields.remove(index),
-                                  isMakingDeleteRequest: false,
-                                },
+                                  isMakingRequest: false,
+                                }),
                               ]
                             : []
                         }

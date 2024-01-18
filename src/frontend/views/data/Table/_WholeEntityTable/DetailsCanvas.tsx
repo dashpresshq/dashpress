@@ -7,6 +7,7 @@ import { Spacer } from "frontend/design-system/primitives/Spacer";
 import { SoftButton } from "frontend/design-system/components/Button/SoftButton";
 import { useDetailsOffCanvasStore } from "../hooks";
 import { EntityDetailsView } from "../../Details/DetailsView";
+import { PortalDataComponent } from "../../portal";
 
 export function DetailsCanvas() {
   const router = useRouter();
@@ -20,26 +21,29 @@ export function DetailsCanvas() {
   }, [router.asPath]);
 
   return (
-    <OffCanvas
-      title={entityCrudConfig.TEXT_LANG.DETAILS}
-      onClose={closeDetailsCanvas}
-      show={!!detailsCanvasEntity}
-    >
-      <EntityDetailsView
-        id={detailsCanvasId}
-        entity={detailsCanvasEntity}
-        displayFrom="canvas"
-      />
-      <Spacer />
-      <SoftButton
-        label="View Full Details"
-        systemIcon="Eye"
-        block
-        action={NAVIGATION_LINKS.ENTITY.DETAILS(
-          detailsCanvasEntity,
-          detailsCanvasId
-        )}
-      />
-    </OffCanvas>
+    <>
+      <OffCanvas
+        title={entityCrudConfig.TEXT_LANG.DETAILS}
+        onClose={closeDetailsCanvas}
+        show={!!detailsCanvasEntity}
+      >
+        <EntityDetailsView
+          entityId={detailsCanvasId}
+          entity={detailsCanvasEntity}
+          displayFrom="canvas"
+        />
+        <Spacer />
+        <SoftButton
+          label="View Full Details"
+          systemIcon="Eye"
+          block
+          action={NAVIGATION_LINKS.ENTITY.DETAILS(
+            detailsCanvasEntity,
+            detailsCanvasId
+          )}
+        />
+      </OffCanvas>
+      <PortalDataComponent />
+    </>
   );
 }

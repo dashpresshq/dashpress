@@ -9,14 +9,14 @@ import { Card, CardBody, CardHeader } from "../../Card";
 import { Tooltip } from "../../Tooltip";
 import { BaseSkeleton } from "../../Skeleton/Base";
 import { SimpleSelect } from "../../Form/FormSelect/Simple";
-import { IActionButton } from "../../Button/ActionButtons/types";
 import { ActionButtons } from "../../Button/ActionButtons";
+import { IGroupActionButton } from "../../Button/types";
 
 export interface IProps {
   title: string;
   children: ReactNode;
   description?: string;
-  actionButtons?: IActionButton[];
+  actionButtons?: IGroupActionButton[];
   selection?: { options: ISelectData[]; onChange: (value: string) => void };
   backLink?: { label?: string; action: string | (() => void) };
   isLoading?: boolean;

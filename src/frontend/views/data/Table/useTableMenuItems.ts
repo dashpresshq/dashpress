@@ -47,9 +47,7 @@ export const useTableMenuItems = (
       order: 1,
       label: entityCrudConfig.TEXT_LANG.CREATE,
       systemIcon: "Plus",
-      onClick: () => {
-        router.push(getEntityCreateLink(entity, reference));
-      },
+      action: getEntityCreateLink(entity, reference),
     });
   }
 

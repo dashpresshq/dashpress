@@ -34,7 +34,7 @@ export function BaseDashboard({ dashboardId, manageLink }: IProps) {
                 id: "manage-dashboard",
                 label: "Edit Dashboard",
                 systemIcon: "Edit" as const,
-                onClick: () => router.replace(manageLink),
+                action: () => router.replace(manageLink),
               },
             ]
           : []

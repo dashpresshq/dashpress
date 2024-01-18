@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { META_USER_PERMISSIONS } from "shared/constants/user";
-import { IDropDownMenuItem } from "frontend/design-system/components/DropdownMenu";
+import { IGroupActionButton } from "frontend/design-system/components/Button/types";
 import { createStore } from "../store";
 
 export type IPageDetails = {
@@ -9,8 +9,8 @@ export type IPageDetails = {
   viewKey: string;
   pageLink: string;
   permission: string;
-  actionItems?: IDropDownMenuItem[];
-  secondaryActionItems?: IDropDownMenuItem[];
+  actionItems?: IGroupActionButton[];
+  secondaryActionItems?: IGroupActionButton[];
 };
 
 type IStore = {

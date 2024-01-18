@@ -14,8 +14,6 @@ import {
 } from "frontend/hooks/configuration/configuration.store";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { MAKE_APP_CONFIGURATION_CRUD_CONFIG } from "frontend/hooks/configuration/configuration.constant";
-import { useState } from "react";
-import { DOCUMENTATION_LABEL } from "frontend/docs";
 import { RelationsSettingsDocumentation } from "frontend/docs/relations";
 import { useChangeRouterParam } from "frontend/lib/routing/useChangeRouterParam";
 import { useRouteParam } from "frontend/lib/routing/useRouteParam";
@@ -28,6 +26,7 @@ import {
 } from "frontend/design-system/components/Skeleton/Form";
 import { Spacer } from "frontend/design-system/primitives/Spacer";
 import { ListSkeleton } from "frontend/design-system/components/Skeleton/List";
+import { useDocumentationActionButton } from "frontend/docs/constants";
 import {
   FieldsLabelForm,
   loadingFieldsLabelForm,
@@ -36,8 +35,6 @@ import { ENTITY_CONFIGURATION_VIEW } from "../constants";
 import { EntityRelationsForm } from "./Relations.form";
 import { BaseEntitySettingsLayout } from "../_Base";
 
-const DOCS_TITLE = "Relationship Settings";
-
 export function EntityRelationsSettings() {
   const entity = useEntitySlug();
   const tabFromUrl = useRouteParam("tab");
@@ -45,7 +42,6 @@ export function EntityRelationsSettings() {
   const entityFields = useEntityFields(entity);
   const entityRelationList = useEntityRelationsList(entity);
   const referenceFields = useEntityReferenceFields(entity);
-  const [isDocOpen, setIsDocOpen] = useState(false);
 
   useSetPageDetails({
     pageTitle: "Relationship Settings",
@@ -61,6 +57,10 @@ export function EntityRelationsSettings() {
   const hiddenEntityRelations = useEntityConfiguration(
     "hidden_entity_relations",
     entity
+  );
+
+  const documentationActionButton = useDocumentationActionButton(
+    "Relationship Settings"
   );
 
   const getEntitiesDictionPlurals = useEntityDictionPlurals(
@@ -127,14 +127,7 @@ export function EntityRelationsSettings() {
     <BaseEntitySettingsLayout>
       <SectionBox
         title="Relationship Settings"
-        actionButtons={[
-          {
-            _type: "normal",
-            action: () => setIsDocOpen(true),
-            systemIcon: "Help",
-            label: DOCUMENTATION_LABEL.CONCEPT(DOCS_TITLE),
-          },
-        ]}
+        actionButtons={[documentationActionButton]}
       >
         <Tabs
           currentTab={tabFromUrl}
@@ -205,11 +198,7 @@ export function EntityRelationsSettings() {
           ]}
         />
       </SectionBox>
-      <RelationsSettingsDocumentation
-        title={DOCS_TITLE}
-        close={setIsDocOpen}
-        isOpen={isDocOpen}
-      />
+      <RelationsSettingsDocumentation />
     </BaseEntitySettingsLayout>
   );
 }

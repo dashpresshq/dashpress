@@ -12,12 +12,13 @@ import { useCallback, useState } from "react";
 import { IActionInstance } from "shared/types/actions";
 import { useApi } from "frontend/lib/data/useApi";
 import { SoftButton } from "frontend/design-system/components/Button/SoftButton";
-import { DeleteButton } from "frontend/design-system/components/Button/DeleteButton";
 import { Stack } from "frontend/design-system/primitives/Stack";
 import { TableSkeleton } from "frontend/design-system/components/Skeleton/Table";
 import { Spacer } from "frontend/design-system/primitives/Spacer";
 import { OffCanvas } from "frontend/design-system/components/OffCanvas";
 import { userFriendlyCase } from "shared/lib/strings/friendly-case";
+import { ActionButtons } from "frontend/design-system/components/Button/ActionButtons";
+import { DELETE_BUTTON_PROPS } from "frontend/design-system/components/Button/constants";
 import { ADMIN_ACTION_INSTANCES_CRUD_CONFIG } from "./constants";
 import {
   LIST_ACTION_INSTANCES,
@@ -51,21 +52,27 @@ export function BaseActionInstances({ entity }: { entity: string }) {
 
   const MemoizedAction = useCallback(
     ({ row }: IFETableCell<IActionInstance>) => (
-      <Stack spacing={4} align="center">
-        <SoftButton
-          action={() => setCurrentInstanceItem(row.original.instanceId)}
-          label="Edit"
-          justIcon
-          systemIcon="Edit"
-        />
-        <DeleteButton
-          onDelete={() =>
-            deleteActionInstanceMutation.mutateAsync(row.original.instanceId)
-          }
-          isMakingDeleteRequest={false}
-          shouldConfirmAlert
-        />
-      </Stack>
+      <ActionButtons
+        justIcons
+        actionButtons={[
+          {
+            id: "edit",
+            action: () => setCurrentInstanceItem(row.original.instanceId),
+            label: ADMIN_ACTION_INSTANCES_CRUD_CONFIG.TEXT_LANG.DELETE,
+            systemIcon: "Edit",
+          },
+          {
+            ...DELETE_BUTTON_PROPS({
+              action: () =>
+                deleteActionInstanceMutation.mutateAsync(
+                  row.original.instanceId
+                ),
+              label: ADMIN_ACTION_INSTANCES_CRUD_CONFIG.TEXT_LANG.DELETE,
+              isMakingRequest: false,
+            }),
+          },
+        ]}
+      />
     ),
     [deleteActionInstanceMutation.isLoading]
   );

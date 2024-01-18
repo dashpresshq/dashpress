@@ -1,25 +1,77 @@
 import { useNavigationStack } from "frontend/lib/routing/useNavigationStack";
 import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
 import { USER_PERMISSIONS } from "shared/constants/user";
-import { useState } from "react";
-import { DOCUMENTATION_LABEL } from "frontend/docs";
 import { SystemProfileDocumentation } from "frontend/docs/system-profile";
 import { ContentLayout } from "frontend/design-system/components/Section/SectionDivider";
 import { SectionBox } from "frontend/design-system/components/Section/SectionBox";
 import { AppLayout } from "frontend/_layouts/app";
 import { SchemaForm } from "frontend/components/SchemaForm";
-import {
-  CREATE_USER_FORM_SCHEMA,
-  ICreateUserForm,
-} from "shared/form-schemas/users/create";
+import { ICreateUserForm } from "shared/form-schemas/users/create";
+import { useDocumentationActionButton } from "frontend/docs/constants";
+import { IActionButton } from "frontend/design-system/components/Button/types";
+import { IAppliedSchemaFormConfig } from "shared/form-schemas/types";
 import { ADMIN_USERS_CRUD_CONFIG, useCreateUserMutation } from "../users.store";
 
-const DOCS_TITLE = "System Profile";
+export const CREATE_USER_FORM_SCHEMA = (
+  actionButton: IActionButton
+): IAppliedSchemaFormConfig<ICreateUserForm> => {
+  return {
+    username: {
+      type: "text",
+      validations: [
+        {
+          validationType: "required",
+        },
+        {
+          validationType: "alphanumeric",
+        },
+      ],
+    },
+    name: {
+      type: "text",
+      validations: [
+        {
+          validationType: "required",
+        },
+      ],
+    },
+    password: {
+      type: "password",
+      validations: [
+        {
+          validationType: "required",
+        },
+      ],
+    },
+    role: {
+      type: "selection",
+      apiSelections: {
+        listUrl: "/api/roles",
+      },
+      validations: [
+        {
+          validationType: "required",
+        },
+      ],
+    },
+    systemProfile: {
+      type: "json",
+      rightActions: [actionButton],
+      validations: [
+        {
+          validationType: "isJson",
+        },
+      ],
+    },
+  };
+};
 
 export function UserCreate() {
   const userCreationMutation = useCreateUserMutation();
   const { backLink } = useNavigationStack();
-  const [isDocOpen, setIsDocOpen] = useState(false);
+
+  const documentationActionButton =
+    useDocumentationActionButton("System Profile");
 
   useSetPageDetails({
     pageTitle: ADMIN_USERS_CRUD_CONFIG.TEXT_LANG.CREATE,
@@ -33,29 +85,17 @@ export function UserCreate() {
         <SectionBox
           title={ADMIN_USERS_CRUD_CONFIG.TEXT_LANG.CREATE}
           backLink={backLink}
-          actionButtons={[
-            {
-              _type: "normal",
-              action: () => setIsDocOpen(true),
-              systemIcon: "Help",
-              label: DOCUMENTATION_LABEL.CONCEPT(DOCS_TITLE),
-            },
-          ]}
         >
           <SchemaForm<ICreateUserForm>
             onSubmit={userCreationMutation.mutateAsync}
             buttonText={ADMIN_USERS_CRUD_CONFIG.FORM_LANG.CREATE}
-            fields={CREATE_USER_FORM_SCHEMA}
+            fields={CREATE_USER_FORM_SCHEMA(documentationActionButton)}
             systemIcon="Plus"
             resetForm
           />
         </SectionBox>
       </ContentLayout.Center>
-      <SystemProfileDocumentation
-        title={DOCS_TITLE}
-        close={setIsDocOpen}
-        isOpen={isDocOpen}
-      />
+      <SystemProfileDocumentation />
     </AppLayout>
   );
 }

@@ -60,7 +60,7 @@ export function ProfileOnNavigation({ isFullWidth }: IProps) {
             id: label,
             label,
             systemIcon,
-            onClick: () => router.push(value),
+            action: () => router.push(value),
           })
         )}
       />

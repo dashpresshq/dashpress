@@ -79,8 +79,8 @@ export class RolesApiService implements IApplicationService {
 
   async createRole(input: Pick<IRole, "id">) {
     const id = makeRoleId(input.id);
-    const role = await this._rolesPersistenceService.getItem(id);
-    if (role) {
+
+    if (await this._rolesPersistenceService.hasItem(id)) {
       throw new BadRequestError("Role already exist");
     }
 
@@ -103,9 +103,7 @@ export class RolesApiService implements IApplicationService {
       throw new BadRequestError("Role already exist");
     }
 
-    const newRole = await this._rolesPersistenceService.getItem(madeRoleId);
-
-    if (newRole) {
+    if (await this._rolesPersistenceService.hasItem(madeRoleId)) {
       throw new BadRequestError("Role already exist");
     }
 

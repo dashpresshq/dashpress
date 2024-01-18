@@ -70,7 +70,7 @@ describe.each(PERSITENT_ADAPTORS)(
     });
 
     it("should getItem", async () => {
-      expect(await adaptor.getItem("foo")).toEqual({
+      expect(await adaptor.getItem("foo", undefined)).toEqual({
         age: 5,
         id: "foo",
         name: "Hello",
@@ -93,7 +93,7 @@ describe.each(PERSITENT_ADAPTORS)(
         name: "Updated",
       });
 
-      expect(await adaptor.getItem("foo")).toEqual({
+      expect(await adaptor.getItem("foo", undefined)).toEqual({
         age: 5,
         id: "updated",
         name: "Updated",
@@ -101,7 +101,7 @@ describe.each(PERSITENT_ADAPTORS)(
     });
 
     it("should remove existing item", async () => {
-      expect(await adaptor.getItem("foo")).toEqual({
+      expect(await adaptor.getItem("foo", undefined)).toEqual({
         age: 5,
         id: "updated",
         name: "Updated",
@@ -109,7 +109,7 @@ describe.each(PERSITENT_ADAPTORS)(
 
       await adaptor.removeItem("foo");
 
-      expect(await adaptor.getItem("foo")).toBeFalsy();
+      expect(await adaptor.getItem("foo", undefined)).toBeFalsy();
     });
 
     it("should insert new items when reseting state", async () => {

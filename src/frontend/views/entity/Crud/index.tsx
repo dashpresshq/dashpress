@@ -1,7 +1,6 @@
 import { ReactNode, useEffect, useState } from "react";
 import { IEntityCrudSettings } from "shared/configurations";
 import { USER_PERMISSIONS } from "shared/constants/user";
-import { DOCUMENTATION_LABEL } from "frontend/docs";
 import { CRUDDocumentation } from "frontend/docs/crud";
 import { useRouteParam } from "frontend/lib/routing/useRouteParam";
 import { useChangeRouterParam } from "frontend/lib/routing/useChangeRouterParam";
@@ -16,6 +15,7 @@ import { useUpsertConfigurationMutation } from "frontend/hooks/configuration/con
 import { useEntityFields } from "frontend/hooks/entity/entity.store";
 import { WarningAlert } from "frontend/design-system/components/Alert";
 import { Spacer } from "frontend/design-system/primitives/Spacer";
+import { useDocumentationActionButton } from "frontend/docs/constants";
 import { BaseEntitySettingsLayout } from "../_Base";
 import {
   EntityFieldsSelectionSettings,
@@ -29,7 +29,7 @@ import {
   PortalEntityUpdateSettings,
 } from "./portal";
 
-const DOCS_TITLE = "CRUD Settings";
+const TITLE = "CRUD Settings";
 
 function useEntityCrudView(entity: string) {
   const entityCrudSettings = useEntityCrudSettings(entity);
@@ -70,7 +70,6 @@ function useEntityCrudView(entity: string) {
     } else if (field === "delete" && newState.delete) {
       newState.details = true;
     }
-
     setEntityCrudSettingsState(newState);
     upsertCrudSettingsMutation.mutateAsync(newState);
   };
@@ -169,10 +168,11 @@ export function EntityCrudSettings() {
   const entityFields = useEntityFields(entity);
 
   const entityCrudView = useEntityCrudView(entity);
-  const [isDocOpen, setIsDocOpen] = useState(false);
+
+  const documentationActionButton = useDocumentationActionButton(TITLE);
 
   useSetPageDetails({
-    pageTitle: "CRUD Settings",
+    pageTitle: TITLE,
     viewKey: ENTITY_CONFIGURATION_VIEW,
     permission: USER_PERMISSIONS.CAN_CONFIGURE_APP,
   });
@@ -185,17 +185,7 @@ export function EntityCrudSettings() {
             <Spacer />
           </>
         )}
-      <SectionBox
-        title="CRUD Settings"
-        actionButtons={[
-          {
-            _type: "normal",
-            action: () => setIsDocOpen(true),
-            systemIcon: "Help",
-            label: DOCUMENTATION_LABEL.CONCEPT(DOCS_TITLE),
-          },
-        ]}
-      >
+      <SectionBox title={TITLE} actionButtons={[documentationActionButton]}>
         <Tabs
           currentTab={tabFromUrl}
           onChange={changeTabParam}
@@ -208,11 +198,7 @@ export function EntityCrudSettings() {
           )}
         />
       </SectionBox>
-      <CRUDDocumentation
-        title={DOCS_TITLE}
-        close={setIsDocOpen}
-        isOpen={isDocOpen}
-      />
+      <CRUDDocumentation />
     </BaseEntitySettingsLayout>
   );
 }

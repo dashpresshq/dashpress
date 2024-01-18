@@ -57,7 +57,7 @@ export function BaseManageDashboard({ dashboardId, doneLink, title }: IProps) {
           id: "done",
           label: "Done",
           systemIcon: "Check",
-          onClick: () => router.replace(doneLink),
+          action: () => router.replace(doneLink),
         },
       ]}
       actionItems={[
@@ -65,8 +65,7 @@ export function BaseManageDashboard({ dashboardId, doneLink, title }: IProps) {
           id: "new",
           label: DASHBOARD_WIDGETS_CRUD_CONFIG.TEXT_LANG.CREATE,
           systemIcon: "Plus",
-          onClick: () =>
-            router.push(NAVIGATION_LINKS.DASHBOARD.WIDGET.CREATE(dashboardId)),
+          action: NAVIGATION_LINKS.DASHBOARD.WIDGET.CREATE(dashboardId),
         },
       ]}
     >

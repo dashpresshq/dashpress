@@ -1,10 +1,10 @@
 import { userFriendlyCase } from "shared/lib/strings/friendly-case";
 import { USER_PERMISSIONS } from "shared/constants/user";
-import { DocumentationRoot, IDocumentationRootProps } from "./_base";
+import { DocumentationRoot } from "./_base";
 
-export function VariablesDocumentation(props: IDocumentationRootProps) {
+export function VariablesDocumentation() {
   return (
-    <DocumentationRoot {...props}>
+    <DocumentationRoot>
       <p>
         Variables are what you use to store values for later use. We have two
         types of variables each with different use cases.

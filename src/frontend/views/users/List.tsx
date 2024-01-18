@@ -1,6 +1,5 @@
 import React from "react";
 import { AppLayout } from "frontend/_layouts/app";
-import { useRouter } from "next/router";
 import { roleLabel, USER_PERMISSIONS } from "shared/constants/user";
 import {
   FEPaginationTable,
@@ -13,10 +12,9 @@ import { useApi } from "frontend/lib/data/useApi";
 import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
 import { userFriendlyCase } from "shared/lib/strings/friendly-case";
-import { SoftButton } from "frontend/design-system/components/Button/SoftButton";
-import { Stack } from "frontend/design-system/primitives/Stack";
-import { DeleteButton } from "frontend/design-system/components/Button/DeleteButton";
 import { Card } from "frontend/design-system/components/Card";
+import { ActionButtons } from "frontend/design-system/components/Button/ActionButtons";
+import { DELETE_BUTTON_PROPS } from "frontend/design-system/components/Button/constants";
 import { ADMIN_ROLES_CRUD_CONFIG } from "../roles/roles.store";
 import {
   ADMIN_USERS_CRUD_CONFIG,
@@ -25,8 +23,6 @@ import {
 } from "./users.store";
 
 export function ListUsers() {
-  const router = useRouter();
-
   useSetPageDetails({
     pageTitle: ADMIN_USERS_CRUD_CONFIG.TEXT_LANG.TITLE,
     viewKey: ADMIN_USERS_CRUD_CONFIG.TEXT_LANG.TITLE,
@@ -49,19 +45,24 @@ export function ListUsers() {
     ({ row }: IFETableCell<IAccountProfile>) => {
       const { username } = row.original;
       return (
-        <Stack spacing={4} align="center">
-          <SoftButton
-            action={NAVIGATION_LINKS.USERS.DETAILS(username)}
-            label="Edit"
-            justIcon
-            systemIcon="Edit"
-          />
-          <DeleteButton
-            onDelete={() => userDeletionMutation.mutateAsync(username)}
-            isMakingDeleteRequest={false}
-            shouldConfirmAlert
-          />
-        </Stack>
+        <ActionButtons
+          justIcons
+          actionButtons={[
+            {
+              id: "edit",
+              action: NAVIGATION_LINKS.USERS.DETAILS(username),
+              label: ADMIN_USERS_CRUD_CONFIG.TEXT_LANG.EDIT,
+              systemIcon: "Edit",
+            },
+            {
+              ...DELETE_BUTTON_PROPS({
+                action: () => userDeletionMutation.mutateAsync(username),
+                label: ADMIN_USERS_CRUD_CONFIG.TEXT_LANG.DELETE,
+                isMakingRequest: false,
+              }),
+            },
+          ]}
+        />
       );
     },
     [userDeletionMutation.isLoading]
@@ -119,9 +120,7 @@ export function ListUsers() {
           id: "add",
           systemIcon: "UserPlus",
           label: ADMIN_USERS_CRUD_CONFIG.TEXT_LANG.CREATE,
-          onClick: () => {
-            router.push(NAVIGATION_LINKS.USERS.CREATE);
-          },
+          action: NAVIGATION_LINKS.USERS.CREATE,
         },
       ]}
     >

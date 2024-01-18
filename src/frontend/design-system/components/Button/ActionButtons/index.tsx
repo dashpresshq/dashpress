@@ -1,17 +1,18 @@
 import { Stack } from "frontend/design-system/primitives/Stack";
 import { SoftButton } from "../SoftButton";
-import { DeleteButton } from "../DeleteButton";
-import { IActionButton } from "./types";
 import { DropDownMenu } from "../../DropdownMenu";
+import { IGroupActionButton } from "../types";
 
 const ELLIPSIS_THRESHOLD = 3;
 
 export function ActionButtons({
   actionButtons,
   justIcons,
+  size,
 }: {
-  actionButtons: IActionButton[];
+  actionButtons: IGroupActionButton[];
   justIcons?: true;
+  size?: "sm" | "xs";
 }) {
   if (actionButtons.length === 0) {
     return null;
@@ -23,37 +24,20 @@ export function ActionButtons({
   const ellipsisButtons = sortedActions.slice(ELLIPSIS_THRESHOLD);
 
   return (
-    <Stack>
-      {buttonsToShow.map((actionButton) =>
-        actionButton._type === "normal" ? (
-          <SoftButton
-            key={actionButton.systemIcon}
-            action={actionButton.action}
-            label={actionButton.label}
-            justIcon={justIcons}
-            isMakingActionRequest={actionButton.isMakingActionRequest}
-            systemIcon={actionButton.systemIcon}
-          />
-        ) : (
-          <DeleteButton
-            key={actionButton._type}
-            onDelete={actionButton.action}
-            shouldConfirmAlert={actionButton.shouldConfirmAlert}
-            isMakingDeleteRequest={actionButton.isMakingDeleteRequest}
-          />
-        )
-      )}
+    <Stack width="auto">
+      {buttonsToShow.map((actionButton) => (
+        <SoftButton
+          key={actionButton.id}
+          justIcon={justIcons}
+          size={size}
+          {...actionButton}
+        />
+      ))}
       {ellipsisButtons.length > 0 && (
         <DropDownMenu
           ellipsis
           ariaLabel="More Actions"
-          menuItems={ellipsisButtons.map((button) => ({
-            id: button._type === "delete" ? "Delete" : button.label,
-            label: button._type === "delete" ? "Delete" : button.label,
-            onClick: typeof button.action === "function" && button.action,
-            systemIcon:
-              button._type === "normal" ? button.systemIcon : "Thrash",
-          }))}
+          menuItems={ellipsisButtons}
         />
       )}
     </Stack>

@@ -13,25 +13,23 @@ import {
 import { USER_PERMISSIONS } from "shared/constants/user";
 import { useTableColumns } from "frontend/views/data/Table/useTableColumns";
 import { MAKE_APP_CONFIGURATION_CRUD_CONFIG } from "frontend/hooks/configuration/configuration.constant";
-import { useState } from "react";
-import { DOCUMENTATION_LABEL } from "frontend/docs";
 import { ViewsDocumentation } from "frontend/docs/views";
+import { useDocumentationActionButton } from "frontend/docs/constants";
 import { BaseEntitySettingsLayout } from "../_Base";
 import { ENTITY_CONFIGURATION_VIEW } from "../constants";
 import { EntityTableTabForm } from "./Form";
 
 const CRUD_CONFIG = MAKE_APP_CONFIGURATION_CRUD_CONFIG("entity_views");
 
-const DOCS_TITLE = "Views";
-
 export function EntityViewsSettings() {
   const entity = useEntitySlug();
-  const [isDocOpen, setIsDocOpen] = useState(false);
 
   const upsertEntityViewsMutation = useUpsertConfigurationMutation(
     "entity_views",
     entity
   );
+
+  const documentationActionButton = useDocumentationActionButton("Views");
 
   const entityViews = useEntityConfiguration("entity_views", entity);
 
@@ -51,14 +49,7 @@ export function EntityViewsSettings() {
     <BaseEntitySettingsLayout>
       <SectionBox
         title={CRUD_CONFIG.TEXT_LANG.TITLE}
-        actionButtons={[
-          {
-            _type: "normal",
-            action: () => setIsDocOpen(true),
-            systemIcon: "Help",
-            label: DOCUMENTATION_LABEL.CONCEPT(DOCS_TITLE),
-          },
-        ]}
+        actionButtons={[documentationActionButton]}
       >
         <ViewStateMachine
           loading={isLoading}
@@ -78,11 +69,7 @@ export function EntityViewsSettings() {
           )}
         </ViewStateMachine>
       </SectionBox>
-      <ViewsDocumentation
-        title={DOCS_TITLE}
-        close={setIsDocOpen}
-        isOpen={isDocOpen}
-      />
+      <ViewsDocumentation />
     </BaseEntitySettingsLayout>
   );
 }

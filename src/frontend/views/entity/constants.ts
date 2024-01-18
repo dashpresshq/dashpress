@@ -108,9 +108,7 @@ export const useEntityActionMenuItems = (
       id: `${slugEntity} ${actionBag.label}`,
       ...actionBag,
       systemIcon: "Settings",
-      onClick: () => {
-        router.push(link(slugEntity));
-      },
+      action: link(slugEntity),
     };
   });
 };

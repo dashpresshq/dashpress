@@ -14,12 +14,8 @@ import { usePasswordStore } from "frontend/views/integrations/password.store";
 import { useUserHasPermission } from "frontend/hooks/auth/user.store";
 import { INTEGRATIONS_GROUP_CONFIG } from "shared/config-bag/integrations";
 import { VariablesDocumentation } from "frontend/docs/variables";
-import { DOCUMENTATION_LABEL } from "frontend/docs";
 import { ToastService } from "frontend/lib/toast";
 import { useApi } from "frontend/lib/data/useApi";
-import { SoftButton } from "frontend/design-system/components/Button/SoftButton";
-import { Stack } from "frontend/design-system/primitives/Stack";
-import { DeleteButton } from "frontend/design-system/components/Button/DeleteButton";
 import { Spacer } from "frontend/design-system/primitives/Spacer";
 import { Typo } from "frontend/design-system/primitives/Typo";
 import { OffCanvas } from "frontend/design-system/components/OffCanvas";
@@ -28,6 +24,9 @@ import {
   PasswordToReveal,
 } from "frontend/views/integrations/Password";
 import { IKeyValue } from "shared/types/options";
+import { useDocumentationActionButton } from "frontend/docs/constants";
+import { ActionButtons } from "frontend/design-system/components/Button/ActionButtons";
+import { DELETE_BUTTON_PROPS } from "frontend/design-system/components/Button/constants";
 import {
   INTEGRATIONS_GROUP_ENDPOINT,
   useIntegrationConfigurationDeletionMutation,
@@ -53,7 +52,6 @@ export function ManageCredentialGroup({
     useIntegrationConfigurationDeletionMutation(group);
 
   const tableData = useApi<IKeyValue[]>(dataEndpoint, { defaultData: [] });
-  const [isDocOpen, setIsDocOpen] = useState(false);
 
   const revealedCredentials = useRevealedCredentialsList(group);
 
@@ -78,23 +76,31 @@ export function ManageCredentialGroup({
 
   const CRUD_CONFIG = INTEGRATIONS_GROUP_CRUD_CONFIG[group].crudConfig;
 
+  const documentationActionButton = useDocumentationActionButton(
+    CRUD_CONFIG.TEXT_LANG.TITLE
+  );
+
   const MemoizedAction = useCallback(
     ({ row }: IFETableCell<IKeyValue>) => (
-      <Stack spacing={4} align="center">
-        <SoftButton
-          action={() => setCurrentConfigItem(row.original.key)}
-          label="Edit"
-          justIcon
-          systemIcon="Edit"
-        />
-        <DeleteButton
-          onDelete={() =>
-            deleteConfigurationMutation.mutateAsync(row.original.key)
-          }
-          isMakingDeleteRequest={false}
-          shouldConfirmAlert
-        />
-      </Stack>
+      <ActionButtons
+        justIcons
+        actionButtons={[
+          {
+            id: "edit",
+            action: () => setCurrentConfigItem(row.original.key),
+            label: CRUD_CONFIG.TEXT_LANG.EDIT,
+            systemIcon: "Edit",
+          },
+          {
+            ...DELETE_BUTTON_PROPS({
+              action: () =>
+                deleteConfigurationMutation.mutateAsync(row.original.key),
+              label: CRUD_CONFIG.TEXT_LANG.DELETE,
+              isMakingRequest: false,
+            }),
+          },
+        ]}
+      />
     ),
     [deleteConfigurationMutation.isLoading, passwordStore.password]
   );
@@ -122,7 +128,7 @@ export function ManageCredentialGroup({
         ? [
             {
               id: `add-${showManageAction ? "true" : "false"}`,
-              onClick: () => {
+              action: () => {
                 setCurrentConfigItem(NEW_CONFIG_ITEM);
               },
               systemIcon: "Plus",
@@ -130,14 +136,7 @@ export function ManageCredentialGroup({
             },
           ]
         : [],
-      secondaryActionItems: [
-        {
-          id: "help",
-          onClick: () => setIsDocOpen(true),
-          systemIcon: "Help",
-          label: DOCUMENTATION_LABEL.CONCEPT(CRUD_CONFIG.TEXT_LANG.TITLE),
-        },
-      ],
+      secondaryActionItems: [documentationActionButton],
     };
   }, [group, currentTab, canManageAction, showManageAction]);
 
@@ -237,11 +236,7 @@ export function ManageCredentialGroup({
           }}
         />
       </OffCanvas>
-      <VariablesDocumentation
-        title={CRUD_CONFIG.TEXT_LANG.TITLE}
-        close={setIsDocOpen}
-        isOpen={isDocOpen}
-      />
+      <VariablesDocumentation />
     </>
   );
 }

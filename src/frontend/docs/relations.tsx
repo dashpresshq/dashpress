@@ -1,11 +1,9 @@
 import { RenderCode } from "frontend/design-system/components/RenderCode";
-import { DocumentationRoot, IDocumentationRootProps } from "./_base";
+import { DocumentationRoot } from "./_base";
 
-export function RelationsSettingsDocumentation(
-  props: Omit<IDocumentationRootProps, "children">
-) {
+export function RelationsSettingsDocumentation() {
   return (
-    <DocumentationRoot {...props}>
+    <DocumentationRoot>
       <p>
         This setting helps you manage how this entity will be presented on other
         tables when referenced, and also how you can organize the related

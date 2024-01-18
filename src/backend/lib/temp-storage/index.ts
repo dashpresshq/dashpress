@@ -30,7 +30,7 @@ export class TempStorageApiService {
   }
 
   async getItem<T>(key: string): Promise<T | null> {
-    const data = await this._tempStoragePersistenceService.getItem(key);
+    const data = await this._tempStoragePersistenceService.getItem(key, null);
     if (!data) {
       return null;
     }

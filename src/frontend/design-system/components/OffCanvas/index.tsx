@@ -78,14 +78,15 @@ export function OffCanvas({
             <Header>
               <Stack justify="space-between" align="center">
                 <Typo.MD weight="bold">{title}</Typo.MD>
-                <div>
-                  <SoftButton
-                    justIcon
-                    systemIcon="Close"
-                    action={onClose}
-                    size="sm"
-                  />
-                </div>
+                <SoftButton
+                  justIcon
+                  label="Close Canvas"
+                  noToolTip
+                  systemIcon="Close"
+                  action={onClose}
+                  color="danger"
+                  size="sm"
+                />
               </Stack>
             </Header>
             <Divider />

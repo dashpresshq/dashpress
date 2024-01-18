@@ -4,8 +4,6 @@ import {
 } from "frontend/hooks/auth/user.store";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { USER_PERMISSIONS } from "shared/constants/user";
-import { DOCUMENTATION_LABEL } from "frontend/docs";
-import { useState } from "react";
 import { SystemProfileDocumentation } from "frontend/docs/system-profile";
 import { useNavigationStack } from "frontend/lib/routing/useNavigationStack";
 import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
@@ -18,12 +16,14 @@ import {
 import { ContentLayout } from "frontend/design-system/components/Section/SectionDivider";
 import { AppLayout } from "frontend/_layouts/app";
 import { SchemaForm } from "frontend/components/SchemaForm";
-import { UPDATE_USER_FORM_SCHEMA } from "shared/form-schemas/users/update";
 import {
   IResetPasswordForm,
   RESET_PASSWORD_FORM_SCHEMA,
 } from "shared/form-schemas/users/reset-password";
-import { IUpdateUserForm } from "shared/form-schemas/profile/update";
+import { useDocumentationActionButton } from "frontend/docs/constants";
+import { IActionButton } from "frontend/design-system/components/Button/types";
+import { IAppliedSchemaFormConfig } from "shared/form-schemas/types";
+import { IUpdateUserForm } from "shared/form-schemas/users/update";
 import { useUsernameFromRouteParam } from "../hooks";
 import {
   useUpdateUserMutation,
@@ -32,7 +32,43 @@ import {
   ADMIN_USERS_CRUD_CONFIG,
 } from "../users.store";
 
-const DOCS_TITLE = "System Profile";
+export const UPDATE_USER_FORM_SCHEMA = (
+  actionButton: IActionButton
+): IAppliedSchemaFormConfig<IUpdateUserForm> => {
+  return {
+    name: {
+      type: "text",
+      validations: [
+        {
+          validationType: "required",
+        },
+      ],
+    },
+    role: {
+      type: "selection",
+      apiSelections: {
+        listUrl: "/api/roles",
+      },
+      validations: [
+        {
+          validationType: "required",
+        },
+      ],
+      formState: ($) => ({
+        disabled: $.auth.username === $.routeParams.username,
+      }),
+    },
+    systemProfile: {
+      type: "json",
+      rightActions: [actionButton],
+      validations: [
+        {
+          validationType: "isJson",
+        },
+      ],
+    },
+  };
+};
 
 export function UserUpdate() {
   const updateUserMutation = useUpdateUserMutation();
@@ -43,7 +79,9 @@ export function UserUpdate() {
   const authenticatedUserBag = useAuthenticatedUserBag();
 
   const userHasPermission = useUserHasPermission();
-  const [isDocOpen, setIsDocOpen] = useState(false);
+
+  const documentationActionButton =
+    useDocumentationActionButton("System Profile");
 
   useSetPageDetails({
     pageTitle: ADMIN_USERS_CRUD_CONFIG.TEXT_LANG.EDIT,
@@ -60,14 +98,6 @@ export function UserUpdate() {
       <ContentLayout.Center>
         <SectionBox
           title={ADMIN_USERS_CRUD_CONFIG.TEXT_LANG.EDIT}
-          actionButtons={[
-            {
-              _type: "normal",
-              action: () => setIsDocOpen(true),
-              systemIcon: "Help",
-              label: DOCUMENTATION_LABEL.CONCEPT(DOCS_TITLE),
-            },
-          ]}
           backLink={backLink}
         >
           <ViewStateMachine
@@ -88,7 +118,7 @@ export function UserUpdate() {
               onSubmit={updateUserMutation.mutateAsync}
               initialValues={userDetails.data}
               systemIcon="Save"
-              fields={UPDATE_USER_FORM_SCHEMA}
+              fields={UPDATE_USER_FORM_SCHEMA(documentationActionButton)}
             />
           </ViewStateMachine>
         </SectionBox>
@@ -108,11 +138,7 @@ export function UserUpdate() {
             </SectionBox>
           )}
       </ContentLayout.Center>
-      <SystemProfileDocumentation
-        title={DOCS_TITLE}
-        close={setIsDocOpen}
-        isOpen={isDocOpen}
-      />
+      <SystemProfileDocumentation />
     </AppLayout>
   );
 }

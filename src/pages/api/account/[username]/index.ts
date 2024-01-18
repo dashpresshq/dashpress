@@ -1,5 +1,4 @@
 import { USER_PERMISSIONS } from "shared/constants/user";
-import { UPDATE_USER_FORM_SCHEMA } from "shared/form-schemas/users/update";
 import { IAccountProfile } from "shared/types/user";
 import { requestHandler } from "backend/lib/request";
 import { usersApiService } from "backend/users/users.service";
@@ -35,7 +34,7 @@ export default requestHandler(
       const validatedRequest = await getValidatedRequest([
         {
           _type: "requestBody",
-          options: UPDATE_USER_FORM_SCHEMA,
+          options: {},
         },
         {
           _type: "requestQuery",

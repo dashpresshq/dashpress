@@ -7,7 +7,6 @@ import { Spacer } from "frontend/design-system/primitives/Spacer";
 import { Stack } from "frontend/design-system/primitives/Stack";
 import { Z_INDEXES } from "../../constants/zIndex";
 import { SoftButton } from "../Button/SoftButton";
-import { DeleteButtonStyled } from "../Button/Button";
 import { SHADOW_CSS } from "../Card";
 
 interface IProps {
@@ -75,17 +74,18 @@ export function Presentation({ action, title, onClose }: IPresentationProps) {
         </Typo.XS>
         <Spacer size="xxl" />
         <Stack justify="center" spacing={8}>
-          <SoftButton action={onClose} label="Cancel" />
-          <DeleteButtonStyled
-            type="button"
+          <SoftButton action={onClose} label="Cancel" systemIcon={null} />
+
+          <SoftButton
+            color="danger"
             size="sm"
-            onClick={() => {
+            systemIcon={null}
+            label="Confirm"
+            action={() => {
               action();
               onClose();
             }}
-          >
-            Confirm
-          </DeleteButtonStyled>
+          />
         </Stack>
       </Body>
     </Overlay>

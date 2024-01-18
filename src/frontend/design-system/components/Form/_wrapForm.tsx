@@ -50,7 +50,6 @@ export const wrapLabelAndError = (
               key={rightAction.label}
               action={rightAction.action}
               size="xs"
-              type="button"
               systemIcon={rightAction.systemIcon}
               label={rightAction.label}
             />

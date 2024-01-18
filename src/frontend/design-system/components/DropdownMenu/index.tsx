@@ -6,23 +6,19 @@ import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
 import { Stack } from "frontend/design-system/primitives/Stack";
 import { Typo } from "frontend/design-system/primitives/Typo";
 import { Z_INDEXES } from "frontend/design-system/constants/zIndex";
-import { SystemIconsKeys } from "shared/constants/Icons";
 import { SystemIcon } from "frontend/design-system/Icons/System";
+import { useRouter } from "next/router";
 import { SoftButtonStyled } from "../Button/Button";
 import { BREAKPOINTS } from "../../constants";
 import { Spin } from "../_/Spin";
 import { SHADOW_CSS } from "../Card";
+import { IGroupActionButton } from "../Button/types";
+import { ConfirmAlert } from "../ConfirmAlert";
 
 const togglePreviousState = (prev: boolean) => !prev;
 
-export interface IDropDownMenuItem {
-  id: string;
-  label: string;
-  systemIcon: SystemIconsKeys;
+export interface IDropDownMenuItem extends IGroupActionButton {
   description?: string;
-  disabled?: boolean;
-  onClick: () => void;
-  order?: number;
 }
 
 export interface IProps {
@@ -127,7 +123,6 @@ const CurrentButton = styled(SoftButtonStyled)`
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
 `;
-
 export function DropDownMenu({
   menuItems: menuItems$1,
   isMakingActionRequest,
@@ -136,6 +131,8 @@ export function DropDownMenu({
   ariaLabel,
 }: IProps) {
   const [isDropDownOpen, setDropDownOpen] = useState(false);
+
+  const router = useRouter();
 
   const toggleDropDown = () => {
     if (!isMakingActionRequest && !disabled) {
@@ -153,6 +150,22 @@ export function DropDownMenu({
     menuItems[0]
   );
 
+  const runAction = (actionMenuItem: IDropDownMenuItem) => {
+    if (typeof actionMenuItem.action === "string") {
+      router.push(actionMenuItem.action);
+      return;
+    }
+
+    if (actionMenuItem.shouldConfirmAlert) {
+      return ConfirmAlert({
+        title: actionMenuItem.shouldConfirmAlert,
+        action: actionMenuItem.action,
+      });
+    }
+
+    actionMenuItem.action();
+  };
+
   useEffect(() => {
     setCurrentMenuItem(menuItems[0]);
   }, [JSON.stringify(menuItems)]);
@@ -164,11 +177,11 @@ export function DropDownMenu({
   const onMenuItemClick = (menuIndex: number) => {
     const menuItem = menuItems[menuIndex];
     toggleDropDown();
-    menuItem.onClick();
+    runAction(menuItem);
     setCurrentMenuItem(menuItem);
   };
 
-  const { systemIcon, onClick, label } = currentMenuItem;
+  const { systemIcon, label } = currentMenuItem;
 
   const currentItem = (
     <Stack spacing={4} align="center">
@@ -187,7 +200,7 @@ export function DropDownMenu({
       <SoftButtonStyled
         size="sm"
         disabled={isMakingActionRequest || disabled}
-        onClick={() => onClick()}
+        onClick={() => runAction(currentMenuItem)}
       >
         {currentItem}
       </SoftButtonStyled>
@@ -216,7 +229,8 @@ export function DropDownMenu({
           <CurrentButton
             size="sm"
             disabled={isMakingActionRequest || disabled}
-            onClick={() => onClick()}
+            onClick={() => runAction(currentMenuItem)}
+            type="button"
           >
             {currentItem}
           </CurrentButton>
@@ -231,6 +245,7 @@ export function DropDownMenu({
             key={menuItem.label}
             onClick={() => onMenuItemClick(index)}
             disabled={menuItem.disabled}
+            type="button"
           >
             <Stack>
               <SystemIcon
@@ -256,3 +271,7 @@ export function DropDownMenu({
     </Dropdown>
   );
 }
+
+// TODO
+// isMakingRequest?: boolean;
+// color?: keyof typeof SYSTEM_COLORS;

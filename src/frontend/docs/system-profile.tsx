@@ -1,11 +1,9 @@
 import { RenderCode } from "frontend/design-system/components/RenderCode";
-import { DocumentationRoot, IDocumentationRootProps } from "./_base";
+import { DocumentationRoot } from "./_base";
 
-export function SystemProfileDocumentation(
-  props: Omit<IDocumentationRootProps, "children">
-) {
+export function SystemProfileDocumentation() {
   return (
-    <DocumentationRoot {...props}>
+    <DocumentationRoot>
       <p>
         Since users are created with only three fields
         <code> Username</code>, <code>Name</code>, and <code>Role</code>, you

@@ -29,7 +29,10 @@ export class KeyValueStoreApiService<T> {
   }
 
   async getItem(): Promise<T | null> {
-    const data = await this._keyValueStorePersistenceService.getItem(this.key);
+    const data = await this._keyValueStorePersistenceService.getItem(
+      this.key,
+      null
+    );
     if (!data) {
       return null;
     }

@@ -14,13 +14,14 @@ import {
 import { IFormProps } from "frontend/lib/form/types";
 import { ITableColumn } from "frontend/design-system/components/Table/types";
 import { SoftButton } from "frontend/design-system/components/Button/SoftButton";
-import { DeleteButton } from "frontend/design-system/components/Button/DeleteButton";
 import { Stack } from "frontend/design-system/primitives/Stack";
 import { FormInput } from "frontend/design-system/components/Form/FormInput";
 import { Spacer } from "frontend/design-system/primitives/Spacer";
 import { Table } from "frontend/design-system/components/Table";
 import { FormButton } from "frontend/design-system/components/Button/FormButton";
 import { Tabs } from "frontend/design-system/components/Tabs";
+import { ActionButtons } from "frontend/design-system/components/Button/ActionButtons";
+import { DELETE_BUTTON_PROPS } from "frontend/design-system/components/Button/constants";
 
 interface IProps {
   values: ITableTab[];
@@ -73,15 +74,22 @@ function TabForm({ values, tableColumns, initialValues }: IProps) {
           content: (
             <>
               <Stack justify="end">
-                <DeleteButton
-                  onDelete={() => {
-                    fields.remove(index);
-                    setCurrentTab(`Tab ${index}`);
-                  }}
-                  shouldConfirmAlert={false}
-                  text="Tab"
+                <ActionButtons
                   size="xs"
+                  actionButtons={[
+                    {
+                      ...DELETE_BUTTON_PROPS({
+                        action: () => {
+                          fields.remove(index);
+                          setCurrentTab(`Tab ${index}`);
+                        },
+                        label: "Delete Tab",
+                        isMakingRequest: false,
+                      }),
+                    },
+                  ]}
                 />
+
                 {newTabButton}
               </Stack>
               <Spacer />

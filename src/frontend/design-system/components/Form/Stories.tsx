@@ -17,10 +17,11 @@ import { FormMultiSelect, FormSelect } from "./FormSelect";
 import { FormCodeEditor } from "./FormCodeEditor";
 import { AsyncFormSelect } from "./FormSelect/Async";
 import { FormSwitch } from "./FormSwitch";
-import { DeleteButton } from "../Button/DeleteButton";
 import { FormSearch } from "./FormSearch";
 import { FormFileInput } from "./FormFileInput";
 import { FormSelectButton } from "./FormSelectButton";
+import { ActionButtons } from "../Button/ActionButtons";
+import { DELETE_BUTTON_PROPS } from "../Button/constants";
 
 function DemoForm() {
   return (
@@ -325,10 +326,17 @@ function DemoForm() {
 
           <FormSearch onChange={() => {}} />
 
-          <DeleteButton
-            onDelete={action("")}
-            isMakingDeleteRequest={false}
-            text="Me"
+          <ActionButtons
+            justIcons
+            actionButtons={[
+              {
+                ...DELETE_BUTTON_PROPS({
+                  action: () => action(""),
+                  label: "Delete Me",
+                  isMakingRequest: false,
+                }),
+              },
+            ]}
           />
           <Stack justify="flex-end">
             <FormButton

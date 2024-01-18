@@ -82,7 +82,7 @@ export abstract class IntegrationsConfigurationApiService
   }
 
   async getValue(key: string): Promise<string | undefined> {
-    const data = await this._persistenceService.getItem(key);
+    const data = await this._persistenceService.getItem(key, undefined);
 
     if (!data) {
       return undefined;

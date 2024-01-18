@@ -35,18 +35,13 @@ export class UserPreferencesApiService implements IApplicationService {
     username: string,
     key: T
   ): Promise<UserPreferencesValueType<T>> {
-    const value = await this._userPreferencesPersistenceService.getItem(
+    return (await this._userPreferencesPersistenceService.getItem(
       this.makeId({
         key,
         username,
-      })
-    );
-
-    if (value) {
-      return value as UserPreferencesValueType<T>;
-    }
-
-    return USER_PREFERENCES_CONFIG[key].defaultValue;
+      }),
+      USER_PREFERENCES_CONFIG[key].defaultValue
+    )) as UserPreferencesValueType<T>;
   }
 
   async upsert<T extends UserPreferencesKeys>(

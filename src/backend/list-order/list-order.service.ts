@@ -16,7 +16,7 @@ export class ListOrderApiService implements IApplicationService {
   }
 
   async getItemOrder(listId: string): Promise<string[]> {
-    return (await this._listOrderPersistenceService.getItem(listId)) || [];
+    return await this._listOrderPersistenceService.getItem(listId, []);
   }
 
   async appendToList(listId: string, itemId: string): Promise<void> {

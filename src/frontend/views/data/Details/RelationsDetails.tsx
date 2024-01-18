@@ -90,6 +90,7 @@ export function EntityRelationDetails() {
     entityId: idData,
     baseActionButtons: actionButtons,
     from: "details",
+    row: dataDetails, // TODO :eyes
   });
 
   return (
@@ -137,7 +138,7 @@ export function EntityRelationDetails() {
         >
           <EntityDetailsView
             displayFrom="details"
-            id={idData}
+            entityId={idData}
             entity={childEntity}
           />
         </SectionBox>

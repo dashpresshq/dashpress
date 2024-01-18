@@ -14,12 +14,12 @@ import {
 import { MAKE_APP_CONFIGURATION_CRUD_CONFIG } from "frontend/hooks/configuration/configuration.constant";
 import { FormInput } from "frontend/design-system/components/Form/FormInput";
 import { Stack } from "frontend/design-system/primitives/Stack";
-import { DeleteButton } from "frontend/design-system/components/Button/DeleteButton";
 import { Card, CardBody } from "frontend/design-system/components/Card";
 import { Spacer } from "frontend/design-system/primitives/Spacer";
 import { SoftButton } from "frontend/design-system/components/Button/SoftButton";
 import { FormButton } from "frontend/design-system/components/Button/FormButton";
 import { FormSwitch } from "frontend/design-system/components/Form/FormSwitch";
+import { DELETE_BUTTON_PROPS } from "frontend/design-system/components/Button/constants";
 import { isBlackOrWhite } from "./isBlackOrWhite";
 
 const ColorBox = styled.button<{ color: string }>`
@@ -169,12 +169,17 @@ export function FieldSelectionCanvas({
                             <div />
                           )}
                           {ManagableEntities.includes(entityType) && (
-                            <DeleteButton
-                              onDelete={() => {
-                                fields.remove(index);
-                              }}
-                              shouldConfirmAlert={false}
+                            <SoftButton
                               size="xs"
+                              justIcon
+                              {...DELETE_BUTTON_PROPS({
+                                action: () => {
+                                  fields.remove(index);
+                                },
+                                isMakingRequest: false,
+                                label: "Delete Selection",
+                                shouldConfirmAlert: undefined,
+                              })}
                             />
                           )}
                         </Stack>

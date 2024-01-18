@@ -14,8 +14,6 @@ import {
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { MAKE_APP_CONFIGURATION_CRUD_CONFIG } from "frontend/hooks/configuration/configuration.constant";
 import { FieldsSettingsDocumentation } from "frontend/docs/fields";
-import { useState } from "react";
-import { DOCUMENTATION_LABEL } from "frontend/docs";
 import { useRouteParam } from "frontend/lib/routing/useRouteParam";
 import { useChangeRouterParam } from "frontend/lib/routing/useChangeRouterParam";
 import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
@@ -25,6 +23,7 @@ import {
 } from "frontend/design-system/components/Skeleton/Form";
 import { SectionBox } from "frontend/design-system/components/Section/SectionBox";
 import { Tabs } from "frontend/design-system/components/Tabs";
+import { useDocumentationActionButton } from "frontend/docs/constants";
 import {
   ENTITY_CONFIGURATION_VIEW,
   ENTITY_FIELD_SETTINGS_TAB_LABELS,
@@ -33,12 +32,9 @@ import { FieldsTypeForm } from "./FieldsType.form";
 import { FieldsLabelForm, loadingFieldsLabelForm } from "./FieldsLabel.form";
 import { BaseEntitySettingsLayout } from "../_Base";
 
-const DOCS_TITLE = "Fields Settings";
-
 export function EntityFieldsSettings() {
   const tabFromUrl = useRouteParam("tab");
   const changeTabParam = useChangeRouterParam("tab");
-  const [isDocOpen, setIsDocOpen] = useState(false);
 
   const entity = useEntitySlug();
   const entityFieldLists = useEntityFieldLists(entity);
@@ -82,6 +78,9 @@ export function EntityFieldsSettings() {
     entity
   );
 
+  const documentationActionButton =
+    useDocumentationActionButton("Fields Settings");
+
   useSetPageDetails({
     pageTitle: "Field Settings",
     viewKey: ENTITY_CONFIGURATION_VIEW,
@@ -104,14 +103,7 @@ export function EntityFieldsSettings() {
     <BaseEntitySettingsLayout>
       <SectionBox
         title="Fields Settings"
-        actionButtons={[
-          {
-            _type: "normal",
-            action: () => setIsDocOpen(true),
-            systemIcon: "Help",
-            label: DOCUMENTATION_LABEL.CONCEPT(DOCS_TITLE),
-          },
-        ]}
+        actionButtons={[documentationActionButton]}
       >
         <Tabs
           currentTab={tabFromUrl}
@@ -188,11 +180,7 @@ export function EntityFieldsSettings() {
           ]}
         />
       </SectionBox>
-      <FieldsSettingsDocumentation
-        title={DOCS_TITLE}
-        close={setIsDocOpen}
-        isOpen={isDocOpen}
-      />
+      <FieldsSettingsDocumentation />
     </BaseEntitySettingsLayout>
   );
 }

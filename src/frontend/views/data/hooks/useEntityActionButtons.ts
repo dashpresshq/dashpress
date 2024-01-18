@@ -1,7 +1,8 @@
 import { useEntityDataDeletionMutation } from "frontend/hooks/data/data.store";
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
-import { IActionButton } from "frontend/design-system/components/Button/ActionButtons/types";
 import { CrudViewsKeys } from "shared/configurations";
+import { IGroupActionButton } from "frontend/design-system/components/Button/types";
+import { DELETE_BUTTON_PROPS } from "frontend/design-system/components/Button/constants";
 import { useCanUserPerformCrudAction } from "./useCanUserPerformCrudAction";
 
 export const useEntityActionButtons = ({
@@ -14,7 +15,7 @@ export const useEntityActionButtons = ({
   entity: string;
   entityId: string;
   redirectAfterDelete?: string;
-}): IActionButton[] => {
+}): IGroupActionButton[] => {
   const canUserPerformCrudAction = useCanUserPerformCrudAction(entity);
   const entityDataDeletionMutation = useEntityDataDeletionMutation(
     {
@@ -23,21 +24,21 @@ export const useEntityActionButtons = ({
     },
     redirectAfterDelete
   );
-  const actionButtons: IActionButton[] = [];
+  const actionButtons: IGroupActionButton[] = [];
 
   if (canUserPerformCrudAction("details") && !exclude.includes("details")) {
     actionButtons.push({
-      _type: "normal",
       systemIcon: "Eye",
       action: NAVIGATION_LINKS.ENTITY.DETAILS(entity, entityId),
       label: "Details",
       order: 10,
+      id: "details",
     });
   }
 
   if (canUserPerformCrudAction("update") && !exclude.includes("update")) {
     actionButtons.push({
-      _type: "normal",
+      id: "edit",
       systemIcon: "Edit",
       action: NAVIGATION_LINKS.ENTITY.UPDATE(entity, entityId),
       label: "Edit",
@@ -47,13 +48,15 @@ export const useEntityActionButtons = ({
 
   if (canUserPerformCrudAction("delete") && !exclude.includes("delete")) {
     actionButtons.push({
-      // TODO delete on the dropdown
-      _type: "delete",
-      action: () => entityDataDeletionMutation.mutate(entityId),
-      isMakingDeleteRequest:
-        entityDataDeletionMutation.isLoading &&
-        entityDataDeletionMutation.variables === entityId,
-      shouldConfirmAlert: true,
+      ...DELETE_BUTTON_PROPS({
+        label: "Delete",
+        action: () => {
+          entityDataDeletionMutation.mutate(entityId);
+        },
+        isMakingRequest:
+          entityDataDeletionMutation.isLoading &&
+          entityDataDeletionMutation.variables === entityId,
+      }),
       order: 30,
     });
   }

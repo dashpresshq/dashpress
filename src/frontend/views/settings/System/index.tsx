@@ -12,24 +12,22 @@ import {
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { MAKE_APP_CONFIGURATION_CRUD_CONFIG } from "frontend/hooks/configuration/configuration.constant";
 import { SystemSettingsDocumentation } from "frontend/docs/system-settings";
-import { DOCUMENTATION_LABEL } from "frontend/docs";
-import { useState } from "react";
 import { SchemaForm } from "frontend/components/SchemaForm";
 import { IBaseSystemSettings } from "shared/configurations/system";
+import { useDocumentationActionButton } from "frontend/docs/constants";
 import { BaseSettingsLayout } from "../_Base";
 import { SETTINGS_VIEW_KEY } from "../constants";
 
 const CRUD_CONFIG = MAKE_APP_CONFIGURATION_CRUD_CONFIG("system_settings");
 
-const DOCS_TITLE = "System Settings";
-
 export function SystemSettings() {
   const systemSettings = useAppConfiguration("system_settings");
 
+  const documentationActionButton =
+    useDocumentationActionButton("System Settings");
+
   const upsertConfigurationMutation =
     useUpsertConfigurationMutation("system_settings");
-
-  const [isDocOpen, setIsDocOpen] = useState(false);
 
   useSetPageDetails({
     pageTitle: CRUD_CONFIG.TEXT_LANG.TITLE,
@@ -41,14 +39,7 @@ export function SystemSettings() {
     <BaseSettingsLayout>
       <SectionBox
         title={CRUD_CONFIG.TEXT_LANG.TITLE}
-        actionButtons={[
-          {
-            _type: "normal",
-            action: () => setIsDocOpen(true),
-            systemIcon: "Help",
-            label: DOCUMENTATION_LABEL.CONCEPT(DOCS_TITLE),
-          },
-        ]}
+        actionButtons={[documentationActionButton]}
       >
         <ViewStateMachine
           loading={systemSettings.isLoading}
@@ -73,11 +64,7 @@ export function SystemSettings() {
           />
         </ViewStateMachine>
       </SectionBox>
-      <SystemSettingsDocumentation
-        title={DOCS_TITLE}
-        close={setIsDocOpen}
-        isOpen={isDocOpen}
-      />
+      <SystemSettingsDocumentation />
     </BaseSettingsLayout>
   );
 }

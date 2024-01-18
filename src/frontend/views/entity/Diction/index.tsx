@@ -12,19 +12,16 @@ import {
 } from "frontend/hooks/entity/entity.config";
 import { useUpsertConfigurationMutation } from "frontend/hooks/configuration/configuration.store";
 import { MAKE_APP_CONFIGURATION_CRUD_CONFIG } from "frontend/hooks/configuration/configuration.constant";
-import { useState } from "react";
 import { DictionDocumentation } from "frontend/docs/diction";
-import { DOCUMENTATION_LABEL } from "frontend/docs";
 import { NAVIGATION_MENU_ENDPOINT } from "frontend/_layouts/app/LayoutImpl/constants";
 import { SchemaForm } from "frontend/components/SchemaForm";
 import { AppConfigurationValueType } from "shared/configurations/constants";
+import { useDocumentationActionButton } from "frontend/docs/constants";
 import { BaseEntitySettingsLayout } from "../_Base";
 import { ENTITY_CONFIGURATION_VIEW } from "../constants";
 
 const ENTITY_DICTION_SETTINGS_CRUD_CONFIG =
   MAKE_APP_CONFIGURATION_CRUD_CONFIG("entity_diction");
-
-const DOCS_TITLE = "Diction Settings";
 
 export function EntityDictionSettings() {
   const entity = useEntitySlug();
@@ -37,7 +34,8 @@ export function EntityDictionSettings() {
     }
   );
 
-  const [isDocOpen, setIsDocOpen] = useState(false);
+  const documentationActionButton =
+    useDocumentationActionButton("Diction Settings");
 
   useSetPageDetails({
     pageTitle: ENTITY_DICTION_SETTINGS_CRUD_CONFIG.TEXT_LANG.TITLE,
@@ -48,14 +46,7 @@ export function EntityDictionSettings() {
     <BaseEntitySettingsLayout>
       <SectionBox
         title={ENTITY_DICTION_SETTINGS_CRUD_CONFIG.TEXT_LANG.TITLE}
-        actionButtons={[
-          {
-            _type: "normal",
-            action: () => setIsDocOpen(true),
-            systemIcon: "Help",
-            label: DOCUMENTATION_LABEL.CONCEPT(DOCS_TITLE),
-          },
-        ]}
+        actionButtons={[documentationActionButton]}
       >
         <ViewStateMachine
           loading={false}
@@ -107,11 +98,7 @@ export function EntityDictionSettings() {
           />
         </ViewStateMachine>
       </SectionBox>
-      <DictionDocumentation
-        title={DOCS_TITLE}
-        close={setIsDocOpen}
-        isOpen={isDocOpen}
-      />
+      <DictionDocumentation />
     </BaseEntitySettingsLayout>
   );
 }

@@ -1,4 +1,3 @@
-import { CREATE_USER_FORM_SCHEMA } from "shared/form-schemas/users/create";
 import { USER_PERMISSIONS } from "shared/constants/user";
 import { requestHandler } from "backend/lib/request";
 import { usersApiService } from "backend/users/users.service";
@@ -16,7 +15,7 @@ export default requestHandler({
       },
       {
         _type: "requestBody",
-        options: CREATE_USER_FORM_SCHEMA,
+        options: {},
       },
     ]);
     return await usersApiService.registerUser(validatedRequest.requestBody);

@@ -38,6 +38,7 @@ export const MAKE_CRUD_CONFIG = ({
     TEXT_LANG: {
       CREATE: `Add New ${singular}`,
       MANAGE: `Manage ${plural}`,
+      DELETE: `Delete ${singular}`,
       EDIT: `Edit ${singular}`,
       DETAILS: `${singular} Details`,
       NOT_FOUND: CRUD_CONFIG_NOT_FOUND(singular),

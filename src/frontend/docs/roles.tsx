@@ -2,11 +2,11 @@ import { USER_PERMISSIONS } from "shared/constants/user";
 import { userFriendlyCase } from "shared/lib/strings/friendly-case";
 import { InfoAlert } from "frontend/design-system/components/Alert";
 import { Spacer } from "frontend/design-system/primitives/Spacer";
-import { DocumentationRoot, IDocumentationRootProps } from "./_base";
+import { DocumentationRoot } from "./_base";
 
-export function RolesDocumentation(props: IDocumentationRootProps) {
+export function RolesDocumentation() {
   return (
-    <DocumentationRoot {...props}>
+    <DocumentationRoot>
       <p>
         DashPress has two default roles which are not editable or deletable and
         they are <code>Creator</code> and <code>Viewer</code>.

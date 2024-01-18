@@ -6,7 +6,6 @@ import { IconInputField } from "frontend/components/IconInputField";
 import { useMutation } from "react-query";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { useEffect, useState } from "react";
-import { DOCUMENTATION_LABEL } from "frontend/docs";
 import { WidgetScriptDocumentation } from "frontend/docs/scripts/widget-scripts";
 import styled from "styled-components";
 import { required } from "frontend/lib/validations";
@@ -27,6 +26,7 @@ import { Stack } from "frontend/design-system/primitives/Stack";
 import { FormButton } from "frontend/design-system/components/Button/FormButton";
 import { FormCodeEditor } from "frontend/design-system/components/Form/FormCodeEditor";
 import { loadedDataState } from "frontend/lib/data/constants/loadedDataState";
+import { useDocumentationActionButton } from "frontend/docs/constants";
 import { GridSpan } from "./Form.style";
 import { DASHBOARD_WIDGETS_CRUD_CONFIG } from "../../constants";
 import { DashboardWidgetPresentation } from "../Presentation";
@@ -34,8 +34,6 @@ import { WIDGET_CONFIG } from "../constants";
 import { PortalFormFields, PortalFormSchema } from "./portal";
 import { WidgetFormField } from "./types";
 import { DASHBOARD_WIDGET_HEIGHTS, DASHBOARD_WIDGET_SPANS } from "./constants";
-
-const DOCS_TITLE = "Widget Script";
 
 const Root = styled.div`
   display: grid;
@@ -77,8 +75,10 @@ export function DashboardWidgetForm({
   action: "create" | "edit";
 }) {
   const [currentTab, setCurrentTab] = useState("");
-  const [isDocOpen, setIsDocOpen] = useState(false);
   const runWidgetScript = useRunWidgetScript();
+
+  const documentationActionButton =
+    useDocumentationActionButton("Widget Script");
 
   useEffect(() => {
     if (initialValues.script) {
@@ -244,15 +244,7 @@ export function DashboardWidgetForm({
                           label="Script"
                           meta={meta}
                           input={input}
-                          rightActions={[
-                            {
-                              systemIcon: "Help",
-                              action: () => {
-                                setIsDocOpen(true);
-                              },
-                              label: DOCUMENTATION_LABEL.CONCEPT(DOCS_TITLE),
-                            },
-                          ]}
+                          rightActions={[documentationActionButton]}
                         />
                       )}
                     </Field>
@@ -310,8 +302,7 @@ export function DashboardWidgetForm({
                               runWidgetScript.mutate(values.script);
                             }}
                             disabled={!values.script}
-                            type="button"
-                            isMakingActionRequest={runWidgetScript.isLoading}
+                            isMakingRequest={runWidgetScript.isLoading}
                             systemIcon="Eye"
                             size={null}
                             label="Test Widget Script"
@@ -337,11 +328,7 @@ export function DashboardWidgetForm({
           );
         }}
       />
-      <WidgetScriptDocumentation
-        title={DOCS_TITLE}
-        close={setIsDocOpen}
-        isOpen={isDocOpen}
-      />
+      <WidgetScriptDocumentation />
     </>
   );
 }

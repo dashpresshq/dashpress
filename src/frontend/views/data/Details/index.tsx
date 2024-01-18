@@ -8,6 +8,7 @@ import {
   useEntitySlug,
 } from "frontend/hooks/entity/entity.config";
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
+import { useEntityDataDetails } from "frontend/hooks/data/data.store";
 import { ENTITY_DETAILS_VIEW_KEY } from "./constants";
 import { EntityDetailsView } from "./DetailsView";
 import { DetailsLayout, DETAILS_LAYOUT_KEY } from "./_Layout";
@@ -19,6 +20,7 @@ export function EntityDetails() {
   const entityId = useEntityId();
   const entity = useEntitySlug();
   const entityCrudConfig = useEntityCrudConfig(entity);
+  const dataDetails = useEntityDataDetails({ entity, entityId });
 
   const { backLink } = useNavigationStack();
 
@@ -46,6 +48,7 @@ export function EntityDetails() {
     entityId,
     baseActionButtons: actionButtons,
     from: "details",
+    row: dataDetails.data,
   });
 
   return (
@@ -61,7 +64,7 @@ export function EntityDetails() {
       >
         <EntityDetailsView
           displayFrom="details"
-          id={entityId}
+          entityId={entityId}
           entity={entity}
         />
       </SectionBox>

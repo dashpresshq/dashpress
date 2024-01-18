@@ -5,8 +5,6 @@ import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { BASE_USER_PERMISSIONS, USER_PERMISSIONS } from "shared/constants/user";
 import { ILabelValue } from "shared/types/options";
 import { userFriendlyCase } from "shared/lib/strings/friendly-case";
-import { DOCUMENTATION_LABEL } from "frontend/docs";
-import { useState } from "react";
 import { RolesDocumentation } from "frontend/docs/roles";
 import { SectionBox } from "frontend/design-system/components/Section/SectionBox";
 import { ContentLayout } from "frontend/design-system/components/Section/SectionDivider";
@@ -16,6 +14,7 @@ import { Spacer } from "frontend/design-system/primitives/Spacer";
 import { AppLayout } from "frontend/_layouts/app";
 import { useRouteParam } from "frontend/lib/routing/useRouteParam";
 import { useChangeRouterParam } from "frontend/lib/routing/useChangeRouterParam";
+import { useDocumentationActionButton } from "frontend/docs/constants";
 import {
   ADMIN_PERMISSIONS_CRUD_CONFIG,
   useRolePermissions,
@@ -38,20 +37,22 @@ const adminPermissionList: ILabelValue[] = mapPermissionStringToLabelValue(
   Object.values(BASE_USER_PERMISSIONS)
 );
 
-const DOCS_TITLE = "Roles and Permissions";
-
 export function RolePermissions() {
   const activeEntities = useActiveEntities();
   const portalPermission = usePortalExtendedPermissions();
   const rolePermissions = useRolePermissions();
   const portalUserPermissions = usePortalUserPermissions();
   const { backLink } = useNavigationStack();
-  const [isDocOpen, setIsDocOpen] = useState(false);
+
   const tabFromUrl = useRouteParam("tab");
   const changeTabParam = useChangeRouterParam("tab");
 
   const portalUserPermissionsList = mapPermissionStringToLabelValue(
     portalUserPermissions
+  );
+
+  const documentationActionButton = useDocumentationActionButton(
+    "Roles and Permissions"
   );
 
   useSetPageDetails({
@@ -69,14 +70,7 @@ export function RolePermissions() {
         <SectionBox
           title={ADMIN_PERMISSIONS_CRUD_CONFIG.TEXT_LANG.EDIT}
           backLink={backLink}
-          actionButtons={[
-            {
-              _type: "normal",
-              action: () => setIsDocOpen(true),
-              systemIcon: "Help",
-              label: DOCUMENTATION_LABEL.CONCEPT(DOCS_TITLE),
-            },
-          ]}
+          actionButtons={[documentationActionButton]}
         >
           <ViewStateMachine
             error={error}
@@ -105,11 +99,7 @@ export function RolePermissions() {
         </SectionBox>
         <Spacer />
       </ContentLayout.Center>
-      <RolesDocumentation
-        title={DOCS_TITLE}
-        close={setIsDocOpen}
-        isOpen={isDocOpen}
-      />
+      <RolesDocumentation />
     </AppLayout>
   );
 }

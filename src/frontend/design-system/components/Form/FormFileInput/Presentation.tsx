@@ -8,7 +8,8 @@ import { SYSTEM_COLORS } from "frontend/design-system/theme/system";
 import { Spacer } from "frontend/design-system/primitives/Spacer";
 import { Typo } from "frontend/design-system/primitives/Typo";
 import { ProgressBar } from "frontend/design-system/components/ProgressBar";
-import { DeleteButton } from "frontend/design-system/components/Button/DeleteButton";
+import { DELETE_BUTTON_PROPS } from "../../Button/constants";
+import { SoftButton } from "../../Button/SoftButton";
 
 const FileInput = styled.input`
   position: absolute;
@@ -130,10 +131,15 @@ export function Presentation({
           <Typo.SM color="muted">
             {value}{" "}
             {!disabled ? (
-              <DeleteButton
-                onDelete={onClear}
-                shouldConfirmAlert={false}
+              <SoftButton
                 size="xs"
+                justIcon
+                {...DELETE_BUTTON_PROPS({
+                  action: onClear,
+                  isMakingRequest: false,
+                  label: "Remove File",
+                  shouldConfirmAlert: undefined,
+                })}
               />
             ) : null}
           </Typo.SM>

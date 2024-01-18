@@ -1,48 +1,33 @@
 import React from "react";
 import Link from "next/link";
 import { Loader } from "react-feather";
-import { SYSTEM_COLORS } from "frontend/design-system/theme/system";
 import { Stack } from "frontend/design-system/primitives/Stack";
-import { SystemIconsKeys } from "shared/constants/Icons";
 import { SystemIcon } from "frontend/design-system/Icons/System";
 import { SoftButtonStyled } from "./Button";
 import { Spin } from "../_/Spin";
 import { Tooltip } from "../Tooltip";
-
-export interface IProps {
-  label?: string;
-  systemIcon?: SystemIconsKeys;
-  size?: "sm" | "xs";
-  block?: true;
-  disabled?: boolean;
-  color?: keyof typeof SYSTEM_COLORS;
-  action: string | (() => void);
-  secondaryAction?: () => void;
-  justIcon?: true;
-  className?: string;
-  type?: "button";
-  isMakingActionRequest?: boolean;
-}
+import { ConfirmAlert } from "../ConfirmAlert";
+import { IActionButton } from "./types";
 
 export function SoftButton({
   label,
   block,
-  color,
   size = "sm",
   systemIcon,
   justIcon,
-  type,
+  shouldConfirmAlert,
   disabled,
-  isMakingActionRequest,
+  isMakingRequest,
   action,
+  noToolTip,
+  color,
   secondaryAction,
-  className,
-}: IProps) {
+}: IActionButton) {
   const iconProps = {
     size: 14,
   };
 
-  const content = isMakingActionRequest ? (
+  const content = isMakingRequest ? (
     <Spin as={Loader} {...iconProps} />
   ) : (
     <Stack
@@ -61,18 +46,17 @@ export function SoftButton({
   );
 
   const buttonProps = {
-    className,
     size,
     block,
-    disabled,
-    color,
+    disabled: disabled || isMakingRequest,
     justIcon,
+    $color: color,
     "aria-label": justIcon ? label : undefined,
   };
 
   const toolTipProps = {
     place: "top",
-    text: justIcon && label,
+    text: justIcon && !noToolTip && label,
   } as const;
 
   if (typeof action === "string") {
@@ -101,10 +85,17 @@ export function SoftButton({
     <Tooltip {...toolTipProps}>
       <SoftButtonStyled
         {...buttonProps}
-        type={type}
-        onClick={(e: { stopPropagation: () => void }) => {
+        type="button"
+        onClick={(e: React.BaseSyntheticEvent) => {
           e.stopPropagation();
-          action();
+
+          if (shouldConfirmAlert) {
+            return ConfirmAlert({
+              title: shouldConfirmAlert,
+              action,
+            });
+          }
+          return action();
         }}
       >
         {content}

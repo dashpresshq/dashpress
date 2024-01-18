@@ -2,11 +2,11 @@ import { INTEGRATIONS_GROUP_CONFIG } from "shared/config-bag/integrations";
 import { ADMIN_ACTION_INSTANCES_CRUD_CONFIG } from "frontend/views/entity/Actions/constants";
 import { ErrorAlert, InfoAlert } from "frontend/design-system/components/Alert";
 import { RenderCode } from "frontend/design-system/components/RenderCode";
-import { DocumentationRoot, IDocumentationRootProps } from "./_base";
+import { DocumentationRoot } from "./_base";
 
-export function FormIntegrationsDocumentation(props: IDocumentationRootProps) {
+export function FormIntegrationsDocumentation() {
   return (
-    <DocumentationRoot {...props}>
+    <DocumentationRoot>
       <p>
         With integrations, after creating, updating, or deleting data you can
         trigger notifications through email, Slack, or SMS or send data to

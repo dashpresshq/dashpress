@@ -91,7 +91,7 @@ export function MainContent({
                 ariaLabel="Toggle Demo Menu"
                 menuItems={DEMO_LINKS.map((link) => ({
                   ...link,
-                  onClick: () => window.open(link.link),
+                  action: () => window.open(link.link),
                 }))}
               />
             )}

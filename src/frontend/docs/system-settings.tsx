@@ -1,10 +1,9 @@
 import { Spacer } from "frontend/design-system/primitives/Spacer";
-import { InfoAlert } from "frontend/design-system/components/Alert";
-import { DocumentationRoot, IDocumentationRootProps } from "./_base";
+import { DocumentationRoot } from "./_base";
 
-export function SystemSettingsDocumentation(props: IDocumentationRootProps) {
+export function SystemSettingsDocumentation() {
   return (
-    <DocumentationRoot {...props}>
+    <DocumentationRoot>
       <Spacer />
       <h4>Token Validity Duration</h4>
       <p>
@@ -12,8 +11,6 @@ export function SystemSettingsDocumentation(props: IDocumentationRootProps) {
         it logs the users out. So decreasing or increasing this value changes
         that invalidation duration.
       </p>
-
-      <InfoAlert message="This setting is not respected when your schema is empty so we will always introspect when running for the first time or if you delete the saved schema for any reason." />
     </DocumentationRoot>
   );
 }

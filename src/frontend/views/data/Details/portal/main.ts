@@ -1,4 +1,4 @@
-import { IActionButton } from "frontend/design-system/components/Button/ActionButtons/types";
+import { IActionButton } from "frontend/design-system/components/Button/types";
 import { IDropDownMenuItem } from "frontend/design-system/components/DropdownMenu";
 import { noop } from "shared/lib/noop";
 

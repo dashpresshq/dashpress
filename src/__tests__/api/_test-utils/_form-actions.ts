@@ -1,10 +1,10 @@
 import { createConfigDomainPersistenceService } from "backend/lib/config-persistence";
-import { ActionIntegrations, IActionInstance } from "shared/types/actions";
+import { ActionIntegrations, IFormAction } from "shared/types/actions";
 import { DataEventActions } from "shared/types/data";
 
-const TEST_ACTION_INSTANCES: IActionInstance[] = [
+const TEST_FORM_ACTIONS: IFormAction[] = [
   {
-    instanceId: "instance-id-1",
+    id: "form-action-id-1",
     integration: ActionIntegrations.SMTP,
     entity: "base-model",
     action: "SEND_MESSAGE",
@@ -14,7 +14,7 @@ const TEST_ACTION_INSTANCES: IActionInstance[] = [
     },
   },
   {
-    instanceId: "instance-id-2",
+    id: "form-action-id-2",
     integration: ActionIntegrations.HTTP,
     entity: "secondary-model",
     action: "POST",
@@ -25,11 +25,11 @@ const TEST_ACTION_INSTANCES: IActionInstance[] = [
   },
 ];
 
-export const setupActionInstanceTestData = async (
-  testActionInstances: IActionInstance[] = TEST_ACTION_INSTANCES
+export const setupFormActionsTestData = async (
+  formActions: IFormAction[] = TEST_FORM_ACTIONS
 ) => {
   const configPersistenceService =
-    createConfigDomainPersistenceService<IActionInstance>("action-instances");
+    createConfigDomainPersistenceService<IFormAction>("form-actions");
 
-  await configPersistenceService.resetState("instanceId", testActionInstances);
+  await configPersistenceService.resetState("id", formActions);
 };

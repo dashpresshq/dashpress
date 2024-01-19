@@ -1,8 +1,8 @@
+import { integrationsApiService } from "backend/integrations/integrations.service";
 import { requestHandler } from "backend/lib/request";
-import { actionsApiService } from "backend/actions/actions.service";
 
 export default requestHandler({
   GET: async () => {
-    return await actionsApiService.listActivatedIntegrations();
+    return await integrationsApiService.listActivatedIntegrations();
   },
 });

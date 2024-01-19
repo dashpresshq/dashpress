@@ -1,6 +1,6 @@
 import { USER_PERMISSIONS } from "shared/constants/user";
 import { requestHandler } from "backend/lib/request";
-import { actionsApiService } from "backend/actions/actions.service";
+import { formActionsApiService } from "backend/form-actions/form-actions.service";
 
 export default requestHandler(
   {
@@ -12,7 +12,7 @@ export default requestHandler(
         },
       ]);
 
-      return await actionsApiService.instantiateAction(
+      return await formActionsApiService.createFormAction(
         validatedRequest.requestBody
       );
     },

@@ -10,7 +10,7 @@ import { setupSchemaTestData } from "./_schema";
 import { setupUsersTestData } from "./_users";
 import { setupIntegrationsEnvTestData } from "./_integrations-env";
 import { setupActivatedIntegrationsTestData } from "./_activated-integrations";
-import { setupActionInstanceTestData } from "./_action-instances";
+import { setupFormActionsTestData } from "./_form-actions";
 import { setupTestDatabaseData } from "./_data";
 import { portalTestData } from "./portal";
 import { setupUserPreferencesTestData } from "./_user-preferences";
@@ -26,7 +26,7 @@ export const setupAllTestData = async (domains: DomainTypes[]) => {
     ["schema", setupSchemaTestData],
     ["data", setupTestDatabaseData],
     ["activated-integrations", setupActivatedIntegrationsTestData],
-    ["action-instances", setupActionInstanceTestData],
+    ["form-actions", setupFormActionsTestData],
     ["constants", setupIntegrationsConstantsTestData],
     ["environment-variables", setupIntegrationsEnvTestData],
     ["credentials", setupCredentialsTestData],

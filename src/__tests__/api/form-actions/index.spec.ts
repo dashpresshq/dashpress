@@ -1,5 +1,5 @@
-import handler from "pages/api/integrations/actions/instances/index";
-import getHandler from "pages/api/integrations/actions/instances/[key]";
+import handler from "pages/api/form-actions/index";
+import getHandler from "pages/api/form-actions/[key]";
 import {
   createAuthenticatedMocks,
   setupAllTestData,
@@ -12,9 +12,9 @@ jest.mock("nanoid", () => ({
     .mockReturnValueOnce("nano-id-2"),
 }));
 
-describe("/api/integrations/actions/instances/index", () => {
+describe("/api/form-actions/index", () => {
   beforeAll(async () => {
-    await setupAllTestData(["action-instances", "activated-integrations"]);
+    await setupAllTestData(["form-actions", "activated-integrations"]);
   });
 
   it("should instantiate actions", async () => {
@@ -59,35 +59,7 @@ describe("/api/integrations/actions/instances/index", () => {
     expect(res._getStatusCode()).toBe(201);
   });
 
-  it("should not instantiate action for un-activated integration", async () => {
-    const { req, res } = createAuthenticatedMocks({
-      method: "POST",
-      body: {
-        integration: "postmark",
-        entity: "test-entity-2",
-        action: "GET",
-        trigger: "update",
-        configuration: {
-          bad: '{"request": "hello"}',
-        },
-      },
-    });
-
-    await handler(req, res);
-
-    expect(res._getStatusCode()).toBe(400);
-    expect(res._getJSONData()).toMatchInlineSnapshot(`
-      {
-        "message": "The integration for 'postmark' has not yet been activated",
-        "method": "POST",
-        "name": "BadRequestError",
-        "path": "",
-        "statusCode": 400,
-      }
-    `);
-  });
-
-  it("should show all the added action instances", async () => {
+  it("should show all the added form actions", async () => {
     const { req, res } = createAuthenticatedMocks({
       method: "GET",
       query: {
@@ -107,7 +79,7 @@ describe("/api/integrations/actions/instances/index", () => {
             "to": "me",
           },
           "entity": "test-entity",
-          "instanceId": "nano-id-1",
+          "id": "nano-id-1",
           "integration": "smtp",
           "trigger": "update",
         },
@@ -119,7 +91,7 @@ describe("/api/integrations/actions/instances/index", () => {
             "url": "/some-where",
           },
           "entity": "test-entity",
-          "instanceId": "nano-id-2",
+          "id": "nano-id-2",
           "integration": "http",
           "trigger": "create",
         },

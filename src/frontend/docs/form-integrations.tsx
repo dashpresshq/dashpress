@@ -1,5 +1,5 @@
 import { INTEGRATIONS_GROUP_CONFIG } from "shared/config-bag/integrations";
-import { ADMIN_ACTION_INSTANCES_CRUD_CONFIG } from "frontend/views/entity/Actions/constants";
+import { FORM_ACTION_CRUD_CONFIG } from "frontend/views/entity/Actions/constants";
 import { ErrorAlert, InfoAlert } from "frontend/design-system/components/Alert";
 import { RenderCode } from "frontend/design-system/components/RenderCode";
 import { DocumentationRoot } from "./_base";
@@ -29,9 +29,8 @@ export function FormIntegrationsDocumentation() {
       <ol>
         <li>
           {" "}
-          Click on the{" "}
-          <code>
-            {ADMIN_ACTION_INSTANCES_CRUD_CONFIG.TEXT_LANG.CREATE}
+          Click on the <code>
+            {FORM_ACTION_CRUD_CONFIG.TEXT_LANG.CREATE}
           </code>{" "}
           button.
         </li>

@@ -1,9 +1,7 @@
 import { MAKE_CRUD_CONFIG } from "frontend/lib/crud-config";
 
-export const BASE_ACTIONS_ENDPOINT = `/api/integrations/actions`;
-
-export const ADMIN_ACTION_INSTANCES_CRUD_CONFIG = MAKE_CRUD_CONFIG({
-  path: `${BASE_ACTIONS_ENDPOINT}/instances`,
+export const FORM_ACTION_CRUD_CONFIG = MAKE_CRUD_CONFIG({
+  path: `/api/form-actions`,
   plural: "Form Actions",
   singular: "Form Action",
 });

@@ -28,8 +28,8 @@ export function Deactivate({ integrationDetail, activationId }: IProps) {
   return (
     <>
       <Typo.SM textStyle="italic">
-        Deactivating an action will irrevocabily delete its configurations and
-        remove all its instances
+        Deactivating an integration will irrevocabily delete its configurations
+        and remove all its form actions
       </Typo.SM>
       <Spacer />
       <SchemaForm

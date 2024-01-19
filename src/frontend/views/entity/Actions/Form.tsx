@@ -4,17 +4,17 @@ import { useState } from "react";
 import { IAppliedSchemaFormConfig } from "shared/form-schemas/types";
 import {
   ActionIntegrations,
-  IActionInstance,
+  IFormAction,
   IIntegrationsList,
 } from "shared/types/actions";
 import { userFriendlyCase } from "shared/lib/strings/friendly-case";
 import { DataEventActions } from "shared/types/data";
-import { useIntegrationImplementationsList } from "./instances.store";
-import { ADMIN_ACTION_INSTANCES_CRUD_CONFIG } from "./constants";
+import { useIntegrationImplementationsList } from "./form-actions.store";
+import { FORM_ACTION_CRUD_CONFIG } from "./constants";
 
 interface IProps {
-  onSubmit: (instance: IActionInstance) => Promise<void>;
-  initialValues?: Partial<IActionInstance>;
+  onSubmit: (formAction: IFormAction) => Promise<void>;
+  initialValues?: Partial<IFormAction>;
   formAction: "create" | "update";
   integrationsList: IIntegrationsList[];
   activatedIntegrations: ActionIntegrations[];
@@ -39,7 +39,7 @@ export function ActionForm({
     value: integration,
   }));
 
-  const [formValues, setFormValues] = useState<Partial<IActionInstance>>({});
+  const [formValues, setFormValues] = useState<Partial<IFormAction>>({});
 
   const implementations = useIntegrationImplementationsList(
     formValues.integration
@@ -113,19 +113,19 @@ export function ActionForm({
   }, initialValues);
 
   return (
-    <SchemaForm<IActionInstance>
+    <SchemaForm<IFormAction>
       buttonText={
         formAction === "create"
-          ? ADMIN_ACTION_INSTANCES_CRUD_CONFIG.FORM_LANG.CREATE
-          : ADMIN_ACTION_INSTANCES_CRUD_CONFIG.FORM_LANG.UPDATE
+          ? FORM_ACTION_CRUD_CONFIG.FORM_LANG.CREATE
+          : FORM_ACTION_CRUD_CONFIG.FORM_LANG.UPDATE
       }
       initialValues={initialValues$1}
       fields={fields}
       systemIcon={formAction === "create" ? "Plus" : "Save"}
       onChange={setFormValues}
       action={formAction}
-      onSubmit={async (instance) => {
-        const cleanedConfigurationForm = Object.entries(instance).reduce(
+      onSubmit={async (value) => {
+        const cleanedConfigurationForm = Object.entries(value).reduce(
           (cleanForm, [formKey, formValue]) => {
             if (formKey.startsWith(CONFIGURATION_FORM_PREFIX)) {
               const key = formKey.replace(CONFIGURATION_FORM_PREFIX, "");
@@ -137,7 +137,7 @@ export function ActionForm({
             return { ...cleanForm, [formKey]: formValue };
           },
           { configuration: {} }
-        ) as IActionInstance;
+        ) as IFormAction;
 
         await onSubmit(cleanedConfigurationForm);
       }}

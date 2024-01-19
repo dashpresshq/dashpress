@@ -12,7 +12,7 @@ import {
 import { ContentLayout } from "frontend/design-system/components/Section/SectionDivider";
 import { Spacer } from "frontend/design-system/primitives/Spacer";
 import { IDropDownMenuItem } from "frontend/design-system/components/DropdownMenu";
-import { ADMIN_ACTION_INSTANCES_CRUD_CONFIG } from "./Actions/constants";
+import { FORM_ACTION_CRUD_CONFIG } from "./Actions/constants";
 import {
   ENTITY_CRUD_LABELS,
   ENTITY_FIELD_SETTINGS_TAB_LABELS,
@@ -68,7 +68,7 @@ const baseMenuItems = (entity: string): IMenuSectionItem[] => [
   },
   {
     action: NAVIGATION_LINKS.ENTITY.CONFIG.FORM_INTEGRATIONS(entity),
-    name: ADMIN_ACTION_INSTANCES_CRUD_CONFIG.TEXT_LANG.TITLE,
+    name: FORM_ACTION_CRUD_CONFIG.TEXT_LANG.TITLE,
     systemIcon: "Zap",
     order: 80,
   },

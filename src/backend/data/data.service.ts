@@ -5,13 +5,10 @@ import {
   PaginatedData,
   QueryFilterSchema,
 } from "shared/types/data";
-import {
-  actionsApiService,
-  ActionsApiService,
-} from "backend/actions/actions.service";
 import { IEntityField } from "shared/types/db";
 import { IAccountProfile } from "shared/types/user";
 import { compileTemplateString } from "shared/lib/strings/templates";
+import { runFormAction } from "backend/form-actions/run-form-action";
 import { rDBMSDataApiService, RDBMSDataApiService } from "./data-access/RDBMS";
 import { IDataApiService, IPaginationFilters } from "./types";
 import {
@@ -33,8 +30,7 @@ export class DataApiService implements IDataApiService {
   constructor(
     private _rDBMSApiDataService: RDBMSDataApiService,
     private _entitiesApiService: EntitiesApiService,
-    private _configurationApiService: ConfigurationApiService,
-    private _actionsApiService: ActionsApiService
+    private _configurationApiService: ConfigurationApiService
   ) {}
 
   async bootstrap() {
@@ -151,7 +147,7 @@ export class DataApiService implements IDataApiService {
       insertId: id,
     });
 
-    await this._actionsApiService.runAction(
+    await runFormAction(
       entity,
       DataEventActions.Create,
       async () => await this.showData(entity, id),
@@ -267,7 +263,7 @@ export class DataApiService implements IDataApiService {
       options,
     });
 
-    await this._actionsApiService.runAction(
+    await runFormAction(
       entity,
       DataEventActions.Update,
       async () => await this.showData(entity, id),
@@ -280,7 +276,7 @@ export class DataApiService implements IDataApiService {
     id: string,
     accountProfile: IAccountProfile
   ): Promise<void> {
-    await this._actionsApiService.runAction(
+    await runFormAction(
       entity,
       DataEventActions.Delete,
       async () => await this.showData(entity, id),
@@ -363,6 +359,5 @@ export class DataApiService implements IDataApiService {
 export const dataApiService = new DataApiService(
   rDBMSDataApiService,
   entitiesApiService,
-  configurationApiService,
-  actionsApiService
+  configurationApiService
 );

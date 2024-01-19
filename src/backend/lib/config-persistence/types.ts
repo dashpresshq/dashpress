@@ -13,7 +13,7 @@ export type ConfigDomain =
   | "list-order"
   | "temp-storage"
   | "key-value"
-  | "action-instances"
+  | "form-actions"
   | "roles";
 
 export enum ConfigAdaptorTypes {

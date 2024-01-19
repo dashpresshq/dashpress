@@ -12,8 +12,8 @@ export enum ActionIntegrations {
   SEND_IN_BLUE = "sendInBlue",
 }
 
-export type IActionInstance = {
-  instanceId: string;
+export type IFormAction = {
+  id: string;
   integration: ActionIntegrations;
   entity: string;
   action: string;

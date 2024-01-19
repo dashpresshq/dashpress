@@ -99,7 +99,7 @@ export const systemIconToSVG = (icon: string, strokeWidth = 2) => {
     return icon;
   }
 
-  const svgProps = `fill="none" stroke-linejoin="round" stroke-linecap="round" stroke-width="${strokeWidth}" stroke="currentColor" `;
+  const svgProps = `fill="none" stroke-linejoin="round" stroke-linecap="round" stroke-width="${strokeWidth}" stroke="currentColor"`;
 
   iconPath = iconPath.replaceAll(`<path `, `<path ${svgProps} `);
   iconPath = iconPath.replaceAll(`<rect `, `<rect ${svgProps} `);

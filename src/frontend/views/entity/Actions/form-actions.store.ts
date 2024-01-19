@@ -1,7 +1,7 @@
 import { CRUD_CONFIG_NOT_FOUND } from "frontend/lib/crud-config";
 import { useMutation } from "react-query";
 import {
-  IActionInstance,
+  IFormAction,
   IIntegrationImplementationList,
 } from "shared/types/actions";
 import { useApiMutateOptimisticOptions } from "frontend/lib/data/useMutate/useApiMutateOptimisticOptions";
@@ -9,13 +9,12 @@ import { MutationHelpers } from "frontend/lib/data/useMutate/mutation-helpers";
 import { makeActionRequest } from "frontend/lib/data/makeRequest";
 import { useWaitForResponseMutationOptions } from "frontend/lib/data/useMutate/useWaitForResponseMutationOptions";
 import { useApi } from "frontend/lib/data/useApi";
-import {
-  ADMIN_ACTION_INSTANCES_CRUD_CONFIG,
-  BASE_ACTIONS_ENDPOINT,
-} from "./constants";
+import { FORM_ACTION_CRUD_CONFIG } from "./constants";
 
-export const LIST_ACTION_INSTANCES = (entity: string) => {
-  return `${BASE_ACTIONS_ENDPOINT}/instances/${entity}`;
+const BASE_ACTIONS_ENDPOINT = `/api/integrations/actions`;
+
+export const LIST_ENTITY_FORM_ACTIONS = (entity: string) => {
+  return `${FORM_ACTION_CRUD_CONFIG.ENDPOINTS.LIST}/${entity}`;
 };
 
 export const useIntegrationImplementationsList = (integration: string) =>
@@ -28,65 +27,62 @@ export const useIntegrationImplementationsList = (integration: string) =>
     }
   );
 
-export function useDeleteActionInstanceMutation(entity: string) {
-  const apiMutateOptions = useApiMutateOptimisticOptions<
-    IActionInstance[],
-    string
-  >({
-    dataQueryPath: LIST_ACTION_INSTANCES(entity),
-    otherEndpoints: [BASE_ACTIONS_ENDPOINT],
-    successMessage: ADMIN_ACTION_INSTANCES_CRUD_CONFIG.MUTATION_LANG.DELETE,
-    onMutate: MutationHelpers.deleteByKey("instanceId") as unknown as (
-      oldData: IActionInstance[],
-      form: string
-    ) => IActionInstance[],
-  });
+export function useDeleteFormActionMutation(entity: string) {
+  const apiMutateOptions = useApiMutateOptimisticOptions<IFormAction[], string>(
+    {
+      dataQueryPath: LIST_ENTITY_FORM_ACTIONS(entity),
+      otherEndpoints: [LIST_ENTITY_FORM_ACTIONS(entity)],
+      successMessage: FORM_ACTION_CRUD_CONFIG.MUTATION_LANG.DELETE,
+      onMutate: MutationHelpers.deleteByKey("id") as unknown as (
+        oldData: IFormAction[],
+        form: string
+      ) => IFormAction[],
+    }
+  );
 
   return useMutation(
-    async (instanceId: string) =>
+    async (formActionId: string) =>
       await makeActionRequest(
         "DELETE",
-        ADMIN_ACTION_INSTANCES_CRUD_CONFIG.ENDPOINTS.DELETE(instanceId)
+        FORM_ACTION_CRUD_CONFIG.ENDPOINTS.DELETE(formActionId)
       ),
     apiMutateOptions
   );
 }
 
-export function useCreateActionInstanceMutation() {
+export function useCreateFormActionMutation() {
   const apiMutateOptions = useWaitForResponseMutationOptions<
     Record<string, string>
   >({
-    endpoints: [BASE_ACTIONS_ENDPOINT],
-    successMessage: ADMIN_ACTION_INSTANCES_CRUD_CONFIG.MUTATION_LANG.CREATE,
+    endpoints: [FORM_ACTION_CRUD_CONFIG.ENDPOINTS.LIST],
+    successMessage: FORM_ACTION_CRUD_CONFIG.MUTATION_LANG.CREATE,
   });
 
   return useMutation(
-    async (configuration: IActionInstance) =>
+    async (configuration: IFormAction) =>
       await makeActionRequest(
         "POST",
-        ADMIN_ACTION_INSTANCES_CRUD_CONFIG.ENDPOINTS.CREATE,
+        FORM_ACTION_CRUD_CONFIG.ENDPOINTS.CREATE,
         configuration
       ),
     apiMutateOptions
   );
 }
 
-export function useUpdateActionInstanceMutation() {
+export function useUpdateFormActionMutation() {
   const apiMutateOptions = useWaitForResponseMutationOptions<
     Record<string, string>
   >({
-    endpoints: [BASE_ACTIONS_ENDPOINT],
-    successMessage: ADMIN_ACTION_INSTANCES_CRUD_CONFIG.MUTATION_LANG.EDIT,
+    endpoints: [FORM_ACTION_CRUD_CONFIG.ENDPOINTS.LIST],
+    successMessage: FORM_ACTION_CRUD_CONFIG.MUTATION_LANG.EDIT,
   });
 
   return useMutation(
-    async (configuration: IActionInstance) =>
+    async (formAction: IFormAction) =>
       await makeActionRequest(
         "PATCH",
-        ADMIN_ACTION_INSTANCES_CRUD_CONFIG.ENDPOINTS.UPDATE(
-          configuration.instanceId
-        ),
-        configuration
+        FORM_ACTION_CRUD_CONFIG.ENDPOINTS.UPDATE(formAction.id),
+        formAction
       ),
     apiMutateOptions
   );

@@ -30,16 +30,16 @@ describe("pages/users", () => {
     ).toBeInTheDocument();
     expect(
       screen.getByRole("row", {
-        name: "user-1 User 1 Role 1 user-1@here.com station - 1 Edit",
+        name: "user-1 User 1 Role 1 user-1@here.com station - 1 Edit User",
       })
     ).toBeInTheDocument();
     expect(
       screen.getByRole("row", {
-        name: "user-2 User 2 Role 2 user-1@here.com Edit",
+        name: "user-2 User 2 Role 2 user-1@here.com Edit User",
       })
     ).toBeInTheDocument();
     expect(
-      screen.getByRole("row", { name: "user-3 User 3 Role 3 Edit" })
+      screen.getByRole("row", { name: "user-3 User 3 Role 3 Edit User" })
     ).toBeInTheDocument();
   });
 
@@ -78,7 +78,7 @@ describe("pages/users", () => {
       </ApplicationRoot>
     );
 
-    const tableRows = await screen.findAllByRole("link", { name: "Edit" });
+    const tableRows = await screen.findAllByRole("link", { name: "Edit User" });
 
     expect(tableRows[0]).toHaveAttribute("href", "/users/user-1");
     expect(tableRows[1]).toHaveAttribute("href", "/users/user-2");
@@ -108,7 +108,7 @@ describe("pages/users", () => {
 
     await userEvent.click(
       within(tableRows[1]).getByRole("button", {
-        name: "Delete Button",
+        name: "Delete User",
       })
     );
 

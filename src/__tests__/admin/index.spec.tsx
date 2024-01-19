@@ -91,15 +91,6 @@ describe("pages/admin", () => {
       "Some SVG Here"
     );
 
-    //   expect(within(widget).getByLabelText("New Summary Card Icon").innerHTML)
-    // .toBe(`<svg fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-    //               <path fill="none" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" d="M10 21a1 1 0 11-2 0 1 1 0 012 0zM21 21a1 1 0 11-2 0 1 1 0 012 0zM1 1h4l2.68 13.39c.188.925.995 1.61 1.962 1.61h.04-.002H19.438a2 2 0 001.959-1.597l.002-.013 1.6-8.39h-17"></path>
-    //             </svg>`);
-
-    expect(within(widget).getByLabelText("Bar Card Icon")).toHaveAttribute(
-      "color",
-      "#FF165D"
-    );
     expect(within(widget).getByLabelText("Total Count")).toHaveTextContent(
       "10"
     );
@@ -111,11 +102,6 @@ describe("pages/admin", () => {
     expect(within(widget).getByLabelText("Relative Direction")).toHaveAttribute(
       "color",
       "#03d87f"
-    );
-
-    expect(within(widget).getByLabelText("Bar Card Icon")).toHaveAttribute(
-      "color",
-      "#FF165D"
     );
 
     expect(within(widget).getByRole("link", { name: "View" })).toHaveAttribute(

@@ -1,15 +1,15 @@
-import handler from "pages/api/integrations/actions/instances/[key]";
-import { ActionIntegrations, IActionInstance } from "shared/types/actions";
+import handler from "pages/api/form-actions/[key]";
+import { ActionIntegrations, IFormAction } from "shared/types/actions";
 import {
   createAuthenticatedMocks,
   setupAllTestData,
 } from "__tests__/api/_test-utils";
-import { setupActionInstanceTestData } from "__tests__/api/_test-utils/_action-instances";
+import { setupFormActionsTestData } from "__tests__/api/_test-utils/_form-actions";
 import { DataEventActions } from "shared/types/data";
 
-const TEST_ACTION_INSTANCES: IActionInstance[] = [
+const TEST_FORM_ACTIONS: IFormAction[] = [
   {
-    instanceId: "instance-id-1",
+    id: "form-action-id-1",
     integration: ActionIntegrations.SMTP,
     entity: "base-model",
     action: "SEND_MESSAGE",
@@ -19,7 +19,7 @@ const TEST_ACTION_INSTANCES: IActionInstance[] = [
     },
   },
   {
-    instanceId: "instance-id-2",
+    id: "form-action-id-2",
     integration: ActionIntegrations.SMTP,
     entity: "base-model",
     action: "SEND_MESSAGE",
@@ -29,7 +29,7 @@ const TEST_ACTION_INSTANCES: IActionInstance[] = [
     },
   },
   {
-    instanceId: "instance-id-3",
+    id: "form-action-id-3",
     integration: ActionIntegrations.SMTP,
     entity: "base-model",
     action: "SEND_MESSAGE",
@@ -39,7 +39,7 @@ const TEST_ACTION_INSTANCES: IActionInstance[] = [
     },
   },
   {
-    instanceId: "instance-id-4",
+    id: "form-action-id-4",
     integration: ActionIntegrations.HTTP,
     entity: "secondary-model",
     action: "POST",
@@ -50,13 +50,13 @@ const TEST_ACTION_INSTANCES: IActionInstance[] = [
   },
 ];
 
-describe("/api/integrations/actions/instances/[key]", () => {
+describe("/api/form-action/[key]", () => {
   beforeAll(async () => {
     await setupAllTestData(["activated-integrations"]);
-    await setupActionInstanceTestData(TEST_ACTION_INSTANCES);
+    await setupFormActionsTestData(TEST_FORM_ACTIONS);
   });
 
-  it("should show entity action instances", async () => {
+  it("should show entity form actions", async () => {
     const { req, res } = createAuthenticatedMocks({
       method: "GET",
       query: {
@@ -74,7 +74,7 @@ describe("/api/integrations/actions/instances/[key]", () => {
             "foo": "bar",
           },
           "entity": "base-model",
-          "instanceId": "instance-id-1",
+          "id": "form-action-id-1",
           "integration": "smtp",
           "trigger": "create",
         },
@@ -84,7 +84,7 @@ describe("/api/integrations/actions/instances/[key]", () => {
             "foo1": "bar1",
           },
           "entity": "base-model",
-          "instanceId": "instance-id-2",
+          "id": "form-action-id-2",
           "integration": "smtp",
           "trigger": "delete",
         },
@@ -94,7 +94,7 @@ describe("/api/integrations/actions/instances/[key]", () => {
             "foo2": "bar2",
           },
           "entity": "base-model",
-          "instanceId": "instance-id-3",
+          "id": "form-action-id-3",
           "integration": "smtp",
           "trigger": "update",
         },
@@ -102,11 +102,11 @@ describe("/api/integrations/actions/instances/[key]", () => {
     `);
   });
 
-  it("should delete action instances", async () => {
+  it("should delete form actions", async () => {
     const { req, res } = createAuthenticatedMocks({
       method: "DELETE",
       query: {
-        key: "instance-id-3",
+        key: "form-action-id-3",
       },
     });
     await handler(req, res);
@@ -125,11 +125,11 @@ describe("/api/integrations/actions/instances/[key]", () => {
     expect(getRes._getJSONData()).toHaveLength(2);
   });
 
-  it("should patch action instances", async () => {
+  it("should patch form action", async () => {
     const { req, res } = createAuthenticatedMocks({
       method: "PATCH",
       query: {
-        key: "instance-id-2",
+        key: "form-action-id-2",
       },
       body: {
         integration: "slack",
@@ -163,7 +163,7 @@ describe("/api/integrations/actions/instances/[key]", () => {
             "foo": "bar",
           },
           "entity": "base-model",
-          "instanceId": "instance-id-1",
+          "id": "form-action-id-1",
           "integration": "smtp",
           "trigger": "create",
         },
@@ -174,7 +174,7 @@ describe("/api/integrations/actions/instances/[key]", () => {
             "you": "are",
           },
           "entity": "base-model",
-          "instanceId": "instance-id-2",
+          "id": "form-action-id-2",
           "integration": "slack",
           "trigger": "update",
         },

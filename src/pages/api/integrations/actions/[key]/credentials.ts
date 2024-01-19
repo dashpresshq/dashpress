@@ -1,6 +1,6 @@
 import { USER_PERMISSIONS } from "shared/constants/user";
 import { requestHandler } from "backend/lib/request";
-import { actionsApiService } from "backend/actions/actions.service";
+import { integrationsApiService } from "backend/integrations/integrations.service";
 
 const REQUEST_KEY_FIELD = "key";
 
@@ -14,7 +14,7 @@ export default requestHandler(
         },
       ]);
 
-      return await actionsApiService.getIntegrationCredentials(
+      return await integrationsApiService.getIntegrationCredentials(
         validatedRequest.requestQuery
       );
     },

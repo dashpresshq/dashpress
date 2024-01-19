@@ -1,13 +1,13 @@
 import handler from "pages/api/integrations/actions/[key]/index";
 import activeHandler from "pages/api/integrations/actions/active";
-import getHandler from "pages/api/integrations/actions/instances/[key]";
+import getHandler from "pages/api/form-actions/[key]";
 
 import credentialsHandler from "pages/api/integrations/actions/[key]/credentials";
 import {
   createAuthenticatedMocks,
   setupAllTestData,
 } from "__tests__/api/_test-utils";
-import { setupActionInstanceTestData } from "__tests__/api/_test-utils/_action-instances";
+import { setupFormActionsTestData } from "__tests__/api/_test-utils/_form-actions";
 import { ActionIntegrations } from "shared/types/actions";
 import { DataEventActions } from "shared/types/data";
 
@@ -19,9 +19,9 @@ describe("/api/integrations/actions/[key]/index", () => {
   beforeAll(async () => {
     await setupAllTestData(["activated-integrations", "users"]);
 
-    await setupActionInstanceTestData([
+    await setupFormActionsTestData([
       {
-        instanceId: "instance-id-1",
+        id: "form-action-id-1",
         integration: ActionIntegrations.HTTP,
         entity: "base-model",
         action: "SEND_MESSAGE",
@@ -31,7 +31,7 @@ describe("/api/integrations/actions/[key]/index", () => {
         },
       },
       {
-        instanceId: "instance-id-2",
+        id: "form-action-id-2",
         integration: ActionIntegrations.SLACK,
         entity: "secondary-model",
         action: "POST",
@@ -246,7 +246,7 @@ describe("/api/integrations/actions/[key]/index", () => {
   });
 
   describe("DELETE", () => {
-    it("should list integration instances", async () => {
+    it("should list integration form actions", async () => {
       const { req: getReq, res: resReq } = createAuthenticatedMocks({
         method: "GET",
         query: {
@@ -311,7 +311,7 @@ describe("/api/integrations/actions/[key]/index", () => {
       `);
     });
 
-    it("should delete all instances", async () => {
+    it("should delete all form actions", async () => {
       const { req: getReq, res: resReq } = createAuthenticatedMocks({
         method: "GET",
         query: {

@@ -31,10 +31,10 @@ describe("pages/roles", () => {
     expect(screen.getByRole("row", { name: "Creator" })).toBeInTheDocument();
     expect(screen.getByRole("row", { name: "Viewer" })).toBeInTheDocument();
     expect(
-      screen.getByRole("row", { name: "Role 1 Edit" })
+      screen.getByRole("row", { name: "Role 1 Edit Role" })
     ).toBeInTheDocument();
     expect(
-      screen.getByRole("row", { name: "Role 2 Edit" })
+      screen.getByRole("row", { name: "Role 2 Edit Role" })
     ).toBeInTheDocument();
   });
 
@@ -73,7 +73,7 @@ describe("pages/roles", () => {
       </ApplicationRoot>
     );
 
-    const tableRows = await screen.findAllByRole("link", { name: "Edit" });
+    const tableRows = await screen.findAllByRole("link", { name: "Edit Role" });
 
     expect(tableRows).toHaveLength(2);
   });
@@ -101,19 +101,19 @@ describe("pages/roles", () => {
 
     expect(
       within(tableRows[1]).queryByRole("button", {
-        name: "Delete Button",
+        name: "Delete Role",
       })
     ).not.toBeInTheDocument();
 
     expect(
       within(tableRows[2]).queryByRole("button", {
-        name: "Delete Button",
+        name: "Delete Role",
       })
     ).not.toBeInTheDocument();
 
     await userEvent.click(
       within(tableRows[4]).getByRole("button", {
-        name: "Delete Button",
+        name: "Delete Role",
       })
     );
 

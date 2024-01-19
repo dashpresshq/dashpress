@@ -13,7 +13,7 @@ import { rolesApiService } from "backend/roles/roles.service";
 import { schemasApiService } from "backend/schema/schema.service";
 import { usersApiService } from "backend/users/users.service";
 import { storageApiService } from "backend/storage/storage.service";
-import { actionsApiService } from "backend/actions/actions.service";
+import { formActionsApiService } from "backend/form-actions/form-actions.service";
 import { dashboardWidgetsApiService } from "backend/dashboard-widgets/dashboard-widgets.service";
 import { listOrderApiService } from "backend/list-order/list-order.service";
 import { tempStorageApiService } from "backend/lib/temp-storage";
@@ -34,7 +34,7 @@ export default requestHandler(
         await schemasApiService.bootstrap();
         await usersApiService.bootstrap();
         await entitiesApiService.bootstrap();
-        await actionsApiService.bootstrap();
+        await formActionsApiService.bootstrap();
         await dashboardWidgetsApiService.bootstrap();
         await storageApiService.bootstrap();
         await listOrderApiService.bootstrap();

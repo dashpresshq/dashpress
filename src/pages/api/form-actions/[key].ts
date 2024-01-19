@@ -1,6 +1,6 @@
 import { USER_PERMISSIONS } from "shared/constants/user";
 import { requestHandler } from "backend/lib/request";
-import { actionsApiService } from "backend/actions/actions.service";
+import { formActionsApiService } from "backend/form-actions/form-actions.service";
 
 const REQUEST_KEY_FIELD = "key";
 
@@ -14,7 +14,7 @@ export default requestHandler(
         },
       ]);
 
-      return await actionsApiService.listEntityActionInstances(
+      return await formActionsApiService.listEntityFormActions(
         validatedRequest.requestQuery
       );
     },
@@ -30,7 +30,7 @@ export default requestHandler(
         },
       ]);
 
-      return await actionsApiService.updateActionInstance(
+      return await formActionsApiService.updateFormAction(
         validatedRequest.requestQuery,
         validatedRequest.requestBody
       );
@@ -43,7 +43,7 @@ export default requestHandler(
         },
       ]);
 
-      return await actionsApiService.deleteActionInstance(
+      return await formActionsApiService.deleteFormAction(
         validatedRequest.requestQuery
       );
     },

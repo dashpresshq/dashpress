@@ -2,133 +2,36 @@ import {
   credentialsApiService,
   CredentialsApiService,
 } from "backend/integrations-configurations";
-import {
-  createConfigDomainPersistenceService,
-  AbstractConfigDataPersistenceService,
-} from "backend/lib/config-persistence";
-import { BadRequestError } from "backend/lib/errors";
 import { validateSchemaRequestBody } from "backend/lib/errors/validate-schema-request-input";
-import { IApplicationService } from "backend/types";
-import { nanoid } from "nanoid";
-import { INTEGRATIONS_GROUP_CONFIG } from "shared/config-bag/integrations";
 import {
   IIntegrationsList,
-  IActionInstance,
   IIntegrationImplementationList,
   ActionIntegrations,
 } from "shared/types/actions";
-import { IAccountProfile } from "shared/types/user";
-import { compileTemplateString } from "shared/lib/strings/templates";
 import { sluggify } from "shared/lib/strings";
-import { DataEventActions } from "shared/types/data";
 import {
   createKeyValueDomainPersistenceService,
   KeyValueStoreApiService,
 } from "backend/lib/key-value";
-import { getAppCredentialsAndConstants } from "backend/integrations-configurations/utils";
-import { ACTION_INTEGRATIONS } from "./integrations";
+import { IApplicationService } from "backend/types";
+import { noop } from "shared/lib/noop";
+import {
+  formActionsApiService,
+  FormActionsApiService,
+} from "backend/form-actions/form-actions.service";
+import { ACTION_INTEGRATIONS } from "./libs";
 
-export class ActionsApiService implements IApplicationService {
+export class IntegrationsApiService implements IApplicationService {
   constructor(
     private readonly _activatedIntegrationsPersistenceService: KeyValueStoreApiService<
       ActionIntegrations[]
     >,
-    private readonly _actionInstancesPersistenceService: AbstractConfigDataPersistenceService<IActionInstance>,
-    private readonly _credentialsApiService: CredentialsApiService
+    private readonly _credentialsApiService: CredentialsApiService,
+    private readonly _formActionsApiService: FormActionsApiService
   ) {}
 
   async bootstrap() {
-    await this._actionInstancesPersistenceService.setup();
-  }
-
-  async runAction(
-    entity: string,
-    dataEventAction: DataEventActions,
-    getData: () => Promise<Record<string, unknown>>,
-    accountProfile: IAccountProfile
-  ) {
-    const instances = await this.listEntityActionInstances(entity);
-    const actionsToRun = instances.filter(
-      (action) => action.trigger === dataEventAction
-    );
-
-    if (actionsToRun.length === 0) {
-      return;
-    }
-
-    const data = await getData();
-
-    const { appConstants, credentials } = await getAppCredentialsAndConstants();
-
-    for (const actionToRun of actionsToRun) {
-      const { configuration, action, integration } = actionToRun;
-
-      const actionConfiguration = await this.getIntegrationCredentials(
-        integration
-      );
-
-      const connection = await ACTION_INTEGRATIONS[integration].connect(
-        actionConfiguration
-      );
-
-      const compiledConfiguration = Object.fromEntries(
-        Object.entries(configuration || {}).map(([key, value]) => [
-          key,
-          compileTemplateString(value, {
-            data,
-            [INTEGRATIONS_GROUP_CONFIG.constants.prefix]: appConstants,
-            [INTEGRATIONS_GROUP_CONFIG.credentials.prefix]: credentials,
-            auth: accountProfile,
-          }),
-        ])
-      );
-
-      await ACTION_INTEGRATIONS[integration].performsImplementation[action].do(
-        connection,
-        compiledConfiguration
-      );
-    }
-  }
-
-  async instantiateAction(action: Omit<IActionInstance, "instanceId">) {
-    const instanceId = nanoid();
-    const activatedIntegrations = await this.listActivatedIntegrations();
-
-    const integration = activatedIntegrations.find(
-      (activatedIntegration) => activatedIntegration === action.integration
-    );
-
-    if (!integration) {
-      throw new BadRequestError(
-        `The integration for '${action.integration}' has not yet been activated`
-      );
-    }
-
-    await this._actionInstancesPersistenceService.createItem(instanceId, {
-      ...action,
-      integration,
-      instanceId,
-    });
-  }
-
-  async updateActionInstance(
-    instanceId: string,
-    instance: Omit<IActionInstance, "instanceId">
-  ) {
-    await this._actionInstancesPersistenceService.upsertItem(instanceId, {
-      ...instance,
-      instanceId,
-    });
-  }
-
-  async deleteActionInstance(instanceId: string) {
-    await this._actionInstancesPersistenceService.removeItem(instanceId);
-  }
-
-  async listEntityActionInstances(entity$1: string) {
-    return (await this._actionInstancesPersistenceService.getAllItems()).filter(
-      ({ entity }) => entity === entity$1
-    );
+    noop();
   }
 
   listActionIntegrations(): IIntegrationsList[] {
@@ -161,7 +64,7 @@ export class ActionsApiService implements IApplicationService {
     return [...activatedIntegrations, ActionIntegrations.HTTP];
   }
 
-  async activateAction(
+  async activateIntegration(
     integration: ActionIntegrations,
     configuration: Record<string, string>
   ): Promise<void> {
@@ -243,14 +146,11 @@ export class ActionsApiService implements IApplicationService {
       )
     );
 
-    const instances =
-      await this._actionInstancesPersistenceService.getAllItems();
+    const formActions = await this._formActionsApiService.getAllFormAction();
 
-    for (const instance of instances) {
-      if (instance.integration === integration) {
-        await this._actionInstancesPersistenceService.removeItem(
-          instance.instanceId
-        );
+    for (const formAction of formActions) {
+      if (formAction.integration === integration) {
+        await this._formActionsApiService.deleteFormAction(formAction.id);
       }
     }
   }
@@ -261,11 +161,8 @@ const activatedIntegrationsPersistenceService =
     "activated-integrations"
   );
 
-const actionInstancesPersistenceService =
-  createConfigDomainPersistenceService<IActionInstance>("action-instances");
-
-export const actionsApiService = new ActionsApiService(
+export const integrationsApiService = new IntegrationsApiService(
   activatedIntegrationsPersistenceService,
-  actionInstancesPersistenceService,
-  credentialsApiService
+  credentialsApiService,
+  formActionsApiService
 );

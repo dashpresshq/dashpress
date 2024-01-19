@@ -151,7 +151,7 @@ describe("pages/integrations/variables => credentials", () => {
       ).not.toBeInTheDocument();
       expect(
         screen.queryByRole("button", {
-          name: "Edit",
+          name: "Edit Secret",
         })
       ).not.toBeInTheDocument();
       expect(
@@ -305,7 +305,7 @@ describe("pages/integrations/variables => credentials", () => {
 
       expect(
         screen.queryAllByRole("button", {
-          name: "Edit",
+          name: "Edit Secret",
         })
       ).toHaveLength(3);
       expect(
@@ -349,7 +349,7 @@ describe("pages/integrations/variables => credentials", () => {
         within((await within(table).findAllByRole("row"))[1]).getByRole(
           "button",
           {
-            name: "Edit",
+            name: "Edit Secret",
           }
         )
       );
@@ -449,7 +449,7 @@ describe("pages/integrations/variables => credentials", () => {
 
       await userEvent.click(
         within(tableRows[2]).getByRole("button", {
-          name: "Delete Button",
+          name: "Delete Secret",
         })
       );
 

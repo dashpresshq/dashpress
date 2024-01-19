@@ -83,7 +83,7 @@ describe("pages/integrations/variables => credentials -- non admin", () => {
       ).not.toBeInTheDocument();
       expect(
         screen.queryByRole("button", {
-          name: "Delete Button",
+          name: "Delete Secret",
         })
       ).not.toBeInTheDocument();
     });
@@ -119,7 +119,7 @@ describe("pages/integrations/variables => credentials -- non admin", () => {
       ).not.toBeInTheDocument();
       expect(
         await screen.findAllByRole("button", {
-          name: "Delete Button",
+          name: "Delete Secret",
         })
       ).toHaveLength(3);
     });

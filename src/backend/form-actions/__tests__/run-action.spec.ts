@@ -7,7 +7,7 @@ import {
   setupAllTestData,
   setupCredentialsTestData,
 } from "__tests__/api/_test-utils";
-import { setupActionInstanceTestData } from "__tests__/api/_test-utils/_action-instances";
+import { setupFormActionsTestData } from "__tests__/api/_test-utils/_form-actions";
 import { setupIntegrationsConstantsTestData } from "__tests__/api/_test-utils/_integrations-constants";
 import { createTransport } from "nodemailer";
 import { DataEventActions } from "shared/types/data";
@@ -60,9 +60,9 @@ describe("Run Action", () => {
         "aad0f7e776963ae66b7459222d54871433f8e119ab9a9712d4e82e8cbb77246e47a750a773c0ea316c110a1d3f2ee16c2509906fb89f1c4b039d09f139b1d7eacc26908c25137c46f269cfb13f63221da2f1631bf4f59cbe14cc18cbfb8993098bd7e2d865f20717",
     });
 
-    await setupActionInstanceTestData([
+    await setupFormActionsTestData([
       {
-        instanceId: "instance-id-1",
+        id: "form-action-id-1",
         integration: ActionIntegrations.SMTP,
         entity: "tests",
         action: "SEND_MAIL",
@@ -78,7 +78,7 @@ describe("Run Action", () => {
         },
       },
       {
-        instanceId: "instance-id-5",
+        id: "form-action-id-5",
         integration: ActionIntegrations.HTTP,
         entity: "tests",
         action: "POST",
@@ -93,7 +93,7 @@ describe("Run Action", () => {
         },
       },
       {
-        instanceId: "instance-id-2",
+        id: "form-action-id-2",
         integration: ActionIntegrations.SLACK,
         entity: "tests",
         action: "SEND_MESSAGE",
@@ -105,7 +105,7 @@ describe("Run Action", () => {
         },
       },
       {
-        instanceId: "instance-id-3",
+        id: "form-action-id-3",
         integration: ActionIntegrations.SLACK,
         entity: "DO_NOT_CALL_ME_CAUSE_INVALID_ENTITY",
         action: "SEND_MESSAGE",
@@ -117,7 +117,7 @@ describe("Run Action", () => {
         },
       },
       {
-        instanceId: "instance-id-4",
+        id: "form-action-id-4",
         integration: ActionIntegrations.HTTP,
         entity: "tests",
         action: "POST",

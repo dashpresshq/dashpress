@@ -114,7 +114,7 @@ describe("pages/integrations/variables => constants", () => {
 
       await userEvent.click(
         within(tableRows[1]).getByRole("button", {
-          name: "Edit",
+          name: "Edit Constant",
         })
       );
 
@@ -172,7 +172,7 @@ describe("pages/integrations/variables => constants", () => {
 
       await userEvent.click(
         within(tableRows[2]).getByRole("button", {
-          name: "Delete Button",
+          name: "Delete Constant",
         })
       );
 

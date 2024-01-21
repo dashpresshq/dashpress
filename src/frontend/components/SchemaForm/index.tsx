@@ -107,7 +107,7 @@ export function SchemaForm<T extends Record<string, unknown>>({
                 })
                 .map(([field, bag]: [string, ISchemaFormConfig<T>]) => (
                   <Field key={field} name={field} validateFields={[]}>
-                    {(renderProps) => (
+                    {(formProps) => (
                       <GridItem $span={bag.span || "4"}>
                         <RenderFormInput
                           type={bag.type}
@@ -122,11 +122,12 @@ export function SchemaForm<T extends Record<string, unknown>>({
                           form={form}
                           rightActions={bag?.rightActions}
                           placeholder={bag.placeholder}
+                          onChange={bag.onChange}
                           description={bag.description}
                           apiSelections={bag.apiSelections}
                           label={bag.label || userFriendlyCase(field)}
                           entityFieldSelections={bag.selections}
-                          renderProps={renderProps}
+                          formProps={formProps}
                         />
                       </GridItem>
                     )}

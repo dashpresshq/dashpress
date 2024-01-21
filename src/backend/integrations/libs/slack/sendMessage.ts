@@ -30,7 +30,7 @@ export const SEND_MESSAGE = {
   label: "Send Message",
   configurationSchema: CONFIG_SCHEMA,
   do: async (config: IActionConfig, messageConfig: IConfig) => {
-    await makeIntegrationRequest("POST", {
+    return await makeIntegrationRequest("POST", {
       url: "https://slack.com/api/chat.postMessage",
       body: JSON.stringify({
         channel: messageConfig.channel,

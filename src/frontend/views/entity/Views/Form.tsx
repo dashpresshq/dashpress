@@ -85,6 +85,7 @@ function TabForm({ values, tableColumns, initialValues }: IProps) {
                         },
                         label: "Delete Tab",
                         isMakingRequest: false,
+                        shouldConfirmAlert: undefined,
                       }),
                     },
                   ]}

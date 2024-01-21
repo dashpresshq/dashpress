@@ -30,78 +30,70 @@ function DemoForm() {
       render={({ handleSubmit }) => (
         <form onSubmit={handleSubmit} noValidate>
           <Field name="checkbox" validateFields={[]}>
-            {(renderProps) => (
-              <FormCheckBox label="Example Checkbox Input" {...renderProps} />
+            {(formProps) => (
+              <FormCheckBox label="Example Checkbox Input" {...formProps} />
             )}
           </Field>
 
           <Field name="switch" validateFields={[]}>
-            {(renderProps) => (
+            {(formProps) => (
               <FormSwitch
-                name={renderProps.input.name}
-                value={renderProps.input.value}
-                onChange={renderProps.input.onChange}
+                name={formProps.input.name}
+                value={formProps.input.value}
+                onChange={formProps.input.onChange}
                 label="Example Form Switch Input"
-                {...renderProps}
+                {...formProps}
               />
             )}
           </Field>
 
           <Field name="checkbox-disabled" validateFields={[]}>
-            {(renderProps) => (
+            {(formProps) => (
               <FormCheckBox
                 disabled
                 label="Disabled Example Checkbox Input"
-                {...renderProps}
+                {...formProps}
               />
             )}
           </Field>
 
           <Field name="switch-disabled" validateFields={[]}>
-            {(renderProps) => (
+            {(formProps) => (
               <FormSwitch
-                name={renderProps.input.name}
+                name={formProps.input.name}
                 disabled
-                value={renderProps.input.value}
-                onChange={renderProps.input.onChange}
+                value={formProps.input.value}
+                onChange={formProps.input.onChange}
                 label="Disabled Example Form Switch Input"
-                {...renderProps}
+                {...formProps}
               />
             )}
           </Field>
 
           <Field name="exampleText" validateFields={[]} validate={required}>
-            {(renderProps) => (
-              <FormInput label="Example Text Input" {...renderProps} />
+            {(formProps) => (
+              <FormInput label="Example Text Input" {...formProps} />
             )}
           </Field>
 
           <Field name="disabled" validateFields={[]} validate={required}>
-            {(renderProps) => (
-              <FormInput
-                label="Disabled Text Input"
-                {...renderProps}
-                disabled
-              />
+            {(formProps) => (
+              <FormInput label="Disabled Text Input" {...formProps} disabled />
             )}
           </Field>
 
           <Field name="requiredText" validateFields={[]} validate={required}>
-            {(renderProps) => (
-              <FormInput
-                label="Required Text Input"
-                required
-                {...renderProps}
-              />
+            {(formProps) => (
+              <FormInput label="Required Text Input" required {...formProps} />
             )}
           </Field>
 
           <Field name="descriptionText" validateFields={[]} validate={required}>
-            {(renderProps) => (
+            {(formProps) => (
               <FormInput
                 description="Some Description here"
                 label="With description"
-                {...renderProps}
+                {...formProps}
               />
             )}
           </Field>
@@ -111,7 +103,7 @@ function DemoForm() {
             validateFields={[]}
             validate={required}
           >
-            {(renderProps) => (
+            {(formProps) => (
               <FormInput
                 rightActions={[
                   {
@@ -121,7 +113,7 @@ function DemoForm() {
                   },
                 ]}
                 label="With right action"
-                {...renderProps}
+                {...formProps}
               />
             )}
           </Field>
@@ -131,7 +123,7 @@ function DemoForm() {
             validateFields={[]}
             validate={required}
           >
-            {(renderProps) => (
+            {(formProps) => (
               <FormInput
                 rightActions={[
                   {
@@ -146,7 +138,7 @@ function DemoForm() {
                   },
                 ]}
                 label="With multiple right action"
-                {...renderProps}
+                {...formProps}
               />
             )}
           </Field>
@@ -156,7 +148,7 @@ function DemoForm() {
             validateFields={[]}
             validate={required}
           >
-            {(renderProps) => (
+            {(formProps) => (
               <FormSelectButton
                 selectData={[
                   { label: "Wood", value: "wood" },
@@ -165,20 +157,20 @@ function DemoForm() {
                   { label: "Gold", value: "gold" },
                 ]}
                 label="Example Select Button"
-                {...renderProps}
+                {...formProps}
               />
             )}
           </Field>
 
           <Field name="baseSelectInput" validateFields={[]} validate={required}>
-            {(renderProps) => (
+            {(formProps) => (
               <FormSelect
                 selectData={[
                   { label: "Foo", value: "foo" },
                   { label: "Bar", value: "bar" },
                 ]}
                 label="Example Select Input"
-                {...renderProps}
+                {...formProps}
               />
             )}
           </Field>
@@ -188,32 +180,32 @@ function DemoForm() {
             validateFields={[]}
             validate={required}
           >
-            {(renderProps) => (
+            {(formProps) => (
               <FormSelect
                 selectData={[
                   { label: "Foo", value: "foo" },
                   { label: "Bar", value: "bar" },
                 ]}
                 label="Disabled Select Input"
-                {...renderProps}
+                {...formProps}
                 disabled
               />
             )}
           </Field>
 
           <Field name="asyncSelect" validateFields={[]} validate={required}>
-            {(renderProps) => (
+            {(formProps) => (
               <AsyncFormSelect
                 url="http://localhost:3000/roles"
                 label="Async Select Input"
                 limit={2}
-                {...renderProps}
+                {...formProps}
               />
             )}
           </Field>
 
           <Field name="foo7" validateFields={[]}>
-            {(renderProps) => (
+            {(formProps) => (
               <FormMultiSelect
                 selectData={[
                   { label: "Foo", value: "foo" },
@@ -222,103 +214,103 @@ function DemoForm() {
                   { label: "Noop", value: "noop" },
                   { label: "Dupe", value: "dupe" },
                 ]}
-                values={renderProps.input.value || ["foo", "bar"]}
-                onChange={renderProps.input.onChange}
+                values={formProps.input.value || ["foo", "bar"]}
+                onChange={formProps.input.onChange}
               />
             )}
           </Field>
 
           <Field name="file" validateFields={[]} validate={required}>
-            {(renderProps) => (
+            {(formProps) => (
               <FormFileInput
                 label="Image"
                 required
                 uploadUrl="http://localhost:3000/api/upload"
-                {...renderProps}
+                {...formProps}
               />
             )}
           </Field>
 
           <Field name="dateInput" validateFields={[]} validate={required}>
-            {(renderProps) => (
-              <FormDateInput label="Example Date Input" {...renderProps} />
+            {(formProps) => (
+              <FormDateInput label="Example Date Input" {...formProps} />
             )}
           </Field>
 
           <Field name="dateInput" validateFields={[]} validate={required}>
-            {(renderProps) => (
+            {(formProps) => (
               <FormDateInput
                 label="Disbaled Date Input"
-                {...renderProps}
+                {...formProps}
                 disabled
               />
             )}
           </Field>
 
           <Field name="numberInput" validateFields={[]} validate={required}>
-            {(renderProps) => (
-              <FormNumberInput label="Example Number Input" {...renderProps} />
+            {(formProps) => (
+              <FormNumberInput label="Example Number Input" {...formProps} />
             )}
           </Field>
 
           <Field name="numberInput" validateFields={[]} validate={required}>
-            {(renderProps) => (
+            {(formProps) => (
               <FormNumberInput
                 label="Disabled Number Input"
-                {...renderProps}
+                {...formProps}
                 disabled
               />
             )}
           </Field>
 
           <Field name="textArea" validateFields={[]} validate={required}>
-            {(renderProps) => (
-              <FormTextArea label="Example Text Area Input" {...renderProps} />
+            {(formProps) => (
+              <FormTextArea label="Example Text Area Input" {...formProps} />
             )}
           </Field>
 
           <Field name="textArea" validateFields={[]} validate={required}>
-            {(renderProps) => (
+            {(formProps) => (
               <FormTextArea
                 label="Disabled Text Area Input"
-                {...renderProps}
+                {...formProps}
                 disabled
               />
             )}
           </Field>
 
           <Field name="richText" validateFields={[]} validate={required}>
-            {(renderProps) => (
-              <FormRichTextArea label="Example Rich Text" {...renderProps} />
+            {(formProps) => (
+              <FormRichTextArea label="Example Rich Text" {...formProps} />
             )}
           </Field>
 
           <Field name="richText" validateFields={[]} validate={required}>
-            {(renderProps) => (
+            {(formProps) => (
               <FormRichTextArea
                 label="Disabled Rich Text"
-                {...renderProps}
+                {...formProps}
                 disabled
               />
             )}
           </Field>
 
           <Field name="code" validateFields={[]} validate={required}>
-            {(renderProps) => (
+            {(formProps) => (
               <FormCodeEditor
                 language="javascript"
                 label="Javascript"
-                {...renderProps}
+                {...formProps}
               />
             )}
           </Field>
 
           <Field name="code" validateFields={[]} validate={required}>
-            {(renderProps) => (
+            {(formProps) => (
               <FormCodeEditor
                 language="javascript"
                 label="Disabled Javascript"
-                {...renderProps}
+                {...formProps}
                 disabled
               />
             )}

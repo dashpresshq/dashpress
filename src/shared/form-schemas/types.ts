@@ -35,6 +35,7 @@ export type ISchemaFormConfig<T> = {
     hidden?: boolean;
     disabled?: boolean;
   };
+  onChange?: (value: unknown) => void;
   span?: GridSpanSizes;
   rightActions?: IFormInputRightAction[];
   validations: IFieldValidationItem[];

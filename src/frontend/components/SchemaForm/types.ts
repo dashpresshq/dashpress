@@ -14,7 +14,7 @@ export interface IFormExtension {
 
 export interface IRenderFormInputProps {
   type: keyof typeof FIELD_TYPES_CONFIG_MAP;
-  renderProps: {
+  formProps: {
     input: FieldInputProps<any, HTMLElement>;
     meta: FieldMetaState<any>;
   };
@@ -22,6 +22,7 @@ export interface IRenderFormInputProps {
   entityFieldSelections?: IColorableSelection[];
   required: boolean;
   disabled: boolean;
+  onChange?: (value: unknown) => void;
   form: FormApi;
   label: string;
   placeholder?: string;

@@ -15,7 +15,7 @@ import { IRenderFormInputProps } from "./types";
 
 export function RenderFormInput(props: IRenderFormInputProps) {
   const {
-    renderProps,
+    formProps: formProps$1,
     label,
     type,
     entityFieldSelections = [],
@@ -25,6 +25,7 @@ export function RenderFormInput(props: IRenderFormInputProps) {
     description,
     placeholder,
     rightActions,
+    onChange,
   } = useExtendRenderFormInputProps(props);
 
   const formProps = {
@@ -34,7 +35,14 @@ export function RenderFormInput(props: IRenderFormInputProps) {
     placeholder: placeholder || label,
     description,
     rightActions,
-    ...renderProps,
+    meta: formProps$1.meta,
+    input: {
+      ...formProps$1.input,
+      onChange: (value: unknown) => {
+        formProps$1.input.onChange(value);
+        onChange?.(value);
+      },
+    },
   };
 
   if (entityFieldSelections.length > 0) {

@@ -48,7 +48,7 @@ export const SEND_MAIL = {
   label: "Send Mail",
   configurationSchema: CONFIG_SCHEMA,
   do: async (config: IActionConfig, messageConfig: IConfig) => {
-    await makeIntegrationRequest("POST", {
+    return await makeIntegrationRequest("POST", {
       url: `https://api.postmarkapp.com/email`,
       body: JSON.stringify({
         From: messageConfig.senderEmail,

@@ -76,7 +76,7 @@ describe("pages/admin/settings/dashboard", () => {
       const widget = await screen.findByLabelText("Foo Table Widget");
 
       await userEvent.click(
-        within(widget).queryByRole("button", { name: "Delete Button" })
+        within(widget).getByRole("button", { name: "Delete Widget" })
       );
 
       const confirmBox = await screen.findByRole("alertdialog", {

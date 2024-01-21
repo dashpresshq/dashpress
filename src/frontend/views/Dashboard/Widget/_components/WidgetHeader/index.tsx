@@ -55,7 +55,7 @@ export function WidgetHeader({
             {
               ...DELETE_BUTTON_PROPS({
                 action: setting.delete,
-                label: "Delete",
+                label: "Delete Widget",
                 isMakingRequest: false,
               }),
             },

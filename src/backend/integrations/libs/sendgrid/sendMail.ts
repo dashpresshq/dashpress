@@ -53,7 +53,7 @@ export const SEND_MAIL = {
   label: "Send Mail",
   configurationSchema: CONFIG_SCHEMA,
   do: async (config: IActionConfig, messageConfig: IConfig) => {
-    await makeIntegrationRequest("POST", {
+    return await makeIntegrationRequest("POST", {
       url: `https://api.sendgrid.com/v3/mail/send`,
       body: JSON.stringify({
         personalizations: [

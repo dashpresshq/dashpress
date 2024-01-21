@@ -44,35 +44,35 @@ export const HTTP_ACTION_INTEGRATION: IActionIntegrationsImplemention = {
       label: "GET",
       configurationSchema: BASE_CONFIGURATION_SCHEMA,
       do: async (_, configuration: IBase) => {
-        await makeIntegrationRequest("GET", configuration);
+        return await makeIntegrationRequest("GET", configuration);
       },
     },
     PUT: {
       label: "PUT",
       configurationSchema: ACTION_CONFIGURATION_SCHEMA,
       do: async (_, configuration: IAction) => {
-        await makeIntegrationRequest("PUT", configuration);
+        return await makeIntegrationRequest("PUT", configuration);
       },
     },
     POST: {
       label: "POST",
       configurationSchema: ACTION_CONFIGURATION_SCHEMA,
       do: async (_, configuration: IAction) => {
-        await makeIntegrationRequest("POST", configuration);
+        return await makeIntegrationRequest("POST", configuration);
       },
     },
     PATCH: {
       label: "PATCH",
       configurationSchema: ACTION_CONFIGURATION_SCHEMA,
       do: async (_, configuration: IAction) => {
-        await makeIntegrationRequest("PATCH", configuration);
+        return await makeIntegrationRequest("PATCH", configuration);
       },
     },
     DELETE: {
       label: "DELETE",
       configurationSchema: ACTION_CONFIGURATION_SCHEMA,
       do: async (_, configuration: IAction) => {
-        await makeIntegrationRequest("DELETE", configuration);
+        return await makeIntegrationRequest("DELETE", configuration);
       },
     },
   },

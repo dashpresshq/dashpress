@@ -87,7 +87,7 @@ export function FieldsTypeForm({
                 validate={composeValidators(minLength(2), maxLength(64))}
                 validateFields={[]}
               >
-                {(renderProps) => {
+                {(formProps) => {
                   let rightActions: IFormInputRightAction[] = [
                     {
                       systemIcon: "Settings",
@@ -100,7 +100,7 @@ export function FieldsTypeForm({
 
                   if (
                     FIELD_TYPES_CONFIG_MAP[
-                      renderProps.input
+                      formProps.input
                         .value as keyof typeof FIELD_TYPES_CONFIG_MAP
                     ]?.configureSelection
                   ) {
@@ -127,14 +127,14 @@ export function FieldsTypeForm({
                       rightActions={rightActions}
                       disabledOptions={listOfEntitiesThatCantBeChanged}
                       disabled={listOfEntitiesThatCantBeChanged.includes(
-                        renderProps.input.value
+                        formProps.input.value
                       )}
-                      meta={renderProps.meta}
+                      meta={formProps.meta}
                       input={{
-                        ...renderProps.input,
+                        ...formProps.input,
                         onChange: (value) => {
                           form.change("typesChanged", true);
-                          renderProps.input.onChange(value);
+                          formProps.input.onChange(value);
                           form.change("validations", {
                             ...values.validations,
                             [name]: resetBoundedValidation(

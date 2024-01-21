@@ -119,7 +119,7 @@ describe("pages/integrations/variables => credentials -- non admin", () => {
       ).not.toBeInTheDocument();
       expect(
         await screen.findAllByRole("button", {
-          name: "Delete Secret",
+          name: "Delete Constant",
         })
       ).toHaveLength(3);
     });

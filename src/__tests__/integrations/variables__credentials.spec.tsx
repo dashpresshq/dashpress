@@ -146,7 +146,7 @@ describe("pages/integrations/variables => credentials", () => {
 
       expect(
         screen.queryByRole("button", {
-          name: "Delete Button",
+          name: "Delete Secret",
         })
       ).not.toBeInTheDocument();
       expect(
@@ -299,7 +299,7 @@ describe("pages/integrations/variables => credentials", () => {
 
       expect(
         screen.queryAllByRole("button", {
-          name: "Delete Button",
+          name: "Delete Secret",
         })
       ).toHaveLength(3);
 

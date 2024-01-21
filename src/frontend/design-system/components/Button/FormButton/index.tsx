@@ -27,12 +27,12 @@ export const actionButtonIsMakingRequest = (
     size: 16,
   };
   return isMakingRequest ? (
-    <Stack align="center">
+    <Stack align="center" justify="center" width="auto">
       <Spin as={Loader} {...iconProps} />
       <span>{text(true)}</span>
     </Stack>
   ) : (
-    <Stack align="center">
+    <Stack align="center" justify="center" width="auto">
       <SystemIcon
         icon={systemIcon}
         {...iconProps}

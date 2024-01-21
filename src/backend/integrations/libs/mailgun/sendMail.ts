@@ -54,7 +54,7 @@ export const SEND_MAIL = {
     form.append("subject", messageConfig.subject);
     form.append("text", messageConfig.body);
 
-    await makeIntegrationRequest("POST", {
+    return await makeIntegrationRequest("POST", {
       url: `https://api.mailgun.net/v3/${config.domain}/messages`,
       body: form,
       headers: JSON.stringify({

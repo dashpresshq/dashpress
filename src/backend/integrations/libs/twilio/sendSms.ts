@@ -39,7 +39,7 @@ export const SEND_SMS = {
   label: "Send SMS",
   configurationSchema: CONFIG_SCHEMA,
   do: async (config: IActionConfig, messageConfig: IConfig) => {
-    await makeIntegrationRequest("POST", {
+    return await makeIntegrationRequest("POST", {
       url: `https://api.twilio.com/2010-04-01/Accounts/${config.accountSid}/Messages.json`,
       body: new URLSearchParams({
         Body: messageConfig.body,

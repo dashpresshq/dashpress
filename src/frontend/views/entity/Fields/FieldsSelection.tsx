@@ -137,7 +137,7 @@ export function FieldSelectionCanvas({
                               validate={required}
                               validateFields={[]}
                             >
-                              {(renderProps) => (
+                              {(formProps) => (
                                 <Stack>
                                   {OPTIONS_COLORS.map((systemColor) => (
                                     <div key={systemColor}>
@@ -145,15 +145,13 @@ export function FieldSelectionCanvas({
                                         type="button"
                                         color={systemColor}
                                         onClick={() =>
-                                          renderProps.input.onChange(
-                                            systemColor
-                                          )
+                                          formProps.input.onChange(systemColor)
                                         }
                                       >
                                         <Check
                                           color={
                                             systemColor ===
-                                            renderProps.input.value
+                                            formProps.input.value
                                               ? isBlackOrWhite(systemColor)
                                               : systemColor
                                           }

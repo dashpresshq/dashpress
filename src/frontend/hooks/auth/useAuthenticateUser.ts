@@ -1,9 +1,5 @@
-import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
-import { TemporayStorageService } from "frontend/lib/storage";
-import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { createStore } from "frontend/lib/store";
-import { STORAGE_CONSTANTS } from "frontend/lib/storage/constants";
 import { DataStates } from "frontend/lib/data/types";
 import * as AuthStore from "./auth.store";
 
@@ -35,7 +31,6 @@ export const useUserAuthenticatedState = () => {
 };
 
 export function useAuthenticateUser() {
-  const router = useRouter();
   const setIsAuthenticated = useIsAuthenticatedStore(
     (store) => store.setIsAuthenticated
   );
@@ -44,9 +39,5 @@ export function useAuthenticateUser() {
     AuthStore.setAuthToken(authToken, rememberMe);
 
     setIsAuthenticated(true);
-    router.push(
-      TemporayStorageService.getString(STORAGE_CONSTANTS.PREVIOUS_AUTH_URL) ||
-        NAVIGATION_LINKS.DASHBOARD.HOME
-    );
   };
 }

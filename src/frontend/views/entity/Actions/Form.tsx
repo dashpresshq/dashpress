@@ -39,17 +39,16 @@ export function ActionForm({
     value: integration,
   }));
 
-  const [formValues, setFormValues] = useState<Partial<IFormAction>>({});
+  const [integration, setIntegration] = useState("");
+  const [action, setAction] = useState("");
 
-  const implementations = useIntegrationImplementationsList(
-    formValues.integration
-  );
+  const implementations = useIntegrationImplementationsList(integration);
 
-  const currentActionTitle = integrationsListMap[formValues.integration]?.title;
+  const currentActionTitle = integrationsListMap[integration]?.title;
 
   const selectedImplementation = Object.fromEntries(
     Object.entries(
-      implementations.data.find(({ key }) => key === formValues.action)
+      implementations.data.find(({ key }) => key === action)
         ?.configurationSchema || {}
     ).map(([key, value]) => [
       `${CONFIGURATION_FORM_PREFIX}${key}`,
@@ -89,6 +88,7 @@ export function ActionForm({
       formState: ($) => ({
         disabled: $.action === "update" || !$.formValues.trigger,
       }),
+      onChange: setIntegration,
     },
     action: {
       label: "Action",
@@ -101,6 +101,7 @@ export function ActionForm({
       formState: ($) => ({
         disabled: !$.formValues.trigger,
       }),
+      onChange: setAction,
     },
     ...selectedImplementation,
   };
@@ -122,7 +123,6 @@ export function ActionForm({
       initialValues={initialValues$1}
       fields={fields}
       systemIcon={formAction === "create" ? "Plus" : "Save"}
-      onChange={setFormValues}
       action={formAction}
       onSubmit={async (value) => {
         const cleanedConfigurationForm = Object.entries(value).reduce(

@@ -46,6 +46,7 @@ export function StorageCredentialsSettings() {
       label: datum.title,
       value: datum.key,
     })),
+    onChange: setCurrentStorage,
     validations: [
       {
         validationType: "required",
@@ -89,9 +90,6 @@ export function StorageCredentialsSettings() {
         </>
       ) : (
         <SchemaForm<{ storageKey: string }>
-          onChange={(data) => {
-            setCurrentStorage(data.storageKey);
-          }}
           fields={{
             storageKey: storageFormConfig,
             ...(currentStorageDetails?.configurationSchema || {}),

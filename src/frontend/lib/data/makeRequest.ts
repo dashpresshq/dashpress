@@ -3,6 +3,7 @@ import { REQUEST_ERROR_CODES } from "shared/constants/auth";
 import { TemporayStorageService } from "frontend/lib/storage";
 import { STORAGE_CONSTANTS } from "frontend/lib/storage/constants";
 import { ApiRequestError } from "./_errors";
+import { NAVIGATION_LINKS } from "../routing/links";
 
 const pathWithBaseUrl = (path: string) => {
   if (path.startsWith("http")) {
@@ -35,7 +36,7 @@ const handleRequestError = async (response: Response, errorMessage: string) => {
         STORAGE_CONSTANTS.PREVIOUS_AUTH_URL,
         window.location.href
       );
-      window.location.replace("/auth");
+      window.location.replace(NAVIGATION_LINKS.AUTH_SIGNIN);
     }
   }
   throw new ApiRequestError(response.status, error.message || errorMessage);

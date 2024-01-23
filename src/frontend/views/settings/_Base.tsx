@@ -63,7 +63,7 @@ export function BaseSettingsLayout({ children }: IProps) {
   const menuItems = useMutateBaseSettingsMenu(baseMenuItems);
   return (
     <AppLayout>
-      {/* {false && ( // TODO log the user who click on the button to not disturb again
+      {/* {true && ( TODO
         <>
           <InfoAlert
             renderJsx
@@ -76,16 +76,12 @@ export function BaseSettingsLayout({ children }: IProps) {
             message={
               <span>
                 <p>
-                  <b> Awesome!,</b>
+                  <b>Hi There!</b>
                 </p>
                 <p>
-                  You have been using DashPress for about a week now. Hope you
-                  are enjoying it so far.
-                </p>
-                <p>
-                  We have spent countless hours developing this free app, and we
-                  would really appreciate it if you could drop a star on Github, 
-                  It would mean a lot to us
+                  Looks like you are enjoying DashPress, We have worked hard
+                  developing this app, and you can tell us thank you by giving
+                  us a star on Github. It would mean a lot to us!
                 </p>
               </span>
             }

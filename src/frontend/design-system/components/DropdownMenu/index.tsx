@@ -23,7 +23,6 @@ export interface IDropDownMenuItem extends IGroupActionButton {
 
 export interface IProps {
   menuItems: IDropDownMenuItem[];
-  isMakingActionRequest?: boolean;
   ariaLabel: string;
   disabled?: boolean;
   ellipsis?: true;
@@ -125,7 +124,6 @@ const CurrentButton = styled(SoftButtonStyled)`
 `;
 export function DropDownMenu({
   menuItems: menuItems$1,
-  isMakingActionRequest,
   disabled,
   ellipsis,
   ariaLabel,
@@ -135,7 +133,7 @@ export function DropDownMenu({
   const router = useRouter();
 
   const toggleDropDown = () => {
-    if (!isMakingActionRequest && !disabled) {
+    if (!disabled) {
       setDropDownOpen(togglePreviousState);
     }
   };
@@ -185,12 +183,11 @@ export function DropDownMenu({
 
   const currentItem = (
     <Stack spacing={4} align="center">
-      {/* eslint-disable-next-line no-nested-ternary */}
-      {isMakingActionRequest ? (
+      {currentMenuItem.isMakingRequest ? (
         <Spin as={Loader} size={14} />
-      ) : systemIcon ? (
+      ) : (
         <SystemIcon icon={systemIcon} size={14} />
-      ) : null}
+      )}
       <Label>{label}</Label>
     </Stack>
   );
@@ -199,7 +196,7 @@ export function DropDownMenu({
     return (
       <SoftButtonStyled
         size="sm"
-        disabled={isMakingActionRequest || disabled}
+        disabled={currentMenuItem.isMakingRequest || disabled}
         onClick={() => runAction(currentMenuItem)}
       >
         {currentItem}
@@ -228,7 +225,7 @@ export function DropDownMenu({
         <>
           <CurrentButton
             size="sm"
-            disabled={isMakingActionRequest || disabled}
+            disabled={disabled || currentMenuItem.isMakingRequest}
             onClick={() => runAction(currentMenuItem)}
             type="button"
           >
@@ -248,11 +245,15 @@ export function DropDownMenu({
             type="button"
           >
             <Stack>
-              <SystemIcon
-                icon={menuItem.systemIcon}
-                size={14}
-                color={menuItem.disabled ? "muted-text" : "main-text"}
-              />
+              {currentMenuItem.isMakingRequest ? (
+                <Spin as={Loader} size={14} />
+              ) : (
+                <SystemIcon
+                  icon={menuItem.systemIcon}
+                  size={14}
+                  color={menuItem.disabled ? "muted-text" : "main-text"}
+                />
+              )}
               <Typo.XS
                 as="span"
                 color={menuItem.disabled ? "muted" : undefined}

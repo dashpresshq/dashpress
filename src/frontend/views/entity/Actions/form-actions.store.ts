@@ -31,7 +31,6 @@ export function useDeleteFormActionMutation(entity: string) {
   const apiMutateOptions = useApiMutateOptimisticOptions<IFormAction[], string>(
     {
       dataQueryPath: LIST_ENTITY_FORM_ACTIONS(entity),
-      otherEndpoints: [LIST_ENTITY_FORM_ACTIONS(entity)],
       successMessage: FORM_ACTION_CRUD_CONFIG.MUTATION_LANG.DELETE,
       onMutate: MutationHelpers.deleteByKey("id") as unknown as (
         oldData: IFormAction[],
@@ -50,30 +49,28 @@ export function useDeleteFormActionMutation(entity: string) {
   );
 }
 
-export function useCreateFormActionMutation() {
+export function useCreateFormActionMutation(entity: string) {
   const apiMutateOptions = useWaitForResponseMutationOptions<
     Record<string, string>
   >({
-    endpoints: [FORM_ACTION_CRUD_CONFIG.ENDPOINTS.LIST],
+    endpoints: [LIST_ENTITY_FORM_ACTIONS(entity)],
     successMessage: FORM_ACTION_CRUD_CONFIG.MUTATION_LANG.CREATE,
   });
 
-  return useMutation(
-    async (configuration: IFormAction) =>
-      await makeActionRequest(
-        "POST",
-        FORM_ACTION_CRUD_CONFIG.ENDPOINTS.CREATE,
-        configuration
-      ),
-    apiMutateOptions
-  );
+  return useMutation(async (configuration: IFormAction) => {
+    return await makeActionRequest(
+      "POST",
+      FORM_ACTION_CRUD_CONFIG.ENDPOINTS.CREATE,
+      configuration
+    );
+  }, apiMutateOptions);
 }
 
-export function useUpdateFormActionMutation() {
+export function useUpdateFormActionMutation(entity: string) {
   const apiMutateOptions = useWaitForResponseMutationOptions<
     Record<string, string>
   >({
-    endpoints: [FORM_ACTION_CRUD_CONFIG.ENDPOINTS.LIST],
+    endpoints: [LIST_ENTITY_FORM_ACTIONS(entity)],
     successMessage: FORM_ACTION_CRUD_CONFIG.MUTATION_LANG.EDIT,
   });
 

@@ -6,7 +6,7 @@ import { ContentLayout } from "frontend/design-system/components/Section/Section
 import { SectionBox } from "frontend/design-system/components/Section/SectionBox";
 import { AppLayout } from "frontend/_layouts/app";
 import { SchemaForm } from "frontend/components/SchemaForm";
-import { ICreateUserForm } from "shared/form-schemas/users/create";
+import { ICreateUserForm } from "shared/form-schemas/users";
 import { useDocumentationActionButton } from "frontend/docs/constants";
 import { IActionButton } from "frontend/design-system/components/Button/types";
 import { IAppliedSchemaFormConfig } from "shared/form-schemas/types";

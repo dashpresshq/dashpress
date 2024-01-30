@@ -23,7 +23,7 @@ import {
 import { useDocumentationActionButton } from "frontend/docs/constants";
 import { IActionButton } from "frontend/design-system/components/Button/types";
 import { IAppliedSchemaFormConfig } from "shared/form-schemas/types";
-import { IUpdateUserForm } from "shared/form-schemas/users/update";
+import { IUpdateUserForm } from "shared/form-schemas/users";
 import { useUsernameFromRouteParam } from "../hooks";
 import {
   useUpdateUserMutation,

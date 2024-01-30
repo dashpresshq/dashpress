@@ -1,7 +1,7 @@
 import { rest } from "msw";
 import { BASE_TEST_URL } from "./_utils";
 
-export const actionsApiHandlers = [
+export const integrationsListApiHandlers = [
   rest.get(
     BASE_TEST_URL("/api/integrations/actions/list"),
     async (_, res, ctx) => {
@@ -65,30 +65,53 @@ export const actionsApiHandlers = [
       return res(ctx.json(["http", "slack"]));
     }
   ),
-  //   rest.put(
-  //     BASE_TEST_URL("/api/integrations/constants/:key"),
-  //     async (req, res, ctx) => {
-  //       const key = req.params.key as string;
-  //       const { value } = await req.json();
-
-  //       const index = CONSTANTS.findIndex((constant) => constant.key === key);
-
-  //       if (index > -1) {
-  //         CONSTANTS[index] = { key, value };
-  //       } else {
-  //         CONSTANTS.push({ key, value });
-  //       }
-
-  //       return res(ctx.status(204));
-  //     }
-  //   ),
-  //   rest.delete(
-  //     BASE_TEST_URL("/api/integrations/constants/:key"),
-  //     async (req, res, ctx) => {
-  //       const key = req.params.key as string;
-
-  //       CONSTANTS = CONSTANTS.filter((permission$1) => permission$1.key !== key);
-  //       return res(ctx.status(204));
-  //     }
-  //   ),
+  rest.get(
+    BASE_TEST_URL("/api/integrations/actions/:integration/implementations"),
+    async (_, res, ctx) => {
+      return res(
+        ctx.json([
+          {
+            key: "send_message",
+            label: "Send Message",
+            configurationSchema: {
+              channel: {
+                type: "text",
+                validations: [
+                  {
+                    validationType: "required",
+                  },
+                ],
+              },
+              message: {
+                type: "text",
+                validations: [
+                  {
+                    validationType: "required",
+                  },
+                ],
+              },
+              shouldNotify: {
+                type: "boolean",
+                validations: [],
+              },
+            },
+          },
+          {
+            key: "send_mail",
+            label: "Send Mail",
+            configurationSchema: {
+              message: {
+                type: "text",
+                validations: [
+                  {
+                    validationType: "required",
+                  },
+                ],
+              },
+            },
+          },
+        ])
+      );
+    }
+  ),
 ];

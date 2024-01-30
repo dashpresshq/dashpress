@@ -1,7 +1,7 @@
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
 import { useRouter } from "next/router";
 import { useMutation } from "react-query";
-import { ICreateUserForm } from "shared/form-schemas/users/create";
+import { ICreateUserForm } from "shared/form-schemas/users";
 import { IResetPasswordForm } from "shared/form-schemas/users/reset-password";
 import { IAccountProfile } from "shared/types/user";
 import { MAKE_CRUD_CONFIG } from "frontend/lib/crud-config";

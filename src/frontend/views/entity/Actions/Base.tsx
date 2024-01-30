@@ -41,8 +41,8 @@ export function FormActions({ entity }: { entity: string }) {
   });
 
   const deleteFormActionMutation = useDeleteFormActionMutation(entity);
-  const updateFormActionMutation = useUpdateFormActionMutation();
-  const createFormActionMutation = useCreateFormActionMutation();
+  const updateFormActionMutation = useUpdateFormActionMutation(entity);
+  const createFormActionMutation = useCreateFormActionMutation(entity);
 
   const [currentFormActionId, setCurrentFormActionId] = useState("");
 

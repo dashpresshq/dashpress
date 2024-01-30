@@ -35,6 +35,7 @@ import { FOR_CODE_COV as $41 } from "frontend/design-system/components/Form/_typ
 import { FOR_CODE_COV as $42 } from "backend/menu/types";
 import { FOR_CODE_COV as $43 } from "frontend/lib/form/types";
 import { FOR_CODE_COV as $44 } from "frontend/design-system/components/Table/filters/types";
+import { FOR_CODE_COV as $45 } from "shared/form-schemas/users";
 
 import { noop } from "shared/lib/noop";
 
@@ -75,7 +76,8 @@ noop(
   $41,
   $42,
   $43,
-  $44
+  $44,
+  $45
 );
 
 describe("Code coverage ignores plain types file", () => {

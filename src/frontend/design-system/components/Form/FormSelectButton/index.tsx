@@ -9,6 +9,7 @@ import { generateFormArias, wrapLabelAndError } from "../_wrapForm";
 interface IProps {
   name: string;
   disabled?: boolean;
+  sm?: boolean;
   options: ISelectData[];
   value: string | boolean;
   onChange: (value: string | boolean) => void;
@@ -41,6 +42,7 @@ function BaseFormSelectButton({
   name,
   value: selectedValue,
   onChange,
+  sm,
   disabled,
 }: IProps) {
   return (
@@ -54,6 +56,7 @@ function BaseFormSelectButton({
           <OutlineButton
             type="button"
             role="option"
+            size={sm ? "xs" : undefined}
             aria-selected={isChecked}
             disabled={disabled}
             key={`${value}`}
@@ -82,7 +85,7 @@ interface IFormSelect extends IBaseFormSelect {
 }
 
 export function FormSelectButton(props: IFormSelect) {
-  const { input, selectData, meta, disabled } = props;
+  const { input, selectData, meta, disabled, sm } = props;
 
   return wrapLabelAndError(
     <BaseFormSelectButton
@@ -90,6 +93,7 @@ export function FormSelectButton(props: IFormSelect) {
       {...generateFormArias(meta)}
       name={input.name}
       disabled={disabled}
+      sm={sm}
       options={selectData}
     />,
     props

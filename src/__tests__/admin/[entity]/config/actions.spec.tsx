@@ -1,3 +1,5 @@
+/* eslint-disable testing-library/no-node-access */
+/* eslint-disable testing-library/no-container */
 import React from "react";
 import { render, screen, within } from "@testing-library/react";
 import { ApplicationRoot } from "frontend/components/ApplicationRoot";
@@ -68,7 +70,7 @@ describe("pages/admin/[entity]/config/actions", () => {
     );
 
     expect(
-      within(dialog).queryByRole("option", { name: "SMTP" })
+      within(dialog).queryByRole("option", { name: "Non Activated Actions" })
     ).not.toBeInTheDocument();
 
     await userEvent.type(
@@ -105,6 +107,102 @@ describe("pages/admin/[entity]/config/actions", () => {
     expect(
       screen.queryByRole("button", { name: "Create Form Action" })
     ).not.toBeInTheDocument();
+
+    expect(await getTableRows(screen.getByRole("table")))
+      .toMatchInlineSnapshot(`
+      [
+        "Integration
+                      
+                    Trigger
+                      
+                    Action
+                      
+                    Action",
+        "HttpCreatePost",
+        "SmtpUpdateSend Mail",
+        "SlackDeleteSend Message",
+        "SlackCreateSend Message",
+      ]
+    `);
+  });
+
+  it("should delete form action successfully", async () => {
+    render(
+      <ApplicationRoot>
+        <EntityFormActionsSettings />
+      </ApplicationRoot>
+    );
+
+    await userEvent.click(screen.getByRole("button", { name: "Close Toast" }));
+
+    expect(await screen.findByRole("table")).toBeInTheDocument();
+
+    const tableRows = await screen.findAllByRole("row");
+
+    expect(tableRows).toHaveLength(5);
+
+    await userEvent.click(
+      within(tableRows[1]).getByRole("button", {
+        name: "Delete Form Action",
+      })
+    );
+
+    const confirmBox = await screen.findByRole("alertdialog", {
+      name: "Confirm Delete",
+    });
+
+    await userEvent.click(
+      await within(confirmBox).findByRole("button", { name: "Confirm" })
+    );
+
+    expect(await screen.findByRole("status")).toHaveTextContent(
+      "Form Action Deleted Successfully"
+    );
+
+    expect(await screen.findAllByRole("row")).toHaveLength(4);
+  });
+
+  it("should show the correct value on the update form", async () => {
+    const { container } = render(
+      <ApplicationRoot>
+        <EntityFormActionsSettings />
+      </ApplicationRoot>
+    );
+
+    await userEvent.click(screen.getByRole("button", { name: "Close Toast" }));
+
+    expect(await screen.findByRole("table")).toBeInTheDocument();
+
+    const tableRows = await screen.findAllByRole("row");
+
+    await userEvent.click(
+      within(tableRows[1]).getByRole("button", {
+        name: "Edit Form Action",
+      })
+    );
+
+    //
+
+    const dialog = screen.getByRole("dialog");
+
+    expect(await within(dialog).findByLabelText("SMTP: From")).toHaveValue(
+      "from@gmail.com"
+    );
+    expect(within(dialog).getByLabelText("SMTP: To")).toHaveValue(
+      "to@gmail.com"
+    );
+
+    expect(container.querySelector(`input[name="trigger"]`)).toHaveValue(
+      "update"
+    );
+
+    expect(
+      within(dialog).getByRole("option", { selected: true })
+    ).toHaveTextContent("SMTP");
+
+    expect(
+      within(dialog).getByRole("option", { selected: true })
+    ).toHaveTextContent("Send Mail");
   });
 
   //   it("should display updated diction values", async () => {

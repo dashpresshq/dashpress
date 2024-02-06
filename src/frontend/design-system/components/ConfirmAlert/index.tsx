@@ -61,7 +61,7 @@ export function Presentation({ action, title, onClose }: IPresentationProps) {
       role="alertdialog"
       aria-modal="true"
       aria-labelledby="confirm_delete_label"
-      aria-describedby="confirm_delete_desc"
+      aria-describedby="confirm_delete_description"
       tabIndex={-1}
     >
       <Body>
@@ -70,7 +70,9 @@ export function Presentation({ action, title, onClose }: IPresentationProps) {
         </Typo.MD>
         <Spacer size="xl" />
         <Typo.XS>
-          <span id="confirm_delete_desc">Are you sure you want to do this</span>
+          <span id="confirm_delete_description">
+            Are you sure you want to do this?
+          </span>
         </Typo.XS>
         <Spacer size="xxl" />
         <Stack justify="center" spacing={8}>

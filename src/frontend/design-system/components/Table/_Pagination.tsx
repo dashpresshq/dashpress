@@ -5,6 +5,7 @@ import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
 import { Stack } from "frontend/design-system/primitives/Stack";
 import { Typo } from "frontend/design-system/primitives/Typo";
 import { SimpleSelect } from "../Form/FormSelect/Simple";
+import { TABLE_PAGE_SIZES } from "./constants";
 
 const Pagination = styled.div`
   .pagination {
@@ -56,8 +57,6 @@ interface IProps {
   totalPageCount: number;
 }
 
-const PAGE_SIZES = [10, 25, 50, 100];
-
 export function TablePagination({
   setPageSize,
   gotoPage,
@@ -76,7 +75,7 @@ export function TablePagination({
           Showing{" "}
           <SimpleSelect
             width={55}
-            options={PAGE_SIZES.map((option) => ({
+            options={TABLE_PAGE_SIZES.map((option) => ({
               value: `${option}`,
               label: `${option}`,
             }))}

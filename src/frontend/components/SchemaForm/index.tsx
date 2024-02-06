@@ -8,14 +8,12 @@ import { ToastService } from "frontend/lib/toast";
 import { resetFormValues } from "frontend/lib/form/utils";
 import { FormButton } from "frontend/design-system/components/Button/FormButton";
 import { userFriendlyCase } from "shared/lib/strings/friendly-case";
-import styled from "styled-components";
-import { gridItem, gridRoot } from "frontend/design-system/constants/grid";
-import { GridSpanSizes } from "shared/types/ui";
 import { SystemIconsKeys } from "shared/constants/Icons";
 import { RenderFormInput } from "./_RenderFormInput";
 import { IFormExtension } from "./types";
 import { runFormBeforeSubmit, runFormFieldState } from "./form-run";
 import { useSchemaFormScriptContext } from "./useSchemaFormScriptContext";
+import { FormGrid } from "./form-grid";
 
 interface IProps<T> {
   fields: IAppliedSchemaFormConfig<T>;
@@ -28,17 +26,6 @@ interface IProps<T> {
   resetForm?: true;
   formExtension?: Partial<IFormExtension>;
 }
-
-export const GridRoot = styled.div`
-  ${gridRoot}
-  grid-auto-rows: auto;
-`;
-
-export const GridItem = styled.div<{
-  $span: GridSpanSizes;
-}>`
-  ${gridItem}
-`;
 
 export function SchemaForm<T extends Record<string, unknown>>({
   onSubmit,
@@ -96,7 +83,7 @@ export function SchemaForm<T extends Record<string, unknown>>({
               });
             }}
           >
-            <GridRoot>
+            <FormGrid.Root>
               {Object.entries(fields)
                 .filter(([field, bag]) => {
                   const isHidden = fieldState[field]?.hidden;
@@ -108,7 +95,7 @@ export function SchemaForm<T extends Record<string, unknown>>({
                 .map(([field, bag]: [string, ISchemaFormConfig<T>]) => (
                   <Field key={field} name={field} validateFields={[]}>
                     {(formProps) => (
-                      <GridItem $span={bag.span || "4"}>
+                      <FormGrid.Item $span={bag.span}>
                         <RenderFormInput
                           type={bag.type}
                           disabled={
@@ -129,11 +116,11 @@ export function SchemaForm<T extends Record<string, unknown>>({
                           entityFieldSelections={bag.selections}
                           formProps={formProps}
                         />
-                      </GridItem>
+                      </FormGrid.Item>
                     )}
                   </Field>
                 ))}
-            </GridRoot>
+            </FormGrid.Root>
             {buttonText && (
               <FormButton
                 text={buttonText}

@@ -29,7 +29,7 @@ interface IProps {
   tableColumns: ITableColumn[];
 }
 
-function TabForm({ values, tableColumns, initialValues }: IProps) {
+function TabForm({ tableColumns, values, initialValues }: IProps) {
   const { fields } = useFieldArray("tabs");
   const [currentTab, setCurrentTab] = useState("");
 
@@ -37,107 +37,111 @@ function TabForm({ values, tableColumns, initialValues }: IProps) {
     ({ accessor }) => ACTIONS_ACCESSOR !== accessor
   );
 
-  const newTabButton = (
-    <SoftButton
-      systemIcon="Plus"
-      label="Add New Tab"
-      action={() => {
-        const newTab: ITableTab = {
-          id: generateRandomString(12),
-          title: `Tab ${fields.length + 1}`,
-          dataState: {
-            filters: [],
-            pageSize: undefined,
-            sortBy: [],
-          },
-        };
-        fields.push(newTab);
-        setCurrentTab(`Tab ${fields.length + 1}`);
-      }}
-    />
-  );
-
-  return values.length > 0 ? (
-    <Tabs
-      currentTab={currentTab}
-      onChange={setCurrentTab}
-      contents={fields.map((field, index) => {
-        const dataState: Pick<
-          IPaginatedDataState<unknown>,
-          "filters" | "sortBy" | "pageSize"
-        > = initialValues[index]?.dataState || {
-          filters: [],
-          pageSize: undefined,
-          sortBy: [],
-        };
-        return {
-          content: (
-            <>
-              <Stack justify="end">
-                <ActionButtons
-                  size="xs"
-                  actionButtons={[
-                    {
-                      ...DELETE_BUTTON_PROPS({
-                        action: () => {
-                          fields.remove(index);
-                          setCurrentTab(`Tab ${index}`);
+  return (
+    <>
+      <Stack justify="end">
+        <SoftButton
+          systemIcon="Plus"
+          label="Add New Tab"
+          action={() => {
+            const newTab: ITableTab = {
+              id: generateRandomString(12),
+              title: `Tab ${fields.length + 1}`,
+              dataState: {
+                filters: [],
+                pageSize: undefined,
+                sortBy: [],
+              },
+            };
+            fields.push(newTab);
+            setCurrentTab(`Tab ${fields.length + 1}`);
+          }}
+        />
+      </Stack>
+      {values.length > 0 && (
+        <Tabs
+          currentTab={currentTab}
+          onChange={setCurrentTab}
+          contents={fields.map((field, index) => {
+            const dataState: Pick<
+              IPaginatedDataState<unknown>,
+              "filters" | "sortBy" | "pageSize"
+            > = initialValues[index]?.dataState || {
+              filters: [],
+              pageSize: undefined,
+              sortBy: [],
+            };
+            return {
+              content: (
+                <>
+                  <Stack justify="end">
+                    <ActionButtons
+                      size="xs"
+                      actionButtons={[
+                        {
+                          ...DELETE_BUTTON_PROPS({
+                            action: () => {
+                              fields.remove(index);
+                              setCurrentTab(`Tab ${index}`);
+                            },
+                            label: "Delete Tab",
+                            isMakingRequest: false,
+                            shouldConfirmAlert: undefined,
+                          }),
                         },
-                        label: "Delete Tab",
-                        isMakingRequest: false,
-                        shouldConfirmAlert: undefined,
-                      }),
-                    },
-                  ]}
-                />
-
-                {newTabButton}
-              </Stack>
-              <Spacer />
-              <Field
-                name={`${field}.title`}
-                validate={composeValidators(required, maxLength(64))}
-                validateFields={[]}
-              >
-                {({ meta, input }) => (
-                  <FormInput label="Title" required meta={meta} input={input} />
-                )}
-              </Field>
-              <Field name={`${field}.dataState`} validateFields={[]}>
-                {({ input }) => (
-                  <Table
-                    {...{
-                      tableData: {
-                        error: false,
-                        isLoading: false,
-                        isPreviousData: false,
-                        data: {
-                          data: [],
-                          pageIndex: 0,
-                          pageSize: 10,
-                          totalRecords: 0,
-                        },
-                      },
-                      syncPaginatedDataStateOut: input.onChange,
-                      overridePaginatedDataState: {
-                        ...dataState,
-                        pageIndex: 0,
-                      },
-                    }}
-                    empty={{ text: "No Data" }}
-                    columns={columns}
-                  />
-                )}
-              </Field>
-            </>
-          ),
-          label: `Tab ${index + 1}`,
-          overrideLabel: fields.value[index]?.title,
-        };
-      })}
-    />
-  ) : (
-    <Stack justify="end">{newTabButton}</Stack>
+                      ]}
+                    />
+                  </Stack>
+                  <Spacer />
+                  <Field
+                    name={`${field}.title`}
+                    validate={composeValidators(required, maxLength(64))}
+                    validateFields={[]}
+                  >
+                    {({ meta, input }) => (
+                      <FormInput
+                        label="Title"
+                        required
+                        meta={meta}
+                        input={input}
+                      />
+                    )}
+                  </Field>
+                  <Field name={`${field}.dataState`} validateFields={[]}>
+                    {({ input }) => (
+                      <Table
+                        {...{
+                          tableData: {
+                            error: false,
+                            isLoading: false,
+                            isPreviousData: false,
+                            data: {
+                              data: [],
+                              pageIndex: 0,
+                              pageSize: 10,
+                              totalRecords: 0,
+                            },
+                          },
+                          syncPaginatedDataStateOut: input.onChange,
+                          overridePaginatedDataState: {
+                            ...dataState,
+                            pageIndex: 0,
+                          },
+                        }}
+                        empty={{ text: "No Data" }}
+                        columns={columns}
+                      />
+                    )}
+                  </Field>
+                </>
+              ),
+              label: `Tab ${index + 1}`,
+              overrideLabel: fields.value[index]?.title,
+            };
+          })}
+        />
+      )}
+    </>
   );
 }
 
@@ -162,6 +166,13 @@ export function EntityTableTabForm({
       }) => {
         return (
           <>
+            <TabForm
+              values={values.tabs}
+              initialValues={initialFormValues.tabs}
+              tableColumns={tableColumns}
+            />
+            <Spacer />
+
             <FormButton
               isMakingRequest={submitting}
               onClick={handleSubmit}
@@ -171,12 +182,6 @@ export function EntityTableTabForm({
               }
               disabled={pristine}
               systemIcon="Save"
-            />
-            <Spacer />
-            <TabForm
-              values={values.tabs}
-              initialValues={initialFormValues.tabs}
-              tableColumns={tableColumns}
             />
           </>
         );

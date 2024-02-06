@@ -29,6 +29,12 @@ export const integrationsListApiHandlers = [
             },
           },
           {
+            key: "non-activated-actions",
+            title: "Non Activated Actions",
+            description: "Some Non Activated Actions Description",
+            configurationSchema: {},
+          },
+          {
             key: "smtp",
             title: "SMTP",
             description: "Some SMTP Description",
@@ -62,7 +68,7 @@ export const integrationsListApiHandlers = [
   rest.get(
     BASE_TEST_URL("/api/integrations/actions/active"),
     async (_, res, ctx) => {
-      return res(ctx.json(["http", "slack"]));
+      return res(ctx.json(["http", "slack", "smtp"]));
     }
   ),
   rest.get(
@@ -71,7 +77,7 @@ export const integrationsListApiHandlers = [
       return res(
         ctx.json([
           {
-            key: "send_message",
+            key: "SEND_MESSAGE",
             label: "Send Message",
             configurationSchema: {
               channel: {
@@ -97,10 +103,18 @@ export const integrationsListApiHandlers = [
             },
           },
           {
-            key: "send_mail",
+            key: "SEND_MAIL",
             label: "Send Mail",
             configurationSchema: {
-              message: {
+              from: {
+                type: "text",
+                validations: [
+                  {
+                    validationType: "required",
+                  },
+                ],
+              },
+              to: {
                 type: "text",
                 validations: [
                   {

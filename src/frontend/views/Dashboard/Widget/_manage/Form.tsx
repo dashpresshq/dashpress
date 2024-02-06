@@ -7,13 +7,11 @@ import { useMutation } from "react-query";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { useEffect, useState } from "react";
 import { WidgetScriptDocumentation } from "frontend/docs/scripts/widget-scripts";
-import styled from "styled-components";
 import { required } from "frontend/lib/validations";
 import { resetFormValues } from "frontend/lib/form/utils";
 import { makeActionRequest } from "frontend/lib/data/makeRequest";
 import { IFormProps } from "frontend/lib/form/types";
 import { ILabelValue } from "shared/types/options";
-import { BREAKPOINTS } from "frontend/design-system/constants";
 import { FormInput } from "frontend/design-system/components/Form/FormInput";
 import { FormSelect } from "frontend/design-system/components/Form/FormSelect";
 import { BaseSkeleton } from "frontend/design-system/components/Skeleton/Base";
@@ -27,22 +25,13 @@ import { FormButton } from "frontend/design-system/components/Button/FormButton"
 import { FormCodeEditor } from "frontend/design-system/components/Form/FormCodeEditor";
 import { loadedDataState } from "frontend/lib/data/constants/loadedDataState";
 import { useDocumentationActionButton } from "frontend/docs/constants";
-import { GridSpan } from "./Form.style";
+import { FormGrid } from "frontend/components/SchemaForm/form-grid";
 import { DASHBOARD_WIDGETS_CRUD_CONFIG } from "../../constants";
 import { DashboardWidgetPresentation } from "../Presentation";
 import { WIDGET_CONFIG } from "../constants";
 import { PortalFormFields, PortalFormSchema } from "./portal";
 import { WidgetFormField } from "./types";
 import { DASHBOARD_WIDGET_HEIGHTS, DASHBOARD_WIDGET_SPANS } from "./constants";
-
-const Root = styled.div`
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-column-gap: 16px;
-  @media (max-width: ${BREAKPOINTS.lg}) {
-    grid-template-columns: repeat(1, 1fr);
-  }
-`;
 
 const DashboardTypesOptions: {
   label: string;
@@ -117,8 +106,8 @@ export function DashboardWidgetForm({
                 });
               }}
             >
-              <Root>
-                <GridSpan $span={1}>
+              <FormGrid.Root>
+                <FormGrid.Item $span="9">
                   <Field name="title" validate={required} validateFields={[]}>
                     {({ input, meta }) => (
                       <FormInput
@@ -129,8 +118,8 @@ export function DashboardWidgetForm({
                       />
                     )}
                   </Field>
-                </GridSpan>
-                <GridSpan $span={1}>
+                </FormGrid.Item>
+                <FormGrid.Item $span="3">
                   <Field name="_type" validate={required} validateFields={[]}>
                     {({ input, meta }) => (
                       <FormSelect
@@ -143,8 +132,8 @@ export function DashboardWidgetForm({
                       />
                     )}
                   </Field>
-                </GridSpan>
-                <GridSpan>
+                </FormGrid.Item>
+                <FormGrid.Item>
                   <Field name="entity" validateFields={[]}>
                     {({ input, meta }) => (
                       <FormSelect
@@ -157,9 +146,9 @@ export function DashboardWidgetForm({
                       />
                     )}
                   </Field>
-                </GridSpan>
+                </FormGrid.Item>
                 {values.entity && (entityViews.data || []).length > 0 && (
-                  <GridSpan>
+                  <FormGrid.Item>
                     <Field name="queryId" validateFields={[]}>
                       {({ input, meta }) => (
                         <FormSelect
@@ -177,11 +166,11 @@ export function DashboardWidgetForm({
                         />
                       )}
                     </Field>
-                  </GridSpan>
+                  </FormGrid.Item>
                 )}
 
                 <PortalFormFields formFields={formFields} />
-                <GridSpan>
+                <FormGrid.Item>
                   {formFields.includes("color") && (
                     <Field name="color" validate={required} validateFields={[]}>
                       {({ input, meta }) => (
@@ -198,15 +187,15 @@ export function DashboardWidgetForm({
                       )}
                     </Field>
                   )}
-                </GridSpan>
-                <GridSpan>
+                </FormGrid.Item>
+                <FormGrid.Item>
                   {formFields.includes("icon") && (
                     <IconInputField
                       value={(values as ISummaryWidgetConfig)?.icon}
                     />
                   )}
-                </GridSpan>
-                <GridSpan $span={1}>
+                </FormGrid.Item>
+                <FormGrid.Item $span="6">
                   <Field name="span" validateFields={[]}>
                     {({ input, meta }) => (
                       <FormSelect
@@ -217,8 +206,8 @@ export function DashboardWidgetForm({
                       />
                     )}
                   </Field>
-                </GridSpan>
-                <GridSpan $span={1}>
+                </FormGrid.Item>
+                <FormGrid.Item $span="6">
                   <Field name="height" validateFields={[]}>
                     {({ input, meta }) => (
                       <FormSelect
@@ -229,9 +218,9 @@ export function DashboardWidgetForm({
                       />
                     )}
                   </Field>
-                </GridSpan>
+                </FormGrid.Item>
                 {values._type && (
-                  <GridSpan>
+                  <FormGrid.Item>
                     <Field
                       name="script"
                       validate={required}
@@ -281,9 +270,9 @@ export function DashboardWidgetForm({
                         />
                       )}
                     </ViewStateMachine>
-                  </GridSpan>
+                  </FormGrid.Item>
                 )}
-                <GridSpan>
+                <FormGrid.Item>
                   {process.env.NEXT_PUBLIC_IS_DEMO ? (
                     <Stack justify="center">
                       <Typo.SM>
@@ -322,8 +311,8 @@ export function DashboardWidgetForm({
                       </Stack>
                     </>
                   )}
-                </GridSpan>
-              </Root>
+                </FormGrid.Item>
+              </FormGrid.Root>
             </form>
           );
         }}

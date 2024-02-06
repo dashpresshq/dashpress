@@ -6,3 +6,5 @@ export const DEFAULT_TABLE_STATE: Required<IPaginatedDataState<unknown>> = {
   filters: [],
   sortBy: [],
 };
+
+export const TABLE_PAGE_SIZES = [10, 25, 50, 100];

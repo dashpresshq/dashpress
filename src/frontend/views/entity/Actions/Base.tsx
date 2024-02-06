@@ -58,7 +58,7 @@ export function FormActions({ entity }: { entity: string }) {
           {
             id: "edit",
             action: () => setCurrentFormActionId(row.original.id),
-            label: FORM_ACTION_CRUD_CONFIG.TEXT_LANG.DELETE,
+            label: FORM_ACTION_CRUD_CONFIG.TEXT_LANG.EDIT,
             systemIcon: "Edit",
           },
           {

@@ -74,6 +74,8 @@ export const NAVIGATION_LINKS = {
       FORM: (entity: string) => `/admin/${entity}/config/form`,
       PRESENTATION: (entity: string) => `/admin/${entity}/config/presentation`,
       VIEWS: (entity: string) => `/admin/${entity}/config/views`,
+      PERSISTENT_QUERY: (entity: string) =>
+        `/admin/${entity}/config/persistent-query`,
       RELATIONS: (entity: string) => `/admin/${entity}/config/relations`,
       FORM_INTEGRATIONS: (entity: string) => `/admin/${entity}/config/actions`,
     },

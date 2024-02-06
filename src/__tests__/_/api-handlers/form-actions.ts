@@ -20,8 +20,8 @@ const FORM_ACTIONS = [
     trigger: "update",
     action: "SEND_MAIL",
     configuration: {
-      url: "http://localhost:3000",
-      method: "GET",
+      from: "from@gmail.com",
+      to: "to@gmail.com",
     },
   },
   {
@@ -46,7 +46,7 @@ export const formActionsApiHandlers = [
     FORM_ACTIONS.push(newFormAction);
     if (
       JSON.stringify(newFormAction) ===
-      '{"configuration":{"channel":"{ CONSTANTS.SLACK_CHANNEL }}","message":"Hello how are youHello how are you","shouldNotify":true},"entity":"test-entity","trigger":"create","integration":"slack","action":"send_message"}'
+      '{"configuration":{"channel":"{ CONSTANTS.SLACK_CHANNEL }}","message":"Hello how are youHello how are you","shouldNotify":true},"entity":"test-entity","trigger":"create","integration":"slack","action":"SEND_MESSAGE"}'
     ) {
       return res(ctx.status(204));
     }

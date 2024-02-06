@@ -54,6 +54,12 @@ const baseMenuItems = (entity: string): IMenuSectionItem[] => [
     systemIcon: "Filter",
     order: 50,
   },
+  // {
+  //   action: NAVIGATION_LINKS.ENTITY.CONFIG.PERSISTENT_QUERY(entity),
+  //   name: "Persistent Query",
+  //   systemIcon: "Shield",
+  //   order: 51,
+  // },
   {
     action: NAVIGATION_LINKS.ENTITY.CONFIG.FORM(entity),
     name: "Form Scripts",

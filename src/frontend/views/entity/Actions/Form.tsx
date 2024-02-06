@@ -86,7 +86,7 @@ export function ActionForm({
       type: "selection",
       validations: [{ validationType: "required" }],
       formState: ($) => ({
-        disabled: $.action === "update" || !$.formValues.trigger,
+        disabled: !$.formValues.trigger,
       }),
       onChange: setIntegration,
     },

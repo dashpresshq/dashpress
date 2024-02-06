@@ -32,7 +32,7 @@
   ],
   "bin": "./bin/dashpress",
   "dependencies": {
-    "@dashpress/bacteria": "^0.0.9",
+    "@dashpress/bacteria": "^0.0.10",
     "@tanstack/react-table": "^8.7.9",
     "@types/cryptr": "^4.0.1",
     "@types/formidable": "^3.4.5",

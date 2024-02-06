@@ -12,6 +12,7 @@ export type BaseAppConfigurationKeys =
   | "entity_fields_orders_details"
   | "entity_crud_settings"
   | "entity_views"
+  | "persistent_query"
   | "menu_entities_order"
   | "disabled_menu_entities"
   | "default_date_format"

@@ -185,3 +185,16 @@ export const ENTITY_VALIDATION_CONFIG: Record<
     implementation: handleValidation(matches, "pattern"),
   },
 };
+
+const LOWERCASE_NUMBERS_HYPEN_AND_UNDERSCORE_REGEX = (delimeter: "-" | "_") =>
+  `^[a-z0-9${delimeter}]+$`;
+
+export const SLUG_VALIDATION = (delimiter: "hyphens" | "underscores") => ({
+  validationType: "regex" as const,
+  constraint: {
+    pattern: LOWERCASE_NUMBERS_HYPEN_AND_UNDERSCORE_REGEX(
+      delimiter === "hyphens" ? "-" : "_"
+    ),
+  },
+  errorMessage: `Only lowercase letters, numbers and ${delimiter} are allowed`,
+});

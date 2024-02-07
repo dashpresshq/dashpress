@@ -1,7 +1,7 @@
 import { IFieldValidationItem } from "shared/validations/types";
 import { IColorableSelection } from "shared/types/ui";
 import { FIELD_TYPES_CONFIG_MAP } from "shared/validations";
-import { ITableTab, QueryFilterSchema } from "shared/types/data";
+import { ITableView, QueryFilterSchema } from "shared/types/data";
 import { BaseAppConfigurationKeys } from "./base-types";
 import {
   PortalAppConfigurationKeys,
@@ -116,10 +116,10 @@ export const APP_CONFIGURATION_CONFIG = {
       delete: true,
     } as IEntityCrudSettings,
   },
-  entity_views: {
-    label: "Views Settings",
+  table_views: {
+    label: "Table Views",
     requireEntity: true,
-    defaultValue: [] as ITableTab[],
+    defaultValue: [] as ITableView[],
   },
   persistent_query: {
     label: "Persistent Query",

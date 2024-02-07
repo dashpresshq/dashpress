@@ -75,4 +75,3 @@ export function EntityPersistentQuerySettings() {
     </BaseEntitySettingsLayout>
   );
 }
-// Run this query when deleting, updating or fetcing details

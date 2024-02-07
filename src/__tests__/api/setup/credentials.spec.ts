@@ -21,7 +21,9 @@ describe("/api/setup/credentials", () => {
     expect(res._getStatusCode()).toBe(400);
     expect(res._getJSONData()).toMatchInlineSnapshot(`
       {
-        "message": "Couldn't not connect to database 'getaddrinfo ENOTFOUND some invalid host'",
+        "message": "Couldn't not connect to database 'Knex: run
+      $ npm install pg --save
+      TextEncoder is not defined'",
         "method": "POST",
         "name": "BadRequestError",
         "path": "",
@@ -34,7 +36,7 @@ describe("/api/setup/credentials", () => {
     const { req, res } = createUnAuthenticatedMocks({
       method: "POST",
       body: {
-        dataSourceType: "postgres",
+        dataSourceType: "sqlite",
         connectionString: "sqlite:./test.sqlite",
       },
     });
@@ -48,7 +50,7 @@ describe("/api/setup/credentials", () => {
     const { req, res } = createUnAuthenticatedMocks({
       method: "POST",
       body: {
-        dataSourceType: "postgres",
+        dataSourceType: "sqlite",
         connectionString: "sqlite:./test.sqlite",
       },
     });

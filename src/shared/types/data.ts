@@ -87,7 +87,7 @@ export type QueryFilterSchema = {
   modifyQuery?: (queryBuilder: Knex.QueryBuilder) => Knex.QueryBuilder;
 };
 
-export type ITableTab = {
+export type ITableView = {
   id: string;
   title: string;
   dataState: Pick<

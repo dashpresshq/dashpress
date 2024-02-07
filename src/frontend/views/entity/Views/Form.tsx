@@ -1,4 +1,4 @@
-import { IPaginatedDataState, ITableTab } from "shared/types/data";
+import { IPaginatedDataState, ITableView } from "shared/types/data";
 import { Form, Field } from "react-final-form";
 import arrayMutators from "final-form-arrays";
 import { useFieldArray } from "react-final-form-arrays";
@@ -24,8 +24,8 @@ import { ActionButtons } from "frontend/design-system/components/Button/ActionBu
 import { DELETE_BUTTON_PROPS } from "frontend/design-system/components/Button/constants";
 
 interface IProps {
-  values: ITableTab[];
-  initialValues: ITableTab[];
+  values: ITableView[];
+  initialValues: ITableView[];
   tableColumns: ITableColumn[];
 }
 
@@ -42,11 +42,11 @@ function TabForm({ tableColumns, values, initialValues }: IProps) {
       <Stack justify="end">
         <SoftButton
           systemIcon="Plus"
-          label="Add New Tab"
+          label="Add New Table View"
           action={() => {
-            const newTab: ITableTab = {
+            const newTab: ITableView = {
               id: generateRandomString(12),
-              title: `Tab ${fields.length + 1}`,
+              title: `View ${fields.length + 1}`,
               dataState: {
                 filters: [],
                 pageSize: undefined,
@@ -54,7 +54,7 @@ function TabForm({ tableColumns, values, initialValues }: IProps) {
               },
             };
             fields.push(newTab);
-            setCurrentTab(`Tab ${fields.length + 1}`);
+            setCurrentTab(`View ${fields.length + 1}`);
           }}
         />
       </Stack>
@@ -82,9 +82,9 @@ function TabForm({ tableColumns, values, initialValues }: IProps) {
                           ...DELETE_BUTTON_PROPS({
                             action: () => {
                               fields.remove(index);
-                              setCurrentTab(`Tab ${index}`);
+                              setCurrentTab(`View ${index}`);
                             },
-                            label: "Delete Tab",
+                            label: "Delete Table View",
                             isMakingRequest: false,
                             shouldConfirmAlert: undefined,
                           }),
@@ -135,7 +135,7 @@ function TabForm({ tableColumns, values, initialValues }: IProps) {
                   </Field>
                 </>
               ),
-              label: `Tab ${index + 1}`,
+              label: `View ${index + 1}`,
               overrideLabel: fields.value[index]?.title,
             };
           })}
@@ -149,7 +149,7 @@ export function EntityTableTabForm({
   onSubmit,
   initialValues,
   tableColumns,
-}: IFormProps<ITableTab[]> & { tableColumns: ITableColumn[] }) {
+}: IFormProps<ITableView[]> & { tableColumns: ITableColumn[] }) {
   return (
     <Form
       onSubmit={({ tabs }) => onSubmit(tabs)}
@@ -177,7 +177,7 @@ export function EntityTableTabForm({
               isMakingRequest={submitting}
               onClick={handleSubmit}
               text={
-                MAKE_APP_CONFIGURATION_CRUD_CONFIG("entity_views").FORM_LANG
+                MAKE_APP_CONFIGURATION_CRUD_CONFIG("table_views").FORM_LANG
                   .UPSERT
               }
               disabled={pristine}

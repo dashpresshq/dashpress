@@ -165,7 +165,7 @@ describe("/api/config/[key]/index", () => {
       const { req, res } = createAuthenticatedMocks({
         method: "GET",
         query: {
-          key: "entity_views",
+          key: "table_views",
         },
       });
 
@@ -174,7 +174,7 @@ describe("/api/config/[key]/index", () => {
       expect(res._getStatusCode()).toBe(400);
       expect(res._getJSONData()).toMatchInlineSnapshot(`
       {
-        "message": "Configuration of key 'entity_views' requires entity",
+        "message": "Configuration of key 'table_views' requires entity",
         "method": "GET",
         "name": "BadRequestError",
         "path": "",

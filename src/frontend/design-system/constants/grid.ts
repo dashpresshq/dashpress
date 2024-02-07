@@ -2,6 +2,12 @@ import { css } from "styled-components";
 import { GridHeightSizes, GridSpanSizes } from "shared/types/ui";
 import { BREAKPOINTS } from "./breakpoints";
 
+export const mapToUnitOptions = (values: number[]) =>
+  values.map((value) => ({
+    label: value === 1 ? `1 Unit` : `${value} Units`,
+    value: `${value}`,
+  }));
+
 export const gridHeightToPx = (unit: GridHeightSizes) => +unit * 100;
 
 export const gridRoot = css`
@@ -22,3 +28,7 @@ export const gridItem = css<{
     grid-column-start: span 1;
   }
 `;
+
+export const GRID_SPAN_OPTIONS = mapToUnitOptions([
+  1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12,
+]);

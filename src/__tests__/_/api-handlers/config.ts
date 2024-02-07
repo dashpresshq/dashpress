@@ -1,10 +1,10 @@
 import { rest } from "msw";
-import { FilterOperators, ITableTab } from "shared/types/data";
+import { FilterOperators, ITableView } from "shared/types/data";
 import { BASE_TEST_URL } from "./_utils";
 
 const ENTITY_CONFIG = {};
 
-const ENTITY_VIEWS = (entity: string): ITableTab[] => [
+const TABLE_VIEWS = (entity: string): ITableView[] => [
   {
     id: "foo",
     title: "Verified Entity View",
@@ -108,7 +108,7 @@ const DEFAULT_ENTITY_CONFIG_VALUES: Record<
     "related-entity-2": "Custom Label For Entity 2",
     "related-entity-4": "Custom Label For Entity 4",
   }),
-  entity_views: (entity) => ENTITY_VIEWS(entity),
+  table_views: (entity) => TABLE_VIEWS(entity),
   hidden_entity_table_columns: () => ["hidden-field-1"],
   hidden_entity_create_columns: () => ["hidden-field-1"],
   hidden_entity_update_columns: () => ["hidden-field-1"],

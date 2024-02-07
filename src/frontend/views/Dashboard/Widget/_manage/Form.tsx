@@ -26,12 +26,13 @@ import { FormCodeEditor } from "frontend/design-system/components/Form/FormCodeE
 import { loadedDataState } from "frontend/lib/data/constants/loadedDataState";
 import { useDocumentationActionButton } from "frontend/docs/constants";
 import { FormGrid } from "frontend/components/SchemaForm/form-grid";
+import { GRID_SPAN_OPTIONS } from "frontend/design-system/constants/grid";
 import { DASHBOARD_WIDGETS_CRUD_CONFIG } from "../../constants";
 import { DashboardWidgetPresentation } from "../Presentation";
 import { WIDGET_CONFIG } from "../constants";
 import { PortalFormFields, PortalFormSchema } from "./portal";
 import { WidgetFormField } from "./types";
-import { DASHBOARD_WIDGET_HEIGHTS, DASHBOARD_WIDGET_SPANS } from "./constants";
+import { DASHBOARD_WIDGET_HEIGHTS } from "./constants";
 
 const DashboardTypesOptions: {
   label: string;
@@ -81,8 +82,8 @@ export function DashboardWidgetForm({
         onSubmit={onSubmit}
         initialValues={initialValues}
         render={({ handleSubmit, form, pristine, values, submitting }) => {
-          const entityViews = useEntityConfiguration(
-            "entity_views",
+          const tableViews = useEntityConfiguration(
+            "table_views",
             values.entity
           );
 
@@ -147,7 +148,7 @@ export function DashboardWidgetForm({
                     )}
                   </Field>
                 </FormGrid.Item>
-                {values.entity && (entityViews.data || []).length > 0 && (
+                {values.entity && (tableViews.data || []).length > 0 && (
                   <FormGrid.Item>
                     <Field name="queryId" validateFields={[]}>
                       {({ input, meta }) => (
@@ -155,7 +156,7 @@ export function DashboardWidgetForm({
                           label="Entity Tab"
                           description="Select the most appropriate tab of the entity above that the user should be direct to"
                           disabledOptions={[]}
-                          selectData={(entityViews.data || []).map(
+                          selectData={(tableViews.data || []).map(
                             ({ id, title }) => ({
                               label: title,
                               value: id,
@@ -200,7 +201,7 @@ export function DashboardWidgetForm({
                     {({ input, meta }) => (
                       <FormSelect
                         label="Width"
-                        selectData={DASHBOARD_WIDGET_SPANS}
+                        selectData={GRID_SPAN_OPTIONS}
                         meta={meta}
                         input={input}
                       />

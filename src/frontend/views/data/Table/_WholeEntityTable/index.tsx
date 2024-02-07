@@ -28,9 +28,9 @@ export function WholeEntityTable({
   const tabFromUrl = useRouteParam("tab");
   const changeTabParam = useChangeRouterParam("tab");
   const portalTableTabs = usePortalTableTabs(entity);
-  const entityViews = useEntityConfiguration("entity_views", entity);
+  const tableViews = useEntityConfiguration("table_views", entity);
 
-  const tableTabs = [...entityViews.data, ...portalTableTabs.data];
+  const tableTabs = [...tableViews.data, ...portalTableTabs.data];
 
   const tableViewsCount = useEntitiesFilterCount(
     tableTabs.length === 0
@@ -57,8 +57,8 @@ export function WholeEntityTable({
       <TableTopComponent entity={entity} />
       <Card>
         <ViewStateMachine
-          error={entityViews.error || portalTableTabs.error}
-          loading={entityViews.isLoading || portalTableTabs.isLoading}
+          error={tableViews.error || portalTableTabs.error}
+          loading={tableViews.isLoading || portalTableTabs.isLoading}
           loader={<TableSkeleton />}
         >
           {tableTabs.length > 0 ? (

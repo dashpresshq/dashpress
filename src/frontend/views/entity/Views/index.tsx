@@ -19,19 +19,21 @@ import { BaseEntitySettingsLayout } from "../_Base";
 import { ENTITY_CONFIGURATION_VIEW } from "../constants";
 import { EntityTableTabForm } from "./Form";
 
-const CRUD_CONFIG = MAKE_APP_CONFIGURATION_CRUD_CONFIG("entity_views");
+const CRUD_CONFIG = MAKE_APP_CONFIGURATION_CRUD_CONFIG("table_views");
 
-export function EntityViewsSettings() {
+export function TableViewsSettings() {
   const entity = useEntitySlug();
 
-  const upsertEntityViewsMutation = useUpsertConfigurationMutation(
-    "entity_views",
+  const upsertTableViewsMutation = useUpsertConfigurationMutation(
+    "table_views",
     entity
   );
 
-  const documentationActionButton = useDocumentationActionButton("Views");
+  const documentationActionButton = useDocumentationActionButton(
+    CRUD_CONFIG.TEXT_LANG.TITLE
+  );
 
-  const entityViews = useEntityConfiguration("entity_views", entity);
+  const tableViews = useEntityConfiguration("table_views", entity);
 
   const tableColumns = useTableColumns(entity);
 
@@ -41,9 +43,9 @@ export function EntityViewsSettings() {
     permission: USER_PERMISSIONS.CAN_CONFIGURE_APP,
   });
 
-  const isLoading = tableColumns.isLoading || entityViews.isLoading;
+  const isLoading = tableColumns.isLoading || tableViews.isLoading;
 
-  const error = entityViews.error || tableColumns.error;
+  const error = tableViews.error || tableColumns.error;
 
   return (
     <BaseEntitySettingsLayout>
@@ -62,8 +64,8 @@ export function EntityViewsSettings() {
         >
           {!isLoading && (
             <EntityTableTabForm
-              initialValues={entityViews.data}
-              onSubmit={upsertEntityViewsMutation.mutateAsync}
+              initialValues={tableViews.data}
+              onSubmit={upsertTableViewsMutation.mutateAsync}
               tableColumns={tableColumns.data || []}
             />
           )}

@@ -43,7 +43,7 @@ export function ViewsDocumentation() {
             sorting as you did previously.
           </li>
           <li>
-            Click on the <code>Save Views Settings</code>
+            Click on the <code>Save Table Views</code>
           </li>
         </ol>
         If you go back to the main table, you will see that your table now has

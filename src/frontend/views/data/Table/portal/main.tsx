@@ -3,7 +3,7 @@ import { ITableColumn } from "frontend/design-system/components/Table/types";
 import { loadedDataState } from "frontend/lib/data/constants/loadedDataState";
 import { DataStateKeys } from "frontend/lib/data/types";
 import { noop } from "shared/lib/noop";
-import { ITableTab } from "shared/types/data";
+import { ITableView } from "shared/types/data";
 
 export const usePluginTableMenuItems = (
   entity: string,
@@ -36,7 +36,7 @@ export const usePortalTableColumns = (entity: string) => {
 
 export const usePortalTableTabs = (
   entity: string
-): DataStateKeys<ITableTab[]> => {
+): DataStateKeys<ITableView[]> => {
   noop(entity);
-  return loadedDataState<ITableTab[]>([]);
+  return loadedDataState<ITableView[]>([]);
 };

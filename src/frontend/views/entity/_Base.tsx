@@ -50,7 +50,7 @@ const baseMenuItems = (entity: string): IMenuSectionItem[] => [
   },
   {
     action: NAVIGATION_LINKS.ENTITY.CONFIG.VIEWS(entity),
-    name: "Views",
+    name: "Table Views",
     systemIcon: "Filter",
     order: 50,
   },

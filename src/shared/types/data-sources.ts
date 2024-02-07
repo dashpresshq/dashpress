@@ -5,7 +5,7 @@ enum RDMSSources {
   Sqlite = "sqlite",
 }
 
-type IRDMSConnectionOptions = {
+export type IDataSourceCredentials = {
   dataSourceType: RDMSSources;
   connectionString?: string;
   host?: string;
@@ -17,8 +17,6 @@ type IRDMSConnectionOptions = {
   ssl?: boolean;
   schemaNames?: string[];
 };
-
-export type IDataSourceCredentials = IRDMSConnectionOptions;
 
 const DATABASE_FIELDS: Array<keyof IDataSourceCredentials> = [
   "host",

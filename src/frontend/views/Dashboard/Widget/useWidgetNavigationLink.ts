@@ -4,8 +4,8 @@ import { useCanUserPerformCrudAction } from "frontend/views/data/hooks/useCanUse
 
 export const useWidgetNavigationLink = (entity?: string, queryId?: string) => {
   const canUserPerformCrudAction = useCanUserPerformCrudAction(entity);
-  const entityViews = useEntityConfiguration(
-    "entity_views",
+  const tableViews = useEntityConfiguration(
+    "table_views",
     queryId ? entity : undefined
   );
 
@@ -17,7 +17,7 @@ export const useWidgetNavigationLink = (entity?: string, queryId?: string) => {
     return undefined;
   }
 
-  const tabTitle = entityViews.data.find(({ id }) => id === queryId)?.title;
+  const tabTitle = tableViews.data.find(({ id }) => id === queryId)?.title;
 
   const tabLink = queryId ? `?tab=${tabTitle}` : "";
 

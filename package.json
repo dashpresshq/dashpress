@@ -1,6 +1,6 @@
 {
-  "name": "dashpress",
-  "version": "1.0.1",
+  "name": "hadmean",
+  "version": "0.20.10",
   "license": "GPL-3.0-or-later",
   "scripts": {
     "dev": "next dev",
@@ -23,13 +23,7 @@
     "build-storybook": "build-storybook",
     "prepare": "husky install"
   },
-  "files": [
-    ".next",
-    "dist",
-    "bin",
-    "public",
-    ".env.example"
-  ],
+  "files": [".next", "dist", "bin", "public", ".env.example"],
   "bin": "./bin/dashpress",
   "dependencies": {
     "@dashpress/bacteria": "^0.0.10",

@@ -38,7 +38,6 @@ describe("pages/integrations/variables => credentials -- non admin", () => {
       name: "Custom Role",
       permissions: [USER_PERMISSIONS.CAN_CONFIGURE_APP],
       role: "custom-role",
-      systemProfile: "{userId: 1}",
       username: "root",
     };
     server.use(

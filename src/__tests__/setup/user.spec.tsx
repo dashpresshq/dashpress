@@ -19,12 +19,12 @@ describe("pages/setup/user", () => {
   it("should create new user successfully", async () => {
     server.resetHandlers();
     localStorage.clear();
-    const pushMock = jest.fn();
+    const replaceMock = jest.fn();
     useRouter.mockImplementation(() => ({
       query: {},
-      push: pushMock,
+      replace: replaceMock,
       isReady: true,
-      replace: jest.fn(),
+      push: jest.fn(),
     }));
 
     server.use(
@@ -59,6 +59,6 @@ describe("pages/setup/user", () => {
       "Account Was Successfully Setup"
     );
 
-    expect(pushMock).toHaveBeenCalledWith("/");
+    expect(replaceMock).toHaveBeenLastCalledWith("/");
   });
 });

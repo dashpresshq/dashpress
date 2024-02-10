@@ -6,7 +6,6 @@ export enum SystemRoles {
 export interface IAccountUser {
   name: string;
   username: string;
-  systemProfile?: string;
   password: string;
   role: string;
 }

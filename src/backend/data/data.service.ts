@@ -50,7 +50,10 @@ export class DataApiService implements IDataApiService {
     return await this.getDataAccessInstance().list(
       entity,
       select,
-      await PortalQueryImplementation.query(queryFilter, entity),
+      await this.appendPersistentQuery(
+        entity,
+        await PortalQueryImplementation.query(queryFilter, entity)
+      ),
       paginationFilters
     );
   }
@@ -61,20 +64,27 @@ export class DataApiService implements IDataApiService {
   ): Promise<number> {
     return await this.getDataAccessInstance().count(
       entity,
-      await PortalQueryImplementation.query(queryFilter, entity)
+      await this.appendPersistentQuery(
+        entity,
+        await PortalQueryImplementation.query(queryFilter, entity)
+      )
     );
   }
 
   async readData<T>(
     entity: string,
     select: string[],
-    query: Record<string, unknown>
+    queryFilter: QueryFilterSchema
   ): Promise<T> {
     progammingError(
       "We dont do that here, Please define the fields you want to select",
       select.length === 0
     );
-    return await this.getDataAccessInstance().read<T>(entity, select, query);
+    return await this.getDataAccessInstance().read<T>(
+      entity,
+      select,
+      queryFilter
+    );
   }
 
   async referenceData(entity: string, id: string): Promise<string> {
@@ -87,7 +97,16 @@ export class DataApiService implements IDataApiService {
       entity,
       relationshipSettings.fields,
       {
-        [primaryField]: id,
+        operator: "and",
+        children: [
+          {
+            id: primaryField,
+            value: {
+              operator: FilterOperators.EQUAL_TO,
+              value: id,
+            },
+          },
+        ],
       }
     );
 
@@ -106,9 +125,18 @@ export class DataApiService implements IDataApiService {
     const data = await this.readData<Record<string, unknown>>(
       entity,
       fieldsToShow,
-      {
-        [columnField]: id,
-      }
+      await this.appendPersistentQuery(entity, {
+        operator: "and",
+        children: [
+          {
+            id: columnField,
+            value: {
+              operator: FilterOperators.EQUAL_TO,
+              value: id,
+            },
+          },
+        ],
+      })
     );
     if (!data) {
       throw new NotFoundError(
@@ -248,9 +276,10 @@ export class DataApiService implements IDataApiService {
 
     await this.getDataAccessInstance().update(
       entity,
-      {
-        [primaryField]: id,
-      },
+      await this.appendPersistentQuery(
+        entity,
+        rDBMSDataApiService.whereEqualQueryFilterSchema(primaryField, id)
+      ),
       valueToUpdate
     );
 
@@ -289,13 +318,19 @@ export class DataApiService implements IDataApiService {
       dataId: id,
     });
 
+    const queryFilter = await this.appendPersistentQuery(
+      entity,
+      this._rDBMSApiDataService.whereEqualQueryFilterSchema(
+        await this._entitiesApiService.getEntityPrimaryField(entity),
+        id
+      )
+    );
+
     await PortalQueryImplementation.delete({
       entity,
-      id,
+      queryFilter,
       implementation: async () => {
-        await this.getDataAccessInstance().delete(entity, {
-          [await this._entitiesApiService.getEntityPrimaryField(entity)]: id,
-        });
+        await this.getDataAccessInstance().delete(entity, queryFilter);
       },
     });
 
@@ -305,6 +340,26 @@ export class DataApiService implements IDataApiService {
       entity,
       dataId: id,
     });
+  }
+
+  private async appendPersistentQuery(
+    entity: string,
+    filterSchema: QueryFilterSchema
+  ): Promise<QueryFilterSchema> {
+    const persistentFilter = await this._configurationApiService.show(
+      "persistent_query",
+      entity
+    );
+
+    if (persistentFilter.children.length === 0) {
+      // TODO compile all the values
+      return filterSchema;
+    }
+
+    return {
+      operator: "and",
+      children: [filterSchema, persistentFilter],
+    };
   }
 
   private async getRelationshipSettings(entity: string): Promise<{

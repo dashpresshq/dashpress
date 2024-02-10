@@ -6,6 +6,14 @@ import { IAccountUser, IAccountProfile } from "shared/types/user";
 import { ISuccessfullAuthenticationResponse } from "shared/types/auth/portal";
 import { noop } from "shared/lib/noop";
 import { IResetPasswordForm } from "shared/form-schemas/users/reset-password";
+import {
+  ConfigurationApiService,
+  configurationApiService,
+} from "backend/configuration/configuration.service";
+import {
+  RDBMSDataApiService,
+  rDBMSDataApiService,
+} from "backend/data/data-access/RDBMS";
 import { getPortalAuthenticationResponse } from "./portal";
 import { generateAuthTokenForUsername } from "./utils";
 import { usersPersistenceService } from "./shared";
@@ -14,7 +22,9 @@ const INVALID_LOGIN_MESSAGE = "Invalid Login";
 
 export class UsersApiService implements IApplicationService {
   constructor(
-    private readonly _usersPersistenceService: AbstractConfigDataPersistenceService<IAccountUser>
+    private readonly _usersPersistenceService: AbstractConfigDataPersistenceService<IAccountUser>,
+    private readonly _configurationApiService: ConfigurationApiService,
+    private _rDBMSApiDataService: RDBMSDataApiService
   ) {}
 
   async tryAuthenticate(authCredentials: {
@@ -69,7 +79,7 @@ export class UsersApiService implements IApplicationService {
     await this._usersPersistenceService.removeItem(username);
   }
 
-  async getUser(username: string): Promise<IAccountProfile> {
+  async getAccountProfile(username: string): Promise<IAccountProfile> {
     const { password, ...user } =
       await this._usersPersistenceService.getItemOrFail(username);
     noop(password);
@@ -127,6 +137,35 @@ export class UsersApiService implements IApplicationService {
       ...userDetails,
     });
   }
+
+  async getUserDatabaseLinkedInfo(
+    auth: IAccountProfile
+  ): Promise<IAccountProfile> {
+    const databaseLink = await this._configurationApiService.show(
+      "users_to_database_link"
+    );
+
+    if (!databaseLink.table) {
+      return auth;
+    }
+
+    const databaseUser = await this._rDBMSApiDataService.read<
+      Record<string, unknown>
+    >(
+      databaseLink.table,
+      ["*"],
+      this._rDBMSApiDataService.whereEqualQueryFilterSchema(
+        databaseLink.field,
+        auth.username
+      )
+    );
+
+    return { ...databaseUser, ...auth };
+  }
 }
 
-export const usersApiService = new UsersApiService(usersPersistenceService);
+export const usersApiService = new UsersApiService(
+  usersPersistenceService,
+  configurationApiService,
+  rDBMSDataApiService
+);

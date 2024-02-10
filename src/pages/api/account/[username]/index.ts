@@ -14,7 +14,9 @@ export default requestHandler(
           options: REQUEST_QUERY_FIELD,
         },
       ]);
-      return await usersApiService.getUser(validatedRequest.requestQuery);
+      return await usersApiService.getAccountProfile(
+        validatedRequest.requestQuery
+      );
     },
 
     DELETE: async (getValidatedRequest) => {

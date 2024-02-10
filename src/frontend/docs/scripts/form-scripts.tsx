@@ -1,5 +1,7 @@
 import { RenderCode } from "frontend/design-system/components/RenderCode";
 import { Spacer } from "frontend/design-system/primitives/Spacer";
+import { TextButton } from "frontend/design-system/components/Button/TextButton";
+import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
 import { DocumentationRoot } from "../_base";
 
 export function FormScriptDocumentation() {
@@ -31,21 +33,14 @@ export function FormScriptDocumentation() {
             <b>
               <code>$.auth</code>
             </b>
-            : The current user object with the following fields
-            <ol>
-              <li>
-                <code>$.auth.role</code>
-              </li>
-              <li>
-                <code>$.auth.name</code>
-              </li>
-              <li>
-                <code>$.auth.username</code>
-              </li>
-              <li>
-                <code>$.auth.systemProfile</code>
-              </li>
-            </ol>
+            : The current user information from your database if you have{" "}
+            <TextButton
+              onClick={() => {
+                window.open(NAVIGATION_LINKS.USERS.LINK_DATABASE, "_blank");
+              }}
+            >
+              linked your database users.
+            </TextButton>
           </li>
         </ul>
       </p>
@@ -199,7 +194,7 @@ Will add "createdById" to the form values that is to be submitted
 */
 return {
   ...$.formValues,
-  createdById: JSON.parse($.auth.systemProfile).userId
+  createdById: $.auth.userId
 }
 
 /*
@@ -235,7 +230,7 @@ if($.formValues.age > 23 && ($.formValues.country != "Belgium" || $.formValues.h
 
 return {
   ...$.formValues,
-  createdById: JSON.parse($.auth.systemProfile).userId
+  createdById: $.auth.userId
 }`}
       />
 

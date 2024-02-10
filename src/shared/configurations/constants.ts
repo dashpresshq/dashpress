@@ -179,6 +179,10 @@ export const APP_CONFIGURATION_CONFIG = {
     label: "System Settings",
     defaultValue: DEFAULT_SYSTEM_SETTINGS,
   },
+  users_to_database_link: {
+    label: "Users to Database Link",
+    defaultValue: { table: "", field: "" },
+  },
   theme_color: {
     label: "Theme Settings",
     guest: true,

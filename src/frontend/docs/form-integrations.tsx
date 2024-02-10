@@ -2,6 +2,8 @@ import { INTEGRATIONS_GROUP_CONFIG } from "shared/config-bag/integrations";
 import { FORM_ACTION_CRUD_CONFIG } from "frontend/views/entity/Actions/constants";
 import { ErrorAlert, InfoAlert } from "frontend/design-system/components/Alert";
 import { RenderCode } from "frontend/design-system/components/RenderCode";
+import { TextButton } from "frontend/design-system/components/Button/TextButton";
+import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
 import { DocumentationRoot } from "./_base";
 
 export function FormIntegrationsDocumentation() {
@@ -77,19 +79,17 @@ export function FormIntegrationsDocumentation() {
             </code>
           </li>
           <li>
-            Current User - any of
+            Current User - through the auth object - if you have{" "}
+            <TextButton
+              onClick={() => {
+                window.open(NAVIGATION_LINKS.USERS.LINK_DATABASE, "_blank");
+              }}
+            >
+              linked your database users.
+            </TextButton>
             <code>
               {" "}
-              {"{{"} auth.role {"}}"}{" "}
-            </code>
-            <code>
-              {"{{"} auth.name {"}}"}{" "}
-            </code>
-            <code>
-              {"{{"} auth.username {"}}"}{" "}
-            </code>
-            <code>
-              {"{{"} auth.systemProfile {"}}"}{" "}
+              {"{{"} auth. {"}}"}{" "}
             </code>
           </li>
         </ol>
@@ -119,7 +119,7 @@ Hi!
 the loan of amount {{ data.amount }}.
 
 Kind Regards!
-{{ auth.systemProfile.fullName }}`}
+{{ auth.fullName }}`}
         />
       </p>
       <p>

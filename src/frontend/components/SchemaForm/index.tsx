@@ -9,10 +9,10 @@ import { resetFormValues } from "frontend/lib/form/utils";
 import { FormButton } from "frontend/design-system/components/Button/FormButton";
 import { userFriendlyCase } from "shared/lib/strings/friendly-case";
 import { SystemIconsKeys } from "shared/constants/Icons";
+import { useEvaluateScriptContext } from "frontend/hooks/scripts";
 import { RenderFormInput } from "./_RenderFormInput";
 import { IFormExtension } from "./types";
 import { runFormBeforeSubmit, runFormFieldState } from "./form-run";
-import { useSchemaFormScriptContext } from "./useSchemaFormScriptContext";
 import { FormGrid } from "./form-grid";
 
 interface IProps<T> {
@@ -38,7 +38,12 @@ export function SchemaForm<T extends Record<string, unknown>>({
   formExtension,
   resetForm,
 }: IProps<T>) {
-  const scriptContext = useSchemaFormScriptContext(action);
+  const evaluateScriptContext = useEvaluateScriptContext();
+
+  const scriptContext = {
+    action,
+    ...evaluateScriptContext,
+  };
 
   return (
     <Form

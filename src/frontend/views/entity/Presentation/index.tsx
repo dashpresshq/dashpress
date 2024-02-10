@@ -17,6 +17,8 @@ import { ToastService } from "frontend/lib/toast";
 import { evalJavascriptString } from "shared/lib/script-runner";
 import { SchemaForm } from "frontend/components/SchemaForm";
 import { useDocumentationActionButton } from "frontend/docs/constants";
+import { IPresentationScriptParams } from "frontend/views/data/evaluatePresentationScript";
+import { useEvaluateScriptContext } from "frontend/hooks/scripts";
 import { BaseEntitySettingsLayout } from "../_Base";
 import { ENTITY_CONFIGURATION_VIEW } from "../constants";
 
@@ -38,6 +40,7 @@ export function EntityPresentationScriptSettings() {
     "entity_presentation_script",
     entity
   );
+  const evaluateScriptContext = useEvaluateScriptContext();
 
   const documentationActionButton = useDocumentationActionButton(
     "Presentation Script"
@@ -86,7 +89,8 @@ if($.field === "commentsCount"){
                   from: "details",
                   row: {},
                   value: "",
-                });
+                  ...evaluateScriptContext,
+                } as IPresentationScriptParams);
 
                 await upsertConfigurationMutation.mutateAsync(data);
               } catch (e) {

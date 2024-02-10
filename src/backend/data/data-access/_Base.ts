@@ -66,6 +66,9 @@ export abstract class BaseDataAccessService<T> {
       case FilterOperators.IS_NULL:
         return operatorConfig[QueryOperators.IS_NULL](query, column, value);
 
+      case FilterOperators.IS_NOT_NULL:
+        return operatorConfig[QueryOperators.IS_NOT_NULL](query, column, value);
+
       case FilterOperators.EQUAL_TO:
         return operatorConfig[QueryOperators.EQUAL_TO](query, column, value);
 

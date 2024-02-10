@@ -1,17 +1,12 @@
 import { SystemIconsKeys } from "shared/constants/Icons";
+import { IEvaluateScriptContext } from "shared/types/forms";
 import { GridSpanSizes, IColorableSelection } from "shared/types/ui";
-import { IAuthenticatedUserBag } from "shared/types/user";
 import { FIELD_TYPES_CONFIG_MAP } from "shared/validations";
 import { IFieldValidationItem } from "shared/validations/types";
 
-export interface ISchemaFormScriptContext {
-  routeParams: Record<string, string>;
-  auth: IAuthenticatedUserBag;
-  action: string;
-}
-
-export interface ISchemaFormScriptProps<T> extends ISchemaFormScriptContext {
+export interface ISchemaFormScriptProps<T> extends IEvaluateScriptContext {
   formValues: T;
+  action: string;
 }
 
 export interface IFormInputRightAction {

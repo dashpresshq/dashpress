@@ -94,8 +94,8 @@ export class PortalDataHooksService {
 
 export class PortalQueryImplementation {
   static async delete(params: {
-    id: string;
     entity: string;
+    queryFilter: QueryFilterSchema;
     implementation: () => Promise<void>;
   }) {
     await params.implementation();

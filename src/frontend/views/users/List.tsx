@@ -11,14 +11,14 @@ import { IAccountProfile } from "shared/types/user";
 import { useApi } from "frontend/lib/data/useApi";
 import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
-import { userFriendlyCase } from "shared/lib/strings/friendly-case";
 import { Card } from "frontend/design-system/components/Card";
 import { ActionButtons } from "frontend/design-system/components/Button/ActionButtons";
 import { DELETE_BUTTON_PROPS } from "frontend/design-system/components/Button/constants";
+import { useUserHasPermission } from "frontend/hooks/auth/user.store";
+import { IDropDownMenuItem } from "frontend/design-system/components/DropdownMenu";
 import { ADMIN_ROLES_CRUD_CONFIG } from "../roles/roles.store";
 import {
   ADMIN_USERS_CRUD_CONFIG,
-  useAllUsers,
   useUserDeletionMutation,
 } from "./users.store";
 
@@ -33,13 +33,9 @@ export function ListUsers() {
     defaultData: [],
   });
 
-  const allUsers = useAllUsers();
-
-  const rootProfileKeys = Object.keys(
-    JSON.parse(allUsers.data[0]?.systemProfile || "{}")
-  );
-
   const userDeletionMutation = useUserDeletionMutation();
+
+  const userHasPermission = useUserHasPermission();
 
   const MemoizedAction = React.useCallback(
     ({ row }: IFETableCell<IAccountProfile>) => {
@@ -68,16 +64,6 @@ export function ListUsers() {
     [userDeletionMutation.isLoading]
   );
 
-  const extendedProfileColumns: IFETableColumn<IAccountProfile>[] =
-    rootProfileKeys.map((profileKey) => ({
-      Header: userFriendlyCase(profileKey),
-      accessor: profileKey as keyof IAccountProfile,
-      filter: undefined,
-      disableSortBy: true,
-      Cell: ({ row }) =>
-        JSON.parse(row.original.systemProfile || "{}")[profileKey],
-    }));
-
   const columns: IFETableColumn<IAccountProfile>[] = [
     {
       Header: "Username",
@@ -104,7 +90,6 @@ export function ListUsers() {
       },
       Cell: ({ value }) => roleLabel(value as string),
     },
-    ...extendedProfileColumns,
     {
       Header: "Action",
       disableSortBy: true,
@@ -113,17 +98,26 @@ export function ListUsers() {
     },
   ];
 
+  const actionsItems: IDropDownMenuItem[] = [
+    {
+      id: "add",
+      systemIcon: "UserPlus",
+      label: ADMIN_USERS_CRUD_CONFIG.TEXT_LANG.CREATE,
+      action: NAVIGATION_LINKS.USERS.CREATE,
+    },
+  ];
+
+  if (userHasPermission(USER_PERMISSIONS.CAN_CONFIGURE_APP)) {
+    actionsItems.push({
+      id: "connect",
+      systemIcon: "Link",
+      label: "Link Users To Database",
+      action: NAVIGATION_LINKS.USERS.LINK_DATABASE,
+    });
+  }
+
   return (
-    <AppLayout
-      actionItems={[
-        {
-          id: "add",
-          systemIcon: "UserPlus",
-          label: ADMIN_USERS_CRUD_CONFIG.TEXT_LANG.CREATE,
-          action: NAVIGATION_LINKS.USERS.CREATE,
-        },
-      ]}
-    >
+    <AppLayout actionItems={actionsItems}>
       <Card>
         <FEPaginationTable
           dataEndpoint={ADMIN_USERS_CRUD_CONFIG.ENDPOINTS.LIST}

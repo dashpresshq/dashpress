@@ -14,6 +14,7 @@ export enum FilterOperators {
   IN = "i",
 
   IS_NULL = "s",
+  IS_NOT_NULL = "o",
 }
 
 export enum DataEventActions {

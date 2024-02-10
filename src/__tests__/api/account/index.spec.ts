@@ -23,7 +23,6 @@ describe("/api/account/index", () => {
         {
           "name": "Root User",
           "role": "creator",
-          "systemProfile": "{"userId": "1"}",
           "username": "root",
         },
       ]

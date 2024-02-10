@@ -73,12 +73,12 @@ describe("pages/auth", () => {
   });
 
   it("should redirect to dashboard when user is succesfully authenticated", async () => {
-    const pushMock = jest.fn();
+    const replaceMock = jest.fn();
     const useRouter = jest.spyOn(require("next/router"), "useRouter");
 
     useRouter.mockImplementation(() => ({
-      replace: () => {},
-      push: pushMock,
+      replace: replaceMock,
+      push: () => {},
       query: {},
       isReady: true,
     }));
@@ -97,8 +97,9 @@ describe("pages/auth", () => {
     expect(localStorage.getItem(JWT_TOKEN_STORAGE_KEY)).toBe(
       "some valid jwt token"
     );
-
-    expect(pushMock).toHaveBeenCalledWith("/");
+    await waitFor(() => {
+      expect(replaceMock).toHaveBeenCalledWith("/");
+    });
   });
 
   describe("Demo Credentials", () => {

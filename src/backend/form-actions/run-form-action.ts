@@ -4,6 +4,7 @@ import { compileTemplateString } from "shared/lib/strings/templates";
 import { getAppCredentialsAndConstants } from "backend/integrations-configurations/utils";
 import { INTEGRATIONS_GROUP_CONFIG } from "shared/config-bag/integrations";
 import { integrationsApiService } from "backend/integrations/integrations.service";
+import { usersApiService } from "backend/users/users.service";
 import { ACTION_INTEGRATIONS } from "../integrations/libs";
 import { formActionsApiService } from "./form-actions.service";
 
@@ -11,7 +12,7 @@ export const runFormAction = async (
   entity: string,
   dataEventAction: DataEventActions,
   getData: () => Promise<Record<string, unknown>>,
-  accountProfile: IAccountProfile
+  authProfile: IAccountProfile
 ) => {
   const formActions = await formActionsApiService.listEntityFormActions(entity);
   const actionsToRun = formActions.filter(
@@ -25,6 +26,8 @@ export const runFormAction = async (
   const data = await getData();
 
   const { appConstants, credentials } = await getAppCredentialsAndConstants();
+
+  const auth = await usersApiService.getUserDatabaseLinkedInfo(authProfile);
 
   for (const actionToRun of actionsToRun) {
     const { configuration, action, integration } = actionToRun;
@@ -43,7 +46,7 @@ export const runFormAction = async (
           data,
           [INTEGRATIONS_GROUP_CONFIG.constants.prefix]: appConstants,
           [INTEGRATIONS_GROUP_CONFIG.credentials.prefix]: credentials,
-          auth: accountProfile,
+          auth,
         }),
       ])
     );

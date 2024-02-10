@@ -1,5 +1,5 @@
-import { FilterOperators, QueryFilterSchema } from "shared/types/data";
-import { Form, Field } from "react-final-form";
+import { QueryFilterSchema } from "shared/types/data";
+import { Form, Field, useField } from "react-final-form";
 import arrayMutators from "final-form-arrays";
 import { FieldArray } from "react-final-form-arrays";
 import React from "react";
@@ -18,13 +18,88 @@ import { FormSelect } from "frontend/design-system/components/Form/FormSelect";
 import { FormSelectButton } from "frontend/design-system/components/Form/FormSelectButton";
 import { FormGrid } from "frontend/components/SchemaForm/form-grid";
 import { Card, CardBody } from "frontend/design-system/components/Card";
+import { FILTER_OPERATOR_CONFIG } from "./constants";
 
 const OPERATOR_SELECTORS = ["and", "or"].map((option) => ({
   value: `${option}`,
   label: `${option.toLocaleUpperCase()}`,
 }));
 
-export function EntityScopedQueriesForm({
+const filterOperatorSelections = Object.entries(FILTER_OPERATOR_CONFIG)
+  .filter(([, value]) => !value.disabled)
+  .map(([key, value]) => ({ value: key, label: value.label }));
+
+function FilterRow({
+  queryFilter,
+  columns,
+}: {
+  queryFilter: string;
+  columns: ITableColumn[];
+}) {
+  const operatorValue = useField(`${queryFilter}.value.operator`).input.value;
+
+  const noValue = FILTER_OPERATOR_CONFIG[operatorValue]?.numberOfInput === 0;
+
+  return (
+    <div style={{ width: "100%" }}>
+      <FormGrid.Root>
+        <Field
+          name={`${queryFilter}.id`}
+          validate={composeValidators(required)}
+          validateFields={[]}
+        >
+          {({ meta, input }) => (
+            <FormGrid.Item $span="3">
+              <FormSelect
+                label="Field"
+                required
+                selectData={columns.map((column) => ({
+                  value: column.accessor,
+                  label: column.Header as string,
+                }))}
+                meta={meta}
+                input={input}
+              />
+            </FormGrid.Item>
+          )}
+        </Field>
+
+        <Field
+          name={`${queryFilter}.value.operator`}
+          validate={composeValidators(required)}
+          validateFields={[]}
+        >
+          {({ meta, input }) => (
+            <FormGrid.Item $span={noValue ? "9" : "3"}>
+              <FormSelect
+                label="Operator"
+                required
+                selectData={filterOperatorSelections}
+                meta={meta}
+                input={input}
+              />
+            </FormGrid.Item>
+          )}
+        </Field>
+        {noValue ? null : (
+          <Field
+            name={`${queryFilter}.value.value`}
+            validate={composeValidators(required)}
+            validateFields={[]}
+          >
+            {({ meta, input }) => (
+              <FormGrid.Item $span="6">
+                <FormInput label="Value" required meta={meta} input={input} />
+              </FormGrid.Item>
+            )}
+          </Field>
+        )}
+      </FormGrid.Root>
+    </div>
+  );
+}
+
+export function EntityPersistentQueryForm({
   onSubmit,
   initialValues,
   tableColumns,
@@ -88,79 +163,10 @@ export function EntityScopedQueriesForm({
                                           </Field>
                                         )}
                                       <Stack align="center">
-                                        <div style={{ width: "100%" }}>
-                                          <FormGrid.Root>
-                                            <Field
-                                              name={`${queryFilter}.id`}
-                                              validate={composeValidators(
-                                                required
-                                              )}
-                                              validateFields={[]}
-                                            >
-                                              {({ meta, input }) => (
-                                                <FormGrid.Item $span="3">
-                                                  <FormSelect
-                                                    label="Field"
-                                                    required
-                                                    selectData={columns.map(
-                                                      (column) => ({
-                                                        value: column.accessor,
-                                                        label:
-                                                          column.Header as string,
-                                                      })
-                                                    )}
-                                                    meta={meta}
-                                                    input={input}
-                                                  />
-                                                </FormGrid.Item>
-                                              )}
-                                            </Field>
-
-                                            <Field
-                                              name={`${queryFilter}.value.operator`}
-                                              validate={composeValidators(
-                                                required
-                                              )}
-                                              validateFields={[]}
-                                            >
-                                              {({ meta, input }) => (
-                                                <FormGrid.Item $span="3">
-                                                  <FormSelect
-                                                    label="Operator"
-                                                    required
-                                                    selectData={Object.values(
-                                                      FilterOperators
-                                                    ).map((operator) => ({
-                                                      value: operator,
-                                                      label: operator,
-                                                    }))}
-                                                    meta={meta}
-                                                    input={input}
-                                                  />
-                                                </FormGrid.Item>
-                                              )}
-                                            </Field>
-
-                                            <Field
-                                              name={`${queryFilter}.value.value`}
-                                              validate={composeValidators(
-                                                required
-                                              )}
-                                              validateFields={[]}
-                                            >
-                                              {({ meta, input }) => (
-                                                <FormGrid.Item $span="6">
-                                                  <FormInput
-                                                    label="Value"
-                                                    required
-                                                    meta={meta}
-                                                    input={input}
-                                                  />
-                                                </FormGrid.Item>
-                                              )}
-                                            </Field>
-                                          </FormGrid.Root>
-                                        </div>
+                                        <FilterRow
+                                          queryFilter={queryFilter}
+                                          columns={columns}
+                                        />
                                         <SoftButton
                                           justIcon
                                           {...DELETE_BUTTON_PROPS({

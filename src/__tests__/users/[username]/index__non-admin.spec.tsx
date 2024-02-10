@@ -16,7 +16,6 @@ const VIEWER: IAuthenticatedUserBag = {
   name: "Root User",
   permissions: [USER_PERMISSIONS.CAN_MANAGE_USERS],
   role: "custom-role",
-  systemProfile: "{userId: 1}",
   username: "root",
 };
 

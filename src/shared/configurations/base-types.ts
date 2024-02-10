@@ -13,6 +13,7 @@ export type BaseAppConfigurationKeys =
   | "entity_crud_settings"
   | "table_views"
   | "persistent_query"
+  | "users_to_database_link"
   | "menu_entities_order"
   | "disabled_menu_entities"
   | "default_date_format"

@@ -22,7 +22,7 @@ export interface IDataApiService extends IApplicationService {
   readData(
     entity: string,
     select: string[],
-    query: Record<string, unknown>
+    query: QueryFilterSchema
   ): Promise<Record<string, unknown>>;
 
   countData(entity: string, queryFilter: QueryFilterSchema): Promise<number>;

@@ -52,7 +52,7 @@ function useEntityFormView(entity: string) {
     disabled: $.formValues.age < 18
   },
   accountBalance: {
-    hidden: JSON.parse($.auth.systemProfile).userId === $.routeParams.entityId
+    hidden: $.auth.userId === $.routeParams.entityId
   },
   someField: {
     disabled: someDisabledLogic,
@@ -77,7 +77,7 @@ function useEntityFormView(entity: string) {
 return {
   ...$.formValues,
   slug: $.formValues.title?.replaceAll(" ", "-").toLowerCase(),
-  createdById: JSON.parse($.auth.systemProfile).userId,
+  createdById: $.auth.userId,
   createdAt: new Date(),
 }
       `}

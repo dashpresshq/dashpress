@@ -1,21 +1,16 @@
 import { useNavigationStack } from "frontend/lib/routing/useNavigationStack";
 import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
 import { USER_PERMISSIONS } from "shared/constants/user";
-import { SystemProfileDocumentation } from "frontend/docs/system-profile";
 import { ContentLayout } from "frontend/design-system/components/Section/SectionDivider";
 import { SectionBox } from "frontend/design-system/components/Section/SectionBox";
 import { AppLayout } from "frontend/_layouts/app";
 import { SchemaForm } from "frontend/components/SchemaForm";
 import { ICreateUserForm } from "shared/form-schemas/users";
-import { useDocumentationActionButton } from "frontend/docs/constants";
-import { IActionButton } from "frontend/design-system/components/Button/types";
 import { IAppliedSchemaFormConfig } from "shared/form-schemas/types";
 import { ADMIN_USERS_CRUD_CONFIG, useCreateUserMutation } from "../users.store";
 
-export const CREATE_USER_FORM_SCHEMA = (
-  actionButton: IActionButton
-): IAppliedSchemaFormConfig<ICreateUserForm> => {
-  return {
+export const CREATE_USER_FORM_SCHEMA: IAppliedSchemaFormConfig<ICreateUserForm> =
+  {
     username: {
       type: "text",
       validations: [
@@ -54,24 +49,11 @@ export const CREATE_USER_FORM_SCHEMA = (
         },
       ],
     },
-    systemProfile: {
-      type: "json",
-      rightActions: [actionButton],
-      validations: [
-        {
-          validationType: "isJson",
-        },
-      ],
-    },
   };
-};
 
 export function UserCreate() {
   const userCreationMutation = useCreateUserMutation();
   const { backLink } = useNavigationStack();
-
-  const documentationActionButton =
-    useDocumentationActionButton("System Profile");
 
   useSetPageDetails({
     pageTitle: ADMIN_USERS_CRUD_CONFIG.TEXT_LANG.CREATE,
@@ -89,13 +71,12 @@ export function UserCreate() {
           <SchemaForm<ICreateUserForm>
             onSubmit={userCreationMutation.mutateAsync}
             buttonText={ADMIN_USERS_CRUD_CONFIG.FORM_LANG.CREATE}
-            fields={CREATE_USER_FORM_SCHEMA(documentationActionButton)}
+            fields={CREATE_USER_FORM_SCHEMA}
             systemIcon="Plus"
             resetForm
           />
         </SectionBox>
       </ContentLayout.Center>
-      <SystemProfileDocumentation />
     </AppLayout>
   );
 }

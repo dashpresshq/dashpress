@@ -17,7 +17,6 @@ describe("/api/integrations/credentials/reveal", () => {
           "$2b$10$/9tw363jvQrylf4eLisJt.afEUphLLaDSfhkweYPhC0ayTJp7Zo0a",
         name: "Custom Role",
         role: "custom-role",
-        systemProfile: "",
       },
     ]);
   });

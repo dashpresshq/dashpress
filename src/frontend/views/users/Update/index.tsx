@@ -4,7 +4,6 @@ import {
 } from "frontend/hooks/auth/user.store";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { USER_PERMISSIONS } from "shared/constants/user";
-import { SystemProfileDocumentation } from "frontend/docs/system-profile";
 import { useNavigationStack } from "frontend/lib/routing/useNavigationStack";
 import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
 import { SectionBox } from "frontend/design-system/components/Section/SectionBox";
@@ -20,8 +19,6 @@ import {
   IResetPasswordForm,
   RESET_PASSWORD_FORM_SCHEMA,
 } from "shared/form-schemas/users/reset-password";
-import { useDocumentationActionButton } from "frontend/docs/constants";
-import { IActionButton } from "frontend/design-system/components/Button/types";
 import { IAppliedSchemaFormConfig } from "shared/form-schemas/types";
 import { IUpdateUserForm } from "shared/form-schemas/users";
 import { useUsernameFromRouteParam } from "../hooks";
@@ -32,10 +29,8 @@ import {
   ADMIN_USERS_CRUD_CONFIG,
 } from "../users.store";
 
-export const UPDATE_USER_FORM_SCHEMA = (
-  actionButton: IActionButton
-): IAppliedSchemaFormConfig<IUpdateUserForm> => {
-  return {
+export const UPDATE_USER_FORM_SCHEMA: IAppliedSchemaFormConfig<IUpdateUserForm> =
+  {
     name: {
       type: "text",
       validations: [
@@ -58,17 +53,7 @@ export const UPDATE_USER_FORM_SCHEMA = (
         disabled: $.auth.username === $.routeParams.username,
       }),
     },
-    systemProfile: {
-      type: "json",
-      rightActions: [actionButton],
-      validations: [
-        {
-          validationType: "isJson",
-        },
-      ],
-    },
   };
-};
 
 export function UserUpdate() {
   const updateUserMutation = useUpdateUserMutation();
@@ -79,9 +64,6 @@ export function UserUpdate() {
   const authenticatedUserBag = useAuthenticatedUserBag();
 
   const userHasPermission = useUserHasPermission();
-
-  const documentationActionButton =
-    useDocumentationActionButton("System Profile");
 
   useSetPageDetails({
     pageTitle: ADMIN_USERS_CRUD_CONFIG.TEXT_LANG.EDIT,
@@ -118,7 +100,7 @@ export function UserUpdate() {
               onSubmit={updateUserMutation.mutateAsync}
               initialValues={userDetails.data}
               systemIcon="Save"
-              fields={UPDATE_USER_FORM_SCHEMA(documentationActionButton)}
+              fields={UPDATE_USER_FORM_SCHEMA}
             />
           </ViewStateMachine>
         </SectionBox>
@@ -138,7 +120,6 @@ export function UserUpdate() {
             </SectionBox>
           )}
       </ContentLayout.Center>
-      <SystemProfileDocumentation />
     </AppLayout>
   );
 }

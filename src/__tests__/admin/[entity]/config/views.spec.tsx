@@ -66,7 +66,7 @@ describe("pages/admin/[entity]/config/views", () => {
     ).toHaveValue("Age Entity View");
   });
 
-  it("should delete tabs", async () => {
+  it("should delete table view", async () => {
     render(
       <ApplicationRoot>
         <TableViewsSettings />
@@ -78,7 +78,9 @@ describe("pages/admin/[entity]/config/views", () => {
 
     await userEvent.click(screen.getByRole("tab", { name: "Age Entity View" }));
 
-    await userEvent.click(screen.getByRole("button", { name: "Delete Tab" }));
+    await userEvent.click(
+      screen.getByRole("button", { name: "Delete Table View" })
+    );
 
     expect(
       screen.queryByRole("tab", { name: "Age Entity View" })
@@ -88,7 +90,9 @@ describe("pages/admin/[entity]/config/views", () => {
       "User Entity View"
     );
 
-    await userEvent.click(screen.getByRole("button", { name: "Delete Tab" }));
+    await userEvent.click(
+      screen.getByRole("button", { name: "Delete Table View" })
+    );
 
     expect(
       screen.queryByRole("tab", { name: "User Entity View" })
@@ -98,10 +102,12 @@ describe("pages/admin/[entity]/config/views", () => {
       "Verified Entity View"
     );
 
-    await userEvent.click(screen.getByRole("button", { name: "Delete Tab" }));
+    await userEvent.click(
+      screen.getByRole("button", { name: "Delete Table View" })
+    );
 
     expect(
-      screen.queryByRole("button", { name: "Delete Tab" })
+      screen.queryByRole("button", { name: "Delete Table View" })
     ).not.toBeInTheDocument();
 
     expect(screen.queryAllByRole("tab")).toHaveLength(0);
@@ -129,31 +135,35 @@ describe("pages/admin/[entity]/config/views", () => {
     expect(screen.queryByLabelText("Title")).not.toBeInTheDocument();
   });
 
-  it("should add new tab", async () => {
+  it("should add new table view", async () => {
     render(
       <ApplicationRoot>
         <TableViewsSettings />
       </ApplicationRoot>
     );
 
-    await userEvent.click(screen.getByRole("button", { name: "Add New Tab" }));
-
-    expect(
-      await within(screen.getByRole("tabpanel")).findByLabelText("Title")
-    ).toHaveValue("Tab 1");
-
-    expect(screen.getByRole("tab", { selected: true })).toHaveTextContent(
-      "Tab 1"
+    await userEvent.click(
+      screen.getByRole("button", { name: "Add New Table View" })
     );
 
-    await userEvent.click(screen.getByRole("button", { name: "Add New Tab" }));
+    expect(
+      await within(screen.getByRole("tabpanel")).findByLabelText("Title")
+    ).toHaveValue("View 1");
+
+    expect(screen.getByRole("tab", { selected: true })).toHaveTextContent(
+      "View 1"
+    );
+
+    await userEvent.click(
+      screen.getByRole("button", { name: "Add New Table View" })
+    );
 
     expect(
       await within(screen.getByRole("tabpanel")).findByLabelText("Title")
-    ).toHaveValue("Tab 2");
+    ).toHaveValue("View 2");
 
     expect(screen.getByRole("tab", { selected: true })).toHaveTextContent(
-      "Tab 2"
+      "View 2"
     );
 
     await userEvent.click(
@@ -172,7 +182,7 @@ describe("pages/admin/[entity]/config/views", () => {
       </ApplicationRoot>
     );
     expect(
-      await screen.findByRole("tab", { name: "Tab 1" })
+      await screen.findByRole("tab", { name: "View 1" })
     ).toBeInTheDocument();
 
     await userEvent.type(
@@ -181,10 +191,10 @@ describe("pages/admin/[entity]/config/views", () => {
     );
 
     expect(screen.getByRole("tab", { selected: true })).toHaveTextContent(
-      "Tab 1Updated"
+      "View 1Updated"
     );
 
-    expect(screen.getByRole("tab", { name: "Tab 2" })).toBeInTheDocument();
+    expect(screen.getByRole("tab", { name: "View 2" })).toBeInTheDocument();
 
     await userEvent.click(
       screen.getByRole("button", { name: "Save Table Views" })
@@ -202,9 +212,9 @@ describe("pages/admin/[entity]/config/views", () => {
       </ApplicationRoot>
     );
     expect(
-      await screen.findByRole("tab", { name: "Tab 1Updated" })
+      await screen.findByRole("tab", { name: "View 1Updated" })
     ).toBeInTheDocument();
-    expect(screen.getByRole("tab", { name: "Tab 2" })).toBeInTheDocument();
+    expect(screen.getByRole("tab", { name: "View 2" })).toBeInTheDocument();
 
     await userEvent.type(
       within(screen.getByRole("tabpanel")).getByLabelText("Title"),

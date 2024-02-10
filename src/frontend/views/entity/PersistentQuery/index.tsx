@@ -13,11 +13,11 @@ import {
 import { USER_PERMISSIONS } from "shared/constants/user";
 import { useTableColumns } from "frontend/views/data/Table/useTableColumns";
 import { MAKE_APP_CONFIGURATION_CRUD_CONFIG } from "frontend/hooks/configuration/configuration.constant";
-import { ViewsDocumentation } from "frontend/docs/views";
 import { useDocumentationActionButton } from "frontend/docs/constants";
+import { PersistentDocumentation } from "frontend/docs/persistent-query";
 import { BaseEntitySettingsLayout } from "../_Base";
 import { ENTITY_CONFIGURATION_VIEW } from "../constants";
-import { EntityScopedQueriesForm } from "./Form";
+import { EntityPersistentQueryForm } from "./Form";
 
 const CRUD_CONFIG = MAKE_APP_CONFIGURATION_CRUD_CONFIG("persistent_query");
 
@@ -62,16 +62,14 @@ export function EntityPersistentQuerySettings() {
             />
           }
         >
-          {!isLoading && (
-            <EntityScopedQueriesForm
-              initialValues={upsertPeristentQueryMutation.data}
-              onSubmit={upsertPeristentQueryMutation.mutateAsync}
-              tableColumns={tableColumns.data || []}
-            />
-          )}
+          <EntityPersistentQueryForm
+            initialValues={upsertPeristentQueryMutation.data}
+            onSubmit={upsertPeristentQueryMutation.mutateAsync}
+            tableColumns={tableColumns.data || []}
+          />
         </ViewStateMachine>
       </SectionBox>
-      <ViewsDocumentation />
+      <PersistentDocumentation />
     </BaseEntitySettingsLayout>
   );
 }

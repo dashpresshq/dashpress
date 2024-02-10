@@ -6,7 +6,6 @@ let ME: IAuthenticatedUserBag = {
   name: "Root User",
   permissions: [],
   role: "creator",
-  systemProfile: "{userId: 1}",
   username: "root",
 };
 
@@ -14,19 +13,11 @@ let USERS = [
   {
     name: "User 1",
     username: "user-1",
-    systemProfile: JSON.stringify({
-      email: "user-1@here.com",
-      station: "station - 1",
-    }),
     role: "role-1",
   },
   {
     name: "User 2",
     username: "user-2",
-    systemProfile: JSON.stringify({
-      email: "user-1@here.com",
-      nonExistent: "nonExistent",
-    }),
     role: "role-2",
   },
   {
@@ -39,7 +30,6 @@ let USERS = [
 let USER = {
   name: "Some Name",
   username: "someuseranme",
-  systemProfile: `{"foo": "bar"}`,
   role: "viewer",
 };
 

@@ -32,6 +32,7 @@ export const NAVIGATION_LINKS = {
   USERS: {
     LIST: "/users",
     CREATE: "/users/create",
+    LINK_DATABASE: "/users/database-link",
     DETAILS: (username: string) => `/users/${username}`,
   },
   ROLES: {

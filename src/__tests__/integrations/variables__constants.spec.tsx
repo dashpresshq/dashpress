@@ -65,7 +65,7 @@ describe("pages/integrations/variables => constants", () => {
         await screen.findByRole("button", { name: "Add New Constant" })
       );
 
-      const dialog = screen.getByRole("dialog");
+      const dialog = await screen.findByRole("dialog");
 
       expect(within(dialog).getByText("Create Constant")).toBeInTheDocument();
 

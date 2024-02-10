@@ -41,16 +41,19 @@ export const useEntityFields = (entity: string) =>
   useApi<IEntityField[]>(ENTITY_FIELDS_ENDPOINT(entity), {
     errorMessage: CRUD_CONFIG_NOT_FOUND("Entity Fields"),
     defaultData: [],
+    enabled: !!entity,
   });
 
 export const useEntityRelationsList = (entity: string) =>
   useApi<string[]>(`/api/entities/${entity}/relation-list`, {
     errorMessage: CRUD_CONFIG_NOT_FOUND("Entity Relations List"),
     defaultData: [],
+    enabled: !!entity,
   });
 
 export const useEntityFieldLists = (entity: string) =>
   useApi<string[]>(ENTITY_FIELDS_ENDPOINT(entity), {
+    enabled: !!entity,
     errorMessage: CRUD_CONFIG_NOT_FOUND("Entity Fields List"),
     selector: (data: IEntityField[]) => data.map(({ name }) => name),
     defaultData: [],
@@ -60,6 +63,7 @@ export const useEntityReferenceFields = (entity: string) =>
   useApi<IEntityRelation[]>(ENTITY_RELATIONS_ENDPOINT(entity), {
     errorMessage: CRUD_CONFIG_NOT_FOUND("Entity Reference Fields"),
     defaultData: [],
+    enabled: !!entity,
   });
 
 export const useMultipleEntityReferenceFields = (entities: string[]) => {
@@ -90,6 +94,7 @@ export const useEntityIdField = (entity: string) =>
   useApi<string>(ENTITY_FIELDS_ENDPOINT(entity), {
     defaultData: "",
     errorMessage: CRUD_CONFIG_NOT_FOUND("Entity Id Field"),
+    enabled: !!entity,
     selector: (data: IEntityField[]) =>
       data.find(({ isId }) => isId)?.name || "id",
   });

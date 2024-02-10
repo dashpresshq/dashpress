@@ -22,12 +22,15 @@ export class UsersApiController {
     authenticatedUsername: string
   ): Promise<IAuthenticatedUserBag> {
     try {
-      const profile = await this._usersService.getUser(authenticatedUsername);
-      const permissions = await this._rolesService.getRolePermissions(
-        profile.role
+      const accountProfile = await this._usersService.getAccountProfile(
+        authenticatedUsername
       );
+      const [permissions, linkedProfile] = await Promise.all([
+        this._rolesService.getRolePermissions(accountProfile.role),
+        this._usersService.getUserDatabaseLinkedInfo(accountProfile),
+      ]);
       return {
-        ...profile,
+        ...linkedProfile,
         permissions,
       };
     } catch (error) {

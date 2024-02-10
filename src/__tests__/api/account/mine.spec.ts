@@ -25,7 +25,6 @@ describe("/api/account/mine", () => {
         "name": "Root User",
         "permissions": [],
         "role": "creator",
-        "systemProfile": "{"userId": "1"}",
         "username": "root",
       }
     `);
@@ -54,7 +53,6 @@ describe("/api/account/mine", () => {
         "name": "Updated Name",
         "permissions": [],
         "role": "creator",
-        "systemProfile": "{"userId": "1"}",
         "username": "root",
       }
     `);
@@ -90,7 +88,6 @@ describe("/api/account/mine", () => {
           "$2b$10$/9tw363jvQrylf4eLisJt.afEUphLLaDSfhkweYPhC0ayTJp7Zo0a",
         name: "Custom Role",
         role: "role-doesn't-exist",
-        systemProfile: "",
       },
     ]);
 

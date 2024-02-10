@@ -14,6 +14,7 @@ const FILTER_OPERATOR_LABELS: Record<FilterOperators, string> = {
   [FilterOperators.CONTAINS]: "Contains",
   [FilterOperators.NOT_EQUAL]: "Not Equal To",
   [FilterOperators.IS_NULL]: "Is Null",
+  [FilterOperators.IS_NOT_NULL]: "Is Not Null",
 };
 
 interface IProps<T> {

@@ -11,6 +11,7 @@ import {
 import { useEntityDataCreationMutation } from "frontend/hooks/data/data.store";
 import { useRouteParams } from "frontend/lib/routing/useRouteParam";
 import { useEntityConfiguration } from "frontend/hooks/configuration/configuration.store";
+import { useEvaluateScriptContext } from "frontend/hooks/scripts";
 import {
   EntityActionTypes,
   useEntityActionMenuItems,
@@ -25,6 +26,7 @@ export function EntityCreate() {
   const entityCrudConfig = useEntityCrudConfig(entity);
 
   const entityDataCreationMutation = useEntityDataCreationMutation(entity);
+  const evaluateScriptContext = useEvaluateScriptContext();
 
   const actionItems = useEntityActionMenuItems(
     [EntityActionTypes.Create, EntityActionTypes.Form],
@@ -46,7 +48,8 @@ export function EntityCreate() {
   );
 
   const scriptInitialValues = runInitialValuesScript(
-    entityFormExtension.data.initialValues
+    entityFormExtension.data.initialValues,
+    evaluateScriptContext
   );
 
   return (

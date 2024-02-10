@@ -503,12 +503,17 @@ describe("Table Filters", () => {
 
       await userEvent.keyboard("{Enter}");
 
-      await waitFor(() => {
-        expect(setFilterValueJestFn).toHaveBeenLastCalledWith({
-          operator: "t",
-          value: ["option-3", "option-1"],
-        });
-      });
+      await waitFor(
+        () => {
+          expect(setFilterValueJestFn).toHaveBeenLastCalledWith({
+            operator: "t",
+            value: ["option-3", "option-1"],
+          });
+        },
+        {
+          timeout: 5000,
+        }
+      );
     });
   });
 

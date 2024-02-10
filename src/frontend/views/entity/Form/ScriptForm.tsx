@@ -3,12 +3,12 @@ import {
   FormSkeletonSchema,
 } from "frontend/design-system/components/Skeleton/Form";
 import { SchemaForm } from "frontend/components/SchemaForm";
-import { useSchemaFormScriptContext } from "frontend/components/SchemaForm/useSchemaFormScriptContext";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { ToastService } from "frontend/lib/toast";
 import { MAKE_APP_CONFIGURATION_CRUD_CONFIG } from "frontend/hooks/configuration/configuration.constant";
 import { AppConfigurationKeys } from "shared/configurations";
 import { evalJavascriptString } from "shared/lib/script-runner";
+import { useEvaluateScriptContext } from "frontend/hooks/scripts";
 
 interface IProps {
   value: string;
@@ -31,7 +31,7 @@ export function ScriptForm({
   isLoading,
   configurationKey,
 }: IProps) {
-  const scriptContext = useSchemaFormScriptContext("test");
+  const evaluateScriptContext = useEvaluateScriptContext();
 
   return (
     <ViewStateMachine
@@ -52,7 +52,8 @@ export function ScriptForm({
           try {
             const jsString = data[`${BASE_SUFFIX}${field}`] as string;
             evalJavascriptString(jsString, {
-              ...scriptContext,
+              ...evaluateScriptContext,
+              action: "test",
               formValues: {},
             });
             await onSubmit(jsString);

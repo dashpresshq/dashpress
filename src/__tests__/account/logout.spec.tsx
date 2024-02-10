@@ -16,7 +16,7 @@ describe("pages/account/logout", () => {
   const replaceMock = jest.fn();
 
   useRouter.mockImplementation(() => ({
-    replace: replaceMock,
+    push: replaceMock,
     asPath: "/",
     isReady: true,
   }));

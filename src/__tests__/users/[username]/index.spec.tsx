@@ -31,8 +31,6 @@ describe("pages/users/[username]/index", () => {
         expect(screen.getByLabelText("Role")).toBeDisabled();
       });
       expect(screen.getByLabelText("Name")).not.toBeDisabled();
-
-      expect(screen.getByLabelText("System Profile")).not.toBeDisabled();
     });
 
     it("should show user details", async () => {
@@ -55,10 +53,6 @@ describe("pages/users/[username]/index", () => {
       expect(container.querySelector(`input[name="role"]`)).toHaveValue(
         "viewer"
       );
-
-      expect(screen.getByLabelText("System Profile")).toHaveValue(
-        `{"foo": "bar"}`
-      );
     });
 
     it("should update user details", async () => {
@@ -80,12 +74,6 @@ describe("pages/users/[username]/index", () => {
 
       await userEvent.type(screen.getByLabelText("Role"), "Creator");
       await userEvent.keyboard("{Enter}");
-
-      await userEvent.clear(screen.getByLabelText("System Profile"));
-      await userEvent.type(
-        screen.getByLabelText("System Profile"),
-        `{{"update": "profile"}`
-      );
 
       await userEvent.click(
         screen.getByRole("button", { name: "Update User" })
@@ -115,10 +103,6 @@ describe("pages/users/[username]/index", () => {
       });
       expect(container.querySelector(`input[name="role"]`)).toHaveValue(
         "creator"
-      );
-
-      expect(screen.getByLabelText("System Profile")).toHaveValue(
-        `{"update": "profile"}`
       );
     });
   });

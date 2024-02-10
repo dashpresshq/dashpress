@@ -172,8 +172,6 @@ export class RDBMSDataApiService extends BaseDataAccessService<Knex.QueryBuilder
       );
     }
 
-    console.log(query.toQuery());
-
     return await query;
   }
 
@@ -186,8 +184,6 @@ export class RDBMSDataApiService extends BaseDataAccessService<Knex.QueryBuilder
       (await RDBMSDataApiService.getInstance()).table(entity).select(select),
       queryFilter
     );
-
-    console.log(query.toQuery());
 
     return await query.first();
   }

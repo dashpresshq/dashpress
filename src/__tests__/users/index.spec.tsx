@@ -12,7 +12,7 @@ setupApiHandlers();
 describe("pages/users", () => {
   const useRouter = jest.spyOn(require("next/router"), "useRouter");
 
-  it("should list users with system profile", async () => {
+  it("should list users", async () => {
     useRouter.mockImplementation(() => ({
       asPath: "/",
       isReady: true,
@@ -25,17 +25,17 @@ describe("pages/users", () => {
 
     expect(
       await screen.findByRole("row", {
-        name: "Username Sort By Username Filter Username By Search Name Sort By Name Filter Name By Search Role Sort By Role Filter Role By Status Email Station Action",
+        name: "Username Sort By Username Filter Username By Search Name Sort By Name Filter Name By Search Role Sort By Role Filter Role By Status Action",
       })
     ).toBeInTheDocument();
     expect(
       screen.getByRole("row", {
-        name: "user-1 User 1 Role 1 user-1@here.com station - 1 Edit User",
+        name: "user-1 User 1 Role 1 Edit User",
       })
     ).toBeInTheDocument();
     expect(
       screen.getByRole("row", {
-        name: "user-2 User 2 Role 2 user-1@here.com Edit User",
+        name: "user-2 User 2 Role 2 Edit User",
       })
     ).toBeInTheDocument();
     expect(

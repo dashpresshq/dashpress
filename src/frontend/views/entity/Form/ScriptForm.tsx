@@ -9,6 +9,7 @@ import { MAKE_APP_CONFIGURATION_CRUD_CONFIG } from "frontend/hooks/configuration
 import { AppConfigurationKeys } from "shared/configurations";
 import { evalJavascriptString } from "shared/lib/script-runner";
 import { useEvaluateScriptContext } from "frontend/hooks/scripts";
+import { ISchemaFormScriptProps } from "shared/form-schemas/types";
 
 interface IProps {
   value: string;
@@ -51,11 +52,12 @@ export function ScriptForm({
         onSubmit={async (data) => {
           try {
             const jsString = data[`${BASE_SUFFIX}${field}`] as string;
-            evalJavascriptString(jsString, {
+            const context: ISchemaFormScriptProps<{}> = {
               ...evaluateScriptContext,
               action: "test",
               formValues: {},
-            });
+            };
+            evalJavascriptString(jsString, context);
             await onSubmit(jsString);
           } catch (e) {
             ToastService.error(`•Expression: \n•JS-Error: ${e}`);

@@ -19,15 +19,6 @@ setupApiHandlers();
 jest.mock("next/router", () => require("next-router-mock"));
 
 describe("pages/account/logout", () => {
-  const useRouter = jest.spyOn(require("next/router"), "useRouter");
-  const replaceMock = jest.fn();
-
-  useRouter.mockImplementation(() => ({
-    push: replaceMock,
-    asPath: "/",
-    isReady: true,
-  }));
-
   it("should log user out", async () => {
     render(
       <ApplicationRoot>

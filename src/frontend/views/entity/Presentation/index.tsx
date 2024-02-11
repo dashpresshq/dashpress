@@ -83,14 +83,15 @@ if($.field === "commentsCount"){
               },
             }}
             onSubmit={async (data) => {
+              const context: IPresentationScriptParams = {
+                field: "test",
+                from: "details",
+                row: {},
+                value: "",
+                ...evaluateScriptContext,
+              };
               try {
-                evalJavascriptString(data.script, {
-                  field: "test",
-                  from: "details",
-                  row: {},
-                  value: "",
-                  ...evaluateScriptContext,
-                } as IPresentationScriptParams);
+                evalJavascriptString(data.script, context);
 
                 await upsertConfigurationMutation.mutateAsync(data);
               } catch (e) {

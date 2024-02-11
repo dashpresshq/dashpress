@@ -2,8 +2,6 @@ import { INTEGRATIONS_GROUP_CONFIG } from "shared/config-bag/integrations";
 import { FORM_ACTION_CRUD_CONFIG } from "frontend/views/entity/Actions/constants";
 import { ErrorAlert, InfoAlert } from "frontend/design-system/components/Alert";
 import { RenderCode } from "frontend/design-system/components/RenderCode";
-import { TextButton } from "frontend/design-system/components/Button/TextButton";
-import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
 import { DocumentationRoot } from "./_base";
 
 export function FormIntegrationsDocumentation() {
@@ -79,17 +77,10 @@ export function FormIntegrationsDocumentation() {
             </code>
           </li>
           <li>
-            Current User - through the auth object - if you have{" "}
-            <TextButton
-              onClick={() => {
-                window.open(NAVIGATION_LINKS.USERS.LINK_DATABASE, "_blank");
-              }}
-            >
-              linked your database users.
-            </TextButton>
+            Current User -
             <code>
               {" "}
-              {"{{"} auth. {"}}"}{" "}
+              {"{{"} auth.field {"}}"}{" "}
             </code>
           </li>
         </ol>

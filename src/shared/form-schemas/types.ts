@@ -4,10 +4,10 @@ import { GridSpanSizes, IColorableSelection } from "shared/types/ui";
 import { FIELD_TYPES_CONFIG_MAP } from "shared/validations";
 import { IFieldValidationItem } from "shared/validations/types";
 
-export interface ISchemaFormScriptProps<T> extends IEvaluateScriptContext {
+export type ISchemaFormScriptProps<T> = IEvaluateScriptContext & {
   formValues: T;
   action: string;
-}
+};
 
 export interface IFormInputRightAction {
   label: string;

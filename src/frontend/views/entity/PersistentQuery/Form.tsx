@@ -107,6 +107,7 @@ export function EntityPersistentQueryForm({
   const columns = tableColumns.filter(
     ({ accessor, filter }) => ACTIONS_ACCESSOR !== accessor && filter
   );
+
   return (
     <Form
       onSubmit={onSubmit}

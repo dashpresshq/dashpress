@@ -1,7 +1,5 @@
 import { RenderCode } from "frontend/design-system/components/RenderCode";
 import { Spacer } from "frontend/design-system/primitives/Spacer";
-import { TextButton } from "frontend/design-system/components/Button/TextButton";
-import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
 import { DocumentationRoot } from "../_base";
 
 export function FormScriptDocumentation() {
@@ -33,14 +31,7 @@ export function FormScriptDocumentation() {
             <b>
               <code>$.auth</code>
             </b>
-            : The current user information from your database if you have{" "}
-            <TextButton
-              onClick={() => {
-                window.open(NAVIGATION_LINKS.USERS.LINK_DATABASE, "_blank");
-              }}
-            >
-              linked your database users.
-            </TextButton>
+            : The current user details
           </li>
         </ul>
       </p>

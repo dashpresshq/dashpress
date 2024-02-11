@@ -58,7 +58,7 @@ export function UsersLinkToDatabase() {
     {
       table: {
         type: "selection",
-        label: "Table containing your user's data",
+        label: "Your Users Table",
         apiSelections: {
           listUrl: ACTIVE_ENTITIES_ENDPOINT,
         },
@@ -71,7 +71,7 @@ export function UsersLinkToDatabase() {
       },
       field: {
         type: "selection",
-        label: "The field that holds the user's email/username",
+        label: "Field Corresponding To Dashpress Usernames",
         selections: entityFields.data.map((field) => ({
           label: field,
           value: field,

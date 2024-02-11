@@ -45,6 +45,13 @@ export function UsersLinkToDatabaseDocumentation() {
         need to link the users are saved on our configuration.
       </p>
       <p>
+        Linking also doesn&apos;t make any changes to the UI, it doesn&apos;t
+        add any new column to the DashPress users table or the user details
+        page. It only affects the scripts in the application. So you will still
+        manage your users details from your users&apos; entity page like the
+        other entities.
+      </p>
+      <p>
         After you link your users, all scripts in the application will be
         injected the <code>$.auth</code> variable will have the user details
         from your database available in the script.

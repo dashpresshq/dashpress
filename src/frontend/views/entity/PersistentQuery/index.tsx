@@ -63,7 +63,7 @@ export function EntityPersistentQuerySettings() {
           }
         >
           <EntityPersistentQueryForm
-            initialValues={upsertPeristentQueryMutation.data}
+            initialValues={peristentQuery.data}
             onSubmit={upsertPeristentQueryMutation.mutateAsync}
             tableColumns={tableColumns.data || []}
           />

@@ -47,7 +47,6 @@ export const FILTER_OPERATOR_CONFIG: Record<
     numberOfInput: 1,
     placeholder: "Comma seperated values",
   },
-  //
   [FilterOperators.BETWEEN]: {
     label: "N/A",
     numberOfInput: 2,

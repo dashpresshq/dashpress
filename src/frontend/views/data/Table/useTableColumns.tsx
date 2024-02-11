@@ -20,6 +20,7 @@ import { ellipsis } from "shared/lib/strings";
 import { ITableColumn } from "frontend/design-system/components/Table/types";
 import { ActionButtons } from "frontend/design-system/components/Button/ActionButtons";
 import { TableFilterType } from "shared/types/data";
+import { useEvaluateScriptContext } from "frontend/hooks/scripts";
 import { viewSpecialDataTypes } from "../viewSpecialDataTypes";
 import { usePortalTableColumns } from "./portal";
 import { evalutePresentationScript } from "../evaluatePresentationScript";
@@ -107,6 +108,7 @@ export const useTableColumns = (
   const entityToOneReferenceFields = useEntityToOneReferenceFields(entity);
   const entityCrudFields = useEntityCrudFields(entity, "table");
   const defaultDateFormat = useAppConfiguration("default_date_format");
+  const evaluateScriptContext = useEvaluateScriptContext();
   const entityPresentationScript = useEntityConfiguration(
     "entity_presentation_script",
     entity
@@ -171,6 +173,7 @@ export const useTableColumns = (
               from: "details",
               row: row.original,
               value: value$1,
+              ...evaluateScriptContext,
             }
           );
 

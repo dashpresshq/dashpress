@@ -17,6 +17,7 @@ import {
 import { useEntityToOneReferenceFields } from "frontend/hooks/entity/entity.store";
 import { DataStates } from "frontend/lib/data/types";
 import styled from "styled-components";
+import { useEvaluateScriptContext } from "frontend/hooks/scripts";
 import { useEntityViewStateMachine } from "../hooks/useEntityViewStateMachine";
 import { viewSpecialDataTypes } from "../viewSpecialDataTypes";
 import { evalutePresentationScript } from "../evaluatePresentationScript";
@@ -40,6 +41,7 @@ export function EntityDetailsView({
   const entityCrudFields = useEntityCrudFields(entity, "details");
   const defaultDateFormat = useAppConfiguration("default_date_format");
   const getEntityFieldLabels = useEntityFieldLabels(entity);
+  const evaluateScriptContext = useEvaluateScriptContext();
   const entityToOneReferenceFields = useEntityToOneReferenceFields(entity);
   const entityFieldSelections = useEntityFieldSelections(entity);
   const entityPresentationScript = useEntityConfiguration(
@@ -98,6 +100,7 @@ export function EntityDetailsView({
               from: "details",
               row: dataDetails?.data,
               value: value$1,
+              ...evaluateScriptContext,
             }
           );
 

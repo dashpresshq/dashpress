@@ -21,6 +21,12 @@ const filterSchema: FieldQueryFilter[] = [
     },
   },
   {
+    id: "is_not_null",
+    value: {
+      operator: FilterOperators.IS_NOT_NULL,
+    },
+  },
+  {
     id: "less_than",
     value: {
       operator: FilterOperators.LESS_THAN,
@@ -98,7 +104,7 @@ describe("query-generation", () => {
         .transformQueryFilterSchema(query, queryFilters)
         .toQuery()
     ).toMatchInlineSnapshot(
-      `"select * from \`tests\` where (\`equal_field\` = '_equal' and \`is_null\` is null and \`less_than\` < '_lessthan' and \`greater_than\` > '_greater_than' and \`contains\` ilike '%_contains%' and \`in\` in ('in1', 'in2') and \`not_in\` not in ('not_in1', 'not_in2') and not \`not_equal\` = 'not_equal' and \`between\` between 'btw_1' and 'btw_2') or (\`equal_field\` = '_equal' or \`is_null\` is null or \`less_than\` < '_lessthan' or \`greater_than\` > '_greater_than' or \`contains\` ilike '%_contains%' or \`in\` in ('in1', 'in2') or \`not_in\` not in ('not_in1', 'not_in2') or not \`not_equal\` = 'not_equal' or \`between\` between 'btw_1' and 'btw_2')"`
+      `"select * from \`tests\` where (\`equal_field\` = '_equal' and \`is_null\` is null and \`is_not_null\` is not null and \`less_than\` < '_lessthan' and \`greater_than\` > '_greater_than' and \`contains\` ilike '%_contains%' and \`in\` in ('in1', 'in2') and \`not_in\` not in ('not_in1', 'not_in2') and not \`not_equal\` = 'not_equal' and \`between\` between 'btw_1' and 'btw_2') or (\`equal_field\` = '_equal' or \`is_null\` is null or \`is_not_null\` is not null or \`less_than\` < '_lessthan' or \`greater_than\` > '_greater_than' or \`contains\` ilike '%_contains%' or \`in\` in ('in1', 'in2') or \`not_in\` not in ('not_in1', 'not_in2') or not \`not_equal\` = 'not_equal' or \`between\` between 'btw_1' and 'btw_2')"`
     );
   });
 });

@@ -57,12 +57,12 @@ const replaceRandomCharaters = (envContent: string) => {
   console.log(`
        /$$                     /$$
       | $$                    | $$
-  /$$$$$$$  /$$$$$$   /$$$$$$ | $$$$$$$   /$$$$$$   /$$$$$$  / $$$$$$$$ /$$$$$$$ /$$$$$$$
- /$$__  $$ |____  $$ /$$____/ | $$__  $$ / $$__ $$ / $$__ $$ | $$__  $$ |$$_____//$$____/
-| $$  | $$  /$$$$$$$ | $$$$$$ | $$  \\ $$ | $$  \\ $$| $$  \\__ | $$$$$$$$ |$$$$$$$|  $$$$$$
-| $$  | $$ / $$__ $$ \\_____$$ | $$  | $$ | $$  | $$| $$      | $$_____/ \\____ $$ \\____ $$
-|  $$$$$$$ | $$$$$$$ /$$$$$$$/| $$  | $$ | $$$$$$$/| $$      | $$$$$$$ /$$$$$$$//$$$$$$$/
-\\_______/ \\_______/|_______/ |__/  |__/  | $$____/ |__/      \\_______/|_______/|_______/
+  /$$$$$$$   /$$$$$$  / $$$$$ | $$$$$$$   /$$$$$$    /$$$$$$  / $$$$$$   / $$$$$  / $$$$$
+ /$$__  $$   |____$$ | $$____ | $$__  $$ / $$__ $$  / $$__ $$ | $$___$$ | $$____ | $$____
+| $$  | $$  /$$$$$$$ | $$$$$$ | $$  \\ $$ | $$  \\ $$ | $$  \\__ | $$$$$$$ | $$$$$$ | $$$$$$
+| $$  | $$ | $$__ $$  \\___ $$ | $$  | $$ | $$  | $$ | $$      | $$____/  \\___ $$  \\___ $$
+| $$$$$$$$ | $$$$$$$ | $$$$$$ | $$  | $$ | $$$$$$$/ | $$      | $$$$$$$ | $$$$$$ | $$$$$$
+\\_______/  \\______/   \\_____/ |__/  |__/ | $$____/  |__/      \\_______/  \\_____/ \\______/
                                          | $$
                                          | $$
                                          |__/
@@ -89,11 +89,11 @@ const replaceRandomCharaters = (envContent: string) => {
     "https://github.com/dashpresshq/dashpress"
   )}
 
-- ${terminalLink(
+  - ${terminalLink(
     "💬 If you have questions? Join our community",
     "https://discord.gg/aV6DxwXhzN"
   )}
-    `);
+      `);
 
   const { stdout, stderr } = execa("npm", ["run", "start"], {
     cwd: path.join(__dirname, ".."),
@@ -106,11 +106,11 @@ const replaceRandomCharaters = (envContent: string) => {
   const WAIT_FOR_NEXT_TO_START = 1000;
 
   /*
-  We want to ping the application to bootstrap itself from here
-  Else it boostraps on the first request which messes a lot of things up
-  We dont want the ping to crash the application if the port is not ready yet
-  Hence the catch(() => {});
-  */
+    We want to ping the application to bootstrap itself from here
+    Else it boostraps on the first request which messes a lot of things up
+    We dont want the ping to crash the application if the port is not ready yet
+    Hence the catch(() => {});
+    */
   setTimeout(() => {
     fetch(`${endpoint}/api/healthcheck`).catch(() => {});
   }, WAIT_FOR_NEXT_TO_START);

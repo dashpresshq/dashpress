@@ -20,7 +20,7 @@ export class RDBMSDataApiService extends BaseDataAccessService<Knex.QueryBuilder
   queryOperationImplementation: QueryOperationImplementation<Knex.QueryBuilder> =
     {
       and: {
-        [QueryOperators.IS_NULL]: (query, column) => query.where(column),
+        [QueryOperators.IS_NULL]: (query, column) => query.whereNull(column),
         [QueryOperators.IS_NOT_NULL]: (query, column) =>
           query.whereNotNull(column),
         [QueryOperators.EQUAL_TO]: (query, column, value) =>
@@ -32,7 +32,7 @@ export class RDBMSDataApiService extends BaseDataAccessService<Knex.QueryBuilder
         [QueryOperators.CONTAINS]: (query, column, value) =>
           query.whereILike(column, `%${value}%`),
         [QueryOperators.IN]: (query, column, value) =>
-          query.whereIn(column, value as string[]),
+          query.whereIn(column, value as string[]), // TODO csv
         [QueryOperators.NOT_IN]: (query, column, value) =>
           query.whereNotIn(column, value as string[]),
         [QueryOperators.NOT_EQUAL]: (query, column, value) =>

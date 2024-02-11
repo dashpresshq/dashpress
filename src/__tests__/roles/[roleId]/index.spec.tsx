@@ -10,19 +10,18 @@ import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 setupApiHandlers();
 
 const closeAllToasts = async () => {
-  const allToasts = await screen.findAllByRole("button", {
+  const toast = screen.getByRole("button", {
     name: "Close Toast",
   });
 
-  for (const toast of allToasts) {
-    await userEvent.click(toast);
-  }
+  await userEvent.click(toast);
 
-  // await waitFor(() => {
-  //   expect(
-  //     screen.queryByRole("button", { name: "Close Toast" })
-  //   ).not.toBeInTheDocument();
-  // });
+  await waitFor(
+    () => {
+      expect(toast).not.toBeInTheDocument();
+    },
+    { timeout: 20000 }
+  );
 };
 
 describe("pages/roles/[roleId]/index", () => {
@@ -36,7 +35,7 @@ describe("pages/roles/[roleId]/index", () => {
     isReady: true,
   }));
 
-  it("should select all admin permissions", async () => {
+  it("should select all user enabled admin permissions", async () => {
     render(
       <ApplicationRoot>
         <RolePermissions />
@@ -69,7 +68,7 @@ describe("pages/roles/[roleId]/index", () => {
 
     expect(
       within(currentTab).getByRole("checkbox", {
-        name: "Can Manage Dashboard",
+        name: "Can Manage All Entities",
       })
     ).not.toBeChecked();
 
@@ -81,48 +80,12 @@ describe("pages/roles/[roleId]/index", () => {
 
     expect(
       within(currentTab).getByRole("checkbox", {
-        name: "Can Manage All Entities",
+        name: "Can Manage Dashboard",
       })
     ).toBeChecked();
   });
 
-  it("should show entities checkbox only when 'Can Manage All Entities' is checked", async () => {
-    render(
-      <ApplicationRoot>
-        <RolePermissions />
-      </ApplicationRoot>
-    );
-
-    await userEvent.click(await screen.findByRole("tab", { name: "Entities" }));
-
-    const currentTab = screen.getByRole("tabpanel");
-
-    expect(within(currentTab).queryByRole("checkbox")).not.toBeInTheDocument();
-
-    await userEvent.click(
-      within(currentTab).queryByRole("button", {
-        name: "Can Manage All Entities",
-      })
-    );
-
-    expect(await within(currentTab).findAllByRole("checkbox")).toHaveLength(5);
-
-    await userEvent.click(
-      within(currentTab).queryByRole("button", {
-        name: "Can Manage All Entities",
-      })
-    );
-
-    expect(within(currentTab).queryByRole("checkbox")).not.toBeInTheDocument();
-
-    await userEvent.click(
-      within(currentTab).queryByRole("button", {
-        name: "Can Manage All Entities",
-      })
-    );
-  });
-
-  it("should select all entities permissions", async () => {
+  it("should select all user enabled entities permissions", async () => {
     render(
       <ApplicationRoot>
         <RolePermissions />
@@ -165,6 +128,130 @@ describe("pages/roles/[roleId]/index", () => {
         name: "Plural disabled-entity-2",
       })
     ).toBeChecked();
+  });
+
+  it("should update entity permissions", async () => {
+    render(
+      <ApplicationRoot>
+        <RolePermissions />
+      </ApplicationRoot>
+    );
+
+    await userEvent.click(await screen.findByRole("tab", { name: "Entities" }));
+
+    const currentTab = screen.getByRole("tabpanel");
+
+    await waitFor(async () => {
+      expect(
+        await within(currentTab).findByRole("checkbox", {
+          name: "Plural entity-3",
+        })
+      ).not.toBeChecked();
+    });
+
+    await userEvent.click(
+      await within(currentTab).findByRole("button", {
+        name: "Plural entity-2",
+      })
+    );
+    expect(await screen.findByRole("status")).toHaveTextContent(
+      "Role Permission Deleted Successfully"
+    );
+
+    await closeAllToasts();
+
+    await userEvent.click(
+      within(currentTab).getByRole("button", { name: "Plural entity-1" })
+    );
+
+    expect(await screen.findByRole("status")).toHaveTextContent(
+      "Role Permission Created Successfully"
+    );
+
+    await closeAllToasts();
+
+    await userEvent.click(
+      within(currentTab).getByRole("button", {
+        name: "Plural disabled-entity-2",
+      })
+    );
+
+    expect(await screen.findByRole("status")).toHaveTextContent(
+      "Role Permission Deleted Successfully"
+    );
+
+    await closeAllToasts();
+
+    await userEvent.click(
+      within(currentTab).getByRole("button", {
+        name: "Plural disabled-entity-2",
+      })
+    );
+    expect(await screen.findByRole("status")).toHaveTextContent(
+      "Role Permission Created Successfully"
+    );
+  });
+
+  it("should show updated entity permissions", async () => {
+    render(
+      <ApplicationRoot>
+        <RolePermissions />
+      </ApplicationRoot>
+    );
+
+    await userEvent.click(await screen.findByRole("tab", { name: "Entities" }));
+
+    const currentTab = screen.getByRole("tabpanel");
+
+    await waitFor(async () => {
+      expect(
+        await within(currentTab).findByRole("checkbox", {
+          name: "Plural entity-2",
+        })
+      ).not.toBeChecked();
+    });
+
+    expect(
+      within(currentTab).getByRole("checkbox", { name: "Plural entity-1" })
+    ).toBeChecked();
+
+    expect(
+      within(currentTab).getByRole("checkbox", {
+        name: "Plural disabled-entity-2",
+      })
+    ).toBeChecked();
+  });
+
+  it("should toggle entities checkbox when 'Can Manage All Entities' is toggled", async () => {
+    render(
+      <ApplicationRoot>
+        <RolePermissions />
+      </ApplicationRoot>
+    );
+
+    await userEvent.click(await screen.findByRole("tab", { name: "Entities" }));
+
+    const currentTab = screen.getByRole("tabpanel");
+
+    expect(await within(currentTab).findAllByRole("checkbox")).toHaveLength(5);
+
+    await userEvent.click(
+      within(currentTab).queryByRole("button", {
+        name: "Can Manage All Entities",
+      })
+    );
+
+    await closeAllToasts();
+
+    expect(within(currentTab).queryByRole("checkbox")).not.toBeInTheDocument();
+
+    await userEvent.click(
+      within(currentTab).queryByRole("button", {
+        name: "Can Manage All Entities",
+      })
+    );
+
+    expect(await within(currentTab).findAllByRole("checkbox")).toHaveLength(5);
 
     await closeAllToasts();
   });
@@ -188,24 +275,34 @@ describe("pages/roles/[roleId]/index", () => {
       "Role Permission Deleted Successfully"
     );
 
+    await closeAllToasts();
+
     await userEvent.click(
-      within(currentTab).getByRole("button", { name: "Can Manage Dashboard" })
+      within(currentTab).getByRole("button", { name: "Can Configure App" })
     );
-    expect((await screen.findAllByRole("status"))[0]).toHaveTextContent(
+
+    expect(await screen.findByRole("status")).toHaveTextContent(
       "Role Permission Created Successfully"
     );
+
+    await closeAllToasts();
 
     await userEvent.click(
       within(currentTab).getByRole("button", { name: "Can Manage Users" })
     );
-    expect((await screen.findAllByRole("status"))[0]).toHaveTextContent(
-      "Role Permission Created Successfully"
+
+    expect(await screen.findByRole("status")).toHaveTextContent(
+      "Role Permission Deleted Successfully"
     );
+
+    await closeAllToasts();
+
     await userEvent.click(
       within(currentTab).getByRole("button", { name: "Can Manage Users" })
     );
-    expect((await screen.findAllByRole("status"))[0]).toHaveTextContent(
-      "Role Permission Deleted Successfully"
+
+    expect(await screen.findByRole("status")).toHaveTextContent(
+      "Role Permission Created Successfully"
     );
   });
 
@@ -232,9 +329,9 @@ describe("pages/roles/[roleId]/index", () => {
 
     expect(
       within(currentTab).getByRole("checkbox", {
-        name: "Can Manage Dashboard",
+        name: "Can Configure App",
       })
-    ).not.toBeChecked();
+    ).toBeChecked();
 
     expect(
       within(currentTab).getByRole("checkbox", {
@@ -243,84 +340,118 @@ describe("pages/roles/[roleId]/index", () => {
     ).toBeChecked();
   });
 
-  it("should update entity permissions", async () => {
-    render(
-      <ApplicationRoot>
-        <RolePermissions />
-      </ApplicationRoot>
-    );
+  describe("Heirachy", () => {
+    it("should toggle heirachy permissions on correctly", async () => {
+      render(
+        <ApplicationRoot>
+          <RolePermissions />
+        </ApplicationRoot>
+      );
 
-    await closeAllToasts();
+      await closeAllToasts();
 
-    await userEvent.click(await screen.findByRole("tab", { name: "Entities" }));
+      const currentTab = await screen.findByRole("tabpanel");
 
-    const currentTab = screen.getByRole("tabpanel");
+      // De-select the child permission
+      await userEvent.click(
+        await within(currentTab).findByRole("button", {
+          name: "Can Manage All Entities",
+        })
+      );
 
-    await userEvent.click(
-      await within(currentTab).findByRole("button", {
-        name: "Plural entity-2",
-      })
-    );
-    expect((await screen.findAllByRole("status"))[0]).toHaveTextContent(
-      "Role Permission Created Successfully"
-    );
+      expect(await screen.findByRole("status")).toHaveTextContent(
+        "Role Permission Deleted Successfully"
+      );
 
-    await userEvent.click(
-      within(currentTab).getByRole("button", { name: "Plural entity-1" })
-    );
-    expect((await screen.findAllByRole("status"))[0]).toHaveTextContent(
-      "Role Permission Created Successfully"
-    );
+      await closeAllToasts();
 
-    await closeAllToasts();
-
-    await userEvent.click(
-      within(currentTab).getByRole("button", {
-        name: "Plural disabled-entity-2",
-      })
-    );
-    expect((await screen.findAllByRole("status"))[0]).toHaveTextContent(
-      "Role Permission Deleted Successfully"
-    );
-    await userEvent.click(
-      within(currentTab).getByRole("button", {
-        name: "Plural disabled-entity-2",
-      })
-    );
-    expect((await screen.findAllByRole("status"))[0]).toHaveTextContent(
-      "Role Permission Created Successfully"
-    );
-  });
-
-  it("should show updated entity permissions", async () => {
-    render(
-      <ApplicationRoot>
-        <RolePermissions />
-      </ApplicationRoot>
-    );
-
-    await userEvent.click(await screen.findByRole("tab", { name: "Entities" }));
-
-    const currentTab = screen.getByRole("tabpanel");
-
-    await waitFor(async () => {
       expect(
-        await within(currentTab).findByRole("checkbox", {
-          name: "Plural entity-2",
+        within(currentTab).queryByRole("checkbox", {
+          name: "Can Configure App",
+        })
+      ).not.toBeChecked();
+
+      // Select the parent permission
+      await userEvent.click(
+        within(currentTab).getByRole("button", {
+          name: "Can Manage App Credentials",
+        })
+      );
+
+      expect(await screen.findByRole("status")).toHaveTextContent(
+        "Role Permission Created Successfully"
+      );
+    });
+
+    it("should toggle heirachy permissions off correctly", async () => {
+      render(
+        <ApplicationRoot>
+          <RolePermissions />
+        </ApplicationRoot>
+      );
+
+      await closeAllToasts();
+
+      const currentTab = await screen.findByRole("tabpanel");
+
+      // See the children permissions are turned on correctly
+      expect(
+        within(currentTab).getByRole("checkbox", {
+          name: "Can Manage App Credentials",
+        })
+      ).toBeChecked();
+
+      expect(
+        within(currentTab).getByRole("checkbox", {
+          name: "Can Configure App",
+        })
+      ).toBeChecked();
+
+      expect(
+        within(currentTab).getByRole("checkbox", {
+          name: "Can Manage All Entities",
+        })
+      ).toBeChecked();
+
+      // De-select the parent permission
+      await userEvent.click(
+        await within(currentTab).findByRole("button", {
+          name: "Can Manage All Entities",
+        })
+      );
+
+      expect(await screen.findByRole("status")).toHaveTextContent(
+        "Role Permission Deleted Successfully"
+      );
+    });
+
+    it("should show turned off children permissions correctly", async () => {
+      render(
+        <ApplicationRoot>
+          <RolePermissions />
+        </ApplicationRoot>
+      );
+
+      const currentTab = await screen.findByRole("tabpanel");
+
+      // See the the child permissions are un-selected
+      expect(
+        within(currentTab).queryByRole("checkbox", {
+          name: "Can Manage App Credentials",
+        })
+      ).not.toBeChecked();
+
+      expect(
+        within(currentTab).queryByRole("checkbox", {
+          name: "Can Configure App",
+        })
+      ).not.toBeChecked();
+
+      expect(
+        within(currentTab).queryByRole("checkbox", {
+          name: "Can Manage All Entities",
         })
       ).not.toBeChecked();
     });
-
-    expect(
-      within(currentTab).getByRole("checkbox", { name: "Plural entity-1" })
-    ).not.toBeChecked();
-
-    expect(
-      within(currentTab).getByRole("checkbox", {
-        name: "Plural disabled-entity-2",
-      })
-    ).toBeChecked();
   });
-
-  // TEST: test heirachy
 });

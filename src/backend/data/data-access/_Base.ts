@@ -56,7 +56,11 @@ export abstract class BaseDataAccessService<T> {
       return query;
     }
 
-    if (operator !== FilterOperators.IS_NULL && !value) {
+    if (
+      operator !== FilterOperators.IS_NULL &&
+      operator !== FilterOperators.IS_NOT_NULL &&
+      !value
+    ) {
       return query;
     }
 

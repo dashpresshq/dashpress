@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import React, { ReactNode } from "react";
+import React from "react";
 import { render, screen, within } from "@testing-library/react";
 import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 
@@ -7,21 +7,14 @@ import ManageVariables from "pages/admin/settings/variables";
 
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 import userEvent from "@testing-library/user-event";
-import { useUserAuthenticatedState } from "frontend/hooks/auth/useAuthenticateUser";
-import { JWT_TOKEN_STORAGE_KEY } from "frontend/hooks/auth/auth.store";
+import { AuthActions } from "frontend/hooks/auth/auth.actions";
 
 setupApiHandlers();
-
-function AuthenticatedApplicationRoot({ children }: { children: ReactNode }) {
-  useUserAuthenticatedState();
-
-  return <ApplicationRoot>{children}</ApplicationRoot>;
-}
 
 describe("pages/integrations/variables => credentials", () => {
   const useRouter = jest.spyOn(require("next/router"), "useRouter");
   beforeAll(() => {
-    localStorage.setItem(JWT_TOKEN_STORAGE_KEY, "foo");
+    localStorage.setItem(AuthActions.JWT_TOKEN_STORAGE_KEY, "foo");
     useRouter.mockImplementation(() => ({
       asPath: "/",
       query: {
@@ -34,9 +27,9 @@ describe("pages/integrations/variables => credentials", () => {
   describe("priviledge", () => {
     it("should not show any password text on constants tab", async () => {
       render(
-        <AuthenticatedApplicationRoot>
+        <ApplicationRoot>
           <ManageVariables />
-        </AuthenticatedApplicationRoot>
+        </ApplicationRoot>
       );
 
       const priviledgeSection = await screen.findByLabelText(
@@ -65,9 +58,9 @@ describe("pages/integrations/variables => credentials", () => {
 
     it("should show correct password text on secret tab", async () => {
       render(
-        <AuthenticatedApplicationRoot>
+        <ApplicationRoot>
           <ManageVariables />
-        </AuthenticatedApplicationRoot>
+        </ApplicationRoot>
       );
       const priviledgeSection = await screen.findByLabelText(
         "credentials priviledge section"
@@ -98,9 +91,9 @@ describe("pages/integrations/variables => credentials", () => {
   describe("list", () => {
     it("should list credentials", async () => {
       render(
-        <AuthenticatedApplicationRoot>
+        <ApplicationRoot>
           <ManageVariables />
-        </AuthenticatedApplicationRoot>
+        </ApplicationRoot>
       );
 
       await userEvent.click(
@@ -135,9 +128,9 @@ describe("pages/integrations/variables => credentials", () => {
   describe("reveal", () => {
     it("should not show credentials action before revealing password", async () => {
       render(
-        <AuthenticatedApplicationRoot>
+        <ApplicationRoot>
           <ManageVariables />
-        </AuthenticatedApplicationRoot>
+        </ApplicationRoot>
       );
 
       await userEvent.click(
@@ -163,9 +156,9 @@ describe("pages/integrations/variables => credentials", () => {
 
     it("should show error on invalid password and not reveal data", async () => {
       render(
-        <AuthenticatedApplicationRoot>
+        <ApplicationRoot>
           <ManageVariables />
-        </AuthenticatedApplicationRoot>
+        </ApplicationRoot>
       );
 
       const priviledgeSection = screen.getByLabelText(
@@ -207,9 +200,9 @@ describe("pages/integrations/variables => credentials", () => {
 
     it("should reveal credentials and the now show the credentials action buttons", async () => {
       render(
-        <AuthenticatedApplicationRoot>
+        <ApplicationRoot>
           <ManageVariables />
-        </AuthenticatedApplicationRoot>
+        </ApplicationRoot>
       );
 
       const priviledgeSection = screen.getByLabelText(
@@ -288,9 +281,9 @@ describe("pages/integrations/variables => credentials", () => {
 
     it("should show credentials action after revealing password", async () => {
       render(
-        <AuthenticatedApplicationRoot>
+        <ApplicationRoot>
           <ManageVariables />
-        </AuthenticatedApplicationRoot>
+        </ApplicationRoot>
       );
 
       await userEvent.click(
@@ -321,9 +314,9 @@ describe("pages/integrations/variables => credentials", () => {
   describe("update", () => {
     it("should update secret", async () => {
       render(
-        <AuthenticatedApplicationRoot>
+        <ApplicationRoot>
           <ManageVariables />
-        </AuthenticatedApplicationRoot>
+        </ApplicationRoot>
       );
 
       await userEvent.click(
@@ -381,9 +374,9 @@ describe("pages/integrations/variables => credentials", () => {
   describe("create", () => {
     it("should create new secret", async () => {
       render(
-        <AuthenticatedApplicationRoot>
+        <ApplicationRoot>
           <ManageVariables />
-        </AuthenticatedApplicationRoot>
+        </ApplicationRoot>
       );
 
       await userEvent.click(
@@ -434,9 +427,9 @@ describe("pages/integrations/variables => credentials", () => {
   describe("delete", () => {
     it("should delete secrets", async () => {
       render(
-        <AuthenticatedApplicationRoot>
+        <ApplicationRoot>
           <ManageVariables />
-        </AuthenticatedApplicationRoot>
+        </ApplicationRoot>
       );
 
       await userEvent.click(

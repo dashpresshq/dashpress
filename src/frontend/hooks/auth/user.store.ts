@@ -6,20 +6,14 @@ import { useCallback } from "react";
 import { useStorageApi } from "frontend/lib/data/useApi";
 import { ToastService } from "frontend/lib/toast";
 import { DataStates } from "frontend/lib/data/types";
-import { useIsAuthenticatedStore } from "./useAuthenticateUser";
 import { ACCOUNT_PROFILE_CRUD_CONFIG } from "./constants";
 import { useIsGranularCheck } from "./portal";
 
 export const AUTHENTICATED_ACCOUNT_URL = "/api/account/mine";
 
 export function useAuthenticatedUserBag() {
-  const isAuthenticated = useIsAuthenticatedStore(
-    (store) => store.isAuthenticated
-  );
-
   return useStorageApi<IAuthenticatedUserBag>(AUTHENTICATED_ACCOUNT_URL, {
     errorMessage: ACCOUNT_PROFILE_CRUD_CONFIG.TEXT_LANG.NOT_FOUND,
-    enabled: isAuthenticated === true,
     defaultData: {
       name: "",
       permissions: [],

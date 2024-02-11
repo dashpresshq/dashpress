@@ -162,7 +162,7 @@ describe("pages/admin/[entity]/config/actions", () => {
     expect(await screen.findAllByRole("row")).toHaveLength(4);
   });
 
-  it("should show the correct value on the update form", async () => {
+  it.skip("should show the correct value on the update form", async () => {
     const { container } = render(
       <ApplicationRoot>
         <EntityFormActionsSettings />

@@ -1,11 +1,10 @@
 import * as React from "react";
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
-import { rest } from "msw";
-import { BASE_TEST_URL } from "__tests__/_/api-handlers/_utils";
 import UserSetup from "pages/setup/user";
 import userEvent from "@testing-library/user-event";
+import { SETUP_CHECK_DATA } from "__tests__/_/api-handlers/setup";
 
 const server = setupApiHandlers();
 
@@ -27,16 +26,10 @@ describe("pages/setup/user", () => {
       push: jest.fn(),
     }));
 
-    server.use(
-      rest.get(BASE_TEST_URL("/api/setup/check"), async (_, res, ctx) => {
-        return res(
-          ctx.json({
-            hasUsers: false,
-            hasDbCredentials: true,
-          })
-        );
-      })
-    );
+    SETUP_CHECK_DATA.data = {
+      hasUsers: false,
+      hasDbCredentials: true,
+    };
 
     render(
       <ApplicationRoot>
@@ -59,6 +52,8 @@ describe("pages/setup/user", () => {
       "Account Was Successfully Setup"
     );
 
-    expect(replaceMock).toHaveBeenLastCalledWith("/");
+    await waitFor(() => {
+      expect(replaceMock).toHaveBeenLastCalledWith("/");
+    });
   });
 });

@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import React, { ReactNode } from "react";
+import React from "react";
 import { render, screen, within } from "@testing-library/react";
 import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 import { rest } from "msw";
@@ -9,23 +9,16 @@ import ManageVariables from "pages/admin/settings/variables";
 import { BASE_TEST_URL } from "__tests__/_/api-handlers/_utils";
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 import userEvent from "@testing-library/user-event";
-import { useUserAuthenticatedState } from "frontend/hooks/auth/useAuthenticateUser";
 import { IAuthenticatedUserBag } from "shared/types/user";
 import { USER_PERMISSIONS } from "shared/constants/user";
-import { JWT_TOKEN_STORAGE_KEY } from "frontend/hooks/auth/auth.store";
+import { AuthActions } from "frontend/hooks/auth/auth.actions";
 
 const server = setupApiHandlers();
-
-function AuthenticatedApplicationRoot({ children }: { children: ReactNode }) {
-  useUserAuthenticatedState();
-
-  return <ApplicationRoot>{children}</ApplicationRoot>;
-}
 
 describe("pages/integrations/variables => credentials -- non admin", () => {
   const useRouter = jest.spyOn(require("next/router"), "useRouter");
   beforeAll(() => {
-    localStorage.setItem(JWT_TOKEN_STORAGE_KEY, "foo");
+    localStorage.setItem(AuthActions.JWT_TOKEN_STORAGE_KEY, "foo");
     useRouter.mockImplementation(() => ({
       asPath: "/",
       query: {
@@ -50,9 +43,9 @@ describe("pages/integrations/variables => credentials -- non admin", () => {
   describe("priviledge", () => {
     it("should show correct password text for `CAN_CONFIGURE_APP_USERS`", async () => {
       render(
-        <AuthenticatedApplicationRoot>
+        <ApplicationRoot>
           <ManageVariables />
-        </AuthenticatedApplicationRoot>
+        </ApplicationRoot>
       );
       const priviledgeSection = screen.getByLabelText(
         "credentials priviledge section"
@@ -89,9 +82,9 @@ describe("pages/integrations/variables => credentials -- non admin", () => {
 
     it("should not show any password text on constants tab", async () => {
       render(
-        <AuthenticatedApplicationRoot>
+        <ApplicationRoot>
           <ManageVariables />
-        </AuthenticatedApplicationRoot>
+        </ApplicationRoot>
       );
 
       const priviledgeSection = await screen.findByLabelText(
@@ -127,9 +120,9 @@ describe("pages/integrations/variables => credentials -- non admin", () => {
   describe("list", () => {
     it("should list credentials", async () => {
       render(
-        <AuthenticatedApplicationRoot>
+        <ApplicationRoot>
           <ManageVariables />
-        </AuthenticatedApplicationRoot>
+        </ApplicationRoot>
       );
 
       await userEvent.click(

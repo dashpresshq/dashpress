@@ -1,9 +1,6 @@
-import { getAuthToken, removeAuthToken } from "frontend/hooks/auth/auth.store";
+import { AuthActions } from "frontend/hooks/auth/auth.actions";
 import { REQUEST_ERROR_CODES } from "shared/constants/auth";
-import { TemporayStorageService } from "frontend/lib/storage";
-import { STORAGE_CONSTANTS } from "frontend/lib/storage/constants";
 import { ApiRequestError } from "./_errors";
-import { NAVIGATION_LINKS } from "../routing/links";
 
 const pathWithBaseUrl = (path: string) => {
   if (path.startsWith("http")) {
@@ -13,7 +10,7 @@ const pathWithBaseUrl = (path: string) => {
 };
 
 export const getRequestHeaders = () => {
-  const authToken = getAuthToken();
+  const authToken = AuthActions.getAuthToken();
   const headers: Record<string, string> = {
     "Content-Type": "application/json",
   };
@@ -31,12 +28,10 @@ const handleRequestError = async (response: Response, errorMessage: string) => {
 
   if ([401, 400].includes(response.status)) {
     if (error.errorCode === REQUEST_ERROR_CODES.NOT_AUTHENTICATED) {
-      removeAuthToken();
-      TemporayStorageService.setString(
-        STORAGE_CONSTANTS.PREVIOUS_AUTH_URL,
-        window.location.href
-      );
-      window.location.replace(NAVIGATION_LINKS.AUTH_SIGNIN);
+      AuthActions.signOut("makeRequest");
+    }
+    if (error.errorCode === REQUEST_ERROR_CODES.ALREADY_AUTHENTICATED) {
+      AuthActions.signIn();
     }
   }
   throw new ApiRequestError(response.status, error.message || errorMessage);

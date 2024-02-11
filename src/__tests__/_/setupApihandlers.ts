@@ -1,12 +1,12 @@
 import { setupServer } from "msw/node";
-import { JWT_TOKEN_STORAGE_KEY } from "frontend/hooks/auth/auth.store";
+import { AuthActions } from "frontend/hooks/auth/auth.actions";
 import { apiHandlers } from "./api-handlers";
 
 export const server = setupServer(...apiHandlers);
 
 export function setupApiHandlers() {
   beforeAll(() => {
-    localStorage.setItem(JWT_TOKEN_STORAGE_KEY, "foo");
+    localStorage.setItem(AuthActions.JWT_TOKEN_STORAGE_KEY, "foo");
     server.listen();
   });
 

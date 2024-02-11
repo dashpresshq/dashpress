@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useMutation } from "react-query";
 import { AuthLayout } from "frontend/_layouts/guest";
 import { ISuccessfullAuthenticationResponse } from "shared/types/auth/portal";
@@ -8,13 +8,13 @@ import {
   ISignInForm,
 } from "shared/form-schemas/auth/signin";
 import { useAuthenticateUser } from "frontend/hooks/auth/useAuthenticateUser";
-import { useGuestCheck } from "frontend/hooks/auth/useGuestCheck";
 import { makeActionRequest } from "frontend/lib/data/makeRequest";
 import { ToastService } from "frontend/lib/toast";
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
 import { ComponentIsLoading } from "frontend/design-system/components/ComponentIsLoading";
 import { Typo } from "frontend/design-system/primitives/Typo";
 import { SchemaForm } from "frontend/components/SchemaForm";
+import { AuthActions } from "frontend/hooks/auth/auth.actions";
 import { useHandleNoTokenAuthResponse } from "./portal";
 
 function useSignInMutation() {
@@ -39,8 +39,17 @@ function useSignInMutation() {
 }
 
 export function SignIn() {
+  const [render, setRender] = React.useState(false);
   const signInMutation = useSignInMutation();
-  const guestCheck = useGuestCheck();
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      if (AuthActions.isAuthenticated()) {
+        AuthActions.signIn();
+      } else {
+        setRender(true);
+      }
+    }
+  }, [typeof window]);
   const setupCheck = useSetupCheck([
     {
       key: "hasDbCredentials",
@@ -54,7 +63,7 @@ export function SignIn() {
     },
   ]);
 
-  if (setupCheck || guestCheck) {
+  if (setupCheck || !render) {
     return <ComponentIsLoading />;
   }
 

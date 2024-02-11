@@ -1,4 +1,3 @@
-import { useIsAuthenticatedStore } from "frontend/hooks/auth/useAuthenticateUser";
 import { useRouter } from "next/router";
 import { ReactNode } from "react";
 import { ContentLayout } from "frontend/design-system/components/Section/SectionDivider";
@@ -8,6 +7,7 @@ import {
 } from "frontend/design-system/components/Section/MenuSection";
 import { AppLayout } from "frontend/_layouts/app";
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
+import { AuthActions } from "frontend/hooks/auth/auth.actions";
 import { usePortalAccountMenu } from "./portal";
 
 interface IProps {
@@ -17,9 +17,6 @@ interface IProps {
 export function BaseAccountLayout({ children }: IProps) {
   const router = useRouter();
   const portalAccountMenu = usePortalAccountMenu();
-  const setIsAuthenticated = useIsAuthenticatedStore(
-    (store) => store.setIsAuthenticated
-  );
 
   const baseMenuItems: IMenuSectionItem[] = [
     {
@@ -42,7 +39,7 @@ export function BaseAccountLayout({ children }: IProps) {
     },
     {
       action: () => {
-        setIsAuthenticated(false);
+        AuthActions.signOut("logout");
       },
       name: "Log Out",
       systemIcon: "LogOut",

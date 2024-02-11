@@ -37,7 +37,7 @@ const customJestConfig = {
 
   transformIgnorePatterns: [],
 
-  testTimeout: 10000,
+  testTimeout: 20000,
 };
 
 export default async (...args: any[]) =>

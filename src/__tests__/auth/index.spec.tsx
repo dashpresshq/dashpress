@@ -4,103 +4,31 @@ import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 import SignIn from "pages/auth";
 import userEvent from "@testing-library/user-event";
-import { JWT_TOKEN_STORAGE_KEY } from "frontend/hooks/auth/auth.store";
+import { AuthActions } from "frontend/hooks/auth/auth.actions";
 
 setupApiHandlers();
+
+Object.defineProperty(window, "location", {
+  value: {
+    ...window.location,
+    replace: jest.fn(),
+  },
+  writable: true,
+});
 
 describe("pages/auth", () => {
   beforeEach(() => {
     localStorage.clear();
   });
 
-  it("should redirect to dashboard when user is authenticated", async () => {
-    localStorage.setItem(JWT_TOKEN_STORAGE_KEY, "foo");
-    const useRouter = jest.spyOn(require("next/router"), "useRouter");
+  const useRouter = jest.spyOn(require("next/router"), "useRouter");
 
-    const replaceMock = jest.fn();
-    useRouter.mockImplementation(() => ({
-      replace: replaceMock,
-      query: {},
-      isReady: true,
-    }));
-
-    render(
-      <ApplicationRoot>
-        <SignIn />
-      </ApplicationRoot>
-    );
-
-    await waitFor(() => {
-      expect(replaceMock).toHaveBeenCalledWith("/");
-    });
-  });
-
-  // Need to be able to tell jest to ignore 401 errors as the test crashes after hitting it
-  it.skip("should prompt invalid login when invalid credentials are put in", async () => {
-    const useRouter = jest.spyOn(require("next/router"), "useRouter");
-
-    const pushMock = jest.fn();
-    useRouter.mockImplementation(() => ({
-      push: pushMock,
-      query: {},
-      isReady: true,
-    }));
-
-    render(
-      <ApplicationRoot>
-        <SignIn />
-      </ApplicationRoot>
-    );
-
-    await userEvent.type(
-      await screen.findByLabelText("Username"),
-      "Invalid Username"
-    );
-    await userEvent.type(
-      await screen.findByLabelText("Password"),
-      "Invalid Password"
-    );
-
-    await userEvent.click(screen.getByRole("button", { name: "Sign In" }));
-
-    expect(await screen.findByRole("status")).toHaveTextContent(
-      "Invalid Login"
-    );
-
-    expect(localStorage.getItem(JWT_TOKEN_STORAGE_KEY)).toBeNull();
-
-    expect(pushMock).not.toHaveBeenCalled();
-  });
-
-  it("should redirect to dashboard when user is succesfully authenticated", async () => {
-    const replaceMock = jest.fn();
-    const useRouter = jest.spyOn(require("next/router"), "useRouter");
-
-    useRouter.mockImplementation(() => ({
-      replace: replaceMock,
-      push: () => {},
-      query: {},
-      isReady: true,
-    }));
-
-    render(
-      <ApplicationRoot>
-        <SignIn />
-      </ApplicationRoot>
-    );
-
-    await userEvent.type(await screen.findByLabelText("Username"), "user");
-    await userEvent.type(await screen.findByLabelText("Password"), "password");
-
-    await userEvent.click(screen.getByRole("button", { name: "Sign In" }));
-
-    expect(localStorage.getItem(JWT_TOKEN_STORAGE_KEY)).toBe(
-      "some valid jwt token"
-    );
-    await waitFor(() => {
-      expect(replaceMock).toHaveBeenCalledWith("/");
-    });
-  });
+  const replaceMock = jest.fn();
+  useRouter.mockImplementation(() => ({
+    replace: replaceMock,
+    query: {},
+    isReady: true,
+  }));
 
   describe("Demo Credentials", () => {
     const OLD_ENV = process.env;
@@ -138,9 +66,78 @@ describe("pages/auth", () => {
         </ApplicationRoot>
       );
 
-      expect(screen.getByLabelText("Demo App Credentials")).toHaveTextContent(
-        "Username is rootPassword is password"
-      );
+      expect(
+        await screen.findByLabelText("Demo App Credentials")
+      ).toHaveTextContent("Username is rootPassword is password");
+    });
+  });
+
+  it("should redirect to dashboard when user is authenticated", async () => {
+    localStorage.setItem(AuthActions.JWT_TOKEN_STORAGE_KEY, "foo");
+
+    render(
+      <ApplicationRoot>
+        <SignIn />
+      </ApplicationRoot>
+    );
+
+    await waitFor(() => {
+      expect(window.location.replace).toHaveBeenCalledWith("/");
+    });
+  });
+
+  // Need to be able to tell jest to ignore 401 errors as the test crashes after hitting it
+  it.skip("should prompt invalid login when invalid credentials are put in", async () => {
+    const pushMock = jest.fn();
+    useRouter.mockImplementation(() => ({
+      push: pushMock,
+      query: {},
+      isReady: true,
+    }));
+
+    render(
+      <ApplicationRoot>
+        <SignIn />
+      </ApplicationRoot>
+    );
+
+    await userEvent.type(
+      await screen.findByLabelText("Username"),
+      "Invalid Username"
+    );
+    await userEvent.type(
+      await screen.findByLabelText("Password"),
+      "Invalid Password"
+    );
+
+    await userEvent.click(screen.getByRole("button", { name: "Sign In" }));
+
+    expect(await screen.findByRole("status")).toHaveTextContent(
+      "Invalid Login"
+    );
+
+    expect(localStorage.getItem(AuthActions.JWT_TOKEN_STORAGE_KEY)).toBeNull();
+
+    expect(pushMock).not.toHaveBeenCalled();
+  });
+
+  it("should redirect to dashboard when user is succesfully authenticated", async () => {
+    render(
+      <ApplicationRoot>
+        <SignIn />
+      </ApplicationRoot>
+    );
+
+    await userEvent.type(await screen.findByLabelText("Username"), "user");
+    await userEvent.type(await screen.findByLabelText("Password"), "password");
+
+    await userEvent.click(screen.getByRole("button", { name: "Sign In" }));
+
+    expect(localStorage.getItem(AuthActions.JWT_TOKEN_STORAGE_KEY)).toBe(
+      "some valid jwt token"
+    );
+    await waitFor(() => {
+      expect(window.location.replace).toHaveBeenCalledWith("/");
     });
   });
 });

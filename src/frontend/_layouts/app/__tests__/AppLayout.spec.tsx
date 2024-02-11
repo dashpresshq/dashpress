@@ -2,11 +2,19 @@ import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 import { render, screen, waitFor } from "@testing-library/react";
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 
-import { JWT_TOKEN_STORAGE_KEY } from "frontend/hooks/auth/auth.store";
+import { AuthActions } from "frontend/hooks/auth/auth.actions";
 import userEvent from "@testing-library/user-event";
 import { AppLayout } from "..";
 
 setupApiHandlers();
+
+Object.defineProperty(window, "location", {
+  value: {
+    ...window.location,
+    replace: jest.fn(),
+  },
+  writable: true,
+});
 
 describe("AppLayout", () => {
   const replaceMock = jest.fn();
@@ -141,7 +149,7 @@ describe("AppLayout", () => {
 
   describe("Not Signed In", () => {
     it("should redirect to sign in when not authenticated", async () => {
-      localStorage.removeItem(JWT_TOKEN_STORAGE_KEY);
+      localStorage.removeItem(AuthActions.JWT_TOKEN_STORAGE_KEY);
 
       render(
         <ApplicationRoot>
@@ -150,7 +158,7 @@ describe("AppLayout", () => {
       );
 
       await waitFor(() => {
-        expect(replaceMock).toHaveBeenCalledWith("/auth");
+        expect(window.location.replace).toHaveBeenCalledWith("/auth");
       });
     });
   });

@@ -1,4 +1,6 @@
+import { AuthActions } from "frontend/hooks/auth/auth.actions";
 import { rest } from "msw";
+import { REQUEST_ERROR_CODES } from "shared/constants/auth";
 import { IAuthenticatedUserBag } from "shared/types/user";
 import { BASE_TEST_URL } from "./_utils";
 
@@ -39,7 +41,14 @@ export const accountApiHandlers = [
   }),
 
   rest.get(BASE_TEST_URL("/api/account/mine"), async (_, res, ctx) => {
-    return res(ctx.json(ME));
+    if (localStorage.getItem(AuthActions.JWT_TOKEN_STORAGE_KEY)) {
+      return res(ctx.json(ME));
+    }
+
+    return res(
+      ctx.status(401),
+      ctx.json({ errorCode: REQUEST_ERROR_CODES.NOT_AUTHENTICATED })
+    );
   }),
 
   rest.patch(BASE_TEST_URL("/api/account/mine"), async (req, res, ctx) => {

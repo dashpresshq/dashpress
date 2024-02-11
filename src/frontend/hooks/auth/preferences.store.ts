@@ -9,7 +9,6 @@ import {
   UserPreferencesValueType,
 } from "shared/user-preferences/constants";
 import { MAKE_CRUD_CONFIG } from "frontend/lib/crud-config";
-import { useIsAuthenticatedStore } from "./useAuthenticateUser";
 
 const userPrefrencesApiPath = (key: UserPreferencesKeys) => {
   return `/api/user-preferences/${key}`;
@@ -24,14 +23,9 @@ export const MAKE_USER_PREFERENCE_CRUD_CONFIG = (key: UserPreferencesKeys) => {
 };
 
 export function useUserPreference<T extends UserPreferencesKeys>(key: T) {
-  const isAuthenticated = useIsAuthenticatedStore(
-    (store) => store.isAuthenticated
-  );
-
   return useStorageApi<UserPreferencesValueType<T>>(
     userPrefrencesApiPath(key),
     {
-      enabled: isAuthenticated === true,
       returnUndefinedOnError: true,
       errorMessage: MAKE_USER_PREFERENCE_CRUD_CONFIG(key).TEXT_LANG.NOT_FOUND,
       defaultData: USER_PREFERENCES_CONFIG[key].defaultValue,

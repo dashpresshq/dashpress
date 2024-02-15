@@ -28,8 +28,8 @@ type IUsersLinkToDatabaseForm = {
 };
 
 const CRUD_CONFIG = MAKE_CRUD_CONFIG({
-  plural: "Users Link to Database",
-  singular: "Users Link to Database",
+  plural: "Users Link To Database",
+  singular: "Users Link To Database",
   path: "N/A",
 });
 

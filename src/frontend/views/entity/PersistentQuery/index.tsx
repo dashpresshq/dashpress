@@ -58,7 +58,7 @@ export function EntityPersistentQuerySettings() {
           error={error}
           loader={
             <FormSkeleton
-              schema={[FormSkeletonSchema.Input, FormSkeletonSchema.Textarea]}
+              schema={[FormSkeletonSchema.Input, FormSkeletonSchema.Input]}
             />
           }
         >

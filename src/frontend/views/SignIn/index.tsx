@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useMutation } from "react-query";
 import { AuthLayout } from "frontend/_layouts/guest";
 import { ISuccessfullAuthenticationResponse } from "shared/types/auth/portal";
@@ -14,7 +14,7 @@ import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
 import { ComponentIsLoading } from "frontend/design-system/components/ComponentIsLoading";
 import { Typo } from "frontend/design-system/primitives/Typo";
 import { SchemaForm } from "frontend/components/SchemaForm";
-import { AuthActions } from "frontend/hooks/auth/auth.actions";
+import { useGuestCheck } from "frontend/hooks/auth/useGuestCheck";
 import { useHandleNoTokenAuthResponse } from "./portal";
 
 function useSignInMutation() {
@@ -39,17 +39,9 @@ function useSignInMutation() {
 }
 
 export function SignIn() {
-  const [render, setRender] = React.useState(false);
+  const render = useGuestCheck();
   const signInMutation = useSignInMutation();
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      if (AuthActions.isAuthenticated()) {
-        AuthActions.signIn();
-      } else {
-        setRender(true);
-      }
-    }
-  }, [typeof window]);
+
   const setupCheck = useSetupCheck([
     {
       key: "hasDbCredentials",

@@ -78,6 +78,10 @@ const CONFIG_VALUES = {
     createdAt: `created_at`,
     updatedAt: `updated_at`,
   },
+  users_to_database_link: {
+    table: "",
+    field: "",
+  },
   disabled_entities: ["disabled-entity-1", "disabled-entity-2"],
   menu_entities_order: [],
   disabled_menu_entities: ["entity-3"],
@@ -122,6 +126,10 @@ const DEFAULT_ENTITY_CONFIG_VALUES: Record<
   entity_relations_order: () => [],
 
   hidden_entity_relations: () => ["hidden-related-entity-5"],
+  persistent_query: () => ({
+    children: [],
+    operator: "and",
+  }),
   entity_columns_labels: () => ({}),
   entity_presentation_script: () => "",
   entity_relation_template: (entity) => ({

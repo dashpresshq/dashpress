@@ -136,18 +136,4 @@ describe("pages/admin/[entity]/config/presentation", () => {
       expect(screen.getByLabelText("Script")).toHaveValue("");
     });
   });
-
-  //   it("should show the documentation panel", async () => {
-  //     render(
-  //       <ApplicationRoot>
-  //         <EntityPresentationScriptSettings />
-  //       </ApplicationRoot>
-  //     );
-
-  //     await userEvent.click(
-  //       screen.getByRole("button", { name: "Explain Presentation Script" })
-  //     );
-
-  //     expect(screen.getByRole("dialog", { name: "Documentation" })).toBeVisible();
-  //   });
 });

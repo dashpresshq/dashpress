@@ -1,6 +1,6 @@
 <h1 align="center">
   <a href="https://github.com/dashpresshq/dashpress">
-    <img src="https://dashpress.io/assets/logos/full-logo-white.png" alt="Logo" height="100">
+    <img src="https://dashpress.io/assets/banner/1.png" alt="Logo" >
   </a>
 </h1>
 
@@ -181,12 +181,6 @@ First off, thanks for taking the time to contribute! Contributions are what make
 
 
 Please read [our contribution guidelines](docs/CONTRIBUTING.md), and thank you for being involved!
-
-## Authors & contributors
-
-The original setup of this repository is by [Ayobami Akingbade](https://github.com/thrownullexception).
-
-For a full list of all authors and contributors, see [the contributors page](https://github.com/dashpresshq/dashpress/contributors).
 
 ## Security
 

@@ -1,5 +1,4 @@
-import React, { useState, ReactNode } from "react";
-import { ISelectData } from "shared/types/options";
+import React, { ReactNode } from "react";
 import { Stack } from "frontend/design-system/primitives/Stack";
 import { Typo } from "frontend/design-system/primitives/Typo";
 import { Spacer } from "frontend/design-system/primitives/Spacer";
@@ -8,7 +7,6 @@ import { SoftButton } from "../../Button/SoftButton";
 import { Card, CardBody, CardHeader } from "../../Card";
 import { Tooltip } from "../../Tooltip";
 import { BaseSkeleton } from "../../Skeleton/Base";
-import { SimpleSelect } from "../../Form/FormSelect/Simple";
 import { ActionButtons } from "../../Button/ActionButtons";
 import { IGroupActionButton } from "../../Button/types";
 
@@ -17,7 +15,6 @@ export interface IProps {
   children: ReactNode;
   description?: string;
   actionButtons?: IGroupActionButton[];
-  selection?: { options: ISelectData[]; onChange: (value: string) => void };
   backLink?: { label?: string; action: string | (() => void) };
   isLoading?: boolean;
   headLess?: boolean;
@@ -29,12 +26,9 @@ export function SectionBox({
   isLoading,
   description,
   actionButtons,
-  selection,
   backLink,
   headLess,
 }: IProps) {
-  const [selectionValue, setSelectionValue] = useState("");
-
   return (
     <>
       {backLink && (
@@ -65,21 +59,8 @@ export function SectionBox({
                 ) : null}
               </Stack>
               {!isLoading &&
-                (actionButtons || selection ? (
-                  <Stack align="center" width="auto">
-                    {selection ? (
-                      <SimpleSelect
-                        options={selection.options}
-                        onChange={(newSelectionValue: string) => {
-                          setSelectionValue(newSelectionValue);
-                          selection.onChange(newSelectionValue);
-                        }}
-                        width={50}
-                        value={selectionValue}
-                      />
-                    ) : null}
-                    <ActionButtons actionButtons={actionButtons} />
-                  </Stack>
+                (actionButtons ? (
+                  <ActionButtons actionButtons={actionButtons} />
                 ) : null)}
             </Stack>
           </CardHeader>

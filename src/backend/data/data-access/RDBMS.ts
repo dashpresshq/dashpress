@@ -16,6 +16,16 @@ import { DATABASE_CREDENTIAL_GROUP } from "../fields";
 import { IPaginationFilters } from "../types";
 import { QueryOperationImplementation, QueryOperators } from "./types";
 
+const makeArray = (value: unknown): string[] => {
+  if (Array.isArray(value)) {
+    return value;
+  }
+  if (typeof value === "string") {
+    return value.split(",");
+  }
+  return [];
+};
+
 export class RDBMSDataApiService extends BaseDataAccessService<Knex.QueryBuilder> {
   queryOperationImplementation: QueryOperationImplementation<Knex.QueryBuilder> =
     {
@@ -32,9 +42,9 @@ export class RDBMSDataApiService extends BaseDataAccessService<Knex.QueryBuilder
         [QueryOperators.CONTAINS]: (query, column, value) =>
           query.whereILike(column, `%${value}%`),
         [QueryOperators.IN]: (query, column, value) =>
-          query.whereIn(column, value as string[]), // TODO csv
+          query.whereIn(column, makeArray(value)),
         [QueryOperators.NOT_IN]: (query, column, value) =>
-          query.whereNotIn(column, value as string[]),
+          query.whereNotIn(column, makeArray(value)),
         [QueryOperators.NOT_EQUAL]: (query, column, value) =>
           query.whereNot(column, "=", value),
         [QueryOperators.BETWEEN]: (query, column, value) =>
@@ -53,9 +63,9 @@ export class RDBMSDataApiService extends BaseDataAccessService<Knex.QueryBuilder
         [QueryOperators.CONTAINS]: (query, column, value) =>
           query.orWhereILike(column, `%${value}%`),
         [QueryOperators.IN]: (query, column, value) =>
-          query.orWhereIn(column, value as string[]),
+          query.orWhereIn(column, makeArray(value)),
         [QueryOperators.NOT_IN]: (query, column, value) =>
-          query.orWhereNotIn(column, value as string[]),
+          query.orWhereNotIn(column, makeArray(value)),
         [QueryOperators.NOT_EQUAL]: (query, column, value) =>
           query.orWhereNot(column, "=", value),
         [QueryOperators.BETWEEN]: (query, column, value) =>

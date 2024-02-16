@@ -6,6 +6,7 @@ import userEvent from "@testing-library/user-event";
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 
 import EntityFormExtensionSettings from "pages/admin/[entity]/config/form";
+import { closeAllToasts } from "__tests__/_/utils/closeAllToasts";
 
 setupApiHandlers();
 
@@ -73,6 +74,8 @@ describe("pages/admin/[entity]/config/form", () => {
       expect(await screen.findByRole("status")).toHaveTextContent(
         "Form Scripts Saved Successfully"
       );
+
+      await closeAllToasts();
     });
 
     it("should display updated value", async () => {
@@ -108,16 +111,14 @@ describe("pages/admin/[entity]/config/form", () => {
       );
 
       await userEvent.click(
-        screen.getByRole("button", { name: "Close Toast" })
-      );
-
-      await userEvent.click(
         within(currentTab).getByRole("button", { name: "Save Form Scripts" })
       );
 
       expect(await screen.findByRole("status")).toHaveTextContent(
         "Expression: •JS-Error: SyntaxError: Unexpected identifier"
       );
+
+      await closeAllToasts();
     });
 
     it("should display previous section value", async () => {
@@ -148,10 +149,6 @@ describe("pages/admin/[entity]/config/form", () => {
       const currentTab = screen.getByRole("tabpanel");
 
       await userEvent.clear(within(currentTab).getByLabelText("Script"));
-
-      await userEvent.click(
-        screen.getByRole("button", { name: "Close Toast" })
-      );
 
       await userEvent.click(
         within(currentTab).getByRole("button", { name: "Save Form Scripts" })

@@ -5,6 +5,7 @@ import userEvent from "@testing-library/user-event";
 import AccountPassword from "pages/account/password";
 
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
+import { closeAllToasts } from "__tests__/_/utils/closeAllToasts";
 
 setupApiHandlers();
 
@@ -45,6 +46,8 @@ describe("pages/account/password", () => {
     expect(await screen.findByRole("status")).toHaveTextContent(
       "Password Updated Successfully"
     );
+
+    await closeAllToasts();
   });
 
   it("should show different error message on demo", async () => {
@@ -55,8 +58,6 @@ describe("pages/account/password", () => {
         <AccountPassword />
       </ApplicationRoot>
     );
-
-    await userEvent.click(screen.getByRole("button", { name: "Close Toast" }));
 
     await userEvent.type(
       await screen.findByLabelText("Old Password"),

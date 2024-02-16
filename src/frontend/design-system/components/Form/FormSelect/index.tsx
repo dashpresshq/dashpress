@@ -69,33 +69,35 @@ export const FormSelect: React.FC<IFormSelect> = (props) => {
     ...selectData,
   ] as ISelectData[];
   return wrapLabelAndError(
-    <SelectStyled
-      {...input}
-      {...generateFormArias(meta)}
-      classNamePrefix={SharedSelectProps.classNamePrefix}
-      value={
-        selectDataWithDefault.find(({ value }) => value === input.value) || {
-          value: "",
-          label: "",
+    <div data-testid={`react-select__${input.name}`}>
+      <SelectStyled
+        {...input}
+        {...generateFormArias(meta)}
+        classNamePrefix={SharedSelectProps.classNamePrefix}
+        value={
+          selectDataWithDefault.find(({ value }) => value === input.value) || {
+            value: "",
+            label: "",
+          }
         }
-      }
-      placeholder={placeholder}
-      inputId={input.name}
-      onChange={({ value }: any) => {
-        input.onChange(nullable && !value ? null : value);
-      }}
-      className={generateClassNames(meta)}
-      isDisabled={disabled}
-      options={selectDataWithDefault}
-      isOptionDisabled={(option: unknown) => {
-        if (!disabledOptions) {
-          return false;
-        }
-        return disabledOptions.includes(
-          (option as ISelectData).value as string
-        );
-      }}
-    />,
+        placeholder={placeholder}
+        inputId={input.name}
+        onChange={({ value }: any) => {
+          input.onChange(nullable && !value ? null : value);
+        }}
+        className={generateClassNames(meta)}
+        isDisabled={disabled}
+        options={selectDataWithDefault}
+        isOptionDisabled={(option: unknown) => {
+          if (!disabledOptions) {
+            return false;
+          }
+          return disabledOptions.includes(
+            (option as ISelectData).value as string
+          );
+        }}
+      />
+    </div>,
     props
   );
 };

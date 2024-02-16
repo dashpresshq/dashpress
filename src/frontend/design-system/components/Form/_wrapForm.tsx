@@ -5,7 +5,7 @@ import { Stack } from "frontend/design-system/primitives/Stack";
 import { SystemIcon } from "frontend/design-system/Icons/System";
 import { ISharedFormInput } from "./_types";
 import { Tooltip } from "../Tooltip";
-import { FormGroup, FormLabel, FormFeedback, RequiredAsterick } from "./Styles";
+import { FormLabel, FormFeedback, RequiredAsterick } from "./Styles";
 import { SoftButton } from "../Button/SoftButton";
 
 export const isFormMetaWithError = (meta: FieldMetaState<any>) =>
@@ -26,24 +26,24 @@ export const wrapLabelAndError = (
     rightActions = [],
   }: ISharedFormInput
 ) => (
-  <FormGroup>
-    <>
-      <Stack justify="space-between" align="baseline">
-        <div>
-          {label && (
-            <>
-              <FormLabel sm={sm} htmlFor={input.name}>
-                {label}
-              </FormLabel>
-              {required ? <RequiredAsterick> *</RequiredAsterick> : null}
-            </>
-          )}
-          {description ? (
-            <Tooltip text={description} place="right">
-              <SystemIcon icon="Help" size={15} />
-            </Tooltip>
-          ) : null}
-        </div>
+  <>
+    <Stack justify="space-between" align="baseline">
+      <div>
+        {label && (
+          <>
+            <FormLabel sm={sm} htmlFor={input.name}>
+              {label}
+            </FormLabel>
+            {required ? <RequiredAsterick> *</RequiredAsterick> : null}
+          </>
+        )}
+        {description ? (
+          <Tooltip text={description} place="right">
+            <SystemIcon icon="Help" size={15} />
+          </Tooltip>
+        ) : null}
+      </div>
+      {rightActions.length > 0 && (
         <Stack flex={1} justify="end">
           {rightActions.map((rightAction) => (
             <SoftButton
@@ -55,17 +55,17 @@ export const wrapLabelAndError = (
             />
           ))}
         </Stack>
-      </Stack>
-      {formComponent}
-      <FormFeedback
-        role={isFormMetaWithError(meta) ? "alert" : undefined}
-        sm={sm}
-      >
-        {isFormMetaWithError(meta)}
-        &nbsp;
-      </FormFeedback>
-    </>
-  </FormGroup>
+      )}
+    </Stack>
+    {formComponent}
+    <FormFeedback
+      role={isFormMetaWithError(meta) ? "alert" : undefined}
+      sm={sm}
+    >
+      {isFormMetaWithError(meta)}
+      &nbsp;
+    </FormFeedback>
+  </>
 );
 
 export const generateClassNames = (meta: FieldMetaState<any>): string =>

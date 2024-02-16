@@ -4,7 +4,7 @@ import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
 import { Typo } from "frontend/design-system/primitives/Typo";
 import { Stack } from "frontend/design-system/primitives/Stack";
 import { ISharedFormInput } from "../_types";
-import { FormFeedback, FormGroup } from "../Styles";
+import { FormFeedback } from "../Styles";
 import { isFormMetaWithError } from "../_wrapForm";
 
 const CheckBoxInput = styled.input`
@@ -35,7 +35,7 @@ export function FormCheckBox({
   disabled,
 }: ISharedFormInput) {
   return (
-    <FormGroup>
+    <>
       <Stack>
         <CheckBoxInput
           {...input}
@@ -51,6 +51,6 @@ export function FormCheckBox({
         {isFormMetaWithError(meta)}
         &nbsp;
       </FormFeedback>
-    </FormGroup>
+    </>
   );
 }

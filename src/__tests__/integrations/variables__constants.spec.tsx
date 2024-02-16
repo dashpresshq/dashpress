@@ -6,6 +6,7 @@ import ManageVariables from "pages/integrations/variables";
 
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 import userEvent from "@testing-library/user-event";
+import { closeAllToasts } from "__tests__/_/utils/closeAllToasts";
 
 setupApiHandlers();
 
@@ -133,6 +134,8 @@ describe("pages/integrations/variables => constants", () => {
       expect(await screen.findByRole("status")).toHaveTextContent(
         "Constant Saved Successfully"
       );
+
+      await closeAllToasts();
     });
 
     it("should show updated constant", async () => {
@@ -165,10 +168,6 @@ describe("pages/integrations/variables => constants", () => {
       const tableRows = await within(table).findAllByRole("row");
 
       expect(tableRows).toHaveLength(5);
-
-      await userEvent.click(
-        screen.getByRole("button", { name: "Close Toast" })
-      );
 
       await userEvent.click(
         within(tableRows[2]).getByRole("button", {

@@ -54,9 +54,9 @@ describe("pages/users/database-link", () => {
       </ApplicationRoot>
     );
 
-    expect(
-      container.querySelector(`input[name="children[0].children[0].id"]`)
-    ).toHaveValue("entity-2");
+    expect(container.querySelector(`input[name="table"]`)).toHaveValue(
+      "entity-2"
+    );
 
     expect(container.querySelector(`input[name="field"]`)).toHaveValue(
       "entity-2-string-field"

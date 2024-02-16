@@ -120,6 +120,10 @@ export function FormActions({ entity }: { entity: string }) {
     },
   ];
 
+  const createNew = () => {
+    setCurrentFormActionId(NEW_ACTION_ITEM);
+  };
+
   return (
     <>
       <ViewStateMachine
@@ -129,7 +133,7 @@ export function FormActions({ entity }: { entity: string }) {
       >
         <Stack justify="end">
           <SoftButton
-            action={() => setCurrentFormActionId(NEW_ACTION_ITEM)}
+            action={createNew}
             systemIcon="Plus"
             label={FORM_ACTION_CRUD_CONFIG.TEXT_LANG.CREATE}
           />
@@ -143,7 +147,7 @@ export function FormActions({ entity }: { entity: string }) {
             text: FORM_ACTION_CRUD_CONFIG.TEXT_LANG.EMPTY_LIST,
             createNew: {
               label: FORM_ACTION_CRUD_CONFIG.TEXT_LANG.CREATE,
-              action: () => setCurrentFormActionId(NEW_ACTION_ITEM),
+              action: createNew,
             },
           }}
         />

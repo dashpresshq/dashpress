@@ -6,7 +6,7 @@ import Dashboard from "pages";
 
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 import userEvent from "@testing-library/user-event";
-import { getTableRows } from "__tests__/_/utiis/getTableRows";
+import { getTableRows } from "__tests__/_/utils/getTableRows";
 
 setupApiHandlers();
 

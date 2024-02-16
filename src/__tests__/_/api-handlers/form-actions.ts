@@ -43,10 +43,10 @@ export const formActionsApiHandlers = [
   }),
   rest.post(BASE_TEST_URL("/api/form-actions"), async (req, res, ctx) => {
     const newFormAction = await req.json();
-    FORM_ACTIONS.push(newFormAction);
+    FORM_ACTIONS.push({ id: "id", ...newFormAction });
     if (
       JSON.stringify(newFormAction) ===
-      '{"configuration":{"channel":"{ CONSTANTS.SLACK_CHANNEL }}","message":"Hello how are youHello how are you","shouldNotify":true},"entity":"test-entity","trigger":"create","integration":"slack","action":"SEND_MESSAGE"}'
+      '{"configuration":{"channel":"{ CONSTANTS.SLACK_CHANNEL }}","message":"Hello how are you","shouldNotify":true},"entity":"test-entity","trigger":"create","integration":"slack","action":"SEND_MESSAGE"}'
     ) {
       return res(ctx.status(204));
     }

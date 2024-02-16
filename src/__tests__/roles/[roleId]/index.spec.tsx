@@ -6,23 +6,9 @@ import userEvent from "@testing-library/user-event";
 import RolePermissions from "pages/roles/[roleId]/index";
 
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
+import { closeAllToasts } from "__tests__/_/utils/closeAllToasts";
 
 setupApiHandlers();
-
-const closeAllToasts = async () => {
-  const toast = screen.getByRole("button", {
-    name: "Close Toast",
-  });
-
-  await userEvent.click(toast);
-
-  await waitFor(
-    () => {
-      expect(toast).not.toBeInTheDocument();
-    },
-    { timeout: 20000 }
-  );
-};
 
 describe("pages/roles/[roleId]/index", () => {
   const useRouter = jest.spyOn(require("next/router"), "useRouter");

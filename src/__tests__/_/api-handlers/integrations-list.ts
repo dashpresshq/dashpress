@@ -73,12 +73,13 @@ export const integrationsListApiHandlers = [
   ),
   rest.get(
     BASE_TEST_URL("/api/integrations/actions/:integration/implementations"),
-    async (_, res, ctx) => {
+    async (req, res, ctx) => {
+      const requestedIntegration = req.params.integration as string;
       return res(
         ctx.json([
           {
             key: "SEND_MESSAGE",
-            label: "Send Message",
+            label: `Send Message - ${requestedIntegration}`,
             configurationSchema: {
               channel: {
                 type: "text",
@@ -104,7 +105,7 @@ export const integrationsListApiHandlers = [
           },
           {
             key: "SEND_MAIL",
-            label: "Send Mail",
+            label: `Send Mail - ${requestedIntegration}`,
             configurationSchema: {
               from: {
                 type: "text",

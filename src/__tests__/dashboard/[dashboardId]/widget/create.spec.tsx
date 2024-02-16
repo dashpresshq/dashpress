@@ -6,6 +6,7 @@ import CreateDashboardWidget from "pages/dashboard/[dashboardId]/widget/create";
 
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 import userEvent from "@testing-library/user-event";
+import { closeAllToasts } from "__tests__/_/utils/closeAllToasts";
 
 setupApiHandlers();
 
@@ -75,6 +76,8 @@ describe("pages/dashboard/[dashboardId]/widget/create", () => {
     expect(await screen.findByRole("status")).toHaveTextContent(
       "Dashboard Widget Created Successfully"
     );
+
+    await closeAllToasts();
   });
 
   it("should create table widget", async () => {
@@ -110,8 +113,6 @@ describe("pages/dashboard/[dashboardId]/widget/create", () => {
 
     expect(screen.queryByLabelText("Color")).not.toBeInTheDocument();
     expect(screen.queryByLabelText("Icon")).not.toBeInTheDocument();
-
-    await userEvent.click(screen.getByRole("button", { name: "Close Toast" }));
 
     await userEvent.click(
       screen.getByRole("button", { name: "Create Dashboard Widget" })

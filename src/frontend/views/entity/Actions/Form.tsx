@@ -1,6 +1,6 @@
 /* eslint-disable no-param-reassign */
 import { SchemaForm } from "frontend/components/SchemaForm";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { IAppliedSchemaFormConfig } from "shared/form-schemas/types";
 import {
   ActionIntegrations,
@@ -45,7 +45,6 @@ export function ActionForm({
   const implementations = useIntegrationImplementationsList(integration);
 
   const currentActionTitle = integrationsListMap[integration]?.title;
-
   const selectedImplementation = Object.fromEntries(
     Object.entries(
       implementations.data.find(({ key }) => key === action)
@@ -55,6 +54,15 @@ export function ActionForm({
       { ...value, label: `${currentActionTitle}: ${userFriendlyCase(key)}` },
     ])
   );
+
+  useEffect(() => {
+    if (initialValues.integration) {
+      setIntegration(initialValues.integration || "");
+    }
+    if (initialValues.action) {
+      setAction(initialValues.action || "");
+    }
+  }, [initialValues]);
 
   const fields: IAppliedSchemaFormConfig<any> = {
     trigger: {

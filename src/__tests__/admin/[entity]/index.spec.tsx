@@ -4,7 +4,7 @@ import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 import EntityTable from "pages/admin/[entity]/index";
 
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
-import { getTableRows } from "__tests__/_/utiis/getTableRows";
+import { getTableRows } from "__tests__/_/utils/getTableRows";
 
 setupApiHandlers();
 

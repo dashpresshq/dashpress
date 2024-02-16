@@ -6,6 +6,7 @@ import UpdateDashboardWidget from "pages/dashboard/[dashboardId]/widget/[widgetI
 
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 import userEvent from "@testing-library/user-event";
+import { closeAllToasts } from "__tests__/_/utils/closeAllToasts";
 
 setupApiHandlers();
 
@@ -65,6 +66,8 @@ describe("pages/dashboard/[dashboardId]/widget/[widgetId]/index", () => {
     expect(await screen.findByRole("status")).toHaveTextContent(
       "Dashboard Widget Updated Successfully"
     );
+
+    await closeAllToasts();
   });
 
   it("should update table widget", async () => {
@@ -111,8 +114,6 @@ describe("pages/dashboard/[dashboardId]/widget/[widgetId]/index", () => {
     await userEvent.click(
       screen.getByRole("button", { name: "Update Dashboard Widget" })
     );
-
-    await userEvent.click(screen.getByRole("button", { name: "Close Toast" }));
 
     expect(await screen.findByRole("status")).toHaveTextContent(
       "Dashboard Widget Updated Successfully"

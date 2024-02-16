@@ -77,11 +77,6 @@ export const Input = styled.input<IInput>`
   ${InputStyles}
 `;
 
-export const FormGroup = styled.div`
-  margin-bottom: 0px;
-  margin-top: 0px;
-`;
-
 export const FormLabel = styled.label<{ sm?: true }>`
   padding-bottom: 1px;
   margin-bottom: 0;

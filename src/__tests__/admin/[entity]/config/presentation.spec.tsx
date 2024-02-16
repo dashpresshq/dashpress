@@ -6,6 +6,7 @@ import userEvent from "@testing-library/user-event";
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 
 import EntityPresentationScriptSettings from "pages/admin/[entity]/config/presentation";
+import { closeAllToasts } from "__tests__/_/utils/closeAllToasts";
 
 setupApiHandlers();
 
@@ -53,6 +54,8 @@ describe("pages/admin/[entity]/config/presentation", () => {
     expect(await screen.findByRole("status")).toHaveTextContent(
       "Presentation Scripts Saved Successfully"
     );
+
+    await closeAllToasts();
   });
 
   it("should display updated value", async () => {
@@ -76,8 +79,6 @@ describe("pages/admin/[entity]/config/presentation", () => {
       </ApplicationRoot>
     );
 
-    await userEvent.click(screen.getByRole("button", { name: "Close Toast" }));
-
     await userEvent.type(screen.getByLabelText("Script"), "invalid");
 
     await userEvent.click(
@@ -88,6 +89,8 @@ describe("pages/admin/[entity]/config/presentation", () => {
     expect(await screen.findByRole("status")).toHaveTextContent(
       "Expression: •JS-Error: SyntaxError: Unexpected identifier"
     );
+
+    await closeAllToasts();
   });
 
   it("should display previous section value", async () => {
@@ -110,8 +113,6 @@ describe("pages/admin/[entity]/config/presentation", () => {
         <EntityPresentationScriptSettings />
       </ApplicationRoot>
     );
-
-    await userEvent.click(screen.getByRole("button", { name: "Close Toast" }));
 
     await userEvent.clear(screen.getByLabelText("Script"));
 

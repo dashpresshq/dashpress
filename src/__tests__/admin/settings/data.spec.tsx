@@ -5,6 +5,7 @@ import userEvent from "@testing-library/user-event";
 import GeneralDataSettings from "pages/admin/settings/data";
 
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
+import { closeAllToasts } from "__tests__/_/utils/closeAllToasts";
 
 setupApiHandlers();
 
@@ -47,6 +48,8 @@ describe("pages/admin/settings/data", () => {
       expect(await screen.findByRole("status")).toHaveTextContent(
         "Metadata Columns Saved Successfully"
       );
+
+      await closeAllToasts();
     });
 
     it("should display updated date values", async () => {
@@ -88,10 +91,6 @@ describe("pages/admin/settings/data", () => {
       await userEvent.clear(screen.getByLabelText("Format"));
 
       await userEvent.type(screen.getByLabelText("Format"), "yyyy MMM do");
-
-      await userEvent.click(
-        screen.getByRole("button", { name: "Close Toast" })
-      );
 
       await userEvent.click(
         screen.getByRole("button", { name: "Save Date Format" })

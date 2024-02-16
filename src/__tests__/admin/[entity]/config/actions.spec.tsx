@@ -1,5 +1,3 @@
-/* eslint-disable testing-library/no-node-access */
-/* eslint-disable testing-library/no-container */
 import React from "react";
 import { render, screen, within } from "@testing-library/react";
 import { ApplicationRoot } from "frontend/components/ApplicationRoot";
@@ -7,7 +5,8 @@ import userEvent from "@testing-library/user-event";
 import EntityFormActionsSettings from "pages/admin/[entity]/config/actions";
 
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
-import { getTableRows } from "__tests__/_/utiis/getTableRows";
+import { getTableRows } from "__tests__/_/utils/getTableRows";
+import { closeAllToasts } from "__tests__/_/utils/closeAllToasts";
 
 setupApiHandlers();
 
@@ -23,7 +22,7 @@ describe("pages/admin/[entity]/config/actions", () => {
     }));
   });
 
-  it.skip("should list entity form actions", async () => {
+  it("should list entity form actions", async () => {
     render(
       <ApplicationRoot>
         <EntityFormActionsSettings />x
@@ -89,11 +88,6 @@ describe("pages/admin/[entity]/config/actions", () => {
       "Hello how are you"
     );
 
-    await userEvent.type(
-      within(dialog).getByLabelText("Slack: Message"),
-      "Hello how are you"
-    );
-
     await userEvent.click(screen.getByLabelText("Slack: Should Notify"));
 
     await userEvent.click(
@@ -124,6 +118,152 @@ describe("pages/admin/[entity]/config/actions", () => {
         "SlackCreateSend Message",
       ]
     `);
+
+    await closeAllToasts();
+  });
+
+  it("should show the correct form values", async () => {
+    render(
+      <ApplicationRoot>
+        <EntityFormActionsSettings />
+      </ApplicationRoot>
+    );
+
+    expect(await screen.findByRole("table")).toBeInTheDocument();
+
+    const tableRows = await screen.findAllByRole("row");
+
+    await userEvent.click(
+      within(tableRows[4]).getByRole("button", {
+        name: "Edit Form Action",
+      })
+    );
+
+    const dialog = screen.getByRole("dialog");
+    //
+    expect(
+      within(dialog).getByTestId("react-select__trigger")
+    ).toHaveTextContent("On Create");
+
+    expect(
+      within(dialog).getByRole("option", { selected: true })
+    ).toHaveTextContent("Slack");
+
+    expect(
+      within(dialog).getByTestId("react-select__action")
+    ).toHaveTextContent("Send Message - slack");
+
+    expect(await within(dialog).findByLabelText("Slack: Channel")).toHaveValue(
+      "{ CONSTANTS.SLACK_CHANNEL }}"
+    );
+    expect(within(dialog).getByLabelText("Slack: Message")).toHaveValue(
+      "Hello how are you"
+    );
+    expect(within(dialog).getByLabelText("Slack: Should Notify")).toBeChecked();
+  });
+
+  it("should update the actions form", async () => {
+    render(
+      <ApplicationRoot>
+        <EntityFormActionsSettings />
+      </ApplicationRoot>
+    );
+
+    expect(await screen.findByRole("table")).toBeInTheDocument();
+
+    const tableRows = await screen.findAllByRole("row");
+
+    await userEvent.click(
+      within(tableRows[4]).getByRole("button", {
+        name: "Edit Form Action",
+      })
+    );
+
+    const dialog = screen.getByRole("dialog");
+
+    await userEvent.type(within(dialog).getByLabelText("Trigger"), "On Delete");
+    await userEvent.keyboard("{Enter}");
+
+    await userEvent.click(within(dialog).getByRole("option", { name: "SMTP" }));
+
+    await userEvent.type(within(dialog).getByLabelText("Action"), "Send Mail");
+    await userEvent.keyboard("{Enter}");
+
+    await userEvent.type(
+      await within(dialog).findByLabelText("SMTP: From"),
+      "{{ CONSTANTS.MAIL_FROM }}"
+    );
+
+    await userEvent.type(
+      within(dialog).getByLabelText("SMTP: To"),
+      "to@gmail.com"
+    );
+
+    await userEvent.click(
+      within(dialog).getByRole("button", { name: "Update Form Action" })
+    );
+
+    expect(await screen.findByRole("status")).toHaveTextContent(
+      "Form Action Updated Successfully"
+    );
+
+    await closeAllToasts();
+
+    expect(await getTableRows(screen.getByRole("table")))
+      .toMatchInlineSnapshot(`
+      [
+        "Integration
+                      
+                    Trigger
+                      
+                    Action
+                      
+                    Action",
+        "HttpCreatePost",
+        "SmtpUpdateSend Mail",
+        "SlackDeleteSend Message",
+        "SmtpDeleteSend Mail",
+      ]
+    `);
+  });
+
+  it("should show the correct form values", async () => {
+    render(
+      <ApplicationRoot>
+        <EntityFormActionsSettings />
+      </ApplicationRoot>
+    );
+
+    expect(await screen.findByRole("table")).toBeInTheDocument();
+
+    const tableRows = await screen.findAllByRole("row");
+
+    await userEvent.click(
+      within(tableRows[4]).getByRole("button", {
+        name: "Edit Form Action",
+      })
+    );
+
+    const dialog = screen.getByRole("dialog");
+    //
+    expect(
+      within(dialog).getByTestId("react-select__trigger")
+    ).toHaveTextContent("On Delete");
+
+    expect(
+      within(dialog).getByRole("option", { selected: true })
+    ).toHaveTextContent("SMTP");
+
+    expect(
+      within(dialog).getByTestId("react-select__action")
+    ).toHaveTextContent("Send Mail - smtp");
+
+    expect(await within(dialog).findByLabelText("SMTP: From")).toHaveValue(
+      "{ CONSTANTS.MAIL_FROM }}"
+    );
+    expect(within(dialog).getByLabelText("SMTP: To")).toHaveValue(
+      "to@gmail.com"
+    );
   });
 
   it("should delete form action successfully", async () => {
@@ -132,8 +272,6 @@ describe("pages/admin/[entity]/config/actions", () => {
         <EntityFormActionsSettings />
       </ApplicationRoot>
     );
-
-    await userEvent.click(screen.getByRole("button", { name: "Close Toast" }));
 
     expect(await screen.findByRole("table")).toBeInTheDocument();
 
@@ -161,63 +299,4 @@ describe("pages/admin/[entity]/config/actions", () => {
 
     expect(await screen.findAllByRole("row")).toHaveLength(4);
   });
-
-  it.skip("should show the correct value on the update form", async () => {
-    const { container } = render(
-      <ApplicationRoot>
-        <EntityFormActionsSettings />
-      </ApplicationRoot>
-    );
-
-    await userEvent.click(screen.getByRole("button", { name: "Close Toast" }));
-
-    expect(await screen.findByRole("table")).toBeInTheDocument();
-
-    const tableRows = await screen.findAllByRole("row");
-
-    await userEvent.click(
-      within(tableRows[1]).getByRole("button", {
-        name: "Edit Form Action",
-      })
-    );
-
-    //
-
-    const dialog = screen.getByRole("dialog");
-
-    expect(await within(dialog).findByLabelText("SMTP: From")).toHaveValue(
-      "from@gmail.com"
-    );
-    expect(within(dialog).getByLabelText("SMTP: To")).toHaveValue(
-      "to@gmail.com"
-    );
-
-    expect(container.querySelector(`input[name="trigger"]`)).toHaveValue(
-      "update"
-    );
-
-    expect(
-      within(dialog).getByRole("option", { selected: true })
-    ).toHaveTextContent("SMTP");
-
-    expect(
-      within(dialog).getByRole("option", { selected: true })
-    ).toHaveTextContent("Send Mail");
-  });
-
-  //   it("should display updated diction values", async () => {
-  //     render(
-  //       <ApplicationRoot>
-  //         <EntityDictionSettings />
-  //       </ApplicationRoot>
-  //     );
-  //     await waitFor(() => {
-  //       expect(screen.getByLabelText("Plural")).toHaveValue(
-  //         "Plural entity-1Updated"
-  //       );
-  //     });
-  //     expect(screen.getByLabelText("Singular")).toHaveValue(
-  //       "Singular entity-1Updated"
-  //     );
-  //   });
 });

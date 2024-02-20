@@ -32,7 +32,24 @@ export const integrationsListApiHandlers = [
             key: "non-activated-actions",
             title: "Non Activated Actions",
             description: "Some Non Activated Actions Description",
-            configurationSchema: {},
+            configurationSchema: {
+              username: {
+                type: "text",
+                validations: [
+                  {
+                    validationType: "required",
+                  },
+                ],
+              },
+              password: {
+                type: "text",
+                validations: [
+                  {
+                    validationType: "required",
+                  },
+                ],
+              },
+            },
           },
           {
             key: "smtp",

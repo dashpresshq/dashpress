@@ -2,6 +2,7 @@ import { IDropDownMenuItem } from "frontend/design-system/components/DropdownMen
 import { ITableColumn } from "frontend/design-system/components/Table/types";
 import { loadedDataState } from "frontend/lib/data/constants/loadedDataState";
 import { DataStateKeys } from "frontend/lib/data/types";
+import { ReactNode } from "react";
 import { noop } from "shared/lib/noop";
 import { ITableView } from "shared/types/data";
 
@@ -40,3 +41,21 @@ export const usePortalTableTabs = (
   noop(entity);
   return loadedDataState<ITableView[]>([]);
 };
+
+export function PortalColumnRender({
+  children,
+  column,
+  value,
+  entity,
+  entityId,
+}: {
+  children: ReactNode;
+  column: string;
+  value: unknown;
+  entity: string;
+  entityId: string;
+}) {
+  noop(column, value, entity, entityId);
+  // eslint-disable-next-line react/jsx-no-useless-fragment
+  return <>{children}</>;
+}

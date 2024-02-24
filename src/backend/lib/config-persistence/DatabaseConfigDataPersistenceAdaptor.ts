@@ -71,6 +71,7 @@ export class DatabaseConfigDataPersistenceAdaptor<
     const query = (await this.getDbInstance())
       .select(["value", "key"])
       .where("domain", "=", this._configDomain)
+      .orderBy("created_at", "desc")
       .from(CONFIG_TABLE_NAME);
 
     const items = await query;
@@ -157,11 +158,8 @@ export class DatabaseConfigDataPersistenceAdaptor<
   }
 
   async _removeItem(key: string): Promise<void> {
-    await (
-      await this.getDbInstance()
-    )(CONFIG_TABLE_NAME)
+    await (await this.getDbInstance())(CONFIG_TABLE_NAME)
       .where("domain", "=", this._configDomain)
-
       .where({ key })
       .del();
   }
@@ -174,6 +172,8 @@ export class DatabaseConfigDataPersistenceAdaptor<
         key: value[keyField],
         domain: this._configDomain,
         value: JSON.stringify(value),
+        created_at: new Date(),
+        updated_at: new Date(),
       }))
     );
   }

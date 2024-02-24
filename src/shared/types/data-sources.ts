@@ -42,15 +42,15 @@ export const DATA_SOURCES_CONFIG: Record<
     useConnectionString: true,
     getQueryData: (data) => data.rows,
   },
-  [RDMSSources.MsSql]: {
-    fields: DATABASE_FIELDS,
-    port: 1433,
-    useConnectionString: true,
-    getQueryData: (data) => data[0],
-  },
   [RDMSSources.MySql]: {
     fields: DATABASE_FIELDS,
     port: 3306,
+    useConnectionString: true,
+    getQueryData: (data) => data[0],
+  },
+  [RDMSSources.MsSql]: {
+    fields: DATABASE_FIELDS,
+    port: 1433,
     useConnectionString: true,
     getQueryData: (data) => data[0],
   },

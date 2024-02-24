@@ -3,7 +3,6 @@ import { flexRender, Table } from "@tanstack/react-table";
 import styled from "styled-components";
 import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
 import { useThemeColorShade } from "frontend/design-system/theme/useTheme";
-import { Typo } from "frontend/design-system/primitives/Typo";
 import { EmptyWrapper } from "../EmptyWrapper";
 import { IEmptyWrapperProps } from "../EmptyWrapper/types";
 
@@ -41,9 +40,7 @@ export function TableBody({ table, dataLength, empty, isLoading }: IProps) {
         <BodyTR key={row.id} $hoverColor={colorShade("base-color", 2)}>
           {row.getVisibleCells().map((cell) => (
             <Td key={cell.id}>
-              <Typo.SM as="span">
-                {flexRender(cell.column.columnDef.cell, cell.getContext())}
-              </Typo.SM>
+              {flexRender(cell.column.columnDef.cell, cell.getContext())}
             </Td>
           ))}
         </BodyTR>

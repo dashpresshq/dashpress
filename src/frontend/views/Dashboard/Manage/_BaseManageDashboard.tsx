@@ -18,6 +18,7 @@ import { DashboardWidget } from "../Widget";
 import { DASHBOARD_WIDGETS_CRUD_CONFIG } from "../constants";
 
 const Root = styled.div`
+  container-type: inline-size;
   .list {
     ${dashboardGridRoot};
   }

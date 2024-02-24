@@ -5,4 +5,5 @@ export {
   usePortalTableColumns,
   TableTopComponent,
   usePortalTableTabs,
+  PortalColumnRender,
 } from "./main";

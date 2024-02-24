@@ -14,6 +14,10 @@ const Root = styled.div`
   ${dashboardGridRoot};
 `;
 
+const Container = styled.div`
+  container-type: inline-size;
+`;
+
 interface IProps {
   dashboardId: string;
   manageLink: string;
@@ -45,11 +49,13 @@ export function BaseDashboard({ dashboardId, manageLink }: IProps) {
         error={widgets.error}
         loader={<DashboardSkeleton />}
       >
-        <Root>
-          {widgets.data.map((config) => (
-            <DashboardWidget config={config} key={config.id} />
-          ))}
-        </Root>
+        <Container>
+          <Root>
+            {widgets.data.map((config) => (
+              <DashboardWidget config={config} key={config.id} />
+            ))}
+          </Root>
+        </Container>
       </ViewStateMachine>
     </AppLayout>
   );

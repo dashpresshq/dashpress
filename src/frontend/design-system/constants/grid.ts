@@ -14,7 +14,7 @@ export const gridRoot = css`
   display: grid;
   column-gap: 16px;
   grid-template-columns: repeat(12, 1fr);
-  @media (max-width: ${BREAKPOINTS.lg}) {
+  @container (width < ${BREAKPOINTS.md}) {
     grid-template-columns: 1fr;
   }
 `;
@@ -24,7 +24,7 @@ export const gridItem = css<{
 }>`
   grid-column-start: span ${(props) => props.$span || "12"};
 
-  @media (max-width: ${BREAKPOINTS.lg}) {
+  @container (width < ${BREAKPOINTS.md}) {
     grid-column-start: span 1;
   }
 `;

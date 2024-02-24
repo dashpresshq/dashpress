@@ -30,36 +30,46 @@ export const buildAppliedSchemaFormConfig = (
     getEntityFieldLabels,
     entityValidationsMap,
   }: IEntitySchemaFormConfigProps,
-  allOptional?: boolean
+  {
+    allOptional,
+    fieldsToShow,
+  }: { allOptional?: boolean; fieldsToShow?: string[] } = {}
 ): IAppliedSchemaFormConfig<any> => {
   return Object.fromEntries(
-    fields.map((field) => {
-      const formConfig: ISchemaFormConfig<any> = {
-        selections: entityFieldSelections[field] || [],
-        apiSelections:
-          entityFieldTypes[field] === "reference"
-            ? {
-                listUrl: ENTITY_LIST_PATH(entityToOneReferenceFields[field]),
-                entity: entityToOneReferenceFields[field],
-                referenceUrl: (value: string) =>
-                  ENTITY_REFERENCE_PATH({
-                    entity: entityToOneReferenceFields[field],
-                    entityId: value,
-                  }),
+    fields
+      .filter((field) => {
+        if (!fieldsToShow) {
+          return true;
+        }
+        return fieldsToShow.includes(field);
+      })
+      .map((field) => {
+        const formConfig: ISchemaFormConfig<any> = {
+          selections: entityFieldSelections[field] || [],
+          apiSelections:
+            entityFieldTypes[field] === "reference"
+              ? {
+                  listUrl: ENTITY_LIST_PATH(entityToOneReferenceFields[field]),
+                  entity: entityToOneReferenceFields[field],
+                  referenceUrl: (value: string) =>
+                    ENTITY_REFERENCE_PATH({
+                      entity: entityToOneReferenceFields[field],
+                      entityId: value,
+                    }),
+                }
+              : undefined,
+          type: entityFieldTypes[field],
+          label: getEntityFieldLabels(field) || userFriendlyCase(field),
+          validations: (entityValidationsMap[field] || []).filter(
+            ({ validationType }) => {
+              if (allOptional) {
+                return validationType !== "required";
               }
-            : undefined,
-        type: entityFieldTypes[field],
-        label: getEntityFieldLabels(field) || userFriendlyCase(field),
-        validations: (entityValidationsMap[field] || []).filter(
-          ({ validationType }) => {
-            if (allOptional) {
-              return validationType !== "required";
+              return true;
             }
-            return true;
-          }
-        ),
-      };
-      return [field, formConfig];
-    })
+          ),
+        };
+        return [field, formConfig];
+      })
   );
 };

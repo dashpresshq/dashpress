@@ -22,7 +22,7 @@ import { ActionButtons } from "frontend/design-system/components/Button/ActionBu
 import { TableFilterType } from "shared/types/data";
 import { useEvaluateScriptContext } from "frontend/hooks/scripts";
 import { viewSpecialDataTypes } from "../viewSpecialDataTypes";
-import { usePortalTableColumns } from "./portal";
+import { PortalColumnRender, usePortalTableColumns } from "./portal";
 import { evalutePresentationScript } from "../evaluatePresentationScript";
 import { useEntityActionButtons } from "../hooks/useEntityActionButtons";
 import { usePortalActionButtons } from "../Details/portal";
@@ -188,16 +188,40 @@ export const useTableColumns = (
               defaultDateFormat: defaultDateFormat.data,
             },
           });
+
+          const columnRenderProps = {
+            column: name,
+            value: value$1,
+            entity,
+            entityId: row.original[idField.data] as string,
+          };
+
           if (specialDataTypeRender) {
-            return specialDataTypeRender;
+            return (
+              <PortalColumnRender {...columnRenderProps}>
+                {specialDataTypeRender}
+              </PortalColumnRender>
+            );
           }
           if (typeof value === "string") {
-            return <>{ellipsis(value as string, 50)}</>;
+            return (
+              <PortalColumnRender {...columnRenderProps}>
+                {ellipsis(value as string, 50)}
+              </PortalColumnRender>
+            );
           }
           if (typeof value === "object") {
-            return <>{JSON.stringify(value)}</>;
+            return (
+              <PortalColumnRender {...columnRenderProps}>
+                {JSON.stringify(value)}
+              </PortalColumnRender>
+            );
           }
-          return <span>{value as string}</span>;
+          return (
+            <PortalColumnRender {...columnRenderProps}>
+              {value as string}
+            </PortalColumnRender>
+          );
         },
       };
       return tableColumn;

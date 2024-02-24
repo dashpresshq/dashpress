@@ -15,7 +15,7 @@ const Root = styled.div`
 type Align = "right" | "left";
 
 const DropdownRoot = styled.div<{
-  zIndex: number;
+  $zIndex: number;
   align: Align;
   offset: number;
   $width: number;
@@ -27,7 +27,7 @@ const DropdownRoot = styled.div<{
       : "auto"};
   left: ${(props) => (props.align === "left" ? "0" : "auto")};
   top: calc(100% + 8px);
-  z-index: ${(props) => props.zIndex};
+  z-index: ${(props) => props.$zIndex};
   background: ${USE_ROOT_COLOR("base-color")};
   border-radius: 2px;
   border: 1px solid ${USE_ROOT_COLOR("border-color")};
@@ -87,7 +87,7 @@ export function Dropdown({
           offset={rootRef.current?.offsetLeft || 0}
           align={align}
           $width={width}
-          zIndex={rootZIndex}
+          $zIndex={rootZIndex}
           onClick={(e) => {
             if (!preserveVisibiltyOnClick) {
               close();

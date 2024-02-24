@@ -15,6 +15,8 @@ import { IFormExtension } from "./types";
 import { runFormBeforeSubmit, runFormFieldState } from "./form-run";
 import { FormGrid } from "./form-grid";
 
+const identity = (value: unknown) => value;
+
 interface IProps<T> {
   fields: IAppliedSchemaFormConfig<T>;
   onSubmit: (data: T) => Promise<void | T>;
@@ -98,7 +100,12 @@ export function SchemaForm<T extends Record<string, unknown>>({
                   return !bag?.formState?.(scriptProps).hidden;
                 })
                 .map(([field, bag]: [string, ISchemaFormConfig<T>]) => (
-                  <Field key={field} name={field} validateFields={[]}>
+                  <Field
+                    key={field}
+                    name={field}
+                    validateFields={[]}
+                    parse={identity}
+                  >
                     {(formProps) => (
                       <FormGrid.Item $span={bag.span}>
                         <RenderFormInput

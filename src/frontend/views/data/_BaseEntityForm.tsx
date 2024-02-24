@@ -30,6 +30,7 @@ type IProps = {
   resetForm?: true;
   buttonText: (submitting: boolean) => string;
   systemIcon: SystemIconsKeys;
+  fieldsToShow?: string[];
 };
 
 export function BaseEntityForm({
@@ -41,6 +42,7 @@ export function BaseEntityForm({
   resetForm,
   buttonText,
   onSubmit,
+  fieldsToShow,
 }: IProps) {
   const entityValidationsMap = useEntityFieldValidations(entity);
   const getEntityFieldLabels = useEntityFieldLabels(entity);
@@ -118,10 +120,10 @@ export function BaseEntityForm({
     fields,
   };
 
-  const formConfig = buildAppliedSchemaFormConfig(
-    formSchemaConfig,
-    allOptional
-  );
+  const formConfig = buildAppliedSchemaFormConfig(formSchemaConfig, {
+    allOptional,
+    fieldsToShow,
+  });
 
   return (
     <ViewStateMachine

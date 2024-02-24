@@ -48,7 +48,7 @@ const LeftSideNavMenuList = styled.li<{}>`
 `;
 
 const LeftSideNavMenuListAnchor = styled.a<{
-  hoverColor: string;
+  $hoverColor: string;
   $isActive: boolean;
   $depth: number;
 }>`
@@ -67,7 +67,7 @@ const LeftSideNavMenuListAnchor = styled.a<{
   padding-left: ${(props) => props.$depth * 16}px;
   &:hover {
     color: ${SYSTEM_COLORS.white};
-    background: ${(props) => props.hoverColor};
+    background: ${(props) => props.$hoverColor};
   }
 `;
 
@@ -178,7 +178,7 @@ export function RenderNavigation({
                   as={PlainButton}
                   $isActive={false}
                   $depth={depth}
-                  hoverColor={getBackgroundColor("primary-color", 45)}
+                  $hoverColor={getBackgroundColor("primary-color", 45)}
                   onClick={() => {
                     clearBreadCrumbStack();
                     setIsFullWidth(true);
@@ -188,9 +188,7 @@ export function RenderNavigation({
                   {menuIcon}
                   {isFullWidth && (
                     <Stack justify="space-between" spacing={0} align="center">
-                      <NavLabel ellipsis $isFullWidth={isFullWidth}>
-                        {title}
-                      </NavLabel>
+                      <NavLabel $isFullWidth={isFullWidth}>{title}</NavLabel>
                       <SubMenuArrow
                         $isFullWidth={isFullWidth}
                         size={16}
@@ -224,12 +222,10 @@ export function RenderNavigation({
                       ? "_blank"
                       : undefined
                   }
-                  hoverColor={getBackgroundColor("primary-color", 45)}
+                  $hoverColor={getBackgroundColor("primary-color", 45)}
                 >
                   {icon && menuIcon}
-                  <NavLabel ellipsis $isFullWidth={isFullWidth}>
-                    {title}
-                  </NavLabel>
+                  <NavLabel $isFullWidth={isFullWidth}>{title}</NavLabel>
                 </LeftSideNavMenuListAnchor>
               </Link>
             )}

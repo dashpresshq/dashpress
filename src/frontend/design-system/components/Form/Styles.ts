@@ -2,7 +2,7 @@ import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
 import { SYSTEM_COLORS } from "frontend/design-system/theme/system";
 import styled, { css } from "styled-components";
 
-interface IInput {
+export interface IInput {
   sm?: true;
 }
 

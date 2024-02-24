@@ -37,6 +37,7 @@ const weights: Record<TextProps["weight"], number> = {
   thick: 600,
 };
 
+// @ts-ignore
 const Text = styled.p.attrs((props: TextProps) => ({
   role: props.as || "p",
   id: props.id,

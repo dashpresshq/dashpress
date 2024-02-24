@@ -115,7 +115,7 @@ export function AsyncFormSelect(props: IProps) {
         loadOptions={(inputValue) =>
           new Promise((resolve) => {
             debouncedSearch(inputValue, url, disabledOptions, resolve);
-          })
+          }) as unknown as void
         }
       />,
       props
@@ -158,7 +158,7 @@ export function AsyncFormMultiSelect({
       loadOptions={(inputValue) =>
         new Promise((resolve) => {
           debouncedSearch(inputValue, url, [], resolve);
-        })
+        }) as unknown as void
       }
     />
   );

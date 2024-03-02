@@ -27,5 +27,6 @@ export interface IRenderFormInputProps {
   label: string;
   placeholder?: string;
   description?: string;
+  from?: string;
   rightActions?: IFormInputRightAction[];
 }

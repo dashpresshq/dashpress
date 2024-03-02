@@ -21,6 +21,7 @@ import { ITableColumn } from "frontend/design-system/components/Table/types";
 import { ActionButtons } from "frontend/design-system/components/Button/ActionButtons";
 import { TableFilterType } from "shared/types/data";
 import { useEvaluateScriptContext } from "frontend/hooks/scripts";
+import { ReactNode } from "react";
 import { viewSpecialDataTypes } from "../viewSpecialDataTypes";
 import { PortalColumnRender, usePortalTableColumns } from "./portal";
 import { evalutePresentationScript } from "../evaluatePresentationScript";
@@ -189,37 +190,30 @@ export const useTableColumns = (
             },
           });
 
-          const columnRenderProps = {
-            column: name,
-            value: value$1,
-            entity,
-            entityId: row.original[idField.data] as string,
-          };
+          let cellRender: string | ReactNode = value;
+
+          if (typeof value === "string") {
+            cellRender = ellipsis(value as string, 50);
+          }
+
+          if (typeof value === "object") {
+            cellRender = JSON.stringify(value);
+          }
 
           if (specialDataTypeRender) {
-            return (
-              <PortalColumnRender {...columnRenderProps}>
-                {specialDataTypeRender}
-              </PortalColumnRender>
-            );
+            cellRender = specialDataTypeRender;
           }
-          if (typeof value === "string") {
-            return (
-              <PortalColumnRender {...columnRenderProps}>
-                {ellipsis(value as string, 50)}
-              </PortalColumnRender>
-            );
-          }
-          if (typeof value === "object") {
-            return (
-              <PortalColumnRender {...columnRenderProps}>
-                {JSON.stringify(value)}
-              </PortalColumnRender>
-            );
-          }
+
           return (
-            <PortalColumnRender {...columnRenderProps}>
-              {value as string}
+            <PortalColumnRender
+              {...{
+                column: name,
+                value: value$1,
+                entity,
+                entityId: row.original[idField.data] as string,
+              }}
+            >
+              {cellRender}
             </PortalColumnRender>
           );
         },

@@ -31,6 +31,23 @@ type IProps = {
   buttonText: (submitting: boolean) => string;
   systemIcon: SystemIconsKeys;
   fieldsToShow?: string[];
+  from?: string;
+};
+
+export const useEntityFormEditableFields = (
+  entity: string,
+  crudAction: "create" | "update"
+): DataStateKeys<string[]> => {
+  const isEntityFieldMutatable = useIsEntityFieldMutatable(crudAction);
+  const entityCrudFields = useEntityCrudFields(entity, crudAction);
+
+  return {
+    error: entityCrudFields.error,
+    isLoading: entityCrudFields.isLoading,
+    data: entityCrudFields.data
+      .filter(isEntityFieldMutatable)
+      .map(({ name }) => name),
+  };
 };
 
 export function BaseEntityForm({
@@ -41,6 +58,7 @@ export function BaseEntityForm({
   systemIcon,
   resetForm,
   buttonText,
+  from,
   onSubmit,
   fieldsToShow,
 }: IProps) {
@@ -52,14 +70,13 @@ export function BaseEntityForm({
     "entity_columns_types",
     entity
   );
-  const entityCrudFields = useEntityCrudFields(entity, crudAction);
+
+  const editableFields = useEntityFormEditableFields(entity, crudAction);
 
   const extendEntityFormConfig = usePortalExtendEntityFormConfig(
     entity,
     crudAction
   );
-
-  const isEntityFieldMutatable = useIsEntityFieldMutatable(crudAction);
 
   const entityFormExtension = useEntityConfiguration(
     "entity_form_extension",
@@ -69,16 +86,16 @@ export function BaseEntityForm({
 
   const error =
     entityFieldTypesMap.error ||
-    entityCrudFields.error ||
     initialValuesData?.error ||
+    editableFields?.error ||
     entityFormExtension.error ||
     entityToOneReferenceFields.error;
 
   const isLoading =
-    entityCrudFields.isLoading ||
     entityToOneReferenceFields.isLoading ||
     entityFormExtension.isLoading ||
     entityFieldTypesMap.isLoading ||
+    editableFields.isLoading ||
     extendEntityFormConfig === "loading" ||
     initialValuesData?.isLoading;
 
@@ -89,17 +106,13 @@ export function BaseEntityForm({
     entity,
   });
 
-  const fields = entityCrudFields.data
-    .filter(isEntityFieldMutatable)
-    .map(({ name }) => name);
-
   const fieldsInitialValues = useMemo(() => {
     const initialValues = initialValuesData?.data;
     if (!initialValues) {
       return initialValues;
     }
     return Object.fromEntries(
-      fields.map((field) => {
+      editableFields.data.map((field) => {
         let value = initialValues[field];
 
         if (typeof value === "object" && value !== null) {
@@ -109,7 +122,7 @@ export function BaseEntityForm({
         return [field, value];
       })
     );
-  }, [initialValuesData, entityCrudFields.data]);
+  }, [initialValuesData, editableFields.data]);
 
   const formSchemaConfig = {
     entityToOneReferenceFields: entityToOneReferenceFields.data,
@@ -117,7 +130,7 @@ export function BaseEntityForm({
     entityFieldTypes,
     entityFieldSelections,
     entityValidationsMap,
-    fields,
+    fields: editableFields.data,
   };
 
   const formConfig = buildAppliedSchemaFormConfig(formSchemaConfig, {
@@ -147,6 +160,7 @@ export function BaseEntityForm({
         resetForm={resetForm}
         onSubmit={onSubmit}
         action={crudAction}
+        from={from}
         systemIcon={systemIcon}
         initialValues={fieldsInitialValues}
         fields={

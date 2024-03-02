@@ -13,7 +13,7 @@ const TEXT_COLORS = {
 export type TextProps = {
   size: "1" | "2" | "3" | "4" | "5" | "6";
   color: keyof typeof TEXT_COLORS;
-  weight: "light" | "regular" | "bold" | "thick";
+  weight: "light" | "regular" | "bold";
   textStyle?: "italic";
   as: "p" | "span";
   id?: string;
@@ -34,7 +34,6 @@ const weights: Record<TextProps["weight"], number> = {
   light: 300,
   regular: 400,
   bold: 500,
-  thick: 600,
 };
 
 // @ts-ignore

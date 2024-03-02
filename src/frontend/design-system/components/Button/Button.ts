@@ -22,7 +22,6 @@ export const StyledBaseButton = styled.button<IStyledBaseButton>`
   font-size: 0.9rem;
   line-height: 1.7;
   border-radius: 4px;
-  position: relative;
   cursor: ${(props) => props.cursor || "pointer"};
   -webkit-appearance: button
   -webkit-tap-highlight-color: transparent;
@@ -71,7 +70,8 @@ export const StyledBaseButton = styled.button<IStyledBaseButton>`
 
 
   &:disabled {
-    opacity: 0.65;
+    cursor: not-allowed;
+    opacity: 0.9;
   }
 `;
 

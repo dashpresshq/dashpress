@@ -55,7 +55,7 @@ export function useStringSelections(key: string) {
       setSelections({ ...selections, ...update });
     },
     isSelected: (item: string) => {
-      return selections[item];
+      return !!selections[item];
     },
     clearAll: () => {
       setSelections({});

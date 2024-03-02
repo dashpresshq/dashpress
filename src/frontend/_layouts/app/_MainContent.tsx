@@ -13,8 +13,13 @@ import { Breadcrumbs } from "frontend/design-system/components/Breadcrumbs";
 import { Typo } from "frontend/design-system/primitives/Typo";
 import { Spacer } from "frontend/design-system/primitives/Spacer";
 import { useAppConfiguration } from "frontend/hooks/configuration/configuration.store";
+import styled from "styled-components";
 import { GoogleTagManager } from "../scripts/GoogleTagManager";
 import { DEMO_LINKS } from "./constant";
+
+const HeaderLeft = styled.div`
+  text-align: left;
+`;
 
 export interface IMainContentProps {
   children: ReactNode;
@@ -68,10 +73,10 @@ export function MainContent({
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
       <Stack justify="space-between" align="center">
-        <div>
+        <HeaderLeft>
           <Typo.MD>{pageTitle}</Typo.MD>
           <Breadcrumbs items={homedBreadcrumb} onCrumbClick={goToLinkIndex} />
-        </div>
+        </HeaderLeft>
         <div>
           <Stack>
             {actionMenuItems.length > 0 ? (

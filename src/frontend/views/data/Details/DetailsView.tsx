@@ -22,9 +22,21 @@ import { useEntityViewStateMachine } from "../hooks/useEntityViewStateMachine";
 import { viewSpecialDataTypes } from "../viewSpecialDataTypes";
 import { evalutePresentationScript } from "../evaluatePresentationScript";
 import { PreDataDetails } from "./portal";
+import { PortalColumnRender } from "../Table/portal";
 
 const ContentText = styled(Typo.SM)`
   overflow-wrap: anywhere;
+`;
+
+const DetailItem = styled.div`
+  .show-on-hover {
+    opacity: 0;
+  }
+  &:hover {
+    .show-on-hover {
+      opacity: 1;
+    }
+  }
 `;
 
 export function EntityDetailsView({
@@ -91,7 +103,7 @@ export function EntityDetailsView({
       <PreDataDetails entity={entity} entityId={entityId} />
       <div aria-label="Details Section">
         {entityCrudFields.data.map(({ name }) => {
-          const value$1 = dataDetails?.data?.[name];
+          const rawValue = dataDetails?.data?.[name];
 
           const value = evalutePresentationScript(
             entityPresentationScript.data.script,
@@ -99,7 +111,7 @@ export function EntityDetailsView({
               field: name,
               from: "details",
               row: dataDetails?.data,
-              value: value$1,
+              value: rawValue,
               ...evaluateScriptContext,
             }
           );
@@ -123,11 +135,20 @@ export function EntityDetailsView({
           );
 
           return (
-            <React.Fragment key={name}>
+            <DetailItem key={name}>
               <Typo.XXS weight="bold">{getEntityFieldLabels(name)}</Typo.XXS>
-              {contentToRender}
+              <PortalColumnRender
+                {...{
+                  column: name,
+                  value: rawValue,
+                  entity,
+                  entityId,
+                }}
+              >
+                {contentToRender}
+              </PortalColumnRender>
               <Spacer />
-            </React.Fragment>
+            </DetailItem>
           );
         })}
       </div>

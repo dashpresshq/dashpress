@@ -20,8 +20,14 @@ const BodyTR = styled.tr<{ $hoverColor: string }>`
   padding: 4px;
   border-bottom: 1px solid ${USE_ROOT_COLOR("border-color")};
   page-break-inside: avoid;
+  .show-on-hover {
+    opacity: 0;
+  }
   &:hover {
     background-color: ${(props) => props.$hoverColor};
+    .show-on-hover {
+      opacity: 1;
+    }
   }
 `;
 

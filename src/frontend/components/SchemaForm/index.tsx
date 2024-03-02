@@ -27,6 +27,7 @@ interface IProps<T> {
   onChange?: (data: T) => void;
   resetForm?: true;
   formExtension?: Partial<IFormExtension>;
+  from?: string;
 }
 
 export function SchemaForm<T extends Record<string, unknown>>({
@@ -39,6 +40,7 @@ export function SchemaForm<T extends Record<string, unknown>>({
   action,
   formExtension,
   resetForm,
+  from,
 }: IProps<T>) {
   const evaluateScriptContext = useEvaluateScriptContext();
 
@@ -127,6 +129,7 @@ export function SchemaForm<T extends Record<string, unknown>>({
                           label={bag.label || userFriendlyCase(field)}
                           entityFieldSelections={bag.selections}
                           formProps={formProps}
+                          from={from}
                         />
                       </FormGrid.Item>
                     )}

@@ -28,7 +28,7 @@ describe("pages/roles/[roleId]/index", () => {
       </ApplicationRoot>
     );
 
-    const currentTab = await screen.findByRole("tabpanel");
+    const currentTab = await screen.findByRole("tabpanel", { name: "App" });
 
     const allCheckBoxes = await within(currentTab).findAllByRole("checkbox");
 
@@ -79,7 +79,7 @@ describe("pages/roles/[roleId]/index", () => {
     );
     await userEvent.click(await screen.findByRole("tab", { name: "Entities" }));
 
-    const currentTab = screen.getByRole("tabpanel");
+    const currentTab = screen.getByRole("tabpanel", { name: "Entities" });
 
     const allCheckBoxes = await within(currentTab).findAllByRole("checkbox");
 
@@ -125,7 +125,7 @@ describe("pages/roles/[roleId]/index", () => {
 
     await userEvent.click(await screen.findByRole("tab", { name: "Entities" }));
 
-    const currentTab = screen.getByRole("tabpanel");
+    const currentTab = screen.getByRole("tabpanel", { name: "Entities" });
 
     await waitFor(async () => {
       expect(
@@ -187,7 +187,7 @@ describe("pages/roles/[roleId]/index", () => {
 
     await userEvent.click(await screen.findByRole("tab", { name: "Entities" }));
 
-    const currentTab = screen.getByRole("tabpanel");
+    const currentTab = screen.getByRole("tabpanel", { name: "Entities" });
 
     await waitFor(async () => {
       expect(
@@ -217,7 +217,7 @@ describe("pages/roles/[roleId]/index", () => {
 
     await userEvent.click(await screen.findByRole("tab", { name: "Entities" }));
 
-    const currentTab = screen.getByRole("tabpanel");
+    const currentTab = screen.getByRole("tabpanel", { name: "Entities" });
 
     expect(await within(currentTab).findAllByRole("checkbox")).toHaveLength(5);
 
@@ -249,7 +249,7 @@ describe("pages/roles/[roleId]/index", () => {
       </ApplicationRoot>
     );
 
-    const currentTab = await screen.findByRole("tabpanel");
+    const currentTab = await screen.findByRole("tabpanel", { name: "App" });
 
     await userEvent.click(
       await within(currentTab).findByRole("button", {
@@ -299,7 +299,7 @@ describe("pages/roles/[roleId]/index", () => {
       </ApplicationRoot>
     );
 
-    const currentTab = screen.getByRole("tabpanel");
+    const currentTab = screen.getByRole("tabpanel", { name: "App" });
 
     await waitFor(async () => {
       expect(
@@ -336,7 +336,7 @@ describe("pages/roles/[roleId]/index", () => {
 
       await closeAllToasts();
 
-      const currentTab = await screen.findByRole("tabpanel");
+      const currentTab = await screen.findByRole("tabpanel", { name: "App" });
 
       // De-select the child permission
       await userEvent.click(
@@ -378,7 +378,7 @@ describe("pages/roles/[roleId]/index", () => {
 
       await closeAllToasts();
 
-      const currentTab = await screen.findByRole("tabpanel");
+      const currentTab = await screen.findByRole("tabpanel", { name: "App" });
 
       // See the children permissions are turned on correctly
       expect(
@@ -418,7 +418,7 @@ describe("pages/roles/[roleId]/index", () => {
         </ApplicationRoot>
       );
 
-      const currentTab = await screen.findByRole("tabpanel");
+      const currentTab = await screen.findByRole("tabpanel", { name: "App" });
 
       // See the the child permissions are un-selected
       expect(

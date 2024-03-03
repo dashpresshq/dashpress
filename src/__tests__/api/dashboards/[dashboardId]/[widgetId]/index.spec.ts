@@ -118,7 +118,7 @@ describe("/api/dashboards/[dashboardId]/[widgetId]/index", () => {
     expect(postRequest.res._getStatusCode()).toBe(400);
     expect(postRequest.res._getJSONData()).toMatchInlineSnapshot(`
       {
-        "message": "This service is not available on the demo site",
+        "message": "This action is not available on the demo site",
         "method": "PATCH",
         "name": "BadRequestError",
         "path": "",

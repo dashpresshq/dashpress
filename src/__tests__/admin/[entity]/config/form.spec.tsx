@@ -45,7 +45,9 @@ describe("pages/admin/[entity]/config/form", () => {
       await userEvent.click(await screen.findByRole("tab", { name: label }));
 
       expect(
-        await within(screen.getByRole("tabpanel")).findByLabelText(`Script`)
+        await within(
+          screen.getByRole("tabpanel", { name: label })
+        ).findByLabelText(`Script`)
       ).toHaveValue(section);
     });
 
@@ -58,7 +60,7 @@ describe("pages/admin/[entity]/config/form", () => {
 
       await userEvent.click(await screen.findByRole("tab", { name: label }));
 
-      const currentTab = screen.getByRole("tabpanel");
+      const currentTab = screen.getByRole("tabpanel", { name: label });
 
       await userEvent.clear(within(currentTab).getByLabelText("Script"));
 
@@ -87,7 +89,7 @@ describe("pages/admin/[entity]/config/form", () => {
 
       await userEvent.click(await screen.findByRole("tab", { name: label }));
 
-      const currentTab = screen.getByRole("tabpanel");
+      const currentTab = screen.getByRole("tabpanel", { name: label });
 
       expect(within(currentTab).getByLabelText("Script")).toHaveValue(
         `${valid}`
@@ -103,7 +105,7 @@ describe("pages/admin/[entity]/config/form", () => {
 
       await userEvent.click(await screen.findByRole("tab", { name: label }));
 
-      const currentTab = screen.getByRole("tabpanel");
+      const currentTab = screen.getByRole("tabpanel", { name: label });
 
       await userEvent.type(
         within(currentTab).getByLabelText("Script"),
@@ -130,7 +132,7 @@ describe("pages/admin/[entity]/config/form", () => {
 
       await userEvent.click(await screen.findByRole("tab", { name: label }));
 
-      const currentTab = screen.getByRole("tabpanel");
+      const currentTab = screen.getByRole("tabpanel", { name: label });
 
       expect(within(currentTab).getByLabelText("Script")).toHaveValue(
         `${valid}`
@@ -146,7 +148,7 @@ describe("pages/admin/[entity]/config/form", () => {
 
       await userEvent.click(await screen.findByRole("tab", { name: label }));
 
-      const currentTab = screen.getByRole("tabpanel");
+      const currentTab = screen.getByRole("tabpanel", { name: label });
 
       await userEvent.clear(within(currentTab).getByLabelText("Script"));
 
@@ -168,7 +170,7 @@ describe("pages/admin/[entity]/config/form", () => {
 
       await userEvent.click(await screen.findByRole("tab", { name: label }));
 
-      const currentTab = screen.getByRole("tabpanel");
+      const currentTab = screen.getByRole("tabpanel", { name: label });
 
       expect(within(currentTab).getByLabelText("Script")).toHaveValue(``);
     });

@@ -28,7 +28,9 @@ describe("pages/admin/[entity]/config/relations", () => {
         </ApplicationRoot>
       );
 
-      const currentTab = await screen.findByRole("tabpanel");
+      const currentTab = await screen.findByRole("tabpanel", {
+        name: "Selection",
+      });
 
       await waitFor(async () => {
         expect(
@@ -64,7 +66,9 @@ describe("pages/admin/[entity]/config/relations", () => {
         </ApplicationRoot>
       );
 
-      const currentTab = await screen.findByRole("tabpanel");
+      const currentTab = await screen.findByRole("tabpanel", {
+        name: "Selection",
+      });
 
       await userEvent.click(
         within(currentTab).getByRole("button", {
@@ -99,7 +103,9 @@ describe("pages/admin/[entity]/config/relations", () => {
         </ApplicationRoot>
       );
 
-      const currentTab = await screen.findByRole("tabpanel");
+      const currentTab = await screen.findByRole("tabpanel", {
+        name: "Selection",
+      });
 
       await waitFor(async () => {
         expect(

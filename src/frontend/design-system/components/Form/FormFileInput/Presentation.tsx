@@ -88,7 +88,7 @@ const ProgressRoot = styled.div`
 `;
 
 export interface IProps {
-  progress: number;
+  isSubmitting: boolean;
   disabled?: boolean;
   value: string;
   error: string;
@@ -98,7 +98,7 @@ export interface IProps {
 }
 
 export function Presentation({
-  progress,
+  isSubmitting,
   disabled,
   value,
   error,
@@ -114,9 +114,9 @@ export function Presentation({
       })}
       {...dropZoneProps.getRootProps()}
     >
-      {progress > 0 && (
+      {isSubmitting && (
         <ProgressRoot>
-          <ProgressBar progress={progress} />
+          <ProgressBar progress={100} />
         </ProgressRoot>
       )}
       <div>

@@ -361,17 +361,22 @@ describe("<SchemaForm />", () => {
       </ApplicationRoot>
     );
 
-    await userEvent.type(screen.getByLabelText("Name"), "h");
+    await userEvent.type(screen.getByLabelText("Name"), "f");
     await userEvent.clear(screen.getByLabelText("Name"));
 
     await userEvent.click(screen.getByRole("button", { name: "Submit Form" }));
 
-    expect(screen.getByRole("alert")).toHaveTextContent("Name is required");
+    expect(screen.getAllByRole("alert")[0]).toHaveTextContent(
+      "Name is required"
+    );
+
+    expect(screen.getAllByRole("alert")[1]).toHaveTextContent(
+      "Email is required"
+    );
+
+    expect(mockOnSubmit).not.toHaveBeenCalledWith();
 
     await userEvent.type(screen.getByLabelText("Name"), "f");
-
-    await userEvent.type(screen.getByLabelText("Email"), "h");
-    await userEvent.clear(screen.getByLabelText("Email"));
 
     await userEvent.click(screen.getByRole("button", { name: "Submit Form" }));
 

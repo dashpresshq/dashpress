@@ -3,6 +3,7 @@ import styled, { css } from "styled-components";
 import RBTab from "react-bootstrap/Tab";
 import RBTabs from "react-bootstrap/Tabs";
 import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
+import { sluggify } from "shared/lib/strings";
 
 const Root = styled.div<{ $padContent: boolean }>`
   .nav {
@@ -76,9 +77,13 @@ export function Tabs({
   lazy,
   padContent = true,
 }: IProps) {
-  const [activeTab, setActiveTab] = useState<string>(
-    currentTab || contents[0].label
+  const [activeTab, setActiveTab$1] = useState<string>(
+    sluggify(currentTab || contents[0].label)
   );
+
+  const setActiveTab = (label: string) => {
+    setActiveTab$1(sluggify(label));
+  };
 
   useEffect(() => {
     if (currentTab) {
@@ -108,8 +113,8 @@ export function Tabs({
       >
         {contents.map(({ label, overrideLabel, disabled, content }) => (
           <RBTab
-            eventKey={label}
-            key={label}
+            eventKey={sluggify(label)}
+            key={sluggify(label)}
             title={overrideLabel || label}
             tabClassName={disabled ? "disabled" : ""}
           >

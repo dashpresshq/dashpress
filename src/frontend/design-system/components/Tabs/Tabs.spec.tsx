@@ -106,7 +106,9 @@ describe("Tabs", () => {
     expect(screen.getByText("Bar Content")).not.toBeVisible();
     expect(screen.getByText("Baz Content")).toBeVisible();
 
-    expect(screen.getByRole("tabpanel")).toHaveTextContent("Baz Content");
+    expect(
+      screen.getByRole("tabpanel", { name: "Baz Label" })
+    ).toHaveTextContent("Baz Content");
 
     fireEvent.click(screen.getByText("Bar Label"));
 
@@ -114,7 +116,9 @@ describe("Tabs", () => {
     expect(screen.getByText("Bar Content")).toBeVisible();
     expect(screen.getByText("Baz Content")).not.toBeVisible();
 
-    expect(screen.getByRole("tabpanel")).toHaveTextContent("Bar Content");
+    expect(
+      screen.getByRole("tabpanel", { name: "Bar Label" })
+    ).toHaveTextContent("Bar Content");
 
     expect(onChange).toHaveBeenCalled();
   });

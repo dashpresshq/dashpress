@@ -48,7 +48,9 @@ describe("pages/admin/[entity]/config/views", () => {
     ).toBeInTheDocument();
 
     expect(
-      within(screen.getByRole("tabpanel")).getByLabelText("Title")
+      within(
+        screen.getByRole("tabpanel", { name: "Verified Entity View" })
+      ).getByLabelText("Title")
     ).toHaveValue("Verified Entity View");
 
     await userEvent.click(
@@ -56,13 +58,17 @@ describe("pages/admin/[entity]/config/views", () => {
     );
 
     expect(
-      await within(screen.getByRole("tabpanel")).findByLabelText("Title")
+      await within(
+        screen.getByRole("tabpanel", { name: "User Entity View" })
+      ).findByLabelText("Title")
     ).toHaveValue("User Entity View");
 
     await userEvent.click(screen.getByRole("tab", { name: "Age Entity View" }));
 
     expect(
-      await within(screen.getByRole("tabpanel")).findByLabelText("Title")
+      await within(
+        screen.getByRole("tabpanel", { name: "Age Entity View" })
+      ).findByLabelText("Title")
     ).toHaveValue("Age Entity View");
   });
 
@@ -147,7 +153,9 @@ describe("pages/admin/[entity]/config/views", () => {
     );
 
     expect(
-      await within(screen.getByRole("tabpanel")).findByLabelText("Title")
+      await within(
+        screen.getByRole("tabpanel", { name: "View 1" })
+      ).findByLabelText("Title")
     ).toHaveValue("View 1");
 
     expect(screen.getByRole("tab", { selected: true })).toHaveTextContent(
@@ -159,7 +167,9 @@ describe("pages/admin/[entity]/config/views", () => {
     );
 
     expect(
-      await within(screen.getByRole("tabpanel")).findByLabelText("Title")
+      await within(
+        screen.getByRole("tabpanel", { name: "View 2" })
+      ).findByLabelText("Title")
     ).toHaveValue("View 2");
 
     expect(screen.getByRole("tab", { selected: true })).toHaveTextContent(
@@ -186,7 +196,9 @@ describe("pages/admin/[entity]/config/views", () => {
     ).toBeInTheDocument();
 
     await userEvent.type(
-      within(screen.getByRole("tabpanel")).getByLabelText("Title"),
+      within(screen.getByRole("tabpanel", { name: "View 1" })).getByLabelText(
+        "Title"
+      ),
       "Updated"
     );
 
@@ -217,7 +229,9 @@ describe("pages/admin/[entity]/config/views", () => {
     expect(screen.getByRole("tab", { name: "View 2" })).toBeInTheDocument();
 
     await userEvent.type(
-      within(screen.getByRole("tabpanel")).getByLabelText("Title"),
+      within(
+        screen.getByRole("tabpanel", { name: "View 1Updated" })
+      ).getByLabelText("Title"),
       "Updated"
     );
   });

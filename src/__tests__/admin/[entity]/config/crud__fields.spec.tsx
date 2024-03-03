@@ -68,7 +68,7 @@ describe("pages/admin/[entity]/config/crud", () => {
         </ApplicationRoot>
       );
 
-      const currentTab = await screen.findByRole("tabpanel");
+      const currentTab = await screen.findByRole("tabpanel", { name: tab });
 
       await waitFor(() => {
         expect(
@@ -96,7 +96,7 @@ describe("pages/admin/[entity]/config/crud", () => {
         </ApplicationRoot>
       );
 
-      const currentTab = screen.getByRole("tabpanel");
+      const currentTab = screen.getByRole("tabpanel", { name: tab });
 
       await userEvent.click(
         await within(currentTab).findByRole("button", { name: "Field 1" })
@@ -125,7 +125,7 @@ describe("pages/admin/[entity]/config/crud", () => {
         </ApplicationRoot>
       );
 
-      const currentTab = screen.getByRole("tabpanel");
+      const currentTab = screen.getByRole("tabpanel", { name: tab });
 
       await waitFor(async () => {
         expect(

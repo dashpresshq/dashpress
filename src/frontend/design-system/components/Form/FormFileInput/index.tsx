@@ -1,7 +1,6 @@
 import React, { useCallback, useState } from "react";
 import { useDropzone } from "react-dropzone";
-import axios, { AxiosProgressEvent } from "axios";
-import { getRequestHeaders } from "frontend/lib/data/makeRequest";
+import { makeFileRequest } from "frontend/lib/data/makeRequest";
 import { ISharedFormInput } from "../_types";
 import { generateClassNames, wrapLabelAndError } from "../_wrapForm";
 import { Presentation } from "./Presentation";
@@ -18,7 +17,7 @@ function FileInput({
   uploadUrl,
   metadata,
 }: IFormFileInput) {
-  const [progress, setProgress] = useState<number>(0);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string>("");
   const { value, onChange } = input;
   // Get the fiel settings
@@ -26,8 +25,6 @@ function FileInput({
     (acceptedFiles: File[]) => {
       input.onChange(null);
       acceptedFiles.forEach(async (file) => {
-        setProgress(1);
-
         const formData = new FormData();
         formData.append("file", file, file.name);
 
@@ -37,20 +34,7 @@ function FileInput({
           });
         }
         try {
-          const { fileUrl } = (
-            await axios.post(uploadUrl, formData, {
-              headers: {
-                ...getRequestHeaders(),
-                "Content-Type": "multipart/form-data",
-              },
-              onUploadProgress: (progressEvent: AxiosProgressEvent) => {
-                const percentCompleted = Math.round(
-                  (progressEvent.loaded * 100) / (progressEvent!.total || 1)
-                );
-                setProgress(percentCompleted);
-              },
-            })
-          ).data;
+          const { fileUrl } = await makeFileRequest(uploadUrl, formData);
           input.onChange(fileUrl);
           setError(null);
         } catch (e) {
@@ -58,7 +42,7 @@ function FileInput({
             e.response.data.message || "Ooops, something wrong happened."
           );
         }
-        setProgress(0);
+        setIsSubmitting(false);
       });
     },
     [uploadUrl, input, metadata]
@@ -73,7 +57,7 @@ function FileInput({
 
   return (
     <Presentation
-      {...{ progress, disabled, value, error }}
+      {...{ isSubmitting, disabled, value, error }}
       onClear={() => onChange(null)}
       dropZoneProps={dropZoneProps}
       formClassName={generateClassNames(meta)}

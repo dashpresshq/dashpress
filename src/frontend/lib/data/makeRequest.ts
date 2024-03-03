@@ -9,7 +9,7 @@ const pathWithBaseUrl = (path: string) => {
   return (process.env.NEXT_PUBLIC_BASE_URL || "") + path;
 };
 
-export const getRequestHeaders = () => {
+const getRequestHeaders = () => {
   const authToken = AuthActions.getAuthToken();
   const headers: Record<string, string> = {
     "Content-Type": "application/json",
@@ -59,13 +59,7 @@ export async function makeGetRequest(path: string, errorMessage?: string) {
   return response.json();
 }
 
-const sleep = (milliseconds: number): Promise<void> =>
-  new Promise((resolve) => {
-    setTimeout(() => resolve(), milliseconds);
-  });
-
 interface IActionRequestOptions {
-  mockRequest?: unknown;
   errorMessage?: string;
 }
 
@@ -75,10 +69,6 @@ export const makeActionRequest = async (
   data?: unknown,
   options: IActionRequestOptions = {}
 ) => {
-  if (options.mockRequest !== undefined) {
-    await sleep(500);
-    return options.mockRequest;
-  }
   const response = await fetch(pathWithBaseUrl(path), {
     method,
     headers: {
@@ -91,6 +81,25 @@ export const makeActionRequest = async (
     response,
     options.errorMessage || "An error occurred processing your request"
   );
+
+  try {
+    return await response.json();
+  } catch {
+    return response;
+  }
+};
+
+export const makeFileRequest = async (path: string, formData: FormData) => {
+  const response = await fetch(pathWithBaseUrl(path), {
+    method: "POST",
+    headers: {
+      ...getRequestHeaders(),
+      "Content-Type": "multipart/form-data",
+    },
+    body: formData,
+  });
+
+  await handleRequestError(response, "An error occurred uploading your file");
 
   try {
     return await response.json();

@@ -86,7 +86,7 @@ describe("pages/admin/[entity]/config/crud", () => {
         </ApplicationRoot>
       );
 
-      const currentTab = screen.getByRole("tabpanel");
+      const currentTab = screen.getByRole("tabpanel", { name: tab });
 
       if (tab !== "Delete") {
         expect(
@@ -117,7 +117,7 @@ describe("pages/admin/[entity]/config/crud", () => {
         </ApplicationRoot>
       );
 
-      const currentTab = screen.getByRole("tabpanel");
+      const currentTab = screen.getByRole("tabpanel", { name: tab });
 
       if (tab !== "Delete") {
         expect(

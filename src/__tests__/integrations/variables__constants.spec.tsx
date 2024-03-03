@@ -30,7 +30,9 @@ describe("pages/integrations/variables => constants", () => {
         </ApplicationRoot>
       );
 
-      const table = await screen.findByRole("table");
+      const table = await within(
+        screen.getByRole("tabpanel", { name: "Constants" })
+      ).findByRole("table");
 
       expect(
         await within(table).findByRole("row", {
@@ -89,7 +91,9 @@ describe("pages/integrations/variables => constants", () => {
         </ApplicationRoot>
       );
 
-      const table = screen.getByRole("table");
+      const table = within(
+        screen.getByRole("tabpanel", { name: "Constants" })
+      ).getByRole("table");
 
       expect(within(table).getAllByRole("row")).toHaveLength(5);
 
@@ -109,7 +113,9 @@ describe("pages/integrations/variables => constants", () => {
         </ApplicationRoot>
       );
 
-      const table = screen.getByRole("table");
+      const table = within(
+        screen.getByRole("tabpanel", { name: "Constants" })
+      ).getByRole("table");
 
       const tableRows = await within(table).findAllByRole("row");
 
@@ -145,7 +151,9 @@ describe("pages/integrations/variables => constants", () => {
         </ApplicationRoot>
       );
 
-      const table = screen.getByRole("table");
+      const table = within(
+        screen.getByRole("tabpanel", { name: "Constants" })
+      ).getByRole("table");
 
       expect(
         within(table).getByRole("row", {
@@ -163,7 +171,9 @@ describe("pages/integrations/variables => constants", () => {
         </ApplicationRoot>
       );
 
-      const table = screen.getByRole("table");
+      const table = within(
+        screen.getByRole("tabpanel", { name: "Constants" })
+      ).getByRole("table");
 
       const tableRows = await within(table).findAllByRole("row");
 

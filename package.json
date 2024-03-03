@@ -34,7 +34,6 @@
   "dependencies": {
     "@dashpress/bacteria": "^0.0.12",
     "@tanstack/react-table": "^8.7.9",
-    "axios": "^1.2.1",
     "bcrypt": "^5.0.1",
     "change-case": "^4.1.2",
     "class-validator": "^0.13.2",

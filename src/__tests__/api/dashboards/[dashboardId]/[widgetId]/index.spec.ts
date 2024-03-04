@@ -145,7 +145,7 @@ describe("/api/dashboards/[dashboardId]/[widgetId]/index", () => {
     expect(deleteRequest.res._getStatusCode()).toBe(400);
     expect(deleteRequest.res._getJSONData()).toMatchInlineSnapshot(`
       {
-        "message": "This service is not available on the demo site",
+        "message": "This action is not available on the demo site",
         "method": "DELETE",
         "name": "BadRequestError",
         "path": "",

@@ -7,6 +7,7 @@ import { rest } from "msw";
 
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 import { BASE_TEST_URL } from "__tests__/_/api-handlers/_utils";
+import { sluggify } from "shared/lib/strings";
 
 const server = setupApiHandlers();
 
@@ -80,7 +81,9 @@ describe("pages/admin/[entity]/config/crud", () => {
       })
     ).toBeVisible();
 
-    expect(replaceMock).toHaveBeenCalledWith(`/hello-there?foo=bar&tab=${tab}`);
+    expect(replaceMock).toHaveBeenCalledWith(
+      `/hello-there?foo=bar&tab=${sluggify(tab)}`
+    );
   });
 
   it("should default to the tab from query and be to go back to table", async () => {
@@ -132,6 +135,6 @@ describe("pages/admin/[entity]/config/crud", () => {
       })
     ).toHaveTextContent("Table");
 
-    expect(replaceMock$1).toHaveBeenCalledWith("/?tab=Table");
+    expect(replaceMock$1).toHaveBeenCalledWith("/?tab=table");
   });
 });

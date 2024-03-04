@@ -100,7 +100,9 @@ describe("pages/integrations/variables => credentials", () => {
         await screen.findByRole("tab", { name: "Secrets" })
       );
 
-      const table = screen.getByRole("table");
+      const table = within(
+        screen.getByRole("tabpanel", { name: "Secrets" })
+      ).getByRole("table");
 
       expect(
         await within(table).findByRole("row", {
@@ -183,7 +185,9 @@ describe("pages/integrations/variables => credentials", () => {
         "Invalid Password"
       );
 
-      const table = screen.getByRole("table");
+      const table = within(
+        screen.getByRole("tabpanel", { name: "Secrets" })
+      ).getByRole("table");
 
       expect(
         await within(table).findByRole("row", {
@@ -223,7 +227,9 @@ describe("pages/integrations/variables => credentials", () => {
         })
       );
 
-      const table = screen.getByRole("table");
+      const table = within(
+        screen.getByRole("tabpanel", { name: "Secrets" })
+      ).getByRole("table");
 
       expect(
         await within(table).findByRole("row", {
@@ -323,7 +329,9 @@ describe("pages/integrations/variables => credentials", () => {
         await screen.findByRole("tab", { name: "Secrets" })
       );
 
-      const table = screen.getByRole("table");
+      const table = within(
+        screen.getByRole("tabpanel", { name: "Secrets" })
+      ).getByRole("table");
 
       expect(
         await within(table).findByRole(
@@ -436,7 +444,9 @@ describe("pages/integrations/variables => credentials", () => {
         await screen.findByRole("tab", { name: "Secrets" })
       );
 
-      const tableRows = await screen.findAllByRole("row");
+      const table = screen.getByRole("tabpanel", { name: "Secrets" });
+
+      const tableRows = await within(table).findAllByRole("row");
 
       expect(tableRows).toHaveLength(5);
 
@@ -454,7 +464,7 @@ describe("pages/integrations/variables => credentials", () => {
         await within(confirmBox).findByRole("button", { name: "Confirm" })
       );
 
-      expect(await screen.findAllByRole("row")).toHaveLength(4);
+      expect(await within(table).findAllByRole("row")).toHaveLength(4);
 
       expect((await screen.findAllByRole("status"))[0]).toHaveTextContent(
         "Secret Deleted Successfully"

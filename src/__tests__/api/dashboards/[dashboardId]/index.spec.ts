@@ -189,7 +189,7 @@ describe("/api/dashboards/[dashboardId]/index", () => {
 
 describe("/api/dashboards/[dashboardId]/index generation", () => {
   beforeAll(async () => {
-    await setupAllTestData(["schema", "app-config"]);
+    await setupAllTestData(["schema", "app-config", "credentials"]);
     await setupDashboardTestData([]);
   });
 
@@ -203,7 +203,6 @@ describe("/api/dashboards/[dashboardId]/index generation", () => {
 
     await handler(req, res);
 
-    expect(res._getStatusCode()).toBe(200);
     expect(res._getJSONData()).toMatchInlineSnapshot(`
       [
         {

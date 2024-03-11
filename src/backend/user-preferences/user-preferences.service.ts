@@ -1,4 +1,3 @@
-import { IApplicationService } from "backend/types";
 import {
   USER_PREFERENCES_CONFIG,
   UserPreferencesKeys,
@@ -9,14 +8,10 @@ import {
   AbstractConfigDataPersistenceService,
 } from "../lib/config-persistence";
 
-export class UserPreferencesApiService implements IApplicationService {
+export class UserPreferencesApiService {
   constructor(
     private _userPreferencesPersistenceService: AbstractConfigDataPersistenceService<unknown>
   ) {}
-
-  async bootstrap() {
-    await this._userPreferencesPersistenceService.setup();
-  }
 
   private makeId({
     key,

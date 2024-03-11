@@ -2,18 +2,13 @@ import {
   createConfigDomainPersistenceService,
   AbstractConfigDataPersistenceService,
 } from "backend/lib/config-persistence";
-import { IApplicationService } from "backend/types";
 import { nanoid } from "nanoid";
 import { IFormAction } from "shared/types/actions";
 
-export class FormActionsApiService implements IApplicationService {
+export class FormActionsApiService {
   constructor(
     private readonly _formActionsPersistenceService: AbstractConfigDataPersistenceService<IFormAction>
   ) {}
-
-  async bootstrap() {
-    await this._formActionsPersistenceService.setup();
-  }
 
   async createFormAction(action: Omit<IFormAction, "id">) {
     const id = nanoid();

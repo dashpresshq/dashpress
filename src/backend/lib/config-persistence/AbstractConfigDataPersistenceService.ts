@@ -10,8 +10,6 @@ export abstract class AbstractConfigDataPersistenceService<T> {
 
   protected readonly _configApiService!: ConfigApiService;
 
-  public abstract setup(): Promise<void>;
-
   constructor(configDomain: ConfigDomain, configApiService: ConfigApiService) {
     this._configDomain = configDomain;
     this._configApiService = configApiService;

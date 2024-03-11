@@ -2,18 +2,13 @@ import {
   createConfigDomainPersistenceService,
   AbstractConfigDataPersistenceService,
 } from "backend/lib/config-persistence";
-import { IApplicationService } from "backend/types";
 
-export class ListOrderApiService implements IApplicationService {
+export class ListOrderApiService {
   constructor(
     private readonly _listOrderPersistenceService: AbstractConfigDataPersistenceService<
       string[]
     >
   ) {}
-
-  async bootstrap() {
-    await this._listOrderPersistenceService.setup();
-  }
 
   async getItemOrder(listId: string): Promise<string[]> {
     return await this._listOrderPersistenceService.getItem(listId, []);

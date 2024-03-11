@@ -32,10 +32,6 @@ export class RedisConfigDataPersistenceAdaptor<
     return null;
   }
 
-  async setup() {
-    await this.getRedisInstance();
-  }
-
   constructor(configDomain: ConfigDomain, _configApiService: ConfigApiService) {
     super(configDomain, _configApiService);
   }

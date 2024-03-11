@@ -16,12 +16,8 @@ export class ConfigApiService {
 
   constructor(protected processEnv: Record<string, unknown>) {
     if (!this.processEnv.DO_NOT_BOOSTRAP_CONFIG) {
-      this.bootstrap();
+      this.assertConfiguration();
     }
-  }
-
-  bootstrap() {
-    this.assertConfiguration();
   }
 
   getConfigValue<T>(key: ConfigKeys): T {

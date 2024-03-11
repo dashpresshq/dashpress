@@ -57,10 +57,6 @@ export class DatabaseConfigDataPersistenceAdaptor<
     return DatabaseConfigDataPersistenceAdaptor._dbInstance;
   }
 
-  async setup() {
-    await this.getDbInstance();
-  }
-
   async _resetToEmpty() {
     await (await this.getDbInstance())(CONFIG_TABLE_NAME)
       .where("domain", "=", this._configDomain)

@@ -7,19 +7,16 @@ import {
   createKeyValueDomainPersistenceService,
   KeyValueStoreApiService,
 } from "backend/lib/key-value";
-import { IApplicationService } from "backend/types";
 import { sluggify } from "shared/lib/strings";
 import { IStorageIntegration } from "shared/types/actions";
 import { STORAGE_INTEGRATIONS } from "./integrations";
 import { StorageIntegrations } from "./integrations/types";
 
-export class StorageApiService implements IApplicationService {
+export class StorageApiService {
   constructor(
     private readonly _currentStorageKeyValueStoreApiService: KeyValueStoreApiService<string>,
     private readonly _credentialsApiService: CredentialsApiService
   ) {}
-
-  async bootstrap() {}
 
   listStorageIntegrations(): IStorageIntegration[] {
     return Object.entries(STORAGE_INTEGRATIONS).map(

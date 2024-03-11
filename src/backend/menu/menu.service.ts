@@ -1,4 +1,3 @@
-import { IApplicationService } from "backend/types";
 import { nanoid } from "nanoid";
 import {
   INavigationMenuItem,
@@ -12,7 +11,6 @@ import {
   EntitiesApiService,
   entitiesApiService,
 } from "backend/entities/entities.service";
-import { noop } from "shared/lib/noop";
 import {
   ConfigurationApiService,
   configurationApiService,
@@ -46,18 +44,12 @@ const SYSTEM_LINKS_CONFIG_MAP: Record<
   },
 };
 
-export class NavigationMenuApiService
-  implements IApplicationService, IBaseNavigationMenuApiService
-{
+export class NavigationMenuApiService implements IBaseNavigationMenuApiService {
   constructor(
     private readonly _entitiesApiService: EntitiesApiService,
     private readonly _configurationApiService: ConfigurationApiService,
     private readonly _rolesApiService: RolesApiService
   ) {}
-
-  async bootstrap() {
-    noop();
-  }
 
   async getMenuItems(userRole: string) {
     const portalMenuItems = await getPortalMenuItems(userRole, this);

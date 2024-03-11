@@ -6,7 +6,6 @@ import {
   createConfigDomainPersistenceService,
   AbstractConfigDataPersistenceService,
 } from "backend/lib/config-persistence";
-import { IApplicationService } from "backend/types";
 import {
   HOME_DASHBOARD_KEY,
   IWidgetConfig,
@@ -52,7 +51,7 @@ const runAsyncJavascriptString = async (
   }
 };
 
-export class DashboardWidgetsApiService implements IApplicationService {
+export class DashboardWidgetsApiService {
   constructor(
     private readonly _dashboardWidgetsPersistenceService: AbstractConfigDataPersistenceService<IWidgetConfig>,
     private readonly _entitiesApiService: EntitiesApiService,
@@ -60,10 +59,6 @@ export class DashboardWidgetsApiService implements IApplicationService {
     private readonly _rolesApiService: RolesApiService,
     private readonly _rDBMSApiDataService: RDBMSDataApiService
   ) {}
-
-  async bootstrap() {
-    await this._dashboardWidgetsPersistenceService.setup();
-  }
 
   async runScript(
     script$1: string,

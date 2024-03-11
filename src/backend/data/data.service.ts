@@ -33,7 +33,7 @@ export class DataApiService implements IDataApiService {
     private _configurationApiService: ConfigurationApiService
   ) {}
 
-  async bootstrap() {
+  async runOnLoad() {
     await this.getDataAccessInstance().bootstrap();
   }
 

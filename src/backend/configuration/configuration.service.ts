@@ -1,4 +1,3 @@
-import { IApplicationService } from "backend/types";
 import { progammingError } from "backend/lib/errors";
 import { AppConfigurationValueType } from "shared/configurations/constants";
 import {
@@ -12,14 +11,10 @@ import {
   AppConfigurationKeys,
 } from "../../shared/configurations";
 
-export class ConfigurationApiService implements IApplicationService {
+export class ConfigurationApiService {
   constructor(
     private _appConfigPersistenceService: AbstractConfigDataPersistenceService<unknown>
   ) {}
-
-  async bootstrap() {
-    await this._appConfigPersistenceService.setup();
-  }
 
   async show<T extends AppConfigurationKeys>(
     key: T,

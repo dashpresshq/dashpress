@@ -1,7 +1,6 @@
 import { AbstractConfigDataPersistenceService } from "backend/lib/config-persistence";
 import { BadRequestError, UnauthorizedError } from "backend/lib/errors";
 import { HashService } from "backend/lib/hash/hash.service";
-import { IApplicationService } from "backend/types";
 import { IAccountUser, IAccountProfile } from "shared/types/user";
 import { ISuccessfullAuthenticationResponse } from "shared/types/auth/portal";
 import { noop } from "shared/lib/noop";
@@ -20,7 +19,7 @@ import { usersPersistenceService } from "./shared";
 
 const INVALID_LOGIN_MESSAGE = "Invalid Login";
 
-export class UsersApiService implements IApplicationService {
+export class UsersApiService {
   constructor(
     private readonly _usersPersistenceService: AbstractConfigDataPersistenceService<IAccountUser>,
     private readonly _configurationApiService: ConfigurationApiService,
@@ -40,10 +39,6 @@ export class UsersApiService implements IApplicationService {
     } catch (error) {
       throw new UnauthorizedError(INVALID_LOGIN_MESSAGE);
     }
-  }
-
-  async bootstrap() {
-    await this._usersPersistenceService.setup();
   }
 
   async registerUser(user: IAccountUser) {

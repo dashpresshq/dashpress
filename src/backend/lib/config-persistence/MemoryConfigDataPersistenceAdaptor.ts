@@ -1,4 +1,3 @@
-import { noop } from "shared/lib/noop";
 import { ConfigApiService } from "../config/config.service";
 import { AbstractConfigDataPersistenceService } from "./AbstractConfigDataPersistenceService";
 import { ConfigDomain } from "./types";
@@ -10,10 +9,6 @@ export class MemoryConfigDataPersistenceAdaptor<
 
   constructor(configDomain: ConfigDomain, configApiService: ConfigApiService) {
     super(configDomain, configApiService);
-  }
-
-  async setup() {
-    noop();
   }
 
   getItemLastUpdated() {

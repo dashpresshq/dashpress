@@ -1,4 +1,3 @@
-import { IApplicationService } from "backend/types";
 import { PaginatedData, QueryFilterSchema } from "shared/types/data";
 import { IAccountProfile } from "shared/types/user";
 
@@ -11,7 +10,7 @@ export interface IPaginationFilters {
 
 export const FOR_CODE_COV = 1;
 
-export interface IDataApiService extends IApplicationService {
+export interface IDataApiService {
   fetchData(
     entity: string,
     select: string[],

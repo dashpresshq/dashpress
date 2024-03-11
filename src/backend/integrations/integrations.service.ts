@@ -13,15 +13,13 @@ import {
   createKeyValueDomainPersistenceService,
   KeyValueStoreApiService,
 } from "backend/lib/key-value";
-import { IApplicationService } from "backend/types";
-import { noop } from "shared/lib/noop";
 import {
   formActionsApiService,
   FormActionsApiService,
 } from "backend/form-actions/form-actions.service";
 import { ACTION_INTEGRATIONS } from "./libs";
 
-export class IntegrationsApiService implements IApplicationService {
+export class IntegrationsApiService {
   constructor(
     private readonly _activatedIntegrationsPersistenceService: KeyValueStoreApiService<
       ActionIntegrations[]
@@ -29,10 +27,6 @@ export class IntegrationsApiService implements IApplicationService {
     private readonly _credentialsApiService: CredentialsApiService,
     private readonly _formActionsApiService: FormActionsApiService
   ) {}
-
-  async bootstrap() {
-    noop();
-  }
 
   listActionIntegrations(): IIntegrationsList[] {
     return Object.entries(ACTION_INTEGRATIONS).map(

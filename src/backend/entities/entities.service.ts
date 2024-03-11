@@ -4,8 +4,6 @@ import {
   ConfigurationApiService,
 } from "backend/configuration/configuration.service";
 import { rolesApiService, RolesApiService } from "backend/roles/roles.service";
-import { IApplicationService } from "backend/types";
-import { noop } from "shared/lib/noop";
 import { IDBSchema, IEntityField, IEntityRelation } from "shared/types/db";
 import { DataCrudKeys } from "shared/types/data";
 import { CRUD_HIDDEN_KEY_CONFIG } from "shared/configurations/permissions";
@@ -13,16 +11,12 @@ import { sortListByOrder } from "shared/lib/array/sort";
 import { SchemasApiService, schemasApiService } from "../schema/schema.service";
 import { PortalFieldsFilterService } from "./portal";
 
-export class EntitiesApiService implements IApplicationService {
+export class EntitiesApiService {
   constructor(
     private _schemasApiService: SchemasApiService,
     private _configurationApiService: ConfigurationApiService,
     private _rolesApiService: RolesApiService
   ) {}
-
-  async bootstrap() {
-    noop();
-  }
 
   private async getDBSchemaModels(): Promise<Record<string, IDBSchema>> {
     return Object.fromEntries(

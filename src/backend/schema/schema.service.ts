@@ -3,7 +3,6 @@ import {
   CredentialsApiService,
   credentialsApiService,
 } from "backend/integrations-configurations";
-import { IApplicationService } from "backend/types";
 import { IDBSchema, IEntityField } from "shared/types/db";
 import { IDataSourceCredentials } from "shared/types/data-sources";
 import { DATABASE_CREDENTIAL_GROUP } from "backend/data/fields";
@@ -13,7 +12,7 @@ import {
   AbstractConfigDataPersistenceService,
 } from "../lib/config-persistence";
 
-export class SchemasApiService implements IApplicationService {
+export class SchemasApiService {
   private dbSchema: IDBSchema[];
 
   constructor(
@@ -21,8 +20,7 @@ export class SchemasApiService implements IApplicationService {
     private _credentialsService: CredentialsApiService
   ) {}
 
-  async bootstrap() {
-    await this._schemaConfigDataPersistenceService.setup();
+  async runOnLoad() {
     await this.loadDbSchema();
   }
 

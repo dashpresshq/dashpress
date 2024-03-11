@@ -1,5 +1,4 @@
 import fs from "fs-extra";
-import { noop } from "shared/lib/noop";
 import path from "path";
 import { ConfigApiService } from "../config/config.service";
 
@@ -11,10 +10,6 @@ export class JsonFileConfigDataPersistenceAdaptor<
 > extends AbstractConfigDataPersistenceService<T> {
   constructor(configDomain: ConfigDomain, configApiService: ConfigApiService) {
     super(configDomain, configApiService);
-  }
-
-  async setup() {
-    noop();
   }
 
   private pathToConfigDomain = (type: ConfigDomain) => {

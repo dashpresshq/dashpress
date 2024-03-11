@@ -1,29 +1,17 @@
 import { AbstractConfigDataPersistenceService } from "backend/lib/config-persistence";
 import { EncryptionApiService } from "backend/lib/encryption/encryption.service";
 import { BadRequestError, progammingError } from "backend/lib/errors";
-import { IApplicationService } from "backend/types";
-import { noop } from "shared/lib/noop";
 import { IGroupCredential } from "../types";
 
 export const INTEGRATION_CONFIG_GROUP_DEMILITER = "___";
 
-export abstract class IntegrationsConfigurationApiService
-  implements IApplicationService
-{
+export abstract class IntegrationsConfigurationApiService {
   constructor(
     protected _persistenceService: AbstractConfigDataPersistenceService<string>,
     protected _encryptionApiService: EncryptionApiService
   ) {}
 
   static GROUP_DEMILITER = INTEGRATION_CONFIG_GROUP_DEMILITER;
-
-  async bootstrap() {
-    try {
-      await this._persistenceService.setup();
-    } catch (error) {
-      noop();
-    }
-  }
 
   async hasKey(key: string): Promise<boolean> {
     return (await this.getValue(key)) !== undefined;

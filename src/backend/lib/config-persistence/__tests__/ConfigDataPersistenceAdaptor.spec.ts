@@ -61,10 +61,6 @@ const PERSITENT_ADAPTORS: {
 describe.each(PERSITENT_ADAPTORS)(
   "$title persistence adaptor",
   ({ adaptor, title }) => {
-    beforeAll(async () => {
-      await adaptor.setup();
-    });
-
     it("should get create new item when persisting", async () => {
       await adaptor.persistItem("foo", { age: 5, id: "foo", name: "Hello" });
     });

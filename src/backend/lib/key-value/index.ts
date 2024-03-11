@@ -14,10 +14,6 @@ export class KeyValueStoreApiService<T> {
     private readonly _keyValueStorePersistenceService: AbstractConfigDataPersistenceService<IStorage>
   ) {}
 
-  async bootstrap() {
-    await this._keyValueStorePersistenceService.setup();
-  }
-
   async clearItem() {
     await this._keyValueStorePersistenceService.removeItem(this.key);
   }

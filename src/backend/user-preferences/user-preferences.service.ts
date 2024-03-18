@@ -3,6 +3,7 @@ import {
   UserPreferencesKeys,
   UserPreferencesValueType,
 } from "shared/user-preferences/constants";
+import { BadRequestError } from "backend/lib/errors";
 import {
   createConfigDomainPersistenceService,
   AbstractConfigDataPersistenceService,
@@ -29,14 +30,16 @@ export class UserPreferencesApiService {
   async show<T extends UserPreferencesKeys>(
     username: string,
     key: T
-  ): Promise<UserPreferencesValueType<T>> {
-    return (await this._userPreferencesPersistenceService.getItem(
-      this.makeId({
-        key,
-        username,
-      }),
-      USER_PREFERENCES_CONFIG[key].defaultValue
-    )) as UserPreferencesValueType<T>;
+  ): Promise<{ data: UserPreferencesValueType<T> }> {
+    return {
+      data: (await this._userPreferencesPersistenceService.getItem(
+        this.makeId({
+          key: this.validateUserPreferencesKeys(key),
+          username,
+        }),
+        USER_PREFERENCES_CONFIG[key].defaultValue
+      )) as UserPreferencesValueType<T>,
+    };
   }
 
   async upsert<T extends UserPreferencesKeys>(
@@ -46,11 +49,20 @@ export class UserPreferencesApiService {
   ): Promise<void> {
     return await this._userPreferencesPersistenceService.upsertItem(
       this.makeId({
-        key,
+        key: this.validateUserPreferencesKeys(key),
         username,
       }),
       value
     );
+  }
+
+  private validateUserPreferencesKeys(key: string) {
+    const configBag = USER_PREFERENCES_CONFIG[key];
+    if (!configBag) {
+      throw new BadRequestError(`User Preference key '${key}' doesn't exist`);
+    }
+
+    return key as UserPreferencesKeys;
   }
 }
 

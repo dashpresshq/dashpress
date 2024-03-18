@@ -1,5 +1,5 @@
 import { requestHandler } from "backend/lib/request";
-import { userPreferenceApiController } from "backend/user-preferences/user-preferences.controller";
+import { userPreferencesApiService } from "backend/user-preferences/user-preferences.service";
 import { IAccountProfile } from "shared/types/user";
 
 const REQUEST_QUERY_FIELD = "key";
@@ -13,7 +13,7 @@ export default requestHandler({
         options: REQUEST_QUERY_FIELD,
       },
     ]);
-    return await userPreferenceApiController.show(
+    return await userPreferencesApiService.show(
       (validatedRequest.authenticatedUser as IAccountProfile).username,
       validatedRequest.requestQuery
     );
@@ -30,7 +30,7 @@ export default requestHandler({
         options: {},
       },
     ]);
-    return await userPreferenceApiController.upsert(
+    return await userPreferencesApiService.upsert(
       (validatedRequest.authenticatedUser as IAccountProfile).username,
       validatedRequest.requestQuery,
       validatedRequest.requestBody.data

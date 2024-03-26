@@ -1,6 +1,6 @@
 {
-  "name": "dashpress",
-  "version": "1.0.2",
+  "name": "hadmean",
+  "version": "0.21.0",
   "license": "GPL-3.0-or-later",
   "scripts": {
     "dev": "next dev",

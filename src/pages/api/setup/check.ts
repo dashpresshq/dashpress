@@ -1,10 +1,10 @@
-import { setupApiController } from "backend/setup/setup.controller";
+import { setupApiService } from "backend/setup/setup.service";
 import { requestHandler } from "backend/lib/request";
 
 export default requestHandler(
   {
     GET: async () => {
-      return await setupApiController.check();
+      return await setupApiService.check();
     },
   },
   [

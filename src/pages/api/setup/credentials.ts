@@ -1,4 +1,4 @@
-import { setupApiController } from "backend/setup/setup.controller";
+import { setupApiService } from "backend/setup/setup.service";
 import { IAppliedSchemaFormConfig } from "shared/form-schemas/types";
 import {
   DATA_SOURCES_CONFIG,
@@ -110,7 +110,7 @@ export default requestHandler(
           options: credentialRequestSchema,
         },
       ]);
-      return await setupApiController.setUpDBCredentials(
+      return await setupApiService.setUpDBCredentials(
         validatedRequest.requestBody
       );
     },

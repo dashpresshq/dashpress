@@ -15,7 +15,7 @@ export type IAccountUserSetupFields = Pick<
   "name" | "username" | "password"
 >;
 
-export class SetupApiController {
+export class SetupApiService {
   constructor(
     private _usersApiService: UsersApiService,
     private _credentialsApiService: CredentialsApiService
@@ -70,7 +70,7 @@ export class SetupApiController {
   }
 }
 
-export const setupApiController = new SetupApiController(
+export const setupApiService = new SetupApiService(
   usersApiService,
   credentialsApiService
 );

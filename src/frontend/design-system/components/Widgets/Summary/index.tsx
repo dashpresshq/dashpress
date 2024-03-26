@@ -46,9 +46,9 @@ const IconRoot = styled(SystemIcon)<{ $color: string }>`
   align-items: center;
 `;
 
-const RelativeCount = styled(Typo.XS)<{ directionColor: string }>`
+const RelativeCount = styled(Typo.XS)<{ $directionColor: string }>`
   lineheight: 20.5px;
-  color: ${(props) => props.directionColor};
+  color: ${(props) => props.$directionColor};
 `;
 
 const DirectionRoot = styled(Stack)<{ color: string }>`
@@ -114,7 +114,7 @@ export function SummaryWidget({
               <RelativeCount
                 weight="bold"
                 aria-label="Relative Count"
-                directionColor={directionColor}
+                $directionColor={directionColor}
               >
                 {relativeCount}
               </RelativeCount>

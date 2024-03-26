@@ -5,7 +5,7 @@ import styled, { css } from "styled-components";
 export interface IStyledBaseButton {
   block?: boolean;
   size?: "sm" | "xs";
-  justIcon?: boolean;
+  $justIcon?: boolean;
   cursor?: "progress";
 }
 
@@ -59,7 +59,7 @@ export const StyledBaseButton = styled.button<IStyledBaseButton>`
       `}
 
       ${(props) =>
-        props.justIcon &&
+        props.$justIcon &&
         css`
           padding: 8px;
           font-size: 10px;

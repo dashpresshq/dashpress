@@ -40,7 +40,7 @@ export function WidgetHeader({
             <GrabIcon width={18} />
           </SortableKnob>
         )}
-        <Typo.MD ellipsis>{title}</Typo.MD>
+        <Typo.MD $ellipsis>{title}</Typo.MD>
       </Stack>
       {setting ? (
         <ActionButtons

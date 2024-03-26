@@ -17,7 +17,7 @@ export type TextProps = {
   textStyle?: "italic";
   as: "p" | "span";
   id?: string;
-  ellipsis?: true;
+  $ellipsis?: true;
   children: ReactNode;
 };
 
@@ -46,7 +46,7 @@ const Text = styled.p.attrs((props: TextProps) => ({
     color = "main",
     weight = "regular",
     textStyle,
-    ellipsis,
+    $ellipsis,
   }) => ({
     color: TEXT_COLORS[color],
     fontStyle: textStyle || "normal",
@@ -55,9 +55,9 @@ const Text = styled.p.attrs((props: TextProps) => ({
     lineHeight: `${sizes[size] * 1.25}px`,
     margin: 0,
     padding: 0,
-    textOverflow: ellipsis ? "ellipsis" : undefined,
-    whiteSpace: ellipsis ? "nowrap" : undefined,
-    overflow: ellipsis ? "hidden" : undefined,
+    textOverflow: $ellipsis ? "ellipsis" : undefined,
+    whiteSpace: $ellipsis ? "nowrap" : undefined,
+    overflow: $ellipsis ? "hidden" : undefined,
   })
 );
 

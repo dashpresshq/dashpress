@@ -49,7 +49,7 @@ export function SoftButton({
     size,
     block,
     disabled: disabled || isMakingRequest,
-    justIcon,
+    $justIcon: justIcon,
     $color: color,
     "aria-label": justIcon ? label : undefined,
   };

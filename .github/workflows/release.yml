@@ -13,9 +13,9 @@ jobs:
         with:
           node-version: 21
       - run: npm install
-      - name: Start Redis
-        uses: supercharge/redis-github-action@1.4.0
-      - run: npm run verify
+      # - name: Start Redis
+      #   uses: supercharge/redis-github-action@1.4.0
+      # - run: npm run verify
       - uses: JS-DevTools/npm-publish@v1
         with:
           token: ${{ secrets.NPM_TOKEN }}

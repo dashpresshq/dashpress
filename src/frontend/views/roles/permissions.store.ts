@@ -1,4 +1,4 @@
-import { useMutation } from "react-query";
+import { useMutation } from "@tanstack/react-query";
 import { MAKE_CRUD_CONFIG } from "frontend/lib/crud-config";
 import { useStorageApi } from "frontend/lib/data/useApi";
 import { useApiMutateOptimisticOptions } from "frontend/lib/data/useMutate/useApiMutateOptimisticOptions";
@@ -34,11 +34,18 @@ export function useRolePermissionDeletionMutation() {
     successMessage: ADMIN_PERMISSIONS_CRUD_CONFIG.MUTATION_LANG.DELETE,
   });
 
-  return useMutation(async (permissions: string[]) => {
-    await makeActionRequest("DELETE", ADMIN_ROLE_PERMISSION_ENDPOINT(roleId), {
-      permissions,
-    });
-  }, apiMutateOptions);
+  return useMutation({
+    mutationFn: async (permissions: string[]) => {
+      await makeActionRequest(
+        "DELETE",
+        ADMIN_ROLE_PERMISSION_ENDPOINT(roleId),
+        {
+          permissions,
+        }
+      );
+    },
+    ...apiMutateOptions,
+  });
 }
 
 export function useCreateRolePermissionMutation() {
@@ -50,11 +57,11 @@ export function useCreateRolePermissionMutation() {
     successMessage: ADMIN_PERMISSIONS_CRUD_CONFIG.MUTATION_LANG.CREATE,
   });
 
-  return useMutation(
-    async (permissions: string[]) =>
+  return useMutation({
+    mutationFn: async (permissions: string[]) =>
       await makeActionRequest("POST", ADMIN_ROLE_PERMISSION_ENDPOINT(roleId), {
         permissions,
       }),
-    apiMutateOptions
-  );
+    ...apiMutateOptions,
+  });
 }

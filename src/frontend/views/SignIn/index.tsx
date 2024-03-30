@@ -1,5 +1,5 @@
 import React from "react";
-import { useMutation } from "react-query";
+import { useMutation } from "@tanstack/react-query";
 import { AuthLayout } from "frontend/_layouts/guest";
 import { ISuccessfullAuthenticationResponse } from "shared/types/auth/portal";
 import { useSetupCheck } from "frontend/hooks/setup/setup.store";
@@ -20,22 +20,20 @@ import { useHandleNoTokenAuthResponse } from "./portal";
 function useSignInMutation() {
   const authenticateUser = useAuthenticateUser();
   const handleNoTokenAuthResponse = useHandleNoTokenAuthResponse();
-  return useMutation(
-    async (values: ISignInForm) =>
+  return useMutation({
+    mutationFn: async (values: ISignInForm) =>
       await makeActionRequest("POST", `/api/auth/signin`, values),
-    {
-      onSuccess: (data: ISuccessfullAuthenticationResponse, formData) => {
-        if (data.token) {
-          authenticateUser(data.token, formData.rememberMe);
-          return;
-        }
-        handleNoTokenAuthResponse(data, formData);
-      },
-      onError: (error: { message: string }) => {
-        ToastService.error(error.message);
-      },
-    }
-  );
+    onSuccess: (data: ISuccessfullAuthenticationResponse, formData) => {
+      if (data.token) {
+        authenticateUser(data.token, formData.rememberMe);
+        return;
+      }
+      handleNoTokenAuthResponse(data, formData);
+    },
+    onError: (error: { message: string }) => {
+      ToastService.error(error.message);
+    },
+  });
 }
 
 export function SignIn() {

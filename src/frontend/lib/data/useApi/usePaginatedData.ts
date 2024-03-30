@@ -1,4 +1,8 @@
-import { useQuery, UseQueryResult } from "react-query";
+import {
+  keepPreviousData,
+  useQuery,
+  UseQueryResult,
+} from "@tanstack/react-query";
 import { IPaginatedDataState, PaginatedData } from "shared/types/data";
 import { useRouter } from "next/router";
 import { makeGetRequest } from "../makeRequest";
@@ -15,18 +19,16 @@ export function usePaginatedData<T extends Record<string, unknown>>(
   const builtOptions = buildApiOptions(options);
   const router = useRouter();
 
-  return useQuery<PaginatedData<T>>(
-    getPaginatedDataCachekey(endPoint, dataState),
-    async () => {
+  return useQuery<PaginatedData<T>>({
+    queryKey: getPaginatedDataCachekey(endPoint, dataState),
+    queryFn: async () => {
       return await makeGetRequest(
         endPoint + tableDataParamsToQueryString(dataState),
         "Data could not be retrieved"
       );
     },
-    {
-      ...builtOptions,
-      enabled: router.isReady && builtOptions.enabled,
-      keepPreviousData: true,
-    }
-  );
+    enabled: router.isReady && builtOptions.enabled,
+    placeholderData: keepPreviousData,
+    ...builtOptions,
+  });
 }

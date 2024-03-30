@@ -61,7 +61,7 @@ export function ListUsers() {
         />
       );
     },
-    [userDeletionMutation.isLoading]
+    [userDeletionMutation.isPending]
   );
 
   const columns: IFETableColumn<IAccountProfile>[] = [

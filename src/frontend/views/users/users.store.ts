@@ -1,6 +1,6 @@
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
 import { useRouter } from "next/router";
-import { useMutation } from "react-query";
+import { useMutation } from "@tanstack/react-query";
 import { ICreateUserForm } from "shared/form-schemas/users";
 import { IResetPasswordForm } from "shared/form-schemas/users/reset-password";
 import { IAccountProfile } from "shared/types/user";
@@ -52,14 +52,14 @@ export function useUserDeletionMutation() {
     successMessage: ADMIN_USERS_CRUD_CONFIG.MUTATION_LANG.DELETE,
   });
 
-  return useMutation(
-    async (username: string) =>
+  return useMutation({
+    mutationFn: async (username: string) =>
       await makeActionRequest(
         "DELETE",
         ADMIN_USERS_CRUD_CONFIG.ENDPOINTS.DELETE(username)
       ),
-    apiMutateOptions
-  );
+    ...apiMutateOptions,
+  });
 }
 
 export function useUpdateUserMutation() {
@@ -72,15 +72,15 @@ export function useUpdateUserMutation() {
     successMessage: ADMIN_USERS_CRUD_CONFIG.MUTATION_LANG.EDIT,
   });
 
-  return useMutation(
-    async (data: Partial<IAccountProfile>) =>
+  return useMutation({
+    mutationFn: async (data: Partial<IAccountProfile>) =>
       await makeActionRequest(
         "PATCH",
         ADMIN_USERS_CRUD_CONFIG.ENDPOINTS.UPDATE(username),
         data
       ),
-    apiMutateOptions
-  );
+    ...apiMutateOptions,
+  });
 }
 
 export function useResetUserPasswordMutation() {
@@ -90,15 +90,15 @@ export function useResetUserPasswordMutation() {
     successMessage: "Password Reset Successfully",
   });
 
-  return useMutation(
-    async (data: IResetPasswordForm) =>
+  return useMutation({
+    mutationFn: async (data: IResetPasswordForm) =>
       await makeActionRequest(
         "PATCH",
         ADMIN_USERS_CRUD_CONFIG.ENDPOINTS.CUSTOM(username, "reset-password"),
         data
       ),
-    apiMutateOptions
-  );
+    ...apiMutateOptions,
+  });
 }
 
 export function useCreateUserMutation() {
@@ -114,12 +114,15 @@ export function useCreateUserMutation() {
     }),
   });
 
-  return useMutation(async (data: ICreateUserForm) => {
-    await makeActionRequest(
-      "POST",
-      ADMIN_USERS_CRUD_CONFIG.ENDPOINTS.CREATE,
-      data
-    );
-    return data;
-  }, apiMutateOptions);
+  return useMutation({
+    mutationFn: async (data: ICreateUserForm) => {
+      await makeActionRequest(
+        "POST",
+        ADMIN_USERS_CRUD_CONFIG.ENDPOINTS.CREATE,
+        data
+      );
+      return data;
+    },
+    ...apiMutateOptions,
+  });
 }

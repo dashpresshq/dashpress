@@ -72,7 +72,7 @@ export function FormActions({ entity }: { entity: string }) {
         ]}
       />
     ),
-    [deleteFormActionMutation.isLoading]
+    [deleteFormActionMutation.isPending]
   );
 
   const columns: IFETableColumn<IFormAction>[] = [

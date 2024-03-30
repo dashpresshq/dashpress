@@ -1,4 +1,4 @@
-import { useMutation } from "react-query";
+import { useMutation } from "@tanstack/react-query";
 import { IIntegrationsList, ActionIntegrations } from "shared/types/actions";
 import { CRUD_CONFIG_NOT_FOUND } from "frontend/lib/crud-config";
 import { reduceStringToNumber } from "shared/lib/strings";
@@ -56,14 +56,14 @@ export function useDeactivateIntegrationMutation() {
       ACTION_INTEGRATIONS_CRUD_CONFIG.MUTATION_LANG.CUSTOM("Deactivated"),
   });
 
-  return useMutation(
-    async (activationId: string) =>
+  return useMutation({
+    mutationFn: async (activationId: string) =>
       await makeActionRequest(
         "DELETE",
         `/api/integrations/actions/${activationId}`
       ),
-    apiMutateOptions
-  );
+    ...apiMutateOptions,
+  });
 }
 
 export function useActivateIntegrationMutation(integration: string) {
@@ -75,15 +75,15 @@ export function useActivateIntegrationMutation(integration: string) {
       ACTION_INTEGRATIONS_CRUD_CONFIG.MUTATION_LANG.CUSTOM("Activated"),
   });
 
-  return useMutation(
-    async (configuration: Record<string, string>) =>
+  return useMutation({
+    mutationFn: async (configuration: Record<string, string>) =>
       await makeActionRequest(
         "POST",
         `/api/integrations/actions/${integration}`,
         configuration
       ),
-    apiMutateOptions
-  );
+    ...apiMutateOptions,
+  });
 }
 
 export function useUpdateActivatedIntegrationMutation(activationId: string) {
@@ -96,8 +96,8 @@ export function useUpdateActivatedIntegrationMutation(activationId: string) {
 
   const rootPassword = usePasswordStore((state) => state.password);
 
-  return useMutation(
-    async (configuration: Record<string, string>) =>
+  return useMutation({
+    mutationFn: async (configuration: Record<string, string>) =>
       await makeActionRequest(
         "PATCH",
         `/api/integrations/actions/${activationId}`,
@@ -106,6 +106,6 @@ export function useUpdateActivatedIntegrationMutation(activationId: string) {
           _password: rootPassword,
         }
       ),
-    apiMutateOptions
-  );
+    ...apiMutateOptions,
+  });
 }

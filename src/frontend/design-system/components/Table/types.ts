@@ -1,6 +1,6 @@
 import { HeaderContext } from "@tanstack/react-table";
 import { ReactNode } from "react";
-import { UseQueryResult } from "react-query";
+import { UseQueryResult } from "@tanstack/react-query";
 import {
   IPaginatedDataState,
   PaginatedData,
@@ -27,7 +27,7 @@ export interface ITableProps<T> {
   columns: ITableColumn[];
   tableData: Pick<
     UseQueryResult<PaginatedData<Record<string, unknown>>, unknown>,
-    "data" | "isLoading" | "error" | "isPreviousData"
+    "data" | "isLoading" | "error" | "isPlaceholderData"
   >;
   lean?: true;
   border?: boolean;

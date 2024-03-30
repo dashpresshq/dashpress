@@ -54,7 +54,7 @@ export function ListRoles() {
         />
       );
     },
-    [roleDeletionMutation.isLoading]
+    [roleDeletionMutation.isPending]
   );
   const columns: IFETableColumn<IRolesList>[] = [
     {

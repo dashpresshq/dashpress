@@ -1,4 +1,4 @@
-import { useMutation } from "react-query";
+import { useMutation } from "@tanstack/react-query";
 import {
   APP_CONFIGURATION_CONFIG,
   AppConfigurationKeys,
@@ -95,10 +95,13 @@ export function useUpsertConfigurationMutation<T extends AppConfigurationKeys>(
     successMessage: MAKE_APP_CONFIGURATION_CRUD_CONFIG(key).MUTATION_LANG.SAVED,
   });
 
-  return useMutation(async (values: AppConfigurationValueType<T>) => {
-    await makeActionRequest("PUT", configurationApiPath(key, entity, "PUT"), {
-      data: values,
-    });
-    return values;
-  }, apiMutateOptions);
+  return useMutation({
+    mutationFn: async (values: AppConfigurationValueType<T>) => {
+      await makeActionRequest("PUT", configurationApiPath(key, entity, "PUT"), {
+        data: values,
+      });
+      return values;
+    },
+    ...apiMutateOptions,
+  });
 }

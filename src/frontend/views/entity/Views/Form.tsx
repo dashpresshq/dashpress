@@ -114,7 +114,7 @@ function TabForm({ tableColumns, values, initialValues }: IProps) {
                           tableData: {
                             error: false,
                             isLoading: false,
-                            isPreviousData: false,
+                            isPlaceholderData: false,
                             data: {
                               data: [],
                               pageIndex: 0,

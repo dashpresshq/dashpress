@@ -2,7 +2,7 @@ import { useAuthenticateUser } from "frontend/hooks/auth/useAuthenticateUser";
 import { SETUP_CHECK_URL } from "frontend/hooks/setup/setup.store";
 import { makeActionRequest } from "frontend/lib/data/makeRequest";
 import { useWaitForResponseMutationOptions } from "frontend/lib/data/useMutate/useWaitForResponseMutationOptions";
-import { useMutation } from "react-query";
+import { useMutation } from "@tanstack/react-query";
 import { ISetupUserForm } from "shared/form-schemas/setup/user";
 import { ISuccessfullAuthenticationResponse } from "shared/types/auth/portal";
 import { IDataSourceCredentials } from "shared/types/data-sources";
@@ -15,11 +15,11 @@ export function useSetupCredentialsMutation() {
     successMessage: "Credentials Was Successfully Setup",
   });
 
-  return useMutation(
-    async (data: IDataSourceCredentials) =>
+  return useMutation({
+    mutationFn: async (data: IDataSourceCredentials) =>
       await makeActionRequest("POST", `/api/setup/credentials`, data),
-    apiMutateOptions
-  );
+    ...apiMutateOptions,
+  });
 }
 
 export function useSetupUserMutation() {
@@ -34,9 +34,9 @@ export function useSetupUserMutation() {
       },
     });
 
-  return useMutation(
-    async (data: ISetupUserForm) =>
+  return useMutation({
+    mutationFn: async (data: ISetupUserForm) =>
       await makeActionRequest("POST", `/api/setup/user`, data),
-    apiMutateOptions
-  );
+    ...apiMutateOptions,
+  });
 }

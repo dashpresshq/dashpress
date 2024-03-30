@@ -3,7 +3,7 @@ import { Field, Form } from "react-final-form";
 import { ISummaryWidgetConfig, IWidgetConfig } from "shared/types/dashboard";
 import { ROYGBIV } from "shared/constants/colors";
 import { IconInputField } from "frontend/components/IconInputField";
-import { useMutation } from "react-query";
+import { useMutation } from "@tanstack/react-query";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { useEffect, useState } from "react";
 import { WidgetScriptDocumentation } from "frontend/docs/scripts/widget-scripts";
@@ -49,10 +49,10 @@ const FormSchema: Partial<Record<IWidgetConfig["_type"], WidgetFormField[]>> = {
 };
 
 export function useRunWidgetScript() {
-  return useMutation(
-    async (script: string) =>
-      await makeActionRequest("POST", `/api/dashboards/script`, { script })
-  );
+  return useMutation({
+    mutationFn: async (script: string) =>
+      await makeActionRequest("POST", `/api/dashboards/script`, { script }),
+  });
 }
 
 export function DashboardWidgetForm({
@@ -241,7 +241,7 @@ export function DashboardWidgetForm({
 
                     <ViewStateMachine
                       error={runWidgetScript.error}
-                      loading={runWidgetScript.isLoading}
+                      loading={runWidgetScript.isPending}
                       loader={
                         <BaseSkeleton height={`${values.height || 250}px`} />
                       }
@@ -292,7 +292,7 @@ export function DashboardWidgetForm({
                               runWidgetScript.mutate(values.script);
                             }}
                             disabled={!values.script}
-                            isMakingRequest={runWidgetScript.isLoading}
+                            isMakingRequest={runWidgetScript.isPending}
                             systemIcon="Eye"
                             size={null}
                             label="Test Widget Script"

@@ -1,4 +1,4 @@
-import { useQueries, UseQueryResult } from "react-query";
+import { useQueries, UseQueryResult } from "@tanstack/react-query";
 import { useRouter } from "next/router";
 import { makeGetRequest } from "../makeRequest";
 import { getQueryCachekey } from "../constants/getQueryCacheKey";
@@ -23,8 +23,8 @@ export function useApiQueries<T, P>({
 > {
   const router = useRouter();
 
-  const queryResults = useQueries(
-    input.map((inputItem) => ({
+  const queryResults = useQueries({
+    queries: input.map((inputItem) => ({
       placeholderData: placeholderDataFn
         ? placeholderDataFn(inputItem[accessor])
         : undefined,
@@ -32,8 +32,8 @@ export function useApiQueries<T, P>({
       queryKey: getQueryCachekey(pathFn(inputItem[accessor])),
       queryFn: async () =>
         dataTransformer(await makeGetRequest(pathFn(inputItem[accessor]))) as P,
-    }))
-  );
+    })),
+  });
 
   const recordedData = (): Record<keyof T, UseQueryResult<P, unknown>> =>
     Object.fromEntries(

@@ -1,6 +1,6 @@
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
 import { useRouter } from "next/router";
-import { useMutation } from "react-query";
+import { useMutation } from "@tanstack/react-query";
 import { IBaseRoleForm } from "shared/form-schemas/roles/base";
 import { makeRoleId } from "shared/constants/user";
 import { IRolesList } from "shared/types/roles";
@@ -30,14 +30,17 @@ export function useCreateRoleMutation() {
     }),
   });
 
-  return useMutation(async (data: IBaseRoleForm) => {
-    await makeActionRequest(
-      "POST",
-      ADMIN_ROLES_CRUD_CONFIG.ENDPOINTS.CREATE,
-      data
-    );
-    return data;
-  }, apiMutateOptions);
+  return useMutation({
+    mutationFn: async (data: IBaseRoleForm) => {
+      await makeActionRequest(
+        "POST",
+        ADMIN_ROLES_CRUD_CONFIG.ENDPOINTS.CREATE,
+        data
+      );
+      return data;
+    },
+    ...apiMutateOptions,
+  });
 }
 
 export function useRoleDeletionMutation() {
@@ -51,12 +54,12 @@ export function useRoleDeletionMutation() {
     successMessage: ADMIN_ROLES_CRUD_CONFIG.MUTATION_LANG.DELETE,
   });
 
-  return useMutation(
-    async (roleId: string) =>
+  return useMutation({
+    mutationFn: async (roleId: string) =>
       await makeActionRequest(
         "DELETE",
         ADMIN_ROLES_CRUD_CONFIG.ENDPOINTS.DELETE(roleId)
       ),
-    apiMutateOptions
-  );
+    ...apiMutateOptions,
+  });
 }

@@ -1,4 +1,4 @@
-import { useMutation } from "react-query";
+import { useMutation } from "@tanstack/react-query";
 import { CRUD_CONFIG_NOT_FOUND } from "frontend/lib/crud-config";
 import { reduceStringToNumber } from "shared/lib/strings";
 import { useApi } from "frontend/lib/data/useApi";
@@ -54,8 +54,8 @@ export function useActivateStorageMutation() {
       STORAGE_INTEGRATIONS_CRUD_CONFIG.MUTATION_LANG.CUSTOM("Activated"),
   });
 
-  return useMutation(
-    async (configuration: {
+  return useMutation({
+    mutationFn: async (configuration: {
       storageKey: string;
       configuration: Record<string, string>;
     }) =>
@@ -64,6 +64,6 @@ export function useActivateStorageMutation() {
         ACTIVE_STORAGE_INTEGRATIONS_ENDPOINT,
         configuration
       ),
-    apiMutateOptions
-  );
+    ...apiMutateOptions,
+  });
 }

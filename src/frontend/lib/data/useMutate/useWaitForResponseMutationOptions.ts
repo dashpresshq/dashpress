@@ -1,4 +1,4 @@
-import { useQueryClient } from "react-query";
+import { useQueryClient } from "@tanstack/react-query";
 import { ToastService } from "frontend/lib/toast";
 import { getQueryCachekey } from "../constants/getQueryCacheKey";
 import { ToastMessageInput } from "./types";
@@ -22,7 +22,7 @@ export function useWaitForResponseMutationOptions<T>(
   return {
     onSuccess: async (formData: T | undefined) => {
       options.endpoints.forEach((queryKey) => {
-        queryClient.invalidateQueries(getQueryCachekey(queryKey));
+        queryClient.invalidateQueries({ queryKey: getQueryCachekey(queryKey) });
       });
 
       if (options.smartSuccessMessage) {

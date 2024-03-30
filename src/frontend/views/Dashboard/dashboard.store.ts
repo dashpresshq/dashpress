@@ -1,4 +1,4 @@
-import { useMutation } from "react-query";
+import { useMutation } from "@tanstack/react-query";
 import { IWidgetConfig } from "shared/types/dashboard";
 import { CRUD_CONFIG_NOT_FOUND } from "frontend/lib/crud-config";
 import { makeActionRequest } from "frontend/lib/data/makeRequest";
@@ -53,9 +53,12 @@ export function useCreateDashboardWidgetMutation(dashboardId: string) {
     successMessage: DASHBOARD_WIDGETS_CRUD_CONFIG.MUTATION_LANG.CREATE,
   });
 
-  return useMutation(async (widget: IWidgetConfig) => {
-    await makeActionRequest("POST", DASHBOARD_ENDPOINT(dashboardId), widget);
-  }, apiMutateOptions);
+  return useMutation({
+    mutationFn: async (widget: IWidgetConfig) => {
+      await makeActionRequest("POST", DASHBOARD_ENDPOINT(dashboardId), widget);
+    },
+    ...apiMutateOptions,
+  });
 }
 
 export function useUpdateDashboardWidgetMutation(
@@ -72,13 +75,16 @@ export function useUpdateDashboardWidgetMutation(
     successMessage: DASHBOARD_WIDGETS_CRUD_CONFIG.MUTATION_LANG.EDIT,
   });
 
-  return useMutation(async (widget: IWidgetConfig) => {
-    await makeActionRequest(
-      "PATCH",
-      `${DASHBOARD_ENDPOINT(dashboardId)}/${widget.id}`,
-      widget
-    );
-  }, apiMutateOptions);
+  return useMutation({
+    mutationFn: async (widget: IWidgetConfig) => {
+      await makeActionRequest(
+        "PATCH",
+        `${DASHBOARD_ENDPOINT(dashboardId)}/${widget.id}`,
+        widget
+      );
+    },
+    ...apiMutateOptions,
+  });
 }
 
 export function useDeleteDashboardWidgetMutation(dashboardId: string) {
@@ -91,15 +97,18 @@ export function useDeleteDashboardWidgetMutation(dashboardId: string) {
     successMessage: DASHBOARD_WIDGETS_CRUD_CONFIG.MUTATION_LANG.DELETE,
   });
 
-  return useMutation(async (widgetId: string) => {
-    await makeActionRequest(
-      "DELETE",
-      `${DASHBOARD_ENDPOINT(dashboardId)}/${widgetId}`,
-      {
-        widgetId,
-      }
-    );
-  }, apiMutateOptions);
+  return useMutation({
+    mutationFn: async (widgetId: string) => {
+      await makeActionRequest(
+        "DELETE",
+        `${DASHBOARD_ENDPOINT(dashboardId)}/${widgetId}`,
+        {
+          widgetId,
+        }
+      );
+    },
+    ...apiMutateOptions,
+  });
 }
 
 export function useArrangeDashboardWidgetMutation(dashboardId: string) {
@@ -111,11 +120,14 @@ export function useArrangeDashboardWidgetMutation(dashboardId: string) {
     onMutate: MutationHelpers.sortOrder,
   });
 
-  return useMutation(async (widgetList: string[]) => {
-    await makeActionRequest(
-      "PATCH",
-      DASHBOARD_ENDPOINT(dashboardId),
-      widgetList
-    );
-  }, apiMutateOptions);
+  return useMutation({
+    mutationFn: async (widgetList: string[]) => {
+      await makeActionRequest(
+        "PATCH",
+        DASHBOARD_ENDPOINT(dashboardId),
+        widgetList
+      );
+    },
+    ...apiMutateOptions,
+  });
 }

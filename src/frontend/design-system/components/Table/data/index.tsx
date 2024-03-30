@@ -41,7 +41,7 @@ export const TABLE_DATA = {
   },
   isLoading: false,
   error: false,
-  isPreviousData: false,
+  isPlaceholderData: false,
 };
 
 export const TABLE_COLUMNS: ITableColumn[] = [

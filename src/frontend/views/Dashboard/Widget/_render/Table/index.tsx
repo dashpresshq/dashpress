@@ -26,7 +26,7 @@ export function TableWidget({ data }: IProps) {
         },
         error: "",
         isLoading: false,
-        isPreviousData: false,
+        isPlaceholderData: false,
       }}
       syncPaginatedDataStateOut={() => {}}
       border

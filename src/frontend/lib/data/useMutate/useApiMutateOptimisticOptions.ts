@@ -1,5 +1,5 @@
 import { noop } from "shared/lib/noop";
-import { useQueryClient } from "react-query";
+import { useQueryClient } from "@tanstack/react-query";
 import { ToastService } from "frontend/lib/toast";
 import { IApiMutateOptions } from "./types";
 import { useApiMutate } from "./useApiMutate";
@@ -22,7 +22,9 @@ export function useApiMutateOptimisticOptions<T, K, V = void>(
       }
       if (options.otherEndpoints) {
         options.otherEndpoints.forEach((queryKey) => {
-          queryClient.invalidateQueries(getQueryCachekey(queryKey));
+          queryClient.invalidateQueries({
+            queryKey: getQueryCachekey(queryKey),
+          });
         });
       }
       if (options.onSuccessActionWithFormData) {

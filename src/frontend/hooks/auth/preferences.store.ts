@@ -1,4 +1,4 @@
-import { useMutation } from "react-query";
+import { useMutation } from "@tanstack/react-query";
 import { makeActionRequest } from "frontend/lib/data/makeRequest";
 import { useStorageApi } from "frontend/lib/data/useApi";
 import { useWaitForResponseMutationOptions } from "frontend/lib/data/useMutate/useWaitForResponseMutationOptions";
@@ -55,10 +55,13 @@ export function useUpsertUserPreferenceMutation<T extends UserPreferencesKeys>(
     successMessage: MAKE_USER_PREFERENCE_CRUD_CONFIG(key).MUTATION_LANG.SAVED,
   });
 
-  return useMutation(async (values: UserPreferencesValueType<T>) => {
-    await makeActionRequest("PUT", userPrefrencesApiPath(key), {
-      data: values,
-    });
-    return values;
-  }, apiMutateOptions);
+  return useMutation({
+    mutationFn: async (values: UserPreferencesValueType<T>) => {
+      await makeActionRequest("PUT", userPrefrencesApiPath(key), {
+        data: values,
+      });
+      return values;
+    },
+    ...apiMutateOptions,
+  });
 }

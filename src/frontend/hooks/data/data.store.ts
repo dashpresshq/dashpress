@@ -1,6 +1,6 @@
 import qs from "qs";
 import { useRouter } from "next/router";
-import { useMutation } from "react-query";
+import { useMutation } from "@tanstack/react-query";
 import { FieldQueryFilter, FilterOperators } from "shared/types/data";
 import { CRUD_CONFIG_NOT_FOUND } from "frontend/lib/crud-config";
 import { makeActionRequest } from "frontend/lib/data/makeRequest";
@@ -38,7 +38,7 @@ export const useEntityDataDetails = ({
     ENTITY_DETAILS_PATH({ entity, entityId, column }),
     {
       errorMessage: entityCrudConfig.TEXT_LANG.NOT_FOUND,
-      enabled: column !== SYSTEM_LOADING_VALUE,
+      enabled: column !== SYSTEM_LOADING_VALUE && !!entityId,
       defaultData: {},
     }
   );
@@ -129,6 +129,7 @@ export const useEntityReferenceCount = (
 export const useEntityDataReference = (entity: string, entityId: string) => {
   return useApi<string>(ENTITY_REFERENCE_PATH({ entity, entityId }), {
     errorMessage: CRUD_CONFIG_NOT_FOUND("Reference data"),
+    enabled: !!entityId && !!entity,
     defaultData: "",
   });
 };
@@ -160,11 +161,11 @@ export function useEntityDataCreationMutation(
         }),
   });
 
-  return useMutation(
-    async (data: Record<string, string>) =>
+  return useMutation({
+    mutationFn: async (data: Record<string, string>) =>
       await makeActionRequest("POST", `/api/data/${entity}`, { data }),
-    apiMutateOptions
-  );
+    ...apiMutateOptions,
+  });
 }
 
 export function useEntityDataUpdationMutation(
@@ -184,13 +185,13 @@ export function useEntityDataUpdationMutation(
 
   const metadata = useEntityMetadataDetails({ entity, entityId });
 
-  return useMutation(
-    async (data: Record<string, string>) =>
+  return useMutation({
+    mutationFn: async (data: Record<string, string>) =>
       await makeActionRequest("PATCH", `/api/data/${entity}/${entityId}`, {
         data: { ...data, ...metadata },
       }),
-    apiMutateOptions
-  );
+    ...apiMutateOptions,
+  });
 }
 
 export function useEntityDataDeletionMutation(
@@ -220,9 +221,9 @@ export function useEntityDataDeletionMutation(
     successMessage: entityCrudConfig.MUTATION_LANG.DELETE,
   });
   // eyes on optimstic delete here
-  return useMutation(
-    async (id: string) =>
+  return useMutation({
+    mutationFn: async (id: string) =>
       await makeActionRequest("DELETE", `/api/data/${entity}/${id}`),
-    apiMutateOptions
-  );
+    ...apiMutateOptions,
+  });
 }

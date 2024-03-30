@@ -1,5 +1,5 @@
 import { CRUD_CONFIG_NOT_FOUND } from "frontend/lib/crud-config";
-import { useMutation } from "react-query";
+import { useMutation } from "@tanstack/react-query";
 import {
   IFormAction,
   IIntegrationImplementationList,
@@ -39,14 +39,14 @@ export function useDeleteFormActionMutation(entity: string) {
     }
   );
 
-  return useMutation(
-    async (formActionId: string) =>
+  return useMutation({
+    mutationFn: async (formActionId: string) =>
       await makeActionRequest(
         "DELETE",
         FORM_ACTION_CRUD_CONFIG.ENDPOINTS.DELETE(formActionId)
       ),
-    apiMutateOptions
-  );
+    ...apiMutateOptions,
+  });
 }
 
 export function useCreateFormActionMutation(entity: string) {
@@ -57,13 +57,16 @@ export function useCreateFormActionMutation(entity: string) {
     successMessage: FORM_ACTION_CRUD_CONFIG.MUTATION_LANG.CREATE,
   });
 
-  return useMutation(async (configuration: IFormAction) => {
-    return await makeActionRequest(
-      "POST",
-      FORM_ACTION_CRUD_CONFIG.ENDPOINTS.CREATE,
-      configuration
-    );
-  }, apiMutateOptions);
+  return useMutation({
+    mutationFn: async (configuration: IFormAction) => {
+      return await makeActionRequest(
+        "POST",
+        FORM_ACTION_CRUD_CONFIG.ENDPOINTS.CREATE,
+        configuration
+      );
+    },
+    ...apiMutateOptions,
+  });
 }
 
 export function useUpdateFormActionMutation(entity: string) {
@@ -74,13 +77,13 @@ export function useUpdateFormActionMutation(entity: string) {
     successMessage: FORM_ACTION_CRUD_CONFIG.MUTATION_LANG.EDIT,
   });
 
-  return useMutation(
-    async (formAction: IFormAction) =>
+  return useMutation({
+    mutationFn: async (formAction: IFormAction) =>
       await makeActionRequest(
         "PATCH",
         FORM_ACTION_CRUD_CONFIG.ENDPOINTS.UPDATE(formAction.id),
         formAction
       ),
-    apiMutateOptions
-  );
+    ...apiMutateOptions,
+  });
 }

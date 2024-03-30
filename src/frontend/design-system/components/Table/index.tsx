@@ -67,7 +67,7 @@ export function Table<T extends unknown>({
     },
     isLoading,
     error,
-    isPreviousData,
+    isPlaceholderData,
   } = tableData;
 
   const totalPageCount = getPageCount(data.totalRecords, data.pageSize);
@@ -111,7 +111,7 @@ export function Table<T extends unknown>({
     return <TableSkeleton lean={lean} />;
   }
 
-  const previousDataRender = isPreviousData ? (
+  const previousDataRender = isPlaceholderData ? (
     <BaseSkeleton
       height="2px"
       width="100%"

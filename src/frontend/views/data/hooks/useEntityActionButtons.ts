@@ -54,7 +54,7 @@ export const useEntityActionButtons = ({
           entityDataDeletionMutation.mutate(entityId);
         },
         isMakingRequest:
-          entityDataDeletionMutation.isLoading &&
+          entityDataDeletionMutation.isPending &&
           entityDataDeletionMutation.variables === entityId,
       }),
       order: 30,

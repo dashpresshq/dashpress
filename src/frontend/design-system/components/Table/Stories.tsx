@@ -87,7 +87,7 @@ Empty.args = {
     },
     isLoading: false,
     error: false,
-    isPreviousData: false,
+    isPlaceholderData: false,
   },
 };
 
@@ -102,7 +102,7 @@ Error.args = {
     },
     isLoading: false,
     error: "Some Error Occured",
-    isPreviousData: false,
+    isPlaceholderData: false,
   },
 };
 
@@ -117,7 +117,7 @@ Loading.args = {
     },
     isLoading: true,
     error: false,
-    isPreviousData: false,
+    isPlaceholderData: false,
   },
 };
 
@@ -125,6 +125,6 @@ export const PreviousData = Template.bind({});
 PreviousData.args = {
   tableData: {
     ...TABLE_DATA,
-    isPreviousData: true,
+    isPlaceholderData: true,
   },
 };

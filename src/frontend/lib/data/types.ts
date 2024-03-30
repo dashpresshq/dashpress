@@ -1,4 +1,4 @@
-import { UseQueryResult } from "react-query";
+import { UseQueryResult } from "@tanstack/react-query";
 
 export enum DataStates {
   Loading = "loading",
@@ -6,10 +6,11 @@ export enum DataStates {
   Loaded = "loaded",
 }
 
-export type DataStateKeys<T> = Pick<
-  UseQueryResult<T>,
-  "data" | "isLoading" | "error"
->;
+export type DataStateKeys<T> = Pick<UseQueryResult<T>, "data" | "isLoading"> & {
+  error: unknown | Error;
+};
+
+type NonFunctionGuard<T> = T extends Function ? never : T;
 
 export interface IUseApiOptions<T> {
   selector?: (input: any) => T;
@@ -20,7 +21,7 @@ export interface IUseApiOptions<T> {
     body: Record<string, unknown>;
   };
   defaultData: T;
-  placeholderData?: T;
+  placeholderData?: NonFunctionGuard<T>;
   /*
   Some requests may go bad in the BE and it is makes sense
   Like checking if something exists in a list

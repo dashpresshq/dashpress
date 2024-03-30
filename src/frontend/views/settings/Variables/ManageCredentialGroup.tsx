@@ -102,7 +102,7 @@ export function ManageCredentialGroup({
         ]}
       />
     ),
-    [deleteConfigurationMutation.isLoading, passwordStore.password]
+    [deleteConfigurationMutation.isPending, passwordStore.password]
   );
 
   const canManageAction = !(

@@ -45,7 +45,9 @@ export function EntityRelationDetails() {
   const { backLink } = useNavigationStack();
 
   const title =
-    entityDataReference.isLoading || entityDataReference.isIdle
+    entityDataReference.isLoading ||
+    (entityDataReference.status === "pending" &&
+      entityDataReference.fetchStatus === "idle")
       ? childEntityCrudConfig.TEXT_LANG.SINGULAR
       : `${entityDataReference.data} - ${childEntityCrudConfig.TEXT_LANG.SINGULAR}`;
 
@@ -100,7 +102,8 @@ export function EntityRelationDetails() {
           title={title}
           isLoading={
             entityDataReference.isLoading ||
-            entityDataReference.isIdle ||
+            (entityDataReference.status === "pending" &&
+              entityDataReference.fetchStatus === "idle") ||
             childEntityIdField.isLoading ||
             dataDetails.isLoading
           }
@@ -130,7 +133,8 @@ export function EntityRelationDetails() {
           title={title}
           isLoading={
             entityDataReference.isLoading ||
-            entityDataReference.isIdle ||
+            (entityDataReference.status === "pending" &&
+              entityDataReference.fetchStatus === "idle") ||
             dataDetails.isLoading
           }
           backLink={backLink}

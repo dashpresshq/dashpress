@@ -1,6 +1,6 @@
 import { usePasswordStore } from "frontend/views/integrations/password.store";
 import { useEffect } from "react";
-import { useMutation, useQueryClient } from "react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { IntegrationsConfigurationGroup } from "shared/types/integrations";
 import { CRUD_CONFIG_NOT_FOUND } from "frontend/lib/crud-config";
 import { makeActionRequest } from "frontend/lib/data/makeRequest";
@@ -34,14 +34,14 @@ export function useIntegrationConfigurationUpsertationMutation(
       INTEGRATIONS_GROUP_CRUD_CONFIG[group].crudConfig.MUTATION_LANG.SAVED,
   });
 
-  return useMutation(
-    async (data: { key: string; value: string }) =>
+  return useMutation({
+    mutationFn: async (data: { key: string; value: string }) =>
       await makeActionRequest("PUT", `/api/integrations/${group}/${data.key}`, {
         value: data.value,
         _password: rootPassword,
       }),
-    apiMutateOptions
-  );
+    ...apiMutateOptions,
+  });
 }
 
 export function useIntegrationConfigurationDeletionMutation(
@@ -57,13 +57,13 @@ export function useIntegrationConfigurationDeletionMutation(
     onMutate: MutationHelpers.deleteByKey("key"),
   });
 
-  return useMutation(
-    async (key: string) =>
+  return useMutation({
+    mutationFn: async (key: string) =>
       await makeActionRequest("DELETE", `/api/integrations/${group}/${key}`, {
         _password: rootPassword,
       }),
-    apiMutateOptions
-  );
+    ...apiMutateOptions,
+  });
 }
 
 export const useRevealedCredentialsList = (

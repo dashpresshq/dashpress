@@ -1,10 +1,11 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import React, { ReactNode, useEffect, useRef, useState } from "react";
+import React, { ReactNode, useEffect, useRef } from "react";
 import useClickAway from "react-use/lib/useClickAway";
 import useKey from "react-use/lib/useKey";
 import styled from "styled-components";
 import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
+import { useToggle } from "frontend/hooks/state/useToggleState";
 import { Z_INDEXES } from "../../constants/zIndex";
 
 const Root = styled.div`
@@ -54,35 +55,31 @@ export function Dropdown({
   onDropDownActiveChange,
   rootZIndex = Z_INDEXES.dropDown,
 }: IProps) {
-  const [menuVisible, setMenuVisible] = useState(false);
+  const menuVisibility = useToggle();
   const rootRef = useRef<HTMLDivElement>(null);
 
-  useClickAway(rootRef, () => setMenuVisible(false));
+  useClickAway(rootRef, menuVisibility.off);
 
   useEffect(() => {
     if (onDropDownActiveChange) {
-      onDropDownActiveChange(menuVisible);
+      onDropDownActiveChange(menuVisibility.isOn);
     }
-  }, [onDropDownActiveChange, menuVisible]);
+  }, [onDropDownActiveChange, menuVisibility.isOn]);
 
-  const close = () => {
-    setMenuVisible(false);
-  };
-
-  useKey("Escape", close);
+  useKey("Escape", menuVisibility.off);
 
   return (
     <Root ref={rootRef}>
       <span
         aria-label={ariaLabel}
         onClick={(e) => {
-          setMenuVisible(!menuVisible);
+          menuVisibility.toggle();
           e.stopPropagation();
         }}
       >
         {target}
       </span>
-      {menuVisible && (
+      {menuVisibility.isOn && (
         <DropdownRoot
           offset={rootRef.current?.offsetLeft || 0}
           align={align}
@@ -90,7 +87,7 @@ export function Dropdown({
           $zIndex={rootZIndex}
           onClick={(e) => {
             if (!preserveVisibiltyOnClick) {
-              close();
+              menuVisibility.off();
             }
             e.stopPropagation();
           }}

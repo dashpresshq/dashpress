@@ -6,8 +6,9 @@ import {
   Table,
   Updater,
 } from "@tanstack/react-table";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo } from "react";
 import { usePrevious } from "react-use";
+import { useToggle } from "frontend/hooks/state/useToggleState";
 import { ITableColumn } from "./types";
 import {
   buildTableStateToRefreshPageNumber,
@@ -48,20 +49,19 @@ export function useSyncTableState<T>(
   overridePaginatedDataState: IPaginatedDataState<T> | undefined,
   syncPaginatedDataStateOut: (params: IPaginatedDataState<T>) => void
 ) {
-  const [resetPage, setResetPage] = useState(true);
+  const resetPage = useToggle(true);
   const tableState = internalTableStateToStandard<T>(table.getState());
   const previousTableState = usePrevious<IPaginatedDataState<T>>(tableState);
 
   useEffect(() => {
     if (
-      resetPage &&
+      resetPage.isOn &&
       buildTableStateToRefreshPageNumber(previousTableState) !==
         buildTableStateToRefreshPageNumber(tableState)
     ) {
       table.setPageIndex(0);
     }
-
-    setResetPage(true);
+    resetPage.on();
     syncPaginatedDataStateOut(tableState);
   }, [JSON.stringify(tableState)]);
 
@@ -70,7 +70,7 @@ export function useSyncTableState<T>(
       return;
     }
 
-    setResetPage(false);
+    resetPage.off();
 
     if (overridePaginatedDataState.pageSize) {
       table.setPageSize(overridePaginatedDataState.pageSize);

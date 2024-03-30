@@ -1,20 +1,22 @@
 import React, { ReactNode, useEffect } from "react";
 import { AuthActions } from "frontend/hooks/auth/auth.actions";
 import { ComponentIsLoading } from "frontend/design-system/components/ComponentIsLoading";
+import { useToggle } from "frontend/hooks/state/useToggleState";
 
 export function IsSignedIn({ children }: { children: ReactNode }) {
-  const [render, setRender] = React.useState(false);
+  const renderMode = useToggle();
+
   useEffect(() => {
     if (typeof window !== "undefined") {
       if (!AuthActions.isAuthenticated()) {
         AuthActions.signOut("IsSignedIn");
       } else {
-        setRender(true);
+        renderMode.on();
       }
     }
   }, [typeof window]);
 
-  if (!render) {
+  if (renderMode.isOff) {
     return <ComponentIsLoading />;
   }
   // eslint-disable-next-line react/jsx-no-useless-fragment

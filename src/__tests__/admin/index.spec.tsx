@@ -70,9 +70,9 @@ describe("pages/admin", () => {
 
     expect(await getTableRows(widget)).toMatchInlineSnapshot(`
       [
-        "NameAge",
-        "John6",
-        "Jane5",
+        "Name|Age",
+        "John|6",
+        "Jane|5",
       ]
     `);
   });

@@ -12,6 +12,7 @@ import userEvent from "@testing-library/user-event";
 import { IAuthenticatedUserBag } from "shared/types/user";
 import { USER_PERMISSIONS } from "shared/constants/user";
 import { AuthActions } from "frontend/hooks/auth/auth.actions";
+import { getTableRows } from "__tests__/_/utils/getTableRows";
 
 const server = setupApiHandlers();
 
@@ -129,28 +130,15 @@ describe("pages/integrations/variables => credentials -- non admin", () => {
         await screen.findByRole("tab", { name: "Secrets" })
       );
 
-      const table = screen.getByRole("table");
-
-      expect(
-        await within(table).findByRole("row", {
-          name: "Key Sort By Key Filter Key By Search Value Sort By Value",
-        })
-      ).toBeInTheDocument();
-      expect(
-        within(table).getByRole("row", {
-          name: "{{ SECRET.PAYMENT_API_KEY }} **********",
-        })
-      ).toBeInTheDocument();
-      expect(
-        within(table).getByRole("row", {
-          name: "{{ SECRET.MAIL_PASSWORD }} **********",
-        })
-      ).toBeInTheDocument();
-      expect(
-        within(table).getByRole("row", {
-          name: "{{ SECRET.ROOT_PASSWORD }} **********",
-        })
-      ).toBeInTheDocument();
+      expect(await getTableRows(screen.getByRole("table")))
+        .toMatchInlineSnapshot(`
+        [
+          "Key|Value",
+          "{{ SECRET.PAYMENT_API_KEY }}|**********",
+          "{{ SECRET.MAIL_PASSWORD }}|**********",
+          "{{ SECRET.ROOT_PASSWORD }}|**********",
+        ]
+      `);
     });
   });
 });

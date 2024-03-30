@@ -1,6 +1,7 @@
 import React, { useCallback, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import { makeFileRequest } from "frontend/lib/data/makeRequest";
+import { useToggle } from "frontend/hooks/state/useToggleState";
 import { ISharedFormInput } from "../_types";
 import { generateClassNames, wrapLabelAndError } from "../_wrapForm";
 import { Presentation } from "./Presentation";
@@ -17,7 +18,7 @@ function FileInput({
   uploadUrl,
   metadata,
 }: IFormFileInput) {
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const submissionMode = useToggle();
   const [error, setError] = useState<string>("");
   const { value, onChange } = input;
   // Get the fiel settings
@@ -42,7 +43,7 @@ function FileInput({
             e.response.data.message || "Ooops, something wrong happened."
           );
         }
-        setIsSubmitting(false);
+        submissionMode.off();
       });
     },
     [uploadUrl, input, metadata]
@@ -57,7 +58,7 @@ function FileInput({
 
   return (
     <Presentation
-      {...{ isSubmitting, disabled, value, error }}
+      {...{ isSubmitting: submissionMode.isOn, disabled, value, error }}
       onClear={() => onChange(null)}
       dropZoneProps={dropZoneProps}
       formClassName={generateClassNames(meta)}

@@ -1,7 +1,13 @@
 import { within } from "@testing-library/react";
 
 export const getTableRows = async (widget: HTMLElement) => {
-  const allRoles = await within(widget).findAllByRole("row");
+  const rows = await within(widget).findAllByRole("row");
 
-  return allRoles.map((row) => row.textContent.trim());
+  return rows.map((row, index) => {
+    return within(row)
+      .getAllByRole(index === 0 ? "columnheader" : "cell")
+      .map((cell) => cell.textContent.trim())
+      .filter(Boolean)
+      .join("|");
+  });
 };

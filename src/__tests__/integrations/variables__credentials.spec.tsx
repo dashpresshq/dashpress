@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 import React from "react";
-import { render, screen, within } from "@testing-library/react";
+import { render, screen, waitFor, within } from "@testing-library/react";
 import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 
 import ManageVariables from "pages/admin/settings/variables";
@@ -8,6 +8,7 @@ import ManageVariables from "pages/admin/settings/variables";
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 import userEvent from "@testing-library/user-event";
 import { AuthActions } from "frontend/hooks/auth/auth.actions";
+import { getTableRows } from "__tests__/_/utils/getTableRows";
 
 setupApiHandlers();
 
@@ -100,30 +101,20 @@ describe("pages/integrations/variables => credentials", () => {
         await screen.findByRole("tab", { name: "Secrets" })
       );
 
-      const table = within(
-        screen.getByRole("tabpanel", { name: "Secrets" })
-      ).getByRole("table");
-
       expect(
-        await within(table).findByRole("row", {
-          name: "Key Sort By Key Filter Key By Search Value Sort By Value",
-        })
-      ).toBeInTheDocument();
-      expect(
-        within(table).getByRole("row", {
-          name: "{{ SECRET.PAYMENT_API_KEY }} **********",
-        })
-      ).toBeInTheDocument();
-      expect(
-        within(table).getByRole("row", {
-          name: "{{ SECRET.MAIL_PASSWORD }} **********",
-        })
-      ).toBeInTheDocument();
-      expect(
-        within(table).getByRole("row", {
-          name: "{{ SECRET.ROOT_PASSWORD }} **********",
-        })
-      ).toBeInTheDocument();
+        await getTableRows(
+          within(screen.getByRole("tabpanel", { name: "Secrets" })).getByRole(
+            "table"
+          )
+        )
+      ).toMatchInlineSnapshot(`
+        [
+          "Key|Value",
+          "{{ SECRET.PAYMENT_API_KEY }}|**********",
+          "{{ SECRET.MAIL_PASSWORD }}|**********",
+          "{{ SECRET.ROOT_PASSWORD }}|**********",
+        ]
+      `);
     });
   });
 
@@ -227,48 +218,20 @@ describe("pages/integrations/variables => credentials", () => {
         })
       );
 
-      const table = within(
-        screen.getByRole("tabpanel", { name: "Secrets" })
-      ).getByRole("table");
-
-      expect(
-        await within(table).findByRole("row", {
-          name: "Key Sort By Key Filter Key By Search Value Sort By Value Action",
-        })
-      ).toBeInTheDocument();
-      expect(
-        await within(table).findByRole(
-          "row",
-          {
-            name: "{{ SECRET.PAYMENT_API_KEY }} super-secret",
-          },
-          {
-            interval: 100,
-            timeout: 2000,
-          }
-        )
-      ).toBeInTheDocument();
-
-      expect(
-        within(table).getByRole("row", {
-          name: "{{ SECRET.MAIL_PASSWORD }} do-not-share",
-        })
-      ).toBeInTheDocument();
-      expect(
-        await within(table).findByRole("row", {
-          name: "Key Sort By Key Filter Key By Search Value Sort By Value Action",
-        })
-      ).toBeInTheDocument();
-      expect(
-        within(table).getByRole("row", {
-          name: "{{ SECRET.ROOT_PASSWORD }} confidential",
-        })
-      ).toBeInTheDocument();
-      expect(
-        within(table).queryByRole("row", {
-          name: "{{ SECRET.ROOT_PASSWORD }} **********",
-        })
-      ).not.toBeInTheDocument();
+      await waitFor(async () => {
+        expect(
+          await getTableRows(
+            await within(
+              screen.getByRole("tabpanel", { name: "Secrets" })
+            ).findByRole("table")
+          )
+        ).toEqual([
+          "Key|Value|Action",
+          "{{ SECRET.PAYMENT_API_KEY }}|super-secret",
+          "{{ SECRET.MAIL_PASSWORD }}|do-not-share",
+          "{{ SECRET.ROOT_PASSWORD }}|confidential",
+        ]);
+      });
 
       expect(
         within(priviledgeSection).queryByText(
@@ -371,11 +334,14 @@ describe("pages/integrations/variables => credentials", () => {
         "Secret Saved Successfully"
       );
 
-      expect(
-        await within(table).findByRole("row", {
-          name: "{{ SECRET.PAYMENT_API_KEY }} super-secret__updated",
-        })
-      ).toBeInTheDocument();
+      await waitFor(async () => {
+        expect(await getTableRows(table)).toEqual([
+          "Key|Value|Action",
+          "{{ SECRET.PAYMENT_API_KEY }}|super-secret__updated",
+          "{{ SECRET.MAIL_PASSWORD }}|do-not-share",
+          "{{ SECRET.ROOT_PASSWORD }}|confidential",
+        ]);
+      });
     });
   });
 

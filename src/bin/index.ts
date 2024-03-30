@@ -84,12 +84,13 @@ const replaceRandomCharaters = (envContent: string) => {
 
   const endpoint = `http://localhost:${process.env.PORT || 3000}`;
 
-  console.log(`- ${terminalLink(
+  console.log(`
+- ${terminalLink(
     "💗 Show us support by dropping a ✨ at github.com/dashpresshq/dashpress",
     "https://github.com/dashpresshq/dashpress"
   )}
 
-  - ${terminalLink(
+- ${terminalLink(
     "💬 If you have questions? Join our community",
     "https://discord.gg/aV6DxwXhzN"
   )}

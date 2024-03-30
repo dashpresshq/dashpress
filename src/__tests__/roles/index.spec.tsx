@@ -6,6 +6,7 @@ import ListRoles from "pages/roles";
 
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 import userEvent from "@testing-library/user-event";
+import { getTableRows } from "__tests__/_/utils/getTableRows";
 
 setupApiHandlers();
 
@@ -23,19 +24,16 @@ describe("pages/roles", () => {
       </ApplicationRoot>
     );
 
-    expect(
-      await screen.findByRole("row", {
-        name: "Role Sort By Role Filter Role By Search Action",
-      })
-    ).toBeInTheDocument();
-    expect(screen.getByRole("row", { name: "Creator" })).toBeInTheDocument();
-    expect(screen.getByRole("row", { name: "Viewer" })).toBeInTheDocument();
-    expect(
-      screen.getByRole("row", { name: "Role 1 Edit Role" })
-    ).toBeInTheDocument();
-    expect(
-      screen.getByRole("row", { name: "Role 2 Edit Role" })
-    ).toBeInTheDocument();
+    expect(await getTableRows(await screen.findByRole("table")))
+      .toMatchInlineSnapshot(`
+      [
+        "Role|Action",
+        "Creator",
+        "Viewer",
+        "Role 1",
+        "Role 2",
+      ]
+    `);
   });
 
   it("should link to create role", async () => {

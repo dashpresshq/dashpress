@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import {
   AlertTriangle,
@@ -12,6 +12,7 @@ import { Typo } from "frontend/design-system/primitives/Typo";
 import { getBestErrorMessage } from "frontend/lib/toast/utils";
 import { Stack } from "frontend/design-system/primitives/Stack";
 import { Spacer } from "frontend/design-system/primitives/Spacer";
+import { useToggle } from "frontend/hooks/state/useToggleState";
 import { SoftButtonStyled } from "../Button/Button";
 
 export enum AlertType {
@@ -96,13 +97,13 @@ const Text = styled(Typo.XS)<{ $color: string }>`
 `;
 
 export function Alert({ type, message, renderJsx, action }: IProps) {
-  const [shouldRender, setShouldRender] = useState(true);
+  const renderMode = useToggle(true);
   const { Icon: IconCmp, color } = AlertMap[type];
   useEffect(() => {
-    setShouldRender(true);
+    renderMode.on();
   }, [message]);
 
-  if (!shouldRender || !message) {
+  if (!renderMode.isOn || !message) {
     return null;
   }
 
@@ -131,9 +132,7 @@ export function Alert({ type, message, renderJsx, action }: IProps) {
       </Content>
       <AlertButton
         type="button"
-        onClick={() => {
-          setShouldRender(false);
-        }}
+        onClick={renderMode.off}
         $color={hexColor}
         aria-label="Close"
       >

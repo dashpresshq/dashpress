@@ -7,6 +7,7 @@ import ManageVariables from "pages/integrations/variables";
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 import userEvent from "@testing-library/user-event";
 import { closeAllToasts } from "__tests__/_/utils/closeAllToasts";
+import { getTableRows } from "__tests__/_/utils/getTableRows";
 
 setupApiHandlers();
 
@@ -30,30 +31,20 @@ describe("pages/integrations/variables => constants", () => {
         </ApplicationRoot>
       );
 
-      const table = await within(
-        screen.getByRole("tabpanel", { name: "Constants" })
-      ).findByRole("table");
-
       expect(
-        await within(table).findByRole("row", {
-          name: "Key Sort By Key Filter Key By Search Value Sort By Value Action",
-        })
-      ).toBeInTheDocument();
-      expect(
-        within(table).getByRole("row", {
-          name: "{{ CONSTANT.BASE_URL }} http://base.com",
-        })
-      ).toBeInTheDocument();
-      expect(
-        within(table).getByRole("row", {
-          name: "{{ CONSTANT.FOO_CONSTANT_KEY }} foo constant value",
-        })
-      ).toBeInTheDocument();
-      expect(
-        within(table).getByRole("row", {
-          name: "{{ CONSTANT.BAR_CONSTANT_KEY }} bar constant value",
-        })
-      ).toBeInTheDocument();
+        await getTableRows(
+          await within(
+            screen.getByRole("tabpanel", { name: "Constants" })
+          ).findByRole("table")
+        )
+      ).toMatchInlineSnapshot(`
+        [
+          "Key|Value|Action",
+          "{{ CONSTANT.BASE_URL }}|http://base.com",
+          "{{ CONSTANT.FOO_CONSTANT_KEY }}|foo constant value",
+          "{{ CONSTANT.BAR_CONSTANT_KEY }}|bar constant value",
+        ]
+      `);
     });
   });
 
@@ -91,17 +82,21 @@ describe("pages/integrations/variables => constants", () => {
         </ApplicationRoot>
       );
 
-      const table = within(
-        screen.getByRole("tabpanel", { name: "Constants" })
-      ).getByRole("table");
-
-      expect(within(table).getAllByRole("row")).toHaveLength(5);
-
       expect(
-        within(table).getByRole("row", {
-          name: "{{ CONSTANT.NEW_KEY }} new value",
-        })
-      ).toBeInTheDocument();
+        await getTableRows(
+          within(screen.getByRole("tabpanel", { name: "Constants" })).getByRole(
+            "table"
+          )
+        )
+      ).toMatchInlineSnapshot(`
+        [
+          "Key|Value|Action",
+          "{{ CONSTANT.BASE_URL }}|http://base.com",
+          "{{ CONSTANT.FOO_CONSTANT_KEY }}|foo constant value",
+          "{{ CONSTANT.BAR_CONSTANT_KEY }}|bar constant value",
+          "{{ CONSTANT.NEW_KEY }}|new value",
+        ]
+      `);
     });
   });
 
@@ -151,15 +146,21 @@ describe("pages/integrations/variables => constants", () => {
         </ApplicationRoot>
       );
 
-      const table = within(
-        screen.getByRole("tabpanel", { name: "Constants" })
-      ).getByRole("table");
-
       expect(
-        within(table).getByRole("row", {
-          name: "{{ CONSTANT.BASE_URL }} http://base.com/updated",
-        })
-      ).toBeInTheDocument();
+        await getTableRows(
+          within(screen.getByRole("tabpanel", { name: "Constants" })).getByRole(
+            "table"
+          )
+        )
+      ).toMatchInlineSnapshot(`
+        [
+          "Key|Value|Action",
+          "{{ CONSTANT.BASE_URL }}|http://base.com/updated",
+          "{{ CONSTANT.FOO_CONSTANT_KEY }}|foo constant value",
+          "{{ CONSTANT.BAR_CONSTANT_KEY }}|bar constant value",
+          "{{ CONSTANT.NEW_KEY }}|new value",
+        ]
+      `);
     });
   });
 

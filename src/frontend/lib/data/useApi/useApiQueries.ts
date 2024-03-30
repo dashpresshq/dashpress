@@ -31,10 +31,7 @@ export function useApiQueries<T, P>({
       enabled: router.isReady,
       queryKey: getQueryCachekey(pathFn(inputItem[accessor])),
       queryFn: async () =>
-        dataTransformer(
-          await makeGetRequest(pathFn(inputItem[accessor])),
-          inputItem[accessor]
-        ) as P,
+        dataTransformer(await makeGetRequest(pathFn(inputItem[accessor]))) as P,
     }))
   );
 

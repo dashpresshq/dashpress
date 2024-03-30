@@ -1,4 +1,5 @@
-import { useState, useRef, useEffect, ReactNode } from "react";
+import { useToggle } from "frontend/hooks/state/useToggleState";
+import { useRef, useEffect, ReactNode } from "react";
 import { createPortal } from "react-dom";
 
 interface IProps {
@@ -7,12 +8,14 @@ interface IProps {
 
 export function NextPortal({ children }: IProps) {
   const ref = useRef<Element | null>(null);
-  const [mounted, setMounted] = useState(false);
+  const isMounted = useToggle();
 
   useEffect(() => {
     ref.current = document.body;
-    setMounted(true);
+    isMounted.on();
   }, []);
 
-  return mounted && ref.current ? createPortal(children, ref.current) : null;
+  return isMounted.isOn && ref.current
+    ? createPortal(children, ref.current)
+    : null;
 }

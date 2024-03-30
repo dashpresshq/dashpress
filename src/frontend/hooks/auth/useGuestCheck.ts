@@ -1,17 +1,18 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { AuthActions } from "./auth.actions";
+import { useToggle } from "../state/useToggleState";
 
 export const useGuestCheck = () => {
-  const [render, setRender] = useState(false);
+  const renderMode = useToggle();
 
   useEffect(() => {
     if (typeof window !== "undefined") {
       if (AuthActions.isAuthenticated()) {
         AuthActions.signIn();
       } else {
-        setRender(true);
+        renderMode.on();
       }
     }
   }, [typeof window]);
-  return render;
+  return renderMode.isOn;
 };

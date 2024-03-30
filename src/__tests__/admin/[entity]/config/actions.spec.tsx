@@ -34,16 +34,10 @@ describe("pages/admin/[entity]/config/actions", () => {
     expect(await getTableRows(screen.getByRole("table")))
       .toMatchInlineSnapshot(`
       [
-        "Integration
-                      
-                    Trigger
-                      
-                    Action
-                      
-                    Action",
-        "HttpCreatePost",
-        "SmtpUpdateSend Mail",
-        "SlackDeleteSend Message",
+        "Integration|Trigger|Action|Action",
+        "Http|Create|Post",
+        "Smtp|Update|Send Mail",
+        "Slack|Delete|Send Message",
       ]
     `);
   });
@@ -105,17 +99,11 @@ describe("pages/admin/[entity]/config/actions", () => {
     expect(await getTableRows(screen.getByRole("table")))
       .toMatchInlineSnapshot(`
       [
-        "Integration
-                      
-                    Trigger
-                      
-                    Action
-                      
-                    Action",
-        "HttpCreatePost",
-        "SmtpUpdateSend Mail",
-        "SlackDeleteSend Message",
-        "SlackCreateSend Message",
+        "Integration|Trigger|Action|Action",
+        "Http|Create|Post",
+        "Smtp|Update|Send Mail",
+        "Slack|Delete|Send Message",
+        "Slack|Create|Send Message",
       ]
     `);
 
@@ -212,17 +200,11 @@ describe("pages/admin/[entity]/config/actions", () => {
     expect(await getTableRows(screen.getByRole("table")))
       .toMatchInlineSnapshot(`
       [
-        "Integration
-                      
-                    Trigger
-                      
-                    Action
-                      
-                    Action",
-        "HttpCreatePost",
-        "SmtpUpdateSend Mail",
-        "SlackDeleteSend Message",
-        "SmtpDeleteSend Mail",
+        "Integration|Trigger|Action|Action",
+        "Http|Create|Post",
+        "Smtp|Update|Send Mail",
+        "Slack|Delete|Send Message",
+        "Smtp|Delete|Send Mail",
       ]
     `);
   });

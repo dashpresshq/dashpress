@@ -8,14 +8,13 @@ import { Typo } from "frontend/design-system/primitives/Typo";
 import { Z_INDEXES } from "frontend/design-system/constants/zIndex";
 import { SystemIcon } from "frontend/design-system/Icons/System";
 import { useRouter } from "next/router";
+import { useToggle } from "frontend/hooks/state/useToggleState";
 import { SoftButtonStyled } from "../Button/Button";
 import { BREAKPOINTS } from "../../constants";
 import { Spin } from "../_/Spin";
 import { SHADOW_CSS } from "../Card";
 import { IGroupActionButton } from "../Button/types";
 import { ConfirmAlert } from "../ConfirmAlert";
-
-const togglePreviousState = (prev: boolean) => !prev;
 
 export interface IDropDownMenuItem extends IGroupActionButton {
   description?: string;
@@ -128,13 +127,12 @@ export function DropDownMenu({
   ellipsis,
   ariaLabel,
 }: IProps) {
-  const [isDropDownOpen, setDropDownOpen] = useState(false);
-
+  const dropDownMode = useToggle();
   const router = useRouter();
 
   const toggleDropDown = () => {
     if (!disabled) {
-      setDropDownOpen(togglePreviousState);
+      dropDownMode.toggle();
     }
   };
 
@@ -209,7 +207,7 @@ export function DropDownMenu({
       as={Stack}
       spacing={0}
       width="auto"
-      show={isDropDownOpen}
+      show={dropDownMode.isOn}
       align="end"
       onToggle={toggleDropDown}
     >

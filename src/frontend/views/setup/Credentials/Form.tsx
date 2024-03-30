@@ -3,7 +3,6 @@ import {
   IDataSourceCredentials,
   DATA_SOURCES_CONFIG,
 } from "shared/types/data-sources";
-import { useState } from "react";
 import { upperCaseFirstLetter } from "shared/lib/strings";
 import { required } from "frontend/lib/validations";
 import { IFormProps } from "frontend/lib/form/types";
@@ -12,11 +11,12 @@ import { FormNumberInput } from "frontend/design-system/components/Form/FormNumb
 import { FormCheckBox } from "frontend/design-system/components/Form/FormCheckBox";
 import { FormButton } from "frontend/design-system/components/Button/FormButton";
 import { FormSelect } from "frontend/design-system/components/Form/FormSelect";
+import { useToggle } from "frontend/hooks/state/useToggleState";
 
 export function CredentialsSetupForm({
   onSubmit,
 }: IFormProps<IDataSourceCredentials>) {
-  const [useConnectionString, setUseConnectionString] = useState(false);
+  const connectionStringView = useToggle();
   return (
     <Form
       onSubmit={onSubmit}
@@ -48,11 +48,11 @@ export function CredentialsSetupForm({
                     dataSourceConfig.useConnectionString
                       ? [
                           {
-                            systemIcon: useConnectionString
+                            systemIcon: connectionStringView.isOn
                               ? "ToggleLeft"
                               : "ToggleRight",
                             action: () => {
-                              setUseConnectionString(!useConnectionString);
+                              connectionStringView.toggle();
                             },
                             label: "Toggle Connection URL",
                           },
@@ -63,7 +63,7 @@ export function CredentialsSetupForm({
                   input={{
                     ...input,
                     onChange: (value) => {
-                      setUseConnectionString(false);
+                      connectionStringView.off();
                       form.change("port", DATA_SOURCES_CONFIG[value]?.port);
                       input.onChange(value);
                     },
@@ -71,7 +71,7 @@ export function CredentialsSetupForm({
                 />
               )}
             </Field>
-            {useConnectionString ? (
+            {connectionStringView.isOn ? (
               <Field
                 name="connectionString"
                 validate={required}

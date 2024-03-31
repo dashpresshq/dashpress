@@ -1,20 +1,40 @@
 import { noop } from "shared/lib/noop";
-import { useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { ToastService } from "frontend/lib/toast";
 import { IApiMutateOptions } from "./types";
-import { useApiMutate } from "./useApiMutate";
 import { getQueryCachekey } from "../constants/getQueryCacheKey";
 
-export function useApiMutateOptimisticOptions<T, K, V = void>(
-  options: IApiMutateOptions<T, K, V>
+function useApiMutate<T>(endpoint: string) {
+  const queryClient = useQueryClient();
+  const queryKey = getQueryCachekey(endpoint);
+
+  return {
+    set: async (mutateOldData: (oldData: T | undefined) => T) => {
+      await queryClient.cancelQueries({ queryKey });
+      const previousData = queryClient.getQueryData<T>(queryKey);
+      queryClient.setQueryData<T>(queryKey, mutateOldData);
+      return previousData;
+    },
+    invalidate: () => {
+      queryClient.invalidateQueries({ queryKey });
+    },
+    reset: (previousData: T | undefined) => {
+      queryClient.setQueryData(queryKey, previousData);
+    },
+  };
+}
+
+export function useApiMutateOptimisticOptions<T, V, R = void>(
+  options: IApiMutateOptions<T, V, R>
 ) {
   const apiMutate = useApiMutate<T>(options.dataQueryPath);
   const queryClient = useQueryClient();
 
-  return {
-    onMutate: async (formData: K) =>
+  return useMutation({
+    mutationFn: options.mutationFn,
+    onMutate: async (formData: V) =>
       apiMutate.set((oldData) => options.onMutate(oldData, formData)),
-    onSuccess: async (requestResponse: V) => {
+    onSuccess: async (requestResponse: R) => {
       if (options.smartSuccessMessage) {
         ToastService.success(options.smartSuccessMessage(requestResponse));
       } else if (options.successMessage) {
@@ -33,7 +53,7 @@ export function useApiMutateOptimisticOptions<T, K, V = void>(
     },
     onError: (
       error: { message: string },
-      formData: K,
+      formData: V,
       oldData: T | undefined
     ) => {
       noop(formData, error);
@@ -46,5 +66,5 @@ export function useApiMutateOptimisticOptions<T, K, V = void>(
     onSettled: () => {
       apiMutate.invalidate();
     },
-  };
+  });
 }

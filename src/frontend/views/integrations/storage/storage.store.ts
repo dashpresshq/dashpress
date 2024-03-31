@@ -1,4 +1,3 @@
-import { useMutation } from "@tanstack/react-query";
 import { CRUD_CONFIG_NOT_FOUND } from "frontend/lib/crud-config";
 import { reduceStringToNumber } from "shared/lib/strings";
 import { useApi } from "frontend/lib/data/useApi";
@@ -43,27 +42,21 @@ export const useStorageCredentialsConfiguration = () => {
 };
 
 export function useActivateStorageMutation() {
-  const apiMutateOptions = useWaitForResponseMutationOptions<
-    Record<string, string>
-  >({
+  return useWaitForResponseMutationOptions<{
+    storageKey: string;
+    configuration: Record<string, string>;
+  }>({
+    mutationFn: async (configuration) =>
+      await makeActionRequest(
+        "POST",
+        ACTIVE_STORAGE_INTEGRATIONS_ENDPOINT,
+        configuration
+      ),
     endpoints: [
       ACTIVE_STORAGE_INTEGRATIONS_ENDPOINT,
       STORAGE_CREDENTIALS_CONFIG,
     ],
     successMessage:
       STORAGE_INTEGRATIONS_CRUD_CONFIG.MUTATION_LANG.CUSTOM("Activated"),
-  });
-
-  return useMutation({
-    mutationFn: async (configuration: {
-      storageKey: string;
-      configuration: Record<string, string>;
-    }) =>
-      await makeActionRequest(
-        "POST",
-        ACTIVE_STORAGE_INTEGRATIONS_ENDPOINT,
-        configuration
-      ),
-    ...apiMutateOptions,
   });
 }

@@ -1,4 +1,3 @@
-import { useMutation } from "@tanstack/react-query";
 import { MAKE_CRUD_CONFIG } from "frontend/lib/crud-config";
 import { useStorageApi } from "frontend/lib/data/useApi";
 import { useApiMutateOptimisticOptions } from "frontend/lib/data/useMutate/useApiMutateOptimisticOptions";
@@ -28,14 +27,8 @@ export function useRolePermissions() {
 export function useRolePermissionDeletionMutation() {
   const roleId = useRoleIdFromRouteParam();
 
-  const apiMutateOptions = useApiMutateOptimisticOptions<string[], string[]>({
-    dataQueryPath: ADMIN_ROLE_PERMISSION_ENDPOINT(roleId),
-    onMutate: MutationHelpers.removeMany,
-    successMessage: ADMIN_PERMISSIONS_CRUD_CONFIG.MUTATION_LANG.DELETE,
-  });
-
-  return useMutation({
-    mutationFn: async (permissions: string[]) => {
+  return useApiMutateOptimisticOptions<string[], string[]>({
+    mutationFn: async (permissions) => {
       await makeActionRequest(
         "DELETE",
         ADMIN_ROLE_PERMISSION_ENDPOINT(roleId),
@@ -44,24 +37,22 @@ export function useRolePermissionDeletionMutation() {
         }
       );
     },
-    ...apiMutateOptions,
+    dataQueryPath: ADMIN_ROLE_PERMISSION_ENDPOINT(roleId),
+    onMutate: MutationHelpers.removeMany,
+    successMessage: ADMIN_PERMISSIONS_CRUD_CONFIG.MUTATION_LANG.DELETE,
   });
 }
 
 export function useCreateRolePermissionMutation() {
   const roleId = useRoleIdFromRouteParam();
 
-  const apiMutateOptions = useApiMutateOptimisticOptions<string[], string[]>({
-    dataQueryPath: ADMIN_ROLE_PERMISSION_ENDPOINT(roleId),
-    onMutate: MutationHelpers.mergeArray,
-    successMessage: ADMIN_PERMISSIONS_CRUD_CONFIG.MUTATION_LANG.CREATE,
-  });
-
-  return useMutation({
-    mutationFn: async (permissions: string[]) =>
+  return useApiMutateOptimisticOptions<string[], string[]>({
+    mutationFn: async (permissions) =>
       await makeActionRequest("POST", ADMIN_ROLE_PERMISSION_ENDPOINT(roleId), {
         permissions,
       }),
-    ...apiMutateOptions,
+    dataQueryPath: ADMIN_ROLE_PERMISSION_ENDPOINT(roleId),
+    onMutate: MutationHelpers.mergeArray,
+    successMessage: ADMIN_PERMISSIONS_CRUD_CONFIG.MUTATION_LANG.CREATE,
   });
 }

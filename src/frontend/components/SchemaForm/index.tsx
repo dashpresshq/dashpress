@@ -19,7 +19,7 @@ const identity = (value: unknown) => value;
 
 interface IProps<T> {
   fields: IAppliedSchemaFormConfig<T>;
-  onSubmit: (data: T) => Promise<void | T>;
+  onSubmit: (data: T) => Promise<unknown>;
   initialValues?: Partial<T>;
   buttonText?: (submitting: boolean) => string;
   action?: string;

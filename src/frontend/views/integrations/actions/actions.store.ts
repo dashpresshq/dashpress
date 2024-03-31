@@ -1,4 +1,3 @@
-import { useMutation } from "@tanstack/react-query";
 import { IIntegrationsList, ActionIntegrations } from "shared/types/actions";
 import { CRUD_CONFIG_NOT_FOUND } from "frontend/lib/crud-config";
 import { reduceStringToNumber } from "shared/lib/strings";
@@ -48,56 +47,37 @@ export const useActivationConfiguration = (activationId: string) => {
 };
 
 export function useDeactivateIntegrationMutation() {
-  const apiMutateOptions = useWaitForResponseMutationOptions<
-    Record<string, string>
-  >({
-    endpoints: [ACTIVE_ACTIONS_INTEGRATIONS_ENDPOINT],
-    successMessage:
-      ACTION_INTEGRATIONS_CRUD_CONFIG.MUTATION_LANG.CUSTOM("Deactivated"),
-  });
-
-  return useMutation({
-    mutationFn: async (activationId: string) =>
+  return useWaitForResponseMutationOptions<string>({
+    mutationFn: async (activationId) =>
       await makeActionRequest(
         "DELETE",
         `/api/integrations/actions/${activationId}`
       ),
-    ...apiMutateOptions,
+    endpoints: [ACTIVE_ACTIONS_INTEGRATIONS_ENDPOINT],
+    successMessage:
+      ACTION_INTEGRATIONS_CRUD_CONFIG.MUTATION_LANG.CUSTOM("Deactivated"),
   });
 }
 
 export function useActivateIntegrationMutation(integration: string) {
-  const apiMutateOptions = useWaitForResponseMutationOptions<
-    Record<string, string>
-  >({
-    endpoints: [ACTIVE_ACTIONS_INTEGRATIONS_ENDPOINT],
-    successMessage:
-      ACTION_INTEGRATIONS_CRUD_CONFIG.MUTATION_LANG.CUSTOM("Activated"),
-  });
-
-  return useMutation({
-    mutationFn: async (configuration: Record<string, string>) =>
+  return useWaitForResponseMutationOptions<Record<string, string>>({
+    mutationFn: async (configuration) =>
       await makeActionRequest(
         "POST",
         `/api/integrations/actions/${integration}`,
         configuration
       ),
-    ...apiMutateOptions,
+    endpoints: [ACTIVE_ACTIONS_INTEGRATIONS_ENDPOINT],
+    successMessage:
+      ACTION_INTEGRATIONS_CRUD_CONFIG.MUTATION_LANG.CUSTOM("Activated"),
   });
 }
 
 export function useUpdateActivatedIntegrationMutation(activationId: string) {
-  const apiMutateOptions = useWaitForResponseMutationOptions<
-    Record<string, string>
-  >({
-    endpoints: [ACTIVE_ACTIONS_INTEGRATIONS_ENDPOINT],
-    successMessage: ACTION_INTEGRATIONS_CRUD_CONFIG.MUTATION_LANG.EDIT,
-  });
-
   const rootPassword = usePasswordStore((state) => state.password);
 
-  return useMutation({
-    mutationFn: async (configuration: Record<string, string>) =>
+  return useWaitForResponseMutationOptions<Record<string, string>>({
+    mutationFn: async (configuration) =>
       await makeActionRequest(
         "PATCH",
         `/api/integrations/actions/${activationId}`,
@@ -106,6 +86,7 @@ export function useUpdateActivatedIntegrationMutation(activationId: string) {
           _password: rootPassword,
         }
       ),
-    ...apiMutateOptions,
+    endpoints: [ACTIVE_ACTIONS_INTEGRATIONS_ENDPOINT],
+    successMessage: ACTION_INTEGRATIONS_CRUD_CONFIG.MUTATION_LANG.EDIT,
   });
 }

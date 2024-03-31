@@ -1,5 +1,4 @@
 import { CRUD_CONFIG_NOT_FOUND } from "frontend/lib/crud-config";
-import { useMutation } from "@tanstack/react-query";
 import {
   IFormAction,
   IIntegrationImplementationList,
@@ -28,62 +27,44 @@ export const useIntegrationImplementationsList = (integration: string) =>
   );
 
 export function useDeleteFormActionMutation(entity: string) {
-  const apiMutateOptions = useApiMutateOptimisticOptions<IFormAction[], string>(
-    {
-      dataQueryPath: LIST_ENTITY_FORM_ACTIONS(entity),
-      successMessage: FORM_ACTION_CRUD_CONFIG.MUTATION_LANG.DELETE,
-      onMutate: MutationHelpers.deleteByKey("id") as unknown as (
-        oldData: IFormAction[],
-        form: string
-      ) => IFormAction[],
-    }
-  );
-
-  return useMutation({
-    mutationFn: async (formActionId: string) =>
+  return useApiMutateOptimisticOptions<IFormAction[], string>({
+    mutationFn: async (formActionId) =>
       await makeActionRequest(
         "DELETE",
         FORM_ACTION_CRUD_CONFIG.ENDPOINTS.DELETE(formActionId)
       ),
-    ...apiMutateOptions,
+    dataQueryPath: LIST_ENTITY_FORM_ACTIONS(entity),
+    successMessage: FORM_ACTION_CRUD_CONFIG.MUTATION_LANG.DELETE,
+    onMutate: MutationHelpers.deleteByKey("id") as unknown as (
+      oldData: IFormAction[],
+      form: string
+    ) => IFormAction[],
   });
 }
 
 export function useCreateFormActionMutation(entity: string) {
-  const apiMutateOptions = useWaitForResponseMutationOptions<
-    Record<string, string>
-  >({
-    endpoints: [LIST_ENTITY_FORM_ACTIONS(entity)],
-    successMessage: FORM_ACTION_CRUD_CONFIG.MUTATION_LANG.CREATE,
-  });
-
-  return useMutation({
-    mutationFn: async (configuration: IFormAction) => {
+  return useWaitForResponseMutationOptions<IFormAction>({
+    mutationFn: async (configuration) => {
       return await makeActionRequest(
         "POST",
         FORM_ACTION_CRUD_CONFIG.ENDPOINTS.CREATE,
         configuration
       );
     },
-    ...apiMutateOptions,
+    endpoints: [LIST_ENTITY_FORM_ACTIONS(entity)],
+    successMessage: FORM_ACTION_CRUD_CONFIG.MUTATION_LANG.CREATE,
   });
 }
 
 export function useUpdateFormActionMutation(entity: string) {
-  const apiMutateOptions = useWaitForResponseMutationOptions<
-    Record<string, string>
-  >({
-    endpoints: [LIST_ENTITY_FORM_ACTIONS(entity)],
-    successMessage: FORM_ACTION_CRUD_CONFIG.MUTATION_LANG.EDIT,
-  });
-
-  return useMutation({
-    mutationFn: async (formAction: IFormAction) =>
+  return useWaitForResponseMutationOptions<IFormAction>({
+    mutationFn: async (formAction) =>
       await makeActionRequest(
         "PATCH",
         FORM_ACTION_CRUD_CONFIG.ENDPOINTS.UPDATE(formAction.id),
         formAction
       ),
-    ...apiMutateOptions,
+    endpoints: [LIST_ENTITY_FORM_ACTIONS(entity)],
+    successMessage: FORM_ACTION_CRUD_CONFIG.MUTATION_LANG.EDIT,
   });
 }

@@ -1,6 +1,5 @@
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
 import { useRouter } from "next/router";
-import { useMutation } from "@tanstack/react-query";
 import { ICreateUserForm } from "shared/form-schemas/users";
 import { IResetPasswordForm } from "shared/form-schemas/users/reset-password";
 import { IAccountProfile } from "shared/types/user";
@@ -40,10 +39,12 @@ export function useUserDetails(username: string) {
 
 export function useUserDeletionMutation() {
   const router = useRouter();
-  const apiMutateOptions = useApiMutateOptimisticOptions<
-    IAccountProfile[],
-    string
-  >({
+  return useApiMutateOptimisticOptions<IAccountProfile[], string>({
+    mutationFn: async (username) =>
+      await makeActionRequest(
+        "DELETE",
+        ADMIN_USERS_CRUD_CONFIG.ENDPOINTS.DELETE(username)
+      ),
     dataQueryPath: ADMIN_USERS_CRUD_CONFIG.ENDPOINTS.LIST,
     onSuccessActionWithFormData: () => {
       router.replace(NAVIGATION_LINKS.USERS.LIST);
@@ -51,70 +52,42 @@ export function useUserDeletionMutation() {
     onMutate: MutationHelpers.deleteByKey("username"),
     successMessage: ADMIN_USERS_CRUD_CONFIG.MUTATION_LANG.DELETE,
   });
-
-  return useMutation({
-    mutationFn: async (username: string) =>
-      await makeActionRequest(
-        "DELETE",
-        ADMIN_USERS_CRUD_CONFIG.ENDPOINTS.DELETE(username)
-      ),
-    ...apiMutateOptions,
-  });
 }
 
 export function useUpdateUserMutation() {
   const username = useUsernameFromRouteParam();
-  const apiMutateOptions = useWaitForResponseMutationOptions<void>({
+  return useWaitForResponseMutationOptions<Partial<IAccountProfile>>({
+    mutationFn: async (data) =>
+      await makeActionRequest(
+        "PATCH",
+        ADMIN_USERS_CRUD_CONFIG.ENDPOINTS.UPDATE(username),
+        data
+      ),
     endpoints: [
       ADMIN_USERS_CRUD_CONFIG.ENDPOINTS.LIST,
       ADMIN_USERS_CRUD_CONFIG.ENDPOINTS.DETAILS(username),
     ],
     successMessage: ADMIN_USERS_CRUD_CONFIG.MUTATION_LANG.EDIT,
   });
-
-  return useMutation({
-    mutationFn: async (data: Partial<IAccountProfile>) =>
-      await makeActionRequest(
-        "PATCH",
-        ADMIN_USERS_CRUD_CONFIG.ENDPOINTS.UPDATE(username),
-        data
-      ),
-    ...apiMutateOptions,
-  });
 }
 
 export function useResetUserPasswordMutation() {
   const username = useUsernameFromRouteParam();
-  const apiMutateOptions = useWaitForResponseMutationOptions<void>({
-    endpoints: [],
-    successMessage: "Password Reset Successfully",
-  });
-
-  return useMutation({
-    mutationFn: async (data: IResetPasswordForm) =>
+  return useWaitForResponseMutationOptions<IResetPasswordForm>({
+    mutationFn: async (data) =>
       await makeActionRequest(
         "PATCH",
         ADMIN_USERS_CRUD_CONFIG.ENDPOINTS.CUSTOM(username, "reset-password"),
         data
       ),
-    ...apiMutateOptions,
+    endpoints: [],
+    successMessage: "Password Reset Successfully",
   });
 }
 
 export function useCreateUserMutation() {
   const router = useRouter();
-  const apiMutateOptions = useWaitForResponseMutationOptions<ICreateUserForm>({
-    endpoints: [ADMIN_USERS_CRUD_CONFIG.ENDPOINTS.LIST],
-    smartSuccessMessage: ({ username }) => ({
-      message: ADMIN_USERS_CRUD_CONFIG.MUTATION_LANG.CREATE,
-      action: {
-        label: ADMIN_USERS_CRUD_CONFIG.MUTATION_LANG.VIEW_DETAILS,
-        action: () => router.push(NAVIGATION_LINKS.USERS.DETAILS(username)),
-      },
-    }),
-  });
-
-  return useMutation({
+  return useWaitForResponseMutationOptions<ICreateUserForm, ICreateUserForm>({
     mutationFn: async (data: ICreateUserForm) => {
       await makeActionRequest(
         "POST",
@@ -123,6 +96,13 @@ export function useCreateUserMutation() {
       );
       return data;
     },
-    ...apiMutateOptions,
+    endpoints: [ADMIN_USERS_CRUD_CONFIG.ENDPOINTS.LIST],
+    smartSuccessMessage: ({ username }) => ({
+      message: ADMIN_USERS_CRUD_CONFIG.MUTATION_LANG.CREATE,
+      action: {
+        label: ADMIN_USERS_CRUD_CONFIG.MUTATION_LANG.VIEW_DETAILS,
+        action: () => router.push(NAVIGATION_LINKS.USERS.DETAILS(username)),
+      },
+    }),
   });
 }

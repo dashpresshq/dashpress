@@ -1,4 +1,3 @@
-import { useMutation } from "@tanstack/react-query";
 import { IWidgetConfig } from "shared/types/dashboard";
 import { CRUD_CONFIG_NOT_FOUND } from "frontend/lib/crud-config";
 import { makeActionRequest } from "frontend/lib/data/makeRequest";
@@ -44,20 +43,13 @@ export const useDasboardWidgetScriptData = (
 };
 
 export function useCreateDashboardWidgetMutation(dashboardId: string) {
-  const apiMutateOptions = useApiMutateOptimisticOptions<
-    IWidgetConfig[],
-    IWidgetConfig
-  >({
+  return useApiMutateOptimisticOptions<IWidgetConfig[], IWidgetConfig>({
+    mutationFn: async (widget) => {
+      await makeActionRequest("POST", DASHBOARD_ENDPOINT(dashboardId), widget);
+    },
     dataQueryPath: DASHBOARD_ENDPOINT(dashboardId),
     onMutate: MutationHelpers.append,
     successMessage: DASHBOARD_WIDGETS_CRUD_CONFIG.MUTATION_LANG.CREATE,
-  });
-
-  return useMutation({
-    mutationFn: async (widget: IWidgetConfig) => {
-      await makeActionRequest("POST", DASHBOARD_ENDPOINT(dashboardId), widget);
-    },
-    ...apiMutateOptions,
   });
 }
 
@@ -65,40 +57,24 @@ export function useUpdateDashboardWidgetMutation(
   dashboardId: string,
   widgetId: string
 ) {
-  const apiMutateOptions = useApiMutateOptimisticOptions<
-    IWidgetConfig[],
-    IWidgetConfig
-  >({
-    dataQueryPath: DASHBOARD_ENDPOINT(dashboardId),
-    otherEndpoints: [DASHBOARD_WIDGET_SCRIPT_ENDPOINT(widgetId)],
-    onMutate: MutationHelpers.update,
-    successMessage: DASHBOARD_WIDGETS_CRUD_CONFIG.MUTATION_LANG.EDIT,
-  });
-
-  return useMutation({
-    mutationFn: async (widget: IWidgetConfig) => {
+  return useApiMutateOptimisticOptions<IWidgetConfig[], IWidgetConfig>({
+    mutationFn: async (widget) => {
       await makeActionRequest(
         "PATCH",
         `${DASHBOARD_ENDPOINT(dashboardId)}/${widget.id}`,
         widget
       );
     },
-    ...apiMutateOptions,
+    dataQueryPath: DASHBOARD_ENDPOINT(dashboardId),
+    otherEndpoints: [DASHBOARD_WIDGET_SCRIPT_ENDPOINT(widgetId)],
+    onMutate: MutationHelpers.update,
+    successMessage: DASHBOARD_WIDGETS_CRUD_CONFIG.MUTATION_LANG.EDIT,
   });
 }
 
 export function useDeleteDashboardWidgetMutation(dashboardId: string) {
-  const apiMutateOptions = useApiMutateOptimisticOptions<
-    IWidgetConfig[],
-    string
-  >({
-    dataQueryPath: DASHBOARD_ENDPOINT(dashboardId),
-    onMutate: MutationHelpers.delete,
-    successMessage: DASHBOARD_WIDGETS_CRUD_CONFIG.MUTATION_LANG.DELETE,
-  });
-
-  return useMutation({
-    mutationFn: async (widgetId: string) => {
+  return useApiMutateOptimisticOptions<IWidgetConfig[], string>({
+    mutationFn: async (widgetId) => {
       await makeActionRequest(
         "DELETE",
         `${DASHBOARD_ENDPOINT(dashboardId)}/${widgetId}`,
@@ -107,27 +83,22 @@ export function useDeleteDashboardWidgetMutation(dashboardId: string) {
         }
       );
     },
-    ...apiMutateOptions,
+    dataQueryPath: DASHBOARD_ENDPOINT(dashboardId),
+    onMutate: MutationHelpers.delete,
+    successMessage: DASHBOARD_WIDGETS_CRUD_CONFIG.MUTATION_LANG.DELETE,
   });
 }
 
 export function useArrangeDashboardWidgetMutation(dashboardId: string) {
-  const apiMutateOptions = useApiMutateOptimisticOptions<
-    IWidgetConfig[],
-    string[]
-  >({
-    dataQueryPath: DASHBOARD_ENDPOINT(dashboardId),
-    onMutate: MutationHelpers.sortOrder,
-  });
-
-  return useMutation({
-    mutationFn: async (widgetList: string[]) => {
+  return useApiMutateOptimisticOptions<IWidgetConfig[], string[]>({
+    mutationFn: async (widgetList) => {
       await makeActionRequest(
         "PATCH",
         DASHBOARD_ENDPOINT(dashboardId),
         widgetList
       );
     },
-    ...apiMutateOptions,
+    dataQueryPath: DASHBOARD_ENDPOINT(dashboardId),
+    onMutate: MutationHelpers.sortOrder,
   });
 }

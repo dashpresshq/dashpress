@@ -26,7 +26,7 @@ type IProps = {
   initialValuesData?: DataStateKeys<Record<string, unknown>>;
   crudAction: "create" | "update";
   allOptional?: boolean;
-  onSubmit: (data: Record<string, string>) => Promise<void>;
+  onSubmit: (data: Record<string, string>) => Promise<unknown>;
   resetForm?: true;
   buttonText: (submitting: boolean) => string;
   systemIcon: SystemIconsKeys;

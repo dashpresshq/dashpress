@@ -1,6 +1,5 @@
 import qs from "qs";
 import { useRouter } from "next/router";
-import { useMutation } from "@tanstack/react-query";
 import { FieldQueryFilter, FilterOperators } from "shared/types/data";
 import { CRUD_CONFIG_NOT_FOUND } from "frontend/lib/crud-config";
 import { makeActionRequest } from "frontend/lib/data/makeRequest";
@@ -142,9 +141,12 @@ export function useEntityDataCreationMutation(
 ) {
   const entityCrudConfig = useEntityCrudConfig(entity);
   const router = useRouter();
-  const apiMutateOptions = useWaitForResponseMutationOptions<
-    Record<string, string>
+  return useWaitForResponseMutationOptions<
+    Record<string, string>,
+    { id: string }
   >({
+    mutationFn: async (data) =>
+      await makeActionRequest("POST", `/api/data/${entity}`, { data }),
     endpoints: DATA_MUTATION_ENDPOINTS_TO_CLEAR(entity),
     onSuccessActionWithFormData: ({ id }) => {
       option?.onSuccessActionWithFormData(id);
@@ -160,12 +162,6 @@ export function useEntityDataCreationMutation(
           },
         }),
   });
-
-  return useMutation({
-    mutationFn: async (data: Record<string, string>) =>
-      await makeActionRequest("POST", `/api/data/${entity}`, { data }),
-    ...apiMutateOptions,
-  });
 }
 
 export function useEntityDataUpdationMutation(
@@ -173,24 +169,18 @@ export function useEntityDataUpdationMutation(
   entityId: string
 ) {
   const entityCrudConfig = useEntityCrudConfig(entity);
-  const apiMutateOptions = useWaitForResponseMutationOptions<
-    Record<string, string>
-  >({
+  const metadata = useEntityMetadataDetails({ entity, entityId });
+
+  return useWaitForResponseMutationOptions<Record<string, string>>({
+    mutationFn: async (data) =>
+      await makeActionRequest("PATCH", `/api/data/${entity}/${entityId}`, {
+        data: { ...data, ...metadata },
+      }),
     endpoints: [
       ...SINGLE_DATA_MUTATION_ENDPOINTS_TO_CLEAR({ entity, entityId }),
       ...DATA_MUTATION_ENDPOINTS_TO_CLEAR(entity),
     ],
     successMessage: entityCrudConfig.MUTATION_LANG.EDIT,
-  });
-
-  const metadata = useEntityMetadataDetails({ entity, entityId });
-
-  return useMutation({
-    mutationFn: async (data: Record<string, string>) =>
-      await makeActionRequest("PATCH", `/api/data/${entity}/${entityId}`, {
-        data: { ...data, ...metadata },
-      }),
-    ...apiMutateOptions,
   });
 }
 
@@ -206,9 +196,11 @@ export function useEntityDataDeletionMutation(
 ) {
   const router = useRouter();
   const entityCrudConfig = useEntityCrudConfig(entity);
-  const apiMutateOptions = useWaitForResponseMutationOptions<
-    Record<string, string>
-  >({
+
+  // eyes on optimstic delete here
+  return useWaitForResponseMutationOptions<string>({
+    mutationFn: async (id) =>
+      await makeActionRequest("DELETE", `/api/data/${entity}/${id}`),
     endpoints: [
       ...SINGLE_DATA_MUTATION_ENDPOINTS_TO_CLEAR({ entity, entityId }),
       ...DATA_MUTATION_ENDPOINTS_TO_CLEAR(entity),
@@ -219,11 +211,5 @@ export function useEntityDataDeletionMutation(
       }
     },
     successMessage: entityCrudConfig.MUTATION_LANG.DELETE,
-  });
-  // eyes on optimstic delete here
-  return useMutation({
-    mutationFn: async (id: string) =>
-      await makeActionRequest("DELETE", `/api/data/${entity}/${id}`),
-    ...apiMutateOptions,
   });
 }

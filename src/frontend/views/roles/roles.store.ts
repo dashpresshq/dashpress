@@ -1,6 +1,5 @@
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
 import { useRouter } from "next/router";
-import { useMutation } from "@tanstack/react-query";
 import { IBaseRoleForm } from "shared/form-schemas/roles/base";
 import { makeRoleId } from "shared/constants/user";
 import { IRolesList } from "shared/types/roles";
@@ -18,7 +17,15 @@ export const ADMIN_ROLES_CRUD_CONFIG = MAKE_CRUD_CONFIG({
 
 export function useCreateRoleMutation() {
   const router = useRouter();
-  const apiMutateOptions = useWaitForResponseMutationOptions<IBaseRoleForm>({
+  return useWaitForResponseMutationOptions<IBaseRoleForm, IBaseRoleForm>({
+    mutationFn: async (data) => {
+      await makeActionRequest(
+        "POST",
+        ADMIN_ROLES_CRUD_CONFIG.ENDPOINTS.CREATE,
+        data
+      );
+      return data;
+    },
     endpoints: [ADMIN_ROLES_CRUD_CONFIG.ENDPOINTS.LIST],
     smartSuccessMessage: ({ name }) => ({
       message: ADMIN_ROLES_CRUD_CONFIG.MUTATION_LANG.CREATE,
@@ -29,37 +36,21 @@ export function useCreateRoleMutation() {
       },
     }),
   });
-
-  return useMutation({
-    mutationFn: async (data: IBaseRoleForm) => {
-      await makeActionRequest(
-        "POST",
-        ADMIN_ROLES_CRUD_CONFIG.ENDPOINTS.CREATE,
-        data
-      );
-      return data;
-    },
-    ...apiMutateOptions,
-  });
 }
 
 export function useRoleDeletionMutation() {
   const router = useRouter();
-  const apiMutateOptions = useApiMutateOptimisticOptions<IRolesList[], string>({
+  return useApiMutateOptimisticOptions<IRolesList[], string>({
+    mutationFn: async (roleId) =>
+      await makeActionRequest(
+        "DELETE",
+        ADMIN_ROLES_CRUD_CONFIG.ENDPOINTS.DELETE(roleId)
+      ),
     dataQueryPath: ADMIN_ROLES_CRUD_CONFIG.ENDPOINTS.LIST,
     onSuccessActionWithFormData: () => {
       router.replace(NAVIGATION_LINKS.ROLES.LIST);
     },
     onMutate: MutationHelpers.deleteByKey("value"),
     successMessage: ADMIN_ROLES_CRUD_CONFIG.MUTATION_LANG.DELETE,
-  });
-
-  return useMutation({
-    mutationFn: async (roleId: string) =>
-      await makeActionRequest(
-        "DELETE",
-        ADMIN_ROLES_CRUD_CONFIG.ENDPOINTS.DELETE(roleId)
-      ),
-    ...apiMutateOptions,
   });
 }

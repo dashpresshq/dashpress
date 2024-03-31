@@ -22,6 +22,7 @@ import {
   useEntityId,
   useEntitySlug,
 } from "frontend/hooks/entity/entity.config";
+import { isQueryIdle } from "frontend/lib/data/useApi/utils";
 import { ENTITY_DETAILS_VIEW_KEY } from "./constants";
 import { EntityDetailsView } from "./DetailsView";
 import { DetailsLayout } from "./_Layout";
@@ -45,9 +46,7 @@ export function EntityRelationDetails() {
   const { backLink } = useNavigationStack();
 
   const title =
-    entityDataReference.isLoading ||
-    (entityDataReference.status === "pending" &&
-      entityDataReference.fetchStatus === "idle")
+    entityDataReference.isLoading || isQueryIdle(entityDataReference)
       ? childEntityCrudConfig.TEXT_LANG.SINGULAR
       : `${entityDataReference.data} - ${childEntityCrudConfig.TEXT_LANG.SINGULAR}`;
 

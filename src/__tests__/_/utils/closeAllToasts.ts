@@ -2,7 +2,7 @@ import { waitFor, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
 export const closeAllToasts = async () => {
-  const toast = screen.getByRole("button", {
+  const toast = await screen.findByRole("button", {
     name: "Close Toast",
   });
 

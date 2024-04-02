@@ -51,7 +51,7 @@ describe("pages/dashboard/[dashboardId]/widget/create", () => {
     await userEvent.keyboard("{Enter}");
 
     await userEvent.type(
-      screen.getByLabelText("Entity Tab"),
+      await screen.findByLabelText("Entity Tab"),
       "Verified Entity View"
     );
 

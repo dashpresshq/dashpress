@@ -41,7 +41,7 @@ describe("pages/dashboard/[dashboardId]/widget/[widgetId]/index", () => {
     await userEvent.keyboard("{Enter}");
 
     await userEvent.type(
-      screen.getByLabelText("Entity Tab"),
+      await screen.findByLabelText("Entity Tab"),
       "User Entity View"
     );
     await userEvent.keyboard("{Enter}");

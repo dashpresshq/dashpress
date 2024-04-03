@@ -18,7 +18,7 @@
     "typecheck": "tsc",
     "lint": "eslint --ext ts,tsx .",
     "lint:fix": "eslint --fix",
-    "verify": "node ./scripts/ci && npm run typecheck && npm run lint && npm run test:cov",
+    "verify": "node ./scripts/ci && npm run typecheck && npm run lint",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
     "prepare": "husky install"

@@ -1,5 +1,6 @@
 import { progammingError } from "backend/lib/errors";
 import { AppConfigurationValueType } from "shared/configurations/constants";
+import { notAllowedOnDemoValidation } from "backend/lib/request/validations/implementations/not-allowed-on-demo";
 import {
   createConfigDomainPersistenceService,
   AbstractConfigDataPersistenceService,
@@ -41,6 +42,14 @@ export class ConfigurationApiService {
     entity?: string
   ): Promise<void> {
     this.checkConfigKeyEntityRequirement(key, entity);
+
+    const disabledConfigKeysOnDemo: AppConfigurationKeys[] = [
+      "disabled_entities",
+    ];
+
+    if (disabledConfigKeysOnDemo.includes(key)) {
+      notAllowedOnDemoValidation();
+    }
 
     return await this._appConfigPersistenceService.upsertItem(
       this._appConfigPersistenceService.mergeKeyWithSecondaryKey(key, entity),

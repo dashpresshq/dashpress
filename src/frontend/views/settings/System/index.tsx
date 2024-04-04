@@ -58,6 +58,12 @@ export function SystemSettings() {
                   {
                     validationType: "required",
                   },
+                  {
+                    validationType: "min",
+                    constraint: {
+                      value: 1,
+                    },
+                  },
                 ],
               },
             }}

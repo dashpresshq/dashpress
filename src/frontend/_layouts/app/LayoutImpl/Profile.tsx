@@ -46,10 +46,14 @@ export function ProfileOnNavigation({ isFullWidth }: IProps) {
     return null;
   }
 
+  const username: string =
+    currentUser.data?.name.length > 14
+      ? `${currentUser.data?.name.substring(0, 14)}...`
+      : currentUser.data?.name;
   return (
     <ProfileRoot justify="space-between" align="center">
       <Name weight="bold">
-        Hi, {currentUser.isLoading ? "There" : currentUser.data?.name}
+        Hi, {currentUser.isLoading ? `There` : username}
       </Name>
 
       <DropDownMenu

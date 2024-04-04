@@ -8,6 +8,7 @@ import { Typo } from "frontend/design-system/primitives/Typo";
 import { ILabelValue } from "shared/types/options";
 import { DropDownMenu } from "frontend/design-system/components/DropdownMenu";
 import { SystemIconsKeys } from "shared/constants/Icons";
+import { ellipsis } from "shared/lib/strings";
 import { useConstantNavigationMenuItems } from "./portal";
 
 const ProfileRoot = styled(Stack)`
@@ -49,7 +50,8 @@ export function ProfileOnNavigation({ isFullWidth }: IProps) {
   return (
     <ProfileRoot justify="space-between" align="center">
       <Name weight="bold">
-        Hi, {currentUser.isLoading ? "There" : currentUser.data?.name}
+        Hi,
+        {currentUser.isLoading ? `There` : ellipsis(currentUser.data?.name, 14)}
       </Name>
 
       <DropDownMenu

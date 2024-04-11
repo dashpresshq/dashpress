@@ -7,7 +7,6 @@ import {
   FormSkeletonSchema,
 } from "frontend/design-system/components/Skeleton/Form";
 import { ISchemaFormConfig } from "shared/form-schemas/types";
-import { noop } from "shared/lib/noop";
 import { IStorageIntegration } from "shared/types/actions";
 import { STORAGE_INTEGRATIONS_CRUD_CONFIG } from "./constants";
 import {
@@ -71,23 +70,10 @@ export function StorageCredentialsSettings() {
       }
     >
       {storageCredentialsConfiguration.data === undefined ? (
-        <>
-          <SchemaForm<{ storageKey: string }>
-            fields={{
-              storageKey: storageFormConfig,
-            }}
-            onSubmit={async () => noop()}
-            initialValues={{
-              storageKey: currentStorage,
-            }}
-            buttonText={null}
-            systemIcon="Save"
-          />
-          <PasswordToReveal
-            label={`${STORAGE_INTEGRATIONS_CRUD_CONFIG.TEXT_LANG.TITLE} Configuration`}
-            isLoading={storageCredentialsConfiguration.isLoading}
-          />
-        </>
+        <PasswordToReveal
+          label={`${STORAGE_INTEGRATIONS_CRUD_CONFIG.TEXT_LANG.TITLE} Configuration`}
+          isLoading={storageCredentialsConfiguration.isLoading}
+        />
       ) : (
         <SchemaForm<{ storageKey: string }>
           fields={{

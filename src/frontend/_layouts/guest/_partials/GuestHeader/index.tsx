@@ -18,7 +18,7 @@ const Root = styled(CardBody)`
 
 interface IProps {
   title: string;
-  subTitle?: string;
+  subTitle: string;
   fullLogo?: string;
   homeLink?: string;
 }
@@ -37,7 +37,7 @@ export function GuestHeader({
         <Spacer />
         <Typo.MD color="inverse">{title}</Typo.MD>
         <Spacer size="xs" />
-        {subTitle ? <Typo.XS color="inverse">{subTitle}</Typo.XS> : null}
+        <Typo.XS color="inverse">{subTitle}</Typo.XS>
       </a>
     </Root>
   );

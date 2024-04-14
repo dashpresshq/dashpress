@@ -76,8 +76,8 @@ export function OffCanvas({
         {show && (
           <>
             <Header>
-              <Stack justify="space-between" align="center">
-                <Typo.MD weight="bold">{title}</Typo.MD>
+              <Stack $justify="space-between" $align="center">
+                <Typo.MD $weight="bold">{title}</Typo.MD>
                 <SoftButton
                   justIcon
                   label="Close Canvas"

@@ -180,7 +180,7 @@ export function DropDownMenu({
   const { systemIcon, label } = currentMenuItem;
 
   const currentItem = (
-    <Stack spacing={4} align="center">
+    <Stack $spacing={4} $align="center">
       {currentMenuItem.isMakingRequest ? (
         <Spin as={Loader} size={14} />
       ) : (
@@ -205,8 +205,8 @@ export function DropDownMenu({
   return (
     <Dropdown
       as={Stack}
-      spacing={0}
-      width="auto"
+      $spacing={0}
+      $width="auto"
       show={dropDownMode.isOn}
       align="end"
       onToggle={toggleDropDown}
@@ -254,13 +254,13 @@ export function DropDownMenu({
               )}
               <Typo.XS
                 as="span"
-                color={menuItem.disabled ? "muted" : undefined}
+                $color={menuItem.disabled ? "muted" : undefined}
               >
                 {menuItem.label}
               </Typo.XS>
             </Stack>
             {menuItem.description ? (
-              <Typo.XS color="muted" as="span">
+              <Typo.XS $color="muted" as="span">
                 {menuItem.description}
               </Typo.XS>
             ) : null}

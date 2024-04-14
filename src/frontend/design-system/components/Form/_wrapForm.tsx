@@ -27,7 +27,7 @@ export const wrapLabelAndError = (
   }: ISharedFormInput
 ) => (
   <>
-    <Stack justify="space-between" align="baseline">
+    <Stack $justify="space-between" $align="baseline">
       <div>
         {label && (
           <>
@@ -44,7 +44,7 @@ export const wrapLabelAndError = (
         ) : null}
       </div>
       {rightActions.length > 0 && (
-        <Stack flex={1} justify="end">
+        <Stack $flex={1} $justify="end">
           {rightActions.map((rightAction) => (
             <SoftButton
               key={rightAction.label}

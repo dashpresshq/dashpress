@@ -69,7 +69,7 @@ export function FilterWrapper({
         </Root>
       }
     >
-      <DownRoot direction="column">
+      <DownRoot $direction="column">
         <div style={{ textAlign: "left" }}>{children}</div>
         <SoftButton
           action={() => {

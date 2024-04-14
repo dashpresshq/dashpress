@@ -44,7 +44,7 @@ export function FormCheckBox({
           id={input.name}
         />
         <label htmlFor={input.name}>
-          <Typo.MD color={disabled ? "muted" : undefined}>{label}</Typo.MD>
+          <Typo.MD $color={disabled ? "muted" : undefined}>{label}</Typo.MD>
         </label>
       </Stack>
       <FormFeedback>

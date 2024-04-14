@@ -55,11 +55,16 @@ export function TableHead({ table }: IProps) {
                 $isSortable={header.column.getCanSort()}
                 onClick={header.column.getToggleSortingHandler()}
               >
-                <Stack justify="space-between" align="center" spacing={0}>
-                  <Typo.SM weight="bold" as="span">
+                <Stack $justify="space-between" $align="center" $spacing={0}>
+                  <Typo.SM $weight="bold" as="span">
                     {header.isPlaceholder ? null : view}
                   </Typo.SM>
-                  <Stack justify="end" width="auto" align="center" spacing={0}>
+                  <Stack
+                    $justify="end"
+                    $width="auto"
+                    $align="center"
+                    $spacing={0}
+                  >
                     {header.column.getCanSort() && (
                       <Sorting
                         size={18}

@@ -17,8 +17,8 @@ export function Deactivate({ integrationDetail, activationId }: IProps) {
 
   if (integrationDetail.key === ActionIntegrations.HTTP) {
     return (
-      <Stack justify="center">
-        <Typo.SM textStyle="italic">
+      <Stack $justify="center">
+        <Typo.SM $textStyle="italic">
           The HTTP action can not be deactivated
         </Typo.SM>
       </Stack>
@@ -27,7 +27,7 @@ export function Deactivate({ integrationDetail, activationId }: IProps) {
 
   return (
     <>
-      <Typo.SM textStyle="italic">
+      <Typo.SM $textStyle="italic">
         Deactivating an integration will irrevocabily delete its configurations
         and remove all its form actions
       </Typo.SM>

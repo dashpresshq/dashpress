@@ -20,7 +20,7 @@ export function EmptyWrapper({ text, createNew }: IEmptyWrapperProps) {
     <Root>
       <Frown size={50} color={USE_ROOT_COLOR("muted-text")} />
       <Spacer size="xxl" />
-      <Typo.MD color="muted"> {text} </Typo.MD>
+      <Typo.MD $color="muted"> {text} </Typo.MD>
       {createNew && (
         <>
           <Spacer size="xxl" />

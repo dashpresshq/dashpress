@@ -48,7 +48,7 @@ export function VersionInfo() {
         >
           {Object.entries(systemVersions.data).map(([label, value]) => (
             <Fragment key={label}>
-              <Typo.XS weight="bold">{label}</Typo.XS>
+              <Typo.XS $weight="bold">{label}</Typo.XS>
               <Typo.SM>{value}</Typo.SM>
               <Spacer />
             </Fragment>

@@ -43,7 +43,7 @@ ContentLayout.Right = function SectionRight({ children }: IProps) {
 
 ContentLayout.Center = function SectionCenter({ children }: IProps) {
   return (
-    <Stack justify="center">
+    <Stack $justify="center">
       <div style={{ maxWidth: "1200px", width: "100%" }}>{children}</div>
     </Stack>
   );

@@ -33,7 +33,7 @@ export function WidgetHeader({
   );
 
   return (
-    <Stack justify="space-between" align="flex-start">
+    <Stack $justify="space-between" $align="flex-start">
       <Stack>
         {setting && (
           <SortableKnob>
@@ -62,7 +62,7 @@ export function WidgetHeader({
           ]}
         />
       ) : (
-        <Stack width="auto">
+        <Stack $width="auto">
           {hasRelativeDate && !isPreview && (
             <DropDownMenu
               ariaLabel={`Toggle ${title} Menu`}

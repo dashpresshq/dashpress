@@ -39,7 +39,7 @@ function TabForm({ tableColumns, values, initialValues }: IProps) {
 
   return (
     <>
-      <Stack justify="end">
+      <Stack $justify="end">
         <SoftButton
           systemIcon="Plus"
           label="Add New Table View"
@@ -74,7 +74,7 @@ function TabForm({ tableColumns, values, initialValues }: IProps) {
             return {
               content: (
                 <>
-                  <Stack justify="end">
+                  <Stack $justify="end">
                     <ActionButtons
                       size="xs"
                       actionButtons={[

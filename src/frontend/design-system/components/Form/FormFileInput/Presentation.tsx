@@ -128,7 +128,7 @@ export function Presentation({
         </Typo.MD>
         <Spacer />
         {value && (
-          <Typo.SM color="muted">
+          <Typo.SM $color="muted">
             {value}{" "}
             {!disabled ? (
               <SoftButton
@@ -145,7 +145,7 @@ export function Presentation({
           </Typo.SM>
         )}
         {error && (
-          <Typo.MD color="danger" weight="bold">
+          <Typo.MD $color="danger" $weight="bold">
             {error}
           </Typo.MD>
         )}

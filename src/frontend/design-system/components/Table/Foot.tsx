@@ -27,8 +27,8 @@ export function TableFoot({ table, dataLength }: IProps) {
         <tr key={footerGroup.id}>
           {footerGroup.headers.map((header) => (
             <Th key={header.id}>
-              <Stack justify="start">
-                <Typo.SM weight="bold" as="span">
+              <Stack $justify="start">
+                <Typo.SM $weight="bold" as="span">
                   {header.isPlaceholder
                     ? null
                     : flexRender(

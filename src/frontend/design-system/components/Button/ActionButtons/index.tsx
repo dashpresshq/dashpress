@@ -24,7 +24,7 @@ export function ActionButtons({
   const ellipsisButtons = sortedActions.slice(ELLIPSIS_THRESHOLD);
 
   return (
-    <Stack width="auto">
+    <Stack $width="auto">
       {buttonsToShow.map((actionButton) => (
         <SoftButton
           key={actionButton.id}

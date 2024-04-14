@@ -72,7 +72,7 @@ export function MainContent({
         </title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
-      <Stack justify="space-between" align="center">
+      <Stack $justify="space-between" $align="center">
         <HeaderLeft>
           <Typo.MD>{pageTitle}</Typo.MD>
           <Breadcrumbs items={homedBreadcrumb} onCrumbClick={goToLinkIndex} />

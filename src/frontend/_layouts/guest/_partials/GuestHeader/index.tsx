@@ -35,9 +35,9 @@ export function GuestHeader({
         <Spacer />
         {fullLogo && <img src={fullLogo} height="40" alt="logo" />}
         <Spacer />
-        <Typo.MD color="inverse">{title}</Typo.MD>
+        <Typo.MD $color="inverse">{title}</Typo.MD>
         <Spacer size="xs" />
-        <Typo.XS color="inverse">{subTitle}</Typo.XS>
+        <Typo.XS $color="inverse">{subTitle}</Typo.XS>
       </a>
     </Root>
   );

@@ -26,8 +26,8 @@ export function NavigationSkeleton() {
 
   return (
     <Stack
-      direction="column"
-      spacing={16}
+      $direction="column"
+      $spacing={16}
       style={{ padding: 24, marginTop: 48 }}
     >
       {SCHEMA.map((type, index) => {

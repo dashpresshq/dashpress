@@ -70,7 +70,7 @@ export function MutatePermission({
     <>
       {overAchingPermission && (
         <>
-          <Stack justify="space-between" align="flex-start">
+          <Stack $justify="space-between" $align="flex-start">
             <FormButton
               isMakingRequest={false}
               systemIcon={isOverAchingPermissionSelected ? "Check" : "Square"}

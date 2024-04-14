@@ -33,8 +33,8 @@ const BASE_WIDGET_CONFIG: Partial<
     requiredInterface: `[{count: number} | number] | number`,
     schema: SummaryCardWidgetSchema,
     LoadingComponent: () => (
-      <Stack justify="space-between">
-        <Stack align="center">
+      <Stack $justify="space-between">
+        <Stack $align="center">
           <BaseSkeleton height="40px" width="40px" circle />
           <BaseSkeleton height="30px" width="100px" />
         </Stack>

@@ -129,9 +129,9 @@ export function SideBar({ isFullWidth, setIsFullWidth }: IProps) {
         </Link>
       </Brand>
       <Stack
-        justify="space-between"
-        direction="column"
-        spacing={0}
+        $justify="space-between"
+        $direction="column"
+        $spacing={0}
         style={{ height: "calc(100vh - 70px)" }}
       >
         <Scroll

@@ -188,7 +188,7 @@ export function ManageCredentialGroup({
           )}
         {!canManageAction && tableData.data.length > 0 && (
           <Spacer>
-            <Typo.SM textStyle="italic">
+            <Typo.SM $textStyle="italic">
               Your account does not have the permission to view secret values or
               manage them
             </Typo.SM>

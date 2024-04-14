@@ -158,9 +158,9 @@ export class DashboardWidgetsApiService {
             icon: SystemIconsList[index % (SystemIconsList.length - 1)],
             script: dateField
               ? `const actual = await $.query(${queryQuote}${plainCountQuery}${queryQuote});
-    const relative = await $.query(${queryQuote}${dateCountQuery}${queryQuote});
+const relative = await $.query(${queryQuote}${dateCountQuery}${queryQuote});
 
-    return [actual[0], relative[0]];
+return [actual[0], relative[0]];
                 `
               : `return await $.query(${queryQuote}${plainCountQuery}${queryQuote})`,
           };

@@ -85,7 +85,7 @@ export function SummaryWidget({
   } = DirectionImplementation[direction];
 
   return (
-    <Stack spacing={18} align="center">
+    <Stack $spacing={18} $align="center">
       <IconRoot
         $color={color}
         icon={icon as SystemIconsKeys}
@@ -94,15 +94,15 @@ export function SummaryWidget({
       />
       <div style={{ width: "100%" }}>
         <Spacer size="xs" />
-        <Stack justify="space-between" align="end">
-          <Typo.L weight="bold" aria-label="Total Count">
+        <Stack $justify="space-between" $align="end">
+          <Typo.L $weight="bold" aria-label="Total Count">
             {fullCount}
           </Typo.L>
           {relativeCount ? (
             <DirectionRoot
               color={directionColor}
-              spacing={2}
-              align="center"
+              $spacing={2}
+              $align="center"
               aria-label="Relative Direction"
             >
               <span aria-label={directionLabel}>
@@ -112,7 +112,7 @@ export function SummaryWidget({
                 />
               </span>
               <RelativeCount
-                weight="bold"
+                $weight="bold"
                 aria-label="Relative Count"
                 $directionColor={directionColor}
               >

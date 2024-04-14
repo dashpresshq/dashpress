@@ -124,7 +124,7 @@ export function FormSwitch(props: IProps) {
 
   return (
     <Root htmlFor={name} size={size}>
-      <Stack spacing={SIZES_CONFIG[size].labelSpacing} align="center">
+      <Stack $spacing={SIZES_CONFIG[size].labelSpacing} $align="center">
         <Input
           id={name}
           type="checkbox"
@@ -140,7 +140,7 @@ export function FormSwitch(props: IProps) {
         {label ? (
           <div style={{ cursor: "pointer" }}>
             <Typo.Raw
-              color={disabled ? "muted" : undefined}
+              $color={disabled ? "muted" : undefined}
               size={SIZES_CONFIG[size].fontSize}
             >
               {label}

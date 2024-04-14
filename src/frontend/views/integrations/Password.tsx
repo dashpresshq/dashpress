@@ -5,7 +5,7 @@ import { usePasswordStore } from "./password.store";
 
 export function PasswordMessage() {
   return (
-    <Typo.SM textStyle="italic">
+    <Typo.SM $textStyle="italic">
       All the values provided from this form will encrypted using `aes-256-gcm`
       before been saved.
     </Typo.SM>
@@ -23,7 +23,7 @@ export function PasswordToReveal({
 
   return (
     <>
-      <Typo.SM textStyle="italic">
+      <Typo.SM $textStyle="italic">
         For security reasons, Please input your account password to be able to
         manage {label}
       </Typo.SM>

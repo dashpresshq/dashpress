@@ -136,7 +136,7 @@ export function EntityDetailsView({
 
           return (
             <DetailItem key={name}>
-              <Typo.XXS weight="bold">{getEntityFieldLabels(name)}</Typo.XXS>
+              <Typo.XXS $weight="bold">{getEntityFieldLabels(name)}</Typo.XXS>
               <PortalColumnRender
                 {...{
                   column: name,

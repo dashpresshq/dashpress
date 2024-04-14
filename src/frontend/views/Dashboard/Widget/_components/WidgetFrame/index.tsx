@@ -113,8 +113,8 @@ export const WidgetFrame = forwardRef<HTMLDivElement, IProps>(
                   <RenderCode input={schemaError} />
                 ) : isDataEmpty(data.data) ? (
                   <Stack
-                    align="center"
-                    justify="center"
+                    $align="center"
+                    $justify="center"
                     style={{ height: "100%" }}
                   >
                     <EmptyWrapper text="No Data For This Widget" />

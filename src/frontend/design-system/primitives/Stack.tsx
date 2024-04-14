@@ -1,10 +1,10 @@
 import styled from "styled-components";
 
 export type StackProps = {
-  spacing: number;
-  flex: number;
-  direction: "column";
-  align:
+  $spacing: number;
+  $flex: number;
+  $direction: "column";
+  $align:
     | "normal"
     | "stretch"
     | "center"
@@ -18,7 +18,7 @@ export type StackProps = {
     | "space-between"
     | "space-around"
     | "space-evenly";
-  justify:
+  $justify:
     | "normal"
     | "stretch"
     | "center"
@@ -31,7 +31,7 @@ export type StackProps = {
     | "space-between"
     | "space-around"
     | "space-evenly";
-  width: string;
+  $width: string;
 };
 
 const spacings: Record<string, string> = {
@@ -41,19 +41,19 @@ const spacings: Record<string, string> = {
 
 export const Stack = styled.div<Partial<StackProps>>(
   ({
-    direction,
-    spacing = 8,
-    align = "normal",
-    justify = "normal",
-    flex,
-    width = "100%",
+    $direction,
+    $spacing = 8,
+    $align = "normal",
+    $justify = "normal",
+    $flex,
+    $width = "100%",
   }) => ({
     display: "flex",
-    flex,
-    flexDirection: direction || "row",
-    [spacings[direction || "row"]]: `${spacing}px`,
-    alignItems: align,
-    justifyContent: justify,
-    width,
+    flex: $flex,
+    flexDirection: $direction || "row",
+    [spacings[$direction || "row"]]: `${$spacing}px`,
+    alignItems: $align,
+    justifyContent: $justify,
+    width: $width,
   })
 );

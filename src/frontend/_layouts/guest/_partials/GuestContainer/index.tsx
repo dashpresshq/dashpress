@@ -21,7 +21,7 @@ const WrapperRow = styled(Stack)`
 export function GuestContainer({ children }: { children: ReactNode }) {
   return (
     <Root>
-      <WrapperRow justify="center" align="center">
+      <WrapperRow $justify="center" $align="center">
         {children}
       </WrapperRow>
     </Root>

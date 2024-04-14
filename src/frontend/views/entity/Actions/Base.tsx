@@ -131,7 +131,7 @@ export function FormActions({ entity }: { entity: string }) {
         error={activeIntegration.error || integrationsList.error}
         loader={<TableSkeleton />}
       >
-        <Stack justify="end">
+        <Stack $justify="end">
           <SoftButton
             action={createNew}
             systemIcon="Plus"

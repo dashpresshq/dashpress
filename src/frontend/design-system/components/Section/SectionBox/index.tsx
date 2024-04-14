@@ -45,12 +45,12 @@ export function SectionBox({
       <Card>
         {!headLess ? (
           <CardHeader>
-            <Stack justify="space-between" align="center">
+            <Stack $justify="space-between" $align="center">
               <Stack>
                 {isLoading ? (
                   <BaseSkeleton width="150px" height="20px" />
                 ) : (
-                  <Typo.MD weight="bold">{title}</Typo.MD>
+                  <Typo.MD $weight="bold">{title}</Typo.MD>
                 )}
                 {description ? (
                   <Tooltip text={description}>

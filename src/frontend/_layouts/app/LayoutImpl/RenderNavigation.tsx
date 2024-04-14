@@ -187,7 +187,11 @@ export function RenderNavigation({
                 >
                   {menuIcon}
                   {isFullWidth && (
-                    <Stack justify="space-between" spacing={0} align="center">
+                    <Stack
+                      $justify="space-between"
+                      $spacing={0}
+                      $align="center"
+                    >
                       <NavLabel $isFullWidth={isFullWidth}>{title}</NavLabel>
                       <SubMenuArrow
                         $isFullWidth={isFullWidth}

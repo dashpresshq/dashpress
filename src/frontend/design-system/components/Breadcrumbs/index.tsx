@@ -39,7 +39,7 @@ const BreadcrumbItem = styled.li`
   }
 `;
 
-const BreadcrumbItemLink = styled.button<{ active: boolean }>`
+const BreadcrumbItemLink = styled.button<{ $active: boolean }>`
   font-weight: 400;
   border: none;
   padding: 0;
@@ -48,7 +48,7 @@ const BreadcrumbItemLink = styled.button<{ active: boolean }>`
   color: ${USE_ROOT_COLOR("primary-color")};
 
   ${(props) =>
-    props.active &&
+    props.$active &&
     css`
       color: ${USE_ROOT_COLOR("muted-text")};
     `}
@@ -72,14 +72,14 @@ export function Breadcrumbs({ items, onCrumbClick }: IProps) {
               label
             ) : onCrumbClick ? (
               <BreadcrumbItemLink
-                active={isLastElement}
+                $active={isLastElement}
                 onClick={() => onCrumbClick(index)}
               >
                 {label}
               </BreadcrumbItemLink>
             ) : (
               <Link href={value} passHref>
-                <BreadcrumbItemLink active={isLastElement}>
+                <BreadcrumbItemLink $active={isLastElement}>
                   {label}
                 </BreadcrumbItemLink>
               </Link>

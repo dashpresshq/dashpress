@@ -51,7 +51,7 @@ export function ToggleCrudState({
   };
 }) {
   return (
-    <Stack justify="space-between" align="flex-start">
+    <Stack $justify="space-between" $align="flex-start">
       {toggling && toggling.onToggle && (
         <FormButton
           isMakingRequest={false}

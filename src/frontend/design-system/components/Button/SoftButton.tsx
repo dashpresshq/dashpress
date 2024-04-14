@@ -31,10 +31,10 @@ export function SoftButton({
     <Spin as={Loader} {...iconProps} />
   ) : (
     <Stack
-      spacing={4}
-      width="auto"
-      align="center"
-      justify={block ? "center" : undefined}
+      $spacing={4}
+      $width="auto"
+      $align="center"
+      $justify={block ? "center" : undefined}
     >
       <>
         <SystemIcon icon={systemIcon} {...iconProps} />

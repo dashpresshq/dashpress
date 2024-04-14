@@ -130,7 +130,7 @@ export function FieldSelectionCanvas({
                             />
                           )}
                         </Field>
-                        <Stack justify="space-between">
+                        <Stack $justify="space-between">
                           {useColors ? (
                             <Field
                               name={`${name}.color`}
@@ -188,7 +188,7 @@ export function FieldSelectionCanvas({
                 ))}
 
                 <Spacer />
-                <Stack justify="space-between">
+                <Stack $justify="space-between">
                   {ManagableEntities.includes(entityType) && (
                     <SoftButton
                       systemIcon="Plus"

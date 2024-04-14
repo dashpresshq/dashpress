@@ -163,7 +163,7 @@ export function EntityPersistentQueryForm({
                                             )}
                                           </Field>
                                         )}
-                                      <Stack align="center">
+                                      <Stack $align="center">
                                         <FilterRow
                                           queryFilter={queryFilter}
                                           columns={columns}
@@ -213,7 +213,7 @@ export function EntityPersistentQueryForm({
                     </React.Fragment>
                   ))}
                   <Spacer />
-                  <Stack justify="end">
+                  <Stack $justify="end">
                     <SoftButton
                       systemIcon="Plus"
                       label="Add Filter"

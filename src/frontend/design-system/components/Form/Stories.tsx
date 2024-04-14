@@ -330,7 +330,7 @@ function DemoForm() {
               },
             ]}
           />
-          <Stack justify="flex-end">
+          <Stack $justify="flex-end">
             <FormButton
               text={(isSubmitting) =>
                 isSubmitting ? "Making Progress" : "Make Progress"

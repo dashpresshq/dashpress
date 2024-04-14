@@ -159,7 +159,7 @@ export function ListManagerItem({
   const id = useId();
   const content = (
     <Stack>
-      <Stack align="center">
+      <Stack $align="center">
         <div style={{ display: sortable && !subtle ? "block" : "none" }}>
           <SortableKnob>
             <GrabIcon />
@@ -182,7 +182,7 @@ export function ListManagerItem({
           {subLabel ? <SubLabel $active={active}>{subLabel}</SubLabel> : null}
         </div>
       </Stack>
-      <Stack justify="end" width="initial">
+      <Stack $justify="end" $width="initial">
         <>
           {actionButtons.map(
             ({

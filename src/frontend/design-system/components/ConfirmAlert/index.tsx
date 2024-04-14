@@ -36,9 +36,9 @@ from {
 `;
 
 const Overlay = styled(Stack).attrs({
-  direction: "column",
-  align: "center",
-  justify: "center",
+  $direction: "column",
+  $align: "center",
+  $justify: "center",
 })`
   position: fixed;
   top: 0;
@@ -65,7 +65,7 @@ export function Presentation({ action, title, onClose }: IPresentationProps) {
       tabIndex={-1}
     >
       <Body>
-        <Typo.MD weight="bold">
+        <Typo.MD $weight="bold">
           <span id="confirm_delete_label"> {title} </span>
         </Typo.MD>
         <Spacer size="xl" />
@@ -75,7 +75,7 @@ export function Presentation({ action, title, onClose }: IPresentationProps) {
           </span>
         </Typo.XS>
         <Spacer size="xxl" />
-        <Stack justify="center" spacing={8}>
+        <Stack $justify="center" $spacing={8}>
           <SoftButton action={onClose} label="Cancel" systemIcon={null} />
 
           <SoftButton

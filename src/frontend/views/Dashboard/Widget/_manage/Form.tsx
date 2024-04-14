@@ -275,7 +275,7 @@ export function DashboardWidgetForm({
                 )}
                 <FormGrid.Item>
                   {process.env.NEXT_PUBLIC_IS_DEMO ? (
-                    <Stack justify="center">
+                    <Stack $justify="center">
                       <Typo.SM>
                         <Spacer />
                         You will be able to save this form on your own
@@ -285,7 +285,7 @@ export function DashboardWidgetForm({
                   ) : (
                     <>
                       <Spacer />
-                      <Stack justify="end" width="auto">
+                      <Stack $justify="end" $width="auto">
                         {values._type && (
                           <SoftButton
                             action={() => {

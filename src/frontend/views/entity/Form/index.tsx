@@ -128,7 +128,7 @@ export function EntityFormExtensionSettings() {
             label: key,
             content: (
               <>
-                <Typo.SM textStyle="italic">
+                <Typo.SM $textStyle="italic">
                   Click the &apos;Explain Form Scripts&apos; at the top right
                   corner for more info on how this works
                 </Typo.SM>

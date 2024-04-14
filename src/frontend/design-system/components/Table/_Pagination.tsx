@@ -70,7 +70,7 @@ export function TablePagination({
   }
   return (
     <Root>
-      <Stack justify="space-between" align="center">
+      <Stack $justify="space-between" $align="center">
         <Typo.MD>
           Showing{" "}
           <SimpleSelect

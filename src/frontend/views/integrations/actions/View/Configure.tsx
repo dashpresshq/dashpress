@@ -30,8 +30,8 @@ export function Configure({ activationId, integrationDetail }: IProps) {
 
   if (Object.keys(integrationDetail.configurationSchema).length === 0) {
     return (
-      <Stack justify="center">
-        <Typo.SM textStyle="italic">
+      <Stack $justify="center">
+        <Typo.SM $textStyle="italic">
           This action does not have configuration
         </Typo.SM>
       </Stack>

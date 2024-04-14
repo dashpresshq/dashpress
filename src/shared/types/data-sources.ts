@@ -28,12 +28,13 @@ const DATABASE_FIELDS: Array<keyof IDataSourceCredentials> = [
 ];
 
 export const DATA_SOURCES_CONFIG: Record<
-  string,
+  RDMSSources,
   {
     fields: Array<keyof IDataSourceCredentials>;
     port?: number;
     useConnectionString?: boolean;
     getQueryData: (input: any) => unknown;
+    scriptQueryDelimiter: string;
   }
 > = {
   [RDMSSources.Postgres]: {
@@ -41,21 +42,25 @@ export const DATA_SOURCES_CONFIG: Record<
     port: 5432,
     useConnectionString: true,
     getQueryData: (data) => data.rows,
+    scriptQueryDelimiter: "`",
   },
   [RDMSSources.MySql]: {
     fields: DATABASE_FIELDS,
     port: 3306,
     useConnectionString: true,
     getQueryData: (data) => data[0],
+    scriptQueryDelimiter: '"',
   },
   [RDMSSources.MsSql]: {
     fields: DATABASE_FIELDS,
     port: 1433,
     useConnectionString: true,
     getQueryData: (data) => data[0],
+    scriptQueryDelimiter: "'",
   },
   [RDMSSources.Sqlite]: {
     fields: ["filename"],
     getQueryData: (data) => data,
+    scriptQueryDelimiter: "'",
   },
 };

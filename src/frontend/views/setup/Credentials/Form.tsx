@@ -99,11 +99,7 @@ export function CredentialsSetupForm({
                 )}
 
                 {dataSourceConfig.fields.includes("password") && (
-                  <Field
-                    name="password"
-                    validate={required}
-                    validateFields={[]}
-                  >
+                  <Field name="password" validateFields={[]}>
                     {({ input, meta }) => (
                       <FormInput
                         label="Password"

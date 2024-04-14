@@ -29,6 +29,7 @@ import { GranularEntityPermissions, IAccountProfile } from "shared/types/user";
 import { relativeDateNotationToActualDate } from "backend/data/data-access/time.constants";
 import { ILabelValue } from "shared/types/options";
 import { sortListByOrder } from "shared/lib/array/sort";
+import { DATA_SOURCES_CONFIG } from "shared/types/data-sources";
 import {
   mutateGeneratedDashboardWidgets,
   PORTAL_DASHBOARD_PERMISSION,
@@ -122,6 +123,11 @@ export class DashboardWidgetsApiService {
 
     const DEFAULT_NUMBER_OF_SUMMARY_CARDS = 8;
 
+    const dbCredentials = await RDBMSDataApiService.getDbCredentials();
+
+    const queryQuote =
+      DATA_SOURCES_CONFIG[dbCredentials.dataSourceType].scriptQueryDelimiter;
+
     const defaultWidgets: IWidgetConfig[] = await Promise.all(
       entitiesToShow
         .slice(0, DEFAULT_NUMBER_OF_SUMMARY_CARDS)
@@ -151,12 +157,12 @@ export class DashboardWidgetsApiService {
             color: colorsList[index % (colorsList.length - 1)],
             icon: SystemIconsList[index % (SystemIconsList.length - 1)],
             script: dateField
-              ? `const actual = await $.query(\`${plainCountQuery}\`);
-const relative = await $.query(\`${dateCountQuery}\`);
+              ? `const actual = await $.query(${queryQuote}${plainCountQuery}${queryQuote});
+    const relative = await $.query(${queryQuote}${dateCountQuery}${queryQuote});
 
-return [actual[0], relative[0]];
-            `
-              : `return await $.query(\`${plainCountQuery}\`)`,
+    return [actual[0], relative[0]];
+                `
+              : `return await $.query(${queryQuote}${plainCountQuery}${queryQuote})`,
           };
         })
     );
@@ -174,7 +180,7 @@ return [actual[0], relative[0]];
         title: userFriendlyCase(`${firstEntity.value}`),
         _type: "table",
         entity: firstEntity.value,
-        script: `return await $.query(\`${firstQuery}\`)`,
+        script: `return await $.query(${queryQuote}${firstQuery}${queryQuote})`,
       });
     }
 

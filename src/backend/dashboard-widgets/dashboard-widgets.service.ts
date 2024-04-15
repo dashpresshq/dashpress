@@ -238,7 +238,13 @@ return [actual[0], relative[0]];
     await this._dashboardWidgetsPersistenceService.upsertItem(widgetId, widget);
   }
 
-  async removeWidget(widgetId: string, dashboardId: string) {
+  async removeWidget({
+    dashboardId,
+    widgetId,
+  }: {
+    widgetId: string;
+    dashboardId: string;
+  }) {
     await this._dashboardWidgetsPersistenceService.removeItem(widgetId);
 
     await this._listOrderApiService.removeFromList(dashboardId, widgetId);

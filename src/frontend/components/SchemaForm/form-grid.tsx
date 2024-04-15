@@ -6,6 +6,7 @@ import styled from "styled-components";
 const Root = styled.div`
   ${gridRoot}
   grid-auto-rows: auto;
+  align-items: end;
 `;
 
 const Container = styled.div`

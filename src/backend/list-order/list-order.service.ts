@@ -36,6 +36,10 @@ export class ListOrderApiService {
 
     await this.upsertOrder(listId, newListOrder);
   }
+
+  async removeList(listId: string): Promise<void> {
+    await this._listOrderPersistenceService.removeItem(listId);
+  }
 }
 
 const listOrderPersistenceService =

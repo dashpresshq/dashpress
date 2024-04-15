@@ -19,10 +19,10 @@ export default requestHandler(
         { _type: "requestQuery", options: "dashboardId" },
         { _type: "requestBody", options: {} },
       ]);
-      return await dashboardWidgetsApiService.removeWidget(
-        validatedRequest.requestBody.widgetId,
-        validatedRequest.requestQuery
-      );
+      return await dashboardWidgetsApiService.removeWidget({
+        widgetId: validatedRequest.requestBody.widgetId,
+        dashboardId: validatedRequest.requestQuery,
+      });
     },
   },
   [

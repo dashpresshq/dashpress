@@ -1,6 +1,6 @@
 {
   "name": "dashpress",
-  "version": "1.0.2",
+  "version": "1.0.4",
   "license": "GPL-3.0-or-later",
   "scripts": {
     "dev": "next dev",
@@ -20,7 +20,6 @@
     "lint:fix": "eslint --fix",
     "verify": "node ./scripts/ci && npm run typecheck && npm run lint",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook",
     "prepare": "husky install"
   },
   "files": [

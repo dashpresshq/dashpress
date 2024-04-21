@@ -6,6 +6,7 @@ import ListRoles from "pages/roles";
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 import userEvent from "@testing-library/user-event";
 import { getTableRows } from "__tests__/_/utils/getTableRows";
+import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
 
 setupApiHandlers();
 
@@ -13,10 +14,8 @@ describe("pages/roles", () => {
   const useRouter = jest.spyOn(require("next/router"), "useRouter");
 
   it("should list roles", async () => {
-    useRouter.mockImplementation(() => ({
-      asPath: "/",
-      isReady: true,
-    }));
+    useRouter.mockImplementation(USE_ROUTER_PARAMS({}));
+
     render(
       <ApplicationRoot>
         <ListRoles />
@@ -38,11 +37,7 @@ describe("pages/roles", () => {
   it("should link to create role", async () => {
     const pushMock = jest.fn();
 
-    useRouter.mockImplementation(() => ({
-      asPath: "/",
-      push: pushMock,
-      isReady: true,
-    }));
+    useRouter.mockImplementation(USE_ROUTER_PARAMS({ pushMock }));
 
     render(
       <ApplicationRoot>
@@ -58,11 +53,7 @@ describe("pages/roles", () => {
   it("should link to role permissions for only non-system roles", async () => {
     const pushMock = jest.fn();
 
-    useRouter.mockImplementation(() => ({
-      asPath: "/",
-      push: pushMock,
-      isReady: true,
-    }));
+    useRouter.mockImplementation(USE_ROUTER_PARAMS({ pushMock }));
 
     render(
       <ApplicationRoot>
@@ -76,15 +67,9 @@ describe("pages/roles", () => {
   });
 
   it("should delete role for only non-system roles", async () => {
-    const pushMock = jest.fn();
     const replaceMock = jest.fn();
 
-    useRouter.mockImplementation(() => ({
-      asPath: "/",
-      push: pushMock,
-      replace: replaceMock,
-      isReady: true,
-    }));
+    useRouter.mockImplementation(USE_ROUTER_PARAMS({ replaceMock }));
 
     render(
       <ApplicationRoot>

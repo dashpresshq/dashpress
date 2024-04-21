@@ -9,6 +9,7 @@ import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 import { rest } from "msw";
 import { BASE_TEST_URL } from "__tests__/_/api-handlers/_utils";
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
+import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
 import { SideBar } from "../SideBar";
 
 const server = setupApiHandlers();
@@ -55,9 +56,8 @@ const navigationItems: INavigationMenuItem[] = [
 
 describe("<RenderNavigation />", () => {
   const useRouter = jest.spyOn(require("next/router"), "useRouter");
-  useRouter.mockImplementation(() => ({
-    isReady: true,
-  }));
+
+  useRouter.mockImplementation(USE_ROUTER_PARAMS({}));
 
   server.use(
     rest.get(BASE_TEST_URL("/api/menu"), async (_, res, ctx) => {

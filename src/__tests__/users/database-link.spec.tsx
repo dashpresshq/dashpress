@@ -8,16 +8,14 @@ import userEvent from "@testing-library/user-event";
 import UsersLinkToDatabase from "pages/users/database-link";
 
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
+import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
 
 setupApiHandlers();
 
 describe("pages/users/database-link", () => {
   const useRouter = jest.spyOn(require("next/router"), "useRouter");
 
-  useRouter.mockImplementation(() => ({
-    asPath: "/",
-    isReady: true,
-  }));
+  useRouter.mockImplementation(USE_ROUTER_PARAMS({}));
 
   it("should save the link form correctly", async () => {
     render(

@@ -4,10 +4,13 @@ import userEvent from "@testing-library/user-event";
 import AccountProfile from "pages/account/profile";
 
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
+import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
 
 setupApiHandlers();
 
-jest.mock("next/router", () => require("next-router-mock"));
+const useRouter = jest.spyOn(require("next/router"), "useRouter");
+
+useRouter.mockImplementation(USE_ROUTER_PARAMS({}));
 
 describe("pages/account/profile", () => {
   it("should display profile details", async () => {

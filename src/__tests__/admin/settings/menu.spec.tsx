@@ -4,17 +4,15 @@ import userEvent from "@testing-library/user-event";
 import MenuSettings from "pages/admin/settings/menu";
 
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
+import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
 
 setupApiHandlers();
 
 describe("pages/admin/settings/menu", () => {
   beforeAll(() => {
     const useRouter = jest.spyOn(require("next/router"), "useRouter");
-    useRouter.mockImplementation(() => ({
-      asPath: "/",
-      query: {},
-      isReady: true,
-    }));
+
+    useRouter.mockImplementation(USE_ROUTER_PARAMS({}));
   });
 
   it("should display only active entities with correct state", async () => {

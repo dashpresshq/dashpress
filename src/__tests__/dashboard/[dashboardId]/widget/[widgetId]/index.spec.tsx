@@ -6,6 +6,7 @@ import UpdateDashboardWidget from "pages/dashboard/[dashboardId]/widget/[widgetI
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 import userEvent from "@testing-library/user-event";
 import { closeAllToasts } from "__tests__/_/utils/closeAllToasts";
+import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
 
 setupApiHandlers();
 
@@ -13,14 +14,14 @@ describe("pages/dashboard/[dashboardId]/widget/[widgetId]/index", () => {
   const useRouter = jest.spyOn(require("next/router"), "useRouter");
 
   it("should update summary widget", async () => {
-    useRouter.mockImplementation(() => ({
-      asPath: "/",
-      query: {
-        dashboardId: "test-dashboard-id",
-        widgetId: "summary_card_id_1",
-      },
-      isReady: true,
-    }));
+    useRouter.mockImplementation(
+      USE_ROUTER_PARAMS({
+        query: {
+          dashboardId: "test-dashboard-id",
+          widgetId: "summary_card_id_1",
+        },
+      })
+    );
 
     render(
       <ApplicationRoot>
@@ -70,14 +71,14 @@ describe("pages/dashboard/[dashboardId]/widget/[widgetId]/index", () => {
   });
 
   it("should update table widget", async () => {
-    useRouter.mockImplementation(() => ({
-      asPath: "/",
-      query: {
-        dashboardId: "test-dashboard-id",
-        widgetId: "table_id_1",
-      },
-      isReady: true,
-    }));
+    useRouter.mockImplementation(
+      USE_ROUTER_PARAMS({
+        query: {
+          dashboardId: "test-dashboard-id",
+          widgetId: "table_id_1",
+        },
+      })
+    );
 
     render(
       <ApplicationRoot>
@@ -120,14 +121,14 @@ describe("pages/dashboard/[dashboardId]/widget/[widgetId]/index", () => {
   });
 
   it("should render error when widget is not present", async () => {
-    useRouter.mockImplementation(() => ({
-      asPath: "/",
-      query: {
-        dashboardId: "test-dashboard-id",
-        widgetId: "invalid-widget-id",
-      },
-      isReady: true,
-    }));
+    useRouter.mockImplementation(
+      USE_ROUTER_PARAMS({
+        query: {
+          dashboardId: "test-dashboard-id",
+          widgetId: "invalid-widget-id",
+        },
+      })
+    );
 
     render(
       <ApplicationRoot>

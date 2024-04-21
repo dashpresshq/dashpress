@@ -8,6 +8,7 @@ import userEvent from "@testing-library/user-event";
 import UserUpdate from "pages/users/[username]/index";
 
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
+import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
 
 setupApiHandlers();
 
@@ -15,13 +16,14 @@ describe("pages/users/[username]/index", () => {
   const useRouter = jest.spyOn(require("next/router"), "useRouter");
   describe("Update Profile", () => {
     it("should disable role for current user", async () => {
-      useRouter.mockImplementation(() => ({
-        asPath: "/",
-        query: {
-          username: "root",
-        },
-        isReady: true,
-      }));
+      useRouter.mockImplementation(
+        USE_ROUTER_PARAMS({
+          query: {
+            username: "root",
+          },
+        })
+      );
+
       render(
         <ApplicationRoot>
           <UserUpdate />
@@ -34,13 +36,14 @@ describe("pages/users/[username]/index", () => {
     });
 
     it("should show user details", async () => {
-      useRouter.mockImplementation(() => ({
-        asPath: "/",
-        query: {
-          username: "foo",
-        },
-        isReady: true,
-      }));
+      useRouter.mockImplementation(
+        USE_ROUTER_PARAMS({
+          query: {
+            username: "foo",
+          },
+        })
+      );
+
       const { container } = render(
         <ApplicationRoot>
           <UserUpdate />
@@ -56,13 +59,13 @@ describe("pages/users/[username]/index", () => {
     });
 
     it("should update user details", async () => {
-      useRouter.mockImplementation(() => ({
-        asPath: "/",
-        query: {
-          username: "foo",
-        },
-        isReady: true,
-      }));
+      useRouter.mockImplementation(
+        USE_ROUTER_PARAMS({
+          query: {
+            username: "foo",
+          },
+        })
+      );
       render(
         <ApplicationRoot>
           <UserUpdate />
@@ -85,13 +88,13 @@ describe("pages/users/[username]/index", () => {
     });
 
     it("should show updated user details", async () => {
-      useRouter.mockImplementation(() => ({
-        asPath: "/",
-        query: {
-          username: "foo",
-        },
-        isReady: true,
-      }));
+      useRouter.mockImplementation(
+        USE_ROUTER_PARAMS({
+          query: {
+            username: "foo",
+          },
+        })
+      );
       const { container } = render(
         <ApplicationRoot>
           <UserUpdate />
@@ -109,13 +112,13 @@ describe("pages/users/[username]/index", () => {
 
   describe("Reset Password", () => {
     it("should be hidden for current user", async () => {
-      useRouter.mockImplementation(() => ({
-        asPath: "/",
-        query: {
-          username: "root",
-        },
-        isReady: true,
-      }));
+      useRouter.mockImplementation(
+        USE_ROUTER_PARAMS({
+          query: {
+            username: "root",
+          },
+        })
+      );
       render(
         <ApplicationRoot>
           <UserUpdate />
@@ -131,13 +134,13 @@ describe("pages/users/[username]/index", () => {
       ).not.toBeInTheDocument();
     });
     it("should reset password", async () => {
-      useRouter.mockImplementation(() => ({
-        asPath: "/",
-        query: {
-          username: "foo",
-        },
-        isReady: true,
-      }));
+      useRouter.mockImplementation(
+        USE_ROUTER_PARAMS({
+          query: {
+            username: "foo",
+          },
+        })
+      );
       render(
         <ApplicationRoot>
           <UserUpdate />

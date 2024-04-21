@@ -4,20 +4,22 @@ import userEvent from "@testing-library/user-event";
 import EntityRelationsSettings from "pages/admin/[entity]/config/relations";
 
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
+import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
 
 setupApiHandlers();
 
 describe("pages/admin/[entity]/config/relations", () => {
   beforeAll(() => {
     const useRouter = jest.spyOn(require("next/router"), "useRouter");
-    useRouter.mockImplementation(() => ({
-      asPath: "/",
-      query: {
-        entity: "entity-1",
-        tab: "Labels",
-      },
-      isReady: true,
-    }));
+
+    useRouter.mockImplementation(
+      USE_ROUTER_PARAMS({
+        query: {
+          entity: "entity-1",
+          tab: "Labels",
+        },
+      })
+    );
   });
   describe("Labels", () => {
     it("should display reference labels", async () => {

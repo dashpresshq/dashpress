@@ -4,6 +4,7 @@ import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 
 import { AuthActions } from "frontend/hooks/auth/auth.actions";
 import userEvent from "@testing-library/user-event";
+import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
 import { AppLayout } from "..";
 
 setupApiHandlers();
@@ -17,18 +18,12 @@ Object.defineProperty(window, "location", {
 });
 
 describe("AppLayout", () => {
-  const replaceMock = jest.fn();
   const pushMock = jest.fn();
 
   beforeAll(() => {
     const useRouter = jest.spyOn(require("next/router"), "useRouter");
 
-    useRouter.mockImplementation(() => ({
-      replace: replaceMock,
-      push: pushMock,
-      asPath: "/",
-      isReady: true,
-    }));
+    useRouter.mockImplementation(USE_ROUTER_PARAMS({ pushMock }));
   });
 
   it("should render the content", async () => {

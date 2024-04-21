@@ -7,6 +7,7 @@ import { rest } from "msw";
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 import { BASE_TEST_URL } from "__tests__/_/api-handlers/_utils";
 import { sluggify } from "shared/lib/strings";
+import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
 
 const server = setupApiHandlers();
 
@@ -31,14 +32,16 @@ describe("pages/admin/[entity]/config/crud", () => {
   const replaceMock = jest.fn();
 
   const useRouter = jest.spyOn(require("next/router"), "useRouter");
-  useRouter.mockImplementation(() => ({
-    asPath: "/hello-there?foo=bar",
-    replace: replaceMock,
-    query: {
-      entity: "entity-1",
-    },
-    isReady: true,
-  }));
+
+  useRouter.mockImplementation(
+    USE_ROUTER_PARAMS({
+      asPath: "/hello-there?foo=bar",
+      replaceMock,
+      query: {
+        entity: "entity-1",
+      },
+    })
+  );
 
   it("should defaults to table", async () => {
     render(
@@ -88,15 +91,16 @@ describe("pages/admin/[entity]/config/crud", () => {
   it("should default to the tab from query and be to go back to table", async () => {
     const replaceMock$1 = jest.fn();
 
-    useRouter.mockImplementation(() => ({
-      asPath: "/",
-      replace: replaceMock$1,
-      query: {
-        entity: "entity-1",
-        tab: "Delete",
-      },
-      isReady: true,
-    }));
+    useRouter.mockImplementation(
+      USE_ROUTER_PARAMS({
+        replaceMock: replaceMock$1,
+        query: {
+          entity: "entity-1",
+          tab: "Delete",
+        },
+      })
+    );
+
     render(
       <ApplicationRoot>
         <EntityCrudSettings />

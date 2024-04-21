@@ -7,20 +7,20 @@ import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 import userEvent from "@testing-library/user-event";
 import { closeAllToasts } from "__tests__/_/utils/closeAllToasts";
 import { getTableRows } from "__tests__/_/utils/getTableRows";
+import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
 
 setupApiHandlers();
 
 describe("pages/integrations/variables => constants", () => {
   const useRouter = jest.spyOn(require("next/router"), "useRouter");
-  beforeAll(() => {
-    useRouter.mockImplementation(() => ({
-      asPath: "/",
+
+  useRouter.mockImplementation(
+    USE_ROUTER_PARAMS({
       query: {
         key: "foo",
       },
-      isReady: true,
-    }));
-  });
+    })
+  );
 
   describe("list", () => {
     it("should list constants", async () => {

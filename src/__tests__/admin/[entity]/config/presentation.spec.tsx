@@ -7,20 +7,20 @@ import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 
 import EntityPresentationScriptSettings from "pages/admin/[entity]/config/presentation";
 import { closeAllToasts } from "__tests__/_/utils/closeAllToasts";
+import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
 
 setupApiHandlers();
 
 describe("pages/admin/[entity]/config/presentation", () => {
   const useRouter = jest.spyOn(require("next/router"), "useRouter");
 
-  useRouter.mockImplementation(() => ({
-    asPath: "/",
-    query: {
-      entity: "entity-1",
-    },
-    isReady: true,
-  }));
-
+  useRouter.mockImplementation(
+    USE_ROUTER_PARAMS({
+      query: {
+        entity: "entity-1",
+      },
+    })
+  );
   it("should show current section value", async () => {
     render(
       <ApplicationRoot>

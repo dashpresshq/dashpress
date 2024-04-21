@@ -1,13 +1,13 @@
 import * as React from "react";
 import { render, screen } from "@testing-library/react";
 import { ApplicationRoot } from "frontend/components/ApplicationRoot";
+import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
 import { ViewStateMachine } from ".";
 
 describe("<ViewStateMachine />", () => {
   const useRouter = jest.spyOn(require("next/router"), "useRouter");
-  useRouter.mockImplementation(() => ({
-    isReady: true,
-  }));
+
+  useRouter.mockImplementation(USE_ROUTER_PARAMS({}));
 
   it("should render only loader when loading", async () => {
     render(

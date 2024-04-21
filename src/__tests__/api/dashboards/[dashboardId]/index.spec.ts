@@ -211,11 +211,11 @@ describe("/api/dashboards/[dashboardId]/index generation", () => {
           "entity": "base-model",
           "icon": "ShoppingCart",
           "id": "1",
-          "script": "const actual = await $.query(\`select count(*) as \`count\` from \`base-model\`\`);
-      const relative = await $.query(\`select count(*) as \`count\` from \`base-model\` where \`createdAt\` < '$.RELATIVE_TIME'\`);
+          "script": "const actual = await $.query('select count(*) as \`count\` from \`base-model\`');
+      const relative = await $.query('select count(*) as \`count\` from \`base-model\` where \`createdAt\` < '$.RELATIVE_TIME'');
 
       return [actual[0], relative[0]];
-                  ",
+      ",
           "title": "Base Model",
         },
         {
@@ -224,7 +224,7 @@ describe("/api/dashboards/[dashboardId]/index generation", () => {
           "entity": "secondary-model",
           "icon": "Activity",
           "id": "2",
-          "script": "return await $.query(\`select count(*) as \`count\` from \`secondary-model\`\`)",
+          "script": "return await $.query('select count(*) as \`count\` from \`secondary-model\`')",
           "title": "Secondary Model",
         },
         {
@@ -233,18 +233,18 @@ describe("/api/dashboards/[dashboardId]/index generation", () => {
           "entity": "tests",
           "icon": "ShoppingBag",
           "id": "3",
-          "script": "const actual = await $.query(\`select count(*) as \`count\` from \`tests\`\`);
-      const relative = await $.query(\`select count(*) as \`count\` from \`tests\` where \`createdAt\` < '$.RELATIVE_TIME'\`);
+          "script": "const actual = await $.query('select count(*) as \`count\` from \`tests\`');
+      const relative = await $.query('select count(*) as \`count\` from \`tests\` where \`createdAt\` < '$.RELATIVE_TIME'');
 
       return [actual[0], relative[0]];
-                  ",
+      ",
           "title": "Tests",
         },
         {
           "_type": "table",
           "entity": "base-model",
           "id": "4",
-          "script": "return await $.query(\`select * from \`base-model\` limit 5\`)",
+          "script": "return await $.query('select * from \`base-model\` limit 5')",
           "title": "Base Model",
         },
       ]

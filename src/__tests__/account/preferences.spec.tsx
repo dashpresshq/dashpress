@@ -4,16 +4,14 @@ import userEvent from "@testing-library/user-event";
 import UserPreferences from "pages/account/preferences";
 
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
+import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
 
 setupApiHandlers();
 
 describe("pages/account/preferences", () => {
   beforeAll(() => {
     const useRouter = jest.spyOn(require("next/router"), "useRouter");
-    useRouter.mockImplementation(() => ({
-      asPath: "/",
-      isReady: true,
-    }));
+    useRouter.mockImplementation(USE_ROUTER_PARAMS({}));
   });
 
   it("should display user preferences", async () => {

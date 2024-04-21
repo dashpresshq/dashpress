@@ -6,6 +6,7 @@ import CreateDashboardWidget from "pages/dashboard/[dashboardId]/widget/create";
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 import userEvent from "@testing-library/user-event";
 import { closeAllToasts } from "__tests__/_/utils/closeAllToasts";
+import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
 
 setupApiHandlers();
 
@@ -19,13 +20,13 @@ jest.mock("nanoid", () => ({
 describe("pages/dashboard/[dashboardId]/widget/create", () => {
   const useRouter = jest.spyOn(require("next/router"), "useRouter");
   beforeAll(() => {
-    useRouter.mockImplementation(() => ({
-      asPath: "/",
-      query: {
-        dashboardId: "test-dashboard-id",
-      },
-      isReady: true,
-    }));
+    useRouter.mockImplementation(
+      USE_ROUTER_PARAMS({
+        query: {
+          dashboardId: "test-dashboard-id",
+        },
+      })
+    );
   });
 
   it("should create summary widget", async () => {

@@ -6,19 +6,21 @@ import RolePermissions from "pages/roles/[roleId]/index";
 
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 import { closeAllToasts } from "__tests__/_/utils/closeAllToasts";
+import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
 
 setupApiHandlers();
 
 describe("pages/roles/[roleId]/index", () => {
   const useRouter = jest.spyOn(require("next/router"), "useRouter");
-  useRouter.mockImplementation(() => ({
-    asPath: "/",
-    query: {
-      roleId: "foo",
-    },
-    replace: jest.fn(),
-    isReady: true,
-  }));
+
+  useRouter.mockImplementation(
+    USE_ROUTER_PARAMS({
+      query: {
+        roleId: "foo",
+      },
+      replaceMock: jest.fn(),
+    })
+  );
 
   it("should select all user enabled admin permissions", async () => {
     render(

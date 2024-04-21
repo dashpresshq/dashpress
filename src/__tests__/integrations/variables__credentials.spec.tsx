@@ -9,6 +9,7 @@ import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 import userEvent from "@testing-library/user-event";
 import { AuthActions } from "frontend/hooks/auth/auth.actions";
 import { getTableRows } from "__tests__/_/utils/getTableRows";
+import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
 
 setupApiHandlers();
 
@@ -16,13 +17,13 @@ describe("pages/integrations/variables => credentials", () => {
   const useRouter = jest.spyOn(require("next/router"), "useRouter");
   beforeAll(() => {
     localStorage.setItem(AuthActions.JWT_TOKEN_STORAGE_KEY, "foo");
-    useRouter.mockImplementation(() => ({
-      asPath: "/",
-      query: {
-        key: "foo",
-      },
-      isReady: true,
-    }));
+    useRouter.mockImplementation(
+      USE_ROUTER_PARAMS({
+        query: {
+          key: "foo",
+        },
+      })
+    );
   });
 
   describe("priviledge", () => {

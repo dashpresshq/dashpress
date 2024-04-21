@@ -8,6 +8,7 @@ import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 import { BASE_TEST_URL } from "__tests__/_/api-handlers/_utils";
 import { IAuthenticatedUserBag } from "shared/types/user";
 import { USER_PERMISSIONS } from "shared/constants/user";
+import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
 
 const server = setupApiHandlers();
 
@@ -29,13 +30,14 @@ describe("pages/users/[username]/index", () => {
   });
   describe("Reset Password", () => {
     it("should be hidden when user doesn't have the permission to reset password", async () => {
-      useRouter.mockImplementation(() => ({
-        asPath: "/",
-        query: {
-          username: "foo",
-        },
-        isReady: true,
-      }));
+      useRouter.mockImplementation(
+        USE_ROUTER_PARAMS({
+          query: {
+            username: "foo",
+          },
+        })
+      );
+
       render(
         <ApplicationRoot>
           <UserUpdate />
@@ -51,13 +53,13 @@ describe("pages/users/[username]/index", () => {
     });
 
     it("should be hidden when user doesn't have the permission to reset password and is current user", async () => {
-      useRouter.mockImplementation(() => ({
-        asPath: "/",
-        query: {
-          username: "root",
-        },
-        isReady: true,
-      }));
+      useRouter.mockImplementation(
+        USE_ROUTER_PARAMS({
+          query: {
+            username: "root",
+          },
+        })
+      );
       render(
         <ApplicationRoot>
           <UserUpdate />

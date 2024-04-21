@@ -8,16 +8,13 @@ import ManageDashboard from "pages/dashboard/manage";
 import Dashboard from "pages";
 
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
+import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
 
 setupApiHandlers();
 
 const useRouter = jest.spyOn(require("next/router"), "useRouter");
 
-useRouter.mockImplementation(() => ({
-  asPath: "/",
-  query: {},
-  isReady: true,
-}));
+useRouter.mockImplementation(USE_ROUTER_PARAMS({}));
 
 jest.mock("react-easy-sort", () => ({
   __esModule: true,

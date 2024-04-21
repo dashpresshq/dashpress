@@ -161,7 +161,7 @@ export class DashboardWidgetsApiService {
 const relative = await $.query(${queryQuote}${dateCountQuery}${queryQuote});
 
 return [actual[0], relative[0]];
-                `
+`
               : `return await $.query(${queryQuote}${plainCountQuery}${queryQuote})`,
           };
         })

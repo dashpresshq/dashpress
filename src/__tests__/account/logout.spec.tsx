@@ -4,6 +4,7 @@ import userEvent from "@testing-library/user-event";
 import AccountPassword from "pages/account/password";
 
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
+import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
 
 Object.defineProperty(window, "location", {
   value: {
@@ -15,7 +16,9 @@ Object.defineProperty(window, "location", {
 
 setupApiHandlers();
 
-jest.mock("next/router", () => require("next-router-mock"));
+const useRouter = jest.spyOn(require("next/router"), "useRouter");
+
+useRouter.mockImplementation(USE_ROUTER_PARAMS({}));
 
 describe("pages/account/logout", () => {
   it("should log user out", async () => {

@@ -6,6 +6,7 @@ import ListUsers from "pages/users";
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 import userEvent from "@testing-library/user-event";
 import { getTableRows } from "__tests__/_/utils/getTableRows";
+import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
 
 setupApiHandlers();
 
@@ -13,10 +14,7 @@ describe("pages/users", () => {
   const useRouter = jest.spyOn(require("next/router"), "useRouter");
 
   it("should list users", async () => {
-    useRouter.mockImplementation(() => ({
-      asPath: "/",
-      isReady: true,
-    }));
+    useRouter.mockImplementation(USE_ROUTER_PARAMS({}));
     render(
       <ApplicationRoot>
         <ListUsers />
@@ -37,11 +35,7 @@ describe("pages/users", () => {
   it("should link to create user", async () => {
     const pushMock = jest.fn();
 
-    useRouter.mockImplementation(() => ({
-      asPath: "/",
-      push: pushMock,
-      isReady: true,
-    }));
+    useRouter.mockImplementation(USE_ROUTER_PARAMS({ pushMock }));
 
     render(
       <ApplicationRoot>
@@ -57,11 +51,7 @@ describe("pages/users", () => {
   it("should link to user edit", async () => {
     const pushMock = jest.fn();
 
-    useRouter.mockImplementation(() => ({
-      asPath: "/",
-      push: pushMock,
-      isReady: true,
-    }));
+    useRouter.mockImplementation(USE_ROUTER_PARAMS({ pushMock }));
 
     render(
       <ApplicationRoot>
@@ -77,15 +67,9 @@ describe("pages/users", () => {
   });
 
   it("should delete user", async () => {
-    const pushMock = jest.fn();
     const replaceMock = jest.fn();
 
-    useRouter.mockImplementation(() => ({
-      asPath: "/",
-      push: pushMock,
-      replace: replaceMock,
-      isReady: true,
-    }));
+    useRouter.mockImplementation(USE_ROUTER_PARAMS({ replaceMock }));
 
     render(
       <ApplicationRoot>

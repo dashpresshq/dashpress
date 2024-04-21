@@ -13,6 +13,7 @@ import { IAuthenticatedUserBag } from "shared/types/user";
 import { USER_PERMISSIONS } from "shared/constants/user";
 import { AuthActions } from "frontend/hooks/auth/auth.actions";
 import { getTableRows } from "__tests__/_/utils/getTableRows";
+import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
 
 const server = setupApiHandlers();
 
@@ -20,13 +21,14 @@ describe("pages/integrations/variables => credentials -- non admin", () => {
   const useRouter = jest.spyOn(require("next/router"), "useRouter");
   beforeAll(() => {
     localStorage.setItem(AuthActions.JWT_TOKEN_STORAGE_KEY, "foo");
-    useRouter.mockImplementation(() => ({
-      asPath: "/",
-      query: {
-        key: "foo",
-      },
-      isReady: true,
-    }));
+
+    useRouter.mockImplementation(
+      USE_ROUTER_PARAMS({
+        query: {
+          key: "foo",
+        },
+      })
+    );
 
     const CUSTOM_ROLE_USER: IAuthenticatedUserBag = {
       name: "Custom Role",

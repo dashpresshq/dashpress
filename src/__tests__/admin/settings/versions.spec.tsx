@@ -3,16 +3,15 @@ import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 import VersionInfo from "pages/admin/settings/versions";
 
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
+import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
 
 setupApiHandlers();
 
 describe("pages/admin/settings/version", () => {
   beforeAll(() => {
     const useRouter = jest.spyOn(require("next/router"), "useRouter");
-    useRouter.mockImplementation(() => ({
-      asPath: "/",
-      isReady: true,
-    }));
+
+    useRouter.mockImplementation(USE_ROUTER_PARAMS({}));
   });
 
   it("should display system info", async () => {

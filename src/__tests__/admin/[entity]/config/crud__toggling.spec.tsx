@@ -6,6 +6,7 @@ import { rest } from "msw";
 
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 import { BASE_TEST_URL } from "__tests__/_/api-handlers/_utils";
+import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
 
 const server = setupApiHandlers();
 
@@ -30,13 +31,14 @@ describe("pages/admin/[entity]/config/crud", () => {
   const useRouter = jest.spyOn(require("next/router"), "useRouter");
 
   it("should not have toggling functionality for tables", async () => {
-    useRouter.mockImplementation(() => ({
-      asPath: "/",
-      query: {
-        entity: "entity-1",
-      },
-      isReady: true,
-    }));
+    useRouter.mockImplementation(
+      USE_ROUTER_PARAMS({
+        query: {
+          entity: "entity-1",
+        },
+      })
+    );
+
     render(
       <ApplicationRoot>
         <EntityCrudSettings />
@@ -68,14 +70,14 @@ describe("pages/admin/[entity]/config/crud", () => {
     { tab: "Delete" },
   ])("$tab feature", ({ tab }) => {
     beforeAll(() => {
-      useRouter.mockImplementation(() => ({
-        asPath: "/",
-        query: {
-          entity: "entity-1",
-          tab,
-        },
-        isReady: true,
-      }));
+      useRouter.mockImplementation(
+        USE_ROUTER_PARAMS({
+          query: {
+            entity: "entity-1",
+            tab,
+          },
+        })
+      );
     });
 
     it("should toggle off functionality", async () => {

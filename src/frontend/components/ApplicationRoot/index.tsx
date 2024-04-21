@@ -15,11 +15,7 @@ export function ApplicationRoot({
 }) {
   const router = useRouter();
   return (
-    <NextIntlClientProvider
-      locale={router.locale}
-      timeZone="Europe/Vienna"
-      messages={messages}
-    >
+    <NextIntlClientProvider locale={router.locale} messages={messages}>
       <QueryProvider>
         <Toaster />
         <GlobalStyles />

@@ -6,16 +6,11 @@ import Dashboard from "pages";
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 import userEvent from "@testing-library/user-event";
 import { getTableRows } from "__tests__/_/utils/getTableRows";
+import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
 
 setupApiHandlers();
 
 const useRouter = jest.spyOn(require("next/router"), "useRouter");
-
-useRouter.mockImplementation(() => ({
-  query: {},
-  asPath: "/",
-  isReady: true,
-}));
 
 // it("should change relative time", async () => {
 //   render(
@@ -51,6 +46,8 @@ useRouter.mockImplementation(() => ({
 // });
 
 describe("pages/admin", () => {
+  useRouter.mockImplementation(USE_ROUTER_PARAMS({}));
+
   it("should render table dashboard widget correctly", async () => {
     render(
       <ApplicationRoot>
@@ -150,12 +147,8 @@ describe("pages/admin", () => {
   describe("Action Button", () => {
     it("should go to settings page on 'Edit Dashboard'", async () => {
       const replaceMock = jest.fn();
-      useRouter.mockImplementation(() => ({
-        replace: replaceMock,
-        query: {},
-        asPath: "/",
-        isReady: true,
-      }));
+
+      useRouter.mockImplementation(USE_ROUTER_PARAMS({ replaceMock }));
 
       render(
         <ApplicationRoot>

@@ -1,5 +1,6 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import { loadedDataState } from "frontend/lib/data/constants/loadedDataState";
+import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
 import { ListManager } from ".";
 
 const defaultProps = {
@@ -17,10 +18,8 @@ const defaultProps = {
 
 describe("ListManager", () => {
   const useRouter = jest.spyOn(require("next/router"), "useRouter");
-  useRouter.mockImplementation(() => ({
-    asPath: "/",
-    isReady: true,
-  }));
+
+  useRouter.mockImplementation(USE_ROUTER_PARAMS({}));
 
   it("should render list items", () => {
     render(

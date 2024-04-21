@@ -4,16 +4,15 @@ import userEvent from "@testing-library/user-event";
 import SystemSettings from "pages/admin/settings/system";
 
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
+import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
 
 setupApiHandlers();
 
 describe("pages/admin/settings/system", () => {
   beforeAll(() => {
     const useRouter = jest.spyOn(require("next/router"), "useRouter");
-    useRouter.mockImplementation(() => ({
-      asPath: "/",
-      isReady: true,
-    }));
+
+    useRouter.mockImplementation(USE_ROUTER_PARAMS({}));
   });
 
   it("should display system values", async () => {

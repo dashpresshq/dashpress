@@ -3,6 +3,7 @@ import { render, screen } from "@testing-library/react";
 import { Form } from "react-final-form";
 import userEvent from "@testing-library/user-event";
 import { FormButton } from "frontend/design-system/components/Button/FormButton";
+import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
 import { IconInputField } from ".";
 import { ApplicationRoot } from "../ApplicationRoot";
 
@@ -34,6 +35,10 @@ function TestComponent({
     />
   );
 }
+
+const useRouter = jest.spyOn(require("next/router"), "useRouter");
+
+useRouter.mockImplementation(USE_ROUTER_PARAMS({}));
 
 describe("<IconInputField />", () => {
   it("should render text input only by default", async () => {

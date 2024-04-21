@@ -5,6 +5,7 @@ import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 import UserSetup from "pages/setup/user";
 import userEvent from "@testing-library/user-event";
 import { SETUP_CHECK_DATA } from "__tests__/_/api-handlers/setup";
+import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
 
 const server = setupApiHandlers();
 
@@ -19,12 +20,12 @@ describe("pages/setup/user", () => {
     server.resetHandlers();
     localStorage.clear();
     const replaceMock = jest.fn();
-    useRouter.mockImplementation(() => ({
-      query: {},
-      replace: replaceMock,
-      isReady: true,
-      push: jest.fn(),
-    }));
+
+    useRouter.mockImplementation(
+      USE_ROUTER_PARAMS({
+        replaceMock,
+      })
+    );
 
     SETUP_CHECK_DATA.data = {
       hasUsers: false,

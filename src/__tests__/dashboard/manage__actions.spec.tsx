@@ -5,15 +5,13 @@ import userEvent from "@testing-library/user-event";
 import ManageDashboard from "pages/dashboard/manage";
 
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
+import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
 
 setupApiHandlers();
 
 const useRouter = jest.spyOn(require("next/router"), "useRouter");
 
-useRouter.mockImplementation(() => ({
-  asPath: "/",
-  query: {},
-}));
+useRouter.mockImplementation(USE_ROUTER_PARAMS({}));
 
 jest.mock("nanoid", () => ({
   nanoid: jest.fn().mockReturnValueOnce("new_id_1").mockReturnValueOnce("2"),
@@ -23,11 +21,7 @@ describe("pages/admin/settings/dashboard", () => {
   describe("Action Button", () => {
     it("should be able to go to home page on 'Done'", async () => {
       const replaceMock = jest.fn();
-      useRouter.mockImplementation(() => ({
-        replace: replaceMock,
-        query: {},
-        isReady: true,
-      }));
+      useRouter.mockImplementation(USE_ROUTER_PARAMS({ replaceMock }));
 
       render(
         <ApplicationRoot>
@@ -44,11 +38,7 @@ describe("pages/admin/settings/dashboard", () => {
 
     it("should be able to go to new widget page", async () => {
       const pushMock = jest.fn();
-      useRouter.mockImplementation(() => ({
-        push: pushMock,
-        query: {},
-        isReady: true,
-      }));
+      useRouter.mockImplementation(USE_ROUTER_PARAMS({ pushMock }));
 
       render(
         <ApplicationRoot>
@@ -97,11 +87,7 @@ describe("pages/admin/settings/dashboard", () => {
 
     it("should edit summary widget", async () => {
       const pushMock = jest.fn();
-      useRouter.mockImplementation(() => ({
-        push: pushMock,
-        query: {},
-        isReady: true,
-      }));
+      useRouter.mockImplementation(USE_ROUTER_PARAMS({ pushMock }));
 
       render(
         <ApplicationRoot>

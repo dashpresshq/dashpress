@@ -4,21 +4,20 @@ import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 import ActionsIntegrations from "pages/integrations/actions/[key]";
 
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
-// import userEvent from "@testing-library/user-event";
-// import { closeAllToasts } from "__tests__/_/utils/closeAllToasts";
+import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
 
 setupApiHandlers();
 
 describe("pages/integrations/actions/[key]", () => {
   const useRouter = jest.spyOn(require("next/router"), "useRouter");
   beforeAll(() => {
-    useRouter.mockImplementation(() => ({
-      asPath: "/",
-      query: {
-        key: "slack",
-      },
-      isReady: true,
-    }));
+    useRouter.mockImplementation(
+      USE_ROUTER_PARAMS({
+        query: {
+          key: "slack",
+        },
+      })
+    );
   });
 
   describe("list", () => {

@@ -5,6 +5,7 @@ import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 import SignIn from "pages/auth";
 import userEvent from "@testing-library/user-event";
 import { AuthActions } from "frontend/hooks/auth/auth.actions";
+import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
 
 setupApiHandlers();
 
@@ -23,12 +24,7 @@ describe("pages/auth", () => {
 
   const useRouter = jest.spyOn(require("next/router"), "useRouter");
 
-  const replaceMock = jest.fn();
-  useRouter.mockImplementation(() => ({
-    replace: replaceMock,
-    query: {},
-    isReady: true,
-  }));
+  useRouter.mockImplementation(USE_ROUTER_PARAMS({}));
 
   describe("Demo Credentials", () => {
     const OLD_ENV = process.env;
@@ -89,11 +85,8 @@ describe("pages/auth", () => {
   // Need to be able to tell jest to ignore 401 errors as the test crashes after hitting it
   it.skip("should prompt invalid login when invalid credentials are put in", async () => {
     const pushMock = jest.fn();
-    useRouter.mockImplementation(() => ({
-      push: pushMock,
-      query: {},
-      isReady: true,
-    }));
+
+    useRouter.mockImplementation(USE_ROUTER_PARAMS({ pushMock }));
 
     render(
       <ApplicationRoot>

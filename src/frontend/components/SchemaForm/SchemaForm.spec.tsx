@@ -2,6 +2,7 @@ import * as React from "react";
 import { render, screen } from "@testing-library/react";
 import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 import userEvent from "@testing-library/user-event";
+import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
 import { SchemaForm } from ".";
 
 type IAccount = {
@@ -9,7 +10,9 @@ type IAccount = {
   email: string;
 };
 
-jest.mock("next/router", () => require("next-router-mock"));
+const useRouter = jest.spyOn(require("next/router"), "useRouter");
+
+useRouter.mockImplementation(USE_ROUTER_PARAMS({}));
 
 const buttonText = (isSubmitting: boolean) =>
   isSubmitting ? "Submitting Form" : "Submit Form";

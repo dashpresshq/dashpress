@@ -5,6 +5,7 @@ import userEvent from "@testing-library/user-event";
 import UserCreate from "pages/users/create";
 
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
+import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
 
 setupApiHandlers();
 
@@ -13,11 +14,9 @@ describe("pages/users/create", () => {
 
   it("should create new user", async () => {
     const pushMock = jest.fn();
-    useRouter.mockImplementation(() => ({
-      asPath: "/",
-      push: pushMock,
-      isReady: true,
-    }));
+
+    useRouter.mockImplementation(USE_ROUTER_PARAMS({ pushMock }));
+
     render(
       <ApplicationRoot>
         <UserCreate />

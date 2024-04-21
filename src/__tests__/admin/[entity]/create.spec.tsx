@@ -3,19 +3,21 @@ import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 import EntityCreate from "pages/admin/[entity]/create";
 
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
+import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
 
 setupApiHandlers();
 
 describe("pages/admin/[entity]/create", () => {
   beforeAll(() => {
     const useRouter = jest.spyOn(require("next/router"), "useRouter");
-    useRouter.mockImplementation(() => ({
-      asPath: "/",
-      query: {
-        entity: "entity-1",
-      },
-      isReady: true,
-    }));
+
+    useRouter.mockImplementation(
+      USE_ROUTER_PARAMS({
+        query: {
+          entity: "entity-1",
+        },
+      })
+    );
   });
 
   it("should create data", async () => {

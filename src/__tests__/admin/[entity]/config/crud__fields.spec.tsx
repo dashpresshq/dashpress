@@ -6,6 +6,7 @@ import { rest } from "msw";
 
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 import { BASE_TEST_URL } from "__tests__/_/api-handlers/_utils";
+import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
 
 const server = setupApiHandlers();
 
@@ -50,14 +51,14 @@ describe("pages/admin/[entity]/config/crud", () => {
     { tab: "Update" },
   ])("$tab Tab", ({ tab }) => {
     beforeEach(() => {
-      useRouter.mockImplementation(() => ({
-        asPath: "/",
-        query: {
-          entity: "entity-1",
-          tab,
-        },
-        isReady: true,
-      }));
+      useRouter.mockImplementation(
+        USE_ROUTER_PARAMS({
+          query: {
+            entity: "entity-1",
+            tab,
+          },
+        })
+      );
     });
 
     it("should show current state correctly", async () => {
@@ -147,14 +148,14 @@ describe("pages/admin/[entity]/config/crud", () => {
   });
 
   it("should show hide id fields from selection", async () => {
-    useRouter.mockImplementation(() => ({
-      asPath: "/",
-      query: {
-        entity: "entity-1",
-      },
-      isReady: true,
-      replace: jest.fn(),
-    }));
+    useRouter.mockImplementation(
+      USE_ROUTER_PARAMS({
+        query: {
+          entity: "entity-1",
+        },
+      })
+    );
+
     render(
       <ApplicationRoot>
         <EntityCrudSettings />
@@ -193,14 +194,15 @@ describe("pages/admin/[entity]/config/crud", () => {
   });
 
   it("should not have toggling functionality for delete", async () => {
-    useRouter.mockImplementation(() => ({
-      asPath: "/",
-      query: {
-        entity: "entity-1",
-        tab: "Delete",
-      },
-      isReady: true,
-    }));
+    useRouter.mockImplementation(
+      USE_ROUTER_PARAMS({
+        query: {
+          entity: "entity-1",
+          tab: "Delete",
+        },
+      })
+    );
+
     render(
       <ApplicationRoot>
         <EntityCrudSettings />

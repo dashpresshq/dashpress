@@ -6,19 +6,21 @@ import EntityFormActionsSettings from "pages/admin/[entity]/config/actions";
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 import { getTableRows } from "__tests__/_/utils/getTableRows";
 import { closeAllToasts } from "__tests__/_/utils/closeAllToasts";
+import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
 
 setupApiHandlers();
 
 describe("pages/admin/[entity]/config/actions", () => {
   beforeAll(() => {
     const useRouter = jest.spyOn(require("next/router"), "useRouter");
-    useRouter.mockImplementation(() => ({
-      asPath: "/",
-      query: {
-        entity: "test-entity",
-      },
-      isReady: true,
-    }));
+
+    useRouter.mockImplementation(
+      USE_ROUTER_PARAMS({
+        query: {
+          entity: "test-entity",
+        },
+      })
+    );
   });
 
   it("should list entity form actions", async () => {

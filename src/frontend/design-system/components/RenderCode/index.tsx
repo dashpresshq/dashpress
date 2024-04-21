@@ -1,4 +1,3 @@
-import React from "react";
 import styled from "styled-components";
 import { highlight, languages } from "prismjs/components/prism-core";
 import "prismjs/components/prism-clike";

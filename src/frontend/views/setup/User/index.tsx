@@ -1,4 +1,3 @@
-import React from "react";
 import { AuthLayout } from "frontend/_layouts/guest";
 import { useSetupCheck } from "frontend/hooks/setup/setup.store";
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";

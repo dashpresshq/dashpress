@@ -1,4 +1,3 @@
-import React from "react";
 import styled from "styled-components";
 import { loadedDataState } from "frontend/lib/data/constants/loadedDataState";
 import { SystemIconsKeys } from "shared/constants/Icons";

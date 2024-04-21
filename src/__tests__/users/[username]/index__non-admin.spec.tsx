@@ -1,4 +1,3 @@
-import React from "react";
 import { render, screen, waitFor } from "@testing-library/react";
 import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 import { rest } from "msw";

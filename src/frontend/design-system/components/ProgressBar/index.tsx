@@ -1,4 +1,3 @@
-import React from "react";
 import styled, { keyframes } from "styled-components";
 import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
 

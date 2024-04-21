@@ -1,5 +1,5 @@
 /* eslint-disable react/function-component-definition */
-import React from "react";
+
 import { Story } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
 import { MoreVertical } from "react-feather";

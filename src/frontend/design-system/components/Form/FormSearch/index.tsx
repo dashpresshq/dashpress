@@ -1,4 +1,3 @@
-import React from "react";
 import styled from "styled-components";
 import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
 import { SystemIcon } from "frontend/design-system/Icons/System";

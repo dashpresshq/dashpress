@@ -1,4 +1,3 @@
-import React from "react";
 import classnames from "classnames";
 import styled, { keyframes } from "styled-components";
 import { Upload } from "react-feather";

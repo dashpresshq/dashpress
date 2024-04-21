@@ -1,4 +1,3 @@
-import React from "react";
 import { useMutation } from "@tanstack/react-query";
 import { AuthLayout } from "frontend/_layouts/guest";
 import { ISuccessfullAuthenticationResponse } from "shared/types/auth/portal";

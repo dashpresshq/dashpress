@@ -1,4 +1,3 @@
-import React from "react";
 import { IColumnFilterBag } from "shared/types/data";
 import { ISelectData } from "shared/types/options";
 import { FormMultiSelect } from "../../Form/FormSelect";

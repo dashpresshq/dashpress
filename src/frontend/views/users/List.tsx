@@ -1,4 +1,3 @@
-import React from "react";
 import { AppLayout } from "frontend/_layouts/app";
 import { roleLabel, USER_PERMISSIONS } from "shared/constants/user";
 import {
@@ -16,6 +15,7 @@ import { ActionButtons } from "frontend/design-system/components/Button/ActionBu
 import { DELETE_BUTTON_PROPS } from "frontend/design-system/components/Button/constants";
 import { useUserHasPermission } from "frontend/hooks/auth/user.store";
 import { IDropDownMenuItem } from "frontend/design-system/components/DropdownMenu";
+import { useCallback } from "react";
 import { ADMIN_ROLES_CRUD_CONFIG } from "../roles/roles.store";
 import {
   ADMIN_USERS_CRUD_CONFIG,
@@ -37,7 +37,7 @@ export function ListUsers() {
 
   const userHasPermission = useUserHasPermission();
 
-  const MemoizedAction = React.useCallback(
+  const MemoizedAction = useCallback(
     ({ row }: IFETableCell<IAccountProfile>) => {
       const { username } = row.original;
       return (

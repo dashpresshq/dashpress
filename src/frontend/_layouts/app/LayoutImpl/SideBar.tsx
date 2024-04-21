@@ -1,6 +1,6 @@
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import Link from "next/link";
-import React from "react";
+
 import { ChevronRight } from "react-feather";
 import styled from "styled-components";
 import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";

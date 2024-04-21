@@ -1,4 +1,3 @@
-import React from "react";
 import { Input } from "./Styles";
 import { ISharedFormInput } from "./_types";
 import { wrapLabelAndError, generateFormArias } from "./_wrapForm";
@@ -17,7 +16,7 @@ const getNumberValue = (value: string | number | null, required: boolean) => {
   return value;
 };
 
-export const FormNumberInput: React.FC<IFormNumberInput> = (formInput) => {
+export const FormNumberInput = (formInput: IFormNumberInput) => {
   const { input, placeholder, disabled, meta, allowNegative, required, sm } =
     formInput;
   if (typeof input.value === "string") {

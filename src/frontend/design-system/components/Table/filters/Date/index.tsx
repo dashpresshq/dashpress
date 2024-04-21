@@ -1,4 +1,3 @@
-import React from "react";
 import { Spacer } from "frontend/design-system/primitives/Spacer";
 import { DATE_FILTER_VALUE, IColumnFilterBag } from "shared/types/data";
 import { useToggle } from "frontend/hooks/state/useToggleState";

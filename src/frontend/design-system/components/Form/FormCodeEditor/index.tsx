@@ -1,4 +1,3 @@
-import React from "react";
 import styled from "styled-components";
 import Editor from "react-simple-code-editor";
 import { highlight, languages } from "prismjs/components/prism-core";
@@ -40,7 +39,7 @@ const Wrapper = styled.div`
   ${PrismTokenStyles}
 `;
 
-export const FormCodeEditor: React.FC<IFormCodeEditor> = (formInput) => {
+export const FormCodeEditor = (formInput: IFormCodeEditor) => {
   const {
     input: { onFocus, onBlur, ...inputProps },
     meta,

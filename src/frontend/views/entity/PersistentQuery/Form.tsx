@@ -2,7 +2,6 @@ import { QueryFilterSchema } from "shared/types/data";
 import { Form, Field, useField } from "react-final-form";
 import arrayMutators from "final-form-arrays";
 import { FieldArray } from "react-final-form-arrays";
-import React from "react";
 import { ACTIONS_ACCESSOR } from "frontend/views/data/Table/useTableColumns";
 import { MAKE_APP_CONFIGURATION_CRUD_CONFIG } from "frontend/hooks/configuration/configuration.constant";
 import { composeValidators, required } from "frontend/lib/validations";
@@ -18,6 +17,7 @@ import { FormSelect } from "frontend/design-system/components/Form/FormSelect";
 import { FormSelectButton } from "frontend/design-system/components/Form/FormSelectButton";
 import { FormGrid } from "frontend/components/SchemaForm/form-grid";
 import { Card, CardBody } from "frontend/design-system/components/Card";
+import { Fragment } from "react";
 import { FILTER_OPERATOR_CONFIG } from "./constants";
 
 const OPERATOR_SELECTORS = ["and", "or"].map((option) => ({
@@ -122,7 +122,7 @@ export function EntityPersistentQueryForm({
               {({ fields: queryFields }) => (
                 <div>
                   {queryFields.map((name, queryFieldIndex) => (
-                    <React.Fragment key={name}>
+                    <Fragment key={name}>
                       {queryFields.length > 1 && queryFieldIndex !== 0 && (
                         <Field name="operator" validateFields={[]}>
                           {({ input, meta }) => (
@@ -210,7 +210,7 @@ export function EntityPersistentQueryForm({
                         </CardBody>
                       </Card>
                       <Spacer />
-                    </React.Fragment>
+                    </Fragment>
                   ))}
                   <Spacer />
                   <Stack $justify="end">

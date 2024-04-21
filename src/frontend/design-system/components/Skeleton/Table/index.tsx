@@ -1,4 +1,3 @@
-import React from "react";
 import styled from "styled-components";
 import { Stack } from "frontend/design-system/primitives/Stack";
 import { BaseSkeleton } from "../Base";

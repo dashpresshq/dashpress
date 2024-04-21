@@ -1,5 +1,6 @@
 import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
-import React from "react";
+import { CSSProperties } from "react";
+
 import SkeletonLoader from "tiny-skeleton-loader-react";
 
 export interface IProps {
@@ -8,7 +9,7 @@ export interface IProps {
   bottom?: number;
   top?: number;
   circle?: true;
-  style?: React.CSSProperties;
+  style?: CSSProperties;
 }
 
 export function BaseSkeleton({

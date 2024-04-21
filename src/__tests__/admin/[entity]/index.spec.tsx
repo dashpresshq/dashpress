@@ -1,4 +1,3 @@
-import React from "react";
 import { render, screen } from "@testing-library/react";
 import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 import EntityTable from "pages/admin/[entity]/index";

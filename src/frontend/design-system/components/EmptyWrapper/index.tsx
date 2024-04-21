@@ -1,4 +1,3 @@
-import React from "react";
 import styled from "styled-components";
 import { Frown } from "react-feather";
 import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";

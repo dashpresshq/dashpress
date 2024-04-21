@@ -362,7 +362,7 @@ export class DataApiService implements IDataApiService {
     };
   }
 
-  private async getRelationshipSettings(entity: string): Promise<{
+  async getRelationshipSettings(entity: string): Promise<{
     format: string;
     fields: string[];
   }> {

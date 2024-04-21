@@ -1,6 +1,5 @@
 import { USER_PERMISSIONS } from "shared/constants/user";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
-import React from "react";
 import { useUserHasPermission } from "frontend/hooks/auth/user.store";
 import styled from "styled-components";
 import { useRouter } from "next/router";
@@ -9,6 +8,7 @@ import { useDashboardWidgets } from "../dashboard.store";
 import { dashboardGridRoot } from "../styles";
 import { DashboardSkeleton } from "../Skeleton";
 import { DashboardWidget } from "../Widget";
+import { DASHBOARD_CRUD_CONFIG } from "../constants";
 
 const Root = styled.div`
   ${dashboardGridRoot};
@@ -36,7 +36,7 @@ export function BaseDashboard({ dashboardId, manageLink }: IProps) {
           ? [
               {
                 id: "manage-dashboard",
-                label: "Edit Dashboard",
+                label: DASHBOARD_CRUD_CONFIG.TEXT_LANG.EDIT,
                 systemIcon: "Edit" as const,
                 action: () => router.replace(manageLink),
               },

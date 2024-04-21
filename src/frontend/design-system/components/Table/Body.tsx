@@ -1,4 +1,3 @@
-import React from "react";
 import { flexRender, Table } from "@tanstack/react-table";
 import styled from "styled-components";
 import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";

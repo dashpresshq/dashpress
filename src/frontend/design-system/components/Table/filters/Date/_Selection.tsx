@@ -1,4 +1,3 @@
-import React from "react";
 import { IColumnFilterBag, IDateFilterOption } from "shared/types/data";
 import { Stack } from "frontend/design-system/primitives/Stack";
 import { DATE_FILTER_OPTIONS } from "./constants";

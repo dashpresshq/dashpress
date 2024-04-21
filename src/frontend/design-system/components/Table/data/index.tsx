@@ -1,4 +1,3 @@
-import React from "react";
 import { ITableColumn } from "../types";
 
 export const TABLE_DATA = {

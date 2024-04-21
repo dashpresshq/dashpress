@@ -1,4 +1,3 @@
-import React from "react";
 import { fireEvent, render, screen } from "@testing-library/react";
 import { loadedDataState } from "frontend/lib/data/constants/loadedDataState";
 import { ListManager } from ".";

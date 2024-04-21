@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import React from "react";
+
 import {
   CheckSquare,
   Icon as IconType,
@@ -48,8 +48,7 @@ export function IntermediateCheckBox({
   disabled,
   label,
 }: IProps) {
-  const handleClick = (e: React.MouseEvent | React.KeyboardEvent) => {
-    e.stopPropagation();
+  const handleClick = () => {
     onClick(state);
   };
 
@@ -60,10 +59,16 @@ export function IntermediateCheckBox({
       aria-label={label}
       tabIndex={0}
       $disabled={disabled}
-      onMouseDown={handleClick}
+      onMouseDown={(e) => {
+        e.stopPropagation();
+
+        handleClick();
+      }}
       onKeyDown={(e) => {
+        e.stopPropagation();
+
         if (e.key === "Enter" || e.key === " ") {
-          handleClick(e);
+          handleClick();
         }
       }}
     >

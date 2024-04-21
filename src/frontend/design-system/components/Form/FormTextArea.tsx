@@ -1,4 +1,3 @@
-import React from "react";
 import styled from "styled-components";
 import { Input } from "./Styles";
 import { ISharedFormInput } from "./_types";
@@ -14,7 +13,7 @@ interface IFormTextArea extends ISharedFormInput {
   rows?: number;
 }
 
-export const FormTextArea: React.FC<IFormTextArea> = (formInput) => {
+export const FormTextArea = (formInput: IFormTextArea) => {
   const { input, rows = 3, placeholder, disabled, meta } = formInput;
   return wrapLabelAndError(
     <TextArea

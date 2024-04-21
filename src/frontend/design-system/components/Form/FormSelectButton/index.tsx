@@ -1,4 +1,3 @@
-import React from "react";
 import styled from "styled-components";
 import { sluggify } from "shared/lib/strings";
 import { ISelectData } from "shared/types/options";

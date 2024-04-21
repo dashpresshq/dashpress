@@ -1,5 +1,5 @@
-import React from "react";
 import { IColumnFilterBag } from "shared/types/data";
+import { BaseSyntheticEvent } from "react";
 import { Input } from "../../Form/Styles";
 import { IFilterProps } from "./types";
 
@@ -9,7 +9,7 @@ export function FilterTableByText({
   return (
     <Input
       value={filterValue?.value || ""}
-      onChange={(e: React.BaseSyntheticEvent) => {
+      onChange={(e: BaseSyntheticEvent) => {
         setFilter({
           ...filterValue,
           value: e.target.value,

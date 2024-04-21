@@ -1,4 +1,3 @@
-import React from "react";
 import { FilterOperators, IColumnFilterBag } from "shared/types/data";
 import { ISelectData } from "shared/types/options";
 import { SimpleSelect } from "../../Form/FormSelect/Simple";

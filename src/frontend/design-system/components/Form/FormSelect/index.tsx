@@ -1,4 +1,3 @@
-import React from "react";
 import Select from "react-select";
 import styled from "styled-components";
 import { ISelectData } from "shared/types/options";
@@ -49,7 +48,7 @@ export function FormMultiSelect({
   );
 }
 
-export const FormSelect: React.FC<IFormSelect> = (props) => {
+export const FormSelect = (props: IFormSelect) => {
   const {
     input,
     selectData,

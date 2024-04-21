@@ -1,4 +1,3 @@
-import React from "react";
 import Link from "next/link";
 import styled, { css } from "styled-components";
 import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";

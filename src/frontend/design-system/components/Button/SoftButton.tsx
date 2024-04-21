@@ -1,8 +1,8 @@
-import React from "react";
 import Link from "next/link";
 import { Loader } from "react-feather";
 import { Stack } from "frontend/design-system/primitives/Stack";
 import { SystemIcon } from "frontend/design-system/Icons/System";
+import { BaseSyntheticEvent } from "react";
 import { SoftButtonStyled } from "./Button";
 import { Spin } from "../_/Spin";
 import { Tooltip } from "../Tooltip";
@@ -86,7 +86,7 @@ export function SoftButton({
       <SoftButtonStyled
         {...buttonProps}
         type="button"
-        onClick={(e: React.BaseSyntheticEvent) => {
+        onClick={(e: BaseSyntheticEvent) => {
           e.stopPropagation();
 
           if (shouldConfirmAlert) {

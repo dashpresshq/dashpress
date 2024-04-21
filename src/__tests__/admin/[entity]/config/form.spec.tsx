@@ -1,5 +1,5 @@
 /* eslint-disable no-useless-escape */
-import React from "react";
+
 import { render, screen, within } from "@testing-library/react";
 import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 import userEvent from "@testing-library/user-event";

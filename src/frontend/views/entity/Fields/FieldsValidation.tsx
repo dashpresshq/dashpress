@@ -6,7 +6,6 @@ import { Form, Field } from "react-final-form";
 import arrayMutators from "final-form-arrays";
 import { FieldArray } from "react-final-form-arrays";
 import { userFriendlyCase } from "shared/lib/strings/friendly-case";
-import React from "react";
 import {
   IFieldValidationItem,
   ValidationTypes,
@@ -24,6 +23,7 @@ import { FormNumberInput } from "frontend/design-system/components/Form/FormNumb
 import { FormNoValueSelect } from "frontend/design-system/components/Form/FormSelect";
 import { FormButton } from "frontend/design-system/components/Button/FormButton";
 import { DELETE_BUTTON_PROPS } from "frontend/design-system/components/Button/constants";
+import { Fragment } from "react";
 
 interface IProps {
   field: string;
@@ -73,7 +73,7 @@ export function FieldValidationCanvas({
                     ENTITY_VALIDATION_CONFIG[validationType];
 
                   return (
-                    <React.Fragment key={name}>
+                    <Fragment key={name}>
                       <SectionBox
                         title={userFriendlyCase(validationType)}
                         actionButtons={
@@ -139,7 +139,7 @@ export function FieldValidationCanvas({
                         </Field>
                       </SectionBox>
                       <Spacer />
-                    </React.Fragment>
+                    </Fragment>
                   );
                 })}
                 <FormNoValueSelect

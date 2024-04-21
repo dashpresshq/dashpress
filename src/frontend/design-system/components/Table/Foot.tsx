@@ -1,5 +1,5 @@
 import { flexRender, Table } from "@tanstack/react-table";
-import React from "react";
+
 import styled from "styled-components";
 import { Stack } from "frontend/design-system/primitives/Stack";
 import { Typo } from "frontend/design-system/primitives/Typo";

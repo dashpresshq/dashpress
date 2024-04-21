@@ -1,4 +1,3 @@
-import React from "react";
 import "react-quill/dist/quill.snow.css";
 import styled from "styled-components";
 import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
@@ -101,7 +100,7 @@ const modules = {
   },
 };
 
-export const FormRichTextArea: React.FC<ISharedFormInput> = (formInput) => {
+export const FormRichTextArea = (formInput: ISharedFormInput) => {
   const {
     input: { onFocus, onBlur, ...inputProps },
     disabled,

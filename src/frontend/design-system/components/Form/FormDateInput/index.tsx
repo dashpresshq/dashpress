@@ -1,4 +1,3 @@
-import React from "react";
 import DatePicker from "react-datepicker";
 import { FieldMetaState } from "react-final-form";
 import styled from "styled-components";
@@ -82,7 +81,7 @@ export function ControlledFormDateInput({
   );
 }
 
-export const FormDateInput: React.FC<IFormDateInput> = (formInput) => {
+export const FormDateInput = (formInput: IFormDateInput) => {
   const { input, disabled, meta, required, minDate, maxDate } = formInput;
   let { value } = input;
   if (value && typeof value === "string") {

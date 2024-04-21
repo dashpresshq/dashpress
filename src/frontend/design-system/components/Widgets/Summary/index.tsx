@@ -1,4 +1,3 @@
-import React from "react";
 import styled from "styled-components";
 import { ChevronsDown, Icon, ChevronsUp } from "react-feather";
 import { SYSTEM_COLORS } from "frontend/design-system/theme/system";

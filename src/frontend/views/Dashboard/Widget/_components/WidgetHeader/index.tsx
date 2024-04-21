@@ -1,4 +1,3 @@
-import React from "react";
 import { SoftButton } from "frontend/design-system/components/Button/SoftButton";
 import { Stack } from "frontend/design-system/primitives/Stack";
 import { Typo } from "frontend/design-system/primitives/Typo";

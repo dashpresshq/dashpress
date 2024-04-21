@@ -1,4 +1,3 @@
-import React from "react";
 import { FilterOperators, IColumnFilterBag } from "shared/types/data";
 import { Spacer } from "frontend/design-system/primitives/Spacer";
 import { Input } from "../../Form/Styles";

@@ -1,4 +1,3 @@
-import React from "react";
 import { Loader } from "react-feather";
 import styled from "styled-components";
 import { Stack } from "frontend/design-system/primitives/Stack";
@@ -6,6 +5,7 @@ import { useThemeColorShade } from "frontend/design-system/theme/useTheme";
 import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
 import { SystemIconsKeys } from "shared/constants/Icons";
 import { SystemIcon } from "frontend/design-system/Icons/System";
+import React from "react";
 import { OutlineButton, IStyledBaseButton, StyledBaseButton } from "../Button";
 import { Spin } from "../../_/Spin";
 

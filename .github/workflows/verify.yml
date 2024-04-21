@@ -20,3 +20,7 @@ jobs:
         uses: supercharge/redis-github-action@1.4.0
       - name: Run Verification
         run: npm run verify
+      - name: Publish code coverage to CodeClimate
+        uses: paambaati/codeclimate-action@v3.0.0
+        env:
+          CC_TEST_REPORTER_ID: 85118bc6c82c6fd71e336c244a09aa065969958afa6d07ec3f22e0abec6e88ac

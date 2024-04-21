@@ -1,4 +1,3 @@
-import React from "react";
 import { LayoutImplementation } from "./LayoutImpl";
 import { IsSignedIn } from "./IsSignedIn";
 import { MainContent, IMainContentProps } from "./_MainContent";

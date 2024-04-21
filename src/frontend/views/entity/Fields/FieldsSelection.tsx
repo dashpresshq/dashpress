@@ -2,7 +2,7 @@ import { Form, Field } from "react-final-form";
 import arrayMutators from "final-form-arrays";
 import { FieldArray } from "react-final-form-arrays";
 import { composeValidators, required } from "frontend/lib/validations";
-import React, { Fragment, useState } from "react";
+import { Fragment, useState } from "react";
 import styled from "styled-components";
 import { isNotEmpty } from "class-validator";
 import { EntityTypesForSelection, IColorableSelection } from "shared/types/ui";

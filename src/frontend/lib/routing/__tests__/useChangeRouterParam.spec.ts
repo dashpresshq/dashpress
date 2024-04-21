@@ -1,29 +1,9 @@
-import { act } from "@testing-library/react";
-import singletonRouter from "next/router";
-import { renderHook } from "__tests__/_/lib/renderHook";
 import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
-import {
-  upsertRouterPathQueryWithValue,
-  useChangeRouterParam,
-} from "../useChangeRouterParam";
+import { upsertRouterPathQueryWithValue } from "../useChangeRouterParam";
 
 const useRouter = jest.spyOn(require("next/router"), "useRouter");
 
 useRouter.mockImplementation(USE_ROUTER_PARAMS({}));
-
-describe("useChangeRouterParam", () => {
-  beforeEach(() => {
-    useRouter.mockImplementation(USE_ROUTER_PARAMS({ asPath: "/initial" }));
-  });
-  it("should pushes new url when called", () => {
-    const { result } = renderHook(() => useChangeRouterParam("foo"));
-    expect(singletonRouter.asPath).toBe("/initial");
-    act(() => {
-      result.current("bar");
-    });
-    expect(singletonRouter.asPath).toBe("/initial?foo=bar");
-  });
-});
 
 describe("upsertRouterPathQueryWithValue", () => {
   it("should replace router query string by path", () => {

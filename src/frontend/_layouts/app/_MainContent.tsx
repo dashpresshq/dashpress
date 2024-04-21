@@ -1,4 +1,4 @@
-import React, { ReactNode, useEffect } from "react";
+import { ReactNode, useEffect } from "react";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useNavigationStack } from "frontend/lib/routing/useNavigationStack";

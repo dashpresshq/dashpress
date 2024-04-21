@@ -1,5 +1,5 @@
 /* eslint-disable testing-library/no-node-access */
-import React, { ReactNode } from "react";
+import { ReactNode } from "react";
 import { render, screen } from "@testing-library/react";
 import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 import userEvent from "@testing-library/user-event";

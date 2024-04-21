@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import debounce from "lodash/debounce";
 import AsyncSelect from "react-select/async";
 import styled from "styled-components";

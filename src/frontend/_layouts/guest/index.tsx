@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import { ReactNode } from "react";
 import Head from "next/head";
 import styled from "styled-components";
 import { SHADOW_CSS, CardBody } from "frontend/design-system/components/Card";

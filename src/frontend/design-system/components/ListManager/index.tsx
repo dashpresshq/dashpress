@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { DataStateKeys } from "frontend/lib/data/types";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";

@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import { useCallback, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import { makeFileRequest } from "frontend/lib/data/makeRequest";
 import { useToggle } from "frontend/hooks/state/useToggleState";
@@ -66,7 +66,7 @@ function FileInput({
   );
 }
 
-export const FormFileInput: React.FC<IFormFileInput> = (formInput) => {
+export const FormFileInput = (formInput: IFormFileInput) => {
   return wrapLabelAndError(<FileInput {...formInput} />, formInput);
 };
 

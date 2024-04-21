@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import { Fragment } from "react";
 import { Stack } from "frontend/design-system/primitives/Stack";
 import { BaseSkeleton } from "../Base";
 

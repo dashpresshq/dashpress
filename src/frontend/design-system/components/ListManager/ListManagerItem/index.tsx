@@ -1,4 +1,4 @@
-import React, { useId } from "react";
+import { useId } from "react";
 import { ChevronRight as ChevronRightIcon } from "react-feather";
 import Link from "next/link";
 import styled, { css } from "styled-components";

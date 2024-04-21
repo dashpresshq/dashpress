@@ -24,7 +24,11 @@ describe("pages/auth", () => {
 
   const useRouter = jest.spyOn(require("next/router"), "useRouter");
 
-  useRouter.mockImplementation(USE_ROUTER_PARAMS({}));
+  useRouter.mockImplementation(
+    USE_ROUTER_PARAMS({
+      replaceMock: jest.fn(),
+    })
+  );
 
   describe("Demo Credentials", () => {
     const OLD_ENV = process.env;

@@ -1,5 +1,5 @@
 import { Column } from "@tanstack/react-table";
-import React, { useEffect, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import { IColumnFilterBag, TableFilterType } from "shared/types/data";
 import { useDebounce } from "react-use";
 import { FilterWrapper } from "./_FilterWrapper";
@@ -14,7 +14,7 @@ interface IProps {
     Column<Record<string, unknown>, unknown>,
     "setFilterValue" | "getFilterValue"
   >;
-  view?: React.ReactNode | string;
+  view?: ReactNode | string;
   debounceWait?: number;
 }
 

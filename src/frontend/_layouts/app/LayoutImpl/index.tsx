@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import { ReactNode } from "react";
 import styled from "styled-components";
 import { useSessionStorage } from "react-use";
 import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";

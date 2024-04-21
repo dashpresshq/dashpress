@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { FilterOperators, IColumnFilterBag } from "shared/types/data";
 import { Spacer } from "frontend/design-system/primitives/Spacer";
 import { SimpleSelect } from "../../Form/FormSelect/Simple";

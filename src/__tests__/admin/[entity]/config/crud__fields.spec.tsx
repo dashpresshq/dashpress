@@ -53,6 +53,7 @@ describe("pages/admin/[entity]/config/crud", () => {
     beforeEach(() => {
       useRouter.mockImplementation(
         USE_ROUTER_PARAMS({
+          replaceMock: jest.fn(),
           query: {
             entity: "entity-1",
             tab,
@@ -150,6 +151,7 @@ describe("pages/admin/[entity]/config/crud", () => {
   it("should show hide id fields from selection", async () => {
     useRouter.mockImplementation(
       USE_ROUTER_PARAMS({
+        replaceMock: jest.fn(),
         query: {
           entity: "entity-1",
         },
@@ -196,6 +198,7 @@ describe("pages/admin/[entity]/config/crud", () => {
   it("should not have toggling functionality for delete", async () => {
     useRouter.mockImplementation(
       USE_ROUTER_PARAMS({
+        replaceMock: jest.fn(),
         query: {
           entity: "entity-1",
           tab: "Delete",

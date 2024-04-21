@@ -1,10 +1,10 @@
-import React, { ReactNode, useId } from "react";
+import { ComponentProps, ReactNode, useId } from "react";
 import { Tooltip as BaseTooltip } from "react-tooltip";
 
 export interface IProps {
   children: ReactNode;
   text: string;
-  place?: React.ComponentProps<typeof BaseTooltip>["place"];
+  place?: ComponentProps<typeof BaseTooltip>["place"];
   offset?: number;
 }
 

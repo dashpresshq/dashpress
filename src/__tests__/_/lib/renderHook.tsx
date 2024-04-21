@@ -1,15 +1,21 @@
 import { render } from "@testing-library/react";
-import React, { MutableRefObject } from "react";
+import {
+  JSXElementConstructor,
+  MutableRefObject,
+  ReactElement,
+  createRef,
+  useEffect,
+} from "react";
 
 export function renderHook(
   renderCallback: (input?: () => void) => void,
   options: {
     initialProps?: () => void;
-    wrapper?: React.JSXElementConstructor<{ children: React.ReactElement }>;
+    wrapper?: JSXElementConstructor<{ children: ReactElement }>;
   } = {}
 ) {
   const { initialProps, wrapper } = options;
-  const result = React.createRef<null>() as MutableRefObject<any>;
+  const result = createRef<null>() as MutableRefObject<any>;
 
   function TestComponent({
     renderCallbackProps,
@@ -19,7 +25,7 @@ export function renderHook(
     // eslint-disable-next-line testing-library/render-result-naming-convention
     const pendingResult = renderCallback(renderCallbackProps);
 
-    React.useEffect(() => {
+    useEffect(() => {
       result.current = pendingResult;
     });
 

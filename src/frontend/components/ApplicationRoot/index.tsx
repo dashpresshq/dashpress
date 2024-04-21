@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import { ReactNode } from "react";
 import { Toaster } from "react-hot-toast";
 import { QueryProvider } from "frontend/lib/data/QueryClient";
 import { ThemeContextProvider } from "frontend/design-system/theme/Context";

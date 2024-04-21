@@ -1,6 +1,6 @@
 import Dropdown from "react-bootstrap/Dropdown";
 import styled from "styled-components";
-import React, { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { Loader, MoreVertical } from "react-feather";
 import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
 import { Stack } from "frontend/design-system/primitives/Stack";

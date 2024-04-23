@@ -2,6 +2,7 @@
 import { ErrorAlert } from "frontend/design-system/components/Alert";
 import { useRouter } from "next/router";
 import { ReactNode } from "react";
+import { ErrorBoundary } from "../ErrorBoundary";
 
 type Props = {
   children: ReactNode;
@@ -20,5 +21,5 @@ export function ViewStateMachine({ loading, error, children, loader }: Props) {
     return <ErrorAlert message={error} />;
   }
 
-  return <>{children}</>;
+  return <ErrorBoundary>{children}</ErrorBoundary>;
 }

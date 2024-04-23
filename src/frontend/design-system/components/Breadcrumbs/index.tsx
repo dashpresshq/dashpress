@@ -1,4 +1,3 @@
-import Link from "next/link";
 import styled, { css } from "styled-components";
 import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
 import { ILabelValue } from "shared/types/options";
@@ -66,22 +65,15 @@ export function Breadcrumbs({ items, onCrumbClick }: IProps) {
         const isLastElement = index === itemsLength - 1;
         return (
           <BreadcrumbItem key={value}>
-            {/* eslint-disable-next-line no-nested-ternary */}
             {isLastElement ? (
               label
-            ) : onCrumbClick ? (
+            ) : (
               <BreadcrumbItemLink
                 $active={isLastElement}
                 onClick={() => onCrumbClick(index)}
               >
                 {label}
               </BreadcrumbItemLink>
-            ) : (
-              <Link href={value} passHref>
-                <BreadcrumbItemLink $active={isLastElement}>
-                  {label}
-                </BreadcrumbItemLink>
-              </Link>
             )}
           </BreadcrumbItem>
         );

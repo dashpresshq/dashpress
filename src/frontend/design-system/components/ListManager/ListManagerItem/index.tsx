@@ -108,6 +108,9 @@ const SubLabel = styled.p<{ $active?: boolean }>`
 
 const Label = styled.label<{ $active?: boolean; $subtle?: boolean }>`
   cursor: pointer;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  text-wrap: nowrap;
   color: ${(props) =>
     // eslint-disable-next-line no-nested-ternary
     props.$active
@@ -236,17 +239,16 @@ export function ListManagerItem({
 
   if (typeof action === "string") {
     return (
-      <Link href={action} passHref>
-        <ListItem
-          as="a"
-          {...buttonProps}
-          onClick={() => {
-            secondaryAction?.();
-          }}
-        >
-          {content}
-        </ListItem>
-      </Link>
+      <ListItem
+        as={Link}
+        href={action}
+        {...buttonProps}
+        onClick={() => {
+          secondaryAction?.();
+        }}
+      >
+        {content}
+      </ListItem>
     );
   }
 

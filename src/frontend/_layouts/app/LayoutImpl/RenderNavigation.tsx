@@ -46,7 +46,7 @@ const LeftSideNavMenuList = styled.li<{}>`
   transition: all 0.3s;
 `;
 
-const LeftSideNavMenuListAnchor = styled.a<{
+const LeftSideNavMenuListAnchor = styled(PlainButton)<{
   $hoverColor: string;
   $isActive: boolean;
   $depth: number;
@@ -212,25 +212,25 @@ export function RenderNavigation({
                 )}
               </>
             ) : (
-              <Link href={getNavigationTypeLink(type, link)} passHref>
-                <LeftSideNavMenuListAnchor
-                  $isActive={isActive}
-                  $depth={depth}
-                  onClick={() => {
-                    clearBreadCrumbStack();
-                    setActiveItem(depth, id);
-                  }}
-                  target={
-                    type === NavigationMenuItemType.ExternalLink
-                      ? "_blank"
-                      : undefined
-                  }
-                  $hoverColor={getBackgroundColor("primary-color", 45)}
-                >
-                  {icon && menuIcon}
-                  <NavLabel $isFullWidth={isFullWidth}>{title}</NavLabel>
-                </LeftSideNavMenuListAnchor>
-              </Link>
+              <LeftSideNavMenuListAnchor
+                as={Link}
+                href={getNavigationTypeLink(type, link)}
+                $isActive={isActive}
+                $depth={depth}
+                onClick={() => {
+                  clearBreadCrumbStack();
+                  setActiveItem(depth, id);
+                }}
+                target={
+                  type === NavigationMenuItemType.ExternalLink
+                    ? "_blank"
+                    : undefined
+                }
+                $hoverColor={getBackgroundColor("primary-color", 45)}
+              >
+                {icon && menuIcon}
+                <NavLabel $isFullWidth={isFullWidth}>{title}</NavLabel>
+              </LeftSideNavMenuListAnchor>
             )}
           </LeftSideNavMenuList>
         );

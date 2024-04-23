@@ -14,13 +14,13 @@ msgstr ""
 "Plural-Forms: \n"
 
 msgid "Change Language"
-msgstr ""
+msgstr "Changer la langue"
 
 msgid "Dashboard"
-msgstr ""
+msgstr "Tableau de bord"
 
 msgid "Hi, {0}"
-msgstr ""
+msgstr "Bonjour, {0}"
 
 msgid "Showing <0/> entries of <1>{0}</1> results"
 msgstr ""

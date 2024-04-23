@@ -14,13 +14,13 @@ msgstr ""
 "Plural-Forms: \n"
 
 msgid "Change Language"
-msgstr ""
+msgstr "更改语言"
 
 msgid "Dashboard"
-msgstr ""
+msgstr "仪表盘"
 
 msgid "Hi, {0}"
-msgstr ""
+msgstr "你好，{0}"
 
 msgid "Showing <0/> entries of <1>{0}</1> results"
-msgstr ""
+msgstr "显示 <0/> 条目的 <1>{0}</1> 结果"

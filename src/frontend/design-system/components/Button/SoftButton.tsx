@@ -62,21 +62,20 @@ export function SoftButton({
   if (typeof action === "string") {
     return (
       <Tooltip {...toolTipProps}>
-        <Link href={action} passHref>
-          <SoftButtonStyled
-            {...buttonProps}
-            as="a"
-            target={action.startsWith("http") ? "_blank" : undefined}
-          >
-            {secondaryAction ? (
-              <span onClick={secondaryAction} aria-hidden="true">
-                {content}
-              </span>
-            ) : (
-              content
-            )}
-          </SoftButtonStyled>
-        </Link>
+        <SoftButtonStyled
+          as={Link}
+          href={action}
+          target={action.startsWith("http") ? "_blank" : undefined}
+          {...buttonProps}
+        >
+          {secondaryAction ? (
+            <span onClick={secondaryAction} aria-hidden="true">
+              {content}
+            </span>
+          ) : (
+            content
+          )}
+        </SoftButtonStyled>
       </Tooltip>
     );
   }

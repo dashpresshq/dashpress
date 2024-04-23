@@ -130,14 +130,16 @@ export function Alert({ type, message, renderJsx, action }: IProps) {
           </>
         )}
       </Content>
-      <AlertButton
-        type="button"
-        onClick={renderMode.off}
-        $color={hexColor}
-        aria-label="Close"
-      >
-        <X size={16} />
-      </AlertButton>
+      {type !== AlertType.Error && (
+        <AlertButton
+          type="button"
+          onClick={renderMode.off}
+          $color={hexColor}
+          aria-label="Close"
+        >
+          <X size={16} />
+        </AlertButton>
+      )}
     </Root>
   );
 }

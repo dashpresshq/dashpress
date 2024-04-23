@@ -50,7 +50,7 @@ export function ProfileOnNavigation({ isFullWidth }: IProps) {
   return (
     <ProfileRoot $justify="space-between" $align="center">
       <Name $weight="bold">
-        Hi,
+        Hi,{" "}
         {currentUser.isLoading ? `There` : ellipsis(currentUser.data?.name, 14)}
       </Name>
 

@@ -45,6 +45,7 @@ export const SelectStyles = css`
 
   .react-select__menu {
     background: ${USE_ROOT_COLOR("base-color")};
+    z-index: 100;
   }
 
   .react-select__multi-value__label {

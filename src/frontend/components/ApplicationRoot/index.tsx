@@ -3,24 +3,26 @@ import { Toaster } from "react-hot-toast";
 import { QueryProvider } from "frontend/lib/data/QueryClient";
 import { ThemeContextProvider } from "frontend/design-system/theme/Context";
 import { GlobalStyles } from "frontend/design-system/globals";
-import { useRouter } from "next/router";
-import { AbstractIntlMessages, NextIntlClientProvider } from "next-intl";
+import { useLinguiInit } from "translations/utils";
+import { I18nProvider } from "@lingui/react";
+import { Messages } from "@lingui/core";
 
 export function ApplicationRoot({
   children,
-  messages,
+  translation,
 }: {
   children: ReactNode;
-  messages?: AbstractIntlMessages;
+  translation?: Messages;
 }) {
-  const router = useRouter();
+  const initializedI18n = useLinguiInit(translation);
+
   return (
-    <NextIntlClientProvider locale={router.locale} messages={messages}>
+    <I18nProvider i18n={initializedI18n}>
       <QueryProvider>
         <Toaster />
         <GlobalStyles />
         <ThemeContextProvider>{children}</ThemeContextProvider>
       </QueryProvider>
-    </NextIntlClientProvider>
+    </I18nProvider>
   );
 }

@@ -15,8 +15,13 @@ import { usePortalThemes } from "frontend/_layouts/portal";
 import { userFriendlyCase } from "shared/lib/strings/friendly-case";
 import { uniqBy } from "shared/lib/array/uniq-by";
 import { useEffect } from "react";
+import { IAppliedSchemaFormConfig } from "shared/form-schemas/types";
+import languages from "translations/languages";
+import { i18n } from "@lingui/core";
+import { t } from "@lingui/macro";
+import { useRouter } from "next/router";
+import { Spacer } from "frontend/design-system/primitives/Spacer";
 import { ACCOUNT_VIEW_KEY } from "../constants";
-
 import { BaseAccountLayout } from "../_Base";
 import {
   ACCOUNT_PREFERENCES_CRUD_CONFIG,
@@ -25,9 +30,27 @@ import {
 import { IUserPreferences } from "./types";
 import { PortalUserPreferences } from "./portal";
 
+export const LANGUAGE_PREFERENCES_FORM_SCHEMA: IAppliedSchemaFormConfig<{
+  locale: string;
+}> = {
+  locale: {
+    type: "selection",
+    validations: [
+      {
+        validationType: "required",
+      },
+    ],
+    selections: languages.map((language) => ({
+      label: i18n._(language.msg),
+      value: language.locale,
+    })),
+  },
+};
+
 export function UserPreferences() {
   const userPreferences = useUserPreference("theme");
   const upsertUserPreferenceMutation = useUpsertUserPreferenceMutation("theme");
+  const router = useRouter();
 
   useSetPageDetails({
     pageTitle: ACCOUNT_PREFERENCES_CRUD_CONFIG.TEXT_LANG.EDIT,
@@ -69,6 +92,25 @@ export function UserPreferences() {
           />
         </ViewStateMachine>
       </SectionBox>
+
+      <Spacer />
+
+      <SectionBox title="Language">
+        <SchemaForm<{ locale: string }>
+          onSubmit={async (data) => {
+            const { pathname, asPath, query } = router;
+
+            router.push({ pathname, query }, asPath, { locale: data.locale });
+
+            // TODO set cookie to NEXT_LOCALE=the-locale
+          }}
+          initialValues={{ locale: router.locale || router.defaultLocale }}
+          buttonText={() => t`Change Language`}
+          fields={LANGUAGE_PREFERENCES_FORM_SCHEMA}
+          systemIcon="Save"
+        />
+      </SectionBox>
+
       <PortalUserPreferences />
     </BaseAccountLayout>
   );

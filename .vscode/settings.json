@@ -15,6 +15,6 @@
   },
   "eslint.validate": ["typescript", "typescriptreact"],
   "prettier.eslintIntegration": true,
-  "i18n-ally.localesPaths": ["./locales"],
+  "i18n-ally.localesPaths": ["src/translations/locales"],
   "i18n-ally.keystyle": "nested"
 }

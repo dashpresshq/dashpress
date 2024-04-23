@@ -11,7 +11,6 @@ export const SHADOW_CSS = css`
 
 export const Card = styled.div`
   background-color: ${USE_ROOT_COLOR("base-color")};
-  position: relative;
   word-wrap: break-word;
   border-radius: 4px;
   ${SHADOW_CSS}

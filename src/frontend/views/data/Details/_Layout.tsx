@@ -16,10 +16,7 @@ import { DataStates } from "frontend/lib/data/types";
 import { IListMangerItemProps } from "frontend/design-system/components/ListManager/ListManagerItem";
 import { useEntityViewStateMachine } from "../hooks/useEntityViewStateMachine";
 import { getEntitiesRelationsCount } from "./utils";
-import {
-  EntityActionTypes,
-  useEntityActionMenuItems,
-} from "../../entity/constants";
+import { useEntityActionMenuItems } from "../../entity/constants";
 
 export const DETAILS_LAYOUT_KEY = "___DETAILS_KEY__";
 
@@ -36,14 +33,7 @@ export function DetailsLayout({
   menuKey,
   menuItems = [],
 }: IProps) {
-  const actionItems = useEntityActionMenuItems(
-    [
-      EntityActionTypes.Details,
-      EntityActionTypes.Form,
-      EntityActionTypes.Labels,
-    ],
-    entity
-  );
+  const actionItems = useEntityActionMenuItems(entity);
   const entityId = useEntityId();
 
   const dataDetails = useEntityDataDetails({ entity, entityId });

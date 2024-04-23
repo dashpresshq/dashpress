@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
 import { Stack } from "frontend/design-system/primitives/Stack";
 import { Typo } from "frontend/design-system/primitives/Typo";
+import { Trans } from "@lingui/macro";
 import { SimpleSelect } from "../Form/FormSelect/Simple";
 import { TABLE_PAGE_SIZES } from "./constants";
 
@@ -72,18 +73,20 @@ export function TablePagination({
     <Root>
       <Stack $justify="space-between" $align="center">
         <Typo.MD>
-          Showing{" "}
-          <SimpleSelect
-            width={55}
-            options={TABLE_PAGE_SIZES.map((option) => ({
-              value: `${option}`,
-              label: `${option}`,
-            }))}
-            onChange={(value) => setPageSize(Number(value))}
-            value={pageSize}
-          />{" "}
-          entries of <b>{Intl.NumberFormat("en-US").format(totalRecords)}</b>{" "}
-          results
+          <Trans>
+            Showing{" "}
+            <SimpleSelect
+              width={55}
+              options={TABLE_PAGE_SIZES.map((option) => ({
+                value: `${option}`,
+                label: `${option}`,
+              }))}
+              onChange={(value) => setPageSize(Number(value))}
+              value={pageSize}
+            />{" "}
+            entries of <b>{Intl.NumberFormat("en-US").format(totalRecords)}</b>{" "}
+            results
+          </Trans>
         </Typo.MD>
         <Pagination>
           <ReactPaginate

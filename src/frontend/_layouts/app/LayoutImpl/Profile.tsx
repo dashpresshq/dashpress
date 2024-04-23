@@ -9,6 +9,7 @@ import { ILabelValue } from "shared/types/options";
 import { DropDownMenu } from "frontend/design-system/components/DropdownMenu";
 import { SystemIconsKeys } from "shared/constants/Icons";
 import { ellipsis } from "shared/lib/strings";
+import { Trans } from "@lingui/macro";
 import { useConstantNavigationMenuItems } from "./portal";
 
 const ProfileRoot = styled(Stack)`
@@ -50,8 +51,12 @@ export function ProfileOnNavigation({ isFullWidth }: IProps) {
   return (
     <ProfileRoot $justify="space-between" $align="center">
       <Name $weight="bold">
-        Hi,{" "}
-        {currentUser.isLoading ? `There` : ellipsis(currentUser.data?.name, 14)}
+        <Trans>
+          Hi,{" "}
+          {currentUser.isLoading
+            ? `There`
+            : ellipsis(currentUser.data?.name, 14)}
+        </Trans>
       </Name>
 
       <DropDownMenu

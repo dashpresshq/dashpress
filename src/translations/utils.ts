@@ -1,22 +1,23 @@
 import { i18n, Messages } from "@lingui/core";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
+import { GetStaticPropsContext, GetStaticPropsResult } from "next";
 import languages from "./languages";
 
-export async function loadCatalog(locale: string) {
+async function loadCatalog(locale: string) {
   const { messages } = await import(`./locales/${locale}.po`);
 
-  //   let data
-  //   if (isProduction) {
-  //     data = await import(`./translations/locales/${locale}/messages`)
-  //   } else {
-  //     data = await import(
-  //       `@lingui/loader!./translations/locales/${locale}/messages.po`
-  //     )
-  //   }
-  //   return data.messages;
-
   return messages;
+}
+
+export async function getStaticProps(
+  ctx: GetStaticPropsContext
+): Promise<GetStaticPropsResult<any>> {
+  return {
+    props: {
+      translation: await loadCatalog(ctx.locale as string),
+    },
+  };
 }
 
 export function useLinguiInit(messages: Messages) {

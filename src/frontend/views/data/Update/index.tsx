@@ -14,10 +14,7 @@ import {
   useEntityDataDetails,
   useEntityDataUpdationMutation,
 } from "frontend/hooks/data/data.store";
-import {
-  EntityActionTypes,
-  useEntityActionMenuItems,
-} from "../../entity/constants";
+import { useEntityActionMenuItems } from "../../entity/constants";
 import { BaseEntityForm } from "../_BaseEntityForm";
 import { useDataUpdateActions } from "./portal";
 import { PortalEntityFormComponent } from "../portal";
@@ -35,10 +32,7 @@ export function EntityUpdate() {
     entityId
   );
 
-  const actionItems = useEntityActionMenuItems(
-    [EntityActionTypes.Update, EntityActionTypes.Form],
-    entity
-  );
+  const actionItems = useEntityActionMenuItems(entity);
 
   useSetPageDetails({
     pageTitle: entityCrudConfig.TEXT_LANG.EDIT,

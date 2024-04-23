@@ -18,3 +18,9 @@ msgstr "Change Language"
 
 msgid "Dashboard"
 msgstr "Dashboard"
+
+msgid "Hi, {0}"
+msgstr "Hi, {0}"
+
+msgid "Showing <0/> entries of <1>{0}</1> results"
+msgstr "Showing <0/> entries of <1>{0}</1> results"

@@ -79,7 +79,7 @@ export const FormSelect = (props: IFormSelect) => {
             label: "",
           }
         }
-        menuIsOpen
+        // menuIsOpen
         placeholder={placeholder}
         inputId={input.name}
         onChange={({ value }: any) => {

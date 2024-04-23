@@ -6,10 +6,7 @@ import {
   useEntitySlug,
 } from "frontend/hooks/entity/entity.config";
 import { AppLayout } from "frontend/_layouts/app";
-import {
-  EntityActionTypes,
-  useEntityActionMenuItems,
-} from "../../entity/constants";
+import { useEntityActionMenuItems } from "../../entity/constants";
 import { getEntityCreateLink, useTableMenuItems } from "./useTableMenuItems";
 import { WholeEntityTable } from "./_WholeEntityTable";
 
@@ -17,15 +14,7 @@ export function EntityTable() {
   const entity = useEntitySlug();
   const entityCrudConfig = useEntityCrudConfig(entity);
 
-  const actionItems = useEntityActionMenuItems(
-    [
-      EntityActionTypes.Table,
-      EntityActionTypes.Diction,
-      EntityActionTypes.Labels,
-      EntityActionTypes.Form,
-    ],
-    entity
-  );
+  const actionItems = useEntityActionMenuItems(entity);
 
   useSetPageDetails({
     pageTitle: entityCrudConfig.TEXT_LANG.TITLE,

@@ -8,6 +8,7 @@ import {
 import { AppLayout } from "frontend/_layouts/app";
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
 import { AuthActions } from "frontend/hooks/auth/auth.actions";
+import { t } from "@lingui/macro";
 import { usePortalAccountMenu } from "./portal";
 
 interface IProps {
@@ -21,19 +22,19 @@ export function BaseAccountLayout({ children }: IProps) {
   const baseMenuItems: IMenuSectionItem[] = [
     {
       action: NAVIGATION_LINKS.ACCOUNT.PROFILE,
-      name: "Profile",
+      name: t`Profile`,
       systemIcon: "User",
       order: 10,
     },
     {
       action: NAVIGATION_LINKS.ACCOUNT.PREFERENCES,
-      name: "Preferences",
+      name: t`Preferences`,
       systemIcon: "Settings" as const,
       order: 20,
     },
     {
       action: NAVIGATION_LINKS.ACCOUNT.PASSWORD,
-      name: "Password",
+      name: t`Password`,
       systemIcon: "Lock",
       order: 30,
     },
@@ -41,7 +42,7 @@ export function BaseAccountLayout({ children }: IProps) {
       action: () => {
         AuthActions.signOut("logout");
       },
-      name: "Log Out",
+      name: t`Log Out`,
       systemIcon: "LogOut",
       order: 40,
     },

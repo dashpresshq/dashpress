@@ -1,3 +1,4 @@
+import { t } from "@lingui/macro";
 import { IAppliedSchemaFormConfig } from "../types";
 
 export type ISignInForm = {
@@ -25,7 +26,7 @@ export const AUTH_SIGNIN_FORM_SCHEMA: IAppliedSchemaFormConfig<ISignInForm> = {
   },
   rememberMe: {
     type: "boolean",
-    label: "Remember Me",
+    label: t`Remember Me`,
     validations: [],
   },
 };

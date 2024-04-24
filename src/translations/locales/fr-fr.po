@@ -13,14 +13,131 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
+msgid "{singular} {action} Successfully"
+msgstr ""
+
+msgid "{singular} could not be retrieved"
+msgstr ""
+
+msgid "{singular} Created Successfully"
+msgstr ""
+
+msgid "{singular} Deleted Successfully"
+msgstr ""
+
+msgid "{singular} Details"
+msgstr ""
+
+msgid "{singular} Saved Successfully"
+msgstr ""
+
+msgid "{singular} Updated Successfully"
+msgstr ""
+
+msgid "Account Preferences"
+msgstr ""
+
+msgid "Action"
+msgstr ""
+
+msgid "Add New {singular}"
+msgstr ""
+
 msgid "Change Language"
 msgstr "Changer la langue"
+
+msgid "Click here to view {0}"
+msgstr ""
+
+msgid "Create"
+msgstr ""
+
+msgid "Creating"
+msgstr ""
+
+msgid "Dark"
+msgstr ""
 
 msgid "Dashboard"
 msgstr "Tableau de bord"
 
+msgid "Dashboard Widget"
+msgstr ""
+
+msgid "Delete {singular}"
+msgstr ""
+
+msgid "Edit {singular}"
+msgstr ""
+
+msgid "Enter your credentials to continue"
+msgstr ""
+
+msgid "File Storage"
+msgstr ""
+
+msgid "Form Action"
+msgstr ""
+
 msgid "Hi, {0}"
 msgstr "Bonjour, {0}"
 
+msgid "Integration"
+msgstr ""
+
+msgid "Language"
+msgstr ""
+
+msgid "Light"
+msgstr ""
+
+msgid "Log Out"
+msgstr ""
+
+msgid "Manage {plural}"
+msgstr ""
+
+msgid "No {singular} Has Been Added Yet"
+msgstr ""
+
+msgid "On Create"
+msgstr ""
+
+msgid "On Delete"
+msgstr ""
+
+msgid "On Update"
+msgstr ""
+
+msgid "Password"
+msgstr ""
+
+msgid "Preferences"
+msgstr ""
+
+msgid "Profile"
+msgstr ""
+
+msgid "Save"
+msgstr ""
+
+msgid "Saving"
+msgstr ""
+
 msgid "Showing <0/> entries of <1>{0}</1> results"
+msgstr ""
+
+msgid "Sign In"
+msgstr ""
+
+msgid "Signing In"
+msgstr ""
+
+msgid "Update"
+msgstr ""
+
+msgid "Updating"
+msgstr ""
+
+msgid "User"
 msgstr ""

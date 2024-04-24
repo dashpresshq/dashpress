@@ -95,7 +95,7 @@ export function UserPreferences() {
 
       <Spacer />
 
-      <SectionBox title="Language">
+      <SectionBox title={t`Language`}>
         <SchemaForm<{ locale: string }>
           onSubmit={async (data) => {
             const { pathname, asPath, query } = router;

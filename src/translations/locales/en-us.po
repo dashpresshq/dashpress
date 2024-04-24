@@ -13,14 +13,131 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
+msgid "{singular} {action} Successfully"
+msgstr "{singular} {action} Successfully"
+
+msgid "{singular} could not be retrieved"
+msgstr "{singular} could not be retrieved"
+
+msgid "{singular} Created Successfully"
+msgstr "{singular} Created Successfully"
+
+msgid "{singular} Deleted Successfully"
+msgstr "{singular} Deleted Successfully"
+
+msgid "{singular} Details"
+msgstr "{singular} Details"
+
+msgid "{singular} Saved Successfully"
+msgstr "{singular} Saved Successfully"
+
+msgid "{singular} Updated Successfully"
+msgstr "{singular} Updated Successfully"
+
+msgid "Account Preferences"
+msgstr "Account Preferences"
+
+msgid "Action"
+msgstr "Action"
+
+msgid "Add New {singular}"
+msgstr "Add New {singular}"
+
 msgid "Change Language"
 msgstr "Change Language"
+
+msgid "Click here to view {0}"
+msgstr "Click here to view {0}"
+
+msgid "Create"
+msgstr "Create"
+
+msgid "Creating"
+msgstr "Creating"
+
+msgid "Dark"
+msgstr "Dark"
 
 msgid "Dashboard"
 msgstr "Dashboard"
 
+msgid "Dashboard Widget"
+msgstr "Dashboard Widget"
+
+msgid "Delete {singular}"
+msgstr "Delete {singular}"
+
+msgid "Edit {singular}"
+msgstr "Edit {singular}"
+
+msgid "Enter your credentials to continue"
+msgstr "Enter your credentials to continue"
+
+msgid "File Storage"
+msgstr "File Storage"
+
+msgid "Form Action"
+msgstr "Form Action"
+
 msgid "Hi, {0}"
 msgstr "Hi, {0}"
 
+msgid "Integration"
+msgstr "Integration"
+
+msgid "Language"
+msgstr "Language"
+
+msgid "Light"
+msgstr "Light"
+
+msgid "Log Out"
+msgstr "Log Out"
+
+msgid "Manage {plural}"
+msgstr "Manage {plural}"
+
+msgid "No {singular} Has Been Added Yet"
+msgstr "No {singular} Has Been Added Yet"
+
+msgid "On Create"
+msgstr "On Create"
+
+msgid "On Delete"
+msgstr "On Delete"
+
+msgid "On Update"
+msgstr "On Update"
+
+msgid "Password"
+msgstr "Password"
+
+msgid "Preferences"
+msgstr "Preferences"
+
+msgid "Profile"
+msgstr "Profile"
+
+msgid "Save"
+msgstr "Save"
+
+msgid "Saving"
+msgstr "Saving"
+
 msgid "Showing <0/> entries of <1>{0}</1> results"
 msgstr "Showing <0/> entries of <1>{0}</1> results"
+
+msgid "Sign In"
+msgstr "Sign In"
+
+msgid "Signing In"
+msgstr "Signing In"
+
+msgid "Update"
+msgstr "Update"
+
+msgid "Updating"
+msgstr "Updating"
+
+msgid "User"
+msgstr "User"

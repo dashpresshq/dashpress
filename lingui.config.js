@@ -4,7 +4,8 @@ const { formatter } = require("@lingui/format-po");
 
 const locales = [
   "en-us", // english
-  "zh-cn", // chinese
+  "zh-cn", // chinese (simplified)
+  "zh-tw", // chinese (traditional)
   "fr-fr", // french
   "es-es", // spanish
   "de-de", // german

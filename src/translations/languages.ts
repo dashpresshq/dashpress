@@ -28,8 +28,13 @@ const languages: Languages[] = [
   },
   {
     locale: "zh-cn",
-    msg: msg`Chinese`,
+    msg: msg`简体中文`,
     territory: "CN",
+  },
+  {
+    locale: "zh-tw",
+    msg: msg`繁體中文`,
+    territory: "TW",
   },
   {
     locale: "de-de",

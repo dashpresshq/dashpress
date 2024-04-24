@@ -9,6 +9,7 @@ import {
 } from "shared/types/actions";
 import { userFriendlyCase } from "shared/lib/strings/friendly-case";
 import { DataEventActions } from "shared/types/data";
+import { t } from "@lingui/macro";
 import { useIntegrationImplementationsList } from "./form-actions.store";
 import { FORM_ACTION_CRUD_CONFIG } from "./constants";
 
@@ -70,15 +71,15 @@ export function ActionForm({
       type: "selection",
       selections: [
         {
-          label: "On Create",
+          label: t`On Create`,
           value: DataEventActions.Create,
         },
         {
-          label: "On Update",
+          label: t`On Update`,
           value: DataEventActions.Update,
         },
         {
-          label: "On Delete",
+          label: t`On Delete`,
           value: DataEventActions.Delete,
         },
       ],
@@ -89,7 +90,7 @@ export function ActionForm({
       ],
     },
     integration: {
-      label: "Integration",
+      label: t`Integration`,
       selections: activatedOptions,
       type: "selection",
       validations: [{ validationType: "required" }],

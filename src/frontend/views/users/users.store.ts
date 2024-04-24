@@ -9,12 +9,13 @@ import { useApiMutateOptimisticOptions } from "frontend/lib/data/useMutate/useAp
 import { makeActionRequest } from "frontend/lib/data/makeRequest";
 import { MutationHelpers } from "frontend/lib/data/useMutate/mutation-helpers";
 import { useWaitForResponseMutationOptions } from "frontend/lib/data/useMutate/useWaitForResponseMutationOptions";
+import { t } from "@lingui/macro";
 import { useUsernameFromRouteParam } from "./hooks";
 
 export const ADMIN_USERS_CRUD_CONFIG = MAKE_CRUD_CONFIG({
   path: "/api/account",
   plural: "Users",
-  singular: "User",
+  singular: t`User`,
 });
 
 export function useAllUsers() {

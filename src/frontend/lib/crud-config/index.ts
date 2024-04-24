@@ -1,5 +1,7 @@
+import { t } from "@lingui/macro";
+
 export const CRUD_CONFIG_NOT_FOUND = (singular: string) =>
-  `${singular} could not be retrieved`;
+  t`${singular} could not be retrieved`;
 
 export const MAKE_CRUD_CONFIG = ({
   path,
@@ -20,31 +22,31 @@ export const MAKE_CRUD_CONFIG = ({
       CUSTOM: (id: string, customPath: string) => `${path}/${id}/${customPath}`,
     },
     MUTATION_LANG: {
-      CREATE: `${singular} Created Successfully`,
-      EDIT: `${singular} Updated Successfully`,
-      DELETE: `${singular} Deleted Successfully`,
-      SAVED: `${singular} Saved Successfully`,
-      CUSTOM: (action: string) => `${singular} ${action} Successfully`,
-      VIEW_DETAILS: `Click here to view ${singular.toLowerCase()}`,
+      CREATE: t`${singular} Created Successfully`,
+      EDIT: t`${singular} Updated Successfully`,
+      DELETE: t`${singular} Deleted Successfully`,
+      SAVED: t`${singular} Saved Successfully`,
+      CUSTOM: (action: string) => t`${singular} ${action} Successfully`,
+      VIEW_DETAILS: t`Click here to view ${singular.toLowerCase()}`,
     },
     FORM_LANG: {
       UPSERT: (submitting: boolean) =>
-        `${submitting ? "Saving" : "Save"} ${singular}`,
+        `${submitting ? t`Saving` : t`Save`} ${singular}`,
       CREATE: (submitting: boolean) =>
-        `${submitting ? "Creating" : "Create"} ${singular}`,
+        `${submitting ? t`Creating` : t`Create`} ${singular}`,
       UPDATE: (submitting: boolean) =>
-        `${submitting ? "Updating" : "Update"} ${singular}`,
+        `${submitting ? t`Updating` : t`Update`} ${singular}`,
     },
     TEXT_LANG: {
-      CREATE: `Add New ${singular}`,
-      MANAGE: `Manage ${plural}`,
-      DELETE: `Delete ${singular}`,
-      EDIT: `Edit ${singular}`,
-      DETAILS: `${singular} Details`,
+      CREATE: t`Add New ${singular}`,
+      MANAGE: t`Manage ${plural}`,
+      DELETE: t`Delete ${singular}`,
+      EDIT: t`Edit ${singular}`,
+      DETAILS: t`${singular} Details`,
       NOT_FOUND: CRUD_CONFIG_NOT_FOUND(singular),
       TITLE: `${plural}`,
-      EMPTY_LIST: `No ${singular} Has Been Added Yet`,
-      SINGULAR: singular,
+      EMPTY_LIST: t`No ${singular} Has Been Added Yet`,
+      SINGULAR: `${singular}`,
     },
   };
 };

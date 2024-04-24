@@ -30,6 +30,8 @@ import {
 import { IUserPreferences } from "./types";
 import { PortalUserPreferences } from "./portal";
 
+// TODO: split the forms
+
 export const LANGUAGE_PREFERENCES_FORM_SCHEMA: IAppliedSchemaFormConfig<{
   locale: string;
 }> = {

@@ -1,7 +1,5 @@
 const { formatter } = require("@lingui/format-po");
 
-// urdu
-
 const locales = [
   "en-us", // english
   "zh-cn", // chinese (simplified)
@@ -14,6 +12,7 @@ const locales = [
   "ja-jp", // japanese
   "pt-br", // portuguese
   "ko-kr", // korean
+
   "bn-in", // bengali
   "hi-in", // hindi
   "ar-sa", // arabic

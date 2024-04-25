@@ -1,18 +1,17 @@
 import { render, fireEvent, screen } from "@testing-library/react";
-import { msg } from "@lingui/macro";
 import { Tabs } from ".";
 
 const TAB_CONTENT = [
   {
-    label: msg`Foo Label`,
+    label: { message: `Foo Label`, id: "foo-label" },
     content: <>Foo Content</>,
   },
   {
-    label: msg`Bar Label`,
+    label: { message: `Bar Label`, id: "bar-label" },
     content: <>Bar Content</>,
   },
   {
-    label: msg`Baz Label`,
+    label: { message: `Baz Label`, id: "baz-label" },
     content: <>Baz Content</>,
   },
 ];

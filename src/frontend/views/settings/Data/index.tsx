@@ -68,6 +68,8 @@ function MetaDataSettings() {
   );
 }
 
+const DATE_FORMAT_LIB_LINK = "https://date-fns.org/docs/format";
+
 function DateSettings() {
   const DATE_FORMAT_CRUD_CONFIG = MAKE_APP_CONFIGURATION_CRUD_CONFIG(
     "default_date_format"
@@ -84,9 +86,9 @@ function DateSettings() {
       actionButtons={[
         {
           id: "help",
-          action: "https://date-fns.org/docs/format",
+          action: DATE_FORMAT_LIB_LINK,
           systemIcon: "Help",
-          label: msg`${"https://date-fns.org/docs/format"}`,
+          label: msg`${DATE_FORMAT_LIB_LINK}`,
         },
       ]}
     >

@@ -34,10 +34,10 @@ msgstr ""
 msgid "{buttonLabel}"
 msgstr ""
 
-msgid "{errorMessage}"
+msgid "{DATE_FORMAT_LIB_LINK}"
 msgstr ""
 
-msgid "{https://date-fns.org/docs/format}"
+msgid "{errorMessage}"
 msgstr ""
 
 msgid "{key}"
@@ -115,10 +115,7 @@ msgstr ""
 msgid "App"
 msgstr ""
 
-msgid "Bar Label"
-msgstr ""
-
-msgid "Baz Label"
+msgid "Are you sure you want to do this?"
 msgstr ""
 
 msgid "Cancel"
@@ -263,9 +260,6 @@ msgid "File Storage"
 msgstr ""
 
 msgid "Follow us on Twitter"
-msgstr ""
-
-msgid "Foo Label"
 msgstr ""
 
 msgid "Form"

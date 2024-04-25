@@ -1,4 +1,4 @@
-import { MessageDescriptor } from "@lingui/core";
+import { MessageDescriptor, i18n } from "@lingui/core";
 import { msg } from "@lingui/macro";
 
 export const CRUD_CONFIG_NOT_FOUND = (singular: string) =>
@@ -14,12 +14,14 @@ export const MAKE_ENDPOINTS_CONFIG = (path: string) => ({
 });
 
 export const MAKE_CRUD_CONFIG = ({
-  singular,
-  plural,
+  singular: singular$1,
+  plural: plural$1,
 }: {
   singular: MessageDescriptor;
   plural: MessageDescriptor;
 }) => {
+  const singular = i18n._(singular$1);
+  const plural = i18n._(plural$1);
   return {
     MUTATION_LANG: {
       CREATE: msg`${singular} Created Successfully`,
@@ -44,10 +46,10 @@ export const MAKE_CRUD_CONFIG = ({
       EDIT: msg`Edit ${singular}`,
       DETAILS: msg`${singular} Details`,
       SETTINGS: msg`${singular} Settings`,
-      NOT_FOUND: CRUD_CONFIG_NOT_FOUND(singular.message), // :eyes
-      TITLE: plural,
+      NOT_FOUND: CRUD_CONFIG_NOT_FOUND(singular),
+      TITLE: msg`${plural}`,
       EMPTY_LIST: msg`No ${singular} Has Been Added Yet`,
-      SINGULAR: singular,
+      SINGULAR: msg`${singular}`,
     },
   };
 };

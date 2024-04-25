@@ -34,11 +34,11 @@ msgstr "{0} Preference"
 msgid "{buttonLabel}"
 msgstr "{buttonLabel}"
 
+msgid "{DATE_FORMAT_LIB_LINK}"
+msgstr "{DATE_FORMAT_LIB_LINK}"
+
 msgid "{errorMessage}"
 msgstr "{errorMessage}"
-
-msgid "{https://date-fns.org/docs/format}"
-msgstr "{https://date-fns.org/docs/format}"
 
 msgid "{key}"
 msgstr "{key}"
@@ -115,11 +115,8 @@ msgstr "Add new option"
 msgid "App"
 msgstr "App"
 
-msgid "Bar Label"
-msgstr "Bar Label"
-
-msgid "Baz Label"
-msgstr "Baz Label"
+msgid "Are you sure you want to do this?"
+msgstr "Are you sure you want to do this?"
 
 msgid "Cancel"
 msgstr "Cancel"
@@ -264,9 +261,6 @@ msgstr "File Storage"
 
 msgid "Follow us on Twitter"
 msgstr "Follow us on Twitter"
-
-msgid "Foo Label"
-msgstr "Foo Label"
 
 msgid "Form"
 msgstr "Form"

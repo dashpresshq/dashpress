@@ -8,7 +8,7 @@ export const withPasswordValidationImpl: ValidationImplType<void> = async (
   try {
     await usersApiService.checkUserPassword({
       username: req.user.username,
-      password: req.body._password,
+      password: req.body._password || req.query._password,
     });
   } catch (error) {
     throw new BadRequestError("Invalid Password");

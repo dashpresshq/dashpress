@@ -5,7 +5,7 @@ import {
   IPaginatedDataState,
   PaginatedData,
 } from "shared/types/data";
-import { makeGetRequest } from "frontend/lib/data/makeRequest";
+import { ApiRequest } from "frontend/lib/data/makeRequest";
 import { getQueryCachekey } from "frontend/lib/data/constants/getQueryCacheKey";
 
 const DEFAULT_PAGE_SIZE = 10;
@@ -21,7 +21,7 @@ export function useFEPagination<T>(
   return useQuery<PaginatedData<T>>({
     queryKey: getQueryCachekey(endPoint),
     queryFn: async () => {
-      return await makeGetRequest(endPoint, "Data could not be retrieved");
+      return await ApiRequest.GET(endPoint, "Data could not be retrieved");
     },
     select: (data: any) => {
       let returnData: T[] = data as unknown as T[];

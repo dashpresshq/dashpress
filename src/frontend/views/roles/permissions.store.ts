@@ -2,7 +2,7 @@ import { MAKE_CRUD_CONFIG } from "frontend/lib/crud-config";
 import { useStorageApi } from "frontend/lib/data/useApi";
 import { useApiMutateOptimisticOptions } from "frontend/lib/data/useMutate/useApiMutateOptimisticOptions";
 import { MutationHelpers } from "frontend/lib/data/useMutate/mutation-helpers";
-import { makeActionRequest } from "frontend/lib/data/makeRequest";
+import { ApiRequest } from "frontend/lib/data/makeRequest";
 import { msg } from "@lingui/macro";
 import { objectToQueryParams } from "frontend/lib/routing/queryObjectToQueryString";
 import { useRoleIdFromRouteParam } from "./hooks";
@@ -30,8 +30,7 @@ export function useDeleteRolePermissionMutation() {
 
   return useApiMutateOptimisticOptions<string[], string[]>({
     mutationFn: async (permissions) => {
-      await makeActionRequest(
-        "DELETE",
+      await ApiRequest.DELETE(
         `${ADMIN_ROLE_PERMISSION_ENDPOINT(roleId)}${objectToQueryParams({
           permissions,
         })}`
@@ -48,7 +47,7 @@ export function useCreateRolePermissionMutation() {
 
   return useApiMutateOptimisticOptions<string[], string[]>({
     mutationFn: async (permissions) =>
-      await makeActionRequest("POST", ADMIN_ROLE_PERMISSION_ENDPOINT(roleId), {
+      await ApiRequest.POST(ADMIN_ROLE_PERMISSION_ENDPOINT(roleId), {
         permissions,
       }),
     dataQueryPath: ADMIN_ROLE_PERMISSION_ENDPOINT(roleId),

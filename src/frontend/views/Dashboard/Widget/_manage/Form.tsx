@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 import { WidgetScriptDocumentation } from "frontend/docs/scripts/widget-scripts";
 import { required } from "frontend/lib/validations";
 import { resetFormValues } from "frontend/lib/form/utils";
-import { makeActionRequest } from "frontend/lib/data/makeRequest";
+import { ApiRequest } from "frontend/lib/data/makeRequest";
 import { IFormProps } from "frontend/lib/form/types";
 import { ILabelValue } from "shared/types/options";
 import { FormInput } from "frontend/design-system/components/Form/FormInput";
@@ -58,7 +58,7 @@ const FormSchema: Partial<Record<IWidgetConfig["_type"], WidgetFormField[]>> = {
 export function useRunWidgetScript() {
   return useMutation({
     mutationFn: async (script: string) =>
-      await makeActionRequest("POST", `/api/dashboards/script`, { script }),
+      await ApiRequest.POST(`/api/dashboards/script`, { script }),
   });
 }
 

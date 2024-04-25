@@ -7,7 +7,7 @@ import {
   ISignInForm,
 } from "shared/form-schemas/auth/signin";
 import { useAuthenticateUser } from "frontend/hooks/auth/useAuthenticateUser";
-import { makeActionRequest } from "frontend/lib/data/makeRequest";
+import { ApiRequest } from "frontend/lib/data/makeRequest";
 import { ToastService } from "frontend/lib/toast";
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
 import { ComponentIsLoading } from "frontend/design-system/components/ComponentIsLoading";
@@ -22,7 +22,7 @@ function useSignInMutation() {
   const handleNoTokenAuthResponse = useHandleNoTokenAuthResponse();
   return useMutation({
     mutationFn: async (values: ISignInForm) =>
-      await makeActionRequest("POST", `/api/auth/signin`, values),
+      await ApiRequest.POST(`/api/auth/signin`, values),
     onSuccess: (data: ISuccessfullAuthenticationResponse, formData) => {
       if (data.token) {
         authenticateUser(data.token, formData.rememberMe);

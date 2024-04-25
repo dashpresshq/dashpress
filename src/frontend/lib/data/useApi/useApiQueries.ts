@@ -1,6 +1,6 @@
 import { useQueries, UseQueryResult } from "@tanstack/react-query";
 import { useRouter } from "next/router";
-import { makeGetRequest } from "../makeRequest";
+import { ApiRequest } from "../makeRequest";
 import { getQueryCachekey } from "../constants/getQueryCacheKey";
 
 interface IApiQueriesOptions<T, P> {
@@ -31,7 +31,7 @@ export function useApiQueries<T, P>({
       enabled: router.isReady,
       queryKey: getQueryCachekey(pathFn(inputItem[accessor])),
       queryFn: async () =>
-        dataTransformer(await makeGetRequest(pathFn(inputItem[accessor]))) as P,
+        dataTransformer(await ApiRequest.GET(pathFn(inputItem[accessor]))) as P,
     })),
   });
 

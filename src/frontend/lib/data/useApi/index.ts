@@ -3,7 +3,7 @@ import { AppStorage } from "frontend/lib/storage/app";
 import { useRouter } from "next/router";
 import { useLingui } from "@lingui/react";
 import { IUseApiOptions } from "../types";
-import { makeActionRequest, makeGetRequest } from "../makeRequest";
+import { ApiRequest } from "../makeRequest";
 import { buildApiOptions } from "../_buildOptions";
 import { getQueryCachekey } from "../constants/getQueryCacheKey";
 
@@ -17,14 +17,14 @@ export function useApi<T>(endPoint: string, options: IUseApiOptions<T>) {
     queryFn: async () => {
       try {
         if (options.request) {
-          return await makeActionRequest(
+          return await ApiRequest.ACTION(
             options.request.method,
             endPoint,
             options.request.body,
             { errorMessage: _(options.errorMessage) }
           );
         }
-        return await makeGetRequest(endPoint, _(options.errorMessage));
+        return await ApiRequest.GET(endPoint, _(options.errorMessage));
       } catch (error) {
         if (options.returnUndefinedOnError) {
           return undefined;

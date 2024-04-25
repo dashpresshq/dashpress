@@ -13,10 +13,10 @@ export function NextPortal({ children }: IProps) {
   useEffect(() => {
     ref.current = document.body;
     isMounted.on();
-    document.getElementById("__next").classList.add("gaussian-blur");
+    document.getElementById("__next")?.classList.add("gaussian-blur");
 
     return () => {
-      document.getElementById("__next").classList.remove("gaussian-blur");
+      document.getElementById("__next")?.classList.remove("gaussian-blur");
 
       isMounted.off();
     };

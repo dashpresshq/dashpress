@@ -2,7 +2,7 @@ import qs from "qs";
 import { useRouter } from "next/router";
 import { FieldQueryFilter, FilterOperators } from "shared/types/data";
 import { CRUD_CONFIG_NOT_FOUND } from "frontend/lib/crud-config";
-import { makeActionRequest } from "frontend/lib/data/makeRequest";
+import { ApiRequest } from "frontend/lib/data/makeRequest";
 import { useApi } from "frontend/lib/data/useApi";
 import { useWaitForResponseMutationOptions } from "frontend/lib/data/useMutate/useWaitForResponseMutationOptions";
 import { useApiQueries } from "frontend/lib/data/useApi/useApiQueries";
@@ -147,7 +147,7 @@ export function useEntityDataCreationMutation(
     { id: string }
   >({
     mutationFn: async (data) =>
-      await makeActionRequest("POST", `/api/data/${entity}`, { data }),
+      await ApiRequest.POST(`/api/data/${entity}`, { data }),
     endpoints: DATA_MUTATION_ENDPOINTS_TO_CLEAR(entity),
     onSuccessActionWithFormData: ({ id }) => {
       option?.onSuccessActionWithFormData(id);
@@ -174,7 +174,7 @@ export function useEntityDataUpdationMutation(
 
   return useWaitForResponseMutationOptions<Record<string, string>>({
     mutationFn: async (data) =>
-      await makeActionRequest("PATCH", `/api/data/${entity}/${entityId}`, {
+      await ApiRequest.PATCH(`/api/data/${entity}/${entityId}`, {
         data: { ...data, ...metadata },
       }),
     endpoints: [
@@ -201,7 +201,7 @@ export function useEntityDataDeletionMutation(
   // eyes on optimstic delete here
   return useWaitForResponseMutationOptions<string>({
     mutationFn: async (id) =>
-      await makeActionRequest("DELETE", `/api/data/${entity}/${id}`),
+      await ApiRequest.DELETE(`/api/data/${entity}/${id}`),
     endpoints: [
       ...SINGLE_DATA_MUTATION_ENDPOINTS_TO_CLEAR({ entity, entityId }),
       ...DATA_MUTATION_ENDPOINTS_TO_CLEAR(entity),

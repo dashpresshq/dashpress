@@ -8,7 +8,7 @@ import {
   MAKE_ENDPOINTS_CONFIG,
 } from "frontend/lib/crud-config";
 import { useWaitForResponseMutationOptions } from "frontend/lib/data/useMutate/useWaitForResponseMutationOptions";
-import { makeActionRequest } from "frontend/lib/data/makeRequest";
+import { ApiRequest } from "frontend/lib/data/makeRequest";
 import { MutationHelpers } from "frontend/lib/data/useMutate/mutation-helpers";
 import { useApiMutateOptimisticOptions } from "frontend/lib/data/useMutate/useApiMutateOptimisticOptions";
 import { msg } from "@lingui/macro";
@@ -24,7 +24,7 @@ export function useCreateRoleMutation() {
   const router = useRouter();
   return useWaitForResponseMutationOptions<IBaseRoleForm, IBaseRoleForm>({
     mutationFn: async (data) => {
-      await makeActionRequest("POST", ROLES_ENDPOINT_CONFIG.CREATE, data);
+      await ApiRequest.POST(ROLES_ENDPOINT_CONFIG.CREATE, data);
       return data;
     },
     endpoints: [ROLES_ENDPOINT_CONFIG.LIST],
@@ -43,7 +43,7 @@ export function useRoleDeletionMutation() {
   const router = useRouter();
   return useApiMutateOptimisticOptions<IRolesList[], string>({
     mutationFn: async (roleId) =>
-      await makeActionRequest("DELETE", ROLES_ENDPOINT_CONFIG.DELETE(roleId)),
+      await ApiRequest.DELETE(ROLES_ENDPOINT_CONFIG.DELETE(roleId)),
     dataQueryPath: ROLES_ENDPOINT_CONFIG.LIST,
     onSuccessActionWithFormData: () => {
       router.replace(NAVIGATION_LINKS.ROLES.LIST);

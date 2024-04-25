@@ -2,7 +2,7 @@ import {
   APP_CONFIGURATION_CONFIG,
   AppConfigurationKeys,
 } from "shared/configurations";
-import { makeActionRequest } from "frontend/lib/data/makeRequest";
+import { ApiRequest } from "frontend/lib/data/makeRequest";
 import { useStorageApi } from "frontend/lib/data/useApi";
 import { useWaitForResponseMutationOptions } from "frontend/lib/data/useMutate/useWaitForResponseMutationOptions";
 import { AppStorage } from "frontend/lib/storage/app";
@@ -86,7 +86,7 @@ export function useUpsertConfigurationMutation<T extends AppConfigurationKeys>(
     AppConfigurationValueType<T>
   >({
     mutationFn: async (values) => {
-      await makeActionRequest("PUT", configurationApiPath(key, entity, "PUT"), {
+      await ApiRequest.PUT(configurationApiPath(key, entity, "PUT"), {
         data: values,
       });
       return values;

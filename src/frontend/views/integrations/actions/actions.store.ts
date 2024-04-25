@@ -1,7 +1,7 @@
 import { IIntegrationsList, ActionIntegrations } from "shared/types/actions";
 import { CRUD_CONFIG_NOT_FOUND } from "frontend/lib/crud-config";
 import { reduceStringToNumber } from "shared/lib/strings";
-import { makeActionRequest } from "frontend/lib/data/makeRequest";
+import { ApiRequest } from "frontend/lib/data/makeRequest";
 import { useApi } from "frontend/lib/data/useApi";
 import { useWaitForResponseMutationOptions } from "frontend/lib/data/useMutate/useWaitForResponseMutationOptions";
 import { usePasswordStore } from "../password.store";
@@ -49,10 +49,7 @@ export const useActivationConfiguration = (activationId: string) => {
 export function useDeactivateIntegrationMutation() {
   return useWaitForResponseMutationOptions<string>({
     mutationFn: async (activationId) =>
-      await makeActionRequest(
-        "DELETE",
-        `/api/integrations/actions/${activationId}`
-      ),
+      await ApiRequest.DELETE(`/api/integrations/actions/${activationId}`),
     endpoints: [ACTIVE_ACTIONS_INTEGRATIONS_ENDPOINT],
     successMessage:
       ACTION_INTEGRATIONS_CRUD_CONFIG.MUTATION_LANG.CUSTOM("Deactivated"),
@@ -62,8 +59,7 @@ export function useDeactivateIntegrationMutation() {
 export function useActivateIntegrationMutation(integration: string) {
   return useWaitForResponseMutationOptions<Record<string, string>>({
     mutationFn: async (configuration) =>
-      await makeActionRequest(
-        "POST",
+      await ApiRequest.POST(
         `/api/integrations/actions/${integration}`,
         configuration
       ),
@@ -78,14 +74,10 @@ export function useUpdateActivatedIntegrationMutation(activationId: string) {
 
   return useWaitForResponseMutationOptions<Record<string, string>>({
     mutationFn: async (configuration) =>
-      await makeActionRequest(
-        "PATCH",
-        `/api/integrations/actions/${activationId}`,
-        {
-          ...configuration,
-          _password: rootPassword,
-        }
-      ),
+      await ApiRequest.PATCH(`/api/integrations/actions/${activationId}`, {
+        ...configuration,
+        _password: rootPassword,
+      }),
     endpoints: [ACTIVE_ACTIONS_INTEGRATIONS_ENDPOINT],
     successMessage: ACTION_INTEGRATIONS_CRUD_CONFIG.MUTATION_LANG.EDIT,
   });

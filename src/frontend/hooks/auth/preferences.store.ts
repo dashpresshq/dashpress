@@ -1,4 +1,4 @@
-import { makeActionRequest } from "frontend/lib/data/makeRequest";
+import { ApiRequest } from "frontend/lib/data/makeRequest";
 import { useStorageApi } from "frontend/lib/data/useApi";
 import { useWaitForResponseMutationOptions } from "frontend/lib/data/useMutate/useWaitForResponseMutationOptions";
 import { AppStorage } from "frontend/lib/storage/app";
@@ -46,7 +46,7 @@ export function useUpsertUserPreferenceMutation<T extends UserPreferencesKeys>(
     UserPreferencesValueType<T>
   >({
     mutationFn: async (values) => {
-      await makeActionRequest("PUT", userPrefrencesApiPath(key), {
+      await ApiRequest.PUT(userPrefrencesApiPath(key), {
         data: values,
       });
       return values;

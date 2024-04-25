@@ -1,9 +1,9 @@
 import { IWidgetConfig } from "shared/types/dashboard";
 import { CRUD_CONFIG_NOT_FOUND } from "frontend/lib/crud-config";
-import { makeActionRequest } from "frontend/lib/data/makeRequest";
 import { MutationHelpers } from "frontend/lib/data/useMutate/mutation-helpers";
 import { useApiMutateOptimisticOptions } from "frontend/lib/data/useMutate/useApiMutateOptimisticOptions";
 import { useApi } from "frontend/lib/data/useApi";
+import { ApiRequest } from "frontend/lib/data/makeRequest";
 import { DASHBOARD_RELATIVE_DAYS } from "./Widget/_components/WidgetHeader/constants";
 import { DASHBOARD_WIDGETS_CRUD_CONFIG } from "./constants";
 
@@ -45,7 +45,7 @@ export const useDasboardWidgetScriptData = (
 export function useCreateDashboardWidgetMutation(dashboardId: string) {
   return useApiMutateOptimisticOptions<IWidgetConfig[], IWidgetConfig>({
     mutationFn: async (widget) => {
-      await makeActionRequest("POST", DASHBOARD_ENDPOINT(dashboardId), widget);
+      await ApiRequest.POST(DASHBOARD_ENDPOINT(dashboardId), widget);
     },
     dataQueryPath: DASHBOARD_ENDPOINT(dashboardId),
     onMutate: MutationHelpers.append,
@@ -59,8 +59,7 @@ export function useUpdateDashboardWidgetMutation(
 ) {
   return useApiMutateOptimisticOptions<IWidgetConfig[], IWidgetConfig>({
     mutationFn: async (widget) => {
-      await makeActionRequest(
-        "PATCH",
+      await ApiRequest.PATCH(
         `${DASHBOARD_ENDPOINT(dashboardId)}/${widget.id}`,
         widget
       );
@@ -75,10 +74,7 @@ export function useUpdateDashboardWidgetMutation(
 export function useDeleteDashboardWidgetMutation(dashboardId: string) {
   return useApiMutateOptimisticOptions<IWidgetConfig[], string>({
     mutationFn: async (widgetId) => {
-      await makeActionRequest(
-        "DELETE",
-        `${DASHBOARD_ENDPOINT(dashboardId)}/${widgetId}`
-      );
+      await ApiRequest.DELETE(`${DASHBOARD_ENDPOINT(dashboardId)}/${widgetId}`);
     },
     dataQueryPath: DASHBOARD_ENDPOINT(dashboardId),
     onMutate: MutationHelpers.delete,
@@ -89,11 +85,7 @@ export function useDeleteDashboardWidgetMutation(dashboardId: string) {
 export function useArrangeDashboardWidgetMutation(dashboardId: string) {
   return useApiMutateOptimisticOptions<IWidgetConfig[], string[]>({
     mutationFn: async (widgetList) => {
-      await makeActionRequest(
-        "PATCH",
-        DASHBOARD_ENDPOINT(dashboardId),
-        widgetList
-      );
+      await ApiRequest.PATCH(DASHBOARD_ENDPOINT(dashboardId), widgetList);
     },
     dataQueryPath: DASHBOARD_ENDPOINT(dashboardId),
     onMutate: MutationHelpers.sortOrder,

@@ -9,7 +9,7 @@ import {
 } from "frontend/lib/crud-config";
 import { useApi } from "frontend/lib/data/useApi";
 import { useApiMutateOptimisticOptions } from "frontend/lib/data/useMutate/useApiMutateOptimisticOptions";
-import { makeActionRequest } from "frontend/lib/data/makeRequest";
+import { ApiRequest } from "frontend/lib/data/makeRequest";
 import { MutationHelpers } from "frontend/lib/data/useMutate/mutation-helpers";
 import { useWaitForResponseMutationOptions } from "frontend/lib/data/useMutate/useWaitForResponseMutationOptions";
 import { msg } from "@lingui/macro";
@@ -43,7 +43,7 @@ export function useUserDeletionMutation() {
   const router = useRouter();
   return useApiMutateOptimisticOptions<IAccountProfile[], string>({
     mutationFn: async (username) =>
-      await makeActionRequest("DELETE", USERS_ENDPOINT_CONFIG.DELETE(username)),
+      await ApiRequest.DELETE(USERS_ENDPOINT_CONFIG.DELETE(username)),
     dataQueryPath: USERS_ENDPOINT_CONFIG.LIST,
     onSuccessActionWithFormData: () => {
       router.replace(NAVIGATION_LINKS.USERS.LIST);
@@ -57,11 +57,7 @@ export function useUpdateUserMutation() {
   const username = useUsernameFromRouteParam();
   return useWaitForResponseMutationOptions<Partial<IAccountProfile>>({
     mutationFn: async (data) =>
-      await makeActionRequest(
-        "PATCH",
-        USERS_ENDPOINT_CONFIG.UPDATE(username),
-        data
-      ),
+      await ApiRequest.PATCH(USERS_ENDPOINT_CONFIG.UPDATE(username), data),
     endpoints: [
       USERS_ENDPOINT_CONFIG.LIST,
       USERS_ENDPOINT_CONFIG.DETAILS(username),
@@ -74,8 +70,7 @@ export function useResetUserPasswordMutation() {
   const username = useUsernameFromRouteParam();
   return useWaitForResponseMutationOptions<IResetPasswordForm>({
     mutationFn: async (data) =>
-      await makeActionRequest(
-        "PATCH",
+      await ApiRequest.PATCH(
         USERS_ENDPOINT_CONFIG.CUSTOM(username, "reset-password"),
         data
       ),
@@ -88,7 +83,7 @@ export function useCreateUserMutation() {
   const router = useRouter();
   return useWaitForResponseMutationOptions<ICreateUserForm, ICreateUserForm>({
     mutationFn: async (data: ICreateUserForm) => {
-      await makeActionRequest("POST", USERS_ENDPOINT_CONFIG.CREATE, data);
+      await ApiRequest.POST(USERS_ENDPOINT_CONFIG.CREATE, data);
       return data;
     },
     endpoints: [USERS_ENDPOINT_CONFIG.LIST],

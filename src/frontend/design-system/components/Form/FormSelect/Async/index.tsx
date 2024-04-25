@@ -5,7 +5,7 @@ import styled from "styled-components";
 import { useAsync, useSessionStorage } from "react-use";
 import { ISelectData } from "shared/types/options";
 import { useApi } from "frontend/lib/data/useApi";
-import { makeGetRequest } from "frontend/lib/data/makeRequest";
+import { ApiRequest } from "frontend/lib/data/makeRequest";
 import { FormSelect } from "..";
 import {
   generateClassNames,
@@ -34,7 +34,7 @@ const debouncedSearch = debounce(
     resolve: (value: any) => void
   ) => {
     const toReturn = (
-      await makeGetRequest(`${url}?search=${inputValue}`)
+      await ApiRequest.GET(`${url}?search=${inputValue}`)
     ).filter(
       ({ value }: ISelectData) => !disabledOptions.includes(value as string)
     );
@@ -87,7 +87,7 @@ export function AsyncFormSelect(props: IProps) {
     if (!referenceUrl) {
       return input.value;
     }
-    return await makeGetRequest(referenceUrl(input.value));
+    return await ApiRequest.GET(referenceUrl(input.value));
   }, [url, valueLabel, isLoading]);
 
   if (error) {

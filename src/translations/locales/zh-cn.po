@@ -13,14 +13,11 @@ msgstr ""
 "Plural-Forms: \n"
 "X-Generator: Poedit 3.4.2\n"
 
-msgid ""
-msgstr ""
-
 msgid "\"{0}\" Selection"
-msgstr ""
+msgstr "选择“{0}”"
 
 msgid "\"{0}\" Validations"
-msgstr ""
+msgstr "验证“{0}”"
 
 msgid "{0}"
 msgstr ""
@@ -29,7 +26,7 @@ msgid "{0} - {1}"
 msgstr ""
 
 msgid "{0} Preference"
-msgstr ""
+msgstr "{0}偏好"
 
 msgid "{buttonLabel}"
 msgstr ""
@@ -71,7 +68,7 @@ msgid "{singular} Saved Successfully"
 msgstr "{singular}保存成功"
 
 msgid "{singular} Settings"
-msgstr ""
+msgstr "{singular}设置"
 
 msgid "{singular} Updated Successfully"
 msgstr "{singular}更新成功"
@@ -83,94 +80,95 @@ msgid "Account Preferences"
 msgstr "账号"
 
 msgid "Account Profile"
-msgstr ""
+msgstr "账号信息"
 
 msgid "Account Was Successfully Setup"
-msgstr ""
+msgstr "账户设置成功"
 
 msgid "Action"
 msgstr "动作"
 
 msgid "Actions"
-msgstr ""
+msgstr "动作"
 
 msgid "Activate {0}"
-msgstr ""
+msgstr "激活 {0}"
 
 msgid "Activating {0}"
-msgstr ""
+msgstr "激活 {0}"
 
+#, fuzzy
 msgid "Add Filter"
-msgstr ""
+msgstr "筛选"
 
 msgid "Add Nested Filter"
-msgstr ""
+msgstr "添加嵌套筛选"
 
 msgid "Add New {singular}"
 msgstr "添加新{singular}"
 
 msgid "Add new option"
-msgstr ""
+msgstr "添加选项"
 
 msgid "App"
-msgstr ""
+msgstr "APP"
 
 msgid "Are you sure you want to do this?"
-msgstr ""
+msgstr "你确定你要这么做吗？"
 
 msgid "Cancel"
-msgstr ""
+msgstr "取消"
 
 msgid "Change Language"
 msgstr "切换语言"
 
 msgid "Click here to view details"
-msgstr ""
+msgstr "查看详情"
 
 msgid "Close Canvas"
-msgstr ""
+msgstr "关闭画布"
 
 msgid "Configure"
-msgstr ""
+msgstr "设置"
 
 msgid "Configure Selections"
-msgstr ""
+msgstr "配置选择"
 
 msgid "Configure Validation"
-msgstr ""
+msgstr "配置验证方式"
 
 msgid "Confirm"
-msgstr ""
+msgstr "确认"
 
 msgid "Constant"
-msgstr ""
+msgstr "常量"
 
 msgid "Constants"
-msgstr ""
+msgstr "常量"
 
 msgid "Create"
-msgstr ""
+msgstr "创建"
 
 msgid "Create {singular}"
-msgstr ""
+msgstr "创建{singular}"
 
 msgid "Create It"
-msgstr ""
+msgstr "创建"
 
 msgid "Creating {singular}"
-msgstr ""
+msgstr "创建{singular}"
 
 msgid "Credentials Was Successfully Setup"
-msgstr ""
+msgstr "证书设置成功"
 
 msgid "CRUD"
-msgstr ""
+msgstr "CRUD"
 
 msgid "CRUD Settings"
-msgstr ""
+msgstr "CRUD设置"
 
 msgid "Dark"
-msgstr "深色"
+msgstr "暗黑"
 
 msgid "Dashboard"
 msgstr "仪表盘"
@@ -179,109 +177,110 @@ msgid "Dashboard Widget"
 msgstr "仪表盘组件"
 
 msgid "Dashboard Widgets"
-msgstr ""
+msgstr "仪表盘组件"
 
 msgid "Dashboards"
-msgstr ""
+msgstr "仪表盘"
 
 msgid "Data"
-msgstr ""
+msgstr "数据"
 
 msgid "Deactivate"
-msgstr ""
+msgstr "停用"
 
 msgid "Deactivate {0}"
-msgstr ""
+msgstr "停用{0}"
 
 msgid "Deactivating {0}"
-msgstr ""
+msgstr "停用{0}"
 
 msgid "Delete"
-msgstr ""
+msgstr "删除"
 
 msgid "Delete {singular}"
 msgstr "删除{singular}"
 
 msgid "Delete Selection"
-msgstr ""
+msgstr "删除所选内容"
 
 msgid "Details"
-msgstr ""
+msgstr "查看详情"
 
+#, fuzzy
 msgid "Diction"
-msgstr ""
+msgstr "字典"
 
 msgid "Diction Settings"
-msgstr ""
+msgstr "字典设置"
 
 msgid "Done"
-msgstr ""
+msgstr "完成"
 
 msgid "Download"
-msgstr ""
+msgstr "导出"
 
 msgid "Edit"
-msgstr ""
+msgstr "编辑"
 
 msgid "Edit {singular}"
 msgstr "修改{singular}"
 
 msgid "Empty Table"
-msgstr ""
+msgstr "空表格"
 
 msgid "Enable {0} Functionality"
-msgstr ""
+msgstr "启用{0}功能"
 
 msgid "Enabled Entities"
-msgstr ""
+msgstr "已启用实体"
 
 msgid "Enter your credentials to continue"
-msgstr ""
+msgstr "输入您的凭证以继续"
 
 msgid "Entities"
-msgstr ""
+msgstr "实体"
 
 msgid "Environment Variable"
-msgstr ""
+msgstr "环境变量"
 
 msgid "Environment Variables"
-msgstr ""
+msgstr "环境变量"
 
 msgid "Explain {title}"
-msgstr ""
+msgstr "解释{title}"
 
 msgid "Field Settings"
-msgstr ""
+msgstr "字段设置"
 
 msgid "Fields"
-msgstr ""
+msgstr "字段"
 
 msgid "File Storage"
 msgstr "存储设置"
 
 msgid "Follow us on Twitter"
-msgstr ""
+msgstr "关注我们的推特"
 
 msgid "Form"
-msgstr ""
+msgstr "表单"
 
 msgid "Form Action"
 msgstr "表单操作"
 
 msgid "Form Actions"
-msgstr ""
+msgstr "表单操作"
 
 msgid "Form Scripts"
-msgstr ""
+msgstr "表单脚本"
 
 msgid "General"
-msgstr ""
+msgstr "一般"
 
 msgid "General Data Settings"
-msgstr ""
+msgstr "常规数据设置"
 
 msgid "Go Back"
-msgstr ""
+msgstr "返回"
 
 msgid "Hi, {0}"
 msgstr "你好，{0}"
@@ -290,19 +289,19 @@ msgid "Integration"
 msgstr "集成"
 
 msgid "Join our Discord community"
-msgstr ""
+msgstr "加入我们社区"
 
 msgid "Labels"
-msgstr ""
+msgstr "标签"
 
 msgid "Language"
 msgstr "语言"
 
 msgid "Light"
-msgstr "浅色"
+msgstr "明亮"
 
 msgid "Link Users To Database"
-msgstr ""
+msgstr "建立用户数据库"
 
 msgid "Log Out"
 msgstr "退出登录"
@@ -311,31 +310,31 @@ msgid "Manage {plural}"
 msgstr "管理{plural}"
 
 msgid "Manage {title}"
-msgstr ""
+msgstr "管理{title}"
 
 msgid "Manage Variables"
-msgstr ""
+msgstr "变量管理"
 
 msgid "Menu Settings"
-msgstr ""
+msgstr "菜单设置"
 
 msgid "My Account"
-msgstr ""
+msgstr "我的账户"
 
 msgid "No {singular} Has Been Added Yet"
 msgstr "没有{singular}被添加"
 
 msgid "No available permission for this section"
-msgstr ""
+msgstr "此部分无可用权限"
 
 msgid "No Data"
-msgstr ""
+msgstr "无数据"
 
 msgid "No result for the current {0} applied."
-msgstr ""
+msgstr "当前{0}没有结果。"
 
 msgid "No Search Results"
-msgstr ""
+msgstr "没有搜索结果"
 
 msgid "On Create"
 msgstr "创建"
@@ -347,112 +346,112 @@ msgid "On Update"
 msgstr "更新"
 
 msgid "Order"
-msgstr ""
+msgstr "顺序"
 
 msgid "Password"
 msgstr "密码"
 
 msgid "Password Reset Successfully"
-msgstr ""
+msgstr "密码重置成功"
 
 msgid "Password will not be changed on demo account"
-msgstr ""
+msgstr "演示账户的密码将不会被更改"
 
 msgid "Persistent Query"
-msgstr ""
+msgstr "持久查询"
 
 msgid "Preferences"
 msgstr "偏好设置"
 
 msgid "Presentation Scripts"
-msgstr ""
+msgstr "演示脚本"
 
 msgid "Preview"
-msgstr ""
+msgstr "预览"
 
 msgid "Profile"
 msgstr "个人信息"
 
 msgid "Reference Template"
-msgstr ""
+msgstr "参考模板"
 
 msgid "Relations"
-msgstr ""
+msgstr "关联"
 
 msgid "Relationship Settings"
-msgstr ""
+msgstr "关联设置"
 
 msgid "Remove"
-msgstr ""
+msgstr "移除"
 
 msgid "Remove Nested Filter"
-msgstr ""
+msgstr "移除嵌套过滤器"
 
 msgid "Reset"
-msgstr ""
+msgstr "重置"
 
 msgid "Reset Password"
-msgstr ""
+msgstr "重置密码"
 
 msgid "Reset User Password"
-msgstr ""
+msgstr "重置用户密码"
 
 msgid "Resetting Password"
-msgstr ""
+msgstr "重置密码"
 
 msgid "Reveal {label}"
-msgstr ""
+msgstr "显示 {label}"
 
 msgid "Revealing {label}"
-msgstr ""
+msgstr "显示 {label}"
 
 msgid "Role"
 msgstr "角色"
 
 msgid "Role Permission"
-msgstr ""
+msgstr "角色权限"
 
 msgid "Role Permissions"
-msgstr ""
+msgstr "角色权限"
 
 msgid "Roles"
 msgstr "角色"
 
 msgid "Roles and Permissions"
-msgstr ""
+msgstr "角色和权限"
 
 msgid "Save"
-msgstr ""
+msgstr "保存"
 
 msgid "Save {singular}"
-msgstr ""
+msgstr "保存{singular}"
 
 msgid "Saving {singular}"
-msgstr ""
+msgstr "保存{singular}"
 
 msgid "Secret"
-msgstr ""
+msgstr "密钥"
 
 msgid "Secrets"
-msgstr ""
+msgstr "密钥"
 
 msgid "Selection"
-msgstr ""
+msgstr "选择"
 
 msgid "Setting Up Account"
-msgstr ""
+msgstr "账户设置"
 
 msgid "Setting Up Credentials"
-msgstr ""
+msgstr "设置凭据"
 
 msgid "Setup"
-msgstr ""
+msgstr "配置"
 
 msgid "Setup Account"
-msgstr ""
+msgstr "配置账户"
 
 msgid "Setup Credentials"
-msgstr ""
+msgstr "配置凭据"
 
 msgid "Showing <0/> entries of <1>{0}</1> results"
 msgstr "显示<0/>条目 <1>{0}</1> 结果"
@@ -464,88 +463,88 @@ msgid "Signing In"
 msgstr "正在登录"
 
 msgid "Site"
-msgstr ""
+msgstr "站点"
 
 msgid "Star us on Github"
-msgstr ""
+msgstr "谢谢给我们项目Star"
 
 msgid "System"
-msgstr ""
+msgstr "系统"
 
 msgid "System Info"
-msgstr ""
+msgstr "系统设置"
 
 msgid "System Information"
-msgstr ""
+msgstr "系统信息"
 
 msgid "Table"
-msgstr ""
+msgstr "表格"
 
 msgid "Table View"
-msgstr ""
+msgstr "表格视图"
 
 msgid "Table Views"
-msgstr ""
+msgstr "表格视图"
 
 msgid "Test Widget Script"
-msgstr ""
+msgstr "测试部件脚本"
 
 msgid "Theme"
-msgstr ""
+msgstr "主题"
 
 msgid "Theme Settings"
-msgstr ""
+msgstr "主题设置"
 
 msgid "This application has no active entities. Kindly add new entities through your preferred database editor then restart this application to proceed."
-msgstr ""
+msgstr "这个应用目前没有可用的数据。请在您喜欢的数据库编辑器中添加新的数据，然后重新启动应用程序以继续。"
 
 msgid "This entity has no fields. Kindly add fields from your prefer database tool to manage them here"
-msgstr ""
+msgstr "这个实体没有字段。请使用您喜欢的数据库工具在此处添加字段以进行管理"
 
 msgid "This entity has no relations"
-msgstr ""
+msgstr "该实体没有关联"
 
 msgid "Toggle Connection URL"
-msgstr ""
+msgstr "切换连接"
 
 msgid "Update"
-msgstr ""
+msgstr "更新"
 
 msgid "Update {singular}"
-msgstr ""
+msgstr "更新{singular}"
 
 msgid "Updating {singular}"
-msgstr ""
+msgstr "更新{singular}"
 
 msgid "Use Icon"
-msgstr ""
+msgstr "使用图标"
 
 msgid "Use SVG"
-msgstr ""
+msgstr "使用SVG"
 
 msgid "User"
 msgstr "用户"
 
 msgid "Users"
-msgstr ""
+msgstr "用户"
 
 msgid "Users Link To Database"
-msgstr ""
+msgstr "建立用户数据库"
 
 msgid "Variables"
-msgstr ""
+msgstr "变量"
 
 msgid "View"
-msgstr ""
+msgstr "查看"
 
 msgid "View {0}"
-msgstr ""
+msgstr "查看{0}"
 
 msgid "View Full Details"
-msgstr ""
+msgstr "查看详情"
 
 msgid "Visit our website"
-msgstr ""
+msgstr "访问我们网站"
 
 msgid "Widget Script"
-msgstr ""
+msgstr "部件脚本"

@@ -1,6 +1,8 @@
 import { ITableColumn } from "frontend/design-system/components/Table/types";
 import { Table } from "frontend/design-system/components/Table";
 import { userFriendlyCase } from "shared/lib/strings/friendly-case";
+import { typescriptSafeObjectDotKeys } from "shared/lib/objects";
+import { msg } from "@lingui/macro";
 import { TableWidgetSchema } from "./types";
 
 interface IProps {
@@ -9,11 +11,13 @@ interface IProps {
 export function TableWidget({ data }: IProps) {
   const tableData = TableWidgetSchema.parse(data);
 
-  const columns: ITableColumn[] = Object.keys(tableData[0]).map((column) => ({
-    Header: userFriendlyCase(column),
-    accessor: column,
-    disableSortBy: true,
-  }));
+  const columns: ITableColumn[] = typescriptSafeObjectDotKeys(tableData[0]).map(
+    (column) => ({
+      Header: userFriendlyCase(column),
+      accessor: column,
+      disableSortBy: true,
+    })
+  );
 
   return (
     <Table
@@ -30,7 +34,7 @@ export function TableWidget({ data }: IProps) {
       }}
       syncPaginatedDataStateOut={() => {}}
       border
-      empty={{ text: "No Data" }}
+      empty={{ text: msg`No Data` }}
       lean
       columns={columns}
     />

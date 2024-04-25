@@ -21,6 +21,7 @@ import {
 } from "shared/form-schemas/users/reset-password";
 import { IAppliedSchemaFormConfig } from "shared/form-schemas/types";
 import { IUpdateUserForm } from "shared/form-schemas/users";
+import { msg } from "@lingui/macro";
 import { useUsernameFromRouteParam } from "../hooks";
 import {
   useUpdateUserMutation,
@@ -67,7 +68,7 @@ export function UserUpdate() {
 
   useSetPageDetails({
     pageTitle: ADMIN_USERS_CRUD_CONFIG.TEXT_LANG.EDIT,
-    viewKey: ADMIN_USERS_CRUD_CONFIG.TEXT_LANG.EDIT,
+    viewKey: `edit-user`,
     permission: USER_PERMISSIONS.CAN_MANAGE_USERS,
   });
 
@@ -107,10 +108,10 @@ export function UserUpdate() {
         <Spacer />
         {userHasPermission(USER_PERMISSIONS.CAN_RESET_PASSWORD) &&
           authenticatedUserBag.data?.username !== username && (
-            <SectionBox title="Reset User Password">
+            <SectionBox title={msg`Reset User Password`}>
               <SchemaForm<IResetPasswordForm>
                 buttonText={(submitting) =>
-                  submitting ? "Resetting Password" : "Reset Password"
+                  submitting ? msg`Resetting Password` : msg`Reset Password`
                 }
                 systemIcon="Unlock"
                 fields={RESET_PASSWORD_FORM_SCHEMA}

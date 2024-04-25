@@ -43,7 +43,7 @@ export function EntityPresentationScriptSettings() {
   const evaluateScriptContext = useEvaluateScriptContext();
 
   const documentationActionButton = useDocumentationActionButton(
-    "Presentation Script"
+    PRESENTATION_SCRIPT_CRUD_CONFIG.TEXT_LANG.TITLE
   );
 
   useSetPageDetails({

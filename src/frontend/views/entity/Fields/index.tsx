@@ -24,6 +24,7 @@ import {
 import { SectionBox } from "frontend/design-system/components/Section/SectionBox";
 import { Tabs } from "frontend/design-system/components/Tabs";
 import { useDocumentationActionButton } from "frontend/docs/constants";
+import { msg } from "@lingui/macro";
 import {
   ENTITY_CONFIGURATION_VIEW,
   ENTITY_FIELD_SETTINGS_TAB_LABELS,
@@ -31,6 +32,8 @@ import {
 import { FieldsTypeForm } from "./FieldsType.form";
 import { FieldsLabelForm, loadingFieldsLabelForm } from "./FieldsLabel.form";
 import { BaseEntitySettingsLayout } from "../_Base";
+
+const TITLE_MSG = msg`Field Settings`;
 
 export function EntityFieldsSettings() {
   const tabFromUrl = useRouteParam("tab");
@@ -78,11 +81,10 @@ export function EntityFieldsSettings() {
     entity
   );
 
-  const documentationActionButton =
-    useDocumentationActionButton("Fields Settings");
+  const documentationActionButton = useDocumentationActionButton(TITLE_MSG);
 
   useSetPageDetails({
-    pageTitle: "Field Settings",
+    pageTitle: TITLE_MSG,
     viewKey: ENTITY_CONFIGURATION_VIEW,
     permission: USER_PERMISSIONS.CAN_CONFIGURE_APP,
   });
@@ -101,10 +103,7 @@ export function EntityFieldsSettings() {
 
   return (
     <BaseEntitySettingsLayout>
-      <SectionBox
-        title="Fields Settings"
-        actionButtons={[documentationActionButton]}
-      >
+      <SectionBox title={TITLE_MSG} actionButtons={[documentationActionButton]}>
         <Tabs
           currentTab={tabFromUrl}
           onChange={changeTabParam}

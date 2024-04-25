@@ -9,6 +9,7 @@ import { useApiQueries } from "frontend/lib/data/useApi/useApiQueries";
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
 import { DataStates } from "frontend/lib/data/types";
 import { SYSTEM_LOADING_VALUE } from "frontend/lib/routing/constants";
+import { typescriptSafeObjectDotEntries } from "shared/lib/objects";
 import { useEntityCrudConfig } from "../entity/entity.config";
 import { useMultipleEntityReferenceFields } from "../entity/entity.store";
 import {
@@ -92,7 +93,7 @@ export const useEntityReferenceCount = (
   const multipleEntityReferenceFields =
     useMultipleEntityReferenceFields(entities);
 
-  const entitiesReferences = Object.entries(
+  const entitiesReferences = typescriptSafeObjectDotEntries(
     multipleEntityReferenceFields.data || {}
   )
     // eslint-disable-next-line @typescript-eslint/no-unused-vars

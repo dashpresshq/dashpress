@@ -1,5 +1,6 @@
 import fs from "fs-extra";
 import path from "path";
+import { typescriptSafeObjectDotEntries } from "shared/lib/objects";
 import { ConfigBag } from "./constants";
 import { ConfigKeys } from "./types";
 
@@ -31,7 +32,7 @@ export class ConfigApiService {
     ConfigApiService.isInitialized = true;
     const newEnvEntries: { key: ConfigKeys; value: string }[] = [];
 
-    Object.entries(ConfigBag).forEach(([key, configBag]) => {
+    typescriptSafeObjectDotEntries(ConfigBag).forEach(([key, configBag]) => {
       const value = this.processEnv[key];
       if (!value) {
         if (this.getNodeEnvironment() === "production") {
@@ -39,7 +40,7 @@ export class ConfigApiService {
           throw new Error(message);
         } else {
           newEnvEntries.push({
-            key: key as ConfigKeys,
+            key,
             value: configBag.defaultValue(),
           });
         }
@@ -63,7 +64,7 @@ export class ConfigApiService {
         envContent.join("\n")
       );
     }
-    Object.entries(ConfigBag).forEach(([key, configBag]) => {
+    typescriptSafeObjectDotEntries(ConfigBag).forEach(([key, configBag]) => {
       const value = this.processEnv[key];
       configBag.validate(value);
     });

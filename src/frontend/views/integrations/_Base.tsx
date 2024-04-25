@@ -9,6 +9,7 @@ import { MenuSection } from "frontend/design-system/components/Section/MenuSecti
 import { AppLayout } from "frontend/_layouts/app";
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
 import { IListMangerItemProps } from "frontend/design-system/components/ListManager/ListManagerItem";
+import { msg } from "@lingui/macro";
 import {
   useIntegrationsList,
   useActiveIntegrations,
@@ -67,7 +68,7 @@ export function BaseActionsLayout({ children }: IProps) {
             menuItems={[
               {
                 action: NAVIGATION_LINKS.INTEGRATIONS.VARIABLES,
-                name: "Variables",
+                name: msg`Variables`,
                 systemIcon: "Book",
               },
             ]}

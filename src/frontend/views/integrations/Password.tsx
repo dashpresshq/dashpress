@@ -1,6 +1,7 @@
 import { SchemaForm } from "frontend/components/SchemaForm";
 import { Spacer } from "frontend/design-system/primitives/Spacer";
 import { Typo } from "frontend/design-system/primitives/Typo";
+import { msg } from "@lingui/macro";
 import { usePasswordStore } from "./password.store";
 
 export function PasswordMessage() {
@@ -44,7 +45,7 @@ export function PasswordToReveal({
         }}
         systemIcon="Unlock"
         buttonText={() =>
-          isLoading ? `Revealing ${label}` : `Reveal ${label}`
+          isLoading ? msg`Revealing ${label}` : msg`Reveal ${label}`
         }
       />
     </>

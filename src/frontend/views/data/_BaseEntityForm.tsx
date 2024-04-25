@@ -16,6 +16,7 @@ import { useMemo } from "react";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { DataStateKeys, DataStates } from "frontend/lib/data/types";
 import { SystemIconsKeys } from "shared/constants/Icons";
+import { MessageDescriptor } from "@lingui/core";
 import { buildAppliedSchemaFormConfig } from "./buildAppliedSchemaFormConfig";
 import { useEntityViewStateMachine } from "./hooks/useEntityViewStateMachine";
 import { usePortalExtendEntityFormConfig } from "./portal";
@@ -28,7 +29,7 @@ type IProps = {
   allOptional?: boolean;
   onSubmit: (data: Record<string, string>) => Promise<unknown>;
   resetForm?: true;
-  buttonText: (submitting: boolean) => string;
+  buttonText: (submitting: boolean) => MessageDescriptor;
   systemIcon: SystemIconsKeys;
   fieldsToShow?: string[];
   from?: string;

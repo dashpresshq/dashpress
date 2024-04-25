@@ -1,8 +1,8 @@
+import { MessageDescriptor } from "@lingui/core";
 import { SystemIconsKeys } from "shared/constants/Icons";
 import { IEvaluateScriptContext } from "shared/types/forms";
 import { GridSpanSizes, IColorableSelection } from "shared/types/ui";
-import { FIELD_TYPES_CONFIG_MAP } from "shared/validations";
-import { IFieldValidationItem } from "shared/validations/types";
+import { FormFieldTypes, IFieldValidationItem } from "shared/validations/types";
 
 export type ISchemaFormScriptProps<T> = IEvaluateScriptContext & {
   formValues: T;
@@ -10,7 +10,7 @@ export type ISchemaFormScriptProps<T> = IEvaluateScriptContext & {
 };
 
 export interface IFormInputRightAction {
-  label: string;
+  label: MessageDescriptor;
   action: string | (() => void);
   systemIcon: SystemIconsKeys;
 }
@@ -22,7 +22,7 @@ export type ISchemaFormConfig<T> = {
     entity?: string;
     referenceUrl?: (value: string) => string;
   };
-  type: keyof typeof FIELD_TYPES_CONFIG_MAP;
+  type: FormFieldTypes;
   label?: string;
   placeholder?: string;
   description?: string;

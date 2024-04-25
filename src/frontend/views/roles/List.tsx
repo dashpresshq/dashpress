@@ -15,13 +15,14 @@ import { DELETE_BUTTON_PROPS } from "frontend/design-system/components/Button/co
 import { ActionButtons } from "frontend/design-system/components/Button/ActionButtons";
 import {
   ADMIN_ROLES_CRUD_CONFIG,
+  ROLES_ENDPOINT_CONFIG,
   useRoleDeletionMutation,
 } from "./roles.store";
 
 export function ListRoles() {
   useSetPageDetails({
     pageTitle: ADMIN_ROLES_CRUD_CONFIG.TEXT_LANG.TITLE,
-    viewKey: ADMIN_ROLES_CRUD_CONFIG.TEXT_LANG.TITLE,
+    viewKey: `list-roles`,
     permission: USER_PERMISSIONS.CAN_MANAGE_PERMISSIONS,
   });
 
@@ -86,7 +87,7 @@ export function ListRoles() {
     >
       <Card>
         <FEPaginationTable
-          dataEndpoint={ADMIN_ROLES_CRUD_CONFIG.ENDPOINTS.LIST}
+          dataEndpoint={ROLES_ENDPOINT_CONFIG.LIST}
           columns={columns}
           empty={{
             text: ADMIN_ROLES_CRUD_CONFIG.TEXT_LANG.EMPTY_LIST,

@@ -4,6 +4,7 @@ import { Form } from "react-final-form";
 import userEvent from "@testing-library/user-event";
 import { FormButton } from "frontend/design-system/components/Button/FormButton";
 import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
+import { msg } from "@lingui/macro";
 import { IconInputField } from ".";
 import { ApplicationRoot } from "../ApplicationRoot";
 
@@ -24,7 +25,7 @@ function TestComponent({
             <IconInputField value={values?.icon} />
 
             <FormButton
-              text={() => "Save"}
+              text={() => msg`Save`}
               systemIcon="Plus"
               isMakingRequest={false}
               disabled={pristine}

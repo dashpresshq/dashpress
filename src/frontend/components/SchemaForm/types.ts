@@ -5,7 +5,7 @@ import {
   ISchemaFormConfig,
 } from "shared/form-schemas/types";
 import { IColorableSelection } from "shared/types/ui";
-import { FIELD_TYPES_CONFIG_MAP } from "shared/validations";
+import { FormFieldTypes } from "shared/validations/types";
 
 export interface IFormExtension {
   fieldsState: string;
@@ -13,7 +13,7 @@ export interface IFormExtension {
 }
 
 export interface IRenderFormInputProps {
-  type: keyof typeof FIELD_TYPES_CONFIG_MAP;
+  type: FormFieldTypes;
   formProps: {
     input: FieldInputProps<any, HTMLElement>;
     meta: FieldMetaState<any>;

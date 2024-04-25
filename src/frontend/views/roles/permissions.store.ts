@@ -3,17 +3,17 @@ import { useStorageApi } from "frontend/lib/data/useApi";
 import { useApiMutateOptimisticOptions } from "frontend/lib/data/useMutate/useApiMutateOptimisticOptions";
 import { MutationHelpers } from "frontend/lib/data/useMutate/mutation-helpers";
 import { makeActionRequest } from "frontend/lib/data/makeRequest";
+import { msg } from "@lingui/macro";
 import { useRoleIdFromRouteParam } from "./hooks";
-import { ADMIN_ROLES_CRUD_CONFIG } from "./roles.store";
+import { ROLES_ENDPOINT_CONFIG } from "./roles.store";
 
 export const ADMIN_PERMISSIONS_CRUD_CONFIG = MAKE_CRUD_CONFIG({
-  path: "N/A",
-  plural: "Role Permissions",
-  singular: "Role Permission",
+  plural: msg`Role Permissions`,
+  singular: msg`Role Permission`,
 });
 
 export const ADMIN_ROLE_PERMISSION_ENDPOINT = (roleId: string) =>
-  ADMIN_ROLES_CRUD_CONFIG.ENDPOINTS.CUSTOM(roleId, "permissions");
+  ROLES_ENDPOINT_CONFIG.CUSTOM(roleId, "permissions");
 
 export function useRolePermissions() {
   const roleId = useRoleIdFromRouteParam();

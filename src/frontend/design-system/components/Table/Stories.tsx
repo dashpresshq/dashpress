@@ -4,6 +4,7 @@ import { Story } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
 import { IPaginatedDataState } from "shared/types/data";
 import { ApplicationRoot } from "frontend/components/ApplicationRoot";
+import { msg } from "@lingui/macro";
 import { Table, DEFAULT_TABLE_STATE } from ".";
 import { ITableProps } from "./types";
 import { TABLE_COLUMNS, TABLE_DATA } from "./data";
@@ -29,7 +30,7 @@ export default {
     syncPaginatedDataStateOut: action("setPaginatedDataState"),
     columns: TABLE_COLUMNS,
     empty: {
-      text: "Empty Table",
+      text: msg`Empty Table`,
     },
     tableData: TABLE_DATA,
   } as ITableProps<unknown>,

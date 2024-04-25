@@ -16,7 +16,7 @@ export function UpdateDashboardWidget() {
 
   useSetPageDetails({
     pageTitle: DASHBOARD_WIDGETS_CRUD_CONFIG.TEXT_LANG.EDIT,
-    viewKey: DASHBOARD_WIDGETS_CRUD_CONFIG.TEXT_LANG.EDIT,
+    viewKey: `edit-dashboard-widget`,
     permission: USER_PERMISSIONS.CAN_MANAGE_DASHBOARD,
   });
 

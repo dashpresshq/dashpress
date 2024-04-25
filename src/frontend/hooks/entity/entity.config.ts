@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { IFieldValidationItem } from "shared/validations/types";
+import { FormFieldTypes, IFieldValidationItem } from "shared/validations/types";
 import { IColorableSelection } from "shared/types/ui";
 import {
   getEntityFieldTypes,
@@ -15,9 +15,9 @@ import { useRouteParam } from "frontend/lib/routing/useRouteParam";
 import { MAKE_CRUD_CONFIG } from "frontend/lib/crud-config";
 import { uniqBy } from "shared/lib/array/uniq-by";
 import { userFriendlyCase } from "shared/lib/strings/friendly-case";
-import { FIELD_TYPES_CONFIG_MAP } from "shared/validations";
 import { IEntityField } from "shared/types/db";
 import { sortListByOrder } from "shared/lib/array/sort";
+import { msg } from "@lingui/macro";
 import { useEntityFields } from "./entity.store";
 import {
   getFieldTypeBoundedValidations,
@@ -46,9 +46,8 @@ export function useEntityCrudConfig(entity: string) {
   const { singular, plural } = useEntityDiction(entity);
 
   return MAKE_CRUD_CONFIG({
-    path: "N/A",
-    plural,
-    singular,
+    plural: msg`${plural}`,
+    singular: msg`${singular}`,
   });
 }
 
@@ -73,7 +72,7 @@ export function useEntityFieldLabels(entity: string) {
 
 export function useProcessedEntityFieldTypes(
   entity: string
-): Record<string, keyof typeof FIELD_TYPES_CONFIG_MAP> {
+): Record<string, FormFieldTypes> {
   const entityFieldTypesMap = useEntityConfiguration(
     "entity_columns_types",
     entity

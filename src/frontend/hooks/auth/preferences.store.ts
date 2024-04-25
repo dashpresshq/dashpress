@@ -8,6 +8,7 @@ import {
   UserPreferencesValueType,
 } from "shared/user-preferences/constants";
 import { MAKE_CRUD_CONFIG } from "frontend/lib/crud-config";
+import { msg } from "@lingui/macro";
 
 const userPrefrencesApiPath = (key: UserPreferencesKeys) => {
   return `/api/user-preferences/${key}`;
@@ -15,9 +16,8 @@ const userPrefrencesApiPath = (key: UserPreferencesKeys) => {
 
 export const MAKE_USER_PREFERENCE_CRUD_CONFIG = (key: UserPreferencesKeys) => {
   return MAKE_CRUD_CONFIG({
-    path: "N/A",
-    plural: `${USER_PREFERENCES_CONFIG[key].label} Preference `,
-    singular: `${USER_PREFERENCES_CONFIG[key].label} Preference `,
+    plural: msg`${USER_PREFERENCES_CONFIG[key].label} Preference `,
+    singular: msg`${USER_PREFERENCES_CONFIG[key].label} Preference `,
   });
 };
 

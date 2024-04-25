@@ -14,8 +14,10 @@ const useRouter = jest.spyOn(require("next/router"), "useRouter");
 
 useRouter.mockImplementation(USE_ROUTER_PARAMS({}));
 
-const buttonText = (isSubmitting: boolean) =>
-  isSubmitting ? "Submitting Form" : "Submit Form";
+const buttonText = (isSubmitting: boolean) => ({
+  id: "test",
+  message: isSubmitting ? "Submitting Form" : "Submit Form",
+});
 
 const BASE_FIELDS = {
   name: {

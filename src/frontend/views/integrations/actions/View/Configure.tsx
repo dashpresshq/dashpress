@@ -5,6 +5,7 @@ import { ToastService } from "frontend/lib/toast";
 import { Typo } from "frontend/design-system/primitives/Typo";
 import { Stack } from "frontend/design-system/primitives/Stack";
 import { Spacer } from "frontend/design-system/primitives/Spacer";
+import { typescriptSafeObjectDotKeys } from "shared/lib/objects";
 import {
   useActivationConfiguration,
   useUpdateActivatedIntegrationMutation,
@@ -28,7 +29,10 @@ export function Configure({ activationId, integrationDetail }: IProps) {
     }
   }, [activationConfiguration.error]);
 
-  if (Object.keys(integrationDetail.configurationSchema).length === 0) {
+  if (
+    typescriptSafeObjectDotKeys(integrationDetail.configurationSchema)
+      .length === 0
+  ) {
     return (
       <Stack $justify="center">
         <Typo.SM $textStyle="italic">

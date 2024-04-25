@@ -47,7 +47,7 @@ export const wrapLabelAndError = (
         <Stack $flex={1} $justify="end">
           {rightActions.map((rightAction) => (
             <SoftButton
-              key={rightAction.label}
+              key={rightAction.label.message}
               action={rightAction.action}
               size="xs"
               systemIcon={rightAction.systemIcon}

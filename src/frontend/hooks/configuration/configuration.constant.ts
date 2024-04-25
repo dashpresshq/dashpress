@@ -8,7 +8,6 @@ export const MAKE_APP_CONFIGURATION_CRUD_CONFIG = (
   key: AppConfigurationKeys
 ) => {
   return MAKE_CRUD_CONFIG({
-    path: "N/A",
     plural: APP_CONFIGURATION_CONFIG[key].label,
     singular: APP_CONFIGURATION_CONFIG[key].label,
   });

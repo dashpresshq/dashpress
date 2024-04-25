@@ -1,4 +1,5 @@
 import { createGlobalStyle } from "styled-components";
+import { typescriptSafeObjectDotEntries } from "shared/lib/objects";
 import { LIGHT_MODE } from "../theme/modes";
 import { GLOBAL_NORMALIZE_CSS } from "./normalize";
 import { GLOBAL_TOOLTIP_CSS } from "./tooltip";
@@ -8,7 +9,7 @@ import { colorModeToRootColors } from "../theme/generate";
 import { USE_ROOT_COLOR, prefixVarNameSpace } from "../theme/root";
 import { DEFAULT_PRIMARY_COLOR } from "../theme/constants";
 
-const rootColorString = Object.entries(
+const rootColorString = typescriptSafeObjectDotEntries(
   colorModeToRootColors(DEFAULT_PRIMARY_COLOR, LIGHT_MODE)
 )
   .map(([key, value]) => `${prefixVarNameSpace(key)}: ${value}`)

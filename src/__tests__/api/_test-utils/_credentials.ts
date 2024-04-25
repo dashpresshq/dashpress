@@ -1,4 +1,5 @@
 import { createConfigDomainPersistenceService } from "backend/lib/config-persistence";
+import { typescriptSafeObjectDotEntries } from "shared/lib/objects";
 
 const TEST_CREDENTIALS: Record<string, string> = {
   CREDENTIAL_KEY_1:
@@ -28,7 +29,7 @@ export const setupCredentialsTestData = async (
     return;
   }
 
-  const configAsArray = Object.entries(credentials);
+  const configAsArray = typescriptSafeObjectDotEntries(credentials);
 
   for (const [key, value] of configAsArray) {
     await configPersistenceService.upsertItem(key, value);

@@ -8,19 +8,19 @@ import { MutationHelpers } from "frontend/lib/data/useMutate/mutation-helpers";
 import { makeActionRequest } from "frontend/lib/data/makeRequest";
 import { useWaitForResponseMutationOptions } from "frontend/lib/data/useMutate/useWaitForResponseMutationOptions";
 import { useApi } from "frontend/lib/data/useApi";
-import { FORM_ACTION_CRUD_CONFIG } from "./constants";
+import { FORM_ACTION_CRUD_CONFIG, FORM_ACTION_ENDPOINT } from "./constants";
 
 const BASE_ACTIONS_ENDPOINT = `/api/integrations/actions`;
 
 export const LIST_ENTITY_FORM_ACTIONS = (entity: string) => {
-  return `${FORM_ACTION_CRUD_CONFIG.ENDPOINTS.LIST}/${entity}`;
+  return `${FORM_ACTION_ENDPOINT.LIST}/${entity}`;
 };
 
 export const useIntegrationImplementationsList = (integration: string) =>
   useApi<IIntegrationImplementationList[]>(
     `${BASE_ACTIONS_ENDPOINT}/${integration}/implementations`,
     {
-      errorMessage: CRUD_CONFIG_NOT_FOUND("Integration Implementations"),
+      errorMessage: CRUD_CONFIG_NOT_FOUND(`Integration Implementations`),
       enabled: !!integration,
       defaultData: [],
     }
@@ -31,7 +31,7 @@ export function useDeleteFormActionMutation(entity: string) {
     mutationFn: async (formActionId) =>
       await makeActionRequest(
         "DELETE",
-        FORM_ACTION_CRUD_CONFIG.ENDPOINTS.DELETE(formActionId)
+        FORM_ACTION_ENDPOINT.DELETE(formActionId)
       ),
     dataQueryPath: LIST_ENTITY_FORM_ACTIONS(entity),
     successMessage: FORM_ACTION_CRUD_CONFIG.MUTATION_LANG.DELETE,
@@ -47,7 +47,7 @@ export function useCreateFormActionMutation(entity: string) {
     mutationFn: async (configuration) => {
       return await makeActionRequest(
         "POST",
-        FORM_ACTION_CRUD_CONFIG.ENDPOINTS.CREATE,
+        FORM_ACTION_ENDPOINT.CREATE,
         configuration
       );
     },
@@ -61,7 +61,7 @@ export function useUpdateFormActionMutation(entity: string) {
     mutationFn: async (formAction) =>
       await makeActionRequest(
         "PATCH",
-        FORM_ACTION_CRUD_CONFIG.ENDPOINTS.UPDATE(formAction.id),
+        FORM_ACTION_ENDPOINT.UPDATE(formAction.id),
         formAction
       ),
     endpoints: [LIST_ENTITY_FORM_ACTIONS(entity)],

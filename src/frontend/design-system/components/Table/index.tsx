@@ -6,6 +6,7 @@ import {
 } from "@tanstack/react-table";
 import styled, { css } from "styled-components";
 import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
+import { typescriptSafeObjectDotEntries } from "shared/lib/objects";
 import { DEFAULT_TABLE_STATE } from "./constants";
 import { ITableProps } from "./types";
 import { getPageCount } from "./utils";
@@ -79,7 +80,7 @@ export function Table<T extends unknown>({
   const tableDataStringified = React.useMemo(() => {
     return data.data.map((datum) =>
       Object.fromEntries(
-        Object.entries(datum).map(([key, value]) => [
+        typescriptSafeObjectDotEntries(datum).map(([key, value]) => [
           key,
           typeof value === "number" ? `${value}` : value,
         ])

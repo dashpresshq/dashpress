@@ -12,6 +12,8 @@ import { INavigationMenuItem } from "shared/types/menu";
 import { useSessionStorage } from "react-use";
 import { PlainButton } from "frontend/design-system/components/Button/TextButton";
 import { useAppConfiguration } from "frontend/hooks/configuration/configuration.store";
+import { CRUD_CONFIG_NOT_FOUND } from "frontend/lib/crud-config";
+import { typescriptSafeObjectDotEntries } from "shared/lib/objects";
 import {
   NAVIGATION_MENU_ENDPOINT,
   SIDE_BAR_WIDTH_VARIATIONS,
@@ -89,7 +91,7 @@ interface IProps {
 
 export const useNavigationMenuItems = () => {
   return useStorageApi<INavigationMenuItem[]>(NAVIGATION_MENU_ENDPOINT, {
-    errorMessage: "Could not load navigation menu",
+    errorMessage: CRUD_CONFIG_NOT_FOUND(`Navigation Menu`),
     defaultData: [],
   });
 };
@@ -104,10 +106,10 @@ export function SideBar({ isFullWidth, setIsFullWidth }: IProps) {
   >(`navigation-current-item`, {});
 
   const setActiveItem = (depth: number, value: string) => {
-    const newValue = { ...activeItem, [depth]: value };
+    const newValue: Record<string, string> = { ...activeItem, [depth]: value };
 
     const newValueFiltered = Object.fromEntries(
-      Object.entries(newValue).filter(([key]) => +key <= depth)
+      typescriptSafeObjectDotEntries(newValue).filter(([key]) => +key <= depth)
     ) as Record<string, string>;
 
     setActiveItem$1(newValueFiltered);

@@ -4,6 +4,7 @@ import { pluralize } from "shared/lib/strings";
 import { ITableColumn } from "frontend/design-system/components/Table/types";
 import { Table } from "frontend/design-system/components/Table";
 import { IEmptyWrapperProps } from "frontend/design-system/components/EmptyWrapper/types";
+import { msg, t } from "@lingui/macro";
 import { useTableState } from "../hooks";
 import { IDataTableProps } from "../types";
 
@@ -44,8 +45,8 @@ export function BaseDataTable({
         persistentFilters.length !== currentState.filters.length
           ? // TODO: for contributors: transform this to user readable message
             {
-              text: `No result for the current ${pluralize({
-                singular: "filter",
+              text: msg`No result for the current ${pluralize({
+                singular: t`filter`,
                 count: currentState.filters.length,
                 inclusive: true,
               })} applied.`,

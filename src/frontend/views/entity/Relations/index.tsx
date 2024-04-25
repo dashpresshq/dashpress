@@ -27,6 +27,7 @@ import {
 import { Spacer } from "frontend/design-system/primitives/Spacer";
 import { ListSkeleton } from "frontend/design-system/components/Skeleton/List";
 import { useDocumentationActionButton } from "frontend/docs/constants";
+import { msg } from "@lingui/macro";
 import {
   FieldsLabelForm,
   loadingFieldsLabelForm,
@@ -34,6 +35,8 @@ import {
 import { ENTITY_CONFIGURATION_VIEW } from "../constants";
 import { EntityRelationsForm } from "./Relations.form";
 import { BaseEntitySettingsLayout } from "../_Base";
+
+const RELATIONSHIP_SETTINGS = msg`Relationship Settings`;
 
 export function EntityRelationsSettings() {
   const entity = useEntitySlug();
@@ -44,7 +47,7 @@ export function EntityRelationsSettings() {
   const referenceFields = useEntityReferenceFields(entity);
 
   useSetPageDetails({
-    pageTitle: "Relationship Settings",
+    pageTitle: RELATIONSHIP_SETTINGS,
     viewKey: ENTITY_CONFIGURATION_VIEW,
     permission: USER_PERMISSIONS.CAN_CONFIGURE_APP,
   });
@@ -60,7 +63,7 @@ export function EntityRelationsSettings() {
   );
 
   const documentationActionButton = useDocumentationActionButton(
-    "Relationship Settings"
+    RELATIONSHIP_SETTINGS
   );
 
   const getEntitiesDictionPlurals = useEntityDictionPlurals(
@@ -126,7 +129,7 @@ export function EntityRelationsSettings() {
   return (
     <BaseEntitySettingsLayout>
       <SectionBox
-        title="Relationship Settings"
+        title={RELATIONSHIP_SETTINGS}
         actionButtons={[documentationActionButton]}
       >
         <Tabs
@@ -147,7 +150,7 @@ export function EntityRelationsSettings() {
                   />
                 </ViewStateMachine>
               ),
-              label: "Reference Template",
+              label: msg`Reference Template`,
             },
             {
               content: (
@@ -173,7 +176,7 @@ export function EntityRelationsSettings() {
                   />
                 </ViewStateMachine>
               ),
-              label: "Selection",
+              label: msg`Selection`,
             },
             {
               content: (
@@ -193,7 +196,7 @@ export function EntityRelationsSettings() {
                   />
                 </ViewStateMachine>
               ),
-              label: "Labels",
+              label: msg`Labels`,
             },
           ]}
         />

@@ -2,6 +2,7 @@ import { USER_PERMISSIONS } from "shared/constants/user";
 import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
 import { SectionBox } from "frontend/design-system/components/Section/SectionBox";
 import { Tabs } from "frontend/design-system/components/Tabs";
+import { msg } from "@lingui/macro";
 import { BaseActionsLayout } from "../_Base";
 import { ACTIONS_VIEW_KEY } from "../constants";
 import { STORAGE_INTEGRATIONS_CRUD_CONFIG } from "./constants";
@@ -22,11 +23,11 @@ export function StorageIntegrations() {
         <Tabs
           contents={[
             {
-              label: "Setup",
+              label: msg`Setup`,
               content: <StorageCredentialsSettings />,
             },
             {
-              label: "General",
+              label: msg`General`,
               content: <GeneralStorageSettings />,
             },
           ]}

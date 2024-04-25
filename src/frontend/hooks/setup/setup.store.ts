@@ -15,7 +15,7 @@ interface ISetupCheckConfig {
 export function useSetupCheck(config: ISetupCheckConfig[]) {
   const router = useRouter();
   const { isLoading, data } = useStorageApi<ISetupCheck>(SETUP_CHECK_URL, {
-    errorMessage: CRUD_CONFIG_NOT_FOUND("Setup Check"),
+    errorMessage: CRUD_CONFIG_NOT_FOUND(`Setup Check`),
     defaultData: {
       hasDbCredentials: false,
       hasUsers: false,

@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
 import { Stack } from "frontend/design-system/primitives/Stack";
 import { Typo } from "frontend/design-system/primitives/Typo";
+import { typescriptSafeObjectDotEntries } from "shared/lib/objects";
 
 type Sizes = "sm" | "md";
 
@@ -113,7 +114,9 @@ export function FormSwitch(props: IProps) {
     ...rest
   } = props;
   const ariaProps = Object.fromEntries(
-    Object.entries(rest).filter(([key]) => key.startsWith("aria-"))
+    typescriptSafeObjectDotEntries(rest as Record<string, string>).filter(
+      ([key]) => String(key).startsWith("aria-")
+    )
   );
 
   useEffect(() => {

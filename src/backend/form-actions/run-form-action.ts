@@ -5,6 +5,7 @@ import { getAppCredentialsAndConstants } from "backend/integrations-configuratio
 import { INTEGRATIONS_GROUP_CONFIG } from "shared/config-bag/integrations";
 import { integrationsApiService } from "backend/integrations/integrations.service";
 import { usersApiService } from "backend/users/users.service";
+import { typescriptSafeObjectDotEntries } from "shared/lib/objects";
 import { ACTION_INTEGRATIONS } from "../integrations/libs";
 import { formActionsApiService } from "./form-actions.service";
 
@@ -40,15 +41,17 @@ export const runFormAction = async (
     );
 
     const compiledConfiguration = Object.fromEntries(
-      Object.entries(configuration || {}).map(([key, value]) => [
-        key,
-        compileTemplateString(value, {
-          data,
-          [INTEGRATIONS_GROUP_CONFIG.constants.prefix]: appConstants,
-          [INTEGRATIONS_GROUP_CONFIG.credentials.prefix]: credentials,
-          auth,
-        }),
-      ])
+      typescriptSafeObjectDotEntries(configuration || {}).map(
+        ([key, value]) => [
+          key,
+          compileTemplateString(value, {
+            data,
+            [INTEGRATIONS_GROUP_CONFIG.constants.prefix]: appConstants,
+            [INTEGRATIONS_GROUP_CONFIG.credentials.prefix]: credentials,
+            auth,
+          }),
+        ]
+      )
     );
 
     await ACTION_INTEGRATIONS[integration].performsImplementation[action].do(

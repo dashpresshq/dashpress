@@ -1,23 +1,8 @@
 import { TableFilterType } from "shared/types/data";
-import { SelectableAbleValidations } from "./types";
+import { FormFieldTypes, SelectableAbleValidations } from "./types";
 
 export const FIELD_TYPES_CONFIG_MAP: Record<
-  | "email"
-  | "password"
-  | "text"
-  | "textarea"
-  | "richtext"
-  | "url"
-  | "number"
-  | "json"
-  | "selection"
-  | "reference"
-  | "boolean"
-  | "selection-enum"
-  | "file"
-  | "image"
-  | "datetime-local"
-  | "color",
+  FormFieldTypes,
   {
     tableFilterType?: TableFilterType;
     sortable: boolean;

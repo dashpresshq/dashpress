@@ -23,8 +23,9 @@ const CRUD_CONFIG = MAKE_APP_CONFIGURATION_CRUD_CONFIG("system_settings");
 export function SystemSettings() {
   const systemSettings = useAppConfiguration("system_settings");
 
-  const documentationActionButton =
-    useDocumentationActionButton("System Settings");
+  const documentationActionButton = useDocumentationActionButton(
+    CRUD_CONFIG.TEXT_LANG.TITLE
+  );
 
   const upsertConfigurationMutation =
     useUpsertConfigurationMutation("system_settings");

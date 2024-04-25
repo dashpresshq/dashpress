@@ -22,6 +22,7 @@ import { ActionButtons } from "frontend/design-system/components/Button/ActionBu
 import { TableFilterType } from "shared/types/data";
 import { useEvaluateScriptContext } from "frontend/hooks/scripts";
 import { ReactNode } from "react";
+import { FormFieldTypes } from "shared/validations/types";
 import { viewSpecialDataTypes } from "../viewSpecialDataTypes";
 import { PortalColumnRender, usePortalTableColumns } from "./portal";
 import { evalutePresentationScript } from "../evaluatePresentationScript";
@@ -60,7 +61,7 @@ function TableActionButtons({
 }
 
 const buildFilterConfigFromType = (prop: {
-  entityType: keyof typeof FIELD_TYPES_CONFIG_MAP;
+  entityType: FormFieldTypes;
   entityFieldSelections: IColorableSelection[];
   isIdField: boolean;
   referenceField?: string;

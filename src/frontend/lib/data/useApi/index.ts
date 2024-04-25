@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { AppStorage } from "frontend/lib/storage/app";
 import { useRouter } from "next/router";
+import { useLingui } from "@lingui/react";
 import { IUseApiOptions } from "../types";
 import { makeActionRequest, makeGetRequest } from "../makeRequest";
 import { buildApiOptions } from "../_buildOptions";
@@ -9,6 +10,7 @@ import { getQueryCachekey } from "../constants/getQueryCacheKey";
 export function useApi<T>(endPoint: string, options: IUseApiOptions<T>) {
   const builtOptions = buildApiOptions(options);
   const router = useRouter();
+  const { _ } = useLingui();
   const { data = options.defaultData, ...rest } = useQuery<T>({
     enabled: router.isReady && builtOptions.enabled,
     queryKey: getQueryCachekey(endPoint),
@@ -19,10 +21,10 @@ export function useApi<T>(endPoint: string, options: IUseApiOptions<T>) {
             options.request.method,
             endPoint,
             options.request.body,
-            { errorMessage: options.errorMessage }
+            { errorMessage: _(options.errorMessage) }
           );
         }
-        return await makeGetRequest(endPoint, options.errorMessage);
+        return await makeGetRequest(endPoint, _(options.errorMessage));
       } catch (error) {
         if (options.returnUndefinedOnError) {
           return undefined;

@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { ListManager } from "frontend/design-system/components/ListManager";
 import { loadedDataState } from "frontend/lib/data/constants/loadedDataState";
 import { IListMangerItemProps } from "frontend/design-system/components/ListManager/ListManagerItem";
+import { msg } from "@lingui/macro";
 import { useStringSelections } from "../../../lib/selection";
 
 interface IProps {
@@ -47,8 +48,8 @@ export function EntitiesSelection({
       empty={{
         text:
           type === "relations"
-            ? "This entity has no relations"
-            : "This application has no active entities. Kindly add new entities through your preferred database editor then restart this application to proceed.",
+            ? msg`This entity has no relations`
+            : msg`This application has no active entities. Kindly add new entities through your preferred database editor then restart this application to proceed.`,
       }}
       sort={
         sort

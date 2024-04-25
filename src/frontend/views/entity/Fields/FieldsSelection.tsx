@@ -20,6 +20,7 @@ import { SoftButton } from "frontend/design-system/components/Button/SoftButton"
 import { FormButton } from "frontend/design-system/components/Button/FormButton";
 import { FormSwitch } from "frontend/design-system/components/Form/FormSwitch";
 import { DELETE_BUTTON_PROPS } from "frontend/design-system/components/Button/constants";
+import { msg } from "@lingui/macro";
 import { isBlackOrWhite } from "./isBlackOrWhite";
 
 const ColorBox = styled.button<{ color: string }>`
@@ -175,7 +176,7 @@ export function FieldSelectionCanvas({
                                   fields.remove(index);
                                 },
                                 isMakingRequest: false,
-                                label: "Delete Selection",
+                                label: msg`Delete Selection`,
                                 shouldConfirmAlert: undefined,
                               })}
                             />
@@ -192,7 +193,7 @@ export function FieldSelectionCanvas({
                   {ManagableEntities.includes(entityType) && (
                     <SoftButton
                       systemIcon="Plus"
-                      label="Add new option"
+                      label={msg`Add new option`}
                       size={null}
                       action={() => {
                         fields.push({

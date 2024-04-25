@@ -1,3 +1,4 @@
+import { msg } from "@lingui/macro";
 import { IAppConfigurationBag } from "shared/configurations/types";
 
 export type IPortalSystemSettings = {};
@@ -11,7 +12,7 @@ export const PORTAL_APP_CONFIGURATION_CONFIG: Record<
   IAppConfigurationBag
 > = {
   "": {
-    label: "",
+    label: msg``,
     defaultValue: "",
   },
 };

@@ -7,6 +7,7 @@ import {
   FormSkeletonSchema,
 } from "frontend/design-system/components/Skeleton/Form";
 import { SectionBox } from "frontend/design-system/components/Section/SectionBox";
+import { msg } from "@lingui/macro";
 import { BaseActionsLayout } from "../_Base";
 import { useIntegrationsList, useActiveIntegrations } from "./actions.store";
 import { ACTIONS_VIEW_KEY } from "../constants";
@@ -37,7 +38,7 @@ export function ActionsIntegrations() {
     <BaseActionsLayout>
       <SectionBox
         isLoading={!integrationDetail}
-        title={integrationDetail?.title}
+        title={msg`${integrationDetail?.title}`}
         description={integrationDetail ? integrationDetail.description : ""}
       >
         <ViewStateMachine

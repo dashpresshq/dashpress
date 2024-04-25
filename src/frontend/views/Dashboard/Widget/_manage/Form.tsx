@@ -27,6 +27,11 @@ import { loadedDataState } from "frontend/lib/data/constants/loadedDataState";
 import { useDocumentationActionButton } from "frontend/docs/constants";
 import { FormGrid } from "frontend/components/SchemaForm/form-grid";
 import { GRID_SPAN_OPTIONS } from "frontend/design-system/constants/grid";
+import { msg } from "@lingui/macro";
+import {
+  typescriptSafeObjectDotEntries,
+  typescriptSafeObjectDotKeys,
+} from "shared/lib/objects";
 import { DASHBOARD_WIDGETS_CRUD_CONFIG } from "../../constants";
 import { DashboardWidgetPresentation } from "../Presentation";
 import { WIDGET_CONFIG } from "../constants";
@@ -37,10 +42,12 @@ import { DASHBOARD_WIDGET_HEIGHTS } from "./constants";
 const DashboardTypesOptions: {
   label: string;
   value: IWidgetConfig["_type"];
-}[] = Object.entries(WIDGET_CONFIG).map(([value, { label }]) => ({
-  label,
-  value: value as IWidgetConfig["_type"],
-}));
+}[] = typescriptSafeObjectDotEntries(WIDGET_CONFIG).map(
+  ([value, { label }]) => ({
+    label,
+    value: value as IWidgetConfig["_type"],
+  })
+);
 
 const FormSchema: Partial<Record<IWidgetConfig["_type"], WidgetFormField[]>> = {
   "summary-card": ["color", "icon"],
@@ -67,8 +74,9 @@ export function DashboardWidgetForm({
   const [currentTab, setCurrentTab] = useState("");
   const runWidgetScript = useRunWidgetScript();
 
-  const documentationActionButton =
-    useDocumentationActionButton("Widget Script");
+  const documentationActionButton = useDocumentationActionButton(
+    msg`Widget Script`
+  );
 
   useEffect(() => {
     if (initialValues.script) {
@@ -178,10 +186,12 @@ export function DashboardWidgetForm({
                         <FormSelect
                           label="Color"
                           required
-                          selectData={Object.keys(ROYGBIV).map((value) => ({
-                            value,
-                            label: value,
-                          }))}
+                          selectData={typescriptSafeObjectDotKeys(ROYGBIV).map(
+                            (value) => ({
+                              value,
+                              label: value,
+                            })
+                          )}
                           meta={meta}
                           input={input}
                         />
@@ -252,7 +262,7 @@ export function DashboardWidgetForm({
                           onChange={setCurrentTab}
                           contents={[
                             {
-                              label: "Preview",
+                              label: msg`Preview`,
                               content: (
                                 <DashboardWidgetPresentation
                                   config={values}
@@ -262,7 +272,7 @@ export function DashboardWidgetForm({
                               ),
                             },
                             {
-                              label: "Data",
+                              label: msg`Data`,
                               content: (
                                 <RenderCode input={runWidgetScript.data} />
                               ),
@@ -295,7 +305,7 @@ export function DashboardWidgetForm({
                             isMakingRequest={runWidgetScript.isPending}
                             systemIcon="Eye"
                             size={null}
-                            label="Test Widget Script"
+                            label={msg`Test Widget Script`}
                           />
                         )}
 

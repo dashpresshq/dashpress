@@ -11,6 +11,7 @@ import { InfoAlert } from "frontend/design-system/components/Alert";
 import { GitHub } from "react-feather";
 import { Spacer } from "frontend/design-system/primitives/Spacer";
 import { useTimeElapsedStorageState } from "frontend/hooks/state/useTimeElapsedStorageState";
+import { msg } from "@lingui/macro";
 import { useMutateBaseSettingsMenu } from "./portal";
 
 interface IProps {
@@ -20,43 +21,43 @@ interface IProps {
 const baseMenuItems: IMenuSectionItem[] = [
   {
     action: NAVIGATION_LINKS.SETTINGS.ENTITIES,
-    name: "Enabled Entities",
+    name: msg`Enabled Entities`,
     systemIcon: "Columns",
     order: 10,
   },
   {
     action: NAVIGATION_LINKS.SETTINGS.THEME,
-    name: "Theme",
+    name: msg`Theme`,
     systemIcon: "Eye",
     order: 20,
   },
   {
     action: NAVIGATION_LINKS.SETTINGS.SITE,
-    name: "Site",
+    name: msg`Site`,
     systemIcon: "Globe",
     order: 30,
   },
   {
     action: NAVIGATION_LINKS.SETTINGS.DATA,
-    name: "General Data Settings",
+    name: msg`General Data Settings`,
     systemIcon: "Calendar",
     order: 40,
   },
   {
     action: NAVIGATION_LINKS.SETTINGS.VARIABLES,
-    name: "Variables",
+    name: msg`Variables`,
     systemIcon: "Book",
     order: 50,
   },
   {
     action: NAVIGATION_LINKS.SETTINGS.SYSTEM,
-    name: "System",
+    name: msg`System`,
     systemIcon: "Server",
     order: 60,
   },
   {
     action: NAVIGATION_LINKS.SETTINGS.VERSIONS,
-    name: "System Info",
+    name: msg`System Info`,
     systemIcon: "Terminal",
     order: 70,
   },

@@ -9,8 +9,8 @@ import {
 } from "backend/lib/key-value";
 import { sluggify } from "shared/lib/strings";
 import { IStorageIntegration } from "shared/types/actions";
+import { typescriptSafeObjectDotEntries } from "shared/lib/objects";
 import { STORAGE_INTEGRATIONS } from "./integrations";
-import { StorageIntegrations } from "./integrations/types";
 
 export class StorageApiService {
   constructor(
@@ -19,10 +19,10 @@ export class StorageApiService {
   ) {}
 
   listStorageIntegrations(): IStorageIntegration[] {
-    return Object.entries(STORAGE_INTEGRATIONS).map(
+    return typescriptSafeObjectDotEntries(STORAGE_INTEGRATIONS).map(
       ([key, { title, integrationConfigurationSchema }]) => ({
         title,
-        key: key as StorageIntegrations,
+        key,
         configurationSchema: integrationConfigurationSchema,
       })
     );
@@ -44,7 +44,7 @@ export class StorageApiService {
     if (previousStorageKey) {
       await this._credentialsApiService.deleteGroup({
         key: this.makeCredentialsGroupKey(storageKey),
-        fields: Object.keys(
+        fields: typescriptSafeObjectDotEntries(
           STORAGE_INTEGRATIONS[previousStorageKey]
             .integrationConfigurationSchema
         ),
@@ -56,7 +56,7 @@ export class StorageApiService {
     await this._credentialsApiService.upsertGroup(
       {
         key: this.makeCredentialsGroupKey(storageKey),
-        fields: Object.keys(
+        fields: typescriptSafeObjectDotEntries(
           STORAGE_INTEGRATIONS[storageKey].integrationConfigurationSchema
         ),
       },
@@ -75,7 +75,7 @@ export class StorageApiService {
     }
     return await this._credentialsApiService.useGroupValue({
       key: this.makeCredentialsGroupKey(storageKey),
-      fields: Object.keys(
+      fields: typescriptSafeObjectDotEntries(
         STORAGE_INTEGRATIONS[storageKey].integrationConfigurationSchema
       ),
     });

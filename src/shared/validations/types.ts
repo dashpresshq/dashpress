@@ -37,4 +37,22 @@ export interface IFieldValidationItem {
   constraint?: Record<string, string | number | string[]>;
 }
 
+export type FormFieldTypes =
+  | "email"
+  | "password"
+  | "text"
+  | "textarea"
+  | "richtext"
+  | "url"
+  | "number"
+  | "json"
+  | "selection"
+  | "reference"
+  | "boolean"
+  | "selection-enum"
+  | "file"
+  | "image"
+  | "datetime-local"
+  | "color";
+
 export const FOR_CODE_COV = 1;

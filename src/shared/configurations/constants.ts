@@ -1,7 +1,7 @@
-import { IFieldValidationItem } from "shared/validations/types";
+import { FormFieldTypes, IFieldValidationItem } from "shared/validations/types";
 import { IColorableSelection } from "shared/types/ui";
-import { FIELD_TYPES_CONFIG_MAP } from "shared/validations";
 import { ITableView, QueryFilterSchema } from "shared/types/data";
+import { msg } from "@lingui/macro";
 import { BaseAppConfigurationKeys } from "./base-types";
 import {
   PortalAppConfigurationKeys,
@@ -17,72 +17,72 @@ export type AppConfigurationKeys =
 export const APP_CONFIGURATION_CONFIG = {
   ...PORTAL_APP_CONFIGURATION_CONFIG,
   hidden_entity_table_columns: {
-    label: "Table Columns Settings",
+    label: msg`Table Columns Settings`,
     requireEntity: true,
     defaultValue: [] as string[],
   },
   hidden_entity_create_columns: {
-    label: "Create Columns Settings",
+    label: msg`Create Columns Settings`,
     requireEntity: true,
     defaultValue: [] as string[],
   },
   hidden_entity_update_columns: {
-    label: "Update Columns Settings",
+    label: msg`Update Columns Settings`,
     requireEntity: true,
     defaultValue: [] as string[],
   },
   hidden_entity_details_columns: {
-    label: "Details Columns Settings",
+    label: msg`Details Columns Settings`,
     requireEntity: true,
     defaultValue: [] as string[],
   },
   entity_fields_orders_table: {
-    label: "Table Fields Order",
+    label: msg`Table Fields Order`,
     requireEntity: true,
     defaultValue: [] as string[],
   },
   entity_fields_orders_create: {
-    label: "Create Fields Order",
+    label: msg`Create Fields Order`,
     requireEntity: true,
     defaultValue: [] as string[],
   },
   entity_fields_orders_update: {
-    label: "Update Fields Order",
+    label: msg`Update Fields Order`,
     requireEntity: true,
     defaultValue: [] as string[],
   },
   entity_fields_orders_details: {
-    label: "Details Fields Order",
+    label: msg`Details Fields Order`,
     requireEntity: true,
     defaultValue: [] as string[],
   },
   entity_columns_labels: {
-    label: "Column Labels Settings",
+    label: msg`Column Labels Settings`,
     requireEntity: true,
     defaultValue: {} as Record<string, string>,
   },
   entity_columns_types: {
-    label: "Column Types Settings",
+    label: msg`Column Types Settings`,
     requireEntity: true,
-    defaultValue: {} as Record<string, keyof typeof FIELD_TYPES_CONFIG_MAP>,
+    defaultValue: {} as Record<string, FormFieldTypes>,
   },
   entity_validations: {
-    label: "Validations",
+    label: msg`Validations`,
     requireEntity: true,
     defaultValue: {} as Record<string, IFieldValidationItem[]>,
   },
   entity_selections: {
-    label: "Selections Settings",
+    label: msg`Selections Settings`,
     requireEntity: true,
     defaultValue: {} as Record<string, IColorableSelection[]>,
   },
   entity_diction: {
-    label: "Diction Settings",
+    label: msg`Diction Settings`,
     requireEntity: true,
     defaultValue: { singular: "", plural: "" },
   },
   entity_form_extension: {
-    label: "Form Scripts",
+    label: msg`Form Scripts`,
     requireEntity: true,
     defaultValue: {
       fieldsState: "",
@@ -91,7 +91,7 @@ export const APP_CONFIGURATION_CONFIG = {
     },
   },
   file_upload_settings: {
-    label: "File Uploads Settings",
+    label: msg`File Uploads Settings`,
     defaultValue: {
       defaultMaxFileSizeInMB: 5,
       fileNameFormat: "{{random_letters}}-{{file_name}}-{{file_extension}}",
@@ -99,14 +99,14 @@ export const APP_CONFIGURATION_CONFIG = {
     },
   },
   entity_presentation_script: {
-    label: "Presentation Scripts",
+    label: msg`Presentation Scripts`,
     requireEntity: true,
     defaultValue: {
       script: "",
     },
   },
   entity_crud_settings: {
-    label: "CRUD Settings",
+    label: msg`CRUD Settings`,
     requireEntity: true,
     defaultValue: {
       create: true,
@@ -117,12 +117,12 @@ export const APP_CONFIGURATION_CONFIG = {
     } as IEntityCrudSettings,
   },
   table_views: {
-    label: "Table Views",
+    label: msg`Table Views`,
     requireEntity: true,
     defaultValue: [] as ITableView[],
   },
   persistent_query: {
-    label: "Persistent Query",
+    label: msg`Persistent Query`,
     requiresEntity: true,
     defaultValue: {
       children: [],
@@ -130,24 +130,24 @@ export const APP_CONFIGURATION_CONFIG = {
     } as QueryFilterSchema,
   },
   entity_relations_order: {
-    label: "Relations Order",
+    label: msg`Relations Order`,
     requireEntity: true,
     defaultValue: [] as string[],
   },
   hidden_entity_relations: {
-    label: "Enabled Relations",
+    label: msg`Enabled Relations`,
     requireEntity: true,
     defaultValue: [] as string[],
   },
   metadata_columns: {
-    label: "Metadata Columns",
+    label: msg`Metadata Columns`,
     defaultValue: {
       createdAt: "created_at",
       updatedAt: "updated_at",
     },
   },
   entity_relation_template: {
-    label: "Relation Template",
+    label: msg`Relation Template`,
     requireEntity: true,
     defaultValue: { format: "", fields: [] } as {
       format: string;
@@ -155,36 +155,36 @@ export const APP_CONFIGURATION_CONFIG = {
     },
   },
   entity_relations_labels: {
-    label: "Relation Labels",
+    label: msg`Relation Labels`,
     requireEntity: true,
     defaultValue: {} as Record<string, string>,
   },
   disabled_entities: {
-    label: "Enabled Entities Settings",
+    label: msg`Enabled Entities Settings`,
     defaultValue: [] as string[],
   },
   disabled_menu_entities: {
-    label: "Menu Settings",
+    label: msg`Menu Settings`,
     defaultValue: [] as string[],
   },
   menu_entities_order: {
-    label: "Menu Settings",
+    label: msg`Menu Settings`,
     defaultValue: [] as string[],
   },
   default_date_format: {
-    label: "Date Format",
+    label: msg`Date Format`,
     defaultValue: "do MMM yyyy, h:MM aa",
   },
   system_settings: {
-    label: "System Settings",
+    label: msg`System Settings`,
     defaultValue: DEFAULT_SYSTEM_SETTINGS,
   },
   users_to_database_link: {
-    label: "Users to Database Link",
+    label: msg`Users to Database Link`,
     defaultValue: { table: "", field: "" },
   },
   theme_color: {
-    label: "Theme Settings",
+    label: msg`Theme Settings`,
     guest: true,
     defaultValue: {
       primary: "#4b38b3",
@@ -192,7 +192,7 @@ export const APP_CONFIGURATION_CONFIG = {
     },
   },
   site_settings: {
-    label: "Site Settings",
+    label: msg`Site Settings`,
     guest: true,
     defaultValue: {
       name: "DashPress",

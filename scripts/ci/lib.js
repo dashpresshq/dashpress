@@ -4,7 +4,7 @@ const fs = require("fs");
 const listAllFilesInDir = (dir, files = []) => {
   const directoryPath = dir.startsWith("/")
     ? dir
-    : path.join(process.cwd(), dir);
+    : path.resolve(__dirname, "../../", dir);
   const filesInDir = fs.readdirSync(directoryPath);
 
   filesInDir.forEach((file) => {

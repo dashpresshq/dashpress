@@ -14,7 +14,7 @@ import { ComponentIsLoading } from "frontend/design-system/components/ComponentI
 import { Typo } from "frontend/design-system/primitives/Typo";
 import { SchemaForm } from "frontend/components/SchemaForm";
 import { useGuestCheck } from "frontend/hooks/auth/useGuestCheck";
-import { t } from "@lingui/macro";
+import { msg, t } from "@lingui/macro";
 import { useHandleNoTokenAuthResponse } from "./portal";
 
 function useSignInMutation() {
@@ -76,7 +76,7 @@ export function SignIn() {
         onSubmit={signInMutation.mutateAsync}
         initialValues={{ rememberMe: true }}
         buttonText={(isSubmitting) =>
-          isSubmitting ? t`Signing In` : t`Sign In`
+          isSubmitting ? msg`Signing In` : msg`Sign In`
         }
         systemIcon="LogIn"
         fields={AUTH_SIGNIN_FORM_SCHEMA}

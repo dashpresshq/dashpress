@@ -1,4 +1,5 @@
 import { render, screen } from "@testing-library/react";
+import { msg } from "@lingui/macro";
 import { Table } from ".";
 import { ITableProps } from "./types";
 import { TABLE_COLUMNS, TABLE_DATA } from "./data";
@@ -12,7 +13,7 @@ const DEFAULT_TABLE_PROPS: ITableProps<unknown> = {
   syncPaginatedDataStateOut: jest.fn(),
   columns: TABLE_COLUMNS,
   empty: {
-    text: "Empty Table",
+    text: msg`Empty Table`,
   },
   tableData: TABLE_DATA,
 };

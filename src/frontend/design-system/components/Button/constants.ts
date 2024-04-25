@@ -1,9 +1,10 @@
+import { MessageDescriptor } from "@lingui/core";
 import { IGroupActionButton } from "./types";
 
 export const DELETE_BUTTON_PROPS = (props: {
   action: () => void;
   isMakingRequest: boolean;
-  label: string;
+  label: MessageDescriptor;
   shouldConfirmAlert?: undefined;
 }): IGroupActionButton => ({
   id: "delete",

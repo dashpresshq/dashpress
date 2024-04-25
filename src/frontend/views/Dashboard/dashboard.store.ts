@@ -36,7 +36,7 @@ export const useDasboardWidgetScriptData = (
   return useApi<unknown>(
     DASHBOARD_WIDGET_SCRIPT_ENDPOINT(widgetId, relativeDate),
     {
-      errorMessage: CRUD_CONFIG_NOT_FOUND("Script"),
+      errorMessage: CRUD_CONFIG_NOT_FOUND(`Script`),
       defaultData: undefined,
     }
   );

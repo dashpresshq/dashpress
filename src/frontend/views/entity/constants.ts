@@ -5,21 +5,23 @@ import { USER_PERMISSIONS } from "shared/constants/user";
 import { CrudViewsKeys } from "shared/configurations";
 import { IDropDownMenuItem } from "frontend/design-system/components/DropdownMenu";
 import { useEntityCrudConfig } from "frontend/hooks/entity/entity.config";
+import { msg } from "@lingui/macro";
+import { MessageDescriptor } from "@lingui/core";
 
 export const ENTITY_CONFIGURATION_VIEW = "ENTITY_CONFIGURATION_VIEW";
 
 export const ENTITY_FIELD_SETTINGS_TAB_LABELS = {
-  LABELS: "Labels",
-  FORM: "Form",
-  ORDER: "Order",
+  LABELS: msg`Labels`,
+  FORM: msg`Form`,
+  ORDER: msg`Order`,
 };
 
-export const ENTITY_CRUD_LABELS: Record<CrudViewsKeys, string> = {
-  create: "Create",
-  update: "Update",
-  details: "Details",
-  table: "Table",
-  delete: "Delete",
+export const ENTITY_CRUD_LABELS: Record<CrudViewsKeys, MessageDescriptor> = {
+  create: msg`Create`,
+  update: msg`Update`,
+  details: msg`Details`,
+  table: msg`Table`,
+  delete: msg`Delete`,
 };
 
 export const useEntityActionMenuItems = (
@@ -43,7 +45,7 @@ export const useEntityActionMenuItems = (
     {
       id: `${slugEntity} Settings`,
       systemIcon: "Settings",
-      label: `${entityCrudConfig.TEXT_LANG.TITLE} Settings`,
+      label: entityCrudConfig.TEXT_LANG.SETTINGS,
       action: NAVIGATION_LINKS.ENTITY.CONFIG.CRUD(slugEntity),
     },
   ];

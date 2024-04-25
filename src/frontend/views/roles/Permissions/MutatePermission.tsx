@@ -8,6 +8,7 @@ import { USER_PERMISSIONS } from "shared/constants/user";
 import { PORTAL_PERMISSION_HEIRACHIES } from "shared/logic/permissions/portal";
 import { loadedDataState } from "frontend/lib/data/constants/loadedDataState";
 import { IListMangerItemProps } from "frontend/design-system/components/ListManager/ListManagerItem";
+import { msg } from "@lingui/macro";
 import {
   useCreateRolePermissionMutation,
   useRolePermissionDeletionMutation,
@@ -76,7 +77,7 @@ export function MutatePermission({
               systemIcon={isOverAchingPermissionSelected ? "Check" : "Square"}
               size="sm"
               isInverse
-              text={() => userFriendlyCase(overAchingPermission)}
+              text={() => msg`${userFriendlyCase(overAchingPermission)}`}
               onClick={() => {
                 if (isOverAchingPermissionSelected) {
                   rolePermissionDeletionMutation.mutate([overAchingPermission]);
@@ -95,7 +96,7 @@ export function MutatePermission({
         listLengthGuess={10}
         labelField="label"
         empty={{
-          text: "No available permission for this section",
+          text: msg`No available permission for this section`,
         }}
         render={(menuItem) => {
           const isPermissionSelected = rolePermissions.data.includes(

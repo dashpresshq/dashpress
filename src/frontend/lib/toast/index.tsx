@@ -1,5 +1,8 @@
 import toast, { Toast } from "react-hot-toast";
 import { X } from "react-feather";
+import { MessageDescriptor } from "@lingui/core";
+import { useLingui } from "@lingui/react";
+import { msg } from "@lingui/macro";
 import { getBestErrorMessage } from "./utils";
 
 const COLORS = {
@@ -13,7 +16,25 @@ const toastStyle = (color: keyof typeof COLORS) => ({
   maxWidth: "550px",
 });
 
-function ToastMessage({ message, toastT }: { message: string; toastT: Toast }) {
+function isMessageDescriptor<T>(
+  message: MessageDescriptor | T
+): message is MessageDescriptor {
+  return typeof (message as MessageDescriptor).message === "string";
+}
+
+type ToastMessageWithAction = {
+  message: MessageDescriptor;
+  action: { label: MessageDescriptor; action: () => void };
+};
+
+function ToastMessage({
+  message,
+  toastT,
+}: {
+  message: MessageDescriptor;
+  toastT: Toast;
+}) {
+  const { _ } = useLingui();
   return (
     <span
       style={{
@@ -21,7 +42,7 @@ function ToastMessage({ message, toastT }: { message: string; toastT: Toast }) {
         alignItems: "center",
       }}
     >
-      <span>{message}</span>
+      <span>{_(message)}</span>
       <X
         size="18"
         role="button"
@@ -38,17 +59,51 @@ function ToastMessage({ message, toastT }: { message: string; toastT: Toast }) {
   );
 }
 
+function ToastAction({
+  message,
+  toastId,
+}: {
+  message: ToastMessageWithAction;
+  toastId: string;
+}) {
+  const { _ } = useLingui();
+  return (
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+      }}
+    >
+      <button
+        type="button"
+        onClick={() => {
+          message.action.action();
+          toast.dismiss(toastId);
+        }}
+        style={{
+          cursor: "pointer",
+          border: 0,
+          display: "inline-block",
+          background: "inherit",
+          padding: 0,
+          color: COLORS.success,
+          fontSize: 15,
+          marginTop: 8,
+        }}
+      >
+        {_(message.action.label)}
+      </button>
+    </div>
+  );
+}
+
 export const ToastService = {
-  success: (
-    message:
-      | string
-      | { message: string; action: { label: string; action: () => void } }
-  ) => {
-    if (typeof message === "string") {
+  success: (message: MessageDescriptor | ToastMessageWithAction) => {
+    if (isMessageDescriptor(message)) {
       toast.success((t) => <ToastMessage message={message} toastT={t} />, {
         style: toastStyle("success"),
         duration: 7000,
-        id: message,
+        id: message.id,
       });
       return;
     }
@@ -57,48 +112,26 @@ export const ToastService = {
       (t) => (
         <div>
           <ToastMessage message={message.message} toastT={t} />
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-            }}
-          >
-            <button
-              type="button"
-              onClick={() => {
-                message.action.action();
-                toast.dismiss(t.id);
-              }}
-              style={{
-                cursor: "pointer",
-                border: 0,
-                display: "inline-block",
-                background: "inherit",
-                padding: 0,
-                color: COLORS.success,
-                fontSize: 15,
-                marginTop: 8,
-              }}
-            >
-              {message.action.label}
-            </button>
-          </div>
+          <ToastAction message={message} toastId={t.id} />
         </div>
       ),
       {
         style: toastStyle("success"),
         duration: 7000,
-        id: message.message,
+        id: message.message.id,
       }
     );
   },
 
   error: (message: unknown) => {
     const errorMessage = getBestErrorMessage(message);
-    toast.error((t) => <ToastMessage message={errorMessage} toastT={t} />, {
-      style: toastStyle("danger"),
-      duration: 7000,
-      id: errorMessage,
-    });
+    toast.error(
+      (t) => <ToastMessage message={msg`${errorMessage}`} toastT={t} />,
+      {
+        style: toastStyle("danger"),
+        duration: 7000,
+        id: errorMessage,
+      }
+    );
   },
 };

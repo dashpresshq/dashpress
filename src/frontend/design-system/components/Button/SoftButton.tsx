@@ -3,6 +3,7 @@ import { Loader } from "react-feather";
 import { Stack } from "frontend/design-system/primitives/Stack";
 import { SystemIcon } from "frontend/design-system/Icons/System";
 import { BaseSyntheticEvent } from "react";
+import { useLingui } from "@lingui/react";
 import { SoftButtonStyled } from "./Button";
 import { Spin } from "../_/Spin";
 import { Tooltip } from "../Tooltip";
@@ -27,6 +28,10 @@ export function SoftButton({
     size: 14,
   };
 
+  const { _ } = useLingui();
+
+  const labelString = _(label);
+
   const content = isMakingRequest ? (
     <Spin as={Loader} {...iconProps} />
   ) : (
@@ -39,7 +44,7 @@ export function SoftButton({
       <>
         <SystemIcon icon={systemIcon} {...iconProps} />
         <span style={{ whiteSpace: "nowrap" }}>
-          {label && !justIcon ? label : null}
+          {label && !justIcon ? labelString : null}
         </span>
       </>
     </Stack>
@@ -51,12 +56,12 @@ export function SoftButton({
     disabled: disabled || isMakingRequest,
     $justIcon: justIcon,
     $color: color,
-    "aria-label": justIcon ? label : undefined,
+    "aria-label": justIcon ? labelString : undefined,
   };
 
   const toolTipProps = {
     place: "top",
-    text: justIcon && !noToolTip && label,
+    text: justIcon && !noToolTip && labelString,
   } as const;
 
   if (typeof action === "string") {

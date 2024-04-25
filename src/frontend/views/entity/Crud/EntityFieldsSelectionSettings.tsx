@@ -27,6 +27,7 @@ import {
   ENTITY_TABLE_PATH,
 } from "frontend/hooks/data/constants";
 import { DataCrudKeys } from "shared/types/data";
+import { msg } from "@lingui/macro";
 import { ENTITY_CRUD_LABELS } from "../constants";
 import { makeEntityFieldsSelectionKey } from "./constants";
 
@@ -58,7 +59,7 @@ export function ToggleCrudState({
           systemIcon={toggling.enabled ? "Check" : "Square"}
           size="sm"
           isInverse
-          text={() => `Enable ${ENTITY_CRUD_LABELS[crudKey]} Functionality`}
+          text={() => msg`Enable ${ENTITY_CRUD_LABELS[crudKey]} Functionality`}
           onClick={() => toggling.onToggle()}
         />
       )}
@@ -131,7 +132,7 @@ export function EntityFieldsSelectionSettings({
         listLengthGuess={10}
         labelField="name"
         empty={{
-          text: "This entity has no fields. Kindly add fields from your prefer database tool to manage them here",
+          text: msg`This entity has no fields. Kindly add fields from your prefer database tool to manage them here`,
         }}
         getLabel={getEntityFieldLabels}
         sort={{

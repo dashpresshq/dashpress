@@ -1,4 +1,5 @@
 import { RedisClientType } from "redis";
+import { typescriptSafeObjectDotEntries } from "shared/lib/objects";
 import { ConfigKeys, ConfigApiService } from "../config/config.service";
 import { getRedisConnection } from "../connection/redis";
 import { AbstractConfigDataPersistenceService } from "./AbstractConfigDataPersistenceService";
@@ -50,7 +51,10 @@ export class RedisConfigDataPersistenceAdaptor<
     ).hGetAll(this.wrapWithConfigDomain());
 
     return Object.fromEntries(
-      Object.entries(allData).map(([key, value]) => [key, JSON.parse(value)])
+      typescriptSafeObjectDotEntries(allData).map(([key, value]) => [
+        key,
+        JSON.parse(value),
+      ])
     );
   }
 

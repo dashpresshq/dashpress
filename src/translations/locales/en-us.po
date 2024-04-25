@@ -13,6 +13,45 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
+msgid ""
+msgstr "/+Z5u4"
+
+msgid "\"{0}\" Selection"
+msgstr "\"{0}\" Selection"
+
+msgid "\"{0}\" Validations"
+msgstr "\"{0}\" Validations"
+
+msgid "{0}"
+msgstr "{0}"
+
+msgid "{0} - {1}"
+msgstr "{0} - {1}"
+
+msgid "{0} Preference"
+msgstr "{0} Preference"
+
+msgid "{buttonLabel}"
+msgstr "{buttonLabel}"
+
+msgid "{errorMessage}"
+msgstr "{errorMessage}"
+
+msgid "{https://date-fns.org/docs/format}"
+msgstr "{https://date-fns.org/docs/format}"
+
+msgid "{key}"
+msgstr "{key}"
+
+msgid "{label}"
+msgstr "{label}"
+
+msgid "{plural}"
+msgstr "{plural}"
+
+msgid "{singular}"
+msgstr "{singular}"
+
 msgid "{singular} {action} Successfully"
 msgstr "{singular} {action} Successfully"
 
@@ -31,29 +70,107 @@ msgstr "{singular} Details"
 msgid "{singular} Saved Successfully"
 msgstr "{singular} Saved Successfully"
 
+msgid "{singular} Settings"
+msgstr "{singular} Settings"
+
 msgid "{singular} Updated Successfully"
 msgstr "{singular} Updated Successfully"
+
+msgid "{title}({currentCount})"
+msgstr "{title}({currentCount})"
 
 msgid "Account Preferences"
 msgstr "Account Preferences"
 
+msgid "Account Profile"
+msgstr "Account Profile"
+
+msgid "Account Was Successfully Setup"
+msgstr "Account Was Successfully Setup"
+
 msgid "Action"
 msgstr "Action"
+
+msgid "Actions"
+msgstr "Actions"
+
+msgid "Activate {0}"
+msgstr "Activate {0}"
+
+msgid "Activating {0}"
+msgstr "Activating {0}"
+
+msgid "Add Filter"
+msgstr "Add Filter"
+
+msgid "Add Nested Filter"
+msgstr "Add Nested Filter"
 
 msgid "Add New {singular}"
 msgstr "Add New {singular}"
 
+msgid "Add new option"
+msgstr "Add new option"
+
+msgid "App"
+msgstr "App"
+
+msgid "Bar Label"
+msgstr "Bar Label"
+
+msgid "Baz Label"
+msgstr "Baz Label"
+
+msgid "Cancel"
+msgstr "Cancel"
+
 msgid "Change Language"
 msgstr "Change Language"
 
-msgid "Click here to view {0}"
-msgstr "Click here to view {0}"
+msgid "Click here to view {singular}"
+msgstr "Click here to view {singular}"
+
+msgid "Close Canvas"
+msgstr "Close Canvas"
+
+msgid "Configure"
+msgstr "Configure"
+
+msgid "Configure Selections"
+msgstr "Configure Selections"
+
+msgid "Configure Validation"
+msgstr "Configure Validation"
+
+msgid "Confirm"
+msgstr "Confirm"
+
+msgid "Constant"
+msgstr "Constant"
+
+msgid "Constants"
+msgstr "Constants"
 
 msgid "Create"
 msgstr "Create"
 
-msgid "Creating"
-msgstr "Creating"
+msgid "Create {singular}"
+msgstr "Create {singular}"
+
+msgid "Create It"
+msgstr "Create It"
+
+msgid "Creating {singular}"
+msgstr "Creating {singular}"
+
+msgid "Credentials Was Successfully Setup"
+msgstr "Credentials Was Successfully Setup"
+
+msgid "CRUD"
+msgstr "CRUD"
+
+msgid "CRUD Settings"
+msgstr "CRUD Settings"
 
 msgid "Dark"
 msgstr "Dark"
@@ -64,20 +181,113 @@ msgstr "Dashboard"
 msgid "Dashboard Widget"
 msgstr "Dashboard Widget"
 
+msgid "Dashboard Widgets"
+msgstr "Dashboard Widgets"
+
+msgid "Dashboards"
+msgstr "Dashboards"
+
+msgid "Data"
+msgstr "Data"
+
+msgid "Deactivate"
+msgstr "Deactivate"
+
+msgid "Deactivate {0}"
+msgstr "Deactivate {0}"
+
+msgid "Deactivating {0}"
+msgstr "Deactivating {0}"
+
+msgid "Delete"
+msgstr "Delete"
+
 msgid "Delete {singular}"
 msgstr "Delete {singular}"
+
+msgid "Delete Selection"
+msgstr "Delete Selection"
+
+msgid "Details"
+msgstr "Details"
+
+msgid "Diction"
+msgstr "Diction"
+
+msgid "Diction Settings"
+msgstr "Diction Settings"
+
+msgid "Done"
+msgstr "Done"
+
+msgid "Download"
+msgstr "Download"
+
+msgid "Edit"
+msgstr "Edit"
 
 msgid "Edit {singular}"
 msgstr "Edit {singular}"
 
+msgid "Empty Table"
+msgstr "Empty Table"
+
+msgid "Enable {0} Functionality"
+msgstr "Enable {0} Functionality"
+
+msgid "Enabled Entities"
+msgstr "Enabled Entities"
+
 msgid "Enter your credentials to continue"
 msgstr "Enter your credentials to continue"
+
+msgid "Entities"
+msgstr "Entities"
+
+msgid "Environment Variable"
+msgstr "Environment Variable"
+
+msgid "Environment Variables"
+msgstr "Environment Variables"
+
+msgid "Explain {title}"
+msgstr "Explain {title}"
+
+msgid "Field Settings"
+msgstr "Field Settings"
+
+msgid "Fields"
+msgstr "Fields"
 
 msgid "File Storage"
 msgstr "File Storage"
 
+msgid "Follow us on Twitter"
+msgstr "Follow us on Twitter"
+
+msgid "Foo Label"
+msgstr "Foo Label"
+
+msgid "Form"
+msgstr "Form"
+
 msgid "Form Action"
 msgstr "Form Action"
+
+msgid "Form Actions"
+msgstr "Form Actions"
+
+msgid "Form Scripts"
+msgstr "Form Scripts"
+
+msgid "General"
+msgstr "General"
+
+msgid "General Data Settings"
+msgstr "General Data Settings"
+
+msgid "Go Back"
+msgstr "Go Back"
 
 msgid "Hi, {0}"
 msgstr "Hi, {0}"
@@ -85,11 +295,20 @@ msgstr "Hi, {0}"
 msgid "Integration"
 msgstr "Integration"
 
+msgid "Join our Discord community"
+msgstr "Join our Discord community"
+
+msgid "Labels"
+msgstr "Labels"
+
 msgid "Language"
 msgstr "Language"
 
 msgid "Light"
 msgstr "Light"
+
+msgid "Link Users To Database"
+msgstr "Link Users To Database"
 
 msgid "Log Out"
 msgstr "Log Out"
@@ -97,8 +316,32 @@ msgstr "Log Out"
 msgid "Manage {plural}"
 msgstr "Manage {plural}"
 
+msgid "Manage {title}"
+msgstr "Manage {title}"
+
+msgid "Manage Variables"
+msgstr "Manage Variables"
+
+msgid "Menu Settings"
+msgstr "Menu Settings"
+
+msgid "My Account"
+msgstr "My Account"
+
 msgid "No {singular} Has Been Added Yet"
 msgstr "No {singular} Has Been Added Yet"
+
+msgid "No available permission for this section"
+msgstr "No available permission for this section"
+
+msgid "No Data"
+msgstr "No Data"
+
+msgid "No result for the current {0} applied."
+msgstr "No result for the current {0} applied."
+
+msgid "No Search Results"
+msgstr "No Search Results"
 
 msgid "On Create"
 msgstr "On Create"
@@ -109,20 +352,113 @@ msgstr "On Delete"
 msgid "On Update"
 msgstr "On Update"
 
+msgid "Order"
+msgstr "Order"
+
 msgid "Password"
 msgstr "Password"
+
+msgid "Password Reset Successfully"
+msgstr "Password Reset Successfully"
+
+msgid "Password will not be changed on demo account"
+msgstr "Password will not be changed on demo account"
+
+msgid "Persistent Query"
+msgstr "Persistent Query"
 
 msgid "Preferences"
 msgstr "Preferences"
 
+msgid "Presentation Scripts"
+msgstr "Presentation Scripts"
+
+msgid "Preview"
+msgstr "Preview"
+
 msgid "Profile"
 msgstr "Profile"
+
+msgid "Reference Template"
+msgstr "Reference Template"
+
+msgid "Relations"
+msgstr "Relations"
+
+msgid "Relationship Settings"
+msgstr "Relationship Settings"
+
+msgid "Remove"
+msgstr "Remove"
+
+msgid "Remove Nested Filter"
+msgstr "Remove Nested Filter"
+
+msgid "Reset"
+msgstr "Reset"
+
+msgid "Reset Password"
+msgstr "Reset Password"
+
+msgid "Reset User Password"
+msgstr "Reset User Password"
+
+msgid "Resetting Password"
+msgstr "Resetting Password"
+
+msgid "Reveal {label}"
+msgstr "Reveal {label}"
+
+msgid "Revealing {label}"
+msgstr "Revealing {label}"
+
+msgid "Role"
+msgstr "Role"
+
+msgid "Role Permission"
+msgstr "Role Permission"
+
+msgid "Role Permissions"
+msgstr "Role Permissions"
+
+msgid "Roles"
+msgstr "Roles"
+
+msgid "Roles and Permissions"
+msgstr "Roles and Permissions"
 
 msgid "Save"
 msgstr "Save"
 
-msgid "Saving"
-msgstr "Saving"
+msgid "Save {singular}"
+msgstr "Save {singular}"
+
+msgid "Saving {singular}"
+msgstr "Saving {singular}"
+
+msgid "Secret"
+msgstr "Secret"
+
+msgid "Secrets"
+msgstr "Secrets"
+
+msgid "Selection"
+msgstr "Selection"
+
+msgid "Setting Up Account"
+msgstr "Setting Up Account"
+
+msgid "Setting Up Credentials"
+msgstr "Setting Up Credentials"
+
+msgid "Setup"
+msgstr "Setup"
+
+msgid "Setup Account"
+msgstr "Setup Account"
+
+msgid "Setup Credentials"
+msgstr "Setup Credentials"
 
 msgid "Showing <0/> entries of <1>{0}</1> results"
 msgstr "Showing <0/> entries of <1>{0}</1> results"
@@ -133,11 +469,89 @@ msgstr "Sign In"
 msgid "Signing In"
 msgstr "Signing In"
 
+msgid "Site"
+msgstr "Site"
+
+msgid "Star us on Github"
+msgstr "Star us on Github"
+
+msgid "System"
+msgstr "System"
+
+msgid "System Info"
+msgstr "System Info"
+
+msgid "System Information"
+msgstr "System Information"
+
+msgid "Table"
+msgstr "Table"
+
+msgid "Table View"
+msgstr "Table View"
+
+msgid "Table Views"
+msgstr "Table Views"
+
+msgid "Test Widget Script"
+msgstr "Test Widget Script"
+
+msgid "Theme"
+msgstr "Theme"
+
+msgid "Theme Settings"
+msgstr "Theme Settings"
+
+msgid "This application has no active entities. Kindly add new entities through your preferred database editor then restart this application to proceed."
+msgstr "This application has no active entities. Kindly add new entities through your preferred database editor then restart this application to proceed."
+
+msgid "This entity has no fields. Kindly add fields from your prefer database tool to manage them here"
+msgstr "This entity has no fields. Kindly add fields from your prefer database tool to manage them here"
+
+msgid "This entity has no relations"
+msgstr "This entity has no relations"
+
+msgid "Toggle Connection URL"
+msgstr "Toggle Connection URL"
+
 msgid "Update"
 msgstr "Update"
 
-msgid "Updating"
-msgstr "Updating"
+msgid "Update {singular}"
+msgstr "Update {singular}"
+
+msgid "Updating {singular}"
+msgstr "Updating {singular}"
+
+msgid "Use Icon"
+msgstr "Use Icon"
+
+msgid "Use SVG"
+msgstr "Use SVG"
 
 msgid "User"
 msgstr "User"
+
+msgid "Users"
+msgstr "Users"
+
+msgid "Users Link To Database"
+msgstr "Users Link To Database"
+
+msgid "Variables"
+msgstr "Variables"
+
+msgid "View"
+msgstr "View"
+
+msgid "View {0}"
+msgstr "View {0}"
+
+msgid "View Full Details"
+msgstr "View Full Details"
+
+msgid "Visit our website"
+msgstr "Visit our website"
+
+msgid "Widget Script"
+msgstr "Widget Script"

@@ -1,4 +1,5 @@
 import { createStore } from "frontend/lib/store";
+import { typescriptSafeObjectDotEntries } from "shared/lib/objects";
 
 type IStore = {
   values: Record<string, Record<string, boolean>>;
@@ -15,7 +16,7 @@ const useSelectionStore = createStore<IStore>((set) => ({
 
 const getAllSelections = (selections: Record<string, boolean>) => {
   return (
-    Object.entries(selections)
+    typescriptSafeObjectDotEntries(selections)
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       .filter(([_, value]) => value)
       .map(([_]) => _)

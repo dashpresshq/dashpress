@@ -9,6 +9,7 @@ import { Z_INDEXES } from "frontend/design-system/constants/zIndex";
 import { SystemIcon } from "frontend/design-system/Icons/System";
 import { useRouter } from "next/router";
 import { useToggle } from "frontend/hooks/state/useToggleState";
+import { useLingui } from "@lingui/react";
 import { SoftButtonStyled } from "../Button/Button";
 import { BREAKPOINTS } from "../../constants";
 import { Spin } from "../_/Spin";
@@ -130,6 +131,8 @@ export function DropDownMenu({
   const dropDownMode = useToggle();
   const router = useRouter();
 
+  const { _ } = useLingui();
+
   const toggleDropDown = () => {
     if (!disabled) {
       dropDownMode.toggle();
@@ -186,7 +189,7 @@ export function DropDownMenu({
       ) : (
         <SystemIcon icon={systemIcon} size={14} />
       )}
-      <Label>{label}</Label>
+      <Label>{_(label)}</Label>
     </Stack>
   );
 
@@ -237,7 +240,7 @@ export function DropDownMenu({
       <DropDownMenuStyled>
         {menuItems.map((menuItem, index) => (
           <DropDownItem
-            key={menuItem.label}
+            key={menuItem.id}
             onClick={() => onMenuItemClick(index)}
             disabled={menuItem.disabled}
             type="button"
@@ -256,7 +259,7 @@ export function DropDownMenu({
                 as="span"
                 $color={menuItem.disabled ? "muted" : undefined}
               >
-                {menuItem.label}
+                {_(menuItem.label)}
               </Typo.XS>
             </Stack>
             {menuItem.description ? (

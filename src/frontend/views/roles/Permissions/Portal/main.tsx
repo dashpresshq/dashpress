@@ -1,9 +1,10 @@
+import { msg } from "@lingui/macro";
 import { BaseMutateEntitiesPermissions } from "./fallback";
 
 export const usePortalExtendedPermissions = () => {
   return [
     {
-      label: "Entities",
+      label: msg`Entities`,
       content: <BaseMutateEntitiesPermissions />,
     },
   ];

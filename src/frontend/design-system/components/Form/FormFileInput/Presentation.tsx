@@ -7,6 +7,7 @@ import { SYSTEM_COLORS } from "frontend/design-system/theme/system";
 import { Spacer } from "frontend/design-system/primitives/Spacer";
 import { Typo } from "frontend/design-system/primitives/Typo";
 import { ProgressBar } from "frontend/design-system/components/ProgressBar";
+import { msg } from "@lingui/macro";
 import { DELETE_BUTTON_PROPS } from "../../Button/constants";
 import { SoftButton } from "../../Button/SoftButton";
 
@@ -136,7 +137,7 @@ export function Presentation({
                 {...DELETE_BUTTON_PROPS({
                   action: onClear,
                   isMakingRequest: false,
-                  label: "Remove File",
+                  label: msg`Remove`,
                   shouldConfirmAlert: undefined,
                 })}
               />

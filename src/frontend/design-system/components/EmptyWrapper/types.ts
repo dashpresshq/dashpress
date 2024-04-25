@@ -1,6 +1,8 @@
+import { MessageDescriptor } from "@lingui/core";
+
 export interface IEmptyWrapperProps {
-  text: string;
-  createNew?: { action: string | (() => void); label: string };
+  text: MessageDescriptor;
+  createNew?: { action: string | (() => void); label: MessageDescriptor };
 }
 
 export const FOR_CODE_COV = 1;

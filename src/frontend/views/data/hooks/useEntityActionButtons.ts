@@ -3,6 +3,7 @@ import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
 import { CrudViewsKeys } from "shared/configurations";
 import { IGroupActionButton } from "frontend/design-system/components/Button/types";
 import { DELETE_BUTTON_PROPS } from "frontend/design-system/components/Button/constants";
+import { msg } from "@lingui/macro";
 import { useCanUserPerformCrudAction } from "./useCanUserPerformCrudAction";
 
 export const useEntityActionButtons = ({
@@ -30,7 +31,7 @@ export const useEntityActionButtons = ({
     actionButtons.push({
       systemIcon: "Eye",
       action: NAVIGATION_LINKS.ENTITY.DETAILS(entity, entityId),
-      label: "Details",
+      label: msg`Details`,
       order: 10,
       id: "details",
     });
@@ -41,7 +42,7 @@ export const useEntityActionButtons = ({
       id: "edit",
       systemIcon: "Edit",
       action: NAVIGATION_LINKS.ENTITY.UPDATE(entity, entityId),
-      label: "Edit",
+      label: msg`Edit`,
       order: 20,
     });
   }
@@ -49,7 +50,7 @@ export const useEntityActionButtons = ({
   if (canUserPerformCrudAction("delete") && !exclude.includes("delete")) {
     actionButtons.push({
       ...DELETE_BUTTON_PROPS({
-        label: "Delete",
+        label: msg`Delete`,
         action: () => {
           entityDataDeletionMutation.mutate(entityId);
         },

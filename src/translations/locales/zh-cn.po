@@ -13,6 +13,45 @@ msgstr ""
 "Plural-Forms: \n"
 "X-Generator: Poedit 3.4.2\n"
 
+msgid ""
+msgstr ""
+
+msgid "\"{0}\" Selection"
+msgstr ""
+
+msgid "\"{0}\" Validations"
+msgstr ""
+
+msgid "{0}"
+msgstr ""
+
+msgid "{0} - {1}"
+msgstr ""
+
+msgid "{0} Preference"
+msgstr ""
+
+msgid "{buttonLabel}"
+msgstr ""
+
+msgid "{errorMessage}"
+msgstr ""
+
+msgid "{https://date-fns.org/docs/format}"
+msgstr ""
+
+msgid "{key}"
+msgstr ""
+
+msgid "{label}"
+msgstr ""
+
+msgid "{plural}"
+msgstr ""
+
+msgid "{singular}"
+msgstr ""
+
 msgid "{singular} {action} Successfully"
 msgstr "{singular}{action}成功"
 
@@ -31,29 +70,107 @@ msgstr "{singular}细节"
 msgid "{singular} Saved Successfully"
 msgstr "{singular}保存成功"
 
+msgid "{singular} Settings"
+msgstr ""
+
 msgid "{singular} Updated Successfully"
 msgstr "{singular}更新成功"
+
+msgid "{title}({currentCount})"
+msgstr ""
 
 msgid "Account Preferences"
 msgstr "账号"
 
+msgid "Account Profile"
+msgstr ""
+
+msgid "Account Was Successfully Setup"
+msgstr ""
+
 msgid "Action"
 msgstr "动作"
+
+msgid "Actions"
+msgstr ""
+
+msgid "Activate {0}"
+msgstr ""
+
+msgid "Activating {0}"
+msgstr ""
+
+msgid "Add Filter"
+msgstr ""
+
+msgid "Add Nested Filter"
+msgstr ""
 
 msgid "Add New {singular}"
 msgstr "添加新{singular}"
 
+msgid "Add new option"
+msgstr ""
+
+msgid "App"
+msgstr ""
+
+msgid "Bar Label"
+msgstr ""
+
+msgid "Baz Label"
+msgstr ""
+
+msgid "Cancel"
+msgstr ""
+
 msgid "Change Language"
 msgstr "切换语言"
 
-msgid "Click here to view {0}"
-msgstr "点击{0}查看"
+msgid "Click here to view {singular}"
+msgstr ""
+
+msgid "Close Canvas"
+msgstr ""
+
+msgid "Configure"
+msgstr ""
+
+msgid "Configure Selections"
+msgstr ""
+
+msgid "Configure Validation"
+msgstr ""
+
+msgid "Confirm"
+msgstr ""
+
+msgid "Constant"
+msgstr ""
+
+msgid "Constants"
+msgstr ""
 
 msgid "Create"
-msgstr "创建"
+msgstr ""
 
-msgid "Creating"
-msgstr "创建中"
+msgid "Create {singular}"
+msgstr ""
+
+msgid "Create It"
+msgstr ""
+
+msgid "Creating {singular}"
+msgstr ""
+
+msgid "Credentials Was Successfully Setup"
+msgstr ""
+
+msgid "CRUD"
+msgstr ""
+
+msgid "CRUD Settings"
+msgstr ""
 
 msgid "Dark"
 msgstr "深色"
@@ -64,20 +181,113 @@ msgstr "仪表盘"
 msgid "Dashboard Widget"
 msgstr "仪表盘组件"
 
+msgid "Dashboard Widgets"
+msgstr ""
+
+msgid "Dashboards"
+msgstr ""
+
+msgid "Data"
+msgstr ""
+
+msgid "Deactivate"
+msgstr ""
+
+msgid "Deactivate {0}"
+msgstr ""
+
+msgid "Deactivating {0}"
+msgstr ""
+
+msgid "Delete"
+msgstr ""
+
 msgid "Delete {singular}"
 msgstr "删除{singular}"
+
+msgid "Delete Selection"
+msgstr ""
+
+msgid "Details"
+msgstr ""
+
+msgid "Diction"
+msgstr ""
+
+msgid "Diction Settings"
+msgstr ""
+
+msgid "Done"
+msgstr ""
+
+msgid "Download"
+msgstr ""
+
+msgid "Edit"
+msgstr ""
 
 msgid "Edit {singular}"
 msgstr "修改{singular}"
 
+msgid "Empty Table"
+msgstr ""
+
+msgid "Enable {0} Functionality"
+msgstr ""
+
+msgid "Enabled Entities"
+msgstr ""
+
 msgid "Enter your credentials to continue"
+msgstr ""
+
+msgid "Entities"
+msgstr ""
+
+msgid "Environment Variable"
+msgstr ""
+
+msgid "Environment Variables"
+msgstr ""
+
+msgid "Explain {title}"
+msgstr ""
+
+msgid "Field Settings"
+msgstr ""
+
+msgid "Fields"
 msgstr ""
 
 msgid "File Storage"
 msgstr "存储设置"
 
+msgid "Follow us on Twitter"
+msgstr ""
+
+msgid "Foo Label"
+msgstr ""
+
+msgid "Form"
+msgstr ""
+
 msgid "Form Action"
 msgstr "表单操作"
+
+msgid "Form Actions"
+msgstr ""
+
+msgid "Form Scripts"
+msgstr ""
+
+msgid "General"
+msgstr ""
+
+msgid "General Data Settings"
+msgstr ""
+
+msgid "Go Back"
+msgstr ""
 
 msgid "Hi, {0}"
 msgstr "你好，{0}"
@@ -85,11 +295,20 @@ msgstr "你好，{0}"
 msgid "Integration"
 msgstr "集成"
 
+msgid "Join our Discord community"
+msgstr ""
+
+msgid "Labels"
+msgstr ""
+
 msgid "Language"
 msgstr "语言"
 
 msgid "Light"
 msgstr "浅色"
+
+msgid "Link Users To Database"
+msgstr ""
 
 msgid "Log Out"
 msgstr "退出登录"
@@ -97,8 +316,32 @@ msgstr "退出登录"
 msgid "Manage {plural}"
 msgstr "管理{plural}"
 
+msgid "Manage {title}"
+msgstr ""
+
+msgid "Manage Variables"
+msgstr ""
+
+msgid "Menu Settings"
+msgstr ""
+
+msgid "My Account"
+msgstr ""
+
 msgid "No {singular} Has Been Added Yet"
 msgstr "没有{singular}被添加"
+
+msgid "No available permission for this section"
+msgstr ""
+
+msgid "No Data"
+msgstr ""
+
+msgid "No result for the current {0} applied."
+msgstr ""
+
+msgid "No Search Results"
+msgstr ""
 
 msgid "On Create"
 msgstr "创建"
@@ -109,20 +352,113 @@ msgstr "删除"
 msgid "On Update"
 msgstr "更新"
 
+msgid "Order"
+msgstr ""
+
 msgid "Password"
 msgstr "密码"
+
+msgid "Password Reset Successfully"
+msgstr ""
+
+msgid "Password will not be changed on demo account"
+msgstr ""
+
+msgid "Persistent Query"
+msgstr ""
 
 msgid "Preferences"
 msgstr "偏好设置"
 
+msgid "Presentation Scripts"
+msgstr ""
+
+msgid "Preview"
+msgstr ""
+
 msgid "Profile"
 msgstr "个人信息"
 
-msgid "Save"
-msgstr "保存"
+msgid "Reference Template"
+msgstr ""
 
-msgid "Saving"
-msgstr "保存中"
+msgid "Relations"
+msgstr ""
+
+msgid "Relationship Settings"
+msgstr ""
+
+msgid "Remove"
+msgstr ""
+
+msgid "Remove Nested Filter"
+msgstr ""
+
+msgid "Reset"
+msgstr ""
+
+msgid "Reset Password"
+msgstr ""
+
+msgid "Reset User Password"
+msgstr ""
+
+msgid "Resetting Password"
+msgstr ""
+
+msgid "Reveal {label}"
+msgstr ""
+
+msgid "Revealing {label}"
+msgstr ""
+
+msgid "Role"
+msgstr "角色"
+
+msgid "Role Permission"
+msgstr ""
+
+msgid "Role Permissions"
+msgstr ""
+
+msgid "Roles"
+msgstr "角色"
+
+msgid "Roles and Permissions"
+msgstr ""
+
+msgid "Save"
+msgstr ""
+
+msgid "Save {singular}"
+msgstr ""
+
+msgid "Saving {singular}"
+msgstr ""
+
+msgid "Secret"
+msgstr ""
+
+msgid "Secrets"
+msgstr ""
+
+msgid "Selection"
+msgstr ""
+
+msgid "Setting Up Account"
+msgstr ""
+
+msgid "Setting Up Credentials"
+msgstr ""
+
+msgid "Setup"
+msgstr ""
+
+msgid "Setup Account"
+msgstr ""
+
+msgid "Setup Credentials"
+msgstr ""
 
 msgid "Showing <0/> entries of <1>{0}</1> results"
 msgstr "显示<0/>条目 <1>{0}</1> 结果"
@@ -133,11 +469,89 @@ msgstr "登录"
 msgid "Signing In"
 msgstr "正在登录"
 
-msgid "Update"
-msgstr "更新"
+msgid "Site"
+msgstr ""
 
-msgid "Updating"
-msgstr "更新中"
+msgid "Star us on Github"
+msgstr ""
+
+msgid "System"
+msgstr ""
+
+msgid "System Info"
+msgstr ""
+
+msgid "System Information"
+msgstr ""
+
+msgid "Table"
+msgstr ""
+
+msgid "Table View"
+msgstr ""
+
+msgid "Table Views"
+msgstr ""
+
+msgid "Test Widget Script"
+msgstr ""
+
+msgid "Theme"
+msgstr ""
+
+msgid "Theme Settings"
+msgstr ""
+
+msgid "This application has no active entities. Kindly add new entities through your preferred database editor then restart this application to proceed."
+msgstr ""
+
+msgid "This entity has no fields. Kindly add fields from your prefer database tool to manage them here"
+msgstr ""
+
+msgid "This entity has no relations"
+msgstr ""
+
+msgid "Toggle Connection URL"
+msgstr ""
+
+msgid "Update"
+msgstr ""
+
+msgid "Update {singular}"
+msgstr ""
+
+msgid "Updating {singular}"
+msgstr ""
+
+msgid "Use Icon"
+msgstr ""
+
+msgid "Use SVG"
+msgstr ""
 
 msgid "User"
 msgstr "用户"
+
+msgid "Users"
+msgstr ""
+
+msgid "Users Link To Database"
+msgstr ""
+
+msgid "Variables"
+msgstr ""
+
+msgid "View"
+msgstr ""
+
+msgid "View {0}"
+msgstr ""
+
+msgid "View Full Details"
+msgstr ""
+
+msgid "Visit our website"
+msgstr ""
+
+msgid "Widget Script"
+msgstr ""

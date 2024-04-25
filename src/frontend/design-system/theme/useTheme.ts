@@ -1,5 +1,6 @@
 import { useCallback, useContext, useEffect } from "react";
 import { ColorSchemes } from "shared/types/ui";
+import { typescriptSafeObjectDotEntries } from "shared/lib/objects";
 import { DEFAULT_PRIMARY_COLOR } from "./constants";
 import { ThemeContext } from "./Context";
 import { colorModeToRootColors } from "./generate";
@@ -62,7 +63,7 @@ export const useTheme = (
 
     themeContext.set(rootColors);
 
-    Object.entries(rootColors).forEach(([key, value]) => {
+    typescriptSafeObjectDotEntries(rootColors).forEach(([key, value]) => {
       document.documentElement.style.setProperty(
         prefixVarNameSpace(key),
         value

@@ -14,6 +14,7 @@ import { Typo } from "frontend/design-system/primitives/Typo";
 import { Spacer } from "frontend/design-system/primitives/Spacer";
 import { useAppConfiguration } from "frontend/hooks/configuration/configuration.store";
 import styled from "styled-components";
+import { useLingui } from "@lingui/react";
 import { GoogleTagManager } from "../scripts/GoogleTagManager";
 import { DEMO_LINKS } from "./constant";
 
@@ -64,17 +65,19 @@ export function MainContent({
     ...pageSecondaryActionItems,
   ];
 
+  const { _ } = useLingui();
+
   return (
     <>
       <Head>
         <title>
-          {pageTitle} - {siteConfig.data.name}
+          {_(pageTitle)} - {siteConfig.data.name}
         </title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
       <Stack $justify="space-between" $align="center">
         <HeaderLeft>
-          <Typo.MD>{pageTitle}</Typo.MD>
+          <Typo.MD>{_(pageTitle)}</Typo.MD>
           <Breadcrumbs items={homedBreadcrumb} onCrumbClick={goToLinkIndex} />
         </HeaderLeft>
         <div>

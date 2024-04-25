@@ -14,6 +14,7 @@ import { ListManager } from "frontend/design-system/components/ListManager";
 import { IDropDownMenuItem } from "frontend/design-system/components/DropdownMenu";
 import { DataStates } from "frontend/lib/data/types";
 import { IListMangerItemProps } from "frontend/design-system/components/ListManager/ListManagerItem";
+import { msg } from "@lingui/macro";
 import { useEntityViewStateMachine } from "../hooks/useEntityViewStateMachine";
 import { getEntitiesRelationsCount } from "./utils";
 import { useEntityActionMenuItems } from "../../entity/constants";
@@ -105,7 +106,7 @@ export function DetailsLayout({
     <AppLayout actionItems={menuItems} secondaryActionItems={actionItems}>
       <ContentLayout>
         <ContentLayout.Left>
-          <SectionBox headLess title="">
+          <SectionBox headLess title={msg``}>
             <ListManager
               items={{
                 data: listItems,

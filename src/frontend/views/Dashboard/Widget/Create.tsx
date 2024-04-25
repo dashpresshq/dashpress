@@ -14,7 +14,7 @@ export function CreateDashboardWidget() {
 
   useSetPageDetails({
     pageTitle: DASHBOARD_WIDGETS_CRUD_CONFIG.TEXT_LANG.CREATE,
-    viewKey: DASHBOARD_WIDGETS_CRUD_CONFIG.TEXT_LANG.CREATE,
+    viewKey: `create-dashboard-widget`,
     permission: USER_PERMISSIONS.CAN_MANAGE_DASHBOARD,
   });
 

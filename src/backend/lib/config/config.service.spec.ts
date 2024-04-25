@@ -1,6 +1,7 @@
 /* eslint-disable no-new */
 import fs from "fs-extra";
 import path from "path";
+import { typescriptSafeObjectDotEntries } from "shared/lib/objects";
 import { ConfigKeys, ConfigApiService } from "./config.service";
 
 const VALID_CONFIG: Record<ConfigKeys, string> = {
@@ -138,7 +139,7 @@ describe("Config Service", () => {
 
       fs.writeFileSync(
         fullPath,
-        Object.entries(oldEnv)
+        typescriptSafeObjectDotEntries(oldEnv)
           .map(([key, value]) => `${key}=${value}`)
           .join("\n")
       );

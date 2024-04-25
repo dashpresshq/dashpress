@@ -22,12 +22,19 @@ import { FormButton } from "frontend/design-system/components/Button/FormButton"
 import { Tabs } from "frontend/design-system/components/Tabs";
 import { ActionButtons } from "frontend/design-system/components/Button/ActionButtons";
 import { DELETE_BUTTON_PROPS } from "frontend/design-system/components/Button/constants";
+import { MAKE_CRUD_CONFIG } from "frontend/lib/crud-config";
+import { msg, t } from "@lingui/macro";
 
 interface IProps {
   values: ITableView[];
   initialValues: ITableView[];
   tableColumns: ITableColumn[];
 }
+
+const TABLE_VIEW_CRUD_CONFIG = MAKE_CRUD_CONFIG({
+  plural: msg`Table Views`,
+  singular: msg`Table View`,
+});
 
 function TabForm({ tableColumns, values, initialValues }: IProps) {
   const { fields } = useFieldArray("tabs");
@@ -42,7 +49,7 @@ function TabForm({ tableColumns, values, initialValues }: IProps) {
       <Stack $justify="end">
         <SoftButton
           systemIcon="Plus"
-          label="Add New Table View"
+          label={TABLE_VIEW_CRUD_CONFIG.TEXT_LANG.CREATE}
           action={() => {
             const newTab: ITableView = {
               id: generateRandomString(12),
@@ -54,7 +61,7 @@ function TabForm({ tableColumns, values, initialValues }: IProps) {
               },
             };
             fields.push(newTab);
-            setCurrentTab(`View ${fields.length + 1}`);
+            setCurrentTab(t`View ${fields.length + 1}`);
           }}
         />
       </Stack>
@@ -84,7 +91,7 @@ function TabForm({ tableColumns, values, initialValues }: IProps) {
                               fields.remove(index);
                               setCurrentTab(`View ${index}`);
                             },
-                            label: "Delete Table View",
+                            label: TABLE_VIEW_CRUD_CONFIG.TEXT_LANG.DELETE,
                             isMakingRequest: false,
                             shouldConfirmAlert: undefined,
                           }),
@@ -128,15 +135,15 @@ function TabForm({ tableColumns, values, initialValues }: IProps) {
                             pageIndex: 0,
                           },
                         }}
-                        empty={{ text: "No Data" }}
+                        empty={{ text: msg`No Data` }}
                         columns={columns}
                       />
                     )}
                   </Field>
                 </>
               ),
-              label: `View ${index + 1}`,
-              overrideLabel: fields.value[index]?.title,
+              label: msg`View ${index + 1}`,
+              overrideLabel: msg`${fields.value[index]?.title}`,
             };
           })}
         />

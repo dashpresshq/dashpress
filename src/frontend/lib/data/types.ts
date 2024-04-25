@@ -1,3 +1,4 @@
+import { MessageDescriptor } from "@lingui/core";
 import { UseQueryResult } from "@tanstack/react-query";
 
 export enum DataStates {
@@ -15,7 +16,7 @@ type NonFunctionGuard<T> = T extends Function ? never : T;
 export interface IUseApiOptions<T> {
   selector?: (input: any) => T;
   enabled?: boolean;
-  errorMessage?: string;
+  errorMessage?: MessageDescriptor;
   request?: {
     method: "POST" | "PATCH" | "PUT";
     body: Record<string, unknown>;

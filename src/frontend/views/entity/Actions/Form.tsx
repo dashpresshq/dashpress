@@ -10,6 +10,7 @@ import {
 import { userFriendlyCase } from "shared/lib/strings/friendly-case";
 import { DataEventActions } from "shared/types/data";
 import { t } from "@lingui/macro";
+import { typescriptSafeObjectDotEntries } from "shared/lib/objects";
 import { useIntegrationImplementationsList } from "./form-actions.store";
 import { FORM_ACTION_CRUD_CONFIG } from "./constants";
 
@@ -47,12 +48,15 @@ export function ActionForm({
 
   const currentActionTitle = integrationsListMap[integration]?.title;
   const selectedImplementation = Object.fromEntries(
-    Object.entries(
+    typescriptSafeObjectDotEntries(
       implementations.data.find(({ key }) => key === action)
         ?.configurationSchema || {}
     ).map(([key, value]) => [
-      `${CONFIGURATION_FORM_PREFIX}${key}`,
-      { ...value, label: `${currentActionTitle}: ${userFriendlyCase(key)}` },
+      `${CONFIGURATION_FORM_PREFIX}${String(key)}`,
+      {
+        ...value,
+        label: `${currentActionTitle}: ${userFriendlyCase(String(key))}`,
+      },
     ])
   );
 
@@ -116,7 +120,7 @@ export function ActionForm({
   };
   initialValues = { ...initialValues, entity };
 
-  const initialValues$1 = Object.entries(
+  const initialValues$1 = typescriptSafeObjectDotEntries(
     initialValues.configuration || {}
   ).reduce((values, [key, value]) => {
     return { ...values, [`${CONFIGURATION_FORM_PREFIX}${key}`]: value };
@@ -134,7 +138,9 @@ export function ActionForm({
       systemIcon={formAction === "create" ? "Plus" : "Save"}
       action={formAction}
       onSubmit={async (value) => {
-        const cleanedConfigurationForm = Object.entries(value).reduce(
+        const cleanedConfigurationForm = typescriptSafeObjectDotEntries(
+          value
+        ).reduce(
           (cleanForm, [formKey, formValue]) => {
             if (formKey.startsWith(CONFIGURATION_FORM_PREFIX)) {
               const key = formKey.replace(CONFIGURATION_FORM_PREFIX, "");

@@ -1,3 +1,4 @@
+import { typescriptSafeObjectDotEntries } from "shared/lib/objects";
 import { DATE_FILTER_VALUE, IDateFilterOption } from "shared/types/data";
 
 const DATE_FILTER_OPTIONS$1: Record<
@@ -42,6 +43,7 @@ const DATE_FILTER_OPTIONS$1: Record<
   },
 };
 
-export const DATE_FILTER_OPTIONS: IDateFilterOption[] = Object.entries(
-  DATE_FILTER_OPTIONS$1
-).map(([value, config]) => ({ ...config, value }));
+export const DATE_FILTER_OPTIONS: IDateFilterOption[] =
+  typescriptSafeObjectDotEntries(DATE_FILTER_OPTIONS$1).map(
+    ([value, config]) => ({ ...config, value })
+  );

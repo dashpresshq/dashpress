@@ -4,6 +4,8 @@ import RBTab from "react-bootstrap/Tab";
 import RBTabs from "react-bootstrap/Tabs";
 import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
 import { sluggify } from "shared/lib/strings";
+import { MessageDescriptor } from "@lingui/core";
+import { useLingui } from "@lingui/react";
 
 const Root = styled.div<{ $padContent: boolean }>`
   .nav {
@@ -59,8 +61,8 @@ const Root = styled.div<{ $padContent: boolean }>`
 
 export interface IProps {
   contents: {
-    label: string;
-    overrideLabel?: string;
+    label: MessageDescriptor;
+    overrideLabel?: MessageDescriptor;
     disabled?: boolean;
     content: ReactNode;
   }[];
@@ -77,8 +79,10 @@ export function Tabs({
   lazy,
   padContent = true,
 }: IProps) {
+  const { _ } = useLingui();
+
   const [activeTab, setActiveTab$1] = useState<string>(
-    sluggify(currentTab || contents[0].label)
+    sluggify(currentTab || _(contents[0].label))
   );
 
   const setActiveTab = (label: string) => {
@@ -89,7 +93,7 @@ export function Tabs({
     if (currentTab) {
       setActiveTab(currentTab);
     } else {
-      setActiveTab(contents[0].label);
+      setActiveTab(_(contents[0].label));
     }
   }, [currentTab, JSON.stringify(contents.map((content) => content.label))]);
 
@@ -113,9 +117,9 @@ export function Tabs({
       >
         {contents.map(({ label, overrideLabel, disabled, content }) => (
           <RBTab
-            eventKey={sluggify(label)}
-            key={sluggify(label)}
-            title={overrideLabel || label}
+            eventKey={sluggify(_(label))}
+            key={sluggify(_(label))}
+            title={_(overrideLabel || label)}
             tabClassName={disabled ? "disabled" : ""}
           >
             {content}

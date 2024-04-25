@@ -23,6 +23,8 @@ import {
   useEntitySlug,
 } from "frontend/hooks/entity/entity.config";
 import { isQueryIdle } from "frontend/lib/data/useApi/utils";
+import { useLingui } from "@lingui/react";
+import { msg } from "@lingui/macro";
 import { ENTITY_DETAILS_VIEW_KEY } from "./constants";
 import { EntityDetailsView } from "./DetailsView";
 import { DetailsLayout } from "./_Layout";
@@ -43,12 +45,14 @@ export function EntityRelationDetails() {
     ({ table }) => table === childEntity
   );
 
+  const { _ } = useLingui();
+
   const { backLink } = useNavigationStack();
 
   const title =
     entityDataReference.isLoading || isQueryIdle(entityDataReference)
       ? childEntityCrudConfig.TEXT_LANG.SINGULAR
-      : `${entityDataReference.data} - ${childEntityCrudConfig.TEXT_LANG.SINGULAR}`;
+      : msg`${entityDataReference.data} - ${childEntityCrudConfig.TEXT_LANG.SINGULAR}`;
 
   useSetPageDetails({
     pageTitle: title,
@@ -110,13 +114,13 @@ export function EntityRelationDetails() {
         >
           <div style={{ textAlign: "center" }}>
             <Typo.SM>
-              The {childEntityCrudConfig.TEXT_LANG.SINGULAR} for{" "}
+              The {_(childEntityCrudConfig.TEXT_LANG.SINGULAR)} for{" "}
               <b>{entityDataReference.data}</b> does not exist
             </Typo.SM>
             <Spacer />
             <SoftButton
               systemIcon="Plus"
-              label="Create It"
+              label={msg`Create It`}
               action={() => {
                 router.push(
                   `${NAVIGATION_LINKS.ENTITY.CREATE(

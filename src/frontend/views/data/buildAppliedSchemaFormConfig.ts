@@ -6,10 +6,8 @@ import {
   ENTITY_LIST_PATH,
   ENTITY_REFERENCE_PATH,
 } from "frontend/hooks/data/constants";
-
 import { IColorableSelection } from "shared/types/ui";
-import { FIELD_TYPES_CONFIG_MAP } from "shared/validations";
-import { IFieldValidationItem } from "shared/validations/types";
+import { FormFieldTypes, IFieldValidationItem } from "shared/validations/types";
 import { userFriendlyCase } from "shared/lib/strings/friendly-case";
 
 interface IEntitySchemaFormConfigProps {
@@ -17,7 +15,7 @@ interface IEntitySchemaFormConfigProps {
   entityToOneReferenceFields: Record<string, string>;
   entityFieldSelections: Record<string, IColorableSelection[]>;
   getEntityFieldLabels: (name: string) => string;
-  entityFieldTypes: Record<string, keyof typeof FIELD_TYPES_CONFIG_MAP>;
+  entityFieldTypes: Record<string, FormFieldTypes>;
   entityValidationsMap: Record<string, IFieldValidationItem[]>;
 }
 

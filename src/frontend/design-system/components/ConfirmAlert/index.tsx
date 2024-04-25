@@ -4,6 +4,7 @@ import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
 import { Typo } from "frontend/design-system/primitives/Typo";
 import { Spacer } from "frontend/design-system/primitives/Spacer";
 import { Stack } from "frontend/design-system/primitives/Stack";
+import { msg } from "@lingui/macro";
 import { Z_INDEXES } from "../../constants/zIndex";
 import { SoftButton } from "../Button/SoftButton";
 import { SHADOW_CSS } from "../Card";
@@ -75,13 +76,13 @@ export function Presentation({ action, title, onClose }: IPresentationProps) {
         </Typo.XS>
         <Spacer size="xxl" />
         <Stack $justify="center" $spacing={8}>
-          <SoftButton action={onClose} label="Cancel" systemIcon={null} />
+          <SoftButton action={onClose} label={msg`Cancel`} systemIcon={null} />
 
           <SoftButton
             color="danger"
             size="sm"
             systemIcon={null}
-            label="Confirm"
+            label={msg`Confirm`}
             action={() => {
               action();
               onClose();

@@ -7,6 +7,7 @@ import arrayMutators from "final-form-arrays";
 import { FieldArray } from "react-final-form-arrays";
 import { userFriendlyCase } from "shared/lib/strings/friendly-case";
 import {
+  FormFieldTypes,
   IFieldValidationItem,
   ValidationTypes,
 } from "shared/validations/types";
@@ -24,11 +25,13 @@ import { FormNoValueSelect } from "frontend/design-system/components/Form/FormSe
 import { FormButton } from "frontend/design-system/components/Button/FormButton";
 import { DELETE_BUTTON_PROPS } from "frontend/design-system/components/Button/constants";
 import { Fragment } from "react";
+import { msg } from "@lingui/macro";
+import { typescriptSafeObjectDotEntries } from "shared/lib/objects";
 
 interface IProps {
   field: string;
   validations: IFieldValidationItem[];
-  entityType: keyof typeof FIELD_TYPES_CONFIG_MAP;
+  entityType: FormFieldTypes;
   onSubmit: (values: IFieldValidationItem[]) => void;
 }
 
@@ -75,12 +78,12 @@ export function FieldValidationCanvas({
                   return (
                     <Fragment key={name}>
                       <SectionBox
-                        title={userFriendlyCase(validationType)}
+                        title={msg`${userFriendlyCase(validationType)}`}
                         actionButtons={
                           !isBoundToType && !fromSchema
                             ? [
                                 DELETE_BUTTON_PROPS({
-                                  label: "Remove",
+                                  label: msg`Remove`,
                                   action: () => fields.remove(index),
                                   isMakingRequest: false,
                                 }),
@@ -90,34 +93,34 @@ export function FieldValidationCanvas({
                       >
                         {validationInput && (
                           <>
-                            {Object.entries(validationInput).map(
-                              ([inputKey, inputValue]) => (
-                                <Field
-                                  key={inputKey}
-                                  name={`${name}.constraint.${inputKey}`}
-                                  validate={composeValidators(required)}
-                                  validateFields={[]}
-                                >
-                                  {({ meta, input }) =>
-                                    typeof inputValue === "string" ? (
-                                      <FormInput
-                                        required
-                                        label={userFriendlyCase(inputKey)}
-                                        meta={meta}
-                                        input={input}
-                                      />
-                                    ) : (
-                                      <FormNumberInput
-                                        required
-                                        label={userFriendlyCase(inputKey)}
-                                        meta={meta}
-                                        input={input}
-                                      />
-                                    )
-                                  }
-                                </Field>
-                              )
-                            )}
+                            {typescriptSafeObjectDotEntries(
+                              validationInput
+                            ).map(([inputKey, inputValue]) => (
+                              <Field
+                                key={inputKey}
+                                name={`${name}.constraint.${inputKey}`}
+                                validate={composeValidators(required)}
+                                validateFields={[]}
+                              >
+                                {({ meta, input }) =>
+                                  typeof inputValue === "string" ? (
+                                    <FormInput
+                                      required
+                                      label={userFriendlyCase(inputKey)}
+                                      meta={meta}
+                                      input={input}
+                                    />
+                                  ) : (
+                                    <FormNumberInput
+                                      required
+                                      label={userFriendlyCase(inputKey)}
+                                      meta={meta}
+                                      input={input}
+                                    />
+                                  )
+                                }
+                              </Field>
+                            ))}
                           </>
                         )}
                         <Field

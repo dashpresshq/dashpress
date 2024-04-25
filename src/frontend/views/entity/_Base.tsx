@@ -12,63 +12,56 @@ import {
 import { ContentLayout } from "frontend/design-system/components/Section/SectionDivider";
 import { Spacer } from "frontend/design-system/primitives/Spacer";
 import { IDropDownMenuItem } from "frontend/design-system/components/DropdownMenu";
+import { msg } from "@lingui/macro";
 import { FORM_ACTION_CRUD_CONFIG } from "./Actions/constants";
-import {
-  ENTITY_CRUD_LABELS,
-  ENTITY_FIELD_SETTINGS_TAB_LABELS,
-} from "./constants";
 import { useMutateBaseEntitySettingsMenu } from "./portal";
 
 const baseMenuItems = (entity: string): IMenuSectionItem[] => [
   {
-    action: NAVIGATION_LINKS.ENTITY.CONFIG.CRUD(entity, {
-      tab: ENTITY_CRUD_LABELS.create,
-    }),
+    action: NAVIGATION_LINKS.ENTITY.CONFIG.CRUD(entity, {}),
     systemIcon: "Sliders",
-    name: "CRUD",
+    name: msg`CRUD`,
     order: 10,
   },
   {
     action: NAVIGATION_LINKS.ENTITY.CONFIG.DICTION(entity),
-    name: "Diction",
+    name: msg`Diction`,
     systemIcon: "Type",
     order: 20,
   },
   {
-    action: NAVIGATION_LINKS.ENTITY.CONFIG.FIELDS(entity, {
-      tab: ENTITY_FIELD_SETTINGS_TAB_LABELS.LABELS,
-    }),
-    name: "Fields",
+    action: NAVIGATION_LINKS.ENTITY.CONFIG.FIELDS(entity, {}),
+    name: msg`Fields`,
     systemIcon: "File",
     order: 30,
   },
   {
     action: NAVIGATION_LINKS.ENTITY.CONFIG.RELATIONS(entity),
-    name: "Relations",
+    name: msg`Relations`,
     systemIcon: "LinkAlt",
     order: 40,
   },
   {
     action: NAVIGATION_LINKS.ENTITY.CONFIG.VIEWS(entity),
-    name: "Table Views",
+    name: msg`Table Views`,
     systemIcon: "Filter",
     order: 50,
   },
   {
     action: NAVIGATION_LINKS.ENTITY.CONFIG.PERSISTENT_QUERY(entity),
-    name: "Persistent Query",
+    name: msg`Persistent Query`,
     systemIcon: "Shield",
     order: 51,
   },
   {
     action: NAVIGATION_LINKS.ENTITY.CONFIG.FORM(entity),
-    name: "Form Scripts",
+    name: msg`Form Scripts`,
     systemIcon: "Code",
     order: 60,
   },
   {
     action: NAVIGATION_LINKS.ENTITY.CONFIG.PRESENTATION(entity),
-    name: "Presentation Scripts",
+    name: msg`Presentation Scripts`,
     systemIcon: "CodeAlt",
     order: 70,
   },
@@ -102,7 +95,7 @@ export function BaseEntitySettingsLayout({ children, actionItems }: IProps) {
           <SoftButton
             systemIcon="Left"
             size="xs"
-            label="Go Back"
+            label={msg`Go Back`}
             action={() => {
               goBack();
             }}

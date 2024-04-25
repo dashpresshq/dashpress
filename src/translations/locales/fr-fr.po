@@ -13,6 +13,45 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
+msgid ""
+msgstr ""
+
+msgid "\"{0}\" Selection"
+msgstr ""
+
+msgid "\"{0}\" Validations"
+msgstr ""
+
+msgid "{0}"
+msgstr ""
+
+msgid "{0} - {1}"
+msgstr ""
+
+msgid "{0} Preference"
+msgstr ""
+
+msgid "{buttonLabel}"
+msgstr ""
+
+msgid "{errorMessage}"
+msgstr ""
+
+msgid "{https://date-fns.org/docs/format}"
+msgstr ""
+
+msgid "{key}"
+msgstr ""
+
+msgid "{label}"
+msgstr ""
+
+msgid "{plural}"
+msgstr ""
+
+msgid "{singular}"
+msgstr ""
+
 msgid "{singular} {action} Successfully"
 msgstr ""
 
@@ -31,28 +70,106 @@ msgstr ""
 msgid "{singular} Saved Successfully"
 msgstr ""
 
+msgid "{singular} Settings"
+msgstr ""
+
 msgid "{singular} Updated Successfully"
+msgstr ""
+
+msgid "{title}({currentCount})"
 msgstr ""
 
 msgid "Account Preferences"
 msgstr ""
 
+msgid "Account Profile"
+msgstr ""
+
+msgid "Account Was Successfully Setup"
+msgstr ""
+
 msgid "Action"
+msgstr ""
+
+msgid "Actions"
+msgstr ""
+
+msgid "Activate {0}"
+msgstr ""
+
+msgid "Activating {0}"
+msgstr ""
+
+msgid "Add Filter"
+msgstr ""
+
+msgid "Add Nested Filter"
 msgstr ""
 
 msgid "Add New {singular}"
 msgstr ""
 
+msgid "Add new option"
+msgstr ""
+
+msgid "App"
+msgstr ""
+
+msgid "Bar Label"
+msgstr ""
+
+msgid "Baz Label"
+msgstr ""
+
+msgid "Cancel"
+msgstr ""
+
 msgid "Change Language"
 msgstr "Changer la langue"
 
-msgid "Click here to view {0}"
+msgid "Click here to view {singular}"
+msgstr ""
+
+msgid "Close Canvas"
+msgstr ""
+
+msgid "Configure"
+msgstr ""
+
+msgid "Configure Selections"
+msgstr ""
+
+msgid "Configure Validation"
+msgstr ""
+
+msgid "Confirm"
+msgstr ""
+
+msgid "Constant"
+msgstr ""
+
+msgid "Constants"
 msgstr ""
 
 msgid "Create"
 msgstr ""
 
-msgid "Creating"
+msgid "Create {singular}"
+msgstr ""
+
+msgid "Create It"
+msgstr ""
+
+msgid "Creating {singular}"
+msgstr ""
+
+msgid "Credentials Was Successfully Setup"
+msgstr ""
+
+msgid "CRUD"
+msgstr ""
+
+msgid "CRUD Settings"
 msgstr ""
 
 msgid "Dark"
@@ -64,19 +181,112 @@ msgstr "Tableau de bord"
 msgid "Dashboard Widget"
 msgstr ""
 
+msgid "Dashboard Widgets"
+msgstr ""
+
+msgid "Dashboards"
+msgstr ""
+
+msgid "Data"
+msgstr ""
+
+msgid "Deactivate"
+msgstr ""
+
+msgid "Deactivate {0}"
+msgstr ""
+
+msgid "Deactivating {0}"
+msgstr ""
+
+msgid "Delete"
+msgstr ""
+
 msgid "Delete {singular}"
+msgstr ""
+
+msgid "Delete Selection"
+msgstr ""
+
+msgid "Details"
+msgstr ""
+
+msgid "Diction"
+msgstr ""
+
+msgid "Diction Settings"
+msgstr ""
+
+msgid "Done"
+msgstr ""
+
+msgid "Download"
+msgstr ""
+
+msgid "Edit"
 msgstr ""
 
 msgid "Edit {singular}"
 msgstr ""
 
+msgid "Empty Table"
+msgstr ""
+
+msgid "Enable {0} Functionality"
+msgstr ""
+
+msgid "Enabled Entities"
+msgstr ""
+
 msgid "Enter your credentials to continue"
+msgstr ""
+
+msgid "Entities"
+msgstr ""
+
+msgid "Environment Variable"
+msgstr ""
+
+msgid "Environment Variables"
+msgstr ""
+
+msgid "Explain {title}"
+msgstr ""
+
+msgid "Field Settings"
+msgstr ""
+
+msgid "Fields"
 msgstr ""
 
 msgid "File Storage"
 msgstr ""
 
+msgid "Follow us on Twitter"
+msgstr ""
+
+msgid "Foo Label"
+msgstr ""
+
+msgid "Form"
+msgstr ""
+
 msgid "Form Action"
+msgstr ""
+
+msgid "Form Actions"
+msgstr ""
+
+msgid "Form Scripts"
+msgstr ""
+
+msgid "General"
+msgstr ""
+
+msgid "General Data Settings"
+msgstr ""
+
+msgid "Go Back"
 msgstr ""
 
 msgid "Hi, {0}"
@@ -85,10 +295,19 @@ msgstr "Bonjour, {0}"
 msgid "Integration"
 msgstr ""
 
+msgid "Join our Discord community"
+msgstr ""
+
+msgid "Labels"
+msgstr ""
+
 msgid "Language"
 msgstr ""
 
 msgid "Light"
+msgstr ""
+
+msgid "Link Users To Database"
 msgstr ""
 
 msgid "Log Out"
@@ -97,7 +316,31 @@ msgstr ""
 msgid "Manage {plural}"
 msgstr ""
 
+msgid "Manage {title}"
+msgstr ""
+
+msgid "Manage Variables"
+msgstr ""
+
+msgid "Menu Settings"
+msgstr ""
+
+msgid "My Account"
+msgstr ""
+
 msgid "No {singular} Has Been Added Yet"
+msgstr ""
+
+msgid "No available permission for this section"
+msgstr ""
+
+msgid "No Data"
+msgstr ""
+
+msgid "No result for the current {0} applied."
+msgstr ""
+
+msgid "No Search Results"
 msgstr ""
 
 msgid "On Create"
@@ -109,19 +352,112 @@ msgstr ""
 msgid "On Update"
 msgstr ""
 
+msgid "Order"
+msgstr ""
+
 msgid "Password"
+msgstr ""
+
+msgid "Password Reset Successfully"
+msgstr ""
+
+msgid "Password will not be changed on demo account"
+msgstr ""
+
+msgid "Persistent Query"
 msgstr ""
 
 msgid "Preferences"
 msgstr ""
 
+msgid "Presentation Scripts"
+msgstr ""
+
+msgid "Preview"
+msgstr ""
+
 msgid "Profile"
+msgstr ""
+
+msgid "Reference Template"
+msgstr ""
+
+msgid "Relations"
+msgstr ""
+
+msgid "Relationship Settings"
+msgstr ""
+
+msgid "Remove"
+msgstr ""
+
+msgid "Remove Nested Filter"
+msgstr ""
+
+msgid "Reset"
+msgstr ""
+
+msgid "Reset Password"
+msgstr ""
+
+msgid "Reset User Password"
+msgstr ""
+
+msgid "Resetting Password"
+msgstr ""
+
+msgid "Reveal {label}"
+msgstr ""
+
+msgid "Revealing {label}"
+msgstr ""
+
+msgid "Role"
+msgstr ""
+
+msgid "Role Permission"
+msgstr ""
+
+msgid "Role Permissions"
+msgstr ""
+
+msgid "Roles"
+msgstr ""
+
+msgid "Roles and Permissions"
 msgstr ""
 
 msgid "Save"
 msgstr ""
 
-msgid "Saving"
+msgid "Save {singular}"
+msgstr ""
+
+msgid "Saving {singular}"
+msgstr ""
+
+msgid "Secret"
+msgstr ""
+
+msgid "Secrets"
+msgstr ""
+
+msgid "Selection"
+msgstr ""
+
+msgid "Setting Up Account"
+msgstr ""
+
+msgid "Setting Up Credentials"
+msgstr ""
+
+msgid "Setup"
+msgstr ""
+
+msgid "Setup Account"
+msgstr ""
+
+msgid "Setup Credentials"
 msgstr ""
 
 msgid "Showing <0/> entries of <1>{0}</1> results"
@@ -133,11 +469,89 @@ msgstr ""
 msgid "Signing In"
 msgstr ""
 
+msgid "Site"
+msgstr ""
+
+msgid "Star us on Github"
+msgstr ""
+
+msgid "System"
+msgstr ""
+
+msgid "System Info"
+msgstr ""
+
+msgid "System Information"
+msgstr ""
+
+msgid "Table"
+msgstr ""
+
+msgid "Table View"
+msgstr ""
+
+msgid "Table Views"
+msgstr ""
+
+msgid "Test Widget Script"
+msgstr ""
+
+msgid "Theme"
+msgstr ""
+
+msgid "Theme Settings"
+msgstr ""
+
+msgid "This application has no active entities. Kindly add new entities through your preferred database editor then restart this application to proceed."
+msgstr ""
+
+msgid "This entity has no fields. Kindly add fields from your prefer database tool to manage them here"
+msgstr ""
+
+msgid "This entity has no relations"
+msgstr ""
+
+msgid "Toggle Connection URL"
+msgstr ""
+
 msgid "Update"
 msgstr ""
 
-msgid "Updating"
+msgid "Update {singular}"
+msgstr ""
+
+msgid "Updating {singular}"
+msgstr ""
+
+msgid "Use Icon"
+msgstr ""
+
+msgid "Use SVG"
 msgstr ""
 
 msgid "User"
+msgstr ""
+
+msgid "Users"
+msgstr ""
+
+msgid "Users Link To Database"
+msgstr ""
+
+msgid "Variables"
+msgstr ""
+
+msgid "View"
+msgstr ""
+
+msgid "View {0}"
+msgstr ""
+
+msgid "View Full Details"
+msgstr ""
+
+msgid "Visit our website"
+msgstr ""
+
+msgid "Widget Script"
 msgstr ""

@@ -18,9 +18,10 @@ import { useEffect } from "react";
 import { IAppliedSchemaFormConfig } from "shared/form-schemas/types";
 import languages from "translations/languages";
 import { i18n } from "@lingui/core";
-import { t } from "@lingui/macro";
+import { msg } from "@lingui/macro";
 import { useRouter } from "next/router";
 import { Spacer } from "frontend/design-system/primitives/Spacer";
+import { typescriptSafeObjectDotKeys } from "shared/lib/objects";
 import { ACCOUNT_VIEW_KEY } from "../constants";
 import { BaseAccountLayout } from "../_Base";
 import {
@@ -66,7 +67,7 @@ export function UserPreferences() {
     UPDATE_USER_PREFERENCES_FORM_SCHEMA.theme.selections = uniqBy(
       [
         ...UPDATE_USER_PREFERENCES_FORM_SCHEMA.theme.selections,
-        ...Object.keys(portalThemes).map((theme) => ({
+        ...typescriptSafeObjectDotKeys(portalThemes).map((theme) => ({
           value: theme,
           label: userFriendlyCase(theme),
         })),
@@ -97,7 +98,7 @@ export function UserPreferences() {
 
       <Spacer />
 
-      <SectionBox title={t`Language`}>
+      <SectionBox title={msg`Language`}>
         <SchemaForm<{ locale: string }>
           onSubmit={async (data) => {
             const { pathname, asPath, query } = router;
@@ -113,7 +114,7 @@ export function UserPreferences() {
             // TODO set cookie to NEXT_LOCALE=the-locale
           }}
           initialValues={{ locale: router.locale || router.defaultLocale }}
-          buttonText={() => t`Change Language`}
+          buttonText={() => msg`Change Language`}
           fields={LANGUAGE_PREFERENCES_FORM_SCHEMA}
           systemIcon="Save"
         />

@@ -16,6 +16,7 @@ import { ToastService } from "frontend/lib/toast";
 import { SchemaForm } from "frontend/components/SchemaForm";
 import { Spacer } from "frontend/design-system/primitives/Spacer";
 import { AppConfigurationValueType } from "shared/configurations/constants";
+import { msg } from "@lingui/macro";
 import { BaseSettingsLayout } from "../_Base";
 import { SETTINGS_VIEW_KEY } from "../constants";
 
@@ -85,7 +86,7 @@ function DateSettings() {
           id: "help",
           action: "https://date-fns.org/docs/format",
           systemIcon: "Help",
-          label: "Using https://date-fns.org/docs/format",
+          label: msg`${"https://date-fns.org/docs/format"}`,
         },
       ]}
     >
@@ -126,7 +127,7 @@ function DateSettings() {
 
 export function GeneralDataSettings() {
   useSetPageDetails({
-    pageTitle: "General Data Settings",
+    pageTitle: msg`General Data Settings`,
     viewKey: SETTINGS_VIEW_KEY,
     permission: USER_PERMISSIONS.CAN_CONFIGURE_APP,
   });

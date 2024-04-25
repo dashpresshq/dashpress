@@ -17,6 +17,7 @@ import { NAVIGATION_MENU_ENDPOINT } from "frontend/_layouts/app/LayoutImpl/const
 import { SchemaForm } from "frontend/components/SchemaForm";
 import { AppConfigurationValueType } from "shared/configurations/constants";
 import { useDocumentationActionButton } from "frontend/docs/constants";
+import { msg } from "@lingui/macro";
 import { BaseEntitySettingsLayout } from "../_Base";
 import { ENTITY_CONFIGURATION_VIEW } from "../constants";
 
@@ -34,8 +35,9 @@ export function EntityDictionSettings() {
     }
   );
 
-  const documentationActionButton =
-    useDocumentationActionButton("Diction Settings");
+  const documentationActionButton = useDocumentationActionButton(
+    msg`Diction Settings`
+  );
 
   useSetPageDetails({
     pageTitle: ENTITY_DICTION_SETTINGS_CRUD_CONFIG.TEXT_LANG.TITLE,

@@ -57,7 +57,7 @@ export function UserCreate() {
 
   useSetPageDetails({
     pageTitle: ADMIN_USERS_CRUD_CONFIG.TEXT_LANG.CREATE,
-    viewKey: ADMIN_USERS_CRUD_CONFIG.TEXT_LANG.CREATE,
+    viewKey: `create-users`,
     permission: USER_PERMISSIONS.CAN_MANAGE_USERS,
   });
 

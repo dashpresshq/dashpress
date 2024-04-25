@@ -1,5 +1,5 @@
 import { ReactNode, useEffect, useState } from "react";
-import { IEntityCrudSettings } from "shared/configurations";
+import { CrudViewsKeys, IEntityCrudSettings } from "shared/configurations";
 import { USER_PERMISSIONS } from "shared/constants/user";
 import { CRUDDocumentation } from "frontend/docs/crud";
 import { useRouteParam } from "frontend/lib/routing/useRouteParam";
@@ -16,6 +16,8 @@ import { useEntityFields } from "frontend/hooks/entity/entity.store";
 import { WarningAlert } from "frontend/design-system/components/Alert";
 import { Spacer } from "frontend/design-system/primitives/Spacer";
 import { useDocumentationActionButton } from "frontend/docs/constants";
+import { msg } from "@lingui/macro";
+import { typescriptSafeObjectDotEntries } from "shared/lib/objects";
 import { BaseEntitySettingsLayout } from "../_Base";
 import {
   EntityFieldsSelectionSettings,
@@ -29,7 +31,7 @@ import {
   PortalEntityUpdateSettings,
 } from "./portal";
 
-const TITLE = "CRUD Settings";
+const TITLE = msg`CRUD Settings`;
 
 function useEntityCrudView(entity: string) {
   const entityCrudSettings = useEntityCrudSettings(entity);
@@ -76,8 +78,11 @@ function useEntityCrudView(entity: string) {
 
   const error = entityFields.error || entityCrudSettings.error;
 
-  const schema: Record<string, { disabled: boolean; render: ReactNode }> = {
-    [ENTITY_CRUD_LABELS.table]: {
+  const schema: Record<
+    CrudViewsKeys,
+    { disabled: boolean; render: ReactNode }
+  > = {
+    table: {
       disabled: false,
       render: (
         <>
@@ -93,7 +98,7 @@ function useEntityCrudView(entity: string) {
         </>
       ),
     },
-    [ENTITY_CRUD_LABELS.details]: {
+    details: {
       disabled: !entityCrudSettingsState.details,
       render: (
         <>
@@ -110,7 +115,7 @@ function useEntityCrudView(entity: string) {
         </>
       ),
     },
-    [ENTITY_CRUD_LABELS.create]: {
+    create: {
       disabled: !entityCrudSettingsState.create,
       render: (
         <>
@@ -127,7 +132,7 @@ function useEntityCrudView(entity: string) {
         </>
       ),
     },
-    [ENTITY_CRUD_LABELS.update]: {
+    update: {
       disabled: !entityCrudSettingsState.update,
       render: (
         <>
@@ -144,7 +149,7 @@ function useEntityCrudView(entity: string) {
         </>
       ),
     },
-    [ENTITY_CRUD_LABELS.delete]: {
+    delete: {
       disabled: !entityCrudSettingsState.delete,
       render: (
         <ToggleCrudState
@@ -189,9 +194,9 @@ export function EntityCrudSettings() {
         <Tabs
           currentTab={tabFromUrl}
           onChange={changeTabParam}
-          contents={Object.entries(entityCrudView).map(
+          contents={typescriptSafeObjectDotEntries(entityCrudView).map(
             ([key, { disabled, render }]) => ({
-              label: key,
+              label: ENTITY_CRUD_LABELS[key],
               content: render,
               disabled,
             })

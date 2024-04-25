@@ -2,6 +2,7 @@ import { Column } from "@tanstack/react-table";
 import { ReactNode, useEffect, useState } from "react";
 import { IColumnFilterBag, TableFilterType } from "shared/types/data";
 import { useDebounce } from "react-use";
+import { typescriptSafeObjectDotEntries } from "shared/lib/objects";
 import { FilterWrapper } from "./_FilterWrapper";
 import { RenderFilterOperator } from "./_FilterOperator";
 import { FilterTypesConfigBag } from "./config";
@@ -34,7 +35,7 @@ export function TableFilter({
 
     return column.setFilterValue(
       Object.fromEntries(
-        Object.entries(value).filter(
+        typescriptSafeObjectDotEntries(value).filter(
           // eslint-disable-next-line @typescript-eslint/no-unused-vars
           ([_, value$1]) => value$1 || typeof value$1 === "boolean"
         )

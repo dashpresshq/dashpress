@@ -5,6 +5,7 @@ import { useEntitySlug } from "frontend/hooks/entity/entity.config";
 import { FormIntegrationsDocumentation } from "frontend/docs/form-integrations";
 import { SectionBox } from "frontend/design-system/components/Section/SectionBox";
 import { useDocumentationActionButton } from "frontend/docs/constants";
+import { msg } from "@lingui/macro";
 import { BaseEntitySettingsLayout } from "../_Base";
 import { ENTITY_CONFIGURATION_VIEW } from "../constants";
 import { FormActions } from "./Base";
@@ -32,7 +33,7 @@ export function EntityFormActionsSettings() {
             id: "manage",
             action: NAVIGATION_LINKS.SETTINGS.VARIABLES,
             systemIcon: "Settings",
-            label: "Manage Variables",
+            label: msg`Manage Variables`,
           },
           documentationActionButton,
         ]}

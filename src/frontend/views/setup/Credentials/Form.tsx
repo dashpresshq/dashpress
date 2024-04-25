@@ -12,6 +12,8 @@ import { FormCheckBox } from "frontend/design-system/components/Form/FormCheckBo
 import { FormButton } from "frontend/design-system/components/Button/FormButton";
 import { FormSelect } from "frontend/design-system/components/Form/FormSelect";
 import { useToggle } from "frontend/hooks/state/useToggleState";
+import { msg } from "@lingui/macro";
+import { typescriptSafeObjectDotKeys } from "shared/lib/objects";
 
 export function CredentialsSetupForm({
   onSubmit,
@@ -38,12 +40,12 @@ export function CredentialsSetupForm({
               {({ input, meta }) => (
                 <FormSelect
                   label="Database Type"
-                  selectData={Object.keys(DATA_SOURCES_CONFIG).map(
-                    (dataSourceType) => ({
-                      label: upperCaseFirstLetter(dataSourceType),
-                      value: dataSourceType,
-                    })
-                  )}
+                  selectData={typescriptSafeObjectDotKeys(
+                    DATA_SOURCES_CONFIG
+                  ).map((dataSourceType) => ({
+                    label: upperCaseFirstLetter(dataSourceType),
+                    value: dataSourceType,
+                  }))}
                   rightActions={
                     dataSourceConfig.useConnectionString
                       ? [
@@ -54,7 +56,7 @@ export function CredentialsSetupForm({
                             action: () => {
                               connectionStringView.toggle();
                             },
-                            label: "Toggle Connection URL",
+                            label: msg`Toggle Connection URL`,
                           },
                         ]
                       : []
@@ -149,7 +151,9 @@ export function CredentialsSetupForm({
 
             <FormButton
               text={(isSubmitting) =>
-                isSubmitting ? "Setting Up Credentials" : "Setup Credentials"
+                isSubmitting
+                  ? msg`Setting Up Credentials`
+                  : msg`Setup Credentials`
               }
               systemIcon="LogIn"
               isMakingRequest={submitting}

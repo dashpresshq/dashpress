@@ -6,6 +6,7 @@ import { arrayMoveImmutable } from "shared/lib/array/move";
 import SortableList, { SortableItem } from "react-easy-sort";
 import { Z_INDEXES } from "frontend/design-system/constants/zIndex";
 import { sortListByOrder } from "shared/lib/array/sort";
+import { msg } from "@lingui/macro";
 import { EmptyWrapper } from "../EmptyWrapper";
 import { FormSearch } from "../Form/FormSearch";
 import { defaultSearchFunction, defaultToEmptyArray } from "./utils";
@@ -121,7 +122,7 @@ export function ListManager<T, K extends StringProps<T>>({
             ))}
           </SortableList>
           {searchResults.length === 0 && searchString.length > 0 ? (
-            <EmptyWrapper text="No Search Results" />
+            <EmptyWrapper text={msg`No Search Results`} />
           ) : null}
         </Root>
       )}

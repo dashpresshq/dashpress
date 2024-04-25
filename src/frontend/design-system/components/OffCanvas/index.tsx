@@ -6,12 +6,15 @@ import { Typo } from "frontend/design-system/primitives/Typo";
 import { Stack } from "frontend/design-system/primitives/Stack";
 import { Divider } from "frontend/design-system/primitives/Divider";
 import { Z_INDEXES } from "frontend/design-system/constants/zIndex";
+import { MessageDescriptor } from "@lingui/core";
+import { msg } from "@lingui/macro";
+import { useLingui } from "@lingui/react";
 import { NextPortal } from "../_/NextPortal";
 import { SoftButton } from "../Button/SoftButton";
 
 export interface IProps {
   show: boolean;
-  title: string;
+  title: MessageDescriptor;
   children: ReactNode;
   onClose: () => void;
   width?: number;
@@ -64,6 +67,7 @@ export function OffCanvas({
   children,
   width = DEFAULT_CANVAS_WIDTH,
 }: IProps) {
+  const { _ } = useLingui();
   return (
     <NextPortal>
       <Root
@@ -77,10 +81,10 @@ export function OffCanvas({
           <>
             <Header>
               <Stack $justify="space-between" $align="center">
-                <Typo.MD $weight="bold">{title}</Typo.MD>
+                <Typo.MD $weight="bold">{_(title)}</Typo.MD>
                 <SoftButton
                   justIcon
-                  label="Close Canvas"
+                  label={msg`Close Canvas`}
                   noToolTip
                   systemIcon="Close"
                   action={onClose}

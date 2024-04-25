@@ -6,11 +6,13 @@ import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
 import { SystemIconsKeys } from "shared/constants/Icons";
 import { SystemIcon } from "frontend/design-system/Icons/System";
 import React from "react";
+import { MessageDescriptor } from "@lingui/core";
+import { useLingui } from "@lingui/react";
 import { OutlineButton, IStyledBaseButton, StyledBaseButton } from "../Button";
 import { Spin } from "../../_/Spin";
 
 interface IFormButton extends IStyledBaseButton {
-  text: (isMakingRequest: boolean) => string;
+  text: (isMakingRequest: boolean) => MessageDescriptor;
   systemIcon: SystemIconsKeys;
   isMakingRequest: boolean;
   onClick?: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
@@ -18,18 +20,23 @@ interface IFormButton extends IStyledBaseButton {
   isInverse?: boolean;
 }
 
-export const actionButtonIsMakingRequest = (
-  isMakingRequest: boolean,
-  text: (isMakingRequest: boolean) => string,
-  systemIcon: SystemIconsKeys
-) => {
+export function ActionButtonIsMakingRequest({
+  isMakingRequest,
+  systemIcon,
+  text,
+}: {
+  isMakingRequest: boolean;
+  text: (isMakingRequest: boolean) => MessageDescriptor;
+  systemIcon: SystemIconsKeys;
+}) {
+  const { _ } = useLingui();
   const iconProps = {
     size: 16,
   };
   return isMakingRequest ? (
     <Stack $align="center" $justify="center" $width="auto">
       <Spin as={Loader} {...iconProps} />
-      <span>{text(true)}</span>
+      <span>{_(text(true))}</span>
     </Stack>
   ) : (
     <Stack $align="center" $justify="center" $width="auto">
@@ -38,10 +45,10 @@ export const actionButtonIsMakingRequest = (
         {...iconProps}
         style={{ verticalAlign: "top" }}
       />
-      <span>{text(false)}</span>
+      <span>{_(text(false))}</span>
     </Stack>
   );
-};
+}
 
 export const StyledButton = styled(StyledBaseButton)<{ $hoverColor: string }>`
   color: ${USE_ROOT_COLOR("text-on-primary")};
@@ -76,10 +83,12 @@ export function FormButton({
     size,
   };
 
-  const toRender = actionButtonIsMakingRequest(
-    isMakingRequest,
-    text,
-    systemIcon
+  const toRender = (
+    <ActionButtonIsMakingRequest
+      isMakingRequest={isMakingRequest}
+      text={text}
+      systemIcon={systemIcon}
+    />
   );
 
   return (

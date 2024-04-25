@@ -3,6 +3,7 @@ import { SchemaForm } from "frontend/components/SchemaForm";
 import { Stack } from "frontend/design-system/primitives/Stack";
 import { Spacer } from "frontend/design-system/primitives/Spacer";
 import { Typo } from "frontend/design-system/primitives/Typo";
+import { msg } from "@lingui/macro";
 import { useDeactivateIntegrationMutation } from "../actions.store";
 
 interface IProps {
@@ -55,8 +56,8 @@ export function Deactivate({ integrationDetail, activationId }: IProps) {
         onSubmit={() => deactivateIntegrationMutation.mutateAsync(activationId)}
         buttonText={(isSubmitting) =>
           isSubmitting
-            ? `Deactivating ${integrationDetail.title}`
-            : `Deactivate ${integrationDetail.title}`
+            ? msg`Deactivating ${integrationDetail.title}`
+            : msg`Deactivate ${integrationDetail.title}`
         }
         systemIcon="Ban"
       />

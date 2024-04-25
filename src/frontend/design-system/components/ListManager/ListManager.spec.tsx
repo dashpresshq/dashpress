@@ -114,7 +114,7 @@ describe("ListManager", () => {
         {...{ ...defaultProps }}
         items={loadedDataState([])}
         empty={{
-          text: "No Item Has Been Added Yet",
+          text: { message: "No Item Has Been Added Yet", id: "some-id" },
         }}
         render={(item) => ({ label: item.label })}
       />

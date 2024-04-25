@@ -10,6 +10,8 @@ import { FormButton } from "frontend/design-system/components/Button/FormButton"
 import { userFriendlyCase } from "shared/lib/strings/friendly-case";
 import { SystemIconsKeys } from "shared/constants/Icons";
 import { useEvaluateScriptContext } from "frontend/hooks/scripts";
+import { MessageDescriptor } from "@lingui/core";
+import { typescriptSafeObjectDotEntries } from "shared/lib/objects";
 import { RenderFormInput } from "./_RenderFormInput";
 import { IFormExtension } from "./types";
 import { runFormBeforeSubmit, runFormFieldState } from "./form-run";
@@ -21,7 +23,7 @@ interface IProps<T> {
   fields: IAppliedSchemaFormConfig<T>;
   onSubmit: (data: T) => Promise<unknown>;
   initialValues?: Partial<T>;
-  buttonText?: (submitting: boolean) => string;
+  buttonText?: (submitting: boolean) => MessageDescriptor;
   action?: string;
   systemIcon: SystemIconsKeys;
   onChange?: (data: T) => void;
@@ -93,9 +95,9 @@ export function SchemaForm<T extends Record<string, unknown>>({
             }}
           >
             <FormGrid.Root>
-              {Object.entries(fields)
+              {typescriptSafeObjectDotEntries(fields)
                 .filter(([field, bag]) => {
-                  const isHidden = fieldState[field]?.hidden;
+                  const isHidden = fieldState[String(field)]?.hidden;
                   if (isHidden) {
                     return false;
                   }

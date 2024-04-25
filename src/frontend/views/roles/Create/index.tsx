@@ -17,7 +17,7 @@ export function RoleCreate() {
 
   useSetPageDetails({
     pageTitle: ADMIN_ROLES_CRUD_CONFIG.TEXT_LANG.CREATE,
-    viewKey: ADMIN_ROLES_CRUD_CONFIG.TEXT_LANG.CREATE,
+    viewKey: "add-new-role",
     permission: USER_PERMISSIONS.CAN_MANAGE_PERMISSIONS,
   });
 

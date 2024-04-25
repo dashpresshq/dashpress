@@ -8,13 +8,14 @@ import { SectionBox } from "frontend/design-system/components/Section/SectionBox
 import { BaseSkeleton } from "frontend/design-system/components/Skeleton/Base";
 import { Typo } from "frontend/design-system/primitives/Typo";
 import { Spacer } from "frontend/design-system/primitives/Spacer";
+import { msg } from "@lingui/macro";
+import { typescriptSafeObjectDotEntries } from "shared/lib/objects";
 import { SETTINGS_VIEW_KEY } from "../constants";
 import { BaseSettingsLayout } from "../_Base";
 
 const SYSTEM_INFORMATION_CRUD_CONFIG = MAKE_CRUD_CONFIG({
-  path: "N/A",
-  plural: "System Information",
-  singular: "System Information",
+  plural: msg`System Information`,
+  singular: msg`System Information`,
 });
 
 export function VersionInfo() {
@@ -46,13 +47,15 @@ export function VersionInfo() {
             </>
           }
         >
-          {Object.entries(systemVersions.data).map(([label, value]) => (
-            <Fragment key={label}>
-              <Typo.XS $weight="bold">{label}</Typo.XS>
-              <Typo.SM>{value}</Typo.SM>
-              <Spacer />
-            </Fragment>
-          ))}
+          {typescriptSafeObjectDotEntries(systemVersions.data).map(
+            ([label, value]) => (
+              <Fragment key={label}>
+                <Typo.XS $weight="bold">{label}</Typo.XS>
+                <Typo.SM>{value}</Typo.SM>
+                <Spacer />
+              </Fragment>
+            )
+          )}
         </ViewStateMachine>
       </SectionBox>
     </BaseSettingsLayout>

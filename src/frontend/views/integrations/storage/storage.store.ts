@@ -19,7 +19,7 @@ const STORAGE_CREDENTIALS_CONFIG = `/api/integrations/storage/credentials`;
 
 export const useActiveStorageIntegration = () =>
   useApi<{ data: string }>(ACTIVE_STORAGE_INTEGRATIONS_ENDPOINT, {
-    errorMessage: CRUD_CONFIG_NOT_FOUND("Active Storage Integrations"),
+    errorMessage: CRUD_CONFIG_NOT_FOUND(`Active Storage Integrations`),
     defaultData: { data: "" },
   });
 
@@ -34,7 +34,7 @@ export const useStorageCredentialsConfiguration = () => {
         },
         method: "POST",
       },
-      errorMessage: CRUD_CONFIG_NOT_FOUND("Storage Credentials"),
+      errorMessage: CRUD_CONFIG_NOT_FOUND(`Storage Credentials`),
       enabled: !!rootPassword,
       defaultData: undefined,
     }

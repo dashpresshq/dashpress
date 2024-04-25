@@ -3,6 +3,8 @@ import { Stack } from "frontend/design-system/primitives/Stack";
 import { Typo } from "frontend/design-system/primitives/Typo";
 import { Spacer } from "frontend/design-system/primitives/Spacer";
 import { SystemIcon } from "frontend/design-system/Icons/System";
+import { MessageDescriptor } from "@lingui/core";
+import { useLingui } from "@lingui/react";
 import { SoftButton } from "../../Button/SoftButton";
 import { Card, CardBody, CardHeader } from "../../Card";
 import { Tooltip } from "../../Tooltip";
@@ -11,11 +13,11 @@ import { ActionButtons } from "../../Button/ActionButtons";
 import { IGroupActionButton } from "../../Button/types";
 
 export interface IProps {
-  title: string;
+  title: MessageDescriptor;
   children: ReactNode;
   description?: string;
   actionButtons?: IGroupActionButton[];
-  backLink?: { label?: string; action: string | (() => void) };
+  backLink?: { label?: MessageDescriptor; action: string | (() => void) };
   isLoading?: boolean;
   headLess?: boolean;
 }
@@ -29,6 +31,8 @@ export function SectionBox({
   backLink,
   headLess,
 }: IProps) {
+  const { _ } = useLingui();
+
   return (
     <>
       {backLink && (
@@ -50,7 +54,7 @@ export function SectionBox({
                 {isLoading ? (
                   <BaseSkeleton width="150px" height="20px" />
                 ) : (
-                  <Typo.MD $weight="bold">{title}</Typo.MD>
+                  <Typo.MD $weight="bold">{_(title)}</Typo.MD>
                 )}
                 {description ? (
                   <Tooltip text={description}>

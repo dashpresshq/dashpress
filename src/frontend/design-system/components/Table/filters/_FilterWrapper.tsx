@@ -6,6 +6,7 @@ import { Stack } from "frontend/design-system/primitives/Stack";
 import { TableFilterType } from "shared/types/data";
 import { SystemIcon } from "frontend/design-system/Icons/System";
 import { SystemIconsKeys } from "shared/constants/Icons";
+import { msg } from "@lingui/macro";
 import { Dropdown } from "../../Dropdown";
 import { SoftButton } from "../../Button/SoftButton";
 
@@ -78,7 +79,7 @@ export function FilterWrapper({
           block
           size="xs"
           systemIcon="Close"
-          label="Reset"
+          label={msg`Reset`}
         />
       </DownRoot>
     </Dropdown>

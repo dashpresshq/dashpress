@@ -3,50 +3,48 @@ import { useRouter } from "next/router";
 import { ICreateUserForm } from "shared/form-schemas/users";
 import { IResetPasswordForm } from "shared/form-schemas/users/reset-password";
 import { IAccountProfile } from "shared/types/user";
-import { MAKE_CRUD_CONFIG } from "frontend/lib/crud-config";
+import {
+  MAKE_CRUD_CONFIG,
+  MAKE_ENDPOINTS_CONFIG,
+} from "frontend/lib/crud-config";
 import { useApi } from "frontend/lib/data/useApi";
 import { useApiMutateOptimisticOptions } from "frontend/lib/data/useMutate/useApiMutateOptimisticOptions";
 import { makeActionRequest } from "frontend/lib/data/makeRequest";
 import { MutationHelpers } from "frontend/lib/data/useMutate/mutation-helpers";
 import { useWaitForResponseMutationOptions } from "frontend/lib/data/useMutate/useWaitForResponseMutationOptions";
-import { t } from "@lingui/macro";
+import { msg } from "@lingui/macro";
 import { useUsernameFromRouteParam } from "./hooks";
 
 export const ADMIN_USERS_CRUD_CONFIG = MAKE_CRUD_CONFIG({
-  path: "/api/account",
-  plural: "Users",
-  singular: t`User`,
+  plural: msg`Users`,
+  singular: msg`User`,
 });
 
+export const USERS_ENDPOINT_CONFIG = MAKE_ENDPOINTS_CONFIG("/api/account");
+
 export function useAllUsers() {
-  return useApi<IAccountProfile[]>(ADMIN_USERS_CRUD_CONFIG.ENDPOINTS.LIST, {
+  return useApi<IAccountProfile[]>(USERS_ENDPOINT_CONFIG.LIST, {
     defaultData: [],
   });
 }
 
 export function useUserDetails(username: string) {
-  return useApi<IAccountProfile>(
-    ADMIN_USERS_CRUD_CONFIG.ENDPOINTS.DETAILS(username),
-    {
-      defaultData: {
-        name: "",
-        role: "",
-        username: "",
-      },
-      errorMessage: ADMIN_USERS_CRUD_CONFIG.TEXT_LANG.NOT_FOUND,
-    }
-  );
+  return useApi<IAccountProfile>(USERS_ENDPOINT_CONFIG.DETAILS(username), {
+    defaultData: {
+      name: "",
+      role: "",
+      username: "",
+    },
+    errorMessage: ADMIN_USERS_CRUD_CONFIG.TEXT_LANG.NOT_FOUND,
+  });
 }
 
 export function useUserDeletionMutation() {
   const router = useRouter();
   return useApiMutateOptimisticOptions<IAccountProfile[], string>({
     mutationFn: async (username) =>
-      await makeActionRequest(
-        "DELETE",
-        ADMIN_USERS_CRUD_CONFIG.ENDPOINTS.DELETE(username)
-      ),
-    dataQueryPath: ADMIN_USERS_CRUD_CONFIG.ENDPOINTS.LIST,
+      await makeActionRequest("DELETE", USERS_ENDPOINT_CONFIG.DELETE(username)),
+    dataQueryPath: USERS_ENDPOINT_CONFIG.LIST,
     onSuccessActionWithFormData: () => {
       router.replace(NAVIGATION_LINKS.USERS.LIST);
     },
@@ -61,12 +59,12 @@ export function useUpdateUserMutation() {
     mutationFn: async (data) =>
       await makeActionRequest(
         "PATCH",
-        ADMIN_USERS_CRUD_CONFIG.ENDPOINTS.UPDATE(username),
+        USERS_ENDPOINT_CONFIG.UPDATE(username),
         data
       ),
     endpoints: [
-      ADMIN_USERS_CRUD_CONFIG.ENDPOINTS.LIST,
-      ADMIN_USERS_CRUD_CONFIG.ENDPOINTS.DETAILS(username),
+      USERS_ENDPOINT_CONFIG.LIST,
+      USERS_ENDPOINT_CONFIG.DETAILS(username),
     ],
     successMessage: ADMIN_USERS_CRUD_CONFIG.MUTATION_LANG.EDIT,
   });
@@ -78,11 +76,11 @@ export function useResetUserPasswordMutation() {
     mutationFn: async (data) =>
       await makeActionRequest(
         "PATCH",
-        ADMIN_USERS_CRUD_CONFIG.ENDPOINTS.CUSTOM(username, "reset-password"),
+        USERS_ENDPOINT_CONFIG.CUSTOM(username, "reset-password"),
         data
       ),
     endpoints: [],
-    successMessage: "Password Reset Successfully",
+    successMessage: msg`Password Reset Successfully`,
   });
 }
 
@@ -90,14 +88,10 @@ export function useCreateUserMutation() {
   const router = useRouter();
   return useWaitForResponseMutationOptions<ICreateUserForm, ICreateUserForm>({
     mutationFn: async (data: ICreateUserForm) => {
-      await makeActionRequest(
-        "POST",
-        ADMIN_USERS_CRUD_CONFIG.ENDPOINTS.CREATE,
-        data
-      );
+      await makeActionRequest("POST", USERS_ENDPOINT_CONFIG.CREATE, data);
       return data;
     },
-    endpoints: [ADMIN_USERS_CRUD_CONFIG.ENDPOINTS.LIST],
+    endpoints: [USERS_ENDPOINT_CONFIG.LIST],
     smartSuccessMessage: ({ username }) => ({
       message: ADMIN_USERS_CRUD_CONFIG.MUTATION_LANG.CREATE,
       action: {

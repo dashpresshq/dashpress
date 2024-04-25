@@ -30,6 +30,7 @@ import { relativeDateNotationToActualDate } from "backend/data/data-access/time.
 import { ILabelValue } from "shared/types/options";
 import { sortListByOrder } from "shared/lib/array/sort";
 import { DATA_SOURCES_CONFIG } from "shared/types/data-sources";
+import { typescriptSafeObjectDotKeys } from "shared/lib/objects";
 import {
   mutateGeneratedDashboardWidgets,
   PORTAL_DASHBOARD_PERMISSION,
@@ -119,7 +120,7 @@ export class DashboardWidgetsApiService {
   }
 
   private generateDashboardWidgets = async (entitiesToShow: ILabelValue[]) => {
-    const colorsList = Object.keys(ROYGBIV);
+    const colorsList = typescriptSafeObjectDotKeys(ROYGBIV);
 
     const DEFAULT_NUMBER_OF_SUMMARY_CARDS = 8;
 

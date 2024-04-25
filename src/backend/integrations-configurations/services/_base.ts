@@ -1,6 +1,7 @@
 import { AbstractConfigDataPersistenceService } from "backend/lib/config-persistence";
 import { EncryptionApiService } from "backend/lib/encryption/encryption.service";
 import { BadRequestError, progammingError } from "backend/lib/errors";
+import { typescriptSafeObjectDotEntries } from "shared/lib/objects";
 import { IGroupCredential } from "../types";
 
 export const INTEGRATION_CONFIG_GROUP_DEMILITER = "___";
@@ -32,7 +33,7 @@ export abstract class IntegrationsConfigurationApiService {
   }
 
   async list() {
-    return Object.entries(
+    return typescriptSafeObjectDotEntries(
       await this._persistenceService.getAllAsKeyValuePair()
     ).map(([key, value]) => ({ key, value }));
   }

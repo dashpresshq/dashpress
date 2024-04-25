@@ -1,8 +1,10 @@
+import { MessageDescriptor } from "@lingui/core";
+
 export interface IAppConfigurationBag {
   requireEntity?: true;
   defaultValue: unknown;
   guest?: true;
-  label: string;
+  label: MessageDescriptor;
 }
 
 export interface IEntityCrudSettings {

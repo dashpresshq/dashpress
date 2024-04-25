@@ -1,3 +1,5 @@
+import { typescriptSafeObjectDotKeys } from "shared/lib/objects";
+
 export const SystemIcons = {
   ShoppingCart: `<path d="M10 21a1 1 0 11-2 0 1 1 0 012 0zM21 21a1 1 0 11-2 0 1 1 0 012 0zM1 1h4l2.68 13.39c.188.925.995 1.61 1.962 1.61h.04-.002H19.438a2 2 0 001.959-1.597l.002-.013 1.6-8.39h-17" />`,
   Activity: `<path d="M22 12h-4l-3 9L9 3l-3 9H2" />`,
@@ -91,7 +93,7 @@ export const SystemIcons = {
 
 export type SystemIconsKeys = keyof typeof SystemIcons;
 
-export const SystemIconsList = Object.keys(SystemIcons);
+export const SystemIconsList = typescriptSafeObjectDotKeys(SystemIcons);
 
 export const systemIconToSVG = (icon: string, strokeWidth = 2) => {
   let iconPath = SystemIcons[icon];

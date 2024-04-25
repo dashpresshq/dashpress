@@ -24,15 +24,14 @@ import {
   lessThanOtherField,
   matchOtherField,
 } from "./custom-validations";
-import { FIELD_TYPES_CONFIG_MAP } from "./field-types-config";
 import { handleValidation } from "./handle-validation";
-import { ValidationTypes } from "./types";
+import { FormFieldTypes, ValidationTypes } from "./types";
 
 export const ENTITY_VALIDATION_CONFIG: Record<
   ValidationTypes,
   {
     input?: Record<string, unknown>;
-    isBoundToType?: Array<keyof typeof FIELD_TYPES_CONFIG_MAP>;
+    isBoundToType?: Array<FormFieldTypes>;
     message: string;
     implementation: (
       value: unknown,
@@ -43,6 +42,7 @@ export const ENTITY_VALIDATION_CONFIG: Record<
   }
 > = {
   required: {
+    // TODO make this work
     message: "{{ name }} is required",
     implementation: (value, errorMessage) =>
       isNotEmpty(value) ? undefined : errorMessage,

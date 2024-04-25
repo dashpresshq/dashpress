@@ -6,6 +6,8 @@ import { SortableKnob } from "react-easy-sort";
 import { GrabIcon } from "frontend/design-system/Icons/Grab";
 import { ActionButtons } from "frontend/design-system/components/Button/ActionButtons";
 import { DELETE_BUTTON_PROPS } from "frontend/design-system/components/Button/constants";
+import { msg } from "@lingui/macro";
+import { DASHBOARD_WIDGETS_CRUD_CONFIG } from "frontend/views/Dashboard/constants";
 import { DASHBOARD_RELATIVE_DAYS } from "./constants";
 import { IWidgetSettingProps } from "./types";
 import { useDashboardWidgetRelativeDateStore } from "../../../relativeTime.store";
@@ -48,13 +50,13 @@ export function WidgetHeader({
             {
               id: "edit",
               action: setting.setId,
-              label: "Edit Widget",
+              label: DASHBOARD_WIDGETS_CRUD_CONFIG.TEXT_LANG.EDIT,
               systemIcon: "Edit",
             },
             {
               ...DELETE_BUTTON_PROPS({
                 action: setting.delete,
-                label: "Delete Widget",
+                label: DASHBOARD_WIDGETS_CRUD_CONFIG.TEXT_LANG.DELETE,
                 isMakingRequest: false,
               }),
             },
@@ -67,7 +69,7 @@ export function WidgetHeader({
               ariaLabel={`Toggle ${title} Menu`}
               menuItems={DASHBOARD_RELATIVE_DAYS.map(({ label, value }) => ({
                 id: label,
-                label: `${label}`,
+                label: msg`${label}`,
                 systemIcon: null,
                 action: () => {
                   setWidgetRelativeDate({
@@ -81,7 +83,7 @@ export function WidgetHeader({
           {link && (
             <SoftButton
               action={link}
-              label="View"
+              label={msg`View`}
               systemIcon="Right"
               disabled={isPreview}
               justIcon

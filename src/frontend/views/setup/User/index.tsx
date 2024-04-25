@@ -11,6 +11,7 @@ import {
   ISetupUserForm,
   SETUP_USER_FORM_SCHEMA,
 } from "shared/form-schemas/setup/user";
+import { msg } from "@lingui/macro";
 import { useSetupUserMutation } from "../setup.store";
 
 export function UserSetup() {
@@ -49,7 +50,7 @@ export function UserSetup() {
       >
         <SchemaForm<ISetupUserForm>
           buttonText={(isSubmitting) =>
-            isSubmitting ? "Setting Up Account" : "Setup Account"
+            isSubmitting ? msg`Setting Up Account` : msg`Setup Account`
           }
           onSubmit={setupUserMutation.mutateAsync}
           systemIcon="UserPlus"

@@ -13,6 +13,7 @@ import { useActiveEntities } from "frontend/hooks/entity/entity.store";
 import { NAVIGATION_MENU_ENDPOINT } from "frontend/_layouts/app/LayoutImpl/constants";
 import { AppLayout } from "frontend/_layouts/app";
 import { ACTIVE_ENTITIES_ENDPOINT } from "shared/constants/entities";
+import { msg } from "@lingui/macro";
 import { SETTINGS_VIEW_KEY } from "../constants";
 import { EntitiesSelection } from "../Entities/Selection";
 
@@ -64,7 +65,7 @@ export function MenuSettings() {
 
   return (
     <AppLayout>
-      <SectionBox title="Menu Settings">
+      <SectionBox title={msg`Menu Settings`}>
         <ViewStateMachine
           error={error}
           loading={isLoading}

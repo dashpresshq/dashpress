@@ -1,26 +1,25 @@
 import { render, fireEvent, screen } from "@testing-library/react";
+import { msg } from "@lingui/macro";
 import { Tabs } from ".";
+
+const TAB_CONTENT = [
+  {
+    label: msg`Foo Label`,
+    content: <>Foo Content</>,
+  },
+  {
+    label: msg`Bar Label`,
+    content: <>Bar Content</>,
+  },
+  {
+    label: msg`Baz Label`,
+    content: <>Baz Content</>,
+  },
+];
 
 describe("Tabs", () => {
   it("should render first tab by default", () => {
-    render(
-      <Tabs
-        contents={[
-          {
-            label: "Foo Label",
-            content: <>Foo Content</>,
-          },
-          {
-            label: "Bar Label",
-            content: <>Bar Content</>,
-          },
-          {
-            label: "Baz Label",
-            content: <>Baz Content</>,
-          },
-        ]}
-      />
-    );
+    render(<Tabs contents={TAB_CONTENT} />);
 
     expect(screen.getByText("Foo Content")).toBeVisible();
     expect(screen.getByText("Bar Content")).not.toBeVisible();
@@ -28,25 +27,7 @@ describe("Tabs", () => {
   });
 
   it("should render first tab when current tab is loading", () => {
-    render(
-      <Tabs
-        currentTab={undefined}
-        contents={[
-          {
-            label: "Foo Label",
-            content: <>Foo Content</>,
-          },
-          {
-            label: "Bar Label",
-            content: <>Bar Content</>,
-          },
-          {
-            label: "Baz Label",
-            content: <>Baz Content</>,
-          },
-        ]}
-      />
-    );
+    render(<Tabs currentTab={undefined} contents={TAB_CONTENT} />);
 
     expect(screen.getByText("Foo Content")).toBeVisible();
     expect(screen.getByText("Bar Content")).not.toBeVisible();
@@ -54,25 +35,7 @@ describe("Tabs", () => {
   });
 
   it("should render currentTab", () => {
-    render(
-      <Tabs
-        currentTab="Baz Label"
-        contents={[
-          {
-            label: "Foo Label",
-            content: <>Foo Content</>,
-          },
-          {
-            label: "Bar Label",
-            content: <>Bar Content</>,
-          },
-          {
-            label: "Baz Label",
-            content: <>Baz Content</>,
-          },
-        ]}
-      />
-    );
+    render(<Tabs currentTab="Baz Label" contents={TAB_CONTENT} />);
 
     expect(screen.getByText("Foo Content")).not.toBeVisible();
     expect(screen.getByText("Bar Content")).not.toBeVisible();
@@ -82,24 +45,7 @@ describe("Tabs", () => {
   it("should switch tab", async () => {
     const onChange = jest.fn();
     render(
-      <Tabs
-        onChange={onChange}
-        currentTab="Baz Label"
-        contents={[
-          {
-            label: "Foo Label",
-            content: <>Foo Content</>,
-          },
-          {
-            label: "Bar Label",
-            content: <>Bar Content</>,
-          },
-          {
-            label: "Baz Label",
-            content: <>Baz Content</>,
-          },
-        ]}
-      />
+      <Tabs onChange={onChange} currentTab="Baz Label" contents={TAB_CONTENT} />
     );
     expect(screen.getByText("Foo Content")).not.toBeVisible();
     expect(screen.getByText("Bar Content")).not.toBeVisible();
@@ -125,24 +71,7 @@ describe("Tabs", () => {
   it("should not call onChange if current tab is pressed", async () => {
     const onChange = jest.fn();
     render(
-      <Tabs
-        onChange={onChange}
-        currentTab="Baz Label"
-        contents={[
-          {
-            label: "Foo Label",
-            content: <>Foo Content</>,
-          },
-          {
-            label: "Bar Label",
-            content: <>Bar Content</>,
-          },
-          {
-            label: "Baz Label",
-            content: <>Baz Content</>,
-          },
-        ]}
-      />
+      <Tabs onChange={onChange} currentTab="Baz Label" contents={TAB_CONTENT} />
     );
     expect(screen.getByText("Foo Content")).not.toBeVisible();
     expect(screen.getByText("Bar Content")).not.toBeVisible();

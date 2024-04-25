@@ -16,20 +16,22 @@ import { DELETE_BUTTON_PROPS } from "frontend/design-system/components/Button/co
 import { useUserHasPermission } from "frontend/hooks/auth/user.store";
 import { IDropDownMenuItem } from "frontend/design-system/components/DropdownMenu";
 import { useCallback } from "react";
-import { ADMIN_ROLES_CRUD_CONFIG } from "../roles/roles.store";
+import { msg } from "@lingui/macro";
+import { ROLES_ENDPOINT_CONFIG } from "../roles/roles.store";
 import {
   ADMIN_USERS_CRUD_CONFIG,
+  USERS_ENDPOINT_CONFIG,
   useUserDeletionMutation,
 } from "./users.store";
 
 export function ListUsers() {
   useSetPageDetails({
     pageTitle: ADMIN_USERS_CRUD_CONFIG.TEXT_LANG.TITLE,
-    viewKey: ADMIN_USERS_CRUD_CONFIG.TEXT_LANG.TITLE,
+    viewKey: `users`,
     permission: USER_PERMISSIONS.CAN_MANAGE_USERS,
   });
 
-  const roles = useApi<IRolesList[]>(ADMIN_ROLES_CRUD_CONFIG.ENDPOINTS.LIST, {
+  const roles = useApi<IRolesList[]>(ROLES_ENDPOINT_CONFIG.LIST, {
     defaultData: [],
   });
 
@@ -111,7 +113,7 @@ export function ListUsers() {
     actionsItems.push({
       id: "connect",
       systemIcon: "Link",
-      label: "Link Users To Database",
+      label: msg`Link Users To Database`,
       action: NAVIGATION_LINKS.USERS.LINK_DATABASE,
     });
   }
@@ -120,7 +122,7 @@ export function ListUsers() {
     <AppLayout actionItems={actionsItems}>
       <Card>
         <FEPaginationTable
-          dataEndpoint={ADMIN_USERS_CRUD_CONFIG.ENDPOINTS.LIST}
+          dataEndpoint={USERS_ENDPOINT_CONFIG.LIST}
           columns={columns}
           empty={{
             text: ADMIN_USERS_CRUD_CONFIG.TEXT_LANG.EMPTY_LIST,

@@ -7,6 +7,8 @@ import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
 import { AppLayout } from "frontend/_layouts/app";
 import { arrayMoveImmutable } from "shared/lib/array/move";
+import { msg } from "@lingui/macro";
+import { useLingui } from "@lingui/react";
 import {
   useArrangeDashboardWidgetMutation,
   useDashboardWidgets,
@@ -33,6 +35,8 @@ interface IProps {
 export function BaseManageDashboard({ dashboardId, doneLink, title }: IProps) {
   const router = useRouter();
 
+  const { _ } = useLingui();
+
   const widgets = useDashboardWidgets(dashboardId);
 
   const deleteDashboardWidgetMutation =
@@ -46,7 +50,7 @@ export function BaseManageDashboard({ dashboardId, doneLink, title }: IProps) {
   };
 
   useSetPageDetails({
-    pageTitle: `Manage ${title}`,
+    pageTitle: msg`Manage ${title}`,
     viewKey: "MANAGE_DASHBOARD",
     permission: USER_PERMISSIONS.CAN_MANAGE_DASHBOARD,
   });
@@ -56,7 +60,7 @@ export function BaseManageDashboard({ dashboardId, doneLink, title }: IProps) {
       secondaryActionItems={[
         {
           id: "done",
-          label: "Done",
+          label: msg`Done`,
           systemIcon: "Check",
           action: () => router.replace(doneLink),
         },
@@ -79,7 +83,7 @@ export function BaseManageDashboard({ dashboardId, doneLink, title }: IProps) {
           <SortableList
             onSortEnd={onSortEnd}
             className="list"
-            aria-label={DASHBOARD_WIDGETS_CRUD_CONFIG.TEXT_LANG.TITLE}
+            aria-label={_(DASHBOARD_WIDGETS_CRUD_CONFIG.TEXT_LANG.TITLE)}
             draggedItemClassName="dragged"
           >
             {widgets.data.map((config) => (

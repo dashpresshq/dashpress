@@ -1,6 +1,7 @@
 import { OffCanvas } from "frontend/design-system/components/OffCanvas";
 import { ReactNode } from "react";
 import styled from "styled-components";
+import { msg } from "@lingui/macro";
 import { useDocumentationCanvasStore } from "./constants";
 
 const Root = styled.div`
@@ -39,7 +40,7 @@ export function DocumentationRoot({ children }: { children: ReactNode }) {
   const canvasStore = useDocumentationCanvasStore();
   return (
     <OffCanvas
-      title={canvasStore.title}
+      title={msg`${canvasStore.title}`}
       onClose={() => canvasStore.setTitle("")}
       show={!!canvasStore.title}
       width={600}

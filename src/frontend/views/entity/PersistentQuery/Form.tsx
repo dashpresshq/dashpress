@@ -18,6 +18,8 @@ import { FormSelectButton } from "frontend/design-system/components/Form/FormSel
 import { FormGrid } from "frontend/components/SchemaForm/form-grid";
 import { Card, CardBody } from "frontend/design-system/components/Card";
 import { Fragment } from "react";
+import { msg } from "@lingui/macro";
+import { typescriptSafeObjectDotEntries } from "shared/lib/objects";
 import { FILTER_OPERATOR_CONFIG } from "./constants";
 
 const OPERATOR_SELECTORS = ["and", "or"].map((option) => ({
@@ -25,7 +27,9 @@ const OPERATOR_SELECTORS = ["and", "or"].map((option) => ({
   label: `${option.toLocaleUpperCase()}`,
 }));
 
-const filterOperatorSelections = Object.entries(FILTER_OPERATOR_CONFIG)
+const filterOperatorSelections = typescriptSafeObjectDotEntries(
+  FILTER_OPERATOR_CONFIG
+)
   .filter(([, value]) => !value.disabled)
   .map(([key, value]) => ({ value: key, label: value.label }));
 
@@ -182,7 +186,7 @@ export function EntityPersistentQueryForm({
                                                 queryFilterIndex
                                               );
                                             },
-                                            label: "Remove Nested Filter",
+                                            label: msg`Remove Nested Filter`,
                                             isMakingRequest: false,
                                             shouldConfirmAlert: undefined,
                                           })}
@@ -193,7 +197,7 @@ export function EntityPersistentQueryForm({
                                 )}
                                 <SoftButton
                                   systemIcon="Plus"
-                                  label="Add Nested Filter"
+                                  label={msg`Add Nested Filter`}
                                   action={() =>
                                     queryFilters.push({
                                       id: "",
@@ -216,7 +220,7 @@ export function EntityPersistentQueryForm({
                   <Stack $justify="end">
                     <SoftButton
                       systemIcon="Plus"
-                      label="Add Filter"
+                      label={msg`Add Filter`}
                       action={() =>
                         queryFields.push({
                           operator: "and",

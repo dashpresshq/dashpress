@@ -1,5 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import * as μs from "microseconds";
+import { typescriptSafeObjectDotKeys } from "shared/lib/objects";
 import { handleResponseError } from "../errors";
 import { RequestMethod, RequestMethodResponseCode } from "./methods";
 import { ValidationKeys } from "./validations/types";
@@ -66,8 +67,12 @@ export const requestHandler =
           await ValidationImpl[validation._type](req, validation.body);
         }
 
-        if (!Object.keys(methodHandler).includes(req.method)) {
-          res.setHeader("Allow", Object.keys(methodHandler));
+        if (
+          !typescriptSafeObjectDotKeys(methodHandler).includes(
+            req.method as RequestMethod
+          )
+        ) {
+          res.setHeader("Allow", typescriptSafeObjectDotKeys(methodHandler));
           return res.status(405).end(`Method '${req.method}' Not Allowed`);
         }
 

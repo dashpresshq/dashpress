@@ -17,6 +17,10 @@ import {
   formActionsApiService,
   FormActionsApiService,
 } from "backend/form-actions/form-actions.service";
+import {
+  typescriptSafeObjectDotEntries,
+  typescriptSafeObjectDotKeys,
+} from "shared/lib/objects";
 import { ACTION_INTEGRATIONS } from "./libs";
 
 export class IntegrationsApiService {
@@ -29,11 +33,11 @@ export class IntegrationsApiService {
   ) {}
 
   listActionIntegrations(): IIntegrationsList[] {
-    return Object.entries(ACTION_INTEGRATIONS).map(
+    return typescriptSafeObjectDotEntries(ACTION_INTEGRATIONS).map(
       ([key, { title, description, configurationSchema }]) => ({
         description,
         title,
-        key: key as ActionIntegrations,
+        key,
         configurationSchema,
       })
     );
@@ -42,7 +46,7 @@ export class IntegrationsApiService {
   listIntegrationImplementations(
     integration: ActionIntegrations
   ): IIntegrationImplementationList[] {
-    return Object.entries(
+    return typescriptSafeObjectDotEntries(
       ACTION_INTEGRATIONS[integration].performsImplementation
     ).map(([key, { configurationSchema, label }]) => ({
       label,
@@ -80,9 +84,9 @@ export class IntegrationsApiService {
     await this._credentialsApiService.upsertGroup(
       {
         key: credentialsGroupKey,
-        fields: Object.keys(
+        fields: typescriptSafeObjectDotKeys(
           ACTION_INTEGRATIONS[integration].configurationSchema
-        ),
+        ) as string[],
       },
       configuration
     );
@@ -101,7 +105,9 @@ export class IntegrationsApiService {
 
     return await this._credentialsApiService.useGroupValue({
       key: this.makeCredentialsGroupKey(integration),
-      fields: Object.keys(ACTION_INTEGRATIONS[integration].configurationSchema),
+      fields: typescriptSafeObjectDotKeys(
+        ACTION_INTEGRATIONS[integration].configurationSchema
+      ) as string[],
     });
   }
 
@@ -117,9 +123,9 @@ export class IntegrationsApiService {
     await this._credentialsApiService.upsertGroup(
       {
         key: this.makeCredentialsGroupKey(integration),
-        fields: Object.keys(
+        fields: typescriptSafeObjectDotKeys(
           ACTION_INTEGRATIONS[integration].configurationSchema
-        ),
+        ) as string[],
       },
       configuration
     );
@@ -128,7 +134,9 @@ export class IntegrationsApiService {
   async deactivateIntegration(integration: ActionIntegrations): Promise<void> {
     await this._credentialsApiService.deleteGroup({
       key: this.makeCredentialsGroupKey(integration),
-      fields: Object.keys(ACTION_INTEGRATIONS[integration].configurationSchema),
+      fields: typescriptSafeObjectDotKeys(
+        ACTION_INTEGRATIONS[integration].configurationSchema
+      ) as string[],
     });
 
     const activatedIntegrations =

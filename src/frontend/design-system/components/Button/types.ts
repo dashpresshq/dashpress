@@ -1,8 +1,9 @@
+import { MessageDescriptor } from "@lingui/core";
 import { SYSTEM_COLORS } from "frontend/design-system/theme/system";
 import { SystemIconsKeys } from "shared/constants/Icons";
 
 export interface IActionButton {
-  label: string;
+  label: MessageDescriptor;
   systemIcon: SystemIconsKeys;
   action: string | (() => void);
   disabled?: boolean;

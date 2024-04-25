@@ -5,6 +5,7 @@ import {
   IDataSourceCredentials,
 } from "shared/types/data-sources";
 import { requestHandler } from "backend/lib/request";
+import { typescriptSafeObjectDotKeys } from "shared/lib/objects";
 
 const credentialRequestSchema: IAppliedSchemaFormConfig<IDataSourceCredentials> =
   {
@@ -17,7 +18,7 @@ const credentialRequestSchema: IAppliedSchemaFormConfig<IDataSourceCredentials> 
         {
           validationType: "isIn",
           constraint: {
-            options: Object.keys(DATA_SOURCES_CONFIG),
+            options: typescriptSafeObjectDotKeys(DATA_SOURCES_CONFIG),
           },
         },
       ],

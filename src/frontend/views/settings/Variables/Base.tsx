@@ -2,6 +2,7 @@ import { useState } from "react";
 import { IntegrationsConfigurationGroup } from "shared/types/integrations";
 import { Card } from "frontend/design-system/components/Card";
 import { Tabs } from "frontend/design-system/components/Tabs";
+import { msg } from "@lingui/macro";
 import { ManageCredentialGroup } from "./ManageCredentialGroup";
 import { INTEGRATIONS_GROUP_CRUD_CONFIG } from "./constants";
 
@@ -19,10 +20,9 @@ export function BaseManageVariables() {
         }
         contents={[
           {
-            overrideLabel:
+            label:
               INTEGRATIONS_GROUP_CRUD_CONFIG.constants.crudConfig.TEXT_LANG
                 .TITLE,
-            label: IntegrationsConfigurationGroup.Constants,
             content: (
               <ManageCredentialGroup
                 group={IntegrationsConfigurationGroup.Constants}
@@ -31,10 +31,9 @@ export function BaseManageVariables() {
             ),
           },
           {
-            overrideLabel:
+            label:
               INTEGRATIONS_GROUP_CRUD_CONFIG.credentials.crudConfig.TEXT_LANG
                 .TITLE,
-            label: IntegrationsConfigurationGroup.Credentials,
             content: (
               <ManageCredentialGroup
                 group={IntegrationsConfigurationGroup.Credentials}
@@ -48,4 +47,4 @@ export function BaseManageVariables() {
   );
 }
 
-export const ManageVariablesPageTitle = "Manage Variables";
+export const ManageVariablesPageTitle = msg`Manage Variables`;

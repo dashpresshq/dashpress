@@ -33,7 +33,8 @@ const Template: Story<IProps> = (args) => (
 export const Success = Template.bind({});
 Success.args = {
   label: "Toast Success",
-  action: () => ToastService.success("App updated successfully"),
+  action: () =>
+    ToastService.success({ message: "App updated successfully", id: "app" }),
 };
 
 export const SuccessWithAction = Template.bind({});
@@ -41,9 +42,9 @@ SuccessWithAction.args = {
   label: "Toast Success With Action",
   action: () =>
     ToastService.success({
-      message: "App updated successfully",
+      message: { message: "App updated successfully", id: "app-suc" },
       action: {
-        label: "Click me",
+        label: { message: "Click me", id: "click" },
         action: () => storyAction("Click me"),
       },
     }),

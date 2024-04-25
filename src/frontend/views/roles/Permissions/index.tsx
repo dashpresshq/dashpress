@@ -15,6 +15,7 @@ import { AppLayout } from "frontend/_layouts/app";
 import { useRouteParam } from "frontend/lib/routing/useRouteParam";
 import { useChangeRouterParam } from "frontend/lib/routing/useChangeRouterParam";
 import { useDocumentationActionButton } from "frontend/docs/constants";
+import { msg } from "@lingui/macro";
 import {
   ADMIN_PERMISSIONS_CRUD_CONFIG,
   useRolePermissions,
@@ -52,12 +53,12 @@ export function RolePermissions() {
   );
 
   const documentationActionButton = useDocumentationActionButton(
-    "Roles and Permissions"
+    msg`Roles and Permissions`
   );
 
   useSetPageDetails({
     pageTitle: ADMIN_PERMISSIONS_CRUD_CONFIG.TEXT_LANG.TITLE,
-    viewKey: ADMIN_PERMISSIONS_CRUD_CONFIG.TEXT_LANG.TITLE,
+    viewKey: `list-permissions`,
     permission: USER_PERMISSIONS.CAN_MANAGE_PERMISSIONS,
   });
 
@@ -82,7 +83,7 @@ export function RolePermissions() {
               onChange={changeTabParam}
               contents={[
                 {
-                  label: "App",
+                  label: msg`App`,
                   content: (
                     <MutatePermission
                       permissionList={[

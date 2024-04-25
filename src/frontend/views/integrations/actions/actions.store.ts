@@ -21,7 +21,7 @@ export const useIntegrationsList = () =>
 
 export const useActiveIntegrations = () =>
   useApi<ActionIntegrations[]>(ACTIVE_ACTIONS_INTEGRATIONS_ENDPOINT, {
-    errorMessage: CRUD_CONFIG_NOT_FOUND("Activated Integrations"),
+    errorMessage: CRUD_CONFIG_NOT_FOUND(`Activated Integrations`),
     defaultData: [],
   });
 
@@ -36,7 +36,7 @@ export const useActivationConfiguration = (activationId: string) => {
         },
         method: "POST",
       },
-      errorMessage: CRUD_CONFIG_NOT_FOUND("Action Credentials"),
+      errorMessage: CRUD_CONFIG_NOT_FOUND(`Action Credentials`),
       enabled:
         !!activationId &&
         !!rootPassword &&

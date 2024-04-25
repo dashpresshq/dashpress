@@ -23,6 +23,13 @@ import { FormSelectButton } from "./FormSelectButton";
 import { ActionButtons } from "../Button/ActionButtons";
 import { DELETE_BUTTON_PROPS } from "../Button/constants";
 
+const fakeMessageDescriptor = (message: string) => {
+  return {
+    id: message,
+    message,
+  };
+};
+
 function DemoForm() {
   return (
     <Form
@@ -108,7 +115,7 @@ function DemoForm() {
                 rightActions={[
                   {
                     systemIcon: "ToggleLeft",
-                    label: "Please click me",
+                    label: fakeMessageDescriptor("Please click me"),
                     action: action("right click actions"),
                   },
                 ]}
@@ -128,12 +135,12 @@ function DemoForm() {
                 rightActions={[
                   {
                     systemIcon: "ToggleLeft",
-                    label: "Please click me",
+                    label: fakeMessageDescriptor("Please click me"),
                     action: action("right click actions"),
                   },
                   {
                     systemIcon: "ToggleLeft",
-                    label: "Please click me 2",
+                    label: fakeMessageDescriptor("Please click me"),
                     action: action("right click actions"),
                   },
                 ]}
@@ -324,7 +331,7 @@ function DemoForm() {
               {
                 ...DELETE_BUTTON_PROPS({
                   action: () => action(""),
-                  label: "Delete Me",
+                  label: fakeMessageDescriptor("Delete Me"),
                   isMakingRequest: false,
                 }),
               },
@@ -333,14 +340,18 @@ function DemoForm() {
           <Stack $justify="flex-end">
             <FormButton
               text={(isSubmitting) =>
-                isSubmitting ? "Making Progress" : "Make Progress"
+                fakeMessageDescriptor(
+                  isSubmitting ? "Making Progress" : "Make Progress"
+                )
               }
               systemIcon="Save"
               isMakingRequest
             />
             <FormButton
               text={(isSubmitting) =>
-                isSubmitting ? "Doing Something" : "Do Something"
+                fakeMessageDescriptor(
+                  isSubmitting ? "Doing Something" : "Do Something"
+                )
               }
               isMakingRequest={false}
               systemIcon="Save"

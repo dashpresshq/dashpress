@@ -21,6 +21,7 @@ import { MAKE_CRUD_CONFIG } from "frontend/lib/crud-config";
 import { UsersLinkToDatabaseDocumentation } from "frontend/docs/users-link-to-database";
 import { useEntityFieldLists } from "frontend/hooks/entity/entity.store";
 import { useEffect, useState } from "react";
+import { msg } from "@lingui/macro";
 
 type IUsersLinkToDatabaseForm = {
   table: string;
@@ -28,9 +29,8 @@ type IUsersLinkToDatabaseForm = {
 };
 
 const CRUD_CONFIG = MAKE_CRUD_CONFIG({
-  plural: "Users Link To Database",
-  singular: "Users Link To Database",
-  path: "N/A",
+  plural: msg`Users Link To Database`,
+  singular: msg`Users Link To Database`,
 });
 
 export function UsersLinkToDatabase() {
@@ -86,7 +86,7 @@ export function UsersLinkToDatabase() {
 
   useSetPageDetails({
     pageTitle: CRUD_CONFIG.TEXT_LANG.TITLE,
-    viewKey: CRUD_CONFIG.TEXT_LANG.TITLE,
+    viewKey: CRUD_CONFIG.TEXT_LANG.TITLE.message,
     permission: USER_PERMISSIONS.CAN_CONFIGURE_APP,
   });
 

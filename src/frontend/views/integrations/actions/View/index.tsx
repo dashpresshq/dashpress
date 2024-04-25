@@ -3,6 +3,7 @@ import { ActionIntegrations, IIntegrationsList } from "shared/types/actions";
 import { Typo } from "frontend/design-system/primitives/Typo";
 import { Spacer } from "frontend/design-system/primitives/Spacer";
 import { Tabs } from "frontend/design-system/components/Tabs";
+import { msg } from "@lingui/macro";
 import { useActivateIntegrationMutation } from "../actions.store";
 import { Deactivate } from "./Deactivate";
 import { Configure } from "./Configure";
@@ -37,8 +38,8 @@ export function ActionSettingsView({
           systemIcon="Unlock"
           buttonText={(isSubmitting) =>
             isSubmitting
-              ? `Activating ${integrationDetail.title}`
-              : `Activate ${integrationDetail.title}`
+              ? msg`Activating ${integrationDetail.title}`
+              : msg`Activate ${integrationDetail.title}`
           }
         />
       </>
@@ -49,7 +50,7 @@ export function ActionSettingsView({
     <Tabs
       contents={[
         {
-          label: "Configure",
+          label: msg`Configure`,
           content: (
             <Configure
               activationId={activeAction}
@@ -58,7 +59,7 @@ export function ActionSettingsView({
           ),
         },
         {
-          label: "Deactivate",
+          label: msg`Deactivate`,
           content: (
             <Deactivate
               activationId={activeAction}

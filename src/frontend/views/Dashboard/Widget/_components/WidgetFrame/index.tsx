@@ -13,6 +13,7 @@ import { Spacer } from "frontend/design-system/primitives/Spacer";
 import { RenderCode } from "frontend/design-system/components/RenderCode";
 import { Stack } from "frontend/design-system/primitives/Stack";
 import { EmptyWrapper } from "frontend/design-system/components/EmptyWrapper";
+import { msg } from "@lingui/macro";
 import { WidgetHeader } from "../WidgetHeader";
 import { IWidgetSettingProps } from "../WidgetHeader/types";
 import { WIDGET_CONFIG } from "../../constants";
@@ -117,7 +118,7 @@ export const WidgetFrame = forwardRef<HTMLDivElement, IProps>(
                     $justify="center"
                     style={{ height: "100%" }}
                   >
-                    <EmptyWrapper text="No Data For This Widget" />
+                    <EmptyWrapper text={msg`No Data`} />
                   </Stack>
                 ) : (
                   <Component data={data.data} config={config} />

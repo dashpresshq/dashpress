@@ -2,6 +2,7 @@ import { useCallback, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import { makeFileRequest } from "frontend/lib/data/makeRequest";
 import { useToggle } from "frontend/hooks/state/useToggleState";
+import { typescriptSafeObjectDotEntries } from "shared/lib/objects";
 import { ISharedFormInput } from "../_types";
 import { generateClassNames, wrapLabelAndError } from "../_wrapForm";
 import { Presentation } from "./Presentation";
@@ -30,9 +31,11 @@ function FileInput({
         formData.append("file", file, file.name);
 
         if (metadata) {
-          Object.entries(metadata).forEach(([key, keyValue]) => {
-            formData.append(key, keyValue as string);
-          });
+          typescriptSafeObjectDotEntries(metadata).forEach(
+            ([key, keyValue]) => {
+              formData.append(key, keyValue as string);
+            }
+          );
         }
         try {
           const { fileUrl } = await makeFileRequest(uploadUrl, formData);

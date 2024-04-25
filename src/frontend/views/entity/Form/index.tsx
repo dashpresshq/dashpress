@@ -12,6 +12,8 @@ import { useEntitySlug } from "frontend/hooks/entity/entity.config";
 import { Typo } from "frontend/design-system/primitives/Typo";
 import { Spacer } from "frontend/design-system/primitives/Spacer";
 import { useDocumentationActionButton } from "frontend/docs/constants";
+import { msg } from "@lingui/macro";
+import { typescriptSafeObjectDotEntries } from "shared/lib/objects";
 import { BaseEntitySettingsLayout } from "../_Base";
 import { ENTITY_CONFIGURATION_VIEW } from "../constants";
 import { ScriptForm } from "./ScriptForm";
@@ -109,8 +111,9 @@ export function EntityFormExtensionSettings() {
 
   const entityFormView = useEntityFormView(entity);
 
-  const documentationActionButton =
-    useDocumentationActionButton("Form Scripts");
+  const documentationActionButton = useDocumentationActionButton(
+    msg`Form Scripts`
+  );
 
   useSetPageDetails({
     pageTitle: CRUD_CONFIG.TEXT_LANG.TITLE,
@@ -124,19 +127,21 @@ export function EntityFormExtensionSettings() {
         actionButtons={[documentationActionButton]}
       >
         <Tabs
-          contents={Object.entries(entityFormView).map(([key, value]) => ({
-            label: key,
-            content: (
-              <>
-                <Typo.SM $textStyle="italic">
-                  Click the &apos;Explain Form Scripts&apos; at the top right
-                  corner for more info on how this works
-                </Typo.SM>
-                <Spacer />
-                {value}
-              </>
-            ),
-          }))}
+          contents={typescriptSafeObjectDotEntries(entityFormView).map(
+            ([key, value]) => ({
+              label: msg`${key}`,
+              content: (
+                <>
+                  <Typo.SM $textStyle="italic">
+                    Click the &apos;Explain Form Scripts&apos; at the top right
+                    corner for more info on how this works
+                  </Typo.SM>
+                  <Spacer />
+                  {value}
+                </>
+              ),
+            })
+          )}
         />
       </SectionBox>
       <FormScriptDocumentation />

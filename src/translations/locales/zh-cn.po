@@ -13,6 +13,9 @@ msgstr ""
 "Plural-Forms: \n"
 "X-Generator: Poedit 3.4.2\n"
 
+msgid ""
+msgstr ""
+
 msgid "\"{0}\" Selection"
 msgstr "选择“{0}”"
 
@@ -97,7 +100,6 @@ msgstr "激活 {0}"
 msgid "Activating {0}"
 msgstr "激活 {0}"
 
-#, fuzzy
 msgid "Add Filter"
 msgstr "筛选"
 
@@ -145,6 +147,9 @@ msgstr "配置验证方式"
 
 msgid "Confirm"
 msgstr "确认"
+
+msgid "Confirm Delete"
+msgstr ""
 
 msgid "Constant"
 msgstr "常量"
@@ -227,7 +232,6 @@ msgstr ""
 msgid "Details Fields Order"
 msgstr ""
 
-#, fuzzy
 msgid "Diction"
 msgstr "字典"
 
@@ -355,9 +359,6 @@ msgid "My Account"
 msgstr "我的账户"
 
 msgid "New Password Again"
-msgstr ""
-
-msgid "newPassword"
 msgstr ""
 
 msgid "No {singular} Has Been Added Yet"
@@ -613,14 +614,8 @@ msgid "Variables"
 msgstr "变量"
 
 msgid "View"
-msgstr "查看"
+msgstr "查看<<<<<<< HEAD"
 
-<<<<<<< HEAD
-msgid "View {0}"
-msgstr "查看{0}"
-
-=======
->>>>>>> 8308b092 (✨ feat(i18n): add the getStaticProps on all the pages)
 msgid "View Full Details"
 msgstr "查看详情"
 

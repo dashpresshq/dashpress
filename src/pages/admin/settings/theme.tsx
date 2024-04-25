@@ -1,5 +1,5 @@
 import { ThemeSettings } from "frontend/views/settings/Theme";
 
-export { getStaticProps } from "translations/utils";
+export { getServerSideProps } from "translations/utils";
 
 export default ThemeSettings;

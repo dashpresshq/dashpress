@@ -148,6 +148,9 @@ msgstr "Configure Validation"
 msgid "Confirm"
 msgstr "Confirm"
 
+msgid "Confirm Delete"
+msgstr "Confirm Delete"
+
 msgid "Constant"
 msgstr "Constant"
 
@@ -357,9 +360,6 @@ msgstr "My Account"
 
 msgid "New Password Again"
 msgstr "New Password Again"
-
-msgid "newPassword"
-msgstr "newPassword"
 
 msgid "No {singular} Has Been Added Yet"
 msgstr "No {singular} Has Been Added Yet"

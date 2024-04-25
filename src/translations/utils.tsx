@@ -15,7 +15,7 @@ async function loadCatalog(locale: string) {
   return messages;
 }
 
-export async function getStaticProps(
+export async function getServerSideProps(
   ctx: GetStaticPropsContext
 ): Promise<GetStaticPropsResult<any>> {
   return {

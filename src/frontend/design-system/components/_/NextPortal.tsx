@@ -13,9 +13,32 @@ export function NextPortal({ children }: IProps) {
   useEffect(() => {
     ref.current = document.body;
     isMounted.on();
+    document.getElementById("__next").classList.add("gaussian-blur");
+
+    return () => {
+      document.getElementById("__next").classList.remove("gaussian-blur");
+
+      isMounted.off();
+    };
   }, []);
 
   return isMounted.isOn && ref.current
-    ? createPortal(children, ref.current)
+    ? createPortal(
+        <>
+          <svg
+            style={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+            }}
+          >
+            <filter id="gaussian-blur">
+              <feGaussianBlur stdDeviation="0.3" />
+            </filter>
+          </svg>
+          {children}
+        </>,
+        ref.current
+      )
     : null;
 }

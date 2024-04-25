@@ -81,7 +81,7 @@ export const ENTITY_VALIDATION_CONFIG: Record<
   },
   isDate: {
     isBoundToType: ["datetime-local"],
-    message: "{{ name }} is an invalid Date",
+    message: "{{ name }} is an invalid date",
     implementation: handleValidation(isDate),
   },
   isNumber: {

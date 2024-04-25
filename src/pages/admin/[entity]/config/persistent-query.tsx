@@ -1,5 +1,5 @@
 import { EntityPersistentQuerySettings } from "frontend/views/entity/PersistentQuery";
 
-export { getStaticProps } from "translations/utils";
+export { getServerSideProps } from "translations/utils";
 
 export default EntityPersistentQuerySettings;

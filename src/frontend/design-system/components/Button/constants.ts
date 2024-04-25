@@ -1,4 +1,5 @@
 import { MessageDescriptor } from "@lingui/core";
+import { msg } from "@lingui/macro";
 import { IGroupActionButton } from "./types";
 
 export const DELETE_BUTTON_PROPS = (props: {
@@ -9,7 +10,7 @@ export const DELETE_BUTTON_PROPS = (props: {
 }): IGroupActionButton => ({
   id: "delete",
   systemIcon: "Thrash",
-  shouldConfirmAlert: "Confirm Delete",
+  shouldConfirmAlert: msg`Confirm Delete`,
   color: "danger",
   ...props,
 });

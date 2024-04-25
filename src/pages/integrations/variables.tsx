@@ -1,5 +1,5 @@
 import { ManageVariables } from "frontend/views/integrations/Variables";
 
-export { getStaticProps } from "translations/utils";
+export { getServerSideProps } from "translations/utils";
 
 export default ManageVariables;

@@ -1,5 +1,5 @@
 import { UsersLinkToDatabase } from "frontend/views/users/DatabaseLink";
 
-export { getStaticProps } from "translations/utils";
+export { getServerSideProps } from "translations/utils";
 
 export default UsersLinkToDatabase;

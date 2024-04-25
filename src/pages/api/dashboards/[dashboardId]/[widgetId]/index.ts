@@ -16,13 +16,11 @@ export default requestHandler(
     },
     DELETE: async (getValidatedRequest) => {
       const validatedRequest = await getValidatedRequest([
-        { _type: "requestQuery", options: "dashboardId" },
-        { _type: "requestBody", options: {} },
+        { _type: "requestQueries", options: ["widgetId", "dashboardId"] },
       ]);
-      return await dashboardWidgetsApiService.removeWidget({
-        widgetId: validatedRequest.requestBody.widgetId,
-        dashboardId: validatedRequest.requestQuery,
-      });
+      return await dashboardWidgetsApiService.removeWidget(
+        validatedRequest.requestQueries
+      );
     },
   },
   [

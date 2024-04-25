@@ -61,6 +61,13 @@ const makeDateFilterOption = (
   };
 };
 
+// TODO
+
+// t`You have ${plural(itemCount, {
+//   one: "# item",
+//   other: "# items",
+// })} in your cart`;
+
 export const DASHBOARD_RELATIVE_DAYS: ILabelValue[] = [
   makeDateFilterOption(DATE_FILTER_VALUE.DAY, 1),
   makeDateFilterOption(DATE_FILTER_VALUE.DAY, 3),

@@ -5,6 +5,7 @@ import { ThemeContextProvider } from "frontend/design-system/theme/Context";
 import { GlobalStyles } from "frontend/design-system/globals";
 import { LinguiProvider } from "translations/utils";
 import { Messages } from "@lingui/core";
+import { ConfirmAlert } from "frontend/design-system/components/ConfirmAlert";
 
 export function ApplicationRoot({
   children,
@@ -19,6 +20,7 @@ export function ApplicationRoot({
         <Toaster />
         <GlobalStyles />
         <ThemeContextProvider>{children}</ThemeContextProvider>
+        <ConfirmAlert />
       </QueryProvider>
     </LinguiProvider>
   );

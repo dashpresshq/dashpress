@@ -26,7 +26,7 @@ export default requestHandler(
         },
         {
           _type: "requestBody",
-          options: {},
+          options: {}, // TODO fix
         },
       ]);
       return await rolesApiController.removePermissions(

@@ -1,19 +1,18 @@
-import { confirmAlert } from "react-confirm-alert";
 import styled, { keyframes } from "styled-components";
 import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
 import { Typo } from "frontend/design-system/primitives/Typo";
 import { Spacer } from "frontend/design-system/primitives/Spacer";
 import { Stack } from "frontend/design-system/primitives/Stack";
 import { msg, t } from "@lingui/macro";
-import { LinguiProvider } from "translations/utils";
+import { createStore } from "frontend/lib/store";
+import { MessageDescriptor } from "@lingui/core";
+import { useLingui } from "@lingui/react";
+import { useClickAway, useKey } from "react-use";
+import { useEffect, useRef } from "react";
 import { Z_INDEXES } from "../../constants/zIndex";
 import { SoftButton } from "../Button/SoftButton";
 import { SHADOW_CSS } from "../Card";
-
-interface IProps {
-  action: () => void;
-  title: string;
-}
+import { NextPortal } from "../_/NextPortal";
 
 const Body = styled.div`
   width: 300px;
@@ -52,13 +51,56 @@ const Overlay = styled(Stack).attrs({
   animation: ${fadeIn} 0.1s 0.1s forwards;
 `;
 
-export interface IPresentationProps extends IProps {
-  onClose: () => void;
+interface IConfirmAlertDetails {
+  title: MessageDescriptor;
+  action: () => void;
 }
 
-export function Presentation({ action, title, onClose }: IPresentationProps) {
+type IStore = {
+  title?: MessageDescriptor;
+  action?: () => void;
+  setDetails: (details: IConfirmAlertDetails) => void;
+  onClose: () => void;
+};
+
+const useConfirmAlertStore = createStore<IStore>((set) => ({
+  setDetails: (details: IConfirmAlertDetails) => set(() => details),
+  onClose: () =>
+    set(() => ({
+      title: undefined,
+      action: undefined,
+    })),
+}));
+
+export const useConfirmAlert = () => {
+  const confirmAlert = useConfirmAlertStore((store) => store.setDetails);
+
+  return confirmAlert;
+};
+
+export function ConfirmAlert() {
+  const rootRef = useRef<HTMLDivElement>(null);
+
+  const { _ } = useLingui();
+  const [title, action, onClose] = useConfirmAlertStore((store) => [
+    store.title,
+    store.action,
+    store.onClose,
+  ]);
+
+  useKey("Escape", onClose);
+  useClickAway(rootRef, onClose);
+
+  useEffect(() => {
+    document.body.style.overflow = title ? "hidden" : "auto";
+  }, [title]);
+
+  if (!title) {
+    return null;
+  }
+
   return (
-    <LinguiProvider>
+    <NextPortal>
       <Overlay
         role="alertdialog"
         aria-modal="true"
@@ -66,9 +108,9 @@ export function Presentation({ action, title, onClose }: IPresentationProps) {
         aria-describedby="confirm_delete_description"
         tabIndex={-1}
       >
-        <Body>
+        <Body ref={rootRef}>
           <Typo.MD $weight="bold">
-            <span id="confirm_delete_label"> {title} </span>
+            <span id="confirm_delete_label"> {_(title)} </span>
           </Typo.MD>
           <Spacer size="xl" />
           <Typo.XS>
@@ -97,11 +139,6 @@ export function Presentation({ action, title, onClose }: IPresentationProps) {
           </Stack>
         </Body>
       </Overlay>
-    </LinguiProvider>
+    </NextPortal>
   );
 }
-
-export const ConfirmAlert = (props: IProps) =>
-  confirmAlert({
-    customUI: ({ onClose }) => <Presentation {...props} onClose={onClose} />,
-  });

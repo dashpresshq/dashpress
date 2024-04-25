@@ -1,5 +1,5 @@
 import { EntityDetails } from "frontend/views/data/Details";
 
-export { getStaticProps } from "translations/utils";
+export { getServerSideProps } from "translations/utils";
 
 export default EntityDetails;

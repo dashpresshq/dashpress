@@ -68,35 +68,30 @@ export function OffCanvas({
   width = DEFAULT_CANVAS_WIDTH,
 }: IProps) {
   const { _ } = useLingui();
+
+  if (!show) {
+    return null;
+  }
+
   return (
     <NextPortal>
-      <Root
-        as={Offcanvas}
-        show={show}
-        onHide={onClose}
-        placement="end"
-        width={width}
-      >
-        {show && (
-          <>
-            <Header>
-              <Stack $justify="space-between" $align="center">
-                <Typo.MD $weight="bold">{_(title)}</Typo.MD>
-                <SoftButton
-                  justIcon
-                  label={msg`Close Canvas`}
-                  noToolTip
-                  systemIcon="Close"
-                  action={onClose}
-                  color="danger"
-                  size="sm"
-                />
-              </Stack>
-            </Header>
-            <Divider />
-            <Body>{children}</Body>
-          </>
-        )}
+      <Root as={Offcanvas} show onHide={onClose} placement="end" width={width}>
+        <Header>
+          <Stack $justify="space-between" $align="center">
+            <Typo.MD $weight="bold">{_(title)}</Typo.MD>
+            <SoftButton
+              justIcon
+              label={msg`Close Canvas`}
+              noToolTip
+              systemIcon="Close"
+              action={onClose}
+              color="danger"
+              size="sm"
+            />
+          </Stack>
+        </Header>
+        <Divider />
+        <Body>{children}</Body>
       </Root>
     </NextPortal>
   );

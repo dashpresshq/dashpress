@@ -1,5 +1,5 @@
 import { VariablesSettings } from "frontend/views/settings/Variables";
 
-export { getStaticProps } from "translations/utils";
+export { getServerSideProps } from "translations/utils";
 
 export default VariablesSettings;

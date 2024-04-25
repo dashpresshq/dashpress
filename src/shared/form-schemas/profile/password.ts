@@ -35,7 +35,7 @@ export const CHANGE_PASSWORD_FORM_SCHEMA: IAppliedSchemaFormConfig<IChangePasswo
         {
           validationType: "matchOtherField",
           constraint: {
-            otherField: t`newPassword`,
+            otherField: `newPassword`,
           },
         },
       ],

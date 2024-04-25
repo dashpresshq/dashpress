@@ -22,6 +22,7 @@ export const MAKE_CRUD_CONFIG = ({
 }) => {
   const singular = i18n._(singular$1);
   const plural = i18n._(plural$1);
+
   return {
     MUTATION_LANG: {
       CREATE: msg`${singular} Created Successfully`,

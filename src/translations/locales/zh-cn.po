@@ -128,6 +128,12 @@ msgstr "查看详情"
 msgid "Close Canvas"
 msgstr "关闭画布"
 
+msgid "Column Labels Settings"
+msgstr ""
+
+msgid "Column Types Settings"
+msgstr ""
+
 msgid "Configure"
 msgstr "设置"
 
@@ -151,6 +157,12 @@ msgstr "创建"
 
 msgid "Create {singular}"
 msgstr "创建{singular}"
+
+msgid "Create Columns Settings"
+msgstr ""
+
+msgid "Create Fields Order"
+msgstr ""
 
 msgid "Create It"
 msgstr "创建"
@@ -185,6 +197,9 @@ msgstr "仪表盘"
 msgid "Data"
 msgstr "数据"
 
+msgid "Date Format"
+msgstr ""
+
 msgid "Deactivate"
 msgstr "停用"
 
@@ -205,6 +220,12 @@ msgstr "删除所选内容"
 
 msgid "Details"
 msgstr "查看详情"
+
+msgid "Details Columns Settings"
+msgstr ""
+
+msgid "Details Fields Order"
+msgstr ""
 
 #, fuzzy
 msgid "Diction"
@@ -234,6 +255,12 @@ msgstr "启用{0}功能"
 msgid "Enabled Entities"
 msgstr "已启用实体"
 
+msgid "Enabled Entities Settings"
+msgstr ""
+
+msgid "Enabled Relations"
+msgstr ""
+
 msgid "Enter your credentials to continue"
 msgstr "输入您的凭证以继续"
 
@@ -257,6 +284,9 @@ msgstr "字段"
 
 msgid "File Storage"
 msgstr "存储设置"
+
+msgid "File Uploads Settings"
+msgstr ""
 
 msgid "Follow us on Twitter"
 msgstr "关注我们的推特"
@@ -318,8 +348,17 @@ msgstr "变量管理"
 msgid "Menu Settings"
 msgstr "菜单设置"
 
+msgid "Metadata Columns"
+msgstr ""
+
 msgid "My Account"
 msgstr "我的账户"
+
+msgid "New Password Again"
+msgstr ""
+
+msgid "newPassword"
+msgstr ""
 
 msgid "No {singular} Has Been Added Yet"
 msgstr "没有{singular}被添加"
@@ -375,11 +414,23 @@ msgstr "个人信息"
 msgid "Reference Template"
 msgstr "参考模板"
 
+msgid "Relation Labels"
+msgstr ""
+
+msgid "Relation Template"
+msgstr ""
+
 msgid "Relations"
 msgstr "关联"
 
+msgid "Relations Order"
+msgstr ""
+
 msgid "Relationship Settings"
 msgstr "关联设置"
+
+msgid "Remember Me"
+msgstr ""
 
 msgid "Remove"
 msgstr "移除"
@@ -438,6 +489,9 @@ msgstr "密钥"
 msgid "Selection"
 msgstr "选择"
 
+msgid "Selections Settings"
+msgstr ""
+
 msgid "Setting Up Account"
 msgstr "账户设置"
 
@@ -465,6 +519,9 @@ msgstr "正在登录"
 msgid "Site"
 msgstr "站点"
 
+msgid "Site Settings"
+msgstr ""
+
 msgid "Star us on Github"
 msgstr "谢谢给我们项目Star"
 
@@ -477,8 +534,17 @@ msgstr "系统设置"
 msgid "System Information"
 msgstr "系统信息"
 
+msgid "System Settings"
+msgstr ""
+
 msgid "Table"
 msgstr "表格"
+
+msgid "Table Columns Settings"
+msgstr ""
+
+msgid "Table Fields Order"
+msgstr ""
 
 msgid "Table View"
 msgstr "表格视图"
@@ -513,6 +579,12 @@ msgstr "更新"
 msgid "Update {singular}"
 msgstr "更新{singular}"
 
+msgid "Update Columns Settings"
+msgstr ""
+
+msgid "Update Fields Order"
+msgstr ""
+
 msgid "Updating {singular}"
 msgstr "更新{singular}"
 
@@ -531,15 +603,24 @@ msgstr "用户"
 msgid "Users Link To Database"
 msgstr "建立用户数据库"
 
+msgid "Users to Database Link"
+msgstr ""
+
+msgid "Validations"
+msgstr ""
+
 msgid "Variables"
 msgstr "变量"
 
 msgid "View"
 msgstr "查看"
 
+<<<<<<< HEAD
 msgid "View {0}"
 msgstr "查看{0}"
 
+=======
+>>>>>>> 8308b092 (✨ feat(i18n): add the getStaticProps on all the pages)
 msgid "View Full Details"
 msgstr "查看详情"
 

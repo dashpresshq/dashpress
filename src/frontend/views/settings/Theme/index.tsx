@@ -45,6 +45,8 @@ export function ThemeSettings() {
     permission: USER_PERMISSIONS.CAN_CONFIGURE_APP,
   });
 
+  console.log(THEME_SETTINGS_CRUD_CONFIG.TEXT_LANG.TITLE);
+
   return (
     <BaseSettingsLayout>
       <SectionBox title={THEME_SETTINGS_CRUD_CONFIG.TEXT_LANG.TITLE}>

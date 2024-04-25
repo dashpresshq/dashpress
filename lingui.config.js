@@ -44,7 +44,7 @@ module.exports = {
   catalogs: [
     {
       path: "<rootDir>/src/translations/locales/{locale}",
-      include: ["<rootDir>/src/frontend"],
+      include: ["<rootDir>/src/frontend", "<rootDir>/src/shared"],
     },
   ],
   format: formatter({ origins: false }),

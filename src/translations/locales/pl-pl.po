@@ -130,6 +130,12 @@ msgstr ""
 msgid "Close Canvas"
 msgstr ""
 
+msgid "Column Labels Settings"
+msgstr ""
+
+msgid "Column Types Settings"
+msgstr ""
+
 msgid "Configure"
 msgstr ""
 
@@ -152,6 +158,12 @@ msgid "Create"
 msgstr ""
 
 msgid "Create {singular}"
+msgstr ""
+
+msgid "Create Columns Settings"
+msgstr ""
+
+msgid "Create Fields Order"
 msgstr ""
 
 msgid "Create It"
@@ -187,6 +199,9 @@ msgstr ""
 msgid "Data"
 msgstr ""
 
+msgid "Date Format"
+msgstr ""
+
 msgid "Deactivate"
 msgstr ""
 
@@ -206,6 +221,12 @@ msgid "Delete Selection"
 msgstr ""
 
 msgid "Details"
+msgstr ""
+
+msgid "Details Columns Settings"
+msgstr ""
+
+msgid "Details Fields Order"
 msgstr ""
 
 msgid "Diction"
@@ -235,6 +256,12 @@ msgstr ""
 msgid "Enabled Entities"
 msgstr ""
 
+msgid "Enabled Entities Settings"
+msgstr ""
+
+msgid "Enabled Relations"
+msgstr ""
+
 msgid "Enter your credentials to continue"
 msgstr ""
 
@@ -257,6 +284,9 @@ msgid "Fields"
 msgstr ""
 
 msgid "File Storage"
+msgstr ""
+
+msgid "File Uploads Settings"
 msgstr ""
 
 msgid "Follow us on Twitter"
@@ -319,7 +349,16 @@ msgstr ""
 msgid "Menu Settings"
 msgstr ""
 
+msgid "Metadata Columns"
+msgstr ""
+
 msgid "My Account"
+msgstr ""
+
+msgid "New Password Again"
+msgstr ""
+
+msgid "newPassword"
 msgstr ""
 
 msgid "No {singular} Has Been Added Yet"
@@ -376,10 +415,22 @@ msgstr ""
 msgid "Reference Template"
 msgstr ""
 
+msgid "Relation Labels"
+msgstr ""
+
+msgid "Relation Template"
+msgstr ""
+
 msgid "Relations"
 msgstr ""
 
+msgid "Relations Order"
+msgstr ""
+
 msgid "Relationship Settings"
+msgstr ""
+
+msgid "Remember Me"
 msgstr ""
 
 msgid "Remove"
@@ -439,6 +490,9 @@ msgstr ""
 msgid "Selection"
 msgstr ""
 
+msgid "Selections Settings"
+msgstr ""
+
 msgid "Setting Up Account"
 msgstr ""
 
@@ -466,6 +520,9 @@ msgstr ""
 msgid "Site"
 msgstr ""
 
+msgid "Site Settings"
+msgstr ""
+
 msgid "Star us on Github"
 msgstr ""
 
@@ -478,7 +535,16 @@ msgstr ""
 msgid "System Information"
 msgstr ""
 
+msgid "System Settings"
+msgstr ""
+
 msgid "Table"
+msgstr ""
+
+msgid "Table Columns Settings"
+msgstr ""
+
+msgid "Table Fields Order"
 msgstr ""
 
 msgid "Table View"
@@ -514,6 +580,12 @@ msgstr ""
 msgid "Update {singular}"
 msgstr ""
 
+msgid "Update Columns Settings"
+msgstr ""
+
+msgid "Update Fields Order"
+msgstr ""
+
 msgid "Updating {singular}"
 msgstr ""
 
@@ -532,13 +604,16 @@ msgstr ""
 msgid "Users Link To Database"
 msgstr ""
 
+msgid "Users to Database Link"
+msgstr ""
+
+msgid "Validations"
+msgstr ""
+
 msgid "Variables"
 msgstr ""
 
 msgid "View"
-msgstr ""
-
-msgid "View {0}"
 msgstr ""
 
 msgid "View Full Details"

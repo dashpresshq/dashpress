@@ -5,6 +5,7 @@ import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
 import { Stack } from "frontend/design-system/primitives/Stack";
 import { Typo } from "frontend/design-system/primitives/Typo";
 import { Trans } from "@lingui/macro";
+import { ChevronLeft, ChevronRight } from "react-feather";
 import { SimpleSelect } from "../Form/FormSelect/Simple";
 import { TABLE_PAGE_SIZES } from "./constants";
 
@@ -17,18 +18,25 @@ const Pagination = styled.div`
 
   .page-link {
     padding: 0.25rem 0.5rem;
-    margin-left: 4px;
-    font-size: 0.71rem;
+    margin-left: 6px;
+    font-size: 0.8rem;
     border-radius: 4px;
-    line-height: 1.8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
     color: ${USE_ROOT_COLOR("primary-color")};
     border: 1px solid ${USE_ROOT_COLOR("primary-color")};
+
+    &:hover {
+      color: ${USE_ROOT_COLOR("text-on-primary")};
+      background-color: ${USE_ROOT_COLOR("primary-color")};
+      border-color: ${USE_ROOT_COLOR("primary-color")};
+    }
   }
 
   .page-item.active {
     .page-link {
-      z-index: 3;
       color: ${USE_ROOT_COLOR("text-on-primary")};
       background-color: ${USE_ROOT_COLOR("primary-color")};
       border-color: ${USE_ROOT_COLOR("primary-color")};
@@ -42,6 +50,10 @@ const Pagination = styled.div`
       border-color: ${USE_ROOT_COLOR("border-color")};
     }
   }
+`;
+
+const DirectionIcon = styled.i`
+  height: 20px;
 `;
 
 const Root = styled.div`
@@ -90,8 +102,8 @@ export function TablePagination({
         </Typo.MD>
         <Pagination>
           <ReactPaginate
-            previousLabel="prev"
-            nextLabel="next"
+            previousLabel={<DirectionIcon as={ChevronLeft} size={16} />}
+            nextLabel={<DirectionIcon as={ChevronRight} size={16} />}
             breakLabel="..."
             pageCount={totalPageCount}
             renderOnZeroPageCount={() => null}

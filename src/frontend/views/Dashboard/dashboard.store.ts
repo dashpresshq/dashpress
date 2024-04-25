@@ -77,10 +77,7 @@ export function useDeleteDashboardWidgetMutation(dashboardId: string) {
     mutationFn: async (widgetId) => {
       await makeActionRequest(
         "DELETE",
-        `${DASHBOARD_ENDPOINT(dashboardId)}/${widgetId}`,
-        {
-          widgetId,
-        }
+        `${DASHBOARD_ENDPOINT(dashboardId)}/${widgetId}`
       );
     },
     dataQueryPath: DASHBOARD_ENDPOINT(dashboardId),

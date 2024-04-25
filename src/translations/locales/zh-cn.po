@@ -614,7 +614,7 @@ msgid "Variables"
 msgstr "变量"
 
 msgid "View"
-msgstr "查看<<<<<<< HEAD"
+msgstr "查看"
 
 msgid "View Full Details"
 msgstr "查看详情"

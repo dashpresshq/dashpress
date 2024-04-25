@@ -84,5 +84,5 @@ export function getRTL(locale: string): {
     right: language.rtl ? "left" : "right",
   };
 }
-
+// rtl for arabic
 // TODO all useDocumentationActionButton to use source settings label

@@ -11,7 +11,7 @@ import { IListMangerItemProps } from "frontend/design-system/components/ListMana
 import { msg } from "@lingui/macro";
 import {
   useCreateRolePermissionMutation,
-  useRolePermissionDeletionMutation,
+  useDeleteRolePermissionMutation,
   useRolePermissions,
 } from "../permissions.store";
 
@@ -61,7 +61,7 @@ export function MutatePermission({
 }: IProps) {
   const rolePermissions = useRolePermissions();
 
-  const rolePermissionDeletionMutation = useRolePermissionDeletionMutation();
+  const rolePermissionDeletionMutation = useDeleteRolePermissionMutation();
   const rolePermissionCreationMutation = useCreateRolePermissionMutation();
 
   const isOverAchingPermissionSelected =

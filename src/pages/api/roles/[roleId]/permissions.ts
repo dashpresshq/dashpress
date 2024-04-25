@@ -21,17 +21,13 @@ export default requestHandler(
     DELETE: async (getValidatedRequest) => {
       const validatedRequest = await getValidatedRequest([
         {
-          _type: "requestQuery",
-          options: REQUEST_QUERY_FIELD,
-        },
-        {
-          _type: "requestBody",
-          options: {}, // TODO fix
+          _type: "requestQueries",
+          options: [REQUEST_QUERY_FIELD, "permissions"],
         },
       ]);
       return await rolesApiController.removePermissions(
-        validatedRequest.requestQuery,
-        validatedRequest.requestBody
+        validatedRequest.requestQueries.roleId,
+        validatedRequest.requestQueries
       );
     },
 

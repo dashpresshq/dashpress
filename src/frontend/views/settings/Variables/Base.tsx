@@ -23,6 +23,7 @@ export function BaseManageVariables() {
             label:
               INTEGRATIONS_GROUP_CRUD_CONFIG.constants.crudConfig.TEXT_LANG
                 .TITLE,
+            id: IntegrationsConfigurationGroup.Constants,
             content: (
               <ManageCredentialGroup
                 group={IntegrationsConfigurationGroup.Constants}
@@ -34,6 +35,7 @@ export function BaseManageVariables() {
             label:
               INTEGRATIONS_GROUP_CRUD_CONFIG.credentials.crudConfig.TEXT_LANG
                 .TITLE,
+            id: IntegrationsConfigurationGroup.Credentials,
             content: (
               <ManageCredentialGroup
                 group={IntegrationsConfigurationGroup.Credentials}

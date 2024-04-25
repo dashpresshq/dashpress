@@ -24,10 +24,12 @@ export function StorageIntegrations() {
           contents={[
             {
               label: msg`Setup`,
+              id: "setup",
               content: <StorageCredentialsSettings />,
             },
             {
               label: msg`General`,
+              id: "general",
               content: <GeneralStorageSettings />,
             },
           ]}

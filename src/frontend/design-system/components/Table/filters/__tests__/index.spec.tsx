@@ -6,6 +6,7 @@ import {
   IColumnFilterBag,
   TableFilterType,
 } from "shared/types/data";
+import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 import { TableFilter } from "..";
 
 const setFilterValueJestFn = jest.fn();
@@ -19,18 +20,20 @@ function TestComponent({
 }) {
   const [state, setState] = useState(defaultValue);
   return (
-    <TableFilter
-      type={type}
-      column={{
-        setFilterValue: (value) => {
-          setState(value);
-          setFilterValueJestFn(value);
-        },
-        getFilterValue: () => state,
-      }}
-      view="Test Column"
-      debounceWait={100}
-    />
+    <ApplicationRoot>
+      <TableFilter
+        type={type}
+        column={{
+          setFilterValue: (value) => {
+            setState(value);
+            setFilterValueJestFn(value);
+          },
+          getFilterValue: () => state,
+        }}
+        view="Test Column"
+        debounceWait={100}
+      />
+    </ApplicationRoot>
   );
 }
 

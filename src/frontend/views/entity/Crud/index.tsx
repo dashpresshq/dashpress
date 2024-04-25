@@ -197,6 +197,7 @@ export function EntityCrudSettings() {
           contents={typescriptSafeObjectDotEntries(entityCrudView).map(
             ([key, { disabled, render }]) => ({
               label: ENTITY_CRUD_LABELS[key],
+              id: key,
               content: render,
               disabled,
             })

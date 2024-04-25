@@ -4,14 +4,17 @@ import { Tabs } from ".";
 const TAB_CONTENT = [
   {
     label: { message: `Foo Label`, id: "foo-label" },
+    id: "foo",
     content: <>Foo Content</>,
   },
   {
     label: { message: `Bar Label`, id: "bar-label" },
+    id: "bar",
     content: <>Bar Content</>,
   },
   {
     label: { message: `Baz Label`, id: "baz-label" },
+    id: "baz",
     content: <>Baz Content</>,
   },
 ];

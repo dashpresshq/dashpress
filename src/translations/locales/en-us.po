@@ -124,8 +124,8 @@ msgstr "Cancel"
 msgid "Change Language"
 msgstr "Change Language"
 
-msgid "Click here to view {singular}"
-msgstr "Click here to view {singular}"
+msgid "Click here to view details"
+msgstr "Click here to view details"
 
 msgid "Close Canvas"
 msgstr "Close Canvas"

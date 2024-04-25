@@ -129,6 +129,7 @@ export function EntityFormExtensionSettings() {
         <Tabs
           contents={typescriptSafeObjectDotEntries(entityFormView).map(
             ([key, value]) => ({
+              id: key,
               label: msg`${key}`,
               content: (
                 <>

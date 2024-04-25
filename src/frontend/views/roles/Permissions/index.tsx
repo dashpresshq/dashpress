@@ -84,6 +84,7 @@ export function RolePermissions() {
               contents={[
                 {
                   label: msg`App`,
+                  id: "app",
                   content: (
                     <MutatePermission
                       permissionList={[

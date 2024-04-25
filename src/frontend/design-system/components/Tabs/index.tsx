@@ -62,7 +62,7 @@ const Root = styled.div<{ $padContent: boolean }>`
 export interface IProps {
   contents: {
     label: MessageDescriptor;
-    overrideLabel?: MessageDescriptor;
+    id: string;
     disabled?: boolean;
     content: ReactNode;
   }[];
@@ -82,28 +82,28 @@ export function Tabs({
   const { _ } = useLingui();
 
   const [activeTab, setActiveTab$1] = useState<string>(
-    sluggify(currentTab || _(contents[0].label))
+    sluggify(currentTab || _(contents[0].id))
   );
 
-  const setActiveTab = (label: string) => {
-    setActiveTab$1(sluggify(label));
+  const setActiveTab = (id: string) => {
+    setActiveTab$1(id);
   };
 
   useEffect(() => {
     if (currentTab) {
       setActiveTab(currentTab);
     } else {
-      setActiveTab(_(contents[0].label));
+      setActiveTab(_(contents[0].id));
     }
-  }, [currentTab, JSON.stringify(contents.map((content) => content.label))]);
+  }, [currentTab, JSON.stringify(contents.map((content) => content.id))]);
 
-  const changeTab = (tabLabel: string | null) => {
-    if (!tabLabel) {
+  const changeTab = (tabId: string | null) => {
+    if (!tabId) {
       return;
     }
-    if (activeTab !== tabLabel) {
-      setActiveTab(tabLabel);
-      onChange?.(tabLabel);
+    if (activeTab !== tabId) {
+      setActiveTab(tabId);
+      onChange?.(tabId);
     }
   };
 
@@ -115,11 +115,11 @@ export function Tabs({
         onSelect={changeTab}
         mountOnEnter={lazy}
       >
-        {contents.map(({ label, overrideLabel, disabled, content }) => (
+        {contents.map(({ label, id, disabled, content }) => (
           <RBTab
-            eventKey={sluggify(_(label))}
-            key={sluggify(_(label))}
-            title={_(overrideLabel || label)}
+            eventKey={id}
+            key={id}
+            title={_(label)}
             tabClassName={disabled ? "disabled" : ""}
           >
             {content}

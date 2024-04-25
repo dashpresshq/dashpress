@@ -5,6 +5,7 @@ import { Typo } from "frontend/design-system/primitives/Typo";
 import { Spacer } from "frontend/design-system/primitives/Spacer";
 import { Stack } from "frontend/design-system/primitives/Stack";
 import { msg, t } from "@lingui/macro";
+import { LinguiProvider } from "translations/utils";
 import { Z_INDEXES } from "../../constants/zIndex";
 import { SoftButton } from "../Button/SoftButton";
 import { SHADOW_CSS } from "../Card";
@@ -57,40 +58,46 @@ export interface IPresentationProps extends IProps {
 
 export function Presentation({ action, title, onClose }: IPresentationProps) {
   return (
-    <Overlay
-      role="alertdialog"
-      aria-modal="true"
-      aria-labelledby="confirm_delete_label"
-      aria-describedby="confirm_delete_description"
-      tabIndex={-1}
-    >
-      <Body>
-        <Typo.MD $weight="bold">
-          <span id="confirm_delete_label"> {title} </span>
-        </Typo.MD>
-        <Spacer size="xl" />
-        <Typo.XS>
-          <span id="confirm_delete_description">
-            {t`Are you sure you want to do this?`}
-          </span>
-        </Typo.XS>
-        <Spacer size="xxl" />
-        <Stack $justify="center" $spacing={8}>
-          <SoftButton action={onClose} label={msg`Cancel`} systemIcon={null} />
+    <LinguiProvider>
+      <Overlay
+        role="alertdialog"
+        aria-modal="true"
+        aria-labelledby="confirm_delete_label"
+        aria-describedby="confirm_delete_description"
+        tabIndex={-1}
+      >
+        <Body>
+          <Typo.MD $weight="bold">
+            <span id="confirm_delete_label"> {title} </span>
+          </Typo.MD>
+          <Spacer size="xl" />
+          <Typo.XS>
+            <span id="confirm_delete_description">
+              {t`Are you sure you want to do this?`}
+            </span>
+          </Typo.XS>
+          <Spacer size="xxl" />
+          <Stack $justify="center" $spacing={8}>
+            <SoftButton
+              action={onClose}
+              label={msg`Cancel`}
+              systemIcon={null}
+            />
 
-          <SoftButton
-            color="danger"
-            size="sm"
-            systemIcon={null}
-            label={msg`Confirm`}
-            action={() => {
-              action();
-              onClose();
-            }}
-          />
-        </Stack>
-      </Body>
-    </Overlay>
+            <SoftButton
+              color="danger"
+              size="sm"
+              systemIcon={null}
+              label={msg`Confirm`}
+              action={() => {
+                action();
+                onClose();
+              }}
+            />
+          </Stack>
+        </Body>
+      </Overlay>
+    </LinguiProvider>
   );
 }
 

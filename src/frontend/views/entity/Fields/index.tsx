@@ -126,6 +126,7 @@ export function EntityFieldsSettings() {
                 </ViewStateMachine>
               ),
               label: ENTITY_FIELD_SETTINGS_TAB_LABELS.LABELS,
+              id: `labels`,
             },
             {
               content: (
@@ -175,6 +176,7 @@ export function EntityFieldsSettings() {
                 </ViewStateMachine>
               ),
               label: ENTITY_FIELD_SETTINGS_TAB_LABELS.FORM,
+              id: `form`,
             },
           ]}
         />

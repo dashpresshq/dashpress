@@ -1,7 +1,8 @@
 import { i18n, Messages } from "@lingui/core";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
+import { ReactNode, useEffect } from "react";
 import { GetStaticPropsContext, GetStaticPropsResult } from "next";
+import { I18nProvider } from "@lingui/react";
 import languages from "./languages";
 
 async function loadCatalog(locale: string) {
@@ -24,7 +25,7 @@ export async function getStaticProps(
   };
 }
 
-export function useLinguiInit(messages: Messages) {
+function useLinguiInit(messages: Messages) {
   const router = useRouter();
   const locale = router.locale || router.defaultLocale!;
   const isClient = typeof window !== "undefined";
@@ -46,6 +47,18 @@ export function useLinguiInit(messages: Messages) {
   }, [locale, messages]);
 
   return i18n;
+}
+
+export function LinguiProvider({
+  children,
+  translation,
+}: {
+  children: ReactNode;
+  translation?: Messages;
+}) {
+  const initializedI18n = useLinguiInit(translation);
+
+  return <I18nProvider i18n={initializedI18n}>{children}</I18nProvider>;
 }
 
 export function getRTL(locale: string): {

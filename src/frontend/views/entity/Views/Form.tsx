@@ -23,7 +23,7 @@ import { Tabs } from "frontend/design-system/components/Tabs";
 import { ActionButtons } from "frontend/design-system/components/Button/ActionButtons";
 import { DELETE_BUTTON_PROPS } from "frontend/design-system/components/Button/constants";
 import { MAKE_CRUD_CONFIG } from "frontend/lib/crud-config";
-import { msg, t } from "@lingui/macro";
+import { msg } from "@lingui/macro";
 
 interface IProps {
   values: ITableView[];
@@ -35,6 +35,8 @@ const TABLE_VIEW_CRUD_CONFIG = MAKE_CRUD_CONFIG({
   plural: msg`Table Views`,
   singular: msg`Table View`,
 });
+
+const makeViewId = (index: number) => `View ${index}`;
 
 function TabForm({ tableColumns, values, initialValues }: IProps) {
   const { fields } = useFieldArray("tabs");
@@ -53,7 +55,7 @@ function TabForm({ tableColumns, values, initialValues }: IProps) {
           action={() => {
             const newTab: ITableView = {
               id: generateRandomString(12),
-              title: `View ${fields.length + 1}`,
+              title: makeViewId(fields.length + 1),
               dataState: {
                 filters: [],
                 pageSize: undefined,
@@ -61,7 +63,7 @@ function TabForm({ tableColumns, values, initialValues }: IProps) {
               },
             };
             fields.push(newTab);
-            setCurrentTab(t`View ${fields.length + 1}`);
+            setCurrentTab(makeViewId(fields.length + 1));
           }}
         />
       </Stack>
@@ -89,7 +91,7 @@ function TabForm({ tableColumns, values, initialValues }: IProps) {
                           ...DELETE_BUTTON_PROPS({
                             action: () => {
                               fields.remove(index);
-                              setCurrentTab(`View ${index}`);
+                              setCurrentTab(makeViewId(index));
                             },
                             label: TABLE_VIEW_CRUD_CONFIG.TEXT_LANG.DELETE,
                             isMakingRequest: false,
@@ -142,8 +144,8 @@ function TabForm({ tableColumns, values, initialValues }: IProps) {
                   </Field>
                 </>
               ),
-              label: msg`View ${index + 1}`,
-              overrideLabel: msg`${fields.value[index]?.title}`,
+              id: makeViewId(index + 1),
+              label: msg`${fields.value[index]?.title}`,
             };
           })}
         />

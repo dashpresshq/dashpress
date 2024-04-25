@@ -83,8 +83,8 @@ export function WholeEntityTable({
                       defaultTableState={dataState}
                     />
                   ),
-                  label: msg`${title.trim()}`,
-                  overrideLabel: msg`${title}(${currentCount})`,
+                  id: title.trim(),
+                  label: msg`${title}(${currentCount})`,
                 };
               })}
             />

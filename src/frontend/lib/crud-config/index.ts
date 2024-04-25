@@ -29,7 +29,7 @@ export const MAKE_CRUD_CONFIG = ({
       DELETE: msg`${singular} Deleted Successfully`,
       SAVED: msg`${singular} Saved Successfully`,
       CUSTOM: (action: string) => msg`${singular} ${action} Successfully`,
-      VIEW_DETAILS: msg`Click here to view ${singular}`,
+      VIEW_DETAILS: msg`Click here to view details`,
     },
     FORM_LANG: {
       UPSERT: (submitting: boolean) =>

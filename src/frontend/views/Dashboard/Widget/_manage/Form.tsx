@@ -263,6 +263,7 @@ export function DashboardWidgetForm({
                           contents={[
                             {
                               label: msg`Preview`,
+                              id: "preview",
                               content: (
                                 <DashboardWidgetPresentation
                                   config={values}
@@ -273,6 +274,7 @@ export function DashboardWidgetForm({
                             },
                             {
                               label: msg`Data`,
+                              id: "data",
                               content: (
                                 <RenderCode input={runWidgetScript.data} />
                               ),

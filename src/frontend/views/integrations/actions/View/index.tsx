@@ -51,6 +51,7 @@ export function ActionSettingsView({
       contents={[
         {
           label: msg`Configure`,
+          id: "configure",
           content: (
             <Configure
               activationId={activeAction}
@@ -60,6 +61,7 @@ export function ActionSettingsView({
         },
         {
           label: msg`Deactivate`,
+          id: "deactivate",
           content: (
             <Deactivate
               activationId={activeAction}

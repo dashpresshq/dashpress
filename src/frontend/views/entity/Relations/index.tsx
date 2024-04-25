@@ -150,6 +150,7 @@ export function EntityRelationsSettings() {
                   />
                 </ViewStateMachine>
               ),
+              id: "template",
               label: msg`Reference Template`,
             },
             {
@@ -176,6 +177,7 @@ export function EntityRelationsSettings() {
                   />
                 </ViewStateMachine>
               ),
+              id: "selection",
               label: msg`Selection`,
             },
             {
@@ -196,6 +198,7 @@ export function EntityRelationsSettings() {
                   />
                 </ViewStateMachine>
               ),
+              id: "labels",
               label: msg`Labels`,
             },
           ]}

@@ -5,6 +5,7 @@ export const usePortalExtendedPermissions = () => {
   return [
     {
       label: msg`Entities`,
+      id: `entities`,
       content: <BaseMutateEntitiesPermissions />,
     },
   ];

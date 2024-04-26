@@ -38,6 +38,7 @@ export function GeneralStorageSettings() {
         initialValues={fileUploadSettings.data}
         fields={{
           filePathFormat: {
+            label: msg`File Path Format`,
             type: "text",
             validations: [
               {
@@ -48,6 +49,7 @@ export function GeneralStorageSettings() {
           },
 
           fileNameFormat: {
+            label: msg`File Name Format`,
             type: "text",
             validations: [
               {

@@ -7,12 +7,14 @@ import { AppLayout } from "frontend/_layouts/app";
 import { SchemaForm } from "frontend/components/SchemaForm";
 import { ICreateUserForm } from "shared/form-schemas/users";
 import { IAppliedSchemaFormConfig } from "shared/form-schemas/types";
+import { msg } from "@lingui/macro";
 import { ADMIN_USERS_CRUD_CONFIG, useCreateUserMutation } from "../users.store";
 
 export const CREATE_USER_FORM_SCHEMA: IAppliedSchemaFormConfig<ICreateUserForm> =
   {
     username: {
       type: "text",
+      label: msg`Username`,
       validations: [
         {
           validationType: "required",
@@ -24,6 +26,7 @@ export const CREATE_USER_FORM_SCHEMA: IAppliedSchemaFormConfig<ICreateUserForm> 
     },
     name: {
       type: "text",
+      label: msg`Name`,
       validations: [
         {
           validationType: "required",
@@ -31,6 +34,7 @@ export const CREATE_USER_FORM_SCHEMA: IAppliedSchemaFormConfig<ICreateUserForm> 
       ],
     },
     password: {
+      label: msg`Password`,
       type: "password",
       validations: [
         {
@@ -39,6 +43,7 @@ export const CREATE_USER_FORM_SCHEMA: IAppliedSchemaFormConfig<ICreateUserForm> 
       ],
     },
     role: {
+      label: msg`Role`,
       type: "selection",
       apiSelections: {
         listUrl: "/api/roles",

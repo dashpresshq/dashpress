@@ -6,10 +6,13 @@ import {
 } from "shared/types/data-sources";
 import { requestHandler } from "backend/lib/request";
 import { typescriptSafeObjectDotKeys } from "shared/lib/objects";
+import { fakeMessageDescriptor } from "translations/fake";
 
 const credentialRequestSchema: IAppliedSchemaFormConfig<IDataSourceCredentials> =
   {
     dataSourceType: {
+      label: fakeMessageDescriptor("dataSourceType"),
+
       type: "selection",
       validations: [
         {
@@ -24,6 +27,8 @@ const credentialRequestSchema: IAppliedSchemaFormConfig<IDataSourceCredentials> 
       ],
     },
     connectionString: {
+      label: fakeMessageDescriptor("connectionString"),
+
       type: "text",
       validations: [
         {
@@ -32,10 +37,14 @@ const credentialRequestSchema: IAppliedSchemaFormConfig<IDataSourceCredentials> 
       ],
     },
     schemaNames: {
+      label: fakeMessageDescriptor("schemaNames"),
+
       type: "text",
       validations: [],
     },
     database: {
+      label: fakeMessageDescriptor("database"),
+
       type: "text",
       validations: [
         {
@@ -44,6 +53,7 @@ const credentialRequestSchema: IAppliedSchemaFormConfig<IDataSourceCredentials> 
       ],
     },
     password: {
+      label: fakeMessageDescriptor("password"),
       type: "password",
       validations: [
         {
@@ -52,6 +62,7 @@ const credentialRequestSchema: IAppliedSchemaFormConfig<IDataSourceCredentials> 
       ],
     },
     user: {
+      label: fakeMessageDescriptor("user"),
       type: "text",
       validations: [
         {
@@ -60,6 +71,7 @@ const credentialRequestSchema: IAppliedSchemaFormConfig<IDataSourceCredentials> 
       ],
     },
     host: {
+      label: fakeMessageDescriptor("host"),
       type: "text",
       validations: [
         {
@@ -68,6 +80,7 @@ const credentialRequestSchema: IAppliedSchemaFormConfig<IDataSourceCredentials> 
       ],
     },
     port: {
+      label: fakeMessageDescriptor("port"),
       type: "number",
       validations: [
         {
@@ -85,6 +98,7 @@ const credentialRequestSchema: IAppliedSchemaFormConfig<IDataSourceCredentials> 
       ],
     },
     ssl: {
+      label: fakeMessageDescriptor("ssl"),
       type: "boolean",
       validations: [
         {
@@ -93,6 +107,7 @@ const credentialRequestSchema: IAppliedSchemaFormConfig<IDataSourceCredentials> 
       ],
     },
     filename: {
+      label: fakeMessageDescriptor("filename"),
       type: "text",
       validations: [
         {

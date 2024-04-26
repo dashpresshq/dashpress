@@ -97,6 +97,9 @@ msgstr "{0}"
 msgid "{0} - {1}"
 msgstr "{0} - {1}"
 
+msgid "{0} [{1}]"
+msgstr "{0} [{1}]"
+
 msgid "{0} Preference"
 msgstr "{0} Preference"
 
@@ -262,6 +265,9 @@ msgstr "Create Fields Order"
 msgid "Create It"
 msgstr "Create It"
 
+msgid "Created at"
+msgstr "Created at"
+
 msgid "Creating {singular}"
 msgstr "Creating {singular}"
 
@@ -403,6 +409,12 @@ msgstr "Fields"
 msgid "File Name"
 msgstr "File Name"
 
+msgid "File Name Format"
+msgstr "File Name Format"
+
+msgid "File Path Format"
+msgstr "File Path Format"
+
 msgid "File Storage"
 msgstr "File Storage"
 
@@ -423,6 +435,9 @@ msgstr "Form Actions"
 
 msgid "Form Scripts"
 msgstr "Form Scripts"
+
+msgid "Format"
+msgstr "Format"
 
 msgid "General"
 msgstr "General"
@@ -460,6 +475,9 @@ msgstr "Integration"
 msgid "Join our Discord community"
 msgstr "Join our Discord community"
 
+msgid "Key"
+msgstr "Key"
+
 msgid "Label"
 msgstr "Label"
 
@@ -477,6 +495,9 @@ msgstr "Light"
 
 msgid "Light Color Scheme"
 msgstr "Light Color Scheme"
+
+msgid "Link"
+msgstr "Link"
 
 msgid "Link Entity"
 msgstr "Link Entity"
@@ -507,6 +528,9 @@ msgstr "Metadata Columns"
 
 msgid "My Account"
 msgstr "My Account"
+
+msgid "Name"
+msgstr "Name"
 
 msgid "New Password"
 msgstr "New Password"
@@ -561,6 +585,9 @@ msgstr "Password will not be changed on demo account"
 
 msgid "Persistent Query"
 msgstr "Persistent Query"
+
+msgid "Plural"
+msgstr "Plural"
 
 msgid "Port"
 msgstr "Port"
@@ -691,6 +718,9 @@ msgstr "Sign In"
 msgid "Signing In"
 msgstr "Signing In"
 
+msgid "Singular"
+msgstr "Singular"
+
 msgid "Site"
 msgstr "Site"
 
@@ -763,6 +793,9 @@ msgstr "Title"
 msgid "Toggle Connection URL"
 msgstr "Toggle Connection URL"
 
+msgid "Token validity duration in days"
+msgstr "Token validity duration in days"
+
 msgid "Trigger"
 msgstr "Trigger"
 
@@ -780,6 +813,9 @@ msgstr "Update Columns Settings"
 
 msgid "Update Fields Order"
 msgstr "Update Fields Order"
+
+msgid "Updated at"
+msgstr "Updated at"
 
 msgid "Updating {singular}"
 msgstr "Updating {singular}"

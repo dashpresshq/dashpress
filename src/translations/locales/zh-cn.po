@@ -97,6 +97,9 @@ msgstr ""
 msgid "{0} - {1}"
 msgstr ""
 
+msgid "{0} [{1}]"
+msgstr ""
+
 msgid "{0} Preference"
 msgstr "{0}偏好"
 
@@ -262,6 +265,9 @@ msgstr ""
 msgid "Create It"
 msgstr "创建"
 
+msgid "Created at"
+msgstr ""
+
 msgid "Creating {singular}"
 msgstr "创建{singular}"
 
@@ -403,6 +409,12 @@ msgstr "字段"
 msgid "File Name"
 msgstr ""
 
+msgid "File Name Format"
+msgstr ""
+
+msgid "File Path Format"
+msgstr ""
+
 msgid "File Storage"
 msgstr "存储设置"
 
@@ -423,6 +435,9 @@ msgstr "表单操作"
 
 msgid "Form Scripts"
 msgstr "表单脚本"
+
+msgid "Format"
+msgstr ""
 
 msgid "General"
 msgstr "一般"
@@ -460,6 +475,9 @@ msgstr "集成"
 msgid "Join our Discord community"
 msgstr "加入我们社区"
 
+msgid "Key"
+msgstr ""
+
 msgid "Label"
 msgstr ""
 
@@ -476,6 +494,9 @@ msgid "Light"
 msgstr "明亮"
 
 msgid "Light Color Scheme"
+msgstr ""
+
+msgid "Link"
 msgstr ""
 
 msgid "Link Entity"
@@ -507,6 +528,9 @@ msgstr ""
 
 msgid "My Account"
 msgstr "我的账户"
+
+msgid "Name"
+msgstr ""
 
 msgid "New Password"
 msgstr ""
@@ -561,6 +585,9 @@ msgstr "演示账户的密码将不会被更改"
 
 msgid "Persistent Query"
 msgstr "持久查询"
+
+msgid "Plural"
+msgstr ""
 
 msgid "Port"
 msgstr ""
@@ -691,6 +718,9 @@ msgstr "登录"
 msgid "Signing In"
 msgstr "正在登录"
 
+msgid "Singular"
+msgstr ""
+
 msgid "Site"
 msgstr "站点"
 
@@ -763,6 +793,9 @@ msgstr ""
 msgid "Toggle Connection URL"
 msgstr "切换连接"
 
+msgid "Token validity duration in days"
+msgstr ""
+
 msgid "Trigger"
 msgstr ""
 
@@ -779,6 +812,9 @@ msgid "Update Columns Settings"
 msgstr ""
 
 msgid "Update Fields Order"
+msgstr ""
+
+msgid "Updated at"
 msgstr ""
 
 msgid "Updating {singular}"

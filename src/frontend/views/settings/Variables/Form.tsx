@@ -10,6 +10,7 @@ export const CAPITAL_AND_UNDERSCORE_REGEX = `^[A-Z_]+$`;
 
 export const FORM_SCHEMA: IAppliedSchemaFormConfig<IKeyValue> = {
   key: {
+    label: msg`Key`,
     type: "text",
     validations: [
       {
@@ -28,6 +29,7 @@ export const FORM_SCHEMA: IAppliedSchemaFormConfig<IKeyValue> = {
     }),
   },
   value: {
+    label: msg`Value`,
     type: "text",
     validations: [
       {

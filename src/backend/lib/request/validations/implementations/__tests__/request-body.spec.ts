@@ -1,9 +1,11 @@
 import { requestHandler } from "backend/lib/request";
 import { IAppliedSchemaFormConfig } from "shared/form-schemas/types";
 import { createAuthenticatedMocks } from "__tests__/api/_test-utils";
+import { fakeMessageDescriptor } from "translations/fake";
 
 export const TEST_FORM_SCHEMA: IAppliedSchemaFormConfig<{ name: string }> = {
   name: {
+    label: fakeMessageDescriptor("name"),
     type: "text",
     validations: [
       {

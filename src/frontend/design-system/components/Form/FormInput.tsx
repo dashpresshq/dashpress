@@ -17,7 +17,7 @@ export const FormInput = (formInput: IFormInput) => {
       {...generateFormArias(meta)}
       type={type}
       id={formInput.input.name}
-      placeholder={_(placeholder)}
+      placeholder={placeholder ? _(placeholder) : null}
       disabled={disabled}
     />,
     formInput

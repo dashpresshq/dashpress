@@ -81,7 +81,7 @@ export const FormSelect = (props: IFormSelect) => {
             label: "",
           }
         }
-        placeholder={_(placeholder)}
+        placeholder={placeholder ? _(placeholder) : null}
         inputId={input.name}
         onChange={({ value }: any) => {
           input.onChange(nullable && !value ? null : value);

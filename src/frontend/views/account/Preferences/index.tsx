@@ -37,6 +37,7 @@ export const LANGUAGE_PREFERENCES_FORM_SCHEMA: IAppliedSchemaFormConfig<{
   locale: string;
 }> = {
   locale: {
+    label: msg`Language`,
     type: "selection",
     validations: [
       {

@@ -23,7 +23,7 @@ export type ISchemaFormConfig<T> = {
     referenceUrl?: (value: string) => string;
   };
   type: FormFieldTypes;
-  label?: MessageDescriptor;
+  label: MessageDescriptor;
   placeholder?: MessageDescriptor;
   description?: string;
   formState?: ($: ISchemaFormScriptProps<T>) => {

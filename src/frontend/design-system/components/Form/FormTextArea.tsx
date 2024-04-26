@@ -28,7 +28,7 @@ export const FormTextArea = (formInput: IFormTextArea) => {
       onFocus={input.onFocus}
       onBlur={input.onBlur}
       rows={rows}
-      placeholder={_(placeholder)}
+      placeholder={placeholder ? _(placeholder) : null}
       disabled={disabled}
     >
       {input.value}

@@ -33,6 +33,7 @@ import {
 export const UPDATE_USER_FORM_SCHEMA: IAppliedSchemaFormConfig<IUpdateUserForm> =
   {
     name: {
+      label: msg`Name`,
       type: "text",
       validations: [
         {
@@ -41,6 +42,7 @@ export const UPDATE_USER_FORM_SCHEMA: IAppliedSchemaFormConfig<IUpdateUserForm> 
       ],
     },
     role: {
+      label: msg`Role`,
       type: "selection",
       apiSelections: {
         listUrl: "/api/roles",

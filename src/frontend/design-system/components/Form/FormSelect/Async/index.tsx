@@ -112,7 +112,7 @@ export function AsyncFormSelect(props: IProps) {
         classNamePrefix={SharedSelectProps.classNamePrefix}
         isDisabled={disabled}
         isLoading={isLoading}
-        placeholder={_(placeholder)}
+        placeholder={placeholder ? _(placeholder) : null}
         className={generateClassNames(meta)}
         value={{ value: input.value, label: valueLabelToUse.value }}
         loadOptions={(inputValue) =>

@@ -38,7 +38,7 @@ export const FormNumberInput = (formInput: IFormNumberInput) => {
       onChange={(e) => {
         input.onChange(getNumberValue(e.target.value, !!required));
       }}
-      placeholder={_(placeholder)}
+      placeholder={placeholder ? _(placeholder) : null}
       type="number"
       disabled={disabled}
     />,

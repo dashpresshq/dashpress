@@ -55,6 +55,7 @@ export function SiteSettings() {
             buttonText={CRUD_CONFIG.FORM_LANG.UPSERT}
             fields={{
               name: {
+                label: msg`Name`,
                 type: "text",
                 validations: [
                   {
@@ -63,6 +64,7 @@ export function SiteSettings() {
                 ],
               },
               homeLink: {
+                label: msg`Link`,
                 type: "text",
                 validations: [
                   {

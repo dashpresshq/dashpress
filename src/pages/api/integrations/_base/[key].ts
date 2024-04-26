@@ -4,6 +4,7 @@ import { integrationsConfigurationApiController } from "backend/integrations-con
 import { IAppliedSchemaFormConfig } from "shared/form-schemas/types";
 import { IntegrationsConfigurationGroup } from "shared/types/integrations";
 import { ValidationKeys } from "backend/lib/request/validations/types";
+import { msg } from "@lingui/macro";
 
 const REQUEST_KEY_FIELD = "key";
 
@@ -14,6 +15,7 @@ type IUpdateIntegrationValueForm = {
 export const UPSERT_INTEGRATION_VALUE_FORM_SCHEMA: IAppliedSchemaFormConfig<IUpdateIntegrationValueForm> =
   {
     value: {
+      label: msg`Value`,
       type: "text",
       validations: [
         {

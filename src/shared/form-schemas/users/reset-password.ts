@@ -1,3 +1,4 @@
+import { msg } from "@lingui/macro";
 import { IAppliedSchemaFormConfig } from "../types";
 
 export type IResetPasswordForm = {
@@ -7,6 +8,7 @@ export type IResetPasswordForm = {
 export const RESET_PASSWORD_FORM_SCHEMA: IAppliedSchemaFormConfig<IResetPasswordForm> =
   {
     password: {
+      label: msg`Password`,
       type: "password",
       validations: [
         {

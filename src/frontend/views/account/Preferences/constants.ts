@@ -11,6 +11,7 @@ export const ACCOUNT_PREFERENCES_CRUD_CONFIG = MAKE_CRUD_CONFIG({
 export const UPDATE_USER_PREFERENCES_FORM_SCHEMA: IAppliedSchemaFormConfig<IUserPreferences> =
   {
     theme: {
+      label: msg`Theme`,
       type: "selection",
       validations: [
         {

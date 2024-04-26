@@ -15,6 +15,7 @@ import { SystemSettingsDocumentation } from "frontend/docs/system-settings";
 import { SchemaForm } from "frontend/components/SchemaForm";
 import { IBaseSystemSettings } from "shared/configurations/system";
 import { useDocumentationActionButton } from "frontend/docs/constants";
+import { msg } from "@lingui/macro";
 import { BaseSettingsLayout } from "../_Base";
 import { SETTINGS_VIEW_KEY } from "../constants";
 
@@ -54,6 +55,7 @@ export function SystemSettings() {
             buttonText={CRUD_CONFIG.FORM_LANG.UPSERT}
             fields={{
               tokenValidityDurationInDays: {
+                label: msg`Token validity duration in days`,
                 type: "number",
                 validations: [
                   {

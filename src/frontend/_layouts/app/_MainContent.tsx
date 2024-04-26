@@ -52,7 +52,7 @@ export function MainContent({
 
   useEffect(() => {
     pushToStack();
-  }, [router.asPath, pageTitle]);
+  }, [router.asPath, pageTitle?.message]);
 
   const homedBreadcrumb = history.map((historyItem) => ({
     value: historyItem.link,

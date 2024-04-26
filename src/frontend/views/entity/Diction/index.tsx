@@ -69,6 +69,7 @@ export function EntityDictionSettings() {
             }
             fields={{
               plural: {
+                label: msg`Plural`,
                 type: "text",
                 validations: [
                   {
@@ -83,6 +84,7 @@ export function EntityDictionSettings() {
                 ],
               },
               singular: {
+                label: msg`Singular`,
                 type: "text",
                 validations: [
                   {

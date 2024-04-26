@@ -1,3 +1,4 @@
+import { msg } from "@lingui/macro";
 import { IAppliedSchemaFormConfig } from "../types";
 
 export type ISetupUserForm = {
@@ -9,6 +10,7 @@ export type ISetupUserForm = {
 export const SETUP_USER_FORM_SCHEMA: IAppliedSchemaFormConfig<ISetupUserForm> =
   {
     username: {
+      label: msg`Username`,
       type: "text",
       validations: [
         {
@@ -20,6 +22,7 @@ export const SETUP_USER_FORM_SCHEMA: IAppliedSchemaFormConfig<ISetupUserForm> =
       ],
     },
     name: {
+      label: msg`Name`,
       type: "text",
       validations: [
         {
@@ -28,6 +31,7 @@ export const SETUP_USER_FORM_SCHEMA: IAppliedSchemaFormConfig<ISetupUserForm> =
       ],
     },
     password: {
+      label: msg`Password`,
       type: "password",
       validations: [
         {

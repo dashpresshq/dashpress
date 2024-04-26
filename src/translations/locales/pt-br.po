@@ -97,6 +97,9 @@ msgstr ""
 msgid "{0} - {1}"
 msgstr ""
 
+msgid "{0} [{1}]"
+msgstr ""
+
 msgid "{0} Preference"
 msgstr ""
 
@@ -262,6 +265,9 @@ msgstr ""
 msgid "Create It"
 msgstr ""
 
+msgid "Created at"
+msgstr ""
+
 msgid "Creating {singular}"
 msgstr ""
 
@@ -403,6 +409,12 @@ msgstr ""
 msgid "File Name"
 msgstr ""
 
+msgid "File Name Format"
+msgstr ""
+
+msgid "File Path Format"
+msgstr ""
+
 msgid "File Storage"
 msgstr ""
 
@@ -422,6 +434,9 @@ msgid "Form Actions"
 msgstr ""
 
 msgid "Form Scripts"
+msgstr ""
+
+msgid "Format"
 msgstr ""
 
 msgid "General"
@@ -460,6 +475,9 @@ msgstr ""
 msgid "Join our Discord community"
 msgstr ""
 
+msgid "Key"
+msgstr ""
+
 msgid "Label"
 msgstr ""
 
@@ -476,6 +494,9 @@ msgid "Light"
 msgstr ""
 
 msgid "Light Color Scheme"
+msgstr ""
+
+msgid "Link"
 msgstr ""
 
 msgid "Link Entity"
@@ -506,6 +527,9 @@ msgid "Metadata Columns"
 msgstr ""
 
 msgid "My Account"
+msgstr ""
+
+msgid "Name"
 msgstr ""
 
 msgid "New Password"
@@ -560,6 +584,9 @@ msgid "Password will not be changed on demo account"
 msgstr ""
 
 msgid "Persistent Query"
+msgstr ""
+
+msgid "Plural"
 msgstr ""
 
 msgid "Port"
@@ -691,6 +718,9 @@ msgstr ""
 msgid "Signing In"
 msgstr ""
 
+msgid "Singular"
+msgstr ""
+
 msgid "Site"
 msgstr ""
 
@@ -763,6 +793,9 @@ msgstr ""
 msgid "Toggle Connection URL"
 msgstr ""
 
+msgid "Token validity duration in days"
+msgstr ""
+
 msgid "Trigger"
 msgstr ""
 
@@ -779,6 +812,9 @@ msgid "Update Columns Settings"
 msgstr ""
 
 msgid "Update Fields Order"
+msgstr ""
+
+msgid "Updated at"
 msgstr ""
 
 msgid "Updating {singular}"

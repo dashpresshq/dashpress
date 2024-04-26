@@ -6,6 +6,7 @@ import { action } from "@storybook/addon-actions";
 import { required } from "frontend/lib/validations";
 import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 import { Stack } from "frontend/design-system/primitives/Stack";
+import { fakeMessageDescriptor } from "translations/fake";
 import { FormCheckBox } from "./FormCheckBox";
 import { FormInput } from "./FormInput";
 import { FormNumberInput } from "./FormNumberInput";
@@ -22,13 +23,6 @@ import { FormFileInput } from "./FormFileInput";
 import { FormSelectButton } from "./FormSelectButton";
 import { ActionButtons } from "../Button/ActionButtons";
 import { DELETE_BUTTON_PROPS } from "../Button/constants";
-
-const fakeMessageDescriptor = (message: string) => {
-  return {
-    id: message,
-    message,
-  };
-};
 
 function DemoForm() {
   return (

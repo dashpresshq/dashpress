@@ -2,6 +2,7 @@ import { IAppliedSchemaFormConfig } from "shared/form-schemas/types";
 import { userFriendlyCase } from "shared/lib/strings/friendly-case";
 import { compileTemplateString } from "shared/lib/strings/templates";
 import { typescriptSafeObjectDotEntries } from "shared/lib/objects";
+import { i18n } from "@lingui/core";
 import { ENTITY_VALIDATION_CONFIG } from "./validations-map";
 
 export const runValidationError =
@@ -25,9 +26,13 @@ export const runValidationError =
           field,
           firstFailedValidation
             ? compileTemplateString(
-                firstFailedValidation.errorMessage ||
-                  ENTITY_VALIDATION_CONFIG[firstFailedValidation.validationType]
-                    .message,
+                firstFailedValidation.errorMessage
+                  ? i18n._(firstFailedValidation.errorMessage)
+                  : i18n._(
+                      ENTITY_VALIDATION_CONFIG[
+                        firstFailedValidation.validationType
+                      ].message
+                    ),
                 {
                   name: config.label || userFriendlyCase(String(field)),
                   ...firstFailedValidation.constraint,

@@ -10,6 +10,7 @@ import {
 } from "frontend/design-system/components/Skeleton/Form";
 import { MAKE_APP_CONFIGURATION_CRUD_CONFIG } from "frontend/hooks/configuration/configuration.constant";
 import { AppConfigurationValueType } from "shared/configurations/constants";
+import { msg } from "@lingui/macro";
 
 export function GeneralStorageSettings() {
   const fileUploadSettings = useAppConfiguration("file_upload_settings");
@@ -41,7 +42,7 @@ export function GeneralStorageSettings() {
             validations: [
               {
                 validationType: "required",
-                errorMessage: "Required",
+                errorMessage: msg`Required`,
               },
             ],
           },
@@ -51,7 +52,7 @@ export function GeneralStorageSettings() {
             validations: [
               {
                 validationType: "required",
-                errorMessage: "Required",
+                errorMessage: msg`Required`,
               },
             ],
           },
@@ -62,7 +63,7 @@ export function GeneralStorageSettings() {
             validations: [
               {
                 validationType: "required",
-                errorMessage: "Required",
+                errorMessage: msg`Required`,
               },
             ],
           },

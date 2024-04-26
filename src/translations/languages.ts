@@ -49,11 +49,6 @@ const languages: Languages[] = [
     territory: "RU",
   },
   {
-    locale: "nl-nl",
-    msg: `Nederlands`,
-    territory: "NL",
-  },
-  {
     locale: "ja-jp",
     msg: `日本語`,
     territory: "JP",
@@ -68,87 +63,87 @@ const languages: Languages[] = [
     msg: `한국어`,
     territory: "KR",
   },
-  {
-    locale: "bn-in",
-    msg: `বাংলা`,
-    territory: "IN",
-  },
-  {
-    locale: "hi-in",
-    msg: `हिंदी`,
-    territory: "IN",
-  },
-  {
-    locale: "ar-sa",
-    msg: `العربية`,
-    territory: "SA",
-    rtl: true,
-  },
-  {
-    locale: "pl-pl",
-    msg: `Polski`,
-    territory: "PL",
-  },
-  {
-    locale: "tr-tr",
-    msg: `Türkçe`,
-    territory: "TR",
-  },
-  {
-    locale: "vi-vn",
-    msg: `Tiếng Việt`,
-    territory: "VN",
-  },
-  {
-    locale: "id-id",
-    msg: `Bahasa Indonesia`,
-    territory: "ID",
-  },
-  {
-    locale: "uk-ua",
-    msg: `Українська`,
-    territory: "UA",
-  },
-  {
-    locale: "hu-hu",
-    msg: `Magyar`,
-    territory: "HU",
-  },
-  {
-    locale: "ro-ro",
-    msg: `Română`,
-    territory: "RO",
-  },
-  {
-    locale: "sv-se",
-    msg: `Svenska`,
-    territory: "SE",
-  },
-  {
-    locale: "fa-ir",
-    msg: `فارسی`,
-    territory: "IR",
-  },
-  {
-    locale: "cs-cz",
-    msg: `Česky`,
-    territory: "CZ",
-  },
-  {
-    locale: "el-gr",
-    msg: `Ελληνικά`,
-    territory: "GR",
-  },
-  {
-    locale: "th-th",
-    msg: `ไทย`,
-    territory: "TH",
-  },
-  {
-    locale: "he-il",
-    msg: `עברית`,
-    territory: "IL",
-  },
+  // {
+  //   locale: "nl-nl",
+  //   msg: `Nederlands`,
+  //   territory: "NL",
+  // },
+  // {
+  //   locale: "bn-in",
+  //   msg: `বাংলা`,
+  //   territory: "IN",
+  // },
+  // {
+  //   locale: "ar-sa",
+  //   msg: `العربية`,
+  //   territory: "SA",
+  //   rtl: true,
+  // },
+  // {
+  //   locale: "pl-pl",
+  //   msg: `Polski`,
+  //   territory: "PL",
+  // },
+  // {
+  //   locale: "tr-tr",
+  //   msg: `Türkçe`,
+  //   territory: "TR",
+  // },
+  // {
+  //   locale: "vi-vn",
+  //   msg: `Tiếng Việt`,
+  //   territory: "VN",
+  // },
+  // {
+  //   locale: "id-id",
+  //   msg: `Bahasa Indonesia`,
+  //   territory: "ID",
+  // },
+  // {
+  //   locale: "uk-ua",
+  //   msg: `Українська`,
+  //   territory: "UA",
+  // },
+  // {
+  //   locale: "hu-hu",
+  //   msg: `Magyar`,
+  //   territory: "HU",
+  // },
+  // {
+  //   locale: "ro-ro",
+  //   msg: `Română`,
+  //   territory: "RO",
+  // },
+  // {
+  //   locale: "sv-se",
+  //   msg: `Svenska`,
+  //   territory: "SE",
+  // },
+  // {
+  //   locale: "fa-ir",
+  //   msg: `فارسی`,
+  //   territory: "IR",
+  // },
+  // {
+  //   locale: "cs-cz",
+  //   msg: `Česky`,
+  //   territory: "CZ",
+  // },
+  // {
+  //   locale: "el-gr",
+  //   msg: `Ελληνικά`,
+  //   territory: "GR",
+  // },
+  // {
+  //   locale: "th-th",
+  //   msg: `ไทย`,
+  //   territory: "TH",
+  // },
+  // {
+  //   locale: "he-il",
+  //   msg: `עברית`,
+  //   territory: "IL",
+  // },
 ];
 
 if (process.env.NODE_ENV !== "production") {

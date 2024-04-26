@@ -22,6 +22,72 @@ msgstr ""
 msgid "\"{0}\" Validations"
 msgstr ""
 
+msgid "[[ name ]] is an invalid date"
+msgstr ""
+
+msgid "[[ name ]] is an invalid email"
+msgstr ""
+
+msgid "[[ name ]] is an invalid json"
+msgstr ""
+
+msgid "[[ name ]] is an invalid URL"
+msgstr ""
+
+msgid "[[ name ]] is invalid"
+msgstr ""
+
+msgid "[[ name ]] is invalid. Allowed values are [[ options ]]"
+msgstr ""
+
+msgid "[[ name ]] is not a text"
+msgstr ""
+
+msgid "[[ name ]] is required"
+msgstr ""
+
+msgid "[[ name ]] should be a boolean"
+msgstr ""
+
+msgid "[[ name ]] should be a color"
+msgstr ""
+
+msgid "[[ name ]] should be a number"
+msgstr ""
+
+msgid "[[ name ]] should be greater than [[ length ]] characters"
+msgstr ""
+
+msgid "[[ name ]] should be greater than [[ otherField ]]"
+msgstr ""
+
+msgid "[[ name ]] should be greater than [[ value ]]"
+msgstr ""
+
+msgid "[[ name ]] should be less than [[ length ]] characters"
+msgstr ""
+
+msgid "[[ name ]] should be less than [[ otherField ]]"
+msgstr ""
+
+msgid "[[ name ]] should be less than [[ value ]]"
+msgstr ""
+
+msgid "[[ name ]] should be positive number"
+msgstr ""
+
+msgid "[[ name ]] should contain only alphabets and numbers"
+msgstr ""
+
+msgid "[[ name ]] should contain only upper cases"
+msgstr ""
+
+msgid "[[ name ]] should match [[ otherField ]]"
+msgstr ""
+
+msgid "[[ name ]] should not match [[ otherField ]]"
+msgstr ""
+
 msgid "{0}"
 msgstr ""
 
@@ -41,9 +107,6 @@ msgid "{errorMessage}"
 msgstr ""
 
 msgid "{key}"
-msgstr ""
-
-msgid "{label}"
 msgstr ""
 
 msgid "{plural}"
@@ -77,6 +140,42 @@ msgid "{singular} Updated Successfully"
 msgstr ""
 
 msgid "{title}({currentCount})"
+msgstr ""
+
+msgid "{value} Day"
+msgstr ""
+
+msgid "{value} Days"
+msgstr ""
+
+msgid "{value} Hour"
+msgstr ""
+
+msgid "{value} Hours"
+msgstr ""
+
+msgid "{value} Month"
+msgstr ""
+
+msgid "{value} Months"
+msgstr ""
+
+msgid "{value} Quarter"
+msgstr ""
+
+msgid "{value} Quarters"
+msgstr ""
+
+msgid "{value} Week"
+msgstr ""
+
+msgid "{value} Weeks"
+msgstr ""
+
+msgid "{value} Year"
+msgstr ""
+
+msgid "{value} Years"
 msgstr ""
 
 msgid "Account Preferences"
@@ -313,10 +412,16 @@ msgstr ""
 msgid "General Data Settings"
 msgstr ""
 
+msgid "Genesis"
+msgstr ""
+
 msgid "Go Back"
 msgstr ""
 
 msgid "Hi, {0}"
+msgstr ""
+
+msgid "Incorrect value"
 msgstr ""
 
 msgid "Integration"
@@ -376,6 +481,9 @@ msgstr ""
 msgid "No Search Results"
 msgstr ""
 
+msgid "Now"
+msgstr ""
+
 msgid "On Create"
 msgstr ""
 
@@ -383,6 +491,9 @@ msgid "On Delete"
 msgstr ""
 
 msgid "On Update"
+msgstr ""
+
+msgid "Only capital letters and underscores are allowed"
 msgstr ""
 
 msgid "Order"
@@ -439,6 +550,9 @@ msgstr ""
 msgid "Remove Nested Filter"
 msgstr ""
 
+msgid "Required"
+msgstr ""
+
 msgid "Reset"
 msgstr ""
 
@@ -479,6 +593,9 @@ msgid "Save {singular}"
 msgstr ""
 
 msgid "Saving {singular}"
+msgstr ""
+
+msgid "Search"
 msgstr ""
 
 msgid "Secret"
@@ -524,6 +641,9 @@ msgid "Site Settings"
 msgstr ""
 
 msgid "Star us on Github"
+msgstr ""
+
+msgid "Start of year"
 msgstr ""
 
 msgid "System"

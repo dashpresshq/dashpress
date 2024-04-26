@@ -80,7 +80,7 @@ export const generateFormArias = (
     return {};
   }
   if (isFormMetaWithError(meta)) {
-    return { "aria-invalid": "true", ariaInvalid: "true" };
+    return { "aria-invalid": "true" };
   }
   return {};
 };

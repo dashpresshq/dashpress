@@ -22,6 +22,72 @@ msgstr "\"{0}\" Selection"
 msgid "\"{0}\" Validations"
 msgstr "\"{0}\" Validations"
 
+msgid "[[ name ]] is an invalid date"
+msgstr "[[ name ]] is an invalid date"
+
+msgid "[[ name ]] is an invalid email"
+msgstr "[[ name ]] is an invalid email"
+
+msgid "[[ name ]] is an invalid json"
+msgstr "[[ name ]] is an invalid json"
+
+msgid "[[ name ]] is an invalid URL"
+msgstr "[[ name ]] is an invalid URL"
+
+msgid "[[ name ]] is invalid"
+msgstr "[[ name ]] is invalid"
+
+msgid "[[ name ]] is invalid. Allowed values are [[ options ]]"
+msgstr "[[ name ]] is invalid. Allowed values are [[ options ]]"
+
+msgid "[[ name ]] is not a text"
+msgstr "[[ name ]] is not a text"
+
+msgid "[[ name ]] is required"
+msgstr "[[ name ]] is required"
+
+msgid "[[ name ]] should be a boolean"
+msgstr "[[ name ]] should be a boolean"
+
+msgid "[[ name ]] should be a color"
+msgstr "[[ name ]] should be a color"
+
+msgid "[[ name ]] should be a number"
+msgstr "[[ name ]] should be a number"
+
+msgid "[[ name ]] should be greater than [[ length ]] characters"
+msgstr "[[ name ]] should be greater than [[ length ]] characters"
+
+msgid "[[ name ]] should be greater than [[ otherField ]]"
+msgstr "[[ name ]] should be greater than [[ otherField ]]"
+
+msgid "[[ name ]] should be greater than [[ value ]]"
+msgstr "[[ name ]] should be greater than [[ value ]]"
+
+msgid "[[ name ]] should be less than [[ length ]] characters"
+msgstr "[[ name ]] should be less than [[ length ]] characters"
+
+msgid "[[ name ]] should be less than [[ otherField ]]"
+msgstr "[[ name ]] should be less than [[ otherField ]]"
+
+msgid "[[ name ]] should be less than [[ value ]]"
+msgstr "[[ name ]] should be less than [[ value ]]"
+
+msgid "[[ name ]] should be positive number"
+msgstr "[[ name ]] should be positive number"
+
+msgid "[[ name ]] should contain only alphabets and numbers"
+msgstr "[[ name ]] should contain only alphabets and numbers"
+
+msgid "[[ name ]] should contain only upper cases"
+msgstr "[[ name ]] should contain only upper cases"
+
+msgid "[[ name ]] should match [[ otherField ]]"
+msgstr "[[ name ]] should match [[ otherField ]]"
+
+msgid "[[ name ]] should not match [[ otherField ]]"
+msgstr "[[ name ]] should not match [[ otherField ]]"
+
 msgid "{0}"
 msgstr "{0}"
 
@@ -42,9 +108,6 @@ msgstr "{errorMessage}"
 
 msgid "{key}"
 msgstr "{key}"
-
-msgid "{label}"
-msgstr "{label}"
 
 msgid "{plural}"
 msgstr "{plural}"
@@ -78,6 +141,42 @@ msgstr "{singular} Updated Successfully"
 
 msgid "{title}({currentCount})"
 msgstr "{title}({currentCount})"
+
+msgid "{value} Day"
+msgstr "{value} Day"
+
+msgid "{value} Days"
+msgstr "{value} Days"
+
+msgid "{value} Hour"
+msgstr "{value} Hour"
+
+msgid "{value} Hours"
+msgstr "{value} Hours"
+
+msgid "{value} Month"
+msgstr "{value} Month"
+
+msgid "{value} Months"
+msgstr "{value} Months"
+
+msgid "{value} Quarter"
+msgstr "{value} Quarter"
+
+msgid "{value} Quarters"
+msgstr "{value} Quarters"
+
+msgid "{value} Week"
+msgstr "{value} Week"
+
+msgid "{value} Weeks"
+msgstr "{value} Weeks"
+
+msgid "{value} Year"
+msgstr "{value} Year"
+
+msgid "{value} Years"
+msgstr "{value} Years"
 
 msgid "Account Preferences"
 msgstr "Account Preferences"
@@ -313,11 +412,17 @@ msgstr "General"
 msgid "General Data Settings"
 msgstr "General Data Settings"
 
+msgid "Genesis"
+msgstr "Genesis"
+
 msgid "Go Back"
 msgstr "Go Back"
 
 msgid "Hi, {0}"
 msgstr "Hi, {0}"
+
+msgid "Incorrect value"
+msgstr "Incorrect value"
 
 msgid "Integration"
 msgstr "Integration"
@@ -376,6 +481,9 @@ msgstr "No result for the current {0} applied."
 msgid "No Search Results"
 msgstr "No Search Results"
 
+msgid "Now"
+msgstr "Now"
+
 msgid "On Create"
 msgstr "On Create"
 
@@ -384,6 +492,9 @@ msgstr "On Delete"
 
 msgid "On Update"
 msgstr "On Update"
+
+msgid "Only capital letters and underscores are allowed"
+msgstr "Only capital letters and underscores are allowed"
 
 msgid "Order"
 msgstr "Order"
@@ -439,6 +550,9 @@ msgstr "Remove"
 msgid "Remove Nested Filter"
 msgstr "Remove Nested Filter"
 
+msgid "Required"
+msgstr "Required"
+
 msgid "Reset"
 msgstr "Reset"
 
@@ -480,6 +594,9 @@ msgstr "Save {singular}"
 
 msgid "Saving {singular}"
 msgstr "Saving {singular}"
+
+msgid "Search"
+msgstr "Search"
 
 msgid "Secret"
 msgstr "Secret"
@@ -525,6 +642,9 @@ msgstr "Site Settings"
 
 msgid "Star us on Github"
 msgstr "Star us on Github"
+
+msgid "Start of year"
+msgstr "Start of year"
 
 msgid "System"
 msgstr "System"

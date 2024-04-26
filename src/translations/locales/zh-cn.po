@@ -22,6 +22,72 @@ msgstr "选择“{0}”"
 msgid "\"{0}\" Validations"
 msgstr "验证“{0}”"
 
+msgid "[[ name ]] is an invalid date"
+msgstr ""
+
+msgid "[[ name ]] is an invalid email"
+msgstr ""
+
+msgid "[[ name ]] is an invalid json"
+msgstr ""
+
+msgid "[[ name ]] is an invalid URL"
+msgstr ""
+
+msgid "[[ name ]] is invalid"
+msgstr ""
+
+msgid "[[ name ]] is invalid. Allowed values are [[ options ]]"
+msgstr ""
+
+msgid "[[ name ]] is not a text"
+msgstr ""
+
+msgid "[[ name ]] is required"
+msgstr ""
+
+msgid "[[ name ]] should be a boolean"
+msgstr ""
+
+msgid "[[ name ]] should be a color"
+msgstr ""
+
+msgid "[[ name ]] should be a number"
+msgstr ""
+
+msgid "[[ name ]] should be greater than [[ length ]] characters"
+msgstr ""
+
+msgid "[[ name ]] should be greater than [[ otherField ]]"
+msgstr ""
+
+msgid "[[ name ]] should be greater than [[ value ]]"
+msgstr ""
+
+msgid "[[ name ]] should be less than [[ length ]] characters"
+msgstr ""
+
+msgid "[[ name ]] should be less than [[ otherField ]]"
+msgstr ""
+
+msgid "[[ name ]] should be less than [[ value ]]"
+msgstr ""
+
+msgid "[[ name ]] should be positive number"
+msgstr ""
+
+msgid "[[ name ]] should contain only alphabets and numbers"
+msgstr ""
+
+msgid "[[ name ]] should contain only upper cases"
+msgstr ""
+
+msgid "[[ name ]] should match [[ otherField ]]"
+msgstr ""
+
+msgid "[[ name ]] should not match [[ otherField ]]"
+msgstr ""
+
 msgid "{0}"
 msgstr ""
 
@@ -41,9 +107,6 @@ msgid "{errorMessage}"
 msgstr ""
 
 msgid "{key}"
-msgstr ""
-
-msgid "{label}"
 msgstr ""
 
 msgid "{plural}"
@@ -77,6 +140,42 @@ msgid "{singular} Updated Successfully"
 msgstr "{singular}更新成功"
 
 msgid "{title}({currentCount})"
+msgstr ""
+
+msgid "{value} Day"
+msgstr ""
+
+msgid "{value} Days"
+msgstr ""
+
+msgid "{value} Hour"
+msgstr ""
+
+msgid "{value} Hours"
+msgstr ""
+
+msgid "{value} Month"
+msgstr ""
+
+msgid "{value} Months"
+msgstr ""
+
+msgid "{value} Quarter"
+msgstr ""
+
+msgid "{value} Quarters"
+msgstr ""
+
+msgid "{value} Week"
+msgstr ""
+
+msgid "{value} Weeks"
+msgstr ""
+
+msgid "{value} Year"
+msgstr ""
+
+msgid "{value} Years"
 msgstr ""
 
 msgid "Account Preferences"
@@ -313,11 +412,17 @@ msgstr "一般"
 msgid "General Data Settings"
 msgstr "常规数据设置"
 
+msgid "Genesis"
+msgstr ""
+
 msgid "Go Back"
 msgstr "返回"
 
 msgid "Hi, {0}"
 msgstr "你好，{0}"
+
+msgid "Incorrect value"
+msgstr ""
 
 msgid "Integration"
 msgstr "集成"
@@ -376,6 +481,9 @@ msgstr "当前{0}没有结果。"
 msgid "No Search Results"
 msgstr "没有搜索结果"
 
+msgid "Now"
+msgstr ""
+
 msgid "On Create"
 msgstr "创建"
 
@@ -384,6 +492,9 @@ msgstr "删除"
 
 msgid "On Update"
 msgstr "更新"
+
+msgid "Only capital letters and underscores are allowed"
+msgstr ""
 
 msgid "Order"
 msgstr "顺序"
@@ -439,6 +550,9 @@ msgstr "移除"
 msgid "Remove Nested Filter"
 msgstr "移除嵌套过滤器"
 
+msgid "Required"
+msgstr ""
+
 msgid "Reset"
 msgstr "重置"
 
@@ -480,6 +594,9 @@ msgstr "保存{singular}"
 
 msgid "Saving {singular}"
 msgstr "保存{singular}"
+
+msgid "Search"
+msgstr ""
 
 msgid "Secret"
 msgstr "密钥"
@@ -525,6 +642,9 @@ msgstr ""
 
 msgid "Star us on Github"
 msgstr "谢谢给我们项目Star"
+
+msgid "Start of year"
+msgstr ""
 
 msgid "System"
 msgstr "系统"

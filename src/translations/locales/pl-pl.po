@@ -22,6 +22,72 @@ msgstr ""
 msgid "\"{0}\" Validations"
 msgstr ""
 
+msgid "[[ name ]] is an invalid date"
+msgstr ""
+
+msgid "[[ name ]] is an invalid email"
+msgstr ""
+
+msgid "[[ name ]] is an invalid json"
+msgstr ""
+
+msgid "[[ name ]] is an invalid URL"
+msgstr ""
+
+msgid "[[ name ]] is invalid"
+msgstr ""
+
+msgid "[[ name ]] is invalid. Allowed values are [[ options ]]"
+msgstr ""
+
+msgid "[[ name ]] is not a text"
+msgstr ""
+
+msgid "[[ name ]] is required"
+msgstr ""
+
+msgid "[[ name ]] should be a boolean"
+msgstr ""
+
+msgid "[[ name ]] should be a color"
+msgstr ""
+
+msgid "[[ name ]] should be a number"
+msgstr ""
+
+msgid "[[ name ]] should be greater than [[ length ]] characters"
+msgstr ""
+
+msgid "[[ name ]] should be greater than [[ otherField ]]"
+msgstr ""
+
+msgid "[[ name ]] should be greater than [[ value ]]"
+msgstr ""
+
+msgid "[[ name ]] should be less than [[ length ]] characters"
+msgstr ""
+
+msgid "[[ name ]] should be less than [[ otherField ]]"
+msgstr ""
+
+msgid "[[ name ]] should be less than [[ value ]]"
+msgstr ""
+
+msgid "[[ name ]] should be positive number"
+msgstr ""
+
+msgid "[[ name ]] should contain only alphabets and numbers"
+msgstr ""
+
+msgid "[[ name ]] should contain only upper cases"
+msgstr ""
+
+msgid "[[ name ]] should match [[ otherField ]]"
+msgstr ""
+
+msgid "[[ name ]] should not match [[ otherField ]]"
+msgstr ""
+
 msgid "{0}"
 msgstr ""
 
@@ -38,6 +104,9 @@ msgid "{DATE_FORMAT_LIB_LINK}"
 msgstr ""
 
 msgid "{errorMessage}"
+msgstr ""
+
+msgid "{errorTemplate}"
 msgstr ""
 
 msgid "{key}"
@@ -319,6 +388,9 @@ msgstr ""
 msgid "Hi, {0}"
 msgstr ""
 
+msgid "Incorrect value"
+msgstr ""
+
 msgid "Integration"
 msgstr ""
 
@@ -385,6 +457,9 @@ msgstr ""
 msgid "On Update"
 msgstr ""
 
+msgid "Only capital letters and underscores are allowed"
+msgstr ""
+
 msgid "Order"
 msgstr ""
 
@@ -439,6 +514,9 @@ msgstr ""
 msgid "Remove Nested Filter"
 msgstr ""
 
+msgid "Required"
+msgstr ""
+
 msgid "Reset"
 msgstr ""
 
@@ -479,6 +557,9 @@ msgid "Save {singular}"
 msgstr ""
 
 msgid "Saving {singular}"
+msgstr ""
+
+msgid "Search"
 msgstr ""
 
 msgid "Secret"

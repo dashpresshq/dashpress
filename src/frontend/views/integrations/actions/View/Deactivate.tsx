@@ -44,11 +44,11 @@ export function Deactivate({ integrationDetail, activationId }: IProps) {
                 constraint: {
                   pattern: `${deactivationKey}$`,
                 },
-                errorMessage: "Incorrect value",
+                errorMessage: msg`Incorrect value`,
               },
               {
                 validationType: "required",
-                errorMessage: "Required",
+                errorMessage: msg`Required`,
               },
             ],
           },

@@ -8,6 +8,7 @@ import {
 } from "frontend/design-system/components/Skeleton/Form";
 import { ISchemaFormConfig } from "shared/form-schemas/types";
 import { IStorageIntegration } from "shared/types/actions";
+import { msg } from "@lingui/macro";
 import { STORAGE_INTEGRATIONS_CRUD_CONFIG } from "./constants";
 import {
   useActivateStorageMutation,
@@ -49,7 +50,7 @@ export function StorageCredentialsSettings() {
     validations: [
       {
         validationType: "required",
-        errorMessage: "Required",
+        errorMessage: msg`Required`,
       },
     ],
   };

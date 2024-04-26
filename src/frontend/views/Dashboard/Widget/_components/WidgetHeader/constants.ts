@@ -1,74 +1,75 @@
-import { ILabelValue } from "shared/types/options";
 import { DATE_FILTER_VALUE } from "shared/types/data";
+import { msg } from "@lingui/macro";
+import { MessageDescriptor } from "@lingui/core";
 
 const DATE_FILTER_VALUE_CONFIG: Record<
   DATE_FILTER_VALUE,
-  { singular: string; plural: string }
+  {
+    singular: (value: number) => MessageDescriptor;
+    plural: (value: number) => MessageDescriptor;
+  }
 > = {
   [DATE_FILTER_VALUE.HOUR]: {
-    singular: "Hour",
-    plural: "Hours",
+    singular: (value) => msg`${value} Hour`,
+    plural: (value) => msg`${value} Hours`,
   },
   [DATE_FILTER_VALUE.DAY]: {
-    singular: "Day",
-    plural: "Days",
+    singular: (value) => msg`${value} Day`,
+    plural: (value) => msg`${value} Days`,
   },
   [DATE_FILTER_VALUE.WEEK]: {
-    singular: "Week",
-    plural: "Weeks",
+    singular: (value) => msg`${value} Week`,
+    plural: (value) => msg`${value} Weeks`,
   },
   [DATE_FILTER_VALUE.MONTH]: {
-    singular: "Month",
-    plural: "Months",
+    singular: (value) => msg`${value} Month`,
+    plural: (value) => msg`${value} Months`,
   },
   [DATE_FILTER_VALUE.QUARTER]: {
-    singular: "Quarter",
-    plural: "Quarters",
+    singular: (value) => msg`${value} Quarter`,
+    plural: (value) => msg`${value} Quarters`,
   },
   [DATE_FILTER_VALUE.YEAR]: {
-    singular: "Year",
-    plural: "Years",
+    singular: (value) => msg`${value} Year`,
+    plural: (value) => msg`${value} Years`,
   },
   [DATE_FILTER_VALUE.BEGINNING_OF_TIME_VALUE]: {
-    singular: "Genesis",
-    plural: "Genesis",
+    singular: () => msg`Genesis`,
+    plural: () => msg`Genesis`,
   },
   [DATE_FILTER_VALUE.BEGINNING_OF_YEAR]: {
-    singular: "Start of year",
-    plural: "Start of year",
+    singular: () => msg`Start of year`,
+    plural: () => msg`Start of year`,
   },
   [DATE_FILTER_VALUE.NOW]: {
-    singular: "Now",
-    plural: "Now",
+    singular: () => msg`Now`,
+    plural: () => msg`Now`,
   },
 };
+
+interface DateFilterOption {
+  value: string;
+  label: MessageDescriptor;
+}
 
 const makeDateFilterOption = (
   filterValue: DATE_FILTER_VALUE,
   value: number
-): ILabelValue => {
+): DateFilterOption => {
   if (filterValue === DATE_FILTER_VALUE.BEGINNING_OF_YEAR) {
-    return { value: filterValue, label: "Start of year" };
+    return { value: filterValue, label: msg`Start of year` };
   }
 
   return {
-    label: `${value} ${
+    label:
       value === 1
-        ? DATE_FILTER_VALUE_CONFIG[filterValue].singular
-        : DATE_FILTER_VALUE_CONFIG[filterValue].plural
-    }`,
+        ? DATE_FILTER_VALUE_CONFIG[filterValue].singular(value)
+        : DATE_FILTER_VALUE_CONFIG[filterValue].plural(value),
     value: `${value}:${filterValue}`,
   };
 };
 
-// TODO
-
-// t`You have ${plural(itemCount, {
-//   one: "# item",
-//   other: "# items",
-// })} in your cart`;
-
-export const DASHBOARD_RELATIVE_DAYS: ILabelValue[] = [
+export const DASHBOARD_RELATIVE_DAYS: DateFilterOption[] = [
   makeDateFilterOption(DATE_FILTER_VALUE.DAY, 1),
   makeDateFilterOption(DATE_FILTER_VALUE.DAY, 3),
   makeDateFilterOption(DATE_FILTER_VALUE.WEEK, 1),

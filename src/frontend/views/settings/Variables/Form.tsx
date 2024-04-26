@@ -3,6 +3,7 @@ import { SchemaForm } from "frontend/components/SchemaForm";
 import { IAppliedSchemaFormConfig } from "shared/form-schemas/types";
 import { IntegrationsConfigurationGroup } from "shared/types/integrations";
 import { IKeyValue } from "shared/types/options";
+import { msg } from "@lingui/macro";
 import { INTEGRATIONS_GROUP_CRUD_CONFIG } from "./constants";
 
 export const CAPITAL_AND_UNDERSCORE_REGEX = `^[A-Z_]+$`;
@@ -19,7 +20,7 @@ export const FORM_SCHEMA: IAppliedSchemaFormConfig<IKeyValue> = {
         constraint: {
           pattern: CAPITAL_AND_UNDERSCORE_REGEX,
         },
-        errorMessage: "Only capital letters and underscores are allowed",
+        errorMessage: msg`Only capital letters and underscores are allowed`,
       },
     ],
     formState: ($) => ({

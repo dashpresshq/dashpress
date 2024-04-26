@@ -18,6 +18,8 @@ import {
   isIn,
   isUppercase,
 } from "class-validator";
+import { msg } from "@lingui/macro";
+import { MessageDescriptor } from "@lingui/core";
 import {
   doesntMatchOtherField,
   greaterThanOtherField,
@@ -32,29 +34,29 @@ export const ENTITY_VALIDATION_CONFIG: Record<
   {
     input?: Record<string, unknown>;
     isBoundToType?: Array<FormFieldTypes>;
-    message: string;
+    message: MessageDescriptor;
     implementation: (
       value: unknown,
-      errorMessage: string,
+      errorMessage: MessageDescriptor,
       constraints: Record<string, unknown>,
       allValues: Record<string, unknown>
-    ) => undefined | string;
+    ) => undefined | MessageDescriptor;
   }
 > = {
   required: {
     // TODO make this work
-    message: "{{ name }} is required",
+    message: msg`[[ name ]] is required`,
     implementation: (value, errorMessage) =>
       isNotEmpty(value) ? undefined : errorMessage,
   },
   isEmail: {
     isBoundToType: ["email"],
-    message: "{{ name }} is an invalid email",
+    message: msg`[[ name ]] is an invalid email`,
     implementation: handleValidation(isEmail),
   },
   isJson: {
     isBoundToType: ["json"],
-    message: "{{ name }} is an invalid json",
+    message: msg`[[ name ]] is an invalid json`,
     implementation: handleValidation(isJSON),
   },
   isString: {
@@ -66,82 +68,82 @@ export const ENTITY_VALIDATION_CONFIG: Record<
       "image",
       "file",
     ],
-    message: "{{ name }} is not a text",
+    message: msg`[[ name ]] is not a text`,
     implementation: handleValidation(isString),
   },
   isColor: {
     isBoundToType: ["color"],
-    message: "{{ name }} should be a color",
+    message: msg`[[ name ]] should be a color`,
     implementation: handleValidation(isRgbColor),
   },
   isUrl: {
     isBoundToType: ["url"],
-    message: "{{ name }} is an invalid URL",
+    message: msg`[[ name ]] is an invalid URL`,
     implementation: handleValidation(isURL),
   },
   isDate: {
     isBoundToType: ["datetime-local"],
-    message: "{{ name }} is an invalid date",
+    message: msg`[[ name ]] is an invalid date`,
     implementation: handleValidation(isDate),
   },
   isNumber: {
     isBoundToType: ["number"],
-    message: "{{ name }} should be a number",
+    message: msg`[[ name ]] should be a number`,
     implementation: handleValidation(isNumber),
   },
   isBoolean: {
     isBoundToType: ["boolean"],
-    message: "{{ name }} should be a boolean",
+    message: msg`[[ name ]] should be a boolean`,
     implementation: handleValidation(isBoolean),
   },
 
   alphanumeric: {
-    message: "{{ name }} should contain only alphabets and numbers",
+    message: msg`[[ name ]] should contain only alphabets and numbers`,
     implementation: handleValidation(isAlphanumeric),
   },
 
   isUpperCase: {
-    message: "{{ name }} should contain only upper cases",
+    message: msg`[[ name ]] should contain only upper cases`,
     implementation: handleValidation(isUppercase),
   },
 
   postiveNumber: {
-    message: "{{ name }} should be positive number",
+    message: msg`[[ name ]] should be positive number`,
     implementation: handleValidation(isPositive),
   },
   min: {
     input: {
       value: 3,
     },
-    message: "{{ name }} should be greater than {{ value }}",
+    message: msg`[[ name ]] should be greater than [[ value ]]`,
     implementation: handleValidation(min, "value"),
   },
   max: {
     input: {
       value: 10,
     },
-    message: "{{ name }} should be less than {{ value }}",
+    message: msg`[[ name ]] should be less than [[ value ]]`,
     implementation: handleValidation(max, "value"),
   },
   maxLength: {
     input: {
       length: 100,
     },
-    message: "{{ name }} should be less than {{ length }} characters",
+    message: msg`[[ name ]] should be less than [[ length ]] characters`,
     implementation: handleValidation(maxLength, "length"),
   },
   minLength: {
     input: {
       length: 3,
     },
-    message: "{{ name }} should be greater than {{ length }} characters",
+    message: msg`[[ name ]] should be greater than [[ length ]] characters`,
     implementation: handleValidation(minLength, "length"),
   },
   isIn: {
     input: {
       options: [],
     },
-    message: "{{ name }} is invalid. Allowed values are {{ options }}",
+    message: msg`[[ name ]] is invalid. Allowed values are [[ options ]]`,
     implementation: handleValidation(isIn, "options"),
   },
 
@@ -149,7 +151,7 @@ export const ENTITY_VALIDATION_CONFIG: Record<
     input: {
       otherField: "",
     },
-    message: "{{ name }} should match {{otherField}}",
+    message: msg`[[ name ]] should match [[ otherField ]]`,
     implementation: handleValidation(matchOtherField, "otherField"),
   },
 
@@ -157,7 +159,7 @@ export const ENTITY_VALIDATION_CONFIG: Record<
     input: {
       otherField: "",
     },
-    message: "{{ name }} should be less than {{otherField}}",
+    message: msg`[[ name ]] should be less than [[ otherField ]]`,
     implementation: handleValidation(lessThanOtherField, "otherField"),
   },
 
@@ -165,7 +167,7 @@ export const ENTITY_VALIDATION_CONFIG: Record<
     input: {
       otherField: "",
     },
-    message: "{{ name }} should be greater than {{otherField}}",
+    message: msg`[[ name ]] should be greater than [[ otherField ]]`,
     implementation: handleValidation(greaterThanOtherField, "otherField"),
   },
 
@@ -173,7 +175,7 @@ export const ENTITY_VALIDATION_CONFIG: Record<
     input: {
       otherField: "",
     },
-    message: "{{ name }} should not match {{otherField}}",
+    message: msg`[[ name ]] should not match [[ otherField ]]`,
     implementation: handleValidation(doesntMatchOtherField, "otherField"),
   },
 
@@ -181,7 +183,7 @@ export const ENTITY_VALIDATION_CONFIG: Record<
     input: {
       pattern: "//",
     },
-    message: "{{ name }} is invalid",
+    message: msg`[[ name ]] is invalid`,
     implementation: handleValidation(matches, "pattern"),
   },
 };

@@ -121,7 +121,7 @@ export function DashboardWidgetForm({
                     {({ input, meta }) => (
                       <FormInput
                         required
-                        label="Title"
+                        label={msg`Title`}
                         meta={meta}
                         input={input}
                       />
@@ -133,7 +133,7 @@ export function DashboardWidgetForm({
                     {({ input, meta }) => (
                       <FormSelect
                         required
-                        label="Type"
+                        label={msg`Type`}
                         disabledOptions={[]}
                         selectData={DashboardTypesOptions}
                         meta={meta}
@@ -146,7 +146,7 @@ export function DashboardWidgetForm({
                   <Field name="entity" validateFields={[]}>
                     {({ input, meta }) => (
                       <FormSelect
-                        label="Link Entity"
+                        label={msg`Link Entity`}
                         description="Select the entity the user should be directed to when clicking on the widget"
                         disabledOptions={[]}
                         selectData={entities}
@@ -161,7 +161,7 @@ export function DashboardWidgetForm({
                     <Field name="queryId" validateFields={[]}>
                       {({ input, meta }) => (
                         <FormSelect
-                          label="Entity Tab"
+                          label={msg`Tab`}
                           description="Select the most appropriate tab of the entity above that the user should be direct to"
                           disabledOptions={[]}
                           selectData={(tableViews.data || []).map(
@@ -184,7 +184,7 @@ export function DashboardWidgetForm({
                     <Field name="color" validate={required} validateFields={[]}>
                       {({ input, meta }) => (
                         <FormSelect
-                          label="Color"
+                          label={msg`Color`}
                           required
                           selectData={typescriptSafeObjectDotKeys(ROYGBIV).map(
                             (value) => ({
@@ -210,7 +210,7 @@ export function DashboardWidgetForm({
                   <Field name="span" validateFields={[]}>
                     {({ input, meta }) => (
                       <FormSelect
-                        label="Width"
+                        label={msg`Width`}
                         selectData={GRID_SPAN_OPTIONS}
                         meta={meta}
                         input={input}
@@ -222,7 +222,7 @@ export function DashboardWidgetForm({
                   <Field name="height" validateFields={[]}>
                     {({ input, meta }) => (
                       <FormSelect
-                        label="Height"
+                        label={msg`Height`}
                         selectData={DASHBOARD_WIDGET_HEIGHTS}
                         meta={meta}
                         input={input}
@@ -241,7 +241,7 @@ export function DashboardWidgetForm({
                         <FormCodeEditor
                           required
                           language="javascript"
-                          label="Script"
+                          label={msg`Script`}
                           meta={meta}
                           input={input}
                           rightActions={[documentationActionButton]}

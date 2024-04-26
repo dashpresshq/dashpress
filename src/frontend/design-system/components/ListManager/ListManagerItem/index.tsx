@@ -9,6 +9,7 @@ import { GrabIcon } from "frontend/design-system/Icons/Grab";
 import { SystemIconsKeys } from "shared/constants/Icons";
 import { SystemIcon } from "frontend/design-system/Icons/System";
 import { msg } from "@lingui/macro";
+import { i18nNoop } from "shared/lib/noop";
 import { FormButton } from "../../Button/FormButton";
 import { FormSwitch } from "../../Form/FormSwitch";
 
@@ -199,7 +200,7 @@ export function ListManagerItem({
             }) => (
               <FormButton
                 key={buttonLabel}
-                text={() => msg`${buttonLabel}`}
+                text={() => msg`${i18nNoop(buttonLabel)}`}
                 size="xs"
                 systemIcon={systemIcon$1}
                 disabled={disabled$1}

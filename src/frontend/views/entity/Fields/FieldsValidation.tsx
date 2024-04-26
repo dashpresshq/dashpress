@@ -40,7 +40,7 @@ const CRUD_CONFIG = MAKE_APP_CONFIGURATION_CRUD_CONFIG("entity_validations");
 const ERROR_MESSAGE_LENGTH = 128;
 
 // TODO: for contributors: Show the actuall error message not the template message
-
+// TODO: make this work with i18n currently shows [object Object]
 export function FieldValidationCanvas({
   field,
   onSubmit,
@@ -106,14 +106,14 @@ export function FieldValidationCanvas({
                                   typeof inputValue === "string" ? (
                                     <FormInput
                                       required
-                                      label={userFriendlyCase(inputKey)}
+                                      label={msg`${userFriendlyCase(inputKey)}`}
                                       meta={meta}
                                       input={input}
                                     />
                                   ) : (
                                     <FormNumberInput
                                       required
-                                      label={userFriendlyCase(inputKey)}
+                                      label={msg`${userFriendlyCase(inputKey)}`}
                                       meta={meta}
                                       input={input}
                                     />
@@ -133,7 +133,7 @@ export function FieldValidationCanvas({
                         >
                           {({ meta, input }) => (
                             <FormInput
-                              label="Error message"
+                              label={msg`Error message`}
                               required
                               meta={meta}
                               input={input}

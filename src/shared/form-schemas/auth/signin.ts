@@ -1,4 +1,4 @@
-import { t } from "@lingui/macro";
+import { msg } from "@lingui/macro";
 import { IAppliedSchemaFormConfig } from "../types";
 
 export type ISignInForm = {
@@ -10,6 +10,7 @@ export type ISignInForm = {
 export const AUTH_SIGNIN_FORM_SCHEMA: IAppliedSchemaFormConfig<ISignInForm> = {
   username: {
     type: "text",
+    label: msg`Username`,
     validations: [
       {
         validationType: "required",
@@ -18,6 +19,7 @@ export const AUTH_SIGNIN_FORM_SCHEMA: IAppliedSchemaFormConfig<ISignInForm> = {
   },
   password: {
     type: "password",
+    label: msg`Password`,
     validations: [
       {
         validationType: "required",
@@ -26,7 +28,7 @@ export const AUTH_SIGNIN_FORM_SCHEMA: IAppliedSchemaFormConfig<ISignInForm> = {
   },
   rememberMe: {
     type: "boolean",
-    label: t`Remember Me`,
+    label: msg`Remember Me`,
     validations: [],
   },
 };

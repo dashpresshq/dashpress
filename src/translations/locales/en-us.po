@@ -16,6 +16,9 @@ msgstr ""
 msgid ""
 msgstr "/+Z5u4"
 
+msgid "\"\""
+msgstr "\"\""
+
 msgid "\"{0}\" Selection"
 msgstr "\"{0}\" Selection"
 
@@ -96,24 +99,6 @@ msgstr "{0} - {1}"
 
 msgid "{0} Preference"
 msgstr "{0} Preference"
-
-msgid "{buttonLabel}"
-msgstr "{buttonLabel}"
-
-msgid "{DATE_FORMAT_LIB_LINK}"
-msgstr "{DATE_FORMAT_LIB_LINK}"
-
-msgid "{errorMessage}"
-msgstr "{errorMessage}"
-
-msgid "{key}"
-msgstr "{key}"
-
-msgid "{plural}"
-msgstr "{plural}"
-
-msgid "{singular}"
-msgstr "{singular}"
 
 msgid "{singular} {action} Successfully"
 msgstr "{singular} {action} Successfully"
@@ -229,6 +214,9 @@ msgstr "Click here to view details"
 msgid "Close Canvas"
 msgstr "Close Canvas"
 
+msgid "Color"
+msgstr "Color"
+
 msgid "Column Labels Settings"
 msgstr "Column Labels Settings"
 
@@ -249,6 +237,9 @@ msgstr "Confirm"
 
 msgid "Confirm Delete"
 msgstr "Confirm Delete"
+
+msgid "Connection URL"
+msgstr "Connection URL"
 
 msgid "Constant"
 msgstr "Constant"
@@ -283,8 +274,14 @@ msgstr "CRUD"
 msgid "CRUD Settings"
 msgstr "CRUD Settings"
 
+msgid "Custom Date"
+msgstr "Custom Date"
+
 msgid "Dark"
 msgstr "Dark"
+
+msgid "Dark Color Scheme"
+msgstr "Dark Color Scheme"
 
 msgid "Dashboard"
 msgstr "Dashboard"
@@ -300,6 +297,12 @@ msgstr "Dashboards"
 
 msgid "Data"
 msgstr "Data"
+
+msgid "Database"
+msgstr "Database"
+
+msgid "Database Type"
+msgstr "Database Type"
 
 msgid "Date Format"
 msgstr "Date Format"
@@ -336,6 +339,9 @@ msgstr "Diction"
 
 msgid "Diction Settings"
 msgstr "Diction Settings"
+
+msgid "Display Format"
+msgstr "Display Format"
 
 msgid "Done"
 msgstr "Done"
@@ -376,14 +382,26 @@ msgstr "Environment Variable"
 msgid "Environment Variables"
 msgstr "Environment Variables"
 
+msgid "Error message"
+msgstr "Error message"
+
 msgid "Explain {title}"
 msgstr "Explain {title}"
+
+msgid "Field"
+msgstr "Field"
+
+msgid "Field Corresponding To Dashpress Usernames"
+msgstr "Field Corresponding To Dashpress Usernames"
 
 msgid "Field Settings"
 msgstr "Field Settings"
 
 msgid "Fields"
 msgstr "Fields"
+
+msgid "File Name"
+msgstr "File Name"
 
 msgid "File Storage"
 msgstr "File Storage"
@@ -418,11 +436,23 @@ msgstr "Genesis"
 msgid "Go Back"
 msgstr "Go Back"
 
+msgid "Height"
+msgstr "Height"
+
 msgid "Hi, {0}"
 msgstr "Hi, {0}"
 
+msgid "Host"
+msgstr "Host"
+
+msgid "Icon"
+msgstr "Icon"
+
 msgid "Incorrect value"
 msgstr "Incorrect value"
+
+msgid "Input {deactivationKey} to continue"
+msgstr "Input {deactivationKey} to continue"
 
 msgid "Integration"
 msgstr "Integration"
@@ -430,14 +460,26 @@ msgstr "Integration"
 msgid "Join our Discord community"
 msgstr "Join our Discord community"
 
+msgid "Label"
+msgstr "Label"
+
 msgid "Labels"
 msgstr "Labels"
 
 msgid "Language"
 msgstr "Language"
 
+msgid "Large Logo"
+msgstr "Large Logo"
+
 msgid "Light"
 msgstr "Light"
+
+msgid "Light Color Scheme"
+msgstr "Light Color Scheme"
+
+msgid "Link Entity"
+msgstr "Link Entity"
 
 msgid "Link Users To Database"
 msgstr "Link Users To Database"
@@ -454,6 +496,9 @@ msgstr "Manage {title}"
 msgid "Manage Variables"
 msgstr "Manage Variables"
 
+msgid "Maximum file size to upload in MB"
+msgstr "Maximum file size to upload in MB"
+
 msgid "Menu Settings"
 msgstr "Menu Settings"
 
@@ -462,6 +507,9 @@ msgstr "Metadata Columns"
 
 msgid "My Account"
 msgstr "My Account"
+
+msgid "New Password"
+msgstr "New Password"
 
 msgid "New Password Again"
 msgstr "New Password Again"
@@ -496,6 +544,9 @@ msgstr "On Update"
 msgid "Only capital letters and underscores are allowed"
 msgstr "Only capital letters and underscores are allowed"
 
+msgid "Operator"
+msgstr "Operator"
+
 msgid "Order"
 msgstr "Order"
 
@@ -510,6 +561,9 @@ msgstr "Password will not be changed on demo account"
 
 msgid "Persistent Query"
 msgstr "Persistent Query"
+
+msgid "Port"
+msgstr "Port"
 
 msgid "Preferences"
 msgstr "Preferences"
@@ -595,6 +649,9 @@ msgstr "Save {singular}"
 msgid "Saving {singular}"
 msgstr "Saving {singular}"
 
+msgid "Script"
+msgstr "Script"
+
 msgid "Search"
 msgstr "Search"
 
@@ -640,11 +697,17 @@ msgstr "Site"
 msgid "Site Settings"
 msgstr "Site Settings"
 
+msgid "Small Logo"
+msgstr "Small Logo"
+
 msgid "Star us on Github"
 msgstr "Star us on Github"
 
 msgid "Start of year"
 msgstr "Start of year"
+
+msgid "SVG"
+msgstr "SVG"
 
 msgid "System"
 msgstr "System"
@@ -657,6 +720,9 @@ msgstr "System Information"
 
 msgid "System Settings"
 msgstr "System Settings"
+
+msgid "Tab"
+msgstr "Tab"
 
 msgid "Table"
 msgstr "Table"
@@ -691,8 +757,17 @@ msgstr "This entity has no fields. Kindly add fields from your prefer database t
 msgid "This entity has no relations"
 msgstr "This entity has no relations"
 
+msgid "Title"
+msgstr "Title"
+
 msgid "Toggle Connection URL"
 msgstr "Toggle Connection URL"
+
+msgid "Trigger"
+msgstr "Trigger"
+
+msgid "Type"
+msgstr "Type"
 
 msgid "Update"
 msgstr "Update"
@@ -709,14 +784,23 @@ msgstr "Update Fields Order"
 msgid "Updating {singular}"
 msgstr "Updating {singular}"
 
+msgid "Use Colors"
+msgstr "Use Colors"
+
 msgid "Use Icon"
 msgstr "Use Icon"
+
+msgid "Use SSL"
+msgstr "Use SSL"
 
 msgid "Use SVG"
 msgstr "Use SVG"
 
 msgid "User"
 msgstr "User"
+
+msgid "Username"
+msgstr "Username"
 
 msgid "Users"
 msgstr "Users"
@@ -729,6 +813,9 @@ msgstr "Users to Database Link"
 
 msgid "Validations"
 msgstr "Validations"
+
+msgid "Value"
+msgstr "Value"
 
 msgid "Variables"
 msgstr "Variables"
@@ -744,3 +831,9 @@ msgstr "Visit our website"
 
 msgid "Widget Script"
 msgstr "Widget Script"
+
+msgid "Width"
+msgstr "Width"
+
+msgid "Your Users Table"
+msgstr "Your Users Table"

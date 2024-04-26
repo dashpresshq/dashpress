@@ -3,6 +3,7 @@ import { X } from "react-feather";
 import { MessageDescriptor } from "@lingui/core";
 import { useLingui } from "@lingui/react";
 import { msg } from "@lingui/macro";
+import { i18nNoop } from "shared/lib/noop";
 import { getBestErrorMessage } from "./utils";
 
 const COLORS = {
@@ -126,7 +127,9 @@ export const ToastService = {
   error: (message: unknown) => {
     const errorMessage = getBestErrorMessage(message);
     toast.error(
-      (t) => <ToastMessage message={msg`${errorMessage}`} toastT={t} />,
+      (t) => (
+        <ToastMessage message={msg`${i18nNoop(errorMessage)}`} toastT={t} />
+      ),
       {
         style: toastStyle("danger"),
         duration: 7000,

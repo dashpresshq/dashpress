@@ -58,7 +58,7 @@ export function UsersLinkToDatabase() {
     {
       table: {
         type: "selection",
-        label: "Your Users Table",
+        label: msg`Your Users Table`,
         apiSelections: {
           listUrl: ACTIVE_ENTITIES_ENDPOINT,
         },
@@ -71,7 +71,7 @@ export function UsersLinkToDatabase() {
       },
       field: {
         type: "selection",
-        label: "Field Corresponding To Dashpress Usernames",
+        label: msg`Field Corresponding To Dashpress Usernames`,
         selections: entityFields.data.map((field) => ({
           label: field,
           value: field,

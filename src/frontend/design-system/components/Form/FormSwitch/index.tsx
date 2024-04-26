@@ -4,6 +4,8 @@ import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
 import { Stack } from "frontend/design-system/primitives/Stack";
 import { Typo } from "frontend/design-system/primitives/Typo";
 import { typescriptSafeObjectDotEntries } from "shared/lib/objects";
+import { MessageDescriptor } from "@lingui/core";
+import { useLingui } from "@lingui/react";
 
 type Sizes = "sm" | "md";
 
@@ -11,7 +13,7 @@ export interface IProps {
   value: boolean;
   onChange: (value: boolean) => void;
   size?: Sizes;
-  label?: string;
+  label?: MessageDescriptor;
   name: string;
   disabled?: boolean;
 }
@@ -119,6 +121,8 @@ export function FormSwitch(props: IProps) {
     )
   );
 
+  const { _ } = useLingui();
+
   useEffect(() => {
     if (value === undefined) {
       onChange(false);
@@ -146,7 +150,7 @@ export function FormSwitch(props: IProps) {
               $color={disabled ? "muted" : undefined}
               size={SIZES_CONFIG[size].fontSize}
             >
-              {label}
+              {_(label)}
             </Typo.Raw>
           </div>
         ) : (

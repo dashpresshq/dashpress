@@ -16,6 +16,9 @@ msgstr ""
 msgid ""
 msgstr ""
 
+msgid "\"\""
+msgstr ""
+
 msgid "\"{0}\" Selection"
 msgstr ""
 
@@ -95,24 +98,6 @@ msgid "{0} - {1}"
 msgstr ""
 
 msgid "{0} Preference"
-msgstr ""
-
-msgid "{buttonLabel}"
-msgstr ""
-
-msgid "{DATE_FORMAT_LIB_LINK}"
-msgstr ""
-
-msgid "{errorMessage}"
-msgstr ""
-
-msgid "{key}"
-msgstr ""
-
-msgid "{plural}"
-msgstr ""
-
-msgid "{singular}"
 msgstr ""
 
 msgid "{singular} {action} Successfully"
@@ -229,6 +214,9 @@ msgstr ""
 msgid "Close Canvas"
 msgstr ""
 
+msgid "Color"
+msgstr ""
+
 msgid "Column Labels Settings"
 msgstr ""
 
@@ -248,6 +236,9 @@ msgid "Confirm"
 msgstr ""
 
 msgid "Confirm Delete"
+msgstr ""
+
+msgid "Connection URL"
 msgstr ""
 
 msgid "Constant"
@@ -283,7 +274,13 @@ msgstr ""
 msgid "CRUD Settings"
 msgstr ""
 
+msgid "Custom Date"
+msgstr ""
+
 msgid "Dark"
+msgstr ""
+
+msgid "Dark Color Scheme"
 msgstr ""
 
 msgid "Dashboard"
@@ -299,6 +296,12 @@ msgid "Dashboards"
 msgstr ""
 
 msgid "Data"
+msgstr ""
+
+msgid "Database"
+msgstr ""
+
+msgid "Database Type"
 msgstr ""
 
 msgid "Date Format"
@@ -335,6 +338,9 @@ msgid "Diction"
 msgstr ""
 
 msgid "Diction Settings"
+msgstr ""
+
+msgid "Display Format"
 msgstr ""
 
 msgid "Done"
@@ -376,13 +382,25 @@ msgstr ""
 msgid "Environment Variables"
 msgstr ""
 
+msgid "Error message"
+msgstr ""
+
 msgid "Explain {title}"
+msgstr ""
+
+msgid "Field"
+msgstr ""
+
+msgid "Field Corresponding To Dashpress Usernames"
 msgstr ""
 
 msgid "Field Settings"
 msgstr ""
 
 msgid "Fields"
+msgstr ""
+
+msgid "File Name"
 msgstr ""
 
 msgid "File Storage"
@@ -418,10 +436,22 @@ msgstr ""
 msgid "Go Back"
 msgstr ""
 
+msgid "Height"
+msgstr ""
+
 msgid "Hi, {0}"
 msgstr "Bonjour, {0}"
 
+msgid "Host"
+msgstr ""
+
+msgid "Icon"
+msgstr ""
+
 msgid "Incorrect value"
+msgstr ""
+
+msgid "Input {deactivationKey} to continue"
 msgstr ""
 
 msgid "Integration"
@@ -430,13 +460,25 @@ msgstr ""
 msgid "Join our Discord community"
 msgstr ""
 
+msgid "Label"
+msgstr ""
+
 msgid "Labels"
 msgstr ""
 
 msgid "Language"
 msgstr ""
 
+msgid "Large Logo"
+msgstr ""
+
 msgid "Light"
+msgstr ""
+
+msgid "Light Color Scheme"
+msgstr ""
+
+msgid "Link Entity"
 msgstr ""
 
 msgid "Link Users To Database"
@@ -454,6 +496,9 @@ msgstr ""
 msgid "Manage Variables"
 msgstr ""
 
+msgid "Maximum file size to upload in MB"
+msgstr ""
+
 msgid "Menu Settings"
 msgstr ""
 
@@ -461,6 +506,9 @@ msgid "Metadata Columns"
 msgstr ""
 
 msgid "My Account"
+msgstr ""
+
+msgid "New Password"
 msgstr ""
 
 msgid "New Password Again"
@@ -496,6 +544,9 @@ msgstr ""
 msgid "Only capital letters and underscores are allowed"
 msgstr ""
 
+msgid "Operator"
+msgstr ""
+
 msgid "Order"
 msgstr ""
 
@@ -509,6 +560,9 @@ msgid "Password will not be changed on demo account"
 msgstr ""
 
 msgid "Persistent Query"
+msgstr ""
+
+msgid "Port"
 msgstr ""
 
 msgid "Preferences"
@@ -595,6 +649,9 @@ msgstr ""
 msgid "Saving {singular}"
 msgstr ""
 
+msgid "Script"
+msgstr ""
+
 msgid "Search"
 msgstr ""
 
@@ -640,10 +697,16 @@ msgstr ""
 msgid "Site Settings"
 msgstr ""
 
+msgid "Small Logo"
+msgstr ""
+
 msgid "Star us on Github"
 msgstr ""
 
 msgid "Start of year"
+msgstr ""
+
+msgid "SVG"
 msgstr ""
 
 msgid "System"
@@ -656,6 +719,9 @@ msgid "System Information"
 msgstr ""
 
 msgid "System Settings"
+msgstr ""
+
+msgid "Tab"
 msgstr ""
 
 msgid "Table"
@@ -691,7 +757,16 @@ msgstr ""
 msgid "This entity has no relations"
 msgstr ""
 
+msgid "Title"
+msgstr ""
+
 msgid "Toggle Connection URL"
+msgstr ""
+
+msgid "Trigger"
+msgstr ""
+
+msgid "Type"
 msgstr ""
 
 msgid "Update"
@@ -709,13 +784,22 @@ msgstr ""
 msgid "Updating {singular}"
 msgstr ""
 
+msgid "Use Colors"
+msgstr ""
+
 msgid "Use Icon"
+msgstr ""
+
+msgid "Use SSL"
 msgstr ""
 
 msgid "Use SVG"
 msgstr ""
 
 msgid "User"
+msgstr ""
+
+msgid "Username"
 msgstr ""
 
 msgid "Users"
@@ -728,6 +812,9 @@ msgid "Users to Database Link"
 msgstr ""
 
 msgid "Validations"
+msgstr ""
+
+msgid "Value"
 msgstr ""
 
 msgid "Variables"
@@ -743,4 +830,10 @@ msgid "Visit our website"
 msgstr ""
 
 msgid "Widget Script"
+msgstr ""
+
+msgid "Width"
+msgstr ""
+
+msgid "Your Users Table"
 msgstr ""

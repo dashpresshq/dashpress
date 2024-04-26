@@ -1,6 +1,7 @@
 import Select from "react-select";
 import styled from "styled-components";
 import { ISelectData } from "shared/types/options";
+import { useLingui } from "@lingui/react";
 import {
   generateClassNames,
   wrapLabelAndError,
@@ -67,6 +68,7 @@ export const FormSelect = (props: IFormSelect) => {
     },
     ...selectData,
   ] as ISelectData[];
+  const { _ } = useLingui();
   return wrapLabelAndError(
     <div data-testid={`react-select__${input.name}`}>
       <SelectStyled
@@ -79,7 +81,7 @@ export const FormSelect = (props: IFormSelect) => {
             label: "",
           }
         }
-        placeholder={placeholder}
+        placeholder={_(placeholder)}
         inputId={input.name}
         onChange={({ value }: any) => {
           input.onChange(nullable && !value ? null : value);

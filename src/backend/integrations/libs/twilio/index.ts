@@ -14,7 +14,6 @@ const CONFIGURATION_SCHEMA: IAppliedSchemaFormConfig<IActionConfig> = {
   },
   accountSid: {
     type: "text",
-    label: "Account SID",
     validations: [
       {
         validationType: "required",

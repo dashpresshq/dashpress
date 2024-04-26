@@ -16,6 +16,9 @@ msgstr ""
 msgid ""
 msgstr ""
 
+msgid "\"\""
+msgstr ""
+
 msgid "\"{0}\" Selection"
 msgstr "选择“{0}”"
 
@@ -96,24 +99,6 @@ msgstr ""
 
 msgid "{0} Preference"
 msgstr "{0}偏好"
-
-msgid "{buttonLabel}"
-msgstr ""
-
-msgid "{DATE_FORMAT_LIB_LINK}"
-msgstr ""
-
-msgid "{errorMessage}"
-msgstr ""
-
-msgid "{key}"
-msgstr ""
-
-msgid "{plural}"
-msgstr ""
-
-msgid "{singular}"
-msgstr ""
 
 msgid "{singular} {action} Successfully"
 msgstr "{singular}{action}成功"
@@ -229,6 +214,9 @@ msgstr "查看详情"
 msgid "Close Canvas"
 msgstr "关闭画布"
 
+msgid "Color"
+msgstr ""
+
 msgid "Column Labels Settings"
 msgstr ""
 
@@ -248,6 +236,9 @@ msgid "Confirm"
 msgstr "确认"
 
 msgid "Confirm Delete"
+msgstr ""
+
+msgid "Connection URL"
 msgstr ""
 
 msgid "Constant"
@@ -283,8 +274,14 @@ msgstr "CRUD"
 msgid "CRUD Settings"
 msgstr "CRUD设置"
 
+msgid "Custom Date"
+msgstr ""
+
 msgid "Dark"
 msgstr "暗黑"
+
+msgid "Dark Color Scheme"
+msgstr ""
 
 msgid "Dashboard"
 msgstr "仪表盘"
@@ -300,6 +297,12 @@ msgstr "仪表盘"
 
 msgid "Data"
 msgstr "数据"
+
+msgid "Database"
+msgstr ""
+
+msgid "Database Type"
+msgstr ""
 
 msgid "Date Format"
 msgstr ""
@@ -336,6 +339,9 @@ msgstr "字典"
 
 msgid "Diction Settings"
 msgstr "字典设置"
+
+msgid "Display Format"
+msgstr ""
 
 msgid "Done"
 msgstr "完成"
@@ -376,14 +382,26 @@ msgstr "环境变量"
 msgid "Environment Variables"
 msgstr "环境变量"
 
+msgid "Error message"
+msgstr ""
+
 msgid "Explain {title}"
 msgstr "解释{title}"
+
+msgid "Field"
+msgstr ""
+
+msgid "Field Corresponding To Dashpress Usernames"
+msgstr ""
 
 msgid "Field Settings"
 msgstr "字段设置"
 
 msgid "Fields"
 msgstr "字段"
+
+msgid "File Name"
+msgstr ""
 
 msgid "File Storage"
 msgstr "存储设置"
@@ -418,10 +436,22 @@ msgstr ""
 msgid "Go Back"
 msgstr "返回"
 
+msgid "Height"
+msgstr ""
+
 msgid "Hi, {0}"
 msgstr "你好，{0}"
 
+msgid "Host"
+msgstr ""
+
+msgid "Icon"
+msgstr ""
+
 msgid "Incorrect value"
+msgstr ""
+
+msgid "Input {deactivationKey} to continue"
 msgstr ""
 
 msgid "Integration"
@@ -430,14 +460,26 @@ msgstr "集成"
 msgid "Join our Discord community"
 msgstr "加入我们社区"
 
+msgid "Label"
+msgstr ""
+
 msgid "Labels"
 msgstr "标签"
 
 msgid "Language"
 msgstr "语言"
 
+msgid "Large Logo"
+msgstr ""
+
 msgid "Light"
 msgstr "明亮"
+
+msgid "Light Color Scheme"
+msgstr ""
+
+msgid "Link Entity"
+msgstr ""
 
 msgid "Link Users To Database"
 msgstr "建立用户数据库"
@@ -454,6 +496,9 @@ msgstr "管理{title}"
 msgid "Manage Variables"
 msgstr "变量管理"
 
+msgid "Maximum file size to upload in MB"
+msgstr ""
+
 msgid "Menu Settings"
 msgstr "菜单设置"
 
@@ -462,6 +507,9 @@ msgstr ""
 
 msgid "My Account"
 msgstr "我的账户"
+
+msgid "New Password"
+msgstr ""
 
 msgid "New Password Again"
 msgstr ""
@@ -496,6 +544,9 @@ msgstr "更新"
 msgid "Only capital letters and underscores are allowed"
 msgstr ""
 
+msgid "Operator"
+msgstr ""
+
 msgid "Order"
 msgstr "顺序"
 
@@ -510,6 +561,9 @@ msgstr "演示账户的密码将不会被更改"
 
 msgid "Persistent Query"
 msgstr "持久查询"
+
+msgid "Port"
+msgstr ""
 
 msgid "Preferences"
 msgstr "偏好设置"
@@ -595,6 +649,9 @@ msgstr "保存{singular}"
 msgid "Saving {singular}"
 msgstr "保存{singular}"
 
+msgid "Script"
+msgstr ""
+
 msgid "Search"
 msgstr ""
 
@@ -640,10 +697,16 @@ msgstr "站点"
 msgid "Site Settings"
 msgstr ""
 
+msgid "Small Logo"
+msgstr ""
+
 msgid "Star us on Github"
 msgstr "谢谢给我们项目Star"
 
 msgid "Start of year"
+msgstr ""
+
+msgid "SVG"
 msgstr ""
 
 msgid "System"
@@ -656,6 +719,9 @@ msgid "System Information"
 msgstr "系统信息"
 
 msgid "System Settings"
+msgstr ""
+
+msgid "Tab"
 msgstr ""
 
 msgid "Table"
@@ -691,8 +757,17 @@ msgstr "这个实体没有字段。请使用您喜欢的数据库工具在此处
 msgid "This entity has no relations"
 msgstr "该实体没有关联"
 
+msgid "Title"
+msgstr ""
+
 msgid "Toggle Connection URL"
 msgstr "切换连接"
+
+msgid "Trigger"
+msgstr ""
+
+msgid "Type"
+msgstr ""
 
 msgid "Update"
 msgstr "更新"
@@ -709,14 +784,23 @@ msgstr ""
 msgid "Updating {singular}"
 msgstr "更新{singular}"
 
+msgid "Use Colors"
+msgstr ""
+
 msgid "Use Icon"
 msgstr "使用图标"
+
+msgid "Use SSL"
+msgstr ""
 
 msgid "Use SVG"
 msgstr "使用SVG"
 
 msgid "User"
 msgstr "用户"
+
+msgid "Username"
+msgstr ""
 
 msgid "Users"
 msgstr "用户"
@@ -728,6 +812,9 @@ msgid "Users to Database Link"
 msgstr ""
 
 msgid "Validations"
+msgstr ""
+
+msgid "Value"
 msgstr ""
 
 msgid "Variables"
@@ -744,3 +831,9 @@ msgstr "访问我们网站"
 
 msgid "Widget Script"
 msgstr "部件脚本"
+
+msgid "Width"
+msgstr ""
+
+msgid "Your Users Table"
+msgstr ""

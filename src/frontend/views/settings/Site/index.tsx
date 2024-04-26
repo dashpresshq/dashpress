@@ -13,6 +13,7 @@ import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { MAKE_APP_CONFIGURATION_CRUD_CONFIG } from "frontend/hooks/configuration/configuration.constant";
 import { SchemaForm } from "frontend/components/SchemaForm";
 import { AppConfigurationValueType } from "shared/configurations/constants";
+import { msg } from "@lingui/macro";
 import { BaseSettingsLayout } from "../_Base";
 import { SETTINGS_VIEW_KEY } from "../constants";
 
@@ -70,7 +71,7 @@ export function SiteSettings() {
                 ],
               },
               logo: {
-                label: "Square Logo",
+                label: msg`Small Logo`,
                 type: "text",
                 validations: [
                   {
@@ -79,7 +80,7 @@ export function SiteSettings() {
                 ],
               },
               fullLogo: {
-                label: "Full Length Logo",
+                label: msg`Large Logo`,
                 type: "text",
                 validations: [
                   {

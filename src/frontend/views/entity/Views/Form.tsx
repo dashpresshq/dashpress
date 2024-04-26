@@ -109,7 +109,7 @@ function TabForm({ tableColumns, values, initialValues }: IProps) {
                   >
                     {({ meta, input }) => (
                       <FormInput
-                        label="Title"
+                        label={msg`Title`}
                         required
                         meta={meta}
                         input={input}

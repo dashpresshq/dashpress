@@ -9,6 +9,7 @@ import {
 import { IColorableSelection } from "shared/types/ui";
 import { FormFieldTypes, IFieldValidationItem } from "shared/validations/types";
 import { userFriendlyCase } from "shared/lib/strings/friendly-case";
+import { msg } from "@lingui/macro";
 
 interface IEntitySchemaFormConfigProps {
   fields: string[];
@@ -57,7 +58,9 @@ export const buildAppliedSchemaFormConfig = (
                 }
               : undefined,
           type: entityFieldTypes[field],
-          label: getEntityFieldLabels(field) || userFriendlyCase(field),
+          label: getEntityFieldLabels(field)
+            ? msg`${getEntityFieldLabels(field)}`
+            : msg`${userFriendlyCase(field)}`,
           validations: (entityValidationsMap[field] || []).filter(
             ({ validationType }) => {
               if (allOptional) {

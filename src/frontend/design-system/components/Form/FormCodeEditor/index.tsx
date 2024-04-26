@@ -4,6 +4,7 @@ import { highlight, languages } from "prismjs/components/prism-core";
 import { SYSTEM_COLORS } from "frontend/design-system/theme/system";
 import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
 import { noop } from "shared/lib/noop";
+import { useLingui } from "@lingui/react";
 import { ISharedFormInput } from "../_types";
 import { generateClassNames, wrapLabelAndError } from "../_wrapForm";
 import "prismjs/components/prism-clike";
@@ -45,6 +46,9 @@ export const FormCodeEditor = (formInput: IFormCodeEditor) => {
     meta,
   } = formInput;
   noop(onFocus, onBlur);
+
+  const { _ } = useLingui();
+
   return wrapLabelAndError(
     <Wrapper className={`${generateClassNames(meta)} line-numbers`}>
       <Editor
@@ -54,7 +58,7 @@ export const FormCodeEditor = (formInput: IFormCodeEditor) => {
           highlight(code, languages[formInput.language || "javascript"])
         }
         disabled={formInput.disabled}
-        placeholder={formInput.placeholder}
+        placeholder={_(formInput.placeholder)}
         textareaId={formInput.input.name}
         padding={4}
         className="form-code-editor"

@@ -59,7 +59,7 @@ export function GeneralStorageSettings() {
 
           defaultMaxFileSizeInMB: {
             type: "number",
-            label: "Maximum file size to upload in MB",
+            label: msg`Maximum file size to upload in MB`,
             validations: [
               {
                 validationType: "required",

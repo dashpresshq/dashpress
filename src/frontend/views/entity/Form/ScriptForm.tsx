@@ -10,6 +10,8 @@ import { AppConfigurationKeys } from "shared/configurations";
 import { evalJavascriptString } from "shared/lib/script-runner";
 import { useEvaluateScriptContext } from "frontend/hooks/scripts";
 import { ISchemaFormScriptProps } from "shared/form-schemas/types";
+import { msg } from "@lingui/macro";
+import { i18nNoop } from "shared/lib/noop";
 
 interface IProps {
   value: string;
@@ -44,9 +46,9 @@ export function ScriptForm({
         fields={{
           [`${BASE_SUFFIX}${field}`]: {
             type: "json",
-            label: "Script",
+            label: msg`Script`,
             validations: [],
-            placeholder,
+            placeholder: msg`${i18nNoop(placeholder)}`,
           },
         }}
         onSubmit={async (data) => {

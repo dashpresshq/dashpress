@@ -12,7 +12,7 @@ export function IconInputField({ value }: { value: string }) {
       {({ input, meta }) =>
         SystemIconsList.includes(value as SystemIconsKeys) ? (
           <FormSelect
-            label="Icon"
+            label={msg`Icon`}
             required
             selectData={SystemIconsList.map((icon) => ({
               value: icon,
@@ -32,7 +32,7 @@ export function IconInputField({ value }: { value: string }) {
           <FormTextArea
             rows={10}
             description="Pass in valid SVG in here with the prop `fill='currentColor'`"
-            label="SVG"
+            label={msg`SVG`}
             required
             meta={meta}
             input={input}

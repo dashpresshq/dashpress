@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
 import { Typo } from "frontend/design-system/primitives/Typo";
 import { Stack } from "frontend/design-system/primitives/Stack";
+import { useLingui } from "@lingui/react";
 import { ISharedFormInput } from "../_types";
 import { FormFeedback } from "../Styles";
 import { isFormMetaWithError } from "../_wrapForm";
@@ -33,6 +34,7 @@ export function FormCheckBox({
   meta,
   disabled,
 }: ISharedFormInput) {
+  const { _ } = useLingui();
   return (
     <>
       <Stack>
@@ -43,7 +45,7 @@ export function FormCheckBox({
           id={input.name}
         />
         <label htmlFor={input.name}>
-          <Typo.MD $color={disabled ? "muted" : undefined}>{label}</Typo.MD>
+          <Typo.MD $color={disabled ? "muted" : undefined}>{_(label)}</Typo.MD>
         </label>
       </Stack>
       <FormFeedback>

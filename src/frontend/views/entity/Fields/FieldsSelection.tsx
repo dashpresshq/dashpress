@@ -73,7 +73,7 @@ export function FieldSelectionCanvas({
         <form onSubmit={handleSubmit}>
           {entityType !== "boolean" && (
             <FormSwitch
-              label="Use Colors"
+              label={msg`Use Colors`}
               name="use-colors"
               size="sm"
               value={useColors}
@@ -110,7 +110,7 @@ export function FieldSelectionCanvas({
                           {({ meta, input }) => (
                             <FormInput
                               disabled={!ManagableEntities.includes(entityType)}
-                              label="Value"
+                              label={msg`Value`}
                               required={ManagableEntities.includes(entityType)}
                               input={input}
                               meta={meta}
@@ -124,7 +124,7 @@ export function FieldSelectionCanvas({
                         >
                           {({ meta, input }) => (
                             <FormInput
-                              label="Label"
+                              label={msg`Label`}
                               required
                               input={input}
                               meta={meta}

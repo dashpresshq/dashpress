@@ -19,8 +19,23 @@ import { SchemaForm } from "frontend/components/SchemaForm";
 import { useDocumentationActionButton } from "frontend/docs/constants";
 import { IPresentationScriptParams } from "frontend/views/data/evaluatePresentationScript";
 import { useEvaluateScriptContext } from "frontend/hooks/scripts";
+import { msg } from "@lingui/macro";
+import { i18nNoop } from "shared/lib/noop";
 import { BaseEntitySettingsLayout } from "../_Base";
 import { ENTITY_CONFIGURATION_VIEW } from "../constants";
+
+const placeholder = `if($.field === "image"){
+  return "https://cdn.mycompany.com/" + $.value + "?size=320x640";
+}
+
+if($.field === "description" && $.from === "table"){
+  return $.value.substr(0, 120)
+}
+
+if($.field === "commentsCount"){
+  return ($.value / 1000) + "K"
+}
+          `;
 
 type IEntityPresentationScript = {
   script: string;
@@ -66,20 +81,9 @@ export function EntityPresentationScriptSettings() {
             fields={{
               script: {
                 type: "json",
-                label: "Script",
+                label: msg`Script`,
                 validations: [],
-                placeholder: `if($.field === "image"){
-  return "https://cdn.mycompany.com/" + $.value + "?size=320x640";
-}
-
-if($.field === "description" && $.from === "table"){
-  return $.value.substr(0, 120)
-}
-
-if($.field === "commentsCount"){
-  return ($.value / 1000) + "K"
-}
-          `,
+                placeholder: msg`${i18nNoop(placeholder)}`,
               },
             }}
             onSubmit={async (data) => {

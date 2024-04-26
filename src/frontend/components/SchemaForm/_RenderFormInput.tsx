@@ -1,4 +1,3 @@
-import { sluggify } from "shared/lib/strings";
 import { FormInput } from "frontend/design-system/components/Form/FormInput";
 import { FormNumberInput } from "frontend/design-system/components/Form/FormNumberInput";
 import { FormSelect } from "frontend/design-system/components/Form/FormSelect";
@@ -96,7 +95,7 @@ export function RenderFormInput(props: IRenderFormInputProps) {
     case "boolean":
       return (
         <FormSwitch
-          name={sluggify(label)}
+          name={formProps.input.name}
           value={formProps.input.value}
           onChange={formProps.input.onChange}
           {...formProps}

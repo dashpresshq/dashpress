@@ -55,7 +55,7 @@ function FilterRow({
           {({ meta, input }) => (
             <FormGrid.Item $span="3">
               <FormSelect
-                label="Field"
+                label={msg`Field`}
                 required
                 selectData={columns.map((column) => ({
                   value: column.accessor,
@@ -76,7 +76,7 @@ function FilterRow({
           {({ meta, input }) => (
             <FormGrid.Item $span={noValue ? "9" : "3"}>
               <FormSelect
-                label="Operator"
+                label={msg`Operator`}
                 required
                 selectData={filterOperatorSelections}
                 meta={meta}
@@ -93,7 +93,12 @@ function FilterRow({
           >
             {({ meta, input }) => (
               <FormGrid.Item $span="6">
-                <FormInput label="Value" required meta={meta} input={input} />
+                <FormInput
+                  label={msg`Value`}
+                  required
+                  meta={meta}
+                  input={input}
+                />
               </FormGrid.Item>
             )}
           </Field>
@@ -131,7 +136,7 @@ export function EntityPersistentQueryForm({
                         <Field name="operator" validateFields={[]}>
                           {({ input, meta }) => (
                             <FormSelectButton
-                              label=""
+                              label={msg`""`}
                               required
                               sm
                               selectData={OPERATOR_SELECTORS}
@@ -157,7 +162,7 @@ export function EntityPersistentQueryForm({
                                           >
                                             {({ input, meta }) => (
                                               <FormSelectButton
-                                                label=""
+                                                label={msg`""`}
                                                 sm
                                                 required
                                                 selectData={OPERATOR_SELECTORS}

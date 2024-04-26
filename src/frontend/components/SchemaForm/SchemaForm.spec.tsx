@@ -409,7 +409,7 @@ describe("<SchemaForm />", () => {
           fields={{
             name: {
               type: "text",
-              label: "Custom Name Label",
+              label: { message: "Custom Name Label", id: "" },
               validations: [],
             },
           }}
@@ -439,7 +439,7 @@ describe("<SchemaForm />", () => {
             ...BASE_FIELDS,
             hello: {
               type: "text",
-              label: "Custom Name Label",
+              label: { message: "Custom Name Label", id: "" },
               validations: [],
             },
           }}

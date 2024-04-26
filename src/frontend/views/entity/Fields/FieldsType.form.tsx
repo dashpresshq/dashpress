@@ -120,7 +120,7 @@ export function FieldsTypeForm({
                   }
                   return (
                     <FormSelect
-                      label={`${getEntityFieldLabels(
+                      label={msg`${getEntityFieldLabels(
                         name
                       )} [${values.validations[name]
                         .map(({ validationType }) => validationType)

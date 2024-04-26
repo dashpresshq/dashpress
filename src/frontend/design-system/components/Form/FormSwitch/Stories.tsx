@@ -12,7 +12,7 @@ function Demo(args: IProps) {
       name="foo"
       onChange={setValue}
       value={value}
-      label="Fooo"
+      label={{ id: "foo", message: "Fooo" }}
     />
   );
 }

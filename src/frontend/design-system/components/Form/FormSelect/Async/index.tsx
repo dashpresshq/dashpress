@@ -6,6 +6,7 @@ import { useAsync, useSessionStorage } from "react-use";
 import { ISelectData } from "shared/types/options";
 import { useApi } from "frontend/lib/data/useApi";
 import { ApiRequest } from "frontend/lib/data/makeRequest";
+import { useLingui } from "@lingui/react";
 import { FormSelect } from "..";
 import {
   generateClassNames,
@@ -60,6 +61,8 @@ export function AsyncFormSelect(props: IProps) {
 
   const [valueLabel, setValueLabel] = useState("");
 
+  const { _ } = useLingui();
+
   const { isLoading, error, data } = useApi<ISelectData[]>(url, {
     defaultData: [],
   });
@@ -109,7 +112,7 @@ export function AsyncFormSelect(props: IProps) {
         classNamePrefix={SharedSelectProps.classNamePrefix}
         isDisabled={disabled}
         isLoading={isLoading}
-        placeholder={placeholder}
+        placeholder={_(placeholder)}
         className={generateClassNames(meta)}
         value={{ value: input.value, label: valueLabelToUse.value }}
         loadOptions={(inputValue) =>

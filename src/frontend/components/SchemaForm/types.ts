@@ -1,3 +1,4 @@
+import { MessageDescriptor } from "@lingui/core";
 import { FormApi } from "final-form";
 import { FieldInputProps, FieldMetaState } from "react-final-form";
 import {
@@ -24,8 +25,8 @@ export interface IRenderFormInputProps {
   disabled: boolean;
   onChange?: (value: unknown) => void;
   form: FormApi;
-  label: string;
-  placeholder?: string;
+  label: MessageDescriptor;
+  placeholder?: MessageDescriptor;
   description?: string;
   from?: string;
   rightActions?: IFormInputRightAction[];

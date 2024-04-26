@@ -9,7 +9,7 @@ import {
 } from "shared/types/actions";
 import { userFriendlyCase } from "shared/lib/strings/friendly-case";
 import { DataEventActions } from "shared/types/data";
-import { t } from "@lingui/macro";
+import { msg, t } from "@lingui/macro";
 import { typescriptSafeObjectDotEntries } from "shared/lib/objects";
 import { useIntegrationImplementationsList } from "./form-actions.store";
 import { FORM_ACTION_CRUD_CONFIG } from "./constants";
@@ -71,7 +71,7 @@ export function ActionForm({
 
   const fields: IAppliedSchemaFormConfig<any> = {
     trigger: {
-      label: "Trigger",
+      label: msg`Trigger`,
       type: "selection",
       selections: [
         {
@@ -94,7 +94,7 @@ export function ActionForm({
       ],
     },
     integration: {
-      label: t`Integration`,
+      label: msg`Integration`,
       selections: activatedOptions,
       type: "selection",
       validations: [{ validationType: "required" }],
@@ -104,7 +104,7 @@ export function ActionForm({
       onChange: setIntegration,
     },
     action: {
-      label: "Action",
+      label: msg`Action`,
       type: "selection",
       validations: [{ validationType: "required" }],
       selections: implementations.data.map(({ key, label }) => ({

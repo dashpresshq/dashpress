@@ -14,6 +14,7 @@ import { Spacer } from "frontend/design-system/primitives/Spacer";
 import { useDocumentationActionButton } from "frontend/docs/constants";
 import { msg } from "@lingui/macro";
 import { typescriptSafeObjectDotEntries } from "shared/lib/objects";
+import { i18nNoop } from "shared/lib/noop";
 import { BaseEntitySettingsLayout } from "../_Base";
 import { ENTITY_CONFIGURATION_VIEW } from "../constants";
 import { ScriptForm } from "./ScriptForm";
@@ -130,7 +131,7 @@ export function EntityFormExtensionSettings() {
           contents={typescriptSafeObjectDotEntries(entityFormView).map(
             ([key, value]) => ({
               id: key,
-              label: msg`${key}`,
+              label: msg`${i18nNoop(key)}`,
               content: (
                 <>
                   <Typo.SM $textStyle="italic">

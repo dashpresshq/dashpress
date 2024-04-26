@@ -20,6 +20,7 @@ import { MAKE_APP_CONFIGURATION_CRUD_CONFIG } from "frontend/hooks/configuration
 import { ColorSchemes } from "shared/types/ui";
 import { AppConfigurationValueType } from "shared/configurations/constants";
 import { UPDATE_USER_PREFERENCES_FORM_SCHEMA } from "frontend/views/account/Preferences/constants";
+import { msg } from "@lingui/macro";
 import { BaseSettingsLayout } from "../_Base";
 import { SETTINGS_VIEW_KEY } from "../constants";
 
@@ -68,7 +69,7 @@ export function ThemeSettings() {
             buttonText={CRUD_CONFIG.FORM_LANG.UPSERT}
             fields={{
               primary: {
-                label: "Light Color Scheme",
+                label: msg`Light Color Scheme`,
                 type: "color",
                 validations: [
                   {
@@ -80,7 +81,7 @@ export function ThemeSettings() {
                 }),
               },
               primaryDark: {
-                label: "Dark Color Scheme",
+                label: msg`Dark Color Scheme`,
                 type: "color",
                 validations: [
                   {

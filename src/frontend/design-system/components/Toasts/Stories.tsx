@@ -4,6 +4,7 @@ import { Story } from "@storybook/react";
 import { action as storyAction } from "@storybook/addon-actions";
 import { ToastService } from "frontend/lib/toast";
 import { ApplicationRoot } from "frontend/components/ApplicationRoot";
+import { fakeMessageDescriptor } from "translations/fake";
 
 interface IProps {
   label: string;
@@ -34,7 +35,7 @@ export const Success = Template.bind({});
 Success.args = {
   label: "Toast Success",
   action: () =>
-    ToastService.success({ message: "App updated successfully", id: "app" }),
+    ToastService.success(fakeMessageDescriptor("App updated successfully")),
 };
 
 export const SuccessWithAction = Template.bind({});
@@ -42,9 +43,9 @@ SuccessWithAction.args = {
   label: "Toast Success With Action",
   action: () =>
     ToastService.success({
-      message: { message: "App updated successfully", id: "app-suc" },
+      message: fakeMessageDescriptor("App updated successfully"),
       action: {
-        label: { message: "Click me", id: "click" },
+        label: fakeMessageDescriptor("Click me"),
         action: () => storyAction("Click me"),
       },
     }),

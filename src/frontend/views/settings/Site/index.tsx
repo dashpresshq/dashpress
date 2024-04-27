@@ -64,7 +64,7 @@ export function SiteSettings() {
                 ],
               },
               homeLink: {
-                label: msg`Link`,
+                label: msg`Home Link`,
                 type: "text",
                 validations: [
                   {

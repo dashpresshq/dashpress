@@ -46,7 +46,10 @@ export const useSetPageDetails = (
       secondaryActionItems: [],
       pageLink: router.asPath,
     });
-  }, [pageDetails.pageTitle]);
+  }, [
+    pageDetails.pageTitle.message,
+    JSON.stringify(pageDetails.pageTitle.values),
+  ]);
 };
 
 export const useSetCurrentActionItems = (

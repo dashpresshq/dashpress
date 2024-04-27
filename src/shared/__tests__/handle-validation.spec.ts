@@ -1,11 +1,9 @@
 import { isBoolean, maxLength } from "class-validator";
+import { fakeMessageDescriptor } from "translations/fake";
 import { handleValidation } from "../validations/handle-validation";
 import { ENTITY_VALIDATION_CONFIG } from "../validations";
 
-const errorMessage = {
-  message: "Error Message",
-  id: `error-message`,
-};
+const errorMessage = fakeMessageDescriptor("Error Message");
 
 describe("Handle Validation", () => {
   it("should return error message when validation expectation are not met", () => {

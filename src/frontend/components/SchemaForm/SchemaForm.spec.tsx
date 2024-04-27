@@ -15,10 +15,8 @@ const useRouter = jest.spyOn(require("next/router"), "useRouter");
 
 useRouter.mockImplementation(USE_ROUTER_PARAMS({}));
 
-const buttonText = (isSubmitting: boolean) => ({
-  id: "test",
-  message: isSubmitting ? "Submitting Form" : "Submit Form",
-});
+const buttonText = (isSubmitting: boolean) =>
+  fakeMessageDescriptor(isSubmitting ? "Submitting Form" : "Submit Form");
 
 const BASE_FIELDS = {
   name: {
@@ -412,7 +410,7 @@ describe("<SchemaForm />", () => {
           fields={{
             name: {
               type: "text",
-              label: { message: "Custom Name Label", id: "" },
+              label: fakeMessageDescriptor("Custom Name Label"),
               validations: [],
             },
           }}
@@ -442,7 +440,7 @@ describe("<SchemaForm />", () => {
             ...BASE_FIELDS,
             hello: {
               type: "text",
-              label: { message: "Custom Name Label", id: "" },
+              label: fakeMessageDescriptor("Custom Name Label"),
               validations: [],
             },
           }}

@@ -5,6 +5,10 @@ import { typescriptSafeObjectDotEntries } from "shared/lib/objects";
 import { i18n } from "@lingui/core";
 import { ENTITY_VALIDATION_CONFIG } from "./validations-map";
 
+const replaceWithBrackets = (value: string) => {
+  return value.replace("[[", "{{").replace("]]", "}}");
+};
+
 export const runValidationError =
   (fields: IAppliedSchemaFormConfig<any>) =>
   (values: Record<string, unknown>) => {
@@ -27,14 +31,20 @@ export const runValidationError =
           firstFailedValidation
             ? compileTemplateString(
                 firstFailedValidation.errorMessage
-                  ? i18n._(firstFailedValidation.errorMessage)
-                  : i18n._(
-                      ENTITY_VALIDATION_CONFIG[
-                        firstFailedValidation.validationType
-                      ].message
+                  ? replaceWithBrackets(
+                      i18n._(firstFailedValidation.errorMessage)
+                    )
+                  : replaceWithBrackets(
+                      i18n._(
+                        ENTITY_VALIDATION_CONFIG[
+                          firstFailedValidation.validationType
+                        ].message
+                      )
                     ),
                 {
-                  name: config.label || userFriendlyCase(String(field)),
+                  name: config.label
+                    ? i18n._(config.label)
+                    : userFriendlyCase(String(field)),
                   ...firstFailedValidation.constraint,
                 }
               )

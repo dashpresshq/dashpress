@@ -8,7 +8,10 @@ describe("getFieldTypeBoundedValidations", () => {
     expect(getFieldTypeBoundedValidations("boolean")).toMatchInlineSnapshot(`
       [
         {
-          "errorMessage": "{{ name }} should be a boolean",
+          "errorMessage": {
+            "id": "PAJZ3x",
+            "message": "[[ name ]] should be a boolean",
+          },
           "fromType": true,
           "validationType": "isBoolean",
         },
@@ -20,7 +23,10 @@ describe("getFieldTypeBoundedValidations", () => {
     expect(getFieldTypeBoundedValidations("text")).toMatchInlineSnapshot(`
       [
         {
-          "errorMessage": "{{ name }} is not a text",
+          "errorMessage": {
+            "id": "Z2sWqN",
+            "message": "[[ name ]] is not a text",
+          },
           "fromType": true,
           "validationType": "isString",
         },
@@ -30,7 +36,10 @@ describe("getFieldTypeBoundedValidations", () => {
     expect(getFieldTypeBoundedValidations("richtext")).toMatchInlineSnapshot(`
       [
         {
-          "errorMessage": "{{ name }} is not a text",
+          "errorMessage": {
+            "id": "Z2sWqN",
+            "message": "[[ name ]] is not a text",
+          },
           "fromType": true,
           "validationType": "isString",
         },
@@ -48,7 +57,10 @@ describe("guessEntityValidations", () => {
     ).toMatchInlineSnapshot(`
       [
         {
-          "errorMessage": "{{ name }} is required",
+          "errorMessage": {
+            "id": "OtbrZ9",
+            "message": "[[ name ]] is required",
+          },
           "fromSchema": true,
           "validationType": "required",
         },
@@ -67,7 +79,10 @@ describe("guessEntityValidations", () => {
           "constraint": {
             "length": 50,
           },
-          "errorMessage": "{{ name }} should be less than {{ length }} characters",
+          "errorMessage": {
+            "id": "pUNEVM",
+            "message": "[[ name ]] should be less than [[ length ]] characters",
+          },
           "fromSchema": true,
           "validationType": "maxLength",
         },
@@ -84,7 +99,10 @@ describe("guessEntityValidations", () => {
     ).toMatchInlineSnapshot(`
       [
         {
-          "errorMessage": "{{ name }} is required",
+          "errorMessage": {
+            "id": "OtbrZ9",
+            "message": "[[ name ]] is required",
+          },
           "fromSchema": true,
           "validationType": "required",
         },
@@ -92,7 +110,10 @@ describe("guessEntityValidations", () => {
           "constraint": {
             "length": 40,
           },
-          "errorMessage": "{{ name }} should be less than {{ length }} characters",
+          "errorMessage": {
+            "id": "pUNEVM",
+            "message": "[[ name ]] should be less than [[ length ]] characters",
+          },
           "fromSchema": true,
           "validationType": "maxLength",
         },

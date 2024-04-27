@@ -161,7 +161,7 @@ export function DashboardWidgetForm({
                     <Field name="queryId" validateFields={[]}>
                       {({ input, meta }) => (
                         <FormSelect
-                          label={msg`Tab`}
+                          label={msg`Entity Tab`}
                           description="Select the most appropriate tab of the entity above that the user should be direct to"
                           disabledOptions={[]}
                           selectData={(tableViews.data || []).map(

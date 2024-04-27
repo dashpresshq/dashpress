@@ -61,14 +61,15 @@ export const FormSelect = (props: IFormSelect) => {
     defaultLabel,
     placeholder,
   } = props;
+  const { _ } = useLingui();
+
   const selectDataWithDefault = [
     {
       value: nullable ? null : "",
-      label: defaultLabel || `--- Select ${formLabel} ---`,
+      label: defaultLabel || `--- Select ${_(formLabel)} ---`,
     },
     ...selectData,
   ] as ISelectData[];
-  const { _ } = useLingui();
   return wrapLabelAndError(
     <div data-testid={`react-select__${input.name}`}>
       <SelectStyled

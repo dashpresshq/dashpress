@@ -58,7 +58,9 @@ export const FormCodeEditor = (formInput: IFormCodeEditor) => {
           highlight(code, languages[formInput.language || "javascript"])
         }
         disabled={formInput.disabled}
-        placeholder={_(formInput.placeholder)}
+        placeholder={
+          formInput.placeholder ? _(formInput.placeholder) : undefined
+        }
         textareaId={formInput.input.name}
         padding={4}
         className="form-code-editor"

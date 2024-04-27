@@ -28,6 +28,13 @@ type ToastMessageWithAction = {
   action: { label: MessageDescriptor; action: () => void };
 };
 
+const getMessageDescriptorId = (message: MessageDescriptor) => {
+  if (!message) {
+    return "_default_";
+  }
+  return `${message.message}__${JSON.stringify(message.values)}`;
+};
+
 function ToastMessage({
   message,
   toastT,
@@ -104,7 +111,7 @@ export const ToastService = {
       toast.success((t) => <ToastMessage message={message} toastT={t} />, {
         style: toastStyle("success"),
         duration: 7000,
-        id: message.id,
+        id: getMessageDescriptorId(message),
       });
       return;
     }
@@ -119,7 +126,7 @@ export const ToastService = {
       {
         style: toastStyle("success"),
         duration: 7000,
-        id: message.message.id,
+        id: getMessageDescriptorId(message.message),
       }
     );
   },

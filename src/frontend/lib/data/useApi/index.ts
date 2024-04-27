@@ -21,10 +21,17 @@ export function useApi<T>(endPoint: string, options: IUseApiOptions<T>) {
             options.request.method,
             endPoint,
             options.request.body,
-            { errorMessage: _(options.errorMessage) }
+            {
+              errorMessage: options.errorMessage
+                ? _(options.errorMessage)
+                : undefined,
+            }
           );
         }
-        return await ApiRequest.GET(endPoint, _(options.errorMessage));
+        return await ApiRequest.GET(
+          endPoint,
+          options.errorMessage ? _(options.errorMessage) : undefined
+        );
       } catch (error) {
         if (options.returnUndefinedOnError) {
           return undefined;

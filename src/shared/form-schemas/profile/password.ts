@@ -11,7 +11,7 @@ export const CHANGE_PASSWORD_FORM_SCHEMA: IAppliedSchemaFormConfig<IChangePasswo
   {
     oldPassword: {
       type: "password",
-      label: msg`Password`,
+      label: msg`Old Password`,
       validations: [
         {
           validationType: "required",

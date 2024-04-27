@@ -9,7 +9,10 @@ import {
 } from "backend/lib/key-value";
 import { sluggify } from "shared/lib/strings";
 import { IStorageIntegration } from "shared/types/actions";
-import { typescriptSafeObjectDotEntries } from "shared/lib/objects";
+import {
+  typescriptSafeObjectDotEntries,
+  typescriptSafeObjectDotKeys,
+} from "shared/lib/objects";
 import { STORAGE_INTEGRATIONS } from "./integrations";
 
 export class StorageApiService {
@@ -44,10 +47,10 @@ export class StorageApiService {
     if (previousStorageKey) {
       await this._credentialsApiService.deleteGroup({
         key: this.makeCredentialsGroupKey(storageKey),
-        fields: typescriptSafeObjectDotEntries(
+        fields: typescriptSafeObjectDotKeys(
           STORAGE_INTEGRATIONS[previousStorageKey]
             .integrationConfigurationSchema
-        ),
+        ) as string[],
       });
     }
 
@@ -56,9 +59,9 @@ export class StorageApiService {
     await this._credentialsApiService.upsertGroup(
       {
         key: this.makeCredentialsGroupKey(storageKey),
-        fields: typescriptSafeObjectDotEntries(
+        fields: typescriptSafeObjectDotKeys(
           STORAGE_INTEGRATIONS[storageKey].integrationConfigurationSchema
-        ),
+        ) as string[],
       },
       configuration
     );
@@ -75,9 +78,9 @@ export class StorageApiService {
     }
     return await this._credentialsApiService.useGroupValue({
       key: this.makeCredentialsGroupKey(storageKey),
-      fields: typescriptSafeObjectDotEntries(
+      fields: typescriptSafeObjectDotKeys(
         STORAGE_INTEGRATIONS[storageKey].integrationConfigurationSchema
-      ),
+      ) as string[],
     });
   }
 

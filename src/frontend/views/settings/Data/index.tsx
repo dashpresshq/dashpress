@@ -55,12 +55,12 @@ function MetaDataSettings() {
           systemIcon="Save"
           fields={{
             createdAt: {
-              label: msg`Created at`,
+              label: msg`Created At`,
               type: "text",
               validations: [],
             },
             updatedAt: {
-              label: msg`Updated at`,
+              label: msg`Updated At`,
               type: "text",
               validations: [],
             },

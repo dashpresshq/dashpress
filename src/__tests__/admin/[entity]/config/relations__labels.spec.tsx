@@ -16,7 +16,7 @@ describe("pages/admin/[entity]/config/relations", () => {
       USE_ROUTER_PARAMS({
         query: {
           entity: "entity-1",
-          tab: "Labels",
+          tab: "labels",
         },
       })
     );

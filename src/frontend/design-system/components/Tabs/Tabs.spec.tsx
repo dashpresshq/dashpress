@@ -1,19 +1,20 @@
 import { render, fireEvent, screen } from "@testing-library/react";
+import { fakeMessageDescriptor } from "translations/fake";
 import { Tabs } from ".";
 
 const TAB_CONTENT = [
   {
-    label: { message: `Foo Label`, id: "foo-label" },
+    label: fakeMessageDescriptor(`Foo Label`),
     id: "foo",
     content: <>Foo Content</>,
   },
   {
-    label: { message: `Bar Label`, id: "bar-label" },
+    label: fakeMessageDescriptor(`Bar Label`),
     id: "bar",
     content: <>Bar Content</>,
   },
   {
-    label: { message: `Baz Label`, id: "baz-label" },
+    label: fakeMessageDescriptor(`Baz Label`),
     id: "baz",
     content: <>Baz Content</>,
   },

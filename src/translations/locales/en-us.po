@@ -265,8 +265,8 @@ msgstr "Create Fields Order"
 msgid "Create It"
 msgstr "Create It"
 
-msgid "Created at"
-msgstr "Created at"
+msgid "Created At"
+msgstr "Created At"
 
 msgid "Creating {singular}"
 msgstr "Creating {singular}"
@@ -457,6 +457,9 @@ msgstr "Height"
 msgid "Hi, {0}"
 msgstr "Hi, {0}"
 
+msgid "Home Link"
+msgstr "Home Link"
+
 msgid "Host"
 msgstr "Host"
 
@@ -495,9 +498,6 @@ msgstr "Light"
 
 msgid "Light Color Scheme"
 msgstr "Light Color Scheme"
-
-msgid "Link"
-msgstr "Link"
 
 msgid "Link Entity"
 msgstr "Link Entity"
@@ -555,6 +555,9 @@ msgstr "No Search Results"
 
 msgid "Now"
 msgstr "Now"
+
+msgid "Old Password"
+msgstr "Old Password"
 
 msgid "On Create"
 msgstr "On Create"
@@ -793,8 +796,8 @@ msgstr "Title"
 msgid "Toggle Connection URL"
 msgstr "Toggle Connection URL"
 
-msgid "Token validity duration in days"
-msgstr "Token validity duration in days"
+msgid "Token Validity Duration In Days"
+msgstr "Token Validity Duration In Days"
 
 msgid "Trigger"
 msgstr "Trigger"
@@ -814,8 +817,8 @@ msgstr "Update Columns Settings"
 msgid "Update Fields Order"
 msgstr "Update Fields Order"
 
-msgid "Updated at"
-msgstr "Updated at"
+msgid "Updated At"
+msgstr "Updated At"
 
 msgid "Updating {singular}"
 msgstr "Updating {singular}"

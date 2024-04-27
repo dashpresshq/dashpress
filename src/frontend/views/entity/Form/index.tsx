@@ -15,6 +15,7 @@ import { useDocumentationActionButton } from "frontend/docs/constants";
 import { msg } from "@lingui/macro";
 import { typescriptSafeObjectDotEntries } from "shared/lib/objects";
 import { i18nNoop } from "shared/lib/noop";
+import { sluggify } from "shared/lib/strings";
 import { BaseEntitySettingsLayout } from "../_Base";
 import { ENTITY_CONFIGURATION_VIEW } from "../constants";
 import { ScriptForm } from "./ScriptForm";
@@ -130,7 +131,7 @@ export function EntityFormExtensionSettings() {
         <Tabs
           contents={typescriptSafeObjectDotEntries(entityFormView).map(
             ([key, value]) => ({
-              id: key,
+              id: sluggify(key),
               label: msg`${i18nNoop(key)}`,
               content: (
                 <>

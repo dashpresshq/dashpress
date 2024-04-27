@@ -7,9 +7,14 @@ import {
   TableFilterType,
 } from "shared/types/data";
 import { ApplicationRoot } from "frontend/components/ApplicationRoot";
+import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
 import { TableFilter } from "..";
 
 const setFilterValueJestFn = jest.fn();
+
+const useRouter = jest.spyOn(require("next/router"), "useRouter");
+
+useRouter.mockImplementation(USE_ROUTER_PARAMS({}));
 
 function TestComponent({
   type,

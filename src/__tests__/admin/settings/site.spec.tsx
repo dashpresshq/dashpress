@@ -25,10 +25,10 @@ describe("pages/admin/settings/site", () => {
       expect(screen.getByLabelText("Name")).toHaveValue("DashPress");
     });
     expect(screen.getByLabelText("Home Link")).toHaveValue("/");
-    expect(screen.getByLabelText("Square Logo")).toHaveValue(
+    expect(screen.getByLabelText("Small Logo")).toHaveValue(
       "/assets/images/logo.png"
     );
-    expect(screen.getByLabelText("Full Length Logo")).toHaveValue(
+    expect(screen.getByLabelText("Large Logo")).toHaveValue(
       "/assets/images/full-logo.png"
     );
   });
@@ -42,8 +42,8 @@ describe("pages/admin/settings/site", () => {
 
     await userEvent.type(screen.getByLabelText("Name"), "Updated");
     await userEvent.type(screen.getByLabelText("Home Link"), "Updated");
-    await userEvent.type(screen.getByLabelText("Square Logo"), "Updated");
-    await userEvent.type(screen.getByLabelText("Full Length Logo"), "Updated");
+    await userEvent.type(screen.getByLabelText("Small Logo"), "Updated");
+    await userEvent.type(screen.getByLabelText("Large Logo"), "Updated");
 
     await userEvent.click(
       screen.getByRole("button", { name: "Save Site Settings" })
@@ -64,10 +64,10 @@ describe("pages/admin/settings/site", () => {
       expect(screen.getByLabelText("Name")).toHaveValue("DashPressUpdated");
     });
     expect(screen.getByLabelText("Home Link")).toHaveValue("/Updated");
-    expect(screen.getByLabelText("Square Logo")).toHaveValue(
+    expect(screen.getByLabelText("Small Logo")).toHaveValue(
       "/assets/images/logo.pngUpdated"
     );
-    expect(screen.getByLabelText("Full Length Logo")).toHaveValue(
+    expect(screen.getByLabelText("Large Logo")).toHaveValue(
       "/assets/images/full-logo.pngUpdated"
     );
   });

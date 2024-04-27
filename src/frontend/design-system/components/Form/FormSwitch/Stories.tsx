@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { Story } from "@storybook/react";
 import { ApplicationRoot } from "frontend/components/ApplicationRoot";
+import { fakeMessageDescriptor } from "translations/fake";
 import { FormSwitch, IProps } from ".";
 
 function Demo(args: IProps) {
@@ -12,7 +13,7 @@ function Demo(args: IProps) {
       name="foo"
       onChange={setValue}
       value={value}
-      label={{ id: "foo", message: "Fooo" }}
+      label={fakeMessageDescriptor("Fooo")}
     />
   );
 }

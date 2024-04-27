@@ -5,7 +5,7 @@ import { fakeMessageDescriptor } from "translations/fake";
 
 export const TEST_FORM_SCHEMA: IAppliedSchemaFormConfig<{ name: string }> = {
   name: {
-    label: fakeMessageDescriptor("name"),
+    label: fakeMessageDescriptor("Name"),
     type: "text",
     validations: [
       {

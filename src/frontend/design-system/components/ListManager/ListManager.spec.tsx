@@ -1,6 +1,8 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import { loadedDataState } from "frontend/lib/data/constants/loadedDataState";
 import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
+import { ApplicationRoot } from "frontend/components/ApplicationRoot";
+import { fakeMessageDescriptor } from "translations/fake";
 import { ListManager } from ".";
 
 const defaultProps = {
@@ -48,10 +50,12 @@ describe("ListManager", () => {
 
   it("should not render search input when items are small", () => {
     render(
-      <ListManager
-        {...{ ...defaultProps }}
-        render={(item) => ({ label: item.name })}
-      />
+      <ApplicationRoot>
+        <ListManager
+          {...{ ...defaultProps }}
+          render={(item) => ({ label: item.name })}
+        />
+      </ApplicationRoot>
     );
 
     expect(screen.queryByPlaceholderText("Search")).not.toBeInTheDocument();
@@ -59,13 +63,15 @@ describe("ListManager", () => {
 
   it("should render search input when items are large", () => {
     render(
-      <ListManager
-        {...{ ...defaultProps }}
-        items={loadedDataState(
-          Array.from({ length: 11 }, (_, i) => ({ name: `foo${i}` }))
-        )}
-        render={(item) => ({ label: item.name })}
-      />
+      <ApplicationRoot>
+        <ListManager
+          {...{ ...defaultProps }}
+          items={loadedDataState(
+            Array.from({ length: 11 }, (_, i) => ({ name: `foo${i}` }))
+          )}
+          render={(item) => ({ label: item.name })}
+        />
+      </ApplicationRoot>
     );
 
     expect(screen.getByPlaceholderText("Search")).toBeInTheDocument();
@@ -73,14 +79,16 @@ describe("ListManager", () => {
 
   it("should search items by label and name when search input is keyed", () => {
     render(
-      <ListManager
-        {...{ ...defaultProps }}
-        items={loadedDataState(
-          Array.from({ length: 11 }, (_, i) => ({ name: `foo${i}` }))
-        )}
-        getLabel={(name) => `1-${name}`}
-        render={(item) => ({ label: item.label })}
-      />
+      <ApplicationRoot>
+        <ListManager
+          {...{ ...defaultProps }}
+          items={loadedDataState(
+            Array.from({ length: 11 }, (_, i) => ({ name: `foo${i}` }))
+          )}
+          getLabel={(name) => `1-${name}`}
+          render={(item) => ({ label: item.label })}
+        />
+      </ApplicationRoot>
     );
 
     fireEvent.change(screen.getByPlaceholderText("Search"), {
@@ -110,14 +118,16 @@ describe("ListManager", () => {
 
   it("should render Empty view when empty", () => {
     render(
-      <ListManager
-        {...{ ...defaultProps }}
-        items={loadedDataState([])}
-        empty={{
-          text: { message: "No Item Has Been Added Yet", id: "some-id" },
-        }}
-        render={(item) => ({ label: item.label })}
-      />
+      <ApplicationRoot>
+        <ListManager
+          {...{ ...defaultProps }}
+          items={loadedDataState([])}
+          empty={{
+            text: fakeMessageDescriptor("No Item Has Been Added Yet"),
+          }}
+          render={(item) => ({ label: item.label })}
+        />
+      </ApplicationRoot>
     );
 
     expect(screen.getByText("No Item Has Been Added Yet")).toBeInTheDocument();

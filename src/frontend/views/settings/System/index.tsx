@@ -55,7 +55,7 @@ export function SystemSettings() {
             buttonText={CRUD_CONFIG.FORM_LANG.UPSERT}
             fields={{
               tokenValidityDurationInDays: {
-                label: msg`Token validity duration in days`,
+                label: msg`Token Validity Duration In Days`,
                 type: "number",
                 validations: [
                   {

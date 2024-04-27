@@ -265,7 +265,7 @@ msgstr ""
 msgid "Create It"
 msgstr ""
 
-msgid "Created at"
+msgid "Created At"
 msgstr ""
 
 msgid "Creating {singular}"
@@ -457,6 +457,9 @@ msgstr ""
 msgid "Hi, {0}"
 msgstr ""
 
+msgid "Home Link"
+msgstr ""
+
 msgid "Host"
 msgstr ""
 
@@ -494,9 +497,6 @@ msgid "Light"
 msgstr ""
 
 msgid "Light Color Scheme"
-msgstr ""
-
-msgid "Link"
 msgstr ""
 
 msgid "Link Entity"
@@ -554,6 +554,9 @@ msgid "No Search Results"
 msgstr ""
 
 msgid "Now"
+msgstr ""
+
+msgid "Old Password"
 msgstr ""
 
 msgid "On Create"
@@ -793,7 +796,7 @@ msgstr ""
 msgid "Toggle Connection URL"
 msgstr ""
 
-msgid "Token validity duration in days"
+msgid "Token Validity Duration In Days"
 msgstr ""
 
 msgid "Trigger"
@@ -814,7 +817,7 @@ msgstr ""
 msgid "Update Fields Order"
 msgstr ""
 
-msgid "Updated at"
+msgid "Updated At"
 msgstr ""
 
 msgid "Updating {singular}"

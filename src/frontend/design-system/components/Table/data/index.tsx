@@ -1,3 +1,4 @@
+import { fakeMessageDescriptor } from "translations/fake";
 import { ITableColumn } from "../types";
 
 export const TABLE_DATA = {
@@ -45,22 +46,22 @@ export const TABLE_DATA = {
 
 export const TABLE_COLUMNS: ITableColumn[] = [
   {
-    Header: "Id",
+    Header: fakeMessageDescriptor("Id"),
     accessor: "id",
     filter: { _type: "idField", bag: undefined },
   },
   {
-    Header: "Name Header",
+    Header: fakeMessageDescriptor("Name Header"),
     accessor: "name",
     filter: { _type: "string", bag: undefined },
   },
   {
-    Header: "Age",
+    Header: fakeMessageDescriptor("Age"),
     accessor: "age",
     filter: { _type: "number", bag: undefined },
   },
   {
-    Header: "Verified",
+    Header: fakeMessageDescriptor("Verified"),
     accessor: "verified",
     disableSortBy: true,
     filter: {
@@ -72,7 +73,7 @@ export const TABLE_COLUMNS: ITableColumn[] = [
     },
   },
   {
-    Header: "Role",
+    Header: fakeMessageDescriptor("Role"),
     accessor: "role",
     disableSortBy: true,
     filter: {
@@ -86,7 +87,7 @@ export const TABLE_COLUMNS: ITableColumn[] = [
     },
   },
   {
-    Header: "Author",
+    Header: fakeMessageDescriptor("Author"),
     accessor: "author",
     filter: {
       _type: "list",
@@ -94,7 +95,7 @@ export const TABLE_COLUMNS: ITableColumn[] = [
     },
   },
   {
-    Header: "Registered",
+    Header: fakeMessageDescriptor("Registered"),
     accessor: "createdAt",
     filter: {
       _type: "date",
@@ -102,7 +103,7 @@ export const TABLE_COLUMNS: ITableColumn[] = [
     },
   },
   {
-    Header: "Actions",
+    Header: fakeMessageDescriptor("Actions"),
     accessor: "__action__",
     disableSortBy: true,
     Cell: () => <span>Some Action</span>,

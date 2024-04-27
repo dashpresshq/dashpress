@@ -5,6 +5,7 @@ import { TableSkeleton } from "frontend/design-system/components/Skeleton/Table"
 import { Table } from "frontend/design-system/components/Table";
 import { ITableColumn } from "frontend/design-system/components/Table/types";
 import { IEmptyWrapperProps } from "frontend/design-system/components/EmptyWrapper/types";
+import { MessageDescriptor } from "@lingui/core";
 import { useFEPagination } from "./useFEPagination";
 import { ViewStateMachine } from "../ViewStateMachine";
 
@@ -16,7 +17,7 @@ export interface IFETableCell<T> {
 }
 
 export interface IFETableColumn<T extends Record<string, unknown>> {
-  Header: string;
+  Header: MessageDescriptor;
   accessor: keyof T | "__action__";
   disableSortBy?: boolean;
   filter?: TableFilterType;

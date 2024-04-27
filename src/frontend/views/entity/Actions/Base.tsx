@@ -19,6 +19,7 @@ import { OffCanvas } from "frontend/design-system/components/OffCanvas";
 import { userFriendlyCase } from "shared/lib/strings/friendly-case";
 import { ActionButtons } from "frontend/design-system/components/Button/ActionButtons";
 import { DELETE_BUTTON_PROPS } from "frontend/design-system/components/Button/constants";
+import { msg } from "@lingui/macro";
 import { FORM_ACTION_CRUD_CONFIG } from "./constants";
 import {
   LIST_ENTITY_FORM_ACTIONS,
@@ -77,7 +78,7 @@ export function FormActions({ entity }: { entity: string }) {
 
   const columns: IFETableColumn<IFormAction>[] = [
     {
-      Header: "Integration",
+      Header: msg`Integration`,
       accessor: "integration",
       filter: {
         _type: "string",
@@ -89,7 +90,7 @@ export function FormActions({ entity }: { entity: string }) {
       },
     },
     {
-      Header: "Trigger",
+      Header: msg`Trigger`,
       accessor: "trigger",
       filter: {
         _type: "string",
@@ -101,7 +102,7 @@ export function FormActions({ entity }: { entity: string }) {
       },
     },
     {
-      Header: "Action",
+      Header: msg`Action`,
       accessor: "action",
       filter: {
         _type: "string",
@@ -113,7 +114,7 @@ export function FormActions({ entity }: { entity: string }) {
       },
     },
     {
-      Header: "Action",
+      Header: msg`Action`,
       disableSortBy: true,
       accessor: "__action__",
       Cell: MemoizedAction,

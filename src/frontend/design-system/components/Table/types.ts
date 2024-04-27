@@ -1,4 +1,3 @@
-import { HeaderContext } from "@tanstack/react-table";
 import { ReactNode } from "react";
 import { UseQueryResult } from "@tanstack/react-query";
 import {
@@ -6,14 +5,11 @@ import {
   PaginatedData,
   TableFilterType,
 } from "shared/types/data";
+import { MessageDescriptor } from "@lingui/core";
 import { IEmptyWrapperProps } from "../EmptyWrapper/types";
 
 export interface ITableColumn {
-  Header:
-    | string
-    | ((
-        headerContext: HeaderContext<Record<string, unknown>, unknown>
-      ) => ReactNode);
+  Header: MessageDescriptor;
   accessor: string;
   disableSortBy?: boolean;
   filter?: TableFilterType;

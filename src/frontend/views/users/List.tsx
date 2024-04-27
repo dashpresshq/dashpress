@@ -68,7 +68,7 @@ export function ListUsers() {
 
   const columns: IFETableColumn<IAccountProfile>[] = [
     {
-      Header: "Username",
+      Header: msg`Username`,
       accessor: "username",
       filter: {
         _type: "string",
@@ -76,7 +76,7 @@ export function ListUsers() {
       },
     },
     {
-      Header: "Name",
+      Header: msg`Name`,
       accessor: "name",
       filter: {
         _type: "string",
@@ -84,7 +84,7 @@ export function ListUsers() {
       },
     },
     {
-      Header: "Role",
+      Header: msg`Role`,
       accessor: "role",
       filter: {
         _type: "status",
@@ -93,7 +93,7 @@ export function ListUsers() {
       Cell: ({ value }) => roleLabel(value as string),
     },
     {
-      Header: "Action",
+      Header: msg`Action`,
       disableSortBy: true,
       accessor: "__action__",
       Cell: MemoizedAction,

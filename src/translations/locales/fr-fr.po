@@ -103,6 +103,9 @@ msgstr ""
 msgid "{0} Preference"
 msgstr ""
 
+msgid "{0}({1})"
+msgstr ""
+
 msgid "{singular} {action} Successfully"
 msgstr ""
 
@@ -125,9 +128,6 @@ msgid "{singular} Settings"
 msgstr ""
 
 msgid "{singular} Updated Successfully"
-msgstr ""
-
-msgid "{title}({currentCount})"
 msgstr ""
 
 msgid "{value} Day"
@@ -164,6 +164,9 @@ msgid "{value} Year"
 msgstr ""
 
 msgid "{value} Years"
+msgstr ""
+
+msgid "Access Key ID"
 msgstr ""
 
 msgid "Account Preferences"
@@ -216,6 +219,9 @@ msgstr ""
 
 msgid "Change Language"
 msgstr "Changer la langue"
+
+msgid "Channel"
+msgstr ""
 
 msgid "Click here to view details"
 msgstr ""
@@ -355,10 +361,16 @@ msgstr ""
 msgid "Display Format"
 msgstr ""
 
+msgid "Domain"
+msgstr ""
+
 msgid "Done"
 msgstr ""
 
 msgid "Download"
+msgstr ""
+
+msgid "Duplicate {singular}"
 msgstr ""
 
 msgid "Edit"
@@ -448,6 +460,9 @@ msgstr ""
 msgid "Format"
 msgstr ""
 
+msgid "From"
+msgstr ""
+
 msgid "General"
 msgstr ""
 
@@ -535,6 +550,9 @@ msgstr ""
 msgid "Menu Settings"
 msgstr ""
 
+msgid "Message"
+msgstr ""
+
 msgid "Metadata Columns"
 msgstr ""
 
@@ -583,6 +601,9 @@ msgstr ""
 msgid "Only capital letters and underscores are allowed"
 msgstr ""
 
+msgid "Only lowercase letters, numbers and {delimiter} are allowed"
+msgstr ""
+
 msgid "Operator"
 msgstr ""
 
@@ -620,6 +641,9 @@ msgid "Profile"
 msgstr ""
 
 msgid "Reference Template"
+msgstr ""
+
+msgid "Region"
 msgstr ""
 
 msgid "Relation Labels"
@@ -700,6 +724,9 @@ msgstr ""
 msgid "Secret"
 msgstr ""
 
+msgid "Secret Access Key"
+msgstr ""
+
 msgid "Secrets"
 msgstr ""
 
@@ -710,6 +737,9 @@ msgid "Selections Settings"
 msgstr ""
 
 msgid "Sender Email"
+msgstr ""
+
+msgid "Sender Name"
 msgstr ""
 
 msgid "Setting Up Account"
@@ -752,6 +782,9 @@ msgid "Star us on Github"
 msgstr ""
 
 msgid "Start of year"
+msgstr ""
+
+msgid "Storage Key"
 msgstr ""
 
 msgid "Subject"

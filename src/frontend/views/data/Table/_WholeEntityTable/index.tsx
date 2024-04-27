@@ -9,6 +9,7 @@ import { TableSkeleton } from "frontend/design-system/components/Skeleton/Table"
 import { Card } from "frontend/design-system/components/Card";
 import { Tabs } from "frontend/design-system/components/Tabs";
 import { msg } from "@lingui/macro";
+import { i18nNoop } from "shared/lib/noop";
 import { DetailsCanvas } from "./DetailsCanvas";
 import { TableTopComponent, usePortalTableTabs } from "../portal";
 import { EntityDataTable } from "./EntityDataTable";
@@ -84,7 +85,7 @@ export function WholeEntityTable({
                     />
                   ),
                   id: title.trim(),
-                  label: msg`${title}(${currentCount})`,
+                  label: msg`${i18nNoop(title)}(${i18nNoop(currentCount)})`,
                 };
               })}
             />

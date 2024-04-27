@@ -13,6 +13,7 @@ import { IRolesList } from "shared/types/roles";
 import { Card } from "frontend/design-system/components/Card";
 import { DELETE_BUTTON_PROPS } from "frontend/design-system/components/Button/constants";
 import { ActionButtons } from "frontend/design-system/components/Button/ActionButtons";
+import { msg } from "@lingui/macro";
 import {
   ADMIN_ROLES_CRUD_CONFIG,
   ROLES_ENDPOINT_CONFIG,
@@ -59,7 +60,7 @@ export function ListRoles() {
   );
   const columns: IFETableColumn<IRolesList>[] = [
     {
-      Header: "Role",
+      Header: msg`Role`,
       accessor: "label",
       filter: {
         _type: "string",
@@ -67,7 +68,7 @@ export function ListRoles() {
       },
     },
     {
-      Header: "Action",
+      Header: msg`Action`,
       disableSortBy: true,
       accessor: "__action__",
       Cell: MemoizedAction,

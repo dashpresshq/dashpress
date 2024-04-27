@@ -27,6 +27,7 @@ import { IKeyValue } from "shared/types/options";
 import { useDocumentationActionButton } from "frontend/docs/constants";
 import { ActionButtons } from "frontend/design-system/components/Button/ActionButtons";
 import { DELETE_BUTTON_PROPS } from "frontend/design-system/components/Button/constants";
+import { msg } from "@lingui/macro";
 import {
   INTEGRATIONS_GROUP_ENDPOINT,
   useIntegrationConfigurationDeletionMutation,
@@ -144,7 +145,7 @@ export function ManageCredentialGroup({
 
   const tableColumns: IFETableColumn<IKeyValue>[] = [
     {
-      Header: "Key",
+      Header: msg`Key`,
       accessor: "key",
       filter: {
         _type: "string",
@@ -160,13 +161,13 @@ export function ManageCredentialGroup({
       ),
     },
     {
-      Header: "Value",
+      Header: msg`Value`,
       accessor: "value",
     },
   ];
   if (showManageAction) {
     tableColumns.push({
-      Header: "Action",
+      Header: msg`Action`,
       disableSortBy: true,
       accessor: "__action__",
       Cell: MemoizedAction,

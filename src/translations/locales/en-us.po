@@ -103,6 +103,9 @@ msgstr "{0} [{1}]"
 msgid "{0} Preference"
 msgstr "{0} Preference"
 
+msgid "{0}({1})"
+msgstr "{0}({1})"
+
 msgid "{singular} {action} Successfully"
 msgstr "{singular} {action} Successfully"
 
@@ -126,9 +129,6 @@ msgstr "{singular} Settings"
 
 msgid "{singular} Updated Successfully"
 msgstr "{singular} Updated Successfully"
-
-msgid "{title}({currentCount})"
-msgstr "{title}({currentCount})"
 
 msgid "{value} Day"
 msgstr "{value} Day"
@@ -165,6 +165,9 @@ msgstr "{value} Year"
 
 msgid "{value} Years"
 msgstr "{value} Years"
+
+msgid "Access Key ID"
+msgstr "Access Key ID"
 
 msgid "Account Preferences"
 msgstr "Account Preferences"
@@ -216,6 +219,9 @@ msgstr "Cancel"
 
 msgid "Change Language"
 msgstr "Change Language"
+
+msgid "Channel"
+msgstr "Channel"
 
 msgid "Click here to view details"
 msgstr "Click here to view details"
@@ -355,11 +361,17 @@ msgstr "Diction Settings"
 msgid "Display Format"
 msgstr "Display Format"
 
+msgid "Domain"
+msgstr "Domain"
+
 msgid "Done"
 msgstr "Done"
 
 msgid "Download"
 msgstr "Download"
+
+msgid "Duplicate {singular}"
+msgstr "Duplicate {singular}"
 
 msgid "Edit"
 msgstr "Edit"
@@ -448,6 +460,9 @@ msgstr "Form Scripts"
 msgid "Format"
 msgstr "Format"
 
+msgid "From"
+msgstr "From"
+
 msgid "General"
 msgstr "General"
 
@@ -535,6 +550,9 @@ msgstr "Maximum file size to upload in MB"
 msgid "Menu Settings"
 msgstr "Menu Settings"
 
+msgid "Message"
+msgstr "Message"
+
 msgid "Metadata Columns"
 msgstr "Metadata Columns"
 
@@ -583,6 +601,9 @@ msgstr "On Update"
 msgid "Only capital letters and underscores are allowed"
 msgstr "Only capital letters and underscores are allowed"
 
+msgid "Only lowercase letters, numbers and {delimiter} are allowed"
+msgstr "Only lowercase letters, numbers and {delimiter} are allowed"
+
 msgid "Operator"
 msgstr "Operator"
 
@@ -621,6 +642,9 @@ msgstr "Profile"
 
 msgid "Reference Template"
 msgstr "Reference Template"
+
+msgid "Region"
+msgstr "Region"
 
 msgid "Relation Labels"
 msgstr "Relation Labels"
@@ -700,6 +724,9 @@ msgstr "Search"
 msgid "Secret"
 msgstr "Secret"
 
+msgid "Secret Access Key"
+msgstr "Secret Access Key"
+
 msgid "Secrets"
 msgstr "Secrets"
 
@@ -711,6 +738,9 @@ msgstr "Selections Settings"
 
 msgid "Sender Email"
 msgstr "Sender Email"
+
+msgid "Sender Name"
+msgstr "Sender Name"
 
 msgid "Setting Up Account"
 msgstr "Setting Up Account"
@@ -753,6 +783,9 @@ msgstr "Star us on Github"
 
 msgid "Start of year"
 msgstr "Start of year"
+
+msgid "Storage Key"
+msgstr "Storage Key"
 
 msgid "Subject"
 msgstr "Subject"

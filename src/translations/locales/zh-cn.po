@@ -103,6 +103,9 @@ msgstr ""
 msgid "{0} Preference"
 msgstr "{0}偏好"
 
+msgid "{0}({1})"
+msgstr ""
+
 msgid "{singular} {action} Successfully"
 msgstr "{singular}{action}成功"
 
@@ -126,9 +129,6 @@ msgstr "{singular}设置"
 
 msgid "{singular} Updated Successfully"
 msgstr "{singular}更新成功"
-
-msgid "{title}({currentCount})"
-msgstr ""
 
 msgid "{value} Day"
 msgstr ""
@@ -164,6 +164,9 @@ msgid "{value} Year"
 msgstr ""
 
 msgid "{value} Years"
+msgstr ""
+
+msgid "Access Key ID"
 msgstr ""
 
 msgid "Account Preferences"
@@ -216,6 +219,9 @@ msgstr "取消"
 
 msgid "Change Language"
 msgstr "切换语言"
+
+msgid "Channel"
+msgstr ""
 
 msgid "Click here to view details"
 msgstr "查看详情"
@@ -355,11 +361,17 @@ msgstr "字典设置"
 msgid "Display Format"
 msgstr ""
 
+msgid "Domain"
+msgstr ""
+
 msgid "Done"
 msgstr "完成"
 
 msgid "Download"
 msgstr "导出"
+
+msgid "Duplicate {singular}"
+msgstr ""
 
 msgid "Edit"
 msgstr "编辑"
@@ -446,6 +458,9 @@ msgid "Form Scripts"
 msgstr "表单脚本"
 
 msgid "Format"
+msgstr ""
+
+msgid "From"
 msgstr ""
 
 msgid "General"
@@ -535,6 +550,9 @@ msgstr ""
 msgid "Menu Settings"
 msgstr "菜单设置"
 
+msgid "Message"
+msgstr ""
+
 msgid "Metadata Columns"
 msgstr ""
 
@@ -583,6 +601,9 @@ msgstr "更新"
 msgid "Only capital letters and underscores are allowed"
 msgstr ""
 
+msgid "Only lowercase letters, numbers and {delimiter} are allowed"
+msgstr ""
+
 msgid "Operator"
 msgstr ""
 
@@ -621,6 +642,9 @@ msgstr "个人信息"
 
 msgid "Reference Template"
 msgstr "参考模板"
+
+msgid "Region"
+msgstr ""
 
 msgid "Relation Labels"
 msgstr ""
@@ -700,6 +724,9 @@ msgstr ""
 msgid "Secret"
 msgstr "密钥"
 
+msgid "Secret Access Key"
+msgstr ""
+
 msgid "Secrets"
 msgstr "密钥"
 
@@ -710,6 +737,9 @@ msgid "Selections Settings"
 msgstr ""
 
 msgid "Sender Email"
+msgstr ""
+
+msgid "Sender Name"
 msgstr ""
 
 msgid "Setting Up Account"
@@ -752,6 +782,9 @@ msgid "Star us on Github"
 msgstr "谢谢给我们项目Star"
 
 msgid "Start of year"
+msgstr ""
+
+msgid "Storage Key"
 msgstr ""
 
 msgid "Subject"

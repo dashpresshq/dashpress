@@ -17,10 +17,18 @@ describe("/api/integrations/actions/[key]/implementations", () => {
         {
           "configurationSchema": {
             "headers": {
+              "label": {
+                "id": "ZIgY2y",
+                "message": "Headers",
+              },
               "type": "json",
               "validations": [],
             },
             "url": {
+              "label": {
+                "id": "IagCbF",
+                "message": "URL",
+              },
               "type": "text",
               "validations": [
                 {
@@ -35,14 +43,26 @@ describe("/api/integrations/actions/[key]/implementations", () => {
         {
           "configurationSchema": {
             "body": {
+              "label": {
+                "id": "bGQplw",
+                "message": "Body",
+              },
               "type": "json",
               "validations": [],
             },
             "headers": {
+              "label": {
+                "id": "ZIgY2y",
+                "message": "Headers",
+              },
               "type": "json",
               "validations": [],
             },
             "url": {
+              "label": {
+                "id": "IagCbF",
+                "message": "URL",
+              },
               "type": "text",
               "validations": [
                 {
@@ -57,14 +77,26 @@ describe("/api/integrations/actions/[key]/implementations", () => {
         {
           "configurationSchema": {
             "body": {
+              "label": {
+                "id": "bGQplw",
+                "message": "Body",
+              },
               "type": "json",
               "validations": [],
             },
             "headers": {
+              "label": {
+                "id": "ZIgY2y",
+                "message": "Headers",
+              },
               "type": "json",
               "validations": [],
             },
             "url": {
+              "label": {
+                "id": "IagCbF",
+                "message": "URL",
+              },
               "type": "text",
               "validations": [
                 {
@@ -79,14 +111,26 @@ describe("/api/integrations/actions/[key]/implementations", () => {
         {
           "configurationSchema": {
             "body": {
+              "label": {
+                "id": "bGQplw",
+                "message": "Body",
+              },
               "type": "json",
               "validations": [],
             },
             "headers": {
+              "label": {
+                "id": "ZIgY2y",
+                "message": "Headers",
+              },
               "type": "json",
               "validations": [],
             },
             "url": {
+              "label": {
+                "id": "IagCbF",
+                "message": "URL",
+              },
               "type": "text",
               "validations": [
                 {
@@ -101,14 +145,26 @@ describe("/api/integrations/actions/[key]/implementations", () => {
         {
           "configurationSchema": {
             "body": {
+              "label": {
+                "id": "bGQplw",
+                "message": "Body",
+              },
               "type": "json",
               "validations": [],
             },
             "headers": {
+              "label": {
+                "id": "ZIgY2y",
+                "message": "Headers",
+              },
               "type": "json",
               "validations": [],
             },
             "url": {
+              "label": {
+                "id": "IagCbF",
+                "message": "URL",
+              },
               "type": "text",
               "validations": [
                 {
@@ -139,6 +195,10 @@ describe("/api/integrations/actions/[key]/implementations", () => {
         {
           "configurationSchema": {
             "body": {
+              "label": {
+                "id": "bGQplw",
+                "message": "Body",
+              },
               "type": "richtext",
               "validations": [
                 {
@@ -147,6 +207,10 @@ describe("/api/integrations/actions/[key]/implementations", () => {
               ],
             },
             "senderEmail": {
+              "label": {
+                "id": "oWvSIB",
+                "message": "Sender Email",
+              },
               "type": "text",
               "validations": [
                 {
@@ -155,10 +219,18 @@ describe("/api/integrations/actions/[key]/implementations", () => {
               ],
             },
             "senderName": {
+              "label": {
+                "id": "fXHEMx",
+                "message": "Sender Name",
+              },
               "type": "text",
               "validations": [],
             },
             "subject": {
+              "label": {
+                "id": "UJmAAK",
+                "message": "Subject",
+              },
               "type": "text",
               "validations": [
                 {
@@ -167,6 +239,10 @@ describe("/api/integrations/actions/[key]/implementations", () => {
               ],
             },
             "to": {
+              "label": {
+                "id": "/jQctM",
+                "message": "To",
+              },
               "type": "text",
               "validations": [
                 {

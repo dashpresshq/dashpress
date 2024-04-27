@@ -46,6 +46,7 @@ export const MAKE_CRUD_CONFIG = ({
       MANAGE: msg`Manage ${plural}`,
       DELETE: msg`Delete ${singular}`,
       EDIT: msg`Edit ${singular}`,
+      DUPLICATE: msg`Duplicate ${singular}`,
       DETAILS: msg`${singular} Details`,
       SETTINGS: msg`${singular} Settings`,
       NOT_FOUND: CRUD_CONFIG_NOT_FOUND(singular),

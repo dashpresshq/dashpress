@@ -14,6 +14,10 @@ describe("/api/integrations/storage/list", () => {
         {
           "configurationSchema": {
             "accessKeyId": {
+              "label": {
+                "id": "pNW+Rt",
+                "message": "Access Key ID",
+              },
               "type": "text",
               "validations": [
                 {
@@ -22,6 +26,10 @@ describe("/api/integrations/storage/list", () => {
               ],
             },
             "region": {
+              "label": {
+                "id": "uJ+Ve2",
+                "message": "Region",
+              },
               "type": "text",
               "validations": [
                 {
@@ -30,6 +38,10 @@ describe("/api/integrations/storage/list", () => {
               ],
             },
             "secretAccessKey": {
+              "label": {
+                "id": "llJ0OR",
+                "message": "Secret Access Key",
+              },
               "type": "text",
               "validations": [
                 {

@@ -198,5 +198,5 @@ export const SLUG_VALIDATION = (delimiter: "hyphens" | "underscores") => ({
       delimiter === "hyphens" ? "-" : "_"
     ),
   },
-  errorMessage: `Only lowercase letters, numbers and ${delimiter} are allowed`,
+  errorMessage: msg`Only lowercase letters, numbers and ${delimiter} are allowed`,
 });

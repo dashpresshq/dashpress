@@ -1,5 +1,6 @@
 import { IAppliedSchemaFormConfig } from "shared/form-schemas/types";
 import { IActionIntegrationsImplemention } from "shared/types/actions";
+import { msg } from "@lingui/macro";
 import { makeIntegrationRequest } from "../makeIntegrationRequest";
 
 interface IBase {
@@ -13,6 +14,7 @@ interface IAction extends IBase {
 
 const BASE_CONFIGURATION_SCHEMA: IAppliedSchemaFormConfig<IBase> = {
   url: {
+    label: msg`URL`,
     type: "text",
     validations: [
       {
@@ -21,6 +23,7 @@ const BASE_CONFIGURATION_SCHEMA: IAppliedSchemaFormConfig<IBase> = {
     ],
   },
   headers: {
+    label: msg`Headers`,
     type: "json",
     validations: [],
   },
@@ -29,6 +32,7 @@ const BASE_CONFIGURATION_SCHEMA: IAppliedSchemaFormConfig<IBase> = {
 const ACTION_CONFIGURATION_SCHEMA: IAppliedSchemaFormConfig<IAction> = {
   ...BASE_CONFIGURATION_SCHEMA,
   body: {
+    label: msg`Body`,
     type: "json",
     validations: [],
   },

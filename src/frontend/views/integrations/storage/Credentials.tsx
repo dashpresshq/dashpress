@@ -41,6 +41,7 @@ export function StorageCredentialsSettings() {
   }, [storageCredentialsConfiguration.error]);
 
   const storageFormConfig: ISchemaFormConfig<{}> = {
+    label: msg`Storage Key`,
     type: "text",
     selections: storageList.data.map((datum) => ({
       label: datum.title,

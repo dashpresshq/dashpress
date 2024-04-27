@@ -199,11 +199,17 @@ msgstr "Add New {singular}"
 msgid "Add new option"
 msgstr "Add new option"
 
+msgid "API Key"
+msgstr "API Key"
+
 msgid "App"
 msgstr "App"
 
 msgid "Are you sure you want to do this?"
 msgstr "Are you sure you want to do this?"
+
+msgid "Body"
+msgstr "Body"
 
 msgid "Cancel"
 msgstr "Cancel"
@@ -382,6 +388,9 @@ msgstr "Enter your credentials to continue"
 msgid "Entities"
 msgstr "Entities"
 
+msgid "Entity Tab"
+msgstr "Entity Tab"
+
 msgid "Environment Variable"
 msgstr "Environment Variable"
 
@@ -450,6 +459,9 @@ msgstr "Genesis"
 
 msgid "Go Back"
 msgstr "Go Back"
+
+msgid "Headers"
+msgstr "Headers"
 
 msgid "Height"
 msgstr "Height"
@@ -697,6 +709,9 @@ msgstr "Selection"
 msgid "Selections Settings"
 msgstr "Selections Settings"
 
+msgid "Sender Email"
+msgstr "Sender Email"
+
 msgid "Setting Up Account"
 msgstr "Setting Up Account"
 
@@ -739,6 +754,9 @@ msgstr "Star us on Github"
 msgid "Start of year"
 msgstr "Start of year"
 
+msgid "Subject"
+msgstr "Subject"
+
 msgid "SVG"
 msgstr "SVG"
 
@@ -753,9 +771,6 @@ msgstr "System Information"
 
 msgid "System Settings"
 msgstr "System Settings"
-
-msgid "Tab"
-msgstr "Tab"
 
 msgid "Table"
 msgstr "Table"
@@ -793,8 +808,14 @@ msgstr "This entity has no relations"
 msgid "Title"
 msgstr "Title"
 
+msgid "To"
+msgstr "To"
+
 msgid "Toggle Connection URL"
 msgstr "Toggle Connection URL"
+
+msgid "Token"
+msgstr "Token"
 
 msgid "Token Validity Duration In Days"
 msgstr "Token Validity Duration In Days"
@@ -822,6 +843,9 @@ msgstr "Updated At"
 
 msgid "Updating {singular}"
 msgstr "Updating {singular}"
+
+msgid "URL"
+msgstr "URL"
 
 msgid "Use Colors"
 msgstr "Use Colors"

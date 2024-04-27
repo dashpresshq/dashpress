@@ -199,10 +199,16 @@ msgstr ""
 msgid "Add new option"
 msgstr ""
 
+msgid "API Key"
+msgstr ""
+
 msgid "App"
 msgstr ""
 
 msgid "Are you sure you want to do this?"
+msgstr ""
+
+msgid "Body"
 msgstr ""
 
 msgid "Cancel"
@@ -382,6 +388,9 @@ msgstr ""
 msgid "Entities"
 msgstr ""
 
+msgid "Entity Tab"
+msgstr ""
+
 msgid "Environment Variable"
 msgstr ""
 
@@ -449,6 +458,9 @@ msgid "Genesis"
 msgstr ""
 
 msgid "Go Back"
+msgstr ""
+
+msgid "Headers"
 msgstr ""
 
 msgid "Height"
@@ -697,6 +709,9 @@ msgstr ""
 msgid "Selections Settings"
 msgstr ""
 
+msgid "Sender Email"
+msgstr ""
+
 msgid "Setting Up Account"
 msgstr ""
 
@@ -739,6 +754,9 @@ msgstr ""
 msgid "Start of year"
 msgstr ""
 
+msgid "Subject"
+msgstr ""
+
 msgid "SVG"
 msgstr ""
 
@@ -752,9 +770,6 @@ msgid "System Information"
 msgstr ""
 
 msgid "System Settings"
-msgstr ""
-
-msgid "Tab"
 msgstr ""
 
 msgid "Table"
@@ -793,7 +808,13 @@ msgstr ""
 msgid "Title"
 msgstr ""
 
+msgid "To"
+msgstr ""
+
 msgid "Toggle Connection URL"
+msgstr ""
+
+msgid "Token"
 msgstr ""
 
 msgid "Token Validity Duration In Days"
@@ -821,6 +842,9 @@ msgid "Updated At"
 msgstr ""
 
 msgid "Updating {singular}"
+msgstr ""
+
+msgid "URL"
 msgstr ""
 
 msgid "Use Colors"

@@ -197,10 +197,6 @@ export const useTableColumns = (
             cellRender = ellipsis(value as string, 50);
           }
 
-          if (typeof value === "object") {
-            cellRender = JSON.stringify(value);
-          }
-
           if (specialDataTypeRender) {
             cellRender = specialDataTypeRender;
           }

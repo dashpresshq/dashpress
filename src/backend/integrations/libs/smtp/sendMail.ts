@@ -1,5 +1,6 @@
 import { IAppliedSchemaFormConfig } from "shared/form-schemas/types";
 import { Transporter } from "nodemailer";
+import { msg } from "@lingui/macro";
 import { IActionConfig } from "./types";
 
 interface IConfig {
@@ -12,6 +13,7 @@ interface IConfig {
 
 const CONFIG_SCHEMA: IAppliedSchemaFormConfig<IConfig> = {
   to: {
+    label: msg`To`,
     type: "text",
     validations: [
       {
@@ -20,6 +22,7 @@ const CONFIG_SCHEMA: IAppliedSchemaFormConfig<IConfig> = {
     ],
   },
   subject: {
+    label: msg`Subject`,
     type: "text",
     validations: [
       {
@@ -28,6 +31,7 @@ const CONFIG_SCHEMA: IAppliedSchemaFormConfig<IConfig> = {
     ],
   },
   body: {
+    label: msg`Body`,
     type: "richtext",
     validations: [
       {
@@ -36,6 +40,7 @@ const CONFIG_SCHEMA: IAppliedSchemaFormConfig<IConfig> = {
     ],
   },
   senderEmail: {
+    label: msg`Sender Email`,
     type: "text",
     validations: [
       {
@@ -44,6 +49,7 @@ const CONFIG_SCHEMA: IAppliedSchemaFormConfig<IConfig> = {
     ],
   },
   senderName: {
+    label: msg`Sender Name`,
     type: "text",
     validations: [],
   },

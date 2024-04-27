@@ -199,11 +199,17 @@ msgstr "添加新{singular}"
 msgid "Add new option"
 msgstr "添加选项"
 
+msgid "API Key"
+msgstr ""
+
 msgid "App"
 msgstr "APP"
 
 msgid "Are you sure you want to do this?"
 msgstr "你确定你要这么做吗？"
+
+msgid "Body"
+msgstr ""
 
 msgid "Cancel"
 msgstr "取消"
@@ -382,6 +388,9 @@ msgstr "输入您的凭证以继续"
 msgid "Entities"
 msgstr "实体"
 
+msgid "Entity Tab"
+msgstr ""
+
 msgid "Environment Variable"
 msgstr "环境变量"
 
@@ -450,6 +459,9 @@ msgstr ""
 
 msgid "Go Back"
 msgstr "返回"
+
+msgid "Headers"
+msgstr ""
 
 msgid "Height"
 msgstr ""
@@ -697,6 +709,9 @@ msgstr "选择"
 msgid "Selections Settings"
 msgstr ""
 
+msgid "Sender Email"
+msgstr ""
+
 msgid "Setting Up Account"
 msgstr "账户设置"
 
@@ -739,6 +754,9 @@ msgstr "谢谢给我们项目Star"
 msgid "Start of year"
 msgstr ""
 
+msgid "Subject"
+msgstr ""
+
 msgid "SVG"
 msgstr ""
 
@@ -752,9 +770,6 @@ msgid "System Information"
 msgstr "系统信息"
 
 msgid "System Settings"
-msgstr ""
-
-msgid "Tab"
 msgstr ""
 
 msgid "Table"
@@ -793,8 +808,14 @@ msgstr "该实体没有关联"
 msgid "Title"
 msgstr ""
 
+msgid "To"
+msgstr ""
+
 msgid "Toggle Connection URL"
 msgstr "切换连接"
+
+msgid "Token"
+msgstr ""
 
 msgid "Token Validity Duration In Days"
 msgstr ""
@@ -822,6 +843,9 @@ msgstr ""
 
 msgid "Updating {singular}"
 msgstr "更新{singular}"
+
+msgid "URL"
+msgstr ""
 
 msgid "Use Colors"
 msgstr ""

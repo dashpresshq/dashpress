@@ -1,4 +1,5 @@
 import { IAppliedSchemaFormConfig } from "shared/form-schemas/types";
+import { msg } from "@lingui/macro";
 import { makeIntegrationRequest } from "../makeIntegrationRequest";
 import { IActionConfig } from "./types";
 
@@ -10,6 +11,7 @@ interface IConfig {
 
 const CONFIG_SCHEMA: IAppliedSchemaFormConfig<IConfig> = {
   from: {
+    label: msg`From`,
     type: "text",
     validations: [
       {
@@ -18,6 +20,7 @@ const CONFIG_SCHEMA: IAppliedSchemaFormConfig<IConfig> = {
     ],
   },
   to: {
+    label: msg`To`,
     type: "text",
     validations: [
       {
@@ -26,6 +29,7 @@ const CONFIG_SCHEMA: IAppliedSchemaFormConfig<IConfig> = {
     ],
   },
   body: {
+    label: msg`Body`,
     type: "textarea",
     validations: [
       {

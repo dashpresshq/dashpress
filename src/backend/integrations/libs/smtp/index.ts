@@ -1,11 +1,13 @@
 import { IAppliedSchemaFormConfig } from "shared/form-schemas/types";
 import { IActionIntegrationsImplemention } from "shared/types/actions";
 import { createTransport } from "nodemailer";
+import { msg } from "@lingui/macro";
 import { SEND_MAIL } from "./sendMail";
 import { IActionConfig } from "./types";
 
 const CONFIGURATION_SCHEMA: IAppliedSchemaFormConfig<IActionConfig> = {
   host: {
+    label: msg`Host`,
     type: "text",
     validations: [
       {
@@ -14,6 +16,7 @@ const CONFIGURATION_SCHEMA: IAppliedSchemaFormConfig<IActionConfig> = {
     ],
   },
   port: {
+    label: msg`Port`,
     type: "number",
     validations: [
       {
@@ -22,6 +25,7 @@ const CONFIGURATION_SCHEMA: IAppliedSchemaFormConfig<IActionConfig> = {
     ],
   },
   authUser: {
+    label: msg`User`,
     type: "text",
     validations: [
       {
@@ -30,6 +34,7 @@ const CONFIGURATION_SCHEMA: IAppliedSchemaFormConfig<IActionConfig> = {
     ],
   },
   authPassword: {
+    label: msg`Password`,
     type: "text",
     validations: [
       {

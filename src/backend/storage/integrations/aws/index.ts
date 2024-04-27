@@ -1,3 +1,4 @@
+import { msg } from "@lingui/macro";
 import { IStorageIntegrationsImplemention } from "backend/storage/types";
 
 export const AWS_STORAGE_INTEGRATION: IStorageIntegrationsImplemention<{
@@ -8,6 +9,7 @@ export const AWS_STORAGE_INTEGRATION: IStorageIntegrationsImplemention<{
   title: "AWS S3",
   integrationConfigurationSchema: {
     accessKeyId: {
+      label: msg`Access Key ID`,
       type: "text",
       validations: [
         {
@@ -16,6 +18,7 @@ export const AWS_STORAGE_INTEGRATION: IStorageIntegrationsImplemention<{
       ],
     },
     secretAccessKey: {
+      label: msg`Secret Access Key`,
       type: "text",
       validations: [
         {
@@ -24,6 +27,7 @@ export const AWS_STORAGE_INTEGRATION: IStorageIntegrationsImplemention<{
       ],
     },
     region: {
+      label: msg`Region`,
       type: "text",
       validations: [
         {

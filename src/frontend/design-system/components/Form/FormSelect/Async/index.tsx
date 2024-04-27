@@ -3,7 +3,7 @@ import debounce from "lodash/debounce";
 import AsyncSelect from "react-select/async";
 import styled from "styled-components";
 import { useAsync, useSessionStorage } from "react-use";
-import { ISelectData } from "shared/types/options";
+import { ILabelValue, ISelectData } from "shared/types/options";
 import { useApi } from "frontend/lib/data/useApi";
 import { ApiRequest } from "frontend/lib/data/makeRequest";
 import { useLingui } from "@lingui/react";
@@ -139,7 +139,7 @@ export function AsyncFormMultiSelect({
   values = [],
   onChange,
 }: IFormMultiSelect) {
-  const [cosmeticValues, setCosmeticValues] = useSessionStorage<ISelectData[]>(
+  const [cosmeticValues, setCosmeticValues] = useSessionStorage<ILabelValue[]>(
     "cosmetic-multi-select-values",
     values.map((value) => ({ value, label: value }))
   );
@@ -153,9 +153,9 @@ export function AsyncFormMultiSelect({
       isMulti
       value={cosmeticValues}
       onChange={(newValues: unknown) => {
-        setCosmeticValues(newValues as ISelectData[]);
+        setCosmeticValues(newValues as ILabelValue[]);
         onChange(
-          (newValues as ISelectData[]).map(({ value }) => value as string)
+          (newValues as ILabelValue[]).map(({ value }) => value as string)
         );
       }}
       loadOptions={(inputValue) =>

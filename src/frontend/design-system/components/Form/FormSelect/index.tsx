@@ -1,6 +1,6 @@
 import Select from "react-select";
 import styled from "styled-components";
-import { ISelectData } from "shared/types/options";
+import { ILabelValue, ISelectData } from "shared/types/options";
 import { useLingui } from "@lingui/react";
 import {
   generateClassNames,
@@ -31,6 +31,8 @@ export function FormMultiSelect({
   onChange,
   ariaLabel,
 }: IFormMultiSelect) {
+  const { _ } = useLingui();
+
   return (
     <SelectStyled
       classNamePrefix={SharedSelectProps.classNamePrefix}
@@ -44,7 +46,10 @@ export function FormMultiSelect({
         onChange(newValues.map(({ value }: ISelectData) => value));
       }}
       aria-label={ariaLabel}
-      options={selectData}
+      options={selectData.map(({ value, label }) => ({
+        value,
+        label: _(label),
+      }))}
     />
   );
 }
@@ -68,8 +73,8 @@ export const FormSelect = (props: IFormSelect) => {
       value: nullable ? null : "",
       label: defaultLabel || `--- Select ${_(formLabel)} ---`,
     },
-    ...selectData,
-  ] as ISelectData[];
+    ...selectData.map(({ value, label }) => ({ value, label: _(label) })),
+  ];
   return wrapLabelAndError(
     <div data-testid={`react-select__${input.name}`}>
       <SelectStyled
@@ -117,18 +122,17 @@ export function FormNoValueSelect({
   defaultLabel,
   onChange,
 }: IFormNoValueSelect) {
+  const { _ } = useLingui();
   return (
     <SelectStyled
       classNamePrefix={SharedSelectProps.classNamePrefix}
       value={{ value: "", label: defaultLabel || "" }}
-      onChange={({ value, label }: any) => {
+      onChange={({ value, label }: ILabelValue) => {
         onChange(value, label);
       }}
-      options={
-        selectData.filter(
-          ({ value }) => !disabledOptions.includes(value as string)
-        ) as { value: string; label: string }[]
-      }
+      options={selectData
+        .filter(({ value }) => !disabledOptions.includes(value as string))
+        .map(({ value, label }) => ({ value, label: _(label) }))}
     />
   );
 }

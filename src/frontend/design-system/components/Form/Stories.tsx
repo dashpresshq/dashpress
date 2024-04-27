@@ -168,10 +168,10 @@ function DemoForm() {
             {(formProps) => (
               <FormSelectButton
                 selectData={[
-                  { label: "Wood", value: "wood" },
-                  { label: "Bronze", value: "bronze" },
-                  { label: "Silver", value: "silver" },
-                  { label: "Gold", value: "gold" },
+                  { label: fakeMessageDescriptor("Wood"), value: "wood" },
+                  { label: fakeMessageDescriptor("Bronze"), value: "bronze" },
+                  { label: fakeMessageDescriptor("Silver"), value: "silver" },
+                  { label: fakeMessageDescriptor("Gold"), value: "gold" },
                 ]}
                 label={fakeMessageDescriptor("Example Select Button")}
                 {...formProps}
@@ -183,8 +183,8 @@ function DemoForm() {
             {(formProps) => (
               <FormSelect
                 selectData={[
-                  { label: "Foo", value: "foo" },
-                  { label: "Bar", value: "bar" },
+                  { label: fakeMessageDescriptor("Foo"), value: "foo" },
+                  { label: fakeMessageDescriptor("Bar"), value: "bar" },
                 ]}
                 label={fakeMessageDescriptor("Example Select Input")}
                 {...formProps}
@@ -200,8 +200,8 @@ function DemoForm() {
             {(formProps) => (
               <FormSelect
                 selectData={[
-                  { label: "Foo", value: "foo" },
-                  { label: "Bar", value: "bar" },
+                  { label: fakeMessageDescriptor("Foo"), value: "foo" },
+                  { label: fakeMessageDescriptor("Bar"), value: "bar" },
                 ]}
                 label={fakeMessageDescriptor("Disabled Select Input")}
                 {...formProps}
@@ -225,11 +225,11 @@ function DemoForm() {
             {(formProps) => (
               <FormMultiSelect
                 selectData={[
-                  { label: "Foo", value: "foo" },
-                  { label: "Bar", value: "bar" },
-                  { label: "Baz", value: "baz" },
-                  { label: "Noop", value: "noop" },
-                  { label: "Dupe", value: "dupe" },
+                  { label: fakeMessageDescriptor("Foo"), value: "foo" },
+                  { label: fakeMessageDescriptor("Bar"), value: "bar" },
+                  { label: fakeMessageDescriptor("Baz"), value: "baz" },
+                  { label: fakeMessageDescriptor("Noop"), value: "noop" },
+                  { label: fakeMessageDescriptor("Dupe"), value: "dupe" },
                 ]}
                 values={formProps.input.value || ["foo", "bar"]}
                 onChange={formProps.input.onChange}

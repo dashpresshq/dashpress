@@ -43,7 +43,7 @@ export function CredentialsSetupForm({
                   selectData={typescriptSafeObjectDotKeys(
                     DATA_SOURCES_CONFIG
                   ).map((dataSourceType) => ({
-                    label: upperCaseFirstLetter(dataSourceType),
+                    label: msg`${upperCaseFirstLetter(dataSourceType)}`,
                     value: dataSourceType,
                   }))}
                   rightActions={

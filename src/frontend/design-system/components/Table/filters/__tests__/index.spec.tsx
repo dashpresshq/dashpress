@@ -8,6 +8,7 @@ import {
 } from "shared/types/data";
 import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
+import { fakeMessageDescriptor } from "translations/fake";
 import { TableFilter } from "..";
 
 const setFilterValueJestFn = jest.fn();
@@ -303,11 +304,11 @@ describe("Table Filters", () => {
       _type: "boolean",
       bag: [
         {
-          label: "True Option",
+          label: fakeMessageDescriptor("True Option"),
           value: true,
         },
         {
-          label: "False Option",
+          label: fakeMessageDescriptor("False Option"),
           value: false,
         },
       ],
@@ -415,15 +416,15 @@ describe("Table Filters", () => {
       _type: "status",
       bag: [
         {
-          label: "Option 1 Label",
+          label: fakeMessageDescriptor("Option 1 Label"),
           value: "option-1",
         },
         {
-          label: "Option 2 Label",
+          label: fakeMessageDescriptor("Option 2 Label"),
           value: "option-2",
         },
         {
-          label: "Option 3 Label",
+          label: fakeMessageDescriptor("Option 3 Label"),
           value: "option-3",
         },
       ],

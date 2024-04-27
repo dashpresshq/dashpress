@@ -32,6 +32,7 @@ import {
   typescriptSafeObjectDotEntries,
   typescriptSafeObjectDotKeys,
 } from "shared/lib/objects";
+import { i18nNoop } from "shared/lib/noop";
 import { DASHBOARD_WIDGETS_CRUD_CONFIG } from "../../constants";
 import { DashboardWidgetPresentation } from "../Presentation";
 import { WIDGET_CONFIG } from "../constants";
@@ -166,7 +167,7 @@ export function DashboardWidgetForm({
                           disabledOptions={[]}
                           selectData={(tableViews.data || []).map(
                             ({ id, title }) => ({
-                              label: title,
+                              label: msg`${i18nNoop(title)}`,
                               value: id,
                             })
                           )}

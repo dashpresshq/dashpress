@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { sluggify } from "shared/lib/strings";
 import { ISelectData } from "shared/types/options";
+import { useLingui } from "@lingui/react";
 import { OutlineButton } from "../../Button/Button";
 import { IBaseFormSelect } from "../FormSelect/types";
 import { generateFormArias, wrapLabelAndError } from "../_wrapForm";
@@ -44,6 +45,7 @@ function BaseFormSelectButton({
   sm,
   disabled,
 }: IProps) {
+  const { _ } = useLingui();
   return (
     <Root>
       {options.map(({ value, label }, index) => {
@@ -71,7 +73,7 @@ function BaseFormSelectButton({
               readOnly
               checked={isChecked}
             />
-            {label}
+            {_(label)}
           </OutlineButton>
         );
       })}

@@ -2,6 +2,7 @@ import styled, { css } from "styled-components";
 
 import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
 import { ISelectData } from "shared/types/options";
+import { useLingui } from "@lingui/react";
 import { Input } from "../Styles";
 
 interface ISimpleSelect {
@@ -41,6 +42,8 @@ export function SimpleSelect({
   width,
   ariaLabel,
 }: ISimpleSelect) {
+  const { _ } = useLingui();
+
   return (
     <SimpleSelectStyled
       as="select"
@@ -55,7 +58,7 @@ export function SimpleSelect({
     >
       {options.map(({ value: value$1, label }) => (
         <option key={`${value$1}`} value={`${value$1}`}>
-          {label}
+          {_(label)}
         </option>
       ))}
     </SimpleSelectStyled>

@@ -16,7 +16,7 @@ export function IconInputField({ value }: { value: string }) {
             required
             selectData={SystemIconsList.map((icon) => ({
               value: icon,
-              label: userFriendlyCase(icon),
+              label: msg`${userFriendlyCase(icon)}`,
             }))}
             meta={meta}
             input={input}

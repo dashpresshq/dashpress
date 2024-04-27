@@ -67,8 +67,16 @@ export const TABLE_COLUMNS: ITableColumn[] = [
     filter: {
       _type: "boolean",
       bag: [
-        { color: "#00ff00", label: "Yes", value: "true" },
-        { color: "#ff0000", label: "No", value: "false" },
+        {
+          color: "#00ff00",
+          label: fakeMessageDescriptor("Yes"),
+          value: "true",
+        },
+        {
+          color: "#ff0000",
+          label: fakeMessageDescriptor("No"),
+          value: "false",
+        },
       ],
     },
   },
@@ -79,10 +87,26 @@ export const TABLE_COLUMNS: ITableColumn[] = [
     filter: {
       _type: "status",
       bag: [
-        { color: "#00ff00", label: "Admin", value: "admin" },
-        { color: "#fff000", label: "Editor", value: "editor" },
-        { color: "#fff000", label: "User", value: "user" },
-        { color: "#ff00f0", label: "Developer", value: "developer" },
+        {
+          color: "#00ff00",
+          label: fakeMessageDescriptor("Admin"),
+          value: "admin",
+        },
+        {
+          color: "#fff000",
+          label: fakeMessageDescriptor("Editor"),
+          value: "editor",
+        },
+        {
+          color: "#fff000",
+          label: fakeMessageDescriptor("User"),
+          value: "user",
+        },
+        {
+          color: "#ff00f0",
+          label: fakeMessageDescriptor("Developer"),
+          value: "developer",
+        },
       ],
     },
   },

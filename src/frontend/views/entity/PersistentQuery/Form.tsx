@@ -20,12 +20,18 @@ import { Card, CardBody } from "frontend/design-system/components/Card";
 import { Fragment } from "react";
 import { msg } from "@lingui/macro";
 import { typescriptSafeObjectDotEntries } from "shared/lib/objects";
-import { FILTER_OPERATOR_CONFIG } from "./constants";
+import { FILTER_OPERATOR_CONFIG } from "frontend/design-system/components/Table/filters/constants";
 
-const OPERATOR_SELECTORS = ["and", "or"].map((option) => ({
-  value: `${option}`,
-  label: `${option.toLocaleUpperCase()}`,
-}));
+const OPERATOR_SELECTORS = [
+  {
+    value: "and",
+    label: msg`AND`,
+  },
+  {
+    value: "or",
+    label: msg`OR`,
+  },
+];
 
 const filterOperatorSelections = typescriptSafeObjectDotEntries(
   FILTER_OPERATOR_CONFIG
@@ -59,7 +65,7 @@ function FilterRow({
                 required
                 selectData={columns.map((column) => ({
                   value: column.accessor,
-                  label: column.Header as string,
+                  label: column.Header,
                 }))}
                 meta={meta}
                 input={input}

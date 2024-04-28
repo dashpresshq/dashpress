@@ -2,6 +2,7 @@ import { SchemaForm } from "frontend/components/SchemaForm";
 import { Spacer } from "frontend/design-system/primitives/Spacer";
 import { Typo } from "frontend/design-system/primitives/Typo";
 import { msg } from "@lingui/macro";
+import { useLingui } from "@lingui/react";
 import { usePasswordStore } from "./password.store";
 
 export function PasswordMessage() {
@@ -20,13 +21,15 @@ export function PasswordToReveal({
   label: string;
   isLoading: boolean;
 }) {
+  const { _ } = useLingui();
   const passwordStore = usePasswordStore();
 
   return (
     <>
       <Typo.SM $textStyle="italic">
-        For security reasons, Please input your account password to be able to
-        manage {label}
+        {_(
+          msg`For security reasons, Please input your account password to be able to manage ${label}`
+        )}
       </Typo.SM>
       <Spacer />
       <SchemaForm

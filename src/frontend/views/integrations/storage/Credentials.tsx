@@ -10,6 +10,7 @@ import { ISchemaFormConfig } from "shared/form-schemas/types";
 import { IStorageIntegration } from "shared/types/actions";
 import { msg } from "@lingui/macro";
 import { i18nNoop } from "translations/fake";
+import { useLingui } from "@lingui/react";
 import { STORAGE_INTEGRATIONS_CRUD_CONFIG } from "./constants";
 import {
   useActivateStorageMutation,
@@ -30,6 +31,8 @@ export function StorageCredentialsSettings() {
 
   const currentStorageDetails: IStorageIntegration | undefined =
     storageList.data.find((datum) => datum.key === currentStorage);
+
+  const { _ } = useLingui();
 
   useEffect(() => {
     setCurrentStorage(activeStorageIntegration.data.data);
@@ -74,7 +77,9 @@ export function StorageCredentialsSettings() {
     >
       {storageCredentialsConfiguration.data === undefined ? (
         <PasswordToReveal
-          label={`${STORAGE_INTEGRATIONS_CRUD_CONFIG.TEXT_LANG.TITLE} Configuration`}
+          label={`${_(
+            STORAGE_INTEGRATIONS_CRUD_CONFIG.TEXT_LANG.TITLE
+          )} Configuration`}
           isLoading={storageCredentialsConfiguration.isLoading}
         />
       ) : (

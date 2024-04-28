@@ -2,7 +2,7 @@ import toast, { Toast } from "react-hot-toast";
 import { X } from "react-feather";
 import { MessageDescriptor } from "@lingui/core";
 import { useLingui } from "@lingui/react";
-import { msg } from "@lingui/macro";
+import { i18nNoop } from "translations/fake";
 import { getBestErrorMessage } from "./utils";
 
 const COLORS = {
@@ -25,6 +25,13 @@ function isMessageDescriptor<T>(
 type ToastMessageWithAction = {
   message: MessageDescriptor;
   action: { label: MessageDescriptor; action: () => void };
+};
+
+const getMessageDescriptorId = (message: MessageDescriptor) => {
+  if (!message) {
+    return "_default_";
+  }
+  return `${message.message}__${JSON.stringify(message.values)}`;
 };
 
 function ToastMessage({
@@ -103,7 +110,7 @@ export const ToastService = {
       toast.success((t) => <ToastMessage message={message} toastT={t} />, {
         style: toastStyle("success"),
         duration: 7000,
-        id: message.id,
+        id: getMessageDescriptorId(message),
       });
       return;
     }
@@ -118,7 +125,7 @@ export const ToastService = {
       {
         style: toastStyle("success"),
         duration: 7000,
-        id: message.message.id,
+        id: getMessageDescriptorId(message.message),
       }
     );
   },
@@ -126,7 +133,7 @@ export const ToastService = {
   error: (message: unknown) => {
     const errorMessage = getBestErrorMessage(message);
     toast.error(
-      (t) => <ToastMessage message={msg`${errorMessage}`} toastT={t} />,
+      (t) => <ToastMessage message={i18nNoop(errorMessage)} toastT={t} />,
       {
         style: toastStyle("danger"),
         duration: 7000,

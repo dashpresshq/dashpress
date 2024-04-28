@@ -1,18 +1,20 @@
 import { useNavigationStack } from "frontend/lib/routing/useNavigationStack";
 import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
-import { USER_PERMISSIONS } from "shared/constants/user";
+import { UserPermissions } from "shared/constants/user";
 import { ContentLayout } from "frontend/design-system/components/Section/SectionDivider";
 import { SectionBox } from "frontend/design-system/components/Section/SectionBox";
 import { AppLayout } from "frontend/_layouts/app";
 import { SchemaForm } from "frontend/components/SchemaForm";
 import { ICreateUserForm } from "shared/form-schemas/users";
 import { IAppliedSchemaFormConfig } from "shared/form-schemas/types";
+import { msg } from "@lingui/macro";
 import { ADMIN_USERS_CRUD_CONFIG, useCreateUserMutation } from "../users.store";
 
 export const CREATE_USER_FORM_SCHEMA: IAppliedSchemaFormConfig<ICreateUserForm> =
   {
     username: {
       type: "text",
+      label: msg`Username`,
       validations: [
         {
           validationType: "required",
@@ -24,6 +26,7 @@ export const CREATE_USER_FORM_SCHEMA: IAppliedSchemaFormConfig<ICreateUserForm> 
     },
     name: {
       type: "text",
+      label: msg`Name`,
       validations: [
         {
           validationType: "required",
@@ -31,6 +34,7 @@ export const CREATE_USER_FORM_SCHEMA: IAppliedSchemaFormConfig<ICreateUserForm> 
       ],
     },
     password: {
+      label: msg`Password`,
       type: "password",
       validations: [
         {
@@ -39,6 +43,7 @@ export const CREATE_USER_FORM_SCHEMA: IAppliedSchemaFormConfig<ICreateUserForm> 
       ],
     },
     role: {
+      label: msg`Role`,
       type: "selection",
       apiSelections: {
         listUrl: "/api/roles",
@@ -58,7 +63,7 @@ export function UserCreate() {
   useSetPageDetails({
     pageTitle: ADMIN_USERS_CRUD_CONFIG.TEXT_LANG.CREATE,
     viewKey: `create-users`,
-    permission: USER_PERMISSIONS.CAN_MANAGE_USERS,
+    permission: UserPermissions.CAN_MANAGE_USERS,
   });
 
   return (

@@ -1,4 +1,4 @@
-import { USER_PERMISSIONS } from "shared/constants/user";
+import { UserPermissions } from "shared/constants/user";
 import { requestHandler } from "backend/lib/request";
 import { formActionsApiService } from "backend/form-actions/form-actions.service";
 
@@ -20,7 +20,7 @@ export default requestHandler(
   [
     {
       _type: "canUser",
-      body: USER_PERMISSIONS.CAN_CONFIGURE_APP,
+      body: UserPermissions.CAN_CONFIGURE_APP,
     },
   ]
 );

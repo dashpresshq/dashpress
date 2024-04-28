@@ -3,6 +3,7 @@ import { render, screen } from "@testing-library/react";
 import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 import userEvent from "@testing-library/user-event";
 import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
+import { fakeMessageDescriptor } from "translations/fake";
 import { SchemaForm } from ".";
 
 type IAccount = {
@@ -14,13 +15,12 @@ const useRouter = jest.spyOn(require("next/router"), "useRouter");
 
 useRouter.mockImplementation(USE_ROUTER_PARAMS({}));
 
-const buttonText = (isSubmitting: boolean) => ({
-  id: "test",
-  message: isSubmitting ? "Submitting Form" : "Submit Form",
-});
+const buttonText = (isSubmitting: boolean) =>
+  fakeMessageDescriptor(isSubmitting ? "Submitting Form" : "Submit Form");
 
 const BASE_FIELDS = {
   name: {
+    label: fakeMessageDescriptor("Name"),
     type: "text" as const,
     validations: [
       {
@@ -29,6 +29,7 @@ const BASE_FIELDS = {
     ],
   },
   email: {
+    label: fakeMessageDescriptor("Email"),
     type: "email" as const,
     validations: [
       {
@@ -409,7 +410,7 @@ describe("<SchemaForm />", () => {
           fields={{
             name: {
               type: "text",
-              label: "Custom Name Label",
+              label: fakeMessageDescriptor("Custom Name Label"),
               validations: [],
             },
           }}
@@ -439,7 +440,7 @@ describe("<SchemaForm />", () => {
             ...BASE_FIELDS,
             hello: {
               type: "text",
-              label: "Custom Name Label",
+              label: fakeMessageDescriptor("Custom Name Label"),
               validations: [],
             },
           }}
@@ -460,6 +461,7 @@ describe("<SchemaForm />", () => {
           systemIcon="Save"
           fields={{
             name: {
+              label: fakeMessageDescriptor("Name"),
               type: "text",
               validations: [],
             },

@@ -1,3 +1,5 @@
+import { MessageDescriptor } from "@lingui/core";
+
 export type ValidationsBoundToType =
   | "isEmail"
   | "isUrl"
@@ -31,7 +33,7 @@ export type ValidationTypes =
 
 export interface IFieldValidationItem {
   validationType: ValidationTypes;
-  errorMessage?: string;
+  errorMessage?: MessageDescriptor;
   fromSchema?: true;
   fromType?: true;
   constraint?: Record<string, string | number | string[]>;

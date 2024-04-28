@@ -1,5 +1,5 @@
 import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
-import { USER_PERMISSIONS } from "shared/constants/user";
+import { UserPermissions } from "shared/constants/user";
 import { MAKE_APP_CONFIGURATION_CRUD_CONFIG } from "frontend/hooks/configuration/configuration.constant";
 import {
   useEntityConfiguration,
@@ -14,12 +14,20 @@ import { Spacer } from "frontend/design-system/primitives/Spacer";
 import { useDocumentationActionButton } from "frontend/docs/constants";
 import { msg } from "@lingui/macro";
 import { typescriptSafeObjectDotEntries } from "shared/lib/objects";
+import { MessageDescriptor } from "@lingui/core";
+import { ReactElement } from "react";
 import { BaseEntitySettingsLayout } from "../_Base";
 import { ENTITY_CONFIGURATION_VIEW } from "../constants";
 import { ScriptForm } from "./ScriptForm";
 import { IEntityFormExtension } from "./types";
 
-function useEntityFormView(entity: string) {
+function useEntityFormView(entity: string): Record<
+  string,
+  {
+    label: MessageDescriptor;
+    Cmp: ReactElement;
+  }
+> {
   const entityFormExtensionSettings = useEntityConfiguration(
     "entity_form_extension",
     entity
@@ -41,15 +49,17 @@ function useEntityFormView(entity: string) {
     };
 
   return {
-    "Fields State": (
-      <ScriptForm
-        value={entityFormExtensionSettings.data?.fieldsState}
-        isLoading={isLoading}
-        onSubmit={onScriptSubmit("fieldsState")}
-        field="fieldsState"
-        error={error}
-        configurationKey="entity_form_extension"
-        placeholder={`return {
+    "fields-state": {
+      label: msg`Fields State`,
+      Cmp: (
+        <ScriptForm
+          value={entityFormExtensionSettings.data?.fieldsState}
+          isLoading={isLoading}
+          onSubmit={onScriptSubmit("fieldsState")}
+          field="fieldsState"
+          error={error}
+          configurationKey="entity_form_extension"
+          placeholder={`return {
   canRegister: {
     disabled: $.formValues.age < 18
   },
@@ -62,17 +72,20 @@ function useEntityFormView(entity: string) {
   },
 }
         `}
-      />
-    ),
-    "Before Submit": (
-      <ScriptForm
-        value={entityFormExtensionSettings.data?.beforeSubmit}
-        isLoading={isLoading}
-        field="beforeSubmit"
-        onSubmit={onScriptSubmit("beforeSubmit")}
-        error={error}
-        configurationKey="entity_form_extension"
-        placeholder={`if($.formValues.planet != "Earth") {
+        />
+      ),
+    },
+    "before-submit": {
+      label: msg`Before Submit`,
+      Cmp: (
+        <ScriptForm
+          value={entityFormExtensionSettings.data?.beforeSubmit}
+          isLoading={isLoading}
+          field="beforeSubmit"
+          onSubmit={onScriptSubmit("beforeSubmit")}
+          error={error}
+          configurationKey="entity_form_extension"
+          placeholder={`if($.formValues.planet != "Earth") {
   return "Only Aliens can submit this form"
 }
 
@@ -83,24 +96,28 @@ return {
   createdAt: new Date(),
 }
       `}
-      />
-    ),
-    "Initial Values": (
-      <ScriptForm
-        value={entityFormExtensionSettings.data?.initialValues}
-        isLoading={isLoading}
-        field="initialValues"
-        configurationKey="entity_form_extension"
-        onSubmit={onScriptSubmit("initialValues")}
-        error={error}
-        placeholder={`return {
+        />
+      ),
+    },
+    "initial-values": {
+      label: msg`Initial Values`,
+      Cmp: (
+        <ScriptForm
+          value={entityFormExtensionSettings.data?.initialValues}
+          isLoading={isLoading}
+          field="initialValues"
+          configurationKey="entity_form_extension"
+          onSubmit={onScriptSubmit("initialValues")}
+          error={error}
+          placeholder={`return {
   price: 1000,
   status: "new",
   country: "US",
   isApproved: true
 }`}
-      />
-    ),
+        />
+      ),
+    },
   };
 }
 
@@ -118,7 +135,7 @@ export function EntityFormExtensionSettings() {
   useSetPageDetails({
     pageTitle: CRUD_CONFIG.TEXT_LANG.TITLE,
     viewKey: ENTITY_CONFIGURATION_VIEW,
-    permission: USER_PERMISSIONS.CAN_CONFIGURE_APP,
+    permission: UserPermissions.CAN_CONFIGURE_APP,
   });
   return (
     <BaseEntitySettingsLayout>
@@ -128,9 +145,9 @@ export function EntityFormExtensionSettings() {
       >
         <Tabs
           contents={typescriptSafeObjectDotEntries(entityFormView).map(
-            ([key, value]) => ({
+            ([key, { Cmp, label }]) => ({
               id: key,
-              label: msg`${key}`,
+              label,
               content: (
                 <>
                   <Typo.SM $textStyle="italic">
@@ -138,7 +155,7 @@ export function EntityFormExtensionSettings() {
                     corner for more info on how this works
                   </Typo.SM>
                   <Spacer />
-                  {value}
+                  {Cmp}
                 </>
               ),
             })

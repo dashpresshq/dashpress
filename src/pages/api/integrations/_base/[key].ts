@@ -1,9 +1,10 @@
-import { USER_PERMISSIONS } from "shared/constants/user";
+import { UserPermissions } from "shared/constants/user";
 import { requestHandler } from "backend/lib/request";
 import { integrationsConfigurationApiController } from "backend/integrations-configurations/integrations-configurations.controller";
 import { IAppliedSchemaFormConfig } from "shared/form-schemas/types";
 import { IntegrationsConfigurationGroup } from "shared/types/integrations";
 import { ValidationKeys } from "backend/lib/request/validations/types";
+import { msg } from "@lingui/macro";
 
 const REQUEST_KEY_FIELD = "key";
 
@@ -14,6 +15,7 @@ type IUpdateIntegrationValueForm = {
 export const UPSERT_INTEGRATION_VALUE_FORM_SCHEMA: IAppliedSchemaFormConfig<IUpdateIntegrationValueForm> =
   {
     value: {
+      label: msg`Value`,
       type: "text",
       validations: [
         {
@@ -29,8 +31,8 @@ const checks = (group: IntegrationsConfigurationGroup): ValidationKeys[] => {
       _type: "canUser",
       body:
         group === IntegrationsConfigurationGroup.Credentials
-          ? USER_PERMISSIONS.CAN_MANAGE_APP_CREDENTIALS
-          : USER_PERMISSIONS.CAN_CONFIGURE_APP,
+          ? UserPermissions.CAN_MANAGE_APP_CREDENTIALS
+          : UserPermissions.CAN_CONFIGURE_APP,
     },
   ];
 

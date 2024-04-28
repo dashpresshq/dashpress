@@ -37,18 +37,18 @@ export function Deactivate({ integrationDetail, activationId }: IProps) {
         fields={{
           confirm: {
             type: "text",
-            label: `Input ${deactivationKey} to continue`,
+            label: msg`Input ${deactivationKey} to continue`,
             validations: [
               {
                 validationType: "regex",
                 constraint: {
                   pattern: `${deactivationKey}$`,
                 },
-                errorMessage: "Incorrect value",
+                errorMessage: msg`Incorrect value`,
               },
               {
                 validationType: "required",
-                errorMessage: "Required",
+                errorMessage: msg`Required`,
               },
             ],
           },

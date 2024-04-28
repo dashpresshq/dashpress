@@ -15,7 +15,7 @@ async function loadCatalog(locale: string) {
   return messages;
 }
 
-export async function getStaticProps(
+export async function getServerSideProps(
   ctx: GetStaticPropsContext
 ): Promise<GetStaticPropsResult<any>> {
   return {
@@ -84,5 +84,5 @@ export function getRTL(locale: string): {
     right: language.rtl ? "left" : "right",
   };
 }
-
+// rtl for arabic
 // TODO all useDocumentationActionButton to use source settings label

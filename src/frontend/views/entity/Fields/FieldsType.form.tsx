@@ -24,8 +24,8 @@ const CRUD_CONFIG = MAKE_APP_CONFIGURATION_CRUD_CONFIG("entity_columns_types");
 const FIELD_TYPES_CONFIG_MAP_AS_SELECTION = typescriptSafeObjectDotEntries(
   FIELD_TYPES_CONFIG_MAP
 )
-  .map(([key, { typeIsNotChangeAble }]) => ({
-    label: key,
+  .map(([key, { typeIsNotChangeAble, label }]) => ({
+    label,
     value: key,
     order: typeIsNotChangeAble ? 1 : 2,
   }))
@@ -120,7 +120,7 @@ export function FieldsTypeForm({
                   }
                   return (
                     <FormSelect
-                      label={`${getEntityFieldLabels(
+                      label={msg`${getEntityFieldLabels(
                         name
                       )} [${values.validations[name]
                         .map(({ validationType }) => validationType)

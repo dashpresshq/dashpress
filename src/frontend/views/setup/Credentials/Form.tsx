@@ -39,11 +39,11 @@ export function CredentialsSetupForm({
             >
               {({ input, meta }) => (
                 <FormSelect
-                  label="Database Type"
+                  label={msg`Database Type`}
                   selectData={typescriptSafeObjectDotKeys(
                     DATA_SOURCES_CONFIG
                   ).map((dataSourceType) => ({
-                    label: upperCaseFirstLetter(dataSourceType),
+                    label: msg`${upperCaseFirstLetter(dataSourceType)}`,
                     value: dataSourceType,
                   }))}
                   rightActions={
@@ -80,7 +80,11 @@ export function CredentialsSetupForm({
                 validateFields={[]}
               >
                 {({ input, meta }) => (
-                  <FormInput label="Connection URL" meta={meta} input={input} />
+                  <FormInput
+                    label={msg`Connection URL`}
+                    meta={meta}
+                    input={input}
+                  />
                 )}
               </Field>
             ) : (
@@ -88,14 +92,14 @@ export function CredentialsSetupForm({
                 {dataSourceConfig.fields.includes("host") && (
                   <Field name="host" validate={required} validateFields={[]}>
                     {({ input, meta }) => (
-                      <FormInput label="Host" meta={meta} input={input} />
+                      <FormInput label={msg`Host`} meta={meta} input={input} />
                     )}
                   </Field>
                 )}
                 {dataSourceConfig.fields.includes("user") && (
                   <Field name="user" validate={required} validateFields={[]}>
                     {({ input, meta }) => (
-                      <FormInput label="User" meta={meta} input={input} />
+                      <FormInput label={msg`User`} meta={meta} input={input} />
                     )}
                   </Field>
                 )}
@@ -104,7 +108,7 @@ export function CredentialsSetupForm({
                   <Field name="password" validateFields={[]}>
                     {({ input, meta }) => (
                       <FormInput
-                        label="Password"
+                        label={msg`Password`}
                         type="password"
                         meta={meta}
                         input={input}
@@ -119,14 +123,22 @@ export function CredentialsSetupForm({
                     validateFields={[]}
                   >
                     {({ input, meta }) => (
-                      <FormInput label="Database" meta={meta} input={input} />
+                      <FormInput
+                        label={msg`Database`}
+                        meta={meta}
+                        input={input}
+                      />
                     )}
                   </Field>
                 )}
                 {dataSourceConfig.fields.includes("port") && (
                   <Field name="port" validate={required} validateFields={[]}>
                     {({ input, meta }) => (
-                      <FormNumberInput label="Port" meta={meta} input={input} />
+                      <FormNumberInput
+                        label={msg`Port`}
+                        meta={meta}
+                        input={input}
+                      />
                     )}
                   </Field>
                 )}
@@ -134,7 +146,11 @@ export function CredentialsSetupForm({
                 {dataSourceConfig.fields.includes("ssl") && (
                   <Field name="ssl" validateFields={[]} type="checkbox">
                     {({ input, meta }) => (
-                      <FormCheckBox label="Use SSL" meta={meta} input={input} />
+                      <FormCheckBox
+                        label={msg`Use SSL`}
+                        meta={meta}
+                        input={input}
+                      />
                     )}
                   </Field>
                 )}
@@ -142,7 +158,11 @@ export function CredentialsSetupForm({
                 {dataSourceConfig.fields.includes("filename") && (
                   <Field name="filename" validateFields={[]}>
                     {({ input, meta }) => (
-                      <FormInput label="File Name" meta={meta} input={input} />
+                      <FormInput
+                        label={msg`File Name`}
+                        meta={meta}
+                        input={input}
+                      />
                     )}
                   </Field>
                 )}

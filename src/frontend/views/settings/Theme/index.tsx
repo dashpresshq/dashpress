@@ -4,7 +4,7 @@ import {
   FormSkeletonSchema,
 } from "frontend/design-system/components/Skeleton/Form";
 import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
-import { USER_PERMISSIONS } from "shared/constants/user";
+import { UserPermissions } from "shared/constants/user";
 import {
   useAppConfiguration,
   useUpsertConfigurationMutation,
@@ -20,6 +20,7 @@ import { MAKE_APP_CONFIGURATION_CRUD_CONFIG } from "frontend/hooks/configuration
 import { ColorSchemes } from "shared/types/ui";
 import { AppConfigurationValueType } from "shared/configurations/constants";
 import { UPDATE_USER_PREFERENCES_FORM_SCHEMA } from "frontend/views/account/Preferences/constants";
+import { msg } from "@lingui/macro";
 import { BaseSettingsLayout } from "../_Base";
 import { SETTINGS_VIEW_KEY } from "../constants";
 
@@ -42,7 +43,7 @@ export function ThemeSettings() {
   useSetPageDetails({
     pageTitle: THEME_SETTINGS_CRUD_CONFIG.TEXT_LANG.TITLE,
     viewKey: SETTINGS_VIEW_KEY,
-    permission: USER_PERMISSIONS.CAN_CONFIGURE_APP,
+    permission: UserPermissions.CAN_CONFIGURE_APP,
   });
 
   return (
@@ -68,7 +69,7 @@ export function ThemeSettings() {
             buttonText={CRUD_CONFIG.FORM_LANG.UPSERT}
             fields={{
               primary: {
-                label: "Light Color Scheme",
+                label: msg`Light Color Scheme`,
                 type: "color",
                 validations: [
                   {
@@ -80,7 +81,7 @@ export function ThemeSettings() {
                 }),
               },
               primaryDark: {
-                label: "Dark Color Scheme",
+                label: msg`Dark Color Scheme`,
                 type: "color",
                 validations: [
                   {

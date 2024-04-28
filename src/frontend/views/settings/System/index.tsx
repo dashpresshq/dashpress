@@ -4,7 +4,7 @@ import {
   FormSkeletonSchema,
 } from "frontend/design-system/components/Skeleton/Form";
 import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
-import { USER_PERMISSIONS } from "shared/constants/user";
+import { UserPermissions } from "shared/constants/user";
 import {
   useAppConfiguration,
   useUpsertConfigurationMutation,
@@ -15,6 +15,7 @@ import { SystemSettingsDocumentation } from "frontend/docs/system-settings";
 import { SchemaForm } from "frontend/components/SchemaForm";
 import { IBaseSystemSettings } from "shared/configurations/system";
 import { useDocumentationActionButton } from "frontend/docs/constants";
+import { msg } from "@lingui/macro";
 import { BaseSettingsLayout } from "../_Base";
 import { SETTINGS_VIEW_KEY } from "../constants";
 
@@ -33,7 +34,7 @@ export function SystemSettings() {
   useSetPageDetails({
     pageTitle: CRUD_CONFIG.TEXT_LANG.TITLE,
     viewKey: SETTINGS_VIEW_KEY,
-    permission: USER_PERMISSIONS.CAN_CONFIGURE_APP,
+    permission: UserPermissions.CAN_CONFIGURE_APP,
   });
 
   return (
@@ -54,6 +55,7 @@ export function SystemSettings() {
             buttonText={CRUD_CONFIG.FORM_LANG.UPSERT}
             fields={{
               tokenValidityDurationInDays: {
+                label: msg`Token Validity Duration In Days`,
                 type: "number",
                 validations: [
                   {

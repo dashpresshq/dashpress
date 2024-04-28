@@ -10,6 +10,7 @@ import {
 } from "frontend/design-system/components/Skeleton/Form";
 import { MAKE_APP_CONFIGURATION_CRUD_CONFIG } from "frontend/hooks/configuration/configuration.constant";
 import { AppConfigurationValueType } from "shared/configurations/constants";
+import { msg } from "@lingui/macro";
 
 export function GeneralStorageSettings() {
   const fileUploadSettings = useAppConfiguration("file_upload_settings");
@@ -37,32 +38,34 @@ export function GeneralStorageSettings() {
         initialValues={fileUploadSettings.data}
         fields={{
           filePathFormat: {
+            label: msg`File Path Format`,
             type: "text",
             validations: [
               {
                 validationType: "required",
-                errorMessage: "Required",
+                errorMessage: msg`Required`,
               },
             ],
           },
 
           fileNameFormat: {
+            label: msg`File Name Format`,
             type: "text",
             validations: [
               {
                 validationType: "required",
-                errorMessage: "Required",
+                errorMessage: msg`Required`,
               },
             ],
           },
 
           defaultMaxFileSizeInMB: {
             type: "number",
-            label: "Maximum file size to upload in MB",
+            label: msg`Maximum file size to upload in MB`,
             validations: [
               {
                 validationType: "required",
-                errorMessage: "Required",
+                errorMessage: msg`Required`,
               },
             ],
           },

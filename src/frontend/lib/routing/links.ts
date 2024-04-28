@@ -1,5 +1,3 @@
-import { queryObjectToQueryString } from "./queryObjectToQueryString";
-
 export const NAVIGATION_LINKS = {
   DASHBOARD: {
     HOME: "/",
@@ -67,10 +65,8 @@ export const NAVIGATION_LINKS = {
     ) => `/admin/${entity}/${id}/relation/${childEntity}/${relationship}`,
     UPDATE: (entity: string, id: string) => `/admin/${entity}/${id}/update`,
     CONFIG: {
-      CRUD: (entity: string, query?: Record<string, string>) =>
-        `/admin/${entity}/config/crud${queryObjectToQueryString(query)}`,
-      FIELDS: (entity: string, query?: Record<string, string>) =>
-        `/admin/${entity}/config/fields${queryObjectToQueryString(query)}`,
+      CRUD: (entity: string) => `/admin/${entity}/config/crud`,
+      FIELDS: (entity: string) => `/admin/${entity}/config/fields`,
       DICTION: (entity: string) => `/admin/${entity}/config/diction`,
       FORM: (entity: string) => `/admin/${entity}/config/form`,
       PRESENTATION: (entity: string) => `/admin/${entity}/config/presentation`,

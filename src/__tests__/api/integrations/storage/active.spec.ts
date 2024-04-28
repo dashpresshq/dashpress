@@ -39,7 +39,7 @@ describe("/api/integrations/actions/[key]/index", () => {
             "path": "",
             "statusCode": 400,
             "validations": {
-              "accessKeyId": "Access Key Id is required",
+              "accessKeyId": "Access Key ID is required",
               "secretAccessKey": "Secret Access Key is required",
             },
           }

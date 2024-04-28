@@ -83,8 +83,6 @@ describe("/api/roles/[roleId]/permissions", () => {
       method: "DELETE",
       query: {
         roleId: "some-admin-permissions",
-      },
-      body: {
         permissions: ["CAN_RESET_PASSWORD", "CAN_MANAGE_APP_CREDENTIALS"],
       },
     });

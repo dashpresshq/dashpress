@@ -10,7 +10,7 @@ import {
   useEntityConfiguration,
   useUpsertConfigurationMutation,
 } from "frontend/hooks/configuration/configuration.store";
-import { USER_PERMISSIONS } from "shared/constants/user";
+import { UserPermissions } from "shared/constants/user";
 import { useTableColumns } from "frontend/views/data/Table/useTableColumns";
 import { MAKE_APP_CONFIGURATION_CRUD_CONFIG } from "frontend/hooks/configuration/configuration.constant";
 import { useDocumentationActionButton } from "frontend/docs/constants";
@@ -40,7 +40,7 @@ export function EntityPersistentQuerySettings() {
   useSetPageDetails({
     pageTitle: CRUD_CONFIG.TEXT_LANG.TITLE,
     viewKey: ENTITY_CONFIGURATION_VIEW,
-    permission: USER_PERMISSIONS.CAN_CONFIGURE_APP,
+    permission: UserPermissions.CAN_CONFIGURE_APP,
   });
 
   const isLoading = tableColumns.isLoading || peristentQuery.isLoading;

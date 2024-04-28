@@ -3,6 +3,7 @@ import { FieldMetaState } from "react-final-form";
 import { Stack } from "frontend/design-system/primitives/Stack";
 import { SystemIcon } from "frontend/design-system/Icons/System";
 import { DetailedHTMLProps, InputHTMLAttributes } from "react";
+import { i18n } from "@lingui/core";
 import { ISharedFormInput } from "./_types";
 import { Tooltip } from "../Tooltip";
 import { FormLabel, FormFeedback, RequiredAsterick } from "./Styles";
@@ -32,7 +33,7 @@ export const wrapLabelAndError = (
         {label && (
           <>
             <FormLabel sm={sm} htmlFor={input.name}>
-              {label}
+              {i18n._(label)}
             </FormLabel>
             {required ? <RequiredAsterick> *</RequiredAsterick> : null}
           </>
@@ -80,7 +81,7 @@ export const generateFormArias = (
     return {};
   }
   if (isFormMetaWithError(meta)) {
-    return { "aria-invalid": "true", ariaInvalid: "true" };
+    return { "aria-invalid": "true" };
   }
   return {};
 };

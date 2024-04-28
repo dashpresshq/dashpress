@@ -45,18 +45,18 @@ describe("pages/admin/[entity]/config/crud", () => {
   const useRouter = jest.spyOn(require("next/router"), "useRouter");
 
   describe.each([
-    { tab: "Table" },
-    { tab: "Details" },
-    { tab: "Create" },
-    { tab: "Update" },
-  ])("$tab Tab", ({ tab }) => {
+    { tab: "Table", id: "table" },
+    { tab: "Details", id: "details" },
+    { tab: "Create", id: "create" },
+    { tab: "Update", id: "update" },
+  ])("$tab Tab", ({ tab, id }) => {
     beforeEach(() => {
       useRouter.mockImplementation(
         USE_ROUTER_PARAMS({
           replaceMock: jest.fn(),
           query: {
             entity: "entity-1",
-            tab,
+            tab: id,
           },
         })
       );
@@ -201,7 +201,7 @@ describe("pages/admin/[entity]/config/crud", () => {
         replaceMock: jest.fn(),
         query: {
           entity: "entity-1",
-          tab: "Delete",
+          tab: "delete",
         },
       })
     );

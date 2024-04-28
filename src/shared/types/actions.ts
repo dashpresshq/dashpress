@@ -1,4 +1,5 @@
 import { IAppliedSchemaFormConfig } from "shared/form-schemas/types";
+import { MessageDescriptor } from "@lingui/core";
 import { DataEventActions } from "./data";
 
 export enum ActionIntegrations {
@@ -22,7 +23,7 @@ export type IFormAction = {
 };
 
 export interface IPerformsImplementation {
-  label: string;
+  label: MessageDescriptor;
   configurationSchema: IAppliedSchemaFormConfig<any>;
   do: (connection: unknown, configuration: unknown) => Promise<any>;
 }

@@ -4,7 +4,7 @@ import {
   FormSkeletonSchema,
 } from "frontend/design-system/components/Skeleton/Form";
 import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
-import { USER_PERMISSIONS } from "shared/constants/user";
+import { UserPermissions } from "shared/constants/user";
 import {
   useAppConfiguration,
   useUpsertConfigurationMutation,
@@ -17,6 +17,7 @@ import { SchemaForm } from "frontend/components/SchemaForm";
 import { Spacer } from "frontend/design-system/primitives/Spacer";
 import { AppConfigurationValueType } from "shared/configurations/constants";
 import { msg } from "@lingui/macro";
+import { i18nNoop } from "translations/fake";
 import { BaseSettingsLayout } from "../_Base";
 import { SETTINGS_VIEW_KEY } from "../constants";
 
@@ -54,10 +55,12 @@ function MetaDataSettings() {
           systemIcon="Save"
           fields={{
             createdAt: {
+              label: msg`Created At`,
               type: "text",
               validations: [],
             },
             updatedAt: {
+              label: msg`Updated At`,
               type: "text",
               validations: [],
             },
@@ -88,7 +91,7 @@ function DateSettings() {
           id: "help",
           action: DATE_FORMAT_LIB_LINK,
           systemIcon: "Help",
-          label: msg`${DATE_FORMAT_LIB_LINK}`,
+          label: i18nNoop(DATE_FORMAT_LIB_LINK),
         },
       ]}
     >
@@ -113,6 +116,7 @@ function DateSettings() {
           systemIcon="Save"
           fields={{
             format: {
+              label: msg`Format`,
               type: "text",
               validations: [
                 {
@@ -131,7 +135,7 @@ export function GeneralDataSettings() {
   useSetPageDetails({
     pageTitle: msg`General Data Settings`,
     viewKey: SETTINGS_VIEW_KEY,
-    permission: USER_PERMISSIONS.CAN_CONFIGURE_APP,
+    permission: UserPermissions.CAN_CONFIGURE_APP,
   });
 
   return (

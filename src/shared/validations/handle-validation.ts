@@ -1,3 +1,4 @@
+import { MessageDescriptor } from "@lingui/core";
 import { isEmpty } from "class-validator";
 
 export const handleValidation =
@@ -11,7 +12,7 @@ export const handleValidation =
   ) =>
   (
     value: unknown,
-    errorMessage: string,
+    errorMessage: MessageDescriptor,
     constraints: Record<string, unknown>,
     allValues: Record<string, unknown>
   ) => {

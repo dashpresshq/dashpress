@@ -3,6 +3,7 @@ import { IColorableSelection } from "shared/types/ui";
 import { SoftButton } from "frontend/design-system/components/Button/SoftButton";
 import { msg } from "@lingui/macro";
 import { FormFieldTypes } from "shared/validations/types";
+import { i18n } from "@lingui/core";
 import {
   ReferenceComponent,
   ReferenceDisplayFromTypes,
@@ -91,7 +92,7 @@ export const viewSpecialDataTypes = ({
           />
         );
       }
-      return availableOption.label;
+      return i18n._(availableOption.label);
     }
   }
   return null;

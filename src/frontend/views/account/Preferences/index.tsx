@@ -17,7 +17,6 @@ import { uniqBy } from "shared/lib/array/uniq-by";
 import { useEffect } from "react";
 import { IAppliedSchemaFormConfig } from "shared/form-schemas/types";
 import languages from "translations/languages";
-import { i18n } from "@lingui/core";
 import { msg } from "@lingui/macro";
 import { useRouter } from "next/router";
 import { Spacer } from "frontend/design-system/primitives/Spacer";
@@ -37,6 +36,7 @@ export const LANGUAGE_PREFERENCES_FORM_SCHEMA: IAppliedSchemaFormConfig<{
   locale: string;
 }> = {
   locale: {
+    label: msg`Language`,
     type: "selection",
     validations: [
       {
@@ -44,7 +44,7 @@ export const LANGUAGE_PREFERENCES_FORM_SCHEMA: IAppliedSchemaFormConfig<{
       },
     ],
     selections: languages.map((language) => ({
-      label: i18n._(language.msg),
+      label: msg`${language.msg}`,
       value: language.locale,
     })),
   },
@@ -69,7 +69,7 @@ export function UserPreferences() {
         ...UPDATE_USER_PREFERENCES_FORM_SCHEMA.theme.selections,
         ...typescriptSafeObjectDotKeys(portalThemes).map((theme) => ({
           value: theme,
-          label: userFriendlyCase(theme),
+          label: msg`${userFriendlyCase(theme)}`,
         })),
       ],
       "value"

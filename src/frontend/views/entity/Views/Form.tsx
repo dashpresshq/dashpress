@@ -36,7 +36,7 @@ const TABLE_VIEW_CRUD_CONFIG = MAKE_CRUD_CONFIG({
   singular: msg`Table View`,
 });
 
-const makeViewId = (index: number) => `View ${index}`;
+const makeViewTitle = (index: number) => `View ${index}`;
 
 function TabForm({ tableColumns, values, initialValues }: IProps) {
   const { fields } = useFieldArray("tabs");
@@ -55,7 +55,7 @@ function TabForm({ tableColumns, values, initialValues }: IProps) {
           action={() => {
             const newTab: ITableView = {
               id: generateRandomString(12),
-              title: makeViewId(fields.length + 1),
+              title: makeViewTitle(fields.length + 1),
               dataState: {
                 filters: [],
                 pageSize: undefined,
@@ -63,7 +63,7 @@ function TabForm({ tableColumns, values, initialValues }: IProps) {
               },
             };
             fields.push(newTab);
-            setCurrentTab(makeViewId(fields.length + 1));
+            setCurrentTab(newTab.id);
           }}
         />
       </Stack>
@@ -91,7 +91,9 @@ function TabForm({ tableColumns, values, initialValues }: IProps) {
                           ...DELETE_BUTTON_PROPS({
                             action: () => {
                               fields.remove(index);
-                              setCurrentTab(makeViewId(index));
+                              if (fields.length > 0 && index > 0) {
+                                setCurrentTab(fields.value[index - 1].id);
+                              }
                             },
                             label: TABLE_VIEW_CRUD_CONFIG.TEXT_LANG.DELETE,
                             isMakingRequest: false,
@@ -109,7 +111,7 @@ function TabForm({ tableColumns, values, initialValues }: IProps) {
                   >
                     {({ meta, input }) => (
                       <FormInput
-                        label="Title"
+                        label={msg`Title`}
                         required
                         meta={meta}
                         input={input}
@@ -144,7 +146,7 @@ function TabForm({ tableColumns, values, initialValues }: IProps) {
                   </Field>
                 </>
               ),
-              id: makeViewId(index + 1),
+              id: fields.value[index].id,
               label: msg`${fields.value[index]?.title}`,
             };
           })}

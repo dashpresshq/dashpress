@@ -2,7 +2,7 @@ import { integrationsApiService } from "backend/integrations/integrations.servic
 import { requestHandler } from "backend/lib/request";
 
 export default requestHandler({
-  GET: () => {
+  GET: async () => {
     return integrationsApiService.listActionIntegrations();
   },
 });

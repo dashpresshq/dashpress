@@ -1,6 +1,6 @@
 import { useNavigationStack } from "frontend/lib/routing/useNavigationStack";
 import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
-import { USER_PERMISSIONS } from "shared/constants/user";
+import { UserPermissions } from "shared/constants/user";
 import { ContentLayout } from "frontend/design-system/components/Section/SectionDivider";
 import { SectionBox } from "frontend/design-system/components/Section/SectionBox";
 import { AppLayout } from "frontend/_layouts/app";
@@ -22,6 +22,7 @@ import { UsersLinkToDatabaseDocumentation } from "frontend/docs/users-link-to-da
 import { useEntityFieldLists } from "frontend/hooks/entity/entity.store";
 import { useEffect, useState } from "react";
 import { msg } from "@lingui/macro";
+import { i18nNoop } from "translations/fake";
 
 type IUsersLinkToDatabaseForm = {
   table: string;
@@ -58,7 +59,7 @@ export function UsersLinkToDatabase() {
     {
       table: {
         type: "selection",
-        label: "Your Users Table",
+        label: msg`Your Users Table`,
         apiSelections: {
           listUrl: ACTIVE_ENTITIES_ENDPOINT,
         },
@@ -71,10 +72,10 @@ export function UsersLinkToDatabase() {
       },
       field: {
         type: "selection",
-        label: "Field Corresponding To Dashpress Usernames",
+        label: msg`Field Corresponding To Dashpress Usernames`,
         selections: entityFields.data.map((field) => ({
-          label: field,
           value: field,
+          label: i18nNoop(field),
         })),
         validations: [
           {
@@ -87,7 +88,7 @@ export function UsersLinkToDatabase() {
   useSetPageDetails({
     pageTitle: CRUD_CONFIG.TEXT_LANG.TITLE,
     viewKey: CRUD_CONFIG.TEXT_LANG.TITLE.message,
-    permission: USER_PERMISSIONS.CAN_CONFIGURE_APP,
+    permission: UserPermissions.CAN_CONFIGURE_APP,
   });
 
   return (

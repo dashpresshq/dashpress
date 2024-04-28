@@ -4,7 +4,7 @@ import {
   FormSkeletonSchema,
 } from "frontend/design-system/components/Skeleton/Form";
 import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
-import { USER_PERMISSIONS } from "shared/constants/user";
+import { UserPermissions } from "shared/constants/user";
 import {
   useAppConfiguration,
   useUpsertConfigurationMutation,
@@ -13,6 +13,7 @@ import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { MAKE_APP_CONFIGURATION_CRUD_CONFIG } from "frontend/hooks/configuration/configuration.constant";
 import { SchemaForm } from "frontend/components/SchemaForm";
 import { AppConfigurationValueType } from "shared/configurations/constants";
+import { msg } from "@lingui/macro";
 import { BaseSettingsLayout } from "../_Base";
 import { SETTINGS_VIEW_KEY } from "../constants";
 
@@ -27,7 +28,7 @@ export function SiteSettings() {
   useSetPageDetails({
     pageTitle: CRUD_CONFIG.TEXT_LANG.TITLE,
     viewKey: SETTINGS_VIEW_KEY,
-    permission: USER_PERMISSIONS.CAN_CONFIGURE_APP,
+    permission: UserPermissions.CAN_CONFIGURE_APP,
   });
 
   return (
@@ -54,6 +55,7 @@ export function SiteSettings() {
             buttonText={CRUD_CONFIG.FORM_LANG.UPSERT}
             fields={{
               name: {
+                label: msg`Name`,
                 type: "text",
                 validations: [
                   {
@@ -62,6 +64,7 @@ export function SiteSettings() {
                 ],
               },
               homeLink: {
+                label: msg`Home Link`,
                 type: "text",
                 validations: [
                   {
@@ -70,7 +73,7 @@ export function SiteSettings() {
                 ],
               },
               logo: {
-                label: "Square Logo",
+                label: msg`Small Logo`,
                 type: "text",
                 validations: [
                   {
@@ -79,7 +82,7 @@ export function SiteSettings() {
                 ],
               },
               fullLogo: {
-                label: "Full Length Logo",
+                label: msg`Large Logo`,
                 type: "text",
                 validations: [
                   {

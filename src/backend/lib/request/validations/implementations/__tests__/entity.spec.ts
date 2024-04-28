@@ -1,5 +1,5 @@
 import { requestHandler } from "backend/lib/request";
-import { USER_PERMISSIONS } from "shared/constants/user";
+import { UserPermissions } from "shared/constants/user";
 import {
   createAuthenticatedCustomRoleMocks,
   createAuthenticatedMocks,
@@ -90,7 +90,7 @@ describe("Request Validations => entityValidationImpl", () => {
     await setupRolesTestData([
       {
         id: "custom-role",
-        permissions: [USER_PERMISSIONS.CAN_MANAGE_DASHBOARD],
+        permissions: [UserPermissions.CAN_MANAGE_DASHBOARD],
       },
     ]);
     const { req, res } = createAuthenticatedCustomRoleMocks({

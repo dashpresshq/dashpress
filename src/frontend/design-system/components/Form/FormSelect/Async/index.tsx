@@ -3,9 +3,10 @@ import debounce from "lodash/debounce";
 import AsyncSelect from "react-select/async";
 import styled from "styled-components";
 import { useAsync, useSessionStorage } from "react-use";
-import { ISelectData } from "shared/types/options";
+import { ILabelValue, ISelectData } from "shared/types/options";
 import { useApi } from "frontend/lib/data/useApi";
-import { makeGetRequest } from "frontend/lib/data/makeRequest";
+import { ApiRequest } from "frontend/lib/data/makeRequest";
+import { useLingui } from "@lingui/react";
 import { FormSelect } from "..";
 import {
   generateClassNames,
@@ -34,7 +35,7 @@ const debouncedSearch = debounce(
     resolve: (value: any) => void
   ) => {
     const toReturn = (
-      await makeGetRequest(`${url}?search=${inputValue}`)
+      await ApiRequest.GET(`${url}?search=${inputValue}`)
     ).filter(
       ({ value }: ISelectData) => !disabledOptions.includes(value as string)
     );
@@ -59,6 +60,8 @@ export function AsyncFormSelect(props: IProps) {
   } = props;
 
   const [valueLabel, setValueLabel] = useState("");
+
+  const { _ } = useLingui();
 
   const { isLoading, error, data } = useApi<ISelectData[]>(url, {
     defaultData: [],
@@ -87,7 +90,7 @@ export function AsyncFormSelect(props: IProps) {
     if (!referenceUrl) {
       return input.value;
     }
-    return await makeGetRequest(referenceUrl(input.value));
+    return await ApiRequest.GET(referenceUrl(input.value));
   }, [url, valueLabel, isLoading]);
 
   if (error) {
@@ -109,7 +112,7 @@ export function AsyncFormSelect(props: IProps) {
         classNamePrefix={SharedSelectProps.classNamePrefix}
         isDisabled={disabled}
         isLoading={isLoading}
-        placeholder={placeholder}
+        placeholder={placeholder ? _(placeholder) : null}
         className={generateClassNames(meta)}
         value={{ value: input.value, label: valueLabelToUse.value }}
         loadOptions={(inputValue) =>
@@ -136,7 +139,7 @@ export function AsyncFormMultiSelect({
   values = [],
   onChange,
 }: IFormMultiSelect) {
-  const [cosmeticValues, setCosmeticValues] = useSessionStorage<ISelectData[]>(
+  const [cosmeticValues, setCosmeticValues] = useSessionStorage<ILabelValue[]>(
     "cosmetic-multi-select-values",
     values.map((value) => ({ value, label: value }))
   );
@@ -150,9 +153,9 @@ export function AsyncFormMultiSelect({
       isMulti
       value={cosmeticValues}
       onChange={(newValues: unknown) => {
-        setCosmeticValues(newValues as ISelectData[]);
+        setCosmeticValues(newValues as ILabelValue[]);
         onChange(
-          (newValues as ISelectData[]).map(({ value }) => value as string)
+          (newValues as ILabelValue[]).map(({ value }) => value as string)
         );
       }}
       loadOptions={(inputValue) =>

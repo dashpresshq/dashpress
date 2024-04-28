@@ -1,4 +1,4 @@
-import { t } from "@lingui/macro";
+import { msg } from "@lingui/macro";
 import { IAppliedSchemaFormConfig } from "../types";
 
 export type IChangePasswordForm = {
@@ -11,6 +11,7 @@ export const CHANGE_PASSWORD_FORM_SCHEMA: IAppliedSchemaFormConfig<IChangePasswo
   {
     oldPassword: {
       type: "password",
+      label: msg`Old Password`,
       validations: [
         {
           validationType: "required",
@@ -19,6 +20,7 @@ export const CHANGE_PASSWORD_FORM_SCHEMA: IAppliedSchemaFormConfig<IChangePasswo
     },
     newPassword: {
       type: "password",
+      label: msg`New Password`,
       validations: [
         {
           validationType: "required",
@@ -27,7 +29,7 @@ export const CHANGE_PASSWORD_FORM_SCHEMA: IAppliedSchemaFormConfig<IChangePasswo
     },
     reNewPassword: {
       type: "password",
-      label: t`New Password Again`,
+      label: msg`New Password Again`,
       validations: [
         {
           validationType: "required",
@@ -35,7 +37,7 @@ export const CHANGE_PASSWORD_FORM_SCHEMA: IAppliedSchemaFormConfig<IChangePasswo
         {
           validationType: "matchOtherField",
           constraint: {
-            otherField: t`newPassword`,
+            otherField: `newPassword`,
           },
         },
       ],

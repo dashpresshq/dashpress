@@ -65,7 +65,7 @@ describe("pages/admin/settings/dashboard", () => {
       const widget = await screen.findByLabelText("Foo Table Widget");
 
       await userEvent.click(
-        within(widget).getByRole("button", { name: "Delete Widget" })
+        within(widget).getByRole("button", { name: "Delete Dashboard Widget" })
       );
 
       const confirmBox = await screen.findByRole("alertdialog", {
@@ -98,7 +98,7 @@ describe("pages/admin/settings/dashboard", () => {
       const widget = await screen.findByLabelText("Bar Card Widget");
 
       await userEvent.click(
-        within(widget).queryByRole("button", { name: "Edit Widget" })
+        within(widget).queryByRole("button", { name: "Edit Dashboard Widget" })
       );
 
       expect(pushMock).toHaveBeenCalledWith(

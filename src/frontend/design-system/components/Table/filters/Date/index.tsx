@@ -1,6 +1,7 @@
 import { Spacer } from "frontend/design-system/primitives/Spacer";
 import { DATE_FILTER_VALUE, IColumnFilterBag } from "shared/types/data";
 import { useToggle } from "frontend/hooks/state/useToggleState";
+import { msg } from "@lingui/macro";
 import { DATE_FILTER_OPTIONS } from "./constants";
 import { IFilterProps } from "../types";
 import { DateSelection } from "./_Selection";
@@ -34,7 +35,7 @@ export function FilterTableByDate({
         }}
         value={customDateMode.isOn}
         size="sm"
-        label="Custom Date"
+        label={msg`Custom Date`}
       />
       {new Date(filterValue?.value || "").toString() !== "Invalid Date" ? (
         <>

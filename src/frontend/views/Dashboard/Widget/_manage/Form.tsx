@@ -1,7 +1,7 @@
 import { useEntityConfiguration } from "frontend/hooks/configuration/configuration.store";
 import { Field, Form } from "react-final-form";
 import { ISummaryWidgetConfig, IWidgetConfig } from "shared/types/dashboard";
-import { ROYGBIV } from "shared/constants/colors";
+import { ROYGBIV, ROYGBIV_CONFIG } from "shared/constants/colors";
 import { IconInputField } from "frontend/components/IconInputField";
 import { useMutation } from "@tanstack/react-query";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 import { WidgetScriptDocumentation } from "frontend/docs/scripts/widget-scripts";
 import { required } from "frontend/lib/validations";
 import { resetFormValues } from "frontend/lib/form/utils";
-import { makeActionRequest } from "frontend/lib/data/makeRequest";
+import { ApiRequest } from "frontend/lib/data/makeRequest";
 import { IFormProps } from "frontend/lib/form/types";
 import { ILabelValue } from "shared/types/options";
 import { FormInput } from "frontend/design-system/components/Form/FormInput";
@@ -32,6 +32,8 @@ import {
   typescriptSafeObjectDotEntries,
   typescriptSafeObjectDotKeys,
 } from "shared/lib/objects";
+import { i18nNoop, transformLabelValueToSelectData } from "translations/fake";
+import { MessageDescriptor } from "@lingui/core";
 import { DASHBOARD_WIDGETS_CRUD_CONFIG } from "../../constants";
 import { DashboardWidgetPresentation } from "../Presentation";
 import { WIDGET_CONFIG } from "../constants";
@@ -40,7 +42,7 @@ import { WidgetFormField } from "./types";
 import { DASHBOARD_WIDGET_HEIGHTS } from "./constants";
 
 const DashboardTypesOptions: {
-  label: string;
+  label: MessageDescriptor;
   value: IWidgetConfig["_type"];
 }[] = typescriptSafeObjectDotEntries(WIDGET_CONFIG).map(
   ([value, { label }]) => ({
@@ -58,7 +60,7 @@ const FormSchema: Partial<Record<IWidgetConfig["_type"], WidgetFormField[]>> = {
 export function useRunWidgetScript() {
   return useMutation({
     mutationFn: async (script: string) =>
-      await makeActionRequest("POST", `/api/dashboards/script`, { script }),
+      await ApiRequest.POST(`/api/dashboards/script`, { script }),
   });
 }
 
@@ -121,7 +123,7 @@ export function DashboardWidgetForm({
                     {({ input, meta }) => (
                       <FormInput
                         required
-                        label="Title"
+                        label={msg`Title`}
                         meta={meta}
                         input={input}
                       />
@@ -133,7 +135,7 @@ export function DashboardWidgetForm({
                     {({ input, meta }) => (
                       <FormSelect
                         required
-                        label="Type"
+                        label={msg`Type`}
                         disabledOptions={[]}
                         selectData={DashboardTypesOptions}
                         meta={meta}
@@ -146,10 +148,10 @@ export function DashboardWidgetForm({
                   <Field name="entity" validateFields={[]}>
                     {({ input, meta }) => (
                       <FormSelect
-                        label="Link Entity"
+                        label={msg`Link Entity`}
                         description="Select the entity the user should be directed to when clicking on the widget"
                         disabledOptions={[]}
-                        selectData={entities}
+                        selectData={transformLabelValueToSelectData(entities)}
                         meta={meta}
                         input={input}
                       />
@@ -161,12 +163,12 @@ export function DashboardWidgetForm({
                     <Field name="queryId" validateFields={[]}>
                       {({ input, meta }) => (
                         <FormSelect
-                          label="Entity Tab"
+                          label={msg`Entity Tab`}
                           description="Select the most appropriate tab of the entity above that the user should be direct to"
                           disabledOptions={[]}
                           selectData={(tableViews.data || []).map(
                             ({ id, title }) => ({
-                              label: title,
+                              label: i18nNoop(title),
                               value: id,
                             })
                           )}
@@ -184,12 +186,12 @@ export function DashboardWidgetForm({
                     <Field name="color" validate={required} validateFields={[]}>
                       {({ input, meta }) => (
                         <FormSelect
-                          label="Color"
+                          label={msg`Color`}
                           required
                           selectData={typescriptSafeObjectDotKeys(ROYGBIV).map(
                             (value) => ({
                               value,
-                              label: value,
+                              label: ROYGBIV_CONFIG[value].label,
                             })
                           )}
                           meta={meta}
@@ -210,7 +212,7 @@ export function DashboardWidgetForm({
                   <Field name="span" validateFields={[]}>
                     {({ input, meta }) => (
                       <FormSelect
-                        label="Width"
+                        label={msg`Width`}
                         selectData={GRID_SPAN_OPTIONS}
                         meta={meta}
                         input={input}
@@ -222,7 +224,7 @@ export function DashboardWidgetForm({
                   <Field name="height" validateFields={[]}>
                     {({ input, meta }) => (
                       <FormSelect
-                        label="Height"
+                        label={msg`Height`}
                         selectData={DASHBOARD_WIDGET_HEIGHTS}
                         meta={meta}
                         input={input}
@@ -241,7 +243,7 @@ export function DashboardWidgetForm({
                         <FormCodeEditor
                           required
                           language="javascript"
-                          label="Script"
+                          label={msg`Script`}
                           meta={meta}
                           input={input}
                           rightActions={[documentationActionButton]}

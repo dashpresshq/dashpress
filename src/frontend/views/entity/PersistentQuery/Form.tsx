@@ -20,12 +20,19 @@ import { Card, CardBody } from "frontend/design-system/components/Card";
 import { Fragment } from "react";
 import { msg } from "@lingui/macro";
 import { typescriptSafeObjectDotEntries } from "shared/lib/objects";
-import { FILTER_OPERATOR_CONFIG } from "./constants";
+import { FILTER_OPERATOR_CONFIG } from "frontend/design-system/components/Table/filters/constants";
+import { MessageDescriptor } from "@lingui/core";
 
-const OPERATOR_SELECTORS = ["and", "or"].map((option) => ({
-  value: `${option}`,
-  label: `${option.toLocaleUpperCase()}`,
-}));
+const OPERATOR_SELECTORS = [
+  {
+    value: "and",
+    label: msg`AND`,
+  },
+  {
+    value: "or",
+    label: msg`OR`,
+  },
+];
 
 const filterOperatorSelections = typescriptSafeObjectDotEntries(
   FILTER_OPERATOR_CONFIG
@@ -55,11 +62,11 @@ function FilterRow({
           {({ meta, input }) => (
             <FormGrid.Item $span="3">
               <FormSelect
-                label="Field"
+                label={msg`Field`}
                 required
                 selectData={columns.map((column) => ({
                   value: column.accessor,
-                  label: column.Header as string,
+                  label: column.Header as MessageDescriptor,
                 }))}
                 meta={meta}
                 input={input}
@@ -76,7 +83,7 @@ function FilterRow({
           {({ meta, input }) => (
             <FormGrid.Item $span={noValue ? "9" : "3"}>
               <FormSelect
-                label="Operator"
+                label={msg`Operator`}
                 required
                 selectData={filterOperatorSelections}
                 meta={meta}
@@ -93,7 +100,12 @@ function FilterRow({
           >
             {({ meta, input }) => (
               <FormGrid.Item $span="6">
-                <FormInput label="Value" required meta={meta} input={input} />
+                <FormInput
+                  label={msg`Value`}
+                  required
+                  meta={meta}
+                  input={input}
+                />
               </FormGrid.Item>
             )}
           </Field>
@@ -131,7 +143,6 @@ export function EntityPersistentQueryForm({
                         <Field name="operator" validateFields={[]}>
                           {({ input, meta }) => (
                             <FormSelectButton
-                              label=""
                               required
                               sm
                               selectData={OPERATOR_SELECTORS}
@@ -157,7 +168,6 @@ export function EntityPersistentQueryForm({
                                           >
                                             {({ input, meta }) => (
                                               <FormSelectButton
-                                                label=""
                                                 sm
                                                 required
                                                 selectData={OPERATOR_SELECTORS}

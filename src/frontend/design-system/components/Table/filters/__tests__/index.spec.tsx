@@ -7,9 +7,15 @@ import {
   TableFilterType,
 } from "shared/types/data";
 import { ApplicationRoot } from "frontend/components/ApplicationRoot";
+import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
+import { fakeMessageDescriptor } from "translations/fake";
 import { TableFilter } from "..";
 
 const setFilterValueJestFn = jest.fn();
+
+const useRouter = jest.spyOn(require("next/router"), "useRouter");
+
+useRouter.mockImplementation(USE_ROUTER_PARAMS({}));
 
 function TestComponent({
   type,
@@ -52,8 +58,8 @@ describe("Table Filters", () => {
         .toMatchInlineSnapshot(`
           [
             "Contains",
-            "Equal To",
-            "Not Equal To",
+            "Equal",
+            "Not Equal",
           ]
         `);
     });
@@ -76,7 +82,7 @@ describe("Table Filters", () => {
 
       await userEvent.selectOptions(
         screen.getByRole("combobox", { name: "Select Filter Operator" }),
-        "Equal To"
+        "Equal"
       );
 
       await waitFor(() => {
@@ -133,8 +139,8 @@ describe("Table Filters", () => {
       expect(screen.getAllByRole("option").map((option) => option.textContent))
         .toMatchInlineSnapshot(`
         [
-          "Equal To",
-          "Not Equal To",
+          "Equal",
+          "Not Equal",
           "Between",
           "Greater Than",
           "Less Than",
@@ -241,7 +247,7 @@ describe("Table Filters", () => {
           .map((option) => option.textContent)
       ).toMatchInlineSnapshot(`
           [
-            "Equal To",
+            "Equal",
           ]
         `);
     });
@@ -298,11 +304,11 @@ describe("Table Filters", () => {
       _type: "boolean",
       bag: [
         {
-          label: "True Option",
+          label: fakeMessageDescriptor("True Option"),
           value: true,
         },
         {
-          label: "False Option",
+          label: fakeMessageDescriptor("False Option"),
           value: false,
         },
       ],
@@ -410,15 +416,15 @@ describe("Table Filters", () => {
       _type: "status",
       bag: [
         {
-          label: "Option 1 Label",
+          label: fakeMessageDescriptor("Option 1 Label"),
           value: "option-1",
         },
         {
-          label: "Option 2 Label",
+          label: fakeMessageDescriptor("Option 2 Label"),
           value: "option-2",
         },
         {
-          label: "Option 3 Label",
+          label: fakeMessageDescriptor("Option 3 Label"),
           value: "option-3",
         },
       ],
@@ -434,8 +440,8 @@ describe("Table Filters", () => {
       expect(screen.getAllByRole("option").map((option) => option.textContent))
         .toMatchInlineSnapshot(`
         [
-          "In",
-          "Not In",
+          "Is In",
+          "Is Not In",
         ]
       `);
     });

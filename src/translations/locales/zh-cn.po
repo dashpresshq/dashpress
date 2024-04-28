@@ -13,11 +13,83 @@ msgstr ""
 "Plural-Forms: \n"
 "X-Generator: Poedit 3.4.2\n"
 
+msgid ""
+msgstr ""
+
+msgid "-- Select State --"
+msgstr ""
+
 msgid "\"{0}\" Selection"
 msgstr "选择“{0}”"
 
 msgid "\"{0}\" Validations"
 msgstr "验证“{0}”"
+
+msgid "[[ name ]] is an invalid date"
+msgstr ""
+
+msgid "[[ name ]] is an invalid email"
+msgstr ""
+
+msgid "[[ name ]] is an invalid json"
+msgstr ""
+
+msgid "[[ name ]] is an invalid URL"
+msgstr ""
+
+msgid "[[ name ]] is invalid"
+msgstr ""
+
+msgid "[[ name ]] is invalid. Allowed values are [[ options ]]"
+msgstr ""
+
+msgid "[[ name ]] is not a text"
+msgstr ""
+
+msgid "[[ name ]] is required"
+msgstr ""
+
+msgid "[[ name ]] should be a boolean"
+msgstr ""
+
+msgid "[[ name ]] should be a color"
+msgstr ""
+
+msgid "[[ name ]] should be a number"
+msgstr ""
+
+msgid "[[ name ]] should be greater than [[ length ]] characters"
+msgstr ""
+
+msgid "[[ name ]] should be greater than [[ otherField ]]"
+msgstr ""
+
+msgid "[[ name ]] should be greater than [[ value ]]"
+msgstr ""
+
+msgid "[[ name ]] should be less than [[ length ]] characters"
+msgstr ""
+
+msgid "[[ name ]] should be less than [[ otherField ]]"
+msgstr ""
+
+msgid "[[ name ]] should be less than [[ value ]]"
+msgstr ""
+
+msgid "[[ name ]] should be positive number"
+msgstr ""
+
+msgid "[[ name ]] should contain only alphabets and numbers"
+msgstr ""
+
+msgid "[[ name ]] should contain only upper cases"
+msgstr ""
+
+msgid "[[ name ]] should match [[ otherField ]]"
+msgstr ""
+
+msgid "[[ name ]] should not match [[ otherField ]]"
+msgstr ""
 
 msgid "{0}"
 msgstr ""
@@ -25,28 +97,13 @@ msgstr ""
 msgid "{0} - {1}"
 msgstr ""
 
+msgid "{0} [{1}]"
+msgstr ""
+
 msgid "{0} Preference"
 msgstr "{0}偏好"
 
-msgid "{buttonLabel}"
-msgstr ""
-
-msgid "{DATE_FORMAT_LIB_LINK}"
-msgstr ""
-
-msgid "{errorMessage}"
-msgstr ""
-
-msgid "{key}"
-msgstr ""
-
-msgid "{label}"
-msgstr ""
-
-msgid "{plural}"
-msgstr ""
-
-msgid "{singular}"
+msgid "{plural} Units"
 msgstr ""
 
 msgid "{singular} {action} Successfully"
@@ -70,10 +127,49 @@ msgstr "{singular}保存成功"
 msgid "{singular} Settings"
 msgstr "{singular}设置"
 
+msgid "{singular} Unit"
+msgstr ""
+
 msgid "{singular} Updated Successfully"
 msgstr "{singular}更新成功"
 
-msgid "{title}({currentCount})"
+msgid "{value} Day"
+msgstr ""
+
+msgid "{value} Days"
+msgstr ""
+
+msgid "{value} Hour"
+msgstr ""
+
+msgid "{value} Hours"
+msgstr ""
+
+msgid "{value} Month"
+msgstr ""
+
+msgid "{value} Months"
+msgstr ""
+
+msgid "{value} Quarter"
+msgstr ""
+
+msgid "{value} Quarters"
+msgstr ""
+
+msgid "{value} Week"
+msgstr ""
+
+msgid "{value} Weeks"
+msgstr ""
+
+msgid "{value} Year"
+msgstr ""
+
+msgid "{value} Years"
+msgstr ""
+
+msgid "Access Key ID"
 msgstr ""
 
 msgid "Account Preferences"
@@ -97,7 +193,6 @@ msgstr "激活 {0}"
 msgid "Activating {0}"
 msgstr "激活 {0}"
 
-#, fuzzy
 msgid "Add Filter"
 msgstr "筛选"
 
@@ -107,8 +202,20 @@ msgstr "添加嵌套筛选"
 msgid "Add New {singular}"
 msgstr "添加新{singular}"
 
-msgid "Add new option"
-msgstr "添加选项"
+msgid "Add New Option"
+msgstr ""
+
+msgid "Add New Validation"
+msgstr ""
+
+msgid "Alphanumeric"
+msgstr ""
+
+msgid "AND"
+msgstr ""
+
+msgid "API Key"
+msgstr ""
 
 msgid "App"
 msgstr "APP"
@@ -116,17 +223,74 @@ msgstr "APP"
 msgid "Are you sure you want to do this?"
 msgstr "你确定你要这么做吗？"
 
+msgid "Before Submit"
+msgstr ""
+
+msgid "Beginning of time"
+msgstr ""
+
+msgid "Beginning of Year"
+msgstr ""
+
+msgid "Between"
+msgstr ""
+
+msgid "Blue"
+msgstr ""
+
+msgid "Body"
+msgstr ""
+
+msgid "Boolean"
+msgstr ""
+
+msgid "Brown"
+msgstr ""
+
+msgid "Can Configure App"
+msgstr ""
+
+msgid "Can Manage All Entities"
+msgstr ""
+
+msgid "Can Manage App Credentials"
+msgstr ""
+
+msgid "Can Manage Dashboard"
+msgstr ""
+
+msgid "Can Manage Permissions"
+msgstr ""
+
+msgid "Can Manage Users"
+msgstr ""
+
+msgid "Can Reset Password"
+msgstr ""
+
 msgid "Cancel"
 msgstr "取消"
 
 msgid "Change Language"
 msgstr "切换语言"
 
+msgid "Channel"
+msgstr ""
+
 msgid "Click here to view details"
 msgstr "查看详情"
 
 msgid "Close Canvas"
 msgstr "关闭画布"
+
+msgid "Color"
+msgstr ""
+
+msgid "Column Labels Settings"
+msgstr ""
+
+msgid "Column Types Settings"
+msgstr ""
 
 msgid "Configure"
 msgstr "设置"
@@ -140,11 +304,20 @@ msgstr "配置验证方式"
 msgid "Confirm"
 msgstr "确认"
 
+msgid "Confirm Delete"
+msgstr ""
+
+msgid "Connection URL"
+msgstr ""
+
 msgid "Constant"
 msgstr "常量"
 
 msgid "Constants"
 msgstr "常量"
+
+msgid "Contains"
+msgstr ""
 
 msgid "Create"
 msgstr "创建"
@@ -152,8 +325,17 @@ msgstr "创建"
 msgid "Create {singular}"
 msgstr "创建{singular}"
 
+msgid "Create Columns Settings"
+msgstr ""
+
+msgid "Create Fields Order"
+msgstr ""
+
 msgid "Create It"
 msgstr "创建"
+
+msgid "Created At"
+msgstr ""
 
 msgid "Creating {singular}"
 msgstr "创建{singular}"
@@ -167,8 +349,14 @@ msgstr "CRUD"
 msgid "CRUD Settings"
 msgstr "CRUD设置"
 
+msgid "Custom Date"
+msgstr ""
+
 msgid "Dark"
 msgstr "暗黑"
+
+msgid "Dark Color Scheme"
+msgstr ""
 
 msgid "Dashboard"
 msgstr "仪表盘"
@@ -184,6 +372,21 @@ msgstr "仪表盘"
 
 msgid "Data"
 msgstr "数据"
+
+msgid "Database"
+msgstr ""
+
+msgid "Database Type"
+msgstr ""
+
+msgid "Date"
+msgstr ""
+
+msgid "Date Format"
+msgstr ""
+
+msgid "Day"
+msgstr ""
 
 msgid "Deactivate"
 msgstr "停用"
@@ -206,12 +409,23 @@ msgstr "删除所选内容"
 msgid "Details"
 msgstr "查看详情"
 
-#, fuzzy
+msgid "Details Columns Settings"
+msgstr ""
+
+msgid "Details Fields Order"
+msgstr ""
+
 msgid "Diction"
 msgstr "字典"
 
 msgid "Diction Settings"
 msgstr "字典设置"
+
+msgid "Display Format"
+msgstr ""
+
+msgid "Domain"
+msgstr ""
 
 msgid "Done"
 msgstr "完成"
@@ -219,11 +433,17 @@ msgstr "完成"
 msgid "Download"
 msgstr "导出"
 
+msgid "Duplicate {singular}"
+msgstr ""
+
 msgid "Edit"
 msgstr "编辑"
 
 msgid "Edit {singular}"
 msgstr "修改{singular}"
+
+msgid "Email"
+msgstr ""
 
 msgid "Empty Table"
 msgstr "空表格"
@@ -234,11 +454,20 @@ msgstr "启用{0}功能"
 msgid "Enabled Entities"
 msgstr "已启用实体"
 
+msgid "Enabled Entities Settings"
+msgstr ""
+
+msgid "Enabled Relations"
+msgstr ""
+
 msgid "Enter your credentials to continue"
 msgstr "输入您的凭证以继续"
 
 msgid "Entities"
 msgstr "实体"
+
+msgid "Entity Tab"
+msgstr ""
 
 msgid "Environment Variable"
 msgstr "环境变量"
@@ -246,8 +475,23 @@ msgstr "环境变量"
 msgid "Environment Variables"
 msgstr "环境变量"
 
+msgid "Equal"
+msgstr ""
+
+msgid "Equal To Other Field"
+msgstr ""
+
+msgid "Error message"
+msgstr ""
+
 msgid "Explain {title}"
 msgstr "解释{title}"
+
+msgid "Field"
+msgstr ""
+
+msgid "Field Corresponding To Dashpress Usernames"
+msgstr ""
 
 msgid "Field Settings"
 msgstr "字段设置"
@@ -255,8 +499,26 @@ msgstr "字段设置"
 msgid "Fields"
 msgstr "字段"
 
+msgid "Fields State"
+msgstr ""
+
+msgid "File"
+msgstr ""
+
+msgid "File Name"
+msgstr ""
+
+msgid "File Name Format"
+msgstr ""
+
+msgid "File Path Format"
+msgstr ""
+
 msgid "File Storage"
 msgstr "存储设置"
+
+msgid "File Uploads Settings"
+msgstr ""
 
 msgid "Follow us on Twitter"
 msgstr "关注我们的推特"
@@ -273,23 +535,95 @@ msgstr "表单操作"
 msgid "Form Scripts"
 msgstr "表单脚本"
 
+msgid "Format"
+msgstr ""
+
+msgid "From"
+msgstr ""
+
 msgid "General"
 msgstr "一般"
 
 msgid "General Data Settings"
 msgstr "常规数据设置"
 
+msgid "Genesis"
+msgstr ""
+
 msgid "Go Back"
 msgstr "返回"
+
+msgid "Greater Than"
+msgstr ""
+
+msgid "Greater Than Other Field"
+msgstr ""
+
+msgid "Green"
+msgstr ""
+
+msgid "Headers"
+msgstr ""
+
+msgid "Height"
+msgstr ""
 
 msgid "Hi, {0}"
 msgstr "你好，{0}"
 
+msgid "Home Link"
+msgstr ""
+
+msgid "Host"
+msgstr ""
+
+msgid "Hour"
+msgstr ""
+
+msgid "Icon"
+msgstr ""
+
+msgid "Image"
+msgstr ""
+
+msgid "Incorrect value"
+msgstr ""
+
+msgid "Indigo"
+msgstr ""
+
+msgid "Initial Values"
+msgstr ""
+
+msgid "Input {deactivationKey} to continue"
+msgstr ""
+
 msgid "Integration"
 msgstr "集成"
 
+msgid "Is In"
+msgstr ""
+
+msgid "Is Not In"
+msgstr ""
+
+msgid "Is Not Null"
+msgstr ""
+
+msgid "Is Null"
+msgstr ""
+
 msgid "Join our Discord community"
 msgstr "加入我们社区"
+
+msgid "JSON"
+msgstr ""
+
+msgid "Key"
+msgstr ""
+
+msgid "Label"
+msgstr ""
 
 msgid "Labels"
 msgstr "标签"
@@ -297,8 +631,23 @@ msgstr "标签"
 msgid "Language"
 msgstr "语言"
 
+msgid "Large Logo"
+msgstr ""
+
+msgid "Less Than"
+msgstr ""
+
+msgid "Less Than Other Field"
+msgstr ""
+
 msgid "Light"
 msgstr "明亮"
+
+msgid "Light Color Scheme"
+msgstr ""
+
+msgid "Link Entity"
+msgstr ""
 
 msgid "Link Users To Database"
 msgstr "建立用户数据库"
@@ -315,11 +664,47 @@ msgstr "管理{title}"
 msgid "Manage Variables"
 msgstr "变量管理"
 
+msgid "Max"
+msgstr ""
+
+msgid "Max Length"
+msgstr ""
+
+msgid "Maximum file size to upload in MB"
+msgstr ""
+
 msgid "Menu Settings"
 msgstr "菜单设置"
 
+msgid "Message"
+msgstr ""
+
+msgid "Metadata Columns"
+msgstr ""
+
+msgid "Min"
+msgstr ""
+
+msgid "Min Length"
+msgstr ""
+
+msgid "Month"
+msgstr ""
+
 msgid "My Account"
 msgstr "我的账户"
+
+msgid "Name"
+msgstr ""
+
+msgid "New Password"
+msgstr ""
+
+msgid "New Password Again"
+msgstr ""
+
+msgid "No"
+msgstr ""
 
 msgid "No {singular} Has Been Added Yet"
 msgstr "没有{singular}被添加"
@@ -336,6 +721,21 @@ msgstr "当前{0}没有结果。"
 msgid "No Search Results"
 msgstr "没有搜索结果"
 
+msgid "Not Equal"
+msgstr ""
+
+msgid "Not Equal To Other Field"
+msgstr ""
+
+msgid "Now"
+msgstr ""
+
+msgid "Number"
+msgstr ""
+
+msgid "Old Password"
+msgstr ""
+
 msgid "On Create"
 msgstr "创建"
 
@@ -344,6 +744,21 @@ msgstr "删除"
 
 msgid "On Update"
 msgstr "更新"
+
+msgid "Only capital letters and underscores are allowed"
+msgstr ""
+
+msgid "Only lowercase letters, numbers and {delimiter} are allowed"
+msgstr ""
+
+msgid "Operator"
+msgstr ""
+
+msgid "OR"
+msgstr ""
+
+msgid "Orange"
+msgstr ""
 
 msgid "Order"
 msgstr "顺序"
@@ -360,6 +775,15 @@ msgstr "演示账户的密码将不会被更改"
 msgid "Persistent Query"
 msgstr "持久查询"
 
+msgid "Plural"
+msgstr ""
+
+msgid "Port"
+msgstr ""
+
+msgid "Positive Number"
+msgstr ""
+
 msgid "Preferences"
 msgstr "偏好设置"
 
@@ -372,20 +796,50 @@ msgstr "预览"
 msgid "Profile"
 msgstr "个人信息"
 
+msgid "Quarter"
+msgstr ""
+
+msgid "Red"
+msgstr ""
+
+msgid "Reference"
+msgstr ""
+
 msgid "Reference Template"
 msgstr "参考模板"
+
+msgid "Regex"
+msgstr ""
+
+msgid "Region"
+msgstr ""
+
+msgid "Relation Labels"
+msgstr ""
+
+msgid "Relation Template"
+msgstr ""
 
 msgid "Relations"
 msgstr "关联"
 
+msgid "Relations Order"
+msgstr ""
+
 msgid "Relationship Settings"
 msgstr "关联设置"
+
+msgid "Remember Me"
+msgstr ""
 
 msgid "Remove"
 msgstr "移除"
 
 msgid "Remove Nested Filter"
 msgstr "移除嵌套过滤器"
+
+msgid "Required"
+msgstr ""
 
 msgid "Reset"
 msgstr "重置"
@@ -404,6 +858,9 @@ msgstr "显示 {label}"
 
 msgid "Revealing {label}"
 msgstr "显示 {label}"
+
+msgid "Rich Text"
+msgstr ""
 
 msgid "Role"
 msgstr "角色"
@@ -429,14 +886,44 @@ msgstr "保存{singular}"
 msgid "Saving {singular}"
 msgstr "保存{singular}"
 
+msgid "Script"
+msgstr ""
+
+msgid "Search"
+msgstr ""
+
 msgid "Secret"
 msgstr "密钥"
+
+msgid "Secret Access Key"
+msgstr ""
 
 msgid "Secrets"
 msgstr "密钥"
 
 msgid "Selection"
 msgstr "选择"
+
+msgid "Selection List"
+msgstr ""
+
+msgid "Selections Settings"
+msgstr ""
+
+msgid "Send Mail"
+msgstr ""
+
+msgid "Send Message"
+msgstr ""
+
+msgid "Send SMS"
+msgstr ""
+
+msgid "Sender Email"
+msgstr ""
+
+msgid "Sender Name"
+msgstr ""
 
 msgid "Setting Up Account"
 msgstr "账户设置"
@@ -462,11 +949,38 @@ msgstr "登录"
 msgid "Signing In"
 msgstr "正在登录"
 
+msgid "Singular"
+msgstr ""
+
 msgid "Site"
 msgstr "站点"
 
+msgid "Site Settings"
+msgstr ""
+
+msgid "Small Logo"
+msgstr ""
+
 msgid "Star us on Github"
 msgstr "谢谢给我们项目Star"
+
+msgid "Start of year"
+msgstr ""
+
+msgid "Storage Key"
+msgstr ""
+
+msgid "String"
+msgstr ""
+
+msgid "Subject"
+msgstr ""
+
+msgid "Summary Card"
+msgstr ""
+
+msgid "SVG"
+msgstr ""
 
 msgid "System"
 msgstr "系统"
@@ -477,8 +991,17 @@ msgstr "系统设置"
 msgid "System Information"
 msgstr "系统信息"
 
+msgid "System Settings"
+msgstr ""
+
 msgid "Table"
 msgstr "表格"
+
+msgid "Table Columns Settings"
+msgstr ""
+
+msgid "Table Fields Order"
+msgstr ""
 
 msgid "Table View"
 msgstr "表格视图"
@@ -488,6 +1011,12 @@ msgstr "表格视图"
 
 msgid "Test Widget Script"
 msgstr "测试部件脚本"
+
+msgid "Text"
+msgstr ""
+
+msgid "Textarea"
+msgstr ""
 
 msgid "Theme"
 msgstr "主题"
@@ -504,8 +1033,26 @@ msgstr "这个实体没有字段。请使用您喜欢的数据库工具在此处
 msgid "This entity has no relations"
 msgstr "该实体没有关联"
 
+msgid "Title"
+msgstr ""
+
+msgid "To"
+msgstr ""
+
 msgid "Toggle Connection URL"
 msgstr "切换连接"
+
+msgid "Token"
+msgstr ""
+
+msgid "Token Validity Duration In Days"
+msgstr ""
+
+msgid "Trigger"
+msgstr ""
+
+msgid "Type"
+msgstr ""
 
 msgid "Update"
 msgstr "更新"
@@ -513,11 +1060,32 @@ msgstr "更新"
 msgid "Update {singular}"
 msgstr "更新{singular}"
 
+msgid "Update Columns Settings"
+msgstr ""
+
+msgid "Update Fields Order"
+msgstr ""
+
+msgid "Updated At"
+msgstr ""
+
 msgid "Updating {singular}"
 msgstr "更新{singular}"
 
+msgid "Uppercase"
+msgstr ""
+
+msgid "URL"
+msgstr ""
+
+msgid "Use Colors"
+msgstr ""
+
 msgid "Use Icon"
 msgstr "使用图标"
+
+msgid "Use SSL"
+msgstr ""
 
 msgid "Use SVG"
 msgstr "使用SVG"
@@ -525,11 +1093,23 @@ msgstr "使用SVG"
 msgid "User"
 msgstr "用户"
 
+msgid "Username"
+msgstr ""
+
 msgid "Users"
 msgstr "用户"
 
 msgid "Users Link To Database"
 msgstr "建立用户数据库"
+
+msgid "Users to Database Link"
+msgstr ""
+
+msgid "Validations"
+msgstr ""
+
+msgid "Value"
+msgstr ""
 
 msgid "Variables"
 msgstr "变量"
@@ -537,14 +1117,29 @@ msgstr "变量"
 msgid "View"
 msgstr "查看"
 
-msgid "View {0}"
-msgstr "查看{0}"
-
 msgid "View Full Details"
 msgstr "查看详情"
+
+msgid "Violet"
+msgstr ""
 
 msgid "Visit our website"
 msgstr "访问我们网站"
 
+msgid "Week"
+msgstr ""
+
 msgid "Widget Script"
 msgstr "部件脚本"
+
+msgid "Width"
+msgstr ""
+
+msgid "Year"
+msgstr ""
+
+msgid "Yes"
+msgstr ""
+
+msgid "Your Users Table"
+msgstr ""

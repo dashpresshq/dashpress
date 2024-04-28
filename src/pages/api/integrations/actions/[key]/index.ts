@@ -1,4 +1,4 @@
-import { USER_PERMISSIONS } from "shared/constants/user";
+import { UserPermissions } from "shared/constants/user";
 import { requestHandler } from "backend/lib/request";
 import { integrationsApiService } from "backend/integrations/integrations.service";
 
@@ -57,7 +57,7 @@ export default requestHandler(
   [
     {
       _type: "canUser",
-      body: USER_PERMISSIONS.CAN_MANAGE_APP_CREDENTIALS,
+      body: UserPermissions.CAN_MANAGE_APP_CREDENTIALS,
     },
   ]
 );

@@ -23,6 +23,7 @@ import { TableFilterType } from "shared/types/data";
 import { useEvaluateScriptContext } from "frontend/hooks/scripts";
 import { ReactNode } from "react";
 import { FormFieldTypes } from "shared/validations/types";
+import { msg } from "@lingui/macro";
 import { viewSpecialDataTypes } from "../viewSpecialDataTypes";
 import { PortalColumnRender, usePortalTableColumns } from "./portal";
 import { evalutePresentationScript } from "../evaluatePresentationScript";
@@ -152,7 +153,7 @@ export const useTableColumns = (
   const columns: ITableColumn[] = entityCrudFields.data.map(
     ({ name, isId }) => {
       const tableColumn: ITableColumn = {
-        Header: getEntityFieldLabels(name),
+        Header: msg`${getEntityFieldLabels(name)}`,
         accessor: name,
         filter: buildFilterConfigFromType({
           entityType: entityFieldTypes[name],
@@ -197,10 +198,6 @@ export const useTableColumns = (
             cellRender = ellipsis(value as string, 50);
           }
 
-          if (typeof value === "object") {
-            cellRender = JSON.stringify(value);
-          }
-
           if (specialDataTypeRender) {
             cellRender = specialDataTypeRender;
           }
@@ -225,7 +222,7 @@ export const useTableColumns = (
 
   if (actionButtons.length > 0) {
     columns.push({
-      Header: "Actions",
+      Header: msg`Actions`,
       accessor: ACTIONS_ACCESSOR,
       disableSortBy: true,
       Cell: ({ row }: { row: { original: Record<string, unknown> } }) => (

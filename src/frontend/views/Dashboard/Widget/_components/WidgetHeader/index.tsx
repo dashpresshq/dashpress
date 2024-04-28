@@ -68,8 +68,8 @@ export function WidgetHeader({
             <DropDownMenu
               ariaLabel={`Toggle ${title} Menu`}
               menuItems={DASHBOARD_RELATIVE_DAYS.map(({ label, value }) => ({
-                id: label,
-                label: msg`${label}`,
+                id: value,
+                label,
                 systemIcon: null,
                 action: () => {
                   setWidgetRelativeDate({

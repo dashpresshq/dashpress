@@ -13,23 +13,22 @@ const locales = [
   "pt-br", // portuguese
   "ko-kr", // korean
 
-  "bn-in", // bengali
-  "hi-in", // hindi
-  "ar-sa", // arabic
-  "pl-pl", // polish
-  "tr-tr", // turkish
-  "vi-vn", // vietnamese
-  "id-id", // indonesian
-  "uk-ua", // ukrainian
-  "hu-hu", // hungarian
-  "ro-ro", // romanian
-  "sv-se", // swedish
-  "nl-nl", // dutch
-  "fa-ir", // persian
-  "cs-cz", // czech
-  "el-gr", // greek
-  "th-th", // thai
-  "he-il", // hebrew
+  // "bn-in", // bengali
+  // "ar-sa", // arabic
+  // "pl-pl", // polish
+  // "tr-tr", // turkish
+  // "vi-vn", // vietnamese
+  // "id-id", // indonesian
+  // "uk-ua", // ukrainian
+  // "hu-hu", // hungarian
+  // "ro-ro", // romanian
+  // "sv-se", // swedish
+  // "nl-nl", // dutch
+  // "fa-ir", // persian
+  // "cs-cz", // czech
+  // "el-gr", // greek
+  // "th-th", // thai
+  // "he-il", // hebrew
 ];
 
 if (process.env.NODE_ENV !== "production") {
@@ -44,7 +43,11 @@ module.exports = {
   catalogs: [
     {
       path: "<rootDir>/src/translations/locales/{locale}",
-      include: ["<rootDir>/src/frontend"],
+      include: [
+        "<rootDir>/src/frontend",
+        "<rootDir>/src/shared",
+        "<rootDir>/src/backend",
+      ],
     },
   ],
   format: formatter({ origins: false }),

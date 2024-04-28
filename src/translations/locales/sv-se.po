@@ -22,6 +22,72 @@ msgstr ""
 msgid "\"{0}\" Validations"
 msgstr ""
 
+msgid "[[ name ]] is an invalid date"
+msgstr ""
+
+msgid "[[ name ]] is an invalid email"
+msgstr ""
+
+msgid "[[ name ]] is an invalid json"
+msgstr ""
+
+msgid "[[ name ]] is an invalid URL"
+msgstr ""
+
+msgid "[[ name ]] is invalid"
+msgstr ""
+
+msgid "[[ name ]] is invalid. Allowed values are [[ options ]]"
+msgstr ""
+
+msgid "[[ name ]] is not a text"
+msgstr ""
+
+msgid "[[ name ]] is required"
+msgstr ""
+
+msgid "[[ name ]] should be a boolean"
+msgstr ""
+
+msgid "[[ name ]] should be a color"
+msgstr ""
+
+msgid "[[ name ]] should be a number"
+msgstr ""
+
+msgid "[[ name ]] should be greater than [[ length ]] characters"
+msgstr ""
+
+msgid "[[ name ]] should be greater than [[ otherField ]]"
+msgstr ""
+
+msgid "[[ name ]] should be greater than [[ value ]]"
+msgstr ""
+
+msgid "[[ name ]] should be less than [[ length ]] characters"
+msgstr ""
+
+msgid "[[ name ]] should be less than [[ otherField ]]"
+msgstr ""
+
+msgid "[[ name ]] should be less than [[ value ]]"
+msgstr ""
+
+msgid "[[ name ]] should be positive number"
+msgstr ""
+
+msgid "[[ name ]] should contain only alphabets and numbers"
+msgstr ""
+
+msgid "[[ name ]] should contain only upper cases"
+msgstr ""
+
+msgid "[[ name ]] should match [[ otherField ]]"
+msgstr ""
+
+msgid "[[ name ]] should not match [[ otherField ]]"
+msgstr ""
+
 msgid "{0}"
 msgstr ""
 
@@ -38,6 +104,9 @@ msgid "{DATE_FORMAT_LIB_LINK}"
 msgstr ""
 
 msgid "{errorMessage}"
+msgstr ""
+
+msgid "{errorTemplate}"
 msgstr ""
 
 msgid "{key}"
@@ -130,6 +199,12 @@ msgstr ""
 msgid "Close Canvas"
 msgstr ""
 
+msgid "Column Labels Settings"
+msgstr ""
+
+msgid "Column Types Settings"
+msgstr ""
+
 msgid "Configure"
 msgstr ""
 
@@ -142,6 +217,9 @@ msgstr ""
 msgid "Confirm"
 msgstr ""
 
+msgid "Confirm Delete"
+msgstr ""
+
 msgid "Constant"
 msgstr ""
 
@@ -152,6 +230,12 @@ msgid "Create"
 msgstr ""
 
 msgid "Create {singular}"
+msgstr ""
+
+msgid "Create Columns Settings"
+msgstr ""
+
+msgid "Create Fields Order"
 msgstr ""
 
 msgid "Create It"
@@ -187,6 +271,9 @@ msgstr ""
 msgid "Data"
 msgstr ""
 
+msgid "Date Format"
+msgstr ""
+
 msgid "Deactivate"
 msgstr ""
 
@@ -206,6 +293,12 @@ msgid "Delete Selection"
 msgstr ""
 
 msgid "Details"
+msgstr ""
+
+msgid "Details Columns Settings"
+msgstr ""
+
+msgid "Details Fields Order"
 msgstr ""
 
 msgid "Diction"
@@ -235,6 +328,12 @@ msgstr ""
 msgid "Enabled Entities"
 msgstr ""
 
+msgid "Enabled Entities Settings"
+msgstr ""
+
+msgid "Enabled Relations"
+msgstr ""
+
 msgid "Enter your credentials to continue"
 msgstr ""
 
@@ -257,6 +356,9 @@ msgid "Fields"
 msgstr ""
 
 msgid "File Storage"
+msgstr ""
+
+msgid "File Uploads Settings"
 msgstr ""
 
 msgid "Follow us on Twitter"
@@ -284,6 +386,9 @@ msgid "Go Back"
 msgstr ""
 
 msgid "Hi, {0}"
+msgstr ""
+
+msgid "Incorrect value"
 msgstr ""
 
 msgid "Integration"
@@ -319,7 +424,13 @@ msgstr ""
 msgid "Menu Settings"
 msgstr ""
 
+msgid "Metadata Columns"
+msgstr ""
+
 msgid "My Account"
+msgstr ""
+
+msgid "New Password Again"
 msgstr ""
 
 msgid "No {singular} Has Been Added Yet"
@@ -344,6 +455,9 @@ msgid "On Delete"
 msgstr ""
 
 msgid "On Update"
+msgstr ""
+
+msgid "Only capital letters and underscores are allowed"
 msgstr ""
 
 msgid "Order"
@@ -376,16 +490,31 @@ msgstr ""
 msgid "Reference Template"
 msgstr ""
 
+msgid "Relation Labels"
+msgstr ""
+
+msgid "Relation Template"
+msgstr ""
+
 msgid "Relations"
 msgstr ""
 
+msgid "Relations Order"
+msgstr ""
+
 msgid "Relationship Settings"
+msgstr ""
+
+msgid "Remember Me"
 msgstr ""
 
 msgid "Remove"
 msgstr ""
 
 msgid "Remove Nested Filter"
+msgstr ""
+
+msgid "Required"
 msgstr ""
 
 msgid "Reset"
@@ -430,6 +559,9 @@ msgstr ""
 msgid "Saving {singular}"
 msgstr ""
 
+msgid "Search"
+msgstr ""
+
 msgid "Secret"
 msgstr ""
 
@@ -437,6 +569,9 @@ msgid "Secrets"
 msgstr ""
 
 msgid "Selection"
+msgstr ""
+
+msgid "Selections Settings"
 msgstr ""
 
 msgid "Setting Up Account"
@@ -466,6 +601,9 @@ msgstr ""
 msgid "Site"
 msgstr ""
 
+msgid "Site Settings"
+msgstr ""
+
 msgid "Star us on Github"
 msgstr ""
 
@@ -478,7 +616,16 @@ msgstr ""
 msgid "System Information"
 msgstr ""
 
+msgid "System Settings"
+msgstr ""
+
 msgid "Table"
+msgstr ""
+
+msgid "Table Columns Settings"
+msgstr ""
+
+msgid "Table Fields Order"
 msgstr ""
 
 msgid "Table View"
@@ -514,6 +661,12 @@ msgstr ""
 msgid "Update {singular}"
 msgstr ""
 
+msgid "Update Columns Settings"
+msgstr ""
+
+msgid "Update Fields Order"
+msgstr ""
+
 msgid "Updating {singular}"
 msgstr ""
 
@@ -532,13 +685,16 @@ msgstr ""
 msgid "Users Link To Database"
 msgstr ""
 
+msgid "Users to Database Link"
+msgstr ""
+
+msgid "Validations"
+msgstr ""
+
 msgid "Variables"
 msgstr ""
 
 msgid "View"
-msgstr ""
-
-msgid "View {0}"
 msgstr ""
 
 msgid "View Full Details"

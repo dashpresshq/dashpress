@@ -2,7 +2,7 @@ import { ContentLayout } from "frontend/design-system/components/Section/Section
 import { SectionBox } from "frontend/design-system/components/Section/SectionBox";
 import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
 import { useNavigationStack } from "frontend/lib/routing/useNavigationStack";
-import { USER_PERMISSIONS } from "shared/constants/user";
+import { UserPermissions } from "shared/constants/user";
 import { AppLayout } from "frontend/_layouts/app";
 import {
   BASE_ROLE_FORM_SCHEMA,
@@ -18,7 +18,7 @@ export function RoleCreate() {
   useSetPageDetails({
     pageTitle: ADMIN_ROLES_CRUD_CONFIG.TEXT_LANG.CREATE,
     viewKey: "add-new-role",
-    permission: USER_PERMISSIONS.CAN_MANAGE_PERMISSIONS,
+    permission: UserPermissions.CAN_MANAGE_PERMISSIONS,
   });
 
   return (

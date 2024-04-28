@@ -17,7 +17,7 @@ import { uniqBy } from "shared/lib/array/uniq-by";
 import { userFriendlyCase } from "shared/lib/strings/friendly-case";
 import { IEntityField } from "shared/types/db";
 import { sortListByOrder } from "shared/lib/array/sort";
-import { msg } from "@lingui/macro";
+import { i18nNoop } from "translations/fake";
 import { useEntityFields } from "./entity.store";
 import {
   getFieldTypeBoundedValidations,
@@ -46,8 +46,8 @@ export function useEntityCrudConfig(entity: string) {
   const { singular, plural } = useEntityDiction(entity);
 
   return MAKE_CRUD_CONFIG({
-    plural: msg`${plural}`,
-    singular: msg`${singular}`,
+    plural: i18nNoop(plural),
+    singular: i18nNoop(singular),
   });
 }
 

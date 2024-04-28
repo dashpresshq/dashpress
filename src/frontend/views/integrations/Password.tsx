@@ -32,6 +32,7 @@ export function PasswordToReveal({
       <SchemaForm
         fields={{
           password: {
+            label: msg`Password`,
             type: "password",
             validations: [
               {

@@ -1,5 +1,6 @@
 import { FilterOperators, IColumnFilterBag } from "shared/types/data";
 import { ISelectData } from "shared/types/options";
+import { msg } from "@lingui/macro";
 import { SimpleSelect } from "../../Form/FormSelect/Simple";
 import { IFilterProps } from "./types";
 
@@ -9,7 +10,7 @@ export function FilterTableByBooleans({
 }: IFilterProps<IColumnFilterBag<boolean>, ISelectData[]>) {
   return (
     <SimpleSelect
-      options={[{ label: "-- Select State --", value: "" }, ...bag]}
+      options={[{ label: msg`-- Select State --`, value: "" }, ...bag]}
       onChange={(value: string) => {
         setFilter({
           operator: FilterOperators.EQUAL_TO,

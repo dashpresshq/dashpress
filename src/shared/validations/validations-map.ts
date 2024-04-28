@@ -18,6 +18,8 @@ import {
   isIn,
   isUppercase,
 } from "class-validator";
+import { msg } from "@lingui/macro";
+import { MessageDescriptor } from "@lingui/core";
 import {
   doesntMatchOtherField,
   greaterThanOtherField,
@@ -30,34 +32,38 @@ import { FormFieldTypes, ValidationTypes } from "./types";
 export const ENTITY_VALIDATION_CONFIG: Record<
   ValidationTypes,
   {
+    label: MessageDescriptor;
     input?: Record<string, unknown>;
     isBoundToType?: Array<FormFieldTypes>;
-    message: string;
+    message: MessageDescriptor;
     implementation: (
       value: unknown,
-      errorMessage: string,
+      errorMessage: MessageDescriptor,
       constraints: Record<string, unknown>,
       allValues: Record<string, unknown>
-    ) => undefined | string;
+    ) => undefined | MessageDescriptor;
   }
 > = {
   required: {
-    // TODO make this work
-    message: "{{ name }} is required",
+    label: msg`Required`,
+    message: msg`[[ name ]] is required`,
     implementation: (value, errorMessage) =>
       isNotEmpty(value) ? undefined : errorMessage,
   },
   isEmail: {
+    label: msg`Email`,
     isBoundToType: ["email"],
-    message: "{{ name }} is an invalid email",
+    message: msg`[[ name ]] is an invalid email`,
     implementation: handleValidation(isEmail),
   },
   isJson: {
+    label: msg`JSON`,
     isBoundToType: ["json"],
-    message: "{{ name }} is an invalid json",
+    message: msg`[[ name ]] is an invalid json`,
     implementation: handleValidation(isJSON),
   },
   isString: {
+    label: msg`String`,
     isBoundToType: [
       "password",
       "text",
@@ -66,122 +72,140 @@ export const ENTITY_VALIDATION_CONFIG: Record<
       "image",
       "file",
     ],
-    message: "{{ name }} is not a text",
+    message: msg`[[ name ]] is not a text`,
     implementation: handleValidation(isString),
   },
   isColor: {
+    label: msg`Color`,
     isBoundToType: ["color"],
-    message: "{{ name }} should be a color",
+    message: msg`[[ name ]] should be a color`,
     implementation: handleValidation(isRgbColor),
   },
   isUrl: {
+    label: msg`URL`,
     isBoundToType: ["url"],
-    message: "{{ name }} is an invalid URL",
+    message: msg`[[ name ]] is an invalid URL`,
     implementation: handleValidation(isURL),
   },
   isDate: {
+    label: msg`Date`,
     isBoundToType: ["datetime-local"],
-    message: "{{ name }} is an invalid Date",
+    message: msg`[[ name ]] is an invalid date`,
     implementation: handleValidation(isDate),
   },
   isNumber: {
+    label: msg`Number`,
     isBoundToType: ["number"],
-    message: "{{ name }} should be a number",
+    message: msg`[[ name ]] should be a number`,
     implementation: handleValidation(isNumber),
   },
   isBoolean: {
+    label: msg`Boolean`,
     isBoundToType: ["boolean"],
-    message: "{{ name }} should be a boolean",
+    message: msg`[[ name ]] should be a boolean`,
     implementation: handleValidation(isBoolean),
   },
 
   alphanumeric: {
-    message: "{{ name }} should contain only alphabets and numbers",
+    label: msg`Alphanumeric`,
+    message: msg`[[ name ]] should contain only alphabets and numbers`,
     implementation: handleValidation(isAlphanumeric),
   },
 
   isUpperCase: {
-    message: "{{ name }} should contain only upper cases",
+    label: msg`Uppercase`,
+    message: msg`[[ name ]] should contain only upper cases`,
     implementation: handleValidation(isUppercase),
   },
 
   postiveNumber: {
-    message: "{{ name }} should be positive number",
+    label: msg`Positive Number`,
+    message: msg`[[ name ]] should be positive number`,
     implementation: handleValidation(isPositive),
   },
   min: {
+    label: msg`Min`,
     input: {
       value: 3,
     },
-    message: "{{ name }} should be greater than {{ value }}",
+    message: msg`[[ name ]] should be greater than [[ value ]]`,
     implementation: handleValidation(min, "value"),
   },
   max: {
+    label: msg`Max`,
     input: {
       value: 10,
     },
-    message: "{{ name }} should be less than {{ value }}",
+    message: msg`[[ name ]] should be less than [[ value ]]`,
     implementation: handleValidation(max, "value"),
   },
   maxLength: {
+    label: msg`Max Length`,
     input: {
       length: 100,
     },
-    message: "{{ name }} should be less than {{ length }} characters",
+    message: msg`[[ name ]] should be less than [[ length ]] characters`,
     implementation: handleValidation(maxLength, "length"),
   },
   minLength: {
+    label: msg`Min Length`,
     input: {
       length: 3,
     },
-    message: "{{ name }} should be greater than {{ length }} characters",
+    message: msg`[[ name ]] should be greater than [[ length ]] characters`,
     implementation: handleValidation(minLength, "length"),
   },
   isIn: {
+    label: msg`Is In`,
     input: {
       options: [],
     },
-    message: "{{ name }} is invalid. Allowed values are {{ options }}",
+    message: msg`[[ name ]] is invalid. Allowed values are [[ options ]]`,
     implementation: handleValidation(isIn, "options"),
   },
 
   matchOtherField: {
+    label: msg`Equal To Other Field`,
     input: {
       otherField: "",
     },
-    message: "{{ name }} should match {{otherField}}",
+    message: msg`[[ name ]] should match [[ otherField ]]`,
     implementation: handleValidation(matchOtherField, "otherField"),
   },
 
   lessThanOtherField: {
+    label: msg`Less Than Other Field`,
     input: {
       otherField: "",
     },
-    message: "{{ name }} should be less than {{otherField}}",
+    message: msg`[[ name ]] should be less than [[ otherField ]]`,
     implementation: handleValidation(lessThanOtherField, "otherField"),
   },
 
   greaterThanOtherField: {
+    label: msg`Greater Than Other Field`,
     input: {
       otherField: "",
     },
-    message: "{{ name }} should be greater than {{otherField}}",
+    message: msg`[[ name ]] should be greater than [[ otherField ]]`,
     implementation: handleValidation(greaterThanOtherField, "otherField"),
   },
 
   doesntMatchOtherField: {
+    label: msg`Not Equal To Other Field`,
     input: {
       otherField: "",
     },
-    message: "{{ name }} should not match {{otherField}}",
+    message: msg`[[ name ]] should not match [[ otherField ]]`,
     implementation: handleValidation(doesntMatchOtherField, "otherField"),
   },
 
   regex: {
+    label: msg`Regex`,
     input: {
       pattern: "//",
     },
-    message: "{{ name }} is invalid",
+    message: msg`[[ name ]] is invalid`,
     implementation: handleValidation(matches, "pattern"),
   },
 };
@@ -196,5 +220,5 @@ export const SLUG_VALIDATION = (delimiter: "hyphens" | "underscores") => ({
       delimiter === "hyphens" ? "-" : "_"
     ),
   },
-  errorMessage: `Only lowercase letters, numbers and ${delimiter} are allowed`,
+  errorMessage: msg`Only lowercase letters, numbers and ${delimiter} are allowed`,
 });

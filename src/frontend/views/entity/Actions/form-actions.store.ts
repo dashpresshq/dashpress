@@ -5,7 +5,7 @@ import {
 } from "shared/types/actions";
 import { useApiMutateOptimisticOptions } from "frontend/lib/data/useMutate/useApiMutateOptimisticOptions";
 import { MutationHelpers } from "frontend/lib/data/useMutate/mutation-helpers";
-import { makeActionRequest } from "frontend/lib/data/makeRequest";
+import { ApiRequest } from "frontend/lib/data/makeRequest";
 import { useWaitForResponseMutationOptions } from "frontend/lib/data/useMutate/useWaitForResponseMutationOptions";
 import { useApi } from "frontend/lib/data/useApi";
 import { FORM_ACTION_CRUD_CONFIG, FORM_ACTION_ENDPOINT } from "./constants";
@@ -29,10 +29,7 @@ export const useIntegrationImplementationsList = (integration: string) =>
 export function useDeleteFormActionMutation(entity: string) {
   return useApiMutateOptimisticOptions<IFormAction[], string>({
     mutationFn: async (formActionId) =>
-      await makeActionRequest(
-        "DELETE",
-        FORM_ACTION_ENDPOINT.DELETE(formActionId)
-      ),
+      await ApiRequest.DELETE(FORM_ACTION_ENDPOINT.DELETE(formActionId)),
     dataQueryPath: LIST_ENTITY_FORM_ACTIONS(entity),
     successMessage: FORM_ACTION_CRUD_CONFIG.MUTATION_LANG.DELETE,
     onMutate: MutationHelpers.deleteByKey("id") as unknown as (
@@ -45,11 +42,7 @@ export function useDeleteFormActionMutation(entity: string) {
 export function useCreateFormActionMutation(entity: string) {
   return useWaitForResponseMutationOptions<IFormAction>({
     mutationFn: async (configuration) => {
-      return await makeActionRequest(
-        "POST",
-        FORM_ACTION_ENDPOINT.CREATE,
-        configuration
-      );
+      return await ApiRequest.POST(FORM_ACTION_ENDPOINT.CREATE, configuration);
     },
     endpoints: [LIST_ENTITY_FORM_ACTIONS(entity)],
     successMessage: FORM_ACTION_CRUD_CONFIG.MUTATION_LANG.CREATE,
@@ -59,8 +52,7 @@ export function useCreateFormActionMutation(entity: string) {
 export function useUpdateFormActionMutation(entity: string) {
   return useWaitForResponseMutationOptions<IFormAction>({
     mutationFn: async (formAction) =>
-      await makeActionRequest(
-        "PATCH",
+      await ApiRequest.PATCH(
         FORM_ACTION_ENDPOINT.UPDATE(formAction.id),
         formAction
       ),

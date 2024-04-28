@@ -28,6 +28,7 @@ import {
 } from "frontend/hooks/data/constants";
 import { DataCrudKeys } from "shared/types/data";
 import { msg } from "@lingui/macro";
+import { useLingui } from "@lingui/react";
 import { ENTITY_CRUD_LABELS } from "../constants";
 import { makeEntityFieldsSelectionKey } from "./constants";
 
@@ -51,6 +52,8 @@ export function ToggleCrudState({
     enabled: boolean;
   };
 }) {
+  const { _ } = useLingui();
+
   return (
     <Stack $justify="space-between" $align="flex-start">
       {toggling && toggling.onToggle && (
@@ -59,7 +62,9 @@ export function ToggleCrudState({
           systemIcon={toggling.enabled ? "Check" : "Square"}
           size="sm"
           isInverse
-          text={() => msg`Enable ${ENTITY_CRUD_LABELS[crudKey]} Functionality`}
+          text={() =>
+            msg`Enable ${_(ENTITY_CRUD_LABELS[crudKey])} Functionality`
+          }
           onClick={() => toggling.onToggle()}
         />
       )}

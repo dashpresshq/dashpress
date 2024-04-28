@@ -96,7 +96,7 @@ describe("pages/admin/[entity]/config/crud", () => {
         replaceMock: replaceMock$1,
         query: {
           entity: "entity-1",
-          tab: "Delete",
+          tab: "delete",
         },
       })
     );

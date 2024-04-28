@@ -1,5 +1,6 @@
 import { MessageDescriptor, i18n } from "@lingui/core";
 import { msg } from "@lingui/macro";
+import { i18nNoop } from "translations/fake";
 
 export const CRUD_CONFIG_NOT_FOUND = (singular: string) =>
   msg`${singular} could not be retrieved`;
@@ -22,6 +23,7 @@ export const MAKE_CRUD_CONFIG = ({
 }) => {
   const singular = i18n._(singular$1);
   const plural = i18n._(plural$1);
+
   return {
     MUTATION_LANG: {
       CREATE: msg`${singular} Created Successfully`,
@@ -44,12 +46,13 @@ export const MAKE_CRUD_CONFIG = ({
       MANAGE: msg`Manage ${plural}`,
       DELETE: msg`Delete ${singular}`,
       EDIT: msg`Edit ${singular}`,
+      DUPLICATE: msg`Duplicate ${singular}`,
       DETAILS: msg`${singular} Details`,
       SETTINGS: msg`${singular} Settings`,
       NOT_FOUND: CRUD_CONFIG_NOT_FOUND(singular),
-      TITLE: msg`${plural}`,
+      TITLE: i18nNoop(plural),
       EMPTY_LIST: msg`No ${singular} Has Been Added Yet`,
-      SINGULAR: msg`${singular}`,
+      SINGULAR: i18nNoop(singular),
     },
   };
 };

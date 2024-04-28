@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
 import { SystemIcon } from "frontend/design-system/Icons/System";
+import { useLingui } from "@lingui/react";
+import { msg } from "@lingui/macro";
 import { Input } from "../Styles";
 import { StyledBaseButton } from "../../Button/Button";
 
@@ -52,12 +54,13 @@ interface IProps {
 }
 
 export function FormSearch({ onChange }: IProps) {
+  const { _ } = useLingui();
   return (
     <InputGroup>
       <FormSearchStyled
         type="search"
         onChange={(e) => onChange(e.target.value.toLowerCase())}
-        placeholder="Search"
+        placeholder={_(msg`Search`)}
       />
       <InputGroupPrepend>
         <ButtonSearch type="button">

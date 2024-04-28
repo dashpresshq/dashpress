@@ -13,7 +13,7 @@ export function TableWidget({ data }: IProps) {
 
   const columns: ITableColumn[] = typescriptSafeObjectDotKeys(tableData[0]).map(
     (column) => ({
-      Header: userFriendlyCase(column),
+      Header: msg`${userFriendlyCase(column)}`,
       accessor: column,
       disableSortBy: true,
     })

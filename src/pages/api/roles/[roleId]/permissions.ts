@@ -1,5 +1,5 @@
 import { rolesApiController } from "backend/roles/roles.controller";
-import { USER_PERMISSIONS } from "shared/constants/user";
+import { UserPermissions } from "shared/constants/user";
 import { requestHandler } from "backend/lib/request";
 
 const REQUEST_QUERY_FIELD = "roleId";
@@ -21,17 +21,13 @@ export default requestHandler(
     DELETE: async (getValidatedRequest) => {
       const validatedRequest = await getValidatedRequest([
         {
-          _type: "requestQuery",
-          options: REQUEST_QUERY_FIELD,
-        },
-        {
-          _type: "requestBody",
-          options: {},
+          _type: "requestQueries",
+          options: [REQUEST_QUERY_FIELD, "permissions"],
         },
       ]);
       return await rolesApiController.removePermissions(
-        validatedRequest.requestQuery,
-        validatedRequest.requestBody
+        validatedRequest.requestQueries.roleId,
+        validatedRequest.requestQueries
       );
     },
 
@@ -55,7 +51,7 @@ export default requestHandler(
   [
     {
       _type: "canUser",
-      body: USER_PERMISSIONS.CAN_MANAGE_PERMISSIONS,
+      body: UserPermissions.CAN_MANAGE_PERMISSIONS,
     },
   ]
 );

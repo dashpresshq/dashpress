@@ -1,3 +1,4 @@
+import { useLingui } from "@lingui/react";
 import { Input } from "./Styles";
 import { ISharedFormInput } from "./_types";
 import { wrapLabelAndError, generateFormArias } from "./_wrapForm";
@@ -22,6 +23,9 @@ export const FormNumberInput = (formInput: IFormNumberInput) => {
   if (typeof input.value === "string") {
     input.onChange(getNumberValue(input.value, !!required));
   }
+
+  const { _ } = useLingui();
+
   const moreProps = { min: allowNegative ? Number.NEGATIVE_INFINITY : 0 };
 
   return wrapLabelAndError(
@@ -34,7 +38,7 @@ export const FormNumberInput = (formInput: IFormNumberInput) => {
       onChange={(e) => {
         input.onChange(getNumberValue(e.target.value, !!required));
       }}
-      placeholder={placeholder}
+      placeholder={placeholder ? _(placeholder) : null}
       type="number"
       disabled={disabled}
     />,

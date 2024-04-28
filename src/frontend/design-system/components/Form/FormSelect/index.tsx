@@ -1,6 +1,8 @@
 import Select from "react-select";
 import styled from "styled-components";
-import { ISelectData } from "shared/types/options";
+import { ILabelValue, ISelectData } from "shared/types/options";
+import { useLingui } from "@lingui/react";
+import { MessageDescriptor } from "@lingui/core";
 import {
   generateClassNames,
   wrapLabelAndError,
@@ -30,6 +32,8 @@ export function FormMultiSelect({
   onChange,
   ariaLabel,
 }: IFormMultiSelect) {
+  const { _ } = useLingui();
+
   return (
     <SelectStyled
       classNamePrefix={SharedSelectProps.classNamePrefix}
@@ -43,7 +47,10 @@ export function FormMultiSelect({
         onChange(newValues.map(({ value }: ISelectData) => value));
       }}
       aria-label={ariaLabel}
-      options={selectData}
+      options={selectData.map(({ value, label }) => ({
+        value,
+        label: _(label),
+      }))}
     />
   );
 }
@@ -60,13 +67,15 @@ export const FormSelect = (props: IFormSelect) => {
     defaultLabel,
     placeholder,
   } = props;
+  const { _ } = useLingui();
+
   const selectDataWithDefault = [
     {
       value: nullable ? null : "",
-      label: defaultLabel || `--- Select ${formLabel} ---`,
+      label: defaultLabel || `--- Select ${_(formLabel)} ---`,
     },
-    ...selectData,
-  ] as ISelectData[];
+    ...selectData.map(({ value, label }) => ({ value, label: _(label) })),
+  ];
   return wrapLabelAndError(
     <div data-testid={`react-select__${input.name}`}>
       <SelectStyled
@@ -79,7 +88,7 @@ export const FormSelect = (props: IFormSelect) => {
             label: "",
           }
         }
-        placeholder={placeholder}
+        placeholder={placeholder ? _(placeholder) : null}
         inputId={input.name}
         onChange={({ value }: any) => {
           input.onChange(nullable && !value ? null : value);
@@ -105,7 +114,7 @@ interface IFormNoValueSelect {
   selectData: ISelectData[];
   disabledOptions: string[];
   onChange: (value: string, label?: string) => void;
-  defaultLabel?: string;
+  defaultLabel?: MessageDescriptor;
 }
 
 export function FormNoValueSelect({
@@ -114,18 +123,17 @@ export function FormNoValueSelect({
   defaultLabel,
   onChange,
 }: IFormNoValueSelect) {
+  const { _ } = useLingui();
   return (
     <SelectStyled
       classNamePrefix={SharedSelectProps.classNamePrefix}
-      value={{ value: "", label: defaultLabel || "" }}
-      onChange={({ value, label }: any) => {
+      value={{ value: "", label: defaultLabel ? _(defaultLabel) : "" }}
+      onChange={({ value, label }: ILabelValue) => {
         onChange(value, label);
       }}
-      options={
-        selectData.filter(
-          ({ value }) => !disabledOptions.includes(value as string)
-        ) as { value: string; label: string }[]
-      }
+      options={selectData
+        .filter(({ value }) => !disabledOptions.includes(value as string))
+        .map(({ value, label }) => ({ value, label: _(label) }))}
     />
   );
 }

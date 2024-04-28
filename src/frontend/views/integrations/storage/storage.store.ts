@@ -2,7 +2,7 @@ import { CRUD_CONFIG_NOT_FOUND } from "frontend/lib/crud-config";
 import { reduceStringToNumber } from "shared/lib/strings";
 import { useApi } from "frontend/lib/data/useApi";
 import { useWaitForResponseMutationOptions } from "frontend/lib/data/useMutate/useWaitForResponseMutationOptions";
-import { makeActionRequest } from "frontend/lib/data/makeRequest";
+import { ApiRequest } from "frontend/lib/data/makeRequest";
 import { IStorageIntegration } from "shared/types/actions";
 import { usePasswordStore } from "../password.store";
 import { STORAGE_INTEGRATIONS_CRUD_CONFIG } from "./constants";
@@ -47,8 +47,7 @@ export function useActivateStorageMutation() {
     configuration: Record<string, string>;
   }>({
     mutationFn: async (configuration) =>
-      await makeActionRequest(
-        "POST",
+      await ApiRequest.POST(
         ACTIVE_STORAGE_INTEGRATIONS_ENDPOINT,
         configuration
       ),

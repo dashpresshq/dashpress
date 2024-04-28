@@ -12,5 +12,5 @@ export const usePortalExtendedPermissions = () => {
 };
 
 export const usePortalUserPermissions = () => {
-  return [];
+  return {};
 };

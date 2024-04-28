@@ -1,22 +1,23 @@
-import { ILabelValue } from "shared/types/options";
 import { userFriendlyCase } from "shared/lib/strings/friendly-case";
 import { Stack } from "frontend/design-system/primitives/Stack";
 import { FormButton } from "frontend/design-system/components/Button/FormButton";
 import { Spacer } from "frontend/design-system/primitives/Spacer";
 import { ListManager } from "frontend/design-system/components/ListManager";
-import { USER_PERMISSIONS } from "shared/constants/user";
+import { UserPermissions } from "shared/constants/user";
 import { PORTAL_PERMISSION_HEIRACHIES } from "shared/logic/permissions/portal";
 import { loadedDataState } from "frontend/lib/data/constants/loadedDataState";
 import { IListMangerItemProps } from "frontend/design-system/components/ListManager/ListManagerItem";
 import { msg } from "@lingui/macro";
+import { MessageDescriptor } from "@lingui/core";
+import { useLingui } from "@lingui/react";
 import {
   useCreateRolePermissionMutation,
-  useRolePermissionDeletionMutation,
+  useDeleteRolePermissionMutation,
   useRolePermissions,
 } from "../permissions.store";
 
 interface IProps {
-  permissionList: ILabelValue[];
+  permissionList: { value: string; label: MessageDescriptor }[];
   overAchingPermission?: string;
 }
 
@@ -25,15 +26,12 @@ interface IProps {
   LESSER PERMISSION FIRST
 */
 const PERMISSION_HEIRACHIES: [string, string][] = [
-  [USER_PERMISSIONS.CAN_MANAGE_USERS, USER_PERMISSIONS.CAN_RESET_PASSWORD],
+  [UserPermissions.CAN_MANAGE_USERS, UserPermissions.CAN_RESET_PASSWORD],
   [
-    USER_PERMISSIONS.CAN_CONFIGURE_APP,
-    USER_PERMISSIONS.CAN_MANAGE_APP_CREDENTIALS,
+    UserPermissions.CAN_CONFIGURE_APP,
+    UserPermissions.CAN_MANAGE_APP_CREDENTIALS,
   ],
-  [
-    USER_PERMISSIONS.CAN_MANAGE_ALL_ENTITIES,
-    USER_PERMISSIONS.CAN_CONFIGURE_APP,
-  ],
+  [UserPermissions.CAN_MANAGE_ALL_ENTITIES, UserPermissions.CAN_CONFIGURE_APP],
   ...PORTAL_PERMISSION_HEIRACHIES,
 ];
 
@@ -59,9 +57,10 @@ export function MutatePermission({
   permissionList,
   overAchingPermission,
 }: IProps) {
+  const { _ } = useLingui();
   const rolePermissions = useRolePermissions();
 
-  const rolePermissionDeletionMutation = useRolePermissionDeletionMutation();
+  const rolePermissionDeletionMutation = useDeleteRolePermissionMutation();
   const rolePermissionCreationMutation = useCreateRolePermissionMutation();
 
   const isOverAchingPermissionSelected =
@@ -92,7 +91,12 @@ export function MutatePermission({
         </>
       )}
       <ListManager
-        items={loadedDataState(permissionList)}
+        items={loadedDataState(
+          permissionList.map((permission) => ({
+            ...permission,
+            label: _(permission.label),
+          }))
+        )}
         listLengthGuess={10}
         labelField="label"
         empty={{

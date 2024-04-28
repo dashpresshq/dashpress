@@ -1,5 +1,5 @@
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
-import { USER_PERMISSIONS } from "shared/constants/user";
+import { UserPermissions } from "shared/constants/user";
 import { MAKE_APP_CONFIGURATION_CRUD_CONFIG } from "frontend/hooks/configuration/configuration.constant";
 import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
 import { ListSkeleton } from "frontend/design-system/components/Skeleton/List";
@@ -25,7 +25,7 @@ export function MenuSettings() {
   useSetPageDetails({
     pageTitle: CRUD_CONFIG.TEXT_LANG.TITLE,
     viewKey: SETTINGS_VIEW_KEY,
-    permission: USER_PERMISSIONS.CAN_CONFIGURE_APP,
+    permission: UserPermissions.CAN_CONFIGURE_APP,
   });
 
   const menuEntitiesToHide = useAppConfiguration("disabled_menu_entities");

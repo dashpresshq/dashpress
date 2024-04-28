@@ -1,7 +1,7 @@
-import { USER_PERMISSIONS } from "shared/constants/user";
 import { IAccountProfile } from "shared/types/user";
 import { requestHandler } from "backend/lib/request";
 import { usersApiService } from "backend/users/users.service";
+import { UserPermissions } from "shared/constants/user";
 
 const REQUEST_QUERY_FIELD = "username";
 
@@ -52,7 +52,7 @@ export default requestHandler(
   [
     {
       _type: "canUser",
-      body: USER_PERMISSIONS.CAN_MANAGE_USERS,
+      body: UserPermissions.CAN_MANAGE_USERS,
     },
   ]
 );

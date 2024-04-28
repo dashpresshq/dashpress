@@ -7,7 +7,6 @@ import { runValidationError } from "shared/validations/run";
 import { ToastService } from "frontend/lib/toast";
 import { resetFormValues } from "frontend/lib/form/utils";
 import { FormButton } from "frontend/design-system/components/Button/FormButton";
-import { userFriendlyCase } from "shared/lib/strings/friendly-case";
 import { SystemIconsKeys } from "shared/constants/Icons";
 import { useEvaluateScriptContext } from "frontend/hooks/scripts";
 import { MessageDescriptor } from "@lingui/core";
@@ -128,7 +127,7 @@ export function SchemaForm<T extends Record<string, unknown>>({
                           onChange={bag.onChange}
                           description={bag.description}
                           apiSelections={bag.apiSelections}
-                          label={bag.label || userFriendlyCase(field)}
+                          label={bag.label}
                           entityFieldSelections={bag.selections}
                           formProps={formProps}
                           from={from}

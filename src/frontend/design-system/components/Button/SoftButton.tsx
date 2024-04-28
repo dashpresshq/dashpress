@@ -7,7 +7,7 @@ import { useLingui } from "@lingui/react";
 import { SoftButtonStyled } from "./Button";
 import { Spin } from "../_/Spin";
 import { Tooltip } from "../Tooltip";
-import { ConfirmAlert } from "../ConfirmAlert";
+import { useConfirmAlert } from "../ConfirmAlert";
 import { IActionButton } from "./types";
 
 export function SoftButton({
@@ -27,6 +27,8 @@ export function SoftButton({
   const iconProps = {
     size: 14,
   };
+
+  const confirmAlert = useConfirmAlert();
 
   const { _ } = useLingui();
 
@@ -94,7 +96,7 @@ export function SoftButton({
           e.stopPropagation();
 
           if (shouldConfirmAlert) {
-            return ConfirmAlert({
+            return confirmAlert({
               title: shouldConfirmAlert,
               action,
             });

@@ -54,16 +54,11 @@ export async function makeRawRequest(path: string, errorMessage?: string) {
   return response;
 }
 
-export async function makeGetRequest(path: string, errorMessage?: string) {
-  const response = await makeRawRequest(path, errorMessage);
-  return response.json();
-}
-
 interface IActionRequestOptions {
   errorMessage?: string;
 }
 
-export const makeActionRequest = async (
+const makeActionRequest = async (
   method: "POST" | "PATCH" | "DELETE" | "PUT",
   path: string,
   data?: unknown,
@@ -87,6 +82,19 @@ export const makeActionRequest = async (
   } catch {
     return response;
   }
+};
+
+export const ApiRequest = {
+  GET: async (path: string, errorMessage?: string) => {
+    const response = await makeRawRequest(path, errorMessage);
+    return response.json();
+  },
+  POST: (path: string, data: unknown) => makeActionRequest("POST", path, data),
+  PUT: (path: string, data: unknown) => makeActionRequest("PUT", path, data),
+  PATCH: (path: string, data: unknown) =>
+    makeActionRequest("PATCH", path, data),
+  DELETE: (path: string) => makeActionRequest("DELETE", path),
+  ACTION: makeActionRequest,
 };
 
 export const makeFileRequest = async (path: string, formData: FormData) => {

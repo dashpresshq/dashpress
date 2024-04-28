@@ -2,13 +2,13 @@ import { IPaginatedDataState } from "shared/types/data";
 import {
   ColumnFiltersState,
   createColumnHelper,
-  HeaderContext,
   Table,
   Updater,
 } from "@tanstack/react-table";
 import { useEffect, useMemo } from "react";
 import { usePrevious } from "react-use";
 import { useToggle } from "frontend/hooks/state/useToggleState";
+import { useLingui } from "@lingui/react";
 import { ITableColumn } from "./types";
 import {
   buildTableStateToRefreshPageNumber,
@@ -18,14 +18,12 @@ import {
 const columnHelper = createColumnHelper<Record<string, unknown>>();
 
 export const useInternalColumns = (columns: ITableColumn[]) => {
+  const { _ } = useLingui();
   return useMemo(() => {
     return columns.map((column) => {
-      const columnHeader = column.Header;
       const header =
-        typeof columnHeader === "string"
-          ? columnHeader
-          : (headerContext: HeaderContext<Record<string, unknown>, unknown>) =>
-              columnHeader(headerContext);
+        typeof column.Header === "function" ? column.Header : _(column.Header);
+
       return columnHelper.accessor(column.accessor, {
         id: column.accessor,
         meta: {

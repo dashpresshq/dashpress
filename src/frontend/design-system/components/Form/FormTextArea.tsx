@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { useLingui } from "@lingui/react";
 import { Input } from "./Styles";
 import { ISharedFormInput } from "./_types";
 import { wrapLabelAndError, generateFormArias } from "./_wrapForm";
@@ -15,6 +16,7 @@ interface IFormTextArea extends ISharedFormInput {
 
 export const FormTextArea = (formInput: IFormTextArea) => {
   const { input, rows = 3, placeholder, disabled, meta } = formInput;
+  const { _ } = useLingui();
   return wrapLabelAndError(
     <TextArea
       {...generateFormArias(meta)}
@@ -26,7 +28,7 @@ export const FormTextArea = (formInput: IFormTextArea) => {
       onFocus={input.onFocus}
       onBlur={input.onBlur}
       rows={rows}
-      placeholder={placeholder}
+      placeholder={placeholder ? _(placeholder) : null}
       disabled={disabled}
     >
       {input.value}

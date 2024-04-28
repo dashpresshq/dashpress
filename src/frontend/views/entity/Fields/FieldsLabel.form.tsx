@@ -11,6 +11,7 @@ import {
 } from "frontend/design-system/components/Skeleton/Form";
 import { FormInput } from "frontend/design-system/components/Form/FormInput";
 import { FormButton } from "frontend/design-system/components/Button/FormButton";
+import { i18nNoop } from "translations/fake";
 
 interface IProps {
   fields: string[];
@@ -50,7 +51,7 @@ export function FieldsLabelForm({
               validateFields={[]}
             >
               {({ input, meta }) => (
-                <FormInput label={field} input={input} meta={meta} />
+                <FormInput label={i18nNoop(field)} input={input} meta={meta} />
               )}
             </Field>
           ))}

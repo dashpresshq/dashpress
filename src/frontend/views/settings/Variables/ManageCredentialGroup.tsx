@@ -9,7 +9,7 @@ import {
   IPageDetails,
   useSetCurrentActionItems,
 } from "frontend/lib/routing/usePageDetails";
-import { USER_PERMISSIONS } from "shared/constants/user";
+import { UserPermissions } from "shared/constants/user";
 import { usePasswordStore } from "frontend/views/integrations/password.store";
 import { useUserHasPermission } from "frontend/hooks/auth/user.store";
 import { INTEGRATIONS_GROUP_CONFIG } from "shared/config-bag/integrations";
@@ -27,6 +27,7 @@ import { IKeyValue } from "shared/types/options";
 import { useDocumentationActionButton } from "frontend/docs/constants";
 import { ActionButtons } from "frontend/design-system/components/Button/ActionButtons";
 import { DELETE_BUTTON_PROPS } from "frontend/design-system/components/Button/constants";
+import { msg } from "@lingui/macro";
 import {
   INTEGRATIONS_GROUP_ENDPOINT,
   useIntegrationConfigurationDeletionMutation,
@@ -107,7 +108,7 @@ export function ManageCredentialGroup({
 
   const canManageAction = !(
     group === IntegrationsConfigurationGroup.Credentials &&
-    !userHasPermission(USER_PERMISSIONS.CAN_MANAGE_APP_CREDENTIALS)
+    !userHasPermission(UserPermissions.CAN_MANAGE_APP_CREDENTIALS)
   );
 
   const showManageAction =
@@ -144,7 +145,7 @@ export function ManageCredentialGroup({
 
   const tableColumns: IFETableColumn<IKeyValue>[] = [
     {
-      Header: "Key",
+      Header: msg`Key`,
       accessor: "key",
       filter: {
         _type: "string",
@@ -160,13 +161,13 @@ export function ManageCredentialGroup({
       ),
     },
     {
-      Header: "Value",
+      Header: msg`Value`,
       accessor: "value",
     },
   ];
   if (showManageAction) {
     tableColumns.push({
-      Header: "Action",
+      Header: msg`Action`,
       disableSortBy: true,
       accessor: "__action__",
       Cell: MemoizedAction,
@@ -177,7 +178,7 @@ export function ManageCredentialGroup({
     <>
       <section aria-label={`${group} priviledge section`}>
         {group === IntegrationsConfigurationGroup.Credentials &&
-          userHasPermission(USER_PERMISSIONS.CAN_MANAGE_APP_CREDENTIALS) &&
+          userHasPermission(UserPermissions.CAN_MANAGE_APP_CREDENTIALS) &&
           revealedCredentials.data === undefined && (
             <Spacer>
               <PasswordToReveal

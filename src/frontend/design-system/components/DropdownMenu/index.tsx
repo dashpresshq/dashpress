@@ -15,7 +15,7 @@ import { BREAKPOINTS } from "../../constants";
 import { Spin } from "../_/Spin";
 import { SHADOW_CSS } from "../Card";
 import { IGroupActionButton } from "../Button/types";
-import { ConfirmAlert } from "../ConfirmAlert";
+import { useConfirmAlert } from "../ConfirmAlert";
 
 export interface IDropDownMenuItem extends IGroupActionButton {
   description?: string;
@@ -149,6 +149,8 @@ export function DropDownMenu({
     menuItems[0]
   );
 
+  const confirmAlert = useConfirmAlert();
+
   const runAction = (actionMenuItem: IDropDownMenuItem) => {
     if (typeof actionMenuItem.action === "string") {
       router.push(actionMenuItem.action);
@@ -156,7 +158,7 @@ export function DropDownMenu({
     }
 
     if (actionMenuItem.shouldConfirmAlert) {
-      return ConfirmAlert({
+      return confirmAlert({
         title: actionMenuItem.shouldConfirmAlert,
         action: actionMenuItem.action,
       });

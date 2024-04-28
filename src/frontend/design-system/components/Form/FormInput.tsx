@@ -1,3 +1,4 @@
+import { useLingui } from "@lingui/react";
 import { Input } from "./Styles";
 import { ISharedFormInput } from "./_types";
 import { wrapLabelAndError, generateFormArias } from "./_wrapForm";
@@ -8,7 +9,7 @@ interface IFormInput extends ISharedFormInput {
 
 export const FormInput = (formInput: IFormInput) => {
   const { input, type, disabled, meta, placeholder, ...rest } = formInput;
-
+  const { _ } = useLingui();
   return wrapLabelAndError(
     <Input
       {...input}
@@ -16,7 +17,7 @@ export const FormInput = (formInput: IFormInput) => {
       {...generateFormArias(meta)}
       type={type}
       id={formInput.input.name}
-      placeholder={placeholder}
+      placeholder={placeholder ? _(placeholder) : null}
       disabled={disabled}
     />,
     formInput

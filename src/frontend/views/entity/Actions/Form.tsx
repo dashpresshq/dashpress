@@ -9,8 +9,9 @@ import {
 } from "shared/types/actions";
 import { userFriendlyCase } from "shared/lib/strings/friendly-case";
 import { DataEventActions } from "shared/types/data";
-import { t } from "@lingui/macro";
+import { msg } from "@lingui/macro";
 import { typescriptSafeObjectDotEntries } from "shared/lib/objects";
+import { i18nNoop } from "translations/fake";
 import { useIntegrationImplementationsList } from "./form-actions.store";
 import { FORM_ACTION_CRUD_CONFIG } from "./constants";
 
@@ -37,7 +38,7 @@ export function ActionForm({
     integrationsList.map((action) => [action.key, action])
   );
   const activatedOptions = activatedIntegrations.map((integration) => ({
-    label: integrationsListMap[integration].title,
+    label: i18nNoop(integrationsListMap[integration].title),
     value: integration,
   }));
 
@@ -71,19 +72,19 @@ export function ActionForm({
 
   const fields: IAppliedSchemaFormConfig<any> = {
     trigger: {
-      label: "Trigger",
+      label: msg`Trigger`,
       type: "selection",
       selections: [
         {
-          label: t`On Create`,
+          label: msg`On Create`,
           value: DataEventActions.Create,
         },
         {
-          label: t`On Update`,
+          label: msg`On Update`,
           value: DataEventActions.Update,
         },
         {
-          label: t`On Delete`,
+          label: msg`On Delete`,
           value: DataEventActions.Delete,
         },
       ],
@@ -94,7 +95,7 @@ export function ActionForm({
       ],
     },
     integration: {
-      label: t`Integration`,
+      label: msg`Integration`,
       selections: activatedOptions,
       type: "selection",
       validations: [{ validationType: "required" }],
@@ -104,7 +105,7 @@ export function ActionForm({
       onChange: setIntegration,
     },
     action: {
-      label: "Action",
+      label: msg`Action`,
       type: "selection",
       validations: [{ validationType: "required" }],
       selections: implementations.data.map(({ key, label }) => ({

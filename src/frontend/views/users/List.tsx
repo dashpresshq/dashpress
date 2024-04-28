@@ -1,5 +1,5 @@
 import { AppLayout } from "frontend/_layouts/app";
-import { roleLabel, USER_PERMISSIONS } from "shared/constants/user";
+import { roleLabel, UserPermissions } from "shared/constants/user";
 import {
   FEPaginationTable,
   IFETableColumn,
@@ -17,6 +17,7 @@ import { useUserHasPermission } from "frontend/hooks/auth/user.store";
 import { IDropDownMenuItem } from "frontend/design-system/components/DropdownMenu";
 import { useCallback } from "react";
 import { msg } from "@lingui/macro";
+import { transformLabelValueToSelectData } from "translations/fake";
 import { ROLES_ENDPOINT_CONFIG } from "../roles/roles.store";
 import {
   ADMIN_USERS_CRUD_CONFIG,
@@ -28,7 +29,7 @@ export function ListUsers() {
   useSetPageDetails({
     pageTitle: ADMIN_USERS_CRUD_CONFIG.TEXT_LANG.TITLE,
     viewKey: `users`,
-    permission: USER_PERMISSIONS.CAN_MANAGE_USERS,
+    permission: UserPermissions.CAN_MANAGE_USERS,
   });
 
   const roles = useApi<IRolesList[]>(ROLES_ENDPOINT_CONFIG.LIST, {
@@ -68,7 +69,7 @@ export function ListUsers() {
 
   const columns: IFETableColumn<IAccountProfile>[] = [
     {
-      Header: "Username",
+      Header: msg`Username`,
       accessor: "username",
       filter: {
         _type: "string",
@@ -76,7 +77,7 @@ export function ListUsers() {
       },
     },
     {
-      Header: "Name",
+      Header: msg`Name`,
       accessor: "name",
       filter: {
         _type: "string",
@@ -84,16 +85,16 @@ export function ListUsers() {
       },
     },
     {
-      Header: "Role",
+      Header: msg`Role`,
       accessor: "role",
       filter: {
         _type: "status",
-        bag: roles.data,
+        bag: transformLabelValueToSelectData(roles.data),
       },
       Cell: ({ value }) => roleLabel(value as string),
     },
     {
-      Header: "Action",
+      Header: msg`Action`,
       disableSortBy: true,
       accessor: "__action__",
       Cell: MemoizedAction,
@@ -109,7 +110,7 @@ export function ListUsers() {
     },
   ];
 
-  if (userHasPermission(USER_PERMISSIONS.CAN_CONFIGURE_APP)) {
+  if (userHasPermission(UserPermissions.CAN_CONFIGURE_APP)) {
     actionsItems.push({
       id: "connect",
       systemIcon: "Link",

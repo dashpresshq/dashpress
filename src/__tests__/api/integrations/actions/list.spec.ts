@@ -20,6 +20,10 @@ describe("/api/integrations/actions/list", () => {
         {
           "configurationSchema": {
             "authPassword": {
+              "label": {
+                "id": "8ZsakT",
+                "message": "Password",
+              },
               "type": "text",
               "validations": [
                 {
@@ -28,6 +32,10 @@ describe("/api/integrations/actions/list", () => {
               ],
             },
             "authUser": {
+              "label": {
+                "id": "7PzzBU",
+                "message": "User",
+              },
               "type": "text",
               "validations": [
                 {
@@ -36,6 +44,10 @@ describe("/api/integrations/actions/list", () => {
               ],
             },
             "host": {
+              "label": {
+                "id": "Ai2U7L",
+                "message": "Host",
+              },
               "type": "text",
               "validations": [
                 {
@@ -44,6 +56,10 @@ describe("/api/integrations/actions/list", () => {
               ],
             },
             "port": {
+              "label": {
+                "id": "hZ6znB",
+                "message": "Port",
+              },
               "type": "number",
               "validations": [
                 {
@@ -59,6 +75,10 @@ describe("/api/integrations/actions/list", () => {
         {
           "configurationSchema": {
             "token": {
+              "label": {
+                "id": "TP9/K5",
+                "message": "Token",
+              },
               "type": "text",
               "validations": [
                 {
@@ -74,6 +94,10 @@ describe("/api/integrations/actions/list", () => {
         {
           "configurationSchema": {
             "apiKey": {
+              "label": {
+                "id": "yRnk5W",
+                "message": "API Key",
+              },
               "type": "text",
               "validations": [
                 {
@@ -89,6 +113,10 @@ describe("/api/integrations/actions/list", () => {
         {
           "configurationSchema": {
             "apiKey": {
+              "label": {
+                "id": "yRnk5W",
+                "message": "API Key",
+              },
               "type": "text",
               "validations": [
                 {
@@ -97,6 +125,10 @@ describe("/api/integrations/actions/list", () => {
               ],
             },
             "domain": {
+              "label": {
+                "id": "EoKe5U",
+                "message": "Domain",
+              },
               "type": "text",
               "validations": [
                 {
@@ -112,7 +144,13 @@ describe("/api/integrations/actions/list", () => {
         {
           "configurationSchema": {
             "accountSid": {
-              "label": "Account SID",
+              "label": {
+                "id": "J/hVSQ",
+                "message": "{0}",
+                "values": {
+                  "0": "Account SID",
+                },
+              },
               "type": "text",
               "validations": [
                 {
@@ -121,6 +159,10 @@ describe("/api/integrations/actions/list", () => {
               ],
             },
             "authToken": {
+              "label": {
+                "id": "TP9/K5",
+                "message": "Token",
+              },
               "type": "text",
               "validations": [
                 {
@@ -136,6 +178,10 @@ describe("/api/integrations/actions/list", () => {
         {
           "configurationSchema": {
             "serverToken": {
+              "label": {
+                "id": "TP9/K5",
+                "message": "Token",
+              },
               "type": "text",
               "validations": [
                 {
@@ -151,6 +197,10 @@ describe("/api/integrations/actions/list", () => {
         {
           "configurationSchema": {
             "apiKey": {
+              "label": {
+                "id": "yRnk5W",
+                "message": "API Key",
+              },
               "type": "text",
               "validations": [
                 {

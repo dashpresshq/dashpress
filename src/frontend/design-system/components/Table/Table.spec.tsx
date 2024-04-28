@@ -1,5 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import { msg } from "@lingui/macro";
+import { ApplicationRoot } from "frontend/components/ApplicationRoot";
+import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
 import { Table } from ".";
 import { ITableProps } from "./types";
 import { TABLE_COLUMNS, TABLE_DATA } from "./data";
@@ -18,9 +20,17 @@ const DEFAULT_TABLE_PROPS: ITableProps<unknown> = {
   tableData: TABLE_DATA,
 };
 
+const useRouter = jest.spyOn(require("next/router"), "useRouter");
+
+useRouter.mockImplementation(USE_ROUTER_PARAMS({}));
+
 describe("Table", () => {
   it("should render data rows", async () => {
-    render(<Table {...DEFAULT_TABLE_PROPS} />);
+    render(
+      <ApplicationRoot>
+        <Table {...DEFAULT_TABLE_PROPS} />
+      </ApplicationRoot>
+    );
 
     expect(
       screen.getByRole("row", {

@@ -7,7 +7,7 @@ export interface IActionButton {
   systemIcon: SystemIconsKeys;
   action: string | (() => void);
   disabled?: boolean;
-  shouldConfirmAlert?: string;
+  shouldConfirmAlert?: MessageDescriptor;
   size?: "sm" | "xs";
   block?: true;
   noToolTip?: true;

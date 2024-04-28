@@ -1,4 +1,5 @@
 import { Knex } from "knex";
+import { MessageDescriptor } from "@lingui/core";
 import { ISystemStatusForDisplay } from "./options";
 
 export enum FilterOperators {
@@ -30,7 +31,7 @@ export interface IColumnFilterBag<T> {
 }
 
 export interface IDateFilterOption {
-  label: string;
+  label: MessageDescriptor;
   value: string;
   hideOnFrom?: true;
   hideOnTo?: true;

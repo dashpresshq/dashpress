@@ -64,17 +64,17 @@ describe("pages/admin/[entity]/config/crud", () => {
   });
 
   describe.each([
-    { tab: "Update" },
-    { tab: "Details" },
-    { tab: "Create" },
-    { tab: "Delete" },
-  ])("$tab feature", ({ tab }) => {
+    { tab: "Update", id: "update" },
+    { tab: "Details", id: "details" },
+    { tab: "Create", id: "create" },
+    { tab: "Delete", id: "delete" },
+  ])("$tab feature", ({ tab, id }) => {
     beforeAll(() => {
       useRouter.mockImplementation(
         USE_ROUTER_PARAMS({
           query: {
             entity: "entity-1",
-            tab,
+            tab: id,
           },
         })
       );

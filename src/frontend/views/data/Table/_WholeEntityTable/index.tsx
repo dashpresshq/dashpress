@@ -8,7 +8,7 @@ import { abbreviateNumber } from "frontend/lib/numbers";
 import { TableSkeleton } from "frontend/design-system/components/Skeleton/Table";
 import { Card } from "frontend/design-system/components/Card";
 import { Tabs } from "frontend/design-system/components/Tabs";
-import { msg } from "@lingui/macro";
+import { i18nNoop } from "translations/fake";
 import { DetailsCanvas } from "./DetailsCanvas";
 import { TableTopComponent, usePortalTableTabs } from "../portal";
 import { EntityDataTable } from "./EntityDataTable";
@@ -84,7 +84,7 @@ export function WholeEntityTable({
                     />
                   ),
                   id: title.trim(),
-                  label: msg`${title}(${currentCount})`,
+                  label: i18nNoop(`${title}(${currentCount})`),
                 };
               })}
             />

@@ -1,4 +1,4 @@
-import { USER_PERMISSIONS } from "shared/constants/user";
+import { UserPermissions } from "shared/constants/user";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { useUserHasPermission } from "frontend/hooks/auth/user.store";
 import styled from "styled-components";
@@ -32,7 +32,7 @@ export function BaseDashboard({ dashboardId, manageLink }: IProps) {
   return (
     <AppLayout
       actionItems={
-        userHasPermission(USER_PERMISSIONS.CAN_MANAGE_DASHBOARD)
+        userHasPermission(UserPermissions.CAN_MANAGE_DASHBOARD)
           ? [
               {
                 id: "manage-dashboard",

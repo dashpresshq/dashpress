@@ -18,7 +18,7 @@ import { useMutateBaseEntitySettingsMenu } from "./portal";
 
 const baseMenuItems = (entity: string): IMenuSectionItem[] => [
   {
-    action: NAVIGATION_LINKS.ENTITY.CONFIG.CRUD(entity, {}),
+    action: NAVIGATION_LINKS.ENTITY.CONFIG.CRUD(entity),
     systemIcon: "Sliders",
     name: msg`CRUD`,
     order: 10,
@@ -30,7 +30,7 @@ const baseMenuItems = (entity: string): IMenuSectionItem[] => [
     order: 20,
   },
   {
-    action: NAVIGATION_LINKS.ENTITY.CONFIG.FIELDS(entity, {}),
+    action: NAVIGATION_LINKS.ENTITY.CONFIG.FIELDS(entity),
     name: msg`Fields`,
     systemIcon: "File",
     order: 30,

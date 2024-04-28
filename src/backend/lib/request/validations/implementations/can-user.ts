@@ -2,10 +2,16 @@ import { ForbiddenError, progammingError } from "backend/lib/errors";
 import { rolesApiService } from "backend/roles/roles.service";
 import { userFriendlyCase } from "shared/lib/strings/friendly-case";
 import { UserPermissions } from "shared/constants/user";
+import { PORTAL_USER_PERMISSIONS } from "shared/constants/portal/user";
 import { ValidationImplType } from "./types";
 
 const ERROR_MESSAGE =
   "Your account doesn't have enough priviledge to perform this action";
+
+const ALL_PERMISSIONS = Object.values({
+  ...UserPermissions,
+  ...PORTAL_USER_PERMISSIONS,
+});
 
 export const canUserValidationImpl: ValidationImplType<void> = async (
   req,
@@ -18,7 +24,7 @@ export const canUserValidationImpl: ValidationImplType<void> = async (
 
   progammingError(
     "The provided permission seems to be invalid",
-    !Object.values(UserPermissions).includes(requiredPermission)
+    !ALL_PERMISSIONS.includes(requiredPermission)
   );
 
   if (

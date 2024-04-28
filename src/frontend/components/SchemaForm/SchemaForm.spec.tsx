@@ -500,7 +500,8 @@ describe("<SchemaForm />", () => {
 
     await userEvent.type(screen.getByLabelText("Name"), "Foo");
 
-    expect(onChangeMock).toHaveBeenCalledTimes(6);
+    expect(onChangeMock).toHaveBeenCalledWith({ name: "F" });
+    expect(onChangeMock).toHaveBeenCalledWith({ name: "Fo" });
     expect(onChangeMock).toHaveBeenLastCalledWith({ name: "Foo" });
   });
 });

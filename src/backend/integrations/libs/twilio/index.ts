@@ -1,7 +1,7 @@
 import { IAppliedSchemaFormConfig } from "shared/form-schemas/types";
 import { IActionIntegrationsImplemention } from "shared/types/actions";
 import { msg } from "@lingui/macro";
-import { i18nNoop } from "shared/lib/noop";
+import { i18nNoop } from "translations/fake";
 import { SEND_SMS } from "./sendSms";
 import { IActionConfig } from "./types";
 
@@ -16,7 +16,7 @@ const CONFIGURATION_SCHEMA: IAppliedSchemaFormConfig<IActionConfig> = {
     ],
   },
   accountSid: {
-    label: msg`${i18nNoop("Account SID")}`,
+    label: i18nNoop("Account SID"),
     type: "text",
     validations: [
       {

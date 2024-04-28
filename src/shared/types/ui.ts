@@ -1,6 +1,8 @@
+import { MessageDescriptor } from "@lingui/core";
+
 export interface IColorableSelection {
   color?: string;
-  label: string;
+  label: MessageDescriptor;
   value: string | boolean;
 }
 

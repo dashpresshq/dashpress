@@ -30,7 +30,7 @@ const CONFIG_SCHEMA: IAppliedSchemaFormConfig<IConfig> = {
 };
 
 export const SEND_MESSAGE = {
-  label: "Send Message",
+  label: msg`Send Message`,
   configurationSchema: CONFIG_SCHEMA,
   do: async (config: IActionConfig, messageConfig: IConfig) => {
     return await makeIntegrationRequest("POST", {

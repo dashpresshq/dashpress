@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { Typo } from "frontend/design-system/primitives/Typo";
 import { IColorableSelection } from "shared/types/ui";
+import { useLingui } from "@lingui/react";
 
 const DEFAULT_TAG_COLOR = "#000000";
 
@@ -17,9 +18,10 @@ const TextColor = styled(Typo.SM)<{ customColor: string }>`
 `;
 
 export function OptionTag({ color, label }: IColorableSelection) {
+  const { _ } = useLingui();
   return (
     <Root color={color}>
-      <TextColor customColor={color}>{label}</TextColor>
+      <TextColor customColor={color}>{_(label)}</TextColor>
     </Root>
   );
 }

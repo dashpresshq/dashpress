@@ -1,5 +1,6 @@
 import { IColumnFilterBag, IDateFilterOption } from "shared/types/data";
 import { Stack } from "frontend/design-system/primitives/Stack";
+import { i18nNoop } from "translations/fake";
 import { DATE_FILTER_OPTIONS } from "./constants";
 import { SimpleSelect } from "../../../Form/FormSelect/Simple";
 
@@ -59,7 +60,7 @@ export function DateSelection({
           options={Array.from(
             { length: getOptionCountLimit(currentFilterValue) },
             (_, k) => `${k + 1}`
-          ).map((count) => ({ label: count, value: count }))}
+          ).map((count) => ({ label: i18nNoop(count), value: count }))}
           onChange={(value) => {
             setFilter({
               ...filterValue,

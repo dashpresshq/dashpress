@@ -193,11 +193,11 @@ export function FieldSelectionCanvas({
                   {ManagableEntities.includes(entityType) && (
                     <SoftButton
                       systemIcon="Plus"
-                      label={msg`Add new option`}
+                      label={msg`Add New Option`}
                       size={null}
                       action={() => {
                         fields.push({
-                          label: "",
+                          label: msg``,
                           value: "",
                           color: useColors
                             ? OPTIONS_COLORS[

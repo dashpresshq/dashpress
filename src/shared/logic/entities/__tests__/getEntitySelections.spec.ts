@@ -1,4 +1,5 @@
 import { IEntityField } from "shared/types/db";
+import { fakeMessageDescriptor } from "translations/fake";
 import { guessEntityType, getEntitySelections } from "../getEntitySelections";
 
 describe("guessEntityType", () => {
@@ -44,36 +45,36 @@ describe("getEntitySelections", () => {
         {
           status: [
             {
-              label: "Approved (Custom)",
+              label: fakeMessageDescriptor("Approved (Custom)"),
               value: "approved",
             },
 
             {
-              label: "In Progress (Custom)",
+              label: fakeMessageDescriptor("In Progress (Custom)"),
               value: "in-progress",
             },
           ],
           isVerified: [
             {
-              label: "Yes (Custom)",
+              label: fakeMessageDescriptor("Yes (Custom)"),
               value: true,
             },
 
             {
-              label: "No (Custom)",
+              label: fakeMessageDescriptor("No (Custom)"),
               value: true,
             },
           ],
           customSelect: [
             {
               color: "#111",
-              label: "Custom Select Option 1",
+              label: fakeMessageDescriptor("Custom Select Option 1"),
               value: "custom-select-option-1",
             },
 
             {
               color: "#222",
-              label: "Custom Select Option 2",
+              label: fakeMessageDescriptor("Custom Select Option 2"),
               value: "custom-select-option-2",
             },
           ],

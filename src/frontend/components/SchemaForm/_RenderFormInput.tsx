@@ -10,6 +10,7 @@ import { FormFileInput } from "frontend/design-system/components/Form/FormFileIn
 import { FormSelectButton } from "frontend/design-system/components/Form/FormSelectButton";
 import { FormRichTextArea } from "frontend/design-system/components/Form/FormRichTextArea";
 import { useExtendRenderFormInputProps } from "frontend/views/data/portal";
+import { useLingui } from "@lingui/react";
 import { IRenderFormInputProps } from "./types";
 
 export function RenderFormInput(props: IRenderFormInputProps) {
@@ -26,7 +27,7 @@ export function RenderFormInput(props: IRenderFormInputProps) {
     rightActions,
     onChange,
   } = useExtendRenderFormInputProps(props);
-
+  const { _ } = useLingui();
   const formProps = {
     label,
     required,
@@ -47,7 +48,7 @@ export function RenderFormInput(props: IRenderFormInputProps) {
   if (entityFieldSelections.length > 0) {
     if (
       entityFieldSelections.reduce((acc, selection) => {
-        return acc + selection.label.length;
+        return acc + _(selection.label).length;
       }, 0) < 15
     ) {
       return (

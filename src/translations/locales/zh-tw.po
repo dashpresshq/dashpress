@@ -16,6 +16,9 @@ msgstr ""
 msgid ""
 msgstr ""
 
+msgid "-- Select State --"
+msgstr ""
+
 msgid "\"\""
 msgstr ""
 
@@ -103,7 +106,7 @@ msgstr ""
 msgid "{0} Preference"
 msgstr ""
 
-msgid "{0}({1})"
+msgid "{plural} Units"
 msgstr ""
 
 msgid "{singular} {action} Successfully"
@@ -125,6 +128,9 @@ msgid "{singular} Saved Successfully"
 msgstr ""
 
 msgid "{singular} Settings"
+msgstr ""
+
+msgid "{singular} Unit"
 msgstr ""
 
 msgid "{singular} Updated Successfully"
@@ -202,6 +208,15 @@ msgstr ""
 msgid "Add new option"
 msgstr ""
 
+msgid "Add New Validation"
+msgstr ""
+
+msgid "Alphanumeric"
+msgstr ""
+
+msgid "AND"
+msgstr ""
+
 msgid "API Key"
 msgstr ""
 
@@ -211,7 +226,28 @@ msgstr ""
 msgid "Are you sure you want to do this?"
 msgstr ""
 
+msgid "Before Submit"
+msgstr ""
+
+msgid "Beginning of time"
+msgstr ""
+
+msgid "Beginning of Year"
+msgstr ""
+
+msgid "Between"
+msgstr ""
+
+msgid "Blue"
+msgstr ""
+
 msgid "Body"
+msgstr ""
+
+msgid "Boolean"
+msgstr ""
+
+msgid "Brown"
 msgstr ""
 
 msgid "Cancel"
@@ -260,6 +296,9 @@ msgid "Constant"
 msgstr ""
 
 msgid "Constants"
+msgstr ""
+
+msgid "Contains"
 msgstr ""
 
 msgid "Create"
@@ -322,7 +361,13 @@ msgstr ""
 msgid "Database Type"
 msgstr ""
 
+msgid "Date"
+msgstr ""
+
 msgid "Date Format"
+msgstr ""
+
+msgid "Day"
 msgstr ""
 
 msgid "Deactivate"
@@ -379,6 +424,9 @@ msgstr ""
 msgid "Edit {singular}"
 msgstr ""
 
+msgid "Email"
+msgstr ""
+
 msgid "Empty Table"
 msgstr ""
 
@@ -409,6 +457,12 @@ msgstr ""
 msgid "Environment Variables"
 msgstr ""
 
+msgid "Equal"
+msgstr ""
+
+msgid "Equal To Other Field"
+msgstr ""
+
 msgid "Error message"
 msgstr ""
 
@@ -425,6 +479,12 @@ msgid "Field Settings"
 msgstr ""
 
 msgid "Fields"
+msgstr ""
+
+msgid "Fields State"
+msgstr ""
+
+msgid "File"
 msgstr ""
 
 msgid "File Name"
@@ -475,6 +535,15 @@ msgstr ""
 msgid "Go Back"
 msgstr ""
 
+msgid "Greater Than"
+msgstr ""
+
+msgid "Greater Than Other Field"
+msgstr ""
+
+msgid "Green"
+msgstr ""
+
 msgid "Headers"
 msgstr ""
 
@@ -490,10 +559,22 @@ msgstr ""
 msgid "Host"
 msgstr ""
 
+msgid "Hour"
+msgstr ""
+
 msgid "Icon"
 msgstr ""
 
+msgid "Image"
+msgstr ""
+
 msgid "Incorrect value"
+msgstr ""
+
+msgid "Indigo"
+msgstr ""
+
+msgid "Initial Values"
 msgstr ""
 
 msgid "Input {deactivationKey} to continue"
@@ -502,7 +583,22 @@ msgstr ""
 msgid "Integration"
 msgstr ""
 
+msgid "Is In"
+msgstr ""
+
+msgid "Is Not In"
+msgstr ""
+
+msgid "Is Not Null"
+msgstr ""
+
+msgid "Is Null"
+msgstr ""
+
 msgid "Join our Discord community"
+msgstr ""
+
+msgid "JSON"
 msgstr ""
 
 msgid "Key"
@@ -518,6 +614,12 @@ msgid "Language"
 msgstr ""
 
 msgid "Large Logo"
+msgstr ""
+
+msgid "Less Than"
+msgstr ""
+
+msgid "Less Than Other Field"
 msgstr ""
 
 msgid "Light"
@@ -544,6 +646,12 @@ msgstr ""
 msgid "Manage Variables"
 msgstr ""
 
+msgid "Max"
+msgstr ""
+
+msgid "Max Length"
+msgstr ""
+
 msgid "Maximum file size to upload in MB"
 msgstr ""
 
@@ -556,6 +664,15 @@ msgstr ""
 msgid "Metadata Columns"
 msgstr ""
 
+msgid "Min"
+msgstr ""
+
+msgid "Min Length"
+msgstr ""
+
+msgid "Month"
+msgstr ""
+
 msgid "My Account"
 msgstr ""
 
@@ -566,6 +683,9 @@ msgid "New Password"
 msgstr ""
 
 msgid "New Password Again"
+msgstr ""
+
+msgid "No"
 msgstr ""
 
 msgid "No {singular} Has Been Added Yet"
@@ -583,7 +703,16 @@ msgstr ""
 msgid "No Search Results"
 msgstr ""
 
+msgid "Not Equal"
+msgstr ""
+
+msgid "Not Equal To Other Field"
+msgstr ""
+
 msgid "Now"
+msgstr ""
+
+msgid "Number"
 msgstr ""
 
 msgid "Old Password"
@@ -607,6 +736,12 @@ msgstr ""
 msgid "Operator"
 msgstr ""
 
+msgid "OR"
+msgstr ""
+
+msgid "Orange"
+msgstr ""
+
 msgid "Order"
 msgstr ""
 
@@ -628,6 +763,9 @@ msgstr ""
 msgid "Port"
 msgstr ""
 
+msgid "Positive Number"
+msgstr ""
+
 msgid "Preferences"
 msgstr ""
 
@@ -640,7 +778,19 @@ msgstr ""
 msgid "Profile"
 msgstr ""
 
+msgid "Quarter"
+msgstr ""
+
+msgid "Red"
+msgstr ""
+
+msgid "Reference"
+msgstr ""
+
 msgid "Reference Template"
+msgstr ""
+
+msgid "Regex"
 msgstr ""
 
 msgid "Region"
@@ -691,6 +841,9 @@ msgstr ""
 msgid "Revealing {label}"
 msgstr ""
 
+msgid "Rich Text"
+msgstr ""
+
 msgid "Role"
 msgstr ""
 
@@ -733,7 +886,19 @@ msgstr ""
 msgid "Selection"
 msgstr ""
 
+msgid "Selection List"
+msgstr ""
+
 msgid "Selections Settings"
+msgstr ""
+
+msgid "Send Mail"
+msgstr ""
+
+msgid "Send Message"
+msgstr ""
+
+msgid "Send SMS"
 msgstr ""
 
 msgid "Sender Email"
@@ -787,7 +952,13 @@ msgstr ""
 msgid "Storage Key"
 msgstr ""
 
+msgid "String"
+msgstr ""
+
 msgid "Subject"
+msgstr ""
+
+msgid "Summary Card"
 msgstr ""
 
 msgid "SVG"
@@ -821,6 +992,12 @@ msgid "Table Views"
 msgstr ""
 
 msgid "Test Widget Script"
+msgstr ""
+
+msgid "Text"
+msgstr ""
+
+msgid "Textarea"
 msgstr ""
 
 msgid "Theme"
@@ -877,6 +1054,9 @@ msgstr ""
 msgid "Updating {singular}"
 msgstr ""
 
+msgid "Uppercase"
+msgstr ""
+
 msgid "URL"
 msgstr ""
 
@@ -922,13 +1102,25 @@ msgstr ""
 msgid "View Full Details"
 msgstr ""
 
+msgid "Violet"
+msgstr ""
+
 msgid "Visit our website"
+msgstr ""
+
+msgid "Week"
 msgstr ""
 
 msgid "Widget Script"
 msgstr ""
 
 msgid "Width"
+msgstr ""
+
+msgid "Year"
+msgstr ""
+
+msgid "Yes"
 msgstr ""
 
 msgid "Your Users Table"

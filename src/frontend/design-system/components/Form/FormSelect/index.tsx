@@ -2,6 +2,7 @@ import Select from "react-select";
 import styled from "styled-components";
 import { ILabelValue, ISelectData } from "shared/types/options";
 import { useLingui } from "@lingui/react";
+import { MessageDescriptor } from "@lingui/core";
 import {
   generateClassNames,
   wrapLabelAndError,
@@ -113,7 +114,7 @@ interface IFormNoValueSelect {
   selectData: ISelectData[];
   disabledOptions: string[];
   onChange: (value: string, label?: string) => void;
-  defaultLabel?: string;
+  defaultLabel?: MessageDescriptor;
 }
 
 export function FormNoValueSelect({
@@ -126,7 +127,7 @@ export function FormNoValueSelect({
   return (
     <SelectStyled
       classNamePrefix={SharedSelectProps.classNamePrefix}
-      value={{ value: "", label: defaultLabel || "" }}
+      value={{ value: "", label: defaultLabel ? _(defaultLabel) : "" }}
       onChange={({ value, label }: ILabelValue) => {
         onChange(value, label);
       }}

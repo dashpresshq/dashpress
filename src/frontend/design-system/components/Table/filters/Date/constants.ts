@@ -1,3 +1,4 @@
+import { msg } from "@lingui/macro";
 import { typescriptSafeObjectDotEntries } from "shared/lib/objects";
 import { DATE_FILTER_VALUE, IDateFilterOption } from "shared/types/data";
 
@@ -6,39 +7,39 @@ const DATE_FILTER_OPTIONS$1: Record<
   Omit<IDateFilterOption, "value">
 > = {
   [DATE_FILTER_VALUE.BEGINNING_OF_TIME_VALUE]: {
-    label: "Beginning of time",
+    label: msg`Beginning of time`,
     hideOnTo: true,
   },
   [DATE_FILTER_VALUE.BEGINNING_OF_YEAR]: {
-    label: "Beginning of Year",
+    label: msg`Beginning of Year`,
     hideOnTo: true,
   },
   [DATE_FILTER_VALUE.HOUR]: {
-    label: "Hour",
+    label: msg`Hour`,
     countLimit: 24,
   },
   [DATE_FILTER_VALUE.DAY]: {
-    label: "Day",
+    label: msg`Day`,
     countLimit: 7,
   },
   [DATE_FILTER_VALUE.WEEK]: {
-    label: "Week",
+    label: msg`Week`,
     countLimit: 4,
   },
   [DATE_FILTER_VALUE.MONTH]: {
-    label: "Month",
+    label: msg`Month`,
     countLimit: 12,
   },
   [DATE_FILTER_VALUE.QUARTER]: {
-    label: "Quarter",
+    label: msg`Quarter`,
     countLimit: 4,
   },
   [DATE_FILTER_VALUE.YEAR]: {
-    label: "Year",
+    label: msg`Year`,
     countLimit: 10,
   },
   [DATE_FILTER_VALUE.NOW]: {
-    label: "Now",
+    label: msg`Now`,
     hideOnFrom: true,
   },
 };

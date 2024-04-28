@@ -16,6 +16,9 @@ msgstr ""
 msgid ""
 msgstr "/+Z5u4"
 
+msgid "-- Select State --"
+msgstr "-- Select State --"
+
 msgid "\"\""
 msgstr "\"\""
 
@@ -103,8 +106,8 @@ msgstr "{0} [{1}]"
 msgid "{0} Preference"
 msgstr "{0} Preference"
 
-msgid "{0}({1})"
-msgstr "{0}({1})"
+msgid "{plural} Units"
+msgstr "{plural} Units"
 
 msgid "{singular} {action} Successfully"
 msgstr "{singular} {action} Successfully"
@@ -126,6 +129,9 @@ msgstr "{singular} Saved Successfully"
 
 msgid "{singular} Settings"
 msgstr "{singular} Settings"
+
+msgid "{singular} Unit"
+msgstr "{singular} Unit"
 
 msgid "{singular} Updated Successfully"
 msgstr "{singular} Updated Successfully"
@@ -202,6 +208,15 @@ msgstr "Add New {singular}"
 msgid "Add new option"
 msgstr "Add new option"
 
+msgid "Add New Validation"
+msgstr "Add New Validation"
+
+msgid "Alphanumeric"
+msgstr "Alphanumeric"
+
+msgid "AND"
+msgstr "AND"
+
 msgid "API Key"
 msgstr "API Key"
 
@@ -211,8 +226,29 @@ msgstr "App"
 msgid "Are you sure you want to do this?"
 msgstr "Are you sure you want to do this?"
 
+msgid "Before Submit"
+msgstr "Before Submit"
+
+msgid "Beginning of time"
+msgstr "Beginning of time"
+
+msgid "Beginning of Year"
+msgstr "Beginning of Year"
+
+msgid "Between"
+msgstr "Between"
+
+msgid "Blue"
+msgstr "Blue"
+
 msgid "Body"
 msgstr "Body"
+
+msgid "Boolean"
+msgstr "Boolean"
+
+msgid "Brown"
+msgstr "Brown"
 
 msgid "Cancel"
 msgstr "Cancel"
@@ -261,6 +297,9 @@ msgstr "Constant"
 
 msgid "Constants"
 msgstr "Constants"
+
+msgid "Contains"
+msgstr "Contains"
 
 msgid "Create"
 msgstr "Create"
@@ -322,8 +361,14 @@ msgstr "Database"
 msgid "Database Type"
 msgstr "Database Type"
 
+msgid "Date"
+msgstr "Date"
+
 msgid "Date Format"
 msgstr "Date Format"
+
+msgid "Day"
+msgstr "Day"
 
 msgid "Deactivate"
 msgstr "Deactivate"
@@ -379,6 +424,9 @@ msgstr "Edit"
 msgid "Edit {singular}"
 msgstr "Edit {singular}"
 
+msgid "Email"
+msgstr "Email"
+
 msgid "Empty Table"
 msgstr "Empty Table"
 
@@ -409,6 +457,12 @@ msgstr "Environment Variable"
 msgid "Environment Variables"
 msgstr "Environment Variables"
 
+msgid "Equal"
+msgstr "Equal"
+
+msgid "Equal To Other Field"
+msgstr "Equal To Other Field"
+
 msgid "Error message"
 msgstr "Error message"
 
@@ -426,6 +480,12 @@ msgstr "Field Settings"
 
 msgid "Fields"
 msgstr "Fields"
+
+msgid "Fields State"
+msgstr "Fields State"
+
+msgid "File"
+msgstr "File"
 
 msgid "File Name"
 msgstr "File Name"
@@ -475,6 +535,15 @@ msgstr "Genesis"
 msgid "Go Back"
 msgstr "Go Back"
 
+msgid "Greater Than"
+msgstr "Greater Than"
+
+msgid "Greater Than Other Field"
+msgstr "Greater Than Other Field"
+
+msgid "Green"
+msgstr "Green"
+
 msgid "Headers"
 msgstr "Headers"
 
@@ -490,11 +559,23 @@ msgstr "Home Link"
 msgid "Host"
 msgstr "Host"
 
+msgid "Hour"
+msgstr "Hour"
+
 msgid "Icon"
 msgstr "Icon"
 
+msgid "Image"
+msgstr "Image"
+
 msgid "Incorrect value"
 msgstr "Incorrect value"
+
+msgid "Indigo"
+msgstr "Indigo"
+
+msgid "Initial Values"
+msgstr "Initial Values"
 
 msgid "Input {deactivationKey} to continue"
 msgstr "Input {deactivationKey} to continue"
@@ -502,8 +583,23 @@ msgstr "Input {deactivationKey} to continue"
 msgid "Integration"
 msgstr "Integration"
 
+msgid "Is In"
+msgstr "Is In"
+
+msgid "Is Not In"
+msgstr "Is Not In"
+
+msgid "Is Not Null"
+msgstr "Is Not Null"
+
+msgid "Is Null"
+msgstr "Is Null"
+
 msgid "Join our Discord community"
 msgstr "Join our Discord community"
+
+msgid "JSON"
+msgstr "JSON"
 
 msgid "Key"
 msgstr "Key"
@@ -519,6 +615,12 @@ msgstr "Language"
 
 msgid "Large Logo"
 msgstr "Large Logo"
+
+msgid "Less Than"
+msgstr "Less Than"
+
+msgid "Less Than Other Field"
+msgstr "Less Than Other Field"
 
 msgid "Light"
 msgstr "Light"
@@ -544,6 +646,12 @@ msgstr "Manage {title}"
 msgid "Manage Variables"
 msgstr "Manage Variables"
 
+msgid "Max"
+msgstr "Max"
+
+msgid "Max Length"
+msgstr "Max Length"
+
 msgid "Maximum file size to upload in MB"
 msgstr "Maximum file size to upload in MB"
 
@@ -556,6 +664,15 @@ msgstr "Message"
 msgid "Metadata Columns"
 msgstr "Metadata Columns"
 
+msgid "Min"
+msgstr "Min"
+
+msgid "Min Length"
+msgstr "Min Length"
+
+msgid "Month"
+msgstr "Month"
+
 msgid "My Account"
 msgstr "My Account"
 
@@ -567,6 +684,9 @@ msgstr "New Password"
 
 msgid "New Password Again"
 msgstr "New Password Again"
+
+msgid "No"
+msgstr "No"
 
 msgid "No {singular} Has Been Added Yet"
 msgstr "No {singular} Has Been Added Yet"
@@ -583,8 +703,17 @@ msgstr "No result for the current {0} applied."
 msgid "No Search Results"
 msgstr "No Search Results"
 
+msgid "Not Equal"
+msgstr "Not Equal"
+
+msgid "Not Equal To Other Field"
+msgstr "Not Equal To Other Field"
+
 msgid "Now"
 msgstr "Now"
+
+msgid "Number"
+msgstr "Number"
 
 msgid "Old Password"
 msgstr "Old Password"
@@ -607,6 +736,12 @@ msgstr "Only lowercase letters, numbers and {delimiter} are allowed"
 msgid "Operator"
 msgstr "Operator"
 
+msgid "OR"
+msgstr "OR"
+
+msgid "Orange"
+msgstr "Orange"
+
 msgid "Order"
 msgstr "Order"
 
@@ -628,6 +763,9 @@ msgstr "Plural"
 msgid "Port"
 msgstr "Port"
 
+msgid "Positive Number"
+msgstr "Positive Number"
+
 msgid "Preferences"
 msgstr "Preferences"
 
@@ -640,8 +778,20 @@ msgstr "Preview"
 msgid "Profile"
 msgstr "Profile"
 
+msgid "Quarter"
+msgstr "Quarter"
+
+msgid "Red"
+msgstr "Red"
+
+msgid "Reference"
+msgstr "Reference"
+
 msgid "Reference Template"
 msgstr "Reference Template"
+
+msgid "Regex"
+msgstr "Regex"
 
 msgid "Region"
 msgstr "Region"
@@ -691,6 +841,9 @@ msgstr "Reveal {label}"
 msgid "Revealing {label}"
 msgstr "Revealing {label}"
 
+msgid "Rich Text"
+msgstr "Rich Text"
+
 msgid "Role"
 msgstr "Role"
 
@@ -733,8 +886,20 @@ msgstr "Secrets"
 msgid "Selection"
 msgstr "Selection"
 
+msgid "Selection List"
+msgstr "Selection List"
+
 msgid "Selections Settings"
 msgstr "Selections Settings"
+
+msgid "Send Mail"
+msgstr "Send Mail"
+
+msgid "Send Message"
+msgstr "Send Message"
+
+msgid "Send SMS"
+msgstr "Send SMS"
 
 msgid "Sender Email"
 msgstr "Sender Email"
@@ -787,8 +952,14 @@ msgstr "Start of year"
 msgid "Storage Key"
 msgstr "Storage Key"
 
+msgid "String"
+msgstr "String"
+
 msgid "Subject"
 msgstr "Subject"
+
+msgid "Summary Card"
+msgstr "Summary Card"
 
 msgid "SVG"
 msgstr "SVG"
@@ -822,6 +993,12 @@ msgstr "Table Views"
 
 msgid "Test Widget Script"
 msgstr "Test Widget Script"
+
+msgid "Text"
+msgstr "Text"
+
+msgid "Textarea"
+msgstr "Textarea"
 
 msgid "Theme"
 msgstr "Theme"
@@ -877,6 +1054,9 @@ msgstr "Updated At"
 msgid "Updating {singular}"
 msgstr "Updating {singular}"
 
+msgid "Uppercase"
+msgstr "Uppercase"
+
 msgid "URL"
 msgstr "URL"
 
@@ -922,14 +1102,26 @@ msgstr "View"
 msgid "View Full Details"
 msgstr "View Full Details"
 
+msgid "Violet"
+msgstr "Violet"
+
 msgid "Visit our website"
 msgstr "Visit our website"
+
+msgid "Week"
+msgstr "Week"
 
 msgid "Widget Script"
 msgstr "Widget Script"
 
 msgid "Width"
 msgstr "Width"
+
+msgid "Year"
+msgstr "Year"
+
+msgid "Yes"
+msgstr "Yes"
 
 msgid "Your Users Table"
 msgstr "Your Users Table"

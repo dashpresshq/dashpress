@@ -4,9 +4,9 @@ import styled from "styled-components";
 import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
 import { Stack } from "frontend/design-system/primitives/Stack";
 import { Typo } from "frontend/design-system/primitives/Typo";
-import { Trans, msg } from "@lingui/macro";
+import { Trans } from "@lingui/macro";
 import { ChevronLeft, ChevronRight } from "react-feather";
-import { i18nNoop } from "shared/lib/noop";
+import { i18nNoop } from "translations/fake";
 import { SimpleSelect } from "../Form/FormSelect/Simple";
 import { TABLE_PAGE_SIZES } from "./constants";
 
@@ -92,7 +92,7 @@ export function TablePagination({
               width={55}
               options={TABLE_PAGE_SIZES.map((option) => ({
                 value: `${option}`,
-                label: msg`${i18nNoop(option)}`,
+                label: i18nNoop(option),
               }))}
               onChange={(value) => setPageSize(Number(value))}
               value={pageSize}

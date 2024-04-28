@@ -1,3 +1,4 @@
+import { fakeMessageDescriptor } from "translations/fake";
 import { getEntitySelectionConfig } from "../getEntitySelectionConfig";
 
 describe("getEntitySelectionConfig", () => {
@@ -25,8 +26,16 @@ describe("getEntitySelectionConfig", () => {
         getEntitySelectionConfig(
           "boolean",
           [
-            { label: "Some Yes", value: "true", color: "#foo" },
-            { label: "Some No", value: "false", color: "#fff" },
+            {
+              label: fakeMessageDescriptor("Some Yes"),
+              value: "true",
+              color: "#foo",
+            },
+            {
+              label: fakeMessageDescriptor("Some No"),
+              value: "false",
+              color: "#fff",
+            },
           ],
           []
         )
@@ -58,7 +67,13 @@ describe("getEntitySelectionConfig", () => {
       expect(
         getEntitySelectionConfig(
           "selection",
-          [{ label: "Option 1", value: "true", color: "#foo" }],
+          [
+            {
+              label: fakeMessageDescriptor("Option 1"),
+              value: "true",
+              color: "#foo",
+            },
+          ],
           []
         )
       ).toMatchInlineSnapshot(`
@@ -108,12 +123,12 @@ describe("getEntitySelectionConfig", () => {
           "selection-enum",
           [
             {
-              label: "Custom Status 1",
+              label: fakeMessageDescriptor("Custom Status 1"),
               value: "custom-status-1",
               color: "#foo",
             },
             {
-              label: "Custom Status 2",
+              label: fakeMessageDescriptor("Custom Status 2"),
               value: "custom-status-2",
               color: "#ffo",
             },
@@ -142,13 +157,13 @@ describe("getEntitySelectionConfig", () => {
           "selection-enum",
           [
             {
-              label: "Custom Status 1",
+              label: fakeMessageDescriptor("Custom Status 1"),
               value: "custom-status-1",
               color: "#foo",
             },
 
             {
-              label: "Custom Status 2",
+              label: fakeMessageDescriptor("Custom Status 2"),
               value: "custom-status-2",
               color: "#ffo",
             },
@@ -193,13 +208,13 @@ describe("getEntitySelectionConfig", () => {
           "selection-enum",
           [
             {
-              label: "Custom Status 1",
+              label: fakeMessageDescriptor("Custom Status 1"),
               value: "custom-status-1",
               color: "#foo",
             },
 
             {
-              label: "Custom Status 2",
+              label: fakeMessageDescriptor("Custom Status 2"),
               value: "approved",
               color: "#ffo",
             },
@@ -239,12 +254,12 @@ describe("getEntitySelectionConfig", () => {
           "selection-enum",
           [
             {
-              label: "Custom Status 1",
+              label: fakeMessageDescriptor("Custom Status 1"),
               value: "custom-status-1",
             },
 
             {
-              label: "Custom Status 2",
+              label: fakeMessageDescriptor("Custom Status 2"),
               value: "custom-status-2",
             },
           ],

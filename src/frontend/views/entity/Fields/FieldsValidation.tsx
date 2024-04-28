@@ -149,7 +149,7 @@ export function FieldValidationCanvas({
                   disabledOptions={(
                     values.validations as IFieldValidationItem[]
                   ).map(({ validationType }) => validationType)}
-                  defaultLabel="Add New Validation"
+                  defaultLabel={msg`Add New Validation`}
                   onChange={(validationType: ValidationTypes) => {
                     const validationItem: IFieldValidationItem = {
                       validationType,
@@ -160,7 +160,7 @@ export function FieldValidationCanvas({
                     fields.push(validationItem);
                   }}
                   selectData={allowedValidations.map((validation) => ({
-                    label: validation,
+                    label: ENTITY_VALIDATION_CONFIG[validation].label,
                     value: validation,
                   }))}
                 />

@@ -9,6 +9,7 @@ import {
 import { ISchemaFormConfig } from "shared/form-schemas/types";
 import { IStorageIntegration } from "shared/types/actions";
 import { msg } from "@lingui/macro";
+import { i18nNoop } from "translations/fake";
 import { STORAGE_INTEGRATIONS_CRUD_CONFIG } from "./constants";
 import {
   useActivateStorageMutation,
@@ -44,7 +45,7 @@ export function StorageCredentialsSettings() {
     label: msg`Storage Key`,
     type: "text",
     selections: storageList.data.map((datum) => ({
-      label: datum.title,
+      label: i18nNoop(datum.title),
       value: datum.key,
     })),
     onChange: setCurrentStorage,

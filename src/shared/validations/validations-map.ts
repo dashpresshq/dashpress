@@ -32,6 +32,7 @@ import { FormFieldTypes, ValidationTypes } from "./types";
 export const ENTITY_VALIDATION_CONFIG: Record<
   ValidationTypes,
   {
+    label: MessageDescriptor;
     input?: Record<string, unknown>;
     isBoundToType?: Array<FormFieldTypes>;
     message: MessageDescriptor;
@@ -44,22 +45,25 @@ export const ENTITY_VALIDATION_CONFIG: Record<
   }
 > = {
   required: {
-    // TODO make this work
+    label: msg`Required`,
     message: msg`[[ name ]] is required`,
     implementation: (value, errorMessage) =>
       isNotEmpty(value) ? undefined : errorMessage,
   },
   isEmail: {
+    label: msg`Email`,
     isBoundToType: ["email"],
     message: msg`[[ name ]] is an invalid email`,
     implementation: handleValidation(isEmail),
   },
   isJson: {
+    label: msg`JSON`,
     isBoundToType: ["json"],
     message: msg`[[ name ]] is an invalid json`,
     implementation: handleValidation(isJSON),
   },
   isString: {
+    label: msg`String`,
     isBoundToType: [
       "password",
       "text",
@@ -72,46 +76,55 @@ export const ENTITY_VALIDATION_CONFIG: Record<
     implementation: handleValidation(isString),
   },
   isColor: {
+    label: msg`Color`,
     isBoundToType: ["color"],
     message: msg`[[ name ]] should be a color`,
     implementation: handleValidation(isRgbColor),
   },
   isUrl: {
+    label: msg`URL`,
     isBoundToType: ["url"],
     message: msg`[[ name ]] is an invalid URL`,
     implementation: handleValidation(isURL),
   },
   isDate: {
+    label: msg`Date`,
     isBoundToType: ["datetime-local"],
     message: msg`[[ name ]] is an invalid date`,
     implementation: handleValidation(isDate),
   },
   isNumber: {
+    label: msg`Number`,
     isBoundToType: ["number"],
     message: msg`[[ name ]] should be a number`,
     implementation: handleValidation(isNumber),
   },
   isBoolean: {
+    label: msg`Boolean`,
     isBoundToType: ["boolean"],
     message: msg`[[ name ]] should be a boolean`,
     implementation: handleValidation(isBoolean),
   },
 
   alphanumeric: {
+    label: msg`Alphanumeric`,
     message: msg`[[ name ]] should contain only alphabets and numbers`,
     implementation: handleValidation(isAlphanumeric),
   },
 
   isUpperCase: {
+    label: msg`Uppercase`,
     message: msg`[[ name ]] should contain only upper cases`,
     implementation: handleValidation(isUppercase),
   },
 
   postiveNumber: {
+    label: msg`Positive Number`,
     message: msg`[[ name ]] should be positive number`,
     implementation: handleValidation(isPositive),
   },
   min: {
+    label: msg`Min`,
     input: {
       value: 3,
     },
@@ -119,6 +132,7 @@ export const ENTITY_VALIDATION_CONFIG: Record<
     implementation: handleValidation(min, "value"),
   },
   max: {
+    label: msg`Max`,
     input: {
       value: 10,
     },
@@ -126,6 +140,7 @@ export const ENTITY_VALIDATION_CONFIG: Record<
     implementation: handleValidation(max, "value"),
   },
   maxLength: {
+    label: msg`Max Length`,
     input: {
       length: 100,
     },
@@ -133,6 +148,7 @@ export const ENTITY_VALIDATION_CONFIG: Record<
     implementation: handleValidation(maxLength, "length"),
   },
   minLength: {
+    label: msg`Min Length`,
     input: {
       length: 3,
     },
@@ -140,6 +156,7 @@ export const ENTITY_VALIDATION_CONFIG: Record<
     implementation: handleValidation(minLength, "length"),
   },
   isIn: {
+    label: msg`Is In`,
     input: {
       options: [],
     },
@@ -148,6 +165,7 @@ export const ENTITY_VALIDATION_CONFIG: Record<
   },
 
   matchOtherField: {
+    label: msg`Equal To Other Field`,
     input: {
       otherField: "",
     },
@@ -156,6 +174,7 @@ export const ENTITY_VALIDATION_CONFIG: Record<
   },
 
   lessThanOtherField: {
+    label: msg`Less Than Other Field`,
     input: {
       otherField: "",
     },
@@ -164,6 +183,7 @@ export const ENTITY_VALIDATION_CONFIG: Record<
   },
 
   greaterThanOtherField: {
+    label: msg`Greater Than Other Field`,
     input: {
       otherField: "",
     },
@@ -172,6 +192,7 @@ export const ENTITY_VALIDATION_CONFIG: Record<
   },
 
   doesntMatchOtherField: {
+    label: msg`Not Equal To Other Field`,
     input: {
       otherField: "",
     },
@@ -180,6 +201,7 @@ export const ENTITY_VALIDATION_CONFIG: Record<
   },
 
   regex: {
+    label: msg`Regex`,
     input: {
       pattern: "//",
     },

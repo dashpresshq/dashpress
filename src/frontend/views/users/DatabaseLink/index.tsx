@@ -22,6 +22,7 @@ import { UsersLinkToDatabaseDocumentation } from "frontend/docs/users-link-to-da
 import { useEntityFieldLists } from "frontend/hooks/entity/entity.store";
 import { useEffect, useState } from "react";
 import { msg } from "@lingui/macro";
+import { i18nNoop } from "translations/fake";
 
 type IUsersLinkToDatabaseForm = {
   table: string;
@@ -73,8 +74,8 @@ export function UsersLinkToDatabase() {
         type: "selection",
         label: msg`Field Corresponding To Dashpress Usernames`,
         selections: entityFields.data.map((field) => ({
-          label: field,
           value: field,
+          label: i18nNoop(field),
         })),
         validations: [
           {

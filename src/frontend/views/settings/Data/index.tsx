@@ -17,7 +17,7 @@ import { SchemaForm } from "frontend/components/SchemaForm";
 import { Spacer } from "frontend/design-system/primitives/Spacer";
 import { AppConfigurationValueType } from "shared/configurations/constants";
 import { msg } from "@lingui/macro";
-import { i18nNoop } from "shared/lib/noop";
+import { i18nNoop } from "translations/fake";
 import { BaseSettingsLayout } from "../_Base";
 import { SETTINGS_VIEW_KEY } from "../constants";
 
@@ -91,7 +91,7 @@ function DateSettings() {
           id: "help",
           action: DATE_FORMAT_LIB_LINK,
           systemIcon: "Help",
-          label: msg`${i18nNoop(DATE_FORMAT_LIB_LINK)}`,
+          label: i18nNoop(DATE_FORMAT_LIB_LINK),
         },
       ]}
     >

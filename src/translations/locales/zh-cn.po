@@ -16,6 +16,9 @@ msgstr ""
 msgid ""
 msgstr ""
 
+msgid "-- Select State --"
+msgstr ""
+
 msgid "\"\""
 msgstr ""
 
@@ -103,7 +106,7 @@ msgstr ""
 msgid "{0} Preference"
 msgstr "{0}偏好"
 
-msgid "{0}({1})"
+msgid "{plural} Units"
 msgstr ""
 
 msgid "{singular} {action} Successfully"
@@ -126,6 +129,9 @@ msgstr "{singular}保存成功"
 
 msgid "{singular} Settings"
 msgstr "{singular}设置"
+
+msgid "{singular} Unit"
+msgstr ""
 
 msgid "{singular} Updated Successfully"
 msgstr "{singular}更新成功"
@@ -202,6 +208,15 @@ msgstr "添加新{singular}"
 msgid "Add new option"
 msgstr "添加选项"
 
+msgid "Add New Validation"
+msgstr ""
+
+msgid "Alphanumeric"
+msgstr ""
+
+msgid "AND"
+msgstr ""
+
 msgid "API Key"
 msgstr ""
 
@@ -211,7 +226,28 @@ msgstr "APP"
 msgid "Are you sure you want to do this?"
 msgstr "你确定你要这么做吗？"
 
+msgid "Before Submit"
+msgstr ""
+
+msgid "Beginning of time"
+msgstr ""
+
+msgid "Beginning of Year"
+msgstr ""
+
+msgid "Between"
+msgstr ""
+
+msgid "Blue"
+msgstr ""
+
 msgid "Body"
+msgstr ""
+
+msgid "Boolean"
+msgstr ""
+
+msgid "Brown"
 msgstr ""
 
 msgid "Cancel"
@@ -261,6 +297,9 @@ msgstr "常量"
 
 msgid "Constants"
 msgstr "常量"
+
+msgid "Contains"
+msgstr ""
 
 msgid "Create"
 msgstr "创建"
@@ -322,7 +361,13 @@ msgstr ""
 msgid "Database Type"
 msgstr ""
 
+msgid "Date"
+msgstr ""
+
 msgid "Date Format"
+msgstr ""
+
+msgid "Day"
 msgstr ""
 
 msgid "Deactivate"
@@ -379,6 +424,9 @@ msgstr "编辑"
 msgid "Edit {singular}"
 msgstr "修改{singular}"
 
+msgid "Email"
+msgstr ""
+
 msgid "Empty Table"
 msgstr "空表格"
 
@@ -409,6 +457,12 @@ msgstr "环境变量"
 msgid "Environment Variables"
 msgstr "环境变量"
 
+msgid "Equal"
+msgstr ""
+
+msgid "Equal To Other Field"
+msgstr ""
+
 msgid "Error message"
 msgstr ""
 
@@ -426,6 +480,12 @@ msgstr "字段设置"
 
 msgid "Fields"
 msgstr "字段"
+
+msgid "Fields State"
+msgstr ""
+
+msgid "File"
+msgstr ""
 
 msgid "File Name"
 msgstr ""
@@ -475,6 +535,15 @@ msgstr ""
 msgid "Go Back"
 msgstr "返回"
 
+msgid "Greater Than"
+msgstr ""
+
+msgid "Greater Than Other Field"
+msgstr ""
+
+msgid "Green"
+msgstr ""
+
 msgid "Headers"
 msgstr ""
 
@@ -490,10 +559,22 @@ msgstr ""
 msgid "Host"
 msgstr ""
 
+msgid "Hour"
+msgstr ""
+
 msgid "Icon"
 msgstr ""
 
+msgid "Image"
+msgstr ""
+
 msgid "Incorrect value"
+msgstr ""
+
+msgid "Indigo"
+msgstr ""
+
+msgid "Initial Values"
 msgstr ""
 
 msgid "Input {deactivationKey} to continue"
@@ -502,8 +583,23 @@ msgstr ""
 msgid "Integration"
 msgstr "集成"
 
+msgid "Is In"
+msgstr ""
+
+msgid "Is Not In"
+msgstr ""
+
+msgid "Is Not Null"
+msgstr ""
+
+msgid "Is Null"
+msgstr ""
+
 msgid "Join our Discord community"
 msgstr "加入我们社区"
+
+msgid "JSON"
+msgstr ""
 
 msgid "Key"
 msgstr ""
@@ -518,6 +614,12 @@ msgid "Language"
 msgstr "语言"
 
 msgid "Large Logo"
+msgstr ""
+
+msgid "Less Than"
+msgstr ""
+
+msgid "Less Than Other Field"
 msgstr ""
 
 msgid "Light"
@@ -544,6 +646,12 @@ msgstr "管理{title}"
 msgid "Manage Variables"
 msgstr "变量管理"
 
+msgid "Max"
+msgstr ""
+
+msgid "Max Length"
+msgstr ""
+
 msgid "Maximum file size to upload in MB"
 msgstr ""
 
@@ -556,6 +664,15 @@ msgstr ""
 msgid "Metadata Columns"
 msgstr ""
 
+msgid "Min"
+msgstr ""
+
+msgid "Min Length"
+msgstr ""
+
+msgid "Month"
+msgstr ""
+
 msgid "My Account"
 msgstr "我的账户"
 
@@ -566,6 +683,9 @@ msgid "New Password"
 msgstr ""
 
 msgid "New Password Again"
+msgstr ""
+
+msgid "No"
 msgstr ""
 
 msgid "No {singular} Has Been Added Yet"
@@ -583,7 +703,16 @@ msgstr "当前{0}没有结果。"
 msgid "No Search Results"
 msgstr "没有搜索结果"
 
+msgid "Not Equal"
+msgstr ""
+
+msgid "Not Equal To Other Field"
+msgstr ""
+
 msgid "Now"
+msgstr ""
+
+msgid "Number"
 msgstr ""
 
 msgid "Old Password"
@@ -607,6 +736,12 @@ msgstr ""
 msgid "Operator"
 msgstr ""
 
+msgid "OR"
+msgstr ""
+
+msgid "Orange"
+msgstr ""
+
 msgid "Order"
 msgstr "顺序"
 
@@ -628,6 +763,9 @@ msgstr ""
 msgid "Port"
 msgstr ""
 
+msgid "Positive Number"
+msgstr ""
+
 msgid "Preferences"
 msgstr "偏好设置"
 
@@ -640,8 +778,20 @@ msgstr "预览"
 msgid "Profile"
 msgstr "个人信息"
 
+msgid "Quarter"
+msgstr ""
+
+msgid "Red"
+msgstr ""
+
+msgid "Reference"
+msgstr ""
+
 msgid "Reference Template"
 msgstr "参考模板"
+
+msgid "Regex"
+msgstr ""
 
 msgid "Region"
 msgstr ""
@@ -691,6 +841,9 @@ msgstr "显示 {label}"
 msgid "Revealing {label}"
 msgstr "显示 {label}"
 
+msgid "Rich Text"
+msgstr ""
+
 msgid "Role"
 msgstr "角色"
 
@@ -733,7 +886,19 @@ msgstr "密钥"
 msgid "Selection"
 msgstr "选择"
 
+msgid "Selection List"
+msgstr ""
+
 msgid "Selections Settings"
+msgstr ""
+
+msgid "Send Mail"
+msgstr ""
+
+msgid "Send Message"
+msgstr ""
+
+msgid "Send SMS"
 msgstr ""
 
 msgid "Sender Email"
@@ -787,7 +952,13 @@ msgstr ""
 msgid "Storage Key"
 msgstr ""
 
+msgid "String"
+msgstr ""
+
 msgid "Subject"
+msgstr ""
+
+msgid "Summary Card"
 msgstr ""
 
 msgid "SVG"
@@ -822,6 +993,12 @@ msgstr "表格视图"
 
 msgid "Test Widget Script"
 msgstr "测试部件脚本"
+
+msgid "Text"
+msgstr ""
+
+msgid "Textarea"
+msgstr ""
 
 msgid "Theme"
 msgstr "主题"
@@ -877,6 +1054,9 @@ msgstr ""
 msgid "Updating {singular}"
 msgstr "更新{singular}"
 
+msgid "Uppercase"
+msgstr ""
+
 msgid "URL"
 msgstr ""
 
@@ -922,13 +1102,25 @@ msgstr "查看"
 msgid "View Full Details"
 msgstr "查看详情"
 
+msgid "Violet"
+msgstr ""
+
 msgid "Visit our website"
 msgstr "访问我们网站"
+
+msgid "Week"
+msgstr ""
 
 msgid "Widget Script"
 msgstr "部件脚本"
 
 msgid "Width"
+msgstr ""
+
+msgid "Year"
+msgstr ""
+
+msgid "Yes"
 msgstr ""
 
 msgid "Your Users Table"

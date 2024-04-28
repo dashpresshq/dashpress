@@ -17,6 +17,7 @@ import { useUserHasPermission } from "frontend/hooks/auth/user.store";
 import { IDropDownMenuItem } from "frontend/design-system/components/DropdownMenu";
 import { useCallback } from "react";
 import { msg } from "@lingui/macro";
+import { transformLabelValueToSelectData } from "translations/fake";
 import { ROLES_ENDPOINT_CONFIG } from "../roles/roles.store";
 import {
   ADMIN_USERS_CRUD_CONFIG,
@@ -88,7 +89,7 @@ export function ListUsers() {
       accessor: "role",
       filter: {
         _type: "status",
-        bag: roles.data,
+        bag: transformLabelValueToSelectData(roles.data),
       },
       Cell: ({ value }) => roleLabel(value as string),
     },

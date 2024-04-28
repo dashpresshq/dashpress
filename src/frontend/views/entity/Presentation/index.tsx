@@ -20,7 +20,7 @@ import { useDocumentationActionButton } from "frontend/docs/constants";
 import { IPresentationScriptParams } from "frontend/views/data/evaluatePresentationScript";
 import { useEvaluateScriptContext } from "frontend/hooks/scripts";
 import { msg } from "@lingui/macro";
-import { i18nNoop } from "shared/lib/noop";
+import { i18nNoop } from "translations/fake";
 import { BaseEntitySettingsLayout } from "../_Base";
 import { ENTITY_CONFIGURATION_VIEW } from "../constants";
 
@@ -83,7 +83,7 @@ export function EntityPresentationScriptSettings() {
                 type: "json",
                 label: msg`Script`,
                 validations: [],
-                placeholder: msg`${i18nNoop(placeholder)}`,
+                placeholder: i18nNoop(placeholder),
               },
             }}
             onSubmit={async (data) => {

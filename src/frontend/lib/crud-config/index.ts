@@ -1,6 +1,6 @@
 import { MessageDescriptor, i18n } from "@lingui/core";
 import { msg } from "@lingui/macro";
-import { i18nNoop } from "shared/lib/noop";
+import { i18nNoop } from "translations/fake";
 
 export const CRUD_CONFIG_NOT_FOUND = (singular: string) =>
   msg`${singular} could not be retrieved`;
@@ -50,9 +50,9 @@ export const MAKE_CRUD_CONFIG = ({
       DETAILS: msg`${singular} Details`,
       SETTINGS: msg`${singular} Settings`,
       NOT_FOUND: CRUD_CONFIG_NOT_FOUND(singular),
-      TITLE: msg`${i18nNoop(plural)}`,
+      TITLE: i18nNoop(plural),
       EMPTY_LIST: msg`No ${singular} Has Been Added Yet`,
-      SINGULAR: msg`${i18nNoop(singular)}`,
+      SINGULAR: i18nNoop(singular),
     },
   };
 };

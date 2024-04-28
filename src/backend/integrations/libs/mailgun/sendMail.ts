@@ -50,7 +50,7 @@ const CONFIG_SCHEMA: IAppliedSchemaFormConfig<IConfig> = {
 };
 
 export const SEND_MAIL = {
-  label: "Send Mail",
+  label: msg`Send Mail`,
   configurationSchema: CONFIG_SCHEMA,
   do: async (config: IActionConfig, messageConfig: IConfig) => {
     const form = new FormData();

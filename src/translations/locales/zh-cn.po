@@ -13,9 +13,6 @@ msgstr ""
 "Plural-Forms: \n"
 "X-Generator: Poedit 3.4.2\n"
 
-msgid ""
-msgstr ""
-
 msgid "-- Select State --"
 msgstr ""
 
@@ -26,70 +23,70 @@ msgid "\"{0}\" Validations"
 msgstr "验证“{0}”"
 
 msgid "[[ name ]] is an invalid date"
-msgstr ""
+msgstr "[[ name ]]是无效日期"
 
 msgid "[[ name ]] is an invalid email"
-msgstr ""
+msgstr "[[ name ]]是无效的电子邮件"
 
 msgid "[[ name ]] is an invalid json"
-msgstr ""
+msgstr "[[ name ]]是无效的 json"
 
 msgid "[[ name ]] is an invalid URL"
-msgstr ""
+msgstr "[[ name ]]是无效的 URL"
 
 msgid "[[ name ]] is invalid"
-msgstr ""
+msgstr "[[ name ]]无效"
 
 msgid "[[ name ]] is invalid. Allowed values are [[ options ]]"
-msgstr ""
+msgstr "[[ name ]] 无效。允许的值为 [[ options ]]"
 
 msgid "[[ name ]] is not a text"
-msgstr ""
+msgstr "[[ name ]]不是文本"
 
 msgid "[[ name ]] is required"
-msgstr ""
+msgstr "[[ name ]]为必填项"
 
 msgid "[[ name ]] should be a boolean"
-msgstr ""
+msgstr "[[ name ]]应是布尔值"
 
 msgid "[[ name ]] should be a color"
-msgstr ""
+msgstr "[[ name ]]应该是一种颜色值"
 
 msgid "[[ name ]] should be a number"
-msgstr ""
+msgstr "[[ name ]]应为数字"
 
 msgid "[[ name ]] should be greater than [[ length ]] characters"
-msgstr ""
+msgstr "[[ name ]]应大于[[ length ]]个字符"
 
 msgid "[[ name ]] should be greater than [[ otherField ]]"
-msgstr ""
+msgstr "[[ name ]]应大于[[ otherField ]]"
 
 msgid "[[ name ]] should be greater than [[ value ]]"
-msgstr ""
+msgstr "[[ name ]]应大于[[ value ]]"
 
 msgid "[[ name ]] should be less than [[ length ]] characters"
-msgstr ""
+msgstr "[[ name ]]应小于[[ length ]]个字符"
 
 msgid "[[ name ]] should be less than [[ otherField ]]"
-msgstr ""
+msgstr "[[ name ]]应小于[[ otherField ]]"
 
 msgid "[[ name ]] should be less than [[ value ]]"
-msgstr ""
+msgstr "[[ name ]]应小于[[ value ]]"
 
 msgid "[[ name ]] should be positive number"
-msgstr ""
+msgstr "[[ name ]]应为正数"
 
 msgid "[[ name ]] should contain only alphabets and numbers"
-msgstr ""
+msgstr "[[ name ]]只能包含字母和数字"
 
 msgid "[[ name ]] should contain only upper cases"
-msgstr ""
+msgstr "[[ name ]]只能包含大写字母"
 
 msgid "[[ name ]] should match [[ otherField ]]"
-msgstr ""
+msgstr "[[ name ]]应与[[ otherField ]]匹配"
 
 msgid "[[ name ]] should not match [[ otherField ]]"
-msgstr ""
+msgstr "[[ name ]]不应与匹配[[ otherField ]]"
 
 msgid "{0}"
 msgstr ""
@@ -104,7 +101,7 @@ msgid "{0} Preference"
 msgstr "{0}偏好"
 
 msgid "{plural} Units"
-msgstr ""
+msgstr "{plural}单位"
 
 msgid "{singular} {action} Successfully"
 msgstr "{singular}{action}成功"
@@ -128,7 +125,7 @@ msgid "{singular} Settings"
 msgstr "{singular}设置"
 
 msgid "{singular} Unit"
-msgstr ""
+msgstr "{singular}单位"
 
 msgid "{singular} Updated Successfully"
 msgstr "{singular}更新成功"
@@ -170,10 +167,10 @@ msgid "{value} Years"
 msgstr ""
 
 msgid "Access Key ID"
-msgstr ""
+msgstr "访问密钥 ID"
 
 msgid "Account Preferences"
-msgstr "账号"
+msgstr "偏好设置"
 
 msgid "Account Profile"
 msgstr "账号信息"
@@ -203,19 +200,19 @@ msgid "Add New {singular}"
 msgstr "添加新{singular}"
 
 msgid "Add New Option"
-msgstr ""
+msgstr "添加新选项"
 
 msgid "Add New Validation"
-msgstr ""
+msgstr "添加新验证"
 
 msgid "Alphanumeric"
-msgstr ""
+msgstr "字母数字"
 
 msgid "AND"
-msgstr ""
+msgstr "和"
 
 msgid "API Key"
-msgstr ""
+msgstr "Api 密钥"
 
 msgid "App"
 msgstr "APP"
@@ -224,19 +221,19 @@ msgid "Are you sure you want to do this?"
 msgstr "你确定你要这么做吗？"
 
 msgid "Before Submit"
-msgstr ""
+msgstr "提交前"
 
 msgid "Beginning of time"
-msgstr ""
+msgstr "开始时间"
 
 msgid "Beginning of Year"
-msgstr ""
+msgstr "年初"
 
 msgid "Between"
 msgstr ""
 
 msgid "Blue"
-msgstr ""
+msgstr "蓝色"
 
 msgid "Body"
 msgstr ""
@@ -248,25 +245,25 @@ msgid "Brown"
 msgstr ""
 
 msgid "Can Configure App"
-msgstr ""
+msgstr "可以配置应用程序"
 
 msgid "Can Manage All Entities"
-msgstr ""
+msgstr "可管理所有实体"
 
 msgid "Can Manage App Credentials"
-msgstr ""
+msgstr "可管理应用程序凭证"
 
 msgid "Can Manage Dashboard"
-msgstr ""
+msgstr "可管理仪表板"
 
 msgid "Can Manage Permissions"
-msgstr ""
+msgstr "可管理权限"
 
 msgid "Can Manage Users"
-msgstr ""
+msgstr "可管理用户"
 
 msgid "Can Reset Password"
-msgstr ""
+msgstr "可重置密码"
 
 msgid "Cancel"
 msgstr "取消"
@@ -275,7 +272,7 @@ msgid "Change Language"
 msgstr "切换语言"
 
 msgid "Channel"
-msgstr ""
+msgstr "频道"
 
 msgid "Click here to view details"
 msgstr "查看详情"
@@ -284,13 +281,13 @@ msgid "Close Canvas"
 msgstr "关闭画布"
 
 msgid "Color"
-msgstr ""
+msgstr "颜色"
 
 msgid "Column Labels Settings"
-msgstr ""
+msgstr "列标签设置"
 
 msgid "Column Types Settings"
-msgstr ""
+msgstr "列类型设置"
 
 msgid "Configure"
 msgstr "设置"
@@ -305,10 +302,10 @@ msgid "Confirm"
 msgstr "确认"
 
 msgid "Confirm Delete"
-msgstr ""
+msgstr "确认删除"
 
 msgid "Connection URL"
-msgstr ""
+msgstr "连接链接"
 
 msgid "Constant"
 msgstr "常量"
@@ -317,7 +314,7 @@ msgid "Constants"
 msgstr "常量"
 
 msgid "Contains"
-msgstr ""
+msgstr "包含"
 
 msgid "Create"
 msgstr "创建"
@@ -326,16 +323,16 @@ msgid "Create {singular}"
 msgstr "创建{singular}"
 
 msgid "Create Columns Settings"
-msgstr ""
+msgstr "创建列设置"
 
 msgid "Create Fields Order"
-msgstr ""
+msgstr "创建字段顺序"
 
 msgid "Create It"
 msgstr "创建"
 
 msgid "Created At"
-msgstr ""
+msgstr "创建时间"
 
 msgid "Creating {singular}"
 msgstr "创建{singular}"
@@ -350,13 +347,13 @@ msgid "CRUD Settings"
 msgstr "CRUD设置"
 
 msgid "Custom Date"
-msgstr ""
+msgstr "自定义日期"
 
 msgid "Dark"
 msgstr "暗黑"
 
 msgid "Dark Color Scheme"
-msgstr ""
+msgstr "深色配色方案"
 
 msgid "Dashboard"
 msgstr "仪表盘"
@@ -374,16 +371,16 @@ msgid "Data"
 msgstr "数据"
 
 msgid "Database"
-msgstr ""
+msgstr "数据库"
 
 msgid "Database Type"
-msgstr ""
+msgstr "数据库类型"
 
 msgid "Date"
-msgstr ""
+msgstr "日期"
 
 msgid "Date Format"
-msgstr ""
+msgstr "日期格式"
 
 msgid "Day"
 msgstr ""
@@ -410,10 +407,10 @@ msgid "Details"
 msgstr "查看详情"
 
 msgid "Details Columns Settings"
-msgstr ""
+msgstr "详细信息列设置"
 
 msgid "Details Fields Order"
-msgstr ""
+msgstr "详情 字段 顺序"
 
 msgid "Diction"
 msgstr "字典"
@@ -422,10 +419,10 @@ msgid "Diction Settings"
 msgstr "字典设置"
 
 msgid "Display Format"
-msgstr ""
+msgstr "显示格式"
 
 msgid "Domain"
-msgstr ""
+msgstr "域名"
 
 msgid "Done"
 msgstr "完成"
@@ -434,7 +431,7 @@ msgid "Download"
 msgstr "导出"
 
 msgid "Duplicate {singular}"
-msgstr ""
+msgstr "重复{singular}"
 
 msgid "Edit"
 msgstr "编辑"
@@ -443,7 +440,7 @@ msgid "Edit {singular}"
 msgstr "修改{singular}"
 
 msgid "Email"
-msgstr ""
+msgstr "邮件"
 
 msgid "Empty Table"
 msgstr "空表格"
@@ -455,10 +452,10 @@ msgid "Enabled Entities"
 msgstr "已启用实体"
 
 msgid "Enabled Entities Settings"
-msgstr ""
+msgstr "启用实体设置"
 
 msgid "Enabled Relations"
-msgstr ""
+msgstr "已启用关系"
 
 msgid "Enter your credentials to continue"
 msgstr "输入您的凭证以继续"
@@ -467,7 +464,7 @@ msgid "Entities"
 msgstr "实体"
 
 msgid "Entity Tab"
-msgstr ""
+msgstr "实体选项卡"
 
 msgid "Environment Variable"
 msgstr "环境变量"
@@ -476,22 +473,22 @@ msgid "Environment Variables"
 msgstr "环境变量"
 
 msgid "Equal"
-msgstr ""
+msgstr "平等的"
 
 msgid "Equal To Other Field"
-msgstr ""
+msgstr "与其他字段相同"
 
 msgid "Error message"
-msgstr ""
+msgstr "错误信息"
 
 msgid "Explain {title}"
 msgstr "解释{title}"
 
 msgid "Field"
-msgstr ""
+msgstr "字段"
 
 msgid "Field Corresponding To Dashpress Usernames"
-msgstr ""
+msgstr "与Dashpress用户名对应的字段"
 
 msgid "Field Settings"
 msgstr "字段设置"
@@ -500,25 +497,25 @@ msgid "Fields"
 msgstr "字段"
 
 msgid "Fields State"
-msgstr ""
+msgstr "字段状态"
 
 msgid "File"
-msgstr ""
+msgstr "文件"
 
 msgid "File Name"
-msgstr ""
+msgstr "文件名"
 
 msgid "File Name Format"
-msgstr ""
+msgstr "文件名格式"
 
 msgid "File Path Format"
-msgstr ""
+msgstr "文件路径格式"
 
 msgid "File Storage"
 msgstr "存储设置"
 
 msgid "File Uploads Settings"
-msgstr ""
+msgstr "文件上传设置"
 
 msgid "Follow us on Twitter"
 msgstr "关注我们的推特"
@@ -536,7 +533,7 @@ msgid "Form Scripts"
 msgstr "表单脚本"
 
 msgid "Format"
-msgstr ""
+msgstr "格式"
 
 msgid "From"
 msgstr ""
@@ -554,64 +551,64 @@ msgid "Go Back"
 msgstr "返回"
 
 msgid "Greater Than"
-msgstr ""
+msgstr "多于"
 
 msgid "Greater Than Other Field"
-msgstr ""
+msgstr "大于其他字段"
 
 msgid "Green"
-msgstr ""
+msgstr "绿色"
 
 msgid "Headers"
-msgstr ""
+msgstr "头部"
 
 msgid "Height"
-msgstr ""
+msgstr "高度"
 
 msgid "Hi, {0}"
 msgstr "你好，{0}"
 
 msgid "Home Link"
-msgstr ""
+msgstr "首页链接"
 
 msgid "Host"
-msgstr ""
+msgstr "主机"
 
 msgid "Hour"
-msgstr ""
+msgstr "小时"
 
 msgid "Icon"
-msgstr ""
+msgstr "图标"
 
 msgid "Image"
-msgstr ""
+msgstr "图像"
 
 msgid "Incorrect value"
-msgstr ""
+msgstr "错误值"
 
 msgid "Indigo"
-msgstr ""
+msgstr "蓝靛"
 
 msgid "Initial Values"
-msgstr ""
+msgstr "初始值"
 
 msgid "Input {deactivationKey} to continue"
-msgstr ""
+msgstr "输入{deactivationKey}继续"
 
 msgid "Integration"
 msgstr "集成"
 
 msgid "Is In"
-msgstr ""
+msgstr "位于"
 
 msgid "Is Not In"
-msgstr ""
+msgstr "不在"
 
 msgid "Is Not Null"
-msgstr ""
+msgstr "不为空"
 
 msgid "Is Null"
-msgstr ""
+msgstr "空值"
 
 msgid "Join our Discord community"
 msgstr "加入我们社区"
@@ -623,7 +620,7 @@ msgid "Key"
 msgstr ""
 
 msgid "Label"
-msgstr ""
+msgstr "标签"
 
 msgid "Labels"
 msgstr "标签"
@@ -632,22 +629,22 @@ msgid "Language"
 msgstr "语言"
 
 msgid "Large Logo"
-msgstr ""
+msgstr "大图标"
 
 msgid "Less Than"
-msgstr ""
+msgstr "少于"
 
 msgid "Less Than Other Field"
-msgstr ""
+msgstr "小于其他字段"
 
 msgid "Light"
 msgstr "明亮"
 
 msgid "Light Color Scheme"
-msgstr ""
+msgstr "浅色主题配色方案"
 
 msgid "Link Entity"
-msgstr ""
+msgstr "实体链接"
 
 msgid "Link Users To Database"
 msgstr "建立用户数据库"
@@ -665,43 +662,43 @@ msgid "Manage Variables"
 msgstr "变量管理"
 
 msgid "Max"
-msgstr ""
+msgstr "最大限度"
 
 msgid "Max Length"
-msgstr ""
+msgstr "最长长度"
 
 msgid "Maximum file size to upload in MB"
-msgstr ""
+msgstr "上传的最大文件大小（MB）"
 
 msgid "Menu Settings"
 msgstr "菜单设置"
 
 msgid "Message"
-msgstr ""
+msgstr "信息"
 
 msgid "Metadata Columns"
-msgstr ""
+msgstr "元数据列"
 
 msgid "Min"
-msgstr ""
+msgstr "最小"
 
 msgid "Min Length"
-msgstr ""
+msgstr "最小长度"
 
 msgid "Month"
-msgstr ""
+msgstr "月份"
 
 msgid "My Account"
 msgstr "我的账户"
 
 msgid "Name"
-msgstr ""
+msgstr "名称"
 
 msgid "New Password"
-msgstr ""
+msgstr "新密码"
 
 msgid "New Password Again"
-msgstr ""
+msgstr "重复新密码"
 
 msgid "No"
 msgstr ""
@@ -722,19 +719,19 @@ msgid "No Search Results"
 msgstr "没有搜索结果"
 
 msgid "Not Equal"
-msgstr ""
+msgstr "不等于"
 
 msgid "Not Equal To Other Field"
-msgstr ""
+msgstr "不等于其他字段"
 
 msgid "Now"
-msgstr ""
+msgstr "当前"
 
 msgid "Number"
-msgstr ""
+msgstr "数字"
 
 msgid "Old Password"
-msgstr ""
+msgstr "旧密码"
 
 msgid "On Create"
 msgstr "创建"
@@ -746,19 +743,19 @@ msgid "On Update"
 msgstr "更新"
 
 msgid "Only capital letters and underscores are allowed"
-msgstr ""
+msgstr "仅允许使用大写字母和下划线(_)"
 
 msgid "Only lowercase letters, numbers and {delimiter} are allowed"
-msgstr ""
+msgstr "仅允许小写字母、数字和{delimiter}"
 
 msgid "Operator"
-msgstr ""
+msgstr "操作员"
 
 msgid "OR"
-msgstr ""
+msgstr "或"
 
 msgid "Orange"
-msgstr ""
+msgstr "橙色"
 
 msgid "Order"
 msgstr "顺序"
@@ -776,13 +773,13 @@ msgid "Persistent Query"
 msgstr "持久查询"
 
 msgid "Plural"
-msgstr ""
+msgstr "复数"
 
 msgid "Port"
-msgstr ""
+msgstr "端口"
 
 msgid "Positive Number"
-msgstr ""
+msgstr "正值"
 
 msgid "Preferences"
 msgstr "偏好设置"
@@ -797,40 +794,40 @@ msgid "Profile"
 msgstr "个人信息"
 
 msgid "Quarter"
-msgstr ""
+msgstr "季度"
 
 msgid "Red"
-msgstr ""
+msgstr "红色"
 
 msgid "Reference"
-msgstr ""
+msgstr "参考"
 
 msgid "Reference Template"
 msgstr "参考模板"
 
 msgid "Regex"
-msgstr ""
+msgstr "正则表达式"
 
 msgid "Region"
-msgstr ""
+msgstr "地区"
 
 msgid "Relation Labels"
-msgstr ""
+msgstr "关系标签"
 
 msgid "Relation Template"
-msgstr ""
+msgstr "关系模板"
 
 msgid "Relations"
 msgstr "关联"
 
 msgid "Relations Order"
-msgstr ""
+msgstr "关系顺序"
 
 msgid "Relationship Settings"
 msgstr "关联设置"
 
 msgid "Remember Me"
-msgstr ""
+msgstr "记住我"
 
 msgid "Remove"
 msgstr "移除"
@@ -839,7 +836,7 @@ msgid "Remove Nested Filter"
 msgstr "移除嵌套过滤器"
 
 msgid "Required"
-msgstr ""
+msgstr "必填项"
 
 msgid "Reset"
 msgstr "重置"
@@ -860,7 +857,7 @@ msgid "Revealing {label}"
 msgstr "显示 {label}"
 
 msgid "Rich Text"
-msgstr ""
+msgstr "富文本"
 
 msgid "Role"
 msgstr "角色"
@@ -887,16 +884,16 @@ msgid "Saving {singular}"
 msgstr "保存{singular}"
 
 msgid "Script"
-msgstr ""
+msgstr "脚本"
 
 msgid "Search"
-msgstr ""
+msgstr "搜索"
 
 msgid "Secret"
 msgstr "密钥"
 
 msgid "Secret Access Key"
-msgstr ""
+msgstr "访问密钥"
 
 msgid "Secrets"
 msgstr "密钥"
@@ -905,25 +902,25 @@ msgid "Selection"
 msgstr "选择"
 
 msgid "Selection List"
-msgstr ""
+msgstr "选择列表"
 
 msgid "Selections Settings"
-msgstr ""
+msgstr "选择设置"
 
 msgid "Send Mail"
-msgstr ""
+msgstr "发邮件"
 
 msgid "Send Message"
-msgstr ""
+msgstr "发信息"
 
 msgid "Send SMS"
-msgstr ""
+msgstr "发送SMS"
 
 msgid "Sender Email"
-msgstr ""
+msgstr "发件人电子邮件"
 
 msgid "Sender Name"
-msgstr ""
+msgstr "发件人名称"
 
 msgid "Setting Up Account"
 msgstr "账户设置"
@@ -956,19 +953,19 @@ msgid "Site"
 msgstr "站点"
 
 msgid "Site Settings"
-msgstr ""
+msgstr "站点设置"
 
 msgid "Small Logo"
-msgstr ""
+msgstr "小图标"
 
 msgid "Star us on Github"
 msgstr "谢谢给我们项目Star"
 
 msgid "Start of year"
-msgstr ""
+msgstr "年初"
 
 msgid "Storage Key"
-msgstr ""
+msgstr "存储密钥"
 
 msgid "String"
 msgstr ""
@@ -977,7 +974,7 @@ msgid "Subject"
 msgstr ""
 
 msgid "Summary Card"
-msgstr ""
+msgstr "摘要卡片"
 
 msgid "SVG"
 msgstr ""
@@ -992,16 +989,16 @@ msgid "System Information"
 msgstr "系统信息"
 
 msgid "System Settings"
-msgstr ""
+msgstr "系统设置"
 
 msgid "Table"
 msgstr "表格"
 
 msgid "Table Columns Settings"
-msgstr ""
+msgstr "表格列设置"
 
 msgid "Table Fields Order"
-msgstr ""
+msgstr "表字段顺序"
 
 msgid "Table View"
 msgstr "表格视图"
@@ -1013,10 +1010,10 @@ msgid "Test Widget Script"
 msgstr "测试部件脚本"
 
 msgid "Text"
-msgstr ""
+msgstr "文本"
 
 msgid "Textarea"
-msgstr ""
+msgstr "文本区域"
 
 msgid "Theme"
 msgstr "主题"
@@ -1034,7 +1031,7 @@ msgid "This entity has no relations"
 msgstr "该实体没有关联"
 
 msgid "Title"
-msgstr ""
+msgstr "标题"
 
 msgid "To"
 msgstr ""
@@ -1046,13 +1043,13 @@ msgid "Token"
 msgstr ""
 
 msgid "Token Validity Duration In Days"
-msgstr ""
+msgstr "令牌有效期（天）"
 
 msgid "Trigger"
-msgstr ""
+msgstr "触发器"
 
 msgid "Type"
-msgstr ""
+msgstr "类型"
 
 msgid "Update"
 msgstr "更新"
@@ -1061,31 +1058,31 @@ msgid "Update {singular}"
 msgstr "更新{singular}"
 
 msgid "Update Columns Settings"
-msgstr ""
+msgstr "更新列设置"
 
 msgid "Update Fields Order"
-msgstr ""
+msgstr "更新字段顺序"
 
 msgid "Updated At"
-msgstr ""
+msgstr "更新时间"
 
 msgid "Updating {singular}"
 msgstr "更新{singular}"
 
 msgid "Uppercase"
-msgstr ""
+msgstr "大写"
 
 msgid "URL"
 msgstr ""
 
 msgid "Use Colors"
-msgstr ""
+msgstr "使用颜色"
 
 msgid "Use Icon"
 msgstr "使用图标"
 
 msgid "Use SSL"
-msgstr ""
+msgstr "使用SSL"
 
 msgid "Use SVG"
 msgstr "使用SVG"
@@ -1094,7 +1091,7 @@ msgid "User"
 msgstr "用户"
 
 msgid "Username"
-msgstr ""
+msgstr "用户名"
 
 msgid "Users"
 msgstr "用户"
@@ -1103,13 +1100,13 @@ msgid "Users Link To Database"
 msgstr "建立用户数据库"
 
 msgid "Users to Database Link"
-msgstr ""
+msgstr "数据库的链接"
 
 msgid "Validations"
-msgstr ""
+msgstr "验证"
 
 msgid "Value"
-msgstr ""
+msgstr "值"
 
 msgid "Variables"
 msgstr "变量"
@@ -1121,25 +1118,25 @@ msgid "View Full Details"
 msgstr "查看详情"
 
 msgid "Violet"
-msgstr ""
+msgstr "紫色"
 
 msgid "Visit our website"
 msgstr "访问我们网站"
 
 msgid "Week"
-msgstr ""
+msgstr "星期"
 
 msgid "Widget Script"
 msgstr "部件脚本"
 
 msgid "Width"
-msgstr ""
+msgstr "宽度"
 
 msgid "Year"
-msgstr ""
+msgstr "年份"
 
 msgid "Yes"
-msgstr ""
+msgstr "是"
 
 msgid "Your Users Table"
-msgstr ""
+msgstr "用户表"

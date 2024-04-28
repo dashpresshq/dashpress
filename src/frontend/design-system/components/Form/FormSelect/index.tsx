@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { ILabelValue, ISelectData } from "shared/types/options";
 import { useLingui } from "@lingui/react";
 import { MessageDescriptor } from "@lingui/core";
+import { useMemo } from "react";
 import {
   generateClassNames,
   wrapLabelAndError,
@@ -34,6 +35,15 @@ export function FormMultiSelect({
 }: IFormMultiSelect) {
   const { _ } = useLingui();
 
+  const allOptions = useMemo(
+    () =>
+      selectData.map(({ value, label }) => ({
+        value,
+        label: _(label),
+      })),
+    [selectData, _]
+  );
+
   return (
     <SelectStyled
       classNamePrefix={SharedSelectProps.classNamePrefix}
@@ -41,16 +51,13 @@ export function FormMultiSelect({
       defaultValue={[]}
       isMulti
       value={values.map((value) =>
-        selectData.find((selectDatum) => selectDatum.value === value)
+        allOptions.find((selectDatum) => selectDatum.value === value)
       )}
       onChange={(newValues: any) => {
         onChange(newValues.map(({ value }: ISelectData) => value));
       }}
       aria-label={ariaLabel}
-      options={selectData.map(({ value, label }) => ({
-        value,
-        label: _(label),
-      }))}
+      options={allOptions}
     />
   );
 }

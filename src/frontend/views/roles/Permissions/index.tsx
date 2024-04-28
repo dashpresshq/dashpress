@@ -54,10 +54,6 @@ export function RolePermissions() {
   const tabFromUrl = useRouteParam("tab");
   const changeTabParam = useChangeRouterParam("tab");
 
-  const portalUserPermissionsList = mapPermissionStringToLabelValue(
-    portalUserPermissions
-  );
-
   const documentationActionButton = useDocumentationActionButton(
     msg`Roles and Permissions`
   );
@@ -95,7 +91,7 @@ export function RolePermissions() {
                     <MutatePermission
                       permissionList={[
                         ...adminPermissionList,
-                        ...portalUserPermissionsList,
+                        ...portalUserPermissions,
                       ]}
                     />
                   ),

@@ -479,7 +479,7 @@ describe("Table Filters", () => {
 
       await userEvent.selectOptions(
         screen.getByRole("combobox", { name: "Select Filter Operator" }),
-        "Not In"
+        "Is Not In"
       );
 
       await waitFor(() => {

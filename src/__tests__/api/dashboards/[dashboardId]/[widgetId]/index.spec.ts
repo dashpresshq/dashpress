@@ -72,8 +72,6 @@ describe("/api/dashboards/[dashboardId]/[widgetId]/index", () => {
       method: "DELETE",
       query: {
         dashboardId: HOME_DASHBOARD_KEY,
-      },
-      body: {
         widgetId: "widget-2",
       },
     });

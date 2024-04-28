@@ -1,9 +1,11 @@
-import { userFriendlyCase } from "shared/lib/strings/friendly-case";
 import { Stack } from "frontend/design-system/primitives/Stack";
 import { FormButton } from "frontend/design-system/components/Button/FormButton";
 import { Spacer } from "frontend/design-system/primitives/Spacer";
 import { ListManager } from "frontend/design-system/components/ListManager";
-import { UserPermissions } from "shared/constants/user";
+import {
+  USER_PERMISSIONS_CONFIG,
+  UserPermissions,
+} from "shared/constants/user";
 import { PORTAL_PERMISSION_HEIRACHIES } from "shared/logic/permissions/portal";
 import { loadedDataState } from "frontend/lib/data/constants/loadedDataState";
 import { IListMangerItemProps } from "frontend/design-system/components/ListManager/ListManagerItem";
@@ -18,7 +20,7 @@ import {
 
 interface IProps {
   permissionList: { value: string; label: MessageDescriptor }[];
-  overAchingPermission?: string;
+  overAchingPermission?: UserPermissions;
 }
 
 /*
@@ -76,7 +78,7 @@ export function MutatePermission({
               systemIcon={isOverAchingPermissionSelected ? "Check" : "Square"}
               size="sm"
               isInverse
-              text={() => msg`${userFriendlyCase(overAchingPermission)}`}
+              text={() => USER_PERMISSIONS_CONFIG[overAchingPermission].label}
               onClick={() => {
                 if (isOverAchingPermissionSelected) {
                   rolePermissionDeletionMutation.mutate([overAchingPermission]);

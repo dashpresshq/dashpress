@@ -130,6 +130,7 @@
     "cross-env": "^7.0.3",
     "cz-emoji-conventional": "^1.0.1",
     "eslint": "^8.19.0",
+    "gettext-parser": "^8.0.0",
     "husky": "^8.0.1",
     "isomorphic-fetch": "^3.0.0",
     "jest": "^29.0.3",

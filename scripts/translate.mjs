@@ -19,6 +19,10 @@ const translateText = async (input, language) => {
   return (await response.json())[0][0][0];
 };
 
+const cleanUpTranslation = (translation) => {
+  return translation;
+};
+
 const getFileMessages = (folderPath, file) => {
   const poContent = fs.readFileSync(path.join(folderPath, file), "utf8");
   const po = gettextParser.po.parse(poContent);
@@ -42,7 +46,7 @@ async function translatePoFiles(folderPath) {
 
     const language = file.split(".")[0];
 
-    if (language === "pseudo") {
+    if (["pseudo.po", "en-us.po"].includes(language)) {
       continue;
     }
 
@@ -57,7 +61,9 @@ async function translatePoFiles(folderPath) {
         continue;
       }
 
-      const translation = await translateText(message.id, language);
+      const translation = cleanUpTranslation(
+        await translateText(message.id, language)
+      );
 
       console.log(`${language}: ${message.id} => ${translation}`);
 

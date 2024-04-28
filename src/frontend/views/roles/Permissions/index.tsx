@@ -2,9 +2,10 @@ import { useActiveEntities } from "frontend/hooks/entity/entity.store";
 import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
 import { useNavigationStack } from "frontend/lib/routing/useNavigationStack";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
-import { BASE_USER_PERMISSIONS, USER_PERMISSIONS } from "shared/constants/user";
-import { ILabelValue } from "shared/types/options";
-import { userFriendlyCase } from "shared/lib/strings/friendly-case";
+import {
+  UserPermissions,
+  USER_PERMISSIONS_CONFIG,
+} from "shared/constants/user";
 import { RolesDocumentation } from "frontend/docs/roles";
 import { SectionBox } from "frontend/design-system/components/Section/SectionBox";
 import { ContentLayout } from "frontend/design-system/components/Section/SectionDivider";
@@ -16,6 +17,8 @@ import { useRouteParam } from "frontend/lib/routing/useRouteParam";
 import { useChangeRouterParam } from "frontend/lib/routing/useChangeRouterParam";
 import { useDocumentationActionButton } from "frontend/docs/constants";
 import { msg } from "@lingui/macro";
+import { MessageDescriptor } from "@lingui/core";
+import { typescriptSafeObjectDotEntries } from "shared/lib/objects";
 import {
   ADMIN_PERMISSIONS_CRUD_CONFIG,
   useRolePermissions,
@@ -26,17 +29,20 @@ import {
   usePortalUserPermissions,
 } from "./Portal";
 
-const mapPermissionStringToLabelValue = (permissionStringList: string[]) => {
-  return permissionStringList.map((permission) => ({
-    value: permission,
-    label: userFriendlyCase(permission),
-  }));
+const mapPermissionStringToLabelValue = (
+  permissions: Record<string, { label: MessageDescriptor }>
+) => {
+  return typescriptSafeObjectDotEntries(permissions).map(
+    ([permission, config]) => ({
+      value: permission,
+      label: config.label,
+    })
+  );
 };
 
 // TODO: sort by heirachy
-const adminPermissionList: ILabelValue[] = mapPermissionStringToLabelValue(
-  Object.values(BASE_USER_PERMISSIONS)
-);
+const adminPermissionList: { value: string; label: MessageDescriptor }[] =
+  mapPermissionStringToLabelValue(USER_PERMISSIONS_CONFIG);
 
 export function RolePermissions() {
   const activeEntities = useActiveEntities();
@@ -59,7 +65,7 @@ export function RolePermissions() {
   useSetPageDetails({
     pageTitle: ADMIN_PERMISSIONS_CRUD_CONFIG.TEXT_LANG.TITLE,
     viewKey: `list-permissions`,
-    permission: USER_PERMISSIONS.CAN_MANAGE_PERMISSIONS,
+    permission: UserPermissions.CAN_MANAGE_PERMISSIONS,
   });
 
   const isLoading = rolePermissions.isLoading || activeEntities.isLoading;

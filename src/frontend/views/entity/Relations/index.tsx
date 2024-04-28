@@ -6,7 +6,7 @@ import {
 } from "frontend/hooks/entity/entity.store";
 import { EntitiesSelection } from "frontend/views/settings/Entities/Selection";
 import { useEntityDictionPlurals } from "frontend/hooks/entity/entity.queries";
-import { USER_PERMISSIONS } from "shared/constants/user";
+import { UserPermissions } from "shared/constants/user";
 import { useEntitySlug } from "frontend/hooks/entity/entity.config";
 import {
   useEntityConfiguration,
@@ -49,7 +49,7 @@ export function EntityRelationsSettings() {
   useSetPageDetails({
     pageTitle: RELATIONSHIP_SETTINGS,
     viewKey: ENTITY_CONFIGURATION_VIEW,
-    permission: USER_PERMISSIONS.CAN_CONFIGURE_APP,
+    permission: UserPermissions.CAN_CONFIGURE_APP,
   });
 
   const entityRelationTemplate = useEntityConfiguration(

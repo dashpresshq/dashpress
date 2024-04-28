@@ -1,4 +1,4 @@
-import { USER_PERMISSIONS } from "shared/constants/user";
+import { UserPermissions } from "shared/constants/user";
 import {
   useEntityFieldLabels,
   useEntityFieldSelections,
@@ -86,7 +86,7 @@ export function EntityFieldsSettings() {
   useSetPageDetails({
     pageTitle: TITLE_MSG,
     viewKey: ENTITY_CONFIGURATION_VIEW,
-    permission: USER_PERMISSIONS.CAN_CONFIGURE_APP,
+    permission: UserPermissions.CAN_CONFIGURE_APP,
   });
 
   const sharedLoadingState =

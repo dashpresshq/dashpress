@@ -19,9 +19,6 @@ msgstr "/+Z5u4"
 msgid "-- Select State --"
 msgstr "-- Select State --"
 
-msgid "\"\""
-msgstr "\"\""
-
 msgid "\"{0}\" Selection"
 msgstr "\"{0}\" Selection"
 
@@ -205,8 +202,8 @@ msgstr "Add Nested Filter"
 msgid "Add New {singular}"
 msgstr "Add New {singular}"
 
-msgid "Add new option"
-msgstr "Add new option"
+msgid "Add New Option"
+msgstr "Add New Option"
 
 msgid "Add New Validation"
 msgstr "Add New Validation"
@@ -249,6 +246,27 @@ msgstr "Boolean"
 
 msgid "Brown"
 msgstr "Brown"
+
+msgid "Can Configure App"
+msgstr "Can Configure App"
+
+msgid "Can Manage All Entities"
+msgstr "Can Manage All Entities"
+
+msgid "Can Manage App Credentials"
+msgstr "Can Manage App Credentials"
+
+msgid "Can Manage Dashboard"
+msgstr "Can Manage Dashboard"
+
+msgid "Can Manage Permissions"
+msgstr "Can Manage Permissions"
+
+msgid "Can Manage Users"
+msgstr "Can Manage Users"
+
+msgid "Can Reset Password"
+msgstr "Can Reset Password"
 
 msgid "Cancel"
 msgstr "Cancel"

@@ -1,4 +1,4 @@
-import { USER_PERMISSIONS } from "shared/constants/user";
+import { UserPermissions } from "shared/constants/user";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { useRouteParam } from "frontend/lib/routing/useRouteParam";
 import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
@@ -31,7 +31,7 @@ export function ActionsIntegrations() {
   useSetPageDetails({
     pageTitle: ACTION_INTEGRATIONS_CRUD_CONFIG.TEXT_LANG.TITLE,
     viewKey: ACTIONS_VIEW_KEY,
-    permission: USER_PERMISSIONS.CAN_MANAGE_APP_CREDENTIALS,
+    permission: UserPermissions.CAN_MANAGE_APP_CREDENTIALS,
   });
 
   return (

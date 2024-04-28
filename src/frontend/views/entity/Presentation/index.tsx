@@ -5,7 +5,6 @@ import {
 } from "frontend/design-system/components/Skeleton/Form";
 import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
-import { USER_PERMISSIONS } from "shared/constants/user";
 import { useEntitySlug } from "frontend/hooks/entity/entity.config";
 import {
   useEntityConfiguration,
@@ -21,6 +20,7 @@ import { IPresentationScriptParams } from "frontend/views/data/evaluatePresentat
 import { useEvaluateScriptContext } from "frontend/hooks/scripts";
 import { msg } from "@lingui/macro";
 import { i18nNoop } from "translations/fake";
+import { UserPermissions } from "shared/constants/user";
 import { BaseEntitySettingsLayout } from "../_Base";
 import { ENTITY_CONFIGURATION_VIEW } from "../constants";
 
@@ -64,7 +64,7 @@ export function EntityPresentationScriptSettings() {
   useSetPageDetails({
     pageTitle: PRESENTATION_SCRIPT_CRUD_CONFIG.TEXT_LANG.TITLE,
     viewKey: ENTITY_CONFIGURATION_VIEW,
-    permission: USER_PERMISSIONS.CAN_CONFIGURE_APP,
+    permission: UserPermissions.CAN_CONFIGURE_APP,
   });
   return (
     <BaseEntitySettingsLayout>

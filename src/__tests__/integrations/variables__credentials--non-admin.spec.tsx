@@ -10,7 +10,7 @@ import { BASE_TEST_URL } from "__tests__/_/api-handlers/_utils";
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 import userEvent from "@testing-library/user-event";
 import { IAuthenticatedUserBag } from "shared/types/user";
-import { USER_PERMISSIONS } from "shared/constants/user";
+import { UserPermissions } from "shared/constants/user";
 import { AuthActions } from "frontend/hooks/auth/auth.actions";
 import { getTableRows } from "__tests__/_/utils/getTableRows";
 import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
@@ -32,7 +32,7 @@ describe("pages/integrations/variables => credentials -- non admin", () => {
 
     const CUSTOM_ROLE_USER: IAuthenticatedUserBag = {
       name: "Custom Role",
-      permissions: [USER_PERMISSIONS.CAN_CONFIGURE_APP],
+      permissions: [UserPermissions.CAN_CONFIGURE_APP],
       role: "custom-role",
       username: "root",
     };

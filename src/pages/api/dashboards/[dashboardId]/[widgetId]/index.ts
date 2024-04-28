@@ -1,4 +1,4 @@
-import { USER_PERMISSIONS } from "shared/constants/user";
+import { UserPermissions } from "shared/constants/user";
 import { requestHandler } from "backend/lib/request";
 import { dashboardWidgetsApiService } from "backend/dashboard-widgets/dashboard-widgets.service";
 
@@ -29,7 +29,7 @@ export default requestHandler(
     },
     {
       _type: "canUser",
-      body: USER_PERMISSIONS.CAN_MANAGE_DASHBOARD,
+      body: UserPermissions.CAN_MANAGE_DASHBOARD,
     },
   ]
 );

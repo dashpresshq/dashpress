@@ -1,6 +1,6 @@
 import { useNavigationStack } from "frontend/lib/routing/useNavigationStack";
 import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
-import { USER_PERMISSIONS } from "shared/constants/user";
+import { UserPermissions } from "shared/constants/user";
 import { ContentLayout } from "frontend/design-system/components/Section/SectionDivider";
 import { SectionBox } from "frontend/design-system/components/Section/SectionBox";
 import { AppLayout } from "frontend/_layouts/app";
@@ -63,7 +63,7 @@ export function UserCreate() {
   useSetPageDetails({
     pageTitle: ADMIN_USERS_CRUD_CONFIG.TEXT_LANG.CREATE,
     viewKey: `create-users`,
-    permission: USER_PERMISSIONS.CAN_MANAGE_USERS,
+    permission: UserPermissions.CAN_MANAGE_USERS,
   });
 
   return (

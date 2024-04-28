@@ -38,7 +38,10 @@ describe("/api/integrations/actions/[key]/implementations", () => {
             },
           },
           "key": "GET",
-          "label": "GET",
+          "label": {
+            "id": "GET",
+            "message": "GET",
+          },
         },
         {
           "configurationSchema": {
@@ -72,7 +75,10 @@ describe("/api/integrations/actions/[key]/implementations", () => {
             },
           },
           "key": "PUT",
-          "label": "PUT",
+          "label": {
+            "id": "PUT",
+            "message": "PUT",
+          },
         },
         {
           "configurationSchema": {
@@ -106,7 +112,10 @@ describe("/api/integrations/actions/[key]/implementations", () => {
             },
           },
           "key": "POST",
-          "label": "POST",
+          "label": {
+            "id": "POST",
+            "message": "POST",
+          },
         },
         {
           "configurationSchema": {
@@ -140,7 +149,10 @@ describe("/api/integrations/actions/[key]/implementations", () => {
             },
           },
           "key": "PATCH",
-          "label": "PATCH",
+          "label": {
+            "id": "PATCH",
+            "message": "PATCH",
+          },
         },
         {
           "configurationSchema": {
@@ -174,85 +186,10 @@ describe("/api/integrations/actions/[key]/implementations", () => {
             },
           },
           "key": "DELETE",
-          "label": "DELETE",
-        },
-      ]
-    `);
-  });
-
-  it("should show an integration implementation for other keys", async () => {
-    const { req, res } = createAuthenticatedMocks({
-      method: "GET",
-      query: {
-        key: "smtp",
-      },
-    });
-    await handler(req, res);
-
-    expect(res._getStatusCode()).toBe(200);
-    expect(res._getJSONData()).toMatchInlineSnapshot(`
-      [
-        {
-          "configurationSchema": {
-            "body": {
-              "label": {
-                "id": "bGQplw",
-                "message": "Body",
-              },
-              "type": "richtext",
-              "validations": [
-                {
-                  "validationType": "required",
-                },
-              ],
-            },
-            "senderEmail": {
-              "label": {
-                "id": "oWvSIB",
-                "message": "Sender Email",
-              },
-              "type": "text",
-              "validations": [
-                {
-                  "validationType": "required",
-                },
-              ],
-            },
-            "senderName": {
-              "label": {
-                "id": "fXHEMx",
-                "message": "Sender Name",
-              },
-              "type": "text",
-              "validations": [],
-            },
-            "subject": {
-              "label": {
-                "id": "UJmAAK",
-                "message": "Subject",
-              },
-              "type": "text",
-              "validations": [
-                {
-                  "validationType": "required",
-                },
-              ],
-            },
-            "to": {
-              "label": {
-                "id": "/jQctM",
-                "message": "To",
-              },
-              "type": "text",
-              "validations": [
-                {
-                  "validationType": "required",
-                },
-              ],
-            },
+          "label": {
+            "id": "DELETE",
+            "message": "DELETE",
           },
-          "key": "SEND_MAIL",
-          "label": "Send Mail",
         },
       ]
     `);

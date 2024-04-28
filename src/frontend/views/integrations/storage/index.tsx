@@ -1,4 +1,4 @@
-import { USER_PERMISSIONS } from "shared/constants/user";
+import { UserPermissions } from "shared/constants/user";
 import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
 import { SectionBox } from "frontend/design-system/components/Section/SectionBox";
 import { Tabs } from "frontend/design-system/components/Tabs";
@@ -14,7 +14,7 @@ export function StorageIntegrations() {
   useSetPageDetails({
     pageTitle: STORAGE_INTEGRATIONS_CRUD_CONFIG.TEXT_LANG.TITLE,
     viewKey: ACTIONS_VIEW_KEY,
-    permission: USER_PERMISSIONS.CAN_MANAGE_APP_CREDENTIALS,
+    permission: UserPermissions.CAN_MANAGE_APP_CREDENTIALS,
   });
 
   return (

@@ -7,14 +7,14 @@ import UserUpdate from "pages/users/[username]/index";
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 import { BASE_TEST_URL } from "__tests__/_/api-handlers/_utils";
 import { IAuthenticatedUserBag } from "shared/types/user";
-import { USER_PERMISSIONS } from "shared/constants/user";
+import { UserPermissions } from "shared/constants/user";
 import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
 
 const server = setupApiHandlers();
 
 const VIEWER: IAuthenticatedUserBag = {
   name: "Root User",
-  permissions: [USER_PERMISSIONS.CAN_MANAGE_USERS],
+  permissions: [UserPermissions.CAN_MANAGE_USERS],
   role: "custom-role",
   username: "root",
 };

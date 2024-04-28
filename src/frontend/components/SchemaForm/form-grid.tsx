@@ -9,8 +9,9 @@ const Root = styled.div`
   align-items: end;
 `;
 
+// TOOD fix
 const Container = styled.div`
-  container-type: inline-size;
+  // container-type: inline-size;
 `;
 
 export const FormGrid = {

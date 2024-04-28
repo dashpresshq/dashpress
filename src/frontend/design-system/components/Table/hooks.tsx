@@ -21,7 +21,8 @@ export const useInternalColumns = (columns: ITableColumn[]) => {
   const { _ } = useLingui();
   return useMemo(() => {
     return columns.map((column) => {
-      const header = _(column.Header);
+      const header =
+        typeof column.Header === "function" ? column.Header : _(column.Header);
 
       return columnHelper.accessor(column.accessor, {
         id: column.accessor,

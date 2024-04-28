@@ -5,7 +5,7 @@ import {
   SystemLinks,
 } from "shared/types/menu";
 import { userFriendlyCase } from "shared/lib/strings/friendly-case";
-import { META_USER_PERMISSIONS, USER_PERMISSIONS } from "shared/constants/user";
+import { META_USER_PERMISSIONS, UserPermissions } from "shared/constants/user";
 import { GranularEntityPermissions } from "shared/types/user";
 import {
   EntitiesApiService,
@@ -28,19 +28,19 @@ const SYSTEM_LINKS_CONFIG_MAP: Record<
   }
 > = {
   [SystemLinks.Settings]: {
-    permission: USER_PERMISSIONS.CAN_CONFIGURE_APP,
+    permission: UserPermissions.CAN_CONFIGURE_APP,
   },
   [SystemLinks.Home]: {
     permission: META_USER_PERMISSIONS.NO_PERMISSION_REQUIRED,
   },
   [SystemLinks.Roles]: {
-    permission: USER_PERMISSIONS.CAN_MANAGE_PERMISSIONS,
+    permission: UserPermissions.CAN_MANAGE_PERMISSIONS,
   },
   [SystemLinks.Users]: {
-    permission: USER_PERMISSIONS.CAN_MANAGE_USERS,
+    permission: UserPermissions.CAN_MANAGE_USERS,
   },
   [SystemLinks.Integrations]: {
-    permission: USER_PERMISSIONS.CAN_MANAGE_APP_CREDENTIALS,
+    permission: UserPermissions.CAN_MANAGE_APP_CREDENTIALS,
   },
 };
 

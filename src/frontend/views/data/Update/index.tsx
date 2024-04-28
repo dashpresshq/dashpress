@@ -2,7 +2,7 @@ import { ContentLayout } from "frontend/design-system/components/Section/Section
 import { SectionBox } from "frontend/design-system/components/Section/SectionBox";
 import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
 import { useNavigationStack } from "frontend/lib/routing/useNavigationStack";
-import { META_USER_PERMISSIONS, USER_PERMISSIONS } from "shared/constants/user";
+import { META_USER_PERMISSIONS, UserPermissions } from "shared/constants/user";
 import { useUserHasPermission } from "frontend/hooks/auth/user.store";
 import { AppLayout } from "frontend/_layouts/app";
 import {
@@ -53,7 +53,7 @@ export function EntityUpdate() {
         <SectionBox
           title={entityCrudConfig.TEXT_LANG.EDIT}
           description={
-            userHasPermission(USER_PERMISSIONS.CAN_CONFIGURE_APP)
+            userHasPermission(UserPermissions.CAN_CONFIGURE_APP)
               ? `For security reasons, Any data that is hidden in details view will not show up here, So rememeber to toggle on all fields there if you want to update them here`
               : undefined
           }

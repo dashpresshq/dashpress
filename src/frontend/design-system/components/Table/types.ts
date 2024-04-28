@@ -6,10 +6,15 @@ import {
   TableFilterType,
 } from "shared/types/data";
 import { MessageDescriptor } from "@lingui/core";
+import { HeaderContext } from "@tanstack/react-table";
 import { IEmptyWrapperProps } from "../EmptyWrapper/types";
 
 export interface ITableColumn {
-  Header: MessageDescriptor;
+  Header:
+    | MessageDescriptor
+    | ((
+        headerContext: HeaderContext<Record<string, unknown>, unknown>
+      ) => ReactNode);
   accessor: string;
   disableSortBy?: boolean;
   filter?: TableFilterType;

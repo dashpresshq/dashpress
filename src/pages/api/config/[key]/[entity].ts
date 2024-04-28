@@ -1,4 +1,4 @@
-import { USER_PERMISSIONS } from "shared/constants/user";
+import { UserPermissions } from "shared/constants/user";
 import { configurationApiController } from "backend/configuration/configuration.controller";
 import { requestHandler } from "backend/lib/request";
 
@@ -48,7 +48,7 @@ export default requestHandler(
     {
       method: ["PUT"],
       _type: "canUser",
-      body: USER_PERMISSIONS.CAN_CONFIGURE_APP,
+      body: UserPermissions.CAN_CONFIGURE_APP,
     },
   ]
 );

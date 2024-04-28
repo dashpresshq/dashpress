@@ -1,7 +1,7 @@
 import { requestHandler } from "backend/lib/request";
 import { integrationsConfigurationApiController } from "backend/integrations-configurations/integrations-configurations.controller";
 import { IntegrationsConfigurationGroup } from "shared/types/integrations";
-import { USER_PERMISSIONS } from "shared/constants/user";
+import { UserPermissions } from "shared/constants/user";
 
 export const integrationsConfigurationListRequestHandler = (
   group: IntegrationsConfigurationGroup
@@ -15,7 +15,7 @@ export const integrationsConfigurationListRequestHandler = (
     [
       {
         _type: "canUser",
-        body: USER_PERMISSIONS.CAN_CONFIGURE_APP,
+        body: UserPermissions.CAN_CONFIGURE_APP,
       },
     ]
   );

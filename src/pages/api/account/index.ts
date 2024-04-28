@@ -1,4 +1,4 @@
-import { USER_PERMISSIONS } from "shared/constants/user";
+import { UserPermissions } from "shared/constants/user";
 import { requestHandler } from "backend/lib/request";
 import { usersApiService } from "backend/users/users.service";
 
@@ -11,7 +11,7 @@ export default requestHandler({
     const validatedRequest = await getValidatedRequest([
       {
         _type: "canUser",
-        options: USER_PERMISSIONS.CAN_MANAGE_USERS,
+        options: UserPermissions.CAN_MANAGE_USERS,
       },
       {
         _type: "requestBody",

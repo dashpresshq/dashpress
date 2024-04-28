@@ -9,12 +9,18 @@ describe("getEntitySelectionConfig", () => {
         [
           {
             "color": "#2ECC40",
-            "label": "Yes",
+            "label": {
+              "id": "l75CjT",
+              "message": "Yes",
+            },
             "value": true,
           },
           {
             "color": "#FF165D",
-            "label": "No",
+            "label": {
+              "id": "1UzENP",
+              "message": "No",
+            },
             "value": false,
           },
         ]
@@ -37,22 +43,29 @@ describe("getEntitySelectionConfig", () => {
               color: "#fff",
             },
           ],
+
           []
         )
       ).toMatchInlineSnapshot(`
-              [
-                {
-                  "color": "#foo",
-                  "label": "Some Yes",
-                  "value": "true",
-                },
-                {
-                  "color": "#fff",
-                  "label": "Some No",
-                  "value": "false",
-                },
-              ]
-          `);
+        [
+          {
+            "color": "#foo",
+            "label": {
+              "id": "Some Yes",
+              "message": "Some Yes",
+            },
+            "value": "true",
+          },
+          {
+            "color": "#fff",
+            "label": {
+              "id": "Some No",
+              "message": "Some No",
+            },
+            "value": "false",
+          },
+        ]
+      `);
     });
   });
 
@@ -74,13 +87,17 @@ describe("getEntitySelectionConfig", () => {
               color: "#foo",
             },
           ],
+
           []
         )
       ).toMatchInlineSnapshot(`
         [
           {
             "color": "#foo",
-            "label": "Option 1",
+            "label": {
+              "id": "Option 1",
+              "message": "Option 1",
+            },
             "value": "true",
           },
         ]
@@ -100,17 +117,35 @@ describe("getEntitySelectionConfig", () => {
         [
           {
             "color": "#2ECC40",
-            "label": "Pending",
+            "label": {
+              "id": "J/hVSQ",
+              "message": "{0}",
+              "values": {
+                "0": "Pending",
+              },
+            },
             "value": "pending",
           },
           {
             "color": "#FF165D",
-            "label": "Approved",
+            "label": {
+              "id": "J/hVSQ",
+              "message": "{0}",
+              "values": {
+                "0": "Approved",
+              },
+            },
             "value": "approved",
           },
           {
             "color": "#0074D9",
-            "label": "Rejected",
+            "label": {
+              "id": "J/hVSQ",
+              "message": "{0}",
+              "values": {
+                "0": "Rejected",
+              },
+            },
             "value": "rejected",
           },
         ]
@@ -133,22 +168,29 @@ describe("getEntitySelectionConfig", () => {
               color: "#ffo",
             },
           ],
+
           null
         )
       ).toMatchInlineSnapshot(`
-          [
-            {
-              "color": "#foo",
-              "label": "Custom Status 1",
-              "value": "custom-status-1",
+        [
+          {
+            "color": "#foo",
+            "label": {
+              "id": "Custom Status 1",
+              "message": "Custom Status 1",
             },
-            {
-              "color": "#ffo",
-              "label": "Custom Status 2",
-              "value": "custom-status-2",
+            "value": "custom-status-1",
+          },
+          {
+            "color": "#ffo",
+            "label": {
+              "id": "Custom Status 2",
+              "message": "Custom Status 2",
             },
-          ]
-        `);
+            "value": "custom-status-2",
+          },
+        ]
+      `);
     });
 
     it("should merge preselected options with generated selections from options", () => {
@@ -175,27 +217,51 @@ describe("getEntitySelectionConfig", () => {
         [
           {
             "color": "#foo",
-            "label": "Custom Status 1",
+            "label": {
+              "id": "Custom Status 1",
+              "message": "Custom Status 1",
+            },
             "value": "custom-status-1",
           },
           {
             "color": "#ffo",
-            "label": "Custom Status 2",
+            "label": {
+              "id": "Custom Status 2",
+              "message": "Custom Status 2",
+            },
             "value": "custom-status-2",
           },
           {
             "color": "#2ECC40",
-            "label": "Pending",
+            "label": {
+              "id": "J/hVSQ",
+              "message": "{0}",
+              "values": {
+                "0": "Pending",
+              },
+            },
             "value": "pending",
           },
           {
             "color": "#FF165D",
-            "label": "Approved",
+            "label": {
+              "id": "J/hVSQ",
+              "message": "{0}",
+              "values": {
+                "0": "Approved",
+              },
+            },
             "value": "approved",
           },
           {
             "color": "#0074D9",
-            "label": "Rejected",
+            "label": {
+              "id": "J/hVSQ",
+              "message": "{0}",
+              "values": {
+                "0": "Rejected",
+              },
+            },
             "value": "rejected",
           },
         ]
@@ -226,22 +292,40 @@ describe("getEntitySelectionConfig", () => {
         [
           {
             "color": "#foo",
-            "label": "Custom Status 1",
+            "label": {
+              "id": "Custom Status 1",
+              "message": "Custom Status 1",
+            },
             "value": "custom-status-1",
           },
           {
             "color": "#ffo",
-            "label": "Custom Status 2",
+            "label": {
+              "id": "Custom Status 2",
+              "message": "Custom Status 2",
+            },
             "value": "approved",
           },
           {
             "color": "#2ECC40",
-            "label": "Pending",
+            "label": {
+              "id": "J/hVSQ",
+              "message": "{0}",
+              "values": {
+                "0": "Pending",
+              },
+            },
             "value": "pending",
           },
           {
             "color": "#0074D9",
-            "label": "Rejected",
+            "label": {
+              "id": "J/hVSQ",
+              "message": "{0}",
+              "values": {
+                "0": "Rejected",
+              },
+            },
             "value": "rejected",
           },
         ]
@@ -269,26 +353,50 @@ describe("getEntitySelectionConfig", () => {
       ).toMatchInlineSnapshot(`
         [
           {
-            "label": "Custom Status 1",
+            "label": {
+              "id": "Custom Status 1",
+              "message": "Custom Status 1",
+            },
             "value": "custom-status-1",
           },
           {
-            "label": "Custom Status 2",
+            "label": {
+              "id": "Custom Status 2",
+              "message": "Custom Status 2",
+            },
             "value": "custom-status-2",
           },
           {
             "color": undefined,
-            "label": "Pending",
+            "label": {
+              "id": "J/hVSQ",
+              "message": "{0}",
+              "values": {
+                "0": "Pending",
+              },
+            },
             "value": "pending",
           },
           {
             "color": undefined,
-            "label": "Approved",
+            "label": {
+              "id": "J/hVSQ",
+              "message": "{0}",
+              "values": {
+                "0": "Approved",
+              },
+            },
             "value": "approved",
           },
           {
             "color": undefined,
-            "label": "Rejected",
+            "label": {
+              "id": "J/hVSQ",
+              "message": "{0}",
+              "values": {
+                "0": "Rejected",
+              },
+            },
             "value": "rejected",
           },
         ]

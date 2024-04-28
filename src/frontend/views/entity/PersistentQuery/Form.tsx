@@ -21,6 +21,7 @@ import { Fragment } from "react";
 import { msg } from "@lingui/macro";
 import { typescriptSafeObjectDotEntries } from "shared/lib/objects";
 import { FILTER_OPERATOR_CONFIG } from "frontend/design-system/components/Table/filters/constants";
+import { MessageDescriptor } from "@lingui/core";
 
 const OPERATOR_SELECTORS = [
   {
@@ -65,7 +66,7 @@ function FilterRow({
                 required
                 selectData={columns.map((column) => ({
                   value: column.accessor,
-                  label: column.Header,
+                  label: column.Header as MessageDescriptor,
                 }))}
                 meta={meta}
                 input={input}
@@ -142,7 +143,6 @@ export function EntityPersistentQueryForm({
                         <Field name="operator" validateFields={[]}>
                           {({ input, meta }) => (
                             <FormSelectButton
-                              label={msg`""`}
                               required
                               sm
                               selectData={OPERATOR_SELECTORS}
@@ -168,7 +168,6 @@ export function EntityPersistentQueryForm({
                                           >
                                             {({ input, meta }) => (
                                               <FormSelectButton
-                                                label={msg`""`}
                                                 sm
                                                 required
                                                 selectData={OPERATOR_SELECTORS}

@@ -1,4 +1,4 @@
-import { USER_PERMISSIONS } from "shared/constants/user";
+import { UserPermissions } from "shared/constants/user";
 import { requestHandler } from "backend/lib/request";
 import { integrationsConfigurationApiController } from "backend/integrations-configurations/integrations-configurations.controller";
 import { IAppliedSchemaFormConfig } from "shared/form-schemas/types";
@@ -31,8 +31,8 @@ const checks = (group: IntegrationsConfigurationGroup): ValidationKeys[] => {
       _type: "canUser",
       body:
         group === IntegrationsConfigurationGroup.Credentials
-          ? USER_PERMISSIONS.CAN_MANAGE_APP_CREDENTIALS
-          : USER_PERMISSIONS.CAN_CONFIGURE_APP,
+          ? UserPermissions.CAN_MANAGE_APP_CREDENTIALS
+          : UserPermissions.CAN_CONFIGURE_APP,
     },
   ];
 

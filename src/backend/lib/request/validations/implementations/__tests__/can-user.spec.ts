@@ -1,5 +1,5 @@
 import { requestHandler } from "backend/lib/request";
-import { USER_PERMISSIONS } from "shared/constants/user";
+import { UserPermissions } from "shared/constants/user";
 import {
   createAuthenticatedMocks,
   createAuthenticatedViewerMocks,
@@ -14,7 +14,7 @@ const handler = requestHandler(
   [
     {
       _type: "canUser",
-      body: USER_PERMISSIONS.CAN_MANAGE_DASHBOARD,
+      body: UserPermissions.CAN_MANAGE_DASHBOARD,
     },
   ]
 );

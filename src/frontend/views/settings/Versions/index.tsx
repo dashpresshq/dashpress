@@ -1,4 +1,4 @@
-import { USER_PERMISSIONS } from "shared/constants/user";
+import { UserPermissions } from "shared/constants/user";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { Fragment } from "react";
 import { MAKE_CRUD_CONFIG } from "frontend/lib/crud-config";
@@ -22,7 +22,7 @@ export function VersionInfo() {
   useSetPageDetails({
     pageTitle: SYSTEM_INFORMATION_CRUD_CONFIG.TEXT_LANG.TITLE,
     viewKey: SETTINGS_VIEW_KEY,
-    permission: USER_PERMISSIONS.CAN_CONFIGURE_APP,
+    permission: UserPermissions.CAN_CONFIGURE_APP,
   });
 
   const systemVersions = useApi<Record<string, string>>("/api/versions", {

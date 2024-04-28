@@ -19,9 +19,6 @@ msgstr ""
 msgid "-- Select State --"
 msgstr ""
 
-msgid "\"\""
-msgstr ""
-
 msgid "\"{0}\" Selection"
 msgstr ""
 
@@ -205,7 +202,7 @@ msgstr ""
 msgid "Add New {singular}"
 msgstr ""
 
-msgid "Add new option"
+msgid "Add New Option"
 msgstr ""
 
 msgid "Add New Validation"
@@ -248,6 +245,27 @@ msgid "Boolean"
 msgstr ""
 
 msgid "Brown"
+msgstr ""
+
+msgid "Can Configure App"
+msgstr ""
+
+msgid "Can Manage All Entities"
+msgstr ""
+
+msgid "Can Manage App Credentials"
+msgstr ""
+
+msgid "Can Manage Dashboard"
+msgstr ""
+
+msgid "Can Manage Permissions"
+msgstr ""
+
+msgid "Can Manage Users"
+msgstr ""
+
+msgid "Can Reset Password"
 msgstr ""
 
 msgid "Cancel"

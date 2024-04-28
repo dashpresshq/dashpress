@@ -1,5 +1,5 @@
 import { AppLayout } from "frontend/_layouts/app";
-import { roleLabel, USER_PERMISSIONS } from "shared/constants/user";
+import { roleLabel, UserPermissions } from "shared/constants/user";
 import {
   FEPaginationTable,
   IFETableColumn,
@@ -29,7 +29,7 @@ export function ListUsers() {
   useSetPageDetails({
     pageTitle: ADMIN_USERS_CRUD_CONFIG.TEXT_LANG.TITLE,
     viewKey: `users`,
-    permission: USER_PERMISSIONS.CAN_MANAGE_USERS,
+    permission: UserPermissions.CAN_MANAGE_USERS,
   });
 
   const roles = useApi<IRolesList[]>(ROLES_ENDPOINT_CONFIG.LIST, {
@@ -110,7 +110,7 @@ export function ListUsers() {
     },
   ];
 
-  if (userHasPermission(USER_PERMISSIONS.CAN_CONFIGURE_APP)) {
+  if (userHasPermission(UserPermissions.CAN_CONFIGURE_APP)) {
     actionsItems.push({
       id: "connect",
       systemIcon: "Link",

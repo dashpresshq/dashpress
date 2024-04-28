@@ -1,6 +1,6 @@
 import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
-import { USER_PERMISSIONS } from "shared/constants/user";
+import { UserPermissions } from "shared/constants/user";
 import { useEntitySlug } from "frontend/hooks/entity/entity.config";
 import { FormIntegrationsDocumentation } from "frontend/docs/form-integrations";
 import { SectionBox } from "frontend/design-system/components/Section/SectionBox";
@@ -17,7 +17,7 @@ export function EntityFormActionsSettings() {
   useSetPageDetails({
     pageTitle: FORM_ACTION_CRUD_CONFIG.TEXT_LANG.TITLE,
     viewKey: ENTITY_CONFIGURATION_VIEW,
-    permission: USER_PERMISSIONS.CAN_CONFIGURE_APP,
+    permission: UserPermissions.CAN_CONFIGURE_APP,
   });
 
   const documentationActionButton = useDocumentationActionButton(

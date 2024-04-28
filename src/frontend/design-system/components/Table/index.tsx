@@ -83,7 +83,7 @@ export function Table<T extends unknown>({
         typescriptSafeObjectDotEntries(datum).map(([key, value]) => [
           key,
           // eslint-disable-next-line no-nested-ternary
-          typeof value === "object" // TODO react elements
+          typeof value === "object"
             ? JSON.stringify(value)
             : typeof value === "number"
             ? `${value}`

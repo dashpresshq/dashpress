@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
 import { useUserHasPermission } from "frontend/hooks/auth/user.store";
-import { USER_PERMISSIONS } from "shared/constants/user";
+import { UserPermissions } from "shared/constants/user";
 import { CrudViewsKeys } from "shared/configurations";
 import { IDropDownMenuItem } from "frontend/design-system/components/DropdownMenu";
 import { useEntityCrudConfig } from "frontend/hooks/entity/entity.config";
@@ -33,7 +33,7 @@ export const useEntityActionMenuItems = (
 
   const userHasPermission = useUserHasPermission();
 
-  if (!userHasPermission(USER_PERMISSIONS.CAN_CONFIGURE_APP)) {
+  if (!userHasPermission(UserPermissions.CAN_CONFIGURE_APP)) {
     return [];
   }
 

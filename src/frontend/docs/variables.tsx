@@ -1,5 +1,5 @@
 import { userFriendlyCase } from "shared/lib/strings/friendly-case";
-import { USER_PERMISSIONS } from "shared/constants/user";
+import { UserPermissions } from "shared/constants/user";
 import { DocumentationRoot } from "./_base";
 
 export function VariablesDocumentation() {
@@ -39,10 +39,7 @@ export function VariablesDocumentation() {
 
       <p>
         Constants can be managed and viewed by anybody that has the
-        <code>
-          {" "}
-          {userFriendlyCase(USER_PERMISSIONS.CAN_CONFIGURE_APP)}
-        </code>{" "}
+        <code> {userFriendlyCase(UserPermissions.CAN_CONFIGURE_APP)}</code>{" "}
         permission.
       </p>
 
@@ -68,15 +65,15 @@ export function VariablesDocumentation() {
       </p>
       <p>
         Secrets can be viewed by users that have the{" "}
-        <code> {userFriendlyCase(USER_PERMISSIONS.CAN_CONFIGURE_APP)}</code> or
+        <code> {userFriendlyCase(UserPermissions.CAN_CONFIGURE_APP)}</code> or
         <code>
           {" "}
-          {userFriendlyCase(USER_PERMISSIONS.CAN_MANAGE_APP_CREDENTIALS)}{" "}
+          {userFriendlyCase(UserPermissions.CAN_MANAGE_APP_CREDENTIALS)}{" "}
         </code>{" "}
         permission but can only be managed by users with the
         <code>
           {" "}
-          {userFriendlyCase(USER_PERMISSIONS.CAN_MANAGE_APP_CREDENTIALS)}
+          {userFriendlyCase(UserPermissions.CAN_MANAGE_APP_CREDENTIALS)}
         </code>{" "}
         permission.
       </p>

@@ -58,8 +58,8 @@ describe("Table Filters", () => {
         .toMatchInlineSnapshot(`
           [
             "Contains",
-            "Equal To",
-            "Not Equal To",
+            "Equal",
+            "Not Equal",
           ]
         `);
     });
@@ -82,7 +82,7 @@ describe("Table Filters", () => {
 
       await userEvent.selectOptions(
         screen.getByRole("combobox", { name: "Select Filter Operator" }),
-        "Equal To"
+        "Equal"
       );
 
       await waitFor(() => {
@@ -139,8 +139,8 @@ describe("Table Filters", () => {
       expect(screen.getAllByRole("option").map((option) => option.textContent))
         .toMatchInlineSnapshot(`
         [
-          "Equal To",
-          "Not Equal To",
+          "Equal",
+          "Not Equal",
           "Between",
           "Greater Than",
           "Less Than",
@@ -247,7 +247,7 @@ describe("Table Filters", () => {
           .map((option) => option.textContent)
       ).toMatchInlineSnapshot(`
           [
-            "Equal To",
+            "Equal",
           ]
         `);
     });
@@ -440,8 +440,8 @@ describe("Table Filters", () => {
       expect(screen.getAllByRole("option").map((option) => option.textContent))
         .toMatchInlineSnapshot(`
         [
-          "In",
-          "Not In",
+          "Is In",
+          "Is Not In",
         ]
       `);
     });

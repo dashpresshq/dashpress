@@ -1,6 +1,6 @@
 import { requestHandler } from "backend/lib/request";
 import { IAccountProfile } from "shared/types/user";
-import { USER_PERMISSIONS } from "shared/constants/user";
+import { UserPermissions } from "shared/constants/user";
 import { dashboardWidgetsApiService } from "backend/dashboard-widgets/dashboard-widgets.service";
 
 export default requestHandler(
@@ -36,7 +36,7 @@ export default requestHandler(
     {
       method: ["POST"],
       _type: "canUser",
-      body: USER_PERMISSIONS.CAN_MANAGE_DASHBOARD,
+      body: UserPermissions.CAN_MANAGE_DASHBOARD,
     },
   ]
 );

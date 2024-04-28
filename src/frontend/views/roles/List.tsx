@@ -8,7 +8,7 @@ import {
   IFETableColumn,
 } from "frontend/components/FEPaginationTable";
 import { SystemRoles } from "shared/types/user";
-import { USER_PERMISSIONS } from "shared/constants/user";
+import { UserPermissions } from "shared/constants/user";
 import { IRolesList } from "shared/types/roles";
 import { Card } from "frontend/design-system/components/Card";
 import { DELETE_BUTTON_PROPS } from "frontend/design-system/components/Button/constants";
@@ -24,7 +24,7 @@ export function ListRoles() {
   useSetPageDetails({
     pageTitle: ADMIN_ROLES_CRUD_CONFIG.TEXT_LANG.TITLE,
     viewKey: `list-roles`,
-    permission: USER_PERMISSIONS.CAN_MANAGE_PERMISSIONS,
+    permission: UserPermissions.CAN_MANAGE_PERMISSIONS,
   });
 
   const roleDeletionMutation = useRoleDeletionMutation();

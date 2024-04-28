@@ -3,7 +3,7 @@ import {
   useUserHasPermission,
 } from "frontend/hooks/auth/user.store";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
-import { USER_PERMISSIONS } from "shared/constants/user";
+import { UserPermissions } from "shared/constants/user";
 import { useNavigationStack } from "frontend/lib/routing/useNavigationStack";
 import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
 import { SectionBox } from "frontend/design-system/components/Section/SectionBox";
@@ -71,7 +71,7 @@ export function UserUpdate() {
   useSetPageDetails({
     pageTitle: ADMIN_USERS_CRUD_CONFIG.TEXT_LANG.EDIT,
     viewKey: `edit-user`,
-    permission: USER_PERMISSIONS.CAN_MANAGE_USERS,
+    permission: UserPermissions.CAN_MANAGE_USERS,
   });
 
   const { isLoading } = userDetails;
@@ -108,7 +108,7 @@ export function UserUpdate() {
           </ViewStateMachine>
         </SectionBox>
         <Spacer />
-        {userHasPermission(USER_PERMISSIONS.CAN_RESET_PASSWORD) &&
+        {userHasPermission(UserPermissions.CAN_RESET_PASSWORD) &&
           authenticatedUserBag.data?.username !== username && (
             <SectionBox title={msg`Reset User Password`}>
               <SchemaForm<IResetPasswordForm>

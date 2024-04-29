@@ -100,7 +100,16 @@ msgstr ""
 msgid "{0} [{1}]"
 msgstr ""
 
+msgid "{0} {1}"
+msgstr ""
+
+msgid "{0} Configuration"
+msgstr ""
+
 msgid "{0} Preference"
+msgstr ""
+
+msgid "{0} Shared Successfully"
 msgstr ""
 
 msgid "{plural} Units"
@@ -169,6 +178,9 @@ msgstr ""
 msgid "{value} Years"
 msgstr ""
 
+msgid "2FA Tokens"
+msgstr ""
+
 msgid "Access Key ID"
 msgstr ""
 
@@ -199,13 +211,25 @@ msgstr ""
 msgid "Add Nested Filter"
 msgstr ""
 
+msgid "Add New {0} And Select"
+msgstr ""
+
 msgid "Add New {singular}"
+msgstr ""
+
+msgid "Add New And Select"
 msgstr ""
 
 msgid "Add New Option"
 msgstr ""
 
 msgid "Add New Validation"
+msgstr ""
+
+msgid "All Dashboards"
+msgstr ""
+
+msgid "All items were {actionText} successfully"
 msgstr ""
 
 msgid "Alphanumeric"
@@ -221,6 +245,30 @@ msgid "App"
 msgstr ""
 
 msgid "Are you sure you want to do this?"
+msgstr ""
+
+msgid "Associated Triggers"
+msgstr ""
+
+msgid "Associated Workflows"
+msgstr ""
+
+msgid "Attach A Trigger"
+msgstr ""
+
+msgid "Attach A Workflow"
+msgstr ""
+
+msgid "Authenticator Token"
+msgstr ""
+
+msgid "Back To {0}"
+msgstr ""
+
+msgid "Back to Sign In Page"
+msgstr ""
+
+msgid "Bar Chart"
 msgstr ""
 
 msgid "Before Submit"
@@ -241,13 +289,40 @@ msgstr ""
 msgid "Body"
 msgstr ""
 
+msgid "Bookmark"
+msgstr ""
+
+msgid "Bookmarks"
+msgstr ""
+
 msgid "Boolean"
 msgstr ""
 
 msgid "Brown"
 msgstr ""
 
+msgid "Bulk Delete"
+msgstr ""
+
+msgid "Bulk Deleting"
+msgstr ""
+
+msgid "Bulk Update"
+msgstr ""
+
+msgid "Can Access All Dashboards"
+msgstr ""
+
+msgid "Can Access And Restore Soft Deleted Items"
+msgstr ""
+
 msgid "Can Configure App"
+msgstr ""
+
+msgid "Can Export Data"
+msgstr ""
+
+msgid "Can Impersonate Users"
 msgstr ""
 
 msgid "Can Manage All Entities"
@@ -265,10 +340,16 @@ msgstr ""
 msgid "Can Manage Users"
 msgstr ""
 
+msgid "Can Manages Flows"
+msgstr ""
+
 msgid "Can Reset Password"
 msgstr ""
 
 msgid "Cancel"
+msgstr ""
+
+msgid "Change History"
 msgstr ""
 
 msgid "Change Language"
@@ -277,7 +358,25 @@ msgstr ""
 msgid "Channel"
 msgstr ""
 
+msgid "Clear selections"
+msgstr ""
+
 msgid "Click here to view details"
+msgstr ""
+
+msgid "Client Script"
+msgstr ""
+
+msgid "Clone"
+msgstr ""
+
+msgid "Clone {0}"
+msgstr ""
+
+msgid "Clone Settings"
+msgstr ""
+
+msgid "Cloning"
 msgstr ""
 
 msgid "Close Canvas"
@@ -286,10 +385,22 @@ msgstr ""
 msgid "Color"
 msgstr ""
 
+msgid "Column"
+msgstr ""
+
 msgid "Column Labels Settings"
 msgstr ""
 
 msgid "Column Types Settings"
+msgstr ""
+
+msgid "Complete Setup"
+msgstr ""
+
+msgid "Completing Setup"
+msgstr ""
+
+msgid "Condition"
 msgstr ""
 
 msgid "Configure"
@@ -304,7 +415,13 @@ msgstr ""
 msgid "Confirm"
 msgstr ""
 
+msgid "Confirm Data Restoration"
+msgstr ""
+
 msgid "Confirm Delete"
+msgstr ""
+
+msgid "Confirmation Text"
 msgstr ""
 
 msgid "Connection URL"
@@ -319,10 +436,19 @@ msgstr ""
 msgid "Contains"
 msgstr ""
 
+msgid "Continue"
+msgstr ""
+
+msgid "Copy To Clipboard"
+msgstr ""
+
 msgid "Create"
 msgstr ""
 
 msgid "Create {singular}"
+msgstr ""
+
+msgid "Create Attachments"
 msgstr ""
 
 msgid "Create Columns Settings"
@@ -340,13 +466,37 @@ msgstr ""
 msgid "Creating {singular}"
 msgstr ""
 
+msgid "Creating Attachments"
+msgstr ""
+
 msgid "Credentials Was Successfully Setup"
+msgstr ""
+
+msgid "Cron Expression"
 msgstr ""
 
 msgid "CRUD"
 msgstr ""
 
 msgid "CRUD Settings"
+msgstr ""
+
+msgid "cURL Command"
+msgstr ""
+
+msgid "Curve"
+msgstr ""
+
+msgid "Custom Action"
+msgstr ""
+
+msgid "Custom Actions"
+msgstr ""
+
+msgid "Custom Dashboard"
+msgstr ""
+
+msgid "Custom Dashboards"
 msgstr ""
 
 msgid "Custom Date"
@@ -371,6 +521,21 @@ msgid "Dashboards"
 msgstr ""
 
 msgid "Data"
+msgstr ""
+
+msgid "Data copied to clipboard successfully"
+msgstr ""
+
+msgid "Data Event"
+msgstr ""
+
+msgid "Data Events"
+msgstr ""
+
+msgid "Data exported successfully"
+msgstr ""
+
+msgid "Data Key"
 msgstr ""
 
 msgid "Database"
@@ -403,7 +568,13 @@ msgstr ""
 msgid "Delete {singular}"
 msgstr ""
 
+msgid "Delete Edge"
+msgstr ""
+
 msgid "Delete Selection"
+msgstr ""
+
+msgid "Description"
 msgstr ""
 
 msgid "Details"
@@ -451,6 +622,12 @@ msgstr ""
 msgid "Enable {0} Functionality"
 msgstr ""
 
+msgid "Enable Area"
+msgstr ""
+
+msgid "Enable Points"
+msgstr ""
+
 msgid "Enabled Entities"
 msgstr ""
 
@@ -466,7 +643,31 @@ msgstr ""
 msgid "Entities"
 msgstr ""
 
+msgid "Entities Enabled For Add New And Select"
+msgstr ""
+
+msgid "Entities Enabled For Change History"
+msgstr ""
+
+msgid "Entity"
+msgstr ""
+
+msgid "Entity Action"
+msgstr ""
+
+msgid "Entity Create Form Layout"
+msgstr ""
+
+msgid "Entity Field"
+msgstr ""
+
+msgid "Entity ID"
+msgstr ""
+
 msgid "Entity Tab"
+msgstr ""
+
+msgid "Entity Update Form Layout"
 msgstr ""
 
 msgid "Environment Variable"
@@ -484,7 +685,22 @@ msgstr ""
 msgid "Error message"
 msgstr ""
 
+msgid "Error Occured Setting Up Your 2FA Token"
+msgstr ""
+
+msgid "Every 6 Hours"
+msgstr ""
+
 msgid "Explain {title}"
+msgstr ""
+
+msgid "Export"
+msgstr ""
+
+msgid "Exporting"
+msgstr ""
+
+msgid "External Link"
 msgstr ""
 
 msgid "Field"
@@ -520,7 +736,22 @@ msgstr ""
 msgid "File Uploads Settings"
 msgstr ""
 
+msgid "Flow"
+msgstr ""
+
+msgid "Flow Trigger Attachment"
+msgstr ""
+
+msgid "Flow Trigger Attachments"
+msgstr ""
+
+msgid "Flows"
+msgstr ""
+
 msgid "Follow us on Twitter"
+msgstr ""
+
+msgid "For security reasons, Please input your account password to be able to manage {label}"
 msgstr ""
 
 msgid "Form"
@@ -530,6 +761,12 @@ msgid "Form Action"
 msgstr ""
 
 msgid "Form Actions"
+msgstr ""
+
+msgid "Form Field"
+msgstr ""
+
+msgid "Form Fields"
 msgstr ""
 
 msgid "Form Scripts"
@@ -550,6 +787,9 @@ msgstr ""
 msgid "Genesis"
 msgstr ""
 
+msgid "Global Action"
+msgstr ""
+
 msgid "Go Back"
 msgstr ""
 
@@ -562,6 +802,15 @@ msgstr ""
 msgid "Green"
 msgstr ""
 
+msgid "Group Mode"
+msgstr ""
+
+msgid "Grouped"
+msgstr ""
+
+msgid "Header"
+msgstr ""
+
 msgid "Headers"
 msgstr ""
 
@@ -571,7 +820,13 @@ msgstr ""
 msgid "Hi, {0}"
 msgstr ""
 
+msgid "Home"
+msgstr ""
+
 msgid "Home Link"
+msgstr ""
+
+msgid "Horizontal"
 msgstr ""
 
 msgid "Host"
@@ -580,10 +835,19 @@ msgstr ""
 msgid "Hour"
 msgstr ""
 
+msgid "I have safely saved my recovery tokens"
+msgstr ""
+
 msgid "Icon"
 msgstr ""
 
 msgid "Image"
+msgstr ""
+
+msgid "Impersonate User"
+msgstr ""
+
+msgid "Impersonating User"
 msgstr ""
 
 msgid "Incorrect value"
@@ -595,10 +859,22 @@ msgstr ""
 msgid "Initial Values"
 msgstr ""
 
+msgid "Inline Edit"
+msgstr ""
+
+msgid "Inline Edit Settings"
+msgstr ""
+
 msgid "Input {deactivationKey} to continue"
 msgstr ""
 
 msgid "Integration"
+msgstr ""
+
+msgid "Integrations"
+msgstr ""
+
+msgid "IP Address"
 msgstr ""
 
 msgid "Is In"
@@ -634,6 +910,9 @@ msgstr ""
 msgid "Large Logo"
 msgstr ""
 
+msgid "Layout"
+msgstr ""
+
 msgid "Less Than"
 msgstr ""
 
@@ -646,19 +925,40 @@ msgstr ""
 msgid "Light Color Scheme"
 msgstr ""
 
+msgid "Line Chart"
+msgstr ""
+
+msgid "Link"
+msgstr ""
+
 msgid "Link Entity"
 msgstr ""
 
 msgid "Link Users To Database"
 msgstr ""
 
+msgid "List"
+msgstr ""
+
+msgid "Loading..."
+msgstr ""
+
 msgid "Log Out"
+msgstr ""
+
+msgid "Loop"
 msgstr ""
 
 msgid "Manage {plural}"
 msgstr ""
 
 msgid "Manage {title}"
+msgstr ""
+
+msgid "Manage Plan"
+msgstr ""
+
+msgid "Manage Sensitive Fields"
 msgstr ""
 
 msgid "Manage Variables"
@@ -671,6 +971,12 @@ msgid "Max Length"
 msgstr ""
 
 msgid "Maximum file size to upload in MB"
+msgstr ""
+
+msgid "Menu Builder"
+msgstr ""
+
+msgid "Menu Item"
 msgstr ""
 
 msgid "Menu Settings"
@@ -688,7 +994,13 @@ msgstr ""
 msgid "Min Length"
 msgstr ""
 
+msgid "Modify Data Before Cloning"
+msgstr ""
+
 msgid "Month"
+msgstr ""
+
+msgid "Mutate"
 msgstr ""
 
 msgid "My Account"
@@ -697,13 +1009,25 @@ msgstr ""
 msgid "Name"
 msgstr ""
 
+msgid "Navigation Menu"
+msgstr ""
+
+msgid "New"
+msgstr ""
+
 msgid "New Password"
 msgstr ""
 
 msgid "New Password Again"
 msgstr ""
 
+msgid "New Value"
+msgstr ""
+
 msgid "No"
+msgstr ""
+
+msgid "No {0} Has Been Logged Yet"
 msgstr ""
 
 msgid "No {singular} Has Been Added Yet"
@@ -721,6 +1045,18 @@ msgstr ""
 msgid "No Search Results"
 msgstr ""
 
+msgid "Node"
+msgstr ""
+
+msgid "Node Label"
+msgstr ""
+
+msgid "Node Properties"
+msgstr ""
+
+msgid "Nodes"
+msgstr ""
+
 msgid "Not Equal"
 msgstr ""
 
@@ -734,6 +1070,9 @@ msgid "Number"
 msgstr ""
 
 msgid "Old Password"
+msgstr ""
+
+msgid "Old Value"
 msgstr ""
 
 msgid "On Create"
@@ -775,6 +1114,12 @@ msgstr ""
 msgid "Persistent Query"
 msgstr ""
 
+msgid "Personalize This Table"
+msgstr ""
+
+msgid "Pie Chart"
+msgstr ""
+
 msgid "Plural"
 msgstr ""
 
@@ -797,6 +1142,15 @@ msgid "Profile"
 msgstr ""
 
 msgid "Quarter"
+msgstr ""
+
+msgid "Query"
+msgstr ""
+
+msgid "Recovery Code"
+msgstr ""
+
+msgid "Recovery tokens copied to clipboard"
 msgstr ""
 
 msgid "Red"
@@ -826,6 +1180,9 @@ msgstr ""
 msgid "Relations Order"
 msgstr ""
 
+msgid "Relations To Clone Along"
+msgstr ""
+
 msgid "Relationship Settings"
 msgstr ""
 
@@ -838,19 +1195,37 @@ msgstr ""
 msgid "Remove Nested Filter"
 msgstr ""
 
+msgid "Request ID"
+msgstr ""
+
+msgid "Request Method"
+msgstr ""
+
 msgid "Required"
 msgstr ""
 
 msgid "Reset"
 msgstr ""
 
+msgid "Reset 2FA Recovery Tokens"
+msgstr ""
+
 msgid "Reset Password"
+msgstr ""
+
+msgid "Reset Recovery Tokens"
 msgstr ""
 
 msgid "Reset User Password"
 msgstr ""
 
 msgid "Resetting Password"
+msgstr ""
+
+msgid "Response"
+msgstr ""
+
+msgid "Restore"
 msgstr ""
 
 msgid "Reveal {label}"
@@ -877,13 +1252,34 @@ msgstr ""
 msgid "Roles and Permissions"
 msgstr ""
 
+msgid "Route ID"
+msgstr ""
+
 msgid "Save"
+msgstr ""
+
+msgid "Save {0}"
 msgstr ""
 
 msgid "Save {singular}"
 msgstr ""
 
+msgid "Save Current Filters"
+msgstr ""
+
+msgid "Saving"
+msgstr ""
+
+msgid "Saving {0}"
+msgstr ""
+
 msgid "Saving {singular}"
+msgstr ""
+
+msgid "Scheduler"
+msgstr ""
+
+msgid "Schedulers"
 msgstr ""
 
 msgid "Script"
@@ -899,6 +1295,15 @@ msgid "Secret Access Key"
 msgstr ""
 
 msgid "Secrets"
+msgstr ""
+
+msgid "Select Node Type"
+msgstr ""
+
+msgid "Select Trigger"
+msgstr ""
+
+msgid "Select Workflow"
 msgstr ""
 
 msgid "Selection"
@@ -925,10 +1330,19 @@ msgstr ""
 msgid "Sender Name"
 msgstr ""
 
+msgid "Sensitive Field"
+msgstr ""
+
+msgid "Sensitive Fields"
+msgstr ""
+
 msgid "Setting Up Account"
 msgstr ""
 
 msgid "Setting Up Credentials"
+msgstr ""
+
+msgid "Settings"
 msgstr ""
 
 msgid "Setup"
@@ -938,6 +1352,18 @@ msgid "Setup Account"
 msgstr ""
 
 msgid "Setup Credentials"
+msgstr ""
+
+msgid "Share"
+msgstr ""
+
+msgid "Sharing"
+msgstr ""
+
+msgid "Show Soft Deleted Items And The Restore Button"
+msgstr ""
+
+msgid "Show Up In Roles And Permissions"
 msgstr ""
 
 msgid "Showing <0/> entries of <1>{0}</1> results"
@@ -958,7 +1384,19 @@ msgstr ""
 msgid "Site Settings"
 msgstr ""
 
+msgid "Slug"
+msgstr ""
+
 msgid "Small Logo"
+msgstr ""
+
+msgid "Soft Delete"
+msgstr ""
+
+msgid "Soft Delete Settings"
+msgstr ""
+
+msgid "Stacked"
 msgstr ""
 
 msgid "Star us on Github"
@@ -967,13 +1405,25 @@ msgstr ""
 msgid "Start of year"
 msgstr ""
 
+msgid "State Script"
+msgstr ""
+
 msgid "Storage Key"
+msgstr ""
+
+msgid "Strategy"
 msgstr ""
 
 msgid "String"
 msgstr ""
 
 msgid "Subject"
+msgstr ""
+
+msgid "Submit"
+msgstr ""
+
+msgid "Submitting"
 msgstr ""
 
 msgid "Summary Card"
@@ -1003,6 +1453,12 @@ msgstr ""
 msgid "Table Fields Order"
 msgstr ""
 
+msgid "Table Personalization"
+msgstr ""
+
+msgid "Table Personalizations"
+msgstr ""
+
 msgid "Table View"
 msgstr ""
 
@@ -1024,13 +1480,31 @@ msgstr ""
 msgid "Theme Settings"
 msgstr ""
 
+msgid "This {0} Has No Form"
+msgstr ""
+
 msgid "This application has no active entities. Kindly add new entities through your preferred database editor then restart this application to proceed."
+msgstr ""
+
+msgid "This entity has no fields"
 msgstr ""
 
 msgid "This entity has no fields. Kindly add fields from your prefer database tool to manage them here"
 msgstr ""
 
 msgid "This entity has no relations"
+msgstr ""
+
+msgid "This flow should be queued and executed asynchronously (recommended for long running flows, requires Redis)"
+msgstr ""
+
+msgid "This trigger has no workflow attached"
+msgstr ""
+
+msgid "This workflow has no trigger attached"
+msgstr ""
+
+msgid "Time Changed"
 msgstr ""
 
 msgid "Title"
@@ -1049,6 +1523,9 @@ msgid "Token Validity Duration In Days"
 msgstr ""
 
 msgid "Trigger"
+msgstr ""
+
+msgid "Try Out 25+ Pro Features"
 msgstr ""
 
 msgid "Type"
@@ -1114,6 +1591,15 @@ msgstr ""
 msgid "Variables"
 msgstr ""
 
+msgid "Verifing"
+msgstr ""
+
+msgid "Verify"
+msgstr ""
+
+msgid "Vertical"
+msgstr ""
+
 msgid "View"
 msgstr ""
 
@@ -1126,6 +1612,12 @@ msgstr ""
 msgid "Visit our website"
 msgstr ""
 
+msgid "Webhook"
+msgstr ""
+
+msgid "Webhooks"
+msgstr ""
+
 msgid "Week"
 msgstr ""
 
@@ -1133,6 +1625,18 @@ msgid "Widget Script"
 msgstr ""
 
 msgid "Width"
+msgstr ""
+
+msgid "Workflow"
+msgstr ""
+
+msgid "Workflows"
+msgstr ""
+
+msgid "X Label"
+msgstr ""
+
+msgid "Y Label"
 msgstr ""
 
 msgid "Year"

@@ -2,10 +2,7 @@ import { Stack } from "frontend/design-system/primitives/Stack";
 import { FormButton } from "frontend/design-system/components/Button/FormButton";
 import { Spacer } from "frontend/design-system/primitives/Spacer";
 import { ListManager } from "frontend/design-system/components/ListManager";
-import {
-  USER_PERMISSIONS_CONFIG,
-  UserPermissions,
-} from "shared/constants/user";
+import { UserPermissions } from "shared/constants/user";
 import { PORTAL_PERMISSION_HEIRACHIES } from "shared/logic/permissions/portal";
 import { loadedDataState } from "frontend/lib/data/constants/loadedDataState";
 import { IListMangerItemProps } from "frontend/design-system/components/ListManager/ListManagerItem";
@@ -20,7 +17,7 @@ import {
 
 interface IProps {
   permissionList: { value: string; label: MessageDescriptor }[];
-  overAchingPermission?: UserPermissions;
+  overAchingPermission?: { permission: string; label: MessageDescriptor };
 }
 
 /*
@@ -66,7 +63,8 @@ export function MutatePermission({
   const rolePermissionCreationMutation = useCreateRolePermissionMutation();
 
   const isOverAchingPermissionSelected =
-    overAchingPermission && rolePermissions.data.includes(overAchingPermission);
+    overAchingPermission &&
+    rolePermissions.data.includes(overAchingPermission.permission);
 
   return (
     <>
@@ -78,12 +76,16 @@ export function MutatePermission({
               systemIcon={isOverAchingPermissionSelected ? "Check" : "Square"}
               size="sm"
               isInverse
-              text={() => USER_PERMISSIONS_CONFIG[overAchingPermission].label}
+              text={() => overAchingPermission.label}
               onClick={() => {
                 if (isOverAchingPermissionSelected) {
-                  rolePermissionDeletionMutation.mutate([overAchingPermission]);
+                  rolePermissionDeletionMutation.mutate([
+                    overAchingPermission.permission,
+                  ]);
                 } else {
-                  rolePermissionCreationMutation.mutate([overAchingPermission]);
+                  rolePermissionCreationMutation.mutate([
+                    overAchingPermission.permission,
+                  ]);
                 }
               }}
             />

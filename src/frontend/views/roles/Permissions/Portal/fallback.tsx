@@ -1,6 +1,10 @@
 import { useEntityDictionPlurals } from "frontend/hooks/entity/entity.queries";
 import { useActiveEntities } from "frontend/hooks/entity/entity.store";
-import { META_USER_PERMISSIONS, UserPermissions } from "shared/constants/user";
+import {
+  META_USER_PERMISSIONS,
+  USER_PERMISSIONS_CONFIG,
+  UserPermissions,
+} from "shared/constants/user";
 import { GranularEntityPermissions } from "shared/types/user";
 import { i18nNoop } from "translations/fake";
 import { MutatePermission } from "../MutatePermission";
@@ -26,7 +30,12 @@ export function BaseMutateEntitiesPermissions() {
   return (
     <MutatePermission
       permissionList={entitiesAsPermissionList}
-      overAchingPermission={UserPermissions.CAN_MANAGE_ALL_ENTITIES}
+      overAchingPermission={{
+        permission: UserPermissions.CAN_MANAGE_ALL_ENTITIES,
+        label:
+          USER_PERMISSIONS_CONFIG[UserPermissions.CAN_MANAGE_ALL_ENTITIES]
+            .label,
+      }}
     />
   );
 }

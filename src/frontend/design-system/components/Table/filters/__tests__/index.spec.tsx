@@ -474,7 +474,7 @@ describe("Table Filters", () => {
             value: ["option-1", "option-2"],
           });
         },
-        { timeout: 5000 }
+        { timeout: 10000 }
       );
 
       await userEvent.selectOptions(

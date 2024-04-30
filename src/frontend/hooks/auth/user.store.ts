@@ -9,13 +9,16 @@ import { DataStates } from "frontend/lib/data/types";
 import { useDomainMessages } from "frontend/lib/crud-config";
 import { LANG_DOMAINS } from "frontend/lib/crud-config/lang-domains";
 import { useIsGranularCheck } from "./portal";
+import { useIsUserAutenticated } from "./auth.actions";
 
 export const AUTHENTICATED_ACCOUNT_URL = "/api/account/mine";
 
 export function useAuthenticatedUserBag() {
+  const isUserAuthenticated = useIsUserAutenticated();
   const domainMessages = useDomainMessages(LANG_DOMAINS.ACCOUNT.PROFILE);
   return useStorageApi<IAuthenticatedUserBag>(AUTHENTICATED_ACCOUNT_URL, {
     errorMessage: domainMessages.TEXT_LANG.NOT_FOUND,
+    enabled: isUserAuthenticated,
     defaultData: {
       name: "",
       permissions: [],

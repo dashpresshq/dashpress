@@ -8,6 +8,7 @@ import { ApiRequest } from "frontend/lib/data/makeRequest";
 import { useApi } from "frontend/lib/data/useApi";
 import { useWaitForResponseMutationOptions } from "frontend/lib/data/useMutate/useWaitForResponseMutationOptions";
 import { LANG_DOMAINS } from "frontend/lib/crud-config/lang-domains";
+import { msg } from "@lingui/macro";
 import { usePasswordStore } from "../password.store";
 
 const ACTIVE_ACTIONS_INTEGRATIONS_ENDPOINT = "/api/integrations/actions/active";
@@ -59,7 +60,7 @@ export function useDeactivateIntegrationMutation() {
     mutationFn: async (activationId) =>
       await ApiRequest.DELETE(`/api/integrations/actions/${activationId}`),
     endpoints: [ACTIVE_ACTIONS_INTEGRATIONS_ENDPOINT],
-    successMessage: domainMessages.MUTATION_LANG.CUSTOM("Deactivated"),
+    successMessage: domainMessages.MUTATION_LANG.CUSTOM(msg`Deactivated`),
   });
 }
 
@@ -73,7 +74,7 @@ export function useActivateIntegrationMutation(integration: string) {
         configuration
       ),
     endpoints: [ACTIVE_ACTIONS_INTEGRATIONS_ENDPOINT],
-    successMessage: domainMessages.MUTATION_LANG.CUSTOM("Activated"),
+    successMessage: domainMessages.MUTATION_LANG.CUSTOM(msg`Activated`),
   });
 }
 

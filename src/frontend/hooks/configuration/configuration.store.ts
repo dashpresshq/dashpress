@@ -9,6 +9,9 @@ import { AppStorage } from "frontend/lib/storage/app";
 import { AppConfigurationValueType } from "shared/configurations/constants";
 import { useApiQueries } from "frontend/lib/data/useApi/useApiQueries";
 import { useAppConfigurationDomainMessages } from "./configuration.constant";
+import { useIsUserAutenticated } from "../auth/auth.actions";
+
+const GUEST_PATH = "__guest";
 
 export const configurationApiPath = (
   key: AppConfigurationKeys,
@@ -26,7 +29,7 @@ export const configurationApiPath = (
   const config = APP_CONFIGURATION_CONFIG[key];
 
   if ("guest" in config && config.guest) {
-    return `/api/config/${key}/__guest`;
+    return `/api/config/${key}/${GUEST_PATH}`;
   }
 
   return `/api/config/${key}`;
@@ -34,10 +37,12 @@ export const configurationApiPath = (
 
 export function useAppConfiguration<T extends AppConfigurationKeys>(key: T) {
   const domainMessages = useAppConfigurationDomainMessages(key);
-
+  const isUserAuthenticated = useIsUserAutenticated();
+  const path = configurationApiPath(key);
   return useStorageApi<AppConfigurationValueType<T>>(
     configurationApiPath(key),
     {
+      enabled: isUserAuthenticated || path.endsWith(GUEST_PATH),
       errorMessage: domainMessages.TEXT_LANG.NOT_FOUND,
       defaultData: APP_CONFIGURATION_CONFIG[key].defaultValue,
     }

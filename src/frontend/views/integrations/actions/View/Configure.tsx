@@ -8,6 +8,8 @@ import { Spacer } from "frontend/design-system/primitives/Spacer";
 import { typescriptSafeObjectDotKeys } from "shared/lib/objects";
 import { useDomainMessages } from "frontend/lib/crud-config";
 import { LANG_DOMAINS } from "frontend/lib/crud-config/lang-domains";
+import { msg } from "@lingui/macro";
+import { useLingui } from "@lingui/react";
 import {
   useActivationConfiguration,
   useUpdateActivatedIntegrationMutation,
@@ -24,6 +26,7 @@ export function Configure({ activationId, integrationDetail }: IProps) {
     useUpdateActivatedIntegrationMutation(activationId);
   const activationConfiguration = useActivationConfiguration(activationId);
   const domainMessages = useDomainMessages(LANG_DOMAINS.INTEGRATIONS.ACTIONS);
+  const { _ } = useLingui();
   useEffect(() => {
     if (activationConfiguration.error) {
       ToastService.error(activationConfiguration.error);
@@ -37,19 +40,14 @@ export function Configure({ activationId, integrationDetail }: IProps) {
     return (
       <Stack $justify="center">
         <Typo.SM $textStyle="italic">
-          This action does not have configuration
+          {_(msg`This action does not have configuration`)}
         </Typo.SM>
       </Stack>
     );
   }
 
   if (activationConfiguration.data === undefined) {
-    return (
-      <PasswordToReveal
-        label={`${integrationDetail.title}'s Configuration`}
-        isLoading={activationConfiguration.isLoading}
-      />
-    );
+    return <PasswordToReveal isLoading={activationConfiguration.isLoading} />;
   }
   return (
     <>

@@ -8,7 +8,7 @@ import { SortableKnob } from "react-easy-sort";
 import { GrabIcon } from "frontend/design-system/Icons/Grab";
 import { SystemIconsKeys } from "shared/constants/Icons";
 import { SystemIcon } from "frontend/design-system/Icons/System";
-import { i18nNoop } from "translations/fake";
+import { MessageDescriptor } from "@lingui/core";
 import { FormButton } from "../../Button/FormButton";
 import { FormSwitch } from "../../Form/FormSwitch";
 
@@ -137,8 +137,9 @@ export interface IListMangerItemProps {
     onChange: () => void;
   };
   actionButtons?: {
+    id: string;
     isInverse: boolean;
-    label: string;
+    label: MessageDescriptor;
     systemIcon: SystemIconsKeys;
     onClick: () => void;
     isMakingRequest?: boolean;
@@ -198,8 +199,8 @@ export function ListManagerItem({
               systemIcon: systemIcon$1,
             }) => (
               <FormButton
-                key={buttonLabel}
-                text={() => i18nNoop(buttonLabel)}
+                key={buttonLabel.id}
+                text={() => buttonLabel}
                 size="xs"
                 systemIcon={systemIcon$1}
                 disabled={disabled$1}

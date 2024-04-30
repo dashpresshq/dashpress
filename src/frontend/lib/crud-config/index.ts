@@ -1,6 +1,7 @@
 import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { i18nNoop } from "translations/fake";
+import { MessageDescriptor } from "@lingui/core";
 import { IDomainDiction } from "./types";
 
 export const CRUD_CONFIG_NOT_FOUND = (singular: string) =>
@@ -29,7 +30,10 @@ export const useDomainMessages = ({
       EDIT: msg`${singular} Updated Successfully`,
       DELETE: msg`${singular} Deleted Successfully`,
       SAVED: msg`${singular} Saved Successfully`,
-      CUSTOM: (action: string) => msg`${singular} ${action} Successfully`,
+      CUSTOM: (actionDescriptor: MessageDescriptor) => {
+        const action = _(actionDescriptor);
+        return msg`${singular} ${action} Successfully`;
+      },
       VIEW_DETAILS: msg`Click here to view details`,
     },
     FORM_LANG: {

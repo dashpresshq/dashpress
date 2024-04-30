@@ -184,10 +184,7 @@ export function ManageCredentialGroup({
           userHasPermission(UserPermissions.CAN_MANAGE_APP_CREDENTIALS) &&
           revealedCredentials.data === undefined && (
             <Spacer>
-              <PasswordToReveal
-                label="Secrets"
-                isLoading={revealedCredentials.isLoading}
-              />
+              <PasswordToReveal isLoading={revealedCredentials.isLoading} />
             </Spacer>
           )}
         {!canManageAction && tableData.data.length > 0 && (

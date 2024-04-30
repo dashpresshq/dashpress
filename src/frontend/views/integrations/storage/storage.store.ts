@@ -8,6 +8,7 @@ import { useWaitForResponseMutationOptions } from "frontend/lib/data/useMutate/u
 import { ApiRequest } from "frontend/lib/data/makeRequest";
 import { IStorageIntegration } from "shared/types/actions";
 import { LANG_DOMAINS } from "frontend/lib/crud-config/lang-domains";
+import { msg } from "@lingui/macro";
 import { usePasswordStore } from "../password.store";
 
 export const useStorageIntegrationsList = () => {
@@ -65,6 +66,6 @@ export function useActivateStorageMutation() {
       ACTIVE_STORAGE_INTEGRATIONS_ENDPOINT,
       STORAGE_CREDENTIALS_CONFIG,
     ],
-    successMessage: domainMessages.MUTATION_LANG.CUSTOM("Activated"),
+    successMessage: domainMessages.MUTATION_LANG.CUSTOM(msg`Activated`),
   });
 }

@@ -9,16 +9,19 @@ import {
   UserPreferencesKeys,
   UserPreferencesValueType,
 } from "shared/user-preferences/constants";
+import { useIsUserAutenticated } from "./auth.actions";
 
 const userPrefrencesApiPath = (key: UserPreferencesKeys) => {
   return `/api/user-preferences/${key}`;
 };
 
 export function useUserPreference<T extends UserPreferencesKeys>(key: T) {
+  const isUserAuthenticated = useIsUserAutenticated();
   const domainMessages = useDomainMessages(LANG_DOMAINS.ACCOUNT.PREFERENCES);
   return useStorageApi<UserPreferencesValueType<T>>(
     userPrefrencesApiPath(key),
     {
+      enabled: isUserAuthenticated,
       returnUndefinedOnError: true,
       errorMessage: domainMessages.TEXT_LANG.NOT_FOUND,
       defaultData: USER_PREFERENCES_CONFIG[key].defaultValue,

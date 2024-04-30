@@ -2,6 +2,7 @@ import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
 import { StorageService, TemporayStorageService } from "frontend/lib/storage";
 import { STORAGE_CONSTANTS } from "frontend/lib/storage/constants";
 import { noop } from "shared/lib/noop";
+import { PORTAL_GUEST_ROUTES } from "./portal";
 
 const JWT_TOKEN_STORAGE_KEY = "__auth-token__";
 
@@ -39,6 +40,7 @@ export const AuthActions = {
         NAVIGATION_LINKS.AUTH_SIGNIN,
         NAVIGATION_LINKS.SETUP.CREDENTIALS,
         NAVIGATION_LINKS.SETUP.USER,
+        ...PORTAL_GUEST_ROUTES,
       ].includes(window.location.pathname)
     ) {
       return;
@@ -51,4 +53,8 @@ export const AuthActions = {
       NAVIGATION_LINKS.DASHBOARD.HOME
     );
   },
+};
+
+export const useIsUserAutenticated = () => {
+  return AuthActions.isAuthenticated();
 };

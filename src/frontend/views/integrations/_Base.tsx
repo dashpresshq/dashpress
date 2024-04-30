@@ -10,18 +10,25 @@ import { AppLayout } from "frontend/_layouts/app";
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
 import { IListMangerItemProps } from "frontend/design-system/components/ListManager/ListManagerItem";
 import { msg } from "@lingui/macro";
+import { useDomainMessages } from "frontend/lib/crud-config";
+import { LANG_DOMAINS } from "frontend/lib/crud-config/lang-domains";
 import {
   useIntegrationsList,
   useActiveIntegrations,
 } from "./actions/actions.store";
-import { ACTION_INTEGRATIONS_CRUD_CONFIG } from "./actions/constants";
-import { STORAGE_INTEGRATIONS_CRUD_CONFIG } from "./storage/constants";
 
 interface IProps {
   children: ReactNode;
 }
 
 export function BaseActionsLayout({ children }: IProps) {
+  const fileStorageDomainMessages = useDomainMessages(
+    LANG_DOMAINS.INTEGRATIONS.FILE_STORAGE
+  );
+  const actionsDomainMessages = useDomainMessages(
+    LANG_DOMAINS.INTEGRATIONS.ACTIONS
+  );
+
   const currentKey = useRouteParam("key");
 
   const integrationsList = useIntegrationsList();
@@ -33,7 +40,7 @@ export function BaseActionsLayout({ children }: IProps) {
     <AppLayout>
       <ContentLayout>
         <ContentLayout.Left>
-          <SectionBox title={ACTION_INTEGRATIONS_CRUD_CONFIG.TEXT_LANG.TITLE}>
+          <SectionBox title={actionsDomainMessages.TEXT_LANG.TITLE}>
             <ListManager
               items={integrationsList}
               listLengthGuess={7}
@@ -57,7 +64,7 @@ export function BaseActionsLayout({ children }: IProps) {
             menuItems={[
               {
                 action: NAVIGATION_LINKS.INTEGRATIONS.STORAGE,
-                name: STORAGE_INTEGRATIONS_CRUD_CONFIG.TEXT_LANG.TITLE,
+                name: fileStorageDomainMessages.TEXT_LANG.TITLE,
                 systemIcon: "Upload",
               },
             ]}

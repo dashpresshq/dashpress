@@ -4,8 +4,8 @@ import { ICreateUserForm } from "shared/form-schemas/users";
 import { IResetPasswordForm } from "shared/form-schemas/users/reset-password";
 import { IAccountProfile } from "shared/types/user";
 import {
-  MAKE_CRUD_CONFIG,
   MAKE_ENDPOINTS_CONFIG,
+  useDomainMessages,
 } from "frontend/lib/crud-config";
 import { useApi } from "frontend/lib/data/useApi";
 import { useApiMutateOptimisticOptions } from "frontend/lib/data/useMutate/useApiMutateOptimisticOptions";
@@ -13,12 +13,8 @@ import { ApiRequest } from "frontend/lib/data/makeRequest";
 import { MutationHelpers } from "frontend/lib/data/useMutate/mutation-helpers";
 import { useWaitForResponseMutationOptions } from "frontend/lib/data/useMutate/useWaitForResponseMutationOptions";
 import { msg } from "@lingui/macro";
+import { LANG_DOMAINS } from "frontend/lib/crud-config/lang-domains";
 import { useUsernameFromRouteParam } from "./hooks";
-
-export const ADMIN_USERS_CRUD_CONFIG = MAKE_CRUD_CONFIG({
-  plural: msg`Users`,
-  singular: msg`User`,
-});
 
 export const USERS_ENDPOINT_CONFIG = MAKE_ENDPOINTS_CONFIG("/api/account");
 
@@ -29,17 +25,20 @@ export function useAllUsers() {
 }
 
 export function useUserDetails(username: string) {
+  const domainMessages = useDomainMessages(LANG_DOMAINS.ACCOUNT.USERS);
+
   return useApi<IAccountProfile>(USERS_ENDPOINT_CONFIG.DETAILS(username), {
     defaultData: {
       name: "",
       role: "",
       username: "",
     },
-    errorMessage: ADMIN_USERS_CRUD_CONFIG.TEXT_LANG.NOT_FOUND,
+    errorMessage: domainMessages.TEXT_LANG.NOT_FOUND,
   });
 }
 
 export function useUserDeletionMutation() {
+  const domainMessages = useDomainMessages(LANG_DOMAINS.ACCOUNT.USERS);
   const router = useRouter();
   return useApiMutateOptimisticOptions<IAccountProfile[], string>({
     mutationFn: async (username) =>
@@ -49,11 +48,12 @@ export function useUserDeletionMutation() {
       router.replace(NAVIGATION_LINKS.USERS.LIST);
     },
     onMutate: MutationHelpers.deleteByKey("username"),
-    successMessage: ADMIN_USERS_CRUD_CONFIG.MUTATION_LANG.DELETE,
+    successMessage: domainMessages.MUTATION_LANG.DELETE,
   });
 }
 
 export function useUpdateUserMutation() {
+  const domainMessages = useDomainMessages(LANG_DOMAINS.ACCOUNT.USERS);
   const username = useUsernameFromRouteParam();
   return useWaitForResponseMutationOptions<Partial<IAccountProfile>>({
     mutationFn: async (data) =>
@@ -62,7 +62,7 @@ export function useUpdateUserMutation() {
       USERS_ENDPOINT_CONFIG.LIST,
       USERS_ENDPOINT_CONFIG.DETAILS(username),
     ],
-    successMessage: ADMIN_USERS_CRUD_CONFIG.MUTATION_LANG.EDIT,
+    successMessage: domainMessages.MUTATION_LANG.EDIT,
   });
 }
 
@@ -80,6 +80,7 @@ export function useResetUserPasswordMutation() {
 }
 
 export function useCreateUserMutation() {
+  const domainMessages = useDomainMessages(LANG_DOMAINS.ACCOUNT.USERS);
   const router = useRouter();
   return useWaitForResponseMutationOptions<ICreateUserForm, ICreateUserForm>({
     mutationFn: async (data: ICreateUserForm) => {
@@ -88,9 +89,9 @@ export function useCreateUserMutation() {
     },
     endpoints: [USERS_ENDPOINT_CONFIG.LIST],
     smartSuccessMessage: ({ username }) => ({
-      message: ADMIN_USERS_CRUD_CONFIG.MUTATION_LANG.CREATE,
+      message: domainMessages.MUTATION_LANG.CREATE,
       action: {
-        label: ADMIN_USERS_CRUD_CONFIG.MUTATION_LANG.VIEW_DETAILS,
+        label: domainMessages.MUTATION_LANG.VIEW_DETAILS,
         action: () => router.push(NAVIGATION_LINKS.USERS.DETAILS(username)),
       },
     }),

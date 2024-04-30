@@ -5,7 +5,7 @@ import {
 import { SchemaForm } from "frontend/components/SchemaForm";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { ToastService } from "frontend/lib/toast";
-import { MAKE_APP_CONFIGURATION_CRUD_CONFIG } from "frontend/hooks/configuration/configuration.constant";
+import { useAppConfigurationDomainMessages } from "frontend/hooks/configuration/configuration.constant";
 import { AppConfigurationKeys } from "shared/configurations";
 import { evalJavascriptString } from "shared/lib/script-runner";
 import { useEvaluateScriptContext } from "frontend/hooks/scripts";
@@ -35,7 +35,7 @@ export function ScriptForm({
   configurationKey,
 }: IProps) {
   const evaluateScriptContext = useEvaluateScriptContext();
-
+  const domainMessages = useAppConfigurationDomainMessages(configurationKey);
   return (
     <ViewStateMachine
       loading={isLoading}
@@ -66,9 +66,7 @@ export function ScriptForm({
           }
         }}
         systemIcon="Save"
-        buttonText={
-          MAKE_APP_CONFIGURATION_CRUD_CONFIG(configurationKey).FORM_LANG.UPSERT
-        }
+        buttonText={domainMessages.FORM_LANG.UPSERT}
         initialValues={{
           [`${BASE_SUFFIX}${field}`]: value,
         }}

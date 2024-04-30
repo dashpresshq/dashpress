@@ -2,7 +2,10 @@ import { usePasswordStore } from "frontend/views/integrations/password.store";
 import { useEffect } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { IntegrationsConfigurationGroup } from "shared/types/integrations";
-import { CRUD_CONFIG_NOT_FOUND } from "frontend/lib/crud-config";
+import {
+  CRUD_CONFIG_NOT_FOUND,
+  useDomainMessages,
+} from "frontend/lib/crud-config";
 import { ApiRequest } from "frontend/lib/data/makeRequest";
 import { reduceStringToNumber } from "shared/lib/strings";
 import { useWaitForResponseMutationOptions } from "frontend/lib/data/useMutate/useWaitForResponseMutationOptions";
@@ -24,7 +27,9 @@ export function useIntegrationConfigurationUpsertationMutation(
   group: IntegrationsConfigurationGroup
 ) {
   const rootPassword = usePasswordStore((state) => state.password);
-
+  const domainMessages = useDomainMessages(
+    INTEGRATIONS_GROUP_CRUD_CONFIG[group].domainDiction
+  );
   return useWaitForResponseMutationOptions<{ key: string; value: string }>({
     mutationFn: async (data) =>
       await ApiRequest.PUT(`/api/integrations/${group}/${data.key}`, {
@@ -34,8 +39,7 @@ export function useIntegrationConfigurationUpsertationMutation(
     endpoints: rootPassword
       ? [REVEAL_CREDENTIALS_ENDPOINT, INTEGRATIONS_GROUP_ENDPOINT(group)]
       : [INTEGRATIONS_GROUP_ENDPOINT(group)],
-    successMessage:
-      INTEGRATIONS_GROUP_CRUD_CONFIG[group].crudConfig.MUTATION_LANG.SAVED,
+    successMessage: domainMessages.MUTATION_LANG.SAVED,
   });
 }
 
@@ -43,7 +47,9 @@ export function useIntegrationConfigurationDeletionMutation(
   group: IntegrationsConfigurationGroup
 ) {
   const rootPassword = usePasswordStore((state) => state.password);
-
+  const domainMessages = useDomainMessages(
+    INTEGRATIONS_GROUP_CRUD_CONFIG[group].domainDiction
+  );
   return useApiMutateOptimisticOptions<IKeyValue[], string>({
     mutationFn: async (key) =>
       await ApiRequest.DELETE(
@@ -53,8 +59,7 @@ export function useIntegrationConfigurationDeletionMutation(
       ),
     dataQueryPath: INTEGRATIONS_GROUP_ENDPOINT(group),
     otherEndpoints: rootPassword ? [REVEAL_CREDENTIALS_ENDPOINT] : [],
-    successMessage:
-      INTEGRATIONS_GROUP_CRUD_CONFIG[group].crudConfig.MUTATION_LANG.DELETE,
+    successMessage: domainMessages.MUTATION_LANG.DELETE,
     onMutate: MutationHelpers.deleteByKey("key"),
   });
 }

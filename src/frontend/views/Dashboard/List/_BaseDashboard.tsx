@@ -4,11 +4,12 @@ import { useUserHasPermission } from "frontend/hooks/auth/user.store";
 import styled from "styled-components";
 import { useRouter } from "next/router";
 import { AppLayout } from "frontend/_layouts/app";
+import { useDomainMessages } from "frontend/lib/crud-config";
+import { LANG_DOMAINS } from "frontend/lib/crud-config/lang-domains";
 import { useDashboardWidgets } from "../dashboard.store";
 import { dashboardGridRoot } from "../styles";
 import { DashboardSkeleton } from "../Skeleton";
 import { DashboardWidget } from "../Widget";
-import { DASHBOARD_CRUD_CONFIG } from "../constants";
 
 const Root = styled.div`
   ${dashboardGridRoot};
@@ -25,6 +26,8 @@ interface IProps {
 
 export function BaseDashboard({ dashboardId, manageLink }: IProps) {
   const widgets = useDashboardWidgets(dashboardId);
+  const domainMessages = useDomainMessages(LANG_DOMAINS.DASHBOARD.DASHBOARDS);
+
   const router = useRouter();
 
   const userHasPermission = useUserHasPermission();
@@ -36,7 +39,7 @@ export function BaseDashboard({ dashboardId, manageLink }: IProps) {
           ? [
               {
                 id: "manage-dashboard",
-                label: DASHBOARD_CRUD_CONFIG.TEXT_LANG.EDIT,
+                label: domainMessages.TEXT_LANG.EDIT,
                 systemIcon: "Edit" as const,
                 action: () => router.replace(manageLink),
               },

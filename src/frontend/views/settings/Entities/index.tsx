@@ -2,7 +2,7 @@ import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { UserPermissions } from "shared/constants/user";
 import { ILabelValue } from "shared/types/options";
-import { MAKE_APP_CONFIGURATION_CRUD_CONFIG } from "frontend/hooks/configuration/configuration.constant";
+import { useAppConfigurationDomainMessages } from "frontend/hooks/configuration/configuration.constant";
 import { EnabledEntitiesDocumentation } from "frontend/docs/enabled-entities";
 import { useApi } from "frontend/lib/data/useApi";
 import { ListSkeleton } from "frontend/design-system/components/Skeleton/List";
@@ -20,19 +20,21 @@ import { SETTINGS_VIEW_KEY } from "../constants";
 import { BaseSettingsLayout } from "../_Base";
 import { EntitiesSelection } from "./Selection";
 
-const CRUD_CONFIG = MAKE_APP_CONFIGURATION_CRUD_CONFIG("disabled_entities");
+const useEntitiesList = () => {
+  const domainMessages = useAppConfigurationDomainMessages("disabled_entities");
 
-const useEntitiesList = () =>
-  useApi<ILabelValue[]>("/api/entities/list", {
-    errorMessage: CRUD_CONFIG.TEXT_LANG.NOT_FOUND,
+  return useApi<ILabelValue[]>("/api/entities/list", {
+    errorMessage: domainMessages.TEXT_LANG.NOT_FOUND,
     defaultData: [],
   });
+};
 
 export function EntitiesSettings() {
+  const domainMessages = useAppConfigurationDomainMessages("disabled_entities");
   const entitiesList = useEntitiesList();
 
   useSetPageDetails({
-    pageTitle: CRUD_CONFIG.TEXT_LANG.TITLE,
+    pageTitle: domainMessages.TEXT_LANG.TITLE,
     viewKey: SETTINGS_VIEW_KEY,
     permission: UserPermissions.CAN_CONFIGURE_APP,
   });
@@ -63,7 +65,7 @@ export function EntitiesSettings() {
   return (
     <BaseSettingsLayout>
       <SectionBox
-        title={CRUD_CONFIG.TEXT_LANG.TITLE}
+        title={domainMessages.TEXT_LANG.TITLE}
         actionButtons={[documentationActionButton]}
       >
         <ViewStateMachine

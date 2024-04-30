@@ -6,14 +6,16 @@ import { useCallback } from "react";
 import { useStorageApi } from "frontend/lib/data/useApi";
 import { ToastService } from "frontend/lib/toast";
 import { DataStates } from "frontend/lib/data/types";
-import { ACCOUNT_PROFILE_CRUD_CONFIG } from "./constants";
+import { useDomainMessages } from "frontend/lib/crud-config";
+import { LANG_DOMAINS } from "frontend/lib/crud-config/lang-domains";
 import { useIsGranularCheck } from "./portal";
 
 export const AUTHENTICATED_ACCOUNT_URL = "/api/account/mine";
 
 export function useAuthenticatedUserBag() {
+  const domainMessages = useDomainMessages(LANG_DOMAINS.ACCOUNT.PROFILE);
   return useStorageApi<IAuthenticatedUserBag>(AUTHENTICATED_ACCOUNT_URL, {
-    errorMessage: ACCOUNT_PROFILE_CRUD_CONFIG.TEXT_LANG.NOT_FOUND,
+    errorMessage: domainMessages.TEXT_LANG.NOT_FOUND,
     defaultData: {
       name: "",
       permissions: [],

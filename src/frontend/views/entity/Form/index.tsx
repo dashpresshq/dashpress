@@ -1,6 +1,6 @@
 import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
 import { UserPermissions } from "shared/constants/user";
-import { MAKE_APP_CONFIGURATION_CRUD_CONFIG } from "frontend/hooks/configuration/configuration.constant";
+import { useAppConfigurationDomainMessages } from "frontend/hooks/configuration/configuration.constant";
 import {
   useEntityConfiguration,
   useUpsertConfigurationMutation,
@@ -121,10 +121,12 @@ return {
   };
 }
 
-const CRUD_CONFIG = MAKE_APP_CONFIGURATION_CRUD_CONFIG("entity_form_extension");
-
 export function EntityFormExtensionSettings() {
   const entity = useEntitySlug();
+
+  const domainMessages = useAppConfigurationDomainMessages(
+    "entity_form_extension"
+  );
 
   const entityFormView = useEntityFormView(entity);
 
@@ -133,14 +135,14 @@ export function EntityFormExtensionSettings() {
   );
 
   useSetPageDetails({
-    pageTitle: CRUD_CONFIG.TEXT_LANG.TITLE,
+    pageTitle: domainMessages.TEXT_LANG.TITLE,
     viewKey: ENTITY_CONFIGURATION_VIEW,
     permission: UserPermissions.CAN_CONFIGURE_APP,
   });
   return (
     <BaseEntitySettingsLayout>
       <SectionBox
-        title={CRUD_CONFIG.TEXT_LANG.TITLE}
+        title={domainMessages.TEXT_LANG.TITLE}
         actionButtons={[documentationActionButton]}
       >
         <Tabs

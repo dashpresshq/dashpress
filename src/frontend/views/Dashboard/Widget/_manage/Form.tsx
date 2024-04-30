@@ -34,7 +34,8 @@ import {
 } from "shared/lib/objects";
 import { i18nNoop, transformLabelValueToSelectData } from "translations/fake";
 import { MessageDescriptor } from "@lingui/core";
-import { DASHBOARD_WIDGETS_CRUD_CONFIG } from "../../constants";
+import { useDomainMessages } from "frontend/lib/crud-config";
+import { LANG_DOMAINS } from "frontend/lib/crud-config/lang-domains";
 import { DashboardWidgetPresentation } from "../Presentation";
 import { WIDGET_CONFIG } from "../constants";
 import { PortalFormFields, PortalFormSchema } from "./portal";
@@ -79,6 +80,8 @@ export function DashboardWidgetForm({
   const documentationActionButton = useDocumentationActionButton(
     msg`Widget Script`
   );
+
+  const domainMessages = useDomainMessages(LANG_DOMAINS.DASHBOARD.WIDGETS);
 
   useEffect(() => {
     if (initialValues.script) {
@@ -316,8 +319,8 @@ export function DashboardWidgetForm({
                         <FormButton
                           text={
                             action === "create"
-                              ? DASHBOARD_WIDGETS_CRUD_CONFIG.FORM_LANG.CREATE
-                              : DASHBOARD_WIDGETS_CRUD_CONFIG.FORM_LANG.UPDATE
+                              ? domainMessages.FORM_LANG.CREATE
+                              : domainMessages.FORM_LANG.UPDATE
                           }
                           systemIcon={action === "create" ? "Plus" : "Save"}
                           isMakingRequest={submitting}

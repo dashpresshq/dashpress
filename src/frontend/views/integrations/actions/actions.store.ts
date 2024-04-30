@@ -1,11 +1,14 @@
 import { IIntegrationsList, ActionIntegrations } from "shared/types/actions";
-import { CRUD_CONFIG_NOT_FOUND } from "frontend/lib/crud-config";
+import {
+  CRUD_CONFIG_NOT_FOUND,
+  useDomainMessages,
+} from "frontend/lib/crud-config";
 import { reduceStringToNumber } from "shared/lib/strings";
 import { ApiRequest } from "frontend/lib/data/makeRequest";
 import { useApi } from "frontend/lib/data/useApi";
 import { useWaitForResponseMutationOptions } from "frontend/lib/data/useMutate/useWaitForResponseMutationOptions";
+import { LANG_DOMAINS } from "frontend/lib/crud-config/lang-domains";
 import { usePasswordStore } from "../password.store";
-import { ACTION_INTEGRATIONS_CRUD_CONFIG } from "./constants";
 
 const ACTIVE_ACTIONS_INTEGRATIONS_ENDPOINT = "/api/integrations/actions/active";
 
@@ -13,11 +16,14 @@ const ACTIVATION_CONFIG = (activationId: string) => {
   return `/api/integrations/actions/${activationId}/credentials`;
 };
 
-export const useIntegrationsList = () =>
-  useApi<IIntegrationsList[]>("/api/integrations/actions/list", {
-    errorMessage: ACTION_INTEGRATIONS_CRUD_CONFIG.TEXT_LANG.NOT_FOUND,
+export const useIntegrationsList = () => {
+  const domainMessages = useDomainMessages(LANG_DOMAINS.INTEGRATIONS.ACTIONS);
+
+  return useApi<IIntegrationsList[]>("/api/integrations/actions/list", {
+    errorMessage: domainMessages.TEXT_LANG.NOT_FOUND,
     defaultData: [],
   });
+};
 
 export const useActiveIntegrations = () =>
   useApi<ActionIntegrations[]>(ACTIVE_ACTIONS_INTEGRATIONS_ENDPOINT, {
@@ -47,16 +53,19 @@ export const useActivationConfiguration = (activationId: string) => {
 };
 
 export function useDeactivateIntegrationMutation() {
+  const domainMessages = useDomainMessages(LANG_DOMAINS.INTEGRATIONS.ACTIONS);
+
   return useWaitForResponseMutationOptions<string>({
     mutationFn: async (activationId) =>
       await ApiRequest.DELETE(`/api/integrations/actions/${activationId}`),
     endpoints: [ACTIVE_ACTIONS_INTEGRATIONS_ENDPOINT],
-    successMessage:
-      ACTION_INTEGRATIONS_CRUD_CONFIG.MUTATION_LANG.CUSTOM("Deactivated"),
+    successMessage: domainMessages.MUTATION_LANG.CUSTOM("Deactivated"),
   });
 }
 
 export function useActivateIntegrationMutation(integration: string) {
+  const domainMessages = useDomainMessages(LANG_DOMAINS.INTEGRATIONS.ACTIONS);
+
   return useWaitForResponseMutationOptions<Record<string, string>>({
     mutationFn: async (configuration) =>
       await ApiRequest.POST(
@@ -64,13 +73,13 @@ export function useActivateIntegrationMutation(integration: string) {
         configuration
       ),
     endpoints: [ACTIVE_ACTIONS_INTEGRATIONS_ENDPOINT],
-    successMessage:
-      ACTION_INTEGRATIONS_CRUD_CONFIG.MUTATION_LANG.CUSTOM("Activated"),
+    successMessage: domainMessages.MUTATION_LANG.CUSTOM("Activated"),
   });
 }
 
 export function useUpdateActivatedIntegrationMutation(activationId: string) {
   const rootPassword = usePasswordStore((state) => state.password);
+  const domainMessages = useDomainMessages(LANG_DOMAINS.INTEGRATIONS.ACTIONS);
 
   return useWaitForResponseMutationOptions<Record<string, string>>({
     mutationFn: async (configuration) =>
@@ -79,6 +88,6 @@ export function useUpdateActivatedIntegrationMutation(activationId: string) {
         _password: rootPassword,
       }),
     endpoints: [ACTIVE_ACTIONS_INTEGRATIONS_ENDPOINT],
-    successMessage: ACTION_INTEGRATIONS_CRUD_CONFIG.MUTATION_LANG.EDIT,
+    successMessage: domainMessages.MUTATION_LANG.EDIT,
   });
 }

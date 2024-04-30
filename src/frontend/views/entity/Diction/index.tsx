@@ -11,7 +11,7 @@ import {
   useEntitySlug,
 } from "frontend/hooks/entity/entity.config";
 import { useUpsertConfigurationMutation } from "frontend/hooks/configuration/configuration.store";
-import { MAKE_APP_CONFIGURATION_CRUD_CONFIG } from "frontend/hooks/configuration/configuration.constant";
+import { useAppConfigurationDomainMessages } from "frontend/hooks/configuration/configuration.constant";
 import { DictionDocumentation } from "frontend/docs/diction";
 import { NAVIGATION_MENU_ENDPOINT } from "frontend/_layouts/app/NavigationSideBar/constants";
 import { SchemaForm } from "frontend/components/SchemaForm";
@@ -21,11 +21,9 @@ import { msg } from "@lingui/macro";
 import { BaseEntitySettingsLayout } from "../_Base";
 import { ENTITY_CONFIGURATION_VIEW } from "../constants";
 
-const ENTITY_DICTION_SETTINGS_CRUD_CONFIG =
-  MAKE_APP_CONFIGURATION_CRUD_CONFIG("entity_diction");
-
 export function EntityDictionSettings() {
   const entity = useEntitySlug();
+  const domainMessages = useAppConfigurationDomainMessages("entity_diction");
   const entityDiction = useEntityDiction(entity);
   const upsertConfigurationMutation = useUpsertConfigurationMutation(
     "entity_diction",
@@ -40,14 +38,14 @@ export function EntityDictionSettings() {
   );
 
   useSetPageDetails({
-    pageTitle: ENTITY_DICTION_SETTINGS_CRUD_CONFIG.TEXT_LANG.TITLE,
+    pageTitle: domainMessages.TEXT_LANG.TITLE,
     viewKey: ENTITY_CONFIGURATION_VIEW,
     permission: UserPermissions.CAN_CONFIGURE_APP,
   });
   return (
     <BaseEntitySettingsLayout>
       <SectionBox
-        title={ENTITY_DICTION_SETTINGS_CRUD_CONFIG.TEXT_LANG.TITLE}
+        title={domainMessages.TEXT_LANG.TITLE}
         actionButtons={[documentationActionButton]}
       >
         <ViewStateMachine
@@ -63,10 +61,7 @@ export function EntityDictionSettings() {
             onSubmit={upsertConfigurationMutation.mutateAsync}
             initialValues={entityDiction}
             systemIcon="Save"
-            buttonText={
-              MAKE_APP_CONFIGURATION_CRUD_CONFIG("entity_diction").FORM_LANG
-                .UPSERT
-            }
+            buttonText={domainMessages.FORM_LANG.UPSERT}
             fields={{
               plural: {
                 label: msg`Plural`,

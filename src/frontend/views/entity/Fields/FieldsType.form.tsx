@@ -4,7 +4,7 @@ import { getFieldTypeBoundedValidations } from "frontend/hooks/entity/guess";
 import { FormFieldTypes, IFieldValidationItem } from "shared/validations/types";
 import { EntityTypesForSelection, IColorableSelection } from "shared/types/ui";
 import { FIELD_TYPES_CONFIG_MAP } from "shared/validations";
-import { MAKE_APP_CONFIGURATION_CRUD_CONFIG } from "frontend/hooks/configuration/configuration.constant";
+import { useAppConfigurationDomainMessages } from "frontend/hooks/configuration/configuration.constant";
 import {
   minLength,
   composeValidators,
@@ -18,8 +18,6 @@ import { msg } from "@lingui/macro";
 import { typescriptSafeObjectDotEntries } from "shared/lib/objects";
 import { FieldSelectionCanvas } from "./FieldsSelection";
 import { FieldValidationCanvas } from "./FieldsValidation";
-
-const CRUD_CONFIG = MAKE_APP_CONFIGURATION_CRUD_CONFIG("entity_columns_types");
 
 const FIELD_TYPES_CONFIG_MAP_AS_SELECTION = typescriptSafeObjectDotEntries(
   FIELD_TYPES_CONFIG_MAP
@@ -72,6 +70,10 @@ export function FieldsTypeForm({
   const memoIzedInitialValuesSoItDoesFlickerOnSubmit = useMemo(
     () => initialValues,
     [JSON.stringify(initialValues)]
+  );
+
+  const domainMessages = useAppConfigurationDomainMessages(
+    "entity_columns_types"
   );
 
   const [showFieldValidations, setShowFieldValidations] = useState("");
@@ -153,7 +155,7 @@ export function FieldsTypeForm({
               </Field>
             ))}
             <FormButton
-              text={CRUD_CONFIG.FORM_LANG.UPSERT}
+              text={domainMessages.FORM_LANG.UPSERT}
               systemIcon="Save"
               isMakingRequest={submitting}
               disabled={

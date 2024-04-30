@@ -19,10 +19,9 @@ import { useDocumentationActionButton } from "frontend/docs/constants";
 import { msg } from "@lingui/macro";
 import { MessageDescriptor } from "@lingui/core";
 import { typescriptSafeObjectDotEntries } from "shared/lib/objects";
-import {
-  ADMIN_PERMISSIONS_CRUD_CONFIG,
-  useRolePermissions,
-} from "../permissions.store";
+import { useDomainMessages } from "frontend/lib/crud-config";
+import { LANG_DOMAINS } from "frontend/lib/crud-config/lang-domains";
+import { useRolePermissions } from "../permissions.store";
 import { MutatePermission } from "./MutatePermission";
 import {
   usePortalExtendedPermissions,
@@ -50,6 +49,7 @@ export function RolePermissions() {
   const rolePermissions = useRolePermissions();
   const portalUserPermissions = usePortalUserPermissions();
   const { backLink } = useNavigationStack();
+  const domainMessages = useDomainMessages(LANG_DOMAINS.ACCOUNT.PERMISSIONS);
 
   const tabFromUrl = useRouteParam("tab");
   const changeTabParam = useChangeRouterParam("tab");
@@ -59,7 +59,7 @@ export function RolePermissions() {
   );
 
   useSetPageDetails({
-    pageTitle: ADMIN_PERMISSIONS_CRUD_CONFIG.TEXT_LANG.TITLE,
+    pageTitle: domainMessages.TEXT_LANG.TITLE,
     viewKey: `list-permissions`,
     permission: UserPermissions.CAN_MANAGE_PERMISSIONS,
   });
@@ -71,7 +71,7 @@ export function RolePermissions() {
     <AppLayout>
       <ContentLayout.Center>
         <SectionBox
-          title={ADMIN_PERMISSIONS_CRUD_CONFIG.TEXT_LANG.EDIT}
+          title={domainMessages.TEXT_LANG.EDIT}
           backLink={backLink}
           actionButtons={[documentationActionButton]}
         >

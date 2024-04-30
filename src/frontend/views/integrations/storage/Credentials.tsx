@@ -11,7 +11,8 @@ import { IStorageIntegration } from "shared/types/actions";
 import { msg } from "@lingui/macro";
 import { i18nNoop } from "translations/fake";
 import { useLingui } from "@lingui/react";
-import { STORAGE_INTEGRATIONS_CRUD_CONFIG } from "./constants";
+import { useDomainMessages } from "frontend/lib/crud-config";
+import { LANG_DOMAINS } from "frontend/lib/crud-config/lang-domains";
 import {
   useActivateStorageMutation,
   useActiveStorageIntegration,
@@ -23,6 +24,9 @@ import { PasswordToReveal } from "../Password";
 export function StorageCredentialsSettings() {
   const storageList = useStorageIntegrationsList();
   const activeStorageIntegration = useActiveStorageIntegration();
+  const fileStorageDomainMessages = useDomainMessages(
+    LANG_DOMAINS.INTEGRATIONS.FILE_STORAGE
+  );
 
   const activateStorageMutation = useActivateStorageMutation();
   const storageCredentialsConfiguration = useStorageCredentialsConfiguration();
@@ -78,7 +82,7 @@ export function StorageCredentialsSettings() {
       {storageCredentialsConfiguration.data === undefined ? (
         <PasswordToReveal
           label={`${_(
-            STORAGE_INTEGRATIONS_CRUD_CONFIG.TEXT_LANG.TITLE
+            fileStorageDomainMessages.TEXT_LANG.TITLE
           )} Configuration`}
           isLoading={storageCredentialsConfiguration.isLoading}
         />
@@ -98,7 +102,7 @@ export function StorageCredentialsSettings() {
             ...(storageCredentialsConfiguration.data || {}),
             storageKey: currentStorage,
           }}
-          buttonText={STORAGE_INTEGRATIONS_CRUD_CONFIG.FORM_LANG.UPSERT}
+          buttonText={fileStorageDomainMessages.FORM_LANG.UPSERT}
           systemIcon="Save"
         />
       )}

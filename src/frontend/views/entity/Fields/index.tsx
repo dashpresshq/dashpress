@@ -12,7 +12,6 @@ import {
   useUpsertConfigurationMutation,
 } from "frontend/hooks/configuration/configuration.store";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
-import { MAKE_APP_CONFIGURATION_CRUD_CONFIG } from "frontend/hooks/configuration/configuration.constant";
 import { FieldsSettingsDocumentation } from "frontend/docs/fields";
 import { useRouteParam } from "frontend/lib/routing/useRouteParam";
 import { useChangeRouterParam } from "frontend/lib/routing/useChangeRouterParam";
@@ -25,6 +24,7 @@ import { SectionBox } from "frontend/design-system/components/Section/SectionBox
 import { Tabs } from "frontend/design-system/components/Tabs";
 import { useDocumentationActionButton } from "frontend/docs/constants";
 import { msg } from "@lingui/macro";
+import { useAppConfigurationDomainMessages } from "frontend/hooks/configuration/configuration.constant";
 import {
   ENTITY_CONFIGURATION_VIEW,
   ENTITY_FIELD_SETTINGS_TAB_LABELS,
@@ -38,6 +38,9 @@ const TITLE_MSG = msg`Field Settings`;
 export function EntityFieldsSettings() {
   const tabFromUrl = useRouteParam("tab");
   const changeTabParam = useChangeRouterParam("tab");
+  const domainMessages = useAppConfigurationDomainMessages(
+    "entity_columns_labels"
+  );
 
   const entity = useEntitySlug();
   const entityFieldLists = useEntityFieldLists(entity);
@@ -118,9 +121,7 @@ export function EntityFieldsSettings() {
                   <FieldsLabelForm
                     initialValues={entityFieldLabelsMap.data}
                     fields={entityFieldLists.data}
-                    crudConfig={MAKE_APP_CONFIGURATION_CRUD_CONFIG(
-                      "entity_columns_labels"
-                    )}
+                    crudConfig={domainMessages}
                     onSubmit={upsertEntityFieldsMapMutation.mutateAsync}
                   />
                 </ViewStateMachine>

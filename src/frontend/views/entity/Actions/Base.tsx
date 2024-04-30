@@ -20,7 +20,8 @@ import { userFriendlyCase } from "shared/lib/strings/friendly-case";
 import { ActionButtons } from "frontend/design-system/components/Button/ActionButtons";
 import { DELETE_BUTTON_PROPS } from "frontend/design-system/components/Button/constants";
 import { msg } from "@lingui/macro";
-import { FORM_ACTION_CRUD_CONFIG } from "./constants";
+import { useDomainMessages } from "frontend/lib/crud-config";
+import { LANG_DOMAINS } from "frontend/lib/crud-config/lang-domains";
 import {
   LIST_ENTITY_FORM_ACTIONS,
   useCreateFormActionMutation,
@@ -34,7 +35,9 @@ const NEW_ACTION_ITEM = "__new_action_item__";
 export function FormActions({ entity }: { entity: string }) {
   const activeIntegration = useActiveIntegrations();
   const integrationsList = useIntegrationsList();
-
+  const domainMessages = useDomainMessages(
+    LANG_DOMAINS.INTEGRATIONS.FORM_ACTIONS
+  );
   const dataEndpoint = LIST_ENTITY_FORM_ACTIONS(entity);
 
   const tableData = useApi<IFormAction[]>(dataEndpoint, {
@@ -59,14 +62,14 @@ export function FormActions({ entity }: { entity: string }) {
           {
             id: "edit",
             action: () => setCurrentFormActionId(row.original.id),
-            label: FORM_ACTION_CRUD_CONFIG.TEXT_LANG.EDIT,
+            label: domainMessages.TEXT_LANG.EDIT,
             systemIcon: "Edit",
           },
           {
             ...DELETE_BUTTON_PROPS({
               action: () =>
                 deleteFormActionMutation.mutateAsync(row.original.id),
-              label: FORM_ACTION_CRUD_CONFIG.TEXT_LANG.DELETE,
+              label: domainMessages.TEXT_LANG.DELETE,
               isMakingRequest: false,
             }),
           },
@@ -136,7 +139,7 @@ export function FormActions({ entity }: { entity: string }) {
           <SoftButton
             action={createNew}
             systemIcon="Plus"
-            label={FORM_ACTION_CRUD_CONFIG.TEXT_LANG.CREATE}
+            label={domainMessages.TEXT_LANG.CREATE}
           />
         </Stack>
         <Spacer />
@@ -145,9 +148,9 @@ export function FormActions({ entity }: { entity: string }) {
           dataEndpoint={dataEndpoint}
           columns={columns}
           empty={{
-            text: FORM_ACTION_CRUD_CONFIG.TEXT_LANG.EMPTY_LIST,
+            text: domainMessages.TEXT_LANG.EMPTY_LIST,
             createNew: {
-              label: FORM_ACTION_CRUD_CONFIG.TEXT_LANG.CREATE,
+              label: domainMessages.TEXT_LANG.CREATE,
               action: createNew,
             },
           }}
@@ -156,8 +159,8 @@ export function FormActions({ entity }: { entity: string }) {
       <OffCanvas
         title={
           currentFormActionId === NEW_ACTION_ITEM
-            ? FORM_ACTION_CRUD_CONFIG.TEXT_LANG.CREATE
-            : FORM_ACTION_CRUD_CONFIG.TEXT_LANG.EDIT
+            ? domainMessages.TEXT_LANG.CREATE
+            : domainMessages.TEXT_LANG.EDIT
         }
         onClose={closeConfigItem}
         show={!!currentFormActionId}

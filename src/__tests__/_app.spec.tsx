@@ -13,8 +13,14 @@ describe("pages/users", () => {
   it("should render components", async () => {
     useRouter.mockImplementation(USE_ROUTER_PARAMS({}));
 
-    // eslint-disable-next-line react/jsx-no-bind
-    render(<MyApp Component={Foo} pageProps={{ title: "Hello" }} />);
+    render(
+      <MyApp
+        // eslint-disable-next-line react/jsx-no-bind
+        Component={Foo}
+        pageProps={{ title: "Hello" }}
+        router={jest.fn as any}
+      />
+    );
 
     expect(screen.getByText("Hello")).toBeInTheDocument();
   });

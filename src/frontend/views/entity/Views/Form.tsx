@@ -4,7 +4,6 @@ import arrayMutators from "final-form-arrays";
 import { useFieldArray } from "react-final-form-arrays";
 import { useState } from "react";
 import { ACTIONS_ACCESSOR } from "frontend/views/data/Table/useTableColumns";
-import { MAKE_APP_CONFIGURATION_CRUD_CONFIG } from "frontend/hooks/configuration/configuration.constant";
 import { generateRandomString } from "shared/lib/strings/random";
 import {
   composeValidators,
@@ -22,8 +21,9 @@ import { FormButton } from "frontend/design-system/components/Button/FormButton"
 import { Tabs } from "frontend/design-system/components/Tabs";
 import { ActionButtons } from "frontend/design-system/components/Button/ActionButtons";
 import { DELETE_BUTTON_PROPS } from "frontend/design-system/components/Button/constants";
-import { MAKE_CRUD_CONFIG } from "frontend/lib/crud-config";
 import { msg } from "@lingui/macro";
+import { useAppConfigurationDomainMessages } from "frontend/hooks/configuration/configuration.constant";
+import { useDomainMessages } from "frontend/lib/crud-config";
 
 interface IProps {
   values: ITableView[];
@@ -31,16 +31,15 @@ interface IProps {
   tableColumns: ITableColumn[];
 }
 
-const TABLE_VIEW_CRUD_CONFIG = MAKE_CRUD_CONFIG({
-  plural: msg`Table Views`,
-  singular: msg`Table View`,
-});
-
 const makeViewTitle = (index: number) => `View ${index}`;
 
 function TabForm({ tableColumns, values, initialValues }: IProps) {
   const { fields } = useFieldArray("tabs");
   const [currentTab, setCurrentTab] = useState("");
+  const domainMessages = useDomainMessages({
+    plural: msg`Table Views`,
+    singular: msg`Table View`,
+  });
 
   const columns = tableColumns.filter(
     ({ accessor }) => ACTIONS_ACCESSOR !== accessor
@@ -51,7 +50,7 @@ function TabForm({ tableColumns, values, initialValues }: IProps) {
       <Stack $justify="end">
         <SoftButton
           systemIcon="Plus"
-          label={TABLE_VIEW_CRUD_CONFIG.TEXT_LANG.CREATE}
+          label={domainMessages.TEXT_LANG.CREATE}
           action={() => {
             const newTab: ITableView = {
               id: generateRandomString(12),
@@ -95,7 +94,7 @@ function TabForm({ tableColumns, values, initialValues }: IProps) {
                                 setCurrentTab(fields.value[index - 1].id);
                               }
                             },
-                            label: TABLE_VIEW_CRUD_CONFIG.TEXT_LANG.DELETE,
+                            label: domainMessages.TEXT_LANG.DELETE,
                             isMakingRequest: false,
                             shouldConfirmAlert: undefined,
                           }),
@@ -161,6 +160,8 @@ export function EntityTableTabForm({
   initialValues,
   tableColumns,
 }: IFormProps<ITableView[]> & { tableColumns: ITableColumn[] }) {
+  const domainMessages = useAppConfigurationDomainMessages("table_views");
+
   return (
     <Form
       onSubmit={({ tabs }) => onSubmit(tabs)}
@@ -187,10 +188,7 @@ export function EntityTableTabForm({
             <FormButton
               isMakingRequest={submitting}
               onClick={handleSubmit}
-              text={
-                MAKE_APP_CONFIGURATION_CRUD_CONFIG("table_views").FORM_LANG
-                  .UPSERT
-              }
+              text={domainMessages.FORM_LANG.UPSERT}
               disabled={pristine}
               systemIcon="Save"
             />

@@ -12,7 +12,7 @@ import {
 } from "shared/configurations/permissions";
 import { DataStateKeys } from "frontend/lib/data/types";
 import { useRouteParam } from "frontend/lib/routing/useRouteParam";
-import { MAKE_CRUD_CONFIG } from "frontend/lib/crud-config";
+import { useDomainMessages } from "frontend/lib/crud-config";
 import { uniqBy } from "shared/lib/array/uniq-by";
 import { userFriendlyCase } from "shared/lib/strings/friendly-case";
 import { IEntityField } from "shared/types/db";
@@ -45,7 +45,7 @@ export function useEntityDiction(entity: string) {
 export function useEntityCrudConfig(entity: string) {
   const { singular, plural } = useEntityDiction(entity);
 
-  return MAKE_CRUD_CONFIG({
+  return useDomainMessages({
     plural: i18nNoop(plural),
     singular: i18nNoop(singular),
   });

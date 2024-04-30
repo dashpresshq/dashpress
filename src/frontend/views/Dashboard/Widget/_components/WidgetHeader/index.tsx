@@ -7,7 +7,8 @@ import { GrabIcon } from "frontend/design-system/Icons/Grab";
 import { ActionButtons } from "frontend/design-system/components/Button/ActionButtons";
 import { DELETE_BUTTON_PROPS } from "frontend/design-system/components/Button/constants";
 import { msg } from "@lingui/macro";
-import { DASHBOARD_WIDGETS_CRUD_CONFIG } from "frontend/views/Dashboard/constants";
+import { useDomainMessages } from "frontend/lib/crud-config";
+import { LANG_DOMAINS } from "frontend/lib/crud-config/lang-domains";
 import { DASHBOARD_RELATIVE_DAYS } from "./constants";
 import { IWidgetSettingProps } from "./types";
 import { useDashboardWidgetRelativeDateStore } from "../../../relativeTime.store";
@@ -32,6 +33,7 @@ export function WidgetHeader({
   const [setWidgetRelativeDate] = useDashboardWidgetRelativeDateStore(
     (store) => [store.setWidgetRelativeDate]
   );
+  const domainMessages = useDomainMessages(LANG_DOMAINS.DASHBOARD.WIDGETS);
 
   return (
     <Stack $justify="space-between" $align="flex-start">
@@ -50,13 +52,13 @@ export function WidgetHeader({
             {
               id: "edit",
               action: setting.setId,
-              label: DASHBOARD_WIDGETS_CRUD_CONFIG.TEXT_LANG.EDIT,
+              label: domainMessages.TEXT_LANG.EDIT,
               systemIcon: "Edit",
             },
             {
               ...DELETE_BUTTON_PROPS({
                 action: setting.delete,
-                label: DASHBOARD_WIDGETS_CRUD_CONFIG.TEXT_LANG.DELETE,
+                label: domainMessages.TEXT_LANG.DELETE,
                 isMakingRequest: false,
               }),
             },

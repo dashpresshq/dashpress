@@ -8,14 +8,16 @@ import {
 } from "frontend/design-system/components/Skeleton/Form";
 import { SectionBox } from "frontend/design-system/components/Section/SectionBox";
 import { msg } from "@lingui/macro";
+import { LANG_DOMAINS } from "frontend/lib/crud-config/lang-domains";
+import { useDomainMessages } from "frontend/lib/crud-config";
 import { BaseActionsLayout } from "../_Base";
 import { useIntegrationsList, useActiveIntegrations } from "./actions.store";
 import { ACTIONS_VIEW_KEY } from "../constants";
 import { ActionSettingsView } from "./View";
-import { ACTION_INTEGRATIONS_CRUD_CONFIG } from "./constants";
 
 export function ActionsIntegrations() {
   const currentKey = useRouteParam("key");
+  const domainMessages = useDomainMessages(LANG_DOMAINS.INTEGRATIONS.ACTIONS);
 
   const integrationsList = useIntegrationsList();
   const activeActionsList = useActiveIntegrations();
@@ -29,7 +31,7 @@ export function ActionsIntegrations() {
   );
 
   useSetPageDetails({
-    pageTitle: ACTION_INTEGRATIONS_CRUD_CONFIG.TEXT_LANG.TITLE,
+    pageTitle: domainMessages.TEXT_LANG.TITLE,
     viewKey: ACTIONS_VIEW_KEY,
     permission: UserPermissions.CAN_MANAGE_APP_CREDENTIALS,
   });

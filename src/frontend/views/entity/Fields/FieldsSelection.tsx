@@ -11,7 +11,7 @@ import {
   isUseColorsFlagOn,
   OPTIONS_COLORS,
 } from "shared/logic/entities/selection.utils";
-import { MAKE_APP_CONFIGURATION_CRUD_CONFIG } from "frontend/hooks/configuration/configuration.constant";
+import { useAppConfigurationDomainMessages } from "frontend/hooks/configuration/configuration.constant";
 import { FormInput } from "frontend/design-system/components/Form/FormInput";
 import { Stack } from "frontend/design-system/primitives/Stack";
 import { Card, CardBody } from "frontend/design-system/components/Card";
@@ -38,8 +38,6 @@ const ColorBox = styled.button<{ color: string }>`
 
 // Reference is a special case basically only use color
 
-const CRUD_CONFIG = MAKE_APP_CONFIGURATION_CRUD_CONFIG("entity_selections");
-
 const ManagableEntities = ["selection"];
 
 interface IProps {
@@ -56,6 +54,7 @@ export function FieldSelectionCanvas({
   selections,
 }: IProps) {
   const [useColors, setUseColors] = useState(isUseColorsFlagOn(selections));
+  const domainMessages = useAppConfigurationDomainMessages("entity_selections");
   if (!field) {
     return null;
   }
@@ -212,7 +211,7 @@ export function FieldSelectionCanvas({
                   <FormButton
                     systemIcon="Save"
                     isMakingRequest={false}
-                    text={CRUD_CONFIG.FORM_LANG.UPSERT}
+                    text={domainMessages.FORM_LANG.UPSERT}
                     disabled={pristine}
                   />
                 </Stack>

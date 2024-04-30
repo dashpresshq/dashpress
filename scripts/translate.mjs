@@ -71,9 +71,12 @@ async function translatePoFiles(folderPath) {
         msgid: message.id,
         msgstr: [translation],
       };
-    }
 
-    fs.writeFileSync(path.join(folderPath, file), gettextParser.po.compile(po));
+      fs.writeFileSync(
+        path.join(folderPath, file),
+        gettextParser.po.compile(po)
+      );
+    }
   }
 }
 

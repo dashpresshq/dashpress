@@ -10,30 +10,30 @@ import {
   useUpsertConfigurationMutation,
 } from "frontend/hooks/configuration/configuration.store";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
-import { MAKE_APP_CONFIGURATION_CRUD_CONFIG } from "frontend/hooks/configuration/configuration.constant";
 import { SchemaForm } from "frontend/components/SchemaForm";
 import { AppConfigurationValueType } from "shared/configurations/constants";
 import { msg } from "@lingui/macro";
+import { useAppConfigurationDomainMessages } from "frontend/hooks/configuration/configuration.constant";
 import { BaseSettingsLayout } from "../_Base";
 import { SETTINGS_VIEW_KEY } from "../constants";
 
-const CRUD_CONFIG = MAKE_APP_CONFIGURATION_CRUD_CONFIG("site_settings");
-
 export function SiteSettings() {
   const siteSettings = useAppConfiguration("site_settings");
+
+  const domainMessages = useAppConfigurationDomainMessages("site_settings");
 
   const upsertConfigurationMutation =
     useUpsertConfigurationMutation("site_settings");
 
   useSetPageDetails({
-    pageTitle: CRUD_CONFIG.TEXT_LANG.TITLE,
+    pageTitle: domainMessages.TEXT_LANG.TITLE,
     viewKey: SETTINGS_VIEW_KEY,
     permission: UserPermissions.CAN_CONFIGURE_APP,
   });
 
   return (
     <BaseSettingsLayout>
-      <SectionBox title={CRUD_CONFIG.TEXT_LANG.TITLE}>
+      <SectionBox title={domainMessages.TEXT_LANG.TITLE}>
         <ViewStateMachine
           loading={siteSettings.isLoading}
           error={siteSettings.error}
@@ -52,7 +52,7 @@ export function SiteSettings() {
             onSubmit={upsertConfigurationMutation.mutateAsync}
             initialValues={siteSettings.data}
             systemIcon="Save"
-            buttonText={CRUD_CONFIG.FORM_LANG.UPSERT}
+            buttonText={domainMessages.FORM_LANG.UPSERT}
             fields={{
               name: {
                 label: msg`Name`,

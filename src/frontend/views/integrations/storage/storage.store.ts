@@ -1,17 +1,24 @@
-import { CRUD_CONFIG_NOT_FOUND } from "frontend/lib/crud-config";
+import {
+  CRUD_CONFIG_NOT_FOUND,
+  useDomainMessages,
+} from "frontend/lib/crud-config";
 import { reduceStringToNumber } from "shared/lib/strings";
 import { useApi } from "frontend/lib/data/useApi";
 import { useWaitForResponseMutationOptions } from "frontend/lib/data/useMutate/useWaitForResponseMutationOptions";
 import { ApiRequest } from "frontend/lib/data/makeRequest";
 import { IStorageIntegration } from "shared/types/actions";
+import { LANG_DOMAINS } from "frontend/lib/crud-config/lang-domains";
 import { usePasswordStore } from "../password.store";
-import { STORAGE_INTEGRATIONS_CRUD_CONFIG } from "./constants";
 
-export const useStorageIntegrationsList = () =>
-  useApi<IStorageIntegration[]>("/api/integrations/storage/list", {
-    errorMessage: STORAGE_INTEGRATIONS_CRUD_CONFIG.TEXT_LANG.NOT_FOUND,
+export const useStorageIntegrationsList = () => {
+  const domainMessages = useDomainMessages(
+    LANG_DOMAINS.INTEGRATIONS.FILE_STORAGE
+  );
+  return useApi<IStorageIntegration[]>("/api/integrations/storage/list", {
+    errorMessage: domainMessages.TEXT_LANG.NOT_FOUND,
     defaultData: [],
   });
+};
 
 const ACTIVE_STORAGE_INTEGRATIONS_ENDPOINT = "/api/integrations/storage/active";
 
@@ -42,6 +49,9 @@ export const useStorageCredentialsConfiguration = () => {
 };
 
 export function useActivateStorageMutation() {
+  const domainMessages = useDomainMessages(
+    LANG_DOMAINS.INTEGRATIONS.FILE_STORAGE
+  );
   return useWaitForResponseMutationOptions<{
     storageKey: string;
     configuration: Record<string, string>;
@@ -55,7 +65,6 @@ export function useActivateStorageMutation() {
       ACTIVE_STORAGE_INTEGRATIONS_ENDPOINT,
       STORAGE_CREDENTIALS_CONFIG,
     ],
-    successMessage:
-      STORAGE_INTEGRATIONS_CRUD_CONFIG.MUTATION_LANG.CUSTOM("Activated"),
+    successMessage: domainMessages.MUTATION_LANG.CUSTOM("Activated"),
   });
 }

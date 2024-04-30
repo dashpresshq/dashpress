@@ -1,6 +1,6 @@
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { UserPermissions } from "shared/constants/user";
-import { MAKE_APP_CONFIGURATION_CRUD_CONFIG } from "frontend/hooks/configuration/configuration.constant";
+import { useAppConfigurationDomainMessages } from "frontend/hooks/configuration/configuration.constant";
 import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
 import { ListSkeleton } from "frontend/design-system/components/Skeleton/List";
 import { SectionBox } from "frontend/design-system/components/Section/SectionBox";
@@ -17,13 +17,13 @@ import { msg } from "@lingui/macro";
 import { SETTINGS_VIEW_KEY } from "../constants";
 import { EntitiesSelection } from "../Entities/Selection";
 
-const CRUD_CONFIG = MAKE_APP_CONFIGURATION_CRUD_CONFIG(
-  "disabled_menu_entities"
-);
-
 export function MenuSettings() {
+  const domainMessages = useAppConfigurationDomainMessages(
+    "disabled_menu_entities"
+  );
+
   useSetPageDetails({
-    pageTitle: CRUD_CONFIG.TEXT_LANG.TITLE,
+    pageTitle: domainMessages.TEXT_LANG.TITLE,
     viewKey: SETTINGS_VIEW_KEY,
     permission: UserPermissions.CAN_CONFIGURE_APP,
   });

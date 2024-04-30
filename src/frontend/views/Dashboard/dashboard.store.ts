@@ -1,11 +1,14 @@
 import { IWidgetConfig } from "shared/types/dashboard";
-import { CRUD_CONFIG_NOT_FOUND } from "frontend/lib/crud-config";
+import {
+  CRUD_CONFIG_NOT_FOUND,
+  useDomainMessages,
+} from "frontend/lib/crud-config";
 import { MutationHelpers } from "frontend/lib/data/useMutate/mutation-helpers";
 import { useApiMutateOptimisticOptions } from "frontend/lib/data/useMutate/useApiMutateOptimisticOptions";
 import { useApi } from "frontend/lib/data/useApi";
 import { ApiRequest } from "frontend/lib/data/makeRequest";
+import { LANG_DOMAINS } from "frontend/lib/crud-config/lang-domains";
 import { DASHBOARD_RELATIVE_DAYS } from "./Widget/_components/WidgetHeader/constants";
-import { DASHBOARD_WIDGETS_CRUD_CONFIG } from "./constants";
 
 const DASHBOARD_ENDPOINT = (dashboardId: string) =>
   `/api/dashboards/${dashboardId}`;
@@ -23,8 +26,9 @@ const DASHBOARD_WIDGET_SCRIPT_ENDPOINT = (
   return `${base}&relativeDate=${relativeDate}`;
 };
 export const useDashboardWidgets = (dashboardId: string) => {
+  const domainMessages = useDomainMessages(LANG_DOMAINS.DASHBOARD.WIDGETS);
   return useApi<IWidgetConfig[]>(DASHBOARD_ENDPOINT(dashboardId), {
-    errorMessage: DASHBOARD_WIDGETS_CRUD_CONFIG.TEXT_LANG.NOT_FOUND,
+    errorMessage: domainMessages.TEXT_LANG.NOT_FOUND,
     defaultData: [],
   });
 };
@@ -43,13 +47,15 @@ export const useDasboardWidgetScriptData = (
 };
 
 export function useCreateDashboardWidgetMutation(dashboardId: string) {
+  const domainMessages = useDomainMessages(LANG_DOMAINS.DASHBOARD.WIDGETS);
+
   return useApiMutateOptimisticOptions<IWidgetConfig[], IWidgetConfig>({
     mutationFn: async (widget) => {
       await ApiRequest.POST(DASHBOARD_ENDPOINT(dashboardId), widget);
     },
     dataQueryPath: DASHBOARD_ENDPOINT(dashboardId),
     onMutate: MutationHelpers.append,
-    successMessage: DASHBOARD_WIDGETS_CRUD_CONFIG.MUTATION_LANG.CREATE,
+    successMessage: domainMessages.MUTATION_LANG.CREATE,
   });
 }
 
@@ -57,6 +63,8 @@ export function useUpdateDashboardWidgetMutation(
   dashboardId: string,
   widgetId: string
 ) {
+  const domainMessages = useDomainMessages(LANG_DOMAINS.DASHBOARD.WIDGETS);
+
   return useApiMutateOptimisticOptions<IWidgetConfig[], IWidgetConfig>({
     mutationFn: async (widget) => {
       await ApiRequest.PATCH(
@@ -67,18 +75,20 @@ export function useUpdateDashboardWidgetMutation(
     dataQueryPath: DASHBOARD_ENDPOINT(dashboardId),
     otherEndpoints: [DASHBOARD_WIDGET_SCRIPT_ENDPOINT(widgetId)],
     onMutate: MutationHelpers.update,
-    successMessage: DASHBOARD_WIDGETS_CRUD_CONFIG.MUTATION_LANG.EDIT,
+    successMessage: domainMessages.MUTATION_LANG.EDIT,
   });
 }
 
 export function useDeleteDashboardWidgetMutation(dashboardId: string) {
+  const domainMessages = useDomainMessages(LANG_DOMAINS.DASHBOARD.WIDGETS);
+
   return useApiMutateOptimisticOptions<IWidgetConfig[], string>({
     mutationFn: async (widgetId) => {
       await ApiRequest.DELETE(`${DASHBOARD_ENDPOINT(dashboardId)}/${widgetId}`);
     },
     dataQueryPath: DASHBOARD_ENDPOINT(dashboardId),
     onMutate: MutationHelpers.delete,
-    successMessage: DASHBOARD_WIDGETS_CRUD_CONFIG.MUTATION_LANG.DELETE,
+    successMessage: domainMessages.MUTATION_LANG.DELETE,
   });
 }
 

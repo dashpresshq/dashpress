@@ -11,7 +11,7 @@ import {
 } from "frontend/hooks/configuration/configuration.store";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { format as dateFnsFormat } from "date-fns";
-import { MAKE_APP_CONFIGURATION_CRUD_CONFIG } from "frontend/hooks/configuration/configuration.constant";
+import { useAppConfigurationDomainMessages } from "frontend/hooks/configuration/configuration.constant";
 import { ToastService } from "frontend/lib/toast";
 import { SchemaForm } from "frontend/components/SchemaForm";
 import { Spacer } from "frontend/design-system/primitives/Spacer";
@@ -26,8 +26,7 @@ type IDateFormatSettings = {
 };
 
 function MetaDataSettings() {
-  const META_DATA_CRUD_CONFIG =
-    MAKE_APP_CONFIGURATION_CRUD_CONFIG("metadata_columns");
+  const domainMessages = useAppConfigurationDomainMessages("metadata_columns");
 
   const metaDataColumns = useAppConfiguration("metadata_columns");
 
@@ -36,7 +35,7 @@ function MetaDataSettings() {
 
   return (
     <SectionBox
-      title={META_DATA_CRUD_CONFIG.TEXT_LANG.TITLE}
+      title={domainMessages.TEXT_LANG.TITLE}
       description="The fields registered below will be automatically hidden on the create and edit forms"
     >
       <ViewStateMachine
@@ -51,7 +50,7 @@ function MetaDataSettings() {
         <SchemaForm<AppConfigurationValueType<"metadata_columns">>
           onSubmit={upsertConfigurationMutation.mutateAsync}
           initialValues={metaDataColumns.data}
-          buttonText={META_DATA_CRUD_CONFIG.FORM_LANG.UPSERT}
+          buttonText={domainMessages.FORM_LANG.UPSERT}
           systemIcon="Save"
           fields={{
             createdAt: {
@@ -74,9 +73,10 @@ function MetaDataSettings() {
 const DATE_FORMAT_LIB_LINK = "https://date-fns.org/docs/format";
 
 function DateSettings() {
-  const DATE_FORMAT_CRUD_CONFIG = MAKE_APP_CONFIGURATION_CRUD_CONFIG(
+  const domainMessages = useAppConfigurationDomainMessages(
     "default_date_format"
   );
+
   const defaultDateFormat = useAppConfiguration("default_date_format");
 
   const upsertDateFormatConfigurationMutation = useUpsertConfigurationMutation(
@@ -85,7 +85,7 @@ function DateSettings() {
 
   return (
     <SectionBox
-      title={DATE_FORMAT_CRUD_CONFIG.TEXT_LANG.TITLE}
+      title={domainMessages.TEXT_LANG.TITLE}
       actionButtons={[
         {
           id: "help",
@@ -112,7 +112,7 @@ function DateSettings() {
             }
           }}
           initialValues={{ format: defaultDateFormat.data }}
-          buttonText={DATE_FORMAT_CRUD_CONFIG.FORM_LANG.UPSERT}
+          buttonText={domainMessages.FORM_LANG.UPSERT}
           systemIcon="Save"
           fields={{
             format: {

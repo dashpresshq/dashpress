@@ -6,26 +6,30 @@ import {
   CHANGE_PASSWORD_FORM_SCHEMA,
   IChangePasswordForm,
 } from "shared/form-schemas/profile/password";
+import { useDomainMessages } from "frontend/lib/crud-config";
+import { LANG_DOMAINS } from "frontend/lib/crud-config/lang-domains";
 import { useChangePasswordMutation } from "../account.store";
-import { ACCOUNT_VIEW_KEY, PASSWORD_CRUD_CONFIG } from "../constants";
+import { ACCOUNT_VIEW_KEY } from "../constants";
 
 import { BaseAccountLayout } from "../_Base";
 
 export function AccountPassword() {
+  const domainMessages = useDomainMessages(LANG_DOMAINS.ACCOUNT.PASSWORD);
+
   const changePasswordMutation = useChangePasswordMutation();
   useSetPageDetails({
-    pageTitle: PASSWORD_CRUD_CONFIG.TEXT_LANG.EDIT,
+    pageTitle: domainMessages.TEXT_LANG.EDIT,
     viewKey: ACCOUNT_VIEW_KEY,
     permission: META_USER_PERMISSIONS.NO_PERMISSION_REQUIRED,
   });
 
   return (
     <BaseAccountLayout>
-      <SectionBox title={PASSWORD_CRUD_CONFIG.TEXT_LANG.EDIT}>
+      <SectionBox title={domainMessages.TEXT_LANG.EDIT}>
         <SchemaForm<IChangePasswordForm>
           onSubmit={changePasswordMutation.mutateAsync}
           systemIcon="Save"
-          buttonText={PASSWORD_CRUD_CONFIG.FORM_LANG.UPDATE}
+          buttonText={domainMessages.FORM_LANG.UPDATE}
           fields={CHANGE_PASSWORD_FORM_SCHEMA}
           resetForm
         />

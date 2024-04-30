@@ -11,7 +11,7 @@ import {
   IFieldValidationItem,
   ValidationTypes,
 } from "shared/validations/types";
-import { MAKE_APP_CONFIGURATION_CRUD_CONFIG } from "frontend/hooks/configuration/configuration.constant";
+import { useAppConfigurationDomainMessages } from "frontend/hooks/configuration/configuration.constant";
 import {
   composeValidators,
   maxLength,
@@ -35,8 +35,6 @@ interface IProps {
   onSubmit: (values: IFieldValidationItem[]) => void;
 }
 
-const CRUD_CONFIG = MAKE_APP_CONFIGURATION_CRUD_CONFIG("entity_validations");
-
 const ERROR_MESSAGE_LENGTH = 128;
 
 // TODO: for contributors: Show the actuall error message not the template message
@@ -47,6 +45,9 @@ export function FieldValidationCanvas({
   entityType,
   validations,
 }: IProps) {
+  const domainMessages =
+    useAppConfigurationDomainMessages("entity_validations");
+
   if (!field) {
     return null;
   }
@@ -170,7 +171,7 @@ export function FieldValidationCanvas({
           <Spacer />
           <FormButton
             isMakingRequest={false}
-            text={CRUD_CONFIG.FORM_LANG.UPSERT}
+            text={domainMessages.FORM_LANG.UPSERT}
             systemIcon="Save"
             disabled={pristine}
           />

@@ -21,16 +21,13 @@ import { msg } from "@lingui/macro";
 import { useRouter } from "next/router";
 import { Spacer } from "frontend/design-system/primitives/Spacer";
 import { typescriptSafeObjectDotKeys } from "shared/lib/objects";
+import { useDomainMessages } from "frontend/lib/crud-config";
+import { LANG_DOMAINS } from "frontend/lib/crud-config/lang-domains";
 import { ACCOUNT_VIEW_KEY } from "../constants";
 import { BaseAccountLayout } from "../_Base";
-import {
-  ACCOUNT_PREFERENCES_CRUD_CONFIG,
-  UPDATE_USER_PREFERENCES_FORM_SCHEMA,
-} from "./constants";
+import { UPDATE_USER_PREFERENCES_FORM_SCHEMA } from "./constants";
 import { IUserPreferences } from "./types";
 import { PortalUserPreferences } from "./portal";
-
-// TODO: split the forms
 
 export const LANGUAGE_PREFERENCES_FORM_SCHEMA: IAppliedSchemaFormConfig<{
   locale: string;
@@ -51,12 +48,13 @@ export const LANGUAGE_PREFERENCES_FORM_SCHEMA: IAppliedSchemaFormConfig<{
 };
 
 export function UserPreferences() {
+  const domainMessages = useDomainMessages(LANG_DOMAINS.ACCOUNT.PREFERENCES);
   const userPreferences = useUserPreference("theme");
   const upsertUserPreferenceMutation = useUpsertUserPreferenceMutation("theme");
   const router = useRouter();
 
   useSetPageDetails({
-    pageTitle: ACCOUNT_PREFERENCES_CRUD_CONFIG.TEXT_LANG.EDIT,
+    pageTitle: domainMessages.TEXT_LANG.TITLE,
     viewKey: ACCOUNT_VIEW_KEY,
     permission: META_USER_PERMISSIONS.NO_PERMISSION_REQUIRED,
   });
@@ -78,7 +76,7 @@ export function UserPreferences() {
 
   return (
     <BaseAccountLayout>
-      <SectionBox title={ACCOUNT_PREFERENCES_CRUD_CONFIG.TEXT_LANG.EDIT}>
+      <SectionBox title={domainMessages.TEXT_LANG.TITLE}>
         <ViewStateMachine
           loading={userPreferences.isLoading}
           error={userPreferences.error}
@@ -89,7 +87,7 @@ export function UserPreferences() {
               await upsertUserPreferenceMutation.mutateAsync(data.theme);
             }}
             initialValues={{ theme: userPreferences.data }}
-            buttonText={ACCOUNT_PREFERENCES_CRUD_CONFIG.FORM_LANG.UPSERT}
+            buttonText={domainMessages.FORM_LANG.UPSERT}
             fields={UPDATE_USER_PREFERENCES_FORM_SCHEMA}
             systemIcon="Save"
           />

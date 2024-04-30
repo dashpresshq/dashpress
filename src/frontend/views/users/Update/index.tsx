@@ -22,12 +22,13 @@ import {
 import { IAppliedSchemaFormConfig } from "shared/form-schemas/types";
 import { IUpdateUserForm } from "shared/form-schemas/users";
 import { msg } from "@lingui/macro";
+import { useDomainMessages } from "frontend/lib/crud-config";
+import { LANG_DOMAINS } from "frontend/lib/crud-config/lang-domains";
 import { useUsernameFromRouteParam } from "../hooks";
 import {
   useUpdateUserMutation,
   useResetUserPasswordMutation,
   useUserDetails,
-  ADMIN_USERS_CRUD_CONFIG,
 } from "../users.store";
 
 export const UPDATE_USER_FORM_SCHEMA: IAppliedSchemaFormConfig<IUpdateUserForm> =
@@ -65,11 +66,12 @@ export function UserUpdate() {
   const username = useUsernameFromRouteParam();
   const userDetails = useUserDetails(username);
   const authenticatedUserBag = useAuthenticatedUserBag();
+  const domainMessages = useDomainMessages(LANG_DOMAINS.ACCOUNT.USERS);
 
   const userHasPermission = useUserHasPermission();
 
   useSetPageDetails({
-    pageTitle: ADMIN_USERS_CRUD_CONFIG.TEXT_LANG.EDIT,
+    pageTitle: domainMessages.TEXT_LANG.EDIT,
     viewKey: `edit-user`,
     permission: UserPermissions.CAN_MANAGE_USERS,
   });
@@ -81,10 +83,7 @@ export function UserUpdate() {
   return (
     <AppLayout>
       <ContentLayout.Center>
-        <SectionBox
-          title={ADMIN_USERS_CRUD_CONFIG.TEXT_LANG.EDIT}
-          backLink={backLink}
-        >
+        <SectionBox title={domainMessages.TEXT_LANG.EDIT} backLink={backLink}>
           <ViewStateMachine
             loading={isLoading}
             error={error}
@@ -99,7 +98,7 @@ export function UserUpdate() {
             }
           >
             <SchemaForm<IUpdateUserForm>
-              buttonText={ADMIN_USERS_CRUD_CONFIG.FORM_LANG.UPDATE}
+              buttonText={domainMessages.FORM_LANG.UPDATE}
               onSubmit={updateUserMutation.mutateAsync}
               initialValues={userDetails.data}
               systemIcon="Save"

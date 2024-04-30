@@ -8,7 +8,9 @@ import { SchemaForm } from "frontend/components/SchemaForm";
 import { ICreateUserForm } from "shared/form-schemas/users";
 import { IAppliedSchemaFormConfig } from "shared/form-schemas/types";
 import { msg } from "@lingui/macro";
-import { ADMIN_USERS_CRUD_CONFIG, useCreateUserMutation } from "../users.store";
+import { useDomainMessages } from "frontend/lib/crud-config";
+import { LANG_DOMAINS } from "frontend/lib/crud-config/lang-domains";
+import { useCreateUserMutation } from "../users.store";
 
 export const CREATE_USER_FORM_SCHEMA: IAppliedSchemaFormConfig<ICreateUserForm> =
   {
@@ -59,9 +61,10 @@ export const CREATE_USER_FORM_SCHEMA: IAppliedSchemaFormConfig<ICreateUserForm> 
 export function UserCreate() {
   const userCreationMutation = useCreateUserMutation();
   const { backLink } = useNavigationStack();
+  const domainMessages = useDomainMessages(LANG_DOMAINS.ACCOUNT.USERS);
 
   useSetPageDetails({
-    pageTitle: ADMIN_USERS_CRUD_CONFIG.TEXT_LANG.CREATE,
+    pageTitle: domainMessages.TEXT_LANG.CREATE,
     viewKey: `create-users`,
     permission: UserPermissions.CAN_MANAGE_USERS,
   });
@@ -69,13 +72,10 @@ export function UserCreate() {
   return (
     <AppLayout>
       <ContentLayout.Center>
-        <SectionBox
-          title={ADMIN_USERS_CRUD_CONFIG.TEXT_LANG.CREATE}
-          backLink={backLink}
-        >
+        <SectionBox title={domainMessages.TEXT_LANG.CREATE} backLink={backLink}>
           <SchemaForm<ICreateUserForm>
             onSubmit={userCreationMutation.mutateAsync}
-            buttonText={ADMIN_USERS_CRUD_CONFIG.FORM_LANG.CREATE}
+            buttonText={domainMessages.FORM_LANG.CREATE}
             fields={CREATE_USER_FORM_SCHEMA}
             systemIcon="Plus"
             resetForm

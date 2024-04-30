@@ -6,28 +6,31 @@ import { FormIntegrationsDocumentation } from "frontend/docs/form-integrations";
 import { SectionBox } from "frontend/design-system/components/Section/SectionBox";
 import { useDocumentationActionButton } from "frontend/docs/constants";
 import { msg } from "@lingui/macro";
+import { useDomainMessages } from "frontend/lib/crud-config";
+import { LANG_DOMAINS } from "frontend/lib/crud-config/lang-domains";
 import { BaseEntitySettingsLayout } from "../_Base";
 import { ENTITY_CONFIGURATION_VIEW } from "../constants";
 import { FormActions } from "./Base";
-import { FORM_ACTION_CRUD_CONFIG } from "./constants";
 
 export function EntityFormActionsSettings() {
   const entity = useEntitySlug();
-
+  const domainMessages = useDomainMessages(
+    LANG_DOMAINS.INTEGRATIONS.FORM_ACTIONS
+  );
   useSetPageDetails({
-    pageTitle: FORM_ACTION_CRUD_CONFIG.TEXT_LANG.TITLE,
+    pageTitle: domainMessages.TEXT_LANG.TITLE,
     viewKey: ENTITY_CONFIGURATION_VIEW,
     permission: UserPermissions.CAN_CONFIGURE_APP,
   });
 
   const documentationActionButton = useDocumentationActionButton(
-    FORM_ACTION_CRUD_CONFIG.TEXT_LANG.TITLE
+    domainMessages.TEXT_LANG.TITLE
   );
 
   return (
     <BaseEntitySettingsLayout>
       <SectionBox
-        title={FORM_ACTION_CRUD_CONFIG.TEXT_LANG.TITLE}
+        title={domainMessages.TEXT_LANG.TITLE}
         actionButtons={[
           {
             id: "manage",

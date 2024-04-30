@@ -17,28 +17,27 @@ import {
   FormSkeleton,
   FormSkeletonSchema,
 } from "frontend/design-system/components/Skeleton/Form";
-import { MAKE_CRUD_CONFIG } from "frontend/lib/crud-config";
 import { UsersLinkToDatabaseDocumentation } from "frontend/docs/users-link-to-database";
 import { useEntityFieldLists } from "frontend/hooks/entity/entity.store";
 import { useEffect, useState } from "react";
 import { msg } from "@lingui/macro";
 import { i18nNoop } from "translations/fake";
+import { useDomainMessages } from "frontend/lib/crud-config";
 
 type IUsersLinkToDatabaseForm = {
   table: string;
   field: string;
 };
 
-const CRUD_CONFIG = MAKE_CRUD_CONFIG({
-  plural: msg`Users Link To Database`,
-  singular: msg`Users Link To Database`,
-});
-
 export function UsersLinkToDatabase() {
+  const domainMessages = useDomainMessages({
+    plural: msg`Users Link To Database`,
+    singular: msg`Users Link To Database`,
+  });
   const { backLink } = useNavigationStack();
 
   const documentationActionButton = useDocumentationActionButton(
-    CRUD_CONFIG.TEXT_LANG.TITLE
+    domainMessages.TEXT_LANG.TITLE
   );
   const [entity, setEntity] = useState("");
 
@@ -86,15 +85,15 @@ export function UsersLinkToDatabase() {
     };
 
   useSetPageDetails({
-    pageTitle: CRUD_CONFIG.TEXT_LANG.TITLE,
-    viewKey: CRUD_CONFIG.TEXT_LANG.TITLE.message,
+    pageTitle: domainMessages.TEXT_LANG.TITLE,
+    viewKey: domainMessages.TEXT_LANG.TITLE.message,
     permission: UserPermissions.CAN_CONFIGURE_APP,
   });
 
   return (
     <AppLayout actionItems={[documentationActionButton]}>
       <ContentLayout.Center>
-        <SectionBox title={CRUD_CONFIG.TEXT_LANG.TITLE} backLink={backLink}>
+        <SectionBox title={domainMessages.TEXT_LANG.TITLE} backLink={backLink}>
           <ViewStateMachine
             loading={userToDatabaseLink.isLoading}
             error={userToDatabaseLink.error}
@@ -106,7 +105,7 @@ export function UsersLinkToDatabase() {
           >
             <SchemaForm<IUsersLinkToDatabaseForm>
               onSubmit={upsertConfigurationMutation.mutateAsync}
-              buttonText={CRUD_CONFIG.FORM_LANG.UPSERT}
+              buttonText={domainMessages.FORM_LANG.UPSERT}
               initialValues={userToDatabaseLink.data}
               fields={LINK_USERS_TO_DATABASE_FORM_SCHEMA}
               systemIcon="Save"

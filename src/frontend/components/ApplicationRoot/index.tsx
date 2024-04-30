@@ -6,6 +6,8 @@ import { GlobalStyles } from "frontend/design-system/globals";
 import { LinguiProvider } from "translations/utils";
 import { Messages } from "@lingui/core";
 import { ConfirmAlert } from "frontend/design-system/components/ConfirmAlert";
+import { PortalProvider } from "frontend/_layouts/app/portal";
+import { GoogleTagManager } from "frontend/_layouts/scripts/GoogleTagManager";
 
 export function ApplicationRoot({
   children,
@@ -17,10 +19,13 @@ export function ApplicationRoot({
   return (
     <LinguiProvider translation={translation}>
       <QueryProvider>
-        <Toaster />
-        <GlobalStyles />
-        <ThemeContextProvider>{children}</ThemeContextProvider>
-        <ConfirmAlert />
+        <PortalProvider>
+          <Toaster />
+          <GlobalStyles />
+          <ThemeContextProvider>{children}</ThemeContextProvider>
+          <ConfirmAlert />
+        </PortalProvider>
+        <GoogleTagManager />
       </QueryProvider>
     </LinguiProvider>
   );

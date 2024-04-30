@@ -3,11 +3,11 @@ import Head from "next/head";
 import styled from "styled-components";
 import { SHADOW_CSS, CardBody } from "frontend/design-system/components/Card";
 import { useAppConfiguration } from "frontend/hooks/configuration/configuration.store";
+import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
+import { Stack } from "frontend/design-system/primitives/Stack";
+import { Typo } from "frontend/design-system/primitives/Typo";
+import { Spacer } from "frontend/design-system/primitives/Spacer";
 import { useAppTheme } from "../useAppTheme";
-import { GoogleTagManager } from "../scripts/GoogleTagManager";
-import { PortalProvider } from "../app/portal";
-
-import { GuestHeader, GuestContainer } from "./_partials";
 
 interface IProps {
   children: ReactNode;
@@ -26,24 +26,63 @@ const Root = styled.div`
   max-width: 500px;
 `;
 
+const Container = styled.div`
+  width: 100%;
+  height: 100vh;
+  background-color: ${USE_ROOT_COLOR("foundation-color")};
+  background-image: radial-gradient(
+    ${USE_ROOT_COLOR("primary-color")} 0.75px,
+    ${USE_ROOT_COLOR("foundation-color")} 0.75px
+  );
+  background-size: 15px 15px;
+`;
+
+const WrapperRow = styled(Stack)`
+  height: 100vh;
+`;
+
+const Header = styled(CardBody)`
+  background-color: ${USE_ROOT_COLOR("primary-color")};
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+  padding: 0px;
+  text-align: center;
+  padding: 1rem;
+`;
+
 export function AuthLayout({ children, title, subTitle }: IProps) {
-  const siteConfig = useAppConfiguration("site_settings");
+  const {
+    data: { fullLogo, homeLink, name },
+  } = useAppConfiguration("site_settings");
   useAppTheme();
 
   return (
-    <PortalProvider>
+    <>
       <Head>
         <title>
-          {title} - {siteConfig.data.name}
+          {title} - {name}
         </title>
       </Head>
-      <GuestContainer>
-        <Root>
-          <GuestHeader title={title} subTitle={subTitle} {...siteConfig.data} />
-          <CardBody>{children}</CardBody>
-        </Root>
-      </GuestContainer>
-      <GoogleTagManager />
-    </PortalProvider>
+      <Container>
+        <WrapperRow $justify="center" $align="center">
+          <Root>
+            <Header>
+              <a href={homeLink}>
+                <Spacer />
+                {fullLogo && <img src={fullLogo} height="40" alt="logo" />}
+                <Spacer />
+                <Typo.MD $color="inverse">{title}</Typo.MD>
+                <Spacer size="xs" />
+                <Typo.XS $color="inverse">{subTitle}</Typo.XS>
+              </a>
+            </Header>
+
+            <CardBody>{children}</CardBody>
+          </Root>
+        </WrapperRow>
+      </Container>
+    </>
   );
 }

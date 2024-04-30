@@ -12,9 +12,11 @@ import {
   SETUP_USER_FORM_SCHEMA,
 } from "shared/form-schemas/setup/user";
 import { msg } from "@lingui/macro";
+import { CustomNextPage } from "frontend/_layouts/types";
 import { useSetupUserMutation } from "../setup.store";
 
-export function UserSetup() {
+// eslint-disable-next-line react/function-component-definition
+export const UserSetup: CustomNextPage = () => {
   const setupUserMutation = useSetupUserMutation();
 
   const isChecking = useSetupCheck([
@@ -59,4 +61,4 @@ export function UserSetup() {
       </ViewStateMachine>
     </AuthLayout>
   );
-}
+};

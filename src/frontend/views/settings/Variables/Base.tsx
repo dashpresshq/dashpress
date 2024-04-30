@@ -16,7 +16,7 @@ export function BaseManageVariables() {
   );
 
   const credentialsDomainMessages = useDomainMessages(
-    INTEGRATIONS_GROUP_CRUD_CONFIG.constants.domainDiction
+    INTEGRATIONS_GROUP_CRUD_CONFIG.credentials.domainDiction
   );
 
   return (

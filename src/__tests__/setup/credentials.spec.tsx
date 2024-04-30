@@ -9,6 +9,7 @@ import { BASE_TEST_URL } from "__tests__/_/api-handlers/_utils";
 import CredentialsSetup from "pages/setup/credentials";
 import userEvent from "@testing-library/user-event";
 import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
+import { queryCache } from "frontend/lib/data/QueryClient";
 
 const server = setupApiHandlers();
 
@@ -268,6 +269,42 @@ describe("pages/setup/credentials", () => {
       );
 
       expect(replaceMock).toHaveBeenCalledWith("/setup/user");
+    });
+  });
+
+  describe("redirect", () => {
+    beforeAll(() => {
+      queryCache.clear();
+    });
+
+    it("should redirect to users page DB credentials is set", async () => {
+      const replaceMock = jest.fn();
+
+      useRouter.mockImplementation(
+        USE_ROUTER_PARAMS({
+          replaceMock,
+        })
+      );
+
+      server.use(
+        rest.get(BASE_TEST_URL("/api/setup/check"), async (_, res, ctx) => {
+          return res(
+            ctx.json({
+              hasUsers: false,
+              hasDbCredentials: true,
+            })
+          );
+        })
+      );
+
+      render(
+        <ApplicationRoot>
+          <CredentialsSetup />
+        </ApplicationRoot>
+      );
+      await waitFor(() => {
+        expect(replaceMock).toHaveBeenCalledWith("/setup/user");
+      });
     });
   });
 });

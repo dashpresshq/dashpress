@@ -1,51 +1,55 @@
-import { IApplicationService } from "backend/types";
 import { nanoid } from "nanoid";
-import { canRoleDoThisSync } from "shared/logic/permissions";
 import {
   INavigationMenuItem,
   NavigationMenuItemType,
   SystemLinks,
 } from "shared/types/menu";
 import { userFriendlyCase } from "shared/lib/strings/friendly-case";
-import { META_USER_PERMISSIONS, USER_PERMISSIONS } from "shared/constants/user";
+import { META_USER_PERMISSIONS, UserPermissions } from "shared/constants/user";
 import { GranularEntityPermissions } from "shared/types/user";
 import {
   EntitiesApiService,
   entitiesApiService,
 } from "backend/entities/entities.service";
-import { noop } from "shared/lib/noop";
 import {
   ConfigurationApiService,
   configurationApiService,
 } from "backend/configuration/configuration.service";
-import { sortByList } from "shared/logic/entities/sort.utils";
 import { RolesApiService, rolesApiService } from "backend/roles/roles.service";
 import { ILabelValue } from "shared/types/options";
-import { ISingularPlural } from "shared/types/config";
+import { sortListByOrder } from "shared/lib/array/sort";
 import { portalCheckIfIsMenuAllowed, getPortalMenuItems } from "./portal";
 import { IBaseNavigationMenuApiService } from "./types";
 
-const SYSTEM_LINKS_PERMISSION_MAP: Record<SystemLinks, string> = {
-  [SystemLinks.Settings]: USER_PERMISSIONS.CAN_CONFIGURE_APP,
-  [SystemLinks.Home]: META_USER_PERMISSIONS.NO_PERMISSION_REQUIRED,
-  [SystemLinks.Roles]: USER_PERMISSIONS.CAN_MANAGE_PERMISSIONS,
-  [SystemLinks.Users]: USER_PERMISSIONS.CAN_MANAGE_USERS,
-  [SystemLinks.Actions]: USER_PERMISSIONS.CAN_MANAGE_INTEGRATIONS,
-  [SystemLinks.AllDashboards]: META_USER_PERMISSIONS.NO_PERMISSION_REQUIRED,
+const SYSTEM_LINKS_CONFIG_MAP: Record<
+  SystemLinks,
+  {
+    permission: string;
+  }
+> = {
+  [SystemLinks.Settings]: {
+    permission: UserPermissions.CAN_CONFIGURE_APP,
+  },
+  [SystemLinks.Home]: {
+    permission: META_USER_PERMISSIONS.NO_PERMISSION_REQUIRED,
+  },
+  [SystemLinks.Roles]: {
+    permission: UserPermissions.CAN_MANAGE_PERMISSIONS,
+  },
+  [SystemLinks.Users]: {
+    permission: UserPermissions.CAN_MANAGE_USERS,
+  },
+  [SystemLinks.Integrations]: {
+    permission: UserPermissions.CAN_MANAGE_APP_CREDENTIALS,
+  },
 };
 
-export class NavigationMenuApiService
-  implements IApplicationService, IBaseNavigationMenuApiService
-{
+export class NavigationMenuApiService implements IBaseNavigationMenuApiService {
   constructor(
     private readonly _entitiesApiService: EntitiesApiService,
     private readonly _configurationApiService: ConfigurationApiService,
     private readonly _rolesApiService: RolesApiService
   ) {}
-
-  async bootstrap() {
-    noop();
-  }
 
   async getMenuItems(userRole: string) {
     const portalMenuItems = await getPortalMenuItems(userRole, this);
@@ -74,11 +78,17 @@ export class NavigationMenuApiService
 
     const entitiesToShow = await this.getUserEntities();
 
-    const dictionMap =
-      await this._configurationApiService.showMultipleConfigForEntities<ISingularPlural>(
-        "entity_diction",
-        entitiesToShow.map((value) => value.value)
-      );
+    const dictionMap = Object.fromEntries(
+      await Promise.all(
+        entitiesToShow.map(async (value) => [
+          value.value,
+          await this._configurationApiService.show(
+            "entity_diction",
+            value.value
+          ),
+        ])
+      )
+    );
 
     navItems = navItems.concat([
       {
@@ -101,10 +111,10 @@ export class NavigationMenuApiService
     navItems = navItems.concat([
       {
         id: nanoid(),
-        title: "Actions",
+        title: "Integrations",
         icon: "Zap",
         type: NavigationMenuItemType.System,
-        link: SystemLinks.Actions,
+        link: SystemLinks.Integrations,
       },
       {
         id: nanoid(),
@@ -139,8 +149,8 @@ export class NavigationMenuApiService
   private async getUserEntities(): Promise<ILabelValue[]> {
     const [hiddenMenuEntities, entitiesOrder, activeEntities] =
       await Promise.all([
-        this._configurationApiService.show<string[]>("disabled_menu_entities"),
-        this._configurationApiService.show<string[]>("menu_entities_order"),
+        this._configurationApiService.show("disabled_menu_entities"),
+        this._configurationApiService.show("menu_entities_order"),
         this._entitiesApiService.getActiveEntities(),
       ]);
 
@@ -148,53 +158,35 @@ export class NavigationMenuApiService
       .filter(({ value }) => !hiddenMenuEntities.includes(value))
       .sort((a, b) => a.value.localeCompare(b.value));
 
-    sortByList(menuEntities, entitiesOrder, "value");
-
-    return menuEntities;
+    return sortListByOrder(entitiesOrder, menuEntities, "value");
   }
 
   async filterOutUserMenuItems(
     userRole: string,
-    navItems: INavigationMenuItem[]
-  ) {
-    return this.filterMenuItemsBasedOnPermissions(
-      userRole,
-      navItems,
-      await this._rolesApiService.getRolePermissions(userRole)
-    );
-  }
-
-  private filterMenuItemsBasedOnPermissions(
-    userRole: string,
-    menuItems: INavigationMenuItem[],
-    userPermissions: string[]
-  ): INavigationMenuItem[] {
-    return menuItems.reduce((allowedMenuItems, menuItem) => {
+    menuItems: INavigationMenuItem[]
+  ): Promise<INavigationMenuItem[]> {
+    const allowedMenuItems: INavigationMenuItem[] = [];
+    for (const menuItem of menuItems) {
       if (menuItem.children) {
         // eslint-disable-next-line no-param-reassign
-        menuItem.children = this.filterMenuItemsBasedOnPermissions(
+        menuItem.children = await this.filterOutUserMenuItems(
           userRole,
-          menuItem.children,
-          userPermissions
+          menuItem.children
         );
       }
-      if (this.isMenuItemAllowed(menuItem, userRole, userPermissions)) {
-        return [...allowedMenuItems, menuItem];
+
+      if (await this.isMenuItemAllowed(menuItem, userRole)) {
+        allowedMenuItems.push(menuItem);
       }
-      return allowedMenuItems;
-    }, []);
+    }
+    return allowedMenuItems;
   }
 
   private async isMenuItemAllowed(
     menuItem: INavigationMenuItem,
-    userRole: string,
-    userPermissions: string[]
+    userRole: string
   ): Promise<boolean> {
-    const isMenuAllowed = await portalCheckIfIsMenuAllowed(
-      menuItem,
-      userRole,
-      userPermissions
-    );
+    const isMenuAllowed = await portalCheckIfIsMenuAllowed(menuItem, userRole);
 
     if (typeof isMenuAllowed === "boolean") {
       return isMenuAllowed;
@@ -204,22 +196,18 @@ export class NavigationMenuApiService
       case NavigationMenuItemType.Header:
         return true;
       case NavigationMenuItemType.System:
-        return canRoleDoThisSync(
+        return await this._rolesApiService.canRoleDoThis(
           userRole,
-          SYSTEM_LINKS_PERMISSION_MAP[menuItem.link],
-          false,
-          userPermissions
+          SYSTEM_LINKS_CONFIG_MAP[menuItem.link as SystemLinks].permission
         );
 
       case NavigationMenuItemType.Entities:
-        return canRoleDoThisSync(
+        return await this._rolesApiService.canRoleDoThis(
           userRole,
           META_USER_PERMISSIONS.APPLIED_CAN_ACCESS_ENTITY(
             menuItem.link,
             GranularEntityPermissions.Show
-          ),
-          false,
-          userPermissions
+          )
         );
       default:
         return false;

@@ -1,23 +1,24 @@
 import { SchemaForm } from "frontend/components/SchemaForm";
-import { IIntegrationsList, IActivatedAction } from "shared/types/actions";
-import { BaseActionInstances } from "frontend/views/entity/Actions/Base";
+import { ActionIntegrations, IIntegrationsList } from "shared/types/actions";
 import { Typo } from "frontend/design-system/primitives/Typo";
 import { Spacer } from "frontend/design-system/primitives/Spacer";
 import { Tabs } from "frontend/design-system/components/Tabs";
-import { useActivateActionMutation } from "../actions.store";
+import { msg } from "@lingui/macro";
+import { useActivateIntegrationMutation } from "../actions.store";
 import { Deactivate } from "./Deactivate";
 import { Configure } from "./Configure";
+import { PasswordMessage } from "../../Password";
 
 interface IProps {
   integrationDetail?: IIntegrationsList;
-  activeAction?: IActivatedAction;
+  activeAction?: ActionIntegrations;
 }
 
 export function ActionSettingsView({
   integrationDetail,
   activeAction,
 }: IProps) {
-  const activateActionMutation = useActivateActionMutation(
+  const activateIntegrationMutation = useActivateIntegrationMutation(
     integrationDetail?.key
   );
 
@@ -28,20 +29,17 @@ export function ActionSettingsView({
   if (!activeAction) {
     return (
       <>
-        <Typo.SM textStyle="italic">
-          All the values provided from this form will encrypted using
-          `aes-256-gcm` before been saved.
-        </Typo.SM>
+        <PasswordMessage />
         <Spacer />
         <SchemaForm
           fields={integrationDetail.configurationSchema}
-          onSubmit={activateActionMutation.mutateAsync}
+          onSubmit={activateIntegrationMutation.mutateAsync}
           initialValues={{}}
-          icon="no-icon"
+          systemIcon="Unlock"
           buttonText={(isSubmitting) =>
             isSubmitting
-              ? `Activating ${integrationDetail.title}`
-              : `Activate ${integrationDetail.title}`
+              ? msg`Activating ${integrationDetail.title}`
+              : msg`Activate ${integrationDetail.title}`
           }
         />
       </>
@@ -52,28 +50,21 @@ export function ActionSettingsView({
     <Tabs
       contents={[
         {
-          label: "Actions",
-          content: (
-            <BaseActionInstances
-              type="integrationKey"
-              id={activeAction.integrationKey}
-            />
-          ),
-        },
-        {
-          label: "Configure",
+          label: msg`Configure`,
+          id: "configure",
           content: (
             <Configure
-              activationId={activeAction.activationId}
+              activationId={activeAction}
               integrationDetail={integrationDetail}
             />
           ),
         },
         {
-          label: "Deactivate",
+          label: msg`Deactivate`,
+          id: "deactivate",
           content: (
             <Deactivate
-              activationId={activeAction.activationId}
+              activationId={activeAction}
               integrationDetail={integrationDetail}
             />
           ),

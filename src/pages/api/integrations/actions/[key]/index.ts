@@ -1,23 +1,11 @@
-import { USER_PERMISSIONS } from "shared/constants/user";
-import { actionsApiController } from "backend/actions/actions.controller";
+import { UserPermissions } from "shared/constants/user";
 import { requestHandler } from "backend/lib/request";
+import { integrationsApiService } from "backend/integrations/integrations.service";
 
 const REQUEST_KEY_FIELD = "key";
 
 export default requestHandler(
   {
-    GET: async (getValidatedRequest) => {
-      const validatedRequest = await getValidatedRequest([
-        {
-          _type: "requestQuery",
-          options: REQUEST_KEY_FIELD,
-        },
-      ]);
-
-      return await actionsApiController.listIntegrationActionInstances(
-        validatedRequest.requestQuery
-      );
-    },
     POST: async (getValidatedRequest) => {
       const validatedRequest = await getValidatedRequest([
         {
@@ -30,7 +18,7 @@ export default requestHandler(
         },
       ]);
 
-      return await actionsApiController.activateAction(
+      return await integrationsApiService.activateIntegration(
         validatedRequest.requestQuery,
         validatedRequest.requestBody
       );
@@ -48,7 +36,7 @@ export default requestHandler(
         "withPassword",
       ]);
 
-      return await actionsApiController.updateActionConfig(
+      return await integrationsApiService.updateIntegrationConfig(
         validatedRequest.requestQuery,
         validatedRequest.requestBody
       );
@@ -61,7 +49,7 @@ export default requestHandler(
         },
       ]);
 
-      return await actionsApiController.deactivateAction(
+      return await integrationsApiService.deactivateIntegration(
         validatedRequest.requestQuery
       );
     },
@@ -69,7 +57,7 @@ export default requestHandler(
   [
     {
       _type: "canUser",
-      body: USER_PERMISSIONS.CAN_MANAGE_INTEGRATIONS,
+      body: UserPermissions.CAN_MANAGE_APP_CREDENTIALS,
     },
   ]
 );

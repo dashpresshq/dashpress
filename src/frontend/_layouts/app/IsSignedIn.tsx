@@ -1,37 +1,22 @@
-import React, { ReactNode, useEffect } from "react";
-import { useRouter } from "next/router";
-import { AUTHENTICATED_ACCOUNT_URL } from "frontend/hooks/auth/user.store";
-import { useUserAuthenticatedState } from "frontend/hooks/auth/useAuthenticateUser";
-import { useQueryClient } from "react-query";
-import { removeAuthToken } from "frontend/hooks/auth/auth.store";
-import { getQueryCachekey } from "frontend/lib/data/constants/getQueryCacheKey";
+import { ReactNode, useEffect } from "react";
+import { AuthActions } from "frontend/hooks/auth/auth.actions";
 import { ComponentIsLoading } from "frontend/design-system/components/ComponentIsLoading";
-import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
-import { useAppTheme } from "../useAppTheme";
-
-const useUserAuthCheck = () => {
-  const userAuthenticatedState = useUserAuthenticatedState();
-  const router = useRouter();
-  const queryClient = useQueryClient();
-
-  useEffect(() => {
-    if (userAuthenticatedState === false) {
-      removeAuthToken();
-      router.replace(NAVIGATION_LINKS.AUTH_SIGNIN);
-      queryClient.invalidateQueries(
-        getQueryCachekey(AUTHENTICATED_ACCOUNT_URL)
-      );
-    }
-  }, [userAuthenticatedState]);
-
-  return userAuthenticatedState;
-};
+import { useToggle } from "frontend/hooks/state/useToggleState";
 
 export function IsSignedIn({ children }: { children: ReactNode }) {
-  useAppTheme();
-  const userAuthenticatedState = useUserAuthCheck();
+  const renderMode = useToggle();
 
-  if (userAuthenticatedState !== true) {
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      if (!AuthActions.isAuthenticated()) {
+        AuthActions.signOut("IsSignedIn");
+      } else {
+        renderMode.on();
+      }
+    }
+  }, [typeof window]);
+
+  if (renderMode.isOff) {
     return <ComponentIsLoading />;
   }
   // eslint-disable-next-line react/jsx-no-useless-fragment

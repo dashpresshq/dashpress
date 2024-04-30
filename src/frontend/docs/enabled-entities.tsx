@@ -1,8 +1,8 @@
-import { DocumentationRoot, IDocumentationRootProps } from "./_base";
+import { DocumentationRoot } from "./_base";
 
-export function EnabledEntitiesDocumentation(props: IDocumentationRootProps) {
+export function EnabledEntitiesDocumentation() {
   return (
-    <DocumentationRoot {...props}>
+    <DocumentationRoot>
       <p>
         Disabling an entity here means it will not be a part of this
         application. It will be like it doesn&apos;t exist. Disabled entities

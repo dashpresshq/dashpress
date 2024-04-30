@@ -1,4 +1,3 @@
-import { IApplicationService } from "backend/types";
 import { PaginatedData, QueryFilterSchema } from "shared/types/data";
 import { IAccountProfile } from "shared/types/user";
 
@@ -11,21 +10,21 @@ export interface IPaginationFilters {
 
 export const FOR_CODE_COV = 1;
 
-export interface IDataApiService extends IApplicationService {
-  list(
+export interface IDataApiService {
+  fetchData(
     entity: string,
     select: string[],
     queryFilter: QueryFilterSchema,
     dataFetchingModifiers: IPaginationFilters
   ): Promise<Record<string, unknown>[]>;
 
-  read(
+  readData(
     entity: string,
     select: string[],
-    query: Record<string, unknown>
+    query: QueryFilterSchema
   ): Promise<Record<string, unknown>>;
 
-  count(entity: string, queryFilter: QueryFilterSchema): Promise<number>;
+  countData(entity: string, queryFilter: QueryFilterSchema): Promise<number>;
 
   create(
     entity: string,

@@ -1,10 +1,10 @@
-import React from "react";
 import styled from "styled-components";
 import Editor from "react-simple-code-editor";
 import { highlight, languages } from "prismjs/components/prism-core";
 import { SYSTEM_COLORS } from "frontend/design-system/theme/system";
 import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
 import { noop } from "shared/lib/noop";
+import { useLingui } from "@lingui/react";
 import { ISharedFormInput } from "../_types";
 import { generateClassNames, wrapLabelAndError } from "../_wrapForm";
 import "prismjs/components/prism-clike";
@@ -15,7 +15,7 @@ interface IFormCodeEditor extends ISharedFormInput {
   language?: "javascript";
 }
 
-const StyledWrapper = styled.div`
+const Wrapper = styled.div`
   border: 1px solid ${USE_ROOT_COLOR("border-color")};
 
   &.invalid {
@@ -40,14 +40,17 @@ const StyledWrapper = styled.div`
   ${PrismTokenStyles}
 `;
 
-export const FormCodeEditor: React.FC<IFormCodeEditor> = (formInput) => {
+export const FormCodeEditor = (formInput: IFormCodeEditor) => {
   const {
     input: { onFocus, onBlur, ...inputProps },
     meta,
   } = formInput;
   noop(onFocus, onBlur);
+
+  const { _ } = useLingui();
+
   return wrapLabelAndError(
-    <StyledWrapper className={`${generateClassNames(meta)} line-numbers`}>
+    <Wrapper className={`${generateClassNames(meta)} line-numbers`}>
       <Editor
         {...inputProps}
         onValueChange={inputProps.onChange}
@@ -55,14 +58,18 @@ export const FormCodeEditor: React.FC<IFormCodeEditor> = (formInput) => {
           highlight(code, languages[formInput.language || "javascript"])
         }
         disabled={formInput.disabled}
+        placeholder={
+          formInput.placeholder ? _(formInput.placeholder) : undefined
+        }
         textareaId={formInput.input.name}
         padding={4}
+        className="form-code-editor"
         style={{
           minHeight: "275px",
           fontFamily: '"Fira code", "Fira Mono", monospace',
         }}
       />
-    </StyledWrapper>,
+    </Wrapper>,
     formInput
   );
 };

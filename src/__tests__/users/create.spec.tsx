@@ -1,5 +1,3 @@
-import "@testing-library/jest-dom";
-import React from "react";
 import { render, screen } from "@testing-library/react";
 import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 import userEvent from "@testing-library/user-event";
@@ -7,6 +5,7 @@ import userEvent from "@testing-library/user-event";
 import UserCreate from "pages/users/create";
 
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
+import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
 
 setupApiHandlers();
 
@@ -15,10 +14,9 @@ describe("pages/users/create", () => {
 
   it("should create new user", async () => {
     const pushMock = jest.fn();
-    useRouter.mockImplementation(() => ({
-      asPath: "/",
-      push: pushMock,
-    }));
+
+    useRouter.mockImplementation(USE_ROUTER_PARAMS({ pushMock }));
+
     render(
       <ApplicationRoot>
         <UserCreate />
@@ -40,11 +38,11 @@ describe("pages/users/create", () => {
     await userEvent.click(screen.getByRole("button", { name: "Create User" }));
 
     expect(await screen.findByRole("status")).toHaveTextContent(
-      "User Created SuccessfullyClick here to view user"
+      "User Created SuccessfullyClick here to view details"
     );
 
     await userEvent.click(
-      screen.getByRole("button", { name: "Click here to view user" })
+      screen.getByRole("button", { name: "Click here to view details" })
     );
 
     expect(pushMock).toHaveBeenCalledWith("/users/someusername");

@@ -1,20 +1,23 @@
 import { useCallback } from "react";
-import { IFieldValidationItem } from "shared/validations/types";
+import { FormFieldTypes, IFieldValidationItem } from "shared/validations/types";
 import { IColorableSelection } from "shared/types/ui";
 import {
   getEntityFieldTypes,
   getEntitySelections,
 } from "shared/logic/entities";
 import { DataCrudKeys } from "shared/types/data";
-import { CRUD_KEY_CONFIG } from "shared/configurations/permissions";
+import {
+  CRUD_HIDDEN_KEY_CONFIG,
+  ORDER_FIELD_CONFIG,
+} from "shared/configurations/permissions";
 import { DataStateKeys } from "frontend/lib/data/types";
 import { useRouteParam } from "frontend/lib/routing/useRouteParam";
 import { MAKE_CRUD_CONFIG } from "frontend/lib/crud-config";
 import { uniqBy } from "shared/lib/array/uniq-by";
 import { userFriendlyCase } from "shared/lib/strings/friendly-case";
-import { FIELD_TYPES_CONFIG_MAP } from "shared/validations";
-import { IEntityCrudSettings } from "shared/configurations";
-import { ISingularPlural } from "shared/types/config";
+import { IEntityField } from "shared/types/db";
+import { sortListByOrder } from "shared/lib/array/sort";
+import { i18nNoop } from "translations/fake";
 import { useEntityFields } from "./entity.store";
 import {
   getFieldTypeBoundedValidations,
@@ -23,40 +26,33 @@ import {
 import { useEntityConfiguration } from "../configuration/configuration.store";
 import { usePortalHiddenEntityColumns } from "./portal";
 
-export function useEntitySlug(overrideValue?: string) {
-  const routeParam = useRouteParam("entity");
-  return overrideValue || routeParam;
+export function useEntitySlug() {
+  return useRouteParam("entity");
 }
 
 export function useEntityId() {
   return useRouteParam("id");
 }
 
-export function useEntityDiction(paramEntity?: string) {
-  const entity = useEntitySlug(paramEntity);
-  const entityDiction = useEntityConfiguration<ISingularPlural>(
-    "entity_diction",
-    entity
-  );
+export function useEntityDiction(entity: string) {
+  const entityDiction = useEntityConfiguration("entity_diction", entity);
   return {
     singular: entityDiction.data?.singular || userFriendlyCase(entity),
     plural: entityDiction.data?.plural || userFriendlyCase(entity),
   };
 }
 
-export function useEntityCrudConfig(paramEntity?: string) {
-  const { singular, plural } = useEntityDiction(paramEntity);
+export function useEntityCrudConfig(entity: string) {
+  const { singular, plural } = useEntityDiction(entity);
 
   return MAKE_CRUD_CONFIG({
-    path: "N/A",
-    plural,
-    singular,
+    plural: i18nNoop(plural),
+    singular: i18nNoop(singular),
   });
 }
 
-export function useEntityFieldLabels(paramEntity?: string) {
-  const entity = useEntitySlug(paramEntity);
-  const entityFieldLabelsMap = useEntityConfiguration<Record<string, string>>(
+export function useEntityFieldLabels(entity: string) {
+  const entityFieldLabelsMap = useEntityConfiguration(
     "entity_columns_labels",
     entity
   );
@@ -75,12 +71,12 @@ export function useEntityFieldLabels(paramEntity?: string) {
 }
 
 export function useProcessedEntityFieldTypes(
-  paramEntity?: string
-): Record<string, keyof typeof FIELD_TYPES_CONFIG_MAP> {
-  const entity = useEntitySlug(paramEntity);
-  const entityFieldTypesMap = useEntityConfiguration<
-    Record<string, keyof typeof FIELD_TYPES_CONFIG_MAP>
-  >("entity_columns_types", entity);
+  entity: string
+): Record<string, FormFieldTypes> {
+  const entityFieldTypesMap = useEntityConfiguration(
+    "entity_columns_types",
+    entity
+  );
 
   const entityFields = useEntityFields(entity);
 
@@ -95,11 +91,11 @@ export function useProcessedEntityFieldTypes(
   return getEntityFieldTypes(entityFields.data, entityFieldTypesMap.data);
 }
 
-export function useEntityFieldValidations(paramEntity?: string) {
-  const entity = useEntitySlug(paramEntity);
-  const entityValidationsMap = useEntityConfiguration<
-    Record<string, IFieldValidationItem[]>
-  >("entity_validations", entity);
+export function useEntityFieldValidations(entity: string) {
+  const entityValidationsMap = useEntityConfiguration(
+    "entity_validations",
+    entity
+  );
   const processedEntityFieldTypes = useProcessedEntityFieldTypes(entity);
   const entityFields = useEntityFields(entity);
 
@@ -137,13 +133,9 @@ export function useEntityFieldValidations(paramEntity?: string) {
 }
 
 export function useEntityFieldSelections(
-  paramEntity?: string
+  entity: string
 ): Record<string, IColorableSelection[]> {
-  const entity = useEntitySlug(paramEntity);
-
-  const entitySelections = useEntityConfiguration<
-    Record<string, IColorableSelection[]>
-  >("entity_selections", entity);
+  const entitySelections = useEntityConfiguration("entity_selections", entity);
   const processedEntityFieldTypes = useProcessedEntityFieldTypes(entity);
   const entityFields = useEntityFields(entity);
 
@@ -163,37 +155,52 @@ export function useEntityFieldSelections(
   );
 }
 
-export function useEntityCrudSettings(paramEntity?: string) {
-  const entity = useEntitySlug(paramEntity);
-
-  return useEntityConfiguration<IEntityCrudSettings>(
-    "entity_crud_settings",
-    entity,
-    {
-      create: false,
-      details: false,
-      delete: false,
-      update: false,
-    }
-  );
+export function useEntityCrudSettings(entity: string) {
+  return useEntityConfiguration("entity_crud_settings", entity, {
+    create: false,
+    details: false,
+    delete: false,
+    update: false,
+  });
 }
 
-export function useHiddenEntityColumns(
-  crudKey: DataCrudKeys,
-  overrideEntity?: string
-): DataStateKeys<string[]> {
-  const entity = useEntitySlug();
-  const entityConfig = useEntityConfiguration<string[]>(
-    CRUD_KEY_CONFIG[crudKey],
-    overrideEntity || entity
+const filterOutHiddenScalarColumns = (
+  scalarFields: IEntityField[],
+  hiddenColumns: string[]
+) => scalarFields.filter(({ name }) => !hiddenColumns.includes(name));
+
+export const useEntityCrudFields = (
+  entity: string,
+  crudKey: DataCrudKeys
+): DataStateKeys<IEntityField[]> => {
+  const entityFields = useEntityFields(entity);
+
+  const entityHiddenList = useEntityConfiguration(
+    CRUD_HIDDEN_KEY_CONFIG[crudKey],
+    entity
+  );
+
+  const entityOrderList = useEntityConfiguration(
+    ORDER_FIELD_CONFIG[crudKey],
+    entity
   );
 
   const portalHiddenEntities = usePortalHiddenEntityColumns(entity, crudKey);
 
+  const columnsToShow = filterOutHiddenScalarColumns(entityFields.data, [
+    ...portalHiddenEntities.data,
+    ...entityHiddenList.data,
+  ]);
+
   return {
-    data: [...portalHiddenEntities.data, ...entityConfig.data],
-    error: portalHiddenEntities.error || entityConfig.error,
-    isLoading: portalHiddenEntities.isLoading || entityConfig.isLoading,
-    isRefetching: false,
+    data: sortListByOrder(entityOrderList.data, columnsToShow, "name"),
+    error:
+      portalHiddenEntities.error ||
+      entityHiddenList.error ||
+      entityOrderList.error,
+    isLoading:
+      portalHiddenEntities.isLoading ||
+      entityHiddenList.isLoading ||
+      entityOrderList.isLoading,
   };
-}
+};

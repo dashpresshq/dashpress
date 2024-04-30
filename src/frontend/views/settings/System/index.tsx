@@ -4,74 +4,76 @@ import {
   FormSkeletonSchema,
 } from "frontend/design-system/components/Skeleton/Form";
 import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
-import { USER_PERMISSIONS } from "shared/constants/user";
+import { UserPermissions } from "shared/constants/user";
 import {
   useAppConfiguration,
   useUpsertConfigurationMutation,
 } from "frontend/hooks/configuration/configuration.store";
-import { ISystemSettings } from "shared/configurations";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { MAKE_APP_CONFIGURATION_CRUD_CONFIG } from "frontend/hooks/configuration/configuration.constant";
 import { SystemSettingsDocumentation } from "frontend/docs/system-settings";
-import { DOCUMENTATION_LABEL } from "frontend/docs";
-import { useState } from "react";
+import { SchemaForm } from "frontend/components/SchemaForm";
+import { IBaseSystemSettings } from "shared/configurations/system";
+import { useDocumentationActionButton } from "frontend/docs/constants";
+import { msg } from "@lingui/macro";
 import { BaseSettingsLayout } from "../_Base";
-import { SystemSettingsForm } from "./Form";
 import { SETTINGS_VIEW_KEY } from "../constants";
 
 const CRUD_CONFIG = MAKE_APP_CONFIGURATION_CRUD_CONFIG("system_settings");
 
-const DOCS_TITLE = "System Settings";
-
 export function SystemSettings() {
-  const systemSettings =
-    useAppConfiguration<ISystemSettings>("system_settings");
+  const systemSettings = useAppConfiguration("system_settings");
+
+  const documentationActionButton = useDocumentationActionButton(
+    CRUD_CONFIG.TEXT_LANG.TITLE
+  );
 
   const upsertConfigurationMutation =
     useUpsertConfigurationMutation("system_settings");
 
-  const [isDocOpen, setIsDocOpen] = useState(false);
-
   useSetPageDetails({
     pageTitle: CRUD_CONFIG.TEXT_LANG.TITLE,
     viewKey: SETTINGS_VIEW_KEY,
-    permission: USER_PERMISSIONS.CAN_CONFIGURE_APP,
+    permission: UserPermissions.CAN_CONFIGURE_APP,
   });
 
   return (
     <BaseSettingsLayout>
       <SectionBox
         title={CRUD_CONFIG.TEXT_LANG.TITLE}
-        iconButtons={[
-          {
-            action: () => setIsDocOpen(true),
-            icon: "help",
-            label: DOCUMENTATION_LABEL.CONCEPT(DOCS_TITLE),
-          },
-        ]}
+        actionButtons={[documentationActionButton]}
       >
         <ViewStateMachine
           loading={systemSettings.isLoading}
           error={systemSettings.error}
-          loader={
-            <FormSkeleton
-              schema={[FormSkeletonSchema.Input, FormSkeletonSchema.Input]}
-            />
-          }
+          loader={<FormSkeleton schema={[FormSkeletonSchema.Input]} />}
         >
-          <SystemSettingsForm
-            onSubmit={async (values) => {
-              await upsertConfigurationMutation.mutateAsync(values);
-            }}
+          <SchemaForm<IBaseSystemSettings>
+            onSubmit={upsertConfigurationMutation.mutateAsync}
             initialValues={systemSettings.data}
+            systemIcon="Save"
+            buttonText={CRUD_CONFIG.FORM_LANG.UPSERT}
+            fields={{
+              tokenValidityDurationInDays: {
+                label: msg`Token Validity Duration In Days`,
+                type: "number",
+                validations: [
+                  {
+                    validationType: "required",
+                  },
+                  {
+                    validationType: "min",
+                    constraint: {
+                      value: 1,
+                    },
+                  },
+                ],
+              },
+            }}
           />
         </ViewStateMachine>
       </SectionBox>
-      <SystemSettingsDocumentation
-        title={DOCS_TITLE}
-        close={setIsDocOpen}
-        isOpen={isDocOpen}
-      />
+      <SystemSettingsDocumentation />
     </BaseSettingsLayout>
   );
 }

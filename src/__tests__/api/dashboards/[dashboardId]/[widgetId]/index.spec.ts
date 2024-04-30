@@ -72,8 +72,6 @@ describe("/api/dashboards/[dashboardId]/[widgetId]/index", () => {
       method: "DELETE",
       query: {
         dashboardId: HOME_DASHBOARD_KEY,
-      },
-      body: {
         widgetId: "widget-2",
       },
     });
@@ -118,7 +116,7 @@ describe("/api/dashboards/[dashboardId]/[widgetId]/index", () => {
     expect(postRequest.res._getStatusCode()).toBe(400);
     expect(postRequest.res._getJSONData()).toMatchInlineSnapshot(`
       {
-        "message": "Cannot update widget in demo mode",
+        "message": "This action is not available on the demo site",
         "method": "PATCH",
         "name": "BadRequestError",
         "path": "",
@@ -145,7 +143,7 @@ describe("/api/dashboards/[dashboardId]/[widgetId]/index", () => {
     expect(deleteRequest.res._getStatusCode()).toBe(400);
     expect(deleteRequest.res._getJSONData()).toMatchInlineSnapshot(`
       {
-        "message": "Cannot remove widget in demo mode",
+        "message": "This action is not available on the demo site",
         "method": "DELETE",
         "name": "BadRequestError",
         "path": "",

@@ -1,4 +1,5 @@
 import { RedisClientType } from "redis";
+import { typescriptSafeObjectDotEntries } from "shared/lib/objects";
 import { ConfigKeys, ConfigApiService } from "../config/config.service";
 import { getRedisConnection } from "../connection/redis";
 import { AbstractConfigDataPersistenceService } from "./AbstractConfigDataPersistenceService";
@@ -32,15 +33,11 @@ export class RedisConfigDataPersistenceAdaptor<
     return null;
   }
 
-  async setup() {
-    await this.getRedisInstance();
-  }
-
   constructor(configDomain: ConfigDomain, _configApiService: ConfigApiService) {
     super(configDomain, _configApiService);
   }
 
-  async resetToEmpty() {
+  async _resetToEmpty() {
     await (await this.getRedisInstance()).del(this.wrapWithConfigDomain());
   }
 
@@ -54,7 +51,10 @@ export class RedisConfigDataPersistenceAdaptor<
     ).hGetAll(this.wrapWithConfigDomain());
 
     return Object.fromEntries(
-      Object.entries(allData).map(([key, value]) => [key, JSON.parse(value)])
+      typescriptSafeObjectDotEntries(allData).map(([key, value]) => [
+        key,
+        JSON.parse(value),
+      ])
     );
   }
 
@@ -72,7 +72,7 @@ export class RedisConfigDataPersistenceAdaptor<
     );
   }
 
-  async getItem(key: string) {
+  async _getItem(key: string) {
     return JSON.parse(
       await (
         await this.getRedisInstance()
@@ -80,13 +80,13 @@ export class RedisConfigDataPersistenceAdaptor<
     );
   }
 
-  async persistItem(key: string, data: T) {
+  async _persistItem(key: string, data: T) {
     await (
       await this.getRedisInstance()
     ).hSet(this.wrapWithConfigDomain(), { [key]: JSON.stringify(data) });
   }
 
-  public async removeItem(key: string): Promise<void> {
+  async _removeItem(key: string): Promise<void> {
     await (
       await this.getRedisInstance()
     ).hDel(this.wrapWithConfigDomain(), key);

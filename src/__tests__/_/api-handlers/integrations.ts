@@ -1,5 +1,4 @@
 /* eslint-disable no-param-reassign */
-import { IKeyValue } from "frontend/views/settings/Variables/types";
 import {
   DefaultBodyType,
   PathParams,
@@ -8,6 +7,7 @@ import {
   RestContext,
   RestRequest,
 } from "msw";
+import { IKeyValue } from "shared/types/options";
 import { BASE_TEST_URL } from "./_utils";
 
 const CONSTANTS = [

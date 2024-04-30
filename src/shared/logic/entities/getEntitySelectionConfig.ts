@@ -1,6 +1,8 @@
 import { userFriendlyCase } from "shared/lib/strings/friendly-case";
 import { EntityTypesForSelection, IColorableSelection } from "shared/types/ui";
 import { uniqBy } from "shared/lib/array/uniq-by";
+import { msg } from "@lingui/macro";
+import { i18nNoop } from "translations/fake";
 import { isUseColorsFlagOn, OPTIONS_COLORS } from "./selection.utils";
 
 export const getEntitySelectionConfig = (
@@ -14,12 +16,12 @@ export const getEntitySelectionConfig = (
         preSelectedType ?? [
           {
             value: true,
-            label: "Yes",
+            label: msg`Yes`,
             color: OPTIONS_COLORS[0],
           },
           {
             value: false,
-            label: "No",
+            label: msg`No`,
             color: OPTIONS_COLORS[1],
           },
         ]
@@ -38,7 +40,7 @@ export const getEntitySelectionConfig = (
           ...preselection,
           ...enumList.map((enumValue, index) => ({
             value: enumValue,
-            label: userFriendlyCase(enumValue),
+            label: i18nNoop(userFriendlyCase(enumValue)),
             color: shouldUseColor
               ? OPTIONS_COLORS[index % OPTIONS_COLORS.length]
               : undefined,

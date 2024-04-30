@@ -1,26 +1,33 @@
-import { SLUG_LOADING_VALUE } from "frontend/lib/routing/constants";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { useEntityCrudConfig } from "frontend/hooks/entity/entity.config";
 import { TableSkeleton } from "frontend/design-system/components/Skeleton/Table";
-import { ENTITY_TABLE_PATH } from "frontend/hooks/data/data.store";
+import { ENTITY_TABLE_PATH } from "frontend/hooks/data/constants";
 import { useTableColumns } from "../useTableColumns";
 import { TableViewComponent } from "../portal";
 import { IDataTableProps } from "../types";
 import { BaseDataTable } from "../DataTable";
+import { useCanUserPerformCrudAction } from "../../hooks/useCanUserPerformCrudAction";
 
 interface IProps extends IDataTableProps {
   entity: string;
+  createNewLink: string;
   tabKey?: string;
 }
 
-export function EntityDataTable({ entity, tabKey = "", ...props }: IProps) {
+export function EntityDataTable({
+  entity,
+  createNewLink,
+  tabKey = "",
+  ...props
+}: IProps) {
   const columns = useTableColumns(entity);
+  const canUserPerformCrudAction = useCanUserPerformCrudAction(entity);
 
   const entityCrudConfig = useEntityCrudConfig(entity);
 
   const { error } = columns;
 
-  const isLoading = entity === SLUG_LOADING_VALUE || columns.isLoading;
+  const { isLoading } = columns;
 
   return (
     <>
@@ -33,9 +40,16 @@ export function EntityDataTable({ entity, tabKey = "", ...props }: IProps) {
           <BaseDataTable
             dataEndpoint={ENTITY_TABLE_PATH(entity)}
             columns={columns.data || []}
-            enabled={entity && entity !== SLUG_LOADING_VALUE}
             stateStorageKey={`${entity}${tabKey}`}
-            crudConfig={entityCrudConfig}
+            empty={{
+              text: entityCrudConfig.TEXT_LANG.EMPTY_LIST,
+              createNew: canUserPerformCrudAction("create")
+                ? {
+                    label: entityCrudConfig.TEXT_LANG.CREATE,
+                    action: createNewLink,
+                  }
+                : undefined,
+            }}
             {...props}
           />
         )}

@@ -1,7 +1,7 @@
 import { Form, Field } from "react-final-form";
 import { useMemo, useState } from "react";
 import { getFieldTypeBoundedValidations } from "frontend/hooks/entity/guess";
-import { IFieldValidationItem } from "shared/validations/types";
+import { FormFieldTypes, IFieldValidationItem } from "shared/validations/types";
 import { EntityTypesForSelection, IColorableSelection } from "shared/types/ui";
 import { FIELD_TYPES_CONFIG_MAP } from "shared/validations";
 import { MAKE_APP_CONFIGURATION_CRUD_CONFIG } from "frontend/hooks/configuration/configuration.constant";
@@ -13,27 +13,32 @@ import {
 import { FormSelect } from "frontend/design-system/components/Form/FormSelect";
 import { FormButton } from "frontend/design-system/components/Button/FormButton";
 import { OffCanvas } from "frontend/design-system/components/OffCanvas";
+import { IFormInputRightAction } from "shared/form-schemas/types";
+import { msg } from "@lingui/macro";
+import { typescriptSafeObjectDotEntries } from "shared/lib/objects";
 import { FieldSelectionCanvas } from "./FieldsSelection";
 import { FieldValidationCanvas } from "./FieldsValidation";
 
 const CRUD_CONFIG = MAKE_APP_CONFIGURATION_CRUD_CONFIG("entity_columns_types");
 
-const FIELD_TYPES_CONFIG_MAP_AS_SELECTION = Object.entries(
+const FIELD_TYPES_CONFIG_MAP_AS_SELECTION = typescriptSafeObjectDotEntries(
   FIELD_TYPES_CONFIG_MAP
 )
-  .map(([key, { typeIsNotChangeAble }]) => ({
-    label: key,
+  .map(([key, { typeIsNotChangeAble, label }]) => ({
+    label,
     value: key,
     order: typeIsNotChangeAble ? 1 : 2,
   }))
   .sort((a, b) => b.order - a.order);
 
-const listOfEntitiesThatCantBeChanged = Object.entries(FIELD_TYPES_CONFIG_MAP)
+const listOfEntitiesThatCantBeChanged = typescriptSafeObjectDotEntries(
+  FIELD_TYPES_CONFIG_MAP
+)
   .filter(([, value]) => value.typeIsNotChangeAble)
   .map(([key]) => key);
 
 interface IValues {
-  types: Record<string, keyof typeof FIELD_TYPES_CONFIG_MAP>;
+  types: Record<string, FormFieldTypes>;
   selections: Record<string, IColorableSelection[]>;
   validations: Record<string, IFieldValidationItem[]>;
   validationsChanged: boolean;
@@ -45,7 +50,7 @@ const CANVAS_WIDTH = 500;
 
 const resetBoundedValidation = (
   validations: IFieldValidationItem[],
-  newType: keyof typeof FIELD_TYPES_CONFIG_MAP
+  newType: FormFieldTypes
 ): IFieldValidationItem[] => [
   ...getFieldTypeBoundedValidations(newType),
   ...validations.filter(({ fromType }) => !fromType),
@@ -86,10 +91,11 @@ export function FieldsTypeForm({
                 validate={composeValidators(minLength(2), maxLength(64))}
                 validateFields={[]}
               >
-                {(renderProps) => {
-                  let rightActions = [
+                {(formProps) => {
+                  let rightActions: IFormInputRightAction[] = [
                     {
-                      label: "Configure Validation",
+                      systemIcon: "Settings",
+                      label: msg`Configure Validation`,
                       action: () => {
                         setShowFieldValidations(name);
                       },
@@ -98,13 +104,13 @@ export function FieldsTypeForm({
 
                   if (
                     FIELD_TYPES_CONFIG_MAP[
-                      renderProps.input
-                        .value as keyof typeof FIELD_TYPES_CONFIG_MAP
-                    ].configureSelection
+                      formProps.input.value as FormFieldTypes
+                    ]?.configureSelection
                   ) {
                     rightActions = [
                       {
-                        label: "Configure Selections",
+                        systemIcon: "Settings",
+                        label: msg`Configure Selections`,
                         action: () => {
                           setShowFieldSelection(name);
                         },
@@ -114,23 +120,24 @@ export function FieldsTypeForm({
                   }
                   return (
                     <FormSelect
-                      label={`${getEntityFieldLabels(
+                      label={msg`${getEntityFieldLabels(
                         name
                       )} [${values.validations[name]
                         .map(({ validationType }) => validationType)
                         .join(",")}]`}
+                      defaultLabel={`Select ${getEntityFieldLabels(name)} Type`}
                       selectData={FIELD_TYPES_CONFIG_MAP_AS_SELECTION}
                       rightActions={rightActions}
                       disabledOptions={listOfEntitiesThatCantBeChanged}
                       disabled={listOfEntitiesThatCantBeChanged.includes(
-                        renderProps.input.value
+                        formProps.input.value as FormFieldTypes
                       )}
-                      meta={renderProps.meta}
+                      meta={formProps.meta}
                       input={{
-                        ...renderProps.input,
+                        ...formProps.input,
                         onChange: (value) => {
                           form.change("typesChanged", true);
-                          renderProps.input.onChange(value);
+                          formProps.input.onChange(value);
                           form.change("validations", {
                             ...values.validations,
                             [name]: resetBoundedValidation(
@@ -147,7 +154,7 @@ export function FieldsTypeForm({
             ))}
             <FormButton
               text={CRUD_CONFIG.FORM_LANG.UPSERT}
-              icon="save"
+              systemIcon="Save"
               isMakingRequest={submitting}
               disabled={
                 !(
@@ -159,7 +166,7 @@ export function FieldsTypeForm({
             />
           </form>
           <OffCanvas
-            title={`"${getEntityFieldLabels(
+            title={msg`"${getEntityFieldLabels(
               showFieldValidations
             )}" Validations`}
             width={CANVAS_WIDTH}
@@ -168,11 +175,7 @@ export function FieldsTypeForm({
           >
             <FieldValidationCanvas
               field={showFieldValidations}
-              entityType={
-                values.types[
-                  showFieldValidations
-                ] as keyof typeof FIELD_TYPES_CONFIG_MAP
-              }
+              entityType={values.types[showFieldValidations] as FormFieldTypes}
               validations={values.validations[showFieldValidations] || []}
               onSubmit={(value) => {
                 form.change("validationsChanged", true);
@@ -186,7 +189,7 @@ export function FieldsTypeForm({
             />
           </OffCanvas>
           <OffCanvas
-            title={`"${getEntityFieldLabels(showFieldSelection)}" Selection`}
+            title={msg`"${getEntityFieldLabels(showFieldSelection)}" Selection`}
             width={CANVAS_WIDTH}
             onClose={() => setShowFieldSelection("")}
             show={!!showFieldSelection}

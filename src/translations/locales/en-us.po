@@ -1,0 +1,1649 @@
+msgid ""
+msgstr ""
+"POT-Creation-Date: 2024-04-22 14:57+0100\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: @lingui/cli\n"
+"Language: en-us\n"
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Plural-Forms: \n"
+
+msgid ""
+msgstr ""
+
+msgid "-- Select State --"
+msgstr "-- Select State --"
+
+msgid "\"{0}\" Selection"
+msgstr "\"{0}\" Selection"
+
+msgid "\"{0}\" Validations"
+msgstr "\"{0}\" Validations"
+
+msgid "[[ name ]] is an invalid date"
+msgstr "[[ name ]] is an invalid date"
+
+msgid "[[ name ]] is an invalid email"
+msgstr "[[ name ]] is an invalid email"
+
+msgid "[[ name ]] is an invalid json"
+msgstr "[[ name ]] is an invalid json"
+
+msgid "[[ name ]] is an invalid URL"
+msgstr "[[ name ]] is an invalid URL"
+
+msgid "[[ name ]] is invalid"
+msgstr "[[ name ]] is invalid"
+
+msgid "[[ name ]] is invalid. Allowed values are [[ options ]]"
+msgstr "[[ name ]] is invalid. Allowed values are [[ options ]]"
+
+msgid "[[ name ]] is not a text"
+msgstr "[[ name ]] is not a text"
+
+msgid "[[ name ]] is required"
+msgstr "[[ name ]] is required"
+
+msgid "[[ name ]] should be a boolean"
+msgstr "[[ name ]] should be a boolean"
+
+msgid "[[ name ]] should be a color"
+msgstr "[[ name ]] should be a color"
+
+msgid "[[ name ]] should be a number"
+msgstr "[[ name ]] should be a number"
+
+msgid "[[ name ]] should be greater than [[ length ]] characters"
+msgstr "[[ name ]] should be greater than [[ length ]] characters"
+
+msgid "[[ name ]] should be greater than [[ otherField ]]"
+msgstr "[[ name ]] should be greater than [[ otherField ]]"
+
+msgid "[[ name ]] should be greater than [[ value ]]"
+msgstr "[[ name ]] should be greater than [[ value ]]"
+
+msgid "[[ name ]] should be less than [[ length ]] characters"
+msgstr "[[ name ]] should be less than [[ length ]] characters"
+
+msgid "[[ name ]] should be less than [[ otherField ]]"
+msgstr "[[ name ]] should be less than [[ otherField ]]"
+
+msgid "[[ name ]] should be less than [[ value ]]"
+msgstr "[[ name ]] should be less than [[ value ]]"
+
+msgid "[[ name ]] should be positive number"
+msgstr "[[ name ]] should be positive number"
+
+msgid "[[ name ]] should contain only alphabets and numbers"
+msgstr "[[ name ]] should contain only alphabets and numbers"
+
+msgid "[[ name ]] should contain only upper cases"
+msgstr "[[ name ]] should contain only upper cases"
+
+msgid "[[ name ]] should match [[ otherField ]]"
+msgstr "[[ name ]] should match [[ otherField ]]"
+
+msgid "[[ name ]] should not match [[ otherField ]]"
+msgstr "[[ name ]] should not match [[ otherField ]]"
+
+msgid "{0}"
+msgstr "{0}"
+
+msgid "{0} - {1}"
+msgstr "{0} - {1}"
+
+msgid "{0} [{1}]"
+msgstr "{0} [{1}]"
+
+msgid "{0} {1}"
+msgstr "{0} {1}"
+
+msgid "{0} Configuration"
+msgstr "{0} Configuration"
+
+msgid "{0} Preference"
+msgstr "{0} Preference"
+
+msgid "{0} Shared Successfully"
+msgstr "{0} Shared Successfully"
+
+msgid "{plural} Units"
+msgstr "{plural} Units"
+
+msgid "{singular} {action} Successfully"
+msgstr "{singular} {action} Successfully"
+
+msgid "{singular} could not be retrieved"
+msgstr "{singular} could not be retrieved"
+
+msgid "{singular} Created Successfully"
+msgstr "{singular} Created Successfully"
+
+msgid "{singular} Deleted Successfully"
+msgstr "{singular} Deleted Successfully"
+
+msgid "{singular} Details"
+msgstr "{singular} Details"
+
+msgid "{singular} Saved Successfully"
+msgstr "{singular} Saved Successfully"
+
+msgid "{singular} Settings"
+msgstr "{singular} Settings"
+
+msgid "{singular} Unit"
+msgstr "{singular} Unit"
+
+msgid "{singular} Updated Successfully"
+msgstr "{singular} Updated Successfully"
+
+msgid "{value} Day"
+msgstr "{value} Day"
+
+msgid "{value} Days"
+msgstr "{value} Days"
+
+msgid "{value} Hour"
+msgstr "{value} Hour"
+
+msgid "{value} Hours"
+msgstr "{value} Hours"
+
+msgid "{value} Month"
+msgstr "{value} Month"
+
+msgid "{value} Months"
+msgstr "{value} Months"
+
+msgid "{value} Quarter"
+msgstr "{value} Quarter"
+
+msgid "{value} Quarters"
+msgstr "{value} Quarters"
+
+msgid "{value} Week"
+msgstr "{value} Week"
+
+msgid "{value} Weeks"
+msgstr "{value} Weeks"
+
+msgid "{value} Year"
+msgstr "{value} Year"
+
+msgid "{value} Years"
+msgstr "{value} Years"
+
+msgid "2FA Tokens"
+msgstr "2FA Tokens"
+
+msgid "Access Key ID"
+msgstr "Access Key ID"
+
+msgid "Account Preferences"
+msgstr "Account Preferences"
+
+msgid "Account Profile"
+msgstr "Account Profile"
+
+msgid "Account Was Successfully Setup"
+msgstr "Account Was Successfully Setup"
+
+msgid "Action"
+msgstr "Action"
+
+msgid "Actions"
+msgstr "Actions"
+
+msgid "Activate {0}"
+msgstr "Activate {0}"
+
+msgid "Activating {0}"
+msgstr "Activating {0}"
+
+msgid "Add Filter"
+msgstr "Add Filter"
+
+msgid "Add Nested Filter"
+msgstr "Add Nested Filter"
+
+msgid "Add New {0} And Select"
+msgstr "Add New {0} And Select"
+
+msgid "Add New {singular}"
+msgstr "Add New {singular}"
+
+msgid "Add New And Select"
+msgstr "Add New And Select"
+
+msgid "Add New Option"
+msgstr "Add New Option"
+
+msgid "Add New Validation"
+msgstr "Add New Validation"
+
+msgid "All Dashboards"
+msgstr "All Dashboards"
+
+msgid "All items were {actionText} successfully"
+msgstr "All items were {actionText} successfully"
+
+msgid "Alphanumeric"
+msgstr "Alphanumeric"
+
+msgid "AND"
+msgstr "AND"
+
+msgid "API Key"
+msgstr "API Key"
+
+msgid "App"
+msgstr "App"
+
+msgid "Are you sure you want to do this?"
+msgstr "Are you sure you want to do this?"
+
+msgid "Associated Triggers"
+msgstr "Associated Triggers"
+
+msgid "Associated Workflows"
+msgstr "Associated Workflows"
+
+msgid "Attach A Trigger"
+msgstr "Attach A Trigger"
+
+msgid "Attach A Workflow"
+msgstr "Attach A Workflow"
+
+msgid "Authenticator Token"
+msgstr "Authenticator Token"
+
+msgid "Back To {0}"
+msgstr "Back To {0}"
+
+msgid "Back to Sign In Page"
+msgstr "Back to Sign In Page"
+
+msgid "Bar Chart"
+msgstr "Bar Chart"
+
+msgid "Before Submit"
+msgstr "Before Submit"
+
+msgid "Beginning of time"
+msgstr "Beginning of time"
+
+msgid "Beginning of Year"
+msgstr "Beginning of Year"
+
+msgid "Between"
+msgstr "Between"
+
+msgid "Blue"
+msgstr "Blue"
+
+msgid "Body"
+msgstr "Body"
+
+msgid "Bookmark"
+msgstr "Bookmark"
+
+msgid "Bookmarks"
+msgstr "Bookmarks"
+
+msgid "Boolean"
+msgstr "Boolean"
+
+msgid "Brown"
+msgstr "Brown"
+
+msgid "Bulk Delete"
+msgstr "Bulk Delete"
+
+msgid "Bulk Deleting"
+msgstr "Bulk Deleting"
+
+msgid "Bulk Update"
+msgstr "Bulk Update"
+
+msgid "Can Access All Dashboards"
+msgstr "Can Access All Dashboards"
+
+msgid "Can Access And Restore Soft Deleted Items"
+msgstr "Can Access And Restore Soft Deleted Items"
+
+msgid "Can Configure App"
+msgstr "Can Configure App"
+
+msgid "Can Export Data"
+msgstr "Can Export Data"
+
+msgid "Can Impersonate Users"
+msgstr "Can Impersonate Users"
+
+msgid "Can Manage All Entities"
+msgstr "Can Manage All Entities"
+
+msgid "Can Manage App Credentials"
+msgstr "Can Manage App Credentials"
+
+msgid "Can Manage Dashboard"
+msgstr "Can Manage Dashboard"
+
+msgid "Can Manage Permissions"
+msgstr "Can Manage Permissions"
+
+msgid "Can Manage Users"
+msgstr "Can Manage Users"
+
+msgid "Can Manages Flows"
+msgstr "Can Manages Flows"
+
+msgid "Can Reset Password"
+msgstr "Can Reset Password"
+
+msgid "Cancel"
+msgstr "Cancel"
+
+msgid "Change History"
+msgstr "Change History"
+
+msgid "Change Language"
+msgstr "Change Language"
+
+msgid "Channel"
+msgstr "Channel"
+
+msgid "Clear selections"
+msgstr "Clear selections"
+
+msgid "Click here to view details"
+msgstr "Click here to view details"
+
+msgid "Client Script"
+msgstr "Client Script"
+
+msgid "Clone"
+msgstr "Clone"
+
+msgid "Clone {0}"
+msgstr "Clone {0}"
+
+msgid "Clone Settings"
+msgstr "Clone Settings"
+
+msgid "Cloning"
+msgstr "Cloning"
+
+msgid "Close Canvas"
+msgstr "Close Canvas"
+
+msgid "Color"
+msgstr "Color"
+
+msgid "Column"
+msgstr "Column"
+
+msgid "Column Labels Settings"
+msgstr "Column Labels Settings"
+
+msgid "Column Types Settings"
+msgstr "Column Types Settings"
+
+msgid "Complete Setup"
+msgstr "Complete Setup"
+
+msgid "Completing Setup"
+msgstr "Completing Setup"
+
+msgid "Condition"
+msgstr "Condition"
+
+msgid "Configure"
+msgstr "Configure"
+
+msgid "Configure Selections"
+msgstr "Configure Selections"
+
+msgid "Configure Validation"
+msgstr "Configure Validation"
+
+msgid "Confirm"
+msgstr "Confirm"
+
+msgid "Confirm Data Restoration"
+msgstr "Confirm Data Restoration"
+
+msgid "Confirm Delete"
+msgstr "Confirm Delete"
+
+msgid "Confirmation Text"
+msgstr "Confirmation Text"
+
+msgid "Connection URL"
+msgstr "Connection URL"
+
+msgid "Constant"
+msgstr "Constant"
+
+msgid "Constants"
+msgstr "Constants"
+
+msgid "Contains"
+msgstr "Contains"
+
+msgid "Continue"
+msgstr "Continue"
+
+msgid "Copy To Clipboard"
+msgstr "Copy To Clipboard"
+
+msgid "Create"
+msgstr "Create"
+
+msgid "Create {singular}"
+msgstr "Create {singular}"
+
+msgid "Create Attachments"
+msgstr "Create Attachments"
+
+msgid "Create Columns Settings"
+msgstr "Create Columns Settings"
+
+msgid "Create Fields Order"
+msgstr "Create Fields Order"
+
+msgid "Create It"
+msgstr "Create It"
+
+msgid "Created At"
+msgstr "Created At"
+
+msgid "Creating {singular}"
+msgstr "Creating {singular}"
+
+msgid "Creating Attachments"
+msgstr "Creating Attachments"
+
+msgid "Credentials Was Successfully Setup"
+msgstr "Credentials Was Successfully Setup"
+
+msgid "Cron Expression"
+msgstr "Cron Expression"
+
+msgid "CRUD"
+msgstr "CRUD"
+
+msgid "CRUD Settings"
+msgstr "CRUD Settings"
+
+msgid "cURL Command"
+msgstr "cURL Command"
+
+msgid "Curve"
+msgstr "Curve"
+
+msgid "Custom Action"
+msgstr "Custom Action"
+
+msgid "Custom Actions"
+msgstr "Custom Actions"
+
+msgid "Custom Dashboard"
+msgstr "Custom Dashboard"
+
+msgid "Custom Dashboards"
+msgstr "Custom Dashboards"
+
+msgid "Custom Date"
+msgstr "Custom Date"
+
+msgid "Dark"
+msgstr "Dark"
+
+msgid "Dark Color Scheme"
+msgstr "Dark Color Scheme"
+
+msgid "Dashboard"
+msgstr "Dashboard"
+
+msgid "Dashboard Widget"
+msgstr "Dashboard Widget"
+
+msgid "Dashboard Widgets"
+msgstr "Dashboard Widgets"
+
+msgid "Dashboards"
+msgstr "Dashboards"
+
+msgid "Data"
+msgstr "Data"
+
+msgid "Data copied to clipboard successfully"
+msgstr "Data copied to clipboard successfully"
+
+msgid "Data Event"
+msgstr "Data Event"
+
+msgid "Data Events"
+msgstr "Data Events"
+
+msgid "Data exported successfully"
+msgstr "Data exported successfully"
+
+msgid "Data Key"
+msgstr "Data Key"
+
+msgid "Database"
+msgstr "Database"
+
+msgid "Database Type"
+msgstr "Database Type"
+
+msgid "Date"
+msgstr "Date"
+
+msgid "Date Format"
+msgstr "Date Format"
+
+msgid "Day"
+msgstr "Day"
+
+msgid "Deactivate"
+msgstr "Deactivate"
+
+msgid "Deactivate {0}"
+msgstr "Deactivate {0}"
+
+msgid "Deactivating {0}"
+msgstr "Deactivating {0}"
+
+msgid "Delete"
+msgstr "Delete"
+
+msgid "Delete {singular}"
+msgstr "Delete {singular}"
+
+msgid "Delete Edge"
+msgstr "Delete Edge"
+
+msgid "Delete Selection"
+msgstr "Delete Selection"
+
+msgid "Description"
+msgstr "Description"
+
+msgid "Details"
+msgstr "Details"
+
+msgid "Details Columns Settings"
+msgstr "Details Columns Settings"
+
+msgid "Details Fields Order"
+msgstr "Details Fields Order"
+
+msgid "Diction"
+msgstr "Diction"
+
+msgid "Diction Settings"
+msgstr "Diction Settings"
+
+msgid "Display Format"
+msgstr "Display Format"
+
+msgid "Domain"
+msgstr "Domain"
+
+msgid "Done"
+msgstr "Done"
+
+msgid "Download"
+msgstr "Download"
+
+msgid "Duplicate {singular}"
+msgstr "Duplicate {singular}"
+
+msgid "Edit"
+msgstr "Edit"
+
+msgid "Edit {singular}"
+msgstr "Edit {singular}"
+
+msgid "Email"
+msgstr "Email"
+
+msgid "Empty Table"
+msgstr "Empty Table"
+
+msgid "Enable {0} Functionality"
+msgstr "Enable {0} Functionality"
+
+msgid "Enable Area"
+msgstr "Enable Area"
+
+msgid "Enable Points"
+msgstr "Enable Points"
+
+msgid "Enabled Entities"
+msgstr "Enabled Entities"
+
+msgid "Enabled Entities Settings"
+msgstr "Enabled Entities Settings"
+
+msgid "Enabled Relations"
+msgstr "Enabled Relations"
+
+msgid "Enter your credentials to continue"
+msgstr "Enter your credentials to continue"
+
+msgid "Entities"
+msgstr "Entities"
+
+msgid "Entities Enabled For Add New And Select"
+msgstr "Entities Enabled For Add New And Select"
+
+msgid "Entities Enabled For Change History"
+msgstr "Entities Enabled For Change History"
+
+msgid "Entity"
+msgstr "Entity"
+
+msgid "Entity Action"
+msgstr "Entity Action"
+
+msgid "Entity Create Form Layout"
+msgstr "Entity Create Form Layout"
+
+msgid "Entity Field"
+msgstr "Entity Field"
+
+msgid "Entity ID"
+msgstr "Entity ID"
+
+msgid "Entity Tab"
+msgstr "Entity Tab"
+
+msgid "Entity Update Form Layout"
+msgstr "Entity Update Form Layout"
+
+msgid "Environment Variable"
+msgstr "Environment Variable"
+
+msgid "Environment Variables"
+msgstr "Environment Variables"
+
+msgid "Equal"
+msgstr "Equal"
+
+msgid "Equal To Other Field"
+msgstr "Equal To Other Field"
+
+msgid "Error message"
+msgstr "Error message"
+
+msgid "Error Occured Setting Up Your 2FA Token"
+msgstr "Error Occured Setting Up Your 2FA Token"
+
+msgid "Every 6 Hours"
+msgstr "Every 6 Hours"
+
+msgid "Explain {title}"
+msgstr "Explain {title}"
+
+msgid "Export"
+msgstr "Export"
+
+msgid "Exporting"
+msgstr "Exporting"
+
+msgid "External Link"
+msgstr "External Link"
+
+msgid "Field"
+msgstr "Field"
+
+msgid "Field Corresponding To Dashpress Usernames"
+msgstr "Field Corresponding To Dashpress Usernames"
+
+msgid "Field Settings"
+msgstr "Field Settings"
+
+msgid "Fields"
+msgstr "Fields"
+
+msgid "Fields State"
+msgstr "Fields State"
+
+msgid "File"
+msgstr "File"
+
+msgid "File Name"
+msgstr "File Name"
+
+msgid "File Name Format"
+msgstr "File Name Format"
+
+msgid "File Path Format"
+msgstr "File Path Format"
+
+msgid "File Storage"
+msgstr "File Storage"
+
+msgid "File Uploads Settings"
+msgstr "File Uploads Settings"
+
+msgid "Flow"
+msgstr "Flow"
+
+msgid "Flow Trigger Attachment"
+msgstr "Flow Trigger Attachment"
+
+msgid "Flow Trigger Attachments"
+msgstr "Flow Trigger Attachments"
+
+msgid "Flows"
+msgstr "Flows"
+
+msgid "Follow us on Twitter"
+msgstr "Follow us on Twitter"
+
+msgid "For security reasons, Please input your account password to be able to manage {label}"
+msgstr "For security reasons, Please input your account password to be able to manage {label}"
+
+msgid "Form"
+msgstr "Form"
+
+msgid "Form Action"
+msgstr "Form Action"
+
+msgid "Form Actions"
+msgstr "Form Actions"
+
+msgid "Form Field"
+msgstr "Form Field"
+
+msgid "Form Fields"
+msgstr "Form Fields"
+
+msgid "Form Scripts"
+msgstr "Form Scripts"
+
+msgid "Format"
+msgstr "Format"
+
+msgid "From"
+msgstr "From"
+
+msgid "General"
+msgstr "General"
+
+msgid "General Data Settings"
+msgstr "General Data Settings"
+
+msgid "Genesis"
+msgstr "Genesis"
+
+msgid "Global Action"
+msgstr "Global Action"
+
+msgid "Go Back"
+msgstr "Go Back"
+
+msgid "Greater Than"
+msgstr "Greater Than"
+
+msgid "Greater Than Other Field"
+msgstr "Greater Than Other Field"
+
+msgid "Green"
+msgstr "Green"
+
+msgid "Group Mode"
+msgstr "Group Mode"
+
+msgid "Grouped"
+msgstr "Grouped"
+
+msgid "Header"
+msgstr "Header"
+
+msgid "Headers"
+msgstr "Headers"
+
+msgid "Height"
+msgstr "Height"
+
+msgid "Hi, {0}"
+msgstr "Hi, {0}"
+
+msgid "Home"
+msgstr "Home"
+
+msgid "Home Link"
+msgstr "Home Link"
+
+msgid "Horizontal"
+msgstr "Horizontal"
+
+msgid "Host"
+msgstr "Host"
+
+msgid "Hour"
+msgstr "Hour"
+
+msgid "I have safely saved my recovery tokens"
+msgstr "I have safely saved my recovery tokens"
+
+msgid "Icon"
+msgstr "Icon"
+
+msgid "Image"
+msgstr "Image"
+
+msgid "Impersonate User"
+msgstr "Impersonate User"
+
+msgid "Impersonating User"
+msgstr "Impersonating User"
+
+msgid "Incorrect value"
+msgstr "Incorrect value"
+
+msgid "Indigo"
+msgstr "Indigo"
+
+msgid "Initial Values"
+msgstr "Initial Values"
+
+msgid "Inline Edit"
+msgstr "Inline Edit"
+
+msgid "Inline Edit Settings"
+msgstr "Inline Edit Settings"
+
+msgid "Input {deactivationKey} to continue"
+msgstr "Input {deactivationKey} to continue"
+
+msgid "Integration"
+msgstr "Integration"
+
+msgid "Integrations"
+msgstr "Integrations"
+
+msgid "IP Address"
+msgstr "IP Address"
+
+msgid "Is In"
+msgstr "Is In"
+
+msgid "Is Not In"
+msgstr "Is Not In"
+
+msgid "Is Not Null"
+msgstr "Is Not Null"
+
+msgid "Is Null"
+msgstr "Is Null"
+
+msgid "Join our Discord community"
+msgstr "Join our Discord community"
+
+msgid "JSON"
+msgstr "JSON"
+
+msgid "Key"
+msgstr "Key"
+
+msgid "Label"
+msgstr "Label"
+
+msgid "Labels"
+msgstr "Labels"
+
+msgid "Language"
+msgstr "Language"
+
+msgid "Large Logo"
+msgstr "Large Logo"
+
+msgid "Layout"
+msgstr "Layout"
+
+msgid "Less Than"
+msgstr "Less Than"
+
+msgid "Less Than Other Field"
+msgstr "Less Than Other Field"
+
+msgid "Light"
+msgstr "Light"
+
+msgid "Light Color Scheme"
+msgstr "Light Color Scheme"
+
+msgid "Line Chart"
+msgstr "Line Chart"
+
+msgid "Link"
+msgstr "Link"
+
+msgid "Link Entity"
+msgstr "Link Entity"
+
+msgid "Link Users To Database"
+msgstr "Link Users To Database"
+
+msgid "List"
+msgstr "List"
+
+msgid "Loading..."
+msgstr "Loading..."
+
+msgid "Log Out"
+msgstr "Log Out"
+
+msgid "Loop"
+msgstr "Loop"
+
+msgid "Manage {plural}"
+msgstr "Manage {plural}"
+
+msgid "Manage {title}"
+msgstr "Manage {title}"
+
+msgid "Manage Plan"
+msgstr "Manage Plan"
+
+msgid "Manage Sensitive Fields"
+msgstr "Manage Sensitive Fields"
+
+msgid "Manage Variables"
+msgstr "Manage Variables"
+
+msgid "Max"
+msgstr "Max"
+
+msgid "Max Length"
+msgstr "Max Length"
+
+msgid "Maximum file size to upload in MB"
+msgstr "Maximum file size to upload in MB"
+
+msgid "Menu Builder"
+msgstr "Menu Builder"
+
+msgid "Menu Item"
+msgstr "Menu Item"
+
+msgid "Menu Settings"
+msgstr "Menu Settings"
+
+msgid "Message"
+msgstr "Message"
+
+msgid "Metadata Columns"
+msgstr "Metadata Columns"
+
+msgid "Min"
+msgstr "Min"
+
+msgid "Min Length"
+msgstr "Min Length"
+
+msgid "Modify Data Before Cloning"
+msgstr "Modify Data Before Cloning"
+
+msgid "Month"
+msgstr "Month"
+
+msgid "Mutate"
+msgstr "Mutate"
+
+msgid "My Account"
+msgstr "My Account"
+
+msgid "Name"
+msgstr "Name"
+
+msgid "Navigation Menu"
+msgstr "Navigation Menu"
+
+msgid "New"
+msgstr "New"
+
+msgid "New Password"
+msgstr "New Password"
+
+msgid "New Password Again"
+msgstr "New Password Again"
+
+msgid "New Value"
+msgstr "New Value"
+
+msgid "No"
+msgstr "No"
+
+msgid "No {0} Has Been Logged Yet"
+msgstr "No {0} Has Been Logged Yet"
+
+msgid "No {singular} Has Been Added Yet"
+msgstr "No {singular} Has Been Added Yet"
+
+msgid "No available permission for this section"
+msgstr "No available permission for this section"
+
+msgid "No Data"
+msgstr "No Data"
+
+msgid "No result for the current {0} applied."
+msgstr "No result for the current {0} applied."
+
+msgid "No Search Results"
+msgstr "No Search Results"
+
+msgid "Node"
+msgstr "Node"
+
+msgid "Node Label"
+msgstr "Node Label"
+
+msgid "Node Properties"
+msgstr "Node Properties"
+
+msgid "Nodes"
+msgstr "Nodes"
+
+msgid "Not Equal"
+msgstr "Not Equal"
+
+msgid "Not Equal To Other Field"
+msgstr "Not Equal To Other Field"
+
+msgid "Now"
+msgstr "Now"
+
+msgid "Number"
+msgstr "Number"
+
+msgid "Old Password"
+msgstr "Old Password"
+
+msgid "Old Value"
+msgstr "Old Value"
+
+msgid "On Create"
+msgstr "On Create"
+
+msgid "On Delete"
+msgstr "On Delete"
+
+msgid "On Update"
+msgstr "On Update"
+
+msgid "Only capital letters and underscores are allowed"
+msgstr "Only capital letters and underscores are allowed"
+
+msgid "Only lowercase letters, numbers and {delimiter} are allowed"
+msgstr "Only lowercase letters, numbers and {delimiter} are allowed"
+
+msgid "Operator"
+msgstr "Operator"
+
+msgid "OR"
+msgstr "OR"
+
+msgid "Orange"
+msgstr "Orange"
+
+msgid "Order"
+msgstr "Order"
+
+msgid "Password"
+msgstr "Password"
+
+msgid "Password Reset Successfully"
+msgstr "Password Reset Successfully"
+
+msgid "Password will not be changed on demo account"
+msgstr "Password will not be changed on demo account"
+
+msgid "Persistent Query"
+msgstr "Persistent Query"
+
+msgid "Personalize This Table"
+msgstr "Personalize This Table"
+
+msgid "Pie Chart"
+msgstr "Pie Chart"
+
+msgid "Plural"
+msgstr "Plural"
+
+msgid "Port"
+msgstr "Port"
+
+msgid "Positive Number"
+msgstr "Positive Number"
+
+msgid "Preferences"
+msgstr "Preferences"
+
+msgid "Presentation Scripts"
+msgstr "Presentation Scripts"
+
+msgid "Preview"
+msgstr "Preview"
+
+msgid "Profile"
+msgstr "Profile"
+
+msgid "Quarter"
+msgstr "Quarter"
+
+msgid "Query"
+msgstr "Query"
+
+msgid "Recovery Code"
+msgstr "Recovery Code"
+
+msgid "Recovery tokens copied to clipboard"
+msgstr "Recovery tokens copied to clipboard"
+
+msgid "Red"
+msgstr "Red"
+
+msgid "Reference"
+msgstr "Reference"
+
+msgid "Reference Template"
+msgstr "Reference Template"
+
+msgid "Regex"
+msgstr "Regex"
+
+msgid "Region"
+msgstr "Region"
+
+msgid "Relation Labels"
+msgstr "Relation Labels"
+
+msgid "Relation Template"
+msgstr "Relation Template"
+
+msgid "Relations"
+msgstr "Relations"
+
+msgid "Relations Order"
+msgstr "Relations Order"
+
+msgid "Relations To Clone Along"
+msgstr "Relations To Clone Along"
+
+msgid "Relationship Settings"
+msgstr "Relationship Settings"
+
+msgid "Remember Me"
+msgstr "Remember Me"
+
+msgid "Remove"
+msgstr "Remove"
+
+msgid "Remove Nested Filter"
+msgstr "Remove Nested Filter"
+
+msgid "Request ID"
+msgstr "Request ID"
+
+msgid "Request Method"
+msgstr "Request Method"
+
+msgid "Required"
+msgstr "Required"
+
+msgid "Reset"
+msgstr "Reset"
+
+msgid "Reset 2FA Recovery Tokens"
+msgstr "Reset 2FA Recovery Tokens"
+
+msgid "Reset Password"
+msgstr "Reset Password"
+
+msgid "Reset Recovery Tokens"
+msgstr "Reset Recovery Tokens"
+
+msgid "Reset User Password"
+msgstr "Reset User Password"
+
+msgid "Resetting Password"
+msgstr "Resetting Password"
+
+msgid "Response"
+msgstr "Response"
+
+msgid "Restore"
+msgstr "Restore"
+
+msgid "Reveal {label}"
+msgstr "Reveal {label}"
+
+msgid "Revealing {label}"
+msgstr "Revealing {label}"
+
+msgid "Rich Text"
+msgstr "Rich Text"
+
+msgid "Role"
+msgstr "Role"
+
+msgid "Role Permission"
+msgstr "Role Permission"
+
+msgid "Role Permissions"
+msgstr "Role Permissions"
+
+msgid "Roles"
+msgstr "Roles"
+
+msgid "Roles and Permissions"
+msgstr "Roles and Permissions"
+
+msgid "Route ID"
+msgstr "Route ID"
+
+msgid "Save"
+msgstr "Save"
+
+msgid "Save {0}"
+msgstr "Save {0}"
+
+msgid "Save {singular}"
+msgstr "Save {singular}"
+
+msgid "Save Current Filters"
+msgstr "Save Current Filters"
+
+msgid "Saving"
+msgstr "Saving"
+
+msgid "Saving {0}"
+msgstr "Saving {0}"
+
+msgid "Saving {singular}"
+msgstr "Saving {singular}"
+
+msgid "Scheduler"
+msgstr "Scheduler"
+
+msgid "Schedulers"
+msgstr "Schedulers"
+
+msgid "Script"
+msgstr "Script"
+
+msgid "Search"
+msgstr "Search"
+
+msgid "Secret"
+msgstr "Secret"
+
+msgid "Secret Access Key"
+msgstr "Secret Access Key"
+
+msgid "Secrets"
+msgstr "Secrets"
+
+msgid "Select Node Type"
+msgstr "Select Node Type"
+
+msgid "Select Trigger"
+msgstr "Select Trigger"
+
+msgid "Select Workflow"
+msgstr "Select Workflow"
+
+msgid "Selection"
+msgstr "Selection"
+
+msgid "Selection List"
+msgstr "Selection List"
+
+msgid "Selections Settings"
+msgstr "Selections Settings"
+
+msgid "Send Mail"
+msgstr "Send Mail"
+
+msgid "Send Message"
+msgstr "Send Message"
+
+msgid "Send SMS"
+msgstr "Send SMS"
+
+msgid "Sender Email"
+msgstr "Sender Email"
+
+msgid "Sender Name"
+msgstr "Sender Name"
+
+msgid "Sensitive Field"
+msgstr "Sensitive Field"
+
+msgid "Sensitive Fields"
+msgstr "Sensitive Fields"
+
+msgid "Setting Up Account"
+msgstr "Setting Up Account"
+
+msgid "Setting Up Credentials"
+msgstr "Setting Up Credentials"
+
+msgid "Settings"
+msgstr "Settings"
+
+msgid "Setup"
+msgstr "Setup"
+
+msgid "Setup Account"
+msgstr "Setup Account"
+
+msgid "Setup Credentials"
+msgstr "Setup Credentials"
+
+msgid "Share"
+msgstr "Share"
+
+msgid "Sharing"
+msgstr "Sharing"
+
+msgid "Show Soft Deleted Items And The Restore Button"
+msgstr "Show Soft Deleted Items And The Restore Button"
+
+msgid "Show Up In Roles And Permissions"
+msgstr "Show Up In Roles And Permissions"
+
+msgid "Showing <0/> entries of <1>{0}</1> results"
+msgstr "Showing <0/> entries of <1>{0}</1> results"
+
+msgid "Sign In"
+msgstr "Sign In"
+
+msgid "Signing In"
+msgstr "Signing In"
+
+msgid "Singular"
+msgstr "Singular"
+
+msgid "Site"
+msgstr "Site"
+
+msgid "Site Settings"
+msgstr "Site Settings"
+
+msgid "Slug"
+msgstr "Slug"
+
+msgid "Small Logo"
+msgstr "Small Logo"
+
+msgid "Soft Delete"
+msgstr "Soft Delete"
+
+msgid "Soft Delete Settings"
+msgstr "Soft Delete Settings"
+
+msgid "Stacked"
+msgstr "Stacked"
+
+msgid "Star us on Github"
+msgstr "Star us on Github"
+
+msgid "Start of year"
+msgstr "Start of year"
+
+msgid "State Script"
+msgstr "State Script"
+
+msgid "Storage Key"
+msgstr "Storage Key"
+
+msgid "Strategy"
+msgstr "Strategy"
+
+msgid "String"
+msgstr "String"
+
+msgid "Subject"
+msgstr "Subject"
+
+msgid "Submit"
+msgstr "Submit"
+
+msgid "Submitting"
+msgstr "Submitting"
+
+msgid "Summary Card"
+msgstr "Summary Card"
+
+msgid "SVG"
+msgstr "SVG"
+
+msgid "System"
+msgstr "System"
+
+msgid "System Info"
+msgstr "System Info"
+
+msgid "System Information"
+msgstr "System Information"
+
+msgid "System Settings"
+msgstr "System Settings"
+
+msgid "Table"
+msgstr "Table"
+
+msgid "Table Columns Settings"
+msgstr "Table Columns Settings"
+
+msgid "Table Fields Order"
+msgstr "Table Fields Order"
+
+msgid "Table Personalization"
+msgstr "Table Personalization"
+
+msgid "Table Personalizations"
+msgstr "Table Personalizations"
+
+msgid "Table View"
+msgstr "Table View"
+
+msgid "Table Views"
+msgstr "Table Views"
+
+msgid "Test Widget Script"
+msgstr "Test Widget Script"
+
+msgid "Text"
+msgstr "Text"
+
+msgid "Textarea"
+msgstr "Textarea"
+
+msgid "Theme"
+msgstr "Theme"
+
+msgid "Theme Settings"
+msgstr "Theme Settings"
+
+msgid "This {0} Has No Form"
+msgstr "This {0} Has No Form"
+
+msgid "This application has no active entities. Kindly add new entities through your preferred database editor then restart this application to proceed."
+msgstr "This application has no active entities. Kindly add new entities through your preferred database editor then restart this application to proceed."
+
+msgid "This entity has no fields"
+msgstr "This entity has no fields"
+
+msgid "This entity has no fields. Kindly add fields from your prefer database tool to manage them here"
+msgstr "This entity has no fields. Kindly add fields from your prefer database tool to manage them here"
+
+msgid "This entity has no relations"
+msgstr "This entity has no relations"
+
+msgid "This flow should be queued and executed asynchronously (recommended for long running flows, requires Redis)"
+msgstr "This flow should be queued and executed asynchronously (recommended for long running flows, requires Redis)"
+
+msgid "This trigger has no workflow attached"
+msgstr "This trigger has no workflow attached"
+
+msgid "This workflow has no trigger attached"
+msgstr "This workflow has no trigger attached"
+
+msgid "Time Changed"
+msgstr "Time Changed"
+
+msgid "Title"
+msgstr "Title"
+
+msgid "To"
+msgstr "To"
+
+msgid "Toggle Connection URL"
+msgstr "Toggle Connection URL"
+
+msgid "Token"
+msgstr "Token"
+
+msgid "Token Validity Duration In Days"
+msgstr "Token Validity Duration In Days"
+
+msgid "Trigger"
+msgstr "Trigger"
+
+msgid "Try Out 25+ Pro Features"
+msgstr "Try Out 25+ Pro Features"
+
+msgid "Type"
+msgstr "Type"
+
+msgid "Update"
+msgstr "Update"
+
+msgid "Update {singular}"
+msgstr "Update {singular}"
+
+msgid "Update Columns Settings"
+msgstr "Update Columns Settings"
+
+msgid "Update Fields Order"
+msgstr "Update Fields Order"
+
+msgid "Updated At"
+msgstr "Updated At"
+
+msgid "Updating {singular}"
+msgstr "Updating {singular}"
+
+msgid "Uppercase"
+msgstr "Uppercase"
+
+msgid "URL"
+msgstr "URL"
+
+msgid "Use Colors"
+msgstr "Use Colors"
+
+msgid "Use Icon"
+msgstr "Use Icon"
+
+msgid "Use SSL"
+msgstr "Use SSL"
+
+msgid "Use SVG"
+msgstr "Use SVG"
+
+msgid "User"
+msgstr "User"
+
+msgid "Username"
+msgstr "Username"
+
+msgid "Users"
+msgstr "Users"
+
+msgid "Users Link To Database"
+msgstr "Users Link To Database"
+
+msgid "Users to Database Link"
+msgstr "Users to Database Link"
+
+msgid "Validations"
+msgstr "Validations"
+
+msgid "Value"
+msgstr "Value"
+
+msgid "Variables"
+msgstr "Variables"
+
+msgid "Verifing"
+msgstr "Verifing"
+
+msgid "Verify"
+msgstr "Verify"
+
+msgid "Vertical"
+msgstr "Vertical"
+
+msgid "View"
+msgstr "View"
+
+msgid "View Full Details"
+msgstr "View Full Details"
+
+msgid "Violet"
+msgstr "Violet"
+
+msgid "Visit our website"
+msgstr "Visit our website"
+
+msgid "Webhook"
+msgstr "Webhook"
+
+msgid "Webhooks"
+msgstr "Webhooks"
+
+msgid "Week"
+msgstr "Week"
+
+msgid "Widget Script"
+msgstr "Widget Script"
+
+msgid "Width"
+msgstr "Width"
+
+msgid "Workflow"
+msgstr "Workflow"
+
+msgid "Workflows"
+msgstr "Workflows"
+
+msgid "X Label"
+msgstr "X Label"
+
+msgid "Y Label"
+msgstr "Y Label"
+
+msgid "Year"
+msgstr "Year"
+
+msgid "Yes"
+msgstr "Yes"
+
+msgid "Your Users Table"
+msgstr "Your Users Table"

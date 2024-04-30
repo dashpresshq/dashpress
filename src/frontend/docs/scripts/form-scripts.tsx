@@ -1,10 +1,10 @@
 import { RenderCode } from "frontend/design-system/components/RenderCode";
 import { Spacer } from "frontend/design-system/primitives/Spacer";
-import { DocumentationRoot, IDocumentationRootProps } from "../_base";
+import { DocumentationRoot } from "../_base";
 
-export function FormScriptDocumentation(props: IDocumentationRootProps) {
+export function FormScriptDocumentation() {
   return (
-    <DocumentationRoot {...props}>
+    <DocumentationRoot>
       <p>
         Forms scripts enable you to implement the complex form logic your
         business requirements require that the UI cannot achieve.
@@ -31,21 +31,7 @@ export function FormScriptDocumentation(props: IDocumentationRootProps) {
             <b>
               <code>$.auth</code>
             </b>
-            : The current user object with the following fields
-            <ol>
-              <li>
-                <code>$.auth.role</code>
-              </li>
-              <li>
-                <code>$.auth.name</code>
-              </li>
-              <li>
-                <code>$.auth.username</code>
-              </li>
-              <li>
-                <code>$.auth.systemProfile</code>
-              </li>
-            </ol>
+            : The current user details
           </li>
         </ul>
       </p>
@@ -54,10 +40,10 @@ export function FormScriptDocumentation(props: IDocumentationRootProps) {
         can&apos;t make Promises or make network calls.{" "}
       </p>
       <p>
-        We have two tabs where which do different things so let&apos;s start
+        We have three tabs where which do different things so let&apos;s start
         with the first
       </p>
-      <h4>1. Field State</h4>
+      <h3>1. Field State</h3>
       <p>
         This allows you to hide or disable your form fields. Let&apos;s dive
         straight into examples
@@ -132,7 +118,7 @@ return {
         the database field name which is <code>accountBalance</code> any other
         label will not work.{" "}
       </p>
-      <h4>2. Before Submit</h4>
+      <h3>2. Before Submit</h3>
       <p>This tab enables you to do two different things.</p>
       <h5>1. Run custom validation</h5>
       <p>
@@ -199,7 +185,7 @@ Will add "createdById" to the form values that is to be submitted
 */
 return {
   ...$.formValues,
-  createdById: JSON.parse($.auth.systemProfile).userId
+  createdById: $.auth.userId
 }
 
 /*
@@ -215,9 +201,7 @@ You can compute fields to save
 */
 return {
   ...$.formValues,
-  slug: $.formValues.title
-    .replaceAll(" ", "-")
-    .toLowerCase()
+  slug: $.formValues.title?.replaceAll(" ", "-").toLowerCase()
 }`}
       />
       <Spacer />
@@ -237,9 +221,27 @@ if($.formValues.age > 23 && ($.formValues.country != "Belgium" || $.formValues.h
 
 return {
   ...$.formValues,
-  createdById: JSON.parse($.auth.systemProfile).userId
+  createdById: $.auth.userId
 }`}
       />
+
+      <h3>3. Initial Values</h3>
+      <p>
+        This tab simply allows you to set the initial values for the create form
+      </p>
+      <RenderCode
+        input={`/**
+ * Will the follow values as intial values on the create form
+ */
+
+return {
+  price: 1000,
+  status: "new",
+  country: "US",
+  isApproved: true
+}`}
+      />
+      <p>You will not have access to any variables here, so no `$.anything`</p>
     </DocumentationRoot>
   );
 }

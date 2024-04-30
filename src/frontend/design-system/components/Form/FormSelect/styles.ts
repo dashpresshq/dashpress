@@ -27,6 +27,11 @@ export const SelectStyles = css`
     }
   }
 
+  .react-select__input-container {
+    color: ${USE_ROOT_COLOR("main-text")};
+    font-size: 0.8125rem;
+  }
+
   .react-select__control--is-disabled {
     background-color: ${USE_ROOT_COLOR("soft-color")};
     opacity: 1;
@@ -52,6 +57,11 @@ export const SelectStyles = css`
 
   .react-select__option--is-selected {
     background: ${USE_ROOT_COLOR("primary-color")};
+  }
+
+  .react-select__option--is-disabled {
+    color: ${USE_ROOT_COLOR("muted-text")};
+    cursor: not-allowed;
   }
 
   .react-select__multi-value {

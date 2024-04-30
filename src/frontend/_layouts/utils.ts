@@ -1,8 +1,9 @@
 import { DataStateKeys } from "frontend/lib/data/types";
-import { IThemeSettings } from "./types";
+import { AppConfigurationValueType } from "shared/configurations/constants";
+import { ColorSchemes } from "shared/types/ui";
 
 export const getThemePrimaryColor = (
-  theme: "light" | "dark",
-  themeColor: DataStateKeys<IThemeSettings>
+  theme: ColorSchemes,
+  themeColor: DataStateKeys<AppConfigurationValueType<"theme_color">>
 ) =>
   theme === "dark" ? themeColor.data?.primaryDark : themeColor.data?.primary;

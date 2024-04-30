@@ -1,12 +1,9 @@
 import { IAppliedSchemaFormConfig } from "shared/form-schemas/types";
 
-export interface IStorageIntegrationsImplemention<T, K> {
+export interface IStorageIntegrationsImplemention<T> {
   title: string;
-  credentialsGroupKey: string;
-  packages: string[];
-  uploadConfigurationSchema: IAppliedSchemaFormConfig<K>;
   integrationConfigurationSchema: IAppliedSchemaFormConfig<T>;
-  store: (integrationConfig: T, uploadConfig: T, file: File) => Promise<string>;
+  store: (integrationConfig: T, file: File) => Promise<string>;
 }
 
 export const FOR_CODE_COV = 1;

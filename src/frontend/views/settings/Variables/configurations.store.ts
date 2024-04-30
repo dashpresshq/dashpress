@@ -1,17 +1,18 @@
 import { usePasswordStore } from "frontend/views/integrations/password.store";
 import { useEffect } from "react";
-import { useMutation, useQueryClient } from "react-query";
+import { useQueryClient } from "@tanstack/react-query";
 import { IntegrationsConfigurationGroup } from "shared/types/integrations";
-import { INTEGRATIONS_GROUP_CONFIG } from "shared/config-bag/integrations";
 import { CRUD_CONFIG_NOT_FOUND } from "frontend/lib/crud-config";
-import { makeActionRequest } from "frontend/lib/data/makeRequest";
+import { ApiRequest } from "frontend/lib/data/makeRequest";
 import { reduceStringToNumber } from "shared/lib/strings";
 import { useWaitForResponseMutationOptions } from "frontend/lib/data/useMutate/useWaitForResponseMutationOptions";
 import { MutationHelpers } from "frontend/lib/data/useMutate/mutation-helpers";
 import { useApiMutateOptimisticOptions } from "frontend/lib/data/useMutate/useApiMutateOptimisticOptions";
 import { useApi } from "frontend/lib/data/useApi";
 import { getQueryCachekey } from "frontend/lib/data/constants/getQueryCacheKey";
-import { IKeyValue } from "./types";
+import { IKeyValue } from "shared/types/options";
+import { objectToQueryParams } from "frontend/lib/routing/queryObjectToQueryString";
+import { INTEGRATIONS_GROUP_CRUD_CONFIG } from "./constants";
 
 export const INTEGRATIONS_GROUP_ENDPOINT = (
   group: IntegrationsConfigurationGroup
@@ -24,24 +25,18 @@ export function useIntegrationConfigurationUpsertationMutation(
 ) {
   const rootPassword = usePasswordStore((state) => state.password);
 
-  const apiMutateOptions = useWaitForResponseMutationOptions<
-    Record<string, string>
-  >({
+  return useWaitForResponseMutationOptions<{ key: string; value: string }>({
+    mutationFn: async (data) =>
+      await ApiRequest.PUT(`/api/integrations/${group}/${data.key}`, {
+        value: data.value,
+        _password: rootPassword,
+      }),
     endpoints: rootPassword
       ? [REVEAL_CREDENTIALS_ENDPOINT, INTEGRATIONS_GROUP_ENDPOINT(group)]
       : [INTEGRATIONS_GROUP_ENDPOINT(group)],
     successMessage:
-      INTEGRATIONS_GROUP_CONFIG[group].crudConfig.MUTATION_LANG.SAVED,
+      INTEGRATIONS_GROUP_CRUD_CONFIG[group].crudConfig.MUTATION_LANG.SAVED,
   });
-
-  return useMutation(
-    async (data: { key: string; value: string }) =>
-      await makeActionRequest("PUT", `/api/integrations/${group}/${data.key}`, {
-        value: data.value,
-        _password: rootPassword,
-      }),
-    apiMutateOptions
-  );
 }
 
 export function useIntegrationConfigurationDeletionMutation(
@@ -49,21 +44,19 @@ export function useIntegrationConfigurationDeletionMutation(
 ) {
   const rootPassword = usePasswordStore((state) => state.password);
 
-  const apiMutateOptions = useApiMutateOptimisticOptions<IKeyValue[], string>({
+  return useApiMutateOptimisticOptions<IKeyValue[], string>({
+    mutationFn: async (key) =>
+      await ApiRequest.DELETE(
+        `/api/integrations/${group}/${key}${objectToQueryParams({
+          _password: rootPassword,
+        })}`
+      ),
     dataQueryPath: INTEGRATIONS_GROUP_ENDPOINT(group),
     otherEndpoints: rootPassword ? [REVEAL_CREDENTIALS_ENDPOINT] : [],
     successMessage:
-      INTEGRATIONS_GROUP_CONFIG[group].crudConfig.MUTATION_LANG.DELETE,
+      INTEGRATIONS_GROUP_CRUD_CONFIG[group].crudConfig.MUTATION_LANG.DELETE,
     onMutate: MutationHelpers.deleteByKey("key"),
   });
-
-  return useMutation(
-    async (key: string) =>
-      await makeActionRequest("DELETE", `/api/integrations/${group}/${key}`, {
-        _password: rootPassword,
-      }),
-    apiMutateOptions
-  );
 }
 
 export const useRevealedCredentialsList = (

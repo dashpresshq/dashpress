@@ -1,14 +1,14 @@
 import { createGlobalStyle } from "styled-components";
+import { typescriptSafeObjectDotEntries } from "shared/lib/objects";
 import { LIGHT_MODE } from "../theme/modes";
 import { GLOBAL_NORMALIZE_CSS } from "./normalize";
 import { GLOBAL_TOOLTIP_CSS } from "./tooltip";
-import { GLOBAL_CONFIRM_ALERT_CSS } from "./confirm-alert";
 import { GLOBAL_OFF_CANVAS_CSS } from "./off-canvas";
 import { colorModeToRootColors } from "../theme/generate";
 import { USE_ROOT_COLOR, prefixVarNameSpace } from "../theme/root";
 import { DEFAULT_PRIMARY_COLOR } from "../theme/constants";
 
-const rootColorString = Object.entries(
+const rootColorString = typescriptSafeObjectDotEntries(
   colorModeToRootColors(DEFAULT_PRIMARY_COLOR, LIGHT_MODE)
 )
   .map(([key, value]) => `${prefixVarNameSpace(key)}: ${value}`)
@@ -24,8 +24,6 @@ export const GlobalStyles = createGlobalStyle`
 ${GLOBAL_NORMALIZE_CSS}
 
 ${GLOBAL_TOOLTIP_CSS}
-
-${GLOBAL_CONFIRM_ALERT_CSS}
 
 ${GLOBAL_OFF_CANVAS_CSS}
 
@@ -138,4 +136,8 @@ svg {
   transition: opacity .15s linear;
 }
 
+.gaussian-blur {
+  filter: url(#gaussian-blur);
+  filter: blur(2px);
+}
 `;

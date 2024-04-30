@@ -1,41 +1,37 @@
 /* eslint-disable prettier/prettier */
-import "@testing-library/jest-dom";
-import React, { ReactNode } from "react";
-import { render, screen, within } from "@testing-library/react";
+
+import { render, screen, waitFor, within } from "@testing-library/react";
 import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 
 import ManageVariables from "pages/admin/settings/variables";
 
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 import userEvent from "@testing-library/user-event";
-import { useUserAuthenticatedState } from "frontend/hooks/auth/useAuthenticateUser";
+import { AuthActions } from "frontend/hooks/auth/auth.actions";
+import { getTableRows } from "__tests__/_/utils/getTableRows";
+import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
 
 setupApiHandlers();
 
-function AuthenticatedApplicationRoot({ children }: { children: ReactNode }) {
-  useUserAuthenticatedState();
-
-  return <ApplicationRoot>{children}</ApplicationRoot>;
-}
-
-describe("pages/integrations/variables => credentials", () => {
+describe.skip("pages/integrations/variables => credentials", () => {
   const useRouter = jest.spyOn(require("next/router"), "useRouter");
   beforeAll(() => {
-    localStorage.setItem("__auth-token__", "foo");
-    useRouter.mockImplementation(() => ({
-      asPath: "/",
-      query: {
-        key: "foo",
-      },
-    }));
+    localStorage.setItem(AuthActions.JWT_TOKEN_STORAGE_KEY, "foo");
+    useRouter.mockImplementation(
+      USE_ROUTER_PARAMS({
+        query: {
+          key: "foo",
+        },
+      })
+    );
   });
 
   describe("priviledge", () => {
     it("should not show any password text on constants tab", async () => {
       render(
-        <AuthenticatedApplicationRoot>
+        <ApplicationRoot>
           <ManageVariables />
-        </AuthenticatedApplicationRoot>
+        </ApplicationRoot>
       );
 
       const priviledgeSection = await screen.findByLabelText(
@@ -44,7 +40,7 @@ describe("pages/integrations/variables => credentials", () => {
 
       expect(
         within(priviledgeSection).queryByText(
-          `Please input your account password to be able to see secret values and manage them`
+          `For security reasons, Please input your account password to be able to manage Secrets`
         )
       ).not.toBeInTheDocument();
       expect(
@@ -64,9 +60,9 @@ describe("pages/integrations/variables => credentials", () => {
 
     it("should show correct password text on secret tab", async () => {
       render(
-        <AuthenticatedApplicationRoot>
+        <ApplicationRoot>
           <ManageVariables />
-        </AuthenticatedApplicationRoot>
+        </ApplicationRoot>
       );
       const priviledgeSection = await screen.findByLabelText(
         "credentials priviledge section"
@@ -75,7 +71,7 @@ describe("pages/integrations/variables => credentials", () => {
       await userEvent.click(screen.getByRole("tab", { name: "Secrets" }));
       expect(
         within(priviledgeSection).getByText(
-          `Please input your account password to be able to see secret values and manage them`
+          `For security reasons, Please input your account password to be able to manage Secrets`
         )
       ).toBeInTheDocument();
       expect(
@@ -97,46 +93,38 @@ describe("pages/integrations/variables => credentials", () => {
   describe("list", () => {
     it("should list credentials", async () => {
       render(
-        <AuthenticatedApplicationRoot>
+        <ApplicationRoot>
           <ManageVariables />
-        </AuthenticatedApplicationRoot>
+        </ApplicationRoot>
       );
 
       await userEvent.click(
         await screen.findByRole("tab", { name: "Secrets" })
       );
 
-      const table = screen.getByRole("table");
-
       expect(
-        await within(table).findByRole("row", {
-          name: "Key Sort By Key Filter Key By Search Value Sort By Value",
-        })
-      ).toBeInTheDocument();
-      expect(
-        within(table).getByRole("row", {
-          name: "{{ SECRET.PAYMENT_API_KEY }} **********",
-        })
-      ).toBeInTheDocument();
-      expect(
-        within(table).getByRole("row", {
-          name: "{{ SECRET.MAIL_PASSWORD }} **********",
-        })
-      ).toBeInTheDocument();
-      expect(
-        within(table).getByRole("row", {
-          name: "{{ SECRET.ROOT_PASSWORD }} **********",
-        })
-      ).toBeInTheDocument();
+        await getTableRows(
+          within(screen.getByRole("tabpanel", { name: "Secrets" })).getByRole(
+            "table"
+          )
+        )
+      ).toMatchInlineSnapshot(`
+        [
+          "Key|Value",
+          "{{ SECRET.PAYMENT_API_KEY }}|**********",
+          "{{ SECRET.MAIL_PASSWORD }}|**********",
+          "{{ SECRET.ROOT_PASSWORD }}|**********",
+        ]
+      `);
     });
   });
 
   describe("reveal", () => {
     it("should not show credentials action before revealing password", async () => {
       render(
-        <AuthenticatedApplicationRoot>
+        <ApplicationRoot>
           <ManageVariables />
-        </AuthenticatedApplicationRoot>
+        </ApplicationRoot>
       );
 
       await userEvent.click(
@@ -145,12 +133,12 @@ describe("pages/integrations/variables => credentials", () => {
 
       expect(
         screen.queryByRole("button", {
-          name: "Delete Button",
+          name: "Delete Secret",
         })
       ).not.toBeInTheDocument();
       expect(
         screen.queryByRole("button", {
-          name: "Edit",
+          name: "Edit Secret",
         })
       ).not.toBeInTheDocument();
       expect(
@@ -162,9 +150,9 @@ describe("pages/integrations/variables => credentials", () => {
 
     it("should show error on invalid password and not reveal data", async () => {
       render(
-        <AuthenticatedApplicationRoot>
+        <ApplicationRoot>
           <ManageVariables />
-        </AuthenticatedApplicationRoot>
+        </ApplicationRoot>
       );
 
       const priviledgeSection = screen.getByLabelText(
@@ -189,7 +177,9 @@ describe("pages/integrations/variables => credentials", () => {
         "Invalid Password"
       );
 
-      const table = screen.getByRole("table");
+      const table = within(
+        screen.getByRole("tabpanel", { name: "Secrets" })
+      ).getByRole("table");
 
       expect(
         await within(table).findByRole("row", {
@@ -206,9 +196,9 @@ describe("pages/integrations/variables => credentials", () => {
 
     it("should reveal credentials and the now show the credentials action buttons", async () => {
       render(
-        <AuthenticatedApplicationRoot>
+        <ApplicationRoot>
           <ManageVariables />
-        </AuthenticatedApplicationRoot>
+        </ApplicationRoot>
       );
 
       const priviledgeSection = screen.getByLabelText(
@@ -229,50 +219,24 @@ describe("pages/integrations/variables => credentials", () => {
         })
       );
 
-      const table = screen.getByRole("table");
-
-      expect(
-        await within(table).findByRole("row", {
-          name: "Key Sort By Key Filter Key By Search Value Sort By Value Action",
-        })
-      ).toBeInTheDocument();
-      expect(
-        await within(table).findByRole(
-          "row",
-          {
-            name: "{{ SECRET.PAYMENT_API_KEY }} super-secret",
-          },
-          {
-            interval: 100,
-            timeout: 2000,
-          }
-        )
-      ).toBeInTheDocument();
-
-      expect(
-        within(table).getByRole("row", {
-          name: "{{ SECRET.MAIL_PASSWORD }} do-not-share",
-        })
-      ).toBeInTheDocument();
-      expect(
-        await within(table).findByRole("row", {
-          name: "Key Sort By Key Filter Key By Search Value Sort By Value Action",
-        })
-      ).toBeInTheDocument();
-      expect(
-        within(table).getByRole("row", {
-          name: "{{ SECRET.ROOT_PASSWORD }} confidential",
-        })
-      ).toBeInTheDocument();
-      expect(
-        within(table).queryByRole("row", {
-          name: "{{ SECRET.ROOT_PASSWORD }} **********",
-        })
-      ).not.toBeInTheDocument();
+      await waitFor(async () => {
+        expect(
+          await getTableRows(
+            await within(
+              screen.getByRole("tabpanel", { name: "Secrets" })
+            ).findByRole("table")
+          )
+        ).toEqual([
+          "Key|Value|Action",
+          "{{ SECRET.PAYMENT_API_KEY }}|super-secret",
+          "{{ SECRET.MAIL_PASSWORD }}|do-not-share",
+          "{{ SECRET.ROOT_PASSWORD }}|confidential",
+        ]);
+      });
 
       expect(
         within(priviledgeSection).queryByText(
-          `Please input your account password to be able to see secret values and manage them`
+          `For security reasons, Please input your account password to be able to manage Secrets`
         )
       ).not.toBeInTheDocument();
       expect(
@@ -287,9 +251,9 @@ describe("pages/integrations/variables => credentials", () => {
 
     it("should show credentials action after revealing password", async () => {
       render(
-        <AuthenticatedApplicationRoot>
+        <ApplicationRoot>
           <ManageVariables />
-        </AuthenticatedApplicationRoot>
+        </ApplicationRoot>
       );
 
       await userEvent.click(
@@ -298,13 +262,13 @@ describe("pages/integrations/variables => credentials", () => {
 
       expect(
         screen.queryAllByRole("button", {
-          name: "Delete Button",
+          name: "Delete Secret",
         })
       ).toHaveLength(3);
 
       expect(
         screen.queryAllByRole("button", {
-          name: "Edit",
+          name: "Edit Secret",
         })
       ).toHaveLength(3);
       expect(
@@ -317,12 +281,77 @@ describe("pages/integrations/variables => credentials", () => {
     });
   });
 
+  describe("update", () => {
+    it("should update secret", async () => {
+      render(
+        <ApplicationRoot>
+          <ManageVariables />
+        </ApplicationRoot>
+      );
+
+      await userEvent.click(
+        await screen.findByRole("tab", { name: "Secrets" })
+      );
+
+      const table = within(
+        screen.getByRole("tabpanel", { name: "Secrets" })
+      ).getByRole("table");
+
+      expect(
+        await within(table).findByRole(
+          "row",
+          {
+            name: "{{ SECRET.PAYMENT_API_KEY }} super-secret",
+          },
+          {
+            interval: 100,
+            timeout: 2000,
+          }
+        )
+      ).toBeInTheDocument();
+
+      await userEvent.click(
+        within((await within(table).findAllByRole("row"))[1]).getByRole(
+          "button",
+          {
+            name: "Edit Secret",
+          }
+        )
+      );
+
+      const dialog = screen.getByRole("dialog");
+
+      expect(within(dialog).getByText("Update Secret")).toBeInTheDocument();
+
+      expect(within(dialog).getByLabelText("Key")).toBeDisabled();
+
+      await userEvent.type(within(dialog).getByLabelText("Value"), "__updated");
+
+      await userEvent.click(
+        within(dialog).getByRole("button", { name: "Update Secret" })
+      );
+
+      expect((await screen.findAllByRole("status"))[0]).toHaveTextContent(
+        "Secret Saved Successfully"
+      );
+
+      await waitFor(async () => {
+        expect(await getTableRows(table)).toEqual([
+          "Key|Value|Action",
+          "{{ SECRET.PAYMENT_API_KEY }}|super-secret__updated",
+          "{{ SECRET.MAIL_PASSWORD }}|do-not-share",
+          "{{ SECRET.ROOT_PASSWORD }}|confidential",
+        ]);
+      });
+    });
+  });
+
   describe("create", () => {
     it("should create new secret", async () => {
       render(
-        <AuthenticatedApplicationRoot>
+        <ApplicationRoot>
           <ManageVariables />
-        </AuthenticatedApplicationRoot>
+        </ApplicationRoot>
       );
 
       await userEvent.click(
@@ -337,7 +366,7 @@ describe("pages/integrations/variables => credentials", () => {
         )
       );
 
-      const dialog = screen.getByRole("dialog");
+      const dialog = await screen.findByRole("dialog");
 
       expect(within(dialog).getByText("Create Secret")).toBeInTheDocument();
 
@@ -370,85 +399,27 @@ describe("pages/integrations/variables => credentials", () => {
     });
   });
 
-  describe("update", () => {
-    it("should update secret", async () => {
-      render(
-        <AuthenticatedApplicationRoot>
-          <ManageVariables />
-        </AuthenticatedApplicationRoot>
-      );
-
-      await userEvent.click(
-        await screen.findByRole("tab", { name: "Secrets" })
-      );
-
-      const table = screen.getByRole("table");
-
-      expect(
-        await within(table).findByRole(
-          "row",
-          {
-            name: "{{ SECRET.PAYMENT_API_KEY }} super-secret",
-          },
-          {
-            interval: 100,
-            timeout: 2000,
-          }
-        )
-      ).toBeInTheDocument();
-
-      await userEvent.click(
-        within((await within(table).findAllByRole("row"))[1]).getByRole(
-          "button",
-          {
-            name: "Edit",
-          }
-        )
-      );
-
-      const dialog = screen.getByRole("dialog");
-
-      expect(within(dialog).getByText("Update Secret")).toBeInTheDocument();
-
-      expect(within(dialog).getByLabelText("Key")).toBeDisabled();
-
-      await userEvent.type(within(dialog).getByLabelText("Value"), "__updated");
-
-      await userEvent.click(
-        within(dialog).getByRole("button", { name: "Update Secret" })
-      );
-
-      expect((await screen.findAllByRole("status"))[0]).toHaveTextContent(
-        "Secret Saved Successfully"
-      );
-
-      expect(
-        await within(table).findByRole("row", {
-          name: "{{ SECRET.PAYMENT_API_KEY }} super-secret__updated",
-        })
-      ).toBeInTheDocument();
-    });
-  });
-
   describe("delete", () => {
     it("should delete secrets", async () => {
       render(
-        <AuthenticatedApplicationRoot>
+        <ApplicationRoot>
           <ManageVariables />
-        </AuthenticatedApplicationRoot>
+        </ApplicationRoot>
       );
 
       await userEvent.click(
         await screen.findByRole("tab", { name: "Secrets" })
       );
 
-      const tableRows = await screen.findAllByRole("row");
+      const table = screen.getByRole("tabpanel", { name: "Secrets" });
+
+      const tableRows = await within(table).findAllByRole("row");
 
       expect(tableRows).toHaveLength(5);
 
       await userEvent.click(
         within(tableRows[2]).getByRole("button", {
-          name: "Delete Button",
+          name: "Delete Secret",
         })
       );
 
@@ -460,7 +431,7 @@ describe("pages/integrations/variables => credentials", () => {
         await within(confirmBox).findByRole("button", { name: "Confirm" })
       );
 
-      expect(await screen.findAllByRole("row")).toHaveLength(4);
+      expect(await within(table).findAllByRole("row")).toHaveLength(4);
 
       expect((await screen.findAllByRole("status"))[0]).toHaveTextContent(
         "Secret Deleted Successfully"

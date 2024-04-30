@@ -1,12 +1,12 @@
-import { USER_PERMISSIONS } from "shared/constants/user";
+import { UserPermissions } from "shared/constants/user";
 import { userFriendlyCase } from "shared/lib/strings/friendly-case";
 import { InfoAlert } from "frontend/design-system/components/Alert";
 import { Spacer } from "frontend/design-system/primitives/Spacer";
-import { DocumentationRoot, IDocumentationRootProps } from "./_base";
+import { DocumentationRoot } from "./_base";
 
-export function RolesDocumentation(props: IDocumentationRootProps) {
+export function RolesDocumentation() {
   return (
-    <DocumentationRoot {...props}>
+    <DocumentationRoot>
       <p>
         DashPress has two default roles which are not editable or deletable and
         they are <code>Creator</code> and <code>Viewer</code>.
@@ -39,7 +39,7 @@ export function RolesDocumentation(props: IDocumentationRootProps) {
       <h4>Permissions Breakdown </h4>
       <p>
         <b>
-          <code>{userFriendlyCase(USER_PERMISSIONS.CAN_CONFIGURE_APP)}</code>
+          <code>{userFriendlyCase(UserPermissions.CAN_CONFIGURE_APP)}</code>
         </b>
         : enables users to configure the app i.e. setting the configurations,
         look and feel of the application. This is the role you will want to
@@ -49,7 +49,7 @@ export function RolesDocumentation(props: IDocumentationRootProps) {
       <p>
         <b>
           <code>
-            {userFriendlyCase(USER_PERMISSIONS.CAN_MANAGE_ALL_ENTITIES)}
+            {userFriendlyCase(UserPermissions.CAN_MANAGE_ALL_ENTITIES)}
           </code>
         </b>
         : enables users access to all entities.
@@ -57,7 +57,7 @@ export function RolesDocumentation(props: IDocumentationRootProps) {
 
       <p>
         <b>
-          <code>{userFriendlyCase(USER_PERMISSIONS.CAN_MANAGE_DASHBOARD)}</code>
+          <code>{userFriendlyCase(UserPermissions.CAN_MANAGE_DASHBOARD)}</code>
         </b>
         : enables users to build and manage the dashboard.
       </p>
@@ -65,7 +65,7 @@ export function RolesDocumentation(props: IDocumentationRootProps) {
       <p>
         <b>
           <code>
-            {userFriendlyCase(USER_PERMISSIONS.CAN_MANAGE_INTEGRATIONS)}
+            {userFriendlyCase(UserPermissions.CAN_MANAGE_APP_CREDENTIALS)}
           </code>
         </b>
         : enables users to set up and manage the integrations with supported
@@ -75,7 +75,7 @@ export function RolesDocumentation(props: IDocumentationRootProps) {
       <p>
         <b>
           <code>
-            {userFriendlyCase(USER_PERMISSIONS.CAN_MANAGE_PERMISSIONS)}
+            {userFriendlyCase(UserPermissions.CAN_MANAGE_PERMISSIONS)}
           </code>
         </b>
         : enables users to manage roles and permissions.
@@ -83,14 +83,14 @@ export function RolesDocumentation(props: IDocumentationRootProps) {
 
       <p>
         <b>
-          <code>{userFriendlyCase(USER_PERMISSIONS.CAN_MANAGE_USERS)}</code>
+          <code>{userFriendlyCase(UserPermissions.CAN_MANAGE_USERS)}</code>
         </b>
         : enables users to list, create, update, and delete users.
       </p>
 
       <p>
         <b>
-          <code>{userFriendlyCase(USER_PERMISSIONS.CAN_RESET_PASSWORD)}</code>
+          <code>{userFriendlyCase(UserPermissions.CAN_RESET_PASSWORD)}</code>
         </b>
         : enables users to reset passwords.
       </p>

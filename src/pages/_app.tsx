@@ -4,7 +4,7 @@ import "../static/fonts/font-face.css";
 
 function MyApp({ Component, pageProps }) {
   return (
-    <ApplicationRoot>
+    <ApplicationRoot translation={pageProps.translation}>
       <Component {...pageProps} />
     </ApplicationRoot>
   );

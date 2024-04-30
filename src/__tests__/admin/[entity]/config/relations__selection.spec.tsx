@@ -1,24 +1,25 @@
-import "@testing-library/jest-dom";
-import React from "react";
 import { render, screen, waitFor, within } from "@testing-library/react";
 import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 import userEvent from "@testing-library/user-event";
 import EntityRelationsSettings from "pages/admin/[entity]/config/relations";
 
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
+import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
 
 setupApiHandlers();
 
 describe("pages/admin/[entity]/config/relations", () => {
   beforeAll(() => {
     const useRouter = jest.spyOn(require("next/router"), "useRouter");
-    useRouter.mockImplementation(() => ({
-      asPath: "/",
-      query: {
-        entity: "entity-1",
-        tab: "Selection",
-      },
-    }));
+
+    useRouter.mockImplementation(
+      USE_ROUTER_PARAMS({
+        query: {
+          entity: "entity-1",
+          tab: "selection",
+        },
+      })
+    );
   });
   describe("Selection", () => {
     it("should display all related entities in correct state", async () => {
@@ -28,7 +29,9 @@ describe("pages/admin/[entity]/config/relations", () => {
         </ApplicationRoot>
       );
 
-      const currentTab = await screen.findByRole("tabpanel");
+      const currentTab = await screen.findByRole("tabpanel", {
+        name: "Selection",
+      });
 
       await waitFor(async () => {
         expect(
@@ -64,7 +67,9 @@ describe("pages/admin/[entity]/config/relations", () => {
         </ApplicationRoot>
       );
 
-      const currentTab = await screen.findByRole("tabpanel");
+      const currentTab = await screen.findByRole("tabpanel", {
+        name: "Selection",
+      });
 
       await userEvent.click(
         within(currentTab).getByRole("button", {
@@ -87,12 +92,6 @@ describe("pages/admin/[entity]/config/relations", () => {
         })
       );
 
-      await userEvent.click(
-        within(currentTab).getAllByRole("button", {
-          name: "Save Enabled Relations",
-        })[0]
-      );
-
       expect(await screen.findByRole("status")).toHaveTextContent(
         "Enabled Relations Saved Successfully"
       );
@@ -105,7 +104,9 @@ describe("pages/admin/[entity]/config/relations", () => {
         </ApplicationRoot>
       );
 
-      const currentTab = await screen.findByRole("tabpanel");
+      const currentTab = await screen.findByRole("tabpanel", {
+        name: "Selection",
+      });
 
       await waitFor(async () => {
         expect(

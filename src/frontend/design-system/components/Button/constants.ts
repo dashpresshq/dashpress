@@ -1,33 +1,16 @@
-import {
-  ArrowRight,
-  CheckSquare,
-  ChevronsLeft,
-  Edit,
-  Eye,
-  HelpCircle,
-  Plus,
-  Save,
-  Settings,
-  Slash,
-  X,
-  LogIn,
-  Square,
-} from "react-feather";
+import { MessageDescriptor } from "@lingui/core";
+import { msg } from "@lingui/macro";
+import { IGroupActionButton } from "./types";
 
-export const ICON_MAP = {
-  logIn: LogIn,
-  edit: Edit,
-  add: Plus,
-  save: Save,
-  eye: Eye,
-  settings: Settings,
-  close: X,
-  ban: Slash,
-  square: Square,
-  check: CheckSquare,
-  right: ArrowRight,
-  help: HelpCircle,
-  back: ChevronsLeft,
-};
-
-export type ButtonIconTypes = keyof typeof ICON_MAP;
+export const DELETE_BUTTON_PROPS = (props: {
+  action: () => void;
+  isMakingRequest: boolean;
+  label: MessageDescriptor;
+  shouldConfirmAlert?: undefined;
+}): IGroupActionButton => ({
+  id: "delete",
+  systemIcon: "Thrash",
+  shouldConfirmAlert: msg`Confirm Delete`,
+  color: "danger",
+  ...props,
+});

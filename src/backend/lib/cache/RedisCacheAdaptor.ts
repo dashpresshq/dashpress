@@ -6,8 +6,8 @@ import { AbstractCacheService } from "./AbstractCacheService";
 export class RedisCacheAdaptor extends AbstractCacheService {
   private redisConnection: RedisClientType;
 
-  constructor(prefix: string, _configApiService: ConfigApiService) {
-    super(prefix, _configApiService);
+  constructor(_configApiService: ConfigApiService) {
+    super(_configApiService);
   }
 
   async getRedisInstance() {
@@ -35,11 +35,13 @@ export class RedisCacheAdaptor extends AbstractCacheService {
   }
 
   async persistData(key: string, data: unknown): Promise<void> {
-    await (await this.getRedisInstance()).set(key, JSON.stringify(data));
+    await (
+      await this.getRedisInstance()
+    ).set(key, JSON.stringify(data), { EX: 60 * 60 }); // I hour
   }
 
-  async clearItem(key: string) {
-    await (await this.getRedisInstance()).del(this.prefixKey(key));
+  async _clearItem(key: string) {
+    await (await this.getRedisInstance()).del(key);
   }
 
   async purge() {

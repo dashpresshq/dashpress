@@ -1,11 +1,12 @@
 import { IEntityField } from "shared/types/db";
 import { EntityTypesForSelection, IColorableSelection } from "shared/types/ui";
 import { FIELD_TYPES_CONFIG_MAP } from "shared/validations/field-types-config";
+import { FormFieldTypes } from "shared/validations/types";
 import { getEntitySelectionConfig } from "./getEntitySelectionConfig";
 
 const FIELD_TYPE_TO_ENTITY_TYPES_MAP: Record<
   IEntityField["type"],
-  keyof typeof FIELD_TYPES_CONFIG_MAP
+  FormFieldTypes
 > = {
   boolean: "boolean",
   date: "datetime-local",
@@ -17,7 +18,7 @@ const FIELD_TYPE_TO_ENTITY_TYPES_MAP: Record<
 export const guessEntityType = (
   type: IEntityField["type"],
   isReference?: IEntityField["isReference"]
-): keyof typeof FIELD_TYPES_CONFIG_MAP => {
+): FormFieldTypes => {
   if (isReference) {
     return "reference";
   }
@@ -33,7 +34,7 @@ export const guessEntityType = (
 export const getEntitySelections = (
   entityFields: IEntityField[],
   entitySelections: Record<string, IColorableSelection[]>,
-  entityFieldTypes: Record<string, keyof typeof FIELD_TYPES_CONFIG_MAP>
+  entityFieldTypes: Record<string, FormFieldTypes>
 ): Record<string, IColorableSelection[]> => {
   const enumOptions = Object.fromEntries(
     entityFields
@@ -68,7 +69,7 @@ export const getEntitySelections = (
 
 export const getEntityFieldTypes = (
   entityFields: IEntityField[],
-  entityFieldTypesMap: Record<string, keyof typeof FIELD_TYPES_CONFIG_MAP>
+  entityFieldTypesMap: Record<string, FormFieldTypes>
 ) => {
   return Object.fromEntries(
     entityFields.map(({ name, type, isReference }) => {

@@ -1,4 +1,3 @@
-import React from "react";
 import styled, { keyframes } from "styled-components";
 import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
 
@@ -10,7 +9,7 @@ const progressBarStripes = keyframes`
 from{background-position:.625rem 0}to{background-position:0 0}
 `;
 
-const StyledProgress = styled.div`
+const Progress = styled.div`
   display: flex;
   height: 0.625rem;
   overflow: hidden;
@@ -21,7 +20,7 @@ const StyledProgress = styled.div`
   margin-bottom: 1rem;
 `;
 
-const StyledProgressBar = styled.div`
+const ProgressBarAsStyle = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -53,8 +52,8 @@ const StyledProgressBar = styled.div`
 
 export function ProgressBar({ progress }: IProgressBar) {
   return (
-    <StyledProgress>
-      <StyledProgressBar
+    <Progress>
+      <ProgressBarAsStyle
         role="progressbar"
         style={{ width: `${progress}%` }}
         aria-valuenow={progress}
@@ -62,7 +61,7 @@ export function ProgressBar({ progress }: IProgressBar) {
         aria-valuemax={100}
       >
         {progress}%
-      </StyledProgressBar>
-    </StyledProgress>
+      </ProgressBarAsStyle>
+    </Progress>
   );
 }

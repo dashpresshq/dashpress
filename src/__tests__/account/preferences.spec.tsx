@@ -1,20 +1,17 @@
-import "@testing-library/jest-dom";
-import React from "react";
 import { render, screen, waitFor } from "@testing-library/react";
 import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 import userEvent from "@testing-library/user-event";
 import UserPreferences from "pages/account/preferences";
 
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
+import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
 
 setupApiHandlers();
 
 describe("pages/account/preferences", () => {
   beforeAll(() => {
     const useRouter = jest.spyOn(require("next/router"), "useRouter");
-    useRouter.mockImplementation(() => ({
-      asPath: "/",
-    }));
+    useRouter.mockImplementation(USE_ROUTER_PARAMS({}));
   });
 
   it("should display user preferences", async () => {
@@ -43,7 +40,7 @@ describe("pages/account/preferences", () => {
     );
 
     expect(await screen.findByRole("status")).toHaveTextContent(
-      "Account Preferences Saved Successfully"
+      "Theme Preference Saved Successfully"
     );
   });
 

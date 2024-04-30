@@ -1,6 +1,8 @@
 import { IAppliedSchemaFormConfig } from "shared/form-schemas/types";
+import { MessageDescriptor } from "@lingui/core";
+import { DataEventActions } from "./data";
 
-export enum ActionIntegrationKeys {
+export enum ActionIntegrations {
   HTTP = "http",
   SMTP = "smtp",
   SLACK = "slack",
@@ -11,31 +13,17 @@ export enum ActionIntegrationKeys {
   SEND_IN_BLUE = "sendInBlue",
 }
 
-export interface IActivatedAction {
-  activationId: string;
-  integrationKey: ActionIntegrationKeys;
-  credentialsGroupKey: string;
-}
-
-export enum BaseAction {
-  Create = "create",
-  Update = "update",
-  Delete = "delete",
-}
-
-export type IActionInstance = {
-  instanceId: string;
-  activatedActionId: string;
-  integrationKey: string;
+export type IFormAction = {
+  id: string;
+  integration: ActionIntegrations;
   entity: string;
-  implementationKey: string;
-  triggerLogic: string;
-  formAction: BaseAction | string;
+  action: string;
+  trigger: DataEventActions;
   configuration: Record<string, string>;
 };
 
 export interface IPerformsImplementation {
-  label: string;
+  label: MessageDescriptor;
   configurationSchema: IAppliedSchemaFormConfig<any>;
   do: (connection: unknown, configuration: unknown) => Promise<any>;
 }
@@ -43,13 +31,18 @@ export interface IPerformsImplementation {
 export interface IActionIntegrationsImplemention {
   title: string;
   description: string;
-  credentialsKey: string;
   configurationSchema: IAppliedSchemaFormConfig<any>;
   connect: (config: Record<string, unknown>) => Promise<unknown>;
   performsImplementation: Record<string, IPerformsImplementation>;
 }
 
-export type IIntegrationsList = { key: string } & Pick<
+export interface IStorageIntegration {
+  title: string;
+  key: string;
+  configurationSchema: IAppliedSchemaFormConfig<any>;
+}
+
+export type IIntegrationsList = { key: ActionIntegrations } & Pick<
   IActionIntegrationsImplemention,
   "title" | "description" | "configurationSchema"
 >;
@@ -58,5 +51,3 @@ export type IIntegrationImplementationList = { key: string } & Pick<
   IPerformsImplementation,
   "label" | "configurationSchema"
 >;
-
-export const HTTP_ACTIVATION_ID = "http";

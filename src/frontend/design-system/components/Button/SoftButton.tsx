@@ -1,81 +1,79 @@
-import React from "react";
 import Link from "next/link";
 import { Loader } from "react-feather";
-import { SYSTEM_COLORS } from "frontend/design-system/theme/system";
 import { Stack } from "frontend/design-system/primitives/Stack";
-import { StyledSoftButton } from "./Button";
-import { ButtonIconTypes, ICON_MAP } from "./constants";
+import { SystemIcon } from "frontend/design-system/Icons/System";
+import { BaseSyntheticEvent } from "react";
+import { useLingui } from "@lingui/react";
+import { SoftButtonStyled } from "./Button";
 import { Spin } from "../_/Spin";
-
-export interface IProps {
-  label?: string;
-  icon?: ButtonIconTypes;
-  size?: "sm" | "xs";
-  block?: true;
-  disabled?: boolean;
-  color?: keyof typeof SYSTEM_COLORS;
-  action: string | (() => void);
-  secondaryAction?: () => void;
-  justIcon?: true;
-  className?: string;
-  type?: "button";
-  isMakingActionRequest?: boolean;
-}
+import { Tooltip } from "../Tooltip";
+import { useConfirmAlert } from "../ConfirmAlert";
+import { IActionButton } from "./types";
 
 export function SoftButton({
   label,
   block,
-  color,
   size = "sm",
-  icon,
+  systemIcon,
   justIcon,
-  type,
+  shouldConfirmAlert,
   disabled,
-  isMakingActionRequest,
+  isMakingRequest,
   action,
+  noToolTip,
+  color,
   secondaryAction,
-  className,
-}: IProps) {
-  const Icon = icon ? ICON_MAP[icon] : null;
+}: IActionButton) {
   const iconProps = {
     size: 14,
   };
 
-  const content = isMakingActionRequest ? (
+  const confirmAlert = useConfirmAlert();
+
+  const { _ } = useLingui();
+
+  const labelString = _(label);
+
+  const content = isMakingRequest ? (
     <Spin as={Loader} {...iconProps} />
   ) : (
     <Stack
-      spacing={4}
-      width="auto"
-      align="center"
-      justify={block ? "center" : undefined}
+      $spacing={4}
+      $width="auto"
+      $align="center"
+      $justify={block ? "center" : undefined}
     >
       <>
-        {Icon ? <Icon {...iconProps} /> : null}
+        <SystemIcon icon={systemIcon} {...iconProps} />
         <span style={{ whiteSpace: "nowrap" }}>
-          {label && !justIcon ? label : null}
+          {label && !justIcon ? labelString : null}
         </span>
       </>
     </Stack>
   );
 
   const buttonProps = {
-    className,
     size,
     block,
-    disabled,
-    color,
-    justIcon,
-    "aria-label": justIcon ? label : undefined,
+    disabled: disabled || isMakingRequest,
+    $justIcon: justIcon,
+    $color: color,
+    "aria-label": justIcon ? labelString : undefined,
   };
+
+  const toolTipProps = {
+    place: "top",
+    text: justIcon && !noToolTip && labelString,
+  } as const;
 
   if (typeof action === "string") {
     return (
-      <Link href={action} passHref>
-        <StyledSoftButton
-          {...buttonProps}
-          as="a"
+      <Tooltip {...toolTipProps}>
+        <SoftButtonStyled
+          as={Link}
+          href={action}
           target={action.startsWith("http") ? "_blank" : undefined}
+          {...buttonProps}
         >
           {secondaryAction ? (
             <span onClick={secondaryAction} aria-hidden="true">
@@ -84,21 +82,30 @@ export function SoftButton({
           ) : (
             content
           )}
-        </StyledSoftButton>
-      </Link>
+        </SoftButtonStyled>
+      </Tooltip>
     );
   }
 
   return (
-    <StyledSoftButton
-      {...buttonProps}
-      type={type}
-      onClick={(e: { stopPropagation: () => void }) => {
-        e.stopPropagation();
-        action();
-      }}
-    >
-      {content}
-    </StyledSoftButton>
+    <Tooltip {...toolTipProps}>
+      <SoftButtonStyled
+        {...buttonProps}
+        type="button"
+        onClick={(e: BaseSyntheticEvent) => {
+          e.stopPropagation();
+
+          if (shouldConfirmAlert) {
+            return confirmAlert({
+              title: shouldConfirmAlert,
+              action,
+            });
+          }
+          return action();
+        }}
+      >
+        {content}
+      </SoftButtonStyled>
+    </Tooltip>
   );
 }

@@ -1,14 +1,14 @@
 import { sluggify } from "shared/lib/strings";
 import { StorageService } from ".";
 
-const PREFIX = "_app_config__";
+const PREFIX = "__dp__";
 
 const makeKey = (key: string): string => {
   return sluggify(`${PREFIX}${key}`, "_");
 };
 
 export const AppStorage = {
-  set: (key: string, value: Record<string, unknown> | unknown[]) => {
+  set: (key: string, value: unknown) => {
     StorageService.setString(makeKey(key), JSON.stringify(value));
   },
   get: (key: string) => {

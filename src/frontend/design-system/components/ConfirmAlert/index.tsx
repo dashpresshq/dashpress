@@ -1,22 +1,20 @@
-import React from "react";
-import { confirmAlert } from "react-confirm-alert";
 import styled, { keyframes } from "styled-components";
 import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
 import { Typo } from "frontend/design-system/primitives/Typo";
 import { Spacer } from "frontend/design-system/primitives/Spacer";
 import { Stack } from "frontend/design-system/primitives/Stack";
+import { msg, t } from "@lingui/macro";
+import { createStore } from "frontend/lib/store";
+import { MessageDescriptor } from "@lingui/core";
+import { useLingui } from "@lingui/react";
+import { useClickAway, useKey } from "react-use";
+import { useEffect, useRef } from "react";
 import { Z_INDEXES } from "../../constants/zIndex";
 import { SoftButton } from "../Button/SoftButton";
-import { StyledDeleteButton } from "../Button/Button";
 import { SHADOW_CSS } from "../Card";
+import { NextPortal } from "../_/NextPortal";
 
-interface IProps {
-  action: () => void;
-  title: string;
-  message: string;
-}
-
-const StyledBody = styled.div`
+const Body = styled.div`
   width: 300px;
   padding: 30px;
   text-align: center;
@@ -37,10 +35,10 @@ from {
   }
 `;
 
-const StyledOverlay = styled(Stack).attrs({
-  direction: "column",
-  align: "center",
-  justify: "center",
+const Overlay = styled(Stack).attrs({
+  $direction: "column",
+  $align: "center",
+  $justify: "center",
 })`
   position: fixed;
   top: 0;
@@ -53,52 +51,94 @@ const StyledOverlay = styled(Stack).attrs({
   animation: ${fadeIn} 0.1s 0.1s forwards;
 `;
 
-export interface IPresentationProps extends IProps {
-  onClose: () => void;
+interface IConfirmAlertDetails {
+  title: MessageDescriptor;
+  action: () => void;
 }
 
-export function Presentation({
-  action,
-  message,
-  onClose,
-  title,
-}: IPresentationProps) {
+type IStore = {
+  title?: MessageDescriptor;
+  action?: () => void;
+  setDetails: (details: IConfirmAlertDetails) => void;
+  onClose: () => void;
+};
+
+const useConfirmAlertStore = createStore<IStore>((set) => ({
+  setDetails: (details: IConfirmAlertDetails) => set(() => details),
+  onClose: () =>
+    set(() => ({
+      title: undefined,
+      action: undefined,
+    })),
+}));
+
+export const useConfirmAlert = () => {
+  const confirmAlert = useConfirmAlertStore((store) => store.setDetails);
+
+  return confirmAlert;
+};
+
+export function ConfirmAlert() {
+  const rootRef = useRef<HTMLDivElement>(null);
+
+  const { _ } = useLingui();
+  const [title, action, onClose] = useConfirmAlertStore((store) => [
+    store.title,
+    store.action,
+    store.onClose,
+  ]);
+
+  useKey("Escape", onClose);
+  useClickAway(rootRef, onClose);
+
+  useEffect(() => {
+    document.body.style.overflow = title ? "hidden" : "auto";
+  }, [title]);
+
+  if (!title) {
+    return null;
+  }
+
   return (
-    <StyledOverlay
-      role="alertdialog"
-      aria-modal="true"
-      aria-labelledby="confirm_delete_label"
-      aria-describedby="confirm_delete_desc"
-      tabIndex={-1}
-    >
-      <StyledBody>
-        <Typo.MD weight="bold">
-          <span id="confirm_delete_label"> {title} </span>
-        </Typo.MD>
-        <Spacer size="xl" />
-        <Typo.XS>
-          <span id="confirm_delete_desc"> {message} </span>{" "}
-        </Typo.XS>
-        <Spacer size="xxl" />
-        <Stack justify="center" spacing={8}>
-          <SoftButton action={onClose} label="Cancel" />
-          <StyledDeleteButton
-            type="button"
-            size="sm"
-            onClick={() => {
-              action();
-              onClose();
-            }}
-          >
-            Confirm
-          </StyledDeleteButton>
-        </Stack>
-      </StyledBody>
-    </StyledOverlay>
+    <NextPortal>
+      <Overlay
+        role="alertdialog"
+        aria-modal="true"
+        aria-labelledby="confirm_delete_label"
+        aria-describedby="confirm_delete_description"
+        tabIndex={-1}
+      >
+        <Body ref={rootRef}>
+          <Typo.MD $weight="bold">
+            <span id="confirm_delete_label"> {_(title)} </span>
+          </Typo.MD>
+          <Spacer size="xl" />
+          <Typo.XS>
+            <span id="confirm_delete_description">
+              {t`Are you sure you want to do this?`}
+            </span>
+          </Typo.XS>
+          <Spacer size="xxl" />
+          <Stack $justify="center" $spacing={8}>
+            <SoftButton
+              action={onClose}
+              label={msg`Cancel`}
+              systemIcon={null}
+            />
+
+            <SoftButton
+              color="danger"
+              size="sm"
+              systemIcon={null}
+              label={msg`Confirm`}
+              action={() => {
+                action();
+                onClose();
+              }}
+            />
+          </Stack>
+        </Body>
+      </Overlay>
+    </NextPortal>
   );
 }
-
-export const ConfirmAlert = (props: IProps) =>
-  confirmAlert({
-    customUI: ({ onClose }) => <Presentation {...props} onClose={onClose} />,
-  });

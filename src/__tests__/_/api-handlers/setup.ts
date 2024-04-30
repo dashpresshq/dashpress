@@ -1,14 +1,16 @@
 import { rest } from "msw";
 import { BASE_TEST_URL } from "./_utils";
 
+export const SETUP_CHECK_DATA = {
+  data: {
+    hasUsers: true,
+    hasDbCredentials: true,
+  },
+};
+
 export const setupApiHandlers = [
   rest.get(BASE_TEST_URL("/api/setup/check"), async (_, res, ctx) => {
-    return res(
-      ctx.json({
-        hasUsers: true,
-        hasDbCredentials: true,
-      })
-    );
+    return res(ctx.json(SETUP_CHECK_DATA.data));
   }),
   rest.post(BASE_TEST_URL("/api/setup/credentials"), async (req, res, ctx) => {
     const reqBody = JSON.stringify(await req.json());
@@ -23,6 +25,7 @@ export const setupApiHandlers = [
         `{"dataSourceType":"sqlite","filename":"some-sqlite-file-name"}`,
       ].includes(reqBody)
     ) {
+      SETUP_CHECK_DATA.data.hasDbCredentials = true;
       return res(ctx.json({ success: true }));
     }
     return res(ctx.status(500));
@@ -32,6 +35,7 @@ export const setupApiHandlers = [
       JSON.stringify(await req.json()) ===
       `{"username":"testusername","name":"testname","password":"Some Password"}`
     ) {
+      SETUP_CHECK_DATA.data.hasUsers = true;
       return res(ctx.json({ success: true, token: true }));
     }
     return res(ctx.status(500));

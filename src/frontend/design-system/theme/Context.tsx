@@ -1,4 +1,4 @@
-import React, { ReactNode, createContext, useState, useMemo } from "react";
+import { ReactNode, createContext, useState, useMemo } from "react";
 import { LIGHT_MODE } from "../theme/modes";
 import { DEFAULT_PRIMARY_COLOR } from "./constants";
 import { colorModeToRootColors } from "./generate";

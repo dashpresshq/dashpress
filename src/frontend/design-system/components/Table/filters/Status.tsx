@@ -1,4 +1,3 @@
-import React from "react";
 import { IColumnFilterBag } from "shared/types/data";
 import { ISelectData } from "shared/types/options";
 import { FormMultiSelect } from "../../Form/FormSelect";
@@ -13,6 +12,7 @@ export function FilterTableByStatus({
       <FormMultiSelect
         selectData={bag}
         values={filterValue?.value || []}
+        ariaLabel="Select Status"
         onChange={(value) => {
           setFilter({
             ...filterValue,

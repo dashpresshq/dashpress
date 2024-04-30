@@ -1,4 +1,3 @@
-import React from "react";
 import classnames from "classnames";
 import styled, { keyframes } from "styled-components";
 import { Upload } from "react-feather";
@@ -8,9 +7,11 @@ import { SYSTEM_COLORS } from "frontend/design-system/theme/system";
 import { Spacer } from "frontend/design-system/primitives/Spacer";
 import { Typo } from "frontend/design-system/primitives/Typo";
 import { ProgressBar } from "frontend/design-system/components/ProgressBar";
-import { DeleteButton } from "frontend/design-system/components/Button/DeleteButton";
+import { msg } from "@lingui/macro";
+import { DELETE_BUTTON_PROPS } from "../../Button/constants";
+import { SoftButton } from "../../Button/SoftButton";
 
-const StyledFileInput = styled.input`
+const FileInput = styled.input`
   position: absolute;
   top: 0;
   right: 0;
@@ -87,7 +88,7 @@ const ProgressRoot = styled.div`
 `;
 
 export interface IProps {
-  progress: number;
+  isSubmitting: boolean;
   disabled?: boolean;
   value: string;
   error: string;
@@ -97,7 +98,7 @@ export interface IProps {
 }
 
 export function Presentation({
-  progress,
+  isSubmitting,
   disabled,
   value,
   error,
@@ -113,9 +114,9 @@ export function Presentation({
       })}
       {...dropZoneProps.getRootProps()}
     >
-      {progress > 0 && (
+      {isSubmitting && (
         <ProgressRoot>
-          <ProgressBar progress={progress} />
+          <ProgressBar progress={100} />
         </ProgressRoot>
       )}
       <div>
@@ -127,24 +128,29 @@ export function Presentation({
         </Typo.MD>
         <Spacer />
         {value && (
-          <Typo.SM color="muted">
+          <Typo.SM $color="muted">
             {value}{" "}
             {!disabled ? (
-              <DeleteButton
-                onDelete={onClear}
-                shouldConfirmAlert={false}
+              <SoftButton
                 size="xs"
+                justIcon
+                {...DELETE_BUTTON_PROPS({
+                  action: onClear,
+                  isMakingRequest: false,
+                  label: msg`Remove`,
+                  shouldConfirmAlert: undefined,
+                })}
               />
             ) : null}
           </Typo.SM>
         )}
         {error && (
-          <Typo.MD color="danger" weight="bold">
+          <Typo.MD $color="danger" $weight="bold">
             {error}
           </Typo.MD>
         )}
       </div>
-      <StyledFileInput type="file" {...dropZoneProps.getInputProps()} />
+      <FileInput type="file" {...dropZoneProps.getInputProps()} />
     </Root>
   );
 }

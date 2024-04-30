@@ -1,12 +1,12 @@
 import { IAccountProfile } from "shared/types/user";
 import { requestHandler } from "backend/lib/request";
-import { menuApiController } from "backend/menu/menu.controller";
+import { navigationMenuApiService } from "backend/menu/menu.service";
 
 export default requestHandler({
   GET: async (getValidatedRequest) => {
     const validatedRequest = await getValidatedRequest(["authenticatedUser"]);
 
-    return await menuApiController.getMenuItems(
+    return await navigationMenuApiService.getMenuItems(
       (validatedRequest.authenticatedUser as IAccountProfile).role
     );
   },

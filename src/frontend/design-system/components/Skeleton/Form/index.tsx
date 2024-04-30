@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import { Fragment } from "react";
 import { Stack } from "frontend/design-system/primitives/Stack";
 import { BaseSkeleton } from "../Base";
 
@@ -21,7 +21,7 @@ export function FormSkeleton({ schema }: IProps) {
           <BaseSkeleton height={schema[key]} bottom={24} />
         </Fragment>
       ))}
-      <Stack justify="end">
+      <Stack $justify="end">
         <BaseSkeleton height="3em" width="120px" bottom={3} top={-8} />
       </Stack>
     </div>

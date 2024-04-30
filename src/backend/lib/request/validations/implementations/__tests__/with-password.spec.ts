@@ -22,10 +22,27 @@ describe("Request Validations => withPasswordValidationImpl", () => {
   beforeAll(async () => {
     await setupAllTestData(["users"]);
   });
-  it("should return data when correct password is sent", async () => {
+  it("should return data when correct password is sent through body", async () => {
     const { req, res } = createAuthenticatedMocks({
       method: "POST",
       body: {
+        _password: "password",
+      },
+    });
+
+    await handler(req, res);
+
+    expect(res._getJSONData()).toMatchInlineSnapshot(`
+      {
+        "foo": "bar",
+      }
+    `);
+  });
+
+  it("should return data when correct password is sent through query", async () => {
+    const { req, res } = createAuthenticatedMocks({
+      method: "POST",
+      query: {
         _password: "password",
       },
     });

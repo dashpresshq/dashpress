@@ -1,14 +1,12 @@
-import { SLUG_LOADING_VALUE } from "frontend/lib/routing/constants";
 import { useEntityConfiguration } from "frontend/hooks/configuration/configuration.store";
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
-import { useCanUserPerformCrudAction } from "frontend/views/data/useCanUserPerformCrudAction";
-import { ITableTab } from "shared/types/data";
+import { useCanUserPerformCrudAction } from "frontend/views/data/hooks/useCanUserPerformCrudAction";
 
 export const useWidgetNavigationLink = (entity?: string, queryId?: string) => {
   const canUserPerformCrudAction = useCanUserPerformCrudAction(entity);
-  const entityViews = useEntityConfiguration<ITableTab[]>(
-    "entity_views",
-    queryId ? entity : SLUG_LOADING_VALUE
+  const tableViews = useEntityConfiguration(
+    "table_views",
+    queryId ? entity : undefined
   );
 
   if (!entity) {
@@ -19,7 +17,7 @@ export const useWidgetNavigationLink = (entity?: string, queryId?: string) => {
     return undefined;
   }
 
-  const tabTitle = entityViews.data.find(({ id }) => id === queryId)?.title;
+  const tabTitle = tableViews.data.find(({ id }) => id === queryId)?.title;
 
   const tabLink = queryId ? `?tab=${tabTitle}` : "";
 

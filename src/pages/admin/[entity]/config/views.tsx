@@ -1,3 +1,5 @@
-import { EntityViewsSettings } from "frontend/views/entity/Views";
+import { TableViewsSettings } from "frontend/views/entity/Views";
 
-export default EntityViewsSettings;
+export { getServerSideProps } from "translations/utils";
+
+export default TableViewsSettings;

@@ -17,10 +17,18 @@ describe("/api/integrations/actions/[key]/implementations", () => {
         {
           "configurationSchema": {
             "headers": {
+              "label": {
+                "id": "ZIgY2y",
+                "message": "Headers",
+              },
               "type": "json",
               "validations": [],
             },
             "url": {
+              "label": {
+                "id": "IagCbF",
+                "message": "URL",
+              },
               "type": "text",
               "validations": [
                 {
@@ -30,19 +38,34 @@ describe("/api/integrations/actions/[key]/implementations", () => {
             },
           },
           "key": "GET",
-          "label": "GET",
+          "label": {
+            "id": "GET",
+            "message": "GET",
+          },
         },
         {
           "configurationSchema": {
             "body": {
+              "label": {
+                "id": "bGQplw",
+                "message": "Body",
+              },
               "type": "json",
               "validations": [],
             },
             "headers": {
+              "label": {
+                "id": "ZIgY2y",
+                "message": "Headers",
+              },
               "type": "json",
               "validations": [],
             },
             "url": {
+              "label": {
+                "id": "IagCbF",
+                "message": "URL",
+              },
               "type": "text",
               "validations": [
                 {
@@ -52,19 +75,34 @@ describe("/api/integrations/actions/[key]/implementations", () => {
             },
           },
           "key": "PUT",
-          "label": "PUT",
+          "label": {
+            "id": "PUT",
+            "message": "PUT",
+          },
         },
         {
           "configurationSchema": {
             "body": {
+              "label": {
+                "id": "bGQplw",
+                "message": "Body",
+              },
               "type": "json",
               "validations": [],
             },
             "headers": {
+              "label": {
+                "id": "ZIgY2y",
+                "message": "Headers",
+              },
               "type": "json",
               "validations": [],
             },
             "url": {
+              "label": {
+                "id": "IagCbF",
+                "message": "URL",
+              },
               "type": "text",
               "validations": [
                 {
@@ -74,19 +112,34 @@ describe("/api/integrations/actions/[key]/implementations", () => {
             },
           },
           "key": "POST",
-          "label": "POST",
+          "label": {
+            "id": "POST",
+            "message": "POST",
+          },
         },
         {
           "configurationSchema": {
             "body": {
+              "label": {
+                "id": "bGQplw",
+                "message": "Body",
+              },
               "type": "json",
               "validations": [],
             },
             "headers": {
+              "label": {
+                "id": "ZIgY2y",
+                "message": "Headers",
+              },
               "type": "json",
               "validations": [],
             },
             "url": {
+              "label": {
+                "id": "IagCbF",
+                "message": "URL",
+              },
               "type": "text",
               "validations": [
                 {
@@ -96,19 +149,34 @@ describe("/api/integrations/actions/[key]/implementations", () => {
             },
           },
           "key": "PATCH",
-          "label": "PATCH",
+          "label": {
+            "id": "PATCH",
+            "message": "PATCH",
+          },
         },
         {
           "configurationSchema": {
             "body": {
+              "label": {
+                "id": "bGQplw",
+                "message": "Body",
+              },
               "type": "json",
               "validations": [],
             },
             "headers": {
+              "label": {
+                "id": "ZIgY2y",
+                "message": "Headers",
+              },
               "type": "json",
               "validations": [],
             },
             "url": {
+              "label": {
+                "id": "IagCbF",
+                "message": "URL",
+              },
               "type": "text",
               "validations": [
                 {
@@ -118,65 +186,10 @@ describe("/api/integrations/actions/[key]/implementations", () => {
             },
           },
           "key": "DELETE",
-          "label": "DELETE",
-        },
-      ]
-    `);
-  });
-
-  it("should show an integration implementation for other keys", async () => {
-    const { req, res } = createAuthenticatedMocks({
-      method: "GET",
-      query: {
-        key: "smtp",
-      },
-    });
-    await handler(req, res);
-
-    expect(res._getStatusCode()).toBe(200);
-    expect(res._getJSONData()).toMatchInlineSnapshot(`
-      [
-        {
-          "configurationSchema": {
-            "body": {
-              "type": "richtext",
-              "validations": [
-                {
-                  "validationType": "required",
-                },
-              ],
-            },
-            "senderEmail": {
-              "type": "text",
-              "validations": [
-                {
-                  "validationType": "required",
-                },
-              ],
-            },
-            "senderName": {
-              "type": "text",
-              "validations": [],
-            },
-            "subject": {
-              "type": "text",
-              "validations": [
-                {
-                  "validationType": "required",
-                },
-              ],
-            },
-            "to": {
-              "type": "text",
-              "validations": [
-                {
-                  "validationType": "required",
-                },
-              ],
-            },
+          "label": {
+            "id": "DELETE",
+            "message": "DELETE",
           },
-          "key": "SEND_MAIL",
-          "label": "Send Mail",
         },
       ]
     `);

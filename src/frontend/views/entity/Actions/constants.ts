@@ -1,9 +1,12 @@
-import { MAKE_CRUD_CONFIG } from "frontend/lib/crud-config";
+import { msg } from "@lingui/macro";
+import {
+  MAKE_CRUD_CONFIG,
+  MAKE_ENDPOINTS_CONFIG,
+} from "frontend/lib/crud-config";
 
-export const BASE_ACTIONS_ENDPOINT = `/api/integrations/actions`;
-
-export const ADMIN_ACTION_INSTANCES_CRUD_CONFIG = MAKE_CRUD_CONFIG({
-  path: `${BASE_ACTIONS_ENDPOINT}/instances`,
-  plural: "Form Actions",
-  singular: "Form Action",
+export const FORM_ACTION_CRUD_CONFIG = MAKE_CRUD_CONFIG({
+  plural: msg`Form Actions`,
+  singular: msg`Form Action`,
 });
+
+export const FORM_ACTION_ENDPOINT = MAKE_ENDPOINTS_CONFIG(`/api/form-actions`);

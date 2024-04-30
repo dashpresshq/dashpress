@@ -1,24 +1,20 @@
-import React from "react";
 import classnames from "classnames";
 import { FieldMetaState } from "react-final-form";
-import { HelpCircle } from "react-feather";
 import { Stack } from "frontend/design-system/primitives/Stack";
+import { SystemIcon } from "frontend/design-system/Icons/System";
+import { DetailedHTMLProps, InputHTMLAttributes } from "react";
+import { i18n } from "@lingui/core";
 import { ISharedFormInput } from "./_types";
 import { Tooltip } from "../Tooltip";
-import {
-  StyledFormGroup,
-  StyledFormLabel,
-  StyledFormFeedback,
-  StyledRequiredAsterick,
-} from "./Styles";
+import { FormLabel, FormFeedback, RequiredAsterick } from "./Styles";
 import { SoftButton } from "../Button/SoftButton";
 
 export const isFormMetaWithError = (meta: FieldMetaState<any>) =>
   meta && meta.touched && meta.invalid && meta.error;
 
 export const wrapLabelAndError = (
-  formComponent: React.DetailedHTMLProps<
-    React.InputHTMLAttributes<HTMLInputElement>,
+  formComponent: DetailedHTMLProps<
+    InputHTMLAttributes<HTMLInputElement>,
     HTMLInputElement
   >,
   {
@@ -31,49 +27,46 @@ export const wrapLabelAndError = (
     rightActions = [],
   }: ISharedFormInput
 ) => (
-  <StyledFormGroup>
-    <>
-      <Stack justify="space-between" align="baseline">
-        <div>
-          {label && (
-            <>
-              <StyledFormLabel sm={sm} htmlFor={input.name}>
-                {label}
-              </StyledFormLabel>
-              {required ? (
-                <StyledRequiredAsterick> *</StyledRequiredAsterick>
-              ) : null}
-            </>
-          )}
-          {description ? (
-            <Tooltip text={description} place="right">
-              <HelpCircle size="15" />
-            </Tooltip>
-          ) : null}
-        </div>
-        <Stack flex={1} justify="end">
+  <>
+    <Stack $justify="space-between" $align="baseline">
+      <div>
+        {label && (
+          <>
+            <FormLabel sm={sm} htmlFor={input.name}>
+              {i18n._(label)}
+            </FormLabel>
+            {required ? <RequiredAsterick> *</RequiredAsterick> : null}
+          </>
+        )}
+        {description ? (
+          <Tooltip text={description} place="right">
+            <SystemIcon icon="Help" size={15} />
+          </Tooltip>
+        ) : null}
+      </div>
+      {rightActions.length > 0 && (
+        <Stack $flex={1} $justify="end">
           {rightActions.map((rightAction) => (
             <SoftButton
-              key={rightAction.label}
+              key={rightAction.label.message}
               action={rightAction.action}
               size="xs"
-              type="button"
-              icon="settings"
+              systemIcon={rightAction.systemIcon}
               label={rightAction.label}
             />
           ))}
         </Stack>
-      </Stack>
-      {formComponent}
-      <StyledFormFeedback
-        role={isFormMetaWithError(meta) ? "alert" : undefined}
-        sm={sm}
-      >
-        {isFormMetaWithError(meta)}
-        &nbsp;
-      </StyledFormFeedback>
-    </>
-  </StyledFormGroup>
+      )}
+    </Stack>
+    {formComponent}
+    <FormFeedback
+      role={isFormMetaWithError(meta) ? "alert" : undefined}
+      sm={sm}
+    >
+      {isFormMetaWithError(meta)}
+      &nbsp;
+    </FormFeedback>
+  </>
 );
 
 export const generateClassNames = (meta: FieldMetaState<any>): string =>
@@ -88,7 +81,7 @@ export const generateFormArias = (
     return {};
   }
   if (isFormMetaWithError(meta)) {
-    return { "aria-invalid": "true", ariaInvalid: "true" };
+    return { "aria-invalid": "true" };
   }
   return {};
 };

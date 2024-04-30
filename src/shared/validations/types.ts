@@ -1,3 +1,5 @@
+import { MessageDescriptor } from "@lingui/core";
+
 export type ValidationsBoundToType =
   | "isEmail"
   | "isUrl"
@@ -11,7 +13,6 @@ export type ValidationsBoundToType =
 
 export type SelectableAbleValidations =
   | "required"
-  // | "unique"
   | "min"
   | "max"
   | "maxLength"
@@ -32,10 +33,28 @@ export type ValidationTypes =
 
 export interface IFieldValidationItem {
   validationType: ValidationTypes;
-  errorMessage?: string;
+  errorMessage?: MessageDescriptor;
   fromSchema?: true;
   fromType?: true;
   constraint?: Record<string, string | number | string[]>;
 }
+
+export type FormFieldTypes =
+  | "email"
+  | "password"
+  | "text"
+  | "textarea"
+  | "richtext"
+  | "url"
+  | "number"
+  | "json"
+  | "selection"
+  | "reference"
+  | "boolean"
+  | "selection-enum"
+  | "file"
+  | "image"
+  | "datetime-local"
+  | "color";
 
 export const FOR_CODE_COV = 1;

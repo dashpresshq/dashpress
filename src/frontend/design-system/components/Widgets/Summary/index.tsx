@@ -1,4 +1,3 @@
-import React from "react";
 import styled from "styled-components";
 import { ChevronsDown, Icon, ChevronsUp } from "react-feather";
 import { SYSTEM_COLORS } from "frontend/design-system/theme/system";
@@ -6,6 +5,8 @@ import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
 import { Stack } from "frontend/design-system/primitives/Stack";
 import { Typo } from "frontend/design-system/primitives/Typo";
 import { Spacer } from "frontend/design-system/primitives/Spacer";
+import { SystemIconsKeys } from "shared/constants/Icons";
+import { SystemIcon } from "frontend/design-system/Icons/System";
 
 const DirectionImplementation: Record<
   "up" | "down" | "side",
@@ -32,11 +33,10 @@ const DirectionImplementation: Record<
   },
 };
 
-const StyledIconRoot = styled.div<{ color: string }>`
-  background: ${(props) => props.color}2A;
-  color: ${(props) => props.color};
-  border: 1px solid ${(props) => props.color};
-  width: 40px;
+const IconRoot = styled(SystemIcon)<{ $color: string }>`
+  background: ${(props) => props.$color}2A;
+  color: ${(props) => props.$color};
+  border: 1px solid ${(props) => props.$color};
   min-width: 40px;
   border-radius: 40px;
   padding: 8px;
@@ -45,15 +45,15 @@ const StyledIconRoot = styled.div<{ color: string }>`
   align-items: center;
 `;
 
-const StyledRelativeCount = styled(Typo.XS)<{ directionColor: string }>`
+const RelativeCount = styled(Typo.XS)<{ $directionColor: string }>`
   lineheight: 20.5px;
-  color: ${(props) => props.directionColor};
+  color: ${(props) => props.$directionColor};
 `;
 
-const StyledDirectionRoot = styled(Stack)<{ color: string }>`
+const DirectionRoot = styled(Stack)<{ color: string }>`
   border: 1px solid transparent;
   width: auto;
-  border-radius: 8px;
+  border-radius: 6px;
   padding: 0 4px;
   color: ${(props) => props.color};
   background-color: ${(props) => props.color}0A;
@@ -84,23 +84,24 @@ export function SummaryWidget({
   } = DirectionImplementation[direction];
 
   return (
-    <Stack spacing={18} align="center">
-      <StyledIconRoot
-        color={color}
-        aria-label={`${title} Icon`}
-        dangerouslySetInnerHTML={{ __html: icon }}
+    <Stack $spacing={18} $align="center">
+      <IconRoot
+        $color={color}
+        icon={icon as SystemIconsKeys}
+        size={40}
+        label={`${title} Icon`}
       />
       <div style={{ width: "100%" }}>
         <Spacer size="xs" />
-        <Stack justify="space-between" align="end">
-          <Typo.L weight="bold" aria-label="Total Count">
+        <Stack $justify="space-between" $align="end">
+          <Typo.L $weight="bold" aria-label="Total Count">
             {fullCount}
           </Typo.L>
           {relativeCount ? (
-            <StyledDirectionRoot
+            <DirectionRoot
               color={directionColor}
-              spacing={2}
-              align="center"
+              $spacing={2}
+              $align="center"
               aria-label="Relative Direction"
             >
               <span aria-label={directionLabel}>
@@ -109,14 +110,14 @@ export function SummaryWidget({
                   style={{ color: directionColor, verticalAlign: "sub" }}
                 />
               </span>
-              <StyledRelativeCount
-                weight="bold"
+              <RelativeCount
+                $weight="bold"
                 aria-label="Relative Count"
-                directionColor={directionColor}
+                $directionColor={directionColor}
               >
                 {relativeCount}
-              </StyledRelativeCount>
-            </StyledDirectionRoot>
+              </RelativeCount>
+            </DirectionRoot>
           ) : null}
         </Stack>
       </div>

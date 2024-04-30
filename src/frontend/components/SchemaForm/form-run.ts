@@ -1,24 +1,17 @@
-import { evalJavascriptStringSafely } from "frontend/lib/script-runner";
+import { ISchemaFormScriptProps } from "shared/form-schemas/types";
+import { evalJavascriptStringSafely } from "shared/lib/script-runner";
 
-export type ISchemaFormScriptParams = Record<string, unknown> & {
-  formValues: Record<string, unknown>;
-};
-
-export const runFormFieldState = (
+export const runFormFieldState = <T>(
   fieldStateString: string,
-  scriptContext: Record<string, unknown>,
-  formValues: Record<string, unknown>
+  scriptProps: ISchemaFormScriptProps<T>
 ) => {
   if (!fieldStateString) {
     return {};
   }
 
-  const response = evalJavascriptStringSafely<ISchemaFormScriptParams>(
+  const response = evalJavascriptStringSafely(
     fieldStateString,
-    {
-      ...scriptContext,
-      formValues,
-    }
+    scriptProps as unknown as Record<string, unknown>
   );
 
   if (typeof response !== "object") {
@@ -27,24 +20,20 @@ export const runFormFieldState = (
   return response;
 };
 
-export const runFormBeforeSubmit = (
+export const runFormBeforeSubmit = <T>(
   beforeSubmitString: string,
-  scriptContext: Record<string, unknown>,
-  formValues: Record<string, unknown>
+  scriptProps: ISchemaFormScriptProps<T>
 ) => {
   if (!beforeSubmitString) {
-    return formValues;
+    return scriptProps.formValues;
   }
-  const response = evalJavascriptStringSafely<ISchemaFormScriptParams>(
+  const response = evalJavascriptStringSafely(
     beforeSubmitString,
-    {
-      ...scriptContext,
-      formValues,
-    }
+    scriptProps as unknown as Record<string, unknown>
   );
 
   if (!response) {
-    return formValues;
+    return scriptProps.formValues;
   }
 
   return response;

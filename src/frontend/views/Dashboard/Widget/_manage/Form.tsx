@@ -1,21 +1,17 @@
 import { useEntityConfiguration } from "frontend/hooks/configuration/configuration.store";
 import { Field, Form } from "react-final-form";
-import { ITableTab } from "shared/types/data";
 import { ISummaryWidgetConfig, IWidgetConfig } from "shared/types/dashboard";
-import { ROYGBIV } from "shared/constants/colors";
+import { ROYGBIV, ROYGBIV_CONFIG } from "shared/constants/colors";
 import { IconInputField } from "frontend/components/IconInputField";
-import { useMutation } from "react-query";
+import { useMutation } from "@tanstack/react-query";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { useEffect, useState } from "react";
-import { DOCUMENTATION_LABEL } from "frontend/docs";
 import { WidgetScriptDocumentation } from "frontend/docs/scripts/widget-scripts";
-import styled from "styled-components";
 import { required } from "frontend/lib/validations";
 import { resetFormValues } from "frontend/lib/form/utils";
-import { makeActionRequest } from "frontend/lib/data/makeRequest";
+import { ApiRequest } from "frontend/lib/data/makeRequest";
 import { IFormProps } from "frontend/lib/form/types";
 import { ILabelValue } from "shared/types/options";
-import { BREAKPOINTS } from "frontend/design-system/constants";
 import { FormInput } from "frontend/design-system/components/Form/FormInput";
 import { FormSelect } from "frontend/design-system/components/Form/FormSelect";
 import { BaseSkeleton } from "frontend/design-system/components/Skeleton/Base";
@@ -28,32 +24,32 @@ import { Stack } from "frontend/design-system/primitives/Stack";
 import { FormButton } from "frontend/design-system/components/Button/FormButton";
 import { FormCodeEditor } from "frontend/design-system/components/Form/FormCodeEditor";
 import { loadedDataState } from "frontend/lib/data/constants/loadedDataState";
-import { GridSpan } from "./Form.style";
+import { useDocumentationActionButton } from "frontend/docs/constants";
+import { FormGrid } from "frontend/components/SchemaForm/form-grid";
+import { GRID_SPAN_OPTIONS } from "frontend/design-system/constants/grid";
+import { msg } from "@lingui/macro";
+import {
+  typescriptSafeObjectDotEntries,
+  typescriptSafeObjectDotKeys,
+} from "shared/lib/objects";
+import { i18nNoop, transformLabelValueToSelectData } from "translations/fake";
+import { MessageDescriptor } from "@lingui/core";
 import { DASHBOARD_WIDGETS_CRUD_CONFIG } from "../../constants";
 import { DashboardWidgetPresentation } from "../Presentation";
 import { WIDGET_CONFIG } from "../constants";
 import { PortalFormFields, PortalFormSchema } from "./portal";
 import { WidgetFormField } from "./types";
-import { DASHBOARD_WIDGET_HEIGHTS, DASHBOARD_WIDGET_SIZES } from "./constants";
-
-const DOCS_TITLE = "Widget Script";
-
-const Root = styled.div`
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-column-gap: 16px;
-  @media (max-width: ${BREAKPOINTS.lg}) {
-    grid-template-columns: repeat(1, 1fr);
-  }
-`;
+import { DASHBOARD_WIDGET_HEIGHTS } from "./constants";
 
 const DashboardTypesOptions: {
-  label: string;
+  label: MessageDescriptor;
   value: IWidgetConfig["_type"];
-}[] = Object.entries(WIDGET_CONFIG).map(([value, { label }]) => ({
-  label,
-  value: value as IWidgetConfig["_type"],
-}));
+}[] = typescriptSafeObjectDotEntries(WIDGET_CONFIG).map(
+  ([value, { label }]) => ({
+    label,
+    value: value as IWidgetConfig["_type"],
+  })
+);
 
 const FormSchema: Partial<Record<IWidgetConfig["_type"], WidgetFormField[]>> = {
   "summary-card": ["color", "icon"],
@@ -62,10 +58,10 @@ const FormSchema: Partial<Record<IWidgetConfig["_type"], WidgetFormField[]>> = {
 };
 
 export function useRunWidgetScript() {
-  return useMutation(
-    async (script: string) =>
-      await makeActionRequest("POST", `/api/dashboards/script`, { script })
-  );
+  return useMutation({
+    mutationFn: async (script: string) =>
+      await ApiRequest.POST(`/api/dashboards/script`, { script }),
+  });
 }
 
 export function DashboardWidgetForm({
@@ -78,8 +74,11 @@ export function DashboardWidgetForm({
   action: "create" | "edit";
 }) {
   const [currentTab, setCurrentTab] = useState("");
-  const [isDocOpen, setIsDocOpen] = useState(false);
   const runWidgetScript = useRunWidgetScript();
+
+  const documentationActionButton = useDocumentationActionButton(
+    msg`Widget Script`
+  );
 
   useEffect(() => {
     if (initialValues.script) {
@@ -93,8 +92,8 @@ export function DashboardWidgetForm({
         onSubmit={onSubmit}
         initialValues={initialValues}
         render={({ handleSubmit, form, pristine, values, submitting }) => {
-          const entityViews = useEntityConfiguration<ITableTab[]>(
-            "entity_views",
+          const tableViews = useEntityConfiguration(
+            "table_views",
             values.entity
           );
 
@@ -118,25 +117,25 @@ export function DashboardWidgetForm({
                 });
               }}
             >
-              <Root>
-                <GridSpan>
+              <FormGrid.Root>
+                <FormGrid.Item $span="9">
                   <Field name="title" validate={required} validateFields={[]}>
                     {({ input, meta }) => (
                       <FormInput
                         required
-                        label="Title"
+                        label={msg`Title`}
                         meta={meta}
                         input={input}
                       />
                     )}
                   </Field>
-                </GridSpan>
-                <GridSpan>
+                </FormGrid.Item>
+                <FormGrid.Item $span="3">
                   <Field name="_type" validate={required} validateFields={[]}>
                     {({ input, meta }) => (
                       <FormSelect
                         required
-                        label="Type"
+                        label={msg`Type`}
                         disabledOptions={[]}
                         selectData={DashboardTypesOptions}
                         meta={meta}
@@ -144,32 +143,32 @@ export function DashboardWidgetForm({
                       />
                     )}
                   </Field>
-                </GridSpan>
-                <GridSpan>
+                </FormGrid.Item>
+                <FormGrid.Item>
                   <Field name="entity" validateFields={[]}>
                     {({ input, meta }) => (
                       <FormSelect
-                        label="Link Entity"
+                        label={msg`Link Entity`}
                         description="Select the entity the user should be directed to when clicking on the widget"
                         disabledOptions={[]}
-                        selectData={entities}
+                        selectData={transformLabelValueToSelectData(entities)}
                         meta={meta}
                         input={input}
                       />
                     )}
                   </Field>
-                </GridSpan>
-                {values.entity && (entityViews.data || []).length > 0 && (
-                  <GridSpan>
+                </FormGrid.Item>
+                {values.entity && (tableViews.data || []).length > 0 && (
+                  <FormGrid.Item>
                     <Field name="queryId" validateFields={[]}>
                       {({ input, meta }) => (
                         <FormSelect
-                          label="Entity Tab"
+                          label={msg`Entity Tab`}
                           description="Select the most appropriate tab of the entity above that the user should be direct to"
                           disabledOptions={[]}
-                          selectData={(entityViews.data || []).map(
+                          selectData={(tableViews.data || []).map(
                             ({ id, title }) => ({
-                              label: title,
+                              label: i18nNoop(title),
                               value: id,
                             })
                           )}
@@ -178,61 +177,63 @@ export function DashboardWidgetForm({
                         />
                       )}
                     </Field>
-                  </GridSpan>
+                  </FormGrid.Item>
                 )}
 
                 <PortalFormFields formFields={formFields} />
-                <GridSpan>
+                <FormGrid.Item>
                   {formFields.includes("color") && (
                     <Field name="color" validate={required} validateFields={[]}>
                       {({ input, meta }) => (
                         <FormSelect
-                          label="Color"
+                          label={msg`Color`}
                           required
-                          selectData={Object.keys(ROYGBIV).map((value) => ({
-                            value,
-                            label: value,
-                          }))}
+                          selectData={typescriptSafeObjectDotKeys(ROYGBIV).map(
+                            (value) => ({
+                              value,
+                              label: ROYGBIV_CONFIG[value].label,
+                            })
+                          )}
                           meta={meta}
                           input={input}
                         />
                       )}
                     </Field>
                   )}
-                </GridSpan>
-                <GridSpan>
+                </FormGrid.Item>
+                <FormGrid.Item>
                   {formFields.includes("icon") && (
                     <IconInputField
                       value={(values as ISummaryWidgetConfig)?.icon}
                     />
                   )}
-                </GridSpan>
-                <GridSpan $span={1}>
-                  <Field name="size" validateFields={[]}>
+                </FormGrid.Item>
+                <FormGrid.Item $span="6">
+                  <Field name="span" validateFields={[]}>
                     {({ input, meta }) => (
                       <FormSelect
-                        label="Width"
-                        selectData={DASHBOARD_WIDGET_SIZES}
+                        label={msg`Width`}
+                        selectData={GRID_SPAN_OPTIONS}
                         meta={meta}
                         input={input}
                       />
                     )}
                   </Field>
-                </GridSpan>
-                <GridSpan $span={1}>
+                </FormGrid.Item>
+                <FormGrid.Item $span="6">
                   <Field name="height" validateFields={[]}>
                     {({ input, meta }) => (
                       <FormSelect
-                        label="Height"
+                        label={msg`Height`}
                         selectData={DASHBOARD_WIDGET_HEIGHTS}
                         meta={meta}
                         input={input}
                       />
                     )}
                   </Field>
-                </GridSpan>
+                </FormGrid.Item>
                 {values._type && (
-                  <GridSpan>
+                  <FormGrid.Item>
                     <Field
                       name="script"
                       validate={required}
@@ -242,24 +243,17 @@ export function DashboardWidgetForm({
                         <FormCodeEditor
                           required
                           language="javascript"
-                          label="Script"
+                          label={msg`Script`}
                           meta={meta}
                           input={input}
-                          rightActions={[
-                            {
-                              action: () => {
-                                setIsDocOpen(true);
-                              },
-                              label: DOCUMENTATION_LABEL.CONCEPT(DOCS_TITLE),
-                            },
-                          ]}
+                          rightActions={[documentationActionButton]}
                         />
                       )}
                     </Field>
 
                     <ViewStateMachine
                       error={runWidgetScript.error}
-                      loading={runWidgetScript.isLoading}
+                      loading={runWidgetScript.isPending}
                       loader={
                         <BaseSkeleton height={`${values.height || 250}px`} />
                       }
@@ -270,7 +264,8 @@ export function DashboardWidgetForm({
                           onChange={setCurrentTab}
                           contents={[
                             {
-                              label: "Preview",
+                              label: msg`Preview`,
+                              id: "preview",
                               content: (
                                 <DashboardWidgetPresentation
                                   config={values}
@@ -280,7 +275,8 @@ export function DashboardWidgetForm({
                               ),
                             },
                             {
-                              label: "Data",
+                              label: msg`Data`,
+                              id: "data",
                               content: (
                                 <RenderCode input={runWidgetScript.data} />
                               ),
@@ -289,12 +285,13 @@ export function DashboardWidgetForm({
                         />
                       )}
                     </ViewStateMachine>
-                  </GridSpan>
+                  </FormGrid.Item>
                 )}
-                <GridSpan>
+                <FormGrid.Item>
                   {process.env.NEXT_PUBLIC_IS_DEMO ? (
-                    <Stack justify="center">
+                    <Stack $justify="center">
                       <Typo.SM>
+                        <Spacer />
                         You will be able to save this form on your own
                         installation
                       </Typo.SM>
@@ -302,18 +299,17 @@ export function DashboardWidgetForm({
                   ) : (
                     <>
                       <Spacer />
-                      <Stack justify="end" width="auto">
+                      <Stack $justify="end" $width="auto">
                         {values._type && (
                           <SoftButton
                             action={() => {
                               runWidgetScript.mutate(values.script);
                             }}
                             disabled={!values.script}
-                            type="button"
-                            isMakingActionRequest={runWidgetScript.isLoading}
-                            icon="eye"
+                            isMakingRequest={runWidgetScript.isPending}
+                            systemIcon="Eye"
                             size={null}
-                            label="Test Widget Script"
+                            label={msg`Test Widget Script`}
                           />
                         )}
 
@@ -323,24 +319,20 @@ export function DashboardWidgetForm({
                               ? DASHBOARD_WIDGETS_CRUD_CONFIG.FORM_LANG.CREATE
                               : DASHBOARD_WIDGETS_CRUD_CONFIG.FORM_LANG.UPDATE
                           }
-                          icon={action === "create" ? "add" : "save"}
+                          systemIcon={action === "create" ? "Plus" : "Save"}
                           isMakingRequest={submitting}
                           disabled={pristine}
                         />
                       </Stack>
                     </>
                   )}
-                </GridSpan>
-              </Root>
+                </FormGrid.Item>
+              </FormGrid.Root>
             </form>
           );
         }}
       />
-      <WidgetScriptDocumentation
-        title={DOCS_TITLE}
-        close={setIsDocOpen}
-        isOpen={isDocOpen}
-      />
+      <WidgetScriptDocumentation />
     </>
   );
 }

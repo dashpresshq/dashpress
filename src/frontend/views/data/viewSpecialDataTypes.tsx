@@ -1,7 +1,9 @@
 import { format } from "date-fns";
 import { IColorableSelection } from "shared/types/ui";
-import { FIELD_TYPES_CONFIG_MAP } from "shared/validations";
 import { SoftButton } from "frontend/design-system/components/Button/SoftButton";
+import { msg } from "@lingui/macro";
+import { FormFieldTypes } from "shared/validations/types";
+import { i18n } from "@lingui/core";
 import {
   ReferenceComponent,
   ReferenceDisplayFromTypes,
@@ -25,7 +27,7 @@ export const viewSpecialDataTypes = ({
   entityFieldSelections?: {
     [k: string]: IColorableSelection[];
   };
-  entityFieldTypes?: Record<string, keyof typeof FIELD_TYPES_CONFIG_MAP>;
+  entityFieldTypes?: Record<string, FormFieldTypes>;
   options: {
     displayFrom: ReferenceDisplayFromTypes;
     defaultDateFormat: string;
@@ -57,7 +59,13 @@ export const viewSpecialDataTypes = ({
   }
 
   if (entityFieldTypes[fieldName] === "file") {
-    return <SoftButton action={value as string} icon="save" label="Download" />;
+    return (
+      <SoftButton
+        action={value as string}
+        systemIcon="Download"
+        label={msg`Download`}
+      />
+    );
   }
 
   if (entityToOneReferenceFields?.[fieldName]) {
@@ -84,7 +92,7 @@ export const viewSpecialDataTypes = ({
           />
         );
       }
-      return availableOption.label;
+      return i18n._(availableOption.label);
     }
   }
   return null;

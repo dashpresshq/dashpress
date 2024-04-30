@@ -1,12 +1,8 @@
 import { OffCanvas } from "frontend/design-system/components/OffCanvas";
 import { ReactNode } from "react";
 import styled from "styled-components";
-
-export interface IDocumentationRootProps {
-  isOpen: boolean;
-  title: string;
-  close: (value: false) => void;
-}
+import { msg } from "@lingui/macro";
+import { useDocumentationCanvasStore } from "./constants";
 
 const Root = styled.div`
   margin-top: -8px;
@@ -40,19 +36,13 @@ const Root = styled.div`
   }
 `;
 
-export function DocumentationRoot({
-  close,
-  isOpen,
-  children,
-  title,
-}: IDocumentationRootProps & {
-  children: ReactNode;
-}) {
+export function DocumentationRoot({ children }: { children: ReactNode }) {
+  const canvasStore = useDocumentationCanvasStore();
   return (
     <OffCanvas
-      title={title}
-      onClose={() => close(false)}
-      show={isOpen}
+      title={msg`${canvasStore.title}`}
+      onClose={() => canvasStore.setTitle("")}
+      show={!!canvasStore.title}
       width={600}
     >
       <Root>{children}</Root>

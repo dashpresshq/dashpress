@@ -1,7 +1,14 @@
-import React, { ReactNode } from "react";
-import { QueryClientProvider, QueryClient } from "react-query";
+import { ReactNode } from "react";
+import {
+  QueryClientProvider,
+  QueryClient,
+  QueryCache,
+} from "@tanstack/react-query";
 
-export const queryClient = new QueryClient({
+export const queryCache = new QueryCache();
+
+const queryClient = new QueryClient({
+  queryCache,
   defaultOptions: {
     queries: {
       staleTime: Infinity,

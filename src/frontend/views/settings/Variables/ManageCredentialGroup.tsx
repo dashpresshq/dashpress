@@ -9,22 +9,25 @@ import {
   IPageDetails,
   useSetCurrentActionItems,
 } from "frontend/lib/routing/usePageDetails";
-import { HelpCircle, Plus } from "react-feather";
-import { SchemaForm } from "frontend/components/SchemaForm";
-import { USER_PERMISSIONS } from "shared/constants/user";
+import { UserPermissions } from "shared/constants/user";
 import { usePasswordStore } from "frontend/views/integrations/password.store";
 import { useUserHasPermission } from "frontend/hooks/auth/user.store";
 import { INTEGRATIONS_GROUP_CONFIG } from "shared/config-bag/integrations";
 import { VariablesDocumentation } from "frontend/docs/variables";
-import { DOCUMENTATION_LABEL } from "frontend/docs";
 import { ToastService } from "frontend/lib/toast";
 import { useApi } from "frontend/lib/data/useApi";
-import { SoftButton } from "frontend/design-system/components/Button/SoftButton";
-import { Stack } from "frontend/design-system/primitives/Stack";
-import { DeleteButton } from "frontend/design-system/components/Button/DeleteButton";
 import { Spacer } from "frontend/design-system/primitives/Spacer";
 import { Typo } from "frontend/design-system/primitives/Typo";
 import { OffCanvas } from "frontend/design-system/components/OffCanvas";
+import {
+  PasswordMessage,
+  PasswordToReveal,
+} from "frontend/views/integrations/Password";
+import { IKeyValue } from "shared/types/options";
+import { useDocumentationActionButton } from "frontend/docs/constants";
+import { ActionButtons } from "frontend/design-system/components/Button/ActionButtons";
+import { DELETE_BUTTON_PROPS } from "frontend/design-system/components/Button/constants";
+import { msg } from "@lingui/macro";
 import {
   INTEGRATIONS_GROUP_ENDPOINT,
   useIntegrationConfigurationDeletionMutation,
@@ -32,7 +35,7 @@ import {
   useRevealedCredentialsList,
 } from "./configurations.store";
 import { KeyValueForm } from "./Form";
-import { IKeyValue } from "./types";
+import { INTEGRATIONS_GROUP_CRUD_CONFIG } from "./constants";
 
 const NEW_CONFIG_ITEM = "__new_config_item__";
 
@@ -50,7 +53,6 @@ export function ManageCredentialGroup({
     useIntegrationConfigurationDeletionMutation(group);
 
   const tableData = useApi<IKeyValue[]>(dataEndpoint, { defaultData: [] });
-  const [isDocOpen, setIsDocOpen] = useState(false);
 
   const revealedCredentials = useRevealedCredentialsList(group);
 
@@ -73,30 +75,40 @@ export function ManageCredentialGroup({
     setCurrentConfigItem("");
   };
 
+  const CRUD_CONFIG = INTEGRATIONS_GROUP_CRUD_CONFIG[group].crudConfig;
+
+  const documentationActionButton = useDocumentationActionButton(
+    CRUD_CONFIG.TEXT_LANG.TITLE
+  );
+
   const MemoizedAction = useCallback(
     ({ row }: IFETableCell<IKeyValue>) => (
-      <Stack spacing={4} align="center">
-        <SoftButton
-          action={() => setCurrentConfigItem(row.original.key)}
-          label="Edit"
-          justIcon
-          icon="edit"
-        />
-        <DeleteButton
-          onDelete={() =>
-            deleteConfigurationMutation.mutateAsync(row.original.key)
-          }
-          isMakingDeleteRequest={false}
-          shouldConfirmAlert
-        />
-      </Stack>
+      <ActionButtons
+        justIcons
+        actionButtons={[
+          {
+            id: "edit",
+            action: () => setCurrentConfigItem(row.original.key),
+            label: CRUD_CONFIG.TEXT_LANG.EDIT,
+            systemIcon: "Edit",
+          },
+          {
+            ...DELETE_BUTTON_PROPS({
+              action: () =>
+                deleteConfigurationMutation.mutateAsync(row.original.key),
+              label: CRUD_CONFIG.TEXT_LANG.DELETE,
+              isMakingRequest: false,
+            }),
+          },
+        ]}
+      />
     ),
-    [deleteConfigurationMutation.isLoading, passwordStore.password]
+    [deleteConfigurationMutation.isPending, passwordStore.password]
   );
 
   const canManageAction = !(
     group === IntegrationsConfigurationGroup.Credentials &&
-    !userHasPermission(USER_PERMISSIONS.CAN_MANAGE_INTEGRATIONS)
+    !userHasPermission(UserPermissions.CAN_MANAGE_APP_CREDENTIALS)
   );
 
   const showManageAction =
@@ -111,30 +123,21 @@ export function ManageCredentialGroup({
     if (group !== currentTab) {
       return undefined;
     }
+
     return {
       actionItems: showManageAction
         ? [
             {
               id: `add-${showManageAction ? "true" : "false"}`,
-              onClick: () => {
+              action: () => {
                 setCurrentConfigItem(NEW_CONFIG_ITEM);
               },
-              IconComponent: Plus,
-              label:
-                INTEGRATIONS_GROUP_CONFIG[group].crudConfig.TEXT_LANG.CREATE,
+              systemIcon: "Plus",
+              label: CRUD_CONFIG.TEXT_LANG.CREATE,
             },
           ]
         : [],
-      secondaryActionItems: [
-        {
-          id: "help",
-          onClick: () => setIsDocOpen(true),
-          IconComponent: HelpCircle,
-          label: DOCUMENTATION_LABEL.CONCEPT(
-            INTEGRATIONS_GROUP_CONFIG[group].crudConfig.TEXT_LANG.TITLE
-          ),
-        },
-      ],
+      secondaryActionItems: [documentationActionButton],
     };
   }, [group, currentTab, canManageAction, showManageAction]);
 
@@ -142,7 +145,7 @@ export function ManageCredentialGroup({
 
   const tableColumns: IFETableColumn<IKeyValue>[] = [
     {
-      Header: "Key",
+      Header: msg`Key`,
       accessor: "key",
       filter: {
         _type: "string",
@@ -158,13 +161,13 @@ export function ManageCredentialGroup({
       ),
     },
     {
-      Header: "Value",
+      Header: msg`Value`,
       accessor: "value",
     },
   ];
   if (showManageAction) {
     tableColumns.push({
-      Header: "Action",
+      Header: msg`Action`,
       disableSortBy: true,
       accessor: "__action__",
       Cell: MemoizedAction,
@@ -175,38 +178,18 @@ export function ManageCredentialGroup({
     <>
       <section aria-label={`${group} priviledge section`}>
         {group === IntegrationsConfigurationGroup.Credentials &&
-          userHasPermission(USER_PERMISSIONS.CAN_MANAGE_INTEGRATIONS) &&
+          userHasPermission(UserPermissions.CAN_MANAGE_APP_CREDENTIALS) &&
           revealedCredentials.data === undefined && (
             <Spacer>
-              <Typo.SM textStyle="italic">
-                Please input your account password to be able to see secret
-                values and manage them
-              </Typo.SM>
-              <Spacer />
-              <SchemaForm
-                fields={{
-                  password: {
-                    type: "password",
-                    validations: [
-                      {
-                        validationType: "required",
-                      },
-                    ],
-                  },
-                }}
-                onSubmit={async ({ password }: { password: string }) => {
-                  passwordStore.setPassword(password);
-                }}
-                icon="eye"
-                buttonText={(isSubmitting) =>
-                  isSubmitting ? "Revealing Secrets" : "Reveal Secrets"
-                }
+              <PasswordToReveal
+                label="Secrets"
+                isLoading={revealedCredentials.isLoading}
               />
             </Spacer>
           )}
         {!canManageAction && tableData.data.length > 0 && (
           <Spacer>
-            <Typo.SM textStyle="italic">
+            <Typo.SM $textStyle="italic">
               Your account does not have the permission to view secret values or
               manage them
             </Typo.SM>
@@ -216,21 +199,33 @@ export function ManageCredentialGroup({
 
       <FEPaginationTable
         dataEndpoint={dataEndpoint}
-        emptyMessage={
-          INTEGRATIONS_GROUP_CONFIG[group].crudConfig.TEXT_LANG.EMPTY_LIST
-        }
+        empty={{
+          text: CRUD_CONFIG.TEXT_LANG.EMPTY_LIST,
+          createNew: showManageAction
+            ? {
+                label: CRUD_CONFIG.TEXT_LANG.CREATE,
+                action: () => setCurrentConfigItem(NEW_CONFIG_ITEM),
+              }
+            : undefined,
+        }}
         columns={tableColumns}
       />
 
       <OffCanvas
         title={
           currentConfigItem === NEW_CONFIG_ITEM
-            ? INTEGRATIONS_GROUP_CONFIG[group].crudConfig.TEXT_LANG.CREATE
-            : INTEGRATIONS_GROUP_CONFIG[group].crudConfig.TEXT_LANG.EDIT
+            ? CRUD_CONFIG.TEXT_LANG.CREATE
+            : CRUD_CONFIG.TEXT_LANG.EDIT
         }
         onClose={closeConfigItem}
         show={!!currentConfigItem}
       >
+        {group === IntegrationsConfigurationGroup.Credentials && (
+          <>
+            <PasswordMessage />
+            <Spacer />
+          </>
+        )}
         <KeyValueForm
           group={group}
           initialValues={tableData.data.find(
@@ -242,11 +237,7 @@ export function ManageCredentialGroup({
           }}
         />
       </OffCanvas>
-      <VariablesDocumentation
-        title={INTEGRATIONS_GROUP_CONFIG[group].crudConfig.TEXT_LANG.TITLE}
-        close={setIsDocOpen}
-        isOpen={isDocOpen}
-      />
+      <VariablesDocumentation />
     </>
   );
 }

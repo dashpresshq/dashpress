@@ -1,22 +1,15 @@
+import { msg } from "@lingui/macro";
 import { IStorageIntegrationsImplemention } from "backend/storage/types";
 
-// https://www.npmjs.com/package/multer-s3
-
-export const AWS_STORAGE_INTEGRATION: IStorageIntegrationsImplemention<
-  {
-    accessKeyId: string;
-    secretAccessKey: string;
-    region: string;
-  },
-  {
-    bucket: string;
-  }
-> = {
+export const AWS_STORAGE_INTEGRATION: IStorageIntegrationsImplemention<{
+  accessKeyId: string;
+  secretAccessKey: string;
+  region: string;
+}> = {
   title: "AWS S3",
-  credentialsGroupKey: "AWS_S3",
-  packages: ["aws-sdk"],
   integrationConfigurationSchema: {
     accessKeyId: {
+      label: msg`Access Key ID`,
       type: "text",
       validations: [
         {
@@ -25,6 +18,7 @@ export const AWS_STORAGE_INTEGRATION: IStorageIntegrationsImplemention<
       ],
     },
     secretAccessKey: {
+      label: msg`Secret Access Key`,
       type: "text",
       validations: [
         {
@@ -33,6 +27,7 @@ export const AWS_STORAGE_INTEGRATION: IStorageIntegrationsImplemention<
       ],
     },
     region: {
+      label: msg`Region`,
       type: "text",
       validations: [
         {
@@ -41,22 +36,12 @@ export const AWS_STORAGE_INTEGRATION: IStorageIntegrationsImplemention<
       ],
     },
   },
-  uploadConfigurationSchema: {
-    bucket: {
-      type: "text",
-      validations: [
-        {
-          validationType: "required",
-        },
-      ],
-    },
-  },
-  store: async (integrationConfig, uploadConfig, file: File) => {
+  store: async (integrationConfig, file: File) => {
     // const foo = new S3Client({
     //   region: "string",
     // });
     // eslint-disable-next-line no-console
-    console.log(integrationConfig, uploadConfig, file);
+    console.log(integrationConfig, file);
     return "";
   },
 };

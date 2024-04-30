@@ -1,16 +1,18 @@
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { META_USER_PERMISSIONS } from "shared/constants/user";
-import { IDropDownMenuItem } from "frontend/design-system/components/DropdownMenu";
+import { IGroupActionButton } from "frontend/design-system/components/Button/types";
+import { MessageDescriptor } from "@lingui/core";
+import { msg } from "@lingui/macro";
 import { createStore } from "../store";
 
 export type IPageDetails = {
-  pageTitle: string;
+  pageTitle: MessageDescriptor;
   viewKey: string;
   pageLink: string;
   permission: string;
-  actionItems?: IDropDownMenuItem[];
-  secondaryActionItems?: IDropDownMenuItem[];
+  actionItems?: IGroupActionButton[];
+  secondaryActionItems?: IGroupActionButton[];
 };
 
 type IStore = {
@@ -19,7 +21,7 @@ type IStore = {
 } & Partial<IPageDetails>;
 
 export const usePageDetailsStore = createStore<IStore>((set) => ({
-  pageTitle: "",
+  pageTitle: msg``,
   viewKey: "",
   pageLink: "/",
   permission: META_USER_PERMISSIONS.NO_PERMISSION_REQUIRED,
@@ -44,7 +46,10 @@ export const useSetPageDetails = (
       secondaryActionItems: [],
       pageLink: router.asPath,
     });
-  }, [pageDetails.pageTitle]);
+  }, [
+    pageDetails.pageTitle.message,
+    JSON.stringify(pageDetails.pageTitle.values),
+  ]);
 };
 
 export const useSetCurrentActionItems = (

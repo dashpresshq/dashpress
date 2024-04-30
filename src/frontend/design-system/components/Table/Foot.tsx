@@ -1,14 +1,14 @@
 import { flexRender, Table } from "@tanstack/react-table";
-import React from "react";
+
 import styled from "styled-components";
 import { Stack } from "frontend/design-system/primitives/Stack";
 import { Typo } from "frontend/design-system/primitives/Typo";
 import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
-import { StyledTh } from "./styles";
+import { Th } from "./styles";
 
 const SHOW_FOOTER_THRESHOLD = 20;
 
-const StyledTFoot = styled.tfoot`
+const TFoot = styled.tfoot`
   background-color: ${USE_ROOT_COLOR("soft-color")};
 `;
 
@@ -22,13 +22,13 @@ export function TableFoot({ table, dataLength }: IProps) {
     return null;
   }
   return (
-    <StyledTFoot>
+    <TFoot>
       {table.getFooterGroups().map((footerGroup) => (
         <tr key={footerGroup.id}>
           {footerGroup.headers.map((header) => (
-            <StyledTh key={header.id}>
-              <Stack justify="start">
-                <Typo.SM weight="bold" as="span">
+            <Th key={header.id}>
+              <Stack $justify="start">
+                <Typo.SM $weight="bold" as="span">
                   {header.isPlaceholder
                     ? null
                     : flexRender(
@@ -37,10 +37,10 @@ export function TableFoot({ table, dataLength }: IProps) {
                       )}
                 </Typo.SM>
               </Stack>
-            </StyledTh>
+            </Th>
           ))}
         </tr>
       ))}
-    </StyledTFoot>
+    </TFoot>
   );
 }

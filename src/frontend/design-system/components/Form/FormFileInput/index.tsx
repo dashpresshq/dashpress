@@ -1,6 +1,8 @@
-import React, { useCallback, useState } from "react";
+import { useCallback, useState } from "react";
 import { useDropzone } from "react-dropzone";
-import axios, { AxiosProgressEvent } from "axios";
+import { makeFileRequest } from "frontend/lib/data/makeRequest";
+import { useToggle } from "frontend/hooks/state/useToggleState";
+import { typescriptSafeObjectDotEntries } from "shared/lib/objects";
 import { ISharedFormInput } from "../_types";
 import { generateClassNames, wrapLabelAndError } from "../_wrapForm";
 import { Presentation } from "./Presentation";
@@ -8,8 +10,6 @@ import { Presentation } from "./Presentation";
 interface IFormFileInput extends ISharedFormInput {
   uploadUrl: string;
   metadata?: Record<string, unknown>;
-  maxSize?: number;
-  requestHeaders?: Record<string, unknown>;
 }
 
 function FileInput({
@@ -18,47 +18,35 @@ function FileInput({
   disabled,
   uploadUrl,
   metadata,
-  maxSize,
-  requestHeaders,
 }: IFormFileInput) {
-  const [progress, setProgress] = useState<number>(0);
+  const submissionMode = useToggle();
   const [error, setError] = useState<string>("");
   const { value, onChange } = input;
-
+  // Get the fiel settings
   const onDrop = useCallback(
     (acceptedFiles: File[]) => {
       input.onChange(null);
       acceptedFiles.forEach(async (file) => {
-        setProgress(1);
-
         const formData = new FormData();
         formData.append("file", file, file.name);
 
         if (metadata) {
-          Object.entries(metadata).forEach(([key, keyValue]) => {
-            formData.append(key, keyValue as string);
-          });
+          typescriptSafeObjectDotEntries(metadata).forEach(
+            ([key, keyValue]) => {
+              formData.append(key, keyValue as string);
+            }
+          );
         }
         try {
-          const { fileUrl } = (
-            await axios.post(uploadUrl, formData, {
-              headers: {
-                ...requestHeaders,
-                "Content-Type": "multipart/form-data",
-              },
-              onUploadProgress: (progressEvent: AxiosProgressEvent) => {
-                const percentCompleted = Math.round(
-                  (progressEvent.loaded * 100) / (progressEvent!.total || 1)
-                );
-                setProgress(percentCompleted);
-              },
-            })
-          ).data;
+          const { fileUrl } = await makeFileRequest(uploadUrl, formData);
           input.onChange(fileUrl);
+          setError(null);
         } catch (e) {
-          setError("Ooops, something wrong happened.");
+          setError(
+            e.response.data.message || "Ooops, something wrong happened."
+          );
         }
-        setProgress(0);
+        submissionMode.off();
       });
     },
     [uploadUrl, input, metadata]
@@ -66,14 +54,14 @@ function FileInput({
   const dropZoneProps = useDropzone({
     onDrop,
     multiple: false,
-    accept: { image: ["jpeg, png"] },
+    // accept: { image: ["jpeg, png"] },
+    // maxSize,
     disabled,
-    maxSize,
   });
 
   return (
     <Presentation
-      {...{ progress, disabled, value, error }}
+      {...{ isSubmitting: submissionMode.isOn, disabled, value, error }}
       onClear={() => onChange(null)}
       dropZoneProps={dropZoneProps}
       formClassName={generateClassNames(meta)}
@@ -81,7 +69,7 @@ function FileInput({
   );
 }
 
-export const FormFileInput: React.FC<IFormFileInput> = (formInput) => {
+export const FormFileInput = (formInput: IFormFileInput) => {
   return wrapLabelAndError(<FileInput {...formInput} />, formInput);
 };
 

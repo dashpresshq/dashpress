@@ -1,1 +1,1 @@
-export const SLUG_LOADING_VALUE = "loading";
+export const SYSTEM_LOADING_VALUE = "__loading__";

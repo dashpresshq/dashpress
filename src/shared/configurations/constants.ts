@@ -1,85 +1,112 @@
-import { ISingularPlural } from "shared/types/config";
+import { FormFieldTypes, IFieldValidationItem } from "shared/validations/types";
+import { IColorableSelection } from "shared/types/ui";
+import { ITableView, QueryFilterSchema } from "shared/types/data";
+import { msg } from "@lingui/macro";
 import { BaseAppConfigurationKeys } from "./base-types";
-import { PortalConfigurationKeys, PORTAL_CONFIGURATION_KEYS } from "./portal";
+import {
+  PortalAppConfigurationKeys,
+  PORTAL_APP_CONFIGURATION_CONFIG,
+} from "./portal";
 import { DEFAULT_SYSTEM_SETTINGS } from "./system";
-import { IAppConfigurationBag } from "./types";
+import { IEntityCrudSettings } from "./types";
 
 export type AppConfigurationKeys =
   | BaseAppConfigurationKeys
-  | PortalConfigurationKeys;
+  | PortalAppConfigurationKeys;
 
-export const CONFIGURATION_KEYS: Record<
-  AppConfigurationKeys,
-  IAppConfigurationBag
-> = {
-  ...PORTAL_CONFIGURATION_KEYS,
+export const APP_CONFIGURATION_CONFIG = {
+  ...PORTAL_APP_CONFIGURATION_CONFIG,
   hidden_entity_table_columns: {
-    crudConfigLabel: "Table Columns Settings",
+    label: msg`Table Columns Settings`,
     requireEntity: true,
-    defaultValue: [],
+    defaultValue: [] as string[],
   },
   hidden_entity_create_columns: {
-    crudConfigLabel: "Create Columns Settings",
+    label: msg`Create Columns Settings`,
     requireEntity: true,
-    defaultValue: [],
+    defaultValue: [] as string[],
   },
   hidden_entity_update_columns: {
-    crudConfigLabel: "Update Columns Settings",
+    label: msg`Update Columns Settings`,
     requireEntity: true,
-    defaultValue: [],
+    defaultValue: [] as string[],
   },
   hidden_entity_details_columns: {
-    crudConfigLabel: "Details Columns Settings",
+    label: msg`Details Columns Settings`,
     requireEntity: true,
-    defaultValue: [],
+    defaultValue: [] as string[],
+  },
+  entity_fields_orders_table: {
+    label: msg`Table Fields Order`,
+    requireEntity: true,
+    defaultValue: [] as string[],
+  },
+  entity_fields_orders_create: {
+    label: msg`Create Fields Order`,
+    requireEntity: true,
+    defaultValue: [] as string[],
+  },
+  entity_fields_orders_update: {
+    label: msg`Update Fields Order`,
+    requireEntity: true,
+    defaultValue: [] as string[],
+  },
+  entity_fields_orders_details: {
+    label: msg`Details Fields Order`,
+    requireEntity: true,
+    defaultValue: [] as string[],
   },
   entity_columns_labels: {
-    crudConfigLabel: "Column Labels Settings",
+    label: msg`Column Labels Settings`,
     requireEntity: true,
-    defaultValue: {},
+    defaultValue: {} as Record<string, string>,
   },
   entity_columns_types: {
-    crudConfigLabel: "Column Types Settings",
+    label: msg`Column Types Settings`,
     requireEntity: true,
-    defaultValue: {},
+    defaultValue: {} as Record<string, FormFieldTypes>,
   },
   entity_validations: {
-    crudConfigLabel: "Validations",
+    label: msg`Validations`,
     requireEntity: true,
-    defaultValue: {},
+    defaultValue: {} as Record<string, IFieldValidationItem[]>,
   },
   entity_selections: {
-    crudConfigLabel: "Selections Settings",
+    label: msg`Selections Settings`,
     requireEntity: true,
-    defaultValue: {},
+    defaultValue: {} as Record<string, IColorableSelection[]>,
   },
   entity_diction: {
-    crudConfigLabel: "Diction Settings",
+    label: msg`Diction Settings`,
     requireEntity: true,
-    defaultValue: { singular: "", plural: "" } as ISingularPlural,
+    defaultValue: { singular: "", plural: "" },
   },
   entity_form_extension: {
-    crudConfigLabel: "Form Scripts",
+    label: msg`Form Scripts`,
     requireEntity: true,
     defaultValue: {
       fieldsState: "",
       beforeSubmit: "",
+      initialValues: "",
+    },
+  },
+  file_upload_settings: {
+    label: msg`File Uploads Settings`,
+    defaultValue: {
+      defaultMaxFileSizeInMB: 5,
+      fileNameFormat: "{{random_letters}}-{{file_name}}-{{file_extension}}",
+      filePathFormat: "/uploads/{{entity}}/{{current_date}}",
     },
   },
   entity_presentation_script: {
-    crudConfigLabel: "Presentation Scripts",
+    label: msg`Presentation Scripts`,
     requireEntity: true,
     defaultValue: {
       script: "",
     },
   },
-  entity_fields_orders: {
-    crudConfigLabel: "Fields Order",
-    requireEntity: true,
-    defaultValue: [],
-  },
   entity_crud_settings: {
-    crudConfigLabel: "CRUD Settings",
+    label: msg`CRUD Settings`,
     requireEntity: true,
     defaultValue: {
       create: true,
@@ -87,55 +114,77 @@ export const CONFIGURATION_KEYS: Record<
       table: true,
       update: true,
       delete: true,
-    },
+    } as IEntityCrudSettings,
   },
-  entity_views: {
-    crudConfigLabel: "Views Settings",
+  table_views: {
+    label: msg`Table Views`,
     requireEntity: true,
-    defaultValue: [],
+    defaultValue: [] as ITableView[],
+  },
+  persistent_query: {
+    label: msg`Persistent Query`,
+    requiresEntity: true,
+    defaultValue: {
+      children: [],
+      operator: "and",
+    } as QueryFilterSchema,
   },
   entity_relations_order: {
-    crudConfigLabel: "Relations Order",
+    label: msg`Relations Order`,
     requireEntity: true,
-    defaultValue: [],
+    defaultValue: [] as string[],
   },
   hidden_entity_relations: {
-    crudConfigLabel: "Enabled Relations",
+    label: msg`Enabled Relations`,
     requireEntity: true,
-    defaultValue: [],
+    defaultValue: [] as string[],
+  },
+  metadata_columns: {
+    label: msg`Metadata Columns`,
+    defaultValue: {
+      createdAt: "created_at",
+      updatedAt: "updated_at",
+    },
   },
   entity_relation_template: {
-    crudConfigLabel: "Relation Template",
+    label: msg`Relation Template`,
     requireEntity: true,
-    defaultValue: { format: "", fields: [] },
+    defaultValue: { format: "", fields: [] } as {
+      format: string;
+      fields: string[];
+    },
   },
   entity_relations_labels: {
-    crudConfigLabel: "Relation Labels",
+    label: msg`Relation Labels`,
     requireEntity: true,
-    defaultValue: {},
+    defaultValue: {} as Record<string, string>,
   },
   disabled_entities: {
-    crudConfigLabel: "Enabled Entities Settings",
-    defaultValue: [],
+    label: msg`Enabled Entities Settings`,
+    defaultValue: [] as string[],
   },
   disabled_menu_entities: {
-    crudConfigLabel: "Menu Settings",
-    defaultValue: [],
+    label: msg`Menu Settings`,
+    defaultValue: [] as string[],
   },
   menu_entities_order: {
-    crudConfigLabel: "Menu Settings",
-    defaultValue: [],
+    label: msg`Menu Settings`,
+    defaultValue: [] as string[],
   },
   default_date_format: {
-    crudConfigLabel: "Date Format",
+    label: msg`Date Format`,
     defaultValue: "do MMM yyyy, h:MM aa",
   },
   system_settings: {
-    crudConfigLabel: "System Settings",
+    label: msg`System Settings`,
     defaultValue: DEFAULT_SYSTEM_SETTINGS,
   },
+  users_to_database_link: {
+    label: msg`Users to Database Link`,
+    defaultValue: { table: "", field: "" },
+  },
   theme_color: {
-    crudConfigLabel: "Theme Settings",
+    label: msg`Theme Settings`,
     guest: true,
     defaultValue: {
       primary: "#4b38b3",
@@ -143,7 +192,7 @@ export const CONFIGURATION_KEYS: Record<
     },
   },
   site_settings: {
-    crudConfigLabel: "Site Settings",
+    label: msg`Site Settings`,
     guest: true,
     defaultValue: {
       name: "DashPress",
@@ -153,3 +202,6 @@ export const CONFIGURATION_KEYS: Record<
     },
   },
 };
+
+export type AppConfigurationValueType<T extends AppConfigurationKeys> =
+  typeof APP_CONFIGURATION_CONFIG[T]["defaultValue"];

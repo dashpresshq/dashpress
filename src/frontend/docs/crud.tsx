@@ -1,10 +1,10 @@
 import { InfoAlert } from "frontend/design-system/components/Alert";
 import { Spacer } from "frontend/design-system/primitives/Spacer";
-import { DocumentationRoot, IDocumentationRootProps } from "./_base";
+import { DocumentationRoot } from "./_base";
 
-export function CRUDDocumentation(props: IDocumentationRootProps) {
+export function CRUDDocumentation() {
   return (
-    <DocumentationRoot {...props}>
+    <DocumentationRoot>
       <p>
         This setting generally allows you to disable CRUD functionalities and
         some of the CRUD field

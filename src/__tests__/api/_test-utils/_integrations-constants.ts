@@ -1,5 +1,6 @@
 import { INTEGRATION_CONFIG_GROUP_DEMILITER } from "backend/integrations-configurations/services/_base";
 import { createConfigDomainPersistenceService } from "backend/lib/config-persistence";
+import { typescriptSafeObjectDotEntries } from "shared/lib/objects";
 
 const TEST_CONSTANTS: Record<string, string> = {
   CONSTANT_KEY_1: "CONSTANT_KEY_1",
@@ -18,7 +19,7 @@ export const setupIntegrationsConstantsTestData = async (
 
   await configPersistenceService.resetToEmpty();
 
-  for (const [key, value] of Object.entries(testConstants)) {
+  for (const [key, value] of typescriptSafeObjectDotEntries(testConstants)) {
     await configPersistenceService.upsertItem(key, value);
   }
 };

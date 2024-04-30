@@ -1,34 +1,45 @@
-import { USER_PERMISSIONS } from "shared/constants/user";
+import { UserPermissions } from "shared/constants/user";
 import { configurationApiController } from "backend/configuration/configuration.controller";
 import { requestHandler } from "backend/lib/request";
+
+const REQUEST_QUERY_FIELD = "key";
 
 export default requestHandler(
   {
     GET: async (getValidatedRequest) => {
       const validatedRequest = await getValidatedRequest([
-        "configKey",
+        {
+          _type: "requestQuery",
+          options: REQUEST_QUERY_FIELD,
+        },
         {
           _type: "entity",
           options: true,
         },
       ]);
       return await configurationApiController.showConfig(
-        validatedRequest.configKey,
+        validatedRequest.requestQuery,
         validatedRequest.entity
       );
     },
     PUT: async (getValidatedRequest) => {
       const validatedRequest = await getValidatedRequest([
-        "configKey",
+        {
+          _type: "requestQuery",
+          options: REQUEST_QUERY_FIELD,
+        },
         {
           _type: "entity",
           options: true,
         },
-        "configBody",
+        {
+          _type: "requestBody",
+          options: {},
+        },
       ]);
       return await configurationApiController.upsertConfig(
-        validatedRequest.configKey,
-        validatedRequest.configBody,
+        validatedRequest.requestQuery,
+        validatedRequest.requestBody.data,
         validatedRequest.entity
       );
     },
@@ -37,7 +48,7 @@ export default requestHandler(
     {
       method: ["PUT"],
       _type: "canUser",
-      body: USER_PERMISSIONS.CAN_CONFIGURE_APP,
+      body: UserPermissions.CAN_CONFIGURE_APP,
     },
   ]
 );

@@ -1,4 +1,3 @@
-import React from "react";
 import { AuthLayout } from "frontend/_layouts/guest";
 import { useSetupCheck } from "frontend/hooks/setup/setup.store";
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
@@ -7,7 +6,12 @@ import {
   FormSkeleton,
   FormSkeletonSchema,
 } from "frontend/design-system/components/Skeleton/Form";
-import { UserSetupForm } from "./Form";
+import { SchemaForm } from "frontend/components/SchemaForm";
+import {
+  ISetupUserForm,
+  SETUP_USER_FORM_SCHEMA,
+} from "shared/form-schemas/setup/user";
+import { msg } from "@lingui/macro";
 import { useSetupUserMutation } from "../setup.store";
 
 export function UserSetup() {
@@ -44,7 +48,14 @@ export function UserSetup() {
           />
         }
       >
-        <UserSetupForm onSubmit={setupUserMutation.mutateAsync} />
+        <SchemaForm<ISetupUserForm>
+          buttonText={(isSubmitting) =>
+            isSubmitting ? msg`Setting Up Account` : msg`Setup Account`
+          }
+          onSubmit={setupUserMutation.mutateAsync}
+          systemIcon="UserPlus"
+          fields={SETUP_USER_FORM_SCHEMA}
+        />
       </ViewStateMachine>
     </AuthLayout>
   );

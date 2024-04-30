@@ -9,12 +9,11 @@ export type ConfigDomain =
   | "environment-variables"
   | "dashboard-widgets"
   | "app-config"
+  | "users-preferences"
   | "list-order"
   | "temp-storage"
   | "key-value"
-  | "action-instances"
-  | "activated-actions"
-  | "activated-storage"
+  | "form-actions"
   | "roles";
 
 export enum ConfigAdaptorTypes {

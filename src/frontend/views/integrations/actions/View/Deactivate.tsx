@@ -1,9 +1,10 @@
-import { ActionIntegrationKeys, IIntegrationsList } from "shared/types/actions";
+import { ActionIntegrations, IIntegrationsList } from "shared/types/actions";
 import { SchemaForm } from "frontend/components/SchemaForm";
 import { Stack } from "frontend/design-system/primitives/Stack";
 import { Spacer } from "frontend/design-system/primitives/Spacer";
 import { Typo } from "frontend/design-system/primitives/Typo";
-import { useDeactivateActionMutation } from "../actions.store";
+import { msg } from "@lingui/macro";
+import { useDeactivateIntegrationMutation } from "../actions.store";
 
 interface IProps {
   integrationDetail: IIntegrationsList;
@@ -11,14 +12,14 @@ interface IProps {
 }
 
 export function Deactivate({ integrationDetail, activationId }: IProps) {
-  const deactivateActionMutation = useDeactivateActionMutation();
+  const deactivateIntegrationMutation = useDeactivateIntegrationMutation();
 
   const deactivationKey = `DEACTIVATE_${integrationDetail.key}`.toUpperCase();
 
-  if (integrationDetail.key === ActionIntegrationKeys.HTTP) {
+  if (integrationDetail.key === ActionIntegrations.HTTP) {
     return (
-      <Stack justify="center">
-        <Typo.SM textStyle="italic">
+      <Stack $justify="center">
+        <Typo.SM $textStyle="italic">
           The HTTP action can not be deactivated
         </Typo.SM>
       </Stack>
@@ -27,38 +28,38 @@ export function Deactivate({ integrationDetail, activationId }: IProps) {
 
   return (
     <>
-      <Typo.SM textStyle="italic">
-        Deactivating an action will irrevocabily delete its configurations and
-        remove all its instances
+      <Typo.SM $textStyle="italic">
+        Deactivating an integration will irrevocabily delete its configurations
+        and remove all its form actions
       </Typo.SM>
       <Spacer />
       <SchemaForm
         fields={{
           confirm: {
             type: "text",
-            label: `Input ${deactivationKey} to continue`,
+            label: msg`Input ${deactivationKey} to continue`,
             validations: [
               {
                 validationType: "regex",
                 constraint: {
                   pattern: `${deactivationKey}$`,
                 },
-                errorMessage: "Incorrect value",
+                errorMessage: msg`Incorrect value`,
               },
               {
                 validationType: "required",
-                errorMessage: "Required",
+                errorMessage: msg`Required`,
               },
             ],
           },
         }}
-        onSubmit={() => deactivateActionMutation.mutateAsync(activationId)}
+        onSubmit={() => deactivateIntegrationMutation.mutateAsync(activationId)}
         buttonText={(isSubmitting) =>
           isSubmitting
-            ? `Deactivating ${integrationDetail.title}`
-            : `Deactivate ${integrationDetail.title}`
+            ? msg`Deactivating ${integrationDetail.title}`
+            : msg`Deactivate ${integrationDetail.title}`
         }
-        icon="no-icon"
+        systemIcon="Ban"
       />
     </>
   );

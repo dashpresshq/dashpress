@@ -5,8 +5,7 @@ import styled, { css } from "styled-components";
 export interface IStyledBaseButton {
   block?: boolean;
   size?: "sm" | "xs";
-  color?: keyof typeof SYSTEM_COLORS;
-  justIcon?: boolean;
+  $justIcon?: boolean;
   cursor?: "progress";
 }
 
@@ -23,7 +22,6 @@ export const StyledBaseButton = styled.button<IStyledBaseButton>`
   font-size: 0.9rem;
   line-height: 1.7;
   border-radius: 4px;
-  position: relative;
   cursor: ${(props) => props.cursor || "pointer"};
   -webkit-appearance: button
   -webkit-tap-highlight-color: transparent;
@@ -54,31 +52,32 @@ export const StyledBaseButton = styled.button<IStyledBaseButton>`
     ${(props) =>
       props.size === "xs" &&
       css`
-      padding: .25rem .5rem;
-      font-size: .71rem;
-      line-height: 1.2;
-      border-radius: 4px;
-  }
+        padding: 0.25rem 0.5rem;
+        font-size: 0.71rem;
+        line-height: 1.2;
+        border-radius: 4px;
       `}
 
       ${(props) =>
-        props.justIcon &&
+        props.$justIcon &&
         css`
-    padding: 8px;
-    font-size: 10px;
-    line-height: initial;
-    border-radius: 50%;
-    width: 29px;
-      }
-          `}
+          padding: 8px;
+          font-size: 10px;
+          line-height: initial;
+          border-radius: 50%;
+          width: 29px;
+        `}
 
 
   &:disabled {
-    opacity: 0.65;
+    cursor: not-allowed;
+    opacity: 0.9;
   }
 `;
 
-export const StyledSoftButton = styled(StyledBaseButton)`
+export const SoftButtonStyled = styled(StyledBaseButton)<{
+  $color?: keyof typeof SYSTEM_COLORS;
+}>`
   background-color: ${USE_ROOT_COLOR("primary-shade-color")};
   color: ${USE_ROOT_COLOR("text-on-shade")};
   border-width: 0;
@@ -92,9 +91,21 @@ export const StyledSoftButton = styled(StyledBaseButton)`
     background-color: ${USE_ROOT_COLOR("primary-color")};
     color: ${USE_ROOT_COLOR("text-on-primary")};
   }
+  ${(props) =>
+    props.$color &&
+    css`
+      background-color: ${SYSTEM_COLORS[props.$color]}1A;
+      color: ${SYSTEM_COLORS[props.$color]};
+      border-color: ${SYSTEM_COLORS[props.$color]};
+
+      &:hover,
+      &:focus {
+        background-color: ${SYSTEM_COLORS[props.$color]};
+      }
+    `}
 `;
 
-export const StyledOutlineButton = styled(StyledBaseButton)`
+export const OutlineButton = styled(StyledBaseButton)`
   color: ${USE_ROOT_COLOR("primary-color")};
   border-color: ${USE_ROOT_COLOR("primary-color")};
 
@@ -124,16 +135,5 @@ export const StyledOutlineButton = styled(StyledBaseButton)`
   &:not(:disabled):not(.disabled):active:focus,
   &:not(:disabled):not(.disabled).active:focus {
     box-shadow: 0 0 0 0.2rem ${USE_ROOT_COLOR("primary-shade-color")};
-  }
-`;
-
-export const StyledDeleteButton = styled(StyledSoftButton)`
-  background-color: ${SYSTEM_COLORS.danger}1A;
-  color: ${SYSTEM_COLORS.danger};
-  border-color: ${SYSTEM_COLORS.danger};
-
-  &:hover,
-  &:focus {
-    background-color: ${SYSTEM_COLORS.danger};
   }
 `;

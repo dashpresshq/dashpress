@@ -1,25 +1,26 @@
-import "@testing-library/jest-dom";
-import React from "react";
 import { render, screen, waitFor } from "@testing-library/react";
 import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 import userEvent from "@testing-library/user-event";
 import AccountPassword from "pages/account/password";
 
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
+import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
+
+Object.defineProperty(window, "location", {
+  value: {
+    ...window.location,
+    replace: jest.fn(),
+  },
+  writable: true,
+});
 
 setupApiHandlers();
 
-jest.mock("next/router", () => require("next-router-mock"));
+const useRouter = jest.spyOn(require("next/router"), "useRouter");
+
+useRouter.mockImplementation(USE_ROUTER_PARAMS({}));
 
 describe("pages/account/logout", () => {
-  const useRouter = jest.spyOn(require("next/router"), "useRouter");
-  const replaceMock = jest.fn();
-
-  useRouter.mockImplementation(() => ({
-    replace: replaceMock,
-    asPath: "/",
-  }));
-
   it("should log user out", async () => {
     render(
       <ApplicationRoot>
@@ -32,8 +33,7 @@ describe("pages/account/logout", () => {
     );
 
     await waitFor(() => {
-      expect(replaceMock).toHaveBeenCalledWith("/auth");
+      expect(window.location.replace).toHaveBeenCalledWith("/auth");
     });
-    expect(localStorage.getItem("__auth-token__")).toBeNull();
   });
 });

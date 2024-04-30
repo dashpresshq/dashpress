@@ -1,17 +1,8 @@
-import { USER_PERMISSIONS } from "shared/constants/user";
-import { actionsApiController } from "backend/actions/actions.controller";
+import { integrationsApiService } from "backend/integrations/integrations.service";
 import { requestHandler } from "backend/lib/request";
 
-export default requestHandler(
-  {
-    GET: async () => {
-      return await actionsApiController.listActivatedActions();
-    },
+export default requestHandler({
+  GET: async () => {
+    return await integrationsApiService.listActivatedIntegrations();
   },
-  [
-    {
-      _type: "canUser",
-      body: USER_PERMISSIONS.CAN_MANAGE_INTEGRATIONS,
-    },
-  ]
-);
+});

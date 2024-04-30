@@ -7,7 +7,7 @@ export const MutationHelpers = {
       (oldItem) => JSON.stringify(formData) !== JSON.stringify(oldItem)
     ),
   ],
-  deleteByKey: <T extends Record<string, string>>(key: keyof T) => {
+  deleteByKey: <T extends Record<string, unknown>>(key: keyof T) => {
     return (old: T[] | undefined = [], currentDataId: string) => [
       ...old.filter((oldData) => currentDataId !== oldData[key]),
     ];

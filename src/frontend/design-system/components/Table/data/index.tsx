@@ -1,4 +1,4 @@
-import React from "react";
+import { fakeMessageDescriptor } from "translations/fake";
 import { ITableColumn } from "../types";
 
 export const TABLE_DATA = {
@@ -41,53 +41,77 @@ export const TABLE_DATA = {
   },
   isLoading: false,
   error: false,
-  isPreviousData: false,
+  isPlaceholderData: false,
 };
 
 export const TABLE_COLUMNS: ITableColumn[] = [
   {
-    Header: "Id",
+    Header: fakeMessageDescriptor("Id"),
     accessor: "id",
     filter: { _type: "idField", bag: undefined },
   },
   {
-    Header: "Name Header",
+    Header: fakeMessageDescriptor("Name Header"),
     accessor: "name",
     filter: { _type: "string", bag: undefined },
   },
   {
-    Header: "Age",
+    Header: fakeMessageDescriptor("Age"),
     accessor: "age",
     filter: { _type: "number", bag: undefined },
   },
   {
-    Header: "Verified",
+    Header: fakeMessageDescriptor("Verified"),
     accessor: "verified",
     disableSortBy: true,
     filter: {
       _type: "boolean",
       bag: [
-        { color: "#00ff00", label: "Yes", value: "true" },
-        { color: "#ff0000", label: "No", value: "false" },
+        {
+          color: "#00ff00",
+          label: fakeMessageDescriptor("Yes"),
+          value: "true",
+        },
+        {
+          color: "#ff0000",
+          label: fakeMessageDescriptor("No"),
+          value: "false",
+        },
       ],
     },
   },
   {
-    Header: "Role",
+    Header: fakeMessageDescriptor("Role"),
     accessor: "role",
     disableSortBy: true,
     filter: {
       _type: "status",
       bag: [
-        { color: "#00ff00", label: "Admin", value: "admin" },
-        { color: "#fff000", label: "Editor", value: "editor" },
-        { color: "#fff000", label: "User", value: "user" },
-        { color: "#ff00f0", label: "Developer", value: "developer" },
+        {
+          color: "#00ff00",
+          label: fakeMessageDescriptor("Admin"),
+          value: "admin",
+        },
+        {
+          color: "#fff000",
+          label: fakeMessageDescriptor("Editor"),
+          value: "editor",
+        },
+        {
+          color: "#fff000",
+          label: fakeMessageDescriptor("User"),
+          value: "user",
+        },
+        {
+          color: "#ff00f0",
+          label: fakeMessageDescriptor("Developer"),
+          value: "developer",
+        },
       ],
     },
   },
   {
-    Header: "Author",
+    Header: fakeMessageDescriptor("Author"),
     accessor: "author",
     filter: {
       _type: "list",
@@ -95,7 +119,7 @@ export const TABLE_COLUMNS: ITableColumn[] = [
     },
   },
   {
-    Header: "Registered",
+    Header: fakeMessageDescriptor("Registered"),
     accessor: "createdAt",
     filter: {
       _type: "date",
@@ -103,7 +127,7 @@ export const TABLE_COLUMNS: ITableColumn[] = [
     },
   },
   {
-    Header: "Actions",
+    Header: fakeMessageDescriptor("Actions"),
     accessor: "__action__",
     disableSortBy: true,
     Cell: () => <span>Some Action</span>,

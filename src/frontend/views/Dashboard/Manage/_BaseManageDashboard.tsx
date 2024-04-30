@@ -1,26 +1,28 @@
 import styled from "styled-components";
-import { Check, Plus } from "react-feather";
-import { USER_PERMISSIONS } from "shared/constants/user";
+import { UserPermissions } from "shared/constants/user";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
-import arrayMove from "array-move";
 import SortableList, { SortableItem } from "react-easy-sort";
 import { useRouter } from "next/router";
 import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
 import { AppLayout } from "frontend/_layouts/app";
+import { arrayMoveImmutable } from "shared/lib/array/move";
+import { msg } from "@lingui/macro";
+import { useLingui } from "@lingui/react";
 import {
   useArrangeDashboardWidgetMutation,
   useDashboardWidgets,
   useDeleteDashboardWidgetMutation,
 } from "../dashboard.store";
-import { gridRoot } from "../styles";
+import { dashboardGridRoot } from "../styles";
 import { DashboardSkeleton } from "../Skeleton";
 import { DashboardWidget } from "../Widget";
 import { DASHBOARD_WIDGETS_CRUD_CONFIG } from "../constants";
 
 const Root = styled.div`
+  container-type: inline-size;
   .list {
-    ${gridRoot};
+    ${dashboardGridRoot};
   }
 `;
 
@@ -33,6 +35,8 @@ interface IProps {
 export function BaseManageDashboard({ dashboardId, doneLink, title }: IProps) {
   const router = useRouter();
 
+  const { _ } = useLingui();
+
   const widgets = useDashboardWidgets(dashboardId);
 
   const deleteDashboardWidgetMutation =
@@ -41,14 +45,14 @@ export function BaseManageDashboard({ dashboardId, doneLink, title }: IProps) {
     useArrangeDashboardWidgetMutation(dashboardId);
 
   const onSortEnd = (oldIndex: number, newIndex: number) => {
-    const newOrder = arrayMove(widgets.data, oldIndex, newIndex);
+    const newOrder = arrayMoveImmutable(widgets.data, oldIndex, newIndex);
     arrangeDashboardWidgetMutation.mutate(newOrder.map(({ id }) => id));
   };
 
   useSetPageDetails({
-    pageTitle: `Manage ${title}`,
+    pageTitle: msg`Manage ${title}`,
     viewKey: "MANAGE_DASHBOARD",
-    permission: USER_PERMISSIONS.CAN_MANAGE_DASHBOARD,
+    permission: UserPermissions.CAN_MANAGE_DASHBOARD,
   });
 
   return (
@@ -56,18 +60,17 @@ export function BaseManageDashboard({ dashboardId, doneLink, title }: IProps) {
       secondaryActionItems={[
         {
           id: "done",
-          label: "Done",
-          IconComponent: Check,
-          onClick: () => router.replace(doneLink),
+          label: msg`Done`,
+          systemIcon: "Check",
+          action: () => router.replace(doneLink),
         },
       ]}
       actionItems={[
         {
           id: "new",
           label: DASHBOARD_WIDGETS_CRUD_CONFIG.TEXT_LANG.CREATE,
-          IconComponent: Plus,
-          onClick: () =>
-            router.push(NAVIGATION_LINKS.DASHBOARD.WIDGET.CREATE(dashboardId)),
+          systemIcon: "Plus",
+          action: NAVIGATION_LINKS.DASHBOARD.WIDGET.CREATE(dashboardId),
         },
       ]}
     >
@@ -80,7 +83,7 @@ export function BaseManageDashboard({ dashboardId, doneLink, title }: IProps) {
           <SortableList
             onSortEnd={onSortEnd}
             className="list"
-            aria-label={DASHBOARD_WIDGETS_CRUD_CONFIG.TEXT_LANG.TITLE}
+            aria-label={_(DASHBOARD_WIDGETS_CRUD_CONFIG.TEXT_LANG.TITLE)}
             draggedItemClassName="dragged"
           >
             {widgets.data.map((config) => (

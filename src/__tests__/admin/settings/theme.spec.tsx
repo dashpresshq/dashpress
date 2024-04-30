@@ -1,20 +1,17 @@
-import "@testing-library/jest-dom";
-import React from "react";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 import userEvent from "@testing-library/user-event";
 import ThemeSettings from "pages/admin/settings/theme";
 
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
+import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
 
 setupApiHandlers();
 
 describe("pages/admin/settings/theme", () => {
   beforeAll(() => {
     const useRouter = jest.spyOn(require("next/router"), "useRouter");
-    useRouter.mockImplementation(() => ({
-      asPath: "/",
-    }));
+    useRouter.mockImplementation(USE_ROUTER_PARAMS({}));
   });
 
   it("should display theme values", async () => {
@@ -48,7 +45,7 @@ describe("pages/admin/settings/theme", () => {
     );
 
     expect((await screen.findAllByRole("status"))[1]).toHaveTextContent(
-      "Theme Settings Saved Successfully"
+      "Theme Preference Saved Successfully"
     );
   });
 
@@ -94,14 +91,6 @@ describe("pages/admin/settings/theme", () => {
     await userEvent.click(
       screen.getByRole("button", { name: "Save Theme Settings" })
     );
-
-    expect((await screen.findAllByRole("status"))[2]).toHaveTextContent(
-      "Account Preferences Saved Successfully"
-    );
-
-    expect((await screen.findAllByRole("status"))[3]).toHaveTextContent(
-      "Theme Settings Saved Successfully"
-    );
   });
 
   it("should display updated theme values", async () => {
@@ -125,7 +114,7 @@ describe("pages/admin/settings/theme", () => {
     );
   });
 
-  it("should display not update the other scheme color", async () => {
+  it("should not display the other scheme color", async () => {
     render(
       <ApplicationRoot>
         <ThemeSettings />

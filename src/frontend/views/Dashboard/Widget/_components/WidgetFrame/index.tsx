@@ -8,18 +8,19 @@ import {
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { ISharedWidgetConfig } from "shared/types/dashboard/base";
 import { DataStateKeys } from "frontend/lib/data/types";
-import { StyledCard } from "frontend/design-system/components/Card";
+import { Card } from "frontend/design-system/components/Card";
 import { Spacer } from "frontend/design-system/primitives/Spacer";
 import { RenderCode } from "frontend/design-system/components/RenderCode";
 import { Stack } from "frontend/design-system/primitives/Stack";
 import { EmptyWrapper } from "frontend/design-system/components/EmptyWrapper";
+import { msg } from "@lingui/macro";
 import { WidgetHeader } from "../WidgetHeader";
 import { IWidgetSettingProps } from "../WidgetHeader/types";
 import { WIDGET_CONFIG } from "../../constants";
 import { useWidgetNavigationLink } from "../../../Widget/useWidgetNavigationLink";
 
-const StyledBox = styled.div`
-  padding: 24px;
+const Box = styled.div`
+  padding: 16px;
 `;
 
 interface IProps {
@@ -46,7 +47,7 @@ export const WidgetFrame = forwardRef<HTMLDivElement, IProps>(
 
     const {
       height: configHeight,
-      size: configSize,
+      span: configSpan,
       LoadingComponent,
       requiredInterface,
       schema,
@@ -79,12 +80,11 @@ export const WidgetFrame = forwardRef<HTMLDivElement, IProps>(
       <WidgetRoot
         ref={ref}
         aria-label={`${config.title} Widget`}
-        $size={config.size || configSize}
+        $span={config.span || configSpan}
         $height={height}
-        hasSetting={!!setting}
       >
-        <StyledCard style={{ height: "100%" }}>
-          <StyledBox>
+        <Card style={{ height: "100%" }}>
+          <Box>
             <WidgetHeader
               setting={setting}
               title={config.title}
@@ -114,19 +114,19 @@ export const WidgetFrame = forwardRef<HTMLDivElement, IProps>(
                   <RenderCode input={schemaError} />
                 ) : isDataEmpty(data.data) ? (
                   <Stack
-                    align="center"
-                    justify="center"
+                    $align="center"
+                    $justify="center"
                     style={{ height: "100%" }}
                   >
-                    <EmptyWrapper text="No Data For This Widget" />
+                    <EmptyWrapper text={msg`No Data`} />
                   </Stack>
                 ) : (
                   <Component data={data.data} config={config} />
                 )}
               </ViewStateMachine>
             </div>
-          </StyledBox>
-        </StyledCard>
+          </Box>
+        </Card>
       </WidgetRoot>
     );
   }

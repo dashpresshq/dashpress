@@ -1,57 +1,44 @@
 import qs from "qs";
 import { useRouter } from "next/router";
-import { useMutation } from "react-query";
 import { FieldQueryFilter, FilterOperators } from "shared/types/data";
 import { CRUD_CONFIG_NOT_FOUND } from "frontend/lib/crud-config";
-import { makeActionRequest } from "frontend/lib/data/makeRequest";
+import { ApiRequest } from "frontend/lib/data/makeRequest";
 import { useApi } from "frontend/lib/data/useApi";
 import { useWaitForResponseMutationOptions } from "frontend/lib/data/useMutate/useWaitForResponseMutationOptions";
-import { SLUG_LOADING_VALUE } from "frontend/lib/routing/constants";
 import { useApiQueries } from "frontend/lib/data/useApi/useApiQueries";
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
+import { DataStates } from "frontend/lib/data/types";
+import { SYSTEM_LOADING_VALUE } from "frontend/lib/routing/constants";
+import { typescriptSafeObjectDotEntries } from "shared/lib/objects";
 import { useEntityCrudConfig } from "../entity/entity.config";
 import { useMultipleEntityReferenceFields } from "../entity/entity.store";
-import { isRouterParamEnabled } from "..";
+import {
+  DATA_MUTATION_ENDPOINTS_TO_CLEAR,
+  ENTITY_COUNT_PATH,
+  ENTITY_DETAILS_PATH,
+  ENTITY_REFERENCE_PATH,
+  SINGLE_DATA_MUTATION_ENDPOINTS_TO_CLEAR,
+} from "./constants";
+import { useEntityMetadataDetails } from "./portal";
 
-export const ENTITY_TABLE_PATH = (entity: string) =>
-  `/api/data/${entity}/table`;
-
-export const ENTITY_COUNT_PATH = (entity: string) =>
-  `/api/data/${entity}/count`;
-
-export const ENTITY_DETAILS_PATH = (
-  entity: string,
-  id: string,
-  column?: string
-) => {
-  const baseLink = `/api/data/${entity}/${id}`;
-
-  if (column) {
-    return `${baseLink}?column=${column}`;
-  }
-  return baseLink;
-};
-
-export const ENTITY_REFERENCE_PATH = (entity: string, id: string) =>
-  `/api/data/${entity}/${id}/reference`;
-
-export const ENTITY_LIST_PATH = (entity: string) => `/api/data/${entity}/list`;
-
-export const useEntityDataDetails = (
-  entity: string,
-  id: string,
-  column?: string
-) => {
+export const useEntityDataDetails = ({
+  entity,
+  entityId,
+  column,
+}: {
+  entity: string;
+  entityId: string;
+  column?: string;
+}) => {
   const entityCrudConfig = useEntityCrudConfig(entity);
 
+  useEntityMetadataDetails({ entity, entityId, column });
+
   return useApi<Record<string, string>>(
-    ENTITY_DETAILS_PATH(entity, id, column),
+    ENTITY_DETAILS_PATH({ entity, entityId, column }),
     {
       errorMessage: entityCrudConfig.TEXT_LANG.NOT_FOUND,
-      enabled:
-        isRouterParamEnabled(entity) &&
-        isRouterParamEnabled(id) &&
-        column !== SLUG_LOADING_VALUE,
+      enabled: column !== SYSTEM_LOADING_VALUE && !!entityId,
       defaultData: {},
     }
   );
@@ -67,13 +54,16 @@ const buildFilterCountQueryString = (
 
 export const useEntityFilterCount = (
   entity: string,
-  filters: FieldQueryFilter[] | "loading"
+  filters: FieldQueryFilter[] | DataStates.Loading
 ) => {
   return useApi<{ count: number }>(
-    buildFilterCountQueryString(entity, filters === "loading" ? [] : filters),
+    buildFilterCountQueryString(
+      entity,
+      filters === DataStates.Loading ? [] : filters
+    ),
     {
       errorMessage: CRUD_CONFIG_NOT_FOUND(`${entity} count`),
-      enabled: filters !== "loading",
+      enabled: filters !== DataStates.Loading,
       defaultData: { count: 0 },
     }
   );
@@ -103,7 +93,7 @@ export const useEntityReferenceCount = (
   const multipleEntityReferenceFields =
     useMultipleEntityReferenceFields(entities);
 
-  const entitiesReferences = Object.entries(
+  const entitiesReferences = typescriptSafeObjectDotEntries(
     multipleEntityReferenceFields.data || {}
   )
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -136,73 +126,85 @@ export const useEntityReferenceCount = (
   });
 };
 
-export const useEntityDataReference = (entity: string, id: string) => {
-  return useApi<string>(ENTITY_REFERENCE_PATH(entity, id), {
+export const useEntityDataReference = (entity: string, entityId: string) => {
+  return useApi<string>(ENTITY_REFERENCE_PATH({ entity, entityId }), {
     errorMessage: CRUD_CONFIG_NOT_FOUND("Reference data"),
-    enabled: isRouterParamEnabled(id) && isRouterParamEnabled(entity),
+    enabled: !!entityId && !!entity,
     defaultData: "",
   });
 };
-export function useEntityDataCreationMutation(entity: string) {
-  const entityCrudConfig = useEntityCrudConfig();
+export function useEntityDataCreationMutation(
+  entity: string,
+  option?: {
+    hideSuccessMessage?: boolean;
+    onSuccessActionWithFormData?: (id: string) => void;
+  }
+) {
+  const entityCrudConfig = useEntityCrudConfig(entity);
   const router = useRouter();
-  const apiMutateOptions = useWaitForResponseMutationOptions<
-    Record<string, string>
+  return useWaitForResponseMutationOptions<
+    Record<string, string>,
+    { id: string }
   >({
-    endpoints: [
-      ENTITY_TABLE_PATH(entity),
-      ENTITY_COUNT_PATH(entity),
-      ENTITY_LIST_PATH(entity),
-    ],
-    smartSuccessMessage: ({ id }) => ({
-      message: entityCrudConfig.MUTATION_LANG.CREATE,
-      action: {
-        label: entityCrudConfig.MUTATION_LANG.VIEW_DETAILS,
-        action: () => router.push(NAVIGATION_LINKS.ENTITY.DETAILS(entity, id)),
-      },
-    }),
+    mutationFn: async (data) =>
+      await ApiRequest.POST(`/api/data/${entity}`, { data }),
+    endpoints: DATA_MUTATION_ENDPOINTS_TO_CLEAR(entity),
+    onSuccessActionWithFormData: ({ id }) => {
+      option?.onSuccessActionWithFormData(id);
+    },
+    smartSuccessMessage: option?.hideSuccessMessage
+      ? undefined
+      : ({ id }) => ({
+          message: entityCrudConfig.MUTATION_LANG.CREATE,
+          action: {
+            label: entityCrudConfig.MUTATION_LANG.VIEW_DETAILS,
+            action: () =>
+              router.push(NAVIGATION_LINKS.ENTITY.DETAILS(entity, id)),
+          },
+        }),
   });
-
-  return useMutation(
-    async (data: Record<string, string>) =>
-      await makeActionRequest("POST", `/api/data/${entity}`, { data }),
-    apiMutateOptions
-  );
 }
 
-export function useEntityDataUpdationMutation(entity: string, id: string) {
-  const entityCrudConfig = useEntityCrudConfig();
-  const apiMutateOptions = useWaitForResponseMutationOptions<
-    Record<string, string>
-  >({
+export function useEntityDataUpdationMutation(
+  entity: string,
+  entityId: string
+) {
+  const entityCrudConfig = useEntityCrudConfig(entity);
+  const metadata = useEntityMetadataDetails({ entity, entityId });
+
+  return useWaitForResponseMutationOptions<Record<string, string>>({
+    mutationFn: async (data) =>
+      await ApiRequest.PATCH(`/api/data/${entity}/${entityId}`, {
+        data: { ...data, ...metadata },
+      }),
     endpoints: [
-      ENTITY_TABLE_PATH(entity),
-      ENTITY_DETAILS_PATH(entity, id),
-      ENTITY_LIST_PATH(entity),
+      ...SINGLE_DATA_MUTATION_ENDPOINTS_TO_CLEAR({ entity, entityId }),
+      ...DATA_MUTATION_ENDPOINTS_TO_CLEAR(entity),
     ],
     successMessage: entityCrudConfig.MUTATION_LANG.EDIT,
   });
-
-  return useMutation(
-    async (data: Record<string, string>) =>
-      await makeActionRequest("PATCH", `/api/data/${entity}/${id}`, { data }),
-    apiMutateOptions
-  );
 }
 
 export function useEntityDataDeletionMutation(
-  entity: string,
+  {
+    entity,
+    entityId,
+  }: {
+    entityId: string;
+    entity: string;
+  },
   redirectTo?: string
 ) {
   const router = useRouter();
-  const entityCrudConfig = useEntityCrudConfig();
-  const apiMutateOptions = useWaitForResponseMutationOptions<
-    Record<string, string>
-  >({
+  const entityCrudConfig = useEntityCrudConfig(entity);
+
+  // eyes on optimstic delete here
+  return useWaitForResponseMutationOptions<string>({
+    mutationFn: async (id) =>
+      await ApiRequest.DELETE(`/api/data/${entity}/${id}`),
     endpoints: [
-      ENTITY_TABLE_PATH(entity),
-      ENTITY_COUNT_PATH(entity),
-      ENTITY_LIST_PATH(entity),
+      ...SINGLE_DATA_MUTATION_ENDPOINTS_TO_CLEAR({ entity, entityId }),
+      ...DATA_MUTATION_ENDPOINTS_TO_CLEAR(entity),
     ],
     onSuccessActionWithFormData: () => {
       if (redirectTo) {
@@ -211,10 +213,4 @@ export function useEntityDataDeletionMutation(
     },
     successMessage: entityCrudConfig.MUTATION_LANG.DELETE,
   });
-  // eyes on optimstic delete here
-  return useMutation(
-    async (id: string) =>
-      await makeActionRequest("DELETE", `/api/data/${entity}/${id}`),
-    apiMutateOptions
-  );
 }

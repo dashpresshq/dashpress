@@ -14,10 +14,6 @@ export class TempStorageApiService {
     private readonly _tempStoragePersistenceService: AbstractConfigDataPersistenceService<ITempStorage>
   ) {}
 
-  async bootstrap() {
-    await this._tempStoragePersistenceService.setup();
-  }
-
   async clearItem(key: string) {
     await this._tempStoragePersistenceService.removeItem(key);
   }
@@ -30,7 +26,7 @@ export class TempStorageApiService {
   }
 
   async getItem<T>(key: string): Promise<T | null> {
-    const data = await this._tempStoragePersistenceService.getItem(key);
+    const data = await this._tempStoragePersistenceService.getItem(key, null);
     if (!data) {
       return null;
     }

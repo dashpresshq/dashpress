@@ -1,18 +1,18 @@
-import React from "react";
 import { IColumnFilterBag } from "shared/types/data";
-import { StyledInput } from "../../Form/Styles";
+import { BaseSyntheticEvent } from "react";
+import { Input } from "../../Form/Styles";
 import { IFilterProps } from "./types";
 
 export function FilterTableByIdField({
   column: { filterValue, setFilter },
 }: IFilterProps<IColumnFilterBag<string>, undefined>) {
   return (
-    <StyledInput
+    <Input
       value={filterValue?.value || ""}
-      onChange={(e: React.BaseSyntheticEvent) => {
+      onChange={(e: BaseSyntheticEvent) => {
         setFilter({
           ...filterValue,
-          value: e.target.value || undefined,
+          value: e.target.value,
         });
       }}
       placeholder="Enter value"

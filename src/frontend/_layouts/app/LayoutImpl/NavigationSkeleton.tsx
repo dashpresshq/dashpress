@@ -3,7 +3,7 @@ import { BaseSkeleton } from "frontend/design-system/components/Skeleton/Base";
 import { Spacer } from "frontend/design-system/primitives/Spacer";
 import { Stack } from "frontend/design-system/primitives/Stack";
 import { useThemeColorShade } from "frontend/design-system/theme/useTheme";
-import React from "react";
+import { Fragment } from "react";
 
 export function NavigationSkeleton() {
   const getThemeColorShade = useThemeColorShade();
@@ -26,14 +26,14 @@ export function NavigationSkeleton() {
 
   return (
     <Stack
-      direction="column"
-      spacing={16}
+      $direction="column"
+      $spacing={16}
       style={{ padding: 24, marginTop: 48 }}
     >
       {SCHEMA.map((type, index) => {
         if (type === "header") {
           return (
-            <React.Fragment key={index}>
+            <Fragment key={index}>
               <Spacer size="sm" />
               <BaseSkeleton
                 height="25px"
@@ -42,7 +42,7 @@ export function NavigationSkeleton() {
                   maxWidth: "120px",
                 }}
               />
-            </React.Fragment>
+            </Fragment>
           );
         }
         return (

@@ -1,8 +1,8 @@
-import { actionsApiController } from "backend/actions/actions.controller";
+import { integrationsApiService } from "backend/integrations/integrations.service";
 import { requestHandler } from "backend/lib/request";
 
 export default requestHandler({
-  GET: () => {
-    return actionsApiController.listIntegrations();
+  GET: async () => {
+    return integrationsApiService.listActionIntegrations();
   },
 });

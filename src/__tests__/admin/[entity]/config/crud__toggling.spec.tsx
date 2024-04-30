@@ -1,5 +1,3 @@
-import "@testing-library/jest-dom";
-import React from "react";
 import { render, screen, within } from "@testing-library/react";
 import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 import userEvent from "@testing-library/user-event";
@@ -8,6 +6,7 @@ import { rest } from "msw";
 
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 import { BASE_TEST_URL } from "__tests__/_/api-handlers/_utils";
+import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
 
 const server = setupApiHandlers();
 
@@ -32,12 +31,14 @@ describe("pages/admin/[entity]/config/crud", () => {
   const useRouter = jest.spyOn(require("next/router"), "useRouter");
 
   it("should not have toggling functionality for tables", async () => {
-    useRouter.mockImplementation(() => ({
-      asPath: "/",
-      query: {
-        entity: "entity-1",
-      },
-    }));
+    useRouter.mockImplementation(
+      USE_ROUTER_PARAMS({
+        query: {
+          entity: "entity-1",
+        },
+      })
+    );
+
     render(
       <ApplicationRoot>
         <EntityCrudSettings />
@@ -63,19 +64,20 @@ describe("pages/admin/[entity]/config/crud", () => {
   });
 
   describe.each([
-    { tab: "Update" },
-    { tab: "Details" },
-    { tab: "Create" },
-    { tab: "Delete" },
-  ])("$tab feature", ({ tab }) => {
+    { tab: "Update", id: "update" },
+    { tab: "Details", id: "details" },
+    { tab: "Create", id: "create" },
+    { tab: "Delete", id: "delete" },
+  ])("$tab feature", ({ tab, id }) => {
     beforeAll(() => {
-      useRouter.mockImplementation(() => ({
-        asPath: "/",
-        query: {
-          entity: "entity-1",
-          tab,
-        },
-      }));
+      useRouter.mockImplementation(
+        USE_ROUTER_PARAMS({
+          query: {
+            entity: "entity-1",
+            tab: id,
+          },
+        })
+      );
     });
 
     it("should toggle off functionality", async () => {
@@ -85,7 +87,7 @@ describe("pages/admin/[entity]/config/crud", () => {
         </ApplicationRoot>
       );
 
-      const currentTab = screen.getByRole("tabpanel");
+      const currentTab = screen.getByRole("tabpanel", { name: tab });
 
       if (tab !== "Delete") {
         expect(
@@ -116,7 +118,7 @@ describe("pages/admin/[entity]/config/crud", () => {
         </ApplicationRoot>
       );
 
-      const currentTab = screen.getByRole("tabpanel");
+      const currentTab = screen.getByRole("tabpanel", { name: tab });
 
       if (tab !== "Delete") {
         expect(

@@ -1,6 +1,6 @@
 import { rolesApiController } from "backend/roles/roles.controller";
 import { BASE_ROLE_FORM_SCHEMA } from "shared/form-schemas/roles/base";
-import { USER_PERMISSIONS } from "shared/constants/user";
+import { UserPermissions } from "shared/constants/user";
 import { requestHandler } from "backend/lib/request";
 
 export default requestHandler(
@@ -22,7 +22,7 @@ export default requestHandler(
   [
     {
       _type: "canUser",
-      body: USER_PERMISSIONS.CAN_MANAGE_PERMISSIONS,
+      body: UserPermissions.CAN_MANAGE_PERMISSIONS,
     },
   ]
 );

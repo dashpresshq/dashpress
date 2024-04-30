@@ -1,5 +1,3 @@
-import "@testing-library/jest-dom";
-import React from "react";
 import { render, screen, waitFor, within } from "@testing-library/react";
 import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 import userEvent from "@testing-library/user-event";
@@ -8,6 +6,7 @@ import { rest } from "msw";
 
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 import { BASE_TEST_URL } from "__tests__/_/api-handlers/_utils";
+import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
 
 const server = setupApiHandlers();
 
@@ -46,19 +45,21 @@ describe("pages/admin/[entity]/config/crud", () => {
   const useRouter = jest.spyOn(require("next/router"), "useRouter");
 
   describe.each([
-    { tab: "Table" },
-    { tab: "Details" },
-    { tab: "Create" },
-    { tab: "Update" },
-  ])("$tab Tab", ({ tab }) => {
+    { tab: "Table", id: "table" },
+    { tab: "Details", id: "details" },
+    { tab: "Create", id: "create" },
+    { tab: "Update", id: "update" },
+  ])("$tab Tab", ({ tab, id }) => {
     beforeEach(() => {
-      useRouter.mockImplementation(() => ({
-        asPath: "/",
-        query: {
-          entity: "entity-1",
-          tab,
-        },
-      }));
+      useRouter.mockImplementation(
+        USE_ROUTER_PARAMS({
+          replaceMock: jest.fn(),
+          query: {
+            entity: "entity-1",
+            tab: id,
+          },
+        })
+      );
     });
 
     it("should show current state correctly", async () => {
@@ -68,7 +69,7 @@ describe("pages/admin/[entity]/config/crud", () => {
         </ApplicationRoot>
       );
 
-      const currentTab = await screen.findByRole("tabpanel");
+      const currentTab = await screen.findByRole("tabpanel", { name: tab });
 
       await waitFor(() => {
         expect(
@@ -96,7 +97,7 @@ describe("pages/admin/[entity]/config/crud", () => {
         </ApplicationRoot>
       );
 
-      const currentTab = screen.getByRole("tabpanel");
+      const currentTab = screen.getByRole("tabpanel", { name: tab });
 
       await userEvent.click(
         await within(currentTab).findByRole("button", { name: "Field 1" })
@@ -113,12 +114,6 @@ describe("pages/admin/[entity]/config/crud", () => {
         within(currentTab).getByRole("button", { name: "Hidden Field 1" })
       );
 
-      await userEvent.click(
-        within(currentTab).getByRole("button", {
-          name: `Save ${tab} Selections`,
-        })
-      );
-
       expect((await screen.findAllByRole("status"))[0]).toHaveTextContent(
         `${tab} Columns Settings Saved Successfully`
       );
@@ -131,7 +126,7 @@ describe("pages/admin/[entity]/config/crud", () => {
         </ApplicationRoot>
       );
 
-      const currentTab = screen.getByRole("tabpanel");
+      const currentTab = screen.getByRole("tabpanel", { name: tab });
 
       await waitFor(async () => {
         expect(
@@ -154,13 +149,15 @@ describe("pages/admin/[entity]/config/crud", () => {
   });
 
   it("should show hide id fields from selection", async () => {
-    useRouter.mockImplementation(() => ({
-      asPath: "/",
-      query: {
-        entity: "entity-1",
-      },
-      replace: jest.fn(),
-    }));
+    useRouter.mockImplementation(
+      USE_ROUTER_PARAMS({
+        replaceMock: jest.fn(),
+        query: {
+          entity: "entity-1",
+        },
+      })
+    );
+
     render(
       <ApplicationRoot>
         <EntityCrudSettings />
@@ -199,13 +196,16 @@ describe("pages/admin/[entity]/config/crud", () => {
   });
 
   it("should not have toggling functionality for delete", async () => {
-    useRouter.mockImplementation(() => ({
-      asPath: "/",
-      query: {
-        entity: "entity-1",
-        tab: "Delete",
-      },
-    }));
+    useRouter.mockImplementation(
+      USE_ROUTER_PARAMS({
+        replaceMock: jest.fn(),
+        query: {
+          entity: "entity-1",
+          tab: "delete",
+        },
+      })
+    );
+
     render(
       <ApplicationRoot>
         <EntityCrudSettings />

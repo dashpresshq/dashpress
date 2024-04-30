@@ -1,29 +1,18 @@
 import { AbstractConfigDataPersistenceService } from "backend/lib/config-persistence";
 import { EncryptionApiService } from "backend/lib/encryption/encryption.service";
 import { BadRequestError, progammingError } from "backend/lib/errors";
-import { IApplicationService } from "backend/types";
-import { noop } from "shared/lib/noop";
+import { typescriptSafeObjectDotEntries } from "shared/lib/objects";
 import { IGroupCredential } from "../types";
 
 export const INTEGRATION_CONFIG_GROUP_DEMILITER = "___";
 
-export abstract class IntegrationsConfigurationApiService
-  implements IApplicationService
-{
+export abstract class IntegrationsConfigurationApiService {
   constructor(
     protected _persistenceService: AbstractConfigDataPersistenceService<string>,
     protected _encryptionApiService: EncryptionApiService
   ) {}
 
   static GROUP_DEMILITER = INTEGRATION_CONFIG_GROUP_DEMILITER;
-
-  async bootstrap() {
-    try {
-      await this._persistenceService.setup();
-    } catch (error) {
-      noop();
-    }
-  }
 
   async hasKey(key: string): Promise<boolean> {
     return (await this.getValue(key)) !== undefined;
@@ -44,7 +33,7 @@ export abstract class IntegrationsConfigurationApiService
   }
 
   async list() {
-    return Object.entries(
+    return typescriptSafeObjectDotEntries(
       await this._persistenceService.getAllAsKeyValuePair()
     ).map(([key, value]) => ({ key, value }));
   }
@@ -82,7 +71,7 @@ export abstract class IntegrationsConfigurationApiService
   }
 
   async getValue(key: string): Promise<string | undefined> {
-    const data = await this._persistenceService.getItem(key);
+    const data = await this._persistenceService.getItem(key, undefined);
 
     if (!data) {
       return undefined;
@@ -90,14 +79,6 @@ export abstract class IntegrationsConfigurationApiService
 
     return await this.processDataAfterFetch(data);
   }
-
-  // async useValue(key: string): Promise<string> {
-  //   const value = this.getValue(key);
-  //   if (value === undefined) {
-  //     throw new BadRequestError(`No credentials available for ${key}`);
-  //   }
-  //   return value;
-  // }
 
   async upsertGroup(
     group: IGroupCredential,

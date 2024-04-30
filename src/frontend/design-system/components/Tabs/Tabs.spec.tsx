@@ -1,28 +1,37 @@
-import React from "react";
 import { render, fireEvent, screen } from "@testing-library/react";
-import { SLUG_LOADING_VALUE } from "frontend/lib/routing/constants";
+import { fakeMessageDescriptor } from "translations/fake";
+import { ApplicationRoot } from "frontend/components/ApplicationRoot";
+import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
 import { Tabs } from ".";
-import "@testing-library/jest-dom/extend-expect";
+
+const TAB_CONTENT = [
+  {
+    label: fakeMessageDescriptor(`Foo Label`),
+    id: "foo",
+    content: <>Foo Content</>,
+  },
+  {
+    label: fakeMessageDescriptor(`Bar Label`),
+    id: "bar",
+    content: <>Bar Content</>,
+  },
+  {
+    label: fakeMessageDescriptor(`Baz Label`),
+    id: "baz",
+    content: <>Baz Content</>,
+  },
+];
+
+const useRouter = jest.spyOn(require("next/router"), "useRouter");
+
+useRouter.mockImplementation(USE_ROUTER_PARAMS({}));
 
 describe("Tabs", () => {
   it("should render first tab by default", () => {
     render(
-      <Tabs
-        contents={[
-          {
-            label: "Foo Label",
-            content: <>Foo Content</>,
-          },
-          {
-            label: "Bar Label",
-            content: <>Bar Content</>,
-          },
-          {
-            label: "Baz Label",
-            content: <>Baz Content</>,
-          },
-        ]}
-      />
+      <ApplicationRoot>
+        <Tabs contents={TAB_CONTENT} />
+      </ApplicationRoot>
     );
 
     expect(screen.getByText("Foo Content")).toBeVisible();
@@ -32,23 +41,9 @@ describe("Tabs", () => {
 
   it("should render first tab when current tab is loading", () => {
     render(
-      <Tabs
-        currentTab={SLUG_LOADING_VALUE}
-        contents={[
-          {
-            label: "Foo Label",
-            content: <>Foo Content</>,
-          },
-          {
-            label: "Bar Label",
-            content: <>Bar Content</>,
-          },
-          {
-            label: "Baz Label",
-            content: <>Baz Content</>,
-          },
-        ]}
-      />
+      <ApplicationRoot>
+        <Tabs currentTab={undefined} contents={TAB_CONTENT} />
+      </ApplicationRoot>
     );
 
     expect(screen.getByText("Foo Content")).toBeVisible();
@@ -58,23 +53,9 @@ describe("Tabs", () => {
 
   it("should render currentTab", () => {
     render(
-      <Tabs
-        currentTab="Baz Label"
-        contents={[
-          {
-            label: "Foo Label",
-            content: <>Foo Content</>,
-          },
-          {
-            label: "Bar Label",
-            content: <>Bar Content</>,
-          },
-          {
-            label: "Baz Label",
-            content: <>Baz Content</>,
-          },
-        ]}
-      />
+      <ApplicationRoot>
+        <Tabs currentTab="baz" contents={TAB_CONTENT} />
+      </ApplicationRoot>
     );
 
     expect(screen.getByText("Foo Content")).not.toBeVisible();
@@ -85,30 +66,17 @@ describe("Tabs", () => {
   it("should switch tab", async () => {
     const onChange = jest.fn();
     render(
-      <Tabs
-        onChange={onChange}
-        currentTab="Baz Label"
-        contents={[
-          {
-            label: "Foo Label",
-            content: <>Foo Content</>,
-          },
-          {
-            label: "Bar Label",
-            content: <>Bar Content</>,
-          },
-          {
-            label: "Baz Label",
-            content: <>Baz Content</>,
-          },
-        ]}
-      />
+      <ApplicationRoot>
+        <Tabs onChange={onChange} currentTab="baz" contents={TAB_CONTENT} />
+      </ApplicationRoot>
     );
     expect(screen.getByText("Foo Content")).not.toBeVisible();
     expect(screen.getByText("Bar Content")).not.toBeVisible();
     expect(screen.getByText("Baz Content")).toBeVisible();
 
-    expect(screen.getByRole("tabpanel")).toHaveTextContent("Baz Content");
+    expect(
+      screen.getByRole("tabpanel", { name: "Baz Label" })
+    ).toHaveTextContent("Baz Content");
 
     fireEvent.click(screen.getByText("Bar Label"));
 
@@ -116,7 +84,9 @@ describe("Tabs", () => {
     expect(screen.getByText("Bar Content")).toBeVisible();
     expect(screen.getByText("Baz Content")).not.toBeVisible();
 
-    expect(screen.getByRole("tabpanel")).toHaveTextContent("Bar Content");
+    expect(
+      screen.getByRole("tabpanel", { name: "Bar Label" })
+    ).toHaveTextContent("Bar Content");
 
     expect(onChange).toHaveBeenCalled();
   });
@@ -124,24 +94,9 @@ describe("Tabs", () => {
   it("should not call onChange if current tab is pressed", async () => {
     const onChange = jest.fn();
     render(
-      <Tabs
-        onChange={onChange}
-        currentTab="Baz Label"
-        contents={[
-          {
-            label: "Foo Label",
-            content: <>Foo Content</>,
-          },
-          {
-            label: "Bar Label",
-            content: <>Bar Content</>,
-          },
-          {
-            label: "Baz Label",
-            content: <>Baz Content</>,
-          },
-        ]}
-      />
+      <ApplicationRoot>
+        <Tabs onChange={onChange} currentTab="baz" contents={TAB_CONTENT} />
+      </ApplicationRoot>
     );
     expect(screen.getByText("Foo Content")).not.toBeVisible();
     expect(screen.getByText("Bar Content")).not.toBeVisible();

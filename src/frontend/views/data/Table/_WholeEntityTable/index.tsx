@@ -1,32 +1,37 @@
 import { useEntitiesFilterCount } from "frontend/hooks/data/data.store";
-import { ITableTab, FieldQueryFilter } from "shared/types/data";
+import { FieldQueryFilter } from "shared/types/data";
 import { useEntityConfiguration } from "frontend/hooks/configuration/configuration.store";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { useChangeRouterParam } from "frontend/lib/routing/useChangeRouterParam";
 import { useRouteParam } from "frontend/lib/routing/useRouteParam";
 import { abbreviateNumber } from "frontend/lib/numbers";
 import { TableSkeleton } from "frontend/design-system/components/Skeleton/Table";
-import { StyledCard } from "frontend/design-system/components/Card";
+import { Card } from "frontend/design-system/components/Card";
 import { Tabs } from "frontend/design-system/components/Tabs";
+import { i18nNoop } from "translations/fake";
 import { DetailsCanvas } from "./DetailsCanvas";
 import { TableTopComponent, usePortalTableTabs } from "../portal";
 import { EntityDataTable } from "./EntityDataTable";
 
 interface IProps {
   entity: string;
-  persistFilters?: FieldQueryFilter[];
+  persistentFilters?: FieldQueryFilter[];
+  skipColumns?: string[];
+  createNewLink: string;
 }
 
-export function WholeEntityTable({ entity, persistFilters = [] }: IProps) {
+export function WholeEntityTable({
+  entity,
+  persistentFilters = [],
+  skipColumns,
+  createNewLink,
+}: IProps) {
   const tabFromUrl = useRouteParam("tab");
   const changeTabParam = useChangeRouterParam("tab");
   const portalTableTabs = usePortalTableTabs(entity);
-  const entityViews = useEntityConfiguration<ITableTab[]>(
-    "entity_views",
-    entity
-  );
+  const tableViews = useEntityConfiguration("table_views", entity);
 
-  const tableTabs = [...entityViews.data, ...portalTableTabs.data];
+  const tableTabs = [...tableViews.data, ...portalTableTabs.data];
 
   const tableViewsCount = useEntitiesFilterCount(
     tableTabs.length === 0
@@ -36,18 +41,25 @@ export function WholeEntityTable({ entity, persistFilters = [] }: IProps) {
           id,
           filters: [
             ...(dataState.filters as FieldQueryFilter[]),
-            ...persistFilters,
+            ...persistentFilters,
           ],
         }))
   );
 
+  const dataTableProps = {
+    entity,
+    persistentFilters,
+    skipColumns,
+    createNewLink,
+  };
+
   return (
     <>
       <TableTopComponent entity={entity} />
-      <StyledCard>
+      <Card>
         <ViewStateMachine
-          error={entityViews.error || portalTableTabs.error}
-          loading={entityViews.isLoading || portalTableTabs.isLoading}
+          error={tableViews.error || portalTableTabs.error}
+          loading={tableViews.isLoading || portalTableTabs.isLoading}
           loader={<TableSkeleton />}
         >
           {tableTabs.length > 0 ? (
@@ -66,25 +78,21 @@ export function WholeEntityTable({ entity, persistFilters = [] }: IProps) {
                 return {
                   content: (
                     <EntityDataTable
-                      entity={entity}
+                      {...{ ...dataTableProps }}
                       tabKey={title}
-                      persitentFilters={persistFilters}
                       defaultTableState={dataState}
                     />
                   ),
-                  label: title.trim(),
-                  overrideLabel: `${title}(${currentCount})`,
+                  id: title.trim(),
+                  label: i18nNoop(`${title}(${currentCount})`),
                 };
               })}
             />
           ) : (
-            <EntityDataTable
-              entity={entity}
-              persitentFilters={persistFilters}
-            />
+            <EntityDataTable {...{ ...dataTableProps }} />
           )}
         </ViewStateMachine>
-      </StyledCard>
+      </Card>
       <DetailsCanvas />
     </>
   );

@@ -1,7 +1,6 @@
 /* eslint-disable testing-library/no-container */
 /* eslint-disable testing-library/no-node-access */
-import "@testing-library/jest-dom";
-import React from "react";
+
 import { render } from "@testing-library/react";
 
 import { GoogleTagManager } from ".";

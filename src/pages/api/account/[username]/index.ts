@@ -1,8 +1,7 @@
-import { usersApiController } from "backend/users/users.controller";
-import { USER_PERMISSIONS } from "shared/constants/user";
-import { UPDATE_USER_FORM_SCHEMA } from "shared/form-schemas/users/update";
 import { IAccountProfile } from "shared/types/user";
 import { requestHandler } from "backend/lib/request";
+import { usersApiService } from "backend/users/users.service";
+import { UserPermissions } from "shared/constants/user";
 
 const REQUEST_QUERY_FIELD = "username";
 
@@ -15,7 +14,7 @@ export default requestHandler(
           options: REQUEST_QUERY_FIELD,
         },
       ]);
-      return await usersApiController.getUserProfile(
+      return await usersApiService.getAccountProfile(
         validatedRequest.requestQuery
       );
     },
@@ -28,7 +27,7 @@ export default requestHandler(
           options: REQUEST_QUERY_FIELD,
         },
       ]);
-      return await usersApiController.removeUser(
+      return await usersApiService.removeUser(
         validatedRequest.requestQuery,
         (validatedRequest.authenticatedUser as IAccountProfile).username
       );
@@ -37,14 +36,14 @@ export default requestHandler(
       const validatedRequest = await getValidatedRequest([
         {
           _type: "requestBody",
-          options: UPDATE_USER_FORM_SCHEMA,
+          options: {},
         },
         {
           _type: "requestQuery",
           options: REQUEST_QUERY_FIELD,
         },
       ]);
-      return await usersApiController.updateProfile(
+      return await usersApiService.updateUser(
         validatedRequest.requestQuery,
         validatedRequest.requestBody
       );
@@ -53,7 +52,7 @@ export default requestHandler(
   [
     {
       _type: "canUser",
-      body: USER_PERMISSIONS.CAN_MANAGE_USERS,
+      body: UserPermissions.CAN_MANAGE_USERS,
     },
   ]
 );

@@ -1,4 +1,3 @@
-import { SLUG_LOADING_VALUE } from "frontend/lib/routing/constants";
 import { GranularEntityPermissions } from "shared/types/user";
 
 export const NO_PERMISSION_REQUIRED = "NO_PERMISSION_REQUIRED";
@@ -6,7 +5,7 @@ export const NO_PERMISSION_REQUIRED = "NO_PERMISSION_REQUIRED";
 export const APPLIED_CAN_ACCESS =
   (context: string) =>
   (entity: string, granular: GranularEntityPermissions) => {
-    if (entity === SLUG_LOADING_VALUE) {
+    if (!entity) {
       return NO_PERMISSION_REQUIRED;
     }
     return `${context}:${entity.toUpperCase()}--${granular}`;

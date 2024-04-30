@@ -15,7 +15,6 @@ describe("/account/[username]/index", () => {
           "$2b$10$/9tw363jvQrylf4eLisJt.afEUphLLaDSfhkweYPhC0ayTJp7Zo0a",
         name: "Test User 1",
         role: "creator",
-        systemProfile: '{"userId": "1"}',
       },
       {
         username: "root",
@@ -23,7 +22,6 @@ describe("/account/[username]/index", () => {
           "$2b$10$/9tw363jvQrylf4eLisJt.afEUphLLaDSfhkweYPhC0ayTJp7Zo0a",
         name: "Root 1",
         role: "creator",
-        systemProfile: '{"userId": "1"}',
       },
       {
         username: "testuser2",
@@ -31,7 +29,6 @@ describe("/account/[username]/index", () => {
           "$2b$10$/9tw363jvQrylf4eLisJt.afEUphLLaDSfhkweYPhC0ayTJp7Zo0a",
         name: "Test User 2",
         role: "viewer",
-        systemProfile: '{"userId": "2"}',
       },
     ]);
   });
@@ -52,7 +49,6 @@ describe("/account/[username]/index", () => {
       {
         "name": "Test User 1",
         "role": "creator",
-        "systemProfile": "{"userId": "1"}",
         "username": "testuser1",
       }
     `);
@@ -118,7 +114,6 @@ describe("/account/[username]/index", () => {
       {
         "name": "Root 1",
         "role": "creator",
-        "systemProfile": "{"userId": "1"}",
         "username": "root",
       }
     `);
@@ -167,7 +162,6 @@ describe("/account/[username]/index", () => {
       {
         "name": "Root 1",
         "role": "creator",
-        "systemProfile": "{"userId": "1"}",
         "username": "root",
       }
     `);
@@ -182,7 +176,6 @@ describe("/account/[username]/index", () => {
       body: {
         name: "Test Name Updated",
         role: "creator",
-        systemProfile: '{"updatedUserId": "2"}',
       },
     });
 
@@ -203,7 +196,6 @@ describe("/account/[username]/index", () => {
       {
         "name": "Test Name Updated",
         "role": "creator",
-        "systemProfile": "{"updatedUserId": "2"}",
         "username": "testuser2",
       }
     `);

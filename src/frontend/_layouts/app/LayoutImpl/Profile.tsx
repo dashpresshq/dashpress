@@ -1,52 +1,41 @@
 import { useAuthenticatedUserBag } from "frontend/hooks/auth/user.store";
-import { MoreVertical } from "react-feather";
 import styled from "styled-components";
 import { useRouter } from "next/router";
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
 import { Stack } from "frontend/design-system/primitives/Stack";
-import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
-import { Dropdown } from "frontend/design-system/components/Dropdown";
 import { SYSTEM_COLORS } from "frontend/design-system/theme/system";
 import { Typo } from "frontend/design-system/primitives/Typo";
-import { ILabelValue } from "shared/types/options";
+import { DropDownMenu } from "frontend/design-system/components/DropdownMenu";
+import { SystemIconsKeys } from "shared/constants/Icons";
+import { ellipsis } from "shared/lib/strings";
+import { Trans, msg } from "@lingui/macro";
+import { MessageDescriptor } from "@lingui/core";
 import { useConstantNavigationMenuItems } from "./portal";
-
-const DownRoot = styled(Stack)`
-  padding: 8px 0;
-  min-width: 180px;
-`;
 
 const ProfileRoot = styled(Stack)`
   padding: 16px;
   color: ${SYSTEM_COLORS.white};
+  button {
+    color: ${SYSTEM_COLORS.white};
+  }
 `;
 
 const Name = styled(Typo.XS)`
   color: ${SYSTEM_COLORS.white};
 `;
 
-const StyledDropDownItem = styled.button`
-  display: block;
-  width: 100%;
-  padding: 6px 12px;
-  cursor: pointer;
-  color: ${USE_ROOT_COLOR("main-text")};
-  text-align: inherit;
-  background: ${USE_ROOT_COLOR("base-color")};
-  border: 0;
-  &:hover {
-    background-color: ${USE_ROOT_COLOR("soft-color")};
-    color: ${USE_ROOT_COLOR("main-text")};
-  }
-`;
-
 interface IProps {
   isFullWidth: boolean;
 }
 
-const constantNavigation: ILabelValue[] = [
+const constantNavigation: Array<{
+  systemIcon: SystemIconsKeys;
+  label: MessageDescriptor;
+  value: string;
+}> = [
   {
-    label: "My Account",
+    label: msg`My Account`,
+    systemIcon: "User",
     value: NAVIGATION_LINKS.ACCOUNT.PROFILE,
   },
 ];
@@ -63,29 +52,28 @@ export function ProfileOnNavigation({ isFullWidth }: IProps) {
   }
 
   return (
-    <ProfileRoot justify="space-between" align="center">
-      <Name weight="bold">
-        Hi, {currentUser.isLoading ? "User" : currentUser.data?.name}
+    <ProfileRoot $justify="space-between" $align="center">
+      <Name $weight="bold">
+        <Trans>
+          Hi,{" "}
+          {currentUser.isLoading
+            ? `There`
+            : ellipsis(currentUser.data?.name, 14)}
+        </Trans>
       </Name>
-      <Dropdown
-        width={250}
-        preserveVisibiltyOnClick
-        align="right"
-        target={<MoreVertical size={16} style={{ cursor: "pointer" }} />}
-      >
-        <DownRoot direction="column">
-          {[...constantNavigation, ...constantNavigationMenuItems].map(
-            ({ label, value }) => (
-              <StyledDropDownItem
-                key={label}
-                onClick={() => router.push(value)}
-              >
-                {label}
-              </StyledDropDownItem>
-            )
-          )}
-        </DownRoot>
-      </Dropdown>
+
+      <DropDownMenu
+        ellipsis
+        ariaLabel="Toggle Profile Menu"
+        menuItems={[...constantNavigation, ...constantNavigationMenuItems].map(
+          ({ label, value, systemIcon }) => ({
+            id: value,
+            label,
+            systemIcon,
+            action: () => router.push(value),
+          })
+        )}
+      />
     </ProfileRoot>
   );
 }

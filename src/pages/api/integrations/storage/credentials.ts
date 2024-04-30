@@ -1,0 +1,20 @@
+import { UserPermissions } from "shared/constants/user";
+import { requestHandler } from "backend/lib/request";
+import { storageApiService } from "backend/storage/storage.service";
+
+export default requestHandler(
+  {
+    POST: async () => {
+      return await storageApiService.showStorageCredentials();
+    },
+  },
+  [
+    {
+      _type: "canUser",
+      body: UserPermissions.CAN_MANAGE_APP_CREDENTIALS,
+    },
+    {
+      _type: "withPassword",
+    },
+  ]
+);

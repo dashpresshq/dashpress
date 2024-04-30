@@ -1,39 +1,41 @@
 import Dropdown from "react-bootstrap/Dropdown";
 import styled from "styled-components";
-import React, { useState, useEffect, useMemo } from "react";
-import { Icon, Loader } from "react-feather";
+import { useState, useEffect, useMemo } from "react";
+import { Loader, MoreVertical } from "react-feather";
 import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
 import { Stack } from "frontend/design-system/primitives/Stack";
 import { Typo } from "frontend/design-system/primitives/Typo";
-import { StyledSoftButton } from "../Button/Button";
+import { Z_INDEXES } from "frontend/design-system/constants/zIndex";
+import { SystemIcon } from "frontend/design-system/Icons/System";
+import { useRouter } from "next/router";
+import { useToggle } from "frontend/hooks/state/useToggleState";
+import { useLingui } from "@lingui/react";
+import { SoftButtonStyled } from "../Button/Button";
 import { BREAKPOINTS } from "../../constants";
 import { Spin } from "../_/Spin";
 import { SHADOW_CSS } from "../Card";
+import { IGroupActionButton } from "../Button/types";
+import { useConfirmAlert } from "../ConfirmAlert";
 
-const togglePreviousState = (prev: boolean) => !prev;
-
-export interface IDropDownMenuItem {
-  id: string;
-  label: string;
+export interface IDropDownMenuItem extends IGroupActionButton {
   description?: string;
-  IconComponent?: Icon;
-  onClick: () => void;
-  order?: number;
 }
 
 export interface IProps {
   menuItems: IDropDownMenuItem[];
-  isMakingActionRequest?: boolean;
+  ariaLabel: string;
   disabled?: boolean;
+  ellipsis?: true;
 }
 
 const Label = styled.span`
+  text-wrap: nowrap;
   @media (max-width: ${BREAKPOINTS.sm}) {
     display: none;
   }
 `;
 
-const StyledDropDownItem = styled.button`
+const DropDownItem = styled.button`
   display: block;
   width: 100%;
   padding: 6px 12px;
@@ -52,14 +54,14 @@ const StyledDropDownItem = styled.button`
   }
 `;
 
-const StyledDropDownMenu = styled(Dropdown.Menu)`
+const DropDownMenuStyled = styled(Dropdown.Menu)`
   ${SHADOW_CSS}
   margin: 0;
 
   position: absolute;
   top: 100%;
   left: 0;
-  z-index: 1000;
+  z-index: ${Z_INDEXES.dropDown};
   display: none;
   float: left;
   min-width: 10rem;
@@ -81,7 +83,7 @@ const StyledDropDownMenu = styled(Dropdown.Menu)`
   }
 `;
 
-const StyledSROnly = styled.span`
+const SROnly = styled.span`
   border: 0;
   clip: rect(0, 0, 0, 0);
   height: 1px;
@@ -92,7 +94,11 @@ const StyledSROnly = styled.span`
   width: 1px;
 `;
 
-const StyledDropDownToggle = styled(StyledSoftButton)`
+const EllipsisDropDownToggle = styled(SoftButtonStyled)`
+  padding: 2px 4px;
+`;
+
+const DropDownToggle = styled(SoftButtonStyled)`
   display: inline-block;
   margin-left: -1px;
   border-top-left-radius: 0;
@@ -112,21 +118,24 @@ const StyledDropDownToggle = styled(StyledSoftButton)`
   }
 `;
 
-const StyledCurrentButton = styled(StyledSoftButton)`
+const CurrentButton = styled(SoftButtonStyled)`
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
 `;
-
 export function DropDownMenu({
   menuItems: menuItems$1,
-  isMakingActionRequest,
   disabled,
+  ellipsis,
+  ariaLabel,
 }: IProps) {
-  const [isDropDownOpen, setDropDownOpen] = useState(false);
+  const dropDownMode = useToggle();
+  const router = useRouter();
+
+  const { _ } = useLingui();
 
   const toggleDropDown = () => {
-    if (!isMakingActionRequest && !disabled) {
-      setDropDownOpen(togglePreviousState);
+    if (!disabled) {
+      dropDownMode.toggle();
     }
   };
 
@@ -140,6 +149,24 @@ export function DropDownMenu({
     menuItems[0]
   );
 
+  const confirmAlert = useConfirmAlert();
+
+  const runAction = (actionMenuItem: IDropDownMenuItem) => {
+    if (typeof actionMenuItem.action === "string") {
+      router.push(actionMenuItem.action);
+      return;
+    }
+
+    if (actionMenuItem.shouldConfirmAlert) {
+      return confirmAlert({
+        title: actionMenuItem.shouldConfirmAlert,
+        action: actionMenuItem.action,
+      });
+    }
+
+    actionMenuItem.action();
+  };
+
   useEffect(() => {
     setCurrentMenuItem(menuItems[0]);
   }, [JSON.stringify(menuItems)]);
@@ -151,71 +178,104 @@ export function DropDownMenu({
   const onMenuItemClick = (menuIndex: number) => {
     const menuItem = menuItems[menuIndex];
     toggleDropDown();
-    menuItem.onClick();
+    runAction(menuItem);
     setCurrentMenuItem(menuItem);
   };
 
-  const { IconComponent, onClick, label } = currentMenuItem;
+  const { systemIcon, label } = currentMenuItem;
 
   const currentItem = (
-    <Stack spacing={4} align="center">
-      {/* eslint-disable-next-line no-nested-ternary */}
-      {isMakingActionRequest ? (
+    <Stack $spacing={4} $align="center">
+      {currentMenuItem.isMakingRequest ? (
         <Spin as={Loader} size={14} />
-      ) : IconComponent ? (
-        <IconComponent size="14" />
-      ) : null}
-      <Label>{label}</Label>
+      ) : (
+        <SystemIcon icon={systemIcon} size={14} />
+      )}
+      <Label>{_(label)}</Label>
     </Stack>
   );
 
-  if (menuItems.length === 1) {
+  if (menuItems.length === 1 && !ellipsis) {
     return (
-      <StyledSoftButton
+      <SoftButtonStyled
         size="sm"
-        disabled={isMakingActionRequest || disabled}
-        onClick={() => onClick()}
+        disabled={currentMenuItem.isMakingRequest || disabled}
+        onClick={() => runAction(currentMenuItem)}
       >
         {currentItem}
-      </StyledSoftButton>
+      </SoftButtonStyled>
     );
   }
 
   return (
     <Dropdown
       as={Stack}
-      spacing={0}
-      width="auto"
-      show={isDropDownOpen}
+      $spacing={0}
+      $width="auto"
+      show={dropDownMode.isOn}
       align="end"
       onToggle={toggleDropDown}
     >
-      <StyledCurrentButton
-        size="sm"
-        disabled={isMakingActionRequest || disabled}
-        onClick={() => onClick()}
-      >
-        {currentItem}
-      </StyledCurrentButton>
-      <StyledDropDownToggle split as={Dropdown.Toggle} size="sm">
-        <StyledSROnly>Toggle Dropdown</StyledSROnly>
-      </StyledDropDownToggle>
-      <StyledDropDownMenu>
-        {menuItems.map(({ label: label$1, description }, index) => (
-          <StyledDropDownItem
-            key={label$1}
-            onClick={() => onMenuItemClick(index)}
+      {ellipsis ? (
+        <EllipsisDropDownToggle split as={Dropdown.Toggle} size="sm">
+          <MoreVertical
+            size={16}
+            style={{ cursor: "pointer" }}
+            aria-label={ariaLabel}
+          />
+        </EllipsisDropDownToggle>
+      ) : (
+        <>
+          <CurrentButton
+            size="sm"
+            disabled={disabled || currentMenuItem.isMakingRequest}
+            onClick={() => runAction(currentMenuItem)}
+            type="button"
           >
-            <Typo.XS as="span">{label$1}</Typo.XS>
-            <br />
-            {description ? (
-              <Typo.XS color="muted" as="span">
-                {description}
+            {currentItem}
+          </CurrentButton>
+          <DropDownToggle split as={Dropdown.Toggle} size="sm">
+            <SROnly>Toggle Dropdown</SROnly>
+          </DropDownToggle>
+        </>
+      )}
+      <DropDownMenuStyled>
+        {menuItems.map((menuItem, index) => (
+          <DropDownItem
+            key={menuItem.id}
+            onClick={() => onMenuItemClick(index)}
+            disabled={menuItem.disabled}
+            type="button"
+          >
+            <Stack>
+              {currentMenuItem.isMakingRequest ? (
+                <Spin as={Loader} size={14} />
+              ) : (
+                <SystemIcon
+                  icon={menuItem.systemIcon}
+                  size={14}
+                  color={menuItem.disabled ? "muted-text" : "main-text"}
+                />
+              )}
+              <Typo.XS
+                as="span"
+                $color={menuItem.disabled ? "muted" : undefined}
+              >
+                {_(menuItem.label)}
+              </Typo.XS>
+            </Stack>
+            {menuItem.description ? (
+              <Typo.XS $color="muted" as="span">
+                {menuItem.description}
               </Typo.XS>
             ) : null}
-          </StyledDropDownItem>
+          </DropDownItem>
         ))}
-      </StyledDropDownMenu>
+      </DropDownMenuStyled>
     </Dropdown>
   );
 }
+
+// TODO
+// isMakingRequest?: boolean;
+// color?: keyof typeof SYSTEM_COLORS;

@@ -1,5 +1,6 @@
 /* eslint-disable max-classes-per-file */
 import { noop } from "shared/lib/noop";
+import { QueryFilterSchema } from "shared/types/data";
 import { IDataApiService } from "../types";
 
 export class PortalDataHooksService {
@@ -50,14 +51,18 @@ export class PortalDataHooksService {
     dataApiService,
     dataId,
     entity,
+    options,
   }: {
     dataApiService: IDataApiService;
     entity: string;
     beforeData: Record<string, unknown>;
     data: Record<string, unknown>;
     dataId: string;
+    options?: {
+      skipDataEvents?: boolean;
+    };
   }) {
-    noop(dataApiService, entity, data, dataId, beforeData);
+    noop(dataApiService, entity, data, dataId, beforeData, options);
   }
 
   static async beforeDelete({
@@ -84,5 +89,23 @@ export class PortalDataHooksService {
     dataId: string;
   }) {
     noop(dataApiService, entity, dataId, beforeData);
+  }
+}
+
+export class PortalQueryImplementation {
+  static async delete(params: {
+    entity: string;
+    queryFilter: QueryFilterSchema;
+    implementation: () => Promise<void>;
+  }) {
+    await params.implementation();
+  }
+
+  static async query(
+    queryFilter: QueryFilterSchema,
+    entity: string
+  ): Promise<QueryFilterSchema> {
+    noop(entity);
+    return queryFilter;
   }
 }

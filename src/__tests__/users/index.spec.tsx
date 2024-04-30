@@ -1,5 +1,3 @@
-import "@testing-library/jest-dom";
-import React from "react";
 import { render, screen, within, waitFor } from "@testing-library/react";
 import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 
@@ -7,49 +5,37 @@ import ListUsers from "pages/users";
 
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 import userEvent from "@testing-library/user-event";
+import { getTableRows } from "__tests__/_/utils/getTableRows";
+import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
 
 setupApiHandlers();
 
 describe("pages/users", () => {
   const useRouter = jest.spyOn(require("next/router"), "useRouter");
 
-  it("should list users with system profile", async () => {
-    useRouter.mockImplementation(() => ({
-      asPath: "/",
-    }));
+  it("should list users", async () => {
+    useRouter.mockImplementation(USE_ROUTER_PARAMS({}));
     render(
       <ApplicationRoot>
         <ListUsers />
       </ApplicationRoot>
     );
 
-    expect(
-      await screen.findByRole("row", {
-        name: "Username Sort By Username Filter Username By Search Name Sort By Name Filter Name By Search Role Sort By Role Filter Role By Status Email Station Action",
-      })
-    ).toBeInTheDocument();
-    expect(
-      screen.getByRole("row", {
-        name: "user-1 User 1 Role 1 user-1@here.com station - 1 Edit",
-      })
-    ).toBeInTheDocument();
-    expect(
-      screen.getByRole("row", {
-        name: "user-2 User 2 Role 2 user-1@here.com Edit",
-      })
-    ).toBeInTheDocument();
-    expect(
-      screen.getByRole("row", { name: "user-3 User 3 Role 3 Edit" })
-    ).toBeInTheDocument();
+    expect(await getTableRows(await screen.findByRole("table")))
+      .toMatchInlineSnapshot(`
+      [
+        "Username|Name|Role|Action",
+        "user-1|User 1|Role 1",
+        "user-2|User 2|Role 2",
+        "user-3|User 3|Role 3",
+      ]
+    `);
   });
 
   it("should link to create user", async () => {
     const pushMock = jest.fn();
 
-    useRouter.mockImplementation(() => ({
-      asPath: "/",
-      push: pushMock,
-    }));
+    useRouter.mockImplementation(USE_ROUTER_PARAMS({ pushMock }));
 
     render(
       <ApplicationRoot>
@@ -65,10 +51,7 @@ describe("pages/users", () => {
   it("should link to user edit", async () => {
     const pushMock = jest.fn();
 
-    useRouter.mockImplementation(() => ({
-      asPath: "/",
-      push: pushMock,
-    }));
+    useRouter.mockImplementation(USE_ROUTER_PARAMS({ pushMock }));
 
     render(
       <ApplicationRoot>
@@ -76,7 +59,7 @@ describe("pages/users", () => {
       </ApplicationRoot>
     );
 
-    const tableRows = await screen.findAllByRole("link", { name: "Edit" });
+    const tableRows = await screen.findAllByRole("link", { name: "Edit User" });
 
     expect(tableRows[0]).toHaveAttribute("href", "/users/user-1");
     expect(tableRows[1]).toHaveAttribute("href", "/users/user-2");
@@ -84,14 +67,9 @@ describe("pages/users", () => {
   });
 
   it("should delete user", async () => {
-    const pushMock = jest.fn();
     const replaceMock = jest.fn();
 
-    useRouter.mockImplementation(() => ({
-      asPath: "/",
-      push: pushMock,
-      replace: replaceMock,
-    }));
+    useRouter.mockImplementation(USE_ROUTER_PARAMS({ replaceMock }));
 
     render(
       <ApplicationRoot>
@@ -105,7 +83,7 @@ describe("pages/users", () => {
 
     await userEvent.click(
       within(tableRows[1]).getByRole("button", {
-        name: "Delete Button",
+        name: "Delete User",
       })
     );
 

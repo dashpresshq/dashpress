@@ -2,12 +2,13 @@ import { IPaginatedDataState } from "shared/types/data";
 import {
   ColumnFiltersState,
   createColumnHelper,
-  HeaderContext,
   Table,
   Updater,
 } from "@tanstack/react-table";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo } from "react";
 import { usePrevious } from "react-use";
+import { useToggle } from "frontend/hooks/state/useToggleState";
+import { useLingui } from "@lingui/react";
 import { ITableColumn } from "./types";
 import {
   buildTableStateToRefreshPageNumber,
@@ -17,14 +18,12 @@ import {
 const columnHelper = createColumnHelper<Record<string, unknown>>();
 
 export const useInternalColumns = (columns: ITableColumn[]) => {
+  const { _ } = useLingui();
   return useMemo(() => {
     return columns.map((column) => {
-      const columnHeader = column.Header;
       const header =
-        typeof columnHeader === "string"
-          ? columnHeader
-          : (headerContext: HeaderContext<Record<string, unknown>, unknown>) =>
-              columnHeader(headerContext);
+        typeof column.Header === "function" ? column.Header : _(column.Header);
+
       return columnHelper.accessor(column.accessor, {
         id: column.accessor,
         meta: {
@@ -48,20 +47,19 @@ export function useSyncTableState<T>(
   overridePaginatedDataState: IPaginatedDataState<T> | undefined,
   syncPaginatedDataStateOut: (params: IPaginatedDataState<T>) => void
 ) {
-  const [resetPage, setResetPage] = useState(true);
+  const resetPage = useToggle(true);
   const tableState = internalTableStateToStandard<T>(table.getState());
   const previousTableState = usePrevious<IPaginatedDataState<T>>(tableState);
 
   useEffect(() => {
     if (
-      resetPage &&
+      resetPage.isOn &&
       buildTableStateToRefreshPageNumber(previousTableState) !==
         buildTableStateToRefreshPageNumber(tableState)
     ) {
       table.setPageIndex(0);
     }
-
-    setResetPage(true);
+    resetPage.on();
     syncPaginatedDataStateOut(tableState);
   }, [JSON.stringify(tableState)]);
 
@@ -70,7 +68,7 @@ export function useSyncTableState<T>(
       return;
     }
 
-    setResetPage(false);
+    resetPage.off();
 
     if (overridePaginatedDataState.pageSize) {
       table.setPageSize(overridePaginatedDataState.pageSize);

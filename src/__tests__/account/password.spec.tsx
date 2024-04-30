@@ -1,15 +1,17 @@
-import "@testing-library/jest-dom";
-import React from "react";
 import { render, screen } from "@testing-library/react";
 import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 import userEvent from "@testing-library/user-event";
 import AccountPassword from "pages/account/password";
 
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
+import { closeAllToasts } from "__tests__/_/utils/closeAllToasts";
+import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
 
 setupApiHandlers();
 
-jest.mock("next/router", () => require("next-router-mock"));
+const useRouter = jest.spyOn(require("next/router"), "useRouter");
+
+useRouter.mockImplementation(USE_ROUTER_PARAMS({}));
 
 describe("pages/account/password", () => {
   const OLD_ENV = process.env;
@@ -46,6 +48,8 @@ describe("pages/account/password", () => {
     expect(await screen.findByRole("status")).toHaveTextContent(
       "Password Updated Successfully"
     );
+
+    await closeAllToasts();
   });
 
   it("should show different error message on demo", async () => {
@@ -71,7 +75,7 @@ describe("pages/account/password", () => {
       screen.getByRole("button", { name: "Update Password" })
     );
 
-    expect((await screen.findAllByRole("status"))[0]).toHaveTextContent(
+    expect(await screen.findByRole("status")).toHaveTextContent(
       "Password will not be changed on demo account"
     );
   });

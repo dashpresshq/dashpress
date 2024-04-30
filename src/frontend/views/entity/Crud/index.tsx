@@ -1,12 +1,6 @@
 import { ReactNode, useEffect, useState } from "react";
-import {
-  ENTITY_LIST_PATH,
-  ENTITY_TABLE_PATH,
-} from "frontend/hooks/data/data.store";
-import { SLUG_LOADING_VALUE } from "frontend/lib/routing/constants";
-import { IEntityCrudSettings } from "shared/configurations";
-import { USER_PERMISSIONS } from "shared/constants/user";
-import { DOCUMENTATION_LABEL } from "frontend/docs";
+import { CrudViewsKeys, IEntityCrudSettings } from "shared/configurations";
+import { UserPermissions } from "shared/constants/user";
 import { CRUDDocumentation } from "frontend/docs/crud";
 import { useRouteParam } from "frontend/lib/routing/useRouteParam";
 import { useChangeRouterParam } from "frontend/lib/routing/useChangeRouterParam";
@@ -15,76 +9,33 @@ import { SectionBox } from "frontend/design-system/components/Section/SectionBox
 import { Tabs } from "frontend/design-system/components/Tabs";
 import {
   useEntityCrudSettings,
-  useEntityFieldLabels,
   useEntitySlug,
 } from "frontend/hooks/entity/entity.config";
-import {
-  useEntityConfiguration,
-  useUpsertConfigurationMutation,
-} from "frontend/hooks/configuration/configuration.store";
+import { useUpsertConfigurationMutation } from "frontend/hooks/configuration/configuration.store";
 import { useEntityFields } from "frontend/hooks/entity/entity.store";
+import { WarningAlert } from "frontend/design-system/components/Alert";
+import { Spacer } from "frontend/design-system/primitives/Spacer";
+import { useDocumentationActionButton } from "frontend/docs/constants";
+import { msg } from "@lingui/macro";
+import { typescriptSafeObjectDotEntries } from "shared/lib/objects";
 import { BaseEntitySettingsLayout } from "../_Base";
-import { SelectionTab } from "./SelectionTab";
-
 import {
-  ENTITY_CONFIGURATION_VIEW,
-  ENTITY_CRUD_SETTINGS_TAB_LABELS,
-} from "../constants";
+  EntityFieldsSelectionSettings,
+  ToggleCrudState,
+} from "./EntityFieldsSelectionSettings";
+import { ENTITY_CONFIGURATION_VIEW, ENTITY_CRUD_LABELS } from "../constants";
+import {
+  PortalEntityTableSettings,
+  PortalEntityCreateSettings,
+  PortalEntityDetailsSettings,
+  PortalEntityUpdateSettings,
+} from "./portal";
 
-const DOCS_TITLE = "CRUD Settings";
+const TITLE = msg`CRUD Settings`;
 
-function useEntityCrudView() {
-  const entity = useEntitySlug();
-
-  const entityCrudSettings = useEntityCrudSettings();
+function useEntityCrudView(entity: string) {
+  const entityCrudSettings = useEntityCrudSettings(entity);
   const entityFields = useEntityFields(entity);
-
-  const getEntityFieldLabels = useEntityFieldLabels();
-
-  const hiddenTableColumns = useEntityConfiguration<string[]>(
-    "hidden_entity_table_columns",
-    entity
-  );
-  const hiddenCreateColumns = useEntityConfiguration<string[]>(
-    "hidden_entity_create_columns",
-    entity
-  );
-  const hiddenUpdateColumns = useEntityConfiguration<string[]>(
-    "hidden_entity_update_columns",
-    entity
-  );
-  const hiddenDetailsColumns = useEntityConfiguration<string[]>(
-    "hidden_entity_details_columns",
-    entity
-  );
-
-  const upsertTableColumnsMutation = useUpsertConfigurationMutation(
-    "hidden_entity_table_columns",
-    entity,
-    {
-      otherEndpoints: [ENTITY_TABLE_PATH(entity)],
-    }
-  );
-
-  const upsertCreateColumnsMutation = useUpsertConfigurationMutation(
-    "hidden_entity_create_columns",
-    entity
-  );
-
-  const upsertUpdateColumnsMutation = useUpsertConfigurationMutation(
-    "hidden_entity_update_columns",
-    entity
-  );
-
-  const upsertDetailsColumnsMutation = useUpsertConfigurationMutation(
-    "hidden_entity_details_columns",
-    entity,
-    {
-      /* This is an hack for  ENTITY_DETAILS_PATH(entity, id) to clear all details 
-      and it quite necessary for the detail page */
-      otherEndpoints: [ENTITY_LIST_PATH(entity)],
-    }
-  );
 
   const upsertCrudSettingsMutation = useUpsertConfigurationMutation(
     "entity_crud_settings",
@@ -99,10 +50,7 @@ function useEntityCrudView() {
       update: true,
     });
 
-  const sharedLoading =
-    entityFields.isLoading ||
-    entityCrudSettings.isLoading ||
-    entity === SLUG_LOADING_VALUE;
+  const sharedLoading = entityFields.isLoading || entityCrudSettings.isLoading;
 
   useEffect(() => {
     if (entityCrudSettings.data) {
@@ -124,118 +72,91 @@ function useEntityCrudView() {
     } else if (field === "delete" && newState.delete) {
       newState.details = true;
     }
-    
     setEntityCrudSettingsState(newState);
-    upsertCrudSettingsMutation.mutateAsync(
-      newState as unknown as Record<string, string>
-    );
+    upsertCrudSettingsMutation.mutateAsync(newState);
   };
 
   const error = entityFields.error || entityCrudSettings.error;
 
-  const schema: Record<string, { disabled: boolean; render: ReactNode }> = {
-    [ENTITY_CRUD_SETTINGS_TAB_LABELS.TABLE]: {
+  const schema: Record<
+    CrudViewsKeys,
+    { disabled: boolean; render: ReactNode }
+  > = {
+    table: {
       disabled: false,
       render: (
-        <SelectionTab
-          label={ENTITY_CRUD_SETTINGS_TAB_LABELS.TABLE}
-          columns={{
-            fields: entityFields.data,
-            submit: async (data) => {
-              await upsertTableColumnsMutation.mutateAsync(data);
-            },
-            hidden: hiddenTableColumns.data,
-            getEntityFieldLabels,
-          }}
-          isLoading={sharedLoading || hiddenTableColumns.isLoading}
-          toggling={{
-            enabled: true,
-            label: ENTITY_CRUD_SETTINGS_TAB_LABELS.TABLE,
-          }}
-          error={error}
-        />
+        <>
+          <EntityFieldsSelectionSettings
+            crudKey="table"
+            isLoading={sharedLoading}
+            toggling={{
+              enabled: true,
+            }}
+            error={error}
+          />
+          <PortalEntityTableSettings />
+        </>
       ),
     },
-    [ENTITY_CRUD_SETTINGS_TAB_LABELS.DETAILS]: {
+    details: {
       disabled: !entityCrudSettingsState.details,
       render: (
-        <SelectionTab
-          label={ENTITY_CRUD_SETTINGS_TAB_LABELS.DETAILS}
-          columns={{
-            fields: entityFields.data,
-            submit: async (data) => {
-              await upsertDetailsColumnsMutation.mutateAsync(data);
-            },
-            hidden: hiddenDetailsColumns.data,
-            getEntityFieldLabels,
-          }}
-          isLoading={sharedLoading || hiddenDetailsColumns.isLoading}
-          error={error}
-          toggling={{
-            onToggle: () => toggleCrudSettings("details"),
-            enabled: entityCrudSettingsState.details,
-            label: ENTITY_CRUD_SETTINGS_TAB_LABELS.DETAILS,
-          }}
-        />
+        <>
+          <EntityFieldsSelectionSettings
+            crudKey="details"
+            isLoading={sharedLoading}
+            error={error}
+            toggling={{
+              onToggle: () => toggleCrudSettings("details"),
+              enabled: entityCrudSettingsState.details,
+            }}
+          />
+          <PortalEntityDetailsSettings />
+        </>
       ),
     },
-    [ENTITY_CRUD_SETTINGS_TAB_LABELS.CREATE]: {
+    create: {
       disabled: !entityCrudSettingsState.create,
       render: (
-        <SelectionTab
-          label={ENTITY_CRUD_SETTINGS_TAB_LABELS.CREATE}
-          columns={{
-            fields: entityFields.data,
-            submit: async (data) => {
-              await upsertCreateColumnsMutation.mutateAsync(data);
-            },
-            hidden: hiddenCreateColumns.data,
-            getEntityFieldLabels,
-          }}
-          isLoading={sharedLoading || hiddenCreateColumns.isLoading}
-          error={error}
-          toggling={{
-            onToggle: () => toggleCrudSettings("create"),
-            enabled: entityCrudSettingsState.create,
-            label: ENTITY_CRUD_SETTINGS_TAB_LABELS.CREATE,
-          }}
-        />
+        <>
+          <EntityFieldsSelectionSettings
+            crudKey="create"
+            isLoading={sharedLoading}
+            error={error}
+            toggling={{
+              onToggle: () => toggleCrudSettings("create"),
+              enabled: entityCrudSettingsState.create,
+            }}
+          />
+          <PortalEntityCreateSettings />
+        </>
       ),
     },
-    [ENTITY_CRUD_SETTINGS_TAB_LABELS.UPDATE]: {
+    update: {
       disabled: !entityCrudSettingsState.update,
       render: (
-        <SelectionTab
-          label={ENTITY_CRUD_SETTINGS_TAB_LABELS.UPDATE}
-          columns={{
-            fields: entityFields.data,
-            submit: async (data) => {
-              await upsertUpdateColumnsMutation.mutateAsync(data);
-            },
-            hidden: hiddenUpdateColumns.data,
-            getEntityFieldLabels,
-          }}
-          toggling={{
-            onToggle: () => toggleCrudSettings("update"),
-            enabled: entityCrudSettingsState.update,
-            label: ENTITY_CRUD_SETTINGS_TAB_LABELS.UPDATE,
-          }}
-          isLoading={sharedLoading || hiddenUpdateColumns.isLoading}
-          error={error}
-        />
+        <>
+          <EntityFieldsSelectionSettings
+            crudKey="update"
+            toggling={{
+              onToggle: () => toggleCrudSettings("update"),
+              enabled: entityCrudSettingsState.update,
+            }}
+            isLoading={sharedLoading}
+            error={error}
+          />
+          <PortalEntityUpdateSettings />
+        </>
       ),
     },
-    [ENTITY_CRUD_SETTINGS_TAB_LABELS.DELETE]: {
+    delete: {
       disabled: !entityCrudSettingsState.delete,
       render: (
-        <SelectionTab
-          label={ENTITY_CRUD_SETTINGS_TAB_LABELS.DELETE}
-          isLoading={false}
-          error={error}
+        <ToggleCrudState
+          crudKey="delete"
           toggling={{
             onToggle: () => toggleCrudSettings("delete"),
             enabled: entityCrudSettingsState.delete,
-            label: ENTITY_CRUD_SETTINGS_TAB_LABELS.DELETE,
           }}
         />
       ),
@@ -248,43 +169,42 @@ function useEntityCrudView() {
 export function EntityCrudSettings() {
   const tabFromUrl = useRouteParam("tab");
   const changeTabParam = useChangeRouterParam("tab");
-  const entityCrudView = useEntityCrudView();
-  const [isDocOpen, setIsDocOpen] = useState(false);
+  const entity = useEntitySlug();
+  const entityFields = useEntityFields(entity);
+
+  const entityCrudView = useEntityCrudView(entity);
+
+  const documentationActionButton = useDocumentationActionButton(TITLE);
 
   useSetPageDetails({
-    pageTitle: "CRUD Settings",
+    pageTitle: TITLE,
     viewKey: ENTITY_CONFIGURATION_VIEW,
-    permission: USER_PERMISSIONS.CAN_CONFIGURE_APP,
+    permission: UserPermissions.CAN_CONFIGURE_APP,
   });
   return (
     <BaseEntitySettingsLayout>
-      <SectionBox
-        title="CRUD Settings"
-        iconButtons={[
-          {
-            action: () => setIsDocOpen(true),
-            icon: "help",
-            label: DOCUMENTATION_LABEL.CONCEPT(DOCS_TITLE),
-          },
-        ]}
-      >
+      {entityFields.data.length > 1 &&
+        entityFields.data.findIndex((field) => field.isId) === -1 && (
+          <>
+            <WarningAlert message="This entity doesn't have a primary key. Kindly add one to this entity and restart the application so as not to run into errors when managing its data" />
+            <Spacer />
+          </>
+        )}
+      <SectionBox title={TITLE} actionButtons={[documentationActionButton]}>
         <Tabs
           currentTab={tabFromUrl}
           onChange={changeTabParam}
-          contents={Object.entries(entityCrudView).map(
+          contents={typescriptSafeObjectDotEntries(entityCrudView).map(
             ([key, { disabled, render }]) => ({
-              label: key,
+              label: ENTITY_CRUD_LABELS[key],
+              id: key,
               content: render,
               disabled,
             })
           )}
         />
       </SectionBox>
-      <CRUDDocumentation
-        title={DOCS_TITLE}
-        close={setIsDocOpen}
-        isOpen={isDocOpen}
-      />
+      <CRUDDocumentation />
     </BaseEntitySettingsLayout>
   );
 }

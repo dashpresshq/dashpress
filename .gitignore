@@ -35,8 +35,12 @@ yarn-error.log*
 
 tsconfig.tsbuildinfo
 
-.config-data/**/*.json
+.config-data
 
 dist/
 
 *.sqlite
+
+src/translations/locales/*.js
+
+.swc

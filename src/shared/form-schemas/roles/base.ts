@@ -1,3 +1,4 @@
+import { msg } from "@lingui/macro";
 import { IAppliedSchemaFormConfig } from "../types";
 
 export type IBaseRoleForm = {
@@ -6,6 +7,7 @@ export type IBaseRoleForm = {
 
 export const BASE_ROLE_FORM_SCHEMA: IAppliedSchemaFormConfig<IBaseRoleForm> = {
   name: {
+    label: msg`Name`,
     type: "text",
     validations: [
       {

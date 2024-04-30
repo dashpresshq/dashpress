@@ -2,6 +2,8 @@ import * as React from "react";
 import { render, screen } from "@testing-library/react";
 import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 import userEvent from "@testing-library/user-event";
+import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
+import { fakeMessageDescriptor } from "translations/fake";
 import { SchemaForm } from ".";
 
 type IAccount = {
@@ -9,13 +11,16 @@ type IAccount = {
   email: string;
 };
 
-jest.mock("next/router", () => require("next-router-mock"));
+const useRouter = jest.spyOn(require("next/router"), "useRouter");
+
+useRouter.mockImplementation(USE_ROUTER_PARAMS({}));
 
 const buttonText = (isSubmitting: boolean) =>
-  isSubmitting ? "Submitting Form" : "Submit Form";
+  fakeMessageDescriptor(isSubmitting ? "Submitting Form" : "Submit Form");
 
 const BASE_FIELDS = {
   name: {
+    label: fakeMessageDescriptor("Name"),
     type: "text" as const,
     validations: [
       {
@@ -24,6 +29,7 @@ const BASE_FIELDS = {
     ],
   },
   email: {
+    label: fakeMessageDescriptor("Email"),
     type: "email" as const,
     validations: [
       {
@@ -64,7 +70,7 @@ describe("<SchemaForm />", () => {
         <SchemaForm<IAccount>
           onSubmit={mockOnSubmit}
           buttonText={buttonText}
-          icon="save"
+          systemIcon="Save"
           fields={BASE_FIELDS}
         />
       </ApplicationRoot>
@@ -90,7 +96,7 @@ describe("<SchemaForm />", () => {
         <SchemaForm<IAccount>
           onSubmit={mockOnSubmit}
           buttonText={buttonText}
-          icon="save"
+          systemIcon="Save"
           fields={BASE_FIELDS}
           resetForm
         />
@@ -114,7 +120,7 @@ describe("<SchemaForm />", () => {
         <SchemaForm<IAccount>
           onSubmit={mockOnSubmit}
           buttonText={buttonText}
-          icon="save"
+          systemIcon="Save"
           fields={BASE_FIELDS}
           formExtension={{
             beforeSubmit: "",
@@ -140,7 +146,7 @@ describe("<SchemaForm />", () => {
         <SchemaForm<IAccount>
           onSubmit={mockOnSubmit}
           buttonText={buttonText}
-          icon="save"
+          systemIcon="Save"
           fields={BASE_FIELDS}
           action="custom-action"
           formExtension={{
@@ -169,7 +175,7 @@ describe("<SchemaForm />", () => {
         <SchemaForm<IAccount>
           onSubmit={mockOnSubmit}
           buttonText={buttonText}
-          icon="save"
+          systemIcon="Save"
           fields={BASE_FIELDS}
           formExtension={{
             beforeSubmit: "sm ks ks dsldm sl dm",
@@ -195,7 +201,7 @@ describe("<SchemaForm />", () => {
         <SchemaForm<IAccount>
           onSubmit={mockOnSubmit}
           buttonText={buttonText}
-          icon="save"
+          systemIcon="Save"
           fields={BASE_FIELDS}
           action="custom-action"
           formExtension={{
@@ -223,7 +229,7 @@ describe("<SchemaForm />", () => {
         <SchemaForm<IAccount>
           onSubmit={mockOnSubmit}
           buttonText={buttonText}
-          icon="save"
+          systemIcon="Save"
           fields={BASE_FIELDS}
           action="edit"
           initialValues={{
@@ -259,7 +265,7 @@ describe("<SchemaForm />", () => {
         <SchemaForm<IAccount>
           onSubmit={mockOnSubmit}
           buttonText={buttonText}
-          icon="save"
+          systemIcon="Save"
           fields={{
             ...BASE_FIELDS,
           }}
@@ -290,7 +296,7 @@ describe("<SchemaForm />", () => {
         <SchemaForm<IAccount>
           onSubmit={mockOnSubmit}
           buttonText={buttonText}
-          icon="save"
+          systemIcon="Save"
           fields={{
             ...BASE_FIELDS,
           }}
@@ -321,7 +327,7 @@ describe("<SchemaForm />", () => {
         <SchemaForm<IAccount>
           onSubmit={mockOnSubmit}
           buttonText={buttonText}
-          icon="save"
+          systemIcon="Save"
           fields={{
             ...BASE_FIELDS,
           }}
@@ -353,7 +359,7 @@ describe("<SchemaForm />", () => {
         <SchemaForm<IAccount>
           onSubmit={mockOnSubmit}
           buttonText={buttonText}
-          icon="save"
+          systemIcon="Save"
           fields={{
             ...BASE_FIELDS,
           }}
@@ -361,17 +367,22 @@ describe("<SchemaForm />", () => {
       </ApplicationRoot>
     );
 
-    await userEvent.type(screen.getByLabelText("Name"), "h");
+    await userEvent.type(screen.getByLabelText("Name"), "f");
     await userEvent.clear(screen.getByLabelText("Name"));
 
     await userEvent.click(screen.getByRole("button", { name: "Submit Form" }));
 
-    expect(screen.getByRole("alert")).toHaveTextContent("Name is required");
+    expect(screen.getAllByRole("alert")[0]).toHaveTextContent(
+      "Name is required"
+    );
+
+    expect(screen.getAllByRole("alert")[1]).toHaveTextContent(
+      "Email is required"
+    );
+
+    expect(mockOnSubmit).not.toHaveBeenCalledWith();
 
     await userEvent.type(screen.getByLabelText("Name"), "f");
-
-    await userEvent.type(screen.getByLabelText("Email"), "h");
-    await userEvent.clear(screen.getByLabelText("Email"));
 
     await userEvent.click(screen.getByRole("button", { name: "Submit Form" }));
 
@@ -395,11 +406,11 @@ describe("<SchemaForm />", () => {
         <SchemaForm<{ name: string }>
           onSubmit={mockOnSubmit}
           buttonText={buttonText}
-          icon="save"
+          systemIcon="Save"
           fields={{
             name: {
               type: "text",
-              label: "Custom Name Label",
+              label: fakeMessageDescriptor("Custom Name Label"),
               validations: [],
             },
           }}
@@ -424,12 +435,12 @@ describe("<SchemaForm />", () => {
         <SchemaForm<{ hello: string }>
           onSubmit={mockOnSubmit}
           buttonText={buttonText}
-          icon="save"
+          systemIcon="Save"
           fields={{
             ...BASE_FIELDS,
             hello: {
               type: "text",
-              label: "Custom Name Label",
+              label: fakeMessageDescriptor("Custom Name Label"),
               validations: [],
             },
           }}
@@ -447,9 +458,10 @@ describe("<SchemaForm />", () => {
         <SchemaForm<{ name: string }>
           onSubmit={mockOnSubmit}
           buttonText={buttonText}
-          icon="save"
+          systemIcon="Save"
           fields={{
             name: {
+              label: fakeMessageDescriptor("Name"),
               type: "text",
               validations: [],
             },
@@ -473,7 +485,7 @@ describe("<SchemaForm />", () => {
           onSubmit={jest.fn()}
           onChange={onChangeMock}
           buttonText={buttonText}
-          icon="save"
+          systemIcon="Save"
           fields={{
             ...BASE_FIELDS,
           }}
@@ -488,7 +500,8 @@ describe("<SchemaForm />", () => {
 
     await userEvent.type(screen.getByLabelText("Name"), "Foo");
 
-    expect(onChangeMock).toHaveBeenCalledTimes(6);
+    expect(onChangeMock).toHaveBeenCalledWith({ name: "F" });
+    expect(onChangeMock).toHaveBeenCalledWith({ name: "Fo" });
     expect(onChangeMock).toHaveBeenLastCalledWith({ name: "Foo" });
   });
 });

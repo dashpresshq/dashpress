@@ -1,9 +1,8 @@
-import React from "react";
 import DatePicker from "react-datepicker";
 import { FieldMetaState } from "react-final-form";
 import styled from "styled-components";
 import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
-import { InputStyles } from "../Styles";
+import { IInput, InputStyles } from "../Styles";
 import { ISharedFormInput } from "../_types";
 import { wrapLabelAndError, generateFormArias } from "../_wrapForm";
 import { dateLibraryStyle } from "./defaultStyle";
@@ -13,7 +12,7 @@ interface IFormDateInput extends ISharedFormInput {
   maxDate?: Date;
 }
 
-const Root = styled.div`
+const Root = styled.div<IInput>`
   ${dateLibraryStyle}
   .react-datepicker {
     border: 1px solid ${USE_ROOT_COLOR("border-color")};
@@ -82,7 +81,7 @@ export function ControlledFormDateInput({
   );
 }
 
-export const FormDateInput: React.FC<IFormDateInput> = (formInput) => {
+export const FormDateInput = (formInput: IFormDateInput) => {
   const { input, disabled, meta, required, minDate, maxDate } = formInput;
   let { value } = input;
   if (value && typeof value === "string") {

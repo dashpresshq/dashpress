@@ -1,8 +1,8 @@
 import { Column } from "@tanstack/react-table";
-import React, { useEffect, useState } from "react";
-import { IColumnFilterBag } from "shared/types/data";
+import { ReactNode, useEffect, useState } from "react";
+import { IColumnFilterBag, TableFilterType } from "shared/types/data";
 import { useDebounce } from "react-use";
-import { TableFilterType } from "./types";
+import { typescriptSafeObjectDotEntries } from "shared/lib/objects";
 import { FilterWrapper } from "./_FilterWrapper";
 import { RenderFilterOperator } from "./_FilterOperator";
 import { FilterTypesConfigBag } from "./config";
@@ -11,15 +11,36 @@ const FILTER_DEBOUNCE_WAIT = 500;
 
 interface IProps {
   type: TableFilterType;
-  column: Column<Record<string, unknown>, unknown>;
-  view?: React.ReactNode;
+  column: Pick<
+    Column<Record<string, unknown>, unknown>,
+    "setFilterValue" | "getFilterValue"
+  >;
+  view?: ReactNode | string;
+  debounceWait?: number;
 }
 
-export function TableFilter({ type, column, view }: IProps) {
+export function TableFilter({
+  type,
+  column,
+  view,
+  debounceWait = FILTER_DEBOUNCE_WAIT,
+}: IProps) {
   const filterValue = column.getFilterValue() as IColumnFilterBag<any>;
 
   const setFilter = (value?: IColumnFilterBag<unknown>) => {
-    return column.setFilterValue(value);
+    if (value === undefined) {
+      column.setFilterValue(undefined);
+      return;
+    }
+
+    return column.setFilterValue(
+      Object.fromEntries(
+        typescriptSafeObjectDotEntries(value).filter(
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars
+          ([_, value$1]) => value$1 || typeof value$1 === "boolean"
+        )
+      )
+    );
   };
 
   const { filterHasValueImpl, operators, FilterComponent } =
@@ -37,7 +58,7 @@ export function TableFilter({ type, column, view }: IProps) {
     () => {
       setFilter(localValue);
     },
-    FILTER_DEBOUNCE_WAIT,
+    debounceWait,
     [localValue]
   );
 

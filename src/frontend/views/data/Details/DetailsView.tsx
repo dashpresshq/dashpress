@@ -1,5 +1,4 @@
-import { SLUG_LOADING_VALUE } from "frontend/lib/routing/constants";
-import React, { Fragment } from "react";
+import { Fragment } from "react";
 import {
   useAppConfiguration,
   useEntityConfiguration,
@@ -13,49 +12,60 @@ import {
   useEntityFieldLabels,
   useEntityFieldSelections,
   useProcessedEntityFieldTypes,
-  useHiddenEntityColumns,
+  useEntityCrudFields,
 } from "frontend/hooks/entity/entity.config";
-import {
-  useEntityFields,
-  useEntityToOneReferenceFields,
-} from "frontend/hooks/entity/entity.store";
-import { filterOutHiddenScalarColumns } from "../utils";
-import { useEntityViewStateMachine } from "../useEntityViewStateMachine";
+import { useEntityToOneReferenceFields } from "frontend/hooks/entity/entity.store";
+import { DataStates } from "frontend/lib/data/types";
+import styled from "styled-components";
+import { useEvaluateScriptContext } from "frontend/hooks/scripts";
+import { useEntityViewStateMachine } from "../hooks/useEntityViewStateMachine";
 import { viewSpecialDataTypes } from "../viewSpecialDataTypes";
-import { IEntityPresentationScript } from "../types";
 import { evalutePresentationScript } from "../evaluatePresentationScript";
+import { PreDataDetails } from "./portal";
+import { PortalColumnRender } from "../Table/portal";
+
+const ContentText = styled(Typo.SM)`
+  overflow-wrap: anywhere;
+`;
+
+const DetailItem = styled.div`
+  .show-on-hover {
+    opacity: 0;
+  }
+  &:hover {
+    .show-on-hover {
+      opacity: 1;
+    }
+  }
+`;
 
 export function EntityDetailsView({
-  id,
+  entityId,
   entity,
   displayFrom,
-  column,
 }: {
-  id: string;
+  entityId: string;
   entity: string;
   displayFrom: "details" | "canvas";
-  column?: string;
 }) {
-  const dataDetails = useEntityDataDetails(entity, id, column);
-  const entityFields = useEntityFields(entity);
+  const dataDetails = useEntityDataDetails({ entity, entityId });
   const entityFieldTypes = useProcessedEntityFieldTypes(entity);
-  const hiddenDetailsColumns = useHiddenEntityColumns("details", entity);
-  const defaultDateFormat = useAppConfiguration<string>("default_date_format");
+  const entityCrudFields = useEntityCrudFields(entity, "details");
+  const defaultDateFormat = useAppConfiguration("default_date_format");
   const getEntityFieldLabels = useEntityFieldLabels(entity);
+  const evaluateScriptContext = useEvaluateScriptContext();
   const entityToOneReferenceFields = useEntityToOneReferenceFields(entity);
   const entityFieldSelections = useEntityFieldSelections(entity);
-  const entityPresentationScript =
-    useEntityConfiguration<IEntityPresentationScript>(
-      "entity_presentation_script",
-      entity
-    );
+  const entityPresentationScript = useEntityConfiguration(
+    "entity_presentation_script",
+    entity
+  );
 
   const error =
     dataDetails.error ||
-    hiddenDetailsColumns.error ||
+    entityCrudFields.error ||
     entityFieldTypes.error ||
     defaultDateFormat.error ||
-    entityFields.error ||
     entityPresentationScript.error ||
     entityToOneReferenceFields.error;
 
@@ -63,22 +73,22 @@ export function EntityDetailsView({
     dataDetails.isLoading ||
     defaultDateFormat.isLoading ||
     entityToOneReferenceFields.isLoading ||
-    entity === SLUG_LOADING_VALUE ||
-    entityFields.isLoading ||
     entityPresentationScript.isLoading ||
-    hiddenDetailsColumns.isLoading;
+    entityCrudFields.isLoading;
 
-  const viewState = useEntityViewStateMachine(
+  const viewState = useEntityViewStateMachine({
     isLoading,
     error,
-    "details",
-    entity
-  );
+    crudAction: "details",
+    entity,
+  });
 
   return (
     <ViewStateMachine
-      loading={viewState.type === "loading" || !id}
-      error={viewState.type === "error" ? viewState.message : undefined}
+      loading={viewState.type === DataStates.Loading || !entityId}
+      error={
+        viewState.type === DataStates.Error ? viewState.message : undefined
+      }
       loader={
         <>
           {Array.from({ length: 7 }, (_, k) => k).map((key) => (
@@ -90,12 +100,10 @@ export function EntityDetailsView({
         </>
       }
     >
+      <PreDataDetails entity={entity} entityId={entityId} />
       <div aria-label="Details Section">
-        {filterOutHiddenScalarColumns(
-          entityFields.data,
-          hiddenDetailsColumns.data
-        ).map(({ name }) => {
-          const value$1 = dataDetails?.data?.[name];
+        {entityCrudFields.data.map(({ name }) => {
+          const rawValue = dataDetails?.data?.[name];
 
           const value = evalutePresentationScript(
             entityPresentationScript.data.script,
@@ -103,7 +111,8 @@ export function EntityDetailsView({
               field: name,
               from: "details",
               row: dataDetails?.data,
-              value: value$1,
+              value: rawValue,
+              ...evaluateScriptContext,
             }
           );
 
@@ -120,17 +129,26 @@ export function EntityDetailsView({
           });
 
           const contentToRender = specialDataTypeRender || (
-            <Typo.SM>
+            <ContentText>
               {typeof value === "object" ? JSON.stringify(value) : value}
-            </Typo.SM>
+            </ContentText>
           );
 
           return (
-            <React.Fragment key={name}>
-              <Typo.XXS weight="bold">{getEntityFieldLabels(name)}</Typo.XXS>
-              {contentToRender}
+            <DetailItem key={name}>
+              <Typo.XXS $weight="bold">{getEntityFieldLabels(name)}</Typo.XXS>
+              <PortalColumnRender
+                {...{
+                  column: name,
+                  value: rawValue,
+                  entity,
+                  entityId,
+                }}
+              >
+                {contentToRender}
+              </PortalColumnRender>
               <Spacer />
-            </React.Fragment>
+            </DetailItem>
           );
         })}
       </div>

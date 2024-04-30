@@ -1,3 +1,5 @@
+import { msg } from "@lingui/macro";
+
 export const DOCUMENTATION_LABEL = {
-  CONCEPT: (title: string) => `Explain ${title}`,
+  CONCEPT: (title: string) => msg`Explain ${title}`,
 };

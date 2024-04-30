@@ -1,21 +1,18 @@
-import "@testing-library/jest-dom";
-import React from "react";
 import { render, screen, waitFor } from "@testing-library/react";
 import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 import userEvent from "@testing-library/user-event";
 import MenuSettings from "pages/admin/settings/menu";
 
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
+import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
 
 setupApiHandlers();
 
-describe.skip("pages/admin/settings/menu", () => {
+describe("pages/admin/settings/menu", () => {
   beforeAll(() => {
     const useRouter = jest.spyOn(require("next/router"), "useRouter");
-    useRouter.mockImplementation(() => ({
-      asPath: "/",
-      query: {},
-    }));
+
+    useRouter.mockImplementation(USE_ROUTER_PARAMS({}));
   });
 
   it("should display only active entities with correct state", async () => {
@@ -68,13 +65,9 @@ describe.skip("pages/admin/settings/menu", () => {
       screen.getByRole("button", { name: "Plural entity-2" })
     );
 
-    await userEvent.click(
-      screen.getByRole("button", { name: "Save Menu Entities Settings" })
-    );
-
     expect(
       await screen.findByRole("status", {}, { timeout: 20000 })
-    ).toHaveTextContent("Menu Entities Settings Saved Successfully");
+    ).toHaveTextContent("Menu Settings Saved Successfully");
   });
 
   it("should display updated entities state", async () => {

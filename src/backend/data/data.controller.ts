@@ -36,7 +36,7 @@ export class DataApiController {
     queryFilters: QueryFilterSchema
   ): Promise<{ count: number }> {
     return {
-      count: await this._dataApiService.count(entity, queryFilters),
+      count: await this._dataApiService.countData(entity, queryFilters),
     };
   }
 

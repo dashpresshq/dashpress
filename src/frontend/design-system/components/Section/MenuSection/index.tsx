@@ -1,15 +1,17 @@
-import React from "react";
-import { Icon } from "react-feather";
 import styled from "styled-components";
-import { SHADOW_CSS, StyledCardBody } from "../../Card";
-import { RenderList } from "../../RenderList";
-import { SectionListItem } from "../SectionList";
+import { loadedDataState } from "frontend/lib/data/constants/loadedDataState";
+import { SystemIconsKeys } from "shared/constants/Icons";
+import { MessageDescriptor } from "@lingui/core";
+import { useLingui } from "@lingui/react";
+import { SHADOW_CSS, CardBody } from "../../Card";
+import { ListManager } from "../../ListManager";
+import { IListMangerItemProps } from "../../ListManager/ListManagerItem";
 
 export interface IMenuSectionItem {
-  name: string;
+  name: MessageDescriptor;
   order?: number;
   action: string | (() => void);
-  IconComponent?: Icon;
+  systemIcon?: SystemIconsKeys;
   disabled?: boolean;
 }
 
@@ -18,11 +20,13 @@ export interface IProps {
   currentMenuItem?: string;
 }
 
-const Root = styled(StyledCardBody)`
+const Root = styled(CardBody)`
   ${SHADOW_CSS}
 `;
 
 export function MenuSection({ menuItems, currentMenuItem }: IProps) {
+  const { _ } = useLingui();
+
   const orderedMenuItems = menuItems.sort((a, b) => {
     const aOrder = a.order ?? 10;
     const bOrder = b.order ?? 10;
@@ -32,24 +36,25 @@ export function MenuSection({ menuItems, currentMenuItem }: IProps) {
 
   return (
     <Root>
-      <RenderList
-        items={orderedMenuItems}
-        notSearchable
-        newItemLink=""
-        singular=""
-        render={(menuItem) => (
-          <SectionListItem
-            label={menuItem.name}
-            action={menuItem.action}
-            active={(typeof menuItem.action === "string"
+      <ListManager
+        items={loadedDataState(
+          orderedMenuItems.map((item) => ({ ...item, name: _(item.name) }))
+        )}
+        listLengthGuess={10}
+        labelField="name"
+        render={(menuItem) => {
+          const props: IListMangerItemProps = {
+            label: menuItem.name,
+            action: menuItem.action,
+            active: (typeof menuItem.action === "string"
               ? menuItem.action
               : ""
-            ).includes(`${currentMenuItem}`)}
-            disabled={!!menuItem.disabled}
-            key={menuItem.name}
-            IconComponent={menuItem.IconComponent}
-          />
-        )}
+            ).includes(`${currentMenuItem}`),
+            disabled: !!menuItem.disabled,
+            systemIcon: menuItem.systemIcon,
+          };
+          return props;
+        }}
       />
     </Root>
   );

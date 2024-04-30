@@ -1,4 +1,5 @@
 import { FormApi } from "final-form";
+import { typescriptSafeObjectDotKeys } from "shared/lib/objects";
 
 export function resetFormValues<T extends Record<string, unknown>>(
   resetForm: boolean,
@@ -8,7 +9,7 @@ export function resetFormValues<T extends Record<string, unknown>>(
 ) {
   form.batch(() => {
     if (resetForm && values) {
-      Object.keys(values).forEach((field: string) => {
+      typescriptSafeObjectDotKeys(values).forEach((field: string) => {
         if (field === "id") {
           return;
         }

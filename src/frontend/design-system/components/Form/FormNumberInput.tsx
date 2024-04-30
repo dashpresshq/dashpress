@@ -1,5 +1,5 @@
-import React from "react";
-import { StyledInput } from "./Styles";
+import { useLingui } from "@lingui/react";
+import { Input } from "./Styles";
 import { ISharedFormInput } from "./_types";
 import { wrapLabelAndError, generateFormArias } from "./_wrapForm";
 
@@ -17,16 +17,19 @@ const getNumberValue = (value: string | number | null, required: boolean) => {
   return value;
 };
 
-export const FormNumberInput: React.FC<IFormNumberInput> = (formInput) => {
-  const { input, label, disabled, meta, allowNegative, required, sm } =
+export const FormNumberInput = (formInput: IFormNumberInput) => {
+  const { input, placeholder, disabled, meta, allowNegative, required, sm } =
     formInput;
   if (typeof input.value === "string") {
     input.onChange(getNumberValue(input.value, !!required));
   }
+
+  const { _ } = useLingui();
+
   const moreProps = { min: allowNegative ? Number.NEGATIVE_INFINITY : 0 };
 
   return wrapLabelAndError(
-    <StyledInput
+    <Input
       {...input}
       {...generateFormArias(meta)}
       {...moreProps}
@@ -35,7 +38,7 @@ export const FormNumberInput: React.FC<IFormNumberInput> = (formInput) => {
       onChange={(e) => {
         input.onChange(getNumberValue(e.target.value, !!required));
       }}
-      placeholder={label}
+      placeholder={placeholder ? _(placeholder) : null}
       type="number"
       disabled={disabled}
     />,

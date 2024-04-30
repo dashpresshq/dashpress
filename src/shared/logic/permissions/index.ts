@@ -1,7 +1,7 @@
 import {
   CAN_ACCESS_ENTITY,
   META_USER_PERMISSIONS,
-  USER_PERMISSIONS,
+  UserPermissions,
 } from "shared/constants/user";
 import { GranularEntityPermissions, SystemRoles } from "shared/types/user";
 import { replaceGranular } from "shared/constants/user/shared";
@@ -45,7 +45,7 @@ export const doesPermissionAllowPermission = (
 
   const entitiesMetaCheck = doMetaPermissionCheck$1(
     CAN_ACCESS_ENTITY,
-    USER_PERMISSIONS.CAN_MANAGE_ALL_ENTITIES
+    UserPermissions.CAN_MANAGE_ALL_ENTITIES
   );
 
   if (typeof entitiesMetaCheck === "boolean") {
@@ -100,8 +100,8 @@ export const canRoleDoThisAsync = async (
 export const canRoleDoThisSync = (
   userRole: string,
   permission: string,
-  checkGranular: boolean,
-  rolePermissions: string[]
+  rolePermissions: string[],
+  checkGranular = false
 ): boolean => {
   const systemRoleCheck = doSystemRoleCheck(userRole, permission);
 

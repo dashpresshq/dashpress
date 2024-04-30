@@ -1,5 +1,3 @@
-import "@testing-library/jest-dom";
-import React from "react";
 import { render, screen, within } from "@testing-library/react";
 import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 
@@ -7,16 +5,12 @@ import Dashboard from "pages";
 
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 import userEvent from "@testing-library/user-event";
-import { getTableRows } from "__tests__/_/utiis/getTableRows";
+import { getTableRows } from "__tests__/_/utils/getTableRows";
+import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
 
 setupApiHandlers();
 
 const useRouter = jest.spyOn(require("next/router"), "useRouter");
-
-useRouter.mockImplementation(() => ({
-  query: {},
-  asPath: "/",
-}));
 
 // it("should change relative time", async () => {
 //   render(
@@ -52,6 +46,8 @@ useRouter.mockImplementation(() => ({
 // });
 
 describe("pages/admin", () => {
+  useRouter.mockImplementation(USE_ROUTER_PARAMS({}));
+
   it("should render table dashboard widget correctly", async () => {
     render(
       <ApplicationRoot>
@@ -70,9 +66,9 @@ describe("pages/admin", () => {
 
     expect(await getTableRows(widget)).toMatchInlineSnapshot(`
       [
-        "nameage",
-        "John6",
-        "Jane5",
+        "Name|Age",
+        "John|6",
+        "Jane|5",
       ]
     `);
   });
@@ -91,15 +87,6 @@ describe("pages/admin", () => {
       "Some SVG Here"
     );
 
-    //   expect(within(widget).getByLabelText("New Summary Card Icon").innerHTML)
-    // .toBe(`<svg fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-    //               <path fill="none" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" d="M10 21a1 1 0 11-2 0 1 1 0 012 0zM21 21a1 1 0 11-2 0 1 1 0 012 0zM1 1h4l2.68 13.39c.188.925.995 1.61 1.962 1.61h.04-.002H19.438a2 2 0 001.959-1.597l.002-.013 1.6-8.39h-17"></path>
-    //             </svg>`);
-
-    expect(within(widget).getByLabelText("Bar Card Icon")).toHaveAttribute(
-      "color",
-      "#FF165D"
-    );
     expect(within(widget).getByLabelText("Total Count")).toHaveTextContent(
       "10"
     );
@@ -111,11 +98,6 @@ describe("pages/admin", () => {
     expect(within(widget).getByLabelText("Relative Direction")).toHaveAttribute(
       "color",
       "#03d87f"
-    );
-
-    expect(within(widget).getByLabelText("Bar Card Icon")).toHaveAttribute(
-      "color",
-      "#FF165D"
     );
 
     expect(within(widget).getByRole("link", { name: "View" })).toHaveAttribute(
@@ -163,13 +145,10 @@ describe("pages/admin", () => {
   });
 
   describe("Action Button", () => {
-    it("should go to settings page on 'Manage Dashboard'", async () => {
+    it("should go to settings page on 'Edit Dashboard'", async () => {
       const replaceMock = jest.fn();
-      useRouter.mockImplementation(() => ({
-        replace: replaceMock,
-        query: {},
-        asPath: "/",
-      }));
+
+      useRouter.mockImplementation(USE_ROUTER_PARAMS({ replaceMock }));
 
       render(
         <ApplicationRoot>
@@ -178,7 +157,7 @@ describe("pages/admin", () => {
       );
 
       await userEvent.click(
-        await screen.findByRole("button", { name: "Manage Dashboard" })
+        await screen.findByRole("button", { name: "Edit Dashboard" })
       );
 
       expect(replaceMock).toHaveBeenCalledWith("/dashboard/manage");

@@ -2,8 +2,9 @@ import { IDropDownMenuItem } from "frontend/design-system/components/DropdownMen
 import { ITableColumn } from "frontend/design-system/components/Table/types";
 import { loadedDataState } from "frontend/lib/data/constants/loadedDataState";
 import { DataStateKeys } from "frontend/lib/data/types";
+import { ReactNode } from "react";
 import { noop } from "shared/lib/noop";
-import { ITableTab } from "shared/types/data";
+import { ITableView } from "shared/types/data";
 
 export const usePluginTableMenuItems = (
   entity: string,
@@ -29,14 +30,32 @@ export function TableTopComponent({ entity }: { entity: string }) {
   return <span />;
 }
 
-export const usePortalTableColumns = (entity: string, lean: boolean) => {
-  noop(entity, lean);
+export const usePortalTableColumns = (entity: string) => {
+  noop(entity);
   return (tableColumns: ITableColumn[]) => tableColumns;
 };
 
 export const usePortalTableTabs = (
   entity: string
-): DataStateKeys<ITableTab[]> => {
+): DataStateKeys<ITableView[]> => {
   noop(entity);
-  return loadedDataState<ITableTab[]>([]);
+  return loadedDataState<ITableView[]>([]);
 };
+
+export function PortalColumnRender({
+  children,
+  column,
+  value,
+  entity,
+  entityId,
+}: {
+  children: ReactNode;
+  column: string;
+  value: unknown;
+  entity: string;
+  entityId: string;
+}) {
+  noop(column, value, entity, entityId);
+  // eslint-disable-next-line react/jsx-no-useless-fragment
+  return <>{children}</>;
+}

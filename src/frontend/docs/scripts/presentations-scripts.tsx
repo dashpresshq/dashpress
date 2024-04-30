@@ -1,13 +1,11 @@
 import { RenderCode } from "frontend/design-system/components/RenderCode";
 import { WarningAlert } from "frontend/design-system/components/Alert";
 import { Spacer } from "frontend/design-system/primitives/Spacer";
-import { DocumentationRoot, IDocumentationRootProps } from "../_base";
+import { DocumentationRoot } from "../_base";
 
-export function PresentationScriptDocumentation(
-  props: IDocumentationRootProps
-) {
+export function PresentationScriptDocumentation() {
   return (
-    <DocumentationRoot {...props}>
+    <DocumentationRoot>
       <p>
         For a quick showoff, copy and paste the script below, save the form, and
         go back to the table.

@@ -4,6 +4,7 @@ import { IFormProps } from "frontend/lib/form/types";
 import { composeValidators, required } from "frontend/lib/validations";
 import { FormInput } from "frontend/design-system/components/Form/FormInput";
 import { FormButton } from "frontend/design-system/components/Button/FormButton";
+import { msg } from "@lingui/macro";
 import { getFieldsOffFormat } from "./utils";
 
 interface IRelationsSettings {
@@ -50,7 +51,7 @@ export function EntityRelationsForm({
             >
               {({ input, meta }) => (
                 <FormInput
-                  label="Display Format"
+                  label={msg`Display Format`}
                   description="Handlebars with valid fields from entity eg. {{ lastName }} - {{  firstName}}"
                   required
                   meta={meta}
@@ -61,7 +62,7 @@ export function EntityRelationsForm({
             <FormButton
               text={CRUD_CONFIG.FORM_LANG.UPSERT}
               isMakingRequest={submitting}
-              icon="save"
+              systemIcon="Save"
               disabled={pristine}
             />
           </form>

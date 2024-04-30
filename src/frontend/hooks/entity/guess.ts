@@ -1,15 +1,15 @@
 import { IEntityField } from "shared/types/db";
-import { IFieldValidationItem } from "shared/validations/types";
+import { FormFieldTypes, IFieldValidationItem } from "shared/validations/types";
 import {
-  FIELD_TYPES_CONFIG_MAP,
   ENTITY_VALIDATION_CONFIG,
   ValidationsBoundToType,
 } from "shared/validations";
+import { typescriptSafeObjectDotEntries } from "shared/lib/objects";
 
 export const getFieldTypeBoundedValidations = (
-  fieldType: keyof typeof FIELD_TYPES_CONFIG_MAP
+  fieldType: FormFieldTypes
 ): IFieldValidationItem[] =>
-  Object.entries(ENTITY_VALIDATION_CONFIG)
+  typescriptSafeObjectDotEntries(ENTITY_VALIDATION_CONFIG)
     .filter(
       ([, config]) =>
         config.isBoundToType && config.isBoundToType.includes(fieldType)

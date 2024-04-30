@@ -1,6 +1,5 @@
 /* eslint-disable testing-library/no-node-access */
-import "@testing-library/jest-dom";
-import React, { ReactNode } from "react";
+import { ReactNode } from "react";
 import { render, screen } from "@testing-library/react";
 import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 import userEvent from "@testing-library/user-event";
@@ -9,15 +8,13 @@ import ManageDashboard from "pages/dashboard/manage";
 import Dashboard from "pages";
 
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
+import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
 
 setupApiHandlers();
 
 const useRouter = jest.spyOn(require("next/router"), "useRouter");
 
-useRouter.mockImplementation(() => ({
-  asPath: "/",
-  query: {},
-}));
+useRouter.mockImplementation(USE_ROUTER_PARAMS({}));
 
 jest.mock("react-easy-sort", () => ({
   __esModule: true,
@@ -41,6 +38,9 @@ jest.mock("react-easy-sort", () => ({
     </div>
   ),
   SortableItem: ({ children }: { children: ReactNode }) => (
+    <div>{children}</div>
+  ),
+  SortableKnob: ({ children }: { children: ReactNode }) => (
     <div>{children}</div>
   ),
 }));

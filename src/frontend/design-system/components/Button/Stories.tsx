@@ -1,16 +1,17 @@
 /* eslint-disable react/function-component-definition */
-import React from "react";
+
 import { Story } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
 import { ApplicationRoot } from "frontend/components/ApplicationRoot";
-import { SoftButton, IProps } from "./SoftButton";
+import { SoftButton } from "./SoftButton";
+import { IActionButton } from "./types";
 
 export default {
   title: "Components/Button",
   component: SoftButton,
 };
 
-const Template: Story<IProps> = (args) => (
+const Template: Story<IActionButton> = (args) => (
   <ApplicationRoot>
     <SoftButton {...args} />
   </ApplicationRoot>
@@ -31,7 +32,7 @@ Edit.args = {
 
 export const Add = Template.bind({});
 Add.args = {
-  icon: "add",
+  systemIcon: "Plus",
   label: "Add",
   action: () => action("On Click"),
 };
@@ -66,7 +67,7 @@ Eye.args = {
 
 export const Help = Template.bind({});
 Help.args = {
-  icon: "help",
+  systemIcon: "Help",
   label: "Help",
   action: () => action("On Click"),
 };

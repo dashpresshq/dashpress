@@ -1,4 +1,4 @@
-import { USER_PERMISSIONS } from "shared/constants/user";
+import { UserPermissions } from "shared/constants/user";
 import {
   useEntityFieldLabels,
   useEntityFieldSelections,
@@ -6,11 +6,7 @@ import {
   useEntityFieldValidations,
   useEntitySlug,
 } from "frontend/hooks/entity/entity.config";
-import { SLUG_LOADING_VALUE } from "frontend/lib/routing/constants";
-import {
-  ENTITY_FIELDS_ENDPOINT,
-  useEntityFieldLists,
-} from "frontend/hooks/entity/entity.store";
+import { useEntityFieldLists } from "frontend/hooks/entity/entity.store";
 import {
   useEntityConfiguration,
   useUpsertConfigurationMutation,
@@ -18,8 +14,6 @@ import {
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { MAKE_APP_CONFIGURATION_CRUD_CONFIG } from "frontend/hooks/configuration/configuration.constant";
 import { FieldsSettingsDocumentation } from "frontend/docs/fields";
-import { useState } from "react";
-import { DOCUMENTATION_LABEL } from "frontend/docs";
 import { useRouteParam } from "frontend/lib/routing/useRouteParam";
 import { useChangeRouterParam } from "frontend/lib/routing/useChangeRouterParam";
 import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
@@ -27,10 +21,10 @@ import {
   FormSkeleton,
   FormSkeletonSchema,
 } from "frontend/design-system/components/Skeleton/Form";
-import { ListSkeleton } from "frontend/design-system/components/Skeleton/List";
-import { SortList } from "frontend/design-system/components/SortList";
 import { SectionBox } from "frontend/design-system/components/Section/SectionBox";
 import { Tabs } from "frontend/design-system/components/Tabs";
+import { useDocumentationActionButton } from "frontend/docs/constants";
+import { msg } from "@lingui/macro";
 import {
   ENTITY_CONFIGURATION_VIEW,
   ENTITY_FIELD_SETTINGS_TAB_LABELS,
@@ -39,40 +33,33 @@ import { FieldsTypeForm } from "./FieldsType.form";
 import { FieldsLabelForm, loadingFieldsLabelForm } from "./FieldsLabel.form";
 import { BaseEntitySettingsLayout } from "../_Base";
 
-const DOCS_TITLE = "Fields Settings";
+const TITLE_MSG = msg`Field Settings`;
 
 export function EntityFieldsSettings() {
   const tabFromUrl = useRouteParam("tab");
   const changeTabParam = useChangeRouterParam("tab");
-  const [isDocOpen, setIsDocOpen] = useState(false);
 
   const entity = useEntitySlug();
   const entityFieldLists = useEntityFieldLists(entity);
-  const entityFieldLabelsMap = useEntityConfiguration<Record<string, string>>(
+  const entityFieldLabelsMap = useEntityConfiguration(
     "entity_columns_labels",
     entity
   );
 
-  const getEntityFieldLabels = useEntityFieldLabels();
+  const getEntityFieldLabels = useEntityFieldLabels(entity);
   const {
     isLoading: entityFieldTypesMapIsLoading,
     error: entityFieldTypesMapError,
-  } = useEntityConfiguration<Record<string, string>>(
-    "entity_columns_types",
-    entity
-  );
+  } = useEntityConfiguration("entity_columns_types", entity);
 
   const {
     isLoading: entityValidationsMapIsLoading,
     error: entityValidationsMapError,
-  } = useEntityConfiguration<Record<string, string>>(
-    "entity_validations",
-    entity
-  );
+  } = useEntityConfiguration("entity_validations", entity);
 
-  const entityFieldTypes = useProcessedEntityFieldTypes();
-  const entityFieldValidations = useEntityFieldValidations();
-  const entityFieldSelections = useEntityFieldSelections();
+  const entityFieldTypes = useProcessedEntityFieldTypes(entity);
+  const entityFieldValidations = useEntityFieldValidations(entity);
+  const entityFieldSelections = useEntityFieldSelections(entity);
 
   const upsertEntityFieldsMapMutation = useUpsertConfigurationMutation(
     "entity_columns_labels",
@@ -94,23 +81,16 @@ export function EntityFieldsSettings() {
     entity
   );
 
-  const upsertEntityColumnsOrderMutation = useUpsertConfigurationMutation(
-    "entity_fields_orders",
-    entity,
-    {
-      otherEndpoints: [ENTITY_FIELDS_ENDPOINT(entity)],
-    }
-  );
+  const documentationActionButton = useDocumentationActionButton(TITLE_MSG);
 
   useSetPageDetails({
-    pageTitle: "Field Settings",
+    pageTitle: TITLE_MSG,
     viewKey: ENTITY_CONFIGURATION_VIEW,
-    permission: USER_PERMISSIONS.CAN_CONFIGURE_APP,
+    permission: UserPermissions.CAN_CONFIGURE_APP,
   });
 
   const sharedLoadingState =
     entityFieldLists.isLoading ||
-    entity === SLUG_LOADING_VALUE ||
     entityFieldLabelsMap.isLoading ||
     entityValidationsMapIsLoading ||
     entityFieldTypesMapIsLoading;
@@ -123,16 +103,7 @@ export function EntityFieldsSettings() {
 
   return (
     <BaseEntitySettingsLayout>
-      <SectionBox
-        title="Fields Settings"
-        iconButtons={[
-          {
-            action: () => setIsDocOpen(true),
-            icon: "help",
-            label: DOCUMENTATION_LABEL.CONCEPT(DOCS_TITLE),
-          },
-        ]}
-      >
+      <SectionBox title={TITLE_MSG} actionButtons={[documentationActionButton]}>
         <Tabs
           currentTab={tabFromUrl}
           onChange={changeTabParam}
@@ -150,15 +121,12 @@ export function EntityFieldsSettings() {
                     crudConfig={MAKE_APP_CONFIGURATION_CRUD_CONFIG(
                       "entity_columns_labels"
                     )}
-                    onSubmit={async (data) => {
-                      await upsertEntityFieldsMapMutation.mutateAsync(
-                        data as Record<string, string>
-                      );
-                    }}
+                    onSubmit={upsertEntityFieldsMapMutation.mutateAsync}
                   />
                 </ViewStateMachine>
               ),
               label: ENTITY_FIELD_SETTINGS_TAB_LABELS.LABELS,
+              id: `labels`,
             },
             {
               content: (
@@ -207,41 +175,13 @@ export function EntityFieldsSettings() {
                   />
                 </ViewStateMachine>
               ),
-              label: ENTITY_FIELD_SETTINGS_TAB_LABELS.TYPES,
-            },
-            {
-              content: (
-                <ViewStateMachine
-                  loader={<ListSkeleton count={10} />}
-                  loading={sharedLoadingState}
-                  error={error}
-                >
-                  <SortList
-                    data={{
-                      ...entityFieldLists,
-                      data: entityFieldLists.data.map((name) => ({
-                        value: name,
-                        label: getEntityFieldLabels(name),
-                      })),
-                    }}
-                    onSave={
-                      upsertEntityColumnsOrderMutation.mutateAsync as (
-                        data: string[]
-                      ) => Promise<void>
-                    }
-                  />
-                </ViewStateMachine>
-              ),
-              label: ENTITY_FIELD_SETTINGS_TAB_LABELS.ORDER,
+              label: ENTITY_FIELD_SETTINGS_TAB_LABELS.FORM,
+              id: `form`,
             },
           ]}
         />
       </SectionBox>
-      <FieldsSettingsDocumentation
-        title={DOCS_TITLE}
-        close={setIsDocOpen}
-        isOpen={isDocOpen}
-      />
+      <FieldsSettingsDocumentation />
     </BaseEntitySettingsLayout>
   );
 }

@@ -2,29 +2,22 @@ import {
   createConfigDomainPersistenceService,
   AbstractConfigDataPersistenceService,
 } from "backend/lib/config-persistence";
-import { IApplicationService } from "backend/types";
 
-export { sortByListOrder } from "./utils";
-
-export class ListOrderApiService implements IApplicationService {
+export class ListOrderApiService {
   constructor(
     private readonly _listOrderPersistenceService: AbstractConfigDataPersistenceService<
       string[]
     >
   ) {}
 
-  async bootstrap() {
-    await this._listOrderPersistenceService.setup();
-  }
-
   async getItemOrder(listId: string): Promise<string[]> {
-    return (await this._listOrderPersistenceService.getItem(listId)) || [];
+    return await this._listOrderPersistenceService.getItem(listId, []);
   }
 
   async appendToList(listId: string, itemId: string): Promise<void> {
     const listsOrder = await this.getItemOrder(listId);
 
-    await this._listOrderPersistenceService.updateItem(listId, [
+    await this._listOrderPersistenceService.upsertItem(listId, [
       ...listsOrder,
       itemId,
     ]);
@@ -42,6 +35,10 @@ export class ListOrderApiService implements IApplicationService {
     );
 
     await this.upsertOrder(listId, newListOrder);
+  }
+
+  async removeList(listId: string): Promise<void> {
+    await this._listOrderPersistenceService.removeItem(listId);
   }
 }
 

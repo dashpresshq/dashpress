@@ -12,7 +12,7 @@ describe("/api/data/[entity]/[id]/index", () => {
       "credentials",
       "app-config",
       "data",
-      "action-instances",
+      "form-actions",
     ]);
   });
 
@@ -40,6 +40,56 @@ describe("/api/data/[entity]/[id]/index", () => {
                 "verified": 1,
               }
           `);
+    });
+
+    it("should query data by the column when present", async () => {
+      const { req, res } = createAuthenticatedMocks({
+        method: "GET",
+        query: {
+          entity: "tests",
+          id: "Jane Doe",
+          column: "name",
+        },
+      });
+
+      await handler(req, res);
+
+      expect(res._getStatusCode()).toBe(200);
+      expect(res._getJSONData()).toMatchInlineSnapshot(`
+        {
+          "age": 9,
+          "createdAt": 1631878197330,
+          "id": 2,
+          "name": "Jane Doe",
+          "referenceId": 5,
+          "status": "opened",
+          "verified": 0,
+        }
+      `);
+    });
+
+    it("should validate the column param", async () => {
+      const { req, res } = createAuthenticatedMocks({
+        method: "GET",
+        query: {
+          entity: "tests",
+          id: "Jane Doe",
+          column: "invalid-field",
+        },
+      });
+
+      await handler(req, res);
+
+      expect(res._getStatusCode()).toBe(400);
+      expect(res._getJSONData()).toMatchInlineSnapshot(`
+        {
+          "message": "Invalid field 'invalid-field' for 'tests'",
+          "method": "GET",
+          "name": "BadRequestError",
+          "path": "",
+          "statusCode": 400,
+        }
+      `);
     });
 
     it("should hide hidden columns from details data", async () => {

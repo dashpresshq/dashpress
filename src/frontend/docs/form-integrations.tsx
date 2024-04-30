@@ -1,12 +1,14 @@
 import { INTEGRATIONS_GROUP_CONFIG } from "shared/config-bag/integrations";
-import { ADMIN_ACTION_INSTANCES_CRUD_CONFIG } from "frontend/views/entity/Actions/constants";
+import { FORM_ACTION_CRUD_CONFIG } from "frontend/views/entity/Actions/constants";
 import { ErrorAlert, InfoAlert } from "frontend/design-system/components/Alert";
 import { RenderCode } from "frontend/design-system/components/RenderCode";
-import { DocumentationRoot, IDocumentationRootProps } from "./_base";
+import { useLingui } from "@lingui/react";
+import { DocumentationRoot } from "./_base";
 
-export function FormIntegrationsDocumentation(props: IDocumentationRootProps) {
+export function FormIntegrationsDocumentation() {
+  const { _ } = useLingui();
   return (
-    <DocumentationRoot {...props}>
+    <DocumentationRoot>
       <p>
         With integrations, after creating, updating, or deleting data you can
         trigger notifications through email, Slack, or SMS or send data to
@@ -30,10 +32,7 @@ export function FormIntegrationsDocumentation(props: IDocumentationRootProps) {
         <li>
           {" "}
           Click on the{" "}
-          <code>
-            {ADMIN_ACTION_INSTANCES_CRUD_CONFIG.TEXT_LANG.CREATE}
-          </code>{" "}
-          button.
+          <code>{_(FORM_ACTION_CRUD_CONFIG.TEXT_LANG.CREATE)}</code> button.
         </li>
         <li>
           Select the <code>Trigger</code> i.e. the event on the data you want to
@@ -78,19 +77,10 @@ export function FormIntegrationsDocumentation(props: IDocumentationRootProps) {
             </code>
           </li>
           <li>
-            Current User - any of
+            Current User -
             <code>
               {" "}
-              {"{{"} auth.role {"}}"}{" "}
-            </code>
-            <code>
-              {"{{"} auth.name {"}}"}{" "}
-            </code>
-            <code>
-              {"{{"} auth.username {"}}"}{" "}
-            </code>
-            <code>
-              {"{{"} auth.systemProfile {"}}"}{" "}
+              {"{{"} auth.field {"}}"}{" "}
             </code>
           </li>
         </ol>
@@ -120,7 +110,7 @@ Hi!
 the loan of amount {{ data.amount }}.
 
 Kind Regards!
-{{ auth.systemProfile.fullName }}`}
+{{ auth.fullName }}`}
         />
       </p>
       <p>

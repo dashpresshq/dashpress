@@ -1,11 +1,12 @@
 /* eslint-disable react/function-component-definition */
-import React, { useState } from "react";
+import { useState } from "react";
 import { Story } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
 import { IPaginatedDataState } from "shared/types/data";
 import { ApplicationRoot } from "frontend/components/ApplicationRoot";
+import { msg } from "@lingui/macro";
 import { Table, DEFAULT_TABLE_STATE } from ".";
-import { IProps } from "./types";
+import { ITableProps } from "./types";
 import { TABLE_COLUMNS, TABLE_DATA } from "./data";
 
 export default {
@@ -28,11 +29,14 @@ export default {
     },
     syncPaginatedDataStateOut: action("setPaginatedDataState"),
     columns: TABLE_COLUMNS,
+    empty: {
+      text: msg`Empty Table`,
+    },
     tableData: TABLE_DATA,
-  } as IProps<unknown>,
+  } as ITableProps<unknown>,
 };
 
-const Template: Story<IProps<unknown>> = (args) => {
+const Template: Story<ITableProps<unknown>> = (args) => {
   const [paginatedDataState, setPaginatedDataState] = useState<
     IPaginatedDataState<any>
   >({ ...DEFAULT_TABLE_STATE });
@@ -84,7 +88,7 @@ Empty.args = {
     },
     isLoading: false,
     error: false,
-    isPreviousData: false,
+    isPlaceholderData: false,
   },
 };
 
@@ -99,7 +103,7 @@ Error.args = {
     },
     isLoading: false,
     error: "Some Error Occured",
-    isPreviousData: false,
+    isPlaceholderData: false,
   },
 };
 
@@ -114,7 +118,7 @@ Loading.args = {
     },
     isLoading: true,
     error: false,
-    isPreviousData: false,
+    isPlaceholderData: false,
   },
 };
 
@@ -122,6 +126,6 @@ export const PreviousData = Template.bind({});
 PreviousData.args = {
   tableData: {
     ...TABLE_DATA,
-    isPreviousData: true,
+    isPlaceholderData: true,
   },
 };

@@ -3,7 +3,6 @@ import {
   IDataSourceCredentials,
   DATA_SOURCES_CONFIG,
 } from "shared/types/data-sources";
-import { useState } from "react";
 import { upperCaseFirstLetter } from "shared/lib/strings";
 import { required } from "frontend/lib/validations";
 import { IFormProps } from "frontend/lib/form/types";
@@ -12,11 +11,14 @@ import { FormNumberInput } from "frontend/design-system/components/Form/FormNumb
 import { FormCheckBox } from "frontend/design-system/components/Form/FormCheckBox";
 import { FormButton } from "frontend/design-system/components/Button/FormButton";
 import { FormSelect } from "frontend/design-system/components/Form/FormSelect";
+import { useToggle } from "frontend/hooks/state/useToggleState";
+import { msg } from "@lingui/macro";
+import { typescriptSafeObjectDotKeys } from "shared/lib/objects";
 
 export function CredentialsSetupForm({
   onSubmit,
 }: IFormProps<IDataSourceCredentials>) {
-  const [useConnectionString, setUseConnectionString] = useState(false);
+  const connectionStringView = useToggle();
   return (
     <Form
       onSubmit={onSubmit}
@@ -37,21 +39,24 @@ export function CredentialsSetupForm({
             >
               {({ input, meta }) => (
                 <FormSelect
-                  label="Database Type"
-                  selectData={Object.keys(DATA_SOURCES_CONFIG).map(
-                    (dataSourceType) => ({
-                      label: upperCaseFirstLetter(dataSourceType),
-                      value: dataSourceType,
-                    })
-                  )}
+                  label={msg`Database Type`}
+                  selectData={typescriptSafeObjectDotKeys(
+                    DATA_SOURCES_CONFIG
+                  ).map((dataSourceType) => ({
+                    label: msg`${upperCaseFirstLetter(dataSourceType)}`,
+                    value: dataSourceType,
+                  }))}
                   rightActions={
                     dataSourceConfig.useConnectionString
                       ? [
                           {
+                            systemIcon: connectionStringView.isOn
+                              ? "ToggleLeft"
+                              : "ToggleRight",
                             action: () => {
-                              setUseConnectionString(!useConnectionString);
+                              connectionStringView.toggle();
                             },
-                            label: "Toggle Connection URL",
+                            label: msg`Toggle Connection URL`,
                           },
                         ]
                       : []
@@ -60,7 +65,7 @@ export function CredentialsSetupForm({
                   input={{
                     ...input,
                     onChange: (value) => {
-                      setUseConnectionString(false);
+                      connectionStringView.off();
                       form.change("port", DATA_SOURCES_CONFIG[value]?.port);
                       input.onChange(value);
                     },
@@ -68,14 +73,18 @@ export function CredentialsSetupForm({
                 />
               )}
             </Field>
-            {useConnectionString ? (
+            {connectionStringView.isOn ? (
               <Field
                 name="connectionString"
                 validate={required}
                 validateFields={[]}
               >
                 {({ input, meta }) => (
-                  <FormInput label="Connection URL" meta={meta} input={input} />
+                  <FormInput
+                    label={msg`Connection URL`}
+                    meta={meta}
+                    input={input}
+                  />
                 )}
               </Field>
             ) : (
@@ -83,27 +92,23 @@ export function CredentialsSetupForm({
                 {dataSourceConfig.fields.includes("host") && (
                   <Field name="host" validate={required} validateFields={[]}>
                     {({ input, meta }) => (
-                      <FormInput label="Host" meta={meta} input={input} />
+                      <FormInput label={msg`Host`} meta={meta} input={input} />
                     )}
                   </Field>
                 )}
                 {dataSourceConfig.fields.includes("user") && (
                   <Field name="user" validate={required} validateFields={[]}>
                     {({ input, meta }) => (
-                      <FormInput label="User" meta={meta} input={input} />
+                      <FormInput label={msg`User`} meta={meta} input={input} />
                     )}
                   </Field>
                 )}
 
                 {dataSourceConfig.fields.includes("password") && (
-                  <Field
-                    name="password"
-                    validate={required}
-                    validateFields={[]}
-                  >
+                  <Field name="password" validateFields={[]}>
                     {({ input, meta }) => (
                       <FormInput
-                        label="Password"
+                        label={msg`Password`}
                         type="password"
                         meta={meta}
                         input={input}
@@ -118,14 +123,22 @@ export function CredentialsSetupForm({
                     validateFields={[]}
                   >
                     {({ input, meta }) => (
-                      <FormInput label="Database" meta={meta} input={input} />
+                      <FormInput
+                        label={msg`Database`}
+                        meta={meta}
+                        input={input}
+                      />
                     )}
                   </Field>
                 )}
                 {dataSourceConfig.fields.includes("port") && (
                   <Field name="port" validate={required} validateFields={[]}>
                     {({ input, meta }) => (
-                      <FormNumberInput label="Port" meta={meta} input={input} />
+                      <FormNumberInput
+                        label={msg`Port`}
+                        meta={meta}
+                        input={input}
+                      />
                     )}
                   </Field>
                 )}
@@ -133,7 +146,11 @@ export function CredentialsSetupForm({
                 {dataSourceConfig.fields.includes("ssl") && (
                   <Field name="ssl" validateFields={[]} type="checkbox">
                     {({ input, meta }) => (
-                      <FormCheckBox label="Use SSL" meta={meta} input={input} />
+                      <FormCheckBox
+                        label={msg`Use SSL`}
+                        meta={meta}
+                        input={input}
+                      />
                     )}
                   </Field>
                 )}
@@ -141,7 +158,11 @@ export function CredentialsSetupForm({
                 {dataSourceConfig.fields.includes("filename") && (
                   <Field name="filename" validateFields={[]}>
                     {({ input, meta }) => (
-                      <FormInput label="File Name" meta={meta} input={input} />
+                      <FormInput
+                        label={msg`File Name`}
+                        meta={meta}
+                        input={input}
+                      />
                     )}
                   </Field>
                 )}
@@ -150,12 +171,13 @@ export function CredentialsSetupForm({
 
             <FormButton
               text={(isSubmitting) =>
-                isSubmitting ? "Setting Up Credentials" : "Setup Credentials"
+                isSubmitting
+                  ? msg`Setting Up Credentials`
+                  : msg`Setup Credentials`
               }
-              icon="no-icon"
+              systemIcon="LogIn"
               isMakingRequest={submitting}
               disabled={pristine}
-              block
             />
           </form>
         );

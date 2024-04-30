@@ -1,7 +1,7 @@
-import { dashboardWidgetsApiController } from "backend/dashboard-widgets/dashboard-widgets.controller";
-import { USER_PERMISSIONS } from "shared/constants/user";
+import { UserPermissions } from "shared/constants/user";
 import { IAccountProfile } from "shared/types/user";
 import { requestHandler } from "backend/lib/request";
+import { dashboardWidgetsApiService } from "backend/dashboard-widgets/dashboard-widgets.service";
 
 const REQUEST_QUERY_FIELD = "dashboardId";
 
@@ -13,7 +13,7 @@ export default requestHandler(
         { _type: "requestQuery", options: REQUEST_QUERY_FIELD },
       ]);
 
-      return await dashboardWidgetsApiController.listDashboardWidgets(
+      return await dashboardWidgetsApiService.listDashboardWidgets(
         validatedRequest.requestQuery,
         (validatedRequest.authenticatedUser as IAccountProfile).role
       );
@@ -23,7 +23,7 @@ export default requestHandler(
         { _type: "requestQuery", options: REQUEST_QUERY_FIELD },
         { _type: "requestBody", options: {} },
       ]);
-      return await dashboardWidgetsApiController.createWidget(
+      return await dashboardWidgetsApiService.createWidget(
         validatedRequest.requestBody,
         validatedRequest.requestQuery
       );
@@ -33,7 +33,7 @@ export default requestHandler(
         { _type: "requestQuery", options: REQUEST_QUERY_FIELD },
         { _type: "requestBody", options: {} },
       ]);
-      return await dashboardWidgetsApiController.updateWidgetList(
+      return await dashboardWidgetsApiService.updateWidgetList(
         validatedRequest.requestQuery,
         validatedRequest.requestBody
       );
@@ -41,9 +41,13 @@ export default requestHandler(
   },
   [
     {
+      _type: "notAllowedOnDemo",
+      method: ["POST"],
+    },
+    {
       method: ["PATCH", "POST"],
       _type: "canUser",
-      body: USER_PERMISSIONS.CAN_MANAGE_DASHBOARD,
+      body: UserPermissions.CAN_MANAGE_DASHBOARD,
     },
   ]
 );

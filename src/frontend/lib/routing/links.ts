@@ -1,5 +1,3 @@
-import { queryObjectToQueryString } from "./queryObjectToQueryString";
-
 export const NAVIGATION_LINKS = {
   DASHBOARD: {
     HOME: "/",
@@ -27,11 +25,12 @@ export const NAVIGATION_LINKS = {
   INTEGRATIONS: {
     VARIABLES: "/integrations/variables",
     ACTIONS: (actionId: string) => `/integrations/actions/${actionId}`,
-    STORAGE: (storageId: string) => `/integrations/storage/${storageId}`,
+    STORAGE: "/integrations/storage",
   },
   USERS: {
     LIST: "/users",
     CREATE: "/users/create",
+    LINK_DATABASE: "/users/database-link",
     DETAILS: (username: string) => `/users/${username}`,
   },
   ROLES: {
@@ -48,7 +47,7 @@ export const NAVIGATION_LINKS = {
     ENTITIES: "/admin/settings/entities",
     MENU: "/admin/settings/menu",
     SYSTEM: "/admin/settings/system",
-    DATE: "/admin/settings/date",
+    DATA: "/admin/settings/data",
     SITE: "/admin/settings/site",
     THEME: "/admin/settings/theme",
     VARIABLES: "/admin/settings/variables",
@@ -66,14 +65,14 @@ export const NAVIGATION_LINKS = {
     ) => `/admin/${entity}/${id}/relation/${childEntity}/${relationship}`,
     UPDATE: (entity: string, id: string) => `/admin/${entity}/${id}/update`,
     CONFIG: {
-      CRUD: (entity: string, query?: Record<string, string>) =>
-        `/admin/${entity}/config/crud${queryObjectToQueryString(query)}`,
-      FIELDS: (entity: string, query?: Record<string, string>) =>
-        `/admin/${entity}/config/fields${queryObjectToQueryString(query)}`,
+      CRUD: (entity: string) => `/admin/${entity}/config/crud`,
+      FIELDS: (entity: string) => `/admin/${entity}/config/fields`,
       DICTION: (entity: string) => `/admin/${entity}/config/diction`,
       FORM: (entity: string) => `/admin/${entity}/config/form`,
       PRESENTATION: (entity: string) => `/admin/${entity}/config/presentation`,
       VIEWS: (entity: string) => `/admin/${entity}/config/views`,
+      PERSISTENT_QUERY: (entity: string) =>
+        `/admin/${entity}/config/persistent-query`,
       RELATIONS: (entity: string) => `/admin/${entity}/config/relations`,
       FORM_INTEGRATIONS: (entity: string) => `/admin/${entity}/config/actions`,
     },

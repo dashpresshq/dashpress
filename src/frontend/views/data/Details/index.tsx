@@ -1,7 +1,5 @@
-import { useEntityDataDeletionMutation } from "frontend/hooks/data/data.store";
 import { META_USER_PERMISSIONS } from "shared/constants/user";
 import { useNavigationStack } from "frontend/lib/routing/useNavigationStack";
-import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
 import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
 import { SectionBox } from "frontend/design-system/components/Section/SectionBox";
 import {
@@ -9,21 +7,20 @@ import {
   useEntityId,
   useEntitySlug,
 } from "frontend/hooks/entity/entity.config";
+import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
+import { useEntityDataDetails } from "frontend/hooks/data/data.store";
 import { ENTITY_DETAILS_VIEW_KEY } from "./constants";
 import { EntityDetailsView } from "./DetailsView";
 import { DetailsLayout, DETAILS_LAYOUT_KEY } from "./_Layout";
-import { useCanUserPerformCrudAction } from "../useCanUserPerformCrudAction";
 import { DetailsCanvas } from "../Table/_WholeEntityTable/DetailsCanvas";
+import { useDetailsViewMenuItems, usePortalActionButtons } from "./portal";
+import { useEntityActionButtons } from "../hooks/useEntityActionButtons";
 
 export function EntityDetails() {
-  const entityCrudConfig = useEntityCrudConfig();
-  const id = useEntityId();
+  const entityId = useEntityId();
   const entity = useEntitySlug();
-  const canUserPerformCrudAction = useCanUserPerformCrudAction(entity);
-  const entityDataDeletionMutation = useEntityDataDeletionMutation(
-    entity,
-    NAVIGATION_LINKS.ENTITY.TABLE(entity)
-  );
+  const entityCrudConfig = useEntityCrudConfig(entity);
+  const dataDetails = useEntityDataDetails({ entity, entityId });
 
   const { backLink } = useNavigationStack();
 
@@ -34,32 +31,42 @@ export function EntityDetails() {
     permission: META_USER_PERMISSIONS.NO_PERMISSION_REQUIRED,
   });
 
+  const menuItems = useDetailsViewMenuItems({
+    entity,
+    entityId,
+  });
+
+  const actionButtons = useEntityActionButtons({
+    entity,
+    entityId,
+    redirectAfterDelete: NAVIGATION_LINKS.ENTITY.TABLE(entity),
+    exclude: ["details"],
+  });
+
+  const portalActionButtons = usePortalActionButtons({
+    entity,
+    entityId,
+    baseActionButtons: actionButtons,
+    from: "details",
+    row: dataDetails.data,
+  });
+
   return (
-    <DetailsLayout entity={entity} menuKey={DETAILS_LAYOUT_KEY}>
+    <DetailsLayout
+      entity={entity}
+      menuKey={DETAILS_LAYOUT_KEY}
+      menuItems={menuItems}
+    >
       <SectionBox
         title={entityCrudConfig.TEXT_LANG.DETAILS}
         backLink={backLink}
-        deleteAction={
-          canUserPerformCrudAction("delete")
-            ? {
-                action: () => entityDataDeletionMutation.mutate(id),
-                isMakingDeleteRequest: entityDataDeletionMutation.isLoading,
-              }
-            : undefined
-        }
-        iconButtons={
-          canUserPerformCrudAction("update")
-            ? [
-                {
-                  icon: "edit",
-                  action: NAVIGATION_LINKS.ENTITY.UPDATE(entity, id),
-                  label: "Edit",
-                },
-              ]
-            : []
-        }
+        actionButtons={portalActionButtons}
       >
-        <EntityDetailsView displayFrom="details" id={id} entity={entity} />
+        <EntityDetailsView
+          displayFrom="details"
+          entityId={entityId}
+          entity={entity}
+        />
       </SectionBox>
       <DetailsCanvas />
     </DetailsLayout>

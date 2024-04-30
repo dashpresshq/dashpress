@@ -9,6 +9,10 @@ import { dashboardApiHandlers } from "./dashboard";
 import { integrationsApiHandlers } from "./integrations";
 import { versionApiHandlers } from "./versions";
 import { portalApiHandlers } from "./portal";
+import { menuApiHandlers } from "./menu";
+import { userPreferencesApiHandlers } from "./user-preferences";
+import { formActionsApiHandlers } from "./form-actions";
+import { integrationsListApiHandlers } from "./integrations-list";
 
 export const apiHandlers = [
   ...setupApiHandlers,
@@ -19,7 +23,11 @@ export const apiHandlers = [
   ...integrationsApiHandlers,
   ...rolesApiHandlers,
   ...configApiHandlers,
+  ...integrationsListApiHandlers,
   ...dashboardApiHandlers,
   ...versionApiHandlers,
   ...portalApiHandlers,
+  ...menuApiHandlers,
+  ...formActionsApiHandlers,
+  ...userPreferencesApiHandlers,
 ];

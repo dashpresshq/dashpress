@@ -1,6 +1,8 @@
 /* eslint-disable react/jsx-no-useless-fragment */
 import { ErrorAlert } from "frontend/design-system/components/Alert";
+import { useRouter } from "next/router";
 import { ReactNode } from "react";
+import { ErrorBoundary } from "../ErrorBoundary";
 
 type Props = {
   children: ReactNode;
@@ -10,7 +12,8 @@ type Props = {
 };
 
 export function ViewStateMachine({ loading, error, children, loader }: Props) {
-  if (loading) {
+  const router = useRouter();
+  if (loading || !router.isReady) {
     return <>{loader}</>;
   }
 
@@ -18,5 +21,5 @@ export function ViewStateMachine({ loading, error, children, loader }: Props) {
     return <ErrorAlert message={error} />;
   }
 
-  return <>{children}</>;
+  return <ErrorBoundary>{children}</ErrorBoundary>;
 }

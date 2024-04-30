@@ -1,4 +1,3 @@
-import React from "react";
 import { BaseSkeleton } from "../Base";
 
 export interface IProps {

@@ -1,39 +1,43 @@
 import Offcanvas from "react-bootstrap/Offcanvas";
-import React, { ReactNode } from "react";
+import { ReactNode } from "react";
 import styled from "styled-components";
 import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
 import { Typo } from "frontend/design-system/primitives/Typo";
 import { Stack } from "frontend/design-system/primitives/Stack";
 import { Divider } from "frontend/design-system/primitives/Divider";
+import { Z_INDEXES } from "frontend/design-system/constants/zIndex";
+import { MessageDescriptor } from "@lingui/core";
+import { msg } from "@lingui/macro";
+import { useLingui } from "@lingui/react";
 import { NextPortal } from "../_/NextPortal";
 import { SoftButton } from "../Button/SoftButton";
 
 export interface IProps {
   show: boolean;
-  title: string;
+  title: MessageDescriptor;
   children: ReactNode;
   onClose: () => void;
   width?: number;
 }
 
-const StyledHeader = styled.div`
+const Header = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 1rem;
 `;
 
-const StyledBody = styled.div`
+const Body = styled.div`
   flex-grow: 1;
   padding: 1rem;
   padding-top: 0.5rem;
   overflow-y: auto;
 `;
 
-const StyledRoot = styled.div<{ width: number }>`
+const Root = styled.div<{ width: number }>`
   position: fixed;
   bottom: 0;
-  z-index: 1045;
+  z-index: ${Z_INDEXES.offCanvas};
   display: flex;
   flex-direction: column;
   max-width: 100%;
@@ -63,35 +67,32 @@ export function OffCanvas({
   children,
   width = DEFAULT_CANVAS_WIDTH,
 }: IProps) {
+  const { _ } = useLingui();
+
+  if (!show) {
+    return null;
+  }
+
   return (
     <NextPortal>
-      <StyledRoot
-        as={Offcanvas}
-        show={show}
-        onHide={onClose}
-        placement="end"
-        width={width}
-      >
-        {show && (
-          <>
-            <StyledHeader>
-              <Stack justify="space-between" align="center">
-                <Typo.MD weight="bold">{title}</Typo.MD>
-                <div>
-                  <SoftButton
-                    justIcon
-                    icon="close"
-                    action={onClose}
-                    size="sm"
-                  />
-                </div>
-              </Stack>
-            </StyledHeader>
-            <Divider />
-            <StyledBody>{children}</StyledBody>
-          </>
-        )}
-      </StyledRoot>
+      <Root as={Offcanvas} show onHide={onClose} placement="end" width={width}>
+        <Header>
+          <Stack $justify="space-between" $align="center">
+            <Typo.MD $weight="bold">{_(title)}</Typo.MD>
+            <SoftButton
+              justIcon
+              label={msg`Close Canvas`}
+              noToolTip
+              systemIcon="Close"
+              action={onClose}
+              color="danger"
+              size="sm"
+            />
+          </Stack>
+        </Header>
+        <Divider />
+        <Body>{children}</Body>
+      </Root>
     </NextPortal>
   );
 }

@@ -1,9 +1,9 @@
 import { Spacer } from "frontend/design-system/primitives/Spacer";
-import { DocumentationRoot, IDocumentationRootProps } from "./_base";
+import { DocumentationRoot } from "./_base";
 
-export function ViewsDocumentation(props: IDocumentationRootProps) {
+export function ViewsDocumentation() {
   return (
-    <DocumentationRoot {...props}>
+    <DocumentationRoot>
       <p>
         Views enable you to implement query tabs. Say you have an{" "}
         <code>Orders </code> table and you want to show different queries on the
@@ -43,7 +43,7 @@ export function ViewsDocumentation(props: IDocumentationRootProps) {
             sorting as you did previously.
           </li>
           <li>
-            Click on the <code>Save Views Settings</code>
+            Click on the <code>Save Table Views</code>
           </li>
         </ol>
         If you go back to the main table, you will see that your table now has

@@ -2,114 +2,97 @@ import {
   credentialsApiService,
   CredentialsApiService,
 } from "backend/integrations-configurations";
-import {
-  createConfigDomainPersistenceService,
-  AbstractConfigDataPersistenceService,
-} from "backend/lib/config-persistence";
 import { validateSchemaRequestBody } from "backend/lib/errors/validate-schema-request-input";
-import { IApplicationService } from "backend/types";
-import { IIntegrationsList } from "shared/types/actions";
-import { IActivatedStorage } from "shared/types/storage";
+import {
+  createKeyValueDomainPersistenceService,
+  KeyValueStoreApiService,
+} from "backend/lib/key-value";
+import { sluggify } from "shared/lib/strings";
+import { IStorageIntegration } from "shared/types/actions";
+import {
+  typescriptSafeObjectDotEntries,
+  typescriptSafeObjectDotKeys,
+} from "shared/lib/objects";
 import { STORAGE_INTEGRATIONS } from "./integrations";
 
-export class StorageApiService implements IApplicationService {
+export class StorageApiService {
   constructor(
-    private readonly _activatedStoragePersistenceService: AbstractConfigDataPersistenceService<IActivatedStorage>,
+    private readonly _currentStorageKeyValueStoreApiService: KeyValueStoreApiService<string>,
     private readonly _credentialsApiService: CredentialsApiService
   ) {}
 
-  async bootstrap() {
-    await this._activatedStoragePersistenceService.setup();
-  }
-
-  listStorageIntegrations(): IIntegrationsList[] {
-    return Object.entries(STORAGE_INTEGRATIONS).map(
+  listStorageIntegrations(): IStorageIntegration[] {
+    return typescriptSafeObjectDotEntries(STORAGE_INTEGRATIONS).map(
       ([key, { title, integrationConfigurationSchema }]) => ({
         title,
         key,
-        description: `Store uploaded files to ${title}`,
         configurationSchema: integrationConfigurationSchema,
       })
     );
   }
 
-  async listActivatedStorage(): Promise<string[]> {
-    const activatedStorage =
-      await this._activatedStoragePersistenceService.getAllItems();
-    return activatedStorage.map(({ key }) => key);
-  }
-
-  async activateStorage(
-    storageKey: string,
-    configuration: Record<string, string>
-  ): Promise<void> {
+  async activateStorage({
+    configuration,
+    storageKey,
+  }: {
+    storageKey: string;
+    configuration: Record<string, string>;
+  }): Promise<void> {
     validateSchemaRequestBody(
       STORAGE_INTEGRATIONS[storageKey].integrationConfigurationSchema,
       configuration
     );
 
-    await this._activatedStoragePersistenceService.createItem(storageKey, {
-      key: storageKey,
-    });
+    const previousStorageKey = await this.getCurrentActivatedStorage();
+    if (previousStorageKey) {
+      await this._credentialsApiService.deleteGroup({
+        key: this.makeCredentialsGroupKey(storageKey),
+        fields: typescriptSafeObjectDotKeys(
+          STORAGE_INTEGRATIONS[previousStorageKey]
+            .integrationConfigurationSchema
+        ) as string[],
+      });
+    }
+
+    await this._currentStorageKeyValueStoreApiService.persistItem(storageKey);
 
     await this._credentialsApiService.upsertGroup(
       {
-        key: STORAGE_INTEGRATIONS[storageKey].credentialsGroupKey,
-        fields: Object.keys(
+        key: this.makeCredentialsGroupKey(storageKey),
+        fields: typescriptSafeObjectDotKeys(
           STORAGE_INTEGRATIONS[storageKey].integrationConfigurationSchema
-        ),
+        ) as string[],
       },
       configuration
     );
   }
 
-  async showStorageConfig(
-    storageKey: string
-  ): Promise<Record<string, unknown>> {
+  async getCurrentActivatedStorage() {
+    return await this._currentStorageKeyValueStoreApiService.getItem();
+  }
+
+  async showStorageCredentials(): Promise<Record<string, unknown>> {
+    const storageKey = await this.getCurrentActivatedStorage();
+    if (!storageKey) {
+      return {};
+    }
     return await this._credentialsApiService.useGroupValue({
-      key: STORAGE_INTEGRATIONS[storageKey].credentialsGroupKey,
-      fields: Object.keys(
+      key: this.makeCredentialsGroupKey(storageKey),
+      fields: typescriptSafeObjectDotKeys(
         STORAGE_INTEGRATIONS[storageKey].integrationConfigurationSchema
-      ),
+      ) as string[],
     });
   }
 
-  async updateStorageConfig(
-    storageKey: string,
-    configuration: Record<string, string>
-  ): Promise<void> {
-    validateSchemaRequestBody(
-      STORAGE_INTEGRATIONS[storageKey].integrationConfigurationSchema,
-      configuration
-    );
-
-    await this._credentialsApiService.upsertGroup(
-      {
-        key: STORAGE_INTEGRATIONS[storageKey].credentialsGroupKey,
-        fields: Object.keys(
-          STORAGE_INTEGRATIONS[storageKey].integrationConfigurationSchema
-        ),
-      },
-      configuration
-    );
-  }
-
-  async deactivateStorage(storageKey: string): Promise<void> {
-    await this._credentialsApiService.deleteGroup({
-      key: STORAGE_INTEGRATIONS[storageKey].credentialsGroupKey,
-      fields: Object.keys(
-        STORAGE_INTEGRATIONS[storageKey].integrationConfigurationSchema
-      ),
-    });
-
-    await this._activatedStoragePersistenceService.removeItem(storageKey);
+  private makeCredentialsGroupKey(storageKey: string) {
+    return sluggify(`FILE_STORAGE__${storageKey}`).toUpperCase();
   }
 }
 
-const activatedStoragePersistenceService =
-  createConfigDomainPersistenceService<IActivatedStorage>("activated-storage");
+const _currentStorageKeyValueStoreApiService =
+  createKeyValueDomainPersistenceService<string>("current-storage");
 
 export const storageApiService = new StorageApiService(
-  activatedStoragePersistenceService,
+  _currentStorageKeyValueStoreApiService,
   credentialsApiService
 );

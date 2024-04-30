@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import { ReactNode } from "react";
 import { DESIGN_SYSTEM_SIZES } from "../constants/sizes";
 
 type SpacerSize = "xxs" | "xs" | "sm" | "md" | "xl" | "xxl";

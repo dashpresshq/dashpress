@@ -1,20 +1,18 @@
-import "@testing-library/jest-dom";
-import React from "react";
 import { render, screen, waitFor } from "@testing-library/react";
 import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 import userEvent from "@testing-library/user-event";
 import SystemSettings from "pages/admin/settings/system";
 
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
+import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
 
 setupApiHandlers();
 
 describe("pages/admin/settings/system", () => {
   beforeAll(() => {
     const useRouter = jest.spyOn(require("next/router"), "useRouter");
-    useRouter.mockImplementation(() => ({
-      asPath: "/",
-    }));
+
+    useRouter.mockImplementation(USE_ROUTER_PARAMS({}));
   });
 
   it("should display system values", async () => {
@@ -23,12 +21,11 @@ describe("pages/admin/settings/system", () => {
         <SystemSettings />
       </ApplicationRoot>
     );
-    await waitFor(() => {
+    await waitFor(async () => {
       expect(
-        screen.getByLabelText("Token Validity Duration In Days")
+        await screen.findByLabelText("Token Validity Duration In Days")
       ).toHaveValue(5);
     });
-    expect(screen.getByLabelText("Force Introspection")).toBeChecked();
   });
 
   it("should update system settings successfully", async () => {
@@ -42,8 +39,6 @@ describe("pages/admin/settings/system", () => {
       screen.getByLabelText("Token Validity Duration In Days"),
       "9"
     );
-
-    userEvent.click(screen.getByLabelText("Force Introspection"));
 
     await userEvent.click(
       screen.getByRole("button", { name: "Save System Settings" })
@@ -65,6 +60,5 @@ describe("pages/admin/settings/system", () => {
         screen.getByLabelText("Token Validity Duration In Days")
       ).toHaveValue(59);
     });
-    expect(screen.getByLabelText("Force Introspection")).not.toBeChecked();
   });
 });

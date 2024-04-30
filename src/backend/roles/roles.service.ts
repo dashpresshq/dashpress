@@ -1,10 +1,8 @@
-import { AbstractCacheService, createCacheService } from "backend/lib/cache";
 import {
   createConfigDomainPersistenceService,
   AbstractConfigDataPersistenceService,
 } from "backend/lib/config-persistence";
 import { BadRequestError } from "backend/lib/errors";
-import { IApplicationService } from "backend/types";
 import { canRoleDoThisAsync } from "shared/logic/permissions";
 import {
   isSystemRole,
@@ -19,16 +17,10 @@ export interface IRole {
   permissions: string[];
 }
 
-export class RolesApiService implements IApplicationService {
+export class RolesApiService {
   constructor(
-    private readonly _rolesPersistenceService: AbstractConfigDataPersistenceService<IRole>,
-    private readonly _cacheService: AbstractCacheService
+    private readonly _rolesPersistenceService: AbstractConfigDataPersistenceService<IRole>
   ) {}
-
-  async bootstrap() {
-    await this._rolesPersistenceService.setup();
-    await this._cacheService.setup();
-  }
 
   async listRoles(): Promise<string[]> {
     const roles = await this._rolesPersistenceService.getAllItems();
@@ -40,12 +32,10 @@ export class RolesApiService implements IApplicationService {
     if (isSystemRole(roleId)) {
       return [];
     }
-    return await this._cacheService.getItem<string[]>(roleId, async () => {
-      const { permissions } = await this._rolesPersistenceService.getItemOrFail(
-        roleId
-      );
-      return permissions;
-    });
+    const { permissions } = await this._rolesPersistenceService.getItemOrFail(
+      roleId
+    );
+    return permissions;
   }
 
   async canRoleDoThis(roleId: string, permission: string) {
@@ -84,8 +74,8 @@ export class RolesApiService implements IApplicationService {
 
   async createRole(input: Pick<IRole, "id">) {
     const id = makeRoleId(input.id);
-    const role = await this._rolesPersistenceService.getItem(id);
-    if (role) {
+
+    if (await this._rolesPersistenceService.hasItem(id)) {
       throw new BadRequestError("Role already exist");
     }
 
@@ -108,15 +98,13 @@ export class RolesApiService implements IApplicationService {
       throw new BadRequestError("Role already exist");
     }
 
-    const newRole = await this._rolesPersistenceService.getItem(madeRoleId);
-
-    if (newRole) {
+    if (await this._rolesPersistenceService.hasItem(madeRoleId)) {
       throw new BadRequestError("Role already exist");
     }
 
     await this._rolesPersistenceService.removeItem(roleId);
 
-    await this._rolesPersistenceService.updateItem(madeRoleId, {
+    await this._rolesPersistenceService.upsertItem(madeRoleId, {
       ...role,
       id: madeRoleId,
     });
@@ -124,38 +112,30 @@ export class RolesApiService implements IApplicationService {
 
   async removeRole(roleId: string) {
     await this._rolesPersistenceService.removeItem(roleId);
-    await this._cacheService.clearItem(roleId);
   }
 
   async addPermission(roleId: string, permission: string) {
     const role = await this._rolesPersistenceService.getItemOrFail(roleId);
 
-    await this._rolesPersistenceService.updateItem(roleId, {
+    await this._rolesPersistenceService.upsertItem(roleId, {
       ...role,
       permissions: [...role.permissions, permission],
     });
-    await this._cacheService.clearItem(roleId);
   }
 
   async removePermission(roleId: string, permission: string) {
     const role = await this._rolesPersistenceService.getItemOrFail(roleId);
 
-    await this._rolesPersistenceService.updateItem(roleId, {
+    await this._rolesPersistenceService.upsertItem(roleId, {
       ...role,
       permissions: role.permissions.filter(
         (loopPermission) => loopPermission !== permission
       ),
     });
-    await this._cacheService.clearItem(roleId);
   }
 }
 
 const rolesPersistenceService =
   createConfigDomainPersistenceService<IRole>("roles");
 
-const cacheService = createCacheService("permission");
-
-export const rolesApiService = new RolesApiService(
-  rolesPersistenceService,
-  cacheService
-);
+export const rolesApiService = new RolesApiService(rolesPersistenceService);

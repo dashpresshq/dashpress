@@ -1,7 +1,6 @@
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
-import { useSiteConfig } from "frontend/hooks/app/site.config";
 import Link from "next/link";
-import React from "react";
+
 import { ChevronRight } from "react-feather";
 import styled from "styled-components";
 import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
@@ -10,6 +9,11 @@ import { useThemeColorShade } from "frontend/design-system/theme/useTheme";
 import { Stack } from "frontend/design-system/primitives/Stack";
 import { useStorageApi } from "frontend/lib/data/useApi";
 import { INavigationMenuItem } from "shared/types/menu";
+import { useSessionStorage } from "react-use";
+import { PlainButton } from "frontend/design-system/components/Button/TextButton";
+import { useAppConfiguration } from "frontend/hooks/configuration/configuration.store";
+import { CRUD_CONFIG_NOT_FOUND } from "frontend/lib/crud-config";
+import { typescriptSafeObjectDotEntries } from "shared/lib/objects";
 import {
   NAVIGATION_MENU_ENDPOINT,
   SIDE_BAR_WIDTH_VARIATIONS,
@@ -18,15 +22,15 @@ import { NavigationSkeleton } from "./NavigationSkeleton";
 import { ProfileOnNavigation } from "./Profile";
 import { RenderNavigation } from "./RenderNavigation";
 
-const StyledLogoSm = styled.img`
+const LogoSm = styled.img`
   width: 28px;
 `;
 
-const StyledLogoFull = styled.img`
+const LogoFull = styled.img`
   width: 120px;
 `;
 
-const StyledBrand = styled.div`
+const Brand = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -56,7 +60,7 @@ const Root = styled.div<{ $isFullWidth: boolean }>`
       : SIDE_BAR_WIDTH_VARIATIONS.collapsed}px;
 `;
 
-const StyledIconRoot = styled.span<{ $isFullWidth: boolean }>`
+const IconRoot = styled.span<{ $isFullWidth: boolean }>`
   color: ${SYSTEM_COLORS.white};
   width: 32px;
   height: 32px;
@@ -65,15 +69,9 @@ const StyledIconRoot = styled.span<{ $isFullWidth: boolean }>`
   ${(props) => props.$isFullWidth && "transform: rotate(180deg);"}
 `;
 
-export const StyledPlainButton = styled.button`
-  &:focus {
-    outline: 0;
-  }
+const ToggleSideBarButton = styled(PlainButton)`
   height: 36px;
   background: ${USE_ROOT_COLOR("primary-color")};
-  border: 0;
-  cursor: pointer;
-  padding: 0;
 `;
 
 const Scroll = styled.div`
@@ -93,35 +91,49 @@ interface IProps {
 
 export const useNavigationMenuItems = () => {
   return useStorageApi<INavigationMenuItem[]>(NAVIGATION_MENU_ENDPOINT, {
-    errorMessage: "Could not load navigation menu",
+    errorMessage: CRUD_CONFIG_NOT_FOUND(`Navigation Menu`),
     defaultData: [],
   });
 };
 
 export function SideBar({ isFullWidth, setIsFullWidth }: IProps) {
-  const siteConfig = useSiteConfig();
+  const siteConfig = useAppConfiguration("site_settings");
   const navigationMenuItems = useNavigationMenuItems();
   const getThemeColorShade = useThemeColorShade();
 
+  const [activeItem, setActiveItem$1] = useSessionStorage<
+    Record<string, string>
+  >(`navigation-current-item`, {});
+
+  const setActiveItem = (depth: number, value: string) => {
+    const newValue: Record<string, string> = { ...activeItem, [depth]: value };
+
+    const newValueFiltered = Object.fromEntries(
+      typescriptSafeObjectDotEntries(newValue).filter(([key]) => +key <= depth)
+    ) as Record<string, string>;
+
+    setActiveItem$1(newValueFiltered);
+  };
+
   return (
     <Root $isFullWidth={isFullWidth}>
-      <StyledBrand
+      <Brand
         style={{
           backgroundColor: getThemeColorShade("primary-color", 35),
         }}
       >
         <Link href="/">
           {isFullWidth ? (
-            <StyledLogoFull src={siteConfig.fullLogo} alt="full logo" />
+            <LogoFull src={siteConfig.data.fullLogo} alt="full logo" />
           ) : (
-            <StyledLogoSm src={siteConfig.logo} alt="small logo" />
+            <LogoSm src={siteConfig.data.logo} alt="small logo" />
           )}
         </Link>
-      </StyledBrand>
+      </Brand>
       <Stack
-        justify="space-between"
-        direction="column"
-        spacing={0}
+        $justify="space-between"
+        $direction="column"
+        $spacing={0}
         style={{ height: "calc(100vh - 70px)" }}
       >
         <Scroll
@@ -139,18 +151,24 @@ export function SideBar({ isFullWidth, setIsFullWidth }: IProps) {
               navigation={navigationMenuItems.data}
               isFullWidth={isFullWidth}
               setIsFullWidth={setIsFullWidth}
+              activeItem={activeItem}
+              setActiveItem={setActiveItem}
             />
           </ViewStateMachine>
         </Scroll>
 
-        <StyledPlainButton
+        <ToggleSideBarButton
           style={{
             backgroundColor: getThemeColorShade("primary-color", 30),
           }}
           onClick={() => setIsFullWidth(!isFullWidth)}
         >
-          <StyledIconRoot as={ChevronRight} $isFullWidth={isFullWidth} />
-        </StyledPlainButton>
+          <IconRoot
+            aria-label="Toggle Side Bar"
+            as={ChevronRight}
+            $isFullWidth={isFullWidth}
+          />
+        </ToggleSideBarButton>
       </Stack>
     </Root>
   );

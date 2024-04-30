@@ -1,4 +1,3 @@
-import { noop } from "shared/lib/noop";
 import { ConfigApiService } from "../config/config.service";
 import { AbstractConfigDataPersistenceService } from "./AbstractConfigDataPersistenceService";
 import { ConfigDomain } from "./types";
@@ -10,10 +9,6 @@ export class MemoryConfigDataPersistenceAdaptor<
 
   constructor(configDomain: ConfigDomain, configApiService: ConfigApiService) {
     super(configDomain, configApiService);
-  }
-
-  async setup() {
-    noop();
   }
 
   getItemLastUpdated() {
@@ -30,7 +25,7 @@ export class MemoryConfigDataPersistenceAdaptor<
     return MemoryConfigDataPersistenceAdaptor.data[configDomain];
   }
 
-  async resetToEmpty() {
+  async _resetToEmpty() {
     MemoryConfigDataPersistenceAdaptor.data[this._configDomain] = {};
   }
 
@@ -56,7 +51,7 @@ export class MemoryConfigDataPersistenceAdaptor<
     );
   }
 
-  async getItem(key: string) {
+  async _getItem(key: string) {
     const currentItem = MemoryConfigDataPersistenceAdaptor.getDomainData(
       this._configDomain
     )[key];
@@ -66,7 +61,7 @@ export class MemoryConfigDataPersistenceAdaptor<
     return undefined;
   }
 
-  async persistItem(key: string, data: T) {
+  async _persistItem(key: string, data: T) {
     const domainData = MemoryConfigDataPersistenceAdaptor.getDomainData(
       this._configDomain
     );
@@ -74,7 +69,7 @@ export class MemoryConfigDataPersistenceAdaptor<
     this.persistDomainData(domainData);
   }
 
-  public async removeItem(key: string): Promise<void> {
+  async _removeItem(key: string): Promise<void> {
     const domainData = MemoryConfigDataPersistenceAdaptor.getDomainData(
       this._configDomain
     );

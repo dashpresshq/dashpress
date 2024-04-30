@@ -1,6 +1,7 @@
-import React, { useState } from "react";
 import { Spacer } from "frontend/design-system/primitives/Spacer";
 import { DATE_FILTER_VALUE, IColumnFilterBag } from "shared/types/data";
+import { useToggle } from "frontend/hooks/state/useToggleState";
+import { msg } from "@lingui/macro";
 import { DATE_FILTER_OPTIONS } from "./constants";
 import { IFilterProps } from "../types";
 import { DateSelection } from "./_Selection";
@@ -10,14 +11,14 @@ import { ControlledFormDateInput } from "../../../Form/FormDateInput";
 export function FilterTableByDate({
   column: { filterValue, setFilter },
 }: IFilterProps<IColumnFilterBag<string>, undefined>) {
-  const [isOnCustomDate, setIsOnCustomDate] = useState(false);
+  const customDateMode = useToggle();
 
   return (
     <>
       <FormSwitch
         name="custom_date"
         onChange={(newFormat) => {
-          setIsOnCustomDate(newFormat);
+          customDateMode.set(newFormat);
           if (!newFormat) {
             setFilter({
               ...filterValue,
@@ -32,9 +33,9 @@ export function FilterTableByDate({
             });
           }
         }}
-        value={isOnCustomDate}
+        value={customDateMode.isOn}
         size="sm"
-        label="Custom Date"
+        label={msg`Custom Date`}
       />
       {new Date(filterValue?.value || "").toString() !== "Invalid Date" ? (
         <>

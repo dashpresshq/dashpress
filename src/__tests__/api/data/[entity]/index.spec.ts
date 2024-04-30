@@ -13,7 +13,7 @@ describe("/api/data/[entity]/index", () => {
       "credentials",
       "app-config",
       "data",
-      "action-instances",
+      "form-actions",
     ]);
   });
 

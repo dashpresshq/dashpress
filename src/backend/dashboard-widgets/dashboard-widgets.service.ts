@@ -6,7 +6,6 @@ import {
   createConfigDomainPersistenceService,
   AbstractConfigDataPersistenceService,
 } from "backend/lib/config-persistence";
-import { IApplicationService } from "backend/types";
 import {
   HOME_DASHBOARD_KEY,
   IWidgetConfig,
@@ -15,7 +14,6 @@ import {
 import {
   listOrderApiService,
   ListOrderApiService,
-  sortByListOrder,
 } from "backend/list-order/list-order.service";
 import { rolesApiService, RolesApiService } from "backend/roles/roles.service";
 import { userFriendlyCase } from "shared/lib/strings/friendly-case";
@@ -30,6 +28,9 @@ import {
 import { GranularEntityPermissions, IAccountProfile } from "shared/types/user";
 import { relativeDateNotationToActualDate } from "backend/data/data-access/time.constants";
 import { ILabelValue } from "shared/types/options";
+import { sortListByOrder } from "shared/lib/array/sort";
+import { DATA_SOURCES_CONFIG } from "shared/types/data-sources";
+import { typescriptSafeObjectDotKeys } from "shared/lib/objects";
 import {
   mutateGeneratedDashboardWidgets,
   PORTAL_DASHBOARD_PERMISSION,
@@ -52,7 +53,7 @@ const runAsyncJavascriptString = async (
   }
 };
 
-export class DashboardWidgetsApiService implements IApplicationService {
+export class DashboardWidgetsApiService {
   constructor(
     private readonly _dashboardWidgetsPersistenceService: AbstractConfigDataPersistenceService<IWidgetConfig>,
     private readonly _entitiesApiService: EntitiesApiService,
@@ -60,14 +61,6 @@ export class DashboardWidgetsApiService implements IApplicationService {
     private readonly _rolesApiService: RolesApiService,
     private readonly _rDBMSApiDataService: RDBMSDataApiService
   ) {}
-
-  async bootstrap() {
-    await this._dashboardWidgetsPersistenceService.setup();
-  }
-
-  private getDataAccessInstance() {
-    return this._rDBMSApiDataService;
-  }
 
   async runScript(
     script$1: string,
@@ -86,8 +79,9 @@ export class DashboardWidgetsApiService implements IApplicationService {
     return (
       (await runAsyncJavascriptString(script, {
         currentUser,
-        query: async (sql: string) =>
-          await this.getDataAccessInstance().runQuery(sql),
+        query: async (sql: string) => {
+          return await this._rDBMSApiDataService.runQuery(sql);
+        },
       })) || "{}"
     );
   }
@@ -126,9 +120,14 @@ export class DashboardWidgetsApiService implements IApplicationService {
   }
 
   private generateDashboardWidgets = async (entitiesToShow: ILabelValue[]) => {
-    const colorsList = Object.keys(ROYGBIV);
+    const colorsList = typescriptSafeObjectDotKeys(ROYGBIV);
 
     const DEFAULT_NUMBER_OF_SUMMARY_CARDS = 8;
+
+    const dbCredentials = await RDBMSDataApiService.getDbCredentials();
+
+    const queryQuote =
+      DATA_SOURCES_CONFIG[dbCredentials.dataSourceType].scriptQueryDelimiter;
 
     const defaultWidgets: IWidgetConfig[] = await Promise.all(
       entitiesToShow
@@ -139,6 +138,18 @@ export class DashboardWidgetsApiService implements IApplicationService {
               entity.value,
               "date"
             );
+
+          const plainCountQuery = (await RDBMSDataApiService.getInstance())
+            .from(entity.value)
+            .count({ count: "*" })
+            .toQuery();
+
+          const dateCountQuery = (await RDBMSDataApiService.getInstance())
+            .from(entity.value)
+            .where(dateField, "<", `$.${WIDGET_SCRIPT_RELATIVE_TIME_MARKER}`)
+            .count({ count: "*" })
+            .toQuery();
+
           return {
             id: nanoid(),
             title: userFriendlyCase(`${entity.value}`),
@@ -147,24 +158,30 @@ export class DashboardWidgetsApiService implements IApplicationService {
             color: colorsList[index % (colorsList.length - 1)],
             icon: SystemIconsList[index % (SystemIconsList.length - 1)],
             script: dateField
-              ? `const actual = await $.query(\`SELECT count(*) FROM "${entity.value}"\`);
-const relative = await $.query(\`SELECT count(*) FROM "${entity.value}" WHERE "${dateField}" < '$.${WIDGET_SCRIPT_RELATIVE_TIME_MARKER}'\`);
+              ? `const actual = await $.query(${queryQuote}${plainCountQuery}${queryQuote});
+const relative = await $.query(${queryQuote}${dateCountQuery}${queryQuote});
 
 return [actual[0], relative[0]];
-            `
-              : `return await $.query('SELECT count(*) FROM "${entity.value}"')`,
+`
+              : `return await $.query(${queryQuote}${plainCountQuery}${queryQuote})`,
           };
         })
     );
 
     const firstEntity = entitiesToShow[0];
+
     if (firstEntity) {
+      const firstQuery = (await RDBMSDataApiService.getInstance())
+        .from(firstEntity.value)
+        .limit(5)
+        .toQuery();
+
       defaultWidgets.push({
         id: nanoid(),
         title: userFriendlyCase(`${firstEntity.value}`),
         _type: "table",
         entity: firstEntity.value,
-        script: `return await $.query('SELECT * FROM "${firstEntity.value}" LIMIT 5')`,
+        script: `return await $.query(${queryQuote}${firstQuery}${queryQuote})`,
       });
     }
 
@@ -183,7 +200,7 @@ return [actual[0], relative[0]];
       await this._dashboardWidgetsPersistenceService.getAllItemsIn(widgetList)
     );
 
-    return sortByListOrder(widgetList, widgets);
+    return sortListByOrder(widgetList, widgets, "id");
   }
 
   async listDashboardWidgets(
@@ -219,10 +236,16 @@ return [actual[0], relative[0]];
   }
 
   async updateWidget(widgetId: string, widget: IWidgetConfig) {
-    await this._dashboardWidgetsPersistenceService.updateItem(widgetId, widget);
+    await this._dashboardWidgetsPersistenceService.upsertItem(widgetId, widget);
   }
 
-  async removeWidget(widgetId: string, dashboardId: string) {
+  async removeWidget({
+    dashboardId,
+    widgetId,
+  }: {
+    widgetId: string;
+    dashboardId: string;
+  }) {
     await this._dashboardWidgetsPersistenceService.removeItem(widgetId);
 
     await this._listOrderApiService.removeFromList(dashboardId, widgetId);

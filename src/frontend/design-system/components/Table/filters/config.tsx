@@ -1,6 +1,10 @@
 import { ReactElement } from "react";
-import { FilterOperators, IColumnFilterBag } from "shared/types/data";
-import { IFilterProps, TableFilterType } from "./types";
+import {
+  FilterOperators,
+  IColumnFilterBag,
+  TableFilterType,
+} from "shared/types/data";
+import { IFilterProps } from "./types";
 import { FilterTableByListSelection } from "./List";
 import { FilterTableByStatus } from "./Status";
 import { FilterTableByIdField } from "./IdField";

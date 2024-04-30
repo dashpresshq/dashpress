@@ -1,10 +1,10 @@
 import { RenderCode } from "frontend/design-system/components/RenderCode";
 import { Spacer } from "frontend/design-system/primitives/Spacer";
-import { DocumentationRoot, IDocumentationRootProps } from "../_base";
+import { DocumentationRoot } from "../_base";
 
-export function WidgetScriptDocumentation(props: IDocumentationRootProps) {
+export function WidgetScriptDocumentation() {
   return (
-    <DocumentationRoot {...props}>
+    <DocumentationRoot>
       <p>
         The widget script is the script that allows you to provide the data that
         the widget will render.

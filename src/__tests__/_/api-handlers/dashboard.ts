@@ -14,7 +14,7 @@ let DASHBOARD_WIDGETS: IWidgetConfig[] = [
       { name: "Jane", age: 5 },
     ]),
     title: "Foo Table",
-    size: "2",
+    span: "2",
     height: "2",
   },
   {
@@ -51,8 +51,8 @@ export const dashboardApiHandlers = [
       if (
         req.params.dashboardId === "test-dashboard-id" &&
         [
-          `{"icon":"Download","title":"New Summary Card","_type":"summary-card","entity":"entity-1","color":"green","script":"return 1","size":"3","height":"4","id":"new_id_1"}`,
-          `{"icon":"ShoppingCart","title":"New Table","_type":"table","entity":"entity-1","size":"2","height":"3","script":"return 1","id":"new_id_2"}`,
+          `{"icon":"Download","title":"New Summary Card","_type":"summary-card","entity":"entity-1","color":"green","script":"return 1","span":"3","height":"4","id":"new_id_1"}`,
+          `{"icon":"ShoppingCart","title":"New Table","_type":"table","entity":"entity-1","span":"2","height":"3","script":"return 1","id":"new_id_2"}`,
         ].includes(JSON.stringify(requestBody))
       ) {
         DASHBOARD_WIDGETS.push(requestBody);
@@ -68,8 +68,8 @@ export const dashboardApiHandlers = [
       if (
         req.params.dashboardId === "test-dashboard-id" &&
         [
-          `{"_type":"table","entity":"entity-2","id":"table_id_1","queryId":"foo","script":"[{\\"name\\":\\"John\\",\\"age\\":6},{\\"name\\":\\"Jane\\",\\"age\\":5}]return 1","title":"Foo TableUpdated","size":"1","height":"2"}`,
-          `{"_type":"summary-card","entity":"entity-2","color":"red","icon":"<p>Some SVG Here</p><p>Custom Icon</p>","queryId":"bar","script":"[{\\"count\\":10},{\\"count\\":5}]return 1","title":"Bar CardUpdated","id":"summary_card_id_1","size":"3","height":"4"}`,
+          `{"_type":"table","entity":"entity-2","id":"table_id_1","queryId":"foo","script":"[{\\"name\\":\\"John\\",\\"age\\":6},{\\"name\\":\\"Jane\\",\\"age\\":5}]return 1","title":"Foo TableUpdated","span":"1","height":"2"}`,
+          `{"_type":"summary-card","entity":"entity-2","color":"red","icon":"<p>Some SVG Here</p><p>Custom Icon</p>","queryId":"bar","script":"[{\\"count\\":10},{\\"count\\":5}]return 1","title":"Bar CardUpdated","id":"summary_card_id_1","span":"3","height":"4"}`,
         ].includes(JSON.stringify(requestBody))
       ) {
         const index = DASHBOARD_WIDGETS.findIndex(

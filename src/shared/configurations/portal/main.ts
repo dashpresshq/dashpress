@@ -1,17 +1,18 @@
+import { msg } from "@lingui/macro";
 import { IAppConfigurationBag } from "shared/configurations/types";
 
 export type IPortalSystemSettings = {};
 
 export const PORTAL_DEFAULT_SYSTEM_SETTINGS = {};
 
-export type PortalConfigurationKeys = "";
+export type PortalAppConfigurationKeys = "";
 
-export const PORTAL_CONFIGURATION_KEYS: Record<
-  PortalConfigurationKeys,
+export const PORTAL_APP_CONFIGURATION_CONFIG: Record<
+  PortalAppConfigurationKeys,
   IAppConfigurationBag
 > = {
   "": {
-    crudConfigLabel: "",
+    label: msg``,
     defaultValue: "",
   },
 };

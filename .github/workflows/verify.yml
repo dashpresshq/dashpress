@@ -2,22 +2,25 @@ name: CI
 
 on:
   push:
-    branches: [ master ]
+    branches: [master]
   pull_request:
-    branches: [ master ]
+    branches: [master]
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - name: Install modules
-      run: npm install
-    - name: Start Redis
-      uses: supercharge/redis-github-action@1.4.0
-    - name: Run Verification
-      run: npm run verify
-    - name: Publish code coverage to CodeClimate
-      uses: paambaati/codeclimate-action@v3.0.0
-      env:
-        CC_TEST_REPORTER_ID: 00fa2af1b50105f491c0e31d7841ecf1e7c495f1b7522ffa6b458d3db566de08
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 21
+      - name: Install modules
+        run: npm ci
+      - name: Start Redis
+        uses: supercharge/redis-github-action@1.4.0
+      - name: Run Verification
+        run: npm run verify
+      - name: Publish code coverage to CodeClimate
+        uses: paambaati/codeclimate-action@v3.0.0
+        env:
+          CC_TEST_REPORTER_ID: 85118bc6c82c6fd71e336c244a09aa065969958afa6d07ec3f22e0abec6e88ac

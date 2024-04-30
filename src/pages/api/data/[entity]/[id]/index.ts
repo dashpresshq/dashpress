@@ -36,7 +36,10 @@ export default requestHandler({
       "entity",
       "entityId",
       "authenticatedUser",
-      "entityRequestBody",
+      {
+        _type: "requestBody",
+        options: {},
+      },
       {
         _type: "crudEnabled",
         options: DataActionType.Update,
@@ -45,7 +48,7 @@ export default requestHandler({
     return await dataApiController.updateData(
       validatedRequest.entity,
       validatedRequest.entityId,
-      validatedRequest.entityRequestBody,
+      validatedRequest.requestBody.data,
       validatedRequest.authenticatedUser as IAccountProfile
     );
   },

@@ -5,12 +5,13 @@ import { ToastService } from "frontend/lib/toast";
 import { Typo } from "frontend/design-system/primitives/Typo";
 import { Stack } from "frontend/design-system/primitives/Stack";
 import { Spacer } from "frontend/design-system/primitives/Spacer";
+import { typescriptSafeObjectDotKeys } from "shared/lib/objects";
 import {
   useActivationConfiguration,
-  useUpdateActivatedActionMutation,
+  useUpdateActivatedIntegrationMutation,
 } from "../actions.store";
-import { usePasswordStore } from "../../password.store";
 import { ACTION_INTEGRATIONS_CRUD_CONFIG } from "../constants";
+import { PasswordMessage, PasswordToReveal } from "../../Password";
 
 interface IProps {
   integrationDetail: IIntegrationsList;
@@ -18,8 +19,8 @@ interface IProps {
 }
 
 export function Configure({ activationId, integrationDetail }: IProps) {
-  const updateActivatedActionMutation =
-    useUpdateActivatedActionMutation(activationId);
+  const updateActivatedIntegrationMutation =
+    useUpdateActivatedIntegrationMutation(activationId);
   const activationConfiguration = useActivationConfiguration(activationId);
 
   useEffect(() => {
@@ -28,61 +29,38 @@ export function Configure({ activationId, integrationDetail }: IProps) {
     }
   }, [activationConfiguration.error]);
 
-  const passwordStore = usePasswordStore();
-
-  if (Object.keys(integrationDetail.configurationSchema).length === 0) {
+  if (
+    typescriptSafeObjectDotKeys(integrationDetail.configurationSchema)
+      .length === 0
+  ) {
     return (
-      <Stack justify="center">
-        <Typo.SM textStyle="italic">
+      <Stack $justify="center">
+        <Typo.SM $textStyle="italic">
           This action does not have configuration
         </Typo.SM>
       </Stack>
     );
   }
 
-  if (
-    activationConfiguration.error ||
-    activationConfiguration.isLoading ||
-    !passwordStore.password
-  ) {
+  if (activationConfiguration.data === undefined) {
     return (
-      <>
-        <Typo.SM textStyle="italic">
-          For security reasons, Please input your account password to reveal
-          this action configuration
-        </Typo.SM>
-        <Spacer />
-        <SchemaForm
-          fields={{
-            password: {
-              type: "password",
-              validations: [
-                {
-                  validationType: "required",
-                },
-              ],
-            },
-          }}
-          onSubmit={async ({ password }: { password: string }) => {
-            passwordStore.setPassword(password);
-          }}
-          icon="eye"
-          buttonText={() => {
-            return activationConfiguration.isLoading
-              ? `Revealing ${integrationDetail.title}'s Configuration`
-              : `Reveal ${integrationDetail.title}'s Configuration`;
-          }}
-        />
-      </>
+      <PasswordToReveal
+        label={`${integrationDetail.title}'s Configuration`}
+        isLoading={activationConfiguration.isLoading}
+      />
     );
   }
   return (
-    <SchemaForm
-      fields={integrationDetail.configurationSchema}
-      onSubmit={updateActivatedActionMutation.mutateAsync}
-      initialValues={activationConfiguration.data || {}}
-      buttonText={ACTION_INTEGRATIONS_CRUD_CONFIG.FORM_LANG.UPDATE}
-      icon="save"
-    />
+    <>
+      <PasswordMessage />
+      <Spacer />
+      <SchemaForm
+        fields={integrationDetail.configurationSchema}
+        onSubmit={updateActivatedIntegrationMutation.mutateAsync}
+        initialValues={activationConfiguration.data || {}}
+        buttonText={ACTION_INTEGRATIONS_CRUD_CONFIG.FORM_LANG.UPDATE}
+        systemIcon="Save"
+      />
+    </>
   );
 }

@@ -14,3 +14,5 @@ export type IRootColors =
   | keyof IColorMode
   | "primary-shade-color"
   | "primary-color";
+
+export const FOR_CODE_COV = 1;

@@ -1,4 +1,4 @@
-import { entitiesApiController } from "backend/entities/entities.controller";
+import { entitiesApiService } from "backend/entities/entities.service";
 import { requestHandler } from "backend/lib/request";
 import { IAccountProfile } from "shared/types/user";
 
@@ -9,7 +9,7 @@ export default requestHandler({
       "authenticatedUser",
     ]);
 
-    return await entitiesApiController.getEntityRelations(
+    return await entitiesApiService.getEntityRelationsForUserRole(
       validatedRequest.entity,
       (validatedRequest.authenticatedUser as IAccountProfile).role
     );

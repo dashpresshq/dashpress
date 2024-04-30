@@ -1,19 +1,21 @@
-import { Settings } from "react-feather";
-import { USER_PERMISSIONS } from "shared/constants/user";
+import { UserPermissions } from "shared/constants/user";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
-import React from "react";
 import { useUserHasPermission } from "frontend/hooks/auth/user.store";
 import styled from "styled-components";
 import { useRouter } from "next/router";
-
 import { AppLayout } from "frontend/_layouts/app";
 import { useDashboardWidgets } from "../dashboard.store";
-import { gridRoot } from "../styles";
+import { dashboardGridRoot } from "../styles";
 import { DashboardSkeleton } from "../Skeleton";
 import { DashboardWidget } from "../Widget";
+import { DASHBOARD_CRUD_CONFIG } from "../constants";
 
 const Root = styled.div`
-  ${gridRoot};
+  ${dashboardGridRoot};
+`;
+
+const Container = styled.div`
+  container-type: inline-size;
 `;
 
 interface IProps {
@@ -30,13 +32,13 @@ export function BaseDashboard({ dashboardId, manageLink }: IProps) {
   return (
     <AppLayout
       actionItems={
-        userHasPermission(USER_PERMISSIONS.CAN_MANAGE_DASHBOARD)
+        userHasPermission(UserPermissions.CAN_MANAGE_DASHBOARD)
           ? [
               {
                 id: "manage-dashboard",
-                label: "Manage Dashboard",
-                IconComponent: Settings,
-                onClick: () => router.replace(manageLink),
+                label: DASHBOARD_CRUD_CONFIG.TEXT_LANG.EDIT,
+                systemIcon: "Edit" as const,
+                action: () => router.replace(manageLink),
               },
             ]
           : []
@@ -47,11 +49,13 @@ export function BaseDashboard({ dashboardId, manageLink }: IProps) {
         error={widgets.error}
         loader={<DashboardSkeleton />}
       >
-        <Root>
-          {widgets.data.map((config) => (
-            <DashboardWidget config={config} key={config.id} />
-          ))}
-        </Root>
+        <Container>
+          <Root>
+            {widgets.data.map((config) => (
+              <DashboardWidget config={config} key={config.id} />
+            ))}
+          </Root>
+        </Container>
       </ViewStateMachine>
     </AppLayout>
   );

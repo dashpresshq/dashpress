@@ -1,19 +1,14 @@
 import { NotFoundError, progammingError } from "backend/lib/errors";
 import {
+  DataEventActions,
   FilterOperators,
   PaginatedData,
   QueryFilterSchema,
 } from "shared/types/data";
-import {
-  actionsApiService,
-  ActionsApiService,
-} from "backend/actions/actions.service";
-import { BaseAction } from "shared/types/actions";
-import { IFieldValidationItem } from "shared/validations/types";
 import { IEntityField } from "shared/types/db";
 import { IAccountProfile } from "shared/types/user";
-import { noop } from "shared/lib/noop";
 import { compileTemplateString } from "shared/lib/strings/templates";
+import { runFormAction } from "backend/form-actions/run-form-action";
 import { rDBMSDataApiService, RDBMSDataApiService } from "./data-access/RDBMS";
 import { IDataApiService, IPaginationFilters } from "./types";
 import {
@@ -24,7 +19,7 @@ import {
   EntitiesApiService,
   entitiesApiService,
 } from "../entities/entities.service";
-import { PortalDataHooksService } from "./portal";
+import { PortalDataHooksService, PortalQueryImplementation } from "./portal";
 import { makeTableData } from "./utils";
 
 const DEFAULT_LIST_LIMIT = 50;
@@ -35,42 +30,61 @@ export class DataApiService implements IDataApiService {
   constructor(
     private _rDBMSApiDataService: RDBMSDataApiService,
     private _entitiesApiService: EntitiesApiService,
-    private _configurationApiService: ConfigurationApiService,
-    private _actionsApiService: ActionsApiService
+    private _configurationApiService: ConfigurationApiService
   ) {}
 
-  async bootstrap() {
-    this.getDataAccessInstance().bootstrap();
+  async runOnLoad() {
+    await this.getDataAccessInstance().bootstrap();
   }
 
   private getDataAccessInstance() {
     return this._rDBMSApiDataService;
   }
 
-  async list(
+  async fetchData(
     entity: string,
     select: string[],
     queryFilter: QueryFilterSchema,
-    dataFetchingModifiers: IPaginationFilters
+    paginationFilters: IPaginationFilters
   ): Promise<Record<string, unknown>[]> {
     return await this.getDataAccessInstance().list(
       entity,
       select,
-      queryFilter,
-      dataFetchingModifiers
+      await this.appendPersistentQuery(
+        entity,
+        await PortalQueryImplementation.query(queryFilter, entity)
+      ),
+      paginationFilters
     );
   }
 
-  async read<T>(
+  async countData(
+    entity: string,
+    queryFilter: QueryFilterSchema
+  ): Promise<number> {
+    return await this.getDataAccessInstance().count(
+      entity,
+      await this.appendPersistentQuery(
+        entity,
+        await PortalQueryImplementation.query(queryFilter, entity)
+      )
+    );
+  }
+
+  async readData<T>(
     entity: string,
     select: string[],
-    query: Record<string, unknown>
+    queryFilter: QueryFilterSchema
   ): Promise<T> {
     progammingError(
       "We dont do that here, Please define the fields you want to select",
       select.length === 0
     );
-    return await this.getDataAccessInstance().read<T>(entity, select, query);
+    return await this.getDataAccessInstance().read<T>(
+      entity,
+      select,
+      queryFilter
+    );
   }
 
   async referenceData(entity: string, id: string): Promise<string> {
@@ -79,11 +93,20 @@ export class DataApiService implements IDataApiService {
       this._entitiesApiService.getEntityPrimaryField(entity),
     ]);
 
-    const data = await this.read<Record<string, unknown>>(
+    const data = await this.readData<Record<string, unknown>>(
       entity,
       relationshipSettings.fields,
       {
-        [primaryField]: id,
+        operator: "and",
+        children: [
+          {
+            id: primaryField,
+            value: {
+              operator: FilterOperators.EQUAL_TO,
+              value: id,
+            },
+          },
+        ],
       }
     );
 
@@ -99,12 +122,21 @@ export class DataApiService implements IDataApiService {
       this._entitiesApiService.getAllowedCrudsFieldsToShow(entity, "details"),
       column || this._entitiesApiService.getEntityPrimaryField(entity),
     ]);
-    const data = await this.read<Record<string, unknown>>(
+    const data = await this.readData<Record<string, unknown>>(
       entity,
       fieldsToShow,
-      {
-        [columnField]: id,
-      }
+      await this.appendPersistentQuery(entity, {
+        operator: "and",
+        children: [
+          {
+            id: columnField,
+            value: {
+              operator: FilterOperators.EQUAL_TO,
+              value: id,
+            },
+          },
+        ],
+      })
     );
     if (!data) {
       throw new NotFoundError(
@@ -114,30 +146,15 @@ export class DataApiService implements IDataApiService {
     return data;
   }
 
-  private returnOnlyDataThatAreAllowed(
-    data: Record<string, unknown>,
-    allowedFields: string[]
-  ) {
-    return Object.fromEntries(
-      allowedFields.map((field) => [field, data[field]])
-    );
-  }
-
   async create(
     entity: string,
     data: Record<string, unknown>,
     accountProfile: IAccountProfile
   ): Promise<string | number> {
-    // TODO validate the createData values
-    const [allowedFields, primaryField, entityValidations] = await Promise.all([
+    const [allowedFields, primaryField] = await Promise.all([
       this._entitiesApiService.getAllowedCrudsFieldsToShow(entity, "create"),
       this._entitiesApiService.getEntityPrimaryField(entity),
-      this._configurationApiService.show<
-        Record<string, IFieldValidationItem[]>
-      >("entity_validations", entity),
     ]);
-
-    noop(entityValidations);
 
     await PortalDataHooksService.beforeCreate({
       dataApiService: this,
@@ -158,9 +175,9 @@ export class DataApiService implements IDataApiService {
       insertId: id,
     });
 
-    await this._actionsApiService.runAction(
+    await runFormAction(
       entity,
-      BaseAction.Create,
+      DataEventActions.Create,
       async () => await this.showData(entity, id),
       accountProfile
     );
@@ -177,7 +194,7 @@ export class DataApiService implements IDataApiService {
       this._entitiesApiService.getEntityPrimaryField(entity),
     ]);
 
-    const data = await this.getDataAccessInstance().list(
+    const data = await this.fetchData(
       entity,
       [...relationshipSettings.fields, primaryField],
       {
@@ -198,7 +215,7 @@ export class DataApiService implements IDataApiService {
 
     return data.map((datum: Record<string, unknown>) => {
       return {
-        value: datum[primaryField],
+        value: datum[primaryField] as string,
         label: compileTemplateString(relationshipSettings.format, datum),
       };
     });
@@ -208,10 +225,10 @@ export class DataApiService implements IDataApiService {
     entity: string,
     queryFilters: QueryFilterSchema,
     paginationFilters: IPaginationFilters
-  ): Promise<PaginatedData<unknown>> {
+  ): Promise<PaginatedData<Record<string, unknown>>> {
     return makeTableData(
       await Promise.all([
-        this.getDataAccessInstance().list(
+        this.fetchData(
           entity,
           await this._entitiesApiService.getAllowedCrudsFieldsToShow(
             entity,
@@ -220,7 +237,7 @@ export class DataApiService implements IDataApiService {
           queryFilters,
           paginationFilters
         ),
-        this.getDataAccessInstance().count(entity, queryFilters),
+        this.countData(entity, queryFilters),
       ]),
       paginationFilters
     );
@@ -230,20 +247,16 @@ export class DataApiService implements IDataApiService {
     entity: string,
     id: string,
     data: Record<string, unknown>,
-    accountProfile: IAccountProfile
+    accountProfile: IAccountProfile,
+    options: {
+      skipDataEvents?: boolean;
+    } = {}
   ): Promise<void> {
-    const [allowedFields, primaryField, entityValidations] = await Promise.all([
+    const [allowedFields, primaryField, metadataColumns] = await Promise.all([
       this._entitiesApiService.getAllowedCrudsFieldsToShow(entity, "update"),
       this._entitiesApiService.getEntityPrimaryField(entity),
-      this._configurationApiService.show<
-        Record<string, IFieldValidationItem[]>
-      >("entity_validations", entity),
+      this._configurationApiService.show("metadata_columns"),
     ]);
-
-    // validate only the fields presents in 'data'
-    noop(entityValidations);
-
-    // const validations = runValidationError({})(data);
 
     const beforeData = await PortalDataHooksService.beforeUpdate({
       dataApiService: this,
@@ -252,12 +265,22 @@ export class DataApiService implements IDataApiService {
       dataId: id,
     });
 
+    const valueToUpdate = this.returnOnlyDataThatAreAllowed(
+      data,
+      allowedFields
+    );
+
+    if (allowedFields.includes(metadataColumns.updatedAt)) {
+      valueToUpdate[metadataColumns.updatedAt] = new Date();
+    }
+
     await this.getDataAccessInstance().update(
       entity,
-      {
-        [primaryField]: id,
-      },
-      this.returnOnlyDataThatAreAllowed(data, allowedFields)
+      await this.appendPersistentQuery(
+        entity,
+        rDBMSDataApiService.whereEqualQueryFilterSchema(primaryField, id)
+      ),
+      valueToUpdate
     );
 
     await PortalDataHooksService.afterUpdate({
@@ -266,11 +289,12 @@ export class DataApiService implements IDataApiService {
       beforeData,
       data,
       dataId: id,
+      options,
     });
 
-    await this._actionsApiService.runAction(
+    await runFormAction(
       entity,
-      BaseAction.Update,
+      DataEventActions.Update,
       async () => await this.showData(entity, id),
       accountProfile
     );
@@ -281,9 +305,9 @@ export class DataApiService implements IDataApiService {
     id: string,
     accountProfile: IAccountProfile
   ): Promise<void> {
-    await this._actionsApiService.runAction(
+    await runFormAction(
       entity,
-      BaseAction.Delete,
+      DataEventActions.Delete,
       async () => await this.showData(entity, id),
       accountProfile
     );
@@ -294,8 +318,20 @@ export class DataApiService implements IDataApiService {
       dataId: id,
     });
 
-    await this.getDataAccessInstance().delete(entity, {
-      [await this._entitiesApiService.getEntityPrimaryField(entity)]: id,
+    const queryFilter = await this.appendPersistentQuery(
+      entity,
+      this._rDBMSApiDataService.whereEqualQueryFilterSchema(
+        await this._entitiesApiService.getEntityPrimaryField(entity),
+        id
+      )
+    );
+
+    await PortalQueryImplementation.delete({
+      entity,
+      queryFilter,
+      implementation: async () => {
+        await this.getDataAccessInstance().delete(entity, queryFilter);
+      },
     });
 
     await PortalDataHooksService.afterDelete({
@@ -306,27 +342,40 @@ export class DataApiService implements IDataApiService {
     });
   }
 
-  async count(entity: string, queryFilter: QueryFilterSchema): Promise<number> {
-    return await this.getDataAccessInstance().count(entity, queryFilter);
+  private async appendPersistentQuery(
+    entity: string,
+    filterSchema: QueryFilterSchema
+  ): Promise<QueryFilterSchema> {
+    const persistentFilter = await this._configurationApiService.show(
+      "persistent_query",
+      entity
+    );
+
+    if (persistentFilter.children.length === 0) {
+      // TODO compile all the values
+      return filterSchema;
+    }
+
+    return {
+      operator: "and",
+      children: [filterSchema, persistentFilter],
+    };
   }
 
-  private async getRelationshipSettings(entity: string): Promise<{
+  async getRelationshipSettings(entity: string): Promise<{
     format: string;
     fields: string[];
   }> {
-    const relationshipSettings = await this._configurationApiService.show<{
-      format: string;
-      fields: string[];
-    }>("entity_relation_template", entity);
+    const relationshipSettings = await this._configurationApiService.show(
+      "entity_relation_template",
+      entity
+    );
 
     if (relationshipSettings.fields.length > 0) {
       return relationshipSettings;
     }
     const [hiddenColumns, primaryField, entityFields] = await Promise.all([
-      this._configurationApiService.show<string[]>(
-        "hidden_entity_table_columns",
-        entity
-      ),
+      this._configurationApiService.show("hidden_entity_table_columns", entity),
       this._entitiesApiService.getEntityPrimaryField(entity),
       this._entitiesApiService.getEntityFields(entity),
     ]);
@@ -351,11 +400,19 @@ export class DataApiService implements IDataApiService {
     );
     return configuration;
   }
+
+  private returnOnlyDataThatAreAllowed(
+    data: Record<string, unknown>,
+    allowedFields: string[]
+  ) {
+    return Object.fromEntries(
+      allowedFields.map((field) => [field, data[field]])
+    );
+  }
 }
 
 export const dataApiService = new DataApiService(
   rDBMSDataApiService,
   entitiesApiService,
-  configurationApiService,
-  actionsApiService
+  configurationApiService
 );

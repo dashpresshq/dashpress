@@ -1,16 +1,17 @@
 import { useState } from "react";
 import { IntegrationsConfigurationGroup } from "shared/types/integrations";
-import { INTEGRATIONS_GROUP_CONFIG } from "shared/config-bag/integrations";
-import { StyledCard } from "frontend/design-system/components/Card";
+import { Card } from "frontend/design-system/components/Card";
 import { Tabs } from "frontend/design-system/components/Tabs";
+import { msg } from "@lingui/macro";
 import { ManageCredentialGroup } from "./ManageCredentialGroup";
+import { INTEGRATIONS_GROUP_CRUD_CONFIG } from "./constants";
 
 export function BaseManageVariables() {
   const [currentTab, setCurrentTab] = useState<IntegrationsConfigurationGroup>(
     IntegrationsConfigurationGroup.Constants
   );
   return (
-    <StyledCard>
+    <Card>
       <Tabs
         padContent={false}
         currentTab={currentTab}
@@ -19,9 +20,10 @@ export function BaseManageVariables() {
         }
         contents={[
           {
-            overrideLabel:
-              INTEGRATIONS_GROUP_CONFIG.constants.crudConfig.TEXT_LANG.TITLE,
-            label: IntegrationsConfigurationGroup.Constants,
+            label:
+              INTEGRATIONS_GROUP_CRUD_CONFIG.constants.crudConfig.TEXT_LANG
+                .TITLE,
+            id: IntegrationsConfigurationGroup.Constants,
             content: (
               <ManageCredentialGroup
                 group={IntegrationsConfigurationGroup.Constants}
@@ -30,9 +32,10 @@ export function BaseManageVariables() {
             ),
           },
           {
-            overrideLabel:
-              INTEGRATIONS_GROUP_CONFIG.credentials.crudConfig.TEXT_LANG.TITLE,
-            label: IntegrationsConfigurationGroup.Credentials,
+            label:
+              INTEGRATIONS_GROUP_CRUD_CONFIG.credentials.crudConfig.TEXT_LANG
+                .TITLE,
+            id: IntegrationsConfigurationGroup.Credentials,
             content: (
               <ManageCredentialGroup
                 group={IntegrationsConfigurationGroup.Credentials}
@@ -42,8 +45,8 @@ export function BaseManageVariables() {
           },
         ]}
       />
-    </StyledCard>
+    </Card>
   );
 }
 
-export const MangeVariablesPageTitle = "Manage Variables";
+export const ManageVariablesPageTitle = msg`Manage Variables`;

@@ -1,101 +1,61 @@
-import { useMutation } from "react-query";
-import { IIntegrationsList } from "shared/types/actions";
 import { CRUD_CONFIG_NOT_FOUND } from "frontend/lib/crud-config";
 import { reduceStringToNumber } from "shared/lib/strings";
 import { useApi } from "frontend/lib/data/useApi";
 import { useWaitForResponseMutationOptions } from "frontend/lib/data/useMutate/useWaitForResponseMutationOptions";
-import { makeActionRequest } from "frontend/lib/data/makeRequest";
+import { ApiRequest } from "frontend/lib/data/makeRequest";
+import { IStorageIntegration } from "shared/types/actions";
 import { usePasswordStore } from "../password.store";
 import { STORAGE_INTEGRATIONS_CRUD_CONFIG } from "./constants";
 
 export const useStorageIntegrationsList = () =>
-  useApi<IIntegrationsList[]>("/api/integrations/storage/list", {
+  useApi<IStorageIntegration[]>("/api/integrations/storage/list", {
     errorMessage: STORAGE_INTEGRATIONS_CRUD_CONFIG.TEXT_LANG.NOT_FOUND,
     defaultData: [],
   });
 
 const ACTIVE_STORAGE_INTEGRATIONS_ENDPOINT = "/api/integrations/storage/active";
 
-const ACTIVATION_CONFIG = (storageKey: string) => {
-  return `/api/integrations/storage/${storageKey}/credentials`;
-};
+const STORAGE_CREDENTIALS_CONFIG = `/api/integrations/storage/credentials`;
 
-export const useActiveStorageIntegrationList = () =>
-  useApi<string[]>(ACTIVE_STORAGE_INTEGRATIONS_ENDPOINT, {
-    errorMessage: CRUD_CONFIG_NOT_FOUND("Active Storage Integrations"),
-    defaultData: [],
+export const useActiveStorageIntegration = () =>
+  useApi<{ data: string }>(ACTIVE_STORAGE_INTEGRATIONS_ENDPOINT, {
+    errorMessage: CRUD_CONFIG_NOT_FOUND(`Active Storage Integrations`),
+    defaultData: { data: "" },
   });
 
-export const useStorageIntegrationConfiguration = (storageKey: string) => {
+export const useStorageCredentialsConfiguration = () => {
   const rootPassword = usePasswordStore((state) => state.password);
   return useApi<Record<string, string>>(
-    `${ACTIVATION_CONFIG(storageKey)}?${reduceStringToNumber(rootPassword)}`,
+    `${STORAGE_CREDENTIALS_CONFIG}?${reduceStringToNumber(rootPassword)}`,
     {
       request: {
         body: {
-          password: rootPassword,
+          _password: rootPassword,
         },
         method: "POST",
       },
-      errorMessage: CRUD_CONFIG_NOT_FOUND("Storage Credentials"),
-      enabled: !!storageKey && !!rootPassword,
-      defaultData: {},
+      errorMessage: CRUD_CONFIG_NOT_FOUND(`Storage Credentials`),
+      enabled: !!rootPassword,
+      defaultData: undefined,
     }
   );
 };
 
-export function useDeactivateStorageMutation() {
-  const apiMutateOptions = useWaitForResponseMutationOptions<
-    Record<string, string>
-  >({
-    endpoints: [ACTIVE_STORAGE_INTEGRATIONS_ENDPOINT],
-    successMessage: STORAGE_INTEGRATIONS_CRUD_CONFIG.MUTATION_LANG.DE_ACTIVATED,
-  });
-
-  return useMutation(
-    async (storageKey: string) =>
-      await makeActionRequest(
-        "DELETE",
-        `/api/integrations/storage/${storageKey}`
-      ),
-    apiMutateOptions
-  );
-}
-
-export function useActivateStorageMutation(integrationKey: string) {
-  const apiMutateOptions = useWaitForResponseMutationOptions<
-    Record<string, string>
-  >({
-    endpoints: [ACTIVE_STORAGE_INTEGRATIONS_ENDPOINT],
-    successMessage: STORAGE_INTEGRATIONS_CRUD_CONFIG.MUTATION_LANG.ACTIVATED,
-  });
-
-  return useMutation(
-    async (configuration: Record<string, string>) =>
-      await makeActionRequest(
-        "POST",
-        `/api/integrations/storage/${integrationKey}`,
+export function useActivateStorageMutation() {
+  return useWaitForResponseMutationOptions<{
+    storageKey: string;
+    configuration: Record<string, string>;
+  }>({
+    mutationFn: async (configuration) =>
+      await ApiRequest.POST(
+        ACTIVE_STORAGE_INTEGRATIONS_ENDPOINT,
         configuration
       ),
-    apiMutateOptions
-  );
-}
-
-export function useUpdateActivatedStorageMutation(storageKey: string) {
-  const apiMutateOptions = useWaitForResponseMutationOptions<
-    Record<string, string>
-  >({
-    endpoints: [ACTIVE_STORAGE_INTEGRATIONS_ENDPOINT],
-    successMessage: STORAGE_INTEGRATIONS_CRUD_CONFIG.MUTATION_LANG.EDIT,
+    endpoints: [
+      ACTIVE_STORAGE_INTEGRATIONS_ENDPOINT,
+      STORAGE_CREDENTIALS_CONFIG,
+    ],
+    successMessage:
+      STORAGE_INTEGRATIONS_CRUD_CONFIG.MUTATION_LANG.CUSTOM("Activated"),
   });
-
-  return useMutation(
-    async (configuration: Record<string, string>) =>
-      await makeActionRequest(
-        "PATCH",
-        `/api/integrations/storage/${storageKey}`,
-        configuration
-      ),
-    apiMutateOptions
-  );
 }

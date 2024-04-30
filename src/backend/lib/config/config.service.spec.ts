@@ -1,6 +1,7 @@
 /* eslint-disable no-new */
 import fs from "fs-extra";
 import path from "path";
+import { typescriptSafeObjectDotEntries } from "shared/lib/objects";
 import { ConfigKeys, ConfigApiService } from "./config.service";
 
 const VALID_CONFIG: Record<ConfigKeys, string> = {
@@ -95,16 +96,17 @@ describe("Config Service", () => {
     it("should throw error on prod for empty env", async () => {
       ConfigApiService.isInitialized = false;
 
-      expect(() =>
-        new ConfigApiService({
-          ENV_LOCAL_FILE,
-          NODE_ENV: "production",
-        }).bootstrap()
+      expect(
+        () =>
+          new ConfigApiService({
+            ENV_LOCAL_FILE,
+            NODE_ENV: "production",
+          })
       ).toThrowError();
     });
 
     it("should create new valid config file when empty", async () => {
-      new ConfigApiService({ ENV_LOCAL_FILE }).bootstrap();
+      new ConfigApiService({ ENV_LOCAL_FILE });
 
       const content = fs.readFileSync(fullPath).toString();
 
@@ -137,7 +139,7 @@ describe("Config Service", () => {
 
       fs.writeFileSync(
         fullPath,
-        Object.entries(oldEnv)
+        typescriptSafeObjectDotEntries(oldEnv)
           .map(([key, value]) => `${key}=${value}`)
           .join("\n")
       );
@@ -145,7 +147,7 @@ describe("Config Service", () => {
       new ConfigApiService({
         ...oldEnv,
         ENV_LOCAL_FILE,
-      }).bootstrap();
+      });
 
       const content = fs.readFileSync(fullPath).toString();
 

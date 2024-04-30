@@ -1,4 +1,4 @@
-import { WidgetHeightUnits, WidgetSizes } from "./types";
+import { GridHeightSizes, GridSpanSizes } from "../ui";
 
 export interface ISharedWidgetConfig {
   id: string;
@@ -6,8 +6,8 @@ export interface ISharedWidgetConfig {
   script: string;
   entity?: string;
   queryId?: string;
-  size?: WidgetSizes;
-  height?: WidgetHeightUnits;
+  span?: GridSpanSizes;
+  height?: GridHeightSizes;
 }
 
 export const FOR_CODE_COV = 1;

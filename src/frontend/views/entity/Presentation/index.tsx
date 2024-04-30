@@ -3,82 +3,115 @@ import {
   FormSkeleton,
   FormSkeletonSchema,
 } from "frontend/design-system/components/Skeleton/Form";
-import { SLUG_LOADING_VALUE } from "frontend/lib/routing/constants";
 import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
-import { USER_PERMISSIONS } from "shared/constants/user";
 import { useEntitySlug } from "frontend/hooks/entity/entity.config";
 import {
   useEntityConfiguration,
   useUpsertConfigurationMutation,
 } from "frontend/hooks/configuration/configuration.store";
 import { MAKE_APP_CONFIGURATION_CRUD_CONFIG } from "frontend/hooks/configuration/configuration.constant";
-import { IEntityPresentationScript } from "frontend/views/data/types";
-import { useState } from "react";
-import { DOCUMENTATION_LABEL } from "frontend/docs";
 import { PresentationScriptDocumentation } from "frontend/docs/scripts/presentations-scripts";
+import { ToastService } from "frontend/lib/toast";
+import { evalJavascriptString } from "shared/lib/script-runner";
+import { SchemaForm } from "frontend/components/SchemaForm";
+import { useDocumentationActionButton } from "frontend/docs/constants";
+import { IPresentationScriptParams } from "frontend/views/data/evaluatePresentationScript";
+import { useEvaluateScriptContext } from "frontend/hooks/scripts";
+import { msg } from "@lingui/macro";
+import { i18nNoop } from "translations/fake";
+import { UserPermissions } from "shared/constants/user";
 import { BaseEntitySettingsLayout } from "../_Base";
-import { PresentationScriptForm } from "./Form";
 import { ENTITY_CONFIGURATION_VIEW } from "../constants";
+
+const placeholder = `if($.field === "image"){
+  return "https://cdn.mycompany.com/" + $.value + "?size=320x640";
+}
+
+if($.field === "description" && $.from === "table"){
+  return $.value.substr(0, 120)
+}
+
+if($.field === "commentsCount"){
+  return ($.value / 1000) + "K"
+}
+          `;
+
+type IEntityPresentationScript = {
+  script: string;
+};
 
 const PRESENTATION_SCRIPT_CRUD_CONFIG = MAKE_APP_CONFIGURATION_CRUD_CONFIG(
   "entity_presentation_script"
 );
 
-const DOCS_TITLE = "Presentation Script";
-
 export function EntityPresentationScriptSettings() {
   const entity = useEntitySlug();
-  const entityPresentationScript =
-    useEntityConfiguration<IEntityPresentationScript>(
-      "entity_presentation_script",
-      entity
-    );
+  const entityPresentationScript = useEntityConfiguration(
+    "entity_presentation_script",
+    entity
+  );
   const upsertConfigurationMutation = useUpsertConfigurationMutation(
     "entity_presentation_script",
     entity
   );
-  const [isDocOpen, setIsDocOpen] = useState(false);
+  const evaluateScriptContext = useEvaluateScriptContext();
+
+  const documentationActionButton = useDocumentationActionButton(
+    PRESENTATION_SCRIPT_CRUD_CONFIG.TEXT_LANG.TITLE
+  );
 
   useSetPageDetails({
     pageTitle: PRESENTATION_SCRIPT_CRUD_CONFIG.TEXT_LANG.TITLE,
     viewKey: ENTITY_CONFIGURATION_VIEW,
-    permission: USER_PERMISSIONS.CAN_CONFIGURE_APP,
+    permission: UserPermissions.CAN_CONFIGURE_APP,
   });
   return (
     <BaseEntitySettingsLayout>
       <SectionBox
         title={PRESENTATION_SCRIPT_CRUD_CONFIG.TEXT_LANG.TITLE}
-        iconButtons={[
-          {
-            action: () => setIsDocOpen(true),
-            icon: "help",
-            label: DOCUMENTATION_LABEL.CONCEPT(DOCS_TITLE),
-          },
-        ]}
+        actionButtons={[documentationActionButton]}
       >
         <ViewStateMachine
-          loading={
-            entity === SLUG_LOADING_VALUE || entityPresentationScript.isLoading
-          }
+          loading={entityPresentationScript.isLoading}
           error={entityPresentationScript.error}
           loader={<FormSkeleton schema={[FormSkeletonSchema.RichTextArea]} />}
         >
-          <PresentationScriptForm
-            onSubmit={async (values) => {
-              await upsertConfigurationMutation.mutateAsync(
-                values as unknown as Record<string, string>
-              );
+          <SchemaForm<IEntityPresentationScript>
+            fields={{
+              script: {
+                type: "json",
+                label: msg`Script`,
+                validations: [],
+                placeholder: i18nNoop(placeholder),
+              },
+            }}
+            onSubmit={async (data) => {
+              const context: IPresentationScriptParams = {
+                field: "test",
+                from: "details",
+                row: {},
+                value: "",
+                ...evaluateScriptContext,
+              };
+              try {
+                evalJavascriptString(data.script, context);
+
+                await upsertConfigurationMutation.mutateAsync(data);
+              } catch (e) {
+                ToastService.error(`•Expression: \n•JS-Error: ${e}`);
+              }
             }}
             initialValues={entityPresentationScript.data}
+            systemIcon="Save"
+            buttonText={
+              MAKE_APP_CONFIGURATION_CRUD_CONFIG("entity_presentation_script")
+                .FORM_LANG.UPSERT
+            }
           />
         </ViewStateMachine>
       </SectionBox>
-      <PresentationScriptDocumentation
-        title={DOCS_TITLE}
-        close={setIsDocOpen}
-        isOpen={isDocOpen}
-      />
+      <PresentationScriptDocumentation />
     </BaseEntitySettingsLayout>
   );
 }

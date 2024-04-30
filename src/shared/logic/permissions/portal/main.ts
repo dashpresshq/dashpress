@@ -7,4 +7,4 @@ export const portalMetaPermissionCheck = (
   return undefined;
 };
 
-export const PORTAL_PERMISSION_HEIRACHIES = {};
+export const PORTAL_PERMISSION_HEIRACHIES = [];

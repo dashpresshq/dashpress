@@ -1,4 +1,3 @@
-import React from "react";
 import styled, { css } from "styled-components";
 import Link from "next/link";
 import {
@@ -7,8 +6,6 @@ import {
   SystemLinks,
 } from "shared/types/menu";
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
-import { systemIconToSVG } from "shared/constants/Icons";
-import { useSessionStorage } from "react-use";
 import { ChevronRight } from "react-feather";
 import { SYSTEM_COLORS } from "frontend/design-system/theme/system";
 import { Typo } from "frontend/design-system/primitives/Typo";
@@ -16,16 +13,41 @@ import { PlainButton } from "frontend/design-system/components/Button/TextButton
 import { Stack } from "frontend/design-system/primitives/Stack";
 import { useThemeColorShade } from "frontend/design-system/theme/useTheme";
 import { useNavigationStack } from "frontend/lib/routing/useNavigationStack";
-import { ActionIntegrationKeys } from "shared/types/actions";
+import { ActionIntegrations } from "shared/types/actions";
+import { SystemIcon } from "frontend/design-system/Icons/System";
+import { PORTAL_SYSTEM_LINK_CONFIG_LINKS } from "./portal";
 
-const StyledLeftSideNavMenuList = styled.li<{}>`
+const SYSTEM_LINKS_CONFIG_MAP: Record<
+  SystemLinks,
+  {
+    link: string;
+  }
+> = {
+  [SystemLinks.Settings]: {
+    link: NAVIGATION_LINKS.SETTINGS.DEFAULT,
+  },
+  [SystemLinks.Home]: {
+    link: NAVIGATION_LINKS.DASHBOARD.HOME,
+  },
+  [SystemLinks.Roles]: {
+    link: NAVIGATION_LINKS.ROLES.LIST,
+  },
+  [SystemLinks.Users]: {
+    link: NAVIGATION_LINKS.USERS.LIST,
+  },
+  [SystemLinks.Integrations]: {
+    link: NAVIGATION_LINKS.INTEGRATIONS.ACTIONS(ActionIntegrations.HTTP),
+  },
+};
+
+const LeftSideNavMenuList = styled.li<{}>`
   list-style: none;
   display: block;
   transition: all 0.3s;
 `;
 
-const StyledLeftSideNavMenuListAnchor = styled.a<{
-  hoverColor: string;
+const LeftSideNavMenuListAnchor = styled(PlainButton)<{
+  $hoverColor: string;
   $isActive: boolean;
   $depth: number;
 }>`
@@ -44,28 +66,18 @@ const StyledLeftSideNavMenuListAnchor = styled.a<{
   padding-left: ${(props) => props.$depth * 16}px;
   &:hover {
     color: ${SYSTEM_COLORS.white};
-    background: ${(props) => props.hoverColor};
+    background: ${(props) => props.$hoverColor};
   }
 `;
 
-const StyledIconRoot = styled.span<{ $isFullWidth: boolean }>`
-  color: ${SYSTEM_COLORS.white};
-  width: 20px;
-  height: 20px;
-  display: inline-block;
-  svg {
-    vertical-align: initial;
-  }
-`;
-
-const StyledLeftSideNavMenu = styled.ul<{}>`
+const LeftSideNavMenu = styled.ul<{}>`
   padding: 0;
   margin-bottom: 0;
 `;
 
 const NavLabel = styled(Typo.XS)<{ $isFullWidth: boolean }>`
   color: ${SYSTEM_COLORS.white};
-  margin-left: 20px;
+  margin-left: 8px;
   transition: all 0.3s;
   ${(props) =>
     !props.$isFullWidth &&
@@ -109,18 +121,9 @@ interface IProp {
   isFullWidth: boolean;
   setIsFullWidth: (value: boolean) => void;
   depth?: number;
+  activeItem: Record<string, string>;
+  setActiveItem: (depth: number, value: string) => void;
 }
-
-const SYSTEM_LINK_MAP: Record<SystemLinks, string> = {
-  [SystemLinks.Settings]: NAVIGATION_LINKS.SETTINGS.DEFAULT,
-  [SystemLinks.Home]: NAVIGATION_LINKS.DASHBOARD.HOME,
-  [SystemLinks.Roles]: NAVIGATION_LINKS.ROLES.LIST,
-  [SystemLinks.Users]: NAVIGATION_LINKS.USERS.LIST,
-  [SystemLinks.Actions]: NAVIGATION_LINKS.INTEGRATIONS.ACTIONS(
-    ActionIntegrationKeys.HTTP
-  ),
-  [SystemLinks.AllDashboards]: NAVIGATION_LINKS.DASHBOARD.CUSTOM.LIST,
-};
 
 const getNavigationTypeLink = (
   type: NavigationMenuItemType,
@@ -136,7 +139,9 @@ const getNavigationTypeLink = (
     case NavigationMenuItemType.Entities:
       return NAVIGATION_LINKS.ENTITY.TABLE(link);
     case NavigationMenuItemType.System:
-      return SYSTEM_LINK_MAP[link];
+      return { ...SYSTEM_LINKS_CONFIG_MAP, ...PORTAL_SYSTEM_LINK_CONFIG_LINKS }[
+        link as SystemLinks
+      ].link;
   }
 };
 
@@ -145,51 +150,48 @@ export function RenderNavigation({
   isFullWidth,
   setIsFullWidth,
   depth = 1,
+  setActiveItem,
+  activeItem,
 }: IProp) {
-  // TODO clear the parent activeitems
-  const [activeItem, setActiveItem] = useSessionStorage(
-    `navigation-item-${depth}`,
-    ""
-  );
-
   const { clear: clearBreadCrumbStack } = useNavigationStack();
 
   const getBackgroundColor = useThemeColorShade();
 
   return (
-    <StyledLeftSideNavMenu>
+    <LeftSideNavMenu>
       {navigation.map(({ title, icon, type, link, id, children }) => {
-        const isActive = activeItem === id;
+        const isActive = activeItem[depth] === id;
+
+        const menuIcon = depth === 1 && (
+          <SystemIcon strokeWidth={isActive ? 2 : 1} icon={icon} size={20} />
+        );
+
         return (
-          <StyledLeftSideNavMenuList key={id}>
+          <LeftSideNavMenuList key={id}>
             {/* eslint-disable-next-line no-nested-ternary */}
             {type === NavigationMenuItemType.Header ? (
               <NavHeader $isFullWidth={isFullWidth}>{title}</NavHeader>
             ) : children && children.length > 0 ? (
               <>
-                <StyledLeftSideNavMenuListAnchor
+                <LeftSideNavMenuListAnchor
                   as={PlainButton}
-                  $isActive={isActive}
+                  $isActive={false}
                   $depth={depth}
-                  hoverColor={getBackgroundColor("primary-color", 45)}
+                  $hoverColor={getBackgroundColor("primary-color", 45)}
                   onClick={() => {
                     clearBreadCrumbStack();
                     setIsFullWidth(true);
-                    setActiveItem(isActive ? "" : id);
+                    setActiveItem(depth, isActive ? "" : id);
                   }}
                 >
-                  <StyledIconRoot
-                    aria-label={`${title} Icon`}
-                    $isFullWidth={isFullWidth}
-                    dangerouslySetInnerHTML={{
-                      __html: systemIconToSVG(icon, isActive ? 2 : 1),
-                    }}
-                  />
+                  {menuIcon}
                   {isFullWidth && (
-                    <Stack justify="space-between" spacing={0} align="center">
-                      <NavLabel ellipsis $isFullWidth={isFullWidth}>
-                        {title}
-                      </NavLabel>
+                    <Stack
+                      $justify="space-between"
+                      $spacing={0}
+                      $align="center"
+                    >
+                      <NavLabel $isFullWidth={isFullWidth}>{title}</NavLabel>
                       <SubMenuArrow
                         $isFullWidth={isFullWidth}
                         size={16}
@@ -197,50 +199,42 @@ export function RenderNavigation({
                       />
                     </Stack>
                   )}
-                </StyledLeftSideNavMenuListAnchor>
+                </LeftSideNavMenuListAnchor>
                 {isActive && isFullWidth && (
                   <RenderNavigation
                     setIsFullWidth={setIsFullWidth}
                     navigation={children}
                     isFullWidth={isFullWidth}
                     depth={depth + 1}
+                    activeItem={activeItem}
+                    setActiveItem={setActiveItem}
                   />
                 )}
               </>
             ) : (
-              <Link href={getNavigationTypeLink(type, link)} passHref>
-                <StyledLeftSideNavMenuListAnchor
-                  $isActive={isActive}
-                  $depth={depth}
-                  onClick={() => {
-                    clearBreadCrumbStack();
-                    setActiveItem(id);
-                  }}
-                  target={
-                    type === NavigationMenuItemType.ExternalLink
-                      ? "_blank"
-                      : undefined
-                  }
-                  hoverColor={getBackgroundColor("primary-color", 45)}
-                >
-                  {icon && (
-                    <StyledIconRoot
-                      aria-label={`${title} Icon`}
-                      $isFullWidth={isFullWidth}
-                      dangerouslySetInnerHTML={{
-                        __html: systemIconToSVG(icon, isActive ? 2 : 1),
-                      }}
-                    />
-                  )}
-                  <NavLabel ellipsis $isFullWidth={isFullWidth}>
-                    {title}
-                  </NavLabel>
-                </StyledLeftSideNavMenuListAnchor>
-              </Link>
+              <LeftSideNavMenuListAnchor
+                as={Link}
+                href={getNavigationTypeLink(type, link)}
+                $isActive={isActive}
+                $depth={depth}
+                onClick={() => {
+                  clearBreadCrumbStack();
+                  setActiveItem(depth, id);
+                }}
+                target={
+                  type === NavigationMenuItemType.ExternalLink
+                    ? "_blank"
+                    : undefined
+                }
+                $hoverColor={getBackgroundColor("primary-color", 45)}
+              >
+                {icon && menuIcon}
+                <NavLabel $isFullWidth={isFullWidth}>{title}</NavLabel>
+              </LeftSideNavMenuListAnchor>
             )}
-          </StyledLeftSideNavMenuList>
+          </LeftSideNavMenuList>
         );
       })}
-    </StyledLeftSideNavMenu>
+    </LeftSideNavMenu>
   );
 }

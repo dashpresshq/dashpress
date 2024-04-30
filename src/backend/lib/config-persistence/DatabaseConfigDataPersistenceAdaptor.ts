@@ -4,9 +4,9 @@ import { getDbConnection } from "../connection/db";
 import { AbstractConfigDataPersistenceService } from "./AbstractConfigDataPersistenceService";
 import { ConfigDomain } from "./types";
 import { CONFIG_TABLE_PREFIX } from "./constants";
+import { createMetaData, updateMetaData } from "./portal";
 
 const CONFIG_TABLE_NAME = CONFIG_TABLE_PREFIX("config");
-
 export class DatabaseConfigDataPersistenceAdaptor<
   T
 > extends AbstractConfigDataPersistenceService<T> {
@@ -43,9 +43,11 @@ export class DatabaseConfigDataPersistenceAdaptor<
           table
             .timestamp("created_at")
             .defaultTo(connection.raw("CURRENT_TIMESTAMP"));
+          table.string("created_by");
           table
             .timestamp("updated_at")
             .defaultTo(connection.raw("CURRENT_TIMESTAMP"));
+          table.string("updated_by");
 
           table.unique(["domain", "key"]);
         }
@@ -55,11 +57,7 @@ export class DatabaseConfigDataPersistenceAdaptor<
     return DatabaseConfigDataPersistenceAdaptor._dbInstance;
   }
 
-  async setup() {
-    await this.getDbInstance();
-  }
-
-  async resetToEmpty() {
+  async _resetToEmpty() {
     await (await this.getDbInstance())(CONFIG_TABLE_NAME)
       .where("domain", "=", this._configDomain)
       .del();
@@ -69,6 +67,7 @@ export class DatabaseConfigDataPersistenceAdaptor<
     const query = (await this.getDbInstance())
       .select(["value", "key"])
       .where("domain", "=", this._configDomain)
+      .orderBy("created_at", "desc")
       .from(CONFIG_TABLE_NAME);
 
     const items = await query;
@@ -94,7 +93,7 @@ export class DatabaseConfigDataPersistenceAdaptor<
     );
   }
 
-  async getItem(key: string) {
+  async _getItem(key: string) {
     const connection = await this.getDbInstance();
     const queryResponse = await connection
       .table(CONFIG_TABLE_NAME)
@@ -129,7 +128,7 @@ export class DatabaseConfigDataPersistenceAdaptor<
     }
   }
 
-  async persistItem(key: string, value: T) {
+  async _persistItem(key: string, value: T) {
     const affectedRowsCount = await (
       await this.getDbInstance()
     )(CONFIG_TABLE_NAME)
@@ -138,6 +137,7 @@ export class DatabaseConfigDataPersistenceAdaptor<
       .update({
         value: JSON.stringify(value),
         updated_at: new Date(),
+        ...updateMetaData(),
       });
     if (affectedRowsCount === 0) {
       await (
@@ -148,16 +148,14 @@ export class DatabaseConfigDataPersistenceAdaptor<
         value: JSON.stringify(value),
         created_at: new Date(),
         updated_at: new Date(),
+        ...createMetaData(),
       });
     }
   }
 
-  async removeItem(key: string): Promise<void> {
-    await (
-      await this.getDbInstance()
-    )(CONFIG_TABLE_NAME)
+  async _removeItem(key: string): Promise<void> {
+    await (await this.getDbInstance())(CONFIG_TABLE_NAME)
       .where("domain", "=", this._configDomain)
-
       .where({ key })
       .del();
   }
@@ -170,6 +168,8 @@ export class DatabaseConfigDataPersistenceAdaptor<
         key: value[keyField],
         domain: this._configDomain,
         value: JSON.stringify(value),
+        created_at: new Date(),
+        updated_at: new Date(),
       }))
     );
   }

@@ -1,4 +1,5 @@
-import { useState, useRef, useEffect, ReactNode } from "react";
+import { useToggle } from "frontend/hooks/state/useToggleState";
+import { useRef, useEffect, ReactNode } from "react";
 import { createPortal } from "react-dom";
 
 interface IProps {
@@ -7,12 +8,37 @@ interface IProps {
 
 export function NextPortal({ children }: IProps) {
   const ref = useRef<Element | null>(null);
-  const [mounted, setMounted] = useState(false);
+  const isMounted = useToggle();
 
   useEffect(() => {
     ref.current = document.body;
-    setMounted(true);
+    isMounted.on();
+    document.getElementById("__next")?.classList.add("gaussian-blur");
+
+    return () => {
+      document.getElementById("__next")?.classList.remove("gaussian-blur");
+
+      isMounted.off();
+    };
   }, []);
 
-  return mounted && ref.current ? createPortal(children, ref.current) : null;
+  return isMounted.isOn && ref.current
+    ? createPortal(
+        <>
+          <svg
+            style={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+            }}
+          >
+            <filter id="gaussian-blur">
+              <feGaussianBlur stdDeviation="0.3" />
+            </filter>
+          </svg>
+          {children}
+        </>,
+        ref.current
+      )
+    : null;
 }

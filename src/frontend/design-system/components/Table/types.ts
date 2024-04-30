@@ -1,12 +1,17 @@
-import { HeaderContext } from "@tanstack/react-table";
 import { ReactNode } from "react";
-import { UseQueryResult } from "react-query";
-import { IPaginatedDataState, PaginatedData } from "shared/types/data";
-import { TableFilterType } from "./filters/types";
+import { UseQueryResult } from "@tanstack/react-query";
+import {
+  IPaginatedDataState,
+  PaginatedData,
+  TableFilterType,
+} from "shared/types/data";
+import { MessageDescriptor } from "@lingui/core";
+import { HeaderContext } from "@tanstack/react-table";
+import { IEmptyWrapperProps } from "../EmptyWrapper/types";
 
 export interface ITableColumn {
   Header:
-    | string
+    | MessageDescriptor
     | ((
         headerContext: HeaderContext<Record<string, unknown>, unknown>
       ) => ReactNode);
@@ -19,15 +24,15 @@ export interface ITableColumn {
   }) => ReactNode;
 }
 
-export interface IProps<T> {
+export interface ITableProps<T> {
   columns: ITableColumn[];
   tableData: Pick<
     UseQueryResult<PaginatedData<Record<string, unknown>>, unknown>,
-    "data" | "isLoading" | "error" | "isPreviousData"
+    "data" | "isLoading" | "error" | "isPlaceholderData"
   >;
   lean?: true;
   border?: boolean;
   overridePaginatedDataState?: IPaginatedDataState<T>;
   syncPaginatedDataStateOut: (params: IPaginatedDataState<T>) => void;
-  emptyMessage?: string;
+  empty: IEmptyWrapperProps;
 }

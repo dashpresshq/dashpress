@@ -1,13 +1,13 @@
 /* eslint-disable react/function-component-definition */
-import React from "react";
+
 import { Story } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
 import { ApplicationRoot } from "frontend/components/ApplicationRoot";
-import { Presentation, IPresentationProps } from ".";
+import { ConfirmAlert } from ".";
 
 export default {
   title: "Components/ConfirmAlert",
-  component: Presentation,
+  component: ConfirmAlert,
   args: {
     action: action("action"),
     onClose: action("onClose"),
@@ -16,9 +16,9 @@ export default {
   },
 };
 
-const Template: Story<IPresentationProps> = (args) => (
+const Template: Story = (args) => (
   <ApplicationRoot>
-    <Presentation {...args} />
+    <ConfirmAlert {...args} />
   </ApplicationRoot>
 );
 

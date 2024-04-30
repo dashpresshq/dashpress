@@ -1,7 +1,11 @@
 /* eslint-disable no-param-reassign */
 import { Knex } from "knex";
 import { getDbConnection } from "backend/lib/connection/db";
-import { FieldQueryFilter, QueryFilterSchema } from "shared/types/data";
+import {
+  FieldQueryFilter,
+  FilterOperators,
+  QueryFilterSchema,
+} from "shared/types/data";
 import { credentialsApiService } from "backend/integrations-configurations";
 import {
   DATA_SOURCES_CONFIG,
@@ -12,11 +16,23 @@ import { DATABASE_CREDENTIAL_GROUP } from "../fields";
 import { IPaginationFilters } from "../types";
 import { QueryOperationImplementation, QueryOperators } from "./types";
 
+const makeArray = (value: unknown): string[] => {
+  if (Array.isArray(value)) {
+    return value;
+  }
+  if (typeof value === "string") {
+    return value.split(",");
+  }
+  return [];
+};
+
 export class RDBMSDataApiService extends BaseDataAccessService<Knex.QueryBuilder> {
   queryOperationImplementation: QueryOperationImplementation<Knex.QueryBuilder> =
     {
       and: {
         [QueryOperators.IS_NULL]: (query, column) => query.whereNull(column),
+        [QueryOperators.IS_NOT_NULL]: (query, column) =>
+          query.whereNotNull(column),
         [QueryOperators.EQUAL_TO]: (query, column, value) =>
           query.where(column, "=", value),
         [QueryOperators.LESS_THAN]: (query, column, value) =>
@@ -26,9 +42,9 @@ export class RDBMSDataApiService extends BaseDataAccessService<Knex.QueryBuilder
         [QueryOperators.CONTAINS]: (query, column, value) =>
           query.whereILike(column, `%${value}%`),
         [QueryOperators.IN]: (query, column, value) =>
-          query.whereIn(column, value as string[]),
+          query.whereIn(column, makeArray(value)),
         [QueryOperators.NOT_IN]: (query, column, value) =>
-          query.whereNotIn(column, value as string[]),
+          query.whereNotIn(column, makeArray(value)),
         [QueryOperators.NOT_EQUAL]: (query, column, value) =>
           query.whereNot(column, "=", value),
         [QueryOperators.BETWEEN]: (query, column, value) =>
@@ -36,6 +52,8 @@ export class RDBMSDataApiService extends BaseDataAccessService<Knex.QueryBuilder
       },
       or: {
         [QueryOperators.IS_NULL]: (query, column) => query.orWhereNull(column),
+        [QueryOperators.IS_NOT_NULL]: (query, column) =>
+          query.orWhereNotNull(column),
         [QueryOperators.EQUAL_TO]: (query, column, value) =>
           query.orWhere(column, "=", value),
         [QueryOperators.LESS_THAN]: (query, column, value) =>
@@ -45,9 +63,9 @@ export class RDBMSDataApiService extends BaseDataAccessService<Knex.QueryBuilder
         [QueryOperators.CONTAINS]: (query, column, value) =>
           query.orWhereILike(column, `%${value}%`),
         [QueryOperators.IN]: (query, column, value) =>
-          query.orWhereIn(column, value as string[]),
+          query.orWhereIn(column, makeArray(value)),
         [QueryOperators.NOT_IN]: (query, column, value) =>
-          query.orWhereNotIn(column, value as string[]),
+          query.orWhereNotIn(column, makeArray(value)),
         [QueryOperators.NOT_EQUAL]: (query, column, value) =>
           query.orWhereNot(column, "=", value),
         [QueryOperators.BETWEEN]: (query, column, value) =>
@@ -107,6 +125,10 @@ export class RDBMSDataApiService extends BaseDataAccessService<Knex.QueryBuilder
           queryFilter.operator === "and"
             ? query.where(builderQuery)
             : query.orWhere(builderQuery);
+
+        if (queryFilter.modifyQuery) {
+          query = queryFilter.modifyQuery(query);
+        }
       }
     });
     return query;
@@ -166,13 +188,14 @@ export class RDBMSDataApiService extends BaseDataAccessService<Knex.QueryBuilder
   async read<T>(
     entity: string,
     select: string[],
-    query: Record<string, unknown>
+    queryFilter: QueryFilterSchema
   ): Promise<T> {
-    return await (await RDBMSDataApiService.getInstance())
-      .table(entity)
-      .select(select)
-      .where(query)
-      .first();
+    const query = this.transformQueryFilterSchema(
+      (await RDBMSDataApiService.getInstance()).table(entity).select(select),
+      queryFilter
+    );
+
+    return await query.first();
   }
 
   async create(
@@ -188,16 +211,24 @@ export class RDBMSDataApiService extends BaseDataAccessService<Knex.QueryBuilder
 
   async update(
     entity: string,
-    query: Record<string, unknown>,
+    queryFilter: QueryFilterSchema,
     data: Record<string, unknown>
   ): Promise<void> {
-    await (await RDBMSDataApiService.getInstance())(entity)
-      .where(query)
-      .update(data);
+    await this.transformQueryFilterSchema(
+      (
+        await RDBMSDataApiService.getInstance()
+      )(entity),
+      queryFilter
+    ).update(data);
   }
 
-  async delete(entity: string, query: Record<string, unknown>): Promise<void> {
-    await (await RDBMSDataApiService.getInstance())(entity).where(query).del();
+  async delete(entity: string, queryFilter: QueryFilterSchema): Promise<void> {
+    await this.transformQueryFilterSchema(
+      (
+        await RDBMSDataApiService.getInstance()
+      )(entity),
+      queryFilter
+    ).del();
   }
 
   async runQuery(sql: string) {
@@ -210,6 +241,24 @@ export class RDBMSDataApiService extends BaseDataAccessService<Knex.QueryBuilder
     return DATA_SOURCES_CONFIG[dbCredentials.dataSourceType].getQueryData(
       driverResponse
     );
+  }
+
+  whereEqualQueryFilterSchema(
+    column: string,
+    value: string
+  ): QueryFilterSchema {
+    return {
+      operator: "and",
+      children: [
+        {
+          id: column,
+          value: {
+            operator: FilterOperators.EQUAL_TO,
+            value,
+          },
+        },
+      ],
+    };
   }
 }
 

@@ -1,8 +1,11 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import styled from "styled-components";
 import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
 import { Stack } from "frontend/design-system/primitives/Stack";
 import { Typo } from "frontend/design-system/primitives/Typo";
+import { typescriptSafeObjectDotEntries } from "shared/lib/objects";
+import { MessageDescriptor } from "@lingui/core";
+import { useLingui } from "@lingui/react";
 
 type Sizes = "sm" | "md";
 
@@ -10,7 +13,7 @@ export interface IProps {
   value: boolean;
   onChange: (value: boolean) => void;
   size?: Sizes;
-  label?: string;
+  label?: MessageDescriptor;
   name: string;
   disabled?: boolean;
 }
@@ -54,7 +57,7 @@ const SIZES_CONFIG: Record<Sizes, ISizeConfig> = {
 
 const Root = styled.label<{ size: Sizes }>`
   position: relative;
-  display: inline-block;
+  display: block;
   margin-bottom: ${(props) => SIZES_CONFIG[props.size].marginBottom}px;
 `;
 
@@ -113,8 +116,12 @@ export function FormSwitch(props: IProps) {
     ...rest
   } = props;
   const ariaProps = Object.fromEntries(
-    Object.entries(rest).filter(([key]) => key.startsWith("aria-"))
+    typescriptSafeObjectDotEntries(rest as Record<string, string>).filter(
+      ([key]) => String(key).startsWith("aria-")
+    )
   );
+
+  const { _ } = useLingui();
 
   useEffect(() => {
     if (value === undefined) {
@@ -124,7 +131,7 @@ export function FormSwitch(props: IProps) {
 
   return (
     <Root htmlFor={name} size={size}>
-      <Stack spacing={SIZES_CONFIG[size].labelSpacing} align="center">
+      <Stack $spacing={SIZES_CONFIG[size].labelSpacing} $align="center">
         <Input
           id={name}
           type="checkbox"
@@ -140,10 +147,10 @@ export function FormSwitch(props: IProps) {
         {label ? (
           <div style={{ cursor: "pointer" }}>
             <Typo.Raw
-              color={disabled ? "muted" : undefined}
+              $color={disabled ? "muted" : undefined}
               size={SIZES_CONFIG[size].fontSize}
             >
-              {label}
+              {_(label)}
             </Typo.Raw>
           </div>
         ) : (

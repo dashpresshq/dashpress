@@ -1,12 +1,16 @@
 import ReactPaginate from "react-paginate";
-import React from "react";
+
 import styled from "styled-components";
 import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
 import { Stack } from "frontend/design-system/primitives/Stack";
 import { Typo } from "frontend/design-system/primitives/Typo";
+import { Trans } from "@lingui/macro";
+import { ChevronLeft, ChevronRight } from "react-feather";
+import { i18nNoop } from "translations/fake";
 import { SimpleSelect } from "../Form/FormSelect/Simple";
+import { TABLE_PAGE_SIZES } from "./constants";
 
-const StyledPagination = styled.div`
+const Pagination = styled.div`
   .pagination {
     display: flex;
     padding-left: 0;
@@ -15,18 +19,25 @@ const StyledPagination = styled.div`
 
   .page-link {
     padding: 0.25rem 0.5rem;
-    margin-left: 4px;
-    font-size: 0.71rem;
+    margin-left: 6px;
+    font-size: 0.8rem;
     border-radius: 4px;
-    line-height: 1.8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
     color: ${USE_ROOT_COLOR("primary-color")};
     border: 1px solid ${USE_ROOT_COLOR("primary-color")};
+
+    &:hover {
+      color: ${USE_ROOT_COLOR("text-on-primary")};
+      background-color: ${USE_ROOT_COLOR("primary-color")};
+      border-color: ${USE_ROOT_COLOR("primary-color")};
+    }
   }
 
   .page-item.active {
     .page-link {
-      z-index: 3;
       color: ${USE_ROOT_COLOR("text-on-primary")};
       background-color: ${USE_ROOT_COLOR("primary-color")};
       border-color: ${USE_ROOT_COLOR("primary-color")};
@@ -40,6 +51,10 @@ const StyledPagination = styled.div`
       border-color: ${USE_ROOT_COLOR("border-color")};
     }
   }
+`;
+
+const DirectionIcon = styled.i`
+  height: 20px;
 `;
 
 const Root = styled.div`
@@ -56,8 +71,6 @@ interface IProps {
   totalPageCount: number;
 }
 
-const PAGE_SIZES = [10, 25, 50, 100];
-
 export function TablePagination({
   setPageSize,
   gotoPage,
@@ -71,24 +84,27 @@ export function TablePagination({
   }
   return (
     <Root>
-      <Stack justify="space-between" align="center">
+      <Stack $justify="space-between" $align="center">
         <Typo.MD>
-          Showing{" "}
-          <SimpleSelect
-            options={PAGE_SIZES.map((option) => ({
-              value: `${option}`,
-              label: `${option}`,
-            }))}
-            onChange={(value) => setPageSize(Number(value))}
-            value={pageSize}
-          />{" "}
-          entries of <b>{Intl.NumberFormat("en-US").format(totalRecords)}</b>{" "}
-          results
+          <Trans>
+            Showing{" "}
+            <SimpleSelect
+              width={55}
+              options={TABLE_PAGE_SIZES.map((option) => ({
+                value: `${option}`,
+                label: i18nNoop(option),
+              }))}
+              onChange={(value) => setPageSize(Number(value))}
+              value={pageSize}
+            />{" "}
+            entries of <b>{Intl.NumberFormat("en-US").format(totalRecords)}</b>{" "}
+            results
+          </Trans>
         </Typo.MD>
-        <StyledPagination>
+        <Pagination>
           <ReactPaginate
-            previousLabel="prev"
-            nextLabel="next"
+            previousLabel={<DirectionIcon as={ChevronLeft} size={16} />}
+            nextLabel={<DirectionIcon as={ChevronRight} size={16} />}
             breakLabel="..."
             pageCount={totalPageCount}
             renderOnZeroPageCount={() => null}
@@ -109,7 +125,7 @@ export function TablePagination({
               gotoPage(selected);
             }}
           />
-        </StyledPagination>
+        </Pagination>
       </Stack>
     </Root>
   );

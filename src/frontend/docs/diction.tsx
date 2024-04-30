@@ -1,8 +1,8 @@
-import { DocumentationRoot, IDocumentationRootProps } from "./_base";
+import { DocumentationRoot } from "./_base";
 
-export function DictionDocumentation(props: IDocumentationRootProps) {
+export function DictionDocumentation() {
   return (
-    <DocumentationRoot {...props}>
+    <DocumentationRoot>
       <p>
         Say an entity is labeled <code>faqs</code> in the database and shows as{" "}
         <code>Faqs</code> in the UI but you want it to be labeled{" "}

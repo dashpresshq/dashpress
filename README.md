@@ -1,6 +1,6 @@
 <h1 align="center">
   <a href="https://github.com/dashpresshq/dashpress">
-    <img src="https://dashpress.io/assets/logos/full-logo-white.png" alt="Logo" height="100">
+    <img src="https://dashpress.io/assets/banner/1.png" alt="Logo" >
   </a>
 </h1>
 
@@ -115,30 +115,39 @@ If you prefer to use Docker, Check the `Dockerfile.example` file in the root fol
 
 
 ## Features
- - One line installation 
- - Authentication
- - Role and Permissions
- - Users management
- - Dashboard builder 
+ - Unlimited Users
+ - Unlimited Roles
+ - One Command Installation
+ - Actions Integrations
+ - Dashboard Builder
  - CRUD
- - Form validation
- - Powerful form manipulation (hiding fields, disabling fields, editing values before submitting)
- - Relationships
- - Powerful Filters
+ - Self Hosted
+ - Form Validations
+ - Form Logic
+ - Breadcrumbs
+ - Rich Text Editor
+ - Tab Views
  - DB Introspection
- - Color Customization
- - Rich text editor
- - Deep navigation
- - Reusable Queries
- - Views
- - Data Count
- - Synced DB Validation
- - Fields selection/ordering
- - Cache
+ - Fields Customisation
+ - Secure Authentication
+ - Synced DB Validations
  - Secure Credentials Storage
- - Forms fields customization
- - Selection Colors
-
+ - Light And Dark Mode
+ - Intelligent Filters
+ - Brand Colors
+ - Intelligent Data Relationships
+ - Menu Builder
+ - Themes
+ - Personalized Table
+ - Bookmarks
+ - 2FA
+ - Multiple Dashboards
+ - Data Export
+ - Charts
+ - Bulk Actions
+ - Fine-Grained Crud Permissions
+ - Change History
+ - Sensitive Fields
 
 ## Roadmap
 
@@ -173,30 +182,12 @@ First off, thanks for taking the time to contribute! Contributions are what make
 
 Please read [our contribution guidelines](docs/CONTRIBUTING.md), and thank you for being involved!
 
-## Authors & contributors
-
-The original setup of this repository is by [Ayobami Akingbade](https://github.com/thrownullexception).
-
-For a full list of all authors and contributors, see [the contributors page](https://github.com/dashpresshq/dashpress/contributors).
-
 ## Security
 
 DashPress takes security at heart and follows all known good practices of security, but 100% security cannot be assured.
 DashPress is provided **"as is"** without any **warranty**.
 
 _For more information and to report security issues, please refer to our [security documentation](docs/SECURITY.md)._
-
-## Built With
-- [KnexJS](https://github.com/knex/knex)
-- [React](https://github.com/facebook/react)
-- [NextJS](https://github.com/vercel/next.js)
-- [Typescript](https://github.com/microsoft/TypeScript)
-- [React Query](https://github.com/TanStack/query)
-- [React Table](https://github.com/TanStack/table)
-- [React Final Form](https://github.com/final-form/react-final-form)
-- [Styled-components](https://github.com/styled-components/styled-components)
-- [Class Validator](https://github.com/typestack/class-validator)
-- [Zustand](https://github.com/pmndrs/zustand) 
 
 ## License
 

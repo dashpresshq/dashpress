@@ -1,9 +1,11 @@
-import React, { useState, useEffect, ReactNode } from "react";
+import { useState, useEffect, ReactNode } from "react";
 import styled, { css } from "styled-components";
 import RBTab from "react-bootstrap/Tab";
 import RBTabs from "react-bootstrap/Tabs";
 import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
-import { SLUG_LOADING_VALUE } from "frontend/lib/routing/constants";
+import { sluggify } from "shared/lib/strings";
+import { MessageDescriptor } from "@lingui/core";
+import { useLingui } from "@lingui/react";
 
 const Root = styled.div<{ $padContent: boolean }>`
   .nav {
@@ -59,8 +61,8 @@ const Root = styled.div<{ $padContent: boolean }>`
 
 export interface IProps {
   contents: {
-    label: string;
-    overrideLabel?: string;
+    label: MessageDescriptor;
+    id: string;
     disabled?: boolean;
     content: ReactNode;
   }[];
@@ -77,25 +79,31 @@ export function Tabs({
   lazy,
   padContent = true,
 }: IProps) {
-  const [activeTab, setActiveTab] = useState<string>(
-    currentTab || contents[0].label
+  const { _ } = useLingui();
+
+  const [activeTab, setActiveTab$1] = useState<string>(
+    sluggify(currentTab || _(contents[0].id))
   );
 
+  const setActiveTab = (id: string) => {
+    setActiveTab$1(id);
+  };
+
   useEffect(() => {
-    if (currentTab && currentTab !== SLUG_LOADING_VALUE) {
+    if (currentTab) {
       setActiveTab(currentTab);
     } else {
-      setActiveTab(contents[0].label);
+      setActiveTab(_(contents[0].id));
     }
-  }, [currentTab, JSON.stringify(contents.map((content) => content.label))]);
+  }, [currentTab, JSON.stringify(contents.map((content) => content.id))]);
 
-  const changeTab = (tabLabel: string | null) => {
-    if (!tabLabel) {
+  const changeTab = (tabId: string | null) => {
+    if (!tabId) {
       return;
     }
-    if (activeTab !== tabLabel) {
-      setActiveTab(tabLabel);
-      onChange?.(tabLabel);
+    if (activeTab !== tabId) {
+      setActiveTab(tabId);
+      onChange?.(tabId);
     }
   };
 
@@ -107,11 +115,11 @@ export function Tabs({
         onSelect={changeTab}
         mountOnEnter={lazy}
       >
-        {contents.map(({ label, overrideLabel, disabled, content }) => (
+        {contents.map(({ label, id, disabled, content }) => (
           <RBTab
-            eventKey={label}
-            key={label}
-            title={overrideLabel || label}
+            eventKey={id}
+            key={id}
+            title={_(label)}
             tabClassName={disabled ? "disabled" : ""}
           >
             {content}

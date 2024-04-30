@@ -1,4 +1,5 @@
 import { createConfigDomainPersistenceService } from "backend/lib/config-persistence";
+import { typescriptSafeObjectDotEntries } from "shared/lib/objects";
 
 const TEST_APP_CONFIG: Partial<Record<string, unknown>> = {
   disabled_entities: ["disabled-entity-1", "disabled-entity-2"],
@@ -7,7 +8,6 @@ const TEST_APP_CONFIG: Partial<Record<string, unknown>> = {
     plural: "Base Model Plural",
   },
   system_settings: {
-    forceIntrospection: false,
     tokenValidityDurationInDays: 1,
   },
 };
@@ -20,7 +20,10 @@ export const setupAppConfigTestData = async (
 
   await configPersistenceService.resetToEmpty();
 
-  const configAsArray = Object.entries({ ...TEST_APP_CONFIG, ...appConfig });
+  const configAsArray = typescriptSafeObjectDotEntries({
+    ...TEST_APP_CONFIG,
+    ...appConfig,
+  });
 
   for (const [key, value] of configAsArray) {
     await configPersistenceService.upsertItem(key, value);

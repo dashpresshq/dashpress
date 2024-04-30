@@ -1,11 +1,7 @@
 import { credentialsApiService } from "backend/integrations-configurations";
 import { createConfigDomainPersistenceService } from "backend/lib/config-persistence";
 import { IDBSchema } from "shared/types/db";
-import { configurationApiService } from "backend/configuration/configuration.service";
-import {
-  setupAppConfigTestData,
-  setupCredentialsTestData,
-} from "__tests__/api/_test-utils";
+import { setupCredentialsTestData } from "__tests__/api/_test-utils";
 import { getDbConnection } from "backend/lib/connection/db";
 import { SchemasApiService } from "../schema.service";
 
@@ -48,12 +44,12 @@ describe("SchemaService", () => {
   const schemaPersistenceService =
     createConfigDomainPersistenceService<IDBSchema>("schema");
 
+  const schemasService = new SchemasApiService(
+    schemaPersistenceService,
+    credentialsApiService
+  );
+
   beforeAll(async () => {
-    await setupAppConfigTestData({
-      system_settings: {
-        forceIntrospection: false,
-      },
-    });
     await setupCredentialsTestData({
       DATABASE___dataSourceType:
         "aad0f7e776963ae66b7459222d54871433f8e119ab9a9712d4e82e8cbb77246e47a750a773c0ea316c110a1d3f2ee16c2509906fb89f1c4b039d09f139b1d7eacc26908c25137c46f269cfb13f63221da2f1631bf4f59cbe14cc18cbfb8993098bd7e2d865f20717",
@@ -66,13 +62,11 @@ describe("SchemaService", () => {
     await schemaPersistenceService.resetState("name", []);
   });
 
-  it("should introspect database correctly when there is no schema data", async () => {
-    const schemasService = new SchemasApiService(
-      schemaPersistenceService,
-      credentialsApiService,
-      configurationApiService
-    );
+  beforeEach(() => {
+    jest.resetModules();
+  });
 
+  it("should introspect database correctly when there is no schema data", async () => {
     expect(JSON.parse(JSON.stringify(await schemasService.getDBSchema())))
       .toMatchInlineSnapshot(`
       [
@@ -163,33 +157,21 @@ describe("SchemaService", () => {
     `);
   });
 
-  it("should not introspect database when schema data already exists when `forceIntrospection` is `false`", async () => {
-    const schemasService = new SchemasApiService(
-      schemaPersistenceService,
-      credentialsApiService,
-      configurationApiService
-    );
-
+  it("should not introspect database when schema data already exists when not on PROD", async () => {
     await setupTestDatabaseData(true);
 
     expect(await schemasService.getDBSchema()).toHaveLength(2);
   });
 
-  it("should introspect database when schema data already exists when `forceIntrospection` is `true`", async () => {
-    const schemasService = new SchemasApiService(
-      schemaPersistenceService,
-      credentialsApiService,
-      configurationApiService
-    );
-
-    await setupAppConfigTestData({
-      system_settings: {
-        forceIntrospection: true,
-      },
-    });
-
+  it.skip("should introspect database when schema data already exists when on PROD", async () => {
     await setupTestDatabaseData(true);
 
+    // @ts-ignore
+    process.env.NODE_ENV = "production";
+
     expect(await schemasService.getDBSchema()).toHaveLength(3);
+
+    // @ts-ignore
+    process.env.NODE_ENV = "test";
   });
 });

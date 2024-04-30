@@ -1,8 +1,8 @@
-import { DocumentationRoot, IDocumentationRootProps } from "./_base";
+import { DocumentationRoot } from "./_base";
 
-export function FieldsSettingsDocumentation(props: IDocumentationRootProps) {
+export function FieldsSettingsDocumentation() {
   return (
-    <DocumentationRoot {...props}>
+    <DocumentationRoot>
       <p>
         You will be able to make field-level customizations on the tables,
         details, create, and edit views. We have three tabs here, so let&apos;s

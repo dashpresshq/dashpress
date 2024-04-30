@@ -1,49 +1,54 @@
-import React from "react";
-import { Icon, Loader } from "react-feather";
+import { Loader } from "react-feather";
 import styled from "styled-components";
 import { Stack } from "frontend/design-system/primitives/Stack";
 import { useThemeColorShade } from "frontend/design-system/theme/useTheme";
 import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
-import {
-  StyledOutlineButton,
-  IStyledBaseButton,
-  StyledBaseButton,
-} from "../Button";
+import { SystemIconsKeys } from "shared/constants/Icons";
+import { SystemIcon } from "frontend/design-system/Icons/System";
+import React from "react";
+import { MessageDescriptor } from "@lingui/core";
+import { useLingui } from "@lingui/react";
+import { OutlineButton, IStyledBaseButton, StyledBaseButton } from "../Button";
 import { Spin } from "../../_/Spin";
-import { ICON_MAP, ButtonIconTypes } from "../constants";
 
 interface IFormButton extends IStyledBaseButton {
-  text: (isMakingRequest: boolean) => string;
-  icon: ButtonIconTypes | "no-icon";
+  text: (isMakingRequest: boolean) => MessageDescriptor;
+  systemIcon: SystemIconsKeys;
   isMakingRequest: boolean;
   onClick?: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
   disabled?: boolean;
   isInverse?: boolean;
 }
 
-export const actionButtonIsMakingRequest = (
-  isMakingRequest: boolean,
-  text: (isMakingRequest: boolean) => string,
-  IconCmp: Icon | null
-) => {
+export function ActionButtonIsMakingRequest({
+  isMakingRequest,
+  systemIcon,
+  text,
+}: {
+  isMakingRequest: boolean;
+  text: (isMakingRequest: boolean) => MessageDescriptor;
+  systemIcon: SystemIconsKeys;
+}) {
+  const { _ } = useLingui();
   const iconProps = {
-    size: 14,
-    style: {
-      marginRight: "4px",
-    },
+    size: 16,
   };
   return isMakingRequest ? (
-    <>
+    <Stack $align="center" $justify="center" $width="auto">
       <Spin as={Loader} {...iconProps} />
-      <span>{text(true)}</span>
-    </>
+      <span>{_(text(true))}</span>
+    </Stack>
   ) : (
-    <>
-      {IconCmp ? <IconCmp {...iconProps} /> : null}
-      <span>{text(false)}</span>
-    </>
+    <Stack $align="center" $justify="center" $width="auto">
+      <SystemIcon
+        icon={systemIcon}
+        {...iconProps}
+        style={{ verticalAlign: "top" }}
+      />
+      <span>{_(text(false))}</span>
+    </Stack>
   );
-};
+}
 
 export const StyledButton = styled(StyledBaseButton)<{ $hoverColor: string }>`
   color: ${USE_ROOT_COLOR("text-on-primary")};
@@ -64,7 +69,7 @@ export function FormButton({
   onClick,
   isInverse,
   size,
-  icon,
+  systemIcon,
   ...rest
 }: IFormButton) {
   const colorShade = useThemeColorShade();
@@ -78,14 +83,18 @@ export function FormButton({
     size,
   };
 
-  const IconCmp = icon === "no-icon" ? null : ICON_MAP[icon];
-
-  const toRender = actionButtonIsMakingRequest(isMakingRequest, text, IconCmp);
+  const toRender = (
+    <ActionButtonIsMakingRequest
+      isMakingRequest={isMakingRequest}
+      text={text}
+      systemIcon={systemIcon}
+    />
+  );
 
   return (
-    <Stack justify="end">
+    <Stack $justify="end">
       {isInverse ? (
-        <StyledOutlineButton {...options}>{toRender}</StyledOutlineButton>
+        <OutlineButton {...options}>{toRender}</OutlineButton>
       ) : (
         <StyledButton
           {...options}

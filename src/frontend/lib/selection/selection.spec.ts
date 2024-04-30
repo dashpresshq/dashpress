@@ -28,6 +28,22 @@ describe("useStringSelections", () => {
       ]);
     });
 
+    it("should select multiple", async () => {
+      const { result, rerender } = renderHook(() => useStringSelections(""));
+
+      result.current.setMultiple(["foo", "bar"]);
+
+      rerender();
+
+      expect(result.current.allSelections).toEqual(["foo", "bar"]);
+
+      result.current.setMultiple(["baz", "quz", "foo"]);
+
+      rerender();
+
+      expect(result.current.allSelections).toEqual(["baz", "quz", "foo"]);
+    });
+
     it("should deSelectMutiple multiple", async () => {
       const { result, rerender } = renderHook(() => useStringSelections(""));
 

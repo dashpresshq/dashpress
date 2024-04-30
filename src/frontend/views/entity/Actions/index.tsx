@@ -1,51 +1,46 @@
 import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
-import { USER_PERMISSIONS } from "shared/constants/user";
+import { UserPermissions } from "shared/constants/user";
 import { useEntitySlug } from "frontend/hooks/entity/entity.config";
 import { FormIntegrationsDocumentation } from "frontend/docs/form-integrations";
-import { DOCUMENTATION_LABEL } from "frontend/docs";
-import { useState } from "react";
 import { SectionBox } from "frontend/design-system/components/Section/SectionBox";
+import { useDocumentationActionButton } from "frontend/docs/constants";
+import { msg } from "@lingui/macro";
 import { BaseEntitySettingsLayout } from "../_Base";
 import { ENTITY_CONFIGURATION_VIEW } from "../constants";
-import { BaseActionInstances } from "./Base";
-import { ADMIN_ACTION_INSTANCES_CRUD_CONFIG } from "./constants";
-
-const DOCS_TITLE = ADMIN_ACTION_INSTANCES_CRUD_CONFIG.TEXT_LANG.TITLE;
+import { FormActions } from "./Base";
+import { FORM_ACTION_CRUD_CONFIG } from "./constants";
 
 export function EntityFormActionsSettings() {
   const entity = useEntitySlug();
-  const [isDocOpen, setIsDocOpen] = useState(false);
 
   useSetPageDetails({
-    pageTitle: ADMIN_ACTION_INSTANCES_CRUD_CONFIG.TEXT_LANG.TITLE,
+    pageTitle: FORM_ACTION_CRUD_CONFIG.TEXT_LANG.TITLE,
     viewKey: ENTITY_CONFIGURATION_VIEW,
-    permission: USER_PERMISSIONS.CAN_CONFIGURE_APP,
+    permission: UserPermissions.CAN_CONFIGURE_APP,
   });
+
+  const documentationActionButton = useDocumentationActionButton(
+    FORM_ACTION_CRUD_CONFIG.TEXT_LANG.TITLE
+  );
+
   return (
     <BaseEntitySettingsLayout>
       <SectionBox
-        title={ADMIN_ACTION_INSTANCES_CRUD_CONFIG.TEXT_LANG.TITLE}
-        iconButtons={[
+        title={FORM_ACTION_CRUD_CONFIG.TEXT_LANG.TITLE}
+        actionButtons={[
           {
+            id: "manage",
             action: NAVIGATION_LINKS.SETTINGS.VARIABLES,
-            icon: "settings",
-            label: "Manage Variables",
+            systemIcon: "Settings",
+            label: msg`Manage Variables`,
           },
-          {
-            action: () => setIsDocOpen(true),
-            icon: "help",
-            label: DOCUMENTATION_LABEL.CONCEPT(DOCS_TITLE),
-          },
+          documentationActionButton,
         ]}
       >
-        <BaseActionInstances id={entity} type="entity" />
+        <FormActions entity={entity} />
       </SectionBox>
-      <FormIntegrationsDocumentation
-        title={DOCS_TITLE}
-        close={setIsDocOpen}
-        isOpen={isDocOpen}
-      />
+      <FormIntegrationsDocumentation />
     </BaseEntitySettingsLayout>
   );
 }

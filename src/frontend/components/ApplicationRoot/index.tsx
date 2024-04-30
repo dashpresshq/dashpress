@@ -1,15 +1,27 @@
-import React, { ReactNode } from "react";
+import { ReactNode } from "react";
 import { Toaster } from "react-hot-toast";
 import { QueryProvider } from "frontend/lib/data/QueryClient";
 import { ThemeContextProvider } from "frontend/design-system/theme/Context";
 import { GlobalStyles } from "frontend/design-system/globals";
+import { LinguiProvider } from "translations/utils";
+import { Messages } from "@lingui/core";
+import { ConfirmAlert } from "frontend/design-system/components/ConfirmAlert";
 
-export function ApplicationRoot({ children }: { children: ReactNode }) {
+export function ApplicationRoot({
+  children,
+  translation,
+}: {
+  children: ReactNode;
+  translation?: Messages;
+}) {
   return (
-    <QueryProvider>
-      <Toaster />
-      <GlobalStyles />
-      <ThemeContextProvider>{children}</ThemeContextProvider>
-    </QueryProvider>
+    <LinguiProvider translation={translation}>
+      <QueryProvider>
+        <Toaster />
+        <GlobalStyles />
+        <ThemeContextProvider>{children}</ThemeContextProvider>
+        <ConfirmAlert />
+      </QueryProvider>
+    </LinguiProvider>
   );
 }

@@ -10,14 +10,14 @@ export const isAuthenticatedValidationImpl: ValidationImplType<void> = async (
   protectedRoute: boolean
 ) => {
   try {
-    const reqHeaders = req.headers.authorization;
-    if (!reqHeaders) {
+    const authHeader = req.headers.authorization;
+    if (!authHeader) {
       throw new UnauthorizedError(
         "No authorization token provided",
         NO_AUTH_ERROR_CODE
       );
     }
-    const authToken = reqHeaders.slice(7);
+    const authToken = authHeader.slice(7);
     if (!authToken) {
       throw new UnauthorizedError(
         "The authorization token provided is empty",

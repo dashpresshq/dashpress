@@ -1,26 +1,69 @@
 import { useNavigationStack } from "frontend/lib/routing/useNavigationStack";
 import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
-import { USER_PERMISSIONS } from "shared/constants/user";
-import { useState } from "react";
-import { DOCUMENTATION_LABEL } from "frontend/docs";
-import { SystemProfileDocumentation } from "frontend/docs/system-profile";
+import { UserPermissions } from "shared/constants/user";
 import { ContentLayout } from "frontend/design-system/components/Section/SectionDivider";
 import { SectionBox } from "frontend/design-system/components/Section/SectionBox";
 import { AppLayout } from "frontend/_layouts/app";
+import { SchemaForm } from "frontend/components/SchemaForm";
+import { ICreateUserForm } from "shared/form-schemas/users";
+import { IAppliedSchemaFormConfig } from "shared/form-schemas/types";
+import { msg } from "@lingui/macro";
 import { ADMIN_USERS_CRUD_CONFIG, useCreateUserMutation } from "../users.store";
-import { CreateUserForm } from "./Form";
 
-const DOCS_TITLE = "System Profile";
+export const CREATE_USER_FORM_SCHEMA: IAppliedSchemaFormConfig<ICreateUserForm> =
+  {
+    username: {
+      type: "text",
+      label: msg`Username`,
+      validations: [
+        {
+          validationType: "required",
+        },
+        {
+          validationType: "alphanumeric",
+        },
+      ],
+    },
+    name: {
+      type: "text",
+      label: msg`Name`,
+      validations: [
+        {
+          validationType: "required",
+        },
+      ],
+    },
+    password: {
+      label: msg`Password`,
+      type: "password",
+      validations: [
+        {
+          validationType: "required",
+        },
+      ],
+    },
+    role: {
+      label: msg`Role`,
+      type: "selection",
+      apiSelections: {
+        listUrl: "/api/roles",
+      },
+      validations: [
+        {
+          validationType: "required",
+        },
+      ],
+    },
+  };
 
 export function UserCreate() {
   const userCreationMutation = useCreateUserMutation();
   const { backLink } = useNavigationStack();
-  const [isDocOpen, setIsDocOpen] = useState(false);
 
   useSetPageDetails({
     pageTitle: ADMIN_USERS_CRUD_CONFIG.TEXT_LANG.CREATE,
-    viewKey: ADMIN_USERS_CRUD_CONFIG.TEXT_LANG.CREATE,
-    permission: USER_PERMISSIONS.CAN_MANAGE_USERS,
+    viewKey: `create-users`,
+    permission: UserPermissions.CAN_MANAGE_USERS,
   });
 
   return (
@@ -29,26 +72,16 @@ export function UserCreate() {
         <SectionBox
           title={ADMIN_USERS_CRUD_CONFIG.TEXT_LANG.CREATE}
           backLink={backLink}
-          iconButtons={[
-            {
-              action: () => setIsDocOpen(true),
-              icon: "help",
-              label: DOCUMENTATION_LABEL.CONCEPT(DOCS_TITLE),
-            },
-          ]}
         >
-          <CreateUserForm
-            onSubmit={async (user) => {
-              await userCreationMutation.mutateAsync(user);
-            }}
+          <SchemaForm<ICreateUserForm>
+            onSubmit={userCreationMutation.mutateAsync}
+            buttonText={ADMIN_USERS_CRUD_CONFIG.FORM_LANG.CREATE}
+            fields={CREATE_USER_FORM_SCHEMA}
+            systemIcon="Plus"
+            resetForm
           />
         </SectionBox>
       </ContentLayout.Center>
-      <SystemProfileDocumentation
-        title={DOCS_TITLE}
-        close={setIsDocOpen}
-        isOpen={isDocOpen}
-      />
     </AppLayout>
   );
 }

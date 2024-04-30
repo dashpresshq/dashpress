@@ -1,20 +1,21 @@
-import React from "react";
 import styled from "styled-components";
 import { sluggify } from "shared/lib/strings";
 import { ISelectData } from "shared/types/options";
-import { StyledOutlineButton } from "../../Button/Button";
+import { useLingui } from "@lingui/react";
+import { OutlineButton } from "../../Button/Button";
 import { IBaseFormSelect } from "../FormSelect/types";
 import { generateFormArias, wrapLabelAndError } from "../_wrapForm";
 
 interface IProps {
   name: string;
   disabled?: boolean;
+  sm?: boolean;
   options: ISelectData[];
   value: string | boolean;
   onChange: (value: string | boolean) => void;
 }
 
-const StyledInput = styled.input`
+const Input = styled.input`
   position: absolute;
   clip: rect(0, 0, 0, 0);
   pointer-events: none;
@@ -41,8 +42,10 @@ function BaseFormSelectButton({
   name,
   value: selectedValue,
   onChange,
+  sm,
   disabled,
 }: IProps) {
+  const { _ } = useLingui();
   return (
     <Root>
       {options.map(({ value, label }, index) => {
@@ -51,16 +54,17 @@ function BaseFormSelectButton({
           (index === 0 && selectedValue === undefined);
 
         return (
-          <StyledOutlineButton
+          <OutlineButton
             type="button"
             role="option"
+            size={sm ? "xs" : undefined}
             aria-selected={isChecked}
             disabled={disabled}
             key={`${value}`}
             className={isChecked ? "active" : ""}
             onClick={() => onChange(value)}
           >
-            <StyledInput
+            <Input
               type="radio"
               name={`${name}__${sluggify(
                 // eslint-disable-next-line no-nested-ternary
@@ -69,8 +73,8 @@ function BaseFormSelectButton({
               readOnly
               checked={isChecked}
             />
-            {label}
-          </StyledOutlineButton>
+            {_(label)}
+          </OutlineButton>
         );
       })}
     </Root>
@@ -82,7 +86,7 @@ interface IFormSelect extends IBaseFormSelect {
 }
 
 export function FormSelectButton(props: IFormSelect) {
-  const { input, selectData, meta, disabled } = props;
+  const { input, selectData, meta, disabled, sm } = props;
 
   return wrapLabelAndError(
     <BaseFormSelectButton
@@ -90,6 +94,7 @@ export function FormSelectButton(props: IFormSelect) {
       {...generateFormArias(meta)}
       name={input.name}
       disabled={disabled}
+      sm={sm}
       options={selectData}
     />,
     props

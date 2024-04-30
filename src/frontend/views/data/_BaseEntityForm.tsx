@@ -4,56 +4,82 @@ import {
 } from "frontend/design-system/components/Skeleton/Form";
 import { SchemaForm } from "frontend/components/SchemaForm";
 import { useEntityConfiguration } from "frontend/hooks/configuration/configuration.store";
-import {
-  useEntityFields,
-  useEntityToOneReferenceFields,
-} from "frontend/hooks/entity/entity.store";
+import { useEntityToOneReferenceFields } from "frontend/hooks/entity/entity.store";
 import {
   useEntityFieldLabels,
   useEntityFieldSelections,
   useProcessedEntityFieldTypes,
   useEntityFieldValidations,
-  useEntityCrudConfig,
+  useEntityCrudFields,
 } from "frontend/hooks/entity/entity.config";
-import { IFormExtension } from "frontend/components/SchemaForm/types";
 import { useMemo } from "react";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
-import { DataStateKeys } from "frontend/lib/data/types";
-import { SLUG_LOADING_VALUE } from "frontend/lib/routing/constants";
+import { DataStateKeys, DataStates } from "frontend/lib/data/types";
+import { SystemIconsKeys } from "shared/constants/Icons";
+import { MessageDescriptor } from "@lingui/core";
 import { buildAppliedSchemaFormConfig } from "./buildAppliedSchemaFormConfig";
-import { useEntityViewStateMachine } from "./useEntityViewStateMachine";
-import { filterOutHiddenScalarColumns } from "./utils";
+import { useEntityViewStateMachine } from "./hooks/useEntityViewStateMachine";
+import { usePortalExtendEntityFormConfig } from "./portal";
+import { useIsEntityFieldMutatable } from "./hooks/useIsEntityFieldMutatable";
 
 type IProps = {
   entity: string;
-  initialValues?: Record<string, unknown>;
-  action: "create" | "update";
-  hiddenColumns: DataStateKeys<string[]>;
-  additionalDataState?: DataStateKeys<unknown>;
+  initialValuesData?: DataStateKeys<Record<string, unknown>>;
+  crudAction: "create" | "update";
   allOptional?: boolean;
-  onSubmit: (data: Record<string, string>) => Promise<void>;
+  onSubmit: (data: Record<string, string>) => Promise<unknown>;
+  resetForm?: true;
+  buttonText: (submitting: boolean) => MessageDescriptor;
+  systemIcon: SystemIconsKeys;
+  fieldsToShow?: string[];
+  from?: string;
+};
+
+export const useEntityFormEditableFields = (
+  entity: string,
+  crudAction: "create" | "update"
+): DataStateKeys<string[]> => {
+  const isEntityFieldMutatable = useIsEntityFieldMutatable(crudAction);
+  const entityCrudFields = useEntityCrudFields(entity, crudAction);
+
+  return {
+    error: entityCrudFields.error,
+    isLoading: entityCrudFields.isLoading,
+    data: entityCrudFields.data
+      .filter(isEntityFieldMutatable)
+      .map(({ name }) => name),
+  };
 };
 
 export function BaseEntityForm({
   entity,
-  initialValues,
-  action,
+  initialValuesData,
+  crudAction,
   allOptional,
-  additionalDataState,
-  hiddenColumns,
+  systemIcon,
+  resetForm,
+  buttonText,
+  from,
   onSubmit,
+  fieldsToShow,
 }: IProps) {
-  const entityCrudConfig = useEntityCrudConfig(entity);
   const entityValidationsMap = useEntityFieldValidations(entity);
-  const entityFields = useEntityFields(entity);
   const getEntityFieldLabels = useEntityFieldLabels(entity);
   const entityFieldTypes = useProcessedEntityFieldTypes(entity);
   const entityFieldSelections = useEntityFieldSelections(entity);
-  const entityFieldTypesMap = useEntityConfiguration<Record<string, string>>(
+  const entityFieldTypesMap = useEntityConfiguration(
     "entity_columns_types",
     entity
   );
-  const entityFormExtension = useEntityConfiguration<IFormExtension>(
+
+  const editableFields = useEntityFormEditableFields(entity, crudAction);
+
+  const extendEntityFormConfig = usePortalExtendEntityFormConfig(
+    entity,
+    crudAction
+  );
+
+  const entityFormExtension = useEntityConfiguration(
     "entity_form_extension",
     entity
   );
@@ -61,34 +87,33 @@ export function BaseEntityForm({
 
   const error =
     entityFieldTypesMap.error ||
-    hiddenColumns.error ||
-    additionalDataState?.error ||
+    initialValuesData?.error ||
+    editableFields?.error ||
     entityFormExtension.error ||
-    entityToOneReferenceFields.error ||
-    entityFields.error;
+    entityToOneReferenceFields.error;
 
   const isLoading =
-    entityFields.isLoading ||
-    hiddenColumns.isLoading ||
     entityToOneReferenceFields.isLoading ||
     entityFormExtension.isLoading ||
-    entity === SLUG_LOADING_VALUE ||
     entityFieldTypesMap.isLoading ||
-    additionalDataState?.isLoading;
+    editableFields.isLoading ||
+    extendEntityFormConfig === "loading" ||
+    initialValuesData?.isLoading;
 
-  const viewState = useEntityViewStateMachine(isLoading, error, action);
-
-  const fields = filterOutHiddenScalarColumns(
-    entityFields.data.filter(({ isId }) => !isId),
-    hiddenColumns.data
-  ).map(({ name }) => name);
+  const viewState = useEntityViewStateMachine({
+    isLoading,
+    error,
+    crudAction,
+    entity,
+  });
 
   const fieldsInitialValues = useMemo(() => {
+    const initialValues = initialValuesData?.data;
     if (!initialValues) {
       return initialValues;
     }
     return Object.fromEntries(
-      fields.map((field) => {
+      editableFields.data.map((field) => {
         let value = initialValues[field];
 
         if (typeof value === "object" && value !== null) {
@@ -98,7 +123,7 @@ export function BaseEntityForm({
         return [field, value];
       })
     );
-  }, [initialValues, hiddenColumns]);
+  }, [initialValuesData, editableFields.data]);
 
   const formSchemaConfig = {
     entityToOneReferenceFields: entityToOneReferenceFields.data,
@@ -106,13 +131,20 @@ export function BaseEntityForm({
     entityFieldTypes,
     entityFieldSelections,
     entityValidationsMap,
-    fields,
+    fields: editableFields.data,
   };
+
+  const formConfig = buildAppliedSchemaFormConfig(formSchemaConfig, {
+    allOptional,
+    fieldsToShow,
+  });
 
   return (
     <ViewStateMachine
-      loading={viewState.type === "loading"}
-      error={viewState.type === "error" ? viewState.message : undefined}
+      loading={viewState.type === DataStates.Loading}
+      error={
+        viewState.type === DataStates.Error ? viewState.message : undefined
+      }
       loader={
         <FormSkeleton
           schema={[
@@ -125,17 +157,18 @@ export function BaseEntityForm({
       }
     >
       <SchemaForm
-        buttonText={
-          action === "create"
-            ? entityCrudConfig.FORM_LANG.CREATE
-            : entityCrudConfig.FORM_LANG.UPDATE
-        }
-        resetForm={action === "create" ? true : undefined}
+        buttonText={buttonText}
+        resetForm={resetForm}
         onSubmit={onSubmit}
-        action={action}
-        icon={action === "create" ? "add" : "save"}
+        action={crudAction}
+        from={from}
+        systemIcon={systemIcon}
         initialValues={fieldsInitialValues}
-        fields={buildAppliedSchemaFormConfig(formSchemaConfig, allOptional)}
+        fields={
+          extendEntityFormConfig === "loading"
+            ? formConfig
+            : extendEntityFormConfig(formConfig)
+        }
         formExtension={entityFormExtension.data}
       />
     </ViewStateMachine>

@@ -5,19 +5,18 @@ import {
 import {
   ENTITY_LIST_PATH,
   ENTITY_REFERENCE_PATH,
-} from "frontend/hooks/data/data.store";
-
+} from "frontend/hooks/data/constants";
 import { IColorableSelection } from "shared/types/ui";
-import { FIELD_TYPES_CONFIG_MAP } from "shared/validations";
-import { IFieldValidationItem } from "shared/validations/types";
+import { FormFieldTypes, IFieldValidationItem } from "shared/validations/types";
 import { userFriendlyCase } from "shared/lib/strings/friendly-case";
+import { msg } from "@lingui/macro";
 
 interface IEntitySchemaFormConfigProps {
   fields: string[];
   entityToOneReferenceFields: Record<string, string>;
   entityFieldSelections: Record<string, IColorableSelection[]>;
   getEntityFieldLabels: (name: string) => string;
-  entityFieldTypes: Record<string, keyof typeof FIELD_TYPES_CONFIG_MAP>;
+  entityFieldTypes: Record<string, FormFieldTypes>;
   entityValidationsMap: Record<string, IFieldValidationItem[]>;
 }
 
@@ -30,35 +29,48 @@ export const buildAppliedSchemaFormConfig = (
     getEntityFieldLabels,
     entityValidationsMap,
   }: IEntitySchemaFormConfigProps,
-  allOptional?: boolean
+  {
+    allOptional,
+    fieldsToShow,
+  }: { allOptional?: boolean; fieldsToShow?: string[] } = {}
 ): IAppliedSchemaFormConfig<any> => {
   return Object.fromEntries(
-    fields.map((field) => {
-      const formConfig: ISchemaFormConfig = {
-        selections: entityFieldSelections[field] || [],
-        apiSelections:
-          entityFieldTypes[field] === "reference"
-            ? {
-                listUrl: ENTITY_LIST_PATH(entityToOneReferenceFields[field]),
-                referenceUrl: (value: string) =>
-                  ENTITY_REFERENCE_PATH(
-                    entityToOneReferenceFields[field],
-                    value
-                  ),
+    fields
+      .filter((field) => {
+        if (!fieldsToShow) {
+          return true;
+        }
+        return fieldsToShow.includes(field);
+      })
+      .map((field) => {
+        const formConfig: ISchemaFormConfig<any> = {
+          selections: entityFieldSelections[field] || [],
+          apiSelections:
+            entityFieldTypes[field] === "reference"
+              ? {
+                  listUrl: ENTITY_LIST_PATH(entityToOneReferenceFields[field]),
+                  entity: entityToOneReferenceFields[field],
+                  referenceUrl: (value: string) =>
+                    ENTITY_REFERENCE_PATH({
+                      entity: entityToOneReferenceFields[field],
+                      entityId: value,
+                    }),
+                }
+              : undefined,
+          type: entityFieldTypes[field],
+          label: getEntityFieldLabels(field)
+            ? msg`${getEntityFieldLabels(field)}`
+            : msg`${userFriendlyCase(field)}`,
+          validations: (entityValidationsMap[field] || []).filter(
+            ({ validationType }) => {
+              if (allOptional) {
+                return validationType !== "required";
               }
-            : undefined,
-        type: entityFieldTypes[field],
-        label: getEntityFieldLabels(field) || userFriendlyCase(field),
-        validations: (entityValidationsMap[field] || []).filter(
-          ({ validationType }) => {
-            if (allOptional) {
-              return validationType !== "required";
+              return true;
             }
-            return true;
-          }
-        ),
-      };
-      return [field, formConfig];
-    })
+          ),
+        };
+        return [field, formConfig];
+      })
   );
 };

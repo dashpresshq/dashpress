@@ -6,8 +6,8 @@ import { Form, Field } from "react-final-form";
 import arrayMutators from "final-form-arrays";
 import { FieldArray } from "react-final-form-arrays";
 import { userFriendlyCase } from "shared/lib/strings/friendly-case";
-import React from "react";
 import {
+  FormFieldTypes,
   IFieldValidationItem,
   ValidationTypes,
 } from "shared/validations/types";
@@ -23,11 +23,15 @@ import { FormInput } from "frontend/design-system/components/Form/FormInput";
 import { FormNumberInput } from "frontend/design-system/components/Form/FormNumberInput";
 import { FormNoValueSelect } from "frontend/design-system/components/Form/FormSelect";
 import { FormButton } from "frontend/design-system/components/Button/FormButton";
+import { DELETE_BUTTON_PROPS } from "frontend/design-system/components/Button/constants";
+import { Fragment } from "react";
+import { msg } from "@lingui/macro";
+import { typescriptSafeObjectDotEntries } from "shared/lib/objects";
 
 interface IProps {
   field: string;
   validations: IFieldValidationItem[];
-  entityType: keyof typeof FIELD_TYPES_CONFIG_MAP;
+  entityType: FormFieldTypes;
   onSubmit: (values: IFieldValidationItem[]) => void;
 }
 
@@ -35,8 +39,8 @@ const CRUD_CONFIG = MAKE_APP_CONFIGURATION_CRUD_CONFIG("entity_validations");
 
 const ERROR_MESSAGE_LENGTH = 128;
 
-// TODO for contributors: Show the actuall error message not the template message
-
+// TODO: for contributors: Show the actuall error message not the template message
+// TODO: make this work with i18n currently shows [object Object]
 export function FieldValidationCanvas({
   field,
   onSubmit,
@@ -72,49 +76,51 @@ export function FieldValidationCanvas({
                     ENTITY_VALIDATION_CONFIG[validationType];
 
                   return (
-                    <React.Fragment key={name}>
+                    <Fragment key={name}>
                       <SectionBox
-                        title={userFriendlyCase(validationType)}
-                        deleteAction={
+                        title={msg`${userFriendlyCase(validationType)}`}
+                        actionButtons={
                           !isBoundToType && !fromSchema
-                            ? {
-                                shouldConfirmAlert: false,
-                                action: () => fields.remove(index),
-                                isMakingDeleteRequest: false,
-                              }
-                            : undefined
+                            ? [
+                                DELETE_BUTTON_PROPS({
+                                  label: msg`Remove`,
+                                  action: () => fields.remove(index),
+                                  isMakingRequest: false,
+                                }),
+                              ]
+                            : []
                         }
                       >
                         {validationInput && (
                           <>
-                            {Object.entries(validationInput).map(
-                              ([inputKey, inputValue]) => (
-                                <Field
-                                  key={inputKey}
-                                  name={`${name}.constraint.${inputKey}`}
-                                  validate={composeValidators(required)}
-                                  validateFields={[]}
-                                >
-                                  {({ meta, input }) =>
-                                    typeof inputValue === "string" ? (
-                                      <FormInput
-                                        required
-                                        label={userFriendlyCase(inputKey)}
-                                        meta={meta}
-                                        input={input}
-                                      />
-                                    ) : (
-                                      <FormNumberInput
-                                        required
-                                        label={userFriendlyCase(inputKey)}
-                                        meta={meta}
-                                        input={input}
-                                      />
-                                    )
-                                  }
-                                </Field>
-                              )
-                            )}
+                            {typescriptSafeObjectDotEntries(
+                              validationInput
+                            ).map(([inputKey, inputValue]) => (
+                              <Field
+                                key={inputKey}
+                                name={`${name}.constraint.${inputKey}`}
+                                validate={composeValidators(required)}
+                                validateFields={[]}
+                              >
+                                {({ meta, input }) =>
+                                  typeof inputValue === "string" ? (
+                                    <FormInput
+                                      required
+                                      label={msg`${userFriendlyCase(inputKey)}`}
+                                      meta={meta}
+                                      input={input}
+                                    />
+                                  ) : (
+                                    <FormNumberInput
+                                      required
+                                      label={msg`${userFriendlyCase(inputKey)}`}
+                                      meta={meta}
+                                      input={input}
+                                    />
+                                  )
+                                }
+                              </Field>
+                            ))}
                           </>
                         )}
                         <Field
@@ -127,7 +133,7 @@ export function FieldValidationCanvas({
                         >
                           {({ meta, input }) => (
                             <FormInput
-                              label="Error message"
+                              label={msg`Error message`}
                               required
                               meta={meta}
                               input={input}
@@ -136,14 +142,14 @@ export function FieldValidationCanvas({
                         </Field>
                       </SectionBox>
                       <Spacer />
-                    </React.Fragment>
+                    </Fragment>
                   );
                 })}
                 <FormNoValueSelect
                   disabledOptions={(
                     values.validations as IFieldValidationItem[]
                   ).map(({ validationType }) => validationType)}
-                  defaultLabel="Add New Validation"
+                  defaultLabel={msg`Add New Validation`}
                   onChange={(validationType: ValidationTypes) => {
                     const validationItem: IFieldValidationItem = {
                       validationType,
@@ -154,7 +160,7 @@ export function FieldValidationCanvas({
                     fields.push(validationItem);
                   }}
                   selectData={allowedValidations.map((validation) => ({
-                    label: validation,
+                    label: ENTITY_VALIDATION_CONFIG[validation].label,
                     value: validation,
                   }))}
                 />
@@ -165,7 +171,7 @@ export function FieldValidationCanvas({
           <FormButton
             isMakingRequest={false}
             text={CRUD_CONFIG.FORM_LANG.UPSERT}
-            icon="save"
+            systemIcon="Save"
             disabled={pristine}
           />
         </form>

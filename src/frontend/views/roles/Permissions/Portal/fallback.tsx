@@ -1,7 +1,12 @@
 import { useEntityDictionPlurals } from "frontend/hooks/entity/entity.queries";
 import { useActiveEntities } from "frontend/hooks/entity/entity.store";
-import { META_USER_PERMISSIONS, USER_PERMISSIONS } from "shared/constants/user";
+import {
+  META_USER_PERMISSIONS,
+  USER_PERMISSIONS_CONFIG,
+  UserPermissions,
+} from "shared/constants/user";
 import { GranularEntityPermissions } from "shared/types/user";
+import { i18nNoop } from "translations/fake";
 import { MutatePermission } from "../MutatePermission";
 
 export function BaseMutateEntitiesPermissions() {
@@ -18,15 +23,19 @@ export function BaseMutateEntitiesPermissions() {
         entity.value,
         GranularEntityPermissions.Show
       ),
-      label: getEntitiesDictionPlurals(entity.value),
+      label: i18nNoop(getEntitiesDictionPlurals(entity.value)),
     })),
   ];
 
   return (
     <MutatePermission
       permissionList={entitiesAsPermissionList}
-      singular="Entity"
-      overAchingPermission={USER_PERMISSIONS.CAN_MANAGE_ALL_ENTITIES}
+      overAchingPermission={{
+        permission: UserPermissions.CAN_MANAGE_ALL_ENTITIES,
+        label:
+          USER_PERMISSIONS_CONFIG[UserPermissions.CAN_MANAGE_ALL_ENTITIES]
+            .label,
+      }}
     />
   );
 }

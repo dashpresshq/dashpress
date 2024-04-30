@@ -2,9 +2,11 @@ import { createStore } from "frontend/lib/store";
 import { useRouter } from "next/router";
 import { useEffect, useMemo } from "react";
 import { TemporayStorageService } from "frontend/lib/storage";
+import { msg } from "@lingui/macro";
+import { useLingui } from "@lingui/react";
 import { usePageDetailsStore } from "./usePageDetails";
 
-const key = "__go_back_context__";
+const key = "__navigation_stack__";
 
 interface INavigationItem {
   link: string;
@@ -55,6 +57,7 @@ const useNavigationHistoryStore = createStore<IStore>((set) => ({
 
 export const useNavigationStack = () => {
   const router = useRouter();
+  const { _ } = useLingui();
 
   const [history, setHistory] = useNavigationHistoryStore((store) => [
     store.history,
@@ -90,7 +93,7 @@ export const useNavigationStack = () => {
           return;
         }
         const newStackEntry = {
-          title: pageTitle,
+          title: _(pageTitle),
           link: pageLink,
           viewKey,
         };
@@ -109,7 +112,7 @@ export const useNavigationStack = () => {
       backLink: canGoBack()
         ? {
             action: goBack,
-            label: "Go Back",
+            label: msg`Go Back`,
           }
         : undefined,
     }),

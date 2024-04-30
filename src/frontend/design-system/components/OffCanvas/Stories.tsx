@@ -1,5 +1,5 @@
 /* eslint-disable react/function-component-definition */
-import React from "react";
+
 import { Story } from "@storybook/react";
 import { useState } from "@storybook/addons";
 import { ApplicationRoot } from "frontend/components/ApplicationRoot";

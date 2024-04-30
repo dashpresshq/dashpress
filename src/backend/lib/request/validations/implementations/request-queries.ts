@@ -17,10 +17,7 @@ export const requestQueriesValidationImpl: ValidationImplType<
   return Object.fromEntries(
     (requestOption as string[]).map((key) => {
       const value = req.query[key];
-      if (Array.isArray(value)) {
-        return [key, value[0]];
-      }
-      return [key, value];
+      return [key, value as string];
     })
   );
 };

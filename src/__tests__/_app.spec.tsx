@@ -1,8 +1,7 @@
-import "@testing-library/jest-dom";
-import React from "react";
 import { render, screen } from "@testing-library/react";
 
 import MyApp from "pages/_app";
+import { USE_ROUTER_PARAMS } from "./_/constants";
 
 describe("pages/users", () => {
   const useRouter = jest.spyOn(require("next/router"), "useRouter");
@@ -12,9 +11,8 @@ describe("pages/users", () => {
   }
 
   it("should render components", async () => {
-    useRouter.mockImplementation(() => ({
-      asPath: "/",
-    }));
+    useRouter.mockImplementation(USE_ROUTER_PARAMS({}));
+
     // eslint-disable-next-line react/jsx-no-bind
     render(<MyApp Component={Foo} pageProps={{ title: "Hello" }} />);
 

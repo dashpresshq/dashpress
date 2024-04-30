@@ -1,5 +1,3 @@
-import "@testing-library/jest-dom";
-import React from "react";
 import { render, screen } from "@testing-library/react";
 import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 
@@ -7,6 +5,8 @@ import CreateDashboardWidget from "pages/dashboard/[dashboardId]/widget/create";
 
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 import userEvent from "@testing-library/user-event";
+import { closeAllToasts } from "__tests__/_/utils/closeAllToasts";
+import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
 
 setupApiHandlers();
 
@@ -20,12 +20,13 @@ jest.mock("nanoid", () => ({
 describe("pages/dashboard/[dashboardId]/widget/create", () => {
   const useRouter = jest.spyOn(require("next/router"), "useRouter");
   beforeAll(() => {
-    useRouter.mockImplementation(() => ({
-      asPath: "/",
-      query: {
-        dashboardId: "test-dashboard-id",
-      },
-    }));
+    useRouter.mockImplementation(
+      USE_ROUTER_PARAMS({
+        query: {
+          dashboardId: "test-dashboard-id",
+        },
+      })
+    );
   });
 
   it("should create summary widget", async () => {
@@ -50,7 +51,7 @@ describe("pages/dashboard/[dashboardId]/widget/create", () => {
     await userEvent.keyboard("{Enter}");
 
     await userEvent.type(
-      screen.getByLabelText("Entity Tab"),
+      await screen.findByLabelText("Entity Tab"),
       "Verified Entity View"
     );
 
@@ -72,9 +73,11 @@ describe("pages/dashboard/[dashboardId]/widget/create", () => {
       screen.getByRole("button", { name: "Create Dashboard Widget" })
     );
 
-    expect((await screen.findAllByRole("status"))[0]).toHaveTextContent(
+    expect(await screen.findByRole("status")).toHaveTextContent(
       "Dashboard Widget Created Successfully"
     );
+
+    await closeAllToasts();
   });
 
   it("should create table widget", async () => {

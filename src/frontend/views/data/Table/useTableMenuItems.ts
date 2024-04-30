@@ -1,11 +1,24 @@
 import { useEntityCrudConfig } from "frontend/hooks/entity/entity.config";
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
 import { useRouter } from "next/router";
-import { Plus } from "react-feather";
-import { SLUG_LOADING_VALUE } from "frontend/lib/routing/constants";
 import { IDropDownMenuItem } from "frontend/design-system/components/DropdownMenu";
 import { usePluginTableMenuItems } from "./portal";
-import { useCanUserPerformCrudAction } from "../useCanUserPerformCrudAction";
+import { useCanUserPerformCrudAction } from "../hooks/useCanUserPerformCrudAction";
+
+export const getEntityCreateLink = (
+  entity: string,
+  reference?: {
+    referenceField: string;
+    entityId: string;
+  }
+) => {
+  let baseUrl = NAVIGATION_LINKS.ENTITY.CREATE(entity);
+  if (reference) {
+    baseUrl = `${baseUrl}?${reference.referenceField}=${reference.entityId}`;
+  }
+
+  return baseUrl;
+};
 
 export const useTableMenuItems = (
   entity: string,
@@ -20,7 +33,7 @@ export const useTableMenuItems = (
 
   const pluginTableMenuItems = usePluginTableMenuItems(entity, reference);
 
-  if (entity === SLUG_LOADING_VALUE) {
+  if (!router.isReady) {
     return [];
   }
 
@@ -33,18 +46,8 @@ export const useTableMenuItems = (
       id: "add",
       order: 1,
       label: entityCrudConfig.TEXT_LANG.CREATE,
-      IconComponent: Plus,
-      onClick: () => {
-        if (reference) {
-          router.push(
-            `${NAVIGATION_LINKS.ENTITY.CREATE(entity)}?${
-              reference.referenceField
-            }=${reference.entityId}`
-          );
-          return;
-        }
-        router.push(NAVIGATION_LINKS.ENTITY.CREATE(entity));
-      },
+      systemIcon: "Plus",
+      action: getEntityCreateLink(entity, reference),
     });
   }
 

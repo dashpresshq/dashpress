@@ -16,14 +16,12 @@ describe("/api/roles/[roleId]/index", () => {
         password: "foo",
         name: "User 1",
         role: "role-to-update",
-        systemProfile: "",
       },
       {
         username: "role-to-delete__user",
         password: "foo",
         name: "User 2",
         role: "role-to-delete",
-        systemProfile: "",
       },
     ]);
     await setupRolesTestData([

@@ -3,7 +3,7 @@ import {
   useEntityIdField,
   useEntityReferenceFields,
 } from "frontend/hooks/entity/entity.store";
-import { SLUG_LOADING_VALUE } from "frontend/lib/routing/constants";
+import { SYSTEM_LOADING_VALUE } from "frontend/lib/routing/constants";
 import {
   useEntityDataDetails,
   useEntityDataReference,
@@ -22,11 +22,15 @@ import {
   useEntityId,
   useEntitySlug,
 } from "frontend/hooks/entity/entity.config";
+import { isQueryIdle } from "frontend/lib/data/useApi/utils";
+import { useLingui } from "@lingui/react";
+import { msg } from "@lingui/macro";
 import { ENTITY_DETAILS_VIEW_KEY } from "./constants";
 import { EntityDetailsView } from "./DetailsView";
 import { DetailsLayout } from "./_Layout";
-import { useCanUserPerformCrudAction } from "../useCanUserPerformCrudAction";
 import { DetailsCanvas } from "../Table/_WholeEntityTable/DetailsCanvas";
+import { useEntityActionButtons } from "../hooks/useEntityActionButtons";
+import { usePortalActionButtons } from "./portal";
 
 export function EntityRelationDetails() {
   const childEntity = useRouteParam("childEntity");
@@ -34,7 +38,6 @@ export function EntityRelationDetails() {
   const entityId = useEntityId();
   const parentEntity = useEntitySlug();
   const entityReferenceFields = useEntityReferenceFields(parentEntity);
-  const canUserPerformCrudAction = useCanUserPerformCrudAction(childEntity);
   const entityDataReference = useEntityDataReference(parentEntity, entityId);
   const router = useRouter();
 
@@ -42,12 +45,14 @@ export function EntityRelationDetails() {
     ({ table }) => table === childEntity
   );
 
+  const { _ } = useLingui();
+
   const { backLink } = useNavigationStack();
 
   const title =
-    entityDataReference.isLoading || entityDataReference.isIdle
+    entityDataReference.isLoading || isQueryIdle(entityDataReference)
       ? childEntityCrudConfig.TEXT_LANG.SINGULAR
-      : `${entityDataReference.data} - ${childEntityCrudConfig.TEXT_LANG.SINGULAR}`;
+      : msg`${entityDataReference.data} - ${childEntityCrudConfig.TEXT_LANG.SINGULAR}`;
 
   useSetPageDetails({
     pageTitle: title,
@@ -57,66 +62,65 @@ export function EntityRelationDetails() {
   });
 
   const detailsColumn = entityReferenceFields.isLoading
-    ? SLUG_LOADING_VALUE
+    ? SYSTEM_LOADING_VALUE
     : referenceColumn?.inverseToOneField;
 
-  const currentEntityData = useEntityDataDetails(parentEntity, entityId);
+  const currentEntityData = useEntityDataDetails({
+    entity: parentEntity,
+    entityId,
+  });
 
   const viewEntityId = referenceColumn?.inverseToOneField
     ? entityId
     : currentEntityData.data[referenceColumn?.field];
 
-  const dataDetails = useEntityDataDetails(
-    childEntity,
-    viewEntityId,
-    detailsColumn
-  );
+  const dataDetails = useEntityDataDetails({
+    entity: childEntity,
+    entityId: viewEntityId,
+    column: detailsColumn,
+  });
 
   const childEntityIdField = useEntityIdField(childEntity);
 
   const idData = dataDetails.data[childEntityIdField.data];
 
-  const actions =
-    childEntityIdField.isLoading || dataDetails.isLoading
-      ? []
-      : [
-          {
-            icon: "eye" as const,
-            action: NAVIGATION_LINKS.ENTITY.DETAILS(childEntity, idData),
-            label: "Details",
-            crudSetting: canUserPerformCrudAction("details"),
-          },
-          {
-            icon: "edit" as const,
-            action: NAVIGATION_LINKS.ENTITY.UPDATE(childEntity, idData),
-            label: "Edit",
-            crudSetting: canUserPerformCrudAction("update"),
-          },
-        ];
+  const actionButtons = useEntityActionButtons({
+    entity: childEntity,
+    entityId: idData,
+    exclude: ["delete"],
+  });
+
+  const portalActionButtons = usePortalActionButtons({
+    entity: childEntity,
+    entityId: idData,
+    baseActionButtons: actionButtons,
+    from: "details",
+    row: dataDetails, // TODO :eyes
+  });
 
   return (
-    <DetailsLayout
-      entity={parentEntity}
-      menuKey={childEntity}
-      childEntity={childEntity}
-    >
+    <DetailsLayout entity={parentEntity} menuKey={childEntity}>
       {dataDetails.error ? (
         <SectionBox
           title={title}
           isLoading={
-            entityDataReference.isLoading || entityDataReference.isIdle
+            entityDataReference.isLoading ||
+            (entityDataReference.status === "pending" &&
+              entityDataReference.fetchStatus === "idle") ||
+            childEntityIdField.isLoading ||
+            dataDetails.isLoading
           }
           backLink={backLink}
         >
           <div style={{ textAlign: "center" }}>
             <Typo.SM>
-              The {childEntityCrudConfig.TEXT_LANG.SINGULAR} for{" "}
+              The {_(childEntityCrudConfig.TEXT_LANG.SINGULAR)} for{" "}
               <b>{entityDataReference.data}</b> does not exist
             </Typo.SM>
             <Spacer />
             <SoftButton
-              icon="add"
-              label="Create It"
+              systemIcon="Plus"
+              label={msg`Create It`}
               action={() => {
                 router.push(
                   `${NAVIGATION_LINKS.ENTITY.CREATE(
@@ -131,16 +135,18 @@ export function EntityRelationDetails() {
         <SectionBox
           title={title}
           isLoading={
-            entityDataReference.isLoading || entityDataReference.isIdle
+            entityDataReference.isLoading ||
+            (entityDataReference.status === "pending" &&
+              entityDataReference.fetchStatus === "idle") ||
+            dataDetails.isLoading
           }
           backLink={backLink}
-          iconButtons={actions.filter(({ crudSetting }) => crudSetting)}
+          actionButtons={portalActionButtons}
         >
           <EntityDetailsView
             displayFrom="details"
-            id={viewEntityId}
+            entityId={idData}
             entity={childEntity}
-            column={detailsColumn}
           />
         </SectionBox>
       )}

@@ -1,17 +1,17 @@
 import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
-import { USER_PERMISSIONS } from "shared/constants/user";
 import {
   BaseManageVariables,
-  MangeVariablesPageTitle,
+  ManageVariablesPageTitle,
 } from "frontend/views/settings/Variables/Base";
-import { BaseActionsLayout } from "../_Base";
+import { UserPermissions } from "shared/constants/user";
 import { ACTIONS_VIEW_KEY } from "../constants";
+import { BaseActionsLayout } from "../_Base";
 
 export function ManageVariables() {
   useSetPageDetails({
-    pageTitle: MangeVariablesPageTitle,
+    pageTitle: ManageVariablesPageTitle,
     viewKey: ACTIONS_VIEW_KEY,
-    permission: USER_PERMISSIONS.CAN_MANAGE_INTEGRATIONS,
+    permission: UserPermissions.CAN_MANAGE_APP_CREDENTIALS,
   });
 
   return (

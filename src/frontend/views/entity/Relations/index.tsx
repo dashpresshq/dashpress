@@ -6,7 +6,7 @@ import {
 } from "frontend/hooks/entity/entity.store";
 import { EntitiesSelection } from "frontend/views/settings/Entities/Selection";
 import { useEntityDictionPlurals } from "frontend/hooks/entity/entity.queries";
-import { USER_PERMISSIONS } from "shared/constants/user";
+import { UserPermissions } from "shared/constants/user";
 import { useEntitySlug } from "frontend/hooks/entity/entity.config";
 import {
   useEntityConfiguration,
@@ -14,10 +14,7 @@ import {
 } from "frontend/hooks/configuration/configuration.store";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { MAKE_APP_CONFIGURATION_CRUD_CONFIG } from "frontend/hooks/configuration/configuration.constant";
-import { useState } from "react";
-import { DOCUMENTATION_LABEL } from "frontend/docs";
 import { RelationsSettingsDocumentation } from "frontend/docs/relations";
-import { SLUG_LOADING_VALUE } from "frontend/lib/routing/constants";
 import { useChangeRouterParam } from "frontend/lib/routing/useChangeRouterParam";
 import { useRouteParam } from "frontend/lib/routing/useRouteParam";
 import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
@@ -29,7 +26,8 @@ import {
 } from "frontend/design-system/components/Skeleton/Form";
 import { Spacer } from "frontend/design-system/primitives/Spacer";
 import { ListSkeleton } from "frontend/design-system/components/Skeleton/List";
-import { SortList } from "frontend/design-system/components/SortList";
+import { useDocumentationActionButton } from "frontend/docs/constants";
+import { msg } from "@lingui/macro";
 import {
   FieldsLabelForm,
   loadingFieldsLabelForm,
@@ -38,7 +36,7 @@ import { ENTITY_CONFIGURATION_VIEW } from "../constants";
 import { EntityRelationsForm } from "./Relations.form";
 import { BaseEntitySettingsLayout } from "../_Base";
 
-const DOCS_TITLE = "Relationship Settings";
+const RELATIONSHIP_SETTINGS = msg`Relationship Settings`;
 
 export function EntityRelationsSettings() {
   const entity = useEntitySlug();
@@ -47,21 +45,25 @@ export function EntityRelationsSettings() {
   const entityFields = useEntityFields(entity);
   const entityRelationList = useEntityRelationsList(entity);
   const referenceFields = useEntityReferenceFields(entity);
-  const [isDocOpen, setIsDocOpen] = useState(false);
 
   useSetPageDetails({
-    pageTitle: "Relationship Settings",
+    pageTitle: RELATIONSHIP_SETTINGS,
     viewKey: ENTITY_CONFIGURATION_VIEW,
-    permission: USER_PERMISSIONS.CAN_CONFIGURE_APP,
+    permission: UserPermissions.CAN_CONFIGURE_APP,
   });
 
-  const entityRelationTemplate = useEntityConfiguration<{
-    format: string;
-  }>("entity_relation_template", entity);
+  const entityRelationTemplate = useEntityConfiguration(
+    "entity_relation_template",
+    entity
+  );
 
-  const hiddenEntityRelations = useEntityConfiguration<string[]>(
+  const hiddenEntityRelations = useEntityConfiguration(
     "hidden_entity_relations",
     entity
+  );
+
+  const documentationActionButton = useDocumentationActionButton(
+    RELATIONSHIP_SETTINGS
   );
 
   const getEntitiesDictionPlurals = useEntityDictionPlurals(
@@ -69,9 +71,10 @@ export function EntityRelationsSettings() {
     "value"
   );
 
-  const entityRelationsLabelsMap = useEntityConfiguration<
-    Record<string, string>
-  >("entity_relations_labels", entity);
+  const entityRelationsLabelsMap = useEntityConfiguration(
+    "entity_relations_labels",
+    entity
+  );
 
   const upsertEntityRelationTemplateMutation = useUpsertConfigurationMutation(
     "entity_relation_template",
@@ -94,6 +97,11 @@ export function EntityRelationsSettings() {
     }
   );
 
+  const entityRelationsOrder = useEntityConfiguration(
+    "entity_relations_order",
+    entity
+  );
+
   const upsertHideEntityRelationMutation = useUpsertConfigurationMutation(
     "hidden_entity_relations",
     entity,
@@ -106,28 +114,23 @@ export function EntityRelationsSettings() {
     entityRelationTemplate.error ||
     entityFields.error ||
     referenceFields.error ||
+    entityRelationsOrder.error ||
     entityRelationList.error ||
     hiddenEntityRelations.error;
 
   const isLoading =
     entityFields.isLoading ||
     entityRelationList.isLoading ||
+    entityRelationsOrder.isLoading ||
     entityRelationTemplate.isLoading ||
     hiddenEntityRelations.isLoading ||
-    referenceFields.isLoading ||
-    entity === SLUG_LOADING_VALUE;
+    referenceFields.isLoading;
 
   return (
     <BaseEntitySettingsLayout>
       <SectionBox
-        title="Relationship Settings"
-        iconButtons={[
-          {
-            action: () => setIsDocOpen(true),
-            icon: "help",
-            label: DOCUMENTATION_LABEL.CONCEPT(DOCS_TITLE),
-          },
-        ]}
+        title={RELATIONSHIP_SETTINGS}
+        actionButtons={[documentationActionButton]}
       >
         <Tabs
           currentTab={tabFromUrl}
@@ -141,17 +144,41 @@ export function EntityRelationsSettings() {
                   loader={<FormSkeleton schema={[FormSkeletonSchema.Input]} />}
                 >
                   <EntityRelationsForm
-                    onSubmit={async (values) => {
-                      await upsertEntityRelationTemplateMutation.mutateAsync(
-                        values as unknown as Record<string, string>
-                      );
-                    }}
+                    onSubmit={upsertEntityRelationTemplateMutation.mutateAsync}
                     entityFields={entityFields.data.map(({ name }) => name)}
                     initialValues={entityRelationTemplate.data}
                   />
                 </ViewStateMachine>
               ),
-              label: "Reference Template",
+              id: "template",
+              label: msg`Reference Template`,
+            },
+            {
+              content: (
+                <ViewStateMachine
+                  error={error}
+                  loading={isLoading}
+                  loader={<ListSkeleton count={5} />}
+                >
+                  <EntitiesSelection
+                    type="relations"
+                    selectionKey={`${entity}-relations`}
+                    allList={entityRelationList.data}
+                    getEntityFieldLabels={(relation) =>
+                      entityRelationsLabelsMap.data?.[relation] ||
+                      getEntitiesDictionPlurals(relation)
+                    }
+                    sort={{
+                      order: entityRelationsOrder.data,
+                      save: upsertEntityRelationsOrderMutation.mutateAsync,
+                    }}
+                    hiddenList={hiddenEntityRelations.data}
+                    onSubmit={upsertHideEntityRelationMutation.mutateAsync}
+                  />
+                </ViewStateMachine>
+              ),
+              id: "selection",
+              label: msg`Selection`,
             },
             {
               content: (
@@ -167,75 +194,17 @@ export function EntityRelationsSettings() {
                       "entity_relations_labels"
                     )}
                     fields={referenceFields.data.map(({ table }) => table)}
-                    onSubmit={async (data) => {
-                      await upsertEntityRelationsLabelsMutation.mutateAsync(
-                        data as Record<string, string>
-                      );
-                    }}
+                    onSubmit={upsertEntityRelationsLabelsMutation.mutateAsync}
                   />
                 </ViewStateMachine>
               ),
-              label: "Labels",
-            },
-            {
-              content: (
-                <ViewStateMachine
-                  error={error}
-                  loading={isLoading}
-                  loader={<ListSkeleton count={5} />}
-                >
-                  <EntitiesSelection
-                    selectionKey={`${entity}-relations`}
-                    allList={entityRelationList.data}
-                    getEntityFieldLabels={(relation) =>
-                      entityRelationsLabelsMap.data?.[relation] ||
-                      getEntitiesDictionPlurals(relation)
-                    }
-                    crudConfig={MAKE_APP_CONFIGURATION_CRUD_CONFIG(
-                      "hidden_entity_relations"
-                    )}
-                    hiddenList={hiddenEntityRelations.data}
-                    onSubmit={async (data) => {
-                      await upsertHideEntityRelationMutation.mutateAsync(data);
-                    }}
-                  />
-                </ViewStateMachine>
-              ),
-              label: "Selection",
-            },
-            {
-              content: (
-                <ViewStateMachine
-                  error={error}
-                  loading={isLoading}
-                  loader={<ListSkeleton count={5} />}
-                >
-                  <SortList
-                    data={{
-                      ...referenceFields,
-                      data: referenceFields.data.map(({ table, label }) => ({
-                        value: table,
-                        label: label || getEntitiesDictionPlurals(table),
-                      })),
-                    }}
-                    onSave={
-                      upsertEntityRelationsOrderMutation.mutateAsync as (
-                        data: string[]
-                      ) => Promise<void>
-                    }
-                  />
-                </ViewStateMachine>
-              ),
-              label: "Order",
+              id: "labels",
+              label: msg`Labels`,
             },
           ]}
         />
       </SectionBox>
-      <RelationsSettingsDocumentation
-        title={DOCS_TITLE}
-        close={setIsDocOpen}
-        isOpen={isDocOpen}
-      />
+      <RelationsSettingsDocumentation />
     </BaseEntitySettingsLayout>
   );
 }

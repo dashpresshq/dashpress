@@ -1,25 +1,26 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import React, { ReactNode } from "react";
-import { Icon, ToggleLeft, Filter, Search, Calendar } from "react-feather";
+import { ReactNode } from "react";
 import styled from "styled-components";
 import { Stack } from "frontend/design-system/primitives/Stack";
-import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
+import { TableFilterType } from "shared/types/data";
+import { SystemIcon } from "frontend/design-system/Icons/System";
+import { SystemIconsKeys } from "shared/constants/Icons";
+import { msg } from "@lingui/macro";
 import { Dropdown } from "../../Dropdown";
 import { SoftButton } from "../../Button/SoftButton";
-import { TableFilterType } from "./types";
 
 const FILTER_TYPE_CONFIG: Record<
   TableFilterType["_type"],
-  { label: string; IconComponent: Icon }
+  { label: string; systemIcon: SystemIconsKeys }
 > = {
-  boolean: { IconComponent: ToggleLeft, label: "Boolean" },
-  idField: { IconComponent: Filter, label: "Id" },
-  number: { IconComponent: Filter, label: "Number" },
-  string: { IconComponent: Search, label: "Search" },
-  status: { IconComponent: Filter, label: "Status" },
-  date: { IconComponent: Calendar, label: "Date" },
-  list: { IconComponent: Filter, label: "List" },
+  boolean: { systemIcon: "ToggleLeft", label: "Boolean" },
+  idField: { systemIcon: "Filter", label: "Id" },
+  number: { systemIcon: "Filter", label: "Number" },
+  string: { systemIcon: "Search", label: "Search" },
+  status: { systemIcon: "Filter", label: "Status" },
+  date: { systemIcon: "Calendar", label: "Date" },
+  list: { systemIcon: "Filter", label: "List" },
 };
 
 interface IProps {
@@ -47,15 +48,7 @@ export function FilterWrapper({
   columnLabel,
   filterType,
 }: IProps) {
-  const iconProps = {
-    size: 15,
-    color: filterHasValue
-      ? USE_ROOT_COLOR("primary-color")
-      : USE_ROOT_COLOR("muted-text"),
-    style: { opacity: filterHasValue ? 1 : 0.7 },
-  };
-
-  const { IconComponent, label: filterLabel } = FILTER_TYPE_CONFIG[filterType];
+  const { systemIcon, label: filterLabel } = FILTER_TYPE_CONFIG[filterType];
 
   return (
     <Dropdown
@@ -68,11 +61,16 @@ export function FilterWrapper({
             filterHasValue ? " Is Active" : ""
           }`}
         >
-          <IconComponent {...iconProps} />
+          <SystemIcon
+            icon={systemIcon}
+            size={15}
+            color={filterHasValue ? "primary-color" : "muted-text"}
+            style={{ opacity: filterHasValue ? 1 : 0.7 }}
+          />
         </Root>
       }
     >
-      <DownRoot direction="column">
+      <DownRoot $direction="column">
         <div style={{ textAlign: "left" }}>{children}</div>
         <SoftButton
           action={() => {
@@ -80,8 +78,8 @@ export function FilterWrapper({
           }}
           block
           size="xs"
-          icon="close"
-          label="Reset"
+          systemIcon="Close"
+          label={msg`Reset`}
         />
       </DownRoot>
     </Dropdown>

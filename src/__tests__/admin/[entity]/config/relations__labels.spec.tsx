@@ -1,24 +1,25 @@
-import "@testing-library/jest-dom";
-import React from "react";
 import { render, screen, waitFor, within } from "@testing-library/react";
 import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 import userEvent from "@testing-library/user-event";
 import EntityRelationsSettings from "pages/admin/[entity]/config/relations";
 
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
+import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
 
 setupApiHandlers();
 
 describe("pages/admin/[entity]/config/relations", () => {
   beforeAll(() => {
     const useRouter = jest.spyOn(require("next/router"), "useRouter");
-    useRouter.mockImplementation(() => ({
-      asPath: "/",
-      query: {
-        entity: "entity-1",
-        tab: "Labels",
-      },
-    }));
+
+    useRouter.mockImplementation(
+      USE_ROUTER_PARAMS({
+        query: {
+          entity: "entity-1",
+          tab: "labels",
+        },
+      })
+    );
   });
   describe("Labels", () => {
     it("should display reference labels", async () => {
@@ -28,7 +29,9 @@ describe("pages/admin/[entity]/config/relations", () => {
         </ApplicationRoot>
       );
 
-      const currentTab = await screen.findByRole("tabpanel");
+      const currentTab = await screen.findByRole("tabpanel", {
+        name: "Labels",
+      });
 
       await waitFor(() => {
         expect(
@@ -55,7 +58,9 @@ describe("pages/admin/[entity]/config/relations", () => {
         </ApplicationRoot>
       );
 
-      const currentTab = await screen.findByRole("tabpanel");
+      const currentTab = await screen.findByRole("tabpanel", {
+        name: "Labels",
+      });
 
       await userEvent.clear(
         await within(currentTab).findByLabelText("related-entity-2")
@@ -88,7 +93,9 @@ describe("pages/admin/[entity]/config/relations", () => {
         </ApplicationRoot>
       );
 
-      const currentTab = await screen.findByRole("tabpanel");
+      const currentTab = await screen.findByRole("tabpanel", {
+        name: "Labels",
+      });
 
       await waitFor(() => {
         expect(

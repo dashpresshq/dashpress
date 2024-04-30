@@ -7,7 +7,6 @@ const TEST_USERS: IAccountUser[] = [
     password: "$2b$10$/9tw363jvQrylf4eLisJt.afEUphLLaDSfhkweYPhC0ayTJp7Zo0a",
     name: "Root User",
     role: "creator",
-    systemProfile: '{"userId": "1"}',
   },
 ];
 

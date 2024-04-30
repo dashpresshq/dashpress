@@ -1,11 +1,9 @@
-import { useMutation } from "react-query";
 import { IWidgetConfig } from "shared/types/dashboard";
 import { CRUD_CONFIG_NOT_FOUND } from "frontend/lib/crud-config";
-import { makeActionRequest } from "frontend/lib/data/makeRequest";
 import { MutationHelpers } from "frontend/lib/data/useMutate/mutation-helpers";
 import { useApiMutateOptimisticOptions } from "frontend/lib/data/useMutate/useApiMutateOptimisticOptions";
 import { useApi } from "frontend/lib/data/useApi";
-import { SLUG_LOADING_VALUE } from "frontend/lib/routing/constants";
+import { ApiRequest } from "frontend/lib/data/makeRequest";
 import { DASHBOARD_RELATIVE_DAYS } from "./Widget/_components/WidgetHeader/constants";
 import { DASHBOARD_WIDGETS_CRUD_CONFIG } from "./constants";
 
@@ -27,7 +25,6 @@ const DASHBOARD_WIDGET_SCRIPT_ENDPOINT = (
 export const useDashboardWidgets = (dashboardId: string) => {
   return useApi<IWidgetConfig[]>(DASHBOARD_ENDPOINT(dashboardId), {
     errorMessage: DASHBOARD_WIDGETS_CRUD_CONFIG.TEXT_LANG.NOT_FOUND,
-    enabled: !!dashboardId && dashboardId !== SLUG_LOADING_VALUE,
     defaultData: [],
   });
 };
@@ -39,86 +36,58 @@ export const useDasboardWidgetScriptData = (
   return useApi<unknown>(
     DASHBOARD_WIDGET_SCRIPT_ENDPOINT(widgetId, relativeDate),
     {
-      errorMessage: CRUD_CONFIG_NOT_FOUND("Script"),
-      enabled: !!widgetId,
+      errorMessage: CRUD_CONFIG_NOT_FOUND(`Script`),
       defaultData: undefined,
     }
   );
 };
 
 export function useCreateDashboardWidgetMutation(dashboardId: string) {
-  const apiMutateOptions = useApiMutateOptimisticOptions<
-    IWidgetConfig[],
-    IWidgetConfig
-  >({
+  return useApiMutateOptimisticOptions<IWidgetConfig[], IWidgetConfig>({
+    mutationFn: async (widget) => {
+      await ApiRequest.POST(DASHBOARD_ENDPOINT(dashboardId), widget);
+    },
     dataQueryPath: DASHBOARD_ENDPOINT(dashboardId),
     onMutate: MutationHelpers.append,
     successMessage: DASHBOARD_WIDGETS_CRUD_CONFIG.MUTATION_LANG.CREATE,
   });
-
-  return useMutation(async (widget: IWidgetConfig) => {
-    await makeActionRequest("POST", DASHBOARD_ENDPOINT(dashboardId), widget);
-  }, apiMutateOptions);
 }
 
 export function useUpdateDashboardWidgetMutation(
   dashboardId: string,
   widgetId: string
 ) {
-  const apiMutateOptions = useApiMutateOptimisticOptions<
-    IWidgetConfig[],
-    IWidgetConfig
-  >({
+  return useApiMutateOptimisticOptions<IWidgetConfig[], IWidgetConfig>({
+    mutationFn: async (widget) => {
+      await ApiRequest.PATCH(
+        `${DASHBOARD_ENDPOINT(dashboardId)}/${widget.id}`,
+        widget
+      );
+    },
     dataQueryPath: DASHBOARD_ENDPOINT(dashboardId),
     otherEndpoints: [DASHBOARD_WIDGET_SCRIPT_ENDPOINT(widgetId)],
     onMutate: MutationHelpers.update,
     successMessage: DASHBOARD_WIDGETS_CRUD_CONFIG.MUTATION_LANG.EDIT,
   });
-
-  return useMutation(async (widget: IWidgetConfig) => {
-    await makeActionRequest(
-      "PATCH",
-      `${DASHBOARD_ENDPOINT(dashboardId)}/${widget.id}`,
-      widget
-    );
-  }, apiMutateOptions);
 }
 
 export function useDeleteDashboardWidgetMutation(dashboardId: string) {
-  const apiMutateOptions = useApiMutateOptimisticOptions<
-    IWidgetConfig[],
-    string
-  >({
+  return useApiMutateOptimisticOptions<IWidgetConfig[], string>({
+    mutationFn: async (widgetId) => {
+      await ApiRequest.DELETE(`${DASHBOARD_ENDPOINT(dashboardId)}/${widgetId}`);
+    },
     dataQueryPath: DASHBOARD_ENDPOINT(dashboardId),
     onMutate: MutationHelpers.delete,
     successMessage: DASHBOARD_WIDGETS_CRUD_CONFIG.MUTATION_LANG.DELETE,
   });
-
-  return useMutation(async (widgetId: string) => {
-    await makeActionRequest(
-      "DELETE",
-      `${DASHBOARD_ENDPOINT(dashboardId)}/${widgetId}`,
-      {
-        widgetId,
-      }
-    );
-  }, apiMutateOptions);
 }
 
 export function useArrangeDashboardWidgetMutation(dashboardId: string) {
-  const apiMutateOptions = useApiMutateOptimisticOptions<
-    IWidgetConfig[],
-    string[]
-  >({
+  return useApiMutateOptimisticOptions<IWidgetConfig[], string[]>({
+    mutationFn: async (widgetList) => {
+      await ApiRequest.PATCH(DASHBOARD_ENDPOINT(dashboardId), widgetList);
+    },
     dataQueryPath: DASHBOARD_ENDPOINT(dashboardId),
     onMutate: MutationHelpers.sortOrder,
   });
-
-  return useMutation(async (widgetList: string[]) => {
-    await makeActionRequest(
-      "PATCH",
-      DASHBOARD_ENDPOINT(dashboardId),
-      widgetList
-    );
-  }, apiMutateOptions);
 }

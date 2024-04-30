@@ -31,23 +31,6 @@ describe("Request Validations => requestQueryValidationImpl", () => {
     `);
   });
 
-  it("should return correct first array element when the value is an array", async () => {
-    const { req, res } = createAuthenticatedMocks({
-      method: "GET",
-      query: {
-        goodKey: ["first value", "second value"],
-      },
-    });
-
-    await handler(req, res);
-
-    expect(res._getJSONData()).toMatchInlineSnapshot(`
-      {
-        "data": "first value",
-      }
-    `);
-  });
-
   it("should return programming error when the query field is not passed", async () => {
     const { req, res } = createAuthenticatedMocks({
       method: "GET",

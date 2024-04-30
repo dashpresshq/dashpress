@@ -1,5 +1,4 @@
 import fs from "fs-extra";
-import { noop } from "shared/lib/noop";
 import path from "path";
 import { ConfigApiService } from "../config/config.service";
 
@@ -11,10 +10,6 @@ export class JsonFileConfigDataPersistenceAdaptor<
 > extends AbstractConfigDataPersistenceService<T> {
   constructor(configDomain: ConfigDomain, configApiService: ConfigApiService) {
     super(configDomain, configApiService);
-  }
-
-  async setup() {
-    noop();
   }
 
   private pathToConfigDomain = (type: ConfigDomain) => {
@@ -29,7 +24,7 @@ export class JsonFileConfigDataPersistenceAdaptor<
     );
   };
 
-  async resetToEmpty() {
+  async _resetToEmpty() {
     fs.removeSync(this.pathToConfigDomain(this._configDomain));
   }
 
@@ -71,7 +66,7 @@ export class JsonFileConfigDataPersistenceAdaptor<
     );
   }
 
-  async getItem(key: string) {
+  async _getItem(key: string) {
     const allIndexedItems = await this.getDomainData();
     const currentItem = allIndexedItems[key];
     if (currentItem) {
@@ -80,13 +75,13 @@ export class JsonFileConfigDataPersistenceAdaptor<
     return undefined;
   }
 
-  async persistItem(key: string, data: T) {
+  async _persistItem(key: string, data: T) {
     const allIndexedItems = await this.getDomainData();
     allIndexedItems[key] = data;
     await this.persist(allIndexedItems);
   }
 
-  async removeItem(key: string): Promise<void> {
+  async _removeItem(key: string): Promise<void> {
     const allIndexedItems = await this.getDomainData();
     delete allIndexedItems[key];
     await this.persist(allIndexedItems);

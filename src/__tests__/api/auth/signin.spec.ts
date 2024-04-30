@@ -26,7 +26,6 @@ describe("/api/auth/signin", () => {
       {
         "name": "Root User",
         "role": "creator",
-        "systemProfile": "{"userId": "1"}",
         "username": "root",
       }
     `);

@@ -6,8 +6,9 @@ import {
 } from "@tanstack/react-table";
 import styled, { css } from "styled-components";
 import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
+import { typescriptSafeObjectDotEntries } from "shared/lib/objects";
 import { DEFAULT_TABLE_STATE } from "./constants";
-import { IProps } from "./types";
+import { ITableProps } from "./types";
 import { getPageCount } from "./utils";
 import { TablePagination } from "./_Pagination";
 import { ErrorAlert } from "../Alert";
@@ -20,20 +21,20 @@ import { BaseSkeleton } from "../Skeleton/Base";
 
 export { DEFAULT_TABLE_STATE };
 
-const StyledTableResponsive = styled.div`
+const TableResponsive = styled.div`
   display: block;
   width: 100%;
   -webkit-overflow-scrolling: touch;
 `;
 
-const StyledTableRoot = styled.div<{ $enforceHeight?: boolean }>`
+const TableRoot = styled.div<{ $enforceHeight?: boolean }>`
   position: relative;
   overflow-x: auto;
   background: ${USE_ROOT_COLOR("base-color")};
   ${(props) => props.$enforceHeight && `min-height: 500px;`}
 `;
 
-const StyledTable = styled.table<{ $border?: boolean }>`
+const TableStyles = styled.table<{ $border?: boolean }>`
   width: 100%;
   color: ${USE_ROOT_COLOR("main-text")};
   border-collapse: collapse;
@@ -56,8 +57,8 @@ export function Table<T extends unknown>({
   columns,
   lean,
   border,
-  emptyMessage,
-}: IProps<T>) {
+  empty,
+}: ITableProps<T>) {
   const {
     data = {
       data: [],
@@ -67,7 +68,7 @@ export function Table<T extends unknown>({
     },
     isLoading,
     error,
-    isPreviousData,
+    isPlaceholderData,
   } = tableData;
 
   const totalPageCount = getPageCount(data.totalRecords, data.pageSize);
@@ -82,9 +83,14 @@ export function Table<T extends unknown>({
   const tableDataStringified = React.useMemo(() => {
     return data.data.map((datum) =>
       Object.fromEntries(
-        Object.entries(datum).map(([key, value]) => [
+        typescriptSafeObjectDotEntries(datum).map(([key, value]) => [
           key,
-          typeof value === "number" ? `${value}` : value,
+          // eslint-disable-next-line no-nested-ternary
+          typeof value === "object"
+            ? JSON.stringify(value)
+            : typeof value === "number"
+            ? `${value}`
+            : value,
         ])
       )
     );
@@ -122,7 +128,7 @@ export function Table<T extends unknown>({
     return <TableSkeleton lean={lean} />;
   }
 
-  const previousDataRender = isPreviousData ? (
+  const previousDataRender = isPlaceholderData ? (
     <BaseSkeleton
       height="2px"
       width="100%"
@@ -141,21 +147,21 @@ export function Table<T extends unknown>({
   );
 
   return (
-    <StyledTableResponsive>
-      <StyledTableRoot $enforceHeight={dataLength > 0 && !lean}>
+    <TableResponsive>
+      <TableRoot $enforceHeight={dataLength > 0 && !lean}>
         {previousDataRender}
-        <StyledTable $border={border}>
+        <TableStyles $border={border}>
           <TableHead table={table} />
           <TableBody
             table={table}
             dataLength={dataLength}
-            emptyMessage={emptyMessage}
+            empty={empty}
             isLoading={isLoading}
           />
           <TableFoot table={table} dataLength={dataLength} />
-        </StyledTable>
+        </TableStyles>
         {previousDataRender}
-      </StyledTableRoot>
+      </TableRoot>
       {!lean && (
         <TablePagination
           {...{
@@ -168,6 +174,6 @@ export function Table<T extends unknown>({
           }}
         />
       )}
-    </StyledTableResponsive>
+    </TableResponsive>
   );
 }

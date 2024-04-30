@@ -69,12 +69,9 @@ export const crudEnabledValidationImpl: ValidationImplType<void> = async (
 
   if (
     EntityCrudCheck[actionType].entityCrudField &&
-    !(
-      await configurationApiService.show<IEntityCrudSettings>(
-        "entity_crud_settings",
-        entity
-      )
-    )[actionType]
+    !(await configurationApiService.show("entity_crud_settings", entity))[
+      actionType
+    ]
   ) {
     throw new ForbiddenError(
       `Action '${actionType}' has been disabled for '${entity}'`

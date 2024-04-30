@@ -1,9 +1,10 @@
 /* eslint-disable react/function-component-definition */
-import React from "react";
+
 import { Story } from "@storybook/react";
 import { action as storyAction } from "@storybook/addon-actions";
 import { ToastService } from "frontend/lib/toast";
 import { ApplicationRoot } from "frontend/components/ApplicationRoot";
+import { fakeMessageDescriptor } from "translations/fake";
 
 interface IProps {
   label: string;
@@ -33,7 +34,8 @@ const Template: Story<IProps> = (args) => (
 export const Success = Template.bind({});
 Success.args = {
   label: "Toast Success",
-  action: () => ToastService.success("App updated successfully"),
+  action: () =>
+    ToastService.success(fakeMessageDescriptor("App updated successfully")),
 };
 
 export const SuccessWithAction = Template.bind({});
@@ -41,9 +43,9 @@ SuccessWithAction.args = {
   label: "Toast Success With Action",
   action: () =>
     ToastService.success({
-      message: "App updated successfully",
+      message: fakeMessageDescriptor("App updated successfully"),
       action: {
-        label: "Click me",
+        label: fakeMessageDescriptor("Click me"),
         action: () => storyAction("Click me"),
       },
     }),

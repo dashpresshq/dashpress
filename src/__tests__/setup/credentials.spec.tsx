@@ -8,6 +8,7 @@ import { rest } from "msw";
 import { BASE_TEST_URL } from "__tests__/_/api-handlers/_utils";
 import CredentialsSetup from "pages/setup/credentials";
 import userEvent from "@testing-library/user-event";
+import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
 
 const server = setupApiHandlers();
 
@@ -52,9 +53,12 @@ describe("pages/setup/credentials", () => {
   it("should render only 'Database Type' input on load", async () => {
     localStorage.clear();
     const replaceMock = jest.fn();
-    useRouter.mockImplementation(() => ({
-      replace: replaceMock,
-    }));
+
+    useRouter.mockImplementation(
+      USE_ROUTER_PARAMS({
+        replaceMock,
+      })
+    );
 
     const { container } = render(
       <ApplicationRoot>
@@ -76,9 +80,12 @@ describe("pages/setup/credentials", () => {
   it("should toggle `connection URL` mode correctly on DB type selection", async () => {
     localStorage.clear();
     const replaceMock = jest.fn();
-    useRouter.mockImplementation(() => ({
-      replace: replaceMock,
-    }));
+
+    useRouter.mockImplementation(
+      USE_ROUTER_PARAMS({
+        replaceMock,
+      })
+    );
 
     const { container } = render(
       <ApplicationRoot>
@@ -140,9 +147,11 @@ describe("pages/setup/credentials", () => {
   describe("Sqlite", () => {
     it("should submit connection successfully", async () => {
       const replaceMock = jest.fn();
-      useRouter.mockImplementation(() => ({
-        replace: replaceMock,
-      }));
+      useRouter.mockImplementation(
+        USE_ROUTER_PARAMS({
+          replaceMock,
+        })
+      );
 
       const { container } = render(
         <ApplicationRoot>
@@ -183,9 +192,11 @@ describe("pages/setup/credentials", () => {
   describe.each(POSTGRES_MYSQL_MSSQL)("$title", ({ port, title }) => {
     it("should submit connection successfully", async () => {
       const replaceMock = jest.fn();
-      useRouter.mockImplementation(() => ({
-        replace: replaceMock,
-      }));
+      useRouter.mockImplementation(
+        USE_ROUTER_PARAMS({
+          replaceMock,
+        })
+      );
 
       const { container } = render(
         <ApplicationRoot>
@@ -222,10 +233,12 @@ describe("pages/setup/credentials", () => {
 
     it("should submit connection through URL successfully", async () => {
       const replaceMock = jest.fn();
-      useRouter.mockImplementation(() => ({
-        replace: replaceMock,
-      }));
 
+      useRouter.mockImplementation(
+        USE_ROUTER_PARAMS({
+          replaceMock,
+        })
+      );
       const { container } = render(
         <ApplicationRoot>
           <CredentialsSetup />

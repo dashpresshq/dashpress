@@ -1,11 +1,12 @@
 /* eslint-disable react/function-component-definition */
-import React from "react";
+
 import { Story } from "@storybook/react";
 import { Field, Form } from "react-final-form";
 import { action } from "@storybook/addon-actions";
 import { required } from "frontend/lib/validations";
 import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 import { Stack } from "frontend/design-system/primitives/Stack";
+import { fakeMessageDescriptor } from "translations/fake";
 import { FormCheckBox } from "./FormCheckBox";
 import { FormInput } from "./FormInput";
 import { FormNumberInput } from "./FormNumberInput";
@@ -17,10 +18,11 @@ import { FormMultiSelect, FormSelect } from "./FormSelect";
 import { FormCodeEditor } from "./FormCodeEditor";
 import { AsyncFormSelect } from "./FormSelect/Async";
 import { FormSwitch } from "./FormSwitch";
-import { DeleteButton } from "../Button/DeleteButton";
 import { FormSearch } from "./FormSearch";
 import { FormFileInput } from "./FormFileInput";
 import { FormSelectButton } from "./FormSelectButton";
+import { ActionButtons } from "../Button/ActionButtons";
+import { DELETE_BUTTON_PROPS } from "../Button/constants";
 
 function DemoForm() {
   return (
@@ -29,78 +31,86 @@ function DemoForm() {
       render={({ handleSubmit }) => (
         <form onSubmit={handleSubmit} noValidate>
           <Field name="checkbox" validateFields={[]}>
-            {(renderProps) => (
-              <FormCheckBox label="Example Checkbox Input" {...renderProps} />
+            {(formProps) => (
+              <FormCheckBox
+                label={fakeMessageDescriptor("Example Checkbox Input")}
+                {...formProps}
+              />
             )}
           </Field>
 
           <Field name="switch" validateFields={[]}>
-            {(renderProps) => (
+            {(formProps) => (
               <FormSwitch
-                name={renderProps.input.name}
-                value={renderProps.input.value}
-                onChange={renderProps.input.onChange}
-                label="Example Form Switch Input"
-                {...renderProps}
+                name={formProps.input.name}
+                value={formProps.input.value}
+                onChange={formProps.input.onChange}
+                label={fakeMessageDescriptor("Example Form Switch Input")}
+                {...formProps}
               />
             )}
           </Field>
 
           <Field name="checkbox-disabled" validateFields={[]}>
-            {(renderProps) => (
+            {(formProps) => (
               <FormCheckBox
                 disabled
-                label="Disabled Example Checkbox Input"
-                {...renderProps}
+                label={fakeMessageDescriptor("Disabled Example Checkbox Input")}
+                {...formProps}
               />
             )}
           </Field>
 
           <Field name="switch-disabled" validateFields={[]}>
-            {(renderProps) => (
+            {(formProps) => (
               <FormSwitch
-                name={renderProps.input.name}
+                name={formProps.input.name}
                 disabled
-                value={renderProps.input.value}
-                onChange={renderProps.input.onChange}
-                label="Disabled Example Form Switch Input"
-                {...renderProps}
+                value={formProps.input.value}
+                onChange={formProps.input.onChange}
+                label={fakeMessageDescriptor(
+                  "Disabled Example Form Switch Input"
+                )}
+                {...formProps}
               />
             )}
           </Field>
 
           <Field name="exampleText" validateFields={[]} validate={required}>
-            {(renderProps) => (
-              <FormInput label="Example Text Input" {...renderProps} />
+            {(formProps) => (
+              <FormInput
+                label={fakeMessageDescriptor("Example Text Input")}
+                {...formProps}
+              />
             )}
           </Field>
 
           <Field name="disabled" validateFields={[]} validate={required}>
-            {(renderProps) => (
+            {(formProps) => (
               <FormInput
-                label="Disabled Text Input"
-                {...renderProps}
+                label={fakeMessageDescriptor("Disabled Text Input")}
+                {...formProps}
                 disabled
               />
             )}
           </Field>
 
           <Field name="requiredText" validateFields={[]} validate={required}>
-            {(renderProps) => (
+            {(formProps) => (
               <FormInput
-                label="Required Text Input"
+                label={fakeMessageDescriptor("Required Text Input")}
                 required
-                {...renderProps}
+                {...formProps}
               />
             )}
           </Field>
 
           <Field name="descriptionText" validateFields={[]} validate={required}>
-            {(renderProps) => (
+            {(formProps) => (
               <FormInput
                 description="Some Description here"
-                label="With description"
-                {...renderProps}
+                label={fakeMessageDescriptor("With description")}
+                {...formProps}
               />
             )}
           </Field>
@@ -110,16 +120,17 @@ function DemoForm() {
             validateFields={[]}
             validate={required}
           >
-            {(renderProps) => (
+            {(formProps) => (
               <FormInput
                 rightActions={[
                   {
-                    label: "Please click me",
+                    systemIcon: "ToggleLeft",
+                    label: fakeMessageDescriptor("Please click me"),
                     action: action("right click actions"),
                   },
                 ]}
-                label="With right action"
-                {...renderProps}
+                label={fakeMessageDescriptor("With right action")}
+                {...formProps}
               />
             )}
           </Field>
@@ -129,20 +140,22 @@ function DemoForm() {
             validateFields={[]}
             validate={required}
           >
-            {(renderProps) => (
+            {(formProps) => (
               <FormInput
                 rightActions={[
                   {
-                    label: "Please click me",
+                    systemIcon: "ToggleLeft",
+                    label: fakeMessageDescriptor("Please click me"),
                     action: action("right click actions"),
                   },
                   {
-                    label: "Please click me 2",
+                    systemIcon: "ToggleLeft",
+                    label: fakeMessageDescriptor("Please click me"),
                     action: action("right click actions"),
                   },
                 ]}
-                label="With multiple right action"
-                {...renderProps}
+                label={fakeMessageDescriptor("With multiple right action")}
+                {...formProps}
               />
             )}
           </Field>
@@ -152,29 +165,29 @@ function DemoForm() {
             validateFields={[]}
             validate={required}
           >
-            {(renderProps) => (
+            {(formProps) => (
               <FormSelectButton
                 selectData={[
-                  { label: "Wood", value: "wood" },
-                  { label: "Bronze", value: "bronze" },
-                  { label: "Silver", value: "silver" },
-                  { label: "Gold", value: "gold" },
+                  { label: fakeMessageDescriptor("Wood"), value: "wood" },
+                  { label: fakeMessageDescriptor("Bronze"), value: "bronze" },
+                  { label: fakeMessageDescriptor("Silver"), value: "silver" },
+                  { label: fakeMessageDescriptor("Gold"), value: "gold" },
                 ]}
-                label="Example Select Button"
-                {...renderProps}
+                label={fakeMessageDescriptor("Example Select Button")}
+                {...formProps}
               />
             )}
           </Field>
 
           <Field name="baseSelectInput" validateFields={[]} validate={required}>
-            {(renderProps) => (
+            {(formProps) => (
               <FormSelect
                 selectData={[
-                  { label: "Foo", value: "foo" },
-                  { label: "Bar", value: "bar" },
+                  { label: fakeMessageDescriptor("Foo"), value: "foo" },
+                  { label: fakeMessageDescriptor("Bar"), value: "bar" },
                 ]}
-                label="Example Select Input"
-                {...renderProps}
+                label={fakeMessageDescriptor("Example Select Input")}
+                {...formProps}
               />
             )}
           </Field>
@@ -184,137 +197,149 @@ function DemoForm() {
             validateFields={[]}
             validate={required}
           >
-            {(renderProps) => (
+            {(formProps) => (
               <FormSelect
                 selectData={[
-                  { label: "Foo", value: "foo" },
-                  { label: "Bar", value: "bar" },
+                  { label: fakeMessageDescriptor("Foo"), value: "foo" },
+                  { label: fakeMessageDescriptor("Bar"), value: "bar" },
                 ]}
-                label="Disabled Select Input"
-                {...renderProps}
+                label={fakeMessageDescriptor("Disabled Select Input")}
+                {...formProps}
                 disabled
               />
             )}
           </Field>
 
           <Field name="asyncSelect" validateFields={[]} validate={required}>
-            {(renderProps) => (
+            {(formProps) => (
               <AsyncFormSelect
                 url="http://localhost:3000/roles"
-                label="Async Select Input"
+                label={fakeMessageDescriptor("Async Select Input")}
                 limit={2}
-                {...renderProps}
+                {...formProps}
               />
             )}
           </Field>
 
           <Field name="foo7" validateFields={[]}>
-            {(renderProps) => (
+            {(formProps) => (
               <FormMultiSelect
                 selectData={[
-                  { label: "Foo", value: "foo" },
-                  { label: "Bar", value: "bar" },
-                  { label: "Baz", value: "baz" },
-                  { label: "Noop", value: "noop" },
-                  { label: "Dupe", value: "dupe" },
+                  { label: fakeMessageDescriptor("Foo"), value: "foo" },
+                  { label: fakeMessageDescriptor("Bar"), value: "bar" },
+                  { label: fakeMessageDescriptor("Baz"), value: "baz" },
+                  { label: fakeMessageDescriptor("Noop"), value: "noop" },
+                  { label: fakeMessageDescriptor("Dupe"), value: "dupe" },
                 ]}
-                values={renderProps.input.value || ["foo", "bar"]}
-                onChange={renderProps.input.onChange}
+                values={formProps.input.value || ["foo", "bar"]}
+                onChange={formProps.input.onChange}
               />
             )}
           </Field>
 
           <Field name="file" validateFields={[]} validate={required}>
-            {(renderProps) => (
+            {(formProps) => (
               <FormFileInput
-                label="Image"
+                label={fakeMessageDescriptor("Image")}
                 required
                 uploadUrl="http://localhost:3000/api/upload"
-                {...renderProps}
+                {...formProps}
               />
             )}
           </Field>
 
           <Field name="dateInput" validateFields={[]} validate={required}>
-            {(renderProps) => (
-              <FormDateInput label="Example Date Input" {...renderProps} />
-            )}
-          </Field>
-
-          <Field name="dateInput" validateFields={[]} validate={required}>
-            {(renderProps) => (
+            {(formProps) => (
               <FormDateInput
-                label="Disbaled Date Input"
-                {...renderProps}
+                label={fakeMessageDescriptor("Example Date Input")}
+                {...formProps}
+              />
+            )}
+          </Field>
+
+          <Field name="dateInput" validateFields={[]} validate={required}>
+            {(formProps) => (
+              <FormDateInput
+                label={fakeMessageDescriptor("Disabled Date Input")}
+                {...formProps}
                 disabled
               />
             )}
           </Field>
 
           <Field name="numberInput" validateFields={[]} validate={required}>
-            {(renderProps) => (
-              <FormNumberInput label="Example Number Input" {...renderProps} />
-            )}
-          </Field>
-
-          <Field name="numberInput" validateFields={[]} validate={required}>
-            {(renderProps) => (
+            {(formProps) => (
               <FormNumberInput
-                label="Disabled Number Input"
-                {...renderProps}
+                label={fakeMessageDescriptor("Example Number Input")}
+                {...formProps}
+              />
+            )}
+          </Field>
+
+          <Field name="numberInput" validateFields={[]} validate={required}>
+            {(formProps) => (
+              <FormNumberInput
+                label={fakeMessageDescriptor("Disabled Number Input")}
+                {...formProps}
                 disabled
               />
             )}
           </Field>
 
           <Field name="textArea" validateFields={[]} validate={required}>
-            {(renderProps) => (
-              <FormTextArea label="Example Text Area Input" {...renderProps} />
-            )}
-          </Field>
-
-          <Field name="textArea" validateFields={[]} validate={required}>
-            {(renderProps) => (
+            {(formProps) => (
               <FormTextArea
-                label="Disabled Text Area Input"
-                {...renderProps}
+                label={fakeMessageDescriptor("Example Text Area Input")}
+                {...formProps}
+              />
+            )}
+          </Field>
+
+          <Field name="textArea" validateFields={[]} validate={required}>
+            {(formProps) => (
+              <FormTextArea
+                label={fakeMessageDescriptor("Disabled Text Area Input")}
+                {...formProps}
                 disabled
               />
             )}
           </Field>
 
           <Field name="richText" validateFields={[]} validate={required}>
-            {(renderProps) => (
-              <FormRichTextArea label="Example Rich Text" {...renderProps} />
-            )}
-          </Field>
-
-          <Field name="richText" validateFields={[]} validate={required}>
-            {(renderProps) => (
+            {(formProps) => (
               <FormRichTextArea
-                label="Disabled Rich Text"
-                {...renderProps}
+                label={fakeMessageDescriptor("Example Rich Text")}
+                {...formProps}
+              />
+            )}
+          </Field>
+
+          <Field name="richText" validateFields={[]} validate={required}>
+            {(formProps) => (
+              <FormRichTextArea
+                label={fakeMessageDescriptor("Disabled Rich Text")}
+                {...formProps}
                 disabled
               />
             )}
           </Field>
 
           <Field name="code" validateFields={[]} validate={required}>
-            {(renderProps) => (
+            {(formProps) => (
               <FormCodeEditor
                 language="javascript"
-                label="Javascript"
-                {...renderProps}
+                label={fakeMessageDescriptor("Javascript")}
+                {...formProps}
               />
             )}
           </Field>
 
           <Field name="code" validateFields={[]} validate={required}>
-            {(renderProps) => (
+            {(formProps) => (
               <FormCodeEditor
                 language="javascript"
-                label="Disabled Javascript"
-                {...renderProps}
+                label={fakeMessageDescriptor("Disabled Javascript")}
+                {...formProps}
                 disabled
               />
             )}
@@ -322,25 +347,36 @@ function DemoForm() {
 
           <FormSearch onChange={() => {}} />
 
-          <DeleteButton
-            onDelete={action("")}
-            isMakingDeleteRequest={false}
-            text="Me"
+          <ActionButtons
+            justIcons
+            actionButtons={[
+              {
+                ...DELETE_BUTTON_PROPS({
+                  action: () => action(""),
+                  label: fakeMessageDescriptor("Delete Me"),
+                  isMakingRequest: false,
+                }),
+              },
+            ]}
           />
-          <Stack justify="flex-end">
+          <Stack $justify="flex-end">
             <FormButton
               text={(isSubmitting) =>
-                isSubmitting ? "Making Progress" : "Make Progress"
+                fakeMessageDescriptor(
+                  isSubmitting ? "Making Progress" : "Make Progress"
+                )
               }
-              icon="save"
+              systemIcon="Save"
               isMakingRequest
             />
             <FormButton
               text={(isSubmitting) =>
-                isSubmitting ? "Doing Something" : "Do Something"
+                fakeMessageDescriptor(
+                  isSubmitting ? "Doing Something" : "Do Something"
+                )
               }
               isMakingRequest={false}
-              icon="save"
+              systemIcon="Save"
             />
           </Stack>
         </form>

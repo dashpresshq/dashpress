@@ -61,16 +61,12 @@ const PERSITENT_ADAPTORS: {
 describe.each(PERSITENT_ADAPTORS)(
   "$title persistence adaptor",
   ({ adaptor, title }) => {
-    beforeAll(async () => {
-      await adaptor.setup();
-    });
-
     it("should get create new item when persisting", async () => {
       await adaptor.persistItem("foo", { age: 5, id: "foo", name: "Hello" });
     });
 
     it("should getItem", async () => {
-      expect(await adaptor.getItem("foo")).toEqual({
+      expect(await adaptor.getItem("foo", undefined)).toEqual({
         age: 5,
         id: "foo",
         name: "Hello",
@@ -93,7 +89,7 @@ describe.each(PERSITENT_ADAPTORS)(
         name: "Updated",
       });
 
-      expect(await adaptor.getItem("foo")).toEqual({
+      expect(await adaptor.getItem("foo", undefined)).toEqual({
         age: 5,
         id: "updated",
         name: "Updated",
@@ -101,7 +97,7 @@ describe.each(PERSITENT_ADAPTORS)(
     });
 
     it("should remove existing item", async () => {
-      expect(await adaptor.getItem("foo")).toEqual({
+      expect(await adaptor.getItem("foo", undefined)).toEqual({
         age: 5,
         id: "updated",
         name: "Updated",
@@ -109,7 +105,7 @@ describe.each(PERSITENT_ADAPTORS)(
 
       await adaptor.removeItem("foo");
 
-      expect(await adaptor.getItem("foo")).toBeFalsy();
+      expect(await adaptor.getItem("foo", undefined)).toBeFalsy();
     });
 
     it("should insert new items when reseting state", async () => {

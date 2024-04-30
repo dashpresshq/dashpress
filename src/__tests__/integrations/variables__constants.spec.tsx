@@ -1,5 +1,3 @@
-import "@testing-library/jest-dom";
-import React from "react";
 import { render, screen, within } from "@testing-library/react";
 import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 
@@ -7,19 +5,22 @@ import ManageVariables from "pages/integrations/variables";
 
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 import userEvent from "@testing-library/user-event";
+import { closeAllToasts } from "__tests__/_/utils/closeAllToasts";
+import { getTableRows } from "__tests__/_/utils/getTableRows";
+import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
 
 setupApiHandlers();
 
 describe("pages/integrations/variables => constants", () => {
   const useRouter = jest.spyOn(require("next/router"), "useRouter");
-  beforeAll(() => {
-    useRouter.mockImplementation(() => ({
-      asPath: "/",
+
+  useRouter.mockImplementation(
+    USE_ROUTER_PARAMS({
       query: {
         key: "foo",
       },
-    }));
-  });
+    })
+  );
 
   describe("list", () => {
     it("should list constants", async () => {
@@ -29,28 +30,20 @@ describe("pages/integrations/variables => constants", () => {
         </ApplicationRoot>
       );
 
-      const table = await screen.findByRole("table");
-
       expect(
-        await within(table).findByRole("row", {
-          name: "Key Sort By Key Filter Key By Search Value Sort By Value Action",
-        })
-      ).toBeInTheDocument();
-      expect(
-        within(table).getByRole("row", {
-          name: "{{ CONSTANT.BASE_URL }} http://base.com",
-        })
-      ).toBeInTheDocument();
-      expect(
-        within(table).getByRole("row", {
-          name: "{{ CONSTANT.FOO_CONSTANT_KEY }} foo constant value",
-        })
-      ).toBeInTheDocument();
-      expect(
-        within(table).getByRole("row", {
-          name: "{{ CONSTANT.BAR_CONSTANT_KEY }} bar constant value",
-        })
-      ).toBeInTheDocument();
+        await getTableRows(
+          await within(
+            screen.getByRole("tabpanel", { name: "Constants" })
+          ).findByRole("table")
+        )
+      ).toMatchInlineSnapshot(`
+        [
+          "Key|Value|Action",
+          "{{ CONSTANT.BASE_URL }}|http://base.com",
+          "{{ CONSTANT.FOO_CONSTANT_KEY }}|foo constant value",
+          "{{ CONSTANT.BAR_CONSTANT_KEY }}|bar constant value",
+        ]
+      `);
     });
   });
 
@@ -65,7 +58,7 @@ describe("pages/integrations/variables => constants", () => {
         await screen.findByRole("button", { name: "Add New Constant" })
       );
 
-      const dialog = screen.getByRole("dialog");
+      const dialog = await screen.findByRole("dialog");
 
       expect(within(dialog).getByText("Create Constant")).toBeInTheDocument();
 
@@ -88,15 +81,21 @@ describe("pages/integrations/variables => constants", () => {
         </ApplicationRoot>
       );
 
-      const table = screen.getByRole("table");
-
-      expect(within(table).getAllByRole("row")).toHaveLength(5);
-
       expect(
-        within(table).getByRole("row", {
-          name: "{{ CONSTANT.NEW_KEY }} new value",
-        })
-      ).toBeInTheDocument();
+        await getTableRows(
+          within(screen.getByRole("tabpanel", { name: "Constants" })).getByRole(
+            "table"
+          )
+        )
+      ).toMatchInlineSnapshot(`
+        [
+          "Key|Value|Action",
+          "{{ CONSTANT.BASE_URL }}|http://base.com",
+          "{{ CONSTANT.FOO_CONSTANT_KEY }}|foo constant value",
+          "{{ CONSTANT.BAR_CONSTANT_KEY }}|bar constant value",
+          "{{ CONSTANT.NEW_KEY }}|new value",
+        ]
+      `);
     });
   });
 
@@ -108,13 +107,15 @@ describe("pages/integrations/variables => constants", () => {
         </ApplicationRoot>
       );
 
-      const table = screen.getByRole("table");
+      const table = within(
+        screen.getByRole("tabpanel", { name: "Constants" })
+      ).getByRole("table");
 
       const tableRows = await within(table).findAllByRole("row");
 
       await userEvent.click(
         within(tableRows[1]).getByRole("button", {
-          name: "Edit",
+          name: "Edit Constant",
         })
       );
 
@@ -130,9 +131,11 @@ describe("pages/integrations/variables => constants", () => {
         within(dialog).getByRole("button", { name: "Update Constant" })
       );
 
-      expect((await screen.findAllByRole("status"))[0]).toHaveTextContent(
+      expect(await screen.findByRole("status")).toHaveTextContent(
         "Constant Saved Successfully"
       );
+
+      await closeAllToasts();
     });
 
     it("should show updated constant", async () => {
@@ -142,13 +145,21 @@ describe("pages/integrations/variables => constants", () => {
         </ApplicationRoot>
       );
 
-      const table = screen.getByRole("table");
-
       expect(
-        within(table).getByRole("row", {
-          name: "{{ CONSTANT.BASE_URL }} http://base.com/updated",
-        })
-      ).toBeInTheDocument();
+        await getTableRows(
+          within(screen.getByRole("tabpanel", { name: "Constants" })).getByRole(
+            "table"
+          )
+        )
+      ).toMatchInlineSnapshot(`
+        [
+          "Key|Value|Action",
+          "{{ CONSTANT.BASE_URL }}|http://base.com/updated",
+          "{{ CONSTANT.FOO_CONSTANT_KEY }}|foo constant value",
+          "{{ CONSTANT.BAR_CONSTANT_KEY }}|bar constant value",
+          "{{ CONSTANT.NEW_KEY }}|new value",
+        ]
+      `);
     });
   });
 
@@ -160,7 +171,9 @@ describe("pages/integrations/variables => constants", () => {
         </ApplicationRoot>
       );
 
-      const table = screen.getByRole("table");
+      const table = within(
+        screen.getByRole("tabpanel", { name: "Constants" })
+      ).getByRole("table");
 
       const tableRows = await within(table).findAllByRole("row");
 
@@ -168,7 +181,7 @@ describe("pages/integrations/variables => constants", () => {
 
       await userEvent.click(
         within(tableRows[2]).getByRole("button", {
-          name: "Delete Button",
+          name: "Delete Constant",
         })
       );
 
@@ -182,7 +195,7 @@ describe("pages/integrations/variables => constants", () => {
 
       expect(await within(table).findAllByRole("row")).toHaveLength(4);
 
-      expect((await screen.findAllByRole("status"))[0]).toHaveTextContent(
+      expect(await screen.findByRole("status")).toHaveTextContent(
         "Constant Deleted Successfully"
       );
     });

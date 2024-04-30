@@ -1,5 +1,6 @@
-import { useQueries, UseQueryResult } from "react-query";
-import { makeGetRequest } from "../makeRequest";
+import { useQueries, UseQueryResult } from "@tanstack/react-query";
+import { useRouter } from "next/router";
+import { ApiRequest } from "../makeRequest";
 import { getQueryCachekey } from "../constants/getQueryCacheKey";
 
 interface IApiQueriesOptions<T, P> {
@@ -20,19 +21,19 @@ export function useApiQueries<T, P>({
   UseQueryResult<Record<string, UseQueryResult<P, unknown>>, unknown>,
   "data" | "error" | "isLoading"
 > {
-  const queryResults = useQueries(
-    input.map((inputItem) => ({
+  const router = useRouter();
+
+  const queryResults = useQueries({
+    queries: input.map((inputItem) => ({
       placeholderData: placeholderDataFn
         ? placeholderDataFn(inputItem[accessor])
         : undefined,
+      enabled: router.isReady,
       queryKey: getQueryCachekey(pathFn(inputItem[accessor])),
       queryFn: async () =>
-        dataTransformer(
-          await makeGetRequest(pathFn(inputItem[accessor])),
-          inputItem[accessor]
-        ) as P,
-    }))
-  );
+        dataTransformer(await ApiRequest.GET(pathFn(inputItem[accessor]))) as P,
+    })),
+  });
 
   const recordedData = (): Record<keyof T, UseQueryResult<P, unknown>> =>
     Object.fromEntries(

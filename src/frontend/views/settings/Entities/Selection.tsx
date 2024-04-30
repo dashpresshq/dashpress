@@ -1,95 +1,81 @@
-import React, { useEffect, useState } from "react";
-import { ICrudConfig } from "frontend/lib/crud-config";
-import { FormButton } from "frontend/design-system/components/Button/FormButton";
-import { Spacer } from "frontend/design-system/primitives/Spacer";
-import { RenderList } from "frontend/design-system/components/RenderList";
-import { SectionListItem } from "frontend/design-system/components/Section/SectionList";
+import { useEffect } from "react";
+import { ListManager } from "frontend/design-system/components/ListManager";
+import { loadedDataState } from "frontend/lib/data/constants/loadedDataState";
+import { IListMangerItemProps } from "frontend/design-system/components/ListManager/ListManagerItem";
+import { msg } from "@lingui/macro";
 import { useStringSelections } from "../../../lib/selection";
 
 interface IProps {
   selectionKey: string;
   hiddenList: string[];
+  type: "relations" | "active";
   allList: string[];
-  crudConfig: ICrudConfig;
-  onSubmit: (columnsSelection: string[]) => Promise<void>;
+  sort?: {
+    order: string[];
+    save: (columnsSelection: string[]) => Promise<void | string[]>;
+  };
+  onSubmit: (columnsSelection: string[]) => Promise<void | string[]>;
   getEntityFieldLabels: (fieldName: string) => string;
 }
-
-const LONG_LIST_THRESHOLD = 10;
 
 export function EntitiesSelection({
   selectionKey,
   getEntityFieldLabels,
   allList,
   onSubmit,
+  sort,
+  type,
   hiddenList,
-  crudConfig,
 }: IProps) {
-  const { toggleSelection, allSelections, selectMutiple, isSelected } =
-    useStringSelections(`${selectionKey}--entities-selection`);
-
-  const [touched, setTouched] = useState(false);
-
-  const [isMakingRequest, setIsMakingRequest] = useState(false);
-
-  useEffect(() => {
-    selectMutiple(hiddenList);
-  }, [hiddenList]);
-
-  const formButton = (
-    <>
-      <Spacer size="xxl" />
-      <FormButton
-        onClick={async () => {
-          setIsMakingRequest(true);
-          await onSubmit(allSelections);
-          setIsMakingRequest(false);
-          setTouched(false);
-        }}
-        icon="save"
-        text={crudConfig.FORM_LANG.UPSERT}
-        disabled={!touched}
-        isMakingRequest={isMakingRequest}
-      />
-    </>
+  const { toggleSelection, setMultiple, isSelected } = useStringSelections(
+    `${selectionKey}--entities-selection`
   );
 
+  useEffect(() => {
+    setMultiple(hiddenList);
+  }, [hiddenList]);
+
   return (
-    <>
-      {allList.length > LONG_LIST_THRESHOLD && (
-        <>
-          {formButton}
-          <Spacer size="xxl" />
-        </>
+    <ListManager
+      items={loadedDataState(
+        allList.map((listItem) => ({
+          name: listItem,
+        }))
       )}
-      {allList.length > 0 && (
-        <>
-          <RenderList
-            items={allList.map((listItem) => ({
-              name: listItem,
-            }))}
-            getLabel={getEntityFieldLabels}
-            singular="Entity"
-            render={(menuItem) => {
-              const isHidden = isSelected(menuItem.name);
-              return (
-                <SectionListItem
-                  label={menuItem.label}
-                  key={menuItem.name}
-                  toggle={{
-                    selected: !isHidden,
-                    onChange: () => {
-                      setTouched(true);
-                      toggleSelection(menuItem.name);
-                    },
-                  }}
-                />
-              );
-            }}
-          />
-          {formButton}
-        </>
-      )}
-    </>
+      listLengthGuess={15}
+      labelField="name"
+      getLabel={getEntityFieldLabels}
+      empty={{
+        text:
+          type === "relations"
+            ? msg`This entity has no relations`
+            : msg`This application has no active entities. Kindly add new entities through your preferred database editor then restart this application to proceed.`,
+      }}
+      sort={
+        sort
+          ? {
+              orderList: sort.order,
+              key: "name",
+              on: (newOrder) => {
+                sort.save(newOrder);
+              },
+            }
+          : undefined
+      }
+      render={(menuItem) => {
+        const isHidden = isSelected(menuItem.name);
+        const props: IListMangerItemProps = {
+          label: menuItem.label,
+          toggle: {
+            selected: !isHidden,
+            onChange: () => {
+              toggleSelection(menuItem.name, onSubmit);
+            },
+          },
+        };
+
+        return props;
+      }}
+    />
   );
 }

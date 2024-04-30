@@ -1,65 +1,19 @@
-import { BREAKPOINTS } from "frontend/design-system/constants";
-import { WidgetSizes } from "shared/types/dashboard/types";
+import { gridItem, gridRoot } from "frontend/design-system/constants/grid";
+import { GridSpanSizes } from "shared/types/ui";
 import styled, { css } from "styled-components";
 
-export const gridRoot = css`
+export const dashboardGridRoot = css`
+  ${gridRoot}
   user-select: none;
-  display: grid;
-  grid-gap: 16px;
-  grid-template-columns: repeat(4, 1fr);
-  grid-auto-rows: minmax(130px, auto);
-  @media (max-width: ${BREAKPOINTS.lg}) {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  @media (max-width: ${BREAKPOINTS.sm}) {
-    grid-template-columns: 1fr;
-  }
+  row-gap: 16px;
+  grid-auto-rows: minmax(110px, auto);
 `;
 
-const WIDGET_SIZE_CONFIG: Record<
-  WidgetSizes,
-  { lg: number; sm: number; xl: number }
-> = {
-  "1": {
-    sm: 1,
-    lg: 1,
-    xl: 1,
-  },
-  "2": {
-    sm: 1,
-    lg: 2,
-    xl: 2,
-  },
-  "3": {
-    sm: 1,
-    lg: 2,
-    xl: 3,
-  },
-  "4": {
-    sm: 1,
-    lg: 2,
-    xl: 4,
-  },
-};
-
 export const WidgetRoot = styled.div<{
-  hasSetting: boolean;
-  $size: WidgetSizes;
+  $span: GridSpanSizes;
   $height: string;
 }>`
-  ${(props) =>
-    props.hasSetting &&
-    css`
-      cursor: grab;
-      user-select: none;
-    `}
-  grid-column-start: span ${(props) => WIDGET_SIZE_CONFIG[props.$size].xl};
-  grid-row-start: span ${(props) => props.$height};
+  ${gridItem};
 
-  @media (max-width: ${BREAKPOINTS.lg}) {
-    grid-column-start: span ${(props) => WIDGET_SIZE_CONFIG[props.$size].lg};
-  }
-  @media (max-width: ${BREAKPOINTS.sm}) {
-    grid-column-start: span ${(props) => WIDGET_SIZE_CONFIG[props.$size].sm};
-  }
+  grid-row-start: span ${(props) => props.$height};
 `;

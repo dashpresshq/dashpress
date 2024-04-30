@@ -1,4 +1,3 @@
-import { useActiveEntities } from "frontend/hooks/entity/entity.store";
 import {
   FEPaginationTable,
   IFETableCell,
@@ -6,178 +5,181 @@ import {
 } from "frontend/components/FEPaginationTable";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import {
-  useActionIntegrationsList,
-  useActiveActionList,
+  useIntegrationsList,
+  useActiveIntegrations,
 } from "frontend/views/integrations/actions/actions.store";
 import { useCallback, useState } from "react";
-import { IActionInstance } from "shared/types/actions";
+import { IFormAction } from "shared/types/actions";
 import { useApi } from "frontend/lib/data/useApi";
-import { SLUG_LOADING_VALUE } from "frontend/lib/routing/constants";
 import { SoftButton } from "frontend/design-system/components/Button/SoftButton";
-import { DeleteButton } from "frontend/design-system/components/Button/DeleteButton";
 import { Stack } from "frontend/design-system/primitives/Stack";
 import { TableSkeleton } from "frontend/design-system/components/Skeleton/Table";
 import { Spacer } from "frontend/design-system/primitives/Spacer";
 import { OffCanvas } from "frontend/design-system/components/OffCanvas";
-import { ActionInstanceView } from "./types";
-import { ADMIN_ACTION_INSTANCES_CRUD_CONFIG } from "./constants";
+import { userFriendlyCase } from "shared/lib/strings/friendly-case";
+import { ActionButtons } from "frontend/design-system/components/Button/ActionButtons";
+import { DELETE_BUTTON_PROPS } from "frontend/design-system/components/Button/constants";
+import { msg } from "@lingui/macro";
+import { FORM_ACTION_CRUD_CONFIG } from "./constants";
 import {
-  LIST_ACTION_INSTANCES,
-  useCreateActionInstanceMutation,
-  useDeleteActionInstanceMutation,
-  useUpdateActionInstanceMutation,
-} from "./instances.store";
+  LIST_ENTITY_FORM_ACTIONS,
+  useCreateFormActionMutation,
+  useDeleteFormActionMutation,
+  useUpdateFormActionMutation,
+} from "./form-actions.store";
 import { ActionForm } from "./Form";
 
 const NEW_ACTION_ITEM = "__new_action_item__";
 
-export function BaseActionInstances(actionInstanceView: ActionInstanceView) {
-  const activeActionList = useActiveActionList();
-  const integrationsList = useActionIntegrationsList();
-  const activeEntities = useActiveEntities();
+export function FormActions({ entity }: { entity: string }) {
+  const activeIntegration = useActiveIntegrations();
+  const integrationsList = useIntegrationsList();
 
-  const dataEndpoint = LIST_ACTION_INSTANCES(actionInstanceView);
+  const dataEndpoint = LIST_ENTITY_FORM_ACTIONS(entity);
 
-  const tableData = useApi<IActionInstance[]>(dataEndpoint, {
+  const tableData = useApi<IFormAction[]>(dataEndpoint, {
     defaultData: [],
   });
 
-  const deleteActionInstanceMutation =
-    useDeleteActionInstanceMutation(actionInstanceView);
-  const updateActionInstanceMutation = useUpdateActionInstanceMutation();
-  const createActionInstanceMutation = useCreateActionInstanceMutation();
+  const deleteFormActionMutation = useDeleteFormActionMutation(entity);
+  const updateFormActionMutation = useUpdateFormActionMutation(entity);
+  const createFormActionMutation = useCreateFormActionMutation(entity);
 
-  const [currentInstanceId, setCurrentInstanceItem] = useState("");
-
-  const { id: actionInstanceViewId, type: actionInstanceViewType } =
-    actionInstanceView;
+  const [currentFormActionId, setCurrentFormActionId] = useState("");
 
   const closeConfigItem = () => {
-    setCurrentInstanceItem("");
+    setCurrentFormActionId("");
   };
 
   const MemoizedAction = useCallback(
-    ({ row }: IFETableCell<IActionInstance>) => (
-      <Stack spacing={4} align="center">
-        <SoftButton
-          action={() => setCurrentInstanceItem(row.original.instanceId)}
-          label="Edit"
-          justIcon
-          icon="edit"
-        />
-        <DeleteButton
-          onDelete={() =>
-            deleteActionInstanceMutation.mutateAsync(row.original.instanceId)
-          }
-          isMakingDeleteRequest={false}
-          shouldConfirmAlert
-        />
-      </Stack>
+    ({ row }: IFETableCell<IFormAction>) => (
+      <ActionButtons
+        justIcons
+        actionButtons={[
+          {
+            id: "edit",
+            action: () => setCurrentFormActionId(row.original.id),
+            label: FORM_ACTION_CRUD_CONFIG.TEXT_LANG.EDIT,
+            systemIcon: "Edit",
+          },
+          {
+            ...DELETE_BUTTON_PROPS({
+              action: () =>
+                deleteFormActionMutation.mutateAsync(row.original.id),
+              label: FORM_ACTION_CRUD_CONFIG.TEXT_LANG.DELETE,
+              isMakingRequest: false,
+            }),
+          },
+        ]}
+      />
     ),
-    [deleteActionInstanceMutation.isLoading]
+    [deleteFormActionMutation.isPending]
   );
 
-  const columns: IFETableColumn<IActionInstance>[] = [
-    actionInstanceViewType === "integrationKey"
-      ? {
-          Header: "Entity",
-          accessor: "entity",
-          filter: {
-            _type: "string",
-            bag: undefined,
-          },
-        }
-      : {
-          Header: "Integration",
-          accessor: "integrationKey",
-          filter: {
-            _type: "string",
-            bag: undefined,
-          },
-        },
+  const columns: IFETableColumn<IFormAction>[] = [
     {
-      Header: "Trigger",
-      accessor: "formAction",
+      Header: msg`Integration`,
+      accessor: "integration",
       filter: {
         _type: "string",
         bag: undefined,
       },
+      // eslint-disable-next-line react/no-unstable-nested-components
+      Cell: ({ value }: IFETableCell<IFormAction>) => {
+        return <>{userFriendlyCase(value as string)}</>;
+      },
     },
     {
-      Header: "Action",
-      accessor: "implementationKey",
+      Header: msg`Trigger`,
+      accessor: "trigger",
       filter: {
         _type: "string",
         bag: undefined,
       },
+      // eslint-disable-next-line react/no-unstable-nested-components
+      Cell: ({ value }: IFETableCell<IFormAction>) => {
+        return <>{userFriendlyCase(value as string)}</>;
+      },
     },
     {
-      Header: "Action",
+      Header: msg`Action`,
+      accessor: "action",
+      filter: {
+        _type: "string",
+        bag: undefined,
+      },
+      // eslint-disable-next-line react/no-unstable-nested-components
+      Cell: ({ value }: IFETableCell<IFormAction>) => {
+        return <>{userFriendlyCase(value as string)}</>;
+      },
+    },
+    {
+      Header: msg`Action`,
       disableSortBy: true,
       accessor: "__action__",
       Cell: MemoizedAction,
     },
   ];
 
+  const createNew = () => {
+    setCurrentFormActionId(NEW_ACTION_ITEM);
+  };
+
   return (
     <>
       <ViewStateMachine
-        loading={
-          actionInstanceViewId === SLUG_LOADING_VALUE ||
-          activeActionList.isLoading ||
-          activeEntities.isLoading ||
-          integrationsList.isLoading
-        }
-        error={
-          activeActionList.error ||
-          activeEntities.error ||
-          integrationsList.error
-        }
+        loading={activeIntegration.isLoading || integrationsList.isLoading}
+        error={activeIntegration.error || integrationsList.error}
         loader={<TableSkeleton />}
       >
-        <Stack justify="end">
+        <Stack $justify="end">
           <SoftButton
-            action={() => setCurrentInstanceItem(NEW_ACTION_ITEM)}
-            icon="add"
-            label={ADMIN_ACTION_INSTANCES_CRUD_CONFIG.TEXT_LANG.CREATE}
+            action={createNew}
+            systemIcon="Plus"
+            label={FORM_ACTION_CRUD_CONFIG.TEXT_LANG.CREATE}
           />
         </Stack>
         <Spacer />
         <FEPaginationTable
-          emptyMessage={ADMIN_ACTION_INSTANCES_CRUD_CONFIG.TEXT_LANG.EMPTY_LIST}
           border
           dataEndpoint={dataEndpoint}
           columns={columns}
+          empty={{
+            text: FORM_ACTION_CRUD_CONFIG.TEXT_LANG.EMPTY_LIST,
+            createNew: {
+              label: FORM_ACTION_CRUD_CONFIG.TEXT_LANG.CREATE,
+              action: createNew,
+            },
+          }}
         />
       </ViewStateMachine>
       <OffCanvas
         title={
-          currentInstanceId === NEW_ACTION_ITEM
-            ? ADMIN_ACTION_INSTANCES_CRUD_CONFIG.TEXT_LANG.CREATE
-            : ADMIN_ACTION_INSTANCES_CRUD_CONFIG.TEXT_LANG.EDIT
+          currentFormActionId === NEW_ACTION_ITEM
+            ? FORM_ACTION_CRUD_CONFIG.TEXT_LANG.CREATE
+            : FORM_ACTION_CRUD_CONFIG.TEXT_LANG.EDIT
         }
         onClose={closeConfigItem}
-        show={!!currentInstanceId}
+        show={!!currentFormActionId}
       >
         <ActionForm
           onSubmit={async (data) => {
-            if (currentInstanceId === NEW_ACTION_ITEM) {
-              await createActionInstanceMutation.mutateAsync(data);
+            if (currentFormActionId === NEW_ACTION_ITEM) {
+              await createFormActionMutation.mutateAsync(data);
             } else {
-              await updateActionInstanceMutation.mutateAsync(data);
+              await updateFormActionMutation.mutateAsync(data);
             }
             closeConfigItem();
           }}
-          currentView={actionInstanceView}
+          entity={entity}
           initialValues={tableData.data.find(
-            ({ instanceId }) => instanceId === currentInstanceId
+            ({ id }) => id === currentFormActionId
           )}
           formAction={
-            currentInstanceId === NEW_ACTION_ITEM ? "create" : "update"
+            currentFormActionId === NEW_ACTION_ITEM ? "create" : "update"
           }
           integrationsList={integrationsList.data}
-          activatedActions={activeActionList.data}
-          entities={activeEntities.data}
+          activatedIntegrations={activeIntegration.data}
         />
       </OffCanvas>
     </>

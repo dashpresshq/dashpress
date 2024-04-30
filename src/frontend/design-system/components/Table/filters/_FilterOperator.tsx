@@ -1,20 +1,8 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { FilterOperators, IColumnFilterBag } from "shared/types/data";
 import { Spacer } from "frontend/design-system/primitives/Spacer";
 import { SimpleSelect } from "../../Form/FormSelect/Simple";
-
-const FILTER_OPERATOR_LABELS: Record<FilterOperators, string> = {
-  [FilterOperators.EQUAL_TO]: "Equal To",
-  [FilterOperators.GREATER_THAN]: "Greater Than",
-  [FilterOperators.LESS_THAN]: "Less Than",
-  [FilterOperators.NOT_IN]: "Not In",
-  [FilterOperators.IN]: "In",
-  [FilterOperators.DATE]: "Date",
-  [FilterOperators.BETWEEN]: "Between",
-  [FilterOperators.CONTAINS]: "Contains",
-  [FilterOperators.NOT_EQUAL]: "Not Equal To",
-  [FilterOperators.IS_NULL]: "Is Null", // TODO
-};
+import { FILTER_OPERATOR_CONFIG } from "./constants";
 
 interface IProps<T> {
   operators: FilterOperators[];
@@ -41,14 +29,16 @@ export function RenderFilterOperator<T>({
         options={[
           ...operators.map((operator) => ({
             value: operator,
-            label: FILTER_OPERATOR_LABELS[operator],
+            label: FILTER_OPERATOR_CONFIG[operator].label,
           })),
         ]}
+        ariaLabel="Select Filter Operator"
         fullWidth
+        width={0}
         onChange={(value) => {
           setFilter({
             ...filterValue,
-            operator: (value as FilterOperators) || undefined,
+            operator: value as FilterOperators,
           });
         }}
         value={filterValue?.operator || ""}

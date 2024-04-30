@@ -1,12 +1,18 @@
-import React from "react";
-import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import styled from "styled-components";
 import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
+import dynamic from "next/dynamic";
 import { SYSTEM_COLORS } from "frontend/design-system/theme/system";
 import { noop } from "shared/lib/noop";
 import { ISharedFormInput } from "../_types";
 import { generateClassNames, wrapLabelAndError } from "../_wrapForm";
+
+const ReactQuill = dynamic<any>(
+  () => {
+    return import("react-quill");
+  },
+  { ssr: false }
+);
 
 const Root = styled.div`
   .ql-editor {
@@ -76,10 +82,6 @@ const Root = styled.div`
   }
 `;
 
-interface IFormRichText extends ISharedFormInput {
-  nothingForNow?: string;
-}
-
 const modules = {
   toolbar: [
     [{ size: [] }, { font: [] }],
@@ -90,7 +92,7 @@ const modules = {
       { indent: "-1" },
       { indent: "+1" },
     ],
-    ["link"], // 'image', 'video'
+    ["link"],
     ["clean"],
   ],
   clipboard: {
@@ -98,11 +100,12 @@ const modules = {
   },
 };
 
-export const FormRichTextArea: React.FC<IFormRichText> = (formInput) => {
+export const FormRichTextArea = (formInput: ISharedFormInput) => {
   const {
     input: { onFocus, onBlur, ...inputProps },
     disabled,
     meta,
+    placeholder,
   } = formInput;
   noop(onBlur, onFocus);
   return wrapLabelAndError(
@@ -113,7 +116,7 @@ export const FormRichTextArea: React.FC<IFormRichText> = (formInput) => {
         readOnly={disabled}
         modules={modules}
         id={formInput.input.name}
-        placeholder="Write something..."
+        placeholder={placeholder}
         theme="snow"
       />
     </Root>,

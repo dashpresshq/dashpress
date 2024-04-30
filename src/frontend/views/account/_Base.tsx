@@ -1,11 +1,14 @@
-import { useIsAuthenticatedStore } from "frontend/hooks/auth/useAuthenticateUser";
 import { useRouter } from "next/router";
 import { ReactNode } from "react";
-import { Lock, LogOut, User, Settings } from "react-feather";
 import { ContentLayout } from "frontend/design-system/components/Section/SectionDivider";
-import { MenuSection } from "frontend/design-system/components/Section/MenuSection";
+import {
+  IMenuSectionItem,
+  MenuSection,
+} from "frontend/design-system/components/Section/MenuSection";
 import { AppLayout } from "frontend/_layouts/app";
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
+import { AuthActions } from "frontend/hooks/auth/auth.actions";
+import { msg } from "@lingui/macro";
 import { usePortalAccountMenu } from "./portal";
 
 interface IProps {
@@ -15,44 +18,42 @@ interface IProps {
 export function BaseAccountLayout({ children }: IProps) {
   const router = useRouter();
   const portalAccountMenu = usePortalAccountMenu();
-  const setIsAuthenticated = useIsAuthenticatedStore(
-    (store) => store.setIsAuthenticated
-  );
+
+  const baseMenuItems: IMenuSectionItem[] = [
+    {
+      action: NAVIGATION_LINKS.ACCOUNT.PROFILE,
+      name: msg`Profile`,
+      systemIcon: "User",
+      order: 10,
+    },
+    {
+      action: NAVIGATION_LINKS.ACCOUNT.PREFERENCES,
+      name: msg`Preferences`,
+      systemIcon: "Settings" as const,
+      order: 20,
+    },
+    {
+      action: NAVIGATION_LINKS.ACCOUNT.PASSWORD,
+      name: msg`Password`,
+      systemIcon: "Lock",
+      order: 30,
+    },
+    {
+      action: () => {
+        AuthActions.signOut("logout");
+      },
+      name: msg`Log Out`,
+      systemIcon: "LogOut",
+      order: 40,
+    },
+  ];
 
   return (
     <AppLayout>
       <ContentLayout>
         <ContentLayout.Left>
           <MenuSection
-            menuItems={[
-              ...portalAccountMenu,
-              {
-                action: NAVIGATION_LINKS.ACCOUNT.PROFILE,
-                name: "Profile",
-                IconComponent: User,
-                order: 10,
-              },
-              {
-                action: NAVIGATION_LINKS.ACCOUNT.PREFERENCES,
-                name: "Preferences",
-                IconComponent: Settings,
-                order: 20,
-              },
-              {
-                action: NAVIGATION_LINKS.ACCOUNT.PASSWORD,
-                name: "Password",
-                IconComponent: Lock,
-                order: 30,
-              },
-              {
-                action: () => {
-                  setIsAuthenticated(false);
-                },
-                name: "Log Out",
-                IconComponent: LogOut,
-                order: 40,
-              },
-            ]}
+            menuItems={[...portalAccountMenu, ...baseMenuItems]}
             currentMenuItem={router.asPath.split("?")[0]}
           />
         </ContentLayout.Left>

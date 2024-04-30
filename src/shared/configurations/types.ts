@@ -1,8 +1,10 @@
+import { MessageDescriptor } from "@lingui/core";
+
 export interface IAppConfigurationBag {
   requireEntity?: true;
   defaultValue: unknown;
   guest?: true;
-  crudConfigLabel: string;
+  label: MessageDescriptor;
 }
 
 export interface IEntityCrudSettings {
@@ -11,6 +13,8 @@ export interface IEntityCrudSettings {
   update: boolean;
   delete: boolean;
 }
+
+export type CrudViewsKeys = keyof IEntityCrudSettings | "table";
 
 export enum DataActionType {
   Create = "create",

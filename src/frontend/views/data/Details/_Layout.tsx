@@ -7,20 +7,17 @@ import {
 import { useEntityId } from "frontend/hooks/entity/entity.config";
 import { AppLayout } from "frontend/_layouts/app";
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
-import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { useEntityDictionPlurals } from "frontend/hooks/entity/entity.queries";
 import { ContentLayout } from "frontend/design-system/components/Section/SectionDivider";
 import { SectionBox } from "frontend/design-system/components/Section/SectionBox";
-import { RenderList } from "frontend/design-system/components/RenderList";
-import { ListSkeleton } from "frontend/design-system/components/Skeleton/List";
-import { SectionListItem } from "frontend/design-system/components/Section/SectionList";
+import { ListManager } from "frontend/design-system/components/ListManager";
 import { IDropDownMenuItem } from "frontend/design-system/components/DropdownMenu";
-import { useEntityViewStateMachine } from "../useEntityViewStateMachine";
+import { DataStates } from "frontend/lib/data/types";
+import { IListMangerItemProps } from "frontend/design-system/components/ListManager/ListManagerItem";
+import { msg } from "@lingui/macro";
+import { useEntityViewStateMachine } from "../hooks/useEntityViewStateMachine";
 import { getEntitiesRelationsCount } from "./utils";
-import {
-  EntityActionTypes,
-  useEntityActionMenuItems,
-} from "../../entity/constants";
+import { useEntityActionMenuItems } from "../../entity/constants";
 
 export const DETAILS_LAYOUT_KEY = "___DETAILS_KEY__";
 
@@ -29,27 +26,18 @@ interface IProps {
   entity: string;
   menuItems?: IDropDownMenuItem[];
   menuKey: string;
-  childEntity?: string;
 }
 
 export function DetailsLayout({
   children,
   entity,
-  childEntity,
   menuKey,
   menuItems = [],
 }: IProps) {
-  const actionItems = useEntityActionMenuItems(
-    [
-      EntityActionTypes.Details,
-      EntityActionTypes.Types,
-      EntityActionTypes.Labels,
-    ],
-    childEntity
-  );
+  const actionItems = useEntityActionMenuItems(entity);
   const entityId = useEntityId();
 
-  const dataDetails = useEntityDataDetails(entity, entityId);
+  const dataDetails = useEntityDataDetails({ entity, entityId });
 
   const referenceFields = useEntityReferenceFields(entity);
 
@@ -107,62 +95,59 @@ export function DetailsLayout({
 
   const { isLoading, error } = referenceFields;
 
-  const viewState = useEntityViewStateMachine(
-    isLoading || dataDetails.isLoading,
-    error || dataDetails.error,
-    "details"
-  );
+  const viewState = useEntityViewStateMachine({
+    isLoading: isLoading || dataDetails.isLoading,
+    error: error || dataDetails.error,
+    crudAction: "details",
+    entity,
+  });
 
   return (
     <AppLayout actionItems={menuItems} secondaryActionItems={actionItems}>
       <ContentLayout>
         <ContentLayout.Left>
-          <SectionBox headLess title="">
-            <ViewStateMachine
-              loading={viewState.type === "loading"}
-              error={viewState.type === "error" ? viewState.message : undefined}
-              loader={<ListSkeleton count={5} />}
-            >
-              <RenderList
-                items={listItems}
-                getLabel={(name) => relatedEntitiesLabelMap[name]}
-                singular="Relation"
-                render={(menuItem) => {
-                  if (menuItem.name === DETAILS_LAYOUT_KEY) {
-                    return (
-                      <SectionListItem
-                        label={menuItem.label}
-                        key={menuItem.name}
-                        active={menuKey === DETAILS_LAYOUT_KEY}
-                        action={NAVIGATION_LINKS.ENTITY.DETAILS(
-                          entity,
-                          entityId
-                        )}
-                      />
-                    );
-                  }
-                  const entityType = relatedEntitiesMap[menuItem.name].type;
-                  const entityCount = getEntitiesRelationsCount(
-                    entityType,
-                    relatedEntitiesCounts.data[menuItem.name]
-                  );
+          <SectionBox headLess title={msg``}>
+            <ListManager
+              items={{
+                data: listItems,
+                error:
+                  viewState.type === DataStates.Error
+                    ? viewState.message
+                    : undefined,
+                isLoading: viewState.type === DataStates.Loading,
+              }}
+              listLengthGuess={5}
+              labelField="name"
+              getLabel={(name) => relatedEntitiesLabelMap[name]}
+              render={(menuItem) => {
+                if (menuItem.name === DETAILS_LAYOUT_KEY) {
+                  const props: IListMangerItemProps = {
+                    label: menuItem.label,
+                    active: menuKey === DETAILS_LAYOUT_KEY,
+                    action: NAVIGATION_LINKS.ENTITY.DETAILS(entity, entityId),
+                  };
+                  return props;
+                }
+                const entityType = relatedEntitiesMap[menuItem.name].type;
+                const entityCount = getEntitiesRelationsCount(
+                  entityType,
+                  relatedEntitiesCounts.data[menuItem.name]
+                );
 
-                  return (
-                    <SectionListItem
-                      label={`${menuItem.label} ${entityCount}`}
-                      key={menuItem.name}
-                      active={menuKey === menuItem.name}
-                      action={NAVIGATION_LINKS.ENTITY.RELATION_TABLE(
-                        entity,
-                        entityId,
-                        menuItem.name,
-                        entityType === "toOne" ? "one" : "many"
-                      )}
-                    />
-                  );
-                }}
-              />
-            </ViewStateMachine>
+                const props: IListMangerItemProps = {
+                  label: `${menuItem.label} ${entityCount}`,
+                  active: menuKey === menuItem.name,
+                  action: NAVIGATION_LINKS.ENTITY.RELATION_TABLE(
+                    entity,
+                    entityId,
+                    menuItem.name,
+                    entityType === "toOne" ? "one" : "many"
+                  ),
+                };
+
+                return props;
+              }}
+            />
           </SectionBox>
         </ContentLayout.Left>
         <ContentLayout.Right>{children}</ContentLayout.Right>

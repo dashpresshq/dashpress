@@ -1,8 +1,8 @@
-import { IPaginatedDataState, ITableTab } from "shared/types/data";
+import { IPaginatedDataState, ITableView } from "shared/types/data";
 import { Form, Field } from "react-final-form";
 import arrayMutators from "final-form-arrays";
 import { useFieldArray } from "react-final-form-arrays";
-import React, { useState } from "react";
+import { useState } from "react";
 import { ACTIONS_ACCESSOR } from "frontend/views/data/Table/useTableColumns";
 import { MAKE_APP_CONFIGURATION_CRUD_CONFIG } from "frontend/hooks/configuration/configuration.constant";
 import { generateRandomString } from "shared/lib/strings/random";
@@ -14,21 +14,31 @@ import {
 import { IFormProps } from "frontend/lib/form/types";
 import { ITableColumn } from "frontend/design-system/components/Table/types";
 import { SoftButton } from "frontend/design-system/components/Button/SoftButton";
-import { DeleteButton } from "frontend/design-system/components/Button/DeleteButton";
 import { Stack } from "frontend/design-system/primitives/Stack";
 import { FormInput } from "frontend/design-system/components/Form/FormInput";
 import { Spacer } from "frontend/design-system/primitives/Spacer";
 import { Table } from "frontend/design-system/components/Table";
 import { FormButton } from "frontend/design-system/components/Button/FormButton";
 import { Tabs } from "frontend/design-system/components/Tabs";
+import { ActionButtons } from "frontend/design-system/components/Button/ActionButtons";
+import { DELETE_BUTTON_PROPS } from "frontend/design-system/components/Button/constants";
+import { MAKE_CRUD_CONFIG } from "frontend/lib/crud-config";
+import { msg } from "@lingui/macro";
 
 interface IProps {
-  values: ITableTab[];
-  initialValues: ITableTab[];
+  values: ITableView[];
+  initialValues: ITableView[];
   tableColumns: ITableColumn[];
 }
 
-function TabForm({ values, tableColumns, initialValues }: IProps) {
+const TABLE_VIEW_CRUD_CONFIG = MAKE_CRUD_CONFIG({
+  plural: msg`Table Views`,
+  singular: msg`Table View`,
+});
+
+const makeViewTitle = (index: number) => `View ${index}`;
+
+function TabForm({ tableColumns, values, initialValues }: IProps) {
   const { fields } = useFieldArray("tabs");
   const [currentTab, setCurrentTab] = useState("");
 
@@ -36,98 +46,113 @@ function TabForm({ values, tableColumns, initialValues }: IProps) {
     ({ accessor }) => ACTIONS_ACCESSOR !== accessor
   );
 
-  const newTabButton = (
-    <SoftButton
-      icon="add"
-      label="Add New Tab"
-      action={() => {
-        const newTab: ITableTab = {
-          id: generateRandomString(12),
-          title: `Tab ${fields.length + 1}`,
-          dataState: {
-            filters: [],
-            pageSize: undefined,
-            sortBy: [],
-          },
-        };
-        fields.push(newTab);
-        setCurrentTab(`Tab ${fields.length + 1}`);
-      }}
-    />
-  );
-
-  return values.length > 0 ? (
-    <Tabs
-      currentTab={currentTab}
-      onChange={setCurrentTab}
-      contents={fields.map((field, index) => {
-        const dataState: Pick<
-          IPaginatedDataState<unknown>,
-          "filters" | "sortBy" | "pageSize"
-        > = initialValues[index]?.dataState || {
-          filters: [],
-          pageSize: undefined,
-          sortBy: [],
-        };
-        return {
-          content: (
-            <>
-              <Stack justify="end">
-                <DeleteButton
-                  onDelete={() => {
-                    fields.remove(index);
-                    setCurrentTab(`Tab ${index}`);
-                  }}
-                  shouldConfirmAlert={false}
-                  text="Tab"
-                  size="xs"
-                />
-                {newTabButton}
-              </Stack>
-              <Spacer />
-              <Field
-                name={`${field}.title`}
-                validate={composeValidators(required, maxLength(64))}
-                validateFields={[]}
-              >
-                {({ meta, input }) => (
-                  <FormInput label="Title" required meta={meta} input={input} />
-                )}
-              </Field>
-              <Field name={`${field}.dataState`} validateFields={[]}>
-                {({ input }) => (
-                  <Table
-                    {...{
-                      tableData: {
-                        error: false,
-                        isLoading: false,
-                        isPreviousData: false,
-                        data: {
-                          data: [],
-                          pageIndex: 0,
-                          pageSize: 10,
-                          totalRecords: 0,
+  return (
+    <>
+      <Stack $justify="end">
+        <SoftButton
+          systemIcon="Plus"
+          label={TABLE_VIEW_CRUD_CONFIG.TEXT_LANG.CREATE}
+          action={() => {
+            const newTab: ITableView = {
+              id: generateRandomString(12),
+              title: makeViewTitle(fields.length + 1),
+              dataState: {
+                filters: [],
+                pageSize: undefined,
+                sortBy: [],
+              },
+            };
+            fields.push(newTab);
+            setCurrentTab(newTab.id);
+          }}
+        />
+      </Stack>
+      {values.length > 0 && (
+        <Tabs
+          currentTab={currentTab}
+          onChange={setCurrentTab}
+          contents={fields.map((field, index) => {
+            const dataState: Pick<
+              IPaginatedDataState<unknown>,
+              "filters" | "sortBy" | "pageSize"
+            > = initialValues[index]?.dataState || {
+              filters: [],
+              pageSize: undefined,
+              sortBy: [],
+            };
+            return {
+              content: (
+                <>
+                  <Stack $justify="end">
+                    <ActionButtons
+                      size="xs"
+                      actionButtons={[
+                        {
+                          ...DELETE_BUTTON_PROPS({
+                            action: () => {
+                              fields.remove(index);
+                              if (fields.length > 0 && index > 0) {
+                                setCurrentTab(fields.value[index - 1].id);
+                              }
+                            },
+                            label: TABLE_VIEW_CRUD_CONFIG.TEXT_LANG.DELETE,
+                            isMakingRequest: false,
+                            shouldConfirmAlert: undefined,
+                          }),
                         },
-                      },
-                      syncPaginatedDataStateOut: input.onChange,
-                      overridePaginatedDataState: {
-                        ...dataState,
-                        pageIndex: 0,
-                      },
-                    }}
-                    columns={columns}
-                  />
-                )}
-              </Field>
-            </>
-          ),
-          label: `Tab ${index + 1}`,
-          overrideLabel: fields.value[index]?.title,
-        };
-      })}
-    />
-  ) : (
-    <Stack justify="end">{newTabButton}</Stack>
+                      ]}
+                    />
+                  </Stack>
+                  <Spacer />
+                  <Field
+                    name={`${field}.title`}
+                    validate={composeValidators(required, maxLength(64))}
+                    validateFields={[]}
+                  >
+                    {({ meta, input }) => (
+                      <FormInput
+                        label={msg`Title`}
+                        required
+                        meta={meta}
+                        input={input}
+                      />
+                    )}
+                  </Field>
+                  <Field name={`${field}.dataState`} validateFields={[]}>
+                    {({ input }) => (
+                      <Table
+                        {...{
+                          tableData: {
+                            error: false,
+                            isLoading: false,
+                            isPlaceholderData: false,
+                            data: {
+                              data: [],
+                              pageIndex: 0,
+                              pageSize: 10,
+                              totalRecords: 0,
+                            },
+                          },
+                          syncPaginatedDataStateOut: input.onChange,
+                          overridePaginatedDataState: {
+                            ...dataState,
+                            pageIndex: 0,
+                          },
+                        }}
+                        empty={{ text: msg`No Data` }}
+                        columns={columns}
+                      />
+                    )}
+                  </Field>
+                </>
+              ),
+              id: fields.value[index].id,
+              label: msg`${fields.value[index]?.title}`,
+            };
+          })}
+        />
+      )}
+    </>
   );
 }
 
@@ -135,7 +160,7 @@ export function EntityTableTabForm({
   onSubmit,
   initialValues,
   tableColumns,
-}: IFormProps<ITableTab[]> & { tableColumns: ITableColumn[] }) {
+}: IFormProps<ITableView[]> & { tableColumns: ITableColumn[] }) {
   return (
     <Form
       onSubmit={({ tabs }) => onSubmit(tabs)}
@@ -152,21 +177,22 @@ export function EntityTableTabForm({
       }) => {
         return (
           <>
-            <FormButton
-              isMakingRequest={submitting}
-              onClick={handleSubmit}
-              text={
-                MAKE_APP_CONFIGURATION_CRUD_CONFIG("entity_views").FORM_LANG
-                  .UPSERT
-              }
-              disabled={pristine}
-              icon="save"
-            />
-            <Spacer />
             <TabForm
               values={values.tabs}
               initialValues={initialFormValues.tabs}
               tableColumns={tableColumns}
+            />
+            <Spacer />
+
+            <FormButton
+              isMakingRequest={submitting}
+              onClick={handleSubmit}
+              text={
+                MAKE_APP_CONFIGURATION_CRUD_CONFIG("table_views").FORM_LANG
+                  .UPSERT
+              }
+              disabled={pristine}
+              systemIcon="Save"
             />
           </>
         );

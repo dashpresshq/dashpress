@@ -10,14 +10,20 @@ import {
   useEntityId,
   useEntitySlug,
 } from "frontend/hooks/entity/entity.config";
+import { msg } from "@lingui/macro";
+import { useLingui } from "@lingui/react";
 import { ENTITY_DETAILS_VIEW_KEY } from "./constants";
 import { DetailsLayout } from "./_Layout";
-import { useTableMenuItems } from "../Table/useTableMenuItems";
+import {
+  getEntityCreateLink,
+  useTableMenuItems,
+} from "../Table/useTableMenuItems";
 import { WholeEntityTable } from "../Table/_WholeEntityTable";
 
 export function EntityRelationTable() {
   const parentEntity = useEntitySlug();
   const entityId = useEntityId();
+  const { _ } = useLingui();
   const childEntity = useRouteParam("childEntity");
   const childEntityCrudConfig = useEntityCrudConfig(childEntity);
   const entityDataReference = useEntityDataReference(parentEntity, entityId);
@@ -35,7 +41,9 @@ export function EntityRelationTable() {
 
   const title = entityDataReference.isLoading
     ? childEntityCrudConfig.TEXT_LANG.SINGULAR
-    : `${entityDataReference.data} - ${childEntityCrudConfig.TEXT_LANG.TITLE}`;
+    : msg`${entityDataReference.data} - ${_(
+        childEntityCrudConfig.TEXT_LANG.TITLE
+      )}`;
 
   useSetPageDetails({
     pageTitle: title,
@@ -49,13 +57,17 @@ export function EntityRelationTable() {
   return (
     <DetailsLayout
       entity={parentEntity}
-      childEntity={childEntity}
       menuKey={childEntity}
       menuItems={menuItems}
     >
       <WholeEntityTable
         entity={childEntity}
-        persistFilters={
+        skipColumns={referenceField ? [referenceField] : []}
+        createNewLink={getEntityCreateLink(childEntity, {
+          referenceField,
+          entityId,
+        })}
+        persistentFilters={
           referenceField
             ? [
                 {

@@ -1,6 +1,5 @@
 /* eslint-disable prettier/prettier */
-import "@testing-library/jest-dom";
-import React, { ReactNode } from "react";
+
 import { render, screen, within } from "@testing-library/react";
 import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 import { rest } from "msw";
@@ -10,34 +9,31 @@ import ManageVariables from "pages/admin/settings/variables";
 import { BASE_TEST_URL } from "__tests__/_/api-handlers/_utils";
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 import userEvent from "@testing-library/user-event";
-import { useUserAuthenticatedState } from "frontend/hooks/auth/useAuthenticateUser";
 import { IAuthenticatedUserBag } from "shared/types/user";
-import { USER_PERMISSIONS } from "shared/constants/user";
+import { UserPermissions } from "shared/constants/user";
+import { AuthActions } from "frontend/hooks/auth/auth.actions";
+import { getTableRows } from "__tests__/_/utils/getTableRows";
+import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
 
 const server = setupApiHandlers();
-
-function AuthenticatedApplicationRoot({ children }: { children: ReactNode }) {
-  useUserAuthenticatedState();
-
-  return <ApplicationRoot>{children}</ApplicationRoot>;
-}
 
 describe("pages/integrations/variables => credentials -- non admin", () => {
   const useRouter = jest.spyOn(require("next/router"), "useRouter");
   beforeAll(() => {
-    localStorage.setItem("__auth-token__", "foo");
-    useRouter.mockImplementation(() => ({
-      asPath: "/",
-      query: {
-        key: "foo",
-      },
-    }));
+    localStorage.setItem(AuthActions.JWT_TOKEN_STORAGE_KEY, "foo");
+
+    useRouter.mockImplementation(
+      USE_ROUTER_PARAMS({
+        query: {
+          key: "foo",
+        },
+      })
+    );
 
     const CUSTOM_ROLE_USER: IAuthenticatedUserBag = {
       name: "Custom Role",
-      permissions: [USER_PERMISSIONS.CAN_CONFIGURE_APP],
+      permissions: [UserPermissions.CAN_CONFIGURE_APP],
       role: "custom-role",
-      systemProfile: "{userId: 1}",
       username: "root",
     };
     server.use(
@@ -50,9 +46,9 @@ describe("pages/integrations/variables => credentials -- non admin", () => {
   describe("priviledge", () => {
     it("should show correct password text for `CAN_CONFIGURE_APP_USERS`", async () => {
       render(
-        <AuthenticatedApplicationRoot>
+        <ApplicationRoot>
           <ManageVariables />
-        </AuthenticatedApplicationRoot>
+        </ApplicationRoot>
       );
       const priviledgeSection = screen.getByLabelText(
         "credentials priviledge section"
@@ -64,7 +60,7 @@ describe("pages/integrations/variables => credentials -- non admin", () => {
 
       expect(
         within(priviledgeSection).queryByText(
-          `For security reasons, Please input your account password to be able to reveal values`
+          `For security reasons, Please input your account password to be able to manage values`
         )
       ).not.toBeInTheDocument();
       expect(
@@ -82,16 +78,16 @@ describe("pages/integrations/variables => credentials -- non admin", () => {
       ).not.toBeInTheDocument();
       expect(
         screen.queryByRole("button", {
-          name: "Delete Button",
+          name: "Delete Secret",
         })
       ).not.toBeInTheDocument();
     });
 
     it("should not show any password text on constants tab", async () => {
       render(
-        <AuthenticatedApplicationRoot>
+        <ApplicationRoot>
           <ManageVariables />
-        </AuthenticatedApplicationRoot>
+        </ApplicationRoot>
       );
 
       const priviledgeSection = await screen.findByLabelText(
@@ -100,7 +96,7 @@ describe("pages/integrations/variables => credentials -- non admin", () => {
 
       expect(
         within(priviledgeSection).queryByText(
-          `For security reasons, Please input your account password to be able to reveal values`
+          `For security reasons, Please input your account password to be able to manage values`
         )
       ).not.toBeInTheDocument();
       expect(
@@ -118,7 +114,7 @@ describe("pages/integrations/variables => credentials -- non admin", () => {
       ).not.toBeInTheDocument();
       expect(
         await screen.findAllByRole("button", {
-          name: "Delete Button",
+          name: "Delete Constant",
         })
       ).toHaveLength(3);
     });
@@ -127,37 +123,24 @@ describe("pages/integrations/variables => credentials -- non admin", () => {
   describe("list", () => {
     it("should list credentials", async () => {
       render(
-        <AuthenticatedApplicationRoot>
+        <ApplicationRoot>
           <ManageVariables />
-        </AuthenticatedApplicationRoot>
+        </ApplicationRoot>
       );
 
       await userEvent.click(
         await screen.findByRole("tab", { name: "Secrets" })
       );
 
-      const table = screen.getByRole("table");
-
-      expect(
-        await within(table).findByRole("row", {
-          name: "Key Sort By Key Filter Key By Search Value Sort By Value",
-        })
-      ).toBeInTheDocument();
-      expect(
-        within(table).getByRole("row", {
-          name: "{{ SECRET.PAYMENT_API_KEY }} **********",
-        })
-      ).toBeInTheDocument();
-      expect(
-        within(table).getByRole("row", {
-          name: "{{ SECRET.MAIL_PASSWORD }} **********",
-        })
-      ).toBeInTheDocument();
-      expect(
-        within(table).getByRole("row", {
-          name: "{{ SECRET.ROOT_PASSWORD }} **********",
-        })
-      ).toBeInTheDocument();
+      expect(await getTableRows(screen.getByRole("table")))
+        .toMatchInlineSnapshot(`
+        [
+          "Key|Value",
+          "{{ SECRET.PAYMENT_API_KEY }}|**********",
+          "{{ SECRET.MAIL_PASSWORD }}|**********",
+          "{{ SECRET.ROOT_PASSWORD }}|**********",
+        ]
+      `);
     });
   });
 });

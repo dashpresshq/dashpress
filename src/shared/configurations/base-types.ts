@@ -6,9 +6,14 @@ export type BaseAppConfigurationKeys =
   | "entity_diction"
   | "entity_columns_types"
   | "theme_color"
-  | "entity_fields_orders"
+  | "entity_fields_orders_table"
+  | "entity_fields_orders_create"
+  | "entity_fields_orders_update"
+  | "entity_fields_orders_details"
   | "entity_crud_settings"
-  | "entity_views"
+  | "table_views"
+  | "persistent_query"
+  | "users_to_database_link"
   | "menu_entities_order"
   | "disabled_menu_entities"
   | "default_date_format"
@@ -23,6 +28,8 @@ export type BaseAppConfigurationKeys =
   | "entity_form_extension"
   | "system_settings"
   | "hidden_entity_relations"
+  | "file_upload_settings"
+  | "metadata_columns"
   | "entity_relations_order";
 
 export const FOR_CODE_COV = 1;

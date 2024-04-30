@@ -1,26 +1,29 @@
 import { isBoolean, maxLength } from "class-validator";
+import { fakeMessageDescriptor } from "translations/fake";
 import { handleValidation } from "../validations/handle-validation";
 import { ENTITY_VALIDATION_CONFIG } from "../validations";
 
+const errorMessage = fakeMessageDescriptor("Error Message");
+
 describe("Handle Validation", () => {
   it("should return error message when validation expectation are not met", () => {
-    expect(handleValidation(isBoolean)("false", "Error Message", {}, {})).toBe(
-      "Error Message"
+    expect(handleValidation(isBoolean)("false", errorMessage, {}, {})).toBe(
+      errorMessage
     );
   });
 
   it("should return undefined when validations expectation are met", () => {
     expect(
-      handleValidation(isBoolean)(false, "Error Message", {}, {})
+      handleValidation(isBoolean)(false, errorMessage, {}, {})
     ).toBeUndefined();
   });
 
   it("should not run validations when values are falsy", () => {
     expect(
-      handleValidation(isBoolean)("", "Error Message", {}, {})
+      handleValidation(isBoolean)("", errorMessage, {}, {})
     ).toBeUndefined();
     expect(
-      handleValidation(isBoolean)(undefined, "Error Message", {}, {})
+      handleValidation(isBoolean)(undefined, errorMessage, {}, {})
     ).toBeUndefined();
   });
 
@@ -28,15 +31,15 @@ describe("Handle Validation", () => {
     expect(
       handleValidation(maxLength, "length")(
         "should error out",
-        "Error Message",
+        errorMessage,
         { length: 5 },
         {}
       )
-    ).toBe("Error Message");
+    ).toBe(errorMessage);
     expect(
       handleValidation(maxLength, "length")(
         "less5",
-        "Error Message",
+        errorMessage,
         { length: 5 },
         {}
       )
@@ -47,18 +50,13 @@ describe("Handle Validation", () => {
 describe("Validation Checks", () => {
   it("should check required correctly", () => {
     expect(
-      ENTITY_VALIDATION_CONFIG.required.implementation(
-        "",
-        "Error Message",
-        {},
-        {}
-      )
-    ).toBe("Error Message");
+      ENTITY_VALIDATION_CONFIG.required.implementation("", errorMessage, {}, {})
+    ).toBe(errorMessage);
 
     expect(
       ENTITY_VALIDATION_CONFIG.required.implementation(
         "dddd",
-        "Error Message",
+        errorMessage,
         {},
         {}
       )

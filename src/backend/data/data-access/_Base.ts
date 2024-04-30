@@ -56,8 +56,11 @@ export abstract class BaseDataAccessService<T> {
       return query;
     }
 
-    // :eyes
-    if (operator !== FilterOperators.IS_NULL && !value) {
+    if (
+      operator !== FilterOperators.IS_NULL &&
+      operator !== FilterOperators.IS_NOT_NULL &&
+      !value
+    ) {
       return query;
     }
 
@@ -66,6 +69,9 @@ export abstract class BaseDataAccessService<T> {
     switch (operator) {
       case FilterOperators.IS_NULL:
         return operatorConfig[QueryOperators.IS_NULL](query, column, value);
+
+      case FilterOperators.IS_NOT_NULL:
+        return operatorConfig[QueryOperators.IS_NOT_NULL](query, column, value);
 
       case FilterOperators.EQUAL_TO:
         return operatorConfig[QueryOperators.EQUAL_TO](query, column, value);

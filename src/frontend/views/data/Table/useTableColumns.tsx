@@ -1,49 +1,74 @@
 import {
+  useEntityCrudFields,
   useEntityFieldLabels,
   useEntityFieldSelections,
   useProcessedEntityFieldTypes,
-  useHiddenEntityColumns,
 } from "frontend/hooks/entity/entity.config";
 import {
   useEntityIdField,
-  useEntityFields,
   useEntityToOneReferenceFields,
 } from "frontend/hooks/entity/entity.store";
 import { FIELD_TYPES_CONFIG_MAP } from "shared/validations";
-import { useMemo } from "react";
 import { IColorableSelection } from "shared/types/ui";
-import { ENTITY_LIST_PATH } from "frontend/hooks/data/data.store";
+import { ENTITY_LIST_PATH } from "frontend/hooks/data/constants";
 import {
   useAppConfiguration,
   useEntityConfiguration,
 } from "frontend/hooks/configuration/configuration.store";
 import { DataStateKeys } from "frontend/lib/data/types";
 import { ellipsis } from "shared/lib/strings";
-import { TableFilterType } from "frontend/design-system/components/Table/filters/types";
 import { ITableColumn } from "frontend/design-system/components/Table/types";
-import { filterOutHiddenScalarColumns } from "../utils";
-import { TableActions } from "./Actions";
+import { ActionButtons } from "frontend/design-system/components/Button/ActionButtons";
+import { TableFilterType } from "shared/types/data";
+import { useEvaluateScriptContext } from "frontend/hooks/scripts";
+import { ReactNode } from "react";
+import { FormFieldTypes } from "shared/validations/types";
+import { msg } from "@lingui/macro";
 import { viewSpecialDataTypes } from "../viewSpecialDataTypes";
-import { usePortalTableColumns } from "./portal";
+import { PortalColumnRender, usePortalTableColumns } from "./portal";
 import { evalutePresentationScript } from "../evaluatePresentationScript";
-import { IEntityPresentationScript } from "../types";
-import { useCanUserPerformCrudAction } from "../useCanUserPerformCrudAction";
+import { useEntityActionButtons } from "../hooks/useEntityActionButtons";
+import { usePortalActionButtons } from "../Details/portal";
 
 export const ACTIONS_ACCESSOR = "__actions__";
 
+function TableActionButtons({
+  row,
+  entity,
+}: {
+  entity: string;
+  row: {
+    original: Record<string, unknown>;
+  };
+}) {
+  const idField = useEntityIdField(entity);
+
+  const idValue = row.original[idField.data || "id"] as string;
+
+  const actionButtons = useEntityActionButtons({
+    entity,
+    entityId: idValue,
+  });
+
+  const portalActionButtons = usePortalActionButtons({
+    entity,
+    entityId: idValue,
+    baseActionButtons: actionButtons,
+    from: "table-inline",
+    row: row.original,
+  });
+
+  return <ActionButtons actionButtons={portalActionButtons} justIcons />;
+}
+
 const buildFilterConfigFromType = (prop: {
-  entityType: keyof typeof FIELD_TYPES_CONFIG_MAP;
+  entityType: FormFieldTypes;
   entityFieldSelections: IColorableSelection[];
   isIdField: boolean;
   referenceField?: string;
-  lean?: true;
 }): TableFilterType | undefined => {
-  const { entityType, entityFieldSelections, isIdField, referenceField, lean } =
-    prop;
+  const { entityType, entityFieldSelections, isIdField, referenceField } = prop;
 
-  if (lean) {
-    return undefined;
-  }
   if (isIdField) {
     return {
       _type: "idField",
@@ -79,40 +104,34 @@ const buildFilterConfigFromType = (prop: {
 };
 
 export const useTableColumns = (
-  entity: string,
-  lean?: true
+  entity: string
 ): Partial<DataStateKeys<ITableColumn[]>> => {
-  const portalTableColumns = usePortalTableColumns(entity, !!lean);
+  const portalTableColumns = usePortalTableColumns(entity);
   const getEntityFieldLabels = useEntityFieldLabels(entity);
-  const canUserPerformCrudAction = useCanUserPerformCrudAction(entity);
-  const entityFields = useEntityFields(entity);
   const entityToOneReferenceFields = useEntityToOneReferenceFields(entity);
-  const hiddenTableColumns = useHiddenEntityColumns("table", entity);
-  const defaultDateFormat = useAppConfiguration<string>("default_date_format");
-  const entityPresentationScript =
-    useEntityConfiguration<IEntityPresentationScript>(
-      "entity_presentation_script",
-      entity
-    );
+  const entityCrudFields = useEntityCrudFields(entity, "table");
+  const defaultDateFormat = useAppConfiguration("default_date_format");
+  const evaluateScriptContext = useEvaluateScriptContext();
+  const entityPresentationScript = useEntityConfiguration(
+    "entity_presentation_script",
+    entity
+  );
 
   const idField = useEntityIdField(entity);
 
   const entityFieldTypes = useProcessedEntityFieldTypes(entity);
   const entityFieldSelections = useEntityFieldSelections(entity);
 
-  const columnsToShow = useMemo(() => {
-    return filterOutHiddenScalarColumns(
-      entityFields.data,
-      hiddenTableColumns.data
-    );
-  }, [entityFields.data.length, hiddenTableColumns.data.length]);
+  const actionButtons = useEntityActionButtons({
+    entity,
+    entityId: "doesnt-matter-any-value-will-do-here",
+  });
 
   if (
     entityToOneReferenceFields.isLoading ||
     defaultDateFormat.isLoading ||
-    entityFields.isLoading ||
-    idField.isLoading ||
-    hiddenTableColumns.isLoading
+    entityCrudFields.isLoading ||
+    idField.isLoading
   ) {
     return {
       isLoading: true,
@@ -122,9 +141,8 @@ export const useTableColumns = (
   const error =
     entityToOneReferenceFields.error ||
     defaultDateFormat.error ||
-    entityFields.error ||
-    idField.error ||
-    hiddenTableColumns.error;
+    entityCrudFields.error ||
+    idField.error;
 
   if (error) {
     return {
@@ -132,76 +150,85 @@ export const useTableColumns = (
     };
   }
 
-  const columns: ITableColumn[] = columnsToShow.map(({ name, isId }) => {
-    const tableColumn: ITableColumn = {
-      Header: getEntityFieldLabels(name),
-      accessor: name,
-      filter: buildFilterConfigFromType({
-        entityType: entityFieldTypes[name],
-        entityFieldSelections: entityFieldSelections[name],
-        isIdField: idField.data === name,
-        referenceField: entityToOneReferenceFields.data[name],
-        lean,
-      }),
-      disableSortBy: lean
-        ? true
-        : !FIELD_TYPES_CONFIG_MAP[entityFieldTypes[name]]?.sortable,
-      Cell: ({ row }: { row: { original: Record<string, unknown> } }) => {
-        const value$1 = row.original[name];
-        if (isId) {
-          return <span>{value$1 as string}</span>;
-        }
-
-        const value = evalutePresentationScript(
-          entityPresentationScript.data.script,
-          {
-            field: name,
-            from: "details",
-            row: row.original,
-            value: value$1,
+  const columns: ITableColumn[] = entityCrudFields.data.map(
+    ({ name, isId }) => {
+      const tableColumn: ITableColumn = {
+        Header: msg`${getEntityFieldLabels(name)}`,
+        accessor: name,
+        filter: buildFilterConfigFromType({
+          entityType: entityFieldTypes[name],
+          entityFieldSelections: entityFieldSelections[name],
+          isIdField: idField.data === name,
+          referenceField: entityToOneReferenceFields.data[name],
+        }),
+        disableSortBy:
+          !FIELD_TYPES_CONFIG_MAP[entityFieldTypes[name]]?.sortable,
+        Cell: ({ row }: { row: { original: Record<string, unknown> } }) => {
+          const value$1 = row.original[name];
+          if (isId) {
+            return <span>{value$1 as string}</span>;
           }
-        );
 
-        const specialDataTypeRender = viewSpecialDataTypes({
-          fieldName: name,
-          value,
-          entityToOneReferenceFields: entityToOneReferenceFields.data,
-          entityFieldSelections,
-          entityFieldTypes,
-          options: {
-            displayFrom: "table",
-            defaultDateFormat: defaultDateFormat.data,
-          },
-        });
-        if (specialDataTypeRender) {
-          return specialDataTypeRender;
-        }
-        if (typeof value === "string") {
-          return <>{ellipsis(value as string, 50)}</>;
-        }
-        if (typeof value === "object") {
-          return <>{JSON.stringify(value)}</>;
-        }
-        return <span>{value as string}</span>;
-      },
-    };
-    return tableColumn;
-  });
-  if (
-    canUserPerformCrudAction("details") ||
-    canUserPerformCrudAction("delete") ||
-    canUserPerformCrudAction("update")
-  ) {
-    if (!lean) {
-      columns.push({
-        Header: "Actions",
-        accessor: ACTIONS_ACCESSOR,
-        disableSortBy: true,
-        Cell: ({ row }: { row: { original: Record<string, unknown> } }) => (
-          <TableActions row={row} entity={entity} />
-        ),
-      });
+          const value = evalutePresentationScript(
+            entityPresentationScript.data.script,
+            {
+              field: name,
+              from: "details",
+              row: row.original,
+              value: value$1,
+              ...evaluateScriptContext,
+            }
+          );
+
+          const specialDataTypeRender = viewSpecialDataTypes({
+            fieldName: name,
+            value,
+            entityToOneReferenceFields: entityToOneReferenceFields.data,
+            entityFieldSelections,
+            entityFieldTypes,
+            options: {
+              displayFrom: "table",
+              defaultDateFormat: defaultDateFormat.data,
+            },
+          });
+
+          let cellRender: string | ReactNode = value;
+
+          if (typeof value === "string") {
+            cellRender = ellipsis(value as string, 50);
+          }
+
+          if (specialDataTypeRender) {
+            cellRender = specialDataTypeRender;
+          }
+
+          return (
+            <PortalColumnRender
+              {...{
+                column: name,
+                value: value$1,
+                entity,
+                entityId: row.original[idField.data] as string,
+              }}
+            >
+              {cellRender}
+            </PortalColumnRender>
+          );
+        },
+      };
+      return tableColumn;
     }
+  );
+
+  if (actionButtons.length > 0) {
+    columns.push({
+      Header: msg`Actions`,
+      accessor: ACTIONS_ACCESSOR,
+      disableSortBy: true,
+      Cell: ({ row }: { row: { original: Record<string, unknown> } }) => (
+        <TableActionButtons row={row} entity={entity} />
+      ),
+    });
   }
 
   return { data: portalTableColumns(columns) };

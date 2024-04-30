@@ -8,18 +8,17 @@ export type ValidationKeys = {
     | "guest"
     | "entity"
     | "authenticatedUser"
-    | "configKey"
+    | "rawRequest"
     | "paginationFilter"
     | "canUser"
+    | "notAllowedOnDemo"
     | "crudEnabled"
     | "requestBody"
     | "requestQuery"
     | "requestQueries"
     | "entityId"
-    | "entityRequestBody"
     | "queryFilters"
-    | "withPassword"
-    | "configBody";
+    | "withPassword";
   method?: RequestMethod[];
   body?: unknown;
 };

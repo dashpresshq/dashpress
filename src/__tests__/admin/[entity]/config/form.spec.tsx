@@ -1,24 +1,26 @@
 /* eslint-disable no-useless-escape */
-import "@testing-library/jest-dom";
-import React from "react";
+
 import { render, screen, within } from "@testing-library/react";
 import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 import userEvent from "@testing-library/user-event";
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 
 import EntityFormExtensionSettings from "pages/admin/[entity]/config/form";
+import { closeAllToasts } from "__tests__/_/utils/closeAllToasts";
+import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
 
 setupApiHandlers();
 
 describe("pages/admin/[entity]/config/form", () => {
   const useRouter = jest.spyOn(require("next/router"), "useRouter");
 
-  useRouter.mockImplementation(() => ({
-    asPath: "/",
-    query: {
-      entity: "entity-1",
-    },
-  }));
+  useRouter.mockImplementation(
+    USE_ROUTER_PARAMS({
+      query: {
+        entity: "entity-1",
+      },
+    })
+  );
 
   describe.each([
     {
@@ -44,7 +46,9 @@ describe("pages/admin/[entity]/config/form", () => {
       await userEvent.click(await screen.findByRole("tab", { name: label }));
 
       expect(
-        await within(screen.getByRole("tabpanel")).findByLabelText(`Script`)
+        await within(
+          screen.getByRole("tabpanel", { name: label })
+        ).findByLabelText(`Script`)
       ).toHaveValue(section);
     });
 
@@ -57,7 +61,7 @@ describe("pages/admin/[entity]/config/form", () => {
 
       await userEvent.click(await screen.findByRole("tab", { name: label }));
 
-      const currentTab = screen.getByRole("tabpanel");
+      const currentTab = screen.getByRole("tabpanel", { name: label });
 
       await userEvent.clear(within(currentTab).getByLabelText("Script"));
 
@@ -70,9 +74,11 @@ describe("pages/admin/[entity]/config/form", () => {
         within(currentTab).getByRole("button", { name: "Save Form Scripts" })
       );
 
-      expect((await screen.findAllByRole("status"))[0]).toHaveTextContent(
+      expect(await screen.findByRole("status")).toHaveTextContent(
         "Form Scripts Saved Successfully"
       );
+
+      await closeAllToasts();
     });
 
     it("should display updated value", async () => {
@@ -84,7 +90,7 @@ describe("pages/admin/[entity]/config/form", () => {
 
       await userEvent.click(await screen.findByRole("tab", { name: label }));
 
-      const currentTab = screen.getByRole("tabpanel");
+      const currentTab = screen.getByRole("tabpanel", { name: label });
 
       expect(within(currentTab).getByLabelText("Script")).toHaveValue(
         `${valid}`
@@ -100,7 +106,7 @@ describe("pages/admin/[entity]/config/form", () => {
 
       await userEvent.click(await screen.findByRole("tab", { name: label }));
 
-      const currentTab = screen.getByRole("tabpanel");
+      const currentTab = screen.getByRole("tabpanel", { name: label });
 
       await userEvent.type(
         within(currentTab).getByLabelText("Script"),
@@ -111,9 +117,11 @@ describe("pages/admin/[entity]/config/form", () => {
         within(currentTab).getByRole("button", { name: "Save Form Scripts" })
       );
 
-      expect((await screen.findAllByRole("status"))[0]).toHaveTextContent(
+      expect(await screen.findByRole("status")).toHaveTextContent(
         "Expression: •JS-Error: SyntaxError: Unexpected identifier"
       );
+
+      await closeAllToasts();
     });
 
     it("should display previous section value", async () => {
@@ -125,7 +133,7 @@ describe("pages/admin/[entity]/config/form", () => {
 
       await userEvent.click(await screen.findByRole("tab", { name: label }));
 
-      const currentTab = screen.getByRole("tabpanel");
+      const currentTab = screen.getByRole("tabpanel", { name: label });
 
       expect(within(currentTab).getByLabelText("Script")).toHaveValue(
         `${valid}`
@@ -141,7 +149,7 @@ describe("pages/admin/[entity]/config/form", () => {
 
       await userEvent.click(await screen.findByRole("tab", { name: label }));
 
-      const currentTab = screen.getByRole("tabpanel");
+      const currentTab = screen.getByRole("tabpanel", { name: label });
 
       await userEvent.clear(within(currentTab).getByLabelText("Script"));
 
@@ -149,7 +157,7 @@ describe("pages/admin/[entity]/config/form", () => {
         within(currentTab).getByRole("button", { name: "Save Form Scripts" })
       );
 
-      expect((await screen.findAllByRole("status"))[0]).toHaveTextContent(
+      expect(await screen.findByRole("status")).toHaveTextContent(
         "Form Scripts Saved Successfully"
       );
     });
@@ -163,7 +171,7 @@ describe("pages/admin/[entity]/config/form", () => {
 
       await userEvent.click(await screen.findByRole("tab", { name: label }));
 
-      const currentTab = screen.getByRole("tabpanel");
+      const currentTab = screen.getByRole("tabpanel", { name: label });
 
       expect(within(currentTab).getByLabelText("Script")).toHaveValue(``);
     });

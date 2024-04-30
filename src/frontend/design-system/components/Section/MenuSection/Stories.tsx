@@ -1,8 +1,7 @@
 /* eslint-disable react/function-component-definition */
-import React from "react";
+
 import { Story } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
-import { Save } from "react-feather";
 import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 import { MenuSection, IProps } from ".";
 
@@ -28,7 +27,7 @@ export default {
       {
         name: "Item Icon",
         action: "item-icon",
-        IconComponent: Save,
+        systemIcon: "Save",
       },
       {
         name: "Item Action",

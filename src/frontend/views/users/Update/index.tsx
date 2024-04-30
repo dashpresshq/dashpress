@@ -3,10 +3,7 @@ import {
   useUserHasPermission,
 } from "frontend/hooks/auth/user.store";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
-import { USER_PERMISSIONS } from "shared/constants/user";
-import { DOCUMENTATION_LABEL } from "frontend/docs";
-import { useState } from "react";
-import { SystemProfileDocumentation } from "frontend/docs/system-profile";
+import { UserPermissions } from "shared/constants/user";
 import { useNavigationStack } from "frontend/lib/routing/useNavigationStack";
 import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
 import { SectionBox } from "frontend/design-system/components/Section/SectionBox";
@@ -17,6 +14,14 @@ import {
 } from "frontend/design-system/components/Skeleton/Form";
 import { ContentLayout } from "frontend/design-system/components/Section/SectionDivider";
 import { AppLayout } from "frontend/_layouts/app";
+import { SchemaForm } from "frontend/components/SchemaForm";
+import {
+  IResetPasswordForm,
+  RESET_PASSWORD_FORM_SCHEMA,
+} from "shared/form-schemas/users/reset-password";
+import { IAppliedSchemaFormConfig } from "shared/form-schemas/types";
+import { IUpdateUserForm } from "shared/form-schemas/users";
+import { msg } from "@lingui/macro";
 import { useUsernameFromRouteParam } from "../hooks";
 import {
   useUpdateUserMutation,
@@ -24,10 +29,34 @@ import {
   useUserDetails,
   ADMIN_USERS_CRUD_CONFIG,
 } from "../users.store";
-import { ResetUserPasswordForm } from "./ResetPassword.form";
-import { UpdateUserForm } from "./Update.Form";
 
-const DOCS_TITLE = "System Profile";
+export const UPDATE_USER_FORM_SCHEMA: IAppliedSchemaFormConfig<IUpdateUserForm> =
+  {
+    name: {
+      label: msg`Name`,
+      type: "text",
+      validations: [
+        {
+          validationType: "required",
+        },
+      ],
+    },
+    role: {
+      label: msg`Role`,
+      type: "selection",
+      apiSelections: {
+        listUrl: "/api/roles",
+      },
+      validations: [
+        {
+          validationType: "required",
+        },
+      ],
+      formState: ($) => ({
+        disabled: $.auth.username === $.routeParams.username,
+      }),
+    },
+  };
 
 export function UserUpdate() {
   const updateUserMutation = useUpdateUserMutation();
@@ -38,12 +67,11 @@ export function UserUpdate() {
   const authenticatedUserBag = useAuthenticatedUserBag();
 
   const userHasPermission = useUserHasPermission();
-  const [isDocOpen, setIsDocOpen] = useState(false);
 
   useSetPageDetails({
     pageTitle: ADMIN_USERS_CRUD_CONFIG.TEXT_LANG.EDIT,
-    viewKey: ADMIN_USERS_CRUD_CONFIG.TEXT_LANG.EDIT,
-    permission: USER_PERMISSIONS.CAN_MANAGE_USERS,
+    viewKey: `edit-user`,
+    permission: UserPermissions.CAN_MANAGE_USERS,
   });
 
   const { isLoading } = userDetails;
@@ -55,13 +83,6 @@ export function UserUpdate() {
       <ContentLayout.Center>
         <SectionBox
           title={ADMIN_USERS_CRUD_CONFIG.TEXT_LANG.EDIT}
-          iconButtons={[
-            {
-              action: () => setIsDocOpen(true),
-              icon: "help",
-              label: DOCUMENTATION_LABEL.CONCEPT(DOCS_TITLE),
-            },
-          ]}
           backLink={backLink}
         >
           <ViewStateMachine
@@ -77,27 +98,31 @@ export function UserUpdate() {
               />
             }
           >
-            <UpdateUserForm
+            <SchemaForm<IUpdateUserForm>
+              buttonText={ADMIN_USERS_CRUD_CONFIG.FORM_LANG.UPDATE}
               onSubmit={updateUserMutation.mutateAsync}
               initialValues={userDetails.data}
+              systemIcon="Save"
+              fields={UPDATE_USER_FORM_SCHEMA}
             />
           </ViewStateMachine>
         </SectionBox>
         <Spacer />
-        {userHasPermission(USER_PERMISSIONS.CAN_RESET_PASSWORD) &&
+        {userHasPermission(UserPermissions.CAN_RESET_PASSWORD) &&
           authenticatedUserBag.data?.username !== username && (
-            <SectionBox title="Reset User Password">
-              <ResetUserPasswordForm
+            <SectionBox title={msg`Reset User Password`}>
+              <SchemaForm<IResetPasswordForm>
+                buttonText={(submitting) =>
+                  submitting ? msg`Resetting Password` : msg`Reset Password`
+                }
+                systemIcon="Unlock"
+                fields={RESET_PASSWORD_FORM_SCHEMA}
                 onSubmit={resetPasswordMutation.mutateAsync}
+                resetForm
               />
             </SectionBox>
           )}
       </ContentLayout.Center>
-      <SystemProfileDocumentation
-        title={DOCS_TITLE}
-        close={setIsDocOpen}
-        isOpen={isDocOpen}
-      />
     </AppLayout>
   );
 }

@@ -8,7 +8,10 @@ export default requestHandler({
     const validatedRequest = await getValidatedRequest([
       "entity",
       "authenticatedUser",
-      "entityRequestBody",
+      {
+        _type: "requestBody",
+        options: {},
+      },
       {
         _type: "crudEnabled",
         options: DataActionType.Create,
@@ -16,7 +19,7 @@ export default requestHandler({
     ]);
     return await dataApiController.createData(
       validatedRequest.entity,
-      validatedRequest.entityRequestBody,
+      validatedRequest.requestBody.data,
       validatedRequest.authenticatedUser as IAccountProfile
     );
   },

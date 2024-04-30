@@ -1,5 +1,6 @@
 import { INTEGRATION_CONFIG_GROUP_DEMILITER } from "backend/integrations-configurations/services/_base";
 import { createConfigDomainPersistenceService } from "backend/lib/config-persistence";
+import { typescriptSafeObjectDotEntries } from "shared/lib/objects";
 
 const TEST_ENVS: Record<string, string> = {
   ENV_KEY_1: "ENV_KEY_1",
@@ -15,7 +16,7 @@ export const setupIntegrationsEnvTestData = async () => {
 
   await configPersistenceService.resetToEmpty();
 
-  for (const [key, value] of Object.entries(TEST_ENVS)) {
+  for (const [key, value] of typescriptSafeObjectDotEntries(TEST_ENVS)) {
     await configPersistenceService.upsertItem(key, value);
   }
 };

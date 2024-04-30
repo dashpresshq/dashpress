@@ -1,9 +1,9 @@
-import { UseQueryOptions } from "react-query";
+import { UseQueryOptions } from "@tanstack/react-query";
 import { IUseApiOptions } from "./types";
 
 export function buildApiOptions<T>(
   options: IUseApiOptions<T>
-): UseQueryOptions<T> {
+): Partial<UseQueryOptions<T>> {
   return {
     ...options,
     select: (data: T) => {

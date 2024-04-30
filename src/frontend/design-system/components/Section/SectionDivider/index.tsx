@@ -1,4 +1,4 @@
-import React, { ReactElement, ReactNode } from "react";
+import { ReactElement, ReactNode } from "react";
 import styled from "styled-components";
 import { Spacer } from "frontend/design-system/primitives/Spacer";
 import { Stack } from "frontend/design-system/primitives/Stack";
@@ -11,13 +11,13 @@ interface IProps {
 export const GridRoot = styled.div`
   display: grid;
   grid-gap: 16px;
-  grid-template-columns: 2fr 9fr;
+  grid-template-columns: 2fr 8fr;
   @media (max-width: ${BREAKPOINTS.md}) {
     grid-template-columns: 1fr;
   }
 `;
 
-export type TContentLayout = ((params: IProps) => ReactElement) & {
+type TContentLayout = ((params: IProps) => ReactElement) & {
   Left: (params: IProps) => ReactElement;
   Right: (params: IProps) => ReactElement;
   Center: (params: IProps) => ReactElement;
@@ -38,12 +38,16 @@ ContentLayout.Left = function SectionLeft({ children }: IProps) {
 };
 
 ContentLayout.Right = function SectionRight({ children }: IProps) {
-  return <div>{children}</div>;
+  return (
+    <div style={{ overflowX: "hidden", minHeight: "calc(100vh - 100px)" }}>
+      {children}
+    </div>
+  );
 };
 
 ContentLayout.Center = function SectionCenter({ children }: IProps) {
   return (
-    <Stack justify="center">
+    <Stack $justify="center">
       <div style={{ maxWidth: "1200px", width: "100%" }}>{children}</div>
     </Stack>
   );

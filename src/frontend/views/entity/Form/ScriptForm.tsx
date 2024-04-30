@@ -3,18 +3,23 @@ import {
   FormSkeletonSchema,
 } from "frontend/design-system/components/Skeleton/Form";
 import { SchemaForm } from "frontend/components/SchemaForm";
-import { ISchemaFormScriptParams } from "frontend/components/SchemaForm/form-run";
-import { useSchemaFormScriptContext } from "frontend/components/SchemaForm/useSchemaFormScriptContext";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { ToastService } from "frontend/lib/toast";
 import { MAKE_APP_CONFIGURATION_CRUD_CONFIG } from "frontend/hooks/configuration/configuration.constant";
-import { evalJavascriptString } from "frontend/lib/script-runner";
+import { AppConfigurationKeys } from "shared/configurations";
+import { evalJavascriptString } from "shared/lib/script-runner";
+import { useEvaluateScriptContext } from "frontend/hooks/scripts";
+import { ISchemaFormScriptProps } from "shared/form-schemas/types";
+import { msg } from "@lingui/macro";
+import { i18nNoop } from "translations/fake";
 
 interface IProps {
   value: string;
   onSubmit: (value: string) => Promise<void>;
   isLoading: boolean;
+  placeholder: string;
   field: string;
+  configurationKey: AppConfigurationKeys;
   error?: unknown;
 }
 
@@ -25,9 +30,11 @@ export function ScriptForm({
   onSubmit,
   field,
   error,
+  placeholder,
   isLoading,
+  configurationKey,
 }: IProps) {
-  const scriptContext = useSchemaFormScriptContext("test");
+  const evaluateScriptContext = useEvaluateScriptContext();
 
   return (
     <ViewStateMachine
@@ -39,26 +46,28 @@ export function ScriptForm({
         fields={{
           [`${BASE_SUFFIX}${field}`]: {
             type: "json",
-            label: "Script",
+            label: msg`Script`,
             validations: [],
+            placeholder: i18nNoop(placeholder),
           },
         }}
         onSubmit={async (data) => {
           try {
             const jsString = data[`${BASE_SUFFIX}${field}`] as string;
-            evalJavascriptString<ISchemaFormScriptParams>(jsString, {
-              ...scriptContext,
+            const context: ISchemaFormScriptProps<{}> = {
+              ...evaluateScriptContext,
+              action: "test",
               formValues: {},
-            });
+            };
+            evalJavascriptString(jsString, context);
             await onSubmit(jsString);
           } catch (e) {
             ToastService.error(`•Expression: \n•JS-Error: ${e}`);
           }
         }}
-        icon="save"
+        systemIcon="Save"
         buttonText={
-          MAKE_APP_CONFIGURATION_CRUD_CONFIG("entity_form_extension").FORM_LANG
-            .UPSERT
+          MAKE_APP_CONFIGURATION_CRUD_CONFIG(configurationKey).FORM_LANG.UPSERT
         }
         initialValues={{
           [`${BASE_SUFFIX}${field}`]: value,

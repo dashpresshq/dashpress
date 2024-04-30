@@ -11,12 +11,13 @@ import {
 } from "frontend/design-system/components/Skeleton/Form";
 import { FormInput } from "frontend/design-system/components/Form/FormInput";
 import { FormButton } from "frontend/design-system/components/Button/FormButton";
+import { i18nNoop } from "translations/fake";
 
 interface IProps {
   fields: string[];
-  initialValues?: Record<string, unknown>;
+  initialValues?: Record<string, string>;
   crudConfig: ICrudConfig;
-  onSubmit: (data: Record<string, unknown>) => void;
+  onSubmit: (data: Record<string, string>) => void;
 }
 
 export const loadingFieldsLabelForm = (
@@ -50,7 +51,7 @@ export function FieldsLabelForm({
               validateFields={[]}
             >
               {({ input, meta }) => (
-                <FormInput label={field} input={input} meta={meta} />
+                <FormInput label={i18nNoop(field)} input={input} meta={meta} />
               )}
             </Field>
           ))}
@@ -58,7 +59,7 @@ export function FieldsLabelForm({
             text={crudConfig.FORM_LANG.UPSERT}
             isMakingRequest={submitting}
             disabled={pristine}
-            icon="save"
+            systemIcon="Save"
           />
         </form>
       )}

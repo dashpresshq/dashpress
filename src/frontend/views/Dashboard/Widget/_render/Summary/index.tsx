@@ -13,7 +13,7 @@ interface IProps {
   data: unknown;
 }
 
-// TODO Card Widgets: targets (for contributors)
+// TODO: Card Widgets: targets (for contributors)
 // card percentage inverse
 
 export function SummaryWidget({ config, data }: IProps) {

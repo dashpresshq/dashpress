@@ -1,11 +1,11 @@
 import * as React from "react";
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
-import { rest } from "msw";
-import { BASE_TEST_URL } from "__tests__/_/api-handlers/_utils";
 import UserSetup from "pages/setup/user";
 import userEvent from "@testing-library/user-event";
+import { SETUP_CHECK_DATA } from "__tests__/_/api-handlers/setup";
+import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
 
 const server = setupApiHandlers();
 
@@ -19,22 +19,18 @@ describe("pages/setup/user", () => {
   it("should create new user successfully", async () => {
     server.resetHandlers();
     localStorage.clear();
-    const pushMock = jest.fn();
-    useRouter.mockImplementation(() => ({
-      query: {},
-      push: pushMock,
-    }));
+    const replaceMock = jest.fn();
 
-    server.use(
-      rest.get(BASE_TEST_URL("/api/setup/check"), async (_, res, ctx) => {
-        return res(
-          ctx.json({
-            hasUsers: false,
-            hasDbCredentials: true,
-          })
-        );
+    useRouter.mockImplementation(
+      USE_ROUTER_PARAMS({
+        replaceMock,
       })
     );
+
+    SETUP_CHECK_DATA.data = {
+      hasUsers: false,
+      hasDbCredentials: true,
+    };
 
     render(
       <ApplicationRoot>
@@ -57,6 +53,8 @@ describe("pages/setup/user", () => {
       "Account Was Successfully Setup"
     );
 
-    expect(pushMock).toHaveBeenCalledWith("/");
+    await waitFor(() => {
+      expect(replaceMock).toHaveBeenLastCalledWith("/");
+    });
   });
 });

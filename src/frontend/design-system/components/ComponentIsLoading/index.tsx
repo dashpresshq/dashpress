@@ -19,14 +19,14 @@ const ldsRippleAnimation = keyframes`
 }
 `;
 
-export const StyledLdsWrapper = styled.div`
+export const LdsWrapper = styled.div`
   display: inline-block;
   position: relative;
   width: 80px;
   height: 80px;
 `;
 
-const StyledLds = styled.div`
+const Lds = styled.div`
   position: absolute;
   border: 4px solid ${USE_ROOT_COLOR("primary-color")};
   opacity: 1;
@@ -41,10 +41,10 @@ const StyledLds = styled.div`
 export function ComponentIsLoading() {
   return (
     <div style={{ textAlign: "center", margin: "30px", marginBottom: "20px" }}>
-      <StyledLdsWrapper>
-        <StyledLds />
-        <StyledLds />
-      </StyledLdsWrapper>
+      <LdsWrapper>
+        <Lds />
+        <Lds />
+      </LdsWrapper>
     </div>
   );
 }

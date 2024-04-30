@@ -1,20 +1,30 @@
-import { useQueryClient } from "react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { ToastService } from "frontend/lib/toast";
 import { getQueryCachekey } from "../constants/getQueryCacheKey";
-import { IWaitForResponseMutationOptions } from "./types";
+import { ToastMessageInput } from "./types";
+
+export interface IWaitForResponseMutationOptions<V, R> {
+  endpoints: string[];
+  redirect?: string;
+  mutationFn: (formData: V) => Promise<R>;
+  onSuccessActionWithFormData?: (response: R) => void;
+  successMessage?: ToastMessageInput;
+  smartSuccessMessage?: (formData: R) => ToastMessageInput;
+}
 
 const PASS_DATA_FROM_HANDLER_ERROR_MESSAGE =
   "Please return in the mutation what data you want to pass to the success handlers";
 
-export function useWaitForResponseMutationOptions<T>(
-  options: IWaitForResponseMutationOptions<T>
+export function useWaitForResponseMutationOptions<V, R = void>(
+  options: IWaitForResponseMutationOptions<V, R>
 ) {
   const queryClient = useQueryClient();
 
-  return {
-    onSuccess: async (formData: T | undefined) => {
+  return useMutation({
+    mutationFn: options.mutationFn,
+    onSuccess: async (formData: R | undefined) => {
       options.endpoints.forEach((queryKey) => {
-        queryClient.invalidateQueries(getQueryCachekey(queryKey));
+        queryClient.invalidateQueries({ queryKey: getQueryCachekey(queryKey) });
       });
 
       if (options.smartSuccessMessage) {
@@ -38,5 +48,5 @@ export function useWaitForResponseMutationOptions<T>(
         error.message || "Something went wrong. Please try again"
       );
     },
-  };
+  });
 }

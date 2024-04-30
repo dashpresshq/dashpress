@@ -3,43 +3,29 @@ import { SectionBox } from "frontend/design-system/components/Section/SectionBox
 import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
 import { useNavigationStack } from "frontend/lib/routing/useNavigationStack";
 import { META_USER_PERMISSIONS } from "shared/constants/user";
-import { useRouter } from "next/router";
 import { AppLayout } from "frontend/_layouts/app";
 import {
   useEntityCrudConfig,
   useEntitySlug,
-  useHiddenEntityColumns,
 } from "frontend/hooks/entity/entity.config";
 import { useEntityDataCreationMutation } from "frontend/hooks/data/data.store";
-import {
-  EntityActionTypes,
-  useEntityActionMenuItems,
-} from "../../entity/constants";
+import { useRouteParams } from "frontend/lib/routing/useRouteParam";
+import { useEntityConfiguration } from "frontend/hooks/configuration/configuration.store";
+import { useEvaluateScriptContext } from "frontend/hooks/scripts";
+import { useEntityActionMenuItems } from "../../entity/constants";
 import { BaseEntityForm } from "../_BaseEntityForm";
-
-export function useRouteParams() {
-  const router = useRouter();
-
-  if (typeof window === "undefined") return {};
-
-  const value = router.query;
-
-  if (Array.isArray(value))
-    throw new Error("Unexpected handle given by Next.js");
-  return value;
-}
+import { runInitialValuesScript } from "./run-initial-values-scripts";
+import { PortalEntityFormComponent } from "../portal";
 
 export function EntityCreate() {
   const routeParams = useRouteParams();
   const entity = useEntitySlug();
-  const entityCrudConfig = useEntityCrudConfig();
+  const entityCrudConfig = useEntityCrudConfig(entity);
 
   const entityDataCreationMutation = useEntityDataCreationMutation(entity);
+  const evaluateScriptContext = useEvaluateScriptContext();
 
-  const actionItems = useEntityActionMenuItems([
-    EntityActionTypes.Create,
-    EntityActionTypes.Types,
-  ]);
+  const actionItems = useEntityActionMenuItems(entity);
 
   useSetPageDetails({
     pageTitle: entityCrudConfig.TEXT_LANG.CREATE,
@@ -48,9 +34,17 @@ export function EntityCreate() {
     permission: META_USER_PERMISSIONS.NO_PERMISSION_REQUIRED,
   });
 
-  const hiddenCreateColumns = useHiddenEntityColumns("create");
-
   const { backLink } = useNavigationStack();
+
+  const entityFormExtension = useEntityConfiguration(
+    "entity_form_extension",
+    entity
+  );
+
+  const scriptInitialValues = runInitialValuesScript(
+    entityFormExtension.data.initialValues,
+    evaluateScriptContext
+  );
 
   return (
     <AppLayout actionItems={actionItems}>
@@ -61,13 +55,20 @@ export function EntityCreate() {
         >
           <BaseEntityForm
             entity={entity}
-            action="create"
-            initialValues={routeParams}
+            systemIcon="Plus"
+            crudAction="create"
+            resetForm
+            buttonText={entityCrudConfig.FORM_LANG.CREATE}
+            initialValuesData={{
+              data: { ...scriptInitialValues, ...routeParams },
+              error: entityFormExtension.error,
+              isLoading: entityFormExtension.isLoading,
+            }}
             onSubmit={entityDataCreationMutation.mutateAsync}
-            hiddenColumns={hiddenCreateColumns}
           />
         </SectionBox>
       </ContentLayout.Center>
+      <PortalEntityFormComponent />
     </AppLayout>
   );
 }

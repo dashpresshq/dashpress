@@ -1,5 +1,5 @@
 /* eslint-disable react/function-component-definition */
-import React from "react";
+
 import { Story } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
 import { ApplicationRoot } from "frontend/components/ApplicationRoot";
@@ -28,22 +28,17 @@ WithDescription.args = {
   description: "Some help text for you",
 };
 
-export const WithNewItemLink = Template.bind({});
-WithNewItemLink.args = {
-  newItemLink: "/go-somewhere",
-};
-
-export const WithIconButtons = Template.bind({});
-WithIconButtons.args = {
-  iconButtons: [
+export const WithActionButtons = Template.bind({});
+WithActionButtons.args = {
+  actionButtons: [
     {
       action: "/foo",
       label: "Add Me",
-      icon: "add",
+      systemIcon: "Plus",
     },
     {
       action: "/baz",
-      icon: "help",
+      systemIcon: "Help",
       label: "Link to help",
     },
     {
@@ -86,17 +81,17 @@ WithDeleteActionInProgress.args = {
   },
 };
 
-export const WithDeleteActionAndIconButtons = Template.bind({});
-WithDeleteActionAndIconButtons.args = {
+export const WithDeleteActionAndActionButtons = Template.bind({});
+WithDeleteActionAndActionButtons.args = {
   deleteAction: {
     action: action("delete"),
     isMakingDeleteRequest: false,
   },
-  iconButtons: [
+  actionButtons: [
     {
       action: "/foo",
       label: "Foo",
-      icon: "add",
+      systemIcon: "Plus",
     },
     {
       action: "/bar",
@@ -124,21 +119,14 @@ HeadLess.args = {
   headLess: true,
 };
 
-export const SideText = Template.bind({});
-SideText.args = {
-  sideText: "Updated Yesterday",
-};
-
 export const EveryThing = Template.bind({});
 EveryThing.args = {
-  sideText: "Updated Yesterday",
   description: "Some help text for you",
-  newItemLink: "/go-somewhere",
-  iconButtons: [
+  actionButtons: [
     {
       action: "/foo",
       label: "Foo",
-      icon: "add",
+      systemIcon: "Plus",
     },
     {
       action: "/foo",

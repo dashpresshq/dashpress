@@ -2,9 +2,9 @@ import { PaginatedData } from "shared/types/data";
 import { IPaginationFilters } from "./types";
 
 export const makeTableData = (
-  [data, totalRecords]: [unknown[], number],
+  [data, totalRecords]: [Record<string, unknown>[], number],
   paginationFilters: IPaginationFilters
-): PaginatedData<unknown> => ({
+): PaginatedData<Record<string, unknown>> => ({
   data,
   pageIndex: paginationFilters.page,
   pageSize: paginationFilters.take,

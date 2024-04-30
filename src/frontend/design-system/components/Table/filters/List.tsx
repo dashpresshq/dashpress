@@ -1,4 +1,3 @@
-import React from "react";
 import { IColumnFilterBag } from "shared/types/data";
 import { IFilterProps } from "./types";
 

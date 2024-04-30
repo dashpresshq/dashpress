@@ -2,7 +2,7 @@ import { Form, Field } from "react-final-form";
 import arrayMutators from "final-form-arrays";
 import { FieldArray } from "react-final-form-arrays";
 import { composeValidators, required } from "frontend/lib/validations";
-import React, { useState } from "react";
+import { Fragment, useState } from "react";
 import styled from "styled-components";
 import { isNotEmpty } from "class-validator";
 import { EntityTypesForSelection, IColorableSelection } from "shared/types/ui";
@@ -14,18 +14,16 @@ import {
 import { MAKE_APP_CONFIGURATION_CRUD_CONFIG } from "frontend/hooks/configuration/configuration.constant";
 import { FormInput } from "frontend/design-system/components/Form/FormInput";
 import { Stack } from "frontend/design-system/primitives/Stack";
-import { DeleteButton } from "frontend/design-system/components/Button/DeleteButton";
-import {
-  StyledCard,
-  StyledCardBody,
-} from "frontend/design-system/components/Card";
+import { Card, CardBody } from "frontend/design-system/components/Card";
 import { Spacer } from "frontend/design-system/primitives/Spacer";
 import { SoftButton } from "frontend/design-system/components/Button/SoftButton";
 import { FormButton } from "frontend/design-system/components/Button/FormButton";
 import { FormSwitch } from "frontend/design-system/components/Form/FormSwitch";
+import { DELETE_BUTTON_PROPS } from "frontend/design-system/components/Button/constants";
+import { msg } from "@lingui/macro";
 import { isBlackOrWhite } from "./isBlackOrWhite";
 
-const StyledColorBox = styled.button<{ color: string }>`
+const ColorBox = styled.button<{ color: string }>`
   height: 24px;
   wifth: 24px;
   border-radius: 5px;
@@ -75,7 +73,7 @@ export function FieldSelectionCanvas({
         <form onSubmit={handleSubmit}>
           {entityType !== "boolean" && (
             <FormSwitch
-              label="Use Colors"
+              label={msg`Use Colors`}
               name="use-colors"
               size="sm"
               value={useColors}
@@ -99,9 +97,9 @@ export function FieldSelectionCanvas({
             {({ fields }) => (
               <>
                 {fields.map((name, index) => (
-                  <React.Fragment key={name}>
-                    <StyledCard>
-                      <StyledCardBody>
+                  <Fragment key={name}>
+                    <Card>
+                      <CardBody>
                         <Field
                           name={`${name}.value`}
                           validate={composeValidators((value) =>
@@ -112,7 +110,7 @@ export function FieldSelectionCanvas({
                           {({ meta, input }) => (
                             <FormInput
                               disabled={!ManagableEntities.includes(entityType)}
-                              label="Value"
+                              label={msg`Value`}
                               required={ManagableEntities.includes(entityType)}
                               input={input}
                               meta={meta}
@@ -126,43 +124,41 @@ export function FieldSelectionCanvas({
                         >
                           {({ meta, input }) => (
                             <FormInput
-                              label="Label"
+                              label={msg`Label`}
                               required
                               input={input}
                               meta={meta}
                             />
                           )}
                         </Field>
-                        <Stack justify="space-between">
+                        <Stack $justify="space-between">
                           {useColors ? (
                             <Field
                               name={`${name}.color`}
                               validate={required}
                               validateFields={[]}
                             >
-                              {(renderProps) => (
+                              {(formProps) => (
                                 <Stack>
                                   {OPTIONS_COLORS.map((systemColor) => (
                                     <div key={systemColor}>
-                                      <StyledColorBox
+                                      <ColorBox
                                         type="button"
                                         color={systemColor}
                                         onClick={() =>
-                                          renderProps.input.onChange(
-                                            systemColor
-                                          )
+                                          formProps.input.onChange(systemColor)
                                         }
                                       >
                                         <Check
                                           color={
                                             systemColor ===
-                                            renderProps.input.value
+                                            formProps.input.value
                                               ? isBlackOrWhite(systemColor)
                                               : systemColor
                                           }
                                           size="18"
                                         />
-                                      </StyledColorBox>
+                                      </ColorBox>
                                     </div>
                                   ))}
                                 </Stack>
@@ -172,31 +168,36 @@ export function FieldSelectionCanvas({
                             <div />
                           )}
                           {ManagableEntities.includes(entityType) && (
-                            <DeleteButton
-                              onDelete={() => {
-                                fields.remove(index);
-                              }}
-                              shouldConfirmAlert={false}
+                            <SoftButton
                               size="xs"
+                              justIcon
+                              {...DELETE_BUTTON_PROPS({
+                                action: () => {
+                                  fields.remove(index);
+                                },
+                                isMakingRequest: false,
+                                label: msg`Delete Selection`,
+                                shouldConfirmAlert: undefined,
+                              })}
                             />
                           )}
                         </Stack>
-                      </StyledCardBody>
-                    </StyledCard>
+                      </CardBody>
+                    </Card>
                     <Spacer />
-                  </React.Fragment>
+                  </Fragment>
                 ))}
 
                 <Spacer />
-                <Stack justify="space-between">
+                <Stack $justify="space-between">
                   {ManagableEntities.includes(entityType) && (
                     <SoftButton
-                      icon="add"
-                      label="Add new option"
+                      systemIcon="Plus"
+                      label={msg`Add New Option`}
                       size={null}
                       action={() => {
                         fields.push({
-                          label: "",
+                          label: msg``,
                           value: "",
                           color: useColors
                             ? OPTIONS_COLORS[
@@ -209,7 +210,7 @@ export function FieldSelectionCanvas({
                   )}
 
                   <FormButton
-                    icon="save"
+                    systemIcon="Save"
                     isMakingRequest={false}
                     text={CRUD_CONFIG.FORM_LANG.UPSERT}
                     disabled={pristine}

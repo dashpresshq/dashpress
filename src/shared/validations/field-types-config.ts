@@ -1,26 +1,14 @@
-import { TableFilterType } from "frontend/design-system/components/Table/filters/types";
-import { SelectableAbleValidations } from "./types";
+import { TableFilterType } from "shared/types/data";
+import { MessageDescriptor } from "@lingui/core";
+import { msg } from "@lingui/macro";
+import { FormFieldTypes, SelectableAbleValidations } from "./types";
 
 export const FIELD_TYPES_CONFIG_MAP: Record<
-  | "email"
-  | "password"
-  | "text"
-  | "textarea"
-  | "richtext"
-  | "url"
-  | "number"
-  | "json"
-  | "selection"
-  | "reference"
-  | "boolean"
-  | "selection-enum"
-  | "file"
-  | "image"
-  | "datetime-local"
-  | "color",
+  FormFieldTypes,
   {
     tableFilterType?: TableFilterType;
     sortable: boolean;
+    label: MessageDescriptor;
     typeIsNotChangeAble?: true;
     configureSelection?: true;
     allowedValidations: Array<SelectableAbleValidations>;
@@ -28,19 +16,15 @@ export const FIELD_TYPES_CONFIG_MAP: Record<
 > = {
   email: {
     sortable: true,
+    label: msg`Email`,
     tableFilterType: {
       _type: "string",
       bag: undefined,
     },
-    allowedValidations: [
-      "required",
-      // "unique",
-      "maxLength",
-      "minLength",
-      "regex",
-    ],
+    allowedValidations: ["required", "maxLength", "minLength", "regex"],
   },
   password: {
+    label: msg`Password`,
     sortable: false,
     allowedValidations: [
       "matchOtherField",
@@ -51,6 +35,7 @@ export const FIELD_TYPES_CONFIG_MAP: Record<
     ],
   },
   text: {
+    label: msg`Text`,
     sortable: true,
     tableFilterType: {
       _type: "string",
@@ -68,6 +53,7 @@ export const FIELD_TYPES_CONFIG_MAP: Record<
     ],
   },
   textarea: {
+    label: msg`Textarea`,
     sortable: false,
     tableFilterType: {
       _type: "string",
@@ -76,6 +62,7 @@ export const FIELD_TYPES_CONFIG_MAP: Record<
     allowedValidations: ["maxLength", "minLength", "required"],
   },
   json: {
+    label: msg`JSON`,
     sortable: false,
     tableFilterType: {
       _type: "string",
@@ -84,6 +71,7 @@ export const FIELD_TYPES_CONFIG_MAP: Record<
     allowedValidations: ["maxLength", "minLength", "required"],
   },
   number: {
+    label: msg`Number`,
     tableFilterType: {
       _type: "number",
       bag: undefined,
@@ -101,6 +89,7 @@ export const FIELD_TYPES_CONFIG_MAP: Record<
     ],
   },
   url: {
+    label: msg`URL`,
     sortable: false,
     tableFilterType: {
       _type: "string",
@@ -115,6 +104,7 @@ export const FIELD_TYPES_CONFIG_MAP: Record<
     ],
   },
   richtext: {
+    label: msg`Rich Text`,
     sortable: false,
     tableFilterType: {
       _type: "string",
@@ -123,6 +113,7 @@ export const FIELD_TYPES_CONFIG_MAP: Record<
     allowedValidations: ["required", "maxLength", "minLength"],
   },
   "datetime-local": {
+    label: msg`Date`,
     sortable: true,
     tableFilterType: {
       _type: "date",
@@ -132,19 +123,23 @@ export const FIELD_TYPES_CONFIG_MAP: Record<
     allowedValidations: ["required"],
   },
   image: {
+    label: msg`Image`,
     sortable: false,
     allowedValidations: ["required"],
   },
   file: {
+    label: msg`File`,
     allowedValidations: ["required"],
     sortable: false,
   },
   color: {
+    label: msg`Color`,
     sortable: false,
     allowedValidations: ["maxLength", "minLength", "required"],
   },
 
   boolean: {
+    label: msg`Boolean`,
     sortable: true,
     tableFilterType: {
       _type: "boolean",
@@ -156,6 +151,7 @@ export const FIELD_TYPES_CONFIG_MAP: Record<
   },
 
   selection: {
+    label: msg`Selection`,
     tableFilterType: {
       _type: "status",
       bag: [],
@@ -166,6 +162,7 @@ export const FIELD_TYPES_CONFIG_MAP: Record<
   },
 
   "selection-enum": {
+    label: msg`Selection List`,
     sortable: true,
     tableFilterType: {
       _type: "status",
@@ -178,6 +175,7 @@ export const FIELD_TYPES_CONFIG_MAP: Record<
   },
 
   reference: {
+    label: msg`Reference`,
     // use color
     tableFilterType: {
       _type: "list",

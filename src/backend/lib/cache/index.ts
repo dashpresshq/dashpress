@@ -2,17 +2,14 @@ import { ConfigKeys, configApiService } from "../config/config.service";
 import { AbstractCacheService } from "./AbstractCacheService";
 import { MemoryCacheAdaptor } from "./MemoryCacheAdaptor";
 import { RedisCacheAdaptor } from "./RedisCacheAdaptor";
-import { CacheAdaptorTypes, CacheDomain } from "./types";
+import { CacheAdaptorTypes } from "./types";
 
 export { AbstractCacheService };
 
-export function createCacheService(prefix: CacheDomain): AbstractCacheService {
+export function createCacheService(): AbstractCacheService {
   const configBag: Record<CacheAdaptorTypes, AbstractCacheService> = {
-    [CacheAdaptorTypes.Memory]: new MemoryCacheAdaptor(
-      prefix,
-      configApiService
-    ),
-    [CacheAdaptorTypes.Redis]: new RedisCacheAdaptor(prefix, configApiService),
+    [CacheAdaptorTypes.Memory]: new MemoryCacheAdaptor(configApiService),
+    [CacheAdaptorTypes.Redis]: new RedisCacheAdaptor(configApiService),
   };
 
   return configBag[

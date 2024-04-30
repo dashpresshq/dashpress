@@ -1,12 +1,12 @@
-import React from "react";
 import { render, screen } from "@testing-library/react";
+import { msg } from "@lingui/macro";
+import { ApplicationRoot } from "frontend/components/ApplicationRoot";
+import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
 import { Table } from ".";
-import { IProps } from "./types";
+import { ITableProps } from "./types";
 import { TABLE_COLUMNS, TABLE_DATA } from "./data";
 
-import "@testing-library/jest-dom/extend-expect";
-
-const DEFAULT_TABLE_PROPS: IProps<unknown> = {
+const DEFAULT_TABLE_PROPS: ITableProps<unknown> = {
   overridePaginatedDataState: {
     pageSize: 10,
     pageIndex: 1,
@@ -14,12 +14,23 @@ const DEFAULT_TABLE_PROPS: IProps<unknown> = {
   },
   syncPaginatedDataStateOut: jest.fn(),
   columns: TABLE_COLUMNS,
+  empty: {
+    text: msg`Empty Table`,
+  },
   tableData: TABLE_DATA,
 };
 
+const useRouter = jest.spyOn(require("next/router"), "useRouter");
+
+useRouter.mockImplementation(USE_ROUTER_PARAMS({}));
+
 describe("Table", () => {
   it("should render data rows", async () => {
-    render(<Table {...DEFAULT_TABLE_PROPS} />);
+    render(
+      <ApplicationRoot>
+        <Table {...DEFAULT_TABLE_PROPS} />
+      </ApplicationRoot>
+    );
 
     expect(
       screen.getByRole("row", {

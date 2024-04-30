@@ -1,13 +1,8 @@
 import { introspect, Entity } from "@dashpress/bacteria";
 import {
-  ConfigurationApiService,
-  configurationApiService,
-} from "backend/configuration/configuration.service";
-import {
   CredentialsApiService,
   credentialsApiService,
 } from "backend/integrations-configurations";
-import { IApplicationService } from "backend/types";
 import { IDBSchema, IEntityField } from "shared/types/db";
 import { IDataSourceCredentials } from "shared/types/data-sources";
 import { DATABASE_CREDENTIAL_GROUP } from "backend/data/fields";
@@ -17,17 +12,15 @@ import {
   AbstractConfigDataPersistenceService,
 } from "../lib/config-persistence";
 
-export class SchemasApiService implements IApplicationService {
+export class SchemasApiService {
   private dbSchema: IDBSchema[];
 
   constructor(
     private _schemaConfigDataPersistenceService: AbstractConfigDataPersistenceService<IDBSchema>,
-    private _credentialsService: CredentialsApiService,
-    private _configurationService: ConfigurationApiService
+    private _credentialsService: CredentialsApiService
   ) {}
 
-  async bootstrap() {
-    await this._schemaConfigDataPersistenceService.setup();
+  async runOnLoad() {
     await this.loadDbSchema();
   }
 
@@ -50,9 +43,7 @@ export class SchemasApiService implements IApplicationService {
   }
 
   private async initDBSchema() {
-    if (
-      await this._configurationService.getSystemSettings("forceIntrospection")
-    ) {
+    if (process.env.NODE_ENV === "production") {
       return await this.doIntrospection();
     }
 
@@ -159,6 +150,5 @@ const schemaPersistenceService =
 
 export const schemasApiService = new SchemasApiService(
   schemaPersistenceService,
-  credentialsApiService,
-  configurationApiService
+  credentialsApiService
 );

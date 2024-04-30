@@ -1,33 +1,30 @@
 import { useCallback } from "react";
 import { AppLayout } from "frontend/_layouts/app";
-import { Plus } from "react-feather";
 import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
-import { useRouter } from "next/router";
 import {
   FEPaginationTable,
   IFETableCell,
   IFETableColumn,
 } from "frontend/components/FEPaginationTable";
 import { SystemRoles } from "shared/types/user";
-import { USER_PERMISSIONS } from "shared/constants/user";
+import { UserPermissions } from "shared/constants/user";
 import { IRolesList } from "shared/types/roles";
-import { SoftButton } from "frontend/design-system/components/Button/SoftButton";
-import { Stack } from "frontend/design-system/primitives/Stack";
-import { DeleteButton } from "frontend/design-system/components/Button/DeleteButton";
-import { StyledCard } from "frontend/design-system/components/Card";
+import { Card } from "frontend/design-system/components/Card";
+import { DELETE_BUTTON_PROPS } from "frontend/design-system/components/Button/constants";
+import { ActionButtons } from "frontend/design-system/components/Button/ActionButtons";
+import { msg } from "@lingui/macro";
 import {
   ADMIN_ROLES_CRUD_CONFIG,
+  ROLES_ENDPOINT_CONFIG,
   useRoleDeletionMutation,
 } from "./roles.store";
 
 export function ListRoles() {
-  const router = useRouter();
-
   useSetPageDetails({
     pageTitle: ADMIN_ROLES_CRUD_CONFIG.TEXT_LANG.TITLE,
-    viewKey: ADMIN_ROLES_CRUD_CONFIG.TEXT_LANG.TITLE,
-    permission: USER_PERMISSIONS.CAN_MANAGE_PERMISSIONS,
+    viewKey: `list-roles`,
+    permission: UserPermissions.CAN_MANAGE_PERMISSIONS,
   });
 
   const roleDeletionMutation = useRoleDeletionMutation();
@@ -39,26 +36,31 @@ export function ListRoles() {
         return null;
       }
       return (
-        <Stack spacing={4} align="center">
-          <SoftButton
-            action={NAVIGATION_LINKS.ROLES.DETAILS(roleId)}
-            label="Edit"
-            justIcon
-            icon="edit"
-          />
-          <DeleteButton
-            onDelete={() => roleDeletionMutation.mutateAsync(roleId)}
-            isMakingDeleteRequest={false}
-            shouldConfirmAlert
-          />
-        </Stack>
+        <ActionButtons
+          justIcons
+          actionButtons={[
+            {
+              id: "edit",
+              action: NAVIGATION_LINKS.ROLES.DETAILS(roleId),
+              label: ADMIN_ROLES_CRUD_CONFIG.TEXT_LANG.EDIT,
+              systemIcon: "Edit",
+            },
+            {
+              ...DELETE_BUTTON_PROPS({
+                action: () => roleDeletionMutation.mutateAsync(roleId),
+                label: ADMIN_ROLES_CRUD_CONFIG.TEXT_LANG.DELETE,
+                isMakingRequest: false,
+              }),
+            },
+          ]}
+        />
       );
     },
-    [roleDeletionMutation.isLoading]
+    [roleDeletionMutation.isPending]
   );
   const columns: IFETableColumn<IRolesList>[] = [
     {
-      Header: "Role",
+      Header: msg`Role`,
       accessor: "label",
       filter: {
         _type: "string",
@@ -66,7 +68,7 @@ export function ListRoles() {
       },
     },
     {
-      Header: "Action",
+      Header: msg`Action`,
       disableSortBy: true,
       accessor: "__action__",
       Cell: MemoizedAction,
@@ -79,20 +81,24 @@ export function ListRoles() {
         {
           id: "add",
           label: ADMIN_ROLES_CRUD_CONFIG.TEXT_LANG.CREATE,
-          IconComponent: Plus,
-          onClick: () => {
-            router.push(NAVIGATION_LINKS.ROLES.CREATE);
-          },
+          systemIcon: "Plus",
+          action: NAVIGATION_LINKS.ROLES.CREATE,
         },
       ]}
     >
-      <StyledCard>
+      <Card>
         <FEPaginationTable
-          dataEndpoint={ADMIN_ROLES_CRUD_CONFIG.ENDPOINTS.LIST}
-          emptyMessage={ADMIN_ROLES_CRUD_CONFIG.TEXT_LANG.EMPTY_LIST}
+          dataEndpoint={ROLES_ENDPOINT_CONFIG.LIST}
           columns={columns}
+          empty={{
+            text: ADMIN_ROLES_CRUD_CONFIG.TEXT_LANG.EMPTY_LIST,
+            createNew: {
+              label: ADMIN_ROLES_CRUD_CONFIG.TEXT_LANG.CREATE,
+              action: NAVIGATION_LINKS.ROLES.CREATE,
+            },
+          }}
         />
-      </StyledCard>
+      </Card>
     </AppLayout>
   );
 }

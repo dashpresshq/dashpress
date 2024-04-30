@@ -17,7 +17,6 @@ describe("/api/integrations/credentials/reveal", () => {
           "$2b$10$/9tw363jvQrylf4eLisJt.afEUphLLaDSfhkweYPhC0ayTJp7Zo0a",
         name: "Custom Role",
         role: "custom-role",
-        systemProfile: "",
       },
     ]);
   });
@@ -26,7 +25,7 @@ describe("/api/integrations/credentials/reveal", () => {
     await setupRolesTestData([
       {
         id: "custom-role",
-        permissions: ["CAN_MANAGE_INTEGRATIONS"],
+        permissions: ["CAN_MANAGE_APP_CREDENTIALS"],
       },
     ]);
 
@@ -54,7 +53,7 @@ describe("/api/integrations/credentials/reveal", () => {
     await setupRolesTestData([
       {
         id: "custom-role",
-        permissions: ["CAN_MANAGE_INTEGRATIONS"],
+        permissions: ["CAN_MANAGE_APP_CREDENTIALS"],
       },
     ]);
 
@@ -102,7 +101,7 @@ describe("/api/integrations/credentials/reveal", () => {
     expect(res._getJSONData()).toMatchInlineSnapshot(`
       {
         "errorCode": "",
-        "message": "Your account doesn't have enough priviledge to perform this action: (Can Manage Integrations)",
+        "message": "Your account doesn't have enough priviledge to perform this action: (Can Manage App Credentials)",
         "method": "POST",
         "name": "ForbiddenError",
         "path": "",

@@ -24,7 +24,7 @@ let PERMISSIONS = [
   "CAN_MANAGE_USERS",
   "CAN_RESET_PASSWORD",
   "CAN_MANAGE_PERMISSIONS",
-  "CAN_MANAGE_ALL_ENTITIES",
+  "CAN_MANAGE_DASHBOARD",
   "CAN_ACCESS_ENTITY:ENTITY-2--show",
   "CAN_ACCESS_ENTITY:DISABLED-ENTITY-2--show",
 ];
@@ -50,7 +50,7 @@ export const rolesApiHandlers = [
   rest.delete(
     BASE_TEST_URL("/api/roles/:roleId/permissions"),
     async (req, res, ctx) => {
-      const { permissions } = await req.json();
+      const permissions = req.url.searchParams.getAll("permissions");
       PERMISSIONS = PERMISSIONS.filter(
         (permission$1) => !permissions.includes(permission$1)
       );

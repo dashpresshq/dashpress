@@ -16,8 +16,6 @@ export const requestQueryValidationImpl: ValidationImplType<string> = async (
   );
 
   const value = req.query[requestOption as string];
-  if (Array.isArray(value)) {
-    return value[0];
-  }
-  return value;
+
+  return value as string;
 };

@@ -6,9 +6,11 @@ export const DATABASE_CREDENTIAL_GROUP: IGroupCredential = {
     "dataSourceType",
     "port",
     "host",
+    "filename",
     "user",
     "connectionString",
     "database",
     "password",
+    "ssl",
   ],
 };

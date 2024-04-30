@@ -1,21 +1,18 @@
-import "@testing-library/jest-dom";
-import React from "react";
 import { render, screen, waitFor } from "@testing-library/react";
 import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 import userEvent from "@testing-library/user-event";
 import EntitiesSettings from "pages/admin/settings/entities";
 
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
+import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
 
 setupApiHandlers();
 
 describe("pages/admin/settings/entities", () => {
   beforeAll(() => {
     const useRouter = jest.spyOn(require("next/router"), "useRouter");
-    useRouter.mockImplementation(() => ({
-      asPath: "/",
-      query: {},
-    }));
+
+    useRouter.mockImplementation(USE_ROUTER_PARAMS({}));
   });
 
   it("should display all entities with correct state", async () => {
@@ -73,10 +70,6 @@ describe("pages/admin/settings/entities", () => {
 
     await userEvent.click(
       screen.getByRole("button", { name: "Plural disabled-entity-2" })
-    );
-
-    await userEvent.click(
-      screen.getByRole("button", { name: "Save Enabled Entities Settings" })
     );
 
     expect(await screen.findByRole("status")).toHaveTextContent(

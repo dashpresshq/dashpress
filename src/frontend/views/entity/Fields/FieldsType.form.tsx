@@ -168,9 +168,9 @@ export function FieldsTypeForm({
             />
           </form>
           <OffCanvas
-            title={msg`"${getEntityFieldLabels(
+            title={msg`${getEntityFieldLabels(
               showFieldValidations
-            )}" Validations`}
+            )} Validations`}
             width={CANVAS_WIDTH}
             onClose={() => setShowFieldValidations("")}
             show={!!showFieldValidations}
@@ -191,7 +191,7 @@ export function FieldsTypeForm({
             />
           </OffCanvas>
           <OffCanvas
-            title={msg`"${getEntityFieldLabels(showFieldSelection)}" Selection`}
+            title={msg`${getEntityFieldLabels(showFieldSelection)} Selections`}
             width={CANVAS_WIDTH}
             onClose={() => setShowFieldSelection("")}
             show={!!showFieldSelection}

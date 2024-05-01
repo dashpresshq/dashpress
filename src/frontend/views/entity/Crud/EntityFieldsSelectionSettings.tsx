@@ -137,7 +137,7 @@ export function EntityFieldsSelectionSettings({
         listLengthGuess={10}
         labelField="name"
         empty={{
-          text: msg`This entity has no fields. Kindly add fields from your prefer database tool to manage them here`,
+          text: msg`Add fields to this table from your prefer database tool to manage them here`,
         }}
         getLabel={getEntityFieldLabels}
         sort={{

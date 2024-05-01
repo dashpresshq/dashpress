@@ -49,7 +49,7 @@ export function EntitiesSelection({
         text:
           type === "relations"
             ? msg`This entity has no relations`
-            : msg`This application has no active entities. Kindly add new entities through your preferred database editor then restart this application to proceed.`,
+            : msg`Add new tables through your preferred database editor then restart this application.`,
       }}
       sort={
         sort

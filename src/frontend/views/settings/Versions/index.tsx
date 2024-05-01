@@ -15,8 +15,8 @@ import { BaseSettingsLayout } from "../_Base";
 
 export function VersionInfo() {
   const domainMessages = useDomainMessages({
-    plural: msg`System Information`,
-    singular: msg`System Information`,
+    plural: msg`System Info`,
+    singular: msg`System Info`,
   });
 
   useSetPageDetails({

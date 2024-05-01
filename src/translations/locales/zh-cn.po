@@ -14,7 +14,7 @@ msgstr ""
 "X-Generator: Poedit 3.4.2\n"
 
 msgid "-- Select State --"
-msgstr ""
+msgstr "-- 选择状态 --"
 
 msgid "\"{0}\" Selection"
 msgstr "选择“{0}”"
@@ -101,13 +101,13 @@ msgid "{0} {1}"
 msgstr ""
 
 msgid "{0} Configuration"
-msgstr ""
+msgstr "{0}配置"
 
 msgid "{0} Preference"
 msgstr "{0}偏好"
 
 msgid "{0} Shared Successfully"
-msgstr ""
+msgstr "{0}分享成功"
 
 msgid "{plural} Units"
 msgstr "{plural}单位"
@@ -140,22 +140,22 @@ msgid "{singular} Updated Successfully"
 msgstr "{singular}更新成功"
 
 msgid "{value} Day"
-msgstr ""
+msgstr "{value}天"
 
 msgid "{value} Days"
-msgstr ""
+msgstr "{value}天"
 
 msgid "{value} Hour"
-msgstr ""
+msgstr "{value}小时"
 
 msgid "{value} Hours"
-msgstr ""
+msgstr "{value}小时"
 
 msgid "{value} Month"
-msgstr ""
+msgstr "{value}个月"
 
 msgid "{value} Months"
-msgstr ""
+msgstr "{value}个月"
 
 msgid "{value} Quarter"
 msgstr ""
@@ -164,19 +164,19 @@ msgid "{value} Quarters"
 msgstr ""
 
 msgid "{value} Week"
-msgstr ""
+msgstr "{value}周"
 
 msgid "{value} Weeks"
-msgstr ""
+msgstr "{value}周"
 
 msgid "{value} Year"
-msgstr ""
+msgstr "{value}年"
 
 msgid "{value} Years"
-msgstr ""
+msgstr "{value}年"
 
 msgid "2FA Tokens"
-msgstr ""
+msgstr "2FA令牌"
 
 msgid "Access Key ID"
 msgstr "访问密钥 ID"
@@ -209,13 +209,13 @@ msgid "Add Nested Filter"
 msgstr "添加嵌套筛选"
 
 msgid "Add New {0} And Select"
-msgstr ""
+msgstr "创建新的并选择{0}"
 
 msgid "Add New {singular}"
 msgstr "添加新{singular}"
 
 msgid "Add New And Select"
-msgstr ""
+msgstr "创建新的并选中"
 
 msgid "Add New Option"
 msgstr "添加新选项"
@@ -224,10 +224,10 @@ msgid "Add New Validation"
 msgstr "添加新验证"
 
 msgid "All Dashboards"
-msgstr ""
+msgstr "所有仪表盘"
 
 msgid "All items were {actionText} successfully"
-msgstr ""
+msgstr "所有项目均已{actionText}成功"
 
 msgid "Alphanumeric"
 msgstr "字母数字"
@@ -245,28 +245,28 @@ msgid "Are you sure you want to do this?"
 msgstr "你确定你要这么做吗？"
 
 msgid "Associated Triggers"
-msgstr ""
+msgstr "关联的触发器"
 
 msgid "Associated Workflows"
-msgstr ""
+msgstr "关联的工作流程"
 
 msgid "Attach A Trigger"
-msgstr ""
+msgstr "连接触发器"
 
 msgid "Attach A Workflow"
-msgstr ""
+msgstr "连接工作流"
 
 msgid "Authenticator Token"
-msgstr ""
+msgstr "身份验证器令牌"
 
 msgid "Back To {0}"
-msgstr ""
+msgstr "返回{0}"
 
 msgid "Back to Sign In Page"
-msgstr ""
+msgstr "返回登录页"
 
 msgid "Bar Chart"
-msgstr ""
+msgstr "饼图"
 
 msgid "Before Submit"
 msgstr "提交前"
@@ -287,40 +287,40 @@ msgid "Body"
 msgstr ""
 
 msgid "Bookmark"
-msgstr ""
+msgstr "书签"
 
 msgid "Bookmarks"
-msgstr ""
+msgstr "书签"
 
 msgid "Boolean"
-msgstr ""
+msgstr "布尔值"
 
 msgid "Brown"
-msgstr ""
+msgstr "棕色"
 
 msgid "Bulk Delete"
-msgstr ""
+msgstr "批量删除"
 
 msgid "Bulk Deleting"
-msgstr ""
+msgstr "批量删除"
 
 msgid "Bulk Update"
-msgstr ""
+msgstr "批量更新"
 
 msgid "Can Access All Dashboards"
-msgstr ""
+msgstr "可以访问所有仪表盘"
 
 msgid "Can Access And Restore Soft Deleted Items"
-msgstr ""
+msgstr "可访问和恢复软删除的项目"
 
 msgid "Can Configure App"
 msgstr "可以配置应用程序"
 
 msgid "Can Export Data"
-msgstr ""
+msgstr "可导出数据"
 
 msgid "Can Impersonate Users"
-msgstr ""
+msgstr "可模拟用户"
 
 msgid "Can Manage All Entities"
 msgstr "可管理所有实体"
@@ -338,7 +338,7 @@ msgid "Can Manage Users"
 msgstr "可管理用户"
 
 msgid "Can Manages Flows"
-msgstr ""
+msgstr "可管理流程"
 
 msgid "Can Reset Password"
 msgstr "可重置密码"
@@ -347,7 +347,7 @@ msgid "Cancel"
 msgstr "取消"
 
 msgid "Change History"
-msgstr ""
+msgstr "变更历史"
 
 msgid "Change Language"
 msgstr "切换语言"
@@ -356,25 +356,25 @@ msgid "Channel"
 msgstr "频道"
 
 msgid "Clear selections"
-msgstr ""
+msgstr "清除选择"
 
 msgid "Click here to view details"
 msgstr "查看详情"
 
 msgid "Client Script"
-msgstr ""
+msgstr "客户端脚本"
 
 msgid "Clone"
-msgstr ""
+msgstr "复制"
 
 msgid "Clone {0}"
-msgstr ""
+msgstr "复制{0}"
 
 msgid "Clone Settings"
-msgstr ""
+msgstr "复制设置"
 
 msgid "Cloning"
-msgstr ""
+msgstr "复制"
 
 msgid "Close Canvas"
 msgstr "关闭画布"
@@ -383,7 +383,7 @@ msgid "Color"
 msgstr "颜色"
 
 msgid "Column"
-msgstr ""
+msgstr "列"
 
 msgid "Column Labels Settings"
 msgstr "列标签设置"
@@ -392,13 +392,13 @@ msgid "Column Types Settings"
 msgstr "列类型设置"
 
 msgid "Complete Setup"
-msgstr ""
+msgstr "完成设置"
 
 msgid "Completing Setup"
-msgstr ""
+msgstr "完成设置"
 
 msgid "Condition"
-msgstr ""
+msgstr "条件"
 
 msgid "Configure"
 msgstr "设置"
@@ -413,13 +413,13 @@ msgid "Confirm"
 msgstr "确认"
 
 msgid "Confirm Data Restoration"
-msgstr ""
+msgstr "确认数据还原"
 
 msgid "Confirm Delete"
 msgstr "确认删除"
 
 msgid "Confirmation Text"
-msgstr ""
+msgstr "确认文字"
 
 msgid "Connection URL"
 msgstr "连接链接"
@@ -434,10 +434,10 @@ msgid "Contains"
 msgstr "包含"
 
 msgid "Continue"
-msgstr ""
+msgstr "继续"
 
 msgid "Copy To Clipboard"
-msgstr ""
+msgstr "复制到剪贴板"
 
 msgid "Create"
 msgstr "创建"
@@ -446,7 +446,7 @@ msgid "Create {singular}"
 msgstr "创建{singular}"
 
 msgid "Create Attachments"
-msgstr ""
+msgstr "添加附件"
 
 msgid "Create Columns Settings"
 msgstr "创建列设置"
@@ -464,13 +464,13 @@ msgid "Creating {singular}"
 msgstr "创建{singular}"
 
 msgid "Creating Attachments"
-msgstr ""
+msgstr "添加附件"
 
 msgid "Credentials Was Successfully Setup"
 msgstr "证书设置成功"
 
 msgid "Cron Expression"
-msgstr ""
+msgstr "Cron表达式"
 
 msgid "CRUD"
 msgstr "CRUD"
@@ -479,22 +479,22 @@ msgid "CRUD Settings"
 msgstr "CRUD设置"
 
 msgid "cURL Command"
-msgstr ""
+msgstr "cURL命令"
 
 msgid "Curve"
-msgstr ""
+msgstr "曲线"
 
 msgid "Custom Action"
-msgstr ""
+msgstr "自定义操作"
 
 msgid "Custom Actions"
-msgstr ""
+msgstr "自定义操作"
 
 msgid "Custom Dashboard"
-msgstr ""
+msgstr "自定义仪表盘"
 
 msgid "Custom Dashboards"
-msgstr ""
+msgstr "自定义仪表盘"
 
 msgid "Custom Date"
 msgstr "自定义日期"
@@ -521,19 +521,19 @@ msgid "Data"
 msgstr "数据"
 
 msgid "Data copied to clipboard successfully"
-msgstr ""
+msgstr "数据已成功复制到剪贴板"
 
 msgid "Data Event"
-msgstr ""
+msgstr "数据事件"
 
 msgid "Data Events"
-msgstr ""
+msgstr "数据事件"
 
 msgid "Data exported successfully"
-msgstr ""
+msgstr "数据导出成功"
 
 msgid "Data Key"
-msgstr ""
+msgstr "数据键值"
 
 msgid "Database"
 msgstr "数据库"
@@ -548,7 +548,7 @@ msgid "Date Format"
 msgstr "日期格式"
 
 msgid "Day"
-msgstr ""
+msgstr "天"
 
 msgid "Deactivate"
 msgstr "停用"
@@ -572,7 +572,7 @@ msgid "Delete Selection"
 msgstr "删除所选内容"
 
 msgid "Description"
-msgstr ""
+msgstr "描述"
 
 msgid "Details"
 msgstr "查看详情"
@@ -620,10 +620,10 @@ msgid "Enable {0} Functionality"
 msgstr "启用{0}功能"
 
 msgid "Enable Area"
-msgstr ""
+msgstr "启用区域"
 
 msgid "Enable Points"
-msgstr ""
+msgstr "启用点"
 
 msgid "Enabled Entities"
 msgstr "已启用实体"
@@ -641,31 +641,31 @@ msgid "Entities"
 msgstr "实体"
 
 msgid "Entities Enabled For Add New And Select"
-msgstr ""
+msgstr "可添加新实体和选择实体"
 
 msgid "Entities Enabled For Change History"
-msgstr ""
+msgstr "启用变更历史的实体"
 
 msgid "Entity"
-msgstr ""
+msgstr "实体"
 
 msgid "Entity Action"
-msgstr ""
+msgstr "实体操作"
 
 msgid "Entity Create Form Layout"
-msgstr ""
+msgstr "实体创建表单布局"
 
 msgid "Entity Field"
-msgstr ""
+msgstr "实体字段"
 
 msgid "Entity ID"
-msgstr ""
+msgstr "实体ID"
 
 msgid "Entity Tab"
 msgstr "实体选项卡"
 
 msgid "Entity Update Form Layout"
-msgstr ""
+msgstr "更新实体表单布局"
 
 msgid "Environment Variable"
 msgstr "环境变量"
@@ -683,22 +683,22 @@ msgid "Error message"
 msgstr "错误信息"
 
 msgid "Error Occured Setting Up Your 2FA Token"
-msgstr ""
+msgstr "设置2FA令牌时发生错误"
 
 msgid "Every 6 Hours"
-msgstr ""
+msgstr "每6小时"
 
 msgid "Explain {title}"
 msgstr "解释{title}"
 
 msgid "Export"
-msgstr ""
+msgstr "导出"
 
 msgid "Exporting"
-msgstr ""
+msgstr "导出"
 
 msgid "External Link"
-msgstr ""
+msgstr "外部链接"
 
 msgid "Field"
 msgstr "字段"
@@ -734,22 +734,22 @@ msgid "File Uploads Settings"
 msgstr "文件上传设置"
 
 msgid "Flow"
-msgstr ""
+msgstr "Flow"
 
 msgid "Flow Trigger Attachment"
-msgstr ""
+msgstr "触发流程附件"
 
 msgid "Flow Trigger Attachments"
-msgstr ""
+msgstr "触发流程附件"
 
 msgid "Flows"
-msgstr ""
+msgstr "Flow"
 
 msgid "Follow us on Twitter"
 msgstr "关注我们的推特"
 
 msgid "For security reasons, Please input your account password to be able to manage {label}"
-msgstr ""
+msgstr "出于安全原因，请输入您的账户密码才能管理{label}"
 
 msgid "Form"
 msgstr "表单"
@@ -761,10 +761,10 @@ msgid "Form Actions"
 msgstr "表单操作"
 
 msgid "Form Field"
-msgstr ""
+msgstr "表单字段"
 
 msgid "Form Fields"
-msgstr ""
+msgstr "表单字段"
 
 msgid "Form Scripts"
 msgstr "表单脚本"
@@ -773,7 +773,7 @@ msgid "Format"
 msgstr "格式"
 
 msgid "From"
-msgstr ""
+msgstr "来自"
 
 msgid "General"
 msgstr "一般"
@@ -782,10 +782,10 @@ msgid "General Data Settings"
 msgstr "常规数据设置"
 
 msgid "Genesis"
-msgstr ""
+msgstr "起源"
 
 msgid "Global Action"
-msgstr ""
+msgstr "全局操作"
 
 msgid "Go Back"
 msgstr "返回"
@@ -800,13 +800,13 @@ msgid "Green"
 msgstr "绿色"
 
 msgid "Group Mode"
-msgstr ""
+msgstr "群组模式"
 
 msgid "Grouped"
-msgstr ""
+msgstr "群组"
 
 msgid "Header"
-msgstr ""
+msgstr "头部"
 
 msgid "Headers"
 msgstr "头部"
@@ -818,13 +818,13 @@ msgid "Hi, {0}"
 msgstr "你好，{0}"
 
 msgid "Home"
-msgstr ""
+msgstr "首页"
 
 msgid "Home Link"
 msgstr "首页链接"
 
 msgid "Horizontal"
-msgstr ""
+msgstr "水平"
 
 msgid "Host"
 msgstr "主机"
@@ -833,7 +833,7 @@ msgid "Hour"
 msgstr "小时"
 
 msgid "I have safely saved my recovery tokens"
-msgstr ""
+msgstr "我已安全保存了我的恢复令牌"
 
 msgid "Icon"
 msgstr "图标"
@@ -842,10 +842,10 @@ msgid "Image"
 msgstr "图像"
 
 msgid "Impersonate User"
-msgstr ""
+msgstr "模拟用户"
 
 msgid "Impersonating User"
-msgstr ""
+msgstr "模拟用户"
 
 msgid "Incorrect value"
 msgstr "错误值"
@@ -857,10 +857,10 @@ msgid "Initial Values"
 msgstr "初始值"
 
 msgid "Inline Edit"
-msgstr ""
+msgstr "行内编辑"
 
 msgid "Inline Edit Settings"
-msgstr ""
+msgstr "行内编辑"
 
 msgid "Input {deactivationKey} to continue"
 msgstr "输入{deactivationKey}继续"
@@ -869,10 +869,10 @@ msgid "Integration"
 msgstr "集成"
 
 msgid "Integrations"
-msgstr ""
+msgstr "集成"
 
 msgid "IP Address"
-msgstr ""
+msgstr "IP地址"
 
 msgid "Is In"
 msgstr "位于"
@@ -923,10 +923,10 @@ msgid "Light Color Scheme"
 msgstr "浅色主题配色方案"
 
 msgid "Line Chart"
-msgstr ""
+msgstr "折线图"
 
 msgid "Link"
-msgstr ""
+msgstr "链接"
 
 msgid "Link Entity"
 msgstr "实体链接"
@@ -935,16 +935,16 @@ msgid "Link Users To Database"
 msgstr "建立用户数据库"
 
 msgid "List"
-msgstr ""
+msgstr "列表"
 
 msgid "Loading..."
-msgstr ""
+msgstr "加载中..."
 
 msgid "Log Out"
 msgstr "退出登录"
 
 msgid "Loop"
-msgstr ""
+msgstr "循环"
 
 msgid "Manage {plural}"
 msgstr "管理{plural}"
@@ -953,10 +953,10 @@ msgid "Manage {title}"
 msgstr "管理{title}"
 
 msgid "Manage Plan"
-msgstr ""
+msgstr "管理计划"
 
 msgid "Manage Sensitive Fields"
-msgstr ""
+msgstr "管理敏感字段"
 
 msgid "Manage Variables"
 msgstr "变量管理"
@@ -971,10 +971,10 @@ msgid "Maximum file size to upload in MB"
 msgstr "上传的最大文件大小（MB）"
 
 msgid "Menu Builder"
-msgstr ""
+msgstr "菜单生成器"
 
 msgid "Menu Item"
-msgstr ""
+msgstr "菜单选项"
 
 msgid "Menu Settings"
 msgstr "菜单设置"
@@ -992,13 +992,13 @@ msgid "Min Length"
 msgstr "最小长度"
 
 msgid "Modify Data Before Cloning"
-msgstr ""
+msgstr "复制前修改数据"
 
 msgid "Month"
 msgstr "月份"
 
 msgid "Mutate"
-msgstr ""
+msgstr "变异"
 
 msgid "My Account"
 msgstr "我的账户"
@@ -1007,10 +1007,10 @@ msgid "Name"
 msgstr "名称"
 
 msgid "Navigation Menu"
-msgstr ""
+msgstr "导航菜单"
 
 msgid "New"
-msgstr ""
+msgstr "新"
 
 msgid "New Password"
 msgstr "新密码"
@@ -1019,13 +1019,13 @@ msgid "New Password Again"
 msgstr "重复新密码"
 
 msgid "New Value"
-msgstr ""
+msgstr "新值"
 
 msgid "No"
 msgstr ""
 
 msgid "No {0} Has Been Logged Yet"
-msgstr ""
+msgstr "尚未记录任何{0}"
 
 msgid "No {singular} Has Been Added Yet"
 msgstr "没有{singular}被添加"
@@ -1043,16 +1043,16 @@ msgid "No Search Results"
 msgstr "没有搜索结果"
 
 msgid "Node"
-msgstr ""
+msgstr "节点"
 
 msgid "Node Label"
-msgstr ""
+msgstr "节点标签"
 
 msgid "Node Properties"
-msgstr ""
+msgstr "节点属性"
 
 msgid "Nodes"
-msgstr ""
+msgstr "节点"
 
 msgid "Not Equal"
 msgstr "不等于"
@@ -1070,7 +1070,7 @@ msgid "Old Password"
 msgstr "旧密码"
 
 msgid "Old Value"
-msgstr ""
+msgstr "旧值"
 
 msgid "On Create"
 msgstr "创建"
@@ -1112,10 +1112,10 @@ msgid "Persistent Query"
 msgstr "持久查询"
 
 msgid "Personalize This Table"
-msgstr ""
+msgstr "个性化表格"
 
 msgid "Pie Chart"
-msgstr ""
+msgstr "饼图"
 
 msgid "Plural"
 msgstr "复数"
@@ -1142,13 +1142,13 @@ msgid "Quarter"
 msgstr "季度"
 
 msgid "Query"
-msgstr ""
+msgstr "查询"
 
 msgid "Recovery Code"
-msgstr ""
+msgstr "恢复码"
 
 msgid "Recovery tokens copied to clipboard"
-msgstr ""
+msgstr "恢复令牌已复制到剪贴板"
 
 msgid "Red"
 msgstr "红色"
@@ -1178,7 +1178,7 @@ msgid "Relations Order"
 msgstr "关系顺序"
 
 msgid "Relations To Clone Along"
-msgstr ""
+msgstr "复制关联信息"
 
 msgid "Relationship Settings"
 msgstr "关联设置"
@@ -1193,10 +1193,10 @@ msgid "Remove Nested Filter"
 msgstr "移除嵌套过滤器"
 
 msgid "Request ID"
-msgstr ""
+msgstr "请求ID"
 
 msgid "Request Method"
-msgstr ""
+msgstr "请求方法"
 
 msgid "Required"
 msgstr "必填项"
@@ -1205,13 +1205,13 @@ msgid "Reset"
 msgstr "重置"
 
 msgid "Reset 2FA Recovery Tokens"
-msgstr ""
+msgstr "重置2FA恢复令牌"
 
 msgid "Reset Password"
 msgstr "重置密码"
 
 msgid "Reset Recovery Tokens"
-msgstr ""
+msgstr "重置恢复令牌"
 
 msgid "Reset User Password"
 msgstr "重置用户密码"
@@ -1220,10 +1220,10 @@ msgid "Resetting Password"
 msgstr "重置密码"
 
 msgid "Response"
-msgstr ""
+msgstr "响应"
 
 msgid "Restore"
-msgstr ""
+msgstr "恢复"
 
 msgid "Reveal {label}"
 msgstr "显示 {label}"
@@ -1250,34 +1250,34 @@ msgid "Roles and Permissions"
 msgstr "角色和权限"
 
 msgid "Route ID"
-msgstr ""
+msgstr "路由ID"
 
 msgid "Save"
 msgstr "保存"
 
 msgid "Save {0}"
-msgstr ""
+msgstr "保存{0}"
 
 msgid "Save {singular}"
 msgstr "保存{singular}"
 
 msgid "Save Current Filters"
-msgstr ""
+msgstr "保存当前过滤器"
 
 msgid "Saving"
-msgstr ""
+msgstr "保存"
 
 msgid "Saving {0}"
-msgstr ""
+msgstr "正在保存{0}"
 
 msgid "Saving {singular}"
 msgstr "保存{singular}"
 
 msgid "Scheduler"
-msgstr ""
+msgstr "调度器"
 
 msgid "Schedulers"
-msgstr ""
+msgstr "调度器"
 
 msgid "Script"
 msgstr "脚本"
@@ -1295,13 +1295,13 @@ msgid "Secrets"
 msgstr "密钥"
 
 msgid "Select Node Type"
-msgstr ""
+msgstr "选择节点类型"
 
 msgid "Select Trigger"
-msgstr ""
+msgstr "选择触发条件"
 
 msgid "Select Workflow"
-msgstr ""
+msgstr "选择工作流"
 
 msgid "Selection"
 msgstr "选择"
@@ -1328,10 +1328,10 @@ msgid "Sender Name"
 msgstr "发件人名称"
 
 msgid "Sensitive Field"
-msgstr ""
+msgstr "敏感字段"
 
 msgid "Sensitive Fields"
-msgstr ""
+msgstr "敏感字段"
 
 msgid "Setting Up Account"
 msgstr "账户设置"
@@ -1340,7 +1340,7 @@ msgid "Setting Up Credentials"
 msgstr "设置凭据"
 
 msgid "Settings"
-msgstr ""
+msgstr "设置"
 
 msgid "Setup"
 msgstr "配置"
@@ -1352,16 +1352,16 @@ msgid "Setup Credentials"
 msgstr "配置凭据"
 
 msgid "Share"
-msgstr ""
+msgstr "分享"
 
 msgid "Sharing"
-msgstr ""
+msgstr "分享"
 
 msgid "Show Soft Deleted Items And The Restore Button"
-msgstr ""
+msgstr "显示软删除项目和恢复按钮"
 
 msgid "Show Up In Roles And Permissions"
-msgstr ""
+msgstr "显示在角色和权限中"
 
 msgid "Showing <0/> entries of <1>{0}</1> results"
 msgstr "显示<0/>条目 <1>{0}</1> 结果"
@@ -1388,13 +1388,13 @@ msgid "Small Logo"
 msgstr "小图标"
 
 msgid "Soft Delete"
-msgstr ""
+msgstr "软删除"
 
 msgid "Soft Delete Settings"
-msgstr ""
+msgstr "软删除设置"
 
 msgid "Stacked"
-msgstr ""
+msgstr "堆叠"
 
 msgid "Star us on Github"
 msgstr "谢谢给我们项目Star"
@@ -1403,25 +1403,25 @@ msgid "Start of year"
 msgstr "年初"
 
 msgid "State Script"
-msgstr ""
+msgstr "状态脚本"
 
 msgid "Storage Key"
 msgstr "存储密钥"
 
 msgid "Strategy"
-msgstr ""
+msgstr "策略"
 
 msgid "String"
 msgstr ""
 
 msgid "Subject"
-msgstr ""
+msgstr "主题"
 
 msgid "Submit"
-msgstr ""
+msgstr "提交"
 
 msgid "Submitting"
-msgstr ""
+msgstr "提交"
 
 msgid "Summary Card"
 msgstr "摘要卡片"
@@ -1451,10 +1451,10 @@ msgid "Table Fields Order"
 msgstr "表字段顺序"
 
 msgid "Table Personalization"
-msgstr ""
+msgstr "表格个性化"
 
 msgid "Table Personalizations"
-msgstr ""
+msgstr "表格个性化"
 
 msgid "Table View"
 msgstr "表格视图"
@@ -1478,7 +1478,7 @@ msgid "Theme Settings"
 msgstr "主题设置"
 
 msgid "This {0} Has No Form"
-msgstr ""
+msgstr "此{0}无表格"
 
 msgid "This application has no active entities. Kindly add new entities through your preferred database editor then restart this application to proceed."
 msgstr "这个应用目前没有可用的数据。请在您喜欢的数据库编辑器中添加新的数据，然后重新启动应用程序以继续。"
@@ -1493,16 +1493,16 @@ msgid "This entity has no relations"
 msgstr "该实体没有关联"
 
 msgid "This flow should be queued and executed asynchronously (recommended for long running flows, requires Redis)"
-msgstr ""
+msgstr "此流程应该排队并异步执行（建议用于长时间运行的流程，需要 Redis）"
 
 msgid "This trigger has no workflow attached"
-msgstr ""
+msgstr "此触发器未附加任何工作流"
 
 msgid "This workflow has no trigger attached"
-msgstr ""
+msgstr "此工作流程未附加触发器"
 
 msgid "Time Changed"
-msgstr ""
+msgstr "时间变化"
 
 msgid "Title"
 msgstr "标题"
@@ -1514,7 +1514,7 @@ msgid "Toggle Connection URL"
 msgstr "切换连接"
 
 msgid "Token"
-msgstr ""
+msgstr "令牌"
 
 msgid "Token Validity Duration In Days"
 msgstr "令牌有效期（天）"
@@ -1523,7 +1523,7 @@ msgid "Trigger"
 msgstr "触发器"
 
 msgid "Try Out 25+ Pro Features"
-msgstr ""
+msgstr "试用25+专业功能"
 
 msgid "Type"
 msgstr "类型"
@@ -1589,13 +1589,13 @@ msgid "Variables"
 msgstr "变量"
 
 msgid "Verifing"
-msgstr ""
+msgstr "验证"
 
 msgid "Verify"
-msgstr ""
+msgstr "验证"
 
 msgid "Vertical"
-msgstr ""
+msgstr "垂直"
 
 msgid "View"
 msgstr "查看"
@@ -1625,16 +1625,16 @@ msgid "Width"
 msgstr "宽度"
 
 msgid "Workflow"
-msgstr ""
+msgstr "工作流"
 
 msgid "Workflows"
-msgstr ""
+msgstr "工作流"
 
 msgid "X Label"
-msgstr ""
+msgstr "X轴标签"
 
 msgid "Y Label"
-msgstr ""
+msgstr "Y轴标签"
 
 msgid "Year"
 msgstr "年份"

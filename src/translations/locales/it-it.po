@@ -13,1637 +13,1669 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-msgid ""
-msgstr ""
-
-msgid "-- Select State --"
-msgstr ""
-
-msgid "\"{0}\" Selection"
-msgstr ""
-
-msgid "\"{0}\" Validations"
-msgstr ""
-
 msgid "[[ name ]] is an invalid date"
-msgstr ""
+msgstr "[[ name ]] è una data non valida"
 
 msgid "[[ name ]] is an invalid email"
-msgstr ""
+msgstr "[[ name ]] è un'e-mail non valida"
 
 msgid "[[ name ]] is an invalid json"
-msgstr ""
+msgstr "[[ name ]] è un json non valido"
 
 msgid "[[ name ]] is an invalid URL"
-msgstr ""
+msgstr "[[ name ]] è un URL non valido"
 
 msgid "[[ name ]] is invalid"
-msgstr ""
-
-msgid "[[ name ]] is invalid. Allowed values are [[ options ]]"
-msgstr ""
+msgstr "[[ name ]] non è valido"
 
 msgid "[[ name ]] is not a text"
-msgstr ""
+msgstr "[[ name ]] non è un testo"
 
 msgid "[[ name ]] is required"
-msgstr ""
+msgstr "[[ name ]] è obbligatorio"
 
 msgid "[[ name ]] should be a boolean"
-msgstr ""
+msgstr "[[ name ]] dovrebbe essere un valore booleano"
 
 msgid "[[ name ]] should be a color"
-msgstr ""
+msgstr "[[ name ]] dovrebbe essere un colore"
 
 msgid "[[ name ]] should be a number"
-msgstr ""
+msgstr "[[ name ]] dovrebbe essere un numero"
 
 msgid "[[ name ]] should be greater than [[ length ]] characters"
-msgstr ""
+msgstr "[[ name ]] deve essere maggiore di [[ length ]] caratteri"
 
 msgid "[[ name ]] should be greater than [[ otherField ]]"
-msgstr ""
+msgstr "[[ name ]] deve essere maggiore di [[ otherField ]]"
 
 msgid "[[ name ]] should be greater than [[ value ]]"
-msgstr ""
+msgstr "[[ name ]] dovrebbe essere maggiore di [[ value ]]"
 
 msgid "[[ name ]] should be less than [[ length ]] characters"
-msgstr ""
+msgstr "[[ name ]] deve contenere meno di [[ length ]] caratteri"
 
 msgid "[[ name ]] should be less than [[ otherField ]]"
-msgstr ""
+msgstr "[[ name ]] dovrebbe essere inferiore a [[ otherField ]]"
 
 msgid "[[ name ]] should be less than [[ value ]]"
-msgstr ""
+msgstr "[[ name ]] dovrebbe essere inferiore a [[ value ]]"
 
 msgid "[[ name ]] should be positive number"
-msgstr ""
+msgstr "[[ name ]] deve essere un numero positivo"
 
 msgid "[[ name ]] should contain only alphabets and numbers"
-msgstr ""
+msgstr "[[ name ]] deve contenere solo lettere e numeri"
 
 msgid "[[ name ]] should contain only upper cases"
-msgstr ""
+msgstr "[[ name ]] deve contenere solo lettere maiuscole"
 
 msgid "[[ name ]] should match [[ otherField ]]"
-msgstr ""
+msgstr "[[ name ]] dovrebbe corrispondere a [[ otherField ]]"
 
 msgid "[[ name ]] should not match [[ otherField ]]"
-msgstr ""
+msgstr "[[ name ]] non deve corrispondere a [[ otherField ]]"
 
 msgid "{0}"
-msgstr ""
+msgstr "{0}"
 
 msgid "{0} - {1}"
-msgstr ""
+msgstr "{0} - {1}"
 
 msgid "{0} [{1}]"
-msgstr ""
+msgstr "{0} [{1}]"
 
 msgid "{0} {1}"
-msgstr ""
+msgstr "{0} {1}"
 
 msgid "{0} Configuration"
-msgstr ""
+msgstr "{0} Configurazione"
 
-msgid "{0} Preference"
-msgstr ""
+msgid "{0} Selections"
+msgstr "{0} Selezioni"
 
-msgid "{0} Shared Successfully"
-msgstr ""
+msgid "{0} Validations"
+msgstr "{0} Convalide"
 
 msgid "{plural} Units"
-msgstr ""
+msgstr "{plural} Unità"
 
 msgid "{singular} {action} Successfully"
-msgstr ""
+msgstr "{singular} {action} Con successo"
 
 msgid "{singular} could not be retrieved"
-msgstr ""
+msgstr "Impossibile recuperare {singular}"
 
 msgid "{singular} Created Successfully"
-msgstr ""
+msgstr "{singular} Creato con successo"
 
 msgid "{singular} Deleted Successfully"
-msgstr ""
+msgstr "{singular} Eliminato con successo"
 
 msgid "{singular} Details"
-msgstr ""
+msgstr "{singular} Dettagli"
 
 msgid "{singular} Saved Successfully"
-msgstr ""
+msgstr "{singular} Salvato con successo"
 
 msgid "{singular} Settings"
-msgstr ""
+msgstr "{singular} Impostazioni"
 
 msgid "{singular} Unit"
-msgstr ""
+msgstr "{singular} Unità"
 
 msgid "{singular} Updated Successfully"
-msgstr ""
+msgstr "{singular} Aggiornato con successo"
 
 msgid "{value} Day"
-msgstr ""
+msgstr "{value} giorno"
 
 msgid "{value} Days"
-msgstr ""
+msgstr "{value} giorni"
 
 msgid "{value} Hour"
-msgstr ""
+msgstr "{value} Ora"
 
 msgid "{value} Hours"
-msgstr ""
+msgstr "{value} ore"
 
 msgid "{value} Month"
-msgstr ""
+msgstr "{value} mese"
 
 msgid "{value} Months"
-msgstr ""
+msgstr "{value} Mesi"
 
 msgid "{value} Quarter"
-msgstr ""
+msgstr "{value} trimestre"
 
 msgid "{value} Quarters"
-msgstr ""
+msgstr "{value} trimestri"
 
 msgid "{value} Week"
-msgstr ""
+msgstr "{value} settimana"
 
 msgid "{value} Weeks"
-msgstr ""
+msgstr "{value} settimane"
 
 msgid "{value} Year"
-msgstr ""
+msgstr "{value} anno"
 
 msgid "{value} Years"
-msgstr ""
+msgstr "{value} Anni"
 
 msgid "2FA Tokens"
-msgstr ""
+msgstr "Gettoni 2FA"
 
 msgid "Access Key ID"
-msgstr ""
+msgstr "ID chiave di accesso"
 
 msgid "Account Preferences"
-msgstr ""
+msgstr "Preferenze dell'account"
 
 msgid "Account Profile"
-msgstr ""
+msgstr "Profilo dell'account"
 
 msgid "Account Was Successfully Setup"
-msgstr ""
+msgstr "L'account è stato configurato correttamente"
 
 msgid "Action"
-msgstr ""
+msgstr "Azione"
 
 msgid "Actions"
-msgstr ""
+msgstr "Azioni"
 
 msgid "Activate {0}"
-msgstr ""
+msgstr "Attiva {0}"
+
+msgid "Activated"
+msgstr "Attivato"
 
 msgid "Activating {0}"
+msgstr "Attivazione di {0}"
+
+msgid "Add fields to this table from your prefer database tool to manage them here"
 msgstr ""
+"Aggiungi campi a questa tabella dal tuo strumento di database preferito per "
+"gestirli qui"
 
 msgid "Add Filter"
-msgstr ""
+msgstr "Aggiungi filtro"
 
 msgid "Add Nested Filter"
-msgstr ""
+msgstr "Aggiungi filtro nidificato"
 
 msgid "Add New {0} And Select"
-msgstr ""
+msgstr "Aggiungi nuovo {0} e seleziona"
 
 msgid "Add New {singular}"
-msgstr ""
+msgstr "Aggiungi nuovo {singular}"
 
 msgid "Add New And Select"
-msgstr ""
+msgstr "Aggiungi nuovo e seleziona"
 
 msgid "Add New Option"
+msgstr "Aggiungi nuova opzione"
+
+msgid ""
+"Add new tables through your preferred database editor then restart this "
+"application."
 msgstr ""
+"Aggiungi nuove tabelle tramite l'editor di database preferito, quindi "
+"riavvia questa applicazione."
 
 msgid "Add New Validation"
-msgstr ""
+msgstr "Aggiungi nuova convalida"
 
 msgid "All Dashboards"
-msgstr ""
+msgstr "Tutti i dashboard"
 
 msgid "All items were {actionText} successfully"
-msgstr ""
+msgstr "Tutti gli elementi sono stati {actionText} correttamente"
+
+msgid "Allowed values are [[ options ]]"
+msgstr "I valori consentiti sono [[ options ]]"
 
 msgid "Alphanumeric"
-msgstr ""
+msgstr "Alfanumerico"
 
 msgid "AND"
-msgstr ""
+msgstr "E"
 
 msgid "API Key"
-msgstr ""
+msgstr "Chiave API"
 
 msgid "App"
-msgstr ""
+msgstr "App"
 
 msgid "Are you sure you want to do this?"
-msgstr ""
+msgstr "Sei sicuro di volerlo fare?"
 
 msgid "Associated Triggers"
-msgstr ""
+msgstr "Trigger associati"
 
 msgid "Associated Workflows"
-msgstr ""
+msgstr "Flussi di lavoro associati"
 
 msgid "Attach A Trigger"
-msgstr ""
+msgstr "Allega un grilletto"
 
 msgid "Attach A Workflow"
-msgstr ""
+msgstr "Allega un flusso di lavoro"
 
 msgid "Authenticator Token"
-msgstr ""
+msgstr "Token di autenticazione"
 
 msgid "Back To {0}"
-msgstr ""
+msgstr "Torna a {0}"
 
 msgid "Back to Sign In Page"
-msgstr ""
+msgstr "Torna alla pagina di accesso"
 
 msgid "Bar Chart"
-msgstr ""
+msgstr "Grafico a barre"
 
 msgid "Before Submit"
-msgstr ""
+msgstr "Prima di inviare"
 
 msgid "Beginning of time"
-msgstr ""
+msgstr "L'inizio del tempo"
 
 msgid "Beginning of Year"
-msgstr ""
+msgstr "Inizio anno"
 
 msgid "Between"
-msgstr ""
+msgstr "Fra"
 
 msgid "Blue"
-msgstr ""
+msgstr "Blu"
 
 msgid "Body"
-msgstr ""
+msgstr "Corpo"
 
 msgid "Bookmark"
-msgstr ""
+msgstr "Segnalibro"
 
 msgid "Bookmarks"
-msgstr ""
+msgstr "Segnalibri"
 
 msgid "Boolean"
-msgstr ""
+msgstr "Booleano"
 
 msgid "Brown"
-msgstr ""
+msgstr "Marrone"
 
 msgid "Bulk Delete"
-msgstr ""
+msgstr "Eliminazione in blocco"
 
 msgid "Bulk Deleting"
-msgstr ""
+msgstr "Eliminazione in blocco"
 
 msgid "Bulk Update"
-msgstr ""
+msgstr "Aggiornamento in blocco"
 
 msgid "Can Access All Dashboards"
-msgstr ""
+msgstr "Può accedere a tutti i dashboard"
 
 msgid "Can Access And Restore Soft Deleted Items"
-msgstr ""
+msgstr "Può accedere e ripristinare gli elementi eliminati temporaneamente"
 
 msgid "Can Configure App"
-msgstr ""
+msgstr "Può configurare l'app"
 
 msgid "Can Export Data"
-msgstr ""
+msgstr "Può esportare dati"
 
 msgid "Can Impersonate Users"
-msgstr ""
+msgstr "Può impersonare gli utenti"
 
 msgid "Can Manage All Entities"
-msgstr ""
+msgstr "Può gestire tutte le entità"
 
 msgid "Can Manage App Credentials"
-msgstr ""
+msgstr "Può gestire le credenziali dell'app"
 
 msgid "Can Manage Dashboard"
-msgstr ""
+msgstr "Può gestire la dashboard"
 
 msgid "Can Manage Permissions"
-msgstr ""
+msgstr "Può gestire le autorizzazioni"
 
 msgid "Can Manage Users"
-msgstr ""
+msgstr "Può gestire gli utenti"
 
 msgid "Can Manages Flows"
-msgstr ""
+msgstr "Can gestisce i flussi"
 
 msgid "Can Reset Password"
-msgstr ""
+msgstr "Può reimpostare la password"
 
 msgid "Cancel"
-msgstr ""
+msgstr "Annulla"
 
 msgid "Change History"
-msgstr ""
+msgstr "cambiare la storia"
 
 msgid "Change Language"
-msgstr ""
+msgstr "Cambia lingua"
 
 msgid "Channel"
-msgstr ""
+msgstr "Canale"
 
 msgid "Clear selections"
-msgstr ""
+msgstr "Selezioni chiare"
 
 msgid "Click here to view details"
-msgstr ""
+msgstr "Clicca qui per visualizzare i dettagli"
 
 msgid "Client Script"
-msgstr ""
+msgstr "Scrittura del cliente"
 
 msgid "Clone"
-msgstr ""
+msgstr "Clone"
 
 msgid "Clone {0}"
-msgstr ""
+msgstr "Clona {0}"
 
 msgid "Clone Settings"
-msgstr ""
+msgstr "Impostazioni di clonazione"
+
+msgid "Cloned"
+msgstr "Clonato"
 
 msgid "Cloning"
-msgstr ""
+msgstr "Clonazione"
 
 msgid "Close Canvas"
-msgstr ""
+msgstr "Chiudi tela"
 
 msgid "Color"
-msgstr ""
+msgstr "Colore"
 
 msgid "Column"
-msgstr ""
+msgstr "Colonna"
 
 msgid "Column Labels Settings"
-msgstr ""
+msgstr "Impostazioni delle etichette delle colonne"
 
 msgid "Column Types Settings"
-msgstr ""
+msgstr "Impostazioni dei tipi di colonna"
 
 msgid "Complete Setup"
-msgstr ""
+msgstr "Configurazione completa"
 
 msgid "Completing Setup"
-msgstr ""
+msgstr "Completamento della configurazione"
 
 msgid "Condition"
-msgstr ""
+msgstr "Condizione"
 
 msgid "Configure"
-msgstr ""
+msgstr "Configura"
 
 msgid "Configure Selections"
-msgstr ""
+msgstr "Configura selezioni"
 
 msgid "Configure Validation"
-msgstr ""
+msgstr "Configura convalida"
 
 msgid "Confirm"
-msgstr ""
+msgstr "Confermare"
 
 msgid "Confirm Data Restoration"
-msgstr ""
+msgstr "Conferma il ripristino dei dati"
 
 msgid "Confirm Delete"
-msgstr ""
+msgstr "Conferma cancellazione"
 
 msgid "Confirmation Text"
-msgstr ""
+msgstr "Testo di conferma"
 
 msgid "Connection URL"
-msgstr ""
+msgstr "URL di connessione"
 
 msgid "Constant"
-msgstr ""
+msgstr "Costante"
 
 msgid "Constants"
-msgstr ""
+msgstr "Costanti"
 
 msgid "Contains"
-msgstr ""
+msgstr "Contiene"
 
 msgid "Continue"
-msgstr ""
+msgstr "Continua"
 
 msgid "Copy To Clipboard"
-msgstr ""
+msgstr "Copia negli appunti"
 
 msgid "Create"
-msgstr ""
+msgstr "Creare"
 
 msgid "Create {singular}"
-msgstr ""
+msgstr "Crea {singular}"
 
 msgid "Create Attachments"
-msgstr ""
+msgstr "Crea allegati"
 
 msgid "Create Columns Settings"
-msgstr ""
+msgstr "Crea impostazioni colonne"
 
 msgid "Create Fields Order"
-msgstr ""
+msgstr "Crea ordine campi"
 
 msgid "Create It"
-msgstr ""
+msgstr "Crealo"
 
 msgid "Created At"
-msgstr ""
+msgstr "Creato a"
 
 msgid "Creating {singular}"
-msgstr ""
+msgstr "Creare {singular}"
 
 msgid "Creating Attachments"
-msgstr ""
+msgstr "Creazione di allegati"
 
 msgid "Credentials Was Successfully Setup"
-msgstr ""
+msgstr "Le credenziali sono state configurate correttamente"
 
 msgid "Cron Expression"
-msgstr ""
+msgstr "Espressione Cron"
 
 msgid "CRUD"
-msgstr ""
+msgstr "CRUDO"
 
 msgid "CRUD Settings"
-msgstr ""
+msgstr "Impostazioni CRUD"
 
 msgid "cURL Command"
-msgstr ""
+msgstr "Comando arriccia"
 
 msgid "Curve"
-msgstr ""
+msgstr "Curva"
 
 msgid "Custom Action"
-msgstr ""
+msgstr "Azione personalizzata"
 
 msgid "Custom Actions"
-msgstr ""
+msgstr "Azioni personalizzate"
 
 msgid "Custom Dashboard"
-msgstr ""
+msgstr "Cruscotto personalizzato"
 
 msgid "Custom Dashboards"
-msgstr ""
+msgstr "Dashboard personalizzate"
 
 msgid "Custom Date"
-msgstr ""
+msgstr "Data personalizzata"
 
 msgid "Dark"
-msgstr ""
+msgstr "Buio"
 
 msgid "Dark Color Scheme"
-msgstr ""
+msgstr "Combinazione di colori scuri"
 
 msgid "Dashboard"
-msgstr ""
+msgstr "Pannello di controllo"
 
 msgid "Dashboard Widget"
-msgstr ""
+msgstr "Widget della dashboard"
 
 msgid "Dashboard Widgets"
-msgstr ""
+msgstr "Widget della dashboard"
 
 msgid "Dashboards"
-msgstr ""
+msgstr "Cruscotti"
 
 msgid "Data"
-msgstr ""
+msgstr "Dati"
 
 msgid "Data copied to clipboard successfully"
-msgstr ""
+msgstr "Dati copiati negli appunti correttamente"
 
 msgid "Data Event"
-msgstr ""
+msgstr "Evento dati"
 
 msgid "Data Events"
-msgstr ""
+msgstr "Eventi dati"
 
 msgid "Data exported successfully"
-msgstr ""
+msgstr "Dati esportati con successo"
 
 msgid "Data Key"
-msgstr ""
+msgstr "Chiave dati"
 
 msgid "Database"
-msgstr ""
+msgstr "Banca dati"
 
 msgid "Database Type"
-msgstr ""
+msgstr "Tipo di banca dati"
 
 msgid "Date"
-msgstr ""
+msgstr "Data"
 
 msgid "Date Format"
-msgstr ""
+msgstr "Formato data"
 
 msgid "Day"
-msgstr ""
+msgstr "Giorno"
 
 msgid "Deactivate"
-msgstr ""
+msgstr "Disattivare"
 
 msgid "Deactivate {0}"
-msgstr ""
+msgstr "Disattiva {0}"
+
+msgid "Deactivated"
+msgstr "Disattivato"
 
 msgid "Deactivating {0}"
-msgstr ""
+msgstr "Disattivazione di {0}"
 
 msgid "Delete"
-msgstr ""
+msgstr "Eliminare"
 
 msgid "Delete {singular}"
-msgstr ""
+msgstr "Elimina {singular}"
 
 msgid "Delete Edge"
-msgstr ""
+msgstr "Elimina bordo"
 
 msgid "Delete Selection"
-msgstr ""
+msgstr "Elimina selezione"
 
 msgid "Description"
-msgstr ""
+msgstr "Descrizione"
 
 msgid "Details"
-msgstr ""
+msgstr "Dettagli"
 
 msgid "Details Columns Settings"
-msgstr ""
+msgstr "Dettagli Impostazioni colonne"
 
 msgid "Details Fields Order"
-msgstr ""
+msgstr "Ordine dei campi dei dettagli"
 
 msgid "Diction"
-msgstr ""
+msgstr "Dizione"
 
 msgid "Diction Settings"
-msgstr ""
+msgstr "Impostazioni dizione"
 
 msgid "Display Format"
-msgstr ""
+msgstr "Formato di visualizzazione"
 
 msgid "Domain"
-msgstr ""
+msgstr "Dominio"
 
 msgid "Done"
-msgstr ""
+msgstr "Fatto"
 
 msgid "Download"
-msgstr ""
+msgstr "Scaricamento"
 
 msgid "Duplicate {singular}"
-msgstr ""
+msgstr "Duplicato {singular}"
 
 msgid "Edit"
-msgstr ""
+msgstr "Modificare"
 
 msgid "Edit {singular}"
-msgstr ""
+msgstr "Modifica {singular}"
 
 msgid "Email"
-msgstr ""
+msgstr "E-mail"
 
 msgid "Empty Table"
-msgstr ""
+msgstr "Tabella vuota"
 
 msgid "Enable {0} Functionality"
-msgstr ""
+msgstr "Abilita la funzionalità {0}"
 
 msgid "Enable Area"
-msgstr ""
+msgstr "Abilita zona"
 
 msgid "Enable Points"
-msgstr ""
+msgstr "Abilita punti"
 
 msgid "Enabled Entities"
-msgstr ""
+msgstr "Enti abilitati"
 
 msgid "Enabled Entities Settings"
-msgstr ""
+msgstr "Impostazioni entità abilitate"
 
 msgid "Enabled Relations"
-msgstr ""
+msgstr "Relazioni abilitate"
+
+msgid "Enter a security token from your authenticator app"
+msgstr "Inserisci un token di sicurezza dalla tua app di autenticazione"
+
+msgid "Enter one of your unsed recovery codes"
+msgstr "Inserisci uno dei codici di ripristino non utilizzati"
 
 msgid "Enter your credentials to continue"
-msgstr ""
+msgstr "Inserisci le tue credenziali per continuare"
 
 msgid "Entities"
-msgstr ""
+msgstr "Entità"
 
 msgid "Entities Enabled For Add New And Select"
-msgstr ""
+msgstr "Entità abilitate per Aggiungi nuovo e seleziona"
 
 msgid "Entities Enabled For Change History"
-msgstr ""
+msgstr "Entità abilitate per la cronologia delle modifiche"
 
 msgid "Entity"
-msgstr ""
+msgstr "Entità"
 
 msgid "Entity Action"
-msgstr ""
+msgstr "Azione dell'entità"
 
 msgid "Entity Create Form Layout"
-msgstr ""
+msgstr "Entità Crea layout modulo"
 
 msgid "Entity Field"
-msgstr ""
+msgstr "Campo entità"
 
 msgid "Entity ID"
-msgstr ""
+msgstr "Identificativo dell'entità"
 
 msgid "Entity Tab"
-msgstr ""
+msgstr "Scheda Entità"
 
 msgid "Entity Update Form Layout"
-msgstr ""
+msgstr "Layout del modulo di aggiornamento dell'entità"
 
 msgid "Environment Variable"
-msgstr ""
+msgstr "Variabile d'ambiente"
 
 msgid "Environment Variables"
-msgstr ""
+msgstr "variabili ambientali"
 
 msgid "Equal"
-msgstr ""
+msgstr "Pari"
 
 msgid "Equal To Other Field"
-msgstr ""
+msgstr "Uguale ad altro campo"
 
 msgid "Error message"
-msgstr ""
+msgstr "Messaggio di errore"
 
 msgid "Error Occured Setting Up Your 2FA Token"
-msgstr ""
+msgstr "Si è verificato un errore durante l'impostazione del token 2FA"
 
 msgid "Every 6 Hours"
-msgstr ""
+msgstr "Ogni 6 ore"
 
 msgid "Explain {title}"
-msgstr ""
+msgstr "Spiega {title}"
 
 msgid "Export"
-msgstr ""
+msgstr "Esportare"
 
 msgid "Exporting"
-msgstr ""
+msgstr "Esportazione"
 
 msgid "External Link"
-msgstr ""
+msgstr "link esterno"
 
 msgid "Field"
-msgstr ""
+msgstr "Campo"
 
 msgid "Field Corresponding To Dashpress Usernames"
-msgstr ""
+msgstr "Campo corrispondente ai nomi utente Dashpress"
 
 msgid "Field Settings"
-msgstr ""
+msgstr "Impostazioni del campo"
 
 msgid "Fields"
-msgstr ""
+msgstr "Campi"
 
 msgid "Fields State"
-msgstr ""
+msgstr "Stato dei campi"
 
 msgid "File"
-msgstr ""
+msgstr "File"
 
 msgid "File Name"
-msgstr ""
+msgstr "Nome del file"
 
 msgid "File Name Format"
-msgstr ""
+msgstr "Formato nome file"
 
 msgid "File Path Format"
-msgstr ""
+msgstr "Formato percorso file"
 
 msgid "File Storage"
-msgstr ""
+msgstr "Archiviazione file"
 
 msgid "File Uploads Settings"
-msgstr ""
+msgstr "Impostazioni di caricamento file"
 
 msgid "Flow"
-msgstr ""
+msgstr "Fluire"
 
 msgid "Flow Trigger Attachment"
-msgstr ""
+msgstr "Attacco per trigger di flusso"
 
 msgid "Flow Trigger Attachments"
-msgstr ""
+msgstr "Accessori per trigger di flusso"
 
 msgid "Flows"
-msgstr ""
+msgstr "Flussi"
 
 msgid "Follow us on Twitter"
-msgstr ""
+msgstr "Seguici su Twitter"
 
-msgid "For security reasons, Please input your account password to be able to manage {label}"
+msgid ""
+"For security reasons, Please input your account password to reveal "
+"credentials"
 msgstr ""
+"Per motivi di sicurezza, inserisci la password del tuo account per rivelare "
+"le credenziali"
 
 msgid "Form"
-msgstr ""
+msgstr "Modulo"
 
 msgid "Form Action"
-msgstr ""
+msgstr "Azione del modulo"
 
 msgid "Form Actions"
-msgstr ""
+msgstr "Azioni del modulo"
 
 msgid "Form Field"
-msgstr ""
+msgstr "Campo modulo"
 
 msgid "Form Fields"
-msgstr ""
+msgstr "Campi del modulo"
 
 msgid "Form Scripts"
-msgstr ""
+msgstr "Script di moduli"
 
 msgid "Format"
-msgstr ""
+msgstr "Formato"
 
 msgid "From"
-msgstr ""
+msgstr "Da"
 
 msgid "General"
-msgstr ""
+msgstr "Generale"
 
 msgid "General Data Settings"
-msgstr ""
+msgstr "Impostazioni generali dei dati"
 
 msgid "Genesis"
-msgstr ""
+msgstr "Genesi"
 
 msgid "Global Action"
-msgstr ""
+msgstr "Azione globale"
 
 msgid "Go Back"
-msgstr ""
+msgstr "Torna indietro"
 
 msgid "Greater Than"
-msgstr ""
+msgstr "Più grande di"
 
 msgid "Greater Than Other Field"
-msgstr ""
+msgstr "Campo più grande di altri"
 
 msgid "Green"
-msgstr ""
+msgstr "Verde"
 
 msgid "Group Mode"
-msgstr ""
+msgstr "Modalità gruppo"
 
 msgid "Grouped"
-msgstr ""
+msgstr "Raggruppato"
 
 msgid "Header"
-msgstr ""
+msgstr "Intestazione"
 
 msgid "Headers"
-msgstr ""
+msgstr "Intestazioni"
 
 msgid "Height"
-msgstr ""
+msgstr "Altezza"
 
 msgid "Hi, {0}"
-msgstr ""
+msgstr "Ciao, {0}"
 
 msgid "Home"
-msgstr ""
+msgstr "Casa"
 
 msgid "Home Link"
-msgstr ""
+msgstr "Collegamento casa"
 
 msgid "Horizontal"
-msgstr ""
+msgstr "Orizzontale"
 
 msgid "Host"
-msgstr ""
+msgstr "Ospite"
 
 msgid "Hour"
-msgstr ""
+msgstr "Ora"
 
 msgid "I have safely saved my recovery tokens"
-msgstr ""
+msgstr "Ho salvato in modo sicuro i miei token di ripristino"
 
 msgid "Icon"
-msgstr ""
+msgstr "Icona"
+
+msgid "ID"
+msgstr "ID"
 
 msgid "Image"
-msgstr ""
+msgstr "Immagine"
 
 msgid "Impersonate User"
-msgstr ""
+msgstr "Impersonare l'utente"
 
 msgid "Impersonating User"
-msgstr ""
+msgstr "Impersonare l'utente"
 
 msgid "Incorrect value"
-msgstr ""
+msgstr "Valore errato"
 
 msgid "Indigo"
-msgstr ""
+msgstr "Indaco"
 
 msgid "Initial Values"
-msgstr ""
+msgstr "Valori iniziali"
 
 msgid "Inline Edit"
-msgstr ""
+msgstr "Modifica in linea"
 
 msgid "Inline Edit Settings"
-msgstr ""
+msgstr "Impostazioni di modifica in linea"
 
 msgid "Input {deactivationKey} to continue"
-msgstr ""
+msgstr "Inserisci {deactivationKey} per continuare"
 
 msgid "Integration"
-msgstr ""
+msgstr "Integrazione"
 
 msgid "Integrations"
-msgstr ""
+msgstr "Integrazioni"
 
 msgid "IP Address"
-msgstr ""
+msgstr "Indirizzo IP"
 
 msgid "Is In"
-msgstr ""
+msgstr "È dentro"
 
 msgid "Is Not In"
-msgstr ""
+msgstr "Non è dentro"
 
 msgid "Is Not Null"
-msgstr ""
+msgstr "Non è nullo"
 
 msgid "Is Null"
-msgstr ""
+msgstr "È zero"
 
 msgid "Join our Discord community"
-msgstr ""
+msgstr "Unisciti alla nostra comunità Discord"
 
 msgid "JSON"
-msgstr ""
+msgstr "JSON"
 
 msgid "Key"
-msgstr ""
+msgstr "Chiave"
 
 msgid "Label"
-msgstr ""
+msgstr "Etichetta"
 
 msgid "Labels"
-msgstr ""
+msgstr "Etichette"
 
 msgid "Language"
-msgstr ""
+msgstr "Lingua"
 
 msgid "Large Logo"
-msgstr ""
+msgstr "Logo grande"
 
 msgid "Layout"
-msgstr ""
+msgstr "Disposizione"
 
 msgid "Less Than"
-msgstr ""
+msgstr "Meno di"
 
 msgid "Less Than Other Field"
-msgstr ""
+msgstr "Meno di altri campi"
 
 msgid "Light"
-msgstr ""
+msgstr "Leggero"
 
 msgid "Light Color Scheme"
-msgstr ""
+msgstr "Combinazione di colori chiari"
 
 msgid "Line Chart"
-msgstr ""
+msgstr "Grafico a linee"
 
 msgid "Link"
-msgstr ""
+msgstr "Collegamento"
 
 msgid "Link Entity"
-msgstr ""
+msgstr "Entità di collegamento"
 
 msgid "Link Users To Database"
-msgstr ""
+msgstr "Collega gli utenti al database"
 
 msgid "List"
-msgstr ""
+msgstr "Elenco"
 
 msgid "Loading..."
-msgstr ""
+msgstr "Caricamento..."
 
 msgid "Log Out"
-msgstr ""
+msgstr "Disconnettersi"
 
 msgid "Loop"
-msgstr ""
+msgstr "Ciclo continuo"
 
 msgid "Manage {plural}"
-msgstr ""
+msgstr "Gestire {plural}"
 
 msgid "Manage {title}"
-msgstr ""
+msgstr "Gestisci {title}"
 
 msgid "Manage Plan"
-msgstr ""
+msgstr "Gestisci piano"
 
 msgid "Manage Sensitive Fields"
-msgstr ""
+msgstr "Gestisci campi sensibili"
 
 msgid "Manage Variables"
-msgstr ""
+msgstr "Gestisci variabili"
 
 msgid "Max"
-msgstr ""
+msgstr "Massimo"
 
 msgid "Max Length"
-msgstr ""
+msgstr "Lunghezza massima"
 
 msgid "Maximum file size to upload in MB"
-msgstr ""
-
-msgid "Menu Builder"
-msgstr ""
+msgstr "Dimensione massima del file da caricare in MB"
 
 msgid "Menu Item"
-msgstr ""
+msgstr "Elemento del menu"
 
 msgid "Menu Settings"
-msgstr ""
+msgstr "Impostazioni del menu"
 
 msgid "Message"
-msgstr ""
+msgstr "Messaggio"
 
 msgid "Metadata Columns"
-msgstr ""
+msgstr "Colonne di metadati"
 
 msgid "Min"
-msgstr ""
+msgstr "minimo"
 
 msgid "Min Length"
-msgstr ""
+msgstr "Lunghezza minima"
 
 msgid "Modify Data Before Cloning"
-msgstr ""
+msgstr "Modifica i dati prima della clonazione"
 
 msgid "Month"
-msgstr ""
+msgstr "Mese"
 
 msgid "Mutate"
-msgstr ""
+msgstr "Mutare"
 
 msgid "My Account"
-msgstr ""
+msgstr "Il mio conto"
 
 msgid "Name"
-msgstr ""
+msgstr "Nome"
 
 msgid "Navigation Menu"
-msgstr ""
+msgstr "Menu di navigazione"
 
 msgid "New"
-msgstr ""
+msgstr "Nuovo"
 
 msgid "New Password"
-msgstr ""
+msgstr "Nuova Password"
 
 msgid "New Password Again"
-msgstr ""
+msgstr "Conferma la nuova password"
 
 msgid "New Value"
-msgstr ""
+msgstr "Nuovo valore"
 
 msgid "No"
-msgstr ""
-
-msgid "No {0} Has Been Logged Yet"
-msgstr ""
+msgstr "NO"
 
 msgid "No {singular} Has Been Added Yet"
-msgstr ""
+msgstr "Nessun {singular} è stato ancora aggiunto"
 
 msgid "No available permission for this section"
-msgstr ""
+msgstr "Nessuna autorizzazione disponibile per questa sezione"
 
 msgid "No Data"
-msgstr ""
+msgstr "Nessun dato"
 
 msgid "No result for the current {0} applied."
-msgstr ""
+msgstr "Nessun risultato applicato per l'attuale {0}."
 
 msgid "No Search Results"
-msgstr ""
+msgstr "nessun risultato trovato"
 
 msgid "Node"
-msgstr ""
+msgstr "Nodo"
 
 msgid "Node Label"
-msgstr ""
+msgstr "Etichetta del nodo"
 
 msgid "Node Properties"
-msgstr ""
+msgstr "Proprietà del nodo"
 
 msgid "Nodes"
-msgstr ""
+msgstr "Nodi"
 
 msgid "Not Equal"
-msgstr ""
+msgstr "Non uguale"
 
 msgid "Not Equal To Other Field"
-msgstr ""
+msgstr "Non uguale ad altri campi"
 
 msgid "Now"
-msgstr ""
+msgstr "Ora"
 
 msgid "Number"
-msgstr ""
+msgstr "Numero"
 
 msgid "Old Password"
-msgstr ""
+msgstr "vecchia password"
 
 msgid "Old Value"
-msgstr ""
+msgstr "Vecchio valore"
 
 msgid "On Create"
-msgstr ""
+msgstr "Su Crea"
 
 msgid "On Delete"
-msgstr ""
+msgstr "All'eliminazione"
 
 msgid "On Update"
-msgstr ""
+msgstr "In aggiornamento"
 
 msgid "Only capital letters and underscores are allowed"
-msgstr ""
+msgstr "Sono consentite solo lettere maiuscole e trattini bassi"
 
 msgid "Only lowercase letters, numbers and {delimiter} are allowed"
-msgstr ""
+msgstr "Sono consentiti solo lettere minuscole, numeri e {delimiter}"
 
 msgid "Operator"
-msgstr ""
+msgstr "Operatore"
 
 msgid "OR"
-msgstr ""
+msgstr "O"
 
 msgid "Orange"
-msgstr ""
+msgstr "Arancia"
 
 msgid "Order"
-msgstr ""
+msgstr "Ordine"
+
+msgid "Ordered"
+msgstr "Ordinato"
 
 msgid "Password"
-msgstr ""
+msgstr "Parola d'ordine"
 
 msgid "Password Reset Successfully"
-msgstr ""
+msgstr "Reimpostazione della password riuscita"
 
 msgid "Password will not be changed on demo account"
-msgstr ""
+msgstr "La password non verrà modificata sull'account demo"
 
 msgid "Persistent Query"
-msgstr ""
+msgstr "Domanda persistente"
 
 msgid "Personalize This Table"
-msgstr ""
+msgstr "Personalizza questo tavolo"
 
 msgid "Pie Chart"
-msgstr ""
+msgstr "Grafico a torta"
 
 msgid "Plural"
-msgstr ""
+msgstr "Plurale"
 
 msgid "Port"
-msgstr ""
+msgstr "Porta"
 
 msgid "Positive Number"
-msgstr ""
+msgstr "Numero positivo"
 
 msgid "Preferences"
-msgstr ""
+msgstr "Preferenze"
 
 msgid "Presentation Scripts"
-msgstr ""
+msgstr "Script di presentazione"
 
 msgid "Preview"
-msgstr ""
+msgstr "Anteprima"
 
 msgid "Profile"
-msgstr ""
+msgstr "Profilo"
 
 msgid "Quarter"
-msgstr ""
+msgstr "Trimestre"
 
 msgid "Query"
-msgstr ""
+msgstr "Domanda"
 
 msgid "Recovery Code"
-msgstr ""
+msgstr "Codice di ripristino"
 
 msgid "Recovery tokens copied to clipboard"
-msgstr ""
+msgstr "Token di ripristino copiati negli appunti"
 
 msgid "Red"
-msgstr ""
+msgstr "Rosso"
 
 msgid "Reference"
-msgstr ""
+msgstr "Riferimento"
 
 msgid "Reference Template"
-msgstr ""
+msgstr "Modello di riferimento"
 
 msgid "Regex"
-msgstr ""
+msgstr "Regex"
 
 msgid "Region"
-msgstr ""
+msgstr "Regione"
 
 msgid "Relation Labels"
-msgstr ""
+msgstr "Etichette di relazione"
 
 msgid "Relation Template"
-msgstr ""
+msgstr "Modello di relazione"
 
 msgid "Relations"
-msgstr ""
+msgstr "Relazioni"
 
 msgid "Relations Order"
-msgstr ""
+msgstr "Ordine delle relazioni"
 
 msgid "Relations To Clone Along"
-msgstr ""
+msgstr "Relazioni da clonare"
 
 msgid "Relationship Settings"
-msgstr ""
+msgstr "Impostazioni delle relazioni"
 
 msgid "Remember Me"
-msgstr ""
+msgstr "Ricordati di me"
 
 msgid "Remove"
-msgstr ""
+msgstr "Rimuovere"
 
 msgid "Remove Nested Filter"
-msgstr ""
+msgstr "Rimuovi filtro nidificato"
 
 msgid "Request ID"
-msgstr ""
+msgstr "Richiedi un documento d'identità"
 
 msgid "Request Method"
-msgstr ""
+msgstr "Metodo di richiesta"
 
 msgid "Required"
-msgstr ""
+msgstr "Necessario"
 
 msgid "Reset"
-msgstr ""
+msgstr "Ripristina"
 
 msgid "Reset 2FA Recovery Tokens"
-msgstr ""
+msgstr "Reimposta i token di ripristino 2FA"
 
 msgid "Reset Password"
-msgstr ""
+msgstr "Resetta la password"
 
 msgid "Reset Recovery Tokens"
-msgstr ""
+msgstr "Reimposta i token di ripristino"
 
 msgid "Reset User Password"
-msgstr ""
+msgstr "Reimposta password utente"
 
 msgid "Resetting Password"
-msgstr ""
+msgstr "Reimpostazione della password"
 
 msgid "Response"
-msgstr ""
+msgstr "Risposta"
 
 msgid "Restore"
-msgstr ""
+msgstr "Ristabilire"
 
-msgid "Reveal {label}"
-msgstr ""
+msgid "Restored"
+msgstr "Restaurato"
 
-msgid "Revealing {label}"
-msgstr ""
+msgid "Reveal Credentials"
+msgstr "Rivela credenziali"
+
+msgid "Revealing Credentials"
+msgstr "Rivelazione delle credenziali"
 
 msgid "Rich Text"
-msgstr ""
+msgstr "Testo ricco"
 
 msgid "Role"
-msgstr ""
+msgstr "Ruolo"
 
 msgid "Role Permission"
-msgstr ""
+msgstr "Autorizzazione del ruolo"
 
 msgid "Role Permissions"
-msgstr ""
+msgstr "Autorizzazioni del ruolo"
 
 msgid "Roles"
-msgstr ""
+msgstr "Ruoli"
 
 msgid "Roles and Permissions"
-msgstr ""
+msgstr "Ruoli e autorizzazioni"
 
 msgid "Route ID"
-msgstr ""
+msgstr "Identificativo del percorso"
 
 msgid "Save"
-msgstr ""
-
-msgid "Save {0}"
-msgstr ""
+msgstr "Salva"
 
 msgid "Save {singular}"
-msgstr ""
+msgstr "Salva {singular}"
 
 msgid "Save Current Filters"
-msgstr ""
+msgstr "Salva i filtri correnti"
 
 msgid "Saving"
-msgstr ""
-
-msgid "Saving {0}"
-msgstr ""
+msgstr "Salvataggio"
 
 msgid "Saving {singular}"
-msgstr ""
+msgstr "Salvare {singular}"
 
 msgid "Scheduler"
-msgstr ""
+msgstr "Pianificatore"
 
 msgid "Schedulers"
-msgstr ""
+msgstr "Pianificatori"
 
 msgid "Script"
-msgstr ""
+msgstr "Copione"
 
 msgid "Search"
-msgstr ""
+msgstr "Ricerca"
 
 msgid "Secret"
-msgstr ""
+msgstr "Segreto"
 
 msgid "Secret Access Key"
-msgstr ""
+msgstr "Chiave di accesso segreta"
 
 msgid "Secrets"
-msgstr ""
+msgstr "Segreti"
+
+msgid "Select {formLabel}"
+msgstr "Seleziona {formLabel}"
 
 msgid "Select Node Type"
-msgstr ""
+msgstr "Seleziona Tipo di nodo"
 
 msgid "Select Trigger"
-msgstr ""
+msgstr "Seleziona Attiva"
+
+msgid "Select Value"
+msgstr "Seleziona Valore"
 
 msgid "Select Workflow"
-msgstr ""
+msgstr "Seleziona Flusso di lavoro"
 
 msgid "Selection"
-msgstr ""
+msgstr "Selezione"
 
 msgid "Selection List"
-msgstr ""
+msgstr "Elenco di selezione"
 
 msgid "Selections Settings"
-msgstr ""
+msgstr "Impostazioni delle selezioni"
 
 msgid "Send Mail"
-msgstr ""
+msgstr "Inviare una mail"
 
 msgid "Send Message"
-msgstr ""
+msgstr "Invia messaggio"
 
 msgid "Send SMS"
-msgstr ""
+msgstr "Inviare SMS"
 
 msgid "Sender Email"
-msgstr ""
+msgstr "E-mail del mittente"
 
 msgid "Sender Name"
-msgstr ""
+msgstr "Nome del mittente"
 
 msgid "Sensitive Field"
-msgstr ""
+msgstr "Campo sensibile"
 
 msgid "Sensitive Fields"
-msgstr ""
+msgstr "Campi sensibili"
 
 msgid "Setting Up Account"
-msgstr ""
+msgstr "Configurazione dell'account"
 
 msgid "Setting Up Credentials"
-msgstr ""
+msgstr "Impostazione delle credenziali"
 
 msgid "Settings"
-msgstr ""
+msgstr "Impostazioni"
 
 msgid "Setup"
-msgstr ""
+msgstr "Impostare"
 
 msgid "Setup Account"
-msgstr ""
+msgstr "Imposta account"
 
 msgid "Setup Credentials"
-msgstr ""
+msgstr "Credenziali di configurazione"
 
 msgid "Share"
-msgstr ""
+msgstr "Condividere"
+
+msgid "Shared"
+msgstr "Condiviso"
 
 msgid "Sharing"
-msgstr ""
+msgstr "Condivisione"
+
+msgid "Show"
+msgstr "Spettacolo"
 
 msgid "Show Soft Deleted Items And The Restore Button"
-msgstr ""
+msgstr "Mostra elementi eliminati temporaneamente e il pulsante Ripristina"
 
 msgid "Show Up In Roles And Permissions"
-msgstr ""
+msgstr "Presentarsi in ruoli e autorizzazioni"
 
 msgid "Showing <0/> entries of <1>{0}</1> results"
-msgstr ""
+msgstr "Visualizzazione di <0/> voci di <1>{0}</1> risultati"
 
 msgid "Sign In"
-msgstr ""
+msgstr "Registrazione"
 
 msgid "Signing In"
-msgstr ""
+msgstr "Registrarsi"
 
 msgid "Singular"
-msgstr ""
+msgstr "Singolare"
 
 msgid "Site"
-msgstr ""
+msgstr "Luogo"
 
 msgid "Site Settings"
-msgstr ""
-
-msgid "Slug"
-msgstr ""
+msgstr "Impostazioni del sito"
 
 msgid "Small Logo"
-msgstr ""
+msgstr "Piccolo logo"
 
 msgid "Soft Delete"
-msgstr ""
+msgstr "Eliminazione graduale"
 
 msgid "Soft Delete Settings"
-msgstr ""
+msgstr "Impostazioni di eliminazione temporanea"
 
 msgid "Stacked"
-msgstr ""
+msgstr "Impilato"
 
 msgid "Star us on Github"
-msgstr ""
+msgstr "Stella su Github"
 
 msgid "Start of year"
-msgstr ""
+msgstr "Inizio anno"
 
 msgid "State Script"
-msgstr ""
+msgstr "Scrittura di Stato"
 
 msgid "Storage Key"
-msgstr ""
+msgstr "Chiave di archiviazione"
 
 msgid "Strategy"
-msgstr ""
+msgstr "Strategia"
 
 msgid "String"
-msgstr ""
+msgstr "Corda"
 
 msgid "Subject"
-msgstr ""
+msgstr "Soggetto"
 
 msgid "Submit"
-msgstr ""
+msgstr "Invia"
 
 msgid "Submitting"
-msgstr ""
+msgstr "Invio"
 
 msgid "Summary Card"
-msgstr ""
+msgstr "Scheda riepilogativa"
 
 msgid "SVG"
-msgstr ""
+msgstr "SVG"
 
 msgid "System"
-msgstr ""
+msgstr "Sistema"
 
 msgid "System Info"
-msgstr ""
+msgstr "Informazioni sul sistema"
 
 msgid "System Information"
-msgstr ""
+msgstr "Informazioni di sistema"
 
 msgid "System Settings"
-msgstr ""
+msgstr "Impostazioni di sistema"
 
 msgid "Table"
-msgstr ""
+msgstr "Tavolo"
 
 msgid "Table Columns Settings"
-msgstr ""
+msgstr "Impostazioni delle colonne della tabella"
 
 msgid "Table Fields Order"
-msgstr ""
+msgstr "Ordine dei campi della tabella"
 
 msgid "Table Personalization"
-msgstr ""
+msgstr "Personalizzazione della tavola"
 
 msgid "Table Personalizations"
-msgstr ""
+msgstr "Personalizzazioni dei tavoli"
 
 msgid "Table View"
-msgstr ""
+msgstr "Visualizzazione tabella"
 
 msgid "Table Views"
-msgstr ""
+msgstr "Visualizzazioni tabella"
 
 msgid "Test Widget Script"
-msgstr ""
+msgstr "Prova lo script del widget"
 
 msgid "Text"
-msgstr ""
+msgstr "Testo"
 
 msgid "Textarea"
-msgstr ""
+msgstr "Area di testo"
 
 msgid "Theme"
-msgstr ""
+msgstr "Tema"
 
 msgid "Theme Settings"
-msgstr ""
+msgstr "Impostazioni tema"
 
 msgid "This {0} Has No Form"
-msgstr ""
+msgstr "Questo {0} non ha alcun modulo"
 
-msgid "This application has no active entities. Kindly add new entities through your preferred database editor then restart this application to proceed."
-msgstr ""
+msgid "This action does not have configuration"
+msgstr "Questa azione non ha configurazione"
 
 msgid "This entity has no fields"
-msgstr ""
-
-msgid "This entity has no fields. Kindly add fields from your prefer database tool to manage them here"
-msgstr ""
+msgstr "Questa entità non ha campi"
 
 msgid "This entity has no relations"
-msgstr ""
+msgstr "Questa entità non ha relazioni"
 
-msgid "This flow should be queued and executed asynchronously (recommended for long running flows, requires Redis)"
+msgid ""
+"This flow should be queued and executed asynchronously (recommended for "
+"long running flows, requires Redis)"
 msgstr ""
+"Questo flusso deve essere messo in coda ed eseguito in modo asincrono "
+"(consigliato per flussi a lunga esecuzione, richiede Redis)"
 
 msgid "This trigger has no workflow attached"
-msgstr ""
+msgstr "A questo trigger non è associato alcun flusso di lavoro"
 
 msgid "This workflow has no trigger attached"
-msgstr ""
+msgstr "A questo flusso di lavoro non è associato alcun trigger"
 
 msgid "Time Changed"
-msgstr ""
+msgstr "Orario cambiato"
 
 msgid "Title"
-msgstr ""
+msgstr "Titolo"
 
 msgid "To"
-msgstr ""
+msgstr "A"
 
 msgid "Toggle Connection URL"
-msgstr ""
+msgstr "Attiva/disattiva URL di connessione"
 
 msgid "Token"
-msgstr ""
+msgstr "Gettone"
 
 msgid "Token Validity Duration In Days"
-msgstr ""
+msgstr "Durata della validità del token in giorni"
 
 msgid "Trigger"
-msgstr ""
+msgstr "Grilletto"
 
 msgid "Try Out 25+ Pro Features"
-msgstr ""
+msgstr "Prova 25 funzionalità Pro"
 
 msgid "Type"
-msgstr ""
+msgstr "Tipo"
 
 msgid "Update"
-msgstr ""
+msgstr "Aggiornamento"
 
 msgid "Update {singular}"
-msgstr ""
+msgstr "Aggiorna {singular}"
 
 msgid "Update Columns Settings"
-msgstr ""
+msgstr "Aggiorna le impostazioni delle colonne"
 
 msgid "Update Fields Order"
-msgstr ""
+msgstr "Aggiorna l'ordine dei campi"
 
 msgid "Updated At"
-msgstr ""
+msgstr "Aggiornato a"
 
 msgid "Updating {singular}"
-msgstr ""
+msgstr "Aggiornamento {singular}"
 
 msgid "Uppercase"
-msgstr ""
+msgstr "Maiuscolo"
 
 msgid "URL"
-msgstr ""
+msgstr "URL"
 
 msgid "Use Colors"
-msgstr ""
+msgstr "Usa i colori"
 
 msgid "Use Icon"
-msgstr ""
+msgstr "Usa l'icona"
+
+msgid "Use OTP Token"
+msgstr "Utilizza il token OTP"
+
+msgid "Use Recovery Code"
+msgstr "Utilizza il codice di ripristino"
 
 msgid "Use SSL"
-msgstr ""
+msgstr "Utilizza SSL"
 
 msgid "Use SVG"
-msgstr ""
+msgstr "Utilizza SVG"
 
 msgid "User"
-msgstr ""
+msgstr "Utente"
 
 msgid "Username"
-msgstr ""
+msgstr "Nome utente"
 
 msgid "Users"
-msgstr ""
+msgstr "Utenti"
 
 msgid "Users Link To Database"
-msgstr ""
+msgstr "Gli utenti si collegano al database"
 
 msgid "Users to Database Link"
-msgstr ""
+msgstr "Utenti al collegamento al database"
 
 msgid "Validations"
-msgstr ""
+msgstr "Convalide"
 
 msgid "Value"
-msgstr ""
+msgstr "Valore"
 
 msgid "Variables"
-msgstr ""
+msgstr "Variabili"
 
 msgid "Verifing"
-msgstr ""
+msgstr "Verifica"
 
 msgid "Verify"
-msgstr ""
+msgstr "Verificare"
 
 msgid "Vertical"
-msgstr ""
+msgstr "Verticale"
 
 msgid "View"
-msgstr ""
+msgstr "Visualizzazione"
 
 msgid "View Full Details"
-msgstr ""
+msgstr "Visualizza i dettagli completi"
 
 msgid "Violet"
-msgstr ""
+msgstr "Viola"
 
 msgid "Visit our website"
-msgstr ""
+msgstr "Visita il nostro sito web"
 
 msgid "Webhook"
-msgstr ""
+msgstr "Webhook"
 
 msgid "Webhooks"
-msgstr ""
+msgstr "Webhook"
 
 msgid "Week"
-msgstr ""
+msgstr "Settimana"
 
 msgid "Widget Script"
-msgstr ""
+msgstr "Scrittura del widget"
 
 msgid "Width"
-msgstr ""
+msgstr "Larghezza"
 
 msgid "Workflow"
-msgstr ""
+msgstr "Flusso di lavoro"
 
 msgid "Workflows"
-msgstr ""
+msgstr "Flussi di lavoro"
 
 msgid "X Label"
-msgstr ""
+msgstr "Etichetta X"
 
 msgid "Y Label"
-msgstr ""
+msgstr "Etichetta Y"
 
 msgid "Year"
-msgstr ""
+msgstr "Anno"
 
 msgid "Yes"
-msgstr ""
+msgstr "SÌ"
 
 msgid "Your Users Table"
-msgstr ""
+msgstr "La tua tabella utenti"

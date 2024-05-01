@@ -13,1637 +13,1661 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-msgid ""
-msgstr ""
-
-msgid "-- Select State --"
-msgstr ""
-
-msgid "\"{0}\" Selection"
-msgstr ""
-
-msgid "\"{0}\" Validations"
-msgstr ""
-
 msgid "[[ name ]] is an invalid date"
-msgstr ""
+msgstr "[[ name ]]은(는) 잘못된 날짜입니다."
 
 msgid "[[ name ]] is an invalid email"
-msgstr ""
+msgstr "[[ name ]]은(는) 잘못된 이메일입니다."
 
 msgid "[[ name ]] is an invalid json"
-msgstr ""
+msgstr "[[ name ]]은(는) 잘못된 JSON입니다."
 
 msgid "[[ name ]] is an invalid URL"
-msgstr ""
+msgstr "[[ name ]]은(는) 잘못된 URL입니다."
 
 msgid "[[ name ]] is invalid"
-msgstr ""
-
-msgid "[[ name ]] is invalid. Allowed values are [[ options ]]"
-msgstr ""
+msgstr "[[ name ]]이(가) 잘못되었습니다"
 
 msgid "[[ name ]] is not a text"
-msgstr ""
+msgstr "[[ name ]]은(는) 텍스트가 아닙니다"
 
 msgid "[[ name ]] is required"
-msgstr ""
+msgstr "[[ name ]]이(가) 필요합니다"
 
 msgid "[[ name ]] should be a boolean"
-msgstr ""
+msgstr "[[ name ]]은 부울이어야 합니다."
 
 msgid "[[ name ]] should be a color"
-msgstr ""
+msgstr "[[ name ]]은 색상이어야 합니다."
 
 msgid "[[ name ]] should be a number"
-msgstr ""
+msgstr "[[ name ]]은 숫자여야 합니다."
 
 msgid "[[ name ]] should be greater than [[ length ]] characters"
-msgstr ""
+msgstr "[[ name ]]은 [[ length ]]자보다 커야 합니다."
 
 msgid "[[ name ]] should be greater than [[ otherField ]]"
-msgstr ""
+msgstr "[[ name ]]은 [[ otherField ]]보다 커야 합니다."
 
 msgid "[[ name ]] should be greater than [[ value ]]"
-msgstr ""
+msgstr "[[ name ]]은 [[ value ]]보다 커야 합니다."
 
 msgid "[[ name ]] should be less than [[ length ]] characters"
-msgstr ""
+msgstr "[[ name ]]은 [[ length ]]자 미만이어야 합니다."
 
 msgid "[[ name ]] should be less than [[ otherField ]]"
-msgstr ""
+msgstr "[[ name ]]은 [[ otherField ]]보다 작아야 합니다."
 
 msgid "[[ name ]] should be less than [[ value ]]"
-msgstr ""
+msgstr "[[ name ]]은 [[ value ]]보다 작아야 합니다."
 
 msgid "[[ name ]] should be positive number"
-msgstr ""
+msgstr "[[ name ]]은 양수여야 합니다."
 
 msgid "[[ name ]] should contain only alphabets and numbers"
-msgstr ""
+msgstr "[[ name ]]에는 알파벳과 숫자만 포함해야 합니다."
 
 msgid "[[ name ]] should contain only upper cases"
-msgstr ""
+msgstr "[[ name ]]에는 대문자만 포함되어야 합니다."
 
 msgid "[[ name ]] should match [[ otherField ]]"
-msgstr ""
+msgstr "[[ name ]]은 [[ otherField ]]와 일치해야 합니다."
 
 msgid "[[ name ]] should not match [[ otherField ]]"
-msgstr ""
+msgstr "[[ name ]]은 [[ otherField ]]와 일치하면 안 됩니다."
 
 msgid "{0}"
-msgstr ""
+msgstr "{0}"
 
 msgid "{0} - {1}"
-msgstr ""
+msgstr "{0} - {1}"
 
 msgid "{0} [{1}]"
-msgstr ""
+msgstr "{0} [{1}]"
 
 msgid "{0} {1}"
-msgstr ""
+msgstr "{0} {1}"
 
 msgid "{0} Configuration"
-msgstr ""
+msgstr "{0} 구성"
 
-msgid "{0} Preference"
-msgstr ""
+msgid "{0} Selections"
+msgstr "{0} 선택사항"
 
-msgid "{0} Shared Successfully"
-msgstr ""
+msgid "{0} Validations"
+msgstr "{0} 유효성 검사"
 
 msgid "{plural} Units"
-msgstr ""
+msgstr "{plural} 단위"
 
 msgid "{singular} {action} Successfully"
-msgstr ""
+msgstr "{singular} {action} 성공적으로"
 
 msgid "{singular} could not be retrieved"
-msgstr ""
+msgstr "{singular}을(를) 검색할 수 없습니다."
 
 msgid "{singular} Created Successfully"
-msgstr ""
+msgstr "{singular}이(가) 성공적으로 생성되었습니다"
 
 msgid "{singular} Deleted Successfully"
-msgstr ""
+msgstr "{singular}이(가) 성공적으로 삭제되었습니다"
 
 msgid "{singular} Details"
-msgstr ""
+msgstr "{singular} 세부정보"
 
 msgid "{singular} Saved Successfully"
-msgstr ""
+msgstr "{singular}이(가) 성공적으로 저장되었습니다"
 
 msgid "{singular} Settings"
-msgstr ""
+msgstr "{singular} 설정"
 
 msgid "{singular} Unit"
-msgstr ""
+msgstr "{singular} 단위"
 
 msgid "{singular} Updated Successfully"
-msgstr ""
+msgstr "{singular}이(가) 성공적으로 업데이트되었습니다."
 
 msgid "{value} Day"
-msgstr ""
+msgstr "{value}일"
 
 msgid "{value} Days"
-msgstr ""
+msgstr "{value}일"
 
 msgid "{value} Hour"
-msgstr ""
+msgstr "{value} 시간"
 
 msgid "{value} Hours"
-msgstr ""
+msgstr "{value} 시간"
 
 msgid "{value} Month"
-msgstr ""
+msgstr "{value}월"
 
 msgid "{value} Months"
-msgstr ""
+msgstr "{value}개월"
 
 msgid "{value} Quarter"
-msgstr ""
+msgstr "{value} 분기"
 
 msgid "{value} Quarters"
-msgstr ""
+msgstr "{value} 분기"
 
 msgid "{value} Week"
-msgstr ""
+msgstr "{value}주"
 
 msgid "{value} Weeks"
-msgstr ""
+msgstr "{value}주"
 
 msgid "{value} Year"
-msgstr ""
+msgstr "{value} 연도"
 
 msgid "{value} Years"
-msgstr ""
+msgstr "{value}년"
 
 msgid "2FA Tokens"
-msgstr ""
+msgstr "2FA 토큰"
 
 msgid "Access Key ID"
-msgstr ""
+msgstr "액세스 키 ID"
 
 msgid "Account Preferences"
-msgstr ""
+msgstr "계정 환경설정"
 
 msgid "Account Profile"
-msgstr ""
+msgstr "계정 프로필"
 
 msgid "Account Was Successfully Setup"
-msgstr ""
+msgstr "계정이 성공적으로 설정되었습니다"
 
 msgid "Action"
-msgstr ""
+msgstr "행동"
 
 msgid "Actions"
-msgstr ""
+msgstr "행위"
 
 msgid "Activate {0}"
-msgstr ""
+msgstr "{0} 활성화"
+
+msgid "Activated"
+msgstr "활성화됨"
 
 msgid "Activating {0}"
-msgstr ""
+msgstr "{0} 활성화 중"
+
+msgid "Add fields to this table from your prefer database tool to manage them here"
+msgstr "여기에서 관리하려면 선호하는 데이터베이스 도구에서 이 테이블에 필드를 추가하세요."
 
 msgid "Add Filter"
-msgstr ""
+msgstr "필터 추가"
 
 msgid "Add Nested Filter"
-msgstr ""
+msgstr "중첩 필터 추가"
 
 msgid "Add New {0} And Select"
-msgstr ""
+msgstr "새 {0}을(를) 추가하고 선택하세요."
 
 msgid "Add New {singular}"
-msgstr ""
+msgstr "새로운 {singular} 추가"
 
 msgid "Add New And Select"
-msgstr ""
+msgstr "새로 추가하고 선택"
 
 msgid "Add New Option"
-msgstr ""
+msgstr "새 옵션 추가"
+
+msgid ""
+"Add new tables through your preferred database editor then restart this "
+"application."
+msgstr "선호하는 데이터베이스 편집기를 통해 새 테이블을 추가한 후 이 애플리케이션을 다시 시작하세요."
 
 msgid "Add New Validation"
-msgstr ""
+msgstr "새 검증 추가"
 
 msgid "All Dashboards"
-msgstr ""
+msgstr "모든 대시보드"
 
 msgid "All items were {actionText} successfully"
-msgstr ""
+msgstr "모든 항목이 성공적으로 {actionText}되었습니다."
+
+msgid "Allowed values are [[ options ]]"
+msgstr "허용되는 값은 [[ options ]]입니다."
 
 msgid "Alphanumeric"
-msgstr ""
+msgstr "영숫자"
 
 msgid "AND"
-msgstr ""
+msgstr "그리고"
 
 msgid "API Key"
-msgstr ""
+msgstr "API 키"
 
 msgid "App"
-msgstr ""
+msgstr "앱"
 
 msgid "Are you sure you want to do this?"
-msgstr ""
+msgstr "정말로 이 작업을 수행하시겠습니까?"
 
 msgid "Associated Triggers"
-msgstr ""
+msgstr "관련 트리거"
 
 msgid "Associated Workflows"
-msgstr ""
+msgstr "관련 워크플로"
 
 msgid "Attach A Trigger"
-msgstr ""
+msgstr "트리거 부착"
 
 msgid "Attach A Workflow"
-msgstr ""
+msgstr "워크플로우 첨부"
 
 msgid "Authenticator Token"
-msgstr ""
+msgstr "인증자 토큰"
 
 msgid "Back To {0}"
-msgstr ""
+msgstr "{0}(으)로 돌아가기"
 
 msgid "Back to Sign In Page"
-msgstr ""
+msgstr "로그인 페이지로 돌아가기"
 
 msgid "Bar Chart"
-msgstr ""
+msgstr "막대 차트"
 
 msgid "Before Submit"
-msgstr ""
+msgstr "제출 전"
 
 msgid "Beginning of time"
-msgstr ""
+msgstr "시간의 시작"
 
 msgid "Beginning of Year"
-msgstr ""
+msgstr "연초"
 
 msgid "Between"
-msgstr ""
+msgstr "사이"
 
 msgid "Blue"
-msgstr ""
+msgstr "파란색"
 
 msgid "Body"
-msgstr ""
+msgstr "몸"
 
 msgid "Bookmark"
-msgstr ""
+msgstr "서표"
 
 msgid "Bookmarks"
-msgstr ""
+msgstr "북마크"
 
 msgid "Boolean"
-msgstr ""
+msgstr "부울"
 
 msgid "Brown"
-msgstr ""
+msgstr "갈색"
 
 msgid "Bulk Delete"
-msgstr ""
+msgstr "대량 삭제"
 
 msgid "Bulk Deleting"
-msgstr ""
+msgstr "대량 삭제"
 
 msgid "Bulk Update"
-msgstr ""
+msgstr "대량 업데이트"
 
 msgid "Can Access All Dashboards"
-msgstr ""
+msgstr "모든 대시보드에 액세스 가능"
 
 msgid "Can Access And Restore Soft Deleted Items"
-msgstr ""
+msgstr "일시 삭제된 항목에 액세스하고 복원할 수 있습니다."
 
 msgid "Can Configure App"
-msgstr ""
+msgstr "앱 구성 가능"
 
 msgid "Can Export Data"
-msgstr ""
+msgstr "데이터 내보내기 가능"
 
 msgid "Can Impersonate Users"
-msgstr ""
+msgstr "사용자를 가장할 수 있음"
 
 msgid "Can Manage All Entities"
-msgstr ""
+msgstr "모든 엔터티를 관리할 수 있습니다."
 
 msgid "Can Manage App Credentials"
-msgstr ""
+msgstr "앱 자격 증명을 관리할 수 있음"
 
 msgid "Can Manage Dashboard"
-msgstr ""
+msgstr "대시보드 관리 가능"
 
 msgid "Can Manage Permissions"
-msgstr ""
+msgstr "권한을 관리할 수 있음"
 
 msgid "Can Manage Users"
-msgstr ""
+msgstr "사용자를 관리할 수 있음"
 
 msgid "Can Manages Flows"
-msgstr ""
+msgstr "흐름을 관리할 수 있음"
 
 msgid "Can Reset Password"
-msgstr ""
+msgstr "비밀번호 재설정 가능"
 
 msgid "Cancel"
-msgstr ""
+msgstr "취소"
 
 msgid "Change History"
-msgstr ""
+msgstr "변경 내역"
 
 msgid "Change Language"
-msgstr ""
+msgstr "언어 변경"
 
 msgid "Channel"
-msgstr ""
+msgstr "채널"
 
 msgid "Clear selections"
-msgstr ""
+msgstr "선택 항목 지우기"
 
 msgid "Click here to view details"
-msgstr ""
+msgstr "세부정보를 보려면 여기를 클릭하세요."
 
 msgid "Client Script"
-msgstr ""
+msgstr "클라이언트 스크립트"
 
 msgid "Clone"
-msgstr ""
+msgstr "클론"
 
 msgid "Clone {0}"
-msgstr ""
+msgstr "{0} 복제"
 
 msgid "Clone Settings"
-msgstr ""
+msgstr "복제 설정"
+
+msgid "Cloned"
+msgstr "복제됨"
 
 msgid "Cloning"
-msgstr ""
+msgstr "복제"
 
 msgid "Close Canvas"
-msgstr ""
+msgstr "캔버스 닫기"
 
 msgid "Color"
-msgstr ""
+msgstr "색상"
 
 msgid "Column"
-msgstr ""
+msgstr "열"
 
 msgid "Column Labels Settings"
-msgstr ""
+msgstr "열 레이블 설정"
 
 msgid "Column Types Settings"
-msgstr ""
+msgstr "열 유형 설정"
 
 msgid "Complete Setup"
-msgstr ""
+msgstr "설정 완료"
 
 msgid "Completing Setup"
-msgstr ""
+msgstr "설정 완료 중"
 
 msgid "Condition"
-msgstr ""
+msgstr "상태"
 
 msgid "Configure"
-msgstr ""
+msgstr "구성"
 
 msgid "Configure Selections"
-msgstr ""
+msgstr "선택 구성"
 
 msgid "Configure Validation"
-msgstr ""
+msgstr "검증 구성"
 
 msgid "Confirm"
-msgstr ""
+msgstr "확인하다"
 
 msgid "Confirm Data Restoration"
-msgstr ""
+msgstr "데이터 복원 확인"
 
 msgid "Confirm Delete"
-msgstr ""
+msgstr "삭제 확인"
 
 msgid "Confirmation Text"
-msgstr ""
+msgstr "확인 텍스트"
 
 msgid "Connection URL"
-msgstr ""
+msgstr "연결 URL"
 
 msgid "Constant"
-msgstr ""
+msgstr "끊임없는"
 
 msgid "Constants"
-msgstr ""
+msgstr "상수"
 
 msgid "Contains"
-msgstr ""
+msgstr "포함"
 
 msgid "Continue"
-msgstr ""
+msgstr "계속하다"
 
 msgid "Copy To Clipboard"
-msgstr ""
+msgstr "클립 보드에 복사"
 
 msgid "Create"
-msgstr ""
+msgstr "만들다"
 
 msgid "Create {singular}"
-msgstr ""
+msgstr "{singular} 만들기"
 
 msgid "Create Attachments"
-msgstr ""
+msgstr "첨부파일 생성"
 
 msgid "Create Columns Settings"
-msgstr ""
+msgstr "열 설정 생성"
 
 msgid "Create Fields Order"
-msgstr ""
+msgstr "필드 순서 만들기"
 
 msgid "Create It"
-msgstr ""
+msgstr "만들기"
 
 msgid "Created At"
-msgstr ""
+msgstr "생성 날짜"
 
 msgid "Creating {singular}"
-msgstr ""
+msgstr "{singular} 생성"
 
 msgid "Creating Attachments"
-msgstr ""
+msgstr "첨부 파일 만들기"
 
 msgid "Credentials Was Successfully Setup"
-msgstr ""
+msgstr "자격 증명이 성공적으로 설정되었습니다."
 
 msgid "Cron Expression"
-msgstr ""
+msgstr "크론 표현"
 
 msgid "CRUD"
-msgstr ""
+msgstr "크루드"
 
 msgid "CRUD Settings"
-msgstr ""
+msgstr "CRUD 설정"
 
 msgid "cURL Command"
-msgstr ""
+msgstr "cURL 명령"
 
 msgid "Curve"
-msgstr ""
+msgstr "곡선"
 
 msgid "Custom Action"
-msgstr ""
+msgstr "맞춤 작업"
 
 msgid "Custom Actions"
-msgstr ""
+msgstr "사용자 정의 작업"
 
 msgid "Custom Dashboard"
-msgstr ""
+msgstr "맞춤형 대시보드"
 
 msgid "Custom Dashboards"
-msgstr ""
+msgstr "맞춤형 대시보드"
 
 msgid "Custom Date"
-msgstr ""
+msgstr "맞춤 날짜"
 
 msgid "Dark"
-msgstr ""
+msgstr "어두운"
 
 msgid "Dark Color Scheme"
-msgstr ""
+msgstr "어두운 색 구성표"
 
 msgid "Dashboard"
-msgstr ""
+msgstr "계기반"
 
 msgid "Dashboard Widget"
-msgstr ""
+msgstr "대시보드 위젯"
 
 msgid "Dashboard Widgets"
-msgstr ""
+msgstr "대시보드 위젯"
 
 msgid "Dashboards"
-msgstr ""
+msgstr "대시보드"
 
 msgid "Data"
-msgstr ""
+msgstr "데이터"
 
 msgid "Data copied to clipboard successfully"
-msgstr ""
+msgstr "데이터가 클립보드에 성공적으로 복사되었습니다."
 
 msgid "Data Event"
-msgstr ""
+msgstr "데이터 이벤트"
 
 msgid "Data Events"
-msgstr ""
+msgstr "데이터 이벤트"
 
 msgid "Data exported successfully"
-msgstr ""
+msgstr "데이터를 성공적으로 내보냈습니다."
 
 msgid "Data Key"
-msgstr ""
+msgstr "데이터 키"
 
 msgid "Database"
-msgstr ""
+msgstr "데이터 베이스"
 
 msgid "Database Type"
-msgstr ""
+msgstr "데이터베이스 유형"
 
 msgid "Date"
-msgstr ""
+msgstr "날짜"
 
 msgid "Date Format"
-msgstr ""
+msgstr "날짜 형식"
 
 msgid "Day"
-msgstr ""
+msgstr "낮"
 
 msgid "Deactivate"
-msgstr ""
+msgstr "비활성화"
 
 msgid "Deactivate {0}"
-msgstr ""
+msgstr "{0} 비활성화"
+
+msgid "Deactivated"
+msgstr "비활성화됨"
 
 msgid "Deactivating {0}"
-msgstr ""
+msgstr "{0} 비활성화 중"
 
 msgid "Delete"
-msgstr ""
+msgstr "삭제"
 
 msgid "Delete {singular}"
-msgstr ""
+msgstr "{singular} 삭제"
 
 msgid "Delete Edge"
-msgstr ""
+msgstr "가장자리 삭제"
 
 msgid "Delete Selection"
-msgstr ""
+msgstr "선택 삭제"
 
 msgid "Description"
-msgstr ""
+msgstr "설명"
 
 msgid "Details"
-msgstr ""
+msgstr "세부"
 
 msgid "Details Columns Settings"
-msgstr ""
+msgstr "세부정보 열 설정"
 
 msgid "Details Fields Order"
-msgstr ""
+msgstr "세부정보 필드 순서"
 
 msgid "Diction"
-msgstr ""
+msgstr "어법"
 
 msgid "Diction Settings"
-msgstr ""
+msgstr "딕션 설정"
 
 msgid "Display Format"
-msgstr ""
+msgstr "디스플레이 형식"
 
 msgid "Domain"
-msgstr ""
+msgstr "도메인"
 
 msgid "Done"
-msgstr ""
+msgstr "완료"
 
 msgid "Download"
-msgstr ""
+msgstr "다운로드"
 
 msgid "Duplicate {singular}"
-msgstr ""
+msgstr "중복 {singular}"
 
 msgid "Edit"
-msgstr ""
+msgstr "편집하다"
 
 msgid "Edit {singular}"
-msgstr ""
+msgstr "편집 {singular}"
 
 msgid "Email"
-msgstr ""
+msgstr "이메일"
 
 msgid "Empty Table"
-msgstr ""
+msgstr "빈 테이블"
 
 msgid "Enable {0} Functionality"
-msgstr ""
+msgstr "{0} 기능 활성화"
 
 msgid "Enable Area"
-msgstr ""
+msgstr "지역 활성화"
 
 msgid "Enable Points"
-msgstr ""
+msgstr "포인트 활성화"
 
 msgid "Enabled Entities"
-msgstr ""
+msgstr "활성화된 엔터티"
 
 msgid "Enabled Entities Settings"
-msgstr ""
+msgstr "활성화된 엔터티 설정"
 
 msgid "Enabled Relations"
-msgstr ""
+msgstr "활성화된 관계"
+
+msgid "Enter a security token from your authenticator app"
+msgstr "인증 앱에서 보안 토큰을 입력하세요."
+
+msgid "Enter one of your unsed recovery codes"
+msgstr "발송되지 않은 복구 코드 중 하나를 입력하세요"
 
 msgid "Enter your credentials to continue"
-msgstr ""
+msgstr "계속하려면 자격 증명을 입력하세요."
 
 msgid "Entities"
-msgstr ""
+msgstr "엔터티"
 
 msgid "Entities Enabled For Add New And Select"
-msgstr ""
+msgstr "새로 추가 및 선택이 활성화된 엔터티"
 
 msgid "Entities Enabled For Change History"
-msgstr ""
+msgstr "변경 내역이 활성화된 엔터티"
 
 msgid "Entity"
-msgstr ""
+msgstr "실재"
 
 msgid "Entity Action"
-msgstr ""
+msgstr "엔터티 작업"
 
 msgid "Entity Create Form Layout"
-msgstr ""
+msgstr "엔터티 생성 양식 레이아웃"
 
 msgid "Entity Field"
-msgstr ""
+msgstr "엔터티 필드"
 
 msgid "Entity ID"
-msgstr ""
+msgstr "엔터티 ID"
 
 msgid "Entity Tab"
-msgstr ""
+msgstr "엔터티 탭"
 
 msgid "Entity Update Form Layout"
-msgstr ""
+msgstr "엔터티 업데이트 양식 레이아웃"
 
 msgid "Environment Variable"
-msgstr ""
+msgstr "환경 변수"
 
 msgid "Environment Variables"
-msgstr ""
+msgstr "환경 변수"
 
 msgid "Equal"
-msgstr ""
+msgstr "동일한"
 
 msgid "Equal To Other Field"
-msgstr ""
+msgstr "다른 필드와 같음"
 
 msgid "Error message"
-msgstr ""
+msgstr "에러 메시지"
 
 msgid "Error Occured Setting Up Your 2FA Token"
-msgstr ""
+msgstr "2FA 토큰 설정 중 오류가 발생했습니다."
 
 msgid "Every 6 Hours"
-msgstr ""
+msgstr "6시간마다"
 
 msgid "Explain {title}"
-msgstr ""
+msgstr "{title} 설명하기"
 
 msgid "Export"
-msgstr ""
+msgstr "내보내다"
 
 msgid "Exporting"
-msgstr ""
+msgstr "내보내기"
 
 msgid "External Link"
-msgstr ""
+msgstr "외부 링크"
 
 msgid "Field"
-msgstr ""
+msgstr "필드"
 
 msgid "Field Corresponding To Dashpress Usernames"
-msgstr ""
+msgstr "Dashpress 사용자 이름에 해당하는 필드"
 
 msgid "Field Settings"
-msgstr ""
+msgstr "필드 설정"
 
 msgid "Fields"
-msgstr ""
+msgstr "필드"
 
 msgid "Fields State"
-msgstr ""
+msgstr "필드 상태"
 
 msgid "File"
-msgstr ""
+msgstr "파일"
 
 msgid "File Name"
-msgstr ""
+msgstr "파일 이름"
 
 msgid "File Name Format"
-msgstr ""
+msgstr "파일 이름 형식"
 
 msgid "File Path Format"
-msgstr ""
+msgstr "파일 경로 형식"
 
 msgid "File Storage"
-msgstr ""
+msgstr "파일 저장"
 
 msgid "File Uploads Settings"
-msgstr ""
+msgstr "파일 업로드 설정"
 
 msgid "Flow"
-msgstr ""
+msgstr "흐름"
 
 msgid "Flow Trigger Attachment"
-msgstr ""
+msgstr "흐름 트리거 부착"
 
 msgid "Flow Trigger Attachments"
-msgstr ""
+msgstr "흐름 트리거 부착물"
 
 msgid "Flows"
-msgstr ""
+msgstr "흐름"
 
 msgid "Follow us on Twitter"
-msgstr ""
+msgstr "트위터에서 우리를 팔로우하세요"
 
-msgid "For security reasons, Please input your account password to be able to manage {label}"
-msgstr ""
+msgid ""
+"For security reasons, Please input your account password to reveal "
+"credentials"
+msgstr "보안상의 이유로 자격 증명을 공개하려면 계정 비밀번호를 입력하세요."
 
 msgid "Form"
-msgstr ""
+msgstr "형태"
 
 msgid "Form Action"
-msgstr ""
+msgstr "양식 작업"
 
 msgid "Form Actions"
-msgstr ""
+msgstr "양식 작업"
 
 msgid "Form Field"
-msgstr ""
+msgstr "양식 필드"
 
 msgid "Form Fields"
-msgstr ""
+msgstr "양식 필드"
 
 msgid "Form Scripts"
-msgstr ""
+msgstr "양식 스크립트"
 
 msgid "Format"
-msgstr ""
+msgstr "체재"
 
 msgid "From"
-msgstr ""
+msgstr "에서"
 
 msgid "General"
-msgstr ""
+msgstr "일반적인"
 
 msgid "General Data Settings"
-msgstr ""
+msgstr "일반 데이터 설정"
 
 msgid "Genesis"
-msgstr ""
+msgstr "창세기"
 
 msgid "Global Action"
-msgstr ""
+msgstr "글로벌 액션"
 
 msgid "Go Back"
-msgstr ""
+msgstr "돌아가기"
 
 msgid "Greater Than"
-msgstr ""
+msgstr "보다 큰"
 
 msgid "Greater Than Other Field"
-msgstr ""
+msgstr "다른 분야보다 큼"
 
 msgid "Green"
-msgstr ""
+msgstr "녹색"
 
 msgid "Group Mode"
-msgstr ""
+msgstr "그룹 모드"
 
 msgid "Grouped"
-msgstr ""
+msgstr "그룹화됨"
 
 msgid "Header"
-msgstr ""
+msgstr "머리글"
 
 msgid "Headers"
-msgstr ""
+msgstr "헤더"
 
 msgid "Height"
-msgstr ""
+msgstr "키"
 
 msgid "Hi, {0}"
-msgstr ""
+msgstr "안녕하세요, {0}"
 
 msgid "Home"
-msgstr ""
+msgstr "집"
 
 msgid "Home Link"
-msgstr ""
+msgstr "홈 링크"
 
 msgid "Horizontal"
-msgstr ""
+msgstr "수평의"
 
 msgid "Host"
-msgstr ""
+msgstr "주인"
 
 msgid "Hour"
-msgstr ""
+msgstr "시간"
 
 msgid "I have safely saved my recovery tokens"
-msgstr ""
+msgstr "복구 토큰을 안전하게 저장했습니다"
 
 msgid "Icon"
-msgstr ""
+msgstr "상"
+
+msgid "ID"
+msgstr "ID"
 
 msgid "Image"
-msgstr ""
+msgstr "영상"
 
 msgid "Impersonate User"
-msgstr ""
+msgstr "사용자 가장"
 
 msgid "Impersonating User"
-msgstr ""
+msgstr "사용자를 가장하는 중"
 
 msgid "Incorrect value"
-msgstr ""
+msgstr "잘못된 값"
 
 msgid "Indigo"
-msgstr ""
+msgstr "남빛"
 
 msgid "Initial Values"
-msgstr ""
+msgstr "초기값"
 
 msgid "Inline Edit"
-msgstr ""
+msgstr "인라인 편집"
 
 msgid "Inline Edit Settings"
-msgstr ""
+msgstr "인라인 편집 설정"
 
 msgid "Input {deactivationKey} to continue"
-msgstr ""
+msgstr "계속하려면 {deactivationKey}를 입력하세요."
 
 msgid "Integration"
-msgstr ""
+msgstr "완성"
 
 msgid "Integrations"
-msgstr ""
+msgstr "통합"
 
 msgid "IP Address"
-msgstr ""
+msgstr "IP 주소"
 
 msgid "Is In"
-msgstr ""
+msgstr "있음"
 
 msgid "Is Not In"
-msgstr ""
+msgstr "포함되지 않음"
 
 msgid "Is Not Null"
-msgstr ""
+msgstr "Null이 아님"
 
 msgid "Is Null"
-msgstr ""
+msgstr "Null임"
 
 msgid "Join our Discord community"
-msgstr ""
+msgstr "Discord 커뮤니티에 가입하세요"
 
 msgid "JSON"
-msgstr ""
+msgstr "JSON"
 
 msgid "Key"
-msgstr ""
+msgstr "열쇠"
 
 msgid "Label"
-msgstr ""
+msgstr "상표"
 
 msgid "Labels"
-msgstr ""
+msgstr "라벨"
 
 msgid "Language"
-msgstr ""
+msgstr "언어"
 
 msgid "Large Logo"
-msgstr ""
+msgstr "대형 로고"
 
 msgid "Layout"
-msgstr ""
+msgstr "공들여 나열한 것"
 
 msgid "Less Than"
-msgstr ""
+msgstr "미만"
 
 msgid "Less Than Other Field"
-msgstr ""
+msgstr "다른 분야보다 적음"
 
 msgid "Light"
-msgstr ""
+msgstr "빛"
 
 msgid "Light Color Scheme"
-msgstr ""
+msgstr "밝은 색 구성표"
 
 msgid "Line Chart"
-msgstr ""
+msgstr "꺾은선형 차트"
 
 msgid "Link"
-msgstr ""
+msgstr "링크"
 
 msgid "Link Entity"
-msgstr ""
+msgstr "링크 엔터티"
 
 msgid "Link Users To Database"
-msgstr ""
+msgstr "사용자를 데이터베이스에 연결"
 
 msgid "List"
-msgstr ""
+msgstr "목록"
 
 msgid "Loading..."
-msgstr ""
+msgstr "로드 중..."
 
 msgid "Log Out"
-msgstr ""
+msgstr "로그 아웃"
 
 msgid "Loop"
-msgstr ""
+msgstr "고리"
 
 msgid "Manage {plural}"
-msgstr ""
+msgstr "{plural} 관리""
 
 msgid "Manage {title}"
-msgstr ""
+msgstr "{title} 관리"
 
 msgid "Manage Plan"
-msgstr ""
+msgstr "계획 관리"
 
 msgid "Manage Sensitive Fields"
-msgstr ""
+msgstr "민감한 필드 관리"
 
 msgid "Manage Variables"
-msgstr ""
+msgstr "변수 관리"
 
 msgid "Max"
-msgstr ""
+msgstr "맥스"
 
 msgid "Max Length"
-msgstr ""
+msgstr "최대 길이"
 
 msgid "Maximum file size to upload in MB"
-msgstr ""
-
-msgid "Menu Builder"
-msgstr ""
+msgstr "업로드할 수 있는 최대 파일 크기(MB)"
 
 msgid "Menu Item"
-msgstr ""
+msgstr "메뉴 아이템"
 
 msgid "Menu Settings"
-msgstr ""
+msgstr "메뉴 설정"
 
 msgid "Message"
-msgstr ""
+msgstr "메시지"
 
 msgid "Metadata Columns"
-msgstr ""
+msgstr "메타데이터 열"
 
 msgid "Min"
-msgstr ""
+msgstr "최소"
 
 msgid "Min Length"
-msgstr ""
+msgstr "최소 길이"
 
 msgid "Modify Data Before Cloning"
-msgstr ""
+msgstr "복제하기 전에 데이터 수정"
 
 msgid "Month"
-msgstr ""
+msgstr "월"
 
 msgid "Mutate"
-msgstr ""
+msgstr "돌연변이"
 
 msgid "My Account"
-msgstr ""
+msgstr "내 계정"
 
 msgid "Name"
-msgstr ""
+msgstr "이름"
 
 msgid "Navigation Menu"
-msgstr ""
+msgstr "탐색 메뉴"
 
 msgid "New"
-msgstr ""
+msgstr "새로운"
 
 msgid "New Password"
-msgstr ""
+msgstr "새 비밀번호"
 
 msgid "New Password Again"
-msgstr ""
+msgstr "새로운 비밀번호를 다시 입력하세요"
 
 msgid "New Value"
-msgstr ""
+msgstr "새로운 가치"
 
 msgid "No"
-msgstr ""
-
-msgid "No {0} Has Been Logged Yet"
-msgstr ""
+msgstr "아니요"
 
 msgid "No {singular} Has Been Added Yet"
-msgstr ""
+msgstr "아직 {singular}가 추가되지 않았습니다"
 
 msgid "No available permission for this section"
-msgstr ""
+msgstr "이 섹션에 사용 가능한 권한이 없습니다."
 
 msgid "No Data"
-msgstr ""
+msgstr "데이터 없음"
 
 msgid "No result for the current {0} applied."
-msgstr ""
+msgstr "현재 {0}에 적용된 결과가 없습니다."
 
 msgid "No Search Results"
-msgstr ""
+msgstr "검색결과가 없습니다"
 
 msgid "Node"
-msgstr ""
+msgstr "마디"
 
 msgid "Node Label"
-msgstr ""
+msgstr "노드 라벨"
 
 msgid "Node Properties"
-msgstr ""
+msgstr "노드 속성"
 
 msgid "Nodes"
-msgstr ""
+msgstr "노드"
 
 msgid "Not Equal"
-msgstr ""
+msgstr "같지 않음"
 
 msgid "Not Equal To Other Field"
-msgstr ""
+msgstr "다른 필드와 같지 않음"
 
 msgid "Now"
-msgstr ""
+msgstr "지금"
 
 msgid "Number"
-msgstr ""
+msgstr "숫자"
 
 msgid "Old Password"
-msgstr ""
+msgstr "기존 비밀번호"
 
 msgid "Old Value"
-msgstr ""
+msgstr "이전 값"
 
 msgid "On Create"
-msgstr ""
+msgstr "생성 시"
 
 msgid "On Delete"
-msgstr ""
+msgstr "삭제 시"
 
 msgid "On Update"
-msgstr ""
+msgstr "업데이트 시"
 
 msgid "Only capital letters and underscores are allowed"
-msgstr ""
+msgstr "대문자와 밑줄만 허용됩니다."
 
 msgid "Only lowercase letters, numbers and {delimiter} are allowed"
-msgstr ""
+msgstr "소문자, 숫자, {delimiter}만 허용됩니다."
 
 msgid "Operator"
-msgstr ""
+msgstr "운영자"
 
 msgid "OR"
-msgstr ""
+msgstr "또는"
 
 msgid "Orange"
-msgstr ""
+msgstr "주황색"
 
 msgid "Order"
-msgstr ""
+msgstr "주문하다"
+
+msgid "Ordered"
+msgstr "주문하다"
 
 msgid "Password"
-msgstr ""
+msgstr "비밀번호"
 
 msgid "Password Reset Successfully"
-msgstr ""
+msgstr "비밀번호 재설정 성공"
 
 msgid "Password will not be changed on demo account"
-msgstr ""
+msgstr "데모 계정에서는 비밀번호가 변경되지 않습니다"
 
 msgid "Persistent Query"
-msgstr ""
+msgstr "영구 쿼리"
 
 msgid "Personalize This Table"
-msgstr ""
+msgstr "이 테이블을 개인화하세요"
 
 msgid "Pie Chart"
-msgstr ""
+msgstr "파이 차트"
 
 msgid "Plural"
-msgstr ""
+msgstr "복수형"
 
 msgid "Port"
-msgstr ""
+msgstr "포트"
 
 msgid "Positive Number"
-msgstr ""
+msgstr "정수"
 
 msgid "Preferences"
-msgstr ""
+msgstr "환경설정"
 
 msgid "Presentation Scripts"
-msgstr ""
+msgstr "프레젠테이션 스크립트"
 
 msgid "Preview"
-msgstr ""
+msgstr "시사"
 
 msgid "Profile"
-msgstr ""
+msgstr "프로필"
 
 msgid "Quarter"
-msgstr ""
+msgstr "4분의 1"
 
 msgid "Query"
-msgstr ""
+msgstr "질문"
 
 msgid "Recovery Code"
-msgstr ""
+msgstr "복구 코드"
 
 msgid "Recovery tokens copied to clipboard"
-msgstr ""
+msgstr "복구 토큰이 클립보드에 복사되었습니다."
 
 msgid "Red"
-msgstr ""
+msgstr "빨간색"
 
 msgid "Reference"
-msgstr ""
+msgstr "참조"
 
 msgid "Reference Template"
-msgstr ""
+msgstr "참조 템플릿"
 
 msgid "Regex"
-msgstr ""
+msgstr "정규식"
 
 msgid "Region"
-msgstr ""
+msgstr "지역"
 
 msgid "Relation Labels"
-msgstr ""
+msgstr "관계 레이블"
 
 msgid "Relation Template"
-msgstr ""
+msgstr "관계 템플릿"
 
 msgid "Relations"
-msgstr ""
+msgstr "처지"
 
 msgid "Relations Order"
-msgstr ""
+msgstr "관계 순서"
 
 msgid "Relations To Clone Along"
-msgstr ""
+msgstr "복제할 관계"
 
 msgid "Relationship Settings"
-msgstr ""
+msgstr "관계 설정"
 
 msgid "Remember Me"
-msgstr ""
+msgstr "날 기억해"
 
 msgid "Remove"
-msgstr ""
+msgstr "제거하다"
 
 msgid "Remove Nested Filter"
-msgstr ""
+msgstr "중첩 필터 제거"
 
 msgid "Request ID"
-msgstr ""
+msgstr "요청 ID"
 
 msgid "Request Method"
-msgstr ""
+msgstr "요청 방법"
 
 msgid "Required"
-msgstr ""
+msgstr "필수의"
 
 msgid "Reset"
-msgstr ""
+msgstr "초기화"
 
 msgid "Reset 2FA Recovery Tokens"
-msgstr ""
+msgstr "2FA 복구 토큰 재설정"
 
 msgid "Reset Password"
-msgstr ""
+msgstr "암호를 재설정"
 
 msgid "Reset Recovery Tokens"
-msgstr ""
+msgstr "복구 토큰 재설정"
 
 msgid "Reset User Password"
-msgstr ""
+msgstr "사용자 비밀번호 재설정"
 
 msgid "Resetting Password"
-msgstr ""
+msgstr "비밀번호 재설정"
 
 msgid "Response"
-msgstr ""
+msgstr "응답"
 
 msgid "Restore"
-msgstr ""
+msgstr "복원하다"
 
-msgid "Reveal {label}"
-msgstr ""
+msgid "Restored"
+msgstr "복원됨"
 
-msgid "Revealing {label}"
-msgstr ""
+msgid "Reveal Credentials"
+msgstr "자격 증명 공개"
+
+msgid "Revealing Credentials"
+msgstr "자격 증명 공개"
 
 msgid "Rich Text"
-msgstr ""
+msgstr "리치 텍스트"
 
 msgid "Role"
-msgstr ""
+msgstr "역할"
 
 msgid "Role Permission"
-msgstr ""
+msgstr "역할 권한"
 
 msgid "Role Permissions"
-msgstr ""
+msgstr "역할 권한"
 
 msgid "Roles"
-msgstr ""
+msgstr "역할"
 
 msgid "Roles and Permissions"
-msgstr ""
+msgstr "역할 및 권한"
 
 msgid "Route ID"
-msgstr ""
+msgstr "경로 ID"
 
 msgid "Save"
-msgstr ""
-
-msgid "Save {0}"
-msgstr ""
+msgstr "구하다"
 
 msgid "Save {singular}"
-msgstr ""
+msgstr "구하다 {singular}"
 
 msgid "Save Current Filters"
-msgstr ""
+msgstr "현재 필터 저장"
 
 msgid "Saving"
-msgstr ""
-
-msgid "Saving {0}"
-msgstr ""
+msgstr "절약"
 
 msgid "Saving {singular}"
-msgstr ""
+msgstr "저장 {singular}"
 
 msgid "Scheduler"
-msgstr ""
+msgstr "스케줄러"
 
 msgid "Schedulers"
-msgstr ""
+msgstr "스케줄러"
 
 msgid "Script"
-msgstr ""
+msgstr "스크립트"
 
 msgid "Search"
-msgstr ""
+msgstr "찾다"
 
 msgid "Secret"
-msgstr ""
+msgstr "비밀"
 
 msgid "Secret Access Key"
-msgstr ""
+msgstr "비밀 액세스 키"
 
 msgid "Secrets"
-msgstr ""
+msgstr "비밀"
+
+msgid "Select {formLabel}"
+msgstr "{formLabel}을 선택하세요."
 
 msgid "Select Node Type"
-msgstr ""
+msgstr "노드 유형 선택"
 
 msgid "Select Trigger"
-msgstr ""
+msgstr "트리거 선택"
+
+msgid "Select Value"
+msgstr "값 선택"
 
 msgid "Select Workflow"
-msgstr ""
+msgstr "워크플로 선택"
 
 msgid "Selection"
-msgstr ""
+msgstr "선택"
 
 msgid "Selection List"
-msgstr ""
+msgstr "선택 목록"
 
 msgid "Selections Settings"
-msgstr ""
+msgstr "선택 설정"
 
 msgid "Send Mail"
-msgstr ""
+msgstr "메일을 보내다"
 
 msgid "Send Message"
-msgstr ""
+msgstr "문자 보내"
 
 msgid "Send SMS"
-msgstr ""
+msgstr "문자를 보내다"
 
 msgid "Sender Email"
-msgstr ""
+msgstr "보낸 사람 이메일"
 
 msgid "Sender Name"
-msgstr ""
+msgstr "보낸 사람 이름"
 
 msgid "Sensitive Field"
-msgstr ""
+msgstr "민감한 분야"
 
 msgid "Sensitive Fields"
-msgstr ""
+msgstr "민감한 필드"
 
 msgid "Setting Up Account"
-msgstr ""
+msgstr "계정 설정"
 
 msgid "Setting Up Credentials"
-msgstr ""
+msgstr "자격 증명 설정"
 
 msgid "Settings"
-msgstr ""
+msgstr "설정"
 
 msgid "Setup"
-msgstr ""
+msgstr "설정"
 
 msgid "Setup Account"
-msgstr ""
+msgstr "계정 설정"
 
 msgid "Setup Credentials"
-msgstr ""
+msgstr "설치 자격 증명"
 
 msgid "Share"
-msgstr ""
+msgstr "공유하다"
+
+msgid "Shared"
+msgstr "공유됨"
 
 msgid "Sharing"
-msgstr ""
+msgstr "나누는"
+
+msgid "Show"
+msgstr "보여주다"
 
 msgid "Show Soft Deleted Items And The Restore Button"
-msgstr ""
+msgstr "소프트 삭제된 항목 및 복원 버튼 표시"
 
 msgid "Show Up In Roles And Permissions"
-msgstr ""
+msgstr "역할 및 권한에 표시"
 
 msgid "Showing <0/> entries of <1>{0}</1> results"
-msgstr ""
+msgstr "<1>{0}</1>개 결과 중 <0/>개 항목 표시 중"
 
 msgid "Sign In"
-msgstr ""
+msgstr "로그인"
 
 msgid "Signing In"
-msgstr ""
+msgstr "로그인"
 
 msgid "Singular"
-msgstr ""
+msgstr "단수형"
 
 msgid "Site"
-msgstr ""
+msgstr "대지"
 
 msgid "Site Settings"
-msgstr ""
-
-msgid "Slug"
-msgstr ""
+msgstr "사이트 설정"
 
 msgid "Small Logo"
-msgstr ""
+msgstr "작은 로고"
 
 msgid "Soft Delete"
-msgstr ""
+msgstr "소프트 삭제"
 
 msgid "Soft Delete Settings"
-msgstr ""
+msgstr "일시 삭제 설정"
 
 msgid "Stacked"
-msgstr ""
+msgstr "쌓인"
 
 msgid "Star us on Github"
-msgstr ""
+msgstr "Github에 별표를 남겨주세요"
 
 msgid "Start of year"
-msgstr ""
+msgstr "연초"
 
 msgid "State Script"
-msgstr ""
+msgstr "상태 스크립트"
 
 msgid "Storage Key"
-msgstr ""
+msgstr "저장 키"
 
 msgid "Strategy"
-msgstr ""
+msgstr "전략"
 
 msgid "String"
-msgstr ""
+msgstr "끈"
 
 msgid "Subject"
-msgstr ""
+msgstr "주제"
 
 msgid "Submit"
-msgstr ""
+msgstr "제출하다"
 
 msgid "Submitting"
-msgstr ""
+msgstr "제출 중"
 
 msgid "Summary Card"
-msgstr ""
+msgstr "요약 카드"
 
 msgid "SVG"
-msgstr ""
+msgstr "SVG"
 
 msgid "System"
-msgstr ""
+msgstr "체계"
 
 msgid "System Info"
-msgstr ""
+msgstr "시스템 정보"
 
 msgid "System Information"
-msgstr ""
+msgstr "시스템 정보"
 
 msgid "System Settings"
-msgstr ""
+msgstr "환경 설정"
 
 msgid "Table"
-msgstr ""
+msgstr "테이블"
 
 msgid "Table Columns Settings"
-msgstr ""
+msgstr "테이블 열 설정"
 
 msgid "Table Fields Order"
-msgstr ""
+msgstr "테이블 필드 순서"
 
 msgid "Table Personalization"
-msgstr ""
+msgstr "테이블 개인화"
 
 msgid "Table Personalizations"
-msgstr ""
+msgstr "테이블 개인화"
 
 msgid "Table View"
-msgstr ""
+msgstr "테이블 보기"
 
 msgid "Table Views"
-msgstr ""
+msgstr "테이블 보기"
 
 msgid "Test Widget Script"
-msgstr ""
+msgstr "테스트 위젯 스크립트"
 
 msgid "Text"
-msgstr ""
+msgstr "텍스트"
 
 msgid "Textarea"
-msgstr ""
+msgstr "텍스트 영역"
 
 msgid "Theme"
-msgstr ""
+msgstr "주제"
 
 msgid "Theme Settings"
-msgstr ""
+msgstr "주제 설정"
 
 msgid "This {0} Has No Form"
-msgstr ""
+msgstr "이 {0}에는 양식이 없습니다."
 
-msgid "This application has no active entities. Kindly add new entities through your preferred database editor then restart this application to proceed."
-msgstr ""
+msgid "This action does not have configuration"
+msgstr "이 작업에는 구성이 없습니다."
 
 msgid "This entity has no fields"
-msgstr ""
-
-msgid "This entity has no fields. Kindly add fields from your prefer database tool to manage them here"
-msgstr ""
+msgstr "이 엔터티에는 필드가 없습니다."
 
 msgid "This entity has no relations"
-msgstr ""
+msgstr "이 엔터티는 관계가 없습니다."
 
-msgid "This flow should be queued and executed asynchronously (recommended for long running flows, requires Redis)"
-msgstr ""
+msgid ""
+"This flow should be queued and executed asynchronously (recommended for "
+"long running flows, requires Redis)"
+msgstr "이 흐름은 대기열에 추가되고 비동기식으로 실행되어야 합니다(장기 실행 흐름에 권장되며 Redis 필요)."
 
 msgid "This trigger has no workflow attached"
-msgstr ""
+msgstr "이 트리거에는 연결된 워크플로가 없습니다."
 
 msgid "This workflow has no trigger attached"
-msgstr ""
+msgstr "이 워크플로에는 연결된 트리거가 없습니다."
 
 msgid "Time Changed"
-msgstr ""
+msgstr "시간이 변경되었습니다"
 
 msgid "Title"
-msgstr ""
+msgstr "제목"
 
 msgid "To"
-msgstr ""
+msgstr "에게"
 
 msgid "Toggle Connection URL"
-msgstr ""
+msgstr "연결 URL 전환"
 
 msgid "Token"
-msgstr ""
+msgstr "토큰"
 
 msgid "Token Validity Duration In Days"
-msgstr ""
+msgstr "토큰 유효 기간(일)"
 
 msgid "Trigger"
-msgstr ""
+msgstr "방아쇠"
 
 msgid "Try Out 25+ Pro Features"
-msgstr ""
+msgstr "25가지 Pro 기능을 사용해 보세요"
 
 msgid "Type"
-msgstr ""
+msgstr "유형"
 
 msgid "Update"
-msgstr ""
+msgstr "업데이트"
 
 msgid "Update {singular}"
-msgstr ""
+msgstr "{singular} 업데이트"
 
 msgid "Update Columns Settings"
-msgstr ""
+msgstr "열 설정 업데이트"
 
 msgid "Update Fields Order"
-msgstr ""
+msgstr "필드 순서 업데이트"
 
 msgid "Updated At"
-msgstr ""
+msgstr "업데이트 날짜"
 
 msgid "Updating {singular}"
-msgstr ""
+msgstr "{singular} 업데이트 중"
 
 msgid "Uppercase"
-msgstr ""
+msgstr "대문자"
 
 msgid "URL"
-msgstr ""
+msgstr "URL"
 
 msgid "Use Colors"
-msgstr ""
+msgstr "색상 사용"
 
 msgid "Use Icon"
-msgstr ""
+msgstr "아이콘 사용"
+
+msgid "Use OTP Token"
+msgstr "OTP 토큰 사용"
+
+msgid "Use Recovery Code"
+msgstr "복구 코드 사용"
 
 msgid "Use SSL"
-msgstr ""
+msgstr "SSL 사용"
 
 msgid "Use SVG"
-msgstr ""
+msgstr "SVG 사용"
 
 msgid "User"
-msgstr ""
+msgstr "사용자"
 
 msgid "Username"
-msgstr ""
+msgstr "사용자 이름"
 
 msgid "Users"
-msgstr ""
+msgstr "사용자"
 
 msgid "Users Link To Database"
-msgstr ""
+msgstr "사용자가 데이터베이스에 연결"
 
 msgid "Users to Database Link"
-msgstr ""
+msgstr "사용자와 데이터베이스 링크"
 
 msgid "Validations"
-msgstr ""
+msgstr "검증"
 
 msgid "Value"
-msgstr ""
+msgstr "값"
 
 msgid "Variables"
-msgstr ""
+msgstr "변수"
 
 msgid "Verifing"
-msgstr ""
+msgstr "확인 중"
 
 msgid "Verify"
-msgstr ""
+msgstr "확인하다"
 
 msgid "Vertical"
-msgstr ""
+msgstr "수직의"
 
 msgid "View"
-msgstr ""
+msgstr "보다"
 
 msgid "View Full Details"
-msgstr ""
+msgstr "전체 세부정보 보기"
 
 msgid "Violet"
-msgstr ""
+msgstr "제비꽃"
 
 msgid "Visit our website"
-msgstr ""
+msgstr "우리 홈페이지에 방문 해주세요"
 
 msgid "Webhook"
-msgstr ""
+msgstr "웹훅"
 
 msgid "Webhooks"
-msgstr ""
+msgstr "웹훅"
 
 msgid "Week"
-msgstr ""
+msgstr "주"
 
 msgid "Widget Script"
-msgstr ""
+msgstr "위젯 스크립트"
 
 msgid "Width"
-msgstr ""
+msgstr "너비"
 
 msgid "Workflow"
-msgstr ""
+msgstr "작업흐름"
 
 msgid "Workflows"
-msgstr ""
+msgstr "워크플로"
 
 msgid "X Label"
-msgstr ""
+msgstr "X 라벨"
 
 msgid "Y Label"
-msgstr ""
+msgstr "Y 라벨"
 
 msgid "Year"
-msgstr ""
+msgstr "년도"
 
 msgid "Yes"
-msgstr ""
+msgstr "예"
 
 msgid "Your Users Table"
-msgstr ""
+msgstr "사용자 테이블"

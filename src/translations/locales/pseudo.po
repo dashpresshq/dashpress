@@ -13,23 +13,11 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-msgid ""
-msgstr ""
-
-msgid "-- Select State --"
-msgstr ""
-
-msgid "\"{0}\" Selection"
-msgstr ""
-
-msgid "\"{0}\" Validations"
-msgstr ""
-
 msgid "[[ name ]] is an invalid date"
-msgstr ""
+msgstr "[[ name ]] is an invalid date"
 
 msgid "[[ name ]] is an invalid email"
-msgstr ""
+msgstr "[[ name ]] is an invalid email"
 
 msgid "[[ name ]] is an invalid json"
 msgstr ""
@@ -38,9 +26,6 @@ msgid "[[ name ]] is an invalid URL"
 msgstr ""
 
 msgid "[[ name ]] is invalid"
-msgstr ""
-
-msgid "[[ name ]] is invalid. Allowed values are [[ options ]]"
 msgstr ""
 
 msgid "[[ name ]] is not a text"
@@ -106,10 +91,10 @@ msgstr ""
 msgid "{0} Configuration"
 msgstr ""
 
-msgid "{0} Preference"
+msgid "{0} Selections"
 msgstr ""
 
-msgid "{0} Shared Successfully"
+msgid "{0} Validations"
 msgstr ""
 
 msgid "{plural} Units"
@@ -202,7 +187,13 @@ msgstr ""
 msgid "Activate {0}"
 msgstr ""
 
+msgid "Activated"
+msgstr ""
+
 msgid "Activating {0}"
+msgstr ""
+
+msgid "Add fields to this table from your prefer database tool to manage them here"
 msgstr ""
 
 msgid "Add Filter"
@@ -223,6 +214,11 @@ msgstr ""
 msgid "Add New Option"
 msgstr ""
 
+msgid ""
+"Add new tables through your preferred database editor then restart this "
+"application."
+msgstr ""
+
 msgid "Add New Validation"
 msgstr ""
 
@@ -230,6 +226,9 @@ msgid "All Dashboards"
 msgstr ""
 
 msgid "All items were {actionText} successfully"
+msgstr ""
+
+msgid "Allowed values are [[ options ]]"
 msgstr ""
 
 msgid "Alphanumeric"
@@ -374,6 +373,9 @@ msgid "Clone {0}"
 msgstr ""
 
 msgid "Clone Settings"
+msgstr ""
+
+msgid "Cloned"
 msgstr ""
 
 msgid "Cloning"
@@ -559,6 +561,9 @@ msgstr ""
 msgid "Deactivate {0}"
 msgstr ""
 
+msgid "Deactivated"
+msgstr ""
+
 msgid "Deactivating {0}"
 msgstr ""
 
@@ -635,6 +640,12 @@ msgid "Enabled Entities Settings"
 msgstr ""
 
 msgid "Enabled Relations"
+msgstr ""
+
+msgid "Enter a security token from your authenticator app"
+msgstr ""
+
+msgid "Enter one of your unsed recovery codes"
 msgstr ""
 
 msgid "Enter your credentials to continue"
@@ -751,7 +762,9 @@ msgstr ""
 msgid "Follow us on Twitter"
 msgstr ""
 
-msgid "For security reasons, Please input your account password to be able to manage {label}"
+msgid ""
+"For security reasons, Please input your account password to reveal "
+"credentials"
 msgstr ""
 
 msgid "Form"
@@ -839,6 +852,9 @@ msgid "I have safely saved my recovery tokens"
 msgstr ""
 
 msgid "Icon"
+msgstr ""
+
+msgid "ID"
 msgstr ""
 
 msgid "Image"
@@ -973,9 +989,6 @@ msgstr ""
 msgid "Maximum file size to upload in MB"
 msgstr ""
 
-msgid "Menu Builder"
-msgstr ""
-
 msgid "Menu Item"
 msgstr ""
 
@@ -1025,9 +1038,6 @@ msgid "New Value"
 msgstr ""
 
 msgid "No"
-msgstr ""
-
-msgid "No {0} Has Been Logged Yet"
 msgstr ""
 
 msgid "No {singular} Has Been Added Yet"
@@ -1100,6 +1110,9 @@ msgid "Orange"
 msgstr ""
 
 msgid "Order"
+msgstr ""
+
+msgid "Ordered"
 msgstr ""
 
 msgid "Password"
@@ -1228,10 +1241,13 @@ msgstr ""
 msgid "Restore"
 msgstr ""
 
-msgid "Reveal {label}"
+msgid "Restored"
 msgstr ""
 
-msgid "Revealing {label}"
+msgid "Reveal Credentials"
+msgstr ""
+
+msgid "Revealing Credentials"
 msgstr ""
 
 msgid "Rich Text"
@@ -1258,9 +1274,6 @@ msgstr ""
 msgid "Save"
 msgstr ""
 
-msgid "Save {0}"
-msgstr ""
-
 msgid "Save {singular}"
 msgstr ""
 
@@ -1268,9 +1281,6 @@ msgid "Save Current Filters"
 msgstr ""
 
 msgid "Saving"
-msgstr ""
-
-msgid "Saving {0}"
 msgstr ""
 
 msgid "Saving {singular}"
@@ -1297,10 +1307,16 @@ msgstr ""
 msgid "Secrets"
 msgstr ""
 
+msgid "Select {formLabel}"
+msgstr ""
+
 msgid "Select Node Type"
 msgstr ""
 
 msgid "Select Trigger"
+msgstr ""
+
+msgid "Select Value"
 msgstr ""
 
 msgid "Select Workflow"
@@ -1357,7 +1373,13 @@ msgstr ""
 msgid "Share"
 msgstr ""
 
+msgid "Shared"
+msgstr ""
+
 msgid "Sharing"
+msgstr ""
+
+msgid "Show"
 msgstr ""
 
 msgid "Show Soft Deleted Items And The Restore Button"
@@ -1382,9 +1404,6 @@ msgid "Site"
 msgstr ""
 
 msgid "Site Settings"
-msgstr ""
-
-msgid "Slug"
 msgstr ""
 
 msgid "Small Logo"
@@ -1483,19 +1502,18 @@ msgstr ""
 msgid "This {0} Has No Form"
 msgstr ""
 
-msgid "This application has no active entities. Kindly add new entities through your preferred database editor then restart this application to proceed."
+msgid "This action does not have configuration"
 msgstr ""
 
 msgid "This entity has no fields"
 msgstr ""
 
-msgid "This entity has no fields. Kindly add fields from your prefer database tool to manage them here"
-msgstr ""
-
 msgid "This entity has no relations"
 msgstr ""
 
-msgid "This flow should be queued and executed asynchronously (recommended for long running flows, requires Redis)"
+msgid ""
+"This flow should be queued and executed asynchronously (recommended for "
+"long running flows, requires Redis)"
 msgstr ""
 
 msgid "This trigger has no workflow attached"
@@ -1559,6 +1577,12 @@ msgid "Use Colors"
 msgstr ""
 
 msgid "Use Icon"
+msgstr ""
+
+msgid "Use OTP Token"
+msgstr ""
+
+msgid "Use Recovery Code"
 msgstr ""
 
 msgid "Use SSL"

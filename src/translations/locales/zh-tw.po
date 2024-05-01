@@ -13,1637 +13,1661 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-msgid ""
-msgstr ""
-
-msgid "-- Select State --"
-msgstr ""
-
-msgid "\"{0}\" Selection"
-msgstr ""
-
-msgid "\"{0}\" Validations"
-msgstr ""
-
 msgid "[[ name ]] is an invalid date"
-msgstr ""
+msgstr "[[ name ]] 是無效日期"
 
 msgid "[[ name ]] is an invalid email"
-msgstr ""
+msgstr "[[ name ]] 是無效的電子郵件"
 
 msgid "[[ name ]] is an invalid json"
-msgstr ""
+msgstr "[[ name ]] 是無效的 json"
 
 msgid "[[ name ]] is an invalid URL"
-msgstr ""
+msgstr "[[ name ]] 是無效的 URL"
 
 msgid "[[ name ]] is invalid"
-msgstr ""
-
-msgid "[[ name ]] is invalid. Allowed values are [[ options ]]"
-msgstr ""
+msgstr "[[ name ]] 無效"
 
 msgid "[[ name ]] is not a text"
-msgstr ""
+msgstr "[[ name ]] 不是文本"
 
 msgid "[[ name ]] is required"
-msgstr ""
+msgstr "[[ name ]] 為必填項"
 
 msgid "[[ name ]] should be a boolean"
-msgstr ""
+msgstr "[[ name ]] 應該是布林值"
 
 msgid "[[ name ]] should be a color"
-msgstr ""
+msgstr "[[ name ]] 應該是一種顏色"
 
 msgid "[[ name ]] should be a number"
-msgstr ""
+msgstr "[[ name ]] 應該是個數字"
 
 msgid "[[ name ]] should be greater than [[ length ]] characters"
-msgstr ""
+msgstr "[[ name ]] 應大於 [[ length ]] 個字符"
 
 msgid "[[ name ]] should be greater than [[ otherField ]]"
-msgstr ""
+msgstr "[[ name ]] 應大於 [[ otherField ]]"
 
 msgid "[[ name ]] should be greater than [[ value ]]"
-msgstr ""
+msgstr "[[name]]應大於[[value]]"
 
 msgid "[[ name ]] should be less than [[ length ]] characters"
-msgstr ""
+msgstr "[[ name ]] 應少於 [[ length ]] 個字符"
 
 msgid "[[ name ]] should be less than [[ otherField ]]"
-msgstr ""
+msgstr "[[ name ]] 應小於 [[ otherField ]]"
 
 msgid "[[ name ]] should be less than [[ value ]]"
-msgstr ""
+msgstr "[[name]]應小於[[value]]"
 
 msgid "[[ name ]] should be positive number"
-msgstr ""
+msgstr "[[ name ]] 應該是正數"
 
 msgid "[[ name ]] should contain only alphabets and numbers"
-msgstr ""
+msgstr "[[ name ]] 只能包含字母和數字"
 
 msgid "[[ name ]] should contain only upper cases"
-msgstr ""
+msgstr "[[ name ]] 應該只包含大寫字母"
 
 msgid "[[ name ]] should match [[ otherField ]]"
-msgstr ""
+msgstr "[[ name ]] 應符合 [[ otherField ]]"
 
 msgid "[[ name ]] should not match [[ otherField ]]"
-msgstr ""
+msgstr "[[ name ]] 不應符合 [[ otherField ]]"
 
 msgid "{0}"
-msgstr ""
+msgstr "{0}"
 
 msgid "{0} - {1}"
-msgstr ""
+msgstr "{0} - {1}"
 
 msgid "{0} [{1}]"
-msgstr ""
+msgstr "{0} [{1}]"
 
 msgid "{0} {1}"
-msgstr ""
+msgstr "{0} {1}"
 
 msgid "{0} Configuration"
-msgstr ""
+msgstr "{0}配置"
 
-msgid "{0} Preference"
-msgstr ""
+msgid "{0} Selections"
+msgstr "{0} 個選擇"
 
-msgid "{0} Shared Successfully"
-msgstr ""
+msgid "{0} Validations"
+msgstr "{0}驗證"
 
 msgid "{plural} Units"
-msgstr ""
+msgstr "{plural} 單位"
 
 msgid "{singular} {action} Successfully"
-msgstr ""
+msgstr "{singular} {action} 成功"
 
 msgid "{singular} could not be retrieved"
-msgstr ""
+msgstr "無法檢索{singular}"
 
 msgid "{singular} Created Successfully"
-msgstr ""
+msgstr "{singular} 創建成功"
 
 msgid "{singular} Deleted Successfully"
-msgstr ""
+msgstr "{singular} 刪除成功"
 
 msgid "{singular} Details"
-msgstr ""
+msgstr "{單數} 詳細信息"
 
 msgid "{singular} Saved Successfully"
-msgstr ""
+msgstr "{singular} 保存成功"
 
 msgid "{singular} Settings"
-msgstr ""
+msgstr "{單數} 設定"
 
 msgid "{singular} Unit"
-msgstr ""
+msgstr "{單數} 單位"
 
 msgid "{singular} Updated Successfully"
-msgstr ""
+msgstr "{singular} 更新成功"
 
 msgid "{value} Day"
-msgstr ""
+msgstr "{value}日"
 
 msgid "{value} Days"
-msgstr ""
+msgstr "{value} 天"
 
 msgid "{value} Hour"
-msgstr ""
+msgstr "{value} 小時"
 
 msgid "{value} Hours"
-msgstr ""
+msgstr "{value} 小時"
 
 msgid "{value} Month"
-msgstr ""
+msgstr "{value} 月"
 
 msgid "{value} Months"
-msgstr ""
+msgstr "{value} 個月"
 
 msgid "{value} Quarter"
-msgstr ""
+msgstr "{value} 季度"
 
 msgid "{value} Quarters"
-msgstr ""
+msgstr "{value} 宿舍"
 
 msgid "{value} Week"
-msgstr ""
+msgstr "{value} 週"
 
 msgid "{value} Weeks"
-msgstr ""
+msgstr "{value} 週"
 
 msgid "{value} Year"
-msgstr ""
+msgstr "{value} 年"
 
 msgid "{value} Years"
-msgstr ""
+msgstr "{value} 年"
 
 msgid "2FA Tokens"
-msgstr ""
+msgstr "2FA 代幣"
 
 msgid "Access Key ID"
-msgstr ""
+msgstr "存取密鑰 ID"
 
 msgid "Account Preferences"
-msgstr ""
+msgstr "帳戶偏好設定"
 
 msgid "Account Profile"
-msgstr ""
+msgstr "帳戶資料"
 
 msgid "Account Was Successfully Setup"
-msgstr ""
+msgstr "帳戶設定成功"
 
 msgid "Action"
-msgstr ""
+msgstr "行動"
 
 msgid "Actions"
-msgstr ""
+msgstr "行動"
 
 msgid "Activate {0}"
-msgstr ""
+msgstr "激活{0}"
+
+msgid "Activated"
+msgstr "活性"
 
 msgid "Activating {0}"
-msgstr ""
+msgstr "激活{0}"
+
+msgid "Add fields to this table from your prefer database tool to manage them here"
+msgstr "從您喜歡的資料庫工具中將欄位新增至此表中以在此處管理它們"
 
 msgid "Add Filter"
-msgstr ""
+msgstr "新增過濾器"
 
 msgid "Add Nested Filter"
-msgstr ""
+msgstr "新增嵌套過濾器"
 
 msgid "Add New {0} And Select"
-msgstr ""
+msgstr "新增新的 {0} 並選擇"
 
 msgid "Add New {singular}"
-msgstr ""
+msgstr "新增新的{單數}"
 
 msgid "Add New And Select"
-msgstr ""
+msgstr "新增內容並選擇"
 
 msgid "Add New Option"
-msgstr ""
+msgstr "新增選項"
+
+msgid ""
+"Add new tables through your preferred database editor then restart this "
+"application."
+msgstr "透過您首選的資料庫編輯器新增資料表，然後重新啟動此應用程式。"
 
 msgid "Add New Validation"
-msgstr ""
+msgstr "新增驗證"
 
 msgid "All Dashboards"
-msgstr ""
+msgstr "所有儀表板"
 
 msgid "All items were {actionText} successfully"
-msgstr ""
+msgstr "所有項目均已成功{actionText}"
+
+msgid "Allowed values are [[ options ]]"
+msgstr "允許的值為 [[ 選項 ]]"
 
 msgid "Alphanumeric"
-msgstr ""
+msgstr "字母數字"
 
 msgid "AND"
-msgstr ""
+msgstr "和"
 
 msgid "API Key"
-msgstr ""
+msgstr "API金鑰"
 
 msgid "App"
-msgstr ""
+msgstr "應用程式"
 
 msgid "Are you sure you want to do this?"
-msgstr ""
+msgstr "你確定你要這麼做嗎？"
 
 msgid "Associated Triggers"
-msgstr ""
+msgstr "相關觸發器"
 
 msgid "Associated Workflows"
-msgstr ""
+msgstr "相關工作流程"
 
 msgid "Attach A Trigger"
-msgstr ""
+msgstr "連接觸發器"
 
 msgid "Attach A Workflow"
-msgstr ""
+msgstr "附上工作流程"
 
 msgid "Authenticator Token"
-msgstr ""
+msgstr "驗證器令牌"
 
 msgid "Back To {0}"
-msgstr ""
+msgstr "返回{0}"
 
 msgid "Back to Sign In Page"
-msgstr ""
+msgstr "返回登入頁面"
 
 msgid "Bar Chart"
-msgstr ""
+msgstr "長條圖"
 
 msgid "Before Submit"
-msgstr ""
+msgstr "提交前"
 
 msgid "Beginning of time"
-msgstr ""
+msgstr "時間的開始"
 
 msgid "Beginning of Year"
-msgstr ""
+msgstr "年初"
 
 msgid "Between"
-msgstr ""
+msgstr "之間"
 
 msgid "Blue"
-msgstr ""
+msgstr "藍色的"
 
 msgid "Body"
-msgstr ""
+msgstr "身體"
 
 msgid "Bookmark"
-msgstr ""
+msgstr "書籤"
 
 msgid "Bookmarks"
-msgstr ""
+msgstr "書籤"
 
 msgid "Boolean"
-msgstr ""
+msgstr "布林值"
 
 msgid "Brown"
-msgstr ""
+msgstr "棕色的"
 
 msgid "Bulk Delete"
-msgstr ""
+msgstr "大量刪除"
 
 msgid "Bulk Deleting"
-msgstr ""
+msgstr "大量刪除"
 
 msgid "Bulk Update"
-msgstr ""
+msgstr "大量更新"
 
 msgid "Can Access All Dashboards"
-msgstr ""
+msgstr "可以存取所有儀表板"
 
 msgid "Can Access And Restore Soft Deleted Items"
-msgstr ""
+msgstr "可以存取和恢復軟刪除的項目"
 
 msgid "Can Configure App"
-msgstr ""
+msgstr "可以配置應用程式"
 
 msgid "Can Export Data"
-msgstr ""
+msgstr "可以匯出數據"
 
 msgid "Can Impersonate Users"
-msgstr ""
+msgstr "可以冒充用戶"
 
 msgid "Can Manage All Entities"
-msgstr ""
+msgstr "可以管理所有實體"
 
 msgid "Can Manage App Credentials"
-msgstr ""
+msgstr "可以管理應用程式憑證"
 
 msgid "Can Manage Dashboard"
-msgstr ""
+msgstr "可以管理儀表板"
 
 msgid "Can Manage Permissions"
-msgstr ""
+msgstr "可以管理權限"
 
 msgid "Can Manage Users"
-msgstr ""
+msgstr "可以管理用戶"
 
 msgid "Can Manages Flows"
-msgstr ""
+msgstr "可以管理流量"
 
 msgid "Can Reset Password"
-msgstr ""
+msgstr "可以重置密碼"
 
 msgid "Cancel"
-msgstr ""
+msgstr "取消"
 
 msgid "Change History"
-msgstr ""
+msgstr "變更歷史記錄"
 
 msgid "Change Language"
-msgstr ""
+msgstr "改變語言"
 
 msgid "Channel"
-msgstr ""
+msgstr "頻道"
 
 msgid "Clear selections"
-msgstr ""
+msgstr "清除選擇"
 
 msgid "Click here to view details"
-msgstr ""
+msgstr "點擊此處查看詳細信息"
 
 msgid "Client Script"
-msgstr ""
+msgstr "客戶端腳本"
 
 msgid "Clone"
-msgstr ""
+msgstr "複製"
 
 msgid "Clone {0}"
-msgstr ""
+msgstr "克隆{0}"
 
 msgid "Clone Settings"
-msgstr ""
+msgstr "克隆設定"
+
+msgid "Cloned"
+msgstr "複製"
 
 msgid "Cloning"
-msgstr ""
+msgstr "複製"
 
 msgid "Close Canvas"
-msgstr ""
+msgstr "關閉畫布"
 
 msgid "Color"
-msgstr ""
+msgstr "顏色"
 
 msgid "Column"
-msgstr ""
+msgstr "柱子"
 
 msgid "Column Labels Settings"
-msgstr ""
+msgstr "列標籤設定"
 
 msgid "Column Types Settings"
-msgstr ""
+msgstr "列類型設定"
 
 msgid "Complete Setup"
-msgstr ""
+msgstr "完成設定"
 
 msgid "Completing Setup"
-msgstr ""
+msgstr "完成設定"
 
 msgid "Condition"
-msgstr ""
+msgstr "狀態"
 
 msgid "Configure"
-msgstr ""
+msgstr "配置"
 
 msgid "Configure Selections"
-msgstr ""
+msgstr "配置選擇"
 
 msgid "Configure Validation"
-msgstr ""
+msgstr "配置驗證"
 
 msgid "Confirm"
-msgstr ""
+msgstr "確認"
 
 msgid "Confirm Data Restoration"
-msgstr ""
+msgstr "確認資料恢復"
 
 msgid "Confirm Delete"
-msgstr ""
+msgstr "確認刪除"
 
 msgid "Confirmation Text"
-msgstr ""
+msgstr "確認文字"
 
 msgid "Connection URL"
-msgstr ""
+msgstr "連接網址"
 
 msgid "Constant"
-msgstr ""
+msgstr "持續的"
 
 msgid "Constants"
-msgstr ""
+msgstr "常數"
 
 msgid "Contains"
-msgstr ""
+msgstr "包含"
 
 msgid "Continue"
-msgstr ""
+msgstr "繼續"
 
 msgid "Copy To Clipboard"
-msgstr ""
+msgstr "複製到剪貼簿"
 
 msgid "Create"
-msgstr ""
+msgstr "創造"
 
 msgid "Create {singular}"
-msgstr ""
+msgstr "建立{singular}"
 
 msgid "Create Attachments"
-msgstr ""
+msgstr "建立附件"
 
 msgid "Create Columns Settings"
-msgstr ""
+msgstr "建立列設定"
 
 msgid "Create Fields Order"
-msgstr ""
+msgstr "建立欄位訂單"
 
 msgid "Create It"
-msgstr ""
+msgstr "創造它"
 
 msgid "Created At"
-msgstr ""
+msgstr "創建於"
 
 msgid "Creating {singular}"
-msgstr ""
+msgstr "建立{singular}"
 
 msgid "Creating Attachments"
-msgstr ""
+msgstr "建立附件"
 
 msgid "Credentials Was Successfully Setup"
-msgstr ""
+msgstr "憑證已成功設定"
 
 msgid "Cron Expression"
-msgstr ""
+msgstr "克朗表達式"
 
 msgid "CRUD"
-msgstr ""
+msgstr "增刪改查"
 
 msgid "CRUD Settings"
-msgstr ""
+msgstr "增刪改查設置"
 
 msgid "cURL Command"
-msgstr ""
+msgstr "捲曲命令"
 
 msgid "Curve"
-msgstr ""
+msgstr "曲線"
 
 msgid "Custom Action"
-msgstr ""
+msgstr "自訂操作"
 
 msgid "Custom Actions"
-msgstr ""
+msgstr "自訂操作"
 
 msgid "Custom Dashboard"
-msgstr ""
+msgstr "客製化儀表板"
 
 msgid "Custom Dashboards"
-msgstr ""
+msgstr "客製化儀表板"
 
 msgid "Custom Date"
-msgstr ""
+msgstr "客製化日期"
 
 msgid "Dark"
-msgstr ""
+msgstr "黑暗的"
 
 msgid "Dark Color Scheme"
-msgstr ""
+msgstr "深色配色方案"
 
 msgid "Dashboard"
-msgstr ""
+msgstr "儀表板"
 
 msgid "Dashboard Widget"
-msgstr ""
+msgstr "儀表板小工具"
 
 msgid "Dashboard Widgets"
-msgstr ""
+msgstr "儀表板小工具"
 
 msgid "Dashboards"
-msgstr ""
+msgstr "儀表板"
 
 msgid "Data"
-msgstr ""
+msgstr "數據"
 
 msgid "Data copied to clipboard successfully"
-msgstr ""
+msgstr "資料已成功複製到剪貼簿"
 
 msgid "Data Event"
-msgstr ""
+msgstr "數據事​​件"
 
 msgid "Data Events"
-msgstr ""
+msgstr "數據事​​件"
 
 msgid "Data exported successfully"
-msgstr ""
+msgstr "數據匯出成功"
 
 msgid "Data Key"
-msgstr ""
+msgstr "資料金鑰"
 
 msgid "Database"
-msgstr ""
+msgstr "資料庫"
 
 msgid "Database Type"
-msgstr ""
+msgstr "資料庫類型"
 
 msgid "Date"
-msgstr ""
+msgstr "日期"
 
 msgid "Date Format"
-msgstr ""
+msgstr "日期格式"
 
 msgid "Day"
-msgstr ""
+msgstr "天"
 
 msgid "Deactivate"
-msgstr ""
+msgstr "停用"
 
 msgid "Deactivate {0}"
-msgstr ""
+msgstr "停用{0}"
+
+msgid "Deactivated"
+msgstr "已停用"
 
 msgid "Deactivating {0}"
-msgstr ""
+msgstr "停用{0}"
 
 msgid "Delete"
-msgstr ""
+msgstr "刪除"
 
 msgid "Delete {singular}"
-msgstr ""
+msgstr "刪除{singular}"
 
 msgid "Delete Edge"
-msgstr ""
+msgstr "刪除邊"
 
 msgid "Delete Selection"
-msgstr ""
+msgstr "刪除選擇"
 
 msgid "Description"
-msgstr ""
+msgstr "描述"
 
 msgid "Details"
-msgstr ""
+msgstr "細節"
 
 msgid "Details Columns Settings"
-msgstr ""
+msgstr "詳細資訊欄設置"
 
 msgid "Details Fields Order"
-msgstr ""
+msgstr "詳細資訊 欄位 訂單"
 
 msgid "Diction"
-msgstr ""
+msgstr "措詞"
 
 msgid "Diction Settings"
-msgstr ""
+msgstr "字典設定"
 
 msgid "Display Format"
-msgstr ""
+msgstr "顯示格式"
 
 msgid "Domain"
-msgstr ""
+msgstr "領域"
 
 msgid "Done"
-msgstr ""
+msgstr "完畢"
 
 msgid "Download"
-msgstr ""
+msgstr "下載"
 
 msgid "Duplicate {singular}"
-msgstr ""
+msgstr "重複的{singular}"
 
 msgid "Edit"
-msgstr ""
+msgstr "編輯"
 
 msgid "Edit {singular}"
-msgstr ""
+msgstr "編輯{singular}"
 
 msgid "Email"
-msgstr ""
+msgstr "電子郵件"
 
 msgid "Empty Table"
-msgstr ""
+msgstr "空表"
 
 msgid "Enable {0} Functionality"
-msgstr ""
+msgstr "啟用 {0} 功能"
 
 msgid "Enable Area"
-msgstr ""
+msgstr "啟用區域"
 
 msgid "Enable Points"
-msgstr ""
+msgstr "啟用點數"
 
 msgid "Enabled Entities"
-msgstr ""
+msgstr "啟用的實體"
 
 msgid "Enabled Entities Settings"
-msgstr ""
+msgstr "啟用的實體設定"
 
 msgid "Enabled Relations"
-msgstr ""
+msgstr "啟用關係"
+
+msgid "Enter a security token from your authenticator app"
+msgstr "輸入來自身份驗證器應用程式的安全性令牌"
+
+msgid "Enter one of your unsed recovery codes"
+msgstr "輸入您未使用的恢復代碼之一"
 
 msgid "Enter your credentials to continue"
-msgstr ""
+msgstr "輸入您的憑證以繼續"
 
 msgid "Entities"
-msgstr ""
+msgstr "實體"
 
 msgid "Entities Enabled For Add New And Select"
-msgstr ""
+msgstr "啟用新增實體和選擇實體"
 
 msgid "Entities Enabled For Change History"
-msgstr ""
+msgstr "啟用更改歷史記錄的實體"
 
 msgid "Entity"
-msgstr ""
+msgstr "實體"
 
 msgid "Entity Action"
-msgstr ""
+msgstr "實體動作"
 
 msgid "Entity Create Form Layout"
-msgstr ""
+msgstr "實體建立表單佈局"
 
 msgid "Entity Field"
-msgstr ""
+msgstr "實體字段"
 
 msgid "Entity ID"
-msgstr ""
+msgstr "實體ID"
 
 msgid "Entity Tab"
-msgstr ""
+msgstr "實體選項卡"
 
 msgid "Entity Update Form Layout"
-msgstr ""
+msgstr "實體更新表單版面"
 
 msgid "Environment Variable"
-msgstr ""
+msgstr "環境變數"
 
 msgid "Environment Variables"
-msgstr ""
+msgstr "環境變數"
 
 msgid "Equal"
-msgstr ""
+msgstr "平等的"
 
 msgid "Equal To Other Field"
-msgstr ""
+msgstr "等於其他字段"
 
 msgid "Error message"
-msgstr ""
+msgstr "錯誤訊息"
 
 msgid "Error Occured Setting Up Your 2FA Token"
-msgstr ""
+msgstr "設定 2FA 令牌時發生錯誤"
 
 msgid "Every 6 Hours"
-msgstr ""
+msgstr "每 6 小時一次"
 
 msgid "Explain {title}"
-msgstr ""
+msgstr "解釋一下{title}"
 
 msgid "Export"
-msgstr ""
+msgstr "出口"
 
 msgid "Exporting"
-msgstr ""
+msgstr "出口"
 
 msgid "External Link"
-msgstr ""
+msgstr "外部連結"
 
 msgid "Field"
-msgstr ""
+msgstr "場地"
 
 msgid "Field Corresponding To Dashpress Usernames"
-msgstr ""
+msgstr "與 Dashpress 使用者名稱對應的字段"
 
 msgid "Field Settings"
-msgstr ""
+msgstr "字段設定"
 
 msgid "Fields"
-msgstr ""
+msgstr "領域"
 
 msgid "Fields State"
-msgstr ""
+msgstr "菲爾茲州"
 
 msgid "File"
-msgstr ""
+msgstr "文件"
 
 msgid "File Name"
-msgstr ""
+msgstr "檔案名稱"
 
 msgid "File Name Format"
-msgstr ""
+msgstr "檔案名稱格式"
 
 msgid "File Path Format"
-msgstr ""
+msgstr "文件路徑格式"
 
 msgid "File Storage"
-msgstr ""
+msgstr "文件儲存"
 
 msgid "File Uploads Settings"
-msgstr ""
+msgstr "文件上傳設定"
 
 msgid "Flow"
-msgstr ""
+msgstr "流動"
 
 msgid "Flow Trigger Attachment"
-msgstr ""
+msgstr "流量觸發附件"
 
 msgid "Flow Trigger Attachments"
-msgstr ""
+msgstr "流量觸發器附件"
 
 msgid "Flows"
-msgstr ""
+msgstr "流量"
 
 msgid "Follow us on Twitter"
-msgstr ""
+msgstr "在推特上關注我們"
 
-msgid "For security reasons, Please input your account password to be able to manage {label}"
-msgstr ""
+msgid ""
+"For security reasons, Please input your account password to reveal "
+"credentials"
+msgstr "出於安全考慮，請輸入您的帳戶密碼以洩露憑證"
 
 msgid "Form"
-msgstr ""
+msgstr "形式"
 
 msgid "Form Action"
-msgstr ""
+msgstr "表單動作"
 
 msgid "Form Actions"
-msgstr ""
+msgstr "表單操作"
 
 msgid "Form Field"
-msgstr ""
+msgstr "表單字段"
 
 msgid "Form Fields"
-msgstr ""
+msgstr "表單字段"
 
 msgid "Form Scripts"
-msgstr ""
+msgstr "表單腳本"
 
 msgid "Format"
-msgstr ""
+msgstr "格式"
 
 msgid "From"
-msgstr ""
+msgstr "從"
 
 msgid "General"
-msgstr ""
+msgstr "一般的"
 
 msgid "General Data Settings"
-msgstr ""
+msgstr "一般數據設定"
 
 msgid "Genesis"
-msgstr ""
+msgstr "創世紀"
 
 msgid "Global Action"
-msgstr ""
+msgstr "全球行動"
 
 msgid "Go Back"
-msgstr ""
+msgstr "回去"
 
 msgid "Greater Than"
-msgstr ""
+msgstr "比...更棒"
 
 msgid "Greater Than Other Field"
-msgstr ""
+msgstr "大於其他領域"
 
 msgid "Green"
-msgstr ""
+msgstr "綠色的"
 
 msgid "Group Mode"
-msgstr ""
+msgstr "團體模式"
 
 msgid "Grouped"
-msgstr ""
+msgstr "分組"
 
 msgid "Header"
-msgstr ""
+msgstr "標頭"
 
 msgid "Headers"
-msgstr ""
+msgstr "標頭"
 
 msgid "Height"
-msgstr ""
+msgstr "高度"
 
 msgid "Hi, {0}"
-msgstr ""
+msgstr "你好，{0}"
 
 msgid "Home"
-msgstr ""
+msgstr "家"
 
 msgid "Home Link"
-msgstr ""
+msgstr "主頁連結"
 
 msgid "Horizontal"
-msgstr ""
+msgstr "水平的"
 
 msgid "Host"
-msgstr ""
+msgstr "主持人"
 
 msgid "Hour"
-msgstr ""
+msgstr "小時"
 
 msgid "I have safely saved my recovery tokens"
-msgstr ""
+msgstr "我已安全保存我的恢復令牌"
 
 msgid "Icon"
-msgstr ""
+msgstr "圖示"
+
+msgid "ID"
+msgstr "ID"
 
 msgid "Image"
-msgstr ""
+msgstr "影像"
 
 msgid "Impersonate User"
-msgstr ""
+msgstr "冒充用戶"
 
 msgid "Impersonating User"
-msgstr ""
+msgstr "冒充用戶"
 
 msgid "Incorrect value"
-msgstr ""
+msgstr "值不正確"
 
 msgid "Indigo"
-msgstr ""
+msgstr "靛青"
 
 msgid "Initial Values"
-msgstr ""
+msgstr "初始值"
 
 msgid "Inline Edit"
-msgstr ""
+msgstr "內嵌編輯"
 
 msgid "Inline Edit Settings"
-msgstr ""
+msgstr "內嵌編輯設定"
 
 msgid "Input {deactivationKey} to continue"
-msgstr ""
+msgstr "輸入 {deactivationKey} 繼續"
 
 msgid "Integration"
-msgstr ""
+msgstr "一體化"
 
 msgid "Integrations"
-msgstr ""
+msgstr "整合"
 
 msgid "IP Address"
-msgstr ""
+msgstr "IP位址"
 
 msgid "Is In"
-msgstr ""
+msgstr "正在"
 
 msgid "Is Not In"
-msgstr ""
+msgstr "不在"
 
 msgid "Is Not Null"
-msgstr ""
+msgstr "不為空"
 
 msgid "Is Null"
-msgstr ""
+msgstr "一片空白"
 
 msgid "Join our Discord community"
-msgstr ""
+msgstr "加入我們的 Discord 社區"
 
 msgid "JSON"
-msgstr ""
+msgstr "JSON"
 
 msgid "Key"
-msgstr ""
+msgstr "鑰匙"
 
 msgid "Label"
-msgstr ""
+msgstr "標籤"
 
 msgid "Labels"
-msgstr ""
+msgstr "標籤"
 
 msgid "Language"
-msgstr ""
+msgstr "語言"
 
 msgid "Large Logo"
-msgstr ""
+msgstr "大標誌"
 
 msgid "Layout"
-msgstr ""
+msgstr "佈局"
 
 msgid "Less Than"
-msgstr ""
+msgstr "少於"
 
 msgid "Less Than Other Field"
-msgstr ""
+msgstr "小於其他領域"
 
 msgid "Light"
-msgstr ""
+msgstr "光"
 
 msgid "Light Color Scheme"
-msgstr ""
+msgstr "淺色方案"
 
 msgid "Line Chart"
-msgstr ""
+msgstr "折線圖"
 
 msgid "Link"
-msgstr ""
+msgstr "關聯"
 
 msgid "Link Entity"
-msgstr ""
+msgstr "連結實體"
 
 msgid "Link Users To Database"
-msgstr ""
+msgstr "將用戶連結到資料庫"
 
 msgid "List"
-msgstr ""
+msgstr "清單"
 
 msgid "Loading..."
-msgstr ""
+msgstr "載入中..."
 
 msgid "Log Out"
-msgstr ""
+msgstr "登出"
 
 msgid "Loop"
-msgstr ""
+msgstr "環形"
 
 msgid "Manage {plural}"
-msgstr ""
+msgstr "管理 {plural}"
 
 msgid "Manage {title}"
-msgstr ""
+msgstr "管理 {title}"
 
 msgid "Manage Plan"
-msgstr ""
+msgstr "管理計劃"
 
 msgid "Manage Sensitive Fields"
-msgstr ""
+msgstr "管理敏感字段"
 
 msgid "Manage Variables"
-msgstr ""
+msgstr "管理變數"
 
 msgid "Max"
-msgstr ""
+msgstr "最大限度"
 
 msgid "Max Length"
-msgstr ""
+msgstr "最長長度"
 
 msgid "Maximum file size to upload in MB"
-msgstr ""
-
-msgid "Menu Builder"
-msgstr ""
+msgstr "上傳的最大檔案大小（以 MB 為單位）"
 
 msgid "Menu Item"
-msgstr ""
+msgstr "選單項目"
 
 msgid "Menu Settings"
-msgstr ""
+msgstr "選單設定"
 
 msgid "Message"
-msgstr ""
+msgstr "訊息"
 
 msgid "Metadata Columns"
-msgstr ""
+msgstr "元資料列"
 
 msgid "Min"
-msgstr ""
+msgstr "最小"
 
 msgid "Min Length"
-msgstr ""
+msgstr "最小長度"
 
 msgid "Modify Data Before Cloning"
-msgstr ""
+msgstr "克隆前修改數據"
 
 msgid "Month"
-msgstr ""
+msgstr "月"
 
 msgid "Mutate"
-msgstr ""
+msgstr "突變"
 
 msgid "My Account"
-msgstr ""
+msgstr "我的帳戶"
 
 msgid "Name"
-msgstr ""
+msgstr "姓名"
 
 msgid "Navigation Menu"
-msgstr ""
+msgstr "導航選單"
 
 msgid "New"
-msgstr ""
+msgstr "新的"
 
 msgid "New Password"
-msgstr ""
+msgstr "新密碼"
 
 msgid "New Password Again"
-msgstr ""
+msgstr "確認新密碼"
 
 msgid "New Value"
-msgstr ""
+msgstr "新價值"
 
 msgid "No"
-msgstr ""
-
-msgid "No {0} Has Been Logged Yet"
-msgstr ""
+msgstr "不"
 
 msgid "No {singular} Has Been Added Yet"
-msgstr ""
+msgstr "尚未添加任何{singular}"
 
 msgid "No available permission for this section"
-msgstr ""
+msgstr "此部分沒有可用權限"
 
 msgid "No Data"
-msgstr ""
+msgstr "沒有數據"
 
 msgid "No result for the current {0} applied."
-msgstr ""
+msgstr "沒有應用目前 {0} 的結果。"
 
 msgid "No Search Results"
-msgstr ""
+msgstr "沒有搜尋結果"
 
 msgid "Node"
-msgstr ""
+msgstr "節點"
 
 msgid "Node Label"
-msgstr ""
+msgstr "節點標籤"
 
 msgid "Node Properties"
-msgstr ""
+msgstr "節點屬性"
 
 msgid "Nodes"
-msgstr ""
+msgstr "節點"
 
 msgid "Not Equal"
-msgstr ""
+msgstr "不等於"
 
 msgid "Not Equal To Other Field"
-msgstr ""
+msgstr "不等於其他字段"
 
 msgid "Now"
-msgstr ""
+msgstr "現在"
 
 msgid "Number"
-msgstr ""
+msgstr "數位"
 
 msgid "Old Password"
-msgstr ""
+msgstr "舊密碼"
 
 msgid "Old Value"
-msgstr ""
+msgstr "舊值"
 
 msgid "On Create"
-msgstr ""
+msgstr "創建時"
 
 msgid "On Delete"
-msgstr ""
+msgstr "刪除時"
 
 msgid "On Update"
-msgstr ""
+msgstr "更新時"
 
 msgid "Only capital letters and underscores are allowed"
-msgstr ""
+msgstr "只允許使用大寫字母和底線"
 
 msgid "Only lowercase letters, numbers and {delimiter} are allowed"
-msgstr ""
+msgstr "只允許小寫字母、數字和 {delimiter}"
 
 msgid "Operator"
-msgstr ""
+msgstr "操作員"
 
 msgid "OR"
-msgstr ""
+msgstr "或者"
 
 msgid "Orange"
-msgstr ""
+msgstr "橘子"
 
 msgid "Order"
-msgstr ""
+msgstr "命令"
+
+msgid "Ordered"
+msgstr "已訂購"
 
 msgid "Password"
-msgstr ""
+msgstr "密碼"
 
 msgid "Password Reset Successfully"
-msgstr ""
+msgstr "密碼重置成功"
 
 msgid "Password will not be changed on demo account"
-msgstr ""
+msgstr "模擬帳戶的密碼不會更改"
 
 msgid "Persistent Query"
-msgstr ""
+msgstr "持久查詢"
 
 msgid "Personalize This Table"
-msgstr ""
+msgstr "個性化這張桌子"
 
 msgid "Pie Chart"
-msgstr ""
+msgstr "圓餅圖"
 
 msgid "Plural"
-msgstr ""
+msgstr "複數"
 
 msgid "Port"
-msgstr ""
+msgstr "港口"
 
 msgid "Positive Number"
-msgstr ""
+msgstr "正數"
 
 msgid "Preferences"
-msgstr ""
+msgstr "優先"
 
 msgid "Presentation Scripts"
-msgstr ""
+msgstr "簡報腳本"
 
 msgid "Preview"
-msgstr ""
+msgstr "預覽"
 
 msgid "Profile"
-msgstr ""
+msgstr "輪廓"
 
 msgid "Quarter"
-msgstr ""
+msgstr "四分之一"
 
 msgid "Query"
-msgstr ""
+msgstr "詢問"
 
 msgid "Recovery Code"
-msgstr ""
+msgstr "恢復程式碼"
 
 msgid "Recovery tokens copied to clipboard"
-msgstr ""
+msgstr "恢復令牌已複製到剪貼簿"
 
 msgid "Red"
-msgstr ""
+msgstr "紅色的"
 
 msgid "Reference"
-msgstr ""
+msgstr "參考"
 
 msgid "Reference Template"
-msgstr ""
+msgstr "參考模板"
 
 msgid "Regex"
-msgstr ""
+msgstr "正規表示式"
 
 msgid "Region"
-msgstr ""
+msgstr "地區"
 
 msgid "Relation Labels"
-msgstr ""
+msgstr "關係標籤"
 
 msgid "Relation Template"
-msgstr ""
+msgstr "關係模板"
 
 msgid "Relations"
-msgstr ""
+msgstr "關係"
 
 msgid "Relations Order"
-msgstr ""
+msgstr "關係順序"
 
 msgid "Relations To Clone Along"
-msgstr ""
+msgstr "克隆關係"
 
 msgid "Relationship Settings"
-msgstr ""
+msgstr "關係設定"
 
 msgid "Remember Me"
-msgstr ""
+msgstr "記住帳號"
 
 msgid "Remove"
-msgstr ""
+msgstr "消除"
 
 msgid "Remove Nested Filter"
-msgstr ""
+msgstr "刪除嵌套過濾器"
 
 msgid "Request ID"
-msgstr ""
+msgstr "請求ID"
 
 msgid "Request Method"
-msgstr ""
+msgstr "請求方式"
 
 msgid "Required"
-msgstr ""
+msgstr "必需的"
 
 msgid "Reset"
-msgstr ""
+msgstr "重置"
 
 msgid "Reset 2FA Recovery Tokens"
-msgstr ""
+msgstr "重置 2FA 恢復令牌"
 
 msgid "Reset Password"
-msgstr ""
+msgstr "重新設密碼"
 
 msgid "Reset Recovery Tokens"
-msgstr ""
+msgstr "重置恢復令牌"
 
 msgid "Reset User Password"
-msgstr ""
+msgstr "重置用戶密碼"
 
 msgid "Resetting Password"
-msgstr ""
+msgstr "重設密碼"
 
 msgid "Response"
-msgstr ""
+msgstr "回覆"
 
 msgid "Restore"
-msgstr ""
+msgstr "恢復"
 
-msgid "Reveal {label}"
-msgstr ""
+msgid "Restored"
+msgstr "已恢復"
 
-msgid "Revealing {label}"
-msgstr ""
+msgid "Reveal Credentials"
+msgstr "透露憑證"
+
+msgid "Revealing Credentials"
+msgstr "洩漏憑證"
 
 msgid "Rich Text"
-msgstr ""
+msgstr "富文本"
 
 msgid "Role"
-msgstr ""
+msgstr "角色"
 
 msgid "Role Permission"
-msgstr ""
+msgstr "角色權限"
 
 msgid "Role Permissions"
-msgstr ""
+msgstr "角色權限"
 
 msgid "Roles"
-msgstr ""
+msgstr "角色"
 
 msgid "Roles and Permissions"
-msgstr ""
+msgstr "角色和權限"
 
 msgid "Route ID"
-msgstr ""
+msgstr "路線編號"
 
 msgid "Save"
-msgstr ""
-
-msgid "Save {0}"
-msgstr ""
+msgstr "節省"
 
 msgid "Save {singular}"
-msgstr ""
+msgstr "儲存{singular}"
 
 msgid "Save Current Filters"
-msgstr ""
+msgstr "儲存目前過濾器"
 
 msgid "Saving"
-msgstr ""
-
-msgid "Saving {0}"
-msgstr ""
+msgstr "儲存"
 
 msgid "Saving {singular}"
-msgstr ""
+msgstr "儲存{singular}"
 
 msgid "Scheduler"
-msgstr ""
+msgstr "調度程式"
 
 msgid "Schedulers"
-msgstr ""
+msgstr "調度程式"
 
 msgid "Script"
-msgstr ""
+msgstr "腳本"
 
 msgid "Search"
-msgstr ""
+msgstr "搜尋"
 
 msgid "Secret"
-msgstr ""
+msgstr "秘密"
 
 msgid "Secret Access Key"
-msgstr ""
+msgstr "秘密存取密鑰"
 
 msgid "Secrets"
-msgstr ""
+msgstr "秘密"
+
+msgid "Select {formLabel}"
+msgstr "選擇{formLabel}"
 
 msgid "Select Node Type"
-msgstr ""
+msgstr "選擇節點類型"
 
 msgid "Select Trigger"
-msgstr ""
+msgstr "選擇觸發器"
+
+msgid "Select Value"
+msgstr "選擇值"
 
 msgid "Select Workflow"
-msgstr ""
+msgstr "選擇工作流程"
 
 msgid "Selection"
-msgstr ""
+msgstr "選擇"
 
 msgid "Selection List"
-msgstr ""
+msgstr "選擇清單"
 
 msgid "Selections Settings"
-msgstr ""
+msgstr "選擇設定"
 
 msgid "Send Mail"
-msgstr ""
+msgstr "傳送郵件"
 
 msgid "Send Message"
-msgstr ""
+msgstr "傳訊息"
 
 msgid "Send SMS"
-msgstr ""
+msgstr "發簡訊"
 
 msgid "Sender Email"
-msgstr ""
+msgstr "寄件者信箱"
 
 msgid "Sender Name"
-msgstr ""
+msgstr "寄件者名稱"
 
 msgid "Sensitive Field"
-msgstr ""
+msgstr "敏感領域"
 
 msgid "Sensitive Fields"
-msgstr ""
+msgstr "敏感領域"
 
 msgid "Setting Up Account"
-msgstr ""
+msgstr "設立帳戶"
 
 msgid "Setting Up Credentials"
-msgstr ""
+msgstr "設定憑證"
 
 msgid "Settings"
-msgstr ""
+msgstr "設定"
 
 msgid "Setup"
-msgstr ""
+msgstr "設定"
 
 msgid "Setup Account"
-msgstr ""
+msgstr "設定帳戶"
 
 msgid "Setup Credentials"
-msgstr ""
+msgstr "設定憑證"
 
 msgid "Share"
-msgstr ""
+msgstr "分享"
+
+msgid "Shared"
+msgstr "共享"
 
 msgid "Sharing"
-msgstr ""
+msgstr "分享"
+
+msgid "Show"
+msgstr "展示"
 
 msgid "Show Soft Deleted Items And The Restore Button"
-msgstr ""
+msgstr "顯示軟刪除項目和恢復按鈕"
 
 msgid "Show Up In Roles And Permissions"
-msgstr ""
+msgstr "顯示角色和權限"
 
 msgid "Showing <0/> entries of <1>{0}</1> results"
-msgstr ""
+msgstr "顯示 <1>{0}</1> 個結果的 <0/> 個項目"
 
 msgid "Sign In"
-msgstr ""
+msgstr "登入"
 
 msgid "Signing In"
-msgstr ""
+msgstr "登入中"
 
 msgid "Singular"
-msgstr ""
+msgstr "單數"
 
 msgid "Site"
-msgstr ""
+msgstr "地點"
 
 msgid "Site Settings"
-msgstr ""
-
-msgid "Slug"
-msgstr ""
+msgstr "站點設定"
 
 msgid "Small Logo"
-msgstr ""
+msgstr "小標誌"
 
 msgid "Soft Delete"
-msgstr ""
+msgstr "軟刪除"
 
 msgid "Soft Delete Settings"
-msgstr ""
+msgstr "軟刪除設定"
 
 msgid "Stacked"
-msgstr ""
+msgstr "堆疊式"
 
 msgid "Star us on Github"
-msgstr ""
+msgstr "在 Github 上為我們加註星標"
 
 msgid "Start of year"
-msgstr ""
+msgstr "年初"
 
 msgid "State Script"
-msgstr ""
+msgstr "狀態腳本"
 
 msgid "Storage Key"
-msgstr ""
+msgstr "儲存密鑰"
 
 msgid "Strategy"
-msgstr ""
+msgstr "策略"
 
 msgid "String"
-msgstr ""
+msgstr "細繩"
 
 msgid "Subject"
-msgstr ""
+msgstr "主題"
 
 msgid "Submit"
-msgstr ""
+msgstr "提交"
 
 msgid "Submitting"
-msgstr ""
+msgstr "正在提交"
 
 msgid "Summary Card"
-msgstr ""
+msgstr "總結卡"
 
 msgid "SVG"
-msgstr ""
+msgstr "靜止無功發生器"
 
 msgid "System"
-msgstr ""
+msgstr "系統"
 
 msgid "System Info"
-msgstr ""
+msgstr "系統資訊"
 
 msgid "System Information"
-msgstr ""
+msgstr "系統資訊"
 
 msgid "System Settings"
-msgstr ""
+msgstr "系統設定"
 
 msgid "Table"
-msgstr ""
+msgstr "桌子"
 
 msgid "Table Columns Settings"
-msgstr ""
+msgstr "表格列設定"
 
 msgid "Table Fields Order"
-msgstr ""
+msgstr "表字段順序"
 
 msgid "Table Personalization"
-msgstr ""
+msgstr "餐桌個性化"
 
 msgid "Table Personalizations"
-msgstr ""
+msgstr "表格個性化"
 
 msgid "Table View"
-msgstr ""
+msgstr "表格視圖"
 
 msgid "Table Views"
-msgstr ""
+msgstr "表格視圖"
 
 msgid "Test Widget Script"
-msgstr ""
+msgstr "測試小工具腳本"
 
 msgid "Text"
-msgstr ""
+msgstr "文字"
 
 msgid "Textarea"
-msgstr ""
+msgstr "文字區"
 
 msgid "Theme"
-msgstr ""
+msgstr "主題"
 
 msgid "Theme Settings"
-msgstr ""
+msgstr "主題設定"
 
 msgid "This {0} Has No Form"
-msgstr ""
+msgstr "此{0}沒有形式"
 
-msgid "This application has no active entities. Kindly add new entities through your preferred database editor then restart this application to proceed."
-msgstr ""
+msgid "This action does not have configuration"
+msgstr "該動作沒有配置"
 
 msgid "This entity has no fields"
-msgstr ""
-
-msgid "This entity has no fields. Kindly add fields from your prefer database tool to manage them here"
-msgstr ""
+msgstr "該實體沒有字段"
 
 msgid "This entity has no relations"
-msgstr ""
+msgstr "該實體沒有關係"
 
-msgid "This flow should be queued and executed asynchronously (recommended for long running flows, requires Redis)"
-msgstr ""
+msgid ""
+"This flow should be queued and executed asynchronously (recommended for "
+"long running flows, requires Redis)"
+msgstr "此流程應排隊並非同步執行（建議用於長時間運行的流程，需要 Redis）"
 
 msgid "This trigger has no workflow attached"
-msgstr ""
+msgstr "該觸發器沒有附加工作流程"
 
 msgid "This workflow has no trigger attached"
-msgstr ""
+msgstr "此工作流程沒有附加觸發器"
 
 msgid "Time Changed"
-msgstr ""
+msgstr "時間變了"
 
 msgid "Title"
-msgstr ""
+msgstr "標題"
 
 msgid "To"
-msgstr ""
+msgstr "到"
 
 msgid "Toggle Connection URL"
-msgstr ""
+msgstr "切換連線 URL"
 
 msgid "Token"
-msgstr ""
+msgstr "代幣"
 
 msgid "Token Validity Duration In Days"
-msgstr ""
+msgstr "令牌有效期限（天）"
 
 msgid "Trigger"
-msgstr ""
+msgstr "扳機"
 
 msgid "Try Out 25+ Pro Features"
-msgstr ""
+msgstr "嘗試 25 項專業功能"
 
 msgid "Type"
-msgstr ""
+msgstr "類型"
 
 msgid "Update"
-msgstr ""
+msgstr "更新"
 
 msgid "Update {singular}"
-msgstr ""
+msgstr "更新{singular}"
 
 msgid "Update Columns Settings"
-msgstr ""
+msgstr "更新列設定"
 
 msgid "Update Fields Order"
-msgstr ""
+msgstr "更新欄位順序"
 
 msgid "Updated At"
-msgstr ""
+msgstr "更新於"
 
 msgid "Updating {singular}"
-msgstr ""
+msgstr "更新{singular}"
 
 msgid "Uppercase"
-msgstr ""
+msgstr "大寫"
 
 msgid "URL"
-msgstr ""
+msgstr "網址"
 
 msgid "Use Colors"
-msgstr ""
+msgstr "使用顏色"
 
 msgid "Use Icon"
-msgstr ""
+msgstr "使用圖示"
+
+msgid "Use OTP Token"
+msgstr "使用 OTP 令牌"
+
+msgid "Use Recovery Code"
+msgstr "使用恢復程式碼"
 
 msgid "Use SSL"
-msgstr ""
+msgstr "使用SSL"
 
 msgid "Use SVG"
-msgstr ""
+msgstr "使用SVG"
 
 msgid "User"
-msgstr ""
+msgstr "使用者"
 
 msgid "Username"
-msgstr ""
+msgstr "使用者名稱"
 
 msgid "Users"
-msgstr ""
+msgstr "使用者"
 
 msgid "Users Link To Database"
-msgstr ""
+msgstr "用戶連結到資料庫"
 
 msgid "Users to Database Link"
-msgstr ""
+msgstr "用戶到資料庫鏈接"
 
 msgid "Validations"
-msgstr ""
+msgstr "驗證"
 
 msgid "Value"
-msgstr ""
+msgstr "價值"
 
 msgid "Variables"
-msgstr ""
+msgstr "變數"
 
 msgid "Verifing"
-msgstr ""
+msgstr "驗證"
 
 msgid "Verify"
-msgstr ""
+msgstr "核實"
 
 msgid "Vertical"
-msgstr ""
+msgstr "垂直的"
 
 msgid "View"
-msgstr ""
+msgstr "看法"
 
 msgid "View Full Details"
-msgstr ""
+msgstr "看完整詳情"
 
 msgid "Violet"
-msgstr ""
+msgstr "紫色"
 
 msgid "Visit our website"
-msgstr ""
+msgstr "造訪我們的網站"
 
 msgid "Webhook"
-msgstr ""
+msgstr "網路鉤子"
 
 msgid "Webhooks"
-msgstr ""
+msgstr "網路鉤子"
 
 msgid "Week"
-msgstr ""
+msgstr "星期"
 
 msgid "Widget Script"
-msgstr ""
+msgstr "小部件腳本"
 
 msgid "Width"
-msgstr ""
+msgstr "寬度"
 
 msgid "Workflow"
-msgstr ""
+msgstr "工作流程"
 
 msgid "Workflows"
-msgstr ""
+msgstr "工作流程"
 
 msgid "X Label"
-msgstr ""
+msgstr "X標籤"
 
 msgid "Y Label"
-msgstr ""
+msgstr "Y標籤"
 
 msgid "Year"
-msgstr ""
+msgstr "年"
 
 msgid "Yes"
-msgstr ""
+msgstr "是的"
 
 msgid "Your Users Table"
-msgstr ""
+msgstr "您的使用者表"

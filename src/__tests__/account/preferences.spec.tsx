@@ -40,7 +40,7 @@ describe("pages/account/preferences", () => {
     );
 
     expect(await screen.findByRole("status")).toHaveTextContent(
-      "Account Preference Saved Successfully"
+      "Account Preferences Saved Successfully"
     );
   });
 

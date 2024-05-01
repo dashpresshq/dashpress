@@ -139,9 +139,11 @@ const getNavigationTypeLink = (
     case NavigationMenuItemType.Entities:
       return NAVIGATION_LINKS.ENTITY.TABLE(link);
     case NavigationMenuItemType.System:
-      return { ...SYSTEM_LINKS_CONFIG_MAP, ...PORTAL_SYSTEM_LINK_CONFIG_LINKS }[
-        link as SystemLinks
-      ].link;
+      return (
+        { ...SYSTEM_LINKS_CONFIG_MAP, ...PORTAL_SYSTEM_LINK_CONFIG_LINKS }[
+          link as SystemLinks
+        ]?.link || "/"
+      );
   }
 };
 

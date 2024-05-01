@@ -103,13 +103,12 @@ export function UserPreferences() {
 
             router.push({ pathname, query }, asPath, { locale: data.locale });
 
-            /*
-    const date = new Date()
-         const expireMs = 100 * 24 * 60 * 60 * 1000 // 100 days
-         date.setTime(date.getTime() + expireMs)
-         document.cookie = `NEXT_LOCALE=${locale};expires=${date.toUTCString()};path=/`
-            */
-            // TODO set cookie to NEXT_LOCALE=the-locale
+            const date = new Date();
+            const expireMs = 100 * 24 * 60 * 60 * 1000; // 100 days
+            date.setTime(date.getTime() + expireMs);
+            document.cookie = `NEXT_LOCALE=${
+              data.locale
+            };expires=${date.toUTCString()};path=/`;
           }}
           initialValues={{ locale: router.locale || router.defaultLocale }}
           buttonText={() => msg`Change Language`}

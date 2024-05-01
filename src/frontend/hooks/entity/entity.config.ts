@@ -110,19 +110,43 @@ export function useEntityFieldValidations(entity: string) {
 
   return Object.fromEntries(
     entityFields.data.map((entityField) => {
-      // The validation from the DB should override that of the config
+      // The validation from the DB should override that of the config but keep the configured error message
       const preSelectedValidation =
         entityValidationsMap.data[entityField.name] || [];
+
+      const preSelectedValidationMap = Object.fromEntries(
+        preSelectedValidation.map((validation) => [
+          validation.validationType,
+          validation,
+        ])
+      );
+
+      const replaceWithCustomErrorMessages = (
+        validations: IFieldValidationItem[]
+      ): IFieldValidationItem[] => {
+        return validations.map((validation) => {
+          return {
+            ...validation,
+            errorMessage:
+              preSelectedValidationMap[validation.validationType]
+                .errorMessage || validation.errorMessage,
+          };
+        });
+      };
 
       const uniqKey: keyof IFieldValidationItem = "validationType";
       return [
         entityField.name,
         uniqBy(
           [
-            ...getFieldTypeBoundedValidations(
-              processedEntityFieldTypes[entityField.name]
+            ...replaceWithCustomErrorMessages(
+              getFieldTypeBoundedValidations(
+                processedEntityFieldTypes[entityField.name]
+              )
             ),
-            ...guessEntityValidations(entityField),
+            ...replaceWithCustomErrorMessages(
+              guessEntityValidations(entityField)
+            ),
             ...preSelectedValidation,
           ],
           uniqKey

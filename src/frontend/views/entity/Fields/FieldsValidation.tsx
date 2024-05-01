@@ -27,6 +27,7 @@ import { DELETE_BUTTON_PROPS } from "frontend/design-system/components/Button/co
 import { Fragment } from "react";
 import { msg } from "@lingui/macro";
 import { typescriptSafeObjectDotEntries } from "shared/lib/objects";
+import { fakeMessageDescriptor } from "translations/fake";
 
 interface IProps {
   field: string;
@@ -38,7 +39,7 @@ interface IProps {
 const ERROR_MESSAGE_LENGTH = 128;
 
 // TODO: for contributors: Show the actuall error message not the template message
-// TODO: make this work with i18n currently shows [object Object]
+
 export function FieldValidationCanvas({
   field,
   onSubmit,
@@ -57,7 +58,14 @@ export function FieldValidationCanvas({
   return (
     <Form
       onSubmit={(values: { validations: IFieldValidationItem[] }) => {
-        onSubmit(values.validations);
+        onSubmit(
+          values.validations.map((validation) => ({
+            ...validation,
+            errorMessage: fakeMessageDescriptor(
+              validation.errorMessage.message
+            ),
+          }))
+        );
       }}
       mutators={{
         ...arrayMutators,
@@ -79,7 +87,7 @@ export function FieldValidationCanvas({
                   return (
                     <Fragment key={name}>
                       <SectionBox
-                        title={msg`${userFriendlyCase(validationType)}`}
+                        title={ENTITY_VALIDATION_CONFIG[validationType].label}
                         actionButtons={
                           !isBoundToType && !fromSchema
                             ? [
@@ -125,7 +133,7 @@ export function FieldValidationCanvas({
                           </>
                         )}
                         <Field
-                          name={`${name}.errorMessage`}
+                          name={`${name}.errorMessage.message`}
                           validate={composeValidators(
                             required,
                             maxLength(ERROR_MESSAGE_LENGTH)

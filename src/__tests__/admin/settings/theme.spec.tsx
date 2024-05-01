@@ -45,7 +45,7 @@ describe("pages/admin/settings/theme", () => {
     );
 
     expect((await screen.findAllByRole("status"))[1]).toHaveTextContent(
-      "Account Preference Saved Successfully"
+      "Account Preferences Saved Successfully"
     );
   });
 

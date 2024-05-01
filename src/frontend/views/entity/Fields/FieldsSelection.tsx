@@ -47,6 +47,24 @@ interface IProps {
   onSubmit: (values: IColorableSelection[]) => void;
 }
 
+const replaceForIntialValues = (selections: IColorableSelection[]) => {
+  return selections.map((selection) => ({
+    ...selection,
+    label: { ...selection.label, message: selection.label.values[0] },
+  }));
+};
+
+const replaceForSubmission = (selections: IColorableSelection[]) => {
+  return selections.map((selection) => ({
+    ...selection,
+    label: {
+      ...selection.label,
+      message: "{0}",
+      values: { 0: selection.label.message },
+    },
+  }));
+};
+
 export function FieldSelectionCanvas({
   field,
   onSubmit,
@@ -62,12 +80,12 @@ export function FieldSelectionCanvas({
   return (
     <Form
       onSubmit={(values: { selections: IColorableSelection[] }) => {
-        onSubmit(values.selections);
+        onSubmit(replaceForSubmission(values.selections));
       }}
       mutators={{
         ...arrayMutators,
       }}
-      initialValues={{ selections }}
+      initialValues={{ selections: replaceForIntialValues(selections) }}
       render={({ handleSubmit, values, pristine, form }) => (
         <form onSubmit={handleSubmit}>
           {entityType !== "boolean" && (
@@ -117,7 +135,7 @@ export function FieldSelectionCanvas({
                           )}
                         </Field>
                         <Field
-                          name={`${name}.label`}
+                          name={`${name}.label.message`}
                           validate={required}
                           validateFields={[]}
                         >

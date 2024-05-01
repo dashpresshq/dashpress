@@ -46,7 +46,7 @@ async function translatePoFiles(folderPath) {
 
     const language = file.split(".")[0];
 
-    if (["pseudo.po", "en-us.po"].includes(language)) {
+    if (["pseudo", "en-us"].includes(language)) {
       continue;
     }
 

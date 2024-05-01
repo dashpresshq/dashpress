@@ -1,1 +1,1 @@
-export { useIsGranularCheck } from "./main";
+export { useIsGranularCheck, PORTAL_GUEST_ROUTES } from "./main";

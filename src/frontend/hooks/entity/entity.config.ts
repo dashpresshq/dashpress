@@ -12,7 +12,7 @@ import {
 } from "shared/configurations/permissions";
 import { DataStateKeys } from "frontend/lib/data/types";
 import { useRouteParam } from "frontend/lib/routing/useRouteParam";
-import { MAKE_CRUD_CONFIG } from "frontend/lib/crud-config";
+import { useDomainMessages } from "frontend/lib/crud-config";
 import { uniqBy } from "shared/lib/array/uniq-by";
 import { userFriendlyCase } from "shared/lib/strings/friendly-case";
 import { IEntityField } from "shared/types/db";
@@ -45,7 +45,7 @@ export function useEntityDiction(entity: string) {
 export function useEntityCrudConfig(entity: string) {
   const { singular, plural } = useEntityDiction(entity);
 
-  return MAKE_CRUD_CONFIG({
+  return useDomainMessages({
     plural: i18nNoop(plural),
     singular: i18nNoop(singular),
   });
@@ -110,19 +110,43 @@ export function useEntityFieldValidations(entity: string) {
 
   return Object.fromEntries(
     entityFields.data.map((entityField) => {
-      // The validation from the DB should override that of the config
+      // The validation from the DB should override that of the config but keep the configured error message
       const preSelectedValidation =
         entityValidationsMap.data[entityField.name] || [];
+
+      const preSelectedValidationMap = Object.fromEntries(
+        preSelectedValidation.map((validation) => [
+          validation.validationType,
+          validation,
+        ])
+      );
+
+      const replaceWithCustomErrorMessages = (
+        validations: IFieldValidationItem[]
+      ): IFieldValidationItem[] => {
+        return validations.map((validation) => {
+          return {
+            ...validation,
+            errorMessage:
+              preSelectedValidationMap[validation.validationType]
+                .errorMessage || validation.errorMessage,
+          };
+        });
+      };
 
       const uniqKey: keyof IFieldValidationItem = "validationType";
       return [
         entityField.name,
         uniqBy(
           [
-            ...getFieldTypeBoundedValidations(
-              processedEntityFieldTypes[entityField.name]
+            ...replaceWithCustomErrorMessages(
+              getFieldTypeBoundedValidations(
+                processedEntityFieldTypes[entityField.name]
+              )
             ),
-            ...guessEntityValidations(entityField),
+            ...replaceWithCustomErrorMessages(
+              guessEntityValidations(entityField)
+            ),
             ...preSelectedValidation,
           ],
           uniqKey

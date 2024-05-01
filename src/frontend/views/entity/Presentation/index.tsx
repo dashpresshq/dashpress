@@ -10,7 +10,7 @@ import {
   useEntityConfiguration,
   useUpsertConfigurationMutation,
 } from "frontend/hooks/configuration/configuration.store";
-import { MAKE_APP_CONFIGURATION_CRUD_CONFIG } from "frontend/hooks/configuration/configuration.constant";
+import { useAppConfigurationDomainMessages } from "frontend/hooks/configuration/configuration.constant";
 import { PresentationScriptDocumentation } from "frontend/docs/scripts/presentations-scripts";
 import { ToastService } from "frontend/lib/toast";
 import { evalJavascriptString } from "shared/lib/script-runner";
@@ -41,16 +41,17 @@ type IEntityPresentationScript = {
   script: string;
 };
 
-const PRESENTATION_SCRIPT_CRUD_CONFIG = MAKE_APP_CONFIGURATION_CRUD_CONFIG(
-  "entity_presentation_script"
-);
-
 export function EntityPresentationScriptSettings() {
   const entity = useEntitySlug();
   const entityPresentationScript = useEntityConfiguration(
     "entity_presentation_script",
     entity
   );
+
+  const domainMessages = useAppConfigurationDomainMessages(
+    "entity_presentation_script"
+  );
+
   const upsertConfigurationMutation = useUpsertConfigurationMutation(
     "entity_presentation_script",
     entity
@@ -58,18 +59,18 @@ export function EntityPresentationScriptSettings() {
   const evaluateScriptContext = useEvaluateScriptContext();
 
   const documentationActionButton = useDocumentationActionButton(
-    PRESENTATION_SCRIPT_CRUD_CONFIG.TEXT_LANG.TITLE
+    domainMessages.TEXT_LANG.TITLE
   );
 
   useSetPageDetails({
-    pageTitle: PRESENTATION_SCRIPT_CRUD_CONFIG.TEXT_LANG.TITLE,
+    pageTitle: domainMessages.TEXT_LANG.TITLE,
     viewKey: ENTITY_CONFIGURATION_VIEW,
     permission: UserPermissions.CAN_CONFIGURE_APP,
   });
   return (
     <BaseEntitySettingsLayout>
       <SectionBox
-        title={PRESENTATION_SCRIPT_CRUD_CONFIG.TEXT_LANG.TITLE}
+        title={domainMessages.TEXT_LANG.TITLE}
         actionButtons={[documentationActionButton]}
       >
         <ViewStateMachine
@@ -104,10 +105,7 @@ export function EntityPresentationScriptSettings() {
             }}
             initialValues={entityPresentationScript.data}
             systemIcon="Save"
-            buttonText={
-              MAKE_APP_CONFIGURATION_CRUD_CONFIG("entity_presentation_script")
-                .FORM_LANG.UPSERT
-            }
+            buttonText={domainMessages.FORM_LANG.UPSERT}
           />
         </ViewStateMachine>
       </SectionBox>

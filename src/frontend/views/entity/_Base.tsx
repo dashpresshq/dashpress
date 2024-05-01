@@ -13,7 +13,7 @@ import { ContentLayout } from "frontend/design-system/components/Section/Section
 import { Spacer } from "frontend/design-system/primitives/Spacer";
 import { IDropDownMenuItem } from "frontend/design-system/components/DropdownMenu";
 import { msg } from "@lingui/macro";
-import { FORM_ACTION_CRUD_CONFIG } from "./Actions/constants";
+import { LANG_DOMAINS } from "frontend/lib/crud-config/lang-domains";
 import { useMutateBaseEntitySettingsMenu } from "./portal";
 
 const baseMenuItems = (entity: string): IMenuSectionItem[] => [
@@ -67,7 +67,7 @@ const baseMenuItems = (entity: string): IMenuSectionItem[] => [
   },
   {
     action: NAVIGATION_LINKS.ENTITY.CONFIG.FORM_INTEGRATIONS(entity),
-    name: FORM_ACTION_CRUD_CONFIG.TEXT_LANG.TITLE,
+    name: LANG_DOMAINS.INTEGRATIONS.FORM_ACTIONS.plural,
     systemIcon: "Zap",
     order: 80,
   },

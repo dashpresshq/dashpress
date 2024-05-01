@@ -4,23 +4,19 @@ import { IBaseRoleForm } from "shared/form-schemas/roles/base";
 import { makeRoleId } from "shared/constants/user";
 import { IRolesList } from "shared/types/roles";
 import {
-  MAKE_CRUD_CONFIG,
   MAKE_ENDPOINTS_CONFIG,
+  useDomainMessages,
 } from "frontend/lib/crud-config";
 import { useWaitForResponseMutationOptions } from "frontend/lib/data/useMutate/useWaitForResponseMutationOptions";
 import { ApiRequest } from "frontend/lib/data/makeRequest";
 import { MutationHelpers } from "frontend/lib/data/useMutate/mutation-helpers";
 import { useApiMutateOptimisticOptions } from "frontend/lib/data/useMutate/useApiMutateOptimisticOptions";
-import { msg } from "@lingui/macro";
-
-export const ADMIN_ROLES_CRUD_CONFIG = MAKE_CRUD_CONFIG({
-  plural: msg`Roles`,
-  singular: msg`Role`,
-});
+import { LANG_DOMAINS } from "frontend/lib/crud-config/lang-domains";
 
 export const ROLES_ENDPOINT_CONFIG = MAKE_ENDPOINTS_CONFIG("/api/roles");
 
 export function useCreateRoleMutation() {
+  const domainMessages = useDomainMessages(LANG_DOMAINS.ACCOUNT.ROLES);
   const router = useRouter();
   return useWaitForResponseMutationOptions<IBaseRoleForm, IBaseRoleForm>({
     mutationFn: async (data) => {
@@ -29,9 +25,9 @@ export function useCreateRoleMutation() {
     },
     endpoints: [ROLES_ENDPOINT_CONFIG.LIST],
     smartSuccessMessage: ({ name }) => ({
-      message: ADMIN_ROLES_CRUD_CONFIG.MUTATION_LANG.CREATE,
+      message: domainMessages.MUTATION_LANG.CREATE,
       action: {
-        label: ADMIN_ROLES_CRUD_CONFIG.MUTATION_LANG.VIEW_DETAILS,
+        label: domainMessages.MUTATION_LANG.VIEW_DETAILS,
         action: () =>
           router.push(NAVIGATION_LINKS.ROLES.DETAILS(makeRoleId(name))),
       },
@@ -40,6 +36,7 @@ export function useCreateRoleMutation() {
 }
 
 export function useRoleDeletionMutation() {
+  const domainMessages = useDomainMessages(LANG_DOMAINS.ACCOUNT.ROLES);
   const router = useRouter();
   return useApiMutateOptimisticOptions<IRolesList[], string>({
     mutationFn: async (roleId) =>
@@ -49,6 +46,6 @@ export function useRoleDeletionMutation() {
       router.replace(NAVIGATION_LINKS.ROLES.LIST);
     },
     onMutate: MutationHelpers.deleteByKey("value"),
-    successMessage: ADMIN_ROLES_CRUD_CONFIG.MUTATION_LANG.DELETE,
+    successMessage: domainMessages.MUTATION_LANG.DELETE,
   });
 }

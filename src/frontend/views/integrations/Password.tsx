@@ -14,13 +14,7 @@ export function PasswordMessage() {
   );
 }
 
-export function PasswordToReveal({
-  label,
-  isLoading,
-}: {
-  label: string;
-  isLoading: boolean;
-}) {
+export function PasswordToReveal({ isLoading }: { isLoading: boolean }) {
   const { _ } = useLingui();
   const passwordStore = usePasswordStore();
 
@@ -28,7 +22,7 @@ export function PasswordToReveal({
     <>
       <Typo.SM $textStyle="italic">
         {_(
-          msg`For security reasons, Please input your account password to be able to manage ${label}`
+          msg`For security reasons, Please input your account password to reveal credentials`
         )}
       </Typo.SM>
       <Spacer />
@@ -49,7 +43,7 @@ export function PasswordToReveal({
         }}
         systemIcon="Unlock"
         buttonText={() =>
-          isLoading ? msg`Revealing ${label}` : msg`Reveal ${label}`
+          isLoading ? msg`Revealing Credentials` : msg`Reveal Credentials`
         }
       />
     </>

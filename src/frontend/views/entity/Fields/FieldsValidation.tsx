@@ -11,7 +11,7 @@ import {
   IFieldValidationItem,
   ValidationTypes,
 } from "shared/validations/types";
-import { MAKE_APP_CONFIGURATION_CRUD_CONFIG } from "frontend/hooks/configuration/configuration.constant";
+import { useAppConfigurationDomainMessages } from "frontend/hooks/configuration/configuration.constant";
 import {
   composeValidators,
   maxLength,
@@ -27,6 +27,7 @@ import { DELETE_BUTTON_PROPS } from "frontend/design-system/components/Button/co
 import { Fragment } from "react";
 import { msg } from "@lingui/macro";
 import { typescriptSafeObjectDotEntries } from "shared/lib/objects";
+import { fakeMessageDescriptor } from "translations/fake";
 
 interface IProps {
   field: string;
@@ -35,18 +36,19 @@ interface IProps {
   onSubmit: (values: IFieldValidationItem[]) => void;
 }
 
-const CRUD_CONFIG = MAKE_APP_CONFIGURATION_CRUD_CONFIG("entity_validations");
-
 const ERROR_MESSAGE_LENGTH = 128;
 
 // TODO: for contributors: Show the actuall error message not the template message
-// TODO: make this work with i18n currently shows [object Object]
+
 export function FieldValidationCanvas({
   field,
   onSubmit,
   entityType,
   validations,
 }: IProps) {
+  const domainMessages =
+    useAppConfigurationDomainMessages("entity_validations");
+
   if (!field) {
     return null;
   }
@@ -56,7 +58,14 @@ export function FieldValidationCanvas({
   return (
     <Form
       onSubmit={(values: { validations: IFieldValidationItem[] }) => {
-        onSubmit(values.validations);
+        onSubmit(
+          values.validations.map((validation) => ({
+            ...validation,
+            errorMessage: fakeMessageDescriptor(
+              validation.errorMessage.message
+            ),
+          }))
+        );
       }}
       mutators={{
         ...arrayMutators,
@@ -78,7 +87,7 @@ export function FieldValidationCanvas({
                   return (
                     <Fragment key={name}>
                       <SectionBox
-                        title={msg`${userFriendlyCase(validationType)}`}
+                        title={ENTITY_VALIDATION_CONFIG[validationType].label}
                         actionButtons={
                           !isBoundToType && !fromSchema
                             ? [
@@ -124,7 +133,7 @@ export function FieldValidationCanvas({
                           </>
                         )}
                         <Field
-                          name={`${name}.errorMessage`}
+                          name={`${name}.errorMessage.message`}
                           validate={composeValidators(
                             required,
                             maxLength(ERROR_MESSAGE_LENGTH)
@@ -170,7 +179,7 @@ export function FieldValidationCanvas({
           <Spacer />
           <FormButton
             isMakingRequest={false}
-            text={CRUD_CONFIG.FORM_LANG.UPSERT}
+            text={domainMessages.FORM_LANG.UPSERT}
             systemIcon="Save"
             disabled={pristine}
           />

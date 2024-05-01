@@ -9,6 +9,8 @@ import { AppLayout } from "frontend/_layouts/app";
 import { arrayMoveImmutable } from "shared/lib/array/move";
 import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
+import { useDomainMessages } from "frontend/lib/crud-config";
+import { LANG_DOMAINS } from "frontend/lib/crud-config/lang-domains";
 import {
   useArrangeDashboardWidgetMutation,
   useDashboardWidgets,
@@ -17,7 +19,6 @@ import {
 import { dashboardGridRoot } from "../styles";
 import { DashboardSkeleton } from "../Skeleton";
 import { DashboardWidget } from "../Widget";
-import { DASHBOARD_WIDGETS_CRUD_CONFIG } from "../constants";
 
 const Root = styled.div`
   container-type: inline-size;
@@ -36,6 +37,8 @@ export function BaseManageDashboard({ dashboardId, doneLink, title }: IProps) {
   const router = useRouter();
 
   const { _ } = useLingui();
+
+  const domainMessages = useDomainMessages(LANG_DOMAINS.DASHBOARD.WIDGETS);
 
   const widgets = useDashboardWidgets(dashboardId);
 
@@ -68,7 +71,7 @@ export function BaseManageDashboard({ dashboardId, doneLink, title }: IProps) {
       actionItems={[
         {
           id: "new",
-          label: DASHBOARD_WIDGETS_CRUD_CONFIG.TEXT_LANG.CREATE,
+          label: domainMessages.TEXT_LANG.CREATE,
           systemIcon: "Plus",
           action: NAVIGATION_LINKS.DASHBOARD.WIDGET.CREATE(dashboardId),
         },
@@ -83,7 +86,7 @@ export function BaseManageDashboard({ dashboardId, doneLink, title }: IProps) {
           <SortableList
             onSortEnd={onSortEnd}
             className="list"
-            aria-label={_(DASHBOARD_WIDGETS_CRUD_CONFIG.TEXT_LANG.TITLE)}
+            aria-label={_(domainMessages.TEXT_LANG.TITLE)}
             draggedItemClassName="dragged"
           >
             {widgets.data.map((config) => (

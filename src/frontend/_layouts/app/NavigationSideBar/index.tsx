@@ -34,7 +34,7 @@ const Page = styled.div<{ $isFullWidth: boolean }>`
   background: ${USE_ROOT_COLOR("foundation-color")};
 `;
 
-export function LayoutImplementation({ children }: IProps) {
+export function NavigationSideBar({ children }: IProps) {
   const [isFullWidth, setIsFullWidth] = useSessionStorage(
     "is-navigation-open",
     true

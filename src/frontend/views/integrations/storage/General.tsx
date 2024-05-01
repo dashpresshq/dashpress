@@ -8,7 +8,7 @@ import {
   FormSkeleton,
   FormSkeletonSchema,
 } from "frontend/design-system/components/Skeleton/Form";
-import { MAKE_APP_CONFIGURATION_CRUD_CONFIG } from "frontend/hooks/configuration/configuration.constant";
+import { useAppConfigurationDomainMessages } from "frontend/hooks/configuration/configuration.constant";
 import { AppConfigurationValueType } from "shared/configurations/constants";
 import { msg } from "@lingui/macro";
 
@@ -16,6 +16,10 @@ export function GeneralStorageSettings() {
   const fileUploadSettings = useAppConfiguration("file_upload_settings");
 
   const upsertFileUploadSettingsMutation = useUpsertConfigurationMutation(
+    "file_upload_settings"
+  );
+
+  const domainMessages = useAppConfigurationDomainMessages(
     "file_upload_settings"
   );
 
@@ -71,10 +75,7 @@ export function GeneralStorageSettings() {
           },
         }}
         onSubmit={upsertFileUploadSettingsMutation.mutateAsync}
-        buttonText={
-          MAKE_APP_CONFIGURATION_CRUD_CONFIG("file_upload_settings").FORM_LANG
-            .UPSERT
-        }
+        buttonText={domainMessages.FORM_LANG.UPSERT}
         systemIcon="Save"
       />
     </ViewStateMachine>

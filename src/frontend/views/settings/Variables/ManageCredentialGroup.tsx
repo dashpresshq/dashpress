@@ -28,6 +28,7 @@ import { useDocumentationActionButton } from "frontend/docs/constants";
 import { ActionButtons } from "frontend/design-system/components/Button/ActionButtons";
 import { DELETE_BUTTON_PROPS } from "frontend/design-system/components/Button/constants";
 import { msg } from "@lingui/macro";
+import { useDomainMessages } from "frontend/lib/crud-config";
 import {
   INTEGRATIONS_GROUP_ENDPOINT,
   useIntegrationConfigurationDeletionMutation,
@@ -75,10 +76,12 @@ export function ManageCredentialGroup({
     setCurrentConfigItem("");
   };
 
-  const CRUD_CONFIG = INTEGRATIONS_GROUP_CRUD_CONFIG[group].crudConfig;
+  const domainMessages = useDomainMessages(
+    INTEGRATIONS_GROUP_CRUD_CONFIG[group].domainDiction
+  );
 
   const documentationActionButton = useDocumentationActionButton(
-    CRUD_CONFIG.TEXT_LANG.TITLE
+    domainMessages.TEXT_LANG.TITLE
   );
 
   const MemoizedAction = useCallback(
@@ -89,14 +92,14 @@ export function ManageCredentialGroup({
           {
             id: "edit",
             action: () => setCurrentConfigItem(row.original.key),
-            label: CRUD_CONFIG.TEXT_LANG.EDIT,
+            label: domainMessages.TEXT_LANG.EDIT,
             systemIcon: "Edit",
           },
           {
             ...DELETE_BUTTON_PROPS({
               action: () =>
                 deleteConfigurationMutation.mutateAsync(row.original.key),
-              label: CRUD_CONFIG.TEXT_LANG.DELETE,
+              label: domainMessages.TEXT_LANG.DELETE,
               isMakingRequest: false,
             }),
           },
@@ -133,7 +136,7 @@ export function ManageCredentialGroup({
                 setCurrentConfigItem(NEW_CONFIG_ITEM);
               },
               systemIcon: "Plus",
-              label: CRUD_CONFIG.TEXT_LANG.CREATE,
+              label: domainMessages.TEXT_LANG.CREATE,
             },
           ]
         : [],
@@ -181,10 +184,7 @@ export function ManageCredentialGroup({
           userHasPermission(UserPermissions.CAN_MANAGE_APP_CREDENTIALS) &&
           revealedCredentials.data === undefined && (
             <Spacer>
-              <PasswordToReveal
-                label="Secrets"
-                isLoading={revealedCredentials.isLoading}
-              />
+              <PasswordToReveal isLoading={revealedCredentials.isLoading} />
             </Spacer>
           )}
         {!canManageAction && tableData.data.length > 0 && (
@@ -200,10 +200,10 @@ export function ManageCredentialGroup({
       <FEPaginationTable
         dataEndpoint={dataEndpoint}
         empty={{
-          text: CRUD_CONFIG.TEXT_LANG.EMPTY_LIST,
+          text: domainMessages.TEXT_LANG.EMPTY_LIST,
           createNew: showManageAction
             ? {
-                label: CRUD_CONFIG.TEXT_LANG.CREATE,
+                label: domainMessages.TEXT_LANG.CREATE,
                 action: () => setCurrentConfigItem(NEW_CONFIG_ITEM),
               }
             : undefined,
@@ -214,8 +214,8 @@ export function ManageCredentialGroup({
       <OffCanvas
         title={
           currentConfigItem === NEW_CONFIG_ITEM
-            ? CRUD_CONFIG.TEXT_LANG.CREATE
-            : CRUD_CONFIG.TEXT_LANG.EDIT
+            ? domainMessages.TEXT_LANG.CREATE
+            : domainMessages.TEXT_LANG.EDIT
         }
         onClose={closeConfigItem}
         show={!!currentConfigItem}

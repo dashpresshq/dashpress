@@ -1,5 +1,5 @@
 import { Form, Field } from "react-final-form";
-import { MAKE_APP_CONFIGURATION_CRUD_CONFIG } from "frontend/hooks/configuration/configuration.constant";
+import { useAppConfigurationDomainMessages } from "frontend/hooks/configuration/configuration.constant";
 import { IFormProps } from "frontend/lib/form/types";
 import { composeValidators, required } from "frontend/lib/validations";
 import { FormInput } from "frontend/design-system/components/Form/FormInput";
@@ -12,10 +12,6 @@ interface IRelationsSettings {
   fields: string[];
 }
 
-const CRUD_CONFIG = MAKE_APP_CONFIGURATION_CRUD_CONFIG(
-  "entity_relation_template"
-);
-
 export function EntityRelationsForm({
   onSubmit,
   entityFields,
@@ -23,6 +19,10 @@ export function EntityRelationsForm({
 }: IFormProps<IRelationsSettings> & {
   entityFields: string[];
 }) {
+  const domainMessages = useAppConfigurationDomainMessages(
+    "entity_relation_template"
+  );
+
   return (
     <Form
       onSubmit={async (values: IRelationsSettings) =>
@@ -60,7 +60,7 @@ export function EntityRelationsForm({
               )}
             </Field>
             <FormButton
-              text={CRUD_CONFIG.FORM_LANG.UPSERT}
+              text={domainMessages.FORM_LANG.UPSERT}
               isMakingRequest={submitting}
               systemIcon="Save"
               disabled={pristine}

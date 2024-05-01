@@ -11,7 +11,7 @@ import {
   isUseColorsFlagOn,
   OPTIONS_COLORS,
 } from "shared/logic/entities/selection.utils";
-import { MAKE_APP_CONFIGURATION_CRUD_CONFIG } from "frontend/hooks/configuration/configuration.constant";
+import { useAppConfigurationDomainMessages } from "frontend/hooks/configuration/configuration.constant";
 import { FormInput } from "frontend/design-system/components/Form/FormInput";
 import { Stack } from "frontend/design-system/primitives/Stack";
 import { Card, CardBody } from "frontend/design-system/components/Card";
@@ -38,8 +38,6 @@ const ColorBox = styled.button<{ color: string }>`
 
 // Reference is a special case basically only use color
 
-const CRUD_CONFIG = MAKE_APP_CONFIGURATION_CRUD_CONFIG("entity_selections");
-
 const ManagableEntities = ["selection"];
 
 interface IProps {
@@ -49,6 +47,24 @@ interface IProps {
   onSubmit: (values: IColorableSelection[]) => void;
 }
 
+const replaceForIntialValues = (selections: IColorableSelection[]) => {
+  return selections.map((selection) => ({
+    ...selection,
+    label: { ...selection.label, message: selection.label.values[0] },
+  }));
+};
+
+const replaceForSubmission = (selections: IColorableSelection[]) => {
+  return selections.map((selection) => ({
+    ...selection,
+    label: {
+      ...selection.label,
+      message: "{0}",
+      values: { 0: selection.label.message },
+    },
+  }));
+};
+
 export function FieldSelectionCanvas({
   field,
   onSubmit,
@@ -56,6 +72,7 @@ export function FieldSelectionCanvas({
   selections,
 }: IProps) {
   const [useColors, setUseColors] = useState(isUseColorsFlagOn(selections));
+  const domainMessages = useAppConfigurationDomainMessages("entity_selections");
   if (!field) {
     return null;
   }
@@ -63,12 +80,12 @@ export function FieldSelectionCanvas({
   return (
     <Form
       onSubmit={(values: { selections: IColorableSelection[] }) => {
-        onSubmit(values.selections);
+        onSubmit(replaceForSubmission(values.selections));
       }}
       mutators={{
         ...arrayMutators,
       }}
-      initialValues={{ selections }}
+      initialValues={{ selections: replaceForIntialValues(selections) }}
       render={({ handleSubmit, values, pristine, form }) => (
         <form onSubmit={handleSubmit}>
           {entityType !== "boolean" && (
@@ -118,7 +135,7 @@ export function FieldSelectionCanvas({
                           )}
                         </Field>
                         <Field
-                          name={`${name}.label`}
+                          name={`${name}.label.message`}
                           validate={required}
                           validateFields={[]}
                         >
@@ -212,7 +229,7 @@ export function FieldSelectionCanvas({
                   <FormButton
                     systemIcon="Save"
                     isMakingRequest={false}
-                    text={CRUD_CONFIG.FORM_LANG.UPSERT}
+                    text={domainMessages.FORM_LANG.UPSERT}
                     disabled={pristine}
                   />
                 </Stack>

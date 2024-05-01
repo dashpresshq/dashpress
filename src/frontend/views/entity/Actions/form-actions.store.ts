@@ -1,4 +1,8 @@
-import { CRUD_CONFIG_NOT_FOUND } from "frontend/lib/crud-config";
+import {
+  CRUD_CONFIG_NOT_FOUND,
+  MAKE_ENDPOINTS_CONFIG,
+  useDomainMessages,
+} from "frontend/lib/crud-config";
 import {
   IFormAction,
   IIntegrationImplementationList,
@@ -8,7 +12,9 @@ import { MutationHelpers } from "frontend/lib/data/useMutate/mutation-helpers";
 import { ApiRequest } from "frontend/lib/data/makeRequest";
 import { useWaitForResponseMutationOptions } from "frontend/lib/data/useMutate/useWaitForResponseMutationOptions";
 import { useApi } from "frontend/lib/data/useApi";
-import { FORM_ACTION_CRUD_CONFIG, FORM_ACTION_ENDPOINT } from "./constants";
+import { LANG_DOMAINS } from "frontend/lib/crud-config/lang-domains";
+
+export const FORM_ACTION_ENDPOINT = MAKE_ENDPOINTS_CONFIG(`/api/form-actions`);
 
 const BASE_ACTIONS_ENDPOINT = `/api/integrations/actions`;
 
@@ -27,11 +33,14 @@ export const useIntegrationImplementationsList = (integration: string) =>
   );
 
 export function useDeleteFormActionMutation(entity: string) {
+  const domainMessages = useDomainMessages(
+    LANG_DOMAINS.INTEGRATIONS.FORM_ACTIONS
+  );
   return useApiMutateOptimisticOptions<IFormAction[], string>({
     mutationFn: async (formActionId) =>
       await ApiRequest.DELETE(FORM_ACTION_ENDPOINT.DELETE(formActionId)),
     dataQueryPath: LIST_ENTITY_FORM_ACTIONS(entity),
-    successMessage: FORM_ACTION_CRUD_CONFIG.MUTATION_LANG.DELETE,
+    successMessage: domainMessages.MUTATION_LANG.DELETE,
     onMutate: MutationHelpers.deleteByKey("id") as unknown as (
       oldData: IFormAction[],
       form: string
@@ -40,16 +49,22 @@ export function useDeleteFormActionMutation(entity: string) {
 }
 
 export function useCreateFormActionMutation(entity: string) {
+  const domainMessages = useDomainMessages(
+    LANG_DOMAINS.INTEGRATIONS.FORM_ACTIONS
+  );
   return useWaitForResponseMutationOptions<IFormAction>({
     mutationFn: async (configuration) => {
       return await ApiRequest.POST(FORM_ACTION_ENDPOINT.CREATE, configuration);
     },
     endpoints: [LIST_ENTITY_FORM_ACTIONS(entity)],
-    successMessage: FORM_ACTION_CRUD_CONFIG.MUTATION_LANG.CREATE,
+    successMessage: domainMessages.MUTATION_LANG.CREATE,
   });
 }
 
 export function useUpdateFormActionMutation(entity: string) {
+  const domainMessages = useDomainMessages(
+    LANG_DOMAINS.INTEGRATIONS.FORM_ACTIONS
+  );
   return useWaitForResponseMutationOptions<IFormAction>({
     mutationFn: async (formAction) =>
       await ApiRequest.PATCH(
@@ -57,6 +72,6 @@ export function useUpdateFormActionMutation(entity: string) {
         formAction
       ),
     endpoints: [LIST_ENTITY_FORM_ACTIONS(entity)],
-    successMessage: FORM_ACTION_CRUD_CONFIG.MUTATION_LANG.EDIT,
+    successMessage: domainMessages.MUTATION_LANG.EDIT,
   });
 }

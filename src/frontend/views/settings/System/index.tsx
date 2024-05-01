@@ -10,7 +10,7 @@ import {
   useUpsertConfigurationMutation,
 } from "frontend/hooks/configuration/configuration.store";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
-import { MAKE_APP_CONFIGURATION_CRUD_CONFIG } from "frontend/hooks/configuration/configuration.constant";
+import { useAppConfigurationDomainMessages } from "frontend/hooks/configuration/configuration.constant";
 import { SystemSettingsDocumentation } from "frontend/docs/system-settings";
 import { SchemaForm } from "frontend/components/SchemaForm";
 import { IBaseSystemSettings } from "shared/configurations/system";
@@ -19,20 +19,19 @@ import { msg } from "@lingui/macro";
 import { BaseSettingsLayout } from "../_Base";
 import { SETTINGS_VIEW_KEY } from "../constants";
 
-const CRUD_CONFIG = MAKE_APP_CONFIGURATION_CRUD_CONFIG("system_settings");
-
 export function SystemSettings() {
   const systemSettings = useAppConfiguration("system_settings");
+  const domainMessages = useAppConfigurationDomainMessages("system_settings");
 
   const documentationActionButton = useDocumentationActionButton(
-    CRUD_CONFIG.TEXT_LANG.TITLE
+    domainMessages.TEXT_LANG.TITLE
   );
 
   const upsertConfigurationMutation =
     useUpsertConfigurationMutation("system_settings");
 
   useSetPageDetails({
-    pageTitle: CRUD_CONFIG.TEXT_LANG.TITLE,
+    pageTitle: domainMessages.TEXT_LANG.TITLE,
     viewKey: SETTINGS_VIEW_KEY,
     permission: UserPermissions.CAN_CONFIGURE_APP,
   });
@@ -40,7 +39,7 @@ export function SystemSettings() {
   return (
     <BaseSettingsLayout>
       <SectionBox
-        title={CRUD_CONFIG.TEXT_LANG.TITLE}
+        title={domainMessages.TEXT_LANG.TITLE}
         actionButtons={[documentationActionButton]}
       >
         <ViewStateMachine
@@ -52,7 +51,7 @@ export function SystemSettings() {
             onSubmit={upsertConfigurationMutation.mutateAsync}
             initialValues={systemSettings.data}
             systemIcon="Save"
-            buttonText={CRUD_CONFIG.FORM_LANG.UPSERT}
+            buttonText={domainMessages.FORM_LANG.UPSERT}
             fields={{
               tokenValidityDurationInDays: {
                 label: msg`Token Validity Duration In Days`,

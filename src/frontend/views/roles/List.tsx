@@ -14,15 +14,14 @@ import { Card } from "frontend/design-system/components/Card";
 import { DELETE_BUTTON_PROPS } from "frontend/design-system/components/Button/constants";
 import { ActionButtons } from "frontend/design-system/components/Button/ActionButtons";
 import { msg } from "@lingui/macro";
-import {
-  ADMIN_ROLES_CRUD_CONFIG,
-  ROLES_ENDPOINT_CONFIG,
-  useRoleDeletionMutation,
-} from "./roles.store";
+import { useDomainMessages } from "frontend/lib/crud-config";
+import { LANG_DOMAINS } from "frontend/lib/crud-config/lang-domains";
+import { ROLES_ENDPOINT_CONFIG, useRoleDeletionMutation } from "./roles.store";
 
 export function ListRoles() {
+  const domainMessages = useDomainMessages(LANG_DOMAINS.ACCOUNT.ROLES);
   useSetPageDetails({
-    pageTitle: ADMIN_ROLES_CRUD_CONFIG.TEXT_LANG.TITLE,
+    pageTitle: domainMessages.TEXT_LANG.TITLE,
     viewKey: `list-roles`,
     permission: UserPermissions.CAN_MANAGE_PERMISSIONS,
   });
@@ -42,13 +41,13 @@ export function ListRoles() {
             {
               id: "edit",
               action: NAVIGATION_LINKS.ROLES.DETAILS(roleId),
-              label: ADMIN_ROLES_CRUD_CONFIG.TEXT_LANG.EDIT,
+              label: domainMessages.TEXT_LANG.EDIT,
               systemIcon: "Edit",
             },
             {
               ...DELETE_BUTTON_PROPS({
                 action: () => roleDeletionMutation.mutateAsync(roleId),
-                label: ADMIN_ROLES_CRUD_CONFIG.TEXT_LANG.DELETE,
+                label: domainMessages.TEXT_LANG.DELETE,
                 isMakingRequest: false,
               }),
             },
@@ -80,7 +79,7 @@ export function ListRoles() {
       actionItems={[
         {
           id: "add",
-          label: ADMIN_ROLES_CRUD_CONFIG.TEXT_LANG.CREATE,
+          label: domainMessages.TEXT_LANG.CREATE,
           systemIcon: "Plus",
           action: NAVIGATION_LINKS.ROLES.CREATE,
         },
@@ -91,9 +90,9 @@ export function ListRoles() {
           dataEndpoint={ROLES_ENDPOINT_CONFIG.LIST}
           columns={columns}
           empty={{
-            text: ADMIN_ROLES_CRUD_CONFIG.TEXT_LANG.EMPTY_LIST,
+            text: domainMessages.TEXT_LANG.EMPTY_LIST,
             createNew: {
-              label: ADMIN_ROLES_CRUD_CONFIG.TEXT_LANG.CREATE,
+              label: domainMessages.TEXT_LANG.CREATE,
               action: NAVIGATION_LINKS.ROLES.CREATE,
             },
           }}

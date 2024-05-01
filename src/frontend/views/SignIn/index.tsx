@@ -15,6 +15,7 @@ import { Typo } from "frontend/design-system/primitives/Typo";
 import { SchemaForm } from "frontend/components/SchemaForm";
 import { useGuestCheck } from "frontend/hooks/auth/useGuestCheck";
 import { msg, t } from "@lingui/macro";
+import { CustomNextPage } from "frontend/_layouts/types";
 import { useHandleNoTokenAuthResponse } from "./portal";
 
 function useSignInMutation() {
@@ -36,7 +37,8 @@ function useSignInMutation() {
   });
 }
 
-export function SignIn() {
+// eslint-disable-next-line react/function-component-definition
+export const SignIn: CustomNextPage = () => {
   const render = useGuestCheck();
   const signInMutation = useSignInMutation();
 
@@ -83,4 +85,4 @@ export function SignIn() {
       />
     </AuthLayout>
   );
-}
+};

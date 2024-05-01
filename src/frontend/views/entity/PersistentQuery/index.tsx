@@ -12,17 +12,16 @@ import {
 } from "frontend/hooks/configuration/configuration.store";
 import { UserPermissions } from "shared/constants/user";
 import { useTableColumns } from "frontend/views/data/Table/useTableColumns";
-import { MAKE_APP_CONFIGURATION_CRUD_CONFIG } from "frontend/hooks/configuration/configuration.constant";
 import { useDocumentationActionButton } from "frontend/docs/constants";
 import { PersistentDocumentation } from "frontend/docs/persistent-query";
+import { useAppConfigurationDomainMessages } from "frontend/hooks/configuration/configuration.constant";
 import { BaseEntitySettingsLayout } from "../_Base";
 import { ENTITY_CONFIGURATION_VIEW } from "../constants";
 import { EntityPersistentQueryForm } from "./Form";
 
-const CRUD_CONFIG = MAKE_APP_CONFIGURATION_CRUD_CONFIG("persistent_query");
-
 export function EntityPersistentQuerySettings() {
   const entity = useEntitySlug();
+  const domainMessages = useAppConfigurationDomainMessages("persistent_query");
 
   const upsertPeristentQueryMutation = useUpsertConfigurationMutation(
     "persistent_query",
@@ -30,7 +29,7 @@ export function EntityPersistentQuerySettings() {
   );
 
   const documentationActionButton = useDocumentationActionButton(
-    CRUD_CONFIG.TEXT_LANG.TITLE
+    domainMessages.TEXT_LANG.TITLE
   );
 
   const peristentQuery = useEntityConfiguration("persistent_query", entity);
@@ -38,7 +37,7 @@ export function EntityPersistentQuerySettings() {
   const tableColumns = useTableColumns(entity);
 
   useSetPageDetails({
-    pageTitle: CRUD_CONFIG.TEXT_LANG.TITLE,
+    pageTitle: domainMessages.TEXT_LANG.TITLE,
     viewKey: ENTITY_CONFIGURATION_VIEW,
     permission: UserPermissions.CAN_CONFIGURE_APP,
   });
@@ -50,7 +49,7 @@ export function EntityPersistentQuerySettings() {
   return (
     <BaseEntitySettingsLayout>
       <SectionBox
-        title={CRUD_CONFIG.TEXT_LANG.TITLE}
+        title={domainMessages.TEXT_LANG.TITLE}
         actionButtons={[documentationActionButton]}
       >
         <ViewStateMachine

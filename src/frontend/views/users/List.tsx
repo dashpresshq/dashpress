@@ -18,16 +18,16 @@ import { IDropDownMenuItem } from "frontend/design-system/components/DropdownMen
 import { useCallback } from "react";
 import { msg } from "@lingui/macro";
 import { transformLabelValueToSelectData } from "translations/fake";
+import { useDomainMessages } from "frontend/lib/crud-config";
+import { LANG_DOMAINS } from "frontend/lib/crud-config/lang-domains";
 import { ROLES_ENDPOINT_CONFIG } from "../roles/roles.store";
-import {
-  ADMIN_USERS_CRUD_CONFIG,
-  USERS_ENDPOINT_CONFIG,
-  useUserDeletionMutation,
-} from "./users.store";
+import { USERS_ENDPOINT_CONFIG, useUserDeletionMutation } from "./users.store";
 
 export function ListUsers() {
+  const domainMessages = useDomainMessages(LANG_DOMAINS.ACCOUNT.USERS);
+
   useSetPageDetails({
-    pageTitle: ADMIN_USERS_CRUD_CONFIG.TEXT_LANG.TITLE,
+    pageTitle: domainMessages.TEXT_LANG.TITLE,
     viewKey: `users`,
     permission: UserPermissions.CAN_MANAGE_USERS,
   });
@@ -50,13 +50,13 @@ export function ListUsers() {
             {
               id: "edit",
               action: NAVIGATION_LINKS.USERS.DETAILS(username),
-              label: ADMIN_USERS_CRUD_CONFIG.TEXT_LANG.EDIT,
+              label: domainMessages.TEXT_LANG.EDIT,
               systemIcon: "Edit",
             },
             {
               ...DELETE_BUTTON_PROPS({
                 action: () => userDeletionMutation.mutateAsync(username),
-                label: ADMIN_USERS_CRUD_CONFIG.TEXT_LANG.DELETE,
+                label: domainMessages.TEXT_LANG.DELETE,
                 isMakingRequest: false,
               }),
             },
@@ -105,7 +105,7 @@ export function ListUsers() {
     {
       id: "add",
       systemIcon: "UserPlus",
-      label: ADMIN_USERS_CRUD_CONFIG.TEXT_LANG.CREATE,
+      label: domainMessages.TEXT_LANG.CREATE,
       action: NAVIGATION_LINKS.USERS.CREATE,
     },
   ];
@@ -126,9 +126,9 @@ export function ListUsers() {
           dataEndpoint={USERS_ENDPOINT_CONFIG.LIST}
           columns={columns}
           empty={{
-            text: ADMIN_USERS_CRUD_CONFIG.TEXT_LANG.EMPTY_LIST,
+            text: domainMessages.TEXT_LANG.EMPTY_LIST,
             createNew: {
-              label: ADMIN_USERS_CRUD_CONFIG.TEXT_LANG.CREATE,
+              label: domainMessages.TEXT_LANG.CREATE,
               action: NAVIGATION_LINKS.USERS.CREATE,
             },
           }}

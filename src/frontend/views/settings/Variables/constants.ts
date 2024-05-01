@@ -1,27 +1,18 @@
-import { msg } from "@lingui/macro";
-import { ICrudConfig, MAKE_CRUD_CONFIG } from "frontend/lib/crud-config";
+import { MessageDescriptor } from "@lingui/core";
+import { LANG_DOMAINS } from "frontend/lib/crud-config/lang-domains";
 import { IntegrationsConfigurationGroup } from "shared/types/integrations";
 
 export const INTEGRATIONS_GROUP_CRUD_CONFIG: Record<
   IntegrationsConfigurationGroup,
-  { crudConfig: ICrudConfig }
+  { domainDiction: { plural: MessageDescriptor; singular: MessageDescriptor } }
 > = {
   constants: {
-    crudConfig: MAKE_CRUD_CONFIG({
-      plural: msg`Constants`,
-      singular: msg`Constant`,
-    }),
+    domainDiction: LANG_DOMAINS.INTEGRATIONS.CONSTANTS,
   },
   env: {
-    crudConfig: MAKE_CRUD_CONFIG({
-      plural: msg`Environment Variables`,
-      singular: msg`Environment Variable`,
-    }),
+    domainDiction: LANG_DOMAINS.INTEGRATIONS.ENVIRONMENT_VARIABLES,
   },
   credentials: {
-    crudConfig: MAKE_CRUD_CONFIG({
-      plural: msg`Secrets`,
-      singular: msg`Secret`,
-    }),
+    domainDiction: LANG_DOMAINS.INTEGRATIONS.CREDENTIALS,
   },
 };

@@ -10,13 +10,12 @@ import {
   useUpsertConfigurationMutation,
 } from "frontend/hooks/configuration/configuration.store";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
-import { THEME_SETTINGS_CRUD_CONFIG } from "frontend/_layouts/useAppTheme";
 import {
   useUpsertUserPreferenceMutation,
   useUserPreference,
 } from "frontend/hooks/auth/preferences.store";
 import { SchemaForm } from "frontend/components/SchemaForm";
-import { MAKE_APP_CONFIGURATION_CRUD_CONFIG } from "frontend/hooks/configuration/configuration.constant";
+import { useAppConfigurationDomainMessages } from "frontend/hooks/configuration/configuration.constant";
 import { ColorSchemes } from "shared/types/ui";
 import { AppConfigurationValueType } from "shared/configurations/constants";
 import { UPDATE_USER_PREFERENCES_FORM_SCHEMA } from "frontend/views/account/Preferences/constants";
@@ -24,15 +23,13 @@ import { msg } from "@lingui/macro";
 import { BaseSettingsLayout } from "../_Base";
 import { SETTINGS_VIEW_KEY } from "../constants";
 
-const CRUD_CONFIG = MAKE_APP_CONFIGURATION_CRUD_CONFIG("theme_color");
-
 type Settings = AppConfigurationValueType<"theme_color"> & {
   theme: ColorSchemes;
 };
 
 export function ThemeSettings() {
   const themeColor = useAppConfiguration("theme_color");
-
+  const domainMessages = useAppConfigurationDomainMessages("theme_color");
   const userPreference = useUserPreference("theme");
 
   const upsertConfigurationMutation =
@@ -41,14 +38,14 @@ export function ThemeSettings() {
   const upsertUserPreferenceMutation = useUpsertUserPreferenceMutation("theme");
 
   useSetPageDetails({
-    pageTitle: THEME_SETTINGS_CRUD_CONFIG.TEXT_LANG.TITLE,
+    pageTitle: domainMessages.TEXT_LANG.TITLE,
     viewKey: SETTINGS_VIEW_KEY,
     permission: UserPermissions.CAN_CONFIGURE_APP,
   });
 
   return (
     <BaseSettingsLayout>
-      <SectionBox title={THEME_SETTINGS_CRUD_CONFIG.TEXT_LANG.TITLE}>
+      <SectionBox title={domainMessages.TEXT_LANG.TITLE}>
         <ViewStateMachine
           loading={themeColor.isLoading || userPreference.isLoading}
           error={themeColor.error || userPreference.error}
@@ -66,7 +63,7 @@ export function ThemeSettings() {
             }}
             initialValues={{ ...themeColor.data, theme: userPreference.data }}
             systemIcon="Save"
-            buttonText={CRUD_CONFIG.FORM_LANG.UPSERT}
+            buttonText={domainMessages.FORM_LANG.UPSERT}
             fields={{
               primary: {
                 label: msg`Light Color Scheme`,

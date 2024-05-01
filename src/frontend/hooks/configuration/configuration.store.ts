@@ -8,7 +8,10 @@ import { useWaitForResponseMutationOptions } from "frontend/lib/data/useMutate/u
 import { AppStorage } from "frontend/lib/storage/app";
 import { AppConfigurationValueType } from "shared/configurations/constants";
 import { useApiQueries } from "frontend/lib/data/useApi/useApiQueries";
-import { MAKE_APP_CONFIGURATION_CRUD_CONFIG } from "./configuration.constant";
+import { useAppConfigurationDomainMessages } from "./configuration.constant";
+import { useIsUserAutenticated } from "../auth/auth.actions";
+
+const GUEST_PATH = "__guest";
 
 export const configurationApiPath = (
   key: AppConfigurationKeys,
@@ -26,17 +29,21 @@ export const configurationApiPath = (
   const config = APP_CONFIGURATION_CONFIG[key];
 
   if ("guest" in config && config.guest) {
-    return `/api/config/${key}/__guest`;
+    return `/api/config/${key}/${GUEST_PATH}`;
   }
 
   return `/api/config/${key}`;
 };
 
 export function useAppConfiguration<T extends AppConfigurationKeys>(key: T) {
+  const domainMessages = useAppConfigurationDomainMessages(key);
+  const isUserAuthenticated = useIsUserAutenticated();
+  const path = configurationApiPath(key);
   return useStorageApi<AppConfigurationValueType<T>>(
     configurationApiPath(key),
     {
-      errorMessage: MAKE_APP_CONFIGURATION_CRUD_CONFIG(key).TEXT_LANG.NOT_FOUND,
+      enabled: isUserAuthenticated || path.endsWith(GUEST_PATH),
+      errorMessage: domainMessages.TEXT_LANG.NOT_FOUND,
       defaultData: APP_CONFIGURATION_CONFIG[key].defaultValue,
     }
   );
@@ -47,12 +54,14 @@ export function useEntityConfiguration<T extends AppConfigurationKeys>(
   entity: string,
   forceDefaultValue?: AppConfigurationValueType<T>
 ) {
+  const domainMessages = useAppConfigurationDomainMessages(key);
+
   return useStorageApi<AppConfigurationValueType<T>>(
     configurationApiPath(key, entity),
     {
       enabled:
         !!entity /* It is possible to not have the entity at the point of call */,
-      errorMessage: MAKE_APP_CONFIGURATION_CRUD_CONFIG(key).TEXT_LANG.NOT_FOUND,
+      errorMessage: domainMessages.TEXT_LANG.NOT_FOUND,
       defaultData:
         forceDefaultValue || (APP_CONFIGURATION_CONFIG[key].defaultValue as T),
     }
@@ -81,6 +90,8 @@ export function useUpsertConfigurationMutation<T extends AppConfigurationKeys>(
   entity?: string,
   mutationOptions?: IUpsertConfigMutationOptions
 ) {
+  const domainMessages = useAppConfigurationDomainMessages(key);
+
   return useWaitForResponseMutationOptions<
     AppConfigurationValueType<T>,
     AppConfigurationValueType<T>
@@ -98,6 +109,6 @@ export function useUpsertConfigurationMutation<T extends AppConfigurationKeys>(
     onSuccessActionWithFormData: (data) => {
       AppStorage.set(configurationApiPath(key, entity), data);
     },
-    successMessage: MAKE_APP_CONFIGURATION_CRUD_CONFIG(key).MUTATION_LANG.SAVED,
+    successMessage: domainMessages.MUTATION_LANG.SAVED,
   });
 }

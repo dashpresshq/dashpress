@@ -9,14 +9,18 @@ import {
   IBaseRoleForm,
 } from "shared/form-schemas/roles/base";
 import { SchemaForm } from "frontend/components/SchemaForm";
-import { ADMIN_ROLES_CRUD_CONFIG, useCreateRoleMutation } from "../roles.store";
+import { LANG_DOMAINS } from "frontend/lib/crud-config/lang-domains";
+import { useDomainMessages } from "frontend/lib/crud-config";
+import { useCreateRoleMutation } from "../roles.store";
 
 export function RoleCreate() {
+  const domainMessages = useDomainMessages(LANG_DOMAINS.ACCOUNT.ROLES);
+
   const roleCreationMutation = useCreateRoleMutation();
   const { backLink } = useNavigationStack();
 
   useSetPageDetails({
-    pageTitle: ADMIN_ROLES_CRUD_CONFIG.TEXT_LANG.CREATE,
+    pageTitle: domainMessages.TEXT_LANG.CREATE,
     viewKey: "add-new-role",
     permission: UserPermissions.CAN_MANAGE_PERMISSIONS,
   });
@@ -24,13 +28,10 @@ export function RoleCreate() {
   return (
     <AppLayout>
       <ContentLayout.Center>
-        <SectionBox
-          title={ADMIN_ROLES_CRUD_CONFIG.TEXT_LANG.CREATE}
-          backLink={backLink}
-        >
+        <SectionBox title={domainMessages.TEXT_LANG.CREATE} backLink={backLink}>
           <SchemaForm<IBaseRoleForm>
             onSubmit={roleCreationMutation.mutateAsync}
-            buttonText={ADMIN_ROLES_CRUD_CONFIG.FORM_LANG.CREATE}
+            buttonText={domainMessages.FORM_LANG.CREATE}
             fields={BASE_ROLE_FORM_SCHEMA}
             systemIcon="Plus"
             resetForm

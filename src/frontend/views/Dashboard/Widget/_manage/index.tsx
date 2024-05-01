@@ -11,9 +11,10 @@ import {
   FormSkeleton,
   FormSkeletonSchema,
 } from "frontend/design-system/components/Skeleton/Form";
+import { useDomainMessages } from "frontend/lib/crud-config";
+import { LANG_DOMAINS } from "frontend/lib/crud-config/lang-domains";
 import { DashboardWidgetForm } from "./Form";
 import { useDashboardWidgets } from "../../dashboard.store";
-import { DASHBOARD_WIDGETS_CRUD_CONFIG } from "../../constants";
 
 interface IProps {
   onSave: (data: IWidgetConfig) => Promise<void>;
@@ -25,6 +26,7 @@ export function BaseManageDashboardWidget({ onSave, action }: IProps) {
   const widgetId = useRouteParam("widgetId");
   const activeEntities = useActiveEntities();
   const widgets = useDashboardWidgets(dashboardId);
+  const domainMessages = useDomainMessages(LANG_DOMAINS.DASHBOARD.WIDGETS);
 
   const { canGoBack, goBack, backLink } = useNavigationStack();
 
@@ -47,8 +49,8 @@ export function BaseManageDashboardWidget({ onSave, action }: IProps) {
         <SectionBox
           title={
             action === "create"
-              ? DASHBOARD_WIDGETS_CRUD_CONFIG.TEXT_LANG.CREATE
-              : DASHBOARD_WIDGETS_CRUD_CONFIG.TEXT_LANG.EDIT
+              ? domainMessages.TEXT_LANG.CREATE
+              : domainMessages.TEXT_LANG.EDIT
           }
           backLink={backLink}
         >

@@ -3,7 +3,7 @@ import { Form, Field, useField } from "react-final-form";
 import arrayMutators from "final-form-arrays";
 import { FieldArray } from "react-final-form-arrays";
 import { ACTIONS_ACCESSOR } from "frontend/views/data/Table/useTableColumns";
-import { MAKE_APP_CONFIGURATION_CRUD_CONFIG } from "frontend/hooks/configuration/configuration.constant";
+import { useAppConfigurationDomainMessages } from "frontend/hooks/configuration/configuration.constant";
 import { composeValidators, required } from "frontend/lib/validations";
 import { IFormProps } from "frontend/lib/form/types";
 import { ITableColumn } from "frontend/design-system/components/Table/types";
@@ -123,6 +123,7 @@ export function EntityPersistentQueryForm({
   const columns = tableColumns.filter(
     ({ accessor, filter }) => ACTIONS_ACCESSOR !== accessor && filter
   );
+  const domainMessages = useAppConfigurationDomainMessages("persistent_query");
 
   return (
     <Form
@@ -254,10 +255,7 @@ export function EntityPersistentQueryForm({
             <FormButton
               isMakingRequest={submitting}
               onClick={handleSubmit}
-              text={
-                MAKE_APP_CONFIGURATION_CRUD_CONFIG("persistent_query").FORM_LANG
-                  .UPSERT
-              }
+              text={domainMessages.FORM_LANG.UPSERT}
               disabled={pristine}
               systemIcon="Save"
             />

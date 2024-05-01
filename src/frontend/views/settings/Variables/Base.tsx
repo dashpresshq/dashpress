@@ -3,6 +3,7 @@ import { IntegrationsConfigurationGroup } from "shared/types/integrations";
 import { Card } from "frontend/design-system/components/Card";
 import { Tabs } from "frontend/design-system/components/Tabs";
 import { msg } from "@lingui/macro";
+import { useDomainMessages } from "frontend/lib/crud-config";
 import { ManageCredentialGroup } from "./ManageCredentialGroup";
 import { INTEGRATIONS_GROUP_CRUD_CONFIG } from "./constants";
 
@@ -10,6 +11,14 @@ export function BaseManageVariables() {
   const [currentTab, setCurrentTab] = useState<IntegrationsConfigurationGroup>(
     IntegrationsConfigurationGroup.Constants
   );
+  const constantsDomainMessages = useDomainMessages(
+    INTEGRATIONS_GROUP_CRUD_CONFIG.constants.domainDiction
+  );
+
+  const credentialsDomainMessages = useDomainMessages(
+    INTEGRATIONS_GROUP_CRUD_CONFIG.credentials.domainDiction
+  );
+
   return (
     <Card>
       <Tabs
@@ -20,9 +29,7 @@ export function BaseManageVariables() {
         }
         contents={[
           {
-            label:
-              INTEGRATIONS_GROUP_CRUD_CONFIG.constants.crudConfig.TEXT_LANG
-                .TITLE,
+            label: constantsDomainMessages.TEXT_LANG.TITLE,
             id: IntegrationsConfigurationGroup.Constants,
             content: (
               <ManageCredentialGroup
@@ -32,9 +39,7 @@ export function BaseManageVariables() {
             ),
           },
           {
-            label:
-              INTEGRATIONS_GROUP_CRUD_CONFIG.credentials.crudConfig.TEXT_LANG
-                .TITLE,
+            label: credentialsDomainMessages.TEXT_LANG.TITLE,
             id: IntegrationsConfigurationGroup.Credentials,
             content: (
               <ManageCredentialGroup

@@ -1,6 +1,8 @@
-import { MessageDescriptor, i18n } from "@lingui/core";
 import { msg } from "@lingui/macro";
+import { useLingui } from "@lingui/react";
 import { i18nNoop } from "translations/fake";
+import { MessageDescriptor } from "@lingui/core";
+import { IDomainDiction } from "./types";
 
 export const CRUD_CONFIG_NOT_FOUND = (singular: string) =>
   msg`${singular} could not be retrieved`;
@@ -14,15 +16,13 @@ export const MAKE_ENDPOINTS_CONFIG = (path: string) => ({
   CUSTOM: (id: string, customPath: string) => `${path}/${id}/${customPath}`,
 });
 
-export const MAKE_CRUD_CONFIG = ({
+export const useDomainMessages = ({
   singular: singular$1,
   plural: plural$1,
-}: {
-  singular: MessageDescriptor;
-  plural: MessageDescriptor;
-}) => {
-  const singular = i18n._(singular$1);
-  const plural = i18n._(plural$1);
+}: IDomainDiction) => {
+  const { _ } = useLingui();
+  const singular = _(singular$1);
+  const plural = _(plural$1);
 
   return {
     MUTATION_LANG: {
@@ -30,7 +30,10 @@ export const MAKE_CRUD_CONFIG = ({
       EDIT: msg`${singular} Updated Successfully`,
       DELETE: msg`${singular} Deleted Successfully`,
       SAVED: msg`${singular} Saved Successfully`,
-      CUSTOM: (action: string) => msg`${singular} ${action} Successfully`,
+      CUSTOM: (actionDescriptor: MessageDescriptor) => {
+        const action = _(actionDescriptor);
+        return msg`${singular} ${action} Successfully`;
+      },
       VIEW_DETAILS: msg`Click here to view details`,
     },
     FORM_LANG: {
@@ -57,4 +60,4 @@ export const MAKE_CRUD_CONFIG = ({
   };
 };
 
-export type ICrudConfig = ReturnType<typeof MAKE_CRUD_CONFIG>;
+export type ICrudConfig = ReturnType<typeof useDomainMessages>;

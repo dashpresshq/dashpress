@@ -6,6 +6,7 @@ import { AuthActions } from "frontend/hooks/auth/auth.actions";
 import userEvent from "@testing-library/user-event";
 import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
 import { AppLayout } from "..";
+import { getAppLayout } from "../getLayout";
 
 setupApiHandlers();
 
@@ -80,13 +81,9 @@ describe("AppLayout", () => {
     });
   });
 
-  describe("Sidebar menu", () => {
+  describe("getAppLayout", () => {
     it("should toggle the sidebar and toggle the correct elements", async () => {
-      render(
-        <ApplicationRoot>
-          <AppLayout>Foo</AppLayout>
-        </ApplicationRoot>
-      );
+      render(<ApplicationRoot>{getAppLayout(<p>Foo</p>)}</ApplicationRoot>);
 
       expect(await screen.findByAltText("full logo")).toBeInTheDocument();
       expect(screen.queryByAltText("small logo")).not.toBeInTheDocument();
@@ -124,11 +121,7 @@ describe("AppLayout", () => {
     });
 
     it("should open menu items", async () => {
-      render(
-        <ApplicationRoot>
-          <AppLayout>Foo</AppLayout>
-        </ApplicationRoot>
-      );
+      render(<ApplicationRoot>{getAppLayout(<p>Foo</p>)}</ApplicationRoot>);
 
       await userEvent.click(
         await screen.findByLabelText("Toggle Profile Menu")
@@ -145,12 +138,7 @@ describe("AppLayout", () => {
   describe("Not Signed In", () => {
     it("should redirect to sign in when not authenticated", async () => {
       localStorage.removeItem(AuthActions.JWT_TOKEN_STORAGE_KEY);
-
-      render(
-        <ApplicationRoot>
-          <AppLayout>Foo</AppLayout>
-        </ApplicationRoot>
-      );
+      render(<ApplicationRoot>{getAppLayout(<p>Foo</p>)}</ApplicationRoot>);
 
       await waitFor(() => {
         expect(window.location.replace).toHaveBeenCalledWith("/auth");

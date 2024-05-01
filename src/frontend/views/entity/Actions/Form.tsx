@@ -12,8 +12,9 @@ import { DataEventActions } from "shared/types/data";
 import { msg } from "@lingui/macro";
 import { typescriptSafeObjectDotEntries } from "shared/lib/objects";
 import { i18nNoop } from "translations/fake";
+import { useDomainMessages } from "frontend/lib/crud-config";
+import { LANG_DOMAINS } from "frontend/lib/crud-config/lang-domains";
 import { useIntegrationImplementationsList } from "./form-actions.store";
-import { FORM_ACTION_CRUD_CONFIG } from "./constants";
 
 interface IProps {
   onSubmit: (formAction: IFormAction) => Promise<void>;
@@ -34,6 +35,9 @@ export function ActionForm({
   activatedIntegrations,
   entity,
 }: IProps) {
+  const domainMessages = useDomainMessages(
+    LANG_DOMAINS.INTEGRATIONS.FORM_ACTIONS
+  );
   const integrationsListMap = Object.fromEntries(
     integrationsList.map((action) => [action.key, action])
   );
@@ -131,8 +135,8 @@ export function ActionForm({
     <SchemaForm<IFormAction>
       buttonText={
         formAction === "create"
-          ? FORM_ACTION_CRUD_CONFIG.FORM_LANG.CREATE
-          : FORM_ACTION_CRUD_CONFIG.FORM_LANG.UPDATE
+          ? domainMessages.FORM_LANG.CREATE
+          : domainMessages.FORM_LANG.UPDATE
       }
       initialValues={initialValues$1}
       fields={fields}

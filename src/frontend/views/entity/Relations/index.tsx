@@ -13,7 +13,7 @@ import {
   useUpsertConfigurationMutation,
 } from "frontend/hooks/configuration/configuration.store";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
-import { MAKE_APP_CONFIGURATION_CRUD_CONFIG } from "frontend/hooks/configuration/configuration.constant";
+import { useAppConfigurationDomainMessages } from "frontend/hooks/configuration/configuration.constant";
 import { RelationsSettingsDocumentation } from "frontend/docs/relations";
 import { useChangeRouterParam } from "frontend/lib/routing/useChangeRouterParam";
 import { useRouteParam } from "frontend/lib/routing/useRouteParam";
@@ -45,7 +45,9 @@ export function EntityRelationsSettings() {
   const entityFields = useEntityFields(entity);
   const entityRelationList = useEntityRelationsList(entity);
   const referenceFields = useEntityReferenceFields(entity);
-
+  const domainMessages = useAppConfigurationDomainMessages(
+    "entity_relations_labels"
+  );
   useSetPageDetails({
     pageTitle: RELATIONSHIP_SETTINGS,
     viewKey: ENTITY_CONFIGURATION_VIEW,
@@ -190,9 +192,7 @@ export function EntityRelationsSettings() {
                   <Spacer />
                   <FieldsLabelForm
                     initialValues={entityRelationsLabelsMap.data}
-                    crudConfig={MAKE_APP_CONFIGURATION_CRUD_CONFIG(
-                      "entity_relations_labels"
-                    )}
+                    crudConfig={domainMessages}
                     fields={referenceFields.data.map(({ table }) => table)}
                     onSubmit={upsertEntityRelationsLabelsMutation.mutateAsync}
                   />

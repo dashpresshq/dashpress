@@ -4,6 +4,7 @@ import { IAppliedSchemaFormConfig } from "shared/form-schemas/types";
 import { IntegrationsConfigurationGroup } from "shared/types/integrations";
 import { IKeyValue } from "shared/types/options";
 import { msg } from "@lingui/macro";
+import { useDomainMessages } from "frontend/lib/crud-config";
 import { INTEGRATIONS_GROUP_CRUD_CONFIG } from "./constants";
 
 export const CAPITAL_AND_UNDERSCORE_REGEX = `^[A-Z_]+$`;
@@ -45,6 +46,11 @@ export function KeyValueForm({
   initialValues,
 }: IFormProps<IKeyValue> & { group: IntegrationsConfigurationGroup }) {
   const isCreate = !initialValues;
+
+  const domainMessages = useDomainMessages(
+    INTEGRATIONS_GROUP_CRUD_CONFIG[group].domainDiction
+  );
+
   return (
     <SchemaForm<IKeyValue>
       onSubmit={onSubmit}
@@ -52,8 +58,8 @@ export function KeyValueForm({
       systemIcon={isCreate ? "Plus" : "Save"}
       buttonText={
         isCreate
-          ? INTEGRATIONS_GROUP_CRUD_CONFIG[group].crudConfig.FORM_LANG.CREATE
-          : INTEGRATIONS_GROUP_CRUD_CONFIG[group].crudConfig.FORM_LANG.UPDATE
+          ? domainMessages.FORM_LANG.CREATE
+          : domainMessages.FORM_LANG.UPDATE
       }
       action={isCreate ? "create" : "update"}
       fields={FORM_SCHEMA}

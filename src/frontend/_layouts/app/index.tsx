@@ -16,6 +16,7 @@ import { useAppConfiguration } from "frontend/hooks/configuration/configuration.
 import styled from "styled-components";
 import { useLingui } from "@lingui/react";
 import { DEMO_LINKS } from "./constant";
+import { useAppTheme } from "../useAppTheme";
 
 const HeaderLeft = styled.div`
   text-align: left;
@@ -46,6 +47,8 @@ export function AppLayout({
     store.actionItems,
     store.secondaryActionItems,
   ]);
+
+  useAppTheme();
 
   usePageRequiresPermission(permission);
 

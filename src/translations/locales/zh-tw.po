@@ -13,6 +13,9 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
+msgid ""
+msgstr ""
+
 msgid "[[ name ]] is an invalid date"
 msgstr "[[ name ]] 是無效日期"
 
@@ -178,6 +181,9 @@ msgstr "帳戶資料"
 msgid "Account Was Successfully Setup"
 msgstr "帳戶設定成功"
 
+msgid "Accounts"
+msgstr ""
+
 msgid "Action"
 msgstr "行動"
 
@@ -214,9 +220,7 @@ msgstr "新增內容並選擇"
 msgid "Add New Option"
 msgstr "新增選項"
 
-msgid ""
-"Add new tables through your preferred database editor then restart this "
-"application."
+msgid "Add new tables through your preferred database editor then restart this application."
 msgstr "透過您首選的資料庫編輯器新增資料表，然後重新啟動此應用程式。"
 
 msgid "Add New Validation"
@@ -242,6 +246,12 @@ msgstr "API金鑰"
 
 msgid "App"
 msgstr "應用程式"
+
+msgid "App Navigation"
+msgstr ""
+
+msgid "App Settings"
+msgstr ""
 
 msgid "Are you sure you want to do this?"
 msgstr "你確定你要這麼做嗎？"
@@ -404,6 +414,9 @@ msgstr "完成設定"
 
 msgid "Condition"
 msgstr "狀態"
+
+msgid "Configurations"
+msgstr ""
 
 msgid "Configure"
 msgstr "配置"
@@ -762,9 +775,7 @@ msgstr "流量"
 msgid "Follow us on Twitter"
 msgstr "在推特上關注我們"
 
-msgid ""
-"For security reasons, Please input your account password to reveal "
-"credentials"
+msgid "For security reasons, Please input your account password to reveal credentials"
 msgstr "出於安全考慮，請輸入您的帳戶密碼以洩露憑證"
 
 msgid "Form"
@@ -1307,8 +1318,8 @@ msgstr "秘密存取密鑰"
 msgid "Secrets"
 msgstr "秘密"
 
-msgid "Select {formLabel}"
-msgstr "選擇{formLabel}"
+msgid "Select {0}"
+msgstr ""
 
 msgid "Select Node Type"
 msgstr "選擇節點類型"
@@ -1457,9 +1468,6 @@ msgstr "系統"
 msgid "System Info"
 msgstr "系統資訊"
 
-msgid "System Information"
-msgstr "系統資訊"
-
 msgid "System Settings"
 msgstr "系統設定"
 
@@ -1511,9 +1519,7 @@ msgstr "該實體沒有字段"
 msgid "This entity has no relations"
 msgstr "該實體沒有關係"
 
-msgid ""
-"This flow should be queued and executed asynchronously (recommended for "
-"long running flows, requires Redis)"
+msgid "This flow should be queued and executed asynchronously (recommended for long running flows, requires Redis)"
 msgstr "此流程應排隊並非同步執行（建議用於長時間運行的流程，需要 Redis）"
 
 msgid "This trigger has no workflow attached"

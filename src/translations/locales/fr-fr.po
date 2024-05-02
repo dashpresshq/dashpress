@@ -13,6 +13,9 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
+msgid ""
+msgstr ""
+
 msgid "[[ name ]] is an invalid date"
 msgstr "[[ name ]] est une date invalide"
 
@@ -178,6 +181,9 @@ msgstr "Profil du compte"
 msgid "Account Was Successfully Setup"
 msgstr "Le compte a été configuré avec succès"
 
+msgid "Accounts"
+msgstr ""
+
 msgid "Action"
 msgstr "Action"
 
@@ -194,9 +200,7 @@ msgid "Activating {0}"
 msgstr "Activation de {0}"
 
 msgid "Add fields to this table from your prefer database tool to manage them here"
-msgstr ""
-"Ajoutez des champs à ce tableau à partir de votre outil de base de données "
-"préféré pour les gérer ici"
+msgstr "Ajoutez des champs à ce tableau à partir de votre outil de base de données préféré pour les gérer ici"
 
 msgid "Add Filter"
 msgstr "Ajouter un filtre"
@@ -216,12 +220,8 @@ msgstr "Ajouter un nouveau et sélectionner"
 msgid "Add New Option"
 msgstr "Ajouter une nouvelle option"
 
-msgid ""
-"Add new tables through your preferred database editor then restart this "
-"application."
-msgstr ""
-"Ajoutez de nouvelles tables via votre éditeur de base de données préféré, "
-"puis redémarrez cette application."
+msgid "Add new tables through your preferred database editor then restart this application."
+msgstr "Ajoutez de nouvelles tables via votre éditeur de base de données préféré, puis redémarrez cette application."
 
 msgid "Add New Validation"
 msgstr "Ajouter une nouvelle validation"
@@ -246,6 +246,12 @@ msgstr "clé API"
 
 msgid "App"
 msgstr "Application"
+
+msgid "App Navigation"
+msgstr ""
+
+msgid "App Settings"
+msgstr ""
 
 msgid "Are you sure you want to do this?"
 msgstr "Es-tu sûr de vouloir faire ça?"
@@ -408,6 +414,9 @@ msgstr "Fin de la configuration"
 
 msgid "Condition"
 msgstr "Condition"
+
+msgid "Configurations"
+msgstr ""
 
 msgid "Configure"
 msgstr "Configurer"
@@ -766,12 +775,8 @@ msgstr "Les flux"
 msgid "Follow us on Twitter"
 msgstr "Suivez-nous sur Twitter"
 
-msgid ""
-"For security reasons, Please input your account password to reveal "
-"credentials"
-msgstr ""
-"Pour des raisons de sécurité, veuillez saisir le mot de passe de votre "
-"compte pour révéler les informations d'identification"
+msgid "For security reasons, Please input your account password to reveal credentials"
+msgstr "Pour des raisons de sécurité, veuillez saisir le mot de passe de votre compte pour révéler les informations d'identification"
 
 msgid "Form"
 msgstr "Formulaire"
@@ -1313,8 +1318,8 @@ msgstr "Clé d'accès secrète"
 msgid "Secrets"
 msgstr "Secrets"
 
-msgid "Select {formLabel}"
-msgstr "Sélectionnez {formLabel}"
+msgid "Select {0}"
+msgstr ""
 
 msgid "Select Node Type"
 msgstr "Sélectionnez le type de nœud"
@@ -1389,9 +1394,7 @@ msgid "Show"
 msgstr "Montrer"
 
 msgid "Show Soft Deleted Items And The Restore Button"
-msgstr ""
-"Afficher les éléments supprimés de manière logicielle et le bouton de "
-"restauration"
+msgstr "Afficher les éléments supprimés de manière logicielle et le bouton de restauration"
 
 msgid "Show Up In Roles And Permissions"
 msgstr "Afficher dans les rôles et les autorisations"
@@ -1465,9 +1468,6 @@ msgstr "Système"
 msgid "System Info"
 msgstr "Information système"
 
-msgid "System Information"
-msgstr "Informations système"
-
 msgid "System Settings"
 msgstr "Les paramètres du système"
 
@@ -1519,12 +1519,8 @@ msgstr "Cette entité n'a pas de champs"
 msgid "This entity has no relations"
 msgstr "Cette entité n'a aucune relation"
 
-msgid ""
-"This flow should be queued and executed asynchronously (recommended for "
-"long running flows, requires Redis)"
-msgstr ""
-"Ce flux doit être mis en file d'attente et exécuté de manière asynchrone "
-"(recommandé pour les flux de longue durée, nécessite Redis)"
+msgid "This flow should be queued and executed asynchronously (recommended for long running flows, requires Redis)"
+msgstr "Ce flux doit être mis en file d'attente et exécuté de manière asynchrone (recommandé pour les flux de longue durée, nécessite Redis)"
 
 msgid "This trigger has no workflow attached"
 msgstr "Ce déclencheur n'a aucun workflow associé"

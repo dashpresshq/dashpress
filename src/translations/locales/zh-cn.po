@@ -13,6 +13,8 @@ msgstr ""
 "Plural-Forms: \n"
 "X-Generator: Poedit 3.4.2\n"
 
+msgid ""
+msgstr ""
 
 msgid "[[ name ]] is an invalid date"
 msgstr "[[ name ]]是无效日期"
@@ -179,6 +181,9 @@ msgstr "账号信息"
 msgid "Account Was Successfully Setup"
 msgstr "账户设置成功"
 
+msgid "Accounts"
+msgstr ""
+
 msgid "Action"
 msgstr "动作"
 
@@ -241,6 +246,12 @@ msgstr "Api 密钥"
 
 msgid "App"
 msgstr "APP"
+
+msgid "App Navigation"
+msgstr ""
+
+msgid "App Settings"
+msgstr ""
 
 msgid "Are you sure you want to do this?"
 msgstr "你确定你要这么做吗？"
@@ -403,6 +414,9 @@ msgstr "完成设置"
 
 msgid "Condition"
 msgstr "条件"
+
+msgid "Configurations"
+msgstr ""
 
 msgid "Configure"
 msgstr "设置"
@@ -1304,7 +1318,7 @@ msgstr "访问密钥"
 msgid "Secrets"
 msgstr "密钥"
 
-msgid "Select {formLabel}"
+msgid "Select {0}"
 msgstr ""
 
 msgid "Select Node Type"

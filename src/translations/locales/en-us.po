@@ -13,6 +13,9 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
+msgid ""
+msgstr "/+Z5u4"
+
 msgid "[[ name ]] is an invalid date"
 msgstr "[[ name ]] is an invalid date"
 
@@ -178,6 +181,9 @@ msgstr "Account Profile"
 msgid "Account Was Successfully Setup"
 msgstr "Account Was Successfully Setup"
 
+msgid "Accounts"
+msgstr "Accounts"
+
 msgid "Action"
 msgstr "Action"
 
@@ -240,6 +246,12 @@ msgstr "API Key"
 
 msgid "App"
 msgstr "App"
+
+msgid "App Navigation"
+msgstr "App Navigation"
+
+msgid "App Settings"
+msgstr "App Settings"
 
 msgid "Are you sure you want to do this?"
 msgstr "Are you sure you want to do this?"
@@ -402,6 +414,9 @@ msgstr "Completing Setup"
 
 msgid "Condition"
 msgstr "Condition"
+
+msgid "Configurations"
+msgstr "Configurations"
 
 msgid "Configure"
 msgstr "Configure"
@@ -1303,8 +1318,8 @@ msgstr "Secret Access Key"
 msgid "Secrets"
 msgstr "Secrets"
 
-msgid "Select {formLabel}"
-msgstr "Select {formLabel}"
+msgid "Select {0}"
+msgstr "Select {0}"
 
 msgid "Select Node Type"
 msgstr "Select Node Type"
@@ -1452,9 +1467,6 @@ msgstr "System"
 
 msgid "System Info"
 msgstr "System Info"
-
-msgid "System Information"
-msgstr "System Information"
 
 msgid "System Settings"
 msgstr "System Settings"

@@ -13,6 +13,9 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
+msgid ""
+msgstr ""
+
 msgid "[[ name ]] is an invalid date"
 msgstr "[[ name ]]은(는) 잘못된 날짜입니다."
 
@@ -178,6 +181,9 @@ msgstr "계정 프로필"
 msgid "Account Was Successfully Setup"
 msgstr "계정이 성공적으로 설정되었습니다"
 
+msgid "Accounts"
+msgstr ""
+
 msgid "Action"
 msgstr "행동"
 
@@ -214,9 +220,7 @@ msgstr "새로 추가하고 선택"
 msgid "Add New Option"
 msgstr "새 옵션 추가"
 
-msgid ""
-"Add new tables through your preferred database editor then restart this "
-"application."
+msgid "Add new tables through your preferred database editor then restart this application."
 msgstr "선호하는 데이터베이스 편집기를 통해 새 테이블을 추가한 후 이 애플리케이션을 다시 시작하세요."
 
 msgid "Add New Validation"
@@ -242,6 +246,12 @@ msgstr "API 키"
 
 msgid "App"
 msgstr "앱"
+
+msgid "App Navigation"
+msgstr ""
+
+msgid "App Settings"
+msgstr ""
 
 msgid "Are you sure you want to do this?"
 msgstr "정말로 이 작업을 수행하시겠습니까?"
@@ -404,6 +414,9 @@ msgstr "설정 완료 중"
 
 msgid "Condition"
 msgstr "상태"
+
+msgid "Configurations"
+msgstr ""
 
 msgid "Configure"
 msgstr "구성"
@@ -762,9 +775,7 @@ msgstr "흐름"
 msgid "Follow us on Twitter"
 msgstr "트위터에서 우리를 팔로우하세요"
 
-msgid ""
-"For security reasons, Please input your account password to reveal "
-"credentials"
+msgid "For security reasons, Please input your account password to reveal credentials"
 msgstr "보안상의 이유로 자격 증명을 공개하려면 계정 비밀번호를 입력하세요."
 
 msgid "Form"
@@ -966,7 +977,7 @@ msgid "Loop"
 msgstr "고리"
 
 msgid "Manage {plural}"
-msgstr "{plural} 관리""
+msgstr "{plural} 관리\""
 
 msgid "Manage {title}"
 msgstr "{title} 관리"
@@ -1307,8 +1318,8 @@ msgstr "비밀 액세스 키"
 msgid "Secrets"
 msgstr "비밀"
 
-msgid "Select {formLabel}"
-msgstr "{formLabel}을 선택하세요."
+msgid "Select {0}"
+msgstr ""
 
 msgid "Select Node Type"
 msgstr "노드 유형 선택"
@@ -1457,9 +1468,6 @@ msgstr "체계"
 msgid "System Info"
 msgstr "시스템 정보"
 
-msgid "System Information"
-msgstr "시스템 정보"
-
 msgid "System Settings"
 msgstr "환경 설정"
 
@@ -1511,9 +1519,7 @@ msgstr "이 엔터티에는 필드가 없습니다."
 msgid "This entity has no relations"
 msgstr "이 엔터티는 관계가 없습니다."
 
-msgid ""
-"This flow should be queued and executed asynchronously (recommended for "
-"long running flows, requires Redis)"
+msgid "This flow should be queued and executed asynchronously (recommended for long running flows, requires Redis)"
 msgstr "이 흐름은 대기열에 추가되고 비동기식으로 실행되어야 합니다(장기 실행 흐름에 권장되며 Redis 필요)."
 
 msgid "This trigger has no workflow attached"

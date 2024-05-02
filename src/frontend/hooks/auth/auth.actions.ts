@@ -1,7 +1,8 @@
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
 import { StorageService, TemporayStorageService } from "frontend/lib/storage";
 import { STORAGE_CONSTANTS } from "frontend/lib/storage/constants";
-import { noop } from "shared/lib/noop";
+import { useMemo } from "react";
+import languages from "translations/languages";
 import { PORTAL_GUEST_ROUTES } from "./portal";
 
 const JWT_TOKEN_STORAGE_KEY = "__auth-token__";
@@ -17,6 +18,16 @@ const removeAuthToken = (): void => {
   TemporayStorageService.removeString(JWT_TOKEN_STORAGE_KEY);
 };
 
+const replaceWithLocale = (path: string) => {
+  const pathSplit = window.location.pathname.split("/");
+  const maybeLocale = pathSplit[1];
+  let pathWithLocale = path;
+  if (languages.map((language) => language.locale).includes(maybeLocale)) {
+    pathWithLocale = `/${maybeLocale}/${path}`;
+  }
+  window.location.replace(pathWithLocale);
+};
+
 export const AuthActions = {
   JWT_TOKEN_STORAGE_KEY,
   getAuthToken,
@@ -28,8 +39,7 @@ export const AuthActions = {
     }
   },
   removeAuthToken,
-  signOut: (from: string) => {
-    noop(from);
+  signOut: () => {
     removeAuthToken();
     TemporayStorageService.setString(
       STORAGE_CONSTANTS.PREVIOUS_AUTH_URL,
@@ -45,10 +55,10 @@ export const AuthActions = {
     ) {
       return;
     }
-    window.location.replace(NAVIGATION_LINKS.AUTH_SIGNIN);
+    replaceWithLocale(NAVIGATION_LINKS.AUTH_SIGNIN);
   },
   signIn: () => {
-    window.location.replace(
+    replaceWithLocale(
       // TemporayStorageService.getString(STORAGE_CONSTANTS.PREVIOUS_AUTH_URL) ||
       NAVIGATION_LINKS.DASHBOARD.HOME
     );
@@ -56,5 +66,10 @@ export const AuthActions = {
 };
 
 export const useIsUserAutenticated = () => {
-  return AuthActions.isAuthenticated();
+  return useMemo(() => {
+    if (typeof window !== "undefined") {
+      return AuthActions.isAuthenticated();
+    }
+    return false;
+  }, [typeof window]);
 };

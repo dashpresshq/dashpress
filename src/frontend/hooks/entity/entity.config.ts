@@ -129,7 +129,7 @@ export function useEntityFieldValidations(entity: string) {
             ...validation,
             errorMessage:
               preSelectedValidationMap[validation.validationType]
-                .errorMessage || validation.errorMessage,
+                ?.errorMessage || validation.errorMessage,
           };
         });
       };

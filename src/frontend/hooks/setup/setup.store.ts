@@ -25,7 +25,9 @@ export function useSetupCheck(config: ISetupCheckConfig[]) {
   useEffect(() => {
     config.forEach((configItem) => {
       if (data[configItem.key] === configItem.value) {
-        router.replace(configItem.url);
+        router.replace(configItem.url, configItem.url, {
+          locale: router.locale,
+        });
       }
     });
   }, [data]);

@@ -1,6 +1,7 @@
 import styled, { css } from "styled-components";
 import Link from "next/link";
 import {
+  HeaderMenuItemType,
   INavigationMenuItem,
   NavigationMenuItemType,
   SystemLinks,
@@ -15,28 +16,55 @@ import { useThemeColorShade } from "frontend/design-system/theme/useTheme";
 import { useNavigationStack } from "frontend/lib/routing/useNavigationStack";
 import { ActionIntegrations } from "shared/types/actions";
 import { SystemIcon } from "frontend/design-system/Icons/System";
+import { MessageDescriptor } from "@lingui/core";
+import { msg } from "@lingui/macro";
+import { fakeMessageDescriptor } from "translations/fake";
+import { useLingui } from "@lingui/react";
 import { PORTAL_SYSTEM_LINK_CONFIG_LINKS } from "./portal";
 
 const SYSTEM_LINKS_CONFIG_MAP: Record<
   SystemLinks,
   {
     link: string;
+    title: MessageDescriptor;
   }
 > = {
   [SystemLinks.Settings]: {
     link: NAVIGATION_LINKS.SETTINGS.DEFAULT,
+    title: msg`App Settings`,
   },
   [SystemLinks.Home]: {
     link: NAVIGATION_LINKS.DASHBOARD.HOME,
+    title: msg`Home`,
   },
   [SystemLinks.Roles]: {
     link: NAVIGATION_LINKS.ROLES.LIST,
+    title: msg`Roles`,
   },
   [SystemLinks.Users]: {
     link: NAVIGATION_LINKS.USERS.LIST,
+    title: msg`Users`,
   },
   [SystemLinks.Integrations]: {
     link: NAVIGATION_LINKS.INTEGRATIONS.ACTIONS(ActionIntegrations.HTTP),
+    title: msg`Integrations`,
+  },
+};
+
+const HEADER_MENU_CONFIG_MAP: Record<
+  HeaderMenuItemType,
+  {
+    title: MessageDescriptor;
+  }
+> = {
+  [HeaderMenuItemType.Accounts]: {
+    title: msg`Accounts`,
+  },
+  [HeaderMenuItemType.AppNavigation]: {
+    title: msg`App Navigation`,
+  },
+  [HeaderMenuItemType.Configurations]: {
+    title: msg`Configurations`,
   },
 };
 
@@ -125,24 +153,35 @@ interface IProp {
   setActiveItem: (depth: number, value: string) => void;
 }
 
-const getNavigationTypeLink = (
-  type: NavigationMenuItemType,
-  link?: string
-): string => {
+const getNavigationDetails = ({
+  title,
+  type,
+  link,
+}: {
+  type: NavigationMenuItemType;
+  title: string;
+  link?: string;
+}): { link: string; title: MessageDescriptor } => {
   switch (type) {
     case NavigationMenuItemType.Header:
-      return "#";
+      return { link: "#", title: HEADER_MENU_CONFIG_MAP[link].title };
     case NavigationMenuItemType.ExternalLink:
-      return link;
+      return { link, title: fakeMessageDescriptor(title) };
     case NavigationMenuItemType.Dashboard:
-      return NAVIGATION_LINKS.DASHBOARD.CUSTOM.VIEW(link);
+      return {
+        link: NAVIGATION_LINKS.DASHBOARD.CUSTOM.VIEW(link),
+        title: fakeMessageDescriptor(title),
+      };
     case NavigationMenuItemType.Entities:
-      return NAVIGATION_LINKS.ENTITY.TABLE(link);
+      return {
+        link: NAVIGATION_LINKS.ENTITY.TABLE(link),
+        title: fakeMessageDescriptor(title),
+      };
     case NavigationMenuItemType.System:
       return (
         { ...SYSTEM_LINKS_CONFIG_MAP, ...PORTAL_SYSTEM_LINK_CONFIG_LINKS }[
           link as SystemLinks
-        ]?.link || "/"
+        ] || { link: "/", title: fakeMessageDescriptor(title) }
       );
   }
 };
@@ -156,87 +195,97 @@ export function RenderNavigation({
   activeItem,
 }: IProp) {
   const { clear: clearBreadCrumbStack } = useNavigationStack();
-
+  const { _ } = useLingui();
   const getBackgroundColor = useThemeColorShade();
 
   return (
     <LeftSideNavMenu>
-      {navigation.map(({ title, icon, type, link, id, children }) => {
-        const isActive = activeItem[depth] === id;
+      {navigation.map(
+        ({ title: title$1, icon, type, link: link$1, id, children }) => {
+          const isActive = activeItem[depth] === id;
 
-        const menuIcon = depth === 1 && (
-          <SystemIcon strokeWidth={isActive ? 2 : 1} icon={icon} size={20} />
-        );
+          const { link, title: title$2 } = getNavigationDetails({
+            type,
+            link: link$1,
+            title: title$1,
+          });
 
-        return (
-          <LeftSideNavMenuList key={id}>
-            {/* eslint-disable-next-line no-nested-ternary */}
-            {type === NavigationMenuItemType.Header ? (
-              <NavHeader $isFullWidth={isFullWidth}>{title}</NavHeader>
-            ) : children && children.length > 0 ? (
-              <>
+          const title = _(title$2);
+
+          const menuIcon = depth === 1 && (
+            <SystemIcon strokeWidth={isActive ? 2 : 1} icon={icon} size={20} />
+          );
+
+          return (
+            <LeftSideNavMenuList key={id}>
+              {/* eslint-disable-next-line no-nested-ternary */}
+              {type === NavigationMenuItemType.Header ? (
+                <NavHeader $isFullWidth={isFullWidth}>{title}</NavHeader>
+              ) : children && children.length > 0 ? (
+                <>
+                  <LeftSideNavMenuListAnchor
+                    as={PlainButton}
+                    $isActive={false}
+                    $depth={depth}
+                    $hoverColor={getBackgroundColor("primary-color", 45)}
+                    onClick={() => {
+                      clearBreadCrumbStack();
+                      setIsFullWidth(true);
+                      setActiveItem(depth, isActive ? "" : id);
+                    }}
+                  >
+                    {menuIcon}
+                    {isFullWidth && (
+                      <Stack
+                        $justify="space-between"
+                        $spacing={0}
+                        $align="center"
+                      >
+                        <NavLabel $isFullWidth={isFullWidth}>{title}</NavLabel>
+                        <SubMenuArrow
+                          $isFullWidth={isFullWidth}
+                          size={16}
+                          $isActive={isActive}
+                        />
+                      </Stack>
+                    )}
+                  </LeftSideNavMenuListAnchor>
+                  {isActive && isFullWidth && (
+                    <RenderNavigation
+                      setIsFullWidth={setIsFullWidth}
+                      navigation={children}
+                      isFullWidth={isFullWidth}
+                      depth={depth + 1}
+                      activeItem={activeItem}
+                      setActiveItem={setActiveItem}
+                    />
+                  )}
+                </>
+              ) : (
                 <LeftSideNavMenuListAnchor
-                  as={PlainButton}
-                  $isActive={false}
+                  as={Link}
+                  href={link}
+                  $isActive={isActive}
                   $depth={depth}
-                  $hoverColor={getBackgroundColor("primary-color", 45)}
                   onClick={() => {
                     clearBreadCrumbStack();
-                    setIsFullWidth(true);
-                    setActiveItem(depth, isActive ? "" : id);
+                    setActiveItem(depth, id);
                   }}
+                  target={
+                    type === NavigationMenuItemType.ExternalLink
+                      ? "_blank"
+                      : undefined
+                  }
+                  $hoverColor={getBackgroundColor("primary-color", 45)}
                 >
-                  {menuIcon}
-                  {isFullWidth && (
-                    <Stack
-                      $justify="space-between"
-                      $spacing={0}
-                      $align="center"
-                    >
-                      <NavLabel $isFullWidth={isFullWidth}>{title}</NavLabel>
-                      <SubMenuArrow
-                        $isFullWidth={isFullWidth}
-                        size={16}
-                        $isActive={isActive}
-                      />
-                    </Stack>
-                  )}
+                  {icon && menuIcon}
+                  <NavLabel $isFullWidth={isFullWidth}>{title}</NavLabel>
                 </LeftSideNavMenuListAnchor>
-                {isActive && isFullWidth && (
-                  <RenderNavigation
-                    setIsFullWidth={setIsFullWidth}
-                    navigation={children}
-                    isFullWidth={isFullWidth}
-                    depth={depth + 1}
-                    activeItem={activeItem}
-                    setActiveItem={setActiveItem}
-                  />
-                )}
-              </>
-            ) : (
-              <LeftSideNavMenuListAnchor
-                as={Link}
-                href={getNavigationTypeLink(type, link)}
-                $isActive={isActive}
-                $depth={depth}
-                onClick={() => {
-                  clearBreadCrumbStack();
-                  setActiveItem(depth, id);
-                }}
-                target={
-                  type === NavigationMenuItemType.ExternalLink
-                    ? "_blank"
-                    : undefined
-                }
-                $hoverColor={getBackgroundColor("primary-color", 45)}
-              >
-                {icon && menuIcon}
-                <NavLabel $isFullWidth={isFullWidth}>{title}</NavLabel>
-              </LeftSideNavMenuListAnchor>
-            )}
-          </LeftSideNavMenuList>
-        );
-      })}
+              )}
+            </LeftSideNavMenuList>
+          );
+        }
+      )}
     </LeftSideNavMenu>
   );
 }

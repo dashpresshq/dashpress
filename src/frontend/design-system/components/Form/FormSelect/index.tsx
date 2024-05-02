@@ -80,7 +80,7 @@ export const FormSelect = (props: IFormSelect) => {
   const selectDataWithDefault = [
     {
       value: nullable ? null : "",
-      label: defaultLabel || `--- ${_(msg`Select ${formLabel}`)} ---`,
+      label: defaultLabel || `--- ${_(msg`Select ${_(formLabel)}`)} ---`,
     },
     ...selectData.map(({ value, label }) => ({ value, label: _(label) })),
   ];

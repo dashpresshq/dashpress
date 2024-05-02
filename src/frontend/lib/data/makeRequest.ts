@@ -28,7 +28,7 @@ const handleRequestError = async (response: Response, errorMessage: string) => {
 
   if ([401, 400].includes(response.status)) {
     if (error.errorCode === REQUEST_ERROR_CODES.NOT_AUTHENTICATED) {
-      AuthActions.signOut("makeRequest");
+      AuthActions.signOut();
     }
     if (error.errorCode === REQUEST_ERROR_CODES.ALREADY_AUTHENTICATED) {
       AuthActions.signIn();

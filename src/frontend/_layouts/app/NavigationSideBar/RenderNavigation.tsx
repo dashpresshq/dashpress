@@ -164,7 +164,11 @@ const getNavigationDetails = ({
 }): { link: string; title: MessageDescriptor } => {
   switch (type) {
     case NavigationMenuItemType.Header:
-      return { link: "#", title: HEADER_MENU_CONFIG_MAP[link].title };
+      return {
+        link: "#",
+        title:
+          HEADER_MENU_CONFIG_MAP[link]?.title || fakeMessageDescriptor(title),
+      };
     case NavigationMenuItemType.ExternalLink:
       return { link, title: fakeMessageDescriptor(title) };
     case NavigationMenuItemType.Dashboard:

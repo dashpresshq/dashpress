@@ -54,7 +54,7 @@ describe("pages/setup/user", () => {
     );
 
     await waitFor(() => {
-      expect(replaceMock).toHaveBeenLastCalledWith("/");
+      expect(replaceMock).toHaveBeenLastCalledWith("/", "/", { locale: "en" });
     });
   });
 });

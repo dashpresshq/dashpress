@@ -42,7 +42,11 @@ describe("pages/setup/user", () => {
       </ApplicationRoot>
     );
     await waitFor(() => {
-      expect(replaceMock).toHaveBeenCalledWith("/setup/credentials");
+      expect(replaceMock).toHaveBeenCalledWith(
+        "/setup/credentials",
+        "/setup/credentials",
+        { locale: "en" }
+      );
     });
   });
 });

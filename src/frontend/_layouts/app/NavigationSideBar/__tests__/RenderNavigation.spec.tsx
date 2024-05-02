@@ -74,7 +74,7 @@ describe("<RenderNavigation />", () => {
 
     expect(await screen.findByText("Header")).toBeInTheDocument();
 
-    expect(screen.getByRole("link", { name: "Settings" })).toHaveAttribute(
+    expect(screen.getByRole("link", { name: "App Settings" })).toHaveAttribute(
       "href",
       "/admin/settings/entities"
     );

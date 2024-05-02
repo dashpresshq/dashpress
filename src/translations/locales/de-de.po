@@ -13,6 +13,9 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
+msgid ""
+msgstr ""
+
 msgid "[[ name ]] is an invalid date"
 msgstr "[[ name ]] ist ein ungültiges Datum"
 
@@ -178,6 +181,9 @@ msgstr "Konto Profil"
 msgid "Account Was Successfully Setup"
 msgstr "Das Konto wurde erfolgreich eingerichtet"
 
+msgid "Accounts"
+msgstr ""
+
 msgid "Action"
 msgstr "Aktion"
 
@@ -194,9 +200,7 @@ msgid "Activating {0}"
 msgstr "{0} wird aktiviert"
 
 msgid "Add fields to this table from your prefer database tool to manage them here"
-msgstr ""
-"Fügen Sie Felder aus Ihrem bevorzugten Datenbanktool zu dieser Tabelle "
-"hinzu, um sie hier zu verwalten"
+msgstr "Fügen Sie Felder aus Ihrem bevorzugten Datenbanktool zu dieser Tabelle hinzu, um sie hier zu verwalten"
 
 msgid "Add Filter"
 msgstr "Filter hinzufügen"
@@ -216,12 +220,8 @@ msgstr "Neu hinzufügen und auswählen"
 msgid "Add New Option"
 msgstr "Neue Option hinzufügen"
 
-msgid ""
-"Add new tables through your preferred database editor then restart this "
-"application."
-msgstr ""
-"Fügen Sie neue Tabellen über Ihren bevorzugten Datenbankeditor hinzu und "
-"starten Sie dann diese Anwendung neu."
+msgid "Add new tables through your preferred database editor then restart this application."
+msgstr "Fügen Sie neue Tabellen über Ihren bevorzugten Datenbankeditor hinzu und starten Sie dann diese Anwendung neu."
 
 msgid "Add New Validation"
 msgstr "Neue Validierung hinzufügen"
@@ -246,6 +246,12 @@ msgstr "API-Schlüssel"
 
 msgid "App"
 msgstr "App"
+
+msgid "App Navigation"
+msgstr ""
+
+msgid "App Settings"
+msgstr ""
 
 msgid "Are you sure you want to do this?"
 msgstr "Sind Sie sicher, dass Sie dies tun möchten?"
@@ -408,6 +414,9 @@ msgstr "Abschluss der Einrichtung"
 
 msgid "Condition"
 msgstr "Zustand"
+
+msgid "Configurations"
+msgstr ""
 
 msgid "Configure"
 msgstr "Konfigurieren"
@@ -766,12 +775,8 @@ msgstr "Fließt"
 msgid "Follow us on Twitter"
 msgstr "Folge uns auf Twitter"
 
-msgid ""
-"For security reasons, Please input your account password to reveal "
-"credentials"
-msgstr ""
-"Aus Sicherheitsgründen geben Sie bitte Ihr Kontopasswort ein, um Ihre "
-"Anmeldeinformationen anzuzeigen"
+msgid "For security reasons, Please input your account password to reveal credentials"
+msgstr "Aus Sicherheitsgründen geben Sie bitte Ihr Kontopasswort ein, um Ihre Anmeldeinformationen anzuzeigen"
 
 msgid "Form"
 msgstr "Bilden"
@@ -1313,8 +1318,8 @@ msgstr "Geheimer Zugangsschlüssel"
 msgid "Secrets"
 msgstr "Geheimnisse"
 
-msgid "Select {formLabel}"
-msgstr "Wählen Sie {formLabel}"
+msgid "Select {0}"
+msgstr ""
 
 msgid "Select Node Type"
 msgstr "Wählen Sie Knotentyp aus"
@@ -1389,9 +1394,7 @@ msgid "Show"
 msgstr "Zeigen"
 
 msgid "Show Soft Deleted Items And The Restore Button"
-msgstr ""
-"Vorläufig gelöschte Elemente und die Schaltfläche „Wiederherstellen“ "
-"anzeigen"
+msgstr "Vorläufig gelöschte Elemente und die Schaltfläche „Wiederherstellen“ anzeigen"
 
 msgid "Show Up In Roles And Permissions"
 msgstr "Erscheinen in Rollen und Berechtigungen"
@@ -1465,9 +1468,6 @@ msgstr "System"
 msgid "System Info"
 msgstr "Systeminformationen"
 
-msgid "System Information"
-msgstr "System Information"
-
 msgid "System Settings"
 msgstr "Systemeinstellungen"
 
@@ -1519,12 +1519,8 @@ msgstr "Diese Entität hat keine Felder"
 msgid "This entity has no relations"
 msgstr "Diese Entität hat keine Beziehungen"
 
-msgid ""
-"This flow should be queued and executed asynchronously (recommended for "
-"long running flows, requires Redis)"
-msgstr ""
-"Dieser Flow sollte in die Warteschlange gestellt und asynchron ausgeführt "
-"werden (empfohlen für lang laufende Flows, erfordert Redis)."
+msgid "This flow should be queued and executed asynchronously (recommended for long running flows, requires Redis)"
+msgstr "Dieser Flow sollte in die Warteschlange gestellt und asynchron ausgeführt werden (empfohlen für lang laufende Flows, erfordert Redis)."
 
 msgid "This trigger has no workflow attached"
 msgstr "Diesem Auslöser ist kein Workflow zugeordnet"

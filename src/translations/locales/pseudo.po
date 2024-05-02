@@ -13,6 +13,9 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
+msgid ""
+msgstr ""
+
 msgid "[[ name ]] is an invalid date"
 msgstr "[[ name ]] is an invalid date"
 
@@ -178,6 +181,9 @@ msgstr ""
 msgid "Account Was Successfully Setup"
 msgstr ""
 
+msgid "Accounts"
+msgstr ""
+
 msgid "Action"
 msgstr ""
 
@@ -214,9 +220,7 @@ msgstr ""
 msgid "Add New Option"
 msgstr ""
 
-msgid ""
-"Add new tables through your preferred database editor then restart this "
-"application."
+msgid "Add new tables through your preferred database editor then restart this application."
 msgstr ""
 
 msgid "Add New Validation"
@@ -241,6 +245,12 @@ msgid "API Key"
 msgstr ""
 
 msgid "App"
+msgstr ""
+
+msgid "App Navigation"
+msgstr ""
+
+msgid "App Settings"
 msgstr ""
 
 msgid "Are you sure you want to do this?"
@@ -403,6 +413,9 @@ msgid "Completing Setup"
 msgstr ""
 
 msgid "Condition"
+msgstr ""
+
+msgid "Configurations"
 msgstr ""
 
 msgid "Configure"
@@ -762,9 +775,7 @@ msgstr ""
 msgid "Follow us on Twitter"
 msgstr ""
 
-msgid ""
-"For security reasons, Please input your account password to reveal "
-"credentials"
+msgid "For security reasons, Please input your account password to reveal credentials"
 msgstr ""
 
 msgid "Form"
@@ -1307,7 +1318,7 @@ msgstr ""
 msgid "Secrets"
 msgstr ""
 
-msgid "Select {formLabel}"
+msgid "Select {0}"
 msgstr ""
 
 msgid "Select Node Type"
@@ -1457,9 +1468,6 @@ msgstr ""
 msgid "System Info"
 msgstr ""
 
-msgid "System Information"
-msgstr ""
-
 msgid "System Settings"
 msgstr ""
 
@@ -1511,9 +1519,7 @@ msgstr ""
 msgid "This entity has no relations"
 msgstr ""
 
-msgid ""
-"This flow should be queued and executed asynchronously (recommended for "
-"long running flows, requires Redis)"
+msgid "This flow should be queued and executed asynchronously (recommended for long running flows, requires Redis)"
 msgstr ""
 
 msgid "This trigger has no workflow attached"

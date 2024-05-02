@@ -13,6 +13,9 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
+msgid ""
+msgstr ""
+
 msgid "[[ name ]] is an invalid date"
 msgstr "[[ name ]] é uma data inválida"
 
@@ -178,6 +181,9 @@ msgstr "Perfil da conta"
 msgid "Account Was Successfully Setup"
 msgstr "A conta foi configurada com sucesso"
 
+msgid "Accounts"
+msgstr ""
+
 msgid "Action"
 msgstr "Ação"
 
@@ -194,9 +200,7 @@ msgid "Activating {0}"
 msgstr "Ativando {0}"
 
 msgid "Add fields to this table from your prefer database tool to manage them here"
-msgstr ""
-"Adicione campos a esta tabela da sua ferramenta de banco de dados preferida "
-"para gerenciá-los aqui"
+msgstr "Adicione campos a esta tabela da sua ferramenta de banco de dados preferida para gerenciá-los aqui"
 
 msgid "Add Filter"
 msgstr "Adicionar filtro"
@@ -216,12 +220,8 @@ msgstr "Adicionar novo e selecionar"
 msgid "Add New Option"
 msgstr "Adicionar nova opção"
 
-msgid ""
-"Add new tables through your preferred database editor then restart this "
-"application."
-msgstr ""
-"Adicione novas tabelas por meio do editor de banco de dados de sua "
-"preferência e reinicie este aplicativo."
+msgid "Add new tables through your preferred database editor then restart this application."
+msgstr "Adicione novas tabelas por meio do editor de banco de dados de sua preferência e reinicie este aplicativo."
 
 msgid "Add New Validation"
 msgstr "Adicionar nova validação"
@@ -246,6 +246,12 @@ msgstr "Chave API"
 
 msgid "App"
 msgstr "Aplicativo"
+
+msgid "App Navigation"
+msgstr ""
+
+msgid "App Settings"
+msgstr ""
 
 msgid "Are you sure you want to do this?"
 msgstr "Você tem certeza de que quer fazer isso?"
@@ -408,6 +414,9 @@ msgstr "Concluindo a configuração"
 
 msgid "Condition"
 msgstr "Doença"
+
+msgid "Configurations"
+msgstr ""
 
 msgid "Configure"
 msgstr "Configurar"
@@ -766,12 +775,8 @@ msgstr "Fluxos"
 msgid "Follow us on Twitter"
 msgstr "Siga-nos no Twitter"
 
-msgid ""
-"For security reasons, Please input your account password to reveal "
-"credentials"
-msgstr ""
-"Por motivos de segurança, insira a senha da sua conta para revelar as "
-"credenciais"
+msgid "For security reasons, Please input your account password to reveal credentials"
+msgstr "Por motivos de segurança, insira a senha da sua conta para revelar as credenciais"
 
 msgid "Form"
 msgstr "Forma"
@@ -1313,8 +1318,8 @@ msgstr "Chave de acesso secreta"
 msgid "Secrets"
 msgstr "Segredos"
 
-msgid "Select {formLabel}"
-msgstr "Selecione {formLabel}"
+msgid "Select {0}"
+msgstr ""
 
 msgid "Select Node Type"
 msgstr "Selecione o tipo de nó"
@@ -1463,9 +1468,6 @@ msgstr "Sistema"
 msgid "System Info"
 msgstr "Informação do sistema"
 
-msgid "System Information"
-msgstr "Informação do sistema"
-
 msgid "System Settings"
 msgstr "Configurações de sistema"
 
@@ -1517,12 +1519,8 @@ msgstr "Esta entidade não possui campos"
 msgid "This entity has no relations"
 msgstr "Esta entidade não tem relações"
 
-msgid ""
-"This flow should be queued and executed asynchronously (recommended for "
-"long running flows, requires Redis)"
-msgstr ""
-"Este fluxo deve ser enfileirado e executado de forma assíncrona "
-"(recomendado para fluxos de longa execução, requer Redis)"
+msgid "This flow should be queued and executed asynchronously (recommended for long running flows, requires Redis)"
+msgstr "Este fluxo deve ser enfileirado e executado de forma assíncrona (recomendado para fluxos de longa execução, requer Redis)"
 
 msgid "This trigger has no workflow attached"
 msgstr "Este gatilho não tem fluxo de trabalho anexado"

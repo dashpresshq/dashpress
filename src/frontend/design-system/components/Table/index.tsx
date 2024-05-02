@@ -77,9 +77,6 @@ export function Table<T extends unknown>({
 
   const internalColumns = useInternalColumns(columns);
 
-
-
-
   const tableDataStringified = React.useMemo(() => {
     return data.data.map((datum) =>
       Object.fromEntries(
@@ -105,14 +102,6 @@ export function Table<T extends unknown>({
     getSortedRowModel: getSortedRowModel(),
     getCoreRowModel: getCoreRowModel(),
   });
-
-  table.getRowModel().rows.map((row) => {
-    row.getVisibleCells().map((cell) => {
-      Object.entries(cell.getContext().row.original).map(([key, value]) => {
-        typeof value === 'object' ? cell.getContext().row.original[key] = JSON.stringify(value) : value
-      })
-    })
-  })
 
   useSyncTableState(
     table,

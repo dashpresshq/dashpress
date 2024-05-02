@@ -8,6 +8,12 @@ export enum NavigationMenuItemType {
   System = "system",
 }
 
+export enum HeaderMenuItemType {
+  Accounts = "accounts",
+  AppNavigation = "app-navigation",
+  Configurations = "configurations",
+}
+
 export enum SystemLinks {
   Settings = "settings",
   Home = "home",

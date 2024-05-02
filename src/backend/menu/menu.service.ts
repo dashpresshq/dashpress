@@ -1,5 +1,6 @@
 import { nanoid } from "nanoid";
 import {
+  HeaderMenuItemType,
   INavigationMenuItem,
   NavigationMenuItemType,
   SystemLinks,
@@ -93,45 +94,38 @@ export class NavigationMenuApiService implements IBaseNavigationMenuApiService {
     navItems = navItems.concat([
       {
         id: nanoid(),
-        title: "Entities",
+        title: "App Navigation",
         icon: "File",
-        type: NavigationMenuItemType.System,
-        link: SystemLinks.Home,
-        children: entitiesToShow.map((entity) => ({
-          id: nanoid(),
-          title:
-            dictionMap[entity.value].plural || userFriendlyCase(entity.label),
-          icon: "File",
-          type: NavigationMenuItemType.Entities,
-          link: entity.value,
-        })),
+        type: NavigationMenuItemType.Header,
+        link: HeaderMenuItemType.AppNavigation,
       },
     ]);
+
+    navItems = navItems.concat(
+      entitiesToShow.map((entity) => ({
+        id: nanoid(),
+        title:
+          dictionMap[entity.value].plural || userFriendlyCase(entity.label),
+        icon: "File",
+        type: NavigationMenuItemType.Entities,
+        link: entity.value,
+      }))
+    );
 
     navItems = navItems.concat([
       {
         id: nanoid(),
-        title: "Integrations",
-        icon: "Zap",
-        type: NavigationMenuItemType.System,
-        link: SystemLinks.Integrations,
+        title: "Accounts",
+        icon: "Users",
+        type: NavigationMenuItemType.Header,
+        link: HeaderMenuItemType.Accounts,
       },
-      {
-        id: nanoid(),
-        title: "Settings",
-        icon: "Settings",
-        type: NavigationMenuItemType.System,
-        link: SystemLinks.Settings,
-        children: [],
-      },
-
       {
         id: nanoid(),
         title: "Users",
         icon: "Users",
         type: NavigationMenuItemType.System,
         link: SystemLinks.Users,
-        children: [],
       },
       {
         id: nanoid(),
@@ -139,7 +133,27 @@ export class NavigationMenuApiService implements IBaseNavigationMenuApiService {
         icon: "Shield",
         type: NavigationMenuItemType.System,
         link: SystemLinks.Roles,
-        children: [],
+      },
+      {
+        id: nanoid(),
+        title: "Configurations",
+        icon: "Users",
+        type: NavigationMenuItemType.Header,
+        link: HeaderMenuItemType.Configurations,
+      },
+      {
+        id: nanoid(),
+        title: "App Settings",
+        icon: "Settings",
+        type: NavigationMenuItemType.System,
+        link: SystemLinks.Settings,
+      },
+      {
+        id: nanoid(),
+        title: "Integrations",
+        icon: "Zap",
+        type: NavigationMenuItemType.System,
+        link: SystemLinks.Integrations,
       },
     ]);
 

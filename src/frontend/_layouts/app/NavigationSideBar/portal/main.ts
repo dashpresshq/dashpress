@@ -23,5 +23,6 @@ export const PORTAL_SYSTEM_LINK_CONFIG_LINKS: Record<
   {
     link: string;
     permission?: string;
+    messages: MessageDescriptor;
   }
 > = {};

@@ -13,6 +13,9 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
+msgid ""
+msgstr ""
+
 msgid "[[ name ]] is an invalid date"
 msgstr "[[ name ]] неверная дата"
 
@@ -178,6 +181,9 @@ msgstr "Профиль учетной записи"
 msgid "Account Was Successfully Setup"
 msgstr "Аккаунт успешно настроен"
 
+msgid "Accounts"
+msgstr ""
+
 msgid "Action"
 msgstr "Действие"
 
@@ -194,9 +200,7 @@ msgid "Activating {0}"
 msgstr "Активация {0}"
 
 msgid "Add fields to this table from your prefer database tool to manage them here"
-msgstr ""
-"Добавьте поля в эту таблицу из предпочитаемого вами инструмента базы "
-"данных, чтобы управлять ими здесь."
+msgstr "Добавьте поля в эту таблицу из предпочитаемого вами инструмента базы данных, чтобы управлять ими здесь."
 
 msgid "Add Filter"
 msgstr "Добавить фильтр"
@@ -216,12 +220,8 @@ msgstr "Добавить новый и выбрать"
 msgid "Add New Option"
 msgstr "Добавить новую опцию"
 
-msgid ""
-"Add new tables through your preferred database editor then restart this "
-"application."
-msgstr ""
-"Добавьте новые таблицы через предпочитаемый вами редактор базы данных, а "
-"затем перезапустите это приложение."
+msgid "Add new tables through your preferred database editor then restart this application."
+msgstr "Добавьте новые таблицы через предпочитаемый вами редактор базы данных, а затем перезапустите это приложение."
 
 msgid "Add New Validation"
 msgstr "Добавить новую проверку"
@@ -246,6 +246,12 @@ msgstr "API-ключ"
 
 msgid "App"
 msgstr "Приложение"
+
+msgid "App Navigation"
+msgstr ""
+
+msgid "App Settings"
+msgstr ""
 
 msgid "Are you sure you want to do this?"
 msgstr "Вы уверены, что хотите это сделать?"
@@ -408,6 +414,9 @@ msgstr "Завершение установки"
 
 msgid "Condition"
 msgstr "Состояние"
+
+msgid "Configurations"
+msgstr ""
 
 msgid "Configure"
 msgstr "Настроить"
@@ -766,12 +775,8 @@ msgstr "Потоки"
 msgid "Follow us on Twitter"
 msgstr "Следуйте за нами на Twitter"
 
-msgid ""
-"For security reasons, Please input your account password to reveal "
-"credentials"
-msgstr ""
-"В целях безопасности введите пароль своей учетной записи, чтобы раскрыть "
-"учетные данные."
+msgid "For security reasons, Please input your account password to reveal credentials"
+msgstr "В целях безопасности введите пароль своей учетной записи, чтобы раскрыть учетные данные."
 
 msgid "Form"
 msgstr "Форма"
@@ -1313,8 +1318,8 @@ msgstr "Секретный ключ доступа"
 msgid "Secrets"
 msgstr "Секреты"
 
-msgid "Select {formLabel}"
-msgstr "Выберите {formLabel}"
+msgid "Select {0}"
+msgstr ""
 
 msgid "Select Node Type"
 msgstr "Выберите тип узла"
@@ -1463,9 +1468,6 @@ msgstr "Система"
 msgid "System Info"
 msgstr "Системная информация"
 
-msgid "System Information"
-msgstr "Системная информация"
-
 msgid "System Settings"
 msgstr "Настройки системы"
 
@@ -1517,12 +1519,8 @@ msgstr "У этой сущности нет полей"
 msgid "This entity has no relations"
 msgstr "Эта сущность не имеет отношений"
 
-msgid ""
-"This flow should be queued and executed asynchronously (recommended for "
-"long running flows, requires Redis)"
-msgstr ""
-"Этот поток должен быть поставлен в очередь и выполняться асинхронно "
-"(рекомендуется для длительных потоков, требуется Redis)."
+msgid "This flow should be queued and executed asynchronously (recommended for long running flows, requires Redis)"
+msgstr "Этот поток должен быть поставлен в очередь и выполняться асинхронно (рекомендуется для длительных потоков, требуется Redis)."
 
 msgid "This trigger has no workflow attached"
 msgstr "К этому триггеру не привязан рабочий процесс"

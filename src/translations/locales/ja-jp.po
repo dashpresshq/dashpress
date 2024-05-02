@@ -13,6 +13,9 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
+msgid ""
+msgstr ""
+
 msgid "[[ name ]] is an invalid date"
 msgstr "[[ name ]] は無効な日付です"
 
@@ -178,6 +181,9 @@ msgstr "アカウントプロフィール"
 msgid "Account Was Successfully Setup"
 msgstr "アカウントは正常にセットアップされました"
 
+msgid "Accounts"
+msgstr ""
+
 msgid "Action"
 msgstr "アクション"
 
@@ -214,9 +220,7 @@ msgstr "新規追加して選択"
 msgid "Add New Option"
 msgstr "新しいオプションを追加"
 
-msgid ""
-"Add new tables through your preferred database editor then restart this "
-"application."
+msgid "Add new tables through your preferred database editor then restart this application."
 msgstr "好みのデータベース エディターを使用して新しいテーブルを追加し、このアプリケーションを再起動します。"
 
 msgid "Add New Validation"
@@ -242,6 +246,12 @@ msgstr "APIキー"
 
 msgid "App"
 msgstr "アプリ"
+
+msgid "App Navigation"
+msgstr ""
+
+msgid "App Settings"
+msgstr ""
 
 msgid "Are you sure you want to do this?"
 msgstr "本当にこれを実行してもよろしいですか?"
@@ -404,6 +414,9 @@ msgstr "セットアップの完了"
 
 msgid "Condition"
 msgstr "状態"
+
+msgid "Configurations"
+msgstr ""
 
 msgid "Configure"
 msgstr "構成、設定"
@@ -762,9 +775,7 @@ msgstr "流れ"
 msgid "Follow us on Twitter"
 msgstr "Twitterでフォローします"
 
-msgid ""
-"For security reasons, Please input your account password to reveal "
-"credentials"
+msgid "For security reasons, Please input your account password to reveal credentials"
 msgstr "セキュリティ上の理由から、資格情報を明らかにするにはアカウントのパスワードを入力してください"
 
 msgid "Form"
@@ -1307,8 +1318,8 @@ msgstr "シークレットアクセスキー"
 msgid "Secrets"
 msgstr "秘密"
 
-msgid "Select {formLabel}"
-msgstr "{formLabel}を選択します"
+msgid "Select {0}"
+msgstr ""
 
 msgid "Select Node Type"
 msgstr "ノードタイプの選択"
@@ -1457,9 +1468,6 @@ msgstr "システム"
 msgid "System Info"
 msgstr "システム情報"
 
-msgid "System Information"
-msgstr "システムインフォメーション"
-
 msgid "System Settings"
 msgstr "システム設定"
 
@@ -1511,9 +1519,7 @@ msgstr "このエンティティにはフィールドがありません"
 msgid "This entity has no relations"
 msgstr "このエンティティには関係がありません"
 
-msgid ""
-"This flow should be queued and executed asynchronously (recommended for "
-"long running flows, requires Redis)"
+msgid "This flow should be queued and executed asynchronously (recommended for long running flows, requires Redis)"
 msgstr "このフローはキューに入れて非同期で実行する必要があります (長時間実行されるフローに推奨、Redis が必要です)。"
 
 msgid "This trigger has no workflow attached"

@@ -186,7 +186,9 @@ describe("pages/setup/credentials", () => {
         "Credentials Was Successfully Setup"
       );
 
-      expect(replaceMock).toHaveBeenCalledWith("/setup/user");
+      expect(replaceMock).toHaveBeenCalledWith("/setup/user", "/setup/user", {
+        locale: "en",
+      });
     });
   });
 
@@ -229,7 +231,9 @@ describe("pages/setup/credentials", () => {
         screen.getByRole("button", { name: "Setup Credentials" })
       );
 
-      expect(replaceMock).toHaveBeenCalledWith("/setup/user");
+      expect(replaceMock).toHaveBeenCalledWith("/setup/user", "/setup/user", {
+        locale: "en",
+      });
     });
 
     it("should submit connection through URL successfully", async () => {
@@ -268,7 +272,9 @@ describe("pages/setup/credentials", () => {
         screen.getByRole("button", { name: "Setup Credentials" })
       );
 
-      expect(replaceMock).toHaveBeenCalledWith("/setup/user");
+      expect(replaceMock).toHaveBeenCalledWith("/setup/user", "/setup/user", {
+        locale: "en",
+      });
     });
   });
 
@@ -303,7 +309,9 @@ describe("pages/setup/credentials", () => {
         </ApplicationRoot>
       );
       await waitFor(() => {
-        expect(replaceMock).toHaveBeenCalledWith("/setup/user");
+        expect(replaceMock).toHaveBeenCalledWith("/setup/user", "/setup/user", {
+          locale: "en",
+        });
       });
     });
   });

@@ -9,7 +9,7 @@ export function IsSignedIn({ children }: { children: ReactNode }) {
   useEffect(() => {
     if (typeof window !== "undefined") {
       if (!AuthActions.isAuthenticated()) {
-        AuthActions.signOut("IsSignedIn");
+        AuthActions.signOut();
       } else {
         renderMode.on();
       }

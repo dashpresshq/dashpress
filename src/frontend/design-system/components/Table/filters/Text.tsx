@@ -1,11 +1,14 @@
 import { IColumnFilterBag } from "shared/types/data";
 import { BaseSyntheticEvent } from "react";
+import { useLingui } from "@lingui/react";
+import { msg } from "@lingui/macro";
 import { Input } from "../../Form/Styles";
 import { IFilterProps } from "./types";
 
 export function FilterTableByText({
   column: { filterValue, setFilter },
 }: IFilterProps<IColumnFilterBag<string>, undefined>) {
+  const { _ } = useLingui();
   return (
     <Input
       value={filterValue?.value || ""}
@@ -15,7 +18,7 @@ export function FilterTableByText({
           value: e.target.value,
         });
       }}
-      placeholder="Search"
+      placeholder={_(msg`Search`)}
     />
   );
 }

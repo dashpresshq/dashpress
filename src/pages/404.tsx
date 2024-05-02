@@ -1,5 +1,7 @@
+import React from 'react';
 import styled from 'styled-components';
 import dynamic from 'next/dynamic';
+import Error404SVG from '../../public/assets/images/Error404SVG';
 
 const Container = styled.div`
   width: 100%;
@@ -15,19 +17,6 @@ const Content = styled.div`
   align-items: center;
   justify-content: center;
   padding: 1rem;
-`;
-
-const ImageContainer = styled.div`
-  position: relative;
-  width: 100%;
-  margin-top: 2rem;
-`;
-
-const Image = styled.img`
-  width: 100%;
-  max-width: 400px;
-  display: block;
-  margin: 0 auto;
 `;
 
 const Heading = styled.h1`
@@ -63,12 +52,7 @@ function Custom404(): JSX.Element {
   return (
     <Container>
       <Content>
-        <ImageContainer>
-          <Image
-            src="https://merakiui.com/images/components/illustration.svg"
-            alt=""
-          />
-        </ImageContainer>
+        <Error404SVG />
 
         <Heading>PAGE NOT FOUND</Heading>
         <SubHeading>

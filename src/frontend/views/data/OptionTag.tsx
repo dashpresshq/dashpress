@@ -13,15 +13,15 @@ const Root = styled.div<{ color: string }>`
   background: ${(props) => props.color || DEFAULT_TAG_COLOR}1A;
 `;
 
-const TextColor = styled(Typo.SM)<{ customColor: string }>`
-  color: ${(props) => props.customColor};
+const TextColor = styled(Typo.SM)<{ $customColor: string }>`
+  color: ${(props) => props.$customColor};
 `;
 
 export function OptionTag({ color, label }: IColorableSelection) {
   const { _ } = useLingui();
   return (
     <Root color={color}>
-      <TextColor customColor={color}>{_(label)}</TextColor>
+      <TextColor $customColor={color}>{_(label)}</TextColor>
     </Root>
   );
 }

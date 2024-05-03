@@ -17,10 +17,10 @@ msgid ""
 msgstr ""
 
 msgid "[[ name ]] is an invalid date"
-msgstr "[[ name ]] is an invalid date"
+msgstr ""
 
 msgid "[[ name ]] is an invalid email"
-msgstr "[[ name ]] is an invalid email"
+msgstr ""
 
 msgid "[[ name ]] is an invalid json"
 msgstr ""

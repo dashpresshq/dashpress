@@ -38,13 +38,19 @@ const Lds = styled.div`
   }
 `;
 
+const Root = styled.div`
+  text-align: center;
+  margin: 30px;
+  margin-bottom: 20px;
+`;
+
 export function ComponentIsLoading() {
   return (
-    <div style={{ textAlign: "center", margin: "30px", marginBottom: "20px" }}>
+    <Root>
       <LdsWrapper>
         <Lds />
         <Lds />
       </LdsWrapper>
-    </div>
+    </Root>
   );
 }

@@ -22,9 +22,9 @@ const ChevronRight = styled(ChevronRightIcon)<{ $active?: boolean }>`
 `;
 
 const ListItem = styled.button<{
-  active: boolean;
-  disabled: boolean;
-  size?: "xs";
+  $active: boolean;
+  $disabled: boolean;
+  $size?: "xs";
 }>`
   justify-content: space-between;
   align-items: center;
@@ -58,16 +58,16 @@ const ListItem = styled.button<{
     border-top: 0;
   }
 
-  ${({ disabled }) =>
-    disabled &&
+  ${({ $disabled }) =>
+    $disabled &&
     css`
       color: ${USE_ROOT_COLOR("muted-text")};
       pointer-events: none;
       background-color: ${USE_ROOT_COLOR("base-color")};
     `}
 
-  ${({ size }) =>
-    size === "xs" &&
+  ${({ $size }) =>
+    $size === "xs" &&
     css`
       padding: 6px 0.75rem;
       font-size: 12px;
@@ -81,8 +81,8 @@ const ListItem = styled.button<{
     background-color: ${USE_ROOT_COLOR("soft-color")};
   }
 
-  ${({ active }) =>
-    active &&
+  ${({ $active }) =>
+    $active &&
     css`
       z-index: 2;
       color: ${USE_ROOT_COLOR("text-on-primary")} !important;
@@ -234,9 +234,9 @@ export function ListManagerItem({
   );
 
   const buttonProps = {
-    active: !!active,
-    disabled: !!disabled,
-    size,
+    $active: !!active,
+    $disabled: !!disabled,
+    $size: size,
   };
 
   if (typeof action === "string") {

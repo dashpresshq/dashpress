@@ -52,7 +52,9 @@ export function EntityRelationDetails() {
   const title =
     entityDataReference.isLoading || isQueryIdle(entityDataReference)
       ? childEntityCrudConfig.TEXT_LANG.SINGULAR
-      : msg`${entityDataReference.data} - ${childEntityCrudConfig.TEXT_LANG.SINGULAR}`;
+      : msg`${entityDataReference.data} - ${_(
+          childEntityCrudConfig.TEXT_LANG.SINGULAR
+        )}`;
 
   useSetPageDetails({
     pageTitle: title,
@@ -95,7 +97,7 @@ export function EntityRelationDetails() {
     entityId: idData,
     baseActionButtons: actionButtons,
     from: "details",
-    row: dataDetails, // TODO :eyes
+    row: dataDetails,
   });
 
   return (

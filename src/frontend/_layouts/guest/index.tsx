@@ -7,12 +7,14 @@ import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
 import { Stack } from "frontend/design-system/primitives/Stack";
 import { Typo } from "frontend/design-system/primitives/Typo";
 import { Spacer } from "frontend/design-system/primitives/Spacer";
+import { MessageDescriptor } from "@lingui/core";
+import { useLingui } from "@lingui/react";
 import { useAppTheme } from "../useAppTheme";
 
 interface IProps {
   children: ReactNode;
-  title: string;
-  subTitle: string;
+  title: MessageDescriptor;
+  subTitle: MessageDescriptor;
 }
 
 const Root = styled.div`
@@ -24,6 +26,7 @@ const Root = styled.div`
   border-width: 0px;
   width: 100%;
   max-width: 500px;
+  margin: 16px;
 `;
 
 const Container = styled.div`
@@ -57,12 +60,12 @@ export function AuthLayout({ children, title, subTitle }: IProps) {
     data: { fullLogo, homeLink, name },
   } = useAppConfiguration("site_settings");
   useAppTheme();
-
+  const { _ } = useLingui();
   return (
     <>
       <Head>
         <title>
-          {title} - {name}
+          {_(title)} - {name}
         </title>
       </Head>
       <Container>
@@ -73,9 +76,9 @@ export function AuthLayout({ children, title, subTitle }: IProps) {
                 <Spacer />
                 {fullLogo && <img src={fullLogo} height="40" alt="logo" />}
                 <Spacer />
-                <Typo.MD $color="inverse">{title}</Typo.MD>
+                <Typo.MD $color="inverse">{_(title)}</Typo.MD>
                 <Spacer size="xs" />
-                <Typo.XS $color="inverse">{subTitle}</Typo.XS>
+                <Typo.XS $color="inverse">{_(subTitle)}</Typo.XS>
               </a>
             </Header>
 

@@ -85,4 +85,3 @@ export function getRTL(locale: string): {
   };
 }
 // rtl for arabic
-// TODO all useDocumentationActionButton to use source settings label

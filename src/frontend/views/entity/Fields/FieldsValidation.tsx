@@ -38,8 +38,6 @@ interface IProps {
 
 const ERROR_MESSAGE_LENGTH = 128;
 
-// TODO: for contributors: Show the actuall error message not the template message
-
 export function FieldValidationCanvas({
   field,
   onSubmit,

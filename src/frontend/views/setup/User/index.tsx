@@ -34,8 +34,8 @@ export const UserSetup: CustomNextPage = () => {
 
   return (
     <AuthLayout
-      title="Account Setup"
-      subTitle="Create first super admin account"
+      title={msg`Account Setup`}
+      subTitle={msg`Create first super admin account`}
     >
       <ViewStateMachine
         loading={isChecking}

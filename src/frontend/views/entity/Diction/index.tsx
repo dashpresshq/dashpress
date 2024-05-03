@@ -34,7 +34,7 @@ export function EntityDictionSettings() {
   );
 
   const documentationActionButton = useDocumentationActionButton(
-    msg`Diction Settings`
+    domainMessages.TEXT_LANG.TITLE
   );
 
   useSetPageDetails({

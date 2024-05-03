@@ -15,7 +15,6 @@ import { useEntityDictionPlurals } from "frontend/hooks/entity/entity.queries";
 import { NAVIGATION_MENU_ENDPOINT } from "frontend/_layouts/app/NavigationSideBar/constants";
 import { ACTIVE_ENTITIES_ENDPOINT } from "shared/constants/entities";
 import { useDocumentationActionButton } from "frontend/docs/constants";
-import { msg } from "@lingui/macro";
 import { SETTINGS_VIEW_KEY } from "../constants";
 import { BaseSettingsLayout } from "../_Base";
 import { EntitiesSelection } from "./Selection";
@@ -55,7 +54,7 @@ export function EntitiesSettings() {
   );
 
   const documentationActionButton = useDocumentationActionButton(
-    msg`Enabled Entities`
+    domainMessages.TEXT_LANG.TITLE
   );
 
   const error = entitiesList.error || entitiesToHide.error;

@@ -7,6 +7,7 @@ import { AuthLayout } from "frontend/_layouts/guest";
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { CustomNextPage } from "frontend/_layouts/types";
+import { msg } from "@lingui/macro";
 import { CredentialsSetupForm } from "./Form";
 import { useSetupCredentialsMutation } from "../setup.store";
 
@@ -24,8 +25,8 @@ export const CredentialsSetup: CustomNextPage = () => {
 
   return (
     <AuthLayout
-      title="Setup DB credentials"
-      subTitle="Enter the credentials of the data you want to manage"
+      title={msg`Setup DB credentials`}
+      subTitle={msg`Enter the credentials of the data you want to manage`}
     >
       <ViewStateMachine
         loading={isChecking}

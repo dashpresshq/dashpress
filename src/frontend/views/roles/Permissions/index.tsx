@@ -55,7 +55,7 @@ export function RolePermissions() {
   const changeTabParam = useChangeRouterParam("tab");
 
   const documentationActionButton = useDocumentationActionButton(
-    msg`Roles and Permissions`
+    LANG_DOMAINS.ACCOUNT.PERMISSIONS.plural
   );
 
   useSetPageDetails({

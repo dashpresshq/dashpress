@@ -96,7 +96,18 @@ export function UserPreferences() {
 
       <Spacer />
 
-      <SectionBox title={msg`Language`}>
+      <SectionBox
+        title={msg`Language`}
+        actionButtons={[
+          {
+            id: "change-language",
+            action:
+              "https://github.com/dashpresshq/dashpress/tree/master/src/translations/locales",
+            systemIcon: "Help",
+            label: msg`I Want To Help With Translation`,
+          },
+        ]}
+      >
         <SchemaForm<{ locale: string }>
           onSubmit={async (data) => {
             const { pathname, asPath, query } = router;

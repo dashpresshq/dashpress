@@ -14,7 +14,7 @@ msgstr ""
 "Plural-Forms: \n"
 
 msgid ""
-msgstr "/+Z5u4"
+msgstr ""
 
 msgid "[[ name ]] is an invalid date"
 msgstr "[[ name ]] is an invalid date"

@@ -23,13 +23,14 @@ export function useSetupCheck(config: ISetupCheckConfig[]) {
   });
 
   useEffect(() => {
-    config.forEach((configItem) => {
+    for (const configItem of config) {
       if (data[configItem.key] === configItem.value) {
         router.replace(configItem.url, configItem.url, {
           locale: router.locale,
         });
+        return;
       }
-    });
+    }
   }, [data]);
 
   if (isLoading || !data) {

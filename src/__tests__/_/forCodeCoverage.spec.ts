@@ -1,4 +1,5 @@
 import { FOR_CODE_COV as $1 } from "backend/lib/request/validations/types";
+import { FOR_CODE_COV as $2 } from "frontend/lib/crud-config/types";
 import { FOR_CODE_COV as $3 } from "shared/form-schemas/types";
 import { FOR_CODE_COV as $4 } from "shared/validations/types";
 import { FOR_CODE_COV as $5 } from "shared/types/options";
@@ -25,6 +26,8 @@ import { FOR_CODE_COV as $25 } from "shared/types/auth/portal/index";
 import { FOR_CODE_COV as $26 } from "shared/types/auth/portal/main";
 import { FOR_CODE_COV as $28 } from "shared/types/portal/widgets/main";
 import { FOR_CODE_COV as $29 } from "shared/types/portal/widgets";
+import { FOR_CODE_COV as $30 } from "backend/lib/key-value/portal/index";
+import { FOR_CODE_COV as $31 } from "backend/lib/key-value/portal/main";
 import { FOR_CODE_COV as $32 } from "shared/configurations/base-types";
 import { FOR_CODE_COV as $33 } from "frontend/views/Dashboard/Widget/_components/WidgetHeader/types";
 import { FOR_CODE_COV as $35 } from "shared/types/roles";
@@ -46,6 +49,7 @@ import { noop } from "shared/lib/noop";
 
 noop(
   $1,
+  $2,
   $3,
   $4,
   $5,
@@ -72,6 +76,8 @@ noop(
   $26,
   $28,
   $29,
+  $30,
+  $31,
   $32,
   $33,
   $35,

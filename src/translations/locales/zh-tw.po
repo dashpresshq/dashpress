@@ -178,6 +178,9 @@ msgstr "帳戶偏好設定"
 msgid "Account Profile"
 msgstr "帳戶資料"
 
+msgid "Account Setup"
+msgstr ""
+
 msgid "Account Was Successfully Setup"
 msgstr "帳戶設定成功"
 
@@ -463,14 +466,14 @@ msgstr "創造"
 msgid "Create {singular}"
 msgstr "建立{singular}"
 
-msgid "Create Attachments"
-msgstr "建立附件"
-
 msgid "Create Columns Settings"
 msgstr "建立列設定"
 
 msgid "Create Fields Order"
 msgstr "建立欄位訂單"
+
+msgid "Create first super admin account"
+msgstr ""
 
 msgid "Create It"
 msgstr "創造它"
@@ -480,9 +483,6 @@ msgstr "創建於"
 
 msgid "Creating {singular}"
 msgstr "建立{singular}"
-
-msgid "Creating Attachments"
-msgstr "建立附件"
 
 msgid "Credentials Was Successfully Setup"
 msgstr "憑證已成功設定"
@@ -663,6 +663,9 @@ msgstr "輸入您未使用的恢復代碼之一"
 
 msgid "Enter your credentials to continue"
 msgstr "輸入您的憑證以繼續"
+
+msgid "Enter your database credentials to continue"
+msgstr ""
 
 msgid "Entities"
 msgstr "實體"
@@ -861,6 +864,9 @@ msgstr "小時"
 
 msgid "I have safely saved my recovery tokens"
 msgstr "我已安全保存我的恢復令牌"
+
+msgid "I Want To Help With Translation"
+msgstr ""
 
 msgid "Icon"
 msgstr "圖示"
@@ -1276,9 +1282,6 @@ msgstr "角色權限"
 msgid "Roles"
 msgstr "角色"
 
-msgid "Roles and Permissions"
-msgstr "角色和權限"
-
 msgid "Route ID"
 msgstr "路線編號"
 
@@ -1380,6 +1383,9 @@ msgstr "設定帳戶"
 
 msgid "Setup Credentials"
 msgstr "設定憑證"
+
+msgid "Setup DB credentials"
+msgstr ""
 
 msgid "Share"
 msgstr "分享"

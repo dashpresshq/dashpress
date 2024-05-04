@@ -29,19 +29,21 @@ import {
 } from "./Portal";
 
 const mapPermissionStringToLabelValue = (
-  permissions: Record<string, { label: MessageDescriptor }>
+  permissions: Record<string, { label: MessageDescriptor; order: number }>
 ) => {
   return typescriptSafeObjectDotEntries(permissions).map(
     ([permission, config]) => ({
       value: permission,
-      label: config.label,
+      ...config,
     })
   );
 };
 
-// TODO: sort by heirachy
-const adminPermissionList: { value: string; label: MessageDescriptor }[] =
-  mapPermissionStringToLabelValue(USER_PERMISSIONS_CONFIG);
+const adminPermissionList: {
+  value: string;
+  label: MessageDescriptor;
+  order: number;
+}[] = mapPermissionStringToLabelValue(USER_PERMISSIONS_CONFIG);
 
 export function RolePermissions() {
   const activeEntities = useActiveEntities();
@@ -92,7 +94,7 @@ export function RolePermissions() {
                       permissionList={[
                         ...adminPermissionList,
                         ...portalUserPermissions,
-                      ]}
+                      ].sort((a, b) => b.order - a.order)}
                     />
                   ),
                 },

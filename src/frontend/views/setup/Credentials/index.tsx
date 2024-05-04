@@ -26,7 +26,7 @@ export const CredentialsSetup: CustomNextPage = () => {
   return (
     <AuthLayout
       title={msg`Setup DB credentials`}
-      subTitle={msg`Enter the credentials of the data you want to manage`}
+      subTitle={msg`Enter your database credentials to continue`}
     >
       <ViewStateMachine
         loading={isChecking}

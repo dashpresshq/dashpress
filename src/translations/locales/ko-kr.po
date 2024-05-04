@@ -178,6 +178,9 @@ msgstr "계정 환경설정"
 msgid "Account Profile"
 msgstr "계정 프로필"
 
+msgid "Account Setup"
+msgstr ""
+
 msgid "Account Was Successfully Setup"
 msgstr "계정이 성공적으로 설정되었습니다"
 
@@ -463,14 +466,14 @@ msgstr "만들다"
 msgid "Create {singular}"
 msgstr "{singular} 만들기"
 
-msgid "Create Attachments"
-msgstr "첨부파일 생성"
-
 msgid "Create Columns Settings"
 msgstr "열 설정 생성"
 
 msgid "Create Fields Order"
 msgstr "필드 순서 만들기"
+
+msgid "Create first super admin account"
+msgstr ""
 
 msgid "Create It"
 msgstr "만들기"
@@ -480,9 +483,6 @@ msgstr "생성 날짜"
 
 msgid "Creating {singular}"
 msgstr "{singular} 생성"
-
-msgid "Creating Attachments"
-msgstr "첨부 파일 만들기"
 
 msgid "Credentials Was Successfully Setup"
 msgstr "자격 증명이 성공적으로 설정되었습니다."
@@ -663,6 +663,9 @@ msgstr "발송되지 않은 복구 코드 중 하나를 입력하세요"
 
 msgid "Enter your credentials to continue"
 msgstr "계속하려면 자격 증명을 입력하세요."
+
+msgid "Enter your database credentials to continue"
+msgstr ""
 
 msgid "Entities"
 msgstr "엔터티"
@@ -861,6 +864,9 @@ msgstr "시간"
 
 msgid "I have safely saved my recovery tokens"
 msgstr "복구 토큰을 안전하게 저장했습니다"
+
+msgid "I Want To Help With Translation"
+msgstr ""
 
 msgid "Icon"
 msgstr "상"
@@ -1276,9 +1282,6 @@ msgstr "역할 권한"
 msgid "Roles"
 msgstr "역할"
 
-msgid "Roles and Permissions"
-msgstr "역할 및 권한"
-
 msgid "Route ID"
 msgstr "경로 ID"
 
@@ -1380,6 +1383,9 @@ msgstr "계정 설정"
 
 msgid "Setup Credentials"
 msgstr "설치 자격 증명"
+
+msgid "Setup DB credentials"
+msgstr ""
 
 msgid "Share"
 msgstr "공유하다"

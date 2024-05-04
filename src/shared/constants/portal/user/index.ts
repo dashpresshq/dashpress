@@ -1,1 +1,1 @@
-export { PORTAL_USER_PERMISSIONS } from "./main";
+export { PORTAL_USER_PERMISSIONS, PORTAL_PERMISSION_HEIRACHIES } from "./main";

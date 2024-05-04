@@ -178,6 +178,9 @@ msgstr ""
 msgid "Account Profile"
 msgstr ""
 
+msgid "Account Setup"
+msgstr ""
+
 msgid "Account Was Successfully Setup"
 msgstr ""
 
@@ -463,13 +466,13 @@ msgstr ""
 msgid "Create {singular}"
 msgstr ""
 
-msgid "Create Attachments"
-msgstr ""
-
 msgid "Create Columns Settings"
 msgstr ""
 
 msgid "Create Fields Order"
+msgstr ""
+
+msgid "Create first super admin account"
 msgstr ""
 
 msgid "Create It"
@@ -479,9 +482,6 @@ msgid "Created At"
 msgstr ""
 
 msgid "Creating {singular}"
-msgstr ""
-
-msgid "Creating Attachments"
 msgstr ""
 
 msgid "Credentials Was Successfully Setup"
@@ -662,6 +662,9 @@ msgid "Enter one of your unsed recovery codes"
 msgstr ""
 
 msgid "Enter your credentials to continue"
+msgstr ""
+
+msgid "Enter your database credentials to continue"
 msgstr ""
 
 msgid "Entities"
@@ -860,6 +863,9 @@ msgid "Hour"
 msgstr ""
 
 msgid "I have safely saved my recovery tokens"
+msgstr ""
+
+msgid "I Want To Help With Translation"
 msgstr ""
 
 msgid "Icon"
@@ -1276,9 +1282,6 @@ msgstr ""
 msgid "Roles"
 msgstr ""
 
-msgid "Roles and Permissions"
-msgstr ""
-
 msgid "Route ID"
 msgstr ""
 
@@ -1379,6 +1382,9 @@ msgid "Setup Account"
 msgstr ""
 
 msgid "Setup Credentials"
+msgstr ""
+
+msgid "Setup DB credentials"
 msgstr ""
 
 msgid "Share"

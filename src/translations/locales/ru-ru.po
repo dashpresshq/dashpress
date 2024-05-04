@@ -178,6 +178,9 @@ msgstr "Настройки аккаунта"
 msgid "Account Profile"
 msgstr "Профиль учетной записи"
 
+msgid "Account Setup"
+msgstr ""
+
 msgid "Account Was Successfully Setup"
 msgstr "Аккаунт успешно настроен"
 
@@ -463,14 +466,14 @@ msgstr "Создавать"
 msgid "Create {singular}"
 msgstr "создать {singular}"
 
-msgid "Create Attachments"
-msgstr "Создание вложений"
-
 msgid "Create Columns Settings"
 msgstr "Создать настройки столбцов"
 
 msgid "Create Fields Order"
 msgstr "Создать порядок полей"
+
+msgid "Create first super admin account"
+msgstr ""
 
 msgid "Create It"
 msgstr "Создать это"
@@ -480,9 +483,6 @@ msgstr "Создан в"
 
 msgid "Creating {singular}"
 msgstr "создание {singular}"
-
-msgid "Creating Attachments"
-msgstr "Создание вложений"
 
 msgid "Credentials Was Successfully Setup"
 msgstr "Учетные данные были успешно настроены"
@@ -663,6 +663,9 @@ msgstr "Введите один из ваших неиспользованных
 
 msgid "Enter your credentials to continue"
 msgstr "Введите свои учетные данные, чтобы продолжить"
+
+msgid "Enter your database credentials to continue"
+msgstr ""
 
 msgid "Entities"
 msgstr "Сущности"
@@ -861,6 +864,9 @@ msgstr "Час"
 
 msgid "I have safely saved my recovery tokens"
 msgstr "Я благополучно сохранил свои токены восстановления."
+
+msgid "I Want To Help With Translation"
+msgstr ""
 
 msgid "Icon"
 msgstr "Икона"
@@ -1276,9 +1282,6 @@ msgstr "Ролевые разрешения"
 msgid "Roles"
 msgstr "Роли"
 
-msgid "Roles and Permissions"
-msgstr "Роли и разрешения"
-
 msgid "Route ID"
 msgstr "Идентификатор маршрута"
 
@@ -1380,6 +1383,9 @@ msgstr "Настройка учетной записи"
 
 msgid "Setup Credentials"
 msgstr "Настройка учетных данных"
+
+msgid "Setup DB credentials"
+msgstr ""
 
 msgid "Share"
 msgstr "Делиться"

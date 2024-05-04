@@ -178,6 +178,9 @@ msgstr "偏好设置"
 msgid "Account Profile"
 msgstr "账号信息"
 
+msgid "Account Setup"
+msgstr ""
+
 msgid "Account Was Successfully Setup"
 msgstr "账户设置成功"
 
@@ -463,14 +466,14 @@ msgstr "创建"
 msgid "Create {singular}"
 msgstr "创建{singular}"
 
-msgid "Create Attachments"
-msgstr "添加附件"
-
 msgid "Create Columns Settings"
 msgstr "创建列设置"
 
 msgid "Create Fields Order"
 msgstr "创建字段顺序"
+
+msgid "Create first super admin account"
+msgstr ""
 
 msgid "Create It"
 msgstr "创建"
@@ -480,9 +483,6 @@ msgstr "创建时间"
 
 msgid "Creating {singular}"
 msgstr "创建{singular}"
-
-msgid "Creating Attachments"
-msgstr "添加附件"
 
 msgid "Credentials Was Successfully Setup"
 msgstr "证书设置成功"
@@ -663,6 +663,9 @@ msgstr ""
 
 msgid "Enter your credentials to continue"
 msgstr "输入您的凭证以继续"
+
+msgid "Enter your database credentials to continue"
+msgstr ""
 
 msgid "Entities"
 msgstr "实体"
@@ -861,6 +864,9 @@ msgstr "小时"
 
 msgid "I have safely saved my recovery tokens"
 msgstr "我已安全保存了我的恢复令牌"
+
+msgid "I Want To Help With Translation"
+msgstr ""
 
 msgid "Icon"
 msgstr "图标"
@@ -1276,9 +1282,6 @@ msgstr "角色权限"
 msgid "Roles"
 msgstr "角色"
 
-msgid "Roles and Permissions"
-msgstr "角色和权限"
-
 msgid "Route ID"
 msgstr "路由ID"
 
@@ -1380,6 +1383,9 @@ msgstr "配置账户"
 
 msgid "Setup Credentials"
 msgstr "配置凭据"
+
+msgid "Setup DB credentials"
+msgstr ""
 
 msgid "Share"
 msgstr "分享"

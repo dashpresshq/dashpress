@@ -178,6 +178,9 @@ msgstr "Preferencias de cuenta"
 msgid "Account Profile"
 msgstr "Perfil de cuenta"
 
+msgid "Account Setup"
+msgstr ""
+
 msgid "Account Was Successfully Setup"
 msgstr "La cuenta se configuró exitosamente"
 
@@ -463,14 +466,14 @@ msgstr "Crear"
 msgid "Create {singular}"
 msgstr "Crear {singular}"
 
-msgid "Create Attachments"
-msgstr "Crear archivos adjuntos"
-
 msgid "Create Columns Settings"
 msgstr "Crear configuración de columnas"
 
 msgid "Create Fields Order"
 msgstr "Crear orden de campos"
+
+msgid "Create first super admin account"
+msgstr ""
 
 msgid "Create It"
 msgstr "Créelo"
@@ -480,9 +483,6 @@ msgstr "Creado en"
 
 msgid "Creating {singular}"
 msgstr "Creando {singular}"
-
-msgid "Creating Attachments"
-msgstr "Crear archivos adjuntos"
 
 msgid "Credentials Was Successfully Setup"
 msgstr "Las credenciales se configuraron correctamente"
@@ -663,6 +663,9 @@ msgstr "Ingrese uno de sus códigos de recuperación no identificados"
 
 msgid "Enter your credentials to continue"
 msgstr "Introduce tus credenciales para continuar"
+
+msgid "Enter your database credentials to continue"
+msgstr ""
 
 msgid "Entities"
 msgstr "Entidades"
@@ -861,6 +864,9 @@ msgstr "Hora"
 
 msgid "I have safely saved my recovery tokens"
 msgstr "He guardado de forma segura mis tokens de recuperación"
+
+msgid "I Want To Help With Translation"
+msgstr ""
 
 msgid "Icon"
 msgstr "Icono"
@@ -1276,9 +1282,6 @@ msgstr "Permisos de rol"
 msgid "Roles"
 msgstr "Roles"
 
-msgid "Roles and Permissions"
-msgstr "Roles y permisos"
-
 msgid "Route ID"
 msgstr "ID de ruta"
 
@@ -1380,6 +1383,9 @@ msgstr "Configurar la cuenta"
 
 msgid "Setup Credentials"
 msgstr "Configurar credenciales"
+
+msgid "Setup DB credentials"
+msgstr ""
 
 msgid "Share"
 msgstr "Compartir"

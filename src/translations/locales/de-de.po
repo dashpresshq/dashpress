@@ -178,6 +178,9 @@ msgstr "Kontoeinstellungen"
 msgid "Account Profile"
 msgstr "Konto Profil"
 
+msgid "Account Setup"
+msgstr ""
+
 msgid "Account Was Successfully Setup"
 msgstr "Das Konto wurde erfolgreich eingerichtet"
 
@@ -463,14 +466,14 @@ msgstr "Erstellen"
 msgid "Create {singular}"
 msgstr "{singular} erstellen"
 
-msgid "Create Attachments"
-msgstr "Anhänge erstellen"
-
 msgid "Create Columns Settings"
 msgstr "Spalteneinstellungen erstellen"
 
 msgid "Create Fields Order"
 msgstr "Feldreihenfolge erstellen"
+
+msgid "Create first super admin account"
+msgstr ""
 
 msgid "Create It"
 msgstr "Erstelle es"
@@ -480,9 +483,6 @@ msgstr "Hergestellt in"
 
 msgid "Creating {singular}"
 msgstr "{singular} erstellen"
-
-msgid "Creating Attachments"
-msgstr "Anhänge erstellen"
 
 msgid "Credentials Was Successfully Setup"
 msgstr "Anmeldeinformationen wurden erfolgreich eingerichtet"
@@ -663,6 +663,9 @@ msgstr "Geben Sie einen Ihrer nicht bestätigten Wiederherstellungscodes ein"
 
 msgid "Enter your credentials to continue"
 msgstr "Geben Sie Ihre Anmeldedaten ein, um fortzufahren"
+
+msgid "Enter your database credentials to continue"
+msgstr ""
 
 msgid "Entities"
 msgstr "Entitäten"
@@ -861,6 +864,9 @@ msgstr "Stunde"
 
 msgid "I have safely saved my recovery tokens"
 msgstr "Ich habe meine Wiederherstellungstokens sicher gespeichert"
+
+msgid "I Want To Help With Translation"
+msgstr ""
 
 msgid "Icon"
 msgstr "Symbol"
@@ -1276,9 +1282,6 @@ msgstr "Rollenberechtigungen"
 msgid "Roles"
 msgstr "Rollen"
 
-msgid "Roles and Permissions"
-msgstr "Rollen und Berechtigungen"
-
 msgid "Route ID"
 msgstr "Routen-ID"
 
@@ -1380,6 +1383,9 @@ msgstr "Einen Account erstellen"
 
 msgid "Setup Credentials"
 msgstr "Anmeldeinformationen einrichten"
+
+msgid "Setup DB credentials"
+msgstr ""
 
 msgid "Share"
 msgstr "Aktie"

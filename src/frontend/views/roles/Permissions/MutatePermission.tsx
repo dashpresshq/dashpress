@@ -3,12 +3,12 @@ import { FormButton } from "frontend/design-system/components/Button/FormButton"
 import { Spacer } from "frontend/design-system/primitives/Spacer";
 import { ListManager } from "frontend/design-system/components/ListManager";
 import { UserPermissions } from "shared/constants/user";
-import { PORTAL_PERMISSION_HEIRACHIES } from "shared/logic/permissions/portal";
 import { loadedDataState } from "frontend/lib/data/constants/loadedDataState";
 import { IListMangerItemProps } from "frontend/design-system/components/ListManager/ListManagerItem";
 import { msg } from "@lingui/macro";
 import { MessageDescriptor } from "@lingui/core";
 import { useLingui } from "@lingui/react";
+import { PORTAL_PERMISSION_HEIRACHIES } from "shared/constants/portal/user";
 import {
   useCreateRolePermissionMutation,
   useDeleteRolePermissionMutation,

@@ -178,6 +178,9 @@ msgstr "アカウントの設定"
 msgid "Account Profile"
 msgstr "アカウントプロフィール"
 
+msgid "Account Setup"
+msgstr ""
+
 msgid "Account Was Successfully Setup"
 msgstr "アカウントは正常にセットアップされました"
 
@@ -463,14 +466,14 @@ msgstr "作成する"
 msgid "Create {singular}"
 msgstr "{singular}を作成する"
 
-msgid "Create Attachments"
-msgstr "添付ファイルの作成"
-
 msgid "Create Columns Settings"
 msgstr "列の作成設定"
 
 msgid "Create Fields Order"
 msgstr "フィールドの作成順序"
+
+msgid "Create first super admin account"
+msgstr ""
 
 msgid "Create It"
 msgstr "作成してください"
@@ -480,9 +483,6 @@ msgstr "作成日"
 
 msgid "Creating {singular}"
 msgstr "{singular}の作成"
-
-msgid "Creating Attachments"
-msgstr "添付ファイルの作成"
 
 msgid "Credentials Was Successfully Setup"
 msgstr "資格情報が正常にセットアップされました"
@@ -663,6 +663,9 @@ msgstr "Unsed リカバリ コードのいずれかを入力してください"
 
 msgid "Enter your credentials to continue"
 msgstr "続行するには資格情報を入力してください"
+
+msgid "Enter your database credentials to continue"
+msgstr ""
 
 msgid "Entities"
 msgstr "エンティティ"
@@ -861,6 +864,9 @@ msgstr "時間"
 
 msgid "I have safely saved my recovery tokens"
 msgstr "回復トークンを安全に保存しました"
+
+msgid "I Want To Help With Translation"
+msgstr ""
 
 msgid "Icon"
 msgstr "アイコン"
@@ -1276,9 +1282,6 @@ msgstr "役割の権限"
 msgid "Roles"
 msgstr "役割"
 
-msgid "Roles and Permissions"
-msgstr "役割と権限"
-
 msgid "Route ID"
 msgstr "ルートID"
 
@@ -1380,6 +1383,9 @@ msgstr "アカウントのセットアップ"
 
 msgid "Setup Credentials"
 msgstr "資格情報のセットアップ"
+
+msgid "Setup DB credentials"
+msgstr ""
 
 msgid "Share"
 msgstr "共有"

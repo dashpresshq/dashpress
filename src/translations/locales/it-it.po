@@ -178,6 +178,9 @@ msgstr "Preferenze dell'account"
 msgid "Account Profile"
 msgstr "Profilo dell'account"
 
+msgid "Account Setup"
+msgstr ""
+
 msgid "Account Was Successfully Setup"
 msgstr "L'account è stato configurato correttamente"
 
@@ -463,14 +466,14 @@ msgstr "Creare"
 msgid "Create {singular}"
 msgstr "Crea {singular}"
 
-msgid "Create Attachments"
-msgstr "Crea allegati"
-
 msgid "Create Columns Settings"
 msgstr "Crea impostazioni colonne"
 
 msgid "Create Fields Order"
 msgstr "Crea ordine campi"
+
+msgid "Create first super admin account"
+msgstr ""
 
 msgid "Create It"
 msgstr "Crealo"
@@ -480,9 +483,6 @@ msgstr "Creato a"
 
 msgid "Creating {singular}"
 msgstr "Creare {singular}"
-
-msgid "Creating Attachments"
-msgstr "Creazione di allegati"
 
 msgid "Credentials Was Successfully Setup"
 msgstr "Le credenziali sono state configurate correttamente"
@@ -663,6 +663,9 @@ msgstr "Inserisci uno dei codici di ripristino non utilizzati"
 
 msgid "Enter your credentials to continue"
 msgstr "Inserisci le tue credenziali per continuare"
+
+msgid "Enter your database credentials to continue"
+msgstr ""
 
 msgid "Entities"
 msgstr "Entità"
@@ -861,6 +864,9 @@ msgstr "Ora"
 
 msgid "I have safely saved my recovery tokens"
 msgstr "Ho salvato in modo sicuro i miei token di ripristino"
+
+msgid "I Want To Help With Translation"
+msgstr ""
 
 msgid "Icon"
 msgstr "Icona"
@@ -1276,9 +1282,6 @@ msgstr "Autorizzazioni del ruolo"
 msgid "Roles"
 msgstr "Ruoli"
 
-msgid "Roles and Permissions"
-msgstr "Ruoli e autorizzazioni"
-
 msgid "Route ID"
 msgstr "Identificativo del percorso"
 
@@ -1380,6 +1383,9 @@ msgstr "Imposta account"
 
 msgid "Setup Credentials"
 msgstr "Credenziali di configurazione"
+
+msgid "Setup DB credentials"
+msgstr ""
 
 msgid "Share"
 msgstr "Condividere"

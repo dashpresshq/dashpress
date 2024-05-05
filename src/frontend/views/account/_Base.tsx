@@ -40,7 +40,7 @@ export function BaseAccountLayout({ children }: IProps) {
     },
     {
       action: () => {
-        AuthActions.signOut("logout");
+        AuthActions.signOut();
       },
       name: msg`Log Out`,
       systemIcon: "LogOut",

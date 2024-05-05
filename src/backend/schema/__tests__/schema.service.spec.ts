@@ -163,6 +163,7 @@ describe("SchemaService", () => {
     expect(await schemasService.getDBSchema()).toHaveLength(2);
   });
 
+  // unable to mock process.env.NODE_ENV to be set to "test", load the json file then set back to "production"
   it.skip("should introspect database when schema data already exists when on PROD", async () => {
     await setupTestDatabaseData(true);
 

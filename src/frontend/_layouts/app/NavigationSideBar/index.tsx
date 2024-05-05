@@ -1,6 +1,5 @@
-import { ReactNode } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import styled from "styled-components";
-import { useSessionStorage } from "react-use";
 import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
 import { SideBar } from "./SideBar";
 import { SIDE_BAR_WIDTH_VARIATIONS } from "./constants";
@@ -35,10 +34,13 @@ const Page = styled.div<{ $isFullWidth: boolean }>`
 `;
 
 export function NavigationSideBar({ children }: IProps) {
-  const [isFullWidth, setIsFullWidth] = useSessionStorage(
-    "is-navigation-open",
-    true
-  );
+  const [isFullWidth, setIsFullWidth] = useState(true);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setIsFullWidth(window.innerWidth >= 768);
+    }
+  }, [typeof window !== "undefined"]);
 
   return (
     <Root>

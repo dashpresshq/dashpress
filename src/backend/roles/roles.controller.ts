@@ -60,10 +60,7 @@ export class RolesApiController {
     }
   }
 
-  async removePermissions(
-    roleId: string,
-    { permissions }: IBasePermissionForm
-  ) {
+  async removePermissions(roleId: string, permissions: string[]) {
     for (const permission of permissions) {
       await this._rolesApiService.removePermission(roleId, permission);
     }

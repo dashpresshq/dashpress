@@ -6,5 +6,3 @@ export const portalMetaPermissionCheck = (
   noop(key);
   return undefined;
 };
-
-export const PORTAL_PERMISSION_HEIRACHIES = [];

@@ -160,7 +160,7 @@ export const ENTITY_VALIDATION_CONFIG: Record<
     input: {
       options: [],
     },
-    message: msg`[[ name ]] is invalid. Allowed values are [[ options ]]`,
+    message: msg`Allowed values are [[ options ]]`,
     implementation: handleValidation(isIn, "options"),
   },
 

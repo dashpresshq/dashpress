@@ -38,27 +38,34 @@ export enum UserPermissions {
 
 export const USER_PERMISSIONS_CONFIG: Record<
   UserPermissions,
-  { label: MessageDescriptor }
+  { label: MessageDescriptor; order: number }
 > = {
-  [UserPermissions.CAN_MANAGE_USERS]: {
-    label: msg`Can Manage Users`,
+  [UserPermissions.CAN_MANAGE_APP_CREDENTIALS]: {
+    label: msg`Can Manage App Credentials`,
+    order: 70,
   },
   [UserPermissions.CAN_CONFIGURE_APP]: {
     label: msg`Can Configure App`,
-  },
-  [UserPermissions.CAN_RESET_PASSWORD]: {
-    label: msg`Can Reset Password`,
-  },
-  [UserPermissions.CAN_MANAGE_DASHBOARD]: {
-    label: msg`Can Manage Dashboard`,
-  },
-  [UserPermissions.CAN_MANAGE_APP_CREDENTIALS]: {
-    label: msg`Can Manage App Credentials`,
-  },
-  [UserPermissions.CAN_MANAGE_PERMISSIONS]: {
-    label: msg`Can Manage Permissions`,
+    order: 60,
   },
   [UserPermissions.CAN_MANAGE_ALL_ENTITIES]: {
     label: msg`Can Manage All Entities`,
+    order: 50,
+  },
+  [UserPermissions.CAN_RESET_PASSWORD]: {
+    label: msg`Can Reset Password`,
+    order: 40,
+  },
+  [UserPermissions.CAN_MANAGE_USERS]: {
+    label: msg`Can Manage Users`,
+    order: 30,
+  },
+  [UserPermissions.CAN_MANAGE_DASHBOARD]: {
+    label: msg`Can Manage Dashboard`,
+    order: 20,
+  },
+  [UserPermissions.CAN_MANAGE_PERMISSIONS]: {
+    label: msg`Can Manage Permissions`,
+    order: 10,
   },
 };

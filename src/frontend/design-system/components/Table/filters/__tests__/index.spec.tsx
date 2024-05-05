@@ -324,7 +324,7 @@ describe("Table Filters", () => {
       expect(screen.getAllByRole("option").map((option) => option.textContent))
         .toMatchInlineSnapshot(`
         [
-          "-- Select State --",
+          "--- Select Value ---",
           "True Option",
           "False Option",
         ]
@@ -364,7 +364,7 @@ describe("Table Filters", () => {
 
       await userEvent.selectOptions(
         screen.getByRole("combobox", { name: "Select Boolean" }),
-        "-- Select State --"
+        "--- Select Value ---"
       );
 
       await waitFor(() => {

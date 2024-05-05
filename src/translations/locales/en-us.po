@@ -14,16 +14,7 @@ msgstr ""
 "Plural-Forms: \n"
 
 msgid ""
-msgstr ""
-
-msgid "-- Select State --"
-msgstr "-- Select State --"
-
-msgid "\"{0}\" Selection"
-msgstr "\"{0}\" Selection"
-
-msgid "\"{0}\" Validations"
-msgstr "\"{0}\" Validations"
+msgstr "/+Z5u4"
 
 msgid "[[ name ]] is an invalid date"
 msgstr "[[ name ]] is an invalid date"
@@ -39,9 +30,6 @@ msgstr "[[ name ]] is an invalid URL"
 
 msgid "[[ name ]] is invalid"
 msgstr "[[ name ]] is invalid"
-
-msgid "[[ name ]] is invalid. Allowed values are [[ options ]]"
-msgstr "[[ name ]] is invalid. Allowed values are [[ options ]]"
 
 msgid "[[ name ]] is not a text"
 msgstr "[[ name ]] is not a text"
@@ -106,11 +94,11 @@ msgstr "{0} {1}"
 msgid "{0} Configuration"
 msgstr "{0} Configuration"
 
-msgid "{0} Preference"
-msgstr "{0} Preference"
+msgid "{0} Selections"
+msgstr "{0} Selections"
 
-msgid "{0} Shared Successfully"
-msgstr "{0} Shared Successfully"
+msgid "{0} Validations"
+msgstr "{0} Validations"
 
 msgid "{plural} Units"
 msgstr "{plural} Units"
@@ -190,8 +178,14 @@ msgstr "Account Preferences"
 msgid "Account Profile"
 msgstr "Account Profile"
 
+msgid "Account Setup"
+msgstr "Account Setup"
+
 msgid "Account Was Successfully Setup"
 msgstr "Account Was Successfully Setup"
+
+msgid "Accounts"
+msgstr "Accounts"
 
 msgid "Action"
 msgstr "Action"
@@ -202,8 +196,14 @@ msgstr "Actions"
 msgid "Activate {0}"
 msgstr "Activate {0}"
 
+msgid "Activated"
+msgstr "Activated"
+
 msgid "Activating {0}"
 msgstr "Activating {0}"
+
+msgid "Add fields to this table from your prefer database tool to manage them here"
+msgstr "Add fields to this table from your prefer database tool to manage them here"
 
 msgid "Add Filter"
 msgstr "Add Filter"
@@ -223,6 +223,9 @@ msgstr "Add New And Select"
 msgid "Add New Option"
 msgstr "Add New Option"
 
+msgid "Add new tables through your preferred database editor then restart this application."
+msgstr "Add new tables through your preferred database editor then restart this application."
+
 msgid "Add New Validation"
 msgstr "Add New Validation"
 
@@ -231,6 +234,9 @@ msgstr "All Dashboards"
 
 msgid "All items were {actionText} successfully"
 msgstr "All items were {actionText} successfully"
+
+msgid "Allowed values are [[ options ]]"
+msgstr "Allowed values are [[ options ]]"
 
 msgid "Alphanumeric"
 msgstr "Alphanumeric"
@@ -243,6 +249,12 @@ msgstr "API Key"
 
 msgid "App"
 msgstr "App"
+
+msgid "App Navigation"
+msgstr "App Navigation"
+
+msgid "App Settings"
+msgstr "App Settings"
 
 msgid "Are you sure you want to do this?"
 msgstr "Are you sure you want to do this?"
@@ -376,6 +388,9 @@ msgstr "Clone {0}"
 msgid "Clone Settings"
 msgstr "Clone Settings"
 
+msgid "Cloned"
+msgstr "Cloned"
+
 msgid "Cloning"
 msgstr "Cloning"
 
@@ -402,6 +417,9 @@ msgstr "Completing Setup"
 
 msgid "Condition"
 msgstr "Condition"
+
+msgid "Configurations"
+msgstr "Configurations"
 
 msgid "Configure"
 msgstr "Configure"
@@ -448,14 +466,14 @@ msgstr "Create"
 msgid "Create {singular}"
 msgstr "Create {singular}"
 
-msgid "Create Attachments"
-msgstr "Create Attachments"
-
 msgid "Create Columns Settings"
 msgstr "Create Columns Settings"
 
 msgid "Create Fields Order"
 msgstr "Create Fields Order"
+
+msgid "Create first super admin account"
+msgstr "Create first super admin account"
 
 msgid "Create It"
 msgstr "Create It"
@@ -465,9 +483,6 @@ msgstr "Created At"
 
 msgid "Creating {singular}"
 msgstr "Creating {singular}"
-
-msgid "Creating Attachments"
-msgstr "Creating Attachments"
 
 msgid "Credentials Was Successfully Setup"
 msgstr "Credentials Was Successfully Setup"
@@ -559,6 +574,9 @@ msgstr "Deactivate"
 msgid "Deactivate {0}"
 msgstr "Deactivate {0}"
 
+msgid "Deactivated"
+msgstr "Deactivated"
+
 msgid "Deactivating {0}"
 msgstr "Deactivating {0}"
 
@@ -637,8 +655,17 @@ msgstr "Enabled Entities Settings"
 msgid "Enabled Relations"
 msgstr "Enabled Relations"
 
+msgid "Enter a security token from your authenticator app"
+msgstr "Enter a security token from your authenticator app"
+
+msgid "Enter one of your unsed recovery codes"
+msgstr "Enter one of your unsed recovery codes"
+
 msgid "Enter your credentials to continue"
 msgstr "Enter your credentials to continue"
+
+msgid "Enter your database credentials to continue"
+msgstr "Enter your database credentials to continue"
 
 msgid "Entities"
 msgstr "Entities"
@@ -751,8 +778,8 @@ msgstr "Flows"
 msgid "Follow us on Twitter"
 msgstr "Follow us on Twitter"
 
-msgid "For security reasons, Please input your account password to be able to manage {label}"
-msgstr "For security reasons, Please input your account password to be able to manage {label}"
+msgid "For security reasons, Please input your account password to reveal credentials"
+msgstr "For security reasons, Please input your account password to reveal credentials"
 
 msgid "Form"
 msgstr "Form"
@@ -838,8 +865,14 @@ msgstr "Hour"
 msgid "I have safely saved my recovery tokens"
 msgstr "I have safely saved my recovery tokens"
 
+msgid "I Want To Help With Translation"
+msgstr "I Want To Help With Translation"
+
 msgid "Icon"
 msgstr "Icon"
+
+msgid "ID"
+msgstr "ID"
 
 msgid "Image"
 msgstr "Image"
@@ -973,9 +1006,6 @@ msgstr "Max Length"
 msgid "Maximum file size to upload in MB"
 msgstr "Maximum file size to upload in MB"
 
-msgid "Menu Builder"
-msgstr "Menu Builder"
-
 msgid "Menu Item"
 msgstr "Menu Item"
 
@@ -1026,9 +1056,6 @@ msgstr "New Value"
 
 msgid "No"
 msgstr "No"
-
-msgid "No {0} Has Been Logged Yet"
-msgstr "No {0} Has Been Logged Yet"
 
 msgid "No {singular} Has Been Added Yet"
 msgstr "No {singular} Has Been Added Yet"
@@ -1101,6 +1128,9 @@ msgstr "Orange"
 
 msgid "Order"
 msgstr "Order"
+
+msgid "Ordered"
+msgstr "Ordered"
 
 msgid "Password"
 msgstr "Password"
@@ -1228,11 +1258,14 @@ msgstr "Response"
 msgid "Restore"
 msgstr "Restore"
 
-msgid "Reveal {label}"
-msgstr "Reveal {label}"
+msgid "Restored"
+msgstr "Restored"
 
-msgid "Revealing {label}"
-msgstr "Revealing {label}"
+msgid "Reveal Credentials"
+msgstr "Reveal Credentials"
+
+msgid "Revealing Credentials"
+msgstr "Revealing Credentials"
 
 msgid "Rich Text"
 msgstr "Rich Text"
@@ -1249,17 +1282,11 @@ msgstr "Role Permissions"
 msgid "Roles"
 msgstr "Roles"
 
-msgid "Roles and Permissions"
-msgstr "Roles and Permissions"
-
 msgid "Route ID"
 msgstr "Route ID"
 
 msgid "Save"
 msgstr "Save"
-
-msgid "Save {0}"
-msgstr "Save {0}"
 
 msgid "Save {singular}"
 msgstr "Save {singular}"
@@ -1269,9 +1296,6 @@ msgstr "Save Current Filters"
 
 msgid "Saving"
 msgstr "Saving"
-
-msgid "Saving {0}"
-msgstr "Saving {0}"
 
 msgid "Saving {singular}"
 msgstr "Saving {singular}"
@@ -1297,11 +1321,17 @@ msgstr "Secret Access Key"
 msgid "Secrets"
 msgstr "Secrets"
 
+msgid "Select {0}"
+msgstr "Select {0}"
+
 msgid "Select Node Type"
 msgstr "Select Node Type"
 
 msgid "Select Trigger"
 msgstr "Select Trigger"
+
+msgid "Select Value"
+msgstr "Select Value"
 
 msgid "Select Workflow"
 msgstr "Select Workflow"
@@ -1354,11 +1384,20 @@ msgstr "Setup Account"
 msgid "Setup Credentials"
 msgstr "Setup Credentials"
 
+msgid "Setup DB credentials"
+msgstr "Setup DB credentials"
+
 msgid "Share"
 msgstr "Share"
 
+msgid "Shared"
+msgstr "Shared"
+
 msgid "Sharing"
 msgstr "Sharing"
+
+msgid "Show"
+msgstr "Show"
 
 msgid "Show Soft Deleted Items And The Restore Button"
 msgstr "Show Soft Deleted Items And The Restore Button"
@@ -1383,9 +1422,6 @@ msgstr "Site"
 
 msgid "Site Settings"
 msgstr "Site Settings"
-
-msgid "Slug"
-msgstr "Slug"
 
 msgid "Small Logo"
 msgstr "Small Logo"
@@ -1438,9 +1474,6 @@ msgstr "System"
 msgid "System Info"
 msgstr "System Info"
 
-msgid "System Information"
-msgstr "System Information"
-
 msgid "System Settings"
 msgstr "System Settings"
 
@@ -1483,14 +1516,11 @@ msgstr "Theme Settings"
 msgid "This {0} Has No Form"
 msgstr "This {0} Has No Form"
 
-msgid "This application has no active entities. Kindly add new entities through your preferred database editor then restart this application to proceed."
-msgstr "This application has no active entities. Kindly add new entities through your preferred database editor then restart this application to proceed."
+msgid "This action does not have configuration"
+msgstr "This action does not have configuration"
 
 msgid "This entity has no fields"
 msgstr "This entity has no fields"
-
-msgid "This entity has no fields. Kindly add fields from your prefer database tool to manage them here"
-msgstr "This entity has no fields. Kindly add fields from your prefer database tool to manage them here"
 
 msgid "This entity has no relations"
 msgstr "This entity has no relations"
@@ -1560,6 +1590,12 @@ msgstr "Use Colors"
 
 msgid "Use Icon"
 msgstr "Use Icon"
+
+msgid "Use OTP Token"
+msgstr "Use OTP Token"
+
+msgid "Use Recovery Code"
+msgstr "Use Recovery Code"
 
 msgid "Use SSL"
 msgstr "Use SSL"

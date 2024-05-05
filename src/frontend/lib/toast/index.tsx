@@ -16,12 +16,6 @@ const toastStyle = (color: keyof typeof COLORS) => ({
   maxWidth: "550px",
 });
 
-function isMessageDescriptor<T>(
-  message: MessageDescriptor | T
-): message is MessageDescriptor {
-  return typeof (message as MessageDescriptor).message === "string";
-}
-
 type ToastMessageWithAction = {
   message: MessageDescriptor;
   action: { label: MessageDescriptor; action: () => void };
@@ -106,28 +100,28 @@ function ToastAction({
 
 export const ToastService = {
   success: (message: MessageDescriptor | ToastMessageWithAction) => {
-    if (isMessageDescriptor(message)) {
-      toast.success((t) => <ToastMessage message={message} toastT={t} />, {
-        style: toastStyle("success"),
-        duration: 7000,
-        id: getMessageDescriptorId(message),
-      });
+    if ("action" in message) {
+      toast.success(
+        (t) => (
+          <div>
+            <ToastMessage message={message.message} toastT={t} />
+            <ToastAction message={message} toastId={t.id} />
+          </div>
+        ),
+        {
+          style: toastStyle("success"),
+          duration: 7000,
+          id: getMessageDescriptorId(message.message),
+        }
+      );
       return;
     }
 
-    toast.success(
-      (t) => (
-        <div>
-          <ToastMessage message={message.message} toastT={t} />
-          <ToastAction message={message} toastId={t.id} />
-        </div>
-      ),
-      {
-        style: toastStyle("success"),
-        duration: 7000,
-        id: getMessageDescriptorId(message.message),
-      }
-    );
+    toast.success((t) => <ToastMessage message={message} toastT={t} />, {
+      style: toastStyle("success"),
+      duration: 7000,
+      id: getMessageDescriptorId(message),
+    });
   },
 
   error: (message: unknown) => {

@@ -1,6 +1,7 @@
 import { rolesApiController } from "backend/roles/roles.controller";
 import { UserPermissions } from "shared/constants/user";
 import { requestHandler } from "backend/lib/request";
+import { ensureIsArray } from "shared/lib/array/ensure";
 
 const REQUEST_QUERY_FIELD = "roleId";
 
@@ -27,7 +28,7 @@ export default requestHandler(
       ]);
       return await rolesApiController.removePermissions(
         validatedRequest.requestQueries.roleId,
-        validatedRequest.requestQueries
+        ensureIsArray(validatedRequest.requestQueries.permissions)
       );
     },
 

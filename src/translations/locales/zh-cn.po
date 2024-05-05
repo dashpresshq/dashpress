@@ -13,14 +13,8 @@ msgstr ""
 "Plural-Forms: \n"
 "X-Generator: Poedit 3.4.2\n"
 
-msgid "-- Select State --"
-msgstr "-- 选择状态 --"
-
-msgid "\"{0}\" Selection"
-msgstr "选择“{0}”"
-
-msgid "\"{0}\" Validations"
-msgstr "验证“{0}”"
+msgid ""
+msgstr ""
 
 msgid "[[ name ]] is an invalid date"
 msgstr "[[ name ]]是无效日期"
@@ -36,9 +30,6 @@ msgstr "[[ name ]]是无效的 URL"
 
 msgid "[[ name ]] is invalid"
 msgstr "[[ name ]]无效"
-
-msgid "[[ name ]] is invalid. Allowed values are [[ options ]]"
-msgstr "[[ name ]] 无效。允许的值为 [[ options ]]"
 
 msgid "[[ name ]] is not a text"
 msgstr "[[ name ]]不是文本"
@@ -103,11 +94,11 @@ msgstr ""
 msgid "{0} Configuration"
 msgstr "{0}配置"
 
-msgid "{0} Preference"
-msgstr "{0}偏好"
+msgid "{0} Selections"
+msgstr ""
 
-msgid "{0} Shared Successfully"
-msgstr "{0}分享成功"
+msgid "{0} Validations"
+msgstr ""
 
 msgid "{plural} Units"
 msgstr "{plural}单位"
@@ -187,8 +178,14 @@ msgstr "偏好设置"
 msgid "Account Profile"
 msgstr "账号信息"
 
+msgid "Account Setup"
+msgstr ""
+
 msgid "Account Was Successfully Setup"
 msgstr "账户设置成功"
+
+msgid "Accounts"
+msgstr ""
 
 msgid "Action"
 msgstr "动作"
@@ -199,8 +196,14 @@ msgstr "动作"
 msgid "Activate {0}"
 msgstr "激活 {0}"
 
+msgid "Activated"
+msgstr ""
+
 msgid "Activating {0}"
 msgstr "激活 {0}"
+
+msgid "Add fields to this table from your prefer database tool to manage them here"
+msgstr ""
 
 msgid "Add Filter"
 msgstr "筛选"
@@ -220,6 +223,9 @@ msgstr "创建新的并选中"
 msgid "Add New Option"
 msgstr "添加新选项"
 
+msgid "Add new tables through your preferred database editor then restart this application."
+msgstr ""
+
 msgid "Add New Validation"
 msgstr "添加新验证"
 
@@ -228,6 +234,9 @@ msgstr "所有仪表盘"
 
 msgid "All items were {actionText} successfully"
 msgstr "所有项目均已{actionText}成功"
+
+msgid "Allowed values are [[ options ]]"
+msgstr ""
 
 msgid "Alphanumeric"
 msgstr "字母数字"
@@ -240,6 +249,12 @@ msgstr "Api 密钥"
 
 msgid "App"
 msgstr "APP"
+
+msgid "App Navigation"
+msgstr ""
+
+msgid "App Settings"
+msgstr ""
 
 msgid "Are you sure you want to do this?"
 msgstr "你确定你要这么做吗？"
@@ -373,6 +388,9 @@ msgstr "复制{0}"
 msgid "Clone Settings"
 msgstr "复制设置"
 
+msgid "Cloned"
+msgstr ""
+
 msgid "Cloning"
 msgstr "复制"
 
@@ -399,6 +417,9 @@ msgstr "完成设置"
 
 msgid "Condition"
 msgstr "条件"
+
+msgid "Configurations"
+msgstr ""
 
 msgid "Configure"
 msgstr "设置"
@@ -445,14 +466,14 @@ msgstr "创建"
 msgid "Create {singular}"
 msgstr "创建{singular}"
 
-msgid "Create Attachments"
-msgstr "添加附件"
-
 msgid "Create Columns Settings"
 msgstr "创建列设置"
 
 msgid "Create Fields Order"
 msgstr "创建字段顺序"
+
+msgid "Create first super admin account"
+msgstr ""
 
 msgid "Create It"
 msgstr "创建"
@@ -462,9 +483,6 @@ msgstr "创建时间"
 
 msgid "Creating {singular}"
 msgstr "创建{singular}"
-
-msgid "Creating Attachments"
-msgstr "添加附件"
 
 msgid "Credentials Was Successfully Setup"
 msgstr "证书设置成功"
@@ -556,6 +574,9 @@ msgstr "停用"
 msgid "Deactivate {0}"
 msgstr "停用{0}"
 
+msgid "Deactivated"
+msgstr ""
+
 msgid "Deactivating {0}"
 msgstr "停用{0}"
 
@@ -634,8 +655,17 @@ msgstr "启用实体设置"
 msgid "Enabled Relations"
 msgstr "已启用关系"
 
+msgid "Enter a security token from your authenticator app"
+msgstr ""
+
+msgid "Enter one of your unsed recovery codes"
+msgstr ""
+
 msgid "Enter your credentials to continue"
 msgstr "输入您的凭证以继续"
+
+msgid "Enter your database credentials to continue"
+msgstr ""
 
 msgid "Entities"
 msgstr "实体"
@@ -748,8 +778,8 @@ msgstr "Flow"
 msgid "Follow us on Twitter"
 msgstr "关注我们的推特"
 
-msgid "For security reasons, Please input your account password to be able to manage {label}"
-msgstr "出于安全原因，请输入您的账户密码才能管理{label}"
+msgid "For security reasons, Please input your account password to reveal credentials"
+msgstr ""
 
 msgid "Form"
 msgstr "表单"
@@ -835,8 +865,14 @@ msgstr "小时"
 msgid "I have safely saved my recovery tokens"
 msgstr "我已安全保存了我的恢复令牌"
 
+msgid "I Want To Help With Translation"
+msgstr ""
+
 msgid "Icon"
 msgstr "图标"
+
+msgid "ID"
+msgstr ""
 
 msgid "Image"
 msgstr "图像"
@@ -970,9 +1006,6 @@ msgstr "最长长度"
 msgid "Maximum file size to upload in MB"
 msgstr "上传的最大文件大小（MB）"
 
-msgid "Menu Builder"
-msgstr "菜单生成器"
-
 msgid "Menu Item"
 msgstr "菜单选项"
 
@@ -1023,9 +1056,6 @@ msgstr "新值"
 
 msgid "No"
 msgstr ""
-
-msgid "No {0} Has Been Logged Yet"
-msgstr "尚未记录任何{0}"
 
 msgid "No {singular} Has Been Added Yet"
 msgstr "没有{singular}被添加"
@@ -1098,6 +1128,9 @@ msgstr "橙色"
 
 msgid "Order"
 msgstr "顺序"
+
+msgid "Ordered"
+msgstr ""
 
 msgid "Password"
 msgstr "密码"
@@ -1225,11 +1258,14 @@ msgstr "响应"
 msgid "Restore"
 msgstr "恢复"
 
-msgid "Reveal {label}"
-msgstr "显示 {label}"
+msgid "Restored"
+msgstr ""
 
-msgid "Revealing {label}"
-msgstr "显示 {label}"
+msgid "Reveal Credentials"
+msgstr ""
+
+msgid "Revealing Credentials"
+msgstr ""
 
 msgid "Rich Text"
 msgstr "富文本"
@@ -1246,17 +1282,11 @@ msgstr "角色权限"
 msgid "Roles"
 msgstr "角色"
 
-msgid "Roles and Permissions"
-msgstr "角色和权限"
-
 msgid "Route ID"
 msgstr "路由ID"
 
 msgid "Save"
 msgstr "保存"
-
-msgid "Save {0}"
-msgstr "保存{0}"
 
 msgid "Save {singular}"
 msgstr "保存{singular}"
@@ -1266,9 +1296,6 @@ msgstr "保存当前过滤器"
 
 msgid "Saving"
 msgstr "保存"
-
-msgid "Saving {0}"
-msgstr "正在保存{0}"
 
 msgid "Saving {singular}"
 msgstr "保存{singular}"
@@ -1294,11 +1321,17 @@ msgstr "访问密钥"
 msgid "Secrets"
 msgstr "密钥"
 
+msgid "Select {0}"
+msgstr ""
+
 msgid "Select Node Type"
 msgstr "选择节点类型"
 
 msgid "Select Trigger"
 msgstr "选择触发条件"
+
+msgid "Select Value"
+msgstr ""
 
 msgid "Select Workflow"
 msgstr "选择工作流"
@@ -1351,11 +1384,20 @@ msgstr "配置账户"
 msgid "Setup Credentials"
 msgstr "配置凭据"
 
+msgid "Setup DB credentials"
+msgstr ""
+
 msgid "Share"
 msgstr "分享"
 
+msgid "Shared"
+msgstr ""
+
 msgid "Sharing"
 msgstr "分享"
+
+msgid "Show"
+msgstr ""
 
 msgid "Show Soft Deleted Items And The Restore Button"
 msgstr "显示软删除项目和恢复按钮"
@@ -1380,9 +1422,6 @@ msgstr "站点"
 
 msgid "Site Settings"
 msgstr "站点设置"
-
-msgid "Slug"
-msgstr ""
 
 msgid "Small Logo"
 msgstr "小图标"
@@ -1435,9 +1474,6 @@ msgstr "系统"
 msgid "System Info"
 msgstr "系统设置"
 
-msgid "System Information"
-msgstr "系统信息"
-
 msgid "System Settings"
 msgstr "系统设置"
 
@@ -1480,14 +1516,11 @@ msgstr "主题设置"
 msgid "This {0} Has No Form"
 msgstr "此{0}无表格"
 
-msgid "This application has no active entities. Kindly add new entities through your preferred database editor then restart this application to proceed."
-msgstr "这个应用目前没有可用的数据。请在您喜欢的数据库编辑器中添加新的数据，然后重新启动应用程序以继续。"
+msgid "This action does not have configuration"
+msgstr ""
 
 msgid "This entity has no fields"
 msgstr ""
-
-msgid "This entity has no fields. Kindly add fields from your prefer database tool to manage them here"
-msgstr "这个实体没有字段。请使用您喜欢的数据库工具在此处添加字段以进行管理"
 
 msgid "This entity has no relations"
 msgstr "该实体没有关联"
@@ -1557,6 +1590,12 @@ msgstr "使用颜色"
 
 msgid "Use Icon"
 msgstr "使用图标"
+
+msgid "Use OTP Token"
+msgstr ""
+
+msgid "Use Recovery Code"
+msgstr ""
 
 msgid "Use SSL"
 msgstr "使用SSL"

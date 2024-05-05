@@ -78,11 +78,6 @@ const Scroll = styled.div`
   height: 100%;
   overflow-y: scroll;
   overflow-x: hidden;
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-  &::-webkit-scrollbar {
-    display: none;
-  }
 `;
 interface IProps {
   isFullWidth: boolean;

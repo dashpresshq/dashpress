@@ -131,7 +131,7 @@ export function EntityFormExtensionSettings() {
   const entityFormView = useEntityFormView(entity);
 
   const documentationActionButton = useDocumentationActionButton(
-    msg`Form Scripts`
+    domainMessages.TEXT_LANG.TITLE
   );
 
   useSetPageDetails({

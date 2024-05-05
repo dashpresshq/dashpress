@@ -14,7 +14,7 @@ import { ComponentIsLoading } from "frontend/design-system/components/ComponentI
 import { Typo } from "frontend/design-system/primitives/Typo";
 import { SchemaForm } from "frontend/components/SchemaForm";
 import { useGuestCheck } from "frontend/hooks/auth/useGuestCheck";
-import { msg, t } from "@lingui/macro";
+import { msg } from "@lingui/macro";
 import { CustomNextPage } from "frontend/_layouts/types";
 import { useHandleNoTokenAuthResponse } from "./portal";
 
@@ -61,8 +61,8 @@ export const SignIn: CustomNextPage = () => {
 
   return (
     <AuthLayout
-      title={t`Sign In`}
-      subTitle={t`Enter your credentials to continue`}
+      title={msg`Sign In`}
+      subTitle={msg`Enter your credentials to continue`}
     >
       {process.env.NEXT_PUBLIC_IS_DEMO && (
         <div aria-label="Demo App Credentials">

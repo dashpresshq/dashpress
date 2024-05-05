@@ -17,16 +17,16 @@ export function ApplicationRoot({
   translation?: Messages;
 }) {
   return (
-    <LinguiProvider translation={translation}>
-      <QueryProvider>
-        <PortalProvider>
+    <ThemeContextProvider>
+      <LinguiProvider translation={translation}>
+        <QueryProvider>
           <Toaster />
           <GlobalStyles />
-          <ThemeContextProvider>{children}</ThemeContextProvider>
           <ConfirmAlert />
-        </PortalProvider>
-        <GoogleTagManager />
-      </QueryProvider>
-    </LinguiProvider>
+          <PortalProvider>{children}</PortalProvider>
+          <GoogleTagManager />
+        </QueryProvider>
+      </LinguiProvider>
+    </ThemeContextProvider>
   );
 }

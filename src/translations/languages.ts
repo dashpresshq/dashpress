@@ -5,8 +5,6 @@ interface Languages {
   rtl?: true;
 }
 
-export type LOCALES = "en-us" | "nl-nl" | "pseudo";
-
 const languages: Languages[] = [
   {
     locale: "en-us",

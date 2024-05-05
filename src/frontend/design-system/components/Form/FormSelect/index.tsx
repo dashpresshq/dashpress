@@ -4,6 +4,7 @@ import { ILabelValue, ISelectData } from "shared/types/options";
 import { useLingui } from "@lingui/react";
 import { MessageDescriptor } from "@lingui/core";
 import { useMemo } from "react";
+import { msg } from "@lingui/macro";
 import {
   generateClassNames,
   wrapLabelAndError,
@@ -79,7 +80,7 @@ export const FormSelect = (props: IFormSelect) => {
   const selectDataWithDefault = [
     {
       value: nullable ? null : "",
-      label: defaultLabel || `--- Select ${_(formLabel)} ---`,
+      label: defaultLabel || `--- ${_(msg`Select ${_(formLabel)}`)} ---`,
     },
     ...selectData.map(({ value, label }) => ({ value, label: _(label) })),
   ];

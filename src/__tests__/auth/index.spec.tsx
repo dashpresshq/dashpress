@@ -88,9 +88,9 @@ describe("pages/auth", () => {
 
   // Need to be able to tell jest to ignore 401 errors as the test crashes after hitting it
   it.skip("should prompt invalid login when invalid credentials are put in", async () => {
-    const pushMock = jest.fn();
+    const replaceMock = jest.fn();
 
-    useRouter.mockImplementation(USE_ROUTER_PARAMS({ pushMock }));
+    useRouter.mockImplementation(USE_ROUTER_PARAMS({ replaceMock }));
 
     render(
       <ApplicationRoot>
@@ -115,7 +115,7 @@ describe("pages/auth", () => {
 
     expect(localStorage.getItem(AuthActions.JWT_TOKEN_STORAGE_KEY)).toBeNull();
 
-    expect(pushMock).not.toHaveBeenCalled();
+    expect(window.location.replace).not.toHaveBeenCalled();
   });
 
   it("should redirect to dashboard when user is succesfully authenticated", async () => {

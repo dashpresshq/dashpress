@@ -16,1634 +16,1670 @@ msgstr ""
 msgid ""
 msgstr ""
 
-msgid "-- Select State --"
-msgstr ""
-
-msgid "\"{0}\" Selection"
-msgstr ""
-
-msgid "\"{0}\" Validations"
-msgstr ""
-
 msgid "[[ name ]] is an invalid date"
-msgstr ""
+msgstr "[[ name ]] は無効な日付です"
 
 msgid "[[ name ]] is an invalid email"
-msgstr ""
+msgstr "[[ name ]] は無効なメールです"
 
 msgid "[[ name ]] is an invalid json"
-msgstr ""
+msgstr "[[ name ]] は無効な JSON です"
 
 msgid "[[ name ]] is an invalid URL"
-msgstr ""
+msgstr "[[ name ]] は無効な URL です"
 
 msgid "[[ name ]] is invalid"
-msgstr ""
-
-msgid "[[ name ]] is invalid. Allowed values are [[ options ]]"
-msgstr ""
+msgstr "[[ name ]] は無効です"
 
 msgid "[[ name ]] is not a text"
-msgstr ""
+msgstr "[[ name ]] はテキストではありません"
 
 msgid "[[ name ]] is required"
-msgstr ""
+msgstr "[[ name ]]は必須です"
 
 msgid "[[ name ]] should be a boolean"
-msgstr ""
+msgstr "[[ name ]] はブール値である必要があります"
 
 msgid "[[ name ]] should be a color"
-msgstr ""
+msgstr "[[ name ]] は色である必要があります"
 
 msgid "[[ name ]] should be a number"
-msgstr ""
+msgstr "[[ name ]] は数字である必要があります"
 
 msgid "[[ name ]] should be greater than [[ length ]] characters"
-msgstr ""
+msgstr "[[ name ]] は [[ length ]] 文字より大きくなければなりません"
 
 msgid "[[ name ]] should be greater than [[ otherField ]]"
-msgstr ""
+msgstr "[[ name ]] は [[ otherField ]] より大きくなければなりません"
 
 msgid "[[ name ]] should be greater than [[ value ]]"
-msgstr ""
+msgstr "[[ name ]] は [[ value ]] より大きくなければなりません"
 
 msgid "[[ name ]] should be less than [[ length ]] characters"
-msgstr ""
+msgstr "[[ name ]] は [[ length ]] 文字未満である必要があります"
 
 msgid "[[ name ]] should be less than [[ otherField ]]"
-msgstr ""
+msgstr "[[ name ]] は [[ otherField ]] より小さくなければなりません"
 
 msgid "[[ name ]] should be less than [[ value ]]"
-msgstr ""
+msgstr "[[ name ]] は [[ value ]] 未満である必要があります"
 
 msgid "[[ name ]] should be positive number"
-msgstr ""
+msgstr "[[ name ]] は正の数である必要があります"
 
 msgid "[[ name ]] should contain only alphabets and numbers"
-msgstr ""
+msgstr "[[ name ]] にはアルファベットと数字のみを含めてください"
 
 msgid "[[ name ]] should contain only upper cases"
-msgstr ""
+msgstr "[[ name ]] には大文字のみを含める必要があります"
 
 msgid "[[ name ]] should match [[ otherField ]]"
-msgstr ""
+msgstr "[[ name ]] は [[ otherField ]] と一致する必要があります"
 
 msgid "[[ name ]] should not match [[ otherField ]]"
-msgstr ""
+msgstr "[[ name ]] は [[ otherField ]] と一致してはなりません"
 
 msgid "{0}"
-msgstr ""
+msgstr "{0}"
 
 msgid "{0} - {1}"
-msgstr ""
+msgstr "{0} - {1}"
 
 msgid "{0} [{1}]"
-msgstr ""
+msgstr "{0} [{1}]"
 
 msgid "{0} {1}"
-msgstr ""
+msgstr "{0} {1}"
 
 msgid "{0} Configuration"
-msgstr ""
+msgstr "{0} 構成"
 
-msgid "{0} Preference"
-msgstr ""
+msgid "{0} Selections"
+msgstr "{0} 個の選択"
 
-msgid "{0} Shared Successfully"
-msgstr ""
+msgid "{0} Validations"
+msgstr "{0} 検証"
 
 msgid "{plural} Units"
-msgstr ""
+msgstr "{plural}単位"
 
 msgid "{singular} {action} Successfully"
-msgstr ""
+msgstr "{singular} {action} が成功しました"
 
 msgid "{singular} could not be retrieved"
-msgstr ""
+msgstr "{singular} を取得できませんでした"
 
 msgid "{singular} Created Successfully"
-msgstr ""
+msgstr "{singular} が正常に作成されました"
 
 msgid "{singular} Deleted Successfully"
-msgstr ""
+msgstr "{singular} が正常に削除されました"
 
 msgid "{singular} Details"
-msgstr ""
+msgstr "{singular} 詳細"
 
 msgid "{singular} Saved Successfully"
-msgstr ""
+msgstr "{singular} が正常に保存されました"
 
 msgid "{singular} Settings"
-msgstr ""
+msgstr "{singular} 設定"
 
 msgid "{singular} Unit"
-msgstr ""
+msgstr "{singular} 単位"
 
 msgid "{singular} Updated Successfully"
-msgstr ""
+msgstr "{singular} が正常に更新されました"
 
 msgid "{value} Day"
-msgstr ""
+msgstr "{value} 日"
 
 msgid "{value} Days"
-msgstr ""
+msgstr "{value} 日"
 
 msgid "{value} Hour"
-msgstr ""
+msgstr "{value} 時間"
 
 msgid "{value} Hours"
-msgstr ""
+msgstr "{value} 時間"
 
 msgid "{value} Month"
-msgstr ""
+msgstr "{value} 月"
 
 msgid "{value} Months"
-msgstr ""
+msgstr "{value} か月"
 
 msgid "{value} Quarter"
-msgstr ""
+msgstr "{value} 四半期"
 
 msgid "{value} Quarters"
-msgstr ""
+msgstr "{value} 四半期"
 
 msgid "{value} Week"
-msgstr ""
+msgstr "{value} 週間"
 
 msgid "{value} Weeks"
-msgstr ""
+msgstr "{value} 週間"
 
 msgid "{value} Year"
-msgstr ""
+msgstr "{value} 年"
 
 msgid "{value} Years"
-msgstr ""
+msgstr "{value} 年"
 
 msgid "2FA Tokens"
-msgstr ""
+msgstr "2FA トークン"
 
 msgid "Access Key ID"
-msgstr ""
+msgstr "アクセスキーID"
 
 msgid "Account Preferences"
-msgstr ""
+msgstr "アカウントの設定"
 
 msgid "Account Profile"
+msgstr "アカウントプロフィール"
+
+msgid "Account Setup"
 msgstr ""
 
 msgid "Account Was Successfully Setup"
+msgstr "アカウントは正常にセットアップされました"
+
+msgid "Accounts"
 msgstr ""
 
 msgid "Action"
-msgstr ""
+msgstr "アクション"
 
 msgid "Actions"
-msgstr ""
+msgstr "行動"
 
 msgid "Activate {0}"
-msgstr ""
+msgstr "{0}をアクティブにする"
+
+msgid "Activated"
+msgstr "アクティブ化された"
 
 msgid "Activating {0}"
-msgstr ""
+msgstr "{0}をアクティブ化しています"
+
+msgid "Add fields to this table from your prefer database tool to manage them here"
+msgstr "好みのデータベース ツールからこのテーブルにフィールドを追加して、ここで管理します"
 
 msgid "Add Filter"
-msgstr ""
+msgstr "フィルターの追加"
 
 msgid "Add Nested Filter"
-msgstr ""
+msgstr "ネストされたフィルターの追加"
 
 msgid "Add New {0} And Select"
-msgstr ""
+msgstr "新しい {0} を追加して選択"
 
 msgid "Add New {singular}"
-msgstr ""
+msgstr "新しい{singular}を追加"
 
 msgid "Add New And Select"
-msgstr ""
+msgstr "新規追加して選択"
 
 msgid "Add New Option"
-msgstr ""
+msgstr "新しいオプションを追加"
+
+msgid "Add new tables through your preferred database editor then restart this application."
+msgstr "好みのデータベース エディターを使用して新しいテーブルを追加し、このアプリケーションを再起動します。"
 
 msgid "Add New Validation"
-msgstr ""
+msgstr "新しい検証を追加"
 
 msgid "All Dashboards"
-msgstr ""
+msgstr "すべてのダッシュボード"
 
 msgid "All items were {actionText} successfully"
-msgstr ""
+msgstr "すべてのアイテムが正常に {actionText} されました"
+
+msgid "Allowed values are [[ options ]]"
+msgstr "許可される値は [[ options ]] です。"
 
 msgid "Alphanumeric"
-msgstr ""
+msgstr "英数字"
 
 msgid "AND"
-msgstr ""
+msgstr "そして"
 
 msgid "API Key"
-msgstr ""
+msgstr "APIキー"
 
 msgid "App"
+msgstr "アプリ"
+
+msgid "App Navigation"
+msgstr ""
+
+msgid "App Settings"
 msgstr ""
 
 msgid "Are you sure you want to do this?"
-msgstr ""
+msgstr "本当にこれを実行してもよろしいですか?"
 
 msgid "Associated Triggers"
-msgstr ""
+msgstr "関連するトリガー"
 
 msgid "Associated Workflows"
-msgstr ""
+msgstr "関連するワークフロー"
 
 msgid "Attach A Trigger"
-msgstr ""
+msgstr "トリガーを接続する"
 
 msgid "Attach A Workflow"
-msgstr ""
+msgstr "ワークフローを添付する"
 
 msgid "Authenticator Token"
-msgstr ""
+msgstr "認証トークン"
 
 msgid "Back To {0}"
-msgstr ""
+msgstr "{0} に戻る"
 
 msgid "Back to Sign In Page"
-msgstr ""
+msgstr "サインインページに戻る"
 
 msgid "Bar Chart"
-msgstr ""
+msgstr "棒グラフ"
 
 msgid "Before Submit"
-msgstr ""
+msgstr "送信する前に"
 
 msgid "Beginning of time"
-msgstr ""
+msgstr "時間の始まり"
 
 msgid "Beginning of Year"
-msgstr ""
+msgstr "年の初め"
 
 msgid "Between"
-msgstr ""
+msgstr "間"
 
 msgid "Blue"
-msgstr ""
+msgstr "青"
 
 msgid "Body"
-msgstr ""
+msgstr "体"
 
 msgid "Bookmark"
-msgstr ""
+msgstr "ブックマーク"
 
 msgid "Bookmarks"
-msgstr ""
+msgstr "ブックマーク"
 
 msgid "Boolean"
-msgstr ""
+msgstr "ブール値"
 
 msgid "Brown"
-msgstr ""
+msgstr "茶色"
 
 msgid "Bulk Delete"
-msgstr ""
+msgstr "一括削除"
 
 msgid "Bulk Deleting"
-msgstr ""
+msgstr "一括削除"
 
 msgid "Bulk Update"
-msgstr ""
+msgstr "一括更新"
 
 msgid "Can Access All Dashboards"
-msgstr ""
+msgstr "すべてのダッシュボードにアクセス可能"
 
 msgid "Can Access And Restore Soft Deleted Items"
-msgstr ""
+msgstr "論理的に削除されたアイテムにアクセスして復元できる"
 
 msgid "Can Configure App"
-msgstr ""
+msgstr "アプリを設定できる"
 
 msgid "Can Export Data"
-msgstr ""
+msgstr "データをエクスポートできる"
 
 msgid "Can Impersonate Users"
-msgstr ""
+msgstr "ユーザーになりすますことができる"
 
 msgid "Can Manage All Entities"
-msgstr ""
+msgstr "すべてのエンティティを管理できる"
 
 msgid "Can Manage App Credentials"
-msgstr ""
+msgstr "アプリの認証情報を管理できる"
 
 msgid "Can Manage Dashboard"
-msgstr ""
+msgstr "ダッシュボードを管理できる"
 
 msgid "Can Manage Permissions"
-msgstr ""
+msgstr "権限を管理できる"
 
 msgid "Can Manage Users"
-msgstr ""
+msgstr "ユーザーを管理できる"
 
 msgid "Can Manages Flows"
-msgstr ""
+msgstr "フローを管理できる"
 
 msgid "Can Reset Password"
-msgstr ""
+msgstr "パスワードをリセットできます"
 
 msgid "Cancel"
-msgstr ""
+msgstr "キャンセル"
 
 msgid "Change History"
-msgstr ""
+msgstr "変更履歴"
 
 msgid "Change Language"
-msgstr ""
+msgstr "言語を変えてください"
 
 msgid "Channel"
-msgstr ""
+msgstr "チャネル"
 
 msgid "Clear selections"
-msgstr ""
+msgstr "選択をクリア"
 
 msgid "Click here to view details"
-msgstr ""
+msgstr "詳細を表示するにはここをクリックしてください"
 
 msgid "Client Script"
-msgstr ""
+msgstr "クライアントスクリプト"
 
 msgid "Clone"
-msgstr ""
+msgstr "クローン"
 
 msgid "Clone {0}"
-msgstr ""
+msgstr "クローン {0}"
 
 msgid "Clone Settings"
-msgstr ""
+msgstr "クローン設定"
+
+msgid "Cloned"
+msgstr "クローン化された"
 
 msgid "Cloning"
-msgstr ""
+msgstr "クローン作成"
 
 msgid "Close Canvas"
-msgstr ""
+msgstr "キャンバスを閉じる"
 
 msgid "Color"
-msgstr ""
+msgstr "色"
 
 msgid "Column"
-msgstr ""
+msgstr "カラム"
 
 msgid "Column Labels Settings"
-msgstr ""
+msgstr "列ラベルの設定"
 
 msgid "Column Types Settings"
-msgstr ""
+msgstr "列タイプの設定"
 
 msgid "Complete Setup"
-msgstr ""
+msgstr "セットアップを完了する"
 
 msgid "Completing Setup"
-msgstr ""
+msgstr "セットアップの完了"
 
 msgid "Condition"
+msgstr "状態"
+
+msgid "Configurations"
 msgstr ""
 
 msgid "Configure"
-msgstr ""
+msgstr "構成、設定"
 
 msgid "Configure Selections"
-msgstr ""
+msgstr "選択項目の構成"
 
 msgid "Configure Validation"
-msgstr ""
+msgstr "検証の構成"
 
 msgid "Confirm"
-msgstr ""
+msgstr "確認する"
 
 msgid "Confirm Data Restoration"
-msgstr ""
+msgstr "データ復元の確認"
 
 msgid "Confirm Delete"
-msgstr ""
+msgstr "削除の確認"
 
 msgid "Confirmation Text"
-msgstr ""
+msgstr "確認テキスト"
 
 msgid "Connection URL"
-msgstr ""
+msgstr "接続URL"
 
 msgid "Constant"
-msgstr ""
+msgstr "絶え間ない"
 
 msgid "Constants"
-msgstr ""
+msgstr "定数"
 
 msgid "Contains"
-msgstr ""
+msgstr "含まれています"
 
 msgid "Continue"
-msgstr ""
+msgstr "続く"
 
 msgid "Copy To Clipboard"
-msgstr ""
+msgstr "クリップボードにコピー"
 
 msgid "Create"
-msgstr ""
+msgstr "作成する"
 
 msgid "Create {singular}"
-msgstr ""
-
-msgid "Create Attachments"
-msgstr ""
+msgstr "{singular}を作成する"
 
 msgid "Create Columns Settings"
-msgstr ""
+msgstr "列の作成設定"
 
 msgid "Create Fields Order"
+msgstr "フィールドの作成順序"
+
+msgid "Create first super admin account"
 msgstr ""
 
 msgid "Create It"
-msgstr ""
+msgstr "作成してください"
 
 msgid "Created At"
-msgstr ""
+msgstr "作成日"
 
 msgid "Creating {singular}"
-msgstr ""
-
-msgid "Creating Attachments"
-msgstr ""
+msgstr "{singular}の作成"
 
 msgid "Credentials Was Successfully Setup"
-msgstr ""
+msgstr "資格情報が正常にセットアップされました"
 
 msgid "Cron Expression"
-msgstr ""
+msgstr "クロン式"
 
 msgid "CRUD"
-msgstr ""
+msgstr "クラッド"
 
 msgid "CRUD Settings"
-msgstr ""
+msgstr "CRUD設定"
 
 msgid "cURL Command"
-msgstr ""
+msgstr "cURLコマンド"
 
 msgid "Curve"
-msgstr ""
+msgstr "曲線"
 
 msgid "Custom Action"
-msgstr ""
+msgstr "カスタムアクション"
 
 msgid "Custom Actions"
-msgstr ""
+msgstr "カスタムアクション"
 
 msgid "Custom Dashboard"
-msgstr ""
+msgstr "カスタムダッシュボード"
 
 msgid "Custom Dashboards"
-msgstr ""
+msgstr "カスタムダッシュボード"
 
 msgid "Custom Date"
-msgstr ""
+msgstr "カスタム日付"
 
 msgid "Dark"
-msgstr ""
+msgstr "暗い"
 
 msgid "Dark Color Scheme"
-msgstr ""
+msgstr "ダークカラースキーム"
 
 msgid "Dashboard"
-msgstr ""
+msgstr "ダッシュボード"
 
 msgid "Dashboard Widget"
-msgstr ""
+msgstr "ダッシュボードウィジェット"
 
 msgid "Dashboard Widgets"
-msgstr ""
+msgstr "ダッシュボードウィジェット"
 
 msgid "Dashboards"
-msgstr ""
+msgstr "ダッシュボード"
 
 msgid "Data"
-msgstr ""
+msgstr "データ"
 
 msgid "Data copied to clipboard successfully"
-msgstr ""
+msgstr "データがクリップボードに正常にコピーされました"
 
 msgid "Data Event"
-msgstr ""
+msgstr "データイベント"
 
 msgid "Data Events"
-msgstr ""
+msgstr "データイベント"
 
 msgid "Data exported successfully"
-msgstr ""
+msgstr "データは正常にエクスポートされました"
 
 msgid "Data Key"
-msgstr ""
+msgstr "データキー"
 
 msgid "Database"
-msgstr ""
+msgstr "データベース"
 
 msgid "Database Type"
-msgstr ""
+msgstr "データベースの種類"
 
 msgid "Date"
-msgstr ""
+msgstr "日付"
 
 msgid "Date Format"
-msgstr ""
+msgstr "日付形式"
 
 msgid "Day"
-msgstr ""
+msgstr "日"
 
 msgid "Deactivate"
-msgstr ""
+msgstr "非アクティブ化"
 
 msgid "Deactivate {0}"
-msgstr ""
+msgstr "{0}を非アクティブ化します"
+
+msgid "Deactivated"
+msgstr "無効化されました"
 
 msgid "Deactivating {0}"
-msgstr ""
+msgstr "{0}を非アクティブ化しています"
 
 msgid "Delete"
-msgstr ""
+msgstr "消去"
 
 msgid "Delete {singular}"
-msgstr ""
+msgstr "{singular}を削除"
 
 msgid "Delete Edge"
-msgstr ""
+msgstr "エッジの削除"
 
 msgid "Delete Selection"
-msgstr ""
+msgstr "選択範囲の削除"
 
 msgid "Description"
-msgstr ""
+msgstr "説明"
 
 msgid "Details"
-msgstr ""
+msgstr "詳細"
 
 msgid "Details Columns Settings"
-msgstr ""
+msgstr "詳細列の設定"
 
 msgid "Details Fields Order"
-msgstr ""
+msgstr "詳細フィールドの順序"
 
 msgid "Diction"
-msgstr ""
+msgstr "辞書"
 
 msgid "Diction Settings"
-msgstr ""
+msgstr "辞書設定"
 
 msgid "Display Format"
-msgstr ""
+msgstr "表示形式"
 
 msgid "Domain"
-msgstr ""
+msgstr "ドメイン"
 
 msgid "Done"
-msgstr ""
+msgstr "終わり"
 
 msgid "Download"
-msgstr ""
+msgstr "ダウンロード"
 
 msgid "Duplicate {singular}"
-msgstr ""
+msgstr "重複 {singular}"
 
 msgid "Edit"
-msgstr ""
+msgstr "編集"
 
 msgid "Edit {singular}"
-msgstr ""
+msgstr "{singular}を編集"
 
 msgid "Email"
-msgstr ""
+msgstr "Eメール"
 
 msgid "Empty Table"
-msgstr ""
+msgstr "空のテーブル"
 
 msgid "Enable {0} Functionality"
-msgstr ""
+msgstr "{0} 機能を有効にする"
 
 msgid "Enable Area"
-msgstr ""
+msgstr "エリアを有効にする"
 
 msgid "Enable Points"
-msgstr ""
+msgstr "ポイントを有効にする"
 
 msgid "Enabled Entities"
-msgstr ""
+msgstr "有効なエンティティ"
 
 msgid "Enabled Entities Settings"
-msgstr ""
+msgstr "有効なエンティティの設定"
 
 msgid "Enabled Relations"
-msgstr ""
+msgstr "有効な関係"
+
+msgid "Enter a security token from your authenticator app"
+msgstr "認証アプリからセキュリティ トークンを入力します"
+
+msgid "Enter one of your unsed recovery codes"
+msgstr "Unsed リカバリ コードのいずれかを入力してください"
 
 msgid "Enter your credentials to continue"
+msgstr "続行するには資格情報を入力してください"
+
+msgid "Enter your database credentials to continue"
 msgstr ""
 
 msgid "Entities"
-msgstr ""
+msgstr "エンティティ"
 
 msgid "Entities Enabled For Add New And Select"
-msgstr ""
+msgstr "新規追加と選択が有効なエンティティ"
 
 msgid "Entities Enabled For Change History"
-msgstr ""
+msgstr "変更履歴が有効になっているエンティティ"
 
 msgid "Entity"
-msgstr ""
+msgstr "実在物"
 
 msgid "Entity Action"
-msgstr ""
+msgstr "エンティティアクション"
 
 msgid "Entity Create Form Layout"
-msgstr ""
+msgstr "エンティティ作成フォームのレイアウト"
 
 msgid "Entity Field"
-msgstr ""
+msgstr "エンティティフィールド"
 
 msgid "Entity ID"
-msgstr ""
+msgstr "エンティティID"
 
 msgid "Entity Tab"
-msgstr ""
+msgstr "エンティティタブ"
 
 msgid "Entity Update Form Layout"
-msgstr ""
+msgstr "エンティティ更新フォームのレイアウト"
 
 msgid "Environment Variable"
-msgstr ""
+msgstr "環境変数"
 
 msgid "Environment Variables"
-msgstr ""
+msgstr "環境変数"
 
 msgid "Equal"
-msgstr ""
+msgstr "等しい"
 
 msgid "Equal To Other Field"
-msgstr ""
+msgstr "他のフィールドと等しい"
 
 msgid "Error message"
-msgstr ""
+msgstr "エラーメッセージ"
 
 msgid "Error Occured Setting Up Your 2FA Token"
-msgstr ""
+msgstr "2FA トークンのセットアップ中にエラーが発生しました"
 
 msgid "Every 6 Hours"
-msgstr ""
+msgstr "6時間ごと"
 
 msgid "Explain {title}"
-msgstr ""
+msgstr "{title}について説明する"
 
 msgid "Export"
-msgstr ""
+msgstr "輸出"
 
 msgid "Exporting"
-msgstr ""
+msgstr "輸出中"
 
 msgid "External Link"
-msgstr ""
+msgstr "外部リンク"
 
 msgid "Field"
-msgstr ""
+msgstr "分野"
 
 msgid "Field Corresponding To Dashpress Usernames"
-msgstr ""
+msgstr "Dashpress ユーザー名に対応するフィールド"
 
 msgid "Field Settings"
-msgstr ""
+msgstr "フィールド設定"
 
 msgid "Fields"
-msgstr ""
+msgstr "田畑"
 
 msgid "Fields State"
-msgstr ""
+msgstr "フィールドの状態"
 
 msgid "File"
-msgstr ""
+msgstr "ファイル"
 
 msgid "File Name"
-msgstr ""
+msgstr "ファイル名"
 
 msgid "File Name Format"
-msgstr ""
+msgstr "ファイル名の形式"
 
 msgid "File Path Format"
-msgstr ""
+msgstr "ファイルパス形式"
 
 msgid "File Storage"
-msgstr ""
+msgstr "ファイルストレージ"
 
 msgid "File Uploads Settings"
-msgstr ""
+msgstr "ファイルアップロード設定"
 
 msgid "Flow"
-msgstr ""
+msgstr "流れ"
 
 msgid "Flow Trigger Attachment"
-msgstr ""
+msgstr "フロートリガーアタッチメント"
 
 msgid "Flow Trigger Attachments"
-msgstr ""
+msgstr "フロートリガーアタッチメント"
 
 msgid "Flows"
-msgstr ""
+msgstr "流れ"
 
 msgid "Follow us on Twitter"
-msgstr ""
+msgstr "Twitterでフォローします"
 
-msgid "For security reasons, Please input your account password to be able to manage {label}"
-msgstr ""
+msgid "For security reasons, Please input your account password to reveal credentials"
+msgstr "セキュリティ上の理由から、資格情報を明らかにするにはアカウントのパスワードを入力してください"
 
 msgid "Form"
-msgstr ""
+msgstr "形状"
 
 msgid "Form Action"
-msgstr ""
+msgstr "フォームアクション"
 
 msgid "Form Actions"
-msgstr ""
+msgstr "フォームアクション"
 
 msgid "Form Field"
-msgstr ""
+msgstr "フォームフィールド"
 
 msgid "Form Fields"
-msgstr ""
+msgstr "フォームフィールド"
 
 msgid "Form Scripts"
-msgstr ""
+msgstr "フォームスクリプト"
 
 msgid "Format"
-msgstr ""
+msgstr "フォーマット"
 
 msgid "From"
-msgstr ""
+msgstr "から"
 
 msgid "General"
-msgstr ""
+msgstr "一般的な"
 
 msgid "General Data Settings"
-msgstr ""
+msgstr "一般的なデータ設定"
 
 msgid "Genesis"
-msgstr ""
+msgstr "創世記"
 
 msgid "Global Action"
-msgstr ""
+msgstr "グローバルアクション"
 
 msgid "Go Back"
-msgstr ""
+msgstr "戻る"
 
 msgid "Greater Than"
-msgstr ""
+msgstr "より大きい"
 
 msgid "Greater Than Other Field"
-msgstr ""
+msgstr "他の分野よりも優れている"
 
 msgid "Green"
-msgstr ""
+msgstr "緑"
 
 msgid "Group Mode"
-msgstr ""
+msgstr "グループモード"
 
 msgid "Grouped"
-msgstr ""
+msgstr "グループ化された"
 
 msgid "Header"
-msgstr ""
+msgstr "ヘッダ"
 
 msgid "Headers"
-msgstr ""
+msgstr "ヘッダー"
 
 msgid "Height"
-msgstr ""
+msgstr "身長"
 
 msgid "Hi, {0}"
-msgstr ""
+msgstr "こんにちは、{0}"
 
 msgid "Home"
-msgstr ""
+msgstr "家"
 
 msgid "Home Link"
-msgstr ""
+msgstr "ホームリンク"
 
 msgid "Horizontal"
-msgstr ""
+msgstr "水平"
 
 msgid "Host"
-msgstr ""
+msgstr "ホスト"
 
 msgid "Hour"
-msgstr ""
+msgstr "時間"
 
 msgid "I have safely saved my recovery tokens"
+msgstr "回復トークンを安全に保存しました"
+
+msgid "I Want To Help With Translation"
 msgstr ""
 
 msgid "Icon"
-msgstr ""
+msgstr "アイコン"
+
+msgid "ID"
+msgstr "ID"
 
 msgid "Image"
-msgstr ""
+msgstr "画像"
 
 msgid "Impersonate User"
-msgstr ""
+msgstr "ユーザーになりすます"
 
 msgid "Impersonating User"
-msgstr ""
+msgstr "ユーザーになりすます"
 
 msgid "Incorrect value"
-msgstr ""
+msgstr "不正な値"
 
 msgid "Indigo"
-msgstr ""
+msgstr "インジゴ"
 
 msgid "Initial Values"
-msgstr ""
+msgstr "初期値"
 
 msgid "Inline Edit"
-msgstr ""
+msgstr "インライン編集"
 
 msgid "Inline Edit Settings"
-msgstr ""
+msgstr "インライン編集設定"
 
 msgid "Input {deactivationKey} to continue"
-msgstr ""
+msgstr "続行するには、{deactivationKey} を入力してください"
 
 msgid "Integration"
-msgstr ""
+msgstr "統合"
 
 msgid "Integrations"
-msgstr ""
+msgstr "統合"
 
 msgid "IP Address"
-msgstr ""
+msgstr "IPアドレス"
 
 msgid "Is In"
-msgstr ""
+msgstr "入っています"
 
 msgid "Is Not In"
-msgstr ""
+msgstr "入っていない"
 
 msgid "Is Not Null"
-msgstr ""
+msgstr "NULL ではありません"
 
 msgid "Is Null"
-msgstr ""
+msgstr "無効である"
 
 msgid "Join our Discord community"
-msgstr ""
+msgstr "Discord コミュニティに参加してください"
 
 msgid "JSON"
-msgstr ""
+msgstr "JSON"
 
 msgid "Key"
-msgstr ""
+msgstr "鍵"
 
 msgid "Label"
-msgstr ""
+msgstr "ラベル"
 
 msgid "Labels"
-msgstr ""
+msgstr "ラベル"
 
 msgid "Language"
-msgstr ""
+msgstr "言語"
 
 msgid "Large Logo"
-msgstr ""
+msgstr "大きなロゴ"
 
 msgid "Layout"
-msgstr ""
+msgstr "レイアウト"
 
 msgid "Less Than"
-msgstr ""
+msgstr "未満"
 
 msgid "Less Than Other Field"
-msgstr ""
+msgstr "他の分野に比べて少ない"
 
 msgid "Light"
-msgstr ""
+msgstr "ライト"
 
 msgid "Light Color Scheme"
-msgstr ""
+msgstr "明るい色の配色"
 
 msgid "Line Chart"
-msgstr ""
+msgstr "折れ線グラフ"
 
 msgid "Link"
-msgstr ""
+msgstr "リンク"
 
 msgid "Link Entity"
-msgstr ""
+msgstr "リンクエンティティ"
 
 msgid "Link Users To Database"
-msgstr ""
+msgstr "ユーザーをデータベースにリンクする"
 
 msgid "List"
-msgstr ""
+msgstr "リスト"
 
 msgid "Loading..."
-msgstr ""
+msgstr "読み込み中..."
 
 msgid "Log Out"
-msgstr ""
+msgstr "ログアウト"
 
 msgid "Loop"
-msgstr ""
+msgstr "ループ"
 
 msgid "Manage {plural}"
-msgstr ""
+msgstr "{複数}を管理する"
 
 msgid "Manage {title}"
-msgstr ""
+msgstr "{タイトル}を管理する"
 
 msgid "Manage Plan"
-msgstr ""
+msgstr "計画の管理"
 
 msgid "Manage Sensitive Fields"
-msgstr ""
+msgstr "機密フィールドの管理"
 
 msgid "Manage Variables"
-msgstr ""
+msgstr "変数の管理"
 
 msgid "Max"
-msgstr ""
+msgstr "マックス"
 
 msgid "Max Length"
-msgstr ""
+msgstr "最大長さ"
 
 msgid "Maximum file size to upload in MB"
-msgstr ""
-
-msgid "Menu Builder"
-msgstr ""
+msgstr "アップロードする最大ファイルサイズ (MB)"
 
 msgid "Menu Item"
-msgstr ""
+msgstr "メニュー項目"
 
 msgid "Menu Settings"
-msgstr ""
+msgstr "メニュー設定"
 
 msgid "Message"
-msgstr ""
+msgstr "メッセージ"
 
 msgid "Metadata Columns"
-msgstr ""
+msgstr "メタデータ列"
 
 msgid "Min"
-msgstr ""
+msgstr "分"
 
 msgid "Min Length"
-msgstr ""
+msgstr "最小長さ"
 
 msgid "Modify Data Before Cloning"
-msgstr ""
+msgstr "クローン作成前にデータを変更する"
 
 msgid "Month"
-msgstr ""
+msgstr "月"
 
 msgid "Mutate"
-msgstr ""
+msgstr "変異する"
 
 msgid "My Account"
-msgstr ""
+msgstr "私のアカウント"
 
 msgid "Name"
-msgstr ""
+msgstr "名前"
 
 msgid "Navigation Menu"
-msgstr ""
+msgstr "ナビゲーションメニュー"
 
 msgid "New"
-msgstr ""
+msgstr "新しい"
 
 msgid "New Password"
-msgstr ""
+msgstr "新しいパスワード"
 
 msgid "New Password Again"
-msgstr ""
+msgstr "新しいパスワードを再入力"
 
 msgid "New Value"
-msgstr ""
+msgstr "新しい価値"
 
 msgid "No"
-msgstr ""
-
-msgid "No {0} Has Been Logged Yet"
-msgstr ""
+msgstr "いいえ"
 
 msgid "No {singular} Has Been Added Yet"
-msgstr ""
+msgstr "{singular} はまだ追加されていません"
 
 msgid "No available permission for this section"
-msgstr ""
+msgstr "このセクションには利用可能な権限がありません"
 
 msgid "No Data"
-msgstr ""
+msgstr "データなし"
 
 msgid "No result for the current {0} applied."
-msgstr ""
+msgstr "現在適用されている {0} の結果はありません。"
 
 msgid "No Search Results"
-msgstr ""
+msgstr "検索結果がありません"
 
 msgid "Node"
-msgstr ""
+msgstr "ノード"
 
 msgid "Node Label"
-msgstr ""
+msgstr "ノードラベル"
 
 msgid "Node Properties"
-msgstr ""
+msgstr "ノードのプロパティ"
 
 msgid "Nodes"
-msgstr ""
+msgstr "ノード"
 
 msgid "Not Equal"
-msgstr ""
+msgstr "等しくない"
 
 msgid "Not Equal To Other Field"
-msgstr ""
+msgstr "他のフィールドと等しくない"
 
 msgid "Now"
-msgstr ""
+msgstr "今"
 
 msgid "Number"
-msgstr ""
+msgstr "番号"
 
 msgid "Old Password"
-msgstr ""
+msgstr "以前のパスワード"
 
 msgid "Old Value"
-msgstr ""
+msgstr "古い値"
 
 msgid "On Create"
-msgstr ""
+msgstr "作成時"
 
 msgid "On Delete"
-msgstr ""
+msgstr "削除時"
 
 msgid "On Update"
-msgstr ""
+msgstr "更新時"
 
 msgid "Only capital letters and underscores are allowed"
-msgstr ""
+msgstr "大文字とアンダースコアのみが使用できます"
 
 msgid "Only lowercase letters, numbers and {delimiter} are allowed"
-msgstr ""
+msgstr "小文字、数字、および {delimiter} のみが許可されます"
 
 msgid "Operator"
-msgstr ""
+msgstr "オペレーター"
 
 msgid "OR"
-msgstr ""
+msgstr "または"
 
 msgid "Orange"
-msgstr ""
+msgstr "オレンジ"
 
 msgid "Order"
-msgstr ""
+msgstr "注文"
+
+msgid "Ordered"
+msgstr "順序付けられました"
 
 msgid "Password"
-msgstr ""
+msgstr "パスワード"
 
 msgid "Password Reset Successfully"
-msgstr ""
+msgstr "パスワードが正常にリセットされました"
 
 msgid "Password will not be changed on demo account"
-msgstr ""
+msgstr "デモアカウントではパスワードは変更されません"
 
 msgid "Persistent Query"
-msgstr ""
+msgstr "永続的なクエリ"
 
 msgid "Personalize This Table"
-msgstr ""
+msgstr "このテーブルをカスタマイズする"
 
 msgid "Pie Chart"
-msgstr ""
+msgstr "円グラフ"
 
 msgid "Plural"
-msgstr ""
+msgstr "複数"
 
 msgid "Port"
-msgstr ""
+msgstr "ポート"
 
 msgid "Positive Number"
-msgstr ""
+msgstr "正数"
 
 msgid "Preferences"
-msgstr ""
+msgstr "環境設定"
 
 msgid "Presentation Scripts"
-msgstr ""
+msgstr "プレゼンテーションスクリプト"
 
 msgid "Preview"
-msgstr ""
+msgstr "プレビュー"
 
 msgid "Profile"
-msgstr ""
+msgstr "プロフィール"
 
 msgid "Quarter"
-msgstr ""
+msgstr "四半期"
 
 msgid "Query"
-msgstr ""
+msgstr "クエリ"
 
 msgid "Recovery Code"
-msgstr ""
+msgstr "リカバリーコード"
 
 msgid "Recovery tokens copied to clipboard"
-msgstr ""
+msgstr "リカバリトークンがクリップボードにコピーされました"
 
 msgid "Red"
-msgstr ""
+msgstr "赤"
 
 msgid "Reference"
-msgstr ""
+msgstr "参照"
 
 msgid "Reference Template"
-msgstr ""
+msgstr "参照テンプレート"
 
 msgid "Regex"
-msgstr ""
+msgstr "正規表現"
 
 msgid "Region"
-msgstr ""
+msgstr "地域"
 
 msgid "Relation Labels"
-msgstr ""
+msgstr "関係ラベル"
 
 msgid "Relation Template"
-msgstr ""
+msgstr "関係テンプレート"
 
 msgid "Relations"
-msgstr ""
+msgstr "関係"
 
 msgid "Relations Order"
-msgstr ""
+msgstr "関係の順序"
 
 msgid "Relations To Clone Along"
-msgstr ""
+msgstr "クローンを作成する関係"
 
 msgid "Relationship Settings"
-msgstr ""
+msgstr "関係設定"
 
 msgid "Remember Me"
-msgstr ""
+msgstr "私を覚えてますか"
 
 msgid "Remove"
-msgstr ""
+msgstr "取り除く"
 
 msgid "Remove Nested Filter"
-msgstr ""
+msgstr "ネストされたフィルタを削除する"
 
 msgid "Request ID"
-msgstr ""
+msgstr "リクエストID"
 
 msgid "Request Method"
-msgstr ""
+msgstr "リクエストメソッド"
 
 msgid "Required"
-msgstr ""
+msgstr "必須"
 
 msgid "Reset"
-msgstr ""
+msgstr "リセット"
 
 msgid "Reset 2FA Recovery Tokens"
-msgstr ""
+msgstr "2FA 回復トークンをリセットする"
 
 msgid "Reset Password"
-msgstr ""
+msgstr "パスワードを再設定する"
 
 msgid "Reset Recovery Tokens"
-msgstr ""
+msgstr "回復トークンをリセットする"
 
 msgid "Reset User Password"
-msgstr ""
+msgstr "ユーザーパスワードのリセット"
 
 msgid "Resetting Password"
-msgstr ""
+msgstr "パスワードのリセット"
 
 msgid "Response"
-msgstr ""
+msgstr "応答"
 
 msgid "Restore"
-msgstr ""
+msgstr "復元する"
 
-msgid "Reveal {label}"
-msgstr ""
+msgid "Restored"
+msgstr "復元されました"
 
-msgid "Revealing {label}"
-msgstr ""
+msgid "Reveal Credentials"
+msgstr "資格情報を明らかにする"
+
+msgid "Revealing Credentials"
+msgstr "資格情報の公開"
 
 msgid "Rich Text"
-msgstr ""
+msgstr "リッチテキスト"
 
 msgid "Role"
-msgstr ""
+msgstr "役割"
 
 msgid "Role Permission"
-msgstr ""
+msgstr "役割の権限"
 
 msgid "Role Permissions"
-msgstr ""
+msgstr "役割の権限"
 
 msgid "Roles"
-msgstr ""
-
-msgid "Roles and Permissions"
-msgstr ""
+msgstr "役割"
 
 msgid "Route ID"
-msgstr ""
+msgstr "ルートID"
 
 msgid "Save"
-msgstr ""
-
-msgid "Save {0}"
-msgstr ""
+msgstr "保存"
 
 msgid "Save {singular}"
-msgstr ""
+msgstr "{singular}を保存"
 
 msgid "Save Current Filters"
-msgstr ""
+msgstr "現在のフィルターを保存する"
 
 msgid "Saving"
-msgstr ""
-
-msgid "Saving {0}"
-msgstr ""
+msgstr "保存"
 
 msgid "Saving {singular}"
-msgstr ""
+msgstr "{singular}を保存しています"
 
 msgid "Scheduler"
-msgstr ""
+msgstr "スケジューラ"
 
 msgid "Schedulers"
-msgstr ""
+msgstr "スケジューラ"
 
 msgid "Script"
-msgstr ""
+msgstr "脚本"
 
 msgid "Search"
-msgstr ""
+msgstr "検索"
 
 msgid "Secret"
-msgstr ""
+msgstr "秘密"
 
 msgid "Secret Access Key"
-msgstr ""
+msgstr "シークレットアクセスキー"
 
 msgid "Secrets"
+msgstr "秘密"
+
+msgid "Select {0}"
 msgstr ""
 
 msgid "Select Node Type"
-msgstr ""
+msgstr "ノードタイプの選択"
 
 msgid "Select Trigger"
-msgstr ""
+msgstr "トリガーの選択"
+
+msgid "Select Value"
+msgstr "値の選択"
 
 msgid "Select Workflow"
-msgstr ""
+msgstr "ワークフローの選択"
 
 msgid "Selection"
-msgstr ""
+msgstr "選択"
 
 msgid "Selection List"
-msgstr ""
+msgstr "選択リスト"
 
 msgid "Selections Settings"
-msgstr ""
+msgstr "選択設定"
 
 msgid "Send Mail"
-msgstr ""
+msgstr "メールを送信する"
 
 msgid "Send Message"
-msgstr ""
+msgstr "メッセージを送る"
 
 msgid "Send SMS"
-msgstr ""
+msgstr "SMSを送信"
 
 msgid "Sender Email"
-msgstr ""
+msgstr "送信者の電子メール"
 
 msgid "Sender Name"
-msgstr ""
+msgstr "送信者名"
 
 msgid "Sensitive Field"
-msgstr ""
+msgstr "敏感なフィールド"
 
 msgid "Sensitive Fields"
-msgstr ""
+msgstr "敏感なフィールド"
 
 msgid "Setting Up Account"
-msgstr ""
+msgstr "アカウントのセットアップ"
 
 msgid "Setting Up Credentials"
-msgstr ""
+msgstr "資格情報のセットアップ"
 
 msgid "Settings"
-msgstr ""
+msgstr "設定"
 
 msgid "Setup"
-msgstr ""
+msgstr "設定"
 
 msgid "Setup Account"
-msgstr ""
+msgstr "アカウントのセットアップ"
 
 msgid "Setup Credentials"
+msgstr "資格情報のセットアップ"
+
+msgid "Setup DB credentials"
 msgstr ""
 
 msgid "Share"
-msgstr ""
+msgstr "共有"
+
+msgid "Shared"
+msgstr "共有"
 
 msgid "Sharing"
-msgstr ""
+msgstr "共有"
+
+msgid "Show"
+msgstr "見せる"
 
 msgid "Show Soft Deleted Items And The Restore Button"
-msgstr ""
+msgstr "ソフト的に削除されたアイテムと復元ボタンを表示する"
 
 msgid "Show Up In Roles And Permissions"
-msgstr ""
+msgstr "役割と権限を表示する"
 
 msgid "Showing <0/> entries of <1>{0}</1> results"
-msgstr ""
+msgstr "<1>{0}</1> 件の結果のうち <0/> 件のエントリを表示しています"
 
 msgid "Sign In"
-msgstr ""
+msgstr "サインイン"
 
 msgid "Signing In"
-msgstr ""
+msgstr "サインイン"
 
 msgid "Singular"
-msgstr ""
+msgstr "特異な"
 
 msgid "Site"
-msgstr ""
+msgstr "サイト"
 
 msgid "Site Settings"
-msgstr ""
-
-msgid "Slug"
-msgstr ""
+msgstr "サイト設定"
 
 msgid "Small Logo"
-msgstr ""
+msgstr "小さなロゴ"
 
 msgid "Soft Delete"
-msgstr ""
+msgstr "ソフト削除"
 
 msgid "Soft Delete Settings"
-msgstr ""
+msgstr "ソフトデリート設定"
 
 msgid "Stacked"
-msgstr ""
+msgstr "積み重ねられた"
 
 msgid "Star us on Github"
-msgstr ""
+msgstr "Github でスターを付けてください"
 
 msgid "Start of year"
-msgstr ""
+msgstr "年の初め"
 
 msgid "State Script"
-msgstr ""
+msgstr "状態スクリプト"
 
 msgid "Storage Key"
-msgstr ""
+msgstr "ストレージキー"
 
 msgid "Strategy"
-msgstr ""
+msgstr "戦略"
 
 msgid "String"
-msgstr ""
+msgstr "弦"
 
 msgid "Subject"
-msgstr ""
+msgstr "主題"
 
 msgid "Submit"
-msgstr ""
+msgstr "提出する"
 
 msgid "Submitting"
-msgstr ""
+msgstr "提出中"
 
 msgid "Summary Card"
-msgstr ""
+msgstr "サマリーカード"
 
 msgid "SVG"
-msgstr ""
+msgstr "SVG"
 
 msgid "System"
-msgstr ""
+msgstr "システム"
 
 msgid "System Info"
-msgstr ""
-
-msgid "System Information"
-msgstr ""
+msgstr "システム情報"
 
 msgid "System Settings"
-msgstr ""
+msgstr "システム設定"
 
 msgid "Table"
-msgstr ""
+msgstr "テーブル"
 
 msgid "Table Columns Settings"
-msgstr ""
+msgstr "テーブル列の設定"
 
 msgid "Table Fields Order"
-msgstr ""
+msgstr "テーブルフィールドの順序"
 
 msgid "Table Personalization"
-msgstr ""
+msgstr "テーブルのパーソナライゼーション"
 
 msgid "Table Personalizations"
-msgstr ""
+msgstr "テーブルのカスタマイズ"
 
 msgid "Table View"
-msgstr ""
+msgstr "テーブルビュー"
 
 msgid "Table Views"
-msgstr ""
+msgstr "テーブルビュー"
 
 msgid "Test Widget Script"
-msgstr ""
+msgstr "ウィジェット スクリプトのテスト"
 
 msgid "Text"
-msgstr ""
+msgstr "文章"
 
 msgid "Textarea"
-msgstr ""
+msgstr "テキストエリア"
 
 msgid "Theme"
-msgstr ""
+msgstr "テーマ"
 
 msgid "Theme Settings"
-msgstr ""
+msgstr "テーマ設定"
 
 msgid "This {0} Has No Form"
-msgstr ""
+msgstr "この {0} には形式がありません"
 
-msgid "This application has no active entities. Kindly add new entities through your preferred database editor then restart this application to proceed."
-msgstr ""
+msgid "This action does not have configuration"
+msgstr "このアクションには構成がありません"
 
 msgid "This entity has no fields"
-msgstr ""
-
-msgid "This entity has no fields. Kindly add fields from your prefer database tool to manage them here"
-msgstr ""
+msgstr "このエンティティにはフィールドがありません"
 
 msgid "This entity has no relations"
-msgstr ""
+msgstr "このエンティティには関係がありません"
 
 msgid "This flow should be queued and executed asynchronously (recommended for long running flows, requires Redis)"
-msgstr ""
+msgstr "このフローはキューに入れて非同期で実行する必要があります (長時間実行されるフローに推奨、Redis が必要です)。"
 
 msgid "This trigger has no workflow attached"
-msgstr ""
+msgstr "このトリガーにはワークフローが接続されていません"
 
 msgid "This workflow has no trigger attached"
-msgstr ""
+msgstr "このワークフローにはトリガーが接続されていません"
 
 msgid "Time Changed"
-msgstr ""
+msgstr "時間変更"
 
 msgid "Title"
-msgstr ""
+msgstr "タイトル"
 
 msgid "To"
-msgstr ""
+msgstr "に"
 
 msgid "Toggle Connection URL"
-msgstr ""
+msgstr "接続 URL の切り替え"
 
 msgid "Token"
-msgstr ""
+msgstr "トークン"
 
 msgid "Token Validity Duration In Days"
-msgstr ""
+msgstr "トークンの有効期間 (日)"
 
 msgid "Trigger"
-msgstr ""
+msgstr "引き金"
 
 msgid "Try Out 25+ Pro Features"
-msgstr ""
+msgstr "25 の Pro 機能を試してみる"
 
 msgid "Type"
-msgstr ""
+msgstr "タイプ"
 
 msgid "Update"
-msgstr ""
+msgstr "アップデート"
 
 msgid "Update {singular}"
-msgstr ""
+msgstr "{singular}を更新します"
 
 msgid "Update Columns Settings"
-msgstr ""
+msgstr "列設定の更新"
 
 msgid "Update Fields Order"
-msgstr ""
+msgstr "フィールドの順序を更新する"
 
 msgid "Updated At"
-msgstr ""
+msgstr "更新日"
 
 msgid "Updating {singular}"
-msgstr ""
+msgstr "{singular}を更新しています"
 
 msgid "Uppercase"
-msgstr ""
+msgstr "大文字"
 
 msgid "URL"
-msgstr ""
+msgstr "URL"
 
 msgid "Use Colors"
-msgstr ""
+msgstr "色の使用"
 
 msgid "Use Icon"
-msgstr ""
+msgstr "アイコンを使用する"
+
+msgid "Use OTP Token"
+msgstr "OTPトークンを使用する"
+
+msgid "Use Recovery Code"
+msgstr "リカバリーコードを使用する"
 
 msgid "Use SSL"
-msgstr ""
+msgstr "SSLを使用する"
 
 msgid "Use SVG"
-msgstr ""
+msgstr "SVGを使用する"
 
 msgid "User"
-msgstr ""
+msgstr "ユーザー"
 
 msgid "Username"
-msgstr ""
+msgstr "ユーザー名"
 
 msgid "Users"
-msgstr ""
+msgstr "ユーザー"
 
 msgid "Users Link To Database"
-msgstr ""
+msgstr "ユーザーがデータベースにリンクする"
 
 msgid "Users to Database Link"
-msgstr ""
+msgstr "ユーザーからデータベースへのリンク"
 
 msgid "Validations"
-msgstr ""
+msgstr "検証"
 
 msgid "Value"
-msgstr ""
+msgstr "価値"
 
 msgid "Variables"
-msgstr ""
+msgstr "変数"
 
 msgid "Verifing"
-msgstr ""
+msgstr "検証中"
 
 msgid "Verify"
-msgstr ""
+msgstr "確認する"
 
 msgid "Vertical"
-msgstr ""
+msgstr "垂直"
 
 msgid "View"
-msgstr ""
+msgstr "ビュー"
 
 msgid "View Full Details"
-msgstr ""
+msgstr "詳細を表示"
 
 msgid "Violet"
-msgstr ""
+msgstr "バイオレット"
 
 msgid "Visit our website"
-msgstr ""
+msgstr "当社のウェブサイトを訪問"
 
 msgid "Webhook"
-msgstr ""
+msgstr "Webhook"
 
 msgid "Webhooks"
-msgstr ""
+msgstr "Webhook"
 
 msgid "Week"
-msgstr ""
+msgstr "週"
 
 msgid "Widget Script"
-msgstr ""
+msgstr "ウィジェットスクリプト"
 
 msgid "Width"
-msgstr ""
+msgstr "幅"
 
 msgid "Workflow"
-msgstr ""
+msgstr "ワークフロー"
 
 msgid "Workflows"
-msgstr ""
+msgstr "ワークフロー"
 
 msgid "X Label"
-msgstr ""
+msgstr "Xラベル"
 
 msgid "Y Label"
-msgstr ""
+msgstr "Yラベル"
 
 msgid "Year"
-msgstr ""
+msgstr "年"
 
 msgid "Yes"
-msgstr ""
+msgstr "はい"
 
 msgid "Your Users Table"
-msgstr ""
+msgstr "ユーザーテーブル"

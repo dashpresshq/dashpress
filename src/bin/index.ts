@@ -116,8 +116,23 @@ const replaceRandomCharaters = (envContent: string) => {
     fetch(`${endpoint}/api/healthcheck`).catch(() => {});
   }, WAIT_FOR_NEXT_TO_START);
 
-  stdout.pipe(process.stdout);
-  stderr.pipe(process.stderr);
+  stdout.on("data", (chunk) => {
+    const data = (chunk || "").toString();
+
+    if (data.startsWith("info")) {
+      return;
+    }
+
+    process.stdout.write(data);
+  });
+
+  stderr.on("data", (chunk) => {
+    const data = (chunk || "").toString();
+    if (data.startsWith("warn")) {
+      return;
+    }
+    process.stderr.write(data);
+  });
 })().catch((err) => {
   console.error(err);
   process.exit(1);

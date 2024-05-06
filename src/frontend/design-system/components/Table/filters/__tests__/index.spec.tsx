@@ -460,8 +460,10 @@ describe("Table Filters", () => {
 
       await userEvent.keyboard("{Enter}");
 
+      await userEvent.clear(screen.getByLabelText("Select Status"));
+
       await userEvent.type(
-        await screen.findByLabelText("Select Status"),
+        screen.getByLabelText("Select Status"),
         "Option 2 Label"
       );
 

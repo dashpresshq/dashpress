@@ -28,6 +28,7 @@ export function RenderFormInput(props: IRenderFormInputProps) {
     onChange,
   } = useExtendRenderFormInputProps(props);
   const { _ } = useLingui();
+  const isPasswordReveal = useToggle();
   const formProps = {
     label,
     required,
@@ -70,10 +71,37 @@ export function RenderFormInput(props: IRenderFormInputProps) {
 
   switch (type) {
     case "email":
-    case "password":
     case "url":
     case "color":
       return <FormInput type={type} {...formProps} />;
+    case "password":
+    return (
+        <FormInput
+          type={isPasswordReveal.isOn ? "text" : "password"}
+          {...formProps}
+          rightActions={
+            formProps.input.value
+              ? [
+                  {
+                    systemIcon: "Eye",
+                    action: () => {
+                      isPasswordReveal.toggle();
+                    },
+                    label: msg`show Password`,
+                  },
+                ]
+              : []
+          }
+          input={{
+            ...formProps.input,
+            onChange: (val) => {
+              formProps.input.onChange(val);
+              if (!formProps.input.value) isPasswordReveal.off();
+            },
+          }}
+        />
+      );
+
     case "number":
       return <FormNumberInput {...formProps} />;
 

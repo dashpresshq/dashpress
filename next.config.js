@@ -2,17 +2,14 @@ const withBundleAnalyzer = require("@next/bundle-analyzer")({
   enabled: process.env.ANALYZE === "true",
 });
 
-const linguiConfig = require("./lingui.config");
+const nextConfigBase = require("./next.config.base");
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  ...nextConfigBase,
   reactStrictMode: true,
   experimental: {
     swcPlugins: [["@lingui/swc-plugin", {}]],
-  },
-  i18n: {
-    locales: linguiConfig.locales,
-    defaultLocale: linguiConfig.sourceLocale,
   },
   webpack: (config) => {
     config.module.rules.push({

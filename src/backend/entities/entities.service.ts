@@ -67,6 +67,27 @@ export class EntitiesApiService {
     return primaryField;
   }
 
+  // TODO
+  // async getEntityPrimaryField(entity: string): Promise<string> {
+  //   const primaryField = (await this.getEntityFields(entity)).filter(
+  //     ({ isId }) => isId
+  //   );
+
+  //   if (primaryField.length === 0) {
+  //     throw new BadRequestError(
+  //       "This entity doesn't have a primary key. Kindly ask your administrator to add one then restart the application and this error will go away."
+  //     );
+  //   }
+
+  //   if (primaryField.length > 1) {
+  //     throw new BadRequestError(
+  //       "This entity has multiple primary keys. Kindly ask your administrator to fix this issue by ensuring only ONE primary key exists then restart the application and this error will go away."
+  //     );
+  //   }
+
+  //   return primaryField[0].name;
+  // }
+
   async getEntityFromSchema(entity: string): Promise<IDBSchema> {
     return (await this.getDBSchemaModels())[entity];
   }

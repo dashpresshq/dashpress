@@ -184,6 +184,7 @@ export function EntityCrudSettings() {
   return (
     <BaseEntitySettingsLayout>
       {entityFields.data.length > 1 &&
+        // TODO
         entityFields.data.findIndex((field) => field.isId) === -1 && (
           <>
             <WarningAlert message="This entity doesn't have a primary key. Kindly add one to this entity and restart the application so as not to run into errors when managing its data" />

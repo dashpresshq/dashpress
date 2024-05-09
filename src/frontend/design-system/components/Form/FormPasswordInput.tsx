@@ -3,9 +3,7 @@ import { ISharedFormInput } from "./_types";
 import { generateFormArias, wrapLabelAndError } from "./_wrapForm";
 import { Input } from "./Styles";
 
-interface IFormInput extends ISharedFormInput {
-  type?: "password" | "text";
-}
+interface IFormInput extends ISharedFormInput {}
 
 export const FormPasswordInput = (formInput: IFormInput) => {
   const { input, type, disabled, meta, placeholder, ...rest } = formInput;

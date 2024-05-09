@@ -11,6 +11,9 @@ import { FormSelectButton } from "frontend/design-system/components/Form/FormSel
 import { FormRichTextArea } from "frontend/design-system/components/Form/FormRichTextArea";
 import { useExtendRenderFormInputProps } from "frontend/views/data/portal";
 import { useLingui } from "@lingui/react";
+import { msg } from "@lingui/macro";
+import { useToggle } from "frontend/hooks/state/useToggleState";
+import { FormPasswordInput } from "frontend/design-system/components/Form/FormPasswordInput";
 import { IRenderFormInputProps } from "./types";
 
 export function RenderFormInput(props: IRenderFormInputProps) {
@@ -28,7 +31,7 @@ export function RenderFormInput(props: IRenderFormInputProps) {
     onChange,
   } = useExtendRenderFormInputProps(props);
   const { _ } = useLingui();
-  const isPasswordReveal = useToggle();
+  const showPassword = useToggle();
   const formProps = {
     label,
     required,
@@ -74,37 +77,34 @@ export function RenderFormInput(props: IRenderFormInputProps) {
     case "url":
     case "color":
       return <FormInput type={type} {...formProps} />;
+    case "number":
+      return <FormNumberInput {...formProps} />;
     case "password":
-    return (
-        <FormInput
-          type={isPasswordReveal.isOn ? "text" : "password"}
+      return (
+        <FormPasswordInput
+          type={showPassword.isOn ? "text" : "password"}
           {...formProps}
           rightActions={
-            formProps.input.value
+            showPassword.isOn
               ? [
                   {
                     systemIcon: "Eye",
-                    action: () => {
-                      isPasswordReveal.toggle();
+                    action() {
+                      showPassword.toggle();
                     },
-                    label: msg`show Password`,
+                    label: msg`Hide Password`,
                   },
                 ]
-              : []
+              : [
+                  {
+                    systemIcon: "EyeOff",
+                    action: showPassword.toggle,
+                    label: msg`Show Password`,
+                  },
+                ]
           }
-          input={{
-            ...formProps.input,
-            onChange: (val) => {
-              formProps.input.onChange(val);
-              if (!formProps.input.value) isPasswordReveal.off();
-            },
-          }}
         />
       );
-
-    case "number":
-      return <FormNumberInput {...formProps} />;
-
     case "datetime-local":
       return <FormDateInput {...formProps} />;
 

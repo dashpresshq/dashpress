@@ -134,7 +134,7 @@ export function SideBar({ isFullWidth, setIsFullWidth }: IProps) {
         $justify="space-between"
         $direction="column"
         $spacing={0}
-        style={{ height: "calc(100vh - 70px)" }}
+        style={{ height: "calc(100dvh - 70px)" }}
       >
         <Scroll
           style={{

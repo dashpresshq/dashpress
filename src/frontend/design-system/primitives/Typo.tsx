@@ -22,12 +22,12 @@ export type TextProps = {
 };
 
 const sizes: Record<TextProps["$size"], number> = {
-  1: 48,
-  2: 24,
-  3: 18,
-  4: 16,
-  5: 14,
-  6: 12,
+  1: 32,
+  2: 20,
+  3: 16,
+  4: 14,
+  5: 12,
+  6: 10,
 };
 
 const weights: Record<TextProps["$weight"], number> = {

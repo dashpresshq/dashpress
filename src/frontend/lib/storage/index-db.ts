@@ -42,25 +42,6 @@ export class DbStorage<T> {
     });
   }
 
-  private async getObjectStore(mode: "readonly" | "readwrite") {
-    const tx = (await DbStorage.getInstance()).transaction(DB_STORE_NAME, mode);
-
-    return tx.objectStore(DB_STORE_NAME);
-  }
-
-  private async getRequestResult(request: IDBRequest) {
-    return await new Promise((resolve) => {
-      request.onsuccess = () => {
-        resolve(request.result);
-      };
-      request.onerror = () => {
-        const errorMessage = request.error?.message || "something went wrong";
-        resolve(errorMessage);
-        throw new Error(errorMessage);
-      };
-    });
-  }
-
   async upsert(key: string, value: T): Promise<void> {
     (await this.getObjectStore("readwrite")).put({ key, value });
   }
@@ -84,5 +65,24 @@ export class DbStorage<T> {
       DbStorage._dbInstance.close();
       DbStorage._dbInstance = null;
     }
+  }
+
+  private async getObjectStore(mode: "readonly" | "readwrite") {
+    const tx = (await DbStorage.getInstance()).transaction(DB_STORE_NAME, mode);
+
+    return tx.objectStore(DB_STORE_NAME);
+  }
+
+  private async getRequestResult(request: IDBRequest) {
+    return await new Promise((resolve) => {
+      request.onsuccess = () => {
+        resolve(request.result);
+      };
+      request.onerror = () => {
+        const errorMessage = request.error?.message || "something went wrong";
+        resolve(errorMessage);
+        throw new Error(errorMessage);
+      };
+    });
   }
 }

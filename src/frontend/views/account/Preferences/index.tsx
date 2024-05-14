@@ -47,6 +47,10 @@ export const LANGUAGE_PREFERENCES_FORM_SCHEMA: IAppliedSchemaFormConfig<{
   },
 };
 
+const formSchema = JSON.parse(
+  JSON.stringify(UPDATE_USER_PREFERENCES_FORM_SCHEMA)
+);
+
 export function UserPreferences() {
   const domainMessages = useDomainMessages(LANG_DOMAINS.ACCOUNT.PREFERENCES);
   const userPreferences = useUserPreference("theme");
@@ -62,9 +66,9 @@ export function UserPreferences() {
   const portalThemes = usePortalThemes();
 
   useEffect(() => {
-    UPDATE_USER_PREFERENCES_FORM_SCHEMA.theme.selections = uniqBy(
+    formSchema.theme.selections = uniqBy(
       [
-        ...UPDATE_USER_PREFERENCES_FORM_SCHEMA.theme.selections,
+        ...formSchema.theme.selections,
         ...typescriptSafeObjectDotKeys(portalThemes).map((theme) => ({
           value: theme,
           label: msg`${userFriendlyCase(theme)}`,
@@ -88,7 +92,7 @@ export function UserPreferences() {
             }}
             initialValues={{ theme: userPreferences.data }}
             buttonText={domainMessages.FORM_LANG.UPSERT}
-            fields={UPDATE_USER_PREFERENCES_FORM_SCHEMA}
+            fields={formSchema}
             systemIcon="Save"
           />
         </ViewStateMachine>

@@ -14,6 +14,7 @@ export const PlainButton = styled.button`
 export const TextButton = styled(PlainButton)`
   display: inline-block;
   position: relative;
+  font-size: 14px;
   color: ${USE_ROOT_COLOR("primary-color")};
 
   &:after {

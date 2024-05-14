@@ -101,7 +101,6 @@ const LeftSideNavMenuListAnchor = styled(PlainButton)<{
 const LeftSideNavMenu = styled.ul<{}>`
   padding: 0;
   margin-bottom: 0;
-  margin-top: 10px;
 `;
 
 const NavLabel = styled(Typo.XS)<{ $isFullWidth: boolean }>`

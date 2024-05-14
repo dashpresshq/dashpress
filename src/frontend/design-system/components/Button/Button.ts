@@ -64,6 +64,7 @@ export const StyledBaseButton = styled.button<IStyledBaseButton>`
           padding: 6px;
           border-radius: 50%;
           width: 26px;
+          height: 26px;
         `}
 
 

@@ -7,71 +7,43 @@ import { typescriptSafeObjectDotEntries } from "shared/lib/objects";
 import { MessageDescriptor } from "@lingui/core";
 import { useLingui } from "@lingui/react";
 
-type Sizes = "sm" | "md";
-
 export interface IProps {
   value: boolean;
   onChange: (value: boolean) => void;
-  size?: Sizes;
   label?: MessageDescriptor;
   name: string;
   disabled?: boolean;
 }
 
-interface ISizeConfig {
-  width: number;
-  height: number;
-  shift: number;
-  top: number;
-  circleSize: number;
-  checkedShift: number;
-  marginBottom: number;
-  fontSize: "4" | "5";
-  labelSpacing: number;
-}
-
-const SIZES_CONFIG: Record<Sizes, ISizeConfig> = {
-  md: {
-    width: 44,
-    height: 24,
-    shift: 3,
-    top: 0,
-    checkedShift: 20,
-    labelSpacing: 56,
-    circleSize: 19,
-    fontSize: "4",
-    marginBottom: 24,
-  },
-  sm: {
-    width: 26,
-    height: 16,
-    shift: 2,
-    top: 0,
-    labelSpacing: 32,
-    checkedShift: 10,
-    circleSize: 12,
-    marginBottom: 12,
-    fontSize: "5",
-  },
+const SIZES_CONFIG = {
+  width: 26,
+  height: 16,
+  shift: 2,
+  top: 0,
+  labelSpacing: 32,
+  checkedShift: 10,
+  circleSize: 12,
+  marginBottom: 12,
+  fontSize: "5" as const,
 };
 
-const Root = styled.label<{ size: Sizes }>`
+const Root = styled.label`
   position: relative;
   display: block;
-  margin-bottom: ${(props) => SIZES_CONFIG[props.size].marginBottom}px;
+  margin-bottom: ${SIZES_CONFIG.marginBottom}px;
 `;
 
-const Slider = styled.span<{ size: Sizes }>`
+const Slider = styled.span`
   position: absolute;
   cursor: pointer;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  width: ${(props) => SIZES_CONFIG[props.size].width}px;
-  height: ${(props) => SIZES_CONFIG[props.size].height}px;
+  width: ${SIZES_CONFIG.width}px;
+  height: ${SIZES_CONFIG.height}px;
   background-color: ${USE_ROOT_COLOR("soft-color")};
-  border-radius: ${(props) => SIZES_CONFIG[props.size].height}px;
+  border-radius: ${SIZES_CONFIG.height}px;
   transition: 0.4s;
 
   &:before {
@@ -79,24 +51,22 @@ const Slider = styled.span<{ size: Sizes }>`
     content: "";
     border-radius: 50%;
     background-color: white;
-    height: ${(props) => SIZES_CONFIG[props.size].circleSize}px;
-    width: ${(props) => SIZES_CONFIG[props.size].circleSize}px;
-    left: ${(props) => SIZES_CONFIG[props.size].shift}px;
-    bottom: ${(props) => SIZES_CONFIG[props.size].shift}px;
+    height: ${SIZES_CONFIG.circleSize}px;
+    width: ${SIZES_CONFIG.circleSize}px;
+    left: ${SIZES_CONFIG.shift}px;
+    bottom: ${SIZES_CONFIG.shift}px;
     transition: 0.4s;
   }
 `;
 
-const Input = styled.input<{ $inputSize: Sizes }>`
+const Input = styled.input`
   appearance: none;
 
   &:checked + ${Slider} {
     background-color: ${USE_ROOT_COLOR("primary-color")};
 
     &:before {
-      transform: translateX(
-        ${(p) => SIZES_CONFIG[p.$inputSize].checkedShift}px
-      );
+      transform: translateX(${SIZES_CONFIG.checkedShift}px);
     }
   }
 
@@ -106,15 +76,7 @@ const Input = styled.input<{ $inputSize: Sizes }>`
 `;
 
 export function FormSwitch(props: IProps) {
-  const {
-    value,
-    onChange,
-    name,
-    disabled,
-    label,
-    size = "md",
-    ...rest
-  } = props;
+  const { value, onChange, name, disabled, label, ...rest } = props;
   const ariaProps = Object.fromEntries(
     typescriptSafeObjectDotEntries(rest as Record<string, string>).filter(
       ([key]) => String(key).startsWith("aria-")
@@ -130,25 +92,24 @@ export function FormSwitch(props: IProps) {
   }, [value, onChange]);
 
   return (
-    <Root htmlFor={name} size={size}>
-      <Stack $spacing={SIZES_CONFIG[size].labelSpacing} $align="center">
+    <Root htmlFor={name}>
+      <Stack $spacing={SIZES_CONFIG.labelSpacing} $align="center">
         <Input
           id={name}
           type="checkbox"
           checked={value}
           disabled={disabled}
-          $inputSize={size}
           onChange={() => {
             onChange(!value);
           }}
           {...ariaProps}
         />
-        <Slider size={size} />
+        <Slider />
         {label ? (
           <div style={{ cursor: "pointer" }}>
             <Typo.Raw
               $color={disabled ? "muted" : undefined}
-              size={SIZES_CONFIG[size].fontSize}
+              size={SIZES_CONFIG.fontSize}
             >
               {_(label)}
             </Typo.Raw>

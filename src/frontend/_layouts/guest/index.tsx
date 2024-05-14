@@ -14,7 +14,7 @@ import { useAppTheme } from "../useAppTheme";
 interface IProps {
   children: ReactNode;
   title: MessageDescriptor;
-  subTitle: MessageDescriptor;
+  subTitle?: MessageDescriptor;
 }
 
 const Root = styled.div`
@@ -78,7 +78,7 @@ export function AuthLayout({ children, title, subTitle }: IProps) {
                 <Spacer />
                 <Typo.MD $color="inverse">{_(title)}</Typo.MD>
                 <Spacer size="xs" />
-                <Typo.XS $color="inverse">{_(subTitle)}</Typo.XS>
+                {subTitle && <Typo.XS $color="inverse">{_(subTitle)}</Typo.XS>}
               </a>
             </Header>
 

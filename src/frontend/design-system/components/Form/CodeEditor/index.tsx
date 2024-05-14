@@ -68,6 +68,7 @@ export function FormCodeEditor(formInput: IFormCodeEditor) {
           className="form-code-editor"
           style={{
             minHeight: "275px",
+            fontSize: "14px",
             fontFamily: '"Fira code", "Fira Mono", monospace',
           }}
         />

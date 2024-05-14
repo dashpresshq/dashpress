@@ -17,8 +17,8 @@ const Root = styled.div`
   }
 
   p {
+    font-size: 0.875rem;
     margin: 12px 0;
-    font-size: 16px !important;
   }
 
   code {

@@ -7,10 +7,6 @@ import {
 import { ContentLayout } from "frontend/design-system/components/Section/SectionDivider";
 import { AppLayout } from "frontend/_layouts/app";
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
-import { InfoAlert } from "frontend/design-system/components/Alert";
-import { GitHub } from "react-feather";
-import { Spacer } from "frontend/design-system/primitives/Spacer";
-import { useTimeElapsedStorageState } from "frontend/hooks/state/useTimeElapsedStorageState";
 import { msg } from "@lingui/macro";
 import { useMutateBaseSettingsMenu } from "./portal";
 
@@ -66,39 +62,8 @@ const baseMenuItems: IMenuSectionItem[] = [
 export function BaseSettingsLayout({ children }: IProps) {
   const router = useRouter();
   const menuItems = useMutateBaseSettingsMenu(baseMenuItems);
-  const { state: giveUsAStarState, off: turnOffGiveUsAState } =
-    useTimeElapsedStorageState("give-us-a-star", 60 * 60 * 24 * 7);
   return (
     <AppLayout>
-      {giveUsAStarState && (
-        <>
-          <InfoAlert
-            renderJsx
-            action={{
-              action: () => {
-                window.open("https://github.com/dashpresshq/dashpress");
-                turnOffGiveUsAState();
-              },
-              Icon: GitHub,
-              label: "Give us a star on Github",
-            }}
-            message={
-              <span>
-                <p>
-                  <b>Hi There!</b>
-                </p>
-                <p>
-                  Looks like you are enjoying DashPress for about a week now, We
-                  have worked hard developing this application, and you can tell
-                  us thank you by giving us a star on Github. It would mean a
-                  lot to us!.
-                </p>
-              </span>
-            }
-          />
-          <Spacer />
-        </>
-      )}
       <ContentLayout>
         <ContentLayout.Left>
           <MenuSection

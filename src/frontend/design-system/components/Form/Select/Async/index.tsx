@@ -77,7 +77,7 @@ export function AsyncFormSelect(props: IProps) {
     }
 
     if (!input.value) {
-      return defaultLabel || `--- Select ${formLabel} ---`;
+      return defaultLabel || `--- Select ${_(formLabel)} ---`;
     }
 
     const isValueInFirstDataLoad = data.find(

@@ -1,6 +1,5 @@
-/* eslint-disable max-classes-per-file */
-
 const DB_NAME = "__dp__";
+const DB_STORE_NAME = "app";
 
 export class DbStorage<T> {
   static _dbInstance: IDBDatabase | null = null;
@@ -26,12 +25,9 @@ export class DbStorage<T> {
 
     request.onupgradeneeded = (event) => {
       DbStorage._dbInstance = (event.target as IDBOpenDBRequest).result;
-      //   if (!this.db!.objectStoreNames.contains(this.dbName)) {
-      DbStorage._dbInstance.createObjectStore(DB_NAME, {
+      DbStorage._dbInstance.createObjectStore(DB_STORE_NAME, {
         keyPath: "id",
-        autoIncrement: true,
       });
-      // }
     };
 
     await new Promise((resolve, reject) => {
@@ -47,32 +43,32 @@ export class DbStorage<T> {
   }
 
   private async getObjectStore(mode: "readonly" | "readwrite") {
-    const tx = (await DbStorage.getInstance()).transaction(DB_NAME, mode);
+    const tx = (await DbStorage.getInstance()).transaction(DB_STORE_NAME, mode);
 
-    return tx.objectStore(DB_NAME);
+    return tx.objectStore(DB_STORE_NAME);
+  }
 
-    // await new Promise((resolve) => {
-    //     request.onsuccess = () => {
-    //       resolve(request.result);
-    //     };
-    //     request.onerror = () => {
-    //       const errorMessage = request.error?.message || "something went wrong";
-    //       resolve(errorMessage);
-    //       throw new Error(errorMessage);
-    //     };
-    //   });
+  private async getRequestResult(request: IDBRequest) {
+    return await new Promise((resolve) => {
+      request.onsuccess = () => {
+        resolve(request.result);
+      };
+      request.onerror = () => {
+        const errorMessage = request.error?.message || "something went wrong";
+        resolve(errorMessage);
+        throw new Error(errorMessage);
+      };
+    });
   }
 
   async upsert(key: string, value: T): Promise<void> {
     (await this.getObjectStore("readwrite")).put({ key, value });
   }
 
-  async list(): Promise<T[]> {
-    return (await this.getObjectStore("readonly")).getAll().result;
-  }
-
   async get(key: string): Promise<T> {
-    return (await this.getObjectStore("readonly")).get(key).result;
+    return (await this.getRequestResult(
+      (await this.getObjectStore("readonly")).get(key)
+    )) as T;
   }
 
   async remove(key: string): Promise<void> {
@@ -83,20 +79,6 @@ export class DbStorage<T> {
     return (await this.getObjectStore("readwrite")).clear();
   }
 
-  async keys() {
-    return (await this.getObjectStore("readonly")).getAllKeys();
-  }
-
-  async exists(key: string): Promise<boolean> {
-    const data = await this.get(key);
-    return !!data;
-  }
-
-  async count(): Promise<number> {
-    const keys = await this.keys();
-    return keys.result.length;
-  }
-
   async destroy() {
     if (await DbStorage.getInstance()) {
       DbStorage._dbInstance.close();
@@ -104,11 +86,3 @@ export class DbStorage<T> {
     }
   }
 }
-
-// export class DB {
-//   private db: IDBDatabase | null = null;
-
-//   private version = 1;
-
-//   constructor(private dbName: string) {}
-// }

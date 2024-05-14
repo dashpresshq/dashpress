@@ -20,7 +20,7 @@ const ProfileRoot = styled(Stack)`
   }
 `;
 
-const Name = styled(Typo.XS)`
+const Name = styled(Typo.SM)`
   color: ${SYSTEM_COLORS.white};
 `;
 

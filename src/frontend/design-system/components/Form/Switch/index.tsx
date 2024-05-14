@@ -46,7 +46,7 @@ const SIZES_CONFIG: Record<Sizes, ISizeConfig> = {
     width: 26,
     height: 16,
     shift: 2,
-    top: 2,
+    top: 0,
     labelSpacing: 32,
     checkedShift: 10,
     circleSize: 12,
@@ -64,7 +64,7 @@ const Root = styled.label<{ size: Sizes }>`
 const Slider = styled.span<{ size: Sizes }>`
   position: absolute;
   cursor: pointer;
-  top: ${(props) => SIZES_CONFIG[props.size].top}px;
+  top: 0;
   left: 0;
   right: 0;
   bottom: 0;

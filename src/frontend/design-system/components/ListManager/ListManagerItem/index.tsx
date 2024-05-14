@@ -9,6 +9,7 @@ import { GrabIcon } from "frontend/design-system/Icons/Grab";
 import { SystemIconsKeys } from "shared/constants/Icons";
 import { SystemIcon } from "frontend/design-system/Icons/System";
 import { MessageDescriptor } from "@lingui/core";
+import { Typo } from "frontend/design-system/primitives/Typo";
 import { FormButton } from "../../Button/FormButton";
 import { FormSwitch } from "../../Form/Switch";
 
@@ -31,7 +32,7 @@ const ListItem = styled.button<{
   display: flex;
 
   position: relative;
-  padding: 12px 0.75rem;
+  padding: 0.575rem;
   background-color: ${USE_ROOT_COLOR("base-color")};
   border-left: 0;
   border: 1px solid transparent;
@@ -182,7 +183,14 @@ export function ListManagerItem({
         ) : null}{" "}
         <div>
           <Label htmlFor={id} $active={active} $subtle={subtle}>
-            {label}
+            <Typo.SM
+              $color={
+                // eslint-disable-next-line no-nested-ternary
+                active ? "inverse" : subtle ? "muted" : "main"
+              }
+            >
+              {label}
+            </Typo.SM>
           </Label>
           {subLabel ? <SubLabel $active={active}>{subLabel}</SubLabel> : null}
         </div>

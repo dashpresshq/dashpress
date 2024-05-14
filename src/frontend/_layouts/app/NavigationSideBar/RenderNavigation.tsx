@@ -90,7 +90,7 @@ const LeftSideNavMenuListAnchor = styled(PlainButton)<{
   align-items: center;
   width: 100%;
   outline: none !important;
-  padding: 12px 16px;
+  padding: 10px 16px;
   padding-left: ${(props) => props.$depth * 16}px;
   &:hover {
     color: ${SYSTEM_COLORS.white};
@@ -101,10 +101,12 @@ const LeftSideNavMenuListAnchor = styled(PlainButton)<{
 const LeftSideNavMenu = styled.ul<{}>`
   padding: 0;
   margin-bottom: 0;
+  margin-top: 10px;
 `;
 
 const NavLabel = styled(Typo.XS)<{ $isFullWidth: boolean }>`
   color: ${SYSTEM_COLORS.white};
+  font-size: 14px;
   margin-left: 8px;
   transition: all 0.3s;
   ${(props) =>
@@ -119,7 +121,7 @@ const NavHeader = styled(Typo.XS)<{ $isFullWidth: boolean }>`
   text-transform: uppercase;
   font-size: 12px;
   font-weight: bold;
-  margin: 24px 0 8px 16px;
+  margin: 20px 0 8px 16px;
   transition: all 0.3s;
   ${(props) =>
     !props.$isFullWidth &&

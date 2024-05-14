@@ -38,7 +38,7 @@ const Label = styled.span`
 const DropDownItem = styled.button`
   display: block;
   width: 100%;
-  padding: 6px 12px;
+  padding: 8px 12px;
   clear: both;
   font-weight: 400;
   cursor: pointer;
@@ -257,12 +257,12 @@ export function DropDownMenu({
                   color={menuItem.disabled ? "muted-text" : "main-text"}
                 />
               )}
-              <Typo.XS
+              <Typo.SM
                 as="span"
                 $color={menuItem.disabled ? "muted" : undefined}
               >
                 {_(menuItem.label)}
-              </Typo.XS>
+              </Typo.SM>
             </Stack>
             {menuItem.description ? (
               <Typo.XS $color="muted" as="span">

@@ -18,8 +18,8 @@ export const StyledBaseButton = styled.button<IStyledBaseButton>`
   user-select: none;
   background-color: transparent;
   border: 1px solid transparent;
-  padding: 0.375rem 0.75rem;
-  font-size: 0.9rem;
+  padding: 0.3rem 0.55rem;
+  font-size: 0.8rem;
   line-height: 1.7;
   border-radius: 4px;
   cursor: ${(props) => props.cursor || "pointer"};
@@ -61,11 +61,9 @@ export const StyledBaseButton = styled.button<IStyledBaseButton>`
       ${(props) =>
         props.$justIcon &&
         css`
-          padding: 8px;
-          font-size: 10px;
-          line-height: initial;
+          padding: 6px;
           border-radius: 50%;
-          width: 29px;
+          width: 26px;
         `}
 
 

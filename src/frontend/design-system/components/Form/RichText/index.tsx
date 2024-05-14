@@ -4,8 +4,8 @@ import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
 import dynamic from "next/dynamic";
 import { SYSTEM_COLORS } from "frontend/design-system/theme/system";
 import { noop } from "shared/lib/noop";
-import { ISharedFormInput } from "../_types";
-import { generateClassNames, wrapLabelAndError } from "../_wrapForm";
+import { ISharedFormInput } from "../types";
+import { generateClassNames, LabelAndError } from "../LabelAndError";
 
 const ReactQuill = dynamic<any>(
   () => {
@@ -100,26 +100,27 @@ const modules = {
   },
 };
 
-export const FormRichTextArea = (formInput: ISharedFormInput) => {
+export function FormRichTextArea(formInput: ISharedFormInput) {
   const {
-    input: { onFocus, onBlur, ...inputProps },
+    input: { onFocus, name, onBlur, ...inputProps },
     disabled,
     meta,
     placeholder,
   } = formInput;
   noop(onBlur, onFocus);
-  return wrapLabelAndError(
-    <Root>
-      <ReactQuill
-        {...inputProps}
-        className={generateClassNames(meta)}
-        readOnly={disabled}
-        modules={modules}
-        id={formInput.input.name}
-        placeholder={placeholder}
-        theme="snow"
-      />
-    </Root>,
-    formInput
+  return (
+    <LabelAndError formInput={formInput}>
+      <Root>
+        <ReactQuill
+          {...inputProps}
+          className={generateClassNames(meta)}
+          readOnly={disabled}
+          modules={modules}
+          id={name}
+          placeholder={placeholder}
+          theme="snow"
+        />
+      </Root>
+    </LabelAndError>
   );
-};
+}

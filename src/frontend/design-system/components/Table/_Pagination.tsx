@@ -7,7 +7,7 @@ import { Typo } from "frontend/design-system/primitives/Typo";
 import { Trans } from "@lingui/macro";
 import { ChevronLeft, ChevronRight } from "react-feather";
 import { i18nNoop } from "translations/fake";
-import { SimpleSelect } from "../Form/FormSelect/Simple";
+import { SimpleSelect } from "../Form/Select/Simple";
 import { TABLE_PAGE_SIZES } from "./constants";
 
 const Pagination = styled.div`

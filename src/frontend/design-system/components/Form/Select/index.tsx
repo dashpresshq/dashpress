@@ -7,9 +7,9 @@ import { useMemo } from "react";
 import { msg } from "@lingui/macro";
 import {
   generateClassNames,
-  wrapLabelAndError,
+  LabelAndError,
   generateFormArias,
-} from "../_wrapForm";
+} from "../LabelAndError";
 import { SelectStyles, SharedSelectProps } from "./styles";
 import { IBaseFormSelect } from "./types";
 
@@ -63,7 +63,7 @@ export function FormMultiSelect({
   );
 }
 
-export const FormSelect = (props: IFormSelect) => {
+export function FormSelect(formInput: IFormSelect) {
   const {
     input,
     selectData,
@@ -74,7 +74,7 @@ export const FormSelect = (props: IFormSelect) => {
     nullable,
     defaultLabel,
     placeholder,
-  } = props;
+  } = formInput;
   const { _ } = useLingui();
 
   const selectDataWithDefault = [
@@ -84,39 +84,42 @@ export const FormSelect = (props: IFormSelect) => {
     },
     ...selectData.map(({ value, label }) => ({ value, label: _(label) })),
   ];
-  return wrapLabelAndError(
-    <div data-testid={`react-select__${input.name}`}>
-      <SelectStyled
-        {...input}
-        {...generateFormArias(meta)}
-        classNamePrefix={SharedSelectProps.classNamePrefix}
-        value={
-          selectDataWithDefault.find(({ value }) => value === input.value) || {
-            value: "",
-            label: "",
+  return (
+    <LabelAndError formInput={formInput}>
+      <div data-testid={`react-select__${input.name}`}>
+        <SelectStyled
+          {...input}
+          {...generateFormArias(meta)}
+          classNamePrefix={SharedSelectProps.classNamePrefix}
+          value={
+            selectDataWithDefault.find(
+              ({ value }) => value === input.value
+            ) || {
+              value: "",
+              label: "",
+            }
           }
-        }
-        placeholder={placeholder ? _(placeholder) : null}
-        inputId={input.name}
-        onChange={({ value }: any) => {
-          input.onChange(nullable && !value ? null : value);
-        }}
-        className={generateClassNames(meta)}
-        isDisabled={disabled}
-        options={selectDataWithDefault}
-        isOptionDisabled={(option: unknown) => {
-          if (!disabledOptions) {
-            return false;
-          }
-          return disabledOptions.includes(
-            (option as ISelectData).value as string
-          );
-        }}
-      />
-    </div>,
-    props
+          placeholder={placeholder ? _(placeholder) : null}
+          inputId={input.name}
+          onChange={({ value }: any) => {
+            input.onChange(nullable && !value ? null : value);
+          }}
+          className={generateClassNames(meta)}
+          isDisabled={disabled}
+          options={selectDataWithDefault}
+          isOptionDisabled={(option: unknown) => {
+            if (!disabledOptions) {
+              return false;
+            }
+            return disabledOptions.includes(
+              (option as ISelectData).value as string
+            );
+          }}
+        />
+      </div>
+    </LabelAndError>
   );
-};
+}
 
 interface IFormNoValueSelect {
   selectData: ISelectData[];

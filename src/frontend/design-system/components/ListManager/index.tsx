@@ -8,7 +8,7 @@ import { Z_INDEXES } from "frontend/design-system/constants/zIndex";
 import { sortListByOrder } from "shared/lib/array/sort";
 import { msg } from "@lingui/macro";
 import { EmptyWrapper } from "../EmptyWrapper";
-import { FormSearch } from "../Form/FormSearch";
+import { FormSearch } from "../Form/Search";
 import { defaultSearchFunction, defaultToEmptyArray } from "./utils";
 import { ListSkeleton } from "../Skeleton/List";
 import { IEmptyWrapperProps } from "../EmptyWrapper/types";

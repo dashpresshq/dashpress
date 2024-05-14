@@ -10,7 +10,7 @@ import { SystemIconsKeys } from "shared/constants/Icons";
 import { SystemIcon } from "frontend/design-system/Icons/System";
 import { MessageDescriptor } from "@lingui/core";
 import { FormButton } from "../../Button/FormButton";
-import { FormSwitch } from "../../Form/FormSwitch";
+import { FormSwitch } from "../../Form/Switch";
 
 const ChevronRight = styled(ChevronRightIcon)<{ $active?: boolean }>`
   width: 14px;

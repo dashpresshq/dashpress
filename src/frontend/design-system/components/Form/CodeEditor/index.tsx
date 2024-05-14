@@ -5,8 +5,8 @@ import { SYSTEM_COLORS } from "frontend/design-system/theme/system";
 import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
 import { noop } from "shared/lib/noop";
 import { useLingui } from "@lingui/react";
-import { ISharedFormInput } from "../_types";
-import { generateClassNames, wrapLabelAndError } from "../_wrapForm";
+import { ISharedFormInput } from "../types";
+import { LabelAndError, generateClassNames } from "../LabelAndError";
 import "prismjs/components/prism-clike";
 import "prismjs/components/prism-javascript";
 import { PrismTokenStyles } from "../../RenderCode/styles";
@@ -40,36 +40,38 @@ const Wrapper = styled.div`
   ${PrismTokenStyles}
 `;
 
-export const FormCodeEditor = (formInput: IFormCodeEditor) => {
+export function FormCodeEditor(formInput: IFormCodeEditor) {
   const {
-    input: { onFocus, onBlur, ...inputProps },
+    input: { onFocus, name, onBlur, ...inputProps },
     meta,
+    language,
+    placeholder,
+    disabled,
   } = formInput;
   noop(onFocus, onBlur);
 
   const { _ } = useLingui();
 
-  return wrapLabelAndError(
-    <Wrapper className={`${generateClassNames(meta)} line-numbers`}>
-      <Editor
-        {...inputProps}
-        onValueChange={inputProps.onChange}
-        highlight={(code) =>
-          highlight(code, languages[formInput.language || "javascript"])
-        }
-        disabled={formInput.disabled}
-        placeholder={
-          formInput.placeholder ? _(formInput.placeholder) : undefined
-        }
-        textareaId={formInput.input.name}
-        padding={4}
-        className="form-code-editor"
-        style={{
-          minHeight: "275px",
-          fontFamily: '"Fira code", "Fira Mono", monospace',
-        }}
-      />
-    </Wrapper>,
-    formInput
+  return (
+    <LabelAndError formInput={formInput}>
+      <Wrapper className={`${generateClassNames(meta)} line-numbers`}>
+        <Editor
+          {...inputProps}
+          onValueChange={inputProps.onChange}
+          highlight={(code) =>
+            highlight(code, languages[language || "javascript"])
+          }
+          disabled={disabled}
+          placeholder={placeholder ? _(placeholder) : undefined}
+          textareaId={name}
+          padding={4}
+          className="form-code-editor"
+          style={{
+            minHeight: "275px",
+            fontFamily: '"Fira code", "Fira Mono", monospace',
+          }}
+        />
+      </Wrapper>
+    </LabelAndError>
   );
-};
+}

@@ -3,7 +3,7 @@ import { ISelectData } from "shared/types/options";
 import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { fakeMessageDescriptor } from "translations/fake";
-import { SimpleSelect } from "../../Form/FormSelect/Simple";
+import { SimpleSelect } from "../../Form/Select/Simple";
 import { IFilterProps } from "./types";
 
 export function FilterTableByBooleans({

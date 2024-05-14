@@ -10,7 +10,7 @@ import {
   composeValidators,
   maxLength,
 } from "frontend/lib/validations";
-import { FormSelect } from "frontend/design-system/components/Form/FormSelect";
+import { FormSelect } from "frontend/design-system/components/Form/Select";
 import { FormButton } from "frontend/design-system/components/Button/FormButton";
 import { OffCanvas } from "frontend/design-system/components/OffCanvas";
 import { IFormInputRightAction } from "shared/form-schemas/types";

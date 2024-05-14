@@ -9,7 +9,7 @@ import {
   FormSkeleton,
   FormSkeletonSchema,
 } from "frontend/design-system/components/Skeleton/Form";
-import { FormInput } from "frontend/design-system/components/Form/FormInput";
+import { FormInput } from "frontend/design-system/components/Form/Input";
 import { FormButton } from "frontend/design-system/components/Button/FormButton";
 import { i18nNoop } from "translations/fake";
 

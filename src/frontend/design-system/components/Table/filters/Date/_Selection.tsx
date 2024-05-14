@@ -2,7 +2,7 @@ import { IColumnFilterBag, IDateFilterOption } from "shared/types/data";
 import { Stack } from "frontend/design-system/primitives/Stack";
 import { i18nNoop } from "translations/fake";
 import { DATE_FILTER_OPTIONS } from "./constants";
-import { SimpleSelect } from "../../../Form/FormSelect/Simple";
+import { SimpleSelect } from "../../../Form/Select/Simple";
 
 const getOptionValue = (value: string) => {
   const dateOption = DATE_FILTER_OPTIONS.find(

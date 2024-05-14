@@ -1,16 +1,17 @@
-import { FormInput } from "frontend/design-system/components/Form/FormInput";
-import { FormNumberInput } from "frontend/design-system/components/Form/FormNumberInput";
-import { FormSelect } from "frontend/design-system/components/Form/FormSelect";
-import { FormDateInput } from "frontend/design-system/components/Form/FormDateInput";
-import { AsyncFormSelect } from "frontend/design-system/components/Form/FormSelect/Async";
-import { FormSwitch } from "frontend/design-system/components/Form/FormSwitch";
-import { FormCodeEditor } from "frontend/design-system/components/Form/FormCodeEditor";
-import { FormTextArea } from "frontend/design-system/components/Form/FormTextArea";
-import { FormFileInput } from "frontend/design-system/components/Form/FormFileInput";
-import { FormSelectButton } from "frontend/design-system/components/Form/FormSelectButton";
-import { FormRichTextArea } from "frontend/design-system/components/Form/FormRichTextArea";
+import { FormSelect } from "frontend/design-system/components/Form/Select";
+import { FormDateInput } from "frontend/design-system/components/Form/Date";
+import { AsyncFormSelect } from "frontend/design-system/components/Form/Select/Async";
+import { FormSwitch } from "frontend/design-system/components/Form/Switch";
+import { FormCodeEditor } from "frontend/design-system/components/Form/CodeEditor";
+import { FormTextArea } from "frontend/design-system/components/Form/TextArea";
+import { FormFileInput } from "frontend/design-system/components/Form/File";
+import { FormSelectButton } from "frontend/design-system/components/Form/SelectButton";
+import { FormRichTextArea } from "frontend/design-system/components/Form/RichText";
 import { useExtendRenderFormInputProps } from "frontend/views/data/portal";
 import { useLingui } from "@lingui/react";
+import { FormInput } from "frontend/design-system/components/Form/Input";
+import { FormNumberInput } from "frontend/design-system/components/Form/Number";
+import { FormPasswordInput } from "frontend/design-system/components/Form/Password";
 import { IRenderFormInputProps } from "./types";
 
 export function RenderFormInput(props: IRenderFormInputProps) {
@@ -70,12 +71,15 @@ export function RenderFormInput(props: IRenderFormInputProps) {
 
   switch (type) {
     case "email":
-    case "password":
     case "url":
     case "color":
       return <FormInput type={type} {...formProps} />;
+
     case "number":
       return <FormNumberInput {...formProps} />;
+
+    case "password":
+      return <FormPasswordInput {...formProps} />;
 
     case "datetime-local":
       return <FormDateInput {...formProps} />;

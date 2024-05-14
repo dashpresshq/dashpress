@@ -7,22 +7,23 @@ import { required } from "frontend/lib/validations";
 import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 import { Stack } from "frontend/design-system/primitives/Stack";
 import { fakeMessageDescriptor } from "translations/fake";
-import { FormCheckBox } from "./FormCheckBox";
-import { FormInput } from "./FormInput";
-import { FormNumberInput } from "./FormNumberInput";
-import { FormRichTextArea } from "./FormRichTextArea";
+import { FormCheckBox } from "./CheckBox";
+import { FormInput } from "./Input";
+import { FormNumberInput } from "./Number";
+import { FormRichTextArea } from "./RichText";
 import { FormButton } from "../Button/FormButton";
-import { FormDateInput } from "./FormDateInput";
-import { FormTextArea } from "./FormTextArea";
-import { FormMultiSelect, FormSelect } from "./FormSelect";
-import { FormCodeEditor } from "./FormCodeEditor";
-import { AsyncFormSelect } from "./FormSelect/Async";
-import { FormSwitch } from "./FormSwitch";
-import { FormSearch } from "./FormSearch";
-import { FormFileInput } from "./FormFileInput";
-import { FormSelectButton } from "./FormSelectButton";
+import { FormDateInput } from "./Date";
+import { FormTextArea } from "./TextArea";
+import { FormMultiSelect, FormSelect } from "./Select";
+import { FormCodeEditor } from "./CodeEditor";
+import { AsyncFormSelect } from "./Select/Async";
+import { FormSwitch } from "./Switch";
+import { FormSearch } from "./Search";
+import { FormFileInput } from "./File";
+import { FormSelectButton } from "./SelectButton";
 import { ActionButtons } from "../Button/ActionButtons";
 import { DELETE_BUTTON_PROPS } from "../Button/constants";
+import { FormPasswordInput } from "./Password";
 
 function DemoForm() {
   return (
@@ -80,6 +81,15 @@ function DemoForm() {
             {(formProps) => (
               <FormInput
                 label={fakeMessageDescriptor("Example Text Input")}
+                {...formProps}
+              />
+            )}
+          </Field>
+
+          <Field name="examplePassword" validateFields={[]} validate={required}>
+            {(formProps) => (
+              <FormPasswordInput
+                label={fakeMessageDescriptor("Example Password Input")}
                 {...formProps}
               />
             )}

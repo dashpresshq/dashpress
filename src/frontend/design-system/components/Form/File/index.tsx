@@ -3,8 +3,8 @@ import { useDropzone } from "react-dropzone";
 import { makeFileRequest } from "frontend/lib/data/makeRequest";
 import { useToggle } from "frontend/hooks/state/useToggleState";
 import { typescriptSafeObjectDotEntries } from "shared/lib/objects";
-import { ISharedFormInput } from "../_types";
-import { generateClassNames, wrapLabelAndError } from "../_wrapForm";
+import { ISharedFormInput } from "../types";
+import { generateClassNames, LabelAndError } from "../LabelAndError";
 import { Presentation } from "./Presentation";
 
 interface IFormFileInput extends ISharedFormInput {
@@ -12,7 +12,7 @@ interface IFormFileInput extends ISharedFormInput {
   metadata?: Record<string, unknown>;
 }
 
-function FileInput({
+export function FormFileInput({
   input,
   meta,
   disabled,
@@ -60,17 +60,15 @@ function FileInput({
   });
 
   return (
-    <Presentation
-      {...{ isSubmitting: submissionMode.isOn, disabled, value, error }}
-      onClear={() => onChange(null)}
-      dropZoneProps={dropZoneProps}
-      formClassName={generateClassNames(meta)}
-    />
+    <LabelAndError formInput={{ input, meta }}>
+      <Presentation
+        {...{ isSubmitting: submissionMode.isOn, disabled, value, error }}
+        onClear={() => onChange(null)}
+        dropZoneProps={dropZoneProps}
+        formClassName={generateClassNames(meta)}
+      />
+    </LabelAndError>
   );
 }
-
-export const FormFileInput = (formInput: IFormFileInput) => {
-  return wrapLabelAndError(<FileInput {...formInput} />, formInput);
-};
 
 // https://react-dropzone.js.org/#section-styling-dropzone

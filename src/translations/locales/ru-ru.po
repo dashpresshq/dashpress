@@ -646,6 +646,9 @@ msgstr "Включить область"
 msgid "Enable Points"
 msgstr "Включить баллы"
 
+msgid "Enable two-factor authentication"
+msgstr ""
+
 msgid "Enabled Entities"
 msgstr "Включенные объекты"
 
@@ -846,6 +849,9 @@ msgstr "Высота"
 
 msgid "Hi, {0}"
 msgstr "Привет, {0}"
+
+msgid "Hide Password"
+msgstr ""
 
 msgid "Home"
 msgstr "Дом"
@@ -1399,6 +1405,9 @@ msgstr "Совместное использование"
 msgid "Show"
 msgstr "Показывать"
 
+msgid "Show Password"
+msgstr ""
+
 msgid "Show Soft Deleted Items And The Restore Button"
 msgstr "Показать обратимо удаленные элементы и кнопку «Восстановить»"
 
@@ -1557,6 +1566,9 @@ msgstr "Курок"
 
 msgid "Try Out 25+ Pro Features"
 msgstr "Попробуйте 25 функций Pro"
+
+msgid "Two Factor Authentication"
+msgstr ""
 
 msgid "Type"
 msgstr "Тип"

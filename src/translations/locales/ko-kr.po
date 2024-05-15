@@ -646,6 +646,9 @@ msgstr "지역 활성화"
 msgid "Enable Points"
 msgstr "포인트 활성화"
 
+msgid "Enable two-factor authentication"
+msgstr ""
+
 msgid "Enabled Entities"
 msgstr "활성화된 엔터티"
 
@@ -846,6 +849,9 @@ msgstr "키"
 
 msgid "Hi, {0}"
 msgstr "안녕하세요, {0}"
+
+msgid "Hide Password"
+msgstr ""
 
 msgid "Home"
 msgstr "집"
@@ -1399,6 +1405,9 @@ msgstr "나누는"
 msgid "Show"
 msgstr "보여주다"
 
+msgid "Show Password"
+msgstr ""
+
 msgid "Show Soft Deleted Items And The Restore Button"
 msgstr "소프트 삭제된 항목 및 복원 버튼 표시"
 
@@ -1557,6 +1566,9 @@ msgstr "방아쇠"
 
 msgid "Try Out 25+ Pro Features"
 msgstr "25가지 Pro 기능을 사용해 보세요"
+
+msgid "Two Factor Authentication"
+msgstr ""
 
 msgid "Type"
 msgstr "유형"

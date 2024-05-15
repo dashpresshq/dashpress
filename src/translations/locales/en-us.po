@@ -14,7 +14,7 @@ msgstr ""
 "Plural-Forms: \n"
 
 msgid ""
-msgstr ""
+msgstr "/+Z5u4"
 
 msgid "[[ name ]] is an invalid date"
 msgstr "[[ name ]] is an invalid date"
@@ -646,6 +646,9 @@ msgstr "Enable Area"
 msgid "Enable Points"
 msgstr "Enable Points"
 
+msgid "Enable two-factor authentication"
+msgstr "Enable two-factor authentication"
+
 msgid "Enabled Entities"
 msgstr "Enabled Entities"
 
@@ -846,6 +849,9 @@ msgstr "Height"
 
 msgid "Hi, {0}"
 msgstr "Hi, {0}"
+
+msgid "Hide Password"
+msgstr "Hide Password"
 
 msgid "Home"
 msgstr "Home"
@@ -1399,6 +1405,9 @@ msgstr "Sharing"
 msgid "Show"
 msgstr "Show"
 
+msgid "Show Password"
+msgstr "Show Password"
+
 msgid "Show Soft Deleted Items And The Restore Button"
 msgstr "Show Soft Deleted Items And The Restore Button"
 
@@ -1557,6 +1566,9 @@ msgstr "Trigger"
 
 msgid "Try Out 25+ Pro Features"
 msgstr "Try Out 25+ Pro Features"
+
+msgid "Two Factor Authentication"
+msgstr "Two Factor Authentication"
 
 msgid "Type"
 msgstr "Type"

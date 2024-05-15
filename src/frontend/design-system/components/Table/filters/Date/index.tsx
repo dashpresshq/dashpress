@@ -34,7 +34,6 @@ export function FilterTableByDate({
           }
         }}
         value={customDateMode.isOn}
-        size="sm"
         label={msg`Custom Date`}
       />
       {new Date(filterValue?.value || "").toString() !== "Invalid Date" ? (

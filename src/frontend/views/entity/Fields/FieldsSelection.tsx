@@ -92,7 +92,6 @@ export function FieldSelectionCanvas({
             <FormSwitch
               label={msg`Use Colors`}
               name="use-colors"
-              size="sm"
               value={useColors}
               onChange={(newUseColorValue) => {
                 setUseColors(newUseColorValue);

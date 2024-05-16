@@ -6,9 +6,10 @@ import { EmptyWrapper } from "../EmptyWrapper";
 import { IEmptyWrapperProps } from "../EmptyWrapper/types";
 
 const Td = styled.td`
-  padding: 0.45rem;
+  padding: 0.345rem 0.45rem;
   vertical-align: middle;
   font-weight: 400;
+  font-size: 14px;
 
   &:not(:last-child) {
     border-right: 1px solid ${USE_ROOT_COLOR("border-color")};

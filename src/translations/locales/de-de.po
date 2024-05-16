@@ -646,6 +646,9 @@ msgstr "Bereich aktivieren"
 msgid "Enable Points"
 msgstr "Punkte aktivieren"
 
+msgid "Enable two-factor authentication"
+msgstr ""
+
 msgid "Enabled Entities"
 msgstr "Aktivierte Entitäten"
 
@@ -846,6 +849,9 @@ msgstr "Höhe"
 
 msgid "Hi, {0}"
 msgstr "Hallo, {0}"
+
+msgid "Hide Password"
+msgstr ""
 
 msgid "Home"
 msgstr "Heim"
@@ -1399,6 +1405,9 @@ msgstr "Teilen"
 msgid "Show"
 msgstr "Zeigen"
 
+msgid "Show Password"
+msgstr ""
+
 msgid "Show Soft Deleted Items And The Restore Button"
 msgstr "Vorläufig gelöschte Elemente und die Schaltfläche „Wiederherstellen“ anzeigen"
 
@@ -1557,6 +1566,9 @@ msgstr "Auslösen"
 
 msgid "Try Out 25+ Pro Features"
 msgstr "Probieren Sie 25 Pro-Funktionen aus"
+
+msgid "Two Factor Authentication"
+msgstr ""
 
 msgid "Type"
 msgstr "Typ"

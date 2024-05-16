@@ -14,7 +14,7 @@ import { IFormProps } from "frontend/lib/form/types";
 import { ITableColumn } from "frontend/design-system/components/Table/types";
 import { SoftButton } from "frontend/design-system/components/Button/SoftButton";
 import { Stack } from "frontend/design-system/primitives/Stack";
-import { FormInput } from "frontend/design-system/components/Form/FormInput";
+import { FormInput } from "frontend/design-system/components/Form/Input";
 import { Spacer } from "frontend/design-system/primitives/Spacer";
 import { Table } from "frontend/design-system/components/Table";
 import { FormButton } from "frontend/design-system/components/Button/FormButton";

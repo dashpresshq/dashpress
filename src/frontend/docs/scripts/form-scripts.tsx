@@ -33,6 +33,12 @@ export function FormScriptDocumentation() {
             </b>
             : The current user details
           </li>
+          <li>
+            <b>
+              <code>$.routeParams</code>
+            </b>
+            : The current entity details
+          </li>
         </ul>
       </p>
       <p>

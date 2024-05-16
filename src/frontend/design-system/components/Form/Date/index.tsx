@@ -3,8 +3,8 @@ import { FieldMetaState } from "react-final-form";
 import styled from "styled-components";
 import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
 import { IInput, InputStyles } from "../Styles";
-import { ISharedFormInput } from "../_types";
-import { wrapLabelAndError, generateFormArias } from "../_wrapForm";
+import { ISharedFormInput } from "../types";
+import { LabelAndError, generateFormArias } from "../LabelAndError";
 import { dateLibraryStyle } from "./defaultStyle";
 
 interface IFormDateInput extends ISharedFormInput {
@@ -81,26 +81,27 @@ export function ControlledFormDateInput({
   );
 }
 
-export const FormDateInput = (formInput: IFormDateInput) => {
+export function FormDateInput(formInput: IFormDateInput) {
   const { input, disabled, meta, required, minDate, maxDate } = formInput;
   let { value } = input;
   if (value && typeof value === "string") {
     value = new Date(value);
     input.onChange(value);
   }
-  return wrapLabelAndError(
-    <ControlledFormDateInput
-      onChange={(value$1) => {
-        input.onChange(value$1);
-      }}
-      isClearable={!required}
-      value={value}
-      id={formInput.input.name}
-      minDate={minDate}
-      maxDate={maxDate}
-      meta={meta}
-      disabled={disabled}
-    />,
-    formInput
+  return (
+    <LabelAndError formInput={formInput}>
+      <ControlledFormDateInput
+        onChange={(value$1) => {
+          input.onChange(value$1);
+        }}
+        isClearable={!required}
+        value={value}
+        id={input.name}
+        minDate={minDate}
+        maxDate={maxDate}
+        meta={meta}
+        disabled={disabled}
+      />
+    </LabelAndError>
   );
-};
+}

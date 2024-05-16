@@ -5,8 +5,8 @@ import { msg } from "@lingui/macro";
 import { DATE_FILTER_OPTIONS } from "./constants";
 import { IFilterProps } from "../types";
 import { DateSelection } from "./_Selection";
-import { FormSwitch } from "../../../Form/FormSwitch";
-import { ControlledFormDateInput } from "../../../Form/FormDateInput";
+import { FormSwitch } from "../../../Form/Switch";
+import { ControlledFormDateInput } from "../../../Form/Date";
 
 export function FilterTableByDate({
   column: { filterValue, setFilter },
@@ -34,7 +34,6 @@ export function FilterTableByDate({
           }
         }}
         value={customDateMode.isOn}
-        size="sm"
         label={msg`Custom Date`}
       />
       {new Date(filterValue?.value || "").toString() !== "Invalid Date" ? (

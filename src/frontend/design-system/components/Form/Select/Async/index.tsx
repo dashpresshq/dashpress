@@ -9,10 +9,10 @@ import { ApiRequest } from "frontend/lib/data/makeRequest";
 import { useLingui } from "@lingui/react";
 import { FormSelect } from "..";
 import {
+  LabelAndError,
   generateClassNames,
   generateFormArias,
-  wrapLabelAndError,
-} from "../../_wrapForm";
+} from "../../LabelAndError";
 import { ErrorAlert } from "../../../Alert";
 import { IBaseFormSelect } from "../types";
 import { SelectStyles, SharedSelectProps } from "../styles";
@@ -77,7 +77,7 @@ export function AsyncFormSelect(props: IProps) {
     }
 
     if (!input.value) {
-      return defaultLabel || `--- Select ${formLabel} ---`;
+      return defaultLabel || `--- Select ${_(formLabel)} ---`;
     }
 
     const isValueInFirstDataLoad = data.find(
@@ -98,30 +98,31 @@ export function AsyncFormSelect(props: IProps) {
   }
 
   if (data.length >= limit) {
-    return wrapLabelAndError(
-      <Select
-        cacheOptions
-        defaultOptions
-        {...input}
-        {...generateFormArias(meta)}
-        onChange={({ value, label }: any) => {
-          input.onChange(nullable && !value ? null : value);
-          setValueLabel(label);
-        }}
-        id={input.name}
-        classNamePrefix={SharedSelectProps.classNamePrefix}
-        isDisabled={disabled}
-        isLoading={isLoading}
-        placeholder={placeholder ? _(placeholder) : null}
-        className={generateClassNames(meta)}
-        value={{ value: input.value, label: valueLabelToUse.value }}
-        loadOptions={(inputValue) =>
-          new Promise((resolve) => {
-            debouncedSearch(inputValue, url, disabledOptions, resolve);
-          }) as unknown as void
-        }
-      />,
-      props
+    return (
+      <LabelAndError formInput={props}>
+        <Select
+          cacheOptions
+          defaultOptions
+          {...input}
+          {...generateFormArias(meta)}
+          onChange={({ value, label }: any) => {
+            input.onChange(nullable && !value ? null : value);
+            setValueLabel(label);
+          }}
+          id={input.name}
+          classNamePrefix={SharedSelectProps.classNamePrefix}
+          isDisabled={disabled}
+          isLoading={isLoading}
+          placeholder={placeholder ? _(placeholder) : null}
+          className={generateClassNames(meta)}
+          value={{ value: input.value, label: valueLabelToUse.value }}
+          loadOptions={(inputValue) =>
+            new Promise((resolve) => {
+              debouncedSearch(inputValue, url, disabledOptions, resolve);
+            }) as unknown as void
+          }
+        />
+      </LabelAndError>
     );
   }
 

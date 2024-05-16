@@ -80,7 +80,7 @@ export const Input = styled.input<IInput>`
 export const FormLabel = styled.label<{ sm?: true }>`
   padding-bottom: 1px;
   margin-bottom: 0;
-  font-size: inherit;
+  font-size: 0.8125rem;
   line-height: 1.8;
   text-align: right;
   display: inline-block;

@@ -646,6 +646,9 @@ msgstr ""
 msgid "Enable Points"
 msgstr ""
 
+msgid "Enable two-factor authentication"
+msgstr ""
+
 msgid "Enabled Entities"
 msgstr ""
 
@@ -845,6 +848,9 @@ msgid "Height"
 msgstr ""
 
 msgid "Hi, {0}"
+msgstr ""
+
+msgid "Hide Password"
 msgstr ""
 
 msgid "Home"
@@ -1399,6 +1405,9 @@ msgstr ""
 msgid "Show"
 msgstr ""
 
+msgid "Show Password"
+msgstr ""
+
 msgid "Show Soft Deleted Items And The Restore Button"
 msgstr ""
 
@@ -1556,6 +1565,9 @@ msgid "Trigger"
 msgstr ""
 
 msgid "Try Out 25+ Pro Features"
+msgstr ""
+
+msgid "Two Factor Authentication"
 msgstr ""
 
 msgid "Type"

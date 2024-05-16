@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { FilterOperators, IColumnFilterBag } from "shared/types/data";
 import { Spacer } from "frontend/design-system/primitives/Spacer";
-import { SimpleSelect } from "../../Form/FormSelect/Simple";
+import { SimpleSelect } from "../../Form/Select/Simple";
 import { FILTER_OPERATOR_CONFIG } from "./constants";
 
 interface IProps<T> {

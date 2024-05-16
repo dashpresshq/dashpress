@@ -24,7 +24,7 @@ const Header = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1rem;
+  padding: 0.8rem;
 `;
 
 const Body = styled.div`
@@ -78,7 +78,7 @@ export function OffCanvas({
       <Root as={Offcanvas} show onHide={onClose} placement="end" width={width}>
         <Header>
           <Stack $justify="space-between" $align="center">
-            <Typo.MD $weight="bold">{_(title)}</Typo.MD>
+            <Typo.SM $weight="bold">{_(title)}</Typo.SM>
             <SoftButton
               justIcon
               label={msg`Close Canvas`}
@@ -86,7 +86,7 @@ export function OffCanvas({
               systemIcon="Close"
               action={onClose}
               color="danger"
-              size="sm"
+              size="xs"
             />
           </Stack>
         </Header>

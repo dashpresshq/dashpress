@@ -1,4 +1,4 @@
-import { ISharedFormInput } from "../_types";
+import { ISharedFormInput } from "../types";
 
 export interface IBaseFormSelect extends ISharedFormInput {
   disabledOptions?: string[];

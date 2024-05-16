@@ -14,6 +14,7 @@ const toastStyle = (color: keyof typeof COLORS) => ({
   borderRadius: `4px`,
   borderTop: `2px solid ${color}`,
   maxWidth: "550px",
+  fontSize: "14px",
 });
 
 type ToastMessageWithAction = {

@@ -1,7 +1,7 @@
 import { IColumnFilterBag } from "shared/types/data";
 import { IFilterProps } from "./types";
 
-import { AsyncFormMultiSelect } from "../../Form/FormSelect/Async";
+import { AsyncFormMultiSelect } from "../../Form/Select/Async";
 
 export function FilterTableByListSelection({
   column: { filterValue, setFilter },

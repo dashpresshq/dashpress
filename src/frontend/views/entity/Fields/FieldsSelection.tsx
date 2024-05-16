@@ -12,13 +12,13 @@ import {
   OPTIONS_COLORS,
 } from "shared/logic/entities/selection.utils";
 import { useAppConfigurationDomainMessages } from "frontend/hooks/configuration/configuration.constant";
-import { FormInput } from "frontend/design-system/components/Form/FormInput";
+import { FormInput } from "frontend/design-system/components/Form/Input";
 import { Stack } from "frontend/design-system/primitives/Stack";
 import { Card, CardBody } from "frontend/design-system/components/Card";
 import { Spacer } from "frontend/design-system/primitives/Spacer";
 import { SoftButton } from "frontend/design-system/components/Button/SoftButton";
 import { FormButton } from "frontend/design-system/components/Button/FormButton";
-import { FormSwitch } from "frontend/design-system/components/Form/FormSwitch";
+import { FormSwitch } from "frontend/design-system/components/Form/Switch";
 import { DELETE_BUTTON_PROPS } from "frontend/design-system/components/Button/constants";
 import { msg } from "@lingui/macro";
 import { isBlackOrWhite } from "./isBlackOrWhite";
@@ -92,7 +92,6 @@ export function FieldSelectionCanvas({
             <FormSwitch
               label={msg`Use Colors`}
               name="use-colors"
-              size="sm"
               value={useColors}
               onChange={(newUseColorValue) => {
                 setUseColors(newUseColorValue);

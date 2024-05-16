@@ -646,6 +646,9 @@ msgstr "启用区域"
 msgid "Enable Points"
 msgstr "启用点"
 
+msgid "Enable two-factor authentication"
+msgstr ""
+
 msgid "Enabled Entities"
 msgstr "已启用实体"
 
@@ -846,6 +849,9 @@ msgstr "高度"
 
 msgid "Hi, {0}"
 msgstr "你好，{0}"
+
+msgid "Hide Password"
+msgstr ""
 
 msgid "Home"
 msgstr "首页"
@@ -1399,6 +1405,9 @@ msgstr "分享"
 msgid "Show"
 msgstr ""
 
+msgid "Show Password"
+msgstr ""
+
 msgid "Show Soft Deleted Items And The Restore Button"
 msgstr "显示软删除项目和恢复按钮"
 
@@ -1557,6 +1566,9 @@ msgstr "触发器"
 
 msgid "Try Out 25+ Pro Features"
 msgstr "试用25+专业功能"
+
+msgid "Two Factor Authentication"
+msgstr ""
 
 msgid "Type"
 msgstr "类型"

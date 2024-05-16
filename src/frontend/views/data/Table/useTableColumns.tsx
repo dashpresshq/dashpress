@@ -58,7 +58,9 @@ function TableActionButtons({
     row: row.original,
   });
 
-  return <ActionButtons actionButtons={portalActionButtons} justIcons />;
+  return (
+    <ActionButtons actionButtons={portalActionButtons} justIcons size="xs" />
+  );
 }
 
 const buildFilterConfigFromType = (prop: {
@@ -173,7 +175,7 @@ export const useTableColumns = (
             entityPresentationScript.data.script,
             {
               field: name,
-              from: "details",
+              from: "table",
               row: row.original,
               value: value$1,
               ...evaluateScriptContext,

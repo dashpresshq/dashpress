@@ -19,9 +19,9 @@ import {
 } from "frontend/lib/validations";
 import { Spacer } from "frontend/design-system/primitives/Spacer";
 import { SectionBox } from "frontend/design-system/components/Section/SectionBox";
-import { FormInput } from "frontend/design-system/components/Form/FormInput";
-import { FormNumberInput } from "frontend/design-system/components/Form/FormNumberInput";
-import { FormNoValueSelect } from "frontend/design-system/components/Form/FormSelect";
+import { FormInput } from "frontend/design-system/components/Form/Input";
+import { FormNumberInput } from "frontend/design-system/components/Form/Number";
+import { FormNoValueSelect } from "frontend/design-system/components/Form/Select";
 import { FormButton } from "frontend/design-system/components/Button/FormButton";
 import { DELETE_BUTTON_PROPS } from "frontend/design-system/components/Button/constants";
 import { Fragment } from "react";

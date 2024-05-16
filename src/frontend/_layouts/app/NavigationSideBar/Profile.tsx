@@ -14,13 +14,14 @@ import { useConstantNavigationMenuItems } from "./portal";
 
 const ProfileRoot = styled(Stack)`
   padding: 16px;
+  padding-bottom: 0;
   color: ${SYSTEM_COLORS.white};
   button {
     color: ${SYSTEM_COLORS.white};
   }
 `;
 
-const Name = styled(Typo.XS)`
+const Name = styled(Typo.SM)`
   color: ${SYSTEM_COLORS.white};
 `;
 

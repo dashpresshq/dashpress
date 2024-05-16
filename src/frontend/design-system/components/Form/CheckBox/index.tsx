@@ -3,9 +3,9 @@ import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
 import { Typo } from "frontend/design-system/primitives/Typo";
 import { Stack } from "frontend/design-system/primitives/Stack";
 import { useLingui } from "@lingui/react";
-import { ISharedFormInput } from "../_types";
+import { ISharedFormInput } from "../types";
 import { FormFeedback } from "../Styles";
-import { isFormMetaWithError } from "../_wrapForm";
+import { isFormMetaWithError } from "../LabelAndError";
 
 const CheckBoxInput = styled.input`
   border-radius: 0.25em;

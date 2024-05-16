@@ -1,6 +1,6 @@
 import { IColumnFilterBag } from "shared/types/data";
 import { ISelectData } from "shared/types/options";
-import { FormMultiSelect } from "../../Form/FormSelect";
+import { FormMultiSelect } from "../../Form/Select";
 import { IFilterProps } from "./types";
 
 export function FilterTableByStatus({

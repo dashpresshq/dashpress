@@ -28,13 +28,14 @@ const LogoSm = styled.img`
 
 const LogoFull = styled.img`
   width: 120px;
+  margin-top: 12px;
 `;
 
 const Brand = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 70px;
+  height: 50px;
 `;
 
 const Root = styled.div<{ $isFullWidth: boolean }>`
@@ -78,6 +79,11 @@ const Scroll = styled.div`
   height: 100%;
   overflow-y: scroll;
   overflow-x: hidden;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
 interface IProps {
   isFullWidth: boolean;
@@ -129,7 +135,7 @@ export function SideBar({ isFullWidth, setIsFullWidth }: IProps) {
         $justify="space-between"
         $direction="column"
         $spacing={0}
-        style={{ height: "calc(100vh - 70px)" }}
+        style={{ height: "calc(100dvh - 50px)" }}
       >
         <Scroll
           style={{

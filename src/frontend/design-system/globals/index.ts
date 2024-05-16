@@ -42,7 +42,6 @@ html {
 
 body {
   margin: 0;
-  font-size: 1rem;
   font-weight: 400;
   color: ${USE_ROOT_COLOR("main-text")};
   background-color: ${USE_ROOT_COLOR("base-color")};

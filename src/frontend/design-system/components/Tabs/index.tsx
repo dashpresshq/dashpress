@@ -26,6 +26,7 @@ const Root = styled.div<{ $padContent: boolean }>`
 
   .nav-item {
     margin-bottom: -1px;
+    font-size: 0.875rem;
   }
 
   .tab-content {

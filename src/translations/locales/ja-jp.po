@@ -646,6 +646,9 @@ msgstr "エリアを有効にする"
 msgid "Enable Points"
 msgstr "ポイントを有効にする"
 
+msgid "Enable two-factor authentication"
+msgstr ""
+
 msgid "Enabled Entities"
 msgstr "有効なエンティティ"
 
@@ -846,6 +849,9 @@ msgstr "身長"
 
 msgid "Hi, {0}"
 msgstr "こんにちは、{0}"
+
+msgid "Hide Password"
+msgstr ""
 
 msgid "Home"
 msgstr "家"
@@ -1399,6 +1405,9 @@ msgstr "共有"
 msgid "Show"
 msgstr "見せる"
 
+msgid "Show Password"
+msgstr ""
+
 msgid "Show Soft Deleted Items And The Restore Button"
 msgstr "ソフト的に削除されたアイテムと復元ボタンを表示する"
 
@@ -1557,6 +1566,9 @@ msgstr "引き金"
 
 msgid "Try Out 25+ Pro Features"
 msgstr "25 の Pro 機能を試してみる"
+
+msgid "Two Factor Authentication"
+msgstr ""
 
 msgid "Type"
 msgstr "タイプ"

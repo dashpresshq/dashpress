@@ -80,8 +80,6 @@ const replaceRandomCharaters = (envContent: string) => {
 
   copyEnvHere();
 
-  process.stdout.write("\n");
-
   const endpoint = `http://localhost:${process.env.PORT || 3000}`;
 
   console.log(`
@@ -104,6 +102,8 @@ const replaceRandomCharaters = (envContent: string) => {
     `🚀 Application started successfully at ${terminalLink(endpoint, endpoint)}`
   );
 
+  process.stdout.write("\n");
+
   const WAIT_FOR_NEXT_TO_START = 1000;
 
   /*
@@ -116,7 +116,26 @@ const replaceRandomCharaters = (envContent: string) => {
     fetch(`${endpoint}/api/healthcheck`).catch(() => {});
   }, WAIT_FOR_NEXT_TO_START);
 
-  stdout.pipe(process.stdout);
+  let stdSkip = true;
+  let stdCount = 0;
+  const STD_SKIP_COUNT = 3;
+
+  stdout.on("data", (chunk) => {
+    const data = (chunk || "").toString();
+
+    if (stdSkip) {
+      stdCount += 1;
+
+      if (stdCount > STD_SKIP_COUNT) {
+        stdSkip = false;
+      }
+
+      return;
+    }
+
+    process.stdout.write(data);
+  });
+
   stderr.pipe(process.stderr);
 })().catch((err) => {
   console.error(err);

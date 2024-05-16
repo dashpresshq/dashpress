@@ -6,10 +6,6 @@ import { I18nProvider } from "@lingui/react";
 import languages from "./languages";
 
 async function loadCatalog(locale: string) {
-  if (process.env.NODE_ENV === "production") {
-    const { messages } = await import(`./locales/${locale}`);
-    return messages;
-  }
   const { messages } = await import(`./locales/${locale}.po`);
 
   return messages;

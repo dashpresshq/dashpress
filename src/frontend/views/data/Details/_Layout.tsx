@@ -96,7 +96,7 @@ export function DetailsLayout({
   const { isLoading, error } = referenceFields;
 
   const viewState = useEntityViewStateMachine({
-    isLoading: isLoading || dataDetails.isLoading,
+    isLoading: isLoading || dataDetails.isLoading || referenceFields.isLoading,
     error: error || dataDetails.error,
     crudAction: "details",
     entity,
@@ -128,7 +128,8 @@ export function DetailsLayout({
                   };
                   return props;
                 }
-                const entityType = relatedEntitiesMap[menuItem.name].type;
+                const entityType =
+                  relatedEntitiesMap[menuItem.name]?.type || "toOne";
                 const entityCount = getEntitiesRelationsCount(
                   entityType,
                   relatedEntitiesCounts.data[menuItem.name]

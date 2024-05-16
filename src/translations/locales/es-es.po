@@ -646,6 +646,9 @@ msgstr "Habilitar área"
 msgid "Enable Points"
 msgstr "Habilitar puntos"
 
+msgid "Enable two-factor authentication"
+msgstr ""
+
 msgid "Enabled Entities"
 msgstr "Entidades habilitadas"
 
@@ -846,6 +849,9 @@ msgstr "Altura"
 
 msgid "Hi, {0}"
 msgstr "Hola, {0}"
+
+msgid "Hide Password"
+msgstr ""
 
 msgid "Home"
 msgstr "Hogar"
@@ -1399,6 +1405,9 @@ msgstr "Intercambio"
 msgid "Show"
 msgstr "Espectáculo"
 
+msgid "Show Password"
+msgstr ""
+
 msgid "Show Soft Deleted Items And The Restore Button"
 msgstr "Mostrar elementos eliminados temporalmente y el botón Restaurar"
 
@@ -1557,6 +1566,9 @@ msgstr "Desencadenar"
 
 msgid "Try Out 25+ Pro Features"
 msgstr "Pruebe 25 funciones profesionales"
+
+msgid "Two Factor Authentication"
+msgstr ""
 
 msgid "Type"
 msgstr "Tipo"

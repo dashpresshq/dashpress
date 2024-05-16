@@ -11,7 +11,7 @@ export const GLOBAL_TOOLTIP_CSS = css`
     left: 0;
     padding: 0.4375rem 0.75rem;
     border-radius: 0.25rem;
-    font-size: 0.9rem;
+    font-size: 14px;
     pointer-events: none;
     opacity: 0;
     transition: opacity 250ms ease-in-out, transform 250ms ease-in-out;
@@ -46,20 +46,5 @@ export const GLOBAL_TOOLTIP_CSS = css`
   .styles-module_show__2NboJ {
     visibility: visible;
     opacity: 1;
-  }
-
-  .brand-tooltip .styles-module_tooltip__mnnfp {
-    background-color: ${USE_ROOT_COLOR("primary-color")};
-    color: ${USE_ROOT_COLOR("text-on-primary")};
-    box-shadow: none;
-    border: none;
-    padding: 0.6rem 0.9rem;
-  }
-
-  .brand-tooltip .styles-module_arrow__K0L3T {
-    background-color: ${USE_ROOT_COLOR("primary-color")};
-    width: 0px;
-    height: 0px;
-    border: none;
   }
 `;

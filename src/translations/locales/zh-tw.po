@@ -646,6 +646,9 @@ msgstr "啟用區域"
 msgid "Enable Points"
 msgstr "啟用點數"
 
+msgid "Enable two-factor authentication"
+msgstr ""
+
 msgid "Enabled Entities"
 msgstr "啟用的實體"
 
@@ -846,6 +849,9 @@ msgstr "高度"
 
 msgid "Hi, {0}"
 msgstr "你好，{0}"
+
+msgid "Hide Password"
+msgstr ""
 
 msgid "Home"
 msgstr "家"
@@ -1399,6 +1405,9 @@ msgstr "分享"
 msgid "Show"
 msgstr "展示"
 
+msgid "Show Password"
+msgstr ""
+
 msgid "Show Soft Deleted Items And The Restore Button"
 msgstr "顯示軟刪除項目和恢復按鈕"
 
@@ -1557,6 +1566,9 @@ msgstr "扳機"
 
 msgid "Try Out 25+ Pro Features"
 msgstr "嘗試 25 項專業功能"
+
+msgid "Two Factor Authentication"
+msgstr ""
 
 msgid "Type"
 msgstr "類型"

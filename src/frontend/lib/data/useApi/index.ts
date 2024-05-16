@@ -48,7 +48,6 @@ export function useStorageApi<T>(endPoint: string, options: IUseApiOptions<T>) {
   return useApi<T>(endPoint, {
     ...options,
     selector: (response) => {
-      // TODO use indexDb
       const data = options.selector ? options.selector(response) : response;
       AppStorage.set(endPoint, response);
       return data;

@@ -1,4 +1,5 @@
 import "isomorphic-fetch";
+import "fake-indexeddb/auto";
 
 Object.defineProperty(window, "matchMedia", {
   writable: true,

@@ -8,15 +8,15 @@ interface IApiQueriesOptions<T, P> {
   pathFn: (accessorValue: T[keyof T]) => string;
   accessor: keyof T;
   dataTransformer?: (data: unknown, accessorValue?: T[keyof T]) => P;
-  placeholderDataFn?: (accessor: T[keyof T]) => P;
+  persist?: boolean;
 }
 
 export function useApiQueries<T, P>({
   input,
   pathFn,
+  persist,
   accessor,
   dataTransformer = (data: unknown): P => data as P,
-  placeholderDataFn,
 }: IApiQueriesOptions<T, P>): Pick<
   UseQueryResult<Record<string, UseQueryResult<P, unknown>>, unknown>,
   "data" | "error" | "isLoading"
@@ -25,11 +25,11 @@ export function useApiQueries<T, P>({
 
   const queryResults = useQueries({
     queries: input.map((inputItem) => ({
-      placeholderData: placeholderDataFn
-        ? placeholderDataFn(inputItem[accessor])
-        : undefined,
       enabled: router.isReady,
       queryKey: getQueryCachekey(pathFn(inputItem[accessor])),
+      meta: {
+        persist,
+      },
       queryFn: async () =>
         dataTransformer(await ApiRequest.GET(pathFn(inputItem[accessor]))) as P,
     })),

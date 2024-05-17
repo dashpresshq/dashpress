@@ -1,7 +1,10 @@
 import { IPaginatedDataState } from "shared/types/data";
 
 export const getQueryCachekey = (endPoint: string) =>
-  endPoint.replace("?", "/").split("/");
+  endPoint
+    .replace("?", "/")
+    .split("/")
+    .filter((x) => x);
 
 export const getPaginatedDataCachekey = (
   endPoint: string,

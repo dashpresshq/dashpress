@@ -8,14 +8,14 @@ interface IFormInput extends ISharedFormInput {
 }
 
 export function FormInput(formInput: IFormInput) {
-  const { input, type, disabled, meta, placeholder, ...rest } = formInput;
+  const { input, type, disabled, meta, placeholder, required } = formInput;
   const { _ } = useLingui();
   return (
     <LabelAndError formInput={formInput}>
       <Input
         {...input}
-        {...rest}
         {...generateFormArias(meta)}
+        required={required}
         type={type}
         id={input.name}
         placeholder={placeholder ? _(placeholder) : null}

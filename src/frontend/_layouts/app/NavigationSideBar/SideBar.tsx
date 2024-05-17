@@ -1,13 +1,12 @@
 import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import Link from "next/link";
-
 import { ChevronRight } from "react-feather";
 import styled from "styled-components";
 import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
 import { SYSTEM_COLORS } from "frontend/design-system/theme/system";
 import { useThemeColorShade } from "frontend/design-system/theme/useTheme";
 import { Stack } from "frontend/design-system/primitives/Stack";
-import { useStorageApi } from "frontend/lib/data/useApi";
+import { useApi } from "frontend/lib/data/useApi";
 import { INavigationMenuItem } from "shared/types/menu";
 import { useSessionStorage } from "react-use";
 import { PlainButton } from "frontend/design-system/components/Button/TextButton";
@@ -91,9 +90,10 @@ interface IProps {
 }
 
 export const useNavigationMenuItems = () => {
-  return useStorageApi<INavigationMenuItem[]>(NAVIGATION_MENU_ENDPOINT, {
+  return useApi<INavigationMenuItem[]>(NAVIGATION_MENU_ENDPOINT, {
     errorMessage: CRUD_CONFIG_NOT_FOUND(`Navigation Menu`),
     defaultData: [],
+    persist: true,
   });
 };
 

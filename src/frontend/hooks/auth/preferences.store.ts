@@ -1,9 +1,8 @@
 import { useDomainMessages } from "frontend/lib/crud-config";
 import { LANG_DOMAINS } from "frontend/lib/crud-config/lang-domains";
 import { ApiRequest } from "frontend/lib/data/makeRequest";
-import { useStorageApi } from "frontend/lib/data/useApi";
+import { useApi } from "frontend/lib/data/useApi";
 import { useWaitForResponseMutationOptions } from "frontend/lib/data/useMutate/useWaitForResponseMutationOptions";
-import { AppStorage } from "frontend/lib/storage/app";
 import {
   USER_PREFERENCES_CONFIG,
   UserPreferencesKeys,
@@ -18,16 +17,14 @@ const userPrefrencesApiPath = (key: UserPreferencesKeys) => {
 export function useUserPreference<T extends UserPreferencesKeys>(key: T) {
   const isUserAuthenticated = useIsUserAutenticated();
   const domainMessages = useDomainMessages(LANG_DOMAINS.ACCOUNT.PREFERENCES);
-  return useStorageApi<UserPreferencesValueType<T>>(
-    userPrefrencesApiPath(key),
-    {
-      enabled: isUserAuthenticated,
-      returnUndefinedOnError: true,
-      errorMessage: domainMessages.TEXT_LANG.NOT_FOUND,
-      defaultData: USER_PREFERENCES_CONFIG[key].defaultValue,
-      selector: (data) => data.data,
-    }
-  );
+  return useApi<UserPreferencesValueType<T>>(userPrefrencesApiPath(key), {
+    enabled: isUserAuthenticated,
+    returnUndefinedOnError: true,
+    errorMessage: domainMessages.TEXT_LANG.NOT_FOUND,
+    defaultData: USER_PREFERENCES_CONFIG[key].defaultValue,
+    selector: (data) => data.data,
+    persist: true,
+  });
 }
 
 interface IUpsertConfigMutationOptions {
@@ -53,9 +50,6 @@ export function useUpsertUserPreferenceMutation<T extends UserPreferencesKeys>(
       userPrefrencesApiPath(key),
       ...(mutationOptions?.otherEndpoints || []),
     ],
-    onSuccessActionWithFormData: (data) => {
-      AppStorage.set(userPrefrencesApiPath(key), data);
-    },
     successMessage: domainMessages.MUTATION_LANG.SAVED,
   });
 }

@@ -1,5 +1,5 @@
 import { useDomainMessages } from "frontend/lib/crud-config";
-import { useStorageApi } from "frontend/lib/data/useApi";
+import { useApi } from "frontend/lib/data/useApi";
 import { useApiMutateOptimisticOptions } from "frontend/lib/data/useMutate/useApiMutateOptimisticOptions";
 import { MutationHelpers } from "frontend/lib/data/useMutate/mutation-helpers";
 import { ApiRequest } from "frontend/lib/data/makeRequest";
@@ -15,7 +15,7 @@ export function useRolePermissions() {
   const domainMessages = useDomainMessages(LANG_DOMAINS.ACCOUNT.PERMISSIONS);
   const roleId = useRoleIdFromRouteParam();
 
-  return useStorageApi<string[]>(ADMIN_ROLE_PERMISSION_ENDPOINT(roleId), {
+  return useApi<string[]>(ADMIN_ROLE_PERMISSION_ENDPOINT(roleId), {
     errorMessage: domainMessages.TEXT_LANG.NOT_FOUND,
     defaultData: [],
   });

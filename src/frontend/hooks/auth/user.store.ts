@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { IAuthenticatedUserBag } from "shared/types/user";
 import { canRoleDoThisSync } from "shared/logic/permissions";
 import { useCallback } from "react";
-import { useStorageApi } from "frontend/lib/data/useApi";
+import { useApi } from "frontend/lib/data/useApi";
 import { ToastService } from "frontend/lib/toast";
 import { DataStates } from "frontend/lib/data/types";
 import { useDomainMessages } from "frontend/lib/crud-config";
@@ -16,9 +16,10 @@ export const AUTHENTICATED_ACCOUNT_URL = "/api/account/mine";
 export function useAuthenticatedUserBag() {
   const isUserAuthenticated = useIsUserAutenticated();
   const domainMessages = useDomainMessages(LANG_DOMAINS.ACCOUNT.PROFILE);
-  return useStorageApi<IAuthenticatedUserBag>(AUTHENTICATED_ACCOUNT_URL, {
+  return useApi<IAuthenticatedUserBag>(AUTHENTICATED_ACCOUNT_URL, {
     errorMessage: domainMessages.TEXT_LANG.NOT_FOUND,
     enabled: isUserAuthenticated,
+    persist: true,
     defaultData: {
       name: "",
       permissions: [],
@@ -71,7 +72,6 @@ function useUserPermission(): (
 ) => boolean | DataStates.Loading {
   const userProfile = useAuthenticatedUserBag();
   const isGranularCheck = useIsGranularCheck();
-
   return useCallback(
     (permission: string): boolean | DataStates.Loading => {
       return doPermissionCheck(

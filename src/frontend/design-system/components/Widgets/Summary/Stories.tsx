@@ -1,6 +1,6 @@
 /* eslint-disable react/function-component-definition */
 import { Story } from "@storybook/react";
-import { ApplicationRoot } from "frontend/components/ApplicationRoot";
+import { TestProviders } from "__tests__/_/Provider";
 import { SummaryWidget, IProps } from ".";
 
 export default {
@@ -26,9 +26,9 @@ export default {
 };
 
 const Template: Story<IProps> = (args) => (
-  <ApplicationRoot>
+  <TestProviders>
     <SummaryWidget {...args} />
-  </ApplicationRoot>
+  </TestProviders>
 );
 
 export const Default = Template.bind({});

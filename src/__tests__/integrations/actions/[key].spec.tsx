@@ -1,10 +1,10 @@
 import { render, screen } from "@testing-library/react";
-import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 
 import ActionsIntegrations from "pages/integrations/actions/[key]";
 
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
+import { TestProviders } from "__tests__/_/Provider";
 
 setupApiHandlers();
 
@@ -23,9 +23,9 @@ describe("pages/integrations/actions/[key]", () => {
   describe("list", () => {
     it("should show the list of actions", async () => {
       render(
-        <ApplicationRoot>
+        <TestProviders>
           <ActionsIntegrations />
-        </ApplicationRoot>
+        </TestProviders>
       );
 
       expect(
@@ -39,9 +39,9 @@ describe("pages/integrations/actions/[key]", () => {
 
     // it("should show the configure UI for activated actions", async () => {
     //   render(
-    //     <ApplicationRoot>
+    //     <TestProviders>
     //       <ActionsIntegrations />
-    //     </ApplicationRoot>
+    //     </TestProviders>
     //   );
 
     //   await waitFor(() => {

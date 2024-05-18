@@ -1,7 +1,7 @@
 /* eslint-disable react/function-component-definition */
 
 import { Story } from "@storybook/react";
-import { ApplicationRoot } from "frontend/components/ApplicationRoot";
+import { TestProviders } from "__tests__/_/Provider";
 import { ContentLayout } from ".";
 
 export default {
@@ -14,7 +14,7 @@ export default {
 };
 
 const Template: Story = () => (
-  <ApplicationRoot>
+  <TestProviders>
     <ContentLayout.Center>
       <div style={{ width: "100%", height: "100px", background: "red" }}>
         Hello
@@ -33,7 +33,7 @@ const Template: Story = () => (
         </div>
       </ContentLayout.Right>
     </ContentLayout>
-  </ApplicationRoot>
+  </TestProviders>
 );
 
 export const Default = Template.bind({});

@@ -1,7 +1,6 @@
 /* eslint-disable prettier/prettier */
 
 import { render, screen, waitFor, within } from "@testing-library/react";
-import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 
 import ManageVariables from "pages/admin/settings/variables";
 
@@ -10,6 +9,7 @@ import userEvent from "@testing-library/user-event";
 import { AuthActions } from "frontend/hooks/auth/auth.actions";
 import { getTableRows } from "__tests__/_/utils/getTableRows";
 import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
+import { TestProviders } from "__tests__/_/Provider";
 
 setupApiHandlers();
 
@@ -29,9 +29,9 @@ describe.skip("pages/integrations/variables => credentials", () => {
   describe("priviledge", () => {
     it("should not show any password text on constants tab", async () => {
       render(
-        <ApplicationRoot>
+        <TestProviders>
           <ManageVariables />
-        </ApplicationRoot>
+        </TestProviders>
       );
 
       const priviledgeSection = await screen.findByLabelText(
@@ -60,9 +60,9 @@ describe.skip("pages/integrations/variables => credentials", () => {
 
     it("should show correct password text on secret tab", async () => {
       render(
-        <ApplicationRoot>
+        <TestProviders>
           <ManageVariables />
-        </ApplicationRoot>
+        </TestProviders>
       );
       const priviledgeSection = await screen.findByLabelText(
         "credentials priviledge section"
@@ -93,9 +93,9 @@ describe.skip("pages/integrations/variables => credentials", () => {
   describe("list", () => {
     it("should list credentials", async () => {
       render(
-        <ApplicationRoot>
+        <TestProviders>
           <ManageVariables />
-        </ApplicationRoot>
+        </TestProviders>
       );
 
       await userEvent.click(
@@ -122,9 +122,9 @@ describe.skip("pages/integrations/variables => credentials", () => {
   describe("reveal", () => {
     it("should not show credentials action before revealing password", async () => {
       render(
-        <ApplicationRoot>
+        <TestProviders>
           <ManageVariables />
-        </ApplicationRoot>
+        </TestProviders>
       );
 
       await userEvent.click(
@@ -150,9 +150,9 @@ describe.skip("pages/integrations/variables => credentials", () => {
 
     it("should show error on invalid password and not reveal data", async () => {
       render(
-        <ApplicationRoot>
+        <TestProviders>
           <ManageVariables />
-        </ApplicationRoot>
+        </TestProviders>
       );
 
       const priviledgeSection = screen.getByLabelText(
@@ -196,9 +196,9 @@ describe.skip("pages/integrations/variables => credentials", () => {
 
     it("should reveal credentials and the now show the credentials action buttons", async () => {
       render(
-        <ApplicationRoot>
+        <TestProviders>
           <ManageVariables />
-        </ApplicationRoot>
+        </TestProviders>
       );
 
       const priviledgeSection = screen.getByLabelText(
@@ -251,9 +251,9 @@ describe.skip("pages/integrations/variables => credentials", () => {
 
     it("should show credentials action after revealing password", async () => {
       render(
-        <ApplicationRoot>
+        <TestProviders>
           <ManageVariables />
-        </ApplicationRoot>
+        </TestProviders>
       );
 
       await userEvent.click(
@@ -284,9 +284,9 @@ describe.skip("pages/integrations/variables => credentials", () => {
   describe("update", () => {
     it("should update secret", async () => {
       render(
-        <ApplicationRoot>
+        <TestProviders>
           <ManageVariables />
-        </ApplicationRoot>
+        </TestProviders>
       );
 
       await userEvent.click(
@@ -349,9 +349,9 @@ describe.skip("pages/integrations/variables => credentials", () => {
   describe("create", () => {
     it("should create new secret", async () => {
       render(
-        <ApplicationRoot>
+        <TestProviders>
           <ManageVariables />
-        </ApplicationRoot>
+        </TestProviders>
       );
 
       await userEvent.click(
@@ -402,9 +402,9 @@ describe.skip("pages/integrations/variables => credentials", () => {
   describe("delete", () => {
     it("should delete secrets", async () => {
       render(
-        <ApplicationRoot>
+        <TestProviders>
           <ManageVariables />
-        </ApplicationRoot>
+        </TestProviders>
       );
 
       await userEvent.click(

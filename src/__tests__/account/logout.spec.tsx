@@ -1,10 +1,10 @@
 import { render, screen, waitFor } from "@testing-library/react";
-import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 import userEvent from "@testing-library/user-event";
 import AccountPassword from "pages/account/password";
 
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
+import { TestProviders } from "__tests__/_/Provider";
 
 Object.defineProperty(window, "location", {
   value: {
@@ -23,9 +23,9 @@ useRouter.mockImplementation(USE_ROUTER_PARAMS({}));
 describe("pages/account/logout", () => {
   it("should log user out", async () => {
     render(
-      <ApplicationRoot>
+      <TestProviders>
         <AccountPassword />
-      </ApplicationRoot>
+      </TestProviders>
     );
 
     await userEvent.click(

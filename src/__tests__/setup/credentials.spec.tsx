@@ -2,14 +2,13 @@
 /* eslint-disable testing-library/no-container */
 import * as React from "react";
 import { render, screen, waitFor } from "@testing-library/react";
-import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 import { rest } from "msw";
 import { BASE_TEST_URL } from "__tests__/_/api-handlers/_utils";
 import CredentialsSetup from "pages/setup/credentials";
 import userEvent from "@testing-library/user-event";
 import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
-import { queryCache } from "frontend/lib/data/QueryClient";
+import { TestProviders, queryCache } from "__tests__/_/Provider";
 
 const server = setupApiHandlers();
 
@@ -62,9 +61,9 @@ describe("pages/setup/credentials", () => {
     );
 
     const { container } = render(
-      <ApplicationRoot>
+      <TestProviders>
         <CredentialsSetup />
-      </ApplicationRoot>
+      </TestProviders>
     );
 
     expect(
@@ -89,9 +88,9 @@ describe("pages/setup/credentials", () => {
     );
 
     const { container } = render(
-      <ApplicationRoot>
+      <TestProviders>
         <CredentialsSetup />
-      </ApplicationRoot>
+      </TestProviders>
     );
 
     expect(
@@ -155,9 +154,9 @@ describe("pages/setup/credentials", () => {
       );
 
       const { container } = render(
-        <ApplicationRoot>
+        <TestProviders>
           <CredentialsSetup />
-        </ApplicationRoot>
+        </TestProviders>
       );
 
       await userEvent.type(
@@ -202,9 +201,9 @@ describe("pages/setup/credentials", () => {
       );
 
       const { container } = render(
-        <ApplicationRoot>
+        <TestProviders>
           <CredentialsSetup />
-        </ApplicationRoot>
+        </TestProviders>
       );
 
       await userEvent.type(
@@ -245,9 +244,9 @@ describe("pages/setup/credentials", () => {
         })
       );
       const { container } = render(
-        <ApplicationRoot>
+        <TestProviders>
           <CredentialsSetup />
-        </ApplicationRoot>
+        </TestProviders>
       );
 
       await userEvent.type(
@@ -304,9 +303,9 @@ describe("pages/setup/credentials", () => {
       );
 
       render(
-        <ApplicationRoot>
+        <TestProviders>
           <CredentialsSetup />
-        </ApplicationRoot>
+        </TestProviders>
       );
       await waitFor(() => {
         expect(replaceMock).toHaveBeenCalledWith("/setup/user", "/setup/user", {

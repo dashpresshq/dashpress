@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { QueryClient, QueryCache } from "@tanstack/react-query";
+import { QueryClient } from "@tanstack/react-query";
 import {
   AsyncStorage,
   MaybePromise,
@@ -9,10 +9,7 @@ import {
 import { createAsyncStoragePersister } from "@tanstack/query-async-storage-persister";
 import { get, set, del } from "idb-keyval";
 
-export const queryCache = new QueryCache();
-
 const queryClient = new QueryClient({
-  queryCache,
   defaultOptions: {
     queries: {
       gcTime: 1000 * 60 * 60 * 24 * 14, // 14 days

@@ -1,5 +1,4 @@
 import { render, screen } from "@testing-library/react";
-import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 import userEvent from "@testing-library/user-event";
 import EntityCrudSettings from "pages/admin/[entity]/config/crud";
 import { rest } from "msw";
@@ -8,6 +7,7 @@ import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 import { BASE_TEST_URL } from "__tests__/_/api-handlers/_utils";
 import { sluggify } from "shared/lib/strings";
 import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
+import { TestProviders } from "__tests__/_/Provider";
 
 const server = setupApiHandlers();
 
@@ -45,9 +45,9 @@ describe("pages/admin/[entity]/config/crud", () => {
 
   it("should defaults to table", async () => {
     render(
-      <ApplicationRoot>
+      <TestProviders>
         <EntityCrudSettings />
-      </ApplicationRoot>
+      </TestProviders>
     );
 
     expect(
@@ -62,9 +62,9 @@ describe("pages/admin/[entity]/config/crud", () => {
     { tab: "Delete" },
   ])("should be tab-able to $tab", async ({ tab }) => {
     render(
-      <ApplicationRoot>
+      <TestProviders>
         <EntityCrudSettings />
-      </ApplicationRoot>
+      </TestProviders>
     );
     expect(
       await screen.findByRole("button", {
@@ -102,9 +102,9 @@ describe("pages/admin/[entity]/config/crud", () => {
     );
 
     render(
-      <ApplicationRoot>
+      <TestProviders>
         <EntityCrudSettings />
-      </ApplicationRoot>
+      </TestProviders>
     );
 
     expect(

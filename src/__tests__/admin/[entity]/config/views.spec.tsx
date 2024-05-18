@@ -1,10 +1,10 @@
 import { render, screen, within } from "@testing-library/react";
-import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 import TableViewsSettings from "pages/admin/[entity]/config/views";
 
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 import userEvent from "@testing-library/user-event";
 import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
+import { TestProviders } from "__tests__/_/Provider";
 
 setupApiHandlers();
 
@@ -23,9 +23,9 @@ describe("pages/admin/[entity]/config/views", () => {
 
   it("should display Table Views", async () => {
     render(
-      <ApplicationRoot>
+      <TestProviders>
         <TableViewsSettings />
-      </ApplicationRoot>
+      </TestProviders>
     );
     expect(
       await screen.findByRole("tab", { name: "Verified Entity View" })
@@ -40,9 +40,9 @@ describe("pages/admin/[entity]/config/views", () => {
 
   it("should tab through views", async () => {
     render(
-      <ApplicationRoot>
+      <TestProviders>
         <TableViewsSettings />
-      </ApplicationRoot>
+      </TestProviders>
     );
     expect(
       await screen.findByRole("tab", { name: "Verified Entity View" })
@@ -75,9 +75,9 @@ describe("pages/admin/[entity]/config/views", () => {
 
   it("should delete table view", async () => {
     render(
-      <ApplicationRoot>
+      <TestProviders>
         <TableViewsSettings />
-      </ApplicationRoot>
+      </TestProviders>
     );
     expect(
       await screen.findByRole("tab", { name: "Verified Entity View" })
@@ -133,9 +133,9 @@ describe("pages/admin/[entity]/config/views", () => {
 
   it("should display delete changes", () => {
     render(
-      <ApplicationRoot>
+      <TestProviders>
         <TableViewsSettings />
-      </ApplicationRoot>
+      </TestProviders>
     );
     expect(screen.queryAllByRole("tab")).toHaveLength(0);
     expect(screen.queryByRole("table")).not.toBeInTheDocument();
@@ -144,9 +144,9 @@ describe("pages/admin/[entity]/config/views", () => {
 
   it("should add new table view", async () => {
     render(
-      <ApplicationRoot>
+      <TestProviders>
         <TableViewsSettings />
-      </ApplicationRoot>
+      </TestProviders>
     );
 
     await userEvent.click(
@@ -188,9 +188,9 @@ describe("pages/admin/[entity]/config/views", () => {
 
   it("should edit existing tabs", async () => {
     render(
-      <ApplicationRoot>
+      <TestProviders>
         <TableViewsSettings />
-      </ApplicationRoot>
+      </TestProviders>
     );
     expect(
       await screen.findByRole("tab", { name: "View 1" })
@@ -220,9 +220,9 @@ describe("pages/admin/[entity]/config/views", () => {
 
   it("should save edit changes", async () => {
     render(
-      <ApplicationRoot>
+      <TestProviders>
         <TableViewsSettings />
-      </ApplicationRoot>
+      </TestProviders>
     );
     expect(
       await screen.findByRole("tab", { name: "View 1Updated" })

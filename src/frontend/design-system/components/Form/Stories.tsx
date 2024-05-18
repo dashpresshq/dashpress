@@ -4,9 +4,9 @@ import { Story } from "@storybook/react";
 import { Field, Form } from "react-final-form";
 import { action } from "@storybook/addon-actions";
 import { required } from "frontend/lib/validations";
-import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 import { Stack } from "frontend/design-system/primitives/Stack";
 import { fakeMessageDescriptor } from "translations/fake";
+import { TestProviders } from "__tests__/_/Provider";
 import { FormCheckBox } from "./CheckBox";
 import { FormInput } from "./Input";
 import { FormNumberInput } from "./Number";
@@ -402,9 +402,9 @@ export default {
 };
 
 const Template: Story<{}> = (args) => (
-  <ApplicationRoot>
+  <TestProviders>
     <DemoForm {...args} />
-  </ApplicationRoot>
+  </TestProviders>
 );
 
 export const Default = Template.bind({});

@@ -1,10 +1,10 @@
 import { render, screen, waitFor } from "@testing-library/react";
-import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 import userEvent from "@testing-library/user-event";
 import MenuSettings from "pages/admin/settings/menu";
 
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
+import { TestProviders } from "__tests__/_/Provider";
 
 setupApiHandlers();
 
@@ -17,9 +17,9 @@ describe("pages/admin/settings/menu", () => {
 
   it("should display only active entities with correct state", async () => {
     render(
-      <ApplicationRoot>
+      <TestProviders>
         <MenuSettings />
-      </ApplicationRoot>
+      </TestProviders>
     );
 
     await waitFor(async () => {
@@ -44,9 +44,9 @@ describe("pages/admin/settings/menu", () => {
 
   it("should toggle menu state successfully", async () => {
     render(
-      <ApplicationRoot>
+      <TestProviders>
         <MenuSettings />
-      </ApplicationRoot>
+      </TestProviders>
     );
 
     await userEvent.click(
@@ -72,9 +72,9 @@ describe("pages/admin/settings/menu", () => {
 
   it("should display updated entities state", async () => {
     render(
-      <ApplicationRoot>
+      <TestProviders>
         <MenuSettings />
-      </ApplicationRoot>
+      </TestProviders>
     );
 
     await waitFor(

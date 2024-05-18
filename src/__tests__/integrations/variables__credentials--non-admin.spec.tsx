@@ -1,7 +1,6 @@
 /* eslint-disable prettier/prettier */
 
 import { render, screen, within } from "@testing-library/react";
-import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 import { rest } from "msw";
 
 import ManageVariables from "pages/admin/settings/variables";
@@ -14,6 +13,7 @@ import { UserPermissions } from "shared/constants/user";
 import { AuthActions } from "frontend/hooks/auth/auth.actions";
 import { getTableRows } from "__tests__/_/utils/getTableRows";
 import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
+import { TestProviders } from "__tests__/_/Provider";
 
 const server = setupApiHandlers();
 
@@ -46,9 +46,9 @@ describe("pages/integrations/variables => credentials -- non admin", () => {
   describe("priviledge", () => {
     it("should show correct password text for `CAN_CONFIGURE_APP_USERS`", async () => {
       render(
-        <ApplicationRoot>
+        <TestProviders>
           <ManageVariables />
-        </ApplicationRoot>
+        </TestProviders>
       );
       const priviledgeSection = screen.getByLabelText(
         "credentials priviledge section"
@@ -85,9 +85,9 @@ describe("pages/integrations/variables => credentials -- non admin", () => {
 
     it("should not show any password text on constants tab", async () => {
       render(
-        <ApplicationRoot>
+        <TestProviders>
           <ManageVariables />
-        </ApplicationRoot>
+        </TestProviders>
       );
 
       const priviledgeSection = await screen.findByLabelText(
@@ -123,9 +123,9 @@ describe("pages/integrations/variables => credentials -- non admin", () => {
   describe("list", () => {
     it("should list credentials", async () => {
       render(
-        <ApplicationRoot>
+        <TestProviders>
           <ManageVariables />
-        </ApplicationRoot>
+        </TestProviders>
       );
 
       await userEvent.click(

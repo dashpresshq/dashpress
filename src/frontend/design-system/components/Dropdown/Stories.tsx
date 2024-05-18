@@ -3,7 +3,7 @@
 import { Story } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
 import { MoreVertical } from "react-feather";
-import { ApplicationRoot } from "frontend/components/ApplicationRoot";
+import { TestProviders } from "__tests__/_/Provider";
 import { Dropdown, IProps } from ".";
 
 export default {
@@ -17,11 +17,11 @@ export default {
 };
 
 const Template: Story<IProps> = (args) => (
-  <ApplicationRoot>
+  <TestProviders>
     <div style={{ display: "flex", justifyContent: "center" }}>
       <Dropdown {...args} width={200} />
     </div>
-  </ApplicationRoot>
+  </TestProviders>
 );
 
 export const Default = Template.bind({});

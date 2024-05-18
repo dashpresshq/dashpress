@@ -2,7 +2,7 @@
 
 import { Story } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
-import { ApplicationRoot } from "frontend/components/ApplicationRoot";
+import { TestProviders } from "__tests__/_/Provider";
 import { Breadcrumbs, IProps } from ".";
 
 export default {
@@ -28,9 +28,9 @@ export default {
 };
 
 const Template: Story<IProps> = (args) => (
-  <ApplicationRoot>
+  <TestProviders>
     <Breadcrumbs {...args} />
-  </ApplicationRoot>
+  </TestProviders>
 );
 
 export const Default = Template.bind({});

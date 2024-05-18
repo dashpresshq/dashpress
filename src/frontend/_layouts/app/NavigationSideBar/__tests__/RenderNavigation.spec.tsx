@@ -5,11 +5,11 @@ import {
   SystemLinks,
 } from "shared/types/menu";
 import userEvent from "@testing-library/user-event";
-import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 import { rest } from "msw";
 import { BASE_TEST_URL } from "__tests__/_/api-handlers/_utils";
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
+import { TestProviders } from "__tests__/_/Provider";
 import { SideBar } from "../SideBar";
 
 const server = setupApiHandlers();
@@ -67,9 +67,9 @@ describe("<RenderNavigation />", () => {
 
   it("should render all first level items", async () => {
     render(
-      <ApplicationRoot>
+      <TestProviders>
         <SideBar isFullWidth setIsFullWidth={jest.fn()} />
-      </ApplicationRoot>
+      </TestProviders>
     );
 
     expect(await screen.findByText("Header")).toBeInTheDocument();
@@ -87,9 +87,9 @@ describe("<RenderNavigation />", () => {
 
   it("should hide the menu items when is not full width", async () => {
     render(
-      <ApplicationRoot>
+      <TestProviders>
         <SideBar isFullWidth={false} setIsFullWidth={jest.fn()} />
-      </ApplicationRoot>
+      </TestProviders>
     );
 
     expect(screen.queryByText("Header")).not.toBeVisible();
@@ -105,9 +105,9 @@ describe("<RenderNavigation />", () => {
 
   it("should render second level items when pressed", async () => {
     render(
-      <ApplicationRoot>
+      <TestProviders>
         <SideBar isFullWidth setIsFullWidth={jest.fn()} />
-      </ApplicationRoot>
+      </TestProviders>
     );
 
     expect(screen.getByText("Header")).toBeInTheDocument();

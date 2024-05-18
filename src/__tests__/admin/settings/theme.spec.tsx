@@ -1,10 +1,10 @@
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
-import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 import userEvent from "@testing-library/user-event";
 import ThemeSettings from "pages/admin/settings/theme";
 
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
+import { TestProviders } from "__tests__/_/Provider";
 
 setupApiHandlers();
 
@@ -16,9 +16,9 @@ describe("pages/admin/settings/theme", () => {
 
   it("should display theme values", async () => {
     render(
-      <ApplicationRoot>
+      <TestProviders>
         <ThemeSettings />
-      </ApplicationRoot>
+      </TestProviders>
     );
     await waitFor(() => {
       expect(screen.getByLabelText("Dark Color Scheme")).toHaveValue("#111111");
@@ -31,9 +31,9 @@ describe("pages/admin/settings/theme", () => {
 
   it("should update theme settings successfully", async () => {
     render(
-      <ApplicationRoot>
+      <TestProviders>
         <ThemeSettings />
-      </ApplicationRoot>
+      </TestProviders>
     );
 
     fireEvent.input(screen.getByLabelText("Dark Color Scheme"), {
@@ -51,9 +51,9 @@ describe("pages/admin/settings/theme", () => {
 
   it("should display updated theme values", async () => {
     render(
-      <ApplicationRoot>
+      <TestProviders>
         <ThemeSettings />
-      </ApplicationRoot>
+      </TestProviders>
     );
     await waitFor(() => {
       expect(screen.getByLabelText("Dark Color Scheme")).toHaveValue("#123456");
@@ -65,9 +65,9 @@ describe("pages/admin/settings/theme", () => {
 
   it("should update user preference and switch color successfully", async () => {
     render(
-      <ApplicationRoot>
+      <TestProviders>
         <ThemeSettings />
-      </ApplicationRoot>
+      </TestProviders>
     );
 
     expect(screen.getByLabelText("Dark Color Scheme")).toBeInTheDocument();
@@ -95,9 +95,9 @@ describe("pages/admin/settings/theme", () => {
 
   it("should display updated theme values", async () => {
     render(
-      <ApplicationRoot>
+      <TestProviders>
         <ThemeSettings />
-      </ApplicationRoot>
+      </TestProviders>
     );
     await waitFor(() => {
       expect(screen.getByLabelText("Light Color Scheme")).toHaveValue(
@@ -116,9 +116,9 @@ describe("pages/admin/settings/theme", () => {
 
   it("should not display the other scheme color", async () => {
     render(
-      <ApplicationRoot>
+      <TestProviders>
         <ThemeSettings />
-      </ApplicationRoot>
+      </TestProviders>
     );
     await userEvent.click(screen.getByRole("option", { name: "Dark" }));
 

@@ -1,11 +1,11 @@
 import * as React from "react";
 import { render, screen, waitFor } from "@testing-library/react";
-import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 import UserSetup from "pages/setup/user";
 import userEvent from "@testing-library/user-event";
 import { SETUP_CHECK_DATA } from "__tests__/_/api-handlers/setup";
 import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
+import { TestProviders } from "__tests__/_/Provider";
 
 const server = setupApiHandlers();
 
@@ -33,9 +33,9 @@ describe("pages/setup/user", () => {
     };
 
     render(
-      <ApplicationRoot>
+      <TestProviders>
         <UserSetup />
-      </ApplicationRoot>
+      </TestProviders>
     );
 
     await userEvent.type(

@@ -1,5 +1,4 @@
 import { render, screen, within } from "@testing-library/react";
-import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 import userEvent from "@testing-library/user-event";
 import EntityFormActionsSettings from "pages/admin/[entity]/config/actions";
 
@@ -7,6 +6,7 @@ import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 import { getTableRows } from "__tests__/_/utils/getTableRows";
 import { closeAllToasts } from "__tests__/_/utils/closeAllToasts";
 import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
+import { TestProviders } from "__tests__/_/Provider";
 
 setupApiHandlers();
 
@@ -25,9 +25,9 @@ describe("pages/admin/[entity]/config/actions", () => {
 
   it("should list entity form actions", async () => {
     render(
-      <ApplicationRoot>
+      <TestProviders>
         <EntityFormActionsSettings />x
-      </ApplicationRoot>
+      </TestProviders>
     );
 
     expect(await screen.findByRole("table")).toBeInTheDocument();
@@ -45,9 +45,9 @@ describe("pages/admin/[entity]/config/actions", () => {
 
   it("should create new form action successfully", async () => {
     render(
-      <ApplicationRoot>
+      <TestProviders>
         <EntityFormActionsSettings />
-      </ApplicationRoot>
+      </TestProviders>
     );
 
     await userEvent.click(
@@ -113,9 +113,9 @@ describe("pages/admin/[entity]/config/actions", () => {
 
   it("should show the correct form values", async () => {
     render(
-      <ApplicationRoot>
+      <TestProviders>
         <EntityFormActionsSettings />
-      </ApplicationRoot>
+      </TestProviders>
     );
 
     expect(await screen.findByRole("table")).toBeInTheDocument();
@@ -153,9 +153,9 @@ describe("pages/admin/[entity]/config/actions", () => {
 
   it("should update the actions form", async () => {
     render(
-      <ApplicationRoot>
+      <TestProviders>
         <EntityFormActionsSettings />
-      </ApplicationRoot>
+      </TestProviders>
     );
 
     expect(await screen.findByRole("table")).toBeInTheDocument();
@@ -212,9 +212,9 @@ describe("pages/admin/[entity]/config/actions", () => {
 
   it("should show the correct form values", async () => {
     render(
-      <ApplicationRoot>
+      <TestProviders>
         <EntityFormActionsSettings />
-      </ApplicationRoot>
+      </TestProviders>
     );
 
     expect(await screen.findByRole("table")).toBeInTheDocument();
@@ -251,9 +251,9 @@ describe("pages/admin/[entity]/config/actions", () => {
 
   it("should delete form action successfully", async () => {
     render(
-      <ApplicationRoot>
+      <TestProviders>
         <EntityFormActionsSettings />
-      </ApplicationRoot>
+      </TestProviders>
     );
 
     expect(await screen.findByRole("table")).toBeInTheDocument();

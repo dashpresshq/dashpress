@@ -1,10 +1,10 @@
 import { render, screen, waitFor } from "@testing-library/react";
-import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 import userEvent from "@testing-library/user-event";
 import SiteSettings from "pages/admin/settings/site";
 
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
+import { TestProviders } from "__tests__/_/Provider";
 
 setupApiHandlers();
 
@@ -17,9 +17,9 @@ describe("pages/admin/settings/site", () => {
 
   it("should display site values", async () => {
     render(
-      <ApplicationRoot>
+      <TestProviders>
         <SiteSettings />
-      </ApplicationRoot>
+      </TestProviders>
     );
     await waitFor(() => {
       expect(screen.getByLabelText("Name")).toHaveValue("DashPress");
@@ -35,9 +35,9 @@ describe("pages/admin/settings/site", () => {
 
   it("should update site values successfully", async () => {
     render(
-      <ApplicationRoot>
+      <TestProviders>
         <SiteSettings />
-      </ApplicationRoot>
+      </TestProviders>
     );
 
     await userEvent.type(screen.getByLabelText("Name"), "Updated");
@@ -56,9 +56,9 @@ describe("pages/admin/settings/site", () => {
 
   it("should display site values", async () => {
     render(
-      <ApplicationRoot>
+      <TestProviders>
         <SiteSettings />
-      </ApplicationRoot>
+      </TestProviders>
     );
     await waitFor(() => {
       expect(screen.getByLabelText("Name")).toHaveValue("DashPressUpdated");

@@ -3,8 +3,8 @@
 import { Story } from "@storybook/react";
 import { action as storyAction } from "@storybook/addon-actions";
 import { ToastService } from "frontend/lib/toast";
-import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 import { fakeMessageDescriptor } from "translations/fake";
+import { TestProviders } from "__tests__/_/Provider";
 
 interface IProps {
   label: string;
@@ -26,9 +26,9 @@ export default {
 };
 
 const Template: Story<IProps> = (args) => (
-  <ApplicationRoot>
+  <TestProviders>
     <Demo {...args} />
-  </ApplicationRoot>
+  </TestProviders>
 );
 
 export const Success = Template.bind({});

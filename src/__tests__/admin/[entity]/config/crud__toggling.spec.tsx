@@ -1,5 +1,4 @@
 import { render, screen, within } from "@testing-library/react";
-import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 import userEvent from "@testing-library/user-event";
 import EntityCrudSettings from "pages/admin/[entity]/config/crud";
 import { rest } from "msw";
@@ -7,6 +6,7 @@ import { rest } from "msw";
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 import { BASE_TEST_URL } from "__tests__/_/api-handlers/_utils";
 import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
+import { TestProviders } from "__tests__/_/Provider";
 
 const server = setupApiHandlers();
 
@@ -40,9 +40,9 @@ describe("pages/admin/[entity]/config/crud", () => {
     );
 
     render(
-      <ApplicationRoot>
+      <TestProviders>
         <EntityCrudSettings />
-      </ApplicationRoot>
+      </TestProviders>
     );
 
     expect(
@@ -82,9 +82,9 @@ describe("pages/admin/[entity]/config/crud", () => {
 
     it("should toggle off functionality", async () => {
       render(
-        <ApplicationRoot>
+        <TestProviders>
           <EntityCrudSettings />
-        </ApplicationRoot>
+        </TestProviders>
       );
 
       const currentTab = screen.getByRole("tabpanel", { name: tab });
@@ -113,9 +113,9 @@ describe("pages/admin/[entity]/config/crud", () => {
 
     it("should toggle on functionality", async () => {
       render(
-        <ApplicationRoot>
+        <TestProviders>
           <EntityCrudSettings />
-        </ApplicationRoot>
+        </TestProviders>
       );
 
       const currentTab = screen.getByRole("tabpanel", { name: tab });

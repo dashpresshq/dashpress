@@ -1,9 +1,9 @@
 import { render, screen, waitFor } from "@testing-library/react";
-import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 import VersionInfo from "pages/admin/settings/versions";
 
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
+import { TestProviders } from "__tests__/_/Provider";
 
 setupApiHandlers();
 
@@ -16,9 +16,9 @@ describe("pages/admin/settings/version", () => {
 
   it("should display system info", async () => {
     render(
-      <ApplicationRoot>
+      <TestProviders>
         <VersionInfo />
-      </ApplicationRoot>
+      </TestProviders>
     );
     await waitFor(() => {
       expect(screen.getByText("key1")).toBeInTheDocument();

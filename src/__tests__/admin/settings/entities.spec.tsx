@@ -1,10 +1,10 @@
 import { render, screen, waitFor } from "@testing-library/react";
-import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 import userEvent from "@testing-library/user-event";
 import EntitiesSettings from "pages/admin/settings/entities";
 
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
+import { TestProviders } from "__tests__/_/Provider";
 
 setupApiHandlers();
 
@@ -17,9 +17,9 @@ describe("pages/admin/settings/entities", () => {
 
   it("should display all entities with correct state", async () => {
     render(
-      <ApplicationRoot>
+      <TestProviders>
         <EntitiesSettings />
-      </ApplicationRoot>
+      </TestProviders>
     );
 
     await waitFor(async () => {
@@ -51,9 +51,9 @@ describe("pages/admin/settings/entities", () => {
 
   it("should toggle entities state successfully", async () => {
     render(
-      <ApplicationRoot>
+      <TestProviders>
         <EntitiesSettings />
-      </ApplicationRoot>
+      </TestProviders>
     );
 
     await userEvent.click(
@@ -79,9 +79,9 @@ describe("pages/admin/settings/entities", () => {
 
   it("should display updated entities state", async () => {
     render(
-      <ApplicationRoot>
+      <TestProviders>
         <EntitiesSettings />
-      </ApplicationRoot>
+      </TestProviders>
     );
 
     expect(

@@ -1,5 +1,4 @@
 import { render, screen, within } from "@testing-library/react";
-import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 
 import Dashboard from "pages";
 
@@ -7,6 +6,7 @@ import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 import userEvent from "@testing-library/user-event";
 import { getTableRows } from "__tests__/_/utils/getTableRows";
 import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
+import { TestProviders } from "__tests__/_/Provider";
 
 setupApiHandlers();
 
@@ -14,9 +14,9 @@ const useRouter = jest.spyOn(require("next/router"), "useRouter");
 
 // it("should change relative time", async () => {
 //   render(
-//     <ApplicationRoot>
+//     <TestProviders>
 //       <Dashboard />
-//     </ApplicationRoot>
+//     </TestProviders>
 //   );
 
 //   await userEvent.click(
@@ -50,9 +50,9 @@ describe("pages/admin", () => {
 
   it("should render table dashboard widget correctly", async () => {
     render(
-      <ApplicationRoot>
+      <TestProviders>
         <Dashboard />
-      </ApplicationRoot>
+      </TestProviders>
     );
 
     const widget = await screen.findByLabelText("Foo Table Widget");
@@ -75,9 +75,9 @@ describe("pages/admin", () => {
 
   it("should render summary card widget correctly", async () => {
     render(
-      <ApplicationRoot>
+      <TestProviders>
         <Dashboard />
-      </ApplicationRoot>
+      </TestProviders>
     );
 
     const widget = await screen.findByLabelText("Bar Card Widget");
@@ -108,9 +108,9 @@ describe("pages/admin", () => {
 
   it("should render correct buttons for table widget", async () => {
     render(
-      <ApplicationRoot>
+      <TestProviders>
         <Dashboard />
-      </ApplicationRoot>
+      </TestProviders>
     );
 
     const widget = await screen.findByLabelText("Foo Table Widget");
@@ -129,9 +129,9 @@ describe("pages/admin", () => {
 
   it("should render correct buttons for summary card widget", async () => {
     render(
-      <ApplicationRoot>
+      <TestProviders>
         <Dashboard />
-      </ApplicationRoot>
+      </TestProviders>
     );
 
     const widget = await screen.findByLabelText("Bar Card Widget");
@@ -151,9 +151,9 @@ describe("pages/admin", () => {
       useRouter.mockImplementation(USE_ROUTER_PARAMS({ replaceMock }));
 
       render(
-        <ApplicationRoot>
+        <TestProviders>
           <Dashboard />
-        </ApplicationRoot>
+        </TestProviders>
       );
 
       await userEvent.click(

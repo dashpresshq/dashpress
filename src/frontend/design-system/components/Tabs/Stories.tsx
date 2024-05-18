@@ -1,7 +1,7 @@
 /* eslint-disable react/function-component-definition */
 
 import { Story } from "@storybook/react";
-import { ApplicationRoot } from "frontend/components/ApplicationRoot";
+import { TestProviders } from "__tests__/_/Provider";
 import { Tabs, IProps } from ".";
 
 const Content = ({ label }: { label: string }) => {
@@ -36,9 +36,9 @@ export default {
 };
 
 const Template: Story<IProps> = (args) => (
-  <ApplicationRoot>
+  <TestProviders>
     <Tabs {...args} />
-  </ApplicationRoot>
+  </TestProviders>
 );
 
 export const Default = Template.bind({});

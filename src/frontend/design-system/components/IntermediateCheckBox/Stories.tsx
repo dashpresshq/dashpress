@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { Story } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
-import { ApplicationRoot } from "frontend/components/ApplicationRoot";
+import { TestProviders } from "__tests__/_/Provider";
 import { IntermediateCheckBox, IProps } from ".";
 
 export default {
@@ -17,7 +17,7 @@ export default {
 const ControlledTemplate: Story<IProps> = (args) => {
   const [state, setState] = useState<IProps["state"]>("unchecked");
   return (
-    <ApplicationRoot>
+    <TestProviders>
       <IntermediateCheckBox
         {...args}
         state={state}
@@ -31,7 +31,7 @@ const ControlledTemplate: Story<IProps> = (args) => {
           }
         }}
       />
-    </ApplicationRoot>
+    </TestProviders>
   );
 };
 

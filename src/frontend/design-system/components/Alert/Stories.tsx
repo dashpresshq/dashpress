@@ -3,7 +3,7 @@
 import { Story } from "@storybook/react";
 import { GitHub } from "react-feather";
 import { action } from "@storybook/addon-actions";
-import { ApplicationRoot } from "frontend/components/ApplicationRoot";
+import { TestProviders } from "__tests__/_/Provider";
 import { Alert, IProps, AlertType } from ".";
 
 export default {
@@ -15,9 +15,9 @@ export default {
 };
 
 const Template: Story<IProps> = (args) => (
-  <ApplicationRoot>
+  <TestProviders>
     <Alert {...args} />
-  </ApplicationRoot>
+  </TestProviders>
 );
 
 export const Info = Template.bind({});

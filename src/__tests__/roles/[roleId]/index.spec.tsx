@@ -1,5 +1,4 @@
 import { render, screen, waitFor, within } from "@testing-library/react";
-import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 import userEvent from "@testing-library/user-event";
 
 import RolePermissions from "pages/roles/[roleId]/index";
@@ -7,6 +6,7 @@ import RolePermissions from "pages/roles/[roleId]/index";
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 import { closeAllToasts } from "__tests__/_/utils/closeAllToasts";
 import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
+import { TestProviders } from "__tests__/_/Provider";
 
 setupApiHandlers();
 
@@ -24,9 +24,9 @@ describe("pages/roles/[roleId]/index", () => {
 
   it("should select all user enabled admin permissions", async () => {
     render(
-      <ApplicationRoot>
+      <TestProviders>
         <RolePermissions />
-      </ApplicationRoot>
+      </TestProviders>
     );
 
     const currentTab = await screen.findByRole("tabpanel", { name: "App" });
@@ -74,9 +74,9 @@ describe("pages/roles/[roleId]/index", () => {
 
   it("should select all user enabled entities permissions", async () => {
     render(
-      <ApplicationRoot>
+      <TestProviders>
         <RolePermissions />
-      </ApplicationRoot>
+      </TestProviders>
     );
     await userEvent.click(await screen.findByRole("tab", { name: "Entities" }));
 
@@ -119,9 +119,9 @@ describe("pages/roles/[roleId]/index", () => {
 
   it("should update entity permissions", async () => {
     render(
-      <ApplicationRoot>
+      <TestProviders>
         <RolePermissions />
-      </ApplicationRoot>
+      </TestProviders>
     );
 
     await userEvent.click(await screen.findByRole("tab", { name: "Entities" }));
@@ -181,9 +181,9 @@ describe("pages/roles/[roleId]/index", () => {
 
   it("should show updated entity permissions", async () => {
     render(
-      <ApplicationRoot>
+      <TestProviders>
         <RolePermissions />
-      </ApplicationRoot>
+      </TestProviders>
     );
 
     await userEvent.click(await screen.findByRole("tab", { name: "Entities" }));
@@ -211,9 +211,9 @@ describe("pages/roles/[roleId]/index", () => {
 
   it("should toggle entities checkbox when 'Can Manage All Entities' is toggled", async () => {
     render(
-      <ApplicationRoot>
+      <TestProviders>
         <RolePermissions />
-      </ApplicationRoot>
+      </TestProviders>
     );
 
     await userEvent.click(await screen.findByRole("tab", { name: "Entities" }));
@@ -245,9 +245,9 @@ describe("pages/roles/[roleId]/index", () => {
 
   it("should update admin permissions", async () => {
     render(
-      <ApplicationRoot>
+      <TestProviders>
         <RolePermissions />
-      </ApplicationRoot>
+      </TestProviders>
     );
 
     const currentTab = await screen.findByRole("tabpanel", { name: "App" });
@@ -295,9 +295,9 @@ describe("pages/roles/[roleId]/index", () => {
 
   it("should show updated admin permissions", async () => {
     render(
-      <ApplicationRoot>
+      <TestProviders>
         <RolePermissions />
-      </ApplicationRoot>
+      </TestProviders>
     );
 
     const currentTab = screen.getByRole("tabpanel", { name: "App" });
@@ -330,9 +330,9 @@ describe("pages/roles/[roleId]/index", () => {
   describe("Heirachy", () => {
     it("should toggle heirachy permissions on correctly", async () => {
       render(
-        <ApplicationRoot>
+        <TestProviders>
           <RolePermissions />
-        </ApplicationRoot>
+        </TestProviders>
       );
 
       await closeAllToasts();
@@ -372,9 +372,9 @@ describe("pages/roles/[roleId]/index", () => {
 
     it("should toggle heirachy permissions off correctly", async () => {
       render(
-        <ApplicationRoot>
+        <TestProviders>
           <RolePermissions />
-        </ApplicationRoot>
+        </TestProviders>
       );
 
       await closeAllToasts();
@@ -414,9 +414,9 @@ describe("pages/roles/[roleId]/index", () => {
 
     it("should show turned off children permissions correctly", async () => {
       render(
-        <ApplicationRoot>
+        <TestProviders>
           <RolePermissions />
-        </ApplicationRoot>
+        </TestProviders>
       );
 
       const currentTab = await screen.findByRole("tabpanel", { name: "App" });

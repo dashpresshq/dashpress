@@ -1,8 +1,8 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import { loadedDataState } from "frontend/lib/data/constants/loadedDataState";
 import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
-import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 import { fakeMessageDescriptor } from "translations/fake";
+import { TestProviders } from "__tests__/_/Provider";
 import { ListManager } from ".";
 
 const defaultProps = {
@@ -50,12 +50,12 @@ describe("ListManager", () => {
 
   it("should not render search input when items are small", () => {
     render(
-      <ApplicationRoot>
+      <TestProviders>
         <ListManager
           {...{ ...defaultProps }}
           render={(item) => ({ label: item.name })}
         />
-      </ApplicationRoot>
+      </TestProviders>
     );
 
     expect(screen.queryByPlaceholderText("Search")).not.toBeInTheDocument();
@@ -63,7 +63,7 @@ describe("ListManager", () => {
 
   it("should render search input when items are large", () => {
     render(
-      <ApplicationRoot>
+      <TestProviders>
         <ListManager
           {...{ ...defaultProps }}
           items={loadedDataState(
@@ -71,7 +71,7 @@ describe("ListManager", () => {
           )}
           render={(item) => ({ label: item.name })}
         />
-      </ApplicationRoot>
+      </TestProviders>
     );
 
     expect(screen.getByPlaceholderText("Search")).toBeInTheDocument();
@@ -79,7 +79,7 @@ describe("ListManager", () => {
 
   it("should search items by label and name when search input is keyed", () => {
     render(
-      <ApplicationRoot>
+      <TestProviders>
         <ListManager
           {...{ ...defaultProps }}
           items={loadedDataState(
@@ -88,7 +88,7 @@ describe("ListManager", () => {
           getLabel={(name) => `1-${name}`}
           render={(item) => ({ label: item.label })}
         />
-      </ApplicationRoot>
+      </TestProviders>
     );
 
     fireEvent.change(screen.getByPlaceholderText("Search"), {
@@ -118,7 +118,7 @@ describe("ListManager", () => {
 
   it("should render Empty view when empty", () => {
     render(
-      <ApplicationRoot>
+      <TestProviders>
         <ListManager
           {...{ ...defaultProps }}
           items={loadedDataState([])}
@@ -127,7 +127,7 @@ describe("ListManager", () => {
           }}
           render={(item) => ({ label: item.label })}
         />
-      </ApplicationRoot>
+      </TestProviders>
     );
 
     expect(screen.getByText("No Item Has Been Added Yet")).toBeInTheDocument();

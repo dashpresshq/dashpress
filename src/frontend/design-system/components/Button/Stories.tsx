@@ -2,7 +2,7 @@
 
 import { Story } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
-import { ApplicationRoot } from "frontend/components/ApplicationRoot";
+import { TestProviders } from "__tests__/_/Provider";
 import { SoftButton } from "./SoftButton";
 import { IActionButton } from "./types";
 
@@ -12,9 +12,9 @@ export default {
 };
 
 const Template: Story<IActionButton> = (args) => (
-  <ApplicationRoot>
+  <TestProviders>
     <SoftButton {...args} />
-  </ApplicationRoot>
+  </TestProviders>
 );
 
 export const Loading = Template.bind({});

@@ -6,9 +6,9 @@ import {
   IColumnFilterBag,
   TableFilterType,
 } from "shared/types/data";
-import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
 import { fakeMessageDescriptor } from "translations/fake";
+import { TestProviders } from "__tests__/_/Provider";
 import { TableFilter } from "..";
 
 const setFilterValueJestFn = jest.fn();
@@ -26,7 +26,7 @@ function TestComponent({
 }) {
   const [state, setState] = useState(defaultValue);
   return (
-    <ApplicationRoot>
+    <TestProviders>
       <TableFilter
         type={type}
         column={{
@@ -39,7 +39,7 @@ function TestComponent({
         view="Test Column"
         debounceWait={100}
       />
-    </ApplicationRoot>
+    </TestProviders>
   );
 }
 

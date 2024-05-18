@@ -2,8 +2,8 @@
 
 import { Story } from "@storybook/react";
 import { actions } from "@storybook/addon-actions";
-import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 import { loadedDataState } from "frontend/lib/data/constants/loadedDataState";
+import { TestProviders } from "__tests__/_/Provider";
 import { ListManager, IProps } from ".";
 
 interface IDemoType {
@@ -32,9 +32,9 @@ export default {
 };
 
 const Template: Story<IProps<IDemoType, "name">> = (args) => (
-  <ApplicationRoot>
+  <TestProviders>
     <ListManager {...args} />
-  </ApplicationRoot>
+  </TestProviders>
 );
 
 export const Default = Template.bind({});

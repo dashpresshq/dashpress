@@ -13,8 +13,6 @@ import {
 } from "frontend/hooks/entity/entity.config";
 import { useUpsertConfigurationMutation } from "frontend/hooks/configuration/configuration.store";
 import { useEntityFields } from "frontend/hooks/entity/entity.store";
-import { WarningAlert } from "frontend/design-system/components/Alert";
-import { Spacer } from "frontend/design-system/primitives/Spacer";
 import { useDocumentationActionButton } from "frontend/docs/constants";
 import { msg } from "@lingui/macro";
 import { typescriptSafeObjectDotEntries } from "shared/lib/objects";
@@ -170,7 +168,6 @@ export function EntityCrudSettings() {
   const tabFromUrl = useRouteParam("tab");
   const changeTabParam = useChangeRouterParam("tab");
   const entity = useEntitySlug();
-  const entityFields = useEntityFields(entity);
 
   const entityCrudView = useEntityCrudView(entity);
 
@@ -181,16 +178,9 @@ export function EntityCrudSettings() {
     viewKey: ENTITY_CONFIGURATION_VIEW,
     permission: UserPermissions.CAN_CONFIGURE_APP,
   });
+
   return (
     <BaseEntitySettingsLayout>
-      {entityFields.data.length > 1 &&
-        // TODO
-        entityFields.data.findIndex((field) => field.isId) === -1 && (
-          <>
-            <WarningAlert message="This entity doesn't have a primary key. Kindly add one to this entity and restart the application so as not to run into errors when managing its data" />
-            <Spacer />
-          </>
-        )}
       <SectionBox title={TITLE} actionButtons={[documentationActionButton]}>
         <Tabs
           currentTab={tabFromUrl}

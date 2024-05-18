@@ -15,7 +15,7 @@ const queryClient = new QueryClient({
   queryCache,
   defaultOptions: {
     queries: {
-      gcTime: 1000 * 60 * 60 * 24, // 24 hours
+      gcTime: 1000 * 60 * 60 * 24 * 14, // 14 days
       staleTime: Infinity,
       refetchOnWindowFocus: false,
       retry: (failureCount, error: any) => {
@@ -54,6 +54,7 @@ export function QueryProvider({ children }: { children: ReactNode }) {
     <PersistQueryClientProvider
       client={queryClient}
       persistOptions={{
+        maxAge: 1000 * 60 * 60 * 24 * 30, // 30 days
         persister: asyncStoragePersister,
         dehydrateOptions: {
           shouldDehydrateQuery: (query) => {

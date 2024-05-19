@@ -1,8 +1,7 @@
 import { render, screen } from "@testing-library/react";
-import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 import userEvent from "@testing-library/user-event";
 import AccountPassword from "pages/account/password";
-
+import { TestProviders } from "__tests__/_/Provider";
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 import { closeAllToasts } from "__tests__/_/utils/closeAllToasts";
 import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
@@ -27,9 +26,9 @@ describe("pages/account/password", () => {
 
   it("should update password", async () => {
     render(
-      <ApplicationRoot>
+      <TestProviders>
         <AccountPassword />
-      </ApplicationRoot>
+      </TestProviders>
     );
     await userEvent.type(
       await screen.findByLabelText("Old Password"),
@@ -56,9 +55,9 @@ describe("pages/account/password", () => {
     process.env.NEXT_PUBLIC_IS_DEMO = "true";
 
     render(
-      <ApplicationRoot>
+      <TestProviders>
         <AccountPassword />
-      </ApplicationRoot>
+      </TestProviders>
     );
 
     await userEvent.type(

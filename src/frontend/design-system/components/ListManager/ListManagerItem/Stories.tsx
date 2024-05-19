@@ -2,7 +2,7 @@
 
 import { Story } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
-import { ApplicationRoot } from "frontend/components/ApplicationRoot";
+import { TestProviders } from "__tests__/_/Provider";
 import { ListManagerItem, IListMangerItemProps } from ".";
 
 export default {
@@ -15,12 +15,12 @@ export default {
 };
 
 const Template: Story<IListMangerItemProps> = (args) => (
-  <ApplicationRoot>
+  <TestProviders>
     <ListManagerItem {...args} />
     <ListManagerItem {...args} />
     <ListManagerItem {...args} />
     <ListManagerItem {...args} />
-  </ApplicationRoot>
+  </TestProviders>
 );
 
 export const Default = Template.bind({});

@@ -1,11 +1,11 @@
 import { render, screen, within } from "@testing-library/react";
-import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 import userEvent from "@testing-library/user-event";
 
 import ManageDashboard from "pages/dashboard/manage";
 
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
+import { TestProviders } from "__tests__/_/Provider";
 
 setupApiHandlers();
 
@@ -24,9 +24,9 @@ describe("pages/admin/settings/dashboard", () => {
       useRouter.mockImplementation(USE_ROUTER_PARAMS({ replaceMock }));
 
       render(
-        <ApplicationRoot>
+        <TestProviders>
           <ManageDashboard />
-        </ApplicationRoot>
+        </TestProviders>
       );
 
       await userEvent.click(
@@ -41,9 +41,9 @@ describe("pages/admin/settings/dashboard", () => {
       useRouter.mockImplementation(USE_ROUTER_PARAMS({ pushMock }));
 
       render(
-        <ApplicationRoot>
+        <TestProviders>
           <ManageDashboard />
-        </ApplicationRoot>
+        </TestProviders>
       );
 
       await userEvent.click(
@@ -57,9 +57,9 @@ describe("pages/admin/settings/dashboard", () => {
 
     it("should delete table widget", async () => {
       render(
-        <ApplicationRoot>
+        <TestProviders>
           <ManageDashboard />
-        </ApplicationRoot>
+        </TestProviders>
       );
 
       const widget = await screen.findByLabelText("Foo Table Widget");
@@ -90,9 +90,9 @@ describe("pages/admin/settings/dashboard", () => {
       useRouter.mockImplementation(USE_ROUTER_PARAMS({ pushMock }));
 
       render(
-        <ApplicationRoot>
+        <TestProviders>
           <ManageDashboard />
-        </ApplicationRoot>
+        </TestProviders>
       );
 
       const widget = await screen.findByLabelText("Bar Card Widget");

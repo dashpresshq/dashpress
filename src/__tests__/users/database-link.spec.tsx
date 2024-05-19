@@ -2,13 +2,13 @@
 /* eslint-disable testing-library/no-container */
 
 import { render, screen } from "@testing-library/react";
-import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 import userEvent from "@testing-library/user-event";
 
 import UsersLinkToDatabase from "pages/users/database-link";
 
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
+import { TestProviders } from "__tests__/_/Provider";
 
 setupApiHandlers();
 
@@ -19,9 +19,9 @@ describe("pages/users/database-link", () => {
 
   it("should save the link form correctly", async () => {
     render(
-      <ApplicationRoot>
+      <TestProviders>
         <UsersLinkToDatabase />
-      </ApplicationRoot>
+      </TestProviders>
     );
 
     await userEvent.type(
@@ -47,9 +47,9 @@ describe("pages/users/database-link", () => {
 
   it("should persist the link form correctly", async () => {
     const { container } = render(
-      <ApplicationRoot>
+      <TestProviders>
         <UsersLinkToDatabase />
-      </ApplicationRoot>
+      </TestProviders>
     );
 
     expect(container.querySelector(`input[name="table"]`)).toHaveValue(

@@ -3,8 +3,8 @@ import { useState } from "react";
 import { Story } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
 import { IPaginatedDataState } from "shared/types/data";
-import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 import { msg } from "@lingui/macro";
+import { TestProviders } from "__tests__/_/Provider";
 import { Table, DEFAULT_TABLE_STATE } from ".";
 import { ITableProps } from "./types";
 import { TABLE_COLUMNS, TABLE_DATA } from "./data";
@@ -42,7 +42,7 @@ const Template: Story<ITableProps<unknown>> = (args) => {
   >({ ...DEFAULT_TABLE_STATE });
 
   return (
-    <ApplicationRoot>
+    <TestProviders>
       <button
         type="button"
         onClick={() => {
@@ -65,7 +65,7 @@ const Template: Story<ITableProps<unknown>> = (args) => {
         Click Me
       </button>
       <Table {...args} overridePaginatedDataState={paginatedDataState} />
-    </ApplicationRoot>
+    </TestProviders>
   );
 };
 

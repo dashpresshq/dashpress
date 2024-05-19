@@ -1,5 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
-import { AppStorage } from "frontend/lib/storage/app";
+import { useIsRestoring, useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/router";
 import { useLingui } from "@lingui/react";
 import { IUseApiOptions } from "../types";
@@ -8,6 +7,8 @@ import { buildApiOptions } from "../_buildOptions";
 import { getQueryCachekey } from "../constants/getQueryCacheKey";
 
 export function useApi<T>(endPoint: string, options: IUseApiOptions<T>) {
+  const isRestoring = useIsRestoring();
+
   const builtOptions = buildApiOptions(options);
   const router = useRouter();
   const { _ } = useLingui();
@@ -41,17 +42,5 @@ export function useApi<T>(endPoint: string, options: IUseApiOptions<T>) {
     },
     ...builtOptions,
   });
-  return { data, ...rest };
-}
-
-export function useStorageApi<T>(endPoint: string, options: IUseApiOptions<T>) {
-  return useApi<T>(endPoint, {
-    ...options,
-    selector: (response) => {
-      const data = options.selector ? options.selector(response) : response;
-      AppStorage.set(endPoint, response);
-      return data;
-    },
-    placeholderData: AppStorage.get(endPoint),
-  });
+  return { data, ...rest, isLoading: rest.isLoading || isRestoring };
 }

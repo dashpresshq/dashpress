@@ -2,7 +2,7 @@
 
 import { Story } from "@storybook/react";
 import { useState } from "@storybook/addons";
-import { ApplicationRoot } from "frontend/components/ApplicationRoot";
+import { TestProviders } from "__tests__/_/Provider";
 import { OffCanvas, IProps } from ".";
 
 export default {
@@ -22,12 +22,12 @@ export default {
 const Template: Story<IProps> = (args) => {
   const [open, setOpen] = useState(false);
   return (
-    <ApplicationRoot>
+    <TestProviders>
       <button type="button" onClick={() => setOpen(true)}>
         Open Canvas
       </button>
       <OffCanvas {...args} show={open} onClose={() => setOpen(false)} />
-    </ApplicationRoot>
+    </TestProviders>
   );
 };
 

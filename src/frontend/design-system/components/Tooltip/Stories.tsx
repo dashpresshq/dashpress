@@ -1,7 +1,7 @@
 /* eslint-disable react/function-component-definition */
 
 import { Story } from "@storybook/react";
-import { ApplicationRoot } from "frontend/components/ApplicationRoot";
+import { TestProviders } from "__tests__/_/Provider";
 import { Tooltip, IProps } from ".";
 
 export default {
@@ -13,9 +13,9 @@ export default {
 };
 
 const Template: Story<IProps> = (args) => (
-  <ApplicationRoot>
+  <TestProviders>
     <Tooltip {...args}>Hover over me</Tooltip>
-  </ApplicationRoot>
+  </TestProviders>
 );
 
 export const Default = Template.bind({});

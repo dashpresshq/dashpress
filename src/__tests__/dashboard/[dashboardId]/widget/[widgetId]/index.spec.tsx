@@ -1,5 +1,4 @@
 import { render, screen } from "@testing-library/react";
-import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 
 import UpdateDashboardWidget from "pages/dashboard/[dashboardId]/widget/[widgetId]/index";
 
@@ -7,6 +6,7 @@ import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 import userEvent from "@testing-library/user-event";
 import { closeAllToasts } from "__tests__/_/utils/closeAllToasts";
 import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
+import { TestProviders } from "__tests__/_/Provider";
 
 setupApiHandlers();
 
@@ -24,9 +24,9 @@ describe("pages/dashboard/[dashboardId]/widget/[widgetId]/index", () => {
     );
 
     render(
-      <ApplicationRoot>
+      <TestProviders>
         <UpdateDashboardWidget />
-      </ApplicationRoot>
+      </TestProviders>
     );
 
     await userEvent.type(await screen.findByLabelText("Title"), "Updated");
@@ -81,9 +81,9 @@ describe("pages/dashboard/[dashboardId]/widget/[widgetId]/index", () => {
     );
 
     render(
-      <ApplicationRoot>
+      <TestProviders>
         <UpdateDashboardWidget />
-      </ApplicationRoot>
+      </TestProviders>
     );
 
     await userEvent.type(await screen.findByLabelText("Title"), "Updated");
@@ -131,9 +131,9 @@ describe("pages/dashboard/[dashboardId]/widget/[widgetId]/index", () => {
     );
 
     render(
-      <ApplicationRoot>
+      <TestProviders>
         <UpdateDashboardWidget />
-      </ApplicationRoot>
+      </TestProviders>
     );
 
     expect(await screen.findByRole("alert")).toHaveTextContent(

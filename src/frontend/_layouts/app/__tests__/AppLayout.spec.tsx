@@ -1,10 +1,10 @@
-import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 import { render, screen, waitFor } from "@testing-library/react";
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 
 import { AuthActions } from "frontend/hooks/auth/auth.actions";
 import userEvent from "@testing-library/user-event";
 import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
+import { TestProviders } from "__tests__/_/Provider";
 import { AppLayout } from "..";
 import { getAppLayout } from "../getLayout";
 
@@ -29,9 +29,9 @@ describe("AppLayout", () => {
 
   it("should render the content", async () => {
     render(
-      <ApplicationRoot>
+      <TestProviders>
         <AppLayout>Foo Content</AppLayout>
-      </ApplicationRoot>
+      </TestProviders>
     );
 
     expect(screen.getByText("Foo Content")).toBeInTheDocument();
@@ -51,9 +51,9 @@ describe("AppLayout", () => {
 
     it("should hide demo elements when NEXT_PUBLIC_IS_DEMO is false", async () => {
       render(
-        <ApplicationRoot>
+        <TestProviders>
           <AppLayout>Foo</AppLayout>
-        </ApplicationRoot>
+        </TestProviders>
       );
 
       expect(
@@ -66,9 +66,9 @@ describe("AppLayout", () => {
 
       process.env.NEXT_PUBLIC_IS_DEMO = "true";
       render(
-        <ApplicationRoot>
+        <TestProviders>
           <AppLayout>Foo</AppLayout>
-        </ApplicationRoot>
+        </TestProviders>
       );
 
       await userEvent.click(
@@ -83,7 +83,7 @@ describe("AppLayout", () => {
 
   describe("getAppLayout", () => {
     it("should toggle the sidebar and toggle the correct elements", async () => {
-      render(<ApplicationRoot>{getAppLayout(<p>Foo</p>)}</ApplicationRoot>);
+      render(<TestProviders>{getAppLayout(<p>Foo</p>)}</TestProviders>);
 
       expect(await screen.findByAltText("full logo")).toBeInTheDocument();
       expect(screen.queryByAltText("small logo")).not.toBeInTheDocument();
@@ -121,7 +121,7 @@ describe("AppLayout", () => {
     });
 
     it("should open menu items", async () => {
-      render(<ApplicationRoot>{getAppLayout(<p>Foo</p>)}</ApplicationRoot>);
+      render(<TestProviders>{getAppLayout(<p>Foo</p>)}</TestProviders>);
 
       await userEvent.click(
         await screen.findByLabelText("Toggle Profile Menu")
@@ -138,7 +138,7 @@ describe("AppLayout", () => {
   describe("Not Signed In", () => {
     it("should redirect to sign in when not authenticated", async () => {
       localStorage.removeItem(AuthActions.JWT_TOKEN_STORAGE_KEY);
-      render(<ApplicationRoot>{getAppLayout(<p>Foo</p>)}</ApplicationRoot>);
+      render(<TestProviders>{getAppLayout(<p>Foo</p>)}</TestProviders>);
 
       await waitFor(() => {
         expect(window.location.replace).toHaveBeenCalledWith("/auth");

@@ -1,11 +1,11 @@
 import { render, screen, waitFor } from "@testing-library/react";
-import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 import userEvent from "@testing-library/user-event";
 import GeneralDataSettings from "pages/admin/settings/data";
 
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 import { closeAllToasts } from "__tests__/_/utils/closeAllToasts";
 import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
+import { TestProviders } from "__tests__/_/Provider";
 
 setupApiHandlers();
 
@@ -19,9 +19,9 @@ describe("pages/admin/settings/data", () => {
   describe("Metadata", () => {
     it("should display metadata columns", async () => {
       render(
-        <ApplicationRoot>
+        <TestProviders>
           <GeneralDataSettings />
-        </ApplicationRoot>
+        </TestProviders>
       );
       await waitFor(() => {
         expect(screen.getByLabelText("Created At")).toHaveValue("created_at");
@@ -31,9 +31,9 @@ describe("pages/admin/settings/data", () => {
 
     it("should update metadata columns successfully", async () => {
       render(
-        <ApplicationRoot>
+        <TestProviders>
           <GeneralDataSettings />
-        </ApplicationRoot>
+        </TestProviders>
       );
 
       await userEvent.type(screen.getByLabelText("Created At"), "-created");
@@ -52,9 +52,9 @@ describe("pages/admin/settings/data", () => {
 
     it("should display updated date values", async () => {
       render(
-        <ApplicationRoot>
+        <TestProviders>
           <GeneralDataSettings />
-        </ApplicationRoot>
+        </TestProviders>
       );
       await waitFor(() => {
         expect(screen.getByLabelText("Created At")).toHaveValue(
@@ -70,9 +70,9 @@ describe("pages/admin/settings/data", () => {
   describe("Date", () => {
     it("should display date values", async () => {
       render(
-        <ApplicationRoot>
+        <TestProviders>
           <GeneralDataSettings />
-        </ApplicationRoot>
+        </TestProviders>
       );
       await waitFor(() => {
         expect(screen.getByLabelText("Format")).toHaveValue("do MMM yyyy");
@@ -81,9 +81,9 @@ describe("pages/admin/settings/data", () => {
 
     it("should update date successfully", async () => {
       render(
-        <ApplicationRoot>
+        <TestProviders>
           <GeneralDataSettings />
-        </ApplicationRoot>
+        </TestProviders>
       );
 
       await userEvent.clear(screen.getByLabelText("Format"));
@@ -101,9 +101,9 @@ describe("pages/admin/settings/data", () => {
 
     it("should display updated date values", async () => {
       render(
-        <ApplicationRoot>
+        <TestProviders>
           <GeneralDataSettings />
-        </ApplicationRoot>
+        </TestProviders>
       );
       await waitFor(() => {
         expect(screen.getByLabelText("Format")).toHaveValue("yyyy MMM do");
@@ -113,9 +113,9 @@ describe("pages/admin/settings/data", () => {
     describe("invalid date formats", () => {
       it("should not be updated", async () => {
         render(
-          <ApplicationRoot>
+          <TestProviders>
             <GeneralDataSettings />
-          </ApplicationRoot>
+          </TestProviders>
         );
 
         await userEvent.clear(screen.getByLabelText("Format"));
@@ -133,9 +133,9 @@ describe("pages/admin/settings/data", () => {
 
       it("should show date format", async () => {
         render(
-          <ApplicationRoot>
+          <TestProviders>
             <GeneralDataSettings />
-          </ApplicationRoot>
+          </TestProviders>
         );
         await waitFor(() => {
           expect(screen.getByLabelText("Format")).toHaveValue("yyyy MMM do");

@@ -1,9 +1,9 @@
 import { render, screen, waitFor } from "@testing-library/react";
-import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 import EntityUpdate from "pages/admin/[entity]/[id]/update";
 
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
+import { TestProviders } from "__tests__/_/Provider";
 
 setupApiHandlers();
 
@@ -22,9 +22,9 @@ describe("pages/admin/[entity]/update", () => {
 
   it("should update data", async () => {
     render(
-      <ApplicationRoot>
+      <TestProviders>
         <EntityUpdate />
-      </ApplicationRoot>
+      </TestProviders>
     );
     await waitFor(() => {
       expect(screen.getByText("Edit Singular entity-1")).toBeInTheDocument();

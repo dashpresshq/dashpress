@@ -2,7 +2,7 @@
 
 import { Story } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
-import { ApplicationRoot } from "frontend/components/ApplicationRoot";
+import { TestProviders } from "__tests__/_/Provider";
 import { ConfirmAlert } from ".";
 
 export default {
@@ -17,9 +17,9 @@ export default {
 };
 
 const Template: Story = (args) => (
-  <ApplicationRoot>
+  <TestProviders>
     <ConfirmAlert {...args} />
-  </ApplicationRoot>
+  </TestProviders>
 );
 
 export const Default = Template.bind({});

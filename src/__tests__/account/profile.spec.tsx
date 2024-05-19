@@ -1,10 +1,10 @@
 import { render, screen, waitFor } from "@testing-library/react";
-import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 import userEvent from "@testing-library/user-event";
 import AccountProfile from "pages/account/profile";
 
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
+import { TestProviders } from "__tests__/_/Provider";
 
 setupApiHandlers();
 
@@ -15,9 +15,9 @@ useRouter.mockImplementation(USE_ROUTER_PARAMS({}));
 describe("pages/account/profile", () => {
   it("should display profile details", async () => {
     render(
-      <ApplicationRoot>
+      <TestProviders>
         <AccountProfile />
-      </ApplicationRoot>
+      </TestProviders>
     );
     await waitFor(() => {
       expect(screen.getByLabelText("Name")).toHaveValue("Root User");
@@ -26,9 +26,9 @@ describe("pages/account/profile", () => {
 
   it("should update profile successfully", async () => {
     render(
-      <ApplicationRoot>
+      <TestProviders>
         <AccountProfile />
-      </ApplicationRoot>
+      </TestProviders>
     );
 
     await userEvent.clear(screen.getByLabelText("Name"));
@@ -46,9 +46,9 @@ describe("pages/account/profile", () => {
 
   it("should display updated profile details", async () => {
     render(
-      <ApplicationRoot>
+      <TestProviders>
         <AccountProfile />
-      </ApplicationRoot>
+      </TestProviders>
     );
     await waitFor(() => {
       expect(screen.getByLabelText("Name")).toHaveValue("Updated Name");

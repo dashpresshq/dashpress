@@ -1,9 +1,9 @@
 import { render, screen, waitFor } from "@testing-library/react";
-import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 import EntityCreate from "pages/admin/[entity]/create";
 
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
+import { TestProviders } from "__tests__/_/Provider";
 
 setupApiHandlers();
 
@@ -22,9 +22,9 @@ describe("pages/admin/[entity]/create", () => {
 
   it("should create data", async () => {
     render(
-      <ApplicationRoot>
+      <TestProviders>
         <EntityCreate />
-      </ApplicationRoot>
+      </TestProviders>
     );
     await waitFor(() => {
       expect(screen.getByText("Create Singular entity-1")).toBeInTheDocument();

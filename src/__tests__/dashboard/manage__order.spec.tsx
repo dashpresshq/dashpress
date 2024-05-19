@@ -1,7 +1,6 @@
 /* eslint-disable testing-library/no-node-access */
 import { ReactNode } from "react";
 import { render, screen } from "@testing-library/react";
-import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 import userEvent from "@testing-library/user-event";
 
 import ManageDashboard from "pages/dashboard/manage";
@@ -9,6 +8,7 @@ import Dashboard from "pages";
 
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
+import { TestProviders } from "__tests__/_/Provider";
 
 setupApiHandlers();
 
@@ -49,9 +49,9 @@ describe("pages/admin/settings/dashboard", () => {
   describe("Sorting", () => {
     it("should order widget", async () => {
       render(
-        <ApplicationRoot>
+        <TestProviders>
           <ManageDashboard />
-        </ApplicationRoot>
+        </TestProviders>
       );
 
       const widgets = await screen.findByLabelText("Dashboard Widgets");
@@ -65,9 +65,9 @@ describe("pages/admin/settings/dashboard", () => {
 
     it("should change the order of the widgets", async () => {
       render(
-        <ApplicationRoot>
+        <TestProviders>
           <ManageDashboard />
-        </ApplicationRoot>
+        </TestProviders>
       );
 
       await screen.findByLabelText("Foo Table Widget");
@@ -77,9 +77,9 @@ describe("pages/admin/settings/dashboard", () => {
 
     it("should show the new ordered widget", async () => {
       render(
-        <ApplicationRoot>
+        <TestProviders>
           <ManageDashboard />
-        </ApplicationRoot>
+        </TestProviders>
       );
 
       const widgets = await screen.findByLabelText("Dashboard Widgets");
@@ -93,9 +93,9 @@ describe("pages/admin/settings/dashboard", () => {
 
     it("should not be orderable in the admin page", async () => {
       render(
-        <ApplicationRoot>
+        <TestProviders>
           <Dashboard />
-        </ApplicationRoot>
+        </TestProviders>
       );
 
       await screen.findByLabelText("Foo Table Widget");

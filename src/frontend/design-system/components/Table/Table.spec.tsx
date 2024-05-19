@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import { msg } from "@lingui/macro";
-import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
+import { TestProviders } from "__tests__/_/Provider";
 import { Table } from ".";
 import { ITableProps } from "./types";
 import { TABLE_COLUMNS, TABLE_DATA } from "./data";
@@ -27,9 +27,9 @@ useRouter.mockImplementation(USE_ROUTER_PARAMS({}));
 describe("Table", () => {
   it("should render data rows", async () => {
     render(
-      <ApplicationRoot>
+      <TestProviders>
         <Table {...DEFAULT_TABLE_PROPS} />
-      </ApplicationRoot>
+      </TestProviders>
     );
 
     expect(

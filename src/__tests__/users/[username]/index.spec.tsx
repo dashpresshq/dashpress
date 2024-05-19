@@ -2,13 +2,13 @@
 /* eslint-disable testing-library/no-container */
 
 import { render, screen, waitFor } from "@testing-library/react";
-import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 import userEvent from "@testing-library/user-event";
 
 import UserUpdate from "pages/users/[username]/index";
 
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
+import { TestProviders } from "__tests__/_/Provider";
 
 setupApiHandlers();
 
@@ -25,9 +25,9 @@ describe("pages/users/[username]/index", () => {
       );
 
       render(
-        <ApplicationRoot>
+        <TestProviders>
           <UserUpdate />
-        </ApplicationRoot>
+        </TestProviders>
       );
       await waitFor(() => {
         expect(screen.getByLabelText("Role")).toBeDisabled();
@@ -45,9 +45,9 @@ describe("pages/users/[username]/index", () => {
       );
 
       const { container } = render(
-        <ApplicationRoot>
+        <TestProviders>
           <UserUpdate />
-        </ApplicationRoot>
+        </TestProviders>
       );
 
       await waitFor(() => {
@@ -67,9 +67,9 @@ describe("pages/users/[username]/index", () => {
         })
       );
       render(
-        <ApplicationRoot>
+        <TestProviders>
           <UserUpdate />
-        </ApplicationRoot>
+        </TestProviders>
       );
 
       await userEvent.clear(await screen.findByLabelText("Name"));
@@ -96,9 +96,9 @@ describe("pages/users/[username]/index", () => {
         })
       );
       const { container } = render(
-        <ApplicationRoot>
+        <TestProviders>
           <UserUpdate />
-        </ApplicationRoot>
+        </TestProviders>
       );
 
       await waitFor(() => {
@@ -120,9 +120,9 @@ describe("pages/users/[username]/index", () => {
         })
       );
       render(
-        <ApplicationRoot>
+        <TestProviders>
           <UserUpdate />
-        </ApplicationRoot>
+        </TestProviders>
       );
 
       await waitFor(() => {
@@ -142,9 +142,9 @@ describe("pages/users/[username]/index", () => {
         })
       );
       render(
-        <ApplicationRoot>
+        <TestProviders>
           <UserUpdate />
-        </ApplicationRoot>
+        </TestProviders>
       );
 
       await userEvent.type(screen.getByLabelText("Password"), "password");

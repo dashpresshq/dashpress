@@ -3,9 +3,8 @@ import {
   AppConfigurationKeys,
 } from "shared/configurations";
 import { ApiRequest } from "frontend/lib/data/makeRequest";
-import { useStorageApi } from "frontend/lib/data/useApi";
+import { useApi } from "frontend/lib/data/useApi";
 import { useWaitForResponseMutationOptions } from "frontend/lib/data/useMutate/useWaitForResponseMutationOptions";
-import { AppStorage } from "frontend/lib/storage/app";
 import { AppConfigurationValueType } from "shared/configurations/constants";
 import { useApiQueries } from "frontend/lib/data/useApi/useApiQueries";
 import { useAppConfigurationDomainMessages } from "./configuration.constant";
@@ -39,14 +38,12 @@ export function useAppConfiguration<T extends AppConfigurationKeys>(key: T) {
   const domainMessages = useAppConfigurationDomainMessages(key);
   const isUserAuthenticated = useIsUserAutenticated();
   const path = configurationApiPath(key);
-  return useStorageApi<AppConfigurationValueType<T>>(
-    configurationApiPath(key),
-    {
-      enabled: isUserAuthenticated || path.endsWith(GUEST_PATH),
-      errorMessage: domainMessages.TEXT_LANG.NOT_FOUND,
-      defaultData: APP_CONFIGURATION_CONFIG[key].defaultValue,
-    }
-  );
+  return useApi<AppConfigurationValueType<T>>(configurationApiPath(key), {
+    enabled: isUserAuthenticated || path.endsWith(GUEST_PATH),
+    errorMessage: domainMessages.TEXT_LANG.NOT_FOUND,
+    persist: true,
+    defaultData: APP_CONFIGURATION_CONFIG[key].defaultValue,
+  });
 }
 
 export function useEntityConfiguration<T extends AppConfigurationKeys>(
@@ -56,9 +53,10 @@ export function useEntityConfiguration<T extends AppConfigurationKeys>(
 ) {
   const domainMessages = useAppConfigurationDomainMessages(key);
 
-  return useStorageApi<AppConfigurationValueType<T>>(
+  return useApi<AppConfigurationValueType<T>>(
     configurationApiPath(key, entity),
     {
+      persist: true,
       enabled:
         !!entity /* It is possible to not have the entity at the point of call */,
       errorMessage: domainMessages.TEXT_LANG.NOT_FOUND,
@@ -76,8 +74,7 @@ export const useMultipleEntityConfiguration = <T extends AppConfigurationKeys>(
     input: entities.map((entity) => ({ entity })),
     accessor: "entity",
     pathFn: (entity) => configurationApiPath(key, entity),
-    placeholderDataFn: (entity) =>
-      AppStorage.get(configurationApiPath(key, entity as unknown as string)),
+    persist: true,
   });
 };
 
@@ -106,9 +103,6 @@ export function useUpsertConfigurationMutation<T extends AppConfigurationKeys>(
       configurationApiPath(key, entity),
       ...(mutationOptions?.otherEndpoints || []),
     ],
-    onSuccessActionWithFormData: (data) => {
-      AppStorage.set(configurationApiPath(key, entity), data);
-    },
     successMessage: domainMessages.MUTATION_LANG.SAVED,
   });
 }

@@ -1,5 +1,4 @@
 import { render, screen, within } from "@testing-library/react";
-import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 
 import ManageVariables from "pages/integrations/variables";
 
@@ -8,6 +7,7 @@ import userEvent from "@testing-library/user-event";
 import { closeAllToasts } from "__tests__/_/utils/closeAllToasts";
 import { getTableRows } from "__tests__/_/utils/getTableRows";
 import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
+import { TestProviders } from "__tests__/_/Provider";
 
 setupApiHandlers();
 
@@ -25,9 +25,9 @@ describe("pages/integrations/variables => constants", () => {
   describe("list", () => {
     it("should list constants", async () => {
       render(
-        <ApplicationRoot>
+        <TestProviders>
           <ManageVariables />
-        </ApplicationRoot>
+        </TestProviders>
       );
 
       expect(
@@ -50,9 +50,9 @@ describe("pages/integrations/variables => constants", () => {
   describe("create", () => {
     it("should create new constant", async () => {
       render(
-        <ApplicationRoot>
+        <TestProviders>
           <ManageVariables />
-        </ApplicationRoot>
+        </TestProviders>
       );
       await userEvent.click(
         await screen.findByRole("button", { name: "Add New Constant" })
@@ -76,9 +76,9 @@ describe("pages/integrations/variables => constants", () => {
 
     it("should show created constant", async () => {
       render(
-        <ApplicationRoot>
+        <TestProviders>
           <ManageVariables />
-        </ApplicationRoot>
+        </TestProviders>
       );
 
       expect(
@@ -102,9 +102,9 @@ describe("pages/integrations/variables => constants", () => {
   describe("update", () => {
     it("should update constant", async () => {
       render(
-        <ApplicationRoot>
+        <TestProviders>
           <ManageVariables />
-        </ApplicationRoot>
+        </TestProviders>
       );
 
       const table = within(
@@ -140,9 +140,9 @@ describe("pages/integrations/variables => constants", () => {
 
     it("should show updated constant", async () => {
       render(
-        <ApplicationRoot>
+        <TestProviders>
           <ManageVariables />
-        </ApplicationRoot>
+        </TestProviders>
       );
 
       expect(
@@ -166,9 +166,9 @@ describe("pages/integrations/variables => constants", () => {
   describe("delete", () => {
     it("should delete constants", async () => {
       render(
-        <ApplicationRoot>
+        <TestProviders>
           <ManageVariables />
-        </ApplicationRoot>
+        </TestProviders>
       );
 
       const table = within(

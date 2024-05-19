@@ -1,5 +1,4 @@
 import { render, screen, within, waitFor } from "@testing-library/react";
-import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 
 import ListUsers from "pages/users";
 
@@ -7,6 +6,7 @@ import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 import userEvent from "@testing-library/user-event";
 import { getTableRows } from "__tests__/_/utils/getTableRows";
 import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
+import { TestProviders } from "__tests__/_/Provider";
 
 setupApiHandlers();
 
@@ -16,9 +16,9 @@ describe("pages/users", () => {
   it("should list users", async () => {
     useRouter.mockImplementation(USE_ROUTER_PARAMS({}));
     render(
-      <ApplicationRoot>
+      <TestProviders>
         <ListUsers />
-      </ApplicationRoot>
+      </TestProviders>
     );
 
     expect(await getTableRows(await screen.findByRole("table")))
@@ -38,9 +38,9 @@ describe("pages/users", () => {
     useRouter.mockImplementation(USE_ROUTER_PARAMS({ pushMock }));
 
     render(
-      <ApplicationRoot>
+      <TestProviders>
         <ListUsers />
-      </ApplicationRoot>
+      </TestProviders>
     );
     await userEvent.click(screen.getByRole("button", { name: "Add New User" }));
     await waitFor(() => {
@@ -54,9 +54,9 @@ describe("pages/users", () => {
     useRouter.mockImplementation(USE_ROUTER_PARAMS({ pushMock }));
 
     render(
-      <ApplicationRoot>
+      <TestProviders>
         <ListUsers />
-      </ApplicationRoot>
+      </TestProviders>
     );
 
     const tableRows = await screen.findAllByRole("link", { name: "Edit User" });
@@ -72,9 +72,9 @@ describe("pages/users", () => {
     useRouter.mockImplementation(USE_ROUTER_PARAMS({ replaceMock }));
 
     render(
-      <ApplicationRoot>
+      <TestProviders>
         <ListUsers />
-      </ApplicationRoot>
+      </TestProviders>
     );
 
     const tableRows = await screen.findAllByRole("row");

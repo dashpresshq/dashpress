@@ -11,18 +11,16 @@ export type DataStateKeys<T> = Pick<UseQueryResult<T>, "data" | "isLoading"> & {
   error: unknown | Error;
 };
 
-type NonFunctionGuard<T> = T extends Function ? never : T;
-
 export interface IUseApiOptions<T> {
   selector?: (input: any) => T;
   enabled?: boolean;
+  persist?: boolean;
   errorMessage?: MessageDescriptor;
   request?: {
     method: "POST" | "PATCH" | "PUT";
     body: Record<string, unknown>;
   };
   defaultData: T;
-  placeholderData?: NonFunctionGuard<T>;
   /*
   Some requests may go bad in the BE and it is makes sense
   Like checking if something exists in a list

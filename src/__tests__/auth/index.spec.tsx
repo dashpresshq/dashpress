@@ -1,11 +1,11 @@
 import * as React from "react";
 import { render, screen, waitFor } from "@testing-library/react";
-import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 import SignIn from "pages/auth";
 import userEvent from "@testing-library/user-event";
 import { AuthActions } from "frontend/hooks/auth/auth.actions";
 import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
+import { TestProviders } from "__tests__/_/Provider";
 
 setupApiHandlers();
 
@@ -48,9 +48,9 @@ describe("pages/auth", () => {
 
     it("should be hidden when NEXT_PUBLIC_IS_DEMO is false", async () => {
       render(
-        <ApplicationRoot>
+        <TestProviders>
           <SignIn />
-        </ApplicationRoot>
+        </TestProviders>
       );
 
       expect(
@@ -61,9 +61,9 @@ describe("pages/auth", () => {
     it("should be shown when NEXT_PUBLIC_IS_DEMO is true", async () => {
       process.env.NEXT_PUBLIC_IS_DEMO = "true";
       render(
-        <ApplicationRoot>
+        <TestProviders>
           <SignIn />
-        </ApplicationRoot>
+        </TestProviders>
       );
 
       expect(
@@ -76,9 +76,9 @@ describe("pages/auth", () => {
     localStorage.setItem(AuthActions.JWT_TOKEN_STORAGE_KEY, "foo");
 
     render(
-      <ApplicationRoot>
+      <TestProviders>
         <SignIn />
-      </ApplicationRoot>
+      </TestProviders>
     );
 
     await waitFor(() => {
@@ -93,9 +93,9 @@ describe("pages/auth", () => {
     useRouter.mockImplementation(USE_ROUTER_PARAMS({ replaceMock }));
 
     render(
-      <ApplicationRoot>
+      <TestProviders>
         <SignIn />
-      </ApplicationRoot>
+      </TestProviders>
     );
 
     await userEvent.type(
@@ -120,9 +120,9 @@ describe("pages/auth", () => {
 
   it("should redirect to dashboard when user is succesfully authenticated", async () => {
     render(
-      <ApplicationRoot>
+      <TestProviders>
         <SignIn />
-      </ApplicationRoot>
+      </TestProviders>
     );
 
     await userEvent.type(await screen.findByLabelText("Username"), "user");

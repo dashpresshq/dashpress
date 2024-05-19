@@ -1,9 +1,9 @@
 import * as React from "react";
 import { render, screen } from "@testing-library/react";
-import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 import userEvent from "@testing-library/user-event";
 import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
 import { fakeMessageDescriptor } from "translations/fake";
+import { TestProviders } from "__tests__/_/Provider";
 import { SchemaForm } from ".";
 
 type IAccount = {
@@ -66,14 +66,14 @@ describe("<SchemaForm />", () => {
   it("should submit valid form and persist value", async () => {
     const mockOnSubmit = jest.fn();
     render(
-      <ApplicationRoot>
+      <TestProviders>
         <SchemaForm<IAccount>
           onSubmit={mockOnSubmit}
           buttonText={buttonText}
           systemIcon="Save"
           fields={BASE_FIELDS}
         />
-      </ApplicationRoot>
+      </TestProviders>
     );
 
     await userEvent.type(screen.getByLabelText("Name"), "Mary");
@@ -92,7 +92,7 @@ describe("<SchemaForm />", () => {
   it("should reset form state when resetForm is true", async () => {
     const mockOnSubmit = jest.fn();
     render(
-      <ApplicationRoot>
+      <TestProviders>
         <SchemaForm<IAccount>
           onSubmit={mockOnSubmit}
           buttonText={buttonText}
@@ -100,7 +100,7 @@ describe("<SchemaForm />", () => {
           fields={BASE_FIELDS}
           resetForm
         />
-      </ApplicationRoot>
+      </TestProviders>
     );
 
     await userEvent.type(screen.getByLabelText("Name"), "Mary");
@@ -116,7 +116,7 @@ describe("<SchemaForm />", () => {
   it("should submit valid form on empty beforeSubmit", async () => {
     const mockOnSubmit = jest.fn();
     render(
-      <ApplicationRoot>
+      <TestProviders>
         <SchemaForm<IAccount>
           onSubmit={mockOnSubmit}
           buttonText={buttonText}
@@ -126,7 +126,7 @@ describe("<SchemaForm />", () => {
             beforeSubmit: "",
           }}
         />
-      </ApplicationRoot>
+      </TestProviders>
     );
 
     await userEvent.type(screen.getByLabelText("Name"), "Mary");
@@ -142,7 +142,7 @@ describe("<SchemaForm />", () => {
   it("should submit values return by beforeSubmit", async () => {
     const mockOnSubmit = jest.fn();
     render(
-      <ApplicationRoot>
+      <TestProviders>
         <SchemaForm<IAccount>
           onSubmit={mockOnSubmit}
           buttonText={buttonText}
@@ -153,7 +153,7 @@ describe("<SchemaForm />", () => {
             beforeSubmit: BEFORE_SUBMIT,
           }}
         />
-      </ApplicationRoot>
+      </TestProviders>
     );
 
     await userEvent.type(screen.getByLabelText("Name"), "Mary");
@@ -171,7 +171,7 @@ describe("<SchemaForm />", () => {
   it("should submit valid form on invalid beforeSubmit JS", async () => {
     const mockOnSubmit = jest.fn();
     render(
-      <ApplicationRoot>
+      <TestProviders>
         <SchemaForm<IAccount>
           onSubmit={mockOnSubmit}
           buttonText={buttonText}
@@ -181,7 +181,7 @@ describe("<SchemaForm />", () => {
             beforeSubmit: "sm ks ks dsldm sl dm",
           }}
         />
-      </ApplicationRoot>
+      </TestProviders>
     );
 
     await userEvent.type(screen.getByLabelText("Name"), "Mary");
@@ -197,7 +197,7 @@ describe("<SchemaForm />", () => {
   it("should throw error and not submit when beforeSubmit returns a string", async () => {
     const mockOnSubmit = jest.fn();
     render(
-      <ApplicationRoot>
+      <TestProviders>
         <SchemaForm<IAccount>
           onSubmit={mockOnSubmit}
           buttonText={buttonText}
@@ -208,7 +208,7 @@ describe("<SchemaForm />", () => {
             beforeSubmit: BEFORE_SUBMIT,
           }}
         />
-      </ApplicationRoot>
+      </TestProviders>
     );
 
     await userEvent.type(screen.getByLabelText("Name"), "Invalid");
@@ -225,7 +225,7 @@ describe("<SchemaForm />", () => {
   it("should edit forms", async () => {
     const mockOnSubmit = jest.fn();
     render(
-      <ApplicationRoot>
+      <TestProviders>
         <SchemaForm<IAccount>
           onSubmit={mockOnSubmit}
           buttonText={buttonText}
@@ -240,7 +240,7 @@ describe("<SchemaForm />", () => {
             beforeSubmit: BEFORE_SUBMIT,
           }}
         />
-      </ApplicationRoot>
+      </TestProviders>
     );
 
     expect(screen.getByLabelText("Name")).toHaveValue("John Doe");
@@ -261,7 +261,7 @@ describe("<SchemaForm />", () => {
   it("should disable form fields", async () => {
     const mockOnSubmit = jest.fn();
     render(
-      <ApplicationRoot>
+      <TestProviders>
         <SchemaForm<IAccount>
           onSubmit={mockOnSubmit}
           buttonText={buttonText}
@@ -275,7 +275,7 @@ describe("<SchemaForm />", () => {
             fieldsState: FIELD_STATE,
           }}
         />
-      </ApplicationRoot>
+      </TestProviders>
     );
 
     expect(screen.getByLabelText("Email")).not.toBeDisabled();
@@ -292,7 +292,7 @@ describe("<SchemaForm />", () => {
   it("should hide form fields", async () => {
     const mockOnSubmit = jest.fn();
     render(
-      <ApplicationRoot>
+      <TestProviders>
         <SchemaForm<IAccount>
           onSubmit={mockOnSubmit}
           buttonText={buttonText}
@@ -306,7 +306,7 @@ describe("<SchemaForm />", () => {
             fieldsState: FIELD_STATE,
           }}
         />
-      </ApplicationRoot>
+      </TestProviders>
     );
 
     expect(screen.getByLabelText("Email")).toBeInTheDocument();
@@ -323,7 +323,7 @@ describe("<SchemaForm />", () => {
   it("should ignore form fields when it recieveds invalid JS", async () => {
     const mockOnSubmit = jest.fn();
     render(
-      <ApplicationRoot>
+      <TestProviders>
         <SchemaForm<IAccount>
           onSubmit={mockOnSubmit}
           buttonText={buttonText}
@@ -337,7 +337,7 @@ describe("<SchemaForm />", () => {
             fieldsState: "sdmsd smd slmd s;ld sl",
           }}
         />
-      </ApplicationRoot>
+      </TestProviders>
     );
 
     await userEvent.type(screen.getByLabelText("Name"), "Hidden");
@@ -355,7 +355,7 @@ describe("<SchemaForm />", () => {
   it("should show validation errors", async () => {
     const mockOnSubmit = jest.fn();
     render(
-      <ApplicationRoot>
+      <TestProviders>
         <SchemaForm<IAccount>
           onSubmit={mockOnSubmit}
           buttonText={buttonText}
@@ -364,7 +364,7 @@ describe("<SchemaForm />", () => {
             ...BASE_FIELDS,
           }}
         />
-      </ApplicationRoot>
+      </TestProviders>
     );
 
     await userEvent.type(screen.getByLabelText("Name"), "f");
@@ -402,7 +402,7 @@ describe("<SchemaForm />", () => {
   it("should use custom labels", async () => {
     const mockOnSubmit = jest.fn();
     render(
-      <ApplicationRoot>
+      <TestProviders>
         <SchemaForm<{ name: string }>
           onSubmit={mockOnSubmit}
           buttonText={buttonText}
@@ -415,7 +415,7 @@ describe("<SchemaForm />", () => {
             },
           }}
         />
-      </ApplicationRoot>
+      </TestProviders>
     );
 
     await userEvent.type(
@@ -431,7 +431,7 @@ describe("<SchemaForm />", () => {
   it("should render * for required field", async () => {
     const mockOnSubmit = jest.fn();
     render(
-      <ApplicationRoot>
+      <TestProviders>
         <SchemaForm<{ hello: string }>
           onSubmit={mockOnSubmit}
           buttonText={buttonText}
@@ -445,7 +445,7 @@ describe("<SchemaForm />", () => {
             },
           }}
         />
-      </ApplicationRoot>
+      </TestProviders>
     );
 
     expect(screen.getAllByText("*").length).toBe(2);
@@ -454,7 +454,7 @@ describe("<SchemaForm />", () => {
   it("should have form button disabled by default", async () => {
     const mockOnSubmit = jest.fn();
     render(
-      <ApplicationRoot>
+      <TestProviders>
         <SchemaForm<{ name: string }>
           onSubmit={mockOnSubmit}
           buttonText={buttonText}
@@ -467,7 +467,7 @@ describe("<SchemaForm />", () => {
             },
           }}
         />
-      </ApplicationRoot>
+      </TestProviders>
     );
 
     expect(screen.getByRole("button", { name: "Submit Form" })).toBeDisabled();
@@ -480,7 +480,7 @@ describe("<SchemaForm />", () => {
   it("should can onChange when fieldChanges", async () => {
     const onChangeMock = jest.fn();
     render(
-      <ApplicationRoot>
+      <TestProviders>
         <SchemaForm<IAccount>
           onSubmit={jest.fn()}
           onChange={onChangeMock}
@@ -495,7 +495,7 @@ describe("<SchemaForm />", () => {
             fieldsState: FIELD_STATE,
           }}
         />
-      </ApplicationRoot>
+      </TestProviders>
     );
 
     await userEvent.type(screen.getByLabelText("Name"), "Foo");

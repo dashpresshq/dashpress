@@ -1,8 +1,8 @@
 /* eslint-disable react/function-component-definition */
 import { useState } from "react";
 import { Story } from "@storybook/react";
-import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 import { fakeMessageDescriptor } from "translations/fake";
+import { TestProviders } from "__tests__/_/Provider";
 import { FormSwitch, IProps } from ".";
 
 function Demo(args: IProps) {
@@ -25,9 +25,9 @@ export default {
 };
 
 const Template: Story<IProps> = (args) => (
-  <ApplicationRoot>
+  <TestProviders>
     <Demo {...args} />
-  </ApplicationRoot>
+  </TestProviders>
 );
 
 export const Default = Template.bind({});

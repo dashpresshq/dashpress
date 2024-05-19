@@ -1,10 +1,10 @@
 import { render, screen, waitFor } from "@testing-library/react";
-import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 import userEvent from "@testing-library/user-event";
 import SystemSettings from "pages/admin/settings/system";
 
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
+import { TestProviders } from "__tests__/_/Provider";
 
 setupApiHandlers();
 
@@ -17,9 +17,9 @@ describe("pages/admin/settings/system", () => {
 
   it("should display system values", async () => {
     render(
-      <ApplicationRoot>
+      <TestProviders>
         <SystemSettings />
-      </ApplicationRoot>
+      </TestProviders>
     );
     await waitFor(async () => {
       expect(
@@ -30,9 +30,9 @@ describe("pages/admin/settings/system", () => {
 
   it("should update system settings successfully", async () => {
     render(
-      <ApplicationRoot>
+      <TestProviders>
         <SystemSettings />
-      </ApplicationRoot>
+      </TestProviders>
     );
 
     await userEvent.type(
@@ -51,9 +51,9 @@ describe("pages/admin/settings/system", () => {
 
   it("should display updated system values", async () => {
     render(
-      <ApplicationRoot>
+      <TestProviders>
         <SystemSettings />
-      </ApplicationRoot>
+      </TestProviders>
     );
     await waitFor(() => {
       expect(

@@ -1,10 +1,10 @@
 import { render, screen } from "@testing-library/react";
-import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 import EntityTable from "pages/admin/[entity]/index";
 
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 import { getTableRows } from "__tests__/_/utils/getTableRows";
 import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
+import { TestProviders } from "__tests__/_/Provider";
 
 setupApiHandlers();
 
@@ -22,9 +22,9 @@ describe("pages/admin/[entity]/index", () => {
 
   it("should show data", async () => {
     render(
-      <ApplicationRoot>
+      <TestProviders>
         <EntityTable />
-      </ApplicationRoot>
+      </TestProviders>
     );
 
     expect(await screen.findByRole("table")).toBeInTheDocument();

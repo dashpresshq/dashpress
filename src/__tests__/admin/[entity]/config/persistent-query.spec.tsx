@@ -2,12 +2,12 @@
 /* eslint-disable testing-library/no-container */
 
 import { render, screen } from "@testing-library/react";
-import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 import userEvent from "@testing-library/user-event";
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 
 import EntityPersistentQuerySettings from "pages/admin/[entity]/config/persistent-query";
 import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
+import { TestProviders } from "__tests__/_/Provider";
 
 setupApiHandlers();
 
@@ -24,9 +24,9 @@ describe("pages/admin/[entity]/config/persistent-query", () => {
 
   it("should save persistent queries", async () => {
     render(
-      <ApplicationRoot>
+      <TestProviders>
         <EntityPersistentQuerySettings />
-      </ApplicationRoot>
+      </TestProviders>
     );
 
     await userEvent.click(
@@ -59,9 +59,9 @@ describe("pages/admin/[entity]/config/persistent-query", () => {
 
   it("should display updated value", async () => {
     const { container } = render(
-      <ApplicationRoot>
+      <TestProviders>
         <EntityPersistentQuerySettings />
-      </ApplicationRoot>
+      </TestProviders>
     );
 
     expect(
@@ -83,9 +83,9 @@ describe("pages/admin/[entity]/config/persistent-query", () => {
 
   it("should add nested filters", async () => {
     const { container } = render(
-      <ApplicationRoot>
+      <TestProviders>
         <EntityPersistentQuerySettings />
-      </ApplicationRoot>
+      </TestProviders>
     );
 
     await userEvent.click(
@@ -143,9 +143,9 @@ describe("pages/admin/[entity]/config/persistent-query", () => {
 
   it("should add more filter blocks", async () => {
     const { container } = render(
-      <ApplicationRoot>
+      <TestProviders>
         <EntityPersistentQuerySettings />
-      </ApplicationRoot>
+      </TestProviders>
     );
 
     await userEvent.click(
@@ -186,9 +186,9 @@ describe("pages/admin/[entity]/config/persistent-query", () => {
 
   it("should render current state correctly", async () => {
     const { container } = render(
-      <ApplicationRoot>
+      <TestProviders>
         <EntityPersistentQuerySettings />
-      </ApplicationRoot>
+      </TestProviders>
     );
 
     expect(
@@ -255,9 +255,9 @@ describe("pages/admin/[entity]/config/persistent-query", () => {
 
   it("should remove all filters", async () => {
     render(
-      <ApplicationRoot>
+      <TestProviders>
         <EntityPersistentQuerySettings />
-      </ApplicationRoot>
+      </TestProviders>
     );
 
     await userEvent.click(
@@ -290,9 +290,9 @@ describe("pages/admin/[entity]/config/persistent-query", () => {
 
   it("should not show any filters", async () => {
     render(
-      <ApplicationRoot>
+      <TestProviders>
         <EntityPersistentQuerySettings />
-      </ApplicationRoot>
+      </TestProviders>
     );
 
     expect(screen.queryByLabelText("Field")).not.toBeInTheDocument();

@@ -1,7 +1,7 @@
 /* eslint-disable react/function-component-definition */
 
 import { Story } from "@storybook/react";
-import { ApplicationRoot } from "frontend/components/ApplicationRoot";
+import { TestProviders } from "__tests__/_/Provider";
 import { DropDownMenu, IProps } from ".";
 
 export default {
@@ -34,11 +34,11 @@ export default {
 };
 
 const Template: Story<IProps> = (args) => (
-  <ApplicationRoot>
+  <TestProviders>
     <div style={{ display: "flex", justifyContent: "center" }}>
       <DropDownMenu {...args} />
     </div>
-  </ApplicationRoot>
+  </TestProviders>
 );
 
 export const Default = Template.bind({});

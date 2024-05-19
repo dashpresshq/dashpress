@@ -1,5 +1,4 @@
 import { render, screen } from "@testing-library/react";
-import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 
 import CreateDashboardWidget from "pages/dashboard/[dashboardId]/widget/create";
 
@@ -7,6 +6,7 @@ import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 import userEvent from "@testing-library/user-event";
 import { closeAllToasts } from "__tests__/_/utils/closeAllToasts";
 import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
+import { TestProviders } from "__tests__/_/Provider";
 
 setupApiHandlers();
 
@@ -31,9 +31,9 @@ describe("pages/dashboard/[dashboardId]/widget/create", () => {
 
   it("should create summary widget", async () => {
     render(
-      <ApplicationRoot>
+      <TestProviders>
         <CreateDashboardWidget />
-      </ApplicationRoot>
+      </TestProviders>
     );
 
     await userEvent.type(
@@ -82,9 +82,9 @@ describe("pages/dashboard/[dashboardId]/widget/create", () => {
 
   it("should create table widget", async () => {
     render(
-      <ApplicationRoot>
+      <TestProviders>
         <CreateDashboardWidget />
-      </ApplicationRoot>
+      </TestProviders>
     );
 
     await userEvent.type(await screen.findByLabelText("Title"), "New Table");

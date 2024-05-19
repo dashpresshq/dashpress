@@ -1,13 +1,13 @@
 /* eslint-disable no-useless-escape */
 
 import { render, screen, within } from "@testing-library/react";
-import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 import userEvent from "@testing-library/user-event";
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 
 import EntityFormExtensionSettings from "pages/admin/[entity]/config/form";
 import { closeAllToasts } from "__tests__/_/utils/closeAllToasts";
 import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
+import { TestProviders } from "__tests__/_/Provider";
 
 setupApiHandlers();
 
@@ -38,9 +38,9 @@ describe("pages/admin/[entity]/config/form", () => {
   ])("$section section", ({ label, section, valid, validInput }) => {
     it("should show current section value", async () => {
       render(
-        <ApplicationRoot>
+        <TestProviders>
           <EntityFormExtensionSettings />
-        </ApplicationRoot>
+        </TestProviders>
       );
 
       await userEvent.click(await screen.findByRole("tab", { name: label }));
@@ -54,9 +54,9 @@ describe("pages/admin/[entity]/config/form", () => {
 
     it("should update when provided value correctly", async () => {
       render(
-        <ApplicationRoot>
+        <TestProviders>
           <EntityFormExtensionSettings />
-        </ApplicationRoot>
+        </TestProviders>
       );
 
       await userEvent.click(await screen.findByRole("tab", { name: label }));
@@ -83,9 +83,9 @@ describe("pages/admin/[entity]/config/form", () => {
 
     it("should display updated value", async () => {
       render(
-        <ApplicationRoot>
+        <TestProviders>
           <EntityFormExtensionSettings />
-        </ApplicationRoot>
+        </TestProviders>
       );
 
       await userEvent.click(await screen.findByRole("tab", { name: label }));
@@ -99,9 +99,9 @@ describe("pages/admin/[entity]/config/form", () => {
 
     it("should not update when invalid JS is provided", async () => {
       render(
-        <ApplicationRoot>
+        <TestProviders>
           <EntityFormExtensionSettings />
-        </ApplicationRoot>
+        </TestProviders>
       );
 
       await userEvent.click(await screen.findByRole("tab", { name: label }));
@@ -126,9 +126,9 @@ describe("pages/admin/[entity]/config/form", () => {
 
     it("should display previous section value", async () => {
       render(
-        <ApplicationRoot>
+        <TestProviders>
           <EntityFormExtensionSettings />
-        </ApplicationRoot>
+        </TestProviders>
       );
 
       await userEvent.click(await screen.findByRole("tab", { name: label }));
@@ -142,9 +142,9 @@ describe("pages/admin/[entity]/config/form", () => {
 
     it("should be able to be cleared", async () => {
       render(
-        <ApplicationRoot>
+        <TestProviders>
           <EntityFormExtensionSettings />
-        </ApplicationRoot>
+        </TestProviders>
       );
 
       await userEvent.click(await screen.findByRole("tab", { name: label }));
@@ -164,9 +164,9 @@ describe("pages/admin/[entity]/config/form", () => {
 
     it("should display cleared value correctly", async () => {
       render(
-        <ApplicationRoot>
+        <TestProviders>
           <EntityFormExtensionSettings />
-        </ApplicationRoot>
+        </TestProviders>
       );
 
       await userEvent.click(await screen.findByRole("tab", { name: label }));

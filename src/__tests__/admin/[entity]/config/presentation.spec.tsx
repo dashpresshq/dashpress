@@ -1,13 +1,13 @@
 /* eslint-disable no-useless-escape */
 
 import { render, screen, waitFor } from "@testing-library/react";
-import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 import userEvent from "@testing-library/user-event";
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 
 import EntityPresentationScriptSettings from "pages/admin/[entity]/config/presentation";
 import { closeAllToasts } from "__tests__/_/utils/closeAllToasts";
 import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
+import { TestProviders } from "__tests__/_/Provider";
 
 setupApiHandlers();
 
@@ -23,9 +23,9 @@ describe("pages/admin/[entity]/config/presentation", () => {
   );
   it("should show current section value", async () => {
     render(
-      <ApplicationRoot>
+      <TestProviders>
         <EntityPresentationScriptSettings />
-      </ApplicationRoot>
+      </TestProviders>
     );
 
     await waitFor(() => {
@@ -35,9 +35,9 @@ describe("pages/admin/[entity]/config/presentation", () => {
 
   it("should update when provided value correctly", async () => {
     render(
-      <ApplicationRoot>
+      <TestProviders>
         <EntityPresentationScriptSettings />
-      </ApplicationRoot>
+      </TestProviders>
     );
 
     await userEvent.type(
@@ -60,9 +60,9 @@ describe("pages/admin/[entity]/config/presentation", () => {
 
   it("should display updated value", async () => {
     render(
-      <ApplicationRoot>
+      <TestProviders>
         <EntityPresentationScriptSettings />
-      </ApplicationRoot>
+      </TestProviders>
     );
 
     await waitFor(() => {
@@ -74,9 +74,9 @@ describe("pages/admin/[entity]/config/presentation", () => {
 
   it("should not update when invalid JS is provided", async () => {
     render(
-      <ApplicationRoot>
+      <TestProviders>
         <EntityPresentationScriptSettings />
-      </ApplicationRoot>
+      </TestProviders>
     );
 
     await userEvent.type(screen.getByLabelText("Script"), "invalid");
@@ -95,9 +95,9 @@ describe("pages/admin/[entity]/config/presentation", () => {
 
   it("should display previous section value", async () => {
     render(
-      <ApplicationRoot>
+      <TestProviders>
         <EntityPresentationScriptSettings />
-      </ApplicationRoot>
+      </TestProviders>
     );
 
     await waitFor(() => {
@@ -109,9 +109,9 @@ describe("pages/admin/[entity]/config/presentation", () => {
 
   it("should be able to be cleared", async () => {
     render(
-      <ApplicationRoot>
+      <TestProviders>
         <EntityPresentationScriptSettings />
-      </ApplicationRoot>
+      </TestProviders>
     );
 
     await userEvent.clear(screen.getByLabelText("Script"));
@@ -128,9 +128,9 @@ describe("pages/admin/[entity]/config/presentation", () => {
 
   it("should display cleared value correctly", async () => {
     render(
-      <ApplicationRoot>
+      <TestProviders>
         <EntityPresentationScriptSettings />
-      </ApplicationRoot>
+      </TestProviders>
     );
 
     await waitFor(() => {

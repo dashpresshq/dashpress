@@ -1,10 +1,10 @@
 import { render, screen, waitFor } from "@testing-library/react";
-import { ApplicationRoot } from "frontend/components/ApplicationRoot";
 import userEvent from "@testing-library/user-event";
 import EntityDictionSettings from "pages/admin/[entity]/config/diction";
 
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
+import { TestProviders } from "__tests__/_/Provider";
 
 setupApiHandlers();
 
@@ -23,9 +23,9 @@ describe("pages/admin/[entity]/config/diction", () => {
 
   it("should display diction values", async () => {
     render(
-      <ApplicationRoot>
+      <TestProviders>
         <EntityDictionSettings />
-      </ApplicationRoot>
+      </TestProviders>
     );
     await waitFor(() => {
       expect(screen.getByLabelText("Plural")).toHaveValue("Plural entity-1");
@@ -35,9 +35,9 @@ describe("pages/admin/[entity]/config/diction", () => {
 
   it("should update diction successfully", async () => {
     render(
-      <ApplicationRoot>
+      <TestProviders>
         <EntityDictionSettings />
-      </ApplicationRoot>
+      </TestProviders>
     );
 
     await userEvent.type(screen.getByLabelText("Plural"), "Updated");
@@ -54,9 +54,9 @@ describe("pages/admin/[entity]/config/diction", () => {
 
   it("should display updated diction values", async () => {
     render(
-      <ApplicationRoot>
+      <TestProviders>
         <EntityDictionSettings />
-      </ApplicationRoot>
+      </TestProviders>
     );
     await waitFor(() => {
       expect(screen.getByLabelText("Plural")).toHaveValue(

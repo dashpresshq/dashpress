@@ -6,6 +6,9 @@ export function buildApiOptions<T>(
 ): Partial<UseQueryOptions<T>> {
   return {
     ...options,
+    meta: {
+      persist: options.persist,
+    },
     select: (data: T) => {
       if (options.selector) {
         return options.selector(data);

@@ -14,6 +14,11 @@ export const queryCache = new QueryCache();
 
 const queryClient = new QueryClient({
   queryCache,
+  defaultOptions: {
+    queries: {
+      staleTime: Infinity,
+    },
+  },
 });
 
 function QueryProvider({ children }: { children: ReactNode }) {

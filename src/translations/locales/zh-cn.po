@@ -13,9 +13,6 @@ msgstr ""
 "Plural-Forms: \n"
 "X-Generator: Poedit 3.4.2\n"
 
-msgid ""
-msgstr ""
-
 msgid "[[ name ]] is an invalid date"
 msgstr "[[ name ]]是无效日期"
 
@@ -88,17 +85,11 @@ msgstr ""
 msgid "{0} [{1}]"
 msgstr ""
 
-msgid "{0} {1}"
-msgstr ""
-
-msgid "{0} Configuration"
-msgstr "{0}配置"
-
 msgid "{0} Selections"
-msgstr ""
+msgstr "{0} 选中"
 
 msgid "{0} Validations"
-msgstr ""
+msgstr "{0}验证"
 
 msgid "{plural} Units"
 msgstr "{plural}单位"
@@ -166,8 +157,14 @@ msgstr "{value}年"
 msgid "{value} Years"
 msgstr "{value}年"
 
-msgid "2FA Tokens"
-msgstr "2FA令牌"
+msgid "1. Choosing A More Specific Data Type"
+msgstr "1. 选择更具体的数据类型"
+
+msgid "2. Managing Validations"
+msgstr "2. 验证方式管理"
+
+msgid "3. Configure Selection"
+msgstr "3. 配置选择"
 
 msgid "Access Key ID"
 msgstr "访问密钥 ID"
@@ -179,31 +176,31 @@ msgid "Account Profile"
 msgstr "账号信息"
 
 msgid "Account Setup"
-msgstr ""
+msgstr "账号设置"
 
 msgid "Account Was Successfully Setup"
 msgstr "账户设置成功"
 
 msgid "Accounts"
-msgstr ""
+msgstr "用户与角色管理"
 
 msgid "Action"
-msgstr "动作"
+msgstr "操作"
 
 msgid "Actions"
-msgstr "动作"
+msgstr "操作"
 
 msgid "Activate {0}"
 msgstr "激活 {0}"
 
 msgid "Activated"
-msgstr ""
+msgstr "已激活"
 
 msgid "Activating {0}"
 msgstr "激活 {0}"
 
 msgid "Add fields to this table from your prefer database tool to manage them here"
-msgstr ""
+msgstr "使用您喜欢的数据库工具添加字段"
 
 msgid "Add Filter"
 msgstr "筛选"
@@ -211,32 +208,20 @@ msgstr "筛选"
 msgid "Add Nested Filter"
 msgstr "添加嵌套筛选"
 
-msgid "Add New {0} And Select"
-msgstr "创建新的并选择{0}"
-
 msgid "Add New {singular}"
 msgstr "添加新{singular}"
-
-msgid "Add New And Select"
-msgstr "创建新的并选中"
 
 msgid "Add New Option"
 msgstr "添加新选项"
 
 msgid "Add new tables through your preferred database editor then restart this application."
-msgstr ""
+msgstr "使用您喜欢的数据库编辑器添加新表，然后重新启动程序。"
 
 msgid "Add New Validation"
 msgstr "添加新验证"
 
-msgid "All Dashboards"
-msgstr "所有仪表盘"
-
-msgid "All items were {actionText} successfully"
-msgstr "所有项目均已{actionText}成功"
-
 msgid "Allowed values are [[ options ]]"
-msgstr ""
+msgstr "允许[[ options ]]"
 
 msgid "Alphanumeric"
 msgstr "字母数字"
@@ -251,37 +236,13 @@ msgid "App"
 msgstr "APP"
 
 msgid "App Navigation"
-msgstr ""
+msgstr "对象列表"
 
 msgid "App Settings"
-msgstr ""
+msgstr "应用设置"
 
 msgid "Are you sure you want to do this?"
 msgstr "你确定你要这么做吗？"
-
-msgid "Associated Triggers"
-msgstr "关联的触发器"
-
-msgid "Associated Workflows"
-msgstr "关联的工作流程"
-
-msgid "Attach A Trigger"
-msgstr "连接触发器"
-
-msgid "Attach A Workflow"
-msgstr "连接工作流"
-
-msgid "Authenticator Token"
-msgstr "身份验证器令牌"
-
-msgid "Back To {0}"
-msgstr "返回{0}"
-
-msgid "Back to Sign In Page"
-msgstr "返回登录页"
-
-msgid "Bar Chart"
-msgstr "饼图"
 
 msgid "Before Submit"
 msgstr "提交前"
@@ -301,41 +262,14 @@ msgstr "蓝色"
 msgid "Body"
 msgstr ""
 
-msgid "Bookmark"
-msgstr "书签"
-
-msgid "Bookmarks"
-msgstr "书签"
-
 msgid "Boolean"
 msgstr "布尔值"
 
 msgid "Brown"
 msgstr "棕色"
 
-msgid "Bulk Delete"
-msgstr "批量删除"
-
-msgid "Bulk Deleting"
-msgstr "批量删除"
-
-msgid "Bulk Update"
-msgstr "批量更新"
-
-msgid "Can Access All Dashboards"
-msgstr "可以访问所有仪表盘"
-
-msgid "Can Access And Restore Soft Deleted Items"
-msgstr "可访问和恢复软删除的项目"
-
 msgid "Can Configure App"
 msgstr "可以配置应用程序"
-
-msgid "Can Export Data"
-msgstr "可导出数据"
-
-msgid "Can Impersonate Users"
-msgstr "可模拟用户"
 
 msgid "Can Manage All Entities"
 msgstr "可管理所有实体"
@@ -352,17 +286,11 @@ msgstr "可管理权限"
 msgid "Can Manage Users"
 msgstr "可管理用户"
 
-msgid "Can Manages Flows"
-msgstr "可管理流程"
-
 msgid "Can Reset Password"
 msgstr "可重置密码"
 
 msgid "Cancel"
 msgstr "取消"
-
-msgid "Change History"
-msgstr "变更历史"
 
 msgid "Change Language"
 msgstr "切换语言"
@@ -370,29 +298,8 @@ msgstr "切换语言"
 msgid "Channel"
 msgstr "频道"
 
-msgid "Clear selections"
-msgstr "清除选择"
-
 msgid "Click here to view details"
 msgstr "查看详情"
-
-msgid "Client Script"
-msgstr "客户端脚本"
-
-msgid "Clone"
-msgstr "复制"
-
-msgid "Clone {0}"
-msgstr "复制{0}"
-
-msgid "Clone Settings"
-msgstr "复制设置"
-
-msgid "Cloned"
-msgstr ""
-
-msgid "Cloning"
-msgstr "复制"
 
 msgid "Close Canvas"
 msgstr "关闭画布"
@@ -400,26 +307,14 @@ msgstr "关闭画布"
 msgid "Color"
 msgstr "颜色"
 
-msgid "Column"
-msgstr "列"
-
 msgid "Column Labels Settings"
 msgstr "列标签设置"
 
 msgid "Column Types Settings"
 msgstr "列类型设置"
 
-msgid "Complete Setup"
-msgstr "完成设置"
-
-msgid "Completing Setup"
-msgstr "完成设置"
-
-msgid "Condition"
-msgstr "条件"
-
 msgid "Configurations"
-msgstr ""
+msgstr "设置"
 
 msgid "Configure"
 msgstr "设置"
@@ -433,32 +328,20 @@ msgstr "配置验证方式"
 msgid "Confirm"
 msgstr "确认"
 
-msgid "Confirm Data Restoration"
-msgstr "确认数据还原"
-
 msgid "Confirm Delete"
 msgstr "确认删除"
-
-msgid "Confirmation Text"
-msgstr "确认文字"
 
 msgid "Connection URL"
 msgstr "连接链接"
 
 msgid "Constant"
-msgstr "常量"
+msgstr "全局常量"
 
 msgid "Constants"
-msgstr "常量"
+msgstr "全局常量"
 
 msgid "Contains"
 msgstr "包含"
-
-msgid "Continue"
-msgstr "继续"
-
-msgid "Copy To Clipboard"
-msgstr "复制到剪贴板"
 
 msgid "Create"
 msgstr "创建"
@@ -473,7 +356,7 @@ msgid "Create Fields Order"
 msgstr "创建字段顺序"
 
 msgid "Create first super admin account"
-msgstr ""
+msgstr "创建超级管理员"
 
 msgid "Create It"
 msgstr "创建"
@@ -487,32 +370,11 @@ msgstr "创建{singular}"
 msgid "Credentials Was Successfully Setup"
 msgstr "证书设置成功"
 
-msgid "Cron Expression"
-msgstr "Cron表达式"
-
 msgid "CRUD"
 msgstr "CRUD"
 
 msgid "CRUD Settings"
 msgstr "CRUD设置"
-
-msgid "cURL Command"
-msgstr "cURL命令"
-
-msgid "Curve"
-msgstr "曲线"
-
-msgid "Custom Action"
-msgstr "自定义操作"
-
-msgid "Custom Actions"
-msgstr "自定义操作"
-
-msgid "Custom Dashboard"
-msgstr "自定义仪表盘"
-
-msgid "Custom Dashboards"
-msgstr "自定义仪表盘"
 
 msgid "Custom Date"
 msgstr "自定义日期"
@@ -535,23 +397,28 @@ msgstr "仪表盘组件"
 msgid "Dashboards"
 msgstr "仪表盘"
 
+msgid ""
+"DashPress is not a database client, meaning any action taken here\n"
+"will not reflect on your database."
+msgstr "DashPress不是数据库客户端，这意味着在此处执行的任何操作都不会反映在您的数据库上。"
+
+msgid ""
+"DashPress will try to pick all the database validations that it can, so\n"
+"it knows the\n"
+"<code> non-nullable</code> constraint means the field is\n"
+"<code>required</code> and so on. We also translate other constraints to\n"
+"validations like <code>maxLength</code>, <code>isDate</code>,\n"
+"<code>unique</code>, <code>isBoolean</code> etc."
+msgstr ""
+"DashPress 将尝试选择它可以选择的所有数据库验证，因此\n"
+"它知道\n"
+"<code> non-nullable</code> 约束意味着该字段是\n"
+"<code>必需</code>等等。我们还将其他约束转化为\n"
+"验证，如 <code>maxLength</code>、<code>isDate</code>、\n"
+"<code>unique</code>、<code>isBoolean</code> 等。"
+
 msgid "Data"
 msgstr "数据"
-
-msgid "Data copied to clipboard successfully"
-msgstr "数据已成功复制到剪贴板"
-
-msgid "Data Event"
-msgstr "数据事件"
-
-msgid "Data Events"
-msgstr "数据事件"
-
-msgid "Data exported successfully"
-msgstr "数据导出成功"
-
-msgid "Data Key"
-msgstr "数据键值"
 
 msgid "Database"
 msgstr "数据库"
@@ -575,7 +442,7 @@ msgid "Deactivate {0}"
 msgstr "停用{0}"
 
 msgid "Deactivated"
-msgstr ""
+msgstr "已停用"
 
 msgid "Deactivating {0}"
 msgstr "停用{0}"
@@ -586,14 +453,8 @@ msgstr "删除"
 msgid "Delete {singular}"
 msgstr "删除{singular}"
 
-msgid "Delete Edge"
-msgstr ""
-
 msgid "Delete Selection"
 msgstr "删除所选内容"
-
-msgid "Description"
-msgstr "描述"
 
 msgid "Details"
 msgstr "查看详情"
@@ -609,6 +470,13 @@ msgstr "字典"
 
 msgid "Diction Settings"
 msgstr "字典设置"
+
+msgid ""
+"Disabling an entity here means it will not be a part of this\n"
+"application. It will be like it doesn&apos;t exist. Disabled entities\n"
+"will not show anywhere on the application and any request made to it\n"
+"will result in a 404 response."
+msgstr "将实体禁用可理解为在应用中删除该实体。实际上，它就像不存在一样。禁用的实体不会在应用程序的任何地方显示，并且对其发出的任何请求都将导致 404 响应。"
 
 msgid "Display Format"
 msgstr "显示格式"
@@ -640,65 +508,26 @@ msgstr "空表格"
 msgid "Enable {0} Functionality"
 msgstr "启用{0}功能"
 
-msgid "Enable Area"
-msgstr "启用区域"
-
-msgid "Enable Points"
-msgstr "启用点"
-
-msgid "Enable two-factor authentication"
-msgstr ""
-
 msgid "Enabled Entities"
-msgstr "已启用实体"
+msgstr "已启用的对象列表"
 
 msgid "Enabled Entities Settings"
-msgstr "启用实体设置"
+msgstr "已启用对象设置"
 
 msgid "Enabled Relations"
 msgstr "已启用关系"
-
-msgid "Enter a security token from your authenticator app"
-msgstr ""
-
-msgid "Enter one of your unsed recovery codes"
-msgstr ""
 
 msgid "Enter your credentials to continue"
 msgstr "输入您的凭证以继续"
 
 msgid "Enter your database credentials to continue"
-msgstr ""
+msgstr "输入数据库凭证以继续使用"
 
 msgid "Entities"
 msgstr "实体"
 
-msgid "Entities Enabled For Add New And Select"
-msgstr "可添加新实体和选择实体"
-
-msgid "Entities Enabled For Change History"
-msgstr "启用变更历史的实体"
-
-msgid "Entity"
-msgstr "实体"
-
-msgid "Entity Action"
-msgstr "实体操作"
-
-msgid "Entity Create Form Layout"
-msgstr "实体创建表单布局"
-
-msgid "Entity Field"
-msgstr "实体字段"
-
-msgid "Entity ID"
-msgstr "实体ID"
-
 msgid "Entity Tab"
 msgstr "实体选项卡"
-
-msgid "Entity Update Form Layout"
-msgstr "更新实体表单布局"
 
 msgid "Environment Variable"
 msgstr "环境变量"
@@ -715,23 +544,8 @@ msgstr "与其他字段相同"
 msgid "Error message"
 msgstr "错误信息"
 
-msgid "Error Occured Setting Up Your 2FA Token"
-msgstr "设置2FA令牌时发生错误"
-
-msgid "Every 6 Hours"
-msgstr "每6小时"
-
 msgid "Explain {title}"
 msgstr "解释{title}"
-
-msgid "Export"
-msgstr "导出"
-
-msgid "Exporting"
-msgstr "导出"
-
-msgid "External Link"
-msgstr "外部链接"
 
 msgid "Field"
 msgstr "字段"
@@ -766,23 +580,11 @@ msgstr "存储设置"
 msgid "File Uploads Settings"
 msgstr "文件上传设置"
 
-msgid "Flow"
-msgstr "Flow"
-
-msgid "Flow Trigger Attachment"
-msgstr "触发流程附件"
-
-msgid "Flow Trigger Attachments"
-msgstr "触发流程附件"
-
-msgid "Flows"
-msgstr "Flow"
-
 msgid "Follow us on Twitter"
 msgstr "关注我们的推特"
 
 msgid "For security reasons, Please input your account password to reveal credentials"
-msgstr ""
+msgstr "出于安全原因，请输入您的账户密码来显示凭证"
 
 msgid "Form"
 msgstr "表单"
@@ -792,12 +594,6 @@ msgstr "表单操作"
 
 msgid "Form Actions"
 msgstr "表单操作"
-
-msgid "Form Field"
-msgstr "表单字段"
-
-msgid "Form Fields"
-msgstr "表单字段"
 
 msgid "Form Scripts"
 msgstr "表单脚本"
@@ -817,9 +613,6 @@ msgstr "常规数据设置"
 msgid "Genesis"
 msgstr "起源"
 
-msgid "Global Action"
-msgstr "全局操作"
-
 msgid "Go Back"
 msgstr "返回"
 
@@ -832,14 +625,8 @@ msgstr "大于其他字段"
 msgid "Green"
 msgstr "绿色"
 
-msgid "Group Mode"
-msgstr "群组模式"
-
-msgid "Grouped"
-msgstr "群组"
-
-msgid "Header"
-msgstr "头部"
+msgid "Having said that, there are three things you can do in this section"
+msgstr "说了这么多，这个部分有三件事情是您可以做的"
 
 msgid "Headers"
 msgstr "头部"
@@ -847,11 +634,27 @@ msgstr "头部"
 msgid "Height"
 msgstr "高度"
 
+msgid ""
+"Here you can be more specific about the type of your field, You can\n"
+"choose a more appropriate field type like <code>email</code>,\n"
+"<code> URL</code>, <code> color</code>\n"
+"<code> image</code> over the plain <code>text</code> field type."
+msgstr ""
+"在这里您可以更具体地了解您的字段类型，您可以\n"
+"选择更合适的字段类型，例如<code>email</code>，\n"
+"<code> URL</code>，<code> color</code>\n"
+"<code> image</code> 覆盖 <code>text</code> 字段类型。"
+
+msgid ""
+"Here you will be able to order the fields around and the order will also\n"
+"be reflected on tables, details view, and forms."
+msgstr "在这里，您可以对字段进行排序，排序的顺序也会在表格、详情视图和表单中反映出来。"
+
 msgid "Hi, {0}"
 msgstr "你好，{0}"
 
 msgid "Hide Password"
-msgstr ""
+msgstr "隐藏密码"
 
 msgid "Home"
 msgstr "首页"
@@ -859,35 +662,20 @@ msgstr "首页"
 msgid "Home Link"
 msgstr "首页链接"
 
-msgid "Horizontal"
-msgstr "水平"
-
 msgid "Host"
 msgstr "主机"
 
 msgid "Hour"
 msgstr "小时"
 
-msgid "I have safely saved my recovery tokens"
-msgstr "我已安全保存了我的恢复令牌"
-
 msgid "I Want To Help With Translation"
-msgstr ""
+msgstr "我想帮忙翻译"
 
 msgid "Icon"
 msgstr "图标"
 
-msgid "ID"
-msgstr ""
-
 msgid "Image"
 msgstr "图像"
-
-msgid "Impersonate User"
-msgstr "模拟用户"
-
-msgid "Impersonating User"
-msgstr "模拟用户"
 
 msgid "Incorrect value"
 msgstr "错误值"
@@ -898,12 +686,6 @@ msgstr "蓝靛"
 msgid "Initial Values"
 msgstr "初始值"
 
-msgid "Inline Edit"
-msgstr "行内编辑"
-
-msgid "Inline Edit Settings"
-msgstr "行内编辑"
-
 msgid "Input {deactivationKey} to continue"
 msgstr "输入{deactivationKey}继续"
 
@@ -912,9 +694,6 @@ msgstr "集成"
 
 msgid "Integrations"
 msgstr "集成"
-
-msgid "IP Address"
-msgstr "IP地址"
 
 msgid "Is In"
 msgstr "位于"
@@ -949,9 +728,6 @@ msgstr "语言"
 msgid "Large Logo"
 msgstr "大图标"
 
-msgid "Layout"
-msgstr ""
-
 msgid "Less Than"
 msgstr "少于"
 
@@ -964,41 +740,20 @@ msgstr "明亮"
 msgid "Light Color Scheme"
 msgstr "浅色主题配色方案"
 
-msgid "Line Chart"
-msgstr "折线图"
-
-msgid "Link"
-msgstr "链接"
-
 msgid "Link Entity"
 msgstr "实体链接"
 
 msgid "Link Users To Database"
 msgstr "建立用户数据库"
 
-msgid "List"
-msgstr "列表"
-
-msgid "Loading..."
-msgstr "加载中..."
-
 msgid "Log Out"
 msgstr "退出登录"
-
-msgid "Loop"
-msgstr "循环"
 
 msgid "Manage {plural}"
 msgstr "管理{plural}"
 
 msgid "Manage {title}"
 msgstr "管理{title}"
-
-msgid "Manage Plan"
-msgstr "管理计划"
-
-msgid "Manage Sensitive Fields"
-msgstr "管理敏感字段"
 
 msgid "Manage Variables"
 msgstr "变量管理"
@@ -1011,9 +766,6 @@ msgstr "最长长度"
 
 msgid "Maximum file size to upload in MB"
 msgstr "上传的最大文件大小（MB）"
-
-msgid "Menu Item"
-msgstr "菜单选项"
 
 msgid "Menu Settings"
 msgstr "菜单设置"
@@ -1030,14 +782,8 @@ msgstr "最小"
 msgid "Min Length"
 msgstr "最小长度"
 
-msgid "Modify Data Before Cloning"
-msgstr "复制前修改数据"
-
 msgid "Month"
 msgstr "月份"
-
-msgid "Mutate"
-msgstr "变异"
 
 msgid "My Account"
 msgstr "我的账户"
@@ -1045,23 +791,14 @@ msgstr "我的账户"
 msgid "Name"
 msgstr "名称"
 
-msgid "Navigation Menu"
-msgstr "导航菜单"
-
-msgid "New"
-msgstr "新"
-
 msgid "New Password"
 msgstr "新密码"
 
 msgid "New Password Again"
 msgstr "重复新密码"
 
-msgid "New Value"
-msgstr "新值"
-
 msgid "No"
-msgstr ""
+msgstr "不"
 
 msgid "No {singular} Has Been Added Yet"
 msgstr "没有{singular}被添加"
@@ -1078,23 +815,17 @@ msgstr "当前{0}没有结果。"
 msgid "No Search Results"
 msgstr "没有搜索结果"
 
-msgid "Node"
-msgstr "节点"
-
-msgid "Node Label"
-msgstr "节点标签"
-
-msgid "Node Properties"
-msgstr "节点属性"
-
-msgid "Nodes"
-msgstr "节点"
-
 msgid "Not Equal"
 msgstr "不等于"
 
 msgid "Not Equal To Other Field"
 msgstr "不等于其他字段"
+
+msgid ""
+"Note that validations picked from the database can&apos;t be removed\n"
+"from the app. The only way to remove them is to delete them from the\n"
+"database and restart your app."
+msgstr "请注意，从数据库中提取的验证规则无法从应用程序中删除。唯一的方法是从数据库中删除它们，然后重新启动您的应用程序。"
 
 msgid "Now"
 msgstr "当前"
@@ -1104,9 +835,6 @@ msgstr "数字"
 
 msgid "Old Password"
 msgstr "旧密码"
-
-msgid "Old Value"
-msgstr "旧值"
 
 msgid "On Create"
 msgstr "创建"
@@ -1133,10 +861,7 @@ msgid "Orange"
 msgstr "橙色"
 
 msgid "Order"
-msgstr "顺序"
-
-msgid "Ordered"
-msgstr ""
+msgstr "排序"
 
 msgid "Password"
 msgstr "密码"
@@ -1149,12 +874,6 @@ msgstr "演示账户的密码将不会被更改"
 
 msgid "Persistent Query"
 msgstr "持久查询"
-
-msgid "Personalize This Table"
-msgstr "个性化表格"
-
-msgid "Pie Chart"
-msgstr "饼图"
 
 msgid "Plural"
 msgstr "复数"
@@ -1179,15 +898,6 @@ msgstr "个人信息"
 
 msgid "Quarter"
 msgstr "季度"
-
-msgid "Query"
-msgstr "查询"
-
-msgid "Recovery Code"
-msgstr "恢复码"
-
-msgid "Recovery tokens copied to clipboard"
-msgstr "恢复令牌已复制到剪贴板"
 
 msgid "Red"
 msgstr "红色"
@@ -1216,9 +926,6 @@ msgstr "关联"
 msgid "Relations Order"
 msgstr "关系顺序"
 
-msgid "Relations To Clone Along"
-msgstr "复制关联信息"
-
 msgid "Relationship Settings"
 msgstr "关联设置"
 
@@ -1231,26 +938,14 @@ msgstr "移除"
 msgid "Remove Nested Filter"
 msgstr "移除嵌套过滤器"
 
-msgid "Request ID"
-msgstr "请求ID"
-
-msgid "Request Method"
-msgstr "请求方法"
-
 msgid "Required"
 msgstr "必填项"
 
 msgid "Reset"
 msgstr "重置"
 
-msgid "Reset 2FA Recovery Tokens"
-msgstr "重置2FA恢复令牌"
-
 msgid "Reset Password"
 msgstr "重置密码"
-
-msgid "Reset Recovery Tokens"
-msgstr "重置恢复令牌"
 
 msgid "Reset User Password"
 msgstr "重置用户密码"
@@ -1258,20 +953,11 @@ msgstr "重置用户密码"
 msgid "Resetting Password"
 msgstr "重置密码"
 
-msgid "Response"
-msgstr "响应"
-
-msgid "Restore"
-msgstr "恢复"
-
-msgid "Restored"
-msgstr ""
-
 msgid "Reveal Credentials"
-msgstr ""
+msgstr "展示凭证"
 
 msgid "Revealing Credentials"
-msgstr ""
+msgstr "展示凭证"
 
 msgid "Rich Text"
 msgstr "富文本"
@@ -1288,29 +974,14 @@ msgstr "角色权限"
 msgid "Roles"
 msgstr "角色"
 
-msgid "Route ID"
-msgstr "路由ID"
-
 msgid "Save"
 msgstr "保存"
 
 msgid "Save {singular}"
 msgstr "保存{singular}"
 
-msgid "Save Current Filters"
-msgstr "保存当前过滤器"
-
-msgid "Saving"
-msgstr "保存"
-
 msgid "Saving {singular}"
 msgstr "保存{singular}"
-
-msgid "Scheduler"
-msgstr "调度器"
-
-msgid "Schedulers"
-msgstr "调度器"
 
 msgid "Script"
 msgstr "脚本"
@@ -1328,19 +999,10 @@ msgid "Secrets"
 msgstr "密钥"
 
 msgid "Select {0}"
-msgstr ""
-
-msgid "Select Node Type"
-msgstr "选择节点类型"
-
-msgid "Select Trigger"
-msgstr "选择触发条件"
+msgstr "选择{0}"
 
 msgid "Select Value"
-msgstr ""
-
-msgid "Select Workflow"
-msgstr "选择工作流"
+msgstr "选择参数"
 
 msgid "Selection"
 msgstr "选择"
@@ -1366,20 +1028,11 @@ msgstr "发件人电子邮件"
 msgid "Sender Name"
 msgstr "发件人名称"
 
-msgid "Sensitive Field"
-msgstr "敏感字段"
-
-msgid "Sensitive Fields"
-msgstr "敏感字段"
-
 msgid "Setting Up Account"
 msgstr "账户设置"
 
 msgid "Setting Up Credentials"
 msgstr "设置凭据"
-
-msgid "Settings"
-msgstr "设置"
 
 msgid "Setup"
 msgstr "配置"
@@ -1391,31 +1044,13 @@ msgid "Setup Credentials"
 msgstr "配置凭据"
 
 msgid "Setup DB credentials"
-msgstr ""
-
-msgid "Share"
-msgstr "分享"
-
-msgid "Shared"
-msgstr ""
-
-msgid "Sharing"
-msgstr "分享"
-
-msgid "Show"
-msgstr ""
+msgstr "设置数据库凭证"
 
 msgid "Show Password"
-msgstr ""
-
-msgid "Show Soft Deleted Items And The Restore Button"
-msgstr "显示软删除项目和恢复按钮"
-
-msgid "Show Up In Roles And Permissions"
-msgstr "显示在角色和权限中"
+msgstr "展示密码"
 
 msgid "Showing <0/> entries of <1>{0}</1> results"
-msgstr "显示<0/>条目 <1>{0}</1> 结果"
+msgstr "<0/>/页 共<1>{0}</1>条"
 
 msgid "Sign In"
 msgstr "登录"
@@ -1427,7 +1062,7 @@ msgid "Singular"
 msgstr ""
 
 msgid "Site"
-msgstr "站点"
+msgstr "站点设置"
 
 msgid "Site Settings"
 msgstr "站点设置"
@@ -1435,41 +1070,20 @@ msgstr "站点设置"
 msgid "Small Logo"
 msgstr "小图标"
 
-msgid "Soft Delete"
-msgstr "软删除"
-
-msgid "Soft Delete Settings"
-msgstr "软删除设置"
-
-msgid "Stacked"
-msgstr "堆叠"
-
 msgid "Star us on Github"
 msgstr "谢谢给我们项目Star"
 
 msgid "Start of year"
 msgstr "年初"
 
-msgid "State Script"
-msgstr "状态脚本"
-
 msgid "Storage Key"
 msgstr "存储密钥"
-
-msgid "Strategy"
-msgstr "策略"
 
 msgid "String"
 msgstr ""
 
 msgid "Subject"
 msgstr "主题"
-
-msgid "Submit"
-msgstr "提交"
-
-msgid "Submitting"
-msgstr "提交"
 
 msgid "Summary Card"
 msgstr "摘要卡片"
@@ -1478,10 +1092,10 @@ msgid "SVG"
 msgstr ""
 
 msgid "System"
-msgstr "系统"
+msgstr "系统设置"
 
 msgid "System Info"
-msgstr "系统设置"
+msgstr "系统信息"
 
 msgid "System Settings"
 msgstr "系统设置"
@@ -1494,12 +1108,6 @@ msgstr "表格列设置"
 
 msgid "Table Fields Order"
 msgstr "表字段顺序"
-
-msgid "Table Personalization"
-msgstr "表格个性化"
-
-msgid "Table Personalizations"
-msgstr "表格个性化"
 
 msgid "Table View"
 msgstr "表格视图"
@@ -1516,35 +1124,43 @@ msgstr "文本"
 msgid "Textarea"
 msgstr "文本区域"
 
+msgid ""
+"The <code> Configure Validation</code> button allows you to add more\n"
+"validations that we can&apos;t possibly get from the database like\n"
+"<code>minLength</code>,<code> regex</code>, <code>alphanumeric</code>,\n"
+"<code>matchOtherField</code>, etc. We also provide a text input for you\n"
+"to customize the validation message."
+msgstr ""
+"<code> 配置验证</code> 按钮允许您添加更多\n"
+"我们不可能从数据库中获得的验证，例如\n"
+"<code>minLength</code>、<code> 正则表达式</code>、<code>字母数字</code>、\n"
+"<code>matchOtherField</code>等。我们还为您提供文本输入\n"
+"自定义验证消息。"
+
 msgid "Theme"
-msgstr "主题"
+msgstr "主题设置"
 
 msgid "Theme Settings"
 msgstr "主题设置"
 
-msgid "This {0} Has No Form"
-msgstr "此{0}无表格"
-
 msgid "This action does not have configuration"
-msgstr ""
-
-msgid "This entity has no fields"
-msgstr ""
+msgstr "此操作没有配置"
 
 msgid "This entity has no relations"
 msgstr "该实体没有关联"
 
-msgid "This flow should be queued and executed asynchronously (recommended for long running flows, requires Redis)"
-msgstr "此流程应该排队并异步执行（建议用于长时间运行的流程，需要 Redis）"
+msgid ""
+"This is a good place to toggle off entities in the database that\n"
+"don&apos;t have much business value, for example, migrations, logs, etc."
+msgstr "这是一个很好的地方，可以在数据库中切换关闭那些没有太多业务价值的实体，比如迁移、日志等。"
 
-msgid "This trigger has no workflow attached"
-msgstr "此触发器未附加任何工作流"
-
-msgid "This workflow has no trigger attached"
-msgstr "此工作流程未附加触发器"
-
-msgid "Time Changed"
-msgstr "时间变化"
+msgid ""
+"This tab enables you to rename the label of the field. Say you want the\n"
+"<code> name</code> to be called <code>Full Name</code>, or\n"
+"<code>updatedAt</code> to be called <code>Last Updated</code>; then you\n"
+"simply input the desired name under the field and submit and the column\n"
+"will be renamed everywhere."
+msgstr "此选项卡允许您重命名字段的标签。假设您想要将<code> name</code>改为<code>全名</code>，或者将<code>updatedAt</code>改为<code>最后更新时间</code>；然后您只需在字段下输入所需的名称，然后提交，列名将在所有地方被重命名。"
 
 msgid "Title"
 msgstr "标题"
@@ -1564,13 +1180,13 @@ msgstr "令牌有效期（天）"
 msgid "Trigger"
 msgstr "触发器"
 
-msgid "Try Out 25+ Pro Features"
-msgstr "试用25+专业功能"
-
-msgid "Two Factor Authentication"
-msgstr ""
+msgid "Two quick notes as we head into this section"
+msgstr "以下有两点需要注意："
 
 msgid "Type"
+msgstr "类型"
+
+msgid "Types"
 msgstr "类型"
 
 msgid "Update"
@@ -1603,12 +1219,6 @@ msgstr "使用颜色"
 msgid "Use Icon"
 msgstr "使用图标"
 
-msgid "Use OTP Token"
-msgstr ""
-
-msgid "Use Recovery Code"
-msgstr ""
-
 msgid "Use SSL"
 msgstr "使用SSL"
 
@@ -1637,16 +1247,7 @@ msgid "Value"
 msgstr "值"
 
 msgid "Variables"
-msgstr "变量"
-
-msgid "Verifing"
-msgstr "验证"
-
-msgid "Verify"
-msgstr "验证"
-
-msgid "Vertical"
-msgstr "垂直"
+msgstr "全局常量和密钥"
 
 msgid "View"
 msgstr "查看"
@@ -1660,14 +1261,20 @@ msgstr "紫色"
 msgid "Visit our website"
 msgstr "访问我们网站"
 
-msgid "Webhook"
-msgstr ""
-
-msgid "Webhooks"
-msgstr ""
+msgid ""
+"We strongly advise that you edit your schema to minimize your\n"
+"touching of this section."
+msgstr "我们强烈建议您编辑您的架构以最大程度地减少对此部分的操作。"
 
 msgid "Week"
 msgstr "星期"
+
+msgid ""
+"When the field is an enum field or you select <code>selection</code> as\n"
+"the type, You will see a <code>Configure Selections</code> button which\n"
+"will allow you to select colors for enum field types and manage the\n"
+"selections for the <code>selection</code> type."
+msgstr "当字段是枚举字段，或者您选择<code>selection</code>作为类型时，您将会看到一个<code>配置选择</code>按钮，它将允许您为枚举字段类型选择颜色，并管理<code>selection</code>类型的选项。"
 
 msgid "Widget Script"
 msgstr "部件脚本"
@@ -1675,23 +1282,39 @@ msgstr "部件脚本"
 msgid "Width"
 msgstr "宽度"
 
-msgid "Workflow"
-msgstr "工作流"
-
-msgid "Workflows"
-msgstr "工作流"
-
-msgid "X Label"
-msgstr "X轴标签"
-
-msgid "Y Label"
-msgstr "Y轴标签"
-
 msgid "Year"
 msgstr "年份"
 
 msgid "Yes"
 msgstr "是"
+
+msgid ""
+"You will also see that the selections are narrowed as you will not see\n"
+"an\n"
+"<code> email</code> selection for a numerical field nor will you see the\n"
+"<code>number</code> for the\n"
+"<code> text</code> field. This is to eliminate the possibility of an\n"
+"invalid selection."
+msgstr ""
+"您还会看到选择范围缩小，因为您看不到\n"
+"一个\n"
+"数字字段的 <code> email</code> 选择，您也不会看到\n"
+"<code>编号</code> 为\n"
+"<code> 文本</code> 字段。这是为了消除以下可能性：\n"
+"选择无效。"
+
+msgid ""
+"You will be able to make field-level customizations on the tables,\n"
+"details, create, and edit views. We have three tabs here, so let&apos;s\n"
+"start with the first."
+msgstr "您可以在表格、详情、创建和编辑视图中进行字段级别的自定义。我们这里有三个选项卡，让我们从第一个开始。"
+
+msgid ""
+"You will see that some field types are disabled and these are for fields\n"
+"like <code>boolean</code>, <code>date</code>, <code>enum</code>, etc.\n"
+"which really don&apos;t have sister types so there is nothing you can\n"
+"update it to."
+msgstr "您会注意到一些字段类型是被禁用的，比如<code>boolean</code>、<code>date</code>、<code>enum</code>等，因为这些字段类型实际上没有对应的姐妹类型，所以无法更新它们。"
 
 msgid "Your Users Table"
 msgstr "用户表"

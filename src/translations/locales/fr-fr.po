@@ -88,12 +88,6 @@ msgstr "{0} - {1}"
 msgid "{0} [{1}]"
 msgstr "{0} [{1}]"
 
-msgid "{0} {1}"
-msgstr "{0} {1}"
-
-msgid "{0} Configuration"
-msgstr "{0} Configuration"
-
 msgid "{0} Selections"
 msgstr "{0} Sélections"
 
@@ -166,8 +160,14 @@ msgstr "{value} Année"
 msgid "{value} Years"
 msgstr "{value} années"
 
-msgid "2FA Tokens"
-msgstr "Jetons 2FA"
+msgid "1. Choosing A More Specific Data Type"
+msgstr ""
+
+msgid "2. Managing Validations"
+msgstr ""
+
+msgid "3. Configure Selection"
+msgstr ""
 
 msgid "Access Key ID"
 msgstr "ID de clé d'accès"
@@ -211,14 +211,8 @@ msgstr "Ajouter un filtre"
 msgid "Add Nested Filter"
 msgstr "Ajouter un filtre imbriqué"
 
-msgid "Add New {0} And Select"
-msgstr "Ajoutez un nouveau {0} et sélectionnez"
-
 msgid "Add New {singular}"
 msgstr "Ajouter un nouveau {singular}"
-
-msgid "Add New And Select"
-msgstr "Ajouter un nouveau et sélectionner"
 
 msgid "Add New Option"
 msgstr "Ajouter une nouvelle option"
@@ -228,12 +222,6 @@ msgstr "Ajoutez de nouvelles tables via votre éditeur de base de données préf
 
 msgid "Add New Validation"
 msgstr "Ajouter une nouvelle validation"
-
-msgid "All Dashboards"
-msgstr "Tous les tableaux de bord"
-
-msgid "All items were {actionText} successfully"
-msgstr "Tous les éléments ont été {actionText} avec succès"
 
 msgid "Allowed values are [[ options ]]"
 msgstr "Les valeurs autorisées sont [[ options ]]"
@@ -259,30 +247,6 @@ msgstr ""
 msgid "Are you sure you want to do this?"
 msgstr "Es-tu sûr de vouloir faire ça?"
 
-msgid "Associated Triggers"
-msgstr "Déclencheurs associés"
-
-msgid "Associated Workflows"
-msgstr "Flux de travail associés"
-
-msgid "Attach A Trigger"
-msgstr "Attacher un déclencheur"
-
-msgid "Attach A Workflow"
-msgstr "Joindre un flux de travail"
-
-msgid "Authenticator Token"
-msgstr "Jeton d'authentification"
-
-msgid "Back To {0}"
-msgstr "Retour à {0}"
-
-msgid "Back to Sign In Page"
-msgstr "Retour à la page de connexion"
-
-msgid "Bar Chart"
-msgstr "Diagramme à bandes"
-
 msgid "Before Submit"
 msgstr "Avant de soumettre"
 
@@ -301,41 +265,14 @@ msgstr "Bleu"
 msgid "Body"
 msgstr "Corps"
 
-msgid "Bookmark"
-msgstr "Signet"
-
-msgid "Bookmarks"
-msgstr "Signets"
-
 msgid "Boolean"
 msgstr "Booléen"
 
 msgid "Brown"
 msgstr "Brun"
 
-msgid "Bulk Delete"
-msgstr "Suppression groupée"
-
-msgid "Bulk Deleting"
-msgstr "Suppression groupée"
-
-msgid "Bulk Update"
-msgstr "Mise à jour groupée"
-
-msgid "Can Access All Dashboards"
-msgstr "Peut accéder à tous les tableaux de bord"
-
-msgid "Can Access And Restore Soft Deleted Items"
-msgstr "Peut accéder et restaurer les éléments supprimés de manière logicielle"
-
 msgid "Can Configure App"
 msgstr "Peut configurer l'application"
-
-msgid "Can Export Data"
-msgstr "Peut exporter des données"
-
-msgid "Can Impersonate Users"
-msgstr "Peut usurper l'identité des utilisateurs"
 
 msgid "Can Manage All Entities"
 msgstr "Peut gérer toutes les entités"
@@ -352,17 +289,11 @@ msgstr "Peut gérer les autorisations"
 msgid "Can Manage Users"
 msgstr "Peut gérer les utilisateurs"
 
-msgid "Can Manages Flows"
-msgstr "Peut gérer les flux"
-
 msgid "Can Reset Password"
 msgstr "Peut réinitialiser le mot de passe"
 
 msgid "Cancel"
 msgstr "Annuler"
-
-msgid "Change History"
-msgstr "Historique des modifications"
 
 msgid "Change Language"
 msgstr "Changer la langue"
@@ -370,29 +301,8 @@ msgstr "Changer la langue"
 msgid "Channel"
 msgstr "Canal"
 
-msgid "Clear selections"
-msgstr "Effacer les sélections"
-
 msgid "Click here to view details"
 msgstr "Cliquez ici pour voir les détails"
-
-msgid "Client Script"
-msgstr "Script client"
-
-msgid "Clone"
-msgstr "Cloner"
-
-msgid "Clone {0}"
-msgstr "Cloner {0}"
-
-msgid "Clone Settings"
-msgstr "Paramètres de clonage"
-
-msgid "Cloned"
-msgstr "Cloné"
-
-msgid "Cloning"
-msgstr "Clonage"
 
 msgid "Close Canvas"
 msgstr "Fermer la toile"
@@ -400,23 +310,11 @@ msgstr "Fermer la toile"
 msgid "Color"
 msgstr "Couleur"
 
-msgid "Column"
-msgstr "Colonne"
-
 msgid "Column Labels Settings"
 msgstr "Paramètres des étiquettes de colonnes"
 
 msgid "Column Types Settings"
 msgstr "Paramètres des types de colonnes"
-
-msgid "Complete Setup"
-msgstr "Configuration complète"
-
-msgid "Completing Setup"
-msgstr "Fin de la configuration"
-
-msgid "Condition"
-msgstr "Condition"
 
 msgid "Configurations"
 msgstr ""
@@ -433,14 +331,8 @@ msgstr "Configurer la validation"
 msgid "Confirm"
 msgstr "Confirmer"
 
-msgid "Confirm Data Restoration"
-msgstr "Confirmer la restauration des données"
-
 msgid "Confirm Delete"
 msgstr "Confirmation de la suppression"
-
-msgid "Confirmation Text"
-msgstr "Texte de confirmation"
 
 msgid "Connection URL"
 msgstr "URL de connexion"
@@ -453,12 +345,6 @@ msgstr "Constantes"
 
 msgid "Contains"
 msgstr "Contient"
-
-msgid "Continue"
-msgstr "Continuer"
-
-msgid "Copy To Clipboard"
-msgstr "Copier dans le presse-papier"
 
 msgid "Create"
 msgstr "Créer"
@@ -487,32 +373,11 @@ msgstr "Création {singular}"
 msgid "Credentials Was Successfully Setup"
 msgstr "Les informations d'identification ont été configurées avec succès"
 
-msgid "Cron Expression"
-msgstr "Expression Cron"
-
 msgid "CRUD"
 msgstr "CRUD"
 
 msgid "CRUD Settings"
 msgstr "Paramètres CRUD"
-
-msgid "cURL Command"
-msgstr "Commande cURL"
-
-msgid "Curve"
-msgstr "Courbe"
-
-msgid "Custom Action"
-msgstr "Action personnalisée"
-
-msgid "Custom Actions"
-msgstr "Actions personnalisées"
-
-msgid "Custom Dashboard"
-msgstr "Tableau de bord personnalisé"
-
-msgid "Custom Dashboards"
-msgstr "Tableaux de bord personnalisés"
 
 msgid "Custom Date"
 msgstr "Date personnalisée"
@@ -535,23 +400,22 @@ msgstr "Widgets de tableau de bord"
 msgid "Dashboards"
 msgstr "Tableaux de bord"
 
+msgid ""
+"DashPress is not a database client, meaning any action taken here\n"
+"will not reflect on your database."
+msgstr ""
+
+msgid ""
+"DashPress will try to pick all the database validations that it can, so\n"
+"it knows the\n"
+"<code> non-nullable</code> constraint means the field is\n"
+"<code>required</code> and so on. We also translate other constraints to\n"
+"validations like <code>maxLength</code>, <code>isDate</code>,\n"
+"<code>unique</code>, <code>isBoolean</code> etc."
+msgstr ""
+
 msgid "Data"
 msgstr "Données"
-
-msgid "Data copied to clipboard successfully"
-msgstr "Données copiées avec succès dans le presse-papiers"
-
-msgid "Data Event"
-msgstr "Événement de données"
-
-msgid "Data Events"
-msgstr "Événements de données"
-
-msgid "Data exported successfully"
-msgstr "Données exportées avec succès"
-
-msgid "Data Key"
-msgstr "Clé de données"
 
 msgid "Database"
 msgstr "Base de données"
@@ -586,14 +450,8 @@ msgstr "Supprimer"
 msgid "Delete {singular}"
 msgstr "Supprimer {singular}"
 
-msgid "Delete Edge"
-msgstr "Supprimer le bord"
-
 msgid "Delete Selection"
 msgstr "Supprimer la sélection"
-
-msgid "Description"
-msgstr "Description"
 
 msgid "Details"
 msgstr "Détails"
@@ -609,6 +467,13 @@ msgstr "Diction"
 
 msgid "Diction Settings"
 msgstr "Paramètres de diction"
+
+msgid ""
+"Disabling an entity here means it will not be a part of this\n"
+"application. It will be like it doesn&apos;t exist. Disabled entities\n"
+"will not show anywhere on the application and any request made to it\n"
+"will result in a 404 response."
+msgstr ""
 
 msgid "Display Format"
 msgstr "Format d'affichage"
@@ -640,15 +505,6 @@ msgstr "Tableau vide"
 msgid "Enable {0} Functionality"
 msgstr "Activer la fonctionnalité {0}"
 
-msgid "Enable Area"
-msgstr "Activer la zone"
-
-msgid "Enable Points"
-msgstr "Activer les points"
-
-msgid "Enable two-factor authentication"
-msgstr ""
-
 msgid "Enabled Entities"
 msgstr "Entités activées"
 
@@ -657,12 +513,6 @@ msgstr "Paramètres des entités activées"
 
 msgid "Enabled Relations"
 msgstr "Relations activées"
-
-msgid "Enter a security token from your authenticator app"
-msgstr "Entrez un jeton de sécurité depuis votre application d'authentification"
-
-msgid "Enter one of your unsed recovery codes"
-msgstr "Entrez l'un de vos codes de récupération non utilisés"
 
 msgid "Enter your credentials to continue"
 msgstr "Entrez vos identifiants pour continuer"
@@ -673,32 +523,8 @@ msgstr ""
 msgid "Entities"
 msgstr "Entités"
 
-msgid "Entities Enabled For Add New And Select"
-msgstr "Entités activées pour ajouter de nouvelles et sélectionner"
-
-msgid "Entities Enabled For Change History"
-msgstr "Entités activées pour l'historique des modifications"
-
-msgid "Entity"
-msgstr "Entité"
-
-msgid "Entity Action"
-msgstr "Action d'entité"
-
-msgid "Entity Create Form Layout"
-msgstr "Entité Créer une présentation de formulaire"
-
-msgid "Entity Field"
-msgstr "Champ d'entité"
-
-msgid "Entity ID"
-msgstr "ID d'entité"
-
 msgid "Entity Tab"
 msgstr "Onglet Entité"
-
-msgid "Entity Update Form Layout"
-msgstr "Présentation du formulaire de mise à jour d'entité"
 
 msgid "Environment Variable"
 msgstr "Variable d'environnement"
@@ -715,23 +541,8 @@ msgstr "Égal à un autre champ"
 msgid "Error message"
 msgstr "Message d'erreur"
 
-msgid "Error Occured Setting Up Your 2FA Token"
-msgstr "Une erreur s'est produite lors de la configuration de votre jeton 2FA"
-
-msgid "Every 6 Hours"
-msgstr "Toutes les 6 heures"
-
 msgid "Explain {title}"
 msgstr "Expliquez {title}"
-
-msgid "Export"
-msgstr "Exporter"
-
-msgid "Exporting"
-msgstr "Exportation"
-
-msgid "External Link"
-msgstr "lien externe"
 
 msgid "Field"
 msgstr "Champ"
@@ -766,18 +577,6 @@ msgstr "Stockage de fichiers"
 msgid "File Uploads Settings"
 msgstr "Paramètres de téléchargement de fichiers"
 
-msgid "Flow"
-msgstr "Couler"
-
-msgid "Flow Trigger Attachment"
-msgstr "Fixation de déclenchement de débit"
-
-msgid "Flow Trigger Attachments"
-msgstr "Accessoires de déclenchement de débit"
-
-msgid "Flows"
-msgstr "Les flux"
-
 msgid "Follow us on Twitter"
 msgstr "Suivez-nous sur Twitter"
 
@@ -792,12 +591,6 @@ msgstr "Action de formulaire"
 
 msgid "Form Actions"
 msgstr "Actions de formulaire"
-
-msgid "Form Field"
-msgstr "Champ de formulaire"
-
-msgid "Form Fields"
-msgstr "Champs de formulaire"
 
 msgid "Form Scripts"
 msgstr "Scripts de formulaire"
@@ -817,9 +610,6 @@ msgstr "Paramètres généraux des données"
 msgid "Genesis"
 msgstr "Genèse"
 
-msgid "Global Action"
-msgstr "Action mondiale"
-
 msgid "Go Back"
 msgstr "Retourner"
 
@@ -832,20 +622,26 @@ msgstr "Plus grand que les autres champs"
 msgid "Green"
 msgstr "Vert"
 
-msgid "Group Mode"
-msgstr "Mode groupe"
-
-msgid "Grouped"
-msgstr "Groupé"
-
-msgid "Header"
-msgstr "Entête"
+msgid "Having said that, there are three things you can do in this section"
+msgstr ""
 
 msgid "Headers"
 msgstr "En-têtes"
 
 msgid "Height"
 msgstr "Hauteur"
+
+msgid ""
+"Here you can be more specific about the type of your field, You can\n"
+"choose a more appropriate field type like <code>email</code>,\n"
+"<code> URL</code>, <code> color</code>\n"
+"<code> image</code> over the plain <code>text</code> field type."
+msgstr ""
+
+msgid ""
+"Here you will be able to order the fields around and the order will also\n"
+"be reflected on tables, details view, and forms."
+msgstr ""
 
 msgid "Hi, {0}"
 msgstr "Bonjour, {0}"
@@ -859,17 +655,11 @@ msgstr "Maison"
 msgid "Home Link"
 msgstr "Lien vers la maison"
 
-msgid "Horizontal"
-msgstr "Horizontal"
-
 msgid "Host"
 msgstr "Hôte"
 
 msgid "Hour"
 msgstr "Heure"
-
-msgid "I have safely saved my recovery tokens"
-msgstr "J'ai sauvegardé mes jetons de récupération en toute sécurité"
 
 msgid "I Want To Help With Translation"
 msgstr ""
@@ -877,17 +667,8 @@ msgstr ""
 msgid "Icon"
 msgstr "Icône"
 
-msgid "ID"
-msgstr "IDENTIFIANT"
-
 msgid "Image"
 msgstr "Image"
-
-msgid "Impersonate User"
-msgstr "Usurper l'identité d'un utilisateur"
-
-msgid "Impersonating User"
-msgstr "Usurpation d'identité d'utilisateur"
 
 msgid "Incorrect value"
 msgstr "Valeur incorrecte"
@@ -898,12 +679,6 @@ msgstr "Indigo"
 msgid "Initial Values"
 msgstr "Valeurs initiales"
 
-msgid "Inline Edit"
-msgstr "Modification en ligne"
-
-msgid "Inline Edit Settings"
-msgstr "Paramètres de modification en ligne"
-
 msgid "Input {deactivationKey} to continue"
 msgstr "Saisissez {deactivationKey} pour continuer"
 
@@ -912,9 +687,6 @@ msgstr "L'intégration"
 
 msgid "Integrations"
 msgstr "Intégrations"
-
-msgid "IP Address"
-msgstr "Adresse IP"
 
 msgid "Is In"
 msgstr "Est dans"
@@ -949,9 +721,6 @@ msgstr "Langue"
 msgid "Large Logo"
 msgstr "Grand logo"
 
-msgid "Layout"
-msgstr "Mise en page"
-
 msgid "Less Than"
 msgstr "Moins que"
 
@@ -964,41 +733,20 @@ msgstr "Lumière"
 msgid "Light Color Scheme"
 msgstr "Schéma de couleurs claires"
 
-msgid "Line Chart"
-msgstr "Graphique en ligne"
-
-msgid "Link"
-msgstr "Lien"
-
 msgid "Link Entity"
 msgstr "Entité de lien"
 
 msgid "Link Users To Database"
 msgstr "Lier les utilisateurs à la base de données"
 
-msgid "List"
-msgstr "Liste"
-
-msgid "Loading..."
-msgstr "Chargement..."
-
 msgid "Log Out"
 msgstr "Se déconnecter"
-
-msgid "Loop"
-msgstr "Boucle"
 
 msgid "Manage {plural}"
 msgstr "Gérer {plural}"
 
 msgid "Manage {title}"
 msgstr "Gérer {title}"
-
-msgid "Manage Plan"
-msgstr "Gérer le forfait"
-
-msgid "Manage Sensitive Fields"
-msgstr "Gérer les champs sensibles"
 
 msgid "Manage Variables"
 msgstr "Gérer les variables"
@@ -1011,9 +759,6 @@ msgstr "Longueur maximale"
 
 msgid "Maximum file size to upload in MB"
 msgstr "Taille maximale du fichier à télécharger en Mo"
-
-msgid "Menu Item"
-msgstr "Élément du menu"
 
 msgid "Menu Settings"
 msgstr "Paramètres des menus"
@@ -1030,14 +775,8 @@ msgstr "Min."
 msgid "Min Length"
 msgstr "Longueur minimale"
 
-msgid "Modify Data Before Cloning"
-msgstr "Modifier les données avant le clonage"
-
 msgid "Month"
 msgstr "Mois"
-
-msgid "Mutate"
-msgstr "Subir une mutation"
 
 msgid "My Account"
 msgstr "Mon compte"
@@ -1045,20 +784,11 @@ msgstr "Mon compte"
 msgid "Name"
 msgstr "Nom"
 
-msgid "Navigation Menu"
-msgstr "le menu de navigation"
-
-msgid "New"
-msgstr "Nouveau"
-
 msgid "New Password"
 msgstr "nouveau mot de passe"
 
 msgid "New Password Again"
 msgstr "Retapez le nouveau mot de passe"
-
-msgid "New Value"
-msgstr "Nouvelle valeur"
 
 msgid "No"
 msgstr "Non"
@@ -1078,23 +808,17 @@ msgstr "Aucun résultat pour le {0} actuel appliqué."
 msgid "No Search Results"
 msgstr "aucun résultat trouvé"
 
-msgid "Node"
-msgstr "Nœud"
-
-msgid "Node Label"
-msgstr "Étiquette de nœud"
-
-msgid "Node Properties"
-msgstr "Propriétés du nœud"
-
-msgid "Nodes"
-msgstr "Nœuds"
-
 msgid "Not Equal"
 msgstr "Inégal"
 
 msgid "Not Equal To Other Field"
 msgstr "Différent des autres champs"
+
+msgid ""
+"Note that validations picked from the database can&apos;t be removed\n"
+"from the app. The only way to remove them is to delete them from the\n"
+"database and restart your app."
+msgstr ""
 
 msgid "Now"
 msgstr "Maintenant"
@@ -1104,9 +828,6 @@ msgstr "Nombre"
 
 msgid "Old Password"
 msgstr "ancien mot de passe"
-
-msgid "Old Value"
-msgstr "Ancienne valeur"
 
 msgid "On Create"
 msgstr "Lors de la création"
@@ -1135,9 +856,6 @@ msgstr "Orange"
 msgid "Order"
 msgstr "Commande"
 
-msgid "Ordered"
-msgstr "Commandé"
-
 msgid "Password"
 msgstr "Mot de passe"
 
@@ -1149,12 +867,6 @@ msgstr "Le mot de passe ne sera pas modifié sur le compte démo"
 
 msgid "Persistent Query"
 msgstr "Requête persistante"
-
-msgid "Personalize This Table"
-msgstr "Personnalisez ce tableau"
-
-msgid "Pie Chart"
-msgstr "Diagramme circulaire"
 
 msgid "Plural"
 msgstr "Pluriel"
@@ -1179,15 +891,6 @@ msgstr "Profil"
 
 msgid "Quarter"
 msgstr "Quart"
-
-msgid "Query"
-msgstr "Requête"
-
-msgid "Recovery Code"
-msgstr "Code de récupération"
-
-msgid "Recovery tokens copied to clipboard"
-msgstr "Jetons de récupération copiés dans le presse-papiers"
 
 msgid "Red"
 msgstr "Rouge"
@@ -1216,9 +919,6 @@ msgstr "Rapports"
 msgid "Relations Order"
 msgstr "Ordre des relations"
 
-msgid "Relations To Clone Along"
-msgstr "Relations à cloner"
-
 msgid "Relationship Settings"
 msgstr "Paramètres de relation"
 
@@ -1231,41 +931,20 @@ msgstr "Retirer"
 msgid "Remove Nested Filter"
 msgstr "Supprimer le filtre imbriqué"
 
-msgid "Request ID"
-msgstr "Numéro de demande"
-
-msgid "Request Method"
-msgstr "Méthode de demande"
-
 msgid "Required"
 msgstr "Requis"
 
 msgid "Reset"
 msgstr "Réinitialiser"
 
-msgid "Reset 2FA Recovery Tokens"
-msgstr "Réinitialiser les jetons de récupération 2FA"
-
 msgid "Reset Password"
 msgstr "réinitialiser le mot de passe"
-
-msgid "Reset Recovery Tokens"
-msgstr "Réinitialiser les jetons de récupération"
 
 msgid "Reset User Password"
 msgstr "Réinitialiser le mot de passe utilisateur"
 
 msgid "Resetting Password"
 msgstr "Réinitialisation du mot de passe"
-
-msgid "Response"
-msgstr "Réponse"
-
-msgid "Restore"
-msgstr "Restaurer"
-
-msgid "Restored"
-msgstr "Restauré"
 
 msgid "Reveal Credentials"
 msgstr "Révéler les informations d'identification"
@@ -1288,29 +967,14 @@ msgstr "Autorisations de rôle"
 msgid "Roles"
 msgstr "Les rôles"
 
-msgid "Route ID"
-msgstr "ID d'itinéraire"
-
 msgid "Save"
 msgstr "Sauvegarder"
 
 msgid "Save {singular}"
 msgstr "Enregistrer {singular}"
 
-msgid "Save Current Filters"
-msgstr "Enregistrer les filtres actuels"
-
-msgid "Saving"
-msgstr "Économie"
-
 msgid "Saving {singular}"
 msgstr "Sauver {singular}"
-
-msgid "Scheduler"
-msgstr "Planificateur"
-
-msgid "Schedulers"
-msgstr "Planificateurs"
 
 msgid "Script"
 msgstr "Scénario"
@@ -1330,17 +994,8 @@ msgstr "Secrets"
 msgid "Select {0}"
 msgstr ""
 
-msgid "Select Node Type"
-msgstr "Sélectionnez le type de nœud"
-
-msgid "Select Trigger"
-msgstr "Sélectionnez le déclencheur"
-
 msgid "Select Value"
 msgstr "Sélectionnez une valeur"
-
-msgid "Select Workflow"
-msgstr "Sélectionnez le flux de travail"
 
 msgid "Selection"
 msgstr "Sélection"
@@ -1366,20 +1021,11 @@ msgstr "E-mail de l'expéditeur"
 msgid "Sender Name"
 msgstr "Nom de l'expéditeur"
 
-msgid "Sensitive Field"
-msgstr "Champ sensible"
-
-msgid "Sensitive Fields"
-msgstr "Champs sensibles"
-
 msgid "Setting Up Account"
 msgstr "Créer un compte"
 
 msgid "Setting Up Credentials"
 msgstr "Configuration des informations d'identification"
-
-msgid "Settings"
-msgstr "Paramètres"
 
 msgid "Setup"
 msgstr "Installation"
@@ -1393,26 +1039,8 @@ msgstr "Informations d'identification de configuration"
 msgid "Setup DB credentials"
 msgstr ""
 
-msgid "Share"
-msgstr "Partager"
-
-msgid "Shared"
-msgstr "partagé"
-
-msgid "Sharing"
-msgstr "Partage"
-
-msgid "Show"
-msgstr "Montrer"
-
 msgid "Show Password"
 msgstr ""
-
-msgid "Show Soft Deleted Items And The Restore Button"
-msgstr "Afficher les éléments supprimés de manière logicielle et le bouton de restauration"
-
-msgid "Show Up In Roles And Permissions"
-msgstr "Afficher dans les rôles et les autorisations"
 
 msgid "Showing <0/> entries of <1>{0}</1> results"
 msgstr "Affichage de <0/> entrées de <1>{0}</1> résultats"
@@ -1435,41 +1063,20 @@ msgstr "Paramètres du site"
 msgid "Small Logo"
 msgstr "Petit logo"
 
-msgid "Soft Delete"
-msgstr "Suppression logicielle"
-
-msgid "Soft Delete Settings"
-msgstr "Paramètres de suppression logicielle"
-
-msgid "Stacked"
-msgstr "Empilé"
-
 msgid "Star us on Github"
 msgstr "Mettez-nous en vedette sur Github"
 
 msgid "Start of year"
 msgstr "Début d'année"
 
-msgid "State Script"
-msgstr "Script d'état"
-
 msgid "Storage Key"
 msgstr "Clé de stockage"
-
-msgid "Strategy"
-msgstr "Stratégie"
 
 msgid "String"
 msgstr "Chaîne"
 
 msgid "Subject"
 msgstr "Sujet"
-
-msgid "Submit"
-msgstr "Soumettre"
-
-msgid "Submitting"
-msgstr "Soumission"
 
 msgid "Summary Card"
 msgstr "Carte récapitulative"
@@ -1495,12 +1102,6 @@ msgstr "Paramètres des colonnes du tableau"
 msgid "Table Fields Order"
 msgstr "Ordre des champs de table"
 
-msgid "Table Personalization"
-msgstr "Personnalisation des tables"
-
-msgid "Table Personalizations"
-msgstr "Personnalisations de tableaux"
-
 msgid "Table View"
 msgstr "Vue de tableau"
 
@@ -1516,35 +1117,38 @@ msgstr "Texte"
 msgid "Textarea"
 msgstr "Zone de texte"
 
+msgid ""
+"The <code> Configure Validation</code> button allows you to add more\n"
+"validations that we can&apos;t possibly get from the database like\n"
+"<code>minLength</code>,<code> regex</code>, <code>alphanumeric</code>,\n"
+"<code>matchOtherField</code>, etc. We also provide a text input for you\n"
+"to customize the validation message."
+msgstr ""
+
 msgid "Theme"
 msgstr "Thème"
 
 msgid "Theme Settings"
 msgstr "Réglage des thèmes"
 
-msgid "This {0} Has No Form"
-msgstr "Ce {0} n'a aucun formulaire"
-
 msgid "This action does not have configuration"
 msgstr "Cette action n'a pas de configuration"
-
-msgid "This entity has no fields"
-msgstr "Cette entité n'a pas de champs"
 
 msgid "This entity has no relations"
 msgstr "Cette entité n'a aucune relation"
 
-msgid "This flow should be queued and executed asynchronously (recommended for long running flows, requires Redis)"
-msgstr "Ce flux doit être mis en file d'attente et exécuté de manière asynchrone (recommandé pour les flux de longue durée, nécessite Redis)"
+msgid ""
+"This is a good place to toggle off entities in the database that\n"
+"don&apos;t have much business value, for example, migrations, logs, etc."
+msgstr ""
 
-msgid "This trigger has no workflow attached"
-msgstr "Ce déclencheur n'a aucun workflow associé"
-
-msgid "This workflow has no trigger attached"
-msgstr "Ce workflow n'a aucun déclencheur associé"
-
-msgid "Time Changed"
-msgstr "L'heure a changé"
+msgid ""
+"This tab enables you to rename the label of the field. Say you want the\n"
+"<code> name</code> to be called <code>Full Name</code>, or\n"
+"<code>updatedAt</code> to be called <code>Last Updated</code>; then you\n"
+"simply input the desired name under the field and submit and the column\n"
+"will be renamed everywhere."
+msgstr ""
 
 msgid "Title"
 msgstr "Titre"
@@ -1564,14 +1168,14 @@ msgstr "Durée de validité du jeton en jours"
 msgid "Trigger"
 msgstr "Déclenchement"
 
-msgid "Try Out 25+ Pro Features"
-msgstr "Essayez 25 fonctionnalités Pro"
-
-msgid "Two Factor Authentication"
+msgid "Two quick notes as we head into this section"
 msgstr ""
 
 msgid "Type"
 msgstr "Taper"
+
+msgid "Types"
+msgstr ""
 
 msgid "Update"
 msgstr "Mise à jour"
@@ -1603,12 +1207,6 @@ msgstr "Utiliser des couleurs"
 msgid "Use Icon"
 msgstr "Utiliser l'icône"
 
-msgid "Use OTP Token"
-msgstr "Utiliser le jeton OTP"
-
-msgid "Use Recovery Code"
-msgstr "Utiliser le code de récupération"
-
 msgid "Use SSL"
 msgstr "Utiliser SSL"
 
@@ -1639,15 +1237,6 @@ msgstr "Valeur"
 msgid "Variables"
 msgstr "Variables"
 
-msgid "Verifing"
-msgstr "Vérification"
-
-msgid "Verify"
-msgstr "Vérifier"
-
-msgid "Vertical"
-msgstr "Verticale"
-
 msgid "View"
 msgstr "Voir"
 
@@ -1660,14 +1249,20 @@ msgstr "Violet"
 msgid "Visit our website"
 msgstr "Visitez notre site Internet"
 
-msgid "Webhook"
-msgstr "Webhook"
-
-msgid "Webhooks"
-msgstr "Webhooks"
+msgid ""
+"We strongly advise that you edit your schema to minimize your\n"
+"touching of this section."
+msgstr ""
 
 msgid "Week"
 msgstr "Semaine"
+
+msgid ""
+"When the field is an enum field or you select <code>selection</code> as\n"
+"the type, You will see a <code>Configure Selections</code> button which\n"
+"will allow you to select colors for enum field types and manage the\n"
+"selections for the <code>selection</code> type."
+msgstr ""
 
 msgid "Widget Script"
 msgstr "Script de widget"
@@ -1675,23 +1270,33 @@ msgstr "Script de widget"
 msgid "Width"
 msgstr "Largeur"
 
-msgid "Workflow"
-msgstr "Flux de travail"
-
-msgid "Workflows"
-msgstr "Flux de travail"
-
-msgid "X Label"
-msgstr "Étiquette X"
-
-msgid "Y Label"
-msgstr "Étiquette Y"
-
 msgid "Year"
 msgstr "Année"
 
 msgid "Yes"
 msgstr "Oui"
+
+msgid ""
+"You will also see that the selections are narrowed as you will not see\n"
+"an\n"
+"<code> email</code> selection for a numerical field nor will you see the\n"
+"<code>number</code> for the\n"
+"<code> text</code> field. This is to eliminate the possibility of an\n"
+"invalid selection."
+msgstr ""
+
+msgid ""
+"You will be able to make field-level customizations on the tables,\n"
+"details, create, and edit views. We have three tabs here, so let&apos;s\n"
+"start with the first."
+msgstr ""
+
+msgid ""
+"You will see that some field types are disabled and these are for fields\n"
+"like <code>boolean</code>, <code>date</code>, <code>enum</code>, etc.\n"
+"which really don&apos;t have sister types so there is nothing you can\n"
+"update it to."
+msgstr ""
 
 msgid "Your Users Table"
 msgstr "Votre tableau des utilisateurs"

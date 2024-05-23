@@ -88,12 +88,6 @@ msgstr "{0} – {1}"
 msgid "{0} [{1}]"
 msgstr "{0} [{1}]"
 
-msgid "{0} {1}"
-msgstr "{0} {1}"
-
-msgid "{0} Configuration"
-msgstr "{0} Конфигурация"
-
 msgid "{0} Selections"
 msgstr "{0} Выбор"
 
@@ -166,8 +160,14 @@ msgstr "{value} Год"
 msgid "{value} Years"
 msgstr "{value} Годы"
 
-msgid "2FA Tokens"
-msgstr "2FA-токены"
+msgid "1. Choosing A More Specific Data Type"
+msgstr ""
+
+msgid "2. Managing Validations"
+msgstr ""
+
+msgid "3. Configure Selection"
+msgstr ""
 
 msgid "Access Key ID"
 msgstr "Идентификатор ключа доступа"
@@ -211,14 +211,8 @@ msgstr "Добавить фильтр"
 msgid "Add Nested Filter"
 msgstr "Добавить вложенный фильтр"
 
-msgid "Add New {0} And Select"
-msgstr "Добавить новый {0} и выбрать"
-
 msgid "Add New {singular}"
 msgstr "Добавить новый {singular}"
-
-msgid "Add New And Select"
-msgstr "Добавить новый и выбрать"
 
 msgid "Add New Option"
 msgstr "Добавить новую опцию"
@@ -228,12 +222,6 @@ msgstr "Добавьте новые таблицы через предпочит
 
 msgid "Add New Validation"
 msgstr "Добавить новую проверку"
-
-msgid "All Dashboards"
-msgstr "Все панели мониторинга"
-
-msgid "All items were {actionText} successfully"
-msgstr "Все элементы были успешно обработаны {actionText}"
 
 msgid "Allowed values are [[ options ]]"
 msgstr "Допустимые значения: [[ options ]]"
@@ -259,30 +247,6 @@ msgstr ""
 msgid "Are you sure you want to do this?"
 msgstr "Вы уверены, что хотите это сделать?"
 
-msgid "Associated Triggers"
-msgstr "Связанные триггеры"
-
-msgid "Associated Workflows"
-msgstr "Связанные рабочие процессы"
-
-msgid "Attach A Trigger"
-msgstr "Прикрепите триггер"
-
-msgid "Attach A Workflow"
-msgstr "Прикрепите рабочий процесс"
-
-msgid "Authenticator Token"
-msgstr "Токен аутентификатора"
-
-msgid "Back To {0}"
-msgstr "Назад к {0}"
-
-msgid "Back to Sign In Page"
-msgstr "Вернуться на страницу входа"
-
-msgid "Bar Chart"
-msgstr "Гистограмма"
-
 msgid "Before Submit"
 msgstr "Перед отправкой"
 
@@ -301,41 +265,14 @@ msgstr "Синий"
 msgid "Body"
 msgstr "Тело"
 
-msgid "Bookmark"
-msgstr "Закладка"
-
-msgid "Bookmarks"
-msgstr "Закладки"
-
 msgid "Boolean"
 msgstr "логическое значение"
 
 msgid "Brown"
 msgstr "Коричневый"
 
-msgid "Bulk Delete"
-msgstr "Массовое удаление"
-
-msgid "Bulk Deleting"
-msgstr "Массовое удаление"
-
-msgid "Bulk Update"
-msgstr "Массовое обновление"
-
-msgid "Can Access All Dashboards"
-msgstr "Может получить доступ ко всем информационным панелям"
-
-msgid "Can Access And Restore Soft Deleted Items"
-msgstr "Может получить доступ и восстановить случайно удаленные элементы"
-
 msgid "Can Configure App"
 msgstr "Можно настроить приложение"
-
-msgid "Can Export Data"
-msgstr "Может экспортировать данные"
-
-msgid "Can Impersonate Users"
-msgstr "Может выдавать себя за пользователей"
 
 msgid "Can Manage All Entities"
 msgstr "Может управлять всеми объектами"
@@ -352,17 +289,11 @@ msgstr "Может управлять разрешениями"
 msgid "Can Manage Users"
 msgstr "Может управлять пользователями"
 
-msgid "Can Manages Flows"
-msgstr "Может управлять потоками"
-
 msgid "Can Reset Password"
 msgstr "Можно сбросить пароль"
 
 msgid "Cancel"
 msgstr "Отмена"
-
-msgid "Change History"
-msgstr "История изменений"
 
 msgid "Change Language"
 msgstr "Изменение языка"
@@ -370,29 +301,8 @@ msgstr "Изменение языка"
 msgid "Channel"
 msgstr "Канал"
 
-msgid "Clear selections"
-msgstr "Очистить выбор"
-
 msgid "Click here to view details"
 msgstr "Нажмите здесь, чтобы просмотреть подробности"
-
-msgid "Client Script"
-msgstr "Клиентский скрипт"
-
-msgid "Clone"
-msgstr "Клонировать"
-
-msgid "Clone {0}"
-msgstr "Клонировать {0}"
-
-msgid "Clone Settings"
-msgstr "Настройки клонирования"
-
-msgid "Cloned"
-msgstr "Клонированный"
-
-msgid "Cloning"
-msgstr "Клонирование"
 
 msgid "Close Canvas"
 msgstr "Закрыть холст"
@@ -400,23 +310,11 @@ msgstr "Закрыть холст"
 msgid "Color"
 msgstr "Цвет"
 
-msgid "Column"
-msgstr "Столбец"
-
 msgid "Column Labels Settings"
 msgstr "Настройки меток столбцов"
 
 msgid "Column Types Settings"
 msgstr "Настройки типов столбцов"
-
-msgid "Complete Setup"
-msgstr "Полная установка"
-
-msgid "Completing Setup"
-msgstr "Завершение установки"
-
-msgid "Condition"
-msgstr "Состояние"
 
 msgid "Configurations"
 msgstr ""
@@ -433,14 +331,8 @@ msgstr "Настройка проверки"
 msgid "Confirm"
 msgstr "Подтверждать"
 
-msgid "Confirm Data Restoration"
-msgstr "Подтвердить восстановление данных"
-
 msgid "Confirm Delete"
 msgstr "Подтвердите удаление"
-
-msgid "Confirmation Text"
-msgstr "Текст подтверждения"
 
 msgid "Connection URL"
 msgstr "URL-адрес подключения"
@@ -453,12 +345,6 @@ msgstr "Константы"
 
 msgid "Contains"
 msgstr "Содержит"
-
-msgid "Continue"
-msgstr "Продолжать"
-
-msgid "Copy To Clipboard"
-msgstr "Скопировать в буфер обмена"
 
 msgid "Create"
 msgstr "Создавать"
@@ -487,32 +373,11 @@ msgstr "создание {singular}"
 msgid "Credentials Was Successfully Setup"
 msgstr "Учетные данные были успешно настроены"
 
-msgid "Cron Expression"
-msgstr "Выражение Крон"
-
 msgid "CRUD"
 msgstr "CRUD"
 
 msgid "CRUD Settings"
 msgstr "Настройки CRUD"
-
-msgid "cURL Command"
-msgstr "Команда cURL"
-
-msgid "Curve"
-msgstr "Изгиб"
-
-msgid "Custom Action"
-msgstr "Пользовательское действие"
-
-msgid "Custom Actions"
-msgstr "Пользовательские действия"
-
-msgid "Custom Dashboard"
-msgstr "Пользовательская панель мониторинга"
-
-msgid "Custom Dashboards"
-msgstr "Пользовательские панели мониторинга"
 
 msgid "Custom Date"
 msgstr "Пользовательская дата"
@@ -535,23 +400,22 @@ msgstr "Виджеты информационной панели"
 msgid "Dashboards"
 msgstr "Панели мониторинга"
 
+msgid ""
+"DashPress is not a database client, meaning any action taken here\n"
+"will not reflect on your database."
+msgstr ""
+
+msgid ""
+"DashPress will try to pick all the database validations that it can, so\n"
+"it knows the\n"
+"<code> non-nullable</code> constraint means the field is\n"
+"<code>required</code> and so on. We also translate other constraints to\n"
+"validations like <code>maxLength</code>, <code>isDate</code>,\n"
+"<code>unique</code>, <code>isBoolean</code> etc."
+msgstr ""
+
 msgid "Data"
 msgstr "Данные"
-
-msgid "Data copied to clipboard successfully"
-msgstr "Данные успешно скопированы в буфер обмена"
-
-msgid "Data Event"
-msgstr "Событие данных"
-
-msgid "Data Events"
-msgstr "События данных"
-
-msgid "Data exported successfully"
-msgstr "Данные успешно экспортированы"
-
-msgid "Data Key"
-msgstr "Ключ данных"
 
 msgid "Database"
 msgstr "База данных"
@@ -586,14 +450,8 @@ msgstr "Удалить"
 msgid "Delete {singular}"
 msgstr "Удалить {singular}"
 
-msgid "Delete Edge"
-msgstr "Удалить край"
-
 msgid "Delete Selection"
 msgstr "Удалить выделение"
-
-msgid "Description"
-msgstr "Описание"
 
 msgid "Details"
 msgstr "Подробности"
@@ -609,6 +467,13 @@ msgstr "Дикция"
 
 msgid "Diction Settings"
 msgstr "Настройки дикции"
+
+msgid ""
+"Disabling an entity here means it will not be a part of this\n"
+"application. It will be like it doesn&apos;t exist. Disabled entities\n"
+"will not show anywhere on the application and any request made to it\n"
+"will result in a 404 response."
+msgstr ""
 
 msgid "Display Format"
 msgstr "Формат отображения"
@@ -640,15 +505,6 @@ msgstr "Пустой стол"
 msgid "Enable {0} Functionality"
 msgstr "Включить функцию {0}"
 
-msgid "Enable Area"
-msgstr "Включить область"
-
-msgid "Enable Points"
-msgstr "Включить баллы"
-
-msgid "Enable two-factor authentication"
-msgstr ""
-
 msgid "Enabled Entities"
 msgstr "Включенные объекты"
 
@@ -657,12 +513,6 @@ msgstr "Настройки включенных объектов"
 
 msgid "Enabled Relations"
 msgstr "Включенные отношения"
-
-msgid "Enter a security token from your authenticator app"
-msgstr "Введите токен безопасности из приложения аутентификации."
-
-msgid "Enter one of your unsed recovery codes"
-msgstr "Введите один из ваших неиспользованных кодов восстановления."
 
 msgid "Enter your credentials to continue"
 msgstr "Введите свои учетные данные, чтобы продолжить"
@@ -673,32 +523,8 @@ msgstr ""
 msgid "Entities"
 msgstr "Сущности"
 
-msgid "Entities Enabled For Add New And Select"
-msgstr "Объекты, включенные для добавления новых и выбора"
-
-msgid "Entities Enabled For Change History"
-msgstr "Объекты, включенные для истории изменений"
-
-msgid "Entity"
-msgstr "Сущность"
-
-msgid "Entity Action"
-msgstr "Действие сущности"
-
-msgid "Entity Create Form Layout"
-msgstr "Макет формы создания сущности"
-
-msgid "Entity Field"
-msgstr "Поле сущности"
-
-msgid "Entity ID"
-msgstr "Идентификатор объекта"
-
 msgid "Entity Tab"
 msgstr "Вкладка «Объект»"
-
-msgid "Entity Update Form Layout"
-msgstr "Макет формы обновления сущности"
 
 msgid "Environment Variable"
 msgstr "Переменная среды"
@@ -715,23 +541,8 @@ msgstr "Равно другому полю"
 msgid "Error message"
 msgstr "Сообщение об ошибке"
 
-msgid "Error Occured Setting Up Your 2FA Token"
-msgstr "Произошла ошибка при настройке токена 2FA."
-
-msgid "Every 6 Hours"
-msgstr "Каждые 6 часов"
-
 msgid "Explain {title}"
 msgstr "Объясните {title}"
-
-msgid "Export"
-msgstr "Экспорт"
-
-msgid "Exporting"
-msgstr "Экспорт"
-
-msgid "External Link"
-msgstr "внешняя ссылка"
 
 msgid "Field"
 msgstr "Поле"
@@ -766,18 +577,6 @@ msgstr "Файловое хранилище"
 msgid "File Uploads Settings"
 msgstr "Настройки загрузки файлов"
 
-msgid "Flow"
-msgstr "Поток"
-
-msgid "Flow Trigger Attachment"
-msgstr "Приставка триггера потока"
-
-msgid "Flow Trigger Attachments"
-msgstr "Приложения триггера потока"
-
-msgid "Flows"
-msgstr "Потоки"
-
 msgid "Follow us on Twitter"
 msgstr "Следуйте за нами на Twitter"
 
@@ -792,12 +591,6 @@ msgstr "Форма действия"
 
 msgid "Form Actions"
 msgstr "Действия с формой"
-
-msgid "Form Field"
-msgstr "Поле формы"
-
-msgid "Form Fields"
-msgstr "Поля формы"
 
 msgid "Form Scripts"
 msgstr "Скрипты форм"
@@ -817,9 +610,6 @@ msgstr "Общие настройки данных"
 msgid "Genesis"
 msgstr "Бытие"
 
-msgid "Global Action"
-msgstr "Глобальное действие"
-
 msgid "Go Back"
 msgstr "Возвращаться"
 
@@ -832,20 +622,26 @@ msgstr "Больше, чем другое поле"
 msgid "Green"
 msgstr "Зеленый"
 
-msgid "Group Mode"
-msgstr "Групповой режим"
-
-msgid "Grouped"
-msgstr "Сгруппировано"
-
-msgid "Header"
-msgstr "Заголовок"
+msgid "Having said that, there are three things you can do in this section"
+msgstr ""
 
 msgid "Headers"
 msgstr "Заголовки"
 
 msgid "Height"
 msgstr "Высота"
+
+msgid ""
+"Here you can be more specific about the type of your field, You can\n"
+"choose a more appropriate field type like <code>email</code>,\n"
+"<code> URL</code>, <code> color</code>\n"
+"<code> image</code> over the plain <code>text</code> field type."
+msgstr ""
+
+msgid ""
+"Here you will be able to order the fields around and the order will also\n"
+"be reflected on tables, details view, and forms."
+msgstr ""
 
 msgid "Hi, {0}"
 msgstr "Привет, {0}"
@@ -859,17 +655,11 @@ msgstr "Дом"
 msgid "Home Link"
 msgstr "Главная ссылка"
 
-msgid "Horizontal"
-msgstr "Горизонтальный"
-
 msgid "Host"
 msgstr "Хозяин"
 
 msgid "Hour"
 msgstr "Час"
-
-msgid "I have safely saved my recovery tokens"
-msgstr "Я благополучно сохранил свои токены восстановления."
 
 msgid "I Want To Help With Translation"
 msgstr ""
@@ -877,17 +667,8 @@ msgstr ""
 msgid "Icon"
 msgstr "Икона"
 
-msgid "ID"
-msgstr "ИДЕНТИФИКАТОР"
-
 msgid "Image"
 msgstr "Изображение"
-
-msgid "Impersonate User"
-msgstr "Выдавать себя за пользователя"
-
-msgid "Impersonating User"
-msgstr "Выдающий себя за пользователя"
 
 msgid "Incorrect value"
 msgstr "Неверное значение"
@@ -898,12 +679,6 @@ msgstr "Индиго"
 msgid "Initial Values"
 msgstr "Начальные значения"
 
-msgid "Inline Edit"
-msgstr "Встроенное редактирование"
-
-msgid "Inline Edit Settings"
-msgstr "Настройки встроенного редактирования"
-
 msgid "Input {deactivationKey} to continue"
 msgstr "Введите {deactivationKey}, чтобы продолжить."
 
@@ -912,9 +687,6 @@ msgstr "Интеграция"
 
 msgid "Integrations"
 msgstr "Интеграции"
-
-msgid "IP Address"
-msgstr "Айпи адрес"
 
 msgid "Is In"
 msgstr "В"
@@ -949,9 +721,6 @@ msgstr "Язык"
 msgid "Large Logo"
 msgstr "Большой логотип"
 
-msgid "Layout"
-msgstr "Макет"
-
 msgid "Less Than"
 msgstr "Меньше, чем"
 
@@ -964,41 +733,20 @@ msgstr "Свет"
 msgid "Light Color Scheme"
 msgstr "Светлая Цветовая Схема"
 
-msgid "Line Chart"
-msgstr "Линейный график"
-
-msgid "Link"
-msgstr "Связь"
-
 msgid "Link Entity"
 msgstr "Ссылка на объект"
 
 msgid "Link Users To Database"
 msgstr "Связать пользователей с базой данных"
 
-msgid "List"
-msgstr "Список"
-
-msgid "Loading..."
-msgstr "Загрузка..."
-
 msgid "Log Out"
 msgstr "Выйти"
-
-msgid "Loop"
-msgstr "Петля"
 
 msgid "Manage {plural}"
 msgstr "управлять {plural}"
 
 msgid "Manage {title}"
 msgstr "Управление {title}"
-
-msgid "Manage Plan"
-msgstr "Управление планом"
-
-msgid "Manage Sensitive Fields"
-msgstr "Управление конфиденциальными полями"
 
 msgid "Manage Variables"
 msgstr "Управление переменными"
@@ -1011,9 +759,6 @@ msgstr "Максимальная длина"
 
 msgid "Maximum file size to upload in MB"
 msgstr "Максимальный размер файла для загрузки в МБ"
-
-msgid "Menu Item"
-msgstr "Пункт меню"
 
 msgid "Menu Settings"
 msgstr "Настройки меню"
@@ -1030,14 +775,8 @@ msgstr "Мин"
 msgid "Min Length"
 msgstr "Минимальная длина"
 
-msgid "Modify Data Before Cloning"
-msgstr "Измените данные перед клонированием"
-
 msgid "Month"
 msgstr "Месяц"
-
-msgid "Mutate"
-msgstr "Мутировать"
 
 msgid "My Account"
 msgstr "Мой счет"
@@ -1045,20 +784,11 @@ msgstr "Мой счет"
 msgid "Name"
 msgstr "Имя"
 
-msgid "Navigation Menu"
-msgstr "Меню навигации"
-
-msgid "New"
-msgstr "Новый"
-
 msgid "New Password"
 msgstr "Новый пароль"
 
 msgid "New Password Again"
 msgstr "Новый пароль еще раз"
-
-msgid "New Value"
-msgstr "Новое значение"
 
 msgid "No"
 msgstr "Нет"
@@ -1078,23 +808,17 @@ msgstr "Нет результата для текущего примененно
 msgid "No Search Results"
 msgstr "Нет Результатов Поиска"
 
-msgid "Node"
-msgstr "Узел"
-
-msgid "Node Label"
-msgstr "Метка узла"
-
-msgid "Node Properties"
-msgstr "Свойства узла"
-
-msgid "Nodes"
-msgstr "Узлы"
-
 msgid "Not Equal"
 msgstr "Не равный"
 
 msgid "Not Equal To Other Field"
 msgstr "Не равно другому полю"
+
+msgid ""
+"Note that validations picked from the database can&apos;t be removed\n"
+"from the app. The only way to remove them is to delete them from the\n"
+"database and restart your app."
+msgstr ""
 
 msgid "Now"
 msgstr "Сейчас"
@@ -1104,9 +828,6 @@ msgstr "Число"
 
 msgid "Old Password"
 msgstr "Старый пароль"
-
-msgid "Old Value"
-msgstr "Старое значение"
 
 msgid "On Create"
 msgstr "При создании"
@@ -1135,9 +856,6 @@ msgstr "Апельсин"
 msgid "Order"
 msgstr "Заказ"
 
-msgid "Ordered"
-msgstr "Заказал"
-
 msgid "Password"
 msgstr "Пароль"
 
@@ -1149,12 +867,6 @@ msgstr "Пароль не будет изменен на демо-счете"
 
 msgid "Persistent Query"
 msgstr "Постоянный запрос"
-
-msgid "Personalize This Table"
-msgstr "Персонализируйте эту таблицу"
-
-msgid "Pie Chart"
-msgstr "Круговая диаграмма"
 
 msgid "Plural"
 msgstr "Множественное число"
@@ -1179,15 +891,6 @@ msgstr "Профиль"
 
 msgid "Quarter"
 msgstr "Четверть"
-
-msgid "Query"
-msgstr "Запрос"
-
-msgid "Recovery Code"
-msgstr "Код восстановления"
-
-msgid "Recovery tokens copied to clipboard"
-msgstr "Токены восстановления скопированы в буфер обмена."
 
 msgid "Red"
 msgstr "Красный"
@@ -1216,9 +919,6 @@ msgstr "связи"
 msgid "Relations Order"
 msgstr "Порядок отношений"
 
-msgid "Relations To Clone Along"
-msgstr "Отношения для клонирования"
-
 msgid "Relationship Settings"
 msgstr "Настройки отношений"
 
@@ -1231,41 +931,20 @@ msgstr "Удалять"
 msgid "Remove Nested Filter"
 msgstr "Удалить вложенный фильтр"
 
-msgid "Request ID"
-msgstr "Идентификатор запроса"
-
-msgid "Request Method"
-msgstr "Метод запроса"
-
 msgid "Required"
 msgstr "Необходимый"
 
 msgid "Reset"
 msgstr "Перезагрузить"
 
-msgid "Reset 2FA Recovery Tokens"
-msgstr "Сброс токенов восстановления 2FA"
-
 msgid "Reset Password"
 msgstr "Сброс пароля"
-
-msgid "Reset Recovery Tokens"
-msgstr "Сбросить токены восстановления"
 
 msgid "Reset User Password"
 msgstr "Сбросить пароль пользователя"
 
 msgid "Resetting Password"
 msgstr "Сброс пароля"
-
-msgid "Response"
-msgstr "Ответ"
-
-msgid "Restore"
-msgstr "Восстановить"
-
-msgid "Restored"
-msgstr "Восстановлен"
 
 msgid "Reveal Credentials"
 msgstr "Раскрыть учетные данные"
@@ -1288,29 +967,14 @@ msgstr "Ролевые разрешения"
 msgid "Roles"
 msgstr "Роли"
 
-msgid "Route ID"
-msgstr "Идентификатор маршрута"
-
 msgid "Save"
 msgstr "Сохранять"
 
 msgid "Save {singular}"
 msgstr "Сохранить {singular}"
 
-msgid "Save Current Filters"
-msgstr "Сохранить текущие фильтры"
-
-msgid "Saving"
-msgstr "Сохранение"
-
 msgid "Saving {singular}"
 msgstr "сохранение {singular}"
-
-msgid "Scheduler"
-msgstr "Планировщик"
-
-msgid "Schedulers"
-msgstr "Планировщики"
 
 msgid "Script"
 msgstr "Скрипт"
@@ -1330,17 +994,8 @@ msgstr "Секреты"
 msgid "Select {0}"
 msgstr ""
 
-msgid "Select Node Type"
-msgstr "Выберите тип узла"
-
-msgid "Select Trigger"
-msgstr "Выберите триггер"
-
 msgid "Select Value"
 msgstr "Выберите значение"
-
-msgid "Select Workflow"
-msgstr "Выберите рабочий процесс"
 
 msgid "Selection"
 msgstr "Выбор"
@@ -1366,20 +1021,11 @@ msgstr "Электронная почта отправителя"
 msgid "Sender Name"
 msgstr "Имя отправителя"
 
-msgid "Sensitive Field"
-msgstr "Чувствительное поле"
-
-msgid "Sensitive Fields"
-msgstr "Чувствительные поля"
-
 msgid "Setting Up Account"
 msgstr "Настройка учетной записи"
 
 msgid "Setting Up Credentials"
 msgstr "Настройка учетных данных"
-
-msgid "Settings"
-msgstr "Настройки"
 
 msgid "Setup"
 msgstr "Настраивать"
@@ -1393,26 +1039,8 @@ msgstr "Настройка учетных данных"
 msgid "Setup DB credentials"
 msgstr ""
 
-msgid "Share"
-msgstr "Делиться"
-
-msgid "Shared"
-msgstr "Общий"
-
-msgid "Sharing"
-msgstr "Совместное использование"
-
-msgid "Show"
-msgstr "Показывать"
-
 msgid "Show Password"
 msgstr ""
-
-msgid "Show Soft Deleted Items And The Restore Button"
-msgstr "Показать обратимо удаленные элементы и кнопку «Восстановить»"
-
-msgid "Show Up In Roles And Permissions"
-msgstr "Показывать роли и разрешения"
 
 msgid "Showing <0/> entries of <1>{0}</1> results"
 msgstr "Показаны <0/> записей из <1>{0}</1> результатов."
@@ -1435,41 +1063,20 @@ msgstr "Настройки сайта"
 msgid "Small Logo"
 msgstr "Маленький логотип"
 
-msgid "Soft Delete"
-msgstr "Мягкое удаление"
-
-msgid "Soft Delete Settings"
-msgstr "Настройки мягкого удаления"
-
-msgid "Stacked"
-msgstr "Сложенный"
-
 msgid "Star us on Github"
 msgstr "Отметьте нас на Github"
 
 msgid "Start of year"
 msgstr "Начало года"
 
-msgid "State Script"
-msgstr "Государственный сценарий"
-
 msgid "Storage Key"
 msgstr "Ключ хранения"
-
-msgid "Strategy"
-msgstr "Стратегия"
 
 msgid "String"
 msgstr "Нить"
 
 msgid "Subject"
 msgstr "Предмет"
-
-msgid "Submit"
-msgstr "Представлять на рассмотрение"
-
-msgid "Submitting"
-msgstr "Отправка"
 
 msgid "Summary Card"
 msgstr "Сводная карточка"
@@ -1495,12 +1102,6 @@ msgstr "Настройки столбцов таблицы"
 msgid "Table Fields Order"
 msgstr "Порядок полей таблицы"
 
-msgid "Table Personalization"
-msgstr "Персонализация стола"
-
-msgid "Table Personalizations"
-msgstr "Персонализация стола"
-
 msgid "Table View"
 msgstr "Представление таблицы"
 
@@ -1516,35 +1117,38 @@ msgstr "Текст"
 msgid "Textarea"
 msgstr "Текстовая область"
 
+msgid ""
+"The <code> Configure Validation</code> button allows you to add more\n"
+"validations that we can&apos;t possibly get from the database like\n"
+"<code>minLength</code>,<code> regex</code>, <code>alphanumeric</code>,\n"
+"<code>matchOtherField</code>, etc. We also provide a text input for you\n"
+"to customize the validation message."
+msgstr ""
+
 msgid "Theme"
 msgstr "Тема"
 
 msgid "Theme Settings"
 msgstr "Настройки темы"
 
-msgid "This {0} Has No Form"
-msgstr "У этого {0} нет формы"
-
 msgid "This action does not have configuration"
 msgstr "У этого действия нет конфигурации"
-
-msgid "This entity has no fields"
-msgstr "У этой сущности нет полей"
 
 msgid "This entity has no relations"
 msgstr "Эта сущность не имеет отношений"
 
-msgid "This flow should be queued and executed asynchronously (recommended for long running flows, requires Redis)"
-msgstr "Этот поток должен быть поставлен в очередь и выполняться асинхронно (рекомендуется для длительных потоков, требуется Redis)."
+msgid ""
+"This is a good place to toggle off entities in the database that\n"
+"don&apos;t have much business value, for example, migrations, logs, etc."
+msgstr ""
 
-msgid "This trigger has no workflow attached"
-msgstr "К этому триггеру не привязан рабочий процесс"
-
-msgid "This workflow has no trigger attached"
-msgstr "К этому рабочему процессу не прикреплен триггер"
-
-msgid "Time Changed"
-msgstr "Время изменено"
+msgid ""
+"This tab enables you to rename the label of the field. Say you want the\n"
+"<code> name</code> to be called <code>Full Name</code>, or\n"
+"<code>updatedAt</code> to be called <code>Last Updated</code>; then you\n"
+"simply input the desired name under the field and submit and the column\n"
+"will be renamed everywhere."
+msgstr ""
 
 msgid "Title"
 msgstr "Заголовок"
@@ -1564,14 +1168,14 @@ msgstr "Срок действия токена в днях"
 msgid "Trigger"
 msgstr "Курок"
 
-msgid "Try Out 25+ Pro Features"
-msgstr "Попробуйте 25 функций Pro"
-
-msgid "Two Factor Authentication"
+msgid "Two quick notes as we head into this section"
 msgstr ""
 
 msgid "Type"
 msgstr "Тип"
+
+msgid "Types"
+msgstr ""
 
 msgid "Update"
 msgstr "Обновлять"
@@ -1603,12 +1207,6 @@ msgstr "Используйте цвета"
 msgid "Use Icon"
 msgstr "Использовать значок"
 
-msgid "Use OTP Token"
-msgstr "Использовать OTP-токен"
-
-msgid "Use Recovery Code"
-msgstr "Использовать код восстановления"
-
 msgid "Use SSL"
 msgstr "Использовать SSL"
 
@@ -1639,15 +1237,6 @@ msgstr "Ценить"
 msgid "Variables"
 msgstr "Переменные"
 
-msgid "Verifing"
-msgstr "Проверка"
-
-msgid "Verify"
-msgstr "Проверять"
-
-msgid "Vertical"
-msgstr "Вертикальный"
-
 msgid "View"
 msgstr "Вид"
 
@@ -1660,14 +1249,20 @@ msgstr "Фиолетовый"
 msgid "Visit our website"
 msgstr "Посетите наш сайт"
 
-msgid "Webhook"
-msgstr "Вебхук"
-
-msgid "Webhooks"
-msgstr "Вебхуки"
+msgid ""
+"We strongly advise that you edit your schema to minimize your\n"
+"touching of this section."
+msgstr ""
 
 msgid "Week"
 msgstr "Неделя"
+
+msgid ""
+"When the field is an enum field or you select <code>selection</code> as\n"
+"the type, You will see a <code>Configure Selections</code> button which\n"
+"will allow you to select colors for enum field types and manage the\n"
+"selections for the <code>selection</code> type."
+msgstr ""
 
 msgid "Widget Script"
 msgstr "Скрипт виджета"
@@ -1675,23 +1270,33 @@ msgstr "Скрипт виджета"
 msgid "Width"
 msgstr "Ширина"
 
-msgid "Workflow"
-msgstr "Рабочий процесс"
-
-msgid "Workflows"
-msgstr "Рабочие процессы"
-
-msgid "X Label"
-msgstr "X-этикетка"
-
-msgid "Y Label"
-msgstr "Y-этикетка"
-
 msgid "Year"
 msgstr "Год"
 
 msgid "Yes"
 msgstr "Да"
+
+msgid ""
+"You will also see that the selections are narrowed as you will not see\n"
+"an\n"
+"<code> email</code> selection for a numerical field nor will you see the\n"
+"<code>number</code> for the\n"
+"<code> text</code> field. This is to eliminate the possibility of an\n"
+"invalid selection."
+msgstr ""
+
+msgid ""
+"You will be able to make field-level customizations on the tables,\n"
+"details, create, and edit views. We have three tabs here, so let&apos;s\n"
+"start with the first."
+msgstr ""
+
+msgid ""
+"You will see that some field types are disabled and these are for fields\n"
+"like <code>boolean</code>, <code>date</code>, <code>enum</code>, etc.\n"
+"which really don&apos;t have sister types so there is nothing you can\n"
+"update it to."
+msgstr ""
 
 msgid "Your Users Table"
 msgstr "Таблица ваших пользователей"

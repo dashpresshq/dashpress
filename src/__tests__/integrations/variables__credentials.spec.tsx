@@ -10,6 +10,7 @@ import { AuthActions } from "frontend/hooks/auth/auth.actions";
 import { getTableRows } from "__tests__/_/utils/getTableRows";
 import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
 import { TestProviders } from "__tests__/_/Provider";
+import { closeAllToasts } from "__tests__/_/utils/closeAllToasts";
 
 setupApiHandlers();
 
@@ -177,6 +178,8 @@ describe("pages/integrations/variables => credentials", () => {
         "Invalid Password"
       );
 
+      await closeAllToasts();
+
       const table = within(
         screen.getByRole("tabpanel", { name: "Secrets" })
       ).getByRole("table");
@@ -278,10 +281,12 @@ describe("pages/integrations/variables => credentials", () => {
           { timeout: 2000 }
         )
       ).toBeInTheDocument();
+
+      await closeAllToasts();
     });
   });
 
-  describe.skip("update", () => {
+  describe("update", () => {
     it("should update secret", async () => {
       render(
         <TestProviders>
@@ -331,9 +336,11 @@ describe("pages/integrations/variables => credentials", () => {
         within(dialog).getByRole("button", { name: "Update Secret" })
       );
 
-      expect((await screen.findAllByRole("status"))[0]).toHaveTextContent(
+      expect(await screen.findByRole("status")).toHaveTextContent(
         "Secret Saved Successfully"
       );
+
+      await closeAllToasts();
 
       await waitFor(async () => {
         expect(await getTableRows(table)).toEqual([
@@ -380,9 +387,11 @@ describe("pages/integrations/variables => credentials", () => {
         within(dialog).getByRole("button", { name: "Create Secret" })
       );
 
-      expect((await screen.findAllByRole("status"))[0]).toHaveTextContent(
+      expect(await screen.findByRole("status")).toHaveTextContent(
         "Secret Saved Successfully"
       );
+
+      await closeAllToasts();
 
       expect(
         await screen.findByRole(
@@ -433,7 +442,7 @@ describe("pages/integrations/variables => credentials", () => {
 
       expect(await within(table).findAllByRole("row")).toHaveLength(4);
 
-      expect((await screen.findAllByRole("status"))[0]).toHaveTextContent(
+      expect(await screen.findByRole("status")).toHaveTextContent(
         "Secret Deleted Successfully"
       );
     });

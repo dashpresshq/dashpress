@@ -4,6 +4,7 @@ import userEvent from "@testing-library/user-event";
 import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
 import { fakeMessageDescriptor } from "translations/fake";
 import { TestProviders } from "__tests__/_/Provider";
+import { IAppliedSchemaFormConfig } from "shared/form-schemas/types";
 import { SchemaForm } from ".";
 
 type IAccount = {
@@ -18,7 +19,7 @@ useRouter.mockImplementation(USE_ROUTER_PARAMS({}));
 const buttonText = (isSubmitting: boolean) =>
   fakeMessageDescriptor(isSubmitting ? "Submitting Form" : "Submit Form");
 
-const BASE_FIELDS = {
+const BASE_FIELDS: IAppliedSchemaFormConfig<IAccount> = {
   name: {
     label: fakeMessageDescriptor("Name"),
     type: "text" as const,
@@ -27,6 +28,12 @@ const BASE_FIELDS = {
         validationType: "required" as const,
       },
     ],
+    formState($) {
+      return {
+        hidden: $.formValues.email === "FSH",
+        disabled: $.formValues.email === "FSD",
+      };
+    },
   },
   email: {
     label: fakeMessageDescriptor("Email"),
@@ -258,7 +265,7 @@ describe("<SchemaForm />", () => {
     });
   });
 
-  it("should disable form fields", async () => {
+  it("should disable form fields from field state", async () => {
     const mockOnSubmit = jest.fn();
     render(
       <TestProviders>
@@ -289,7 +296,7 @@ describe("<SchemaForm />", () => {
     expect(screen.getByLabelText("Email")).not.toBeDisabled();
   });
 
-  it("should hide form fields", async () => {
+  it("should hide form fields from field state", async () => {
     const mockOnSubmit = jest.fn();
     render(
       <TestProviders>
@@ -309,15 +316,77 @@ describe("<SchemaForm />", () => {
       </TestProviders>
     );
 
-    expect(screen.getByLabelText("Email")).toBeInTheDocument();
+    expect(screen.getByLabelText("Name")).toBeInTheDocument();
 
-    await userEvent.type(screen.getByLabelText("Name"), "Hidden");
+    await userEvent.type(screen.getByLabelText("Email"), "Hidden");
 
-    expect(screen.queryByLabelText("Email")).not.toBeDisabled();
+    expect(screen.queryByLabelText("Name")).not.toBeInTheDocument();
 
-    await userEvent.type(screen.getByLabelText("Name"), "-");
+    await userEvent.type(screen.getByLabelText("Email"), "-");
 
-    expect(screen.getByLabelText("Email")).toBeInTheDocument();
+    expect(screen.getByLabelText("Name")).toBeInTheDocument();
+  });
+
+  it("should disable form fields from form state", async () => {
+    const mockOnSubmit = jest.fn();
+    render(
+      <TestProviders>
+        <SchemaForm<IAccount>
+          onSubmit={mockOnSubmit}
+          buttonText={buttonText}
+          systemIcon="Save"
+          fields={{
+            ...BASE_FIELDS,
+          }}
+          action="edit"
+          formExtension={{
+            beforeSubmit: BEFORE_SUBMIT,
+            fieldsState: FIELD_STATE,
+          }}
+        />
+      </TestProviders>
+    );
+
+    expect(screen.getByLabelText("Name")).not.toBeDisabled();
+
+    await userEvent.type(screen.getByLabelText("Email"), "FSD");
+
+    expect(screen.getByLabelText("Name")).toBeDisabled();
+
+    await userEvent.type(screen.getByLabelText("Email"), "-");
+
+    expect(screen.getByLabelText("Name")).not.toBeDisabled();
+  });
+
+  it("should hide form fields from form state", async () => {
+    const mockOnSubmit = jest.fn();
+    render(
+      <TestProviders>
+        <SchemaForm<IAccount>
+          onSubmit={mockOnSubmit}
+          buttonText={buttonText}
+          systemIcon="Save"
+          fields={{
+            ...BASE_FIELDS,
+          }}
+          action="edit"
+          formExtension={{
+            beforeSubmit: BEFORE_SUBMIT,
+            fieldsState: FIELD_STATE,
+          }}
+        />
+      </TestProviders>
+    );
+
+    expect(screen.getByLabelText("Name")).toBeInTheDocument();
+
+    await userEvent.type(screen.getByLabelText("Email"), "FSH");
+
+    expect(screen.queryByLabelText("Name")).not.toBeInTheDocument();
+
+    await userEvent.type(screen.getByLabelText("Email"), "-");
+
+    expect(screen.getByLabelText("Name")).toBeInTheDocument();
   });
 
   it("should ignore form fields when it recieveds invalid JS", async () => {

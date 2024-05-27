@@ -31,3 +31,5 @@ export interface IRenderFormInputProps {
   from?: string;
   rightActions?: IFormInputRightAction[];
 }
+
+export const FOR_CODE_COV = 1;

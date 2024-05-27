@@ -44,6 +44,8 @@ import { FOR_CODE_COV as $47 } from "shared/constants/portal/menu/index";
 import { FOR_CODE_COV as $48 } from "shared/user-preferences/base-types";
 import { FOR_CODE_COV as $49 } from "shared/user-preferences/types";
 import { FOR_CODE_COV as $50 } from "frontend/design-system/components/EmptyWrapper/types";
+import { FOR_CODE_COV as $51 } from "frontend/components/SchemaForm/types";
+import { FOR_CODE_COV as $52 } from "frontend/design-system/components/Button/types";
 
 import { noop } from "shared/lib/noop";
 
@@ -93,7 +95,9 @@ noop(
   $47,
   $48,
   $49,
-  $50
+  $50,
+  $51,
+  $52
 );
 
 describe("Code coverage ignores plain types file", () => {

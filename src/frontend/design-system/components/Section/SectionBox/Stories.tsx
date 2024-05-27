@@ -114,11 +114,6 @@ IsLoading.args = {
   isLoading: true,
 };
 
-export const HeadLess = Template.bind({});
-HeadLess.args = {
-  headLess: true,
-};
-
 export const EveryThing = Template.bind({});
 EveryThing.args = {
   description: "Some help text for you",

@@ -19,7 +19,6 @@ export interface IProps {
   actionButtons?: IGroupActionButton[];
   backLink?: { label?: MessageDescriptor; action: string | (() => void) };
   isLoading?: boolean;
-  headLess?: boolean;
 }
 
 export function SectionBox({
@@ -29,7 +28,6 @@ export function SectionBox({
   description,
   actionButtons,
   backLink,
-  headLess,
 }: IProps) {
   const { _ } = useLingui();
 
@@ -47,28 +45,26 @@ export function SectionBox({
         </>
       )}
       <Card>
-        {!headLess ? (
-          <CardHeader>
-            <Stack $justify="space-between" $align="center">
-              <Stack>
-                {isLoading ? (
-                  <BaseSkeleton width="150px" height="20px" />
-                ) : (
-                  <Typo.MD $weight="bold">{_(title)}</Typo.MD>
-                )}
-                {description ? (
-                  <Tooltip text={description}>
-                    <SystemIcon icon="Help" size={15} />
-                  </Tooltip>
-                ) : null}
-              </Stack>
-              {!isLoading &&
-                (actionButtons ? (
-                  <ActionButtons actionButtons={actionButtons} />
-                ) : null)}
+        <CardHeader>
+          <Stack $justify="space-between" $align="center">
+            <Stack>
+              {isLoading ? (
+                <BaseSkeleton width="150px" height="20px" />
+              ) : (
+                <Typo.MD $weight="bold">{_(title)}</Typo.MD>
+              )}
+              {description ? (
+                <Tooltip text={description}>
+                  <SystemIcon icon="Help" size={15} />
+                </Tooltip>
+              ) : null}
             </Stack>
-          </CardHeader>
-        ) : null}
+            {!isLoading &&
+              (actionButtons ? (
+                <ActionButtons actionButtons={actionButtons} />
+              ) : null)}
+          </Stack>
+        </CardHeader>
         {children ? <CardBody>{children}</CardBody> : null}
       </Card>
     </>

@@ -22,7 +22,6 @@ export function SoftButton({
   action,
   noToolTip,
   color,
-  secondaryAction,
 }: IActionButton) {
   const iconProps = {
     size: 14,
@@ -75,13 +74,7 @@ export function SoftButton({
           target={action.startsWith("http") ? "_blank" : undefined}
           {...buttonProps}
         >
-          {secondaryAction ? (
-            <span onClick={secondaryAction} aria-hidden="true">
-              {content}
-            </span>
-          ) : (
-            content
-          )}
+          {content}
         </SoftButtonStyled>
       </Tooltip>
     );

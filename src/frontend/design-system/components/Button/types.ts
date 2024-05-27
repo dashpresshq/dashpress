@@ -11,7 +11,6 @@ export interface IActionButton {
   size?: "sm" | "xs";
   block?: true;
   noToolTip?: true;
-  secondaryAction?: () => void;
   justIcon?: true;
   isMakingRequest?: boolean;
   color?: keyof typeof SYSTEM_COLORS;
@@ -21,3 +20,5 @@ export interface IGroupActionButton extends IActionButton {
   id: string;
   order?: number;
 }
+
+export const FOR_CODE_COV = 1;

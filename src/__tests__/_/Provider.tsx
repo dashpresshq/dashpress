@@ -17,6 +17,16 @@ const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       staleTime: Infinity,
+      retry: (failureCount, error: any) => {
+        const statusCode = (error as Response)?.status;
+        if (!statusCode) {
+          return true;
+        }
+        if (`${statusCode}`.startsWith("4")) {
+          return false;
+        }
+        return failureCount < 3;
+      },
     },
   },
 });

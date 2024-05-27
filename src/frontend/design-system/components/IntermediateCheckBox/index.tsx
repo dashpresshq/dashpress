@@ -48,10 +48,6 @@ export function IntermediateCheckBox({
   disabled,
   label,
 }: IProps) {
-  const handleClick = () => {
-    onClick(state);
-  };
-
   return (
     <IconWrapper
       role="checkbox"
@@ -62,14 +58,7 @@ export function IntermediateCheckBox({
       onMouseDown={(e) => {
         e.stopPropagation();
 
-        handleClick();
-      }}
-      onKeyDown={(e) => {
-        e.stopPropagation();
-
-        if (e.key === "Enter" || e.key === " ") {
-          handleClick();
-        }
+        onClick(state);
       }}
     >
       <Icon as={IconPerState[state].IconCmp} aria-hidden />

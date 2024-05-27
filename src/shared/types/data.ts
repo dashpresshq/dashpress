@@ -98,6 +98,4 @@ export type ITableView = {
   >;
 };
 
-export const FOR_CODE_COV = 1;
-
 export type DataCrudKeys = "create" | "update" | "table" | "details";

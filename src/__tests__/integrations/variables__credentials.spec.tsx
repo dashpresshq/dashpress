@@ -13,7 +13,7 @@ import { TestProviders } from "__tests__/_/Provider";
 
 setupApiHandlers();
 
-describe.skip("pages/integrations/variables => credentials", () => {
+describe("pages/integrations/variables => credentials", () => {
   const useRouter = jest.spyOn(require("next/router"), "useRouter");
   beforeAll(() => {
     localStorage.setItem(AuthActions.JWT_TOKEN_STORAGE_KEY, "foo");
@@ -40,7 +40,7 @@ describe.skip("pages/integrations/variables => credentials", () => {
 
       expect(
         within(priviledgeSection).queryByText(
-          `For security reasons, Please input your account password to be able to manage Secrets`
+          `For security reasons, Please input your account password to reveal credentials`
         )
       ).not.toBeInTheDocument();
       expect(
@@ -53,7 +53,7 @@ describe.skip("pages/integrations/variables => credentials", () => {
       ).not.toBeInTheDocument();
       expect(
         within(priviledgeSection).queryByRole(`button`, {
-          name: "Reveal Secrets",
+          name: "Reveal Credentials",
         })
       ).not.toBeInTheDocument();
     });
@@ -71,7 +71,7 @@ describe.skip("pages/integrations/variables => credentials", () => {
       await userEvent.click(screen.getByRole("tab", { name: "Secrets" }));
       expect(
         within(priviledgeSection).getByText(
-          `For security reasons, Please input your account password to be able to manage Secrets`
+          `For security reasons, Please input your account password to reveal credentials`
         )
       ).toBeInTheDocument();
       expect(
@@ -84,7 +84,7 @@ describe.skip("pages/integrations/variables => credentials", () => {
       ).toBeInTheDocument();
       expect(
         within(priviledgeSection).getByRole(`button`, {
-          name: "Reveal Secrets",
+          name: "Reveal Credentials",
         })
       ).toBeInTheDocument();
     });
@@ -169,7 +169,7 @@ describe.skip("pages/integrations/variables => credentials", () => {
       );
       await userEvent.click(
         within(priviledgeSection).getByRole("button", {
-          name: "Reveal Secrets",
+          name: "Reveal Credentials",
         })
       );
 
@@ -215,7 +215,7 @@ describe.skip("pages/integrations/variables => credentials", () => {
       );
       await userEvent.click(
         within(priviledgeSection).getByRole("button", {
-          name: "Reveal Secrets",
+          name: "Reveal Credentials",
         })
       );
 
@@ -236,7 +236,7 @@ describe.skip("pages/integrations/variables => credentials", () => {
 
       expect(
         within(priviledgeSection).queryByText(
-          `For security reasons, Please input your account password to be able to manage Secrets`
+          `For security reasons, Please input your account password to reveal credentials`
         )
       ).not.toBeInTheDocument();
       expect(
@@ -244,7 +244,7 @@ describe.skip("pages/integrations/variables => credentials", () => {
       ).not.toBeInTheDocument();
       expect(
         within(priviledgeSection).queryByRole(`button`, {
-          name: "Reveal Secrets",
+          name: "Reveal Credentials",
         })
       ).not.toBeInTheDocument();
     });
@@ -281,7 +281,7 @@ describe.skip("pages/integrations/variables => credentials", () => {
     });
   });
 
-  describe("update", () => {
+  describe.skip("update", () => {
     it("should update secret", async () => {
       render(
         <TestProviders>

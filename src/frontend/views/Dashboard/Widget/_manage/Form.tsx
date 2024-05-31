@@ -37,26 +37,27 @@ import { MessageDescriptor } from "@lingui/core";
 import { useDomainMessages } from "frontend/lib/crud-config";
 import { LANG_DOMAINS } from "frontend/lib/crud-config/lang-domains";
 import { DashboardWidgetPresentation } from "../Presentation";
-import { WIDGET_CONFIG } from "../constants";
+import { BASE_WIDGET_CONFIG } from "../constants";
 import { PortalFormFields, PortalFormSchema } from "./portal";
 import { WidgetFormField } from "./types";
 import { DASHBOARD_WIDGET_HEIGHTS } from "./constants";
-
-const DashboardTypesOptions: {
-  label: MessageDescriptor;
-  value: IWidgetConfig["_type"];
-}[] = typescriptSafeObjectDotEntries(WIDGET_CONFIG).map(
-  ([value, { label }]) => ({
-    label,
-    value: value as IWidgetConfig["_type"],
-  })
-);
+import { usePortalDashboardTypesOptions } from "../portal";
 
 const FormSchema: Partial<Record<IWidgetConfig["_type"], WidgetFormField[]>> = {
   "summary-card": ["color", "icon"],
   table: [],
   ...PortalFormSchema,
 };
+
+const baseDashboardTypesOptions: {
+  label: MessageDescriptor;
+  value: IWidgetConfig["_type"];
+}[] = typescriptSafeObjectDotEntries(BASE_WIDGET_CONFIG).map(
+  ([value, { label }]) => ({
+    label,
+    value: value as IWidgetConfig["_type"],
+  })
+);
 
 export function useRunWidgetScript() {
   return useMutation({
@@ -88,6 +89,8 @@ export function DashboardWidgetForm({
       runWidgetScript.mutate(initialValues.script);
     }
   }, [initialValues]);
+
+  const portalDashboardTypesOptions = usePortalDashboardTypesOptions();
 
   return (
     <>
@@ -140,7 +143,10 @@ export function DashboardWidgetForm({
                         required
                         label={msg`Type`}
                         disabledOptions={[]}
-                        selectData={DashboardTypesOptions}
+                        selectData={[
+                          ...baseDashboardTypesOptions,
+                          ...portalDashboardTypesOptions,
+                        ]}
                         meta={meta}
                         input={input}
                       />

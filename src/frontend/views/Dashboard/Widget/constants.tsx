@@ -8,7 +8,7 @@ import { IWidgetConfigBag } from "./types";
 import { TableWidgetSchema } from "./_render/Table/types";
 import { SummaryCardWidgetSchema } from "./_render/Summary/types";
 
-const BASE_WIDGET_CONFIG: Partial<
+export const BASE_WIDGET_CONFIG: Partial<
   Record<IWidgetConfig["_type"], IWidgetConfigBag>
 > = {
   table: {

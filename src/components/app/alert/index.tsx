@@ -60,7 +60,7 @@ export function Alert({ type, message, renderJsx, action }: IProps) {
   return (
     <div
       className={cn(
-        "rounded-md shadow-md w-full flex items-center gap-3 px-4 my-3",
+        "rounded-md shadow-md w-full flex items-center gap-3 px-4 mb-3",
         spectrumVariants({ spectrum })
       )}
       role="alert"

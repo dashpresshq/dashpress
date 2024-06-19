@@ -34,45 +34,43 @@ export function BaseActionsLayout({ children }: IProps) {
     <AppLayout>
       <ContentLayout>
         <ContentLayout.Left>
-          <div className="flex flex-col gap-2">
-            <MenuSection
-              menuItems={integrationsList.data.map((menuitem) => {
-                const isActive = activeIntegrations.data.includes(menuitem.key);
-                return {
-                  id: menuitem.key,
-                  action: NAVIGATION_LINKS.INTEGRATIONS.ACTIONS(menuitem.key),
-                  label: fakeMessageDescriptor(menuitem.title),
-                  subtle: !isActive,
-                  active: menuitem.key === currentKey,
-                  systemIcon: isActive ? "Zap" : "ZapOff",
-                };
-              })}
-              currentMenuItem={router.asPath.split("?")[0]}
-            />
+          <MenuSection
+            menuItems={integrationsList.data.map((menuitem) => {
+              const isActive = activeIntegrations.data.includes(menuitem.key);
+              return {
+                id: menuitem.key,
+                action: NAVIGATION_LINKS.INTEGRATIONS.ACTIONS(menuitem.key),
+                label: fakeMessageDescriptor(menuitem.title),
+                subtle: !isActive,
+                active: menuitem.key === currentKey,
+                systemIcon: isActive ? "Zap" : "ZapOff",
+              };
+            })}
+            currentMenuItem={router.asPath.split("?")[0]}
+          />
 
-            <MenuSection
-              menuItems={[
-                {
-                  id: "storage",
-                  action: NAVIGATION_LINKS.INTEGRATIONS.STORAGE,
-                  label: fileStorageDomainMessages.TEXT_LANG.TITLE,
-                  systemIcon: "Upload",
-                },
-              ]}
-              currentMenuItem={router.asPath.split("?")[0]}
-            />
-            <MenuSection
-              menuItems={[
-                {
-                  id: "variables",
-                  action: NAVIGATION_LINKS.INTEGRATIONS.VARIABLES,
-                  label: msg`Variables`,
-                  systemIcon: "Book",
-                },
-              ]}
-              currentMenuItem={router.asPath.split("?")[0]}
-            />
-          </div>
+          <MenuSection
+            menuItems={[
+              {
+                id: "storage",
+                action: NAVIGATION_LINKS.INTEGRATIONS.STORAGE,
+                label: fileStorageDomainMessages.TEXT_LANG.TITLE,
+                systemIcon: "Upload",
+              },
+            ]}
+            currentMenuItem={router.asPath.split("?")[0]}
+          />
+          <MenuSection
+            menuItems={[
+              {
+                id: "variables",
+                action: NAVIGATION_LINKS.INTEGRATIONS.VARIABLES,
+                label: msg`Variables`,
+                systemIcon: "Book",
+              },
+            ]}
+            currentMenuItem={router.asPath.split("?")[0]}
+          />
         </ContentLayout.Left>
         <ContentLayout.Right>{children}</ContentLayout.Right>
       </ContentLayout>

@@ -79,59 +79,57 @@ export function UserPreferences() {
 
   return (
     <BaseAccountLayout>
-      <div className="flex flex-col gap-4">
-        <SectionBox title={domainMessages.TEXT_LANG.TITLE}>
-          <ViewStateMachine
-            loading={userPreferences.isLoading}
-            error={userPreferences.error}
-            loader={<FormSkeleton schema={[FormSkeletonSchema.Input]} />}
-          >
-            <SchemaForm<IUserPreferences>
-              onSubmit={async (data) => {
-                await upsertUserPreferenceMutation.mutateAsync(data.theme);
-              }}
-              initialValues={{ theme: userPreferences.data }}
-              buttonText={domainMessages.FORM_LANG.UPSERT}
-              fields={formSchema}
-              systemIcon="Save"
-            />
-          </ViewStateMachine>
-        </SectionBox>
-
-        <SectionBox
-          title={msg`Language`}
-          actionButtons={[
-            {
-              id: "change-language",
-              action:
-                "https://github.com/dashpresshq/dashpress/tree/master/src/translations/locales",
-              systemIcon: "Help",
-              label: msg`I Want To Help With Translation`,
-            },
-          ]}
+      <SectionBox title={domainMessages.TEXT_LANG.TITLE}>
+        <ViewStateMachine
+          loading={userPreferences.isLoading}
+          error={userPreferences.error}
+          loader={<FormSkeleton schema={[FormSkeletonSchema.Input]} />}
         >
-          <SchemaForm<{ locale: string }>
+          <SchemaForm<IUserPreferences>
             onSubmit={async (data) => {
-              const { pathname, asPath, query } = router;
-
-              router.push({ pathname, query }, asPath, { locale: data.locale });
-
-              const date = new Date();
-              const expireMs = 100 * 24 * 60 * 60 * 1000; // 100 days
-              date.setTime(date.getTime() + expireMs);
-              document.cookie = `NEXT_LOCALE=${
-                data.locale
-              };expires=${date.toUTCString()};path=/`;
+              await upsertUserPreferenceMutation.mutateAsync(data.theme);
             }}
-            initialValues={{ locale: router.locale || router.defaultLocale }}
-            buttonText={() => msg`Change Language`}
-            fields={LANGUAGE_PREFERENCES_FORM_SCHEMA}
+            initialValues={{ theme: userPreferences.data }}
+            buttonText={domainMessages.FORM_LANG.UPSERT}
+            fields={formSchema}
             systemIcon="Save"
           />
-        </SectionBox>
+        </ViewStateMachine>
+      </SectionBox>
 
-        <PortalUserPreferences />
-      </div>
+      <SectionBox
+        title={msg`Language`}
+        actionButtons={[
+          {
+            id: "change-language",
+            action:
+              "https://github.com/dashpresshq/dashpress/tree/master/src/translations/locales",
+            systemIcon: "Help",
+            label: msg`I Want To Help With Translation`,
+          },
+        ]}
+      >
+        <SchemaForm<{ locale: string }>
+          onSubmit={async (data) => {
+            const { pathname, asPath, query } = router;
+
+            router.push({ pathname, query }, asPath, { locale: data.locale });
+
+            const date = new Date();
+            const expireMs = 100 * 24 * 60 * 60 * 1000; // 100 days
+            date.setTime(date.getTime() + expireMs);
+            document.cookie = `NEXT_LOCALE=${
+              data.locale
+            };expires=${date.toUTCString()};path=/`;
+          }}
+          initialValues={{ locale: router.locale || router.defaultLocale }}
+          buttonText={() => msg`Change Language`}
+          fields={LANGUAGE_PREFERENCES_FORM_SCHEMA}
+          systemIcon="Save"
+        />
+      </SectionBox>
+
+      <PortalUserPreferences />
     </BaseAccountLayout>
   );
 }

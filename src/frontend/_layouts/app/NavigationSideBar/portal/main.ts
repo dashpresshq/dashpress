@@ -7,12 +7,12 @@ import { PortalSystemLinks } from "shared/constants/portal/menu/main";
 export const useConstantNavigationMenuItems = (): Array<{
   systemIcon: SystemIconsKeys;
   label: MessageDescriptor;
-  link: string;
+  action: string;
 }> => {
   return [
     {
       label: msg`Menu Settings`,
-      link: NAVIGATION_LINKS.SETTINGS.MENU,
+      action: NAVIGATION_LINKS.SETTINGS.MENU,
       systemIcon: "List",
     },
   ];

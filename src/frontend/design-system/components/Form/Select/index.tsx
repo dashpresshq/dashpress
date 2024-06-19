@@ -6,7 +6,7 @@ import { useMemo } from "react";
 import { msg } from "@lingui/macro";
 import { SelectStyles, SharedSelectProps } from "./styles";
 import { IBaseFormSelect } from "./types";
-import { Select as SelectCmp } from "@/components/ui/select"; // TODO
+import { Select as SelectCmp } from "@/components/ui/select";
 import { fakeMessageDescriptor } from "@/translations/fake";
 import {
   LabelAndError,

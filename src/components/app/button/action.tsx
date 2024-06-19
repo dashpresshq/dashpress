@@ -5,7 +5,7 @@ import { IGroupActionButton } from "./types";
 import { SoftButton } from "./soft";
 import { DropDownMenu } from "../drop-drop-menu";
 
-const ELLIPSIS_THRESHOLD = 1;
+const ELLIPSIS_THRESHOLD = 3;
 
 export function ActionButtons({
   actionButtons,

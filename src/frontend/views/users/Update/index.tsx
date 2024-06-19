@@ -82,46 +82,44 @@ export function UserUpdate() {
   return (
     <AppLayout>
       <ContentLayout.Center>
-        <div className="flex flex-col gap-4">
-          <SectionBox title={domainMessages.TEXT_LANG.EDIT} backLink={backLink}>
-            <ViewStateMachine
-              loading={isLoading}
-              error={error}
-              loader={
-                <FormSkeleton
-                  schema={[
-                    FormSkeletonSchema.Input,
-                    FormSkeletonSchema.Input,
-                    FormSkeletonSchema.Textarea,
-                  ]}
-                />
-              }
-            >
-              <SchemaForm<IUpdateUserForm>
-                buttonText={domainMessages.FORM_LANG.UPDATE}
-                onSubmit={updateUserMutation.mutateAsync}
-                initialValues={userDetails.data}
-                systemIcon="Save"
-                fields={UPDATE_USER_FORM_SCHEMA}
+        <SectionBox title={domainMessages.TEXT_LANG.EDIT} backLink={backLink}>
+          <ViewStateMachine
+            loading={isLoading}
+            error={error}
+            loader={
+              <FormSkeleton
+                schema={[
+                  FormSkeletonSchema.Input,
+                  FormSkeletonSchema.Input,
+                  FormSkeletonSchema.Textarea,
+                ]}
               />
-            </ViewStateMachine>
-          </SectionBox>
+            }
+          >
+            <SchemaForm<IUpdateUserForm>
+              buttonText={domainMessages.FORM_LANG.UPDATE}
+              onSubmit={updateUserMutation.mutateAsync}
+              initialValues={userDetails.data}
+              systemIcon="Save"
+              fields={UPDATE_USER_FORM_SCHEMA}
+            />
+          </ViewStateMachine>
+        </SectionBox>
 
-          {userHasPermission(UserPermissions.CAN_RESET_PASSWORD) &&
-            authenticatedUserBag.data?.username !== username && (
-              <SectionBox title={msg`Reset User Password`}>
-                <SchemaForm<IResetPasswordForm>
-                  buttonText={(submitting) =>
-                    submitting ? msg`Resetting Password` : msg`Reset Password`
-                  }
-                  systemIcon="Unlock"
-                  fields={RESET_PASSWORD_FORM_SCHEMA}
-                  onSubmit={resetPasswordMutation.mutateAsync}
-                  resetForm
-                />
-              </SectionBox>
-            )}
-        </div>
+        {userHasPermission(UserPermissions.CAN_RESET_PASSWORD) &&
+          authenticatedUserBag.data?.username !== username && (
+            <SectionBox title={msg`Reset User Password`}>
+              <SchemaForm<IResetPasswordForm>
+                buttonText={(submitting) =>
+                  submitting ? msg`Resetting Password` : msg`Reset Password`
+                }
+                systemIcon="Unlock"
+                fields={RESET_PASSWORD_FORM_SCHEMA}
+                onSubmit={resetPasswordMutation.mutateAsync}
+                resetForm
+              />
+            </SectionBox>
+          )}
       </ContentLayout.Center>
     </AppLayout>
   );

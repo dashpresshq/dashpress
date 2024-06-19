@@ -36,6 +36,7 @@ export function ReferenceComponent({ entity, id, displayFrom }: IProps) {
   return (
     <Button
       variant="link"
+      size="lg"
       onClick={() => {
         if (displayFrom === "table" || displayFrom === "details") {
           openDetailsCanvas({ entity, id });

@@ -14,12 +14,12 @@ interface IProps {
 const constantNavigation: Array<{
   systemIcon: SystemIconsKeys;
   label: MessageDescriptor;
-  link: string;
+  action: string;
 }> = [
   {
     label: msg`My Account`,
     systemIcon: "User",
-    link: NAVIGATION_LINKS.ACCOUNT.PROFILE,
+    action: NAVIGATION_LINKS.ACCOUNT.PROFILE,
   },
 ];
 
@@ -48,11 +48,11 @@ export function ProfileOnNavigation({ isFullWidth }: IProps) {
         ariaLabel="Toggle Profile Menu"
         className="[&_svg]:text-white"
         menuItems={[...constantNavigation, ...constantNavigationMenuItems].map(
-          ({ label, link, systemIcon }) => ({
-            id: link,
+          ({ label, action, systemIcon }) => ({
+            id: action,
             label,
             systemIcon,
-            action: link,
+            action,
           })
         )}
       />

@@ -27,12 +27,12 @@ export const ContentLayout: TContentLayout = ({ children }: IProps) => {
 };
 
 ContentLayout.Left = function SectionLeft({ children }: IProps) {
-  return <div className="mb-4">{children}</div>;
+  return <div className="mb-3 flex flex-col gap-3">{children}</div>;
 };
 
 ContentLayout.Right = function SectionRight({ children }: IProps) {
   return (
-    <div className="overflow-x-hidden min-h-[calc(100vh-100px)] mb-4">
+    <div className="overflow-x-hidden min-h-[calc(100vh-100px)] mb-3 flex flex-col gap-3">
       {children}
     </div>
   );
@@ -40,8 +40,10 @@ ContentLayout.Right = function SectionRight({ children }: IProps) {
 
 ContentLayout.Center = function SectionCenter({ children }: IProps) {
   return (
-    <div className="flex justify-center mb-4">
-      <div className="max-w-[1200px] w-full">{children}</div>
+    <div className="flex justify-center mb-3">
+      <div className="max-w-[1200px] w-full flex flex-col gap-3">
+        {children}
+      </div>
     </div>
   );
 };

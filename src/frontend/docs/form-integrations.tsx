@@ -1,10 +1,10 @@
 import { INTEGRATIONS_GROUP_CONFIG } from "shared/config-bag/integrations";
-import { ErrorAlert, InfoAlert } from "frontend/design-system/components/Alert";
-import { RenderCode } from "frontend/design-system/components/RenderCode";
 import { useLingui } from "@lingui/react";
 import { useDomainMessages } from "frontend/lib/crud-config";
 import { LANG_DOMAINS } from "frontend/lib/crud-config/lang-domains";
 import { DocumentationRoot } from "./_base";
+import { ErrorAlert, InfoAlert } from "@/components/app/alert";
+import { RenderCode } from "@/components/app/render-code";
 
 export function FormIntegrationsDocumentation() {
   const { _ } = useLingui();

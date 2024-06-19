@@ -1,10 +1,11 @@
 /* eslint-disable react/prop-types */
-import { ApplicationRoot } from "frontend/components/ApplicationRoot";
+import "@/styles/globals.css";
 import "../static/fonts/font-face.css";
 import { ReactElement } from "react";
 import { AppProps } from "next/app";
 import { getAppLayout } from "frontend/_layouts/app/getLayout";
 import { CustomNextPage } from "frontend/_layouts/types";
+import { ApplicationRoot } from "@/components/app/roots";
 
 function MyApp({
   Component,

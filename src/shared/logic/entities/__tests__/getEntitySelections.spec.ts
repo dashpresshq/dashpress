@@ -70,13 +70,13 @@ describe("getEntitySelections", () => {
 
           customSelect: [
             {
-              color: "#111",
+              spectrum: "green",
               label: fakeMessageDescriptor("Custom Select Option 1"),
               value: "custom-select-option-1",
             },
 
             {
-              color: "#222",
+              spectrum: "red",
               label: fakeMessageDescriptor("Custom Select Option 2"),
               value: "custom-select-option-2",
             },
@@ -94,19 +94,19 @@ describe("getEntitySelections", () => {
       {
         "customSelect": [
           {
-            "color": "#111",
             "label": {
               "id": "Custom Select Option 1",
               "message": "Custom Select Option 1",
             },
+            "spectrum": "green",
             "value": "custom-select-option-1",
           },
           {
-            "color": "#222",
             "label": {
               "id": "Custom Select Option 2",
               "message": "Custom Select Option 2",
             },
+            "spectrum": "red",
             "value": "custom-select-option-2",
           },
         ],
@@ -142,7 +142,6 @@ describe("getEntitySelections", () => {
             "value": "in-progress",
           },
           {
-            "color": undefined,
             "label": {
               "id": "J/hVSQ",
               "message": "{0}",
@@ -150,6 +149,7 @@ describe("getEntitySelections", () => {
                 "0": "Rejected",
               },
             },
+            "spectrum": undefined,
             "value": "rejected",
           },
         ],
@@ -196,25 +196,24 @@ describe("getEntitySelections", () => {
         "customSelect": [],
         "isVerified": [
           {
-            "color": "#2ECC40",
             "label": {
               "id": "l75CjT",
               "message": "Yes",
             },
+            "spectrum": "green",
             "value": true,
           },
           {
-            "color": "#FF165D",
             "label": {
               "id": "1UzENP",
               "message": "No",
             },
+            "spectrum": "red",
             "value": false,
           },
         ],
         "status": [
           {
-            "color": "#2ECC40",
             "label": {
               "id": "J/hVSQ",
               "message": "{0}",
@@ -222,10 +221,10 @@ describe("getEntitySelections", () => {
                 "0": "Approved",
               },
             },
+            "spectrum": "green",
             "value": "approved",
           },
           {
-            "color": "#FF165D",
             "label": {
               "id": "J/hVSQ",
               "message": "{0}",
@@ -233,10 +232,10 @@ describe("getEntitySelections", () => {
                 "0": "In Progress",
               },
             },
+            "spectrum": "red",
             "value": "in-progress",
           },
           {
-            "color": "#0074D9",
             "label": {
               "id": "J/hVSQ",
               "message": "{0}",
@@ -244,6 +243,7 @@ describe("getEntitySelections", () => {
                 "0": "Rejected",
               },
             },
+            "spectrum": "blue",
             "value": "rejected",
           },
         ],

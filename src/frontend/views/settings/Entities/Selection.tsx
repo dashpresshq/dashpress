@@ -1,9 +1,9 @@
 import { useEffect } from "react";
-import { ListManager } from "frontend/design-system/components/ListManager";
 import { loadedDataState } from "frontend/lib/data/constants/loadedDataState";
-import { IListMangerItemProps } from "frontend/design-system/components/ListManager/ListManagerItem";
 import { msg } from "@lingui/macro";
 import { useStringSelections } from "../../../lib/selection";
+import { ListManager } from "@/components/app/list-manager";
+import { IListMangerItemProps } from "@/components/app/list-manager/list-manager-item";
 
 interface IProps {
   selectionKey: string;

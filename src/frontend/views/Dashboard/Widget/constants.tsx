@@ -1,12 +1,11 @@
 import { IWidgetConfig } from "shared/types/dashboard";
-import { Stack } from "frontend/design-system/primitives/Stack";
-import { BaseSkeleton } from "frontend/design-system/components/Skeleton/Base";
-import { TableSkeleton } from "frontend/design-system/components/Skeleton/Table";
 import { msg } from "@lingui/macro";
+import { TableSkeleton } from "@/components/app/skeleton/table";
 import { PORTAL_WIDGET_CONFIG } from "./portal";
 import { IWidgetConfigBag } from "./types";
 import { TableWidgetSchema } from "./_render/Table/types";
 import { SummaryCardWidgetSchema } from "./_render/Summary/types";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export const BASE_WIDGET_CONFIG: Partial<
   Record<IWidgetConfig["_type"], IWidgetConfigBag>
@@ -34,13 +33,13 @@ export const BASE_WIDGET_CONFIG: Partial<
     requiredInterface: `[{count: number} | number] | number`,
     schema: SummaryCardWidgetSchema,
     LoadingComponent: () => (
-      <Stack $justify="space-between">
-        <Stack $align="center">
-          <BaseSkeleton height="40px" width="40px" circle />
-          <BaseSkeleton height="30px" width="100px" />
-        </Stack>
-        <BaseSkeleton height="30px" width="50px" />
-      </Stack>
+      <div className="flex justify-between">
+        <div className="flex items-center">
+          <Skeleton className="h-10 w-10 rounded-full" />
+          <Skeleton className="h-8 w-24" />
+        </div>
+        <Skeleton className="h-8 w-12" />
+      </div>
     ),
     isDataEmpty: () => {
       return false;

@@ -1,5 +1,4 @@
-import { InfoAlert } from "frontend/design-system/components/Alert";
-import { Spacer } from "frontend/design-system/primitives/Spacer";
+import { InfoAlert } from "@/components/app/alert";
 import { DocumentationRoot } from "./_base";
 
 export function CRUDDocumentation() {
@@ -27,7 +26,7 @@ export function CRUDDocumentation() {
         decreasing the workload on your database and ensuring
         that those data do not leak out of your server.`}
       />
-      <Spacer size="xl" />
+
       <h4>Details</h4>
       <p>
         The same behavior for the fields selection as with tables, hide a field

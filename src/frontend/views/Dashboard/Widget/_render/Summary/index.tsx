@@ -1,5 +1,4 @@
 import { ISummaryWidgetConfig } from "shared/types/dashboard";
-import { ROYGBIV } from "shared/constants/colors";
 import { systemIconToSVG } from "shared/constants/Icons";
 import { SummaryWidget as SummaryWidgetPresentation } from "frontend/design-system/components/Widgets/Summary";
 import { SummaryCardWidgetSchema } from "./types";
@@ -32,7 +31,7 @@ export function SummaryWidget({ config, data }: IProps) {
 
   return (
     <SummaryWidgetPresentation
-      color={ROYGBIV[color]}
+      color={color}
       title={config.title}
       icon={fullIcon}
       fullCount={fullCount$1}

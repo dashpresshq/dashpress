@@ -5,13 +5,13 @@ import {
   maxLength,
 } from "frontend/lib/validations";
 import { ICrudConfig } from "frontend/lib/crud-config";
+import { i18nNoop } from "translations/fake";
 import {
   FormSkeleton,
   FormSkeletonSchema,
-} from "frontend/design-system/components/Skeleton/Form";
-import { FormInput } from "frontend/design-system/components/Form/Input";
-import { FormButton } from "frontend/design-system/components/Button/FormButton";
-import { i18nNoop } from "translations/fake";
+} from "@/components/app/skeleton/form";
+import { FormInput } from "@/components/app/form/input/text";
+import { FormButton } from "@/components/app/button/form";
 
 interface IProps {
   fields: string[];

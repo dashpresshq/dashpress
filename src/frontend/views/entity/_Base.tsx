@@ -4,70 +4,75 @@ import { ReactNode } from "react";
 import { useEntitySlug } from "frontend/hooks/entity/entity.config";
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
 import { AppLayout } from "frontend/_layouts/app";
-import { SoftButton } from "frontend/design-system/components/Button/SoftButton";
-import {
-  IMenuSectionItem,
-  MenuSection,
-} from "frontend/design-system/components/Section/MenuSection";
-import { ContentLayout } from "frontend/design-system/components/Section/SectionDivider";
-import { Spacer } from "frontend/design-system/primitives/Spacer";
-import { IDropDownMenuItem } from "frontend/design-system/components/DropdownMenu";
 import { msg } from "@lingui/macro";
 import { LANG_DOMAINS } from "frontend/lib/crud-config/lang-domains";
+import { ContentLayout } from "@/components/app/content-layout";
+import { SoftButton } from "@/components/app/button/soft";
+import { MenuSection } from "@/components/app/menu-section";
 import { useMutateBaseEntitySettingsMenu } from "./portal";
+import { IMenuActionItem } from "@/components/app/button/types";
 
-const baseMenuItems = (entity: string): IMenuSectionItem[] => [
+const baseMenuItems = (entity: string): IMenuActionItem[] => [
   {
+    id: "crud",
     action: NAVIGATION_LINKS.ENTITY.CONFIG.CRUD(entity),
     systemIcon: "Sliders",
-    name: msg`CRUD`,
+    label: msg`CRUD`,
     order: 10,
   },
   {
+    id: "diction",
     action: NAVIGATION_LINKS.ENTITY.CONFIG.DICTION(entity),
-    name: msg`Diction`,
+    label: msg`Diction`,
     systemIcon: "Type",
     order: 20,
   },
   {
+    id: "fields",
     action: NAVIGATION_LINKS.ENTITY.CONFIG.FIELDS(entity),
-    name: msg`Fields`,
+    label: msg`Fields`,
     systemIcon: "File",
     order: 30,
   },
   {
+    id: "relations",
     action: NAVIGATION_LINKS.ENTITY.CONFIG.RELATIONS(entity),
-    name: msg`Relations`,
+    label: msg`Relations`,
     systemIcon: "LinkAlt",
     order: 40,
   },
   {
+    id: "views",
     action: NAVIGATION_LINKS.ENTITY.CONFIG.VIEWS(entity),
-    name: msg`Table Views`,
+    label: msg`Table Views`,
     systemIcon: "Filter",
     order: 50,
   },
   {
+    id: "queries",
     action: NAVIGATION_LINKS.ENTITY.CONFIG.PERSISTENT_QUERY(entity),
-    name: msg`Persistent Query`,
+    label: msg`Persistent Query`,
     systemIcon: "Shield",
     order: 51,
   },
   {
+    id: "scripts",
     action: NAVIGATION_LINKS.ENTITY.CONFIG.FORM(entity),
-    name: msg`Form Scripts`,
+    label: msg`Form Scripts`,
     systemIcon: "Code",
     order: 60,
   },
   {
+    id: "presentation",
     action: NAVIGATION_LINKS.ENTITY.CONFIG.PRESENTATION(entity),
-    name: msg`Presentation Scripts`,
+    label: msg`Presentation Scripts`,
     systemIcon: "CodeAlt",
     order: 70,
   },
   {
+    id: "integrations",
     action: NAVIGATION_LINKS.ENTITY.CONFIG.FORM_INTEGRATIONS(entity),
-    name: LANG_DOMAINS.INTEGRATIONS.FORM_ACTIONS.plural,
+    label: LANG_DOMAINS.INTEGRATIONS.FORM_ACTIONS.plural,
     systemIcon: "Zap",
     order: 80,
   },
@@ -75,7 +80,7 @@ const baseMenuItems = (entity: string): IMenuSectionItem[] => [
 
 interface IProps {
   children: ReactNode;
-  actionItems?: IDropDownMenuItem[];
+  actionItems?: IMenuActionItem[];
 }
 
 export function BaseEntitySettingsLayout({ children, actionItems }: IProps) {
@@ -91,19 +96,16 @@ export function BaseEntitySettingsLayout({ children, actionItems }: IProps) {
   return (
     <AppLayout actionItems={actionItems}>
       {canGoBack() && (
-        <>
-          <SoftButton
-            systemIcon="Left"
-            size="xs"
-            label={msg`Go Back`}
-            action={() => {
-              goBack();
-            }}
-          />
-          <Spacer />
-        </>
+        <SoftButton
+          systemIcon="Left"
+          size="sm"
+          className="mb-2"
+          label={msg`Go Back`}
+          action={() => {
+            goBack();
+          }}
+        />
       )}
-
       <ContentLayout>
         <ContentLayout.Left>
           <MenuSection

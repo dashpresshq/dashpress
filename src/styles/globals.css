@@ -1,0 +1,69 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* --soft: 215, 15%, 15%;
+    --muted: 212, 9%, 58%;
+    --main: 210, 17%, 82%;
+    --border: 212, 12%, 21%;
+    --base: 215, 21%, 11%;
+    --foundation: 216, 28%, 7%;
+    --primary: 249, 52%, 46%;
+    --primary-text: 0, 0%, 100%;
+    --shade-text: 0, 0%, 100%;  */
+
+    --soft: 213, 47%, 96%;
+    --muted: 227, 22%, 71%;
+    --main: 229, 8%, 41%;
+    --border: 215, 51%, 93%;
+    --base: 0, 0%, 100%;
+    --foundation: 210, 33%, 96%;
+    --primary: 249, 52%, 46%;
+    --primary-text: 0, 0%, 100%;
+    --shade-text: 249, 52%, 46%;
+
+    /* --secondary: 240 4.8% 95.9%;
+    --secondary-foreground: 240 5.9% 10%; */
+
+    /* --accent: %;
+    --accent-foreground: 240 5.9% 10%; */
+
+    /* --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%; */
+
+    /* --input: 240 5.9% 90%; */
+    /* --ring: 240 10% 3.9%; */
+
+    /* --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%; */
+
+    --radius: 0.5rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  .gaussian-blur {
+    filter: url(#gaussian-blur);
+    filter: blur(2px);
+  }
+  body {
+    @apply text-main;
+  }
+
+  html {
+    font-family: "Inter", sans-serif;
+  }
+}
+
+@layer components {
+  .input-base {
+    @apply flex w-full rounded-md border border-border px-3 py-1 text-sm shadow-sm transition-colors placeholder:text-muted font-normal;
+    @apply focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary;
+    @apply disabled:cursor-not-allowed disabled:bg-soft disabled:opacity-70;
+  }
+}

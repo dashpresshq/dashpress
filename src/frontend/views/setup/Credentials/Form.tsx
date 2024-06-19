@@ -6,14 +6,14 @@ import {
 import { upperCaseFirstLetter } from "shared/lib/strings";
 import { required } from "frontend/lib/validations";
 import { IFormProps } from "frontend/lib/form/types";
-import { FormInput } from "frontend/design-system/components/Form/Input";
-import { FormNumberInput } from "frontend/design-system/components/Form/Number";
-import { FormCheckBox } from "frontend/design-system/components/Form/CheckBox";
-import { FormButton } from "frontend/design-system/components/Button/FormButton";
 import { FormSelect } from "frontend/design-system/components/Form/Select";
 import { useToggle } from "frontend/hooks/state/useToggleState";
 import { msg } from "@lingui/macro";
 import { typescriptSafeObjectDotKeys } from "shared/lib/objects";
+import { FormButton } from "@/components/app/button/form";
+import { FormInput } from "@/components/app/form/input/text";
+import { FormSwitch } from "@/components/app/form/input/switch";
+import { FormNumberInput } from "@/components/app/form/input/number";
 
 export function CredentialsSetupForm({
   onSubmit,
@@ -145,11 +145,13 @@ export function CredentialsSetupForm({
 
                 {dataSourceConfig.fields.includes("ssl") && (
                   <Field name="ssl" validateFields={[]} type="checkbox">
-                    {({ input, meta }) => (
-                      <FormCheckBox
+                    {({ input }) => (
+                      <FormSwitch
                         label={msg`Use SSL`}
-                        meta={meta}
-                        input={input}
+                        value={input.value}
+                        onChange={input.onChange}
+                        name={input.name}
+                        disabled={input.disabled}
                       />
                     )}
                   </Field>

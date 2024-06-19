@@ -1,5 +1,3 @@
-import { ContentLayout } from "frontend/design-system/components/Section/SectionDivider";
-import { SectionBox } from "frontend/design-system/components/Section/SectionBox";
 import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
 import { useNavigationStack } from "frontend/lib/routing/useNavigationStack";
 import { META_USER_PERMISSIONS } from "shared/constants/user";
@@ -12,6 +10,8 @@ import { useEntityDataCreationMutation } from "frontend/hooks/data/data.store";
 import { useRouteParams } from "frontend/lib/routing/useRouteParam";
 import { useEntityConfiguration } from "frontend/hooks/configuration/configuration.store";
 import { useEvaluateScriptContext } from "frontend/hooks/scripts";
+import { ContentLayout } from "@/components/app/content-layout";
+import { SectionBox } from "@/components/app/section-box";
 import { useEntityActionMenuItems } from "../../entity/constants";
 import { BaseEntityForm } from "../_BaseEntityForm";
 import { runInitialValuesScript } from "./run-initial-values-scripts";

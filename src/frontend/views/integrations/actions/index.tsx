@@ -1,15 +1,15 @@
 import { UserPermissions } from "shared/constants/user";
-import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { useRouteParam } from "frontend/lib/routing/useRouteParam";
 import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
-import {
-  FormSkeleton,
-  FormSkeletonSchema,
-} from "frontend/design-system/components/Skeleton/Form";
-import { SectionBox } from "frontend/design-system/components/Section/SectionBox";
 import { msg } from "@lingui/macro";
 import { LANG_DOMAINS } from "frontend/lib/crud-config/lang-domains";
 import { useDomainMessages } from "frontend/lib/crud-config";
+import { SectionBox } from "@/components/app/section-box";
+import {
+  FormSkeleton,
+  FormSkeletonSchema,
+} from "@/components/app/skeleton/form";
+import { ViewStateMachine } from "@/components/app/view-state-machine";
 import { BaseActionsLayout } from "../_Base";
 import { useIntegrationsList, useActiveIntegrations } from "./actions.store";
 import { ACTIONS_VIEW_KEY } from "../constants";

@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { UserPermissions } from "shared/constants/user";
-import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import SortableList, { SortableItem } from "react-easy-sort";
 import { useRouter } from "next/router";
 import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
@@ -11,6 +10,7 @@ import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { useDomainMessages } from "frontend/lib/crud-config";
 import { LANG_DOMAINS } from "frontend/lib/crud-config/lang-domains";
+import { ViewStateMachine } from "@/components/app/view-state-machine";
 import {
   useArrangeDashboardWidgetMutation,
   useDashboardWidgets,

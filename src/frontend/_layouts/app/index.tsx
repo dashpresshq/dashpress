@@ -4,28 +4,18 @@ import { useRouter } from "next/router";
 import { useNavigationStack } from "frontend/lib/routing/useNavigationStack";
 import { usePageDetailsStore } from "frontend/lib/routing/usePageDetails";
 import { usePageRequiresPermission } from "frontend/hooks/auth/user.store";
-import {
-  DropDownMenu,
-  IDropDownMenuItem,
-} from "frontend/design-system/components/DropdownMenu";
-import { Stack } from "frontend/design-system/primitives/Stack";
-import { Breadcrumbs } from "frontend/design-system/components/Breadcrumbs";
-import { Typo } from "frontend/design-system/primitives/Typo";
-import { Spacer } from "frontend/design-system/primitives/Spacer";
 import { useAppConfiguration } from "frontend/hooks/configuration/configuration.store";
-import styled from "styled-components";
 import { useLingui } from "@lingui/react";
 import { DEMO_LINKS } from "./constant";
 import { useAppTheme } from "../useAppTheme";
-
-const HeaderLeft = styled.div`
-  text-align: left;
-`;
+import { IMenuActionItem } from "@/components/app/button/types";
+import { Breadcrumbs } from "@/components/app/breadcrumbs";
+import { DropDownMenu } from "@/components/app/drop-drop-menu";
 
 export interface IProps {
   children: ReactNode;
-  actionItems?: IDropDownMenuItem[];
-  secondaryActionItems?: IDropDownMenuItem[];
+  actionItems?: IMenuActionItem[];
+  secondaryActionItems?: IMenuActionItem[];
 }
 
 export function AppLayout({
@@ -77,13 +67,13 @@ export function AppLayout({
         </title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
-      <Stack $justify="space-between" $align="center">
-        <HeaderLeft>
-          <Typo.MD>{_(pageTitle)}</Typo.MD>
+      <div className="flex justify-between items-center mb-2">
+        <div className="text-left">
+          <p>{_(pageTitle)}</p>
           <Breadcrumbs items={homedBreadcrumb} onCrumbClick={goToLinkIndex} />
-        </HeaderLeft>
+        </div>
         <div>
-          <Stack>
+          <div className="flex gap-2">
             {actionMenuItems.length > 0 ? (
               <DropDownMenu
                 ariaLabel="Toggle Action Menu"
@@ -99,16 +89,12 @@ export function AppLayout({
             {process.env.NEXT_PUBLIC_IS_DEMO && (
               <DropDownMenu
                 ariaLabel="Toggle Demo Menu"
-                menuItems={DEMO_LINKS.map((link) => ({
-                  ...link,
-                  action: () => window.open(link.link),
-                }))}
+                menuItems={DEMO_LINKS}
               />
             )}
-          </Stack>
+          </div>
         </div>
-      </Stack>
-      <Spacer />
+      </div>
       <main>{children}</main>
     </>
   );

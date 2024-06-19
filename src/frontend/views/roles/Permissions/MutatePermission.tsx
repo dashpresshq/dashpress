@@ -1,14 +1,13 @@
-import { Stack } from "frontend/design-system/primitives/Stack";
-import { FormButton } from "frontend/design-system/components/Button/FormButton";
-import { Spacer } from "frontend/design-system/primitives/Spacer";
-import { ListManager } from "frontend/design-system/components/ListManager";
 import { UserPermissions } from "shared/constants/user";
 import { loadedDataState } from "frontend/lib/data/constants/loadedDataState";
-import { IListMangerItemProps } from "frontend/design-system/components/ListManager/ListManagerItem";
+
 import { msg } from "@lingui/macro";
 import { MessageDescriptor } from "@lingui/core";
 import { useLingui } from "@lingui/react";
 import { PORTAL_PERMISSION_HEIRACHIES } from "shared/constants/portal/user";
+import { IListMangerItemProps } from "@/components/app/list-manager/list-manager-item";
+import { ListManager } from "@/components/app/list-manager";
+import { FormButton } from "@/components/app/button/form";
 import {
   useCreateRolePermissionMutation,
   useDeleteRolePermissionMutation,
@@ -67,32 +66,28 @@ export function MutatePermission({
     rolePermissions.data.includes(overAchingPermission.permission);
 
   return (
-    <>
+    <div className="mt-6">
       {overAchingPermission && (
-        <>
-          <Stack $justify="space-between" $align="flex-start">
-            <FormButton
-              isMakingRequest={false}
-              systemIcon={isOverAchingPermissionSelected ? "Check" : "Square"}
-              size="sm"
-              isInverse
-              text={() => overAchingPermission.label}
-              onClick={() => {
-                if (isOverAchingPermissionSelected) {
-                  rolePermissionDeletionMutation.mutate([
-                    overAchingPermission.permission,
-                  ]);
-                } else {
-                  rolePermissionCreationMutation.mutate([
-                    overAchingPermission.permission,
-                  ]);
-                }
-              }}
-            />
-          </Stack>
-
-          <Spacer size="xxl" />
-        </>
+        <div className="flex mb-7 justify-end items-end">
+          <FormButton
+            isMakingRequest={false}
+            systemIcon={isOverAchingPermissionSelected ? "Check" : "Square"}
+            size="sm"
+            variant="outline"
+            text={() => overAchingPermission.label}
+            onClick={() => {
+              if (isOverAchingPermissionSelected) {
+                rolePermissionDeletionMutation.mutate([
+                  overAchingPermission.permission,
+                ]);
+              } else {
+                rolePermissionCreationMutation.mutate([
+                  overAchingPermission.permission,
+                ]);
+              }
+            }}
+          />
+        </div>
       )}
       <ListManager
         items={loadedDataState(
@@ -136,6 +131,6 @@ export function MutatePermission({
           return props;
         }}
       />
-    </>
+    </div>
   );
 }

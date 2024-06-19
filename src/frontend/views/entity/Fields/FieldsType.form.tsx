@@ -11,13 +11,13 @@ import {
   maxLength,
 } from "frontend/lib/validations";
 import { FormSelect } from "frontend/design-system/components/Form/Select";
-import { FormButton } from "frontend/design-system/components/Button/FormButton";
-import { OffCanvas } from "frontend/design-system/components/OffCanvas";
 import { IFormInputRightAction } from "shared/form-schemas/types";
 import { msg } from "@lingui/macro";
 import { typescriptSafeObjectDotEntries } from "shared/lib/objects";
+import { FormButton } from "@/components/app/button/form";
 import { FieldSelectionCanvas } from "./FieldsSelection";
 import { FieldValidationCanvas } from "./FieldsValidation";
+import { OffCanvas } from "@/components/app/off-canvas";
 
 const FIELD_TYPES_CONFIG_MAP_AS_SELECTION = typescriptSafeObjectDotEntries(
   FIELD_TYPES_CONFIG_MAP
@@ -43,8 +43,6 @@ interface IValues {
   selectionsChanged: boolean;
   typesChanged: boolean;
 }
-
-const CANVAS_WIDTH = 500;
 
 const resetBoundedValidation = (
   validations: IFieldValidationItem[],
@@ -127,7 +125,9 @@ export function FieldsTypeForm({
                       )} [${values.validations[name]
                         .map(({ validationType }) => validationType)
                         .join(",")}]`}
-                      defaultLabel={`Select ${getEntityFieldLabels(name)} Type`}
+                      placeholder={msg`Select ${getEntityFieldLabels(
+                        name
+                      )} Type`}
                       selectData={FIELD_TYPES_CONFIG_MAP_AS_SELECTION}
                       rightActions={rightActions}
                       disabledOptions={listOfEntitiesThatCantBeChanged}
@@ -171,7 +171,7 @@ export function FieldsTypeForm({
             title={msg`${getEntityFieldLabels(
               showFieldValidations
             )} Validations`}
-            width={CANVAS_WIDTH}
+            size="md"
             onClose={() => setShowFieldValidations("")}
             show={!!showFieldValidations}
           >
@@ -192,7 +192,7 @@ export function FieldsTypeForm({
           </OffCanvas>
           <OffCanvas
             title={msg`${getEntityFieldLabels(showFieldSelection)} Selections`}
-            width={CANVAS_WIDTH}
+            size="md"
             onClose={() => setShowFieldSelection("")}
             show={!!showFieldSelection}
           >

@@ -1,10 +1,4 @@
-import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { useEffect } from "react";
-import { FormButton } from "frontend/design-system/components/Button/FormButton";
-import { ListSkeleton } from "frontend/design-system/components/Skeleton/List";
-import { ListManager } from "frontend/design-system/components/ListManager";
-import { Spacer } from "frontend/design-system/primitives/Spacer";
-import { Stack } from "frontend/design-system/primitives/Stack";
 import { useStringSelections } from "frontend/lib/selection";
 import { useEntityFields } from "frontend/hooks/entity/entity.store";
 import {
@@ -13,7 +7,7 @@ import {
 } from "frontend/hooks/entity/entity.config";
 import { CrudViewsKeys } from "shared/configurations";
 import { useIsEntityFieldMutatable } from "frontend/views/data/hooks/useIsEntityFieldMutatable";
-import { IListMangerItemProps } from "frontend/design-system/components/ListManager/ListManagerItem";
+
 import {
   useEntityConfiguration,
   useUpsertConfigurationMutation,
@@ -29,6 +23,11 @@ import {
 import { DataCrudKeys } from "shared/types/data";
 import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
+import { IListMangerItemProps } from "@/components/app/list-manager/list-manager-item";
+import { ListManager } from "@/components/app/list-manager";
+import { ListSkeleton } from "@/components/app/skeleton/list";
+import { FormButton } from "@/components/app/button/form";
+import { ViewStateMachine } from "@/components/app/view-state-machine";
 import { ENTITY_CRUD_LABELS } from "../constants";
 import { makeEntityFieldsSelectionKey } from "./constants";
 
@@ -55,20 +54,20 @@ export function ToggleCrudState({
   const { _ } = useLingui();
 
   return (
-    <Stack $justify="space-between" $align="flex-start">
+    <div className="flex justify-end mb-4">
       {toggling && toggling.onToggle && (
         <FormButton
           isMakingRequest={false}
           systemIcon={toggling.enabled ? "Check" : "Square"}
+          variant="outline"
           size="sm"
-          isInverse
           text={() =>
             msg`Enable ${_(ENTITY_CRUD_LABELS[crudKey])} Functionality`
           }
-          onClick={() => toggling.onToggle()}
+          onClick={toggling.onToggle}
         />
       )}
-    </Stack>
+    </div>
   );
 }
 
@@ -131,7 +130,6 @@ export function EntityFieldsSelectionSettings({
       loader={<ListSkeleton count={10} />}
     >
       <ToggleCrudState crudKey={crudKey} toggling={toggling} />
-      <Spacer size="xxl" />
       <ListManager
         items={entityFields}
         listLengthGuess={10}

@@ -1,8 +1,8 @@
 import { createStore } from "frontend/lib/store";
-import { IGroupActionButton } from "frontend/design-system/components/Button/types";
 import { MessageDescriptor } from "@lingui/core";
 import { useLingui } from "@lingui/react";
 import { DOCUMENTATION_LABEL } from ".";
+import { IGroupActionButton } from "@/components/app/button/types";
 
 type IDocumentationCanvasStore = {
   title: string;

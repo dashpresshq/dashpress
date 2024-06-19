@@ -1,5 +1,4 @@
-import { RenderCode } from "frontend/design-system/components/RenderCode";
-import { Spacer } from "frontend/design-system/primitives/Spacer";
+import { RenderCode } from "@/components/app/render-code";
 import { DocumentationRoot } from "../_base";
 
 export function FormScriptDocumentation() {
@@ -175,7 +174,6 @@ if(customFunctionToReturnFalse()){
         script.
       </p>
 
-      <Spacer />
       <h5>2. Modify the form values</h5>
       <p>
         The second use for this tab to is modify the data you are submitting.
@@ -210,7 +208,6 @@ return {
   slug: $.formValues.title?.replaceAll(" ", "-").toLowerCase()
 }`}
       />
-      <Spacer />
       <p>
         Needless to say, you can combine both <code>Before Submit</code> usages
         to both validate data before submitting and transform the data when

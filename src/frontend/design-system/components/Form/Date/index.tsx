@@ -1,18 +1,71 @@
 import DatePicker from "react-datepicker";
 import { FieldMetaState } from "react-final-form";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
-import { IInput, InputStyles } from "../Styles";
-import { ISharedFormInput } from "../types";
-import { LabelAndError, generateFormArias } from "../LabelAndError";
+
+import { ISharedFormInput } from "../../../../../components/app/form/input/types";
 import { dateLibraryStyle } from "./defaultStyle";
+import { SYSTEM_COLORS } from "@/frontend/design-system/theme/system";
+import {
+  LabelAndError,
+  generateFormArias,
+} from "@/components/app/form/input/label-and-error";
+
+export const InputStyles = css`
+  margin: 0;
+  overflow: visible;
+  display: block;
+  width: 100%;
+  height: calc(1.8em + 0.75rem + 2px);
+  padding: 0.375rem 0.75rem;
+  font-size: 0.8125rem;
+  font-weight: 400;
+  line-height: 1.8;
+  color: ${USE_ROOT_COLOR("main-text")};
+  background-color: ${USE_ROOT_COLOR("base-color")};
+  background-clip: padding-box;
+  border-radius: 6px;
+
+  transition: border-color 0.15s ease-in-out;
+
+  &:focus {
+    border-width: 1.5px;
+    color: ${USE_ROOT_COLOR("main-text")};
+    background-color: ${USE_ROOT_COLOR("base-color")};
+    border-color: ${USE_ROOT_COLOR("primary-color")};
+    outline: 0;
+  }
+
+  &[aria-invalid] {
+    border-width: 1px;
+    border-color: ${SYSTEM_COLORS.danger} !important;
+  }
+
+  &::-ms-expand {
+    background-color: transparent;
+    border: 0;
+  }
+
+  &:-moz-focusring {
+    color: transparent;
+    text-shadow: 0 0 0 ${USE_ROOT_COLOR("main-text")};
+  }
+
+  &:disabled {
+    background-color: ${USE_ROOT_COLOR("soft-color")};
+    opacity: 1;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
+`;
 
 interface IFormDateInput extends ISharedFormInput {
   minDate?: Date;
   maxDate?: Date;
 }
 
-const Root = styled.div<IInput>`
+const Root = styled.div`
   ${dateLibraryStyle}
   .react-datepicker {
     border: 1px solid ${USE_ROOT_COLOR("border-color")};

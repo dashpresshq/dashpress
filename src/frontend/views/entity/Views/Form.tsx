@@ -11,19 +11,17 @@ import {
   required,
 } from "frontend/lib/validations";
 import { IFormProps } from "frontend/lib/form/types";
-import { ITableColumn } from "frontend/design-system/components/Table/types";
-import { SoftButton } from "frontend/design-system/components/Button/SoftButton";
-import { Stack } from "frontend/design-system/primitives/Stack";
-import { FormInput } from "frontend/design-system/components/Form/Input";
-import { Spacer } from "frontend/design-system/primitives/Spacer";
-import { Table } from "frontend/design-system/components/Table";
-import { FormButton } from "frontend/design-system/components/Button/FormButton";
-import { Tabs } from "frontend/design-system/components/Tabs";
-import { ActionButtons } from "frontend/design-system/components/Button/ActionButtons";
-import { DELETE_BUTTON_PROPS } from "frontend/design-system/components/Button/constants";
 import { msg } from "@lingui/macro";
 import { useAppConfigurationDomainMessages } from "frontend/hooks/configuration/configuration.constant";
 import { useDomainMessages } from "frontend/lib/crud-config";
+import { DELETE_BUTTON_PROPS } from "@/components/app/button/constants";
+import { Tabs } from "@/components/app/tabs";
+import { ITableColumn } from "@/components/app/table/types";
+import { SoftButton } from "@/components/app/button/soft";
+import { ActionButtons } from "@/components/app/button/action";
+import { FormInput } from "@/components/app/form/input/text";
+import { Table } from "@/components/app/table";
+import { FormButton } from "@/components/app/button/form";
 
 interface IProps {
   values: ITableView[];
@@ -47,7 +45,7 @@ function TabForm({ tableColumns, values, initialValues }: IProps) {
 
   return (
     <>
-      <Stack $justify="end">
+      <div className="flex justify-end">
         <SoftButton
           systemIcon="Plus"
           label={domainMessages.TEXT_LANG.CREATE}
@@ -65,7 +63,7 @@ function TabForm({ tableColumns, values, initialValues }: IProps) {
             setCurrentTab(newTab.id);
           }}
         />
-      </Stack>
+      </div>
       {values.length > 0 && (
         <Tabs
           currentTab={currentTab}
@@ -82,9 +80,9 @@ function TabForm({ tableColumns, values, initialValues }: IProps) {
             return {
               content: (
                 <>
-                  <Stack $justify="end">
+                  <div className="flex justify-end mb-3">
                     <ActionButtons
-                      size="xs"
+                      size="sm"
                       actionButtons={[
                         {
                           ...DELETE_BUTTON_PROPS({
@@ -101,8 +99,7 @@ function TabForm({ tableColumns, values, initialValues }: IProps) {
                         },
                       ]}
                     />
-                  </Stack>
-                  <Spacer />
+                  </div>
                   <Field
                     name={`${field}.title`}
                     validate={composeValidators(required, maxLength(64))}
@@ -183,9 +180,9 @@ export function EntityTableTabForm({
               initialValues={initialFormValues.tabs}
               tableColumns={tableColumns}
             />
-            <Spacer />
 
             <FormButton
+              className="mt-3"
               isMakingRequest={submitting}
               onClick={handleSubmit}
               text={domainMessages.FORM_LANG.UPSERT}

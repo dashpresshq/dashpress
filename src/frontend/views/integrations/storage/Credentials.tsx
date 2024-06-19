@@ -1,17 +1,17 @@
-import { SchemaForm } from "frontend/components/SchemaForm";
 import { useEffect, useState } from "react";
 import { ToastService } from "frontend/lib/toast";
-import { ViewStateMachine } from "frontend/components/ViewStateMachine";
-import {
-  FormSkeleton,
-  FormSkeletonSchema,
-} from "frontend/design-system/components/Skeleton/Form";
 import { ISchemaFormConfig } from "shared/form-schemas/types";
 import { IStorageIntegration } from "shared/types/actions";
 import { msg } from "@lingui/macro";
 import { i18nNoop } from "translations/fake";
 import { useDomainMessages } from "frontend/lib/crud-config";
 import { LANG_DOMAINS } from "frontend/lib/crud-config/lang-domains";
+import {
+  FormSkeleton,
+  FormSkeletonSchema,
+} from "@/components/app/skeleton/form";
+import { ViewStateMachine } from "@/components/app/view-state-machine";
+import { SchemaForm } from "@/components/app/form/schema";
 import {
   useActivateStorageMutation,
   useActiveStorageIntegration,

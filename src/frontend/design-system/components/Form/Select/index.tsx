@@ -1,17 +1,18 @@
 import Select from "react-select";
 import styled from "styled-components";
-import { ILabelValue, ISelectData } from "shared/types/options";
+import { ISelectData } from "shared/types/options";
 import { useLingui } from "@lingui/react";
-import { MessageDescriptor } from "@lingui/core";
 import { useMemo } from "react";
 import { msg } from "@lingui/macro";
-import {
-  generateClassNames,
-  LabelAndError,
-  generateFormArias,
-} from "../LabelAndError";
 import { SelectStyles, SharedSelectProps } from "./styles";
 import { IBaseFormSelect } from "./types";
+import { Select as SelectCmp } from "@/components/ui/select"; // TODO
+import { fakeMessageDescriptor } from "@/translations/fake";
+import {
+  LabelAndError,
+  generateClassNames,
+  generateFormArias,
+} from "@/components/app/form/input/label-and-error";
 
 interface IFormSelect extends IBaseFormSelect {
   selectData: ISelectData[];
@@ -71,80 +72,24 @@ export function FormSelect(formInput: IFormSelect) {
     disabled,
     label: formLabel,
     disabledOptions,
-    nullable,
-    defaultLabel,
     placeholder,
   } = formInput;
   const { _ } = useLingui();
 
-  const selectDataWithDefault = [
-    {
-      value: nullable ? null : "",
-      label: defaultLabel || `--- ${_(msg`Select ${_(formLabel)}`)} ---`,
-    },
-    ...selectData.map(({ value, label }) => ({ value, label: _(label) })),
-  ];
   return (
     <LabelAndError formInput={formInput}>
-      <div data-testid={`react-select__${input.name}`}>
-        <SelectStyled
-          {...input}
-          {...generateFormArias(meta)}
-          classNamePrefix={SharedSelectProps.classNamePrefix}
-          value={
-            selectDataWithDefault.find(
-              ({ value }) => value === input.value
-            ) || {
-              value: "",
-              label: "",
-            }
-          }
-          placeholder={placeholder ? _(placeholder) : null}
-          inputId={input.name}
-          onChange={({ value }: any) => {
-            input.onChange(nullable && !value ? null : value);
-          }}
-          className={generateClassNames(meta)}
-          isDisabled={disabled}
-          options={selectDataWithDefault}
-          isOptionDisabled={(option: unknown) => {
-            if (!disabledOptions) {
-              return false;
-            }
-            return disabledOptions.includes(
-              (option as ISelectData).value as string
-            );
-          }}
-        />
-      </div>
+      <SelectCmp
+        {...input}
+        {...generateFormArias(meta)}
+        className={generateClassNames(meta)}
+        options={selectData}
+        placeholder={
+          placeholder ||
+          fakeMessageDescriptor(`--- ${_(msg`Select ${_(formLabel)}`)} ---`)
+        }
+        disabled={disabled}
+        disabledOptions={disabledOptions}
+      />
     </LabelAndError>
-  );
-}
-
-interface IFormNoValueSelect {
-  selectData: ISelectData[];
-  disabledOptions: string[];
-  onChange: (value: string, label?: string) => void;
-  defaultLabel?: MessageDescriptor;
-}
-
-export function FormNoValueSelect({
-  selectData,
-  disabledOptions,
-  defaultLabel,
-  onChange,
-}: IFormNoValueSelect) {
-  const { _ } = useLingui();
-  return (
-    <SelectStyled
-      classNamePrefix={SharedSelectProps.classNamePrefix}
-      value={{ value: "", label: defaultLabel ? _(defaultLabel) : "" }}
-      onChange={({ value, label }: ILabelValue) => {
-        onChange(value, label);
-      }}
-      options={selectData
-        .filter(({ value }) => !disabledOptions.includes(value as string))
-        .map(({ value, label }) => ({ value, label: _(label) }))}
-    />
   );
 }

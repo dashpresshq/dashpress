@@ -1,9 +1,9 @@
 import { useEntityCrudConfig } from "frontend/hooks/entity/entity.config";
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
 import { useRouter } from "next/router";
-import { IDropDownMenuItem } from "frontend/design-system/components/DropdownMenu";
 import { usePluginTableMenuItems } from "./portal";
 import { useCanUserPerformCrudAction } from "../hooks/useCanUserPerformCrudAction";
+import { IMenuActionItem } from "@/components/app/button/types";
 
 export const getEntityCreateLink = (
   entity: string,
@@ -26,7 +26,7 @@ export const useTableMenuItems = (
     referenceField: string;
     entityId: string;
   }
-): IDropDownMenuItem[] => {
+): IMenuActionItem[] => {
   const router = useRouter();
   const entityCrudConfig = useEntityCrudConfig(entity);
   const canUserPerformCrudAction = useCanUserPerformCrudAction(entity);

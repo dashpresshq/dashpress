@@ -1,5 +1,4 @@
 /* eslint-disable no-param-reassign */
-import { SchemaForm } from "frontend/components/SchemaForm";
 import { useEffect, useState } from "react";
 import { IAppliedSchemaFormConfig } from "shared/form-schemas/types";
 import {
@@ -14,6 +13,7 @@ import { typescriptSafeObjectDotEntries } from "shared/lib/objects";
 import { i18nNoop } from "translations/fake";
 import { useDomainMessages } from "frontend/lib/crud-config";
 import { LANG_DOMAINS } from "frontend/lib/crud-config/lang-domains";
+import { SchemaForm } from "@/components/app/form/schema";
 import { useIntegrationImplementationsList } from "./form-actions.store";
 
 interface IProps {

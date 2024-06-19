@@ -19,7 +19,10 @@
     "noImplicitReturns": true,
     "baseUrl": "./src",
     "strict": false,
-    "isolatedModules": true
+    "isolatedModules": true,
+    "paths": {
+      "@/*": ["./*"]
+    }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
   "ts-node": {

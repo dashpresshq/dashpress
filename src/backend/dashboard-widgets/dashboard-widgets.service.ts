@@ -18,7 +18,6 @@ import {
 import { rolesApiService, RolesApiService } from "backend/roles/roles.service";
 import { userFriendlyCase } from "shared/lib/strings/friendly-case";
 import { nanoid } from "nanoid";
-import { ROYGBIV } from "shared/constants/colors";
 import { SystemIconsList } from "shared/constants/Icons";
 import { BadRequestError } from "backend/lib/errors";
 import {
@@ -30,11 +29,11 @@ import { relativeDateNotationToActualDate } from "backend/data/data-access/time.
 import { ILabelValue } from "shared/types/options";
 import { sortListByOrder } from "shared/lib/array/sort";
 import { DATA_SOURCES_CONFIG } from "shared/types/data-sources";
-import { typescriptSafeObjectDotKeys } from "shared/lib/objects";
 import {
   mutateGeneratedDashboardWidgets,
   PORTAL_DASHBOARD_PERMISSION,
 } from "./portal";
+import { SPECTRUM_COLORS } from "@/components/ui/spectrum";
 
 const runAsyncJavascriptString = async (
   javascriptString: string,
@@ -120,8 +119,6 @@ export class DashboardWidgetsApiService {
   }
 
   private generateDashboardWidgets = async (entitiesToShow: ILabelValue[]) => {
-    const colorsList = typescriptSafeObjectDotKeys(ROYGBIV);
-
     const DEFAULT_NUMBER_OF_SUMMARY_CARDS = 8;
 
     const dbCredentials = await RDBMSDataApiService.getDbCredentials();
@@ -155,7 +152,7 @@ export class DashboardWidgetsApiService {
             title: userFriendlyCase(`${entity.value}`),
             _type: "summary-card",
             entity: entity.value,
-            color: colorsList[index % (colorsList.length - 1)],
+            color: SPECTRUM_COLORS[index % (SPECTRUM_COLORS.length - 1)],
             icon: SystemIconsList[index % (SystemIconsList.length - 1)],
             script: dateField
               ? `const actual = await $.query(${queryQuote}${plainCountQuery}${queryQuote});

@@ -1,15 +1,13 @@
 import { useRouter } from "next/router";
 import { ReactNode } from "react";
-import { ContentLayout } from "frontend/design-system/components/Section/SectionDivider";
-import {
-  IMenuSectionItem,
-  MenuSection,
-} from "frontend/design-system/components/Section/MenuSection";
 import { AppLayout } from "frontend/_layouts/app";
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
 import { AuthActions } from "frontend/hooks/auth/auth.actions";
 import { msg } from "@lingui/macro";
+import { ContentLayout } from "@/components/app/content-layout";
+import { MenuSection } from "@/components/app/menu-section";
 import { usePortalAccountMenu } from "./portal";
+import { IMenuActionItem } from "@/components/app/button/types";
 
 interface IProps {
   children: ReactNode;
@@ -19,31 +17,36 @@ export function BaseAccountLayout({ children }: IProps) {
   const router = useRouter();
   const portalAccountMenu = usePortalAccountMenu();
 
-  const baseMenuItems: IMenuSectionItem[] = [
+  const baseMenuItems: IMenuActionItem[] = [
     {
+      id: "profile",
       action: NAVIGATION_LINKS.ACCOUNT.PROFILE,
-      name: msg`Profile`,
+      label: msg`Profile`,
       systemIcon: "User",
       order: 10,
     },
     {
+      id: "preferences",
       action: NAVIGATION_LINKS.ACCOUNT.PREFERENCES,
-      name: msg`Preferences`,
+      label: msg`Preferences`,
       systemIcon: "Settings" as const,
       order: 20,
     },
     {
+      id: "password",
       action: NAVIGATION_LINKS.ACCOUNT.PASSWORD,
-      name: msg`Password`,
+      label: msg`Password`,
       systemIcon: "Lock",
       order: 30,
     },
     {
+      id: "logout",
       action: () => {
         AuthActions.signOut();
       },
-      name: msg`Log Out`,
+      label: msg`Log Out`,
       systemIcon: "LogOut",
+      destructive: true,
       order: 40,
     },
   ];

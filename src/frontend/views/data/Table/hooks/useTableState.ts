@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { IPaginatedDataState } from "shared/types/data";
-import { DEFAULT_TABLE_STATE } from "frontend/design-system/components/Table/constants";
 import { useSyncPaginatedDataState } from "../portal";
 import { IDataTableProps } from "../types";
 import { useCurrentTableStateStore } from "./useCurrentTableState.store";
 import { useEntityContextState } from "./useEntityContextState";
+import { DEFAULT_TABLE_STATE } from "@/components/app/table";
 
 export const useTableState = (
   contextKey: string,

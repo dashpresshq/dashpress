@@ -17,17 +17,15 @@ import {
   maxLength,
   required,
 } from "frontend/lib/validations";
-import { Spacer } from "frontend/design-system/primitives/Spacer";
-import { SectionBox } from "frontend/design-system/components/Section/SectionBox";
-import { FormInput } from "frontend/design-system/components/Form/Input";
-import { FormNumberInput } from "frontend/design-system/components/Form/Number";
-import { FormNoValueSelect } from "frontend/design-system/components/Form/Select";
-import { FormButton } from "frontend/design-system/components/Button/FormButton";
-import { DELETE_BUTTON_PROPS } from "frontend/design-system/components/Button/constants";
-import { Fragment } from "react";
 import { msg } from "@lingui/macro";
 import { typescriptSafeObjectDotEntries } from "shared/lib/objects";
 import { fakeMessageDescriptor } from "translations/fake";
+import { SectionBox } from "@/components/app/section-box";
+import { DELETE_BUTTON_PROPS } from "@/components/app/button/constants";
+import { Select } from "@/components/ui/select";
+import { FormButton } from "@/components/app/button/form";
+import { FormInput } from "@/components/app/form/input/text";
+import { FormNumberInput } from "@/components/app/form/input/number";
 
 interface IProps {
   field: string;
@@ -71,20 +69,20 @@ export function FieldValidationCanvas({
       initialValues={{ validations }}
       render={({ handleSubmit, values, pristine }) => (
         <form onSubmit={handleSubmit}>
-          <Spacer size="sm" />
-          <FieldArray name="validations">
-            {({ fields }) => (
-              <>
-                {fields.map((name, index) => {
-                  const { validationType, fromSchema }: IFieldValidationItem =
-                    values.validations[index];
+          <div className="mt-2 flex flex-col gap-3">
+            <FieldArray name="validations">
+              {({ fields }) => (
+                <>
+                  {fields.map((name, index) => {
+                    const { validationType, fromSchema }: IFieldValidationItem =
+                      values.validations[index];
 
-                  const { input: validationInput, isBoundToType } =
-                    ENTITY_VALIDATION_CONFIG[validationType];
+                    const { input: validationInput, isBoundToType } =
+                      ENTITY_VALIDATION_CONFIG[validationType];
 
-                  return (
-                    <Fragment key={name}>
+                    return (
                       <SectionBox
+                        key={name}
                         title={ENTITY_VALIDATION_CONFIG[validationType].label}
                         actionButtons={
                           !isBoundToType && !fromSchema
@@ -148,39 +146,39 @@ export function FieldValidationCanvas({
                           )}
                         </Field>
                       </SectionBox>
-                      <Spacer />
-                    </Fragment>
-                  );
-                })}
-                <FormNoValueSelect
-                  disabledOptions={(
-                    values.validations as IFieldValidationItem[]
-                  ).map(({ validationType }) => validationType)}
-                  defaultLabel={msg`Add New Validation`}
-                  onChange={(validationType: ValidationTypes) => {
-                    const validationItem: IFieldValidationItem = {
-                      validationType,
-                      errorMessage:
-                        ENTITY_VALIDATION_CONFIG[validationType].message,
-                      constraint: {},
-                    };
-                    fields.push(validationItem);
-                  }}
-                  selectData={allowedValidations.map((validation) => ({
-                    label: ENTITY_VALIDATION_CONFIG[validation].label,
-                    value: validation,
-                  }))}
-                />
-              </>
-            )}
-          </FieldArray>
-          <Spacer />
-          <FormButton
-            isMakingRequest={false}
-            text={domainMessages.FORM_LANG.UPSERT}
-            systemIcon="Save"
-            disabled={pristine}
-          />
+                    );
+                  })}
+                  <Select
+                    onChange={(validationType: ValidationTypes) => {
+                      const validationItem: IFieldValidationItem = {
+                        validationType,
+                        errorMessage:
+                          ENTITY_VALIDATION_CONFIG[validationType].message,
+                        constraint: {},
+                      };
+                      fields.push(validationItem);
+                    }}
+                    name="select-validation"
+                    value=""
+                    options={allowedValidations.map((validation) => ({
+                      label: ENTITY_VALIDATION_CONFIG[validation].label,
+                      value: validation,
+                    }))}
+                    placeholder={msg`Add New Validation`}
+                    disabledOptions={(
+                      values.validations as IFieldValidationItem[]
+                    ).map(({ validationType }) => validationType)}
+                  />
+                </>
+              )}
+            </FieldArray>
+            <FormButton
+              isMakingRequest={false}
+              text={domainMessages.FORM_LANG.UPSERT}
+              systemIcon="Save"
+              disabled={pristine}
+            />
+          </div>
         </form>
       )}
     />

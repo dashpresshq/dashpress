@@ -1,9 +1,7 @@
-import { SchemaForm } from "frontend/components/SchemaForm";
 import { ActionIntegrations, IIntegrationsList } from "shared/types/actions";
-import { Typo } from "frontend/design-system/primitives/Typo";
-import { Spacer } from "frontend/design-system/primitives/Spacer";
-import { Tabs } from "frontend/design-system/components/Tabs";
 import { msg } from "@lingui/macro";
+import { SchemaForm } from "@/components/app/form/schema";
+import { Tabs } from "@/components/app/tabs";
 import { useActivateIntegrationMutation } from "../actions.store";
 import { Deactivate } from "./Deactivate";
 import { Configure } from "./Configure";
@@ -23,14 +21,13 @@ export function ActionSettingsView({
   );
 
   if (!integrationDetail) {
-    return <Typo.MD>404: Unknown Action</Typo.MD>;
+    return <p>404: Unknown Action</p>;
   }
 
   if (!activeAction) {
     return (
-      <>
+      <div className="flex flex-col gap-3">
         <PasswordMessage />
-        <Spacer />
         <SchemaForm
           fields={integrationDetail.configurationSchema}
           onSubmit={activateIntegrationMutation.mutateAsync}
@@ -42,7 +39,7 @@ export function ActionSettingsView({
               : msg`Activate ${integrationDetail.title}`
           }
         />
-      </>
+      </div>
     );
   }
 

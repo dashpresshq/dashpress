@@ -1,16 +1,14 @@
-import { SchemaForm } from "frontend/components/SchemaForm";
-import { Spacer } from "frontend/design-system/primitives/Spacer";
-import { Typo } from "frontend/design-system/primitives/Typo";
 import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
+import { SchemaForm } from "@/components/app/form/schema";
 import { usePasswordStore } from "./password.store";
 
 export function PasswordMessage() {
   return (
-    <Typo.SM $textStyle="italic">
+    <p className="italic text-sm">
       All the values provided from this form will encrypted using `aes-256-gcm`
       before been saved.
-    </Typo.SM>
+    </p>
   );
 }
 
@@ -20,12 +18,12 @@ export function PasswordToReveal({ isLoading }: { isLoading: boolean }) {
 
   return (
     <>
-      <Typo.SM $textStyle="italic">
+      <p className="italic text-sm mb-3">
         {_(
           msg`For security reasons, Please input your account password to reveal credentials`
         )}
-      </Typo.SM>
-      <Spacer />
+      </p>
+
       <SchemaForm
         fields={{
           password: {

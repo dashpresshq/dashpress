@@ -1,4 +1,3 @@
-import { Spacer } from "frontend/design-system/primitives/Spacer";
 import { DocumentationRoot } from "./_base";
 
 export function ViewsDocumentation() {
@@ -55,7 +54,6 @@ export function ViewsDocumentation() {
         settings are just default values so other users can still edit the
         filters as they see fit.
       </p>
-      <Spacer />
     </DocumentationRoot>
   );
 }

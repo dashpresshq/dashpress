@@ -1,7 +1,7 @@
 import { ReactNode, useEffect } from "react";
 import { AuthActions } from "frontend/hooks/auth/auth.actions";
-import { ComponentIsLoading } from "frontend/design-system/components/ComponentIsLoading";
 import { useToggle } from "frontend/hooks/state/useToggleState";
+import { ComponentIsLoading } from "@/components/app/loading-component";
 
 export function IsSignedIn({ children }: { children: ReactNode }) {
   const renderMode = useToggle();

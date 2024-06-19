@@ -1,8 +1,8 @@
 import styled from "styled-components";
-import { BaseSkeleton } from "frontend/design-system/components/Skeleton/Base";
-import { TableSkeleton } from "frontend/design-system/components/Skeleton/Table";
-import { Card } from "frontend/design-system/components/Card";
+import { TableSkeleton } from "@/components/app/skeleton/table";
 import { dashboardGridRoot, WidgetRoot } from "./styles";
+import { Card } from "@/components/ui/card";
+import { Skeleton } from "@/components/ui/skeleton";
 
 const Root = styled.div`
   ${dashboardGridRoot};
@@ -11,10 +11,10 @@ const Root = styled.div`
 export function DashboardSkeleton() {
   return (
     <Card>
-      <Root style={{ padding: 10 }}>
+      <Root className="p-2">
         {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
           <WidgetRoot $span="3" $height="1" key={i}>
-            <BaseSkeleton height="100px" />
+            <Skeleton className="h-24" />
           </WidgetRoot>
         ))}
       </Root>

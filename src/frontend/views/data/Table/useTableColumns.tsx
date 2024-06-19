@@ -17,8 +17,6 @@ import {
 } from "frontend/hooks/configuration/configuration.store";
 import { DataStateKeys } from "frontend/lib/data/types";
 import { ellipsis } from "shared/lib/strings";
-import { ITableColumn } from "frontend/design-system/components/Table/types";
-import { ActionButtons } from "frontend/design-system/components/Button/ActionButtons";
 import { TableFilterType } from "shared/types/data";
 import { useEvaluateScriptContext } from "frontend/hooks/scripts";
 import { ReactNode } from "react";
@@ -29,6 +27,8 @@ import { PortalColumnRender, usePortalTableColumns } from "./portal";
 import { evalutePresentationScript } from "../evaluatePresentationScript";
 import { useEntityActionButtons } from "../hooks/useEntityActionButtons";
 import { usePortalActionButtons } from "../Details/portal";
+import { ActionButtons } from "@/components/app/button/action";
+import { ITableColumn } from "@/components/app/table/types";
 
 export const ACTIONS_ACCESSOR = "__actions__";
 
@@ -58,9 +58,7 @@ function TableActionButtons({
     row: row.original,
   });
 
-  return (
-    <ActionButtons actionButtons={portalActionButtons} justIcons size="xs" />
-  );
+  return <ActionButtons actionButtons={portalActionButtons} size="icon" />;
 }
 
 const buildFilterConfigFromType = (prop: {

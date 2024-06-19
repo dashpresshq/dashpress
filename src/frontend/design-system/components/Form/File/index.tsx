@@ -3,9 +3,12 @@ import { useDropzone } from "react-dropzone";
 import { makeFileRequest } from "frontend/lib/data/makeRequest";
 import { useToggle } from "frontend/hooks/state/useToggleState";
 import { typescriptSafeObjectDotEntries } from "shared/lib/objects";
-import { ISharedFormInput } from "../types";
-import { generateClassNames, LabelAndError } from "../LabelAndError";
+import { ISharedFormInput } from "../../../../../components/app/form/input/types";
 import { Presentation } from "./Presentation";
+import {
+  LabelAndError,
+  generateClassNames,
+} from "@/components/app/form/input/label-and-error";
 
 interface IFormFileInput extends ISharedFormInput {
   uploadUrl: string;

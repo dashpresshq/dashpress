@@ -1,27 +1,21 @@
-import styled from "styled-components";
 import { WidgetRoot } from "frontend/views/Dashboard/styles";
 import { ReactElement, forwardRef } from "react";
 import {
   IWidgetConfig,
   WIDGET_SCRIPT_RELATIVE_TIME_MARKER,
 } from "shared/types/dashboard";
-import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { ISharedWidgetConfig } from "shared/types/dashboard/base";
 import { DataStateKeys } from "frontend/lib/data/types";
-import { Card } from "frontend/design-system/components/Card";
-import { Spacer } from "frontend/design-system/primitives/Spacer";
-import { RenderCode } from "frontend/design-system/components/RenderCode";
-import { Stack } from "frontend/design-system/primitives/Stack";
-import { EmptyWrapper } from "frontend/design-system/components/EmptyWrapper";
 import { msg } from "@lingui/macro";
+import { ViewStateMachine } from "@/components/app/view-state-machine";
 import { WidgetHeader } from "../WidgetHeader";
 import { IWidgetSettingProps } from "../WidgetHeader/types";
 import { WIDGET_CONFIG } from "../../constants";
 import { useWidgetNavigationLink } from "../../../Widget/useWidgetNavigationLink";
-
-const Box = styled.div`
-  padding: 16px;
-`;
+import { Card } from "@/components/ui/card";
+import { cn } from "@/lib/utils";
+import { EmptyWrapper } from "@/components/app/empty-wrapper";
+import { RenderCode } from "@/components/app/render-code";
 
 interface IProps {
   config: ISharedWidgetConfig;
@@ -83,8 +77,8 @@ export const WidgetFrame = forwardRef<HTMLDivElement, IProps>(
         $span={config.span || configSpan}
         $height={height}
       >
-        <Card style={{ height: "100%" }}>
-          <Box>
+        <Card className="h-full">
+          <div className="p-4">
             <WidgetHeader
               setting={setting}
               title={config.title}
@@ -93,16 +87,10 @@ export const WidgetFrame = forwardRef<HTMLDivElement, IProps>(
               isPreview={isPreview}
               hasRelativeDate={hasRelativeDate}
             />
-            <Spacer />
             <div
-              style={
-                schemaError
-                  ? {}
-                  : {
-                      height: "100%",
-                      overflowY: "auto",
-                    }
-              }
+              className={cn("mt-3", {
+                "h-full overflow-y-auto": schemaError,
+              })}
             >
               <ViewStateMachine
                 error={data.error}
@@ -113,19 +101,13 @@ export const WidgetFrame = forwardRef<HTMLDivElement, IProps>(
                 {schemaError ? (
                   <RenderCode input={schemaError} />
                 ) : isDataEmpty(data.data) ? (
-                  <Stack
-                    $align="center"
-                    $justify="center"
-                    style={{ height: "100%" }}
-                  >
-                    <EmptyWrapper text={msg`No Data`} />
-                  </Stack>
+                  <EmptyWrapper text={msg`No Data`} />
                 ) : (
                   <Component data={data.data} config={config} />
                 )}
               </ViewStateMachine>
             </div>
-          </Box>
+          </div>
         </Card>
       </WidgetRoot>
     );

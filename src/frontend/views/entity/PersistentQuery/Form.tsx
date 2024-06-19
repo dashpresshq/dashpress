@@ -6,22 +6,20 @@ import { ACTIONS_ACCESSOR } from "frontend/views/data/Table/useTableColumns";
 import { useAppConfigurationDomainMessages } from "frontend/hooks/configuration/configuration.constant";
 import { composeValidators, required } from "frontend/lib/validations";
 import { IFormProps } from "frontend/lib/form/types";
-import { ITableColumn } from "frontend/design-system/components/Table/types";
-import { SoftButton } from "frontend/design-system/components/Button/SoftButton";
-import { Stack } from "frontend/design-system/primitives/Stack";
-import { FormInput } from "frontend/design-system/components/Form/Input";
-import { Spacer } from "frontend/design-system/primitives/Spacer";
-import { FormButton } from "frontend/design-system/components/Button/FormButton";
-import { DELETE_BUTTON_PROPS } from "frontend/design-system/components/Button/constants";
 import { FormSelect } from "frontend/design-system/components/Form/Select";
-import { FormSelectButton } from "frontend/design-system/components/Form/SelectButton";
-import { FormGrid } from "frontend/components/SchemaForm/form-grid";
-import { Card, CardBody } from "frontend/design-system/components/Card";
 import { Fragment } from "react";
 import { msg } from "@lingui/macro";
 import { typescriptSafeObjectDotEntries } from "shared/lib/objects";
-import { FILTER_OPERATOR_CONFIG } from "frontend/design-system/components/Table/filters/constants";
 import { MessageDescriptor } from "@lingui/core";
+import { DELETE_BUTTON_PROPS } from "@/components/app/button/constants";
+import { FormButton } from "@/components/app/button/form";
+import { FormInput } from "@/components/app/form/input/text";
+import { SoftButton } from "@/components/app/button/soft";
+import { Card, CardContent } from "@/components/ui/card";
+import { ITableColumn } from "@/components/app/table/types";
+import { FILTER_OPERATOR_CONFIG } from "@/components/app/table/filters/constants";
+import { FormGrid } from "@/components/app/form/schema/form-grid";
+import { FormSelectButton } from "@/components/app/form/input/select-button";
 
 const OPERATOR_SELECTORS = [
   {
@@ -52,7 +50,7 @@ function FilterRow({
   const noValue = FILTER_OPERATOR_CONFIG[operatorValue]?.numberOfInput === 0;
 
   return (
-    <div style={{ width: "100%" }}>
+    <div className="w-full">
       <FormGrid.Root>
         <Field
           name={`${queryFilter}.id`}
@@ -145,7 +143,7 @@ export function EntityPersistentQueryForm({
                           {({ input, meta }) => (
                             <FormSelectButton
                               required
-                              sm
+                              size="sm"
                               selectData={OPERATOR_SELECTORS}
                               meta={meta}
                               input={input}
@@ -153,8 +151,8 @@ export function EntityPersistentQueryForm({
                           )}
                         </Field>
                       )}
-                      <Card>
-                        <CardBody>
+                      <Card className="mb-4">
+                        <CardContent>
                           <FieldArray name={`${name}.children`}>
                             {({ fields: queryFilters }) => (
                               <div>
@@ -169,7 +167,7 @@ export function EntityPersistentQueryForm({
                                           >
                                             {({ input, meta }) => (
                                               <FormSelectButton
-                                                sm
+                                                size="sm"
                                                 required
                                                 selectData={OPERATOR_SELECTORS}
                                                 meta={meta}
@@ -178,13 +176,13 @@ export function EntityPersistentQueryForm({
                                             )}
                                           </Field>
                                         )}
-                                      <Stack $align="center">
+                                      <div className="flex items-center gap-2">
                                         <FilterRow
                                           queryFilter={queryFilter}
                                           columns={columns}
                                         />
                                         <SoftButton
-                                          justIcon
+                                          size="icon"
                                           {...DELETE_BUTTON_PROPS({
                                             action: () => {
                                               if (queryFilters.length === 1) {
@@ -202,7 +200,7 @@ export function EntityPersistentQueryForm({
                                             shouldConfirmAlert: undefined,
                                           })}
                                         />
-                                      </Stack>
+                                      </div>
                                     </div>
                                   )
                                 )}
@@ -222,13 +220,11 @@ export function EntityPersistentQueryForm({
                               </div>
                             )}
                           </FieldArray>
-                        </CardBody>
+                        </CardContent>
                       </Card>
-                      <Spacer />
                     </Fragment>
                   ))}
-                  <Spacer />
-                  <Stack $justify="end">
+                  <div className="flex justify-end mt-2">
                     <SoftButton
                       systemIcon="Plus"
                       label={msg`Add Filter`}
@@ -247,12 +243,12 @@ export function EntityPersistentQueryForm({
                         })
                       }
                     />
-                  </Stack>
+                  </div>
                 </div>
               )}
             </FieldArray>
-            <Spacer />
             <FormButton
+              className="mt-3"
               isMakingRequest={submitting}
               onClick={handleSubmit}
               text={domainMessages.FORM_LANG.UPSERT}

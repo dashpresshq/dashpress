@@ -1,18 +1,18 @@
 import { AuthLayout } from "frontend/_layouts/guest";
 import { useSetupCheck } from "frontend/hooks/setup/setup.store";
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
-import { ViewStateMachine } from "frontend/components/ViewStateMachine";
-import {
-  FormSkeleton,
-  FormSkeletonSchema,
-} from "frontend/design-system/components/Skeleton/Form";
-import { SchemaForm } from "frontend/components/SchemaForm";
 import {
   ISetupUserForm,
   SETUP_USER_FORM_SCHEMA,
 } from "shared/form-schemas/setup/user";
 import { msg } from "@lingui/macro";
 import { CustomNextPage } from "frontend/_layouts/types";
+import { ViewStateMachine } from "@/components/app/view-state-machine";
+import {
+  FormSkeleton,
+  FormSkeletonSchema,
+} from "@/components/app/skeleton/form";
+import { SchemaForm } from "@/components/app/form/schema";
 import { useSetupUserMutation } from "../setup.store";
 
 // eslint-disable-next-line react/function-component-definition

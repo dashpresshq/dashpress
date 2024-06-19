@@ -1,11 +1,6 @@
 import { IntegrationsConfigurationGroup } from "shared/types/integrations";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import {
-  FEPaginationTable,
-  IFETableCell,
-  IFETableColumn,
-} from "frontend/components/FEPaginationTable";
-import {
   IPageDetails,
   useSetCurrentActionItems,
 } from "frontend/lib/routing/usePageDetails";
@@ -16,19 +11,20 @@ import { INTEGRATIONS_GROUP_CONFIG } from "shared/config-bag/integrations";
 import { VariablesDocumentation } from "frontend/docs/variables";
 import { ToastService } from "frontend/lib/toast";
 import { useApi } from "frontend/lib/data/useApi";
-import { Spacer } from "frontend/design-system/primitives/Spacer";
-import { Typo } from "frontend/design-system/primitives/Typo";
-import { OffCanvas } from "frontend/design-system/components/OffCanvas";
 import {
   PasswordMessage,
   PasswordToReveal,
 } from "frontend/views/integrations/Password";
 import { IKeyValue } from "shared/types/options";
 import { useDocumentationActionButton } from "frontend/docs/constants";
-import { ActionButtons } from "frontend/design-system/components/Button/ActionButtons";
-import { DELETE_BUTTON_PROPS } from "frontend/design-system/components/Button/constants";
 import { msg } from "@lingui/macro";
 import { useDomainMessages } from "frontend/lib/crud-config";
+import { DELETE_BUTTON_PROPS } from "@/components/app/button/constants";
+import {
+  FEPaginationTable,
+  IFETableCell,
+  IFETableColumn,
+} from "@/components/app/pagination-table";
 import {
   INTEGRATIONS_GROUP_ENDPOINT,
   useIntegrationConfigurationDeletionMutation,
@@ -37,6 +33,9 @@ import {
 } from "./configurations.store";
 import { KeyValueForm } from "./Form";
 import { INTEGRATIONS_GROUP_CRUD_CONFIG } from "./constants";
+import { Card } from "@/components/ui/card";
+import { OffCanvas } from "@/components/app/off-canvas";
+import { ActionButtons } from "@/components/app/button/action";
 
 const NEW_CONFIG_ITEM = "__new_config_item__";
 
@@ -87,7 +86,7 @@ export function ManageCredentialGroup({
   const MemoizedAction = useCallback(
     ({ row }: IFETableCell<IKeyValue>) => (
       <ActionButtons
-        justIcons
+        size="icon"
         actionButtons={[
           {
             id: "edit",
@@ -178,22 +177,20 @@ export function ManageCredentialGroup({
   }
 
   return (
-    <>
+    <Card>
       <section aria-label={`${group} priviledge section`}>
         {group === IntegrationsConfigurationGroup.Credentials &&
           userHasPermission(UserPermissions.CAN_MANAGE_APP_CREDENTIALS) &&
           revealedCredentials.data === undefined && (
-            <Spacer>
+            <div className="my-3">
               <PasswordToReveal isLoading={revealedCredentials.isLoading} />
-            </Spacer>
+            </div>
           )}
         {!canManageAction && tableData.data.length > 0 && (
-          <Spacer>
-            <Typo.SM $textStyle="italic">
-              Your account does not have the permission to view secret values or
-              manage them
-            </Typo.SM>
-          </Spacer>
+          <p className="text-sm italic my-2 px-2">
+            Your account does not have the permission to view secret values or
+            manage them
+          </p>
         )}
       </section>
 
@@ -218,13 +215,13 @@ export function ManageCredentialGroup({
             : domainMessages.TEXT_LANG.EDIT
         }
         onClose={closeConfigItem}
+        size="sm"
         show={!!currentConfigItem}
       >
         {group === IntegrationsConfigurationGroup.Credentials && (
-          <>
+          <div className="mb-3">
             <PasswordMessage />
-            <Spacer />
-          </>
+          </div>
         )}
         <KeyValueForm
           group={group}
@@ -238,6 +235,6 @@ export function ManageCredentialGroup({
         />
       </OffCanvas>
       <VariablesDocumentation />
-    </>
+    </Card>
   );
 }

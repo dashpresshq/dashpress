@@ -94,7 +94,9 @@ export const SystemIcons = {
 
 export type SystemIconsKeys = keyof typeof SystemIcons;
 
-export const SystemIconsList = typescriptSafeObjectDotKeys(SystemIcons);
+export const SystemIconsList = typescriptSafeObjectDotKeys(SystemIcons).sort(
+  (a, b) => a.localeCompare(b)
+);
 
 export const systemIconToSVG = (icon: string, strokeWidth = 2) => {
   let iconPath = SystemIcons[icon];

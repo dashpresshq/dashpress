@@ -1,13 +1,7 @@
 /* eslint-disable react/no-array-index-key */
-import { BaseSkeleton } from "frontend/design-system/components/Skeleton/Base";
-import { Spacer } from "frontend/design-system/primitives/Spacer";
-import { Stack } from "frontend/design-system/primitives/Stack";
-import { useThemeColorShade } from "frontend/design-system/theme/useTheme";
-import { Fragment } from "react";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export function NavigationSkeleton() {
-  const getThemeColorShade = useThemeColorShade();
-
   const SCHEMA = [
     "header",
     "item",
@@ -22,39 +16,33 @@ export function NavigationSkeleton() {
     "item",
     "item",
     "item",
+    "header",
+    "item",
+    "item",
+    "item",
+    "header",
+    "item",
+    "item",
+    "item",
+    "item",
+    "item",
   ];
 
   return (
-    <Stack
-      $direction="column"
-      $spacing={16}
-      style={{ padding: 24, marginTop: 48 }}
-    >
+    <div className="flex gap-2 flex-col px-6 mt-2">
       {SCHEMA.map((type, index) => {
         if (type === "header") {
           return (
-            <Fragment key={index}>
-              <Spacer size="sm" />
-              <BaseSkeleton
-                height="25px"
-                style={{
-                  background: getThemeColorShade("primary-color", 35),
-                  maxWidth: "120px",
-                }}
-              />
-            </Fragment>
+            <Skeleton
+              key={index}
+              className="h-4 bg-primary-shade-thick-xl max-w-24"
+            />
           );
         }
         return (
-          <BaseSkeleton
-            key={index}
-            height="25px"
-            style={{
-              background: getThemeColorShade("primary-color", 35),
-            }}
-          />
+          <Skeleton key={index} className="h-6 bg-primary-shade-thick-xl" />
         );
       })}
-    </Stack>
+    </div>
   );
 }

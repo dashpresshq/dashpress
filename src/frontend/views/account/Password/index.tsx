@@ -1,13 +1,13 @@
 import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
 import { META_USER_PERMISSIONS } from "shared/constants/user";
-import { SectionBox } from "frontend/design-system/components/Section/SectionBox";
-import { SchemaForm } from "frontend/components/SchemaForm";
 import {
   CHANGE_PASSWORD_FORM_SCHEMA,
   IChangePasswordForm,
 } from "shared/form-schemas/profile/password";
 import { useDomainMessages } from "frontend/lib/crud-config";
 import { LANG_DOMAINS } from "frontend/lib/crud-config/lang-domains";
+import { SchemaForm } from "@/components/app/form/schema";
+import { SectionBox } from "@/components/app/section-box";
 import { useChangePasswordMutation } from "../account.store";
 import { ACCOUNT_VIEW_KEY } from "../constants";
 

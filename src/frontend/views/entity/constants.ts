@@ -3,10 +3,10 @@ import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
 import { useUserHasPermission } from "frontend/hooks/auth/user.store";
 import { UserPermissions } from "shared/constants/user";
 import { CrudViewsKeys } from "shared/configurations";
-import { IDropDownMenuItem } from "frontend/design-system/components/DropdownMenu";
 import { useEntityCrudConfig } from "frontend/hooks/entity/entity.config";
 import { msg } from "@lingui/macro";
 import { MessageDescriptor } from "@lingui/core";
+import { IMenuActionItem } from "@/components/app/button/types";
 
 export const ENTITY_CONFIGURATION_VIEW = "ENTITY_CONFIGURATION_VIEW";
 
@@ -26,7 +26,7 @@ export const ENTITY_CRUD_LABELS: Record<CrudViewsKeys, MessageDescriptor> = {
 
 export const useEntityActionMenuItems = (
   slugEntity: string
-): IDropDownMenuItem[] => {
+): IMenuActionItem[] => {
   const router = useRouter();
 
   const entityCrudConfig = useEntityCrudConfig(slugEntity);

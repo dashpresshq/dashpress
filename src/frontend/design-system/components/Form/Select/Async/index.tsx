@@ -8,14 +8,14 @@ import { useApi } from "frontend/lib/data/useApi";
 import { ApiRequest } from "frontend/lib/data/makeRequest";
 import { useLingui } from "@lingui/react";
 import { FormSelect } from "..";
+import { IBaseFormSelect } from "../types";
+import { SelectStyles, SharedSelectProps } from "../styles";
+import { ErrorAlert } from "@/components/app/alert";
 import {
   LabelAndError,
   generateClassNames,
   generateFormArias,
-} from "../../LabelAndError";
-import { ErrorAlert } from "../../../Alert";
-import { IBaseFormSelect } from "../types";
-import { SelectStyles, SharedSelectProps } from "../styles";
+} from "@/components/app/form/input/label-and-error";
 
 interface IProps extends IBaseFormSelect {
   url: string;
@@ -54,9 +54,7 @@ export function AsyncFormSelect(props: IProps) {
     disabled,
     label: formLabel,
     disabledOptions = [],
-    nullable,
     placeholder,
-    defaultLabel,
   } = props;
 
   const [valueLabel, setValueLabel] = useState("");
@@ -77,7 +75,7 @@ export function AsyncFormSelect(props: IProps) {
     }
 
     if (!input.value) {
-      return defaultLabel || `--- Select ${_(formLabel)} ---`;
+      return placeholder ? _(placeholder) : `--- Select ${_(formLabel)} ---`;
     }
 
     const isValueInFirstDataLoad = data.find(
@@ -106,7 +104,7 @@ export function AsyncFormSelect(props: IProps) {
           {...input}
           {...generateFormArias(meta)}
           onChange={({ value, label }: any) => {
-            input.onChange(nullable && !value ? null : value);
+            input.onChange(value);
             setValueLabel(label);
           }}
           id={input.name}

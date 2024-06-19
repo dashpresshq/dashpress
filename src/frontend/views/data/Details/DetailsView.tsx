@@ -3,10 +3,6 @@ import {
   useAppConfiguration,
   useEntityConfiguration,
 } from "frontend/hooks/configuration/configuration.store";
-import { ViewStateMachine } from "frontend/components/ViewStateMachine";
-import { BaseSkeleton } from "frontend/design-system/components/Skeleton/Base";
-import { Typo } from "frontend/design-system/primitives/Typo";
-import { Spacer } from "frontend/design-system/primitives/Spacer";
 import { useEntityDataDetails } from "frontend/hooks/data/data.store";
 import {
   useEntityFieldLabels,
@@ -18,15 +14,13 @@ import { useEntityToOneReferenceFields } from "frontend/hooks/entity/entity.stor
 import { DataStates } from "frontend/lib/data/types";
 import styled from "styled-components";
 import { useEvaluateScriptContext } from "frontend/hooks/scripts";
+import { ViewStateMachine } from "@/components/app/view-state-machine";
 import { useEntityViewStateMachine } from "../hooks/useEntityViewStateMachine";
 import { viewSpecialDataTypes } from "../viewSpecialDataTypes";
 import { evalutePresentationScript } from "../evaluatePresentationScript";
 import { PreDataDetails } from "./portal";
 import { PortalColumnRender } from "../Table/portal";
-
-const ContentText = styled(Typo.SM)`
-  overflow-wrap: anywhere;
-`;
+import { Skeleton } from "@/components/ui/skeleton";
 
 const DetailItem = styled.div`
   .show-on-hover {
@@ -93,8 +87,8 @@ export function EntityDetailsView({
         <>
           {Array.from({ length: 7 }, (_, k) => k).map((key) => (
             <Fragment key={key}>
-              <BaseSkeleton height="18px" width="100px" bottom={8} />
-              <BaseSkeleton height="20px" bottom={16} />
+              <Skeleton className="h-4 w-24 mb-2" />
+              <Skeleton className="h-5 max-w-xs mb-4" />
             </Fragment>
           ))}
         </>
@@ -129,15 +123,17 @@ export function EntityDetailsView({
           });
 
           const contentToRender = specialDataTypeRender || (
-            <ContentText>
+            <span className="break-words">
               {typeof value === "object" ? JSON.stringify(value) : value}
-            </ContentText>
+            </span>
           );
 
           return (
             <DetailItem key={name}>
-              <Typo.XXS $weight="bold">{getEntityFieldLabels(name)}</Typo.XXS>
-              <Typo.XS>
+              <p className="text-xs font-semibold">
+                {getEntityFieldLabels(name)}
+              </p>
+              <p className="text-sm mb-2">
                 <PortalColumnRender
                   {...{
                     column: name,
@@ -148,8 +144,7 @@ export function EntityDetailsView({
                 >
                   {contentToRender}
                 </PortalColumnRender>
-              </Typo.XS>
-              <Spacer />
+              </p>
             </DetailItem>
           );
         })}

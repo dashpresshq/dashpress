@@ -1,12 +1,9 @@
 import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
-import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { UserPermissions } from "shared/constants/user";
 import { ILabelValue } from "shared/types/options";
 import { useAppConfigurationDomainMessages } from "frontend/hooks/configuration/configuration.constant";
 import { EnabledEntitiesDocumentation } from "frontend/docs/enabled-entities";
 import { useApi } from "frontend/lib/data/useApi";
-import { ListSkeleton } from "frontend/design-system/components/Skeleton/List";
-import { SectionBox } from "frontend/design-system/components/Section/SectionBox";
 import {
   useAppConfiguration,
   useUpsertConfigurationMutation,
@@ -15,6 +12,9 @@ import { useEntityDictionPlurals } from "frontend/hooks/entity/entity.queries";
 import { NAVIGATION_MENU_ENDPOINT } from "frontend/_layouts/app/NavigationSideBar/constants";
 import { ACTIVE_ENTITIES_ENDPOINT } from "shared/constants/entities";
 import { useDocumentationActionButton } from "frontend/docs/constants";
+import { SectionBox } from "@/components/app/section-box";
+import { ListSkeleton } from "@/components/app/skeleton/list";
+import { ViewStateMachine } from "@/components/app/view-state-machine";
 import { SETTINGS_VIEW_KEY } from "../constants";
 import { BaseSettingsLayout } from "../_Base";
 import { EntitiesSelection } from "./Selection";

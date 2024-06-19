@@ -1,15 +1,12 @@
-import { SchemaForm } from "frontend/components/SchemaForm";
 import { useEffect } from "react";
 import { IIntegrationsList } from "shared/types/actions";
 import { ToastService } from "frontend/lib/toast";
-import { Typo } from "frontend/design-system/primitives/Typo";
-import { Stack } from "frontend/design-system/primitives/Stack";
-import { Spacer } from "frontend/design-system/primitives/Spacer";
 import { typescriptSafeObjectDotKeys } from "shared/lib/objects";
 import { useDomainMessages } from "frontend/lib/crud-config";
 import { LANG_DOMAINS } from "frontend/lib/crud-config/lang-domains";
 import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
+import { SchemaForm } from "@/components/app/form/schema";
 import {
   useActivationConfiguration,
   useUpdateActivatedIntegrationMutation,
@@ -38,11 +35,11 @@ export function Configure({ activationId, integrationDetail }: IProps) {
       .length === 0
   ) {
     return (
-      <Stack $justify="center">
-        <Typo.SM $textStyle="italic">
+      <div className="text-center">
+        <p className="text-sm">
           {_(msg`This action does not have configuration`)}
-        </Typo.SM>
-      </Stack>
+        </p>
+      </div>
     );
   }
 
@@ -50,9 +47,9 @@ export function Configure({ activationId, integrationDetail }: IProps) {
     return <PasswordToReveal isLoading={activationConfiguration.isLoading} />;
   }
   return (
-    <>
+    <div className="flex flex-col gap-3">
       <PasswordMessage />
-      <Spacer />
+
       <SchemaForm
         fields={integrationDetail.configurationSchema}
         onSubmit={updateActivatedIntegrationMutation.mutateAsync}
@@ -60,6 +57,6 @@ export function Configure({ activationId, integrationDetail }: IProps) {
         buttonText={domainMessages.FORM_LANG.UPDATE}
         systemIcon="Save"
       />
-    </>
+    </div>
   );
 }

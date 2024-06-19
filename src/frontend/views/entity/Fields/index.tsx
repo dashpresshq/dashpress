@@ -11,20 +11,18 @@ import {
   useEntityConfiguration,
   useUpsertConfigurationMutation,
 } from "frontend/hooks/configuration/configuration.store";
-import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { FieldsSettingsDocumentation } from "frontend/docs/fields";
 import { useRouteParam } from "frontend/lib/routing/useRouteParam";
 import { useChangeRouterParam } from "frontend/lib/routing/useChangeRouterParam";
 import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
-import {
-  FormSkeleton,
-  FormSkeletonSchema,
-} from "frontend/design-system/components/Skeleton/Form";
-import { SectionBox } from "frontend/design-system/components/Section/SectionBox";
-import { Tabs } from "frontend/design-system/components/Tabs";
 import { useDocumentationActionButton } from "frontend/docs/constants";
 import { msg } from "@lingui/macro";
 import { useAppConfigurationDomainMessages } from "frontend/hooks/configuration/configuration.constant";
+import {
+  FormSkeleton,
+  FormSkeletonSchema,
+} from "@/components/app/skeleton/form";
+import { ViewStateMachine } from "@/components/app/view-state-machine";
 import {
   ENTITY_CONFIGURATION_VIEW,
   ENTITY_FIELD_SETTINGS_TAB_LABELS,
@@ -32,6 +30,8 @@ import {
 import { FieldsTypeForm } from "./FieldsType.form";
 import { FieldsLabelForm, loadingFieldsLabelForm } from "./FieldsLabel.form";
 import { BaseEntitySettingsLayout } from "../_Base";
+import { Tabs } from "@/components/app/tabs";
+import { SectionBox } from "@/components/app/section-box";
 
 const TITLE_MSG = msg`Field Settings`;
 

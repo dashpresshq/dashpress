@@ -4,8 +4,11 @@ import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
 import dynamic from "next/dynamic";
 import { SYSTEM_COLORS } from "frontend/design-system/theme/system";
 import { noop } from "shared/lib/noop";
-import { ISharedFormInput } from "../types";
-import { generateClassNames, LabelAndError } from "../LabelAndError";
+import { ISharedFormInput } from "../../../../../components/app/form/input/types";
+import {
+  LabelAndError,
+  generateClassNames,
+} from "@/components/app/form/input/label-and-error";
 
 const ReactQuill = dynamic<any>(
   () => {

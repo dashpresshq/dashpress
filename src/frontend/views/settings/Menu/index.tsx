@@ -1,9 +1,6 @@
-import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { UserPermissions } from "shared/constants/user";
 import { useAppConfigurationDomainMessages } from "frontend/hooks/configuration/configuration.constant";
 import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
-import { ListSkeleton } from "frontend/design-system/components/Skeleton/List";
-import { SectionBox } from "frontend/design-system/components/Section/SectionBox";
 import {
   useAppConfiguration,
   useUpsertConfigurationMutation,
@@ -14,6 +11,9 @@ import { NAVIGATION_MENU_ENDPOINT } from "frontend/_layouts/app/NavigationSideBa
 import { AppLayout } from "frontend/_layouts/app";
 import { ACTIVE_ENTITIES_ENDPOINT } from "shared/constants/entities";
 import { msg } from "@lingui/macro";
+import { SectionBox } from "@/components/app/section-box";
+import { ListSkeleton } from "@/components/app/skeleton/list";
+import { ViewStateMachine } from "@/components/app/view-state-machine";
 import { SETTINGS_VIEW_KEY } from "../constants";
 import { EntitiesSelection } from "../Entities/Selection";
 

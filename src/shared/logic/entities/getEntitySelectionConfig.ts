@@ -3,7 +3,8 @@ import { EntityTypesForSelection, IColorableSelection } from "shared/types/ui";
 import { uniqBy } from "shared/lib/array/uniq-by";
 import { msg } from "@lingui/macro";
 import { i18nNoop } from "translations/fake";
-import { isUseColorsFlagOn, OPTIONS_COLORS } from "./selection.utils";
+import { isUseColorsFlagOn } from "./selection.utils";
+import { SPECTRUM_COLORS } from "@/components/ui/spectrum";
 
 export const getEntitySelectionConfig = (
   entityType: EntityTypesForSelection,
@@ -17,12 +18,12 @@ export const getEntitySelectionConfig = (
           {
             value: true,
             label: msg`Yes`,
-            color: OPTIONS_COLORS[0],
+            spectrum: "green",
           },
           {
             value: false,
             label: msg`No`,
-            color: OPTIONS_COLORS[1],
+            spectrum: "red",
           },
         ]
       );
@@ -41,8 +42,8 @@ export const getEntitySelectionConfig = (
           ...enumList.map((enumValue, index) => ({
             value: enumValue,
             label: i18nNoop(userFriendlyCase(enumValue)),
-            color: shouldUseColor
-              ? OPTIONS_COLORS[index % OPTIONS_COLORS.length]
+            spectrum: shouldUseColor
+              ? SPECTRUM_COLORS[index % SPECTRUM_COLORS.length]
               : undefined,
           })),
         ],

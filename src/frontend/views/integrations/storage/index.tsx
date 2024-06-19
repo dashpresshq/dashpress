@@ -1,10 +1,10 @@
 import { UserPermissions } from "shared/constants/user";
 import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
-import { SectionBox } from "frontend/design-system/components/Section/SectionBox";
-import { Tabs } from "frontend/design-system/components/Tabs";
 import { msg } from "@lingui/macro";
 import { useDomainMessages } from "frontend/lib/crud-config";
 import { LANG_DOMAINS } from "frontend/lib/crud-config/lang-domains";
+import { SectionBox } from "@/components/app/section-box";
+import { Tabs } from "@/components/app/tabs";
 import { BaseActionsLayout } from "../_Base";
 import { ACTIONS_VIEW_KEY } from "../constants";
 

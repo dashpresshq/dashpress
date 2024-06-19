@@ -1,3 +1,4 @@
+import { SpectrumColorTypes } from "@/components/ui/spectrum";
 import { IPortalWidgetConfig } from "../portal/widgets";
 import { ISharedWidgetConfig } from "./base";
 
@@ -8,7 +9,7 @@ export interface ITableWidgetConfig extends ISharedWidgetConfig {
 export interface ISummaryWidgetConfig extends ISharedWidgetConfig {
   _type: "summary-card";
   icon: string;
-  color: string;
+  color: SpectrumColorTypes;
 }
 
 export type IWidgetConfig =

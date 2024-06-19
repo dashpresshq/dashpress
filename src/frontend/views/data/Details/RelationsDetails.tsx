@@ -13,10 +13,6 @@ import { useRouteParam } from "frontend/lib/routing/useRouteParam";
 import { useNavigationStack } from "frontend/lib/routing/useNavigationStack";
 import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
-import { SectionBox } from "frontend/design-system/components/Section/SectionBox";
-import { Typo } from "frontend/design-system/primitives/Typo";
-import { Spacer } from "frontend/design-system/primitives/Spacer";
-import { SoftButton } from "frontend/design-system/components/Button/SoftButton";
 import {
   useEntityCrudConfig,
   useEntityId,
@@ -25,6 +21,8 @@ import {
 import { isQueryIdle } from "frontend/lib/data/useApi/utils";
 import { useLingui } from "@lingui/react";
 import { msg } from "@lingui/macro";
+import { SoftButton } from "@/components/app/button/soft";
+import { SectionBox } from "@/components/app/section-box";
 import { ENTITY_DETAILS_VIEW_KEY } from "./constants";
 import { EntityDetailsView } from "./DetailsView";
 import { DetailsLayout } from "./_Layout";
@@ -114,12 +112,11 @@ export function EntityRelationDetails() {
           }
           backLink={backLink}
         >
-          <div style={{ textAlign: "center" }}>
-            <Typo.SM>
+          <div className="text-center">
+            <p className="text-sm mb-3">
               The {_(childEntityCrudConfig.TEXT_LANG.SINGULAR)} for{" "}
               <b>{entityDataReference.data}</b> does not exist
-            </Typo.SM>
-            <Spacer />
+            </p>
             <SoftButton
               systemIcon="Plus"
               label={msg`Create It`}

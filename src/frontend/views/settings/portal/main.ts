@@ -1,5 +1,5 @@
-import { IMenuSectionItem } from "frontend/design-system/components/Section/MenuSection";
+import { IMenuActionItem } from "@/components/app/button/types";
 
-export const useMutateBaseSettingsMenu = (menu: IMenuSectionItem[]) => {
+export const useMutateBaseSettingsMenu = (menu: IMenuActionItem[]) => {
   return menu;
 };

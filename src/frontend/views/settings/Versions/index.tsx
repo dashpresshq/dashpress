@@ -1,17 +1,15 @@
 import { UserPermissions } from "shared/constants/user";
-import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { Fragment } from "react";
 import { useApi } from "frontend/lib/data/useApi";
 import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
-import { SectionBox } from "frontend/design-system/components/Section/SectionBox";
-import { BaseSkeleton } from "frontend/design-system/components/Skeleton/Base";
-import { Typo } from "frontend/design-system/primitives/Typo";
-import { Spacer } from "frontend/design-system/primitives/Spacer";
 import { msg } from "@lingui/macro";
 import { typescriptSafeObjectDotEntries } from "shared/lib/objects";
 import { useDomainMessages } from "frontend/lib/crud-config";
+import { SectionBox } from "@/components/app/section-box";
+import { ViewStateMachine } from "@/components/app/view-state-machine";
 import { SETTINGS_VIEW_KEY } from "../constants";
 import { BaseSettingsLayout } from "../_Base";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export function VersionInfo() {
   const domainMessages = useDomainMessages({
@@ -40,8 +38,8 @@ export function VersionInfo() {
             <>
               {Array.from({ length: 4 }, (_, k) => k).map((key) => (
                 <Fragment key={key}>
-                  <BaseSkeleton height="18px" width="100px" bottom={8} />
-                  <BaseSkeleton height="20px" bottom={16} />
+                  <Skeleton className="h-4 w-24 mb-2" />
+                  <Skeleton className="h-5 mb-4" />
                 </Fragment>
               ))}
             </>
@@ -49,11 +47,10 @@ export function VersionInfo() {
         >
           {typescriptSafeObjectDotEntries(systemVersions.data).map(
             ([label, value]) => (
-              <Fragment key={label}>
-                <Typo.XS $weight="bold">{label}</Typo.XS>
-                <Typo.SM>{value}</Typo.SM>
-                <Spacer />
-              </Fragment>
+              <div className="mb-3" key={label}>
+                <p className="text-xs font-semibold">{label}</p>
+                <p className="text-sm">{value}</p>
+              </div>
             )
           )}
         </ViewStateMachine>

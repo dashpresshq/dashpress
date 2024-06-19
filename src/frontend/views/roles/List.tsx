@@ -2,21 +2,21 @@ import { useCallback } from "react";
 import { AppLayout } from "frontend/_layouts/app";
 import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
+import { SystemRoles } from "shared/types/user";
+import { UserPermissions } from "shared/constants/user";
+import { IRolesList } from "shared/types/roles";
+import { msg } from "@lingui/macro";
+import { useDomainMessages } from "frontend/lib/crud-config";
+import { LANG_DOMAINS } from "frontend/lib/crud-config/lang-domains";
+import { DELETE_BUTTON_PROPS } from "@/components/app/button/constants";
 import {
   FEPaginationTable,
   IFETableCell,
   IFETableColumn,
-} from "frontend/components/FEPaginationTable";
-import { SystemRoles } from "shared/types/user";
-import { UserPermissions } from "shared/constants/user";
-import { IRolesList } from "shared/types/roles";
-import { Card } from "frontend/design-system/components/Card";
-import { DELETE_BUTTON_PROPS } from "frontend/design-system/components/Button/constants";
-import { ActionButtons } from "frontend/design-system/components/Button/ActionButtons";
-import { msg } from "@lingui/macro";
-import { useDomainMessages } from "frontend/lib/crud-config";
-import { LANG_DOMAINS } from "frontend/lib/crud-config/lang-domains";
+} from "@/components/app/pagination-table";
 import { ROLES_ENDPOINT_CONFIG, useRoleDeletionMutation } from "./roles.store";
+import { Card } from "@/components/ui/card";
+import { ActionButtons } from "@/components/app/button/action";
 
 export function ListRoles() {
   const domainMessages = useDomainMessages(LANG_DOMAINS.ACCOUNT.ROLES);
@@ -36,7 +36,7 @@ export function ListRoles() {
       }
       return (
         <ActionButtons
-          justIcons
+          size="icon"
           actionButtons={[
             {
               id: "edit",

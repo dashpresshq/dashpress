@@ -1,5 +1,4 @@
-import { RenderCode } from "frontend/design-system/components/RenderCode";
-import { Spacer } from "frontend/design-system/primitives/Spacer";
+import { RenderCode } from "@/components/app/render-code";
 import { DocumentationRoot } from "../_base";
 
 export function WidgetScriptDocumentation() {
@@ -83,7 +82,6 @@ const cleanData = data.map(datum => someCustomProcessing(datum));
 // Just make sure to return the data you want to render
 return cleanData;`}
       />
-      <Spacer />
       <h4>Summary Card</h4>
       <p>Below are valid data for Summary Cards </p>
       <RenderCode
@@ -123,7 +121,6 @@ const relative = await $.query(\`SELECT count(*) FROM "users" WHERE "createdAt" 
 
 return [actual[0], relative[0]];`}
       />
-      <Spacer size="xxl" />
       <h4>$.RELATIVE_TIME</h4>
       <p>
         Create a new table widget and paste this

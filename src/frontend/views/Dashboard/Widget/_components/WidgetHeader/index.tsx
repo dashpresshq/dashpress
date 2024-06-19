@@ -1,17 +1,15 @@
-import { SoftButton } from "frontend/design-system/components/Button/SoftButton";
-import { Stack } from "frontend/design-system/primitives/Stack";
-import { Typo } from "frontend/design-system/primitives/Typo";
-import { DropDownMenu } from "frontend/design-system/components/DropdownMenu";
 import { SortableKnob } from "react-easy-sort";
-import { GrabIcon } from "frontend/design-system/Icons/Grab";
-import { ActionButtons } from "frontend/design-system/components/Button/ActionButtons";
-import { DELETE_BUTTON_PROPS } from "frontend/design-system/components/Button/constants";
 import { msg } from "@lingui/macro";
 import { useDomainMessages } from "frontend/lib/crud-config";
 import { LANG_DOMAINS } from "frontend/lib/crud-config/lang-domains";
+import { DELETE_BUTTON_PROPS } from "@/components/app/button/constants";
+import { SoftButton } from "@/components/app/button/soft";
 import { DASHBOARD_RELATIVE_DAYS } from "./constants";
 import { IWidgetSettingProps } from "./types";
 import { useDashboardWidgetRelativeDateStore } from "../../../relativeTime.store";
+import { ActionButtons } from "@/components/app/button/action";
+import { GrabIcon } from "@/components/app/system-icons";
+import { DropDownMenu } from "@/components/app/drop-drop-menu";
 
 interface IProps {
   setting?: IWidgetSettingProps;
@@ -36,18 +34,18 @@ export function WidgetHeader({
   const domainMessages = useDomainMessages(LANG_DOMAINS.DASHBOARD.WIDGETS);
 
   return (
-    <Stack $justify="space-between" $align="flex-start">
-      <Stack>
+    <div className="flex justify-between items-start w-full">
+      <div className="flex flex-1 w-full">
         {setting && (
           <SortableKnob>
             <GrabIcon width={18} />
           </SortableKnob>
         )}
-        <Typo.MD $ellipsis>{title}</Typo.MD>
-      </Stack>
+        <p className="truncate w-[calc(100%-1px)]">{title} dsds ds // TODO</p>
+      </div>
       {setting ? (
         <ActionButtons
-          justIcons
+          size="icon"
           actionButtons={[
             {
               id: "edit",
@@ -65,7 +63,7 @@ export function WidgetHeader({
           ]}
         />
       ) : (
-        <Stack $width="auto">
+        <div className="flex w-auto gap-2">
           {hasRelativeDate && !isPreview && (
             <DropDownMenu
               ariaLabel={`Toggle ${title} Menu`}
@@ -88,11 +86,11 @@ export function WidgetHeader({
               label={msg`View`}
               systemIcon="Right"
               disabled={isPreview}
-              justIcon
+              size="icon"
             />
           )}
-        </Stack>
+        </div>
       )}
-    </Stack>
+    </div>
   );
 }

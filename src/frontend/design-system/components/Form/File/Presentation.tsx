@@ -1,15 +1,12 @@
-import classnames from "classnames";
 import styled, { keyframes } from "styled-components";
 import { Upload } from "react-feather";
 import { DropzoneState } from "react-dropzone";
 import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
 import { SYSTEM_COLORS } from "frontend/design-system/theme/system";
-import { Spacer } from "frontend/design-system/primitives/Spacer";
-import { Typo } from "frontend/design-system/primitives/Typo";
-import { ProgressBar } from "frontend/design-system/components/ProgressBar";
 import { msg } from "@lingui/macro";
-import { DELETE_BUTTON_PROPS } from "../../Button/constants";
-import { SoftButton } from "../../Button/SoftButton";
+import { DELETE_BUTTON_PROPS } from "../../../../../components/app/button/constants";
+import { cn } from "@/lib/utils";
+import { SoftButton } from "@/components/app/button/soft";
 
 const FileInput = styled.input`
   position: absolute;
@@ -81,12 +78,6 @@ const Root = styled.div`
   }
 `;
 
-const ProgressRoot = styled.div`
-  position: absolute;
-  width: 100%;
-  top: 5px;
-`;
-
 export interface IProps {
   isSubmitting: boolean;
   disabled?: boolean;
@@ -108,32 +99,28 @@ export function Presentation({
 }: IProps) {
   return (
     <Root
-      className={classnames({
+      className={cn({
         disabled,
         [formClassName]: true,
       })}
       {...dropZoneProps.getRootProps()}
     >
-      {isSubmitting && (
-        <ProgressRoot>
-          <ProgressBar progress={100} />
-        </ProgressRoot>
-      )}
       <div>
-        <Upload size={40} color={USE_ROOT_COLOR("primary-color")} />
-        <Typo.MD>
-          {value
+        <Upload size={40} className="text-primary" />
+        <p className="mb-3">
+          {/* eslint-disable-next-line no-nested-ternary */}
+          {isSubmitting
+            ? "Uploading..."
+            : value
             ? "Drag and drop or click to replace"
             : "Drag and drop a file here, or click to select file"}
-        </Typo.MD>
-        <Spacer />
+        </p>
         {value && (
-          <Typo.SM $color="muted">
+          <p className="text-sm text-muted">
             {value}{" "}
             {!disabled ? (
               <SoftButton
-                size="xs"
-                justIcon
+                size="icon"
                 {...DELETE_BUTTON_PROPS({
                   action: onClear,
                   isMakingRequest: false,
@@ -142,13 +129,9 @@ export function Presentation({
                 })}
               />
             ) : null}
-          </Typo.SM>
+          </p>
         )}
-        {error && (
-          <Typo.MD $color="danger" $weight="bold">
-            {error}
-          </Typo.MD>
-        )}
+        {error && <p className="font-semibold text-red-600">{error}</p>}
       </div>
       <FileInput type="file" {...dropZoneProps.getInputProps()} />
     </Root>

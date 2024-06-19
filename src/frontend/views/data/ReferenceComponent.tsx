@@ -1,9 +1,9 @@
 import { useEntityDataReference } from "frontend/hooks/data/data.store";
 import { useRouter } from "next/router";
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
-import { BaseSkeleton } from "frontend/design-system/components/Skeleton/Base";
-import { TextButton } from "frontend/design-system/components/Button/TextButton";
 import { useDetailsOffCanvasStore } from "./Table/hooks/useDetailsOffCanvas.store";
+import { Skeleton } from "@/components/ui/skeleton";
+import { Button } from "@/components/ui/button";
 
 export type ReferenceDisplayFromTypes = "table" | "details" | "canvas";
 
@@ -20,7 +20,7 @@ export function ReferenceComponent({ entity, id, displayFrom }: IProps) {
   const entityDataReference = useEntityDataReference(entity, id);
 
   if (entityDataReference.isLoading) {
-    return <BaseSkeleton width="150px" height="20px" />;
+    return <Skeleton className="w-36 h-5" />;
   }
 
   if (entityDataReference.error) {
@@ -34,7 +34,8 @@ export function ReferenceComponent({ entity, id, displayFrom }: IProps) {
   }
 
   return (
-    <TextButton
+    <Button
+      variant="link"
       onClick={() => {
         if (displayFrom === "table" || displayFrom === "details") {
           openDetailsCanvas({ entity, id });
@@ -44,6 +45,6 @@ export function ReferenceComponent({ entity, id, displayFrom }: IProps) {
       }}
     >
       {displayText}
-    </TextButton>
+    </Button>
   );
 }

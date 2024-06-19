@@ -1,16 +1,16 @@
-import { SchemaForm } from "frontend/components/SchemaForm";
-import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import {
   useAppConfiguration,
   useUpsertConfigurationMutation,
 } from "frontend/hooks/configuration/configuration.store";
-import {
-  FormSkeleton,
-  FormSkeletonSchema,
-} from "frontend/design-system/components/Skeleton/Form";
 import { useAppConfigurationDomainMessages } from "frontend/hooks/configuration/configuration.constant";
 import { AppConfigurationValueType } from "shared/configurations/constants";
 import { msg } from "@lingui/macro";
+import {
+  FormSkeleton,
+  FormSkeletonSchema,
+} from "@/components/app/skeleton/form";
+import { ViewStateMachine } from "@/components/app/view-state-machine";
+import { SchemaForm } from "@/components/app/form/schema";
 
 export function GeneralStorageSettings() {
   const fileUploadSettings = useAppConfiguration("file_upload_settings");

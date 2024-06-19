@@ -10,13 +10,12 @@ import { useAuthenticateUser } from "frontend/hooks/auth/useAuthenticateUser";
 import { ApiRequest } from "frontend/lib/data/makeRequest";
 import { ToastService } from "frontend/lib/toast";
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
-import { ComponentIsLoading } from "frontend/design-system/components/ComponentIsLoading";
-import { Typo } from "frontend/design-system/primitives/Typo";
-import { SchemaForm } from "frontend/components/SchemaForm";
 import { useGuestCheck } from "frontend/hooks/auth/useGuestCheck";
 import { msg } from "@lingui/macro";
 import { CustomNextPage } from "frontend/_layouts/types";
+import { SchemaForm } from "@/components/app/form/schema";
 import { useHandleNoTokenAuthResponse } from "./portal";
+import { ComponentIsLoading } from "@/components/app/loading-component";
 
 function useSignInMutation() {
   const authenticateUser = useAuthenticateUser();
@@ -66,12 +65,12 @@ export const SignIn: CustomNextPage = () => {
     >
       {process.env.NEXT_PUBLIC_IS_DEMO && (
         <div aria-label="Demo App Credentials">
-          <Typo.XS>
+          <p className="text-sm">
             Username is <b>root</b>
-          </Typo.XS>
-          <Typo.XS>
+          </p>
+          <p className="text-sm">
             Password is <b>password</b>
-          </Typo.XS>
+          </p>
         </div>
       )}
       <SchemaForm<ISignInForm>

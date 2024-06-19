@@ -3,12 +3,12 @@ import { Toaster } from "react-hot-toast";
 import { ThemeContextProvider } from "frontend/design-system/theme/Context";
 import { LinguiProvider } from "translations/utils";
 import { Messages } from "@lingui/core";
-import { ConfirmAlert } from "frontend/design-system/components/ConfirmAlert";
 import {
   QueryCache,
   QueryClient,
   QueryClientProvider,
 } from "@tanstack/react-query";
+import { ConfirmAlert } from "@/components/app/confirm-alert";
 
 export const queryCache = new QueryCache();
 

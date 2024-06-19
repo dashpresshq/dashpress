@@ -6,16 +6,14 @@ import {
   useUpsertConfigurationMutation,
 } from "frontend/hooks/configuration/configuration.store";
 import { FormScriptDocumentation } from "frontend/docs/scripts/form-scripts";
-import { SectionBox } from "frontend/design-system/components/Section/SectionBox";
-import { Tabs } from "frontend/design-system/components/Tabs";
 import { useEntitySlug } from "frontend/hooks/entity/entity.config";
-import { Typo } from "frontend/design-system/primitives/Typo";
-import { Spacer } from "frontend/design-system/primitives/Spacer";
 import { useDocumentationActionButton } from "frontend/docs/constants";
 import { msg } from "@lingui/macro";
 import { typescriptSafeObjectDotEntries } from "shared/lib/objects";
 import { MessageDescriptor } from "@lingui/core";
 import { ReactElement } from "react";
+import { SectionBox } from "@/components/app/section-box";
+import { Tabs } from "@/components/app/tabs";
 import { BaseEntitySettingsLayout } from "../_Base";
 import { ENTITY_CONFIGURATION_VIEW } from "../constants";
 import { ScriptForm } from "./ScriptForm";
@@ -150,16 +148,7 @@ export function EntityFormExtensionSettings() {
             ([key, { Cmp, label }]) => ({
               id: key,
               label,
-              content: (
-                <>
-                  <Typo.SM $textStyle="italic">
-                    Click the &apos;Explain Form Scripts&apos; at the top right
-                    corner for more info on how this works
-                  </Typo.SM>
-                  <Spacer />
-                  {Cmp}
-                </>
-              ),
+              content: Cmp,
             })
           )}
         />

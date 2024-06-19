@@ -1,9 +1,9 @@
 import { format } from "date-fns";
 import { IColorableSelection } from "shared/types/ui";
-import { SoftButton } from "frontend/design-system/components/Button/SoftButton";
 import { msg } from "@lingui/macro";
 import { FormFieldTypes } from "shared/validations/types";
 import { i18n } from "@lingui/core";
+import { SoftButton } from "@/components/app/button/soft";
 import {
   ReferenceComponent,
   ReferenceDisplayFromTypes,
@@ -83,10 +83,10 @@ export const viewSpecialDataTypes = ({
       (option) => option.value === value
     );
     if (availableOption) {
-      if (availableOption.color) {
+      if (availableOption.spectrum) {
         return (
           <OptionTag
-            color={availableOption.color}
+            spectrum={availableOption.spectrum}
             label={availableOption.label}
             value={availableOption.value}
           />

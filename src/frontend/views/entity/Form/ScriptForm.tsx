@@ -1,9 +1,3 @@
-import {
-  FormSkeleton,
-  FormSkeletonSchema,
-} from "frontend/design-system/components/Skeleton/Form";
-import { SchemaForm } from "frontend/components/SchemaForm";
-import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { ToastService } from "frontend/lib/toast";
 import { useAppConfigurationDomainMessages } from "frontend/hooks/configuration/configuration.constant";
 import { AppConfigurationKeys } from "shared/configurations";
@@ -12,6 +6,12 @@ import { useEvaluateScriptContext } from "frontend/hooks/scripts";
 import { ISchemaFormScriptProps } from "shared/form-schemas/types";
 import { msg } from "@lingui/macro";
 import { i18nNoop } from "translations/fake";
+import { ViewStateMachine } from "@/components/app/view-state-machine";
+import { SchemaForm } from "@/components/app/form/schema";
+import {
+  FormSkeleton,
+  FormSkeletonSchema,
+} from "@/components/app/skeleton/form";
 
 interface IProps {
   value: string;

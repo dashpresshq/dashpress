@@ -1,4 +1,3 @@
-import { Spacer } from "frontend/design-system/primitives/Spacer";
 import { DocumentationRoot } from "./_base";
 
 export function PersistentDocumentation() {
@@ -30,7 +29,6 @@ export function PersistentDocumentation() {
         You have access to the current user object through{" "}
         <code>{"{{ auth }}"}</code>.
       </p>
-      <Spacer />
     </DocumentationRoot>
   );
 }

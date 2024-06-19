@@ -2,13 +2,12 @@ import { useEffect } from "react";
 import { useRouter } from "next/router";
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
 import { useEntityCrudConfig } from "frontend/hooks/entity/entity.config";
-import { OffCanvas } from "frontend/design-system/components/OffCanvas";
-import { Spacer } from "frontend/design-system/primitives/Spacer";
-import { SoftButton } from "frontend/design-system/components/Button/SoftButton";
 import { msg } from "@lingui/macro";
+import { SoftButton } from "@/components/app/button/soft";
 import { useDetailsOffCanvasStore } from "../hooks";
 import { EntityDetailsView } from "../../Details/DetailsView";
 import { PortalDataComponent } from "../../portal";
+import { OffCanvas } from "@/components/app/off-canvas";
 
 export function DetailsCanvas() {
   const router = useRouter();
@@ -27,17 +26,17 @@ export function DetailsCanvas() {
         title={entityCrudConfig.TEXT_LANG.DETAILS}
         onClose={closeDetailsCanvas}
         show={!!detailsCanvasEntity}
+        size="sm"
       >
         <EntityDetailsView
           entityId={detailsCanvasId}
           entity={detailsCanvasEntity}
           displayFrom="canvas"
         />
-        <Spacer />
         <SoftButton
           label={msg`View Full Details`}
           systemIcon="Eye"
-          block
+          className="w-full"
           action={NAVIGATION_LINKS.ENTITY.DETAILS(
             detailsCanvasEntity,
             detailsCanvasId

@@ -1,9 +1,6 @@
 import { ActionIntegrations, IIntegrationsList } from "shared/types/actions";
-import { SchemaForm } from "frontend/components/SchemaForm";
-import { Stack } from "frontend/design-system/primitives/Stack";
-import { Spacer } from "frontend/design-system/primitives/Spacer";
-import { Typo } from "frontend/design-system/primitives/Typo";
 import { msg } from "@lingui/macro";
+import { SchemaForm } from "@/components/app/form/schema";
 import { useDeactivateIntegrationMutation } from "../actions.store";
 
 interface IProps {
@@ -18,21 +15,18 @@ export function Deactivate({ integrationDetail, activationId }: IProps) {
 
   if (integrationDetail.key === ActionIntegrations.HTTP) {
     return (
-      <Stack $justify="center">
-        <Typo.SM $textStyle="italic">
-          The HTTP action can not be deactivated
-        </Typo.SM>
-      </Stack>
+      <div className="text-center">
+        <p className="text-sm italic">The HTTP action can not be deactivated</p>
+      </div>
     );
   }
 
   return (
     <>
-      <Typo.SM $textStyle="italic">
+      <p className="text-sm italic mb-3">
         Deactivating an integration will irrevocabily delete its configurations
         and remove all its form actions
-      </Typo.SM>
-      <Spacer />
+      </p>
       <SchemaForm
         fields={{
           confirm: {

@@ -1,5 +1,3 @@
-import { ContentLayout } from "frontend/design-system/components/Section/SectionDivider";
-import { SectionBox } from "frontend/design-system/components/Section/SectionBox";
 import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
 import { useNavigationStack } from "frontend/lib/routing/useNavigationStack";
 import { UserPermissions } from "shared/constants/user";
@@ -8,9 +6,11 @@ import {
   BASE_ROLE_FORM_SCHEMA,
   IBaseRoleForm,
 } from "shared/form-schemas/roles/base";
-import { SchemaForm } from "frontend/components/SchemaForm";
 import { LANG_DOMAINS } from "frontend/lib/crud-config/lang-domains";
 import { useDomainMessages } from "frontend/lib/crud-config";
+import { ContentLayout } from "@/components/app/content-layout";
+import { SchemaForm } from "@/components/app/form/schema";
+import { SectionBox } from "@/components/app/section-box";
 import { useCreateRoleMutation } from "../roles.store";
 
 export function RoleCreate() {

@@ -1,10 +1,10 @@
-import { IDropDownMenuItem } from "frontend/design-system/components/DropdownMenu";
-import { ITableColumn } from "frontend/design-system/components/Table/types";
 import { loadedDataState } from "frontend/lib/data/constants/loadedDataState";
 import { DataStateKeys } from "frontend/lib/data/types";
 import { ReactNode } from "react";
 import { noop } from "shared/lib/noop";
 import { ITableView } from "shared/types/data";
+import { IMenuActionItem } from "@/components/app/button/types";
+import { ITableColumn } from "@/components/app/table/types";
 
 export const usePluginTableMenuItems = (
   entity: string,
@@ -12,8 +12,8 @@ export const usePluginTableMenuItems = (
     referenceField: string;
     entityId: string;
   }
-): IDropDownMenuItem[] => {
-  const menuItems: IDropDownMenuItem[] = [];
+): IMenuActionItem[] => {
+  const menuItems: IMenuActionItem[] = [];
   noop(entity, reference);
   return menuItems;
 };

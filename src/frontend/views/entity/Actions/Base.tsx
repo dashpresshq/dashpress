@@ -1,27 +1,23 @@
 import {
-  FEPaginationTable,
-  IFETableCell,
-  IFETableColumn,
-} from "frontend/components/FEPaginationTable";
-import { ViewStateMachine } from "frontend/components/ViewStateMachine";
-import {
   useIntegrationsList,
   useActiveIntegrations,
 } from "frontend/views/integrations/actions/actions.store";
 import { useCallback, useState } from "react";
 import { IFormAction } from "shared/types/actions";
 import { useApi } from "frontend/lib/data/useApi";
-import { SoftButton } from "frontend/design-system/components/Button/SoftButton";
-import { Stack } from "frontend/design-system/primitives/Stack";
-import { TableSkeleton } from "frontend/design-system/components/Skeleton/Table";
-import { Spacer } from "frontend/design-system/primitives/Spacer";
-import { OffCanvas } from "frontend/design-system/components/OffCanvas";
 import { userFriendlyCase } from "shared/lib/strings/friendly-case";
-import { ActionButtons } from "frontend/design-system/components/Button/ActionButtons";
-import { DELETE_BUTTON_PROPS } from "frontend/design-system/components/Button/constants";
 import { msg } from "@lingui/macro";
 import { useDomainMessages } from "frontend/lib/crud-config";
 import { LANG_DOMAINS } from "frontend/lib/crud-config/lang-domains";
+import { DELETE_BUTTON_PROPS } from "@/components/app/button/constants";
+import { TableSkeleton } from "@/components/app/skeleton/table";
+import { SoftButton } from "@/components/app/button/soft";
+import { ViewStateMachine } from "@/components/app/view-state-machine";
+import {
+  FEPaginationTable,
+  IFETableCell,
+  IFETableColumn,
+} from "@/components/app/pagination-table";
 import {
   LIST_ENTITY_FORM_ACTIONS,
   useCreateFormActionMutation,
@@ -29,6 +25,8 @@ import {
   useUpdateFormActionMutation,
 } from "./form-actions.store";
 import { ActionForm } from "./Form";
+import { ActionButtons } from "@/components/app/button/action";
+import { OffCanvas } from "@/components/app/off-canvas";
 
 const NEW_ACTION_ITEM = "__new_action_item__";
 
@@ -57,7 +55,7 @@ export function FormActions({ entity }: { entity: string }) {
   const MemoizedAction = useCallback(
     ({ row }: IFETableCell<IFormAction>) => (
       <ActionButtons
-        justIcons
+        size="icon"
         actionButtons={[
           {
             id: "edit",
@@ -135,14 +133,13 @@ export function FormActions({ entity }: { entity: string }) {
         error={activeIntegration.error || integrationsList.error}
         loader={<TableSkeleton />}
       >
-        <Stack $justify="end">
+        <div className="flex justify-end mb-3">
           <SoftButton
             action={createNew}
             systemIcon="Plus"
             label={domainMessages.TEXT_LANG.CREATE}
           />
-        </Stack>
-        <Spacer />
+        </div>
         <FEPaginationTable
           border
           dataEndpoint={dataEndpoint}
@@ -162,6 +159,7 @@ export function FormActions({ entity }: { entity: string }) {
             ? domainMessages.TEXT_LANG.CREATE
             : domainMessages.TEXT_LANG.EDIT
         }
+        size="sm"
         onClose={closeConfigItem}
         show={!!currentFormActionId}
       >

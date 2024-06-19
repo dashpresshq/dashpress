@@ -1,12 +1,12 @@
 import { usePaginatedData } from "frontend/lib/data/useApi/usePaginatedData";
 import { DEFAULT_PAGINATED_DATA } from "frontend/lib/data/constants/defaults";
 import { pluralize } from "shared/lib/strings";
-import { ITableColumn } from "frontend/design-system/components/Table/types";
-import { Table } from "frontend/design-system/components/Table";
-import { IEmptyWrapperProps } from "frontend/design-system/components/EmptyWrapper/types";
 import { msg, t } from "@lingui/macro";
 import { useTableState } from "../hooks";
 import { IDataTableProps } from "../types";
+import { IEmptyWrapperProps } from "@/components/app/empty-wrapper/types";
+import { Table } from "@/components/app/table";
+import { ITableColumn } from "@/components/app/table/types";
 
 interface IProps extends IDataTableProps {
   columns: ITableColumn[];

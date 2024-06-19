@@ -1,10 +1,8 @@
-import { Spacer } from "frontend/design-system/primitives/Spacer";
 import { DocumentationRoot } from "./_base";
 
 export function SystemSettingsDocumentation() {
   return (
     <DocumentationRoot>
-      <Spacer />
       <h4>Token Validity Duration</h4>
       <p>
         By default DashPress invalidates the user&aos;s token after 14 days i.e.

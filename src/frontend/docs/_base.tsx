@@ -1,12 +1,10 @@
-import { OffCanvas } from "frontend/design-system/components/OffCanvas";
 import { ReactNode } from "react";
 import styled from "styled-components";
 import { msg } from "@lingui/macro";
 import { useDocumentationCanvasStore } from "./constants";
+import { OffCanvas } from "@/components/app/off-canvas";
 
 const Root = styled.div`
-  margin-top: -8px;
-
   h4,
   h5 {
     margin-bottom: -8px !important;
@@ -16,7 +14,8 @@ const Root = styled.div`
     font-size: 15px;
   }
 
-  p {
+  p,
+  li {
     font-size: 0.875rem;
     margin: 12px 0;
   }
@@ -33,6 +32,7 @@ const Root = styled.div`
   ol {
     margin-top: 0px;
     padding-left: 24px;
+    list-style-type: disc;
   }
 `;
 
@@ -43,7 +43,7 @@ export function DocumentationRoot({ children }: { children: ReactNode }) {
       title={msg`${canvasStore.title}`}
       onClose={() => canvasStore.setTitle("")}
       show={!!canvasStore.title}
-      width={600}
+      size="lg"
     >
       <Root>{children}</Root>
     </OffCanvas>

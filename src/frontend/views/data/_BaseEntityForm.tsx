@@ -1,8 +1,3 @@
-import {
-  FormSkeleton,
-  FormSkeletonSchema,
-} from "frontend/design-system/components/Skeleton/Form";
-import { SchemaForm } from "frontend/components/SchemaForm";
 import { useEntityConfiguration } from "frontend/hooks/configuration/configuration.store";
 import { useEntityToOneReferenceFields } from "frontend/hooks/entity/entity.store";
 import {
@@ -13,10 +8,15 @@ import {
   useEntityCrudFields,
 } from "frontend/hooks/entity/entity.config";
 import { useMemo } from "react";
-import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { DataStateKeys, DataStates } from "frontend/lib/data/types";
 import { SystemIconsKeys } from "shared/constants/Icons";
 import { MessageDescriptor } from "@lingui/core";
+import { ViewStateMachine } from "@/components/app/view-state-machine";
+import { SchemaForm } from "@/components/app/form/schema";
+import {
+  FormSkeleton,
+  FormSkeletonSchema,
+} from "@/components/app/skeleton/form";
 import { buildAppliedSchemaFormConfig } from "./buildAppliedSchemaFormConfig";
 import { useEntityViewStateMachine } from "./hooks/useEntityViewStateMachine";
 import { usePortalExtendEntityFormConfig } from "./portal";

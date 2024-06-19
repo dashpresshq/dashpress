@@ -1,10 +1,10 @@
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { META_USER_PERMISSIONS } from "shared/constants/user";
-import { IGroupActionButton } from "frontend/design-system/components/Button/types";
 import { MessageDescriptor } from "@lingui/core";
 import { msg } from "@lingui/macro";
 import { createStore } from "../store";
+import { IGroupActionButton } from "@/components/app/button/types";
 
 export type IPageDetails = {
   pageTitle: MessageDescriptor;

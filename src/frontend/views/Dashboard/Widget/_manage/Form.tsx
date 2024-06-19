@@ -1,10 +1,7 @@
 import { useEntityConfiguration } from "frontend/hooks/configuration/configuration.store";
 import { Field, Form } from "react-final-form";
-import { ISummaryWidgetConfig, IWidgetConfig } from "shared/types/dashboard";
-import { ROYGBIV, ROYGBIV_CONFIG } from "shared/constants/colors";
-import { IconInputField } from "frontend/components/IconInputField";
+import { IWidgetConfig } from "shared/types/dashboard";
 import { useMutation } from "@tanstack/react-query";
-import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { useEffect, useState } from "react";
 import { WidgetScriptDocumentation } from "frontend/docs/scripts/widget-scripts";
 import { required } from "frontend/lib/validations";
@@ -12,36 +9,33 @@ import { resetFormValues } from "frontend/lib/form/utils";
 import { ApiRequest } from "frontend/lib/data/makeRequest";
 import { IFormProps } from "frontend/lib/form/types";
 import { ILabelValue } from "shared/types/options";
-import { FormInput } from "frontend/design-system/components/Form/Input";
 import { FormSelect } from "frontend/design-system/components/Form/Select";
-import { BaseSkeleton } from "frontend/design-system/components/Skeleton/Base";
-import { Tabs } from "frontend/design-system/components/Tabs";
-import { RenderCode } from "frontend/design-system/components/RenderCode";
-import { Spacer } from "frontend/design-system/primitives/Spacer";
-import { SoftButton } from "frontend/design-system/components/Button/SoftButton";
-import { Typo } from "frontend/design-system/primitives/Typo";
-import { Stack } from "frontend/design-system/primitives/Stack";
-import { FormButton } from "frontend/design-system/components/Button/FormButton";
 import { FormCodeEditor } from "frontend/design-system/components/Form/CodeEditor";
 import { loadedDataState } from "frontend/lib/data/constants/loadedDataState";
 import { useDocumentationActionButton } from "frontend/docs/constants";
-import { FormGrid } from "frontend/components/SchemaForm/form-grid";
 import { GRID_SPAN_OPTIONS } from "frontend/design-system/constants/grid";
 import { msg } from "@lingui/macro";
-import {
-  typescriptSafeObjectDotEntries,
-  typescriptSafeObjectDotKeys,
-} from "shared/lib/objects";
+import { typescriptSafeObjectDotEntries } from "shared/lib/objects";
 import { i18nNoop, transformLabelValueToSelectData } from "translations/fake";
 import { MessageDescriptor } from "@lingui/core";
 import { useDomainMessages } from "frontend/lib/crud-config";
 import { LANG_DOMAINS } from "frontend/lib/crud-config/lang-domains";
+import { RenderCode } from "@/components/app/render-code";
+import { FormInput } from "@/components/app/form/input/text";
 import { DashboardWidgetPresentation } from "../Presentation";
 import { BASE_WIDGET_CONFIG } from "../constants";
 import { PortalFormFields, PortalFormSchema } from "./portal";
 import { WidgetFormField } from "./types";
 import { DASHBOARD_WIDGET_HEIGHTS } from "./constants";
 import { usePortalDashboardTypesOptions } from "../portal";
+import { Skeleton } from "@/components/ui/skeleton";
+import { FormGrid } from "@/components/app/form/schema/form-grid";
+import { SpectrumColorInputField } from "@/components/app/form/input/spectrum";
+import { IconInputField } from "@/components/app/form/input/icon";
+import { ViewStateMachine } from "@/components/app/view-state-machine";
+import { Tabs } from "@/components/app/tabs";
+import { SoftButton } from "@/components/app/button/soft";
+import { FormButton } from "@/components/app/button/form";
 
 const FormSchema: Partial<Record<IWidgetConfig["_type"], WidgetFormField[]>> = {
   "summary-card": ["color", "icon"],
@@ -194,28 +188,20 @@ export function DashboardWidgetForm({
                   {formFields.includes("color") && (
                     <Field name="color" validate={required} validateFields={[]}>
                       {({ input, meta }) => (
-                        <FormSelect
-                          label={msg`Color`}
-                          required
-                          selectData={typescriptSafeObjectDotKeys(ROYGBIV).map(
-                            (value) => ({
-                              value,
-                              label: ROYGBIV_CONFIG[value].label,
-                            })
-                          )}
-                          meta={meta}
-                          input={input}
+                        <SpectrumColorInputField
+                          formInput={{
+                            input,
+                            meta,
+                            label: msg`Color`,
+                            required: true,
+                          }}
                         />
                       )}
                     </Field>
                   )}
                 </FormGrid.Item>
                 <FormGrid.Item>
-                  {formFields.includes("icon") && (
-                    <IconInputField
-                      value={(values as ISummaryWidgetConfig)?.icon}
-                    />
-                  )}
+                  {formFields.includes("icon") && <IconInputField />}
                 </FormGrid.Item>
                 <FormGrid.Item $span="6">
                   <Field name="span" validateFields={[]}>
@@ -264,7 +250,9 @@ export function DashboardWidgetForm({
                       error={runWidgetScript.error}
                       loading={runWidgetScript.isPending}
                       loader={
-                        <BaseSkeleton height={`${values.height || 250}px`} />
+                        <Skeleton
+                          style={{ height: `${values.height || 250}px` }}
+                        />
                       }
                     >
                       {!runWidgetScript.isIdle && (
@@ -298,42 +286,38 @@ export function DashboardWidgetForm({
                 )}
                 <FormGrid.Item>
                   {process.env.NEXT_PUBLIC_IS_DEMO ? (
-                    <Stack $justify="center">
-                      <Typo.SM>
-                        <Spacer />
+                    <div className="text-center ">
+                      <p className="text-sm mt-4">
                         You will be able to save this form on your own
                         installation
-                      </Typo.SM>
-                    </Stack>
+                      </p>
+                    </div>
                   ) : (
-                    <>
-                      <Spacer />
-                      <Stack $justify="end" $width="auto">
-                        {values._type && (
-                          <SoftButton
-                            action={() => {
-                              runWidgetScript.mutate(values.script);
-                            }}
-                            disabled={!values.script}
-                            isMakingRequest={runWidgetScript.isPending}
-                            systemIcon="Eye"
-                            size={null}
-                            label={msg`Test Widget Script`}
-                          />
-                        )}
-
-                        <FormButton
-                          text={
-                            action === "create"
-                              ? domainMessages.FORM_LANG.CREATE
-                              : domainMessages.FORM_LANG.UPDATE
-                          }
-                          systemIcon={action === "create" ? "Plus" : "Save"}
-                          isMakingRequest={submitting}
-                          disabled={pristine}
+                    <div className="flex justify-end gap-4 mt-4">
+                      {values._type && (
+                        <SoftButton
+                          action={() => {
+                            runWidgetScript.mutate(values.script);
+                          }}
+                          disabled={!values.script}
+                          isMakingRequest={runWidgetScript.isPending}
+                          systemIcon="Eye"
+                          size="lg"
+                          label={msg`Test Widget Script`}
                         />
-                      </Stack>
-                    </>
+                      )}
+
+                      <FormButton
+                        text={
+                          action === "create"
+                            ? domainMessages.FORM_LANG.CREATE
+                            : domainMessages.FORM_LANG.UPDATE
+                        }
+                        systemIcon={action === "create" ? "Plus" : "Save"}
+                        isMakingRequest={submitting}
+                        disabled={pristine}
+                      />
+                    </div>
                   )}
                 </FormGrid.Item>
               </FormGrid.Root>

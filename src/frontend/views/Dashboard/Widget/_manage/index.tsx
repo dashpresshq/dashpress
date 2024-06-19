@@ -1,18 +1,18 @@
-import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { IWidgetConfig } from "shared/types/dashboard";
 import { useActiveEntities } from "frontend/hooks/entity/entity.store";
 import { useRouteParam } from "frontend/lib/routing/useRouteParam";
 import { SystemIconsList } from "shared/constants/Icons";
 import { AppLayout } from "frontend/_layouts/app";
 import { useNavigationStack } from "frontend/lib/routing/useNavigationStack";
-import { ContentLayout } from "frontend/design-system/components/Section/SectionDivider";
-import { SectionBox } from "frontend/design-system/components/Section/SectionBox";
+import { useDomainMessages } from "frontend/lib/crud-config";
+import { LANG_DOMAINS } from "frontend/lib/crud-config/lang-domains";
+import { ContentLayout } from "@/components/app/content-layout";
+import { SectionBox } from "@/components/app/section-box";
 import {
   FormSkeleton,
   FormSkeletonSchema,
-} from "frontend/design-system/components/Skeleton/Form";
-import { useDomainMessages } from "frontend/lib/crud-config";
-import { LANG_DOMAINS } from "frontend/lib/crud-config/lang-domains";
+} from "@/components/app/skeleton/form";
+import { ViewStateMachine } from "@/components/app/view-state-machine";
 import { DashboardWidgetForm } from "./Form";
 import { useDashboardWidgets } from "../../dashboard.store";
 

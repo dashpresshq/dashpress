@@ -1,12 +1,13 @@
-import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { useEntityCrudConfig } from "frontend/hooks/entity/entity.config";
-import { TableSkeleton } from "frontend/design-system/components/Skeleton/Table";
 import { ENTITY_TABLE_PATH } from "frontend/hooks/data/constants";
+import { ViewStateMachine } from "@/components/app/view-state-machine";
+import { TableSkeleton } from "@/components/app/skeleton/table";
 import { useTableColumns } from "../useTableColumns";
 import { TableViewComponent } from "../portal";
 import { IDataTableProps } from "../types";
 import { BaseDataTable } from "../DataTable";
 import { useCanUserPerformCrudAction } from "../../hooks/useCanUserPerformCrudAction";
+import { Card } from "@/components/ui/card";
 
 interface IProps extends IDataTableProps {
   entity: string;
@@ -30,7 +31,7 @@ export function EntityDataTable({
   const { isLoading } = columns;
 
   return (
-    <>
+    <Card>
       <ViewStateMachine
         error={error}
         loading={isLoading}
@@ -55,6 +56,6 @@ export function EntityDataTable({
         )}
       </ViewStateMachine>
       <TableViewComponent entity={entity} />
-    </>
+    </Card>
   );
 }

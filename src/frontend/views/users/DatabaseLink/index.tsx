@@ -1,10 +1,7 @@
 import { useNavigationStack } from "frontend/lib/routing/useNavigationStack";
 import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
 import { UserPermissions } from "shared/constants/user";
-import { ContentLayout } from "frontend/design-system/components/Section/SectionDivider";
-import { SectionBox } from "frontend/design-system/components/Section/SectionBox";
 import { AppLayout } from "frontend/_layouts/app";
-import { SchemaForm } from "frontend/components/SchemaForm";
 import { useDocumentationActionButton } from "frontend/docs/constants";
 import { IAppliedSchemaFormConfig } from "shared/form-schemas/types";
 import { ACTIVE_ENTITIES_ENDPOINT } from "shared/constants/entities";
@@ -12,17 +9,20 @@ import {
   useAppConfiguration,
   useUpsertConfigurationMutation,
 } from "frontend/hooks/configuration/configuration.store";
-import { ViewStateMachine } from "frontend/components/ViewStateMachine";
-import {
-  FormSkeleton,
-  FormSkeletonSchema,
-} from "frontend/design-system/components/Skeleton/Form";
 import { UsersLinkToDatabaseDocumentation } from "frontend/docs/users-link-to-database";
 import { useEntityFieldLists } from "frontend/hooks/entity/entity.store";
 import { useEffect, useState } from "react";
 import { msg } from "@lingui/macro";
 import { i18nNoop } from "translations/fake";
 import { useDomainMessages } from "frontend/lib/crud-config";
+import { ContentLayout } from "@/components/app/content-layout";
+import {
+  FormSkeleton,
+  FormSkeletonSchema,
+} from "@/components/app/skeleton/form";
+import { ViewStateMachine } from "@/components/app/view-state-machine";
+import { SchemaForm } from "@/components/app/form/schema";
+import { SectionBox } from "@/components/app/section-box";
 
 type IUsersLinkToDatabaseForm = {
   table: string;

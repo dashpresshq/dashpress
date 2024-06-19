@@ -1,7 +1,6 @@
 import { META_USER_PERMISSIONS } from "shared/constants/user";
 import { useNavigationStack } from "frontend/lib/routing/useNavigationStack";
 import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
-import { SectionBox } from "frontend/design-system/components/Section/SectionBox";
 import {
   useEntityCrudConfig,
   useEntityId,
@@ -9,6 +8,7 @@ import {
 } from "frontend/hooks/entity/entity.config";
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
 import { useEntityDataDetails } from "frontend/hooks/data/data.store";
+import { SectionBox } from "@/components/app/section-box";
 import { ENTITY_DETAILS_VIEW_KEY } from "./constants";
 import { EntityDetailsView } from "./DetailsView";
 import { DetailsLayout, DETAILS_LAYOUT_KEY } from "./_Layout";

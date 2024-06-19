@@ -15,10 +15,10 @@ export const DARK_MODE: IColorMode = {
 };
 
 export const LIGHT_MODE: IColorMode = {
-  "main-text": "#5f6270",
-  "muted-text": "#a4abc5",
-  "border-color": "#e3ebf6",
   "soft-color": "#f1f5fa",
+  "muted-text": "#a4abc5",
+  "main-text": "#5f6270",
+  "border-color": "#e3ebf6",
   "base-color": "#ffffff",
   "foundation-color": "#f3f6f9",
   "text-on-primary": "#ffffff",

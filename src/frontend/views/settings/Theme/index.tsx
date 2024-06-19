@@ -1,25 +1,25 @@
-import { SectionBox } from "frontend/design-system/components/Section/SectionBox";
-import {
-  FormSkeleton,
-  FormSkeletonSchema,
-} from "frontend/design-system/components/Skeleton/Form";
 import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
 import { UserPermissions } from "shared/constants/user";
 import {
   useAppConfiguration,
   useUpsertConfigurationMutation,
 } from "frontend/hooks/configuration/configuration.store";
-import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import {
   useUpsertUserPreferenceMutation,
   useUserPreference,
 } from "frontend/hooks/auth/preferences.store";
-import { SchemaForm } from "frontend/components/SchemaForm";
 import { useAppConfigurationDomainMessages } from "frontend/hooks/configuration/configuration.constant";
 import { ColorSchemes } from "shared/types/ui";
 import { AppConfigurationValueType } from "shared/configurations/constants";
 import { UPDATE_USER_PREFERENCES_FORM_SCHEMA } from "frontend/views/account/Preferences/constants";
 import { msg } from "@lingui/macro";
+import { SchemaForm } from "@/components/app/form/schema";
+import { ViewStateMachine } from "@/components/app/view-state-machine";
+import {
+  FormSkeleton,
+  FormSkeletonSchema,
+} from "@/components/app/skeleton/form";
+import { SectionBox } from "@/components/app/section-box";
 import { BaseSettingsLayout } from "../_Base";
 import { SETTINGS_VIEW_KEY } from "../constants";
 

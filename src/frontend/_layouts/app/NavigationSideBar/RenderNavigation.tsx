@@ -1,4 +1,3 @@
-import styled, { css } from "styled-components";
 import Link from "next/link";
 import {
   HeaderMenuItemType,
@@ -8,19 +7,16 @@ import {
 } from "shared/types/menu";
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
 import { ChevronRight } from "react-feather";
-import { SYSTEM_COLORS } from "frontend/design-system/theme/system";
-import { Typo } from "frontend/design-system/primitives/Typo";
-import { PlainButton } from "frontend/design-system/components/Button/TextButton";
-import { Stack } from "frontend/design-system/primitives/Stack";
-import { useThemeColorShade } from "frontend/design-system/theme/useTheme";
 import { useNavigationStack } from "frontend/lib/routing/useNavigationStack";
 import { ActionIntegrations } from "shared/types/actions";
-import { SystemIcon } from "frontend/design-system/Icons/System";
 import { MessageDescriptor } from "@lingui/core";
 import { msg } from "@lingui/macro";
 import { fakeMessageDescriptor } from "translations/fake";
 import { useLingui } from "@lingui/react";
 import { PORTAL_SYSTEM_LINK_CONFIG_LINKS } from "./portal";
+import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
+import { SystemIcon } from "@/components/app/system-icons";
 
 const SYSTEM_LINKS_CONFIG_MAP: Record<
   SystemLinks,
@@ -67,83 +63,6 @@ const HEADER_MENU_CONFIG_MAP: Record<
     title: msg`Configurations`,
   },
 };
-
-const LeftSideNavMenuList = styled.li<{}>`
-  list-style: none;
-  display: block;
-  transition: all 0.3s;
-`;
-
-const LeftSideNavMenuListAnchor = styled(PlainButton)<{
-  $hoverColor: string;
-  $isActive: boolean;
-  $depth: number;
-}>`
-  border-left: 2px solid transparent;
-  ${(props) =>
-    props.$isActive &&
-    css`
-      border-color: ${SYSTEM_COLORS.white};
-    `}
-  display: flex;
-  color: ${SYSTEM_COLORS.white};
-  align-items: center;
-  width: 100%;
-  outline: none !important;
-  padding: 10px 16px;
-  padding-left: ${(props) => props.$depth * 16}px;
-  &:hover {
-    color: ${SYSTEM_COLORS.white};
-    background: ${(props) => props.$hoverColor};
-  }
-`;
-
-const LeftSideNavMenu = styled.ul<{}>`
-  padding: 0;
-  margin-bottom: 0;
-`;
-
-const NavLabel = styled(Typo.XS)<{ $isFullWidth: boolean }>`
-  color: ${SYSTEM_COLORS.white};
-  font-size: 14px;
-  margin-left: 8px;
-  transition: all 0.3s;
-  ${(props) =>
-    !props.$isFullWidth &&
-    `
-    display: none;
-  `}
-`;
-
-const NavHeader = styled(Typo.XS)<{ $isFullWidth: boolean }>`
-  color: ${SYSTEM_COLORS.white};
-  text-transform: uppercase;
-  font-size: 12px;
-  font-weight: bold;
-  margin: 20px 0 8px 16px;
-  transition: all 0.3s;
-  ${(props) =>
-    !props.$isFullWidth &&
-    `
-    display: none;
-  `}
-`;
-
-const SubMenuArrow = styled(ChevronRight)<{
-  $isActive: boolean;
-  $isFullWidth: boolean;
-}>`
-  fill: ${SYSTEM_COLORS.white}
-  cursor: pointer;
-  margin-left: 0px;
-  transition: transform 0.3s;
-  ${(props) => props.$isActive && "transform: rotate(90deg);"}
-  ${(props) =>
-    !props.$isFullWidth &&
-    `
-    display: none;
-  `}
-`;
 
 interface IProp {
   navigation: INavigationMenuItem[];
@@ -201,10 +120,17 @@ export function RenderNavigation({
 }: IProp) {
   const { clear: clearBreadCrumbStack } = useNavigationStack();
   const { _ } = useLingui();
-  const getBackgroundColor = useThemeColorShade();
+
+  if (!navigation) {
+    return null;
+  }
 
   return (
-    <LeftSideNavMenu>
+    <ul
+      className={cn("px-1 mb-0 mt-1", {
+        "px-3": isFullWidth,
+      })}
+    >
       {navigation.map(
         ({ title: title$1, icon, type, link: link$1, id, children }) => {
           const isActive = activeItem[depth] === id;
@@ -218,79 +144,112 @@ export function RenderNavigation({
           const title = _(title$2);
 
           const menuIcon = depth === 1 && (
-            <SystemIcon strokeWidth={isActive ? 2 : 1} icon={icon} size={20} />
+            <SystemIcon
+              strokeWidth={isActive ? 2 : 1}
+              icon={icon}
+              className="w-[20px] h-[20px]"
+            />
           );
 
           return (
-            <LeftSideNavMenuList key={id}>
-              {/* eslint-disable-next-line no-nested-ternary */}
+            <li className="list-none block transition-all" key={id}>
               {type === NavigationMenuItemType.Header ? (
-                <NavHeader $isFullWidth={isFullWidth}>{title}</NavHeader>
-              ) : children && children.length > 0 ? (
-                <>
-                  <LeftSideNavMenuListAnchor
-                    as={PlainButton}
-                    $isActive={false}
-                    $depth={depth}
-                    $hoverColor={getBackgroundColor("primary-color", 45)}
-                    onClick={() => {
-                      clearBreadCrumbStack();
-                      setIsFullWidth(true);
-                      setActiveItem(depth, isActive ? "" : id);
-                    }}
-                  >
-                    {menuIcon}
-                    {isFullWidth && (
-                      <Stack
-                        $justify="space-between"
-                        $spacing={0}
-                        $align="center"
-                      >
-                        <NavLabel $isFullWidth={isFullWidth}>{title}</NavLabel>
-                        <SubMenuArrow
-                          $isFullWidth={isFullWidth}
-                          size={16}
-                          $isActive={isActive}
-                        />
-                      </Stack>
-                    )}
-                  </LeftSideNavMenuListAnchor>
-                  {isActive && isFullWidth && (
-                    <RenderNavigation
-                      setIsFullWidth={setIsFullWidth}
-                      navigation={children}
-                      isFullWidth={isFullWidth}
-                      depth={depth + 1}
-                      activeItem={activeItem}
-                      setActiveItem={setActiveItem}
-                    />
+                <p
+                  className={cn(
+                    "text-white uppercase text-xs font-semibold mt-5 mr-0 mb-2 ml-1",
+                    {
+                      hidden: !isFullWidth,
+                    }
                   )}
-                </>
-              ) : (
-                <LeftSideNavMenuListAnchor
-                  as={Link}
-                  href={link}
-                  $isActive={isActive}
-                  $depth={depth}
-                  onClick={() => {
-                    clearBreadCrumbStack();
-                    setActiveItem(depth, id);
-                  }}
-                  target={
-                    type === NavigationMenuItemType.ExternalLink
-                      ? "_blank"
-                      : undefined
-                  }
-                  $hoverColor={getBackgroundColor("primary-color", 45)}
                 >
-                  {icon && menuIcon}
-                  <NavLabel $isFullWidth={isFullWidth}>{title}</NavLabel>
-                </LeftSideNavMenuListAnchor>
+                  {title}
+                </p>
+              ) : (
+                <Button
+                  asChild
+                  variant="ghost"
+                  size="lg"
+                  style={{
+                    marginLeft: (depth - 1) * 16,
+                  }}
+                  className={cn(
+                    "w-full text-white py-2 flex px-2 mb-1 items-center justify-start rounded-md hover:bg-primary-shade-thick hover:text-white",
+                    {
+                      "bg-primary": isActive,
+                    }
+                  )}
+                >
+                  {children && children.length > 0 ? (
+                    <Button
+                      onClick={() => {
+                        clearBreadCrumbStack();
+                        setIsFullWidth(true);
+                        setActiveItem(depth, isActive ? "" : id);
+                      }}
+                    >
+                      {menuIcon}
+                      {isFullWidth && (
+                        <div className="flex justify-between items-center w-full">
+                          <p
+                            className={cn(
+                              "text-sm text-white ml-2 transition-all"
+                            )}
+                          >
+                            {title}
+                          </p>
+                          <ChevronRight
+                            className={cn(
+                              "fill-white cursor-pointer ml-0 transition-all",
+                              {
+                                "rotate-90": isActive,
+                              }
+                            )}
+                            size={16}
+                          />
+                        </div>
+                      )}
+                    </Button>
+                  ) : (
+                    <Link
+                      href={link}
+                      onClick={() => {
+                        clearBreadCrumbStack();
+                        setActiveItem(depth, id);
+                      }}
+                      target={
+                        type === NavigationMenuItemType.ExternalLink
+                          ? "_blank"
+                          : undefined
+                      }
+                    >
+                      {icon && menuIcon}
+                      {isFullWidth && (
+                        <p
+                          className={cn(
+                            "text-sm text-white ml-2 transition-all"
+                          )}
+                        >
+                          {title}
+                        </p>
+                      )}
+                    </Link>
+                  )}
+                </Button>
               )}
-            </LeftSideNavMenuList>
+              {isActive && isFullWidth && (
+                <RenderNavigation
+                  setIsFullWidth={setIsFullWidth}
+                  navigation={children}
+                  isFullWidth={isFullWidth}
+                  depth={depth + 1}
+                  activeItem={activeItem}
+                  setActiveItem={setActiveItem}
+                />
+              )}
+            </li>
           );
         }
       )}
-    </LeftSideNavMenu>
+    </ul>
   );
 }

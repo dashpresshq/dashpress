@@ -1,7 +1,6 @@
-import { RenderCode } from "frontend/design-system/components/RenderCode";
-import { WarningAlert } from "frontend/design-system/components/Alert";
-import { Spacer } from "frontend/design-system/primitives/Spacer";
+import { RenderCode } from "@/components/app/render-code";
 import { DocumentationRoot } from "../_base";
+import { WarningAlert } from "@/components/app/alert";
 
 export function PresentationScriptDocumentation() {
   return (
@@ -80,9 +79,8 @@ return "Hannah Frederick";
         This script is not async, meaning you can&apos;t do Promises, so you
         can&apos;t make network calls within this script.
       </p>
-      <Spacer />
       <WarningAlert message="Note that this script runs only on the browser so don't do any sensitive processing here" />
-      <Spacer />
+
       <WarningAlert
         message="Any error on this script will fail silently so the original value will be
       used; be careful to make sure your scripts are valid when making changes."

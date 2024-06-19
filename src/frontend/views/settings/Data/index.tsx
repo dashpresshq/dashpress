@@ -1,23 +1,22 @@
-import { SectionBox } from "frontend/design-system/components/Section/SectionBox";
-import {
-  FormSkeleton,
-  FormSkeletonSchema,
-} from "frontend/design-system/components/Skeleton/Form";
 import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
 import { UserPermissions } from "shared/constants/user";
 import {
   useAppConfiguration,
   useUpsertConfigurationMutation,
 } from "frontend/hooks/configuration/configuration.store";
-import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { format as dateFnsFormat } from "date-fns";
 import { useAppConfigurationDomainMessages } from "frontend/hooks/configuration/configuration.constant";
 import { ToastService } from "frontend/lib/toast";
-import { SchemaForm } from "frontend/components/SchemaForm";
-import { Spacer } from "frontend/design-system/primitives/Spacer";
 import { AppConfigurationValueType } from "shared/configurations/constants";
 import { msg } from "@lingui/macro";
 import { i18nNoop } from "translations/fake";
+import { SectionBox } from "@/components/app/section-box";
+import { SchemaForm } from "@/components/app/form/schema";
+import { ViewStateMachine } from "@/components/app/view-state-machine";
+import {
+  FormSkeleton,
+  FormSkeletonSchema,
+} from "@/components/app/skeleton/form";
 import { BaseSettingsLayout } from "../_Base";
 import { SETTINGS_VIEW_KEY } from "../constants";
 
@@ -140,9 +139,10 @@ export function GeneralDataSettings() {
 
   return (
     <BaseSettingsLayout>
-      <DateSettings />
-      <Spacer size="xl" />
-      <MetaDataSettings />
+      <div className="flex gap-4 flex-col">
+        <DateSettings />
+        <MetaDataSettings />
+      </div>
     </BaseSettingsLayout>
   );
 }

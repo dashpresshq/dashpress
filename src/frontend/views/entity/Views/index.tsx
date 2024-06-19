@@ -1,10 +1,4 @@
-import { SectionBox } from "frontend/design-system/components/Section/SectionBox";
-import {
-  FormSkeleton,
-  FormSkeletonSchema,
-} from "frontend/design-system/components/Skeleton/Form";
 import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
-import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { useEntitySlug } from "frontend/hooks/entity/entity.config";
 import {
   useEntityConfiguration,
@@ -15,6 +9,12 @@ import { useTableColumns } from "frontend/views/data/Table/useTableColumns";
 import { useAppConfigurationDomainMessages } from "frontend/hooks/configuration/configuration.constant";
 import { ViewsDocumentation } from "frontend/docs/views";
 import { useDocumentationActionButton } from "frontend/docs/constants";
+import { ViewStateMachine } from "@/components/app/view-state-machine";
+import {
+  FormSkeleton,
+  FormSkeletonSchema,
+} from "@/components/app/skeleton/form";
+import { SectionBox } from "@/components/app/section-box";
 import { BaseEntitySettingsLayout } from "../_Base";
 import { ENTITY_CONFIGURATION_VIEW } from "../constants";
 import { EntityTableTabForm } from "./Form";

@@ -1,10 +1,4 @@
-import { SectionBox } from "frontend/design-system/components/Section/SectionBox";
-import {
-  FormSkeleton,
-  FormSkeletonSchema,
-} from "frontend/design-system/components/Skeleton/Form";
 import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
-import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { useEntitySlug } from "frontend/hooks/entity/entity.config";
 import {
   useEntityConfiguration,
@@ -14,13 +8,19 @@ import { useAppConfigurationDomainMessages } from "frontend/hooks/configuration/
 import { PresentationScriptDocumentation } from "frontend/docs/scripts/presentations-scripts";
 import { ToastService } from "frontend/lib/toast";
 import { evalJavascriptString } from "shared/lib/script-runner";
-import { SchemaForm } from "frontend/components/SchemaForm";
 import { useDocumentationActionButton } from "frontend/docs/constants";
 import { IPresentationScriptParams } from "frontend/views/data/evaluatePresentationScript";
 import { useEvaluateScriptContext } from "frontend/hooks/scripts";
 import { msg } from "@lingui/macro";
 import { i18nNoop } from "translations/fake";
 import { UserPermissions } from "shared/constants/user";
+import { SchemaForm } from "@/components/app/form/schema";
+import { ViewStateMachine } from "@/components/app/view-state-machine";
+import {
+  FormSkeleton,
+  FormSkeletonSchema,
+} from "@/components/app/skeleton/form";
+import { SectionBox } from "@/components/app/section-box";
 import { BaseEntitySettingsLayout } from "../_Base";
 import { ENTITY_CONFIGURATION_VIEW } from "../constants";
 

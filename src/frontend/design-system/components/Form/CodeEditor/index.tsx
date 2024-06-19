@@ -5,11 +5,14 @@ import { SYSTEM_COLORS } from "frontend/design-system/theme/system";
 import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
 import { noop } from "shared/lib/noop";
 import { useLingui } from "@lingui/react";
-import { ISharedFormInput } from "../types";
-import { LabelAndError, generateClassNames } from "../LabelAndError";
+import { ISharedFormInput } from "../../../../../components/app/form/input/types";
 import "prismjs/components/prism-clike";
 import "prismjs/components/prism-javascript";
-import { PrismTokenStyles } from "../../RenderCode/styles";
+import {
+  LabelAndError,
+  generateClassNames,
+} from "@/components/app/form/input/label-and-error";
+import { PrismTokenStyles } from "@/components/app/render-code/styles";
 
 interface IFormCodeEditor extends ISharedFormInput {
   language?: "javascript";

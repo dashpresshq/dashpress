@@ -8,19 +8,19 @@ describe("getEntitySelectionConfig", () => {
         .toMatchInlineSnapshot(`
         [
           {
-            "color": "#2ECC40",
             "label": {
               "id": "l75CjT",
               "message": "Yes",
             },
+            "spectrum": "green",
             "value": true,
           },
           {
-            "color": "#FF165D",
             "label": {
               "id": "1UzENP",
               "message": "No",
             },
+            "spectrum": "red",
             "value": false,
           },
         ]
@@ -35,12 +35,12 @@ describe("getEntitySelectionConfig", () => {
             {
               label: fakeMessageDescriptor("Some Yes"),
               value: "true",
-              color: "#foo",
+              spectrum: "blue",
             },
             {
               label: fakeMessageDescriptor("Some No"),
               value: "false",
-              color: "#fff",
+              spectrum: "red",
             },
           ],
 
@@ -49,19 +49,19 @@ describe("getEntitySelectionConfig", () => {
       ).toMatchInlineSnapshot(`
         [
           {
-            "color": "#foo",
             "label": {
               "id": "Some Yes",
               "message": "Some Yes",
             },
+            "spectrum": "blue",
             "value": "true",
           },
           {
-            "color": "#fff",
             "label": {
               "id": "Some No",
               "message": "Some No",
             },
+            "spectrum": "red",
             "value": "false",
           },
         ]
@@ -84,7 +84,7 @@ describe("getEntitySelectionConfig", () => {
             {
               label: fakeMessageDescriptor("Option 1"),
               value: "true",
-              color: "#foo",
+              spectrum: "blue",
             },
           ],
 
@@ -93,11 +93,11 @@ describe("getEntitySelectionConfig", () => {
       ).toMatchInlineSnapshot(`
         [
           {
-            "color": "#foo",
             "label": {
               "id": "Option 1",
               "message": "Option 1",
             },
+            "spectrum": "blue",
             "value": "true",
           },
         ]
@@ -116,7 +116,6 @@ describe("getEntitySelectionConfig", () => {
       ).toMatchInlineSnapshot(`
         [
           {
-            "color": "#2ECC40",
             "label": {
               "id": "J/hVSQ",
               "message": "{0}",
@@ -124,10 +123,10 @@ describe("getEntitySelectionConfig", () => {
                 "0": "Pending",
               },
             },
+            "spectrum": "green",
             "value": "pending",
           },
           {
-            "color": "#FF165D",
             "label": {
               "id": "J/hVSQ",
               "message": "{0}",
@@ -135,10 +134,10 @@ describe("getEntitySelectionConfig", () => {
                 "0": "Approved",
               },
             },
+            "spectrum": "red",
             "value": "approved",
           },
           {
-            "color": "#0074D9",
             "label": {
               "id": "J/hVSQ",
               "message": "{0}",
@@ -146,6 +145,7 @@ describe("getEntitySelectionConfig", () => {
                 "0": "Rejected",
               },
             },
+            "spectrum": "blue",
             "value": "rejected",
           },
         ]
@@ -160,12 +160,12 @@ describe("getEntitySelectionConfig", () => {
             {
               label: fakeMessageDescriptor("Custom Status 1"),
               value: "custom-status-1",
-              color: "#foo",
+              spectrum: "blue",
             },
             {
               label: fakeMessageDescriptor("Custom Status 2"),
               value: "custom-status-2",
-              color: "#ffo",
+              spectrum: "green",
             },
           ],
 
@@ -174,19 +174,19 @@ describe("getEntitySelectionConfig", () => {
       ).toMatchInlineSnapshot(`
         [
           {
-            "color": "#foo",
             "label": {
               "id": "Custom Status 1",
               "message": "Custom Status 1",
             },
+            "spectrum": "blue",
             "value": "custom-status-1",
           },
           {
-            "color": "#ffo",
             "label": {
               "id": "Custom Status 2",
               "message": "Custom Status 2",
             },
+            "spectrum": "green",
             "value": "custom-status-2",
           },
         ]
@@ -201,13 +201,13 @@ describe("getEntitySelectionConfig", () => {
             {
               label: fakeMessageDescriptor("Custom Status 1"),
               value: "custom-status-1",
-              color: "#foo",
+              spectrum: "blue",
             },
 
             {
               label: fakeMessageDescriptor("Custom Status 2"),
               value: "custom-status-2",
-              color: "#ffo",
+              spectrum: "green",
             },
           ],
 
@@ -216,23 +216,22 @@ describe("getEntitySelectionConfig", () => {
       ).toMatchInlineSnapshot(`
         [
           {
-            "color": "#foo",
             "label": {
               "id": "Custom Status 1",
               "message": "Custom Status 1",
             },
+            "spectrum": "blue",
             "value": "custom-status-1",
           },
           {
-            "color": "#ffo",
             "label": {
               "id": "Custom Status 2",
               "message": "Custom Status 2",
             },
+            "spectrum": "green",
             "value": "custom-status-2",
           },
           {
-            "color": "#2ECC40",
             "label": {
               "id": "J/hVSQ",
               "message": "{0}",
@@ -240,10 +239,10 @@ describe("getEntitySelectionConfig", () => {
                 "0": "Pending",
               },
             },
+            "spectrum": "green",
             "value": "pending",
           },
           {
-            "color": "#FF165D",
             "label": {
               "id": "J/hVSQ",
               "message": "{0}",
@@ -251,10 +250,10 @@ describe("getEntitySelectionConfig", () => {
                 "0": "Approved",
               },
             },
+            "spectrum": "red",
             "value": "approved",
           },
           {
-            "color": "#0074D9",
             "label": {
               "id": "J/hVSQ",
               "message": "{0}",
@@ -262,6 +261,7 @@ describe("getEntitySelectionConfig", () => {
                 "0": "Rejected",
               },
             },
+            "spectrum": "blue",
             "value": "rejected",
           },
         ]
@@ -276,13 +276,13 @@ describe("getEntitySelectionConfig", () => {
             {
               label: fakeMessageDescriptor("Custom Status 1"),
               value: "custom-status-1",
-              color: "#foo",
+              spectrum: "blue",
             },
 
             {
               label: fakeMessageDescriptor("Custom Status 2"),
               value: "approved",
-              color: "#ffo",
+              spectrum: "green",
             },
           ],
 
@@ -291,23 +291,22 @@ describe("getEntitySelectionConfig", () => {
       ).toMatchInlineSnapshot(`
         [
           {
-            "color": "#foo",
             "label": {
               "id": "Custom Status 1",
               "message": "Custom Status 1",
             },
+            "spectrum": "blue",
             "value": "custom-status-1",
           },
           {
-            "color": "#ffo",
             "label": {
               "id": "Custom Status 2",
               "message": "Custom Status 2",
             },
+            "spectrum": "green",
             "value": "approved",
           },
           {
-            "color": "#2ECC40",
             "label": {
               "id": "J/hVSQ",
               "message": "{0}",
@@ -315,10 +314,10 @@ describe("getEntitySelectionConfig", () => {
                 "0": "Pending",
               },
             },
+            "spectrum": "green",
             "value": "pending",
           },
           {
-            "color": "#0074D9",
             "label": {
               "id": "J/hVSQ",
               "message": "{0}",
@@ -326,13 +325,14 @@ describe("getEntitySelectionConfig", () => {
                 "0": "Rejected",
               },
             },
+            "spectrum": "blue",
             "value": "rejected",
           },
         ]
       `);
     });
 
-    it("should not use colors for generated options when preselected dont have colors", () => {
+    it("should not use spectrums for generated options when preselected dont have spectrums", () => {
       expect(
         getEntitySelectionConfig(
           "selection-enum",
@@ -367,7 +367,6 @@ describe("getEntitySelectionConfig", () => {
             "value": "custom-status-2",
           },
           {
-            "color": undefined,
             "label": {
               "id": "J/hVSQ",
               "message": "{0}",
@@ -375,10 +374,10 @@ describe("getEntitySelectionConfig", () => {
                 "0": "Pending",
               },
             },
+            "spectrum": undefined,
             "value": "pending",
           },
           {
-            "color": undefined,
             "label": {
               "id": "J/hVSQ",
               "message": "{0}",
@@ -386,10 +385,10 @@ describe("getEntitySelectionConfig", () => {
                 "0": "Approved",
               },
             },
+            "spectrum": undefined,
             "value": "approved",
           },
           {
-            "color": undefined,
             "label": {
               "id": "J/hVSQ",
               "message": "{0}",
@@ -397,6 +396,7 @@ describe("getEntitySelectionConfig", () => {
                 "0": "Rejected",
               },
             },
+            "spectrum": undefined,
             "value": "rejected",
           },
         ]

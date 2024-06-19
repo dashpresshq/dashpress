@@ -1,7 +1,8 @@
 import { MessageDescriptor } from "@lingui/core";
+import { SpectrumColorTypes } from "@/components/ui/spectrum";
 
 export interface IColorableSelection {
-  color?: string;
+  spectrum?: SpectrumColorTypes;
   label: MessageDescriptor;
   value: string | boolean;
 }

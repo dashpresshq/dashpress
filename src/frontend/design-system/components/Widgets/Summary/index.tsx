@@ -1,17 +1,12 @@
-import styled from "styled-components";
 import { ChevronsDown, Icon, ChevronsUp } from "react-feather";
-import { SYSTEM_COLORS } from "frontend/design-system/theme/system";
-import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
-import { Stack } from "frontend/design-system/primitives/Stack";
-import { Typo } from "frontend/design-system/primitives/Typo";
-import { Spacer } from "frontend/design-system/primitives/Spacer";
 import { SystemIconsKeys } from "shared/constants/Icons";
-import { SystemIcon } from "frontend/design-system/Icons/System";
+import { cn } from "@/lib/utils";
+import { SpectrumColorTypes, spectrumVariants } from "@/components/ui/spectrum";
+import { SystemIcon } from "@/components/app/system-icons";
 
 const DirectionImplementation: Record<
   "up" | "down" | "side",
   {
-    color: string;
     label: string;
     Icon: Icon;
   }
@@ -19,50 +14,20 @@ const DirectionImplementation: Record<
   down: {
     Icon: ChevronsDown,
     label: "Down",
-    color: SYSTEM_COLORS.danger,
   },
   up: {
     Icon: ChevronsUp,
     label: "Up",
-    color: SYSTEM_COLORS.success,
   },
   side: {
     Icon: () => null,
     label: "Side",
-    color: USE_ROOT_COLOR("main-text"),
   },
 };
 
-const IconRoot = styled(SystemIcon)<{ $color: string }>`
-  background: ${(props) => props.$color}2A;
-  color: ${(props) => props.$color};
-  border: 1px solid ${(props) => props.$color};
-  min-width: 40px;
-  border-radius: 40px;
-  padding: 8px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-const RelativeCount = styled(Typo.XS)<{ $directionColor: string }>`
-  lineheight: 20.5px;
-  color: ${(props) => props.$directionColor};
-`;
-
-const DirectionRoot = styled(Stack)<{ color: string }>`
-  border: 1px solid transparent;
-  width: auto;
-  border-radius: 6px;
-  padding: 0 4px;
-  color: ${(props) => props.color};
-  background-color: ${(props) => props.color}0A;
-  border-color: ${(props) => props.color};
-`;
-
 export interface IProps {
   title: string;
-  color: string;
+  color: SpectrumColorTypes;
   fullCount: string;
   relativeCount: string;
   icon: string;
@@ -73,54 +38,69 @@ export function SummaryWidget({
   color,
   fullCount,
   relativeCount,
-  direction,
   title,
+  direction,
   icon,
 }: IProps) {
-  const {
-    Icon: DirectionIcon,
-    color: directionColor,
-    label: directionLabel,
-  } = DirectionImplementation[direction];
+  const { Icon: DirectionIcon, label: directionLabel } =
+    DirectionImplementation[direction];
 
   return (
-    <Stack $spacing={18} $align="center">
-      <IconRoot
-        $color={color}
+    <div className="flex gap-4 items-center">
+      <SystemIcon
         icon={icon as SystemIconsKeys}
-        size={40}
+        className={cn(
+          "w-10 h-10 min-w-10 rounded-full p-2",
+          spectrumVariants({
+            spectrum: color,
+          })
+        )}
         label={`${title} Icon`}
       />
-      <div style={{ width: "100%" }}>
-        <Spacer size="xs" />
-        <Stack $justify="space-between" $align="end">
-          <Typo.L $weight="bold" aria-label="Total Count">
+      <div className="w-full pt-1">
+        <div className="flex justify-between items-end">
+          <p className="font-semibold text-xl" aria-label="Total Count">
             {fullCount}
-          </Typo.L>
+          </p>
           {relativeCount ? (
-            <DirectionRoot
-              color={directionColor}
-              $spacing={2}
-              $align="center"
+            <div
+              className={cn(
+                "flex gap-0.5 w-auto items-center border rounded-lg px-1",
+                spectrumVariants({
+                  spectrum:
+                    // eslint-disable-next-line no-nested-ternary
+                    direction === "up"
+                      ? "green"
+                      : direction === "down"
+                      ? "red"
+                      : "gray",
+                })
+              )}
               aria-label="Relative Direction"
             >
               <span aria-label={directionLabel}>
                 <DirectionIcon
                   size={20}
-                  style={{ color: directionColor, verticalAlign: "sub" }}
+                  className={cn("text-main align-sub", {
+                    "text-green-600": direction === "up",
+                    "text-red-600": direction === "down",
+                  })}
                 />
               </span>
-              <RelativeCount
-                $weight="bold"
+
+              <p
+                className={cn("font-semibold text-xs leading-5 text-main", {
+                  "text-green-600": direction === "up",
+                  "text-red-600": direction === "down",
+                })}
                 aria-label="Relative Count"
-                $directionColor={directionColor}
               >
                 {relativeCount}
-              </RelativeCount>
-            </DirectionRoot>
+              </p>
+            </div>
           ) : null}
-        </Stack>
+        </div>
       </div>
-    </Stack>
+    </div>
   );
 }

@@ -1,6 +1,6 @@
-import { DEFAULT_TABLE_STATE } from "frontend/design-system/components/Table/constants";
 import { createStore } from "frontend/lib/store";
 import { IPaginatedDataState } from "shared/types/data";
+import { DEFAULT_TABLE_STATE } from "@/components/app/table";
 
 type IStore = {
   tableState: IPaginatedDataState<any>;

@@ -1,8 +1,7 @@
 import { UserPermissions } from "shared/constants/user";
 import { userFriendlyCase } from "shared/lib/strings/friendly-case";
-import { InfoAlert } from "frontend/design-system/components/Alert";
-import { Spacer } from "frontend/design-system/primitives/Spacer";
 import { DocumentationRoot } from "./_base";
+import { InfoAlert } from "@/components/app/alert";
 
 export function RolesDocumentation() {
   return (
@@ -34,7 +33,6 @@ export function RolesDocumentation() {
       </p>
 
       <InfoAlert message="When a custom role is deleted then all the users belonging to that role will be assigned the Viewer role" />
-      <Spacer />
 
       <h4>Permissions Breakdown </h4>
       <p>

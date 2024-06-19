@@ -1,17 +1,11 @@
 import { useActiveEntities } from "frontend/hooks/entity/entity.store";
 import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
 import { useNavigationStack } from "frontend/lib/routing/useNavigationStack";
-import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import {
   UserPermissions,
   USER_PERMISSIONS_CONFIG,
 } from "shared/constants/user";
 import { RolesDocumentation } from "frontend/docs/roles";
-import { SectionBox } from "frontend/design-system/components/Section/SectionBox";
-import { ContentLayout } from "frontend/design-system/components/Section/SectionDivider";
-import { ListSkeleton } from "frontend/design-system/components/Skeleton/List";
-import { Tabs } from "frontend/design-system/components/Tabs";
-import { Spacer } from "frontend/design-system/primitives/Spacer";
 import { AppLayout } from "frontend/_layouts/app";
 import { useRouteParam } from "frontend/lib/routing/useRouteParam";
 import { useChangeRouterParam } from "frontend/lib/routing/useChangeRouterParam";
@@ -21,6 +15,11 @@ import { MessageDescriptor } from "@lingui/core";
 import { typescriptSafeObjectDotEntries } from "shared/lib/objects";
 import { useDomainMessages } from "frontend/lib/crud-config";
 import { LANG_DOMAINS } from "frontend/lib/crud-config/lang-domains";
+import { ContentLayout } from "@/components/app/content-layout";
+import { ListSkeleton } from "@/components/app/skeleton/list";
+import { SectionBox } from "@/components/app/section-box";
+import { ViewStateMachine } from "@/components/app/view-state-machine";
+import { Tabs } from "@/components/app/tabs";
 import { useRolePermissions } from "../permissions.store";
 import { MutatePermission } from "./MutatePermission";
 import {
@@ -103,7 +102,6 @@ export function RolePermissions() {
             />
           </ViewStateMachine>
         </SectionBox>
-        <Spacer />
       </ContentLayout.Center>
       <RolesDocumentation />
     </AppLayout>

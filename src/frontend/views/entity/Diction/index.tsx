@@ -1,10 +1,4 @@
-import { SectionBox } from "frontend/design-system/components/Section/SectionBox";
-import {
-  FormSkeleton,
-  FormSkeletonSchema,
-} from "frontend/design-system/components/Skeleton/Form";
 import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
-import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { UserPermissions } from "shared/constants/user";
 import {
   useEntityDiction,
@@ -14,10 +8,16 @@ import { useUpsertConfigurationMutation } from "frontend/hooks/configuration/con
 import { useAppConfigurationDomainMessages } from "frontend/hooks/configuration/configuration.constant";
 import { DictionDocumentation } from "frontend/docs/diction";
 import { NAVIGATION_MENU_ENDPOINT } from "frontend/_layouts/app/NavigationSideBar/constants";
-import { SchemaForm } from "frontend/components/SchemaForm";
 import { AppConfigurationValueType } from "shared/configurations/constants";
 import { useDocumentationActionButton } from "frontend/docs/constants";
 import { msg } from "@lingui/macro";
+import { SchemaForm } from "@/components/app/form/schema";
+import { ViewStateMachine } from "@/components/app/view-state-machine";
+import {
+  FormSkeleton,
+  FormSkeletonSchema,
+} from "@/components/app/skeleton/form";
+import { SectionBox } from "@/components/app/section-box";
 import { BaseEntitySettingsLayout } from "../_Base";
 import { ENTITY_CONFIGURATION_VIEW } from "../constants";
 

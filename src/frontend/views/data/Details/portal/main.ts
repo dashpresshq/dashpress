@@ -1,6 +1,8 @@
-import { IGroupActionButton } from "frontend/design-system/components/Button/types";
-import { IDropDownMenuItem } from "frontend/design-system/components/DropdownMenu";
 import { noop } from "shared/lib/noop";
+import {
+  IGroupActionButton,
+  IMenuActionItem,
+} from "@/components/app/button/types";
 
 export const useDetailsViewMenuItems = ({
   entity,
@@ -8,7 +10,7 @@ export const useDetailsViewMenuItems = ({
 }: {
   entity: string;
   entityId: string;
-}): IDropDownMenuItem[] => {
+}): IMenuActionItem[] => {
   noop(entity, entityId);
   return [];
 };

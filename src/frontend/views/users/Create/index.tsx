@@ -1,15 +1,15 @@
 import { useNavigationStack } from "frontend/lib/routing/useNavigationStack";
 import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
 import { UserPermissions } from "shared/constants/user";
-import { ContentLayout } from "frontend/design-system/components/Section/SectionDivider";
-import { SectionBox } from "frontend/design-system/components/Section/SectionBox";
 import { AppLayout } from "frontend/_layouts/app";
-import { SchemaForm } from "frontend/components/SchemaForm";
 import { ICreateUserForm } from "shared/form-schemas/users";
 import { IAppliedSchemaFormConfig } from "shared/form-schemas/types";
 import { msg } from "@lingui/macro";
 import { useDomainMessages } from "frontend/lib/crud-config";
 import { LANG_DOMAINS } from "frontend/lib/crud-config/lang-domains";
+import { ContentLayout } from "@/components/app/content-layout";
+import { SchemaForm } from "@/components/app/form/schema";
+import { SectionBox } from "@/components/app/section-box";
 import { useCreateUserMutation } from "../users.store";
 
 export const CREATE_USER_FORM_SCHEMA: IAppliedSchemaFormConfig<ICreateUserForm> =

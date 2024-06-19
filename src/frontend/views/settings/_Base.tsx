@@ -1,59 +1,65 @@
 import { useRouter } from "next/router";
 import { ReactNode } from "react";
-import {
-  IMenuSectionItem,
-  MenuSection,
-} from "frontend/design-system/components/Section/MenuSection";
-import { ContentLayout } from "frontend/design-system/components/Section/SectionDivider";
+
 import { AppLayout } from "frontend/_layouts/app";
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
 import { msg } from "@lingui/macro";
+import { ContentLayout } from "@/components/app/content-layout";
 import { useMutateBaseSettingsMenu } from "./portal";
+import { MenuSection } from "@/components/app/menu-section";
+import { IMenuActionItem } from "@/components/app/button/types";
 
 interface IProps {
   children: ReactNode;
 }
 
-const baseMenuItems: IMenuSectionItem[] = [
+const baseMenuItems: IMenuActionItem[] = [
   {
+    id: "settings",
     action: NAVIGATION_LINKS.SETTINGS.ENTITIES,
-    name: msg`Enabled Entities`,
+    label: msg`Enabled Entities`,
     systemIcon: "Columns",
     order: 10,
   },
   {
+    id: "theme",
     action: NAVIGATION_LINKS.SETTINGS.THEME,
-    name: msg`Theme`,
+    label: msg`Theme`,
     systemIcon: "Eye",
     order: 20,
   },
   {
+    id: "site",
     action: NAVIGATION_LINKS.SETTINGS.SITE,
-    name: msg`Site`,
+    label: msg`Site`,
     systemIcon: "Globe",
     order: 30,
   },
   {
+    id: "data",
     action: NAVIGATION_LINKS.SETTINGS.DATA,
-    name: msg`General Data Settings`,
+    label: msg`General Data Settings`,
     systemIcon: "Calendar",
     order: 40,
   },
   {
+    id: "variables",
     action: NAVIGATION_LINKS.SETTINGS.VARIABLES,
-    name: msg`Variables`,
+    label: msg`Variables`,
     systemIcon: "Book",
     order: 50,
   },
   {
+    id: "system",
     action: NAVIGATION_LINKS.SETTINGS.SYSTEM,
-    name: msg`System`,
+    label: msg`System`,
     systemIcon: "Server",
     order: 60,
   },
   {
+    id: "versions",
     action: NAVIGATION_LINKS.SETTINGS.VERSIONS,
-    name: msg`System Info`,
+    label: msg`System Info`,
     systemIcon: "Terminal",
     order: 70,
   },

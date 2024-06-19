@@ -3,38 +3,19 @@ import arrayMutators from "final-form-arrays";
 import { FieldArray } from "react-final-form-arrays";
 import { composeValidators, required } from "frontend/lib/validations";
 import { Fragment, useState } from "react";
-import styled from "styled-components";
 import { isNotEmpty } from "class-validator";
 import { EntityTypesForSelection, IColorableSelection } from "shared/types/ui";
-import { Check } from "react-feather";
-import {
-  isUseColorsFlagOn,
-  OPTIONS_COLORS,
-} from "shared/logic/entities/selection.utils";
+import { isUseColorsFlagOn } from "shared/logic/entities/selection.utils";
 import { useAppConfigurationDomainMessages } from "frontend/hooks/configuration/configuration.constant";
-import { FormInput } from "frontend/design-system/components/Form/Input";
-import { Stack } from "frontend/design-system/primitives/Stack";
-import { Card, CardBody } from "frontend/design-system/components/Card";
-import { Spacer } from "frontend/design-system/primitives/Spacer";
-import { SoftButton } from "frontend/design-system/components/Button/SoftButton";
-import { FormButton } from "frontend/design-system/components/Button/FormButton";
-import { FormSwitch } from "frontend/design-system/components/Form/Switch";
-import { DELETE_BUTTON_PROPS } from "frontend/design-system/components/Button/constants";
 import { msg } from "@lingui/macro";
-import { isBlackOrWhite } from "./isBlackOrWhite";
-
-const ColorBox = styled.button<{ color: string }>`
-  height: 24px;
-  wifth: 24px;
-  border-radius: 5px;
-  width: 100%;
-  margin-bottom: 0;
-  cursor: pointer;
-  padding-bottom: 0px;
-  outline: none;
-  border: 0;
-  background: ${(props) => props.color};
-`;
+import { FormButton } from "@/components/app/button/form";
+import { DELETE_BUTTON_PROPS } from "@/components/app/button/constants";
+import { CardContent, Card } from "@/components/ui/card";
+import { SPECTRUM_COLORS } from "@/components/ui/spectrum";
+import { FormInput } from "@/components/app/form/input/text";
+import { SoftButton } from "@/components/app/button/soft";
+import { SpectrumColorInputField } from "@/components/app/form/input/spectrum";
+import { FormSwitch } from "@/components/app/form/input/switch";
 
 // Reference is a special case basically only use color
 
@@ -50,7 +31,7 @@ interface IProps {
 const replaceForIntialValues = (selections: IColorableSelection[]) => {
   return selections.map((selection) => ({
     ...selection,
-    label: { ...selection.label, message: selection.label.values[0] },
+    label: { ...selection.label, message: selection.label.values?.[0] },
   }));
 };
 
@@ -87,7 +68,7 @@ export function FieldSelectionCanvas({
       }}
       initialValues={{ selections: replaceForIntialValues(selections) }}
       render={({ handleSubmit, values, pristine, form }) => (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className="mb-3">
           {entityType !== "boolean" && (
             <FormSwitch
               label={msg`Use Colors`}
@@ -102,7 +83,7 @@ export function FieldSelectionCanvas({
                   ).selections.map((selection, index) => ({
                     ...selection,
                     color: newUseColorValue
-                      ? OPTIONS_COLORS[index % OPTIONS_COLORS.length]
+                      ? SPECTRUM_COLORS[index % SPECTRUM_COLORS.length]
                       : undefined,
                   }))
                 );
@@ -114,8 +95,8 @@ export function FieldSelectionCanvas({
               <>
                 {fields.map((name, index) => (
                   <Fragment key={name}>
-                    <Card>
-                      <CardBody>
+                    <Card className="mt-3">
+                      <CardContent>
                         <Field
                           name={`${name}.value`}
                           validate={composeValidators((value) =>
@@ -147,37 +128,17 @@ export function FieldSelectionCanvas({
                             />
                           )}
                         </Field>
-                        <Stack $justify="space-between">
+                        <div className="flex justify-between">
                           {useColors ? (
                             <Field
                               name={`${name}.color`}
                               validate={required}
                               validateFields={[]}
                             >
-                              {(formProps) => (
-                                <Stack>
-                                  {OPTIONS_COLORS.map((systemColor) => (
-                                    <div key={systemColor}>
-                                      <ColorBox
-                                        type="button"
-                                        color={systemColor}
-                                        onClick={() =>
-                                          formProps.input.onChange(systemColor)
-                                        }
-                                      >
-                                        <Check
-                                          color={
-                                            systemColor ===
-                                            formProps.input.value
-                                              ? isBlackOrWhite(systemColor)
-                                              : systemColor
-                                          }
-                                          size="18"
-                                        />
-                                      </ColorBox>
-                                    </div>
-                                  ))}
-                                </Stack>
+                              {({ input, meta }) => (
+                                <SpectrumColorInputField
+                                  formInput={{ input, meta }}
+                                />
                               )}
                             </Field>
                           ) : (
@@ -185,8 +146,7 @@ export function FieldSelectionCanvas({
                           )}
                           {ManagableEntities.includes(entityType) && (
                             <SoftButton
-                              size="xs"
-                              justIcon
+                              size="icon"
                               {...DELETE_BUTTON_PROPS({
                                 action: () => {
                                   fields.remove(index);
@@ -197,15 +157,13 @@ export function FieldSelectionCanvas({
                               })}
                             />
                           )}
-                        </Stack>
-                      </CardBody>
+                        </div>
+                      </CardContent>
                     </Card>
-                    <Spacer />
                   </Fragment>
                 ))}
 
-                <Spacer />
-                <Stack $justify="space-between">
+                <div className="flex justify-between mt-3">
                   {ManagableEntities.includes(entityType) && (
                     <SoftButton
                       systemIcon="Plus"
@@ -216,8 +174,8 @@ export function FieldSelectionCanvas({
                           label: msg``,
                           value: "",
                           color: useColors
-                            ? OPTIONS_COLORS[
-                                fields.length % OPTIONS_COLORS.length
+                            ? SPECTRUM_COLORS[
+                                fields.length % SPECTRUM_COLORS.length
                               ]
                             : undefined,
                         } as IColorableSelection);
@@ -231,7 +189,7 @@ export function FieldSelectionCanvas({
                     text={domainMessages.FORM_LANG.UPSERT}
                     disabled={pristine}
                   />
-                </Stack>
+                </div>
               </>
             )}
           </FieldArray>

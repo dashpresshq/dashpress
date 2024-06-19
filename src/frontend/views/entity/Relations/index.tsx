@@ -12,22 +12,21 @@ import {
   useEntityConfiguration,
   useUpsertConfigurationMutation,
 } from "frontend/hooks/configuration/configuration.store";
-import { ViewStateMachine } from "frontend/components/ViewStateMachine";
 import { useAppConfigurationDomainMessages } from "frontend/hooks/configuration/configuration.constant";
 import { RelationsSettingsDocumentation } from "frontend/docs/relations";
 import { useChangeRouterParam } from "frontend/lib/routing/useChangeRouterParam";
 import { useRouteParam } from "frontend/lib/routing/useRouteParam";
 import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
-import { SectionBox } from "frontend/design-system/components/Section/SectionBox";
-import { Tabs } from "frontend/design-system/components/Tabs";
+import { useDocumentationActionButton } from "frontend/docs/constants";
+import { msg } from "@lingui/macro";
+import { SectionBox } from "@/components/app/section-box";
 import {
   FormSkeleton,
   FormSkeletonSchema,
-} from "frontend/design-system/components/Skeleton/Form";
-import { Spacer } from "frontend/design-system/primitives/Spacer";
-import { ListSkeleton } from "frontend/design-system/components/Skeleton/List";
-import { useDocumentationActionButton } from "frontend/docs/constants";
-import { msg } from "@lingui/macro";
+} from "@/components/app/skeleton/form";
+import { ListSkeleton } from "@/components/app/skeleton/list";
+import { ViewStateMachine } from "@/components/app/view-state-machine";
+import { Tabs } from "@/components/app/tabs";
 import {
   FieldsLabelForm,
   loadingFieldsLabelForm,
@@ -162,21 +161,23 @@ export function EntityRelationsSettings() {
                   loading={isLoading}
                   loader={<ListSkeleton count={5} />}
                 >
-                  <EntitiesSelection
-                    type="relations"
-                    selectionKey={`${entity}-relations`}
-                    allList={entityRelationList.data}
-                    getEntityFieldLabels={(relation) =>
-                      entityRelationsLabelsMap.data?.[relation] ||
-                      getEntitiesDictionPlurals(relation)
-                    }
-                    sort={{
-                      order: entityRelationsOrder.data,
-                      save: upsertEntityRelationsOrderMutation.mutateAsync,
-                    }}
-                    hiddenList={hiddenEntityRelations.data}
-                    onSubmit={upsertHideEntityRelationMutation.mutateAsync}
-                  />
+                  <div className="mt-6">
+                    <EntitiesSelection
+                      type="relations"
+                      selectionKey={`${entity}-relations`}
+                      allList={entityRelationList.data}
+                      getEntityFieldLabels={(relation) =>
+                        entityRelationsLabelsMap.data?.[relation] ||
+                        getEntitiesDictionPlurals(relation)
+                      }
+                      sort={{
+                        order: entityRelationsOrder.data,
+                        save: upsertEntityRelationsOrderMutation.mutateAsync,
+                      }}
+                      hiddenList={hiddenEntityRelations.data}
+                      onSubmit={upsertHideEntityRelationMutation.mutateAsync}
+                    />
+                  </div>
                 </ViewStateMachine>
               ),
               id: "selection",
@@ -189,7 +190,6 @@ export function EntityRelationsSettings() {
                   loading={isLoading}
                   loader={loadingFieldsLabelForm}
                 >
-                  <Spacer />
                   <FieldsLabelForm
                     initialValues={entityRelationsLabelsMap.data}
                     crudConfig={domainMessages}

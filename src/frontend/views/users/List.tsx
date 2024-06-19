@@ -1,27 +1,27 @@
 import { AppLayout } from "frontend/_layouts/app";
 import { roleLabel, UserPermissions } from "shared/constants/user";
-import {
-  FEPaginationTable,
-  IFETableColumn,
-  IFETableCell,
-} from "frontend/components/FEPaginationTable";
 import { IRolesList } from "shared/types/roles";
 import { IAccountProfile } from "shared/types/user";
 import { useApi } from "frontend/lib/data/useApi";
 import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
-import { Card } from "frontend/design-system/components/Card";
-import { ActionButtons } from "frontend/design-system/components/Button/ActionButtons";
-import { DELETE_BUTTON_PROPS } from "frontend/design-system/components/Button/constants";
 import { useUserHasPermission } from "frontend/hooks/auth/user.store";
-import { IDropDownMenuItem } from "frontend/design-system/components/DropdownMenu";
 import { useCallback } from "react";
 import { msg } from "@lingui/macro";
 import { transformLabelValueToSelectData } from "translations/fake";
 import { useDomainMessages } from "frontend/lib/crud-config";
 import { LANG_DOMAINS } from "frontend/lib/crud-config/lang-domains";
+import { DELETE_BUTTON_PROPS } from "@/components/app/button/constants";
+import {
+  FEPaginationTable,
+  IFETableColumn,
+  IFETableCell,
+} from "@/components/app/pagination-table";
 import { ROLES_ENDPOINT_CONFIG } from "../roles/roles.store";
 import { USERS_ENDPOINT_CONFIG, useUserDeletionMutation } from "./users.store";
+import { Card } from "@/components/ui/card";
+import { IMenuActionItem } from "@/components/app/button/types";
+import { ActionButtons } from "@/components/app/button/action";
 
 export function ListUsers() {
   const domainMessages = useDomainMessages(LANG_DOMAINS.ACCOUNT.USERS);
@@ -45,7 +45,7 @@ export function ListUsers() {
       const { username } = row.original;
       return (
         <ActionButtons
-          justIcons
+          size="icon"
           actionButtons={[
             {
               id: "edit",
@@ -101,7 +101,7 @@ export function ListUsers() {
     },
   ];
 
-  const actionsItems: IDropDownMenuItem[] = [
+  const actionsItems: IMenuActionItem[] = [
     {
       id: "add",
       systemIcon: "UserPlus",

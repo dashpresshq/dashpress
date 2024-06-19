@@ -8,22 +8,23 @@ import { useEntityId } from "frontend/hooks/entity/entity.config";
 import { AppLayout } from "frontend/_layouts/app";
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
 import { useEntityDictionPlurals } from "frontend/hooks/entity/entity.queries";
-import { ContentLayout } from "frontend/design-system/components/Section/SectionDivider";
-import { ListManager } from "frontend/design-system/components/ListManager";
-import { IDropDownMenuItem } from "frontend/design-system/components/DropdownMenu";
 import { DataStates } from "frontend/lib/data/types";
-import { IListMangerItemProps } from "frontend/design-system/components/ListManager/ListManagerItem";
-import { Card, CardBody } from "frontend/design-system/components/Card";
+import { ContentLayout } from "@/components/app/content-layout";
+import { ListManager } from "@/components/app/list-manager";
+import { IListMangerItemProps } from "@/components/app/list-manager/list-manager-item";
+
 import { useEntityViewStateMachine } from "../hooks/useEntityViewStateMachine";
 import { getEntitiesRelationsCount } from "./utils";
 import { useEntityActionMenuItems } from "../../entity/constants";
+import { Card, CardContent } from "@/components/ui/card";
+import { IMenuActionItem } from "@/components/app/button/types";
 
 export const DETAILS_LAYOUT_KEY = "___DETAILS_KEY__";
 
 interface IProps {
   children: ReactNode;
   entity: string;
-  menuItems?: IDropDownMenuItem[];
+  menuItems?: IMenuActionItem[];
   menuKey: string;
 }
 
@@ -106,7 +107,7 @@ export function DetailsLayout({
       <ContentLayout>
         <ContentLayout.Left>
           <Card>
-            <CardBody>
+            <CardContent>
               <ListManager
                 items={{
                   data: listItems,
@@ -149,7 +150,7 @@ export function DetailsLayout({
                   return props;
                 }}
               />
-            </CardBody>
+            </CardContent>
           </Card>
         </ContentLayout.Left>
         <ContentLayout.Right>{children}</ContentLayout.Right>

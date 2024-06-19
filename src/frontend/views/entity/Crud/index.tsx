@@ -5,8 +5,6 @@ import { CRUDDocumentation } from "frontend/docs/crud";
 import { useRouteParam } from "frontend/lib/routing/useRouteParam";
 import { useChangeRouterParam } from "frontend/lib/routing/useChangeRouterParam";
 import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
-import { SectionBox } from "frontend/design-system/components/Section/SectionBox";
-import { Tabs } from "frontend/design-system/components/Tabs";
 import {
   useEntityCrudSettings,
   useEntitySlug,
@@ -16,6 +14,7 @@ import { useEntityFields } from "frontend/hooks/entity/entity.store";
 import { useDocumentationActionButton } from "frontend/docs/constants";
 import { msg } from "@lingui/macro";
 import { typescriptSafeObjectDotEntries } from "shared/lib/objects";
+import { SectionBox } from "@/components/app/section-box";
 import { BaseEntitySettingsLayout } from "../_Base";
 import {
   EntityFieldsSelectionSettings,
@@ -28,6 +27,7 @@ import {
   PortalEntityDetailsSettings,
   PortalEntityUpdateSettings,
 } from "./portal";
+import { Tabs } from "@/components/app/tabs";
 
 const TITLE = msg`CRUD Settings`;
 

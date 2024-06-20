@@ -66,4 +66,10 @@
     @apply focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary;
     @apply disabled:cursor-not-allowed disabled:bg-soft disabled:opacity-70;
   }
+  .grid-root {
+    @apply grid gap-4 grid-cols-1 md:grid-cols-12;
+  }
+  .dashboard-grid-root {
+    @apply grid-root select-none auto-rows-[minmax(100px,auto)];
+  }
 }

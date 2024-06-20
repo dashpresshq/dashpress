@@ -16,15 +16,6 @@ export const mapToUnitOptions = (values: number[]) => {
 
 export const gridHeightToPx = (unit: GridHeightSizes) => +unit * 100;
 
-export const gridRoot = css`
-  display: grid;
-  column-gap: 16px;
-  grid-template-columns: repeat(12, 1fr);
-  @container (width < ${BREAKPOINTS.md}) {
-    grid-template-columns: 1fr;
-  }
-`;
-
 export const gridItem = css<{
   $span: GridSpanSizes;
 }>`

@@ -13,14 +13,13 @@ import {
   generateClassNames,
 } from "@/components/app/form/input/label-and-error";
 import { PrismTokenStyles } from "@/components/app/render-code/styles";
+import { cn } from "@/lib/utils";
 
 interface IFormCodeEditor extends ISharedFormInput {
   language?: "javascript";
 }
 
 const Wrapper = styled.div`
-  border: 1px solid ${USE_ROOT_COLOR("border-color")};
-
   &.invalid {
     border-color: ${SYSTEM_COLORS.danger} !important;
   }
@@ -57,7 +56,13 @@ export function FormCodeEditor(formInput: IFormCodeEditor) {
 
   return (
     <LabelAndError formInput={formInput}>
-      <Wrapper className={`${generateClassNames(meta)} line-numbers`}>
+      <Wrapper
+        className={cn(
+          generateClassNames(meta),
+          "line-numbers",
+          "border border-border"
+        )}
+      >
         <Editor
           {...inputProps}
           onValueChange={inputProps.onChange}

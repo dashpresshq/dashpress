@@ -69,12 +69,14 @@ export function TableFilter({
       columnLabel={view}
       filterType={type._type}
     >
-      {operators.length > 1 && (
-        <RenderFilterOperator
-          operators={operators}
-          filterValue={filterValue}
-          setFilter={setFilter}
-        />
+      {operators.length > 0 && (
+        <div style={{ display: operators.length === 1 ? "none" : "block" }}>
+          <RenderFilterOperator
+            operators={operators}
+            filterValue={filterValue}
+            setFilter={setFilter}
+          />
+        </div>
       )}
       <FilterComponent
         column={{

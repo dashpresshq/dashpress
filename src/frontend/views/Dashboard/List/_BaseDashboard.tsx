@@ -7,13 +7,8 @@ import { useDomainMessages } from "frontend/lib/crud-config";
 import { LANG_DOMAINS } from "frontend/lib/crud-config/lang-domains";
 import { ViewStateMachine } from "@/components/app/view-state-machine";
 import { useDashboardWidgets } from "../dashboard.store";
-import { dashboardGridRoot } from "../styles";
 import { DashboardSkeleton } from "../Skeleton";
 import { DashboardWidget } from "../Widget";
-
-const Root = styled.div`
-  ${dashboardGridRoot};
-`;
 
 const Container = styled.div`
   container-type: inline-size;
@@ -53,11 +48,11 @@ export function BaseDashboard({ dashboardId, manageLink }: IProps) {
         loader={<DashboardSkeleton />}
       >
         <Container>
-          <Root>
+          <div className="dashboard-grid-root">
             {widgets.data.map((config) => (
               <DashboardWidget config={config} key={config.id} />
             ))}
-          </Root>
+          </div>
         </Container>
       </ViewStateMachine>
     </AppLayout>

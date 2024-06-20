@@ -9,7 +9,6 @@ import { TestProviders } from "__tests__/_/Provider";
 import { FormInput } from "./text";
 import { FormNumberInput } from "./number";
 import { FormRichTextArea } from "../../../../frontend/design-system/components/Form/RichText";
-import { FormDateInput } from "../../../../frontend/design-system/components/Form/Date";
 import { FormTextArea } from "./textarea";
 import {
   FormMultiSelect,
@@ -24,6 +23,7 @@ import { DELETE_BUTTON_PROPS } from "../../button/constants";
 import { FormPasswordInput } from "./password";
 import { FormButton } from "../../button/form";
 import { ActionButtons } from "../../button/action";
+import { FormDateInput } from "./date";
 
 function DemoForm() {
   return (

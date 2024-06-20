@@ -1,4 +1,3 @@
-import { useRouter } from "next/router";
 import { ReactNode } from "react";
 import { AppLayout } from "frontend/_layouts/app";
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
@@ -14,7 +13,6 @@ interface IProps {
 }
 
 export function BaseAccountLayout({ children }: IProps) {
-  const router = useRouter();
   const portalAccountMenu = usePortalAccountMenu();
 
   const baseMenuItems: IMenuActionItem[] = [
@@ -55,10 +53,7 @@ export function BaseAccountLayout({ children }: IProps) {
     <AppLayout>
       <ContentLayout>
         <ContentLayout.Left>
-          <MenuSection
-            menuItems={[...portalAccountMenu, ...baseMenuItems]}
-            currentMenuItem={router.asPath.split("?")[0]}
-          />
+          <MenuSection menuItems={[...portalAccountMenu, ...baseMenuItems]} />
         </ContentLayout.Left>
         <ContentLayout.Right>{children}</ContentLayout.Right>
       </ContentLayout>

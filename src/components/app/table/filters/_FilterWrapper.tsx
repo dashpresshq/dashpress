@@ -40,36 +40,38 @@ export function FilterWrapper({
   const { systemIcon, label: filterLabel } = FILTER_TYPE_CONFIG[filterType];
 
   return (
-    <Dropdown
-      className="w-64"
-      target={
-        <div
-          className="cursor-pointer"
-          aria-label={`Filter ${columnLabel} By ${filterLabel}${
-            filterHasValue ? " Is Active" : ""
-          }`}
-        >
-          <SystemIcon
-            icon={systemIcon}
-            className={cn("w-4 h-4 text-muted", {
-              "text-primary": filterHasValue,
-              "opacity-70": !filterHasValue,
-            })}
+    <span onClick={(e) => e.stopPropagation()}>
+      <Dropdown
+        className="w-64"
+        target={
+          <div
+            className="cursor-pointer"
+            aria-label={`Filter ${columnLabel} By ${filterLabel}${
+              filterHasValue ? " Is Active" : ""
+            }`}
+          >
+            <SystemIcon
+              icon={systemIcon}
+              className={cn("w-4 h-4 text-muted", {
+                "text-primary": filterHasValue,
+                "opacity-70": !filterHasValue,
+              })}
+            />
+          </div>
+        }
+      >
+        <div className="flex flex-col gap-3 p-2">
+          <div className="text-left flex flex-col gap-3">{children}</div>
+          <SoftButton
+            action={() => {
+              clearFilter(undefined);
+            }}
+            size="sm"
+            systemIcon="Close"
+            label={msg`Reset`}
           />
         </div>
-      }
-    >
-      <div className="flex flex-col gap-3 p-2">
-        <div className="text-left flex flex-col gap-3">{children}</div>
-        <SoftButton
-          action={() => {
-            clearFilter(undefined);
-          }}
-          size="sm"
-          systemIcon="Close"
-          label={msg`Reset`}
-        />
-      </div>
-    </Dropdown>
+      </Dropdown>
+    </span>
   );
 }

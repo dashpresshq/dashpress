@@ -10,14 +10,15 @@ import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
 import { useEntityDictionPlurals } from "frontend/hooks/entity/entity.queries";
 import { DataStates } from "frontend/lib/data/types";
 import { ContentLayout } from "@/components/app/content-layout";
-import { ListManager } from "@/components/app/list-manager";
-import { IListMangerItemProps } from "@/components/app/list-manager/list-manager-item";
-
 import { useEntityViewStateMachine } from "../hooks/useEntityViewStateMachine";
 import { getEntitiesRelationsCount } from "./utils";
 import { useEntityActionMenuItems } from "../../entity/constants";
-import { Card, CardContent } from "@/components/ui/card";
 import { IMenuActionItem } from "@/components/app/button/types";
+import { MenuSection } from "@/components/app/menu-section";
+import { ViewStateMachine } from "@/components/app/view-state-machine";
+import { ListSkeleton } from "@/components/app/skeleton/list";
+import { fakeMessageDescriptor } from "@/translations/fake";
+import { Card, CardContent } from "@/components/ui/card";
 
 export const DETAILS_LAYOUT_KEY = "___DETAILS_KEY__";
 
@@ -82,17 +83,6 @@ export function DetailsLayout({
     ...relatedEntities,
   ];
 
-  const relatedEntitiesLabelMap = Object.fromEntries(
-    listItems.map((relatedEntity) => [
-      relatedEntity.name,
-      relatedEntity.referencelabel ||
-        getEntitiesDictionPlurals(
-          relatedEntity.name,
-          relatedEntitiesMap[relatedEntity.name].type === "toOne"
-        ),
-    ])
-  );
-
   const { isLoading, error } = referenceFields;
 
   const viewState = useEntityViewStateMachine({
@@ -106,52 +96,63 @@ export function DetailsLayout({
     <AppLayout actionItems={menuItems} secondaryActionItems={actionItems}>
       <ContentLayout>
         <ContentLayout.Left>
-          <Card>
-            <CardContent>
-              <ListManager
-                items={{
-                  data: listItems,
-                  error:
-                    viewState.type === DataStates.Error
-                      ? viewState.message
-                      : undefined,
-                  isLoading: viewState.type === DataStates.Loading,
-                }}
-                listLengthGuess={5}
-                labelField="name"
-                getLabel={(name) => relatedEntitiesLabelMap[name]}
-                render={(menuItem) => {
-                  if (menuItem.name === DETAILS_LAYOUT_KEY) {
-                    const props: IListMangerItemProps = {
-                      label: menuItem.label,
-                      active: menuKey === DETAILS_LAYOUT_KEY,
-                      action: NAVIGATION_LINKS.ENTITY.DETAILS(entity, entityId),
-                    };
-                    return props;
-                  }
-                  const entityType =
-                    relatedEntitiesMap[menuItem.name]?.type || "toOne";
-                  const entityCount = getEntitiesRelationsCount(
-                    entityType,
-                    relatedEntitiesCounts.data[menuItem.name]
+          <ViewStateMachine
+            loading={viewState.type === DataStates.Loading}
+            error={
+              viewState.type === DataStates.Error
+                ? viewState.message
+                : undefined
+            }
+            loader={
+              <Card>
+                <CardContent>
+                  <ListSkeleton count={8} />
+                </CardContent>
+              </Card>
+            }
+          >
+            <MenuSection
+              menuItems={listItems.map((menuItem) => {
+                const label =
+                  menuItem.referencelabel ||
+                  getEntitiesDictionPlurals(
+                    menuItem.name,
+                    relatedEntitiesMap[menuItem.name].type === "toOne"
                   );
-
-                  const props: IListMangerItemProps = {
-                    label: `${menuItem.label} ${entityCount}`,
-                    active: menuKey === menuItem.name,
-                    action: NAVIGATION_LINKS.ENTITY.RELATION_TABLE(
-                      entity,
-                      entityId,
-                      menuItem.name,
-                      entityType === "toOne" ? "one" : "many"
-                    ),
+                if (menuItem.name === DETAILS_LAYOUT_KEY) {
+                  const props: IMenuActionItem = {
+                    id: "details",
+                    systemIcon: "none",
+                    label: fakeMessageDescriptor(label),
+                    active: menuKey === DETAILS_LAYOUT_KEY,
+                    action: NAVIGATION_LINKS.ENTITY.DETAILS(entity, entityId),
                   };
-
                   return props;
-                }}
-              />
-            </CardContent>
-          </Card>
+                }
+                const entityType =
+                  relatedEntitiesMap[menuItem.name]?.type || "toOne";
+                const entityCount = getEntitiesRelationsCount(
+                  entityType,
+                  relatedEntitiesCounts.data[menuItem.name]
+                );
+
+                const props: IMenuActionItem = {
+                  label: fakeMessageDescriptor(`${label} ${entityCount}`),
+                  id: menuItem.name,
+                  systemIcon: "none",
+                  active: menuKey === menuItem.name,
+                  action: NAVIGATION_LINKS.ENTITY.RELATION_TABLE(
+                    entity,
+                    entityId,
+                    menuItem.name,
+                    entityType === "toOne" ? "one" : "many"
+                  ),
+                };
+
+                return props;
+              })}
+            />
+          </ViewStateMachine>
         </ContentLayout.Left>
         <ContentLayout.Right>{children}</ContentLayout.Right>
       </ContentLayout>

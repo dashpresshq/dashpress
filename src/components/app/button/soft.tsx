@@ -34,7 +34,9 @@ export function SoftButton({
   ) : (
     <div className="flex gap-2 w-auto items-center">
       <SystemIcon icon={systemIcon} className="w-[14px] h-[14px]" />
-      <span className="whitespace-nowrap">{labelString}</span>
+      <span className="whitespace-nowrap hidden md:inline-block">
+        {labelString}
+      </span>
     </div>
   );
 

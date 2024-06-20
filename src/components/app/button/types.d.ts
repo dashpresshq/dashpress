@@ -23,4 +23,6 @@ export interface IGroupActionButton extends IActionButton {
 export interface IMenuActionItem extends IGroupActionButton {
   subtle?: boolean;
   destructive?: boolean;
+  active?: boolean;
+  secondaryAction?: () => void;
 }

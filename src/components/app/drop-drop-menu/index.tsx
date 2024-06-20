@@ -1,6 +1,5 @@
 import { useState, useEffect, useMemo } from "react";
 import { ChevronDown, MoreVertical } from "react-feather";
-
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -11,12 +10,14 @@ import { useToggle } from "@/frontend/hooks/state/useToggleState";
 import { MenuSection } from "@/components/app/menu-section";
 import { IMenuActionItem } from "../button/types";
 import { SoftButton } from "../button/soft";
+import { cn } from "@/lib/utils";
 
 export interface IProps {
   menuItems: IMenuActionItem[];
   ariaLabel: string;
   disabled?: boolean;
   ellipsis?: true;
+  contentClassName?: string;
   className?: string;
 }
 
@@ -24,17 +25,27 @@ export function DropDownMenu({
   menuItems: menuItems$1,
   ellipsis,
   ariaLabel,
+  contentClassName,
   className,
 }: IProps) {
-  const menuItems = useMemo(() => {
-    return [...menuItems$1].sort((a, b) => {
-      return (a.order || 0) - (b.order || 0);
-    });
-  }, [menuItems$1]);
-
   const [currentMenuItem, setCurrentMenuItem] = useState<IMenuActionItem>(
-    menuItems?.[0]
+    menuItems$1[0]
   );
+
+  const menuItems: IMenuActionItem[] = useMemo(() => {
+    return [...menuItems$1]
+      .sort((a, b) => {
+        return (a.order || 0) - (b.order || 0);
+      })
+      .map((menuItem) => {
+        return {
+          ...menuItem,
+          secondaryAction: () => {
+            setCurrentMenuItem(menuItem);
+          },
+        };
+      });
+  }, [menuItems$1]);
 
   useEffect(() => {
     setCurrentMenuItem(menuItems[0]);
@@ -47,12 +58,6 @@ export function DropDownMenu({
   if (menuItems.length === 1 && !ellipsis) {
     return <SoftButton {...currentMenuItem} />;
   }
-
-  // TODO
-  // const onMenuItemClick = (menuIndex: number) => {
-  //   const menuItem = menuItems[menuIndex];
-  //   setCurrentMenuItem(menuItem);
-  // };
 
   const { isOn: isOpen, toggle } = useToggle(false);
 
@@ -81,8 +86,11 @@ export function DropDownMenu({
             </Button>
           )}
         </DropdownMenuTrigger>
-        <DropdownMenuContent className="p-0 border-0" onClick={toggle}>
-          <MenuSection menuItems={menuItems$1} size="sm" />
+        <DropdownMenuContent
+          className={cn("p-0 border-0", contentClassName)}
+          onClick={toggle}
+        >
+          <MenuSection menuItems={menuItems} size="sm" />
         </DropdownMenuContent>
       </DropdownMenu>
     </div>

@@ -35,7 +35,7 @@ export function WidgetHeader({
 
   return (
     <div className="flex justify-between items-start w-full">
-      <div className="flex flex-1 w-full">
+      <div className="flex flex-1 w-full gap-2">
         {setting && (
           <SortableKnob>
             <GrabIcon width={18} />
@@ -67,10 +67,11 @@ export function WidgetHeader({
           {hasRelativeDate && !isPreview && (
             <DropDownMenu
               ariaLabel={`Toggle ${title} Menu`}
+              contentClassName="[&_svg]:hidden"
               menuItems={DASHBOARD_RELATIVE_DAYS.map(({ label, value }) => ({
                 id: value,
                 label,
-                systemIcon: null,
+                systemIcon: "Filter",
                 action: () => {
                   setWidgetRelativeDate({
                     widgetId,

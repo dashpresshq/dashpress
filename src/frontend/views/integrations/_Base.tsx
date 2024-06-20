@@ -1,5 +1,4 @@
 import { useRouteParam } from "frontend/lib/routing/useRouteParam";
-import { useRouter } from "next/router";
 import { ReactNode } from "react";
 import { AppLayout } from "frontend/_layouts/app";
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
@@ -13,6 +12,9 @@ import {
 } from "./actions/actions.store";
 import { fakeMessageDescriptor } from "@/translations/fake";
 import { MenuSection } from "@/components/app/menu-section";
+import { ListSkeleton } from "@/components/app/skeleton/list";
+import { ViewStateMachine } from "@/components/app/view-state-machine";
+import { Card, CardContent } from "@/components/ui/card";
 
 interface IProps {
   children: ReactNode;
@@ -28,26 +30,35 @@ export function BaseActionsLayout({ children }: IProps) {
   const integrationsList = useIntegrationsList();
   const activeIntegrations = useActiveIntegrations();
 
-  const router = useRouter();
-
   return (
     <AppLayout>
       <ContentLayout>
         <ContentLayout.Left>
-          <MenuSection
-            menuItems={integrationsList.data.map((menuitem) => {
-              const isActive = activeIntegrations.data.includes(menuitem.key);
-              return {
-                id: menuitem.key,
-                action: NAVIGATION_LINKS.INTEGRATIONS.ACTIONS(menuitem.key),
-                label: fakeMessageDescriptor(menuitem.title),
-                subtle: !isActive,
-                active: menuitem.key === currentKey,
-                systemIcon: isActive ? "Zap" : "ZapOff",
-              };
-            })}
-            currentMenuItem={router.asPath.split("?")[0]}
-          />
+          <ViewStateMachine
+            loading={integrationsList.isLoading}
+            error={integrationsList.error}
+            loader={
+              <Card>
+                <CardContent>
+                  <ListSkeleton count={8} />
+                </CardContent>
+              </Card>
+            }
+          >
+            <MenuSection
+              menuItems={integrationsList.data.map((menuitem) => {
+                const isActive = activeIntegrations.data.includes(menuitem.key);
+                return {
+                  id: menuitem.key,
+                  action: NAVIGATION_LINKS.INTEGRATIONS.ACTIONS(menuitem.key),
+                  label: fakeMessageDescriptor(menuitem.title),
+                  subtle: !isActive,
+                  active: menuitem.key === currentKey,
+                  systemIcon: isActive ? "Zap" : "ZapOff",
+                };
+              })}
+            />
+          </ViewStateMachine>
 
           <MenuSection
             menuItems={[
@@ -58,7 +69,6 @@ export function BaseActionsLayout({ children }: IProps) {
                 systemIcon: "Upload",
               },
             ]}
-            currentMenuItem={router.asPath.split("?")[0]}
           />
           <MenuSection
             menuItems={[
@@ -69,7 +79,6 @@ export function BaseActionsLayout({ children }: IProps) {
                 systemIcon: "Book",
               },
             ]}
-            currentMenuItem={router.asPath.split("?")[0]}
           />
         </ContentLayout.Left>
         <ContentLayout.Right>{children}</ContentLayout.Right>

@@ -1,28 +1,10 @@
-import styled from "styled-components";
-
 import {
   CheckSquare,
   Icon as IconType,
   MinusSquare,
   Square,
 } from "react-feather";
-import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
-
-const IconWrapper = styled.span<{ $disabled?: boolean }>`
-  align-self: center;
-  width: 16px;
-  height: 16px;
-  border-radius: 2px;
-  cursor: ${(props) => (props.$disabled ? "not-allowed" : "pointer")};
-  color: ${(props) =>
-    props.$disabled
-      ? USE_ROOT_COLOR("muted-text")
-      : USE_ROOT_COLOR("primary-color")};
-`;
-
-const Icon = styled.i`
-  height: 18px;
-`;
+import { cn } from "@/lib/utils";
 
 type CheckboxState = "checked" | "unchecked" | "partial";
 
@@ -35,11 +17,11 @@ export interface IProps {
 
 const IconPerState: Record<
   IProps["state"],
-  { IconCmp: IconType; label: boolean | "mixed" }
+  { IconCmp: IconType; ariaChecked: boolean | "mixed" }
 > = {
-  checked: { IconCmp: CheckSquare, label: true },
-  partial: { IconCmp: MinusSquare, label: "mixed" },
-  unchecked: { IconCmp: Square, label: false },
+  checked: { IconCmp: CheckSquare, ariaChecked: true },
+  partial: { IconCmp: MinusSquare, ariaChecked: "mixed" },
+  unchecked: { IconCmp: Square, ariaChecked: false },
 };
 
 export function IntermediateCheckBox({
@@ -48,20 +30,26 @@ export function IntermediateCheckBox({
   disabled,
   label,
 }: IProps) {
+  const { IconCmp, ariaChecked } = IconPerState[state];
   return (
-    <IconWrapper
+    <i
       role="checkbox"
-      aria-checked={IconPerState[state].label}
+      aria-checked={ariaChecked}
       aria-label={label}
+      className={cn(
+        "self-center w-4 h-4 rounded-sm cursor-pointer text-primary",
+        {
+          "cursor-not-allowed text-muted": disabled,
+        }
+      )}
       tabIndex={0}
-      $disabled={disabled}
       onMouseDown={(e) => {
         e.stopPropagation();
 
         onClick(state);
       }}
     >
-      <Icon as={IconPerState[state].IconCmp} aria-hidden />
-    </IconWrapper>
+      <IconCmp className="h-5 w-5" aria-hidden />
+    </i>
   );
 }

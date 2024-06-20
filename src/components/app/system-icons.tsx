@@ -14,6 +14,10 @@ export function SystemIcon({ icon, label, strokeWidth, className }: IProps) {
     return null;
   }
 
+  if (icon === "none") {
+    return null;
+  }
+
   const iconSvg = systemIconToSVG(icon, strokeWidth);
   return (
     <i

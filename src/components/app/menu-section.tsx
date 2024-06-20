@@ -2,6 +2,7 @@ import { useLingui } from "@lingui/react";
 import Link from "next/link";
 import { Loader } from "react-feather";
 import { VariantProps } from "class-variance-authority";
+import { useRouter } from "next/router";
 import { Card } from "@/components/ui/card";
 import { CommandItem, Command, CommandList } from "@/components/ui/command";
 import { cn } from "@/lib/utils";
@@ -12,16 +13,14 @@ import { SystemIcon } from "./system-icons";
 
 export interface IProps {
   menuItems: IMenuActionItem[];
-  currentMenuItem?: string;
   size?: VariantProps<typeof buttonVariants>["size"];
 }
 
-export function MenuSection({
-  menuItems,
-  currentMenuItem,
-  size = "lg",
-}: IProps) {
+export function MenuSection({ menuItems, size = "lg" }: IProps) {
   const { _ } = useLingui();
+  const router = useRouter();
+
+  const currentPath = router.asPath.split("?")[0];
 
   const confirmAlert = useConfirmAlert();
 
@@ -41,7 +40,9 @@ export function MenuSection({
               ({
                 label,
                 action,
+                active,
                 systemIcon,
+                secondaryAction,
                 subtle,
                 id,
                 variant = "ghost",
@@ -50,9 +51,9 @@ export function MenuSection({
                 isMakingRequest,
                 shouldConfirmAlert,
               }) => {
-                const active = (
-                  typeof action === "string" ? action : ""
-                ).includes(currentMenuItem);
+                const isActive =
+                  active ||
+                  (typeof action === "string" ? action : "") === currentPath;
 
                 const content = (
                   <>
@@ -61,7 +62,7 @@ export function MenuSection({
                     ) : (
                       <SystemIcon
                         className={cn("mr-2 h-4 w-4 text-main", {
-                          "text-primary-text": active,
+                          "text-primary-text": isActive,
                           "text-muted": subtle || disabled,
                           "text-red-600": destructive,
                         })}
@@ -79,7 +80,7 @@ export function MenuSection({
                       buttonVariants({ variant, size }),
                       "text-main hover:text-main hover:cursor-pointer rounded-md hover:bg-hover justify-start",
                       {
-                        "!bg-primary !text-primary-text": active,
+                        "!bg-primary !text-primary-text": isActive,
                         "text-muted hover:text-muted": subtle || disabled,
                         "text-red-600 hover:text-red-600 hover:bg-red-100":
                           destructive,
@@ -91,6 +92,7 @@ export function MenuSection({
                     {typeof action === "string" ? (
                       <Link
                         href={action}
+                        onClick={secondaryAction}
                         target={
                           action.startsWith("http") ? "_blank" : undefined
                         }
@@ -100,6 +102,7 @@ export function MenuSection({
                     ) : (
                       <Button
                         onClick={() => {
+                          secondaryAction?.();
                           if (shouldConfirmAlert) {
                             return confirmAlert({
                               title: shouldConfirmAlert,

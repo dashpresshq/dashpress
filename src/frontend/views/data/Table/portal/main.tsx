@@ -22,12 +22,12 @@ export const useSyncPaginatedDataState = () => {};
 
 export function TableViewComponent({ entity }: { entity: string }) {
   noop(entity);
-  return <span />;
+  return null;
 }
 
 export function TableTopComponent({ entity }: { entity: string }) {
   noop(entity);
-  return <span />;
+  return null;
 }
 
 export const usePortalTableColumns = (entity: string) => {

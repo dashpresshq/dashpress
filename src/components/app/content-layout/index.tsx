@@ -1,19 +1,8 @@
 import { ReactElement, ReactNode } from "react";
-import styled from "styled-components";
-import { BREAKPOINTS } from "@/frontend/design-system/constants";
 
 interface IProps {
   children: ReactNode;
 }
-
-export const GridRoot = styled.div`
-  display: grid;
-  grid-gap: 16px;
-  grid-template-columns: 2fr 8fr;
-  @media (max-width: ${BREAKPOINTS.md}) {
-    grid-template-columns: 1fr;
-  }
-`;
 
 type TContentLayout = ((params: IProps) => ReactElement) & {
   Left: (params: IProps) => ReactElement;
@@ -23,16 +12,20 @@ type TContentLayout = ((params: IProps) => ReactElement) & {
 
 // eslint-disable-next-line react/function-component-definition
 export const ContentLayout: TContentLayout = ({ children }: IProps) => {
-  return <GridRoot>{children}</GridRoot>;
+  return (
+    <div className="grid gap-4 grid-cols-1 md:grid-cols-[2fr,8fr]">
+      {children}
+    </div>
+  );
 };
 
 ContentLayout.Left = function SectionLeft({ children }: IProps) {
-  return <div className="mb-3 flex flex-col gap-3">{children}</div>;
+  return <div className="flex flex-col gap-3">{children}</div>;
 };
 
 ContentLayout.Right = function SectionRight({ children }: IProps) {
   return (
-    <div className="overflow-x-hidden min-h-[calc(100vh-100px)] mb-3 flex flex-col gap-3">
+    <div className="overflow-x-hidden min-h-[calc(100vh-100px)] mb-2 flex flex-col gap-3">
       {children}
     </div>
   );

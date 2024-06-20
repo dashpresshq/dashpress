@@ -16,15 +16,11 @@ import {
   useDashboardWidgets,
   useDeleteDashboardWidgetMutation,
 } from "../dashboard.store";
-import { dashboardGridRoot } from "../styles";
 import { DashboardSkeleton } from "../Skeleton";
 import { DashboardWidget } from "../Widget";
 
 const Root = styled.div`
   container-type: inline-size;
-  .list {
-    ${dashboardGridRoot};
-  }
 `;
 
 interface IProps {
@@ -85,7 +81,7 @@ export function BaseManageDashboard({ dashboardId, doneLink, title }: IProps) {
         <Root>
           <SortableList
             onSortEnd={onSortEnd}
-            className="list"
+            className="dashboard-grid-root"
             aria-label={_(domainMessages.TEXT_LANG.TITLE)}
             draggedItemClassName="dragged"
           >

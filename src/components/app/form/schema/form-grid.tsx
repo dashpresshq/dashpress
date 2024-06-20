@@ -1,13 +1,7 @@
-import { gridItem, gridRoot } from "frontend/design-system/constants/grid";
+import { gridItem } from "frontend/design-system/constants/grid";
 import { ReactNode } from "react";
 import { GridSpanSizes } from "shared/types/ui";
 import styled from "styled-components";
-
-const Root = styled.div`
-  ${gridRoot}
-  grid-auto-rows: auto;
-  align-items: center;
-`;
 
 // TOOD fix
 const Container = styled.div`
@@ -17,7 +11,7 @@ const Container = styled.div`
 export const FormGrid = {
   Root: ({ children }: { children: ReactNode }) => (
     <Container>
-      <Root>{children}</Root>
+      <div className="grid-root auto-rows-auto items-center">{children}</div>
     </Container>
   ),
   Item: styled.div<{

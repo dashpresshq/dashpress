@@ -3,9 +3,9 @@ import { useToggle } from "frontend/hooks/state/useToggleState";
 import { msg } from "@lingui/macro";
 import { IFilterProps } from "../types";
 import { FormSwitch } from "@/components/app/form/input/switch";
-import { ControlledFormDateInput } from "@/frontend/design-system/components/Form/Date";
 import { DATE_FILTER_OPTIONS } from "./constants";
 import { DateSelection } from "./_Selection";
+import { ControlledFormDateInput } from "@/components/app/form/input/date";
 
 export function FilterTableByDate({
   column: { filterValue, setFilter },
@@ -37,6 +37,7 @@ export function FilterTableByDate({
       />
       {new Date(filterValue?.value || "").toString() !== "Invalid Date" ? (
         <>
+          {/* TODO date not changing */}
           <ControlledFormDateInput
             onChange={(value) => {
               setFilter({

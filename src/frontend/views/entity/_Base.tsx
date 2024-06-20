@@ -1,5 +1,4 @@
 import { useNavigationStack } from "frontend/lib/routing/useNavigationStack";
-import { useRouter } from "next/router";
 import { ReactNode } from "react";
 import { useEntitySlug } from "frontend/hooks/entity/entity.config";
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
@@ -86,7 +85,6 @@ interface IProps {
 export function BaseEntitySettingsLayout({ children, actionItems }: IProps) {
   const entity = useEntitySlug();
   const { canGoBack, goBack } = useNavigationStack();
-  const router = useRouter();
 
   const menuItems = useMutateBaseEntitySettingsMenu(
     entity,
@@ -108,10 +106,7 @@ export function BaseEntitySettingsLayout({ children, actionItems }: IProps) {
       )}
       <ContentLayout>
         <ContentLayout.Left>
-          <MenuSection
-            menuItems={menuItems}
-            currentMenuItem={router.asPath.split("?")[0]}
-          />
+          <MenuSection menuItems={menuItems} />
         </ContentLayout.Left>
         <ContentLayout.Right>{children}</ContentLayout.Right>
       </ContentLayout>

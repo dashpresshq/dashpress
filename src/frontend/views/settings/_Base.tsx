@@ -1,6 +1,4 @@
-import { useRouter } from "next/router";
 import { ReactNode } from "react";
-
 import { AppLayout } from "frontend/_layouts/app";
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
 import { msg } from "@lingui/macro";
@@ -66,16 +64,12 @@ const baseMenuItems: IMenuActionItem[] = [
 ];
 
 export function BaseSettingsLayout({ children }: IProps) {
-  const router = useRouter();
   const menuItems = useMutateBaseSettingsMenu(baseMenuItems);
   return (
     <AppLayout>
       <ContentLayout>
         <ContentLayout.Left>
-          <MenuSection
-            menuItems={menuItems}
-            currentMenuItem={router.asPath.split("?")[0]}
-          />
+          <MenuSection menuItems={menuItems} />
         </ContentLayout.Left>
         <ContentLayout.Right>{children}</ContentLayout.Right>
       </ContentLayout>

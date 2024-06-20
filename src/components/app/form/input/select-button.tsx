@@ -1,4 +1,3 @@
-import styled from "styled-components";
 import { sluggify } from "shared/lib/strings";
 import { ISelectData } from "shared/types/options";
 import { useLingui } from "@lingui/react";
@@ -7,28 +6,6 @@ import { Button, buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { LabelAndError } from "./label-and-error";
 import { IBaseFormSelect } from "@/frontend/design-system/components/Form/Select/types";
-
-const Input = styled.input`
-  position: absolute;
-  clip: rect(0, 0, 0, 0);
-  pointer-events: none;
-`;
-
-const Root = styled.div`
-  position: relative;
-  display: inline-flex;
-  vertical-align: middle;
-
-  & > button:not(:last-child) {
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
-  }
-  & > button:not(:first-child) {
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
-    margin-left: -1px;
-  }
-`;
 
 interface IFormSelect extends IBaseFormSelect {
   selectData: ISelectData[];
@@ -41,7 +18,7 @@ export function FormSelectButton(formInput: IFormSelect) {
   const { _ } = useLingui();
   return (
     <LabelAndError formInput={formInput}>
-      <Root>
+      <div className="inline-flex">
         {selectData.map(({ value, label }, index) => {
           const isChecked =
             input.value === value || (index === 0 && input.value === undefined);
@@ -55,13 +32,17 @@ export function FormSelectButton(formInput: IFormSelect) {
               aria-selected={isChecked}
               disabled={disabled}
               key={`${value}`}
-              className={cn({
-                "bg-primary text-primary-text": isChecked,
-              })}
+              className={cn(
+                "rounded-none border-l-0 last:rounded-r-sm first:rounded-l-sm first:border-l",
+                {
+                  "bg-primary text-primary-text": isChecked,
+                }
+              )}
               onClick={() => input.onChange(value)}
             >
-              <Input
+              <input
                 type="radio"
+                className="sr-only pointer-events-none"
                 name={`${input.name}__${sluggify(
                   // eslint-disable-next-line no-nested-ternary
                   typeof value === "boolean"
@@ -77,7 +58,7 @@ export function FormSelectButton(formInput: IFormSelect) {
             </Button>
           );
         })}
-      </Root>
+      </div>
     </LabelAndError>
   );
 }

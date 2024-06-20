@@ -10,12 +10,8 @@ import { FormInput } from "./text";
 import { FormNumberInput } from "./number";
 import { FormRichTextArea } from "../../../../frontend/design-system/components/Form/RichText";
 import { FormTextArea } from "./textarea";
-import {
-  FormMultiSelect,
-  FormSelect,
-} from "../../../../frontend/design-system/components/Form/Select";
+import { FormMultiSelect } from "../../../../frontend/design-system/components/Form/Select";
 import { FormCodeEditor } from "../../../../frontend/design-system/components/Form/CodeEditor";
-import { AsyncFormSelect } from "../../../../frontend/design-system/components/Form/Select/Async";
 import { FormSwitch } from "./switch";
 import { FormFileInput } from "../../../../frontend/design-system/components/Form/File";
 import { FormSelectButton } from "./select-button";
@@ -24,6 +20,8 @@ import { FormPasswordInput } from "./password";
 import { FormButton } from "../../button/form";
 import { ActionButtons } from "../../button/action";
 import { FormDateInput } from "./date";
+import { AsyncFormSelect } from "./select-async";
+import { FormSelect } from "./select";
 
 function DemoForm() {
   return (

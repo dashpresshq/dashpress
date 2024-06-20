@@ -1,31 +1,20 @@
-import { useState } from "react";
-import debounce from "lodash/debounce";
 import AsyncSelect from "react-select/async";
 import styled from "styled-components";
-import { useAsync, useSessionStorage } from "react-use";
+import { useSessionStorage } from "react-use";
 import { ILabelValue, ISelectData } from "shared/types/options";
-import { useApi } from "frontend/lib/data/useApi";
 import { ApiRequest } from "frontend/lib/data/makeRequest";
-import { useLingui } from "@lingui/react";
-import { FormSelect } from "..";
-import { IBaseFormSelect } from "../types";
+import { debounce } from "lodash";
 import { SelectStyles, SharedSelectProps } from "../styles";
-import { ErrorAlert } from "@/components/app/alert";
-import {
-  LabelAndError,
-  generateClassNames,
-  generateFormArias,
-} from "@/components/app/form/input/label-and-error";
-
-interface IProps extends IBaseFormSelect {
-  url: string;
-  referenceUrl?: (value: string) => string;
-  limit?: number;
-}
 
 export const Select = styled(AsyncSelect)`
   ${SelectStyles}
 `;
+
+interface IFormMultiSelect {
+  url: string;
+  values: string[];
+  onChange: (values: string[]) => void;
+}
 
 const debouncedSearch = debounce(
   async (
@@ -43,95 +32,6 @@ const debouncedSearch = debounce(
   },
   700
 );
-
-export function AsyncFormSelect(props: IProps) {
-  const {
-    input,
-    url,
-    referenceUrl,
-    limit = 50,
-    meta,
-    disabled,
-    label: formLabel,
-    disabledOptions = [],
-    placeholder,
-  } = props;
-
-  const [valueLabel, setValueLabel] = useState("");
-
-  const { _ } = useLingui();
-
-  const { isLoading, error, data } = useApi<ISelectData[]>(url, {
-    defaultData: [],
-  });
-
-  const valueLabelToUse = useAsync(async () => {
-    if (valueLabel) {
-      return valueLabel;
-    }
-
-    if (isLoading) {
-      return "Loading Options...";
-    }
-
-    if (!input.value) {
-      return placeholder ? _(placeholder) : `--- Select ${_(formLabel)} ---`;
-    }
-
-    const isValueInFirstDataLoad = data.find(
-      ({ value }: ISelectData) => value === input.value
-    );
-
-    if (isValueInFirstDataLoad) {
-      return isValueInFirstDataLoad?.label;
-    }
-    if (!referenceUrl) {
-      return input.value;
-    }
-    return await ApiRequest.GET(referenceUrl(input.value));
-  }, [url, valueLabel, isLoading]);
-
-  if (error) {
-    return <ErrorAlert message={error} />;
-  }
-
-  if (data.length >= limit) {
-    return (
-      <LabelAndError formInput={props}>
-        <Select
-          cacheOptions
-          defaultOptions
-          {...input}
-          {...generateFormArias(meta)}
-          onChange={({ value, label }: any) => {
-            input.onChange(value);
-            setValueLabel(label);
-          }}
-          id={input.name}
-          classNamePrefix={SharedSelectProps.classNamePrefix}
-          isDisabled={disabled}
-          isLoading={isLoading}
-          placeholder={placeholder ? _(placeholder) : null}
-          className={generateClassNames(meta)}
-          value={{ value: input.value, label: valueLabelToUse.value }}
-          loadOptions={(inputValue) =>
-            new Promise((resolve) => {
-              debouncedSearch(inputValue, url, disabledOptions, resolve);
-            }) as unknown as void
-          }
-        />
-      </LabelAndError>
-    );
-  }
-
-  return <FormSelect {...props} selectData={data} />;
-}
-
-interface IFormMultiSelect {
-  url: string;
-  values: string[];
-  onChange: (values: string[]) => void;
-}
 
 export function AsyncFormMultiSelect({
   url,

@@ -10,7 +10,6 @@ import {
   composeValidators,
   maxLength,
 } from "frontend/lib/validations";
-import { FormSelect } from "frontend/design-system/components/Form/Select";
 import { IFormInputRightAction } from "shared/form-schemas/types";
 import { msg } from "@lingui/macro";
 import { typescriptSafeObjectDotEntries } from "shared/lib/objects";
@@ -18,6 +17,7 @@ import { FormButton } from "@/components/app/button/form";
 import { FieldSelectionCanvas } from "./FieldsSelection";
 import { FieldValidationCanvas } from "./FieldsValidation";
 import { OffCanvas } from "@/components/app/off-canvas";
+import { FormSelect } from "@/components/app/form/input/select";
 
 const FIELD_TYPES_CONFIG_MAP_AS_SELECTION = typescriptSafeObjectDotEntries(
   FIELD_TYPES_CONFIG_MAP

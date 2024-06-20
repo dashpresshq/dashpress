@@ -55,7 +55,7 @@ export const SignIn: CustomNextPage = () => {
   ]);
 
   if (setupCheck || !render) {
-    return <ComponentIsLoading />;
+    return <ComponentIsLoading fullPage />;
   }
 
   return (

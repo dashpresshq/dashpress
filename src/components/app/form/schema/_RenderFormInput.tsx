@@ -1,5 +1,3 @@
-import { FormSelect } from "frontend/design-system/components/Form/Select";
-import { AsyncFormSelect } from "frontend/design-system/components/Form/Select/Async";
 import { FormCodeEditor } from "frontend/design-system/components/Form/CodeEditor";
 import { FormFileInput } from "frontend/design-system/components/Form/File";
 import { FormRichTextArea } from "frontend/design-system/components/Form/RichText";
@@ -13,6 +11,8 @@ import { FormPasswordInput } from "../input/password";
 import { FormTextArea } from "../input/textarea";
 import { FormSwitch } from "../input/switch";
 import { FormDateInput } from "../input/date";
+import { FormSelect } from "../input/select";
+import { AsyncFormSelect } from "../input/select-async";
 
 export function RenderFormInput(props: IRenderFormInputProps) {
   const {

@@ -114,7 +114,7 @@ export function ControlledFormDateInput({
     </Popover>
   );
 }
-// TODO fix date
+// TODO fix date with timezone
 export function FormDateInput(formInput: IFormDateInput) {
   const { input, disabled, meta, minDate, maxDate } = formInput;
   let { value } = input;

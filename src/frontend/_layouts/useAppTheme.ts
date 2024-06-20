@@ -6,7 +6,7 @@ import { ColorSchemes } from "shared/types/ui";
 import { processThemeColors } from "./portal";
 import { getThemePrimaryColor } from "./utils";
 
-export const useUserThemePreference = () => {
+const useUserThemePreference = () => {
   const themeColor = useAppConfiguration("theme_color");
   const userPreferences = useUserPreference("theme");
 

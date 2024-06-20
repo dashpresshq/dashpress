@@ -12,6 +12,7 @@ import { useLingui } from "@lingui/react";
 import { MessageDescriptor } from "@lingui/core";
 import { cn } from "@/lib/utils";
 import { ISelectData } from "@/shared/types/options";
+import { FormSearch } from "../app/form/input/search";
 
 const SelectRoot = SelectPrimitive.Root;
 
@@ -150,7 +151,7 @@ const SelectSeparator = React.forwardRef<
 ));
 SelectSeparator.displayName = SelectPrimitive.Separator.displayName;
 
-interface IProps {
+export interface ISelectProps {
   options: ISelectData[];
   onChange: (value: string) => void;
   value: string;
@@ -159,6 +160,12 @@ interface IProps {
   placeholder: MessageDescriptor;
   disabled?: boolean;
   disabledOptions?: Array<string>;
+  onSearch?: {
+    onChange: (value: string) => void;
+    value: string;
+    isLoading: boolean;
+    valueLabel?: string;
+  };
 }
 
 export function Select({
@@ -169,9 +176,13 @@ export function Select({
   name,
   placeholder,
   className,
+  onSearch,
   disabledOptions,
-}: IProps) {
+}: ISelectProps) {
   const { _ } = useLingui();
+
+  const valueLabel = options.find((option) => option.value === value)?.label;
+
   return (
     <SelectRoot onValueChange={onChange} value={value}>
       <SelectTrigger
@@ -180,9 +191,19 @@ export function Select({
         id={name}
         disabled={disabled}
       >
-        <SelectValue placeholder={_(placeholder)} />
+        <SelectValue placeholder={_(placeholder)}>
+          {onSearch?.valueLabel || (valueLabel ? _(valueLabel) : null)}
+        </SelectValue>
       </SelectTrigger>
       <SelectContent>
+        {onSearch && (
+          <div className="mb-1">
+            <FormSearch
+              onChange={onSearch.onChange}
+              loading={onSearch.isLoading}
+            />
+          </div>
+        )}
         {options.map(({ value: value$1, label }) => (
           <SelectItem
             key={`${value$1}`}

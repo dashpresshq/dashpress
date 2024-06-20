@@ -6,7 +6,6 @@ import { ACTIONS_ACCESSOR } from "frontend/views/data/Table/useTableColumns";
 import { useAppConfigurationDomainMessages } from "frontend/hooks/configuration/configuration.constant";
 import { composeValidators, required } from "frontend/lib/validations";
 import { IFormProps } from "frontend/lib/form/types";
-import { FormSelect } from "frontend/design-system/components/Form/Select";
 import { Fragment } from "react";
 import { msg } from "@lingui/macro";
 import { typescriptSafeObjectDotEntries } from "shared/lib/objects";
@@ -20,6 +19,7 @@ import { ITableColumn } from "@/components/app/table/types";
 import { FILTER_OPERATOR_CONFIG } from "@/components/app/table/filters/constants";
 import { FormGrid } from "@/components/app/form/schema/form-grid";
 import { FormSelectButton } from "@/components/app/form/input/select-button";
+import { FormSelect } from "@/components/app/form/input/select";
 
 const OPERATOR_SELECTORS = [
   {

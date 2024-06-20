@@ -34,7 +34,7 @@ export const BASE_WIDGET_CONFIG: Partial<
     schema: SummaryCardWidgetSchema,
     LoadingComponent: () => (
       <div className="flex justify-between">
-        <div className="flex items-center">
+        <div className="flex items-center gap-2">
           <Skeleton className="h-10 w-10 rounded-full" />
           <Skeleton className="h-8 w-24" />
         </div>

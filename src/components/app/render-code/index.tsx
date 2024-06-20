@@ -9,13 +9,6 @@ export interface IProps {
 }
 
 const Root = styled.div`
-  overflow-x: auto;
-  margin-bottom: 1rem;
-
-  pre {
-    min-height: 50px;
-  }
-
   pre[class*="language-"].line-numbers {
     position: relative;
     padding-left: 3.8em;
@@ -61,7 +54,7 @@ const Root = styled.div`
 
 export function RenderCode({ input }: IProps) {
   return (
-    <Root className="line-numbers">
+    <Root className="line-numbers bg-soft rounded-lg text-sm p-2 mb-1 overflow-x-auto">
       <pre>
         <code
           dangerouslySetInnerHTML={{

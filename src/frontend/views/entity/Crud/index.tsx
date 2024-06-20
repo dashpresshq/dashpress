@@ -190,7 +190,7 @@ export function EntityCrudSettings() {
               label: ENTITY_CRUD_LABELS[key],
               id: key,
               content: render,
-              disabled,
+              muted: disabled,
             })
           )}
         />

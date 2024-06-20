@@ -4,12 +4,14 @@ import { MessageDescriptor } from "@lingui/core";
 import * as TabsPrimitive from "@radix-ui/react-tabs";
 import { useLingui } from "@lingui/react";
 import { TabsContent, TabsList, TabsTrigger } from "../ui/tabs";
+import { cn } from "@/lib/utils";
 
 interface IProps {
   contents: {
     label: MessageDescriptor;
     id: string;
     content: ReactNode;
+    muted?: boolean;
   }[];
   currentTab?: string;
   onChange?: (tab: string) => void;
@@ -51,8 +53,12 @@ export function Tabs({ contents, currentTab, onChange }: IProps) {
       onValueChange={changeTab}
     >
       <TabsList>
-        {contents.map(({ label, id }) => (
-          <TabsTrigger value={id} key={id}>
+        {contents.map(({ label, id, muted }) => (
+          <TabsTrigger
+            value={id}
+            key={id}
+            className={cn({ "!text-muted": muted })}
+          >
             {_(label)}
           </TabsTrigger>
         ))}

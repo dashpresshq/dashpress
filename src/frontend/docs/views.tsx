@@ -7,21 +7,21 @@ export function ViewsDocumentation() {
         Views enable you to implement query tabs. Say you have an{" "}
         <code>Orders </code> table and you want to show different queries on the
         table like
-        <ul>
-          <li>
-            <code>Latest Orders</code>
-          </li>
-          <li>
-            <code>Priority Orders </code>
-          </li>
-          <li>
-            <code>Active Orders</code>
-          </li>
-          <li>
-            <code>Completed Orders </code>
-          </li>
-        </ul>
       </p>
+      <ul>
+        <li>
+          <code>Latest Orders</code>
+        </li>
+        <li>
+          <code>Priority Orders </code>
+        </li>
+        <li>
+          <code>Active Orders</code>
+        </li>
+        <li>
+          <code>Completed Orders </code>
+        </li>
+      </ul>
       <p>You can do this by:</p>
       <p>
         <ol>

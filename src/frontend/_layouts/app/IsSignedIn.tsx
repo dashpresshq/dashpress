@@ -17,7 +17,7 @@ export function IsSignedIn({ children }: { children: ReactNode }) {
   }, [typeof window]);
 
   if (renderMode.isOff) {
-    return <ComponentIsLoading />;
+    return <ComponentIsLoading fullPage />;
   }
   // eslint-disable-next-line react/jsx-no-useless-fragment
   return <>{children}</>;

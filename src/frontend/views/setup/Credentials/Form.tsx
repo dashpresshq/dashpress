@@ -6,7 +6,6 @@ import {
 import { upperCaseFirstLetter } from "shared/lib/strings";
 import { required } from "frontend/lib/validations";
 import { IFormProps } from "frontend/lib/form/types";
-import { FormSelect } from "frontend/design-system/components/Form/Select";
 import { useToggle } from "frontend/hooks/state/useToggleState";
 import { msg } from "@lingui/macro";
 import { typescriptSafeObjectDotKeys } from "shared/lib/objects";
@@ -14,6 +13,7 @@ import { FormButton } from "@/components/app/button/form";
 import { FormInput } from "@/components/app/form/input/text";
 import { FormSwitch } from "@/components/app/form/input/switch";
 import { FormNumberInput } from "@/components/app/form/input/number";
+import { FormSelect } from "@/components/app/form/input/select";
 
 export function CredentialsSetupForm({
   onSubmit,

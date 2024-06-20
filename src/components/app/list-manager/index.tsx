@@ -6,15 +6,13 @@ import SortableList, { SortableItem } from "react-easy-sort";
 import { Z_INDEXES } from "frontend/design-system/constants/zIndex";
 import { sortListByOrder } from "shared/lib/array/sort";
 import { msg } from "@lingui/macro";
-import { useLingui } from "@lingui/react";
 import { defaultSearchFunction, defaultToEmptyArray } from "./utils";
 import { IListMangerItemProps, ListManagerItem } from "./list-manager-item";
-import { Input } from "@/components/ui/input";
 import { IEmptyWrapperProps } from "../empty-wrapper/types";
 import { ViewStateMachine } from "../view-state-machine";
 import { ListSkeleton } from "../skeleton/list";
 import { EmptyWrapper } from "../empty-wrapper";
-import { SystemIcon } from "../system-icons";
+import { FormSearch } from "../form/input/search";
 
 const SEARCH_THRESHOLD = 10;
 
@@ -31,26 +29,6 @@ const Root = styled.ul`
     cursor: grabbing;
   }
 `;
-
-function FormSearch({ onChange }: { onChange: (value: string) => void }) {
-  const { _ } = useLingui();
-  return (
-    <div className="relative flex w-full">
-      <Input
-        className="rounded-none focus-visible:ring-0 pl-3 border-t-0 border-x-0"
-        type="search"
-        onChange={(e) => onChange(e.target.value.toLowerCase())}
-        placeholder={_(msg`Search`)}
-      />
-      <button
-        className="text-primary px-3 border-b border-border"
-        type="button"
-      >
-        <SystemIcon icon="Search" className="w-5 h-5" />
-      </button>
-    </div>
-  );
-}
 
 type StringProps<T> = {
   [K in keyof T]: T[K] extends string ? K : never;

@@ -9,7 +9,6 @@ import { resetFormValues } from "frontend/lib/form/utils";
 import { ApiRequest } from "frontend/lib/data/makeRequest";
 import { IFormProps } from "frontend/lib/form/types";
 import { ILabelValue } from "shared/types/options";
-import { FormSelect } from "frontend/design-system/components/Form/Select";
 import { FormCodeEditor } from "frontend/design-system/components/Form/CodeEditor";
 import { loadedDataState } from "frontend/lib/data/constants/loadedDataState";
 import { useDocumentationActionButton } from "frontend/docs/constants";
@@ -36,6 +35,7 @@ import { ViewStateMachine } from "@/components/app/view-state-machine";
 import { Tabs } from "@/components/app/tabs";
 import { SoftButton } from "@/components/app/button/soft";
 import { FormButton } from "@/components/app/button/form";
+import { FormSelect } from "@/components/app/form/input/select";
 
 const FormSchema: Partial<Record<IWidgetConfig["_type"], WidgetFormField[]>> = {
   "summary-card": ["color", "icon"],

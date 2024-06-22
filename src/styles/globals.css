@@ -11,18 +11,7 @@
     --base: 215, 21%, 11%;
     --foundation: 216, 28%, 7%;
     --primary: 249, 52%, 46%;
-    --primary-text: 0, 0%, 100%;
-    --shade-text: 0, 0%, 100%;  */
-
-    --soft: 213, 47%, 96%;
-    --muted: 227, 22%, 71%;
-    --main: 229, 8%, 41%;
-    --border: 215, 51%, 93%;
-    --base: 0, 0%, 100%;
-    --foundation: 210, 33%, 96%;
-    --primary: 249, 52%, 46%;
-    --primary-text: 0, 0%, 100%;
-    --shade-text: 249, 52%, 46%;
+    --primary-text: 0, 0%, 100%; */
 
     /* --secondary: 240 4.8% 95.9%;
     --secondary-foreground: 240 5.9% 10%; */
@@ -40,6 +29,43 @@
     --foreground: 240 10% 3.9%; */
 
     --radius: 0.5rem;
+
+    --light-primary-alpha-opacity: 0.1;
+    --dark-primary-alpha-opacity: 0.5;
+
+    --app-primary: 249, 52%, 46%;
+
+    --white: 0, 0%, 100%;
+  }
+
+  [data-theme="light"] {
+    --dp-primary: var(--app-primary);
+    --dp-primary-text: var(--white);
+
+    --dp-soft: 213, 47%, 96%;
+    --dp-muted: 227, 22%, 71%;
+    --dp-main: 229, 8%, 41%;
+    --dp-border: 215, 51%, 93%;
+    --dp-base: 0, 0%, 100%;
+    --dp-foundation: 210, 33%, 96%;
+
+    --dp-primary-alpha-opacity: var(--light-primary-alpha-opacity);
+    --dp-primary-alpha-text: var(--app-primary);
+  }
+
+  [data-theme="dark"] {
+    --dp-primary: var(--app-primary);
+    --dp-primary-text: var(--white);
+
+    --dp-soft: 215, 15%, 15%;
+    --dp-muted: 212, 9%, 58%;
+    --dp-main: 210, 17%, 82%;
+    --dp-border: 212, 12%, 21%;
+    --dp-base: 215, 21%, 11%;
+    --dp-foundation: 216, 28%, 7%;
+
+    --dp-primary-alpha-opacity: var(--dark-primary-alpha-opacity);
+    --dp-primary-alpha-text: var(--white);
   }
 }
 
@@ -62,7 +88,7 @@
 
 @layer components {
   .input-base {
-    @apply flex w-full rounded-md border border-border px-3 py-1 text-sm shadow-sm transition-colors placeholder:text-muted font-normal;
+    @apply bg-base flex w-full rounded-md border border-border px-3 py-1 text-sm shadow-sm transition-colors placeholder:text-muted font-normal;
     @apply focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary;
     @apply disabled:cursor-not-allowed disabled:bg-soft disabled:opacity-70;
   }

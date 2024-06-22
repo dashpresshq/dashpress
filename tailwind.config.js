@@ -1,7 +1,4 @@
 const { fontFamily } = require("tailwindcss/defaultTheme");
-// const {
-//   default: flattenColorPalette,
-// } = require("tailwindcss/lib/util/flattenColorPalette");
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -21,34 +18,31 @@ module.exports = {
         // ring: "hsl(var(--ring))",
         // background: "hsl(var(--background))",
         // foreground: "hsl(var(--foreground))",
-        soft: "hsl(var(--soft))",
-        muted: "hsl(var(--muted))",
-        main: "hsl(var(--main))",
-        border: "hsl(var(--border))",
-        base: "hsl(var(--base))",
-        foundation: "hsl(var(--foundation))",
-        "primary-text": "hsl(var(--primary-text))",
-        hover: "hsla(var(--border), 0.3)",
+        soft: "hsl(var(--dp-soft))",
+        muted: "hsl(var(--dp-muted))",
+        main: "hsl(var(--dp-main))",
+        border: "hsl(var(--dp-border))",
+        base: "hsl(var(--dp-base))",
+        foundation: "hsl(var(--dp-foundation))",
+        "primary-text": "hsl(var(--dp-primary-text))",
+        hover: "hsla(var(--dp-border), 0.3)",
         primary: {
-          DEFAULT: "hsl(var(--primary))",
-          "shade-light": "hsla(var(--primary), 0.1)",
-          "shade-thick": "hsla(var(--primary), 0.85)",
-          "shade-thick-xl": "hsla(var(--primary), 0.9)",
-          "shade-thick-xxl": "hsla(var(--primary), 0.95)",
+          DEFAULT: "hsl(var(--dp-primary))",
+          alpha: "hsla(var(--dp-primary), var(--dp-primary-alpha-opacity))",
+          "alpha-text": "hsl(var(--dp-primary-alpha-text))",
+          "shade-thick": "hsla(var(--dp-primary), 0.85)",
+          "shade-thick-xl": "hsla(var(--dp-primary), 0.9)",
+          "shade-thick-xxl": "hsla(var(--dp-primary), 0.95)",
         },
-        "shade-text": "hsl(var(--shade-text))",
 
         // secondary: {
         //   DEFAULT: "hsl(var(--secondary))",
-        //   foreground: "hsl(var(--secondary-foreground))",
         // },
         // destructive: {
         //   DEFAULT: "hsl(var(--destructive))",
-        //   foreground: "hsl(var(--destructive-foreground))",
         // },
         // accent: {
         //   DEFAULT: "hsl(var(--accent))",
-        //   foreground: "hsl(var(--accent-foreground))",
         // },
       },
       borderRadius: {
@@ -79,17 +73,5 @@ module.exports = {
   plugins: [
     require("tailwindcss-animate"),
     // require("@tailwindcss/typography"),
-    // addVariablesForColors,
   ],
 };
-
-// function addVariablesForColors({ addBase, theme }) {
-//   const allColors = flattenColorPalette(theme("colors"));
-//   const newVars = Object.fromEntries(
-//     Object.entries(allColors).map(([key, val]) => [`--${key}`, val])
-//   );
-
-//   addBase({
-//     ":root": newVars,
-//   });
-// }

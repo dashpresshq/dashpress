@@ -1,11 +1,11 @@
 import { ISummaryWidgetConfig } from "shared/types/dashboard";
 import { systemIconToSVG } from "shared/constants/Icons";
-import { SummaryWidget as SummaryWidgetPresentation } from "frontend/design-system/components/Widgets/Summary";
 import { SummaryCardWidgetSchema } from "./types";
 import {
   getFullAndRelativeCount,
   splitSummaryCardWidgetDataToRelativeCount,
 } from "./getFullAndRelativeCount";
+import { SummaryWidgetPresentation } from "./Presentation";
 
 interface IProps {
   config: ISummaryWidgetConfig;

@@ -25,7 +25,7 @@ ContentLayout.Left = function SectionLeft({ children }: IProps) {
 
 ContentLayout.Right = function SectionRight({ children }: IProps) {
   return (
-    <div className="overflow-x-hidden min-h-[calc(100vh-100px)] mb-2 flex flex-col gap-3">
+    <div className="overflow-x-hidden min-h-[calc(100vh-100px)] mb-2 flex flex-col gap-4">
       {children}
     </div>
   );

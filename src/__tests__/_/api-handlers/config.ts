@@ -72,7 +72,6 @@ const CONFIG_VALUES = {
   default_date_format: "do MMM yyyy",
   theme_color: {
     primary: `#4b38b3`,
-    primaryDark: `#111111`,
   },
   metadata_columns: {
     createdAt: `created_at`,

@@ -4,14 +4,8 @@ import {
   useAppConfiguration,
   useUpsertConfigurationMutation,
 } from "frontend/hooks/configuration/configuration.store";
-import {
-  useUpsertUserPreferenceMutation,
-  useUserPreference,
-} from "frontend/hooks/auth/preferences.store";
 import { useAppConfigurationDomainMessages } from "frontend/hooks/configuration/configuration.constant";
-import { ColorSchemes } from "shared/types/ui";
 import { AppConfigurationValueType } from "shared/configurations/constants";
-import { UPDATE_USER_PREFERENCES_FORM_SCHEMA } from "frontend/views/account/Preferences/constants";
 import { msg } from "@lingui/macro";
 import { SchemaForm } from "@/components/app/form/schema";
 import { ViewStateMachine } from "@/components/app/view-state-machine";
@@ -23,19 +17,14 @@ import { SectionBox } from "@/components/app/section-box";
 import { BaseSettingsLayout } from "../_Base";
 import { SETTINGS_VIEW_KEY } from "../constants";
 
-type Settings = AppConfigurationValueType<"theme_color"> & {
-  theme: ColorSchemes;
-};
+type Settings = AppConfigurationValueType<"theme_color">;
 
 export function ThemeSettings() {
   const themeColor = useAppConfiguration("theme_color");
   const domainMessages = useAppConfigurationDomainMessages("theme_color");
-  const userPreference = useUserPreference("theme");
 
   const upsertConfigurationMutation =
     useUpsertConfigurationMutation("theme_color");
-
-  const upsertUserPreferenceMutation = useUpsertUserPreferenceMutation("theme");
 
   useSetPageDetails({
     pageTitle: domainMessages.TEXT_LANG.TITLE,
@@ -47,49 +36,29 @@ export function ThemeSettings() {
     <BaseSettingsLayout>
       <SectionBox title={domainMessages.TEXT_LANG.TITLE}>
         <ViewStateMachine
-          loading={themeColor.isLoading || userPreference.isLoading}
-          error={themeColor.error || userPreference.error}
+          loading={themeColor.isLoading}
+          error={themeColor.error}
           loader={<FormSkeleton schema={[FormSkeletonSchema.Input]} />}
         >
           <SchemaForm<Settings>
-            onSubmit={async ({ primary, primaryDark, theme }) => {
-              await Promise.all([
-                upsertUserPreferenceMutation.mutateAsync(theme),
-                upsertConfigurationMutation.mutateAsync({
-                  primary,
-                  primaryDark,
-                }),
-              ]);
+            onSubmit={async ({ primary }) => {
+              await upsertConfigurationMutation.mutateAsync({
+                primary,
+              });
             }}
-            initialValues={{ ...themeColor.data, theme: userPreference.data }}
+            initialValues={{ ...themeColor.data }}
             systemIcon="Save"
             buttonText={domainMessages.FORM_LANG.UPSERT}
             fields={{
               primary: {
-                label: msg`Light Color Scheme`,
+                label: msg`Color Scheme`,
                 type: "color",
                 validations: [
                   {
                     validationType: "required",
                   },
                 ],
-                formState: ($) => ({
-                  hidden: $.formValues.theme === "dark" || !$.formValues.theme,
-                }),
               },
-              primaryDark: {
-                label: msg`Dark Color Scheme`,
-                type: "color",
-                validations: [
-                  {
-                    validationType: "required",
-                  },
-                ],
-                formState: ($) => ({
-                  hidden: $.formValues.theme === "light" || !$.formValues.theme,
-                }),
-              },
-              theme: UPDATE_USER_PREFERENCES_FORM_SCHEMA.theme,
             }}
           />
         </ViewStateMachine>

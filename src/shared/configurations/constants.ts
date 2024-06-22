@@ -188,7 +188,6 @@ export const APP_CONFIGURATION_CONFIG = {
     guest: true,
     defaultValue: {
       primary: "#4b38b3",
-      primaryDark: "#8c68cd",
     },
   },
   site_settings: {

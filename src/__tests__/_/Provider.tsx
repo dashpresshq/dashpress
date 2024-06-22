@@ -1,6 +1,5 @@
 import { ReactNode } from "react";
 import { Toaster } from "react-hot-toast";
-import { ThemeContextProvider } from "frontend/design-system/theme/Context";
 import { LinguiProvider } from "translations/utils";
 import { Messages } from "@lingui/core";
 import {
@@ -8,6 +7,7 @@ import {
   QueryClient,
   QueryClientProvider,
 } from "@tanstack/react-query";
+import { ThemeProvider } from "next-themes";
 import { ConfirmAlert } from "@/components/app/confirm-alert";
 
 export const queryCache = new QueryCache();
@@ -45,7 +45,7 @@ export function TestProviders({
   translation?: Messages;
 }) {
   return (
-    <ThemeContextProvider>
+    <ThemeProvider>
       <LinguiProvider translation={translation}>
         <QueryProvider>
           <Toaster />
@@ -53,6 +53,6 @@ export function TestProviders({
           {children}
         </QueryProvider>
       </LinguiProvider>
-    </ThemeContextProvider>
+    </ThemeProvider>
   );
 }

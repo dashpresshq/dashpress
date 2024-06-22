@@ -66,25 +66,28 @@ export function AuthLayout({ children, title, subTitle }: IProps) {
                 gradientUnits="userSpaceOnUse"
                 gradientTransform="translate(-804.109 -2036.8) rotate(64.9401) scale(6436.87 6304.81)"
               >
-                <stop stopColor="hsla(var(--primary), 0.85)" />
+                <stop stopColor="hsla(var(--dp-primary), 0.85)" />
                 <stop
                   offset="0.0833333"
-                  stopColor="hsla(var(--primary), 0.95)"
+                  stopColor="hsla(var(--dp-primary), 0.95)"
                 />
                 <stop
                   offset="0.364583"
-                  stopColor="#hsla(var(--primary), 0.55)"
+                  stopColor="#hsla(var(--dp-primary), 0.55)"
                 />
                 <stop
                   offset="0.658041"
-                  stopColor="hsla(var(--primary), 0.85)"
+                  stopColor="hsla(var(--dp-primary), 0.85)"
                 />
-                <stop offset="0.798521" stopColor="hsla(var(--primary), 0.1)" />
+                <stop
+                  offset="0.798521"
+                  stopColor="hsla(var(--dp-primary), 0.1)"
+                />
                 <stop
                   offset="0.942708"
-                  stopColor="hsla(var(--primary), 0.85)"
+                  stopColor="hsla(var(--dp-primary), 0.85)"
                 />
-                <stop offset="1" stopColor="hsla(var(--primary), 0.85)" />
+                <stop offset="1" stopColor="hsla(var(--dp-primary), 0.85)" />
               </radialGradient>
               <radialGradient
                 id="paint1_radial_37_453-1"
@@ -94,25 +97,28 @@ export function AuthLayout({ children, title, subTitle }: IProps) {
                 gradientUnits="userSpaceOnUse"
                 gradientTransform="translate(201.6 -1080.02) rotate(64.9401) scale(6436.87 6304.81)"
               >
-                <stop stopColor="hsla(var(--primary), 0.85)" />
+                <stop stopColor="hsla(var(--dp-primary), 0.85)" />
                 <stop
                   offset="0.0833333"
-                  stopColor="hsla(var(--primary), 0.75)"
+                  stopColor="hsla(var(--dp-primary), 0.75)"
                 />
                 <stop
                   offset="0.333803"
-                  stopColor="hsla(var(--primary), 0.55)"
+                  stopColor="hsla(var(--dp-primary), 0.55)"
                 />
                 <stop
                   offset="0.658041"
-                  stopColor="hsla(var(--primary), 0.85)"
+                  stopColor="hsla(var(--dp-primary), 0.85)"
                 />
-                <stop offset="0.798521" stopColor="hsla(var(--primary), 0.1)" />
+                <stop
+                  offset="0.798521"
+                  stopColor="hsla(var(--dp-primary), 0.1)"
+                />
                 <stop
                   offset="0.942708"
-                  stopColor="hsla(var(--primary), 0.85)"
+                  stopColor="hsla(var(--dp-primary), 0.85)"
                 />
-                <stop offset="1" stopColor="hsla(var(--primary), 0.85)" />
+                <stop offset="1" stopColor="hsla(var(--dp-primary), 0.85)" />
               </radialGradient>
               <radialGradient
                 id="paint2_radial_37_453-1"
@@ -122,25 +128,28 @@ export function AuthLayout({ children, title, subTitle }: IProps) {
                 gradientUnits="userSpaceOnUse"
                 gradientTransform="translate(912.834 -811.021) rotate(64.9401) scale(6436.87 6304.81)"
               >
-                <stop stopColor="hsla(var(--primary), 0.85)" />
+                <stop stopColor="hsla(var(--dp-primary), 0.85)" />
                 <stop
                   offset="0.140625"
-                  stopColor="hsla(var(--primary), 0.65)"
+                  stopColor="hsla(var(--dp-primary), 0.65)"
                 />
                 <stop
                   offset="0.333803"
-                  stopColor="hsla(var(--primary), 0.95)"
+                  stopColor="hsla(var(--dp-primary), 0.95)"
                 />
                 <stop
                   offset="0.658041"
-                  stopColor="hsla(var(--primary), 0.85)"
+                  stopColor="hsla(var(--dp-primary), 0.85)"
                 />
-                <stop offset="0.798521" stopColor="hsla(var(--primary), 0.1)" />
+                <stop
+                  offset="0.798521"
+                  stopColor="hsla(var(--dp-primary), 0.1)"
+                />
                 <stop
                   offset="0.942708"
-                  stopColor="hsla(var(--primary), 0.85)"
+                  stopColor="hsla(var(--dp-primary), 0.85)"
                 />
-                <stop offset="1" stopColor="hsla(var(--primary), 0.85)" />
+                <stop offset="1" stopColor="hsla(var(--dp-primary), 0.85)" />
               </radialGradient>
               <radialGradient
                 id="paint3_radial_37_453-1"
@@ -150,28 +159,28 @@ export function AuthLayout({ children, title, subTitle }: IProps) {
                 gradientUnits="userSpaceOnUse"
                 gradientTransform="translate(1711.41 -1639.11) rotate(64.9401) scale(6436.87 6304.81)"
               >
-                <stop stopColor="hsla(var(--primary), 0.85)" />
+                <stop stopColor="hsla(var(--dp-primary), 0.85)" />
                 <stop
                   offset="0.0833333"
-                  stopColor="hsla(var(--primary), 0.95)"
+                  stopColor="hsla(var(--dp-primary), 0.95)"
                 />
                 <stop
                   offset="0.333803"
-                  stopColor="hsla(var(--primary), 0.55)"
+                  stopColor="hsla(var(--dp-primary), 0.55)"
                 />
                 <stop
                   offset="0.658041"
-                  stopColor="hsla(var(--primary), 0.85)"
+                  stopColor="hsla(var(--dp-primary), 0.85)"
                 />
                 <stop
                   offset="0.798521"
-                  stopColor="hsla(var(--primary), 0.45)"
+                  stopColor="hsla(var(--dp-primary), 0.45)"
                 />
                 <stop
                   offset="0.942708"
-                  stopColor="hsla(var(--primary), 0.85)"
+                  stopColor="hsla(var(--dp-primary), 0.85)"
                 />
-                <stop offset="1" stopColor="hsla(var(--primary), 0.85)" />
+                <stop offset="1" stopColor="hsla(var(--dp-primary), 0.85)" />
               </radialGradient>
               <radialGradient
                 id="paint4_radial_37_453-1"
@@ -181,25 +190,28 @@ export function AuthLayout({ children, title, subTitle }: IProps) {
                 gradientUnits="userSpaceOnUse"
                 gradientTransform="translate(3479.06 -623.459) rotate(113.028) scale(8332.26 4870.62)"
               >
-                <stop stopColor="hsla(var(--primary), 0.85)" />
+                <stop stopColor="hsla(var(--dp-primary), 0.85)" />
                 <stop
                   offset="0.0833333"
-                  stopColor="hsla(var(--primary), 0.95)"
+                  stopColor="hsla(var(--dp-primary), 0.95)"
                 />
                 <stop
                   offset="0.333803"
-                  stopColor="hsla(var(--primary), 0.55)"
+                  stopColor="hsla(var(--dp-primary), 0.55)"
                 />
                 <stop
                   offset="0.658041"
-                  stopColor="hsla(var(--primary), 0.85)"
+                  stopColor="hsla(var(--dp-primary), 0.85)"
                 />
-                <stop offset="0.798521" stopColor="hsla(var(--primary), 0.1)" />
+                <stop
+                  offset="0.798521"
+                  stopColor="hsla(var(--dp-primary), 0.1)"
+                />
                 <stop
                   offset="0.942708"
-                  stopColor="hsla(var(--primary), 0.85)"
+                  stopColor="hsla(var(--dp-primary), 0.85)"
                 />
-                <stop offset="1" stopColor="hsla(var(--primary), 0.85)" />
+                <stop offset="1" stopColor="hsla(var(--dp-primary), 0.85)" />
               </radialGradient>
             </defs>
           </svg>

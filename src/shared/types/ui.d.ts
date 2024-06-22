@@ -12,8 +12,6 @@ export type EntityTypesForSelection =
   | "selection-enum"
   | "boolean";
 
-export type ColorSchemes = "light" | "dark";
-
 export type GridSpanSizes =
   | "1"
   | "2"

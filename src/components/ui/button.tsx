@@ -13,7 +13,7 @@ const buttonVariants = cva(
           "bg-primary text-primary-text shadow focus-visible:ring-primary hover:bg-primary-shade-thick",
         destructive:
           "bg-red-100 text-red-600 shadow-sm hover:bg-red-600 focus-visible:ring-red-600 hover:text-white",
-        soft: "bg-primary-shade-light text-primary shadow-sm hover:bg-primary hover:text-primary-text focus-visible:ring-primary",
+        soft: "bg-primary-alpha text-primary-alpha-text shadow-sm hover:bg-primary hover:text-primary-text focus-visible:ring-primary",
         ghost: "rounded-none",
         link: "text-primary underline-offset-4 hover:underline",
         // fix the shadow

@@ -38,7 +38,7 @@ function Calendar({ className, classNames, ...props }: CalendarProps) {
         ),
         day: cn(
           buttonVariants({ variant: "ghost" }),
-          "h-8 w-8 p-0 font-normal hover:bg-primary-shade-light hover:text-primary hover:shadow aria-selected:opacity-100"
+          "h-8 w-8 p-0 font-normal hover:bg-primary-alpha hover:text-primary-alpha-text hover:shadow aria-selected:opacity-100"
         ),
         day_range_start: "day-range-start",
         day_range_end: "day-range-end",

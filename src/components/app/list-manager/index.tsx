@@ -3,7 +3,6 @@ import styled from "styled-components";
 import { DataStateKeys } from "frontend/lib/data/types";
 import { arrayMoveImmutable } from "shared/lib/array/move";
 import SortableList, { SortableItem } from "react-easy-sort";
-import { Z_INDEXES } from "frontend/design-system/constants/zIndex";
 import { sortListByOrder } from "shared/lib/array/sort";
 import { msg } from "@lingui/macro";
 import { defaultSearchFunction, defaultToEmptyArray } from "./utils";
@@ -110,7 +109,7 @@ export function ListManager<T, K extends StringProps<T>>({
           >
             {searchResults.map((item, index) => (
               <SortableItem key={item[labelField] as unknown as string}>
-                <div className="item" style={{ zIndex: Z_INDEXES.dragAndDrop }}>
+                <div className="item z-[1000]">
                   <ListManagerItem
                     {...render(item, index)}
                     sortable={

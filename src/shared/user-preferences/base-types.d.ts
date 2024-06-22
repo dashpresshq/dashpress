@@ -1,1 +1,1 @@
-export type BaseUserPreferencesKeys = "theme";
+export type BaseUserPreferencesKeys = "placeholder";

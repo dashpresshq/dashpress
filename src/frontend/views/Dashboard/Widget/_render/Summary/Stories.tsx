@@ -1,11 +1,11 @@
 /* eslint-disable react/function-component-definition */
 import { Story } from "@storybook/react";
 import { TestProviders } from "__tests__/_/Provider";
-import { SummaryWidget, IProps } from ".";
+import { SummaryWidgetPresentation, IProps } from "./Presentation";
 
 export default {
   title: "DashboardWidgets/Summary",
-  component: SummaryWidget,
+  component: SummaryWidgetPresentation,
   args: {
     color: "#654321",
     fullCount: "29.3K",
@@ -27,7 +27,7 @@ export default {
 
 const Template: Story<IProps> = (args) => (
   <TestProviders>
-    <SummaryWidget {...args} />
+    <SummaryWidgetPresentation {...args} />
   </TestProviders>
 );
 

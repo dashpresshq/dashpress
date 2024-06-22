@@ -80,13 +80,13 @@ export function TablePagination({
   return (
     <Root className="px-3 py-2">
       <div className="flex justify-between items-center">
-        <p>
+        <div className="flex gap-2 items-center">
           <Trans>
-            Showing{" "}
+            Showing
             <Select
               placeholder={msg`Select Page Size`}
               name="table-page-size"
-              className="w-14 inline-block"
+              className="w-14"
               options={TABLE_PAGE_SIZES.map((option) => ({
                 value: `${option}`,
                 label: i18nNoop(option),
@@ -97,7 +97,7 @@ export function TablePagination({
             entries of <b>{Intl.NumberFormat("en-US").format(totalRecords)}</b>{" "}
             results
           </Trans>
-        </p>
+        </div>
         <Pagination>
           <ReactPaginate
             previousLabel={<DirectionIcon as={ChevronLeft} size={16} />}

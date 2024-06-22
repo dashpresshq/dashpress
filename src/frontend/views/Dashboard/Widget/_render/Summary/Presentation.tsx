@@ -34,7 +34,7 @@ export interface IProps {
   direction: "up" | "down" | "side";
 }
 
-export function SummaryWidget({
+export function SummaryWidgetPresentation({
   color,
   fullCount,
   relativeCount,
@@ -81,7 +81,7 @@ export function SummaryWidget({
               <span aria-label={directionLabel}>
                 <DirectionIcon
                   size={20}
-                  className={cn("text-main align-sub", {
+                  className={cn("align-sub", {
                     "text-green-600": direction === "up",
                     "text-red-600": direction === "down",
                   })}
@@ -89,7 +89,7 @@ export function SummaryWidget({
               </span>
 
               <p
-                className={cn("font-semibold text-xs leading-5 text-main", {
+                className={cn("font-semibold text-xs leading-5", {
                   "text-green-600": direction === "up",
                   "text-red-600": direction === "down",
                 })}

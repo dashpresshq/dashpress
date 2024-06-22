@@ -6,7 +6,6 @@ import {
   Info as InfoIcon,
   X,
 } from "react-feather";
-import { SYSTEM_COLORS } from "frontend/design-system/theme/system";
 import { getBestErrorMessage } from "frontend/lib/toast/utils";
 import { useToggle } from "frontend/hooks/state/useToggleState";
 import { cn } from "@/lib/utils";
@@ -55,8 +54,6 @@ export function Alert({ type, message, renderJsx, action }: IProps) {
     return null;
   }
 
-  const hexColor = SYSTEM_COLORS[spectrum];
-
   return (
     <div
       className={cn(
@@ -69,7 +66,7 @@ export function Alert({ type, message, renderJsx, action }: IProps) {
         <IconCmp size={24} />
       </div>
       <div className="w-full self-center my-3">
-        <p className="text-sm !mb-0" style={{ color: hexColor }}>
+        <p className="text-sm !mb-0">
           {(renderJsx ? message : getBestErrorMessage(message)) as string}
         </p>
         {action && (

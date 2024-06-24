@@ -1,83 +1,108 @@
-import styled, { css } from "styled-components";
-import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
+import * as React from "react";
 import { ILabelValue } from "shared/types/options";
-//  TODO https://ui.shadcn.com/docs/components/breadcrumb
-const Breadcrumb = styled.ol`
-  display: flex;
-  flex-wrap: wrap;
-  margin: 0;
-  list-style: none;
-  position: relative;
-  border-radius: 0.25rem;
-  font-size: 12px;
-  font-weight: 500;
-  padding: 2px 0;
-  background-color: transparent;
-`;
-
-const BreadcrumbItem = styled.li`
-  display: flex;
-  color: ${USE_ROOT_COLOR("muted-text")};
-
-  & + & {
-    padding-left: 0.3rem;
-
-    &:hover {
-      &::before {
-        text-decoration: none;
-      }
-    }
-
-    &::before {
-      display: inline-block;
-      padding-right: 0.3rem;
-      color: ${USE_ROOT_COLOR("muted-text")};
-      content: "/";
-    }
-  }
-`;
-
-const BreadcrumbItemLink = styled.button<{ $active: boolean }>`
-  font-weight: 400;
-  border: none;
-  padding: 0;
-  cursor: pointer;
-  background-color: transparent;
-  color: ${USE_ROOT_COLOR("primary-color")};
-
-  ${(props) =>
-    props.$active &&
-    css`
-      color: ${USE_ROOT_COLOR("muted-text")};
-    `}
-`;
+import {
+  Breadcrumb,
+  BreadcrumbEllipsis,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 export interface IProps {
   items: ILabelValue[];
   onCrumbClick: (index: number) => void;
 }
 
+const ITEMS_TO_DISPLAY = 3;
+
 export function Breadcrumbs({ items, onCrumbClick }: IProps) {
-  const itemsLength = items.length;
+  const [open, setOpen] = React.useState(false);
+
+  if (items.length <= 1) {
+    return null;
+  }
+
+  const itemsWithOriginalIndex = items.map((item, index) => ({
+    ...item,
+    index,
+  }));
+
   return (
     <Breadcrumb>
-      {items.map(({ label, value }, index) => {
-        const isLastElement = index === itemsLength - 1;
-        return (
-          <BreadcrumbItem key={value}>
-            {isLastElement ? (
-              label
+      <BreadcrumbList>
+        {items.length > ITEMS_TO_DISPLAY && (
+          <>
+            <BreadcrumbItem>
+              <BreadcrumbLink asChild>
+                <button type="button" onClick={() => onCrumbClick(0)}>
+                  {items[0].label}
+                </button>
+              </BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbSeparator />
+          </>
+        )}
+        {items.length > ITEMS_TO_DISPLAY ? (
+          <>
+            <BreadcrumbItem>
+              <DropdownMenu open={open} onOpenChange={setOpen}>
+                <DropdownMenuTrigger
+                  className="flex items-center gap-1"
+                  aria-label="Toggle menu"
+                >
+                  <BreadcrumbEllipsis className="h-4 w-4" />
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="start">
+                  {itemsWithOriginalIndex.slice(1, -2).map((item) => (
+                    <DropdownMenuItem key={item.index}>
+                      <button
+                        type="button"
+                        className="text-xs"
+                        onClick={() => onCrumbClick(item.index)}
+                      >
+                        {item.label}
+                      </button>
+                    </DropdownMenuItem>
+                  ))}
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </BreadcrumbItem>
+            <BreadcrumbSeparator />
+          </>
+        ) : null}
+        {itemsWithOriginalIndex.slice(-ITEMS_TO_DISPLAY + 1).map((item) => (
+          <BreadcrumbItem key={item.value}>
+            {item.index < items.length - 1 ? (
+              <>
+                <BreadcrumbLink
+                  asChild
+                  className="max-w-20 truncate md:max-w-none"
+                >
+                  <button
+                    type="button"
+                    onClick={() => onCrumbClick(item.index)}
+                  >
+                    {item.label}
+                  </button>
+                </BreadcrumbLink>
+                <BreadcrumbSeparator />
+              </>
             ) : (
-              <BreadcrumbItemLink
-                $active={isLastElement}
-                onClick={() => onCrumbClick(index)}
-              >
-                {label}
-              </BreadcrumbItemLink>
+              <BreadcrumbPage className="max-w-20 truncate md:max-w-none">
+                {item.label}
+              </BreadcrumbPage>
             )}
           </BreadcrumbItem>
-        );
-      })}
+        ))}
+      </BreadcrumbList>
     </Breadcrumb>
   );
 }

@@ -14,7 +14,7 @@ const buttonVariants = cva(
         destructive:
           "bg-red-100 text-red-600 shadow-sm hover:bg-red-600 focus-visible:ring-red-600 hover:text-white",
         soft: "bg-primary-alpha text-primary-alpha-text shadow-sm hover:bg-primary hover:text-primary-text focus-visible:ring-primary",
-        ghost: "rounded-none",
+        ghost: "",
         link: "text-primary underline-offset-4 hover:underline",
         // fix the shadow
         outline:

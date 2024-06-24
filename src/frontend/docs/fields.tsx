@@ -67,7 +67,7 @@ export function FieldsSettingsDocumentation() {
         database and restart your app.
       </p>
       <p>
-        The <code> Configure Validation</code> button allows you to add more
+        The <code>Configure Validation</code> button allows you to add more
         validations that we can&apos;t possibly get from the database like{" "}
         <code>minLength</code>,<code> regex</code>, <code>alphanumeric</code>,{" "}
         <code>matchOtherField</code>, etc. We also provide a text input for you

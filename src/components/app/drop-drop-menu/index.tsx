@@ -87,6 +87,7 @@ export function DropDownMenu({
           )}
         </DropdownMenuTrigger>
         <DropdownMenuContent
+          align="end"
           className={cn("p-0 border-0", contentClassName)}
           onClick={toggle}
         >

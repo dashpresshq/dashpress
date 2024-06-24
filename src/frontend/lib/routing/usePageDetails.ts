@@ -2,7 +2,6 @@ import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { META_USER_PERMISSIONS } from "shared/constants/user";
 import { MessageDescriptor } from "@lingui/core";
-import { msg } from "@lingui/macro";
 import { createStore } from "../store";
 import { IGroupActionButton } from "@/components/app/button/types";
 
@@ -21,7 +20,7 @@ type IStore = {
 } & Partial<IPageDetails>;
 
 export const usePageDetailsStore = createStore<IStore>((set) => ({
-  pageTitle: msg``,
+  pageTitle: null,
   viewKey: "",
   pageLink: "/",
   permission: META_USER_PERMISSIONS.NO_PERMISSION_REQUIRED,

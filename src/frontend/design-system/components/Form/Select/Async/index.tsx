@@ -4,11 +4,14 @@ import { useSessionStorage } from "react-use";
 import { ILabelValue, ISelectData } from "shared/types/options";
 import { ApiRequest } from "frontend/lib/data/makeRequest";
 import { debounce } from "lodash";
+import { useEffect } from "react";
 import { SelectStyles, SharedSelectProps } from "../styles";
 
 export const Select = styled(AsyncSelect)`
   ${SelectStyles}
 `;
+
+const abortController = new AbortController();
 
 interface IFormMultiSelect {
   url: string;
@@ -24,7 +27,10 @@ const debouncedSearch = debounce(
     resolve: (value: any) => void
   ) => {
     const toReturn = (
-      await ApiRequest.GET(`${url}?search=${inputValue}`)
+      await ApiRequest.GET(
+        `${url}?search=${inputValue}`,
+        abortController.signal
+      )
     ).filter(
       ({ value }: ISelectData) => !disabledOptions.includes(value as string)
     );
@@ -42,6 +48,11 @@ export function AsyncFormMultiSelect({
     "cosmetic-multi-select-values",
     values.map((value) => ({ value, label: value }))
   );
+  useEffect(() => {
+    return () => {
+      abortController.abort();
+    };
+  });
   return (
     <Select
       cacheOptions

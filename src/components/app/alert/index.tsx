@@ -66,7 +66,7 @@ export function Alert({ type, message, renderJsx, action }: IProps) {
         <IconCmp size={24} />
       </div>
       <div className="w-full self-center my-3">
-        <p className="text-sm !mb-0">
+        <p className="text-sm !m-0">
           {(renderJsx ? message : getBestErrorMessage(message)) as string}
         </p>
         {action && (

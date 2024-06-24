@@ -63,13 +63,13 @@ export function AppLayout({
     <>
       <Head>
         <title>
-          {_(pageTitle)} - {siteConfig.data.name}
+          {pageTitle ? _(pageTitle) : null} - {siteConfig.data.name}
         </title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
       <div className="flex justify-between items-center mb-2">
         <div className="text-left">
-          <p>{_(pageTitle)}</p>
+          <p>{pageTitle ? _(pageTitle) : null}</p>
           <Breadcrumbs items={homedBreadcrumb} onCrumbClick={goToLinkIndex} />
         </div>
         <div>

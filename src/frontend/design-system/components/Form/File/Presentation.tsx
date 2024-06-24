@@ -8,19 +8,6 @@ import { DELETE_BUTTON_PROPS } from "../../../../../components/app/button/consta
 import { cn } from "@/lib/utils";
 import { SoftButton } from "@/components/app/button/soft";
 
-const FileInput = styled.input`
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  opacity: 0;
-  cursor: pointer;
-  z-index: 5;
-`;
-
 const stripes = keyframes`
 from {
 background-position: 0 0;
@@ -133,7 +120,11 @@ export function Presentation({
         )}
         {error && <p className="font-semibold text-red-600">{error}</p>}
       </div>
-      <FileInput type="file" {...dropZoneProps.getInputProps()} />
+      <input
+        type="file"
+        className="absolute top-0 right-0 bottom-0 left-0 h-full w-full opacity-0 cursor-pointer z-[5]"
+        {...dropZoneProps.getInputProps()}
+      />
     </Root>
   );
 }

@@ -51,11 +51,10 @@ export function VariablesDocumentation() {
       </p>
       <p>
         The primary difference between secrets and variables is that secrets are
-        encrypted at rest using
-        <code> aes-256-gcm</code> and variables are not. Meaning anybody that
-        gets access to the secrets will not be able to use them elsewhere as
-        they will be gibberish whereas constants are stored in plaintext and can
-        be copied.
+        encrypted at rest using <code>aes-256-gcm</code> and variables are not.
+        Meaning anybody that gets access to the secrets will not be able to use
+        them elsewhere as they will be gibberish whereas constants are stored in
+        plaintext and can be copied.
       </p>
       <p>
         This doesn&apos;t mean everything should be stored as a secret as

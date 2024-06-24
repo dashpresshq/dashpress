@@ -13,13 +13,13 @@ export function ViewsDocumentation() {
           <code>Latest Orders</code>
         </li>
         <li>
-          <code>Priority Orders </code>
+          <code>Priority Orders</code>
         </li>
         <li>
           <code>Active Orders</code>
         </li>
         <li>
-          <code>Completed Orders </code>
+          <code>Completed Orders</code>
         </li>
       </ul>
       <p>You can do this by:</p>

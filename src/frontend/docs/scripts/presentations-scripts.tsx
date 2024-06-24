@@ -83,7 +83,7 @@ return "Hannah Frederick";
 
       <WarningAlert
         message="Any error on this script will fail silently so the original value will be
-      used; be careful to make sure your scripts are valid when making changes."
+      used, so be careful to make sure your scripts are valid when making changes."
       />
     </DocumentationRoot>
   );

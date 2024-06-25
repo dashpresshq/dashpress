@@ -4,12 +4,13 @@ import { IAuthenticatedUserBag } from "shared/types/user";
 import { canRoleDoThisSync } from "shared/logic/permissions";
 import { useCallback } from "react";
 import { useApi } from "frontend/lib/data/useApi";
-import { ToastService } from "frontend/lib/toast";
 import { DataStates } from "frontend/lib/data/types";
 import { useDomainMessages } from "frontend/lib/crud-config";
 import { LANG_DOMAINS } from "frontend/lib/crud-config/lang-domains";
+import { msg } from "@lingui/macro";
 import { useIsGranularCheck } from "./portal";
 import { useIsUserAutenticated } from "./auth.actions";
+import { useToast } from "@/components/app/toast/use-toast";
 
 export const AUTHENTICATED_ACCOUNT_URL = "/api/account/mine";
 
@@ -89,12 +90,17 @@ export function usePageRequiresPermission(
   permission: string
 ): DataStates.Loading | void {
   const router = useRouter();
+  const { toast } = useToast();
   const canUser = useUserPermission();
   if (canUser(permission) === DataStates.Loading) {
     return DataStates.Loading;
   }
   if (!canUser(permission)) {
-    ToastService.error("You dont have the permission to view this page");
+    toast({
+      variant: "danger",
+      title: msg`Unauthorized Access`,
+      description: msg`You dont have the permission to view this page`,
+    });
     router.replace(NAVIGATION_LINKS.DASHBOARD.HOME);
   }
 }

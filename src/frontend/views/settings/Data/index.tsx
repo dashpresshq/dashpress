@@ -6,10 +6,9 @@ import {
 } from "frontend/hooks/configuration/configuration.store";
 import { format as dateFnsFormat } from "date-fns";
 import { useAppConfigurationDomainMessages } from "frontend/hooks/configuration/configuration.constant";
-import { ToastService } from "frontend/lib/toast";
 import { AppConfigurationValueType } from "shared/configurations/constants";
 import { msg } from "@lingui/macro";
-import { i18nNoop } from "translations/fake";
+import { fakeMessageDescriptor } from "translations/fake";
 import { SectionBox } from "@/components/app/section-box";
 import { SchemaForm } from "@/components/app/form/schema";
 import { ViewStateMachine } from "@/components/app/view-state-machine";
@@ -19,6 +18,7 @@ import {
 } from "@/components/app/skeleton/form";
 import { BaseSettingsLayout } from "../_Base";
 import { SETTINGS_VIEW_KEY } from "../constants";
+import { useToast } from "@/components/app/toast/use-toast";
 
 type IDateFormatSettings = {
   format: string;
@@ -76,6 +76,8 @@ function DateSettings() {
     "default_date_format"
   );
 
+  const { toast } = useToast();
+
   const defaultDateFormat = useAppConfiguration("default_date_format");
 
   const upsertDateFormatConfigurationMutation = useUpsertConfigurationMutation(
@@ -90,7 +92,7 @@ function DateSettings() {
           id: "help",
           action: DATE_FORMAT_LIB_LINK,
           systemIcon: "Help",
-          label: i18nNoop(DATE_FORMAT_LIB_LINK),
+          label: fakeMessageDescriptor(DATE_FORMAT_LIB_LINK),
         },
       ]}
     >
@@ -105,9 +107,11 @@ function DateSettings() {
               dateFnsFormat(new Date(), format);
               await upsertDateFormatConfigurationMutation.mutateAsync(format);
             } catch (error) {
-              ToastService.error(
-                "Invalid Date Format!. Please go to https://date-fns.org/docs/format to see valid formats"
-              );
+              toast({
+                variant: "danger",
+                title: msg`Invalid Date Format`,
+                description: msg`Please go to ${DATE_FORMAT_LIB_LINK} to see valid formats`,
+              });
             }
           }}
           initialValues={{ format: defaultDateFormat.data }}

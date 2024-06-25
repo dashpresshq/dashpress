@@ -48,7 +48,7 @@ export function useUserDeletionMutation() {
       router.replace(NAVIGATION_LINKS.USERS.LIST);
     },
     onMutate: MutationHelpers.deleteByKey("username"),
-    successMessage: domainMessages.MUTATION_LANG.DELETE,
+    successMessage: { description: domainMessages.MUTATION_LANG.DELETE },
   });
 }
 
@@ -62,7 +62,7 @@ export function useUpdateUserMutation() {
       USERS_ENDPOINT_CONFIG.LIST,
       USERS_ENDPOINT_CONFIG.DETAILS(username),
     ],
-    successMessage: domainMessages.MUTATION_LANG.EDIT,
+    successMessage: { description: domainMessages.MUTATION_LANG.EDIT },
   });
 }
 
@@ -75,7 +75,7 @@ export function useResetUserPasswordMutation() {
         data
       ),
     endpoints: [],
-    successMessage: msg`Password Reset Successfully`,
+    successMessage: { description: msg`Password Reset Successfully` },
   });
 }
 
@@ -89,7 +89,7 @@ export function useCreateUserMutation() {
     },
     endpoints: [USERS_ENDPOINT_CONFIG.LIST],
     smartSuccessMessage: ({ username }) => ({
-      message: domainMessages.MUTATION_LANG.CREATE,
+      description: domainMessages.MUTATION_LANG.CREATE,
       action: {
         label: domainMessages.MUTATION_LANG.VIEW_DETAILS,
         action: () => router.push(NAVIGATION_LINKS.USERS.DETAILS(username)),

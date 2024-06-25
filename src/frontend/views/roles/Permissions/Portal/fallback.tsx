@@ -6,7 +6,7 @@ import {
   UserPermissions,
 } from "shared/constants/user";
 import { GranularEntityPermissions } from "shared/types/user";
-import { i18nNoop } from "translations/fake";
+import { fakeMessageDescriptor } from "translations/fake";
 import { MutatePermission } from "../MutatePermission";
 
 export function BaseMutateEntitiesPermissions() {
@@ -23,7 +23,7 @@ export function BaseMutateEntitiesPermissions() {
         entity.value,
         GranularEntityPermissions.Show
       ),
-      label: i18nNoop(getEntitiesDictionPlurals(entity.value)),
+      label: fakeMessageDescriptor(getEntitiesDictionPlurals(entity.value)),
     })),
   ];
 

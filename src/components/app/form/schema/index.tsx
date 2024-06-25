@@ -4,17 +4,18 @@ import {
   ISchemaFormConfig,
 } from "shared/form-schemas/types";
 import { runValidationError } from "shared/validations/run";
-import { ToastService } from "frontend/lib/toast";
 import { resetFormValues } from "frontend/lib/form/utils";
 import { SystemIconsKeys } from "shared/constants/Icons";
 import { useEvaluateScriptContext } from "frontend/hooks/scripts";
 import { MessageDescriptor } from "@lingui/core";
 import { typescriptSafeObjectDotEntries } from "shared/lib/objects";
+import { msg } from "@lingui/macro";
 import { FormButton } from "@/components/app/button/form";
 import { RenderFormInput } from "./_RenderFormInput";
 import { IFormExtension } from "./types";
 import { runFormBeforeSubmit, runFormFieldState } from "./form-run";
 import { FormGrid } from "./form-grid";
+import { useToast } from "../../toast/use-toast";
 
 const identity = (value: unknown) => value;
 
@@ -44,7 +45,7 @@ export function SchemaForm<T extends Record<string, unknown>>({
   from,
 }: IProps<T>) {
   const evaluateScriptContext = useEvaluateScriptContext();
-
+  const { toast } = useToast();
   const scriptContext = {
     action,
     ...evaluateScriptContext,
@@ -59,7 +60,11 @@ export function SchemaForm<T extends Record<string, unknown>>({
         );
 
         if (typeof modifiedFormValues !== "object") {
-          ToastService.error(modifiedFormValues);
+          toast({
+            description: modifiedFormValues,
+            variant: "danger",
+            title: msg`Input Validation`,
+          });
           return;
         }
 

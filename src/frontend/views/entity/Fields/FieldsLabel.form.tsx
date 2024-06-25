@@ -5,7 +5,7 @@ import {
   maxLength,
 } from "frontend/lib/validations";
 import { ICrudConfig } from "frontend/lib/crud-config";
-import { i18nNoop } from "translations/fake";
+import { fakeMessageDescriptor } from "translations/fake";
 import {
   FormSkeleton,
   FormSkeletonSchema,
@@ -51,7 +51,11 @@ export function FieldsLabelForm({
               validateFields={[]}
             >
               {({ input, meta }) => (
-                <FormInput label={i18nNoop(field)} input={input} meta={meta} />
+                <FormInput
+                  label={fakeMessageDescriptor(field)}
+                  input={input}
+                  meta={meta}
+                />
               )}
             </Field>
           ))}

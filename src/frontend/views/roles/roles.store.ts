@@ -25,7 +25,7 @@ export function useCreateRoleMutation() {
     },
     endpoints: [ROLES_ENDPOINT_CONFIG.LIST],
     smartSuccessMessage: ({ name }) => ({
-      message: domainMessages.MUTATION_LANG.CREATE,
+      description: domainMessages.MUTATION_LANG.CREATE,
       action: {
         label: domainMessages.MUTATION_LANG.VIEW_DETAILS,
         action: () =>
@@ -46,6 +46,6 @@ export function useRoleDeletionMutation() {
       router.replace(NAVIGATION_LINKS.ROLES.LIST);
     },
     onMutate: MutationHelpers.deleteByKey("value"),
-    successMessage: domainMessages.MUTATION_LANG.DELETE,
+    successMessage: { description: domainMessages.MUTATION_LANG.DELETE },
   });
 }

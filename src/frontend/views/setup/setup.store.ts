@@ -12,7 +12,7 @@ export function useSetupCredentialsMutation() {
     mutationFn: async (data) =>
       await ApiRequest.POST(`/api/setup/credentials`, data),
     endpoints: [SETUP_CHECK_URL],
-    successMessage: msg`Credentials Was Successfully Setup`,
+    successMessage: { description: msg`Credentials Was Successfully Setup` },
   });
 }
 
@@ -25,7 +25,7 @@ export function useSetupUserMutation() {
   >({
     mutationFn: async (data) => await ApiRequest.POST(`/api/setup/user`, data),
     endpoints: [SETUP_CHECK_URL],
-    successMessage: msg`Account Was Successfully Setup`,
+    successMessage: { description: msg`Account Was Successfully Setup` },
     onSuccessActionWithFormData: (response) => {
       authenticateUser(response.token, true);
     },

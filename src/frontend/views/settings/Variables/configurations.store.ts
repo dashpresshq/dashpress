@@ -39,7 +39,7 @@ export function useIntegrationConfigurationUpsertationMutation(
     endpoints: rootPassword
       ? [REVEAL_CREDENTIALS_ENDPOINT, INTEGRATIONS_GROUP_ENDPOINT(group)]
       : [INTEGRATIONS_GROUP_ENDPOINT(group)],
-    successMessage: domainMessages.MUTATION_LANG.SAVED,
+    successMessage: { description: domainMessages.MUTATION_LANG.SAVED },
   });
 }
 
@@ -59,7 +59,7 @@ export function useIntegrationConfigurationDeletionMutation(
       ),
     dataQueryPath: INTEGRATIONS_GROUP_ENDPOINT(group),
     otherEndpoints: rootPassword ? [REVEAL_CREDENTIALS_ENDPOINT] : [],
-    successMessage: domainMessages.MUTATION_LANG.DELETE,
+    successMessage: { description: domainMessages.MUTATION_LANG.DELETE },
     onMutate: MutationHelpers.deleteByKey("key"),
   });
 }

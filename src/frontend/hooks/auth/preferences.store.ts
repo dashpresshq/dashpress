@@ -50,6 +50,6 @@ export function useUpsertUserPreferenceMutation<T extends UserPreferencesKeys>(
       userPrefrencesApiPath(key),
       ...(mutationOptions?.otherEndpoints || []),
     ],
-    successMessage: domainMessages.MUTATION_LANG.SAVED,
+    successMessage: { description: domainMessages.MUTATION_LANG.SAVED },
   });
 }

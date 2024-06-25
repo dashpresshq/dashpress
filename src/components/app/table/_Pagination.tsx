@@ -1,7 +1,7 @@
 import ReactPaginate from "react-paginate";
 import { Trans, msg } from "@lingui/macro";
 import { ChevronLeft, ChevronRight } from "react-feather";
-import { i18nNoop } from "translations/fake";
+import { fakeMessageDescriptor } from "translations/fake";
 import { DotsHorizontalIcon } from "@radix-ui/react-icons";
 import { TABLE_PAGE_SIZES } from "./constants";
 import { Select } from "@/components/ui/select";
@@ -45,7 +45,7 @@ export function TablePagination({
               className="w-18"
               options={TABLE_PAGE_SIZES.map((option) => ({
                 value: `${option}`,
-                label: i18nNoop(option),
+                label: fakeMessageDescriptor(`${option}`),
               }))}
               onChange={(value) => setPageSize(Number(value))}
               value={`${pageSize}`}

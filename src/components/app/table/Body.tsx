@@ -41,7 +41,7 @@ export function TableBody({ table, dataLength, empty, isLoading }: IProps) {
         <TableRow>
           <TableCell colSpan={10000}>
             {isLoading ? (
-              <div style={{ height: "204px" }} />
+              <div className="h-52" />
             ) : (
               <EmptyWrapper {...{ ...empty }} />
             )}

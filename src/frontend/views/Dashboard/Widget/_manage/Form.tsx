@@ -15,7 +15,10 @@ import { useDocumentationActionButton } from "frontend/docs/constants";
 import { GRID_SPAN_OPTIONS } from "frontend/design-system/constants/grid";
 import { msg } from "@lingui/macro";
 import { typescriptSafeObjectDotEntries } from "shared/lib/objects";
-import { i18nNoop, transformLabelValueToSelectData } from "translations/fake";
+import {
+  fakeMessageDescriptor,
+  transformLabelValueToSelectData,
+} from "translations/fake";
 import { MessageDescriptor } from "@lingui/core";
 import { useDomainMessages } from "frontend/lib/crud-config";
 import { LANG_DOMAINS } from "frontend/lib/crud-config/lang-domains";
@@ -171,7 +174,7 @@ export function DashboardWidgetForm({
                           disabledOptions={[]}
                           selectData={(tableViews.data || []).map(
                             ({ id, title }) => ({
-                              label: i18nNoop(title),
+                              label: fakeMessageDescriptor(title),
                               value: id,
                             })
                           )}

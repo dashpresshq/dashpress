@@ -38,7 +38,7 @@ export function Breadcrumbs({ items, onCrumbClick }: IProps) {
   return (
     <Breadcrumb>
       <BreadcrumbList>
-        {items.length > ITEMS_TO_DISPLAY && (
+        {items.length >= ITEMS_TO_DISPLAY && (
           <>
             <BreadcrumbItem>
               <BreadcrumbLink asChild>

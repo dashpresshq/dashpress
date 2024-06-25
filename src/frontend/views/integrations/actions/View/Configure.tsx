@@ -1,6 +1,4 @@
-import { useEffect } from "react";
 import { IIntegrationsList } from "shared/types/actions";
-import { ToastService } from "frontend/lib/toast";
 import { typescriptSafeObjectDotKeys } from "shared/lib/objects";
 import { useDomainMessages } from "frontend/lib/crud-config";
 import { LANG_DOMAINS } from "frontend/lib/crud-config/lang-domains";
@@ -12,6 +10,7 @@ import {
   useUpdateActivatedIntegrationMutation,
 } from "../actions.store";
 import { PasswordMessage, PasswordToReveal } from "../../Password";
+import { useToastActionQueryError } from "@/components/app/toast/error";
 
 interface IProps {
   integrationDetail: IIntegrationsList;
@@ -24,11 +23,8 @@ export function Configure({ activationId, integrationDetail }: IProps) {
   const activationConfiguration = useActivationConfiguration(activationId);
   const domainMessages = useDomainMessages(LANG_DOMAINS.INTEGRATIONS.ACTIONS);
   const { _ } = useLingui();
-  useEffect(() => {
-    if (activationConfiguration.error) {
-      ToastService.error(activationConfiguration.error);
-    }
-  }, [activationConfiguration.error]);
+
+  useToastActionQueryError(activationConfiguration.error);
 
   if (
     typescriptSafeObjectDotKeys(integrationDetail.configurationSchema)

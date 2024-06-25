@@ -32,12 +32,10 @@ describe("pages/roles/create", () => {
     await userEvent.click(screen.getByRole("button", { name: "Create Role" }));
 
     expect(await screen.findByRole("status")).toHaveTextContent(
-      "Role Created SuccessfullyClick here to view details"
+      "Role Created SuccessfullyView Details"
     );
 
-    await userEvent.click(
-      screen.getByRole("button", { name: "Click here to view details" })
-    );
+    await userEvent.click(screen.getByRole("button", { name: "View Details" }));
 
     expect(pushMock).toHaveBeenCalledWith("/roles/some-new-role");
   });

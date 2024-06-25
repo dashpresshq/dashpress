@@ -55,7 +55,7 @@ export function useCreateDashboardWidgetMutation(dashboardId: string) {
     },
     dataQueryPath: DASHBOARD_ENDPOINT(dashboardId),
     onMutate: MutationHelpers.append,
-    successMessage: domainMessages.MUTATION_LANG.CREATE,
+    successMessage: { description: domainMessages.MUTATION_LANG.CREATE },
   });
 }
 
@@ -75,7 +75,7 @@ export function useUpdateDashboardWidgetMutation(
     dataQueryPath: DASHBOARD_ENDPOINT(dashboardId),
     otherEndpoints: [DASHBOARD_WIDGET_SCRIPT_ENDPOINT(widgetId)],
     onMutate: MutationHelpers.update,
-    successMessage: domainMessages.MUTATION_LANG.EDIT,
+    successMessage: { description: domainMessages.MUTATION_LANG.EDIT },
   });
 }
 
@@ -88,7 +88,7 @@ export function useDeleteDashboardWidgetMutation(dashboardId: string) {
     },
     dataQueryPath: DASHBOARD_ENDPOINT(dashboardId),
     onMutate: MutationHelpers.delete,
-    successMessage: domainMessages.MUTATION_LANG.DELETE,
+    successMessage: { description: domainMessages.MUTATION_LANG.DELETE },
   });
 }
 

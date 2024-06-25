@@ -2,7 +2,7 @@ import { userFriendlyCase } from "shared/lib/strings/friendly-case";
 import { EntityTypesForSelection, IColorableSelection } from "shared/types/ui";
 import { uniqBy } from "shared/lib/array/uniq-by";
 import { msg } from "@lingui/macro";
-import { i18nNoop } from "translations/fake";
+import { fakeMessageDescriptor } from "translations/fake";
 import { isUseColorsFlagOn } from "./selection.utils";
 import { SPECTRUM_COLORS } from "@/components/ui/spectrum";
 
@@ -41,7 +41,7 @@ export const getEntitySelectionConfig = (
           ...preselection,
           ...enumList.map((enumValue, index) => ({
             value: enumValue,
-            label: i18nNoop(userFriendlyCase(enumValue)),
+            label: fakeMessageDescriptor(userFriendlyCase(enumValue)),
             spectrum: shouldUseColor
               ? SPECTRUM_COLORS[index % SPECTRUM_COLORS.length]
               : undefined,

@@ -5,6 +5,7 @@ import * as ToastPrimitives from "@radix-ui/react-toast";
 import { cva, type VariantProps } from "class-variance-authority";
 
 import { cn } from "@/lib/utils";
+import { spectrumVariants } from "./spectrum";
 
 const ToastProvider = ToastPrimitives.Provider;
 
@@ -28,13 +29,13 @@ const toastVariants = cva(
   {
     variants: {
       variant: {
-        default: "border bg-background text-foreground",
-        destructive:
-          "destructive group border-destructive bg-destructive text-destructive-foreground",
+        success: cn(spectrumVariants({ spectrum: "green" })),
+        warning: cn(spectrumVariants({ spectrum: "yellow" })),
+        danger: cn(spectrumVariants({ spectrum: "red" })),
       },
     },
     defaultVariants: {
-      variant: "default",
+      variant: "success",
     },
   }
 );
@@ -113,11 +114,8 @@ ToastDescription.displayName = ToastPrimitives.Description.displayName;
 
 type ToastProps = React.ComponentPropsWithoutRef<typeof Toast>;
 
-type ToastActionElement = React.ReactElement<typeof ToastAction>;
-
 export {
   type ToastProps,
-  type ToastActionElement,
   ToastProvider,
   ToastViewport,
   Toast,

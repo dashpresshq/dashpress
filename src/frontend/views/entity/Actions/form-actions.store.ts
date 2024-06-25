@@ -40,7 +40,7 @@ export function useDeleteFormActionMutation(entity: string) {
     mutationFn: async (formActionId) =>
       await ApiRequest.DELETE(FORM_ACTION_ENDPOINT.DELETE(formActionId)),
     dataQueryPath: LIST_ENTITY_FORM_ACTIONS(entity),
-    successMessage: domainMessages.MUTATION_LANG.DELETE,
+    successMessage: { description: domainMessages.MUTATION_LANG.DELETE },
     onMutate: MutationHelpers.deleteByKey("id") as unknown as (
       oldData: IFormAction[],
       form: string
@@ -57,7 +57,7 @@ export function useCreateFormActionMutation(entity: string) {
       return await ApiRequest.POST(FORM_ACTION_ENDPOINT.CREATE, configuration);
     },
     endpoints: [LIST_ENTITY_FORM_ACTIONS(entity)],
-    successMessage: domainMessages.MUTATION_LANG.CREATE,
+    successMessage: { description: domainMessages.MUTATION_LANG.CREATE },
   });
 }
 
@@ -72,6 +72,6 @@ export function useUpdateFormActionMutation(entity: string) {
         formAction
       ),
     endpoints: [LIST_ENTITY_FORM_ACTIONS(entity)],
-    successMessage: domainMessages.MUTATION_LANG.EDIT,
+    successMessage: { description: domainMessages.MUTATION_LANG.EDIT },
   });
 }

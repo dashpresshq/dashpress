@@ -164,7 +164,11 @@ export function ListManagerItem({
   const content = (
     <div className="flex justify-between w-full">
       <div className="flex items-center gap-3">
-        <div style={{ display: sortable && !subtle ? "block" : "none" }}>
+        <div
+          className={cn("hidden", {
+            block: sortable && !subtle,
+          })}
+        >
           <SortableKnob>
             <GrabIcon />
           </SortableKnob>

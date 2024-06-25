@@ -1,5 +1,5 @@
 import { IntegrationsConfigurationGroup } from "shared/types/integrations";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import {
   IPageDetails,
   useSetCurrentActionItems,
@@ -9,7 +9,6 @@ import { usePasswordStore } from "frontend/views/integrations/password.store";
 import { useUserHasPermission } from "frontend/hooks/auth/user.store";
 import { INTEGRATIONS_GROUP_CONFIG } from "shared/config-bag/integrations";
 import { VariablesDocumentation } from "frontend/docs/variables";
-import { ToastService } from "frontend/lib/toast";
 import { useApi } from "frontend/lib/data/useApi";
 import {
   PasswordMessage,
@@ -36,6 +35,7 @@ import { INTEGRATIONS_GROUP_CRUD_CONFIG } from "./constants";
 import { Card } from "@/components/ui/card";
 import { OffCanvas } from "@/components/app/off-canvas";
 import { ActionButtons } from "@/components/app/button/action";
+import { useToastActionQueryError } from "@/components/app/toast/error";
 
 const NEW_CONFIG_ITEM = "__new_config_item__";
 
@@ -51,19 +51,14 @@ export function ManageCredentialGroup({
     useIntegrationConfigurationUpsertationMutation(group);
   const deleteConfigurationMutation =
     useIntegrationConfigurationDeletionMutation(group);
-
   const tableData = useApi<IKeyValue[]>(dataEndpoint, { defaultData: [] });
 
   const revealedCredentials = useRevealedCredentialsList(group);
 
-  useEffect(() => {
-    if (
-      revealedCredentials.error &&
-      group === IntegrationsConfigurationGroup.Credentials
-    ) {
-      ToastService.error(revealedCredentials.error);
-    }
-  }, [revealedCredentials.error]);
+  useToastActionQueryError(
+    revealedCredentials.error,
+    group === IntegrationsConfigurationGroup.Credentials
+  );
 
   const passwordStore = usePasswordStore();
 

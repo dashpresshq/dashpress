@@ -1,5 +1,5 @@
 import { IColumnFilterBag, IDateFilterOption } from "shared/types/data";
-import { i18nNoop } from "translations/fake";
+import { fakeMessageDescriptor } from "translations/fake";
 import { msg } from "@lingui/macro";
 import { DATE_FILTER_OPTIONS } from "./constants";
 import { Select } from "@/components/ui/select";
@@ -62,7 +62,10 @@ export function DateSelection({
           options={Array.from(
             { length: getOptionCountLimit(currentFilterValue) },
             (_, k) => `${k + 1}`
-          ).map((count) => ({ label: i18nNoop(count), value: count }))}
+          ).map((count) => ({
+            label: fakeMessageDescriptor(count),
+            value: count,
+          }))}
           onChange={(value) => {
             setFilter({
               ...filterValue,

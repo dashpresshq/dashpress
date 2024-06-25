@@ -35,7 +35,7 @@ export function useDeleteRolePermissionMutation() {
     },
     dataQueryPath: ADMIN_ROLE_PERMISSION_ENDPOINT(roleId),
     onMutate: MutationHelpers.removeMany,
-    successMessage: domainMessages.MUTATION_LANG.DELETE,
+    successMessage: { description: domainMessages.MUTATION_LANG.DELETE },
   });
 }
 
@@ -50,6 +50,6 @@ export function useCreateRolePermissionMutation() {
       }),
     dataQueryPath: ADMIN_ROLE_PERMISSION_ENDPOINT(roleId),
     onMutate: MutationHelpers.mergeArray,
-    successMessage: domainMessages.MUTATION_LANG.CREATE,
+    successMessage: { description: domainMessages.MUTATION_LANG.CREATE },
   });
 }

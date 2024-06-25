@@ -1,7 +1,9 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { ToastService } from "frontend/lib/toast";
+import { msg } from "@lingui/macro";
 import { getQueryCachekey } from "../constants/getQueryCacheKey";
 import { ToastMessageInput } from "./types";
+import { useToast } from "@/components/app/toast/use-toast";
+import { fakeMessageDescriptor } from "@/translations/fake";
 
 export interface IWaitForResponseMutationOptions<V, R> {
   endpoints: string[];
@@ -19,6 +21,7 @@ export function useWaitForResponseMutationOptions<V, R = void>(
   options: IWaitForResponseMutationOptions<V, R>
 ) {
   const queryClient = useQueryClient();
+  const { toast } = useToast();
 
   return useMutation({
     mutationFn: options.mutationFn,
@@ -31,9 +34,9 @@ export function useWaitForResponseMutationOptions<V, R = void>(
         if (formData === undefined) {
           throw new Error(PASS_DATA_FROM_HANDLER_ERROR_MESSAGE);
         }
-        ToastService.success(options.smartSuccessMessage(formData));
+        toast(options.smartSuccessMessage(formData));
       } else if (options.successMessage) {
-        ToastService.success(options.successMessage);
+        toast(options.successMessage);
       }
 
       if (options.onSuccessActionWithFormData) {
@@ -44,9 +47,14 @@ export function useWaitForResponseMutationOptions<V, R = void>(
       }
     },
     onError: (error: { message: string }) => {
-      ToastService.error(
-        error.message || "Something went wrong. Please try again"
-      );
+      toast({
+        variant: "danger",
+        title: msg`Request Error`,
+        description: fakeMessageDescriptor(
+          error.message ||
+            "Something went wrong. Please try again or contact your adminstrator."
+        ),
+      });
     },
   });
 }

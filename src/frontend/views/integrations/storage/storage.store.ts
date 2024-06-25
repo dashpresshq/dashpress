@@ -66,6 +66,8 @@ export function useActivateStorageMutation() {
       ACTIVE_STORAGE_INTEGRATIONS_ENDPOINT,
       STORAGE_CREDENTIALS_CONFIG,
     ],
-    successMessage: domainMessages.MUTATION_LANG.CUSTOM(msg`Activated`),
+    successMessage: {
+      description: domainMessages.MUTATION_LANG.CUSTOM(msg`Activated`),
+    },
   });
 }

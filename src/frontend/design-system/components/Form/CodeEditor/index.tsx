@@ -73,10 +73,8 @@ export function FormCodeEditor(formInput: IFormCodeEditor) {
           placeholder={placeholder ? _(placeholder) : undefined}
           textareaId={name}
           padding={4}
-          className="form-code-editor"
+          className="form-code-editor min-h-72 text-sm"
           style={{
-            minHeight: "275px",
-            fontSize: "14px",
             fontFamily: '"Fira code", "Fira Mono", monospace',
           }}
         />

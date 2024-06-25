@@ -155,7 +155,7 @@ export function useEntityDataCreationMutation(
     smartSuccessMessage: option?.hideSuccessMessage
       ? undefined
       : ({ id }) => ({
-          message: entityCrudConfig.MUTATION_LANG.CREATE,
+          description: entityCrudConfig.MUTATION_LANG.CREATE,
           action: {
             label: entityCrudConfig.MUTATION_LANG.VIEW_DETAILS,
             action: () =>
@@ -181,7 +181,7 @@ export function useEntityDataUpdationMutation(
       ...SINGLE_DATA_MUTATION_ENDPOINTS_TO_CLEAR({ entity, entityId }),
       ...DATA_MUTATION_ENDPOINTS_TO_CLEAR(entity),
     ],
-    successMessage: entityCrudConfig.MUTATION_LANG.EDIT,
+    successMessage: { description: entityCrudConfig.MUTATION_LANG.EDIT },
   });
 }
 
@@ -211,6 +211,6 @@ export function useEntityDataDeletionMutation(
         router.replace(redirectTo);
       }
     },
-    successMessage: entityCrudConfig.MUTATION_LANG.DELETE,
+    successMessage: { description: entityCrudConfig.MUTATION_LANG.DELETE },
   });
 }

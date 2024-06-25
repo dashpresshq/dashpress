@@ -7,7 +7,7 @@ export function FilterTableByListSelection({
   bag,
 }: IFilterProps<IColumnFilterBag<string[]>, string>) {
   return (
-    <div style={{ minWidth: "250px" }}>
+    <div className="min-w-64">
       <AsyncFormMultiSelect
         url={bag}
         values={filterValue?.value || []}

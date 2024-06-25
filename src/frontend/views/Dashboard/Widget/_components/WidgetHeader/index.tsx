@@ -35,13 +35,15 @@ export function WidgetHeader({
 
   return (
     <div className="flex justify-between items-start w-full">
-      <div className="flex flex-1 w-full gap-2">
+       <div className="flex flex-1 items-center overflow-hidden w-full gap-2">
         {setting && (
           <SortableKnob>
             <GrabIcon width={18} />
           </SortableKnob>
         )}
-        <p className="truncate w-[calc(100%-1px)]">{title} TODO</p>
+          <p className="truncate max-w-[calc(100%-5px)] w-full ">
+          {title} TODO DONE
+        </p>
       </div>
       {setting ? (
         <ActionButtons

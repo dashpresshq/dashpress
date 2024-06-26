@@ -1,6 +1,5 @@
 import "react-quill/dist/quill.snow.css";
 import styled from "styled-components";
-import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
 import dynamic from "next/dynamic";
 import { SYSTEM_COLORS } from "frontend/design-system/theme/system";
 import { noop } from "shared/lib/noop";
@@ -26,16 +25,16 @@ const Root = styled.div`
 
   .ql-toolbar {
     display: block;
-    background: ${USE_ROOT_COLOR("soft-color")};
-    color: ${USE_ROOT_COLOR("main-text")};
-    border: 1px solid ${USE_ROOT_COLOR("border-color")};
+    background: hsl(var(--dp-soft));
+    color: hsl(var(--dp-main));
+    border: 1px solid hsl(var(--dp-border));
     border-radius: 0.25rem 0.25rem 0 0;
   }
 
   .ql-stroke,
   .ql-fill {
-    color: ${USE_ROOT_COLOR("main-text")};
-    stroke: ${USE_ROOT_COLOR("main-text")};
+    color: hsl(var(--dp-main));
+    stroke: hsl(var(--dp-main));
   }
 
   .ql-snow.ql-toolbar button:hover,
@@ -52,30 +51,30 @@ const Root = styled.div`
   .ql-snow .ql-toolbar .ql-picker-item:hover,
   .ql-snow.ql-toolbar .ql-picker-item.ql-selected,
   .ql-snow .ql-toolbar .ql-picker-item.ql-selected {
-    color: ${USE_ROOT_COLOR("primary-color")};
+    color: hsl(var(--dp-primary));
   }
 
   .ql-toolbar button:hover .ql-stroke {
-    stroke: ${USE_ROOT_COLOR("primary-color")};
+    stroke: hsl(var(--dp-primary));
   }
 
   .ql-container {
-    background: ${USE_ROOT_COLOR("base-color")};
-    border: 1px solid ${USE_ROOT_COLOR("border-color")};
+    background: hsl(var(--dp-base));
+    border: 1px solid hsl(var(--dp-border));
     border-radius: 0 0 0.25rem 0.25rem;
   }
 
   .ql-container.ql-disabled {
-    background-color: ${USE_ROOT_COLOR("soft-color")};
+    background-color: hsl(var(--dp-soft));
     opacity: 1;
   }
 
   .ql-editor.ql-blank::before {
-    color: ${USE_ROOT_COLOR("muted-text")};
+    color: hsl(var(--dp-muted));
   }
 
   .ql-picker {
-    color: ${USE_ROOT_COLOR("main-text")};
+    color: hsl(var(--dp-main));
   }
 
   .quill {

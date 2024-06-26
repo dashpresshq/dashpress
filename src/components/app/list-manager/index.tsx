@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import styled from "styled-components";
 import { DataStateKeys } from "frontend/lib/data/types";
 import { arrayMoveImmutable } from "shared/lib/array/move";
 import SortableList, { SortableItem } from "react-easy-sort";
@@ -14,20 +13,6 @@ import { EmptyWrapper } from "../empty-wrapper";
 import { FormSearch } from "../form/input/search";
 
 const SEARCH_THRESHOLD = 10;
-
-const Root = styled.ul`
-  display: flex;
-  flex-direction: column;
-  padding-left: 0;
-  margin-bottom: 0;
-  border-radius: 0.25rem;
-  margin: -16px;
-  border-radius: 0px;
-
-  .dragged .grab-icon {
-    cursor: grabbing;
-  }
-`;
 
 type StringProps<T> = {
   [K in keyof T]: T[K] extends string ? K : never;
@@ -98,14 +83,14 @@ export function ListManager<T, K extends StringProps<T>>({
       {itemsLength === 0 ? (
         <EmptyWrapper {...{ ...empty }} />
       ) : (
-        <Root>
+        <ul className="flex flex-col pl-0 mb-0 rounded-none">
           {itemsLength > SEARCH_THRESHOLD ? (
             <FormSearch onChange={setSearchString} />
           ) : null}
           <SortableList
             onSortEnd={onSortEnd}
             className="list"
-            draggedItemClassName="dragged"
+            draggedItemClassName="[&_.grab-icon]:cursor-grabbing"
           >
             {searchResults.map((item, index) => (
               <SortableItem key={item[labelField] as unknown as string}>
@@ -123,7 +108,7 @@ export function ListManager<T, K extends StringProps<T>>({
           {searchResults.length === 0 && searchString.length > 0 ? (
             <EmptyWrapper text={msg`No Search Results`} />
           ) : null}
-        </Root>
+        </ul>
       )}
     </ViewStateMachine>
   );

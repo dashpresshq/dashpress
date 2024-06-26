@@ -1,4 +1,3 @@
-import styled from "styled-components";
 import { UserPermissions } from "shared/constants/user";
 import SortableList, { SortableItem } from "react-easy-sort";
 import { useRouter } from "next/router";
@@ -18,10 +17,6 @@ import {
 } from "../dashboard.store";
 import { DashboardSkeleton } from "../Skeleton";
 import { DashboardWidget } from "../Widget";
-
-const Root = styled.div`
-  container-type: inline-size;
-`;
 
 interface IProps {
   dashboardId: string;
@@ -78,7 +73,7 @@ export function BaseManageDashboard({ dashboardId, doneLink, title }: IProps) {
         error={widgets.error}
         loader={<DashboardSkeleton />}
       >
-        <Root>
+        <div className="@container">
           <SortableList
             onSortEnd={onSortEnd}
             className="dashboard-grid-root"
@@ -105,7 +100,7 @@ export function BaseManageDashboard({ dashboardId, doneLink, title }: IProps) {
               </SortableItem>
             ))}
           </SortableList>
-        </Root>
+        </div>
       </ViewStateMachine>
     </AppLayout>
   );

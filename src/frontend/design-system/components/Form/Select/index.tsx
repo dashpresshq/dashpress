@@ -1,13 +1,7 @@
 import Select from "react-select";
-import styled from "styled-components";
 import { ISelectData } from "shared/types/options";
 import { useLingui } from "@lingui/react";
 import { useMemo } from "react";
-import { SelectStyles, SharedSelectProps } from "./styles";
-
-export const SelectStyled = styled(Select)`
-  ${SelectStyles}
-`;
 
 interface IFormMultiSelect {
   selectData: ISelectData[];
@@ -34,8 +28,7 @@ export function FormMultiSelect({
   );
 
   return (
-    <SelectStyled
-      classNamePrefix={SharedSelectProps.classNamePrefix}
+    <Select
       closeMenuOnSelect={false}
       defaultValue={[]}
       isMulti

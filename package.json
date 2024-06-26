@@ -125,6 +125,7 @@
     "@storybook/addons": "^6.5.3",
     "@storybook/react": "^6.5.14",
     "@svgr/webpack": "^6.2.1",
+    "@tailwindcss/container-queries": "^0.1.1",
     "@tailwindcss/typography": "^0.5.13",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.3.0",

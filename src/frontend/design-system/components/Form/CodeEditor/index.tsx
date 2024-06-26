@@ -1,8 +1,5 @@
-import styled from "styled-components";
 import Editor from "react-simple-code-editor";
 import { highlight, languages } from "prismjs/components/prism-core";
-import { SYSTEM_COLORS } from "frontend/design-system/theme/system";
-import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
 import { noop } from "shared/lib/noop";
 import { useLingui } from "@lingui/react";
 import { ISharedFormInput } from "../../../../../components/app/form/input/types";
@@ -12,35 +9,12 @@ import {
   LabelAndError,
   generateClassNames,
 } from "@/components/app/form/input/label-and-error";
-import { PrismTokenStyles } from "@/components/app/render-code/styles";
+import styles from "@/components/app/render-code/styles.module.css";
 import { cn } from "@/lib/utils";
 
 interface IFormCodeEditor extends ISharedFormInput {
   language?: "javascript";
 }
-
-const Wrapper = styled.div`
-  &.invalid {
-    border-color: ${SYSTEM_COLORS.danger} !important;
-  }
-
-  textarea:disabled {
-    background: ${USE_ROOT_COLOR("soft-color")} !important;
-  }
-
-  border-radius: 0.25rem;
-
-  &:focus {
-    border-color: ${USE_ROOT_COLOR("primary-color")};
-    outline: 0;
-  }
-
-  pre {
-    min-height: 50px;
-  }
-
-  ${PrismTokenStyles}
-`;
 
 export function FormCodeEditor(formInput: IFormCodeEditor) {
   const {
@@ -56,11 +30,12 @@ export function FormCodeEditor(formInput: IFormCodeEditor) {
 
   return (
     <LabelAndError formInput={formInput}>
-      <Wrapper
+      <div
         className={cn(
           generateClassNames(meta),
           "line-numbers",
-          "border border-border"
+          "border border-border !rounded-sm [&_pre]:min-h-12 disabled:[&_textarea]:bg-soft focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary",
+          styles.root
         )}
       >
         <Editor
@@ -78,7 +53,7 @@ export function FormCodeEditor(formInput: IFormCodeEditor) {
             fontFamily: '"Fira code", "Fira Mono", monospace',
           }}
         />
-      </Wrapper>
+      </div>
     </LabelAndError>
   );
 }

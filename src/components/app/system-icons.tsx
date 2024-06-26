@@ -46,4 +46,3 @@ export const GrabIcon = forwardRef<
     </svg>
   );
 });
-//   // :eyes document.body.style.setProperty("cursor", "grabbing");

@@ -14,9 +14,6 @@ module.exports = {
     },
     extend: {
       colors: {
-        // input: "hsl(var(--input))",
-        // ring: "hsl(var(--ring))",
-        // background: "hsl(var(--background))",
         // foreground: "hsl(var(--foreground))",
         soft: "hsl(var(--dp-soft))",
         muted: "hsl(var(--dp-muted))",
@@ -34,15 +31,8 @@ module.exports = {
           "shade-thick-xl": "hsla(var(--dp-primary), 0.9)",
           "shade-thick-xxl": "hsla(var(--dp-primary), 0.95)",
         },
-
-        // secondary: {
-        //   DEFAULT: "hsl(var(--secondary))",
-        // },
         // destructive: {
         //   DEFAULT: "hsl(var(--destructive))",
-        // },
-        // accent: {
-        //   DEFAULT: "hsl(var(--accent))",
         // },
       },
       borderRadius: {
@@ -70,5 +60,8 @@ module.exports = {
       },
     },
   },
-  plugins: [require("@tailwindcss/typography")],
+  plugins: [
+    require("@tailwindcss/typography"),
+    require("@tailwindcss/container-queries"),
+  ],
 };

@@ -12,7 +12,6 @@ import {
 } from "frontend/hooks/entity/entity.config";
 import { useEntityToOneReferenceFields } from "frontend/hooks/entity/entity.store";
 import { DataStates } from "frontend/lib/data/types";
-import styled from "styled-components";
 import { useEvaluateScriptContext } from "frontend/hooks/scripts";
 import { ViewStateMachine } from "@/components/app/view-state-machine";
 import { useEntityViewStateMachine } from "../hooks/useEntityViewStateMachine";
@@ -21,17 +20,6 @@ import { evalutePresentationScript } from "../evaluatePresentationScript";
 import { PreDataDetails } from "./portal";
 import { PortalColumnRender } from "../Table/portal";
 import { Skeleton } from "@/components/ui/skeleton";
-
-const DetailItem = styled.div`
-  .show-on-hover {
-    opacity: 0;
-  }
-  &:hover {
-    .show-on-hover {
-      opacity: 1;
-    }
-  }
-`;
 
 export function EntityDetailsView({
   entityId,
@@ -129,7 +117,10 @@ export function EntityDetailsView({
           );
 
           return (
-            <DetailItem key={name}>
+            <div
+              className="[&_.show-on-hover]:opacity-0 [&_.show-on-hover]:hover:opacity-100"
+              key={name}
+            >
               <p className="text-xs font-semibold">
                 {getEntityFieldLabels(name)}
               </p>
@@ -145,7 +136,7 @@ export function EntityDetailsView({
                   {contentToRender}
                 </PortalColumnRender>
               </p>
-            </DetailItem>
+            </div>
           );
         })}
       </div>

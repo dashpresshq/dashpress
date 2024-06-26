@@ -1,15 +1,9 @@
 import AsyncSelect from "react-select/async";
-import styled from "styled-components";
 import { useSessionStorage } from "react-use";
 import { ILabelValue, ISelectData } from "shared/types/options";
 import { ApiRequest } from "frontend/lib/data/makeRequest";
 import { debounce } from "lodash";
 import { useEffect } from "react";
-import { SelectStyles, SharedSelectProps } from "../styles";
-
-export const Select = styled(AsyncSelect)`
-  ${SelectStyles}
-`;
 
 const abortController = new AbortController();
 
@@ -54,12 +48,11 @@ export function AsyncFormMultiSelect({
     };
   });
   return (
-    <Select
+    <AsyncSelect
       cacheOptions
       defaultOptions
-      classNamePrefix={SharedSelectProps.classNamePrefix}
       closeMenuOnSelect={false}
-      defaultValue={values}
+      // defaultValue={values}
       isMulti
       value={cosmeticValues}
       onChange={(newValues: unknown) => {

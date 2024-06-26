@@ -39,7 +39,7 @@ const handleRequestError = async (response: Response, errorMessage: string) => {
 
 export async function makeRawRequest(
   path: string,
-  signal: AbortSignal,
+  signal?: AbortSignal,
   errorMessage?: string
 ) {
   const response = await fetch(pathWithBaseUrl(path), {

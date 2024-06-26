@@ -79,9 +79,9 @@ export function Breadcrumbs({ items, onCrumbClick }: IProps) {
           </>
         ) : null}
         {itemsWithOriginalIndex.slice(-ITEMS_TO_DISPLAY + 1).map((item) => (
-          <BreadcrumbItem key={item.value}>
-            {item.index < items.length - 1 ? (
-              <>
+          <React.Fragment key={item.value}>
+            <BreadcrumbItem>
+              {item.index < items.length - 1 ? (
                 <BreadcrumbLink
                   asChild
                   className="max-w-20 truncate md:max-w-none"
@@ -93,14 +93,14 @@ export function Breadcrumbs({ items, onCrumbClick }: IProps) {
                     {item.label}
                   </button>
                 </BreadcrumbLink>
-                <BreadcrumbSeparator />
-              </>
-            ) : (
-              <BreadcrumbPage className="max-w-20 truncate md:max-w-none">
-                {item.label}
-              </BreadcrumbPage>
-            )}
-          </BreadcrumbItem>
+              ) : (
+                <BreadcrumbPage className="max-w-20 truncate md:max-w-none">
+                  {item.label}
+                </BreadcrumbPage>
+              )}
+            </BreadcrumbItem>
+            {item.index < items.length - 1 && <BreadcrumbSeparator />}
+          </React.Fragment>
         ))}
       </BreadcrumbList>
     </Breadcrumb>

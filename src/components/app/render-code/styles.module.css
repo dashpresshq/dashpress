@@ -1,74 +1,70 @@
-.root .token.cdata,
-.root .token.comment,
-.root .token.doctype,
-.root .token.prolog {
+.root :global .token.cdata,
+.root :global .token.comment,
+.root :global .token.doctype,
+.root :global .token.prolog {
   color: #90a4ae;
 }
 
-.root.token.punctuation {
+.root :global .token.punctuation {
   color: #9e9e9e;
 }
 
-.root {
-  background: #e91e63 !important;
-}
-
-.namespace {
+.root :global .namespace {
   opacity: 0.7;
 }
 
-.root .token.boolean,
-.root .token.constant,
-.root .token.deleted,
-.root .token.number,
-.root .token.property,
-.root .token.symbol,
-.root .token.tag {
+.root :global .token.boolean,
+.root :global .token.constant,
+.root :global .token.deleted,
+.root :global .token.number,
+.root :global .token.property,
+.root :global .token.symbol,
+.root :global .token.tag {
   color: #e91e63;
 }
 
-.root.token.attr-name,
-.root.token.builtin,
-.root.token.char,
-.root.token.inserted,
-.root.token.selector,
-.root.token.string {
+.root :global .token.attr-name,
+.root :global .token.builtin,
+.root :global .token.char,
+.root :global .token.inserted,
+.root :global .token.selector,
+.root :global .token.string {
   color: #4caf50;
 }
 
-.language-css .token.string,
-.style .token.string,
-.token.entity,
-.token.operator,
-.token.url {
+.root :global .language-css .token.string,
+.root :global .style .token.string,
+.root :global .token.entity,
+.root :global .token.operator,
+.root :global .token.url {
   color: #795548;
 }
 
-.root .token.atrule,
-.root .token.attr-value,
-.root .token.keyword {
-  color: #3f51b5;
+.root :global .token.atrule,
+.root :global .token.attr-value,
+.root :global .token.keyword {
+  color: #d5c4a1;
 }
 
-.token.function {
+.root :global .token.function {
   color: #f44336;
 }
 
-.token.important,
-.token.regex,
-.token.variable {
+.root :global .token.important,
+.root :global .token.regex,
+.root :global .token.variable {
   color: #ff9800;
 }
 
-.token.bold,
-.token.important {
+.root :global .token.bold,
+.root :global .token.important {
   font-weight: 700;
 }
 
-.token.italic {
+.root :global .token.italic {
   font-style: italic;
 }
 
-.token.entity {
+.root :global .token.entity {
   cursor: help;
 }

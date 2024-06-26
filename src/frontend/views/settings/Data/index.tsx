@@ -108,7 +108,7 @@ function DateSettings() {
               await upsertDateFormatConfigurationMutation.mutateAsync(format);
             } catch (error) {
               toast({
-                variant: "danger",
+                variant: "red",
                 title: msg`Invalid Date Format`,
                 description: msg`Please go to ${DATE_FORMAT_LIB_LINK} to see valid formats`,
               });

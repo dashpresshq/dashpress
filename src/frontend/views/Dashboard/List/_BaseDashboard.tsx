@@ -37,19 +37,19 @@ export function BaseDashboard({ dashboardId, manageLink }: IProps) {
           : []
       }
     >
-      <ViewStateMachine
-        loading={widgets.isLoading}
-        error={widgets.error}
-        loader={<DashboardSkeleton />}
-      >
-        <div className="@container">
+      <div className="@container">
+        <ViewStateMachine
+          loading={widgets.isLoading}
+          error={widgets.error}
+          loader={<DashboardSkeleton />}
+        >
           <div className="dashboard-grid-root">
             {widgets.data.map((config) => (
               <DashboardWidget config={config} key={config.id} />
             ))}
           </div>
-        </div>
-      </ViewStateMachine>
+        </ViewStateMachine>
+      </div>
     </AppLayout>
   );
 }

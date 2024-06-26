@@ -1,0 +1,63 @@
+.root :global .ql-editor {
+  min-height: 18em;
+  border: none;
+  border-radius: 0;
+}
+
+.root :global .ql-toolbar {
+  display: block;
+  background: hsl(var(--dp-soft));
+  color: hsl(var(--dp-main));
+  border: 1px solid hsl(var(--dp-border));
+  border-radius: 0.25rem 0.25rem 0 0;
+}
+
+.root :global .ql-stroke,
+.root :global .ql-fill {
+  color: hsl(var(--dp-main));
+  stroke: hsl(var(--dp-main));
+}
+
+.root :global .ql-snow.ql-toolbar button:hover,
+.root :global .ql-snow .ql-toolbar button:hover,
+.root :global .ql-snow.ql-toolbar button:focus,
+.root :global .ql-snow .ql-toolbar button:focus,
+.root :global .ql-snow.ql-toolbar button.ql-active,
+.root :global .ql-snow .ql-toolbar button.ql-active,
+.root :global .ql-snow.ql-toolbar .ql-picker-label:hover,
+.root :global .ql-snow .ql-toolbar .ql-picker-label:hover,
+.root :global .ql-snow.ql-toolbar .ql-picker-label.ql-active,
+.root :global .ql-snow .ql-toolbar .ql-picker-label.ql-active,
+.root :global .ql-snow.ql-toolbar .ql-picker-item:hover,
+.root :global .ql-snow .ql-toolbar .ql-picker-item:hover,
+.root :global .ql-snow.ql-toolbar .ql-picker-item.ql-selected,
+.root :global .ql-snow .ql-toolbar .ql-picker-item.ql-selected {
+  color: hsl(var(--dp-primary));
+}
+
+.root :global .ql-toolbar button:hover .ql-stroke {
+  stroke: hsl(var(--dp-primary));
+}
+
+.root :global .ql-container {
+  background: hsl(var(--dp-base));
+  border: 1px solid hsl(var(--dp-border));
+  border-radius: 0 0 0.25rem 0.25rem;
+}
+
+.root :global .ql-container.ql-disabled {
+  background-color: hsl(var(--dp-soft));
+  opacity: 1;
+}
+
+.root :global .ql-editor.ql-blank::before {
+  color: hsl(var(--dp-muted));
+}
+
+.root :global .ql-picker {
+  color: hsl(var(--dp-main));
+}
+
+.root :global .quill.invalid {
+  border: 1px solid #dc2626 !important;
+}

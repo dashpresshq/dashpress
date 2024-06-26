@@ -1,7 +1,5 @@
-import { gridItem } from "frontend/design-system/constants/grid";
-import { ReactNode } from "react";
+import { CSSProperties, ReactNode } from "react";
 import { GridSpanSizes } from "shared/types/ui";
-import styled from "styled-components";
 
 export const FormGrid = {
   Root: ({ children }: { children: ReactNode }) => (
@@ -9,9 +7,16 @@ export const FormGrid = {
       <div className="grid-root auto-rows-auto items-center">{children}</div>
     </div>
   ),
-  Item: styled.div<{
-    $span?: GridSpanSizes;
-  }>`
-    ${gridItem}
-  `,
+  Item: ({ children, span }: { children: ReactNode; span?: GridSpanSizes }) => (
+    <div
+      style={
+        {
+          "--grid-span": span,
+        } as CSSProperties
+      }
+      className="grid-item"
+    >
+      {children}
+    </div>
+  ),
 };

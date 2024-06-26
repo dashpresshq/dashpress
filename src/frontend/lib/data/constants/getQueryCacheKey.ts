@@ -2,7 +2,7 @@ import { IPaginatedDataState } from "shared/types/data";
 
 export const getQueryCachekey = (endPoint: string) =>
   endPoint
-    .replace("?", "/")
+    ?.replace("?", "/")
     .split("/")
     .filter((x) => x);
 

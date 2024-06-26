@@ -29,13 +29,13 @@ const toastVariants = cva(
   {
     variants: {
       variant: {
-        success: cn(spectrumVariants({ spectrum: "green" })),
-        warning: cn(spectrumVariants({ spectrum: "yellow" })),
-        danger: cn(spectrumVariants({ spectrum: "red" })),
+        green: cn(spectrumVariants({ spectrum: "green" })),
+        yellow: cn(spectrumVariants({ spectrum: "yellow" })),
+        red: cn(spectrumVariants({ spectrum: "red" })),
       },
     },
     defaultVariants: {
-      variant: "success",
+      variant: "green",
     },
   }
 );

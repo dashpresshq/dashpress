@@ -97,7 +97,7 @@ export function usePageRequiresPermission(
   }
   if (!canUser(permission)) {
     toast({
-      variant: "danger",
+      variant: "red",
       title: msg`Unauthorized Access`,
       description: msg`You dont have the permission to view this page`,
     });

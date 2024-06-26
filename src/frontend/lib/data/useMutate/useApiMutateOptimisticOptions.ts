@@ -62,8 +62,8 @@ export function useApiMutateOptimisticOptions<T, V, R = void>(
       noop(formData, error);
       apiMutate.reset(oldData);
       toast({
-        variant: "danger",
-        title: msg`Request Error`,
+        variant: "red",
+        title: msg`Request Failed`,
         description: fakeMessageDescriptor(
           error.message ||
             "Something went wrong. Please try again or contact your adminstrator."

@@ -25,7 +25,7 @@ export function NavigationSideBar({ children }: IProps) {
             isFullWidth
               ? SIDE_BAR_WIDTH_VARIATIONS.full
               : SIDE_BAR_WIDTH_VARIATIONS.collapsed
-          }px - 16px)`,
+          }px)`,
           marginLeft: isFullWidth
             ? SIDE_BAR_WIDTH_VARIATIONS.full
             : SIDE_BAR_WIDTH_VARIATIONS.collapsed,

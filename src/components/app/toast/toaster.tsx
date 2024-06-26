@@ -9,6 +9,8 @@ import {
   ToastViewport,
 } from "@/components/ui/toast";
 import { useToast } from "./use-toast";
+import { spectrumVariants } from "@/components/ui/spectrum";
+import { cn } from "@/lib/utils";
 
 export function Toaster() {
   const { toasts } = useToast();
@@ -21,7 +23,8 @@ export function Toaster() {
           <Toast
             key={id}
             {...props}
-            duration={variant === "danger" || action ? 10000 : 5000}
+            variant={variant}
+            duration={variant === "red" || action ? 10000 : 5000}
           >
             <div className="grid gap-1">
               {title && <ToastTitle>{_(title)}</ToastTitle>}
@@ -30,7 +33,15 @@ export function Toaster() {
               )}
             </div>
             {action && (
-              <ToastAction onClick={action.action} altText={_(action.label)}>
+              <ToastAction
+                onClick={action.action}
+                altText={_(action.label)}
+                className={cn(
+                  spectrumVariants({
+                    spectrum: variant || "green",
+                  })
+                )}
+              >
                 {_(action.label)}
               </ToastAction>
             )}

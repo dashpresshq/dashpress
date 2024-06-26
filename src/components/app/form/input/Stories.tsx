@@ -8,7 +8,7 @@ import { fakeMessageDescriptor } from "translations/fake";
 import { TestProviders } from "__tests__/_/Provider";
 import { FormInput } from "./text";
 import { FormNumberInput } from "./number";
-import { FormRichTextArea } from "../../../../frontend/design-system/components/Form/RichText";
+import { FormRichTextArea } from "./rich-text";
 import { FormTextArea } from "./textarea";
 import { FormMultiSelect } from "../../../../frontend/design-system/components/Form/Select";
 import { FormCodeEditor } from "../../../../frontend/design-system/components/Form/CodeEditor";

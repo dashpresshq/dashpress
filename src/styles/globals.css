@@ -183,7 +183,10 @@ text-on-shade: 48, 86.7%, 88.2%
     @apply disabled:cursor-not-allowed disabled:bg-soft disabled:opacity-70;
   }
   .grid-root {
-    @apply grid gap-x-4 grid-cols-1 md:grid-cols-12;
+    @apply grid gap-x-4 grid-cols-1 @3xl:grid-cols-12;
+  }
+  .grid-item {
+    @apply col-start-[span_1] @3xl:col-start-[span_var(--grid-span,12)];
   }
   .dashboard-grid-root {
     @apply grid-root select-none gap-y-4 auto-rows-[minmax(100px,auto)];

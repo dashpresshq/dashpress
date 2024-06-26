@@ -8,7 +8,7 @@ export const useToastActionQueryError = (error: unknown, condition = true) => {
     if (error && condition) {
       toast({
         description: fakeMessageDescriptor(getBestErrorMessage(error)),
-        variant: "danger",
+        variant: "red",
       });
     }
   }, [error, condition]);

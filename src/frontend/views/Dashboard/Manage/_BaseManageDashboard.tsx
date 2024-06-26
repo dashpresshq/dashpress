@@ -68,12 +68,12 @@ export function BaseManageDashboard({ dashboardId, doneLink, title }: IProps) {
         },
       ]}
     >
-      <ViewStateMachine
-        loading={widgets.isLoading}
-        error={widgets.error}
-        loader={<DashboardSkeleton />}
-      >
-        <div className="@container">
+      <div className="@container">
+        <ViewStateMachine
+          loading={widgets.isLoading}
+          error={widgets.error}
+          loader={<DashboardSkeleton />}
+        >
           <SortableList
             onSortEnd={onSortEnd}
             className="dashboard-grid-root"
@@ -100,8 +100,8 @@ export function BaseManageDashboard({ dashboardId, doneLink, title }: IProps) {
               </SortableItem>
             ))}
           </SortableList>
-        </div>
-      </ViewStateMachine>
+        </ViewStateMachine>
+      </div>
     </AppLayout>
   );
 }

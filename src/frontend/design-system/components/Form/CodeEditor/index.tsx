@@ -34,7 +34,7 @@ export function FormCodeEditor(formInput: IFormCodeEditor) {
         className={cn(
           generateClassNames(meta),
           "line-numbers",
-          "border border-border !rounded-sm [&_pre]:min-h-12 disabled:[&_textarea]:bg-soft focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary",
+          "border border-border !rounded-md [&_textarea]!rounded-md [&_pre]:min-h-12 disabled:[&_textarea]:bg-soft [&_textarea]:focus:border-primary [&_textarea]:focus:outline-none [&_textarea]:focus:ring-1 [&_textarea]:focus:ring-primary",
           styles.root
         )}
       >

@@ -64,7 +64,7 @@ export function ScriptForm({
             await onSubmit(jsString);
           } catch (e) {
             toast({
-              variant: "danger",
+              variant: "red",
               title: msg`Could not parse Javascript`,
               description: msg`•Expression: \n•JS-Error: ${e}`,
             });

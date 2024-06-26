@@ -48,8 +48,8 @@ export function useWaitForResponseMutationOptions<V, R = void>(
     },
     onError: (error: { message: string }) => {
       toast({
-        variant: "danger",
-        title: msg`Request Error`,
+        variant: "red",
+        title: msg`Request Failed`,
         description: fakeMessageDescriptor(
           error.message ||
             "Something went wrong. Please try again or contact your adminstrator."

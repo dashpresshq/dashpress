@@ -58,7 +58,7 @@ function FilterRow({
           validateFields={[]}
         >
           {({ meta, input }) => (
-            <FormGrid.Item $span="3">
+            <FormGrid.Item span="3">
               <FormSelect
                 label={msg`Field`}
                 required
@@ -79,7 +79,7 @@ function FilterRow({
           validateFields={[]}
         >
           {({ meta, input }) => (
-            <FormGrid.Item $span={noValue ? "9" : "3"}>
+            <FormGrid.Item span={noValue ? "9" : "3"}>
               <FormSelect
                 label={msg`Operator`}
                 required
@@ -97,7 +97,7 @@ function FilterRow({
             validateFields={[]}
           >
             {({ meta, input }) => (
-              <FormGrid.Item $span="6">
+              <FormGrid.Item span="6">
                 <FormInput
                   label={msg`Value`}
                   required

@@ -83,7 +83,7 @@ export function ListManager<T, K extends StringProps<T>>({
       {itemsLength === 0 ? (
         <EmptyWrapper {...{ ...empty }} />
       ) : (
-        <ul className="flex flex-col pl-0 mb-0 rounded-none">
+        <ul className="flex flex-col pl-0 rounded-none -mx-4 -mb-4">
           {itemsLength > SEARCH_THRESHOLD ? (
             <FormSearch onChange={setSearchString} />
           ) : null}

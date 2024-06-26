@@ -34,7 +34,7 @@ function useSignInMutation() {
     },
     onError: (error: { message: string }) => {
       toast({
-        variant: "danger",
+        variant: "red",
         description: fakeMessageDescriptor(error.message),
       });
     },

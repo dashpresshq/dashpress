@@ -62,7 +62,7 @@ export function SchemaForm<T extends Record<string, unknown>>({
         if (typeof modifiedFormValues !== "object") {
           toast({
             description: modifiedFormValues,
-            variant: "danger",
+            variant: "red",
             title: msg`Input Validation`,
           });
           return;
@@ -115,7 +115,7 @@ export function SchemaForm<T extends Record<string, unknown>>({
                     parse={identity}
                   >
                     {(formProps) => (
-                      <FormGrid.Item $span={bag.span}>
+                      <FormGrid.Item span={bag.span}>
                         <RenderFormInput
                           type={bag.type}
                           disabled={

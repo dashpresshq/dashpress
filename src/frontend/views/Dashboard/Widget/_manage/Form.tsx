@@ -121,7 +121,7 @@ export function DashboardWidgetForm({
               }}
             >
               <FormGrid.Root>
-                <FormGrid.Item $span="9">
+                <FormGrid.Item span="9">
                   <Field name="title" validate={required} validateFields={[]}>
                     {({ input, meta }) => (
                       <FormInput
@@ -133,7 +133,7 @@ export function DashboardWidgetForm({
                     )}
                   </Field>
                 </FormGrid.Item>
-                <FormGrid.Item $span="3">
+                <FormGrid.Item span="3">
                   <Field name="_type" validate={required} validateFields={[]}>
                     {({ input, meta }) => (
                       <FormSelect
@@ -206,7 +206,7 @@ export function DashboardWidgetForm({
                 <FormGrid.Item>
                   {formFields.includes("icon") && <IconInputField />}
                 </FormGrid.Item>
-                <FormGrid.Item $span="6">
+                <FormGrid.Item span="6">
                   <Field name="span" validateFields={[]}>
                     {({ input, meta }) => (
                       <FormSelect
@@ -218,7 +218,7 @@ export function DashboardWidgetForm({
                     )}
                   </Field>
                 </FormGrid.Item>
-                <FormGrid.Item $span="6">
+                <FormGrid.Item span="6">
                   <Field name="height" validateFields={[]}>
                     {({ input, meta }) => (
                       <FormSelect

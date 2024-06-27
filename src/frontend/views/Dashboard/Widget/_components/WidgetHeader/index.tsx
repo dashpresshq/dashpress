@@ -41,7 +41,7 @@ export function WidgetHeader({
             <GrabIcon width={18} />
           </SortableKnob>
         )}
-        <p className="truncate max-w-[calc(100%-10px)] ">{title}</p>
+        <p className="truncate">{title}</p>
       </div>
       {setting ? (
         <ActionButtons

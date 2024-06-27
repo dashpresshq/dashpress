@@ -6,6 +6,7 @@ import { useSessionStorage } from "react-use";
 import { useAppConfiguration } from "frontend/hooks/configuration/configuration.store";
 import { CRUD_CONFIG_NOT_FOUND } from "frontend/lib/crud-config";
 import { typescriptSafeObjectDotEntries } from "shared/lib/objects";
+import { useEffect } from "react";
 import {
   NAVIGATION_MENU_ENDPOINT,
   SIDE_BAR_WIDTH_VARIATIONS,
@@ -49,6 +50,20 @@ export function SideBar({ isFullWidth, setIsFullWidth }: IProps) {
     setActiveItem$1(newValueFiltered);
   };
 
+  const handleKeyPress = (event: KeyboardEvent) => {
+    if (!event.ctrlKey) return;
+    if (event.key !== "B") return;
+    console.log(event.key);
+    setIsFullWidth(!isFullWidth);
+  };
+
+  useEffect(() => {
+    document.addEventListener("keydown", handleKeyPress);
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyPress);
+    };
+  }, [handleKeyPress]);
   return (
     <div
       className="fixed transition-all min-h-dvh"

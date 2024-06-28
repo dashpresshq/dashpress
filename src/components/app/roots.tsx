@@ -1,5 +1,4 @@
 import { ReactNode } from "react";
-import { Toaster } from "react-hot-toast";
 import { QueryProvider } from "frontend/lib/data/QueryClient";
 import { LinguiProvider } from "translations/utils";
 import { Messages } from "@lingui/core";
@@ -7,6 +6,7 @@ import { PortalProvider } from "frontend/_layouts/app/portal";
 import { GoogleTagManager } from "frontend/_layouts/scripts/GoogleTagManager";
 import { ThemeProvider } from "next-themes";
 import { ConfirmAlert } from "./confirm-alert";
+import { Toaster } from "./toast/toaster";
 
 export function ApplicationRoot({
   children,

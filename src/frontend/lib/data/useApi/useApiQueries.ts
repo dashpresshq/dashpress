@@ -30,8 +30,10 @@ export function useApiQueries<T, P>({
       meta: {
         persist,
       },
-      queryFn: async () =>
-        dataTransformer(await ApiRequest.GET(pathFn(inputItem[accessor]))) as P,
+      queryFn: async ({ signal }) =>
+        dataTransformer(
+          await ApiRequest.GET(pathFn(inputItem[accessor]), signal)
+        ) as P,
     })),
   });
 

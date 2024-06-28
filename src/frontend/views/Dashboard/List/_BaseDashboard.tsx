@@ -1,6 +1,5 @@
 import { UserPermissions } from "shared/constants/user";
 import { useUserHasPermission } from "frontend/hooks/auth/user.store";
-import styled from "styled-components";
 import { useRouter } from "next/router";
 import { AppLayout } from "frontend/_layouts/app";
 import { useDomainMessages } from "frontend/lib/crud-config";
@@ -9,10 +8,6 @@ import { ViewStateMachine } from "@/components/app/view-state-machine";
 import { useDashboardWidgets } from "../dashboard.store";
 import { DashboardSkeleton } from "../Skeleton";
 import { DashboardWidget } from "../Widget";
-
-const Container = styled.div`
-  container-type: inline-size;
-`;
 
 interface IProps {
   dashboardId: string;
@@ -42,19 +37,19 @@ export function BaseDashboard({ dashboardId, manageLink }: IProps) {
           : []
       }
     >
-      <ViewStateMachine
-        loading={widgets.isLoading}
-        error={widgets.error}
-        loader={<DashboardSkeleton />}
-      >
-        <Container>
+      <div className="@container">
+        <ViewStateMachine
+          loading={widgets.isLoading}
+          error={widgets.error}
+          loader={<DashboardSkeleton />}
+        >
           <div className="dashboard-grid-root">
             {widgets.data.map((config) => (
               <DashboardWidget config={config} key={config.id} />
             ))}
           </div>
-        </Container>
-      </ViewStateMachine>
+        </ViewStateMachine>
+      </div>
     </AppLayout>
   );
 }

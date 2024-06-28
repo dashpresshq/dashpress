@@ -74,8 +74,8 @@ export const WidgetFrame = forwardRef<HTMLDivElement, IProps>(
       <WidgetRoot
         ref={ref}
         aria-label={`${config.title} Widget`}
-        $span={config.span || configSpan}
-        $height={height}
+        span={config.span || configSpan}
+        height={height}
       >
         <Card className="h-full">
           <div className="p-4">

@@ -35,7 +35,7 @@ export default {
 
 const Template: Story<IProps> = (args) => (
   <TestProviders>
-    <div style={{ display: "flex", justifyContent: "center" }}>
+    <div className="flex justify-center">
       <DropDownMenu {...args} />
     </div>
   </TestProviders>

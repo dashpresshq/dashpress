@@ -1,61 +1,12 @@
 import ReactPaginate from "react-paginate";
-
-import styled from "styled-components";
-import { USE_ROOT_COLOR } from "frontend/design-system/theme/root";
 import { Trans, msg } from "@lingui/macro";
 import { ChevronLeft, ChevronRight } from "react-feather";
-import { i18nNoop } from "translations/fake";
+import { fakeMessageDescriptor } from "translations/fake";
+import { DotsHorizontalIcon } from "@radix-ui/react-icons";
 import { TABLE_PAGE_SIZES } from "./constants";
 import { Select } from "@/components/ui/select";
-
-const Pagination = styled.div`
-  .pagination {
-    display: flex;
-    padding-left: 0;
-    list-style: none;
-  }
-
-  .page-link {
-    padding: 0.25rem 0.5rem;
-    margin-left: 6px;
-    font-size: 0.8rem;
-    border-radius: 4px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    color: ${USE_ROOT_COLOR("primary-color")};
-    border: 1px solid ${USE_ROOT_COLOR("primary-color")};
-
-    &:hover {
-      color: ${USE_ROOT_COLOR("text-on-primary")};
-      background-color: ${USE_ROOT_COLOR("primary-color")};
-      border-color: ${USE_ROOT_COLOR("primary-color")};
-    }
-  }
-
-  .page-item.active {
-    .page-link {
-      color: ${USE_ROOT_COLOR("text-on-primary")};
-      background-color: ${USE_ROOT_COLOR("primary-color")};
-      border-color: ${USE_ROOT_COLOR("primary-color")};
-    }
-  }
-
-  .page-item.disabled {
-    .page-link {
-      cursor: not-allowed;
-      color: ${USE_ROOT_COLOR("muted-text")};
-      border-color: ${USE_ROOT_COLOR("border-color")};
-    }
-  }
-`;
-
-const DirectionIcon = styled.i`
-  height: 20px;
-`;
-
-const Root = styled.div``;
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
 interface IProps {
   setPageSize: (pageSize: number) => void;
@@ -65,6 +16,11 @@ interface IProps {
   pageSize: number;
   totalPageCount: number;
 }
+
+const className = cn(
+  buttonVariants({ variant: "ghost" }),
+  "text-primary border border-primary-alpha hover:bg-primary-alpha hover:text-primary-alpha-text"
+);
 
 export function TablePagination({
   setPageSize,
@@ -78,18 +34,18 @@ export function TablePagination({
     return null;
   }
   return (
-    <Root className="px-3 py-2">
-      <div className="flex justify-between items-center">
+    <div className="px-3 py-2">
+      <div className="flex items-center flex-col gap-2 md:flex-row md:justify-between">
         <div className="flex gap-2 items-center">
           <Trans>
             Showing
             <Select
               placeholder={msg`Select Page Size`}
               name="table-page-size"
-              className="w-14"
+              className="w-18"
               options={TABLE_PAGE_SIZES.map((option) => ({
                 value: `${option}`,
-                label: i18nNoop(option),
+                label: fakeMessageDescriptor(`${option}`),
               }))}
               onChange={(value) => setPageSize(Number(value))}
               value={`${pageSize}`}
@@ -98,32 +54,29 @@ export function TablePagination({
             results
           </Trans>
         </div>
-        <Pagination>
+        <nav role="navigation" aria-label="pagination">
           <ReactPaginate
-            previousLabel={<DirectionIcon as={ChevronLeft} size={16} />}
-            nextLabel={<DirectionIcon as={ChevronRight} size={16} />}
-            breakLabel="..."
+            previousLabel={<ChevronLeft className="h-4 w-4" />}
+            nextLabel={<ChevronRight className="h-4 w-4" />}
+            breakLabel={<DotsHorizontalIcon className="h-4 w-4" />}
             pageCount={totalPageCount}
             renderOnZeroPageCount={() => null}
             marginPagesDisplayed={2}
             pageRangeDisplayed={3}
-            breakClassName="page-item"
-            nextClassName="page-item"
             forcePage={pageIndex}
-            previousClassName="page-item"
-            pageClassName="page-item"
-            breakLinkClassName="page-link"
-            pageLinkClassName="page-link"
-            nextLinkClassName="page-link"
-            previousLinkClassName="page-link"
-            containerClassName="pagination"
-            activeClassName="active"
+            breakLinkClassName={className}
+            pageLinkClassName={className}
+            nextLinkClassName={className}
+            previousLinkClassName={className}
+            disabledLinkClassName="opacity-70 cursor-not-allowed"
+            containerClassName="flex flex-row items-center gap-1"
+            activeLinkClassName="!bg-primary-alpha !text-primary-alpha-text"
             onPageChange={({ selected }) => {
               gotoPage(selected);
             }}
           />
-        </Pagination>
+        </nav>
       </div>
-    </Root>
+    </div>
   );
 }

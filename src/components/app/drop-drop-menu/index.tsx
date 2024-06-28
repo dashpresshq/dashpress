@@ -67,9 +67,9 @@ export function DropDownMenu({
         <SoftButton {...currentMenuItem} className="rounded-r-none" />
       )}
       <DropdownMenu open={isOpen} onOpenChange={toggle}>
-        <DropdownMenuTrigger className={className}>
+        <DropdownMenuTrigger asChild>
           {ellipsis ? (
-            <Button className="p-0.5 px-1" variant="soft">
+            <Button className={cn("p-0.5 px-1", className)} variant="soft">
               <MoreVertical
                 size={16}
                 className="cursor-pointer"
@@ -79,7 +79,7 @@ export function DropDownMenu({
           ) : (
             <Button
               variant="soft"
-              className="rounded-l-none px-1"
+              className={cn("rounded-l-none px-1", className)}
               aria-label="Toggle Dropdown"
             >
               <ChevronDown size={16} />
@@ -87,6 +87,7 @@ export function DropDownMenu({
           )}
         </DropdownMenuTrigger>
         <DropdownMenuContent
+          align="end"
           className={cn("p-0 border-0", contentClassName)}
           onClick={toggle}
         >

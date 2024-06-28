@@ -1,8 +1,10 @@
 import { noop } from "shared/lib/noop";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { ToastService } from "frontend/lib/toast";
+import { msg } from "@lingui/macro";
 import { IApiMutateOptions } from "./types";
 import { getQueryCachekey } from "../constants/getQueryCacheKey";
+import { useToast } from "@/components/app/toast/use-toast";
+import { fakeMessageDescriptor } from "@/translations/fake";
 
 function useApiMutate<T>(endpoint: string) {
   const queryClient = useQueryClient();
@@ -29,6 +31,7 @@ export function useApiMutateOptimisticOptions<T, V, R = void>(
 ) {
   const apiMutate = useApiMutate<T>(options.dataQueryPath);
   const queryClient = useQueryClient();
+  const { toast } = useToast();
 
   return useMutation({
     mutationFn: options.mutationFn,
@@ -36,9 +39,9 @@ export function useApiMutateOptimisticOptions<T, V, R = void>(
       apiMutate.set((oldData) => options.onMutate(oldData, formData)),
     onSuccess: async (requestResponse: R) => {
       if (options.smartSuccessMessage) {
-        ToastService.success(options.smartSuccessMessage(requestResponse));
+        toast(options.smartSuccessMessage(requestResponse));
       } else if (options.successMessage) {
-        ToastService.success(options.successMessage);
+        toast(options.successMessage);
       }
       if (options.otherEndpoints) {
         options.otherEndpoints.forEach((queryKey) => {
@@ -58,10 +61,14 @@ export function useApiMutateOptimisticOptions<T, V, R = void>(
     ) => {
       noop(formData, error);
       apiMutate.reset(oldData);
-      ToastService.error(
-        error.message ||
-          "Something went wrong. Please try again or contact support."
-      );
+      toast({
+        variant: "red",
+        title: msg`Request Failed`,
+        description: fakeMessageDescriptor(
+          error.message ||
+            "Something went wrong. Please try again or contact your adminstrator."
+        ),
+      });
     },
     onSettled: () => {
       apiMutate.invalidate();

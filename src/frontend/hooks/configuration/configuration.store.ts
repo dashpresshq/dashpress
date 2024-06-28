@@ -103,6 +103,6 @@ export function useUpsertConfigurationMutation<T extends AppConfigurationKeys>(
       configurationApiPath(key, entity),
       ...(mutationOptions?.otherEndpoints || []),
     ],
-    successMessage: domainMessages.MUTATION_LANG.SAVED,
+    successMessage: { description: domainMessages.MUTATION_LANG.SAVED },
   });
 }

@@ -13,7 +13,7 @@ export interface IProps {
 
 export function FormSkeleton({ schema }: IProps) {
   return (
-    <div style={{ paddingTop: "8px" }}>
+    <div className="pt-2">
       {Array.from({ length: schema.length }, (_, k) => k).map((key) => (
         <Fragment key={key}>
           <Skeleton className="h-4 w-12 mb-1" />

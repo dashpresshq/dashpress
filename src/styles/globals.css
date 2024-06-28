@@ -4,30 +4,6 @@
 
 @layer base {
   :root {
-    /* --soft: 215, 15%, 15%;
-    --muted: 212, 9%, 58%;
-    --main: 210, 17%, 82%;
-    --border: 212, 12%, 21%;
-    --base: 215, 21%, 11%;
-    --foundation: 216, 28%, 7%;
-    --primary: 249, 52%, 46%;
-    --primary-text: 0, 0%, 100%; */
-
-    /* --secondary: 240 4.8% 95.9%;
-    --secondary-foreground: 240 5.9% 10%; */
-
-    /* --accent: %;
-    --accent-foreground: 240 5.9% 10%; */
-
-    /* --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%; */
-
-    /* --input: 240 5.9% 90%; */
-    /* --ring: 240 10% 3.9%; */
-
-    /* --background: 0 0% 100%;
-    --foreground: 240 10% 3.9%; */
-
     --radius: 0.5rem;
 
     --light-primary-alpha-opacity: 0.1;
@@ -67,6 +43,120 @@
     --dp-primary-alpha-opacity: var(--dark-primary-alpha-opacity);
     --dp-primary-alpha-text: var(--white);
   }
+
+  [data-theme="gruv_box"] {
+    --dp-primary: 27, 99.1%, 54.7%;
+    --dp-primary-text: 195, 6.5%, 12.2%;
+
+    --dp-soft: 20, 5.3%, 22.4%;
+    --dp-muted: 40, 38.2%, 73.3%;
+    --dp-main: 43, 58.8%, 81%;
+    --dp-border: 28, 10.7%, 43.9%;
+    --dp-base: 22, 7.4%, 29.2%;
+    --dp-foundation: 22, 7.4%, 29.2%;
+
+    --dp-primary-alpha-opacity: var(--dark-primary-alpha-opacity);
+    --dp-primary-alpha-text: 48, 86.7%, 88.2%;
+
+    /*
+overidePrimary: 27, 99.1%, 54.7%
+base-color: 22, 7.4%, 29.2%
+foundation-color: 22, 7.4%, 29.2%
+soft-color: 20, 5.3%, 22.4%
+main-text: 43, 58.8%, 81%
+muted-text: 40, 38.2%, 73.3%
+border-color: 28, 10.7%, 43.9%
+text-on-primary: 195, 6.5%, 12.2%
+text-on-shade: 48, 86.7%, 88.2%
+    */
+
+    /* overidePrimary: "#fe8019",
+    "base-color": "#504945",
+    "foundation-color": "#504945",
+    "soft-color": "#3c3836",
+    "main-text": "#ebdbb2",
+    "muted-text": "#d5c4a1",
+    "border-color": "#7c6f64",
+    "text-on-primary": "#1d2021",
+    "text-on-shade": "#fbf1c7",
+    "shade-opacity": "5A", */
+  }
+
+  [data-theme="high_contrast"] {
+    --dp-primary: var(--app-primary);
+    --dp-primary-text: var(--white);
+
+    --dp-soft: 0, 0%, 6.7%;
+    --dp-muted: 0, 0%, 93.3%;
+    --dp-main: 0, 0%, 100%;
+    --dp-border: 0, 0%, 13.3%;
+    --dp-base: 0, 0%, 2%;
+    --dp-foundation: 0, 0%, 0%;
+
+    --dp-primary-alpha-opacity: var(--dark-primary-alpha-opacity);
+    --dp-primary-alpha-text: var(--white);
+  }
+
+  [data-theme="nord"] {
+    --dp-primary: var(--app-primary);
+    --dp-primary-text: var(--white);
+
+    --dp-soft: 0, 0%, 6.7%;
+    --dp-muted: 0, 0%, 93.3%;
+    --dp-main: 0, 0%, 100%;
+    --dp-border: 0, 0%, 13.3%;
+    --dp-base: 0, 0%, 2%;
+    --dp-foundation: 0, 0%, 0%;
+
+    --dp-primary-alpha-opacity: var(--dark-primary-alpha-opacity);
+    --dp-primary-alpha-text: var(--white);
+  }
+
+  [data-theme="solarized_light"] {
+    --dp-primary: 180, 6.9%, 60.4%;
+    --dp-primary-text: 46, 42.4%, 88.4%;
+
+    --dp-soft: 46, 42.4%, 88.4%;
+    --dp-muted: 180, 6.9%, 60.4%;
+    --dp-main: 196, 12.9%, 45.5%;
+    --dp-border: 180, 6.9%, 60.4%;
+    --dp-base: 44, 86.7%, 94.1%;
+    --dp-foundation: 46, 42.4%, 88.4%;
+
+    --dp-primary-alpha-opacity: var(--dark-primary-alpha-opacity);
+    --dp-primary-alpha-text: 46, 42.4%, 88.4%;
+  }
+
+  [data-theme="solarized_dark"] {
+    --dp-primary: 175, 58.6%, 39.8%;
+    --dp-primary-text: 44, 86.7%, 94.1%;
+
+    --dp-soft: 192, 100%, 10.6%;
+    --dp-muted: 196, 12.9%, 45.5%;
+    --dp-main: 44, 86.7%, 94.1%;
+    --dp-border: 194, 14.1%, 40.2%;
+    --dp-base: 192, 80.8%, 14.3%;
+    --dp-foundation: 192, 100%, 10.6%;
+
+    --dp-primary-alpha-opacity: var(--dark-primary-alpha-opacity);
+    --dp-primary-alpha-text: 44, 86.7%, 94.1%;
+  }
+
+  /* // TODO */
+  [data-theme="retro"] {
+    --dp-primary: 27, 99.1%, 54.7%;
+    --dp-primary-text: 195, 6.5%, 12.2%;
+
+    --dp-soft: 20, 5.3%, 22.4%;
+    --dp-muted: 40, 38.2%, 73.3%;
+    --dp-main: 43, 58.8%, 81%;
+    --dp-border: 28, 10.7%, 43.9%;
+    --dp-base: 22, 7.4%, 29.2%;
+    --dp-foundation: 22, 7.4%, 29.2%;
+
+    --dp-primary-alpha-opacity: var(--dark-primary-alpha-opacity);
+    --dp-primary-alpha-text: 48, 86.7%, 88.2%;
+  }
 }
 
 @layer base {
@@ -93,7 +183,10 @@
     @apply disabled:cursor-not-allowed disabled:bg-soft disabled:opacity-70;
   }
   .grid-root {
-    @apply grid gap-x-4 grid-cols-1 md:grid-cols-12;
+    @apply grid gap-x-4 grid-cols-1 @3xl:grid-cols-12;
+  }
+  .grid-item {
+    @apply col-start-[span_1] @3xl:col-start-[span_var(--grid-span,12)];
   }
   .dashboard-grid-root {
     @apply grid-root select-none gap-y-4 auto-rows-[minmax(100px,auto)];

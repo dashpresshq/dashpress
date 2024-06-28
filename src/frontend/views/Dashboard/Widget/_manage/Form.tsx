@@ -15,7 +15,10 @@ import { useDocumentationActionButton } from "frontend/docs/constants";
 import { GRID_SPAN_OPTIONS } from "frontend/design-system/constants/grid";
 import { msg } from "@lingui/macro";
 import { typescriptSafeObjectDotEntries } from "shared/lib/objects";
-import { i18nNoop, transformLabelValueToSelectData } from "translations/fake";
+import {
+  fakeMessageDescriptor,
+  transformLabelValueToSelectData,
+} from "translations/fake";
 import { MessageDescriptor } from "@lingui/core";
 import { useDomainMessages } from "frontend/lib/crud-config";
 import { LANG_DOMAINS } from "frontend/lib/crud-config/lang-domains";
@@ -118,7 +121,7 @@ export function DashboardWidgetForm({
               }}
             >
               <FormGrid.Root>
-                <FormGrid.Item $span="9">
+                <FormGrid.Item span="9">
                   <Field name="title" validate={required} validateFields={[]}>
                     {({ input, meta }) => (
                       <FormInput
@@ -130,7 +133,7 @@ export function DashboardWidgetForm({
                     )}
                   </Field>
                 </FormGrid.Item>
-                <FormGrid.Item $span="3">
+                <FormGrid.Item span="3">
                   <Field name="_type" validate={required} validateFields={[]}>
                     {({ input, meta }) => (
                       <FormSelect
@@ -171,7 +174,7 @@ export function DashboardWidgetForm({
                           disabledOptions={[]}
                           selectData={(tableViews.data || []).map(
                             ({ id, title }) => ({
-                              label: i18nNoop(title),
+                              label: fakeMessageDescriptor(title),
                               value: id,
                             })
                           )}
@@ -203,7 +206,7 @@ export function DashboardWidgetForm({
                 <FormGrid.Item>
                   {formFields.includes("icon") && <IconInputField />}
                 </FormGrid.Item>
-                <FormGrid.Item $span="6">
+                <FormGrid.Item span="6">
                   <Field name="span" validateFields={[]}>
                     {({ input, meta }) => (
                       <FormSelect
@@ -215,7 +218,7 @@ export function DashboardWidgetForm({
                     )}
                   </Field>
                 </FormGrid.Item>
-                <FormGrid.Item $span="6">
+                <FormGrid.Item span="6">
                   <Field name="height" validateFields={[]}>
                     {({ input, meta }) => (
                       <FormSelect

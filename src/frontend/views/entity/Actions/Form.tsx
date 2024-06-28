@@ -10,7 +10,7 @@ import { userFriendlyCase } from "shared/lib/strings/friendly-case";
 import { DataEventActions } from "shared/types/data";
 import { msg } from "@lingui/macro";
 import { typescriptSafeObjectDotEntries } from "shared/lib/objects";
-import { i18nNoop } from "translations/fake";
+import { fakeMessageDescriptor } from "translations/fake";
 import { useDomainMessages } from "frontend/lib/crud-config";
 import { LANG_DOMAINS } from "frontend/lib/crud-config/lang-domains";
 import { SchemaForm } from "@/components/app/form/schema";
@@ -42,7 +42,7 @@ export function ActionForm({
     integrationsList.map((action) => [action.key, action])
   );
   const activatedOptions = activatedIntegrations.map((integration) => ({
-    label: i18nNoop(integrationsListMap[integration].title),
+    label: fakeMessageDescriptor(integrationsListMap[integration].title),
     value: integration,
   }));
 

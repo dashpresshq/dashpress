@@ -7,17 +7,6 @@ import {
 import { IEmptyWrapperProps } from "../empty-wrapper/types";
 import { EmptyWrapper } from "../empty-wrapper";
 
-// const BodyTR = styled.tr<{ $hoverColor: string }>`
-//   .show-on-hover {
-//     opacity: 0;
-//   }
-//   &:hover {
-//     .show-on-hover {
-//       opacity: 1;
-//     }
-//   }
-// `;
-
 interface IProps {
   table: Table<Record<string, unknown>>;
   dataLength: number;
@@ -29,7 +18,10 @@ export function TableBody({ table, dataLength, empty, isLoading }: IProps) {
   return (
     <TableBodyRoot>
       {table.getRowModel().rows.map((row) => (
-        <TableRow key={row.id}>
+        <TableRow
+          key={row.id}
+          className="[&_.show-on-hover]:opacity-0 [&_.show-on-hover]:hover:opacity-100"
+        >
           {row.getVisibleCells().map((cell) => (
             <TableCell key={cell.id}>
               {flexRender(cell.column.columnDef.cell, cell.getContext())}
@@ -41,7 +33,7 @@ export function TableBody({ table, dataLength, empty, isLoading }: IProps) {
         <TableRow>
           <TableCell colSpan={10000}>
             {isLoading ? (
-              <div style={{ height: "204px" }} />
+              <div className="h-52" />
             ) : (
               <EmptyWrapper {...{ ...empty }} />
             )}

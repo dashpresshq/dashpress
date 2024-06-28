@@ -6,13 +6,12 @@ import {
 } from "frontend/hooks/configuration/configuration.store";
 import { useAppConfigurationDomainMessages } from "frontend/hooks/configuration/configuration.constant";
 import { PresentationScriptDocumentation } from "frontend/docs/scripts/presentations-scripts";
-import { ToastService } from "frontend/lib/toast";
 import { evalJavascriptString } from "shared/lib/script-runner";
 import { useDocumentationActionButton } from "frontend/docs/constants";
 import { IPresentationScriptParams } from "frontend/views/data/evaluatePresentationScript";
 import { useEvaluateScriptContext } from "frontend/hooks/scripts";
 import { msg } from "@lingui/macro";
-import { i18nNoop } from "translations/fake";
+import { fakeMessageDescriptor } from "translations/fake";
 import { UserPermissions } from "shared/constants/user";
 import { SchemaForm } from "@/components/app/form/schema";
 import { ViewStateMachine } from "@/components/app/view-state-machine";
@@ -23,6 +22,7 @@ import {
 import { SectionBox } from "@/components/app/section-box";
 import { BaseEntitySettingsLayout } from "../_Base";
 import { ENTITY_CONFIGURATION_VIEW } from "../constants";
+import { useToast } from "@/components/app/toast/use-toast";
 
 const placeholder = `if($.field === "image"){
   return "https://cdn.mycompany.com/" + $.value + "?size=320x640";
@@ -47,6 +47,7 @@ export function EntityPresentationScriptSettings() {
     "entity_presentation_script",
     entity
   );
+  const { toast } = useToast();
 
   const domainMessages = useAppConfigurationDomainMessages(
     "entity_presentation_script"
@@ -84,7 +85,7 @@ export function EntityPresentationScriptSettings() {
                 type: "json",
                 label: msg`Script`,
                 validations: [],
-                placeholder: i18nNoop(placeholder),
+                placeholder: fakeMessageDescriptor(placeholder),
               },
             }}
             onSubmit={async (data) => {
@@ -100,7 +101,11 @@ export function EntityPresentationScriptSettings() {
 
                 await upsertConfigurationMutation.mutateAsync(data);
               } catch (e) {
-                ToastService.error(`•Expression: \n•JS-Error: ${e}`);
+                toast({
+                  variant: "red",
+                  title: msg`Could not parse Javascript`,
+                  description: msg`•Expression: \n•JS-Error: ${e}`,
+                });
               }
             }}
             initialValues={entityPresentationScript.data}

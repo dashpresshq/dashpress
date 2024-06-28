@@ -1,16 +1,16 @@
-// Inspired by react-hot-toast library
 import * as React from "react";
 
-import type { ToastActionElement, ToastProps } from "@/components/ui/toast";
+import { MessageDescriptor } from "@lingui/core";
+import type { ToastProps } from "@/components/ui/toast";
 
 const TOAST_LIMIT = 1;
 const TOAST_REMOVE_DELAY = 1000000;
 
-type ToasterToast = ToastProps & {
+type ToasterToast = Pick<ToastProps, "open" | "onOpenChange" | "variant"> & {
   id: string;
-  title?: React.ReactNode;
-  description?: React.ReactNode;
-  action?: ToastActionElement;
+  title?: MessageDescriptor;
+  description?: MessageDescriptor;
+  action?: { label: MessageDescriptor; action: () => void };
 };
 
 const actionTypes = {
@@ -70,7 +70,7 @@ const addToRemoveQueue = (toastId: string) => {
   toastTimeouts.set(toastId, timeout);
 };
 
-export const reducer = (state: State, action: Action): State => {
+const reducer = (state: State, action: Action): State => {
   switch (action.type) {
     case "ADD_TOAST":
       return {

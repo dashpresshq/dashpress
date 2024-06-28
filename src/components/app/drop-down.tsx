@@ -15,7 +15,7 @@ export function Dropdown({ target, children, className }: IProps) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>{target}</DropdownMenuTrigger>
-      <DropdownMenuContent className={className}>
+      <DropdownMenuContent className={className} align="end">
         {children}
       </DropdownMenuContent>
     </DropdownMenu>

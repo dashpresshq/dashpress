@@ -1,0 +1,70 @@
+.root :global .token.cdata,
+.root :global .token.comment,
+.root :global .token.doctype,
+.root :global .token.prolog {
+  color: #90a4ae;
+}
+
+.root :global .token.punctuation {
+  color: #9e9e9e;
+}
+
+.root :global .namespace {
+  opacity: 0.7;
+}
+
+.root :global .token.boolean,
+.root :global .token.constant,
+.root :global .token.deleted,
+.root :global .token.number,
+.root :global .token.property,
+.root :global .token.symbol,
+.root :global .token.tag {
+  color: #e91e63;
+}
+
+.root :global .token.attr-name,
+.root :global .token.builtin,
+.root :global .token.char,
+.root :global .token.inserted,
+.root :global .token.selector,
+.root :global .token.string {
+  color: #4caf50;
+}
+
+.root :global .language-css .token.string,
+.root :global .style .token.string,
+.root :global .token.entity,
+.root :global .token.operator,
+.root :global .token.url {
+  color: #795548;
+}
+
+.root :global .token.atrule,
+.root :global .token.attr-value,
+.root :global .token.keyword {
+  color: #d5c4a1;
+}
+
+.root :global .token.function {
+  color: #f44336;
+}
+
+.root :global .token.important,
+.root :global .token.regex,
+.root :global .token.variable {
+  color: #ff9800;
+}
+
+.root :global .token.bold,
+.root :global .token.important {
+  font-weight: 700;
+}
+
+.root :global .token.italic {
+  font-style: italic;
+}
+
+.root :global .token.entity {
+  cursor: help;
+}

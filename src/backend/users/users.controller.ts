@@ -26,9 +26,6 @@ export class UsersApiController {
         permissions,
       };
     } catch (error) {
-      /*
-        Any error here should make the user redirect to login page
-      */
       throw new UnauthorizedError(
         error.message,
         REQUEST_ERROR_CODES.NOT_AUTHENTICATED

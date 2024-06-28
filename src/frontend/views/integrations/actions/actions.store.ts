@@ -60,7 +60,9 @@ export function useDeactivateIntegrationMutation() {
     mutationFn: async (activationId) =>
       await ApiRequest.DELETE(`/api/integrations/actions/${activationId}`),
     endpoints: [ACTIVE_ACTIONS_INTEGRATIONS_ENDPOINT],
-    successMessage: domainMessages.MUTATION_LANG.CUSTOM(msg`Deactivated`),
+    successMessage: {
+      description: domainMessages.MUTATION_LANG.CUSTOM(msg`Deactivated`),
+    },
   });
 }
 
@@ -74,7 +76,9 @@ export function useActivateIntegrationMutation(integration: string) {
         configuration
       ),
     endpoints: [ACTIVE_ACTIONS_INTEGRATIONS_ENDPOINT],
-    successMessage: domainMessages.MUTATION_LANG.CUSTOM(msg`Activated`),
+    successMessage: {
+      description: domainMessages.MUTATION_LANG.CUSTOM(msg`Activated`),
+    },
   });
 }
 
@@ -89,6 +93,6 @@ export function useUpdateActivatedIntegrationMutation(activationId: string) {
         _password: rootPassword,
       }),
     endpoints: [ACTIVE_ACTIONS_INTEGRATIONS_ENDPOINT],
-    successMessage: domainMessages.MUTATION_LANG.EDIT,
+    successMessage: { description: domainMessages.MUTATION_LANG.EDIT },
   });
 }

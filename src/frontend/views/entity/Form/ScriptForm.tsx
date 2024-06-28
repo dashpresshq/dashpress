@@ -1,17 +1,17 @@
-import { ToastService } from "frontend/lib/toast";
 import { useAppConfigurationDomainMessages } from "frontend/hooks/configuration/configuration.constant";
 import { AppConfigurationKeys } from "shared/configurations";
 import { evalJavascriptString } from "shared/lib/script-runner";
 import { useEvaluateScriptContext } from "frontend/hooks/scripts";
 import { ISchemaFormScriptProps } from "shared/form-schemas/types";
 import { msg } from "@lingui/macro";
-import { i18nNoop } from "translations/fake";
+import { fakeMessageDescriptor } from "translations/fake";
 import { ViewStateMachine } from "@/components/app/view-state-machine";
 import { SchemaForm } from "@/components/app/form/schema";
 import {
   FormSkeleton,
   FormSkeletonSchema,
 } from "@/components/app/skeleton/form";
+import { useToast } from "@/components/app/toast/use-toast";
 
 interface IProps {
   value: string;
@@ -36,6 +36,7 @@ export function ScriptForm({
 }: IProps) {
   const evaluateScriptContext = useEvaluateScriptContext();
   const domainMessages = useAppConfigurationDomainMessages(configurationKey);
+  const { toast } = useToast();
   return (
     <ViewStateMachine
       loading={isLoading}
@@ -48,7 +49,7 @@ export function ScriptForm({
             type: "json",
             label: msg`Script`,
             validations: [],
-            placeholder: i18nNoop(placeholder),
+            placeholder: fakeMessageDescriptor(placeholder),
           },
         }}
         onSubmit={async (data) => {
@@ -62,7 +63,11 @@ export function ScriptForm({
             evalJavascriptString(jsString, context);
             await onSubmit(jsString);
           } catch (e) {
-            ToastService.error(`•Expression: \n•JS-Error: ${e}`);
+            toast({
+              variant: "red",
+              title: msg`Could not parse Javascript`,
+              description: msg`•Expression: \n•JS-Error: ${e}`,
+            });
           }
         }}
         systemIcon="Save"

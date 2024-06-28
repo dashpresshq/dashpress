@@ -4,7 +4,7 @@ import { useEntityConfiguration } from "frontend/hooks/configuration/configurati
 import { useChangeRouterParam } from "frontend/lib/routing/useChangeRouterParam";
 import { useRouteParam } from "frontend/lib/routing/useRouteParam";
 import { abbreviateNumber } from "frontend/lib/numbers";
-import { i18nNoop } from "translations/fake";
+import { fakeMessageDescriptor } from "translations/fake";
 import { DetailsCanvas } from "./DetailsCanvas";
 import { TableTopComponent, usePortalTableTabs } from "../portal";
 import { EntityDataTable } from "./EntityDataTable";
@@ -73,7 +73,7 @@ export function WholeEntityTable({
                 />
               ),
               id: title.trim(),
-              label: i18nNoop(`${title}(${currentCount})`),
+              label: fakeMessageDescriptor(`${title}(${currentCount})`),
             };
           })}
         />

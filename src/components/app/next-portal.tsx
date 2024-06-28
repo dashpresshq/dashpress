@@ -25,13 +25,7 @@ export function NextPortal({ children }: IProps) {
   return isMounted.isOn && ref.current
     ? createPortal(
         <>
-          <svg
-            style={{
-              position: "absolute",
-              top: 0,
-              left: 0,
-            }}
-          >
+          <svg className="absolute top-0 left-0">
             <filter id="gaussian-blur">
               <feGaussianBlur stdDeviation="0.3" />
             </filter>

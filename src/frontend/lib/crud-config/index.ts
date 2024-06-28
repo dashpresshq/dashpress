@@ -1,6 +1,6 @@
 import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
-import { i18nNoop } from "translations/fake";
+import { fakeMessageDescriptor } from "translations/fake";
 import { MessageDescriptor } from "@lingui/core";
 import { IDomainDiction } from "./types";
 
@@ -34,7 +34,7 @@ export const useDomainMessages = ({
         const action = _(actionDescriptor);
         return msg`${singular} ${action} Successfully`;
       },
-      VIEW_DETAILS: msg`Click here to view details`,
+      VIEW_DETAILS: msg`View Details`,
     },
     FORM_LANG: {
       UPSERT: (submitting: boolean) =>
@@ -53,9 +53,9 @@ export const useDomainMessages = ({
       DETAILS: msg`${singular} Details`,
       SETTINGS: msg`${singular} Settings`,
       NOT_FOUND: CRUD_CONFIG_NOT_FOUND(singular),
-      TITLE: i18nNoop(plural),
+      TITLE: fakeMessageDescriptor(plural),
       EMPTY_LIST: msg`No ${singular} Has Been Added Yet`,
-      SINGULAR: i18nNoop(singular),
+      SINGULAR: fakeMessageDescriptor(singular),
     },
   };
 };

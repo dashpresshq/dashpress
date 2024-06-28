@@ -1,8 +1,8 @@
-import { useState } from "react";
-import { useAsync, useDebounce } from "react-use";
+import { useMemo, useState } from "react";
+import { useDebounce } from "react-use";
 import { ISelectData } from "shared/types/options";
 import { useApi } from "frontend/lib/data/useApi";
-import { ApiRequest } from "frontend/lib/data/makeRequest";
+import { useLingui } from "@lingui/react";
 import { ErrorAlert } from "@/components/app/alert";
 import { IBaseFormSelect } from "@/frontend/design-system/components/Form/Select/types";
 import { FormSelect } from "./select";
@@ -14,6 +14,8 @@ interface IProps extends IBaseFormSelect {
 }
 
 export function AsyncFormSelect(props: IProps) {
+  const { _ } = useLingui();
+
   const { input, url, referenceUrl, limit = 50 } = props;
 
   const [search, setSearch] = useState("");
@@ -30,16 +32,13 @@ export function AsyncFormSelect(props: IProps) {
     }
   );
 
-  const valueLabelToUse = useAsync(async () => {
-    if (!input.value) {
-      return undefined;
-    }
+  const currentLabelFromSelection = useMemo(() => {
     const isValueInFirstDataLoad = fullData.data.find(
       ({ value }: ISelectData) => value === input.value
     );
 
     if (isValueInFirstDataLoad) {
-      return isValueInFirstDataLoad.label;
+      return _(isValueInFirstDataLoad.label);
     }
 
     const isValueInSelectionOptions = selectOptions.data.find(
@@ -47,15 +46,16 @@ export function AsyncFormSelect(props: IProps) {
     );
 
     if (isValueInSelectionOptions) {
-      return isValueInSelectionOptions.label;
+      return _(isValueInSelectionOptions.label);
     }
 
-    if (!referenceUrl) {
-      return undefined; // or the value
-    }
-
-    return await ApiRequest.GET(referenceUrl(input.value));
+    return undefined;
   }, [url, fullData.isLoading]);
+
+  const referenceLabel = useApi(referenceUrl?.(input.value), {
+    defaultData: "",
+    enabled: !!referenceUrl && !!input.value && !currentLabelFromSelection,
+  });
 
   useDebounce(
     () => {
@@ -78,7 +78,9 @@ export function AsyncFormSelect(props: IProps) {
           isLoading: selectOptions.isLoading,
           onChange: setSearch,
           value: search,
-          valueLabel: valueLabelToUse.value,
+          valueLabel: referenceLabel.data
+            ? referenceLabel.data
+            : currentLabelFromSelection,
         }}
       />
     );

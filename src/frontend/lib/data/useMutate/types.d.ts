@@ -1,11 +1,9 @@
 import { MessageDescriptor } from "@lingui/core";
 
-export type ToastMessageInput =
-  | {
-      message: MessageDescriptor;
-      action: { label: MessageDescriptor; action: () => void };
-    }
-  | MessageDescriptor;
+export type ToastMessageInput = {
+  description: MessageDescriptor;
+  // action?: { label: MessageDescriptor; action: () => void };
+};
 
 export interface IApiMutateOptions<T, V, R> {
   dataQueryPath: string;

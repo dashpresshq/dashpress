@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
-import { ToastService } from "frontend/lib/toast";
 import { ISchemaFormConfig } from "shared/form-schemas/types";
 import { IStorageIntegration } from "shared/types/actions";
 import { msg } from "@lingui/macro";
-import { i18nNoop } from "translations/fake";
+import { fakeMessageDescriptor } from "translations/fake";
 import { useDomainMessages } from "frontend/lib/crud-config";
 import { LANG_DOMAINS } from "frontend/lib/crud-config/lang-domains";
 import {
@@ -19,6 +18,7 @@ import {
   useStorageIntegrationsList,
 } from "./storage.store";
 import { PasswordToReveal } from "../Password";
+import { useToastActionQueryError } from "@/components/app/toast/error";
 
 export function StorageCredentialsSettings() {
   const storageList = useStorageIntegrationsList();
@@ -39,17 +39,13 @@ export function StorageCredentialsSettings() {
     setCurrentStorage(activeStorageIntegration.data.data);
   }, [activeStorageIntegration.data]);
 
-  useEffect(() => {
-    if (storageCredentialsConfiguration.error) {
-      ToastService.error(storageCredentialsConfiguration.error);
-    }
-  }, [storageCredentialsConfiguration.error]);
+  useToastActionQueryError(storageCredentialsConfiguration.error);
 
   const storageFormConfig: ISchemaFormConfig<{}> = {
     label: msg`Storage Key`,
     type: "text",
     selections: storageList.data.map((datum) => ({
-      label: i18nNoop(datum.title),
+      label: fakeMessageDescriptor(datum.title),
       value: datum.key,
     })),
     onChange: setCurrentStorage,

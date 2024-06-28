@@ -13,7 +13,7 @@ import { UsersLinkToDatabaseDocumentation } from "frontend/docs/users-link-to-da
 import { useEntityFieldLists } from "frontend/hooks/entity/entity.store";
 import { useEffect, useState } from "react";
 import { msg } from "@lingui/macro";
-import { i18nNoop } from "translations/fake";
+import { fakeMessageDescriptor } from "translations/fake";
 import { useDomainMessages } from "frontend/lib/crud-config";
 import { ContentLayout } from "@/components/app/content-layout";
 import {
@@ -74,7 +74,7 @@ export function UsersLinkToDatabase() {
         label: msg`Field Corresponding To Dashpress Usernames`,
         selections: entityFields.data.map((field) => ({
           value: field,
-          label: i18nNoop(field),
+          label: fakeMessageDescriptor(field),
         })),
         validations: [
           {

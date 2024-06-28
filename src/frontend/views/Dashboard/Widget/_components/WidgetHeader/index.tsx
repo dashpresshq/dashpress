@@ -34,8 +34,8 @@ export function WidgetHeader({
   const domainMessages = useDomainMessages(LANG_DOMAINS.DASHBOARD.WIDGETS);
 
   return (
-    <div className="flex justify-between items-center w-full ">
-      <div className="flex flex-1 overflow-hidden w-full gap-2">
+    <div className="flex justify-between items-center gap-2 w-full">
+      <div className="flex flex-1 items-center overflow-hidden gap-2">
         {setting && (
           <SortableKnob>
             <GrabIcon width={18} />

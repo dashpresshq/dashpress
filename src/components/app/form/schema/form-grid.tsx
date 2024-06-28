@@ -1,22 +1,22 @@
-import { gridItem } from "frontend/design-system/constants/grid";
-import { ReactNode } from "react";
+import { CSSProperties, ReactNode } from "react";
 import { GridSpanSizes } from "shared/types/ui";
-import styled from "styled-components";
-
-// TOOD fix
-const Container = styled.div`
-  // container-type: inline-size;
-`;
 
 export const FormGrid = {
   Root: ({ children }: { children: ReactNode }) => (
-    <Container>
+    <div className="@container">
       <div className="grid-root auto-rows-auto items-center">{children}</div>
-    </Container>
+    </div>
   ),
-  Item: styled.div<{
-    $span?: GridSpanSizes;
-  }>`
-    ${gridItem}
-  `,
+  Item: ({ children, span }: { children: ReactNode; span?: GridSpanSizes }) => (
+    <div
+      style={
+        {
+          "--grid-span": span,
+        } as CSSProperties
+      }
+      className="grid-item"
+    >
+      {children}
+    </div>
+  ),
 };

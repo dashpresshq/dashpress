@@ -16,21 +16,15 @@ export default {
 const Template: Story = () => (
   <TestProviders>
     <ContentLayout.Center>
-      <div style={{ width: "100%", height: "100px", background: "red" }}>
-        Hello
-      </div>
+      <div className="w-full h-full bg-red-500">Hello</div>
     </ContentLayout.Center>
     <br />
     <ContentLayout>
       <ContentLayout.Left>
-        <div style={{ width: "100%", height: "100px", background: "green" }}>
-          Left
-        </div>
+        <div className="w-full h-full bg-green-500">Left</div>
       </ContentLayout.Left>
       <ContentLayout.Right>
-        <div style={{ width: "100%", height: "100px", background: "blue" }}>
-          Right
-        </div>
+        <div className="w-full h-full bg-blue-500">Right</div>
       </ContentLayout.Right>
     </ContentLayout>
   </TestProviders>

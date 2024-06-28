@@ -8,7 +8,7 @@ export function FilterTableByStatus({
   bag,
 }: IFilterProps<IColumnFilterBag<string[]>, ISelectData[]>) {
   return (
-    <div style={{ minWidth: "250px" }}>
+    <div className="min-w-64">
       <FormMultiSelect
         selectData={bag}
         values={filterValue?.value || []}

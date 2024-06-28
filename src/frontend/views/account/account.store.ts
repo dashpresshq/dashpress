@@ -13,7 +13,7 @@ export function useUpdateProfileMutation() {
     mutationFn: async (data) =>
       await ApiRequest.PATCH(AUTHENTICATED_ACCOUNT_URL, data),
     endpoints: [AUTHENTICATED_ACCOUNT_URL],
-    successMessage: domainMessages.MUTATION_LANG.SAVED,
+    successMessage: { description: domainMessages.MUTATION_LANG.SAVED },
   });
 }
 
@@ -24,8 +24,10 @@ export function useChangePasswordMutation() {
       return await ApiRequest.PATCH(`/api/account/change-password`, data);
     },
     endpoints: [],
-    successMessage: process.env.NEXT_PUBLIC_IS_DEMO
-      ? msg`Password will not be changed on demo account`
-      : domainMessages.MUTATION_LANG.EDIT,
+    successMessage: {
+      description: process.env.NEXT_PUBLIC_IS_DEMO
+        ? msg`Password will not be changed on demo account`
+        : domainMessages.MUTATION_LANG.EDIT,
+    },
   });
 }

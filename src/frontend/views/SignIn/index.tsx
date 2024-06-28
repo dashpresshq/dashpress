@@ -8,7 +8,6 @@ import {
 } from "shared/form-schemas/auth/signin";
 import { useAuthenticateUser } from "frontend/hooks/auth/useAuthenticateUser";
 import { ApiRequest } from "frontend/lib/data/makeRequest";
-import { ToastService } from "frontend/lib/toast";
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
 import { useGuestCheck } from "frontend/hooks/auth/useGuestCheck";
 import { msg } from "@lingui/macro";
@@ -16,10 +15,13 @@ import { CustomNextPage } from "frontend/_layouts/types";
 import { SchemaForm } from "@/components/app/form/schema";
 import { useHandleNoTokenAuthResponse } from "./portal";
 import { ComponentIsLoading } from "@/components/app/loading-component";
+import { useToast } from "@/components/app/toast/use-toast";
+import { fakeMessageDescriptor } from "@/translations/fake";
 
 function useSignInMutation() {
   const authenticateUser = useAuthenticateUser();
   const handleNoTokenAuthResponse = useHandleNoTokenAuthResponse();
+  const { toast } = useToast();
   return useMutation({
     mutationFn: async (values: ISignInForm) =>
       await ApiRequest.POST(`/api/auth/signin`, values),
@@ -31,7 +33,10 @@ function useSignInMutation() {
       handleNoTokenAuthResponse(data, formData);
     },
     onError: (error: { message: string }) => {
-      ToastService.error(error.message);
+      toast({
+        variant: "red",
+        description: fakeMessageDescriptor(error.message),
+      });
     },
   });
 }

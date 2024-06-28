@@ -6,6 +6,7 @@ import { typescriptSafeObjectDotEntries } from "shared/lib/objects";
 import { FilterWrapper } from "./_FilterWrapper";
 import { RenderFilterOperator } from "./_FilterOperator";
 import { FilterTypesConfigBag } from "./config";
+import { cn } from "@/lib/utils";
 
 const FILTER_DEBOUNCE_WAIT = 500;
 
@@ -70,7 +71,12 @@ export function TableFilter({
       filterType={type._type}
     >
       {operators.length > 0 && (
-        <div style={{ display: operators.length === 1 ? "none" : "block" }}>
+        <div
+          className={cn({
+            hidden: operators.length === 1,
+            block: operators.length > 1,
+          })}
+        >
           <RenderFilterOperator
             operators={operators}
             filterValue={filterValue}

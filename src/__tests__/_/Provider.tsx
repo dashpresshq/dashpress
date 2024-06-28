@@ -1,5 +1,4 @@
 import { ReactNode } from "react";
-import { Toaster } from "react-hot-toast";
 import { LinguiProvider } from "translations/utils";
 import { Messages } from "@lingui/core";
 import {
@@ -9,6 +8,7 @@ import {
 } from "@tanstack/react-query";
 import { ThemeProvider } from "next-themes";
 import { ConfirmAlert } from "@/components/app/confirm-alert";
+import { Toaster } from "@/components/app/toast/toaster";
 
 export const queryCache = new QueryCache();
 

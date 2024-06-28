@@ -51,10 +51,9 @@ export function SideBar({ isFullWidth, setIsFullWidth }: IProps) {
   };
 
   const handleKeyPress = (event: KeyboardEvent) => {
-    if (!event.ctrlKey) return;
-    if (event.key !== "B") return;
-    console.log(event.key);
-    setIsFullWidth(!isFullWidth);
+    if ((event.ctrlKey || event.metaKey) && event.keyCode === 66) {
+      setIsFullWidth(!isFullWidth);
+    }
   };
 
   useEffect(() => {

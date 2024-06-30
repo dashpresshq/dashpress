@@ -69,6 +69,8 @@ function MetaDataSettings() {
   );
 }
 
+// Notify about setting the process.env.TZ
+
 const DATE_FORMAT_LIB_LINK = "https://date-fns.org/docs/format";
 
 function DateSettings() {

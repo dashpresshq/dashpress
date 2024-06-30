@@ -24,8 +24,8 @@ function Calendar({ className, classNames, ...props }: CalendarProps) {
           buttonVariants({ variant: "outline" }),
           "h-7 w-7 bg-base p-0"
         ),
-        nav_button_previous: "absolute left-1",
-        nav_button_next: "absolute right-1",
+        nav_button_previous: "!absolute left-1",
+        nav_button_next: "!absolute right-1",
         table: "w-full border-collapse space-y-1",
         head_row: "flex",
         head_cell: "text-muted rounded-md w-8 font-normal text-[0.8rem]",

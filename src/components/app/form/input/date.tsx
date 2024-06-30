@@ -36,14 +36,6 @@ interface IProps {
   meta?: FieldMetaState<any>;
 }
 
-export const dateWithoutTimezone = (date: Date) => {
-  const tzoffset = date.getTimezoneOffset() * 60000; // offset in milliseconds
-  const withoutTimezone = new Date(date.valueOf() - tzoffset)
-    .toISOString()
-    .slice(0, -1);
-  return new Date(withoutTimezone);
-};
-
 export function ControlledFormDateInput({
   minDate,
   maxDate,
@@ -55,10 +47,6 @@ export function ControlledFormDateInput({
   meta,
 }: IProps) {
   const isOpen = useToggle();
-
-  const onChangeRemoveTimeZone = (inputValue: Date | null) => {
-    onChange(dateWithoutTimezone(inputValue));
-  };
 
   return (
     <Popover onOpenChange={isOpen.set}>
@@ -95,7 +83,7 @@ export function ControlledFormDateInput({
         <Calendar
           mode="single"
           selected={value}
-          onSelect={onChangeRemoveTimeZone}
+          onSelect={onChange}
           initialFocus
           fromDate={minDate}
           toDate={maxDate}
@@ -114,7 +102,7 @@ export function ControlledFormDateInput({
     </Popover>
   );
 }
-// TODO fix date with timezone
+
 export function FormDateInput(formInput: IFormDateInput) {
   const { input, disabled, meta, minDate, maxDate } = formInput;
   let { value } = input;

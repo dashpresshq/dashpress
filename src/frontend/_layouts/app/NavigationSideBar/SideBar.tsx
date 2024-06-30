@@ -67,7 +67,7 @@ export function SideBar({ isFullWidth, setIsFullWidth }: IProps) {
           : SIDE_BAR_WIDTH_VARIATIONS.collapsed,
       }}
     >
-      <div className="flex items-center justify-center h-[50px] bg-primary-shade-thick-xxl">
+      <div className="flex items-center justify-center h-[50px] bg-[hsla(var(--dp-primary),0.95)]">
         <Link href="/">
           {isFullWidth ? (
             <img
@@ -81,7 +81,7 @@ export function SideBar({ isFullWidth, setIsFullWidth }: IProps) {
         </Link>
       </div>
       <div className="flex justify-between flex-col h-[calc(100dvh-50px)]">
-        <ScrollArea className="h-[calc(100%-1px)] bg-primary-shade-thick-xxl">
+        <ScrollArea className="h-[calc(100%-1px)] bg-[hsla(var(--dp-primary),0.95)]">
           <ProfileOnNavigation isFullWidth={isFullWidth} />
           <ViewStateMachine
             loading={navigationMenuItems.isLoading}

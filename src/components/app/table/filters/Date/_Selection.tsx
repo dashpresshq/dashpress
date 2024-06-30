@@ -54,7 +54,7 @@ export function DateSelection({
   const currentFilterValue = filterValue?.[field] || "";
   const hasCountValue = currentFilterValue?.includes(":");
   return (
-    <>
+    <div className="flex gap-2">
       {hasCountValue && (
         <Select
           placeholder={msg`Select Count`}
@@ -89,6 +89,6 @@ export function DateSelection({
         }}
         value={getFilterValue(currentFilterValue || defaultValue)}
       />
-    </>
+    </div>
   );
 }

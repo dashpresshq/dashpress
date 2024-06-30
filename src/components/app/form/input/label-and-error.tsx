@@ -38,7 +38,7 @@ export function LabelAndError({ formInput, children }: IProps) {
             </>
           )}
           {description ? (
-            <Tooltip text={description}>
+            <Tooltip isOverAButton={false} text={description}>
               <SystemIcon icon="Help" className="w-4 h-4 ml-1" />
             </Tooltip>
           ) : null}

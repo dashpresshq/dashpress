@@ -218,16 +218,18 @@ export function ManageCredentialGroup({
             <PasswordMessage />
           </div>
         )}
-        <KeyValueForm
-          group={group}
-          initialValues={tableData.data.find(
-            ({ key }) => key === currentConfigItem
-          )}
-          onSubmit={async (values: { key: string; value: string }) => {
-            await upsertConfigurationMutation.mutateAsync(values);
-            closeConfigItem();
-          }}
-        />
+        <div className="px-1">
+          <KeyValueForm
+            group={group}
+            initialValues={tableData.data.find(
+              ({ key }) => key === currentConfigItem
+            )}
+            onSubmit={async (values: { key: string; value: string }) => {
+              await upsertConfigurationMutation.mutateAsync(values);
+              closeConfigItem();
+            }}
+          />
+        </div>
       </OffCanvas>
       <VariablesDocumentation />
     </Card>

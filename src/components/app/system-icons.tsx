@@ -9,24 +9,27 @@ interface IProps {
   className: string;
 }
 
-export function SystemIcon({ icon, label, strokeWidth, className }: IProps) {
-  if (!icon) {
-    return null;
-  }
+export const SystemIcon = forwardRef<HTMLElement, IProps>(
+  ({ icon, label, strokeWidth, className }, ref) => {
+    if (!icon) {
+      return null;
+    }
 
-  if (icon === "none") {
-    return null;
-  }
+    if (icon === "none") {
+      return null;
+    }
 
-  const iconSvg = systemIconToSVG(icon, strokeWidth);
-  return (
-    <i
-      className={cn("inline-block [&_svg]:align-baseline", className)}
-      aria-label={label}
-      dangerouslySetInnerHTML={{ __html: iconSvg }}
-    />
-  );
-}
+    const iconSvg = systemIconToSVG(icon, strokeWidth);
+    return (
+      <i
+        ref={ref}
+        className={cn("inline-block", className)}
+        aria-label={label}
+        dangerouslySetInnerHTML={{ __html: iconSvg }}
+      />
+    );
+  }
+);
 
 export const GrabIcon = forwardRef<
   SVGSVGElement,

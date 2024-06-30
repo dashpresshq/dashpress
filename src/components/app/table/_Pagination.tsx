@@ -50,8 +50,7 @@ export function TablePagination({
               onChange={(value) => setPageSize(Number(value))}
               value={`${pageSize}`}
             />{" "}
-            entries of <b>{Intl.NumberFormat("en-US").format(totalRecords)}</b>{" "}
-            results
+            of <b>{Intl.NumberFormat("en-US").format(totalRecords)}</b> results
           </Trans>
         </div>
         <nav role="navigation" aria-label="pagination">
@@ -67,6 +66,8 @@ export function TablePagination({
             breakLinkClassName={className}
             pageLinkClassName={className}
             nextLinkClassName={className}
+            breakClassName="hidden md:inline-block"
+            pageClassName="hidden md:inline-block"
             previousLinkClassName={className}
             disabledLinkClassName="opacity-70 cursor-not-allowed"
             containerClassName="flex flex-row items-center gap-1"

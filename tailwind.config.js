@@ -14,7 +14,6 @@ module.exports = {
     },
     extend: {
       colors: {
-        // foreground: "hsl(var(--foreground))",
         soft: "hsl(var(--dp-soft))",
         muted: "hsl(var(--dp-muted))",
         main: "hsl(var(--dp-main))",
@@ -29,11 +28,7 @@ module.exports = {
           "alpha-text": "hsl(var(--dp-primary-alpha-text))",
           "shade-thick": "hsla(var(--dp-primary), 0.85)",
           "shade-thick-xl": "hsla(var(--dp-primary), 0.9)",
-          "shade-thick-xxl": "hsla(var(--dp-primary), 0.95)",
         },
-        // destructive: {
-        //   DEFAULT: "hsl(var(--destructive))",
-        // },
       },
       borderRadius: {
         lg: `var(--radius)`,

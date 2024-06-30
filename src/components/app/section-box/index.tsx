@@ -49,7 +49,7 @@ export function SectionBox({
                 <p className="font-semibold">{_(title)}</p>
               )}
               {description ? (
-                <Tooltip text={description}>
+                <Tooltip isOverAButton={false} text={description}>
                   <SystemIcon icon="Help" className="h-4 w-4" />
                 </Tooltip>
               ) : null}

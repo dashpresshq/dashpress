@@ -5,6 +5,7 @@ import * as TabsPrimitive from "@radix-ui/react-tabs";
 import { useLingui } from "@lingui/react";
 import { TabsContent, TabsList, TabsTrigger } from "../ui/tabs";
 import { cn } from "@/lib/utils";
+import { ScrollArea } from "../ui/scroll-area";
 
 interface IProps {
   contents: {
@@ -52,17 +53,19 @@ export function Tabs({ contents, currentTab, onChange }: IProps) {
       value={activeTab}
       onValueChange={changeTab}
     >
-      <TabsList>
-        {contents.map(({ label, id, muted }) => (
-          <TabsTrigger
-            value={id}
-            key={id}
-            className={cn({ "!text-muted": muted })}
-          >
-            {_(label)}
-          </TabsTrigger>
-        ))}
-      </TabsList>
+      <ScrollArea orientation="horizontal">
+        <TabsList className="mb-1">
+          {contents.map(({ label, id, muted }) => (
+            <TabsTrigger
+              value={id}
+              key={id}
+              className={cn({ "!text-muted": muted })}
+            >
+              {_(label)}
+            </TabsTrigger>
+          ))}
+        </TabsList>
+      </ScrollArea>
       {contents.map(({ id, content }) => (
         <TabsContent key={id} value={id}>
           {content}

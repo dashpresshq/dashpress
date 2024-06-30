@@ -118,6 +118,7 @@ export function ControlledFormDateInput({
 export function FormDateInput(formInput: IFormDateInput) {
   const { input, disabled, meta, minDate, maxDate } = formInput;
   let { value } = input;
+
   if (value && typeof value === "string") {
     value = new Date(value);
     input.onChange(value);

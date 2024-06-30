@@ -5,6 +5,7 @@ import { Sheet, SheetContent, SheetHeader, SheetTitle } from "../ui/sheet";
 import { cn } from "@/lib/utils";
 import { Separator } from "../ui/separator";
 import { NextPortal } from "./next-portal";
+import { ScrollArea } from "../ui/scroll-area";
 
 export interface IProps {
   show: boolean;
@@ -35,7 +36,7 @@ export function OffCanvas({ show, onClose, title, children, size }: IProps) {
             <SheetTitle>{_(title)}</SheetTitle>
           </SheetHeader>
           <Separator className="mt-2" />
-          <div className="flex-grow overflow-y-auto px-4 my-2">{children}</div>
+          <ScrollArea className="flex-grow px-4 my-2">{children}</ScrollArea>
         </SheetContent>
       </Sheet>
     </NextPortal>

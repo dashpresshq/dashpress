@@ -79,7 +79,9 @@ export function SoftButton({
     );
 
   return size === "icon" ? (
-    <Tooltip text={labelString}>{buttonElement}</Tooltip>
+    <Tooltip text={labelString} isOverAButton>
+      {buttonElement}
+    </Tooltip>
   ) : (
     buttonElement
   );

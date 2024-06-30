@@ -18,6 +18,7 @@ import { cn } from "@/lib/utils";
 import { Table as TableRoot } from "@/components/ui/table";
 import { Skeleton } from "@/components/ui/skeleton";
 import { TableSkeleton } from "../skeleton/table";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 export { DEFAULT_TABLE_STATE };
 
@@ -94,8 +95,9 @@ export function Table<T extends unknown>({
 
   return (
     <div className="w-full">
-      <div
-        className={cn("relative overflow-x-auto bg-base", {
+      <ScrollArea
+        orientation="horizontal"
+        className={cn("relative bg-base", {
           "min-h-[500px]": dataLength > 0 && !lean,
         })}
       >
@@ -115,7 +117,7 @@ export function Table<T extends unknown>({
           <TableFoot table={table} dataLength={dataLength} />
         </TableRoot>
         {previousDataRender}
-      </div>
+      </ScrollArea>
       {!lean && (
         <TablePagination
           {...{

@@ -9,9 +9,10 @@ import {
 export interface IProps {
   children: ReactNode;
   text: string;
+  isOverAButton: boolean;
 }
 
-export function Tooltip({ children, text }: IProps) {
+export function Tooltip({ children, text, isOverAButton }: IProps) {
   if (!text) {
     // eslint-disable-next-line react/jsx-no-useless-fragment
     return <>{children}</>;
@@ -19,7 +20,7 @@ export function Tooltip({ children, text }: IProps) {
   return (
     <TooltipProvider>
       <TooltipRoot>
-        <TooltipTrigger>{children}</TooltipTrigger>
+        <TooltipTrigger asChild={isOverAButton}>{children}</TooltipTrigger>
         <TooltipContent>
           <div
             className="rounded-md bg-base px-3 py-1.5 text-sm text-main shadow-md"

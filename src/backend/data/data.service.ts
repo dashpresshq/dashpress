@@ -138,6 +138,7 @@ export class DataApiService implements IDataApiService {
         ],
       })
     );
+
     if (!data) {
       throw new NotFoundError(
         `Entity '${entity}' with '${columnField}' '${id}' does not exist`

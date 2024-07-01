@@ -34,7 +34,7 @@ export function AsyncFormSelect(props: IProps) {
 
   const currentLabelFromSelection = useMemo(() => {
     const isValueInFirstDataLoad = fullData.data.find(
-      ({ value }: ISelectData) => value === input.value
+      ({ value }: ISelectData) => String(value) === String(input.value)
     );
 
     if (isValueInFirstDataLoad) {
@@ -42,7 +42,7 @@ export function AsyncFormSelect(props: IProps) {
     }
 
     const isValueInSelectionOptions = selectOptions.data.find(
-      ({ value }: ISelectData) => value === input.value
+      ({ value }: ISelectData) => String(value) === String(input.value)
     );
 
     if (isValueInSelectionOptions) {
@@ -50,11 +50,14 @@ export function AsyncFormSelect(props: IProps) {
     }
 
     return undefined;
-  }, [url, fullData.isLoading]);
+  }, [url, fullData, selectOptions, input.value]);
 
   const referenceLabel = useApi(referenceUrl?.(input.value), {
     defaultData: "",
-    enabled: !!referenceUrl && !!input.value && !currentLabelFromSelection,
+    enabled:
+      !!referenceUrl &&
+      !!input.value &&
+      !(currentLabelFromSelection || fullData.isLoading),
   });
 
   useDebounce(
@@ -69,22 +72,25 @@ export function AsyncFormSelect(props: IProps) {
     return <ErrorAlert message={fullData.error || selectOptions.error} />;
   }
 
+  const isLoading = selectOptions.isLoading || fullData.isLoading;
+
   if (fullData.data.length >= limit) {
     return (
       <FormSelect
         {...props}
         selectData={selectOptions.data}
+        isLoading={isLoading}
         onSearch={{
           isLoading: selectOptions.isLoading,
           onChange: setSearch,
           value: search,
-          valueLabel: referenceLabel.data
-            ? referenceLabel.data
-            : currentLabelFromSelection,
+          valueLabel: currentLabelFromSelection || referenceLabel.data,
         }}
       />
     );
   }
 
-  return <FormSelect {...props} selectData={fullData.data} />;
+  return (
+    <FormSelect {...props} selectData={fullData.data} isLoading={isLoading} />
+  );
 }

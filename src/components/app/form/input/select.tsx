@@ -13,6 +13,7 @@ import { IBaseFormSelect } from "@/frontend/design-system/components/Form/Select
 interface IFormSelect extends IBaseFormSelect {
   selectData: ISelectData[];
   onSearch?: ISelectProps["onSearch"];
+  isLoading?: boolean;
 }
 
 export function FormSelect(formInput: IFormSelect) {
@@ -23,7 +24,7 @@ export function FormSelect(formInput: IFormSelect) {
     disabled,
     label: formLabel,
     disabledOptions,
-    placeholder,
+    isLoading,
     onSearch,
   } = formInput;
   const { _ } = useLingui();
@@ -34,11 +35,11 @@ export function FormSelect(formInput: IFormSelect) {
         {...input}
         {...generateFormArias(meta)}
         className={generateClassNames(meta)}
+        isLoading={isLoading}
         options={selectData}
-        placeholder={
-          placeholder ||
-          fakeMessageDescriptor(`--- ${_(msg`Select ${_(formLabel)}`)} ---`)
-        }
+        placeholder={fakeMessageDescriptor(
+          `--- ${_(msg`Select ${_(formLabel)}`)} ---`
+        )}
         disabled={disabled}
         disabledOptions={disabledOptions}
         onSearch={onSearch}

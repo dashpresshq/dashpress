@@ -10,9 +10,13 @@ import * as SelectPrimitive from "@radix-ui/react-select";
 
 import { useLingui } from "@lingui/react";
 import { MessageDescriptor } from "@lingui/core";
+import { Loader } from "react-feather";
+import { msg } from "@lingui/macro";
 import { cn } from "@/lib/utils";
 import { ISelectData } from "@/shared/types/options";
 import { FormSearch } from "../app/form/input/search";
+import { EmptyWrapper } from "../app/empty-wrapper";
+import { ListSkeleton } from "../app/skeleton/list";
 
 const SelectRoot = SelectPrimitive.Root;
 
@@ -20,19 +24,25 @@ const SelectValue = SelectPrimitive.Value;
 
 const SelectTrigger = React.forwardRef<
   React.ElementRef<typeof SelectPrimitive.Trigger>,
-  React.ComponentPropsWithoutRef<typeof SelectPrimitive.Trigger>
->(({ className, children, ...props }, ref) => (
+  React.ComponentPropsWithoutRef<typeof SelectPrimitive.Trigger> & {
+    isLoading?: boolean;
+  }
+>(({ className, children, isLoading, ...props }, ref) => (
   <SelectPrimitive.Trigger
     ref={ref}
     className={cn(
-      "flex h-9 w-full items-center justify-between font-normal whitespace-nowrap rounded-md border border-border bg-transparent px-3 py-2 text-sm shadow-sm ring-offset-base placeholder:text-muted focus:outline-none focus:ring-1 focus:ring-primary disabled:cursor-not-allowed disabled:bg-soft [&>span]:line-clamp-1",
+      "flex h-9 w-full items-center justify-between font-normal whitespace-nowrap rounded-md border border-border bg-transparent px-3 py-2 text-sm shadow-sm ring-offset-base data-[placeholder]:text-muted focus:outline-none focus:ring-1 focus:ring-primary disabled:cursor-not-allowed disabled:bg-soft [&>span]:line-clamp-1",
       className
     )}
     {...props}
   >
     {children}
     <SelectPrimitive.Icon asChild>
-      <CaretSortIcon className="h-4 w-4 opacity-50" />
+      {isLoading ? (
+        <Loader className="animate-spin h-4 w-4 opacity-50" />
+      ) : (
+        <CaretSortIcon className="h-4 w-4 opacity-50" />
+      )}
     </SelectPrimitive.Icon>
   </SelectPrimitive.Trigger>
 ));
@@ -160,6 +170,7 @@ export interface ISelectProps {
   placeholder: MessageDescriptor;
   disabled?: boolean;
   disabledOptions?: Array<string>;
+  isLoading?: boolean;
   onSearch?: {
     onChange: (value: string) => void;
     value: string;
@@ -172,6 +183,7 @@ export function Select({
   onChange,
   options,
   disabled,
+  isLoading,
   value,
   name,
   placeholder,
@@ -181,7 +193,9 @@ export function Select({
 }: ISelectProps) {
   const { _ } = useLingui();
 
-  const valueLabel = options.find((option) => option.value === value)?.label;
+  const valueLabel = options.find(
+    (option) => String(option.value) === String(value)
+  )?.label;
 
   return (
     <SelectRoot onValueChange={onChange} value={value}>
@@ -190,6 +204,7 @@ export function Select({
         name={name}
         id={name}
         disabled={disabled}
+        isLoading={isLoading}
       >
         <SelectValue placeholder={_(placeholder)}>
           {onSearch?.valueLabel || (valueLabel ? _(valueLabel) : null)}
@@ -199,11 +214,16 @@ export function Select({
         {onSearch && (
           <div className="mb-1">
             <FormSearch
+              initialValue={onSearch.value}
               onChange={onSearch.onChange}
               loading={onSearch.isLoading}
             />
           </div>
         )}
+        {onSearch?.value && options.length === 0 && !onSearch?.isLoading && (
+          <EmptyWrapper text={msg`No Search Results`} />
+        )}
+        {onSearch?.isLoading && <ListSkeleton count={10} />}
         {options.map(({ value: value$1, label }) => (
           <SelectItem
             key={`${value$1}`}

@@ -7,12 +7,13 @@ import { Input } from "@/components/ui/input";
 interface IProps {
   onChange: (value: string) => void;
   loading?: boolean;
+  initialValue?: string;
 }
 
-export function FormSearch({ onChange, loading }: IProps) {
+export function FormSearch({ onChange, loading, initialValue }: IProps) {
   const { _ } = useLingui();
 
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState(initialValue || "");
 
   return (
     <div className="relative flex w-full">

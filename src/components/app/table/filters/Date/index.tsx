@@ -37,7 +37,6 @@ export function FilterTableByDate({
       />
       {new Date(filterValue?.value || "").toString() !== "Invalid Date" ? (
         <>
-          {/* TODO date not changing */}
           <ControlledFormDateInput
             onChange={(value) => {
               setFilter({

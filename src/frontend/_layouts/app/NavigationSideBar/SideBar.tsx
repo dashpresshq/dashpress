@@ -18,6 +18,7 @@ import { cn } from "@/lib/utils";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Button } from "@/components/ui/button";
 import { ViewStateMachine } from "@/components/app/view-state-machine";
+import { Tooltip } from "@/components/app/tooltip";
 
 interface IProps {
   isFullWidth: boolean;
@@ -68,6 +69,7 @@ export function SideBar({ isFullWidth, setIsFullWidth }: IProps) {
   }, [handleKeyPress]);
   return (
     <div
+      id="gaussian-portal-1"
       className="fixed transition-all min-h-dvh"
       style={{
         maxWidth: isFullWidth
@@ -114,22 +116,23 @@ export function SideBar({ isFullWidth, setIsFullWidth }: IProps) {
             />
           </ViewStateMachine>
         </ScrollArea>
-
-        <Button
-          variant="ghost"
-          className="h-9 bg-primary-shade-thick-xl shadow-sm rounded-none"
-          onClick={() => setIsFullWidth(!isFullWidth)}
-        >
-          <ChevronRight
-            className={cn(
-              "w-8 h-8 text-white inline-block transition-transform",
-              {
-                "rotate-180": isFullWidth,
-              }
-            )}
-            aria-label="Toggle Side Bar"
-          />
-        </Button>
+        <Tooltip isOverAButton text="Use `Ctrl + B` to toggle">
+          <Button
+            variant="ghost"
+            className="h-9 bg-primary-shade-thick-xl shadow-sm rounded-none"
+            onClick={() => setIsFullWidth(!isFullWidth)}
+          >
+            <ChevronRight
+              className={cn(
+                "w-8 h-8 text-white inline-block transition-transform",
+                {
+                  "rotate-180": isFullWidth,
+                }
+              )}
+              aria-label="Toggle Side Bar"
+            />
+          </Button>
+        </Tooltip>
       </div>
     </div>
   );

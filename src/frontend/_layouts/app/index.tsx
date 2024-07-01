@@ -67,35 +67,37 @@ export function AppLayout({
         </title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
-      <div className="flex justify-between items-center mb-2">
-        <div className="text-left">
-          <p>{pageTitle ? _(pageTitle) : null}</p>
-          <Breadcrumbs items={homedBreadcrumb} onCrumbClick={goToLinkIndex} />
-        </div>
-        <div>
-          <div className="flex gap-2">
-            {actionMenuItems.length > 0 ? (
-              <DropDownMenu
-                ariaLabel="Toggle Action Menu"
-                menuItems={actionMenuItems}
-              />
-            ) : null}
-            {secondaryMenuItems.length > 0 ? (
-              <DropDownMenu
-                ariaLabel="Toggle Secondary  Menu"
-                menuItems={secondaryMenuItems}
-              />
-            ) : null}
-            {process.env.NEXT_PUBLIC_IS_DEMO && (
-              <DropDownMenu
-                ariaLabel="Toggle Demo Menu"
-                menuItems={DEMO_LINKS}
-              />
-            )}
+      <div id="gaussian-portal-0">
+        <div className="flex justify-between items-center mb-2">
+          <div className="text-left">
+            <p>{pageTitle ? _(pageTitle) : null}</p>
+            <Breadcrumbs items={homedBreadcrumb} onCrumbClick={goToLinkIndex} />
+          </div>
+          <div>
+            <div className="flex gap-2">
+              {actionMenuItems.length > 0 ? (
+                <DropDownMenu
+                  ariaLabel="Toggle Action Menu"
+                  menuItems={actionMenuItems}
+                />
+              ) : null}
+              {secondaryMenuItems.length > 0 ? (
+                <DropDownMenu
+                  ariaLabel="Toggle Secondary  Menu"
+                  menuItems={secondaryMenuItems}
+                />
+              ) : null}
+              {process.env.NEXT_PUBLIC_IS_DEMO && (
+                <DropDownMenu
+                  ariaLabel="Toggle Demo Menu"
+                  menuItems={DEMO_LINKS}
+                />
+              )}
+            </div>
           </div>
         </div>
+        <main>{children}</main>
       </div>
-      <main>{children}</main>
     </>
   );
 }

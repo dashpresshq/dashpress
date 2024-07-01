@@ -164,7 +164,6 @@ text-on-shade: 48, 86.7%, 88.2%
     @apply border-border;
   }
   .gaussian-blur {
-    filter: url(#gaussian-blur);
     filter: blur(2px);
   }
   body {

@@ -6,6 +6,8 @@ interface IProps {
   children: ReactNode;
 }
 
+const gaussianPortals = ["gaussian-portal-0", "gaussian-portal-1"];
+
 export function NextPortal({ children }: IProps) {
   const ref = useRef<Element | null>(null);
   const isMounted = useToggle();
@@ -13,26 +15,20 @@ export function NextPortal({ children }: IProps) {
   useEffect(() => {
     ref.current = document.body;
     isMounted.on();
-    document.getElementById("__next")?.classList.add("gaussian-blur");
+    gaussianPortals.forEach((portal) => {
+      document.getElementById(portal)?.classList.add("gaussian-blur");
+    });
 
     return () => {
-      document.getElementById("__next")?.classList.remove("gaussian-blur");
+      gaussianPortals.forEach((portal) => {
+        document.getElementById(portal)?.classList.remove("gaussian-blur");
+      });
 
       isMounted.off();
     };
   }, []);
 
   return isMounted.isOn && ref.current
-    ? createPortal(
-        <>
-          <svg className="absolute top-0 left-0">
-            <filter id="gaussian-blur">
-              <feGaussianBlur stdDeviation="0.3" />
-            </filter>
-          </svg>
-          {children}
-        </>,
-        ref.current
-      )
+    ? createPortal(children, document.body)
     : null;
 }

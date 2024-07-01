@@ -1,7 +1,8 @@
+import { Config } from "tailwindcss";
+
 const { fontFamily } = require("tailwindcss/defaultTheme");
 
-/** @type {import('tailwindcss').Config} */
-module.exports = {
+const config: Config = {
   content: ["./src/components/**/*.{ts,tsx}", "./src/frontend/**/*.{ts,tsx}"],
   darkMode: ["class"],
   theme: {
@@ -41,12 +42,12 @@ module.exports = {
       },
       keyframes: {
         "accordion-down": {
-          from: { height: 0 },
+          from: { height: "0" },
           to: { height: "var(--radix-accordion-content-height)" },
         },
         "accordion-up": {
           from: { height: "var(--radix-accordion-content-height)" },
-          to: { height: 0 },
+          to: { height: "0" },
         },
       },
       animation: {
@@ -56,7 +57,10 @@ module.exports = {
     },
   },
   plugins: [
+    require("tailwindcss-animate"),
     require("@tailwindcss/typography"),
     require("@tailwindcss/container-queries"),
   ],
 };
+
+export default config;

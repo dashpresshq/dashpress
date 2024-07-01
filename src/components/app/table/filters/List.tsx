@@ -1,6 +1,6 @@
 import { IColumnFilterBag } from "shared/types/data";
 import { IFilterProps } from "./types";
-import { AsyncFormMultiSelect } from "@/frontend/design-system/components/Form/Select/Async";
+// import { AsyncFormMultiSelect } from "@/frontend/design-system/components/Form/Select/Async";
 
 export function FilterTableByListSelection({
   column: { filterValue, setFilter },
@@ -8,7 +8,8 @@ export function FilterTableByListSelection({
 }: IFilterProps<IColumnFilterBag<string[]>, string>) {
   return (
     <div className="min-w-64">
-      <AsyncFormMultiSelect
+      <div>TODO</div>
+      {/* <AsyncFormMultiSelect
         url={bag}
         values={filterValue?.value || []}
         onChange={(value) => {
@@ -17,7 +18,7 @@ export function FilterTableByListSelection({
             value,
           });
         }}
-      />
+      /> */}
     </div>
   );
 }

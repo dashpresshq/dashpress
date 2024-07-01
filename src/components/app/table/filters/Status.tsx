@@ -1,7 +1,7 @@
 import { IColumnFilterBag } from "shared/types/data";
 import { ISelectData } from "shared/types/options";
 import { IFilterProps } from "./types";
-import { FormMultiSelect } from "@/frontend/design-system/components/Form/Select";
+// import { FormMultiSelect } from "@/frontend/design-system/components/Form/Select";
 
 export function FilterTableByStatus({
   column: { filterValue, setFilter },
@@ -9,7 +9,8 @@ export function FilterTableByStatus({
 }: IFilterProps<IColumnFilterBag<string[]>, ISelectData[]>) {
   return (
     <div className="min-w-64">
-      <FormMultiSelect
+      <div>TODO</div>
+      {/* <FormMultiSelect
         selectData={bag}
         values={filterValue?.value || []}
         ariaLabel="Select Status"
@@ -19,7 +20,7 @@ export function FilterTableByStatus({
             value,
           });
         }}
-      />
+      /> */}
     </div>
   );
 }

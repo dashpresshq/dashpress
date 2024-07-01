@@ -177,7 +177,7 @@ export function ManageCredentialGroup({
         {group === IntegrationsConfigurationGroup.Credentials &&
           userHasPermission(UserPermissions.CAN_MANAGE_APP_CREDENTIALS) &&
           revealedCredentials.data === undefined && (
-            <div className="my-3">
+            <div className="my-3 px-3">
               <PasswordToReveal isLoading={revealedCredentials.isLoading} />
             </div>
           )}

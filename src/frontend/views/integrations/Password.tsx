@@ -17,7 +17,7 @@ export function PasswordToReveal({ isLoading }: { isLoading: boolean }) {
   const passwordStore = usePasswordStore();
 
   return (
-    <div className="px-3">
+    <div>
       <p className="italic text-sm mb-3">
         {_(
           msg`For security reasons, Please input your account password to reveal credentials`

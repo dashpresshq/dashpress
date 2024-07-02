@@ -8,7 +8,7 @@ import {
   generateClassNames,
   generateFormArias,
 } from "@/components/app/form/input/label-and-error";
-import { IBaseFormSelect } from "@/frontend/design-system/components/Form/Select/types";
+import { IBaseFormSelect } from "./types";
 
 interface IFormSelect extends IBaseFormSelect {
   selectData: ISelectData[];

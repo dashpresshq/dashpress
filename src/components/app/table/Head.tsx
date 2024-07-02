@@ -18,7 +18,7 @@ interface IProps {
   table: Table<Record<string, unknown>>;
 }
 
-export function TableHead({ table }: IProps) {
+export function _TableHead({ table }: IProps) {
   return (
     <TableHeader>
       {table.getHeaderGroups().map((headerGroup) => (
@@ -74,3 +74,5 @@ export function TableHead({ table }: IProps) {
     </TableHeader>
   );
 }
+
+export const TableHead = React.memo(_TableHead);

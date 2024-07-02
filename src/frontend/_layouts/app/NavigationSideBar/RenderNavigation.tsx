@@ -127,7 +127,7 @@ export function RenderNavigation({
 
   return (
     <ul
-      className={cn("px-1 mb-0 mt-1", {
+      className={cn("mb-0 mt-1", {
         "px-3": isFullWidth,
       })}
     >
@@ -156,7 +156,7 @@ export function RenderNavigation({
               {type === NavigationMenuItemType.Header ? (
                 <p
                   className={cn(
-                    "text-white uppercase text-xs font-semibold mt-5 mr-0 mb-2 ml-1",
+                    "text-white uppercase text-[11px] font-semibold mt-5 mr-0 mb-2 ml-1",
                     {
                       hidden: !isFullWidth,
                     }
@@ -170,12 +170,13 @@ export function RenderNavigation({
                   variant="ghost"
                   size="lg"
                   style={{
-                    marginLeft: (depth - 1) * 16,
+                    marginLeft: (depth - 1) * 8,
                   }}
                   className={cn(
-                    "w-full text-white py-2 flex px-2 mb-1 items-center justify-start rounded-md hover:bg-primary-shade-thick hover:text-white",
+                    "w-full text-white flex mb-1 py-2 items-center justify-start rounded-md hover:bg-primary-shade-thick hover:text-white",
                     {
                       "bg-primary": isActive,
+                      "px-3": isFullWidth,
                     }
                   )}
                 >

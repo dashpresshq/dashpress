@@ -5,7 +5,7 @@ import { VariantProps } from "class-variance-authority";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { LabelAndError } from "./label-and-error";
-import { IBaseFormSelect } from "@/frontend/design-system/components/Form/Select/types";
+import { IBaseFormSelect } from "./types";
 
 interface IFormSelect extends IBaseFormSelect {
   selectData: ISelectData[];

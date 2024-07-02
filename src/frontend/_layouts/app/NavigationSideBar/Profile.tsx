@@ -34,7 +34,7 @@ export function ProfileOnNavigation({ isFullWidth }: IProps) {
 
   return (
     <div className="flex justify-between items-center p-4 pb-0 mb-4">
-      <p className="text-sm text-white">
+      <p className="text-xs font-semibold text-white">
         <Trans>
           Hi,{" "}
           {currentUser.isLoading
@@ -46,7 +46,7 @@ export function ProfileOnNavigation({ isFullWidth }: IProps) {
       <DropDownMenu
         ellipsis
         ariaLabel="Toggle Profile Menu"
-        className="[&_svg]:text-white"
+        className="[&_svg]:text-white bg-[hsla(var(--dp-primary),0.6)] hover:bg-[hsla(var(--dp-primary),0.9)]"
         menuItems={[...constantNavigation, ...constantNavigationMenuItems].map(
           ({ label, action, systemIcon }) => ({
             id: action,

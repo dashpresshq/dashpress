@@ -14,7 +14,9 @@ export interface IProps {
 export function Dropdown({ target, children, className }: IProps) {
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger>{target}</DropdownMenuTrigger>
+      <DropdownMenuTrigger className="outline-none">
+        {target}
+      </DropdownMenuTrigger>
       <DropdownMenuContent className={className} align="end">
         {children}
       </DropdownMenuContent>

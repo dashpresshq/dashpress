@@ -95,12 +95,7 @@ export function Table<T extends unknown>({
 
   return (
     <div className="w-full">
-      <ScrollArea
-        orientation="horizontal"
-        className={cn("relative bg-base", {
-          "min-h-[500px]": dataLength > 0 && !lean,
-        })}
-      >
+      <ScrollArea orientation="horizontal" className={cn("relative bg-base")}>
         {previousDataRender}
         <TableRoot
           className={cn("w-full text-main border-collapse", {

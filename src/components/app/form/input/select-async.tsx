@@ -1,11 +1,12 @@
 import { useMemo, useState } from "react";
 import { useDebounce } from "react-use";
-import { ISelectData } from "shared/types/options";
+import { ILabelValue } from "shared/types/options";
 import { useApi } from "frontend/lib/data/useApi";
 import { useLingui } from "@lingui/react";
 import { ErrorAlert } from "@/components/app/alert";
-import { IBaseFormSelect } from "@/frontend/design-system/components/Form/Select/types";
 import { FormSelect } from "./select";
+import { IBaseFormSelect } from "./types";
+import { transformLabelValueToSelectData } from "@/translations/fake";
 
 interface IProps extends IBaseFormSelect {
   url: string;
@@ -21,11 +22,11 @@ export function AsyncFormSelect(props: IProps) {
   const [search, setSearch] = useState("");
   const [debounceSearch, setDebounceSearch] = useState("");
 
-  const fullData = useApi<ISelectData[]>(url, {
+  const fullData = useApi<ILabelValue[]>(url, {
     defaultData: [],
   });
 
-  const selectOptions = useApi<ISelectData[]>(
+  const selectOptions = useApi<ILabelValue[]>(
     debounceSearch ? `${url}?search=${debounceSearch}` : url,
     {
       defaultData: [],
@@ -34,7 +35,7 @@ export function AsyncFormSelect(props: IProps) {
 
   const currentLabelFromSelection = useMemo(() => {
     const isValueInFirstDataLoad = fullData.data.find(
-      ({ value }: ISelectData) => String(value) === String(input.value)
+      ({ value }: ILabelValue) => String(value) === String(input.value)
     );
 
     if (isValueInFirstDataLoad) {
@@ -42,7 +43,7 @@ export function AsyncFormSelect(props: IProps) {
     }
 
     const isValueInSelectionOptions = selectOptions.data.find(
-      ({ value }: ISelectData) => String(value) === String(input.value)
+      ({ value }: ILabelValue) => String(value) === String(input.value)
     );
 
     if (isValueInSelectionOptions) {
@@ -78,7 +79,7 @@ export function AsyncFormSelect(props: IProps) {
     return (
       <FormSelect
         {...props}
-        selectData={selectOptions.data}
+        selectData={transformLabelValueToSelectData(selectOptions.data)}
         isLoading={isLoading}
         onSearch={{
           isLoading: selectOptions.isLoading,
@@ -91,6 +92,10 @@ export function AsyncFormSelect(props: IProps) {
   }
 
   return (
-    <FormSelect {...props} selectData={fullData.data} isLoading={isLoading} />
+    <FormSelect
+      {...props}
+      selectData={transformLabelValueToSelectData(fullData.data)}
+      isLoading={isLoading}
+    />
   );
 }

@@ -15,3 +15,7 @@ export interface ISharedFormInput extends ILabelAndErrorProps {
   placeholder?: MessageDescriptor;
   disabled?: boolean;
 }
+
+export interface IBaseFormSelect extends ISharedFormInput {
+  disabledOptions?: string[];
+}

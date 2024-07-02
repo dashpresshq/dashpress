@@ -129,21 +129,24 @@ SelectLabel.displayName = SelectPrimitive.Label.displayName;
 
 const SelectItem = React.forwardRef<
   React.ElementRef<typeof SelectPrimitive.Item>,
-  React.ComponentPropsWithoutRef<typeof SelectPrimitive.Item>
->(({ className, children, ...props }, ref) => (
+  React.ComponentPropsWithoutRef<typeof SelectPrimitive.Item> & {
+    selected: boolean;
+  }
+>(({ className, selected, children, ...props }, ref) => (
   <SelectPrimitive.Item
     ref={ref}
     className={cn(
-      "relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 pl-2 pr-8 text-sm outline-none focus:bg-hover data-[disabled]:pointer-events-none data-[disabled]:text-muted",
+      "relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 pl-2 pr-8 text-sm outline-none hover:bg-hover data-[disabled]:pointer-events-none data-[disabled]:text-muted",
+      { "bg-hover": selected },
       className
     )}
     {...props}
   >
-    <span className="absolute right-2 flex h-3.5 w-3.5 items-center justify-center">
-      <SelectPrimitive.ItemIndicator>
+    {selected && (
+      <span className="absolute right-2 flex h-3.5 w-3.5 items-center justify-center">
         <CheckIcon className="h-4 w-4" />
-      </SelectPrimitive.ItemIndicator>
-    </span>
+      </span>
+    )}
     <SelectPrimitive.ItemText>{children}</SelectPrimitive.ItemText>
   </SelectPrimitive.Item>
 ));
@@ -226,8 +229,9 @@ export function Select({
         {onSearch?.isLoading && <ListSkeleton count={10} />}
         {options.map(({ value: value$1, label }) => (
           <SelectItem
-            key={`${value$1}`}
-            value={`${value$1}`}
+            key={String(value$1)}
+            value={String(value$1)}
+            selected={String(value$1) === String(value)}
             disabled={disabledOptions?.includes(`${value$1}`)}
           >
             {_(label)}

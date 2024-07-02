@@ -44,20 +44,16 @@ export function FilterWrapper({
       <Dropdown
         className="w-64"
         target={
-          <div
-            className="cursor-pointer"
+          <SystemIcon
+            icon={systemIcon}
             aria-label={`Filter ${columnLabel} By ${filterLabel}${
               filterHasValue ? " Is Active" : ""
             }`}
-          >
-            <SystemIcon
-              icon={systemIcon}
-              className={cn("w-4 h-4 text-muted", {
-                "text-primary": filterHasValue,
-                "opacity-70": !filterHasValue,
-              })}
-            />
-          </div>
+            className={cn("w-4 h-4 text-muted align-text-top", {
+              "text-primary": filterHasValue,
+              "opacity-70": !filterHasValue,
+            })}
+          />
         }
       >
         <div className="flex flex-col gap-3 p-2">

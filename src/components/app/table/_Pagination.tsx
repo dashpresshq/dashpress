@@ -1,8 +1,7 @@
 import ReactPaginate from "react-paginate";
 import { Trans, msg } from "@lingui/macro";
-import { ChevronLeft, ChevronRight } from "react-feather";
+import { ChevronLeft, ChevronRight, MoreHorizontal } from "react-feather";
 import { fakeMessageDescriptor } from "translations/fake";
-import { DotsHorizontalIcon } from "@radix-ui/react-icons";
 import { TABLE_PAGE_SIZES } from "./constants";
 import { Select } from "@/components/ui/select";
 import { buttonVariants } from "@/components/ui/button";
@@ -57,7 +56,7 @@ export function TablePagination({
           <ReactPaginate
             previousLabel={<ChevronLeft className="h-4 w-4" />}
             nextLabel={<ChevronRight className="h-4 w-4" />}
-            breakLabel={<DotsHorizontalIcon className="h-4 w-4" />}
+            breakLabel={<MoreHorizontal className="h-4 w-4" />}
             pageCount={totalPageCount}
             renderOnZeroPageCount={() => null}
             marginPagesDisplayed={2}

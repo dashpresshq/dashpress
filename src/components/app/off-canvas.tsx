@@ -36,7 +36,9 @@ export function OffCanvas({ show, onClose, title, children, size }: IProps) {
             <SheetTitle>{_(title)}</SheetTitle>
           </SheetHeader>
           <Separator className="mt-2" />
-          <ScrollArea className="flex-grow px-4 my-2">{children}</ScrollArea>
+          <ScrollArea className="flex-grow">
+            <div className="px-4 my-2">{children}</div>
+          </ScrollArea>
         </SheetContent>
       </Sheet>
     </NextPortal>

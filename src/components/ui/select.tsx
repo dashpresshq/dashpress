@@ -1,16 +1,10 @@
 /* eslint-disable react/prop-types */
 import * as React from "react";
-import {
-  CaretSortIcon,
-  CheckIcon,
-  ChevronDownIcon,
-  ChevronUpIcon,
-} from "@radix-ui/react-icons";
 import * as SelectPrimitive from "@radix-ui/react-select";
 
 import { useLingui } from "@lingui/react";
 import { MessageDescriptor } from "@lingui/core";
-import { Loader } from "react-feather";
+import { Check, ChevronDown, ChevronUp, Loader } from "react-feather";
 import { msg } from "@lingui/macro";
 import { cn } from "@/lib/utils";
 import { ISelectData } from "@/shared/types/options";
@@ -41,7 +35,7 @@ const SelectTrigger = React.forwardRef<
       {isLoading ? (
         <Loader className="animate-spin h-4 w-4 opacity-50" />
       ) : (
-        <CaretSortIcon className="h-4 w-4 opacity-50" />
+        <ChevronDown className="h-4 w-4 opacity-50" />
       )}
     </SelectPrimitive.Icon>
   </SelectPrimitive.Trigger>
@@ -60,7 +54,7 @@ const SelectScrollUpButton = React.forwardRef<
     )}
     {...props}
   >
-    <ChevronUpIcon />
+    <ChevronUp />
   </SelectPrimitive.ScrollUpButton>
 ));
 SelectScrollUpButton.displayName = SelectPrimitive.ScrollUpButton.displayName;
@@ -77,7 +71,7 @@ const SelectScrollDownButton = React.forwardRef<
     )}
     {...props}
   >
-    <ChevronDownIcon />
+    <ChevronDown />
   </SelectPrimitive.ScrollDownButton>
 ));
 SelectScrollDownButton.displayName =
@@ -144,7 +138,7 @@ const SelectItem = React.forwardRef<
   >
     {selected && (
       <span className="absolute right-2 flex h-3.5 w-3.5 items-center justify-center">
-        <CheckIcon className="h-4 w-4" />
+        <Check className="h-4 w-4" />
       </span>
     )}
     <SelectPrimitive.ItemText>{children}</SelectPrimitive.ItemText>
@@ -225,6 +219,9 @@ export function Select({
         )}
         {onSearch?.value && options.length === 0 && !onSearch?.isLoading && (
           <EmptyWrapper text={msg`No Search Results`} />
+        )}
+        {options.length === 0 && !onSearch && (
+          <EmptyWrapper text={msg`No Options`} />
         )}
         {onSearch?.isLoading && <ListSkeleton count={10} />}
         {options.map(({ value: value$1, label }) => (

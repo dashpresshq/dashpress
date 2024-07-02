@@ -41,8 +41,12 @@ export function AuthLayout({ children, title, subTitle }: IProps) {
             className="w-lvw h-lvh"
             viewBox="0 0 1600 800"
           >
-            <rect fill="#ffffff" width="1600" height="800" />
-            <g stroke="#000" strokeWidth="66.7" strokeOpacity="0.05">
+            <rect fill="#000" width="1600" height="800" />
+            <g
+              stroke="hsla(var(--dp-primary))"
+              strokeWidth="66.7"
+              strokeOpacity="0.05"
+            >
               <circle fill={getRandom()} cx="0" cy="0" r="1800" />
               <circle fill={getRandom()} cx="0" cy="0" r="1700" />
               <circle fill={getRandom()} cx="0" cy="0" r="1600" />
@@ -66,7 +70,7 @@ export function AuthLayout({ children, title, subTitle }: IProps) {
         </div>
         <div className="flex justify-center items-center h-lvh relative">
           <div className="w-full max-w-lg m-4">
-            <CardHeader className="flex gap-2 flex-col items-center bg-primary rounded-2xl rounded-b-none">
+            <CardHeader className="flex gap-2 flex-col items-center bg-primary rounded-xl rounded-b-none">
               {fullLogo && (
                 <a href={homeLink}>
                   <img src={fullLogo} className="w-40" alt="logo" />
@@ -75,7 +79,7 @@ export function AuthLayout({ children, title, subTitle }: IProps) {
               <p className="text-white">{_(title)}</p>
               {subTitle && <p className="text-white text-xs">{_(subTitle)}</p>}
             </CardHeader>
-            <CardContent className="rounded-2xl rounded-t-none">
+            <CardContent className="rounded-xl rounded-t-none">
               {children}
             </CardContent>
           </div>

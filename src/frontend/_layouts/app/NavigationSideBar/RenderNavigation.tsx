@@ -124,7 +124,6 @@ export function RenderNavigation({
   if (!navigation) {
     return null;
   }
-
   return (
     <ul
       className={cn("mb-0 mt-1", {
@@ -147,7 +146,7 @@ export function RenderNavigation({
             <SystemIcon
               strokeWidth={isActive ? 2 : 1}
               icon={icon}
-              className="w-[20px] h-[20px]"
+              className="w-[16px] h-[16px]"
             />
           );
 
@@ -173,7 +172,7 @@ export function RenderNavigation({
                     marginLeft: (depth - 1) * 8,
                   }}
                   className={cn(
-                    "w-full text-white flex mb-1 py-2 items-center justify-start rounded-md hover:bg-primary-shade-thick hover:text-white",
+                    "w-full text-white flex mb-1 py-5 items-center justify-start rounded-lg hover:bg-primary-shade-thick hover:text-white",
                     {
                       "bg-primary": isActive,
                       "px-3": isFullWidth,
@@ -182,6 +181,7 @@ export function RenderNavigation({
                 >
                   {children && children.length > 0 ? (
                     <Button
+                      variant="ghost"
                       onClick={() => {
                         clearBreadCrumbStack();
                         setIsFullWidth(true);
@@ -193,14 +193,14 @@ export function RenderNavigation({
                         <div className="flex justify-between items-center w-full">
                           <p
                             className={cn(
-                              "text-sm text-white ml-2 transition-all"
+                              "text-xs text-white ml-2 transition-all"
                             )}
                           >
                             {title}
                           </p>
                           <ChevronRight
                             className={cn(
-                              "fill-white cursor-pointer ml-0 transition-all",
+                              "cursor-pointer ml-0 transition-all",
                               {
                                 "rotate-90": isActive,
                               }
@@ -227,7 +227,7 @@ export function RenderNavigation({
                       {isFullWidth && (
                         <p
                           className={cn(
-                            "text-sm text-white ml-2 transition-all"
+                            "text-xs text-white ml-2 transition-all"
                           )}
                         >
                           {title}

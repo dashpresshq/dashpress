@@ -91,6 +91,7 @@ export function Alert({ type, message, renderJsx, action }: IProps) {
           type="button"
           onClick={renderMode.off}
           variant="ghost"
+          className="p-0"
           aria-label="Close"
         >
           <X size={16} />

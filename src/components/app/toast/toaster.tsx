@@ -1,4 +1,11 @@
 import { useLingui } from "@lingui/react";
+import React from "react";
+import {
+  AlertCircle,
+  CheckCircle,
+  Icon as IconType,
+  XCircle,
+} from "react-feather";
 import {
   Toast,
   ToastAction,
@@ -12,13 +19,25 @@ import { useToast } from "./use-toast";
 import { spectrumVariants } from "@/components/ui/spectrum";
 import { cn } from "@/lib/utils";
 
+const ToastConfigMap: Record<
+  "green" | "red" | "yellow",
+  {
+    Icon: IconType;
+  }
+> = {
+  green: { Icon: CheckCircle },
+  red: { Icon: XCircle },
+  yellow: { Icon: AlertCircle },
+};
+
 export function Toaster() {
   const { toasts } = useToast();
   const { _ } = useLingui();
 
   return (
     <ToastProvider>
-      {toasts.map(({ id, title, variant, description, action, ...props }) => {
+      {toasts.map(({ id, title, description, variant, action, ...props }) => {
+        const { Icon } = ToastConfigMap[variant];
         return (
           <Toast
             key={id}
@@ -26,25 +45,29 @@ export function Toaster() {
             variant={variant}
             duration={variant === "red" || action ? 10000 : 5000}
           >
-            <div className="grid gap-1">
-              {title && <ToastTitle>{_(title)}</ToastTitle>}
-              {description && (
-                <ToastDescription>{_(description)}</ToastDescription>
-              )}
-            </div>
-            {action && (
-              <ToastAction
-                onClick={action.action}
-                altText={_(action.label)}
-                className={cn(
-                  spectrumVariants({
-                    spectrum: variant || "green",
-                  })
+            <div className="flex items-center">
+              <Icon className="mr-3 w-5 h-5 shrink-0" />
+              <div className="flex flex-col gap-2">
+                {title && <ToastTitle>{_(title)}</ToastTitle>}
+                {description && (
+                  <ToastDescription>{_(description)}</ToastDescription>
                 )}
-              >
-                {_(action.label)}
-              </ToastAction>
-            )}
+                {action && (
+                  <ToastAction
+                    onClick={action.action}
+                    altText={_(action.label)}
+                    className={cn(
+                      "self-start",
+                      spectrumVariants({
+                        spectrum: variant,
+                      })
+                    )}
+                  >
+                    {_(action.label)}
+                  </ToastAction>
+                )}
+              </div>
+            </div>
             <ToastClose />
           </Toast>
         );

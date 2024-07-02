@@ -6,10 +6,11 @@ import type { ToastProps } from "@/components/ui/toast";
 const TOAST_LIMIT = 1;
 const TOAST_REMOVE_DELAY = 1000000;
 
-type ToasterToast = Pick<ToastProps, "open" | "onOpenChange" | "variant"> & {
+type ToasterToast = Pick<ToastProps, "open" | "onOpenChange"> & {
   id: string;
   title?: MessageDescriptor;
   description?: MessageDescriptor;
+  variant: ToastProps["variant"];
   action?: { label: MessageDescriptor; action: () => void };
 };
 
@@ -129,7 +130,12 @@ const listeners: Array<(state: State) => void> = [];
 
 let memoryState: State = { toasts: [] };
 
-type Toast = Omit<ToasterToast, "id">;
+type Toast = {
+  description: MessageDescriptor;
+  variant: ToastProps["variant"];
+  title?: MessageDescriptor;
+  action?: { label: MessageDescriptor; action: () => void };
+};
 
 function dispatch(action: Action) {
   memoryState = reducer(memoryState, action);

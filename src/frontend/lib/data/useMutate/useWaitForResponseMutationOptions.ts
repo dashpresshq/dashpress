@@ -34,9 +34,9 @@ export function useWaitForResponseMutationOptions<V, R = void>(
         if (formData === undefined) {
           throw new Error(PASS_DATA_FROM_HANDLER_ERROR_MESSAGE);
         }
-        toast(options.smartSuccessMessage(formData));
+        toast({ variant: "green", ...options.smartSuccessMessage(formData) });
       } else if (options.successMessage) {
-        toast(options.successMessage);
+        toast({ variant: "green", ...options.successMessage });
       }
 
       if (options.onSuccessActionWithFormData) {

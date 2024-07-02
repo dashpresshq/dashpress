@@ -39,9 +39,12 @@ export function useApiMutateOptimisticOptions<T, V, R = void>(
       apiMutate.set((oldData) => options.onMutate(oldData, formData)),
     onSuccess: async (requestResponse: R) => {
       if (options.smartSuccessMessage) {
-        toast(options.smartSuccessMessage(requestResponse));
+        toast({
+          variant: "green",
+          ...options.smartSuccessMessage(requestResponse),
+        });
       } else if (options.successMessage) {
-        toast(options.successMessage);
+        toast({ variant: "green", ...options.successMessage });
       }
       if (options.otherEndpoints) {
         options.otherEndpoints.forEach((queryKey) => {

@@ -10,7 +10,6 @@ import { FormInput } from "./text";
 import { FormNumberInput } from "./number";
 import { FormRichTextArea } from "./rich-text";
 import { FormTextArea } from "./textarea";
-import { FormMultiSelect } from "../../../../frontend/design-system/components/Form/Select";
 import { FormCodeEditor } from "../../../../frontend/design-system/components/Form/CodeEditor";
 import { FormSwitch } from "./switch";
 import { FormFileInput } from "../../../../frontend/design-system/components/Form/File";
@@ -206,22 +205,6 @@ function DemoForm() {
                 label={fakeMessageDescriptor("Async Select Input")}
                 limit={2}
                 {...formProps}
-              />
-            )}
-          </Field>
-
-          <Field name="foo7" validateFields={[]}>
-            {(formProps) => (
-              <FormMultiSelect
-                selectData={[
-                  { label: fakeMessageDescriptor("Foo"), value: "foo" },
-                  { label: fakeMessageDescriptor("Bar"), value: "bar" },
-                  { label: fakeMessageDescriptor("Baz"), value: "baz" },
-                  { label: fakeMessageDescriptor("Noop"), value: "noop" },
-                  { label: fakeMessageDescriptor("Dupe"), value: "dupe" },
-                ]}
-                values={formProps.input.value || ["foo", "bar"]}
-                onChange={formProps.input.onChange}
               />
             )}
           </Field>

@@ -172,7 +172,7 @@ export function RenderNavigation({
                     marginLeft: (depth - 1) * 8,
                   }}
                   className={cn(
-                    "w-full text-white flex mb-1 py-5 items-center justify-start rounded-lg hover:bg-primary-shade-thick hover:text-white",
+                    "w-full text-white flex mb-1 py-5 items-center justify-start rounded-lg hover:!bg-[hsla(0,0%,0%,0.2)]",
                     {
                       "bg-primary": isActive,
                       "px-3": isFullWidth,

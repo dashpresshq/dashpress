@@ -6,6 +6,7 @@ import UserCreate from "pages/users/create";
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
 import { TestProviders } from "__tests__/_/Provider";
+import { expectToast } from "../_/utils/closeAllToasts";
 
 setupApiHandlers();
 
@@ -37,9 +38,7 @@ describe("pages/users/create", () => {
 
     await userEvent.click(screen.getByRole("button", { name: "Create User" }));
 
-    expect(await screen.findByRole("status")).toHaveTextContent(
-      "User Created SuccessfullyView Details"
-    );
+    await expectToast("User Created SuccessfullyView Details");
 
     await userEvent.click(screen.getByRole("button", { name: "View Details" }));
 

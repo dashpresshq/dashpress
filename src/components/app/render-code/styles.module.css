@@ -2,11 +2,11 @@
 .root :global .token.comment,
 .root :global .token.doctype,
 .root :global .token.prolog {
-  color: #90a4ae;
+  color: rgb(21 128 61);
 }
 
 .root :global .token.punctuation {
-  color: #9e9e9e;
+  color: rgb(185 28 28);
 }
 
 .root :global .namespace {
@@ -20,7 +20,7 @@
 .root :global .token.property,
 .root :global .token.symbol,
 .root :global .token.tag {
-  color: #e91e63;
+  color: rgb(29 78 216);
 }
 
 .root :global .token.attr-name,
@@ -29,7 +29,7 @@
 .root :global .token.inserted,
 .root :global .token.selector,
 .root :global .token.string {
-  color: #4caf50;
+  color: rgb(180 83 9);
 }
 
 .root :global .language-css .token.string,
@@ -37,23 +37,23 @@
 .root :global .token.entity,
 .root :global .token.operator,
 .root :global .token.url {
-  color: #795548;
+  color: rgb(126 34 206);
 }
 
 .root :global .token.atrule,
 .root :global .token.attr-value,
 .root :global .token.keyword {
-  color: #d5c4a1;
+  color: rgb(14 116 144);
 }
 
 .root :global .token.function {
-  color: #f44336;
+  color: rgb(77 124 15);
 }
 
 .root :global .token.important,
 .root :global .token.regex,
 .root :global .token.variable {
-  color: #ff9800;
+  color: rgb(194 65 12);
 }
 
 .root :global .token.bold,

@@ -148,6 +148,7 @@
     "eslint": "^8.19.0",
     "fake-indexeddb": "^5.0.2",
     "gettext-parser": "^8.0.0",
+    "headers-polyfill": "^3.2.5",
     "husky": "^8.0.1",
     "isomorphic-fetch": "^3.0.0",
     "jest": "^29.0.3",

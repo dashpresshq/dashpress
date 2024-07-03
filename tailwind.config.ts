@@ -27,8 +27,6 @@ const config: Config = {
           DEFAULT: "hsl(var(--dp-primary))",
           alpha: "hsla(var(--dp-primary), var(--dp-primary-alpha-opacity))",
           "alpha-text": "hsl(var(--dp-primary-alpha-text))",
-          "shade-thick": "hsla(var(--dp-primary), 0.85)",
-          "shade-thick-xl": "hsla(var(--dp-primary), 0.9)",
         },
       },
       borderRadius: {

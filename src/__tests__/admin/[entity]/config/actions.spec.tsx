@@ -4,7 +4,7 @@ import EntityFormActionsSettings from "pages/admin/[entity]/config/actions";
 
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 import { getTableRows } from "__tests__/_/utils/getTableRows";
-import { closeAllToasts } from "__tests__/_/utils/closeAllToasts";
+import { closeAllToasts, expectToast } from "__tests__/_/utils/closeAllToasts";
 import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
 import { TestProviders } from "__tests__/_/Provider";
 
@@ -89,9 +89,7 @@ describe("pages/admin/[entity]/config/actions", () => {
       within(dialog).getByRole("button", { name: "Create Form Action" })
     );
 
-    expect(await screen.findByRole("status")).toHaveTextContent(
-      "Form Action Created Successfully"
-    );
+    await expectToast("Form Action Created Successfully");
 
     expect(
       screen.queryByRole("button", { name: "Create Form Action" })
@@ -192,9 +190,7 @@ describe("pages/admin/[entity]/config/actions", () => {
       within(dialog).getByRole("button", { name: "Update Form Action" })
     );
 
-    expect(await screen.findByRole("status")).toHaveTextContent(
-      "Form Action Updated Successfully"
-    );
+    await expectToast("Form Action Updated Successfully");
 
     await closeAllToasts();
 
@@ -276,9 +272,7 @@ describe("pages/admin/[entity]/config/actions", () => {
       await within(confirmBox).findByRole("button", { name: "Confirm" })
     );
 
-    expect(await screen.findByRole("status")).toHaveTextContent(
-      "Form Action Deleted Successfully"
-    );
+    await expectToast("Form Action Deleted Successfully");
 
     expect(await screen.findAllByRole("row")).toHaveLength(4);
   });

@@ -10,7 +10,7 @@ import { AuthActions } from "frontend/hooks/auth/auth.actions";
 import { getTableRows } from "__tests__/_/utils/getTableRows";
 import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
 import { TestProviders } from "__tests__/_/Provider";
-import { closeAllToasts } from "__tests__/_/utils/closeAllToasts";
+import { closeAllToasts, expectToast } from "__tests__/_/utils/closeAllToasts";
 
 setupApiHandlers();
 
@@ -174,9 +174,7 @@ describe("pages/integrations/variables => credentials", () => {
         })
       );
 
-      expect(await screen.findByRole("status")).toHaveTextContent(
-        "Invalid Password"
-      );
+      await expectToast("Invalid Password");
 
       await closeAllToasts();
 
@@ -336,9 +334,7 @@ describe("pages/integrations/variables => credentials", () => {
         within(dialog).getByRole("button", { name: "Update Secret" })
       );
 
-      expect(await screen.findByRole("status")).toHaveTextContent(
-        "Secret Saved Successfully"
-      );
+      await expectToast("Secret Saved Successfully");
 
       await closeAllToasts();
 
@@ -387,9 +383,7 @@ describe("pages/integrations/variables => credentials", () => {
         within(dialog).getByRole("button", { name: "Create Secret" })
       );
 
-      expect(await screen.findByRole("status")).toHaveTextContent(
-        "Secret Saved Successfully"
-      );
+      await expectToast("Secret Saved Successfully");
 
       await closeAllToasts();
 
@@ -442,9 +436,7 @@ describe("pages/integrations/variables => credentials", () => {
 
       expect(await within(table).findAllByRole("row")).toHaveLength(4);
 
-      expect(await screen.findByRole("status")).toHaveTextContent(
-        "Secret Deleted Successfully"
-      );
+      await expectToast("Secret Deleted Successfully");
     });
   });
 });

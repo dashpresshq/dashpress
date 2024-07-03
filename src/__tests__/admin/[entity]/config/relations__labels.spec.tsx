@@ -5,6 +5,7 @@ import EntityRelationsSettings from "pages/admin/[entity]/config/relations";
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
 import { TestProviders } from "__tests__/_/Provider";
+import { expectToast } from "@/__tests__/_/utils/closeAllToasts";
 
 setupApiHandlers();
 
@@ -81,9 +82,7 @@ describe("pages/admin/[entity]/config/relations", () => {
           name: "Save Relation Labels",
         })
       );
-      expect(await screen.findByRole("status")).toHaveTextContent(
-        "Relation Labels Saved Successfully"
-      );
+      await expectToast("Relation Labels Saved Successfully");
     });
 
     it("should display updated labels", async () => {

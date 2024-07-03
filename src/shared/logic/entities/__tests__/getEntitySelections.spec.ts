@@ -143,11 +143,8 @@ describe("getEntitySelections", () => {
           },
           {
             "label": {
-              "id": "J/hVSQ",
-              "message": "{0}",
-              "values": {
-                "0": "Rejected",
-              },
+              "id": "Rejected",
+              "message": "Rejected",
             },
             "spectrum": undefined,
             "value": "rejected",
@@ -215,33 +212,24 @@ describe("getEntitySelections", () => {
         "status": [
           {
             "label": {
-              "id": "J/hVSQ",
-              "message": "{0}",
-              "values": {
-                "0": "Approved",
-              },
+              "id": "Approved",
+              "message": "Approved",
             },
             "spectrum": "green",
             "value": "approved",
           },
           {
             "label": {
-              "id": "J/hVSQ",
-              "message": "{0}",
-              "values": {
-                "0": "In Progress",
-              },
+              "id": "In Progress",
+              "message": "In Progress",
             },
             "spectrum": "red",
             "value": "in-progress",
           },
           {
             "label": {
-              "id": "J/hVSQ",
-              "message": "{0}",
-              "values": {
-                "0": "Rejected",
-              },
+              "id": "Rejected",
+              "message": "Rejected",
             },
             "spectrum": "blue",
             "value": "rejected",

@@ -5,6 +5,7 @@ import SiteSettings from "pages/admin/settings/site";
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
 import { TestProviders } from "__tests__/_/Provider";
+import { expectToast } from "@/__tests__/_/utils/closeAllToasts";
 
 setupApiHandlers();
 
@@ -49,9 +50,7 @@ describe("pages/admin/settings/site", () => {
       screen.getByRole("button", { name: "Save Site Settings" })
     );
 
-    expect(await screen.findByRole("status")).toHaveTextContent(
-      "Site Settings Saved Successfully"
-    );
+    await expectToast("Site Settings Saved Successfully");
   });
 
   it("should display site values", async () => {

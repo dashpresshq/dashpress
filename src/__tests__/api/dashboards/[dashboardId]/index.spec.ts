@@ -56,7 +56,7 @@ describe("/api/dashboards/[dashboardId]/index", () => {
         },
         {
           "_type": "summary-card",
-          "color": "#0074D9",
+          "color": "blue",
           "entity": "base-model",
           "icon": "home",
           "id": "widget-2",
@@ -95,7 +95,7 @@ describe("/api/dashboards/[dashboardId]/index", () => {
       [
         {
           "_type": "summary-card",
-          "color": "#0074D9",
+          "color": "blue",
           "entity": "base-model",
           "icon": "home",
           "id": "widget-2",
@@ -207,9 +207,9 @@ describe("/api/dashboards/[dashboardId]/index generation", () => {
       [
         {
           "_type": "summary-card",
-          "color": "red",
+          "color": "green",
           "entity": "base-model",
-          "icon": "ShoppingCart",
+          "icon": "Activity",
           "id": "1",
           "script": "const actual = await $.query('select count(*) as \`count\` from \`base-model\`');
       const relative = await $.query('select count(*) as \`count\` from \`base-model\` where \`createdAt\` < '$.RELATIVE_TIME'');
@@ -220,18 +220,18 @@ describe("/api/dashboards/[dashboardId]/index generation", () => {
         },
         {
           "_type": "summary-card",
-          "color": "orange",
+          "color": "red",
           "entity": "secondary-model",
-          "icon": "Activity",
+          "icon": "Award",
           "id": "2",
           "script": "return await $.query('select count(*) as \`count\` from \`secondary-model\`')",
           "title": "Secondary Model",
         },
         {
           "_type": "summary-card",
-          "color": "green",
+          "color": "blue",
           "entity": "tests",
-          "icon": "ShoppingBag",
+          "icon": "Ban",
           "id": "3",
           "script": "const actual = await $.query('select count(*) as \`count\` from \`tests\`');
       const relative = await $.query('select count(*) as \`count\` from \`tests\` where \`createdAt\` < '$.RELATIVE_TIME'');

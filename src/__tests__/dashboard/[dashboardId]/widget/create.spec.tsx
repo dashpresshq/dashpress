@@ -4,7 +4,7 @@ import CreateDashboardWidget from "pages/dashboard/[dashboardId]/widget/create";
 
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 import userEvent from "@testing-library/user-event";
-import { closeAllToasts } from "__tests__/_/utils/closeAllToasts";
+import { closeAllToasts, expectToast } from "__tests__/_/utils/closeAllToasts";
 import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
 import { TestProviders } from "__tests__/_/Provider";
 
@@ -73,9 +73,7 @@ describe("pages/dashboard/[dashboardId]/widget/create", () => {
       screen.getByRole("button", { name: "Create Dashboard Widget" })
     );
 
-    expect(await screen.findByRole("status")).toHaveTextContent(
-      "Dashboard Widget Created Successfully"
-    );
+    await expectToast("Dashboard Widget Created Successfully");
 
     await closeAllToasts();
   });
@@ -118,8 +116,6 @@ describe("pages/dashboard/[dashboardId]/widget/create", () => {
       screen.getByRole("button", { name: "Create Dashboard Widget" })
     );
 
-    expect(await screen.findByRole("status")).toHaveTextContent(
-      "Dashboard Widget Created Successfully"
-    );
+    await expectToast("Dashboard Widget Created Successfully");
   });
 });

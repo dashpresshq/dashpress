@@ -46,7 +46,7 @@ export function TablePagination({
             onChange={(value) => setPageSize(Number(value))}
             value={`${pageSize}`}
           />{" "}
-          / <b>{Intl.NumberFormat("en-US").format(totalRecords)}</b>{" "}
+          of <b>{Intl.NumberFormat("en-US").format(totalRecords)}</b>{" "}
           <Trans> results </Trans>
         </div>
         <nav role="navigation" aria-label="pagination">

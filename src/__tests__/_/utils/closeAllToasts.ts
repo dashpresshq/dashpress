@@ -1,4 +1,4 @@
-import { waitFor, screen } from "@testing-library/react";
+import { waitFor, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
 export const closeAllToasts = async () => {
@@ -14,4 +14,10 @@ export const closeAllToasts = async () => {
     },
     { timeout: 20000 }
   );
+};
+
+export const expectToast = async (message: string) => {
+  expect(
+    await within(screen.getByRole("region")).findByRole("status")
+  ).toHaveTextContent(message);
 };

@@ -9,6 +9,7 @@ import CredentialsSetup from "pages/setup/credentials";
 import userEvent from "@testing-library/user-event";
 import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
 import { TestProviders, queryCache } from "__tests__/_/Provider";
+import { expectToast } from "../_/utils/closeAllToasts";
 
 const server = setupApiHandlers();
 
@@ -181,9 +182,7 @@ describe("pages/setup/credentials", () => {
         screen.getByRole("button", { name: "Setup Credentials" })
       );
 
-      expect(await screen.findByRole("status")).toHaveTextContent(
-        "Credentials Was Successfully Setup"
-      );
+      await expectToast("Credentials Was Successfully Setup");
 
       expect(replaceMock).toHaveBeenCalledWith("/setup/user", "/setup/user", {
         locale: "en",

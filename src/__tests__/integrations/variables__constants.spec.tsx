@@ -4,7 +4,7 @@ import ManageVariables from "pages/integrations/variables";
 
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 import userEvent from "@testing-library/user-event";
-import { closeAllToasts } from "__tests__/_/utils/closeAllToasts";
+import { closeAllToasts, expectToast } from "__tests__/_/utils/closeAllToasts";
 import { getTableRows } from "__tests__/_/utils/getTableRows";
 import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
 import { TestProviders } from "__tests__/_/Provider";
@@ -69,9 +69,7 @@ describe("pages/integrations/variables => constants", () => {
         within(dialog).getByRole("button", { name: "Create Constant" })
       );
 
-      expect(await screen.findByRole("status")).toHaveTextContent(
-        "Constant Saved Successfully"
-      );
+      await expectToast("Constant Saved Successfully");
     });
 
     it("should show created constant", async () => {
@@ -131,9 +129,7 @@ describe("pages/integrations/variables => constants", () => {
         within(dialog).getByRole("button", { name: "Update Constant" })
       );
 
-      expect(await screen.findByRole("status")).toHaveTextContent(
-        "Constant Saved Successfully"
-      );
+      await expectToast("Constant Saved Successfully");
 
       await closeAllToasts();
     });
@@ -195,9 +191,7 @@ describe("pages/integrations/variables => constants", () => {
 
       expect(await within(table).findAllByRole("row")).toHaveLength(4);
 
-      expect(await screen.findByRole("status")).toHaveTextContent(
-        "Constant Deleted Successfully"
-      );
+      await expectToast("Constant Deleted Successfully");
     });
   });
 });

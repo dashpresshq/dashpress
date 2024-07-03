@@ -119,7 +119,7 @@ export function SideBar({ isFullWidth, setIsFullWidth }: IProps) {
         <Tooltip isOverAButton text="Use `Ctrl + B` to toggle">
           <Button
             variant="ghost"
-            className="h-9 bg-primary-shade-thick-xl shadow-sm rounded-none"
+            className="h-9 bg-[hsla(var(--dp-primary),0.8)] shadow-sm rounded-none"
             onClick={() => setIsFullWidth(!isFullWidth)}
           >
             <ChevronRight

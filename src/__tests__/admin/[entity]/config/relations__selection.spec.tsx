@@ -5,6 +5,7 @@ import EntityRelationsSettings from "pages/admin/[entity]/config/relations";
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
 import { TestProviders } from "__tests__/_/Provider";
+import { expectToast } from "@/__tests__/_/utils/closeAllToasts";
 
 setupApiHandlers();
 
@@ -92,9 +93,7 @@ describe("pages/admin/[entity]/config/relations", () => {
         })
       );
 
-      expect(await screen.findByRole("status")).toHaveTextContent(
-        "Enabled Relations Saved Successfully"
-      );
+      await expectToast("Enabled Relations Saved Successfully");
     });
 
     it("should display updated selection state", async () => {

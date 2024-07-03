@@ -6,6 +6,7 @@ import { fakeMessageDescriptor } from "translations/fake";
 import { TestProviders } from "__tests__/_/Provider";
 import { IAppliedSchemaFormConfig } from "shared/form-schemas/types";
 import { SchemaForm } from ".";
+import { expectToast } from "@/__tests__/_/utils/closeAllToasts";
 
 type IAccount = {
   name: string;
@@ -224,9 +225,7 @@ describe("<SchemaForm />", () => {
 
     expect(mockOnSubmit).not.toHaveBeenCalled();
 
-    expect(await screen.findByRole("status")).toHaveTextContent(
-      "A Custom Validation Failed"
-    );
+    await expectToast("A Custom Validation Failed");
   });
 
   it("should edit forms", async () => {

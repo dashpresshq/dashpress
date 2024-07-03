@@ -3,7 +3,7 @@ import userEvent from "@testing-library/user-event";
 import GeneralDataSettings from "pages/admin/settings/data";
 
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
-import { closeAllToasts } from "__tests__/_/utils/closeAllToasts";
+import { closeAllToasts, expectToast } from "__tests__/_/utils/closeAllToasts";
 import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
 import { TestProviders } from "__tests__/_/Provider";
 
@@ -43,9 +43,7 @@ describe("pages/admin/settings/data", () => {
         screen.getByRole("button", { name: "Save Metadata Columns" })
       );
 
-      expect(await screen.findByRole("status")).toHaveTextContent(
-        "Metadata Columns Saved Successfully"
-      );
+      await expectToast("Metadata Columns Saved Successfully");
 
       await closeAllToasts();
     });
@@ -94,9 +92,7 @@ describe("pages/admin/settings/data", () => {
         screen.getByRole("button", { name: "Save Date Format" })
       );
 
-      expect(await screen.findByRole("status")).toHaveTextContent(
-        "Date Format Saved Successfully"
-      );
+      await expectToast("Date Format Saved Successfully");
     });
 
     it("should display updated date values", async () => {

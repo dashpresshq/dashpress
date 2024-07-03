@@ -4,7 +4,7 @@ import userEvent from "@testing-library/user-event";
 import RolePermissions from "pages/roles/[roleId]/index";
 
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
-import { closeAllToasts } from "__tests__/_/utils/closeAllToasts";
+import { closeAllToasts, expectToast } from "__tests__/_/utils/closeAllToasts";
 import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
 import { TestProviders } from "__tests__/_/Provider";
 
@@ -141,9 +141,7 @@ describe("pages/roles/[roleId]/index", () => {
         name: "Plural entity-2",
       })
     );
-    expect(await screen.findByRole("status")).toHaveTextContent(
-      "Role Permission Deleted Successfully"
-    );
+    await expectToast("Role Permission Deleted Successfully");
 
     await closeAllToasts();
 
@@ -151,9 +149,7 @@ describe("pages/roles/[roleId]/index", () => {
       within(currentTab).getByRole("button", { name: "Plural entity-1" })
     );
 
-    expect(await screen.findByRole("status")).toHaveTextContent(
-      "Role Permission Created Successfully"
-    );
+    await expectToast("Role Permission Created Successfully");
 
     await closeAllToasts();
 
@@ -163,9 +159,7 @@ describe("pages/roles/[roleId]/index", () => {
       })
     );
 
-    expect(await screen.findByRole("status")).toHaveTextContent(
-      "Role Permission Deleted Successfully"
-    );
+    await expectToast("Role Permission Deleted Successfully");
 
     await closeAllToasts();
 
@@ -174,9 +168,7 @@ describe("pages/roles/[roleId]/index", () => {
         name: "Plural disabled-entity-2",
       })
     );
-    expect(await screen.findByRole("status")).toHaveTextContent(
-      "Role Permission Created Successfully"
-    );
+    await expectToast("Role Permission Created Successfully");
   });
 
   it("should show updated entity permissions", async () => {
@@ -258,9 +250,7 @@ describe("pages/roles/[roleId]/index", () => {
       })
     );
 
-    expect(await screen.findByRole("status")).toHaveTextContent(
-      "Role Permission Deleted Successfully"
-    );
+    await expectToast("Role Permission Deleted Successfully");
 
     await closeAllToasts();
 
@@ -268,9 +258,7 @@ describe("pages/roles/[roleId]/index", () => {
       within(currentTab).getByRole("button", { name: "Can Configure App" })
     );
 
-    expect(await screen.findByRole("status")).toHaveTextContent(
-      "Role Permission Created Successfully"
-    );
+    await expectToast("Role Permission Created Successfully");
 
     await closeAllToasts();
 
@@ -278,9 +266,7 @@ describe("pages/roles/[roleId]/index", () => {
       within(currentTab).getByRole("button", { name: "Can Manage Users" })
     );
 
-    expect(await screen.findByRole("status")).toHaveTextContent(
-      "Role Permission Deleted Successfully"
-    );
+    await expectToast("Role Permission Deleted Successfully");
 
     await closeAllToasts();
 
@@ -288,9 +274,7 @@ describe("pages/roles/[roleId]/index", () => {
       within(currentTab).getByRole("button", { name: "Can Manage Users" })
     );
 
-    expect(await screen.findByRole("status")).toHaveTextContent(
-      "Role Permission Created Successfully"
-    );
+    await expectToast("Role Permission Created Successfully");
   });
 
   it("should show updated admin permissions", async () => {
@@ -346,9 +330,7 @@ describe("pages/roles/[roleId]/index", () => {
         })
       );
 
-      expect(await screen.findByRole("status")).toHaveTextContent(
-        "Role Permission Deleted Successfully"
-      );
+      await expectToast("Role Permission Deleted Successfully");
 
       await closeAllToasts();
 
@@ -365,9 +347,7 @@ describe("pages/roles/[roleId]/index", () => {
         })
       );
 
-      expect(await screen.findByRole("status")).toHaveTextContent(
-        "Role Permission Created Successfully"
-      );
+      await expectToast("Role Permission Created Successfully");
     });
 
     it("should toggle heirachy permissions off correctly", async () => {
@@ -407,9 +387,7 @@ describe("pages/roles/[roleId]/index", () => {
         })
       );
 
-      expect(await screen.findByRole("status")).toHaveTextContent(
-        "Role Permission Deleted Successfully"
-      );
+      await expectToast("Role Permission Deleted Successfully");
     });
 
     it("should show turned off children permissions correctly", async () => {

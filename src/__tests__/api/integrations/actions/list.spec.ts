@@ -145,11 +145,8 @@ describe("/api/integrations/actions/list", () => {
           "configurationSchema": {
             "accountSid": {
               "label": {
-                "id": "J/hVSQ",
-                "message": "{0}",
-                "values": {
-                  "0": "Account SID",
-                },
+                "id": "Account SID",
+                "message": "Account SID",
               },
               "type": "text",
               "validations": [

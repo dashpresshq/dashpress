@@ -9,6 +9,7 @@ import UsersLinkToDatabase from "pages/users/database-link";
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
 import { TestProviders } from "__tests__/_/Provider";
+import { expectToast } from "../_/utils/closeAllToasts";
 
 setupApiHandlers();
 
@@ -40,9 +41,7 @@ describe("pages/users/database-link", () => {
       screen.getByRole("button", { name: "Save Users Link To Database" })
     );
 
-    expect(await screen.findByRole("status")).toHaveTextContent(
-      "Users to Database Link Saved Successfully"
-    );
+    await expectToast("Users to Database Link Saved Successfully");
   });
 
   it("should persist the link form correctly", async () => {

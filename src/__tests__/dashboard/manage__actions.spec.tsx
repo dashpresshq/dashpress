@@ -6,6 +6,7 @@ import ManageDashboard from "pages/dashboard/manage";
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
 import { TestProviders } from "__tests__/_/Provider";
+import { expectToast } from "../_/utils/closeAllToasts";
 
 setupApiHandlers();
 
@@ -76,9 +77,7 @@ describe("pages/admin/settings/dashboard", () => {
         await within(confirmBox).findByRole("button", { name: "Confirm" })
       );
 
-      expect(await screen.findByRole("status")).toHaveTextContent(
-        "Widget Deleted Successfully"
-      );
+      await expectToast("Widget Deleted Successfully");
 
       expect(
         screen.queryByLabelText("Foo Table Widget")

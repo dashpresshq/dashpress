@@ -5,6 +5,7 @@ import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 import userEvent from "@testing-library/user-event";
 import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
 import { TestProviders } from "__tests__/_/Provider";
+import { expectToast } from "@/__tests__/_/utils/closeAllToasts";
 
 setupApiHandlers();
 
@@ -126,9 +127,7 @@ describe("pages/admin/[entity]/config/views", () => {
       screen.getByRole("button", { name: "Save Table Views" })
     );
 
-    expect(await screen.findByRole("status")).toHaveTextContent(
-      "Table Views Saved Successfully"
-    );
+    await expectToast("Table Views Saved Successfully");
   });
 
   it("should display delete changes", () => {

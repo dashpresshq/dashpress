@@ -5,7 +5,7 @@ import userEvent from "@testing-library/user-event";
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 
 import EntityFormExtensionSettings from "pages/admin/[entity]/config/form";
-import { closeAllToasts } from "__tests__/_/utils/closeAllToasts";
+import { closeAllToasts, expectToast } from "__tests__/_/utils/closeAllToasts";
 import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
 import { TestProviders } from "__tests__/_/Provider";
 
@@ -74,9 +74,7 @@ describe("pages/admin/[entity]/config/form", () => {
         within(currentTab).getByRole("button", { name: "Save Form Scripts" })
       );
 
-      expect(await screen.findByRole("status")).toHaveTextContent(
-        "Form Scripts Saved Successfully"
-      );
+      await expectToast("Form Scripts Saved Successfully");
 
       await closeAllToasts();
     });
@@ -117,7 +115,7 @@ describe("pages/admin/[entity]/config/form", () => {
         within(currentTab).getByRole("button", { name: "Save Form Scripts" })
       );
 
-      expect(await screen.findByRole("status")).toHaveTextContent(
+      await expectToast(
         "Expression: •JS-Error: SyntaxError: Unexpected identifier"
       );
 
@@ -157,9 +155,7 @@ describe("pages/admin/[entity]/config/form", () => {
         within(currentTab).getByRole("button", { name: "Save Form Scripts" })
       );
 
-      expect(await screen.findByRole("status")).toHaveTextContent(
-        "Form Scripts Saved Successfully"
-      );
+      await expectToast("Form Scripts Saved Successfully");
     });
 
     it("should display cleared value correctly", async () => {

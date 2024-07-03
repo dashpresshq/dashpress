@@ -9,6 +9,7 @@ import UserUpdate from "pages/users/[username]/index";
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
 import { TestProviders } from "__tests__/_/Provider";
+import { expectToast } from "@/__tests__/_/utils/closeAllToasts";
 
 setupApiHandlers();
 
@@ -82,9 +83,7 @@ describe("pages/users/[username]/index", () => {
         screen.getByRole("button", { name: "Update User" })
       );
 
-      expect(await screen.findByRole("status")).toHaveTextContent(
-        "User Updated Successfully"
-      );
+      await expectToast("User Updated Successfully");
     });
 
     it("should show updated user details", async () => {

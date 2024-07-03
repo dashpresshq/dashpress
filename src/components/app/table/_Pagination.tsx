@@ -1,7 +1,6 @@
 import ReactPaginate from "react-paginate";
 import { Trans, msg } from "@lingui/macro";
 import { ChevronLeft, ChevronRight, MoreHorizontal } from "react-feather";
-import { fakeMessageDescriptor } from "translations/fake";
 import { TABLE_PAGE_SIZES } from "./constants";
 import { Select } from "@/components/ui/select";
 import { buttonVariants } from "@/components/ui/button";
@@ -36,21 +35,19 @@ export function TablePagination({
     <div className="px-3 py-2">
       <div className="flex items-center flex-col gap-2 md:flex-row md:justify-between">
         <div className="flex gap-2 items-center">
-          <Trans>
-            Showing
-            <Select
-              placeholder={msg`Select Page Size`}
-              name="table-page-size"
-              className="w-18"
-              options={TABLE_PAGE_SIZES.map((option) => ({
-                value: `${option}`,
-                label: fakeMessageDescriptor(`${option}`),
-              }))}
-              onChange={(value) => setPageSize(Number(value))}
-              value={`${pageSize}`}
-            />{" "}
-            of <b>{Intl.NumberFormat("en-US").format(totalRecords)}</b> results
-          </Trans>
+          <Select
+            placeholder={msg`Select Page Size`}
+            name="table-page-size"
+            className="w-18"
+            options={TABLE_PAGE_SIZES.map((option) => ({
+              value: `${option}`,
+              label: msg`${option} / Page`,
+            }))}
+            onChange={(value) => setPageSize(Number(value))}
+            value={`${pageSize}`}
+          />{" "}
+          / <b>{Intl.NumberFormat("en-US").format(totalRecords)}</b>{" "}
+          <Trans> results </Trans>
         </div>
         <nav role="navigation" aria-label="pagination">
           <ReactPaginate

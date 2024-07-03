@@ -103,6 +103,9 @@ msgstr "{0} 個の選択"
 msgid "{0} Validations"
 msgstr "{0} 検証"
 
+msgid "{option} / Page"
+msgstr ""
+
 msgid "{plural} Units"
 msgstr "{plural}単位"
 
@@ -1264,6 +1267,9 @@ msgstr "復元する"
 msgid "Restored"
 msgstr "復元されました"
 
+msgid "results"
+msgstr ""
+
 msgid "Reveal Credentials"
 msgstr "資格情報を明らかにする"
 
@@ -1428,9 +1434,6 @@ msgstr "ソフト的に削除されたアイテムと復元ボタンを表示す
 
 msgid "Show Up In Roles And Permissions"
 msgstr "役割と権限を表示する"
-
-msgid "Showing{3, select, placeholder {{0}} name {table-page-size} className {w-18} options {{1}} onChange {{2}}} of <0>{4}</0> results"
-msgstr ""
 
 msgid "Sign In"
 msgstr "サインイン"

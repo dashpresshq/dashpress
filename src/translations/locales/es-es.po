@@ -103,6 +103,9 @@ msgstr "{0} Selecciones"
 msgid "{0} Validations"
 msgstr "{0} Validaciones"
 
+msgid "{option} / Page"
+msgstr ""
+
 msgid "{plural} Units"
 msgstr "{plural} Unidades"
 
@@ -1264,6 +1267,9 @@ msgstr "Restaurar"
 msgid "Restored"
 msgstr "Restaurado"
 
+msgid "results"
+msgstr ""
+
 msgid "Reveal Credentials"
 msgstr "Revelar Credenciales"
 
@@ -1428,9 +1434,6 @@ msgstr "Mostrar elementos eliminados temporalmente y el botón Restaurar"
 
 msgid "Show Up In Roles And Permissions"
 msgstr "Aparecer en roles y permisos"
-
-msgid "Showing{3, select, placeholder {{0}} name {table-page-size} className {w-18} options {{1}} onChange {{2}}} of <0>{4}</0> results"
-msgstr ""
 
 msgid "Sign In"
 msgstr "Iniciar sesión"

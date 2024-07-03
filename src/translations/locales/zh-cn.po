@@ -103,6 +103,9 @@ msgstr ""
 msgid "{0} Validations"
 msgstr ""
 
+msgid "{option} / Page"
+msgstr ""
+
 msgid "{plural} Units"
 msgstr "{plural}单位"
 
@@ -1264,6 +1267,9 @@ msgstr "恢复"
 msgid "Restored"
 msgstr ""
 
+msgid "results"
+msgstr ""
+
 msgid "Reveal Credentials"
 msgstr ""
 
@@ -1428,9 +1434,6 @@ msgstr "显示软删除项目和恢复按钮"
 
 msgid "Show Up In Roles And Permissions"
 msgstr "显示在角色和权限中"
-
-msgid "Showing{3, select, placeholder {{0}} name {table-page-size} className {w-18} options {{1}} onChange {{2}}} of <0>{4}</0> results"
-msgstr ""
 
 msgid "Sign In"
 msgstr "登录"

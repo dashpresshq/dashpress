@@ -103,6 +103,9 @@ msgstr "{0} Auswahl"
 msgid "{0} Validations"
 msgstr "{0} Validierungen"
 
+msgid "{option} / Page"
+msgstr ""
+
 msgid "{plural} Units"
 msgstr "{plural} Einheiten"
 
@@ -1264,6 +1267,9 @@ msgstr "Wiederherstellen"
 msgid "Restored"
 msgstr "Restauriert"
 
+msgid "results"
+msgstr ""
+
 msgid "Reveal Credentials"
 msgstr "Referenzen offenlegen"
 
@@ -1428,9 +1434,6 @@ msgstr "Vorläufig gelöschte Elemente und die Schaltfläche „Wiederherstellen
 
 msgid "Show Up In Roles And Permissions"
 msgstr "Erscheinen in Rollen und Berechtigungen"
-
-msgid "Showing{3, select, placeholder {{0}} name {table-page-size} className {w-18} options {{1}} onChange {{2}}} of <0>{4}</0> results"
-msgstr ""
 
 msgid "Sign In"
 msgstr "Anmelden"

@@ -1,7 +1,8 @@
 import { usePaginatedData } from "frontend/lib/data/useApi/usePaginatedData";
 import { DEFAULT_PAGINATED_DATA } from "frontend/lib/data/constants/defaults";
 import { pluralize } from "shared/lib/strings";
-import { msg, t } from "@lingui/macro";
+import { msg } from "@lingui/macro";
+import { useLingui } from "@lingui/react";
 import { useTableState } from "../hooks";
 import { IDataTableProps } from "../types";
 import { IEmptyWrapperProps } from "@/components/app/empty-wrapper/types";
@@ -27,7 +28,7 @@ export function BaseDataTable({
 }: IProps) {
   const [currentState, overridePaginatedDataState, setPaginatedDataState] =
     useTableState(stateStorageKey, persistentFilters, defaultTableState);
-
+  const { _ } = useLingui();
   const tableData = usePaginatedData(dataEndpoint, currentState, {
     defaultData: DEFAULT_PAGINATED_DATA,
   });
@@ -46,7 +47,7 @@ export function BaseDataTable({
           ? // TODO: for contributors: transform this to user readable message
             {
               text: msg`No result for the current ${pluralize({
-                singular: t`filter`,
+                singular: _(msg`filter`),
                 count: currentState.filters.length,
                 inclusive: true,
               })} applied.`,

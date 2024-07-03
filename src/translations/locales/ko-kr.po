@@ -103,6 +103,9 @@ msgstr "{0} 선택사항"
 msgid "{0} Validations"
 msgstr "{0} 유효성 검사"
 
+msgid "{option} / Page"
+msgstr ""
+
 msgid "{plural} Units"
 msgstr "{plural} 단위"
 
@@ -1264,6 +1267,9 @@ msgstr "복원하다"
 msgid "Restored"
 msgstr "복원됨"
 
+msgid "results"
+msgstr ""
+
 msgid "Reveal Credentials"
 msgstr "자격 증명 공개"
 
@@ -1428,9 +1434,6 @@ msgstr "소프트 삭제된 항목 및 복원 버튼 표시"
 
 msgid "Show Up In Roles And Permissions"
 msgstr "역할 및 권한에 표시"
-
-msgid "Showing{3, select, placeholder {{0}} name {table-page-size} className {w-18} options {{1}} onChange {{2}}} of <0>{4}</0> results"
-msgstr ""
 
 msgid "Sign In"
 msgstr "로그인"

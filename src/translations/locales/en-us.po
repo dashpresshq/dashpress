@@ -103,6 +103,9 @@ msgstr "{0} Selections"
 msgid "{0} Validations"
 msgstr "{0} Validations"
 
+msgid "{option} / Page"
+msgstr "{option} / Page"
+
 msgid "{plural} Units"
 msgstr "{plural} Units"
 
@@ -1264,6 +1267,9 @@ msgstr "Restore"
 msgid "Restored"
 msgstr "Restored"
 
+msgid "results"
+msgstr "results"
+
 msgid "Reveal Credentials"
 msgstr "Reveal Credentials"
 
@@ -1428,9 +1434,6 @@ msgstr "Show Soft Deleted Items And The Restore Button"
 
 msgid "Show Up In Roles And Permissions"
 msgstr "Show Up In Roles And Permissions"
-
-msgid "Showing{3, select, placeholder {{0}} name {table-page-size} className {w-18} options {{1}} onChange {{2}}} of <0>{4}</0> results"
-msgstr "Showing{3, select, placeholder {{0}} name {table-page-size} className {w-18} options {{1}} onChange {{2}}} of <0>{4}</0> results"
 
 msgid "Sign In"
 msgstr "Sign In"

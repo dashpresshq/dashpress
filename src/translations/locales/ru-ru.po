@@ -94,6 +94,9 @@ msgstr "{0} {1}"
 msgid "{0} Configuration"
 msgstr "{0} Конфигурация"
 
+msgid "{0} of the {1} items were not successfully {actionText}. You will find them selected"
+msgstr ""
+
 msgid "{0} Selections"
 msgstr "{0} Выбор"
 
@@ -165,6 +168,9 @@ msgstr "{value} Год"
 
 msgid "{value} Years"
 msgstr "{value} Годы"
+
+msgid "•Expression: \\n•JS-Error: {e}"
+msgstr ""
 
 msgid "2FA Tokens"
 msgstr "2FA-токены"
@@ -256,9 +262,6 @@ msgstr ""
 msgid "App Settings"
 msgstr ""
 
-msgid "Are you sure you want to do this?"
-msgstr "Вы уверены, что хотите это сделать?"
-
 msgid "Associated Triggers"
 msgstr "Связанные триггеры"
 
@@ -286,18 +289,6 @@ msgstr "Гистограмма"
 msgid "Before Submit"
 msgstr "Перед отправкой"
 
-msgid "Beginning of time"
-msgstr "Начало времени"
-
-msgid "Beginning of Year"
-msgstr "Начало года"
-
-msgid "Between"
-msgstr "Между"
-
-msgid "Blue"
-msgstr "Синий"
-
 msgid "Body"
 msgstr "Тело"
 
@@ -309,9 +300,6 @@ msgstr "Закладки"
 
 msgid "Boolean"
 msgstr "логическое значение"
-
-msgid "Brown"
-msgstr "Коричневый"
 
 msgid "Bulk Delete"
 msgstr "Массовое удаление"
@@ -358,9 +346,6 @@ msgstr "Может управлять потоками"
 msgid "Can Reset Password"
 msgstr "Можно сбросить пароль"
 
-msgid "Cancel"
-msgstr "Отмена"
-
 msgid "Change History"
 msgstr "История изменений"
 
@@ -372,9 +357,6 @@ msgstr "Канал"
 
 msgid "Clear selections"
 msgstr "Очистить выбор"
-
-msgid "Click here to view details"
-msgstr "Нажмите здесь, чтобы просмотреть подробности"
 
 msgid "Client Script"
 msgstr "Клиентский скрипт"
@@ -394,11 +376,11 @@ msgstr "Клонированный"
 msgid "Cloning"
 msgstr "Клонирование"
 
-msgid "Close Canvas"
-msgstr "Закрыть холст"
-
 msgid "Color"
 msgstr "Цвет"
+
+msgid "Color Scheme"
+msgstr ""
 
 msgid "Column"
 msgstr "Столбец"
@@ -430,14 +412,8 @@ msgstr "Настройка выбора"
 msgid "Configure Validation"
 msgstr "Настройка проверки"
 
-msgid "Confirm"
-msgstr "Подтверждать"
-
 msgid "Confirm Data Restoration"
 msgstr "Подтвердить восстановление данных"
-
-msgid "Confirm Delete"
-msgstr "Подтвердите удаление"
 
 msgid "Confirmation Text"
 msgstr "Текст подтверждения"
@@ -451,14 +427,14 @@ msgstr "Постоянный"
 msgid "Constants"
 msgstr "Константы"
 
-msgid "Contains"
-msgstr "Содержит"
-
 msgid "Continue"
 msgstr "Продолжать"
 
 msgid "Copy To Clipboard"
 msgstr "Скопировать в буфер обмена"
+
+msgid "Could not parse Javascript"
+msgstr ""
 
 msgid "Create"
 msgstr "Создавать"
@@ -514,15 +490,6 @@ msgstr "Пользовательская панель мониторинга"
 msgid "Custom Dashboards"
 msgstr "Пользовательские панели мониторинга"
 
-msgid "Custom Date"
-msgstr "Пользовательская дата"
-
-msgid "Dark"
-msgstr "Темный"
-
-msgid "Dark Color Scheme"
-msgstr "Темная цветовая гамма"
-
 msgid "Dashboard"
 msgstr "Панель приборов"
 
@@ -564,9 +531,6 @@ msgstr "Дата"
 
 msgid "Date Format"
 msgstr "Формат даты"
-
-msgid "Day"
-msgstr "День"
 
 msgid "Deactivate"
 msgstr "Деактивировать"
@@ -633,9 +597,6 @@ msgstr "изменить {singular}"
 
 msgid "Email"
 msgstr "Электронная почта"
-
-msgid "Empty Table"
-msgstr "Пустой стол"
 
 msgid "Enable {0} Functionality"
 msgstr "Включить функцию {0}"
@@ -705,9 +666,6 @@ msgstr "Переменная среды"
 
 msgid "Environment Variables"
 msgstr "Переменные среды"
-
-msgid "Equal"
-msgstr "Равный"
 
 msgid "Equal To Other Field"
 msgstr "Равно другому полю"
@@ -823,14 +781,8 @@ msgstr "Глобальное действие"
 msgid "Go Back"
 msgstr "Возвращаться"
 
-msgid "Greater Than"
-msgstr "Больше чем"
-
 msgid "Greater Than Other Field"
 msgstr "Больше, чем другое поле"
-
-msgid "Green"
-msgstr "Зеленый"
 
 msgid "Group Mode"
 msgstr "Групповой режим"
@@ -850,9 +802,6 @@ msgstr "Высота"
 msgid "Hi, {0}"
 msgstr "Привет, {0}"
 
-msgid "Hide Password"
-msgstr ""
-
 msgid "Home"
 msgstr "Дом"
 
@@ -864,9 +813,6 @@ msgstr "Горизонтальный"
 
 msgid "Host"
 msgstr "Хозяин"
-
-msgid "Hour"
-msgstr "Час"
 
 msgid "I have safely saved my recovery tokens"
 msgstr "Я благополучно сохранил свои токены восстановления."
@@ -892,9 +838,6 @@ msgstr "Выдающий себя за пользователя"
 msgid "Incorrect value"
 msgstr "Неверное значение"
 
-msgid "Indigo"
-msgstr "Индиго"
-
 msgid "Initial Values"
 msgstr "Начальные значения"
 
@@ -913,20 +856,14 @@ msgstr "Интеграция"
 msgid "Integrations"
 msgstr "Интеграции"
 
+msgid "Invalid Date Format"
+msgstr ""
+
 msgid "IP Address"
 msgstr "Айпи адрес"
 
 msgid "Is In"
 msgstr "В"
-
-msgid "Is Not In"
-msgstr "не в"
-
-msgid "Is Not Null"
-msgstr "Не является нулевым"
-
-msgid "Is Null"
-msgstr "Нулевой"
 
 msgid "Join our Discord community"
 msgstr "Присоединяйтесь к нашему сообществу Discord"
@@ -952,17 +889,8 @@ msgstr "Большой логотип"
 msgid "Layout"
 msgstr "Макет"
 
-msgid "Less Than"
-msgstr "Меньше, чем"
-
 msgid "Less Than Other Field"
 msgstr "Меньше, чем другое поле"
-
-msgid "Light"
-msgstr "Свет"
-
-msgid "Light Color Scheme"
-msgstr "Светлая Цветовая Схема"
 
 msgid "Line Chart"
 msgstr "Линейный график"
@@ -1018,6 +946,9 @@ msgstr "Пункт меню"
 msgid "Menu Settings"
 msgstr "Настройки меню"
 
+msgid "Menu Updated Successfully"
+msgstr ""
+
 msgid "Message"
 msgstr "Сообщение"
 
@@ -1032,9 +963,6 @@ msgstr "Минимальная длина"
 
 msgid "Modify Data Before Cloning"
 msgstr "Измените данные перед клонированием"
-
-msgid "Month"
-msgstr "Месяц"
 
 msgid "Mutate"
 msgstr "Мутировать"
@@ -1075,9 +1003,6 @@ msgstr "Нет данных"
 msgid "No result for the current {0} applied."
 msgstr "Нет результата для текущего примененного {0}."
 
-msgid "No Search Results"
-msgstr "Нет Результатов Поиска"
-
 msgid "Node"
 msgstr "Узел"
 
@@ -1089,9 +1014,6 @@ msgstr "Свойства узла"
 
 msgid "Nodes"
 msgstr "Узлы"
-
-msgid "Not Equal"
-msgstr "Не равный"
 
 msgid "Not Equal To Other Field"
 msgstr "Не равно другому полю"
@@ -1129,9 +1051,6 @@ msgstr "Оператор"
 msgid "OR"
 msgstr "ИЛИ"
 
-msgid "Orange"
-msgstr "Апельсин"
-
 msgid "Order"
 msgstr "Заказ"
 
@@ -1156,6 +1075,9 @@ msgstr "Персонализируйте эту таблицу"
 msgid "Pie Chart"
 msgstr "Круговая диаграмма"
 
+msgid "Please go to {DATE_FORMAT_LIB_LINK} to see valid formats"
+msgstr ""
+
 msgid "Plural"
 msgstr "Множественное число"
 
@@ -1177,9 +1099,6 @@ msgstr "Предварительный просмотр"
 msgid "Profile"
 msgstr "Профиль"
 
-msgid "Quarter"
-msgstr "Четверть"
-
 msgid "Query"
 msgstr "Запрос"
 
@@ -1188,9 +1107,6 @@ msgstr "Код восстановления"
 
 msgid "Recovery tokens copied to clipboard"
 msgstr "Токены восстановления скопированы в буфер обмена."
-
-msgid "Red"
-msgstr "Красный"
 
 msgid "Reference"
 msgstr "Ссылка"
@@ -1231,6 +1147,9 @@ msgstr "Удалять"
 msgid "Remove Nested Filter"
 msgstr "Удалить вложенный фильтр"
 
+msgid "Request Failed"
+msgstr ""
+
 msgid "Request ID"
 msgstr "Идентификатор запроса"
 
@@ -1239,9 +1158,6 @@ msgstr "Метод запроса"
 
 msgid "Required"
 msgstr "Необходимый"
-
-msgid "Reset"
-msgstr "Перезагрузить"
 
 msgid "Reset 2FA Recovery Tokens"
 msgstr "Сброс токенов восстановления 2FA"
@@ -1315,9 +1231,6 @@ msgstr "Планировщики"
 msgid "Script"
 msgstr "Скрипт"
 
-msgid "Search"
-msgstr "Поиск"
-
 msgid "Secret"
 msgstr "Секрет"
 
@@ -1327,7 +1240,7 @@ msgstr "Секретный ключ доступа"
 msgid "Secrets"
 msgstr "Секреты"
 
-msgid "Select {0}"
+msgid "Select {0} Type"
 msgstr ""
 
 msgid "Select Node Type"
@@ -1335,9 +1248,6 @@ msgstr "Выберите тип узла"
 
 msgid "Select Trigger"
 msgstr "Выберите триггер"
-
-msgid "Select Value"
-msgstr "Выберите значение"
 
 msgid "Select Workflow"
 msgstr "Выберите рабочий процесс"
@@ -1405,17 +1315,11 @@ msgstr "Совместное использование"
 msgid "Show"
 msgstr "Показывать"
 
-msgid "Show Password"
-msgstr ""
-
 msgid "Show Soft Deleted Items And The Restore Button"
 msgstr "Показать обратимо удаленные элементы и кнопку «Восстановить»"
 
 msgid "Show Up In Roles And Permissions"
 msgstr "Показывать роли и разрешения"
-
-msgid "Showing <0/> entries of <1>{0}</1> results"
-msgstr "Показаны <0/> записей из <1>{0}</1> результатов."
 
 msgid "Sign In"
 msgstr "Войти"
@@ -1440,6 +1344,9 @@ msgstr "Мягкое удаление"
 
 msgid "Soft Delete Settings"
 msgstr "Настройки мягкого удаления"
+
+msgid "Soft deleted data cannot be updated. Kindly restore the data to be able to update it"
+msgstr ""
 
 msgid "Stacked"
 msgstr "Сложенный"
@@ -1473,9 +1380,6 @@ msgstr "Отправка"
 
 msgid "Summary Card"
 msgstr "Сводная карточка"
-
-msgid "SVG"
-msgstr "SVG"
 
 msgid "System"
 msgstr "Система"
@@ -1515,6 +1419,9 @@ msgstr "Текст"
 
 msgid "Textarea"
 msgstr "Текстовая область"
+
+msgid "That feature is not enabled on your current plan."
+msgstr ""
 
 msgid "Theme"
 msgstr "Тема"
@@ -1573,6 +1480,9 @@ msgstr ""
 msgid "Type"
 msgstr "Тип"
 
+msgid "Unauthorized Access"
+msgstr ""
+
 msgid "Update"
 msgstr "Обновлять"
 
@@ -1600,9 +1510,6 @@ msgstr "URL-адрес"
 msgid "Use Colors"
 msgstr "Используйте цвета"
 
-msgid "Use Icon"
-msgstr "Использовать значок"
-
 msgid "Use OTP Token"
 msgstr "Использовать OTP-токен"
 
@@ -1611,9 +1518,6 @@ msgstr "Использовать код восстановления"
 
 msgid "Use SSL"
 msgstr "Использовать SSL"
-
-msgid "Use SVG"
-msgstr "Используйте SVG"
 
 msgid "User"
 msgstr "Пользователь"
@@ -1651,11 +1555,11 @@ msgstr "Вертикальный"
 msgid "View"
 msgstr "Вид"
 
+msgid "View Details"
+msgstr ""
+
 msgid "View Full Details"
 msgstr "Посмотреть полную информацию"
-
-msgid "Violet"
-msgstr "Фиолетовый"
 
 msgid "Visit our website"
 msgstr "Посетите наш сайт"
@@ -1665,9 +1569,6 @@ msgstr "Вебхук"
 
 msgid "Webhooks"
 msgstr "Вебхуки"
-
-msgid "Week"
-msgstr "Неделя"
 
 msgid "Widget Script"
 msgstr "Скрипт виджета"
@@ -1687,11 +1588,14 @@ msgstr "X-этикетка"
 msgid "Y Label"
 msgstr "Y-этикетка"
 
-msgid "Year"
-msgstr "Год"
-
 msgid "Yes"
 msgstr "Да"
+
+msgid "You dont have the permission to view this page"
+msgstr ""
+
+msgid "You have {0} recovery tokens left. You can generate new ones from your account page"
+msgstr ""
 
 msgid "Your Users Table"
 msgstr "Таблица ваших пользователей"

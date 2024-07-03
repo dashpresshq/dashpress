@@ -195,7 +195,14 @@ export function Select({
   )?.label;
 
   return (
-    <SelectRoot onValueChange={onChange} value={value}>
+    <SelectRoot
+      onValueChange={(value$1) => {
+        if (value$1) {
+          onChange(value$1);
+        }
+      }}
+      value={value}
+    >
       <SelectTrigger
         className={className}
         name={name}

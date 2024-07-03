@@ -94,6 +94,9 @@ msgstr "{0} {1}"
 msgid "{0} Configuration"
 msgstr "{0} 構成"
 
+msgid "{0} of the {1} items were not successfully {actionText}. You will find them selected"
+msgstr ""
+
 msgid "{0} Selections"
 msgstr "{0} 個の選択"
 
@@ -165,6 +168,9 @@ msgstr "{value} 年"
 
 msgid "{value} Years"
 msgstr "{value} 年"
+
+msgid "•Expression: \\n•JS-Error: {e}"
+msgstr ""
 
 msgid "2FA Tokens"
 msgstr "2FA トークン"
@@ -256,9 +262,6 @@ msgstr ""
 msgid "App Settings"
 msgstr ""
 
-msgid "Are you sure you want to do this?"
-msgstr "本当にこれを実行してもよろしいですか?"
-
 msgid "Associated Triggers"
 msgstr "関連するトリガー"
 
@@ -286,18 +289,6 @@ msgstr "棒グラフ"
 msgid "Before Submit"
 msgstr "送信する前に"
 
-msgid "Beginning of time"
-msgstr "時間の始まり"
-
-msgid "Beginning of Year"
-msgstr "年の初め"
-
-msgid "Between"
-msgstr "間"
-
-msgid "Blue"
-msgstr "青"
-
 msgid "Body"
 msgstr "体"
 
@@ -309,9 +300,6 @@ msgstr "ブックマーク"
 
 msgid "Boolean"
 msgstr "ブール値"
-
-msgid "Brown"
-msgstr "茶色"
 
 msgid "Bulk Delete"
 msgstr "一括削除"
@@ -358,9 +346,6 @@ msgstr "フローを管理できる"
 msgid "Can Reset Password"
 msgstr "パスワードをリセットできます"
 
-msgid "Cancel"
-msgstr "キャンセル"
-
 msgid "Change History"
 msgstr "変更履歴"
 
@@ -372,9 +357,6 @@ msgstr "チャネル"
 
 msgid "Clear selections"
 msgstr "選択をクリア"
-
-msgid "Click here to view details"
-msgstr "詳細を表示するにはここをクリックしてください"
 
 msgid "Client Script"
 msgstr "クライアントスクリプト"
@@ -394,11 +376,11 @@ msgstr "クローン化された"
 msgid "Cloning"
 msgstr "クローン作成"
 
-msgid "Close Canvas"
-msgstr "キャンバスを閉じる"
-
 msgid "Color"
 msgstr "色"
+
+msgid "Color Scheme"
+msgstr ""
 
 msgid "Column"
 msgstr "カラム"
@@ -430,14 +412,8 @@ msgstr "選択項目の構成"
 msgid "Configure Validation"
 msgstr "検証の構成"
 
-msgid "Confirm"
-msgstr "確認する"
-
 msgid "Confirm Data Restoration"
 msgstr "データ復元の確認"
-
-msgid "Confirm Delete"
-msgstr "削除の確認"
 
 msgid "Confirmation Text"
 msgstr "確認テキスト"
@@ -451,14 +427,14 @@ msgstr "絶え間ない"
 msgid "Constants"
 msgstr "定数"
 
-msgid "Contains"
-msgstr "含まれています"
-
 msgid "Continue"
 msgstr "続く"
 
 msgid "Copy To Clipboard"
 msgstr "クリップボードにコピー"
+
+msgid "Could not parse Javascript"
+msgstr ""
 
 msgid "Create"
 msgstr "作成する"
@@ -514,15 +490,6 @@ msgstr "カスタムダッシュボード"
 msgid "Custom Dashboards"
 msgstr "カスタムダッシュボード"
 
-msgid "Custom Date"
-msgstr "カスタム日付"
-
-msgid "Dark"
-msgstr "暗い"
-
-msgid "Dark Color Scheme"
-msgstr "ダークカラースキーム"
-
 msgid "Dashboard"
 msgstr "ダッシュボード"
 
@@ -564,9 +531,6 @@ msgstr "日付"
 
 msgid "Date Format"
 msgstr "日付形式"
-
-msgid "Day"
-msgstr "日"
 
 msgid "Deactivate"
 msgstr "非アクティブ化"
@@ -633,9 +597,6 @@ msgstr "{singular}を編集"
 
 msgid "Email"
 msgstr "Eメール"
-
-msgid "Empty Table"
-msgstr "空のテーブル"
 
 msgid "Enable {0} Functionality"
 msgstr "{0} 機能を有効にする"
@@ -705,9 +666,6 @@ msgstr "環境変数"
 
 msgid "Environment Variables"
 msgstr "環境変数"
-
-msgid "Equal"
-msgstr "等しい"
 
 msgid "Equal To Other Field"
 msgstr "他のフィールドと等しい"
@@ -823,14 +781,8 @@ msgstr "グローバルアクション"
 msgid "Go Back"
 msgstr "戻る"
 
-msgid "Greater Than"
-msgstr "より大きい"
-
 msgid "Greater Than Other Field"
 msgstr "他の分野よりも優れている"
-
-msgid "Green"
-msgstr "緑"
 
 msgid "Group Mode"
 msgstr "グループモード"
@@ -850,9 +802,6 @@ msgstr "身長"
 msgid "Hi, {0}"
 msgstr "こんにちは、{0}"
 
-msgid "Hide Password"
-msgstr ""
-
 msgid "Home"
 msgstr "家"
 
@@ -864,9 +813,6 @@ msgstr "水平"
 
 msgid "Host"
 msgstr "ホスト"
-
-msgid "Hour"
-msgstr "時間"
 
 msgid "I have safely saved my recovery tokens"
 msgstr "回復トークンを安全に保存しました"
@@ -892,9 +838,6 @@ msgstr "ユーザーになりすます"
 msgid "Incorrect value"
 msgstr "不正な値"
 
-msgid "Indigo"
-msgstr "インジゴ"
-
 msgid "Initial Values"
 msgstr "初期値"
 
@@ -913,20 +856,14 @@ msgstr "統合"
 msgid "Integrations"
 msgstr "統合"
 
+msgid "Invalid Date Format"
+msgstr ""
+
 msgid "IP Address"
 msgstr "IPアドレス"
 
 msgid "Is In"
 msgstr "入っています"
-
-msgid "Is Not In"
-msgstr "入っていない"
-
-msgid "Is Not Null"
-msgstr "NULL ではありません"
-
-msgid "Is Null"
-msgstr "無効である"
 
 msgid "Join our Discord community"
 msgstr "Discord コミュニティに参加してください"
@@ -952,17 +889,8 @@ msgstr "大きなロゴ"
 msgid "Layout"
 msgstr "レイアウト"
 
-msgid "Less Than"
-msgstr "未満"
-
 msgid "Less Than Other Field"
 msgstr "他の分野に比べて少ない"
-
-msgid "Light"
-msgstr "ライト"
-
-msgid "Light Color Scheme"
-msgstr "明るい色の配色"
 
 msgid "Line Chart"
 msgstr "折れ線グラフ"
@@ -1018,6 +946,9 @@ msgstr "メニュー項目"
 msgid "Menu Settings"
 msgstr "メニュー設定"
 
+msgid "Menu Updated Successfully"
+msgstr ""
+
 msgid "Message"
 msgstr "メッセージ"
 
@@ -1032,9 +963,6 @@ msgstr "最小長さ"
 
 msgid "Modify Data Before Cloning"
 msgstr "クローン作成前にデータを変更する"
-
-msgid "Month"
-msgstr "月"
 
 msgid "Mutate"
 msgstr "変異する"
@@ -1075,9 +1003,6 @@ msgstr "データなし"
 msgid "No result for the current {0} applied."
 msgstr "現在適用されている {0} の結果はありません。"
 
-msgid "No Search Results"
-msgstr "検索結果がありません"
-
 msgid "Node"
 msgstr "ノード"
 
@@ -1089,9 +1014,6 @@ msgstr "ノードのプロパティ"
 
 msgid "Nodes"
 msgstr "ノード"
-
-msgid "Not Equal"
-msgstr "等しくない"
 
 msgid "Not Equal To Other Field"
 msgstr "他のフィールドと等しくない"
@@ -1129,9 +1051,6 @@ msgstr "オペレーター"
 msgid "OR"
 msgstr "または"
 
-msgid "Orange"
-msgstr "オレンジ"
-
 msgid "Order"
 msgstr "注文"
 
@@ -1156,6 +1075,9 @@ msgstr "このテーブルをカスタマイズする"
 msgid "Pie Chart"
 msgstr "円グラフ"
 
+msgid "Please go to {DATE_FORMAT_LIB_LINK} to see valid formats"
+msgstr ""
+
 msgid "Plural"
 msgstr "複数"
 
@@ -1177,9 +1099,6 @@ msgstr "プレビュー"
 msgid "Profile"
 msgstr "プロフィール"
 
-msgid "Quarter"
-msgstr "四半期"
-
 msgid "Query"
 msgstr "クエリ"
 
@@ -1188,9 +1107,6 @@ msgstr "リカバリーコード"
 
 msgid "Recovery tokens copied to clipboard"
 msgstr "リカバリトークンがクリップボードにコピーされました"
-
-msgid "Red"
-msgstr "赤"
 
 msgid "Reference"
 msgstr "参照"
@@ -1231,6 +1147,9 @@ msgstr "取り除く"
 msgid "Remove Nested Filter"
 msgstr "ネストされたフィルタを削除する"
 
+msgid "Request Failed"
+msgstr ""
+
 msgid "Request ID"
 msgstr "リクエストID"
 
@@ -1239,9 +1158,6 @@ msgstr "リクエストメソッド"
 
 msgid "Required"
 msgstr "必須"
-
-msgid "Reset"
-msgstr "リセット"
 
 msgid "Reset 2FA Recovery Tokens"
 msgstr "2FA 回復トークンをリセットする"
@@ -1315,9 +1231,6 @@ msgstr "スケジューラ"
 msgid "Script"
 msgstr "脚本"
 
-msgid "Search"
-msgstr "検索"
-
 msgid "Secret"
 msgstr "秘密"
 
@@ -1327,7 +1240,7 @@ msgstr "シークレットアクセスキー"
 msgid "Secrets"
 msgstr "秘密"
 
-msgid "Select {0}"
+msgid "Select {0} Type"
 msgstr ""
 
 msgid "Select Node Type"
@@ -1335,9 +1248,6 @@ msgstr "ノードタイプの選択"
 
 msgid "Select Trigger"
 msgstr "トリガーの選択"
-
-msgid "Select Value"
-msgstr "値の選択"
 
 msgid "Select Workflow"
 msgstr "ワークフローの選択"
@@ -1405,17 +1315,11 @@ msgstr "共有"
 msgid "Show"
 msgstr "見せる"
 
-msgid "Show Password"
-msgstr ""
-
 msgid "Show Soft Deleted Items And The Restore Button"
 msgstr "ソフト的に削除されたアイテムと復元ボタンを表示する"
 
 msgid "Show Up In Roles And Permissions"
 msgstr "役割と権限を表示する"
-
-msgid "Showing <0/> entries of <1>{0}</1> results"
-msgstr "<1>{0}</1> 件の結果のうち <0/> 件のエントリを表示しています"
 
 msgid "Sign In"
 msgstr "サインイン"
@@ -1440,6 +1344,9 @@ msgstr "ソフト削除"
 
 msgid "Soft Delete Settings"
 msgstr "ソフトデリート設定"
+
+msgid "Soft deleted data cannot be updated. Kindly restore the data to be able to update it"
+msgstr ""
 
 msgid "Stacked"
 msgstr "積み重ねられた"
@@ -1473,9 +1380,6 @@ msgstr "提出中"
 
 msgid "Summary Card"
 msgstr "サマリーカード"
-
-msgid "SVG"
-msgstr "SVG"
 
 msgid "System"
 msgstr "システム"
@@ -1515,6 +1419,9 @@ msgstr "文章"
 
 msgid "Textarea"
 msgstr "テキストエリア"
+
+msgid "That feature is not enabled on your current plan."
+msgstr ""
 
 msgid "Theme"
 msgstr "テーマ"
@@ -1573,6 +1480,9 @@ msgstr ""
 msgid "Type"
 msgstr "タイプ"
 
+msgid "Unauthorized Access"
+msgstr ""
+
 msgid "Update"
 msgstr "アップデート"
 
@@ -1600,9 +1510,6 @@ msgstr "URL"
 msgid "Use Colors"
 msgstr "色の使用"
 
-msgid "Use Icon"
-msgstr "アイコンを使用する"
-
 msgid "Use OTP Token"
 msgstr "OTPトークンを使用する"
 
@@ -1611,9 +1518,6 @@ msgstr "リカバリーコードを使用する"
 
 msgid "Use SSL"
 msgstr "SSLを使用する"
-
-msgid "Use SVG"
-msgstr "SVGを使用する"
 
 msgid "User"
 msgstr "ユーザー"
@@ -1651,11 +1555,11 @@ msgstr "垂直"
 msgid "View"
 msgstr "ビュー"
 
+msgid "View Details"
+msgstr ""
+
 msgid "View Full Details"
 msgstr "詳細を表示"
-
-msgid "Violet"
-msgstr "バイオレット"
 
 msgid "Visit our website"
 msgstr "当社のウェブサイトを訪問"
@@ -1665,9 +1569,6 @@ msgstr "Webhook"
 
 msgid "Webhooks"
 msgstr "Webhook"
-
-msgid "Week"
-msgstr "週"
 
 msgid "Widget Script"
 msgstr "ウィジェットスクリプト"
@@ -1687,11 +1588,14 @@ msgstr "Xラベル"
 msgid "Y Label"
 msgstr "Yラベル"
 
-msgid "Year"
-msgstr "年"
-
 msgid "Yes"
 msgstr "はい"
+
+msgid "You dont have the permission to view this page"
+msgstr ""
+
+msgid "You have {0} recovery tokens left. You can generate new ones from your account page"
+msgstr ""
 
 msgid "Your Users Table"
 msgstr "ユーザーテーブル"

@@ -94,6 +94,9 @@ msgstr ""
 msgid "{0} Configuration"
 msgstr "{0}配置"
 
+msgid "{0} of the {1} items were not successfully {actionText}. You will find them selected"
+msgstr ""
+
 msgid "{0} Selections"
 msgstr ""
 
@@ -165,6 +168,9 @@ msgstr "{value}年"
 
 msgid "{value} Years"
 msgstr "{value}年"
+
+msgid "•Expression: \\n•JS-Error: {e}"
+msgstr ""
 
 msgid "2FA Tokens"
 msgstr "2FA令牌"
@@ -256,9 +262,6 @@ msgstr ""
 msgid "App Settings"
 msgstr ""
 
-msgid "Are you sure you want to do this?"
-msgstr "你确定你要这么做吗？"
-
 msgid "Associated Triggers"
 msgstr "关联的触发器"
 
@@ -286,18 +289,6 @@ msgstr "饼图"
 msgid "Before Submit"
 msgstr "提交前"
 
-msgid "Beginning of time"
-msgstr "开始时间"
-
-msgid "Beginning of Year"
-msgstr "年初"
-
-msgid "Between"
-msgstr ""
-
-msgid "Blue"
-msgstr "蓝色"
-
 msgid "Body"
 msgstr ""
 
@@ -309,9 +300,6 @@ msgstr "书签"
 
 msgid "Boolean"
 msgstr "布尔值"
-
-msgid "Brown"
-msgstr "棕色"
 
 msgid "Bulk Delete"
 msgstr "批量删除"
@@ -358,9 +346,6 @@ msgstr "可管理流程"
 msgid "Can Reset Password"
 msgstr "可重置密码"
 
-msgid "Cancel"
-msgstr "取消"
-
 msgid "Change History"
 msgstr "变更历史"
 
@@ -372,9 +357,6 @@ msgstr "频道"
 
 msgid "Clear selections"
 msgstr "清除选择"
-
-msgid "Click here to view details"
-msgstr "查看详情"
 
 msgid "Client Script"
 msgstr "客户端脚本"
@@ -394,11 +376,11 @@ msgstr ""
 msgid "Cloning"
 msgstr "复制"
 
-msgid "Close Canvas"
-msgstr "关闭画布"
-
 msgid "Color"
 msgstr "颜色"
+
+msgid "Color Scheme"
+msgstr ""
 
 msgid "Column"
 msgstr "列"
@@ -430,14 +412,8 @@ msgstr "配置选择"
 msgid "Configure Validation"
 msgstr "配置验证方式"
 
-msgid "Confirm"
-msgstr "确认"
-
 msgid "Confirm Data Restoration"
 msgstr "确认数据还原"
-
-msgid "Confirm Delete"
-msgstr "确认删除"
 
 msgid "Confirmation Text"
 msgstr "确认文字"
@@ -451,14 +427,14 @@ msgstr "常量"
 msgid "Constants"
 msgstr "常量"
 
-msgid "Contains"
-msgstr "包含"
-
 msgid "Continue"
 msgstr "继续"
 
 msgid "Copy To Clipboard"
 msgstr "复制到剪贴板"
+
+msgid "Could not parse Javascript"
+msgstr ""
 
 msgid "Create"
 msgstr "创建"
@@ -514,15 +490,6 @@ msgstr "自定义仪表盘"
 msgid "Custom Dashboards"
 msgstr "自定义仪表盘"
 
-msgid "Custom Date"
-msgstr "自定义日期"
-
-msgid "Dark"
-msgstr "暗黑"
-
-msgid "Dark Color Scheme"
-msgstr "深色配色方案"
-
 msgid "Dashboard"
 msgstr "仪表盘"
 
@@ -564,9 +531,6 @@ msgstr "日期"
 
 msgid "Date Format"
 msgstr "日期格式"
-
-msgid "Day"
-msgstr "天"
 
 msgid "Deactivate"
 msgstr "停用"
@@ -633,9 +597,6 @@ msgstr "修改{singular}"
 
 msgid "Email"
 msgstr "邮件"
-
-msgid "Empty Table"
-msgstr "空表格"
 
 msgid "Enable {0} Functionality"
 msgstr "启用{0}功能"
@@ -705,9 +666,6 @@ msgstr "环境变量"
 
 msgid "Environment Variables"
 msgstr "环境变量"
-
-msgid "Equal"
-msgstr "平等的"
 
 msgid "Equal To Other Field"
 msgstr "与其他字段相同"
@@ -823,14 +781,8 @@ msgstr "全局操作"
 msgid "Go Back"
 msgstr "返回"
 
-msgid "Greater Than"
-msgstr "多于"
-
 msgid "Greater Than Other Field"
 msgstr "大于其他字段"
-
-msgid "Green"
-msgstr "绿色"
 
 msgid "Group Mode"
 msgstr "群组模式"
@@ -850,9 +802,6 @@ msgstr "高度"
 msgid "Hi, {0}"
 msgstr "你好，{0}"
 
-msgid "Hide Password"
-msgstr ""
-
 msgid "Home"
 msgstr "首页"
 
@@ -864,9 +813,6 @@ msgstr "水平"
 
 msgid "Host"
 msgstr "主机"
-
-msgid "Hour"
-msgstr "小时"
 
 msgid "I have safely saved my recovery tokens"
 msgstr "我已安全保存了我的恢复令牌"
@@ -892,9 +838,6 @@ msgstr "模拟用户"
 msgid "Incorrect value"
 msgstr "错误值"
 
-msgid "Indigo"
-msgstr "蓝靛"
-
 msgid "Initial Values"
 msgstr "初始值"
 
@@ -913,20 +856,14 @@ msgstr "集成"
 msgid "Integrations"
 msgstr "集成"
 
+msgid "Invalid Date Format"
+msgstr ""
+
 msgid "IP Address"
 msgstr "IP地址"
 
 msgid "Is In"
 msgstr "位于"
-
-msgid "Is Not In"
-msgstr "不在"
-
-msgid "Is Not Null"
-msgstr "不为空"
-
-msgid "Is Null"
-msgstr "空值"
 
 msgid "Join our Discord community"
 msgstr "加入我们社区"
@@ -952,17 +889,8 @@ msgstr "大图标"
 msgid "Layout"
 msgstr ""
 
-msgid "Less Than"
-msgstr "少于"
-
 msgid "Less Than Other Field"
 msgstr "小于其他字段"
-
-msgid "Light"
-msgstr "明亮"
-
-msgid "Light Color Scheme"
-msgstr "浅色主题配色方案"
 
 msgid "Line Chart"
 msgstr "折线图"
@@ -1018,6 +946,9 @@ msgstr "菜单选项"
 msgid "Menu Settings"
 msgstr "菜单设置"
 
+msgid "Menu Updated Successfully"
+msgstr ""
+
 msgid "Message"
 msgstr "信息"
 
@@ -1032,9 +963,6 @@ msgstr "最小长度"
 
 msgid "Modify Data Before Cloning"
 msgstr "复制前修改数据"
-
-msgid "Month"
-msgstr "月份"
 
 msgid "Mutate"
 msgstr "变异"
@@ -1075,9 +1003,6 @@ msgstr "无数据"
 msgid "No result for the current {0} applied."
 msgstr "当前{0}没有结果。"
 
-msgid "No Search Results"
-msgstr "没有搜索结果"
-
 msgid "Node"
 msgstr "节点"
 
@@ -1089,9 +1014,6 @@ msgstr "节点属性"
 
 msgid "Nodes"
 msgstr "节点"
-
-msgid "Not Equal"
-msgstr "不等于"
 
 msgid "Not Equal To Other Field"
 msgstr "不等于其他字段"
@@ -1129,9 +1051,6 @@ msgstr "操作员"
 msgid "OR"
 msgstr "或"
 
-msgid "Orange"
-msgstr "橙色"
-
 msgid "Order"
 msgstr "顺序"
 
@@ -1156,6 +1075,9 @@ msgstr "个性化表格"
 msgid "Pie Chart"
 msgstr "饼图"
 
+msgid "Please go to {DATE_FORMAT_LIB_LINK} to see valid formats"
+msgstr ""
+
 msgid "Plural"
 msgstr "复数"
 
@@ -1177,9 +1099,6 @@ msgstr "预览"
 msgid "Profile"
 msgstr "个人信息"
 
-msgid "Quarter"
-msgstr "季度"
-
 msgid "Query"
 msgstr "查询"
 
@@ -1188,9 +1107,6 @@ msgstr "恢复码"
 
 msgid "Recovery tokens copied to clipboard"
 msgstr "恢复令牌已复制到剪贴板"
-
-msgid "Red"
-msgstr "红色"
 
 msgid "Reference"
 msgstr "参考"
@@ -1231,6 +1147,9 @@ msgstr "移除"
 msgid "Remove Nested Filter"
 msgstr "移除嵌套过滤器"
 
+msgid "Request Failed"
+msgstr ""
+
 msgid "Request ID"
 msgstr "请求ID"
 
@@ -1239,9 +1158,6 @@ msgstr "请求方法"
 
 msgid "Required"
 msgstr "必填项"
-
-msgid "Reset"
-msgstr "重置"
 
 msgid "Reset 2FA Recovery Tokens"
 msgstr "重置2FA恢复令牌"
@@ -1315,9 +1231,6 @@ msgstr "调度器"
 msgid "Script"
 msgstr "脚本"
 
-msgid "Search"
-msgstr "搜索"
-
 msgid "Secret"
 msgstr "密钥"
 
@@ -1327,7 +1240,7 @@ msgstr "访问密钥"
 msgid "Secrets"
 msgstr "密钥"
 
-msgid "Select {0}"
+msgid "Select {0} Type"
 msgstr ""
 
 msgid "Select Node Type"
@@ -1335,9 +1248,6 @@ msgstr "选择节点类型"
 
 msgid "Select Trigger"
 msgstr "选择触发条件"
-
-msgid "Select Value"
-msgstr ""
 
 msgid "Select Workflow"
 msgstr "选择工作流"
@@ -1405,17 +1315,11 @@ msgstr "分享"
 msgid "Show"
 msgstr ""
 
-msgid "Show Password"
-msgstr ""
-
 msgid "Show Soft Deleted Items And The Restore Button"
 msgstr "显示软删除项目和恢复按钮"
 
 msgid "Show Up In Roles And Permissions"
 msgstr "显示在角色和权限中"
-
-msgid "Showing <0/> entries of <1>{0}</1> results"
-msgstr "显示<0/>条目 <1>{0}</1> 结果"
 
 msgid "Sign In"
 msgstr "登录"
@@ -1440,6 +1344,9 @@ msgstr "软删除"
 
 msgid "Soft Delete Settings"
 msgstr "软删除设置"
+
+msgid "Soft deleted data cannot be updated. Kindly restore the data to be able to update it"
+msgstr ""
 
 msgid "Stacked"
 msgstr "堆叠"
@@ -1473,9 +1380,6 @@ msgstr "提交"
 
 msgid "Summary Card"
 msgstr "摘要卡片"
-
-msgid "SVG"
-msgstr ""
 
 msgid "System"
 msgstr "系统"
@@ -1515,6 +1419,9 @@ msgstr "文本"
 
 msgid "Textarea"
 msgstr "文本区域"
+
+msgid "That feature is not enabled on your current plan."
+msgstr ""
 
 msgid "Theme"
 msgstr "主题"
@@ -1573,6 +1480,9 @@ msgstr ""
 msgid "Type"
 msgstr "类型"
 
+msgid "Unauthorized Access"
+msgstr ""
+
 msgid "Update"
 msgstr "更新"
 
@@ -1600,9 +1510,6 @@ msgstr ""
 msgid "Use Colors"
 msgstr "使用颜色"
 
-msgid "Use Icon"
-msgstr "使用图标"
-
 msgid "Use OTP Token"
 msgstr ""
 
@@ -1611,9 +1518,6 @@ msgstr ""
 
 msgid "Use SSL"
 msgstr "使用SSL"
-
-msgid "Use SVG"
-msgstr "使用SVG"
 
 msgid "User"
 msgstr "用户"
@@ -1651,11 +1555,11 @@ msgstr "垂直"
 msgid "View"
 msgstr "查看"
 
+msgid "View Details"
+msgstr ""
+
 msgid "View Full Details"
 msgstr "查看详情"
-
-msgid "Violet"
-msgstr "紫色"
 
 msgid "Visit our website"
 msgstr "访问我们网站"
@@ -1665,9 +1569,6 @@ msgstr ""
 
 msgid "Webhooks"
 msgstr ""
-
-msgid "Week"
-msgstr "星期"
 
 msgid "Widget Script"
 msgstr "部件脚本"
@@ -1687,11 +1588,14 @@ msgstr "X轴标签"
 msgid "Y Label"
 msgstr "Y轴标签"
 
-msgid "Year"
-msgstr "年份"
-
 msgid "Yes"
 msgstr "是"
+
+msgid "You dont have the permission to view this page"
+msgstr ""
+
+msgid "You have {0} recovery tokens left. You can generate new ones from your account page"
+msgstr ""
 
 msgid "Your Users Table"
 msgstr "用户表"

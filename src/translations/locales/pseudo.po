@@ -94,6 +94,9 @@ msgstr ""
 msgid "{0} Configuration"
 msgstr ""
 
+msgid "{0} of the {1} items were not successfully {actionText}. You will find them selected"
+msgstr ""
+
 msgid "{0} Selections"
 msgstr ""
 
@@ -164,6 +167,9 @@ msgid "{value} Year"
 msgstr ""
 
 msgid "{value} Years"
+msgstr ""
+
+msgid "•Expression: \\n•JS-Error: {e}"
 msgstr ""
 
 msgid "2FA Tokens"
@@ -256,9 +262,6 @@ msgstr ""
 msgid "App Settings"
 msgstr ""
 
-msgid "Are you sure you want to do this?"
-msgstr ""
-
 msgid "Associated Triggers"
 msgstr ""
 
@@ -286,18 +289,6 @@ msgstr ""
 msgid "Before Submit"
 msgstr ""
 
-msgid "Beginning of time"
-msgstr ""
-
-msgid "Beginning of Year"
-msgstr ""
-
-msgid "Between"
-msgstr ""
-
-msgid "Blue"
-msgstr ""
-
 msgid "Body"
 msgstr ""
 
@@ -308,9 +299,6 @@ msgid "Bookmarks"
 msgstr ""
 
 msgid "Boolean"
-msgstr ""
-
-msgid "Brown"
 msgstr ""
 
 msgid "Bulk Delete"
@@ -358,9 +346,6 @@ msgstr ""
 msgid "Can Reset Password"
 msgstr ""
 
-msgid "Cancel"
-msgstr ""
-
 msgid "Change History"
 msgstr ""
 
@@ -371,9 +356,6 @@ msgid "Channel"
 msgstr ""
 
 msgid "Clear selections"
-msgstr ""
-
-msgid "Click here to view details"
 msgstr ""
 
 msgid "Client Script"
@@ -394,10 +376,10 @@ msgstr ""
 msgid "Cloning"
 msgstr ""
 
-msgid "Close Canvas"
+msgid "Color"
 msgstr ""
 
-msgid "Color"
+msgid "Color Scheme"
 msgstr ""
 
 msgid "Column"
@@ -430,13 +412,7 @@ msgstr ""
 msgid "Configure Validation"
 msgstr ""
 
-msgid "Confirm"
-msgstr ""
-
 msgid "Confirm Data Restoration"
-msgstr ""
-
-msgid "Confirm Delete"
 msgstr ""
 
 msgid "Confirmation Text"
@@ -451,13 +427,13 @@ msgstr ""
 msgid "Constants"
 msgstr ""
 
-msgid "Contains"
-msgstr ""
-
 msgid "Continue"
 msgstr ""
 
 msgid "Copy To Clipboard"
+msgstr ""
+
+msgid "Could not parse Javascript"
 msgstr ""
 
 msgid "Create"
@@ -514,15 +490,6 @@ msgstr ""
 msgid "Custom Dashboards"
 msgstr ""
 
-msgid "Custom Date"
-msgstr ""
-
-msgid "Dark"
-msgstr ""
-
-msgid "Dark Color Scheme"
-msgstr ""
-
 msgid "Dashboard"
 msgstr ""
 
@@ -563,9 +530,6 @@ msgid "Date"
 msgstr ""
 
 msgid "Date Format"
-msgstr ""
-
-msgid "Day"
 msgstr ""
 
 msgid "Deactivate"
@@ -632,9 +596,6 @@ msgid "Edit {singular}"
 msgstr ""
 
 msgid "Email"
-msgstr ""
-
-msgid "Empty Table"
 msgstr ""
 
 msgid "Enable {0} Functionality"
@@ -704,9 +665,6 @@ msgid "Environment Variable"
 msgstr ""
 
 msgid "Environment Variables"
-msgstr ""
-
-msgid "Equal"
 msgstr ""
 
 msgid "Equal To Other Field"
@@ -823,13 +781,7 @@ msgstr ""
 msgid "Go Back"
 msgstr ""
 
-msgid "Greater Than"
-msgstr ""
-
 msgid "Greater Than Other Field"
-msgstr ""
-
-msgid "Green"
 msgstr ""
 
 msgid "Group Mode"
@@ -850,9 +802,6 @@ msgstr ""
 msgid "Hi, {0}"
 msgstr ""
 
-msgid "Hide Password"
-msgstr ""
-
 msgid "Home"
 msgstr ""
 
@@ -863,9 +812,6 @@ msgid "Horizontal"
 msgstr ""
 
 msgid "Host"
-msgstr ""
-
-msgid "Hour"
 msgstr ""
 
 msgid "I have safely saved my recovery tokens"
@@ -892,9 +838,6 @@ msgstr ""
 msgid "Incorrect value"
 msgstr ""
 
-msgid "Indigo"
-msgstr ""
-
 msgid "Initial Values"
 msgstr ""
 
@@ -913,19 +856,13 @@ msgstr ""
 msgid "Integrations"
 msgstr ""
 
+msgid "Invalid Date Format"
+msgstr ""
+
 msgid "IP Address"
 msgstr ""
 
 msgid "Is In"
-msgstr ""
-
-msgid "Is Not In"
-msgstr ""
-
-msgid "Is Not Null"
-msgstr ""
-
-msgid "Is Null"
 msgstr ""
 
 msgid "Join our Discord community"
@@ -952,16 +889,7 @@ msgstr ""
 msgid "Layout"
 msgstr ""
 
-msgid "Less Than"
-msgstr ""
-
 msgid "Less Than Other Field"
-msgstr ""
-
-msgid "Light"
-msgstr ""
-
-msgid "Light Color Scheme"
 msgstr ""
 
 msgid "Line Chart"
@@ -1018,6 +946,9 @@ msgstr ""
 msgid "Menu Settings"
 msgstr ""
 
+msgid "Menu Updated Successfully"
+msgstr ""
+
 msgid "Message"
 msgstr ""
 
@@ -1031,9 +962,6 @@ msgid "Min Length"
 msgstr ""
 
 msgid "Modify Data Before Cloning"
-msgstr ""
-
-msgid "Month"
 msgstr ""
 
 msgid "Mutate"
@@ -1075,9 +1003,6 @@ msgstr ""
 msgid "No result for the current {0} applied."
 msgstr ""
 
-msgid "No Search Results"
-msgstr ""
-
 msgid "Node"
 msgstr ""
 
@@ -1088,9 +1013,6 @@ msgid "Node Properties"
 msgstr ""
 
 msgid "Nodes"
-msgstr ""
-
-msgid "Not Equal"
 msgstr ""
 
 msgid "Not Equal To Other Field"
@@ -1129,9 +1051,6 @@ msgstr ""
 msgid "OR"
 msgstr ""
 
-msgid "Orange"
-msgstr ""
-
 msgid "Order"
 msgstr ""
 
@@ -1156,6 +1075,9 @@ msgstr ""
 msgid "Pie Chart"
 msgstr ""
 
+msgid "Please go to {DATE_FORMAT_LIB_LINK} to see valid formats"
+msgstr ""
+
 msgid "Plural"
 msgstr ""
 
@@ -1177,9 +1099,6 @@ msgstr ""
 msgid "Profile"
 msgstr ""
 
-msgid "Quarter"
-msgstr ""
-
 msgid "Query"
 msgstr ""
 
@@ -1187,9 +1106,6 @@ msgid "Recovery Code"
 msgstr ""
 
 msgid "Recovery tokens copied to clipboard"
-msgstr ""
-
-msgid "Red"
 msgstr ""
 
 msgid "Reference"
@@ -1231,6 +1147,9 @@ msgstr ""
 msgid "Remove Nested Filter"
 msgstr ""
 
+msgid "Request Failed"
+msgstr ""
+
 msgid "Request ID"
 msgstr ""
 
@@ -1238,9 +1157,6 @@ msgid "Request Method"
 msgstr ""
 
 msgid "Required"
-msgstr ""
-
-msgid "Reset"
 msgstr ""
 
 msgid "Reset 2FA Recovery Tokens"
@@ -1315,9 +1231,6 @@ msgstr ""
 msgid "Script"
 msgstr ""
 
-msgid "Search"
-msgstr ""
-
 msgid "Secret"
 msgstr ""
 
@@ -1327,16 +1240,13 @@ msgstr ""
 msgid "Secrets"
 msgstr ""
 
-msgid "Select {0}"
+msgid "Select {0} Type"
 msgstr ""
 
 msgid "Select Node Type"
 msgstr ""
 
 msgid "Select Trigger"
-msgstr ""
-
-msgid "Select Value"
 msgstr ""
 
 msgid "Select Workflow"
@@ -1405,16 +1315,10 @@ msgstr ""
 msgid "Show"
 msgstr ""
 
-msgid "Show Password"
-msgstr ""
-
 msgid "Show Soft Deleted Items And The Restore Button"
 msgstr ""
 
 msgid "Show Up In Roles And Permissions"
-msgstr ""
-
-msgid "Showing <0/> entries of <1>{0}</1> results"
 msgstr ""
 
 msgid "Sign In"
@@ -1439,6 +1343,9 @@ msgid "Soft Delete"
 msgstr ""
 
 msgid "Soft Delete Settings"
+msgstr ""
+
+msgid "Soft deleted data cannot be updated. Kindly restore the data to be able to update it"
 msgstr ""
 
 msgid "Stacked"
@@ -1472,9 +1379,6 @@ msgid "Submitting"
 msgstr ""
 
 msgid "Summary Card"
-msgstr ""
-
-msgid "SVG"
 msgstr ""
 
 msgid "System"
@@ -1514,6 +1418,9 @@ msgid "Text"
 msgstr ""
 
 msgid "Textarea"
+msgstr ""
+
+msgid "That feature is not enabled on your current plan."
 msgstr ""
 
 msgid "Theme"
@@ -1573,6 +1480,9 @@ msgstr ""
 msgid "Type"
 msgstr ""
 
+msgid "Unauthorized Access"
+msgstr ""
+
 msgid "Update"
 msgstr ""
 
@@ -1600,9 +1510,6 @@ msgstr ""
 msgid "Use Colors"
 msgstr ""
 
-msgid "Use Icon"
-msgstr ""
-
 msgid "Use OTP Token"
 msgstr ""
 
@@ -1610,9 +1517,6 @@ msgid "Use Recovery Code"
 msgstr ""
 
 msgid "Use SSL"
-msgstr ""
-
-msgid "Use SVG"
 msgstr ""
 
 msgid "User"
@@ -1651,10 +1555,10 @@ msgstr ""
 msgid "View"
 msgstr ""
 
-msgid "View Full Details"
+msgid "View Details"
 msgstr ""
 
-msgid "Violet"
+msgid "View Full Details"
 msgstr ""
 
 msgid "Visit our website"
@@ -1664,9 +1568,6 @@ msgid "Webhook"
 msgstr ""
 
 msgid "Webhooks"
-msgstr ""
-
-msgid "Week"
 msgstr ""
 
 msgid "Widget Script"
@@ -1687,10 +1588,13 @@ msgstr ""
 msgid "Y Label"
 msgstr ""
 
-msgid "Year"
+msgid "Yes"
 msgstr ""
 
-msgid "Yes"
+msgid "You dont have the permission to view this page"
+msgstr ""
+
+msgid "You have {0} recovery tokens left. You can generate new ones from your account page"
 msgstr ""
 
 msgid "Your Users Table"

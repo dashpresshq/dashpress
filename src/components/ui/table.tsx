@@ -24,7 +24,7 @@ const TableHeader = React.forwardRef<
   <thead
     ref={ref}
     className={cn(
-      "[&_tr]:border-b bg-hover border-t border-border [&_span]:whitespace-nowrap",
+      "[&_tr]:border-b bg-hover [&_span]:whitespace-nowrap",
       className
     )}
     {...props}

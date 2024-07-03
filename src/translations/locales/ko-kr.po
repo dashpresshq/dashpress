@@ -94,6 +94,9 @@ msgstr "{0} {1}"
 msgid "{0} Configuration"
 msgstr "{0} 구성"
 
+msgid "{0} of the {1} items were not successfully {actionText}. You will find them selected"
+msgstr ""
+
 msgid "{0} Selections"
 msgstr "{0} 선택사항"
 
@@ -165,6 +168,9 @@ msgstr "{value} 연도"
 
 msgid "{value} Years"
 msgstr "{value}년"
+
+msgid "•Expression: \\n•JS-Error: {e}"
+msgstr ""
 
 msgid "2FA Tokens"
 msgstr "2FA 토큰"
@@ -256,9 +262,6 @@ msgstr ""
 msgid "App Settings"
 msgstr ""
 
-msgid "Are you sure you want to do this?"
-msgstr "정말로 이 작업을 수행하시겠습니까?"
-
 msgid "Associated Triggers"
 msgstr "관련 트리거"
 
@@ -286,18 +289,6 @@ msgstr "막대 차트"
 msgid "Before Submit"
 msgstr "제출 전"
 
-msgid "Beginning of time"
-msgstr "시간의 시작"
-
-msgid "Beginning of Year"
-msgstr "연초"
-
-msgid "Between"
-msgstr "사이"
-
-msgid "Blue"
-msgstr "파란색"
-
 msgid "Body"
 msgstr "몸"
 
@@ -309,9 +300,6 @@ msgstr "북마크"
 
 msgid "Boolean"
 msgstr "부울"
-
-msgid "Brown"
-msgstr "갈색"
 
 msgid "Bulk Delete"
 msgstr "대량 삭제"
@@ -358,9 +346,6 @@ msgstr "흐름을 관리할 수 있음"
 msgid "Can Reset Password"
 msgstr "비밀번호 재설정 가능"
 
-msgid "Cancel"
-msgstr "취소"
-
 msgid "Change History"
 msgstr "변경 내역"
 
@@ -372,9 +357,6 @@ msgstr "채널"
 
 msgid "Clear selections"
 msgstr "선택 항목 지우기"
-
-msgid "Click here to view details"
-msgstr "세부정보를 보려면 여기를 클릭하세요."
 
 msgid "Client Script"
 msgstr "클라이언트 스크립트"
@@ -394,11 +376,11 @@ msgstr "복제됨"
 msgid "Cloning"
 msgstr "복제"
 
-msgid "Close Canvas"
-msgstr "캔버스 닫기"
-
 msgid "Color"
 msgstr "색상"
+
+msgid "Color Scheme"
+msgstr ""
 
 msgid "Column"
 msgstr "열"
@@ -430,14 +412,8 @@ msgstr "선택 구성"
 msgid "Configure Validation"
 msgstr "검증 구성"
 
-msgid "Confirm"
-msgstr "확인하다"
-
 msgid "Confirm Data Restoration"
 msgstr "데이터 복원 확인"
-
-msgid "Confirm Delete"
-msgstr "삭제 확인"
 
 msgid "Confirmation Text"
 msgstr "확인 텍스트"
@@ -451,14 +427,14 @@ msgstr "끊임없는"
 msgid "Constants"
 msgstr "상수"
 
-msgid "Contains"
-msgstr "포함"
-
 msgid "Continue"
 msgstr "계속하다"
 
 msgid "Copy To Clipboard"
 msgstr "클립 보드에 복사"
+
+msgid "Could not parse Javascript"
+msgstr ""
 
 msgid "Create"
 msgstr "만들다"
@@ -514,15 +490,6 @@ msgstr "맞춤형 대시보드"
 msgid "Custom Dashboards"
 msgstr "맞춤형 대시보드"
 
-msgid "Custom Date"
-msgstr "맞춤 날짜"
-
-msgid "Dark"
-msgstr "어두운"
-
-msgid "Dark Color Scheme"
-msgstr "어두운 색 구성표"
-
 msgid "Dashboard"
 msgstr "계기반"
 
@@ -564,9 +531,6 @@ msgstr "날짜"
 
 msgid "Date Format"
 msgstr "날짜 형식"
-
-msgid "Day"
-msgstr "낮"
 
 msgid "Deactivate"
 msgstr "비활성화"
@@ -633,9 +597,6 @@ msgstr "편집 {singular}"
 
 msgid "Email"
 msgstr "이메일"
-
-msgid "Empty Table"
-msgstr "빈 테이블"
 
 msgid "Enable {0} Functionality"
 msgstr "{0} 기능 활성화"
@@ -705,9 +666,6 @@ msgstr "환경 변수"
 
 msgid "Environment Variables"
 msgstr "환경 변수"
-
-msgid "Equal"
-msgstr "동일한"
 
 msgid "Equal To Other Field"
 msgstr "다른 필드와 같음"
@@ -823,14 +781,8 @@ msgstr "글로벌 액션"
 msgid "Go Back"
 msgstr "돌아가기"
 
-msgid "Greater Than"
-msgstr "보다 큰"
-
 msgid "Greater Than Other Field"
 msgstr "다른 분야보다 큼"
-
-msgid "Green"
-msgstr "녹색"
 
 msgid "Group Mode"
 msgstr "그룹 모드"
@@ -850,9 +802,6 @@ msgstr "키"
 msgid "Hi, {0}"
 msgstr "안녕하세요, {0}"
 
-msgid "Hide Password"
-msgstr ""
-
 msgid "Home"
 msgstr "집"
 
@@ -864,9 +813,6 @@ msgstr "수평의"
 
 msgid "Host"
 msgstr "주인"
-
-msgid "Hour"
-msgstr "시간"
 
 msgid "I have safely saved my recovery tokens"
 msgstr "복구 토큰을 안전하게 저장했습니다"
@@ -892,9 +838,6 @@ msgstr "사용자를 가장하는 중"
 msgid "Incorrect value"
 msgstr "잘못된 값"
 
-msgid "Indigo"
-msgstr "남빛"
-
 msgid "Initial Values"
 msgstr "초기값"
 
@@ -913,20 +856,14 @@ msgstr "완성"
 msgid "Integrations"
 msgstr "통합"
 
+msgid "Invalid Date Format"
+msgstr ""
+
 msgid "IP Address"
 msgstr "IP 주소"
 
 msgid "Is In"
 msgstr "있음"
-
-msgid "Is Not In"
-msgstr "포함되지 않음"
-
-msgid "Is Not Null"
-msgstr "Null이 아님"
-
-msgid "Is Null"
-msgstr "Null임"
 
 msgid "Join our Discord community"
 msgstr "Discord 커뮤니티에 가입하세요"
@@ -952,17 +889,8 @@ msgstr "대형 로고"
 msgid "Layout"
 msgstr "공들여 나열한 것"
 
-msgid "Less Than"
-msgstr "미만"
-
 msgid "Less Than Other Field"
 msgstr "다른 분야보다 적음"
-
-msgid "Light"
-msgstr "빛"
-
-msgid "Light Color Scheme"
-msgstr "밝은 색 구성표"
 
 msgid "Line Chart"
 msgstr "꺾은선형 차트"
@@ -1018,6 +946,9 @@ msgstr "메뉴 아이템"
 msgid "Menu Settings"
 msgstr "메뉴 설정"
 
+msgid "Menu Updated Successfully"
+msgstr ""
+
 msgid "Message"
 msgstr "메시지"
 
@@ -1032,9 +963,6 @@ msgstr "최소 길이"
 
 msgid "Modify Data Before Cloning"
 msgstr "복제하기 전에 데이터 수정"
-
-msgid "Month"
-msgstr "월"
 
 msgid "Mutate"
 msgstr "돌연변이"
@@ -1075,9 +1003,6 @@ msgstr "데이터 없음"
 msgid "No result for the current {0} applied."
 msgstr "현재 {0}에 적용된 결과가 없습니다."
 
-msgid "No Search Results"
-msgstr "검색결과가 없습니다"
-
 msgid "Node"
 msgstr "마디"
 
@@ -1089,9 +1014,6 @@ msgstr "노드 속성"
 
 msgid "Nodes"
 msgstr "노드"
-
-msgid "Not Equal"
-msgstr "같지 않음"
 
 msgid "Not Equal To Other Field"
 msgstr "다른 필드와 같지 않음"
@@ -1129,9 +1051,6 @@ msgstr "운영자"
 msgid "OR"
 msgstr "또는"
 
-msgid "Orange"
-msgstr "주황색"
-
 msgid "Order"
 msgstr "주문하다"
 
@@ -1156,6 +1075,9 @@ msgstr "이 테이블을 개인화하세요"
 msgid "Pie Chart"
 msgstr "파이 차트"
 
+msgid "Please go to {DATE_FORMAT_LIB_LINK} to see valid formats"
+msgstr ""
+
 msgid "Plural"
 msgstr "복수형"
 
@@ -1177,9 +1099,6 @@ msgstr "시사"
 msgid "Profile"
 msgstr "프로필"
 
-msgid "Quarter"
-msgstr "4분의 1"
-
 msgid "Query"
 msgstr "질문"
 
@@ -1188,9 +1107,6 @@ msgstr "복구 코드"
 
 msgid "Recovery tokens copied to clipboard"
 msgstr "복구 토큰이 클립보드에 복사되었습니다."
-
-msgid "Red"
-msgstr "빨간색"
 
 msgid "Reference"
 msgstr "참조"
@@ -1231,6 +1147,9 @@ msgstr "제거하다"
 msgid "Remove Nested Filter"
 msgstr "중첩 필터 제거"
 
+msgid "Request Failed"
+msgstr ""
+
 msgid "Request ID"
 msgstr "요청 ID"
 
@@ -1239,9 +1158,6 @@ msgstr "요청 방법"
 
 msgid "Required"
 msgstr "필수의"
-
-msgid "Reset"
-msgstr "초기화"
 
 msgid "Reset 2FA Recovery Tokens"
 msgstr "2FA 복구 토큰 재설정"
@@ -1315,9 +1231,6 @@ msgstr "스케줄러"
 msgid "Script"
 msgstr "스크립트"
 
-msgid "Search"
-msgstr "찾다"
-
 msgid "Secret"
 msgstr "비밀"
 
@@ -1327,7 +1240,7 @@ msgstr "비밀 액세스 키"
 msgid "Secrets"
 msgstr "비밀"
 
-msgid "Select {0}"
+msgid "Select {0} Type"
 msgstr ""
 
 msgid "Select Node Type"
@@ -1335,9 +1248,6 @@ msgstr "노드 유형 선택"
 
 msgid "Select Trigger"
 msgstr "트리거 선택"
-
-msgid "Select Value"
-msgstr "값 선택"
 
 msgid "Select Workflow"
 msgstr "워크플로 선택"
@@ -1405,17 +1315,11 @@ msgstr "나누는"
 msgid "Show"
 msgstr "보여주다"
 
-msgid "Show Password"
-msgstr ""
-
 msgid "Show Soft Deleted Items And The Restore Button"
 msgstr "소프트 삭제된 항목 및 복원 버튼 표시"
 
 msgid "Show Up In Roles And Permissions"
 msgstr "역할 및 권한에 표시"
-
-msgid "Showing <0/> entries of <1>{0}</1> results"
-msgstr "<1>{0}</1>개 결과 중 <0/>개 항목 표시 중"
 
 msgid "Sign In"
 msgstr "로그인"
@@ -1440,6 +1344,9 @@ msgstr "소프트 삭제"
 
 msgid "Soft Delete Settings"
 msgstr "일시 삭제 설정"
+
+msgid "Soft deleted data cannot be updated. Kindly restore the data to be able to update it"
+msgstr ""
 
 msgid "Stacked"
 msgstr "쌓인"
@@ -1473,9 +1380,6 @@ msgstr "제출 중"
 
 msgid "Summary Card"
 msgstr "요약 카드"
-
-msgid "SVG"
-msgstr "SVG"
 
 msgid "System"
 msgstr "체계"
@@ -1515,6 +1419,9 @@ msgstr "텍스트"
 
 msgid "Textarea"
 msgstr "텍스트 영역"
+
+msgid "That feature is not enabled on your current plan."
+msgstr ""
 
 msgid "Theme"
 msgstr "주제"
@@ -1573,6 +1480,9 @@ msgstr ""
 msgid "Type"
 msgstr "유형"
 
+msgid "Unauthorized Access"
+msgstr ""
+
 msgid "Update"
 msgstr "업데이트"
 
@@ -1600,9 +1510,6 @@ msgstr "URL"
 msgid "Use Colors"
 msgstr "색상 사용"
 
-msgid "Use Icon"
-msgstr "아이콘 사용"
-
 msgid "Use OTP Token"
 msgstr "OTP 토큰 사용"
 
@@ -1611,9 +1518,6 @@ msgstr "복구 코드 사용"
 
 msgid "Use SSL"
 msgstr "SSL 사용"
-
-msgid "Use SVG"
-msgstr "SVG 사용"
 
 msgid "User"
 msgstr "사용자"
@@ -1651,11 +1555,11 @@ msgstr "수직의"
 msgid "View"
 msgstr "보다"
 
+msgid "View Details"
+msgstr ""
+
 msgid "View Full Details"
 msgstr "전체 세부정보 보기"
-
-msgid "Violet"
-msgstr "제비꽃"
 
 msgid "Visit our website"
 msgstr "우리 홈페이지에 방문 해주세요"
@@ -1665,9 +1569,6 @@ msgstr "웹훅"
 
 msgid "Webhooks"
 msgstr "웹훅"
-
-msgid "Week"
-msgstr "주"
 
 msgid "Widget Script"
 msgstr "위젯 스크립트"
@@ -1687,11 +1588,14 @@ msgstr "X 라벨"
 msgid "Y Label"
 msgstr "Y 라벨"
 
-msgid "Year"
-msgstr "년도"
-
 msgid "Yes"
 msgstr "예"
+
+msgid "You dont have the permission to view this page"
+msgstr ""
+
+msgid "You have {0} recovery tokens left. You can generate new ones from your account page"
+msgstr ""
 
 msgid "Your Users Table"
 msgstr "사용자 테이블"

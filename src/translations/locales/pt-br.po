@@ -94,6 +94,9 @@ msgstr "{0} {1}"
 msgid "{0} Configuration"
 msgstr "{0} Configuração"
 
+msgid "{0} of the {1} items were not successfully {actionText}. You will find them selected"
+msgstr ""
+
 msgid "{0} Selections"
 msgstr "{0} Seleções"
 
@@ -165,6 +168,9 @@ msgstr "{value} Ano"
 
 msgid "{value} Years"
 msgstr "{value} Anos"
+
+msgid "•Expression: \\n•JS-Error: {e}"
+msgstr ""
 
 msgid "2FA Tokens"
 msgstr "Tokens 2FA"
@@ -256,9 +262,6 @@ msgstr ""
 msgid "App Settings"
 msgstr ""
 
-msgid "Are you sure you want to do this?"
-msgstr "Você tem certeza de que quer fazer isso?"
-
 msgid "Associated Triggers"
 msgstr "Gatilhos associados"
 
@@ -286,18 +289,6 @@ msgstr "Gráfico de barras"
 msgid "Before Submit"
 msgstr "Antes de enviar"
 
-msgid "Beginning of time"
-msgstr "Início dos tempos"
-
-msgid "Beginning of Year"
-msgstr "Início do ano"
-
-msgid "Between"
-msgstr "Entre"
-
-msgid "Blue"
-msgstr "Azul"
-
 msgid "Body"
 msgstr "Corpo"
 
@@ -309,9 +300,6 @@ msgstr "Favoritos"
 
 msgid "Boolean"
 msgstr "boleano"
-
-msgid "Brown"
-msgstr "Marrom"
 
 msgid "Bulk Delete"
 msgstr "Exclusão em massa"
@@ -358,9 +346,6 @@ msgstr "Pode gerenciar fluxos"
 msgid "Can Reset Password"
 msgstr "Pode redefinir a senha"
 
-msgid "Cancel"
-msgstr "Cancelar"
-
 msgid "Change History"
 msgstr "Histórico de alterações"
 
@@ -372,9 +357,6 @@ msgstr "Canal"
 
 msgid "Clear selections"
 msgstr "Limpar seleções"
-
-msgid "Click here to view details"
-msgstr "Clique aqui para ver detalhes"
 
 msgid "Client Script"
 msgstr "Script do cliente"
@@ -394,11 +376,11 @@ msgstr "Clonado"
 msgid "Cloning"
 msgstr "Clonagem"
 
-msgid "Close Canvas"
-msgstr "Fechar tela"
-
 msgid "Color"
 msgstr "Cor"
+
+msgid "Color Scheme"
+msgstr ""
 
 msgid "Column"
 msgstr "Coluna"
@@ -430,14 +412,8 @@ msgstr "Configurar seleções"
 msgid "Configure Validation"
 msgstr "Configurar validação"
 
-msgid "Confirm"
-msgstr "confirme"
-
 msgid "Confirm Data Restoration"
 msgstr "Confirme a restauração de dados"
-
-msgid "Confirm Delete"
-msgstr "Confirmar exclusão"
 
 msgid "Confirmation Text"
 msgstr "Texto de confirmação"
@@ -451,14 +427,14 @@ msgstr "Constante"
 msgid "Constants"
 msgstr "Constantes"
 
-msgid "Contains"
-msgstr "Contém"
-
 msgid "Continue"
 msgstr "Continuar"
 
 msgid "Copy To Clipboard"
 msgstr "Copiar para área de transferência"
+
+msgid "Could not parse Javascript"
+msgstr ""
 
 msgid "Create"
 msgstr "Criar"
@@ -514,15 +490,6 @@ msgstr "Painel personalizado"
 msgid "Custom Dashboards"
 msgstr "Painéis personalizados"
 
-msgid "Custom Date"
-msgstr "Data personalizada"
-
-msgid "Dark"
-msgstr "Escuro"
-
-msgid "Dark Color Scheme"
-msgstr "Esquema de cores escuras"
-
 msgid "Dashboard"
 msgstr "Painel"
 
@@ -564,9 +531,6 @@ msgstr "Data"
 
 msgid "Date Format"
 msgstr "Formato de data"
-
-msgid "Day"
-msgstr "Dia"
 
 msgid "Deactivate"
 msgstr "Desativar"
@@ -633,9 +597,6 @@ msgstr "Editar {singular}"
 
 msgid "Email"
 msgstr "E-mail"
-
-msgid "Empty Table"
-msgstr "Mesa Vazia"
 
 msgid "Enable {0} Functionality"
 msgstr "Ativar funcionalidade {0}"
@@ -705,9 +666,6 @@ msgstr "Variável de ambiente"
 
 msgid "Environment Variables"
 msgstr "variáveis ​​ambientais"
-
-msgid "Equal"
-msgstr "Igual"
 
 msgid "Equal To Other Field"
 msgstr "Igual a outro campo"
@@ -823,14 +781,8 @@ msgstr "Ação Global"
 msgid "Go Back"
 msgstr "Volte"
 
-msgid "Greater Than"
-msgstr "Maior que"
-
 msgid "Greater Than Other Field"
 msgstr "Maior que outro campo"
-
-msgid "Green"
-msgstr "Verde"
 
 msgid "Group Mode"
 msgstr "Modo de grupo"
@@ -850,9 +802,6 @@ msgstr "Altura"
 msgid "Hi, {0}"
 msgstr "Olá, {0}"
 
-msgid "Hide Password"
-msgstr ""
-
 msgid "Home"
 msgstr "Lar"
 
@@ -864,9 +813,6 @@ msgstr "Horizontal"
 
 msgid "Host"
 msgstr "Hospedar"
-
-msgid "Hour"
-msgstr "Hora"
 
 msgid "I have safely saved my recovery tokens"
 msgstr "Salvei com segurança meus tokens de recuperação"
@@ -892,9 +838,6 @@ msgstr "Representando usuário"
 msgid "Incorrect value"
 msgstr "Valor incorreto"
 
-msgid "Indigo"
-msgstr "Índigo"
-
 msgid "Initial Values"
 msgstr "Valores Iniciais"
 
@@ -913,20 +856,14 @@ msgstr "Integração"
 msgid "Integrations"
 msgstr "Integrações"
 
+msgid "Invalid Date Format"
+msgstr ""
+
 msgid "IP Address"
 msgstr "Endereço de IP"
 
 msgid "Is In"
 msgstr "É em"
-
-msgid "Is Not In"
-msgstr "Não está dentro"
-
-msgid "Is Not Null"
-msgstr "Não é nulo"
-
-msgid "Is Null"
-msgstr "É nulo"
 
 msgid "Join our Discord community"
 msgstr "Junte-se à nossa comunidade Discord"
@@ -952,17 +889,8 @@ msgstr "Logotipo grande"
 msgid "Layout"
 msgstr "Disposição"
 
-msgid "Less Than"
-msgstr "Menor que"
-
 msgid "Less Than Other Field"
 msgstr "Menos que outro campo"
-
-msgid "Light"
-msgstr "Luz"
-
-msgid "Light Color Scheme"
-msgstr "Esquema de cores claras"
 
 msgid "Line Chart"
 msgstr "Gráfico de linha"
@@ -1018,6 +946,9 @@ msgstr "Item do menu"
 msgid "Menu Settings"
 msgstr "Configurações do menu"
 
+msgid "Menu Updated Successfully"
+msgstr ""
+
 msgid "Message"
 msgstr "Mensagem"
 
@@ -1032,9 +963,6 @@ msgstr "Comprimento mínimo"
 
 msgid "Modify Data Before Cloning"
 msgstr "Modifique os dados antes da clonagem"
-
-msgid "Month"
-msgstr "Mês"
 
 msgid "Mutate"
 msgstr "Mutar"
@@ -1075,9 +1003,6 @@ msgstr "Sem dados"
 msgid "No result for the current {0} applied."
 msgstr "Nenhum resultado para o {0} atual aplicado."
 
-msgid "No Search Results"
-msgstr "Nenhum resultado de pesquisa"
-
 msgid "Node"
 msgstr "Nó"
 
@@ -1089,9 +1014,6 @@ msgstr "Propriedades do nó"
 
 msgid "Nodes"
 msgstr "Nós"
-
-msgid "Not Equal"
-msgstr "Não igual"
 
 msgid "Not Equal To Other Field"
 msgstr "Diferente de outro campo"
@@ -1129,9 +1051,6 @@ msgstr "Operador"
 msgid "OR"
 msgstr "OU"
 
-msgid "Orange"
-msgstr "Laranja"
-
 msgid "Order"
 msgstr "Ordem"
 
@@ -1156,6 +1075,9 @@ msgstr "Personalize esta mesa"
 msgid "Pie Chart"
 msgstr "Gráfico de pizza"
 
+msgid "Please go to {DATE_FORMAT_LIB_LINK} to see valid formats"
+msgstr ""
+
 msgid "Plural"
 msgstr "Plural"
 
@@ -1177,9 +1099,6 @@ msgstr "Visualização"
 msgid "Profile"
 msgstr "Perfil"
 
-msgid "Quarter"
-msgstr "Trimestre"
-
 msgid "Query"
 msgstr "Consulta"
 
@@ -1188,9 +1107,6 @@ msgstr "Código de recuperação"
 
 msgid "Recovery tokens copied to clipboard"
 msgstr "Tokens de recuperação copiados para a área de transferência"
-
-msgid "Red"
-msgstr "Vermelho"
 
 msgid "Reference"
 msgstr "Referência"
@@ -1231,6 +1147,9 @@ msgstr "Remover"
 msgid "Remove Nested Filter"
 msgstr "Remover filtro aninhado"
 
+msgid "Request Failed"
+msgstr ""
+
 msgid "Request ID"
 msgstr "Identificação do Pedido"
 
@@ -1239,9 +1158,6 @@ msgstr "Método de solicitação"
 
 msgid "Required"
 msgstr "Obrigatório"
-
-msgid "Reset"
-msgstr "Reiniciar"
 
 msgid "Reset 2FA Recovery Tokens"
 msgstr "Redefinir tokens de recuperação 2FA"
@@ -1315,9 +1231,6 @@ msgstr "Agendadores"
 msgid "Script"
 msgstr "Roteiro"
 
-msgid "Search"
-msgstr "Procurar"
-
 msgid "Secret"
 msgstr "Segredo"
 
@@ -1327,7 +1240,7 @@ msgstr "Chave de acesso secreta"
 msgid "Secrets"
 msgstr "Segredos"
 
-msgid "Select {0}"
+msgid "Select {0} Type"
 msgstr ""
 
 msgid "Select Node Type"
@@ -1335,9 +1248,6 @@ msgstr "Selecione o tipo de nó"
 
 msgid "Select Trigger"
 msgstr "Selecione o gatilho"
-
-msgid "Select Value"
-msgstr "Selecione o valor"
 
 msgid "Select Workflow"
 msgstr "Selecione Fluxo de Trabalho"
@@ -1405,17 +1315,11 @@ msgstr "Compartilhamento"
 msgid "Show"
 msgstr "Mostrar"
 
-msgid "Show Password"
-msgstr ""
-
 msgid "Show Soft Deleted Items And The Restore Button"
 msgstr "Mostrar itens excluídos de forma reversível e o botão Restaurar"
 
 msgid "Show Up In Roles And Permissions"
 msgstr "Apareça em funções e permissões"
-
-msgid "Showing <0/> entries of <1>{0}</1> results"
-msgstr "Mostrando <0/> entradas de <1>{0}</1> resultados"
 
 msgid "Sign In"
 msgstr "Entrar"
@@ -1440,6 +1344,9 @@ msgstr "Exclusão suave"
 
 msgid "Soft Delete Settings"
 msgstr "Configurações de exclusão reversível"
+
+msgid "Soft deleted data cannot be updated. Kindly restore the data to be able to update it"
+msgstr ""
 
 msgid "Stacked"
 msgstr "Empilhado"
@@ -1473,9 +1380,6 @@ msgstr "Enviando"
 
 msgid "Summary Card"
 msgstr "Cartão de Resumo"
-
-msgid "SVG"
-msgstr "SVG"
 
 msgid "System"
 msgstr "Sistema"
@@ -1515,6 +1419,9 @@ msgstr "Texto"
 
 msgid "Textarea"
 msgstr "Área de texto"
+
+msgid "That feature is not enabled on your current plan."
+msgstr ""
 
 msgid "Theme"
 msgstr "Tema"
@@ -1573,6 +1480,9 @@ msgstr ""
 msgid "Type"
 msgstr "Tipo"
 
+msgid "Unauthorized Access"
+msgstr ""
+
 msgid "Update"
 msgstr "Atualizar"
 
@@ -1600,9 +1510,6 @@ msgstr "URL"
 msgid "Use Colors"
 msgstr "Use cores"
 
-msgid "Use Icon"
-msgstr "Usar ícone"
-
 msgid "Use OTP Token"
 msgstr "Usar token OTP"
 
@@ -1611,9 +1518,6 @@ msgstr "Usar código de recuperação"
 
 msgid "Use SSL"
 msgstr "Usar SSL"
-
-msgid "Use SVG"
-msgstr "Usar SVG"
 
 msgid "User"
 msgstr "Do utilizador"
@@ -1651,11 +1555,11 @@ msgstr "Vertical"
 msgid "View"
 msgstr "Visualizar"
 
+msgid "View Details"
+msgstr ""
+
 msgid "View Full Details"
 msgstr "Ver detalhes completos"
-
-msgid "Violet"
-msgstr "Tolet"
 
 msgid "Visit our website"
 msgstr "Visite o nosso site"
@@ -1665,9 +1569,6 @@ msgstr "Webhook"
 
 msgid "Webhooks"
 msgstr "Webhooks"
-
-msgid "Week"
-msgstr "Semana"
 
 msgid "Widget Script"
 msgstr "Roteiro de widget"
@@ -1687,11 +1588,14 @@ msgstr "Etiqueta X"
 msgid "Y Label"
 msgstr "Etiqueta Y"
 
-msgid "Year"
-msgstr "Ano"
-
 msgid "Yes"
 msgstr "Sim"
+
+msgid "You dont have the permission to view this page"
+msgstr ""
+
+msgid "You have {0} recovery tokens left. You can generate new ones from your account page"
+msgstr ""
 
 msgid "Your Users Table"
 msgstr "Sua tabela de usuários"

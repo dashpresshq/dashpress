@@ -13,6 +13,7 @@ module.exports = {
     {
       path: "<rootDir>/src/translations/locales/{locale}",
       include: [
+        "<rootDir>/src/components",
         "<rootDir>/src/frontend",
         "<rootDir>/src/shared",
         "<rootDir>/src/backend",

@@ -262,6 +262,9 @@ msgstr ""
 msgid "App Settings"
 msgstr ""
 
+msgid "Are you sure you want to do this?"
+msgstr ""
+
 msgid "Associated Triggers"
 msgstr "관련 트리거"
 
@@ -288,6 +291,15 @@ msgstr "막대 차트"
 
 msgid "Before Submit"
 msgstr "제출 전"
+
+msgid "Beginning of time"
+msgstr ""
+
+msgid "Beginning of Year"
+msgstr ""
+
+msgid "Between"
+msgstr ""
 
 msgid "Body"
 msgstr "몸"
@@ -346,6 +358,9 @@ msgstr "흐름을 관리할 수 있음"
 msgid "Can Reset Password"
 msgstr "비밀번호 재설정 가능"
 
+msgid "Cancel"
+msgstr ""
+
 msgid "Change History"
 msgstr "변경 내역"
 
@@ -354,6 +369,9 @@ msgstr "언어 변경"
 
 msgid "Channel"
 msgstr "채널"
+
+msgid "Clear"
+msgstr ""
 
 msgid "Clear selections"
 msgstr "선택 항목 지우기"
@@ -415,6 +433,9 @@ msgstr "검증 구성"
 msgid "Confirm Data Restoration"
 msgstr "데이터 복원 확인"
 
+msgid "Confirm Delete"
+msgstr ""
+
 msgid "Confirmation Text"
 msgstr "확인 텍스트"
 
@@ -426,6 +447,9 @@ msgstr "끊임없는"
 
 msgid "Constants"
 msgstr "상수"
+
+msgid "Contains"
+msgstr ""
 
 msgid "Continue"
 msgstr "계속하다"
@@ -490,6 +514,9 @@ msgstr "맞춤형 대시보드"
 msgid "Custom Dashboards"
 msgstr "맞춤형 대시보드"
 
+msgid "Custom Date"
+msgstr ""
+
 msgid "Dashboard"
 msgstr "계기반"
 
@@ -531,6 +558,9 @@ msgstr "날짜"
 
 msgid "Date Format"
 msgstr "날짜 형식"
+
+msgid "Day"
+msgstr ""
 
 msgid "Deactivate"
 msgstr "비활성화"
@@ -597,6 +627,9 @@ msgstr "편집 {singular}"
 
 msgid "Email"
 msgstr "이메일"
+
+msgid "Empty Table"
+msgstr ""
 
 msgid "Enable {0} Functionality"
 msgstr "{0} 기능 활성화"
@@ -666,6 +699,9 @@ msgstr "환경 변수"
 
 msgid "Environment Variables"
 msgstr "환경 변수"
+
+msgid "Equal"
+msgstr ""
 
 msgid "Equal To Other Field"
 msgstr "다른 필드와 같음"
@@ -781,6 +817,9 @@ msgstr "글로벌 액션"
 msgid "Go Back"
 msgstr "돌아가기"
 
+msgid "Greater Than"
+msgstr ""
+
 msgid "Greater Than Other Field"
 msgstr "다른 분야보다 큼"
 
@@ -802,6 +841,9 @@ msgstr "키"
 msgid "Hi, {0}"
 msgstr "안녕하세요, {0}"
 
+msgid "Hide Password"
+msgstr ""
+
 msgid "Home"
 msgstr "집"
 
@@ -813,6 +855,9 @@ msgstr "수평의"
 
 msgid "Host"
 msgstr "주인"
+
+msgid "Hour"
+msgstr ""
 
 msgid "I have safely saved my recovery tokens"
 msgstr "복구 토큰을 안전하게 저장했습니다"
@@ -850,6 +895,9 @@ msgstr "인라인 편집 설정"
 msgid "Input {deactivationKey} to continue"
 msgstr "계속하려면 {deactivationKey}를 입력하세요."
 
+msgid "Input Validation"
+msgstr ""
+
 msgid "Integration"
 msgstr "완성"
 
@@ -864,6 +912,15 @@ msgstr "IP 주소"
 
 msgid "Is In"
 msgstr "있음"
+
+msgid "Is Not In"
+msgstr ""
+
+msgid "Is Not Null"
+msgstr ""
+
+msgid "Is Null"
+msgstr ""
 
 msgid "Join our Discord community"
 msgstr "Discord 커뮤니티에 가입하세요"
@@ -888,6 +945,9 @@ msgstr "대형 로고"
 
 msgid "Layout"
 msgstr "공들여 나열한 것"
+
+msgid "Less Than"
+msgstr ""
 
 msgid "Less Than Other Field"
 msgstr "다른 분야보다 적음"
@@ -964,6 +1024,9 @@ msgstr "최소 길이"
 msgid "Modify Data Before Cloning"
 msgstr "복제하기 전에 데이터 수정"
 
+msgid "Month"
+msgstr ""
+
 msgid "Mutate"
 msgstr "돌연변이"
 
@@ -1000,8 +1063,14 @@ msgstr "이 섹션에 사용 가능한 권한이 없습니다."
 msgid "No Data"
 msgstr "데이터 없음"
 
+msgid "No Options"
+msgstr ""
+
 msgid "No result for the current {0} applied."
 msgstr "현재 {0}에 적용된 결과가 없습니다."
+
+msgid "No Search Results"
+msgstr ""
 
 msgid "Node"
 msgstr "마디"
@@ -1014,6 +1083,9 @@ msgstr "노드 속성"
 
 msgid "Nodes"
 msgstr "노드"
+
+msgid "Not Equal"
+msgstr ""
 
 msgid "Not Equal To Other Field"
 msgstr "다른 필드와 같지 않음"
@@ -1072,6 +1144,9 @@ msgstr "영구 쿼리"
 msgid "Personalize This Table"
 msgstr "이 테이블을 개인화하세요"
 
+msgid "Pick a date"
+msgstr ""
+
 msgid "Pie Chart"
 msgstr "파이 차트"
 
@@ -1098,6 +1173,9 @@ msgstr "시사"
 
 msgid "Profile"
 msgstr "프로필"
+
+msgid "Quarter"
+msgstr ""
 
 msgid "Query"
 msgstr "질문"
@@ -1158,6 +1236,9 @@ msgstr "요청 방법"
 
 msgid "Required"
 msgstr "필수의"
+
+msgid "Reset"
+msgstr ""
 
 msgid "Reset 2FA Recovery Tokens"
 msgstr "2FA 복구 토큰 재설정"
@@ -1231,6 +1312,9 @@ msgstr "스케줄러"
 msgid "Script"
 msgstr "스크립트"
 
+msgid "Search"
+msgstr ""
+
 msgid "Secret"
 msgstr "비밀"
 
@@ -1240,14 +1324,35 @@ msgstr "비밀 액세스 키"
 msgid "Secrets"
 msgstr "비밀"
 
+msgid "Select {0}"
+msgstr ""
+
 msgid "Select {0} Type"
+msgstr ""
+
+msgid "Select Count"
+msgstr ""
+
+msgid "Select Date Option"
 msgstr ""
 
 msgid "Select Node Type"
 msgstr "노드 유형 선택"
 
+msgid "Select Operator"
+msgstr ""
+
+msgid "Select Option"
+msgstr ""
+
+msgid "Select Page Size"
+msgstr ""
+
 msgid "Select Trigger"
 msgstr "트리거 선택"
+
+msgid "Select Value"
+msgstr ""
 
 msgid "Select Workflow"
 msgstr "워크플로 선택"
@@ -1315,11 +1420,17 @@ msgstr "나누는"
 msgid "Show"
 msgstr "보여주다"
 
+msgid "Show Password"
+msgstr ""
+
 msgid "Show Soft Deleted Items And The Restore Button"
 msgstr "소프트 삭제된 항목 및 복원 버튼 표시"
 
 msgid "Show Up In Roles And Permissions"
 msgstr "역할 및 권한에 표시"
+
+msgid "Showing{3, select, placeholder {{0}} name {table-page-size} className {w-18} options {{1}} onChange {{2}}} of <0>{4}</0> results"
+msgstr ""
 
 msgid "Sign In"
 msgstr "로그인"
@@ -1357,6 +1468,9 @@ msgstr "Github에 별표를 남겨주세요"
 msgid "Start of year"
 msgstr "연초"
 
+msgid "Start Typing"
+msgstr ""
+
 msgid "State Script"
 msgstr "상태 스크립트"
 
@@ -1380,6 +1494,9 @@ msgstr "제출 중"
 
 msgid "Summary Card"
 msgstr "요약 카드"
+
+msgid "SVG"
+msgstr ""
 
 msgid "System"
 msgstr "체계"
@@ -1510,6 +1627,9 @@ msgstr "URL"
 msgid "Use Colors"
 msgstr "색상 사용"
 
+msgid "Use Icon"
+msgstr ""
+
 msgid "Use OTP Token"
 msgstr "OTP 토큰 사용"
 
@@ -1518,6 +1638,9 @@ msgstr "복구 코드 사용"
 
 msgid "Use SSL"
 msgstr "SSL 사용"
+
+msgid "Use SVG"
+msgstr ""
 
 msgid "User"
 msgstr "사용자"
@@ -1570,6 +1693,9 @@ msgstr "웹훅"
 msgid "Webhooks"
 msgstr "웹훅"
 
+msgid "Week"
+msgstr ""
+
 msgid "Widget Script"
 msgstr "위젯 스크립트"
 
@@ -1587,6 +1713,9 @@ msgstr "X 라벨"
 
 msgid "Y Label"
 msgstr "Y 라벨"
+
+msgid "Year"
+msgstr ""
 
 msgid "Yes"
 msgstr "예"

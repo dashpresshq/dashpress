@@ -262,6 +262,9 @@ msgstr ""
 msgid "App Settings"
 msgstr ""
 
+msgid "Are you sure you want to do this?"
+msgstr ""
+
 msgid "Associated Triggers"
 msgstr ""
 
@@ -287,6 +290,15 @@ msgid "Bar Chart"
 msgstr ""
 
 msgid "Before Submit"
+msgstr ""
+
+msgid "Beginning of time"
+msgstr ""
+
+msgid "Beginning of Year"
+msgstr ""
+
+msgid "Between"
 msgstr ""
 
 msgid "Body"
@@ -346,6 +358,9 @@ msgstr ""
 msgid "Can Reset Password"
 msgstr ""
 
+msgid "Cancel"
+msgstr ""
+
 msgid "Change History"
 msgstr ""
 
@@ -353,6 +368,9 @@ msgid "Change Language"
 msgstr ""
 
 msgid "Channel"
+msgstr ""
+
+msgid "Clear"
 msgstr ""
 
 msgid "Clear selections"
@@ -415,6 +433,9 @@ msgstr ""
 msgid "Confirm Data Restoration"
 msgstr ""
 
+msgid "Confirm Delete"
+msgstr ""
+
 msgid "Confirmation Text"
 msgstr ""
 
@@ -425,6 +446,9 @@ msgid "Constant"
 msgstr ""
 
 msgid "Constants"
+msgstr ""
+
+msgid "Contains"
 msgstr ""
 
 msgid "Continue"
@@ -490,6 +514,9 @@ msgstr ""
 msgid "Custom Dashboards"
 msgstr ""
 
+msgid "Custom Date"
+msgstr ""
+
 msgid "Dashboard"
 msgstr ""
 
@@ -530,6 +557,9 @@ msgid "Date"
 msgstr ""
 
 msgid "Date Format"
+msgstr ""
+
+msgid "Day"
 msgstr ""
 
 msgid "Deactivate"
@@ -596,6 +626,9 @@ msgid "Edit {singular}"
 msgstr ""
 
 msgid "Email"
+msgstr ""
+
+msgid "Empty Table"
 msgstr ""
 
 msgid "Enable {0} Functionality"
@@ -665,6 +698,9 @@ msgid "Environment Variable"
 msgstr ""
 
 msgid "Environment Variables"
+msgstr ""
+
+msgid "Equal"
 msgstr ""
 
 msgid "Equal To Other Field"
@@ -781,6 +817,9 @@ msgstr ""
 msgid "Go Back"
 msgstr ""
 
+msgid "Greater Than"
+msgstr ""
+
 msgid "Greater Than Other Field"
 msgstr ""
 
@@ -802,6 +841,9 @@ msgstr ""
 msgid "Hi, {0}"
 msgstr ""
 
+msgid "Hide Password"
+msgstr ""
+
 msgid "Home"
 msgstr ""
 
@@ -812,6 +854,9 @@ msgid "Horizontal"
 msgstr ""
 
 msgid "Host"
+msgstr ""
+
+msgid "Hour"
 msgstr ""
 
 msgid "I have safely saved my recovery tokens"
@@ -850,6 +895,9 @@ msgstr ""
 msgid "Input {deactivationKey} to continue"
 msgstr ""
 
+msgid "Input Validation"
+msgstr ""
+
 msgid "Integration"
 msgstr ""
 
@@ -863,6 +911,15 @@ msgid "IP Address"
 msgstr ""
 
 msgid "Is In"
+msgstr ""
+
+msgid "Is Not In"
+msgstr ""
+
+msgid "Is Not Null"
+msgstr ""
+
+msgid "Is Null"
 msgstr ""
 
 msgid "Join our Discord community"
@@ -887,6 +944,9 @@ msgid "Large Logo"
 msgstr ""
 
 msgid "Layout"
+msgstr ""
+
+msgid "Less Than"
 msgstr ""
 
 msgid "Less Than Other Field"
@@ -964,6 +1024,9 @@ msgstr ""
 msgid "Modify Data Before Cloning"
 msgstr ""
 
+msgid "Month"
+msgstr ""
+
 msgid "Mutate"
 msgstr ""
 
@@ -1000,7 +1063,13 @@ msgstr ""
 msgid "No Data"
 msgstr ""
 
+msgid "No Options"
+msgstr ""
+
 msgid "No result for the current {0} applied."
+msgstr ""
+
+msgid "No Search Results"
 msgstr ""
 
 msgid "Node"
@@ -1013,6 +1082,9 @@ msgid "Node Properties"
 msgstr ""
 
 msgid "Nodes"
+msgstr ""
+
+msgid "Not Equal"
 msgstr ""
 
 msgid "Not Equal To Other Field"
@@ -1072,6 +1144,9 @@ msgstr ""
 msgid "Personalize This Table"
 msgstr ""
 
+msgid "Pick a date"
+msgstr ""
+
 msgid "Pie Chart"
 msgstr ""
 
@@ -1097,6 +1172,9 @@ msgid "Preview"
 msgstr ""
 
 msgid "Profile"
+msgstr ""
+
+msgid "Quarter"
 msgstr ""
 
 msgid "Query"
@@ -1157,6 +1235,9 @@ msgid "Request Method"
 msgstr ""
 
 msgid "Required"
+msgstr ""
+
+msgid "Reset"
 msgstr ""
 
 msgid "Reset 2FA Recovery Tokens"
@@ -1231,6 +1312,9 @@ msgstr ""
 msgid "Script"
 msgstr ""
 
+msgid "Search"
+msgstr ""
+
 msgid "Secret"
 msgstr ""
 
@@ -1240,13 +1324,34 @@ msgstr ""
 msgid "Secrets"
 msgstr ""
 
+msgid "Select {0}"
+msgstr ""
+
 msgid "Select {0} Type"
+msgstr ""
+
+msgid "Select Count"
+msgstr ""
+
+msgid "Select Date Option"
 msgstr ""
 
 msgid "Select Node Type"
 msgstr ""
 
+msgid "Select Operator"
+msgstr ""
+
+msgid "Select Option"
+msgstr ""
+
+msgid "Select Page Size"
+msgstr ""
+
 msgid "Select Trigger"
+msgstr ""
+
+msgid "Select Value"
 msgstr ""
 
 msgid "Select Workflow"
@@ -1315,10 +1420,16 @@ msgstr ""
 msgid "Show"
 msgstr ""
 
+msgid "Show Password"
+msgstr ""
+
 msgid "Show Soft Deleted Items And The Restore Button"
 msgstr ""
 
 msgid "Show Up In Roles And Permissions"
+msgstr ""
+
+msgid "Showing{3, select, placeholder {{0}} name {table-page-size} className {w-18} options {{1}} onChange {{2}}} of <0>{4}</0> results"
 msgstr ""
 
 msgid "Sign In"
@@ -1357,6 +1468,9 @@ msgstr ""
 msgid "Start of year"
 msgstr ""
 
+msgid "Start Typing"
+msgstr ""
+
 msgid "State Script"
 msgstr ""
 
@@ -1379,6 +1493,9 @@ msgid "Submitting"
 msgstr ""
 
 msgid "Summary Card"
+msgstr ""
+
+msgid "SVG"
 msgstr ""
 
 msgid "System"
@@ -1510,6 +1627,9 @@ msgstr ""
 msgid "Use Colors"
 msgstr ""
 
+msgid "Use Icon"
+msgstr ""
+
 msgid "Use OTP Token"
 msgstr ""
 
@@ -1517,6 +1637,9 @@ msgid "Use Recovery Code"
 msgstr ""
 
 msgid "Use SSL"
+msgstr ""
+
+msgid "Use SVG"
 msgstr ""
 
 msgid "User"
@@ -1570,6 +1693,9 @@ msgstr ""
 msgid "Webhooks"
 msgstr ""
 
+msgid "Week"
+msgstr ""
+
 msgid "Widget Script"
 msgstr ""
 
@@ -1586,6 +1712,9 @@ msgid "X Label"
 msgstr ""
 
 msgid "Y Label"
+msgstr ""
+
+msgid "Year"
 msgstr ""
 
 msgid "Yes"

@@ -9,12 +9,13 @@ export interface IProps {
   target: ReactNode;
   children: ReactNode;
   className?: string;
+  ariaLabel?: string;
 }
 
-export function Dropdown({ target, children, className }: IProps) {
+export function Dropdown({ target, children, className, ariaLabel }: IProps) {
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger className="outline-none">
+      <DropdownMenuTrigger className="outline-none" aria-label={ariaLabel}>
         {target}
       </DropdownMenuTrigger>
       <DropdownMenuContent className={className} align="end">

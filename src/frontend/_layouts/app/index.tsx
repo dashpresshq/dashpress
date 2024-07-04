@@ -68,7 +68,7 @@ export function AppLayout({
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
       <div id="gaussian-portal-0">
-        <div className="flex justify-between items-center mb-2">
+        <div className="flex justify-between items-center mb-3">
           <div className="text-left">
             <p>{pageTitle ? _(pageTitle) : null}</p>
             <Breadcrumbs items={homedBreadcrumb} onCrumbClick={goToLinkIndex} />

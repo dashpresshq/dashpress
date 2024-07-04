@@ -172,9 +172,9 @@ export function RenderNavigation({
                     marginLeft: (depth - 1) * 8,
                   }}
                   className={cn(
-                    "w-full text-white flex mb-1 py-5 items-center justify-start rounded-lg hover:!bg-[hsla(0,0%,0%,0.2)]",
+                    "w-full text-white flex mb-1 py-5 items-center justify-start rounded-lg hover:!bg-[hsla(0,0%,0%,0.1)]",
                     {
-                      "bg-primary": isActive,
+                      "bg-[hsla(0,0%,0%,0.1)]": isActive,
                       "px-3": isFullWidth,
                     }
                   )}
@@ -193,7 +193,7 @@ export function RenderNavigation({
                         <div className="flex justify-between items-center w-full">
                           <p
                             className={cn(
-                              "text-xs text-white ml-2 transition-all"
+                              "text-[0.8125rem] text-white ml-2 transition-all"
                             )}
                           >
                             {title}
@@ -227,7 +227,7 @@ export function RenderNavigation({
                       {isFullWidth && (
                         <p
                           className={cn(
-                            "text-xs text-white ml-2 transition-all"
+                            "text-[0.8125rem] text-white ml-2 transition-all"
                           )}
                         >
                           {title}

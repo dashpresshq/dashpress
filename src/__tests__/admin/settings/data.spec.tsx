@@ -122,8 +122,8 @@ describe("pages/admin/settings/data", () => {
           screen.getByRole("button", { name: "Save Date Format" })
         );
 
-        expect((await screen.findAllByRole("status"))[0]).toHaveTextContent(
-          `Invalid Date Format!. Please go to https://date-fns.org/docs/format to see valid formats`
+        await expectToast(
+          `Invalid Date FormatPlease go to https://date-fns.org/docs/format to see valid formats`
         );
       });
 

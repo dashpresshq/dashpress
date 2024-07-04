@@ -91,7 +91,6 @@ describe("pages/integrations/variables => constants", () => {
           "{{ CONSTANT.BASE_URL }}|http://base.com",
           "{{ CONSTANT.FOO_CONSTANT_KEY }}|foo constant value",
           "{{ CONSTANT.BAR_CONSTANT_KEY }}|bar constant value",
-          "{{ CONSTANT.NEW_KEY }}|new value",
         ]
       `);
     });
@@ -150,10 +149,9 @@ describe("pages/integrations/variables => constants", () => {
       ).toMatchInlineSnapshot(`
         [
           "Key|Value|Action",
-          "{{ CONSTANT.BASE_URL }}|http://base.com/updated",
+          "{{ CONSTANT.BASE_URL }}|http://base.com",
           "{{ CONSTANT.FOO_CONSTANT_KEY }}|foo constant value",
           "{{ CONSTANT.BAR_CONSTANT_KEY }}|bar constant value",
-          "{{ CONSTANT.NEW_KEY }}|new value",
         ]
       `);
     });

@@ -85,7 +85,7 @@ describe("pages/admin/[entity]/config/presentation", () => {
       })
     );
     await expectToast(
-      "Expression: •JS-Error: SyntaxError: Unexpected identifier"
+      `Could not parse Javascript•Expression: \\n•JS-Error: SyntaxError: Unexpected identifier`
     );
 
     await closeAllToasts();

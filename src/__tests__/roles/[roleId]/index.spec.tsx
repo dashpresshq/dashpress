@@ -31,7 +31,7 @@ describe("pages/roles/[roleId]/index", () => {
 
     const currentTab = await screen.findByRole("tabpanel", { name: "App" });
 
-    const allCheckBoxes = await within(currentTab).findAllByRole("checkbox");
+    const allCheckBoxes = await within(currentTab).findAllByRole("switch");
 
     await waitFor(() => {
       expect(allCheckBoxes).toHaveLength(7);
@@ -39,34 +39,34 @@ describe("pages/roles/[roleId]/index", () => {
 
     await waitFor(async () => {
       expect(
-        await within(currentTab).findByRole("checkbox", {
+        await within(currentTab).findByRole("switch", {
           name: "Can Configure App",
         })
       ).not.toBeChecked();
     });
 
     expect(
-      within(currentTab).getByRole("checkbox", { name: "Can Manage Users" })
+      within(currentTab).getByRole("switch", { name: "Can Manage Users" })
     ).toBeChecked();
 
     expect(
-      within(currentTab).getByRole("checkbox", { name: "Can Reset Password" })
+      within(currentTab).getByRole("switch", { name: "Can Reset Password" })
     ).toBeChecked();
 
     expect(
-      within(currentTab).getByRole("checkbox", {
+      within(currentTab).getByRole("switch", {
         name: "Can Manage All Entities",
       })
     ).not.toBeChecked();
 
     expect(
-      within(currentTab).getByRole("checkbox", {
+      within(currentTab).getByRole("switch", {
         name: "Can Manage Permissions",
       })
     ).toBeChecked();
 
     expect(
-      within(currentTab).getByRole("checkbox", {
+      within(currentTab).getByRole("switch", {
         name: "Can Manage Dashboard",
       })
     ).toBeChecked();
@@ -82,7 +82,7 @@ describe("pages/roles/[roleId]/index", () => {
 
     const currentTab = screen.getByRole("tabpanel", { name: "Entities" });
 
-    const allCheckBoxes = await within(currentTab).findAllByRole("checkbox");
+    const allCheckBoxes = await within(currentTab).findAllByRole("switch");
 
     await waitFor(() => {
       expect(allCheckBoxes).toHaveLength(5);
@@ -90,28 +90,28 @@ describe("pages/roles/[roleId]/index", () => {
 
     await waitFor(async () => {
       expect(
-        await within(currentTab).findByRole("checkbox", {
+        await within(currentTab).findByRole("switch", {
           name: "Plural entity-3",
         })
       ).not.toBeChecked();
     });
 
     expect(
-      within(currentTab).getByRole("checkbox", { name: "Plural entity-1" })
+      within(currentTab).getByRole("switch", { name: "Plural entity-1" })
     ).not.toBeChecked();
 
     expect(
-      within(currentTab).getByRole("checkbox", { name: "Plural entity-2" })
+      within(currentTab).getByRole("switch", { name: "Plural entity-2" })
     ).toBeChecked();
 
     expect(
-      within(currentTab).getByRole("checkbox", {
+      within(currentTab).getByRole("switch", {
         name: "Plural disabled-entity-1",
       })
     ).not.toBeChecked();
 
     expect(
-      within(currentTab).getByRole("checkbox", {
+      within(currentTab).getByRole("switch", {
         name: "Plural disabled-entity-2",
       })
     ).toBeChecked();
@@ -130,14 +130,14 @@ describe("pages/roles/[roleId]/index", () => {
 
     await waitFor(async () => {
       expect(
-        await within(currentTab).findByRole("checkbox", {
+        await within(currentTab).findByRole("switch", {
           name: "Plural entity-3",
         })
       ).not.toBeChecked();
     });
 
     await userEvent.click(
-      await within(currentTab).findByRole("button", {
+      await within(currentTab).findByRole("switch", {
         name: "Plural entity-2",
       })
     );
@@ -146,7 +146,7 @@ describe("pages/roles/[roleId]/index", () => {
     await closeAllToasts();
 
     await userEvent.click(
-      within(currentTab).getByRole("button", { name: "Plural entity-1" })
+      within(currentTab).getByRole("switch", { name: "Plural entity-1" })
     );
 
     await expectToast("Role Permission Created Successfully");
@@ -154,7 +154,7 @@ describe("pages/roles/[roleId]/index", () => {
     await closeAllToasts();
 
     await userEvent.click(
-      within(currentTab).getByRole("button", {
+      within(currentTab).getByRole("switch", {
         name: "Plural disabled-entity-2",
       })
     );
@@ -164,7 +164,7 @@ describe("pages/roles/[roleId]/index", () => {
     await closeAllToasts();
 
     await userEvent.click(
-      within(currentTab).getByRole("button", {
+      within(currentTab).getByRole("switch", {
         name: "Plural disabled-entity-2",
       })
     );
@@ -184,18 +184,18 @@ describe("pages/roles/[roleId]/index", () => {
 
     await waitFor(async () => {
       expect(
-        await within(currentTab).findByRole("checkbox", {
+        await within(currentTab).findByRole("switch", {
           name: "Plural entity-2",
         })
       ).not.toBeChecked();
     });
 
     expect(
-      within(currentTab).getByRole("checkbox", { name: "Plural entity-1" })
+      within(currentTab).getByRole("switch", { name: "Plural entity-1" })
     ).toBeChecked();
 
     expect(
-      within(currentTab).getByRole("checkbox", {
+      within(currentTab).getByRole("switch", {
         name: "Plural disabled-entity-2",
       })
     ).toBeChecked();
@@ -212,7 +212,7 @@ describe("pages/roles/[roleId]/index", () => {
 
     const currentTab = screen.getByRole("tabpanel", { name: "Entities" });
 
-    expect(await within(currentTab).findAllByRole("checkbox")).toHaveLength(5);
+    expect(await within(currentTab).findAllByRole("switch")).toHaveLength(5);
 
     await userEvent.click(
       within(currentTab).queryByRole("button", {
@@ -222,7 +222,7 @@ describe("pages/roles/[roleId]/index", () => {
 
     await closeAllToasts();
 
-    expect(within(currentTab).queryByRole("checkbox")).not.toBeInTheDocument();
+    expect(within(currentTab).queryByRole("switch")).not.toBeInTheDocument();
 
     await userEvent.click(
       within(currentTab).queryByRole("button", {
@@ -230,7 +230,7 @@ describe("pages/roles/[roleId]/index", () => {
       })
     );
 
-    expect(await within(currentTab).findAllByRole("checkbox")).toHaveLength(5);
+    expect(await within(currentTab).findAllByRole("switch")).toHaveLength(5);
 
     await closeAllToasts();
   });
@@ -245,7 +245,7 @@ describe("pages/roles/[roleId]/index", () => {
     const currentTab = await screen.findByRole("tabpanel", { name: "App" });
 
     await userEvent.click(
-      await within(currentTab).findByRole("button", {
+      await within(currentTab).findByRole("switch", {
         name: "Can Reset Password",
       })
     );
@@ -255,7 +255,7 @@ describe("pages/roles/[roleId]/index", () => {
     await closeAllToasts();
 
     await userEvent.click(
-      within(currentTab).getByRole("button", { name: "Can Configure App" })
+      within(currentTab).getByRole("switch", { name: "Can Configure App" })
     );
 
     await expectToast("Role Permission Created Successfully");
@@ -263,7 +263,7 @@ describe("pages/roles/[roleId]/index", () => {
     await closeAllToasts();
 
     await userEvent.click(
-      within(currentTab).getByRole("button", { name: "Can Manage Users" })
+      within(currentTab).getByRole("switch", { name: "Can Manage Users" })
     );
 
     await expectToast("Role Permission Deleted Successfully");
@@ -271,7 +271,7 @@ describe("pages/roles/[roleId]/index", () => {
     await closeAllToasts();
 
     await userEvent.click(
-      within(currentTab).getByRole("button", { name: "Can Manage Users" })
+      within(currentTab).getByRole("switch", { name: "Can Manage Users" })
     );
 
     await expectToast("Role Permission Created Successfully");
@@ -288,24 +288,24 @@ describe("pages/roles/[roleId]/index", () => {
 
     await waitFor(async () => {
       expect(
-        await within(currentTab).findByRole("checkbox", {
+        await within(currentTab).findByRole("switch", {
           name: "Can Reset Password",
         })
       ).not.toBeChecked();
     });
 
     expect(
-      within(currentTab).getByRole("checkbox", { name: "Can Manage Users" })
+      within(currentTab).getByRole("switch", { name: "Can Manage Users" })
     ).toBeChecked();
 
     expect(
-      within(currentTab).getByRole("checkbox", {
+      within(currentTab).getByRole("switch", {
         name: "Can Configure App",
       })
     ).toBeChecked();
 
     expect(
-      within(currentTab).getByRole("checkbox", {
+      within(currentTab).getByRole("switch", {
         name: "Can Manage Permissions",
       })
     ).toBeChecked();
@@ -325,7 +325,7 @@ describe("pages/roles/[roleId]/index", () => {
 
       // De-select the child permission
       await userEvent.click(
-        await within(currentTab).findByRole("button", {
+        await within(currentTab).findByRole("switch", {
           name: "Can Manage All Entities",
         })
       );
@@ -335,14 +335,14 @@ describe("pages/roles/[roleId]/index", () => {
       await closeAllToasts();
 
       expect(
-        within(currentTab).queryByRole("checkbox", {
+        within(currentTab).queryByRole("switch", {
           name: "Can Configure App",
         })
       ).not.toBeChecked();
 
       // Select the parent permission
       await userEvent.click(
-        within(currentTab).getByRole("button", {
+        within(currentTab).getByRole("switch", {
           name: "Can Manage App Credentials",
         })
       );
@@ -363,26 +363,26 @@ describe("pages/roles/[roleId]/index", () => {
 
       // See the children permissions are turned on correctly
       expect(
-        within(currentTab).getByRole("checkbox", {
+        within(currentTab).getByRole("switch", {
           name: "Can Manage App Credentials",
         })
       ).toBeChecked();
 
       expect(
-        within(currentTab).getByRole("checkbox", {
+        within(currentTab).getByRole("switch", {
           name: "Can Configure App",
         })
       ).toBeChecked();
 
       expect(
-        within(currentTab).getByRole("checkbox", {
+        within(currentTab).getByRole("switch", {
           name: "Can Manage All Entities",
         })
       ).toBeChecked();
 
       // De-select the parent permission
       await userEvent.click(
-        await within(currentTab).findByRole("button", {
+        await within(currentTab).findByRole("switch", {
           name: "Can Manage All Entities",
         })
       );
@@ -401,19 +401,19 @@ describe("pages/roles/[roleId]/index", () => {
 
       // See the the child permissions are un-selected
       expect(
-        within(currentTab).queryByRole("checkbox", {
+        within(currentTab).queryByRole("switch", {
           name: "Can Manage App Credentials",
         })
       ).not.toBeChecked();
 
       expect(
-        within(currentTab).queryByRole("checkbox", {
+        within(currentTab).queryByRole("switch", {
           name: "Can Configure App",
         })
       ).not.toBeChecked();
 
       expect(
-        within(currentTab).queryByRole("checkbox", {
+        within(currentTab).queryByRole("switch", {
           name: "Can Manage All Entities",
         })
       ).not.toBeChecked();

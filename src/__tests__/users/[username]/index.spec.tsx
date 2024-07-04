@@ -1,6 +1,3 @@
-/* eslint-disable testing-library/no-node-access */
-/* eslint-disable testing-library/no-container */
-
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
@@ -45,7 +42,7 @@ describe("pages/users/[username]/index", () => {
         })
       );
 
-      const { container } = render(
+      render(
         <TestProviders>
           <UserUpdate />
         </TestProviders>
@@ -54,9 +51,12 @@ describe("pages/users/[username]/index", () => {
       await waitFor(() => {
         expect(screen.getByLabelText("Name")).toHaveValue("Some Name");
       });
-      expect(container.querySelector(`input[name="role"]`)).toHaveValue(
-        "viewer"
-      );
+
+      expect(
+        screen.getByRole("listbox", {
+          name: "Role",
+        })
+      ).toHaveValue("Viewer");
     });
 
     it("should update user details", async () => {
@@ -94,7 +94,8 @@ describe("pages/users/[username]/index", () => {
           },
         })
       );
-      const { container } = render(
+
+      render(
         <TestProviders>
           <UserUpdate />
         </TestProviders>
@@ -103,9 +104,11 @@ describe("pages/users/[username]/index", () => {
       await waitFor(() => {
         expect(screen.getByLabelText("Name")).toHaveValue("Updated Name");
       });
-      expect(container.querySelector(`input[name="role"]`)).toHaveValue(
-        "creator"
-      );
+      expect(
+        screen.getByRole("combobox", {
+          name: "Role",
+        })
+      ).toHaveTextContent("Creator");
     });
   });
 

@@ -10,7 +10,18 @@ const customJestConfig = {
 
   coverageProvider: "v8",
 
-  collectCoverageFrom: ["src/**/*.{ts,tsx}", "!**/Stories.tsx", "!**/.d.ts"],
+  collectCoverageFrom: ["src/**/*.{ts,tsx}", "!**/Stories.tsx", "!**/*.d.ts"],
+
+  collectCoverage: true,
+
+  coverageThreshold: {
+    global: {
+      branches: 85,
+      functions: 85,
+      lines: 85,
+      statements: 85,
+    },
+  },
 
   moduleDirectories: ["node_modules", "src"],
 
@@ -31,7 +42,7 @@ const customJestConfig = {
 
   testEnvironment: "jsdom",
 
-  testMatch: ["**/__tests__/**/?(*.)+(spec).ts?(x)", "**/?(*.)+(spec).ts?(x)"],
+  testMatch: ["**/?(*.)+(spec).ts?(x)"],
 
   transform: {},
 

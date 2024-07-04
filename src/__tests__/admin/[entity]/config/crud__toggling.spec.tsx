@@ -46,13 +46,6 @@ describe("pages/admin/[entity]/config/crud", () => {
     );
 
     expect(
-      await screen.findByRole("button", {
-        name: `Enable Create Functionality`,
-        hidden: true,
-      })
-    ).not.toBeVisible();
-
-    expect(
       await screen.findByRole("tab", { selected: true })
     ).toHaveTextContent("Table");
 
@@ -61,6 +54,13 @@ describe("pages/admin/[entity]/config/crud", () => {
         name: `Disable Table Functionality`,
       })
     ).not.toBeInTheDocument();
+
+    expect(
+      await screen.findByRole("button", {
+        name: `Enable Create Functionality`,
+        hidden: true,
+      })
+    ).not.toBeVisible();
   });
 
   describe.each([
@@ -91,7 +91,7 @@ describe("pages/admin/[entity]/config/crud", () => {
 
       if (tab !== "Delete") {
         expect(
-          await within(currentTab).findByRole("checkbox", { name: "Field 1" })
+          await within(currentTab).findByRole("switch", { name: "Field 1" })
         ).toBeInTheDocument();
       }
 
@@ -102,7 +102,7 @@ describe("pages/admin/[entity]/config/crud", () => {
       );
       if (tab !== "Delete") {
         expect(
-          within(currentTab).queryByRole("checkbox", { name: "Field 1" })
+          within(currentTab).queryByRole("switch", { name: "Field 1" })
         ).not.toBeInTheDocument();
       }
 
@@ -122,7 +122,7 @@ describe("pages/admin/[entity]/config/crud", () => {
 
       if (tab !== "Delete") {
         expect(
-          within(currentTab).queryByRole("checkbox", { name: "Field 1" })
+          within(currentTab).queryByRole("switch", { name: "Field 1" })
         ).not.toBeInTheDocument();
       }
 
@@ -133,7 +133,7 @@ describe("pages/admin/[entity]/config/crud", () => {
       );
       if (tab !== "Delete") {
         expect(
-          within(currentTab).getByRole("checkbox", { name: "Field 1" })
+          within(currentTab).getByRole("switch", { name: "Field 1" })
         ).toBeInTheDocument();
       }
       expect((await screen.findAllByRole("status"))[0]).toHaveTextContent(

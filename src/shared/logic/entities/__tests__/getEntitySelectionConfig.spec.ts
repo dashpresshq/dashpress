@@ -117,33 +117,24 @@ describe("getEntitySelectionConfig", () => {
         [
           {
             "label": {
-              "id": "J/hVSQ",
-              "message": "{0}",
-              "values": {
-                "0": "Pending",
-              },
+              "id": "Pending",
+              "message": "Pending",
             },
             "spectrum": "green",
             "value": "pending",
           },
           {
             "label": {
-              "id": "J/hVSQ",
-              "message": "{0}",
-              "values": {
-                "0": "Approved",
-              },
+              "id": "Approved",
+              "message": "Approved",
             },
             "spectrum": "red",
             "value": "approved",
           },
           {
             "label": {
-              "id": "J/hVSQ",
-              "message": "{0}",
-              "values": {
-                "0": "Rejected",
-              },
+              "id": "Rejected",
+              "message": "Rejected",
             },
             "spectrum": "blue",
             "value": "rejected",
@@ -233,33 +224,24 @@ describe("getEntitySelectionConfig", () => {
           },
           {
             "label": {
-              "id": "J/hVSQ",
-              "message": "{0}",
-              "values": {
-                "0": "Pending",
-              },
+              "id": "Pending",
+              "message": "Pending",
             },
             "spectrum": "green",
             "value": "pending",
           },
           {
             "label": {
-              "id": "J/hVSQ",
-              "message": "{0}",
-              "values": {
-                "0": "Approved",
-              },
+              "id": "Approved",
+              "message": "Approved",
             },
             "spectrum": "red",
             "value": "approved",
           },
           {
             "label": {
-              "id": "J/hVSQ",
-              "message": "{0}",
-              "values": {
-                "0": "Rejected",
-              },
+              "id": "Rejected",
+              "message": "Rejected",
             },
             "spectrum": "blue",
             "value": "rejected",
@@ -308,22 +290,16 @@ describe("getEntitySelectionConfig", () => {
           },
           {
             "label": {
-              "id": "J/hVSQ",
-              "message": "{0}",
-              "values": {
-                "0": "Pending",
-              },
+              "id": "Pending",
+              "message": "Pending",
             },
             "spectrum": "green",
             "value": "pending",
           },
           {
             "label": {
-              "id": "J/hVSQ",
-              "message": "{0}",
-              "values": {
-                "0": "Rejected",
-              },
+              "id": "Rejected",
+              "message": "Rejected",
             },
             "spectrum": "blue",
             "value": "rejected",
@@ -368,33 +344,24 @@ describe("getEntitySelectionConfig", () => {
           },
           {
             "label": {
-              "id": "J/hVSQ",
-              "message": "{0}",
-              "values": {
-                "0": "Pending",
-              },
+              "id": "Pending",
+              "message": "Pending",
             },
             "spectrum": undefined,
             "value": "pending",
           },
           {
             "label": {
-              "id": "J/hVSQ",
-              "message": "{0}",
-              "values": {
-                "0": "Approved",
-              },
+              "id": "Approved",
+              "message": "Approved",
             },
             "spectrum": undefined,
             "value": "approved",
           },
           {
             "label": {
-              "id": "J/hVSQ",
-              "message": "{0}",
-              "values": {
-                "0": "Rejected",
-              },
+              "id": "Rejected",
+              "message": "Rejected",
             },
             "spectrum": undefined,
             "value": "rejected",

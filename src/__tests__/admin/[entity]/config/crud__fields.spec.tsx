@@ -73,18 +73,18 @@ describe("pages/admin/[entity]/config/crud", () => {
 
       await waitFor(() => {
         expect(
-          within(currentTab).getByRole("checkbox", {
+          within(currentTab).getByRole("switch", {
             name: "Hidden Field 1",
           })
         ).not.toBeChecked();
       });
 
       expect(
-        await within(currentTab).findByRole("checkbox", { name: "Field 1" })
+        await within(currentTab).findByRole("switch", { name: "Field 1" })
       ).toBeChecked();
 
       expect(
-        within(currentTab).getByRole("checkbox", {
+        within(currentTab).getByRole("switch", {
           name: "Field 2",
         })
       ).toBeChecked();
@@ -100,18 +100,18 @@ describe("pages/admin/[entity]/config/crud", () => {
       const currentTab = screen.getByRole("tabpanel", { name: tab });
 
       await userEvent.click(
-        await within(currentTab).findByRole("button", { name: "Field 1" })
+        await within(currentTab).findByRole("switch", { name: "Field 1" })
       );
 
       await userEvent.click(
-        within(currentTab).getByRole("button", { name: "Field 2" })
+        within(currentTab).getByRole("switch", { name: "Field 2" })
       );
       await userEvent.click(
-        within(currentTab).getByRole("button", { name: "Field 2" })
+        within(currentTab).getByRole("switch", { name: "Field 2" })
       );
 
       await userEvent.click(
-        within(currentTab).getByRole("button", { name: "Hidden Field 1" })
+        within(currentTab).getByRole("switch", { name: "Hidden Field 1" })
       );
 
       expect((await screen.findAllByRole("status"))[0]).toHaveTextContent(
@@ -130,18 +130,18 @@ describe("pages/admin/[entity]/config/crud", () => {
 
       await waitFor(async () => {
         expect(
-          await within(currentTab).findByRole("checkbox", { name: "Field 1" })
+          await within(currentTab).findByRole("switch", { name: "Field 1" })
         ).not.toBeChecked();
       });
 
       expect(
-        await within(currentTab).findByRole("checkbox", {
+        await within(currentTab).findByRole("switch", {
           name: "Field 2",
         })
       ).toBeChecked();
 
       expect(
-        within(currentTab).getByRole("checkbox", {
+        within(currentTab).getByRole("switch", {
           name: "Hidden Field 1",
         })
       ).toBeChecked();
@@ -165,7 +165,7 @@ describe("pages/admin/[entity]/config/crud", () => {
     );
 
     expect(
-      screen.queryByRole("checkbox", {
+      screen.queryByRole("switch", {
         name: "Primary",
       })
     ).not.toBeInTheDocument();
@@ -173,7 +173,7 @@ describe("pages/admin/[entity]/config/crud", () => {
     await userEvent.click(screen.getByRole("tab", { name: "Details" }));
 
     expect(
-      screen.queryByRole("checkbox", {
+      screen.queryByRole("switch", {
         name: "Primary",
       })
     ).not.toBeInTheDocument();
@@ -181,7 +181,7 @@ describe("pages/admin/[entity]/config/crud", () => {
     await userEvent.click(screen.getByRole("tab", { name: "Create" }));
 
     expect(
-      screen.queryByRole("checkbox", {
+      screen.queryByRole("switch", {
         name: "Primary",
       })
     ).not.toBeInTheDocument();
@@ -189,7 +189,7 @@ describe("pages/admin/[entity]/config/crud", () => {
     await userEvent.click(screen.getByRole("tab", { name: "Update" }));
 
     expect(
-      screen.queryByRole("checkbox", {
+      screen.queryByRole("switch", {
         name: "Primary",
       })
     ).not.toBeInTheDocument();
@@ -217,13 +217,13 @@ describe("pages/admin/[entity]/config/crud", () => {
     ).toHaveTextContent("Delete");
 
     expect(
-      screen.queryByRole("checkbox", {
+      screen.queryByRole("switch", {
         name: "Primary",
       })
     ).not.toBeInTheDocument();
 
     expect(
-      screen.queryByRole("checkbox", {
+      screen.queryByRole("switch", {
         name: "Field 1",
       })
     ).not.toBeInTheDocument();

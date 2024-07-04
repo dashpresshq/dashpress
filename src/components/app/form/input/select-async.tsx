@@ -8,16 +8,17 @@ import { FormSelect } from "./select";
 import { IBaseFormSelect } from "./types";
 import { transformLabelValueToSelectData } from "@/translations/fake";
 
+const limit = 50;
+
 interface IProps extends IBaseFormSelect {
   url: string;
   referenceUrl?: (value: string) => string;
-  limit?: number;
 }
 
 export function AsyncFormSelect(props: IProps) {
   const { _ } = useLingui();
 
-  const { input, url, referenceUrl, limit = 50 } = props;
+  const { input, url, referenceUrl } = props;
 
   const [search, setSearch] = useState("");
   const [debounceSearch, setDebounceSearch] = useState("");

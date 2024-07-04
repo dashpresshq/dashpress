@@ -51,11 +51,14 @@ describe("Table Filters", () => {
       render(<TestComponent type={type} />);
 
       await userEvent.click(
-        screen.getByLabelText("Filter Test Column By Search")
+        screen.getByRole("button", { name: "Filter Test Column By Search" })
       );
 
-      expect(screen.getAllByRole("option").map((option) => option.textContent))
-        .toMatchInlineSnapshot(`
+      expect(
+        (await screen.findAllByRole("option")).map(
+          (option) => option.textContent
+        )
+      ).toMatchInlineSnapshot(`
           [
             "Contains",
             "Equal",
@@ -68,7 +71,7 @@ describe("Table Filters", () => {
       render(<TestComponent type={type} />);
 
       await userEvent.click(
-        screen.getByLabelText("Filter Test Column By Search")
+        screen.getByRole("button", { name: "Filter Test Column By Search" })
       );
 
       await userEvent.type(screen.getByPlaceholderText("Search"), "Hello");
@@ -105,7 +108,9 @@ describe("Table Filters", () => {
       );
 
       await userEvent.click(
-        screen.getByLabelText("Filter Test Column By Search Is Active")
+        screen.getByRole("button", {
+          name: "Filter Test Column By Search Is Active",
+        })
       );
 
       expect(screen.getByPlaceholderText("Search")).toHaveValue(
@@ -133,7 +138,7 @@ describe("Table Filters", () => {
       render(<TestComponent type={type} />);
 
       await userEvent.click(
-        screen.getByLabelText("Filter Test Column By Number")
+        screen.getByRole("button", { name: "Filter Test Column By Number" })
       );
 
       expect(screen.getAllByRole("option").map((option) => option.textContent))
@@ -152,7 +157,7 @@ describe("Table Filters", () => {
       render(<TestComponent type={type} />);
 
       await userEvent.click(
-        screen.getByLabelText("Filter Test Column By Number")
+        screen.getByRole("button", { name: "Filter Test Column By Number" })
       );
 
       await userEvent.type(
@@ -199,7 +204,9 @@ describe("Table Filters", () => {
       );
 
       await userEvent.click(
-        screen.getByLabelText("Filter Test Column By Number Is Active")
+        screen.getByRole("button", {
+          name: "Filter Test Column By Number Is Active",
+        })
       );
 
       expect(screen.getByRole("spinbutton", { name: "Value 1" })).toHaveValue(
@@ -239,7 +246,9 @@ describe("Table Filters", () => {
     it("should have the correct options", async () => {
       render(<TestComponent type={type} />);
 
-      await userEvent.click(screen.getByLabelText("Filter Test Column By Id"));
+      await userEvent.click(
+        screen.getByRole("button", { name: "Filter Test Column By Id" })
+      );
 
       expect(
         screen
@@ -255,7 +264,9 @@ describe("Table Filters", () => {
     it("should filter by value correctly", async () => {
       render(<TestComponent type={type} />);
 
-      await userEvent.click(screen.getByLabelText("Filter Test Column By Id"));
+      await userEvent.click(
+        screen.getByRole("button", { name: "Filter Test Column By Id" })
+      );
 
       await userEvent.type(screen.getByPlaceholderText("Enter value"), "12345");
 
@@ -283,7 +294,9 @@ describe("Table Filters", () => {
       );
 
       await userEvent.click(
-        screen.getByLabelText("Filter Test Column By Id Is Active")
+        screen.getByRole("button", {
+          name: "Filter Test Column By Id Is Active",
+        })
       );
 
       expect(screen.getByPlaceholderText("Enter value")).toHaveValue("789");
@@ -318,7 +331,7 @@ describe("Table Filters", () => {
       render(<TestComponent type={type} />);
 
       await userEvent.click(
-        screen.getByLabelText("Filter Test Column By Boolean")
+        screen.getByRole("button", { name: "Filter Test Column By Boolean" })
       );
 
       expect(screen.getAllByRole("option").map((option) => option.textContent))
@@ -335,7 +348,7 @@ describe("Table Filters", () => {
       render(<TestComponent type={type} />);
 
       await userEvent.click(
-        screen.getByLabelText("Filter Test Column By Boolean")
+        screen.getByRole("button", { name: "Filter Test Column By Boolean" })
       );
 
       await userEvent.selectOptions(
@@ -390,7 +403,9 @@ describe("Table Filters", () => {
       );
 
       await userEvent.click(
-        screen.getByLabelText("Filter Test Column By Boolean Is Active")
+        screen.getByRole("button", {
+          name: "Filter Test Column By Boolean Is Active",
+        })
       );
 
       expect(
@@ -434,7 +449,7 @@ describe("Table Filters", () => {
       render(<TestComponent type={type} />);
 
       await userEvent.click(
-        screen.getByLabelText("Filter Test Column By Status")
+        screen.getByRole("button", { name: "Filter Test Column By Status" })
       );
 
       expect(screen.getAllByRole("option").map((option) => option.textContent))
@@ -450,7 +465,7 @@ describe("Table Filters", () => {
       render(<TestComponent type={type} />);
 
       await userEvent.click(
-        screen.getByLabelText("Filter Test Column By Status")
+        screen.getByRole("button", { name: "Filter Test Column By Status" })
       );
 
       await userEvent.type(
@@ -460,10 +475,12 @@ describe("Table Filters", () => {
 
       await userEvent.keyboard("{Enter}");
 
-      await userEvent.clear(screen.getByLabelText("Select Status"));
+      await userEvent.clear(
+        screen.getByRole("button", { name: "Select Status" })
+      );
 
       await userEvent.type(
-        screen.getByLabelText("Select Status"),
+        screen.getByRole("button", { name: "Select Status" }),
         "Option 2 Label"
       );
 
@@ -504,7 +521,9 @@ describe("Table Filters", () => {
       );
 
       await userEvent.click(
-        screen.getByLabelText("Filter Test Column By Status Is Active")
+        screen.getByRole("button", {
+          name: "Filter Test Column By Status Is Active",
+        })
       );
 
       await userEvent.type(
@@ -532,7 +551,7 @@ describe("Table Filters", () => {
     render(<TestComponent type={{ _type: "string", bag: undefined }} />);
 
     await userEvent.click(
-      screen.getByLabelText("Filter Test Column By Search")
+      screen.getByRole("button", { name: "Filter Test Column By Search" })
     );
 
     await userEvent.type(screen.getByPlaceholderText("Search"), "Hello");

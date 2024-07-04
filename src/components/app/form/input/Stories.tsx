@@ -203,7 +203,6 @@ function DemoForm() {
               <AsyncFormSelect
                 url="http://localhost:3000/roles"
                 label={fakeMessageDescriptor("Async Select Input")}
-                limit={2}
                 {...formProps}
               />
             )}

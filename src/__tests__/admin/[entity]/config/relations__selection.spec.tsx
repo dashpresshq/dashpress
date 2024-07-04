@@ -36,26 +36,26 @@ describe("pages/admin/[entity]/config/relations", () => {
 
       await waitFor(async () => {
         expect(
-          await within(currentTab).findByRole("checkbox", {
+          await within(currentTab).findByRole("switch", {
             name: "Plural hidden-related-entity-5",
           })
         ).not.toBeChecked();
       });
 
       expect(
-        within(currentTab).getByRole("checkbox", {
+        within(currentTab).getByRole("switch", {
           name: "Custom Label For Entity 2",
         })
       ).toBeChecked();
 
       expect(
-        within(currentTab).getByRole("checkbox", {
+        within(currentTab).getByRole("switch", {
           name: "Plural related-entity-3",
         })
       ).toBeChecked();
 
       expect(
-        within(currentTab).getByRole("checkbox", {
+        within(currentTab).getByRole("switch", {
           name: "Custom Label For Entity 4",
         })
       ).toBeChecked();
@@ -73,22 +73,22 @@ describe("pages/admin/[entity]/config/relations", () => {
       });
 
       await userEvent.click(
-        within(currentTab).getByRole("button", {
+        within(currentTab).getByRole("switch", {
           name: "Custom Label For Entity 4",
         })
       );
       await userEvent.click(
-        within(currentTab).getByRole("button", {
+        within(currentTab).getByRole("switch", {
           name: "Plural related-entity-3",
         })
       );
       await userEvent.click(
-        within(currentTab).getByRole("button", {
+        within(currentTab).getByRole("switch", {
           name: "Plural related-entity-3",
         })
       );
       await userEvent.click(
-        within(currentTab).getByRole("button", {
+        within(currentTab).getByRole("switch", {
           name: "Plural hidden-related-entity-5",
         })
       );
@@ -109,26 +109,26 @@ describe("pages/admin/[entity]/config/relations", () => {
 
       await waitFor(async () => {
         expect(
-          await within(currentTab).findByRole("checkbox", {
+          await within(currentTab).findByRole("switch", {
             name: "Custom Label For Entity 4",
           })
         ).not.toBeChecked();
       });
 
       expect(
-        within(currentTab).getByRole("checkbox", {
+        within(currentTab).getByRole("switch", {
           name: "Custom Label For Entity 2",
         })
       ).toBeChecked();
 
       expect(
-        within(currentTab).getByRole("checkbox", {
+        within(currentTab).getByRole("switch", {
           name: "Plural related-entity-3",
         })
       ).toBeChecked();
 
       expect(
-        within(currentTab).getByRole("checkbox", {
+        within(currentTab).getByRole("switch", {
           name: "Plural hidden-related-entity-5",
         })
       ).toBeChecked();

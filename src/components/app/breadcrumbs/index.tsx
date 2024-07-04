@@ -26,10 +26,6 @@ const ITEMS_TO_DISPLAY = 3;
 export function Breadcrumbs({ items, onCrumbClick }: IProps) {
   const [open, setOpen] = React.useState(false);
 
-  if (items.length <= 1) {
-    return null;
-  }
-
   const itemsWithOriginalIndex = items.map((item, index) => ({
     ...item,
     index,

@@ -43,12 +43,12 @@ export function FilterWrapper({
     <span onClick={(e) => e.stopPropagation()}>
       <Dropdown
         className="w-64"
+        ariaLabel={`Filter ${columnLabel} By ${filterLabel}${
+          filterHasValue ? " Is Active" : ""
+        }`}
         target={
           <SystemIcon
             icon={systemIcon}
-            aria-label={`Filter ${columnLabel} By ${filterLabel}${
-              filterHasValue ? " Is Active" : ""
-            }`}
             className={cn("w-4 h-4 text-muted align-text-top", {
               "text-primary": filterHasValue,
               "opacity-70": !filterHasValue,

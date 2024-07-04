@@ -24,21 +24,21 @@ describe("pages/admin/settings/menu", () => {
 
     await waitFor(async () => {
       expect(
-        await screen.findByRole("checkbox", {
+        await screen.findByRole("switch", {
           name: "Plural entity-3",
         })
       ).not.toBeChecked();
     });
 
     expect(
-      screen.getByRole("checkbox", { name: "Plural entity-1" })
+      screen.getByRole("switch", { name: "Plural entity-1" })
     ).toBeChecked();
     expect(
-      screen.getByRole("checkbox", { name: "Plural entity-2" })
+      screen.getByRole("switch", { name: "Plural entity-2" })
     ).toBeChecked();
 
     expect(
-      screen.queryByRole("checkbox", { name: "Plural entity-4" })
+      screen.queryByRole("switch", { name: "Plural entity-4" })
     ).not.toBeInTheDocument();
   });
 
@@ -50,19 +50,19 @@ describe("pages/admin/settings/menu", () => {
     );
 
     await userEvent.click(
-      screen.getByRole("button", { name: "Plural entity-3" })
+      screen.getByRole("switch", { name: "Plural entity-3" })
     );
 
     await userEvent.click(
-      screen.getByRole("button", { name: "Plural entity-1" })
+      screen.getByRole("switch", { name: "Plural entity-1" })
     );
 
     await userEvent.click(
-      screen.getByRole("button", { name: "Plural entity-2" })
+      screen.getByRole("switch", { name: "Plural entity-2" })
     );
 
     await userEvent.click(
-      screen.getByRole("button", { name: "Plural entity-2" })
+      screen.getByRole("switch", { name: "Plural entity-2" })
     );
 
     expect(
@@ -80,7 +80,7 @@ describe("pages/admin/settings/menu", () => {
     await waitFor(
       async () => {
         expect(
-          await screen.findByRole("checkbox", {
+          await screen.findByRole("switch", {
             name: "Plural entity-1",
           })
         ).not.toBeChecked();
@@ -91,10 +91,10 @@ describe("pages/admin/settings/menu", () => {
     );
 
     expect(
-      screen.getByRole("checkbox", { name: "Plural entity-3" })
+      screen.getByRole("switch", { name: "Plural entity-3" })
     ).toBeChecked();
     expect(
-      screen.getByRole("checkbox", { name: "Plural entity-2" })
+      screen.getByRole("switch", { name: "Plural entity-2" })
     ).toBeChecked();
   });
 });

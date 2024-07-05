@@ -1,5 +1,6 @@
-import type { IAppliedSchemaFormConfig } from "shared/form-schemas/types";
 import { msg } from "@lingui/macro";
+import type { IAppliedSchemaFormConfig } from "shared/form-schemas/types";
+
 import { makeIntegrationRequest } from "../makeIntegrationRequest";
 import type { IActionConfig } from "./types";
 

@@ -1,9 +1,10 @@
-import type { IWidgetConfig } from "shared/types/dashboard";
 import { forwardRef } from "react";
-import { DashboardWidgetPresentation } from "./Presentation";
+import type { IWidgetConfig } from "shared/types/dashboard";
+
 import { useDasboardWidgetScriptData } from "../dashboard.store";
-import type { IWidgetSettingProps } from "./_components/WidgetHeader/types";
 import { useDashboardWidgetRelativeDateStore } from "../relativeTime.store";
+import type { IWidgetSettingProps } from "./_components/WidgetHeader/types";
+import { DashboardWidgetPresentation } from "./Presentation";
 
 interface IProps {
   config: IWidgetConfig;

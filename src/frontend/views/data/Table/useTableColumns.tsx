@@ -1,3 +1,9 @@
+import { msg } from "@lingui/macro";
+import {
+  useAppConfiguration,
+  useEntityConfiguration,
+} from "frontend/hooks/configuration/configuration.store";
+import { ENTITY_LIST_PATH } from "frontend/hooks/data/constants";
 import {
   useEntityCrudFields,
   useEntityFieldLabels,
@@ -8,27 +14,23 @@ import {
   useEntityIdField,
   useEntityToOneReferenceFields,
 } from "frontend/hooks/entity/entity.store";
-import { FIELD_TYPES_CONFIG_MAP } from "shared/validations";
-import type { IColorableSelection } from "shared/types/ui";
-import { ENTITY_LIST_PATH } from "frontend/hooks/data/constants";
-import {
-  useAppConfiguration,
-  useEntityConfiguration,
-} from "frontend/hooks/configuration/configuration.store";
+import { useEvaluateScriptContext } from "frontend/hooks/scripts";
 import type { DataStateKeys } from "frontend/lib/data/types";
+import type { ReactNode } from "react";
 import { ellipsis } from "shared/lib/strings";
 import type { TableFilterType } from "shared/types/data";
-import { useEvaluateScriptContext } from "frontend/hooks/scripts";
-import type { ReactNode } from "react";
+import type { IColorableSelection } from "shared/types/ui";
+import { FIELD_TYPES_CONFIG_MAP } from "shared/validations";
 import type { FormFieldTypes } from "shared/validations/types";
-import { msg } from "@lingui/macro";
+
 import { ActionButtons } from "@/components/app/button/action";
 import type { ITableColumn } from "@/components/app/table/types";
-import { viewSpecialDataTypes } from "../viewSpecialDataTypes";
-import { PortalColumnRender, usePortalTableColumns } from "./portal";
+
+import { usePortalActionButtons } from "../Details/portal";
 import { evalutePresentationScript } from "../evaluatePresentationScript";
 import { useEntityActionButtons } from "../hooks/useEntityActionButtons";
-import { usePortalActionButtons } from "../Details/portal";
+import { viewSpecialDataTypes } from "../viewSpecialDataTypes";
+import { PortalColumnRender, usePortalTableColumns } from "./portal";
 
 export const ACTIONS_ACCESSOR = "__actions__";
 

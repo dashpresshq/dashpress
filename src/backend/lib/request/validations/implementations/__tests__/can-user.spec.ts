@@ -1,9 +1,9 @@
-import { requestHandler } from "backend/lib/request";
-import { UserPermissions } from "shared/constants/user";
 import {
   createAuthenticatedMocks,
   createAuthenticatedViewerMocks,
 } from "__tests__/api/_test-utils";
+import { requestHandler } from "backend/lib/request";
+import { UserPermissions } from "shared/constants/user";
 
 const handler = requestHandler(
   {

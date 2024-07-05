@@ -1,16 +1,18 @@
-import Editor from "react-simple-code-editor";
-import { highlight, languages } from "prismjs/components/prism-core";
-import { noop } from "shared/lib/noop";
-import { useLingui } from "@lingui/react";
 import "prismjs/components/prism-clike";
 import "prismjs/components/prism-javascript";
+
+import { useLingui } from "@lingui/react";
+import { highlight, languages } from "prismjs/components/prism-core";
+import Editor from "react-simple-code-editor";
+import { noop } from "shared/lib/noop";
+
 import {
-  LabelAndError,
   generateClassNames,
+  LabelAndError,
 } from "@/components/app/form/input/label-and-error";
+import type { ISharedFormInput } from "@/components/app/form/input/types";
 import styles from "@/components/app/render-code/styles.module.css";
 import { cn } from "@/lib/utils";
-import type { ISharedFormInput } from "@/components/app/form/input/types";
 
 interface IFormCodeEditor extends ISharedFormInput {
   language?: "javascript";

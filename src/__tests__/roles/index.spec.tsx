@@ -1,13 +1,12 @@
-import { render, screen, within, waitFor } from "@testing-library/react";
-
-import ListRoles from "pages/roles";
-
-import { setupApiHandlers } from "__tests__/_/setupApihandlers";
-import userEvent from "@testing-library/user-event";
-import { getTableRows } from "__tests__/_/utils/getTableRows";
 import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
 import { TestProviders } from "__tests__/_/Provider";
-import { getToastMessage } from "../_/utils/closeAllToasts";
+import { setupApiHandlers } from "__tests__/_/setupApihandlers";
+import { getTableRows } from "__tests__/_/utils/getTableRows";
+import { render, screen, within } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import ListRoles from "pages/roles";
+
+import { confirmDelete, getToastMessage } from "../_/utils/closeAllToasts";
 
 setupApiHandlers();
 
@@ -45,17 +44,13 @@ describe("pages/roles", () => {
         <ListRoles />
       </TestProviders>
     );
-    await userEvent.click(screen.getByRole("button", { name: "Add New Role" }));
-    await waitFor(() => {
-      expect(pushMock).toHaveBeenCalledWith("/roles/create");
-    });
+    expect(screen.getByRole("link", { name: "Add New Role" })).toHaveAttribute(
+      "href",
+      "/roles/create"
+    );
   });
 
   it("should link to role permissions for only non-system roles", async () => {
-    const pushMock = jest.fn();
-
-    useRouter.mockImplementation(USE_ROUTER_PARAMS({ pushMock }));
-
     render(
       <TestProviders>
         <ListRoles />
@@ -100,13 +95,7 @@ describe("pages/roles", () => {
       })
     );
 
-    const confirmBox = await screen.findByRole("alertdialog", {
-      name: "Confirm Delete",
-    });
-
-    await userEvent.click(
-      await within(confirmBox).findByRole("button", { name: "Confirm" })
-    );
+    await confirmDelete();
 
     expect(await getToastMessage()).toBe("Role Deleted Successfully");
 

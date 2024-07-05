@@ -1,4 +1,5 @@
 import type { RedisClientType } from "redis";
+
 import type { ConfigApiService } from "../config/config.service";
 import { ConfigKeys } from "../config/config.service";
 import { getRedisConnection } from "../connection/redis";

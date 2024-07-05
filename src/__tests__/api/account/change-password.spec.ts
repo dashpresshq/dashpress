@@ -1,9 +1,10 @@
-import handler from "pages/api/account/change-password";
-import signInHandler from "pages/api/auth/signin";
 import {
   createAuthenticatedMocks,
   setupAllTestData,
 } from "__tests__/api/_test-utils";
+import handler from "pages/api/account/change-password";
+import signInHandler from "pages/api/auth/signin";
+
 import { createUnAuthenticatedMocks } from "../_test-utils/_authenticatedMock";
 
 describe("/api/account/change-password", () => {

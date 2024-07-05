@@ -1,11 +1,13 @@
 import type { MessageDescriptor } from "@lingui/core";
 import { useLingui } from "@lingui/react";
 import type { ReactNode } from "react";
+
 import { cn } from "@/lib/utils";
-import { Sheet, SheetContent, SheetHeader, SheetTitle } from "../ui/sheet";
-import { Separator } from "../ui/separator";
-import { NextPortal } from "./next-portal";
+
 import { ScrollArea } from "../ui/scroll-area";
+import { Separator } from "../ui/separator";
+import { Sheet, SheetContent, SheetHeader, SheetTitle } from "../ui/sheet";
+import { NextPortal } from "./next-portal";
 
 export interface IProps {
   show: boolean;

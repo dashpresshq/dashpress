@@ -1,15 +1,15 @@
-/* eslint-disable react/prop-types */
-import * as React from "react";
-import * as SelectPrimitive from "@radix-ui/react-select";
-
-import { useLingui } from "@lingui/react";
 import type { MessageDescriptor } from "@lingui/core";
-import { Check, ChevronDown, ChevronUp, Loader } from "react-feather";
 import { msg } from "@lingui/macro";
+import { useLingui } from "@lingui/react";
+import * as SelectPrimitive from "@radix-ui/react-select";
+import * as React from "react";
+import { Check, ChevronDown, ChevronUp, Loader } from "react-feather";
+
 import { cn } from "@/lib/utils";
 import type { ISelectData } from "@/shared/types/options";
-import { FormSearch } from "../app/form/input/search";
+
 import { EmptyWrapper } from "../app/empty-wrapper";
+import { FormSearch } from "../app/form/input/search";
 import { ListSkeleton } from "../app/skeleton/list";
 
 const SelectRoot = SelectPrimitive.Root;

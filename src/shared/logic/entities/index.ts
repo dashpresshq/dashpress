@@ -1,4 +1,4 @@
 export {
-  getEntitySelections,
   getEntityFieldTypes,
+  getEntitySelections,
 } from "./getEntitySelections";

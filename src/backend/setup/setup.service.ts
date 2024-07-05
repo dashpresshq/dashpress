@@ -1,3 +1,4 @@
+import { DATABASE_CREDENTIAL_GROUP } from "backend/data/fields";
 import type { CredentialsApiService } from "backend/integrations-configurations";
 import { credentialsApiService } from "backend/integrations-configurations";
 import { getDbConnection } from "backend/lib/connection/db";
@@ -5,10 +6,9 @@ import { BadRequestError } from "backend/lib/errors";
 import type { UsersApiService } from "backend/users/users.service";
 import { usersApiService } from "backend/users/users.service";
 import type { ISetupCheck } from "shared/types/auth";
+import type { IDataSourceCredentials } from "shared/types/data-sources";
 import type { IAccountUser } from "shared/types/user";
 import { SystemRoles } from "shared/types/user";
-import type { IDataSourceCredentials } from "shared/types/data-sources";
-import { DATABASE_CREDENTIAL_GROUP } from "backend/data/fields";
 
 export type IAccountUserSetupFields = Pick<
   IAccountUser,

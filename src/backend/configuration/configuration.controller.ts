@@ -1,6 +1,7 @@
 import { BadRequestError } from "backend/lib/errors";
 import type { AppConfigurationKeys } from "shared/configurations";
 import { APP_CONFIGURATION_CONFIG } from "shared/configurations";
+
 import type { ConfigurationApiService } from "./configuration.service";
 import { configurationApiService } from "./configuration.service";
 

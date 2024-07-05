@@ -1,5 +1,6 @@
-import type { ReactNode } from "react";
 import { TooltipContent } from "@radix-ui/react-tooltip";
+import type { ReactNode } from "react";
+
 import {
   TooltipProvider,
   TooltipRoot,

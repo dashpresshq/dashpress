@@ -1,15 +1,16 @@
+import { useDomainMessages } from "frontend/lib/crud-config";
+import { LANG_DOMAINS } from "frontend/lib/crud-config/lang-domains";
 import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
 import { META_USER_PERMISSIONS } from "shared/constants/user";
 import type { IChangePasswordForm } from "shared/form-schemas/profile/password";
 import { CHANGE_PASSWORD_FORM_SCHEMA } from "shared/form-schemas/profile/password";
-import { useDomainMessages } from "frontend/lib/crud-config";
-import { LANG_DOMAINS } from "frontend/lib/crud-config/lang-domains";
+
 import { SchemaForm } from "@/components/app/form/schema";
 import { SectionBox } from "@/components/app/section-box";
-import { useChangePasswordMutation } from "../account.store";
-import { ACCOUNT_VIEW_KEY } from "../constants";
 
 import { BaseAccountLayout } from "../_Base";
+import { useChangePasswordMutation } from "../account.store";
+import { ACCOUNT_VIEW_KEY } from "../constants";
 
 export function AccountPassword() {
   const domainMessages = useDomainMessages(LANG_DOMAINS.ACCOUNT.PASSWORD);

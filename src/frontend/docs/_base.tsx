@@ -1,6 +1,8 @@
-import type { CSSProperties, ReactNode } from "react";
 import { msg } from "@lingui/macro";
+import type { CSSProperties, ReactNode } from "react";
+
 import { OffCanvas } from "@/components/app/off-canvas";
+
 import { useDocumentationCanvasStore } from "./constants";
 
 export function DocumentationRoot({ children }: { children: ReactNode }) {

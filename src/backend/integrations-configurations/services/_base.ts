@@ -2,6 +2,7 @@ import type { AbstractConfigDataPersistenceService } from "backend/lib/config-pe
 import type { EncryptionApiService } from "backend/lib/encryption/encryption.service";
 import { BadRequestError, progammingError } from "backend/lib/errors";
 import { typescriptSafeObjectDotEntries } from "shared/lib/objects";
+
 import type { IGroupCredential } from "../types";
 
 export const INTEGRATION_CONFIG_GROUP_DEMILITER = "___";

@@ -1,4 +1,5 @@
 import type { PaginatedData } from "shared/types/data";
+
 import type { IPaginationFilters } from "./types";
 
 export const makeTableData = (

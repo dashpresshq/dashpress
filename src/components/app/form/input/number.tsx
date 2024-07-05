@@ -1,7 +1,8 @@
 import type { ChangeEvent } from "react";
 import { useEffect } from "react";
-import type { ISharedFormInput } from "./types";
+
 import { FormInput } from "./text";
+import type { ISharedFormInput } from "./types";
 
 interface IFormNumberInput extends ISharedFormInput {
   allowNegative?: boolean;

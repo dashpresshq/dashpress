@@ -1,12 +1,14 @@
+import { useToggle } from "frontend/hooks/state/useToggleState";
+import { makeFileRequest } from "frontend/lib/data/makeRequest";
 import { useCallback, useState } from "react";
 import { useDropzone } from "react-dropzone";
-import { makeFileRequest } from "frontend/lib/data/makeRequest";
-import { useToggle } from "frontend/hooks/state/useToggleState";
 import { typescriptSafeObjectDotEntries } from "shared/lib/objects";
+
 import {
-  LabelAndError,
   generateClassNames,
+  LabelAndError,
 } from "@/components/app/form/input/label-and-error";
+
 import type { ISharedFormInput } from "../../../../../components/app/form/input/types";
 import { Presentation } from "./Presentation";
 

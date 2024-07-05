@@ -1,4 +1,5 @@
 import type { SpectrumColorTypes } from "@/components/ui/spectrum";
+
 import type { IPortalWidgetConfig } from "../portal/widgets";
 import type { ISharedWidgetConfig } from "./base";
 

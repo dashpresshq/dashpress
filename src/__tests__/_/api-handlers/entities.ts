@@ -1,5 +1,6 @@
 import { rest } from "msw";
 import type { IEntityField } from "shared/types/db";
+
 import { BASE_TEST_URL } from "./_utils";
 
 export const entitiesApiHandlers = [

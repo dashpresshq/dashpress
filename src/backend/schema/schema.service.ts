@@ -1,11 +1,12 @@
 import type { Entity } from "@dashpress/bacteria";
 import { introspect } from "@dashpress/bacteria";
+import type { Column } from "@dashpress/bacteria/dist/models/Column";
+import { DATABASE_CREDENTIAL_GROUP } from "backend/data/fields";
 import type { CredentialsApiService } from "backend/integrations-configurations";
 import { credentialsApiService } from "backend/integrations-configurations";
-import type { IDBSchema, IEntityField } from "shared/types/db";
 import type { IDataSourceCredentials } from "shared/types/data-sources";
-import { DATABASE_CREDENTIAL_GROUP } from "backend/data/fields";
-import type { Column } from "@dashpress/bacteria/dist/models/Column";
+import type { IDBSchema, IEntityField } from "shared/types/db";
+
 import type { AbstractConfigDataPersistenceService } from "../lib/config-persistence";
 import { createConfigDomainPersistenceService } from "../lib/config-persistence";
 

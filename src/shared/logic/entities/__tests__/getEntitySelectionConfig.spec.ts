@@ -1,4 +1,5 @@
 import { fakeMessageDescriptor } from "translations/fake";
+
 import { getEntitySelectionConfig } from "../getEntitySelectionConfig";
 
 describe("getEntitySelectionConfig", () => {

@@ -1,5 +1,6 @@
-import handler from "pages/api/setup/credentials";
 import { setupCredentialsTestData } from "__tests__/api/_test-utils";
+import handler from "pages/api/setup/credentials";
+
 import { createUnAuthenticatedMocks } from "../_test-utils/_authenticatedMock";
 
 describe("/api/setup/credentials", () => {

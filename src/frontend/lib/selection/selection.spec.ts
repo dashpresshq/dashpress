@@ -1,4 +1,5 @@
 import { renderHook } from "__tests__/_/lib/renderHook";
+
 import { useStringSelections } from ".";
 
 describe("useStringSelections", () => {

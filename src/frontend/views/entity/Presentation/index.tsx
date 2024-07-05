@@ -1,26 +1,28 @@
-import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
-import { useEntitySlug } from "frontend/hooks/entity/entity.config";
+import { msg } from "@lingui/macro";
+import { useDocumentationActionButton } from "frontend/docs/constants";
+import { PresentationScriptDocumentation } from "frontend/docs/scripts/presentations-scripts";
+import { useAppConfigurationDomainMessages } from "frontend/hooks/configuration/configuration.constant";
 import {
   useEntityConfiguration,
   useUpsertConfigurationMutation,
 } from "frontend/hooks/configuration/configuration.store";
-import { useAppConfigurationDomainMessages } from "frontend/hooks/configuration/configuration.constant";
-import { PresentationScriptDocumentation } from "frontend/docs/scripts/presentations-scripts";
-import { evalJavascriptString } from "shared/lib/script-runner";
-import { useDocumentationActionButton } from "frontend/docs/constants";
-import type { IPresentationScriptParams } from "frontend/views/data/evaluatePresentationScript";
+import { useEntitySlug } from "frontend/hooks/entity/entity.config";
 import { useEvaluateScriptContext } from "frontend/hooks/scripts";
-import { msg } from "@lingui/macro";
-import { fakeMessageDescriptor } from "translations/fake";
+import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
+import type { IPresentationScriptParams } from "frontend/views/data/evaluatePresentationScript";
 import { UserPermissions } from "shared/constants/user";
+import { evalJavascriptString } from "shared/lib/script-runner";
+import { fakeMessageDescriptor } from "translations/fake";
+
 import { SchemaForm } from "@/components/app/form/schema";
-import { ViewStateMachine } from "@/components/app/view-state-machine";
+import { SectionBox } from "@/components/app/section-box";
 import {
   FormSkeleton,
   FormSkeletonSchema,
 } from "@/components/app/skeleton/form";
-import { SectionBox } from "@/components/app/section-box";
 import { useToast } from "@/components/app/toast/use-toast";
+import { ViewStateMachine } from "@/components/app/view-state-machine";
+
 import { BaseEntitySettingsLayout } from "../_Base";
 import { ENTITY_CONFIGURATION_VIEW } from "../constants";
 

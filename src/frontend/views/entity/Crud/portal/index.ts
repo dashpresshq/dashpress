@@ -1,6 +1,6 @@
 export {
-  PortalEntityTableSettings,
   PortalEntityCreateSettings,
-  PortalEntityUpdateSettings,
   PortalEntityDetailsSettings,
+  PortalEntityTableSettings,
+  PortalEntityUpdateSettings,
 } from "./main";

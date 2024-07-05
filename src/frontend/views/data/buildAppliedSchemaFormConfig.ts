@@ -1,18 +1,18 @@
-import type {
-  IAppliedSchemaFormConfig,
-  ISchemaFormConfig,
-} from "shared/form-schemas/types";
+import { msg } from "@lingui/macro";
 import {
   ENTITY_LIST_PATH,
   ENTITY_REFERENCE_PATH,
 } from "frontend/hooks/data/constants";
+import type {
+  IAppliedSchemaFormConfig,
+  ISchemaFormConfig,
+} from "shared/form-schemas/types";
+import { userFriendlyCase } from "shared/lib/strings/friendly-case";
 import type { IColorableSelection } from "shared/types/ui";
 import type {
   FormFieldTypes,
   IFieldValidationItem,
 } from "shared/validations/types";
-import { userFriendlyCase } from "shared/lib/strings/friendly-case";
-import { msg } from "@lingui/macro";
 
 interface IEntitySchemaFormConfigProps {
   fields: string[];

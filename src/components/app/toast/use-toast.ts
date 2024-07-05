@@ -1,6 +1,6 @@
+import type { MessageDescriptor } from "@lingui/core";
 import * as React from "react";
 
-import type { MessageDescriptor } from "@lingui/core";
 import type { ToastProps } from "@/components/ui/toast";
 
 const TOAST_LIMIT = 1;
@@ -195,4 +195,4 @@ function useToast() {
   };
 }
 
-export { useToast, toast };
+export { toast, useToast };

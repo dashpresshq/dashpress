@@ -1,18 +1,18 @@
-import { setupApiHandlers } from "./setup";
 import { accountApiHandlers } from "./account";
 import { authApiHandlers } from "./auth";
-import { entitiesApiHandlers } from "./entities";
-import { dataApiHandlers } from "./data";
-import { rolesApiHandlers } from "./roles";
 import { configApiHandlers } from "./config";
 import { dashboardApiHandlers } from "./dashboard";
-import { integrationsApiHandlers } from "./integrations";
-import { versionApiHandlers } from "./versions";
-import { portalApiHandlers } from "./portal";
-import { menuApiHandlers } from "./menu";
-import { userPreferencesApiHandlers } from "./user-preferences";
+import { dataApiHandlers } from "./data";
+import { entitiesApiHandlers } from "./entities";
 import { formActionsApiHandlers } from "./form-actions";
+import { integrationsApiHandlers } from "./integrations";
 import { integrationsListApiHandlers } from "./integrations-list";
+import { menuApiHandlers } from "./menu";
+import { portalApiHandlers } from "./portal";
+import { rolesApiHandlers } from "./roles";
+import { setupApiHandlers } from "./setup";
+import { userPreferencesApiHandlers } from "./user-preferences";
+import { versionApiHandlers } from "./versions";
 
 export const apiHandlers = [
   ...setupApiHandlers,

@@ -1,10 +1,11 @@
-import { render, screen } from "@testing-library/react";
-import { msg } from "@lingui/macro";
 import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
 import { TestProviders } from "__tests__/_/Provider";
+import { msg } from "@lingui/macro";
+import { render, screen } from "@testing-library/react";
+
 import { Table } from ".";
-import type { ITableProps } from "./types";
 import { TABLE_COLUMNS, TABLE_DATA } from "./data";
+import type { ITableProps } from "./types";
 
 const DEFAULT_TABLE_PROPS: ITableProps<unknown> = {
   overridePaginatedDataState: {

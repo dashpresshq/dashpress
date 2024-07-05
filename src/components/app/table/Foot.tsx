@@ -1,5 +1,6 @@
 import type { Table } from "@tanstack/react-table";
 import { flexRender } from "@tanstack/react-table";
+
 import { TableFooter, TableHead, TableRow } from "@/components/ui/table";
 
 const SHOW_FOOTER_THRESHOLD = 20;

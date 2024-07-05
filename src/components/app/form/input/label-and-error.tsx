@@ -1,12 +1,14 @@
-import type { FieldMetaState } from "react-final-form";
 import { i18n } from "@lingui/core";
 import type { ReactNode } from "react";
-import { cn } from "@/lib/utils";
+import type { FieldMetaState } from "react-final-form";
+
 import { Label } from "@/components/ui/label";
-import { SystemIcon } from "../../system-icons";
+import { cn } from "@/lib/utils";
+
 import { SoftButton } from "../../button/soft";
-import type { ILabelAndErrorProps } from "./types";
+import { SystemIcon } from "../../system-icons";
 import { Tooltip } from "../../tooltip";
+import type { ILabelAndErrorProps } from "./types";
 
 export const isFormMetaWithError = (meta: FieldMetaState<any>) =>
   meta && meta.touched && meta.invalid && meta.error;

@@ -1,10 +1,12 @@
-import { UserPermissions } from "shared/constants/user";
-import { useUserHasPermission } from "frontend/hooks/auth/user.store";
-import { useRouter } from "next/router";
 import { AppLayout } from "frontend/_layouts/app";
+import { useUserHasPermission } from "frontend/hooks/auth/user.store";
 import { useDomainMessages } from "frontend/lib/crud-config";
 import { LANG_DOMAINS } from "frontend/lib/crud-config/lang-domains";
+import { useRouter } from "next/router";
+import { UserPermissions } from "shared/constants/user";
+
 import { ViewStateMachine } from "@/components/app/view-state-machine";
+
 import { useDashboardWidgets } from "../dashboard.store";
 import { DashboardSkeleton } from "../Skeleton";
 import { DashboardWidget } from "../Widget";

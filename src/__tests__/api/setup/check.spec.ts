@@ -1,9 +1,10 @@
-import handler from "pages/api/setup/check";
 import {
-  setupCredentialsTestData,
   setupAllTestData,
+  setupCredentialsTestData,
   setupUsersTestData,
 } from "__tests__/api/_test-utils";
+import handler from "pages/api/setup/check";
+
 import { createUnAuthenticatedMocks } from "../_test-utils/_authenticatedMock";
 
 describe("/api/setup/check", () => {

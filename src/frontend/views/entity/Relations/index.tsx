@@ -1,39 +1,41 @@
+import { msg } from "@lingui/macro";
+import { useDocumentationActionButton } from "frontend/docs/constants";
+import { RelationsSettingsDocumentation } from "frontend/docs/relations";
+import { useAppConfigurationDomainMessages } from "frontend/hooks/configuration/configuration.constant";
+import {
+  useEntityConfiguration,
+  useUpsertConfigurationMutation,
+} from "frontend/hooks/configuration/configuration.store";
+import { useEntitySlug } from "frontend/hooks/entity/entity.config";
+import { useEntityDictionPlurals } from "frontend/hooks/entity/entity.queries";
 import {
   ENTITY_RELATIONS_ENDPOINT,
   useEntityFields,
   useEntityReferenceFields,
   useEntityRelationsList,
 } from "frontend/hooks/entity/entity.store";
-import { EntitiesSelection } from "frontend/views/settings/Entities/Selection";
-import { useEntityDictionPlurals } from "frontend/hooks/entity/entity.queries";
-import { UserPermissions } from "shared/constants/user";
-import { useEntitySlug } from "frontend/hooks/entity/entity.config";
-import {
-  useEntityConfiguration,
-  useUpsertConfigurationMutation,
-} from "frontend/hooks/configuration/configuration.store";
-import { useAppConfigurationDomainMessages } from "frontend/hooks/configuration/configuration.constant";
-import { RelationsSettingsDocumentation } from "frontend/docs/relations";
 import { useChangeRouterParam } from "frontend/lib/routing/useChangeRouterParam";
-import { useRouteParam } from "frontend/lib/routing/useRouteParam";
 import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
-import { useDocumentationActionButton } from "frontend/docs/constants";
-import { msg } from "@lingui/macro";
+import { useRouteParam } from "frontend/lib/routing/useRouteParam";
+import { EntitiesSelection } from "frontend/views/settings/Entities/Selection";
+import { UserPermissions } from "shared/constants/user";
+
 import { SectionBox } from "@/components/app/section-box";
 import {
   FormSkeleton,
   FormSkeletonSchema,
 } from "@/components/app/skeleton/form";
 import { ListSkeleton } from "@/components/app/skeleton/list";
-import { ViewStateMachine } from "@/components/app/view-state-machine";
 import { Tabs } from "@/components/app/tabs";
+import { ViewStateMachine } from "@/components/app/view-state-machine";
+
+import { BaseEntitySettingsLayout } from "../_Base";
+import { ENTITY_CONFIGURATION_VIEW } from "../constants";
 import {
   FieldsLabelForm,
   loadingFieldsLabelForm,
 } from "../Fields/FieldsLabel.form";
-import { ENTITY_CONFIGURATION_VIEW } from "../constants";
 import { EntityRelationsForm } from "./Relations.form";
-import { BaseEntitySettingsLayout } from "../_Base";
 
 const RELATIONSHIP_SETTINGS = msg`Relationship Settings`;
 

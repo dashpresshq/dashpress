@@ -1,19 +1,21 @@
-import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
-import { UserPermissions } from "shared/constants/user";
+import { msg } from "@lingui/macro";
+import { useAppConfigurationDomainMessages } from "frontend/hooks/configuration/configuration.constant";
 import {
   useAppConfiguration,
   useUpsertConfigurationMutation,
 } from "frontend/hooks/configuration/configuration.store";
+import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
 import type { AppConfigurationValueType } from "shared/configurations/constants";
-import { msg } from "@lingui/macro";
-import { useAppConfigurationDomainMessages } from "frontend/hooks/configuration/configuration.constant";
+import { UserPermissions } from "shared/constants/user";
+
 import { SchemaForm } from "@/components/app/form/schema";
-import { ViewStateMachine } from "@/components/app/view-state-machine";
+import { SectionBox } from "@/components/app/section-box";
 import {
   FormSkeleton,
   FormSkeletonSchema,
 } from "@/components/app/skeleton/form";
-import { SectionBox } from "@/components/app/section-box";
+import { ViewStateMachine } from "@/components/app/view-state-machine";
+
 import { BaseSettingsLayout } from "../_Base";
 import { SETTINGS_VIEW_KEY } from "../constants";
 

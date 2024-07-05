@@ -3,12 +3,14 @@ import { flexRender } from "@tanstack/react-table";
 import * as React from "react";
 import { ArrowUp } from "react-feather";
 import type { TableFilterType } from "shared/types/data";
+
 import {
+  TableHead as TableHeadCmp,
   TableHeader,
   TableRow,
-  TableHead as TableHeadCmp,
 } from "@/components/ui/table";
 import { cn } from "@/lib/utils";
+
 import { TableFilter } from "./filters";
 
 interface IColumnMeta {

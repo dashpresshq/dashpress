@@ -1,12 +1,12 @@
+import { configurationApiService } from "backend/configuration/configuration.service";
+import { format } from "date-fns";
 import formidable from "formidable";
 import { mkdir, stat } from "fs/promises";
+import { nanoid } from "nanoid";
+import type { NextApiRequest } from "next";
 import { join } from "path";
 import { sluggify } from "shared/lib/strings";
-import { format } from "date-fns";
-import type { NextApiRequest } from "next";
-import { nanoid } from "nanoid";
 import { compileTemplateString } from "shared/lib/strings/templates";
-import { configurationApiService } from "backend/configuration/configuration.service";
 
 export async function parseForm(
   req: NextApiRequest

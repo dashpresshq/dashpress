@@ -1,13 +1,15 @@
-import Link from "next/link";
-import { Loader } from "react-feather";
-import type { BaseSyntheticEvent } from "react";
 import { useLingui } from "@lingui/react";
+import Link from "next/link";
+import type { BaseSyntheticEvent } from "react";
+import { Loader } from "react-feather";
+
 import { Button, buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { Tooltip } from "../tooltip";
+
 import { useConfirmAlert } from "../confirm-alert";
-import type { IActionButton } from "./types";
 import { SystemIcon } from "../system-icons";
+import { Tooltip } from "../tooltip";
+import type { IActionButton } from "./types";
 
 export function SoftButton({
   label,

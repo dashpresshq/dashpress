@@ -1,18 +1,20 @@
+import { useLingui } from "@lingui/react";
 import { FormCodeEditor } from "frontend/design-system/components/Form/CodeEditor";
 import { FormFileInput } from "frontend/design-system/components/Form/File";
 import { useExtendRenderFormInputProps } from "frontend/views/data/portal";
-import { useLingui } from "@lingui/react";
+
 import { FormInput } from "@/components/app/form/input/text";
-import type { IRenderFormInputProps } from "./types";
-import { FormNumberInput } from "../input/number";
-import { FormSelectButton } from "../input/select-button";
-import { FormPasswordInput } from "../input/password";
-import { FormTextArea } from "../input/textarea";
-import { FormSwitch } from "../input/switch";
+
 import { FormDateInput } from "../input/date";
+import { FormNumberInput } from "../input/number";
+import { FormPasswordInput } from "../input/password";
+import { FormRichTextArea } from "../input/rich-text";
 import { FormSelect } from "../input/select";
 import { AsyncFormSelect } from "../input/select-async";
-import { FormRichTextArea } from "../input/rich-text";
+import { FormSelectButton } from "../input/select-button";
+import { FormSwitch } from "../input/switch";
+import { FormTextArea } from "../input/textarea";
+import type { IRenderFormInputProps } from "./types";
 
 export function RenderFormInput(props: IRenderFormInputProps) {
   const {

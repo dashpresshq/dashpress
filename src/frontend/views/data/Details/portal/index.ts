@@ -1,5 +1,5 @@
 export {
+  PreDataDetails,
   useDetailsViewMenuItems,
   usePortalActionButtons,
-  PreDataDetails,
 } from "./main";

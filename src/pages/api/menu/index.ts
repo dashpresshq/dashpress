@@ -1,6 +1,6 @@
-import type { IAccountProfile } from "shared/types/user";
 import { requestHandler } from "backend/lib/request";
 import { navigationMenuApiService } from "backend/menu/menu.service";
+import type { IAccountProfile } from "shared/types/user";
 
 export default requestHandler({
   GET: async (getValidatedRequest) => {

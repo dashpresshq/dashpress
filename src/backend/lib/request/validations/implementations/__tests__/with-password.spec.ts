@@ -1,9 +1,9 @@
-import { requestHandler } from "backend/lib/request";
 import {
   createAuthenticatedMocks,
   createAuthenticatedViewerMocks,
   setupAllTestData,
 } from "__tests__/api/_test-utils";
+import { requestHandler } from "backend/lib/request";
 
 const handler = requestHandler(
   {

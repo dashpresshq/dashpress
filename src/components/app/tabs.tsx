@@ -1,12 +1,14 @@
-import type { ReactNode } from "react";
-import { useState, useEffect } from "react";
-import { sluggify } from "shared/lib/strings";
 import type { MessageDescriptor } from "@lingui/core";
-import * as TabsPrimitive from "@radix-ui/react-tabs";
 import { useLingui } from "@lingui/react";
+import * as TabsPrimitive from "@radix-ui/react-tabs";
+import type { ReactNode } from "react";
+import { useEffect, useState } from "react";
+import { sluggify } from "shared/lib/strings";
+
 import { cn } from "@/lib/utils";
-import { TabsContent, TabsList, TabsTrigger } from "../ui/tabs";
+
 import { ScrollArea } from "../ui/scroll-area";
+import { TabsContent, TabsList, TabsTrigger } from "../ui/tabs";
 
 interface IProps {
   contents: {

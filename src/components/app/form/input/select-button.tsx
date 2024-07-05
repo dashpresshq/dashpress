@@ -1,10 +1,12 @@
-import { sluggify } from "shared/lib/strings";
-import type { ISelectData } from "shared/types/options";
 import { useLingui } from "@lingui/react";
 import type { VariantProps } from "class-variance-authority";
+import { sluggify } from "shared/lib/strings";
+import type { ISelectData } from "shared/types/options";
+
 import type { buttonVariants } from "@/components/ui/button";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+
 import { LabelAndError } from "./label-and-error";
 import type { IBaseFormSelect } from "./types";
 

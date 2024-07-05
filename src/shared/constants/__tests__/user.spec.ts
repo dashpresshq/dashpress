@@ -1,4 +1,5 @@
 import { GranularEntityPermissions } from "shared/types/user";
+
 import { META_USER_PERMISSIONS } from "../user";
 
 describe("META_USER_PERMISSIONS", () => {

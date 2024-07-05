@@ -1,5 +1,5 @@
-import handler from "pages/api/integrations/actions/list";
 import { createAuthenticatedMocks } from "__tests__/api/_test-utils";
+import handler from "pages/api/integrations/actions/list";
 
 describe("/api/integrations/actions/list", () => {
   it("should list integrations", async () => {

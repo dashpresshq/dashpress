@@ -1,5 +1,6 @@
 import { createStore } from "frontend/lib/store";
 import type { IPaginatedDataState } from "shared/types/data";
+
 import { DEFAULT_TABLE_STATE } from "@/components/app/table";
 
 type IStore = {

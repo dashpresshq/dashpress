@@ -1,7 +1,7 @@
-import { requestHandler } from "backend/lib/request";
 import { integrationsConfigurationApiController } from "backend/integrations-configurations/integrations-configurations.controller";
-import type { IntegrationsConfigurationGroup } from "shared/types/integrations";
+import { requestHandler } from "backend/lib/request";
 import { UserPermissions } from "shared/constants/user";
+import type { IntegrationsConfigurationGroup } from "shared/types/integrations";
 
 export const integrationsConfigurationListRequestHandler = (
   group: IntegrationsConfigurationGroup

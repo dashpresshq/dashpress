@@ -1,11 +1,12 @@
-import * as React from "react";
-import { render, screen, waitFor } from "@testing-library/react";
-import { setupApiHandlers } from "__tests__/_/setupApihandlers";
-import UserSetup from "pages/setup/user";
-import userEvent from "@testing-library/user-event";
 import { SETUP_CHECK_DATA } from "__tests__/_/api-handlers/setup";
 import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
 import { TestProviders } from "__tests__/_/Provider";
+import { setupApiHandlers } from "__tests__/_/setupApihandlers";
+import { render, screen, waitFor } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import UserSetup from "pages/setup/user";
+import * as React from "react";
+
 import { getToastMessage } from "../_/utils/closeAllToasts";
 
 const server = setupApiHandlers();

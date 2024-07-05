@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
-
-import MyApp from "pages/_app";
 import type { CustomNextPage } from "frontend/_layouts/types";
+import MyApp from "pages/_app";
+
 import { USE_ROUTER_PARAMS } from "./_/constants";
 
 describe("pages/users", () => {
@@ -19,7 +19,6 @@ describe("pages/users", () => {
 
     render(
       <MyApp
-        // eslint-disable-next-line react/jsx-no-bind
         Component={Foo}
         pageProps={{ title: "Hello" }}
         router={jest.fn as any}

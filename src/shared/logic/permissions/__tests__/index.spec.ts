@@ -1,6 +1,6 @@
 import {
-  canRoleDoThisSync,
   canRoleDoThisAsync,
+  canRoleDoThisSync,
   doesPermissionAllowPermission,
 } from "..";
 

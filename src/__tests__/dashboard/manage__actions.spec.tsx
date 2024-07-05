@@ -1,12 +1,11 @@
-import { render, screen, within } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
-
-import ManageDashboard from "pages/dashboard/manage";
-
-import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
 import { TestProviders } from "__tests__/_/Provider";
-import { getToastMessage } from "../_/utils/closeAllToasts";
+import { setupApiHandlers } from "__tests__/_/setupApihandlers";
+import { render, screen, within } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import ManageDashboard from "pages/dashboard/manage";
+
+import { confirmDelete, getToastMessage } from "../_/utils/closeAllToasts";
 
 setupApiHandlers();
 
@@ -69,13 +68,7 @@ describe("pages/admin/settings/dashboard", () => {
         within(widget).getByRole("button", { name: "Delete Dashboard Widget" })
       );
 
-      const confirmBox = await screen.findByRole("alertdialog", {
-        name: "Confirm Delete",
-      });
-
-      await userEvent.click(
-        await within(confirmBox).findByRole("button", { name: "Confirm" })
-      );
+      await confirmDelete();
 
       expect(await getToastMessage()).toBe("Widget Deleted Successfully");
 

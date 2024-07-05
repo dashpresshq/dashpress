@@ -1,14 +1,16 @@
 import { useLingui } from "@lingui/react";
-import Link from "next/link";
-import { Loader } from "react-feather";
 import type { VariantProps } from "class-variance-authority";
+import Link from "next/link";
 import { useRouter } from "next/router";
+import { Loader } from "react-feather";
+
 import { Card } from "@/components/ui/card";
-import { CommandItem, Command, CommandList } from "@/components/ui/command";
+import { Command, CommandItem, CommandList } from "@/components/ui/command";
 import { cn } from "@/lib/utils";
+
 import { Button, buttonVariants } from "../ui/button";
-import { useConfirmAlert } from "./confirm-alert";
 import type { IMenuActionItem } from "./button/types";
+import { useConfirmAlert } from "./confirm-alert";
 import { SystemIcon } from "./system-icons";
 
 export interface IProps {

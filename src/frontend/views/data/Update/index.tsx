@@ -1,23 +1,25 @@
-import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
-import { useNavigationStack } from "frontend/lib/routing/useNavigationStack";
-import { META_USER_PERMISSIONS, UserPermissions } from "shared/constants/user";
-import { useUserHasPermission } from "frontend/hooks/auth/user.store";
 import { AppLayout } from "frontend/_layouts/app";
+import { useUserHasPermission } from "frontend/hooks/auth/user.store";
+import {
+  useEntityDataDetails,
+  useEntityDataUpdationMutation,
+} from "frontend/hooks/data/data.store";
 import {
   useEntityCrudConfig,
   useEntityId,
   useEntitySlug,
 } from "frontend/hooks/entity/entity.config";
-import {
-  useEntityDataDetails,
-  useEntityDataUpdationMutation,
-} from "frontend/hooks/data/data.store";
+import { useNavigationStack } from "frontend/lib/routing/useNavigationStack";
+import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
+import { META_USER_PERMISSIONS, UserPermissions } from "shared/constants/user";
+
 import { ContentLayout } from "@/components/app/content-layout";
 import { SectionBox } from "@/components/app/section-box";
+
 import { useEntityActionMenuItems } from "../../entity/constants";
 import { BaseEntityForm } from "../_BaseEntityForm";
-import { useDataUpdateActions } from "./portal";
 import { PortalEntityFormComponent } from "../portal";
+import { useDataUpdateActions } from "./portal";
 
 export function EntityUpdate() {
   const entityId = useEntityId();

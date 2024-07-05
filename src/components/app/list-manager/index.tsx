@@ -1,17 +1,18 @@
-import { useEffect, useState } from "react";
-import type { DataStateKeys } from "frontend/lib/data/types";
-import { arrayMoveImmutable } from "shared/lib/array/move";
-import SortableList, { SortableItem } from "react-easy-sort";
-import { sortListByOrder } from "shared/lib/array/sort";
 import { msg } from "@lingui/macro";
-import { defaultSearchFunction, defaultToEmptyArray } from "./utils";
+import type { DataStateKeys } from "frontend/lib/data/types";
+import { useEffect, useState } from "react";
+import SortableList, { SortableItem } from "react-easy-sort";
+import { arrayMoveImmutable } from "shared/lib/array/move";
+import { sortListByOrder } from "shared/lib/array/sort";
+
+import { EmptyWrapper } from "../empty-wrapper";
+import type { IEmptyWrapperProps } from "../empty-wrapper/types";
+import { FormSearch } from "../form/input/search";
+import { ListSkeleton } from "../skeleton/list";
+import { ViewStateMachine } from "../view-state-machine";
 import type { IListMangerItemProps } from "./list-manager-item";
 import { ListManagerItem } from "./list-manager-item";
-import type { IEmptyWrapperProps } from "../empty-wrapper/types";
-import { ViewStateMachine } from "../view-state-machine";
-import { ListSkeleton } from "../skeleton/list";
-import { EmptyWrapper } from "../empty-wrapper";
-import { FormSearch } from "../form/input/search";
+import { defaultSearchFunction, defaultToEmptyArray } from "./utils";
 
 const SEARCH_THRESHOLD = 10;
 

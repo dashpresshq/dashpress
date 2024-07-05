@@ -1,24 +1,26 @@
-import type { ReactNode } from "react";
-import { useEntityReferenceFields } from "frontend/hooks/entity/entity.store";
+import { AppLayout } from "frontend/_layouts/app";
 import {
   useEntityDataDetails,
   useEntityReferenceCount,
 } from "frontend/hooks/data/data.store";
 import { useEntityId } from "frontend/hooks/entity/entity.config";
-import { AppLayout } from "frontend/_layouts/app";
-import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
 import { useEntityDictionPlurals } from "frontend/hooks/entity/entity.queries";
+import { useEntityReferenceFields } from "frontend/hooks/entity/entity.store";
 import { DataStates } from "frontend/lib/data/types";
-import { ContentLayout } from "@/components/app/content-layout";
+import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
+import type { ReactNode } from "react";
+
 import type { IMenuActionItem } from "@/components/app/button/types";
+import { ContentLayout } from "@/components/app/content-layout";
 import { MenuSection } from "@/components/app/menu-section";
-import { ViewStateMachine } from "@/components/app/view-state-machine";
 import { ListSkeleton } from "@/components/app/skeleton/list";
-import { fakeMessageDescriptor } from "@/translations/fake";
+import { ViewStateMachine } from "@/components/app/view-state-machine";
 import { Card, CardContent } from "@/components/ui/card";
+import { fakeMessageDescriptor } from "@/translations/fake";
+
 import { useEntityActionMenuItems } from "../../entity/constants";
-import { getEntitiesRelationsCount } from "./utils";
 import { useEntityViewStateMachine } from "../hooks/useEntityViewStateMachine";
+import { getEntitiesRelationsCount } from "./utils";
 
 export const DETAILS_LAYOUT_KEY = "___DETAILS_KEY__";
 

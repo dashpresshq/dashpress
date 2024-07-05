@@ -1,8 +1,8 @@
-import type { PageConfig } from "next";
-import { requestHandler } from "backend/lib/request";
 import { BadRequestError } from "backend/lib/errors";
+import { requestHandler } from "backend/lib/request";
 import { FORMIDABLE_ERRORS } from "backend/uploads/constants";
 import { parseForm } from "backend/uploads/parse";
+import type { PageConfig } from "next";
 
 export default requestHandler(
   {

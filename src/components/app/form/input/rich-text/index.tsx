@@ -1,13 +1,16 @@
 import "react-quill/dist/quill.snow.css";
+
+import { msg } from "@lingui/macro";
+import { useLingui } from "@lingui/react";
 import dynamic from "next/dynamic";
 import { noop } from "shared/lib/noop";
-import { useLingui } from "@lingui/react";
-import { msg } from "@lingui/macro";
+
 import {
-  LabelAndError,
   generateClassNames,
+  LabelAndError,
 } from "@/components/app/form/input/label-and-error";
 import type { ISharedFormInput } from "@/components/app/form/input/types";
+
 import styles from "./styles.module.css";
 
 const ReactQuill = dynamic<any>(

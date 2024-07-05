@@ -1,7 +1,8 @@
 import { isBoolean, maxLength } from "class-validator";
 import { fakeMessageDescriptor } from "translations/fake";
-import { handleValidation } from "../validations/handle-validation";
+
 import { ENTITY_VALIDATION_CONFIG } from "../validations";
+import { handleValidation } from "../validations/handle-validation";
 
 const errorMessage = fakeMessageDescriptor("Error Message");
 

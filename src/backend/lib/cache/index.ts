@@ -1,4 +1,4 @@
-import { ConfigKeys, configApiService } from "../config/config.service";
+import { configApiService, ConfigKeys } from "../config/config.service";
 import { AbstractCacheService } from "./AbstractCacheService";
 import { MemoryCacheAdaptor } from "./MemoryCacheAdaptor";
 import { RedisCacheAdaptor } from "./RedisCacheAdaptor";

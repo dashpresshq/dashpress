@@ -1,11 +1,11 @@
-import { ConfigAdaptorTypes } from "backend/lib/config-persistence/types";
+import { CacheAdaptorTypes } from "backend/lib/cache/types";
 import { configApiService } from "backend/lib/config/config.service";
 import { ConfigKeys } from "backend/lib/config/types";
+import { ConfigAdaptorTypes } from "backend/lib/config-persistence/types";
+import { requestHandler } from "backend/lib/request";
+import { schemasApiService } from "backend/schema/schema.service";
 import { checkNodeVersion } from "bin/checkNodeVersion";
 import latestVersion from "latest-version";
-import { schemasApiService } from "backend/schema/schema.service";
-import { CacheAdaptorTypes } from "backend/lib/cache/types";
-import { requestHandler } from "backend/lib/request";
 
 const { version } = require("../../../package.json");
 

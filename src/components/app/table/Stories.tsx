@@ -1,13 +1,14 @@
 /* eslint-disable react/function-component-definition */
-import { useState } from "react";
-import type { Story } from "@storybook/react";
-import { action } from "@storybook/addon-actions";
-import type { IPaginatedDataState } from "shared/types/data";
-import { msg } from "@lingui/macro";
 import { TestProviders } from "__tests__/_/Provider";
-import { Table, DEFAULT_TABLE_STATE } from ".";
-import type { ITableProps } from "./types";
+import { msg } from "@lingui/macro";
+import { action } from "@storybook/addon-actions";
+import type { Story } from "@storybook/react";
+import { useState } from "react";
+import type { IPaginatedDataState } from "shared/types/data";
+
+import { DEFAULT_TABLE_STATE, Table } from ".";
 import { TABLE_COLUMNS, TABLE_DATA } from "./data";
+import type { ITableProps } from "./types";
 
 export default {
   title: "Components/Table",

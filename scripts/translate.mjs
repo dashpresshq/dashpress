@@ -1,4 +1,3 @@
-/* eslint-disable no-continue */
 import gettextParser from "gettext-parser";
 
 import fs from "fs";

@@ -1,9 +1,10 @@
-import fetchMock from "jest-fetch-mock";
+import { renderHook } from "__tests__/_/lib/renderHook";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { waitFor } from "@testing-library/react";
+import fetchMock from "jest-fetch-mock";
 import type { FieldQueryFilter } from "shared/types/data";
 import { FilterOperators } from "shared/types/data";
-import { renderHook } from "__tests__/_/lib/renderHook";
+
 import { useFEPagination } from "./useFEPagination";
 
 fetchMock.enableMocks();

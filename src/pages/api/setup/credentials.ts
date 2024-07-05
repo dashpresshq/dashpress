@@ -1,9 +1,9 @@
+import { requestHandler } from "backend/lib/request";
 import { setupApiService } from "backend/setup/setup.service";
 import type { IAppliedSchemaFormConfig } from "shared/form-schemas/types";
+import { typescriptSafeObjectDotKeys } from "shared/lib/objects";
 import type { IDataSourceCredentials } from "shared/types/data-sources";
 import { DATA_SOURCES_CONFIG } from "shared/types/data-sources";
-import { requestHandler } from "backend/lib/request";
-import { typescriptSafeObjectDotKeys } from "shared/lib/objects";
 import { fakeMessageDescriptor } from "translations/fake";
 
 const credentialRequestSchema: IAppliedSchemaFormConfig<IDataSourceCredentials> =

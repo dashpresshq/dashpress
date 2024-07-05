@@ -1,7 +1,9 @@
+import { msg } from "@lingui/macro";
 import type { IColumnFilterBag, IDateFilterOption } from "shared/types/data";
 import { fakeMessageDescriptor } from "translations/fake";
-import { msg } from "@lingui/macro";
+
 import { Select } from "@/components/ui/select";
+
 import { DATE_FILTER_OPTIONS } from "./constants";
 
 const getOptionValue = (value: string) => {

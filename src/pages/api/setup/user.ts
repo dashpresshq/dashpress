@@ -1,6 +1,6 @@
+import { requestHandler } from "backend/lib/request";
 import { setupApiService } from "backend/setup/setup.service";
 import { SETUP_USER_FORM_SCHEMA } from "shared/form-schemas/setup/user";
-import { requestHandler } from "backend/lib/request";
 
 export default requestHandler(
   {

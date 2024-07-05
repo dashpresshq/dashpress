@@ -149,6 +149,7 @@
     "eslint-config-airbnb-typescript": "^18.0.0",
     "eslint-plugin-jest": "^28.6.0",
     "eslint-plugin-jest-formatting": "^3.1.0",
+    "eslint-plugin-simple-import-sort": "^12.1.1",
     "eslint-plugin-tailwindcss": "^3.17.4",
     "fake-indexeddb": "^5.0.2",
     "gettext-parser": "^8.0.0",

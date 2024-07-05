@@ -1,32 +1,34 @@
-import type { ReactNode } from "react";
-import { useEffect, useState } from "react";
-import type { CrudViewsKeys, IEntityCrudSettings } from "shared/configurations";
-import { UserPermissions } from "shared/constants/user";
+import { msg } from "@lingui/macro";
+import { useDocumentationActionButton } from "frontend/docs/constants";
 import { CRUDDocumentation } from "frontend/docs/crud";
-import { useRouteParam } from "frontend/lib/routing/useRouteParam";
-import { useChangeRouterParam } from "frontend/lib/routing/useChangeRouterParam";
-import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
+import { useUpsertConfigurationMutation } from "frontend/hooks/configuration/configuration.store";
 import {
   useEntityCrudSettings,
   useEntitySlug,
 } from "frontend/hooks/entity/entity.config";
-import { useUpsertConfigurationMutation } from "frontend/hooks/configuration/configuration.store";
 import { useEntityFields } from "frontend/hooks/entity/entity.store";
-import { useDocumentationActionButton } from "frontend/docs/constants";
-import { msg } from "@lingui/macro";
+import { useChangeRouterParam } from "frontend/lib/routing/useChangeRouterParam";
+import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
+import { useRouteParam } from "frontend/lib/routing/useRouteParam";
+import type { ReactNode } from "react";
+import { useEffect, useState } from "react";
+import type { CrudViewsKeys, IEntityCrudSettings } from "shared/configurations";
+import { UserPermissions } from "shared/constants/user";
 import { typescriptSafeObjectDotEntries } from "shared/lib/objects";
+
 import { SectionBox } from "@/components/app/section-box";
 import { Tabs } from "@/components/app/tabs";
+
 import { BaseEntitySettingsLayout } from "../_Base";
+import { ENTITY_CONFIGURATION_VIEW, ENTITY_CRUD_LABELS } from "../constants";
 import {
   EntityFieldsSelectionSettings,
   ToggleCrudState,
 } from "./EntityFieldsSelectionSettings";
-import { ENTITY_CONFIGURATION_VIEW, ENTITY_CRUD_LABELS } from "../constants";
 import {
-  PortalEntityTableSettings,
   PortalEntityCreateSettings,
   PortalEntityDetailsSettings,
+  PortalEntityTableSettings,
   PortalEntityUpdateSettings,
 } from "./portal";
 

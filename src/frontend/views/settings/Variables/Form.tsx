@@ -1,10 +1,12 @@
+import { msg } from "@lingui/macro";
+import { useDomainMessages } from "frontend/lib/crud-config";
 import type { IFormProps } from "frontend/lib/form/types";
 import type { IAppliedSchemaFormConfig } from "shared/form-schemas/types";
 import type { IntegrationsConfigurationGroup } from "shared/types/integrations";
 import type { IKeyValue } from "shared/types/options";
-import { msg } from "@lingui/macro";
-import { useDomainMessages } from "frontend/lib/crud-config";
+
 import { SchemaForm } from "@/components/app/form/schema";
+
 import { INTEGRATIONS_GROUP_CRUD_CONFIG } from "./constants";
 
 export const CAPITAL_AND_UNDERSCORE_REGEX = `^[A-Z_]+$`;

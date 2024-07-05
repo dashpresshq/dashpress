@@ -1,7 +1,7 @@
-/* eslint-disable react/prop-types */
-import * as React from "react";
 import { Slot } from "@radix-ui/react-slot";
+import * as React from "react";
 import { ChevronRight, MoreHorizontal } from "react-feather";
+
 import { cn } from "@/lib/utils";
 
 const Breadcrumb = React.forwardRef<
@@ -110,10 +110,10 @@ BreadcrumbEllipsis.displayName = "BreadcrumbElipssis";
 
 export {
   Breadcrumb,
-  BreadcrumbList,
+  BreadcrumbEllipsis,
   BreadcrumbItem,
   BreadcrumbLink,
+  BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
-  BreadcrumbEllipsis,
 };

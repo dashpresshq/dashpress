@@ -1,7 +1,8 @@
-import * as React from "react";
-import { render, screen } from "@testing-library/react";
 import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
 import { TestProviders } from "__tests__/_/Provider";
+import { render, screen } from "@testing-library/react";
+import * as React from "react";
+
 import { ViewStateMachine } from ".";
 
 describe("<ViewStateMachine />", () => {

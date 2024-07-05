@@ -1,5 +1,6 @@
-import type { Knex } from "knex";
 import type { MessageDescriptor } from "@lingui/core";
+import type { Knex } from "knex";
+
 import type { ISystemStatusForDisplay } from "./options";
 
 export enum FilterOperators {

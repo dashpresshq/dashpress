@@ -1,25 +1,27 @@
-import { Fragment } from "react";
 import {
   useAppConfiguration,
   useEntityConfiguration,
 } from "frontend/hooks/configuration/configuration.store";
 import { useEntityDataDetails } from "frontend/hooks/data/data.store";
 import {
+  useEntityCrudFields,
   useEntityFieldLabels,
   useEntityFieldSelections,
   useProcessedEntityFieldTypes,
-  useEntityCrudFields,
 } from "frontend/hooks/entity/entity.config";
 import { useEntityToOneReferenceFields } from "frontend/hooks/entity/entity.store";
-import { DataStates } from "frontend/lib/data/types";
 import { useEvaluateScriptContext } from "frontend/hooks/scripts";
+import { DataStates } from "frontend/lib/data/types";
+import { Fragment } from "react";
+
 import { ViewStateMachine } from "@/components/app/view-state-machine";
 import { Skeleton } from "@/components/ui/skeleton";
-import { useEntityViewStateMachine } from "../hooks/useEntityViewStateMachine";
-import { viewSpecialDataTypes } from "../viewSpecialDataTypes";
+
 import { evalutePresentationScript } from "../evaluatePresentationScript";
-import { PreDataDetails } from "./portal";
+import { useEntityViewStateMachine } from "../hooks/useEntityViewStateMachine";
 import { PortalColumnRender } from "../Table/portal";
+import { viewSpecialDataTypes } from "../viewSpecialDataTypes";
+import { PreDataDetails } from "./portal";
 
 export function EntityDetailsView({
   entityId,

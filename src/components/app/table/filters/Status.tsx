@@ -1,10 +1,12 @@
-import type { IColumnFilterBag } from "shared/types/data";
-import type { ISelectData } from "shared/types/options";
 import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
+import type { IColumnFilterBag } from "shared/types/data";
+import type { ISelectData } from "shared/types/options";
+
 import { Select } from "@/components/ui/select";
-import type { IFilterProps } from "./types";
+
 import { MultiFilterValues } from "./_MultiFilterValues";
+import type { IFilterProps } from "./types";
 
 export function FilterTableByStatus({
   column: { filterValue, setFilter },

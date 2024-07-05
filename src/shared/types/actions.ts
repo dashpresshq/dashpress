@@ -1,5 +1,6 @@
-import type { IAppliedSchemaFormConfig } from "shared/form-schemas/types";
 import type { MessageDescriptor } from "@lingui/core";
+import type { IAppliedSchemaFormConfig } from "shared/form-schemas/types";
+
 import type { DataEventActions } from "./data";
 
 export enum ActionIntegrations {

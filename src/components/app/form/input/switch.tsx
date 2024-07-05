@@ -1,8 +1,9 @@
-import { useEffect } from "react";
 import type { MessageDescriptor } from "@lingui/core";
 import { useLingui } from "@lingui/react";
-import { Switch } from "@/components/ui/switch";
+import { useEffect } from "react";
+
 import { Label } from "@/components/ui/label";
+import { Switch } from "@/components/ui/switch";
 
 export interface IProps {
   value: boolean;

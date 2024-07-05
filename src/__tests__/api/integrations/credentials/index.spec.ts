@@ -1,10 +1,10 @@
-import handler from "pages/api/integrations/credentials";
 import {
-  setupAllTestData,
-  createAuthenticatedViewerMocks,
   createAuthenticatedCustomRoleMocks,
+  createAuthenticatedViewerMocks,
+  setupAllTestData,
   setupRolesTestData,
 } from "__tests__/api/_test-utils";
+import handler from "pages/api/integrations/credentials";
 
 describe("/api/integrations/credentials", () => {
   beforeAll(async () => {

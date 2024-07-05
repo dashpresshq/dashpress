@@ -1,8 +1,8 @@
-import handler from "pages/api/config/[key]/[entity]";
 import {
-  setupAllTestData,
   createAuthenticatedMocks,
+  setupAllTestData,
 } from "__tests__/api/_test-utils";
+import handler from "pages/api/config/[key]/[entity]";
 
 describe("/api/config/[key]/[entity]", () => {
   beforeAll(async () => {

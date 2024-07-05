@@ -1,7 +1,8 @@
-import type { IPortalWidgetConfig } from "shared/types/portal/widgets/main";
-import { forwardRef } from "react";
 import type { DataStateKeys } from "frontend/lib/data/types";
+import { forwardRef } from "react";
 import { noop } from "shared/lib/noop";
+import type { IPortalWidgetConfig } from "shared/types/portal/widgets/main";
+
 import type { IWidgetSettingProps } from "../../_components/WidgetHeader/types";
 
 interface IProps {

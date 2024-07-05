@@ -1,5 +1,6 @@
 import { AuthActions } from "frontend/hooks/auth/auth.actions";
 import { REQUEST_ERROR_CODES } from "shared/constants/auth";
+
 import { ApiRequestError } from "./_errors";
 
 const pathWithBaseUrl = (path: string) => {

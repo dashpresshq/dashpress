@@ -1,5 +1,6 @@
 import type { MessageDescriptor } from "@lingui/core";
 import { msg } from "@lingui/macro";
+
 import type { IMenuActionItem } from "./types";
 
 export const DELETE_BUTTON_PROPS = (props: {

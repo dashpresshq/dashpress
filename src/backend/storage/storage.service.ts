@@ -3,12 +3,13 @@ import { credentialsApiService } from "backend/integrations-configurations";
 import { validateSchemaRequestBody } from "backend/lib/errors/validate-schema-request-input";
 import type { KeyValueStoreApiService } from "backend/lib/key-value";
 import { createKeyValueDomainPersistenceService } from "backend/lib/key-value";
-import { sluggify } from "shared/lib/strings";
-import type { IStorageIntegration } from "shared/types/actions";
 import {
   typescriptSafeObjectDotEntries,
   typescriptSafeObjectDotKeys,
 } from "shared/lib/objects";
+import { sluggify } from "shared/lib/strings";
+import type { IStorageIntegration } from "shared/types/actions";
+
 import { STORAGE_INTEGRATIONS } from "./integrations";
 
 export class StorageApiService {

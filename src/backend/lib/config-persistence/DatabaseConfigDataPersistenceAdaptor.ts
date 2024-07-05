@@ -1,11 +1,12 @@
 import type { Knex } from "knex";
+
 import type { ConfigApiService } from "../config/config.service";
 import { ConfigKeys } from "../config/config.service";
 import { getDbConnection } from "../connection/db";
 import { AbstractConfigDataPersistenceService } from "./AbstractConfigDataPersistenceService";
-import type { ConfigDomain } from "./types";
 import { CONFIG_TABLE_PREFIX } from "./constants";
 import { createMetaData, updateMetaData } from "./portal";
+import type { ConfigDomain } from "./types";
 
 const CONFIG_TABLE_NAME = CONFIG_TABLE_PREFIX("config");
 export class DatabaseConfigDataPersistenceAdaptor<

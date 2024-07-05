@@ -1,4 +1,5 @@
 import { GranularEntityPermissions } from "shared/types/user";
+
 import { PORTAL_DASHBOARD_PERMISSION } from "./main";
 
 describe("PORTAL_DASHBOARD_PERMISSION", () => {

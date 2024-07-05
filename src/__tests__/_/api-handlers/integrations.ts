@@ -8,6 +8,7 @@ import type {
 } from "msw";
 import { rest } from "msw";
 import type { IKeyValue } from "shared/types/options";
+
 import { BASE_TEST_URL } from "./_utils";
 
 const CONSTANTS = [

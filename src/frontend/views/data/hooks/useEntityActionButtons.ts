@@ -1,9 +1,11 @@
+import { msg } from "@lingui/macro";
 import { useEntityDataDeletionMutation } from "frontend/hooks/data/data.store";
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
 import type { CrudViewsKeys } from "shared/configurations";
-import { msg } from "@lingui/macro";
+
 import { DELETE_BUTTON_PROPS } from "@/components/app/button/constants";
 import type { IGroupActionButton } from "@/components/app/button/types";
+
 import { useCanUserPerformCrudAction } from "./useCanUserPerformCrudAction";
 
 export const useEntityActionButtons = ({

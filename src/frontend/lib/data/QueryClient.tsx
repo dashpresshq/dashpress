@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import { createAsyncStoragePersister } from "@tanstack/query-async-storage-persister";
 import { QueryClient } from "@tanstack/react-query";
 import type {
   AsyncStorage,
@@ -6,8 +6,8 @@ import type {
   PersistedClient,
 } from "@tanstack/react-query-persist-client";
 import { PersistQueryClientProvider } from "@tanstack/react-query-persist-client";
-import { createAsyncStoragePersister } from "@tanstack/query-async-storage-persister";
-import { get, set, del } from "idb-keyval";
+import { del, get, set } from "idb-keyval";
+import type { ReactNode } from "react";
 
 const queryClient = new QueryClient({
   defaultOptions: {

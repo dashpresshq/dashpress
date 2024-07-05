@@ -1,6 +1,6 @@
-import { UserPermissions } from "shared/constants/user";
-import { requestHandler } from "backend/lib/request";
 import { dashboardWidgetsApiService } from "backend/dashboard-widgets/dashboard-widgets.service";
+import { requestHandler } from "backend/lib/request";
+import { UserPermissions } from "shared/constants/user";
 
 export default requestHandler(
   {

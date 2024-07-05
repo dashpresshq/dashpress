@@ -1,15 +1,17 @@
-import { UserPermissions } from "shared/constants/user";
-import { Fragment } from "react";
+import { msg } from "@lingui/macro";
+import { useDomainMessages } from "frontend/lib/crud-config";
 import { useApi } from "frontend/lib/data/useApi";
 import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
-import { msg } from "@lingui/macro";
+import { Fragment } from "react";
+import { UserPermissions } from "shared/constants/user";
 import { typescriptSafeObjectDotEntries } from "shared/lib/objects";
-import { useDomainMessages } from "frontend/lib/crud-config";
+
 import { SectionBox } from "@/components/app/section-box";
 import { ViewStateMachine } from "@/components/app/view-state-machine";
 import { Skeleton } from "@/components/ui/skeleton";
-import { SETTINGS_VIEW_KEY } from "../constants";
+
 import { BaseSettingsLayout } from "../_Base";
+import { SETTINGS_VIEW_KEY } from "../constants";
 
 export function VersionInfo() {
   const domainMessages = useDomainMessages({

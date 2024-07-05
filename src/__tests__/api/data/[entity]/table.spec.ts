@@ -1,9 +1,9 @@
-import handler from "pages/api/data/[entity]/table";
 import {
-  setupAllTestData,
   createAuthenticatedMocks,
+  setupAllTestData,
   setupAppConfigTestData,
 } from "__tests__/api/_test-utils";
+import handler from "pages/api/data/[entity]/table";
 
 describe("/api/data/[entity]/table", () => {
   beforeAll(async () => {

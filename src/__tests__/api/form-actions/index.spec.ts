@@ -1,9 +1,9 @@
-import handler from "pages/api/form-actions/index";
-import getHandler from "pages/api/form-actions/[key]";
 import {
   createAuthenticatedMocks,
   setupAllTestData,
 } from "__tests__/api/_test-utils";
+import getHandler from "pages/api/form-actions/[key]";
+import handler from "pages/api/form-actions/index";
 
 jest.mock("nanoid", () => ({
   nanoid: jest

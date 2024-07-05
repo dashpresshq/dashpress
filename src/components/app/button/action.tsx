@@ -1,9 +1,10 @@
 import type { VariantProps } from "class-variance-authority";
 
 import type { buttonVariants } from "@/components/ui/button";
-import type { IGroupActionButton } from "./types";
-import { SoftButton } from "./soft";
+
 import { DropDownMenu } from "../drop-drop-menu";
+import { SoftButton } from "./soft";
+import type { IGroupActionButton } from "./types";
 
 const ELLIPSIS_THRESHOLD = 3;
 

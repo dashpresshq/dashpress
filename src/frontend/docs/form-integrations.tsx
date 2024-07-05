@@ -1,9 +1,11 @@
-import { INTEGRATIONS_GROUP_CONFIG } from "shared/config-bag/integrations";
 import { useLingui } from "@lingui/react";
 import { useDomainMessages } from "frontend/lib/crud-config";
 import { LANG_DOMAINS } from "frontend/lib/crud-config/lang-domains";
+import { INTEGRATIONS_GROUP_CONFIG } from "shared/config-bag/integrations";
+
 import { ErrorAlert, InfoAlert } from "@/components/app/alert";
 import { RenderCode } from "@/components/app/render-code";
+
 import { DocumentationRoot } from "./_base";
 
 export function FormIntegrationsDocumentation() {

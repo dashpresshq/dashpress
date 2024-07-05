@@ -1,4 +1,5 @@
 import fetchMock from "jest-fetch-mock";
+
 import { SEND_MAIL } from "../sendMail";
 
 fetchMock.enableMocks();

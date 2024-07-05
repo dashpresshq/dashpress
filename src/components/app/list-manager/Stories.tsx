@@ -1,9 +1,10 @@
 /* eslint-disable react/function-component-definition */
 
-import type { Story } from "@storybook/react";
-import { actions } from "@storybook/addon-actions";
-import { loadedDataState } from "frontend/lib/data/constants/loadedDataState";
 import { TestProviders } from "__tests__/_/Provider";
+import { actions } from "@storybook/addon-actions";
+import type { Story } from "@storybook/react";
+import { loadedDataState } from "frontend/lib/data/constants/loadedDataState";
+
 import type { IProps } from ".";
 import { ListManager } from ".";
 

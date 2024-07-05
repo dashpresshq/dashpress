@@ -1,17 +1,18 @@
-import type {
-  DataActionType,
-  IEntityCrudSettings,
-} from "shared/configurations";
+import { configurationApiService } from "backend/configuration/configuration.service";
 import {
   ForbiddenError,
   NotFoundError,
   progammingError,
 } from "backend/lib/errors";
-import { configurationApiService } from "backend/configuration/configuration.service";
 import { rolesApiService } from "backend/roles/roles.service";
+import type {
+  DataActionType,
+  IEntityCrudSettings,
+} from "shared/configurations";
 import { META_USER_PERMISSIONS } from "shared/constants/user";
 import { GranularEntityPermissions } from "shared/types/user";
-import { getEntityFromRequest, ERROR_MESSAGE } from "./entity";
+
+import { ERROR_MESSAGE, getEntityFromRequest } from "./entity";
 import type { ValidationImplType } from "./types";
 
 const EntityCrudCheck: Record<

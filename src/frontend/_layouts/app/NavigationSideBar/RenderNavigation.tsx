@@ -1,21 +1,23 @@
+import type { MessageDescriptor } from "@lingui/core";
+import { msg } from "@lingui/macro";
+import { useLingui } from "@lingui/react";
+import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
+import { useNavigationStack } from "frontend/lib/routing/useNavigationStack";
 import Link from "next/link";
+import { ChevronRight } from "react-feather";
+import { ActionIntegrations } from "shared/types/actions";
 import type { INavigationMenuItem } from "shared/types/menu";
 import {
   HeaderMenuItemType,
   NavigationMenuItemType,
   SystemLinks,
 } from "shared/types/menu";
-import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
-import { ChevronRight } from "react-feather";
-import { useNavigationStack } from "frontend/lib/routing/useNavigationStack";
-import { ActionIntegrations } from "shared/types/actions";
-import type { MessageDescriptor } from "@lingui/core";
-import { msg } from "@lingui/macro";
 import { fakeMessageDescriptor } from "translations/fake";
-import { useLingui } from "@lingui/react";
-import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
+
 import { SystemIcon } from "@/components/app/system-icons";
+import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+
 import { PORTAL_SYSTEM_LINK_CONFIG_LINKS } from "./portal";
 
 const SYSTEM_LINKS_CONFIG_MAP: Record<

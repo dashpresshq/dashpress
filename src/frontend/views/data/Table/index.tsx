@@ -1,14 +1,15 @@
-import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
-import { META_USER_PERMISSIONS } from "shared/constants/user";
-import { GranularEntityPermissions } from "shared/types/user";
+import { AppLayout } from "frontend/_layouts/app";
 import {
   useEntityCrudConfig,
   useEntitySlug,
 } from "frontend/hooks/entity/entity.config";
-import { AppLayout } from "frontend/_layouts/app";
+import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
+import { META_USER_PERMISSIONS } from "shared/constants/user";
+import { GranularEntityPermissions } from "shared/types/user";
+
 import { useEntityActionMenuItems } from "../../entity/constants";
-import { getEntityCreateLink, useTableMenuItems } from "./useTableMenuItems";
 import { WholeEntityTable } from "./_WholeEntityTable";
+import { getEntityCreateLink, useTableMenuItems } from "./useTableMenuItems";
 
 export function EntityTable() {
   const entity = useEntitySlug();

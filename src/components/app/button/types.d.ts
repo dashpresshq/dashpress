@@ -1,6 +1,7 @@
 import type { MessageDescriptor } from "@lingui/core";
-import type { SystemIconsKeys } from "shared/constants/Icons";
 import type { VariantProps } from "class-variance-authority";
+import type { SystemIconsKeys } from "shared/constants/Icons";
+
 import type { buttonVariants } from "@/components/ui/button";
 
 export interface IActionButton {

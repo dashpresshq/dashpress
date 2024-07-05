@@ -1,15 +1,16 @@
 import { BadRequestError } from "backend/lib/errors";
 import { IntegrationsConfigurationGroup } from "shared/types/integrations";
 import type { IKeyValue } from "shared/types/options";
+
+import {
+  INTEGRATION_CONFIG_GROUP_DEMILITER,
+  IntegrationsConfigurationApiService,
+} from "./services/_base";
 import { credentialsApiService } from "./services/credentials.service";
 import {
   appConstantsApiService,
   environmentVariablesApiService,
 } from "./services/env-variable.service";
-import {
-  IntegrationsConfigurationApiService,
-  INTEGRATION_CONFIG_GROUP_DEMILITER,
-} from "./services/_base";
 
 export class IntegrationsConfigurationApiController {
   constructor(

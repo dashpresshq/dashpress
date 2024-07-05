@@ -1,7 +1,7 @@
-import { rolesApiController } from "backend/roles/roles.controller";
-import { BASE_ROLE_FORM_SCHEMA } from "shared/form-schemas/roles/base";
-import { UserPermissions } from "shared/constants/user";
 import { requestHandler } from "backend/lib/request";
+import { rolesApiController } from "backend/roles/roles.controller";
+import { UserPermissions } from "shared/constants/user";
+import { BASE_ROLE_FORM_SCHEMA } from "shared/form-schemas/roles/base";
 
 export default requestHandler(
   {

@@ -1,13 +1,15 @@
-import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
-import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
-import { UserPermissions } from "shared/constants/user";
-import { useEntitySlug } from "frontend/hooks/entity/entity.config";
-import { FormIntegrationsDocumentation } from "frontend/docs/form-integrations";
-import { useDocumentationActionButton } from "frontend/docs/constants";
 import { msg } from "@lingui/macro";
+import { useDocumentationActionButton } from "frontend/docs/constants";
+import { FormIntegrationsDocumentation } from "frontend/docs/form-integrations";
+import { useEntitySlug } from "frontend/hooks/entity/entity.config";
 import { useDomainMessages } from "frontend/lib/crud-config";
 import { LANG_DOMAINS } from "frontend/lib/crud-config/lang-domains";
+import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
+import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
+import { UserPermissions } from "shared/constants/user";
+
 import { SectionBox } from "@/components/app/section-box";
+
 import { BaseEntitySettingsLayout } from "../_Base";
 import { ENTITY_CONFIGURATION_VIEW } from "../constants";
 import { FormActions } from "./Base";

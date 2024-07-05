@@ -1,5 +1,6 @@
 import type { IAppliedSchemaFormConfig } from "shared/form-schemas/types";
 import { noop } from "shared/lib/noop";
+
 import type { IRenderFormInputProps } from "@/components/app/form/schema/types";
 
 export const usePortalExtendEntityFormConfig = (

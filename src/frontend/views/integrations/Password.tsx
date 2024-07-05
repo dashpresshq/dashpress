@@ -1,6 +1,8 @@
 import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
+
 import { SchemaForm } from "@/components/app/form/schema";
+
 import { usePasswordStore } from "./password.store";
 
 export function PasswordMessage() {

@@ -1,5 +1,6 @@
 import { isEmpty } from "class-validator";
 import { abbreviateNumber } from "frontend/lib/numbers";
+
 import type { ISummaryCardWidgetData } from "./types";
 
 export const getFullAndRelativeCount = (

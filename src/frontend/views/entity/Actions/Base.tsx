@@ -1,32 +1,34 @@
-import {
-  useIntegrationsList,
-  useActiveIntegrations,
-} from "frontend/views/integrations/actions/actions.store";
-import { useCallback, useState } from "react";
-import type { IFormAction } from "shared/types/actions";
-import { useApi } from "frontend/lib/data/useApi";
-import { userFriendlyCase } from "shared/lib/strings/friendly-case";
 import { msg } from "@lingui/macro";
 import { useDomainMessages } from "frontend/lib/crud-config";
 import { LANG_DOMAINS } from "frontend/lib/crud-config/lang-domains";
+import { useApi } from "frontend/lib/data/useApi";
+import {
+  useActiveIntegrations,
+  useIntegrationsList,
+} from "frontend/views/integrations/actions/actions.store";
+import { useCallback, useState } from "react";
+import { userFriendlyCase } from "shared/lib/strings/friendly-case";
+import type { IFormAction } from "shared/types/actions";
+
+import { ActionButtons } from "@/components/app/button/action";
 import { DELETE_BUTTON_PROPS } from "@/components/app/button/constants";
-import { TableSkeleton } from "@/components/app/skeleton/table";
 import { SoftButton } from "@/components/app/button/soft";
-import { ViewStateMachine } from "@/components/app/view-state-machine";
+import { OffCanvas } from "@/components/app/off-canvas";
 import type {
   IFETableCell,
   IFETableColumn,
 } from "@/components/app/pagination-table";
 import { FEPaginationTable } from "@/components/app/pagination-table";
-import { ActionButtons } from "@/components/app/button/action";
-import { OffCanvas } from "@/components/app/off-canvas";
+import { TableSkeleton } from "@/components/app/skeleton/table";
+import { ViewStateMachine } from "@/components/app/view-state-machine";
+
+import { ActionForm } from "./Form";
 import {
   LIST_ENTITY_FORM_ACTIONS,
   useCreateFormActionMutation,
   useDeleteFormActionMutation,
   useUpdateFormActionMutation,
 } from "./form-actions.store";
-import { ActionForm } from "./Form";
 
 const NEW_ACTION_ITEM = "__new_action_item__";
 
@@ -89,7 +91,6 @@ export function FormActions({ entity }: { entity: string }) {
         _type: "string",
         bag: undefined,
       },
-      // eslint-disable-next-line react/no-unstable-nested-components
       Cell: ({ value }: IFETableCell<IFormAction>) => {
         return <>{userFriendlyCase(value as string)}</>;
       },
@@ -101,7 +102,6 @@ export function FormActions({ entity }: { entity: string }) {
         _type: "string",
         bag: undefined,
       },
-      // eslint-disable-next-line react/no-unstable-nested-components
       Cell: ({ value }: IFETableCell<IFormAction>) => {
         return <>{userFriendlyCase(value as string)}</>;
       },
@@ -113,7 +113,6 @@ export function FormActions({ entity }: { entity: string }) {
         _type: "string",
         bag: undefined,
       },
-      // eslint-disable-next-line react/no-unstable-nested-components
       Cell: ({ value }: IFETableCell<IFormAction>) => {
         return <>{userFriendlyCase(value as string)}</>;
       },

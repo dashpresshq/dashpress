@@ -1,8 +1,9 @@
 import type { UseQueryResult } from "@tanstack/react-query";
 import { useQueries } from "@tanstack/react-query";
 import { useRouter } from "next/router";
-import { ApiRequest } from "../makeRequest";
+
 import { getQueryCachekey } from "../constants/getQueryCacheKey";
+import { ApiRequest } from "../makeRequest";
 
 interface IApiQueriesOptions<T, P> {
   input: T[];

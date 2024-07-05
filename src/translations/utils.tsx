@@ -1,10 +1,11 @@
 import type { Messages } from "@lingui/core";
 import { i18n } from "@lingui/core";
+import { I18nProvider } from "@lingui/react";
+import type { GetStaticPropsContext, GetStaticPropsResult } from "next";
 import { useRouter } from "next/router";
 import type { ReactNode } from "react";
 import { useEffect } from "react";
-import type { GetStaticPropsContext, GetStaticPropsResult } from "next";
-import { I18nProvider } from "@lingui/react";
+
 import languages from "./languages";
 
 async function loadCatalog(locale: string) {

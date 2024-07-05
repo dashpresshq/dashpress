@@ -1,21 +1,23 @@
-import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
-import { useNavigationStack } from "frontend/lib/routing/useNavigationStack";
-import { META_USER_PERMISSIONS } from "shared/constants/user";
 import { AppLayout } from "frontend/_layouts/app";
+import { useEntityConfiguration } from "frontend/hooks/configuration/configuration.store";
+import { useEntityDataCreationMutation } from "frontend/hooks/data/data.store";
 import {
   useEntityCrudConfig,
   useEntitySlug,
 } from "frontend/hooks/entity/entity.config";
-import { useEntityDataCreationMutation } from "frontend/hooks/data/data.store";
-import { useRouteParams } from "frontend/lib/routing/useRouteParam";
-import { useEntityConfiguration } from "frontend/hooks/configuration/configuration.store";
 import { useEvaluateScriptContext } from "frontend/hooks/scripts";
+import { useNavigationStack } from "frontend/lib/routing/useNavigationStack";
+import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
+import { useRouteParams } from "frontend/lib/routing/useRouteParam";
+import { META_USER_PERMISSIONS } from "shared/constants/user";
+
 import { ContentLayout } from "@/components/app/content-layout";
 import { SectionBox } from "@/components/app/section-box";
+
 import { useEntityActionMenuItems } from "../../entity/constants";
 import { BaseEntityForm } from "../_BaseEntityForm";
-import { runInitialValuesScript } from "./run-initial-values-scripts";
 import { PortalEntityFormComponent } from "../portal";
+import { runInitialValuesScript } from "./run-initial-values-scripts";
 
 export function EntityCreate() {
   const routeParams = useRouteParams();

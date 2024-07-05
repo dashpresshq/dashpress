@@ -1,5 +1,6 @@
 import * as React from "react";
 import { Loader } from "react-feather";
+
 import { cn } from "@/lib/utils";
 
 export function ComponentIsLoading({ fullPage }: { fullPage: boolean }) {

@@ -1,7 +1,8 @@
 import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
-import { Loader, Search } from "react-feather";
 import { useState } from "react";
+import { Loader, Search } from "react-feather";
+
 import { Input } from "@/components/ui/input";
 
 interface IProps {

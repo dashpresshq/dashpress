@@ -1,6 +1,6 @@
+import { META_USER_PERMISSIONS } from "shared/constants/user";
 import { noop } from "shared/lib/noop";
 import type { IWidgetConfig } from "shared/types/dashboard";
-import { META_USER_PERMISSIONS } from "shared/constants/user";
 import type { ILabelValue } from "shared/types/options";
 import type { GranularEntityPermissions } from "shared/types/user";
 

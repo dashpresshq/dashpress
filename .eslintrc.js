@@ -6,7 +6,6 @@ module.exports = {
     jest: true,
   },
   extends: ["next/core-web-vitals", "plugin:prettier/recommended"],
-  parser: "@typescript-eslint/parser",
   parserOptions: {
     ecmaFeatures: {
       jsx: true,
@@ -21,8 +20,14 @@ module.exports = {
   },
   overrides: [
     {
+      parser: "@typescript-eslint/parser",
       files: ["**/*.ts", "**/*.tsx"],
-      plugins: ["tailwindcss", "react"],
+      plugins: [
+        "tailwindcss",
+        "react",
+        "@typescript-eslint",
+        "simple-import-sort",
+      ],
       extends: [
         "plugin:react/recommended",
         "plugin:tailwindcss/recommended",
@@ -35,6 +40,8 @@ module.exports = {
         project: "./tsconfig.json",
       },
       rules: {
+        "simple-import-sort/imports": "error",
+        "simple-import-sort/exports": "error",
         "@typescript-eslint/no-duplicate-enum-values": "error",
         "@typescript-eslint/consistent-type-imports": "error",
         "@typescript-eslint/no-useless-constructor": "off",
@@ -59,6 +66,7 @@ module.exports = {
         "no-empty-function": "off",
         "no-unused-vars": "off",
         "react/no-danger": "off",
+        "react/no-unstable-nested-components": "off",
         "import/no-extraneous-dependencies": "off",
         "consistent-return": "off",
         "default-case": "off",

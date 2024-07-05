@@ -1,5 +1,5 @@
-import { createLogger, format, transports } from "winston";
 import { format as dateFNSformat } from "date-fns";
+import { createLogger, format, transports } from "winston";
 
 const myFormat = format.printf(({ level, message }) => {
   return `${dateFNSformat(

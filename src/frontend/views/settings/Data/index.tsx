@@ -1,22 +1,24 @@
-import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
-import { UserPermissions } from "shared/constants/user";
+import { msg } from "@lingui/macro";
+import { format as dateFnsFormat } from "date-fns";
+import { useAppConfigurationDomainMessages } from "frontend/hooks/configuration/configuration.constant";
 import {
   useAppConfiguration,
   useUpsertConfigurationMutation,
 } from "frontend/hooks/configuration/configuration.store";
-import { format as dateFnsFormat } from "date-fns";
-import { useAppConfigurationDomainMessages } from "frontend/hooks/configuration/configuration.constant";
+import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
 import type { AppConfigurationValueType } from "shared/configurations/constants";
-import { msg } from "@lingui/macro";
+import { UserPermissions } from "shared/constants/user";
 import { fakeMessageDescriptor } from "translations/fake";
-import { SectionBox } from "@/components/app/section-box";
+
 import { SchemaForm } from "@/components/app/form/schema";
-import { ViewStateMachine } from "@/components/app/view-state-machine";
+import { SectionBox } from "@/components/app/section-box";
 import {
   FormSkeleton,
   FormSkeletonSchema,
 } from "@/components/app/skeleton/form";
 import { useToast } from "@/components/app/toast/use-toast";
+import { ViewStateMachine } from "@/components/app/view-state-machine";
+
 import { BaseSettingsLayout } from "../_Base";
 import { SETTINGS_VIEW_KEY } from "../constants";
 

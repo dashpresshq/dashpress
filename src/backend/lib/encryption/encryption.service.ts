@@ -1,6 +1,7 @@
 import Cryptr from "cryptr";
+
 import type { ConfigApiService } from "../config/config.service";
-import { ConfigKeys, configApiService } from "../config/config.service";
+import { configApiService, ConfigKeys } from "../config/config.service";
 
 export class EncryptionApiService {
   private encyptionInstance: Cryptr;

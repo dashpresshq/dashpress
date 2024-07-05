@@ -2,6 +2,7 @@ import type { AbstractConfigDataPersistenceService } from "backend/lib/config-pe
 import { createConfigDomainPersistenceService } from "backend/lib/config-persistence";
 import type { EncryptionApiService } from "backend/lib/encryption/encryption.service";
 import { encryptionApiService } from "backend/lib/encryption/encryption.service";
+
 import { IntegrationsConfigurationApiService } from "./_base";
 
 export class CredentialsApiService extends IntegrationsConfigurationApiService {

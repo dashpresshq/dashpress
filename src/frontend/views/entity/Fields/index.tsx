@@ -1,37 +1,39 @@
-import { UserPermissions } from "shared/constants/user";
-import {
-  useEntityFieldLabels,
-  useEntityFieldSelections,
-  useProcessedEntityFieldTypes,
-  useEntityFieldValidations,
-  useEntitySlug,
-} from "frontend/hooks/entity/entity.config";
-import { useEntityFieldLists } from "frontend/hooks/entity/entity.store";
+import { msg } from "@lingui/macro";
+import { useDocumentationActionButton } from "frontend/docs/constants";
+import { FieldsSettingsDocumentation } from "frontend/docs/fields";
+import { useAppConfigurationDomainMessages } from "frontend/hooks/configuration/configuration.constant";
 import {
   useEntityConfiguration,
   useUpsertConfigurationMutation,
 } from "frontend/hooks/configuration/configuration.store";
-import { FieldsSettingsDocumentation } from "frontend/docs/fields";
-import { useRouteParam } from "frontend/lib/routing/useRouteParam";
+import {
+  useEntityFieldLabels,
+  useEntityFieldSelections,
+  useEntityFieldValidations,
+  useEntitySlug,
+  useProcessedEntityFieldTypes,
+} from "frontend/hooks/entity/entity.config";
+import { useEntityFieldLists } from "frontend/hooks/entity/entity.store";
 import { useChangeRouterParam } from "frontend/lib/routing/useChangeRouterParam";
 import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
-import { useDocumentationActionButton } from "frontend/docs/constants";
-import { msg } from "@lingui/macro";
-import { useAppConfigurationDomainMessages } from "frontend/hooks/configuration/configuration.constant";
+import { useRouteParam } from "frontend/lib/routing/useRouteParam";
+import { UserPermissions } from "shared/constants/user";
+
+import { SectionBox } from "@/components/app/section-box";
 import {
   FormSkeleton,
   FormSkeletonSchema,
 } from "@/components/app/skeleton/form";
-import { ViewStateMachine } from "@/components/app/view-state-machine";
 import { Tabs } from "@/components/app/tabs";
-import { SectionBox } from "@/components/app/section-box";
+import { ViewStateMachine } from "@/components/app/view-state-machine";
+
+import { BaseEntitySettingsLayout } from "../_Base";
 import {
   ENTITY_CONFIGURATION_VIEW,
   ENTITY_FIELD_SETTINGS_TAB_LABELS,
 } from "../constants";
-import { FieldsTypeForm } from "./FieldsType.form";
 import { FieldsLabelForm, loadingFieldsLabelForm } from "./FieldsLabel.form";
-import { BaseEntitySettingsLayout } from "../_Base";
+import { FieldsTypeForm } from "./FieldsType.form";
 
 const TITLE_MSG = msg`Field Settings`;
 

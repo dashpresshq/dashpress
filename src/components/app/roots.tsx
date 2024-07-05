@@ -1,7 +1,7 @@
-import { ReactNode } from "react";
+import type { ReactNode } from "react";
 import { QueryProvider } from "frontend/lib/data/QueryClient";
 import { LinguiProvider } from "translations/utils";
-import { Messages } from "@lingui/core";
+import type { Messages } from "@lingui/core";
 import { PortalProvider } from "frontend/_layouts/app/portal";
 import { GoogleTagManager } from "frontend/_layouts/scripts/GoogleTagManager";
 import { ThemeProvider } from "next-themes";

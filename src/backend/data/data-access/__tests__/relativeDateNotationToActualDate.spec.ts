@@ -10,12 +10,14 @@ describe("relativeDateNotationToActualDate", () => {
   afterAll(() => {
     jest.useRealTimers();
   });
+
   describe("Static", () => {
     it("should return back valid dates", () => {
       expect(relativeDateNotationToActualDate("2022-09-09").toISOString()).toBe(
         "2022-09-09T00:00:00.000Z"
       );
     });
+
     it("should return correct value for BEGINNING_OF_TIME_VALUE", () => {
       expect(
         relativeDateNotationToActualDate(
@@ -25,11 +27,13 @@ describe("relativeDateNotationToActualDate", () => {
           .substring(0, 7)
       ).toBe("1899-12");
     });
+
     it("should return correct value for NOW", () => {
       expect(
         relativeDateNotationToActualDate(DATE_FILTER_VALUE.NOW).toISOString()
       ).toBe("2020-03-31T23:00:00.000Z");
     });
+
     it("should return correct value for BEGINNING_OF_YEAR", () => {
       expect(
         relativeDateNotationToActualDate(DATE_FILTER_VALUE.BEGINNING_OF_YEAR)
@@ -38,6 +42,7 @@ describe("relativeDateNotationToActualDate", () => {
       ).toBe("2019-12");
     });
   });
+
   describe("Dynamic", () => {
     it("should return correct value for HOUR", () => {
       expect(
@@ -46,6 +51,7 @@ describe("relativeDateNotationToActualDate", () => {
         ).toISOString()
       ).toBe("2020-03-31T20:00:00.000Z");
     });
+
     it("should return correct value for DAY", () => {
       expect(
         relativeDateNotationToActualDate(
@@ -53,6 +59,7 @@ describe("relativeDateNotationToActualDate", () => {
         ).toISOString()
       ).toBe("2020-03-28T23:00:00.000Z");
     });
+
     it("should return correct value for WEEK", () => {
       expect(
         relativeDateNotationToActualDate(
@@ -60,6 +67,7 @@ describe("relativeDateNotationToActualDate", () => {
         ).toISOString()
       ).toBe("2020-03-10T23:00:00.000Z");
     });
+
     it("should return correct value for MONTH", () => {
       expect(
         relativeDateNotationToActualDate(
@@ -67,6 +75,7 @@ describe("relativeDateNotationToActualDate", () => {
         ).toISOString()
       ).toBe("2019-12-31T23:00:00.000Z");
     });
+
     it("should return correct value for QUARTER", () => {
       expect(
         relativeDateNotationToActualDate(
@@ -74,6 +83,7 @@ describe("relativeDateNotationToActualDate", () => {
         ).toISOString()
       ).toBe("2019-06-30T23:00:00.000Z");
     });
+
     it("should return correct value for YEAR", () => {
       expect(
         relativeDateNotationToActualDate(

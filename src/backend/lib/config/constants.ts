@@ -1,7 +1,7 @@
 import { generateRandomString } from "shared/lib/strings/random";
 import { CacheAdaptorTypes } from "../cache/types";
 import { ConfigAdaptorTypes } from "../config-persistence/types";
-import { ConfigKeys } from "./types";
+import type { ConfigKeys } from "./types";
 
 interface IConfigBag {
   defaultValue: () => string;

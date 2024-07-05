@@ -1,5 +1,5 @@
 import { createConfigDomainPersistenceService } from "backend/lib/config-persistence";
-import { IAccountUser } from "shared/types/user";
+import type { IAccountUser } from "shared/types/user";
 
 const TEST_USERS: IAccountUser[] = [
   {

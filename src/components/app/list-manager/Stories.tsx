@@ -1,10 +1,11 @@
 /* eslint-disable react/function-component-definition */
 
-import { Story } from "@storybook/react";
+import type { Story } from "@storybook/react";
 import { actions } from "@storybook/addon-actions";
 import { loadedDataState } from "frontend/lib/data/constants/loadedDataState";
 import { TestProviders } from "__tests__/_/Provider";
-import { ListManager, IProps } from ".";
+import type { IProps } from ".";
+import { ListManager } from ".";
 
 interface IDemoType {
   name: string;

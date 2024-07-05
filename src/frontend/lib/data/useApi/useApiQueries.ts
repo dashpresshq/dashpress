@@ -1,4 +1,5 @@
-import { useQueries, UseQueryResult } from "@tanstack/react-query";
+import type { UseQueryResult } from "@tanstack/react-query";
+import { useQueries } from "@tanstack/react-query";
 import { useRouter } from "next/router";
 import { ApiRequest } from "../makeRequest";
 import { getQueryCachekey } from "../constants/getQueryCacheKey";

@@ -1,8 +1,8 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import { ReactNode } from "react";
-import { TableFilterType } from "shared/types/data";
-import { SystemIconsKeys } from "shared/constants/Icons";
+import type { ReactNode } from "react";
+import type { TableFilterType } from "shared/types/data";
+import type { SystemIconsKeys } from "shared/constants/Icons";
 import { msg } from "@lingui/macro";
 import { cn } from "@/lib/utils";
 import { Dropdown } from "../../drop-down";
@@ -49,7 +49,7 @@ export function FilterWrapper({
         target={
           <SystemIcon
             icon={systemIcon}
-            className={cn("w-4 h-4 text-muted align-text-top", {
+            className={cn("size-4 align-text-top text-muted", {
               "text-primary": filterHasValue,
               "opacity-70": !filterHasValue,
             })}
@@ -57,7 +57,7 @@ export function FilterWrapper({
         }
       >
         <div className="flex flex-col gap-3 p-2">
-          <div className="text-left flex flex-col gap-3">{children}</div>
+          <div className="flex flex-col gap-3 text-left">{children}</div>
           <SoftButton
             action={() => {
               clearFilter(undefined);

@@ -3,11 +3,11 @@ import * as React from "react";
 import * as SelectPrimitive from "@radix-ui/react-select";
 
 import { useLingui } from "@lingui/react";
-import { MessageDescriptor } from "@lingui/core";
+import type { MessageDescriptor } from "@lingui/core";
 import { Check, ChevronDown, ChevronUp, Loader } from "react-feather";
 import { msg } from "@lingui/macro";
 import { cn } from "@/lib/utils";
-import { ISelectData } from "@/shared/types/options";
+import type { ISelectData } from "@/shared/types/options";
 import { FormSearch } from "../app/form/input/search";
 import { EmptyWrapper } from "../app/empty-wrapper";
 import { ListSkeleton } from "../app/skeleton/list";
@@ -25,7 +25,7 @@ const SelectTrigger = React.forwardRef<
   <SelectPrimitive.Trigger
     ref={ref}
     className={cn(
-      "flex h-9 w-full items-center justify-between font-normal whitespace-nowrap rounded-md border border-border bg-transparent px-3 py-2 text-sm shadow-sm ring-offset-base data-[placeholder]:text-muted focus:outline-none focus:ring-1 focus:ring-primary disabled:cursor-not-allowed disabled:bg-soft [&>span]:line-clamp-1",
+      "flex h-9 w-full items-center justify-between whitespace-nowrap rounded-md border border-border bg-transparent px-3 py-2 text-sm font-normal shadow-sm ring-offset-base focus:outline-none focus:ring-1 focus:ring-primary disabled:cursor-not-allowed disabled:bg-soft data-[placeholder]:text-muted [&>span]:line-clamp-1",
       className
     )}
     {...props}
@@ -33,9 +33,9 @@ const SelectTrigger = React.forwardRef<
     {children}
     <SelectPrimitive.Icon asChild>
       {isLoading ? (
-        <Loader className="animate-spin h-4 w-4 opacity-50" />
+        <Loader className="size-4 animate-spin opacity-50" />
       ) : (
-        <ChevronDown className="h-4 w-4 opacity-50" />
+        <ChevronDown className="size-4 opacity-50" />
       )}
     </SelectPrimitive.Icon>
   </SelectPrimitive.Trigger>
@@ -85,7 +85,7 @@ const SelectContent = React.forwardRef<
     <SelectPrimitive.Content
       ref={ref}
       className={cn(
-        "relative z-50 max-h-96 min-w-[8rem] overflow-hidden rounded-md border bg-base text-main shadow-md data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2",
+        "relative z-50 max-h-96 min-w-32 overflow-hidden rounded-md border bg-base text-main shadow-md data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2",
         position === "popper" &&
           "data-[side=bottom]:translate-y-1 data-[side=left]:-translate-x-1 data-[side=right]:translate-x-1 data-[side=top]:-translate-y-1",
         className
@@ -137,8 +137,8 @@ const SelectItem = React.forwardRef<
     {...props}
   >
     {selected && (
-      <span className="absolute right-2 flex h-3.5 w-3.5 items-center justify-center">
-        <Check className="h-4 w-4" />
+      <span className="absolute right-2 flex size-3.5 items-center justify-center">
+        <Check className="size-4" />
       </span>
     )}
     <SelectPrimitive.ItemText>{children}</SelectPrimitive.ItemText>

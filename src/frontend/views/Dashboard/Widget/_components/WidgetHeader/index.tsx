@@ -4,12 +4,12 @@ import { useDomainMessages } from "frontend/lib/crud-config";
 import { LANG_DOMAINS } from "frontend/lib/crud-config/lang-domains";
 import { DELETE_BUTTON_PROPS } from "@/components/app/button/constants";
 import { SoftButton } from "@/components/app/button/soft";
-import { DASHBOARD_RELATIVE_DAYS } from "./constants";
-import { IWidgetSettingProps } from "./types";
-import { useDashboardWidgetRelativeDateStore } from "../../../relativeTime.store";
 import { ActionButtons } from "@/components/app/button/action";
 import { GrabIcon } from "@/components/app/system-icons";
 import { DropDownMenu } from "@/components/app/drop-drop-menu";
+import { DASHBOARD_RELATIVE_DAYS } from "./constants";
+import type { IWidgetSettingProps } from "./types";
+import { useDashboardWidgetRelativeDateStore } from "../../../relativeTime.store";
 
 interface IProps {
   setting?: IWidgetSettingProps;
@@ -34,8 +34,8 @@ export function WidgetHeader({
   const domainMessages = useDomainMessages(LANG_DOMAINS.DASHBOARD.WIDGETS);
 
   return (
-    <div className="flex justify-between items-center gap-2 w-full">
-      <div className="flex flex-1 items-center overflow-hidden gap-2">
+    <div className="flex w-full items-center justify-between gap-2">
+      <div className="flex flex-1 items-center gap-2 overflow-hidden">
         {setting && (
           <SortableKnob>
             <GrabIcon width={18} />

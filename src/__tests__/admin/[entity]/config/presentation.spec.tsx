@@ -5,7 +5,10 @@ import userEvent from "@testing-library/user-event";
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 
 import EntityPresentationScriptSettings from "pages/admin/[entity]/config/presentation";
-import { closeAllToasts, expectToast } from "__tests__/_/utils/closeAllToasts";
+import {
+  closeAllToasts,
+  getToastMessage,
+} from "__tests__/_/utils/closeAllToasts";
 import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
 import { TestProviders } from "__tests__/_/Provider";
 
@@ -21,6 +24,7 @@ describe("pages/admin/[entity]/config/presentation", () => {
       },
     })
   );
+
   it("should show current section value", async () => {
     render(
       <TestProviders>
@@ -51,7 +55,9 @@ describe("pages/admin/[entity]/config/presentation", () => {
       })
     );
 
-    await expectToast("Presentation Scripts Saved Successfully");
+    expect(await getToastMessage()).toBe(
+      "Presentation Scripts Saved Successfully"
+    );
 
     await closeAllToasts();
   });
@@ -84,7 +90,7 @@ describe("pages/admin/[entity]/config/presentation", () => {
         name: "Save Presentation Scripts",
       })
     );
-    await expectToast(
+    expect(await getToastMessage()).toBe(
       `Could not parse Javascript•Expression: \\n•JS-Error: SyntaxError: Unexpected identifier`
     );
 
@@ -119,7 +125,9 @@ describe("pages/admin/[entity]/config/presentation", () => {
         name: "Save Presentation Scripts",
       })
     );
-    await expectToast("Presentation Scripts Saved Successfully");
+    expect(await getToastMessage()).toBe(
+      "Presentation Scripts Saved Successfully"
+    );
   });
 
   it("should display cleared value correctly", async () => {

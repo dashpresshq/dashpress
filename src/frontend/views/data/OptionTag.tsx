@@ -1,4 +1,4 @@
-import { IColorableSelection } from "shared/types/ui";
+import type { IColorableSelection } from "shared/types/ui";
 import { useLingui } from "@lingui/react";
 import { cn } from "@/lib/utils";
 import { spectrumVariants } from "@/components/ui/spectrum";
@@ -8,7 +8,7 @@ export function OptionTag({ spectrum, label }: IColorableSelection) {
   return (
     <div
       className={cn(
-        "inline-block rounded-md py-0.5 px-2 border",
+        "inline-block rounded-md border px-2 py-0.5",
         spectrumVariants({
           spectrum,
         })

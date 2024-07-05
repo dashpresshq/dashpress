@@ -1,4 +1,7 @@
-import { ActionIntegrations, IIntegrationsList } from "shared/types/actions";
+import type {
+  ActionIntegrations,
+  IIntegrationsList,
+} from "shared/types/actions";
 import { msg } from "@lingui/macro";
 import { SchemaForm } from "@/components/app/form/schema";
 import { Tabs } from "@/components/app/tabs";

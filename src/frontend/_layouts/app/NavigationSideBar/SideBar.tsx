@@ -1,24 +1,25 @@
 import Link from "next/link";
 import { ChevronRight } from "react-feather";
 import { useApi } from "frontend/lib/data/useApi";
-import { INavigationMenuItem } from "shared/types/menu";
+import type { INavigationMenuItem } from "shared/types/menu";
 import { useSessionStorage } from "react-use";
 import { useAppConfiguration } from "frontend/hooks/configuration/configuration.store";
 import { CRUD_CONFIG_NOT_FOUND } from "frontend/lib/crud-config";
 import { typescriptSafeObjectDotEntries } from "shared/lib/objects";
 import { useCallback, useEffect } from "react";
-import {
-  NAVIGATION_MENU_ENDPOINT,
-  SIDE_BAR_WIDTH_VARIATIONS,
-} from "./constants";
-import { NavigationSkeleton } from "./NavigationSkeleton";
-import { ProfileOnNavigation } from "./Profile";
-import { RenderNavigation } from "./RenderNavigation";
 import { cn } from "@/lib/utils";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Button } from "@/components/ui/button";
 import { ViewStateMachine } from "@/components/app/view-state-machine";
 import { Tooltip } from "@/components/app/tooltip";
+import Image from "next/image";
+import { RenderNavigation } from "./RenderNavigation";
+import { ProfileOnNavigation } from "./Profile";
+import { NavigationSkeleton } from "./NavigationSkeleton";
+import {
+  NAVIGATION_MENU_ENDPOINT,
+  SIDE_BAR_WIDTH_VARIATIONS,
+} from "./constants";
 
 interface IProps {
   isFullWidth: boolean;
@@ -70,7 +71,7 @@ export function SideBar({ isFullWidth, setIsFullWidth }: IProps) {
   return (
     <div
       id="gaussian-portal-1"
-      className="fixed transition-all min-h-dvh"
+      className="fixed min-h-dvh transition-all"
       style={{
         maxWidth: isFullWidth
           ? SIDE_BAR_WIDTH_VARIATIONS.full
@@ -86,20 +87,28 @@ export function SideBar({ isFullWidth, setIsFullWidth }: IProps) {
           : SIDE_BAR_WIDTH_VARIATIONS.collapsed,
       }}
     >
-      <div className="flex items-center justify-center h-[50px] bg-[hsla(var(--dp-primary),0.95)]">
+      <div className="flex h-[50px] items-center justify-center bg-[hsla(var(--dp-primary),0.95)]">
         <Link href="/">
           {isFullWidth ? (
-            <img
-              className="w-28 mt-3"
+            <Image
+              className="mt-3 w-28"
+              width={112}
+              height={28}
               src={siteConfig.data.fullLogo}
               alt="full logo"
             />
           ) : (
-            <img className="w-7" src={siteConfig.data.logo} alt="small logo" />
+            <Image
+              className="w-7"
+              width={28}
+              height={28}
+              src={siteConfig.data.logo}
+              alt="small logo"
+            />
           )}
         </Link>
       </div>
-      <div className="flex justify-between flex-col h-[calc(100dvh-50px)]">
+      <div className="flex h-[calc(100dvh-50px)] flex-col justify-between">
         <ScrollArea className="h-[calc(100%-1px)] bg-[hsla(var(--dp-primary),0.95)]">
           <ProfileOnNavigation isFullWidth={isFullWidth} />
           <ViewStateMachine
@@ -119,12 +128,12 @@ export function SideBar({ isFullWidth, setIsFullWidth }: IProps) {
         <Tooltip isOverAButton text="Use `Ctrl + B` to toggle">
           <Button
             variant="ghost"
-            className="h-9 bg-[hsla(var(--dp-primary),0.8)] shadow-sm rounded-none"
+            className="h-9 rounded-none bg-[hsla(var(--dp-primary),0.8)] shadow-sm"
             onClick={() => setIsFullWidth(!isFullWidth)}
           >
             <ChevronRight
               className={cn(
-                "w-8 h-8 text-white inline-block transition-transform",
+                "inline-block size-8 text-white transition-transform",
                 {
                   "rotate-180": isFullWidth,
                 }

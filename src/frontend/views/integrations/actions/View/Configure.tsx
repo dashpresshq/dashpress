@@ -1,16 +1,16 @@
-import { IIntegrationsList } from "shared/types/actions";
+import type { IIntegrationsList } from "shared/types/actions";
 import { typescriptSafeObjectDotKeys } from "shared/lib/objects";
 import { useDomainMessages } from "frontend/lib/crud-config";
 import { LANG_DOMAINS } from "frontend/lib/crud-config/lang-domains";
 import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { SchemaForm } from "@/components/app/form/schema";
+import { useToastActionQueryError } from "@/components/app/toast/error";
 import {
   useActivationConfiguration,
   useUpdateActivatedIntegrationMutation,
 } from "../actions.store";
 import { PasswordMessage, PasswordToReveal } from "../../Password";
-import { useToastActionQueryError } from "@/components/app/toast/error";
 
 interface IProps {
   integrationDetail: IIntegrationsList;

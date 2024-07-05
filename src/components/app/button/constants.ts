@@ -1,6 +1,6 @@
-import { MessageDescriptor } from "@lingui/core";
+import type { MessageDescriptor } from "@lingui/core";
 import { msg } from "@lingui/macro";
-import { IMenuActionItem } from "./types";
+import type { IMenuActionItem } from "./types";
 
 export const DELETE_BUTTON_PROPS = (props: {
   action: () => void;

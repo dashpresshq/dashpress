@@ -1,7 +1,7 @@
 import { useIsRestoring, useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/router";
 import { useLingui } from "@lingui/react";
-import { IUseApiOptions } from "../types";
+import type { IUseApiOptions } from "../types";
 import { ApiRequest } from "../makeRequest";
 import { buildApiOptions } from "../_buildOptions";
 import { getQueryCachekey } from "../constants/getQueryCacheKey";

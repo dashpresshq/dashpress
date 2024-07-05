@@ -90,7 +90,7 @@ describe("guessEntityValidations", () => {
     `);
   });
 
-  it("should combine all gotten validation ", () => {
+  it("should combine all gotten validation", () => {
     expect(
       guessEntityValidations({
         isRequired: true,

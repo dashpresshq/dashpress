@@ -1,6 +1,6 @@
-import { SpectrumColorTypes } from "@/components/ui/spectrum";
-import { IPortalWidgetConfig } from "../portal/widgets";
-import { ISharedWidgetConfig } from "./base";
+import type { SpectrumColorTypes } from "@/components/ui/spectrum";
+import type { IPortalWidgetConfig } from "../portal/widgets";
+import type { ISharedWidgetConfig } from "./base";
 
 export interface ITableWidgetConfig extends ISharedWidgetConfig {
   _type: "table";

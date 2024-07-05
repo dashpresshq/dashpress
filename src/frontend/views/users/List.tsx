@@ -1,7 +1,7 @@
 import { AppLayout } from "frontend/_layouts/app";
 import { roleLabel, UserPermissions } from "shared/constants/user";
-import { IRolesList } from "shared/types/roles";
-import { IAccountProfile } from "shared/types/user";
+import type { IRolesList } from "shared/types/roles";
+import type { IAccountProfile } from "shared/types/user";
 import { useApi } from "frontend/lib/data/useApi";
 import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
@@ -12,16 +12,16 @@ import { transformLabelValueToSelectData } from "translations/fake";
 import { useDomainMessages } from "frontend/lib/crud-config";
 import { LANG_DOMAINS } from "frontend/lib/crud-config/lang-domains";
 import { DELETE_BUTTON_PROPS } from "@/components/app/button/constants";
-import {
-  FEPaginationTable,
+import type {
   IFETableColumn,
   IFETableCell,
 } from "@/components/app/pagination-table";
-import { ROLES_ENDPOINT_CONFIG } from "../roles/roles.store";
-import { USERS_ENDPOINT_CONFIG, useUserDeletionMutation } from "./users.store";
+import { FEPaginationTable } from "@/components/app/pagination-table";
 import { Card } from "@/components/ui/card";
-import { IMenuActionItem } from "@/components/app/button/types";
+import type { IMenuActionItem } from "@/components/app/button/types";
 import { ActionButtons } from "@/components/app/button/action";
+import { USERS_ENDPOINT_CONFIG, useUserDeletionMutation } from "./users.store";
+import { ROLES_ENDPOINT_CONFIG } from "../roles/roles.store";
 
 export function ListUsers() {
   const domainMessages = useDomainMessages(LANG_DOMAINS.ACCOUNT.USERS);
@@ -64,7 +64,11 @@ export function ListUsers() {
         />
       );
     },
-    [userDeletionMutation.isPending]
+    [
+      domainMessages.TEXT_LANG.DELETE,
+      domainMessages.TEXT_LANG.EDIT,
+      userDeletionMutation,
+    ]
   );
 
   const columns: IFETableColumn<IAccountProfile>[] = [

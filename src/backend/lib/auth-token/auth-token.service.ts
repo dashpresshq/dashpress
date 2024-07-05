@@ -1,15 +1,10 @@
-import {
-  configurationApiService,
-  ConfigurationApiService,
-} from "backend/configuration/configuration.service";
+import type { ConfigurationApiService } from "backend/configuration/configuration.service";
+import { configurationApiService } from "backend/configuration/configuration.service";
 import jsonwebtoken from "jsonwebtoken";
-import { IAccountProfile } from "shared/types/user";
+import type { IAccountProfile } from "shared/types/user";
 import { noop } from "shared/lib/noop";
-import {
-  ConfigKeys,
-  configApiService,
-  ConfigApiService,
-} from "../config/config.service";
+import type { ConfigApiService } from "../config/config.service";
+import { ConfigKeys, configApiService } from "../config/config.service";
 
 interface IWithJWTMetadataAccountProfile extends IAccountProfile {
   iat: number;

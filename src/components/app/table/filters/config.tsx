@@ -1,10 +1,7 @@
-import { ReactElement } from "react";
-import {
-  FilterOperators,
-  IColumnFilterBag,
-  TableFilterType,
-} from "shared/types/data";
-import { IFilterProps } from "./types";
+import type { ReactElement } from "react";
+import type { IColumnFilterBag, TableFilterType } from "shared/types/data";
+import { FilterOperators } from "shared/types/data";
+import type { IFilterProps } from "./types";
 import { FilterTableByListSelection } from "./List";
 import { FilterTableByStatus } from "./Status";
 import { FilterTableByIdField } from "./IdField";
@@ -13,14 +10,17 @@ import { FilterTableByText } from "./Text";
 import { FilterTableByNumbers } from "./Number";
 import { FilterTableByDate } from "./Date";
 
+type FilterHasValueImplFnType = (filterValue: IColumnFilterBag<any>) => boolean;
+type FilterComponentFnType = (
+  props: IFilterProps<IColumnFilterBag<any>, any>
+) => ReactElement;
+
 export const FilterTypesConfigBag: Record<
   TableFilterType["_type"],
   {
     operators: FilterOperators[];
-    FilterComponent: (
-      props: IFilterProps<IColumnFilterBag<any>, any>
-    ) => ReactElement;
-    filterHasValueImpl: (filterValue: IColumnFilterBag<any>) => boolean;
+    FilterComponent: FilterComponentFnType;
+    filterHasValueImpl: FilterHasValueImplFnType;
   }
 > = {
   string: {

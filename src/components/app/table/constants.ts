@@ -1,4 +1,4 @@
-import { IPaginatedDataState } from "shared/types/data";
+import type { IPaginatedDataState } from "shared/types/data";
 
 export const DEFAULT_TABLE_STATE: Required<IPaginatedDataState<unknown>> = {
   pageIndex: 0,

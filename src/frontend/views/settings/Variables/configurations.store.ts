@@ -13,7 +13,7 @@ import { MutationHelpers } from "frontend/lib/data/useMutate/mutation-helpers";
 import { useApiMutateOptimisticOptions } from "frontend/lib/data/useMutate/useApiMutateOptimisticOptions";
 import { useApi } from "frontend/lib/data/useApi";
 import { getQueryCachekey } from "frontend/lib/data/constants/getQueryCacheKey";
-import { IKeyValue } from "shared/types/options";
+import type { IKeyValue } from "shared/types/options";
 import { objectToQueryParams } from "frontend/lib/routing/queryObjectToQueryString";
 import { INTEGRATIONS_GROUP_CRUD_CONFIG } from "./constants";
 

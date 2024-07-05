@@ -1,4 +1,4 @@
-import { UseQueryResult } from "@tanstack/react-query";
+import type { UseQueryResult } from "@tanstack/react-query";
 
 export const isQueryIdle = (
   query: Pick<UseQueryResult<unknown>, "status" | "fetchStatus">

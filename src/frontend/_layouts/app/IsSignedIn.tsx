@@ -1,4 +1,5 @@
-import { ReactNode, useEffect } from "react";
+import type { ReactNode } from "react";
+import { useEffect } from "react";
 import { AuthActions } from "frontend/hooks/auth/auth.actions";
 import { useToggle } from "frontend/hooks/state/useToggleState";
 import { ComponentIsLoading } from "@/components/app/loading-component";
@@ -6,15 +7,17 @@ import { ComponentIsLoading } from "@/components/app/loading-component";
 export function IsSignedIn({ children }: { children: ReactNode }) {
   const renderMode = useToggle();
 
+  const isClient = typeof window !== "undefined";
+
   useEffect(() => {
-    if (typeof window !== "undefined") {
+    if (isClient) {
       if (!AuthActions.isAuthenticated()) {
         AuthActions.signOut();
       } else {
         renderMode.on();
       }
     }
-  }, [typeof window]);
+  }, [isClient]);
 
   if (renderMode.isOff) {
     return <ComponentIsLoading fullPage />;

@@ -11,7 +11,7 @@ import { useRouteParam } from "frontend/lib/routing/useRouteParam";
 import { useChangeRouterParam } from "frontend/lib/routing/useChangeRouterParam";
 import { useDocumentationActionButton } from "frontend/docs/constants";
 import { msg } from "@lingui/macro";
-import { MessageDescriptor } from "@lingui/core";
+import type { MessageDescriptor } from "@lingui/core";
 import { typescriptSafeObjectDotEntries } from "shared/lib/objects";
 import { useDomainMessages } from "frontend/lib/crud-config";
 import { LANG_DOMAINS } from "frontend/lib/crud-config/lang-domains";

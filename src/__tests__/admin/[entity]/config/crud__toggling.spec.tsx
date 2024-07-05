@@ -1,3 +1,4 @@
+/* eslint-disable jest/no-conditional-expect */
 import { render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import EntityCrudSettings from "pages/admin/[entity]/config/crud";

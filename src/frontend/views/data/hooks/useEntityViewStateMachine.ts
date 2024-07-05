@@ -1,5 +1,5 @@
 import { useAppConfiguration } from "frontend/hooks/configuration/configuration.store";
-import { IEntityCrudSettings } from "shared/configurations";
+import type { IEntityCrudSettings } from "shared/configurations";
 import { userFriendlyCase } from "shared/lib/strings/friendly-case";
 import { DataStates } from "frontend/lib/data/types";
 import { useCanUserPerformCrudAction } from "./useCanUserPerformCrudAction";

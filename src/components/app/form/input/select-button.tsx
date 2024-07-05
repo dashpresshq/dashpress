@@ -1,11 +1,12 @@
 import { sluggify } from "shared/lib/strings";
-import { ISelectData } from "shared/types/options";
+import type { ISelectData } from "shared/types/options";
 import { useLingui } from "@lingui/react";
-import { VariantProps } from "class-variance-authority";
-import { Button, buttonVariants } from "@/components/ui/button";
+import type { VariantProps } from "class-variance-authority";
+import type { buttonVariants } from "@/components/ui/button";
+import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { LabelAndError } from "./label-and-error";
-import { IBaseFormSelect } from "./types";
+import type { IBaseFormSelect } from "./types";
 
 interface IFormSelect extends IBaseFormSelect {
   selectData: ISelectData[];
@@ -33,7 +34,7 @@ export function FormSelectButton(formInput: IFormSelect) {
               disabled={disabled}
               key={`${value}`}
               className={cn(
-                "rounded-none border-l-0 last:rounded-r-sm first:rounded-l-sm first:border-l",
+                "rounded-none border-l-0 first:rounded-l-sm first:border-l last:rounded-r-sm",
                 {
                   "bg-primary text-primary-text": isChecked,
                 }

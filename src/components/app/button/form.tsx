@@ -1,10 +1,11 @@
 import { Loader } from "react-feather";
-import { SystemIconsKeys } from "shared/constants/Icons";
+import type { SystemIconsKeys } from "shared/constants/Icons";
 import React from "react";
-import { MessageDescriptor } from "@lingui/core";
+import type { MessageDescriptor } from "@lingui/core";
 import { useLingui } from "@lingui/react";
-import { VariantProps } from "class-variance-authority";
-import { Button, buttonVariants } from "@/components/ui/button";
+import type { VariantProps } from "class-variance-authority";
+import type { buttonVariants } from "@/components/ui/button";
+import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { SystemIcon } from "../system-icons";
 
@@ -31,15 +32,15 @@ export function ActionButtonIsMakingRequest({
   const { _ } = useLingui();
 
   return (
-    <div className="flex justify-center items-center w-auto gap-2">
+    <div className="flex w-auto items-center justify-center gap-2">
       {isMakingRequest ? (
         <>
-          <Loader className="w-4 h-4 animate-spin" />
+          <Loader className="size-4 animate-spin" />
           <span>{_(text(true))}</span>
         </>
       ) : (
         <>
-          <SystemIcon icon={systemIcon} className="w-4 h-4" />
+          <SystemIcon icon={systemIcon} className="size-4" />
           <span>{_(text(false))}</span>
         </>
       )}

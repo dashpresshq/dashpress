@@ -18,6 +18,7 @@ describe("abbreviateNumber", () => {
     expect(abbreviateNumber(11111111111111)).toBe("11.1T");
     expect(abbreviateNumber(111111111111111)).toBe("111T");
   });
+
   it("should abreviate numbers with last zero correctly", () => {
     expect(abbreviateNumber(1)).toBe("1");
     expect(abbreviateNumber(10)).toBe("10");

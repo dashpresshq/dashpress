@@ -1,7 +1,7 @@
 import { AuthActions } from "frontend/hooks/auth/auth.actions";
 import { rest } from "msw";
 import { REQUEST_ERROR_CODES } from "shared/constants/auth";
-import { IAuthenticatedUserBag } from "shared/types/user";
+import type { IAuthenticatedUserBag } from "shared/types/user";
 import { BASE_TEST_URL } from "./_utils";
 
 let ME: IAuthenticatedUserBag = {

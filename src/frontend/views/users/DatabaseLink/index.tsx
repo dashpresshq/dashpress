@@ -3,7 +3,7 @@ import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
 import { UserPermissions } from "shared/constants/user";
 import { AppLayout } from "frontend/_layouts/app";
 import { useDocumentationActionButton } from "frontend/docs/constants";
-import { IAppliedSchemaFormConfig } from "shared/form-schemas/types";
+import type { IAppliedSchemaFormConfig } from "shared/form-schemas/types";
 import { ACTIVE_ENTITIES_ENDPOINT } from "shared/constants/entities";
 import {
   useAppConfiguration,

@@ -2,9 +2,9 @@ import { useState } from "react";
 import { IntegrationsConfigurationGroup } from "shared/types/integrations";
 import { msg } from "@lingui/macro";
 import { useDomainMessages } from "frontend/lib/crud-config";
+import { Tabs } from "@/components/app/tabs";
 import { ManageCredentialGroup } from "./ManageCredentialGroup";
 import { INTEGRATIONS_GROUP_CRUD_CONFIG } from "./constants";
-import { Tabs } from "@/components/app/tabs";
 
 export function BaseManageVariables() {
   const [currentTab, setCurrentTab] = useState<IntegrationsConfigurationGroup>(

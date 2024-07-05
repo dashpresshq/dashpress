@@ -1,8 +1,8 @@
-import { AbstractConfigDataPersistenceService } from "backend/lib/config-persistence";
-import { EncryptionApiService } from "backend/lib/encryption/encryption.service";
+import type { AbstractConfigDataPersistenceService } from "backend/lib/config-persistence";
+import type { EncryptionApiService } from "backend/lib/encryption/encryption.service";
 import { BadRequestError, progammingError } from "backend/lib/errors";
 import { typescriptSafeObjectDotEntries } from "shared/lib/objects";
-import { IGroupCredential } from "../types";
+import type { IGroupCredential } from "../types";
 
 export const INTEGRATION_CONFIG_GROUP_DEMILITER = "___";
 

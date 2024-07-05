@@ -1,8 +1,8 @@
-import { IPortalWidgetConfig } from "shared/types/portal/widgets/main";
+import type { IPortalWidgetConfig } from "shared/types/portal/widgets/main";
 import { forwardRef } from "react";
-import { DataStateKeys } from "frontend/lib/data/types";
+import type { DataStateKeys } from "frontend/lib/data/types";
 import { noop } from "shared/lib/noop";
-import { IWidgetSettingProps } from "../../_components/WidgetHeader/types";
+import type { IWidgetSettingProps } from "../../_components/WidgetHeader/types";
 
 interface IProps {
   config: IPortalWidgetConfig;
@@ -12,7 +12,7 @@ interface IProps {
 }
 
 export const PortalDashboardWidget = forwardRef<HTMLDivElement, IProps>(
-  ({ config, setting, data, isPreview }, ref) => {
+  function PortalDashboardWidgetCmp({ config, setting, data, isPreview }, ref) {
     noop(config, setting, ref, data, isPreview);
     return null;
   }

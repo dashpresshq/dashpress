@@ -1,7 +1,7 @@
 /* eslint-disable no-param-reassign */
 import { useEffect, useState } from "react";
-import { IAppliedSchemaFormConfig } from "shared/form-schemas/types";
-import {
+import type { IAppliedSchemaFormConfig } from "shared/form-schemas/types";
+import type {
   ActionIntegrations,
   IFormAction,
   IIntegrationsList,

@@ -1,4 +1,4 @@
-import { GridHeightSizes, GridSpanSizes } from "../ui";
+import type { GridHeightSizes, GridSpanSizes } from "../ui";
 
 export interface ISharedWidgetConfig {
   id: string;

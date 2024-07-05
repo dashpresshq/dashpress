@@ -5,7 +5,7 @@ import SystemSettings from "pages/admin/settings/system";
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
 import { TestProviders } from "__tests__/_/Provider";
-import { expectToast } from "@/__tests__/_/utils/closeAllToasts";
+import { getToastMessage } from "@/__tests__/_/utils/closeAllToasts";
 
 setupApiHandlers();
 
@@ -45,7 +45,7 @@ describe("pages/admin/settings/system", () => {
       screen.getByRole("button", { name: "Save System Settings" })
     );
 
-    await expectToast("System Settings Saved Successfully");
+    expect(await getToastMessage()).toBe("System Settings Saved Successfully");
   });
 
   it("should display updated system values", async () => {

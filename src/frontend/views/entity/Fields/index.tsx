@@ -23,6 +23,8 @@ import {
   FormSkeletonSchema,
 } from "@/components/app/skeleton/form";
 import { ViewStateMachine } from "@/components/app/view-state-machine";
+import { Tabs } from "@/components/app/tabs";
+import { SectionBox } from "@/components/app/section-box";
 import {
   ENTITY_CONFIGURATION_VIEW,
   ENTITY_FIELD_SETTINGS_TAB_LABELS,
@@ -30,8 +32,6 @@ import {
 import { FieldsTypeForm } from "./FieldsType.form";
 import { FieldsLabelForm, loadingFieldsLabelForm } from "./FieldsLabel.form";
 import { BaseEntitySettingsLayout } from "../_Base";
-import { Tabs } from "@/components/app/tabs";
-import { SectionBox } from "@/components/app/section-box";
 
 const TITLE_MSG = msg`Field Settings`;
 

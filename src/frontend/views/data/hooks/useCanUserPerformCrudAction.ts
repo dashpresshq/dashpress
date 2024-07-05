@@ -1,6 +1,6 @@
 import { useUserHasPermission } from "frontend/hooks/auth/user.store";
 import { useEntityCrudSettings } from "frontend/hooks/entity/entity.config";
-import { CrudViewsKeys } from "shared/configurations";
+import type { CrudViewsKeys } from "shared/configurations";
 import { META_USER_PERMISSIONS } from "shared/constants/user";
 import { GranularEntityPermissions } from "shared/types/user";
 

@@ -1,6 +1,6 @@
-import { IPaginationFilters } from "../../../../data/types";
+import type { IPaginationFilters } from "../../../../data/types";
 import { entityValidationImpl } from "./entity";
-import { ValidationImplType } from "./types";
+import type { ValidationImplType } from "./types";
 import { validateEntityFields } from "./_validateEntityField";
 
 export const paginationFilterValidationImpl: ValidationImplType<

@@ -1,8 +1,9 @@
 /* eslint-disable react/function-component-definition */
 
-import { Story } from "@storybook/react";
+import type { Story } from "@storybook/react";
 import { TestProviders } from "__tests__/_/Provider";
-import { ListSkeleton, IProps } from ".";
+import type { IProps } from ".";
+import { ListSkeleton } from ".";
 
 export default {
   title: "Components/Skeleton/List",

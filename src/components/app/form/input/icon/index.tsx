@@ -1,5 +1,6 @@
 import { Field } from "react-final-form";
-import { SystemIconsKeys, SystemIconsList } from "shared/constants/Icons";
+import type { SystemIconsKeys } from "shared/constants/Icons";
+import { SystemIconsList } from "shared/constants/Icons";
 import { required } from "frontend/lib/validations";
 import { userFriendlyCase } from "shared/lib/strings/friendly-case";
 import { msg } from "@lingui/macro";

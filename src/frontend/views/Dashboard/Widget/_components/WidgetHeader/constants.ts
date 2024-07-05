@@ -1,12 +1,14 @@
 import { DATE_FILTER_VALUE } from "shared/types/data";
 import { msg } from "@lingui/macro";
-import { MessageDescriptor } from "@lingui/core";
+import type { MessageDescriptor } from "@lingui/core";
+
+type MsgFn = (value: number) => MessageDescriptor;
 
 const DATE_FILTER_VALUE_CONFIG: Record<
   DATE_FILTER_VALUE,
   {
-    singular: (value: number) => MessageDescriptor;
-    plural: (value: number) => MessageDescriptor;
+    singular: MsgFn;
+    plural: MsgFn;
   }
 > = {
   [DATE_FILTER_VALUE.HOUR]: {

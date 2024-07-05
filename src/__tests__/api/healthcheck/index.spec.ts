@@ -6,6 +6,7 @@ describe("/api/healthcheck", () => {
   beforeAll(async () => {
     await setupAllTestData(["credentials"]);
   });
+
   it("should set up app successfuly", async () => {
     const { req, res } = createUnAuthenticatedMocks({
       method: "GET",

@@ -3,7 +3,7 @@ import {
   useUpsertConfigurationMutation,
 } from "frontend/hooks/configuration/configuration.store";
 import { useAppConfigurationDomainMessages } from "frontend/hooks/configuration/configuration.constant";
-import { AppConfigurationValueType } from "shared/configurations/constants";
+import type { AppConfigurationValueType } from "shared/configurations/constants";
 import { msg } from "@lingui/macro";
 import {
   FormSkeleton,

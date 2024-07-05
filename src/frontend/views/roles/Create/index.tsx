@@ -2,10 +2,8 @@ import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
 import { useNavigationStack } from "frontend/lib/routing/useNavigationStack";
 import { UserPermissions } from "shared/constants/user";
 import { AppLayout } from "frontend/_layouts/app";
-import {
-  BASE_ROLE_FORM_SCHEMA,
-  IBaseRoleForm,
-} from "shared/form-schemas/roles/base";
+import type { IBaseRoleForm } from "shared/form-schemas/roles/base";
+import { BASE_ROLE_FORM_SCHEMA } from "shared/form-schemas/roles/base";
 import { LANG_DOMAINS } from "frontend/lib/crud-config/lang-domains";
 import { useDomainMessages } from "frontend/lib/crud-config";
 import { ContentLayout } from "@/components/app/content-layout";

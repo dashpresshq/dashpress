@@ -1,9 +1,5 @@
-import {
-  CheckSquare,
-  Icon as IconType,
-  MinusSquare,
-  Square,
-} from "react-feather";
+import type { Icon as IconType } from "react-feather";
+import { CheckSquare, MinusSquare, Square } from "react-feather";
 import { cn } from "@/lib/utils";
 
 type CheckboxState = "checked" | "unchecked" | "partial";
@@ -37,7 +33,7 @@ export function IntermediateCheckBox({
       aria-checked={ariaChecked}
       aria-label={label}
       className={cn(
-        "self-center w-4 h-4 rounded-sm cursor-pointer text-primary",
+        "size-4 cursor-pointer self-center rounded-sm text-primary",
         {
           "cursor-not-allowed text-muted": disabled,
         }
@@ -49,7 +45,7 @@ export function IntermediateCheckBox({
         onClick(state);
       }}
     >
-      <IconCmp className="h-5 w-5" aria-hidden />
+      <IconCmp className="size-5" aria-hidden />
     </i>
   );
 }

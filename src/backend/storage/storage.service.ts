@@ -1,14 +1,10 @@
-import {
-  credentialsApiService,
-  CredentialsApiService,
-} from "backend/integrations-configurations";
+import type { CredentialsApiService } from "backend/integrations-configurations";
+import { credentialsApiService } from "backend/integrations-configurations";
 import { validateSchemaRequestBody } from "backend/lib/errors/validate-schema-request-input";
-import {
-  createKeyValueDomainPersistenceService,
-  KeyValueStoreApiService,
-} from "backend/lib/key-value";
+import type { KeyValueStoreApiService } from "backend/lib/key-value";
+import { createKeyValueDomainPersistenceService } from "backend/lib/key-value";
 import { sluggify } from "shared/lib/strings";
-import { IStorageIntegration } from "shared/types/actions";
+import type { IStorageIntegration } from "shared/types/actions";
 import {
   typescriptSafeObjectDotEntries,
   typescriptSafeObjectDotKeys,

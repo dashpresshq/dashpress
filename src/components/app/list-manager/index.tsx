@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
-import { DataStateKeys } from "frontend/lib/data/types";
+import type { DataStateKeys } from "frontend/lib/data/types";
 import { arrayMoveImmutable } from "shared/lib/array/move";
 import SortableList, { SortableItem } from "react-easy-sort";
 import { sortListByOrder } from "shared/lib/array/sort";
 import { msg } from "@lingui/macro";
 import { defaultSearchFunction, defaultToEmptyArray } from "./utils";
-import { IListMangerItemProps, ListManagerItem } from "./list-manager-item";
-import { IEmptyWrapperProps } from "../empty-wrapper/types";
+import type { IListMangerItemProps } from "./list-manager-item";
+import { ListManagerItem } from "./list-manager-item";
+import type { IEmptyWrapperProps } from "../empty-wrapper/types";
 import { ViewStateMachine } from "../view-state-machine";
 import { ListSkeleton } from "../skeleton/list";
 import { EmptyWrapper } from "../empty-wrapper";
@@ -83,17 +84,19 @@ export function ListManager<T, K extends StringProps<T>>({
       {itemsLength === 0 ? (
         <EmptyWrapper {...{ ...empty }} />
       ) : (
-        <ul className="flex flex-col pl-0 rounded-none -mx-4 -mb-4">
+        <ul className="-mx-4 -mb-4 flex flex-col rounded-none pl-0">
           {itemsLength > SEARCH_THRESHOLD ? (
             <FormSearch onChange={setSearchString} />
           ) : null}
           <SortableList
             onSortEnd={onSortEnd}
+            // eslint-disable-next-line tailwindcss/no-custom-classname
             className="list"
             draggedItemClassName="[&_.grab-icon]:cursor-grabbing"
           >
             {searchResults.map((item, index) => (
               <SortableItem key={item[labelField] as unknown as string}>
+                {/* eslint-disable-next-line tailwindcss/no-custom-classname */}
                 <div className="item z-[1000]">
                   <ListManagerItem
                     {...render(item, index)}

@@ -1,4 +1,4 @@
-import { ISharedWidgetConfig } from "shared/types/dashboard/base";
+import type { ISharedWidgetConfig } from "shared/types/dashboard/base";
 
 export interface INeverWidgetConfig extends ISharedWidgetConfig {
   _type: "never";

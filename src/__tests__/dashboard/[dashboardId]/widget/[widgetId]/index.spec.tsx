@@ -4,7 +4,10 @@ import UpdateDashboardWidget from "pages/dashboard/[dashboardId]/widget/[widgetI
 
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 import userEvent from "@testing-library/user-event";
-import { closeAllToasts, expectToast } from "__tests__/_/utils/closeAllToasts";
+import {
+  closeAllToasts,
+  getToastMessage,
+} from "__tests__/_/utils/closeAllToasts";
 import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
 import { TestProviders } from "__tests__/_/Provider";
 
@@ -63,7 +66,9 @@ describe("pages/dashboard/[dashboardId]/widget/[widgetId]/index", () => {
       screen.getByRole("button", { name: "Update Dashboard Widget" })
     );
 
-    await expectToast("Dashboard Widget Updated Successfully");
+    expect(await getToastMessage()).toBe(
+      "Dashboard Widget Updated Successfully"
+    );
 
     await closeAllToasts();
   });
@@ -113,7 +118,9 @@ describe("pages/dashboard/[dashboardId]/widget/[widgetId]/index", () => {
       screen.getByRole("button", { name: "Update Dashboard Widget" })
     );
 
-    await expectToast("Dashboard Widget Updated Successfully");
+    expect(await getToastMessage()).toBe(
+      "Dashboard Widget Updated Successfully"
+    );
   });
 
   it("should render error when widget is not present", async () => {

@@ -10,14 +10,14 @@ import { useEntitySlug } from "frontend/hooks/entity/entity.config";
 import { useDocumentationActionButton } from "frontend/docs/constants";
 import { msg } from "@lingui/macro";
 import { typescriptSafeObjectDotEntries } from "shared/lib/objects";
-import { MessageDescriptor } from "@lingui/core";
-import { ReactElement } from "react";
+import type { MessageDescriptor } from "@lingui/core";
+import type { ReactElement } from "react";
 import { SectionBox } from "@/components/app/section-box";
 import { Tabs } from "@/components/app/tabs";
 import { BaseEntitySettingsLayout } from "../_Base";
 import { ENTITY_CONFIGURATION_VIEW } from "../constants";
 import { ScriptForm } from "./ScriptForm";
-import { IEntityFormExtension } from "./types";
+import type { IEntityFormExtension } from "./types";
 
 function useEntityFormView(entity: string): Record<
   string,

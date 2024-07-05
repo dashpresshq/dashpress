@@ -1,6 +1,7 @@
 import { msg } from "@lingui/macro";
 import { typescriptSafeObjectDotEntries } from "shared/lib/objects";
-import { DATE_FILTER_VALUE, IDateFilterOption } from "shared/types/data";
+import type { IDateFilterOption } from "shared/types/data";
+import { DATE_FILTER_VALUE } from "shared/types/data";
 
 const DATE_FILTER_OPTIONS$1: Record<
   DATE_FILTER_VALUE,

@@ -11,16 +11,19 @@ describe("upsertRouterPathQueryWithValue", () => {
       upsertRouterPathQueryWithValue("/foo/bar?key=changeme", "key", "newvalue")
     ).toBe("/foo/bar?key=newvalue");
   });
+
   it("should create new query key if key doesn't exist", () => {
     expect(
       upsertRouterPathQueryWithValue("/foo/bar?key=value", "newkey", "newvalue")
     ).toBe("/foo/bar?key=value&newkey=newvalue");
   });
+
   it("should create query paths if not query string", () => {
     expect(
       upsertRouterPathQueryWithValue("/foo/bar", "newkey", "newvalue")
     ).toBe("/foo/bar?newkey=newvalue");
   });
+
   it("should keep order of keys", () => {
     expect(
       upsertRouterPathQueryWithValue(

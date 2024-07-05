@@ -5,7 +5,7 @@ import EntityDictionSettings from "pages/admin/[entity]/config/diction";
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
 import { TestProviders } from "__tests__/_/Provider";
-import { expectToast } from "@/__tests__/_/utils/closeAllToasts";
+import { getToastMessage } from "@/__tests__/_/utils/closeAllToasts";
 
 setupApiHandlers();
 
@@ -48,7 +48,7 @@ describe("pages/admin/[entity]/config/diction", () => {
       screen.getByRole("button", { name: "Save Diction Settings" })
     );
 
-    await expectToast("Diction Settings Saved Successfully");
+    expect(await getToastMessage()).toBe("Diction Settings Saved Successfully");
   });
 
   it("should display updated diction values", async () => {

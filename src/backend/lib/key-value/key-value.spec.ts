@@ -1,5 +1,5 @@
 import { createKeyValueDomainPersistenceService } from ".";
-import { KeyValueDomain } from "./types";
+import type { KeyValueDomain } from "./types";
 
 const keyValueStoreApiService = createKeyValueDomainPersistenceService<
   Record<string, unknown>

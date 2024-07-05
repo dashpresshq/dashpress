@@ -1,5 +1,5 @@
-import { ConfigDomain } from "../config-persistence/types";
-import { ConfigApiService } from "../config/config.service";
+import type { ConfigDomain } from "../config-persistence/types";
+import type { ConfigApiService } from "../config/config.service";
 
 export abstract class AbstractCacheService {
   protected readonly _configApiService!: ConfigApiService;

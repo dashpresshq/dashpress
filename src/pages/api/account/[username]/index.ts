@@ -1,4 +1,4 @@
-import { IAccountProfile } from "shared/types/user";
+import type { IAccountProfile } from "shared/types/user";
 import { requestHandler } from "backend/lib/request";
 import { usersApiService } from "backend/users/users.service";
 import { UserPermissions } from "shared/constants/user";

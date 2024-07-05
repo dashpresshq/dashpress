@@ -1,5 +1,5 @@
 import { createConfigDomainPersistenceService } from "backend/lib/config-persistence";
-import { IDBSchema } from "shared/types/db";
+import type { IDBSchema } from "shared/types/db";
 
 const TEST_DB_SCHEMA: IDBSchema[] = [
   {

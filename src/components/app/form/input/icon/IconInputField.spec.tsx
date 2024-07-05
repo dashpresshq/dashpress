@@ -5,8 +5,8 @@ import userEvent from "@testing-library/user-event";
 import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
 import { msg } from "@lingui/macro";
 import { TestProviders } from "__tests__/_/Provider";
-import { IconInputField } from ".";
 import { FormButton } from "@/components/app/button/form";
+import { IconInputField } from ".";
 
 function TestComponent({
   onSubmit,

@@ -3,7 +3,10 @@ import userEvent from "@testing-library/user-event";
 import GeneralDataSettings from "pages/admin/settings/data";
 
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
-import { closeAllToasts, expectToast } from "__tests__/_/utils/closeAllToasts";
+import {
+  closeAllToasts,
+  getToastMessage,
+} from "__tests__/_/utils/closeAllToasts";
 import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
 import { TestProviders } from "__tests__/_/Provider";
 
@@ -43,7 +46,9 @@ describe("pages/admin/settings/data", () => {
         screen.getByRole("button", { name: "Save Metadata Columns" })
       );
 
-      await expectToast("Metadata Columns Saved Successfully");
+      expect(await getToastMessage()).toBe(
+        "Metadata Columns Saved Successfully"
+      );
 
       await closeAllToasts();
     });
@@ -92,7 +97,7 @@ describe("pages/admin/settings/data", () => {
         screen.getByRole("button", { name: "Save Date Format" })
       );
 
-      await expectToast("Date Format Saved Successfully");
+      expect(await getToastMessage()).toBe("Date Format Saved Successfully");
     });
 
     it("should display updated date values", async () => {
@@ -122,7 +127,7 @@ describe("pages/admin/settings/data", () => {
           screen.getByRole("button", { name: "Save Date Format" })
         );
 
-        await expectToast(
+        expect(await getToastMessage()).toBe(
           `Invalid Date FormatPlease go to https://date-fns.org/docs/format to see valid formats`
         );
       });

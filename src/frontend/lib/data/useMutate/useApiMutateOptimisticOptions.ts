@@ -1,10 +1,10 @@
 import { noop } from "shared/lib/noop";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { msg } from "@lingui/macro";
-import { IApiMutateOptions } from "./types";
-import { getQueryCachekey } from "../constants/getQueryCacheKey";
 import { useToast } from "@/components/app/toast/use-toast";
 import { fakeMessageDescriptor } from "@/translations/fake";
+import type { IApiMutateOptions } from "./types";
+import { getQueryCachekey } from "../constants/getQueryCacheKey";
 
 function useApiMutate<T>(endpoint: string) {
   const queryClient = useQueryClient();

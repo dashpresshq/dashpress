@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { SPECTRUM_COLORS, spectrumVariants } from "@/components/ui/spectrum";
 import { cn } from "@/lib/utils";
 import { LabelAndError } from "./label-and-error";
-import { ILabelAndErrorProps } from "./types";
+import type { ILabelAndErrorProps } from "./types";
 
 export function SpectrumColorInputField({
   formInput,
@@ -18,7 +18,7 @@ export function SpectrumColorInputField({
             key={spectrum}
             variant="ghost"
             className={cn(
-              "h-8 w-8 p-0 flex justify-center items-center rounded-full mb-0 border-4 text-center cursor-pointer outline-none",
+              "mb-0 flex size-8 cursor-pointer items-center justify-center rounded-full border-4 p-0 text-center outline-none",
               spectrumVariants({
                 spectrum,
               })

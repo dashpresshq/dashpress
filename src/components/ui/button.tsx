@@ -5,26 +5,26 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center whitespace-nowrap relative rounded-md text-sm transition-colors focus-visible:outline-none focus-visible:ring-1 disabled:pointer-events-none disabled:opacity-50",
+  "relative inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm transition-colors focus-visible:outline-none focus-visible:ring-1 disabled:pointer-events-none disabled:opacity-50",
   {
     variants: {
       variant: {
         default:
-          "bg-primary text-primary-text shadow focus-visible:ring-primary hover:bg-[hsla(var(--dp-primary),0.85)]",
+          "bg-primary text-primary-text shadow hover:bg-[hsla(var(--dp-primary),0.85)] focus-visible:ring-primary",
         destructive:
-          "bg-red-100 text-red-600 shadow-sm hover:bg-red-600 focus-visible:ring-red-600 hover:text-white",
+          "bg-red-100 text-red-600 shadow-sm hover:bg-red-600 hover:text-white focus-visible:ring-red-600",
         soft: "bg-primary-alpha text-primary-alpha-text shadow-sm hover:bg-primary hover:text-primary-text focus-visible:ring-primary",
         ghost: "",
         link: "text-primary underline-offset-4 hover:underline",
         // fix the shadow
         outline:
-          "border border-primary text-primary bg-base shadow-sm hover:bg-primary hover:text-primary-text focus-visible:ring-primary",
+          "border border-primary bg-base text-primary shadow-sm hover:bg-primary hover:text-primary-text focus-visible:ring-primary",
       },
       size: {
         lg: "h-9 px-4 py-2",
         md: "h-7 rounded-md px-3 text-xs",
         sm: "h-6 rounded-md px-2 text-xs",
-        icon: "h-7 w-7 rounded-full text-center",
+        icon: "size-7 rounded-full text-center",
       },
     },
     defaultVariants: {

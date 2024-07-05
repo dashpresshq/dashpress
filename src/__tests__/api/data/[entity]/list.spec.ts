@@ -8,6 +8,7 @@ describe("/api/data/[entity]/list", () => {
   beforeAll(async () => {
     await setupAllTestData(["schema", "credentials", "app-config", "data"]);
   });
+
   describe("GET", () => {
     it("should list data", async () => {
       const { req, res } = createAuthenticatedMocks({

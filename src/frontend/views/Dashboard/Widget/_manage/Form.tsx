@@ -1,14 +1,14 @@
 import { useEntityConfiguration } from "frontend/hooks/configuration/configuration.store";
 import { Field, Form } from "react-final-form";
-import { IWidgetConfig } from "shared/types/dashboard";
+import type { IWidgetConfig } from "shared/types/dashboard";
 import { useMutation } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { WidgetScriptDocumentation } from "frontend/docs/scripts/widget-scripts";
 import { required } from "frontend/lib/validations";
 import { resetFormValues } from "frontend/lib/form/utils";
 import { ApiRequest } from "frontend/lib/data/makeRequest";
-import { IFormProps } from "frontend/lib/form/types";
-import { ILabelValue } from "shared/types/options";
+import type { IFormProps } from "frontend/lib/form/types";
+import type { ILabelValue } from "shared/types/options";
 import { FormCodeEditor } from "frontend/design-system/components/Form/CodeEditor";
 import { loadedDataState } from "frontend/lib/data/constants/loadedDataState";
 import { useDocumentationActionButton } from "frontend/docs/constants";
@@ -19,17 +19,11 @@ import {
   fakeMessageDescriptor,
   transformLabelValueToSelectData,
 } from "translations/fake";
-import { MessageDescriptor } from "@lingui/core";
+import type { MessageDescriptor } from "@lingui/core";
 import { useDomainMessages } from "frontend/lib/crud-config";
 import { LANG_DOMAINS } from "frontend/lib/crud-config/lang-domains";
 import { RenderCode } from "@/components/app/render-code";
 import { FormInput } from "@/components/app/form/input/text";
-import { DashboardWidgetPresentation } from "../Presentation";
-import { BASE_WIDGET_CONFIG } from "../constants";
-import { PortalFormFields, PortalFormSchema } from "./portal";
-import { WidgetFormField } from "./types";
-import { DASHBOARD_WIDGET_HEIGHTS } from "./constants";
-import { usePortalDashboardTypesOptions } from "../portal";
 import { Skeleton } from "@/components/ui/skeleton";
 import { FormGrid } from "@/components/app/form/schema/form-grid";
 import { SpectrumColorInputField } from "@/components/app/form/input/spectrum";
@@ -39,6 +33,12 @@ import { Tabs } from "@/components/app/tabs";
 import { SoftButton } from "@/components/app/button/soft";
 import { FormButton } from "@/components/app/button/form";
 import { FormSelect } from "@/components/app/form/input/select";
+import { usePortalDashboardTypesOptions } from "../portal";
+import { DASHBOARD_WIDGET_HEIGHTS } from "./constants";
+import type { WidgetFormField } from "./types";
+import { PortalFormFields, PortalFormSchema } from "./portal";
+import { BASE_WIDGET_CONFIG } from "../constants";
+import { DashboardWidgetPresentation } from "../Presentation";
 
 const FormSchema: Partial<Record<IWidgetConfig["_type"], WidgetFormField[]>> = {
   "summary-card": ["color", "icon"],
@@ -95,6 +95,7 @@ export function DashboardWidgetForm({
         onSubmit={onSubmit}
         initialValues={initialValues}
         render={({ handleSubmit, form, pristine, values, submitting }) => {
+          // eslint-disable-next-line react-hooks/rules-of-hooks
           const tableViews = useEntityConfiguration(
             "table_views",
             values.entity
@@ -290,13 +291,13 @@ export function DashboardWidgetForm({
                 <FormGrid.Item>
                   {process.env.NEXT_PUBLIC_IS_DEMO ? (
                     <div className="text-center ">
-                      <p className="text-sm mt-4">
+                      <p className="mt-4 text-sm">
                         You will be able to save this form on your own
                         installation
                       </p>
                     </div>
                   ) : (
-                    <div className="flex justify-end gap-4 mt-4">
+                    <div className="mt-4 flex justify-end gap-4">
                       {values._type && (
                         <SoftButton
                           action={() => {

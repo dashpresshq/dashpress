@@ -1,10 +1,10 @@
 import ReactPaginate from "react-paginate";
 import { Trans, msg } from "@lingui/macro";
 import { ChevronLeft, ChevronRight, MoreHorizontal } from "react-feather";
-import { TABLE_PAGE_SIZES } from "./constants";
 import { Select } from "@/components/ui/select";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { TABLE_PAGE_SIZES } from "./constants";
 
 interface IProps {
   setPageSize: (pageSize: number) => void;
@@ -17,7 +17,7 @@ interface IProps {
 
 const className = cn(
   buttonVariants({ variant: "ghost" }),
-  "text-primary border border-primary-alpha hover:bg-primary-alpha hover:text-primary-alpha-text"
+  "border border-primary-alpha text-primary hover:bg-primary-alpha hover:text-primary-alpha-text"
 );
 
 export function TablePagination({
@@ -33,12 +33,12 @@ export function TablePagination({
   }
   return (
     <div className="px-3 py-2">
-      <div className="flex items-center flex-col gap-2 md:flex-row md:justify-between">
-        <div className="flex gap-2 items-center">
+      <div className="flex flex-col items-center gap-2 md:flex-row md:justify-between">
+        <div className="flex items-center gap-2">
           <Select
             placeholder={msg`Select Page Size`}
             name="table-page-size"
-            className="w-18"
+            className="w-28"
             options={TABLE_PAGE_SIZES.map((option) => ({
               value: `${option}`,
               label: msg`${option} / Page`,
@@ -51,9 +51,9 @@ export function TablePagination({
         </div>
         <nav role="navigation" aria-label="pagination">
           <ReactPaginate
-            previousLabel={<ChevronLeft className="h-4 w-4" />}
-            nextLabel={<ChevronRight className="h-4 w-4" />}
-            breakLabel={<MoreHorizontal className="h-4 w-4" />}
+            previousLabel={<ChevronLeft className="size-4" />}
+            nextLabel={<ChevronRight className="size-4" />}
+            breakLabel={<MoreHorizontal className="size-4" />}
             pageCount={totalPageCount}
             renderOnZeroPageCount={() => null}
             marginPagesDisplayed={2}

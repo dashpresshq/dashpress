@@ -1,13 +1,10 @@
-import {
-  keepPreviousData,
-  useQuery,
-  UseQueryResult,
-} from "@tanstack/react-query";
-import { IPaginatedDataState, PaginatedData } from "shared/types/data";
+import type { UseQueryResult } from "@tanstack/react-query";
+import { keepPreviousData, useQuery } from "@tanstack/react-query";
+import type { IPaginatedDataState, PaginatedData } from "shared/types/data";
 import { useRouter } from "next/router";
 import { ApiRequest } from "../makeRequest";
 import { buildApiOptions } from "../_buildOptions";
-import { IUseApiOptions } from "../types";
+import type { IUseApiOptions } from "../types";
 import { getPaginatedDataCachekey } from "../constants/getQueryCacheKey";
 import { tableDataParamsToQueryString } from "./tableDataParamsToQueryString";
 

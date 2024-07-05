@@ -1,4 +1,4 @@
-import { IWidgetConfig } from "shared/types/dashboard";
+import type { IWidgetConfig } from "shared/types/dashboard";
 import {
   CRUD_CONFIG_NOT_FOUND,
   useDomainMessages,

@@ -7,7 +7,7 @@ import userEvent from "@testing-library/user-event";
 import { getTableRows } from "__tests__/_/utils/getTableRows";
 import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
 import { TestProviders } from "__tests__/_/Provider";
-import { expectToast } from "../_/utils/closeAllToasts";
+import { getToastMessage } from "../_/utils/closeAllToasts";
 
 setupApiHandlers();
 
@@ -96,7 +96,7 @@ describe("pages/users", () => {
       await within(confirmBox).findByRole("button", { name: "Confirm" })
     );
 
-    await expectToast("User Deleted Successfully");
+    expect(await getToastMessage()).toBe("User Deleted Successfully");
 
     expect(replaceMock).toHaveBeenCalledWith("/users");
     expect(await screen.findAllByRole("row")).toHaveLength(3);

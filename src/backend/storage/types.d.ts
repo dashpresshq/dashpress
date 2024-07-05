@@ -1,4 +1,4 @@
-import { IAppliedSchemaFormConfig } from "shared/form-schemas/types";
+import type { IAppliedSchemaFormConfig } from "shared/form-schemas/types";
 
 export interface IStorageIntegrationsImplemention<T> {
   title: string;

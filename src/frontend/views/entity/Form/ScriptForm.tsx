@@ -1,8 +1,8 @@
 import { useAppConfigurationDomainMessages } from "frontend/hooks/configuration/configuration.constant";
-import { AppConfigurationKeys } from "shared/configurations";
+import type { AppConfigurationKeys } from "shared/configurations";
 import { evalJavascriptString } from "shared/lib/script-runner";
 import { useEvaluateScriptContext } from "frontend/hooks/scripts";
-import { ISchemaFormScriptProps } from "shared/form-schemas/types";
+import type { ISchemaFormScriptProps } from "shared/form-schemas/types";
 import { msg } from "@lingui/macro";
 import { fakeMessageDescriptor } from "translations/fake";
 import { ViewStateMachine } from "@/components/app/view-state-machine";

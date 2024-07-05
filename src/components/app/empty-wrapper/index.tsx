@@ -1,13 +1,13 @@
 import { Frown } from "react-feather";
 import { useLingui } from "@lingui/react";
-import { IEmptyWrapperProps } from "./types";
+import type { IEmptyWrapperProps } from "./types";
 import { SoftButton } from "../button/soft";
 
 export function EmptyWrapper({ text, createNew }: IEmptyWrapperProps) {
   const { _ } = useLingui();
   return (
-    <div className="text-center p-7 pb-5 rounded-sm bg-base">
-      <Frown size={50} className="text-muted mb-6 inline-block" />
+    <div className="rounded-sm bg-base p-7 pb-5 text-center">
+      <Frown size={50} className="mb-6 inline-block text-muted" />
       <p className="text-muted"> {_(text)} </p>
       {createNew && (
         <SoftButton

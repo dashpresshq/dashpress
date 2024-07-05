@@ -1,10 +1,11 @@
-import { useQuery, UseQueryResult } from "@tanstack/react-query";
-import {
+import type { UseQueryResult } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
+import type {
   FieldQueryFilter,
-  FilterOperators,
   IPaginatedDataState,
   PaginatedData,
 } from "shared/types/data";
+import { FilterOperators } from "shared/types/data";
 import { ApiRequest } from "frontend/lib/data/makeRequest";
 import { getQueryCachekey } from "frontend/lib/data/constants/getQueryCacheKey";
 

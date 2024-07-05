@@ -6,7 +6,7 @@ import { Form, Field } from "react-final-form";
 import arrayMutators from "final-form-arrays";
 import { FieldArray } from "react-final-form-arrays";
 import { userFriendlyCase } from "shared/lib/strings/friendly-case";
-import {
+import type {
   FormFieldTypes,
   IFieldValidationItem,
   ValidationTypes,

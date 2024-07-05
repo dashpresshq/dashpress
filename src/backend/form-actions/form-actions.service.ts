@@ -1,9 +1,7 @@
-import {
-  createConfigDomainPersistenceService,
-  AbstractConfigDataPersistenceService,
-} from "backend/lib/config-persistence";
+import type { AbstractConfigDataPersistenceService } from "backend/lib/config-persistence";
+import { createConfigDomainPersistenceService } from "backend/lib/config-persistence";
 import { nanoid } from "nanoid";
-import { IFormAction } from "shared/types/actions";
+import type { IFormAction } from "shared/types/actions";
 
 export class FormActionsApiService {
   constructor(

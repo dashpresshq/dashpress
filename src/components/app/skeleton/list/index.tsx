@@ -8,7 +8,7 @@ export function ListSkeleton({ count }: IProps) {
   return (
     <div data-testid="list-skeleton">
       {Array.from({ length: count }, (_, k) => k + 1).map((key) => (
-        <Skeleton className="h-10 mb-0.5" key={key} />
+        <Skeleton className="mb-0.5 h-10" key={key} />
       ))}
     </div>
   );

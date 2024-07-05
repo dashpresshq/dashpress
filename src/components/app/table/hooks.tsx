@@ -1,15 +1,11 @@
-import { IPaginatedDataState } from "shared/types/data";
-import {
-  ColumnFiltersState,
-  createColumnHelper,
-  Table,
-  Updater,
-} from "@tanstack/react-table";
+import type { IPaginatedDataState } from "shared/types/data";
+import type { ColumnFiltersState, Table, Updater } from "@tanstack/react-table";
+import { createColumnHelper } from "@tanstack/react-table";
 import { useEffect, useMemo } from "react";
 import { usePrevious } from "react-use";
 import { useToggle } from "frontend/hooks/state/useToggleState";
 import { useLingui } from "@lingui/react";
-import { ITableColumn } from "./types";
+import type { ITableColumn } from "./types";
 import {
   buildTableStateToRefreshPageNumber,
   internalTableStateToStandard,

@@ -1,5 +1,5 @@
-import { UseQueryOptions } from "@tanstack/react-query";
-import { IUseApiOptions } from "./types";
+import type { UseQueryOptions } from "@tanstack/react-query";
+import type { IUseApiOptions } from "./types";
 
 export function buildApiOptions<T>(
   options: IUseApiOptions<T>

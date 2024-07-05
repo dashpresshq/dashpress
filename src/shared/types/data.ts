@@ -1,6 +1,6 @@
-import { Knex } from "knex";
-import { MessageDescriptor } from "@lingui/core";
-import { ISystemStatusForDisplay } from "./options";
+import type { Knex } from "knex";
+import type { MessageDescriptor } from "@lingui/core";
+import type { ISystemStatusForDisplay } from "./options";
 
 export enum FilterOperators {
   GREATER_THAN = "g",

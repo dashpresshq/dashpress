@@ -1,8 +1,8 @@
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
 import { useRouter } from "next/router";
-import { IBaseRoleForm } from "shared/form-schemas/roles/base";
+import type { IBaseRoleForm } from "shared/form-schemas/roles/base";
 import { makeRoleId } from "shared/constants/user";
-import { IRolesList } from "shared/types/roles";
+import type { IRolesList } from "shared/types/roles";
 import {
   MAKE_ENDPOINTS_CONFIG,
   useDomainMessages,

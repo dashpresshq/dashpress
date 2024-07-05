@@ -1,11 +1,12 @@
-import { DATE_FILTER_VALUE, IColumnFilterBag } from "shared/types/data";
+import type { IColumnFilterBag } from "shared/types/data";
+import { DATE_FILTER_VALUE } from "shared/types/data";
 import { useToggle } from "frontend/hooks/state/useToggleState";
 import { msg } from "@lingui/macro";
-import { IFilterProps } from "../types";
 import { FormSwitch } from "@/components/app/form/input/switch";
+import { ControlledFormDateInput } from "@/components/app/form/input/date";
+import type { IFilterProps } from "../types";
 import { DATE_FILTER_OPTIONS } from "./constants";
 import { DateSelection } from "./_Selection";
-import { ControlledFormDateInput } from "@/components/app/form/input/date";
 
 export function FilterTableByDate({
   column: { filterValue, setFilter },

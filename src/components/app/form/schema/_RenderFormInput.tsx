@@ -3,7 +3,7 @@ import { FormFileInput } from "frontend/design-system/components/Form/File";
 import { useExtendRenderFormInputProps } from "frontend/views/data/portal";
 import { useLingui } from "@lingui/react";
 import { FormInput } from "@/components/app/form/input/text";
-import { IRenderFormInputProps } from "./types";
+import type { IRenderFormInputProps } from "./types";
 import { FormNumberInput } from "../input/number";
 import { FormSelectButton } from "../input/select-button";
 import { FormPasswordInput } from "../input/password";

@@ -27,13 +27,15 @@ const DATABASE_FIELDS: Array<keyof IDataSourceCredentials> = [
   "ssl",
 ];
 
+type GetQueryDataFnType = (data: any) => unknown;
+
 export const DATA_SOURCES_CONFIG: Record<
   RDMSSources,
   {
     fields: Array<keyof IDataSourceCredentials>;
     port?: number;
     useConnectionString?: boolean;
-    getQueryData: (input: any) => unknown;
+    getQueryData: GetQueryDataFnType;
     scriptQueryDelimiter: string;
   }
 > = {

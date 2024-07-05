@@ -1,9 +1,6 @@
 import { render, screen } from "@testing-library/react";
-import {
-  INavigationMenuItem,
-  NavigationMenuItemType,
-  SystemLinks,
-} from "shared/types/menu";
+import type { INavigationMenuItem } from "shared/types/menu";
+import { NavigationMenuItemType, SystemLinks } from "shared/types/menu";
 import userEvent from "@testing-library/user-event";
 import { rest } from "msw";
 import { BASE_TEST_URL } from "__tests__/_/api-handlers/_utils";

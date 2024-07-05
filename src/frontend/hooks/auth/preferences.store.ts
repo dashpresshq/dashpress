@@ -3,11 +3,11 @@ import { LANG_DOMAINS } from "frontend/lib/crud-config/lang-domains";
 import { ApiRequest } from "frontend/lib/data/makeRequest";
 import { useApi } from "frontend/lib/data/useApi";
 import { useWaitForResponseMutationOptions } from "frontend/lib/data/useMutate/useWaitForResponseMutationOptions";
-import {
-  USER_PREFERENCES_CONFIG,
+import type {
   UserPreferencesKeys,
   UserPreferencesValueType,
 } from "shared/user-preferences/constants";
+import { USER_PREFERENCES_CONFIG } from "shared/user-preferences/constants";
 import { useIsUserAutenticated } from "./auth.actions";
 
 const userPrefrencesApiPath = (key: UserPreferencesKeys) => {

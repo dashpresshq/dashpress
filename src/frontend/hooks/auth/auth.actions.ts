@@ -66,10 +66,11 @@ export const AuthActions = {
 };
 
 export const useIsUserAutenticated = () => {
+  const isClient = typeof window !== "undefined";
   return useMemo(() => {
-    if (typeof window !== "undefined") {
+    if (isClient) {
       return AuthActions.isAuthenticated();
     }
     return false;
-  }, [typeof window]);
+  }, [isClient]);
 };

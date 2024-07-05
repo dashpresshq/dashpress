@@ -8,8 +8,10 @@ import {
 } from "date-fns";
 import { DATE_FILTER_VALUE } from "shared/types/data";
 
+type DateFilterValueFnType = (count: number) => Date;
+
 const RELATIVE_TIME_MAP: Partial<
-  Record<DATE_FILTER_VALUE, (count: number) => Date>
+  Record<DATE_FILTER_VALUE, DateFilterValueFnType>
 > = {
   [DATE_FILTER_VALUE.HOUR]: (count) => subHours(new Date(), count),
   [DATE_FILTER_VALUE.DAY]: (count) => subDays(new Date(), count),

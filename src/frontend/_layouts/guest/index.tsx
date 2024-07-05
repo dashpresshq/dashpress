@@ -1,10 +1,11 @@
-import { ReactNode } from "react";
+import type { ReactNode } from "react";
 import Head from "next/head";
 import { useAppConfiguration } from "frontend/hooks/configuration/configuration.store";
-import { MessageDescriptor } from "@lingui/core";
+import type { MessageDescriptor } from "@lingui/core";
 import { useLingui } from "@lingui/react";
-import { useAppTheme } from "../useAppTheme";
 import { CardContent, CardHeader } from "@/components/ui/card";
+import Image from "next/image";
+import { useAppTheme } from "../useAppTheme";
 
 interface IProps {
   children: ReactNode;
@@ -34,11 +35,11 @@ export function AuthLayout({ children, title, subTitle }: IProps) {
         </title>
       </Head>
       <div className="relative bg-primary">
-        <div className="absolute overflow-hidden justify-center inset-0 items-center flex">
+        <div className="absolute inset-0 flex items-center justify-center overflow-hidden">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             preserveAspectRatio="none"
-            className="w-lvw h-lvh"
+            className="h-lvh w-lvw"
             viewBox="0 0 1600 800"
           >
             <rect fill="#000" width="1600" height="800" />
@@ -68,16 +69,22 @@ export function AuthLayout({ children, title, subTitle }: IProps) {
             </g>
           </svg>
         </div>
-        <div className="flex justify-center items-center h-lvh relative">
-          <div className="w-full max-w-lg m-4">
-            <CardHeader className="flex gap-2 flex-col items-center bg-primary rounded-xl rounded-b-none">
+        <div className="relative flex h-lvh items-center justify-center">
+          <div className="m-4 w-full max-w-lg">
+            <CardHeader className="flex flex-col items-center gap-2 rounded-xl rounded-b-none bg-primary">
               {fullLogo && (
                 <a href={homeLink}>
-                  <img src={fullLogo} className="w-40" alt="logo" />
+                  <Image
+                    src={fullLogo}
+                    className="w-40"
+                    width={160}
+                    height={40}
+                    alt="logo"
+                  />
                 </a>
               )}
               <p className="text-white">{_(title)}</p>
-              {subTitle && <p className="text-white text-xs">{_(subTitle)}</p>}
+              {subTitle && <p className="text-xs text-white">{_(subTitle)}</p>}
             </CardHeader>
             <CardContent className="rounded-xl rounded-t-none">
               {children}

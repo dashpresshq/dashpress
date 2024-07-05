@@ -4,9 +4,9 @@ import userEvent from "@testing-library/user-event";
 import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
 import { fakeMessageDescriptor } from "translations/fake";
 import { TestProviders } from "__tests__/_/Provider";
-import { IAppliedSchemaFormConfig } from "shared/form-schemas/types";
+import type { IAppliedSchemaFormConfig } from "shared/form-schemas/types";
+import { getToastMessage } from "@/__tests__/_/utils/closeAllToasts";
 import { SchemaForm } from ".";
-import { expectToast } from "@/__tests__/_/utils/closeAllToasts";
 
 type IAccount = {
   name: string;
@@ -225,7 +225,7 @@ describe("<SchemaForm />", () => {
 
     expect(mockOnSubmit).not.toHaveBeenCalled();
 
-    await expectToast("A Custom Validation Failed");
+    expect(await getToastMessage()).toBe("A Custom Validation Failed");
   });
 
   it("should edit forms", async () => {

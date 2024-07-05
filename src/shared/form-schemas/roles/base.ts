@@ -1,5 +1,5 @@
 import { msg } from "@lingui/macro";
-import { IAppliedSchemaFormConfig } from "../types";
+import type { IAppliedSchemaFormConfig } from "../types";
 
 export type IBaseRoleForm = {
   name: string;

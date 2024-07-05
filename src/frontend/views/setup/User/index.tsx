@@ -1,12 +1,10 @@
 import { AuthLayout } from "frontend/_layouts/guest";
 import { useSetupCheck } from "frontend/hooks/setup/setup.store";
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
-import {
-  ISetupUserForm,
-  SETUP_USER_FORM_SCHEMA,
-} from "shared/form-schemas/setup/user";
+import type { ISetupUserForm } from "shared/form-schemas/setup/user";
+import { SETUP_USER_FORM_SCHEMA } from "shared/form-schemas/setup/user";
 import { msg } from "@lingui/macro";
-import { CustomNextPage } from "frontend/_layouts/types";
+import type { CustomNextPage } from "frontend/_layouts/types";
 import { ViewStateMachine } from "@/components/app/view-state-machine";
 import {
   FormSkeleton,

@@ -8,9 +8,10 @@ import {
   useEntityCrudFields,
 } from "frontend/hooks/entity/entity.config";
 import { useMemo } from "react";
-import { DataStateKeys, DataStates } from "frontend/lib/data/types";
-import { SystemIconsKeys } from "shared/constants/Icons";
-import { MessageDescriptor } from "@lingui/core";
+import type { DataStateKeys } from "frontend/lib/data/types";
+import { DataStates } from "frontend/lib/data/types";
+import type { SystemIconsKeys } from "shared/constants/Icons";
+import type { MessageDescriptor } from "@lingui/core";
 import { ViewStateMachine } from "@/components/app/view-state-machine";
 import { SchemaForm } from "@/components/app/form/schema";
 import {

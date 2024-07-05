@@ -1,5 +1,6 @@
 import handler from "pages/api/form-actions/[key]";
-import { ActionIntegrations, IFormAction } from "shared/types/actions";
+import type { IFormAction } from "shared/types/actions";
+import { ActionIntegrations } from "shared/types/actions";
 import {
   createAuthenticatedMocks,
   setupAllTestData,

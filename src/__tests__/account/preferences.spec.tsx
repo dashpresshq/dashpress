@@ -5,7 +5,7 @@ import UserPreferences from "pages/account/preferences";
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
 import { TestProviders } from "__tests__/_/Provider";
-import { expectToast } from "../_/utils/closeAllToasts";
+import { getToastMessage } from "../_/utils/closeAllToasts";
 
 setupApiHandlers();
 
@@ -40,7 +40,9 @@ describe("pages/account/preferences", () => {
       screen.getByRole("button", { name: "Save Account Preferences" })
     );
 
-    await expectToast("Account Preferences Saved Successfully");
+    expect(await getToastMessage()).toBe(
+      "Account Preferences Saved Successfully"
+    );
   });
 
   it("should display updated preference", async () => {

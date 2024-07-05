@@ -1,4 +1,4 @@
-import { IStorageIntegrationsImplemention } from "../types";
+import type { IStorageIntegrationsImplemention } from "../types";
 import { AWS_STORAGE_INTEGRATION } from "./aws";
 import { CLOUDINARY_STORAGE_INTEGRATION } from "./cloudinary";
 import { GOOGLE_STORAGE_INTEGRATION } from "./google";

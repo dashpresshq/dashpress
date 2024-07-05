@@ -1,6 +1,6 @@
 import { Form, Field } from "react-final-form";
 import { useAppConfigurationDomainMessages } from "frontend/hooks/configuration/configuration.constant";
-import { IFormProps } from "frontend/lib/form/types";
+import type { IFormProps } from "frontend/lib/form/types";
 import { composeValidators, required } from "frontend/lib/validations";
 import { msg } from "@lingui/macro";
 import { FormInput } from "@/components/app/form/input/text";

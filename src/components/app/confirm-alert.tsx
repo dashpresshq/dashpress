@@ -1,6 +1,6 @@
 import { t } from "@lingui/macro";
 import { createStore } from "frontend/lib/store";
-import { MessageDescriptor } from "@lingui/core";
+import type { MessageDescriptor } from "@lingui/core";
 import { useLingui } from "@lingui/react";
 import {
   AlertDialog,

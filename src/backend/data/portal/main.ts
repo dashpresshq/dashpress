@@ -1,7 +1,7 @@
 /* eslint-disable max-classes-per-file */
 import { noop } from "shared/lib/noop";
-import { QueryFilterSchema } from "shared/types/data";
-import { IDataApiService } from "../types";
+import type { QueryFilterSchema } from "shared/types/data";
+import type { IDataApiService } from "../types";
 
 export class PortalDataHooksService {
   static async beforeCreate({

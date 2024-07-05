@@ -6,7 +6,7 @@ import RoleCreate from "pages/roles/create";
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
 import { TestProviders } from "__tests__/_/Provider";
-import { expectToast } from "../_/utils/closeAllToasts";
+import { getToastMessage } from "../_/utils/closeAllToasts";
 
 setupApiHandlers();
 
@@ -32,7 +32,9 @@ describe("pages/roles/create", () => {
 
     await userEvent.click(screen.getByRole("button", { name: "Create Role" }));
 
-    await expectToast("Role Created SuccessfullyView Details");
+    expect(await getToastMessage()).toBe(
+      "Role Created SuccessfullyView Details"
+    );
 
     await userEvent.click(screen.getByRole("button", { name: "View Details" }));
 

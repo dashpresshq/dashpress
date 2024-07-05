@@ -1,8 +1,8 @@
-import { MessageDescriptor } from "@lingui/core";
+import type { MessageDescriptor } from "@lingui/core";
 import { msg } from "@lingui/macro";
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
-import { SystemIconsKeys } from "shared/constants/Icons";
-import { PortalSystemLinks } from "shared/constants/portal/menu/main";
+import type { SystemIconsKeys } from "shared/constants/Icons";
+import type { PortalSystemLinks } from "shared/constants/portal/menu/main";
 
 export const useConstantNavigationMenuItems = (): Array<{
   systemIcon: SystemIconsKeys;

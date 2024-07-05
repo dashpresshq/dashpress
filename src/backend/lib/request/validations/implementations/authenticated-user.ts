@@ -1,6 +1,6 @@
-import { IAccountProfile } from "shared/types/user";
+import type { IAccountProfile } from "shared/types/user";
 import { progammingError } from "backend/lib/errors";
-import { ValidationImplType } from "./types";
+import type { ValidationImplType } from "./types";
 
 export const authenticatedUserValidationImpl: ValidationImplType<
   IAccountProfile

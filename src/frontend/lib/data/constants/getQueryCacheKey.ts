@@ -1,4 +1,4 @@
-import { IPaginatedDataState } from "shared/types/data";
+import type { IPaginatedDataState } from "shared/types/data";
 
 export const getQueryCachekey = (endPoint: string) =>
   endPoint

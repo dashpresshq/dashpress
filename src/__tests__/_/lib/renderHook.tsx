@@ -1,11 +1,10 @@
 import { render } from "@testing-library/react";
-import {
+import type {
   JSXElementConstructor,
   MutableRefObject,
   ReactElement,
-  createRef,
-  useEffect,
 } from "react";
+import { createRef, useEffect } from "react";
 
 export function renderHook(
   renderCallback: (input?: () => void) => void,

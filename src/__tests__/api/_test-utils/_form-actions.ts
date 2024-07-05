@@ -1,5 +1,6 @@
 import { createConfigDomainPersistenceService } from "backend/lib/config-persistence";
-import { ActionIntegrations, IFormAction } from "shared/types/actions";
+import type { IFormAction } from "shared/types/actions";
+import { ActionIntegrations } from "shared/types/actions";
 import { DataEventActions } from "shared/types/data";
 
 const TEST_FORM_ACTIONS: IFormAction[] = [

@@ -1,6 +1,6 @@
 /* eslint-disable react/function-component-definition */
 
-import { Story } from "@storybook/react";
+import type { Story } from "@storybook/react";
 import { Field, Form } from "react-final-form";
 import { action } from "@storybook/addon-actions";
 import { required } from "frontend/lib/validations";

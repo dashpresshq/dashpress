@@ -29,13 +29,13 @@ export function NavigationSkeleton() {
   ];
 
   return (
-    <div className="flex gap-2 flex-col px-6 mt-2">
+    <div className="mt-2 flex flex-col gap-2 px-6">
       {SCHEMA.map((type, index) => {
         if (type === "header") {
           return (
             <Skeleton
               key={index}
-              className="h-4 bg-[hsla(0,0%,0%,0.3)] max-w-24"
+              className="h-4 max-w-24 bg-[hsla(0,0%,0%,0.3)]"
             />
           );
         }

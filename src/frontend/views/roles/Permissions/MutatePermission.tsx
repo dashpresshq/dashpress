@@ -1,11 +1,10 @@
 import { UserPermissions } from "shared/constants/user";
 import { loadedDataState } from "frontend/lib/data/constants/loadedDataState";
-
 import { msg } from "@lingui/macro";
-import { MessageDescriptor } from "@lingui/core";
+import type { MessageDescriptor } from "@lingui/core";
 import { useLingui } from "@lingui/react";
 import { PORTAL_PERMISSION_HEIRACHIES } from "shared/constants/portal/user";
-import { IListMangerItemProps } from "@/components/app/list-manager/list-manager-item";
+import type { IListMangerItemProps } from "@/components/app/list-manager/list-manager-item";
 import { ListManager } from "@/components/app/list-manager";
 import { FormButton } from "@/components/app/button/form";
 import {
@@ -68,7 +67,7 @@ export function MutatePermission({
   return (
     <div className="mt-6">
       {overAchingPermission && (
-        <div className="flex mb-7 justify-end items-end">
+        <div className="mb-7 flex items-end justify-end">
           <FormButton
             isMakingRequest={false}
             systemIcon={isOverAchingPermissionSelected ? "Check" : "Square"}

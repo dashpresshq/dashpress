@@ -1,4 +1,4 @@
-import { ValidationImplType } from "./types";
+import type { ValidationImplType } from "./types";
 
 export const rawRequestValidationImpl: ValidationImplType<
   Record<string, unknown>

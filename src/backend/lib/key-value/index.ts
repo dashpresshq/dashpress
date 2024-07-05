@@ -1,8 +1,6 @@
-import {
-  AbstractConfigDataPersistenceService,
-  createConfigDomainPersistenceService,
-} from "../config-persistence";
-import { KeyValueDomain } from "./types";
+import type { AbstractConfigDataPersistenceService } from "../config-persistence";
+import { createConfigDomainPersistenceService } from "../config-persistence";
+import type { KeyValueDomain } from "./types";
 
 interface IStorage {
   data: string;

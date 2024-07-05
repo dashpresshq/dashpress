@@ -1,11 +1,11 @@
 import { useAuthenticatedUserBag } from "frontend/hooks/auth/user.store";
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
-import { SystemIconsKeys } from "shared/constants/Icons";
+import type { SystemIconsKeys } from "shared/constants/Icons";
 import { ellipsis } from "shared/lib/strings";
 import { Trans, msg } from "@lingui/macro";
-import { MessageDescriptor } from "@lingui/core";
-import { useConstantNavigationMenuItems } from "./portal";
+import type { MessageDescriptor } from "@lingui/core";
 import { DropDownMenu } from "@/components/app/drop-drop-menu";
+import { useConstantNavigationMenuItems } from "./portal";
 
 interface IProps {
   isFullWidth: boolean;
@@ -33,7 +33,7 @@ export function ProfileOnNavigation({ isFullWidth }: IProps) {
   }
 
   return (
-    <div className="flex justify-between items-center p-4 pb-0 mb-4">
+    <div className="mb-4 flex items-center justify-between p-4 pb-0">
       <p className="text-xs font-semibold text-white">
         <Trans>
           Hi,{" "}
@@ -46,7 +46,7 @@ export function ProfileOnNavigation({ isFullWidth }: IProps) {
       <DropDownMenu
         ellipsis
         ariaLabel="Toggle Profile Menu"
-        className="[&_svg]:text-white bg-[hsla(var(--dp-primary),0.6)] hover:bg-[hsla(var(--dp-primary),0.9)]"
+        className="bg-[hsla(var(--dp-primary),0.6)] hover:bg-[hsla(var(--dp-primary),0.9)] [&_svg]:text-white"
         menuItems={[...constantNavigation, ...constantNavigationMenuItems].map(
           ({ label, action, systemIcon }) => ({
             id: action,

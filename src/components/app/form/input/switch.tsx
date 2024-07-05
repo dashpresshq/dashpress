@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { MessageDescriptor } from "@lingui/core";
+import type { MessageDescriptor } from "@lingui/core";
 import { useLingui } from "@lingui/react";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";

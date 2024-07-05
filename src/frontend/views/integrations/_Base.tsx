@@ -1,20 +1,20 @@
 import { useRouteParam } from "frontend/lib/routing/useRouteParam";
-import { ReactNode } from "react";
+import type { ReactNode } from "react";
 import { AppLayout } from "frontend/_layouts/app";
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
 import { msg } from "@lingui/macro";
 import { useDomainMessages } from "frontend/lib/crud-config";
 import { LANG_DOMAINS } from "frontend/lib/crud-config/lang-domains";
 import { ContentLayout } from "@/components/app/content-layout";
-import {
-  useIntegrationsList,
-  useActiveIntegrations,
-} from "./actions/actions.store";
 import { fakeMessageDescriptor } from "@/translations/fake";
 import { MenuSection } from "@/components/app/menu-section";
 import { ListSkeleton } from "@/components/app/skeleton/list";
 import { ViewStateMachine } from "@/components/app/view-state-machine";
 import { Card, CardContent } from "@/components/ui/card";
+import {
+  useIntegrationsList,
+  useActiveIntegrations,
+} from "./actions/actions.store";
 
 interface IProps {
   children: ReactNode;

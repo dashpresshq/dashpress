@@ -1,7 +1,7 @@
 import Link from "next/link";
+import type { INavigationMenuItem } from "shared/types/menu";
 import {
   HeaderMenuItemType,
-  INavigationMenuItem,
   NavigationMenuItemType,
   SystemLinks,
 } from "shared/types/menu";
@@ -9,14 +9,14 @@ import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
 import { ChevronRight } from "react-feather";
 import { useNavigationStack } from "frontend/lib/routing/useNavigationStack";
 import { ActionIntegrations } from "shared/types/actions";
-import { MessageDescriptor } from "@lingui/core";
+import type { MessageDescriptor } from "@lingui/core";
 import { msg } from "@lingui/macro";
 import { fakeMessageDescriptor } from "translations/fake";
 import { useLingui } from "@lingui/react";
-import { PORTAL_SYSTEM_LINK_CONFIG_LINKS } from "./portal";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { SystemIcon } from "@/components/app/system-icons";
+import { PORTAL_SYSTEM_LINK_CONFIG_LINKS } from "./portal";
 
 const SYSTEM_LINKS_CONFIG_MAP: Record<
   SystemLinks,
@@ -146,16 +146,16 @@ export function RenderNavigation({
             <SystemIcon
               strokeWidth={isActive ? 2 : 1}
               icon={icon}
-              className="w-[16px] h-[16px]"
+              className="size-[16px]"
             />
           );
 
           return (
-            <li className="list-none block transition-all" key={id}>
+            <li className="block list-none transition-all" key={id}>
               {type === NavigationMenuItemType.Header ? (
                 <p
                   className={cn(
-                    "text-white uppercase text-[11px] font-semibold mt-5 mr-0 mb-2 ml-1",
+                    "mb-2 ml-1 mr-0 mt-5 text-[11px] font-semibold uppercase text-white",
                     {
                       hidden: !isFullWidth,
                     }
@@ -172,7 +172,7 @@ export function RenderNavigation({
                     marginLeft: (depth - 1) * 8,
                   }}
                   className={cn(
-                    "w-full text-white flex mb-1 py-5 items-center justify-start rounded-lg hover:!bg-[hsla(0,0%,0%,0.1)]",
+                    "mb-1 flex w-full items-center justify-start rounded-lg py-5 text-white hover:!bg-[hsla(0,0%,0%,0.1)]",
                     {
                       "bg-[hsla(0,0%,0%,0.1)]": isActive,
                       "px-3": isFullWidth,
@@ -190,17 +190,17 @@ export function RenderNavigation({
                     >
                       {menuIcon}
                       {isFullWidth && (
-                        <div className="flex justify-between items-center w-full">
+                        <div className="flex w-full items-center justify-between">
                           <p
                             className={cn(
-                              "text-[0.8125rem] text-white ml-2 transition-all"
+                              "ml-2 text-[0.8125rem] text-white transition-all"
                             )}
                           >
                             {title}
                           </p>
                           <ChevronRight
                             className={cn(
-                              "cursor-pointer ml-0 transition-all",
+                              "ml-0 cursor-pointer transition-all",
                               {
                                 "rotate-90": isActive,
                               }
@@ -227,7 +227,7 @@ export function RenderNavigation({
                       {isFullWidth && (
                         <p
                           className={cn(
-                            "text-[0.8125rem] text-white ml-2 transition-all"
+                            "ml-2 text-[0.8125rem] text-white transition-all"
                           )}
                         >
                           {title}

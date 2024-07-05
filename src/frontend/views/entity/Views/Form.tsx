@@ -1,4 +1,4 @@
-import { IPaginatedDataState, ITableView } from "shared/types/data";
+import type { IPaginatedDataState, ITableView } from "shared/types/data";
 import { Form, Field } from "react-final-form";
 import arrayMutators from "final-form-arrays";
 import { useFieldArray } from "react-final-form-arrays";
@@ -10,13 +10,13 @@ import {
   maxLength,
   required,
 } from "frontend/lib/validations";
-import { IFormProps } from "frontend/lib/form/types";
+import type { IFormProps } from "frontend/lib/form/types";
 import { msg } from "@lingui/macro";
 import { useAppConfigurationDomainMessages } from "frontend/hooks/configuration/configuration.constant";
 import { useDomainMessages } from "frontend/lib/crud-config";
 import { DELETE_BUTTON_PROPS } from "@/components/app/button/constants";
 import { Tabs } from "@/components/app/tabs";
-import { ITableColumn } from "@/components/app/table/types";
+import type { ITableColumn } from "@/components/app/table/types";
 import { SoftButton } from "@/components/app/button/soft";
 import { ActionButtons } from "@/components/app/button/action";
 import { FormInput } from "@/components/app/form/input/text";
@@ -80,7 +80,7 @@ function TabForm({ tableColumns, values, initialValues }: IProps) {
             return {
               content: (
                 <>
-                  <div className="flex justify-end mb-3">
+                  <div className="mb-3 flex justify-end">
                     <ActionButtons
                       size="sm"
                       actionButtons={[

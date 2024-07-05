@@ -4,7 +4,7 @@ import {
   useAppConfiguration,
   useUpsertConfigurationMutation,
 } from "frontend/hooks/configuration/configuration.store";
-import { AppConfigurationValueType } from "shared/configurations/constants";
+import type { AppConfigurationValueType } from "shared/configurations/constants";
 import { msg } from "@lingui/macro";
 import { useAppConfigurationDomainMessages } from "frontend/hooks/configuration/configuration.constant";
 import { SchemaForm } from "@/components/app/form/schema";

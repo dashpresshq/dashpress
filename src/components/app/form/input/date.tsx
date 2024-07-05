@@ -1,4 +1,4 @@
-import { FieldMetaState } from "react-final-form";
+import type { FieldMetaState } from "react-final-form";
 import * as React from "react";
 import { format } from "date-fns";
 import { Calendar as CalendarIcon } from "react-feather";
@@ -8,7 +8,7 @@ import {
   generateClassNames,
   generateFormArias,
 } from "@/components/app/form/input/label-and-error";
-import { ISharedFormInput } from "@/components/app/form/input/types";
+import type { ISharedFormInput } from "@/components/app/form/input/types";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
@@ -66,7 +66,7 @@ export function ControlledFormDateInput({
           {...generateFormArias(meta)}
         >
           <CalendarIcon
-            className={cn("mr-2 h-4 w-4", {
+            className={cn("mr-2 size-4", {
               "text-muted": !value,
             })}
           />
@@ -92,7 +92,7 @@ export function ControlledFormDateInput({
               systemIcon="Close"
               action={() => onChange(null)}
               label={msg`Clear`}
-              className="w-full mt-3"
+              className="mt-3 w-full"
               size="sm"
               disabled={!value}
             />

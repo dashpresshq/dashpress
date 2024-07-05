@@ -1,9 +1,10 @@
-import { RedisClientType } from "redis";
+import type { RedisClientType } from "redis";
 import { typescriptSafeObjectDotEntries } from "shared/lib/objects";
-import { ConfigKeys, ConfigApiService } from "../config/config.service";
+import type { ConfigApiService } from "../config/config.service";
+import { ConfigKeys } from "../config/config.service";
 import { getRedisConnection } from "../connection/redis";
 import { AbstractConfigDataPersistenceService } from "./AbstractConfigDataPersistenceService";
-import { ConfigDomain } from "./types";
+import type { ConfigDomain } from "./types";
 
 export class RedisConfigDataPersistenceAdaptor<
   T

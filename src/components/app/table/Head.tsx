@@ -1,14 +1,15 @@
-import { flexRender, Table } from "@tanstack/react-table";
+import type { Table } from "@tanstack/react-table";
+import { flexRender } from "@tanstack/react-table";
 import * as React from "react";
 import { ArrowUp } from "react-feather";
-import { TableFilterType } from "shared/types/data";
-import { TableFilter } from "./filters";
+import type { TableFilterType } from "shared/types/data";
 import {
   TableHeader,
   TableRow,
   TableHead as TableHeadCmp,
 } from "@/components/ui/table";
 import { cn } from "@/lib/utils";
+import { TableFilter } from "./filters";
 
 interface IColumnMeta {
   filter?: TableFilterType;
@@ -36,15 +37,15 @@ export function TableHead({ table }: IProps) {
                 className={cn({ "cursor-pointer": header.column.getCanSort() })}
                 onClick={header.column.getToggleSortingHandler()}
               >
-                <div className="flex justify-between items-center gap-0">
+                <div className="flex items-center justify-between gap-0">
                   <span className="font-semibold">
                     {header.isPlaceholder ? null : view}
                   </span>
-                  <div className="flex justify-end w-auto items-center gap-0">
+                  <div className="flex w-auto items-center justify-end gap-0">
                     {header.column.getCanSort() && (
                       <ArrowUp
                         className={cn(
-                          "text-muted opacity-70 cursor-pointer ml-0 transition-all",
+                          "ml-0 cursor-pointer text-muted opacity-70 transition-all",
                           {
                             "rotate-180": isSorted === "desc",
                             "opacity-100 text-primary": !!isSorted,

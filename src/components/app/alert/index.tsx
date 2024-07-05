@@ -1,15 +1,11 @@
 import { useEffect } from "react";
-import {
-  AlertTriangle,
-  ThumbsUp,
-  Icon,
-  Info as InfoIcon,
-  X,
-} from "react-feather";
+import type { Icon } from "react-feather";
+import { AlertTriangle, ThumbsUp, Info as InfoIcon, X } from "react-feather";
 import { getBestErrorMessage } from "frontend/lib/toast/utils";
 import { useToggle } from "frontend/hooks/state/useToggleState";
 import { cn } from "@/lib/utils";
-import { SpectrumColorTypes, spectrumVariants } from "@/components/ui/spectrum";
+import type { SpectrumColorTypes } from "@/components/ui/spectrum";
+import { spectrumVariants } from "@/components/ui/spectrum";
 import { Button } from "@/components/ui/button";
 
 export enum AlertType {
@@ -46,6 +42,7 @@ const AlertMap: Record<
 export function Alert({ type, message, renderJsx, action }: IProps) {
   const renderMode = useToggle(true);
   const { Icon: IconCmp, spectrum } = AlertMap[type];
+
   useEffect(() => {
     renderMode.on();
   }, [message]);
@@ -57,7 +54,7 @@ export function Alert({ type, message, renderJsx, action }: IProps) {
   return (
     <div
       className={cn(
-        "rounded-md shadow-md w-full flex items-center gap-3 px-4 mb-3",
+        "mb-3 flex w-full items-center gap-3 rounded-md px-4 shadow-md",
         spectrumVariants({ spectrum })
       )}
       role="alert"
@@ -65,8 +62,8 @@ export function Alert({ type, message, renderJsx, action }: IProps) {
       <div>
         <IconCmp size={24} />
       </div>
-      <div className="w-full self-center my-3">
-        <p className="text-sm !m-0">
+      <div className="my-3 w-full self-center">
+        <p className="!m-0 text-sm">
           {(renderJsx ? message : getBestErrorMessage(message)) as string}
         </p>
         {action && (
@@ -74,12 +71,12 @@ export function Alert({ type, message, renderJsx, action }: IProps) {
             variant="ghost"
             size="sm"
             className={cn(
-              "rounded-md border mt-2",
+              "mt-2 rounded-md border",
               spectrumVariants({ spectrum })
             )}
             onClick={action.action}
           >
-            <div className="flex gap-2 items-center">
+            <div className="flex items-center gap-2">
               <action.Icon size="14" />
               {action.label}
             </div>

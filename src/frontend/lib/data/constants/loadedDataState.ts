@@ -1,4 +1,4 @@
-import { DataStateKeys } from "../types";
+import type { DataStateKeys } from "../types";
 
 export function loadedDataState<T>(input: T): DataStateKeys<T> {
   return {

@@ -1,9 +1,10 @@
-import { NextApiRequest, NextApiResponse } from "next";
+import type { NextApiRequest, NextApiResponse } from "next";
 import * as μs from "microseconds";
 import { typescriptSafeObjectDotKeys } from "shared/lib/objects";
 import { handleResponseError } from "../errors";
-import { RequestMethod, RequestMethodResponseCode } from "./methods";
-import { ValidationKeys } from "./validations/types";
+import type { RequestMethod } from "./methods";
+import { RequestMethodResponseCode } from "./methods";
+import type { ValidationKeys } from "./validations/types";
 import { ValidationImpl } from "./validations/implementations";
 import { logger } from "./logging";
 import { requestHook } from "./portal";
@@ -20,19 +21,16 @@ import { requestHook } from "./portal";
 
 type GetValidatedRequestOptions<T> = Array<T | { _type: T; options: unknown }>;
 
+type RequestFn = (
+  getRequest: <T extends ValidationKeys["_type"]>(
+    key: GetValidatedRequestOptions<T>
+  ) => Promise<Record<T, any>>,
+  res: NextApiResponse
+) => unknown;
+
 export const requestHandler =
   (
-    methodHandler: Partial<
-      Record<
-        RequestMethod,
-        (
-          getRequest: <T extends ValidationKeys["_type"]>(
-            key: GetValidatedRequestOptions<T>
-          ) => Promise<Record<T, any>>,
-          res: NextApiResponse
-        ) => unknown
-      >
-    >,
+    methodHandler: Partial<Record<RequestMethod, RequestFn>>,
     validations?: ValidationKeys[]
   ) =>
   async (req: NextApiRequest, res: NextApiResponse) => {

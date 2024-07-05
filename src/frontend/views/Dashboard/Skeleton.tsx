@@ -1,7 +1,7 @@
 import { TableSkeleton } from "@/components/app/skeleton/table";
-import { WidgetRoot } from "./styles";
 import { Card } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
+import { WidgetRoot } from "./styles";
 
 export function DashboardSkeleton() {
   return (

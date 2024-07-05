@@ -1,6 +1,6 @@
 import { AUTHENTICATED_ACCOUNT_URL } from "frontend/hooks/auth/user.store";
-import { IChangePasswordForm } from "shared/form-schemas/profile/password";
-import { IUpdateProfileForm } from "shared/form-schemas/profile/update";
+import type { IChangePasswordForm } from "shared/form-schemas/profile/password";
+import type { IUpdateProfileForm } from "shared/form-schemas/profile/update";
 import { useWaitForResponseMutationOptions } from "frontend/lib/data/useMutate/useWaitForResponseMutationOptions";
 import { ApiRequest } from "frontend/lib/data/makeRequest";
 import { msg } from "@lingui/macro";

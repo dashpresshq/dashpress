@@ -1,8 +1,9 @@
-import { FilterOperators, IColumnFilterBag } from "shared/types/data";
-import { ISelectData } from "shared/types/options";
+import type { IColumnFilterBag } from "shared/types/data";
+import { FilterOperators } from "shared/types/data";
+import type { ISelectData } from "shared/types/options";
 import { msg } from "@lingui/macro";
-import { IFilterProps } from "./types";
 import { Select } from "@/components/ui/select";
+import type { IFilterProps } from "./types";
 
 export function FilterTableByBooleans({
   column: { filterValue, setFilter },

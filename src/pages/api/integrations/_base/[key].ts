@@ -1,9 +1,9 @@
 import { UserPermissions } from "shared/constants/user";
 import { requestHandler } from "backend/lib/request";
 import { integrationsConfigurationApiController } from "backend/integrations-configurations/integrations-configurations.controller";
-import { IAppliedSchemaFormConfig } from "shared/form-schemas/types";
+import type { IAppliedSchemaFormConfig } from "shared/form-schemas/types";
 import { IntegrationsConfigurationGroup } from "shared/types/integrations";
-import { ValidationKeys } from "backend/lib/request/validations/types";
+import type { ValidationKeys } from "backend/lib/request/validations/types";
 import { msg } from "@lingui/macro";
 
 const REQUEST_KEY_FIELD = "key";

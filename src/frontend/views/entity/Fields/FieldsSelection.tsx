@@ -4,7 +4,10 @@ import { FieldArray } from "react-final-form-arrays";
 import { composeValidators, required } from "frontend/lib/validations";
 import { Fragment, useState } from "react";
 import { isNotEmpty } from "class-validator";
-import { EntityTypesForSelection, IColorableSelection } from "shared/types/ui";
+import type {
+  EntityTypesForSelection,
+  IColorableSelection,
+} from "shared/types/ui";
 import { isUseColorsFlagOn } from "shared/logic/entities/selection.utils";
 import { useAppConfigurationDomainMessages } from "frontend/hooks/configuration/configuration.constant";
 import { msg } from "@lingui/macro";
@@ -163,7 +166,7 @@ export function FieldSelectionCanvas({
                   </Fragment>
                 ))}
 
-                <div className="flex justify-between mt-3">
+                <div className="mt-3 flex justify-between">
                   {ManagableEntities.includes(entityType) && (
                     <SoftButton
                       systemIcon="Plus"

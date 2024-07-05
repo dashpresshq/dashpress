@@ -1,5 +1,5 @@
 import { DataActionType } from "shared/configurations";
-import { IAccountProfile } from "shared/types/user";
+import type { IAccountProfile } from "shared/types/user";
 import { dataApiController } from "backend/data/data.controller";
 import { requestHandler } from "backend/lib/request";
 

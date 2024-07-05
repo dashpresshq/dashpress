@@ -1,6 +1,6 @@
 import { requestHandler } from "backend/lib/request";
 import { userPreferencesApiService } from "backend/user-preferences/user-preferences.service";
-import { IAccountProfile } from "shared/types/user";
+import type { IAccountProfile } from "shared/types/user";
 
 const REQUEST_QUERY_FIELD = "key";
 

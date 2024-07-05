@@ -1,9 +1,9 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { msg } from "@lingui/macro";
-import { getQueryCachekey } from "../constants/getQueryCacheKey";
-import { ToastMessageInput } from "./types";
 import { useToast } from "@/components/app/toast/use-toast";
 import { fakeMessageDescriptor } from "@/translations/fake";
+import { getQueryCachekey } from "../constants/getQueryCacheKey";
+import type { ToastMessageInput } from "./types";
 
 export interface IWaitForResponseMutationOptions<V, R> {
   endpoints: string[];

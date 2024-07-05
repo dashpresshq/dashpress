@@ -1,5 +1,5 @@
 import { ConfigApiService } from "backend/lib/config/config.service";
-import { AbstractCacheService } from "../AbstractCacheService";
+import type { AbstractCacheService } from "../AbstractCacheService";
 import { MemoryCacheAdaptor } from "../MemoryCacheAdaptor";
 import { RedisCacheAdaptor } from "../RedisCacheAdaptor";
 

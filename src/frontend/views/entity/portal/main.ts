@@ -1,5 +1,5 @@
 import { noop } from "shared/lib/noop";
-import { IMenuActionItem } from "@/components/app/button/types";
+import type { IMenuActionItem } from "@/components/app/button/types";
 
 export const useMutateBaseEntitySettingsMenu = (
   entity: string,

@@ -10,3 +10,8 @@ export const expectToast = async (message: string) => {
     await within(screen.getByRole("region")).findByRole("status")
   ).toHaveTextContent(message);
 };
+
+export const getToastMessage = async () => {
+  return (await within(screen.getByRole("region")).findByRole("status"))
+    .textContent;
+};

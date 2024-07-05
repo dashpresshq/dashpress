@@ -113,7 +113,7 @@ export function EntityRelationDetails() {
           backLink={backLink}
         >
           <div className="text-center">
-            <p className="text-sm mb-3">
+            <p className="mb-3 text-sm">
               The {_(childEntityCrudConfig.TEXT_LANG.SINGULAR)} for{" "}
               <b>{entityDataReference.data}</b> does not exist
             </p>

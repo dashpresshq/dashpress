@@ -10,7 +10,7 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
     return (
       <textarea
         className={cn(
-          "input-base min-h-[60px] resize-y overflow-auto h-auto",
+          "input-base h-auto min-h-[60px] resize-y overflow-auto",
           className
         )}
         ref={ref}

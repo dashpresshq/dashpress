@@ -1,21 +1,20 @@
 import { WidgetRoot } from "frontend/views/Dashboard/styles";
-import { ReactElement, forwardRef } from "react";
-import {
-  IWidgetConfig,
-  WIDGET_SCRIPT_RELATIVE_TIME_MARKER,
-} from "shared/types/dashboard";
-import { ISharedWidgetConfig } from "shared/types/dashboard/base";
-import { DataStateKeys } from "frontend/lib/data/types";
+import type { ReactElement } from "react";
+import { forwardRef } from "react";
+import type { IWidgetConfig } from "shared/types/dashboard";
+import { WIDGET_SCRIPT_RELATIVE_TIME_MARKER } from "shared/types/dashboard";
+import type { ISharedWidgetConfig } from "shared/types/dashboard/base";
+import type { DataStateKeys } from "frontend/lib/data/types";
 import { msg } from "@lingui/macro";
 import { ViewStateMachine } from "@/components/app/view-state-machine";
-import { WidgetHeader } from "../WidgetHeader";
-import { IWidgetSettingProps } from "../WidgetHeader/types";
-import { WIDGET_CONFIG } from "../../constants";
-import { useWidgetNavigationLink } from "../../../Widget/useWidgetNavigationLink";
 import { Card } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 import { EmptyWrapper } from "@/components/app/empty-wrapper";
 import { RenderCode } from "@/components/app/render-code";
+import { WidgetHeader } from "../WidgetHeader";
+import type { IWidgetSettingProps } from "../WidgetHeader/types";
+import { WIDGET_CONFIG } from "../../constants";
+import { useWidgetNavigationLink } from "../../useWidgetNavigationLink";
 
 interface IProps {
   config: ISharedWidgetConfig;
@@ -33,7 +32,10 @@ interface IProps {
 }
 
 export const WidgetFrame = forwardRef<HTMLDivElement, IProps>(
-  ({ setting, config, type, data, isPreview, Component }, ref) => {
+  function WidgetFrameCmp(
+    { setting, config, type, data, isPreview, Component },
+    ref
+  ) {
     const navigationLink = useWidgetNavigationLink(
       config.entity,
       config.queryId

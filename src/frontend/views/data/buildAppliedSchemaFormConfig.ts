@@ -1,4 +1,4 @@
-import {
+import type {
   IAppliedSchemaFormConfig,
   ISchemaFormConfig,
 } from "shared/form-schemas/types";
@@ -6,8 +6,11 @@ import {
   ENTITY_LIST_PATH,
   ENTITY_REFERENCE_PATH,
 } from "frontend/hooks/data/constants";
-import { IColorableSelection } from "shared/types/ui";
-import { FormFieldTypes, IFieldValidationItem } from "shared/validations/types";
+import type { IColorableSelection } from "shared/types/ui";
+import type {
+  FormFieldTypes,
+  IFieldValidationItem,
+} from "shared/validations/types";
 import { userFriendlyCase } from "shared/lib/strings/friendly-case";
 import { msg } from "@lingui/macro";
 

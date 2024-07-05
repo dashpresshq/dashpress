@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 
 import MyApp from "pages/_app";
-import { CustomNextPage } from "frontend/_layouts/types";
+import type { CustomNextPage } from "frontend/_layouts/types";
 import { USE_ROUTER_PARAMS } from "./_/constants";
 
 describe("pages/users", () => {

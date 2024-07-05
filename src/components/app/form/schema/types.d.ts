@@ -1,12 +1,12 @@
-import { MessageDescriptor } from "@lingui/core";
-import { FormApi } from "final-form";
-import { FieldInputProps, FieldMetaState } from "react-final-form";
-import {
+import type { MessageDescriptor } from "@lingui/core";
+import type { FormApi } from "final-form";
+import type { FieldInputProps, FieldMetaState } from "react-final-form";
+import type {
   IFormInputRightAction,
   ISchemaFormConfig,
 } from "shared/form-schemas/types";
-import { IColorableSelection } from "shared/types/ui";
-import { FormFieldTypes } from "shared/validations/types";
+import type { IColorableSelection } from "shared/types/ui";
+import type { FormFieldTypes } from "shared/validations/types";
 
 export interface IFormExtension {
   fieldsState: string;

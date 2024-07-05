@@ -1,14 +1,14 @@
 import { useEntitiesFilterCount } from "frontend/hooks/data/data.store";
-import { FieldQueryFilter } from "shared/types/data";
+import type { FieldQueryFilter } from "shared/types/data";
 import { useEntityConfiguration } from "frontend/hooks/configuration/configuration.store";
 import { useChangeRouterParam } from "frontend/lib/routing/useChangeRouterParam";
 import { useRouteParam } from "frontend/lib/routing/useRouteParam";
 import { abbreviateNumber } from "frontend/lib/numbers";
 import { fakeMessageDescriptor } from "translations/fake";
+import { Tabs } from "@/components/app/tabs";
 import { DetailsCanvas } from "./DetailsCanvas";
 import { TableTopComponent, usePortalTableTabs } from "../portal";
 import { EntityDataTable } from "./EntityDataTable";
-import { Tabs } from "@/components/app/tabs";
 
 interface IProps {
   entity: string;

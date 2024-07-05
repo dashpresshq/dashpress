@@ -4,7 +4,10 @@ import EntityFormActionsSettings from "pages/admin/[entity]/config/actions";
 
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 import { getTableRows } from "__tests__/_/utils/getTableRows";
-import { closeAllToasts, expectToast } from "__tests__/_/utils/closeAllToasts";
+import {
+  closeAllToasts,
+  getToastMessage,
+} from "__tests__/_/utils/closeAllToasts";
 import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
 import { TestProviders } from "__tests__/_/Provider";
 
@@ -89,7 +92,7 @@ describe("pages/admin/[entity]/config/actions", () => {
       within(dialog).getByRole("button", { name: "Create Form Action" })
     );
 
-    await expectToast("Form Action Created Successfully");
+    expect(await getToastMessage()).toBe("Form Action Created Successfully");
 
     expect(
       screen.queryByRole("button", { name: "Create Form Action" })
@@ -109,7 +112,7 @@ describe("pages/admin/[entity]/config/actions", () => {
     await closeAllToasts();
   });
 
-  it("should show the correct form values", async () => {
+  it("should show the correct created form values", async () => {
     render(
       <TestProviders>
         <EntityFormActionsSettings />
@@ -190,7 +193,7 @@ describe("pages/admin/[entity]/config/actions", () => {
       within(dialog).getByRole("button", { name: "Update Form Action" })
     );
 
-    await expectToast("Form Action Updated Successfully");
+    expect(await getToastMessage()).toBe("Form Action Updated Successfully");
 
     await closeAllToasts();
 
@@ -206,7 +209,7 @@ describe("pages/admin/[entity]/config/actions", () => {
     `);
   });
 
-  it("should show the correct form values", async () => {
+  it("should show the correct updated form values", async () => {
     render(
       <TestProviders>
         <EntityFormActionsSettings />
@@ -272,7 +275,7 @@ describe("pages/admin/[entity]/config/actions", () => {
       await within(confirmBox).findByRole("button", { name: "Confirm" })
     );
 
-    await expectToast("Form Action Deleted Successfully");
+    expect(await getToastMessage()).toBe("Form Action Deleted Successfully");
 
     expect(await screen.findAllByRole("row")).toHaveLength(4);
   });

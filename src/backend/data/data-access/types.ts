@@ -11,7 +11,9 @@ export enum QueryOperators {
   IS_NOT_NULL = "IS_NOT_NULL",
 }
 
+type QueryOperatorsFnType<T> = (query: T, column: string, value: unknown) => T;
+
 export type QueryOperationImplementation<T> = Record<
   "or" | "and",
-  Record<QueryOperators, (query: T, column: string, value: unknown) => T>
+  Record<QueryOperators, QueryOperatorsFnType<T>>
 >;

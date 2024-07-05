@@ -6,7 +6,7 @@ import {
 } from "frontend/hooks/configuration/configuration.store";
 import { format as dateFnsFormat } from "date-fns";
 import { useAppConfigurationDomainMessages } from "frontend/hooks/configuration/configuration.constant";
-import { AppConfigurationValueType } from "shared/configurations/constants";
+import type { AppConfigurationValueType } from "shared/configurations/constants";
 import { msg } from "@lingui/macro";
 import { fakeMessageDescriptor } from "translations/fake";
 import { SectionBox } from "@/components/app/section-box";
@@ -16,9 +16,9 @@ import {
   FormSkeleton,
   FormSkeletonSchema,
 } from "@/components/app/skeleton/form";
+import { useToast } from "@/components/app/toast/use-toast";
 import { BaseSettingsLayout } from "../_Base";
 import { SETTINGS_VIEW_KEY } from "../constants";
-import { useToast } from "@/components/app/toast/use-toast";
 
 type IDateFormatSettings = {
   format: string;
@@ -145,7 +145,7 @@ export function GeneralDataSettings() {
 
   return (
     <BaseSettingsLayout>
-      <div className="flex gap-4 flex-col">
+      <div className="flex flex-col gap-4">
         <DateSettings />
         <MetaDataSettings />
       </div>

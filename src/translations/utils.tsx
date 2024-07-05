@@ -1,7 +1,9 @@
-import { i18n, Messages } from "@lingui/core";
+import type { Messages } from "@lingui/core";
+import { i18n } from "@lingui/core";
 import { useRouter } from "next/router";
-import { ReactNode, useEffect } from "react";
-import { GetStaticPropsContext, GetStaticPropsResult } from "next";
+import type { ReactNode } from "react";
+import { useEffect } from "react";
+import type { GetStaticPropsContext, GetStaticPropsResult } from "next";
 import { I18nProvider } from "@lingui/react";
 import languages from "./languages";
 

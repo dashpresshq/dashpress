@@ -1,11 +1,11 @@
-import { ReactNode } from "react";
+import type { ReactNode } from "react";
 import { QueryClient } from "@tanstack/react-query";
-import {
+import type {
   AsyncStorage,
   MaybePromise,
-  PersistQueryClientProvider,
   PersistedClient,
 } from "@tanstack/react-query-persist-client";
+import { PersistQueryClientProvider } from "@tanstack/react-query-persist-client";
 import { createAsyncStoragePersister } from "@tanstack/query-async-storage-persister";
 import { get, set, del } from "idb-keyval";
 

@@ -3,7 +3,7 @@ import {
   MAKE_ENDPOINTS_CONFIG,
   useDomainMessages,
 } from "frontend/lib/crud-config";
-import {
+import type {
   IFormAction,
   IIntegrationImplementationList,
 } from "shared/types/actions";

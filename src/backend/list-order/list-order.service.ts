@@ -1,7 +1,5 @@
-import {
-  createConfigDomainPersistenceService,
-  AbstractConfigDataPersistenceService,
-} from "backend/lib/config-persistence";
+import type { AbstractConfigDataPersistenceService } from "backend/lib/config-persistence";
+import { createConfigDomainPersistenceService } from "backend/lib/config-persistence";
 
 export class ListOrderApiService {
   constructor(

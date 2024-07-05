@@ -10,6 +10,7 @@ setupApiHandlers();
 
 describe("pages/integrations/actions/[key]", () => {
   const useRouter = jest.spyOn(require("next/router"), "useRouter");
+
   beforeAll(() => {
     useRouter.mockImplementation(
       USE_ROUTER_PARAMS({
@@ -36,19 +37,5 @@ describe("pages/integrations/actions/[key]", () => {
         screen.getByRole("link", { name: "Non Activated Actions" })
       ).toBeInTheDocument();
     });
-
-    // it("should show the configure UI for activated actions", async () => {
-    //   render(
-    //     <TestProviders>
-    //       <ActionsIntegrations />
-    //     </TestProviders>
-    //   );
-
-    //   await waitFor(() => {
-    //     expect(
-    //       screen.getByRole("option", { selected: true })
-    //     ).toHaveTextContent("Slack");
-    //   });
-    // });
   });
 });

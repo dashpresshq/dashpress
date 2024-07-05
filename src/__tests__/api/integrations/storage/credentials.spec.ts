@@ -8,10 +8,10 @@ import { createKeyValueDomainPersistenceService } from "backend/lib/key-value";
 
 describe("/api/integrations/storage/[key]/credentials", () => {
   beforeAll(async () => {
-    const _currentStorageKeyValueStoreApiService =
+    const currentStorageKeyValueStoreApiService =
       createKeyValueDomainPersistenceService<string>("current-storage");
 
-    _currentStorageKeyValueStoreApiService.persistItem("s3");
+    currentStorageKeyValueStoreApiService.persistItem("s3");
 
     await setupAllTestData(["users"]);
     await setupCredentialsTestData({

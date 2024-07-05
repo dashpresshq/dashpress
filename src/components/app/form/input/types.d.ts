@@ -1,6 +1,6 @@
-import { MessageDescriptor } from "@lingui/core";
-import { FieldInputProps, FieldMetaState } from "react-final-form";
-import { IFormInputRightAction } from "shared/form-schemas/types";
+import type { MessageDescriptor } from "@lingui/core";
+import type { FieldInputProps, FieldMetaState } from "react-final-form";
+import type { IFormInputRightAction } from "shared/form-schemas/types";
 
 export interface ILabelAndErrorProps {
   input: FieldInputProps<any, HTMLElement>;

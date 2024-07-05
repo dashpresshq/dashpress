@@ -1,11 +1,9 @@
 import { Form, Field } from "react-final-form";
-import {
-  IDataSourceCredentials,
-  DATA_SOURCES_CONFIG,
-} from "shared/types/data-sources";
+import type { IDataSourceCredentials } from "shared/types/data-sources";
+import { DATA_SOURCES_CONFIG } from "shared/types/data-sources";
 import { upperCaseFirstLetter } from "shared/lib/strings";
 import { required } from "frontend/lib/validations";
-import { IFormProps } from "frontend/lib/form/types";
+import type { IFormProps } from "frontend/lib/form/types";
 import { useToggle } from "frontend/hooks/state/useToggleState";
 import { msg } from "@lingui/macro";
 import { typescriptSafeObjectDotKeys } from "shared/lib/objects";

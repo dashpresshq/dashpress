@@ -1,7 +1,5 @@
-import {
-  createConfigDomainPersistenceService,
-  AbstractConfigDataPersistenceService,
-} from "backend/lib/config-persistence";
+import type { AbstractConfigDataPersistenceService } from "backend/lib/config-persistence";
+import { createConfigDomainPersistenceService } from "backend/lib/config-persistence";
 import { BadRequestError } from "backend/lib/errors";
 import { canRoleDoThisAsync } from "shared/logic/permissions";
 import {

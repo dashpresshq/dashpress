@@ -1,7 +1,7 @@
-import { IEntityField, IEntityRelation } from "shared/types/db";
-import { ILabelValue } from "shared/types/options";
+import type { IEntityField, IEntityRelation } from "shared/types/db";
+import type { ILabelValue } from "shared/types/options";
 import { CRUD_CONFIG_NOT_FOUND } from "frontend/lib/crud-config";
-import { DataStateKeys } from "frontend/lib/data/types";
+import type { DataStateKeys } from "frontend/lib/data/types";
 import { useApi } from "frontend/lib/data/useApi";
 import { useApiQueries } from "frontend/lib/data/useApi/useApiQueries";
 import { ACTIVE_ENTITIES_ENDPOINT } from "shared/constants/entities";

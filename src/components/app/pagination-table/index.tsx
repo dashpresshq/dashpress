@@ -1,12 +1,13 @@
-import { useState, ReactNode } from "react";
-import { IPaginatedDataState, TableFilterType } from "shared/types/data";
-import { MessageDescriptor } from "@lingui/core";
+import type { ReactNode } from "react";
+import { useState } from "react";
+import type { IPaginatedDataState, TableFilterType } from "shared/types/data";
+import type { MessageDescriptor } from "@lingui/core";
 import { TableSkeleton } from "@/components/app/skeleton/table";
-import { IEmptyWrapperProps } from "../empty-wrapper/types";
+import type { IEmptyWrapperProps } from "../empty-wrapper/types";
 import { useFEPagination } from "./useFEPagination";
 import { ViewStateMachine } from "../view-state-machine";
 import { DEFAULT_TABLE_STATE, Table } from "../table";
-import { ITableColumn } from "../table/types";
+import type { ITableColumn } from "../table/types";
 
 export interface IFETableCell<T> {
   row: {

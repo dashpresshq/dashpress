@@ -1,11 +1,10 @@
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import ThemeSettings from "pages/admin/settings/theme";
-
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
 import { TestProviders } from "__tests__/_/Provider";
-import { expectToast } from "@/__tests__/_/utils/closeAllToasts";
+import { getToastMessage } from "@/__tests__/_/utils/closeAllToasts";
 
 setupApiHandlers();
 
@@ -41,7 +40,7 @@ describe("pages/admin/settings/theme", () => {
       screen.getByRole("button", { name: "Save Theme Settings" })
     );
 
-    await expectToast("Theme Settings Saved Successfully");
+    expect(await getToastMessage()).toBe("Theme Settings Saved Successfully");
   });
 
   it("should display updated theme values", async () => {

@@ -1,7 +1,7 @@
-import { IColumnFilterBag } from "shared/types/data";
-import { BaseSyntheticEvent } from "react";
-import { IFilterProps } from "./types";
+import type { IColumnFilterBag } from "shared/types/data";
+import type { BaseSyntheticEvent } from "react";
 import { Input } from "@/components/ui/input";
+import type { IFilterProps } from "./types";
 
 export function FilterTableByIdField({
   column: { filterValue, setFilter },

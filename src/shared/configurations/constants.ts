@@ -1,14 +1,15 @@
-import { FormFieldTypes, IFieldValidationItem } from "shared/validations/types";
-import { IColorableSelection } from "shared/types/ui";
-import { ITableView, QueryFilterSchema } from "shared/types/data";
+import type {
+  FormFieldTypes,
+  IFieldValidationItem,
+} from "shared/validations/types";
+import type { IColorableSelection } from "shared/types/ui";
+import type { ITableView, QueryFilterSchema } from "shared/types/data";
 import { msg } from "@lingui/macro";
-import { BaseAppConfigurationKeys } from "./base-types";
-import {
-  PortalAppConfigurationKeys,
-  PORTAL_APP_CONFIGURATION_CONFIG,
-} from "./portal";
+import type { BaseAppConfigurationKeys } from "./base-types";
+import type { PortalAppConfigurationKeys } from "./portal";
+import { PORTAL_APP_CONFIGURATION_CONFIG } from "./portal";
 import { DEFAULT_SYSTEM_SETTINGS } from "./system";
-import { IEntityCrudSettings } from "./types";
+import type { IEntityCrudSettings } from "./types";
 
 export type AppConfigurationKeys =
   | BaseAppConfigurationKeys

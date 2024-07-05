@@ -1,13 +1,12 @@
 import { format } from "date-fns";
-import { IColorableSelection } from "shared/types/ui";
+import type { IColorableSelection } from "shared/types/ui";
 import { msg } from "@lingui/macro";
-import { FormFieldTypes } from "shared/validations/types";
+import type { FormFieldTypes } from "shared/validations/types";
 import { i18n } from "@lingui/core";
 import { SoftButton } from "@/components/app/button/soft";
-import {
-  ReferenceComponent,
-  ReferenceDisplayFromTypes,
-} from "./ReferenceComponent";
+import Image from "next/image";
+import type { ReferenceDisplayFromTypes } from "./ReferenceComponent";
+import { ReferenceComponent } from "./ReferenceComponent";
 import { OptionTag } from "./OptionTag";
 
 export const viewSpecialDataTypes = ({
@@ -50,10 +49,10 @@ export const viewSpecialDataTypes = ({
 
   if (entityFieldTypes[fieldName] === "image") {
     return (
-      <img
+      <Image
         src={value as string}
         alt={fieldName}
-        width={options.displayFrom === "table" ? "48px" : undefined}
+        width={options.displayFrom === "table" ? "48" : undefined}
       />
     );
   }

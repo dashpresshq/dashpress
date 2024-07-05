@@ -1,4 +1,5 @@
-import { ReactNode, useEffect, useState } from "react";
+import type { ReactNode } from "react";
+import { useEffect, useState } from "react";
 import { SideBar } from "./SideBar";
 import { SIDE_BAR_WIDTH_VARIATIONS } from "./constants";
 
@@ -9,17 +10,19 @@ export interface IProps {
 export function NavigationSideBar({ children }: IProps) {
   const [isFullWidth, setIsFullWidth] = useState(true);
 
+  const isClient = typeof window !== "undefined";
+
   useEffect(() => {
-    if (typeof window !== "undefined") {
+    if (isClient) {
       setIsFullWidth(window.innerWidth >= 768);
     }
-  }, [typeof window !== "undefined"]);
+  }, [isClient]);
 
   return (
-    <div className="w-full flex flex-row">
+    <div className="flex w-full flex-row">
       <SideBar isFullWidth={isFullWidth} setIsFullWidth={setIsFullWidth} />
       <div
-        className="p-4 min-h-dvh block transition-all bg-foundation"
+        className="block min-h-dvh bg-foundation p-4 transition-all"
         style={{
           width: `calc(100vw - ${
             isFullWidth

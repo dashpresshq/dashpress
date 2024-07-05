@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import type { ReactNode } from "react";
 import { useEntityReferenceFields } from "frontend/hooks/entity/entity.store";
 import {
   useEntityDataDetails,
@@ -10,15 +10,15 @@ import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
 import { useEntityDictionPlurals } from "frontend/hooks/entity/entity.queries";
 import { DataStates } from "frontend/lib/data/types";
 import { ContentLayout } from "@/components/app/content-layout";
-import { useEntityViewStateMachine } from "../hooks/useEntityViewStateMachine";
-import { getEntitiesRelationsCount } from "./utils";
-import { useEntityActionMenuItems } from "../../entity/constants";
-import { IMenuActionItem } from "@/components/app/button/types";
+import type { IMenuActionItem } from "@/components/app/button/types";
 import { MenuSection } from "@/components/app/menu-section";
 import { ViewStateMachine } from "@/components/app/view-state-machine";
 import { ListSkeleton } from "@/components/app/skeleton/list";
 import { fakeMessageDescriptor } from "@/translations/fake";
 import { Card, CardContent } from "@/components/ui/card";
+import { useEntityActionMenuItems } from "../../entity/constants";
+import { getEntitiesRelationsCount } from "./utils";
+import { useEntityViewStateMachine } from "../hooks/useEntityViewStateMachine";
 
 export const DETAILS_LAYOUT_KEY = "___DETAILS_KEY__";
 

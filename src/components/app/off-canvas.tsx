@@ -1,8 +1,8 @@
-import { MessageDescriptor } from "@lingui/core";
+import type { MessageDescriptor } from "@lingui/core";
 import { useLingui } from "@lingui/react";
-import { ReactNode } from "react";
-import { Sheet, SheetContent, SheetHeader, SheetTitle } from "../ui/sheet";
+import type { ReactNode } from "react";
 import { cn } from "@/lib/utils";
+import { Sheet, SheetContent, SheetHeader, SheetTitle } from "../ui/sheet";
 import { Separator } from "../ui/separator";
 import { NextPortal } from "./next-portal";
 import { ScrollArea } from "../ui/scroll-area";
@@ -26,7 +26,7 @@ export function OffCanvas({ show, onClose, title, children, size }: IProps) {
     <NextPortal>
       <Sheet open={show} onOpenChange={onClose}>
         <SheetContent
-          className={cn("w-full flex flex-col", {
+          className={cn("flex w-full flex-col", {
             "md:w-[400px]": size === "sm",
             "md:w-[500px]": size === "md",
             "md:w-[600px]": size === "lg",
@@ -36,8 +36,8 @@ export function OffCanvas({ show, onClose, title, children, size }: IProps) {
             <SheetTitle>{_(title)}</SheetTitle>
           </SheetHeader>
           <Separator className="mt-2" />
-          <ScrollArea className="flex-grow">
-            <div className="px-4 my-2">{children}</div>
+          <ScrollArea className="grow">
+            <div className="my-2 px-4">{children}</div>
           </ScrollArea>
         </SheetContent>
       </Sheet>

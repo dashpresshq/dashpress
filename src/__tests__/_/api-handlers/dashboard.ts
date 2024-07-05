@@ -1,5 +1,5 @@
 import { rest } from "msw";
-import { IWidgetConfig } from "shared/types/dashboard";
+import type { IWidgetConfig } from "shared/types/dashboard";
 import { MutationHelpers } from "frontend/lib/data/useMutate/mutation-helpers";
 import { BASE_TEST_URL } from "./_utils";
 

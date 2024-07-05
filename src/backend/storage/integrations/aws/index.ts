@@ -1,5 +1,5 @@
 import { msg } from "@lingui/macro";
-import { IStorageIntegrationsImplemention } from "backend/storage/types";
+import type { IStorageIntegrationsImplemention } from "backend/storage/types";
 
 export const AWS_STORAGE_INTEGRATION: IStorageIntegrationsImplemention<{
   accessKeyId: string;

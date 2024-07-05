@@ -1,4 +1,7 @@
-import { DataActionType, IEntityCrudSettings } from "shared/configurations";
+import type {
+  DataActionType,
+  IEntityCrudSettings,
+} from "shared/configurations";
 import {
   ForbiddenError,
   NotFoundError,
@@ -9,7 +12,7 @@ import { rolesApiService } from "backend/roles/roles.service";
 import { META_USER_PERMISSIONS } from "shared/constants/user";
 import { GranularEntityPermissions } from "shared/types/user";
 import { getEntityFromRequest, ERROR_MESSAGE } from "./entity";
-import { ValidationImplType } from "./types";
+import type { ValidationImplType } from "./types";
 
 const EntityCrudCheck: Record<
   DataActionType,

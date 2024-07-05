@@ -1,13 +1,13 @@
-import { ReactNode } from "react";
-import { MessageDescriptor } from "@lingui/core";
+import type { ReactNode } from "react";
+import type { MessageDescriptor } from "@lingui/core";
 import { useLingui } from "@lingui/react";
 import { Card, CardHeader, CardContent } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { SoftButton } from "@/components/app/button/soft";
 import { SystemIcon } from "@/components/app/system-icons";
 import { ActionButtons } from "@/components/app/button/action";
-import { IGroupActionButton } from "../button/types";
 import { Tooltip } from "@/components/app/tooltip";
+import type { IGroupActionButton } from "../button/types";
 
 export interface IProps {
   title: MessageDescriptor;
@@ -41,16 +41,16 @@ export function SectionBox({
       )}
       <Card>
         <CardHeader>
-          <div className="flex justify-between items-center">
+          <div className="flex items-center justify-between">
             <div className="flex gap-2">
               {isLoading ? (
-                <Skeleton className="w-40 h-5" />
+                <Skeleton className="h-5 w-40" />
               ) : (
                 <p className="font-semibold">{_(title)}</p>
               )}
               {description ? (
                 <Tooltip isOverAButton={false} text={description}>
-                  <SystemIcon icon="Help" className="h-4 w-4" />
+                  <SystemIcon icon="Help" className="size-4" />
                 </Tooltip>
               ) : null}
             </div>

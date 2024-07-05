@@ -1,6 +1,6 @@
-import { IAppliedSchemaFormConfig } from "shared/form-schemas/types";
-import { MessageDescriptor } from "@lingui/core";
-import { DataEventActions } from "./data";
+import type { IAppliedSchemaFormConfig } from "shared/form-schemas/types";
+import type { MessageDescriptor } from "@lingui/core";
+import type { DataEventActions } from "./data";
 
 export enum ActionIntegrations {
   HTTP = "http",

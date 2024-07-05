@@ -1,7 +1,7 @@
 import { createCacheService } from "../cache";
-import { ConfigApiService } from "../config/config.service";
+import type { ConfigApiService } from "../config/config.service";
 import { NotFoundError } from "../errors";
-import { ConfigDomain } from "./types";
+import type { ConfigDomain } from "./types";
 
 const cacheService = createCacheService();
 

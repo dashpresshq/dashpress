@@ -1,8 +1,8 @@
-import { IWidgetConfig } from "shared/types/dashboard";
+import type { IWidgetConfig } from "shared/types/dashboard";
 import { forwardRef } from "react";
 import { DashboardWidgetPresentation } from "./Presentation";
 import { useDasboardWidgetScriptData } from "../dashboard.store";
-import { IWidgetSettingProps } from "./_components/WidgetHeader/types";
+import type { IWidgetSettingProps } from "./_components/WidgetHeader/types";
 import { useDashboardWidgetRelativeDateStore } from "../relativeTime.store";
 
 interface IProps {
@@ -11,7 +11,7 @@ interface IProps {
 }
 
 export const DashboardWidget = forwardRef<HTMLDivElement, IProps>(
-  ({ config, setting }, ref) => {
+  function DashboardWidgetCmp({ config, setting }, ref) {
     const widgetRelativeDate = useDashboardWidgetRelativeDateStore(
       (store) => store.widgetRelativeDate
     );

@@ -1,5 +1,5 @@
 import { noop } from "shared/lib/noop";
-import { NextApiRequest, NextApiResponse } from "next";
+import type { NextApiRequest, NextApiResponse } from "next";
 
 export const requestHook = async (
   req: NextApiRequest,

@@ -1,11 +1,11 @@
 import { useLingui } from "@lingui/react";
+import { Textarea } from "@/components/ui/textarea";
 import {
   generateClassNames,
   generateFormArias,
   LabelAndError,
 } from "./label-and-error";
-import { Textarea } from "@/components/ui/textarea";
-import { ISharedFormInput } from "./types";
+import type { ISharedFormInput } from "./types";
 
 interface IFormTextArea extends ISharedFormInput {
   rows?: number;

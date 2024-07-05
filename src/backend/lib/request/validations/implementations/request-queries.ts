@@ -1,5 +1,5 @@
 import { progammingError } from "backend/lib/errors";
-import { ValidationImplType } from "./types";
+import type { ValidationImplType } from "./types";
 
 export const requestQueriesValidationImpl: ValidationImplType<
   Record<string, string>

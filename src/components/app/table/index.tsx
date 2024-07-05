@@ -5,8 +5,12 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import { typescriptSafeObjectDotEntries } from "shared/lib/objects";
+import { cn } from "@/lib/utils";
+import { Table as TableRoot } from "@/components/ui/table";
+import { Skeleton } from "@/components/ui/skeleton";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import { DEFAULT_TABLE_STATE } from "./constants";
-import { ITableProps } from "./types";
+import type { ITableProps } from "./types";
 import { getPageCount } from "./utils";
 import { TablePagination } from "./_Pagination";
 import { ErrorAlert } from "../alert";
@@ -14,11 +18,7 @@ import { TableHead } from "./Head";
 import { TableBody } from "./Body";
 import { TableFoot } from "./Foot";
 import { useInternalColumns, useSyncTableState } from "./hooks";
-import { cn } from "@/lib/utils";
-import { Table as TableRoot } from "@/components/ui/table";
-import { Skeleton } from "@/components/ui/skeleton";
 import { TableSkeleton } from "../skeleton/table";
-import { ScrollArea } from "@/components/ui/scroll-area";
 
 export { DEFAULT_TABLE_STATE };
 
@@ -98,7 +98,7 @@ export function Table<T extends unknown>({
       <ScrollArea orientation="horizontal" className={cn("relative bg-base")}>
         {previousDataRender}
         <TableRoot
-          className={cn("w-full text-main border-collapse", {
+          className={cn("w-full border-collapse text-main", {
             "border-border border-r border-l": border,
           })}
         >

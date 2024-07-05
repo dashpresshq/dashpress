@@ -1,4 +1,4 @@
-import { SystemIconsKeys } from "shared/constants/Icons";
+import type { SystemIconsKeys } from "shared/constants/Icons";
 
 export enum NavigationMenuItemType {
   ExternalLink = "external-link",

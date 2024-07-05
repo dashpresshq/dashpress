@@ -1,9 +1,9 @@
-import { IAppliedSchemaFormConfig } from "shared/form-schemas/types";
-import { IActionIntegrationsImplemention } from "shared/types/actions";
+import type { IAppliedSchemaFormConfig } from "shared/form-schemas/types";
+import type { IActionIntegrationsImplemention } from "shared/types/actions";
 import { createTransport } from "nodemailer";
 import { msg } from "@lingui/macro";
 import { SEND_MAIL } from "./sendMail";
-import { IActionConfig } from "./types";
+import type { IActionConfig } from "./types";
 
 const CONFIGURATION_SCHEMA: IAppliedSchemaFormConfig<IActionConfig> = {
   host: {

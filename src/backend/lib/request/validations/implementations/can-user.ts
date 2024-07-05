@@ -3,7 +3,7 @@ import { rolesApiService } from "backend/roles/roles.service";
 import { userFriendlyCase } from "shared/lib/strings/friendly-case";
 import { UserPermissions } from "shared/constants/user";
 import { PORTAL_USER_PERMISSIONS } from "shared/constants/portal/user";
-import { ValidationImplType } from "./types";
+import type { ValidationImplType } from "./types";
 
 const ERROR_MESSAGE =
   "Your account doesn't have enough priviledge to perform this action";

@@ -1,6 +1,7 @@
-import { FilterOperators, IColumnFilterBag } from "shared/types/data";
-import { IFilterProps } from "./types";
+import type { IColumnFilterBag } from "shared/types/data";
+import { FilterOperators } from "shared/types/data";
 import { Input } from "@/components/ui/input";
+import type { IFilterProps } from "./types";
 
 export function FilterTableByNumbers({
   column: { filterValue, setFilter },

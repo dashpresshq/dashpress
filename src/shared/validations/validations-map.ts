@@ -19,7 +19,7 @@ import {
   isUppercase,
 } from "class-validator";
 import { msg } from "@lingui/macro";
-import { MessageDescriptor } from "@lingui/core";
+import type { MessageDescriptor } from "@lingui/core";
 import {
   doesntMatchOtherField,
   greaterThanOtherField,
@@ -27,7 +27,14 @@ import {
   matchOtherField,
 } from "./custom-validations";
 import { handleValidation } from "./handle-validation";
-import { FormFieldTypes, ValidationTypes } from "./types";
+import type { FormFieldTypes, ValidationTypes } from "./types";
+
+type ImplementationFn = (
+  value: unknown,
+  errorMessage: MessageDescriptor,
+  constraints: Record<string, unknown>,
+  allValues: Record<string, unknown>
+) => undefined | MessageDescriptor;
 
 export const ENTITY_VALIDATION_CONFIG: Record<
   ValidationTypes,
@@ -36,12 +43,7 @@ export const ENTITY_VALIDATION_CONFIG: Record<
     input?: Record<string, unknown>;
     isBoundToType?: Array<FormFieldTypes>;
     message: MessageDescriptor;
-    implementation: (
-      value: unknown,
-      errorMessage: MessageDescriptor,
-      constraints: Record<string, unknown>,
-      allValues: Record<string, unknown>
-    ) => undefined | MessageDescriptor;
+    implementation: ImplementationFn;
   }
 > = {
   required: {

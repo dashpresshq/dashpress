@@ -2,7 +2,8 @@
 import fs from "fs-extra";
 import path from "path";
 import { typescriptSafeObjectDotEntries } from "shared/lib/objects";
-import { ConfigKeys, ConfigApiService } from "./config.service";
+import type { ConfigKeys } from "./config.service";
+import { ConfigApiService } from "./config.service";
 
 const VALID_CONFIG: Record<ConfigKeys, string> = {
   CONFIG_ADAPTOR: "json-file",
@@ -32,31 +33,30 @@ describe("Config Service", () => {
   beforeEach(() => {
     ConfigApiService.isInitialized = false;
   });
+
   describe("validation", () => {
     it("should validate `CACHE_ADAPTOR_CONNECTION_STRING`", async () => {
       expect(() => {
         bootstrapConfig({ CACHE_ADAPTOR_CONNECTION_STRING: true });
-      }).toThrowError(`'Cache Adaptor Connection' should be a string`);
+      }).toThrow(`'Cache Adaptor Connection' should be a string`);
     });
 
     it("should validate `CONFIG_ADAPTOR_CONNECTION_STRING`", () => {
       expect(() => {
         bootstrapConfig({ CONFIG_ADAPTOR_CONNECTION_STRING: true });
-      }).toThrowError(`'Config Adaptor Connection' should be a string`);
+      }).toThrow(`'Config Adaptor Connection' should be a string`);
     });
 
     it("should validate `CONFIG_ADAPTOR`", () => {
       expect(() =>
         bootstrapConfig({ CONFIG_ADAPTOR: "invalid-value" })
-      ).toThrowError(
+      ).toThrow(
         `Invalid Config Adaptor name provided 'invalid-value'. Valid values are json-file,database,memory,redis`
       );
     });
 
     it("should validate `CACHE_ADAPTOR`", () => {
-      expect(() =>
-        bootstrapConfig({ CACHE_ADAPTOR: "invalid-value" })
-      ).toThrowError(
+      expect(() => bootstrapConfig({ CACHE_ADAPTOR: "invalid-value" })).toThrow(
         `Invalid Cache Adaptor name provided 'invalid-value'. Valid values are memory,redis`
       );
     });
@@ -67,7 +67,7 @@ describe("Config Service", () => {
           CREDENTIALS_ENCRYPTION_KEY:
             "less-than-64-chars-no-uppercase-no-numbers",
         })
-      ).toThrowError(
+      ).toThrow(
         `Encryption Key must contain uppercase letters, lowercase letters, numbers and be more than 64 characters`
       );
     });
@@ -77,18 +77,19 @@ describe("Config Service", () => {
         bootstrapConfig({
           AUTH_TOKEN_KEY: "less-than-64-chars-no-uppercase-no-numbers",
         });
-      }).toThrowError(
+      }).toThrow(
         `Auth token Key must contain uppercase letters, lowercase letters, numbers and be more than 64 characters`
       );
     });
 
     it("should not throw any error for valid env", () => {
-      expect(() => bootstrapConfig({})).not.toThrowError();
+      expect(() => bootstrapConfig({})).not.toThrow();
     });
   });
 
   describe("generation", () => {
     const fullPath = path.resolve(process.cwd(), ENV_LOCAL_FILE);
+
     beforeEach(() => {
       fs.removeSync(fullPath);
     });
@@ -102,7 +103,7 @@ describe("Config Service", () => {
             ENV_LOCAL_FILE,
             NODE_ENV: "production",
           })
-      ).toThrowError();
+      ).toThrow();
     });
 
     it("should create new valid config file when empty", async () => {
@@ -118,13 +119,13 @@ describe("Config Service", () => {
           .map((value) => value.split("="))
       );
 
-      expect(() => new ConfigApiService(newEnv)).not.toThrowError();
+      expect(() => new ConfigApiService(newEnv)).not.toThrow();
 
       ConfigApiService.isInitialized = false;
 
       newEnv.CONFIG_ADAPTOR = "hello";
 
-      expect(() => new ConfigApiService(newEnv)).toThrowError(
+      expect(() => new ConfigApiService(newEnv)).toThrow(
         "Invalid Config Adaptor name provided 'hello'. Valid values are json-file,database,memory,redis"
       );
     });
@@ -159,7 +160,7 @@ describe("Config Service", () => {
           .map((value) => value.split("="))
       );
 
-      expect(() => new ConfigApiService(newEnv)).not.toThrowError();
+      expect(() => new ConfigApiService(newEnv)).not.toThrow();
 
       expect(newEnv.CONFIG_ADAPTOR_CONNECTION_STRING).toBe("test");
       expect(newEnv.CACHE_ADAPTOR).toBe("redis");

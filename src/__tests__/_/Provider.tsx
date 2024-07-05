@@ -1,6 +1,6 @@
-import { ReactNode } from "react";
+import type { ReactNode } from "react";
 import { LinguiProvider } from "translations/utils";
-import { Messages } from "@lingui/core";
+import type { Messages } from "@lingui/core";
 import {
   QueryCache,
   QueryClient,

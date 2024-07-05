@@ -1,9 +1,7 @@
 import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
 import { META_USER_PERMISSIONS } from "shared/constants/user";
-import {
-  CHANGE_PASSWORD_FORM_SCHEMA,
-  IChangePasswordForm,
-} from "shared/form-schemas/profile/password";
+import type { IChangePasswordForm } from "shared/form-schemas/profile/password";
+import { CHANGE_PASSWORD_FORM_SCHEMA } from "shared/form-schemas/profile/password";
 import { useDomainMessages } from "frontend/lib/crud-config";
 import { LANG_DOMAINS } from "frontend/lib/crud-config/lang-domains";
 import { SchemaForm } from "@/components/app/form/schema";

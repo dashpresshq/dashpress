@@ -1,14 +1,14 @@
 import { useLingui } from "@lingui/react";
 import Link from "next/link";
 import { Loader } from "react-feather";
-import { VariantProps } from "class-variance-authority";
+import type { VariantProps } from "class-variance-authority";
 import { useRouter } from "next/router";
 import { Card } from "@/components/ui/card";
 import { CommandItem, Command, CommandList } from "@/components/ui/command";
 import { cn } from "@/lib/utils";
 import { Button, buttonVariants } from "../ui/button";
 import { useConfirmAlert } from "./confirm-alert";
-import { IMenuActionItem } from "./button/types";
+import type { IMenuActionItem } from "./button/types";
 import { SystemIcon } from "./system-icons";
 
 export interface IProps {
@@ -58,10 +58,10 @@ export function MenuSection({ menuItems, size = "lg" }: IProps) {
                 const content = (
                   <>
                     {isMakingRequest ? (
-                      <Loader className="animate-spin w-4 h-4" />
+                      <Loader className="size-4 animate-spin" />
                     ) : (
                       <SystemIcon
-                        className={cn("mr-2 h-4 w-4 text-main", {
+                        className={cn("mr-2 size-4 text-main", {
                           "text-primary-text": isActive,
                           "text-muted": subtle || disabled,
                           "text-red-600": destructive,
@@ -78,7 +78,7 @@ export function MenuSection({ menuItems, size = "lg" }: IProps) {
                     asChild
                     className={cn(
                       buttonVariants({ variant, size }),
-                      "text-main hover:text-main hover:cursor-pointer rounded-md hover:bg-hover justify-start",
+                      "justify-start rounded-md text-main hover:cursor-pointer hover:bg-hover hover:text-main",
                       {
                         "!bg-primary !text-primary-text": isActive,
                         "text-muted hover:text-muted": subtle || disabled,

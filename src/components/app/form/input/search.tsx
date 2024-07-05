@@ -18,17 +18,17 @@ export function FormSearch({ onChange, loading, initialValue }: IProps) {
   return (
     <div className="relative flex w-full">
       <button
-        className="text-primary pl-3 border-b border-border"
+        className="border-b border-border pl-3 text-primary"
         type="button"
       >
         {loading ? (
-          <Loader className="animate-spin mr-2 h-4 w-4 shrink-0" />
+          <Loader className="mr-2 size-4 shrink-0 animate-spin" />
         ) : (
-          <Search className="mr-2 h-4 w-4 shrink-0" />
+          <Search className="mr-2 size-4 shrink-0" />
         )}
       </button>
       <Input
-        className="rounded-none focus-visible:ring-0 px-1 border-t-0 border-x-0"
+        className="rounded-none border-x-0 border-t-0 px-1 focus-visible:ring-0"
         type="search"
         value={value}
         onChange={(e) => {

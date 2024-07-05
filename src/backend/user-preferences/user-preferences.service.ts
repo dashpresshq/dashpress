@@ -1,13 +1,11 @@
-import {
-  USER_PREFERENCES_CONFIG,
+import type {
   UserPreferencesKeys,
   UserPreferencesValueType,
 } from "shared/user-preferences/constants";
+import { USER_PREFERENCES_CONFIG } from "shared/user-preferences/constants";
 import { BadRequestError } from "backend/lib/errors";
-import {
-  createConfigDomainPersistenceService,
-  AbstractConfigDataPersistenceService,
-} from "../lib/config-persistence";
+import type { AbstractConfigDataPersistenceService } from "../lib/config-persistence";
+import { createConfigDomainPersistenceService } from "../lib/config-persistence";
 
 export class UserPreferencesApiService {
   constructor(

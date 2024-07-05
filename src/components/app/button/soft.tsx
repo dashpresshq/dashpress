@@ -1,12 +1,12 @@
 import Link from "next/link";
 import { Loader } from "react-feather";
-import { BaseSyntheticEvent } from "react";
+import type { BaseSyntheticEvent } from "react";
 import { useLingui } from "@lingui/react";
-import { Tooltip } from "../tooltip";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { Tooltip } from "../tooltip";
 import { useConfirmAlert } from "../confirm-alert";
-import { IActionButton } from "./types";
+import type { IActionButton } from "./types";
 import { SystemIcon } from "../system-icons";
 
 export function SoftButton({
@@ -28,13 +28,13 @@ export function SoftButton({
 
   // eslint-disable-next-line no-nested-ternary
   const content = isMakingRequest ? (
-    <Loader className="w-[14px] h-[14px] animate-spin" />
+    <Loader className="size-[14px] animate-spin" />
   ) : size === "icon" ? (
-    <SystemIcon icon={systemIcon} className="w-[14px] h-[14px]" />
+    <SystemIcon icon={systemIcon} className="size-[14px]" />
   ) : (
-    <div className="flex gap-2 w-auto items-center">
-      <SystemIcon icon={systemIcon} className="w-[14px] h-[14px]" />
-      <span className="whitespace-nowrap hidden md:inline-block">
+    <div className="flex w-auto items-center gap-2">
+      <SystemIcon icon={systemIcon} className="size-[14px]" />
+      <span className="hidden whitespace-nowrap md:inline-block">
         {labelString}
       </span>
     </div>

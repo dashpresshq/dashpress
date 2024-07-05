@@ -1,7 +1,8 @@
 import fetchMock from "jest-fetch-mock";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { waitFor } from "@testing-library/react";
-import { FieldQueryFilter, FilterOperators } from "shared/types/data";
+import type { FieldQueryFilter } from "shared/types/data";
+import { FilterOperators } from "shared/types/data";
 import { renderHook } from "__tests__/_/lib/renderHook";
 import { useFEPagination } from "./useFEPagination";
 
@@ -28,11 +29,13 @@ interface ITestData {
   age: number;
   position: string;
 }
-describe("useFEPagination => ", () => {
+
+describe("useFEPagination =>", () => {
   const queryClient = new QueryClient();
   const wrapper = ({ children }) => (
     <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
   );
+
   beforeAll(async () => {
     fetchMock.mockResponseOnce(JSON.stringify(TEST_DATA));
   });
@@ -129,6 +132,7 @@ describe("useFEPagination => ", () => {
         }
       `);
     });
+
     it("should order by numeric field DESC correctly", async () => {
       const { result } = renderHook(
         () =>
@@ -170,6 +174,7 @@ describe("useFEPagination => ", () => {
         }
       `);
     });
+
     it("should order by string field ASC correctly", async () => {
       const { result } = renderHook(
         () =>
@@ -211,6 +216,7 @@ describe("useFEPagination => ", () => {
         }
       `);
     });
+
     it("should order by string field DESC correctly", async () => {
       const { result } = renderHook(
         () =>
@@ -281,6 +287,7 @@ describe("useFEPagination => ", () => {
         }
       `);
     });
+
     it("should return correct data for second page", async () => {
       const { result } = renderHook(
         () =>
@@ -307,6 +314,7 @@ describe("useFEPagination => ", () => {
         }
       `);
     });
+
     it("should return correct data for last page", async () => {
       const { result } = renderHook(
         () =>
@@ -333,6 +341,7 @@ describe("useFEPagination => ", () => {
         }
       `);
     });
+
     it("should return empty data for non-existent page", async () => {
       const { result } = renderHook(
         () =>

@@ -1,5 +1,5 @@
 import { BadRequestError } from "backend/lib/errors";
-import { ValidationImplType } from "./types";
+import type { ValidationImplType } from "./types";
 
 export const notAllowedOnDemoValidation = () => {
   if (process.env.NEXT_PUBLIC_IS_DEMO) {

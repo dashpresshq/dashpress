@@ -4,7 +4,10 @@ import CreateDashboardWidget from "pages/dashboard/[dashboardId]/widget/create";
 
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 import userEvent from "@testing-library/user-event";
-import { closeAllToasts, expectToast } from "__tests__/_/utils/closeAllToasts";
+import {
+  closeAllToasts,
+  getToastMessage,
+} from "__tests__/_/utils/closeAllToasts";
 import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
 import { TestProviders } from "__tests__/_/Provider";
 
@@ -19,6 +22,7 @@ jest.mock("nanoid", () => ({
 
 describe("pages/dashboard/[dashboardId]/widget/create", () => {
   const useRouter = jest.spyOn(require("next/router"), "useRouter");
+
   beforeAll(() => {
     useRouter.mockImplementation(
       USE_ROUTER_PARAMS({
@@ -73,7 +77,9 @@ describe("pages/dashboard/[dashboardId]/widget/create", () => {
       screen.getByRole("button", { name: "Create Dashboard Widget" })
     );
 
-    await expectToast("Dashboard Widget Created Successfully");
+    expect(await getToastMessage()).toBe(
+      "Dashboard Widget Created Successfully"
+    );
 
     await closeAllToasts();
   });
@@ -116,6 +122,8 @@ describe("pages/dashboard/[dashboardId]/widget/create", () => {
       screen.getByRole("button", { name: "Create Dashboard Widget" })
     );
 
-    await expectToast("Dashboard Widget Created Successfully");
+    expect(await getToastMessage()).toBe(
+      "Dashboard Widget Created Successfully"
+    );
   });
 });

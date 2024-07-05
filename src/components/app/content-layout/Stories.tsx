@@ -1,6 +1,6 @@
 /* eslint-disable react/function-component-definition */
 
-import { Story } from "@storybook/react";
+import type { Story } from "@storybook/react";
 import { TestProviders } from "__tests__/_/Provider";
 import { ContentLayout } from ".";
 
@@ -16,15 +16,15 @@ export default {
 const Template: Story = () => (
   <TestProviders>
     <ContentLayout.Center>
-      <div className="w-full h-full bg-red-500">Hello</div>
+      <div className="size-full bg-red-500">Hello</div>
     </ContentLayout.Center>
     <br />
     <ContentLayout>
       <ContentLayout.Left>
-        <div className="w-full h-full bg-green-500">Left</div>
+        <div className="size-full bg-green-500">Left</div>
       </ContentLayout.Left>
       <ContentLayout.Right>
-        <div className="w-full h-full bg-blue-500">Right</div>
+        <div className="size-full bg-blue-500">Right</div>
       </ContentLayout.Right>
     </ContentLayout>
   </TestProviders>

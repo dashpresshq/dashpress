@@ -4,7 +4,8 @@ import { DatabaseConfigDataPersistenceAdaptor } from "./DatabaseConfigDataPersis
 import { JsonFileConfigDataPersistenceAdaptor } from "./JsonFileConfigDataPersistenceAdaptor";
 import { MemoryConfigDataPersistenceAdaptor } from "./MemoryConfigDataPersistenceAdaptor";
 import { RedisConfigDataPersistenceAdaptor } from "./RedisConfigDataPersistenceAdaptor";
-import { ConfigAdaptorTypes, ConfigDomain } from "./types";
+import type { ConfigDomain } from "./types";
+import { ConfigAdaptorTypes } from "./types";
 
 export { AbstractConfigDataPersistenceService };
 

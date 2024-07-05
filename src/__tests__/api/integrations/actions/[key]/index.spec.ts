@@ -259,6 +259,7 @@ describe("/api/integrations/actions/[key]/index", () => {
 
       expect(resReq._getJSONData()).toHaveLength(1);
     });
+
     it("should deactivate activated actions", async () => {
       const { req, res } = createAuthenticatedMocks({
         method: "DELETE",

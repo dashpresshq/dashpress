@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { MessageDescriptor } from "@lingui/core";
+import type { MessageDescriptor } from "@lingui/core";
 import type { ToastProps } from "@/components/ui/toast";
 
 const TOAST_LIMIT = 1;
@@ -61,7 +61,7 @@ const addToRemoveQueue = (toastId: string) => {
 
   const timeout = setTimeout(() => {
     toastTimeouts.delete(toastId);
-    // eslint-disable-next-line no-use-before-define
+    // eslint-disable-next-line @typescript-eslint/no-use-before-define
     dispatch({
       type: "REMOVE_TOAST",
       toastId,
@@ -126,7 +126,9 @@ const reducer = (state: State, action: Action): State => {
   }
 };
 
-const listeners: Array<(state: State) => void> = [];
+type ListenerFn = (state: State) => void;
+
+const listeners: ListenerFn[] = [];
 
 let memoryState: State = { toasts: [] };
 

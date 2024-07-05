@@ -1,7 +1,7 @@
 import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
 import { META_USER_PERMISSIONS } from "shared/constants/user";
 import { userFriendlyCase } from "shared/lib/strings/friendly-case";
-import { IAppliedSchemaFormConfig } from "shared/form-schemas/types";
+import type { IAppliedSchemaFormConfig } from "shared/form-schemas/types";
 import languages from "translations/languages";
 import { msg } from "@lingui/macro";
 import { useRouter } from "next/router";

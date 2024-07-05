@@ -4,19 +4,19 @@ import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
 import { SystemRoles } from "shared/types/user";
 import { UserPermissions } from "shared/constants/user";
-import { IRolesList } from "shared/types/roles";
+import type { IRolesList } from "shared/types/roles";
 import { msg } from "@lingui/macro";
 import { useDomainMessages } from "frontend/lib/crud-config";
 import { LANG_DOMAINS } from "frontend/lib/crud-config/lang-domains";
 import { DELETE_BUTTON_PROPS } from "@/components/app/button/constants";
-import {
-  FEPaginationTable,
+import type {
   IFETableCell,
   IFETableColumn,
 } from "@/components/app/pagination-table";
-import { ROLES_ENDPOINT_CONFIG, useRoleDeletionMutation } from "./roles.store";
+import { FEPaginationTable } from "@/components/app/pagination-table";
 import { Card } from "@/components/ui/card";
 import { ActionButtons } from "@/components/app/button/action";
+import { ROLES_ENDPOINT_CONFIG, useRoleDeletionMutation } from "./roles.store";
 
 export function ListRoles() {
   const domainMessages = useDomainMessages(LANG_DOMAINS.ACCOUNT.ROLES);
@@ -55,7 +55,11 @@ export function ListRoles() {
         />
       );
     },
-    [roleDeletionMutation.isPending]
+    [
+      domainMessages.TEXT_LANG.DELETE,
+      domainMessages.TEXT_LANG.EDIT,
+      roleDeletionMutation,
+    ]
   );
   const columns: IFETableColumn<IRolesList>[] = [
     {

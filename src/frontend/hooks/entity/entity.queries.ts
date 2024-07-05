@@ -1,7 +1,7 @@
 import { useCallback } from "react";
 import { userFriendlyCase } from "shared/lib/strings/friendly-case";
 import { useApiQueries } from "frontend/lib/data/useApi/useApiQueries";
-import { AppConfigurationValueType } from "shared/configurations/constants";
+import type { AppConfigurationValueType } from "shared/configurations/constants";
 import { configurationApiPath } from "../configuration/configuration.store";
 
 export function useEntityDictionPlurals<T, P extends keyof T>(

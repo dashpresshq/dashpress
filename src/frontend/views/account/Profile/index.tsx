@@ -1,10 +1,8 @@
 import { useAuthenticatedUserBag } from "frontend/hooks/auth/user.store";
 import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
 import { META_USER_PERMISSIONS } from "shared/constants/user";
-import {
-  IUpdateProfileForm,
-  UPDATE_PROFILE_FORM_SCHEMA,
-} from "shared/form-schemas/profile/update";
+import type { IUpdateProfileForm } from "shared/form-schemas/profile/update";
+import { UPDATE_PROFILE_FORM_SCHEMA } from "shared/form-schemas/profile/update";
 import { LANG_DOMAINS } from "frontend/lib/crud-config/lang-domains";
 import { useDomainMessages } from "frontend/lib/crud-config";
 import { SchemaForm } from "@/components/app/form/schema";

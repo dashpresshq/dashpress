@@ -3,7 +3,10 @@ import userEvent from "@testing-library/user-event";
 import AccountPassword from "pages/account/password";
 import { TestProviders } from "__tests__/_/Provider";
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
-import { closeAllToasts, expectToast } from "__tests__/_/utils/closeAllToasts";
+import {
+  closeAllToasts,
+  getToastMessage,
+} from "__tests__/_/utils/closeAllToasts";
 import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
 
 setupApiHandlers();
@@ -44,7 +47,7 @@ describe("pages/account/password", () => {
       screen.getByRole("button", { name: "Update Password" })
     );
 
-    await expectToast("Password Updated Successfully");
+    expect(await getToastMessage()).toBe("Password Updated Successfully");
 
     await closeAllToasts();
   });
@@ -72,6 +75,8 @@ describe("pages/account/password", () => {
       screen.getByRole("button", { name: "Update Password" })
     );
 
-    await expectToast("Password will not be changed on demo account");
+    expect(await getToastMessage()).toBe(
+      "Password will not be changed on demo account"
+    );
   });
 });

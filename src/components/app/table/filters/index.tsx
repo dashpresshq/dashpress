@@ -1,12 +1,13 @@
-import { Column } from "@tanstack/react-table";
-import { ReactNode, useEffect, useState } from "react";
-import { IColumnFilterBag, TableFilterType } from "shared/types/data";
+import type { Column } from "@tanstack/react-table";
+import type { ReactNode } from "react";
+import { useEffect, useState } from "react";
+import type { IColumnFilterBag, TableFilterType } from "shared/types/data";
 import { useDebounce } from "react-use";
 import { typescriptSafeObjectDotEntries } from "shared/lib/objects";
+import { cn } from "@/lib/utils";
 import { FilterWrapper } from "./_FilterWrapper";
 import { RenderFilterOperator } from "./_FilterOperator";
 import { FilterTypesConfigBag } from "./config";
-import { cn } from "@/lib/utils";
 
 const FILTER_DEBOUNCE_WAIT = 500;
 

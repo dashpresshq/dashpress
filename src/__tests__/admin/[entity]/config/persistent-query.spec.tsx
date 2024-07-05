@@ -8,7 +8,7 @@ import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 import EntityPersistentQuerySettings from "pages/admin/[entity]/config/persistent-query";
 import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
 import { TestProviders } from "__tests__/_/Provider";
-import { expectToast } from "@/__tests__/_/utils/closeAllToasts";
+import { getToastMessage } from "@/__tests__/_/utils/closeAllToasts";
 
 setupApiHandlers();
 
@@ -53,7 +53,7 @@ describe("pages/admin/[entity]/config/persistent-query", () => {
       })
     );
 
-    await expectToast("Persistent Query Saved Successfully");
+    expect(await getToastMessage()).toBe("Persistent Query Saved Successfully");
   });
 
   it("should display updated value", async () => {

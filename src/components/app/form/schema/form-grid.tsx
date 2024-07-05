@@ -1,5 +1,5 @@
-import { CSSProperties, ReactNode } from "react";
-import { GridSpanSizes } from "shared/types/ui";
+import type { CSSProperties, ReactNode } from "react";
+import type { GridSpanSizes } from "shared/types/ui";
 
 export const FormGrid = {
   Root: ({ children }: { children: ReactNode }) => (

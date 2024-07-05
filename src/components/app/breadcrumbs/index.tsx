@@ -1,5 +1,5 @@
 import * as React from "react";
-import { ILabelValue } from "shared/types/options";
+import type { ILabelValue } from "shared/types/options";
 import {
   Breadcrumb,
   BreadcrumbEllipsis,
@@ -54,7 +54,7 @@ export function Breadcrumbs({ items, onCrumbClick }: IProps) {
                   className="flex items-center gap-1"
                   aria-label="Toggle menu"
                 >
-                  <BreadcrumbEllipsis className="h-4 w-4" />
+                  <BreadcrumbEllipsis className="size-4" />
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="start">
                   {itemsWithOriginalIndex.slice(1, -2).map((item) => (

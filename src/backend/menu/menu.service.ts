@@ -1,26 +1,23 @@
 import { nanoid } from "nanoid";
+import type { INavigationMenuItem } from "shared/types/menu";
 import {
   HeaderMenuItemType,
-  INavigationMenuItem,
   NavigationMenuItemType,
   SystemLinks,
 } from "shared/types/menu";
 import { userFriendlyCase } from "shared/lib/strings/friendly-case";
 import { META_USER_PERMISSIONS, UserPermissions } from "shared/constants/user";
 import { GranularEntityPermissions } from "shared/types/user";
-import {
-  EntitiesApiService,
-  entitiesApiService,
-} from "backend/entities/entities.service";
-import {
-  ConfigurationApiService,
-  configurationApiService,
-} from "backend/configuration/configuration.service";
-import { RolesApiService, rolesApiService } from "backend/roles/roles.service";
-import { ILabelValue } from "shared/types/options";
+import type { EntitiesApiService } from "backend/entities/entities.service";
+import { entitiesApiService } from "backend/entities/entities.service";
+import type { ConfigurationApiService } from "backend/configuration/configuration.service";
+import { configurationApiService } from "backend/configuration/configuration.service";
+import type { RolesApiService } from "backend/roles/roles.service";
+import { rolesApiService } from "backend/roles/roles.service";
+import type { ILabelValue } from "shared/types/options";
 import { sortListByOrder } from "shared/lib/array/sort";
 import { portalCheckIfIsMenuAllowed, getPortalMenuItems } from "./portal";
-import { IBaseNavigationMenuApiService } from "./types";
+import type { IBaseNavigationMenuApiService } from "./types";
 
 const SYSTEM_LINKS_CONFIG_MAP: Record<
   SystemLinks,

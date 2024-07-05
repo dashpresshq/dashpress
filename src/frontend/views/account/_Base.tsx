@@ -1,12 +1,12 @@
-import { ReactNode } from "react";
+import type { ReactNode } from "react";
 import { AppLayout } from "frontend/_layouts/app";
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
 import { AuthActions } from "frontend/hooks/auth/auth.actions";
 import { msg } from "@lingui/macro";
 import { ContentLayout } from "@/components/app/content-layout";
 import { MenuSection } from "@/components/app/menu-section";
+import type { IMenuActionItem } from "@/components/app/button/types";
 import { usePortalAccountMenu } from "./portal";
-import { IMenuActionItem } from "@/components/app/button/types";
 
 interface IProps {
   children: ReactNode;

@@ -21,7 +21,7 @@ function Calendar({ className, classNames, ...props }: CalendarProps) {
         nav: "space-x-1 flex items-center",
         nav_button: cn(
           buttonVariants({ variant: "outline" }),
-          "h-7 w-7 bg-base p-0"
+          "size-7 bg-base p-0"
         ),
         nav_button_previous: "!absolute left-1",
         nav_button_next: "!absolute right-1",
@@ -37,7 +37,7 @@ function Calendar({ className, classNames, ...props }: CalendarProps) {
         ),
         day: cn(
           buttonVariants({ variant: "ghost" }),
-          "h-8 w-8 p-0 font-normal hover:bg-primary-alpha hover:text-primary-alpha-text hover:shadow aria-selected:opacity-100"
+          "size-8 p-0 font-normal hover:bg-primary-alpha hover:text-primary-alpha-text hover:shadow aria-selected:opacity-100"
         ),
         day_range_start: "day-range-start",
         day_range_end: "day-range-end",
@@ -53,8 +53,8 @@ function Calendar({ className, classNames, ...props }: CalendarProps) {
         ...classNames,
       }}
       components={{
-        IconLeft: () => <ChevronLeft className="h-4 w-4" />,
-        IconRight: () => <ChevronRight className="h-4 w-4" />,
+        IconLeft: () => <ChevronLeft className="size-4" />,
+        IconRight: () => <ChevronRight className="size-4" />,
       }}
       {...props}
     />

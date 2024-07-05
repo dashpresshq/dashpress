@@ -5,7 +5,7 @@ import EntitiesSettings from "pages/admin/settings/entities";
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
 import { TestProviders } from "__tests__/_/Provider";
-import { expectToast } from "@/__tests__/_/utils/closeAllToasts";
+import { getToastMessage } from "@/__tests__/_/utils/closeAllToasts";
 
 setupApiHandlers();
 
@@ -73,7 +73,9 @@ describe("pages/admin/settings/entities", () => {
       screen.getByRole("switch", { name: "Plural disabled-entity-2" })
     );
 
-    await expectToast("Enabled Entities Settings Saved Successfully");
+    expect(await getToastMessage()).toBe(
+      "Enabled Entities Settings Saved Successfully"
+    );
   });
 
   it("should display updated entities state", async () => {

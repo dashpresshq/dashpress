@@ -1,13 +1,13 @@
 /* eslint-disable no-param-reassign */
-import {
+import type {
   DefaultBodyType,
   PathParams,
   ResponseComposition,
-  rest,
   RestContext,
   RestRequest,
 } from "msw";
-import { IKeyValue } from "shared/types/options";
+import { rest } from "msw";
+import type { IKeyValue } from "shared/types/options";
 import { BASE_TEST_URL } from "./_utils";
 
 const CONSTANTS = [
@@ -100,8 +100,8 @@ export const integrationsApiHandlers = [
   rest.post(
     BASE_TEST_URL("/api/integrations/credentials/reveal"),
     async (req, res, ctx) => {
-      const { _password } = await req.json();
-      if (_password === "password") {
+      const { _password: password } = await req.json();
+      if (password === "password") {
         return res(ctx.json(CREDENTIALS));
       }
       return res(ctx.status(400), ctx.json({ message: "Invalid Password" }));

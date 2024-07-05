@@ -1,7 +1,7 @@
 import { useSetupCheck } from "frontend/hooks/setup/setup.store";
 import { AuthLayout } from "frontend/_layouts/guest";
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
-import { CustomNextPage } from "frontend/_layouts/types";
+import type { CustomNextPage } from "frontend/_layouts/types";
 import { msg } from "@lingui/macro";
 import { ViewStateMachine } from "@/components/app/view-state-machine";
 import {

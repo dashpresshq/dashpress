@@ -1,6 +1,6 @@
 import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
 import { UserPermissions } from "shared/constants/user";
-import { ILabelValue } from "shared/types/options";
+import type { ILabelValue } from "shared/types/options";
 import { useAppConfigurationDomainMessages } from "frontend/hooks/configuration/configuration.constant";
 import { EnabledEntitiesDocumentation } from "frontend/docs/enabled-entities";
 import { useApi } from "frontend/lib/data/useApi";

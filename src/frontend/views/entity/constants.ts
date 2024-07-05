@@ -2,11 +2,11 @@ import { useRouter } from "next/router";
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
 import { useUserHasPermission } from "frontend/hooks/auth/user.store";
 import { UserPermissions } from "shared/constants/user";
-import { CrudViewsKeys } from "shared/configurations";
+import type { CrudViewsKeys } from "shared/configurations";
 import { useEntityCrudConfig } from "frontend/hooks/entity/entity.config";
 import { msg } from "@lingui/macro";
-import { MessageDescriptor } from "@lingui/core";
-import { IMenuActionItem } from "@/components/app/button/types";
+import type { MessageDescriptor } from "@lingui/core";
+import type { IMenuActionItem } from "@/components/app/button/types";
 
 export const ENTITY_CONFIGURATION_VIEW = "ENTITY_CONFIGURATION_VIEW";
 

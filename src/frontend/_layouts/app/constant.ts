@@ -1,6 +1,6 @@
-import { MessageDescriptor } from "@lingui/core";
+import type { MessageDescriptor } from "@lingui/core";
 import { msg } from "@lingui/macro";
-import { SystemIconsKeys } from "shared/constants/Icons";
+import type { SystemIconsKeys } from "shared/constants/Icons";
 
 export const DEMO_LINKS: {
   id: string;

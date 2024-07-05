@@ -1,8 +1,8 @@
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
 import { useRouter } from "next/router";
-import { ICreateUserForm } from "shared/form-schemas/users";
-import { IResetPasswordForm } from "shared/form-schemas/users/reset-password";
-import { IAccountProfile } from "shared/types/user";
+import type { ICreateUserForm } from "shared/form-schemas/users";
+import type { IResetPasswordForm } from "shared/form-schemas/users/reset-password";
+import type { IAccountProfile } from "shared/types/user";
 import {
   MAKE_ENDPOINTS_CONFIG,
   useDomainMessages,

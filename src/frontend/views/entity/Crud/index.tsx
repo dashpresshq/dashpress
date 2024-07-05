@@ -1,5 +1,6 @@
-import { ReactNode, useEffect, useState } from "react";
-import { CrudViewsKeys, IEntityCrudSettings } from "shared/configurations";
+import type { ReactNode } from "react";
+import { useEffect, useState } from "react";
+import type { CrudViewsKeys, IEntityCrudSettings } from "shared/configurations";
 import { UserPermissions } from "shared/constants/user";
 import { CRUDDocumentation } from "frontend/docs/crud";
 import { useRouteParam } from "frontend/lib/routing/useRouteParam";
@@ -15,6 +16,7 @@ import { useDocumentationActionButton } from "frontend/docs/constants";
 import { msg } from "@lingui/macro";
 import { typescriptSafeObjectDotEntries } from "shared/lib/objects";
 import { SectionBox } from "@/components/app/section-box";
+import { Tabs } from "@/components/app/tabs";
 import { BaseEntitySettingsLayout } from "../_Base";
 import {
   EntityFieldsSelectionSettings,
@@ -27,7 +29,6 @@ import {
   PortalEntityDetailsSettings,
   PortalEntityUpdateSettings,
 } from "./portal";
-import { Tabs } from "@/components/app/tabs";
 
 const TITLE = msg`CRUD Settings`;
 

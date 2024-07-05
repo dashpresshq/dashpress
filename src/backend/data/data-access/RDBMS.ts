@@ -1,20 +1,16 @@
 /* eslint-disable no-param-reassign */
-import { Knex } from "knex";
+import type { Knex } from "knex";
 import { getDbConnection } from "backend/lib/connection/db";
-import {
-  FieldQueryFilter,
-  FilterOperators,
-  QueryFilterSchema,
-} from "shared/types/data";
+import type { FieldQueryFilter, QueryFilterSchema } from "shared/types/data";
+import { FilterOperators } from "shared/types/data";
 import { credentialsApiService } from "backend/integrations-configurations";
-import {
-  DATA_SOURCES_CONFIG,
-  IDataSourceCredentials,
-} from "shared/types/data-sources";
+import type { IDataSourceCredentials } from "shared/types/data-sources";
+import { DATA_SOURCES_CONFIG } from "shared/types/data-sources";
 import { BaseDataAccessService } from "./_Base";
 import { DATABASE_CREDENTIAL_GROUP } from "../fields";
-import { IPaginationFilters } from "../types";
-import { QueryOperationImplementation, QueryOperators } from "./types";
+import type { IPaginationFilters } from "../types";
+import type { QueryOperationImplementation } from "./types";
+import { QueryOperators } from "./types";
 
 const makeArray = (value: unknown): string[] => {
   if (Array.isArray(value)) {

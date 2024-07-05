@@ -1,7 +1,7 @@
 import { X } from "react-feather";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { IColumnFilterBag } from "@/shared/types/data";
+import type { IColumnFilterBag } from "@/shared/types/data";
 
 interface IProps {
   values: string[];
@@ -23,7 +23,7 @@ export function MultiFilterValues({
           (option) => String(option.value) === String(value)
         )?.label;
         return (
-          <div key={value} className="inline-flex mb-1 mr-1">
+          <div key={value} className="mb-1 mr-1 inline-flex">
             <div
               className={cn(
                 buttonVariants({ variant: "soft", size: "sm" }),

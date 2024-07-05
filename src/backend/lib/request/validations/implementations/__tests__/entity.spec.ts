@@ -30,6 +30,7 @@ describe("Request Validations => entityValidationImpl", () => {
   beforeAll(async () => {
     await setupAllTestData(["schema", "users", "app-config"]);
   });
+
   it("should return back valid entity", async () => {
     const { req, res } = createAuthenticatedMocks({
       method: "GET",

@@ -1,5 +1,5 @@
 import { createConfigDomainPersistenceService } from "backend/lib/config-persistence";
-import { IRole } from "backend/roles/roles.service";
+import type { IRole } from "backend/roles/roles.service";
 
 const TEST_ROLES: IRole[] = [
   {

@@ -22,6 +22,7 @@ describe("Request Validations => withPasswordValidationImpl", () => {
   beforeAll(async () => {
     await setupAllTestData(["users"]);
   });
+
   it("should return data when correct password is sent through body", async () => {
     const { req, res } = createAuthenticatedMocks({
       method: "POST",

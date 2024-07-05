@@ -1,5 +1,6 @@
 import { rest } from "msw";
-import { ITableView, FilterOperators } from "shared/types/data";
+import type { ITableView } from "shared/types/data";
+import { FilterOperators } from "shared/types/data";
 import { BASE_TEST_URL } from "./_utils";
 
 const ENTITY_CONFIG = {};
@@ -86,10 +87,9 @@ const CONFIG_VALUES = {
   disabled_menu_entities: ["entity-3"],
 };
 
-const DEFAULT_ENTITY_CONFIG_VALUES: Record<
-  string,
-  (entity: string) => unknown
-> = {
+type EntityConfigValuesFnType = (entity: string) => unknown;
+
+const DEFAULT_ENTITY_CONFIG_VALUES: Record<string, EntityConfigValuesFnType> = {
   entity_crud_settings: () => ({
     create: true,
     details: true,

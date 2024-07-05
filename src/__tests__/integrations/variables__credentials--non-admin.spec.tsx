@@ -8,7 +8,7 @@ import ManageVariables from "pages/admin/settings/variables";
 import { BASE_TEST_URL } from "__tests__/_/api-handlers/_utils";
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 import userEvent from "@testing-library/user-event";
-import { IAuthenticatedUserBag } from "shared/types/user";
+import type { IAuthenticatedUserBag } from "shared/types/user";
 import { UserPermissions } from "shared/constants/user";
 import { AuthActions } from "frontend/hooks/auth/auth.actions";
 import { getTableRows } from "__tests__/_/utils/getTableRows";
@@ -19,6 +19,7 @@ const server = setupApiHandlers();
 
 describe("pages/integrations/variables => credentials -- non admin", () => {
   const useRouter = jest.spyOn(require("next/router"), "useRouter");
+
   beforeAll(() => {
     localStorage.setItem(AuthActions.JWT_TOKEN_STORAGE_KEY, "foo");
 

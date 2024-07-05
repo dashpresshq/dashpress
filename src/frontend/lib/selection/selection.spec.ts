@@ -6,6 +6,7 @@ describe("useStringSelections", () => {
     const { result } = renderHook(() => useStringSelections(""));
     expect(result.current.allSelections).toEqual([]);
   });
+
   describe("single page", () => {
     it("should select multiple", async () => {
       const { result, rerender } = renderHook(() => useStringSelections(""));
@@ -28,7 +29,7 @@ describe("useStringSelections", () => {
       ]);
     });
 
-    it("should select multiple", async () => {
+    it("should set multiple", async () => {
       const { result, rerender } = renderHook(() => useStringSelections(""));
 
       result.current.setMultiple(["foo", "bar"]);

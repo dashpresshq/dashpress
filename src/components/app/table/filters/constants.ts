@@ -1,4 +1,4 @@
-import { MessageDescriptor } from "@lingui/core";
+import type { MessageDescriptor } from "@lingui/core";
 import { msg } from "@lingui/macro";
 import { FilterOperators } from "shared/types/data";
 

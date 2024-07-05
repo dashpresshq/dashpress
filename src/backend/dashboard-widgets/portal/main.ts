@@ -1,8 +1,8 @@
 import { noop } from "shared/lib/noop";
-import { IWidgetConfig } from "shared/types/dashboard";
+import type { IWidgetConfig } from "shared/types/dashboard";
 import { META_USER_PERMISSIONS } from "shared/constants/user";
-import { ILabelValue } from "shared/types/options";
-import { GranularEntityPermissions } from "shared/types/user";
+import type { ILabelValue } from "shared/types/options";
+import type { GranularEntityPermissions } from "shared/types/user";
 
 export const mutateGeneratedDashboardWidgets = async (
   wigdets: IWidgetConfig[],

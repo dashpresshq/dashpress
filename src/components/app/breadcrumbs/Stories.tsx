@@ -1,9 +1,10 @@
 /* eslint-disable react/function-component-definition */
 
-import { Story } from "@storybook/react";
+import type { Story } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
 import { TestProviders } from "__tests__/_/Provider";
-import { Breadcrumbs, IProps } from ".";
+import type { IProps } from ".";
+import { Breadcrumbs } from ".";
 
 export default {
   title: "Components/Breadcrumbs",

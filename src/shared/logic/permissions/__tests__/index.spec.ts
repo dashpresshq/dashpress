@@ -78,6 +78,7 @@ describe("user role checks", () => {
           doesPermissionAllowPermission([], "NO_PERMISSION_REQUIRED", true)
         ).toBe(true);
       });
+
       it("should return true when permission is contained", () => {
         expect(
           doesPermissionAllowPermission(
@@ -87,6 +88,7 @@ describe("user role checks", () => {
           )
         ).toBe(true);
       });
+
       it("should return false when permission is not contained", () => {
         expect(
           doesPermissionAllowPermission(
@@ -100,6 +102,7 @@ describe("user role checks", () => {
         ).toBe(false);
       });
     });
+
     describe("Group", () => {
       it("should return true for `CAN_MANAGE_ALL_ENTITIES` when permission starts with APPLIED_CAN_ACCESS_ENTITY", () => {
         expect(
@@ -110,6 +113,7 @@ describe("user role checks", () => {
           )
         ).toBe(true);
       });
+
       it("should return false for `CAN_MANAGE_ALL_ENTITIES` when permission doesn't start with APPLIED_CAN_ACCESS_ENTITY", () => {
         expect(
           doesPermissionAllowPermission(
@@ -120,6 +124,7 @@ describe("user role checks", () => {
         ).toBe(false);
       });
     });
+
     describe("Check Granular", () => {
       it("should pass check granular when granular is true", () => {
         expect(

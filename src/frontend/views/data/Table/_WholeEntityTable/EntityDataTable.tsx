@@ -2,12 +2,12 @@ import { useEntityCrudConfig } from "frontend/hooks/entity/entity.config";
 import { ENTITY_TABLE_PATH } from "frontend/hooks/data/constants";
 import { ViewStateMachine } from "@/components/app/view-state-machine";
 import { TableSkeleton } from "@/components/app/skeleton/table";
+import { Card } from "@/components/ui/card";
 import { useTableColumns } from "../useTableColumns";
 import { TableViewComponent } from "../portal";
-import { IDataTableProps } from "../types";
+import type { IDataTableProps } from "../types";
 import { BaseDataTable } from "../DataTable";
 import { useCanUserPerformCrudAction } from "../../hooks/useCanUserPerformCrudAction";
-import { Card } from "@/components/ui/card";
 
 interface IProps extends IDataTableProps {
   entity: string;

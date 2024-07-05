@@ -3,7 +3,7 @@ import {
   useActiveIntegrations,
 } from "frontend/views/integrations/actions/actions.store";
 import { useCallback, useState } from "react";
-import { IFormAction } from "shared/types/actions";
+import type { IFormAction } from "shared/types/actions";
 import { useApi } from "frontend/lib/data/useApi";
 import { userFriendlyCase } from "shared/lib/strings/friendly-case";
 import { msg } from "@lingui/macro";
@@ -13,11 +13,13 @@ import { DELETE_BUTTON_PROPS } from "@/components/app/button/constants";
 import { TableSkeleton } from "@/components/app/skeleton/table";
 import { SoftButton } from "@/components/app/button/soft";
 import { ViewStateMachine } from "@/components/app/view-state-machine";
-import {
-  FEPaginationTable,
+import type {
   IFETableCell,
   IFETableColumn,
 } from "@/components/app/pagination-table";
+import { FEPaginationTable } from "@/components/app/pagination-table";
+import { ActionButtons } from "@/components/app/button/action";
+import { OffCanvas } from "@/components/app/off-canvas";
 import {
   LIST_ENTITY_FORM_ACTIONS,
   useCreateFormActionMutation,
@@ -25,8 +27,6 @@ import {
   useUpdateFormActionMutation,
 } from "./form-actions.store";
 import { ActionForm } from "./Form";
-import { ActionButtons } from "@/components/app/button/action";
-import { OffCanvas } from "@/components/app/off-canvas";
 
 const NEW_ACTION_ITEM = "__new_action_item__";
 
@@ -74,7 +74,11 @@ export function FormActions({ entity }: { entity: string }) {
         ]}
       />
     ),
-    [deleteFormActionMutation.isPending]
+    [
+      deleteFormActionMutation,
+      domainMessages.TEXT_LANG.DELETE,
+      domainMessages.TEXT_LANG.EDIT,
+    ]
   );
 
   const columns: IFETableColumn<IFormAction>[] = [
@@ -133,7 +137,7 @@ export function FormActions({ entity }: { entity: string }) {
         error={activeIntegration.error || integrationsList.error}
         loader={<TableSkeleton />}
       >
-        <div className="flex justify-end mb-3">
+        <div className="mb-3 flex justify-end">
           <SoftButton
             action={createNew}
             systemIcon="Plus"

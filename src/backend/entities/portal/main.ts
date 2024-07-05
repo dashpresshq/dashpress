@@ -1,5 +1,5 @@
 import { noop } from "shared/lib/noop";
-import { DataCrudKeys } from "shared/types/data";
+import type { DataCrudKeys } from "shared/types/data";
 
 export class PortalFieldsFilterService {
   static async getFieldsToHide(

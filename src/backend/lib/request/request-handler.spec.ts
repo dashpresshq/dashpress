@@ -1,5 +1,5 @@
 import { createAuthenticatedMocks } from "__tests__/api/_test-utils";
-import { requestHandler } from "../request";
+import { requestHandler } from ".";
 
 describe("/api/requestHandler", () => {
   it("should call error on non implemented request method", async () => {

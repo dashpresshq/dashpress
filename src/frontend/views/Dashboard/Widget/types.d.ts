@@ -1,7 +1,7 @@
-import { GridSpanSizes, GridHeightSizes } from "shared/types/ui";
-import { ReactElement } from "react";
-import { z } from "zod";
-import { MessageDescriptor } from "@lingui/core";
+import type { GridSpanSizes, GridHeightSizes } from "shared/types/ui";
+import type { ReactElement } from "react";
+import type { z } from "zod";
+import type { MessageDescriptor } from "@lingui/core";
 
 export interface IWidgetConfigBag {
   span: GridSpanSizes;

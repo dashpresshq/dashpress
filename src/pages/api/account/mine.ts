@@ -1,6 +1,6 @@
 import { usersApiController } from "backend/users/users.controller";
 import { UPDATE_PROFILE_FORM_SCHEMA } from "shared/form-schemas/profile/update";
-import { IAccountProfile } from "shared/types/user";
+import type { IAccountProfile } from "shared/types/user";
 import { requestHandler } from "backend/lib/request";
 import { usersApiService } from "backend/users/users.service";
 

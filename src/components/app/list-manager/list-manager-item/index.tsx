@@ -1,7 +1,7 @@
 import { useId } from "react";
 import { SortableKnob } from "react-easy-sort";
-import { SystemIconsKeys } from "shared/constants/Icons";
-import { MessageDescriptor } from "@lingui/core";
+import type { SystemIconsKeys } from "shared/constants/Icons";
+import type { MessageDescriptor } from "@lingui/core";
 import { cn } from "@/lib/utils";
 import { GrabIcon, SystemIcon } from "../../system-icons";
 import { FormButton } from "../../button/form";
@@ -39,7 +39,7 @@ export function ListManagerItem({
 }: IListMangerItemProps) {
   const id = useId();
   const content = (
-    <div className="flex justify-between w-full">
+    <div className="flex w-full justify-between">
       <div className="flex items-center gap-3">
         <div
           className={cn("hidden", {
@@ -52,7 +52,7 @@ export function ListManagerItem({
         </div>
         {systemIcon ? (
           <SystemIcon
-            className={cn("w-4 h-4  text-main", {
+            className={cn("size-4 text-main", {
               "text-muted": subtle,
             })}
             icon={systemIcon}
@@ -61,7 +61,7 @@ export function ListManagerItem({
         <div>
           <label htmlFor={id}>
             <p
-              className={cn("text-sm text-main truncate", {
+              className={cn("truncate text-sm text-main", {
                 "text-muted": subtle,
               })}
             >
@@ -70,7 +70,7 @@ export function ListManagerItem({
           </label>
         </div>
       </div>
-      <div className="flex gap-3 justify-end">
+      <div className="flex justify-end gap-3">
         {actionButtons.map(
           ({
             label: buttonLabel,
@@ -107,19 +107,14 @@ export function ListManagerItem({
     </div>
   );
 
-  const buttonProps = {
-    $disabled: !!disabled,
-  };
-
   return (
     <div
       className={cn(
-        "flex justify-between items-center relative p-2 bg-base text-main border-b border-border cursor-pointer hover:bg-hover",
+        "relative flex cursor-pointer items-center justify-between border-b border-border bg-base p-2 text-main hover:bg-hover",
         {
           "text-muted bg-base pointer-events-none": disabled,
         }
       )}
-      {...buttonProps}
     >
       {content}
     </div>

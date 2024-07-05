@@ -1,4 +1,5 @@
-import { IIntegrationsList, ActionIntegrations } from "shared/types/actions";
+import type { IIntegrationsList } from "shared/types/actions";
+import { ActionIntegrations } from "shared/types/actions";
 import {
   CRUD_CONFIG_NOT_FOUND,
   useDomainMessages,

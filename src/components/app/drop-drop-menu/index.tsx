@@ -8,9 +8,9 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { useToggle } from "@/frontend/hooks/state/useToggleState";
 import { MenuSection } from "@/components/app/menu-section";
-import { IMenuActionItem } from "../button/types";
-import { SoftButton } from "../button/soft";
 import { cn } from "@/lib/utils";
+import type { IMenuActionItem } from "../button/types";
+import { SoftButton } from "../button/soft";
 
 export interface IProps {
   menuItems: IMenuActionItem[];
@@ -51,6 +51,8 @@ export function DropDownMenu({
     setCurrentMenuItem(menuItems[0]);
   }, [JSON.stringify(menuItems)]);
 
+  const { isOn: isOpen, toggle } = useToggle(false);
+
   if (menuItems.length === 0) {
     return null;
   }
@@ -58,8 +60,6 @@ export function DropDownMenu({
   if (menuItems.length === 1 && !ellipsis) {
     return <SoftButton {...currentMenuItem} />;
   }
-
-  const { isOn: isOpen, toggle } = useToggle(false);
 
   return (
     <div className="relative flex">
@@ -88,7 +88,7 @@ export function DropDownMenu({
         </DropdownMenuTrigger>
         <DropdownMenuContent
           align="end"
-          className={cn("p-0 border-0", contentClassName)}
+          className={cn("border-0 p-0", contentClassName)}
           onClick={toggle}
         >
           <MenuSection menuItems={menuItems} size="sm" />

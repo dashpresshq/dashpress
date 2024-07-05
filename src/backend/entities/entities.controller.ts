@@ -1,8 +1,7 @@
-import {
-  ConfigurationApiService,
-  configurationApiService,
-} from "../configuration/configuration.service";
-import { entitiesApiService, EntitiesApiService } from "./entities.service";
+import type { ConfigurationApiService } from "../configuration/configuration.service";
+import { configurationApiService } from "../configuration/configuration.service";
+import type { EntitiesApiService } from "./entities.service";
+import { entitiesApiService } from "./entities.service";
 
 export class EntitiesApiController {
   constructor(

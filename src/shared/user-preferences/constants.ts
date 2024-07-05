@@ -1,5 +1,8 @@
-import { BaseUserPreferencesKeys } from "./base-types";
-import { PortalUserPreferencesKeys, PORTAL_CONFIGURATION_KEYS } from "./portal";
+import type { BaseUserPreferencesKeys } from "./base-types";
+import {
+  PORTAL_CONFIGURATION_KEYS,
+  type PortalUserPreferencesKeys,
+} from "./portal";
 
 export type UserPreferencesKeys =
   | BaseUserPreferencesKeys

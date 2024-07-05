@@ -49,6 +49,7 @@ describe("Custom validations", () => {
           );
         });
       });
+
       it("should return false when invalid", () => {
         falseCases.forEach(([value, otherField]) => {
           expect(implementation(value, "otherField", { otherField })).toBe(

@@ -6,7 +6,7 @@ import { reduceStringToNumber } from "shared/lib/strings";
 import { useApi } from "frontend/lib/data/useApi";
 import { useWaitForResponseMutationOptions } from "frontend/lib/data/useMutate/useWaitForResponseMutationOptions";
 import { ApiRequest } from "frontend/lib/data/makeRequest";
-import { IStorageIntegration } from "shared/types/actions";
+import type { IStorageIntegration } from "shared/types/actions";
 import { LANG_DOMAINS } from "frontend/lib/crud-config/lang-domains";
 import { msg } from "@lingui/macro";
 import { usePasswordStore } from "../password.store";

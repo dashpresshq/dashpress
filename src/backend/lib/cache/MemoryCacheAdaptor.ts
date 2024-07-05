@@ -1,5 +1,5 @@
 import { noop } from "shared/lib/noop";
-import { ConfigApiService } from "../config/config.service";
+import type { ConfigApiService } from "../config/config.service";
 import { AbstractCacheService } from "./AbstractCacheService";
 
 export class MemoryCacheAdaptor extends AbstractCacheService {

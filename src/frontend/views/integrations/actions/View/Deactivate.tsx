@@ -1,4 +1,5 @@
-import { ActionIntegrations, IIntegrationsList } from "shared/types/actions";
+import type { IIntegrationsList } from "shared/types/actions";
+import { ActionIntegrations } from "shared/types/actions";
 import { msg } from "@lingui/macro";
 import { SchemaForm } from "@/components/app/form/schema";
 import { useDeactivateIntegrationMutation } from "../actions.store";
@@ -23,7 +24,7 @@ export function Deactivate({ integrationDetail, activationId }: IProps) {
 
   return (
     <>
-      <p className="text-sm italic mb-3">
+      <p className="mb-3 text-sm italic">
         Deactivating an integration will irrevocabily delete its configurations
         and remove all its form actions
       </p>

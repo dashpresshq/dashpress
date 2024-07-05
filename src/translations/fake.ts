@@ -1,4 +1,4 @@
-import { ILabelValue } from "shared/types/options";
+import type { ILabelValue } from "shared/types/options";
 
 export const fakeMessageDescriptor = (value: string) => {
   return {

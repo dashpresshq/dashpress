@@ -1,4 +1,4 @@
-import { IMenuActionItem } from "@/components/app/button/types";
+import type { IMenuActionItem } from "@/components/app/button/types";
 
 export const useMutateBaseSettingsMenu = (menu: IMenuActionItem[]) => {
   return menu;

@@ -1,22 +1,16 @@
-import {
-  credentialsApiService,
-  CredentialsApiService,
-} from "backend/integrations-configurations";
+import type { CredentialsApiService } from "backend/integrations-configurations";
+import { credentialsApiService } from "backend/integrations-configurations";
 import { validateSchemaRequestBody } from "backend/lib/errors/validate-schema-request-input";
-import {
+import type {
   IIntegrationsList,
   IIntegrationImplementationList,
-  ActionIntegrations,
 } from "shared/types/actions";
+import { ActionIntegrations } from "shared/types/actions";
 import { sluggify } from "shared/lib/strings";
-import {
-  createKeyValueDomainPersistenceService,
-  KeyValueStoreApiService,
-} from "backend/lib/key-value";
-import {
-  formActionsApiService,
-  FormActionsApiService,
-} from "backend/form-actions/form-actions.service";
+import type { KeyValueStoreApiService } from "backend/lib/key-value";
+import { createKeyValueDomainPersistenceService } from "backend/lib/key-value";
+import type { FormActionsApiService } from "backend/form-actions/form-actions.service";
+import { formActionsApiService } from "backend/form-actions/form-actions.service";
 import {
   typescriptSafeObjectDotEntries,
   typescriptSafeObjectDotKeys,

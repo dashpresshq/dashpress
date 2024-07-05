@@ -1,4 +1,4 @@
-import { ValidationImplType } from "./types";
+import type { ValidationImplType } from "./types";
 
 export const entityIdFilterValidationImpl: ValidationImplType<string> = async (
   req

@@ -1,21 +1,16 @@
-import {
-  entitiesApiService,
-  EntitiesApiService,
-} from "backend/entities/entities.service";
-import {
-  createConfigDomainPersistenceService,
-  AbstractConfigDataPersistenceService,
-} from "backend/lib/config-persistence";
+import type { EntitiesApiService } from "backend/entities/entities.service";
+import { entitiesApiService } from "backend/entities/entities.service";
+import type { AbstractConfigDataPersistenceService } from "backend/lib/config-persistence";
+import { createConfigDomainPersistenceService } from "backend/lib/config-persistence";
+import type { IWidgetConfig } from "shared/types/dashboard";
 import {
   HOME_DASHBOARD_KEY,
-  IWidgetConfig,
   WIDGET_SCRIPT_RELATIVE_TIME_MARKER,
 } from "shared/types/dashboard";
-import {
-  listOrderApiService,
-  ListOrderApiService,
-} from "backend/list-order/list-order.service";
-import { rolesApiService, RolesApiService } from "backend/roles/roles.service";
+import type { ListOrderApiService } from "backend/list-order/list-order.service";
+import { listOrderApiService } from "backend/list-order/list-order.service";
+import type { RolesApiService } from "backend/roles/roles.service";
+import { rolesApiService } from "backend/roles/roles.service";
 import { userFriendlyCase } from "shared/lib/strings/friendly-case";
 import { nanoid } from "nanoid";
 import { SystemIconsList } from "shared/constants/Icons";
@@ -24,21 +19,23 @@ import {
   rDBMSDataApiService,
   RDBMSDataApiService,
 } from "backend/data/data-access/RDBMS";
-import { GranularEntityPermissions, IAccountProfile } from "shared/types/user";
+import type { IAccountProfile } from "shared/types/user";
+import { GranularEntityPermissions } from "shared/types/user";
 import { relativeDateNotationToActualDate } from "backend/data/data-access/time.constants";
-import { ILabelValue } from "shared/types/options";
+import type { ILabelValue } from "shared/types/options";
 import { sortListByOrder } from "shared/lib/array/sort";
 import { DATA_SOURCES_CONFIG } from "shared/types/data-sources";
+import { SPECTRUM_COLORS } from "@/components/ui/spectrum";
 import {
   mutateGeneratedDashboardWidgets,
   PORTAL_DASHBOARD_PERMISSION,
 } from "./portal";
-import { SPECTRUM_COLORS } from "@/components/ui/spectrum";
 
 const runAsyncJavascriptString = async (
   javascriptString: string,
   context: Record<string, unknown>
 ) => {
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
   const AsyncFunction = async function X() {}.constructor;
   try {
     return await AsyncFunction("$", javascriptString)(context);

@@ -8,7 +8,7 @@ import { useUpsertConfigurationMutation } from "frontend/hooks/configuration/con
 import { useAppConfigurationDomainMessages } from "frontend/hooks/configuration/configuration.constant";
 import { DictionDocumentation } from "frontend/docs/diction";
 import { NAVIGATION_MENU_ENDPOINT } from "frontend/_layouts/app/NavigationSideBar/constants";
-import { AppConfigurationValueType } from "shared/configurations/constants";
+import type { AppConfigurationValueType } from "shared/configurations/constants";
 import { useDocumentationActionButton } from "frontend/docs/constants";
 import { msg } from "@lingui/macro";
 import { SchemaForm } from "@/components/app/form/schema";

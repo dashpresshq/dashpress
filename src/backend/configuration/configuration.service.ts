@@ -1,15 +1,15 @@
 import { progammingError } from "backend/lib/errors";
-import { AppConfigurationValueType } from "shared/configurations/constants";
+import type { AppConfigurationValueType } from "shared/configurations/constants";
 import { notAllowedOnDemoValidation } from "backend/lib/request/validations/implementations/not-allowed-on-demo";
-import {
-  createConfigDomainPersistenceService,
-  AbstractConfigDataPersistenceService,
-} from "../lib/config-persistence";
+import type { AbstractConfigDataPersistenceService } from "../lib/config-persistence";
+import { createConfigDomainPersistenceService } from "../lib/config-persistence";
+import type {
+  ISystemSettings,
+  AppConfigurationKeys,
+} from "../../shared/configurations";
 import {
   APP_CONFIGURATION_CONFIG,
   DEFAULT_SYSTEM_SETTINGS,
-  ISystemSettings,
-  AppConfigurationKeys,
 } from "../../shared/configurations";
 
 export class ConfigurationApiService {

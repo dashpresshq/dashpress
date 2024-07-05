@@ -1,5 +1,5 @@
 import { noop } from "shared/lib/noop";
-import {
+import type {
   IGroupActionButton,
   IMenuActionItem,
 } from "@/components/app/button/types";

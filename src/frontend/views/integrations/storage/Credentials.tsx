@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { ISchemaFormConfig } from "shared/form-schemas/types";
-import { IStorageIntegration } from "shared/types/actions";
+import type { ISchemaFormConfig } from "shared/form-schemas/types";
+import type { IStorageIntegration } from "shared/types/actions";
 import { msg } from "@lingui/macro";
 import { fakeMessageDescriptor } from "translations/fake";
 import { useDomainMessages } from "frontend/lib/crud-config";
@@ -11,6 +11,7 @@ import {
 } from "@/components/app/skeleton/form";
 import { ViewStateMachine } from "@/components/app/view-state-machine";
 import { SchemaForm } from "@/components/app/form/schema";
+import { useToastActionQueryError } from "@/components/app/toast/error";
 import {
   useActivateStorageMutation,
   useActiveStorageIntegration,
@@ -18,7 +19,6 @@ import {
   useStorageIntegrationsList,
 } from "./storage.store";
 import { PasswordToReveal } from "../Password";
-import { useToastActionQueryError } from "@/components/app/toast/error";
 
 export function StorageCredentialsSettings() {
   const storageList = useStorageIntegrationsList();

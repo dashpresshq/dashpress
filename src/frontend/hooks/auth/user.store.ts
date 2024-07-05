@@ -1,6 +1,6 @@
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
 import { useRouter } from "next/router";
-import { IAuthenticatedUserBag } from "shared/types/user";
+import type { IAuthenticatedUserBag } from "shared/types/user";
 import { canRoleDoThisSync } from "shared/logic/permissions";
 import { useCallback } from "react";
 import { useApi } from "frontend/lib/data/useApi";
@@ -8,9 +8,9 @@ import { DataStates } from "frontend/lib/data/types";
 import { useDomainMessages } from "frontend/lib/crud-config";
 import { LANG_DOMAINS } from "frontend/lib/crud-config/lang-domains";
 import { msg } from "@lingui/macro";
+import { useToast } from "@/components/app/toast/use-toast";
 import { useIsGranularCheck } from "./portal";
 import { useIsUserAutenticated } from "./auth.actions";
-import { useToast } from "@/components/app/toast/use-toast";
 
 export const AUTHENTICATED_ACCOUNT_URL = "/api/account/mine";
 
@@ -64,7 +64,7 @@ export function useUserHasPermission(): (permision: string) => boolean {
         ) === true
       );
     },
-    [userProfile]
+    [isGranularCheck, userProfile.data, userProfile.isLoading]
   );
 }
 
@@ -82,7 +82,7 @@ function useUserPermission(): (
         isGranularCheck
       );
     },
-    [userProfile.isLoading, userProfile.data]
+    [userProfile.isLoading, userProfile.data, isGranularCheck]
   );
 }
 

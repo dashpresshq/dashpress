@@ -1,4 +1,4 @@
-import { IAccountProfile } from "shared/types/user";
+import type { IAccountProfile } from "shared/types/user";
 import { requestHandler } from "backend/lib/request";
 import { navigationMenuApiService } from "backend/menu/menu.service";
 

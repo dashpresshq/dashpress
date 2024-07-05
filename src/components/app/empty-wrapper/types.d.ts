@@ -1,4 +1,4 @@
-import { MessageDescriptor } from "@lingui/core";
+import type { MessageDescriptor } from "@lingui/core";
 
 export interface IEmptyWrapperProps {
   text: MessageDescriptor;

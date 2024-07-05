@@ -10,12 +10,16 @@ import { AuthActions } from "frontend/hooks/auth/auth.actions";
 import { getTableRows } from "__tests__/_/utils/getTableRows";
 import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
 import { TestProviders } from "__tests__/_/Provider";
-import { closeAllToasts, expectToast } from "__tests__/_/utils/closeAllToasts";
+import {
+  closeAllToasts,
+  getToastMessage,
+} from "__tests__/_/utils/closeAllToasts";
 
 setupApiHandlers();
 
 describe("pages/integrations/variables => credentials", () => {
   const useRouter = jest.spyOn(require("next/router"), "useRouter");
+
   beforeAll(() => {
     localStorage.setItem(AuthActions.JWT_TOKEN_STORAGE_KEY, "foo");
     useRouter.mockImplementation(
@@ -174,7 +178,7 @@ describe("pages/integrations/variables => credentials", () => {
         })
       );
 
-      await expectToast("Invalid Password");
+      expect(await getToastMessage()).toBe("Invalid Password");
 
       await closeAllToasts();
 
@@ -334,7 +338,7 @@ describe("pages/integrations/variables => credentials", () => {
         within(dialog).getByRole("button", { name: "Update Secret" })
       );
 
-      await expectToast("Secret Saved Successfully");
+      expect(await getToastMessage()).toBe("Secret Saved Successfully");
 
       await closeAllToasts();
 
@@ -383,7 +387,7 @@ describe("pages/integrations/variables => credentials", () => {
         within(dialog).getByRole("button", { name: "Create Secret" })
       );
 
-      await expectToast("Secret Saved Successfully");
+      expect(await getToastMessage()).toBe("Secret Saved Successfully");
 
       await closeAllToasts();
 
@@ -436,7 +440,7 @@ describe("pages/integrations/variables => credentials", () => {
 
       expect(await within(table).findAllByRole("row")).toHaveLength(4);
 
-      await expectToast("Secret Deleted Successfully");
+      expect(await getToastMessage()).toBe("Secret Deleted Successfully");
     });
   });
 });

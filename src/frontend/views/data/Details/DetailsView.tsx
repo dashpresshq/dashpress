@@ -14,12 +14,12 @@ import { useEntityToOneReferenceFields } from "frontend/hooks/entity/entity.stor
 import { DataStates } from "frontend/lib/data/types";
 import { useEvaluateScriptContext } from "frontend/hooks/scripts";
 import { ViewStateMachine } from "@/components/app/view-state-machine";
+import { Skeleton } from "@/components/ui/skeleton";
 import { useEntityViewStateMachine } from "../hooks/useEntityViewStateMachine";
 import { viewSpecialDataTypes } from "../viewSpecialDataTypes";
 import { evalutePresentationScript } from "../evaluatePresentationScript";
 import { PreDataDetails } from "./portal";
 import { PortalColumnRender } from "../Table/portal";
-import { Skeleton } from "@/components/ui/skeleton";
 
 export function EntityDetailsView({
   entityId,
@@ -75,8 +75,8 @@ export function EntityDetailsView({
         <>
           {Array.from({ length: 7 }, (_, k) => k).map((key) => (
             <Fragment key={key}>
-              <Skeleton className="h-4 w-24 mb-2" />
-              <Skeleton className="h-5 max-w-xs mb-4" />
+              <Skeleton className="mb-2 h-4 w-24" />
+              <Skeleton className="mb-4 h-5 max-w-xs" />
             </Fragment>
           ))}
         </>
@@ -124,7 +124,7 @@ export function EntityDetailsView({
               <p className="text-xs font-semibold">
                 {getEntityFieldLabels(name)}
               </p>
-              <p className="text-sm mb-2">
+              <p className="mb-2 text-sm">
                 <PortalColumnRender
                   {...{
                     column: name,

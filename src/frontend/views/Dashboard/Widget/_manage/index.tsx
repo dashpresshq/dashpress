@@ -1,4 +1,4 @@
-import { IWidgetConfig } from "shared/types/dashboard";
+import type { IWidgetConfig } from "shared/types/dashboard";
 import { useActiveEntities } from "frontend/hooks/entity/entity.store";
 import { useRouteParam } from "frontend/lib/routing/useRouteParam";
 import { SystemIconsList } from "shared/constants/Icons";

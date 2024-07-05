@@ -1,4 +1,4 @@
-import { ISummaryWidgetConfig } from "shared/types/dashboard";
+import type { ISummaryWidgetConfig } from "shared/types/dashboard";
 import { systemIconToSVG } from "shared/constants/Icons";
 import { SummaryCardWidgetSchema } from "./types";
 import {

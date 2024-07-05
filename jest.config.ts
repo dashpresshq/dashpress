@@ -12,7 +12,7 @@ const customJestConfig = {
 
   collectCoverageFrom: ["src/**/*.{ts,tsx}", "!**/Stories.tsx", "!**/*.d.ts"],
 
-  collectCoverage: true,
+  collectCoverage: false,
 
   coverageThreshold: {
     global: {

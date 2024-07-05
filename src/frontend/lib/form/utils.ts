@@ -1,4 +1,4 @@
-import { FormApi } from "final-form";
+import type { FormApi } from "final-form";
 import { typescriptSafeObjectDotKeys } from "shared/lib/objects";
 
 export function resetFormValues<T extends Record<string, unknown>>(

@@ -1,5 +1,5 @@
 /* eslint max-classes-per-file: ["error", 5] */
-import { NextApiRequest } from "next";
+import type { NextApiRequest } from "next";
 
 export class CustomError extends Error {
   code: number;

@@ -1,5 +1,6 @@
 import { useToggle } from "frontend/hooks/state/useToggleState";
-import { useRef, useEffect, ReactNode } from "react";
+import type { ReactNode } from "react";
+import { useRef, useEffect } from "react";
 import { createPortal } from "react-dom";
 
 interface IProps {

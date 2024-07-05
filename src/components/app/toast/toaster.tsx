@@ -1,11 +1,7 @@
 import { useLingui } from "@lingui/react";
 import React from "react";
-import {
-  AlertCircle,
-  CheckCircle,
-  Icon as IconType,
-  XCircle,
-} from "react-feather";
+import type { Icon as IconType } from "react-feather";
+import { AlertCircle, CheckCircle, XCircle } from "react-feather";
 import {
   Toast,
   ToastAction,
@@ -15,9 +11,9 @@ import {
   ToastTitle,
   ToastViewport,
 } from "@/components/ui/toast";
-import { useToast } from "./use-toast";
 import { spectrumVariants } from "@/components/ui/spectrum";
 import { cn } from "@/lib/utils";
+import { useToast } from "./use-toast";
 
 const ToastConfigMap: Record<
   "green" | "red" | "yellow",
@@ -46,7 +42,7 @@ export function Toaster() {
             duration={variant === "red" || action ? 10000 : 5000}
           >
             <div className="flex items-center">
-              <Icon className="mr-3 w-5 h-5 shrink-0" />
+              <Icon className="mr-3 size-5 shrink-0" />
               <div className="flex flex-col gap-2">
                 {title && <ToastTitle>{_(title)}</ToastTitle>}
                 {description && (

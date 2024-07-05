@@ -16,6 +16,7 @@ describe("Request Validations => authenticatedUserValidationImpl", () => {
   beforeAll(() => {
     setupAllTestData(["users"]);
   });
+
   it("should return authenticated user", async () => {
     const { req, res } = createAuthenticatedMocks({
       method: "GET",

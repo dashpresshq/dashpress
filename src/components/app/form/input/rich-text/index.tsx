@@ -7,8 +7,8 @@ import {
   LabelAndError,
   generateClassNames,
 } from "@/components/app/form/input/label-and-error";
+import type { ISharedFormInput } from "@/components/app/form/input/types";
 import styles from "./styles.module.css";
-import { ISharedFormInput } from "@/components/app/form/input/types";
 
 const ReactQuill = dynamic<any>(
   () => {

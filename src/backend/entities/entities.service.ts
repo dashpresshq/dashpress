@@ -1,15 +1,15 @@
-import { ILabelValue } from "shared/types/options";
-import {
-  configurationApiService,
-  ConfigurationApiService,
-} from "backend/configuration/configuration.service";
-import { rolesApiService, RolesApiService } from "backend/roles/roles.service";
-import { IDBSchema, IEntityField, IEntityRelation } from "shared/types/db";
-import { DataCrudKeys } from "shared/types/data";
+import type { ILabelValue } from "shared/types/options";
+import type { ConfigurationApiService } from "backend/configuration/configuration.service";
+import { configurationApiService } from "backend/configuration/configuration.service";
+import type { RolesApiService } from "backend/roles/roles.service";
+import { rolesApiService } from "backend/roles/roles.service";
+import type { IDBSchema, IEntityField, IEntityRelation } from "shared/types/db";
+import type { DataCrudKeys } from "shared/types/data";
 import { CRUD_HIDDEN_KEY_CONFIG } from "shared/configurations/permissions";
 import { sortListByOrder } from "shared/lib/array/sort";
 import { BadRequestError } from "backend/lib/errors";
-import { SchemasApiService, schemasApiService } from "../schema/schema.service";
+import type { SchemasApiService } from "../schema/schema.service";
+import { schemasApiService } from "../schema/schema.service";
 import { PortalFieldsFilterService } from "./portal";
 
 export class EntitiesApiService {

@@ -1,16 +1,13 @@
-import { introspect, Entity } from "@dashpress/bacteria";
-import {
-  CredentialsApiService,
-  credentialsApiService,
-} from "backend/integrations-configurations";
-import { IDBSchema, IEntityField } from "shared/types/db";
-import { IDataSourceCredentials } from "shared/types/data-sources";
+import type { Entity } from "@dashpress/bacteria";
+import { introspect } from "@dashpress/bacteria";
+import type { CredentialsApiService } from "backend/integrations-configurations";
+import { credentialsApiService } from "backend/integrations-configurations";
+import type { IDBSchema, IEntityField } from "shared/types/db";
+import type { IDataSourceCredentials } from "shared/types/data-sources";
 import { DATABASE_CREDENTIAL_GROUP } from "backend/data/fields";
-import { Column } from "@dashpress/bacteria/dist/models/Column";
-import {
-  createConfigDomainPersistenceService,
-  AbstractConfigDataPersistenceService,
-} from "../lib/config-persistence";
+import type { Column } from "@dashpress/bacteria/dist/models/Column";
+import type { AbstractConfigDataPersistenceService } from "../lib/config-persistence";
+import { createConfigDomainPersistenceService } from "../lib/config-persistence";
 
 export class SchemasApiService {
   private dbSchema: IDBSchema[];

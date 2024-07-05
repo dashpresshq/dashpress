@@ -4,7 +4,10 @@ import userEvent from "@testing-library/user-event";
 import RolePermissions from "pages/roles/[roleId]/index";
 
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
-import { closeAllToasts, expectToast } from "__tests__/_/utils/closeAllToasts";
+import {
+  closeAllToasts,
+  getToastMessage,
+} from "__tests__/_/utils/closeAllToasts";
 import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
 import { TestProviders } from "__tests__/_/Provider";
 
@@ -141,7 +144,9 @@ describe("pages/roles/[roleId]/index", () => {
         name: "Plural entity-2",
       })
     );
-    await expectToast("Role Permission Deleted Successfully");
+    expect(await getToastMessage()).toBe(
+      "Role Permission Deleted Successfully"
+    );
 
     await closeAllToasts();
 
@@ -149,7 +154,9 @@ describe("pages/roles/[roleId]/index", () => {
       within(currentTab).getByRole("switch", { name: "Plural entity-1" })
     );
 
-    await expectToast("Role Permission Created Successfully");
+    expect(await getToastMessage()).toBe(
+      "Role Permission Created Successfully"
+    );
 
     await closeAllToasts();
 
@@ -159,7 +166,9 @@ describe("pages/roles/[roleId]/index", () => {
       })
     );
 
-    await expectToast("Role Permission Deleted Successfully");
+    expect(await getToastMessage()).toBe(
+      "Role Permission Deleted Successfully"
+    );
 
     await closeAllToasts();
 
@@ -168,7 +177,9 @@ describe("pages/roles/[roleId]/index", () => {
         name: "Plural disabled-entity-2",
       })
     );
-    await expectToast("Role Permission Created Successfully");
+    expect(await getToastMessage()).toBe(
+      "Role Permission Created Successfully"
+    );
   });
 
   it("should show updated entity permissions", async () => {
@@ -250,7 +261,9 @@ describe("pages/roles/[roleId]/index", () => {
       })
     );
 
-    await expectToast("Role Permission Deleted Successfully");
+    expect(await getToastMessage()).toBe(
+      "Role Permission Deleted Successfully"
+    );
 
     await closeAllToasts();
 
@@ -258,7 +271,9 @@ describe("pages/roles/[roleId]/index", () => {
       within(currentTab).getByRole("switch", { name: "Can Configure App" })
     );
 
-    await expectToast("Role Permission Created Successfully");
+    expect(await getToastMessage()).toBe(
+      "Role Permission Created Successfully"
+    );
 
     await closeAllToasts();
 
@@ -266,7 +281,9 @@ describe("pages/roles/[roleId]/index", () => {
       within(currentTab).getByRole("switch", { name: "Can Manage Users" })
     );
 
-    await expectToast("Role Permission Deleted Successfully");
+    expect(await getToastMessage()).toBe(
+      "Role Permission Deleted Successfully"
+    );
 
     await closeAllToasts();
 
@@ -274,7 +291,9 @@ describe("pages/roles/[roleId]/index", () => {
       within(currentTab).getByRole("switch", { name: "Can Manage Users" })
     );
 
-    await expectToast("Role Permission Created Successfully");
+    expect(await getToastMessage()).toBe(
+      "Role Permission Created Successfully"
+    );
   });
 
   it("should show updated admin permissions", async () => {
@@ -330,7 +349,9 @@ describe("pages/roles/[roleId]/index", () => {
         })
       );
 
-      await expectToast("Role Permission Deleted Successfully");
+      expect(await getToastMessage()).toBe(
+        "Role Permission Deleted Successfully"
+      );
 
       await closeAllToasts();
 
@@ -347,7 +368,9 @@ describe("pages/roles/[roleId]/index", () => {
         })
       );
 
-      await expectToast("Role Permission Created Successfully");
+      expect(await getToastMessage()).toBe(
+        "Role Permission Created Successfully"
+      );
     });
 
     it("should toggle heirachy permissions off correctly", async () => {
@@ -387,7 +410,9 @@ describe("pages/roles/[roleId]/index", () => {
         })
       );
 
-      await expectToast("Role Permission Deleted Successfully");
+      expect(await getToastMessage()).toBe(
+        "Role Permission Deleted Successfully"
+      );
     });
 
     it("should show turned off children permissions correctly", async () => {

@@ -1,5 +1,6 @@
-import { CSSProperties, ReactNode, forwardRef } from "react";
-import { GridSpanSizes } from "shared/types/ui";
+import type { CSSProperties, ReactNode } from "react";
+import { forwardRef } from "react";
+import type { GridSpanSizes } from "shared/types/ui";
 
 export const WidgetRoot = forwardRef<
   HTMLDivElement,
@@ -8,7 +9,7 @@ export const WidgetRoot = forwardRef<
     span: GridSpanSizes;
     height: string;
   }
->(({ children, span, height }, ref) => {
+>(function WidgetRootCmp({ children, span, height }, ref) {
   return (
     <div
       ref={ref}

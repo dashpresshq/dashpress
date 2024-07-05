@@ -5,19 +5,23 @@ describe("reduceStringToNumber", () => {
     expect(reduceStringToNumber("foo")).toBe(reduceStringToNumber("foo"));
     expect(reduceStringToNumber("foo")).not.toBe(reduceStringToNumber("bar"));
   });
+
   it("should return determinitic values regardless of case", () => {
     expect(reduceStringToNumber("foo")).toBe(reduceStringToNumber("FOO"));
     expect(reduceStringToNumber("foo")).toBe(reduceStringToNumber("fOO"));
   });
+
   it("should return determinitic values regardless of order", () => {
     expect(reduceStringToNumber("ofo")).toBe(reduceStringToNumber("foo"));
     expect(reduceStringToNumber("oof")).toBe(reduceStringToNumber("foo"));
   });
+
   it("should return determinitic regardless of special characters", () => {
     expect(reduceStringToNumber("foo**")).toBe(reduceStringToNumber("foo"));
     expect(reduceStringToNumber("*fo*o")).toBe(reduceStringToNumber("foo"));
     expect(reduceStringToNumber(" fo o")).toBe(reduceStringToNumber("foo"));
   });
+
   it("should return value", () => {
     expect(reduceStringToNumber("foo")).toBe(33);
     expect(reduceStringToNumber("foo**")).toBe(33);

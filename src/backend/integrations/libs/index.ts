@@ -1,7 +1,5 @@
-import {
-  ActionIntegrations,
-  IActionIntegrationsImplemention,
-} from "shared/types/actions";
+import type { IActionIntegrationsImplemention } from "shared/types/actions";
+import { ActionIntegrations } from "shared/types/actions";
 import { HTTP_ACTION_INTEGRATION } from "./http";
 import { MAIL_GUN_ACTION_INTEGRATION } from "./mailgun";
 import { POST_MARK_ACTION_INTEGRATION } from "./postmark";

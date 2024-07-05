@@ -1,21 +1,21 @@
-import { QueryFilterSchema } from "shared/types/data";
+import type { QueryFilterSchema } from "shared/types/data";
 import { Form, Field, useField } from "react-final-form";
 import arrayMutators from "final-form-arrays";
 import { FieldArray } from "react-final-form-arrays";
 import { ACTIONS_ACCESSOR } from "frontend/views/data/Table/useTableColumns";
 import { useAppConfigurationDomainMessages } from "frontend/hooks/configuration/configuration.constant";
 import { composeValidators, required } from "frontend/lib/validations";
-import { IFormProps } from "frontend/lib/form/types";
+import type { IFormProps } from "frontend/lib/form/types";
 import { Fragment } from "react";
 import { msg } from "@lingui/macro";
 import { typescriptSafeObjectDotEntries } from "shared/lib/objects";
-import { MessageDescriptor } from "@lingui/core";
+import type { MessageDescriptor } from "@lingui/core";
 import { DELETE_BUTTON_PROPS } from "@/components/app/button/constants";
 import { FormButton } from "@/components/app/button/form";
 import { FormInput } from "@/components/app/form/input/text";
 import { SoftButton } from "@/components/app/button/soft";
 import { Card, CardContent } from "@/components/ui/card";
-import { ITableColumn } from "@/components/app/table/types";
+import type { ITableColumn } from "@/components/app/table/types";
 import { FILTER_OPERATOR_CONFIG } from "@/components/app/table/filters/constants";
 import { FormGrid } from "@/components/app/form/schema/form-grid";
 import { FormSelectButton } from "@/components/app/form/input/select-button";
@@ -224,7 +224,7 @@ export function EntityPersistentQueryForm({
                       </Card>
                     </Fragment>
                   ))}
-                  <div className="flex justify-end mt-2">
+                  <div className="mt-2 flex justify-end">
                     <SoftButton
                       systemIcon="Plus"
                       label={msg`Add Filter`}

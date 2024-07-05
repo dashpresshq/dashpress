@@ -7,11 +7,11 @@ import { useNavigationStack } from "frontend/lib/routing/useNavigationStack";
 import { useSetPageDetails } from "frontend/lib/routing/usePageDetails";
 import { AppLayout } from "frontend/_layouts/app";
 import {
-  IResetPasswordForm,
   RESET_PASSWORD_FORM_SCHEMA,
+  type IResetPasswordForm,
 } from "shared/form-schemas/users/reset-password";
-import { IAppliedSchemaFormConfig } from "shared/form-schemas/types";
-import { IUpdateUserForm } from "shared/form-schemas/users";
+import type { IAppliedSchemaFormConfig } from "shared/form-schemas/types";
+import type { IUpdateUserForm } from "shared/form-schemas/users";
 import { msg } from "@lingui/macro";
 import { useDomainMessages } from "frontend/lib/crud-config";
 import { LANG_DOMAINS } from "frontend/lib/crud-config/lang-domains";

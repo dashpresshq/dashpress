@@ -1,4 +1,4 @@
-import { ValidationKeys } from "../types";
+import type { ValidationKeys } from "../types";
 import { crudEnabledValidationImpl as crudEnabled } from "./crud-enabled";
 import { entityValidationImpl as entity } from "./entity";
 import { entityIdFilterValidationImpl as entityId } from "./entity-id";
@@ -16,7 +16,7 @@ import { requestQueriesValidationImpl as requestQueries } from "./request-querie
 import { rawRequestValidationImpl as rawRequest } from "./raw-request";
 import { notAllowedOnDemoValidationImpl as notAllowedOnDemo } from "./not-allowed-on-demo";
 
-import { ValidationImplType } from "./types";
+import type { ValidationImplType } from "./types";
 import { PortalValidationImpl } from "./portal";
 
 export const ValidationImpl: Record<

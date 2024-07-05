@@ -159,6 +159,7 @@ describe("/api/data/[entity]/[id]/index", () => {
         hidden_entity_details_columns__tests: [],
       });
     });
+
     it("should update data", async () => {
       const { req, res } = createAuthenticatedMocks({
         method: "PATCH",

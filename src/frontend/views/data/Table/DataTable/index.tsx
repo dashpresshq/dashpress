@@ -3,11 +3,11 @@ import { DEFAULT_PAGINATED_DATA } from "frontend/lib/data/constants/defaults";
 import { pluralize } from "shared/lib/strings";
 import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
-import { useTableState } from "../hooks";
-import { IDataTableProps } from "../types";
-import { IEmptyWrapperProps } from "@/components/app/empty-wrapper/types";
+import type { IEmptyWrapperProps } from "@/components/app/empty-wrapper/types";
 import { Table } from "@/components/app/table";
-import { ITableColumn } from "@/components/app/table/types";
+import type { ITableColumn } from "@/components/app/table/types";
+import type { IDataTableProps } from "../types";
+import { useTableState } from "../hooks";
 
 interface IProps extends IDataTableProps {
   columns: ITableColumn[];

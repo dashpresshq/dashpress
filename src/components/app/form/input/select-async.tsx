@@ -1,12 +1,12 @@
 import { useMemo, useState } from "react";
 import { useDebounce } from "react-use";
-import { ILabelValue } from "shared/types/options";
+import type { ILabelValue } from "shared/types/options";
 import { useApi } from "frontend/lib/data/useApi";
 import { useLingui } from "@lingui/react";
 import { ErrorAlert } from "@/components/app/alert";
-import { FormSelect } from "./select";
-import { IBaseFormSelect } from "./types";
 import { transformLabelValueToSelectData } from "@/translations/fake";
+import { FormSelect } from "./select";
+import type { IBaseFormSelect } from "./types";
 
 const limit = 50;
 
@@ -52,7 +52,7 @@ export function AsyncFormSelect(props: IProps) {
     }
 
     return undefined;
-  }, [url, fullData, selectOptions, input.value]);
+  }, [fullData, selectOptions, input.value, _]);
 
   const referenceLabel = useApi(referenceUrl?.(input.value), {
     defaultData: "",

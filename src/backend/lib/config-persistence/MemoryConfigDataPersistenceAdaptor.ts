@@ -1,6 +1,6 @@
-import { ConfigApiService } from "../config/config.service";
+import type { ConfigApiService } from "../config/config.service";
 import { AbstractConfigDataPersistenceService } from "./AbstractConfigDataPersistenceService";
-import { ConfigDomain } from "./types";
+import type { ConfigDomain } from "./types";
 
 export class MemoryConfigDataPersistenceAdaptor<
   T

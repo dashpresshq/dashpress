@@ -1,18 +1,18 @@
 import { Field, Form } from "react-final-form";
-import {
+import type {
   IAppliedSchemaFormConfig,
   ISchemaFormConfig,
 } from "shared/form-schemas/types";
 import { runValidationError } from "shared/validations/run";
 import { resetFormValues } from "frontend/lib/form/utils";
-import { SystemIconsKeys } from "shared/constants/Icons";
+import type { SystemIconsKeys } from "shared/constants/Icons";
 import { useEvaluateScriptContext } from "frontend/hooks/scripts";
-import { MessageDescriptor } from "@lingui/core";
+import type { MessageDescriptor } from "@lingui/core";
 import { typescriptSafeObjectDotEntries } from "shared/lib/objects";
 import { msg } from "@lingui/macro";
 import { FormButton } from "@/components/app/button/form";
 import { RenderFormInput } from "./_RenderFormInput";
-import { IFormExtension } from "./types";
+import type { IFormExtension } from "./types";
 import { runFormBeforeSubmit, runFormFieldState } from "./form-run";
 import { FormGrid } from "./form-grid";
 import { useToast } from "../../toast/use-toast";

@@ -1,5 +1,5 @@
 import { noop } from "shared/lib/noop";
-import { WidgetFormField } from "../../types";
+import type { WidgetFormField } from "../../types";
 
 interface IProps {
   formFields: WidgetFormField[];

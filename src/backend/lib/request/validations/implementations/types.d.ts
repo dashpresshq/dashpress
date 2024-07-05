@@ -1,5 +1,5 @@
-import { NextApiRequest } from "next";
-import { IAccountProfile } from "shared/types/user";
+import type { NextApiRequest } from "next";
+import type { IAccountProfile } from "shared/types/user";
 
 export type ValidationImplType<T extends unknown> = (
   req: NextApiRequest & { user?: IAccountProfile },

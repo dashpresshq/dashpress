@@ -1,21 +1,17 @@
-import { AbstractConfigDataPersistenceService } from "backend/lib/config-persistence";
+import type { AbstractConfigDataPersistenceService } from "backend/lib/config-persistence";
 import { BadRequestError, UnauthorizedError } from "backend/lib/errors";
 import { HashService } from "backend/lib/hash/hash.service";
-import { IAccountUser, IAccountProfile } from "shared/types/user";
-import { ISuccessfullAuthenticationResponse } from "shared/types/auth/portal";
+import type { IAccountUser, IAccountProfile } from "shared/types/user";
+import type { ISuccessfullAuthenticationResponse } from "shared/types/auth/portal";
 import { noop } from "shared/lib/noop";
-import { IResetPasswordForm } from "shared/form-schemas/users/reset-password";
-import {
-  ConfigurationApiService,
-  configurationApiService,
-} from "backend/configuration/configuration.service";
-import {
-  RDBMSDataApiService,
-  rDBMSDataApiService,
-} from "backend/data/data-access/RDBMS";
+import type { IResetPasswordForm } from "shared/form-schemas/users/reset-password";
+import type { ConfigurationApiService } from "backend/configuration/configuration.service";
+import { configurationApiService } from "backend/configuration/configuration.service";
+import type { RDBMSDataApiService } from "backend/data/data-access/RDBMS";
+import { rDBMSDataApiService } from "backend/data/data-access/RDBMS";
 import { getPortalAuthenticationResponse } from "./portal";
-import { generateAuthTokenForUsername } from "./utils";
 import { usersPersistenceService } from "./shared";
+import { authTokenApiService } from "../lib/auth-token/auth-token.service";
 
 const INVALID_LOGIN_MESSAGE = "Invalid Login";
 
@@ -34,11 +30,21 @@ export class UsersApiService {
       await this.checkUserPassword(authCredentials);
       return await getPortalAuthenticationResponse(
         authCredentials.username,
-        () => generateAuthTokenForUsername(authCredentials.username)
+        () => this.generateAuthTokenForUsername(authCredentials.username)
       );
     } catch (error) {
       throw new UnauthorizedError(INVALID_LOGIN_MESSAGE);
     }
+  }
+
+  async generateAuthTokenForUsername(
+    username: string
+  ): Promise<ISuccessfullAuthenticationResponse> {
+    return {
+      token: await authTokenApiService.sign(
+        await this.getAccountProfile(username)
+      ),
+    };
   }
 
   async registerUser(user: IAccountUser) {

@@ -1,24 +1,17 @@
 import { NotFoundError, progammingError } from "backend/lib/errors";
-import {
-  DataEventActions,
-  FilterOperators,
-  PaginatedData,
-  QueryFilterSchema,
-} from "shared/types/data";
-import { IEntityField } from "shared/types/db";
-import { IAccountProfile } from "shared/types/user";
+import type { PaginatedData, QueryFilterSchema } from "shared/types/data";
+import { DataEventActions, FilterOperators } from "shared/types/data";
+import type { IEntityField } from "shared/types/db";
+import type { IAccountProfile } from "shared/types/user";
 import { compileTemplateString } from "shared/lib/strings/templates";
 import { runFormAction } from "backend/form-actions/run-form-action";
-import { rDBMSDataApiService, RDBMSDataApiService } from "./data-access/RDBMS";
-import { IDataApiService, IPaginationFilters } from "./types";
-import {
-  ConfigurationApiService,
-  configurationApiService,
-} from "../configuration/configuration.service";
-import {
-  EntitiesApiService,
-  entitiesApiService,
-} from "../entities/entities.service";
+import type { RDBMSDataApiService } from "./data-access/RDBMS";
+import { rDBMSDataApiService } from "./data-access/RDBMS";
+import type { IDataApiService, IPaginationFilters } from "./types";
+import type { ConfigurationApiService } from "../configuration/configuration.service";
+import { configurationApiService } from "../configuration/configuration.service";
+import type { EntitiesApiService } from "../entities/entities.service";
+import { entitiesApiService } from "../entities/entities.service";
 import { PortalDataHooksService, PortalQueryImplementation } from "./portal";
 import { makeTableData } from "./utils";
 

@@ -1,6 +1,6 @@
 import { noop } from "shared/lib/noop";
-import { INavigationMenuItem } from "shared/types/menu";
-import { IBaseNavigationMenuApiService } from "../types";
+import type { INavigationMenuItem } from "shared/types/menu";
+import type { IBaseNavigationMenuApiService } from "../types";
 
 export const portalCheckIfIsMenuAllowed = async (
   menuItem: INavigationMenuItem,

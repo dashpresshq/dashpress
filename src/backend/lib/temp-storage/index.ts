@@ -1,8 +1,6 @@
 import { addSeconds, isBefore } from "date-fns";
-import {
-  AbstractConfigDataPersistenceService,
-  createConfigDomainPersistenceService,
-} from "../config-persistence";
+import type { AbstractConfigDataPersistenceService } from "../config-persistence";
+import { createConfigDomainPersistenceService } from "../config-persistence";
 
 interface ITempStorage {
   data: string;

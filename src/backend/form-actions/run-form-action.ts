@@ -1,5 +1,5 @@
-import { DataEventActions } from "shared/types/data";
-import { IAccountProfile } from "shared/types/user";
+import type { DataEventActions } from "shared/types/data";
+import type { IAccountProfile } from "shared/types/user";
 import { compileTemplateString } from "shared/lib/strings/templates";
 import { getAppCredentialsAndConstants } from "backend/integrations-configurations/utils";
 import { INTEGRATIONS_GROUP_CONFIG } from "shared/config-bag/integrations";

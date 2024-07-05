@@ -5,7 +5,7 @@ import { usePasswordStore } from "./password.store";
 
 export function PasswordMessage() {
   return (
-    <p className="italic text-sm">
+    <p className="text-sm italic">
       All the values provided from this form will encrypted using `aes-256-gcm`
       before been saved.
     </p>
@@ -18,7 +18,7 @@ export function PasswordToReveal({ isLoading }: { isLoading: boolean }) {
 
   return (
     <div>
-      <p className="italic text-sm mb-3">
+      <p className="mb-3 text-sm italic">
         {_(
           msg`For security reasons, Please input your account password to reveal credentials`
         )}

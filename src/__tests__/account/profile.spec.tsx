@@ -5,7 +5,7 @@ import AccountProfile from "pages/account/profile";
 import { setupApiHandlers } from "__tests__/_/setupApihandlers";
 import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
 import { TestProviders } from "__tests__/_/Provider";
-import { expectToast } from "../_/utils/closeAllToasts";
+import { getToastMessage } from "../_/utils/closeAllToasts";
 
 setupApiHandlers();
 
@@ -40,7 +40,7 @@ describe("pages/account/profile", () => {
       screen.getByRole("button", { name: "Save Account Profile" })
     );
 
-    await expectToast("Account Profile Saved Successfully");
+    expect(await getToastMessage()).toBe("Account Profile Saved Successfully");
   });
 
   it("should display updated profile details", async () => {

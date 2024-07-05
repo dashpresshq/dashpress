@@ -1,6 +1,7 @@
 import qs from "qs";
 import { useRouter } from "next/router";
-import { FieldQueryFilter, FilterOperators } from "shared/types/data";
+import type { FieldQueryFilter } from "shared/types/data";
+import { FilterOperators } from "shared/types/data";
 import { CRUD_CONFIG_NOT_FOUND } from "frontend/lib/crud-config";
 import { ApiRequest } from "frontend/lib/data/makeRequest";
 import { useApi } from "frontend/lib/data/useApi";

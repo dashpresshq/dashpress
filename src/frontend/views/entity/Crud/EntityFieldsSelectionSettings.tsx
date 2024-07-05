@@ -5,7 +5,7 @@ import {
   useEntityFieldLabels,
   useEntitySlug,
 } from "frontend/hooks/entity/entity.config";
-import { CrudViewsKeys } from "shared/configurations";
+import type { CrudViewsKeys } from "shared/configurations";
 import { useIsEntityFieldMutatable } from "frontend/views/data/hooks/useIsEntityFieldMutatable";
 
 import {
@@ -20,10 +20,10 @@ import {
   ENTITY_LIST_PATH,
   ENTITY_TABLE_PATH,
 } from "frontend/hooks/data/constants";
-import { DataCrudKeys } from "shared/types/data";
+import type { DataCrudKeys } from "shared/types/data";
 import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
-import { IListMangerItemProps } from "@/components/app/list-manager/list-manager-item";
+import type { IListMangerItemProps } from "@/components/app/list-manager/list-manager-item";
 import { ListManager } from "@/components/app/list-manager";
 import { ListSkeleton } from "@/components/app/skeleton/list";
 import { FormButton } from "@/components/app/button/form";
@@ -54,7 +54,7 @@ export function ToggleCrudState({
   const { _ } = useLingui();
 
   return (
-    <div className="flex justify-end mb-4">
+    <div className="mb-4 flex justify-end">
       {toggling && toggling.onToggle && (
         <FormButton
           isMakingRequest={false}

@@ -1,8 +1,8 @@
 import { msg } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
 import { fakeMessageDescriptor } from "translations/fake";
-import { MessageDescriptor } from "@lingui/core";
-import { IDomainDiction } from "./types";
+import type { MessageDescriptor } from "@lingui/core";
+import type { IDomainDiction } from "./types";
 
 export const CRUD_CONFIG_NOT_FOUND = (singular: string) =>
   msg`${singular} could not be retrieved`;

@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import { useAuthenticatedUserBag } from "frontend/hooks/auth/user.store";
-import { IEvaluateScriptContext } from "shared/types/forms";
+import type { IEvaluateScriptContext } from "shared/types/forms";
 
 export const useEvaluateScriptContext = (): IEvaluateScriptContext => {
   const router = useRouter();

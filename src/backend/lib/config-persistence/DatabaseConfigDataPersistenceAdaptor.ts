@@ -1,8 +1,9 @@
-import { Knex } from "knex";
-import { ConfigKeys, ConfigApiService } from "../config/config.service";
+import type { Knex } from "knex";
+import type { ConfigApiService } from "../config/config.service";
+import { ConfigKeys } from "../config/config.service";
 import { getDbConnection } from "../connection/db";
 import { AbstractConfigDataPersistenceService } from "./AbstractConfigDataPersistenceService";
-import { ConfigDomain } from "./types";
+import type { ConfigDomain } from "./types";
 import { CONFIG_TABLE_PREFIX } from "./constants";
 import { createMetaData, updateMetaData } from "./portal";
 

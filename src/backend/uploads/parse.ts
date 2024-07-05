@@ -3,7 +3,7 @@ import { mkdir, stat } from "fs/promises";
 import { join } from "path";
 import { sluggify } from "shared/lib/strings";
 import { format } from "date-fns";
-import { NextApiRequest } from "next";
+import type { NextApiRequest } from "next";
 import { nanoid } from "nanoid";
 import { compileTemplateString } from "shared/lib/strings/templates";
 import { configurationApiService } from "backend/configuration/configuration.service";

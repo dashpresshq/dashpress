@@ -1,5 +1,4 @@
-/* eslint-disable no-param-reassign */
-/* eslint-disable default-param-last */
+/* eslint-disable @typescript-eslint/default-param-last */
 export const MutationHelpers = {
   append: <T, K>(old: T[] | undefined = [], formData: K) => [...old, formData],
   remove: <T>(old: T[] | undefined = [], formData: T) => [
@@ -23,11 +22,12 @@ export const MutationHelpers = {
     old: T[] | undefined = [],
     formData: K
   ) => {
-    const index = old.findIndex(({ id }) => id === formData.id);
+    const clone = [...old];
+    const index = clone.findIndex(({ id }) => id === formData.id);
     if (index > -1) {
-      old[index] = { ...old[index], ...formData };
+      clone[index] = { ...clone[index], ...formData };
     }
-    return [...old];
+    return clone;
   },
   delete: <T extends { id: string }>(
     old: T[] | undefined = [],

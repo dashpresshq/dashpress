@@ -1,5 +1,6 @@
-import { ChangeEvent, useEffect } from "react";
-import { ISharedFormInput } from "./types";
+import type { ChangeEvent } from "react";
+import { useEffect } from "react";
+import type { ISharedFormInput } from "./types";
 import { FormInput } from "./text";
 
 interface IFormNumberInput extends ISharedFormInput {

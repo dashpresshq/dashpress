@@ -1,11 +1,11 @@
 import { useLingui } from "@lingui/react";
+import { Input } from "@/components/ui/input";
 import {
   LabelAndError,
   generateClassNames,
   generateFormArias,
 } from "./label-and-error";
-import { Input } from "@/components/ui/input";
-import { ISharedFormInput } from "./types";
+import type { ISharedFormInput } from "./types";
 
 interface IFormInput extends ISharedFormInput {
   type?: "email" | "password" | "url" | "color" | "number";

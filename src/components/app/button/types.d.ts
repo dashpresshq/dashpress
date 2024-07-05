@@ -1,7 +1,7 @@
-import { MessageDescriptor } from "@lingui/core";
-import { SystemIconsKeys } from "shared/constants/Icons";
-import { VariantProps } from "class-variance-authority";
-import { buttonVariants } from "@/components/ui/button";
+import type { MessageDescriptor } from "@lingui/core";
+import type { SystemIconsKeys } from "shared/constants/Icons";
+import type { VariantProps } from "class-variance-authority";
+import type { buttonVariants } from "@/components/ui/button";
 
 export interface IActionButton {
   label: MessageDescriptor;

@@ -1,5 +1,5 @@
-import { IWidgetConfig } from "shared/types/dashboard";
-import { WidgetFormField } from "../../types";
+import type { IWidgetConfig } from "shared/types/dashboard";
+import type { WidgetFormField } from "../../types";
 
 export type PortalWidgetFormField = "";
 

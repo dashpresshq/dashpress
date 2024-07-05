@@ -1,8 +1,8 @@
 import { useEffect } from "react";
-import { FilterOperators, IColumnFilterBag } from "shared/types/data";
+import type { FilterOperators, IColumnFilterBag } from "shared/types/data";
 import { msg } from "@lingui/macro";
-import { FILTER_OPERATOR_CONFIG } from "./constants";
 import { Select } from "@/components/ui/select";
+import { FILTER_OPERATOR_CONFIG } from "./constants";
 
 interface IProps<T> {
   operators: FilterOperators[];
@@ -22,7 +22,9 @@ export function RenderFilterOperator<T>({
         operator: operators[0],
       });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [JSON.stringify(filterValue)]);
+
   return (
     <Select
       placeholder={msg`Select Operator`}

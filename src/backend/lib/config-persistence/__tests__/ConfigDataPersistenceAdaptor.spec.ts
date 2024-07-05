@@ -1,10 +1,11 @@
+/* eslint-disable jest/no-conditional-expect */
 import { ConfigApiService } from "backend/lib/config/config.service";
-import { AbstractConfigDataPersistenceService } from "../AbstractConfigDataPersistenceService";
+import type { AbstractConfigDataPersistenceService } from "../AbstractConfigDataPersistenceService";
 import { DatabaseConfigDataPersistenceAdaptor } from "../DatabaseConfigDataPersistenceAdaptor";
 import { JsonFileConfigDataPersistenceAdaptor } from "../JsonFileConfigDataPersistenceAdaptor";
 import { MemoryConfigDataPersistenceAdaptor } from "../MemoryConfigDataPersistenceAdaptor";
 import { RedisConfigDataPersistenceAdaptor } from "../RedisConfigDataPersistenceAdaptor";
-import { ConfigDomain } from "../types";
+import type { ConfigDomain } from "../types";
 
 interface ITestData {
   id: string;
@@ -62,7 +63,9 @@ describe.each(PERSITENT_ADAPTORS)(
   "$title persistence adaptor",
   ({ adaptor, title }) => {
     it("should get create new item when persisting", async () => {
-      await adaptor.persistItem("foo", { age: 5, id: "foo", name: "Hello" });
+      expect(
+        await adaptor.persistItem("foo", { age: 5, id: "foo", name: "Hello" })
+      ).toBeUndefined();
     });
 
     it("should getItem", async () => {
@@ -109,10 +112,12 @@ describe.each(PERSITENT_ADAPTORS)(
     });
 
     it("should insert new items when reseting state", async () => {
-      await adaptor.resetState("id", [
-        { age: 1, id: "id-1", name: "First Item" },
-        { age: 2, id: "id-2", name: "Second Item" },
-      ]);
+      expect(
+        await adaptor.resetState("id", [
+          { age: 1, id: "id-1", name: "First Item" },
+          { age: 2, id: "id-2", name: "Second Item" },
+        ])
+      ).toBeUndefined();
     });
 
     it("should getAllItems", async () => {
@@ -122,7 +127,7 @@ describe.each(PERSITENT_ADAPTORS)(
       ]);
     });
 
-    it("should getAllItems", async () => {
+    it("should getAllAsKeyValuePair", async () => {
       expect(await adaptor.getAllAsKeyValuePair()).toEqual({
         "id-1": { age: 1, id: "id-1", name: "First Item" },
         "id-2": { age: 2, id: "id-2", name: "Second Item" },

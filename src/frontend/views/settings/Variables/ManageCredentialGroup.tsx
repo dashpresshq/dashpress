@@ -1,11 +1,8 @@
 import { IntegrationsConfigurationGroup } from "shared/types/integrations";
 import { useCallback, useMemo, useState } from "react";
-import {
-  IPageDetails,
-  useSetCurrentActionItems,
-} from "frontend/lib/routing/usePageDetails";
+import type { IPageDetails } from "frontend/lib/routing/usePageDetails";
+import { useSetCurrentActionItems } from "frontend/lib/routing/usePageDetails";
 import { UserPermissions } from "shared/constants/user";
-import { usePasswordStore } from "frontend/views/integrations/password.store";
 import { useUserHasPermission } from "frontend/hooks/auth/user.store";
 import { INTEGRATIONS_GROUP_CONFIG } from "shared/config-bag/integrations";
 import { VariablesDocumentation } from "frontend/docs/variables";
@@ -14,28 +11,28 @@ import {
   PasswordMessage,
   PasswordToReveal,
 } from "frontend/views/integrations/Password";
-import { IKeyValue } from "shared/types/options";
+import type { IKeyValue } from "shared/types/options";
 import { useDocumentationActionButton } from "frontend/docs/constants";
 import { msg } from "@lingui/macro";
 import { useDomainMessages } from "frontend/lib/crud-config";
 import { DELETE_BUTTON_PROPS } from "@/components/app/button/constants";
-import {
-  FEPaginationTable,
+import type {
   IFETableCell,
   IFETableColumn,
 } from "@/components/app/pagination-table";
+import { FEPaginationTable } from "@/components/app/pagination-table";
+import { Card } from "@/components/ui/card";
+import { OffCanvas } from "@/components/app/off-canvas";
+import { ActionButtons } from "@/components/app/button/action";
+import { useToastActionQueryError } from "@/components/app/toast/error";
+import { INTEGRATIONS_GROUP_CRUD_CONFIG } from "./constants";
+import { KeyValueForm } from "./Form";
 import {
   INTEGRATIONS_GROUP_ENDPOINT,
   useIntegrationConfigurationDeletionMutation,
   useIntegrationConfigurationUpsertationMutation,
   useRevealedCredentialsList,
 } from "./configurations.store";
-import { KeyValueForm } from "./Form";
-import { INTEGRATIONS_GROUP_CRUD_CONFIG } from "./constants";
-import { Card } from "@/components/ui/card";
-import { OffCanvas } from "@/components/app/off-canvas";
-import { ActionButtons } from "@/components/app/button/action";
-import { useToastActionQueryError } from "@/components/app/toast/error";
 
 const NEW_CONFIG_ITEM = "__new_config_item__";
 
@@ -59,8 +56,6 @@ export function ManageCredentialGroup({
     revealedCredentials.error,
     group === IntegrationsConfigurationGroup.Credentials
   );
-
-  const passwordStore = usePasswordStore();
 
   const userHasPermission = useUserHasPermission();
 
@@ -100,7 +95,11 @@ export function ManageCredentialGroup({
         ]}
       />
     ),
-    [deleteConfigurationMutation.isPending, passwordStore.password]
+    [
+      deleteConfigurationMutation,
+      domainMessages.TEXT_LANG.DELETE,
+      domainMessages.TEXT_LANG.EDIT,
+    ]
   );
 
   const canManageAction = !(
@@ -136,7 +135,13 @@ export function ManageCredentialGroup({
         : [],
       secondaryActionItems: [documentationActionButton],
     };
-  }, [group, currentTab, canManageAction, showManageAction]);
+  }, [
+    group,
+    currentTab,
+    showManageAction,
+    domainMessages.TEXT_LANG.CREATE,
+    documentationActionButton,
+  ]);
 
   useSetCurrentActionItems(actionItems);
 
@@ -182,7 +187,7 @@ export function ManageCredentialGroup({
             </div>
           )}
         {!canManageAction && tableData.data.length > 0 && (
-          <p className="text-sm italic my-2 px-2">
+          <p className="my-2 px-2 text-sm italic">
             Your account does not have the permission to view secret values or
             manage them
           </p>

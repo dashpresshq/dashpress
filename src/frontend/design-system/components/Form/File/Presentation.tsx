@@ -1,9 +1,9 @@
 import { Upload } from "react-feather";
-import { DropzoneState } from "react-dropzone";
+import type { DropzoneState } from "react-dropzone";
 import { msg } from "@lingui/macro";
-import { DELETE_BUTTON_PROPS } from "../../../../../components/app/button/constants";
 import { cn } from "@/lib/utils";
 import { SoftButton } from "@/components/app/button/soft";
+import { DELETE_BUTTON_PROPS } from "../../../../../components/app/button/constants";
 
 // const stripes = keyframes`
 // from {
@@ -70,7 +70,7 @@ export function Presentation({
     // transition: border-color 0.15s linear;
     <div
       className={cn(
-        "bg-base border border-dashed rounded-md border-border cursor-pointer overflow-hidden w-full max-w-full h-48 text-main",
+        "h-48 w-full max-w-full cursor-pointer overflow-hidden rounded-md border border-dashed border-border bg-base text-main",
         {
           disabled,
           [formClassName]: true,
@@ -78,7 +78,7 @@ export function Presentation({
       )}
       {...dropZoneProps.getRootProps()}
     >
-      <div className="flex flex-col gap-3 justify-center items-center">
+      <div className="flex flex-col items-center justify-center gap-3">
         <Upload size={40} className="text-primary" />
         <p className="mb-3">
           {/* eslint-disable-next-line no-nested-ternary */}
@@ -108,7 +108,7 @@ export function Presentation({
       </div>
       <input
         type="file"
-        className="absolute top-0 right-0 bottom-0 left-0 h-full w-full opacity-0 cursor-pointer z-[5]"
+        className="absolute inset-0 z-[5] size-full cursor-pointer opacity-0"
         {...dropZoneProps.getInputProps()}
       />
     </div>

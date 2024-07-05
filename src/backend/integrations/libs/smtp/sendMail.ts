@@ -1,7 +1,7 @@
-import { IAppliedSchemaFormConfig } from "shared/form-schemas/types";
-import { Transporter } from "nodemailer";
+import type { IAppliedSchemaFormConfig } from "shared/form-schemas/types";
+import type { Transporter } from "nodemailer";
 import { msg } from "@lingui/macro";
-import { IActionConfig } from "./types";
+import type { IActionConfig } from "./types";
 
 interface IConfig {
   to: string;

@@ -1,7 +1,5 @@
-import {
-  IPortalSystemSettings,
-  PORTAL_DEFAULT_SYSTEM_SETTINGS,
-} from "./portal";
+import type { IPortalSystemSettings } from "./portal";
+import { PORTAL_DEFAULT_SYSTEM_SETTINGS } from "./portal";
 
 export type IBaseSystemSettings = {
   tokenValidityDurationInDays: number;

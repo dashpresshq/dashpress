@@ -12,39 +12,6 @@ setupApiHandlers();
 
 const useRouter = jest.spyOn(require("next/router"), "useRouter");
 
-// it("should change relative time", async () => {
-//   render(
-//     <TestProviders>
-//       <Dashboard />
-//     </TestProviders>
-//   );
-
-//   await userEvent.click(
-//     screen.getAllByRole("button", {
-//       name: "Toggle Dropdown",
-//     })[1]
-//   );
-
-//   await userEvent.click(
-//     screen.getByRole("button", {
-//       name: "Past 3 Months",
-//     })
-//   );
-
-//   const widget = await screen.findByLabelText("New Summary Card Widget");
-
-//   expect(within(widget).getByLabelText("Total Count")).toHaveTextContent(
-//     "1.52K"
-//   );
-//   expect(within(widget).getByLabelText("Relative Count")).toHaveTextContent(
-//     "54%"
-//   );
-//   expect(
-//     within(widget).getByLabelText("Relative Direction")
-//     // :eyes #03d87f
-//   ).toHaveAttribute("color", "#f5325c");
-// });
-
 describe("pages/admin", () => {
   useRouter.mockImplementation(USE_ROUTER_PARAMS({}));
 

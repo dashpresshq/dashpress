@@ -3,7 +3,7 @@ import { msg } from "@lingui/macro";
 import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
 import { TestProviders } from "__tests__/_/Provider";
 import { Table } from ".";
-import { ITableProps } from "./types";
+import type { ITableProps } from "./types";
 import { TABLE_COLUMNS, TABLE_DATA } from "./data";
 
 const DEFAULT_TABLE_PROPS: ITableProps<unknown> = {

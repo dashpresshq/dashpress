@@ -1,5 +1,5 @@
-import { RequestMethod } from "../methods";
-import { PortalValidationKeys } from "./implementations/portal";
+import type { RequestMethod } from "../methods";
+import type { PortalValidationKeys } from "./implementations/portal";
 
 export type ValidationKeys = {
   _type:

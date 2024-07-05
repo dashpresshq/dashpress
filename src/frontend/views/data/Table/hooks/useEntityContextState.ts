@@ -1,7 +1,7 @@
 import { useContextState } from "frontend/hooks/state";
-import { IPaginatedDataState } from "shared/types/data";
-import { IDataTableProps } from "../types";
+import type { IPaginatedDataState } from "shared/types/data";
 import { DEFAULT_TABLE_STATE } from "@/components/app/table";
+import type { IDataTableProps } from "../types";
 
 export const useEntityContextState = (
   contextKey: string,

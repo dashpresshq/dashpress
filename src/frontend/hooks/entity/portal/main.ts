@@ -1,7 +1,7 @@
 import { loadedDataState } from "frontend/lib/data/constants/loadedDataState";
-import { DataStateKeys } from "frontend/lib/data/types";
+import type { DataStateKeys } from "frontend/lib/data/types";
 import { noop } from "shared/lib/noop";
-import { DataCrudKeys } from "shared/types/data";
+import type { DataCrudKeys } from "shared/types/data";
 
 export function usePortalHiddenEntityColumns(
   entity: string,

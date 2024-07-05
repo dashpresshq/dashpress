@@ -243,6 +243,7 @@ describe("/api/integrations/constants/[key]", () => {
 
       expect(res._getStatusCode()).toBe(403);
     });
+
     it("should work when user has correct permission", async () => {
       await setupRolesTestData([
         {

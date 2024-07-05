@@ -4,7 +4,7 @@ import {
   composeValidators,
   maxLength,
 } from "frontend/lib/validations";
-import { ICrudConfig } from "frontend/lib/crud-config";
+import type { ICrudConfig } from "frontend/lib/crud-config";
 import { fakeMessageDescriptor } from "translations/fake";
 import {
   FormSkeleton,

@@ -1,4 +1,4 @@
-import { PageConfig } from "next";
+import type { PageConfig } from "next";
 import { requestHandler } from "backend/lib/request";
 import { BadRequestError } from "backend/lib/errors";
 import { FORMIDABLE_ERRORS } from "backend/uploads/constants";

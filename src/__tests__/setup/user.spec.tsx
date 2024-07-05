@@ -6,7 +6,7 @@ import userEvent from "@testing-library/user-event";
 import { SETUP_CHECK_DATA } from "__tests__/_/api-handlers/setup";
 import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
 import { TestProviders } from "__tests__/_/Provider";
-import { expectToast } from "../_/utils/closeAllToasts";
+import { getToastMessage } from "../_/utils/closeAllToasts";
 
 const server = setupApiHandlers();
 
@@ -50,7 +50,7 @@ describe("pages/setup/user", () => {
       screen.getByRole("button", { name: "Setup Account" })
     );
 
-    await expectToast("Account Was Successfully Setup");
+    expect(await getToastMessage()).toBe("Account Was Successfully Setup");
 
     await waitFor(() => {
       expect(replaceMock).toHaveBeenLastCalledWith("/", "/", { locale: "en" });

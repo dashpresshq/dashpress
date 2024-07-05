@@ -1,22 +1,20 @@
 import { useMutation } from "@tanstack/react-query";
 import { AuthLayout } from "frontend/_layouts/guest";
-import { ISuccessfullAuthenticationResponse } from "shared/types/auth/portal";
+import type { ISuccessfullAuthenticationResponse } from "shared/types/auth/portal";
 import { useSetupCheck } from "frontend/hooks/setup/setup.store";
-import {
-  AUTH_SIGNIN_FORM_SCHEMA,
-  ISignInForm,
-} from "shared/form-schemas/auth/signin";
+import type { ISignInForm } from "shared/form-schemas/auth/signin";
+import { AUTH_SIGNIN_FORM_SCHEMA } from "shared/form-schemas/auth/signin";
 import { useAuthenticateUser } from "frontend/hooks/auth/useAuthenticateUser";
 import { ApiRequest } from "frontend/lib/data/makeRequest";
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
 import { useGuestCheck } from "frontend/hooks/auth/useGuestCheck";
 import { msg } from "@lingui/macro";
-import { CustomNextPage } from "frontend/_layouts/types";
+import type { CustomNextPage } from "frontend/_layouts/types";
 import { SchemaForm } from "@/components/app/form/schema";
-import { useHandleNoTokenAuthResponse } from "./portal";
 import { ComponentIsLoading } from "@/components/app/loading-component";
 import { useToast } from "@/components/app/toast/use-toast";
 import { fakeMessageDescriptor } from "@/translations/fake";
+import { useHandleNoTokenAuthResponse } from "./portal";
 
 function useSignInMutation() {
   const authenticateUser = useAuthenticateUser();

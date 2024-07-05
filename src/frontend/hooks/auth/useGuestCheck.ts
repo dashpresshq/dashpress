@@ -5,14 +5,16 @@ import { useToggle } from "../state/useToggleState";
 export const useGuestCheck = () => {
   const renderMode = useToggle();
 
+  const isClient = typeof window !== "undefined";
+
   useEffect(() => {
-    if (typeof window !== "undefined") {
+    if (isClient) {
       if (AuthActions.isAuthenticated()) {
         AuthActions.signIn();
       } else {
         renderMode.on();
       }
     }
-  }, [typeof window]);
+  }, [isClient]);
   return renderMode.isOn;
 };

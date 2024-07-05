@@ -1,5 +1,5 @@
 import { requestHandler } from "backend/lib/request";
-import { IAccountProfile } from "shared/types/user";
+import type { IAccountProfile } from "shared/types/user";
 import { UserPermissions } from "shared/constants/user";
 import { dashboardWidgetsApiService } from "backend/dashboard-widgets/dashboard-widgets.service";
 

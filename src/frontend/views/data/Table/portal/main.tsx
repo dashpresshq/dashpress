@@ -1,10 +1,10 @@
 import { loadedDataState } from "frontend/lib/data/constants/loadedDataState";
-import { DataStateKeys } from "frontend/lib/data/types";
-import { ReactNode } from "react";
+import type { DataStateKeys } from "frontend/lib/data/types";
+import type { ReactNode } from "react";
 import { noop } from "shared/lib/noop";
-import { ITableView } from "shared/types/data";
-import { IMenuActionItem } from "@/components/app/button/types";
-import { ITableColumn } from "@/components/app/table/types";
+import type { ITableView } from "shared/types/data";
+import type { IMenuActionItem } from "@/components/app/button/types";
+import type { ITableColumn } from "@/components/app/table/types";
 
 export const usePluginTableMenuItems = (
   entity: string,

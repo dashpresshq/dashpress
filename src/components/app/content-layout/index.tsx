@@ -1,4 +1,4 @@
-import { ReactElement, ReactNode } from "react";
+import type { ReactElement, ReactNode } from "react";
 
 interface IProps {
   children: ReactNode;
@@ -13,7 +13,7 @@ type TContentLayout = ((params: IProps) => ReactElement) & {
 // eslint-disable-next-line react/function-component-definition
 export const ContentLayout: TContentLayout = ({ children }: IProps) => {
   return (
-    <div className="grid gap-4 grid-cols-1 md:grid-cols-[2fr,8fr]">
+    <div className="grid grid-cols-1 gap-4 md:grid-cols-[2fr,8fr]">
       {children}
     </div>
   );
@@ -25,7 +25,7 @@ ContentLayout.Left = function SectionLeft({ children }: IProps) {
 
 ContentLayout.Right = function SectionRight({ children }: IProps) {
   return (
-    <div className="overflow-x-hidden min-h-[calc(100vh-100px)] mb-2 flex flex-col gap-4">
+    <div className="mb-2 flex min-h-[calc(100vh-100px)] flex-col gap-4 overflow-x-hidden">
       {children}
     </div>
   );
@@ -33,8 +33,8 @@ ContentLayout.Right = function SectionRight({ children }: IProps) {
 
 ContentLayout.Center = function SectionCenter({ children }: IProps) {
   return (
-    <div className="flex justify-center mb-3">
-      <div className="max-w-[1200px] w-full flex flex-col gap-3">
+    <div className="mb-3 flex justify-center">
+      <div className="flex w-full max-w-[1200px] flex-col gap-3">
         {children}
       </div>
     </div>

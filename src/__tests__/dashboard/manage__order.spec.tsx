@@ -1,5 +1,5 @@
 /* eslint-disable testing-library/no-node-access */
-import { ReactNode } from "react";
+import type { ReactNode } from "react";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
@@ -73,16 +73,9 @@ describe("pages/admin/settings/dashboard", () => {
       await screen.findByLabelText("Foo Table Widget");
 
       await userEvent.click(screen.getByTestId("fake-sorting"));
-    });
-
-    it("should show the new ordered widget", async () => {
-      render(
-        <TestProviders>
-          <ManageDashboard />
-        </TestProviders>
-      );
 
       const widgets = await screen.findByLabelText("Dashboard Widgets");
+
       const order = ["Bar Card Widget", "Foo Table Widget"];
       Array.from((widgets.firstChild as HTMLElement).children).forEach(
         async (element, index) => {

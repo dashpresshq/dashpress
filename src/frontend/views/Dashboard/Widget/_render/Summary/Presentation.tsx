@@ -1,7 +1,9 @@
-import { ChevronsDown, Icon, ChevronsUp } from "react-feather";
-import { SystemIconsKeys } from "shared/constants/Icons";
+import type { Icon } from "react-feather";
+import { ChevronsDown, ChevronsUp } from "react-feather";
+import type { SystemIconsKeys } from "shared/constants/Icons";
 import { cn } from "@/lib/utils";
-import { SpectrumColorTypes, spectrumVariants } from "@/components/ui/spectrum";
+import type { SpectrumColorTypes } from "@/components/ui/spectrum";
+import { spectrumVariants } from "@/components/ui/spectrum";
 import { SystemIcon } from "@/components/app/system-icons";
 
 const DirectionImplementation: Record<
@@ -46,11 +48,11 @@ export function SummaryWidgetPresentation({
     DirectionImplementation[direction];
 
   return (
-    <div className="flex gap-4 items-center">
+    <div className="flex items-center gap-4">
       <SystemIcon
         icon={icon as SystemIconsKeys}
         className={cn(
-          "w-10 h-10 min-w-10 rounded-full p-2",
+          "size-10 min-w-10 rounded-full p-2",
           spectrumVariants({
             spectrum: color,
           })
@@ -58,14 +60,14 @@ export function SummaryWidgetPresentation({
         label={`${title} Icon`}
       />
       <div className="w-full pt-1">
-        <div className="flex justify-between items-end">
-          <p className="font-semibold text-xl" aria-label="Total Count">
+        <div className="flex items-end justify-between">
+          <p className="text-xl font-semibold" aria-label="Total Count">
             {fullCount}
           </p>
           {relativeCount ? (
             <div
               className={cn(
-                "flex gap-0.5 w-auto items-center border rounded-lg px-1",
+                "flex w-auto items-center gap-0.5 rounded-lg border px-1",
                 spectrumVariants({
                   spectrum:
                     // eslint-disable-next-line no-nested-ternary
@@ -89,7 +91,7 @@ export function SummaryWidgetPresentation({
               </span>
 
               <p
-                className={cn("font-semibold text-xs leading-5", {
+                className={cn("text-xs font-semibold leading-5", {
                   "text-green-600": direction === "up",
                   "text-red-600": direction === "down",
                 })}

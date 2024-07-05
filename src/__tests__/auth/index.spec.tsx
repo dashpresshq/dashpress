@@ -6,7 +6,7 @@ import userEvent from "@testing-library/user-event";
 import { AuthActions } from "frontend/hooks/auth/auth.actions";
 import { USE_ROUTER_PARAMS } from "__tests__/_/constants";
 import { TestProviders } from "__tests__/_/Provider";
-import { expectToast } from "../_/utils/closeAllToasts";
+import { getToastMessage } from "../_/utils/closeAllToasts";
 
 setupApiHandlers();
 
@@ -110,7 +110,7 @@ describe("pages/auth", () => {
 
     await userEvent.click(screen.getByRole("button", { name: "Sign In" }));
 
-    await expectToast("Invalid Login");
+    expect(await getToastMessage()).toBe("Invalid Login");
 
     expect(localStorage.getItem(AuthActions.JWT_TOKEN_STORAGE_KEY)).toBeNull();
 

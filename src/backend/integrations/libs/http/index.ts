@@ -1,5 +1,5 @@
-import { IAppliedSchemaFormConfig } from "shared/form-schemas/types";
-import { IActionIntegrationsImplemention } from "shared/types/actions";
+import type { IAppliedSchemaFormConfig } from "shared/form-schemas/types";
+import type { IActionIntegrationsImplemention } from "shared/types/actions";
 import { msg } from "@lingui/macro";
 import { fakeMessageDescriptor } from "translations/fake";
 import { makeIntegrationRequest } from "../makeIntegrationRequest";

@@ -1,11 +1,11 @@
-import { FieldMetaState } from "react-final-form";
+import type { FieldMetaState } from "react-final-form";
 import { i18n } from "@lingui/core";
-import { ReactNode } from "react";
+import type { ReactNode } from "react";
 import { cn } from "@/lib/utils";
 import { Label } from "@/components/ui/label";
 import { SystemIcon } from "../../system-icons";
 import { SoftButton } from "../../button/soft";
-import { ILabelAndErrorProps } from "./types";
+import type { ILabelAndErrorProps } from "./types";
 import { Tooltip } from "../../tooltip";
 
 export const isFormMetaWithError = (meta: FieldMetaState<any>) =>
@@ -39,12 +39,12 @@ export function LabelAndError({ formInput, children }: IProps) {
           )}
           {description ? (
             <Tooltip isOverAButton={false} text={description}>
-              <SystemIcon icon="Help" className="w-4 h-4 ml-1" />
+              <SystemIcon icon="Help" className="ml-1 size-4" />
             </Tooltip>
           ) : null}
         </div>
         {rightActions.length > 0 && (
-          <div className="flex gap-3 flex-1 justify-end mb-1">
+          <div className="mb-1 flex flex-1 justify-end gap-3">
             {rightActions.map((rightAction) => (
               <SoftButton
                 key={rightAction.label.message}
@@ -59,7 +59,7 @@ export function LabelAndError({ formInput, children }: IProps) {
       </div>
       {children}
       <p
-        className="text-red-600 text-xs pb-0"
+        className="pb-0 text-xs text-red-600"
         role={isFormMetaWithError(meta) ? "alert" : undefined}
       >
         {isFormMetaWithError(meta)}

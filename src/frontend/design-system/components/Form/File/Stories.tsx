@@ -1,8 +1,9 @@
 /* eslint-disable react/function-component-definition */
 
-import { Story } from "@storybook/react";
+import type { Story } from "@storybook/react";
 import { TestProviders } from "__tests__/_/Provider";
-import { IProps, Presentation } from "./Presentation";
+import type { IProps } from "./Presentation";
+import { Presentation } from "./Presentation";
 
 export default {
   title: "Components/FormFileInput",

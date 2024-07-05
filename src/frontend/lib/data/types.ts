@@ -1,5 +1,5 @@
-import { MessageDescriptor } from "@lingui/core";
-import { UseQueryResult } from "@tanstack/react-query";
+import type { MessageDescriptor } from "@lingui/core";
+import type { UseQueryResult } from "@tanstack/react-query";
 
 export enum DataStates {
   Loading = "loading",

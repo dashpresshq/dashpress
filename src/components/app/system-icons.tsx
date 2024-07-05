@@ -1,4 +1,5 @@
-import { SystemIconsKeys, systemIconToSVG } from "shared/constants/Icons";
+import type { SystemIconsKeys } from "shared/constants/Icons";
+import { systemIconToSVG } from "shared/constants/Icons";
 import { forwardRef } from "react";
 import { cn } from "@/lib/utils";
 
@@ -10,7 +11,7 @@ interface IProps {
 }
 
 export const SystemIcon = forwardRef<HTMLElement, IProps>(
-  ({ icon, label, strokeWidth, className }, ref) => {
+  function SystemIconCmp({ icon, label, strokeWidth, className }, ref) {
     if (!icon) {
       return null;
     }
@@ -37,10 +38,11 @@ export const GrabIcon = forwardRef<
     width?: number;
     className?: string;
   }
->(({ width, className }, ref) => {
+>(function GrabIconCmp({ width, className }, ref) {
   return (
     <svg
-      className={cn("cursor-grab fill-main touch-none grab-icon", className)}
+      // eslint-disable-next-line tailwindcss/no-custom-classname
+      className={cn("grab-icon cursor-grab touch-none fill-main", className)}
       ref={ref}
       viewBox="0 0 20 20"
       width={width || 12}

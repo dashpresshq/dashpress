@@ -1,5 +1,5 @@
 import { msg } from "@lingui/macro";
-import { IAppConfigurationBag } from "shared/configurations/types";
+import type { IAppConfigurationBag } from "shared/configurations/types";
 
 export type IPortalSystemSettings = {};
 

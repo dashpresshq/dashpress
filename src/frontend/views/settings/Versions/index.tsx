@@ -7,9 +7,9 @@ import { typescriptSafeObjectDotEntries } from "shared/lib/objects";
 import { useDomainMessages } from "frontend/lib/crud-config";
 import { SectionBox } from "@/components/app/section-box";
 import { ViewStateMachine } from "@/components/app/view-state-machine";
+import { Skeleton } from "@/components/ui/skeleton";
 import { SETTINGS_VIEW_KEY } from "../constants";
 import { BaseSettingsLayout } from "../_Base";
-import { Skeleton } from "@/components/ui/skeleton";
 
 export function VersionInfo() {
   const domainMessages = useDomainMessages({
@@ -38,8 +38,8 @@ export function VersionInfo() {
             <>
               {Array.from({ length: 4 }, (_, k) => k).map((key) => (
                 <Fragment key={key}>
-                  <Skeleton className="h-4 w-24 mb-2" />
-                  <Skeleton className="h-5 mb-4" />
+                  <Skeleton className="mb-2 h-4 w-24" />
+                  <Skeleton className="mb-4 h-5" />
                 </Fragment>
               ))}
             </>

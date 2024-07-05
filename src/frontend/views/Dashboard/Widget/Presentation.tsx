@@ -1,10 +1,10 @@
-import { IWidgetConfig } from "shared/types/dashboard";
+import type { IWidgetConfig } from "shared/types/dashboard";
 import { forwardRef } from "react";
-import { DataStateKeys } from "frontend/lib/data/types";
+import type { DataStateKeys } from "frontend/lib/data/types";
 import { SummaryWidget, TableWidget } from "./_render";
 import { PortalDashboardWidget } from "./portal";
 import { WidgetFrame } from "./_components/WidgetFrame";
-import { IWidgetSettingProps } from "./_components/WidgetHeader/types";
+import type { IWidgetSettingProps } from "./_components/WidgetHeader/types";
 
 export interface IDashboardWidgetPresentationProps {
   config: IWidgetConfig;
@@ -16,7 +16,10 @@ export interface IDashboardWidgetPresentationProps {
 export const DashboardWidgetPresentation = forwardRef<
   HTMLDivElement,
   IDashboardWidgetPresentationProps
->(({ config, setting, data, isPreview }, ref) => {
+>(function DashboardWidgetPresentationCmp(
+  { config, setting, data, isPreview },
+  ref
+) {
   const frameProps = {
     config,
     setting,

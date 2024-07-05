@@ -1,5 +1,5 @@
 import { useNavigationStack } from "frontend/lib/routing/useNavigationStack";
-import { ReactNode } from "react";
+import type { ReactNode } from "react";
 import { useEntitySlug } from "frontend/hooks/entity/entity.config";
 import { NAVIGATION_LINKS } from "frontend/lib/routing/links";
 import { AppLayout } from "frontend/_layouts/app";
@@ -8,8 +8,8 @@ import { LANG_DOMAINS } from "frontend/lib/crud-config/lang-domains";
 import { ContentLayout } from "@/components/app/content-layout";
 import { SoftButton } from "@/components/app/button/soft";
 import { MenuSection } from "@/components/app/menu-section";
+import type { IMenuActionItem } from "@/components/app/button/types";
 import { useMutateBaseEntitySettingsMenu } from "./portal";
-import { IMenuActionItem } from "@/components/app/button/types";
 
 const baseMenuItems = (entity: string): IMenuActionItem[] => [
   {

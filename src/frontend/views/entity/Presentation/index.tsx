@@ -8,7 +8,7 @@ import { useAppConfigurationDomainMessages } from "frontend/hooks/configuration/
 import { PresentationScriptDocumentation } from "frontend/docs/scripts/presentations-scripts";
 import { evalJavascriptString } from "shared/lib/script-runner";
 import { useDocumentationActionButton } from "frontend/docs/constants";
-import { IPresentationScriptParams } from "frontend/views/data/evaluatePresentationScript";
+import type { IPresentationScriptParams } from "frontend/views/data/evaluatePresentationScript";
 import { useEvaluateScriptContext } from "frontend/hooks/scripts";
 import { msg } from "@lingui/macro";
 import { fakeMessageDescriptor } from "translations/fake";
@@ -20,9 +20,9 @@ import {
   FormSkeletonSchema,
 } from "@/components/app/skeleton/form";
 import { SectionBox } from "@/components/app/section-box";
+import { useToast } from "@/components/app/toast/use-toast";
 import { BaseEntitySettingsLayout } from "../_Base";
 import { ENTITY_CONFIGURATION_VIEW } from "../constants";
-import { useToast } from "@/components/app/toast/use-toast";
 
 const placeholder = `if($.field === "image"){
   return "https://cdn.mycompany.com/" + $.value + "?size=320x640";

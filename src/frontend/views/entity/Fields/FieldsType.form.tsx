@@ -1,8 +1,14 @@
 import { Form, Field } from "react-final-form";
 import { useMemo, useState } from "react";
 import { getFieldTypeBoundedValidations } from "frontend/hooks/entity/guess";
-import { FormFieldTypes, IFieldValidationItem } from "shared/validations/types";
-import { EntityTypesForSelection, IColorableSelection } from "shared/types/ui";
+import type {
+  FormFieldTypes,
+  IFieldValidationItem,
+} from "shared/validations/types";
+import type {
+  EntityTypesForSelection,
+  IColorableSelection,
+} from "shared/types/ui";
 import { FIELD_TYPES_CONFIG_MAP } from "shared/validations";
 import { useAppConfigurationDomainMessages } from "frontend/hooks/configuration/configuration.constant";
 import {
@@ -10,14 +16,14 @@ import {
   composeValidators,
   maxLength,
 } from "frontend/lib/validations";
-import { IFormInputRightAction } from "shared/form-schemas/types";
+import type { IFormInputRightAction } from "shared/form-schemas/types";
 import { msg } from "@lingui/macro";
 import { typescriptSafeObjectDotEntries } from "shared/lib/objects";
 import { FormButton } from "@/components/app/button/form";
-import { FieldSelectionCanvas } from "./FieldsSelection";
-import { FieldValidationCanvas } from "./FieldsValidation";
 import { OffCanvas } from "@/components/app/off-canvas";
 import { FormSelect } from "@/components/app/form/input/select";
+import { FieldSelectionCanvas } from "./FieldsSelection";
+import { FieldValidationCanvas } from "./FieldsValidation";
 
 const FIELD_TYPES_CONFIG_MAP_AS_SELECTION = typescriptSafeObjectDotEntries(
   FIELD_TYPES_CONFIG_MAP
@@ -67,6 +73,7 @@ export function FieldsTypeForm({
 }: IProps) {
   const memoIzedInitialValuesSoItDoesFlickerOnSubmit = useMemo(
     () => initialValues,
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [JSON.stringify(initialValues)]
   );
 

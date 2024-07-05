@@ -1,5 +1,5 @@
-import { ConfigDomain } from "backend/lib/config-persistence/types";
-import { KeyValueDomain } from "backend/lib/key-value/types";
+import type { ConfigDomain } from "backend/lib/config-persistence/types";
+import type { KeyValueDomain } from "backend/lib/key-value/types";
 import { createCacheService } from "backend/lib/cache";
 import { setupAppConfigTestData } from "./_app-config";
 import { setupIntegrationsConstantsTestData } from "./_integrations-constants";

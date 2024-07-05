@@ -20,10 +20,10 @@ describe("validateSchemaRequestBody", () => {
           name: "Foo",
         }
       )
-    ).not.toThrowError();
+    ).not.toThrow();
   });
 
-  it("should pass valid input", () => {
+  it("should throw error on invalid input", () => {
     expect(() =>
       validateSchemaRequestBody(
         {
@@ -39,6 +39,6 @@ describe("validateSchemaRequestBody", () => {
         },
         {}
       )
-    ).toThrowError("Invalid Request");
+    ).toThrow("Invalid Request");
   });
 });

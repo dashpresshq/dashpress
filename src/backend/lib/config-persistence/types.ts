@@ -1,4 +1,4 @@
-import { PortalConfigDomain } from "./portal";
+import type { PortalConfigDomain } from "./portal";
 
 export type ConfigDomain =
   | PortalConfigDomain

@@ -1,4 +1,4 @@
-import { IAppliedSchemaFormConfig } from "shared/form-schemas/types";
+import type { IAppliedSchemaFormConfig } from "shared/form-schemas/types";
 import { userFriendlyCase } from "shared/lib/strings/friendly-case";
 import { compileTemplateString } from "shared/lib/strings/templates";
 import { typescriptSafeObjectDotEntries } from "shared/lib/objects";
